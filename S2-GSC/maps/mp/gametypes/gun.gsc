@@ -3,8 +3,8 @@
  * Script: maps\mp\gametypes\gun.gsc
 *********************************************/
 
-func_00F9() {
-  maps\mp\gametypes\_globallogic::func_00D5();
+main() {
+  maps\mp\gametypes\_globallogic::init();
   lib_01DD::func_8A0C();
   maps\mp\gametypes\_globallogic::func_8A0C();
   if(isusingmatchrulesdata()) {
@@ -12,11 +12,11 @@ func_00F9() {
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BFA(level.var_3FDC, 10);
-    maps\mp\_utility::func_7BF7(level.var_3FDC, 1);
-    maps\mp\_utility::func_7C04(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BF1(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BE5(level.var_3FDC, 0);
+    maps\mp\_utility::func_7BFA(level.gametype, 10);
+    maps\mp\_utility::func_7BF7(level.gametype, 1);
+    maps\mp\_utility::func_7C04(level.gametype, 0);
+    maps\mp\_utility::func_7BF1(level.gametype, 0);
+    maps\mp\_utility::func_7BE5(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
     setdynamicdvar("scr_game_radarMode", 1);
@@ -94,14 +94,14 @@ func_5300() {
 
 func_871C() {
   setdynamicdvar("scr_gun_scorelimit", level.gun_guns_raw.size * level.gun_cyclecount);
-  maps\mp\_utility::func_7BF9(level.var_3FDC, level.gun_guns_raw.size * level.gun_cyclecount);
+  maps\mp\_utility::func_7BF9(level.gametype, level.gun_guns_raw.size * level.gun_cyclecount);
 }
 
 func_6BAF() {
   setclientnamemode("auto_change");
   maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_DM");
   maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_DM");
-  if(level.var_910F) {
+  if(level.splitscreen) {
     maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_DM");
     maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_DM");
   } else {
@@ -113,13 +113,13 @@ func_6BAF() {
   maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_DM_HINT");
   lib_050D::func_10E4();
   var_00 = [];
-  maps\mp\gametypes\_gameobjects::func_00F9(var_00);
+  maps\mp\gametypes\_gameobjects::main(var_00);
   level.var_7895 = 1;
   level.var_17EF = 1;
-  level thread func_6B6C();
+  level thread onplayerconnect();
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
     var_00.var_48E6 = 0;
@@ -138,12 +138,12 @@ func_48E5(param_00) {
     param_00 = 1;
   }
 
-  self.var_012C["class"] = "gamemode";
-  self.var_012C["lastClass"] = "";
-  self.var_012C["gamemodeLoadout"] = level.var_48D4;
-  self.var_2319 = self.var_012C["class"];
-  self.var_5B84 = self.var_012C["lastClass"];
-  maps\mp\gametypes\_class::func_4790(self.var_01A7, self.var_2319);
+  self.pers["class"] = "gamemode";
+  self.pers["lastClass"] = "";
+  self.pers["gamemodeLoadout"] = level.var_48D4;
+  self.var_2319 = self.pers["class"];
+  self.var_5B84 = self.pers["lastClass"];
+  maps\mp\gametypes\_class::func_4790(self.team, self.var_2319);
   if(param_00) {
     self method_8512(level.var_48D2[0]["builtWeaponName"]);
   }
@@ -158,7 +158,7 @@ func_6BA7() {
   maps\mp\_utility::func_47A2("specialty_sprintequipment");
   maps\mp\_utility::func_47A2("specialty_throwequipmentfarther");
   maps\mp\_utility::func_47A2("specialty_increasedmeleedamage");
-  self method_8326();
+  self disableweaponswitch();
   self method_8328();
   func_48E5(0);
   thread func_A6F3();
@@ -172,13 +172,13 @@ func_A6F3() {
   if(self.var_8C15) {
     self.var_8C15 = 0;
     self.var_5BB5 = undefined;
-    thread maps\mp\_events::func_2B72();
+    thread maps\mp\_events::getdailyref();
   }
 }
 
 func_6B7F(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = maps\mp\gametypes\_rank::func_4671(param_00);
-  param_01 maps\mp\_utility::func_867B(param_01.var_008F + var_05);
+  var_05 = maps\mp\gametypes\_rank::getscoreinfovalue(param_00);
+  param_01 maps\mp\_utility::func_867B(param_01.extrascore0 + var_05);
   param_01 maps\mp\gametypes\_gamescore::func_A161(param_01, var_05);
   if(param_00 == "gained_gun_score") {
     return 1;
@@ -199,17 +199,17 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   if(param_03 == "MOD_FALLING" || isPlayer(param_01)) {
-    if(param_03 == "MOD_FALLING" || param_01 == self || (maps\mp\_utility::func_5755(param_03) && param_04 != "riotshield_mp") || param_04 == "boost_slam_mp") {
-      self method_8615("mp_war_objective_lost");
+    if(param_03 == "MOD_FALLING" || param_01 == self || (maps\mp\_utility::ismeleemod(param_03) && param_04 != "riotshield_mp") || param_04 == "boost_slam_mp") {
+      self playlocalsound("mp_war_objective_lost");
       self.var_48E7 = self.var_48E6;
       self.var_48E6 = int(max(0, self.var_48E6 - level.var_8637));
       if(self.var_48E7 > self.var_48E6) {
         self.var_65ED++;
         maps\mp\_utility::func_867C(self.var_65ED);
         self.var_8C15 = 1;
-        if(maps\mp\_utility::func_5755(param_03) || param_04 == "boost_slam_mp") {
+        if(maps\mp\_utility::ismeleemod(param_03) || param_04 == "boost_slam_mp") {
           param_01.var_9149++;
-          param_01.var_0021 = param_01.var_9149;
+          param_01.assists = param_01.var_9149;
           param_01 thread maps\mp\_events::func_8634();
           if(self.var_48E7 == level.var_48D2.size * level.gun_cyclecount - 1) {
             param_01 thread maps\mp\_events::func_8635();
@@ -226,7 +226,7 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       return;
     }
 
-    if((param_03 == "MOD_PISTOL_BULLET" || param_03 == "MOD_RIFLE_BULLET" || param_03 == "MOD_HEAD_SHOT" || param_03 == "MOD_PROJECTILE" || param_03 == "MOD_PROJECTILE_SPLASH" || param_03 == "MOD_EXPLOSIVE" || param_03 == "MOD_IMPACT" || param_03 == "MOD_GRENADE" || param_03 == "MOD_GRENADE_SPLASH" || maps\mp\_utility::func_5697(param_03, param_04) || maps\mp\_utility::func_5755(param_03) && param_04 == "riotshield_mp") && param_04 != "v2_rocket_mp") {
+    if((param_03 == "MOD_PISTOL_BULLET" || param_03 == "MOD_RIFLE_BULLET" || param_03 == "MOD_HEAD_SHOT" || param_03 == "MOD_PROJECTILE" || param_03 == "MOD_PROJECTILE_SPLASH" || param_03 == "MOD_EXPLOSIVE" || param_03 == "MOD_IMPACT" || param_03 == "MOD_GRENADE" || param_03 == "MOD_GRENADE_SPLASH" || maps\mp\_utility::func_5697(param_03, param_04) || maps\mp\_utility::ismeleemod(param_03) && param_04 == "riotshield_mp") && param_04 != "v2_rocket_mp") {
       if(isDefined(param_01.var_5BB5) && param_01.var_5BB5 == param_04) {
         if((isDefined(param_01.lastkilllifeid) && param_01.lastkilllifeid == param_01.var_5CC6) || isDefined(param_01.var_5BB8) && param_01.var_5BB8 + 1000 > gettime()) {
           return;
@@ -291,7 +291,7 @@ func_479C(param_00, param_01) {
   }
 
   self takeallweapons();
-  maps\mp\_utility::func_0642(var_03);
+  maps\mp\_utility::func_642(var_03);
   self givestartammo(var_03);
   if(param_00) {
     self switchtoweaponimmediate(var_03);
@@ -303,19 +303,19 @@ func_479C(param_00, param_01) {
     self setspawnweapon(var_03);
   }
 
-  var_04 = maps\mp\_utility::func_4431(var_03);
-  self.var_012C["primaryWeapon"] = var_04;
-  self.var_7704 = var_03;
+  var_04 = maps\mp\_utility::getbaseweaponname(var_03);
+  self.pers["primaryWeapon"] = var_04;
+  self.primaryweapon = var_03;
   self.lethalweapon = undefined;
   if(var_02["forcedLethal"] != "") {
     self.lethalweapon = var_02["forcedLethal"];
     self method_8349(self.lethalweapon);
     self giveweapon(self.lethalweapon);
-    self method_82FA(self.lethalweapon, 1);
+    self setweaponammoclip(self.lethalweapon, 1);
   }
 
-  var_05 = self.var_0079;
-  maps\mp\_utility::func_06D4(var_05, var_02["division"]);
+  var_05 = self.var_79;
+  maps\mp\_utility::func_6D4(var_05, var_02["division"]);
   self setclientomnvar("ui_show_division_sniper_ability_prompt", 0);
   if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
     maps\mp\gametypes\_division_change::func_8725(2, var_03);
@@ -324,7 +324,7 @@ func_479C(param_00, param_01) {
   }
 
   if(maps\mp\_utility::func_4571() != "mp_sandbox_01") {
-    var_06 = maps\mp\gametypes\_class::func_1F93(self.var_0079, "allies");
+    var_06 = maps\mp\gametypes\_class::func_1F93(self.var_79, "allies");
     self setrankedplayerdata(common_scripts\utility::func_46A9(), "activeCostume", var_06);
     self.var_267E = maps\mp\gametypes\_class::func_1F97(var_06);
     var_07 = maps\mp\gametypes\_class::func_1F95();
@@ -360,27 +360,27 @@ func_6BB6() {
   level.var_3B5C = "none";
   var_00 = func_4509();
   if(!isDefined(var_00) || !var_00.size) {
-    thread maps\mp\gametypes\_gamelogic::func_36B9("tie", game["end_reason"]["time_limit_reached"]);
+    thread maps\mp\gametypes\_gamelogic::endgame("tie", game["end_reason"]["time_limit_reached"]);
     return;
   }
 
   if(var_00.size == 1) {
-    thread maps\mp\gametypes\_gamelogic::func_36B9(var_00[0], game["end_reason"]["time_limit_reached"]);
+    thread maps\mp\gametypes\_gamelogic::endgame(var_00[0], game["end_reason"]["time_limit_reached"]);
     return;
   }
 
   if(var_00[var_00.size - 1].var_48E6 > var_00[var_00.size - 2].var_48E6) {
-    thread maps\mp\gametypes\_gamelogic::func_36B9(var_00[var_00.size - 1], game["end_reason"]["time_limit_reached"]);
+    thread maps\mp\gametypes\_gamelogic::endgame(var_00[var_00.size - 1], game["end_reason"]["time_limit_reached"]);
     return;
   }
 
-  thread maps\mp\gametypes\_gamelogic::func_36B9("tie", game["end_reason"]["time_limit_reached"]);
+  thread maps\mp\gametypes\_gamelogic::endgame("tie", game["end_reason"]["time_limit_reached"]);
 }
 
 func_4509() {
   var_00 = -1;
   var_01 = [];
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(isDefined(var_03.var_48E6) && var_03.var_48E6 >= var_00) {
       var_00 = var_03.var_48E6;
       var_01[var_01.size] = var_03;
@@ -395,7 +395,7 @@ func_7B82() {
   self endon("disconnect");
   for(;;) {
     self waittill("reload");
-    self givestartammo(self.var_7704);
+    self givestartammo(self.primaryweapon);
     if(isDefined(self.lethalweapon)) {
       self givestartammo(self.lethalweapon);
       if(self.lethalweapon == "throwingknife_mp") {
@@ -405,8 +405,8 @@ func_7B82() {
       }
     }
 
-    if(self.var_7704 == "killstreak_molotov_cocktail_mp") {
-      self switchtoweaponimmediate(self.var_7704);
+    if(self.primaryweapon == "killstreak_molotov_cocktail_mp") {
+      self switchtoweaponimmediate(self.primaryweapon);
     }
   }
 }
@@ -415,7 +415,7 @@ func_7B85() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    if(maps\mp\_utility::func_57A0(self) && self.var_01A7 != "spectator" && (isDefined(self.var_7704) && function_01A9(self.var_7704) != "melee" && self method_817F(self.var_7704) == 0) || isDefined(self.lethalweapon) && self method_817F(self.lethalweapon) == 0) {
+    if(maps\mp\_utility::func_57A0(self) && self.team != "spectator" && (isDefined(self.primaryweapon) && function_01A9(self.primaryweapon) != "melee" && self method_817F(self.primaryweapon) == 0) || isDefined(self.lethalweapon) && self method_817F(self.lethalweapon) == 0) {
       wait(2);
       self notify("reload");
       wait(1);
@@ -596,11 +596,11 @@ func_869C() {
       break;
 
     case 1:
-      level.gun_guns_raw = common_scripts\utility::func_0F92(level.gun_guns_raw);
+      level.gun_guns_raw = common_scripts\utility::func_F92(level.gun_guns_raw);
       break;
 
     case 2:
-      level.gun_guns_raw = common_scripts\utility::func_0FA2(level.gun_guns_raw);
+      level.gun_guns_raw = common_scripts\utility::func_FA2(level.gun_guns_raw);
       break;
   }
 
@@ -706,7 +706,7 @@ buildrandomweapontable() {
 getrandomweaponfromcategory(param_00, param_01) {
   var_02 = level.gungameoptionstable[param_00];
   if(isDefined(var_02) && var_02.size > 0) {
-    var_02 = common_scripts\utility::func_0F92(var_02);
+    var_02 = common_scripts\utility::func_F92(var_02);
     var_03 = undefined;
     for(var_04 = 0; var_04 < var_02.size; var_04++) {
       var_03 = var_02[var_04];
@@ -743,7 +743,7 @@ getrandomweaponfromcategory(param_00, param_01) {
     if(level.gun_weaponattachments) {
       var_09 = var_03["forcedAttachments"];
       var_0A = randomintrange(var_03["minAttachments"], var_03["maxAttachments"] + 1);
-      var_09 = common_scripts\utility::func_0F8C(var_09, getattachmentsforweapon(var_03, var_0A, param_01, var_09));
+      var_09 = common_scripts\utility::func_F8C(var_09, getattachmentsforweapon(var_03, var_0A, param_01, var_09));
     }
 
     var_0B = [];
@@ -774,7 +774,7 @@ getattachmentsforweapon(param_00, param_01, param_02, param_03) {
 
   var_04 = param_00["weaponName"];
   var_05 = function_0060(var_04);
-  var_05 = common_scripts\utility::func_0F92(var_05);
+  var_05 = common_scripts\utility::func_F92(var_05);
   var_06 = param_03;
   var_07 = [];
   for(var_08 = 0; var_08 < var_05.size; var_08++) {

@@ -3,14 +3,14 @@
  * Script: maps\mp\_braggingrights.gsc
 *********************************************/
 
-func_7DA2() {
-  var_00 = func_45C5();
+resolvebraggingrights() {
+  var_00 = getnumbraggingrights();
   var_01 = [];
   for(var_02 = 0; var_02 < var_00; var_02++) {
     var_01[var_02] = [];
   }
 
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     if(isalive(var_04)) {
       var_05 = var_04 method_83BD();
       if(var_05 < var_00) {
@@ -26,7 +26,7 @@ func_7DA2() {
       var_0A = undefined;
       var_0B = undefined;
       foreach(var_0D in var_05) {
-        var_0E = var_0D maps\mp\_utility::func_4628(var_09);
+        var_0E = var_0D maps\mp\_utility::getplayerstat(var_09);
         if(!isDefined(var_0A) || var_0E > var_0A) {
           var_0B = var_0D;
           var_0A = var_0E;
@@ -35,34 +35,34 @@ func_7DA2() {
 
       foreach(var_0D in var_05) {
         if(var_0D == var_0B) {
-          if(!isDefined(var_0D.var_6024)) {
-            var_0D.var_6024 = 0;
+          if(!isDefined(var_0D.matchbonus)) {
+            var_0D.matchbonus = 0;
           }
 
           var_11 = 0;
           foreach(var_04 in var_05) {
-            if(isDefined(var_04.var_6024)) {
-              var_11 = var_11 + var_04.var_6024;
+            if(isDefined(var_04.matchbonus)) {
+              var_11 = var_11 + var_04.matchbonus;
             }
           }
 
-          var_0D.var_6024 = var_0D.var_6024 + var_11;
+          var_0D.matchbonus = var_0D.matchbonus + var_11;
           continue;
         }
 
-        var_0D.var_1B7E = 1;
+        var_0D.braggingrightsloser = 1;
       }
     }
   }
 
-  foreach(var_04 in level.var_744A) {
-    if(isDefined(var_04.var_1B7E) && var_04.var_1B7E) {
-      var_04.var_6024 = 0;
+  foreach(var_04 in level.players) {
+    if(isDefined(var_04.braggingrightsloser) && var_04.braggingrightsloser) {
+      var_04.matchbonus = 0;
     }
   }
 }
 
-func_45C5() {
+getnumbraggingrights() {
   var_00 = -1;
   var_01 = "temp";
   while(var_01 != "") {

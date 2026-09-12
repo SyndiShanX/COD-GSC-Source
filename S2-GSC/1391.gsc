@@ -3,11 +3,11 @@
  * Script: 1391.gsc
 *********************************************/
 
-lib_056F::func_52A4() {
-  lib_0561::initconsumablesfromtable("double_points", ::lib_056F::func_A208, ::lib_056F::func_1F7D, ::lib_056F::func_44A8);
+func_52A4() {
+  lib_0561::initconsumablesfromtable("double_points", ::func_A208, ::func_1F7D, ::func_44A8);
 }
 
-lib_056F::func_1F7D(param_00) {
+func_1F7D(param_00) {
   if(!lib_0561::func_1F7B()) {
     return 0;
   }
@@ -15,11 +15,11 @@ lib_056F::func_1F7D(param_00) {
   return 1;
 }
 
-lib_056F::func_A208(param_00) {
-  maps\mp\gametypes\zombies::func_32C8(self, 1);
+func_A208(param_00) {
+  maps / mp / gametypes / zombies::func_32C8(self, 1);
 }
 
-lib_056F::func_44A8(param_00) {
+func_44A8(param_00) {
   if(!isDefined(param_00)) {
     param_00 = "";
   }

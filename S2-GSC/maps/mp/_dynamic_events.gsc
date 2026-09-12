@@ -37,7 +37,7 @@ func_352E(param_00, param_01, param_02) {
     level.var_352E = [];
   }
 
-  if(level.var_3FDC == "sd" || level.var_3FDC == "sr") {
+  if(level.gametype == "sd" || level.gametype == "sr") {
     level thread func_4A59(param_00, param_02);
   } else {
     level thread func_49DC(param_00, param_01, 0);
@@ -50,9 +50,9 @@ func_5E8F() {}
 
 func_4A59(param_00, param_01) {
   game["dynamicEvent_switchedsides"] = game["switchedsides"];
-  if(level.var_3FDC == "sd") {
+  if(level.gametype == "sd") {
     game["dynamicEvent_scorelimit"] = getdvarint("scr_sd_winlimit", 6);
-  } else if(level.var_3FDC == "sr") {
+  } else if(level.gametype == "sr") {
     game["dynamicEvent_scorelimit"] = getdvarint("scr_sr_winlimit", 6);
   }
 
@@ -149,23 +149,23 @@ func_44AD() {
 
 func_44AC() {
   var_00 = undefined;
-  if(level.var_984D) {
+  if(level.teambased) {
     var_01 = maps\mp\gametypes\_gamescore::func_473F();
-    if(isDefined(var_01) && var_01 == "none" && isDefined(level.var_985B)) {
-      var_00 = maps\mp\gametypes\_gamescore::func_063E(level.var_985B[0]);
+    if(isDefined(var_01) && var_01 == "none" && isDefined(level.teamnamelist)) {
+      var_00 = maps\mp\gametypes\_gamescore::func_63E(level.teamnamelist[0]);
     } else if(isDefined(var_01)) {
-      var_00 = maps\mp\gametypes\_gamescore::func_063E(var_01);
+      var_00 = maps\mp\gametypes\_gamescore::func_63E(var_01);
     }
   } else {
     var_02 = maps\mp\gametypes\_gamescore::func_450A();
-    if(!isDefined(var_02) && isDefined(level.var_744A) && level.var_744A.size > 0) {
-      var_01 = maps\mp\gametypes\_gamescore::func_0638(level.var_744A[0]);
+    if(!isDefined(var_02) && isDefined(level.players) && level.players.size > 0) {
+      var_00 = maps\mp\gametypes\_gamescore::_getplayerscore(level.players[0]);
     } else if(isDefined(var_02)) {
-      var_01 = maps\mp\gametypes\_gamescore::func_0638(var_02);
+      var_00 = maps\mp\gametypes\_gamescore::_getplayerscore(var_02);
     }
   }
 
-  return var_02;
+  return var_00;
 }
 
 func_44AE() {

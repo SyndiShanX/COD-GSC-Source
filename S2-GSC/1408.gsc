@@ -3,17 +3,17 @@
  * Script: 1408.gsc
 *********************************************/
 
-lib_0580::func_00D5() {
-  lib_0547::func_7BD0("tesla_shock", ::lib_0580::func_8316, undefined, 5, ::lib_0580::func_8315);
-  common_scripts\utility::func_092C("shock", "vfx/sparks/tesla_stun_sparks");
-  common_scripts\utility::func_092C("head_sparks", "vfx/sparks/microwave_grenade_sparks_char_1");
-  lib_054D::func_7BC6(::lib_0580::func_98EC);
+init() {
+  lib_0547::func_7BD0("tesla_shock", ::func_8316, undefined, 5, ::func_8315);
+  common_scripts\utility::func_92C("shock", "vfx/sparks/tesla_stun_sparks");
+  common_scripts\utility::func_92C("head_sparks", "vfx/sparks/microwave_grenade_sparks_char_1");
+  lib_054D::func_7BC6(::func_98EC);
   var_00 = spawnStruct();
   var_00.var_6042 = 5;
   var_00.var_6053 = 5;
   var_00.var_78CA = 300;
   var_00.var_78C4 = 20;
-  var_00.var_0F43 = 0.5;
+  var_00.var_F43 = 0.5;
   common_scripts\utility::func_3C87("teslagun_punch_active");
   level.var_98F5 = var_00;
   lib_0581::func_17FD();
@@ -22,21 +22,21 @@ lib_0580::func_00D5() {
   lib_0582::func_2A99();
 }
 
-lib_0580::func_98F6(param_00) {
+func_98F6(param_00) {
   var_01 = self;
-  var_01.var_721C = param_00;
+  var_01.player = param_00;
   var_02 = param_00 common_scripts\utility::func_A74D("disconnect", 5);
   if(!lib_0547::func_5565("timeout", var_02)) {
-    var_01.var_721C = undefined;
+    var_01.player = undefined;
   }
 }
 
-lib_0580::func_98FD(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
+func_98FD(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
   if(lib_0547::func_5565(param_02, param_00)) {
     return;
   }
 
-  if(lib_0547::func_5565(param_02.var_000A, level.var_746E)) {
+  if(lib_0547::func_5565(param_02.agentteam, level.var_746E)) {
     return;
   }
 
@@ -44,7 +44,7 @@ lib_0580::func_98FD(param_00, param_01, param_02, param_03, param_04, param_05, 
     return;
   }
 
-  if(lib_0547::func_5565(param_02.var_98FE, lib_0580::func_4385())) {
+  if(lib_0547::func_5565(param_02.var_98FE, func_4385())) {
     return;
   }
 
@@ -53,19 +53,19 @@ lib_0580::func_98FD(param_00, param_01, param_02, param_03, param_04, param_05, 
   }
 
   var_08 = spawnStruct();
-  var_08.var_953E = param_05;
-  var_08.var_8CD7 = param_04;
+  var_08.sweapon = param_05;
+  var_08.smeansofdeath = param_04;
   var_08.var_6B87 = param_06;
   var_08.var_4DCD = 0;
   var_08.var_94B3 = param_07;
   if(isDefined(param_01)) {
-    var_08 thread lib_0580::func_98F6(param_01);
+    var_08 thread func_98F6(param_01);
   }
 
-  param_02 thread lib_0580::func_9900(param_02.var_0116, param_03, var_08, 1, param_01, param_04, param_05);
+  param_02 thread func_9900(param_02.origin, param_03, var_08, 1, param_01, param_04, param_05);
 }
 
-lib_0580::func_98EC(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
+func_98EC(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
   var_0B = self;
   if(!isDefined(param_05)) {
     return;
@@ -84,14 +84,14 @@ lib_0580::func_98EC(param_00, param_01, param_02, param_03, param_04, param_05, 
     return;
   }
 
-  if(param_02 == lib_0580::func_4382()) {
+  if(param_02 == func_4382()) {
     return;
   }
 
-  lib_0580::func_98FD(param_00, param_01, var_0B, "j_head", param_04, param_05, ::lib_0580::func_98FF);
+  func_98FD(param_00, param_01, var_0B, "j_head", param_04, param_05, ::func_98FF);
 }
 
-lib_0580::func_9900(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+func_9900(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   var_07 = self;
   if(!isalive(var_07)) {
     return;
@@ -107,40 +107,40 @@ lib_0580::func_9900(param_00, param_01, param_02, param_03, param_04, param_05, 
     return;
   }
 
-  var_07 endon("death");
+  var_08 endon("death");
   wait(0);
-  var_07.var_98FE = lib_0580::func_4385();
-  if(var_07 maps\mp\agents\humanoid\_humanoid_util::func_56BC()) {
-    var_07 dodamage(var_07.var_00BC + 10, param_00, param_04, var_07, param_05, "dot_generic_zm");
+  var_08.var_98FE = func_4385();
+  if(var_08 maps / mp / agents / humanoid / _humanoid_util::func_56BC()) {
+    var_08 dodamage(var_08.health + 10, param_01, param_05, var_08, param_06, "dot_generic_zm");
     return;
   }
 
-  if(self.var_0A4B != "zombie_heavy" && self.var_0A4B != "zombie_fireman") {
+  if(self.var_A4B != "zombie_heavy" && self.var_A4B != "zombie_fireman") {
     var_09 = "shock";
-    if(isDefined(param_02.var_94B3)) {
-      var_09 = param_02.var_94B3;
+    if(isDefined(param_03.var_94B3)) {
+      var_09 = param_03.var_94B3;
     }
 
-    var_07 thread play_shock_fx(var_09, "j_spine4", 4);
+    var_08 thread play_shock_fx(var_09, "j_spine4", 4);
     thread play_shock_sound(4);
   }
 
-  if(isDefined(var_07.var_98F0) && lib_0580::func_4385() < var_07.var_98F0) {
-    var_07 lib_0580::func_9901();
+  if(isDefined(var_08.var_98F0) && func_4385() < var_08.var_98F0) {
+    var_08 func_9901();
   } else {
-    var_07 childthread[[param_02.var_6B87]](param_00, param_02);
+    var_08 childthread[[param_03.var_6B87]](param_01, param_03);
   }
 
   var_0A = level.var_98F5;
-  wait(var_0A.var_0F43);
-  var_0B = var_0A.var_78CA - var_0A.var_78C4 * param_03;
+  wait(var_0A.var_F43);
+  var_0B = var_0A.var_78CA - var_0A.var_78C4 * param_04;
   var_0C = squared(var_0B);
-  if(var_0B <= 0 || param_03 >= var_0A.var_6042) {
+  if(var_0B <= 0 || param_04 >= var_0A.var_6042) {
     return;
   }
 
-  var_0D = var_07 gettagorigin(param_01);
-  var_0E = lib_0580::func_4385();
+  var_0D = var_08 gettagorigin(param_02);
+  var_0E = func_4385();
   foreach(var_10 in lib_0547::func_408F()) {
     if(!isalive(var_10)) {
       continue;
@@ -150,15 +150,15 @@ lib_0580::func_9900(param_00, param_01, param_02, param_03, param_04, param_05, 
       continue;
     }
 
-    if(distancesquared(var_07.var_0116, var_10.var_0116) > var_0C) {
+    if(distancesquared(var_08.origin, var_10.origin) > var_0C) {
       continue;
     }
 
-    if(isDefined(var_07.var_98FE) && var_0E - var_07.var_98FE < 1) {
+    if(isDefined(var_08.var_98FE) && var_0E - var_08.var_98FE < 1) {
       continue;
     }
 
-    if(param_02.var_4DCD >= var_0A.var_6053) {
+    if(param_03.var_4DCD >= var_0A.var_6053) {
       break;
     }
 
@@ -168,13 +168,13 @@ lib_0580::func_9900(param_00, param_01, param_02, param_03, param_04, param_05, 
     }
 
     var_12 = var_10 gettagorigin(var_11);
-    if(!bullettracepassed(var_0D, var_12, 0, var_07)) {
+    if(!bullettracepassed(var_0D, var_12, 0, var_08)) {
       continue;
     }
 
-    param_02.var_4DCD++;
-    lib_0580::func_98EA(var_07, param_01, var_10, var_11, var_0A.var_953E);
-    var_10 thread lib_0580::func_9900(var_07.var_0116, var_11, param_02, param_03 + 1);
+    param_03.var_4DCD++;
+    func_98EA(var_08, param_02, var_10, var_11, var_0A.sweapon);
+    var_10 thread func_9900(var_08.origin, var_11, param_03, param_04 + 1);
   }
 }
 
@@ -196,28 +196,28 @@ play_shock_sound(param_00) {
   thread lib_0378::func_8D74("aud_wonder_weapon_electrocute_end");
 }
 
-lib_0580::func_9901(param_00) {
+func_9901(param_00) {
   var_01 = 3;
   if(isDefined(param_00)) {
     var_01 = param_00;
   }
 
   var_02 = self;
-  var_02.var_98F0 = lib_0580::func_4385() + var_01 + randomfloatrange(0.1, 0.6);
+  var_02.var_98F0 = func_4385() + var_01 + randomfloatrange(0.1, 0.6);
 }
 
-lib_0580::func_98FF(param_00, param_01) {
+func_98FF(param_00, param_01) {
   var_02 = self;
-  if(lib_0547::func_5565(var_02.var_0A4B, "zombie_fireman") || var_02 maps\mp\agents\humanoid\_humanoid_util::func_56BC() || common_scripts\utility::func_562E(var_02.isteslastunimmune)) {
-    var_02 thread lib_0580::func_98EE(param_00, param_01.var_721C, param_01.var_8CD7, param_01.var_953E, 0);
+  if(lib_0547::func_5565(var_02.var_A4B, "zombie_fireman") || var_02 maps / mp / agents / humanoid / _humanoid_util::func_56BC() || common_scripts\utility::func_562E(var_02.isteslastunimmune)) {
+    var_02 thread func_98EE(param_00, param_01.player, param_01.smeansofdeath, param_01.sweapon, 0);
     return;
   }
 
-  var_03 = lib_0580::func_8317(param_00, param_01.var_721C);
+  var_03 = func_8317(param_00, param_01.player);
   var_02 thread lib_0547::func_7D1A("tesla_shock", [var_03], 4);
 }
 
-lib_0580::func_98EE(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+func_98EE(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   var_07 = self;
   if(!isalive(var_07)) {
     return;
@@ -225,9 +225,9 @@ lib_0580::func_98EE(param_00, param_01, param_02, param_03, param_04, param_05, 
 
   if(!isDefined(param_00)) {
     if(isDefined(param_01)) {
-      param_00 = param_01.var_0116;
+      param_00 = param_01.origin;
     } else if(isDefined(var_07)) {
-      param_00 = var_07.var_0116;
+      param_00 = var_07.origin;
     }
   }
 
@@ -250,8 +250,8 @@ lib_0580::func_98EE(param_00, param_01, param_02, param_03, param_04, param_05, 
     var_0C = 6000;
   }
 
-  if(isDefined(var_07.var_0A4B)) {
-    var_0C = [[var_07 maps\mp\agents\_agent_utility::func_0A59("tesla_delayed_dmg")]](var_0C, param_04, param_06);
+  if(isDefined(var_07.var_A4B)) {
+    var_0C = [[var_07 maps / mp / agents / _agent_utility::func_A59("tesla_delayed_dmg")]](var_0C, param_04, param_06);
   }
 
   var_07 endon("death");
@@ -263,40 +263,40 @@ lib_0580::func_98EE(param_00, param_01, param_02, param_03, param_04, param_05, 
   var_07 dodamage(var_0C, param_00, param_01, var_07, param_02, param_03);
 }
 
-lib_0580::func_4382() {
+func_4382() {
   return int(3);
 }
 
-lib_0580::func_98E9(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+func_98E9(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   var_07 = lib_0547::func_408F();
   var_08 = squared(param_01);
   if(isDefined(param_03)) {
-    var_07 = common_scripts\utility::func_0F93(var_07, param_03);
+    var_07 = common_scripts\utility::func_F93(var_07, param_03);
   }
 
   foreach(var_0A in var_07) {
-    if(distancesquared(var_0A.var_0116, param_00) > var_08) {
+    if(distancesquared(var_0A.origin, param_00) > var_08) {
       continue;
     }
 
-    var_0A thread lib_0580::func_98EE(param_00, param_02, "MOD_ENERGY", param_04, 1, undefined, param_06);
+    var_0A thread func_98EE(param_00, param_02, "MOD_ENERGY", param_04, 1, undefined, param_06);
   }
 
-  radiusdamage(param_00, param_01, lib_0580::func_4382(), lib_0580::func_4382(), param_02, "MOD_ENERGY", param_04);
+  radiusdamage(param_00, param_01, func_4382(), func_4382(), param_02, "MOD_ENERGY", param_04);
   physicsexplosioncylinder(param_00, param_01, 0, 1.7);
 }
 
-lib_0580::func_98FA(param_00, param_01, param_02, param_03, param_04) {
+func_98FA(param_00, param_01, param_02, param_03, param_04) {
   var_05 = spawnStruct();
   var_05.var_8FAD = param_01;
   var_05.var_9014 = param_02;
   var_05.var_606B = param_03;
   var_05.var_A0A7 = param_04;
-  var_05.var_953E = param_00;
-  level thread maps\mp\_utility::func_6F74(::lib_0580::func_98F9, var_05);
+  var_05.sweapon = param_00;
+  level thread maps\mp\_utility::func_6F74(::func_98F9, var_05);
 }
 
-lib_0580::func_98F7(param_00) {
+func_98F7(param_00) {
   var_01 = self;
   if(!isalive(param_00)) {
     return;
@@ -316,15 +316,15 @@ lib_0580::func_98F7(param_00) {
     return;
   }
 
-  lib_0580::func_98EA(var_01, "tag_origin", param_00, var_02, var_01.var_953E);
+  func_98EA(var_01, "tag_origin", param_00, var_02, var_01.sweapon);
 }
 
-lib_0580::func_98F8(param_00, param_01) {
+func_98F8(param_00, param_01) {
   var_02 = self;
-  param_00 thread lib_0580::func_98EE(var_02.var_0116, var_02.var_721C, "MOD_ENERGY", var_02.var_953E, 1, param_01);
+  param_00 thread func_98EE(var_02.origin, var_02.player, "MOD_ENERGY", var_02.sweapon, 1, param_01);
 }
 
-lib_0580::func_98FC() {
+func_98FC() {
   var_00 = self;
   var_00 endon("death");
   var_01 = 30;
@@ -342,7 +342,7 @@ lib_0580::func_98FC() {
         var_06 = var_05.var_8303;
       }
 
-      if(distance2d(var_05.var_0116, var_00.var_0116) > var_06 + var_01) {
+      if(distance2d(var_05.origin, var_00.origin) > var_06 + var_01) {
         continue;
       }
 
@@ -351,7 +351,7 @@ lib_0580::func_98FC() {
         var_07 = var_05.var_8302;
       }
 
-      if(var_00.var_0116[2] < var_05.var_0116[2] - var_01 || var_00.var_0116[2] > var_05.var_0116[2] + var_07 + var_01) {
+      if(var_00.origin[2] < var_05.origin[2] - var_01 || var_00.origin[2] > var_05.origin[2] + var_07 + var_01) {
         continue;
       }
 
@@ -361,11 +361,11 @@ lib_0580::func_98FC() {
       }
 
       var_02[var_08] = 1;
-      if(issubstr(var_00.var_953E, "moon")) {
+      if(issubstr(var_00.sweapon, "moon")) {
         var_00 lib_0583::func_63FC(var_05);
       } else {
-        var_00 lib_0580::func_98F7(var_05);
-        var_00 lib_0580::func_98F8(var_05);
+        var_00 func_98F7(var_05);
+        var_00 func_98F8(var_05);
       }
 
       var_03++;
@@ -377,11 +377,11 @@ lib_0580::func_98FC() {
   }
 }
 
-lib_0580::func_98F9(param_00) {
+func_98F9(param_00) {
   var_01 = self;
   for(;;) {
     var_01 waittill("weapon_fired", var_02);
-    if(!lib_0547::func_5565(var_02, param_00.var_953E)) {
+    if(!lib_0547::func_5565(var_02, param_00.sweapon)) {
       continue;
     }
 
@@ -394,24 +394,24 @@ lib_0580::func_98F9(param_00) {
     var_09 = var_01 getEye() + var_07 * var_03 + var_08 * var_04;
     var_0A = bulletTrace(var_09, var_09 + var_05 * var_07, 0, undefined, 0, 0, 0, 0, 0, 0, 0);
     var_0B = spawn("script_model", var_09);
-    var_0B.var_001D = var_01.var_001D;
+    var_0B.angles = var_01.angles;
     var_0B setModel("tag_origin");
     var_0B.var_2DA7 = var_0A["position"];
-    var_0B.var_2F0C = vectorNormalize(var_0B.var_2DA7 - var_0B.var_0116);
+    var_0B.var_2F0C = vectorNormalize(var_0B.var_2DA7 - var_0B.origin);
     var_0B.var_9B7F = var_0A["fraction"];
-    var_0B.var_721C = var_01;
-    var_0B.var_953E = param_00.var_953E;
-    var_0B thread lib_0580::func_98FB();
-    var_0B thread lib_0580::func_98FC();
+    var_0B.player = var_01;
+    var_0B.sweapon = param_00.sweapon;
+    var_0B thread func_98FB();
+    var_0B thread func_98FC();
     var_0B thread[[param_00.var_A0A7]]();
   }
 }
 
-lib_0580::func_98FB() {
+func_98FB() {
   var_00 = self;
   var_00 endon("death");
-  var_00.var_721C waittill("disconnect");
-  var_00.var_721C = undefined;
+  var_00.player waittill("disconnect");
+  var_00.player = undefined;
 }
 
 tesla_ammo_tracker(param_00) {
@@ -432,7 +432,7 @@ tesla_drop_watcher(param_00, param_01, param_02) {
   }
 
   for(;;) {
-    var_03 = param_00 common_scripts\utility::func_A715("bleedout", "weapon_change", "becameSpectator", "disconnect", "death");
+    var_03 = param_00 common_scripts\utility::waittill_any_return("bleedout", "weapon_change", "becameSpectator", "disconnect", "death");
     if(var_03 == "weapon_change") {
       if(lib_0547::func_577E(param_00)) {
         continue;
@@ -463,7 +463,7 @@ init_variant_structs_simple() {
     level.var_AACA = [];
   }
 
-  var_00 = lib_0580::func_43B4();
+  var_00 = func_43B4();
   foreach(var_02 in var_00) {
     level.var_AACA[var_02] = tesla_variant_struct_init(var_02);
   }
@@ -497,7 +497,7 @@ tesla_variant_set_taken(param_00, param_01) {
   level.var_AACA[param_00].var_2909 = param_01;
 }
 
-lib_0580::func_5533(param_00) {
+func_5533(param_00) {
   if(!isstring(param_00)) {
     return 0;
   }
@@ -505,31 +505,31 @@ lib_0580::func_5533(param_00) {
   return issubstr(param_00, "teslagun");
 }
 
-lib_0580::func_408C() {
-  var_00 = common_scripts\utility::func_0F73(["teslagun_zm"], lib_0580::func_43B4());
-  var_00 = common_scripts\utility::func_0F73(["teslagun_pap_zm"], var_00);
+func_408C() {
+  var_00 = common_scripts\utility::func_F73(["teslagun_zm"], func_43B4());
+  var_00 = common_scripts\utility::func_F73(["teslagun_pap_zm"], var_00);
   return var_00;
 }
 
-lib_0580::func_43B4() {
+func_43B4() {
   return ["teslagun_zm_blood", "teslagun_zm_death", "teslagun_zm_moon", "teslagun_zm_storm"];
 }
 
-lib_0580::func_563A(param_00) {
+func_563A(param_00) {
   if(!isstring(param_00)) {
     return 0;
   }
 
-  return common_scripts\utility::func_0F79(lib_0580::func_43B4(), param_00);
+  return common_scripts\utility::func_F79(func_43B4(), param_00);
 }
 
-lib_0580::func_4385() {
+func_4385() {
   var_00 = gettime();
   var_01 = var_00 * 0.001;
   return var_01;
 }
 
-lib_0580::func_40C5(param_00) {
+func_40C5(param_00) {
   switch (param_00) {
     case "teslagun_zm_blood":
       return "zmb_tesla_blood_beam";
@@ -548,41 +548,41 @@ lib_0580::func_40C5(param_00) {
   }
 }
 
-lib_0580::func_98EB(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = launchbeam(lib_0580::func_40C5(param_04), param_00, param_01, param_02, param_03);
-  wait(level.var_98F5.var_0F43);
+func_98EB(param_00, param_01, param_02, param_03, param_04) {
+  var_05 = launchbeam(func_40C5(param_04), param_00, param_01, param_02, param_03);
+  wait(level.var_98F5.var_F43);
   var_05 delete();
 }
 
-lib_0580::func_98EA(param_00, param_01, param_02, param_03, param_04) {
-  level thread lib_0580::func_98EB(param_00, param_01, param_02, param_03, param_04);
+func_98EA(param_00, param_01, param_02, param_03, param_04) {
+  level thread func_98EB(param_00, param_01, param_02, param_03, param_04);
 }
 
-lib_0580::func_8317(param_00, param_01, param_02, param_03) {
+func_8317(param_00, param_01, param_02, param_03) {
   var_04 = spawnStruct();
   var_04.var_29A8 = param_00;
-  var_04.var_721C = param_01;
+  var_04.player = param_01;
   var_04.var_6AA0 = param_02;
   var_04.var_8365 = param_03;
   return var_04;
 }
 
-lib_0580::func_8316(param_00) {
+func_8316(param_00) {
   var_01 = self;
   var_01 endon("death");
   var_01.var_98EF = 1;
   var_01.var_172A = 1;
   var_02 = "scripted_tesla_shock";
-  if(var_01 maps\mp\agents\humanoid\_humanoid_util::func_56BC()) {
+  if(var_01 maps / mp / agents / humanoid / _humanoid_util::func_56BC()) {
     var_02 = "stun_hold";
   }
 
-  var_03 = maps\mp\agents\_scripted_agent_anim_util::func_434D(var_02);
+  var_03 = maps / mp / agents / _scripted_agent_anim_util::func_434D(var_02);
   if(isDefined(var_03)) {
-    thread maps\mp\agents\humanoid\_humanoid_util::func_8318(self.var_0116, self.var_001D, var_03, undefined, 0, undefined, 1, 1, undefined, "stop_shock");
-    var_01 lib_0580::func_9901(param_00.var_8365);
+    thread maps / mp / agents / humanoid / _humanoid_util::func_8318(self.origin, self.angles, var_03, undefined, 0, undefined, 1, 1, undefined, "stop_shock");
+    var_01 func_9901(param_00.var_8365);
     for(;;) {
-      var_04 = var_01.var_98F0 - lib_0580::func_4385();
+      var_04 = var_01.var_98F0 - func_4385();
       if(var_04 <= 0) {
         break;
       }
@@ -592,7 +592,7 @@ lib_0580::func_8316(param_00) {
   }
 }
 
-lib_0580::func_8315(param_00) {
+func_8315(param_00) {
   var_01 = self;
   var_01.var_98EF = 0;
   var_01 notify("stop_shock");
@@ -601,5 +601,5 @@ lib_0580::func_8315(param_00) {
     return;
   }
 
-  var_01 thread lib_0580::func_98EE(param_00.var_29A8, param_00.var_721C, param_00.var_8CD7, param_00.var_953E, 0);
+  var_01 thread func_98EE(param_00.var_29A8, param_00.player, param_00.smeansofdeath, param_00.sweapon, 0);
 }

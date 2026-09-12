@@ -3,11 +3,11 @@
  * Script: 1367.gsc
 *********************************************/
 
-lib_0557::func_786C() {
+func_786C() {
   level.var_ABE8 = [];
   level.var_7874 = [];
-  level.var_0BD7 = [];
-  level.var_08CC = [];
+  level.var_BD7 = [];
+  level.var_8CC = [];
   level.var_ABE7 = spawnStruct();
   level.var_ABE7.var_5870 = [];
   level.var_782E = 0;
@@ -23,11 +23,11 @@ lib_0557::func_786C() {
       level.var_ABEF[var_04] = var_05;
     }
 
-    level thread lib_0557::func_5F3C();
+    level thread func_5F3C();
   }
 
   level thread quest_analytics_match_summary();
-  level thread maps\mp\_utility::func_6F74(::lib_0557::func_782A);
+  level thread maps\mp\_utility::func_6F74(::func_782A);
 }
 
 zmb_hint_system_disabled() {
@@ -46,7 +46,7 @@ quest_ensure_proper_hints(param_00) {
   return param_00;
 }
 
-lib_0557::func_7846(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+func_7846(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   if(!isDefined(param_05)) {
     param_05 = 1;
   }
@@ -57,7 +57,7 @@ lib_0557::func_7846(param_00, param_01, param_02, param_03, param_04, param_05, 
 
   param_03 = quest_ensure_proper_hints(param_03);
   var_07 = spawnStruct();
-  var_07.var_0109 = param_00;
+  var_07.name = param_00;
   var_07.var_6F77 = [];
   var_07.var_2917 = [];
   var_07.var_939C = [];
@@ -72,7 +72,7 @@ lib_0557::func_7846(param_00, param_01, param_02, param_03, param_04, param_05, 
   var_07.var_76A7 = common_scripts\utility::func_98E7(isDefined(param_02), param_02, []);
   level.var_ABE8[param_00] = var_07;
   if(isDefined(param_04)) {
-    var_08 = common_scripts\utility::func_0F79(["mp_zombie_nest_01", "mp_zombie_training"], maps\mp\_utility::func_4571());
+    var_08 = common_scripts\utility::func_F79(["mp_zombie_nest_01", "mp_zombie_training"], maps\mp\_utility::func_4571());
   } else {
     param_04 = "ZOMBIES_EMPTY_STRING";
   }
@@ -81,7 +81,7 @@ lib_0557::func_7846(param_00, param_01, param_02, param_03, param_04, param_05, 
   common_scripts\utility::func_3C87(param_00);
 }
 
-lib_0557::func_782F(param_00, param_01, param_02) {
+func_782F(param_00, param_01, param_02) {
   var_03 = spawnStruct();
   var_03.var_6C17 = param_00;
   var_03.var_7840 = [];
@@ -94,223 +94,223 @@ lib_0557::func_782F(param_00, param_01, param_02) {
     }
 
     foreach(var_05 in param_01) {
-      if(!lib_0557::func_5642(var_05)) {
+      if(!func_5642(var_05)) {
         continue;
       }
 
-      var_03.var_37C5 = common_scripts\utility::func_0F6F(var_03.var_37C5, var_05);
+      var_03.var_37C5 = common_scripts\utility::func_F6F(var_03.var_37C5, var_05);
     }
   }
 
-  level.var_0BD7 = common_scripts\utility::func_0F6F(level.var_0BD7, var_03);
+  level.var_BD7 = common_scripts\utility::func_F6F(level.var_BD7, var_03);
   if(isDefined(param_00)) {
     var_03.var_7B06 = param_00;
   } else if(var_03.var_37C5.size) {
-    var_03.var_7B06 = var_03.var_37C5[0].var_0116;
+    var_03.var_7B06 = var_03.var_37C5[0].origin;
   }
 
-  var_03 lib_0557::func_7844(var_03.var_7B06, "objective_create");
+  var_03 func_7844(var_03.var_7B06, "objective_create");
   return var_03;
 }
 
-lib_0557::func_781D(param_00, param_01, param_02) {
+func_781D(param_00, param_01, param_02) {
   if(!isDefined(param_02)) {
     param_02 = 1;
   }
 
-  var_03 = lib_0557::func_7832(param_00);
+  var_03 = func_7832(param_00);
   if(var_03.var_933D != "in progress") {
     return;
   }
 
   if(param_02) {
-    var_03.var_2917 = common_scripts\utility::func_0F6F(var_03.var_2917, param_01);
+    var_03.var_2917 = common_scripts\utility::func_F6F(var_03.var_2917, param_01);
   } else {
-    var_03.var_6F77 = common_scripts\utility::func_0F6F(var_03.var_6F77, param_01);
+    var_03.var_6F77 = common_scripts\utility::func_F6F(var_03.var_6F77, param_01);
   }
 
-  param_01.var_7840 = common_scripts\utility::func_0F6F(param_01.var_7840, param_00);
+  param_01.var_7840 = common_scripts\utility::func_F6F(param_01.var_7840, param_00);
   if(param_01.var_7840.size != 1) {
     return;
   }
 
-  level.var_08CC = common_scripts\utility::func_0F6F(level.var_08CC, param_01);
-  foreach(var_05 in lib_0557::func_42B9()) {
-    lib_0557::func_783A(var_05, param_01);
+  level.var_8CC = common_scripts\utility::func_F6F(level.var_8CC, param_01);
+  foreach(var_05 in func_42B9()) {
+    func_783A(var_05, param_01);
   }
 }
 
-lib_0557::func_7847(param_00, param_01) {
-  var_02 = lib_0557::func_7832(param_00);
-  lib_0557::func_783D(param_01, var_02);
+func_7847(param_00, param_01) {
+  var_02 = func_7832(param_00);
+  func_783D(param_01, var_02);
 }
 
-lib_0557::func_781E(param_00, param_01, param_02, param_03, param_04) {
-  lib_0557::func_781F(param_00);
-  var_05 = lib_0557::func_7832(param_00);
+func_781E(param_00, param_01, param_02, param_03, param_04) {
+  func_781F(param_00);
+  var_05 = func_7832(param_00);
   param_04 = quest_ensure_proper_hints(param_04);
   var_06 = spawnStruct();
-  var_06.var_0109 = param_01;
+  var_06.name = param_01;
   var_06.var_A09A = param_02;
-  var_06.var_00D4 = var_05.var_939C.size;
+  var_06.index = var_05.var_939C.size;
   var_06.var_4DAC = param_04;
   var_06.var_9399 = common_scripts\utility::func_98E7(isarray(param_03), param_03, [param_03]);
-  var_05.var_939C[var_06.var_00D4] = var_06;
-  common_scripts\utility::func_3C87(lib_0557::func_7838(param_00, param_01));
+  var_05.var_939C[var_06.index] = var_06;
+  common_scripts\utility::func_3C87(func_7838(param_00, param_01));
 }
 
-lib_0557::func_7848(param_00) {
-  lib_0557::func_781F(param_00);
-  var_01 = lib_0557::func_7832(param_00);
-  level thread lib_0557::func_7849(var_01);
+func_7848(param_00) {
+  func_781F(param_00);
+  var_01 = func_7832(param_00);
+  level thread func_7849(var_01);
 }
 
-lib_0557::func_7870(param_00, param_01) {
-  common_scripts\utility::func_3C9F(lib_0557::func_7838(param_00, param_01));
+func_7870(param_00, param_01) {
+  common_scripts\utility::func_3C9F(func_7838(param_00, param_01));
 }
 
-lib_0557::func_782D(param_00, param_01) {
-  common_scripts\utility::func_3C8F(lib_0557::func_7838(param_00, param_01));
+func_782D(param_00, param_01) {
+  common_scripts\utility::func_3C8F(func_7838(param_00, param_01));
 }
 
-lib_0557::func_783E(param_00, param_01) {
-  return common_scripts\utility::func_3C77(lib_0557::func_7838(param_00, param_01));
+func_783E(param_00, param_01) {
+  return common_scripts\utility::func_3C77(func_7838(param_00, param_01));
 }
 
-lib_0557::func_7838(param_00, param_01, param_02) {
+func_7838(param_00, param_01, param_02) {
   if(!common_scripts\utility::func_562E(param_02)) {
-    lib_0557::func_7820(param_00, param_01);
+    func_7820(param_00, param_01);
   }
 
   return "flag " + param_00 + " " + param_01;
 }
 
-lib_0557::func_30D8(param_00) {}
+func_30D8(param_00) {}
 
-lib_0557::func_1D88(param_00) {
-  var_01 = lib_0557::func_7836(param_00);
-  var_02 = common_scripts\utility::func_0F7E(level.var_7874, param_00);
+func_1D88(param_00) {
+  var_01 = func_7836(param_00);
+  var_02 = common_scripts\utility::func_F7E(level.var_7874, param_00);
   if((param_00.var_8BDE && isDefined(param_00.var_4DAC)) || isDefined(var_01) && param_00.var_8BE1 && isDefined(var_01.var_4DAC)) {
-    lib_0557::func_378C(param_00);
+    func_378C(param_00);
     return;
   }
 
   if(isDefined(var_02)) {
-    level.var_7874 = common_scripts\utility::func_0F93(level.var_7874, param_00);
+    level.var_7874 = common_scripts\utility::func_F93(level.var_7874, param_00);
     if(var_02 < 3) {
-      lib_0557::func_7CAF(param_00);
-      lib_0557::func_7CB6(param_00);
+      func_7CAF(param_00);
+      func_7CB6(param_00);
       if(level.var_7874.size >= 3) {
-        lib_0557::func_378D(level.var_7874[2]);
+        func_378D(level.var_7874[2]);
       }
 
-      lib_0557::func_7ACA();
+      func_7ACA();
       return;
     }
   }
 }
 
-lib_0557::func_9A78(param_00) {
-  lib_0557::func_8564(param_00, !lib_0557::func_42D6(param_00));
+func_9A78(param_00) {
+  func_8564(param_00, !func_42D6(param_00));
 }
 
-lib_0557::func_9A7C(param_00) {
-  lib_0557::func_8596(param_00, !lib_0557::func_434E(param_00));
+func_9A7C(param_00) {
+  func_8596(param_00, !func_434E(param_00));
 }
 
-lib_0557::func_42D6(param_00) {
-  return lib_0557::func_7834(param_00).var_8BDE;
+func_42D6(param_00) {
+  return func_7834(param_00).var_8BDE;
 }
 
-lib_0557::func_434E(param_00) {
-  return lib_0557::func_7834(param_00).var_8BE1;
+func_434E(param_00) {
+  return func_7834(param_00).var_8BE1;
 }
 
-lib_0557::func_8564(param_00, param_01) {
-  var_02 = lib_0557::func_7834(param_00);
+func_8564(param_00, param_01) {
+  var_02 = func_7834(param_00);
   var_02.var_8BDE = param_01;
-  lib_0557::func_1D88(var_02);
+  func_1D88(var_02);
 }
 
-lib_0557::func_8596(param_00, param_01) {
-  var_02 = lib_0557::func_7834(param_00);
+func_8596(param_00, param_01) {
+  var_02 = func_7834(param_00);
   var_02.var_8BE1 = param_01;
-  lib_0557::func_1D88(var_02);
+  func_1D88(var_02);
 }
 
-lib_0557::func_20BA(param_00, param_01) {
-  var_02 = lib_0557::func_7834(param_00);
-  lib_0557::func_7CAF(var_02);
+func_20BA(param_00, param_01) {
+  var_02 = func_7834(param_00);
+  func_7CAF(var_02);
   param_01 = quest_ensure_proper_hints(param_01);
   var_02.var_4DAC = param_01;
-  lib_0557::func_1D88(var_02);
+  func_1D88(var_02);
 }
 
-lib_0557::func_20BC(param_00, param_01, param_02) {
-  var_03 = lib_0557::func_7834(param_00);
-  var_04 = lib_0557::func_7835(var_03, param_01);
+func_20BC(param_00, param_01, param_02) {
+  var_03 = func_7834(param_00);
+  var_04 = func_7835(var_03, param_01);
   param_02 = quest_ensure_proper_hints(param_02);
-  if(lib_0547::func_5565(var_04.var_00D4, var_03.var_939A)) {
-    lib_0557::func_7822(param_00, param_02);
+  if(lib_0547::func_5565(var_04.index, var_03.var_939A)) {
+    func_7822(param_00, param_02);
     return;
   }
 
   var_04.var_4DAC = param_02;
 }
 
-lib_0557::func_7822(param_00, param_01) {
-  var_02 = lib_0557::func_7834(param_00);
-  lib_0557::func_7CB6(var_02);
-  var_03 = lib_0557::func_7836(var_02);
+func_7822(param_00, param_01) {
+  var_02 = func_7834(param_00);
+  func_7CB6(var_02);
+  var_03 = func_7836(var_02);
   param_01 = quest_ensure_proper_hints(param_01);
   if(isDefined(var_03)) {
     var_03.var_4DAC = param_01;
   }
 
-  lib_0557::func_1D88(var_02);
+  func_1D88(var_02);
 }
 
-lib_0557::func_782A() {
+func_782A() {
   var_00 = self;
   var_00 waittill("spawned_player");
   var_00 quest_omnvar_init();
   var_00 thread quest_omnvar_handle_player_respawn();
   foreach(var_02 in level.var_ABE7.var_5870) {
-    if(var_02.var_01B9 == 2) {
-      lib_0557::func_782B(var_00, var_02);
+    if(var_02.type == 2) {
+      func_782B(var_00, var_02);
       continue;
     }
 
-    if(var_02.var_01B9 == 1) {
+    if(var_02.type == 1) {
       zombie_collectable_internal_global_collect_on_join(var_02);
     }
   }
 }
 
-lib_0557::func_782B(param_00, param_01) {
-  param_00 thread lib_0557::func_AB8A(param_01);
+func_782B(param_00, param_01) {
+  param_00 thread func_AB8A(param_01);
 }
 
-lib_0557::func_AB8C(param_00) {
+func_AB8C(param_00) {
   var_04 = spawnStruct();
   var_04.var_3C8C = param_00;
   var_04.var_3E41 = 0;
-  var_04.var_01B9 = 1;
-  var_04.var_00D4 = level.var_ABE7.var_5870.size;
-  level.var_ABE7.var_5870 = common_scripts\utility::func_0F6F(level.var_ABE7.var_5870, var_04);
-  level thread lib_0557::func_AB89(var_04);
+  var_04.type = 1;
+  var_04.index = level.var_ABE7.var_5870.size;
+  level.var_ABE7.var_5870 = common_scripts\utility::func_F6F(level.var_ABE7.var_5870, var_04);
+  level thread func_AB89(var_04);
 }
 
-lib_0557::func_AB8D(param_00, param_01) {
+func_AB8D(param_00, param_01) {
   var_05 = spawnStruct();
   var_05.var_3C8C = param_00;
   var_05.var_3E41 = 0;
-  var_05.var_01B9 = 2;
-  var_05.var_00D4 = level.var_ABE7.var_5870.size;
-  level.var_ABE7.var_5870 = common_scripts\utility::func_0F6F(level.var_ABE7.var_5870, var_05);
+  var_05.type = 2;
+  var_05.index = level.var_ABE7.var_5870.size;
+  level.var_ABE7.var_5870 = common_scripts\utility::func_F6F(level.var_ABE7.var_5870, var_05);
 }
 
-lib_0557::func_AB88(param_00) {
+func_AB88(param_00) {
   common_scripts\utility::func_3C8F(param_00);
 }
 
@@ -340,14 +340,14 @@ step_should_write_match_data(param_00) {
 
 quest_analytics_objective_step(param_00, param_01) {
   var_02 = getmatchdata("objective_step_count");
-  setmatchdata("objective_step_count", maps\mp\_utility::func_2315(var_02 + 1));
+  setmatchdata("objective_step_count", maps\mp\_utility::clamptoshort(var_02 + 1));
   if(step_should_write_match_data(var_02)) {
     var_03 = maps\mp\_matchdata::getmatchtimepassed();
     setmatchdata("objective_steps", var_02, "step", param_00);
     setmatchdata("objective_steps", var_02, "time_ms", var_03);
     setmatchdata("objective_steps", var_02, "objective", param_01);
-    if(isDefined(level.var_721C)) {
-      var_04 = level.var_721C lib_055A::func_462D();
+    if(isDefined(level.player)) {
+      var_04 = level.player lib_055A::func_462D();
       if(!isDefined(var_04)) {
         var_04 = "none";
       }
@@ -376,15 +376,15 @@ quest_analytics_match_summary() {
     var_07 = undefined;
     var_08 = undefined;
     var_09 = undefined;
-    var_0A = lib_0557::func_7836(var_03);
+    var_0A = func_7836(var_03);
     if(isDefined(var_0A)) {
-      var_07 = var_0A.var_0109;
+      var_07 = var_0A.name;
       var_08 = var_00 - var_0A.var_924E * var_04;
       var_09 = level.var_A980;
     }
 
     var_0B = lib_0547::func_AC4B(undefined, "questsummary");
-    var_0B lib_0547::func_AC48("quest_name", var_03.var_0109);
+    var_0B lib_0547::func_AC48("quest_name", var_03.name);
     var_0B lib_0547::func_AC48("quest_status", var_03.var_933D);
     var_0B lib_0547::func_AC44("quest_start_wave", var_03.var_92AF);
     var_0B lib_0547::func_AC44("quest_finish_wave", var_03.var_3BA4);
@@ -408,7 +408,7 @@ quest_analytics_match_summary() {
         var_07 = "unknown";
       }
 
-      setmatchdata("objectives", var_03.objective_index, "description", var_03.var_0109);
+      setmatchdata("objectives", var_03.objective_index, "description", var_03.name);
       setmatchdata("objectives", var_03.objective_index, "start_time_ms", var_0D);
       setmatchdata("objectives", var_03.objective_index, "end_time_ms", var_0C);
       setmatchdata("objectives", var_03.objective_index, "step", var_07);
@@ -416,19 +416,19 @@ quest_analytics_match_summary() {
   }
 }
 
-lib_0557::func_7844(param_00, param_01, param_02, param_03) {
+func_7844(param_00, param_01, param_02, param_03) {
   var_04 = "";
   if(isDefined(param_02)) {
-    var_04 = param_02.var_0109;
+    var_04 = param_02.name;
   }
 
   if(isDefined(param_02) && !isDefined(param_03)) {
-    param_03 = lib_0557::func_7836(param_02);
+    param_03 = func_7836(param_02);
   }
 
   var_05 = "";
   if(isDefined(param_03)) {
-    var_05 = param_03.var_0109;
+    var_05 = param_03.name;
   }
 
   var_06 = "";
@@ -449,7 +449,7 @@ lib_0557::func_7844(param_00, param_01, param_02, param_03) {
   var_07 lib_0547::func_AC4D();
 }
 
-lib_0557::func_7837() {
+func_7837() {
   var_00 = "";
   if(isDefined(level.var_ABE8)) {
     foreach(var_03, var_02 in level.var_ABE8) {
@@ -460,7 +460,7 @@ lib_0557::func_7837() {
 
         var_00 = var_00 + var_03;
         if(isDefined(var_02.var_939A)) {
-          var_00 = var_00 + "/" + var_02.var_939C[var_02.var_939A].var_0109;
+          var_00 = var_00 + "/" + var_02.var_939C[var_02.var_939A].name;
         }
       }
     }
@@ -469,11 +469,11 @@ lib_0557::func_7837() {
   return var_00;
 }
 
-lib_0557::func_7849(param_00) {
+func_7849(param_00) {
   waittillframeend;
   param_00.objective_index = quest_allocate_match_data_counter();
   if(quest_should_write_match_data(param_00.objective_index)) {
-    setmatchdata("objectives", param_00.objective_index, "description", param_00.var_0109);
+    setmatchdata("objectives", param_00.objective_index, "description", param_00.name);
     setmatchdata("objectives", param_00.objective_index, "description_id", param_00.var_4DAD);
     setmatchdata("objectives", param_00.objective_index, "is_hardcore", 0);
     setmatchdata("objectives", param_00.objective_index, "start_time_ms", -1);
@@ -484,8 +484,8 @@ lib_0557::func_7849(param_00) {
   param_00.var_924E = gettime();
   param_00.start_game_ms = maps\mp\_matchdata::getmatchtimepassed();
   param_00.var_92AF = level.var_A980;
-  lib_0557::func_7844(undefined, "quest_start", param_00, undefined);
-  lib_0557::func_20BA(param_00.var_0109, param_00.var_4DAC);
+  func_7844(undefined, "quest_start", param_00, undefined);
+  func_20BA(param_00.name, param_00.var_4DAC);
   if(quest_should_write_match_data(param_00.objective_index)) {
     setmatchdata("objectives", param_00.objective_index, "start_time_ms", param_00.start_game_ms);
   }
@@ -499,17 +499,17 @@ lib_0557::func_7849(param_00) {
 
     var_04.var_924E = gettime();
     var_04.var_92AF = level.var_A980;
-    lib_0557::func_7844(undefined, "step_start", param_00, var_04);
-    lib_0557::func_7822(param_00.var_0109, var_04.var_4DAC);
-    lib_0557::func_7870(param_00.var_0109, var_04.var_0109);
-    lib_0557::func_7822(param_00.var_0109, undefined);
+    func_7844(undefined, "step_start", param_00, var_04);
+    func_7822(param_00.name, var_04.var_4DAC);
+    func_7870(param_00.name, var_04.name);
+    func_7822(param_00.name, undefined);
     var_04.var_3BA1 = gettime();
     var_04.var_3BA4 = level.var_A980;
-    lib_0557::func_7844(undefined, "step_end", param_00, var_04);
-    quest_analytics_objective_step(var_04.var_0109, param_00.objective_index);
+    func_7844(undefined, "step_end", param_00, var_04);
+    quest_analytics_objective_step(var_04.name, param_00.objective_index);
     while(param_00.var_2917.size > 0) {
       var_05 = param_00.var_2917[0];
-      lib_0557::func_783D(var_05, param_00);
+      func_783D(var_05, param_00);
     }
 
     foreach(var_07 in var_04.var_9399) {
@@ -523,11 +523,11 @@ lib_0557::func_7849(param_00) {
 
   param_00.var_939A = undefined;
   param_00.var_933D = "completed";
-  lib_0557::func_20BA(param_00.var_0109, undefined);
+  func_20BA(param_00.name, undefined);
   param_00.var_3BA1 = gettime();
   param_00.finish_game_ms = maps\mp\_matchdata::getmatchtimepassed();
   param_00.var_3BA4 = level.var_A980;
-  lib_0557::func_7844(undefined, "quest_end", param_00, undefined);
+  func_7844(undefined, "quest_end", param_00, undefined);
   if(quest_should_write_match_data(param_00.objective_index)) {
     setmatchdata("objectives", param_00.objective_index, "end_time_ms", param_00.finish_game_ms);
     setmatchdata("objectives", param_00.objective_index, "is_completed", 1);
@@ -535,54 +535,54 @@ lib_0557::func_7849(param_00) {
 
   while(param_00.var_6F77.size > 0) {
     var_05 = param_00.var_6F77[0];
-    lib_0557::func_783D(var_05, param_00);
+    func_783D(var_05, param_00);
   }
 
   if(isDefined(param_00.var_782C)) {
     level childthread[[param_00.var_782C]]();
   }
 
-  common_scripts\utility::func_3C8F(param_00.var_0109);
+  common_scripts\utility::func_3C8F(param_00.name);
 }
 
-lib_0557::func_7832(param_00) {
+func_7832(param_00) {
   var_01 = level.var_ABE8[param_00];
   return var_01;
 }
 
-lib_0557::func_7833(param_00, param_01) {
+func_7833(param_00, param_01) {
   foreach(var_03 in param_00.var_939C) {
-    if(var_03.var_0109 == param_01) {
+    if(var_03.name == param_01) {
       return var_03;
     }
   }
 }
 
-lib_0557::func_7835(param_00, param_01) {
-  var_02 = lib_0557::func_7833(param_00, param_01);
+func_7835(param_00, param_01) {
+  var_02 = func_7833(param_00, param_01);
   return var_02;
 }
 
-lib_0557::func_7831(param_00) {
-  var_01 = lib_0557::func_7832(param_00);
+func_7831(param_00) {
+  var_01 = func_7832(param_00);
   return isDefined(var_01);
 }
 
-lib_0557::func_781F(param_00) {}
+func_781F(param_00) {}
 
-lib_0557::func_7850(param_00, param_01) {
-  var_02 = lib_0557::func_7832(param_00);
+func_7850(param_00, param_01) {
+  var_02 = func_7832(param_00);
   if(!isDefined(var_02)) {
     return 0;
   }
 
-  var_03 = lib_0557::func_7833(var_02, param_01);
+  var_03 = func_7833(var_02, param_01);
   return isDefined(var_03);
 }
 
-lib_0557::func_7820(param_00, param_01) {}
+func_7820(param_00, param_01) {}
 
-lib_0557::func_7836(param_00) {
+func_7836(param_00) {
   if(!isDefined(param_00.var_939A)) {
     return;
   }
@@ -591,9 +591,9 @@ lib_0557::func_7836(param_00) {
   return var_01;
 }
 
-lib_0557::func_7834(param_00) {
-  lib_0557::func_781F(param_00);
-  return lib_0557::func_7832(param_00);
+func_7834(param_00) {
+  func_781F(param_00);
+  return func_7832(param_00);
 }
 
 quest_allocate_match_data_counter() {
@@ -606,7 +606,7 @@ quest_allocate_match_data_counter() {
   return var_00;
 }
 
-lib_0557::func_419A() {
+func_419A() {
   if(level.var_7874.size < 3) {
     return level.var_7874.size;
   }
@@ -614,62 +614,62 @@ lib_0557::func_419A() {
   return 3;
 }
 
-lib_0557::func_7ACA() {
+func_7ACA() {
   if(1) {
-    if(isDefined(level.var_744A)) {
-      foreach(var_01 in level.var_744A) {
-        lib_0557::func_5F3D(var_01);
+    if(isDefined(level.players)) {
+      foreach(var_01 in level.players) {
+        func_5F3D(var_01);
       }
     }
   }
 }
 
-lib_0557::func_378D(param_00) {
+func_378D(param_00) {
   if(!isDefined(param_00.var_3007)) {
     param_00.var_3007 = param_00.var_4DAC;
   }
 
-  var_01 = lib_0557::func_7836(param_00);
+  var_01 = func_7836(param_00);
   if(isDefined(var_01) && !isDefined(param_00.var_3008) && isDefined(var_01.var_4DAC)) {
     param_00.var_3008 = var_01.var_4DAC;
   }
 }
 
-lib_0557::func_7CB6(param_00) {
+func_7CB6(param_00) {
   if(isDefined(param_00.var_3008)) {
     param_00.var_3008 = undefined;
   }
 }
 
-lib_0557::func_7CAF(param_00) {
+func_7CAF(param_00) {
   if(isDefined(param_00.var_3007)) {
     param_00.var_3007 = undefined;
   }
 }
 
-lib_0557::func_378C(param_00) {
-  var_01 = common_scripts\utility::func_0F7E(level.var_7874, param_00);
+func_378C(param_00) {
+  var_01 = common_scripts\utility::func_F7E(level.var_7874, param_00);
   var_02 = 0;
   if(isDefined(var_01)) {
     if(var_01 >= 3) {
-      level.var_7874 = common_scripts\utility::func_0F93(level.var_7874, param_00);
-      level.var_7874 = common_scripts\utility::func_0F73([param_00], level.var_7874);
+      level.var_7874 = common_scripts\utility::func_F93(level.var_7874, param_00);
+      level.var_7874 = common_scripts\utility::func_F73([param_00], level.var_7874);
       var_02 = 1;
     }
   } else {
-    level.var_7874 = common_scripts\utility::func_0F73([param_00], level.var_7874);
+    level.var_7874 = common_scripts\utility::func_F73([param_00], level.var_7874);
     var_02 = 1;
   }
 
   if(var_02 && level.var_7874.size > 3) {
-    lib_0557::func_7CAF(level.var_7874[3]);
+    func_7CAF(level.var_7874[3]);
   }
 
-  lib_0557::func_378D(param_00);
-  lib_0557::func_7ACA();
+  func_378D(param_00);
+  func_7ACA();
 }
 
-lib_0557::func_5F3B(param_00, param_01) {
+func_5F3B(param_00, param_01) {
   if(!param_01) {
     return 0;
   }
@@ -678,21 +678,21 @@ lib_0557::func_5F3B(param_00, param_01) {
     return 0;
   }
 
-  var_02 = common_scripts\utility::func_0F7E(level.var_ABEF, param_00);
+  var_02 = common_scripts\utility::func_F7E(level.var_ABEF, param_00);
   return var_02;
 }
 
-lib_0557::func_5F3D(param_00) {
+func_5F3D(param_00) {
   if(zmb_hint_system_disabled()) {
     return;
   }
 
-  var_01 = lib_0557::func_419A();
+  var_01 = func_419A();
   for(var_02 = 0; var_02 < var_01; var_02++) {
     var_03 = level.var_7874[var_02];
-    var_04 = lib_0557::func_5F3B(var_03.var_3007, var_03.var_8BDE);
+    var_04 = func_5F3B(var_03.var_3007, var_03.var_8BDE);
     param_00 setclientomnvar("ui_zm_quest_hint_" + var_02, var_04);
-    var_05 = lib_0557::func_5F3B(var_03.var_3008, var_03.var_8BE1);
+    var_05 = func_5F3B(var_03.var_3008, var_03.var_8BE1);
     param_00 setclientomnvar("ui_zm_step_hint_" + var_02, var_05);
   }
 
@@ -705,12 +705,12 @@ lib_0557::func_5F3D(param_00) {
   param_00 luinotifyevent(&"update_zm_quest_hints", 0);
 }
 
-lib_0557::func_A8D6(param_00) {
+func_A8D6(param_00) {
   var_01 = param_00 getentitynumber();
   param_00 waittill("disconnect");
-  foreach(var_03 in level.var_0BD7) {
+  foreach(var_03 in level.var_BD7) {
     foreach(var_05 in var_03.var_37C5) {
-      if(!lib_0557::func_5642(var_05)) {
+      if(!func_5642(var_05)) {
         continue;
       }
 
@@ -735,30 +735,30 @@ lib_0557::func_A8D6(param_00) {
   }
 }
 
-lib_0557::func_42B9() {
-  if(!isDefined(level.var_744A)) {
+func_42B9() {
+  if(!isDefined(level.players)) {
     return [];
   }
 
   var_00 = [];
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(!common_scripts\utility::func_562E(var_02.var_5602)) {
       continue;
     }
 
-    var_00 = common_scripts\utility::func_0F6F(var_00, var_02);
+    var_00 = common_scripts\utility::func_F6F(var_00, var_02);
   }
 
   return var_00;
 }
 
-lib_0557::func_A8DC(param_00) {
+func_A8DC(param_00) {
   param_00 endon("death");
   param_00 endon("disconnect");
   param_00.var_5602 = 0;
   var_01 = "on togglescore";
   param_00 notifyonplayercommand(var_01, "togglescores");
-  level thread lib_0557::func_A8D6(param_00);
+  level thread func_A8D6(param_00);
   for(;;) {
     param_00 waittill(var_01);
     param_00.var_5602 = !param_00.var_5602;
@@ -776,8 +776,8 @@ lib_0557::func_A8DC(param_00) {
         level thread[[level.plr_custom_on_scoreboard_open_func]](param_00);
       }
 
-      foreach(var_03 in level.var_08CC) {
-        lib_0557::func_783A(param_00, var_03);
+      foreach(var_03 in level.var_8CC) {
+        func_783A(param_00, var_03);
       }
 
       continue;
@@ -787,27 +787,27 @@ lib_0557::func_A8DC(param_00) {
       level thread[[level.plr_custom_on_scoreboard_off_func]](param_00);
     }
 
-    foreach(var_03 in level.var_08CC) {
-      lib_0557::func_783C(param_00, var_03, 1.5);
+    foreach(var_03 in level.var_8CC) {
+      func_783C(param_00, var_03, 1.5);
     }
   }
 }
 
-lib_0557::func_5F3C() {
-  if(isDefined(level.var_744A)) {
-    foreach(var_01 in level.var_744A) {
-      lib_0557::func_5F3D(var_01);
+func_5F3C() {
+  if(isDefined(level.players)) {
+    foreach(var_01 in level.players) {
+      func_5F3D(var_01);
     }
   }
 
   for(;;) {
     level waittill("connected", var_01);
-    lib_0557::func_5F3D(var_01);
-    level thread lib_0557::func_A8DC(var_01);
+    func_5F3D(var_01);
+    level thread func_A8DC(var_01);
   }
 }
 
-lib_0557::func_5642(param_00) {
+func_5642(param_00) {
   if(function_0279(param_00) || !isDefined(param_00)) {
     return 0;
   }
@@ -815,7 +815,7 @@ lib_0557::func_5642(param_00) {
   return 1;
 }
 
-lib_0557::func_783A(param_00, param_01) {
+func_783A(param_00, param_01) {
   if(zmb_hint_system_disabled()) {
     return;
   }
@@ -824,7 +824,7 @@ lib_0557::func_783A(param_00, param_01) {
   var_03 = 0;
   var_04 = 1;
   foreach(var_06 in param_01.var_37C5) {
-    if(!lib_0557::func_5642(var_06)) {
+    if(!func_5642(var_06)) {
       continue;
     }
 
@@ -860,20 +860,20 @@ lib_0557::func_783A(param_00, param_01) {
   } else {
     var_09 = newclienthudelem(param_00);
     var_09 setshader("objpoint_default", 1, 1);
-    var_09.var_0018 = 0;
-    var_09.var_0056 = (1, 1, 1);
-    var_09.var_01D3 = param_01.var_6C17[0];
-    var_09.var_01D7 = param_01.var_6C17[1];
-    var_09.var_01D9 = param_01.var_6C17[2];
+    var_09.alpha = 0;
+    var_09.color = (1, 1, 1);
+    var_09.x = param_01.var_6C17[0];
+    var_09.y = param_01.var_6C17[1];
+    var_09.z = param_01.var_6C17[2];
     var_09 setwaypoint(0, 1, 0);
     var_08.var_A98D = var_09;
   }
 
   var_09 fadeovertime(0.5);
-  var_09.var_0018 = 0.9;
+  var_09.alpha = 0.9;
 }
 
-lib_0557::func_A98E(param_00, param_01) {
+func_A98E(param_00, param_01) {
   var_02 = self;
   var_02 endon("death");
   param_00 endon("disconnect");
@@ -881,22 +881,22 @@ lib_0557::func_A98E(param_00, param_01) {
   var_04 = 350;
   for(;;) {
     wait(0.1);
-    var_05 = distance2d(param_01.var_6C17, param_00.var_0116);
+    var_05 = distance2d(param_01.var_6C17, param_00.origin);
     var_06 = 0.9;
     if(common_scripts\utility::func_562E(var_02.var_5578) || var_05 < var_03 || var_05 > var_04) {
       var_06 = 0;
     }
 
-    if(var_06 == var_02.var_0018) {
+    if(var_06 == var_02.alpha) {
       continue;
     }
 
     var_02 fadeovertime(0.5);
-    var_02.var_0018 = var_06;
+    var_02.alpha = var_06;
   }
 }
 
-lib_0557::func_783B(param_00, param_01, param_02) {
+func_783B(param_00, param_01, param_02) {
   var_03 = param_01.var_6925[param_00 getentitynumber()];
   var_04 = var_03.var_A98D;
   if(!isDefined(var_04)) {
@@ -908,20 +908,20 @@ lib_0557::func_783B(param_00, param_01, param_02) {
   wait(param_02);
   var_04.var_5578 = 1;
   var_04 fadeovertime(0.5);
-  var_04.var_0018 = 0;
+  var_04.alpha = 0;
   wait(0.5);
   var_04 destroy();
   var_03.var_A98D = undefined;
 }
 
-lib_0557::func_783C(param_00, param_01, param_02) {
+func_783C(param_00, param_01, param_02) {
   var_03 = param_00 getentitynumber();
   if(zmb_hint_system_disabled()) {
     return;
   }
 
   foreach(var_05 in param_01.var_37C5) {
-    if(!lib_0557::func_5642(var_05)) {
+    if(!func_5642(var_05)) {
       continue;
     }
 
@@ -933,41 +933,41 @@ lib_0557::func_783C(param_00, param_01, param_02) {
     var_05 hudoutlinedisableforclient(param_00);
   }
 
-  level thread lib_0557::func_783B(param_00, param_01, param_02);
+  level thread func_783B(param_00, param_01, param_02);
 }
 
-lib_0557::func_783D(param_00, param_01) {
+func_783D(param_00, param_01) {
   var_02 = 0;
-  if(common_scripts\utility::func_0F79(param_01.var_2917, param_00)) {
-    param_01.var_2917 = common_scripts\utility::func_0F93(param_01.var_2917, param_00);
+  if(common_scripts\utility::func_F79(param_01.var_2917, param_00)) {
+    param_01.var_2917 = common_scripts\utility::func_F93(param_01.var_2917, param_00);
     var_02++;
   }
 
-  if(common_scripts\utility::func_0F79(param_01.var_6F77, param_00)) {
-    param_01.var_6F77 = common_scripts\utility::func_0F93(param_01.var_6F77, param_00);
+  if(common_scripts\utility::func_F79(param_01.var_6F77, param_00)) {
+    param_01.var_6F77 = common_scripts\utility::func_F93(param_01.var_6F77, param_00);
     var_02++;
   }
 
-  param_00.var_7840 = common_scripts\utility::func_0F93(param_00.var_7840, param_01.var_0109);
+  param_00.var_7840 = common_scripts\utility::func_F93(param_00.var_7840, param_01.name);
   if(param_00.var_7840.size != 0) {
     return;
   }
 
-  level.var_08CC = common_scripts\utility::func_0F93(level.var_08CC, param_00);
-  foreach(var_04 in lib_0557::func_42B9()) {
-    lib_0557::func_783C(var_04, param_00, 0);
+  level.var_8CC = common_scripts\utility::func_F93(level.var_8CC, param_00);
+  foreach(var_04 in func_42B9()) {
+    func_783C(var_04, param_00, 0);
   }
 
-  lib_0557::func_7844(param_00.var_7B06, "objective_remove", param_01);
+  func_7844(param_00.var_7B06, "objective_remove", param_01);
 }
 
-lib_0557::func_AB89(param_00) {
+func_AB89(param_00) {
   wait 0.05;
   common_scripts\utility::func_3C9F(param_00.var_3C8C);
   param_00.var_3E41 = 1;
-  level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("any_objective_completed");
-  foreach(var_03 in level.var_744A) {
-    var_03 quest_omnvar_mark_completed(param_00.var_00D4, 1);
+  level thread maps / mp / gametypes / zombies::orders_and_contracts_report_event("any_objective_completed");
+  foreach(var_03 in level.players) {
+    var_03 quest_omnvar_mark_completed(param_00.index, 1);
     var_03 thread maps\mp\gametypes\_hud_message::func_9102(param_00.var_3C8C);
   }
 }
@@ -975,21 +975,21 @@ lib_0557::func_AB89(param_00) {
 zombie_collectable_internal_global_collect_on_join(param_00) {
   var_01 = self;
   if(param_00.var_3E41) {
-    var_01 quest_omnvar_mark_completed(param_00.var_00D4, 1);
+    var_01 quest_omnvar_mark_completed(param_00.index, 1);
   }
 }
 
-lib_0557::func_AB8A(param_00) {
+func_AB8A(param_00) {
   var_01 = self;
   var_01 endon("disconnect");
   wait 0.05;
   common_scripts\utility::func_379C(param_00.var_3C8C);
   param_00.var_3E41 = 1;
-  quest_omnvar_mark_completed(param_00.var_00D4, 1);
+  quest_omnvar_mark_completed(param_00.index, 1);
   thread maps\mp\gametypes\_hud_message::func_9102(param_00.var_3C8C);
 }
 
-lib_0557::func_4BCA(param_00, param_01) {
+func_4BCA(param_00, param_01) {
   var_02 = level.zombiehcanalyticcounters[param_00];
   if(quest_should_write_match_data(var_02)) {
     var_03 = maps\mp\_matchdata::getmatchtimepassed();
@@ -1009,13 +1009,13 @@ lib_0557::func_4BCA(param_00, param_01) {
   level notify(get_hc_analytics_reported_notify(param_00));
 }
 
-lib_0557::func_4BCB(param_00) {
+func_4BCB(param_00) {
   level endon(get_hc_analytics_reported_notify(param_00));
   level waittill("game_ended");
-  lib_0557::func_4BCA(param_00, 0);
+  func_4BCA(param_00, 0);
 }
 
-lib_0557::func_4BC8(param_00) {
+func_4BC8(param_00) {
   var_01 = common_scripts\utility::func_98E7(isarray(param_00), param_00, [param_00]);
   foreach(var_03 in var_01) {
     if(common_scripts\utility::func_3C77(var_03)) {
@@ -1023,7 +1023,7 @@ lib_0557::func_4BC8(param_00) {
     }
 
     common_scripts\utility::func_3C8F(var_03);
-    lib_0557::func_4BCA(var_03, 1);
+    func_4BCA(var_03, 1);
   }
 }
 
@@ -1042,7 +1042,7 @@ hc_analytics_register_match_data(param_00, param_01, param_02) {
   level.zombiehcanalyticcounters[param_00] = var_03;
 }
 
-lib_0557::func_4BC9(param_00, param_01, param_02, param_03) {
+func_4BC9(param_00, param_01, param_02, param_03) {
   if(common_scripts\utility::func_562E(param_03)) {
     if(!isDefined(param_01)) {
       param_01 = param_00;
@@ -1060,13 +1060,13 @@ lib_0557::func_4BC9(param_00, param_01, param_02, param_03) {
   }
 
   thread hc_analytics_watch_autocompletion(param_00);
-  thread lib_0557::func_4BCB(param_00);
+  thread func_4BCB(param_00);
 }
 
 hc_analytics_watch_autocompletion(param_00) {
   level endon(get_hc_analytics_reported_notify(param_00));
   common_scripts\utility::func_3C9F(param_00);
-  lib_0557::func_4BCA(param_00, 1);
+  func_4BCA(param_00, 1);
 }
 
 get_hc_analytics_reported_notify(param_00) {
@@ -1081,7 +1081,7 @@ quest_omnvar_init() {
     var_00.questprogressbitfield[var_02] = 0;
   }
 
-  var_00 lib_0557::func_23DB("ui_zm_has_quest_item_bits_", 46);
+  var_00 func_23DB("ui_zm_has_quest_item_bits_", 46);
 }
 
 quest_omnvar_mark_completed(param_00, param_01) {
@@ -1110,7 +1110,7 @@ quest_omnvar_handle_player_respawn() {
   }
 }
 
-lib_0557::func_23DB(param_00, param_01) {
+func_23DB(param_00, param_01) {
   var_02 = int(param_01 - 1 / 23) + 1;
   for(var_03 = 0; var_03 < var_02; var_03++) {
     var_04 = param_00 + var_03;
@@ -1118,7 +1118,7 @@ lib_0557::func_23DB(param_00, param_01) {
   }
 }
 
-lib_0557::func_8650(param_00, param_01, param_02) {
+func_8650(param_00, param_01, param_02) {
   var_03 = int(param_01 / 23);
   var_04 = param_01 - var_03 * 23;
   var_05 = param_00 + var_03;
@@ -1148,5 +1148,5 @@ giveplayereventbuff() {
   var_01 = ["blunderbuss_zm"];
   var_02 = maps\mp\zombies\_zombies_magicbox::func_454B(var_00, lib_0547::func_AAF9(common_scripts\utility::func_7A33(var_01)));
   maps\mp\zombies\_zombies_magicbox::func_A7D6(var_00, var_02);
-  lib_0533::func_0F37(2, 1, 0);
+  lib_0533::func_F37(2, 1, 0);
 }

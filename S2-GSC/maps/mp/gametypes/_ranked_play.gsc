@@ -9,7 +9,7 @@ waitforbackendreply() {
   }
 }
 
-func_00D5() {
+init() {
   if(function_03AF()) {
     thread func_6B90();
     level.var_75E7 = ::waitforbackendreply;
@@ -22,11 +22,11 @@ func_6B90() {
   level endon("exitLevel_called");
   for(;;) {
     level waittill("connected", var_00);
-    var_00 thread func_6B6C();
+    var_00 thread onplayerconnect();
   }
 }
 
-func_6B6C() {
+onplayerconnect() {
   level endon("game_win");
   level endon("exitLevel_called");
   self method_854C();
@@ -54,25 +54,25 @@ onmatchvoid() {
 func_21BA() {
   var_00["allies"] = 0;
   var_00["axis"] = 0;
-  foreach(var_02 in level.var_744A) {
-    if(isDefined(var_02.var_01A7) && isDefined(var_00[var_02.var_01A7])) {
-      var_00[var_02.var_01A7]++;
+  foreach(var_02 in level.players) {
+    if(isDefined(var_02.team) && isDefined(var_00[var_02.team])) {
+      var_00[var_02.team]++;
     }
   }
 
-  foreach(var_02 in level.var_744A) {
-    if(isDefined(var_02.var_01A7)) {
-      if(var_02.var_01A7 == "allies" && var_00["axis"] == 0) {
-        var_02.var_012C["division"]["wonByForfeit"] = 1;
+  foreach(var_02 in level.players) {
+    if(isDefined(var_02.team)) {
+      if(var_02.team == "allies" && var_00["axis"] == 0) {
+        var_02.pers["division"]["wonByForfeit"] = 1;
         continue;
       }
 
-      if(var_02.var_01A7 == "axis" && var_00["allies"] == 0) {
-        var_02.var_012C["division"]["wonByForfeit"] = 1;
+      if(var_02.team == "axis" && var_00["allies"] == 0) {
+        var_02.pers["division"]["wonByForfeit"] = 1;
         continue;
       }
 
-      var_02.var_012C["division"]["wonByForfeit"] = 0;
+      var_02.pers["division"]["wonByForfeit"] = 0;
     }
   }
 }

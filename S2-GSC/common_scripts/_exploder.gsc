@@ -37,21 +37,21 @@ func_885C(param_00) {
     level.var_3948[var_01] = [];
   }
 
-  var_02 = param_00.var_01A5;
+  var_02 = param_00.targetname;
   if(!isDefined(var_02)) {
     var_02 = "";
   }
 
   level.var_3948[var_01][level.var_3948[var_01].size] = param_00;
   if(func_393B(param_00)) {
-    param_00 method_805C();
+    param_00 hide();
     return;
   }
 
   if(func_393A(param_00)) {
-    param_00 method_805C();
+    param_00 hide();
     param_00 notsolid();
-    if(isDefined(param_00.var_0187) && param_00.var_0187 & 1) {
+    if(isDefined(param_00.spawnflags) && param_00.spawnflags & 1) {
       if(isDefined(param_00.var_8166)) {
         param_00 method_8060();
       }
@@ -61,9 +61,9 @@ func_885C(param_00) {
   }
 
   if(func_3939(param_00)) {
-    param_00 method_805C();
+    param_00 hide();
     param_00 notsolid();
-    if(isDefined(param_00.var_0187) && param_00.var_0187 & 1) {
+    if(isDefined(param_00.spawnflags) && param_00.spawnflags & 1) {
       param_00 method_8060();
     }
   }
@@ -147,8 +147,8 @@ func_8A1A() {
     }
 
     if(isDefined(var_07[var_02].var_8186)) {
-      if(!isDefined(var_07[var_02].var_001D)) {
-        var_07[var_02].var_001D = (0, 0, 0);
+      if(!isDefined(var_07[var_02].angles)) {
+        var_07[var_02].angles = (0, 0, 0);
       }
 
       var_06[var_06.size] = var_07[var_02];
@@ -164,14 +164,13 @@ func_8A1A() {
   var_08["exploderchunk"] = 1;
   var_08["exploder"] = 1;
   thread func_8825();
-  var_02 = 0;
-  while(var_02 < var_06.size) {
+  for(var_02 = 0; var_02 < var_06.size; var_02++) {
     var_09 = var_06[var_02];
     var_04 = common_scripts\utility::func_27E7(var_09.var_81BB);
     var_04.var_A265 = [];
-    var_04.var_A265["origin"] = var_09.var_0116;
-    var_04.var_A265["angles"] = var_09.var_001D;
-    var_04.var_A265["delay"] = var_09.var_0161;
+    var_04.var_A265["origin"] = var_09.origin;
+    var_04.var_A265["angles"] = var_09.angles;
+    var_04.var_A265["delay"] = var_09.var_161;
     var_04.var_A265["delay_post"] = var_09.var_8155;
     var_04.var_A265["firefx"] = var_09.var_8193;
     var_04.var_A265["firefxdelay"] = var_09.var_8194;
@@ -185,7 +184,7 @@ func_8A1A() {
     var_04.var_A265["repeat"] = var_09.var_8278;
     var_04.var_A265["delay_min"] = var_09.var_8154;
     var_04.var_A265["delay_max"] = var_09.var_8153;
-    var_04.var_A265["target"] = var_09.var_01A2;
+    var_04.var_A265["target"] = var_09.target;
     var_04.var_A265["ender"] = var_09.var_817E;
     var_04.var_A265["physics"] = var_09.var_8269;
     var_04.var_A265["type"] = "exploder";
@@ -210,45 +209,44 @@ func_8A1A() {
       var_04.var_A265["delay"] = 0;
     }
 
-    if(isDefined(var_09.var_01A2)) {
+    if(isDefined(var_09.target)) {
       var_0B = getEntArray(var_04.var_A265["target"], "targetname")[0];
       if(isDefined(var_0B)) {
-        var_0C = var_0B.var_0116;
+        var_0C = var_0B.origin;
         var_04.var_A265["angles"] = vectortoangles(var_0C - var_04.var_A265["origin"]);
       } else {
         var_0B = common_scripts\utility::func_4375(var_04.var_A265["target"]);
         if(isDefined(var_0B)) {
-          var_0C = var_0B.var_0116;
+          var_0C = var_0B.origin;
           var_04.var_A265["angles"] = vectortoangles(var_0C - var_04.var_A265["origin"]);
         }
       }
     }
 
-    if(!isDefined(var_0B.var_003B)) {
-      var_05.var_0106 = var_0B;
-      if(isDefined(var_05.var_0106.var_8205)) {
-        precachemodel(var_05.var_0106.var_8205);
+    if(!isDefined(var_09.code_classname)) {
+      var_04.model = var_09;
+      if(isDefined(var_04.model.var_8205)) {
+        precachemodel(var_04.model.var_8205);
       }
-    } else if(var_0B.var_003B == "script_brushmodel" || isDefined(var_0B.var_0106)) {
-      var_05.var_0106 = var_0B;
-      var_05.var_0106.var_2FBF = var_0B.var_8166;
+    } else if(var_09.code_classname == "script_brushmodel" || isDefined(var_09.model)) {
+      var_04.model = var_09;
+      var_04.model.var_2FBF = var_09.var_8166;
     }
 
-    if(isDefined(var_0B.var_01A5) && isDefined(var_09[var_0B.var_01A5])) {
-      var_05.var_A265["exploder_type"] = var_0B.var_01A5;
+    if(isDefined(var_09.targetname) && isDefined(var_08[var_09.targetname])) {
+      var_04.var_A265["exploder_type"] = var_09.targetname;
     } else {
-      var_05.var_A265["exploder_type"] = "normal";
+      var_04.var_A265["exploder_type"] = "normal";
     }
 
-    if(isDefined(var_0B.var_6019)) {
-      var_05.var_A265["masked_exploder"] = var_0B.var_0106;
-      var_05.var_A265["masked_exploder_spawnflags"] = var_0B.var_0187;
-      var_05.var_A265["masked_exploder_script_disconnectpaths"] = var_0B.var_8166;
-      var_0B delete();
+    if(isDefined(var_09.var_6019)) {
+      var_04.var_A265["masked_exploder"] = var_09.model;
+      var_04.var_A265["masked_exploder_spawnflags"] = var_09.spawnflags;
+      var_04.var_A265["masked_exploder_script_disconnectpaths"] = var_09.var_8166;
+      var_09 delete();
     }
 
-    var_05 common_scripts\_createfx::func_75BE();
-    var_03++;
+    var_04 common_scripts\_createfx::func_75BE();
   }
 }
 
@@ -299,20 +297,20 @@ func_3933(param_00) {
       continue;
     }
 
-    var_02 common_scripts\utility::func_0894();
+    var_02 common_scripts\utility::func_894();
   }
 }
 
 func_393A(param_00) {
-  return isDefined(param_00.var_01A5) && param_00.var_01A5 == "exploder";
+  return isDefined(param_00.targetname) && param_00.targetname == "exploder";
 }
 
 func_393B(param_00) {
-  return param_00.var_0106 == "fx" && !isDefined(param_00.var_01A5) || param_00.var_01A5 != "exploderchunk";
+  return param_00.model == "fx" && !isDefined(param_00.targetname) || param_00.targetname != "exploderchunk";
 }
 
 func_3939(param_00) {
-  return isDefined(param_00.var_01A5) && param_00.var_01A5 == "exploderchunk";
+  return isDefined(param_00.targetname) && param_00.targetname == "exploderchunk";
 }
 
 func_8BCA(param_00) {
@@ -321,12 +319,12 @@ func_8BCA(param_00) {
     var_01 = level.var_2807[param_00];
     if(isDefined(var_01)) {
       foreach(var_03 in var_01) {
-        if(!func_393B(var_03.var_0106) && !func_393A(var_03.var_0106) && !func_3939(var_03.var_0106)) {
-          var_03.var_0106 method_805B();
+        if(!func_393B(var_03.model) && !func_393A(var_03.model) && !func_3939(var_03.model)) {
+          var_03.model show();
         }
 
         if(isDefined(var_03.var_1CB4)) {
-          var_03.var_0106 method_805B();
+          var_03.model show();
         }
       }
 
@@ -336,33 +334,36 @@ func_8BCA(param_00) {
     return;
   }
 
-  for(var_05 = 0; var_05 < level.var_2804.size; var_05++) {
-    var_03 = level.var_2804[var_05];
-    if(!isDefined(var_03)) {
+  var_05 = 0;
+  while(var_03 < level.var_2804.size) {
+    var_05 = level.var_2804[var_03];
+    if(!isDefined(var_05)) {
       continue;
     }
 
-    if(var_03.var_A265["type"] != "exploder") {
+    if(var_05.var_A265["type"] != "exploder") {
       continue;
     }
 
-    if(!isDefined(var_03.var_A265["exploder"])) {
+    if(!isDefined(var_05.var_A265["exploder"])) {
       continue;
     }
 
-    if(var_03.var_A265["exploder"] + "" != param_00) {
+    if(var_05.var_A265["exploder"] + "" != var_02) {
       continue;
     }
 
-    if(isDefined(var_03.var_0106)) {
-      if(!func_393B(var_03.var_0106) && !func_393A(var_03.var_0106) && !func_3939(var_03.var_0106)) {
-        var_03.var_0106 method_805B();
+    if(isDefined(var_05.model)) {
+      if(!func_393B(var_05.model) && !func_393A(var_05.model) && !func_3939(var_05.model)) {
+        var_05.model show();
       }
 
-      if(isDefined(var_03.var_1CB4)) {
-        var_03.var_0106 method_805B();
+      if(isDefined(var_05.var_1CB4)) {
+        var_05.model show();
       }
     }
+
+    var_03++;
   }
 }
 
@@ -385,29 +386,31 @@ func_93C8(param_00) {
     return;
   }
 
-  for(var_05 = 0; var_05 < level.var_2804.size; var_05++) {
-    var_03 = level.var_2804[var_05];
-    if(!isDefined(var_03)) {
+  var_05 = 0;
+  while(var_03 < level.var_2804.size) {
+    var_05 = level.var_2804[var_03];
+    if(!isDefined(var_05)) {
       continue;
     }
 
-    if(var_03.var_A265["type"] != "exploder") {
+    if(var_05.var_A265["type"] != "exploder") {
       continue;
     }
 
-    if(!isDefined(var_03.var_A265["exploder"])) {
+    if(!isDefined(var_05.var_A265["exploder"])) {
       continue;
     }
 
-    if(var_03.var_A265["exploder"] + "" != param_00) {
+    if(var_05.var_A265["exploder"] + "" != var_02) {
       continue;
     }
 
-    if(!isDefined(var_03.var_5EED)) {
+    if(!isDefined(var_05.var_5EED)) {
       continue;
     }
 
-    var_03.var_5EED delete();
+    var_05.var_5EED delete();
+    var_03++;
   }
 }
 
@@ -446,8 +449,8 @@ func_4CE3(param_00) {
     var_01 = level.var_2807[param_00];
     if(isDefined(var_01)) {
       foreach(var_03 in var_01) {
-        if(isDefined(var_03.var_0106)) {
-          var_03.var_0106 method_805C();
+        if(isDefined(var_03.model)) {
+          var_03.model hide();
         }
       }
 
@@ -457,27 +460,30 @@ func_4CE3(param_00) {
     return;
   }
 
-  for(var_05 = 0; var_05 < level.var_2804.size; var_05++) {
-    var_03 = level.var_2804[var_05];
-    if(!isDefined(var_03)) {
+  var_05 = 0;
+  while(var_03 < level.var_2804.size) {
+    var_05 = level.var_2804[var_03];
+    if(!isDefined(var_05)) {
       continue;
     }
 
-    if(var_03.var_A265["type"] != "exploder") {
+    if(var_05.var_A265["type"] != "exploder") {
       continue;
     }
 
-    if(!isDefined(var_03.var_A265["exploder"])) {
+    if(!isDefined(var_05.var_A265["exploder"])) {
       continue;
     }
 
-    if(var_03.var_A265["exploder"] + "" != param_00) {
+    if(var_05.var_A265["exploder"] + "" != var_02) {
       continue;
     }
 
-    if(isDefined(var_03.var_0106)) {
-      var_03.var_0106 method_805C();
+    if(isDefined(var_05.model)) {
+      var_05.model hide();
     }
+
+    var_03++;
   }
 }
 
@@ -487,8 +493,8 @@ func_2D0D(param_00) {
     var_01 = level.var_2807[param_00];
     if(isDefined(var_01)) {
       foreach(var_03 in var_01) {
-        if(isDefined(var_03.var_0106)) {
-          var_03.var_0106 delete();
+        if(isDefined(var_03.model)) {
+          var_03.model delete();
         }
       }
     }
@@ -511,8 +517,8 @@ func_2D0D(param_00) {
         continue;
       }
 
-      if(isDefined(var_03.var_0106)) {
-        var_03.var_0106 delete();
+      if(isDefined(var_03.model)) {
+        var_03.model delete();
       }
     }
   }
@@ -594,13 +600,13 @@ func_1CB2() {
     wait 0.05;
   }
 
-  if(!isDefined(self.var_0106)) {
+  if(!isDefined(self.model)) {
     return;
   }
 
-  if(isDefined(self.var_0106.var_003A)) {
-    if(common_scripts\utility::func_57D7() && self.var_0106.var_0187 & 1) {
-      self.var_0106[[level.var_2587]]();
+  if(isDefined(self.model.classname)) {
+    if(common_scripts\utility::func_57D7() && self.model.spawnflags & 1) {
+      self.model[[level.var_2587]]();
     }
   }
 
@@ -610,12 +616,12 @@ func_1CB2() {
     }
 
     self.var_3928 = 1;
-    self.var_0106 method_805C();
-    self.var_0106 notsolid();
+    self.model hide();
+    self.model notsolid();
     wait(3);
     self.var_3928 = undefined;
-    self.var_0106 method_805B();
-    self.var_0106 solid();
+    self.model show();
+    self.model solid();
     return;
   }
 
@@ -624,8 +630,8 @@ func_1CB2() {
   }
 
   waittillframeend;
-  if(isDefined(self.var_0106) && isDefined(self.var_0106.var_003A)) {
-    self.var_0106 delete();
+  if(isDefined(self.model) && isDefined(self.model.classname)) {
+    self.model delete();
   }
 }
 
@@ -640,18 +646,18 @@ func_1CB5() {
   }
 
   if(!isDefined(var_00)) {
-    self.var_0106 delete();
+    self.model delete();
     return;
   }
 
-  self.var_0106 method_805B();
+  self.model show();
   if(isDefined(self.var_A265["delay_post"])) {
     wait(self.var_A265["delay_post"]);
   }
 
   var_01 = self.var_A265["origin"];
   var_02 = self.var_A265["angles"];
-  var_03 = var_00.var_0116;
+  var_03 = var_00.origin;
   var_04 = var_03 - self.var_A265["origin"];
   var_05 = var_04[0];
   var_06 = var_04[1];
@@ -659,23 +665,23 @@ func_1CB5() {
   var_08 = isDefined(self.var_A265["physics"]);
   if(var_08) {
     var_09 = undefined;
-    if(isDefined(var_00.var_01A2)) {
+    if(isDefined(var_00.target)) {
       var_09 = var_00 common_scripts\utility::func_4375();
     }
 
     if(!isDefined(var_09)) {
       var_0A = var_01;
-      var_0B = var_00.var_0116;
+      var_0B = var_00.origin;
     } else {
-      var_0A = var_02.var_0116;
-      var_0B = var_0A.var_0116 - var_01.var_0116 * self.var_A265["physics"];
+      var_0A = var_02.origin;
+      var_0B = var_0A.origin - var_01.origin * self.var_A265["physics"];
     }
 
-    self.var_0106 method_82C5(var_0A, var_0B);
+    self.model method_82C5(var_0A, var_0B);
     return;
   } else {
-    self.var_0106 rotatevelocity((var_08, var_09, var_0A), 12);
-    self.var_0106 gravitymove((var_08, var_09, var_0A), 12);
+    self.model rotatevelocity((var_08, var_09, var_0A), 12);
+    self.model gravitymove((var_08, var_09, var_0A), 12);
   }
 
   if(level.var_27F6) {
@@ -688,13 +694,13 @@ func_1CB5() {
     self.var_3928 = undefined;
     self.var_A265["origin"] = var_04;
     self.var_A265["angles"] = var_05;
-    self.var_0106 method_805C();
+    self.model hide();
     return;
   }
 
   self.var_A265["exploder"] = undefined;
   wait(6);
-  self.var_0106 delete();
+  self.model delete();
 }
 
 func_1CB3() {
@@ -702,25 +708,25 @@ func_1CB3() {
     wait(self.var_A265["delay"]);
   }
 
-  if(!isDefined(self.var_0106.var_8205)) {
-    self.var_0106 method_805B();
-    self.var_0106 solid();
+  if(!isDefined(self.model.var_8205)) {
+    self.model show();
+    self.model solid();
   } else {
-    var_00 = self.var_0106 common_scripts\utility::func_8FFC();
-    if(isDefined(self.var_0106.var_0164)) {
-      var_00.var_0164 = self.var_0106.var_0164;
+    var_00 = self.model common_scripts\utility::func_8FFC();
+    if(isDefined(self.model.script_linkname)) {
+      var_00.script_linkname = self.model.script_linkname;
     }
 
-    var_00 setModel(self.var_0106.var_8205);
-    var_00 method_805B();
+    var_00 setModel(self.model.var_8205);
+    var_00 show();
   }
 
   self.var_1CB4 = 1;
-  if(common_scripts\utility::func_57D7() && !isDefined(self.var_0106.var_8205) && self.var_0106.var_0187 & 1) {
-    if(!isDefined(self.var_0106.var_2FBF)) {
-      self.var_0106[[level.var_2587]]();
+  if(common_scripts\utility::func_57D7() && !isDefined(self.model.var_8205) && self.model.spawnflags & 1) {
+    if(!isDefined(self.model.var_2FBF)) {
+      self.model[[level.var_2587]]();
     } else {
-      self.var_0106[[level.var_2FC3]]();
+      self.model[[level.var_2FC3]]();
     }
   }
 
@@ -732,9 +738,9 @@ func_1CB3() {
     self.var_3928 = 1;
     wait(3);
     self.var_3928 = undefined;
-    if(!isDefined(self.var_0106.var_8205)) {
-      self.var_0106 method_805C();
-      self.var_0106 notsolid();
+    if(!isDefined(self.model.var_8205)) {
+      self.model hide();
+      self.model notsolid();
     }
   }
 }
@@ -745,7 +751,7 @@ func_393F() {
   }
 
   func_3930();
-  level.var_721C playRumbleOnEntity(self.var_A265["rumble"]);
+  level.player playRumbleOnEntity(self.var_A265["rumble"]);
 }
 
 func_3930() {
@@ -765,7 +771,7 @@ func_3930() {
 
   if(var_00 > 0) {
     var_02 = randomfloatrange(var_00, var_01);
-    self.var_08F0 = var_02;
+    self.var_8F0 = var_02;
     wait(var_02);
   }
 }
@@ -824,14 +830,14 @@ func_3BB8() {
     common_scripts\utility::func_5EE2(var_03, var_04, (0, 0, 0), 1, var_06);
   }
 
-  playFX(level.var_0611[var_05], self.var_A265["origin"], var_00, var_01);
+  playFX(level.var_611[var_05], self.var_A265["origin"], var_00, var_01);
 }
 
 func_1F5E() {
   if(isDefined(self.var_A265["repeat"])) {
     thread func_393D();
     for(var_00 = 0; var_00 < self.var_A265["repeat"]; var_00++) {
-      playFX(level.var_0611[self.var_A265["fxid"]], self.var_A265["origin"], self.var_A265["forward"], self.var_A265["up"]);
+      playFX(level.var_611[self.var_A265["fxid"]], self.var_A265["origin"], self.var_A265["forward"], self.var_A265["up"]);
       func_3930();
     }
 
@@ -879,7 +885,7 @@ func_0891(param_00, param_01, param_02) {
           continue;
         }
 
-        var_06 common_scripts\utility::func_0894();
+        var_06 common_scripts\utility::func_894();
         var_03 = 1;
       }
     }
@@ -906,7 +912,7 @@ func_0891(param_00, param_01, param_02) {
         continue;
       }
 
-      var_06 common_scripts\utility::func_0894();
+      var_06 common_scripts\utility::func_894();
       var_03 = 1;
     }
   }
@@ -917,7 +923,7 @@ func_0891(param_00, param_01, param_02) {
 }
 
 func_392A(param_00, param_01, param_02) {
-  [[level.var_062E.var_3945]](param_00, param_01, param_02);
+  [[level.var_62E.var_3945]](param_00, param_01, param_02);
 }
 
 func_5A01(param_00) {

@@ -3,9 +3,9 @@
  * Script: 870.gsc
 *********************************************/
 
-lib_0366::func_8E25() {
-  level lib_0366::func_8E44();
-  level lib_0366::func_8E27();
+func_8E25() {
+  level func_8E44();
+  level func_8E27();
   level thread snd_level_handle_zombie_round_countdown_started();
   level thread snd_level_handle_zombie_wave_started();
   level thread snd_level_handle_zombie_wave_ended();
@@ -28,23 +28,23 @@ lib_0366::func_8E25() {
     }
   }
 
-  level lib_0367::func_8E3A(var_00, ::lib_0366::func_8E75, var_01, var_02);
-  level.var_071D.threat_to_dlg_vol_scalar = [[0, 0.75], [1, 1]];
-  level.var_071D.round_countdown_alias = "hvox_breath_countdown";
-  level.var_071D.round_countdown_end_alias = undefined;
-  level.var_071D.global_threat_scalar = 0.666;
+  level lib_0367::func_8E3A(var_00, ::func_8E75, var_01, var_02);
+  level.var_71D.threat_to_dlg_vol_scalar = [[0, 0.75], [1, 1]];
+  level.var_71D.round_countdown_alias = "hvox_breath_countdown";
+  level.var_71D.round_countdown_end_alias = undefined;
+  level.var_71D.global_threat_scalar = 0.666;
   level._snd_num_players_in_combat = 0;
-  level.var_071D.map_wave_music_master_volume_scalar = 1;
-  level.var_071D.zombie_vox_attack_hit_prev_time = 0;
-  level.var_071D.zombie_vox_attack_hit_wait_time_min = 3;
-  level.var_071D.zombie_vox_attack_hit_wait_time_max = 5;
-  level.var_071D.zombie_vox_attack_hit_wait_time = randomintrange(2, 4);
-  level.var_071D.zombie_vox_attack_hit_req_names = ["attack_hit", "anim_sprint_attack_1", "anim_sprint_attack_2", "anim_sprint_attack_3", "anim_stand_attack_1", "anim_stand_attack_2", "anim_stand_attack_3"];
+  level.var_71D.map_wave_music_master_volume_scalar = 1;
+  level.var_71D.zombie_vox_attack_hit_prev_time = 0;
+  level.var_71D.zombie_vox_attack_hit_wait_time_min = 3;
+  level.var_71D.zombie_vox_attack_hit_wait_time_max = 5;
+  level.var_71D.zombie_vox_attack_hit_wait_time = randomintrange(2, 4);
+  level.var_71D.zombie_vox_attack_hit_req_names = ["attack_hit", "anim_sprint_attack_1", "anim_sprint_attack_2", "anim_sprint_attack_3", "anim_stand_attack_1", "anim_stand_attack_2", "anim_stand_attack_3"];
   level thread sndx_monitor_num_players_in_combat(::sndx_update_global_threat_scalar);
-  lib_0547::func_7BA9(::lib_0366::func_8E2E);
+  lib_0547::func_7BA9(::func_8E2E);
 }
 
-lib_0366::func_8E75(param_00, param_01, param_02) {
+func_8E75(param_00, param_01, param_02) {
   var_03 = self;
   var_04 = 1;
   if(param_00 == "begin") {
@@ -60,77 +60,77 @@ lib_0366::func_8E75(param_00, param_01, param_02) {
 }
 
 sndx_get_threat_dialog_volume() {
-  var_00 = lib_0366::func_8E14();
-  return lib_0378::func_8D72(var_00, level.var_071D.threat_to_dlg_vol_scalar);
+  var_00 = func_8E14();
+  return lib_0378::func_8D72(var_00, level.var_71D.threat_to_dlg_vol_scalar);
 }
 
-lib_0366::func_8E44() {
-  lib_0378::func_8DC7("player_connect", ::lib_0366::func_7247);
-  lib_0378::func_8DC7("onZombieSpawn", ::lib_0366::func_ABFA);
-  lib_0378::func_8DC7("onZombieDamaged", ::lib_0366::func_6BD1);
-  lib_0378::func_8DC7("onZombieKilled", ::lib_0366::func_6BD4);
-  lib_0378::func_8DC7("objective_complete", ::lib_0366::func_690B);
-  lib_0378::func_8DC7("snd_zmb_mus_start", ::lib_0366::func_8E31);
-  lib_0378::func_8DC7("snd_zmb_mus_stop", ::lib_0366::func_8E32);
-  lib_0378::func_8DC7("snd_zmb_mus_stop_all_players", ::lib_0366::func_8E33);
-  lib_0378::func_8DC7("simple_jump_scare", ::lib_0366::func_8C59);
-  lib_0378::func_8DC7("zombie_set_anim_state", ::lib_0366::func_ABF0);
-  lib_0378::func_8DC7("set_client_sticky_threat", ::lib_0366::func_8E47);
-  lib_0378::func_8DC7("clear_client_sticky_threat", ::lib_0366::func_8E09);
-  lib_0378::func_8DC7("vox_request", ::lib_0366::func_8E4B);
-  lib_0378::func_8DC7("aud_raven_sword_power_up", ::lib_0366::func_7A83);
-  lib_0378::func_8DC7("aud_raven_sword_power_dwn", ::lib_0366::func_7A82);
-  lib_0378::func_8DC7("aud_raven_sword_aoe", ::lib_0366::func_7A7A);
-  lib_0378::func_8DC7("zombies_2016_gl_ending", ::lib_0366::func_AC3C);
-  lib_0378::func_8DC7("trap_spinner_activate", ::lib_0366::func_9CC9);
-  lib_0378::func_8DC7("money_spend", ::lib_0366::func_62D2);
-  lib_0378::func_8DC7("found_collectible", ::lib_0366::func_3E42);
-  lib_0378::func_8DC7("zombie_ignite", ::lib_0366::func_ABCE);
-  lib_0378::func_8DC7("zombie_extinguish", ::lib_0366::func_ABA2);
-  lib_0378::func_8DC7("zombie_fall_impact", ::lib_0366::func_ABA3);
-  lib_0378::func_8DC7("mystery_box_attract_on", ::lib_0366::func_65F0);
-  lib_0378::func_8DC7("mystery_box_attract_off", ::lib_0366::func_65EF);
-  lib_0378::func_8DC7("mystery_box_attract_open", ::lib_0366::func_65F1);
-  lib_0378::func_8DC7("mystery_box_attract_closed", ::lib_0366::func_65EE);
-  lib_0378::func_8DC7("mystery_box_elec", ::lib_0366::func_65F3);
-  lib_0378::func_8DC7("mystery_box_open", ::lib_0366::func_65F5);
-  lib_0378::func_8DC7("mystery_box_close", ::lib_0366::func_65F2);
-  lib_0378::func_8DC7("play_bird_loop", ::lib_0366::func_70C3);
-  lib_0378::func_8DC7("stop_bird_loop", ::lib_0366::func_93BD);
-  lib_0378::func_8DC7("play_bird_retreat", ::lib_0366::func_70C4);
-  lib_0378::func_8DC7("electric_cherry_vfx", ::lib_0366::func_35AE);
-  lib_0378::func_8DC7("flamethrower_start", ::lib_0366::func_3D25);
-  lib_0378::func_8DC7("flamethrower_stop", ::lib_0366::func_3D26);
-  lib_0378::func_8DC7("uber_battery_spawn", ::lib_0366::func_9FE4);
-  lib_0378::func_8DC7("tesla_hc_energy_lamp_destruct", ::lib_0366::func_98F1);
-  lib_0378::func_8DC7("tesla_hc_energy_lamp_loop_on", ::lib_0366::func_98F3);
-  lib_0378::func_8DC7("tesla_hc_energy_lamp_loop_off", ::lib_0366::func_98F2);
-  lib_0378::func_8DC7("wpn_bouncingbetty_trigger", ::lib_0366::func_AA91);
-  lib_0378::func_8DC7("wpn_bouncingbetty_spin", ::lib_0366::func_AA90);
-  lib_0378::func_8DC7("wpn_bouncingbetty_exp", ::lib_0366::func_AA8F);
-  lib_0378::func_8DC7("aud_jack_in_box_land", ::lib_0366::func_5872);
-  lib_0378::func_8DC7("aud_jack_open", ::lib_0366::func_5873);
-  lib_0378::func_8DC7("aud_jack_in_box_explode", ::lib_0366::func_5871);
-  lib_0378::func_8DC7("aud_use_armor_machine", ::lib_0366::func_A1D6);
-  lib_0378::func_8DC7("aud_stunning_burst_use", ::lib_0366::func_94BC);
-  lib_0378::func_8DC7("aud_stun_zombies_strt", ::lib_0366::func_94B8);
-  lib_0378::func_8DC7("aud_stun_zombies_end", ::lib_0366::func_94B7);
-  lib_0378::func_8DC7("aud_mad_minute_use", ::lib_0366::func_5F5B);
-  lib_0378::func_8DC7("aud_taunt_use", ::lib_0366::func_983A);
-  lib_0378::func_8DC7("aud_camo_use", ::lib_0366::func_1EBA);
+func_8E44() {
+  lib_0378::func_8DC7("player_connect", ::func_7247);
+  lib_0378::func_8DC7("onZombieSpawn", ::func_ABFA);
+  lib_0378::func_8DC7("onZombieDamaged", ::func_6BD1);
+  lib_0378::func_8DC7("onZombieKilled", ::func_6BD4);
+  lib_0378::func_8DC7("objective_complete", ::func_690B);
+  lib_0378::func_8DC7("snd_zmb_mus_start", ::func_8E31);
+  lib_0378::func_8DC7("snd_zmb_mus_stop", ::func_8E32);
+  lib_0378::func_8DC7("snd_zmb_mus_stop_all_players", ::func_8E33);
+  lib_0378::func_8DC7("simple_jump_scare", ::func_8C59);
+  lib_0378::func_8DC7("zombie_set_anim_state", ::func_ABF0);
+  lib_0378::func_8DC7("set_client_sticky_threat", ::func_8E47);
+  lib_0378::func_8DC7("clear_client_sticky_threat", ::func_8E09);
+  lib_0378::func_8DC7("vox_request", ::func_8E4B);
+  lib_0378::func_8DC7("aud_raven_sword_power_up", ::func_7A83);
+  lib_0378::func_8DC7("aud_raven_sword_power_dwn", ::func_7A82);
+  lib_0378::func_8DC7("aud_raven_sword_aoe", ::func_7A7A);
+  lib_0378::func_8DC7("zombies_2016_gl_ending", ::func_AC3C);
+  lib_0378::func_8DC7("trap_spinner_activate", ::func_9CC9);
+  lib_0378::func_8DC7("money_spend", ::func_62D2);
+  lib_0378::func_8DC7("found_collectible", ::func_3E42);
+  lib_0378::func_8DC7("zombie_ignite", ::func_ABCE);
+  lib_0378::func_8DC7("zombie_extinguish", ::func_ABA2);
+  lib_0378::func_8DC7("zombie_fall_impact", ::func_ABA3);
+  lib_0378::func_8DC7("mystery_box_attract_on", ::func_65F0);
+  lib_0378::func_8DC7("mystery_box_attract_off", ::func_65EF);
+  lib_0378::func_8DC7("mystery_box_attract_open", ::func_65F1);
+  lib_0378::func_8DC7("mystery_box_attract_closed", ::func_65EE);
+  lib_0378::func_8DC7("mystery_box_elec", ::func_65F3);
+  lib_0378::func_8DC7("mystery_box_open", ::func_65F5);
+  lib_0378::func_8DC7("mystery_box_close", ::func_65F2);
+  lib_0378::func_8DC7("play_bird_loop", ::func_70C3);
+  lib_0378::func_8DC7("stop_bird_loop", ::func_93BD);
+  lib_0378::func_8DC7("play_bird_retreat", ::func_70C4);
+  lib_0378::func_8DC7("electric_cherry_vfx", ::func_35AE);
+  lib_0378::func_8DC7("flamethrower_start", ::func_3D25);
+  lib_0378::func_8DC7("flamethrower_stop", ::func_3D26);
+  lib_0378::func_8DC7("uber_battery_spawn", ::func_9FE4);
+  lib_0378::func_8DC7("tesla_hc_energy_lamp_destruct", ::func_98F1);
+  lib_0378::func_8DC7("tesla_hc_energy_lamp_loop_on", ::func_98F3);
+  lib_0378::func_8DC7("tesla_hc_energy_lamp_loop_off", ::func_98F2);
+  lib_0378::func_8DC7("wpn_bouncingbetty_trigger", ::func_AA91);
+  lib_0378::func_8DC7("wpn_bouncingbetty_spin", ::func_AA90);
+  lib_0378::func_8DC7("wpn_bouncingbetty_exp", ::func_AA8F);
+  lib_0378::func_8DC7("aud_jack_in_box_land", ::func_5872);
+  lib_0378::func_8DC7("aud_jack_open", ::func_5873);
+  lib_0378::func_8DC7("aud_jack_in_box_explode", ::func_5871);
+  lib_0378::func_8DC7("aud_use_armor_machine", ::func_A1D6);
+  lib_0378::func_8DC7("aud_stunning_burst_use", ::func_94BC);
+  lib_0378::func_8DC7("aud_stun_zombies_strt", ::func_94B8);
+  lib_0378::func_8DC7("aud_stun_zombies_end", ::func_94B7);
+  lib_0378::func_8DC7("aud_mad_minute_use", ::func_5F5B);
+  lib_0378::func_8DC7("aud_taunt_use", ::func_983A);
+  lib_0378::func_8DC7("aud_camo_use", ::func_1EBA);
   lib_0378::func_8DC7("aud_assassin_use_camoflage", ::assassin_use_camoflage);
   lib_0378::func_8DC7("aud_assassin_use_shell_shock", ::assassin_use_shell_shock);
   lib_0378::func_8DC7("aud_assassin_use_taunt", ::assassin_use_taunt);
   lib_0378::func_8DC7("aud_strt_asn_camo_blur", ::strt_asn_camo_blur);
   lib_0378::func_8DC7("aud_stp_asn_camo_blur", ::stp_asn_camo_blur);
-  lib_0378::func_8DC7("aud_treasurer_strt_timer", ::lib_0366::func_9D33);
-  lib_0378::func_8DC7("aud_treasurer_end_timer", ::lib_0366::func_9D21);
-  lib_0378::func_8DC7("aud_treasurer_fuse", ::lib_0366::func_9D22);
-  lib_0378::func_8DC7("zmb_points_pickup", ::lib_0366::func_AB0A);
-  lib_0378::func_8DC7("zmb_points_share", ::lib_0366::func_AB0B);
-  lib_0378::func_8DC7("zmb_ravens_key_pickup", ::lib_0366::func_AB0C);
+  lib_0378::func_8DC7("aud_treasurer_strt_timer", ::func_9D33);
+  lib_0378::func_8DC7("aud_treasurer_end_timer", ::func_9D21);
+  lib_0378::func_8DC7("aud_treasurer_fuse", ::func_9D22);
+  lib_0378::func_8DC7("zmb_points_pickup", ::func_AB0A);
+  lib_0378::func_8DC7("zmb_points_share", ::func_AB0B);
+  lib_0378::func_8DC7("zmb_ravens_key_pickup", ::func_AB0C);
   lib_0378::func_8DC7("zmb_ballistic_aura", ::zmb_ballistic_aura);
-  lib_0378::func_8DC7("brute_battle_complete_notification", ::lib_0366::func_1CB9);
+  lib_0378::func_8DC7("brute_battle_complete_notification", ::func_1CB9);
   lib_0378::func_8DC7("ripsaw_spine_cut", ::ripsaw_spine_cut);
   lib_0378::func_8DC7("ripsaw_fatal_melee", ::ripsaw_fatal_melee);
   lib_0378::func_8DC7("aud_ripsaw_start_spinning", ::ripsaw_start_spinning);
@@ -151,15 +151,15 @@ lib_0366::func_8E44() {
   lib_0378::func_8DC7("zmb_axe_hc_melee_alt_hit", ::zmb_axe_hc_melee_alt_hit);
   lib_0378::func_8DC7("zmb_siz_trans_fx_burst", ::zmb_siz_trans_fx_burst);
   lib_0378::func_8DC7("aud_zmb_uberschnell_pickup", ::zmb_uberschnell_pickup);
-  lib_0378::func_8DC7("aud_wonder_weapon_electrocute_strt", ::lib_0366::func_AA59);
+  lib_0378::func_8DC7("aud_wonder_weapon_electrocute_strt", ::func_AA59);
   lib_0378::func_8DC7("aud_wonder_weapon_electrocute_end", ::wonder_weapon_electrocute_end);
-  lib_0378::func_8DC7("aud_moon_projectile_strt", ::lib_0366::func_6401);
-  lib_0378::func_8DC7("aud_moon_projectile_end", ::lib_0366::func_6400);
-  lib_0378::func_8DC7("aud_storm_proj_loop_strt", ::lib_0366::func_9433);
-  lib_0378::func_8DC7("aud_storm_proj_loop_end", ::lib_0366::func_9432);
-  lib_0378::func_8DC7("aud_ww_projectile_zap", ::lib_0366::func_AAC9);
-  lib_0378::func_8DC7("aud_ww_blood_explode", ::lib_0366::func_AAC2);
-  lib_0378::func_8DC7("aud_ww_death_explode", ::lib_0366::func_AAC3);
+  lib_0378::func_8DC7("aud_moon_projectile_strt", ::func_6401);
+  lib_0378::func_8DC7("aud_moon_projectile_end", ::func_6400);
+  lib_0378::func_8DC7("aud_storm_proj_loop_strt", ::func_9433);
+  lib_0378::func_8DC7("aud_storm_proj_loop_end", ::func_9432);
+  lib_0378::func_8DC7("aud_ww_projectile_zap", ::func_AAC9);
+  lib_0378::func_8DC7("aud_ww_blood_explode", ::func_AAC2);
+  lib_0378::func_8DC7("aud_ww_death_explode", ::func_AAC3);
   lib_0378::func_8DC7("aud_pap_wpn_charlton_vortex", ::pap_wpn_charlton_vortex);
   lib_0378::func_8DC7("aud_pap_wpn_crossbow_cricket_shot", ::pap_wpn_crossbow_cricket_shot);
   lib_0378::func_8DC7("aud_pap_wpn_crossbow_cricket_explo", ::pap_wpn_crossbow_cricket_explo);
@@ -167,7 +167,7 @@ lib_0366::func_8E44() {
   lib_0378::func_8DC7("aud_pap_wpn_sdk_shottysnipe_fire", ::pap_wpn_sdk_shottysnipe_fire);
 }
 
-lib_0366::func_8E0C() {
+func_8E0C() {
   var_00 = "zombie_generic";
   var_00 = "zombie_generic2";
   var_00 = "zombie_berserker";
@@ -203,41 +203,41 @@ lib_0366::func_8E0C() {
   var_00 = "attack_miss";
 }
 
-lib_0366::func_8E27() {
-  lib_0366::func_8E0C();
+func_8E27() {
+  func_8E0C();
   common_scripts\utility::func_3799("zombie_passive");
-  level.var_071D.var_A974 = 0;
-  level.var_071D.var_5AB6 = 16;
-  level.var_071D.var_4031 = 0;
+  level.var_71D.var_A974 = 0;
+  level.var_71D.var_5AB6 = 16;
+  level.var_71D.var_4031 = 0;
   var_00 = [[0, 1], [0.0667, 0.95], [0.1333, 0.6509629], [0.2, 0.512], [0.2667, 0.3943704], [0.3333, 0.2962963], [0.4, 0.216], [0.4667, 0.1517037], [0.5333, 0.1016296], [0.6, 0.064], [0.6667, 0.03703704], [0.7333, 0.01896296], [0.8, 0.008], [0.8667, 0.00237037], [0.9333, 0.0002962963], [1, 0]];
-  level.var_071D.var_725F = lib_0378::func_8DCB(var_00, 1, 0.5);
-  level.var_071D.var_AB8E = [[0, 1], [0.0667, 0.9780229], [0.1333, 0.9149472], [0.2, 0.8187308], [0.2667, 0.700784], [0.3333, 0.5737534], [0.4, 0.449329], [0.4667, 0.3365903], [0.5333, 0.2411775], [0.6, 0.1652989], [0.6667, 0.108368], [0.7333, 0.0679564], [0.8, 0.0407622], [0.8667, 0.02338745], [0.9333, 0.01283531], [1, 0]];
-  level.var_071D.var_7500 = [[0, 0.666], [1, 1]];
-  level.var_071D.var_AC07 = 1;
-  level.var_071D.var_0CB8 = [[0, 1000], [1, 10000]];
+  level.var_71D.var_725F = lib_0378::func_8DCB(var_00, 1, 0.5);
+  level.var_71D.var_AB8E = [[0, 1], [0.0667, 0.9780229], [0.1333, 0.9149472], [0.2, 0.8187308], [0.2667, 0.700784], [0.3333, 0.5737534], [0.4, 0.449329], [0.4667, 0.3365903], [0.5333, 0.2411775], [0.6, 0.1652989], [0.6667, 0.108368], [0.7333, 0.0679564], [0.8, 0.0407622], [0.8667, 0.02338745], [0.9333, 0.01283531], [1, 0]];
+  level.var_71D.var_7500 = [[0, 0.666], [1, 1]];
+  level.var_71D.var_AC07 = 1;
+  level.var_71D.var_CB8 = [[0, 1000], [1, 10000]];
 }
 
 snd_level_handle_zombie_round_countdown_started() {
   for(;;) {
-    level common_scripts\utility::func_A70A("zombie_round_countdown_started", "zombies_manual_start");
+    level common_scripts\utility::waittill_any("zombie_round_countdown_started", "zombies_manual_start");
     var_00 = 1;
-    level.var_071D.round_countdown_snd = lib_0380::func_6840(level.var_071D.round_countdown_alias, undefined, var_00);
+    level.var_71D.round_countdown_snd = lib_0380::func_6840(level.var_71D.round_countdown_alias, undefined, var_00);
   }
 }
 
 snd_level_handle_zombie_wave_started() {
   for(;;) {
     level waittill("zombie_wave_started");
-    if(isDefined(level.var_071D.round_countdown_end_alias)) {
-      lib_0380::func_6850(level.var_071D.round_countdown_snd, 0.5);
-      level.var_071D.round_countdown_snd = undefined;
-      lib_0380::func_6840(level.var_071D.round_countdown_end_alias);
+    if(isDefined(level.var_71D.round_countdown_end_alias)) {
+      lib_0380::func_6850(level.var_71D.round_countdown_snd, 0.5);
+      level.var_71D.round_countdown_snd = undefined;
+      lib_0380::func_6840(level.var_71D.round_countdown_end_alias);
     }
 
     lib_0380::func_6840("zmb_ui_wave_splash");
-    level.var_071D.var_A974 = 1;
-    foreach(var_01 in level.var_744A) {
-      var_01 lib_0366::func_8E4D();
+    level.var_71D.var_A974 = 1;
+    foreach(var_01 in level.players) {
+      var_01 func_8E4D();
       var_01 lib_0378::func_8D74("wave_begin");
     }
   }
@@ -246,17 +246,17 @@ snd_level_handle_zombie_wave_started() {
 snd_level_handle_zombie_wave_ended() {
   for(;;) {
     level waittill("zombie_wave_ended");
-    level.var_071D.var_A974 = 0;
-    foreach(var_01 in level.var_744A) {
-      var_01 lib_0366::func_8E4E();
+    level.var_71D.var_A974 = 0;
+    foreach(var_01 in level.players) {
+      var_01 func_8E4E();
       var_01 lib_0378::func_8D74("wave_end");
     }
   }
 }
 
-lib_0366::func_8E00(param_00) {
-  if(isDefined(level.var_744A) && level.var_744A.size > 0) {
-    foreach(var_02 in level.var_744A) {
+func_8E00(param_00) {
+  if(isDefined(level.players) && level.players.size > 0) {
+    foreach(var_02 in level.players) {
       if(isDefined(var_02)) {
         var_02 method_8626(param_00);
         wait 0.05;
@@ -265,130 +265,130 @@ lib_0366::func_8E00(param_00) {
   }
 }
 
-lib_0366::func_7247() {
+func_7247() {
   self method_85A7("ClientScriptInit", "zombies");
   self method_8626("zmb_init_mix");
   self method_8626("zmb_init_overrides_mix");
   self method_8626("zmb_headroom_mix");
-  lib_0366::func_8E45();
-  thread lib_0366::func_8E21();
-  thread lib_0366::func_8E1C();
-  thread lib_0366::func_8E20();
-  thread lib_0366::func_8E1E();
-  thread lib_0366::func_8E1F();
-  thread lib_0366::func_8E1B();
-  thread lib_0366::func_8E1D();
-  thread lib_0366::func_8E2C();
-  thread lib_0366::func_8E2B();
-  thread lib_0366::func_8E40();
-  lib_0366::func_8E2F(1, 0.1, self);
+  func_8E45();
+  thread func_8E21();
+  thread func_8E1C();
+  thread func_8E20();
+  thread func_8E1E();
+  thread func_8E1F();
+  thread func_8E1B();
+  thread func_8E1D();
+  thread func_8E2C();
+  thread func_8E2B();
+  thread func_8E40();
+  func_8E2F(1, 0.1, self);
   lib_0378::func_8D74("player_connect_map");
-  self.var_071D.var_6599 = 0;
+  self.var_71D.var_6599 = 0;
 }
 
-lib_0366::func_ABFA() {
-  self.var_071D = spawnStruct();
-  self.var_071D.var_502A = snd_zmb_new_guid();
-  self.var_071D.var_9977 = 0;
-  self.var_071D.var_900C = gettime();
-  self.var_071D.var_99E0 = [];
-  self.var_071D.var_0A47 = self.var_0A4B;
-  switch (self.var_071D.var_0A47) {
+func_ABFA() {
+  self.var_71D = spawnStruct();
+  self.var_71D.var_502A = snd_zmb_new_guid();
+  self.var_71D.var_9977 = 0;
+  self.var_71D.var_900C = gettime();
+  self.var_71D.var_99E0 = [];
+  self.var_71D.var_A47 = self.var_A4B;
+  switch (self.var_71D.var_A47) {
     case "zombie_generic":
-      self.var_071D.var_9979 = 1;
+      self.var_71D.var_9979 = 1;
       var_00 = 3;
-      var_01 = common_scripts\utility::func_627D(level.var_071D.var_4031, var_00);
+      var_01 = common_scripts\utility::func_627D(level.var_71D.var_4031, var_00);
       if(var_01 < var_00 - 1) {
-        self.var_071D.var_0A47 = self.var_071D.var_0A47 + "2";
+        self.var_71D.var_A47 = self.var_71D.var_A47 + "2";
       }
 
-      level.var_071D.var_4031++;
-      lib_0366::func_8E26(::lib_0366::func_8E05);
+      level.var_71D.var_4031++;
+      func_8E26(::func_8E05);
       break;
 
     case "zombie_berserker":
-      self.var_071D.var_9979 = 1;
-      lib_0366::func_8E26(::lib_0366::func_8E01);
+      self.var_71D.var_9979 = 1;
+      func_8E26(::func_8E01);
       lib_0380::func_6846("fly_swarm_npc", undefined, self, 4, 1, 5);
       break;
 
     case "zombie_sizzler":
-      self.var_071D.var_9979 = 1;
+      self.var_71D.var_9979 = 1;
       break;
 
     case "zombie_fireman":
-      self.var_071D.var_9979 = 3.5;
-      lib_0366::func_8E26(::lib_0366::func_8E04);
+      self.var_71D.var_9979 = 3.5;
+      func_8E26(::func_8E04);
       break;
 
     case "zombie_exploder":
-      self.var_071D.var_9979 = 3;
-      lib_0366::func_8E26(::lib_0366::func_8E03);
+      self.var_71D.var_9979 = 3;
+      func_8E26(::func_8E03);
       break;
 
     case "zombie_treasurer":
-      self.var_071D.var_9979 = 3.5;
-      lib_0366::func_8E26(::lib_0366::func_8E03);
+      self.var_71D.var_9979 = 3.5;
+      func_8E26(::func_8E03);
       break;
 
     case "zombie_heavy":
-      self.var_071D.var_9979 = 3;
-      lib_0366::func_8E26(::lib_0366::func_8E06);
+      self.var_71D.var_9979 = 3;
+      func_8E26(::func_8E06);
       break;
 
     case "zombie_assassin":
-      self.var_071D.var_9979 = 3.5;
-      lib_0366::func_8E26(::lib_0366::func_8E02);
+      self.var_71D.var_9979 = 3.5;
+      func_8E26(::func_8E02);
       break;
 
     case "zombie_boss_village":
-      self.var_071D.var_9979 = 10;
-      lib_0366::func_8E26(::lib_0366::func_8E06);
+      self.var_71D.var_9979 = 10;
+      func_8E26(::func_8E06);
       break;
 
     case "zombie_bob":
-      self.var_071D.var_9979 = 10;
+      self.var_71D.var_9979 = 10;
       break;
 
     case "zombie_guardian":
-      self.var_071D.var_9979 = 10;
+      self.var_71D.var_9979 = 10;
       break;
 
     default:
-      self.var_071D.var_9979 = 1;
-      lib_0366::func_8E26(::lib_0366::func_8E02);
+      self.var_71D.var_9979 = 1;
+      func_8E26(::func_8E02);
       break;
   }
 
-  if(lib_0366::func_8E19()) {
-    lib_0366::func_8E37();
+  if(func_8E19()) {
+    func_8E37();
   }
 
-  thread lib_0366::func_8E2A();
-  thread lib_0366::func_8E2D();
+  thread func_8E2A();
+  thread func_8E2D();
 }
 
-lib_0366::func_6BD1(param_00) {
+func_6BD1(param_00) {
   if(param_00.var_60B8 == "MELEE" || param_00.var_60B8 == "MOD_MELEE") {
-    param_00.var_721C method_85A7("snd_zmb_handle_plr_melee");
+    param_00.player method_85A7("snd_zmb_handle_plr_melee");
   }
 
-  if(issubstr(param_00.var_01D0, "shovel")) {
+  if(issubstr(param_00.var_1D0, "shovel")) {
     if(isalive(self)) {
-      lib_0366::func_8E8D("zm_melee_shovel_head_2d", "zm_melee_shovel_head", param_00.var_721C.var_0116, 72, 1);
+      func_8E8D("zm_melee_shovel_head_2d", "zm_melee_shovel_head", param_00.player.origin, 72, 1);
     } else {
-      lib_0366::func_8E8D("zm_melee_shovel_head_2d", "zm_melee_shovel_head", param_00.var_721C.var_0116, 72, 0.5);
+      func_8E8D("zm_melee_shovel_head_2d", "zm_melee_shovel_head", param_00.player.origin, 72, 0.5);
     }
   }
 
-  if(param_00.var_01D0 == "raven_sword_zm") {
-    lib_0366::func_8E8D("zmb_raven_swrd_hit_2d", "zmb_raven_swrd_hit", param_00.var_721C.var_0116, 72);
+  if(param_00.var_1D0 == "raven_sword_zm") {
+    func_8E8D("zmb_raven_swrd_hit_2d", "zmb_raven_swrd_hit", param_00.player.origin, 72);
   }
 }
 
-lib_0366::func_8E8D(param_00, param_01, param_02, param_03, param_04) {
-  foreach(var_06 in level.var_744A) {
-    var_07 = distance(var_06.var_0116, param_02);
+func_8E8D(param_00, param_01, param_02, param_03, param_04) {
+  foreach(var_06 in level.players) {
+    var_07 = distance(var_06.origin, param_02);
     if(var_07 < param_03) {
       lib_0380::func_6840(param_00, var_06, 0, param_04);
       continue;
@@ -398,7 +398,7 @@ lib_0366::func_8E8D(param_00, param_01, param_02, param_03, param_04) {
   }
 }
 
-lib_0366::func_7A83() {
+func_7A83() {
   var_00 = self;
   level.var_11CB.var_9571 = lib_0380::func_288B("zmb_raven_swrd_power_up", undefined, var_00);
   lib_0378::func_8D14(level.var_11CB.var_9571);
@@ -408,123 +408,123 @@ lib_0366::func_7A83() {
   }
 }
 
-lib_0366::func_7A82() {
+func_7A82() {
   lib_0380::func_2893(level.var_11CB.var_9570, 0.25);
   level.var_11CB.var_9570 = undefined;
 }
 
-lib_0366::func_7A7A() {
+func_7A7A() {
   var_00 = self;
   var_01 = lib_0380::func_288B("zmb_raven_swrd_aoe", undefined, var_00);
   lib_0378::func_8D14(var_01);
 }
 
-lib_0366::func_6BD4(param_00) {
+func_6BD4(param_00) {
   switch (param_00.var_4DCF) {
     case "head":
-      param_00.var_721C method_8615("zm_hit_kill_head_impact");
+      param_00.player playlocalsound("zm_hit_kill_head_impact");
       wait(0.25);
       maps\mp\_audio::func_8DA0("zm_hit_kill_headshot_splatter", param_00.var_ABE6);
       break;
 
     case "helmet":
-      param_00.var_721C method_8615("zm_hit_kill_head_impact");
+      param_00.player playlocalsound("zm_hit_kill_head_impact");
       maps\mp\_audio::func_8DA0("zm_hit_kill_helmet_impact", param_00.var_ABE6);
       wait(0.25);
       maps\mp\_audio::func_8DA0("zm_hit_kill_headshot_splatter", param_00.var_ABE6);
       break;
 
     default:
-      param_00.var_721C method_8615("zm_hit_kill");
+      param_00.player playlocalsound("zm_hit_kill");
       break;
   }
 }
 
-lib_0366::func_690B(param_00) {
+func_690B(param_00) {
   level notify("stop_objective_complete");
   level endon("objective_complete");
   lib_0378::func_8DC2("objective_complete: " + param_00);
-  if(!isDefined(level.var_071D.var_690D)) {
-    level.var_071D.var_690D = [["mus_objective_complete_01", 13], ["mus_objective_complete_02", 13], ["mus_objective_complete_03", 16], ["mus_objective_complete_04", 14], ["mus_objective_complete_05", 15], ["mus_objective_complete_06", 14]];
+  if(!isDefined(level.var_71D.var_690D)) {
+    level.var_71D.var_690D = [["mus_objective_complete_01", 13], ["mus_objective_complete_02", 13], ["mus_objective_complete_03", 16], ["mus_objective_complete_04", 14], ["mus_objective_complete_05", 15], ["mus_objective_complete_06", 14]];
   }
 
-  if(isDefined(self.var_071D.var_690C)) {
-    lib_0380::func_2893(self.var_071D.var_690C, 1);
-    self.var_071D.var_690C = undefined;
+  if(isDefined(self.var_71D.var_690C)) {
+    lib_0380::func_2893(self.var_71D.var_690C, 1);
+    self.var_71D.var_690C = undefined;
   } else {
     self method_8626("zmb_objective_complete_mix");
   }
 
-  var_01 = level.var_071D.var_690D[randomint(level.var_071D.var_690D.size)];
-  self.var_071D.var_690C = lib_0380::func_2888(var_01[0], self);
+  var_01 = level.var_71D.var_690D[randomint(level.var_71D.var_690D.size)];
+  self.var_71D.var_690C = lib_0380::func_2888(var_01[0], self);
   wait(var_01[1]);
   self method_8627("zmb_objective_complete_mix");
-  self.var_071D.var_690C = undefined;
+  self.var_71D.var_690C = undefined;
 }
 
 snd_set_round_countdown_aliases(param_00, param_01) {
-  level.var_071D.round_countdown_alias = param_00;
-  level.var_071D.round_countdown_end_alias = param_01;
+  level.var_71D.round_countdown_alias = param_00;
+  level.var_71D.round_countdown_end_alias = param_01;
 }
 
 snd_get_round_countdown_aliases() {
   var_00 = spawnStruct();
-  var_00.round_countdown_alias = level.var_071D.round_countdown_alias;
-  var_00.round_countdown_end_alias = level.var_071D.round_countdown_end_alias;
+  var_00.round_countdown_alias = level.var_71D.round_countdown_alias;
+  var_00.round_countdown_end_alias = level.var_71D.round_countdown_end_alias;
   return var_00;
 }
 
 snd_set_mus_combat_cues_override(param_00) {
-  level.var_071D.mus_combat_cues_override = param_00;
+  level.var_71D.mus_combat_cues_override = param_00;
 }
 
 snd_clear_mus_combat_cues_override() {
-  level.var_071D.mus_combat_cues_override = undefined;
+  level.var_71D.mus_combat_cues_override = undefined;
 }
 
-lib_0366::func_8D46() {
-  if(!isDefined(level.var_071D.var_6552)) {
-    level.var_071D.var_6552 = ["zom_movin", "zmb_mus_wave_02", "zmb_mus_wave_03", "zmb_mus_wave_04", "zom_screetchy1", "zmb_mus_wave_01", "zmb_mus_wave_05"];
+func_8D46() {
+  if(!isDefined(level.var_71D.var_6552)) {
+    level.var_71D.var_6552 = ["zom_movin", "zmb_mus_wave_02", "zmb_mus_wave_03", "zmb_mus_wave_04", "zom_screetchy1", "zmb_mus_wave_01", "zmb_mus_wave_05"];
   }
 
-  var_00 = level.var_071D.var_6552;
-  if(isDefined(level.var_071D.mus_combat_cues_override)) {
-    var_00 = level.var_071D.mus_combat_cues_override;
+  var_00 = level.var_71D.var_6552;
+  if(isDefined(level.var_71D.mus_combat_cues_override)) {
+    var_00 = level.var_71D.mus_combat_cues_override;
   }
 
   if(getomnvar("ui_zm_round_number") > 10) {
     var_01 = var_00[randomint(var_00.size)];
   } else {
-    var_01 = var_01[self.var_071D.var_6551];
-    self.var_071D.var_6551 = self.var_071D.var_6551 + 1 % var_00.size;
+    var_01 = var_01[self.var_71D.var_6551];
+    self.var_71D.var_6551 = self.var_71D.var_6551 + 1 % var_00.size;
   }
 
   return var_01;
 }
 
-lib_0366::func_8DCF(param_00) {
-  self.var_071D.var_A97B = param_00;
+func_8DCF(param_00) {
+  self.var_71D.var_A97B = param_00;
 }
 
 snd_get_curr_combat_cue_name() {
-  return self.var_071D.var_A97B;
+  return self.var_71D.var_A97B;
 }
 
-lib_0366::func_8D9F() {
+func_8D9F() {
   lib_0380::func_2888("fly_swarm_player", self);
 }
 
-lib_0366::func_8C59(param_00) {
+func_8C59(param_00) {
   var_01 = self;
-  thread lib_0366::func_8E34("mus_stinger_lrg", var_01, 1, param_00);
+  thread func_8E34("mus_stinger_lrg", var_01, 1, param_00);
   wait(0.1);
-  foreach(var_03 in level.var_744A) {
-    if(var_03 == var_01 && distance(var_03.var_0116, param_00.var_0116) < 108) {
-      var_03 thread lib_0366::func_8E49(param_00, "sneakattack_success", 1);
+  foreach(var_03 in level.players) {
+    if(var_03 == var_01 && distance(var_03.origin, param_00.origin) < 108) {
+      var_03 thread func_8E49(param_00, "sneakattack_success", 1);
       continue;
     }
 
-    var_03 thread lib_0366::func_8E49(param_00, "sneakattack_success", 0);
+    var_03 thread func_8E49(param_00, "sneakattack_success", 0);
   }
 }
 
@@ -532,8 +532,8 @@ snd_not_so_simple_jump_scare(param_00) {
   param_00 = self;
   var_01 = [];
   var_02 = [];
-  foreach(var_04 in level.var_744A) {
-    var_05 = distance(var_04.var_0116, param_00.var_0116);
+  foreach(var_04 in level.players) {
+    var_05 = distance(var_04.origin, param_00.origin);
     if(var_05 < 540) {
       var_02[var_02.size] = var_04;
       if(var_05 < 144) {
@@ -543,79 +543,79 @@ snd_not_so_simple_jump_scare(param_00) {
   }
 
   foreach(var_04 in var_01) {
-    thread lib_0366::func_8E34("mus_stinger_lrg", var_04, 1, param_00);
+    thread func_8E34("mus_stinger_lrg", var_04, 1, param_00);
   }
 
   wait(0.1);
   foreach(var_04 in var_02) {
-    var_04 thread lib_0366::func_8E49(param_00, "sneakattack_success");
+    var_04 thread func_8E49(param_00, "sneakattack_success");
   }
 }
 
-lib_0366::func_8E2A() {}
+func_8E2A() {}
 
-lib_0366::func_8E26(param_00) {
-  self.var_071D.var_AB00 = param_00;
+func_8E26(param_00) {
+  self.var_71D.var_AB00 = param_00;
 }
 
-lib_0366::func_ABF0(param_00, param_01) {
-  if(isDefined(self.var_071D.var_AB00)) {
-    self[[self.var_071D.var_AB00]](param_00, param_01);
+func_ABF0(param_00, param_01) {
+  if(isDefined(self.var_71D.var_AB00)) {
+    self[[self.var_71D.var_AB00]](param_00, param_01);
   }
 }
 
-lib_0366::func_8E01(param_00, param_01) {
+func_8E01(param_00, param_01) {
   switch (param_01) {
     case "s2_zom_spr_sprint_death_v1":
-      lib_0366::func_8E4B("anim_death");
+      func_8E4B("anim_death");
       break;
 
     case "s2_zom_spr_sprint_stun_react_left":
-      lib_0366::func_8E4B("anim_hit_react_left");
+      func_8E4B("anim_hit_react_left");
       break;
 
     case "s2_zom_spr_sprint_stun_react_right":
-      lib_0366::func_8E4B("anim_hit_react_right");
+      func_8E4B("anim_hit_react_right");
       break;
 
     case "s2_zom_spr_sprint_v1":
-      lib_0366::func_8E4B("anim_sprint_1");
+      func_8E4B("anim_sprint_1");
       break;
 
     case "s2_zom_spr_sprint_v2":
-      lib_0366::func_8E4B("anim_sprint_2");
+      func_8E4B("anim_sprint_2");
       break;
 
     case "s2_zom_spr_sprint_v3":
-      lib_0366::func_8E4B("anim_sprint_3");
+      func_8E4B("anim_sprint_3");
       break;
 
     case "s2_zom_spr_sprint_attack_v1":
-      lib_0366::func_8E4B("anim_sprint_attack_1");
+      func_8E4B("anim_sprint_attack_1");
       break;
 
     case "s2_zom_spr_sprint_attack_v2":
-      lib_0366::func_8E4B("anim_sprint_attack_2");
+      func_8E4B("anim_sprint_attack_2");
       break;
 
     case "s2_zom_spr_sprint_attack_v3":
-      lib_0366::func_8E4B("anim_sprint_attack_3");
+      func_8E4B("anim_sprint_attack_3");
       break;
 
     case "s2_zom_sprinter_stand_attack_1":
-      lib_0366::func_8E4B("anim_stand_attack_1");
+      func_8E4B("anim_stand_attack_1");
       break;
 
     case "s2_zom_sprinter_stand_attack_2":
-      lib_0366::func_8E4B("anim_stand_attack_2");
+      func_8E4B("anim_stand_attack_2");
       break;
 
     case "s2_zom_sprinter_stand_attack_3":
-      lib_0366::func_8E4B("anim_stand_attack_3");
+      func_8E4B("anim_stand_attack_3");
       break;
 
     case "s2_zom_core_idle_twitch_v1":
-      lib_0366::func_8E4B("snarl");
+      func_8E4B("snarl");
       break;
 
     default:
@@ -623,48 +623,48 @@ lib_0366::func_8E01(param_00, param_01) {
   }
 }
 
-lib_0366::func_8E05(param_00, param_01) {
+func_8E05(param_00, param_01) {
   switch (param_01) {
     default:
       break;
   }
 }
 
-lib_0366::func_8E04(param_00, param_01) {
+func_8E04(param_00, param_01) {
   switch (param_01) {
     default:
       break;
   }
 }
 
-lib_0366::func_8E03(param_00, param_01) {
+func_8E03(param_00, param_01) {
   switch (param_01) {
     default:
       break;
   }
 }
 
-lib_0366::func_8E06(param_00, param_01) {
+func_8E06(param_00, param_01) {
   switch (param_01) {
     default:
       break;
   }
 }
 
-lib_0366::func_8E02(param_00, param_01) {
+func_8E02(param_00, param_01) {
   switch (param_01) {
     default:
       break;
   }
 }
 
-lib_0366::func_9916() {
+func_9916() {
   var_00 = self;
   var_01 = 180;
   for(;;) {
-    var_02 = level.var_744A[0];
+    var_02 = level.players[0];
     if(isDefined(var_02)) {
-      var_03 = distance2d(var_00.var_0116, var_02.var_0116);
+      var_03 = distance2d(var_00.origin, var_02.origin);
       if(var_03 < var_01) {
         lib_0378::func_8D74("zombie_ignite");
         wait(10);
@@ -677,47 +677,47 @@ lib_0366::func_9916() {
   }
 }
 
-lib_0366::func_8E37() {
-  if(!level.var_071D.var_A974) {
+func_8E37() {
+  if(!level.var_71D.var_A974) {
     return;
   }
 
-  if(!isDefined(level.var_071D.var_ABFB)) {
-    level.var_071D.var_ABFB = ["zmb_spawn_cardboard_pallet_default", "zmb_spawn_const_barrel_default", "zmb_spawn_const_sawhorse_default", "zmb_spawn_const_sign_default", "zmb_spawn_mesh_container_default", "zmb_spawn_chain_default", "zmb_spawn_wood_default", "zmb_spawn_wood_lrg_default", "zmb_spawn_light_lrg_default", "zmb_spawn_light_sml_default", "zmb_spawn_metal_hollow_default"];
+  if(!isDefined(level.var_71D.var_ABFB)) {
+    level.var_71D.var_ABFB = ["zmb_spawn_cardboard_pallet_default", "zmb_spawn_const_barrel_default", "zmb_spawn_const_sawhorse_default", "zmb_spawn_const_sign_default", "zmb_spawn_mesh_container_default", "zmb_spawn_chain_default", "zmb_spawn_wood_default", "zmb_spawn_wood_lrg_default", "zmb_spawn_light_lrg_default", "zmb_spawn_light_sml_default", "zmb_spawn_metal_hollow_default"];
   }
 
   if(lib_0378::func_8D1B(0.5)) {
-    lib_0366::func_8E4B("spawn");
+    func_8E4B("spawn");
     return;
   }
 
-  var_00 = randomint(level.var_071D.var_ABFB.size);
-  var_01 = level.var_071D.var_ABFB[var_00];
-  lib_0380::func_2889(var_01, undefined, self.var_0116);
+  var_00 = randomint(level.var_71D.var_ABFB.size);
+  var_01 = level.var_71D.var_ABFB[var_00];
+  lib_0380::func_2889(var_01, undefined, self.origin);
 }
 
-lib_0366::func_9CC9(param_00) {
+func_9CC9(param_00) {
   maps\mp\_audio::func_8DA2("trap_spinner_activate", self);
   maps\mp\_audio::func_8DA4("trap_spinner_spin_lp", self, param_00);
 }
 
-lib_0366::func_62D2() {}
+func_62D2() {}
 
-lib_0366::func_3E42() {
+func_3E42() {
   lib_0380::func_2888("zmb_pickup_general", self);
 }
 
-lib_0366::func_ABA3() {
-  if(isDefined(self) && isDefined(self.var_0116) && function_0344("zmb_bodyfall_hv")) {
-    thread maps\mp\_audio::func_8DA0("zmb_falling_zombie_impact", self.var_0116);
-    lib_0366::func_8E4B("pain");
+func_ABA3() {
+  if(isDefined(self) && isDefined(self.origin) && function_0344("zmb_bodyfall_hv")) {
+    thread maps\mp\_audio::func_8DA0("zmb_falling_zombie_impact", self.origin);
+    func_8E4B("pain");
     return;
   }
 
   lib_0378::func_8D14(0, "wtf");
 }
 
-lib_0366::func_ABCE(param_00) {
+func_ABCE(param_00) {
   wait 0.05;
   if(!common_scripts\utility::func_562E(self.var_55CB)) {
     self.var_55CB = 1;
@@ -733,23 +733,23 @@ lib_0366::func_ABCE(param_00) {
       return;
     }
 
-    self.var_071D.var_4FF5 = var_04;
+    self.var_71D.var_4FF5 = var_04;
   }
 }
 
-lib_0366::func_ABA2() {
-  if(isDefined(self) && isDefined(self.var_071D.var_4FF5)) {
+func_ABA2() {
+  if(isDefined(self) && isDefined(self.var_71D.var_4FF5)) {
     var_00 = 3;
-    lib_0380::func_6850(self.var_071D.var_4FF5, var_00);
+    lib_0380::func_6850(self.var_71D.var_4FF5, var_00);
     self.var_55CB = 0;
   }
 }
 
-lib_0366::func_8E21() {
+func_8E21() {
   self endon("disconnect");
   for(;;) {
     self waittill("spawned");
-    lib_0366::func_8E41("Recieved Message:spawened");
+    func_8E41("Recieved Message:spawened");
     wait(1);
     if(!function_0367()) {
       thread lib_0378::func_92F3(0.003, 0.01);
@@ -766,48 +766,48 @@ lib_0366::func_8E21() {
 }
 
 snd_is_level_wave_active() {
-  return level.var_071D.var_A974;
+  return level.var_71D.var_A974;
 }
 
 snd_get_auto_wave_music_enabled() {
   var_00 = self;
-  return var_00.var_071D.auto_wave_music_enabled;
+  return var_00.var_71D.auto_wave_music_enabled;
 }
 
 snd_set_auto_wave_music_enabled(param_00) {
   var_01 = self;
-  var_01.var_071D.auto_wave_music_enabled = param_00;
+  var_01.var_71D.auto_wave_music_enabled = param_00;
 }
 
-lib_0366::func_8E4D() {
+func_8E4D() {
   if(snd_get_auto_wave_music_enabled()) {
-    lib_0366::func_8DCF(lib_0366::func_8D46());
+    func_8DCF(func_8D46());
     var_00 = 5;
     var_01 = 10;
-    lib_0366::func_8E31(self.var_071D.var_A97B, var_00, var_01);
-    lib_0366::func_8E2F(0.9 * level.var_071D.map_wave_music_master_volume_scalar, 2, self);
+    func_8E31(self.var_71D.var_A97B, var_00, var_01);
+    func_8E2F(0.9 * level.var_71D.map_wave_music_master_volume_scalar, 2, self);
   }
 
   if(level.var_7F24 == 0) {
-    thread lib_0366::func_8D9F();
+    thread func_8D9F();
   }
 }
 
-lib_0366::func_8E4E() {
+func_8E4E() {
   if(snd_get_auto_wave_music_enabled()) {
     var_00 = "stinger_round_end_hit";
     var_01 = 0;
-    lib_0366::func_8E31(var_00, var_01);
-    lib_0366::func_8DCF(undefined);
+    func_8E31(var_00, var_01);
+    func_8DCF(undefined);
     wait(1);
-    lib_0366::func_AB0D();
-    lib_0366::func_8E2F(1, 2, self);
+    func_AB0D();
+    func_8E2F(1, 2, self);
   }
 }
 
-lib_0366::func_AB0D() {
-  if(isDefined(level.var_071D.start_intermission_music_override)) {
-    [[level.var_071D.start_intermission_music_override]]();
+func_AB0D() {
+  if(isDefined(level.var_71D.start_intermission_music_override)) {
+    [[level.var_71D.start_intermission_music_override]]();
     return;
   }
 
@@ -819,31 +819,31 @@ lib_0366::func_AB0D() {
 
   var_02 = 4;
   var_03 = 5;
-  lib_0366::func_8E31(var_00, var_02, var_03);
+  func_8E31(var_00, var_02, var_03);
 }
 
 snd_zmb_set_start_intermission_music_override_callback(param_00) {
-  level.var_071D.start_intermission_music_override = param_00;
+  level.var_71D.start_intermission_music_override = param_00;
 }
 
-lib_0366::func_8E1C() {
+func_8E1C() {
   self endon("disconnect");
   for(;;) {
     self waittill("enter_last_stand");
     self.var_5BF3 = gettime();
-    lib_0366::func_8E41("Recieved Message:spawened");
+    func_8E41("Recieved Message:spawened");
     lib_0378::func_8D74("enter_last_stand");
   }
 }
 
-lib_0366::func_8E20() {
+func_8E20() {
   self endon("disconnect");
   for(;;) {
     self waittill("revive");
-    lib_0366::func_8E41("Recieved Message:spawened");
+    func_8E41("Recieved Message:spawened");
     var_00 = gettime();
-    if(isDefined(self.var_5BEF)) {
-      self.var_32CD = self.var_32CD + int(var_00 - self.var_5BEF.var_5BF4 / 1000);
+    if(isDefined(self.laststandparams)) {
+      self.var_32CD = self.var_32CD + int(var_00 - self.laststandparams.laststandstarttime / 1000);
     }
 
     self.var_99F8 = self.var_99F8 + self.var_32CD;
@@ -851,7 +851,7 @@ lib_0366::func_8E20() {
   }
 }
 
-lib_0366::func_8E1E() {
+func_8E1E() {
   self endon("disconnect");
   for(;;) {
     self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_0A, var_0B);
@@ -862,11 +862,11 @@ lib_0366::func_8E1E() {
   }
 }
 
-lib_0366::func_8E1F() {
+func_8E1F() {
   self endon("disconnect");
   for(;;) {
     self waittill("death");
-    lib_0366::func_8E41("Recieved Message:spawened");
+    func_8E41("Recieved Message:spawened");
     lib_0378::func_8D74("death");
     var_00 = level.var_A980 - 1;
     var_01 = self getentitynumber();
@@ -876,50 +876,50 @@ lib_0366::func_8E1F() {
     }
 
     lib_0378::func_93E2();
-    if(isDefined(self.var_071D.var_3D90)) {
-      lib_0380::func_6850(self.var_071D.var_3D90);
+    if(isDefined(self.var_71D.var_3D90)) {
+      lib_0380::func_6850(self.var_71D.var_3D90);
     }
   }
 }
 
-lib_0366::func_8E1B() {
+func_8E1B() {
   self endon("disconnect");
   for(;;) {
     self waittill("end_respawn");
-    lib_0366::func_8E41("Recieved Message:spawened");
+    func_8E41("Recieved Message:spawened");
     lib_0378::func_8D74("end_respawn");
   }
 }
 
-lib_0366::func_8E1D() {
+func_8E1D() {
   self endon("disconnect");
   for(;;) {
     self waittill("joined_spectators");
-    lib_0366::func_8E41("Recieved Message:spawened");
+    func_8E41("Recieved Message:spawened");
     lib_0378::func_8D74("joined_spectators");
   }
 }
 
-lib_0366::func_8E45() {
-  if(!isDefined(level.var_071D.var_74F7)) {
-    level.var_071D.var_74F7 = [];
+func_8E45() {
+  if(!isDefined(level.var_71D.var_74F7)) {
+    level.var_71D.var_74F7 = [];
   }
 
   var_00 = spawnStruct();
   var_01 = lib_0378::func_8D86();
   var_00.var_2417 = var_01;
   var_00.var_74F3 = self;
-  level.var_071D.var_74F7[var_01] = var_00;
-  self.var_071D.var_2417 = var_01;
-  self.var_071D.var_28BF = [];
-  self.var_071D.var_6551 = 0;
-  self.var_071D.auto_wave_music_enabled = 1;
+  level.var_71D.var_74F7[var_01] = var_00;
+  self.var_71D.var_2417 = var_01;
+  self.var_71D.var_28BF = [];
+  self.var_71D.var_6551 = 0;
+  self.var_71D.auto_wave_music_enabled = 1;
 }
 
-lib_0366::func_8E0A(param_00) {
+func_8E0A(param_00) {
   var_01 = undefined;
-  lib_0366::func_8E07(function_02A2(param_00));
-  var_02 = level.var_071D.var_74F7[param_00];
+  func_8E07(function_02A2(param_00));
+  var_02 = level.var_71D.var_74F7[param_00];
   if(isDefined(var_02)) {
     var_01 = var_02.var_74F3;
   }
@@ -927,10 +927,10 @@ lib_0366::func_8E0A(param_00) {
   return var_01;
 }
 
-lib_0366::func_8E3F(param_00) {
+func_8E3F(param_00) {
   var_01 = undefined;
-  lib_0366::func_8E07(isDefined(param_00));
-  foreach(var_03 in level.var_071D.var_74F7) {
+  func_8E07(isDefined(param_00));
+  foreach(var_03 in level.var_71D.var_74F7) {
     if(var_03.var_74F3 == param_00) {
       var_01 = var_03.var_2417;
       break;
@@ -940,97 +940,97 @@ lib_0366::func_8E3F(param_00) {
   return var_01;
 }
 
-lib_0366::func_8E0E() {
-  return self.var_071D.var_2417;
+func_8E0E() {
+  return self.var_71D.var_2417;
 }
 
-lib_0366::func_AC3C() {
+func_AC3C() {
   maps\mp\_audio::func_8DA0("zombies_2016_gl_ending_hit");
-  lib_0366::func_8E00("zombies_2016_gl_ending");
+  func_8E00("zombies_2016_gl_ending");
 }
 
-lib_0366::func_65F3(param_00, param_01) {
+func_65F3(param_00, param_01) {
   if(param_01 == 1) {
     wait(4.55);
-    level.var_11CB.var_65F4 = lib_0380::func_2889("zmb_mystery_box_elec", undefined, param_00.var_0116);
+    level.var_11CB.var_65F4 = lib_0380::func_2889("zmb_mystery_box_elec", undefined, param_00.origin);
     return;
   }
 
   stopclientsound(level.var_11CB.var_65F4);
 }
 
-lib_0366::func_65F5(param_00) {
-  lib_0380::func_2889("interact_mystery_box_open", undefined, param_00.var_0116);
+func_65F5(param_00) {
+  lib_0380::func_2889("interact_mystery_box_open", undefined, param_00.origin);
 }
 
-lib_0366::func_65F2(param_00) {
-  lib_0380::func_2889("interact_mystery_box_close", undefined, param_00.var_0116);
+func_65F2(param_00) {
+  lib_0380::func_2889("interact_mystery_box_close", undefined, param_00.origin);
 }
 
-lib_0366::func_65F0(param_00) {
+func_65F0(param_00) {
   if(!isDefined(param_00.var_11C6)) {
     param_00.var_11C6 = lib_0380::func_6844("zmb_interact_mystery_box_attract", undefined, param_00, 3);
     wait(2);
-    lib_0366::func_65EE(param_00);
+    func_65EE(param_00);
   }
 }
 
-lib_0366::func_65EF(param_00) {
+func_65EF(param_00) {
   if(isDefined(param_00.var_11C6)) {
     lib_0380::func_6850(param_00.var_11C6, 3);
     param_00.var_11C6 = undefined;
   }
 }
 
-lib_0366::func_65F1(param_00) {
+func_65F1(param_00) {
   if(!isDefined(param_00.var_11C6)) {
-    lib_0366::func_65F0(param_00);
+    func_65F0(param_00);
   }
 
   lib_0380::func_684E(param_00.var_11C6, 1, 3);
 }
 
-lib_0366::func_65EE(param_00) {
+func_65EE(param_00) {
   if(isDefined(param_00.var_11C6)) {
     lib_0380::func_684E(param_00.var_11C6, 0.25, 3);
   }
 }
 
-lib_0366::func_8E31(param_00, param_01, param_02) {
-  var_03 = lib_0366::func_8E14();
+func_8E31(param_00, param_01, param_02) {
+  var_03 = func_8E14();
   self method_85A7("snd_start_mus", param_00, var_03, param_01, param_02);
 }
 
-lib_0366::func_8E32(param_00) {
+func_8E32(param_00) {
   self method_85A7("snd_stop_mus", param_00);
 }
 
-lib_0366::func_8E33(param_00) {
-  callclientscript(level.var_744A, "snd_stop_mus", param_00);
+func_8E33(param_00) {
+  callclientscript(level.players, "snd_stop_mus", param_00);
 }
 
-lib_0366::func_8E34(param_00, param_01, param_02, param_03) {
+func_8E34(param_00, param_01, param_02, param_03) {
   var_04 = lib_0378::func_8D49(1, param_02);
   if(isDefined(param_01)) {
     var_05 = gettime();
-    var_06 = param_01 lib_0366::func_8E10();
+    var_06 = param_01 func_8E10();
     if(var_05 > var_06 + 4000) {
-      param_01 lib_0366::func_8E46(var_05);
-      var_07 = lib_0366::func_8E15();
-      var_04 = var_04 * lib_0378::func_8D72(param_01.var_071D.var_74FF, var_07);
+      param_01 func_8E46(var_05);
+      var_07 = func_8E15();
+      var_04 = var_04 * lib_0378::func_8D72(param_01.var_71D.var_74FF, var_07);
       if(param_00 != "player_vox_only") {
         param_01 method_85A7("snd_zmb_play_mus_stinger", param_00, var_04);
       }
 
-      param_01 lib_0366::func_8E0D(param_00);
+      param_01 func_8E0D(param_00);
       return;
     }
 
     return;
   }
 
-  if(param_00 != "player_vox_only") {
-    callclientscript(level.var_744A, "snd_zmb_play_mus_stinger", param_00, var_04);
+  if(param_01 != "player_vox_only") {
+    callclientscript(level.players, "snd_zmb_play_mus_stinger", param_01, var_05);
   }
 }
 
@@ -1038,16 +1038,16 @@ snd_zmb_set_plr_vox_scare_count_max(param_00) {
   self method_85A7("snd_zmb_set_plr_vox_scare_count_max", param_00);
 }
 
-lib_0366::func_8E0D(param_00) {
+func_8E0D(param_00) {
   wait(0.5);
   self method_85A7("snd_zmb_plr_stinger_scare_vox", param_00);
 }
 
-lib_0366::func_8E35(param_00, param_01, param_02) {
-  thread lib_0366::func_8E9D(param_00, param_01, param_02);
+func_8E35(param_00, param_01, param_02) {
+  thread func_8E9D(param_00, param_01, param_02);
 }
 
-lib_0366::func_8E9D(param_00, param_01, param_02) {
+func_8E9D(param_00, param_01, param_02) {
   param_01 endon("death");
   param_01 endon("disconnect");
   param_02 endon("death");
@@ -1056,9 +1056,9 @@ lib_0366::func_8E9D(param_00, param_01, param_02) {
   while(isDefined(param_01) && isDefined(param_02)) {
     if(param_01 common_scripts\utility::func_7237(param_02)) {
       if(!lib_0547::func_577E(param_01)) {
-        var_03 = distance2d(param_01.var_0116, param_02.var_0116);
+        var_03 = distance2d(param_01.origin, param_02.origin);
         if(var_03 < 180) {
-          lib_0366::func_8E34(param_00, param_01, 1, param_02);
+          func_8E34(param_00, param_01, 1, param_02);
         }
       }
 
@@ -1070,70 +1070,70 @@ lib_0366::func_8E9D(param_00, param_01, param_02) {
 }
 
 snd_zmb_set_map_wave_music_master_volume_scalar(param_00) {
-  level.var_071D.map_wave_music_master_volume_scalar = param_00;
+  level.var_71D.map_wave_music_master_volume_scalar = param_00;
 }
 
-lib_0366::func_8E30(param_00, param_01, param_02) {
+func_8E30(param_00, param_01, param_02) {
   var_03 = 1 * param_00;
-  lib_0366::func_8E2F(var_03, param_01, param_02);
+  func_8E2F(var_03, param_01, param_02);
 }
 
-lib_0366::func_8E2F(param_00, param_01, param_02) {
+func_8E2F(param_00, param_01, param_02) {
   if(isDefined(param_02)) {
     self method_85A7("snd_set_mus_master_vol", param_00, param_01);
     return;
   }
 
-  callclientscript(level.var_744A, "snd_set_mus_master_vol", param_00, param_01);
+  callclientscript(level.players, "snd_set_mus_master_vol", param_00, param_01);
 }
 
-lib_0366::func_8E2C() {
+func_8E2C() {
   self endon("disconnect");
   var_00 = 0.5;
   var_01 = -666;
   self method_85A7("snd_set_threat_update_period", var_00);
   for(;;) {
-    if(lib_0366::func_8E19()) {
-      if(isDefined(self.var_071D.var_93A0)) {
-        self.var_071D.var_74FF = self.var_071D.var_93A0;
+    if(func_8E19()) {
+      if(isDefined(self.var_71D.var_93A0)) {
+        self.var_71D.var_74FF = self.var_71D.var_93A0;
       } else {
-        self.var_071D.var_74FF = lib_0366::func_8E08();
+        self.var_71D.var_74FF = func_8E08();
       }
     } else {
-      self.var_071D.var_74FF = 0;
+      self.var_71D.var_74FF = 0;
     }
 
-    if(self.var_071D.var_74FF != var_01) {
-      var_01 = self.var_071D.var_74FF;
-      self method_85A7("snd_update_plr_threat", self.var_071D.var_74FF);
+    if(self.var_71D.var_74FF != var_01) {
+      var_01 = self.var_71D.var_74FF;
+      self method_85A7("snd_update_plr_threat", self.var_71D.var_74FF);
     }
 
     wait(var_00);
   }
 }
 
-lib_0366::func_8E47(param_00) {
-  self.var_071D.var_93A0 = param_00;
+func_8E47(param_00) {
+  self.var_71D.var_93A0 = param_00;
 }
 
-lib_0366::func_8E09() {
-  self.var_071D.var_93A0 = undefined;
+func_8E09() {
+  self.var_71D.var_93A0 = undefined;
 }
 
-lib_0366::func_8E18() {
+func_8E18() {
   var_00 = [];
   var_01 = self;
-  var_02 = lib_0366::func_8E1A();
+  var_02 = func_8E1A();
   var_03 = var_02.size;
   var_04 = 100000000;
   for(var_05 = 0; var_05 < var_03; var_05++) {
     var_06 = var_02[var_05];
-    if(isDefined(var_06.var_0116) && isDefined(var_06.var_0A4B)) {
-      var_07 = lib_0366::func_8E17(var_06);
+    if(isDefined(var_06.origin) && isDefined(var_06.var_A4B)) {
+      var_07 = func_8E17(var_06);
       var_08 = spawnStruct();
       var_08.var_AB4D = var_06;
       var_08.var_502A = var_07;
-      var_08.var_3018 = distance(var_01.var_0116, var_06.var_0116);
+      var_08.var_3018 = distance(var_01.origin, var_06.origin);
       var_08.is_closest = 0;
       var_08.var_1F21 = var_01 common_scripts\utility::func_7237(var_06);
       var_08.is_passive = var_06 snd_zmb_zom_is_passive();
@@ -1150,11 +1150,11 @@ lib_0366::func_8E18() {
   return var_00;
 }
 
-lib_0366::func_8E0B(param_00) {
+func_8E0B(param_00) {
   var_01 = [];
   var_02 = param_00.size;
   if(var_02 > 0) {
-    var_03 = common_scripts\utility::func_7897(param_00, ::lib_0366::func_8E29);
+    var_03 = common_scripts\utility::func_7897(param_00, ::func_8E29);
     var_04 = 0;
     foreach(var_06 in var_03) {
       if(var_04 >= 5) {
@@ -1169,13 +1169,13 @@ lib_0366::func_8E0B(param_00) {
   return var_01;
 }
 
-lib_0366::func_8E29(param_00, param_01) {
+func_8E29(param_00, param_01) {
   return param_00.var_3018 <= param_01.var_3018;
 }
 
-lib_0366::func_8E0F() {
+func_8E0F() {
   var_00 = self;
-  return var_00.var_071D.var_28BF;
+  return var_00.var_71D.var_28BF;
 }
 
 snd_zmb_plr_is_in_thick_fog() {
@@ -1192,35 +1192,35 @@ snd_zmb_zom_is_passive() {
   return var_00;
 }
 
-lib_0366::func_8E2B() {
+func_8E2B() {
   self endon("disconnect");
-  while(self.var_00BC <= 0) {
+  while(self.health <= 0) {
     wait 0.05;
   }
 
-  self method_85A7("snd_update_plr_health", self.var_00BC);
+  self method_85A7("snd_update_plr_health", self.health);
   var_00 = 0.1;
-  var_01 = self.var_00BC;
+  var_01 = self.health;
   for(;;) {
-    if(self.var_00BC != var_01) {
-      var_01 = self.var_00BC;
-      self method_85A7("snd_update_plr_health", self.var_00BC);
+    if(self.health != var_01) {
+      var_01 = self.health;
+      self method_85A7("snd_update_plr_health", self.health);
     }
 
     wait(var_00);
   }
 }
 
-lib_0366::func_8E08() {
+func_8E08() {
   var_00 = self;
   var_01 = 0;
-  var_02 = lib_0366::func_8E1A();
-  var_03 = self.var_0116;
+  var_02 = func_8E1A();
+  var_03 = self.origin;
   var_04 = var_00 snd_zmb_plr_is_in_thick_fog();
   var_05 = 1800;
   var_06 = var_05 * 0.333;
-  var_07 = lib_0366::func_8E13();
-  var_08 = lib_0366::func_8E0E();
+  var_07 = func_8E13();
+  var_08 = func_8E0E();
   var_09 = gettime();
   var_0A = -5536;
   var_0B = 1;
@@ -1231,14 +1231,14 @@ lib_0366::func_8E08() {
 
   foreach(var_0D in var_02) {
     var_0E = 0;
-    var_0F = distance(var_03, var_0D.var_0116);
+    var_0F = distance(var_03, var_0D.origin);
     var_10 = var_0D snd_zmb_zom_is_passive();
-    var_11 = var_0D.var_071D.var_0A47;
+    var_11 = var_0D.var_71D.var_A47;
     var_12 = isDefined(var_0D.var_28D2) && var_0D.var_28D2 == var_00;
     if(var_04 && var_10) {
       continue;
     } else if(var_0F < var_05) {
-      var_13 = var_0D.var_071D.var_99E0[var_08];
+      var_13 = var_0D.var_71D.var_99E0[var_08];
       var_14 = isDefined(var_13);
       var_15 = var_00 common_scripts\utility::func_7237(var_0D);
       if(!var_15 && var_14) {
@@ -1246,46 +1246,46 @@ lib_0366::func_8E08() {
         if(var_16 < var_0A) {
           var_0E = 1;
         } else {
-          var_0D.var_071D.var_99E0[var_08] = undefined;
+          var_0D.var_71D.var_99E0[var_08] = undefined;
         }
-      } else if(var_16) {
-        var_0F = 1;
-        var_0E.var_071D.var_99E0[var_09] = var_0A;
+      } else if(var_15) {
+        var_0E = 1;
+        var_0D.var_71D.var_99E0[var_08] = var_09;
       }
 
-      if(var_0F) {
-        if(var_12 == "zombie_assassin" && var_05) {
-          var_02 = 1;
+      if(var_0E) {
+        if(var_11 == "zombie_assassin" && var_04) {
+          var_01 = 1;
         } else {
-          var_17 = lib_0378::func_8D73(var_10, 0, var_06, var_08);
-          var_17 = var_17 * var_0E.var_071D.var_9979;
-          var_17 = var_17 * level.var_071D.global_threat_scalar;
-          var_17 = var_17 * var_0C;
-          var_02 = var_02 + var_17;
+          var_17 = lib_0378::func_8D73(var_0F, 0, var_05, var_07);
+          var_17 = var_17 * var_0D.var_71D.var_9979;
+          var_17 = var_17 * level.var_71D.global_threat_scalar;
+          var_17 = var_17 * var_0B;
+          var_01 = var_01 + var_17;
         }
       }
     }
   }
 
-  return clamp(var_04, 0, 1);
+  return clamp(var_01, 0, 1);
 }
 
 sndx_update_global_threat_scalar(param_00) {
   if(param_00 > 0) {
-    level.var_071D.global_threat_scalar = 0.666 + param_00 - 1 * 0.177822;
+    level.var_71D.global_threat_scalar = 0.666 + param_00 - 1 * 0.177822;
     lib_0378::func_8D64("in_combat: " + param_00);
     return;
   }
 
-  level.var_071D.global_threat_scalar = 0.666;
+  level.var_71D.global_threat_scalar = 0.666;
 }
 
 sndx_monitor_num_players_in_combat(param_00) {
   for(;;) {
-    level common_scripts\utility::func_A70A("player_spawned", "player_last_stand", "player_bleedout", "player_revived", "player_disconnected");
+    level common_scripts\utility::waittill_any("player_spawned", "player_last_stand", "player_bleedout", "player_revived", "player_disconnected");
     var_01 = 0;
     var_02 = 0;
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       if(maps\mp\_utility::func_57A0(var_04)) {
         if(lib_0547::func_577E(var_04)) {
           var_02 = 1;
@@ -1300,7 +1300,7 @@ sndx_monitor_num_players_in_combat(param_00) {
       var_01 = 1;
     }
 
-    level.var_071D.num_players_in_combat = var_01;
+    level.var_71D.num_players_in_combat = var_01;
     if(isDefined(param_00)) {
       [[param_00]](var_01);
     }
@@ -1308,45 +1308,45 @@ sndx_monitor_num_players_in_combat(param_00) {
 }
 
 snd_zmb_get_num_players_in_combat() {
-  return level.var_071D.num_players_in_combat;
+  return level.var_71D.num_players_in_combat;
 }
 
-lib_0366::func_8E14(param_00) {
+func_8E14(param_00) {
   var_01 = 0;
   var_02 = self;
   if(function_02A2(param_00)) {
-    var_02 = lib_0366::func_8E0A(param_00);
-    lib_0366::func_8E07(isDefined(var_02));
+    var_02 = func_8E0A(param_00);
+    func_8E07(isDefined(var_02));
   }
 
   if(isDefined(var_02)) {
-    var_01 = var_02.var_071D.var_74FF;
+    var_01 = var_02.var_71D.var_74FF;
   }
 
   return var_01;
 }
 
-lib_0366::func_8E13() {
-  return level.var_071D.var_725F;
+func_8E13() {
+  return level.var_71D.var_725F;
 }
 
-lib_0366::func_8E17(param_00) {
-  return param_00.var_071D.var_502A;
+func_8E17(param_00) {
+  return param_00.var_71D.var_502A;
 }
 
-lib_0366::func_8E16() {
-  return level.var_071D.var_AB8E;
+func_8E16() {
+  return level.var_71D.var_AB8E;
 }
 
-lib_0366::func_8E15() {
-  return level.var_071D.var_7500;
+func_8E15() {
+  return level.var_71D.var_7500;
 }
 
-lib_0366::func_8E1A() {
+func_8E1A() {
   var_00 = [];
-  var_01 = maps\mp\agents\_agent_utility::func_43FD("all");
+  var_01 = maps / mp / agents / _agent_utility::func_43FD("all");
   foreach(var_03 in var_01) {
-    if(isDefined(var_03.var_000A) && var_03.var_000A == level.var_746E) {
+    if(isDefined(var_03.agentteam) && var_03.agentteam == level.var_746E) {
       continue;
     }
 
@@ -1357,23 +1357,23 @@ lib_0366::func_8E1A() {
 }
 
 snd_zmb_new_guid() {
-  if(!isDefined(level.var_071D.zmb_guid)) {
-    level.var_071D.zmb_guid = 0;
+  if(!isDefined(level.var_71D.zmb_guid)) {
+    level.var_71D.zmb_guid = 0;
   }
 
-  if(level.var_071D.zmb_guid > 500) {
-    level.var_071D.zmb_guid = 0;
+  if(level.var_71D.zmb_guid > 500) {
+    level.var_71D.zmb_guid = 0;
   }
 
-  level.var_071D.zmb_guid++;
-  return level.var_071D.zmb_guid;
+  level.var_71D.zmb_guid++;
+  return level.var_71D.zmb_guid;
 }
 
-lib_0366::func_8E2E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
-  var_09 = self.var_071D.var_0A47;
-  var_0A = self.var_0116;
-  var_0B = lib_0366::func_8E17(self);
-  foreach(var_0D in level.var_744A) {
+func_8E2E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+  var_09 = self.var_71D.var_A47;
+  var_0A = self.origin;
+  var_0B = func_8E17(self);
+  foreach(var_0D in level.players) {
     if(isDefined(var_0D.zombie_sighting_times[var_0B])) {
       var_0D.zombie_sighting_times[var_0B] = undefined;
     }
@@ -1388,19 +1388,19 @@ lib_0366::func_8E2E(param_00, param_01, param_02, param_03, param_04, param_05, 
   }
 
   if(!(var_09 == "zombie_generic" || var_09 == "zombie_generic2") && lib_0378::func_8D1B(0.5)) {
-    lib_0366::func_8E4B("death", undefined, var_0A, var_09);
+    func_8E4B("death", undefined, var_0A, var_09);
   }
 }
 
-lib_0366::func_8E48(param_00) {
-  level.var_071D.var_AC07 = param_00;
+func_8E48(param_00) {
+  level.var_71D.var_AC07 = param_00;
 }
 
-lib_0366::func_8E19() {
-  return level.var_071D.var_AC07;
+func_8E19() {
+  return level.var_71D.var_AC07;
 }
 
-lib_0366::func_8E40() {
+func_8E40() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
@@ -1413,12 +1413,12 @@ lib_0366::func_8E40() {
   var_03 = randomintrange(5000, 10000);
   var_04 = 360;
   var_05 = 180;
-  var_00.var_071D.stinger_filter_prev_stinger_time = 0;
+  var_00.var_71D.stinger_filter_prev_stinger_time = 0;
   wait(randomfloat(var_01));
   for(;;) {
     wait(var_01);
     var_06 = var_00 snd_zmb_plr_is_in_thick_fog();
-    var_07 = lib_0366::func_8E18();
+    var_07 = func_8E18();
     var_08 = undefined;
     var_09 = gettime();
     foreach(var_0B in var_07) {
@@ -1453,7 +1453,7 @@ lib_0366::func_8E40() {
 
             var_19 = sndx_zmb_choose_stinger_or_player_vox(var_19, var_00, var_09);
             if(!var_06) {
-              lib_0366::func_8E34(var_19, var_1B, var_1A, var_0C);
+              func_8E34(var_19, var_1B, var_1A, var_0C);
             }
           }
 
@@ -1464,7 +1464,7 @@ lib_0366::func_8E40() {
         var_0B.var_1F21 = 1;
         var_00.zombie_sighting_times[var_0D] = var_09;
         var_19 = sndx_zmb_choose_stinger_or_player_vox("mus_stinger_lrg", var_00, var_09);
-        thread lib_0366::func_8E35(var_19, var_00, var_0C);
+        thread func_8E35(var_19, var_00, var_0C);
       } else if(var_12 && !var_13 && var_09 - var_11 > -5536) {
         var_00.zombie_sighting_times[var_0D] = undefined;
       } else if(var_13) {
@@ -1476,18 +1476,18 @@ lib_0366::func_8E40() {
           var_00.prev_charge_times[var_0D] = 0;
         }
 
-        if(var_15 && var_0E < 720 && var_0C lib_0366::func_8E28() && var_09 - var_00.prev_charge_times[var_0D] > 3000) {
+        if(var_15 && var_0E < 720 && var_0C func_8E28() && var_09 - var_00.prev_charge_times[var_0D] > 3000) {
           var_16 = "charge";
           var_00.prev_charge_times[var_0D] = var_09;
         } else {
-          if(lib_0547::func_5565(var_0C.var_0A4B, "zombie_fireman")) {
+          if(lib_0547::func_5565(var_0C.var_A4B, "zombie_fireman")) {
             if(lib_0378::func_8D1B(0.75)) {
               continue;
             }
           }
 
           if(!isDefined(var_08)) {
-            var_08 = lib_0366::func_8E0B(var_07);
+            var_08 = func_8E0B(var_07);
           }
 
           if(isDefined(var_08[var_0D])) {
@@ -1495,7 +1495,7 @@ lib_0366::func_8E40() {
               var_00.amb_zvox_prev_try_times[var_0D] = 0;
             }
 
-            var_1C = lib_0366::func_8E11(var_0E);
+            var_1C = func_8E11(var_0E);
             var_1D = var_09 - var_00.amb_zvox_prev_try_times[var_0D];
             if(var_12 && var_1D > var_1C) {
               var_00.amb_zvox_prev_try_times[var_0D] = var_09;
@@ -1507,9 +1507,9 @@ lib_0366::func_8E40() {
               } else {
                 var_1E = randomfloat(1);
                 if(var_1E < 0.4 && !var_14) {
-                  var_1F = lib_0366::func_8E16();
+                  var_1F = func_8E16();
                   var_20 = lib_0378::func_8D73(var_0E, 0, 1800, var_1F);
-                  var_16 = lib_0366::func_8E4A(var_20);
+                  var_16 = func_8E4A(var_20);
                 } else if(var_1E < 0.9) {
                   var_16 = "snarl";
                 } else {
@@ -1521,45 +1521,45 @@ lib_0366::func_8E40() {
         }
       }
 
-      if(isDefined(var_18)) {
-        var_02 lib_0366::func_8E49(var_0E, var_18, var_1C);
+      if(isDefined(var_16)) {
+        var_00 func_8E49(var_0C, var_16, var_18);
       }
     }
   }
 }
 
 sndx_zmb_choose_stinger_or_player_vox(param_00, param_01, param_02) {
-  var_03 = param_01 lib_0366::func_8E14();
-  if(var_03 > 0.95 || param_02 - param_01.var_071D.stinger_filter_prev_stinger_time < 12) {
+  var_03 = param_01 func_8E14();
+  if(var_03 > 0.95 || param_02 - param_01.var_71D.stinger_filter_prev_stinger_time < 12) {
     param_00 = "player_vox_only";
   } else {
-    param_01.var_071D.stinger_filter_prev_stinger_time = param_02;
+    param_01.var_71D.stinger_filter_prev_stinger_time = param_02;
   }
 
   return param_00;
 }
 
-lib_0366::func_8E11(param_00) {
-  var_01 = lib_0378::func_8D73(param_00, 0, 1800, level.var_071D.var_0CB8);
+func_8E11(param_00) {
+  var_01 = lib_0378::func_8D73(param_00, 0, 1800, level.var_71D.var_CB8);
   var_02 = randomfloatrange(var_01 * -0.5, var_01 * 0.5);
   return var_01 + var_02;
 }
 
-lib_0366::func_8E36(param_00, param_01) {
+func_8E36(param_00, param_01) {
   if(isDefined(param_00)) {
-    lib_0366::func_8E9E(param_01);
+    func_8E9E(param_01);
     return;
   }
 
-  thread lib_0366::func_8E9E(param_01);
+  thread func_8E9E(param_01);
 }
 
-lib_0366::func_8E9E(param_00) {
+func_8E9E(param_00) {
   param_00 = lib_0378::func_8D49(0, param_00);
-  var_01 = lib_0366::func_8E1A();
+  var_01 = func_8E1A();
   foreach(var_03 in var_01) {
-    if(isDefined(var_03) && isDefined(var_03.var_071D)) {
-      var_03.var_071D.var_9977 = 1;
+    if(isDefined(var_03) && isDefined(var_03.var_71D)) {
+      var_03.var_71D.var_9977 = 1;
       var_04 = "sneakattack_busted";
       if(!param_00) {
         param_00 = 1;
@@ -1568,24 +1568,24 @@ lib_0366::func_8E9E(param_00) {
         var_04 = "growl_lev4";
       }
 
-      var_03 lib_0366::func_8E4B(var_04);
+      var_03 func_8E4B(var_04);
     }
 
     wait(0.3);
   }
 }
 
-lib_0366::func_8E28() {
-  return isDefined(self.var_071D.var_5542) && self.var_071D.var_5542;
+func_8E28() {
+  return isDefined(self.var_71D.var_5542) && self.var_71D.var_5542;
 }
 
-lib_0366::func_8E2D() {
+func_8E2D() {
   self endon("death");
   var_00 = self;
   var_01 = 0.25;
   var_02 = 0;
   var_03 = undefined;
-  var_00.var_071D.var_5542 = 0;
+  var_00.var_71D.var_5542 = 0;
   for(;;) {
     wait(var_01);
     var_04 = length2d(var_00 getvelocity()) * 0.05681818;
@@ -1594,23 +1594,23 @@ lib_0366::func_8E2D() {
       if(!isDefined(var_03)) {
         var_03 = var_05;
       } else if(var_05 - var_03 > 750) {
-        var_00.var_071D.var_5542 = 1;
+        var_00.var_71D.var_5542 = 1;
       }
 
       continue;
     }
 
-    var_01.var_071D.var_5542 = 0;
-    var_04 = undefined;
+    var_00.var_71D.var_5542 = 0;
+    var_03 = undefined;
   }
 }
 
-lib_0366::func_8E12(param_00, param_01, param_02) {
+func_8E12(param_00, param_01, param_02) {
   var_03 = 1000 + 4000 * lib_0378::func_8D73(param_01, 0, 1800, param_02) + randomint(1000);
   return param_00 + var_03;
 }
 
-lib_0366::func_8E4A(param_00) {
+func_8E4A(param_00) {
   var_01 = 4;
   var_02 = 0.25;
   var_03 = 1 - var_02;
@@ -1622,15 +1622,15 @@ lib_0366::func_8E4A(param_00) {
   return "growl_lev" + var_01;
 }
 
-lib_0366::func_8E49(param_00, param_01, param_02, param_03, param_04) {
+func_8E49(param_00, param_01, param_02, param_03, param_04) {
   var_05 = self;
   var_06 = lib_0378::func_8D49(0, param_02);
-  var_07 = lib_0378::func_8D49(self.var_0A4B, param_04);
-  if(isDefined(param_00.var_071D) && isDefined(param_00.var_071D.var_0A47)) {
-    var_07 = param_00.var_071D.var_0A47;
+  var_07 = lib_0378::func_8D49(self.var_A4B, param_04);
+  if(isDefined(param_00.var_71D) && isDefined(param_00.var_71D.var_A47)) {
+    var_07 = param_00.var_71D.var_A47;
   }
 
-  param_01 = lib_0366::func_8E4C(param_01);
+  param_01 = func_8E4C(param_01);
   if(isDefined(param_00) && common_scripts\utility::func_562E(param_00.var_6701)) {
     return;
   }
@@ -1644,13 +1644,13 @@ lib_0366::func_8E49(param_00, param_01, param_02, param_03, param_04) {
   }
 }
 
-lib_0366::func_8E4B(param_00, param_01, param_02, param_03) {
+func_8E4B(param_00, param_01, param_02, param_03) {
   if(common_scripts\utility::func_562E(self.var_6701)) {
     return;
   }
 
   var_04 = 0;
-  foreach(var_06 in level.var_071D.zombie_vox_attack_hit_req_names) {
+  foreach(var_06 in level.var_71D.zombie_vox_attack_hit_req_names) {
     if(param_00 == var_06) {
       var_04 = 1;
       break;
@@ -1659,45 +1659,45 @@ lib_0366::func_8E4B(param_00, param_01, param_02, param_03) {
 
   if(var_04) {
     var_08 = gettime();
-    if(var_08 - level.var_071D.zombie_vox_attack_hit_prev_time < level.var_071D.zombie_vox_attack_hit_wait_time) {
+    if(var_08 - level.var_71D.zombie_vox_attack_hit_prev_time < level.var_71D.zombie_vox_attack_hit_wait_time) {
       return;
     } else {
-      level.var_071D.zombie_vox_attack_hit_prev_time = var_08;
-      level.var_071D.zombie_vox_attack_hit_wait_time = randomintrange(level.var_071D.zombie_vox_attack_hit_wait_time_min, level.var_071D.zombie_vox_attack_hit_wait_time_max);
+      level.var_71D.zombie_vox_attack_hit_prev_time = var_08;
+      level.var_71D.zombie_vox_attack_hit_wait_time = randomintrange(level.var_71D.zombie_vox_attack_hit_wait_time_min, level.var_71D.zombie_vox_attack_hit_wait_time_max);
     }
   }
 
   var_09 = self;
-  var_0A = lib_0378::func_8D49(self.var_0A4B, var_04);
-  if(isDefined(var_09.var_071D) && isDefined(var_09.var_071D.var_0A47)) {
-    var_0A = var_09.var_071D.var_0A47;
+  var_0A = lib_0378::func_8D49(self.var_A4B, param_03);
+  if(isDefined(var_09.var_71D) && isDefined(var_09.var_71D.var_A47)) {
+    var_0A = var_09.var_71D.var_A47;
   }
 
-  param_01 = lib_0366::func_8E4C(param_01);
-  if(isDefined(param_01) && param_01 == "death") {
-    var_0B = distance(level.var_744A[0].var_0116, param_03);
+  param_00 = func_8E4C(param_00);
+  if(isDefined(param_00) && param_00 == "death") {
+    var_0B = distance(level.players[0].origin, param_02);
     var_0C = var_0B / 36;
   }
 
-  if(isDefined(param_01)) {
-    if(isDefined(param_02)) {
-      foreach(var_0E in level.var_744A) {
-        var_0F = param_01;
-        if(var_0E == param_02) {
+  if(isDefined(param_00)) {
+    if(isDefined(param_01)) {
+      foreach(var_0E in level.players) {
+        var_0F = param_00;
+        if(var_0E == param_01) {
           var_0F = var_0F + "_2d";
         }
 
-        var_0E method_85A7("snd_zmb_handle_vox_request", var_09, var_0A, var_0F, param_03);
+        var_0E method_85A7("snd_zmb_handle_vox_request", var_09, var_0A, var_0F, param_02);
       }
 
       return;
     }
 
-    callclientscript(level.var_744A, "snd_zmb_handle_vox_request", var_09, var_0A, param_01, param_03);
+    callclientscript(level.players, "snd_zmb_handle_vox_request", var_09, var_0A, param_00, param_02);
   }
 }
 
-lib_0366::func_8E4C(param_00) {
+func_8E4C(param_00) {
   switch (param_00) {
     case "foo":
       break;
@@ -1709,17 +1709,17 @@ lib_0366::func_8E4C(param_00) {
   return param_00;
 }
 
-lib_0366::func_8E46(param_00) {
-  self.var_071D.var_6599 = param_00;
+func_8E46(param_00) {
+  self.var_71D.var_6599 = param_00;
 }
 
-lib_0366::func_8E10() {
-  return self.var_071D.var_6599;
+func_8E10() {
+  return self.var_71D.var_6599;
 }
 
-lib_0366::func_70C3(param_00) {}
+func_70C3(param_00) {}
 
-lib_0366::func_93BD(param_00) {
+func_93BD(param_00) {
   if(isDefined(param_00.var_8E52)) {
     var_01 = 3;
     var_02 = param_00.var_8E52;
@@ -1728,34 +1728,34 @@ lib_0366::func_93BD(param_00) {
   }
 }
 
-lib_0366::func_70C4(param_00) {
+func_70C4(param_00) {
   var_01 = 0;
   var_02 = 1;
   var_03 = undefined;
-  lib_0380::func_2889("tf_bird_retreat", var_03, param_00.var_78CB.var_0116, var_01, var_02);
+  lib_0380::func_2889("tf_bird_retreat", var_03, param_00.var_78CB.origin, var_01, var_02);
 }
 
-lib_0366::func_35AE() {
+func_35AE() {
   lib_0380::func_2888("perk_electric_cherry", self);
 }
 
-lib_0366::func_A1D6() {
+func_A1D6() {
   var_00 = lib_0380::func_288B("zmb_armor_machine_use", undefined, self);
   lib_0378::func_8D14(var_00);
 }
 
-lib_0366::func_94BC() {
+func_94BC() {
   level.var_11CB.var_94BC = lib_0380::func_288B("zmb_ablty_stun_burst_use", undefined, self);
   lib_0378::func_8D14(level.var_11CB.var_94BC);
 }
 
-lib_0366::func_94B8() {
+func_94B8() {
   var_00 = self;
   level.var_11CB.var_94B6 = lib_0380::func_288E("zmb_wonder_weapon_electrocute_lp", undefined, var_00, 0.25, 1, 0.25, "aud_stop_stun_lp");
   lib_0378::func_8D14(level.var_11CB.var_94B6);
 }
 
-lib_0366::func_94B7() {
+func_94B7() {
   var_00 = self;
   var_00 notify("aud_stop_stun_lp");
   level.var_11CB.var_94B6 = undefined;
@@ -1763,17 +1763,17 @@ lib_0366::func_94B7() {
   lib_0378::func_8D14(level.var_11CB.var_94B5);
 }
 
-lib_0366::func_5F5B() {
+func_5F5B() {
   level.var_11CB.var_5F5B = lib_0380::func_288B("zmb_ablty_mad_minute_use", undefined, self);
   lib_0378::func_8D14(level.var_11CB.var_5F5B);
 }
 
-lib_0366::func_983A() {
+func_983A() {
   level.var_11CB.var_983A = lib_0380::func_288B("zmb_ablty_taunt_use", undefined, self);
   lib_0378::func_8D14(level.var_11CB.var_983A);
 }
 
-lib_0366::func_1EBA() {
+func_1EBA() {
   level.var_11CB.var_1EBA = lib_0380::func_288B("zmb_ablty_camo_use", undefined, self);
   lib_0378::func_8D14(level.var_11CB.var_1EBA);
 }
@@ -1786,13 +1786,13 @@ assassin_use_camoflage() {
 strt_asn_camo_blur(param_00) {
   var_01 = self;
   var_01 method_8626("zmb_blurry_vision");
-  var_01.var_071D.blurry_vision_snd = lib_0380::func_6840("zmb_blurry_vision", var_01, 0.2);
+  var_01.var_71D.blurry_vision_snd = lib_0380::func_6840("zmb_blurry_vision", var_01, 0.2);
 }
 
 stp_asn_camo_blur() {
   var_00 = self;
   var_00 method_8627("zmb_blurry_vision");
-  lib_0380::func_6850(var_00.var_071D.blurry_vision_snd, 2.5);
+  lib_0380::func_6850(var_00.var_71D.blurry_vision_snd, 2.5);
 }
 
 assassin_use_shell_shock() {
@@ -1805,7 +1805,7 @@ assassin_use_taunt() {
   lib_0380::func_288B("zmb_asn_ablty_taunt_use", undefined, self);
 }
 
-lib_0366::func_9D33() {
+func_9D33() {
   var_00 = self;
   if(!isDefined(level.var_11CB.var_9D36)) {
     level.var_11CB.var_9D36 = lib_0380::func_288B("zmb_treasure_timer", undefined, var_00);
@@ -1817,27 +1817,27 @@ lib_0366::func_9D33() {
   level.var_11CB.var_9D36 = undefined;
 }
 
-lib_0366::func_9D22() {
+func_9D22() {
   var_00 = self;
   level.var_11CB.var_9A0D = lib_0380::func_288B("zmb_treasure_fuse", undefined, var_00);
   lib_0378::func_8D14(level.var_11CB.var_9A0D);
 }
 
-lib_0366::func_9D21() {
+func_9D21() {
   var_00 = self;
   lib_0380::func_2893(level.var_11CB.var_9D36);
   level.var_11CB.var_9D36 = undefined;
 }
 
-lib_0366::func_AB0A(param_00) {
+func_AB0A(param_00) {
   lib_0380::func_2889("zmb_points_pickup", undefined, param_00);
 }
 
-lib_0366::func_AB0B(param_00) {
+func_AB0B(param_00) {
   lib_0380::func_2889("zmb_points_share", undefined, param_00);
 }
 
-lib_0366::func_AB0C() {
+func_AB0C() {
   lib_0380::func_2888("zmb_ravens_key_pickup", self);
 }
 
@@ -1847,7 +1847,7 @@ zmb_ballistic_aura() {
   }
 
   var_00 = self;
-  var_01 = self.var_0116;
+  var_01 = self.origin;
   lib_0380::func_288B("zmb_ballistic_aura_start", undefined, var_00);
   var_02 = lib_0380::func_6844("zmb_ballistic_aura_lp", undefined, var_00, 4);
   level waittill("aud_stop_ballistic_aura_snd");
@@ -1857,24 +1857,24 @@ zmb_ballistic_aura() {
   }
 }
 
-lib_0366::func_3D25(param_00) {
-  lib_0366::func_3D03("zmb_flamethrower_start", undefined, self, 0, 1, param_00);
+func_3D25(param_00) {
+  func_3D03("zmb_flamethrower_start", undefined, self, 0, 1, param_00);
   var_01 = lib_0380::func_684A("zmb_flamethrower_lp", undefined, self, param_00, 0, 1);
-  self.var_071D.var_3D19 = var_01;
-  thread lib_0366::func_3D1C(param_00, var_01);
+  self.var_71D.var_3D19 = var_01;
+  thread func_3D1C(param_00, var_01);
 }
 
-lib_0366::func_3D1C(param_00, param_01) {
+func_3D1C(param_00, param_01) {
   self endon("stop_flame_sfx");
   self waittill("death");
-  lib_0366::func_3D26(param_00, param_01);
+  func_3D26(param_00, param_01);
 }
 
-lib_0366::func_3D26(param_00, param_01) {
-  if(isDefined(self.var_071D) && isDefined(self.var_071D.var_3D19)) {
-    lib_0380::func_6850(self.var_071D.var_3D19, 1);
-    self.var_071D.var_3D19 = undefined;
-    lib_0366::func_3D03("zmb_flamethrower_stop", undefined, self, 0, 1, param_00);
+func_3D26(param_00, param_01) {
+  if(isDefined(self.var_71D) && isDefined(self.var_71D.var_3D19)) {
+    lib_0380::func_6850(self.var_71D.var_3D19, 1);
+    self.var_71D.var_3D19 = undefined;
+    func_3D03("zmb_flamethrower_stop", undefined, self, 0, 1, param_00);
   } else if(isDefined(param_01)) {
     lib_0380::func_6850(param_01, 1);
   }
@@ -1882,72 +1882,72 @@ lib_0366::func_3D26(param_00, param_01) {
   self notify("stop_flame_sfx");
 }
 
-lib_0366::func_3D03(param_00, param_01, param_02, param_03, param_04, param_05) {
+func_3D03(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = undefined;
   if(isDefined(param_02)) {
     var_06 = playclientsound(param_00, param_02, undefined, undefined, param_05, "hard", param_03, undefined, param_04, undefined, param_01, undefined);
   }
 
-  lib_0380::func_0787(isDefined(var_06), "Call to csnd failed for alias: " + param_00);
+  lib_0380::func_787(isDefined(var_06), "Call to csnd failed for alias: " + param_00);
   return var_06;
 }
 
-lib_0366::func_9FE4() {
+func_9FE4() {
   lib_0380::func_6846("zmb_uber_battery_lp", undefined, self, 0.5, 1, 0.5);
 }
 
-lib_0366::func_98F1(param_00) {
+func_98F1(param_00) {
   lib_0380::func_2889("zmb_tesla_hc_energy_lamp_destruct", undefined, param_00);
 }
 
-lib_0366::func_98F3(param_00) {
-  lib_0366::func_98F2();
-  level.var_071D.var_98F4 = lib_0380::func_6842("zmb_tesla_hc_energy_lamp_lp", undefined, param_00);
+func_98F3(param_00) {
+  func_98F2();
+  level.var_71D.var_98F4 = lib_0380::func_6842("zmb_tesla_hc_energy_lamp_lp", undefined, param_00);
 }
 
-lib_0366::func_98F2() {
-  if(isDefined(level.var_071D.var_98F4)) {
-    lib_0380::func_6850(level.var_071D.var_98F4, 0.1);
+func_98F2() {
+  if(isDefined(level.var_71D.var_98F4)) {
+    lib_0380::func_6850(level.var_71D.var_98F4, 0.1);
   }
 }
 
-lib_0366::func_AA91() {
+func_AA91() {
   var_00 = self;
-  lib_0380::func_6842("mp_wpn_betty_triggered", undefined, var_00.var_0116);
+  lib_0380::func_6842("mp_wpn_betty_triggered", undefined, var_00.origin);
 }
 
-lib_0366::func_AA90() {}
+func_AA90() {}
 
-lib_0366::func_AA8F() {
+func_AA8F() {
   var_00 = self;
-  lib_0380::func_6842("mp_wpn_betty_exp", undefined, var_00.var_0116);
+  lib_0380::func_6842("mp_wpn_betty_exp", undefined, var_00.origin);
 }
 
-lib_0366::func_5872() {
+func_5872() {
   var_00 = self;
-  var_01 = lib_0380::func_2889("zmb_jack_box_land", undefined, var_00.var_0116);
+  var_01 = lib_0380::func_2889("zmb_jack_box_land", undefined, var_00.origin);
   lib_0378::func_8D14(var_01);
-  var_02 = lib_0380::func_2889("zmb_jack_box_idle", undefined, var_00.var_0116);
+  var_02 = lib_0380::func_2889("zmb_jack_box_idle", undefined, var_00.origin);
   lib_0378::func_8D14(var_02);
 }
 
-lib_0366::func_5873() {
+func_5873() {
   var_00 = self;
-  var_01 = lib_0380::func_2889("zmb_jack_box_pop_up", undefined, var_00.var_0116);
+  var_01 = lib_0380::func_2889("zmb_jack_box_pop_up", undefined, var_00.origin);
   lib_0378::func_8D14(var_01);
   wait(0.25);
-  var_02 = lib_0380::func_2889("zmb_jack_box_fuse", undefined, var_00.var_0116);
+  var_02 = lib_0380::func_2889("zmb_jack_box_fuse", undefined, var_00.origin);
   lib_0378::func_8D14(var_02);
 }
 
-lib_0366::func_5871() {
+func_5871() {
   var_00 = self;
-  var_01 = lib_0380::func_2889("wpn_grenade_exp", undefined, var_00.var_0116);
+  var_01 = lib_0380::func_2889("wpn_grenade_exp", undefined, var_00.origin);
   lib_0378::func_8D14(var_01);
 }
 
-lib_0366::func_1CB9() {
-  callclientscript(level.var_744A, "snd_brute_defeated");
+func_1CB9() {
+  callclientscript(level.players, "snd_brute_defeated");
 }
 
 ripsaw_spine_cut() {
@@ -1994,8 +1994,8 @@ zmb_bat_melee_hit_wooden(param_00) {
     wait(param_00.delaysec * 0.5);
   }
 
-  foreach(var_03 in level.var_744A) {
-    if(var_03 == param_00.var_721C) {
+  foreach(var_03 in level.players) {
+    if(var_03 == param_00.player) {
       lib_0380::func_2889("zmb_bat_melee_hit_wooden", undefined, param_00.var_ABE6);
       continue;
     }
@@ -2009,8 +2009,8 @@ zmb_bat_melee_hit_metal(param_00) {
     wait(param_00.delaysec * 0.5);
   }
 
-  foreach(var_02 in level.var_744A) {
-    if(var_02 == param_00.var_721C) {
+  foreach(var_02 in level.players) {
+    if(var_02 == param_00.player) {
       lib_0380::func_2889("zmb_bat_melee_hit_metal", undefined, param_00.var_ABE6);
       continue;
     }
@@ -2021,19 +2021,19 @@ zmb_bat_melee_hit_metal(param_00) {
 
 zmb_hc_bat_aoe_fx(param_00, param_01) {
   var_02 = self;
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     if(var_04 == var_02) {
-      lib_0380::func_2889("zmb_hc_bat_aoe_fx", undefined, param_00.var_0116);
+      lib_0380::func_2889("zmb_hc_bat_aoe_fx", undefined, param_00.origin);
       continue;
     }
 
-    lib_0380::func_2889("zmb_hc_bat_aoe_fx", undefined, param_00.var_0116, undefined, 0.5);
+    lib_0380::func_2889("zmb_hc_bat_aoe_fx", undefined, param_00.origin, undefined, 0.5);
   }
 }
 
 zmb_sword_melee_hit(param_00) {
-  foreach(var_02 in level.var_744A) {
-    if(var_02 == param_00.var_721C) {
+  foreach(var_02 in level.players) {
+    if(var_02 == param_00.player) {
       lib_0380::func_2889("zmb_barbarosa_swrd_hit", undefined, param_00.var_ABE6);
       continue;
     }
@@ -2044,7 +2044,7 @@ zmb_sword_melee_hit(param_00) {
 
 zmb_sword_melee_hit_delayed(param_00) {
   var_01 = self;
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(var_03 == var_01) {
       lib_0380::func_2889("zmb_barbarosa_swrd_hit", undefined, param_00);
       continue;
@@ -2056,7 +2056,7 @@ zmb_sword_melee_hit_delayed(param_00) {
 
 zmb_sword_aoe(param_00) {
   var_01 = self;
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(var_03 == var_01) {
       lib_0380::func_2889("zmb_barbarosa_swrd_aoe", undefined, param_00);
       continue;
@@ -2067,8 +2067,8 @@ zmb_sword_aoe(param_00) {
 }
 
 zmb_knife_melee_hit(param_00) {
-  foreach(var_02 in level.var_744A) {
-    if(var_02 == param_00.var_721C) {
+  foreach(var_02 in level.players) {
+    if(var_02 == param_00.player) {
       lib_0380::func_2889("zmb_trenchknife_hit", undefined, param_00.var_ABE6);
       continue;
     }
@@ -2085,8 +2085,8 @@ zmb_knife_finisher_effects() {
 }
 
 zmb_axe_melee_hit(param_00) {
-  foreach(var_02 in level.var_744A) {
-    if(var_02 == param_00.var_721C) {
+  foreach(var_02 in level.players) {
+    if(var_02 == param_00.player) {
       lib_0380::func_2889("zmb_axe_hit", undefined, param_00.var_ABE6);
       continue;
     }
@@ -2096,8 +2096,8 @@ zmb_axe_melee_hit(param_00) {
 }
 
 zmb_axe_melee_alt_hit(param_00) {
-  foreach(var_02 in level.var_744A) {
-    if(var_02 == param_00.var_721C) {
+  foreach(var_02 in level.players) {
+    if(var_02 == param_00.player) {
       lib_0380::func_2889("zmb_axe_hit_alt_hit", undefined, param_00.var_ABE6);
       continue;
     }
@@ -2107,8 +2107,8 @@ zmb_axe_melee_alt_hit(param_00) {
 }
 
 zmb_axe_hc_melee_hit(param_00) {
-  foreach(var_02 in level.var_744A) {
-    if(var_02 == param_00.var_721C) {
+  foreach(var_02 in level.players) {
+    if(var_02 == param_00.player) {
       lib_0380::func_2889("zmb_axe_hc_hit", undefined, param_00.var_ABE6);
       continue;
     }
@@ -2118,8 +2118,8 @@ zmb_axe_hc_melee_hit(param_00) {
 }
 
 zmb_axe_hc_melee_alt_hit(param_00) {
-  foreach(var_02 in level.var_744A) {
-    if(var_02 == param_00.var_721C) {
+  foreach(var_02 in level.players) {
+    if(var_02 == param_00.player) {
       lib_0380::func_2889("zmb_axe_hit_alt_hit", undefined, param_00.var_ABE6);
       lib_0380::func_2889("zmb_axe_hit_alt_hit_hc", undefined, param_00.var_ABE6);
       continue;
@@ -2130,7 +2130,7 @@ zmb_axe_hc_melee_alt_hit(param_00) {
   }
 }
 
-lib_0366::func_AA59() {
+func_AA59() {
   var_00 = "ww_electrocute_end" + self getentitynumber();
   level.var_11CB.var_AAC4 = level lib_0380::func_6847("zmb_wonder_weapon_electrocute_lp", undefined, self, 0.25, undefined, 0.25, level, var_00);
 }
@@ -2140,36 +2140,36 @@ wonder_weapon_electrocute_end() {
   level notify(var_00);
 }
 
-lib_0366::func_6401() {
+func_6401() {
   var_00 = lib_0380::func_6846("zmb_wonder_weapon_proj_moon_lp", undefined, self, 0.25);
 }
 
-lib_0366::func_6400() {
-  var_00 = lib_0380::func_2889("zmb_wonder_weapon_proj_moon_end", undefined, self.var_0116);
+func_6400() {
+  var_00 = lib_0380::func_2889("zmb_wonder_weapon_proj_moon_end", undefined, self.origin);
 }
 
-lib_0366::func_9433() {
+func_9433() {
   var_00 = lib_0380::func_6846("zmb_wonder_weapon_storm_proj_lp", undefined, self, 0.25);
 }
 
-lib_0366::func_9432() {
-  var_00 = lib_0380::func_2889("zmb_wonder_weapon_storm_proj_end", undefined, self.var_0116);
+func_9432() {
+  var_00 = lib_0380::func_2889("zmb_wonder_weapon_storm_proj_end", undefined, self.origin);
 }
 
-lib_0366::func_AAC9() {
+func_AAC9() {
   if(!isDefined(level.var_11CB.var_AAC9)) {
-    level.var_11CB.var_AAC9 = lib_0380::func_2889("zmb_wonder_weapon_proj_zap", undefined, self.var_0116);
+    level.var_11CB.var_AAC9 = lib_0380::func_2889("zmb_wonder_weapon_proj_zap", undefined, self.origin);
     wait(1);
     level.var_11CB.var_AAC9 = undefined;
   }
 }
 
-lib_0366::func_AAC2() {
-  level.var_11CB.var_17F1 = lib_0380::func_2889("zmb_ww_projectile_blood_explode", undefined, self.var_0116);
+func_AAC2() {
+  level.var_11CB.var_17F1 = lib_0380::func_2889("zmb_ww_projectile_blood_explode", undefined, self.origin);
 }
 
-lib_0366::func_AAC3() {
-  level.var_11CB.var_AAC3 = lib_0380::func_2889("zmb_ww_projectile_raven_explode", undefined, self.var_0116);
+func_AAC3() {
+  level.var_11CB.var_AAC3 = lib_0380::func_2889("zmb_ww_projectile_raven_explode", undefined, self.origin);
 }
 
 zmb_siz_trans_fx_burst(param_00) {
@@ -2240,6 +2240,6 @@ pap_wpn_sdk_shottysnipe_fire(param_00) {
   lib_0380::func_2889("zmb_wpn_sdk_pap_add", undefined, param_00);
 }
 
-lib_0366::func_8E41(param_00) {}
+func_8E41(param_00) {}
 
-lib_0366::func_8E07(param_00, param_01) {}
+func_8E07(param_00, param_01) {}

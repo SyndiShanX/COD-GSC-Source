@@ -3,19 +3,19 @@
  * Script: 1319.gsc
 *********************************************/
 
-lib_0527::func_52F7() {
-  lib_0527::func_5304();
-  level.var_0611["plane_death"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
-  level.var_0611["airstrike_death_allies"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
-  level.var_0611["airstrike_death_axis"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
+func_52F7() {
+  func_5304();
+  level.var_611["plane_death"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
+  level.var_611["airstrike_death_allies"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
+  level.var_611["airstrike_death_axis"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
   level.var_80BC = [];
 }
 
-lib_0527::func_7033(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+func_7033(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   switch (param_00) {
     case "firebomb":
     case "airstrike":
-      level thread lib_0527::func_7031(param_00, param_01, param_02, param_03, param_04);
+      level thread func_7031(param_00, param_01, param_02, param_03, param_04);
       break;
 
     case "zm_carepackage":
@@ -35,7 +35,7 @@ lib_0527::func_7033(param_00, param_01, param_02, param_03, param_04, param_05, 
   }
 }
 
-lib_0527::func_7031(param_00, param_01, param_02, param_03, param_04) {
+func_7031(param_00, param_01, param_02, param_03, param_04) {
   level endon("game_ended");
   param_01 endon("airstrike_complete");
   param_01 endon("delete");
@@ -47,11 +47,11 @@ lib_0527::func_7031(param_00, param_01, param_02, param_03, param_04) {
 
   var_05 = 0;
   if(isDefined(param_02)) {
-    var_05 = param_02 maps\mp\_utility::func_0649("specialty_improvedstreaks");
+    var_05 = param_02 maps\mp\_utility::_hasperk("specialty_improvedstreaks");
   }
 
-  var_06 = lib_0527::func_44E5(param_00) / 2;
-  var_07 = param_01.var_34AC + -1 * anglesToForward(param_01.var_001D) * 2000;
+  var_06 = func_44E5(param_00) / 2;
+  var_07 = param_01.var_34AC + -1 * anglesToForward(param_01.angles) * 2000;
   param_01.var_18C9 = spawn("script_model", (0, 0, 0));
   param_01.var_18C9 setModel("tag_origin");
   param_01.var_18C9 linkTo(param_01, "TAG_BOMB_L", (0, 0, 0), (0, 0, 0));
@@ -64,34 +64,34 @@ lib_0527::func_7031(param_00, param_01, param_02, param_03, param_04) {
   }
 
   if(var_08) {
-    level thread lib_0527::func_281E(param_01, param_00);
+    level thread func_281E(param_01, param_00);
   }
 
   wait(4);
   param_01 notify("start_bombing");
   param_01.var_6F2A = 1;
   var_09 = 0;
-  var_0A = lib_0527::func_44E6(param_00);
+  var_0A = func_44E6(param_00);
   var_0B = 0;
   var_0C = 3;
   var_0D = 1;
   while(var_0B <= var_0A) {
-    var_0E = lib_0527::func_443B(param_00);
+    var_0E = func_443B(param_00);
     var_0F = (0, randomint(360), 0);
     var_10 = anglesToForward(var_0F) * var_0E;
-    var_11 = param_01.var_0116 + anglesToForward(param_01.var_001D) * 2000;
+    var_11 = param_01.origin + anglesToForward(param_01.angles) * 2000;
     var_11 = (var_11[0], var_11[1], var_07[2]);
     var_11 = var_11 + var_10;
     if(var_09) {
-      var_12 = param_01.var_18C9.var_0116;
+      var_12 = param_01.var_18C9.origin;
     } else {
-      var_12 = param_01.var_18CA.var_0116;
+      var_12 = param_01.var_18CA.origin;
     }
 
     var_09 = !var_09;
-    var_13 = magicartillery(lib_0527::func_443C(param_00, param_02), var_12, var_11, 3, var_12[2], param_02);
-    var_13.var_0117 = param_01.var_0117;
-    var_13.var_01A7 = param_01.var_01A7;
+    var_13 = magicartillery(func_443C(param_00, param_02), var_12, var_11, 3, var_12[2], param_02);
+    var_13.owner = param_01.owner;
+    var_13.team = param_01.team;
     if(param_00 == "firebomb") {
       var_13 thread maps\mp\killstreaks\_firebomb::func_27EC(var_05);
       if(var_0C == 3) {
@@ -128,24 +128,24 @@ lib_0527::func_7031(param_00, param_01, param_02, param_03, param_04) {
   }
 
   param_01 notify("stop_bombing");
-  level.var_0B93 = undefined;
+  level.var_B93 = undefined;
 }
 
-lib_0527::func_443C(param_00, param_01) {
+func_443C(param_00, param_01) {
   switch (param_00) {
     case "firebomb":
       var_02 = 0;
       if(isDefined(param_01)) {
-        var_02 = param_01 maps\mp\_utility::func_0649("specialty_improvedstreaks");
+        var_02 = param_01 maps\mp\_utility::_hasperk("specialty_improvedstreaks");
       }
 
       if(var_02) {
-        if(isDefined(param_01) && isDefined(param_01.var_01A7) && param_01.var_01A7 == "axis") {
+        if(isDefined(param_01) && isDefined(param_01.team) && param_01.team == "axis") {
           return "firebomb_bomb_axis_grenadier_mp";
         } else {
           return "firebomb_bomb_grenadier_mp";
         }
-      } else if(isDefined(param_01) && isDefined(param_01.var_01A7) && param_01.var_01A7 == "axis") {
+      } else if(isDefined(param_01) && isDefined(param_01.team) && param_01.team == "axis") {
         return "firebomb_bomb_axis_mp";
       } else {
         return "firebomb_bomb_mp";
@@ -154,14 +154,14 @@ lib_0527::func_443C(param_00, param_01) {
       break;
 
     case "airstrike":
-      if(isDefined(var_02) && isDefined(var_02.var_01A7) && var_02.var_01A7 == "axis") {
+      if(isDefined(param_01) && isDefined(param_01.team) && param_01.team == "axis") {
         return "airstrike_bomb_axis_mp";
       }
       return "airstrike_bomb_mp";
   }
 }
 
-lib_0527::func_443B(param_00) {
+func_443B(param_00) {
   switch (param_00) {
     case "firebomb":
       return 0;
@@ -174,13 +174,13 @@ lib_0527::func_443B(param_00) {
   }
 }
 
-lib_0527::func_9302(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+func_9302(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   self notify("used");
   if(!isDefined(param_05)) {
     if(isDefined(param_04)) {
       param_05 = param_04;
     } else {
-      param_05 = self.var_012C["team"];
+      param_05 = self.pers["team"];
     }
   }
 
@@ -190,36 +190,36 @@ lib_0527::func_9302(param_00, param_01, param_02, param_03, param_04, param_05, 
     var_0A = bulletTrace(level.var_5FEB + (0, 0, 10000), level.var_5FEB, 0, undefined);
     var_08 = (var_08[0], var_08[1], var_0A["position"][2]);
     if(isDefined(param_04)) {
-      thread lib_0527::func_1719(param_00, var_08, var_09, undefined, param_05, param_03, param_04, param_06);
+      thread func_1719(param_00, var_08, var_09, undefined, param_05, param_03, param_04, param_06);
       continue;
     }
 
-    thread lib_0527::func_1719(param_00, var_08, var_09, self, param_05, param_03, undefined, param_06);
+    thread func_1719(param_00, var_08, var_09, self, param_05, param_03, undefined, param_06);
   }
 }
 
-lib_0527::func_1719(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  if(isDefined(level.var_0B97)) {
-    while(isDefined(level.var_0B97)) {
+func_1719(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
+  if(isDefined(level.var_B97)) {
+    while(isDefined(level.var_B97)) {
       level waittill("begin_airstrike");
     }
 
-    level.var_0B97 = 1;
+    level.var_B97 = 1;
   }
 
-  level.var_0B97 = 1;
-  var_08 = lib_0527::func_34B0(param_01, param_03);
+  level.var_B97 = 1;
+  var_08 = func_34B0(param_01, param_03);
   if(isDefined(level.var_80B5) && isDefined(level.var_80B5[param_05])) {
     if(isDefined(param_06)) {
       lib_0526::func_280E(var_08, param_02, param_05, param_06);
     } else {
-      lib_0526::func_280E(var_08, param_02, param_05, param_03.var_01A7);
+      lib_0526::func_280E(var_08, param_02, param_05, param_03.team);
     }
   }
 
-  lib_0527::func_1E89(param_00, param_03, var_08, param_02, param_05, param_06, param_04, param_07);
+  func_1E89(param_00, param_03, var_08, param_02, param_05, param_06, param_04, param_07);
   wait(1);
-  level.var_0B97 = undefined;
+  level.var_B97 = undefined;
   if(isDefined(param_03)) {
     param_03 notify("begin_airstrike");
   }
@@ -230,23 +230,23 @@ lib_0527::func_1719(param_00, param_01, param_02, param_03, param_04, param_05, 
   }
 }
 
-lib_0527::func_1E89(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
-  var_08 = lib_0527::func_460F(param_04);
+func_1E89(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
+  var_08 = func_460F(param_04);
   if(isDefined(param_01)) {
     param_01 endon("disconnect");
   }
 
   var_09 = (0, param_03, 0);
-  var_0A = lib_0527::func_4616(param_02, var_09, var_08, param_04);
-  level thread lib_0527::func_32A7(param_00, param_01, param_02, var_0A, var_09, param_04, param_05, param_06, param_07);
+  var_0A = func_4616(param_02, var_09, var_08, param_04);
+  level thread func_32A7(param_00, param_01, param_02, var_0A, var_09, param_04, param_05, param_06, param_07);
 }
 
-lib_0527::func_32A7(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+func_32A7(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
   switch (param_05) {
     case "firebomb":
     case "airstrike":
       param_03 = param_03 + -1 * anglesToForward(param_04) * 2000;
-      thread lib_0527::func_909F(param_00, param_01, param_02, param_03, param_04, param_05, 1, param_06);
+      thread func_909F(param_00, param_01, param_02, param_03, param_04, param_05, 1, param_06);
       break;
 
     case "zm_carepackage":
@@ -255,51 +255,51 @@ lib_0527::func_32A7(param_00, param_01, param_02, param_03, param_04, param_05, 
     case "emergency_carepackage":
     case "carepackage":
     case "paratroopers":
-      thread lib_0527::func_909F(param_00, param_01, param_02, param_03, param_04, param_05, 1, param_06, param_07, param_08);
+      thread func_909F(param_00, param_01, param_02, param_03, param_04, param_05, 1, param_06, param_07, param_08);
       break;
   }
 }
 
-lib_0527::func_909F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
+func_909F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
   if(isDefined(param_08)) {
     var_0A = param_08;
   } else {
     var_0A = param_08;
   }
 
-  var_0B = lib_0527::func_4615(param_05, param_01, var_0A);
-  var_0C = lib_0527::func_460E(param_05, param_01, var_0A);
-  var_0D = lib_0527::func_460A(param_05, param_01, var_0A);
+  var_0B = func_4615(param_05, param_01, var_0A);
+  var_0C = func_460E(param_05, param_01, var_0A);
+  var_0D = func_460A(param_05, param_01, var_0A);
   var_0E = spawn("script_model", param_03);
-  var_0E.var_001D = param_04;
+  var_0E.angles = param_04;
   if(isDefined(var_0C)) {
     var_0E setModel(var_0C);
-    var_0E thread lib_0527::func_39C6(var_0B, 1);
+    var_0E thread func_39C6(var_0B, 1);
   } else {
     var_0E setModel(var_0B);
   }
 
   if(isDefined(var_0D)) {
-    var_0E lib_0527::func_74CE(param_05, var_0D);
+    var_0E func_74CE(param_05, var_0D);
   }
 
   if(maps\mp\_utility::func_579B() && isDefined(param_07)) {
     var_0E.var_384B = [];
-    var_0F = anglesToForward(var_0E.var_001D + (0, 135, 0));
+    var_0F = anglesToForward(var_0E.angles + (0, 135, 0));
     var_10 = param_03 + var_0F * 1200;
     var_11 = spawn("script_model", var_10);
-    var_11.var_001D = param_04;
+    var_11.angles = param_04;
     var_11 setModel(var_0B);
-    var_11.var_01A7 = param_07;
-    var_11 lib_0527::func_74CE(param_05, var_0D);
+    var_11.team = param_07;
+    var_11 func_74CE(param_05, var_0D);
     var_0E.var_384B[var_0E.var_384B.size] = var_11;
-    var_0F = anglesToForward(var_0E.var_001D + (0, -135, 0));
+    var_0F = anglesToForward(var_0E.angles + (0, -135, 0));
     var_10 = param_03 + var_0F * 1200;
     var_11 = spawn("script_model", var_10);
-    var_11.var_001D = param_04;
+    var_11.angles = param_04;
     var_11 setModel(var_0B);
-    var_11.var_01A7 = param_07;
-    var_11 lib_0527::func_74CE(param_05, var_0D);
+    var_11.team = param_07;
+    var_11 func_74CE(param_05, var_0D);
     var_0E.var_384B[var_0E.var_384B.size] = var_11;
   }
 
@@ -312,7 +312,7 @@ lib_0527::func_909F(param_00, param_01, param_02, param_03, param_04, param_05, 
     var_12 = 0;
   }
 
-  if(isDefined(level.var_0811) && level.var_0811) {
+  if(isDefined(level.var_811) && level.var_811) {
     var_12 = 0;
   }
 
@@ -326,53 +326,53 @@ lib_0527::func_909F(param_00, param_01, param_02, param_03, param_04, param_05, 
       var_15 = param_07;
     }
 
-    var_0E.var_620D method_8351(var_15, lib_0527::func_4613(param_05), 20, 20, var_14, var_13, lib_0527::func_4614(param_05));
+    var_0E.var_620D method_8351(var_15, func_4613(param_05), 20, 20, var_14, var_13, func_4614(param_05));
     var_0E.var_620D method_8449(var_0E, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
 
-  var_0E.var_01C8 = param_05;
-  lib_0527::func_09E1(var_0E);
+  var_0E.var_1C8 = param_05;
+  func_09E1(var_0E);
   level thread maps\mp\killstreaks\_killstreaks::func_A0DC();
   var_0E setCanDamage(1);
   var_0E setCanRadiusDamage(1);
-  var_0E thread maps\mp\gametypes\_damage::func_8676(lib_0527::func_4612(param_05), undefined, ::lib_0527::func_6B9D, ::lib_0527::func_6B9C, 1);
-  var_0E thread lib_0527::func_4AB8();
+  var_0E thread maps\mp\gametypes\_damage::func_8676(func_4612(param_05), undefined, ::func_6B9D, ::func_6B9C, 1);
+  var_0E thread func_4AB8();
   var_0E.var_6F2A = 0;
-  var_0E lib_0527::func_74D3(param_05);
+  var_0E func_74D3(param_05);
   var_0E.var_5CC6 = param_00;
   if(isDefined(param_07)) {
-    var_0E.var_01A7 = param_07;
+    var_0E.team = param_07;
   } else if(isDefined(param_01)) {
-    var_0E.var_0117 = param_01;
-    var_0E.var_01A7 = param_01.var_01A7;
+    var_0E.owner = param_01;
+    var_0E.team = param_01.team;
   } else {
-    var_0E.var_01A7 = "allies";
+    var_0E.team = "allies";
   }
 
   var_0E.var_34AC = param_02;
   var_0E.var_5C2F = gettime();
-  var_0E thread lib_0527::func_702D(param_05, param_03, param_04);
+  var_0E thread func_702D(param_05, param_03, param_04);
   if(isDefined(var_0E.var_384B)) {
     foreach(var_11 in var_0E.var_384B) {
-      var_11 thread lib_0527::func_702D(param_05, var_11.var_0116, param_04);
+      var_11 thread func_702D(param_05, var_11.origin, param_04);
     }
   }
 
-  thread lib_0527::func_7033(param_05, var_0E, param_01, param_04, param_07, param_08, param_09);
+  thread func_7033(param_05, var_0E, param_01, param_04, param_07, param_08, param_09);
   var_0E endon("death");
   var_0E endon("crashing");
   var_0E waittill("pathComplete");
-  var_0E thread lib_0527::func_2D47(0);
+  var_0E thread func_2D47(0);
 }
 
-lib_0527::func_39C6(param_00, param_01) {
+func_39C6(param_00, param_01) {
   self endon("death");
   self setmaterialscriptparam(0, 1, param_01);
   wait(param_01);
   self setModel(param_00);
 }
 
-lib_0527::func_74CE(param_00, param_01) {
+func_74CE(param_00, param_01) {
   switch (param_00) {
     case "firebomb":
     case "airstrike":
@@ -390,7 +390,7 @@ lib_0527::func_74CE(param_00, param_01) {
   }
 }
 
-lib_0527::func_74D3(param_00) {
+func_74D3(param_00) {
   switch (param_00) {
     case "fighter_strike":
       lib_0378::func_8D74("ks_fighterstrike_flyby");
@@ -418,7 +418,7 @@ lib_0527::func_74D3(param_00) {
   }
 }
 
-lib_0527::func_4612(param_00) {
+func_4612(param_00) {
   switch (param_00) {
     case "airstrike":
       return 1000;
@@ -453,11 +453,11 @@ lib_0527::func_4612(param_00) {
   }
 }
 
-lib_0527::func_4615(param_00, param_01, param_02) {
+func_4615(param_00, param_01, param_02) {
   if(isDefined(param_02)) {
     var_03 = param_02;
   } else if(isDefined(param_02)) {
-    var_03 = param_02.var_01A7;
+    var_03 = param_02.team;
   } else {
     var_03 = "allies";
   }
@@ -504,11 +504,11 @@ lib_0527::func_4615(param_00, param_01, param_02) {
   }
 }
 
-lib_0527::func_460E(param_00, param_01, param_02) {
+func_460E(param_00, param_01, param_02) {
   if(isDefined(param_02)) {
     var_03 = param_02;
   } else if(isDefined(param_02)) {
-    var_03 = param_02.var_01A7;
+    var_03 = param_02.team;
   } else {
     var_03 = "allies";
   }
@@ -546,11 +546,11 @@ lib_0527::func_460E(param_00, param_01, param_02) {
   }
 }
 
-lib_0527::func_460A(param_00, param_01, param_02) {
+func_460A(param_00, param_01, param_02) {
   if(isDefined(param_02)) {
     var_03 = param_02;
   } else if(isDefined(param_02)) {
-    var_03 = param_02.var_01A7;
+    var_03 = param_02.team;
   } else {
     var_03 = "allies";
   }
@@ -613,7 +613,7 @@ lib_0527::func_460A(param_00, param_01, param_02) {
   }
 }
 
-lib_0527::func_4613(param_00) {
+func_4613(param_00) {
   switch (param_00) {
     case "firebomb":
     case "airstrike":
@@ -635,7 +635,7 @@ lib_0527::func_4613(param_00) {
   }
 }
 
-lib_0527::func_4614(param_00) {
+func_4614(param_00) {
   switch (param_00) {
     case "zm_carepackage":
     case "raid_carepackage":
@@ -653,7 +653,7 @@ lib_0527::func_4614(param_00) {
   }
 }
 
-lib_0527::func_8C0A(param_00, param_01, param_02, param_03, param_04) {
+func_8C0A(param_00, param_01, param_02, param_03, param_04) {
   var_05 = 1;
   var_06 = 0;
   var_07 = 1;
@@ -669,12 +669,12 @@ lib_0527::func_8C0A(param_00, param_01, param_02, param_03, param_04) {
   }
 }
 
-lib_0527::func_4516() {
+func_4516() {
   return 80;
 }
 
-lib_0527::func_6B9C(param_00, param_01, param_02, param_03) {
-  if(isDefined(param_00) && isDefined(self.var_0117) && param_00 == self.var_0117) {
+func_6B9C(param_00, param_01, param_02, param_03) {
+  if(isDefined(param_00) && isDefined(self.owner) && param_00 == self.owner) {
     return -1;
   }
 
@@ -701,11 +701,11 @@ lib_0527::func_6B9C(param_00, param_01, param_02, param_03) {
           var_04 = var_04 * 2;
         }
 
-        if(isDefined(param_00) && param_00 maps\mp\_utility::func_0649("specialty_superbulletpenetration")) {
+        if(isDefined(param_00) && param_00 maps\mp\_utility::_hasperk("specialty_superbulletpenetration")) {
           var_04 = var_04 * 2;
         }
 
-        if(lib_0527::func_576A(param_01)) {
+        if(func_576A(param_01)) {
           var_04 = var_04 * 0.12;
         }
 
@@ -717,7 +717,7 @@ lib_0527::func_6B9C(param_00, param_01, param_02, param_03) {
   return maps\mp\gametypes\_damage::func_62A6(param_00, param_01, param_02, var_04);
 }
 
-lib_0527::func_576A(param_00) {
+func_576A(param_00) {
   foreach(var_02 in level.var_80BC) {
     if(issubstr(param_00, var_02)) {
       return 1;
@@ -727,62 +727,62 @@ lib_0527::func_576A(param_00) {
   return 0;
 }
 
-lib_0527::func_4ACE() {
+func_4ACE() {
   level endon("game_ended");
   self endon("death");
   for(;;) {
     level waittill("launcher_missile_fire", var_00, var_01);
-    var_01[0] thread lib_0527::func_9147(self, var_00);
-    thread lib_0527::func_5C27(var_01[0], var_00);
+    var_01[0] thread func_9147(self, var_00);
+    thread func_5C27(var_01[0], var_00);
   }
 }
 
-lib_0527::func_9147(param_00, param_01) {
-  var_02 = vectorNormalize(param_00.var_0116 - param_01.var_0116);
+func_9147(param_00, param_01) {
+  var_02 = vectorNormalize(param_00.origin - param_01.origin);
   var_03 = 15;
-  var_04 = anglesToForward(param_01 getangles());
+  var_04 = anglesToForward(param_01 getplayerangles());
   if(vectordot(var_02, var_04) >= cos(var_03)) {
     self setstablemissile(1);
   }
 }
 
-lib_0527::func_5C27(param_00, param_01) {
+func_5C27(param_00, param_01) {
   self endon("death");
   param_00 endon("death");
-  var_02 = lib_0527::func_4611(self.var_01C8);
+  var_02 = func_4611(self.var_1C8);
   for(;;) {
-    var_03 = self.var_0116;
-    if(self.var_01C8 == "fighter_strike") {
+    var_03 = self.origin;
+    if(self.var_1C8 == "fighter_strike") {
       var_03 = self gettagorigin("TAG_BLOOD");
     }
 
-    var_04 = distancesquared(param_00.var_0116, var_03);
+    var_04 = distancesquared(param_00.origin, var_03);
     if(var_04 < var_02) {
-      thread lib_0527::func_5C26(param_00, param_01);
+      thread func_5C26(param_00, param_01);
     }
 
     wait 0.05;
   }
 }
 
-lib_0527::func_5C26(param_00, param_01) {
-  self dodamage(2200, self.var_0116, param_01, param_00, "MOD_PROJECTILE", param_00.var_A9E0);
+func_5C26(param_00, param_01) {
+  self dodamage(2200, self.origin, param_01, param_00, "MOD_PROJECTILE", param_00.var_A9E0);
   param_00 method_81D6();
 }
 
-lib_0527::func_2818() {
+func_2818() {
   self.var_11C7 = 1000;
   self.var_11C5 = 1000;
   self.var_11C9 = missilecreateattractorent(self, self.var_11C7, self.var_11C5);
 }
 
-lib_0527::func_2DD3() {
+func_2DD3() {
   if(isDefined(self.var_11C9)) {
     missiledeleteattractor(self.var_11C9);
   }
 }
 
-lib_0527::func_4611(param_00) {
+func_4611(param_00) {
   switch (param_00) {
     case "fighter_strike":
       return 10000;
@@ -804,11 +804,11 @@ lib_0527::func_4611(param_00) {
   }
 }
 
-lib_0527::func_2D47(param_00) {
+func_2D47(param_00) {
   level endon("game_ended");
-  level.var_0B93 = undefined;
+  level.var_B93 = undefined;
   self notify("airstrike_complete");
-  lib_0527::func_7CEE(self);
+  func_7CEE(self);
   if(isDefined(self.var_620D)) {
     self.var_620D delete();
   }
@@ -836,20 +836,20 @@ lib_0527::func_2D47(param_00) {
   }
 }
 
-lib_0527::func_6B9D(param_00, param_01, param_02, param_03) {
-  thread lib_0527::func_272D();
+func_6B9D(param_00, param_01, param_02, param_03) {
+  thread func_272D();
   var_04 = undefined;
-  if(self.var_01C8 == "carepackage" || self.var_01C8 == "emergency_carepackage" || self.var_01C8 == "raid_carepackage" || self.var_01C8 == "zm_carepackage") {
+  if(self.var_1C8 == "carepackage" || self.var_1C8 == "emergency_carepackage" || self.var_1C8 == "raid_carepackage" || self.var_1C8 == "zm_carepackage") {
     var_04 = "cpkg_destroyed";
   }
 
-  maps\mp\gametypes\_damage::func_6B4B(param_00, param_01, param_02, param_03, lib_0527::func_460B(self.var_01C8), var_04, lib_0527::func_460D(self.var_01C8), 1);
+  maps\mp\gametypes\_damage::func_6B4B(param_00, param_01, param_02, param_03, func_460B(self.var_1C8), var_04, func_460D(self.var_1C8), 1);
 }
 
-lib_0527::func_272D() {
+func_272D() {
   self notify("crashing");
   self.var_272A = 1;
-  switch (self.var_01C8) {
+  switch (self.var_1C8) {
     case "zm_carepackage":
     case "raid_carepackage":
     case "paratrooper_insert":
@@ -864,23 +864,23 @@ lib_0527::func_272D() {
   }
 }
 
-lib_0527::func_4AB8(param_00) {
+func_4AB8(param_00) {
   level endon("game_ended");
   self endon("delete");
   common_scripts\utility::func_A732("death", "crashing");
   if(isDefined(self)) {
-    var_01 = anglesToForward(self.var_001D);
-    playFX(lib_0527::func_460C(self.var_01C8, self.var_01A7), self.var_0116, var_01);
-    lib_0380::func_2889("ks_plane_destruct_explode", undefined, self.var_0116);
-    if(self.var_01C8 == "airstrike") {
+    var_01 = anglesToForward(self.angles);
+    playFX(func_460C(self.var_1C8, self.team), self.origin, var_01);
+    lib_0380::func_2889("ks_plane_destruct_explode", undefined, self.origin);
+    if(self.var_1C8 == "airstrike") {
       level notify("aud_carpet_bomb_killed");
     }
   }
 
-  lib_0527::func_2D47(1);
+  func_2D47(1);
 }
 
-lib_0527::func_460B(param_00) {
+func_460B(param_00) {
   switch (param_00) {
     case "airstrike":
       return "airstrike_destroyed";
@@ -902,7 +902,7 @@ lib_0527::func_460B(param_00) {
   }
 }
 
-lib_0527::func_460D(param_00) {
+func_460D(param_00) {
   switch (param_00) {
     case "airstrike":
       return "callout_destroyed_airstrike";
@@ -924,7 +924,7 @@ lib_0527::func_460D(param_00) {
   }
 }
 
-lib_0527::func_460C(param_00, param_01) {
+func_460C(param_00, param_01) {
   switch (param_00) {
     case "firebomb":
       if(param_01 == "allies") {
@@ -971,11 +971,11 @@ lib_0527::func_460C(param_00, param_01) {
   }
 }
 
-lib_0527::func_702D(param_00, param_01, param_02) {
+func_702D(param_00, param_01, param_02) {
   switch (param_00) {
     case "firebomb":
     case "airstrike":
-      lib_0527::func_0EA1(param_00, param_01, param_02, 1);
+      func_0EA1(param_00, param_01, param_02, 1);
       break;
 
     case "zm_carepackage":
@@ -984,15 +984,15 @@ lib_0527::func_702D(param_00, param_01, param_02) {
     case "emergency_carepackage":
     case "carepackage":
     case "paratroopers":
-      lib_0527::func_0EA1(param_00, param_01, param_02, 0);
+      func_0EA1(param_00, param_01, param_02, 0);
       break;
   }
 }
 
-lib_0527::func_0EA1(param_00, param_01, param_02, param_03) {
+func_0EA1(param_00, param_01, param_02, param_03) {
   self endon("airstrike_complete");
-  var_04 = lib_0527::func_44E5(param_00);
-  var_05 = lib_0527::func_44E6(param_00);
+  var_04 = func_44E5(param_00);
+  var_05 = func_44E6(param_00);
   var_06 = 6400;
   var_07 = 12800;
   if(param_00 == "zm_carepackage") {
@@ -1006,7 +1006,7 @@ lib_0527::func_0EA1(param_00, param_01, param_02, param_03) {
     var_09 = 2 + var_05 + 4;
   }
 
-  thread lib_0527::func_703B();
+  thread func_703B();
   self.var_933D = "flying_in";
   if(1 && isDefined(self.var_620D)) {
     self.var_620D method_8352(4000, 1);
@@ -1045,11 +1045,11 @@ lib_0527::func_0EA1(param_00, param_01, param_02, param_03) {
 
   wait(var_0C);
   var_0D = undefined;
-  if(!isDefined(self.var_0117)) {
-    var_0D = self.var_01A7;
+  if(!isDefined(self.owner)) {
+    var_0D = self.team;
   }
 
-  var_0E = lib_0527::func_460E(param_00, self.var_0117, var_0D);
+  var_0E = func_460E(param_00, self.owner, var_0D);
   if(isDefined(var_0E)) {
     self setModel(var_0E);
     self setmaterialscriptparam(1, 0, 1);
@@ -1059,7 +1059,7 @@ lib_0527::func_0EA1(param_00, param_01, param_02, param_03) {
   self notify("pathComplete");
 }
 
-lib_0527::func_703B() {
+func_703B() {
   self endon("airstrike_complete");
   self endon("pathComplete");
   for(;;) {
@@ -1070,7 +1070,7 @@ lib_0527::func_703B() {
   }
 }
 
-lib_0527::func_7041() {
+func_7041() {
   self endon("airstrike_complete");
   wait 0.05;
   playFXOnTag(common_scripts\utility::func_44F5("airstrike_engine"), self, "tag_engine_right");
@@ -1079,47 +1079,47 @@ lib_0527::func_7041() {
   playFXOnTag(common_scripts\utility::func_44F5("airstrike_wingtip"), self, "tag_left_wingtip");
 }
 
-lib_0527::func_281E(param_00, param_01) {
+func_281E(param_00, param_01) {
   var_02 = spawn("script_model", (0, 0, 0));
   var_02 setscriptmoverkillcam("script_entity");
   var_02 method_80B1();
-  var_03 = 4 + lib_0527::func_44E6(param_01) + 8;
-  var_02 thread lib_0527::func_2D3B(var_03);
+  var_03 = 4 + func_44E6(param_01) + 8;
+  var_02 thread func_2D3B(var_03);
   var_04 = anglestoaxis((35, -45, 0))["forward"];
   var_02 linkTo(param_00, "tag_origin", var_04 * -1 * 1000, (35, -45, 0));
   param_00.var_5A2C = var_02;
 }
 
-lib_0527::func_2D3B(param_00) {
+func_2D3B(param_00) {
   self endon("death");
   wait(param_00);
   self delete();
 }
 
-lib_0527::func_4409() {
-  if(isDefined(level.var_0B92)) {
-    return level.var_0B92;
+func_4409() {
+  if(isDefined(level.var_B92)) {
+    return level.var_B92;
   }
 
   var_00 = common_scripts\utility::func_44BD("warbird_anchor", "targetname");
   if(!isDefined(var_00)) {
     var_00 = spawnStruct();
-    var_00.var_0116 = (0, 0, 0);
-    var_00.var_01A5 = "warbird_anchor";
+    var_00.origin = (0, 0, 0);
+    var_00.targetname = "warbird_anchor";
   }
 
-  if(!isDefined(var_00.var_0165)) {
-    var_00.var_0165 = 3500;
+  if(!isDefined(var_00.script_noteworthy)) {
+    var_00.script_noteworthy = 3500;
   }
 
-  level.var_0B92 = var_00.var_0116[2] + 3000;
-  return level.var_0B92;
+  level.var_B92 = var_00.origin[2] + 3000;
+  return level.var_B92;
 }
 
-lib_0527::func_460F(param_00) {
+func_460F(param_00) {
   var_01 = 0;
-  if(isDefined(level.var_0B99) && isDefined(level.var_0B99.var_906E)) {
-    var_01 = level.var_0B99.var_906E;
+  if(isDefined(level.var_B99) && isDefined(level.var_B99.var_906E)) {
+    var_01 = level.var_B99.var_906E;
   }
 
   var_02 = 0;
@@ -1139,11 +1139,11 @@ lib_0527::func_460F(param_00) {
     var_02 = 1000;
   }
 
-  var_03 = lib_0527::func_4409();
+  var_03 = func_4409();
   return var_03 + var_01 + var_02;
 }
 
-lib_0527::func_4404(param_00, param_01, param_02) {
+func_4404(param_00, param_01, param_02) {
   var_03 = anglestoright(param_01);
   param_02.var_92F5 = param_00;
   param_02.var_92F6 = param_00 + var_03 * -1 * 600;
@@ -1152,13 +1152,13 @@ lib_0527::func_4404(param_00, param_01, param_02) {
   param_02.var_92F9 = param_00 + var_03 * -1200;
 }
 
-lib_0527::func_4616(param_00, param_01, param_02, param_03) {
+func_4616(param_00, param_01, param_02, param_03) {
   var_04 = 6400;
   if(param_03 == "zm_carepackage") {
     var_04 = 4000;
   }
 
-  var_05 = lib_0527::func_44E5(param_03);
+  var_05 = func_44E5(param_03);
   var_06 = var_05 / 2 + var_04;
   var_07 = param_00 + anglesToForward(param_01) * -1 * var_06;
   var_07 = var_07 * (1, 1, 0);
@@ -1166,7 +1166,7 @@ lib_0527::func_4616(param_00, param_01, param_02, param_03) {
   return var_07;
 }
 
-lib_0527::func_44E5(param_00) {
+func_44E5(param_00) {
   switch (param_00) {
     case "airstrike":
       return 6000;
@@ -1184,7 +1184,7 @@ lib_0527::func_44E5(param_00) {
   }
 }
 
-lib_0527::func_44E6(param_00) {
+func_44E6(param_00) {
   switch (param_00) {
     case "raid_carepackage":
     case "paratrooper_insert":
@@ -1202,11 +1202,11 @@ lib_0527::func_44E6(param_00) {
   }
 }
 
-lib_0527::func_34B0(param_00, param_01) {
+func_34B0(param_00, param_01) {
   var_02 = param_00;
   var_03 = var_02 + (0, 0, -1000000);
   var_04 = bulletTrace(var_02, var_03, 0, param_01);
-  for(var_05 = var_04["entity"]; isDefined(var_05) && isDefined(var_05.var_01C8); var_05 = var_04["entity"]) {
+  for(var_05 = var_04["entity"]; isDefined(var_05) && isDefined(var_05.var_1C8); var_05 = var_04["entity"]) {
     wait 0.05;
     var_02 = var_04["position"];
     var_04 = bulletTrace(var_02, var_03, 0, var_05);
@@ -1215,35 +1215,35 @@ lib_0527::func_34B0(param_00, param_01) {
   return var_04["position"];
 }
 
-lib_0527::func_34AD(param_00, param_01) {
-  var_02 = lib_0527::func_34AF(param_00, param_01);
+func_34AD(param_00, param_01) {
+  var_02 = func_34AF(param_00, param_01);
   if(var_02) {
     var_03 = 1;
   } else {
     var_03 = -1;
   }
 
-  var_04 = common_scripts\utility::func_3D5D(param_00.var_0116);
-  var_05 = var_04 + anglesToForward(common_scripts\utility::func_3D5C(param_00.var_001D)) * var_03 * 100000;
+  var_04 = common_scripts\utility::func_3D5D(param_00.origin);
+  var_05 = var_04 + anglesToForward(common_scripts\utility::func_3D5C(param_00.angles)) * var_03 * 100000;
   var_06 = pointonsegmentnearesttopoint(var_04, var_05, param_01);
   var_07 = distance(var_04, var_06);
   return var_07;
 }
 
-lib_0527::func_34AE(param_00, param_01, param_02) {
+func_34AE(param_00, param_01, param_02) {
   if(!isDefined(param_02)) {
     param_02 = 3000;
   }
 
-  var_03 = lib_0527::func_34AF(param_00, param_01);
+  var_03 = func_34AF(param_00, param_01);
   if(var_03) {
     var_04 = 1;
   } else {
     var_04 = -1;
   }
 
-  var_05 = common_scripts\utility::func_3D5D(param_00.var_0116);
-  var_06 = var_05 + anglesToForward(common_scripts\utility::func_3D5C(param_00.var_001D)) * var_04 * 100000;
+  var_05 = common_scripts\utility::func_3D5D(param_00.origin);
+  var_06 = var_05 + anglesToForward(common_scripts\utility::func_3D5C(param_00.angles)) * var_04 * 100000;
   var_07 = pointonsegmentnearesttopoint(var_05, var_06, param_01);
   var_08 = distance(var_05, var_07);
   if(var_08 <= param_02) {
@@ -1253,9 +1253,9 @@ lib_0527::func_34AE(param_00, param_01, param_02) {
   return 0;
 }
 
-lib_0527::func_34AF(param_00, param_01) {
-  var_02 = anglesToForward(common_scripts\utility::func_3D5C(param_00.var_001D));
-  var_03 = vectorNormalize(common_scripts\utility::func_3D5D(param_01) - param_00.var_0116);
+func_34AF(param_00, param_01) {
+  var_02 = anglesToForward(common_scripts\utility::func_3D5C(param_00.angles));
+  var_03 = vectorNormalize(common_scripts\utility::func_3D5D(param_01) - param_00.origin);
   var_04 = vectordot(var_02, var_03);
   if(var_04 > 0) {
     return 1;
@@ -1264,50 +1264,50 @@ lib_0527::func_34AF(param_00, param_01) {
   return 0;
 }
 
-lib_0527::func_A6E4(param_00, param_01, param_02) {
+func_A6E4(param_00, param_01, param_02) {
   param_00 endon("airstrike_complete");
   if(isDefined(param_02)) {
     param_02 endon("disconnect");
     param_02 endon("joined_team");
   }
 
-  while(!lib_0527::func_34AE(param_00, param_00.var_34AC, param_01)) {
+  while(!func_34AE(param_00, param_00.var_34AC, param_01)) {
     wait 0.05;
   }
 }
 
-lib_0527::func_9E35(param_00, param_01) {
+func_9E35(param_00, param_01) {
   if(maps\mp\_utility::func_5668()) {
     return 0;
   }
 
-  if(isDefined(level.var_0B93) || isDefined(level.var_2000)) {
-    self iclientprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+  if(isDefined(level.var_B93) || isDefined(level.var_2000)) {
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 
-  level.var_0B93 = 1;
+  level.var_B93 = 1;
   maps\mp\_matchdata::func_5E9A(param_01, level.var_5FEB);
   switch (param_01) {
     case "airstrike":
-      thread maps\mp\killstreaks\_airstrike::func_0B9A(param_00, param_01, self);
+      thread maps\mp\killstreaks\_airstrike::func_B9A(param_00, param_01, self);
       break;
   }
 
   return 1;
 }
 
-lib_0527::func_9E3A(param_00, param_01) {
+func_9E3A(param_00, param_01) {
   if(maps\mp\_utility::func_5668()) {
     return 0;
   }
 
-  if(isDefined(level.var_0B93) || isDefined(level.var_2000)) {
-    self iclientprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+  if(isDefined(level.var_B93) || isDefined(level.var_2000)) {
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 
-  var_02 = lib_0527::func_83BA(param_00, param_01);
+  var_02 = func_83BA(param_00, param_01);
   if(!isDefined(var_02) || !var_02) {
     return 0;
   }
@@ -1315,22 +1315,22 @@ lib_0527::func_9E3A(param_00, param_01) {
   return 1;
 }
 
-lib_0527::func_83BA(param_00, param_01) {
+func_83BA(param_00, param_01) {
   self endon("stop_location_selection");
-  if(!isDefined(level.var_5FF0)) {
-    level.var_5FF0 = 1024;
+  if(!isDefined(level.mapsize)) {
+    level.mapsize = 1024;
   }
 
-  var_02 = level.var_5FF0 / 6.46875;
-  if(level.var_910F) {
+  var_02 = level.mapsize / 6.46875;
+  if(level.splitscreen) {
     var_02 = var_02 * 1.5;
   }
 
   var_03 = 1;
   self setclientomnvar("ui_map_location_num_planes", 1);
-  self setclientomnvar("ui_map_location_height", lib_0527::func_460F(param_01));
-  maps\mp\_utility::func_05D4(param_01, "map_artillery_selector", var_03, var_02, 0.5);
-  thread lib_0527::func_A68F();
+  self setclientomnvar("ui_map_location_height", func_460F(param_01));
+  maps\mp\_utility::func_5D4(param_01, "map_artillery_selector", var_03, var_02, 0.5);
+  thread func_A68F();
   var_04 = undefined;
   var_05 = undefined;
   var_06 = 0;
@@ -1340,7 +1340,7 @@ lib_0527::func_83BA(param_00, param_01) {
       var_08 = 0;
     }
 
-    if(lib_0527::func_A272(var_07, var_08, self, param_01)) {
+    if(func_A272(var_07, var_08, self, param_01)) {
       var_04 = var_07;
       var_05 = var_08;
       self setclientomnvar("ui_map_location_use_carepackages", 0);
@@ -1348,7 +1348,7 @@ lib_0527::func_83BA(param_00, param_01) {
       self setclientomnvar("ui_map_location_height", 0);
       break;
     } else {
-      thread lib_0527::func_8BEE();
+      thread func_8BEE();
     }
   }
 
@@ -1360,18 +1360,18 @@ lib_0527::func_83BA(param_00, param_01) {
     return 0;
   }
 
-  if(isDefined(level.var_0B93) || isDefined(level.var_2000)) {
-    self iclientprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+  if(isDefined(level.var_B93) || isDefined(level.var_2000)) {
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 
-  level.var_0B93 = 1;
+  level.var_B93 = 1;
   maps\mp\_matchdata::func_5E9A(param_01, var_04);
-  thread lib_0527::func_9302(param_00, [var_04], [var_05], param_01);
+  thread func_9302(param_00, [var_04], [var_05], param_01);
   return 1;
 }
 
-lib_0527::func_8BEE() {
+func_8BEE() {
   self endon("location_selection_complete");
   self endon("disconnect");
   self endon("stop_location_selection");
@@ -1382,7 +1382,7 @@ lib_0527::func_8BEE() {
   self setclientomnvar("ui_map_location_blocked", 0);
 }
 
-lib_0527::func_A68F() {
+func_A68F() {
   self endon("location_selection_complete");
   self endon("disconnect");
   self waittill("stop_location_selection");
@@ -1392,16 +1392,16 @@ lib_0527::func_A68F() {
     self switchtoweapon(common_scripts\utility::func_4550());
   }
 
-  level.var_0B93 = undefined;
+  level.var_B93 = undefined;
 }
 
-lib_0527::func_A272(param_00, param_01, param_02, param_03) {
-  var_04 = lib_0527::func_460F(param_03);
+func_A272(param_00, param_01, param_02, param_03) {
+  var_04 = func_460F(param_03);
   var_05 = 1;
   return bombingruntracepassed(param_00, var_04, param_01, var_05);
 }
 
-lib_0527::func_4570() {
+func_4570() {
   switch (maps\mp\_utility::func_4571()) {
     case "mp_battleship_2":
       return 90;
@@ -1478,14 +1478,14 @@ lib_0527::func_4570() {
   }
 }
 
-lib_0527::func_5304() {
+func_5304() {
   level.var_7043 = [];
 }
 
-lib_0527::func_09E1(param_00) {
+func_09E1(param_00) {
   level.var_7043[level.var_7043.size] = param_00;
 }
 
-lib_0527::func_7CEE(param_00) {
-  level.var_7043 = common_scripts\utility::func_0F93(level.var_7043, param_00);
+func_7CEE(param_00) {
+  level.var_7043 = common_scripts\utility::func_F93(level.var_7043, param_00);
 }

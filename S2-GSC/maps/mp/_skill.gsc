@@ -3,13 +3,13 @@
  * Script: maps\mp\_skill.gsc
 *********************************************/
 
-func_00D5() {
+init() {
   level.var_8C73 = getdvarint("skill_rdur_min", 60);
   level.var_8C74 = float(getdvarint("skill_recent_sosc", 1000)) / 1000;
   level.var_8C76 = getdvarint("skill_sos_max_weight", 5);
   level.var_8C77 = float(getdvarint("skill_sos_tanh_scale", 1000)) / 1000;
   level.var_8C75 = float(getdvarint("skill_sos_default_rating", 500)) / 1000;
-  level thread func_6B82();
+  level thread onplayerspawned();
 }
 
 func_534E(param_00) {
@@ -38,8 +38,8 @@ func_534E(param_00) {
   level.var_8F29[param_00.var_8F28] = var_01;
 }
 
-func_7743() {
-  foreach(var_01 in level.var_744A) {
+process() {
+  foreach(var_01 in level.players) {
     var_01 func_0738();
   }
 }
@@ -48,7 +48,7 @@ func_775A() {
   func_0738();
 }
 
-func_6B82() {
+onplayerspawned() {
   level.var_8F29 = [];
   level.var_8F28 = 0;
   for(;;) {
@@ -66,7 +66,7 @@ func_57D1() {
     return 0;
   }
 
-  if(!maps\mp\_utility::func_7A69()) {
+  if(!maps\mp\_utility::rankingenabled()) {
     return 0;
   }
 
@@ -249,8 +249,8 @@ func_0739(param_00) {
 
   level.var_8F29[param_00.var_8F28].var_5C17 = maps\mp\_utility::func_44FB();
   var_01 = level.var_8F29[param_00.var_8F28].var_5C17 - level.var_8F29[param_00.var_8F28].var_170A;
-  if(var_01 > level.var_8C73 && isDefined(param_00.var_012C) && isDefined(param_00.var_012C["score"])) {
-    level.var_8F29[param_00.var_8F28].var_80A6 = param_00.var_012C["score"] / var_01;
+  if(var_01 > level.var_8C73 && isDefined(param_00.pers) && isDefined(param_00.pers["score"])) {
+    level.var_8F29[param_00.var_8F28].var_80A6 = param_00.pers["score"] / var_01;
     return;
   }
 
@@ -271,7 +271,7 @@ func_0738() {
     return;
   }
 
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     func_0739(var_01);
   }
 

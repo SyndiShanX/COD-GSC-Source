@@ -103,7 +103,7 @@ dlc4_wave_mus_switcher() {
   var_08 = 0;
   var_09 = 0;
   var_0A = 1;
-  var_0B = var_00.var_116;
+  var_0B = var_00.origin;
   var_0C = 1;
   var_0D = 6;
   var_0E = 14;
@@ -118,8 +118,8 @@ dlc4_wave_mus_switcher() {
 
     var_11 = gettime() - var_06;
     var_12 = var_00 lib_0366::func_8E14();
-    var_13 = var_00.var_116 != var_0B;
-    var_0B = var_00.var_116;
+    var_13 = var_00.origin != var_0B;
+    var_0B = var_00.origin;
     var_14 = var_04;
     if(var_13) {
       if(!var_0A) {
@@ -156,8 +156,8 @@ dlc4_wave_mus_switcher() {
 }
 
 zmb_hammer_melee_hit_wooden(param_00) {
-  foreach(var_02 in level.var_744A) {
-    if(var_02 == param_00.var_721C) {
+  foreach(var_02 in level.players) {
+    if(var_02 == param_00.player) {
       lib_0380::func_2889("zmb_weap_hammer_imp_main", undefined, param_00.var_ABE6);
       continue;
     }
@@ -167,8 +167,8 @@ zmb_hammer_melee_hit_wooden(param_00) {
 }
 
 zmb_hammer_melee_hit_metal(param_00) {
-  foreach(var_02 in level.var_744A) {
-    if(var_02 == param_00.var_721C) {
+  foreach(var_02 in level.players) {
+    if(var_02 == param_00.player) {
       lib_0380::func_2889("zmb_weap_hammer_imp_main", undefined, param_00.var_ABE6);
       continue;
     }
@@ -193,7 +193,7 @@ dlc4_hammer_catch(param_00, param_01) {
 
 zmb_hammer_throw_hit_metal() {
   var_00 = self;
-  lib_0380::func_2889("zmb_weap_hammer_imp_main", undefined, var_00.var_116);
+  lib_0380::func_2889("zmb_weap_hammer_imp_main", undefined, var_00.origin);
 }
 
 hammer_lightning(param_00) {
@@ -210,7 +210,7 @@ hammer_emp_charged() {
 
 zmb_shield_bash(param_00) {
   var_01 = self;
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(var_03 == var_01) {
       var_03.plr_shield_hit_snd = lib_0380::func_2889("zmb_wpn_shield_hit_plr", var_01, param_00);
       continue;
@@ -226,7 +226,7 @@ zmb_shield_hit() {
   }
 
   var_00 = self;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 == var_00) {
       lib_0380::func_288B("zmb_wpn_shield_dmg_plr", var_00, var_00);
       continue;
@@ -242,7 +242,7 @@ zmb_shield_break() {
   }
 
   var_00 = self;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 == var_00) {
       lib_0380::func_288B("zmb_wpn_shield_break_plr", var_00, var_00);
       continue;
@@ -254,7 +254,7 @@ zmb_shield_break() {
 
 zmb_bloodraven_shield_bash(param_00) {
   var_01 = self;
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(var_03 == var_01) {
       var_03.plr_br_shield_hit_snd = lib_0380::func_2889("zmb_wpn_bloodraven_shield_hit_plr", var_01, param_00);
       continue;
@@ -270,7 +270,7 @@ scythe_swing() {
   }
 
   var_00 = self;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 == var_00) {
       lib_0380::func_288B("zmb_weap_scythe_whoosh_2d", var_00, var_00);
       continue;
@@ -286,7 +286,7 @@ scythe_impact() {
   }
 
   var_00 = self;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 == var_00) {
       lib_0380::func_288B("zmb_weap_scythe_hit_2d", var_00, var_00);
       continue;
@@ -302,7 +302,7 @@ scythe_emp_swing() {
   }
 
   var_00 = self;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 == var_00) {
       lib_0380::func_288B("zmb_weap_scythe_emp_whoosh_2d", var_00, var_00);
       continue;
@@ -318,7 +318,7 @@ scythe_burst() {
   }
 
   var_00 = self;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 == var_00) {
       lib_0380::func_288B("zmb_weap_scythe_burst_2d", var_00, var_00);
       continue;
@@ -334,7 +334,7 @@ scythe_proj_shoot() {
   }
 
   var_00 = self;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 == var_00) {
       lib_0380::func_288B("zmb_weap_scythe_proj_shoot_2d", var_00, var_00);
       continue;
@@ -346,7 +346,7 @@ scythe_proj_shoot() {
 
 scythe_proj_loop() {
   var_00 = lib_0380::func_288B("zmb_weap_scythe_proj_lp", undefined, self);
-  common_scripts\utility::func_A74B("death", 3);
+  common_scripts\utility::waittill_notify_or_timeout("death", 3);
   lib_0380::func_2893(var_00, 1);
 }
 
@@ -430,7 +430,7 @@ moonorb_teleport() {
 }
 
 dlc4_magic_poof(param_00) {
-  lib_0380::func_2889("dlc4_magic_poof", undefined, self.var_116);
+  lib_0380::func_2889("dlc4_magic_poof", undefined, self.origin);
 }
 
 god_king_giestblast_charge() {
@@ -525,9 +525,9 @@ god_king_giestdrain(param_00, param_01) {
 zombie_giestdrain_submix(param_00, param_01) {
   level endon("end_geistdrain_submix");
   param_01 endon("attack_geist_drain_stop");
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     for(;;) {
-      var_04 = distance2d(var_03.var_116, param_00.var_116);
+      var_04 = distance2d(var_03.origin, param_00.origin);
       if(var_04 < 800) {
         var_03 method_8626("godking_giestdrain_mute_zvox");
         continue;
@@ -542,7 +542,7 @@ zombie_giestdrain_submix(param_00, param_01) {
 drain_king(param_00, param_01) {
   param_01 endon("attack_geist_drain_stop");
   for(;;) {
-    var_02 = lib_0380::func_6842("zmb_gdkng_drain", undefined, param_00.var_116);
+    var_02 = lib_0380::func_6842("zmb_gdkng_drain", undefined, param_00.origin);
     wait(1);
   }
 }
@@ -552,17 +552,17 @@ drain_plate(param_00, param_01) {
   param_00 endon("plate_destroyed");
   thread blood_plate_drain_blood(param_00);
   for(;;) {
-    param_00.soul_snd = lib_0380::func_6842("zmb_gdkng_drain", undefined, param_00.plate_model.var_116);
+    param_00.soul_snd = lib_0380::func_6842("zmb_gdkng_drain", undefined, param_00.plate_model.origin);
     wait(1);
   }
 }
 
 blood_plate_drain_blood(param_00) {
-  param_00.blood_strt = lib_0380::func_2889("zmb_gdkng_drain_blood_strt", undefined, param_00.plate_model.var_116);
-  param_00.blood_lp = lib_0380::func_6842("zmb_gdkng_drain_blood_lp", undefined, param_00.plate_model.var_116, 0.3);
-  param_00 common_scripts\utility::knock_off_battery("drain_ended", "plate_destroyed");
+  param_00.blood_strt = lib_0380::func_2889("zmb_gdkng_drain_blood_strt", undefined, param_00.plate_model.origin);
+  param_00.blood_lp = lib_0380::func_6842("zmb_gdkng_drain_blood_lp", undefined, param_00.plate_model.origin, 0.3);
+  param_00 common_scripts\utility::waittill_any("drain_ended", "plate_destroyed");
   lib_0380::func_6850(param_00.blood_lp, 0.5);
-  param_00.blood_stop = lib_0380::func_2889("zmb_gdkng_drain_blood_end", undefined, param_00.plate_model.var_116);
+  param_00.blood_stop = lib_0380::func_2889("zmb_gdkng_drain_blood_end", undefined, param_00.plate_model.origin);
 }
 
 god_king_giestdrain_plate_destroyed() {
@@ -572,7 +572,7 @@ god_king_giestdrain_plate_destroyed() {
 
 clear_mute_zvox_for_drain() {
   level notify("end_geistdrain_submix");
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 method_8627("godking_giestdrain_mute_zvox");
   }
 }
@@ -607,9 +607,9 @@ god_king_detonate_cast() {
 
 god_king_detonate_throw(param_00) {
   var_01 = self;
-  var_01.drain_ent = spawn("script_origin", var_01.var_116);
+  var_01.drain_ent = spawn("script_origin", var_01.origin);
   var_01.beam_snd = lib_0380::func_288B("zmb_gdkng_drain", undefined, var_01.drain_ent);
-  var_01.drain_ent moveTo(param_00.var_116, 1.5);
+  var_01.drain_ent moveTo(param_00.origin, 1.5);
   wait(1.6);
   var_01.drain_ent delete();
 }
@@ -624,7 +624,7 @@ god_king_force_summon() {
 
 god_king_force_kneel() {
   wait(1);
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     lib_0380::func_2888("zmb_gdkng_kneel", var_01);
   }
 }
@@ -645,7 +645,7 @@ finale_elec_oneshots() {
   wait(3);
   for(;;) {
     var_00 = randomintrange(5, 8);
-    var_01 = self.var_116 + (randomintrange(-200, 200), randomintrange(-200, 200), 0);
+    var_01 = self.origin + (randomintrange(-200, 200), randomintrange(-200, 200), 0);
     lib_0380::func_2889("zmb_gdkng_giest_finale_elec_oneshot", undefined, var_01);
     wait(var_00);
   }
@@ -657,7 +657,7 @@ finale_whoosh_oneshots() {
   wait(3);
   for(;;) {
     var_00 = randomintrange(4, 9);
-    var_01 = self.var_116 + (randomintrange(-200, 200), randomintrange(-200, 200), 0);
+    var_01 = self.origin + (randomintrange(-200, 200), randomintrange(-200, 200), 0);
     lib_0380::func_2889("zmb_gdkng_giest_finale_whoosh_oneshot", undefined, var_01);
     wait(var_00);
   }

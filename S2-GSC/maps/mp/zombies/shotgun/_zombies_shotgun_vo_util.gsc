@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\shotgun\_zombies_shotgun_vo_util.gsc
 ****************************************************************/
 
-func_00D5() {
+init() {
   init_converations();
   level.charactergroups = [];
   var_00 = 0;
@@ -30,12 +30,12 @@ func_00D5() {
 }
 
 init_converations() {
-  maps\mp\zombies\_zombies_audio_dlc2::initwavestories();
+  maps / mp / zombies / _zombies_audio_dlc2::initwavestories();
   var_00 = [];
   var_00[var_00.size] = ["zmb_dlc3_gbl_dros_nowimnophysicianbutthoseg", 1];
   var_00[var_00.size] = ["zmb_dlc3_gbl_oliv_theyvebeenchargedwithwhat", 1];
   var_00[var_00.size] = ["zmb_dlc3_gbl_jeff_thisisnotcomplicatedpeopl", 1];
-  level.extermination_story = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_00, 1, undefined, "zmb_dlc3_gbl_");
+  level.extermination_story = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_00, 1, undefined, "zmb_dlc3_gbl_");
 }
 
 is_character_present_in_match(param_00) {
@@ -44,7 +44,7 @@ is_character_present_in_match(param_00) {
   }
 
   foreach(var_02 in param_00) {
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       if(common_scripts\utility::func_F79(level.charactergroups[var_02], var_04.var_20D8)) {
         return 1;
       }
@@ -61,7 +61,7 @@ player_is_character_type(param_00) {
 
 random_valid_character_player(param_00, param_01) {
   var_02 = [];
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     foreach(var_07, var_06 in param_01) {
       var_02 = common_scripts\utility::func_F6F(var_02, [var_04, param_01[var_07], param_00[var_07]]);
     }
@@ -73,7 +73,7 @@ random_valid_character_player(param_00, param_01) {
     var_0B = var_0A[1];
     var_0C = var_0A[2];
     if(var_04 player_is_character_type(var_0C)) {
-      var_04 thread lib_0378::func_307E(var_0B, level.var_744A);
+      var_04 thread lib_0378::func_307E(var_0B, level.players);
       return;
     }
   }
@@ -81,7 +81,7 @@ random_valid_character_player(param_00, param_01) {
 
 all_players_present(param_00) {
   var_01 = 0;
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     var_04 = 0;
     foreach(var_06 in param_00) {
       if(var_03 player_is_character_type(var_06)) {
@@ -94,7 +94,7 @@ all_players_present(param_00) {
 }
 
 play_global_vo(param_00, param_01, param_02) {
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     var_04 thread player_vo_to_self(param_00, param_01, param_02);
   }
 }
@@ -105,7 +105,7 @@ player_vo_to_self(param_00, param_01, param_02) {
     if(var_03 player_is_character_type("ride")) {
       if(var_03 issplitscreenplayer()) {
         if(var_03 method_82ED()) {
-          var_03 thread lib_0378::func_307E(param_00, level.var_744A);
+          var_03 thread lib_0378::func_307E(param_00, level.players);
           return;
         }
 
@@ -137,7 +137,7 @@ player_vo_to_self(param_00, param_01, param_02) {
 }
 
 try_run_conversation(param_00, param_01, param_02, param_03, param_04) {
-  if(!maps\mp\zombies\_zombies_audio_dlc2::validate_players_in_story(param_00)) {
+  if(!maps / mp / zombies / _zombies_audio_dlc2::validate_players_in_story(param_00)) {
     return 0;
   }
 
@@ -158,7 +158,7 @@ try_run_conversation(param_00, param_01, param_02, param_03, param_04) {
     var_09 = undefined;
     var_0A = 0;
     var_0B = 0;
-    foreach(var_0D in level.var_744A) {
+    foreach(var_0D in level.players) {
       if(isDefined(var_0D.var_20D8)) {
         var_0E = lib_0378::func_307B(var_0D.var_20D8);
         if(var_0E == var_08) {
@@ -173,9 +173,9 @@ try_run_conversation(param_00, param_01, param_02, param_03, param_04) {
     var_10 = undefined;
     if(var_0B && isDefined(var_09)) {
       var_11 = gettime();
-      var_09 lib_0378::func_307E(var_07.var_BB4, level.var_744A, undefined, param_01);
+      var_09 lib_0378::func_307E(var_07.var_BB4, level.players, undefined, param_01);
     } else {
-      var_09 lib_0378::func_307E(var_07.var_BB4, level.var_744A, undefined, param_01);
+      var_09 lib_0378::func_307E(var_07.var_BB4, level.players, undefined, param_01);
     }
 
     wait(var_07.post_delay);
@@ -197,7 +197,7 @@ get_speaker_alive(param_00) {
     return 0;
   }
 
-  if(param_00.var_178 == "spectator") {
+  if(param_00.sessionstate == "spectator") {
     return 0;
   }
 

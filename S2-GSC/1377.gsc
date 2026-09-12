@@ -3,7 +3,7 @@
  * Script: 1377.gsc
 *********************************************/
 
-lib_0561::func_00D5() {
+init() {
   lib_0572::func_52A4();
   lib_0571::func_52A4();
   lib_056F::func_52A4();
@@ -16,9 +16,9 @@ lib_0561::func_00D5() {
   lib_0576::func_52A4();
   lib_0579::func_52A4();
   lib_0578::func_52A4();
-  maps\mp\zombies\consumables\inv_giest_shield::func_52A4();
-  maps\mp\zombies\consumables\inv_rng_ability::func_52A4();
-  maps\mp\zombies\consumables\inv_armor::func_52A4();
+  maps / mp / zombies / consumables / inv_giest_shield::func_52A4();
+  maps / mp / zombies / consumables / inv_rng_ability::func_52A4();
+  maps / mp / zombies / consumables / inv_armor::func_52A4();
 }
 
 initconsumablesfromtable(param_00, param_01, param_02, param_03) {
@@ -27,29 +27,29 @@ initconsumablesfromtable(param_00, param_01, param_02, param_03) {
     for(var_05 = function_027A(var_04); var_05 >= 0; var_05 = var_06 - 1) {
       var_06 = tablelookuprownum(var_04, 6, param_00, var_05);
       var_07 = tablelookupbyrow(var_04, var_06, 0);
-      var_08 = lib_0561::func_4471(var_07);
+      var_08 = func_4471(var_07);
       var_09 = var_08[0];
       var_0A = var_08[1];
       if(var_09 != "none") {
-        lib_0561::func_52A5(var_09, var_09, param_01, param_02, param_03);
+        func_52A5(var_09, var_09, param_01, param_02, param_03);
       }
     }
   }
 }
 
-lib_0561::func_52A5(param_00, param_01, param_02, param_03, param_04) {
+func_52A5(param_00, param_01, param_02, param_03, param_04) {
   if(!isDefined(level.var_25A0)) {
     level.var_25A0 = [];
   }
 
   var_05 = spawnStruct();
-  var_05.var_0109 = param_00;
+  var_05.name = param_00;
   var_05.var_A20E = param_02;
   var_05.var_4459 = param_04;
   if(isDefined(param_03)) {
     var_05.var_1F7F = param_03;
   } else {
-    var_05.var_1F7F = ::lib_0561::func_1F7B;
+    var_05.var_1F7F = ::func_1F7B;
   }
 
   level.var_25A0[param_00] = var_05;
@@ -65,7 +65,7 @@ getconsumablerefrowintable(param_00) {
   return var_02;
 }
 
-lib_0561::func_4472(param_00) {
+func_4472(param_00) {
   if(param_00 == 0) {
     return "none";
   }
@@ -73,47 +73,47 @@ lib_0561::func_4472(param_00) {
   return maps\mp\_utility::func_452B(param_00);
 }
 
-lib_0561::func_5332() {
+func_5332() {
   self notifyonplayercommand("useConsumable_upSlot", "+actionslot 1");
   self notifyonplayercommand("useConsumable_downSlot", "+actionslot 2");
   if(!common_scripts\utility::func_562E(level.var_8C8D)) {
     var_00 = level.var_25A0;
     var_01 = self getrankedplayerdata(common_scripts\utility::func_46A8(), "equippedConsumables", 0, "ID");
     var_02 = self getrankedplayerdata(common_scripts\utility::func_46A8(), "equippedConsumables", 0, "quantity");
-    var_03 = lib_0561::func_4472(var_01);
-    var_04 = lib_0561::func_4471(var_03);
+    var_03 = func_4472(var_01);
+    var_04 = func_4471(var_03);
     var_05 = var_04[0];
     var_06 = var_04[1];
     if(isDefined(level.var_25A0[var_05]) && var_02 > 0) {
-      lib_0561::func_477D(var_03, var_05, var_06, "upSlot", var_01);
+      func_477D(var_03, var_05, var_06, "upSlot", var_01);
       setmatchdata("players", self.var_2418, "loadout", "consumables", 0, var_01);
     }
 
     var_07 = self getrankedplayerdata(common_scripts\utility::func_46A8(), "equippedConsumables", 1, "ID");
     var_08 = self getrankedplayerdata(common_scripts\utility::func_46A8(), "equippedConsumables", 1, "quantity");
-    var_09 = lib_0561::func_4472(var_07);
-    var_0A = lib_0561::func_4471(var_09);
+    var_09 = func_4472(var_07);
+    var_0A = func_4471(var_09);
     var_0B = var_0A[0];
     var_0C = var_0A[1];
     if(isDefined(level.var_25A0[var_0B]) && var_08 > 0 && !var_01 == var_07 || var_08 > 1) {
-      lib_0561::func_477D(var_09, var_0B, var_0C, "downSlot", var_07);
+      func_477D(var_09, var_0B, var_0C, "downSlot", var_07);
       setmatchdata("players", self.var_2418, "loadout", "consumables", 1, var_07);
     }
 
     var_0D = self getrankedplayerdata(common_scripts\utility::func_46A8(), "equippedConsumables", 2, "ID");
     var_0E = self getrankedplayerdata(common_scripts\utility::func_46A8(), "equippedConsumables", 2, "quantity");
     if(var_0E > 0) {
-      lib_0561::func_477D("consumable_zm_self_revive", "consumable_zm_self_revive", "common", "sReviveSlot", var_0D);
+      func_477D("consumable_zm_self_revive", "consumable_zm_self_revive", "common", "sReviveSlot", var_0D);
     }
   }
 
   self.var_A97F = 0;
   self setclientomnvar("ui_zm_can_use_consumable", 0);
-  thread lib_0561::func_636D();
-  thread lib_0561::func_A6DA();
+  thread func_636D();
+  thread func_A6DA();
 }
 
-lib_0561::func_636D() {
+func_636D() {
   level endon("game_over");
   self endon("disconnect");
   for(;;) {
@@ -129,11 +129,11 @@ lib_0561::func_636D() {
   }
 }
 
-lib_0561::func_464C(param_00) {
+func_464C(param_00) {
   for(;;) {
     var_01 = common_scripts\utility::func_7A33(param_00);
-    if(var_01.var_0109 == "self_revive") {
-      param_00 = common_scripts\utility::func_0F93(param_00, var_01);
+    if(var_01.name == "self_revive") {
+      param_00 = common_scripts\utility::func_F93(param_00, var_01);
       continue;
     }
 
@@ -143,7 +143,7 @@ lib_0561::func_464C(param_00) {
   return var_01;
 }
 
-lib_0561::func_4471(param_00) {
+func_4471(param_00) {
   var_01 = getsubstr(param_00, param_00.size - 2, param_00.size);
   var_02 = getsubstr(param_00, 0, param_00.size - 2);
   switch (var_01) {
@@ -164,7 +164,7 @@ lib_0561::func_4471(param_00) {
   }
 }
 
-lib_0561::func_477D(param_00, param_01, param_02, param_03, param_04) {
+func_477D(param_00, param_01, param_02, param_03, param_04) {
   if(!isDefined(self.var_259F)) {
     self.var_259F = [];
   }
@@ -175,12 +175,12 @@ lib_0561::func_477D(param_00, param_01, param_02, param_03, param_04) {
   }
 
   self.var_259F[param_03].var_7B79 = param_00;
-  self.var_259F[param_03].var_0109 = var_05.var_0109;
-  self.var_259F[param_03].var_01B9 = param_02;
-  self.var_259F[param_03].var_20F0 = [[var_05.var_4459]](self.var_259F[param_03].var_01B9);
+  self.var_259F[param_03].name = var_05.name;
+  self.var_259F[param_03].type = param_02;
+  self.var_259F[param_03].var_20F0 = [[var_05.var_4459]](self.var_259F[param_03].type);
   self.var_259F[param_03].var_7B7D = param_04;
   if(param_03 == "upSlot" || param_03 == "downSlot") {
-    lib_0561::func_5FB3(param_03);
+    func_5FB3(param_03);
     self.var_259F[param_03].var_5501 = 1;
     return;
   }
@@ -188,16 +188,16 @@ lib_0561::func_477D(param_00, param_01, param_02, param_03, param_04) {
   self.var_259F[param_03].var_5501 = 2;
 }
 
-lib_0561::func_477E(param_00, param_01) {
+func_477E(param_00, param_01) {
   var_02 = 0;
   if(isDefined(self.var_259F[param_00])) {
     var_02 = 1;
   }
 
   if(var_02) {
-    var_03 = self.var_259F[param_00].var_0109;
+    var_03 = self.var_259F[param_00].name;
     var_04 = level.var_25A0[var_03];
-    var_05 = [[var_04.var_4459]](self.var_259F[param_00].var_01B9);
+    var_05 = [[var_04.var_4459]](self.var_259F[param_00].type);
     if(!isDefined(param_01)) {
       param_01 = var_05;
     }
@@ -205,11 +205,11 @@ lib_0561::func_477E(param_00, param_01) {
     var_06 = param_01 + self.var_259F[param_00].var_20F0;
     var_06 = int(clamp(var_06, 0, var_05));
     self.var_259F[param_00].var_20F0 = var_06;
-    lib_0561::func_A126(param_00);
+    func_A126(param_00);
   }
 }
 
-lib_0561::func_5FB3(param_00) {
+func_5FB3(param_00) {
   var_01 = self.var_259F[param_00].var_7B79;
   var_02 = self.var_259F[param_00].var_20F0;
   var_03 = getconsumablerefrowintable(var_01);
@@ -226,7 +226,7 @@ lib_0561::func_5FB3(param_00) {
   }
 }
 
-lib_0561::func_A126(param_00) {
+func_A126(param_00) {
   var_01 = self.var_259F[param_00].var_20F0;
   if(param_00 == "upSlot") {
     self setclientomnvar("ui_zm_consumable_count0", var_01);
@@ -238,32 +238,32 @@ lib_0561::func_A126(param_00) {
   }
 }
 
-lib_0561::func_A6DA() {
+func_A6DA() {
   level endon("game_over");
   self endon("disconnect");
   for(;;) {
-    var_00 = common_scripts\utility::func_A715("useConsumable_upSlot", "useConsumable_downSlot", "useConsumable_sReviveSlot", "death");
+    var_00 = common_scripts\utility::waittill_any_return("useConsumable_upSlot", "useConsumable_downSlot", "useConsumable_sReviveSlot", "death");
     if(var_00 == "death") {
       continue;
     }
 
     if(issubstr(var_00, "upSlot")) {
-      childthread lib_0561::func_A201("upSlot");
+      childthread func_A201("upSlot");
       continue;
     }
 
     if(issubstr(var_00, "downSlot")) {
-      childthread lib_0561::func_A201("downSlot");
+      childthread func_A201("downSlot");
       continue;
     }
 
     if(issubstr(var_00, "sReviveSlot")) {
-      childthread lib_0561::func_A201("sReviveSlot");
+      childthread func_A201("sReviveSlot");
     }
   }
 }
 
-lib_0561::func_4B5E(param_00) {
+func_4B5E(param_00) {
   if(!isDefined(self.var_259F)) {
     return [0, undefined];
   }
@@ -272,22 +272,22 @@ lib_0561::func_4B5E(param_00) {
     return [0, undefined];
   }
 
-  if(isDefined(self.var_259F["upSlot"]) && self.var_259F["upSlot"].var_0109 == param_00) {
+  if(isDefined(self.var_259F["upSlot"]) && self.var_259F["upSlot"].name == param_00) {
     return [1, "upSlot"];
   }
 
-  if(isDefined(self.var_259F["downSlot"]) && self.var_259F["downSlot"].var_0109 == param_00) {
+  if(isDefined(self.var_259F["downSlot"]) && self.var_259F["downSlot"].name == param_00) {
     return [1, "downSlot"];
   }
 
-  if(isDefined(self.var_259F["sReviveSlot"]) && self.var_259F["sReviveSlot"].var_0109 == param_00) {
+  if(isDefined(self.var_259F["sReviveSlot"]) && self.var_259F["sReviveSlot"].name == param_00) {
     return [1, "sReviveSlot"];
   }
 
   return [0, undefined];
 }
 
-lib_0561::func_4B5F(param_00) {
+func_4B5F(param_00) {
   if(!isDefined(param_00)) {
     return 0;
   }
@@ -299,7 +299,7 @@ lib_0561::func_4B5F(param_00) {
   return 0;
 }
 
-lib_0561::func_1F7B() {
+func_1F7B() {
   if(isDefined(self.var_5378) && self.var_5378) {
     return 0;
   }
@@ -315,16 +315,16 @@ lib_0561::func_1F7B() {
   return 1;
 }
 
-lib_0561::func_A201(param_00) {
-  if(!lib_0561::func_4B5F(param_00)) {
+func_A201(param_00) {
+  if(!func_4B5F(param_00)) {
     return;
   }
 
-  var_01 = self.var_259F[param_00].var_0109;
+  var_01 = self.var_259F[param_00].name;
   if([[level.var_25A0[var_01].var_1F7F]](var_01)) {
     self.var_259F[param_00].var_20F0--;
-    lib_0561::func_25A2(param_00);
-    lib_0561::func_A126(param_00);
+    func_25A2(param_00);
+    func_A126(param_00);
     self thread[[level.var_25A0[var_01].var_A20E]](param_00);
     if(isDefined(level.zmb_events_consumables_notify)) {
       level notify(level.zmb_events_consumables_notify);
@@ -337,7 +337,7 @@ lib_0561::func_A201(param_00) {
   }
 }
 
-lib_0561::func_25A2(param_00) {
+func_25A2(param_00) {
   if(getdvarint("709") == 1) {
     return;
   }
@@ -374,10 +374,10 @@ lib_0561::func_25A2(param_00) {
     }
   }
 
-  lib_0547::writeusedconsumable(self.var_259F[param_00].var_7B7D, self.var_2418, self.var_0116);
+  lib_0547::writeusedconsumable(self.var_259F[param_00].var_7B7D, self.var_2418, self.origin);
 }
 
-lib_0561::func_AABA() {
+func_AABA() {
   if(getdvarint("709") == 1) {
     return;
   }
@@ -389,8 +389,8 @@ lib_0561::func_AABA() {
   var_00 = ["upSlot", "downSlot"];
   foreach(var_02 in var_00) {
     if(!isDefined(self.var_259F[var_02])) {} else {
-      var_03 = level.var_25A0[self.var_259F[var_02].var_0109];
-      var_04 = [[var_03.var_4459]](self.var_259F[var_02].var_01B9);
+      var_03 = level.var_25A0[self.var_259F[var_02].name];
+      var_04 = [[var_03.var_4459]](self.var_259F[var_02].type);
       if(self.var_259F[var_02].var_20F0 != var_04) {}
     }
   }

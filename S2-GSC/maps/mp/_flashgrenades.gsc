@@ -3,7 +3,7 @@
  * Script: maps\mp\_flashgrenades.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   precacheshellshock("flashbang_mp");
 }
 
@@ -30,7 +30,7 @@ func_6394() {
   self endon("disconnect");
   self notify("monitorFlash");
   self endon("monitorFlash");
-  self.var_3D48 = 0;
+  self.flashendtime = 0;
   self.var_8C5E = 0;
   var_00 = 2.5;
   for(;;) {
@@ -76,22 +76,22 @@ func_6394() {
       var_0B = 0.25;
     }
 
-    if(level.var_984D && isDefined(var_04) && isDefined(var_04.var_01A7) && var_04.var_01A7 == self.var_01A7 && var_04 != self) {
-      if(level.var_3EC4 == 0) {
+    if(level.teambased && isDefined(var_04) && isDefined(var_04.team) && var_04.team == self.team && var_04 != self) {
+      if(level.friendlyfire == 0) {
         continue;
-      } else if(level.var_3EC4 == 1) {} else if(level.var_3EC4 == 2) {
+      } else if(level.friendlyfire == 1) {} else if(level.friendlyfire == 2) {
         var_09 = var_09 * 0.5;
         var_0B = var_0B * 0.5;
         var_08 = 0;
         var_07 = 1;
-      } else if(level.var_3EC4 == 3) {
+      } else if(level.friendlyfire == 3) {
         var_09 = var_09 * 0.5;
         var_0B = var_0B * 0.5;
         var_07 = 1;
       }
     } else if(isDefined(var_04)) {
       if(var_04 != self) {
-        var_04 maps\mp\gametypes\_missions::func_7750("ch_indecentexposure");
+        var_04 maps\mp\gametypes\_missions::processchallenge("ch_indecentexposure");
       }
     }
 
@@ -100,7 +100,7 @@ func_6394() {
       if(isDefined(var_04) && var_04 != self) {
         var_04 thread maps\mp\gametypes\_damagefeedback::func_A102("flash");
         var_0C = self;
-        if(isPlayer(var_04) && var_04 maps\mp\_utility::func_0649("specialty_paint")) {
+        if(isPlayer(var_04) && var_04 maps\mp\_utility::_hasperk("specialty_paint")) {
           var_0C thread maps\mp\perks\_perkfunctions::func_86ED(var_04, 0);
         }
       }
@@ -124,7 +124,7 @@ func_0F33(param_00, param_01, param_02) {
   wait 0.05;
   if(isDefined(self.var_3D46)) {
     self shellshock("flashbang_mp", self.var_3D46);
-    self.var_3D48 = gettime() + self.var_3D46 * 1000;
+    self.flashendtime = gettime() + self.var_3D46 * 1000;
     if(param_02) {
       self.var_8C5C = self.var_3D46 * 10;
       self.var_8C5E = gettime() + self.var_8C5C * 1000;
@@ -140,5 +140,5 @@ func_0F33(param_00, param_01, param_02) {
 }
 
 func_56F3() {
-  return isDefined(self.var_3D48) && gettime() < self.var_3D48;
+  return isDefined(self.flashendtime) && gettime() < self.flashendtime;
 }

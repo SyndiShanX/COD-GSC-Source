@@ -3,8 +3,8 @@
  * Script: 1388.gsc
 *********************************************/
 
-lib_056C::func_A9CE() {
-  level.var_A9CC = ::lib_056C::func_4735;
+func_A9CE() {
+  level.var_A9CC = ::func_4735;
 }
 
 getattachmentforzombieweapon(param_00, param_01) {
@@ -22,7 +22,7 @@ getattachmentforzombieweapon(param_00, param_01) {
   return undefined;
 }
 
-lib_056C::func_4735(param_00, param_01) {
+func_4735(param_00, param_01) {
   if(param_01 == "none") {
     return;
   }
@@ -33,11 +33,11 @@ lib_056C::func_4735(param_00, param_01) {
 
   var_02 = lib_0547::func_AAF9(param_01);
   var_03 = lib_0547::func_9475(var_02) + "_mp";
-  if(!maps\mp\zombies\zombie_weapon_kits_shared::func_5842(var_03)) {
+  if(!maps / mp / zombies / zombie_weapon_kits_shared::func_5842(var_03)) {
     return;
   }
 
-  var_04 = maps\mp\zombies\zombie_weapon_kits_shared::getweaponkitmp(param_00, var_03);
+  var_04 = maps / mp / zombies / zombie_weapon_kits_shared::getweaponkitmp(param_00, var_03);
   var_05 = [];
   foreach(var_07 in var_04.var_114C) {
     var_08 = getzombieattachmentoverrideguid(var_07, param_01);
@@ -75,7 +75,7 @@ weaponkitsgetvalidbaseweaponrefmp(param_00) {
 
   var_01 = lib_0547::func_AAF9(param_00);
   var_02 = lib_0547::func_9475(var_01) + "_mp";
-  if(!maps\mp\zombies\zombie_weapon_kits_shared::func_5842(var_02)) {
+  if(!maps / mp / zombies / zombie_weapon_kits_shared::func_5842(var_02)) {
     return;
   }
 
@@ -89,7 +89,7 @@ getzombiepaintjob(param_00, param_01) {
   }
 
   var_03 = function_02FF(var_02, "_zm") + "_mp";
-  if(!maps\mp\zombies\zombie_weapon_kits_shared::func_5842(var_03)) {
+  if(!maps / mp / zombies / zombie_weapon_kits_shared::func_5842(var_03)) {
     return 0;
   }
 

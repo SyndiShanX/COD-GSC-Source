@@ -10,14 +10,14 @@ init_dlc1_secrets_mp_zombie_house() {
 mountain_blood_0() {
   var_00 = self;
   var_00 endon("enter_last_stand");
-  level waittill(maps\mp\gametypes\zombies::get_round_complete_notify(30));
+  level waittill(maps / mp / gametypes / zombies::get_round_complete_notify(30));
   return 1;
 }
 
 mountain_blood_1() {
   var_00 = self;
   var_00 endon("damage");
-  level waittill(maps\mp\gametypes\zombies::get_round_complete_notify(20));
+  level waittill(maps / mp / gametypes / zombies::get_round_complete_notify(20));
   return 1;
 }
 

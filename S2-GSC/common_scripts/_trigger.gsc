@@ -36,7 +36,7 @@ func_097B(param_00) {
       level.var_9D7B[param_00[var_01]] = [];
     }
 
-    level.var_9D7B[param_00[var_01]] = common_scripts\utility::func_0F6F(level.var_9D7B[param_00[var_01]], self);
+    level.var_9D7B[param_00[var_01]] = common_scripts\utility::func_F6F(level.var_9D7B[param_00[var_01]], self);
   }
 }
 
@@ -62,24 +62,24 @@ func_4397(param_00) {
   if(param_00) {}
 
   var_01 = [];
-  var_02 = getEntArray(self.var_01A2, "targetname");
+  var_02 = getEntArray(self.target, "targetname");
   if(isDefined(var_02)) {
-    var_01 = common_scripts\utility::func_0F73(var_01, var_02);
+    var_01 = common_scripts\utility::func_F73(var_01, var_02);
   }
 
-  var_03 = common_scripts\utility::func_46B7(self.var_01A2, "targetname");
+  var_03 = common_scripts\utility::func_46B7(self.target, "targetname");
   if(isDefined(var_03)) {
-    var_01 = common_scripts\utility::func_0F73(var_01, var_03);
+    var_01 = common_scripts\utility::func_F73(var_01, var_03);
   }
 
-  var_04 = getnodearray(self.var_01A2, "targetname");
+  var_04 = getnodearray(self.target, "targetname");
   if(isDefined(var_04)) {
-    var_01 = common_scripts\utility::func_0F73(var_01, var_04);
+    var_01 = common_scripts\utility::func_F73(var_01, var_04);
   }
 
-  var_05 = function_01DC(self.var_01A2, "targetname");
+  var_05 = function_01DC(self.target, "targetname");
   if(isDefined(var_05)) {
-    var_01 = common_scripts\utility::func_0F73(var_01, var_05);
+    var_01 = common_scripts\utility::func_F73(var_01, var_05);
   }
 
   if(param_00) {}
@@ -96,7 +96,7 @@ func_9D79(param_00) {
 
   for(;;) {
     param_00 waittill("trigger", var_02);
-    param_00 common_scripts\utility::func_0161();
+    param_00 common_scripts\utility::func_161();
     common_scripts\utility::func_3C8F(var_01, var_02);
   }
 }
@@ -110,7 +110,7 @@ func_9D75(param_00) {
 
   for(;;) {
     param_00 waittill("trigger", var_02);
-    param_00 common_scripts\utility::func_0161();
+    param_00 common_scripts\utility::func_161();
     common_scripts\utility::func_3C7B(var_01, var_02);
   }
 }
@@ -124,7 +124,7 @@ func_9D7A(param_00) {
 
   for(;;) {
     param_00 waittill("trigger", var_02);
-    param_00 common_scripts\utility::func_0161();
+    param_00 common_scripts\utility::func_161();
     if(isalive(var_02) && var_02 istouching(param_00) && isDefined(param_00)) {
       common_scripts\utility::func_3C8F(var_01, var_02);
     }
@@ -153,7 +153,7 @@ func_9D8E(param_00, param_01) {
 
   var_03 = param_00 func_4397();
   var_04 = var_03[0];
-  var_05 = var_04.var_0116;
+  var_05 = var_04.origin;
   param_00 endon("death");
   var_04 endon("death");
   var_06 = param_00 common_scripts\utility::func_4395();
@@ -188,8 +188,8 @@ func_9D8E(param_00, param_01) {
         continue;
       }
 
-      var_09 = vectorNormalize(var_05 - var_08.var_0116);
-      var_0A = var_08 getangles();
+      var_09 = vectorNormalize(var_05 - var_08.origin);
+      var_0A = var_08 getplayerangles();
       var_0B = anglesToForward(var_0A);
       var_0C = vectordot(var_0B, var_09);
       if(var_0C >= var_02) {

@@ -3,8 +3,8 @@
  * Script: maps\mp\gametypes\blades.gsc
 *********************************************/
 
-func_00F9() {
-  maps\mp\gametypes\_globallogic::func_00D5();
+main() {
+  maps\mp\gametypes\_globallogic::init();
   lib_01DD::func_8A0C();
   maps\mp\gametypes\_globallogic::func_8A0C();
   if(isusingmatchrulesdata()) {
@@ -12,12 +12,12 @@ func_00F9() {
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BFA(level.var_3FDC, 5);
-    maps\mp\_utility::func_7BF9(level.var_3FDC, 0);
-    maps\mp\_utility::func_7C04(level.var_3FDC, 1);
-    maps\mp\_utility::func_7BF7(level.var_3FDC, 1);
-    maps\mp\_utility::func_7BF1(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BE5(level.var_3FDC, 0);
+    maps\mp\_utility::func_7BFA(level.gametype, 5);
+    maps\mp\_utility::func_7BF9(level.gametype, 0);
+    maps\mp\_utility::func_7C04(level.gametype, 1);
+    maps\mp\_utility::func_7BF7(level.gametype, 1);
+    maps\mp\_utility::func_7BF1(level.gametype, 0);
+    maps\mp\_utility::func_7BE5(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
     setdynamicdvar("scr_game_radarMode", 1);
@@ -33,7 +33,7 @@ func_00F9() {
   level.var_6BA7 = ::func_6BA7;
   level.var_6B7B = ::func_6B7B;
   level.var_6BAF = ::func_6BAF;
-  level.var_6B5C = ::func_6B5C;
+  level.onnormaldeath = ::onnormaldeath;
   level.var_6B7F = ::func_6B7F;
   level.var_1DEA = ::func_1785;
   level.var_80A8 = 1;
@@ -75,7 +75,7 @@ func_6BAF() {
   setclientnamemode("auto_change");
   maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_BLADES");
   maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_BLADES");
-  if(level.var_910F) {
+  if(level.splitscreen) {
     maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_BLADES");
     maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_BLADES");
   } else {
@@ -86,29 +86,29 @@ func_6BAF() {
   maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_BLADES_HINT");
   maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_BLADES_HINT");
   lib_050D::func_10E4();
-  level.var_A239 = 0;
+  level.usestartspawns = 0;
   var_00[0] = "blades";
-  maps\mp\gametypes\_gameobjects::func_00F9(var_00);
-  foreach(var_02 in level.var_744A) {
-    var_02.var_012C["gamemodeLoadout"] = level.var_1784;
-    var_02 maps\mp\gametypes\_class::func_4773(var_02.var_01A7, "gamemode");
+  maps\mp\gametypes\_gameobjects::main(var_00);
+  foreach(var_02 in level.players) {
+    var_02.pers["gamemodeLoadout"] = level.var_1784;
+    var_02 maps\mp\gametypes\_class::func_4773(var_02.team, "gamemode");
   }
 
   level.var_7895 = 1;
   level.var_17EF = 1;
-  level thread func_6B6C();
+  level thread onplayerconnect();
 }
 
-func_6B5C(param_00, param_01, param_02) {
+onnormaldeath(param_00, param_01, param_02) {
   var_03 = 0;
-  foreach(var_05 in level.var_744A) {
-    if(isDefined(var_05.var_015C) && var_05.var_015C > var_03) {
-      var_03 = var_05.var_015C;
+  foreach(var_05 in level.players) {
+    if(isDefined(var_05.score) && var_05.score > var_03) {
+      var_03 = var_05.score;
     }
   }
 
-  if(game["state"] == "postgame" && param_01.var_015C >= var_03) {
-    param_01.var_3B4B = 1;
+  if(game["state"] == "postgame" && param_01.score >= var_03) {
+    param_01.finalkill = 1;
   }
 }
 
@@ -151,14 +151,14 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   if(param_03 == "MOD_FALLING" || isPlayer(param_01)) {
     if(param_03 == "MOD_FALLING" || param_01 == self || func_5806(param_04, param_03)) {
-      self method_8615("mp_war_objective_lost");
+      self playlocalsound("mp_war_objective_lost");
       self.var_8C15 = 1;
       self.setbackduetosuicide = param_03 == "MOD_FALLING" || param_01 == self;
       self.var_65ED++;
-      self.var_0021 = self.var_65ED;
-      var_0A = self.var_015C;
-      self.var_012C["score"] = 0;
-      self.var_015C = 0;
+      self.assists = self.var_65ED;
+      var_0A = self.score;
+      self.pers["score"] = 0;
+      self.score = 0;
       maps\mp\_utility::func_867B(0);
       maps\mp\gametypes\_gamescore::func_A161(self, var_0A * -1);
       if(func_5806(param_04, param_03) && isDefined(param_01)) {
@@ -178,24 +178,24 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       return;
     }
 
-    if(func_57BE("kill", param_04, param_03) && !func_5806(param_04, param_03)) {
-      if(param_01.lastscoretime + 3000 > gettime()) {
-        param_01 thread maps\mp\_events::quickbladesscoreevent();
+    if(func_57BE("kill", param_05, param_04) && !func_5806(param_05, param_04)) {
+      if(param_02.lastscoretime + 3000 > gettime()) {
+        param_02 thread maps\mp\_events::quickbladesscoreevent();
       }
 
-      param_01.lastscoretime = gettime();
-      if(isriflebulletkill(param_04, param_03)) {
-        param_01 thread maps\mp\_events::increasedbladesscoreriflebulletevent();
+      param_02.lastscoretime = gettime();
+      if(isriflebulletkill(param_05, param_04)) {
+        param_02 thread maps\mp\_events::increasedbladesscoreriflebulletevent();
         return;
       }
 
-      if(isdefectivegrenadekill(param_04, param_03)) {
-        param_01 thread maps\mp\_events::increasedbladesscoredefectivegrenadeevent();
+      if(isdefectivegrenadekill(param_05, param_04)) {
+        param_02 thread maps\mp\_events::increasedbladesscoredefectivegrenadeevent();
         return;
       }
 
-      if(func_5754(param_04, param_03)) {
-        param_01 thread maps\mp\_events::increasedbladesscoremeleeevent();
+      if(func_5754(param_05, param_04)) {
+        param_02 thread maps\mp\_events::increasedbladesscoremeleeevent();
         return;
       }
 
@@ -207,14 +207,14 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 getleadingplayer() {
   var_00 = 0;
   var_01 = undefined;
-  foreach(var_03 in level.var_744A) {
-    if(isDefined(var_03.var_015C) && var_03.var_015C > var_00) {
-      var_00 = var_03.var_015C;
+  foreach(var_03 in level.players) {
+    if(isDefined(var_03.score) && var_03.score > var_00) {
+      var_00 = var_03.score;
       var_01 = var_03;
       continue;
     }
 
-    if(isDefined(var_03.var_015C) && var_03.var_015C == var_00) {
+    if(isDefined(var_03.score) && var_03.score == var_00) {
       var_01 = undefined;
     }
   }
@@ -246,7 +246,7 @@ func_872E() {
   level.var_1784["loadoutEquipmentStruct"] = maps\mp\_utility::func_44CE(16818176, 0);
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
     var_00.var_9149 = 0;
@@ -262,7 +262,7 @@ func_7B82() {
   self endon("disconnect");
   for(;;) {
     self waittill("reload");
-    self givestartammo(self.var_7704);
+    self givestartammo(self.primaryweapon);
     if(isDefined(self.lethalweapon)) {
       self givestartammo(self.lethalweapon);
       if(self.lethalweapon == "throwingknife_mp") {
@@ -279,7 +279,7 @@ func_7B85() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    if(maps\mp\_utility::func_57A0(self) && self.var_01A7 != "spectator" && (isDefined(self.var_7704) && function_01A9(self.var_7704) != "melee" && self method_817F(self.var_7704) == 0) || isDefined(self.lethalweapon) && self method_817F(self.lethalweapon) == 0) {
+    if(maps\mp\_utility::func_57A0(self) && self.team != "spectator" && (isDefined(self.primaryweapon) && function_01A9(self.primaryweapon) != "melee" && self method_817F(self.primaryweapon) == 0) || isDefined(self.lethalweapon) && self method_817F(self.lethalweapon) == 0) {
       wait(2);
       self notify("reload");
       wait(1);
@@ -291,12 +291,12 @@ func_7B85() {
 }
 
 func_1785() {
-  self.var_012C["class"] = "gamemode";
-  self.var_012C["lastClass"] = "";
-  self.var_012C["gamemodeLoadout"] = level.var_1784;
-  self.var_2319 = self.var_012C["class"];
-  self.var_5B84 = self.var_012C["lastClass"];
-  maps\mp\gametypes\_class::func_4790(self.var_01A7, self.var_2319);
+  self.pers["class"] = "gamemode";
+  self.pers["lastClass"] = "";
+  self.pers["gamemodeLoadout"] = level.var_1784;
+  self.var_2319 = self.pers["class"];
+  self.var_5B84 = self.pers["lastClass"];
+  maps\mp\gametypes\_class::func_4790(self.team, self.var_2319);
 }
 
 func_6BA7() {
@@ -340,19 +340,19 @@ givesticksnstonesloadout() {
   self.lethalweapon = "throwingknife_mp";
   self method_8349(self.lethalweapon);
   self giveweapon(self.lethalweapon);
-  self method_82FA(self.lethalweapon, 1);
+  self setweaponammoclip(self.lethalweapon, 1);
   var_00 = "alt+m30_blades_mp+m30_rifle_blades";
-  maps\mp\_utility::func_0642(var_00);
+  maps\mp\_utility::func_642(var_00);
   self givestartammo(var_00);
-  var_01 = maps\mp\_utility::func_4431(var_00);
-  self.var_012C["secondaryWeapon"] = var_01;
+  var_01 = maps\mp\_utility::getbaseweaponname(var_00);
+  self.pers["secondaryWeapon"] = var_01;
   self.var_835A = var_00;
   var_02 = "alt+m1garand_blades_mp+grenade_launcher_blades";
-  maps\mp\_utility::func_0642(var_02);
+  maps\mp\_utility::func_642(var_02);
   self givestartammo(var_02);
   self switchtoweapon(var_02);
   self setspawnweapon(var_02);
-  var_01 = maps\mp\_utility::func_4431(var_02);
-  self.var_012C["primaryWeapon"] = var_01;
-  self.var_7704 = var_02;
+  var_01 = maps\mp\_utility::getbaseweaponname(var_02);
+  self.pers["primaryWeapon"] = var_01;
+  self.primaryweapon = var_02;
 }

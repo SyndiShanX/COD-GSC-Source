@@ -3,7 +3,7 @@
  * Script: 1343.gsc
 *********************************************/
 
-lib_053F::func_00D5() {
+init() {
   common_scripts\utility::func_3C87("door_opened");
   if(!isDefined(level.var_328C)) {
     level.var_328C = [];
@@ -14,18 +14,18 @@ lib_053F::func_00D5() {
   }
 
   level.var_AC1D = common_scripts\utility::func_46B7("door", "targetname");
-  common_scripts\utility::func_0FB2(level.var_AC1D, ::lib_053F::func_51BE);
+  common_scripts\utility::array_thread(level.var_AC1D, ::func_51BE);
 }
 
-lib_053F::func_51BE() {
-  self.var_3280 = self.var_0165;
+func_51BE() {
+  self.var_3280 = self.script_noteworthy;
   if(!isDefined(self.var_3280)) {
     self.var_3280 = "normal";
   }
 
-  if(isDefined(self.var_0164) && issubstr(self.var_0164, "final_brute_closable")) {
+  if(isDefined(self.script_linkname) && issubstr(self.script_linkname, "final_brute_closable")) {
     self.var_3280 = "closeable";
-    self.var_0165 = "closeable";
+    self.script_noteworthy = "closeable";
   }
 
   if(isDefined(self.var_819A) && !common_scripts\utility::func_3C83(self.var_819A)) {
@@ -39,15 +39,15 @@ lib_053F::func_51BE() {
   waittillframeend;
   switch (self.var_3280) {
     case "normal":
-      thread lib_053F::func_51C1();
+      thread func_51C1();
       break;
 
     case "closeable":
-      thread lib_053F::func_51BF();
+      thread func_51BF();
       break;
 
     case "safe_haven":
-      thread lib_053F::func_51C2();
+      thread func_51C2();
       break;
 
     default:
@@ -55,7 +55,7 @@ lib_053F::func_51BE() {
   }
 }
 
-lib_053F::func_327B(param_00) {
+func_327B(param_00) {
   if(!isDefined(param_00)) {
     param_00 = 500;
   }
@@ -63,32 +63,32 @@ lib_053F::func_327B(param_00) {
   self.var_267B = param_00;
 }
 
-lib_053F::func_51BF() {
+func_51BF() {
   self.var_56AE = 1;
-  lib_053F::func_51C1();
+  func_51C1();
 }
 
-lib_053F::func_51C2() {
+func_51C2() {
   self.var_57B4 = 1;
   self.var_56AE = 1;
-  lib_053F::func_51C1();
+  func_51C1();
 }
 
-lib_053F::func_51C1() {
+func_51C1() {
   self.var_9DC2 = [];
   self.var_64C5 = [];
   self.var_17F0 = 0;
-  if(!isDefined(self.var_01A2)) {
-    lib_053F::func_325C("Door struct without any targets at " + self.var_0116 + ".");
+  if(!isDefined(self.target)) {
+    func_325C("Door struct without any targets at " + self.origin + ".");
     return;
   }
 
-  self.var_8301 = function_021F(self.var_01A2, "targetname");
-  var_00 = getEntArray(self.var_01A2, "targetname");
+  self.var_8301 = function_021F(self.target, "targetname");
+  var_00 = getEntArray(self.target, "targetname");
   foreach(var_02 in var_00) {
-    var_03 = var_02.var_0165;
-    if(!isDefined(var_03) && isDefined(var_02.var_003A)) {
-      switch (var_02.var_003A) {
+    var_03 = var_02.script_noteworthy;
+    if(!isDefined(var_03) && isDefined(var_02.classname)) {
+      switch (var_02.classname) {
         case "script_brushmodel":
         case "script_model":
           var_03 = "mover";
@@ -107,13 +107,13 @@ lib_053F::func_51C1() {
 
     switch (var_03) {
       case "trigger":
-        if(lib_053F::func_51C3(var_02)) {
+        if(func_51C3(var_02)) {
           self.var_9DC2[self.var_9DC2.size] = var_02;
         }
         break;
 
       case "mover":
-        if(lib_053F::func_51C0(var_02)) {
+        if(func_51C0(var_02)) {
           self.var_64C5[self.var_64C5.size] = var_02;
         }
         break;
@@ -123,7 +123,7 @@ lib_053F::func_51C1() {
         break;
 
       default:
-        lib_053F::func_325C("Unknown ent type \'" + var_03 + "\' on entity at " + var_02.var_0116 + ".");
+        func_325C("Unknown ent type \'" + var_03 + "\' on entity at " + var_02.origin + ".");
         break;
     }
   }
@@ -145,27 +145,27 @@ lib_053F::func_51C1() {
   }
 
   if((self.var_9DC2.size || common_scripts\utility::func_562E(self.var_57B4)) && self.var_64C5.size || self.var_8301.size) {
-    lib_053F::func_7F5C();
+    func_7F5C();
   }
 }
 
-lib_053F::func_51C3(param_00) {
+func_51C3(param_00) {
   param_00.var_3276 = self;
   return 1;
 }
 
-lib_053F::func_51C0(param_00) {
-  if(!isDefined(param_00.var_01A2)) {
+func_51C0(param_00) {
+  if(!isDefined(param_00.target)) {
     return 1;
   }
 
-  param_00.var_2444 = param_00.var_0116;
+  param_00.var_2444 = param_00.origin;
   param_00.var_17F0 = [];
   param_00.var_64A9 = [];
   param_00.var_5DBD = [];
-  var_01 = common_scripts\utility::func_46B7(param_00.var_01A2, "targetname");
+  var_01 = common_scripts\utility::func_46B7(param_00.target, "targetname");
   foreach(var_03 in var_01) {
-    var_04 = var_03.var_0165;
+    var_04 = var_03.script_noteworthy;
     if(!isDefined(var_04)) {
       var_04 = "goal";
     }
@@ -176,14 +176,14 @@ lib_053F::func_51C0(param_00) {
         break;
 
       default:
-        lib_053F::func_325C("Unknown door target struct type \'" + var_04 + "\' on struct at " + var_03.var_0116 + ".");
+        func_325C("Unknown door target struct type \'" + var_04 + "\' on struct at " + var_03.origin + ".");
         break;
     }
   }
 
-  var_06 = getEntArray(param_00.var_01A2, "targetname");
+  var_06 = getEntArray(param_00.target, "targetname");
   foreach(var_03 in var_06) {
-    var_04 = var_03.var_0165;
+    var_04 = var_03.script_noteworthy;
     if(!isDefined(var_04)) {
       var_04 = "link";
     }
@@ -201,7 +201,7 @@ lib_053F::func_51C0(param_00) {
         break;
 
       default:
-        lib_053F::func_325C("Unknown door target ent type \'" + var_04 + "\' on ent at " + var_03.var_0116 + ".");
+        func_325C("Unknown door target ent type \'" + var_04 + "\' on ent at " + var_03.origin + ".");
         break;
     }
   }
@@ -210,11 +210,11 @@ lib_053F::func_51C0(param_00) {
     return 1;
   }
 
-  lib_053F::func_325C("Door mover at " + param_00.var_0116 + "doesn\'t have a goal stuct.");
+  func_325C("Door mover at " + param_00.origin + "doesn\'t have a goal stuct.");
   return 0;
 }
 
-lib_053F::func_0BCB() {
+func_0BCB() {
   foreach(var_01 in level.var_AC1D) {
     if(!isDefined(var_01.var_6BE1) && var_01.var_6BE1) {
       return 0;
@@ -224,7 +224,7 @@ lib_053F::func_0BCB() {
   return 1;
 }
 
-lib_053F::func_7F5C() {
+func_7F5C() {
   if(1) {
     foreach(var_01 in self.var_9DC2) {
       if(!isDefined(var_01.var_7778)) {
@@ -237,29 +237,29 @@ lib_053F::func_7F5C() {
 
   if(!common_scripts\utility::func_562E(self.var_57B4)) {
     foreach(var_01 in self.var_9DC2) {
-      thread lib_053F::func_7F61(var_01);
+      thread func_7F61(var_01);
     }
   }
 
-  var_05 = lib_053F::func_3278() && lib_053F::func_4B39();
+  var_05 = func_3278() && func_4B39();
   if(var_05) {
     foreach(var_07 in self.var_8301) {
       var_07 setscriptablepartstate("power_light", "power_off", 0);
     }
 
-    thread lib_053F::func_9E96();
+    thread func_9E96();
   }
 
   self waittill("open", var_09);
   foreach(var_01 in self.var_9DC2) {
-    thread lib_053F::func_3677(var_01);
+    thread func_3677(var_01);
   }
 
   foreach(var_0D in self.var_64C5) {
-    thread lib_053F::func_7F5E(var_0D);
+    thread func_7F5E(var_0D);
   }
 
-  lib_053F::func_82F2();
+  func_82F2();
   self.var_6BE1 = 1;
   common_scripts\utility::func_3C8F("door_opened");
   if(level.var_A980 <= 20) {
@@ -274,7 +274,7 @@ lib_053F::func_7F5C() {
     }
   }
 
-  var_0F = lib_0547::func_AC4B(self.var_0116, "door");
+  var_0F = lib_0547::func_AC4B(self.origin, "door");
   var_0F lib_0547::func_AC47(var_09);
   var_0F lib_0547::func_AC48("script_flag", self.var_819A);
   var_0F lib_0547::func_AC44("cost", self.var_267B);
@@ -291,32 +291,32 @@ lib_053F::func_7F5C() {
   }
 
   if(!common_scripts\utility::func_562E(self.var_56AE)) {
-    thread lib_053F::func_7F5F();
+    thread func_7F5F();
     return;
   }
 
   self waittill("close");
-  thread lib_053F::func_82F1();
+  thread func_82F1();
   self.var_6BE1 = 0;
   if(isDefined(self.var_819A)) {
     common_scripts\utility::func_3C7B(self.var_819A, var_09);
   }
 
-  lib_053F::func_7F5C();
+  func_7F5C();
 }
 
-lib_053F::func_9E96() {
+func_9E96() {
   common_scripts\utility::func_3C9F(self.var_81A1);
   foreach(var_01 in self.var_8301) {
     var_01 setscriptablepartstate("power_light", "power_on", 0);
   }
 }
 
-lib_053F::func_4B39() {
+func_4B39() {
   return isDefined(self.var_819E) && self.var_819E == "has_power_light";
 }
 
-lib_053F::func_82F2() {
+func_82F2() {
   self endon("scriptable_door_close");
   self notify("scriptable_door_open");
   foreach(var_01 in self.var_8301) {
@@ -408,7 +408,7 @@ lib_053F::func_82F2() {
   if(var_05 > 0) {
     wait(var_05);
     foreach(var_09 in self.var_64C5) {
-      if(isDefined(var_09.var_01A2)) {
+      if(isDefined(var_09.target)) {
         continue;
       }
 
@@ -420,11 +420,11 @@ lib_053F::func_82F2() {
 
   wait(var_04);
   if(var_07) {
-    self.var_8301[0] method_805C();
+    self.var_8301[0] hide();
   }
 
   foreach(var_09 in self.var_64C5) {
-    if(isDefined(var_09.var_01A2)) {
+    if(isDefined(var_09.target)) {
       continue;
     }
 
@@ -433,14 +433,14 @@ lib_053F::func_82F2() {
       var_09 method_8060();
     }
 
-    var_09 method_805C();
+    var_09 hide();
     self.var_1F73 = 0;
   }
 
-  thread lib_053F::func_82F3(var_03 - var_04);
+  thread func_82F3(var_03 - var_04);
 }
 
-lib_053F::func_82F3(param_00) {
+func_82F3(param_00) {
   if(isDefined(param_00) && param_00 > 0) {
     wait(param_00);
   }
@@ -450,7 +450,7 @@ lib_053F::func_82F3(param_00) {
   }
 }
 
-lib_053F::func_82F1() {
+func_82F1() {
   self endon("scriptable_door_open");
   self notify("scriptable_door_close");
   foreach(var_01 in self.var_8301) {
@@ -463,84 +463,84 @@ lib_053F::func_82F1() {
   }
 
   foreach(var_06 in self.var_64C5) {
-    if(isDefined(var_06.var_01A2)) {
+    if(isDefined(var_06.target)) {
       continue;
     }
 
-    var_06 method_805B();
+    var_06 show();
     var_06 solid();
     var_06 method_805F();
   }
 }
 
-lib_053F::func_7F61(param_00) {
+func_7F61(param_00) {
   self endon("open");
-  lib_053F::func_327B(self.var_8140);
-  thread lib_053F::func_7F5D(param_00);
+  func_327B(self.var_8140);
+  thread func_7F5D(param_00);
   for(;;) {
     var_01 = param_00 lib_0547::func_A795();
     var_02 = var_01[0];
     var_03 = var_01[1];
-    if(!lib_053F::func_3262()) {
+    if(!func_3262()) {
       continue;
     }
 
     if(var_03 == "token") {
-      var_02 maps\mp\gametypes\zombies::func_90F6(param_00.var_9A84);
+      var_02 maps / mp / gametypes / zombies::func_90F6(param_00.var_9A84);
       break;
     } else {
       var_04 = self.var_267B;
       var_05 = var_02 lib_0577::func_4687();
       var_04 = int(var_04 * var_05);
       var_06 = undefined;
-      if(var_02 maps\mp\gametypes\zombies::func_11C2(var_04)) {
+      if(var_02 maps / mp / gametypes / zombies::func_11C2(var_04)) {
         break;
       }
     }
 
-    var_02 thread lib_054E::func_0695("needmoney");
+    var_02 thread lib_054E::func_695("needmoney");
   }
 
   var_02 lib_0577::func_A236();
   self notify("open", var_02);
 }
 
-lib_053F::func_7F5F() {
+func_7F5F() {
   if(!isDefined(self.var_9CFE)) {
     return;
   }
 
-  if(isDefined(self.var_9CFE.var_01A2)) {
-    var_00 = common_scripts\utility::func_46B5(self.var_9CFE.var_01A2, "targetname");
+  if(isDefined(self.var_9CFE.target)) {
+    var_00 = common_scripts\utility::func_46B5(self.var_9CFE.target, "targetname");
     if(isDefined(var_00)) {
-      self.var_9CF7 = anglesToForward(var_00.var_001D);
+      self.var_9CF7 = anglesToForward(var_00.angles);
     }
   }
 
   foreach(var_02 in self.var_64C5) {
     var_02.var_A049 = 1;
-    var_02.var_A045 = ::lib_053F::func_327F;
-    var_02.var_6E74 = self;
+    var_02.var_A045 = ::func_327F;
+    var_02.parent = self;
   }
 
   self.var_9CF5 = 0;
-  thread lib_053F::func_7F60();
+  thread func_7F60();
   for(;;) {
     self waittill("trap_trigger", var_04, var_05);
     self.var_9CFA = var_04;
     self.var_9CF5 = 1;
-    thread lib_053F::func_327E(var_05);
+    thread func_327E(var_05);
   }
 }
 
-lib_053F::func_327E(param_00) {
+func_327E(param_00) {
   self notify("door_trap_end");
   self endon("door_trap_end");
   wait(param_00);
   self.var_9CF5 = 0;
 }
 
-lib_053F::func_7F60() {
+func_7F60() {
   var_00 = 0.1;
   for(;;) {
     self.var_9CFE waittill("trigger", var_01);
@@ -556,14 +556,14 @@ lib_053F::func_7F60() {
       continue;
     }
 
-    if(lib_053F::func_5532(self.var_9CFE)) {
+    if(func_5532(self.var_9CFE)) {
       continue;
     }
 
     if(isDefined(self.var_9CF7)) {
       var_02 = var_01 getvelocity();
-      var_03 = var_01.var_0116 - self.var_9CFE.var_0116;
-      var_04 = var_01.var_0116 + var_02 * var_00 - self.var_9CFE.var_0116;
+      var_03 = var_01.origin - self.var_9CFE.origin;
+      var_04 = var_01.origin + var_02 * var_00 - self.var_9CFE.origin;
       var_03 = (var_03[0], var_03[1], 0);
       var_04 = (var_04[0], var_04[1], 0);
       var_05 = vectordot(self.var_9CF7, var_03);
@@ -575,16 +575,16 @@ lib_053F::func_7F60() {
 
     foreach(var_08 in self.var_64C5) {
       var_08 moveTo(var_08.var_2444, var_00, var_00);
-      var_08 method_8617("trap_security_door_slam");
+      var_08 playSound("trap_security_door_slam");
     }
 
     wait(var_00);
-    earthquake(0.2, 0.5, self.var_9CFE.var_0116, 500);
+    earthquake(0.2, 0.5, self.var_9CFE.origin, 500);
     wait(0.1);
     var_0A = 1;
     foreach(var_08 in self.var_64C5) {
       var_08 moveTo(var_08.var_6BF0, var_0A);
-      var_08 method_8617("trap_security_door_reset");
+      var_08 playSound("trap_security_door_reset");
     }
 
     wait(var_0A);
@@ -592,7 +592,7 @@ lib_053F::func_7F60() {
   }
 }
 
-lib_053F::func_327F(param_00) {
+func_327F(param_00) {
   if(!isDefined(param_00) || isPlayer(param_00)) {
     return;
   }
@@ -601,11 +601,11 @@ lib_053F::func_327F(param_00) {
     return;
   }
 
-  self.var_6E74 lib_053F::func_3256();
-  param_00 dodamage(param_00.var_00BC, param_00.var_0116, self.var_6E74.var_9CFA, self, "MOD_CRUSH", "trap_zm_mp", "torso_upper");
+  self.parent func_3256();
+  param_00 dodamage(param_00.health, param_00.origin, self.parent.var_9CFA, self, "MOD_CRUSH", "trap_zm_mp", "torso_upper");
 }
 
-lib_053F::func_3256() {
+func_3256() {
   if(self.var_17F0) {
     return;
   }
@@ -613,13 +613,13 @@ lib_053F::func_3256() {
   self.var_17F0 = 1;
   foreach(var_01 in self.var_64C5) {
     foreach(var_03 in var_01.var_17F0) {
-      var_03 method_805B();
+      var_03 show();
     }
   }
 }
 
-lib_053F::func_5532(param_00) {
-  foreach(var_02 in level.var_744A) {
+func_5532(param_00) {
+  foreach(var_02 in level.players) {
     if(var_02 istouching(param_00)) {
       return 1;
     }
@@ -628,25 +628,25 @@ lib_053F::func_5532(param_00) {
   return 0;
 }
 
-lib_053F::func_415D(param_00) {
+func_415D(param_00) {
   var_01 = lib_0547::func_4474(self.var_267B);
   return var_01;
 }
 
-lib_053F::func_7F5D(param_00) {
+func_7F5D(param_00) {
   self endon("open");
   for(;;) {
-    if(lib_053F::func_3278()) {
+    if(func_3278()) {
       for(;;) {
-        if(!lib_053F::func_3262()) {
+        if(!func_3262()) {
           if(0) {
-            param_00 setHintString(lib_053F::func_4565(param_00));
+            param_00 setHintString(func_4565(param_00));
             param_00 setsecondaryhintstring("");
             param_00 lib_0547::func_9A85(0);
           }
 
           if(1) {
-            param_00.var_7778.var_3264 = lib_053F::func_4564(param_00);
+            param_00.var_7778.var_3264 = func_4564(param_00);
             param_00.var_7778.var_3259 = 0;
             param_00.var_7778.interact_disabled = 1;
             param_00.var_7778.var_6642 = 1;
@@ -656,13 +656,13 @@ lib_053F::func_7F5D(param_00) {
         }
 
         if(0) {
-          param_00 setHintString(lib_053F::func_450D(param_00));
-          param_00 setsecondaryhintstring(lib_053F::func_415D(self.var_267B));
+          param_00 setHintString(func_450D(param_00));
+          param_00 setsecondaryhintstring(func_415D(self.var_267B));
           param_00 lib_0547::func_9A85(1);
         }
 
         if(1) {
-          param_00.var_7778.var_3264 = lib_053F::func_450C(param_00);
+          param_00.var_7778.var_3264 = func_450C(param_00);
           param_00.var_7778.var_3259 = self.var_267B;
           param_00.var_7778.interact_disabled = 0;
           param_00.var_7778.var_6642 = 1;
@@ -672,13 +672,13 @@ lib_053F::func_7F5D(param_00) {
       }
     } else {
       if(0) {
-        param_00 setHintString(lib_053F::func_450D(param_00));
-        param_00 setsecondaryhintstring(lib_053F::func_415D(self.var_267B));
+        param_00 setHintString(func_450D(param_00));
+        param_00 setsecondaryhintstring(func_415D(self.var_267B));
         param_00 lib_0547::func_9A85(1);
       }
 
       if(1) {
-        param_00.var_7778.var_3264 = lib_053F::func_450C(param_00);
+        param_00.var_7778.var_3264 = func_450C(param_00);
         param_00.var_7778.var_3259 = self.var_267B;
         param_00.var_7778.interact_disabled = 0;
         param_00.var_7778.var_6642 = 1;
@@ -689,24 +689,24 @@ lib_053F::func_7F5D(param_00) {
   }
 }
 
-lib_053F::func_8477(param_00) {
+func_8477(param_00) {
   self.var_267B = param_00;
   self notify("cost_change");
 }
 
-lib_053F::func_3278() {
+func_3278() {
   return isDefined(self.var_81A1);
 }
 
-lib_053F::func_3262() {
-  if(lib_053F::func_3278()) {
+func_3262() {
+  if(func_3278()) {
     return common_scripts\utility::func_3C77(self.var_81A1);
   }
 
   return 1;
 }
 
-lib_053F::func_3677(param_00) {
+func_3677(param_00) {
   if(0) {
     param_00 setHintString("");
     param_00 setsecondaryhintstring("");
@@ -720,20 +720,20 @@ lib_053F::func_3677(param_00) {
   }
 }
 
-lib_053F::func_7F5E(param_00) {
-  if(!isDefined(param_00.var_01A2)) {
+func_7F5E(param_00) {
+  if(!isDefined(param_00.target)) {
     return;
   }
 
-  param_00.var_5B37 = param_00.var_0116;
-  param_00.var_5B12 = param_00.var_001D;
+  param_00.var_5B37 = param_00.origin;
+  param_00.var_5B12 = param_00.angles;
   var_01 = common_scripts\utility::func_7A33(param_00.var_64A9);
-  param_00 moveTo(var_01.var_0116, 1);
-  if(param_00.var_003A == "script_model") {
-    param_00 rotateTo(var_01.var_001D, 1);
+  param_00 moveTo(var_01.origin, 1);
+  if(param_00.classname == "script_model") {
+    param_00 rotateTo(var_01.angles, 1);
   }
 
-  param_00.var_6BF0 = var_01.var_0116;
+  param_00.var_6BF0 = var_01.origin;
   var_02 = "interact_door";
   if(isDefined(param_00.var_8260)) {
     if(function_0344(param_00.var_8260)) {
@@ -742,7 +742,7 @@ lib_053F::func_7F5E(param_00) {
   }
 
   if(function_0344(var_02)) {
-    param_00 method_8617(var_02);
+    param_00 playSound(var_02);
   }
 
   if(param_00 maps\mp\_movers::func_8221()) {
@@ -756,9 +756,9 @@ lib_053F::func_7F5E(param_00) {
   }
 }
 
-lib_053F::func_2435(param_00) {
+func_2435(param_00) {
   param_00 moveTo(param_00.var_5B37, 1);
-  if(param_00.var_003A == "script_model") {
+  if(param_00.classname == "script_model") {
     param_00 rotateTo(param_00.var_5B12, 1);
   }
 
@@ -770,7 +770,7 @@ lib_053F::func_2435(param_00) {
   }
 
   if(function_0344(var_01)) {
-    param_00 method_8617(var_01);
+    param_00 playSound(var_01);
   }
 
   if(param_00 maps\mp\_movers::func_8221()) {
@@ -786,9 +786,9 @@ lib_053F::func_2435(param_00) {
   }
 }
 
-lib_053F::func_325C(param_00) {}
+func_325C(param_00) {}
 
-lib_053F::func_4485(param_00, param_01) {
+func_4485(param_00, param_01) {
   var_02 = undefined;
   if(isDefined(param_01)) {
     var_02 = tablelookup("mp/zombieCustomDoorInteract.csv", 1, param_01, 0);
@@ -800,7 +800,7 @@ lib_053F::func_4485(param_00, param_01) {
   return int(var_02);
 }
 
-lib_053F::func_7BE6(param_00, param_01, param_02, param_03) {
+func_7BE6(param_00, param_01, param_02, param_03) {
   if(0) {
     if(!isDefined(level.var_328C)) {
       level.var_328C = [];
@@ -814,7 +814,7 @@ lib_053F::func_7BE6(param_00, param_01, param_02, param_03) {
   }
 
   if(1) {
-    var_04 = lib_053F::func_4485(param_00, param_03);
+    var_04 = func_4485(param_00, param_03);
     if(!isDefined(level.var_328B)) {
       level.var_328B = [];
     }
@@ -827,13 +827,13 @@ lib_053F::func_7BE6(param_00, param_01, param_02, param_03) {
   }
 }
 
-lib_053F::func_7BEB(param_00, param_01, param_02) {
+func_7BEB(param_00, param_01, param_02) {
   if(0) {
     level.var_5E6E[param_01] = param_00;
   }
 
   if(1) {
-    var_03 = lib_053F::func_4485(param_00, param_02);
+    var_03 = func_4485(param_00, param_02);
     if(!isDefined(level.var_5E6D)) {
       level.var_5E6D = [];
     }
@@ -842,7 +842,7 @@ lib_053F::func_7BEB(param_00, param_01, param_02) {
   }
 }
 
-lib_053F::func_450C(param_00) {
+func_450C(param_00) {
   if(isDefined(level.var_328B)) {
     if(isDefined(param_00.var_819A) && isDefined(param_00.var_81E1)) {
       var_01 = level.var_328B[param_00.var_819A];
@@ -852,10 +852,10 @@ lib_053F::func_450C(param_00) {
     }
   }
 
-  return lib_053F::func_4485("", "locked");
+  return func_4485("", "locked");
 }
 
-lib_053F::func_4564(param_00) {
+func_4564(param_00) {
   if(isDefined(param_00.var_81A1)) {
     if(isDefined(level.var_5E6D)) {
       var_01 = level.var_5E6D[param_00.var_81A1];
@@ -865,10 +865,10 @@ lib_053F::func_4564(param_00) {
     }
   }
 
-  return lib_053F::func_4485("", "no_power");
+  return func_4485("", "no_power");
 }
 
-lib_053F::func_450D(param_00) {
+func_450D(param_00) {
   if(isDefined(param_00.var_819A) && isDefined(param_00.var_81E1)) {
     var_01 = level.var_328C[param_00.var_819A];
     if(isDefined(var_01) && isDefined(var_01[param_00.var_81E1])) {
@@ -879,7 +879,7 @@ lib_053F::func_450D(param_00) {
   return &"ZOMBIES_DOOR_BUY";
 }
 
-lib_053F::func_4565(param_00) {
+func_4565(param_00) {
   if(isDefined(param_00.var_81A1)) {
     var_01 = level.var_5E6E[param_00.var_81A1];
     if(isDefined(var_01)) {
@@ -890,11 +890,11 @@ lib_053F::func_4565(param_00) {
   return &"ZOMBIES_REQUIRES_POWER";
 }
 
-lib_053F::func_328A() {
+func_328A() {
   return common_scripts\utility::func_3C83("door_opened") && common_scripts\utility::func_3C77("door_opened");
 }
 
-lib_053F::func_44A6(param_00) {
+func_44A6(param_00) {
   var_01 = undefined;
   if(isDefined(level.var_AC1D) && isDefined(param_00)) {
     foreach(var_03 in level.var_AC1D) {

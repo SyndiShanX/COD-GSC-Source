@@ -4,11 +4,11 @@
 *********************************************/
 
 func_3941() {
-  if(isDefined(self.var_0161)) {
-    wait(self.var_0161);
+  if(isDefined(self.var_161)) {
+    wait(self.var_161);
   }
 
-  self method_8617(level.var_80D2[self.var_828A]);
+  self playSound(level.var_80D2[self.var_828A]);
 }
 
 func_05D4(param_00, param_01, param_02, param_03, param_04, param_05) {
@@ -94,7 +94,7 @@ func_36E7() {
   self endon("stop_location_selection");
   for(;;) {
     level waittill("emp_update");
-    if(!func_56D7()) {
+    if(!isemped()) {
       continue;
     }
 
@@ -424,50 +424,50 @@ func_2CEF(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 }
 
 func_4617() {
-  var_00 = self.var_0116 + (0, 0, 10);
+  var_00 = self.origin + (0, 0, 10);
   var_01 = 11;
-  var_02 = anglesToForward(self.var_001D);
+  var_02 = anglesToForward(self.angles);
   var_02 = var_02 * var_01;
   var_03[0] = var_00 + var_02;
   var_03[1] = var_00;
   var_04 = bulletTrace(var_03[0], var_03[0] + (0, 0, -18), 0, undefined);
   if(var_04["fraction"] < 1) {
     var_05 = spawnStruct();
-    var_05.var_0116 = var_04["position"];
-    var_05.var_001D = func_6C3A(var_04["normal"]);
+    var_05.origin = var_04["position"];
+    var_05.angles = func_6C3A(var_04["normal"]);
     return var_05;
   }
 
-  var_04 = bulletTrace(var_03[1], var_03[1] + (0, 0, -18), 0, undefined);
-  if(var_04["fraction"] < 1) {
+  var_05 = bulletTrace(var_04[1], var_04[1] + (0, 0, -18), 0, undefined);
+  if(var_05["fraction"] < 1) {
     var_05 = spawnStruct();
-    var_05.var_0116 = var_04["position"];
-    var_05.var_001D = func_6C3A(var_04["normal"]);
+    var_05.origin = var_04["position"];
+    var_05.angles = func_6C3A(var_04["normal"]);
     return var_05;
   }
 
-  var_03[2] = var_00 + (16, 16, 0);
-  var_03[3] = var_00 + (16, -16, 0);
-  var_03[4] = var_00 + (-16, -16, 0);
-  var_03[5] = var_00 + (-16, 16, 0);
+  var_04[2] = var_01 + (16, 16, 0);
+  var_04[3] = var_01 + (16, -16, 0);
+  var_04[4] = var_01 + (-16, -16, 0);
+  var_04[5] = var_01 + (-16, 16, 0);
   var_06 = undefined;
   var_07 = undefined;
-  for(var_08 = 0; var_08 < var_03.size; var_08++) {
-    var_04 = bulletTrace(var_03[var_08], var_03[var_08] + (0, 0, -1000), 0, undefined);
-    if(!isDefined(var_06) || var_04["fraction"] < var_06) {
-      var_06 = var_04["fraction"];
-      var_07 = var_04["position"];
+  for(var_08 = 0; var_08 < var_04.size; var_08++) {
+    var_05 = bulletTrace(var_04[var_08], var_04[var_08] + (0, 0, -1000), 0, undefined);
+    if(!isDefined(var_06) || var_05["fraction"] < var_06) {
+      var_06 = var_05["fraction"];
+      var_07 = var_05["position"];
     }
   }
 
   if(var_06 == 1) {
-    var_07 = self.var_0116;
+    var_07 = self.origin;
   }
 
   var_05 = spawnStruct();
-  var_05.var_0116 = var_07;
-  var_05.var_001D = func_6C3A(var_04["normal"]);
-  return var_05;
+  var_08.origin = var_06;
+  var_08.angles = func_6C3A(var_04["normal"]);
+  return var_08;
 }
 
 func_6C3A(param_00) {
@@ -492,9 +492,9 @@ func_2D46(param_00) {
 }
 
 func_74D9(param_00, param_01, param_02) {
-  if(level.var_910F) {
-    if(isDefined(level.var_744A[0])) {
-      level.var_744A[0] method_8615(param_00);
+  if(level.splitscreen) {
+    if(isDefined(level.players[0])) {
+      level.players[0] playlocalsound(param_00);
       return;
     }
 
@@ -503,56 +503,56 @@ func_74D9(param_00, param_01, param_02) {
 
   if(isDefined(param_01)) {
     if(isDefined(param_02)) {
-      for(var_03 = 0; var_03 < level.var_744A.size; var_03++) {
-        var_04 = level.var_744A[var_03];
+      for(var_03 = 0; var_03 < level.players.size; var_03++) {
+        var_04 = level.players[var_03];
         if(var_04 issplitscreenplayer() && !var_04 method_82ED()) {
           continue;
         }
 
-        if(isDefined(var_04.var_012C["team"]) && var_04.var_012C["team"] == param_01 && !func_56E0(var_04, param_02)) {
-          var_04 method_8615(param_00);
+        if(isDefined(var_04.pers["team"]) && var_04.pers["team"] == param_01 && !func_56E0(var_04, param_02)) {
+          var_04 playlocalsound(param_00);
         }
       }
 
       return;
     }
 
-    for(var_03 = 0; var_03 < level.var_744A.size; var_03++) {
-      var_04 = level.var_744A[var_03];
+    for(var_03 = 0; var_03 < level.players.size; var_03++) {
+      var_04 = level.players[var_03];
       if(var_04 issplitscreenplayer() && !var_04 method_82ED()) {
         continue;
       }
 
-      if(isDefined(var_04.var_012C["team"]) && var_04.var_012C["team"] == param_01) {
-        var_04 method_8615(param_00);
+      if(isDefined(var_04.pers["team"]) && var_04.pers["team"] == param_01) {
+        var_04 playlocalsound(param_00);
       }
     }
 
     return;
   }
 
-  if(isDefined(param_02)) {
-    for(var_03 = 0; var_03 < level.var_744A.size; var_03++) {
-      var_04 = level.var_744A[var_03];
+  if(isDefined(var_04)) {
+    for(var_03 = 0; var_03 < level.players.size; var_03++) {
+      var_04 = level.players[var_03];
       if(var_04 issplitscreenplayer() && !var_04 method_82ED()) {
         continue;
       }
 
       if(!func_56E0(var_04, param_02)) {
-        var_04 method_8615(param_00);
+        var_04 playlocalsound(param_00);
       }
     }
 
     return;
   }
 
-  for(var_03 = 0; var_03 < level.var_744A.size; var_03++) {
-    var_04 = level.var_744A[var_03];
+  for(var_03 = 0; var_03 < level.players.size; var_03++) {
+    var_04 = level.players[var_03];
     if(var_04 issplitscreenplayer() && !var_04 method_82ED()) {
       continue;
     }
 
-    var_04 method_8615(param_00);
+    var_04 playlocalsound(param_00);
   }
 }
 
@@ -565,19 +565,19 @@ func_74C3(param_00, param_01, param_02) {
   var_03 endon("death");
   thread common_scripts\utility::func_2D18(var_03);
   if(isDefined(param_02)) {
-    var_03 method_805C();
+    var_03 hide();
     foreach(var_05 in param_02) {
       var_03 showtoclient(var_05);
     }
   }
 
   if(isDefined(param_01)) {
-    var_03.var_0116 = self.var_0116 + param_01;
-    var_03.var_001D = self.var_001D;
+    var_03.origin = self.origin + param_01;
+    var_03.angles = self.angles;
     var_03 method_8449(self);
   } else {
-    var_03.var_0116 = self.var_0116;
-    var_03.var_001D = self.var_001D;
+    var_03.origin = self.origin;
+    var_03.angles = self.angles;
     var_03 method_8449(self);
   }
 
@@ -602,7 +602,7 @@ func_8F25() {
 func_09C7(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
   var_09 = undefined;
   foreach(var_0B in self.var_5F2B) {
-    if(var_0B.var_0109 == param_00) {
+    if(var_0B.name == param_00) {
       if(var_0B.var_991F == param_01 && var_0B.var_7734 == param_03) {
         return;
       }
@@ -617,23 +617,23 @@ func_09C7(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     self.var_5F2B[self.var_5F2B.size] = var_09;
   }
 
-  var_09.var_0109 = param_00;
+  var_09.name = param_00;
   var_09.var_991F = param_01;
-  var_09.var_99DA = param_02;
-  var_09.var_09F6 = gettime();
+  var_09.time = param_02;
+  var_09.var_9F6 = gettime();
   var_09.var_7734 = param_03;
   var_09.var_8C1E = param_04;
   var_09.var_8B91 = param_05;
   var_09.var_39CE = param_06;
   var_09.var_39CF = param_07;
-  var_09.var_00C1 = param_08;
+  var_09.hidewhenindemo = param_08;
   func_8F25();
 }
 
 func_7CE9(param_00) {
   if(isDefined(self.var_5F2B)) {
     for(var_01 = self.var_5F2B.size; var_01 > 0; var_01--) {
-      if(self.var_5F2B[var_01 - 1].var_0109 != param_00) {
+      if(self.var_5F2B[var_01 - 1].name != param_00) {
         continue;
       }
 
@@ -696,31 +696,31 @@ func_A131() {
   var_00 = func_4569();
   if(!isDefined(var_00)) {
     if(isDefined(self.var_5F29) && isDefined(self.var_5F30)) {
-      self.var_5F29.var_0018 = 0;
-      self.var_5F30.var_0018 = 0;
+      self.var_5F29.alpha = 0;
+      self.var_5F30.alpha = 0;
     }
 
     return;
   }
 
   self.var_5F29 settext(var_00.var_991F);
-  self.var_5F29.var_0018 = 0.85;
-  self.var_5F30.var_0018 = 1;
-  self.var_5F29.var_00C1 = var_00.var_00C1;
+  self.var_5F29.alpha = 0.85;
+  self.var_5F30.alpha = 1;
+  self.var_5F29.hidewhenindemo = var_00.hidewhenindemo;
   if(var_00.var_8B91) {
     self.var_5F29 fadeovertime(min(var_00.var_39CF, 60));
-    self.var_5F29.var_0018 = var_00.var_39CE;
+    self.var_5F29.alpha = var_00.var_39CE;
   }
 
-  if(var_00.var_99DA > 0 && var_00.var_8C1E) {
-    self.var_5F30 settimer(max(var_00.var_99DA - gettime() - var_00.var_09F6 / 1000, 0.1));
+  if(var_00.time > 0 && var_00.var_8C1E) {
+    self.var_5F30 settimer(max(var_00.time - gettime() - var_00.var_9F6 / 1000, 0.1));
     return;
   }
 
-  if(var_00.var_99DA > 0 && !var_00.var_8C1E) {
+  if(var_00.time > 0 && !var_00.var_8C1E) {
     self.var_5F30 settext("");
-    self.var_5F29 fadeovertime(min(var_00.var_99DA, 60));
-    self.var_5F29.var_0018 = 0;
+    self.var_5F29 fadeovertime(min(var_00.time, 60));
+    self.var_5F29.alpha = 0;
     thread func_2403(var_00);
     thread func_23D6(var_00);
     return;
@@ -735,12 +735,12 @@ func_2403(param_00) {
   self endon("disconnect");
   level endon("game_ended");
   self waittill("death");
-  func_2401(param_00.var_0109);
+  func_2401(param_00.name);
 }
 
 func_23D6(param_00) {
-  wait(param_00.var_99DA);
-  func_2401(param_00.var_0109);
+  wait(param_00.time);
+  func_2401(param_00.name);
   self notify("message_cleared");
 }
 
@@ -762,64 +762,64 @@ func_2402() {
 }
 
 func_7728(param_00, param_01) {
-  foreach(var_03 in level.var_744A) {
-    if(var_03.var_01A7 != param_01) {
+  foreach(var_03 in level.players) {
+    if(var_03.team != param_01) {
       continue;
     }
 
-    var_03 iclientprintln(param_00);
+    var_03 iprintln(param_00);
   }
 }
 
 func_772A(param_00, param_01, param_02) {
-  foreach(var_04 in level.var_744A) {
-    if(var_04.var_01A7 != param_01) {
+  foreach(var_04 in level.players) {
+    if(var_04.team != param_01) {
       continue;
     }
 
-    var_04 iclientprintln(param_00, param_02);
+    var_04 iprintln(param_00, param_02);
   }
 }
 
 func_771E(param_00, param_01) {
-  for(var_02 = 0; var_02 < level.var_744A.size; var_02++) {
-    var_03 = level.var_744A[var_02];
-    if(isDefined(var_03.var_012C["team"]) && var_03.var_012C["team"] == param_01) {
-      var_03 iclientprintlnbold(param_00);
+  for(var_02 = 0; var_02 < level.players.size; var_02++) {
+    var_03 = level.players[var_02];
+    if(isDefined(var_03.pers["team"]) && var_03.pers["team"] == param_01) {
+      var_03 iprintlnbold(param_00);
     }
   }
 }
 
 func_771F(param_00, param_01, param_02) {
-  for(var_03 = 0; var_03 < level.var_744A.size; var_03++) {
-    var_04 = level.var_744A[var_03];
-    if(isDefined(var_04.var_012C["team"]) && var_04.var_012C["team"] == param_01) {
-      var_04 iclientprintlnbold(param_00, param_02);
+  for(var_03 = 0; var_03 < level.players.size; var_03++) {
+    var_04 = level.players[var_03];
+    if(isDefined(var_04.pers["team"]) && var_04.pers["team"] == param_01) {
+      var_04 iprintlnbold(param_00, param_02);
     }
   }
 }
 
 func_7729(param_00, param_01, param_02) {
-  for(var_03 = 0; var_03 < level.var_744A.size; var_03++) {
-    var_04 = level.var_744A[var_03];
-    if(isDefined(var_04.var_012C["team"]) && var_04.var_012C["team"] == param_01) {
-      var_04 iclientprintln(param_00, param_02);
+  for(var_03 = 0; var_03 < level.players.size; var_03++) {
+    var_04 = level.players[var_03];
+    if(isDefined(var_04.pers["team"]) && var_04.pers["team"] == param_01) {
+      var_04 iprintln(param_00, param_02);
     }
   }
 }
 
 func_7727(param_00, param_01) {
-  var_02 = level.var_744A;
+  var_02 = level.players;
   for(var_03 = 0; var_03 < var_02.size; var_03++) {
     if(isDefined(param_01)) {
-      if(isDefined(var_02[var_03].var_012C["team"]) && var_02[var_03].var_012C["team"] == param_01) {
-        var_02[var_03] iclientprintln(param_00);
+      if(isDefined(var_02[var_03].pers["team"]) && var_02[var_03].pers["team"] == param_01) {
+        var_02[var_03] iprintln(param_00);
       }
 
       continue;
     }
 
-    var_02[var_03] iclientprintln(param_00);
+    var_02[var_03] iprintln(param_00);
   }
 }
 
@@ -830,50 +830,50 @@ func_771A(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     var_08 = 1;
   }
 
-  if(level.var_910F || !var_07) {
-    for(var_09 = 0; var_09 < level.var_744A.size; var_09++) {
-      var_0A = level.var_744A[var_09];
-      var_0B = var_0A.var_01A7;
+  if(level.splitscreen || !var_07) {
+    for(var_09 = 0; var_09 < level.players.size; var_09++) {
+      var_0A = level.players[var_09];
+      var_0B = var_0A.team;
       if(isDefined(var_0B)) {
         if(var_0B == param_00 && isDefined(param_02)) {
-          var_0A iclientprintln(param_02, param_06);
+          var_0A iprintln(param_02, param_06);
           continue;
         }
 
         if(var_0B == param_01 && isDefined(param_03)) {
-          var_0A iclientprintln(param_03, param_06);
+          var_0A iprintln(param_03, param_06);
         }
       }
     }
 
     if(var_07) {
-      level.var_744A[0] method_8615(param_04);
+      level.players[0] playlocalsound(param_04);
       return;
     }
 
     return;
   }
 
-  if(var_08) {
-    for(var_09 = 0; var_09 < level.var_744A.size; var_09++) {
-      var_0A = level.var_744A[var_09];
-      var_0B = var_0A.var_01A7;
+  if(var_0B) {
+    for(var_09 = 0; var_09 < level.players.size; var_09++) {
+      var_0A = level.players[var_09];
+      var_0B = var_0A.team;
       if(isDefined(var_0B)) {
         if(var_0B == param_00) {
           if(isDefined(param_02)) {
-            var_0A iclientprintln(param_02, param_06);
+            var_0A iprintln(param_02, param_06);
           }
 
-          var_0A method_8615(param_04);
+          var_0A playlocalsound(param_04);
           continue;
         }
 
         if(var_0B == param_01) {
           if(isDefined(param_03)) {
-            var_0A iclientprintln(param_03, param_06);
+            var_0A iprintln(param_03, param_06);
           }
 
-          var_0A method_8615(param_05);
+          var_0A playlocalsound(param_05);
         }
       }
     }
@@ -881,22 +881,22 @@ func_771A(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     return;
   }
 
-  for(var_09 = 0; var_09 < level.var_744A.size; var_09++) {
-    var_0A = level.var_744A[var_09];
-    var_0B = var_0A.var_01A7;
+  for(var_09 = 0; var_09 < level.players.size; var_09++) {
+    var_0A = level.players[var_09];
+    var_0B = var_0A.team;
     if(isDefined(var_0B)) {
       if(var_0B == param_00) {
         if(isDefined(param_02)) {
-          var_0A iclientprintln(param_02, param_06);
+          var_0A iprintln(param_02, param_06);
         }
 
-        var_0A method_8615(param_04);
+        var_0A playlocalsound(param_04);
         continue;
       }
 
       if(var_0B == param_01) {
         if(isDefined(param_03)) {
-          var_0A iclientprintln(param_03, param_06);
+          var_0A iprintln(param_03, param_06);
         }
       }
     }
@@ -904,8 +904,8 @@ func_771A(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 }
 
 func_771C(param_00, param_01, param_02) {
-  foreach(var_04 in level.var_744A) {
-    if(var_04.var_01A7 != param_00) {
+  foreach(var_04 in level.players) {
+    if(var_04.team != param_00) {
       continue;
     }
 
@@ -914,20 +914,20 @@ func_771C(param_00, param_01, param_02) {
 }
 
 func_771B(param_00, param_01) {
-  self iclientprintln(param_00);
-  self method_8615(param_01);
+  self iprintln(param_00);
+  self playlocalsound(param_01);
 }
 
 func_069F(param_00) {
-  if(level.var_910F && self getentitynumber() != 0) {
+  if(level.splitscreen && self getentitynumber() != 0) {
     return;
   }
 
-  self method_8615(param_00);
+  self playlocalsound(param_00);
 }
 
 func_3517(param_00, param_01, param_02, param_03) {
-  param_00 = "scr_" + level.var_3FDC + "_" + param_00;
+  param_00 = "scr_" + level.gametype + "_" + param_00;
   if(getDvar(param_00) == "") {
     setDvar(param_00, param_01);
     return param_01;
@@ -947,7 +947,7 @@ func_3517(param_00, param_01, param_02, param_03) {
 }
 
 func_3516(param_00, param_01, param_02, param_03) {
-  param_00 = "scr_" + level.var_3FDC + "_" + param_00;
+  param_00 = "scr_" + level.gametype + "_" + param_00;
   if(getDvar(param_00) == "") {
     setDvar(param_00, param_01);
     return param_01;
@@ -972,11 +972,11 @@ func_71AC(param_00, param_01) {
     return;
   }
 
-  playsoundatpos(self.var_0116, param_00);
+  playsoundatpos(self.origin, param_00);
 }
 
 func_45DE(param_00) {
-  if(level.var_6520) {}
+  if(level.multiteambased) {}
 
   if(param_00 == "allies") {
     return "axis";
@@ -988,81 +988,81 @@ func_45DE(param_00) {
 }
 
 func_532D(param_00) {
-  if(!isDefined(self.var_012C[param_00])) {
-    self.var_012C[param_00] = 0;
+  if(!isDefined(self.pers[param_00])) {
+    self.pers[param_00] = 0;
   }
 }
 
-func_4607(param_00) {
-  return self.var_012C[param_00];
+getpersstat(param_00) {
+  return self.pers[param_00];
 }
 
-func_50E9(param_00, param_01) {
-  if(isDefined(self) && isDefined(self.var_012C) && isDefined(self.var_012C[param_00])) {
-    self.var_012C[param_00] = self.var_012C[param_00] + param_01;
+incpersstat(param_00, param_01) {
+  if(isDefined(self) && isDefined(self.pers) && isDefined(self.pers[param_00])) {
+    self.pers[param_00] = self.pers[param_00] + param_01;
     if((!isDefined(level.disableallplayerstats) || !level.disableallplayerstats) && (param_00 != "suicides" && param_00 != "kills" && param_00 != "deaths") || !func_579B() || function_03AF() || isDefined(level.var_2F8B) && level.var_2F8B) {
       maps\mp\gametypes\_persistence::func_9314(param_00, param_01);
     }
   }
 }
 
-func_86F5(param_00, param_01) {
-  self.var_012C[param_00] = param_01;
+setpersstat(param_00, param_01) {
+  self.pers[param_00] = param_01;
 }
 
-func_5335(param_00, param_01) {
-  if(!isDefined(self.var_9337["stats_" + param_00])) {
+initplayerstat(param_00, param_01) {
+  if(!isDefined(self.stats["stats_" + param_00])) {
     if(!isDefined(param_01)) {
       param_01 = 0;
     }
 
-    self.var_9337["stats_" + param_00] = spawnStruct();
-    self.var_9337["stats_" + param_00].var_A281 = param_01;
-    if(!function_0367() && func_7A69()) {
-      self setrankedplayerdata(common_scripts\utility::func_46A7(), "round", "awards", param_00, 0);
+    self.stats["stats_" + param_00] = spawnStruct();
+    self.stats["stats_" + param_00].var_A281 = param_01;
+    if(!function_0367() && rankingenabled()) {
+      self setrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "awards", param_00, 0);
     }
   }
 }
 
-func_50EA(param_00, param_01) {
+incplayerstat(param_00, param_01) {
   if(function_01EF(self)) {
     return;
   }
 
-  var_02 = self.var_9337["stats_" + param_00];
+  var_02 = self.stats["stats_" + param_00];
   var_02.var_A281 = var_02.var_A281 + param_01;
 }
 
-func_8702(param_00, param_01) {
-  var_02 = self.var_9337["stats_" + param_00];
+setplayerstat(param_00, param_01) {
+  var_02 = self.stats["stats_" + param_00];
   var_02.var_A281 = param_01;
-  var_02.var_99DA = gettime();
+  var_02.time = gettime();
 }
 
-func_4628(param_00) {
-  return self.var_9337["stats_" + param_00].var_A281;
+getplayerstat(param_00) {
+  return self.stats["stats_" + param_00].var_A281;
 }
 
 func_4629(param_00) {
-  return self.var_9337["stats_" + param_00].var_99DA;
+  return self.stats["stats_" + param_00].time;
 }
 
-func_8703(param_00, param_01) {
-  var_02 = func_4628(param_00);
+setplayerstatifgreater(param_00, param_01) {
+  var_02 = getplayerstat(param_00);
   if(param_01 > var_02) {
-    func_8702(param_00, param_01);
+    setplayerstat(param_00, param_01);
   }
 }
 
 func_8704(param_00, param_01) {
-  var_02 = func_4628(param_00);
+  var_02 = getplayerstat(param_00);
   if(param_01 < var_02) {
-    func_8702(param_00, param_01);
+    setplayerstat(param_00, param_01);
   }
 }
 
 func_A14B(param_00, param_01, param_02) {
-  if(!func_7A69()) {
+  if(!rankingenabled()) {
     return;
   }
 
@@ -1072,11 +1072,11 @@ func_A14B(param_00, param_01, param_02) {
     var_04 = 1;
   }
 
-  maps\mp\gametypes\_persistence::func_9338(param_00, int(var_03 * 1000 / var_04));
+  maps\mp\gametypes\_persistence::statset(param_00, int(var_03 * 1000 / var_04));
 }
 
 func_A14C(param_00, param_01, param_02) {
-  if(!func_7A69()) {
+  if(!rankingenabled()) {
     return;
   }
 
@@ -1089,7 +1089,7 @@ func_A14C(param_00, param_01, param_02) {
   maps\mp\gametypes\_persistence::func_9339(param_00, int(var_03 * 1000 / var_04));
 }
 
-func_A790(param_00) {
+waittillslowprocessallowed(param_00) {
   if(level.var_5BDF == gettime()) {
     if(isDefined(param_00) && param_00) {
       while(level.var_5BDF == gettime()) {
@@ -1140,7 +1140,7 @@ func_56E0(param_00, param_01) {
 }
 
 func_5C39(param_00, param_01, param_02, param_03, param_04) {
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
@@ -1154,9 +1154,9 @@ func_5C39(param_00, param_01, param_02, param_03, param_04) {
   }
 
   if(isDefined(param_03)) {
-    for(var_05 = 0; var_05 < level.var_744A.size; var_05++) {
-      var_06 = level.var_744A[var_05];
-      if(isDefined(var_06.var_012C["team"]) && var_06.var_012C["team"] == param_01 && !func_56E0(var_06, param_03)) {
+    for(var_05 = 0; var_05 < level.players.size; var_05++) {
+      var_06 = level.players[var_05];
+      if(isDefined(var_06.pers["team"]) && var_06.pers["team"] == param_01 && !func_56E0(var_06, param_03)) {
         if(var_06 issplitscreenplayer() && !var_06 method_82ED()) {
           continue;
         }
@@ -1168,9 +1168,9 @@ func_5C39(param_00, param_01, param_02, param_03, param_04) {
     return;
   }
 
-  for(var_05 = 0; var_05 < level.var_744A.size; var_05++) {
-    var_06 = level.var_744A[var_05];
-    if(isDefined(var_06.var_012C["team"]) && var_06.var_012C["team"] == param_01) {
+  for(var_05 = 0; var_05 < level.players.size; var_05++) {
+    var_06 = level.players[var_05];
+    if(isDefined(var_06.pers["team"]) && var_06.pers["team"] == param_01) {
       if(var_06 issplitscreenplayer() && !var_06 method_82ED()) {
         continue;
       }
@@ -1181,26 +1181,26 @@ func_5C39(param_00, param_01, param_02, param_03, param_04) {
 }
 
 func_5C3E(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
-  if(level.var_910F) {
+  if(level.splitscreen) {
     return;
   }
 
-  if(level.var_910F) {
-    if(level.var_744A.size) {
-      level.var_744A[0] func_5C43(param_00, param_04, undefined, param_06);
+  if(level.splitscreen) {
+    if(level.players.size) {
+      level.players[0] func_5C43(param_00, param_04, undefined, param_06);
     }
 
     return;
   }
 
   if(isDefined(param_05)) {
-    for(var_07 = 0; var_07 < level.var_744A.size; var_07++) {
-      var_08 = level.var_744A[var_07];
-      var_09 = var_08.var_012C["team"];
+    for(var_07 = 0; var_07 < level.players.size; var_07++) {
+      var_08 = level.players[var_07];
+      var_09 = var_08.pers["team"];
       if(!isDefined(var_09)) {
         continue;
       }
@@ -1226,9 +1226,9 @@ func_5C3E(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     return;
   }
 
-  for(var_07 = 0; var_07 < level.var_744A.size; var_07++) {
-    var_08 = level.var_744A[var_07];
-    var_09 = var_08.var_012C["team"];
+  for(var_07 = 0; var_07 < level.players.size; var_07++) {
+    var_08 = level.players[var_07];
+    var_09 = var_08.pers["team"];
     if(!isDefined(var_09)) {
       continue;
     }
@@ -1249,7 +1249,7 @@ func_5C3E(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 }
 
 func_5C46(param_00, param_01, param_02, param_03) {
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
@@ -1259,7 +1259,7 @@ func_5C46(param_00, param_01, param_02, param_03) {
 }
 
 func_5C43(param_00, param_01, param_02, param_03) {
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
@@ -1271,8 +1271,8 @@ func_5C43(param_00, param_01, param_02, param_03) {
     param_02 = 0;
   }
 
-  var_04 = self.var_012C["team"];
-  if(isDefined(level.var_0F05) && level.var_0F05) {
+  var_04 = self.pers["team"];
+  if(isDefined(level.var_F05) && level.var_F05) {
     return;
   }
 
@@ -1332,24 +1332,24 @@ func_5C3C(param_00, param_01) {
     }
   }
 
-  if(!isDefined(param_01.var_08C9)) {
-    param_01.var_08C9 = [];
+  if(!isDefined(param_01.var_8C9)) {
+    param_01.var_8C9 = [];
   }
 
-  param_01.var_08C9[param_00] = 1;
+  param_01.var_8C9[param_00] = 1;
   thread func_5C3B(param_00, param_01, var_02);
 }
 
 func_5C3B(param_00, param_01, param_02) {
   param_01 endon("disconnect");
   wait(param_02);
-  param_01.var_08C9[param_00] = undefined;
+  param_01.var_8C9[param_00] = undefined;
 }
 
 func_5C3A(param_00, param_01) {
-  if(isDefined(param_01.var_08C9)) {
-    if(isDefined(param_01.var_08C9[param_00])) {
-      if(isDefined(param_01.var_08C9[param_00] == 1)) {
+  if(isDefined(param_01.var_8C9)) {
+    if(isDefined(param_01.var_8C9[param_00])) {
+      if(isDefined(param_01.var_8C9[param_00] == 1)) {
         return 1;
       }
     }
@@ -1429,22 +1429,22 @@ func_5C45(param_00, param_01, param_02) {
 func_45AA() {
   for(var_00 = 0; var_00 < self.var_5C47.size; var_00++) {
     if(issubstr(self.var_5C47[var_00], "losing")) {
-      if(self.var_01A7 == "allies") {
+      if(self.team == "allies") {
         if(issubstr(level.var_147A, self.var_5C47[var_00])) {
           return self.var_5C47[var_00];
         } else {
-          common_scripts\utility::func_0F93(self.var_5C47, self.var_5C47[var_00]);
+          common_scripts\utility::func_F93(self.var_5C47, self.var_5C47[var_00]);
         }
-      } else if(issubstr(level.var_0BF4, self.var_5C47[var_00])) {
+      } else if(issubstr(level.var_BF4, self.var_5C47[var_00])) {
         return self.var_5C47[var_00];
       } else {
-        common_scripts\utility::func_0F93(self.var_5C47, self.var_5C47[var_00]);
+        common_scripts\utility::func_F93(self.var_5C47, self.var_5C47[var_00]);
       }
 
       continue;
     }
 
-    return level.var_0BF4[self.var_5C47];
+    return level.var_BF4[self.var_5C47];
   }
 }
 
@@ -1461,7 +1461,7 @@ func_6C2A() {
 
         if(var_02 != var_01) {
           func_0FBD(var_00, self.var_5C47[var_01], var_02);
-          common_scripts\utility::func_0F93(var_00, self.var_5C47[var_01]);
+          common_scripts\utility::func_F93(var_00, self.var_5C47[var_01]);
           break;
         }
       }
@@ -1480,7 +1480,7 @@ func_3D8B() {
 }
 
 func_3D8C(param_00) {
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 func_3D8D(param_00);
   }
 }
@@ -1515,31 +1515,31 @@ func_3D8D(param_00) {
 }
 
 func_A132() {
-  if(self.var_012C["team"] == "spectator") {
+  if(self.pers["team"] == "spectator") {
     self setclientdvar("g_scriptMainMenu", game["menu_team"]);
     return;
   }
 
-  self setclientdvar("g_scriptMainMenu", game["menu_class_" + self.var_012C["team"]]);
+  self setclientdvar("g_scriptMainMenu", game["menu_class_" + self.pers["team"]]);
 }
 
 func_A143() {
-  if(self.var_012C["team"] == "spectator") {
+  if(self.pers["team"] == "spectator") {
     self setclientdvar("cg_objectiveText", "");
     return;
   }
 
   if(func_471A("scorelimit") > 0 && !func_5760()) {
-    if(level.var_910F) {
-      self setclientdvar("cg_objectiveText", func_45D2(self.var_012C["team"]));
+    if(level.splitscreen) {
+      self setclientdvar("cg_objectiveText", func_45D2(self.pers["team"]));
       return;
     }
 
-    self setclientdvar("cg_objectiveText", func_45D2(self.var_012C["team"]), func_471A("scorelimit"));
+    self setclientdvar("cg_objectiveText", func_45D2(self.pers["team"]), func_471A("scorelimit"));
     return;
   }
 
-  self setclientdvar("cg_objectiveText", func_45D3(self.var_012C["team"]));
+  self setclientdvar("cg_objectiveText", func_45D3(self.pers["team"]));
 }
 
 func_86DC(param_00, param_01) {
@@ -1566,7 +1566,7 @@ func_45CD(param_00) {
   return game["strings"]["objective_hint_" + param_00];
 }
 
-func_46E3() {
+gettimepassed() {
   if(!isDefined(level.var_9309) || !isDefined(level.var_2FB1)) {
     return 0;
   }
@@ -1599,18 +1599,18 @@ func_44FB() {
 }
 
 func_46E4() {
-  return func_46E3() / func_46E2() * 60 * 1000 * 100;
+  return gettimepassed() / func_46E2() * 60 * 1000 * 100;
 }
 
 func_467B() {
-  return func_46E3() / 1000;
+  return gettimepassed() / 1000;
 }
 
 func_4589() {
   return func_467B() / 60;
 }
 
-func_2315(param_00) {
+clamptoshort(param_00) {
   param_00 = int(param_00);
   if(param_00 > 32767) {
     param_00 = 32767;
@@ -1637,12 +1637,12 @@ func_2314(param_00) {
 }
 
 func_23FF() {
-  self.var_009F = -1;
-  self.var_00E1 = -1;
-  self.var_0020 = 0;
-  self.var_014A = 0;
-  self.var_0188 = 0;
-  self.var_0189 = 0;
+  self.forcespectatorclient = -1;
+  self.killcamentity = -1;
+  self.archivetime = 0;
+  self.psoffsettime = 0;
+  self.spectatekillcam = 0;
+  self.spectaterecordedplay = 0;
 }
 
 func_5727() {
@@ -1655,8 +1655,8 @@ func_5727() {
     var_00 = "Agent";
   }
 
-  var_01 = "ERROR: self.spectateKillcam is " + self.var_0188 + ", but self.forcespectatorclient = " + self.var_009F + " and self.killcamentity = " + self.var_00E1 + " (self is " + var_00 + ")";
-  return self.var_0188;
+  var_01 = "ERROR: self.spectateKillcam is " + self.spectatekillcam + ", but self.forcespectatorclient = " + self.forcespectatorclient + " and self.killcamentity = " + self.killcamentity + " (self is " + var_00 + ")";
+  return self.spectatekillcam;
 }
 
 func_5822(param_00) {
@@ -1676,7 +1676,7 @@ func_470E(param_00, param_01, param_02) {
 }
 
 func_5EB0() {
-  if(!isDefined(self.var_012C["summary"])) {
+  if(!isDefined(self.pers["summary"])) {
     return;
   }
 
@@ -1685,11 +1685,11 @@ func_5EB0() {
   }
 
   var_00 = 0;
-  if(isDefined(self.var_9A06["total"])) {
-    var_00 = self.var_9A06["total"];
+  if(isDefined(self.timeplayed["total"])) {
+    var_00 = self.timeplayed["total"];
   }
 
-  function_00F5("script_EarnedXP: totalXP %d, timeplayed %d, score %d, challenge %d, match %d, misc %d, gamemode %s", self.var_012C["summary"]["xp"], var_00, self.var_012C["summary"]["score"], self.var_012C["summary"]["challenge"], self.var_012C["summary"]["match"], self.var_012C["summary"]["misc"], level.var_3FDC);
+  function_00F5("script_EarnedXP: totalXP %d, timeplayed %d, score %d, challenge %d, match %d, misc %d, gamemode %s", self.pers["summary"]["xp"], var_00, self.pers["summary"]["score"], self.pers["summary"]["challenge"], self.pers["summary"]["match"], self.pers["summary"]["misc"], level.gametype);
 }
 
 func_7BF8(param_00, param_01, param_02, param_03) {
@@ -1747,7 +1747,7 @@ func_413A(param_00, param_01) {
   var_02 = spawnStruct();
   var_02.var_5779 = 1;
   var_02.var_5662 = 0;
-  var_02.var_008E = param_00;
+  var_02.var_8E = param_00;
   var_02.var_29B6 = param_01;
   return var_02;
 }
@@ -1757,7 +1757,7 @@ func_413C(param_00, param_01) {
   var_02.var_5779 = 0;
   var_02.var_5662 = 0;
   var_02.var_57C4 = 1;
-  var_02.var_008E = param_00;
+  var_02.var_8E = param_00;
   var_02.var_29B6 = param_01;
   return var_02;
 }
@@ -1766,7 +1766,7 @@ func_4137(param_00, param_01) {
   var_02 = spawnStruct();
   var_02.var_5779 = 0;
   var_02.var_5662 = 0;
-  var_02.var_008E = param_00;
+  var_02.var_8E = param_00;
   var_02.var_29B6 = param_01;
   return var_02;
 }
@@ -1775,29 +1775,29 @@ func_4139(param_00, param_01) {
   var_02 = spawnStruct();
   var_02.var_5779 = 0;
   var_02.var_5662 = 0;
-  var_02.var_008E = param_00;
+  var_02.var_8E = param_00;
   var_02.var_29B6 = param_01;
   return var_02;
 }
 
 func_413B(param_00) {
-  return param_00.var_0116 + (0, 0, 32);
+  return param_00.origin + (0, 0, 32);
 }
 
 func_469E() {
   if(self getstance() == "crouch") {
-    var_00 = self.var_0116 + (0, 0, 24);
+    var_00 = self.origin + (0, 0, 24);
   } else if(self getstance() == "prone") {
-    var_00 = self.var_0116 + (0, 0, 10);
+    var_00 = self.origin + (0, 0, 10);
   } else {
-    var_00 = self.var_0116 + (0, 0, 32);
+    var_00 = self.origin + (0, 0, 32);
   }
 
   return var_00;
 }
 
 func_4138(param_00) {
-  return param_00.var_0116;
+  return param_00.origin;
 }
 
 func_44AB(param_00) {
@@ -1842,8 +1842,8 @@ func_072B(param_00) {
 
 func_8064() {
   var_00 = spawnStruct();
-  var_00.var_69A9 = self method_831F();
-  var_00.var_0888 = self.var_805F;
+  var_00.var_69A9 = self getplayersoffhands();
+  var_00.var_888 = self.var_805F;
   var_00.var_2953 = self getcurrentweapon();
   var_01 = self getweaponslistall();
   var_00.var_A9E7 = [];
@@ -1857,11 +1857,11 @@ func_8064() {
     }
 
     var_04 = spawnStruct();
-    var_04.var_0109 = var_03;
+    var_04.name = var_03;
     var_04.var_242A = self getweaponammoclip(var_03, "right");
     var_04.var_2429 = self getweaponammoclip(var_03, "left");
     var_04.var_93B1 = self getweaponammostock(var_03);
-    if(isDefined(self.var_99AC) && self.var_99AC == var_03) {
+    if(isDefined(self.throwinggrenade) && self.throwinggrenade == var_03) {
       var_04.var_93B1--;
     }
 
@@ -1875,16 +1875,16 @@ func_7DEF() {
   var_00 = self.var_827E;
   self method_831E(var_00.var_69A9);
   foreach(var_02 in var_00.var_A9E7) {
-    self method_82FA(var_02.var_0109, var_02.var_242A, "right");
-    if(issubstr(var_02.var_0109, "akimbo")) {
-      self method_82FA(var_02.var_0109, var_02.var_2429, "left");
+    self setweaponammoclip(var_02.name, var_02.var_242A, "right");
+    if(issubstr(var_02.name, "akimbo")) {
+      self setweaponammoclip(var_02.name, var_02.var_2429, "left");
     }
 
-    self setweaponammostock(var_02.var_0109, var_02.var_93B1);
+    self setweaponammostock(var_02.name, var_02.var_93B1);
   }
 
-  foreach(var_06, var_05 in var_00.var_0888) {
-    func_06D0(var_06, var_05.var_01B9, var_05.var_586B);
+  foreach(var_06, var_05 in var_00.var_888) {
+    func_06D0(var_06, var_05.type, var_05.var_586B);
   }
 
   if(self getcurrentweapon() == "none") {
@@ -1899,17 +1899,17 @@ func_7DEF() {
 }
 
 func_867B(param_00) {
-  self.var_008F = param_00;
-  func_86F5("extrascore0", param_00);
+  self.extrascore0 = param_00;
+  setpersstat("extrascore0", param_00);
 }
 
 func_867C(param_00) {
-  self.var_0090 = param_00;
-  func_86F5("extrascore1", param_00);
+  self.extrascore1 = param_00;
+  setpersstat("extrascore1", param_00);
 }
 
 func_06D0(param_00, param_01, param_02) {
-  self.var_805F[param_00].var_01B9 = param_01;
+  self.var_805F[param_00].type = param_01;
   self.var_805F[param_00].var_586B = param_02;
   self setactionslot(param_00, param_01, param_02);
 }
@@ -1919,7 +1919,7 @@ func_861B() {
   func_06D0(2, "");
   func_06D0(3, "altMode");
   func_06D0(4, "");
-  if(!level.var_258F) {
+  if(!level.console) {
     func_06D0(5, "");
     func_06D0(6, "");
     func_06D0(7, "");
@@ -1936,36 +1936,36 @@ func_56F6(param_00) {
 }
 
 func_7C01(param_00, param_01) {
-  var_02 = "scr_" + level.var_3FDC + "_" + param_00;
+  var_02 = "scr_" + level.gametype + "_" + param_00;
   level.var_A901[var_02] = spawnStruct();
   level.var_A901[var_02].var_A281 = getdvarint(var_02, param_01);
-  level.var_A901[var_02].var_01B9 = "int";
+  level.var_A901[var_02].type = "int";
   level.var_A901[var_02].var_6810 = "update_" + param_00;
 }
 
 func_7C00(param_00, param_01) {
-  var_02 = "scr_" + level.var_3FDC + "_" + param_00;
+  var_02 = "scr_" + level.gametype + "_" + param_00;
   level.var_A901[var_02] = spawnStruct();
   level.var_A901[var_02].var_A281 = getdvarfloat(var_02, param_01);
-  level.var_A901[var_02].var_01B9 = "float";
+  level.var_A901[var_02].type = "float";
   level.var_A901[var_02].var_6810 = "update_" + param_00;
 }
 
 func_7BFF(param_00, param_01) {
-  var_02 = "scr_" + level.var_3FDC + "_" + param_00;
+  var_02 = "scr_" + level.gametype + "_" + param_00;
   level.var_A901[var_02] = spawnStruct();
   level.var_A901[var_02].var_A281 = getDvar(var_02, param_01);
-  level.var_A901[var_02].var_01B9 = "string";
+  level.var_A901[var_02].type = "string";
   level.var_A901[var_02].var_6810 = "update_" + param_00;
 }
 
 func_86EA(param_00, param_01) {
-  param_00 = "scr_" + level.var_3FDC + "_" + param_00;
+  param_00 = "scr_" + level.gametype + "_" + param_00;
   level.var_6CC8[param_00] = param_01;
 }
 
 func_471A(param_00) {
-  param_00 = "scr_" + level.var_3FDC + "_" + param_00;
+  param_00 = "scr_" + level.gametype + "_" + param_00;
   if(isDefined(level.var_6CC8) && isDefined(level.var_6CC8[param_00])) {
     return level.var_6CC8[param_00];
   }
@@ -1985,9 +1985,9 @@ func_A194() {
 
 func_A193(param_00) {
   var_01 = level.var_A901[param_00];
-  if(var_01.var_01B9 == "string") {
+  if(var_01.type == "string") {
     var_02 = func_463A(param_00, var_01.var_A281);
-  } else if(var_02.var_01B9 == "float") {
+  } else if(var_02.type == "float") {
     var_02 = func_44E8(var_01, var_02.var_A281);
   } else {
     var_02 = func_4529(var_01, var_02.var_A281);
@@ -2000,7 +2000,7 @@ func_A193(param_00) {
 }
 
 func_57B2() {
-  if(!level.var_984D && !common_scripts\utility::func_562E(level.roundbasedffa)) {
+  if(!level.teambased && !common_scripts\utility::func_562E(level.roundbasedffa)) {
     return 0;
   }
 
@@ -2012,7 +2012,7 @@ func_57B2() {
 }
 
 func_56F0() {
-  if(!level.var_984D) {
+  if(!level.teambased) {
     return 1;
   }
 
@@ -2028,7 +2028,7 @@ func_56F0() {
 }
 
 func_5743() {
-  if(!level.var_984D) {
+  if(!level.teambased) {
     return 1;
   }
 
@@ -2044,7 +2044,7 @@ func_5743() {
 }
 
 func_A875() {
-  if(!level.var_984D && !common_scripts\utility::func_562E(level.roundbasedffa)) {
+  if(!level.teambased && !common_scripts\utility::func_562E(level.roundbasedffa)) {
     return 1;
   }
 
@@ -2064,11 +2064,11 @@ func_A875() {
 }
 
 func_A872() {
-  if(level.var_3E16) {
+  if(level.forcedend) {
     return 1;
   }
 
-  if(!level.var_984D && !common_scripts\utility::func_562E(level.roundbasedffa)) {
+  if(!level.teambased && !common_scripts\utility::func_562E(level.roundbasedffa)) {
     return 1;
   }
 
@@ -2096,14 +2096,14 @@ func_4DE2() {
     return 0;
   }
 
-  if(level.var_984D) {
+  if(level.teambased) {
     if(game["teamScores"]["allies"] >= func_471A("scorelimit") || game["teamScores"]["axis"] >= func_471A("scorelimit")) {
       return 1;
     }
   } else {
-    for(var_00 = 0; var_00 < level.var_744A.size; var_00++) {
-      var_01 = level.var_744A[var_00];
-      if(isDefined(var_01.var_015C) && var_01.var_015C >= func_471A("scorelimit")) {
+    for(var_00 = 0; var_00 < level.players.size; var_00++) {
+      var_01 = level.players[var_00];
+      if(isDefined(var_01.score) && var_01.score >= func_471A("scorelimit")) {
         return 1;
       }
     }
@@ -2121,7 +2121,7 @@ func_4DE7() {
     return 0;
   }
 
-  if(!level.var_984D) {
+  if(!level.teambased) {
     return 1;
   }
 
@@ -2157,7 +2157,7 @@ func_579B() {
 }
 
 func_585F() {
-  return isDefined(level.var_585D) && level.var_585D;
+  return isDefined(level.iszombiegame) && level.iszombiegame;
 }
 
 iszombiegameshattermode() {
@@ -2204,9 +2204,9 @@ func_46E2() {
     return var_00;
   } else if(isDefined(level.var_2D64) && level.var_2D64 == 1 && isDefined(level.var_18EE) && level.var_18EE == 1 && isDefined(level.var_3992)) {
     return func_471A("timelimit") + 2 * level.var_3992;
-  } else if(level.var_3FDC == "onevone" && isDefined(level.var_09B7)) {
-    return func_471A("timelimit") + level.var_09B7;
-  } else if(level.var_3FDC == "ctf" && isDefined(level.var_289F) && level.var_289F && isDefined(level.var_3992)) {
+  } else if(level.gametype == "onevone" && isDefined(level.var_9B7)) {
+    return func_471A("timelimit") + level.var_9B7;
+  } else if(level.gametype == "ctf" && isDefined(level.var_289F) && level.var_289F && isDefined(level.var_3992)) {
     return func_471A("timelimit") + 2 * level.var_3992;
   }
 
@@ -2234,11 +2234,11 @@ func_3FA6() {
     return level.var_3FA6;
   }
 
-  if(level.var_984D) {
-    return level.var_4B96["axis"] && level.var_4B96["allies"];
+  if(level.teambased) {
+    return level.hasspawned["axis"] && level.hasspawned["allies"];
   }
 
-  return level.var_6094 > 1;
+  return level.maxplayercount > 1;
 }
 
 func_442E(param_00) {
@@ -2248,7 +2248,7 @@ func_442E(param_00) {
   }
 
   foreach(var_03 in param_00) {
-    var_01 = var_01 + var_03.var_0116;
+    var_01 = var_01 + var_03.origin;
   }
 
   var_05 = int(var_01[0] / param_00.size);
@@ -2260,13 +2260,13 @@ func_442E(param_00) {
 
 func_455E(param_00) {
   var_01 = [];
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(!isalive(var_03)) {
       continue;
     }
 
-    if(level.var_984D && isDefined(param_00)) {
-      if(param_00 == var_03.var_012C["team"]) {
+    if(level.teambased && isDefined(param_00)) {
+      if(param_00 == var_03.pers["team"]) {
         var_01[var_01.size] = var_03;
       }
 
@@ -2281,11 +2281,11 @@ func_455E(param_00) {
 
 func_8A5B(param_00) {
   if(isDefined(self.var_2015)) {
-    self.var_2015.var_0018 = 0;
+    self.var_2015.alpha = 0;
   }
 
   self.var_A25C = param_00;
-  common_scripts\utility::func_0600();
+  common_scripts\utility::func_600();
   self notify("using_remote");
 }
 
@@ -2306,10 +2306,10 @@ func_3E8E(param_00) {
 func_3E8F(param_00) {
   if(!param_00) {
     self method_84CB();
-    self method_8324();
+    self disableoffhandweapons();
   } else {
     self method_84CC();
-    self method_8325();
+    self enableoffhandweapons();
   }
 
   self allowmovement(param_00);
@@ -2336,13 +2336,13 @@ func_3E90(param_00, param_01) {
 
 func_2414() {
   if(isDefined(self.var_2015)) {
-    self.var_2015.var_0018 = 1;
+    self.var_2015.alpha = 1;
   }
 
   self.var_A25C = undefined;
-  common_scripts\utility::func_0614();
+  common_scripts\utility::func_614();
   var_00 = self getcurrentweapon();
-  if(var_00 == "none" || func_5740(var_00)) {
+  if(var_00 == "none" || iskillstreakweapon(var_00)) {
     self switchtoweapon(common_scripts\utility::func_4550());
   }
 
@@ -2378,11 +2378,11 @@ func_43D1() {
 }
 
 func_4739(param_00, param_01) {
-  if(!func_7A69() || func_761E()) {
+  if(!rankingenabled() || practiceroundgame()) {
     return 0;
   }
 
-  if(isDefined(param_00) && isDefined(param_01) && isPlayer(param_00) && func_5699(param_01) || func_569A(param_01)) {
+  if(isDefined(param_00) && isDefined(param_01) && isPlayer(param_00) && func_5699(param_01) || iscacsecondaryweapon(param_01)) {
     var_02 = param_00 getrankedplayerdata(common_scripts\utility::func_46AE(), "weaponStats", func_45B5(param_01), "prestigeLevel");
     var_03 = param_00 getrankedplayerdata(common_scripts\utility::func_46AE(), "weaponStats", func_45B5(param_01), "kills");
     return getweaponreputation(var_03, var_02);
@@ -2408,17 +2408,17 @@ func_6F74(param_00, param_01, param_02) {
     level endon(param_02);
   }
 
-  if(isDefined(level.var_744A)) {
-    common_scripts\utility::func_0FB2(level.var_744A, param_00, param_01);
+  if(isDefined(level.players)) {
+    common_scripts\utility::array_thread(level.players, param_00, param_01);
   }
 
   if(isDefined(level.var_596C)) {
-    common_scripts\utility::func_0FB2(level.var_596C, param_00, param_01);
+    common_scripts\utility::array_thread(level.var_596C, param_00, param_01);
   }
 
   for(;;) {
     level waittill("connected", var_03);
-    common_scripts\utility::func_0FB2([var_03], param_00, param_01);
+    common_scripts\utility::array_thread([var_03], param_00, param_01);
   }
 }
 
@@ -2470,7 +2470,7 @@ func_9466(param_00, param_01) {
 
 func_5DC8() {
   var_00 = spawnStruct();
-  var_00.var_005C = 0;
+  var_00.var_5C = 0;
   return var_00;
 }
 
@@ -2478,50 +2478,50 @@ func_5DC6(param_00) {
   var_01 = spawnStruct();
   var_01.var_A281 = param_00;
   if(!isDefined(self.var_95BE)) {
-    self.var_00B9 = var_01;
+    self.var_B9 = var_01;
     self.var_95BE = var_01;
   } else {
     self.var_95BE.var_66A1 = var_01;
     self.var_95BE = var_01;
   }
 
-  self.var_005C++;
+  self.var_5C++;
 }
 
 func_5DCA() {
-  if(!isDefined(self.var_00B9)) {
+  if(!isDefined(self.var_B9)) {
     return undefined;
   }
 
-  if(self.var_00B9 == self.var_95BE) {
-    var_00 = self.var_00B9.var_A281;
-    self.var_00B9 = undefined;
+  if(self.var_B9 == self.var_95BE) {
+    var_00 = self.var_B9.var_A281;
+    self.var_B9 = undefined;
     self.var_95BE = undefined;
-    self.var_005C = 0;
+    self.var_5C = 0;
     return var_00;
   }
 
-  var_00 = self.var_00B9.var_A281;
-  self.var_00B9 = self.var_00B9.var_66A1;
-  self.var_005C--;
+  var_00 = self.var_B9.var_A281;
+  self.var_B9 = self.var_B9.var_66A1;
+  self.var_5C--;
   return var_00;
 }
 
 func_5DC9() {
-  if(!isDefined(self.var_00B9)) {
+  if(!isDefined(self.var_B9)) {
     return undefined;
   }
 
-  return self.var_00B9.var_A281;
+  return self.var_B9.var_A281;
 }
 
 func_5DCB() {
-  return self.var_005C;
+  return self.var_5C;
 }
 
 func_5DC7() {
-  var_00 = self.var_005C;
-  for(var_01 = self.var_00B9; var_00; var_01 = var_02) {
+  var_00 = self.var_5C;
+  for(var_01 = self.var_B9; var_00; var_01 = var_02) {
     var_02 = var_01.var_66A1;
     var_01.var_66A1 = undefined;
     var_01.var_A281 = undefined;
@@ -2529,15 +2529,15 @@ func_5DC7() {
     var_00 = var_00 - 1;
   }
 
-  self.var_005C = 0;
-  self.var_00B9 = undefined;
+  self.var_5C = 0;
+  self.var_B9 = undefined;
   self.var_95BE = undefined;
 }
 
 func_5DCC() {
   var_00 = [];
   var_01 = 0;
-  var_02 = self.var_00B9;
+  var_02 = self.var_B9;
   while(isDefined(var_02)) {
     var_00[var_01] = var_02.var_A281;
     var_01++;
@@ -2555,7 +2555,7 @@ func_06D4(param_00, param_01) {
     self.var_305A = gettime();
   }
 
-  self.var_0079 = param_01;
+  self.var_79 = param_01;
 }
 
 func_0642(param_00, param_01, param_02, param_03) {
@@ -2597,7 +2597,7 @@ areexperimentalbasictrainingsenabled() {
   return getdvarint("6015", 0) == 1;
 }
 
-func_0649(param_00) {
+_hasperk(param_00) {
   if(!func_585F() && maps\mp\perks\_perkfunctions::isspecialistperk(param_00) && !maps\mp\perks\_perkfunctions::hasspecialistperkunlocked(param_00)) {
     return 0;
   }
@@ -2615,7 +2615,7 @@ func_0649(param_00) {
 
 _hasexperimentalbtperk(param_00) {
   if(areexperimentalbasictrainingsenabled()) {
-    return func_0649(param_00);
+    return _hasperk(param_00);
   }
 
   return 0;
@@ -2703,11 +2703,11 @@ func_1F50(param_00) {
 }
 
 func_05DE(param_00) {
-  if(!isDefined(level.var_083D) || !isDefined(level.var_083D[param_00])) {
+  if(!isDefined(level.var_83D) || !isDefined(level.var_83D[param_00])) {
     return 1;
   }
 
-  return self[[level.var_083D[param_00]]]();
+  return self[[level.var_83D[param_00]]]();
 }
 
 func_476E(param_00, param_01) {
@@ -2715,10 +2715,10 @@ func_476E(param_00, param_01) {
 }
 
 func_06CF(param_00, param_01) {
-  self.var_083B[param_00] = 1;
+  self.var_83B[param_00] = 1;
   if(isPlayer(self)) {
-    if(isDefined(level.var_0841[param_00])) {
-      self thread[[level.var_0841[param_00]]]();
+    if(isDefined(level.var_841[param_00])) {
+      self thread[[level.var_841[param_00]]]();
     }
   }
 
@@ -2726,10 +2726,10 @@ func_06CF(param_00, param_01) {
 }
 
 func_0734(param_00) {
-  self.var_083B[param_00] = undefined;
+  self.var_83B[param_00] = undefined;
   if(isPlayer(self)) {
-    if(isDefined(level.var_0842[param_00])) {
-      self thread[[level.var_0842[param_00]]]();
+    if(isDefined(level.var_842[param_00])) {
+      self thread[[level.var_842[param_00]]]();
     }
   }
 
@@ -2738,12 +2738,12 @@ func_0734(param_00) {
 
 func_05E1() {
   if(isPlayer(self)) {
-    if(isDefined(level.var_0842[self.var_012C["ability"]])) {
-      self[[level.var_0842[self.var_012C["ability"]]]]();
+    if(isDefined(level.var_842[self.pers["ability"]])) {
+      self[[level.var_842[self.pers["ability"]]]]();
     }
   }
 
-  self.var_083B = [];
+  self.var_83B = [];
   self method_82AB();
 }
 
@@ -2753,19 +2753,19 @@ func_0648(param_00, param_01) {
   }
 
   if(param_01) {
-    if(isDefined(self.var_083B[param_00]) && self.var_083B[param_00]) {
+    if(isDefined(self.var_83B[param_00]) && self.var_83B[param_00]) {
       return 1;
     }
-  } else if(isDefined(self.var_012C["ability"]) && self.var_012C["ability"] == param_00 && isDefined(self.var_012C["abilityOn"]) && self.var_012C["abilityOn"]) {
+  } else if(isDefined(self.pers["ability"]) && self.pers["ability"] == param_00 && isDefined(self.pers["abilityOn"]) && self.pers["abilityOn"]) {
     return 1;
   }
 
   return 0;
 }
 
-func_0728() {
+_suicide() {
   if(func_581D() && !function_02D2(self)) {
-    thread maps\mp\gametypes\_damage::func_7418(self, self, self, 10000, "MOD_SUICIDE", "frag_grenade_mp", (0, 0, 0), "none", 0, 1116, 1);
+    thread maps\mp\gametypes\_damage::playerkilled_internal(self, self, self, 10000, "MOD_SUICIDE", "frag_grenade_mp", (0, 0, 0), "none", 0, 1116, 1);
     return;
   }
 
@@ -2836,96 +2836,96 @@ func_7210(param_00, param_01) {
   }
 
   if(isDefined(self.var_18A8)) {
-    if(self.var_01A7 == "axis") {
+    if(self.team == "axis") {
       if(self method_843D()) {
         var_02 = randomintrange(1, 4);
         if(isDefined(param_00) && param_00 == "MOD_BURNED" || param_00 == "MOD_BURNED_OVER_TIME") {
-          var_03 = lib_0380::func_6842("flame_death_enemy_fm_" + var_02, undefined, self.var_18A8.var_0116);
+          var_03 = lib_0380::func_6842("flame_death_enemy_fm_" + var_02, undefined, self.var_18A8.origin);
           return;
         }
 
-        if(isDefined(param_00) && param_00 == "MOD_MELEE" && issubstr(param_01, "bayonet")) {
-          var_03 = lib_0380::func_2889("bayo_death_enemy_fm_" + var_02, undefined, self.var_18A8.var_0116);
+        if(isDefined(param_01) && param_01 == "MOD_MELEE" && issubstr(var_02, "bayonet")) {
+          var_03 = lib_0380::func_2889("bayo_death_enemy_fm_" + var_03, undefined, self.var_18A8.origin);
           return;
         }
 
         if(isDefined(self.var_5D9F) && self.var_5D9F == 1) {
-          var_03 = lib_0380::func_6842("lingering_death_enemy_fm_" + var_02, undefined, self.var_18A8.var_0116);
+          var_03 = lib_0380::func_6842("lingering_death_enemy_fm_" + var_03, undefined, self.var_18A8.origin);
           return;
         }
 
-        var_03 = lib_0380::func_6842("generic_death_enemy_fm_" + var_02, undefined, self.var_18A8.var_0116);
+        var_03 = lib_0380::func_6842("generic_death_enemy_fm_" + var_03, undefined, self.var_18A8.origin);
         return;
       }
 
       var_02 = randomintrange(1, 7);
-      if(isDefined(param_00) && param_00 == "MOD_BURNED" || param_00 == "MOD_BURNED_OVER_TIME") {
-        var_03 = lib_0380::func_6842("flame_death_enemy_" + var_02, undefined, self.var_18A8.var_0116);
+      if(isDefined(param_01) && param_01 == "MOD_BURNED" || param_01 == "MOD_BURNED_OVER_TIME") {
+        var_03 = lib_0380::func_6842("flame_death_enemy_" + var_03, undefined, self.var_18A8.origin);
         return;
       }
 
-      if(isDefined(param_00) && param_00 == "MOD_MELEE" && issubstr(param_01, "bayonet")) {
-        var_03 = lib_0380::func_2889("bayo_death_enemy_" + var_02, undefined, self.var_18A8.var_0116);
+      if(isDefined(param_01) && param_01 == "MOD_MELEE" && issubstr(var_02, "bayonet")) {
+        var_03 = lib_0380::func_2889("bayo_death_enemy_" + var_03, undefined, self.var_18A8.origin);
         return;
       }
 
       if(isDefined(self.var_5D9F) && self.var_5D9F == 1) {
-        var_03 = lib_0380::func_6842("lingering_death_enemy_" + var_02, undefined, self.var_18A8.var_0116);
+        var_03 = lib_0380::func_6842("lingering_death_enemy_" + var_03, undefined, self.var_18A8.origin);
         return;
       }
 
-      var_03 = lib_0380::func_6842("generic_death_enemy_" + var_02, undefined, self.var_18A8.var_0116);
+      var_03 = lib_0380::func_6842("generic_death_enemy_" + var_03, undefined, self.var_18A8.origin);
       return;
     }
 
     if(self method_843D()) {
       var_02 = randomintrange(1, 4);
-      if(isDefined(param_00) && param_00 == "MOD_BURNED" || param_00 == "MOD_BURNED_OVER_TIME") {
-        var_03 = lib_0380::func_6842("flame_death_friendly_fm_" + var_02, undefined, self.var_18A8.var_0116);
+      if(isDefined(param_01) && param_01 == "MOD_BURNED" || param_01 == "MOD_BURNED_OVER_TIME") {
+        var_03 = lib_0380::func_6842("flame_death_friendly_fm_" + var_03, undefined, self.var_18A8.origin);
         return;
       }
 
-      if(isDefined(param_00) && param_00 == "MOD_MELEE" && issubstr(param_01, "bayonet")) {
-        var_03 = lib_0380::func_2889("bayo_death_friendly_fm_" + var_02, undefined, self.var_18A8.var_0116);
+      if(isDefined(param_01) && param_01 == "MOD_MELEE" && issubstr(var_02, "bayonet")) {
+        var_03 = lib_0380::func_2889("bayo_death_friendly_fm_" + var_03, undefined, self.var_18A8.origin);
         return;
       }
 
       if(isDefined(self.var_5D9F) && self.var_5D9F == 1) {
-        var_03 = lib_0380::func_6842("lingering_death_friendly_fm_" + var_02, undefined, self.var_18A8.var_0116);
+        var_03 = lib_0380::func_6842("lingering_death_friendly_fm_" + var_03, undefined, self.var_18A8.origin);
         return;
       }
 
-      var_03 = lib_0380::func_6842("generic_death_friendly_fm_" + var_02, undefined, self.var_18A8.var_0116);
+      var_03 = lib_0380::func_6842("generic_death_friendly_fm_" + var_03, undefined, self.var_18A8.origin);
       return;
     }
 
     var_02 = randomintrange(1, 7);
-    if(isDefined(param_00) && param_00 == "MOD_BURNED" || param_00 == "MOD_BURNED_OVER_TIME") {
-      var_03 = lib_0380::func_6842("flame_death_friendly_" + var_02, undefined, self.var_18A8.var_0116);
+    if(isDefined(param_01) && param_01 == "MOD_BURNED" || param_01 == "MOD_BURNED_OVER_TIME") {
+      var_03 = lib_0380::func_6842("flame_death_friendly_" + var_03, undefined, self.var_18A8.origin);
       return;
     }
 
-    if(isDefined(param_00) && param_00 == "MOD_MELEE" && issubstr(param_01, "bayonet")) {
-      var_03 = lib_0380::func_2889("bayo_death_friendly_" + var_02, undefined, self.var_18A8.var_0116);
+    if(isDefined(param_01) && param_01 == "MOD_MELEE" && issubstr(var_02, "bayonet")) {
+      var_03 = lib_0380::func_2889("bayo_death_friendly_" + var_03, undefined, self.var_18A8.origin);
       return;
     }
 
     if(isDefined(self.var_5D9F) && self.var_5D9F == 1) {
-      var_03 = lib_0380::func_6842("lingering_death_friendly_" + var_02, undefined, self.var_18A8.var_0116);
+      var_03 = lib_0380::func_6842("lingering_death_friendly_" + var_03, undefined, self.var_18A8.origin);
       return;
     }
 
-    var_03 = lib_0380::func_6842("generic_death_friendly_" + var_02, undefined, self.var_18A8.var_0116);
+    var_03 = lib_0380::func_6842("generic_death_friendly_" + var_03, undefined, self.var_18A8.origin);
     return;
   }
 }
 
-func_7A69() {
+rankingenabled() {
   if(!isPlayer(self)) {
     return 0;
   }
 
-  return (level.var_7A67 && !self.var_A25B) || function_0367() && !function_0371() && !issplitscreen() && !function_02A4();
+  return (level.rankedmatch && !self.var_A25B) || function_0367() && !function_0371() && !issplitscreen() && !function_02A4();
 }
 
 func_773F() {
@@ -2936,7 +2936,7 @@ func_602B() {
   return level.var_6B4D && !function_0371();
 }
 
-func_761E() {
+practiceroundgame() {
   return level.var_7616;
 }
 
@@ -2992,7 +2992,7 @@ func_5A54(param_00) {
   return 1;
 }
 
-func_5740(param_00) {
+iskillstreakweapon(param_00) {
   if(!isDefined(param_00)) {
     return 0;
   }
@@ -3017,7 +3017,7 @@ func_5740(param_00) {
     return 0;
   }
 
-  param_00 = func_4431(param_00);
+  param_00 = getbaseweaponname(param_00);
   if(param_00 == "airdrop_sentry_marker_mp") {
     return 1;
   }
@@ -3105,7 +3105,7 @@ isuseweapon(param_00) {
   return 0;
 }
 
-func_56DF(param_00) {
+isenvironmentweapon(param_00) {
   if(!isDefined(param_00)) {
     return 0;
   }
@@ -3121,7 +3121,7 @@ func_56DF(param_00) {
   return 0;
 }
 
-func_5856(param_00) {
+islootweapon(param_00) {
   if(issubstr(param_00, "loot")) {
     return 1;
   }
@@ -3135,7 +3135,7 @@ func_5857(param_00) {
   }
 
   var_01 = getitemreffromguid(param_00);
-  return func_5856(var_01);
+  return islootweapon(var_01);
 }
 
 func_4738(param_00) {
@@ -3170,20 +3170,20 @@ func_472F(param_00) {
   return func_4730(param_00, "cust");
 }
 
-func_472A(param_00, param_01) {
+getweaponclass(param_00, param_01) {
   if(param_00 == "p51_cannon") {
     return "none";
   }
 
-  var_02 = func_4431(param_00);
+  var_02 = getbaseweaponname(param_00);
   var_03 = tablelookup("mp/statstable.csv", 2, var_02, 0);
   if(var_03 == "") {
     var_03 = tablelookup("mp/statstable.csv", 2, param_00, 0);
   }
 
-  if(func_56DF(param_00)) {
+  if(isenvironmentweapon(param_00)) {
     var_03 = "weapon_mg";
-  } else if(!common_scripts\utility::func_562E(param_01) && func_5740(param_00)) {
+  } else if(!common_scripts\utility::func_562E(param_01) && iskillstreakweapon(param_00)) {
     var_03 = "killstreak";
   } else if(param_00 == "none") {
     var_03 = "other";
@@ -3194,11 +3194,11 @@ func_472A(param_00, param_01) {
   return var_03;
 }
 
-func_4723(param_00) {
+getweaponattachmentfromstats(param_00) {
   return function_0060(param_00);
 }
 
-func_4431(param_00, param_01) {
+getbaseweaponname(param_00, param_01) {
   var_02 = strtok(param_00, "+");
   var_03 = "";
   if(var_02[0] == "alt") {
@@ -3218,9 +3218,9 @@ func_4431(param_00, param_01) {
 }
 
 func_45B5(param_00) {
-  var_01 = func_4431(param_00);
-  if(func_5856(var_01)) {
-    var_01 = maps\mp\gametypes\_class::func_4432(var_01);
+  var_01 = getbaseweaponname(param_00);
+  if(islootweapon(var_01)) {
+    var_01 = maps\mp\gametypes\_class::getbasefromlootversion(var_01);
   }
 
   return var_01;
@@ -3230,7 +3230,7 @@ func_74D8(param_00, param_01) {
   playsoundatpos(param_01, param_00);
 }
 
-func_5D7F(param_00, param_01) {
+limitdecimalplaces(param_00, param_01) {
   if(!isDefined(param_01)) {
     param_01 = 2;
   }
@@ -3247,7 +3247,7 @@ func_5D7F(param_00, param_01) {
 }
 
 func_73E2(param_00) {
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02.var_2418 == param_00) {
       return var_02;
     }
@@ -3258,7 +3258,7 @@ func_73E2(param_00) {
 
 func_871E(param_00) {
   self makeusable();
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 != param_00) {
       self disableplayeruse(var_02);
       continue;
@@ -3279,7 +3279,7 @@ func_A18D(param_00) {
 
 func_871D() {
   self makeunusable();
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     self disableplayeruse(var_01);
   }
 }
@@ -3294,8 +3294,8 @@ func_073A(param_00) {
   self notify("stop_usable_update");
   self endon("stop_usable_update");
   for(;;) {
-    foreach(var_02 in level.var_744A) {
-      if(var_02.var_01A7 == param_00) {
+    foreach(var_02 in level.players) {
+      if(var_02.team == param_00) {
         self enableplayeruse(var_02);
         continue;
       }
@@ -3314,11 +3314,11 @@ func_5FB6(param_00) {
 
 func_0737(param_00) {
   self endon("death");
-  var_01 = param_00.var_01A7;
+  var_01 = param_00.team;
   for(;;) {
-    if(level.var_984D) {
-      foreach(var_03 in level.var_744A) {
-        if(var_03.var_01A7 != var_01) {
+    if(level.teambased) {
+      foreach(var_03 in level.players) {
+        if(var_03.team != var_01) {
           self enableplayeruse(var_03);
           continue;
         }
@@ -3326,7 +3326,7 @@ func_0737(param_00) {
         self disableplayeruse(var_03);
       }
     } else {
-      foreach(var_03 in level.var_744A) {
+      foreach(var_03 in level.players) {
         if(var_03 != param_00) {
           self enableplayeruse(var_03);
           continue;
@@ -3394,7 +3394,7 @@ func_5694(param_00) {
 }
 
 func_56F8(param_00, param_01, param_02) {
-  return isDefined(param_02) && isPlayer(param_02) && (param_02 func_0649("specialty_bulletpenetration") || param_02 func_0649("specialty_superbulletpenetration")) && isDefined(param_01) && func_5694(param_01);
+  return isDefined(param_02) && isPlayer(param_02) && (param_02 _hasperk("specialty_bulletpenetration") || param_02 _hasperk("specialty_superbulletpenetration")) && isDefined(param_01) && func_5694(param_01);
 }
 
 func_5315() {
@@ -3454,11 +3454,11 @@ func_573D() {
     return 0;
   }
 
-  return func_56D7() || func_5668();
+  return isemped() || func_5668();
 }
 
-func_56D7() {
-  if(self.var_01A7 == "spectator") {
+isemped() {
+  if(self.team == "spectator") {
     return 0;
   }
 
@@ -3466,15 +3466,15 @@ func_56D7() {
     return 0;
   }
 
-  if(level.var_984D) {
-    return (isDefined(level.var_9852) && level.var_9852[self.var_01A7]) || isDefined(self.var_35F1) && self.var_35F1;
+  if(level.teambased) {
+    return (isDefined(level.var_9852) && level.var_9852[self.team]) || isDefined(self.var_35F1) && self.var_35F1;
   }
 
   return (isDefined(level.var_35F6) && level.var_35F6 != self) || isDefined(self.var_35F1) && self.var_35F1;
 }
 
 func_56D8() {
-  if(self.var_01A7 == "spectator") {
+  if(self.team == "spectator") {
     return 0;
   }
 
@@ -3482,22 +3482,22 @@ func_56D8() {
     return 0;
   }
 
-  if(level.var_984D) {
-    return level.var_9852[self.var_01A7];
+  if(level.teambased) {
+    return level.var_9852[self.team];
   }
 
   return isDefined(level.var_35F6) && level.var_35F6 != self;
 }
 
 func_5668(param_00, param_01) {
-  var_02 = self.var_01A7;
+  var_02 = self.team;
   if(isDefined(param_01)) {
     var_02 = param_01;
   }
 
-  if((level.var_984D && isDefined(level.var_9854) && isDefined(var_02) && isDefined(level.var_9854[var_02]) && level.var_9854[var_02]) || !level.var_984D && isDefined(level.var_3CE0) && level.var_3CE0 != self) {
+  if((level.teambased && isDefined(level.var_9854) && isDefined(var_02) && isDefined(level.var_9854[var_02]) && level.var_9854[var_02]) || !level.teambased && isDefined(level.var_3CE0) && level.var_3CE0 != self) {
     if(!isDefined(param_00) || param_00) {
-      self iclientprintlnbold(&"KILLSTREAKS_FLAK_GUN_ACTIVE");
+      self iprintlnbold(&"KILLSTREAKS_FLAK_GUN_ACTIVE");
     }
 
     return 1;
@@ -3507,14 +3507,14 @@ func_5668(param_00, param_01) {
 }
 
 func_5814(param_00, param_01) {
-  var_02 = self.var_01A7;
+  var_02 = self.team;
   if(isDefined(param_01)) {
     var_02 = param_01;
   }
 
-  if((level.var_984D && isDefined(level.var_9850) && level.var_9850[var_02]) || !level.var_984D && isDefined(level.var_2694) && level.var_2694 != self) {
+  if((level.teambased && isDefined(level.var_9850) && level.var_9850[var_02]) || !level.teambased && isDefined(level.var_2694) && level.var_2694 != self) {
     if(!isDefined(param_00) || param_00) {
-      self iclientprintlnbold(&"KILLSTREAKS_COUNTER_RECON_ACTIVE");
+      self iprintlnbold(&"KILLSTREAKS_COUNTER_RECON_ACTIVE");
     }
 
     return 1;
@@ -3524,7 +3524,7 @@ func_5814(param_00, param_01) {
 }
 
 func_575F() {
-  if(self.var_01A7 == "spectator") {
+  if(self.team == "spectator") {
     return 0;
   }
 
@@ -3532,8 +3532,8 @@ func_575F() {
 }
 
 func_4621(param_00) {
-  foreach(var_02 in level.var_744A) {
-    if(var_02.var_48CA == param_00) {
+  foreach(var_02 in level.players) {
+    if(var_02.guid == param_00) {
       return var_02;
     }
   }
@@ -3542,16 +3542,16 @@ func_4621(param_00) {
 }
 
 func_9863(param_00, param_01, param_02, param_03) {
-  if(level.var_4B17) {
+  if(level.hardcoremode) {
     return;
   }
 
-  foreach(var_05 in level.var_744A) {
+  foreach(var_05 in level.players) {
     if(!isDefined(var_05)) {
       continue;
     }
 
-    if(isDefined(param_02) && !isDefined(var_05.var_01A7) || var_05.var_01A7 != param_02) {
+    if(isDefined(param_02) && !isDefined(var_05.team) || var_05.team != param_02) {
       continue;
     }
 
@@ -3564,7 +3564,7 @@ func_9863(param_00, param_01, param_02, param_03) {
 }
 
 func_5699(param_00) {
-  switch (func_472A(param_00)) {
+  switch (getweaponclass(param_00)) {
     case "weapon_special":
     case "weapon_heavy":
     case "weapon_shotgun":
@@ -3580,8 +3580,8 @@ func_5699(param_00) {
   }
 }
 
-func_569A(param_00) {
-  switch (func_472A(param_00)) {
+iscacsecondaryweapon(param_00) {
+  switch (getweaponclass(param_00)) {
     case "weapon_other":
     case "weapon_sec_special":
     case "weapon_machine_pistol":
@@ -3597,8 +3597,8 @@ func_569A(param_00) {
 
 func_454F(param_00) {
   var_01 = undefined;
-  foreach(var_03 in level.var_744A) {
-    if(isDefined(param_00) && var_03.var_01A7 != param_00) {
+  foreach(var_03 in level.players) {
+    if(isDefined(param_00) && var_03.team != param_00) {
       continue;
     }
 
@@ -3614,7 +3614,7 @@ func_454F(param_00) {
 
 func_4630() {
   var_00 = [];
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(!func_57A0(var_02) && !var_02 maps\mp\gametypes\_playerlogic::func_60B2()) {
       continue;
     }
@@ -3638,14 +3638,14 @@ func_A78E(param_00, param_01) {
   }
 
   for(;;) {
-    if(self.var_00BC != self.var_00FB) {
+    if(self.health != self.maxhealth) {
       var_02 = 0;
     } else {
       var_02 = var_02 + param_01;
     }
 
     wait(param_01);
-    if(self.var_00BC == self.var_00FB && var_02 >= param_00) {
+    if(self.health == self.maxhealth && var_02 >= param_00) {
       break;
     }
   }
@@ -3654,9 +3654,9 @@ func_A78E(param_00, param_01) {
 func_1151(param_00, param_01) {
   var_02 = param_00;
   if(isDefined(param_00)) {
-    param_01 = func_4431(param_01, 1);
-    if(func_5856(param_01)) {
-      param_01 = maps\mp\gametypes\_class::func_4432(param_01);
+    param_01 = getbaseweaponname(param_01, 1);
+    if(islootweapon(param_01)) {
+      param_01 = maps\mp\gametypes\_class::getbasefromlootversion(param_01);
     }
 
     if(isDefined(level.var_114F[param_01]) && isDefined(level.var_114F[param_01][param_00])) {
@@ -3718,7 +3718,7 @@ func_4427() {
   var_01 = 0;
   var_02 = tablelookup("mp/attachmenttable.csv", 0, var_01, 4);
   while(var_02 != "") {
-    if(!common_scripts\utility::func_0F79(var_00, var_02)) {
+    if(!common_scripts\utility::func_F79(var_00, var_02)) {
       var_00[var_00.size] = var_02;
     }
 
@@ -3866,13 +3866,13 @@ func_5A81(param_00, param_01, param_02) {
 }
 
 func_3B8E(param_00, param_01, param_02) {
-  return findisfacingvectors(param_00.var_0116, anglesToForward(param_00.var_001D), param_01.var_0116, param_02);
+  return findisfacingvectors(param_00.origin, anglesToForward(param_00.angles), param_01.origin, param_02);
 }
 
 findplayerisfacing(param_00, param_01, param_02) {
-  var_03 = distance(param_00 getEye(), param_01.var_0116);
+  var_03 = distance(param_00 getEye(), param_01.origin);
   var_04 = param_00 getEye() + var_03 * vectorNormalize(anglesToForward(param_00 geteyeangles()));
-  return distance(param_01.var_0116, var_04) < param_02;
+  return distance(param_01.origin, var_04) < param_02;
 }
 
 findisfacingvectors(param_00, param_01, param_02, param_03) {
@@ -3921,7 +3921,7 @@ func_870F(param_00, param_01) {
     var_02 = 100 - self.var_7AD7;
   }
 
-  if(func_0649("specialty_sessionProgressionC") && isDefined(self.var_012C["sessionProgressionC_Modifier"])) {
+  if(_hasperk("specialty_sessionProgressionC") && isDefined(self.pers["sessionProgressionC_Modifier"])) {
     var_02 = var_02 * maps\mp\perks\_perkfunctions::getgrenadiermodvalue_c();
   }
 
@@ -3997,7 +3997,7 @@ func_A27A(param_00, param_01) {
   if(isDefined(param_00)) {
     var_02 = param_00;
   } else {
-    var_03 = self.var_012C["killstreaks"];
+    var_03 = self.pers["killstreaks"];
     var_02 = var_03[self.var_5A69].var_944C;
   }
 
@@ -4042,36 +4042,36 @@ func_A27A(param_00, param_01) {
       }
 
       if(!isDefined(param_01) && param_01) {
-        self iclientprintlnbold(&"MP_UNAVAILABLE_FOR_N", var_05);
+        self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", var_05);
       }
 
       return 0;
     }
   }
 
-  if(func_56D7() && !isDefined(level.var_585D) || !level.var_585D) {
-    if(!isDefined(param_01) && param_01) {
+  if(isemped() && !isDefined(level.iszombiegame) || !level.iszombiegame) {
+    if(!isDefined(var_02) && var_02) {
       if(isDefined(level.var_35F7) && level.var_35F7 > 0) {
-        self iclientprintlnbold(&"MP_UNAVAILABLE_FOR_N_WHEN_EMP", level.var_35F7);
+        self iprintlnbold(&"MP_UNAVAILABLE_FOR_N_WHEN_EMP", level.var_35F7);
       } else if(isDefined(self.var_35EF) && int(self.var_35EF - gettime() / 1000) > 0) {
-        self iclientprintlnbold(&"MP_UNAVAILABLE_FOR_N", int(self.var_35EF - gettime() / 1000));
+        self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", int(self.var_35EF - gettime() / 1000));
       }
     }
 
     return 0;
   }
 
-  if(self isusingturret() && func_57AD(var_02) || func_56A6(var_02)) {
-    if(!isDefined(param_01) && param_01) {
-      self iclientprintlnbold(&"MP_UNAVAILABLE_USING_TURRET");
+  if(self isusingturret() && func_57AD(var_04) || func_56A6(var_04)) {
+    if(!isDefined(var_02) && var_02) {
+      self iprintlnbold(&"MP_UNAVAILABLE_USING_TURRET");
     }
 
     return 0;
   }
 
-  if(isDefined(self.var_00E8) && !func_0649("specialty_finalstand")) {
-    if(!isDefined(param_01) && param_01) {
-      self iclientprintlnbold(&"MP_UNAVILABLE_IN_LASTSTAND");
+  if(isDefined(self.laststand) && !_hasperk("specialty_finalstand")) {
+    if(!isDefined(var_02) && var_02) {
+      self iprintlnbold(&"MP_UNAVILABLE_IN_LASTSTAND");
     }
 
     return 0;
@@ -4196,7 +4196,7 @@ func_4543(param_00) {
 }
 
 func_4541(param_00) {
-  return function_01AF("mp/killstreakTable.csv", 1, param_00, 2);
+  return tablelookupistring("mp/killstreakTable.csv", 1, param_00, 2);
 }
 
 func_4544(param_00) {
@@ -4204,7 +4204,7 @@ func_4544(param_00) {
 }
 
 func_4534(param_00) {
-  return function_01AF("mp/killstreakTable.csv", 1, param_00, 3);
+  return tablelookupistring("mp/killstreakTable.csv", 1, param_00, 3);
 }
 
 func_4531(param_00) {
@@ -4236,7 +4236,7 @@ getkillstreaksupportkills(param_00) {
 }
 
 func_4538(param_00) {
-  return function_01AF("mp/killstreakTable.csv", 1, param_00, 10);
+  return tablelookupistring("mp/killstreakTable.csv", 1, param_00, 10);
 }
 
 func_4547(param_00) {
@@ -4350,7 +4350,7 @@ func_0C2D() {
     return 0;
   }
 
-  var_00 = int(tablelookup("mp/gametypesTable.csv", 0, level.var_3FDC, 4));
+  var_00 = int(tablelookup("mp/gametypesTable.csv", 0, level.gametype, 4));
   return var_00;
 }
 
@@ -4359,11 +4359,11 @@ func_0C1E() {
     return 0;
   }
 
-  if(isprophuntgametype() && !level.phsettings.allowloadouts || !isDefined(self.var_01A7) || self.var_01A7 == game["defenders"]) {
+  if(isprophuntgametype() && !level.phsettings.allowloadouts || !isDefined(self.team) || self.team == game["defenders"]) {
     return 0;
   }
 
-  var_00 = int(tablelookup("mp/gametypesTable.csv", 0, level.var_3FDC, 5));
+  var_00 = int(tablelookup("mp/gametypesTable.csv", 0, level.gametype, 5));
   return var_00;
 }
 
@@ -4372,7 +4372,7 @@ func_8BFD() {
     return 0;
   }
 
-  var_00 = int(tablelookup("mp/gametypesTable.csv", 0, level.var_3FDC, 7));
+  var_00 = int(tablelookup("mp/gametypesTable.csv", 0, level.gametype, 7));
   return var_00;
 }
 
@@ -4382,19 +4382,19 @@ func_5693(param_00, param_01) {
 
 func_8653(param_00) {
   var_01 = getmatchrulesdata("commonOption", "timeLimit");
-  setdynamicdvar("scr_" + level.var_3FDC + "_timeLimit", var_01);
-  func_7BFA(level.var_3FDC, var_01);
+  setdynamicdvar("scr_" + level.gametype + "_timeLimit", var_01);
+  func_7BFA(level.gametype, var_01);
   var_02 = getmatchrulesdata("commonOption", "scoreLimit");
-  setdynamicdvar("scr_" + level.var_3FDC + "_scoreLimit", var_02);
-  func_7BF9(level.var_3FDC, var_02);
+  setdynamicdvar("scr_" + level.gametype + "_scoreLimit", var_02);
+  func_7BF9(level.gametype, var_02);
   setdynamicdvar("scr_game_matchstarttime", getmatchrulesdata("commonOption", "preMatchTimer"));
   setdynamicdvar("scr_game_roundstarttime", getmatchrulesdata("commonOption", "preRoundTimer"));
   setdynamicdvar("scr_game_suicidespawndelay", getmatchrulesdata("commonOption", "suicidePenalty"));
   setdynamicdvar("scr_team_teamkillspawndelay", getmatchrulesdata("commonOption", "teamKillPenalty"));
   setdynamicdvar("scr_team_teamkillkicklimit", getmatchrulesdata("commonOption", "teamKillKickLimit"));
   var_03 = getmatchrulesdata("commonOption", "numLives");
-  setdynamicdvar("scr_" + level.var_3FDC + "_numLives", var_03);
-  func_7BF1(level.var_3FDC, var_03);
+  setdynamicdvar("scr_" + level.gametype + "_numLives", var_03);
+  func_7BF1(level.gametype, var_03);
   setdynamicdvar("scr_player_maxhealth", getmatchrulesdata("commonOption", "maxHealth"));
   setdynamicdvar("scr_player_healthregentime", getmatchrulesdata("commonOption", "healthRegen"));
   level.var_6031 = 0;
@@ -4404,8 +4404,8 @@ func_8653(param_00) {
   setdynamicdvar("scr_game_allowkillcam", getmatchrulesdata("commonOption", "showKillcam"));
   setdynamicdvar("scr_game_forceuav", getmatchrulesdata("commonOption", "radarMode") == 2);
   setdynamicdvar("scr_game_radarMode", getmatchrulesdata("commonOption", "radarMode"));
-  setdynamicdvar("scr_" + level.var_3FDC + "_playerrespawndelay", getmatchrulesdata("commonOption", "respawnDelay"));
-  setdynamicdvar("scr_" + level.var_3FDC + "_waverespawndelay", getmatchrulesdata("commonOption", "waveRespawnDelay"));
+  setdynamicdvar("scr_" + level.gametype + "_playerrespawndelay", getmatchrulesdata("commonOption", "respawnDelay"));
+  setdynamicdvar("scr_" + level.gametype + "_waverespawndelay", getmatchrulesdata("commonOption", "waveRespawnDelay"));
   setdynamicdvar("scr_player_forcerespawn", getmatchrulesdata("commonOption", "forceRespawn"));
   level.var_6030 = getmatchrulesdata("commonOption", "allowCustomClasses");
   level.var_297A = getmatchrulesdata("commonOption", "classPickCount");
@@ -4424,7 +4424,7 @@ func_8653(param_00) {
   level.var_5FF1 = 1;
   level.mgnestsdisabled = getmatchrulesdata("commonOption", "disableMGNests");
   level.var_212F = getmatchrulesdata("commonOption", "chatterDisabled");
-  level.var_0F05 = getmatchrulesdata("commonOption", "announcerDisabled");
+  level.var_F05 = getmatchrulesdata("commonOption", "announcerDisabled");
   level.var_6034 = getmatchrulesdata("commonOption", "switchTeamDisabled");
   level.var_4867 = getmatchrulesdata("commonOption", "grenadeGracePeriod");
   setdynamicdvar("scr_oneShot", getmatchrulesdata("commonOption", "oneShotMode"));
@@ -4529,8 +4529,8 @@ removemgnestsfromlevel() {
   }
 }
 
-func_A165(param_00) {
-  self.var_0178 = param_00;
+updatesessionstate(param_00) {
+  self.sessionstate = param_00;
   self setclientomnvar("ui_session_state", param_00);
 }
 
@@ -4573,17 +4573,17 @@ func_537D() {
 }
 
 func_445D(param_00) {
-  if(isDefined(level.var_2321[param_00])) {
-    return level.var_2321[param_00];
+  if(isDefined(level.classmap[param_00])) {
+    return level.classmap[param_00];
   }
 
   return 0;
 }
 
 func_57FF() {
-  var_00 = func_455E(self.var_01A7);
+  var_00 = func_455E(self.team);
   foreach(var_02 in var_00) {
-    if(var_02 != self && !isDefined(var_02.var_00E8) || !var_02.var_00E8) {
+    if(var_02 != self && !isDefined(var_02.laststand) || !var_02.laststand) {
       return 0;
     }
   }
@@ -4594,7 +4594,7 @@ func_57FF() {
 func_5A7F(param_00) {
   var_01 = func_455E(param_00);
   foreach(var_03 in var_01) {
-    if(isDefined(var_03.var_00E8) && var_03.var_00E8) {
+    if(isDefined(var_03.laststand) && var_03.laststand) {
       var_03 thread maps\mp\gametypes\_damage::func_2EEF(randomintrange(1, 3));
     }
   }
@@ -4619,7 +4619,7 @@ func_955D(param_00) {
 }
 
 func_566A(param_00) {
-  if(function_01EF(param_00) && param_00.var_0A4A == 1) {
+  if(function_01EF(param_00) && param_00.var_A4A == 1) {
     return 1;
   }
 
@@ -4643,7 +4643,7 @@ func_5800(param_00) {
 }
 
 func_5666(param_00) {
-  if(function_01EF(param_00) && param_00.var_0A42 == 1) {
+  if(function_01EF(param_00) && param_00.var_A42 == 1) {
     return 1;
   }
 
@@ -4668,7 +4668,7 @@ func_56FF(param_00) {
 
 func_46D4(param_00) {
   var_01 = 0;
-  if(level.var_984D) {
+  if(level.teambased) {
     switch (param_00) {
       case "axis":
         var_01 = 1;
@@ -4683,7 +4683,7 @@ func_46D4(param_00) {
   return var_01;
 }
 
-func_5755(param_00) {
+ismeleemod(param_00) {
   return param_00 == "MOD_MELEE";
 }
 
@@ -4699,34 +4699,34 @@ func_5697(param_00, param_01) {
   return param_00 == "MOD_BURNED" || param_00 == "MOD_BURNED_OVER_TIME";
 }
 
-func_570A(param_00, param_01, param_02, param_03) {
+isheadshot(param_00, param_01, param_02, param_03) {
   if(isDefined(param_03)) {
-    if(isDefined(param_03.var_0117)) {
-      if(function_02BD() && !isDefined(param_03.var_003B)) {
+    if(isDefined(param_03.owner)) {
+      if(function_02BD() && !isDefined(param_03.code_classname)) {
         return 0;
       }
 
-      if(param_03.var_003B == "script_vehicle") {
+      if(param_03.code_classname == "script_vehicle") {
         return 0;
       }
 
-      if(param_03.var_003B == "misc_turret") {
+      if(param_03.code_classname == "misc_turret") {
         return 0;
       }
 
-      if(param_03.var_003B == "script_model") {
+      if(param_03.code_classname == "script_model") {
         return 0;
       }
     }
 
-    if(isDefined(param_03.var_0A4B)) {
-      if(param_03.var_0A4B == "dog") {
+    if(isDefined(param_03.var_A4B)) {
+      if(param_03.var_A4B == "dog") {
         return 0;
       }
     }
   }
 
-  return (param_01 == "head" || param_01 == "helmet") && !func_5755(param_02) && (func_45B5(param_00) == "dp28_mp" || param_02 != "MOD_IMPACT") && !func_56DF(param_00);
+  return (param_01 == "head" || param_01 == "helmet") && !ismeleemod(param_02) && (func_45B5(param_00) == "dp28_mp" || param_02 != "MOD_IMPACT") && !isenvironmentweapon(param_00);
 }
 
 func_5670(param_00) {
@@ -4738,19 +4738,19 @@ func_5670(param_00) {
 }
 
 func_118D(param_00, param_01) {
-  if(isDefined(param_00) && isDefined(param_01) && function_01EF(param_00) && isDefined(param_00.var_0A4B) && param_00.var_0A4B == "leprechauns") {
+  if(isDefined(param_00) && isDefined(param_01) && function_01EF(param_00) && isDefined(param_00.var_A4B) && param_00.var_A4B == "leprechauns") {
     return 0;
   }
 
-  if(isDefined(param_00) && isDefined(param_01) && function_01EF(param_00) && isDefined(param_00.var_0A4B) && param_00.var_0A4B == "mp_zombie_generic") {
+  if(isDefined(param_00) && isDefined(param_01) && function_01EF(param_00) && isDefined(param_00.var_A4B) && param_00.var_A4B == "mp_zombie_generic") {
     return 0;
   }
 
-  if(isDefined(param_00) && isDefined(param_01) && function_01EF(param_01) && isDefined(param_01.var_0A4B) && param_01.var_0A4B == "paratroopers" && isDefined(param_01.var_0117) && param_01.var_0117 == param_00) {
+  if(isDefined(param_00) && isDefined(param_01) && function_01EF(param_01) && isDefined(param_01.var_A4B) && param_01.var_A4B == "paratroopers" && isDefined(param_01.owner) && param_01.owner == param_00) {
     return 1;
   }
 
-  if(!level.var_984D) {
+  if(!level.teambased) {
     return 0;
   }
 
@@ -4762,7 +4762,7 @@ func_118D(param_00, param_01) {
     return 0;
   }
 
-  if(!isDefined(param_00.var_01A7) || !isDefined(param_01.var_01A7)) {
+  if(!isDefined(param_00.team) || !isDefined(param_01.team)) {
     return 0;
   }
 
@@ -4770,7 +4770,7 @@ func_118D(param_00, param_01) {
     return 0;
   }
 
-  if(isDefined(param_01.var_984E) && param_00.var_012C["team"] == param_01.var_01A7) {
+  if(isDefined(param_01.var_984E) && param_00.pers["team"] == param_01.team) {
     return 0;
   }
 
@@ -4778,7 +4778,7 @@ func_118D(param_00, param_01) {
     return 0;
   }
 
-  if(param_00.var_01A7 == param_01.var_01A7) {
+  if(param_00.team == param_01.team) {
     return 1;
   }
 
@@ -4786,7 +4786,7 @@ func_118D(param_00, param_01) {
 }
 
 playerhaskillstreak(param_00, param_01) {
-  foreach(var_03 in param_00.var_012C["killstreaks"]) {
+  foreach(var_03 in param_00.pers["killstreaks"]) {
     if(isDefined(var_03.var_944C) && var_03.var_944C == param_01) {
       return 1;
     }
@@ -4796,8 +4796,8 @@ playerhaskillstreak(param_00, param_01) {
 }
 
 func_84D3(param_00) {
-  if(!isDefined(self.var_4D3C) && common_scripts\utility::func_0F79(self.var_4D3C, param_00)) {
-    self.var_4D3C = common_scripts\utility::func_0F6F(self.var_4D3C, param_00);
+  if(!isDefined(self.var_4D3C) && common_scripts\utility::func_F79(self.var_4D3C, param_00)) {
+    self.var_4D3C = common_scripts\utility::func_F6F(self.var_4D3C, param_00);
     param_00 notify("calculate_new_level_targets");
   }
 }
@@ -4844,9 +4844,9 @@ func_42EC() {
 func_8568() {
   var_00 = func_42EC();
   if(isDefined(var_00)) {
-    self.var_012C["rankxp"] = var_00.var_7A6D;
-    self.var_012C["prestige"] = var_00.var_76B0;
-    self.var_012C["prestige_fake"] = var_00.var_76B0;
+    self.pers["rankxp"] = var_00.var_7A6D;
+    self.pers["prestige"] = var_00.var_76B0;
+    self.pers["prestige_fake"] = var_00.var_76B0;
   }
 }
 
@@ -4857,29 +4857,29 @@ func_8567() {
 }
 
 func_843E() {
-  if(!isDefined(level.var_258F)) {
-    level.var_258F = getDvar("5554") == "true";
+  if(!isDefined(level.console)) {
+    level.console = getDvar("5554") == "true";
   } else {}
 
-  if(!isDefined(level.var_01D4)) {
-    level.var_01D4 = getDvar("3475") == "true";
+  if(!isDefined(level.var_1D4)) {
+    level.var_1D4 = getDvar("3475") == "true";
   } else {}
 
-  if(!isDefined(level.var_01D5)) {
-    level.var_01D5 = getDvar("2695") == "true";
+  if(!isDefined(level.var_1D5)) {
+    level.var_1D5 = getDvar("2695") == "true";
   } else {}
 
-  if(!isDefined(level.var_0148)) {
-    level.var_0148 = getDvar("3864") == "true";
+  if(!isDefined(level.var_148)) {
+    level.var_148 = getDvar("3864") == "true";
   } else {}
 
-  if(!isDefined(level.var_0149)) {
-    level.var_0149 = getDvar("3957") == "true";
+  if(!isDefined(level.var_149)) {
+    level.var_149 = getDvar("3957") == "true";
   }
 }
 
 func_5583() {
-  if(level.var_01D4 || level.var_0148 || !level.var_258F) {
+  if(level.var_1D4 || level.var_148 || !level.console) {
     return 1;
   }
 
@@ -4887,7 +4887,7 @@ func_5583() {
 }
 
 func_8670(param_00, param_01, param_02) {
-  if(!isDefined(level.var_258F) || !isDefined(level.var_01D4) || !isDefined(level.var_0148)) {
+  if(!isDefined(level.console) || !isDefined(level.var_1D4) || !isDefined(level.var_148)) {
     func_843E();
   }
 
@@ -4900,11 +4900,11 @@ func_8670(param_00, param_01, param_02) {
 }
 
 func_583E(param_00, param_01) {
-  return isDefined(param_01.var_01A7) && param_01.var_01A7 != param_00.var_01A7;
+  return isDefined(param_01.team) && param_01.team != param_00.team;
 }
 
 func_5828(param_00, param_01) {
-  return isDefined(param_01.var_0117) && param_01.var_0117 != param_00;
+  return isDefined(param_01.owner) && param_01.owner != param_00;
 }
 
 func_4507() {
@@ -4915,7 +4915,7 @@ func_4508() {
   return (0, 0, 2500);
 }
 
-func_7E50(param_00) {
+revertvisionsetforplayer(param_00) {
   if(!isDefined(param_00)) {
     param_00 = 1;
   }
@@ -4980,8 +4980,8 @@ func_5D22(param_00, param_01, param_02, param_03) {
 }
 
 func_4704() {
-  if(isDefined(self.var_012C["guid"])) {
-    return self.var_012C["guid"];
+  if(isDefined(self.pers["guid"])) {
+    return self.pers["guid"];
   }
 
   var_00 = self getguid();
@@ -4995,8 +4995,8 @@ func_4704() {
     var_00 = "script" + level.var_48CB;
   }
 
-  self.var_012C["guid"] = var_00;
-  return self.var_012C["guid"];
+  self.pers["guid"] = var_00;
+  return self.pers["guid"];
 }
 
 func_42B8(param_00, param_01) {
@@ -5010,27 +5010,27 @@ func_42B8(param_00, param_01) {
 
   var_02 = self getentitynumber();
   var_03 = [];
-  foreach(var_05 in level.var_744A) {
+  foreach(var_05 in level.players) {
     if(!isDefined(var_05) || var_05 == self) {
       continue;
     }
 
     var_06 = 0;
     if(!param_01) {
-      if((isDefined(var_05.var_01A7) && var_05.var_01A7 == "spectator") || var_05.var_0178 == "spectator") {
+      if((isDefined(var_05.team) && var_05.team == "spectator") || var_05.sessionstate == "spectator") {
         var_07 = var_05 getspectatingplayer();
         if(isDefined(var_07) && var_07 == self) {
           var_06 = 1;
         }
       }
 
-      if(var_05.var_009F == var_02) {
+      if(var_05.forcespectatorclient == var_02) {
         var_06 = 1;
       }
     }
 
     if(!param_00) {
-      if(var_05.var_00E1 == var_02) {
+      if(var_05.killcamentity == var_02) {
         var_06 = 1;
       }
     }
@@ -5076,9 +5076,9 @@ func_7D4B(param_00, param_01, param_02) {
   self endon("changing_watching_visionset");
   param_00 endon("disconnect");
   var_03 = gettime();
-  var_04 = self.var_01A7;
+  var_04 = self.team;
   while(gettime() - var_03 < param_01 * 1000) {
-    if(self.var_01A7 != var_04 || !common_scripts\utility::func_0F79(param_00 func_42B8(), self)) {
+    if(self.team != var_04 || !common_scripts\utility::func_F79(param_00 func_42B8(), self)) {
       if(isDefined(param_02) && param_02) {
         self visionsetpostapplyforplayer("", 0);
       } else {
@@ -5104,7 +5104,7 @@ func_7D49(param_00, param_01) {
   self visionsetnakedforplayer("", 0);
 }
 
-func_073C(param_00) {
+_validateattacker(param_00) {
   if(function_01EF(param_00) && !isDefined(param_00.var_565F) || !param_00.var_565F) {
     return undefined;
   }
@@ -5188,7 +5188,7 @@ func_0693(param_00, param_01, param_02, param_03, param_04) {
   }
 
   if(param_01) {
-    self.var_73D4[param_00] = common_scripts\utility::func_0F93(self.var_73D4[param_00], param_02);
+    self.var_73D4[param_00] = common_scripts\utility::func_F93(self.var_73D4[param_00], param_02);
     if(!self.var_73D4[param_00].size) {
       if(param_04) {
         self[[param_03]](1);
@@ -5202,8 +5202,8 @@ func_0693(param_00, param_01, param_02, param_03, param_04) {
     return;
   }
 
-  if(!isDefined(common_scripts\utility::func_0F7E(self.var_73D4[param_00], param_02))) {
-    self.var_73D4[param_00] = common_scripts\utility::func_0F6F(self.var_73D4[param_00], param_02);
+  if(!isDefined(common_scripts\utility::func_F7E(self.var_73D4[param_00], param_02))) {
+    self.var_73D4[param_00] = common_scripts\utility::func_F6F(self.var_73D4[param_00], param_02);
   }
 
   if(param_04) {
@@ -5254,7 +5254,7 @@ func_065E(param_00, param_01, param_02, param_03) {
     if(var_06.var_7734 == param_00) {
       var_06.var_7734 = var_06.var_7734 + 0.01;
       if(var_06.var_3655) {
-        var_06.var_378F registerusable(var_06.var_7734, var_06.var_721C, var_06.var_01A7);
+        var_06.var_378F registerusable(var_06.var_7734, var_06.player, var_06.team);
       }
 
       if(var_04 == -1) {
@@ -5270,11 +5270,11 @@ func_065E(param_00, param_01, param_02, param_03) {
   var_07 = spawnStruct();
   var_07.var_378F = self;
   var_07.var_7734 = param_00;
-  var_07.var_01B9 = param_01;
-  var_07.var_721C = param_02;
-  var_07.var_01A7 = param_03;
+  var_07.type = param_01;
+  var_07.player = param_02;
+  var_07.team = param_03;
   var_07.var_3655 = 1;
-  level.var_47E6 = common_scripts\utility::func_0F86(level.var_47E6, var_07, var_04);
+  level.var_47E6 = common_scripts\utility::func_F86(level.var_47E6, var_07, var_04);
 }
 
 func_5FB9() {
@@ -5288,13 +5288,13 @@ func_5FB9() {
 
   if(isDefined(var_00)) {
     var_04 = var_00.var_7734;
-    level.var_47E6 = common_scripts\utility::func_0F93(level.var_47E6, var_00);
+    level.var_47E6 = common_scripts\utility::func_F93(level.var_47E6, var_00);
     self method_80B5();
     foreach(var_02 in level.var_47E6) {
       if(var_04 > var_02.var_7734 && int(var_04) == int(var_02.var_7734)) {
         var_02.var_7734 = var_02.var_7734 - 0.01;
         if(var_02.var_3655) {
-          var_02.var_378F registerusable(var_02.var_7734, var_02.var_721C, var_02.var_01A7);
+          var_02.var_378F registerusable(var_02.var_7734, var_02.player, var_02.team);
         }
       }
     }
@@ -5318,7 +5318,7 @@ func_3659() {
   foreach(var_01 in level.var_47E6) {
     if(var_01.var_378F == self) {
       if(!var_01.var_3655) {
-        var_01.var_378F registerusable(var_01.var_7734, var_01.var_721C, var_01.var_01A7);
+        var_01.var_378F registerusable(var_01.var_7734, var_01.player, var_01.team);
         var_01.var_3655 = 1;
       }
 
@@ -5364,7 +5364,7 @@ func_86F7(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 }
 
 func_56D9(param_00) {
-  if(level.var_984D) {
+  if(level.teambased) {
     return func_5781(param_00);
   }
 
@@ -5372,12 +5372,12 @@ func_56D9(param_00) {
 }
 
 func_5781(param_00) {
-  return param_00.var_01A7 != self.var_01A7;
+  return param_00.team != self.team;
 }
 
 func_577B(param_00) {
-  if(isDefined(param_00.var_0117)) {
-    return param_00.var_0117 != self;
+  if(isDefined(param_00.owner)) {
+    return param_00.owner != self;
   }
 
   return param_00 != self;
@@ -5431,9 +5431,9 @@ func_8BFC(param_00) {
   self endon("death");
   level endon("game_ended");
   for(;;) {
-    self method_805C();
-    foreach(var_02 in level.var_744A) {
-      var_03 = var_02.var_01A7;
+    self hide();
+    foreach(var_02 in level.players) {
+      var_03 = var_02.team;
       if(var_02 method_8436()) {
         var_03 = "broadcaster";
       } else if(var_03 != "axis") {
@@ -5471,16 +5471,16 @@ func_8C1B(param_00, param_01, param_02) {
   self endon("death");
   level endon("game_ended");
   for(;;) {
-    self method_805C();
-    foreach(var_04 in level.var_744A) {
-      var_05 = var_04.var_01A7;
+    self hide();
+    foreach(var_04 in level.players) {
+      var_05 = var_04.team;
       if(var_04 method_8436()) {
         var_05 = "broadcaster";
       } else if(var_05 != "axis") {
         var_05 = "allies";
       }
 
-      var_06 = var_04 func_0649("specialty_stun_resistance");
+      var_06 = var_04 _hasperk("specialty_stun_resistance");
       if((!param_02 && var_06) || param_01 == var_05 && var_04 == param_00 && !var_06) {
         continue;
       }
@@ -5496,14 +5496,14 @@ func_8C1B(param_00, param_01, param_02) {
 
 func_922B(param_00) {
   var_01 = issubstr(param_00, "zk383");
-  if(isDefined(self.var_012C["altModeActive"]) && isDefined(self.var_0079) && self.var_012C["altModeActive"] && self.var_0079 != 5 && func_472A(param_00) == "weapon_smg" && issubstr(param_00, "suppressor") && !var_01) {
+  if(isDefined(self.pers["altModeActive"]) && isDefined(self.var_79) && self.pers["altModeActive"] && self.var_79 != 5 && getweaponclass(param_00) == "weapon_smg" && issubstr(param_00, "suppressor") && !var_01) {
     var_02 = maps\mp\gametypes\_divisions::func_461C(1);
     if(var_02 == "suppressor_level1" || var_02 == "suppressor_level2" || var_02 == "suppressor_level3") {
       param_00 = "alt+" + param_00;
     }
-  } else if(var_01 && common_scripts\utility::func_562E(self.var_012C["altModeActive"])) {
+  } else if(var_01 && common_scripts\utility::func_562E(self.pers["altModeActive"])) {
     param_00 = "alt+" + param_00;
-  } else if(isDefined(self.var_0079) && self.var_0079 != 5 && func_472A(param_00) == "weapon_shotgun" && issubstr(param_00, "dragon_breath")) {}
+  } else if(isDefined(self.var_79) && self.var_79 != 5 && getweaponclass(param_00) == "weapon_shotgun" && issubstr(param_00, "dragon_breath")) {}
 
   return param_00;
 }
@@ -5523,13 +5523,13 @@ func_4340(param_00) {
 }
 
 func_744E() {
-  self.var_7DEE = self getangles();
+  self.var_7DEE = self getplayerangles();
 }
 
 func_7447() {
   if(isDefined(self.var_7DEE)) {
-    if(self.var_01A7 != "spectator") {
-      self setangles(self.var_7DEE);
+    if(self.team != "spectator") {
+      self setplayerangles(self.var_7DEE);
     }
 
     self.var_7DEE = undefined;
@@ -5549,12 +5549,12 @@ func_907D(param_00, param_01, param_02) {
 
   var_04 = spawn("script_model", param_01);
   var_04 clonebrushmodeltoscriptmodel(var_03);
-  var_04.var_001D = param_02;
+  var_04.angles = param_02;
   return var_04;
 }
 
 func_56B9() {
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return 1;
   }
 
@@ -5566,7 +5566,7 @@ func_86BF(param_00) {
   setomnvar("lighting_state", param_00);
   if(!getdvarint("233")) {
     foreach(var_03 in var_01) {
-      if(isDefined(var_03.var_5D56) && isDefined(var_03.var_003A) && var_03.var_003A == "script_brushmodel" || var_03.var_003A == "script_model") {
+      if(isDefined(var_03.var_5D56) && isDefined(var_03.classname) && var_03.classname == "script_brushmodel" || var_03.classname == "script_model") {
         if(var_03.var_5D56 == 0) {
           continue;
         }
@@ -5589,23 +5589,23 @@ func_46E7() {
 }
 
 func_08F7() {
-  if(isDefined(self.var_005C) && self.var_005C <= 0) {
+  if(isDefined(self.var_5C) && self.var_5C <= 0) {
     return undefined;
   }
 
-  if(self.var_003A == "agent_enemy_dog_raid") {
-    var_00 = [[level.var_0A4C]](undefined, undefined, self.var_0116, self.var_001D, undefined, 0, undefined, self.var_003A);
+  if(self.classname == "agent_enemy_dog_raid") {
+    var_00 = [[level.var_A4C]](undefined, undefined, self.origin, self.angles, undefined, 0, undefined, self.classname);
   } else {
-    var_00 = [[level.var_0A4D]]("player", "axis", undefined, self.var_0116, self.var_001D, undefined, 0, 0, undefined, self.var_003A);
+    var_00 = [[level.var_A4D]]("player", "axis", undefined, self.origin, self.angles, undefined, 0, 0, undefined, self.classname);
   }
 
   if(isDefined(var_00) && function_01EF(var_00)) {
-    if(isDefined(level.var_0A41[var_00.var_0A4B]["set_initial_behavior"])) {
-      self[[level.var_0A41[var_00.var_0A4B]["set_initial_behavior"]]](var_00);
+    if(isDefined(level.var_A41[var_00.var_A4B]["set_initial_behavior"])) {
+      self[[level.var_A41[var_00.var_A4B]["set_initial_behavior"]]](var_00);
     }
 
-    if(isDefined(self.var_005C)) {
-      self.var_005C--;
+    if(isDefined(self.var_5C)) {
+      self.var_5C--;
     }
   }
 
@@ -5619,7 +5619,7 @@ func_0FA7(param_00, param_01) {
 
   var_02 = [];
   foreach(var_04 in param_00) {
-    if(isDefined(var_04.var_005C) && var_04.var_005C <= 0) {
+    if(isDefined(var_04.var_5C) && var_04.var_5C <= 0) {
       continue;
     }
 
@@ -5641,10 +5641,10 @@ func_8FE4(param_00, param_01, param_02, param_03) {
     var_04 = getvehiclenode(param_01, "targetname");
   }
 
-  var_05 = spawnhelicopter(var_04.var_0116, var_04.var_001D, param_02, param_01);
+  var_05 = spawnhelicopter(var_04.origin, var_04.angles, param_02, param_01);
   var_05 notify("forward");
-  var_05.var_01C7 = "forward";
-  var_05.var_01C1 = "forward";
+  var_05.veh_transmission = "forward";
+  var_05.veh_pathdir = "forward";
   var_05.var_17DC = 0;
   var_05.var_931A = "forward";
   var_05 startpath(var_04);
@@ -5671,7 +5671,7 @@ func_853A(param_00) {
 
 func_5243() {
   level.var_738E = 1;
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 thread func_A1CE();
   }
 
@@ -5686,7 +5686,7 @@ func_A1CE() {
   var_00 = undefined;
   for(;;) {
     var_01 = self getusableentity();
-    if(isDefined(var_01) && distance2dsquared(var_01.var_0116, self.var_0116) > pow(getdvarfloat("2098"), 2)) {
+    if(isDefined(var_01) && distance2dsquared(var_01.origin, self.origin) > pow(getdvarfloat("2098"), 2)) {
       var_01 = undefined;
     }
 
@@ -5708,7 +5708,7 @@ func_A1CE() {
 }
 
 func_461F() {
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return common_scripts\utility::func_46A8();
   }
 
@@ -5716,7 +5716,7 @@ func_461F() {
     return common_scripts\utility::func_46AE();
   }
 
-  return common_scripts\utility::func_46A7();
+  return common_scripts\utility::getstatgamemode();
 }
 
 func_461E() {
@@ -5762,24 +5762,24 @@ func_473D(param_00) {
     var_01.var_3FC3 = 0;
   }
 
-  var_01.var_48CA = func_452A(var_02);
+  var_01.guid = func_452A(var_02);
   return var_01;
 }
 
 func_473C(param_00, param_01) {
   var_02 = spawnStruct();
-  var_02.var_48CA = param_00;
+  var_02.guid = param_00;
   var_02.var_3FC3 = param_01;
   return var_02;
 }
 
 func_4737(param_00) {
   var_01 = "none";
-  if(!isDefined(param_00) || !isDefined(param_00.var_48CA) || param_00.var_48CA == 0 || !isDefined(param_00.var_3FC3)) {
+  if(!isDefined(param_00) || !isDefined(param_00.guid) || param_00.guid == 0 || !isDefined(param_00.var_3FC3)) {
     return var_01;
   }
 
-  var_02 = func_452B(param_00.var_48CA);
+  var_02 = func_452B(param_00.guid);
   if(param_00.var_3FC3 == 2) {
     var_01 = function_02FF(var_02, "_mp") + "_raid" + "_mp";
   } else if(param_00.var_3FC3 == 1) {
@@ -5802,11 +5802,11 @@ func_472C(param_00) {
 
 func_472D(param_00) {
   var_01 = 0;
-  if(!isDefined(param_00) || !isDefined(param_00.var_48CA) || param_00.var_48CA == 0 || !isDefined(param_00.var_3FC3)) {
+  if(!isDefined(param_00) || !isDefined(param_00.guid) || param_00.guid == 0 || !isDefined(param_00.var_3FC3)) {
     return var_01;
   }
 
-  var_01 = getweaponconditionid(param_00.var_48CA);
+  var_01 = getweaponconditionid(param_00.guid);
   return var_01;
 }
 
@@ -5823,24 +5823,24 @@ func_44CF(param_00) {
     var_01.var_3FC3 = 0;
   }
 
-  var_01.var_48CA = func_452A(var_02);
+  var_01.guid = func_452A(var_02);
   return var_01;
 }
 
 func_44CE(param_00, param_01) {
   var_02 = spawnStruct();
-  var_02.var_48CA = param_00;
+  var_02.guid = param_00;
   var_02.var_3FC3 = param_01;
   return var_02;
 }
 
 func_44CD(param_00) {
   var_01 = "none";
-  if(!isDefined(param_00) || !isDefined(param_00.var_48CA) || param_00.var_48CA == 0 || !isDefined(param_00.var_3FC3)) {
+  if(!isDefined(param_00) || !isDefined(param_00.guid) || param_00.guid == 0 || !isDefined(param_00.var_3FC3)) {
     return var_01;
   }
 
-  var_02 = func_452B(param_00.var_48CA);
+  var_02 = func_452B(param_00.guid);
   if(param_00.var_3FC3 == 2) {
     var_01 = function_02FF(var_02, "_mp") + "_raid" + "_mp";
   } else if(param_00.var_3FC3 == 1) {
@@ -5869,7 +5869,7 @@ func_5746(param_00, param_01, param_02) {
 }
 
 func_873B(param_00) {
-  level.var_984D = param_00;
+  level.teambased = param_00;
   setDvar("4491", param_00);
 }
 
@@ -5955,7 +5955,7 @@ func_2D4F(param_00) {
     return;
   }
 
-  var_01 = param_00.var_0164;
+  var_01 = param_00.script_linkname;
   if(isDefined(var_01) && isDefined(level.var_947C["script_linkname"]) && isDefined(level.var_947C["script_linkname"][var_01])) {
     foreach(var_04, var_03 in level.var_947C["script_linkname"][var_01]) {
       if(isDefined(var_03) && param_00 == var_03) {
@@ -5968,7 +5968,7 @@ func_2D4F(param_00) {
     }
   }
 
-  var_01 = param_00.var_0165;
+  var_01 = param_00.script_noteworthy;
   if(isDefined(var_01) && isDefined(level.var_947C["script_noteworthy"]) && isDefined(level.var_947C["script_noteworthy"][var_01])) {
     foreach(var_04, var_03 in level.var_947C["script_noteworthy"][var_01]) {
       if(isDefined(var_03) && param_00 == var_03) {
@@ -5981,7 +5981,7 @@ func_2D4F(param_00) {
     }
   }
 
-  var_01 = param_00.var_01A2;
+  var_01 = param_00.target;
   if(isDefined(var_01) && isDefined(level.var_947C["target"]) && isDefined(level.var_947C["target"][var_01])) {
     foreach(var_04, var_03 in level.var_947C["target"][var_01]) {
       if(isDefined(var_03) && param_00 == var_03) {
@@ -5994,7 +5994,7 @@ func_2D4F(param_00) {
     }
   }
 
-  var_01 = param_00.var_01A5;
+  var_01 = param_00.targetname;
   if(isDefined(var_01) && isDefined(level.var_947C["targetname"]) && isDefined(level.var_947C["targetname"][var_01])) {
     foreach(var_04, var_03 in level.var_947C["targetname"][var_01]) {
       if(isDefined(var_03) && param_00 == var_03) {
@@ -6070,13 +6070,13 @@ func_0F24() {
 array_combine_no_dupes(param_00, param_01) {
   var_02 = [];
   foreach(var_04 in param_00) {
-    if(isDefined(var_04) && !isDefined(common_scripts\utility::func_0F7E(var_02, var_04))) {
+    if(isDefined(var_04) && !isDefined(common_scripts\utility::func_F7E(var_02, var_04))) {
       var_02[var_02.size] = var_04;
     }
   }
 
   foreach(var_04 in param_01) {
-    if(isDefined(var_04) && !isDefined(common_scripts\utility::func_0F7E(var_02, var_04))) {
+    if(isDefined(var_04) && !isDefined(common_scripts\utility::func_F7E(var_02, var_04))) {
       var_02[var_02.size] = var_04;
     }
   }

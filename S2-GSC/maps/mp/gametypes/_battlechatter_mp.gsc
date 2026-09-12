@@ -3,14 +3,14 @@
  * Script: maps\mp\gametypes\_battlechatter_mp.gsc
 ***************************************************/
 
-func_00D5() {
+init() {
   if(maps\mp\_utility::func_571D()) {
     level.var_212F = 1;
     return;
   }
 
-  if(level.var_6520) {
-    foreach(var_01 in level.var_985B) {
+  if(level.multiteambased) {
+    foreach(var_01 in level.teamnamelist) {
       level.var_5801[var_01] = 0;
       level.var_90C1[var_01] = [];
     }
@@ -108,26 +108,26 @@ func_00D5() {
     level.var_57F5 = 0;
   }
 
-  level thread func_6B6C();
+  level thread onplayerconnect();
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
-    var_00 thread func_6B82();
+    var_00 thread onplayerspawned();
   }
 }
 
-func_6B82() {
+onplayerspawned() {
   self endon("disconnect");
   for(;;) {
-    common_scripts\utility::func_A70A("spawned_player", "faux_spawn");
+    common_scripts\utility::waittill_any("spawned_player", "faux_spawn");
     self.var_166D = [];
     self.var_166D["last_say_time"]["suppressing_fire"] = -99999;
     self.var_166D["last_say_time"]["moving"] = -99999;
     self.var_166D["last_say_time"]["callout_generic"] = -99999;
     self.var_166D["last_say_time"]["callout_location"] = -99999;
-    var_00 = [[level.var_46D9]](self.var_01A7);
+    var_00 = [[level.var_46D9]](self.team);
     var_01 = 6;
     var_02 = 3;
     var_03 = "";
@@ -135,15 +135,15 @@ func_6B82() {
       var_03 = "w";
     }
 
-    self.var_012C["voiceNum"] = level.var_A601[self.var_01A7][var_03];
+    self.pers["voiceNum"] = level.var_A601[self.team][var_03];
     if(var_03 == "w") {
-      level.var_A601[self.var_01A7][var_03] = level.var_A601[self.var_01A7][var_03] + 1 % var_02;
+      level.var_A601[self.team][var_03] = level.var_A601[self.team][var_03] + 1 % var_02;
     } else {
-      level.var_A601[self.var_01A7][var_03] = level.var_A601[self.var_01A7][var_03] + 1 % var_01;
+      level.var_A601[self.team][var_03] = level.var_A601[self.team][var_03] + 1 % var_01;
     }
 
-    self.var_012C["voicePrefix"] = var_00 + var_03 + self.var_012C["voiceNum"] + "_";
-    if(level.var_910F) {
+    self.pers["voicePrefix"] = var_00 + var_03 + self.pers["voiceNum"] + "_";
+    if(level.splitscreen) {
       continue;
     }
 
@@ -151,7 +151,7 @@ func_6B82() {
     thread func_1659();
     thread func_1654();
     thread func_1652();
-    if(!level.var_984D) {
+    if(!level.teambased) {
       continue;
     }
 
@@ -169,7 +169,7 @@ func_6B82() {
 func_486A() {
   self endon("disconnect");
   self endon("death");
-  var_00 = self.var_0116;
+  var_00 = self.origin;
   var_01 = 147456;
   if(maps\mp\_utility::isprophuntgametype()) {
     return;
@@ -189,8 +189,8 @@ func_486A() {
       continue;
     }
 
-    var_02 = common_scripts\utility::func_0F73(var_02, var_03);
-    var_02 = common_scripts\utility::func_0F73(var_02, var_04);
+    var_02 = common_scripts\utility::func_F73(var_02, var_03);
+    var_02 = common_scripts\utility::func_F73(var_02, var_04);
     if(var_02.size < 1) {
       wait 0.05;
       continue;
@@ -202,7 +202,7 @@ func_486A() {
         continue;
       }
 
-      var_07 = (isDefined(var_06.var_01B9) && var_06.var_01B9 == "explosive_drone" || var_06.var_01B9 == "tracking_drone") || isDefined(var_06.var_01C8);
+      var_07 = (isDefined(var_06.type) && var_06.type == "explosive_drone" || var_06.type == "tracking_drone") || isDefined(var_06.var_1C8);
       if(isDefined(var_06.var_A9E0)) {
         switch (var_06.var_A9E0) {
           case "gamemode_ball":
@@ -214,17 +214,17 @@ func_486A() {
         }
       }
 
-      if(!isDefined(var_06.var_0117) && !var_07) {
-        var_06.var_0117 = function_01B3(var_06);
+      if(!isDefined(var_06.owner) && !var_07) {
+        var_06.owner = function_01B3(var_06);
       }
 
-      if(isDefined(var_06.var_0117) && isDefined(var_06.var_0117.var_01A7) && level.var_984D && var_06.var_0117.var_01A7 == self.var_01A7) {
+      if(isDefined(var_06.owner) && isDefined(var_06.owner.team) && level.teambased && var_06.owner.team == self.team) {
         continue;
       }
 
-      var_08 = distancesquared(var_06.var_0116, self.var_0116);
+      var_08 = distancesquared(var_06.origin, self.origin);
       if(var_08 < var_01) {
-        if(bullettracepassed(var_06.var_0116, self.var_0116, 0, self)) {
+        if(bullettracepassed(var_06.origin, self.origin, 0, self)) {
           var_09 = "";
           if(var_07) {
             var_09 = "drone_incoming";
@@ -399,7 +399,7 @@ func_1659() {
   var_01 = "";
   var_02 = "";
   var_03 = "";
-  self.var_0BBA = "_2D";
+  self.var_BBA = "_2D";
   var_04 = 3;
   var_05 = 0;
   for(;;) {
@@ -413,8 +413,8 @@ func_1659() {
 
     self.var_1655 = "";
     self.var_1656 = 1;
-    if(self.var_01A7 != "spectator") {
-      var_06 = self.var_012C["voicePrefix"];
+    if(self.team != "spectator") {
+      var_06 = self.pers["voicePrefix"];
       if(maps\mp\_utility::func_585F()) {
         var_06 = "plr_";
       }
@@ -422,9 +422,9 @@ func_1659() {
       if(isDefined(var_06)) {
         if(isDefined(level.var_1676["bayo_charge"])) {
           var_02 = var_06 + level.var_1676["bayo_charge"];
-          if(maps\mp\_utility::func_0649("specialty_sprintmeleechargelonger")) {
+          if(maps\mp\_utility::_hasperk("specialty_sprintmeleechargelonger")) {
             var_02 = var_02 + "_intro";
-          } else if(maps\mp\_utility::func_0649("specialty_sprintmeleecharge")) {
+          } else if(maps\mp\_utility::_hasperk("specialty_sprintmeleecharge")) {
             var_02 = var_02 + "_intro_short";
           }
         }
@@ -436,8 +436,8 @@ func_1659() {
       }
     }
 
-    if(function_0344(var_03)) {
-      self.var_1657 = lib_0380::func_6844(var_03, undefined, self);
+    if(function_0344(var_02)) {
+      self.var_1657 = lib_0380::func_6844(var_02, undefined, self);
     }
 
     lib_0380::func_684C(self.var_1657, self, "charge_intro_done");
@@ -445,12 +445,12 @@ func_1659() {
     self waittill("charge_intro_done");
     self.var_1656 = 0;
     self.var_1655 = "_0";
-    for(var_06 = randomint(var_05) + 1; var_06 == var_08; var_06 = randomint(var_05) + 1) {}
+    for(var_08 = randomint(var_04) + 1; var_08 == var_05; var_08 = randomint(var_04) + 1) {}
 
-    var_08 = var_06;
-    self.var_1655 = self.var_1655 + var_06;
-    if(self.var_01A7 != "spectator" && self.var_165B) {
-      var_06 = self.var_012C["voicePrefix"];
+    var_05 = var_08;
+    self.var_1655 = self.var_1655 + var_08;
+    if(self.team != "spectator" && self.var_165B) {
+      var_06 = self.pers["voicePrefix"];
       if(maps\mp\_utility::func_585F()) {
         var_06 = "plr_";
       }
@@ -478,7 +478,7 @@ func_1659() {
 
 func_1653() {
   self endon("disconnect");
-  var_00 = common_scripts\utility::func_A715("death", "sprint_melee_charge_end", "sprint_melee_charge_attack");
+  var_00 = common_scripts\utility::waittill_any_return("death", "sprint_melee_charge_end", "sprint_melee_charge_attack");
   if(var_00 == "death" && isDefined(self)) {
     if(self.var_1656) {
       lib_0380::func_6850(self.var_1657, 0.1);
@@ -502,8 +502,8 @@ func_1654() {
     }
 
     if(!self.var_1656) {
-      if(self.var_01A7 != "spectator") {
-        var_02 = self.var_012C["voicePrefix"];
+      if(self.team != "spectator") {
+        var_02 = self.pers["voicePrefix"];
         if(maps\mp\_utility::func_585F()) {
           var_02 = "plr_";
         }
@@ -546,8 +546,8 @@ func_1652() {
       self method_8627("bayo_submix");
     }
 
-    if(self.var_01A7 != "spectator") {
-      var_03 = self.var_012C["voicePrefix"];
+    if(self.team != "spectator") {
+      var_03 = self.pers["voicePrefix"];
       if(maps\mp\_utility::func_585F()) {
         var_03 = "plr_";
       }
@@ -590,11 +590,11 @@ func_29DF() {
       continue;
     }
 
-    if(!isDefined(var_01.var_003A)) {
+    if(!isDefined(var_01.classname)) {
       continue;
     }
 
-    if(var_01 != self && var_01.var_003A != "worldspawn") {
+    if(var_01 != self && var_01.classname != "worldspawn") {
       wait(1.5);
       level thread func_8079(self, "damage");
       wait(3);
@@ -605,7 +605,7 @@ func_29DF() {
 func_2030() {
   self endon("disconnect");
   self endon("faux_spawn");
-  var_00 = self.var_01A7;
+  var_00 = self.team;
   if(maps\mp\_utility::isprophuntgametype()) {
     return;
   }
@@ -624,11 +624,11 @@ func_2030() {
       continue;
     }
 
-    if(var_02.var_01A7 != var_00) {
+    if(var_02.team != var_00) {
       continue;
     }
 
-    if(isDefined(self) && distancesquared(self.var_0116, var_02.var_0116) <= 262144) {
+    if(isDefined(self) && distancesquared(self.origin, var_02.origin) <= 262144) {
       level thread func_807A(var_02, "casualty", 0.75);
       break;
     }
@@ -666,11 +666,11 @@ func_998F() {
     }
 
     foreach(var_04 in var_00) {
-      if(isDefined(var_04) && maps\mp\_utility::func_57A0(var_04) && !var_04 maps\mp\_utility::func_0649("specialty_coldblooded") && distancesquared(self.var_0116, var_04.var_0116) < var_02) {
+      if(isDefined(var_04) && maps\mp\_utility::func_57A0(var_04) && !var_04 maps\mp\_utility::_hasperk("specialty_coldblooded") && distancesquared(self.origin, var_04.origin) < var_02) {
         var_05 = var_04 func_4709(self);
         var_01 = var_04;
         if(isDefined(var_05) && func_1F69("callout_location") && func_3EB6(4840000)) {
-          if(maps\mp\_utility::func_0649("specialty_silentmovement") || maps\mp\_utility::func_0649("specialty_quieter") || !func_3EB6(262144)) {
+          if(maps\mp\_utility::_hasperk("specialty_silentmovement") || maps\mp\_utility::_hasperk("specialty_quieter") || !func_3EB6(262144)) {
             level thread func_8079(self, var_05.var_5E5C[0], 0);
           } else {
             level thread func_8079(self, var_05.var_5E5C[0], 1);
@@ -718,8 +718,8 @@ func_8079(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  if(param_00.var_01A7 != "spectator") {
-    var_04 = param_00.var_012C["voicePrefix"];
+  if(param_00.team != "spectator") {
+    var_04 = param_00.pers["voicePrefix"];
     if(isDefined(var_04)) {
       if(isDefined(level.var_1676[param_01])) {
         var_05 = var_04 + level.var_1676[param_01];
@@ -753,7 +753,7 @@ func_32AB(param_00, param_01, param_02, param_03) {
     param_03 = 0;
   }
 
-  var_04 = self.var_012C["team"];
+  var_04 = self.pers["team"];
   level func_09ED(self, var_04);
   if(!function_0344(param_00)) {
     level func_7CFB(self, var_04);
@@ -807,7 +807,7 @@ func_32AB(param_00, param_01, param_02, param_03) {
   }
 
   if(!var_06) {
-    var_04 = self.var_01A7;
+    var_04 = self.team;
   }
 
   var_09 = self playvo(param_00, var_04, var_08);
@@ -819,22 +819,22 @@ func_32AB(param_00, param_01, param_02, param_03) {
   }
 
   if(isDefined(self)) {
-    level func_7CFB(self, self.var_01A7);
+    level func_7CFB(self, self.team);
   }
 }
 
 func_32B5(param_00, param_01) {
-  var_02 = common_scripts\utility::func_A715(param_00, "death", "disconnect");
+  var_02 = common_scripts\utility::waittill_any_return(param_00, "death", "disconnect");
   if(var_02 == param_00) {
-    var_03 = self.var_01A7;
+    var_03 = self.team;
     if(!function_01EF(self)) {
       var_04 = self method_843D();
     } else {
       var_04 = 0;
     }
 
-    var_05 = self.var_012C["voiceNum"];
-    var_06 = self.var_0116;
+    var_05 = self.pers["voiceNum"];
+    var_06 = self.origin;
     wait(0.5);
     foreach(var_08 in level.var_6E97) {
       if(!isDefined(var_08)) {
@@ -849,7 +849,7 @@ func_32B5(param_00, param_01) {
         continue;
       }
 
-      if(var_08.var_01A7 != var_03) {
+      if(var_08.team != var_03) {
         continue;
       }
 
@@ -859,8 +859,8 @@ func_32B5(param_00, param_01) {
         var_09 = 0;
       }
 
-      if((var_05 != var_08.var_012C["voiceNum"] || var_04 != var_09) && distancesquared(var_06, var_08.var_0116) <= 262144 && !func_57DD(var_08)) {
-        var_0A = var_08.var_012C["voicePrefix"];
+      if((var_05 != var_08.pers["voiceNum"] || var_04 != var_09) && distancesquared(var_06, var_08.origin) <= 262144 && !func_57DD(var_08)) {
+        var_0A = var_08.pers["voicePrefix"];
         var_0B = var_0A + "co_loc_" + param_01 + "_echo";
         if(common_scripts\utility::func_24A6() && function_0344(var_0B)) {
           var_0C = var_0B;
@@ -890,9 +890,9 @@ func_57DD(param_00, param_01) {
   }
 
   var_02 = param_01 * param_01;
-  if(isDefined(param_00) && isDefined(param_00.var_01A7) && param_00.var_01A7 != "spectator") {
-    for(var_03 = 0; var_03 < level.var_90C1[param_00.var_01A7].size; var_03++) {
-      var_04 = level.var_90C1[param_00.var_01A7][var_03];
+  if(isDefined(param_00) && isDefined(param_00.team) && param_00.team != "spectator") {
+    for(var_03 = 0; var_03 < level.var_90C1[param_00.team].size; var_03++) {
+      var_04 = level.var_90C1[param_00.team][var_03];
       if(var_04 == param_00) {
         return 1;
       }
@@ -901,7 +901,7 @@ func_57DD(param_00, param_01) {
         continue;
       }
 
-      if(distancesquared(var_04.var_0116, param_00.var_0116) < var_02) {
+      if(distancesquared(var_04.origin, param_00.origin) < var_02) {
         return 1;
       }
     }
@@ -936,7 +936,7 @@ func_3654(param_00) {
 }
 
 func_1F69(param_00) {
-  var_01 = self.var_012C["team"];
+  var_01 = self.pers["team"];
   if(var_01 == "spectator") {
     return 0;
   }
@@ -957,15 +957,15 @@ func_1F69(param_00) {
 }
 
 func_A0F4(param_00) {
-  var_01 = self.var_012C["team"];
+  var_01 = self.pers["team"];
   self.var_166D["last_say_time"][param_00] = gettime();
   level.var_166D["last_say_time"][var_01][param_00] = gettime();
-  level.var_166D["last_say_pos"][var_01][param_00] = self.var_0116;
+  level.var_166D["last_say_pos"][var_01][param_00] = self.origin;
 }
 
 func_4561() {
   var_00 = func_4087();
-  var_00 = common_scripts\utility::func_0F92(var_00);
+  var_00 = common_scripts\utility::func_F92(var_00);
   if(var_00.size) {
     foreach(var_02 in var_00) {
       if(!func_5E57(var_02)) {
@@ -985,7 +985,7 @@ func_4561() {
 
 func_4709(param_00) {
   var_01 = func_4087();
-  var_01 = common_scripts\utility::func_0F92(var_01);
+  var_01 = common_scripts\utility::func_F92(var_01);
   if(var_01.size) {
     foreach(var_03 in var_01) {
       if(!func_5E57(var_03) && param_00 func_1F33(var_03)) {
@@ -1018,7 +1018,7 @@ func_4087() {
 
 func_A097() {
   if(isDefined(level.var_1672)) {
-    anim.var_1672 = common_scripts\utility::func_0FA0(level.var_1672);
+    anim.var_1672 = common_scripts\utility::func_FA0(level.var_1672);
   }
 }
 
@@ -1137,7 +1137,7 @@ func_569D(param_00, param_01) {
 }
 
 func_4563(param_00) {
-  var_01 = self.var_012C["voicePrefix"] + param_00;
+  var_01 = self.pers["voicePrefix"] + param_00;
   return var_01;
 }
 
@@ -1170,9 +1170,9 @@ func_3EB6(param_00) {
     param_00 = 262144;
   }
 
-  foreach(var_02 in level.var_744A) {
-    if(isDefined(var_02) && isDefined(var_02.var_01A7) && isDefined(self.var_012C["team"]) && var_02.var_01A7 == self.var_012C["team"]) {
-      if(var_02 != self && distancesquared(var_02.var_0116, self.var_0116) <= param_00) {
+  foreach(var_02 in level.players) {
+    if(isDefined(var_02) && isDefined(var_02.team) && isDefined(self.pers["team"]) && var_02.team == self.pers["team"]) {
+      if(var_02 != self && distancesquared(var_02.origin, self.origin) <= param_00) {
         return 1;
       }
     }

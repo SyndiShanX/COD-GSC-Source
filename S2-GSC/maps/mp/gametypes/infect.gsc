@@ -3,8 +3,8 @@
  * Script: maps\mp\gametypes\infect.gsc
 *********************************************/
 
-func_00F9() {
-  maps\mp\gametypes\_globallogic::func_00D5();
+main() {
+  maps\mp\gametypes\_globallogic::init();
   lib_01DD::func_8A0C();
   maps\mp\gametypes\_globallogic::func_8A0C();
   if(isusingmatchrulesdata()) {
@@ -12,12 +12,12 @@ func_00F9() {
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BFA(level.var_3FDC, 10);
+    maps\mp\_utility::func_7BFA(level.gametype, 10);
     maps\mp\_utility::func_86EA("scorelimit", 0);
-    maps\mp\_utility::func_7BF7(level.var_3FDC, 1);
-    maps\mp\_utility::func_7C04(level.var_3FDC, 1);
-    maps\mp\_utility::func_7BF1(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BE5(level.var_3FDC, 0);
+    maps\mp\_utility::func_7BF7(level.gametype, 1);
+    maps\mp\_utility::func_7C04(level.gametype, 1);
+    maps\mp\_utility::func_7BF1(level.gametype, 0);
+    maps\mp\_utility::func_7BE5(level.gametype, 0);
     level.var_6032 = 1;
     level.var_6031 = 0;
   }
@@ -56,17 +56,17 @@ func_00F9() {
   game["dialog"]["inf_finalone"] = "inf_finalone";
   game["dialog"]["inf_infected"] = "inf_infected";
   game["dialog"]["inf_timeadded"] = "inf_timeadded";
-  level.var_0611["mp_infected_zombie_vision_01"] = loadfx("vfx/unique/mp_infected_zombie_vision_01");
-  level.var_0611["mp_infected_zombie_vision_spltscrn_01"] = loadfx("vfx/unique/mp_infected_zombie_vision_spltscrn_01");
-  level.var_0611["infected_turn_lightning_01"] = loadfx("vfx/unique/infected_turn_lightning_01");
-  level.var_0611["tesla_gun_glow"] = loadfx("vfx/unique/mp_loot_ray_01");
+  level.var_611["mp_infected_zombie_vision_01"] = loadfx("vfx/unique/mp_infected_zombie_vision_01");
+  level.var_611["mp_infected_zombie_vision_spltscrn_01"] = loadfx("vfx/unique/mp_infected_zombie_vision_spltscrn_01");
+  level.var_611["infected_turn_lightning_01"] = loadfx("vfx/unique/infected_turn_lightning_01");
+  level.var_611["tesla_gun_glow"] = loadfx("vfx/unique/mp_loot_ray_01");
 }
 
 func_5300() {
   maps\mp\_utility::func_8653();
   level.var_6032 = getmatchrulesdata("infectData", "numInitialInfected");
-  setdynamicdvar("scr_" + level.var_3FDC + "_numLives", 0);
-  maps\mp\_utility::func_7BF1(level.var_3FDC, 0);
+  setdynamicdvar("scr_" + level.gametype + "_numLives", 0);
+  maps\mp\_utility::func_7BF1(level.gametype, 0);
   maps\mp\_utility::func_86EA("scorelimit", 0);
   setdynamicdvar("scr_infect_roundswitch", 0);
   maps\mp\_utility::func_7BF8("infect", 0, 0, 9);
@@ -88,7 +88,7 @@ func_6BAF() {
   setclientnamemode("auto_change");
   maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_INFECT");
   maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_INFECT");
-  if(level.var_910F) {
+  if(level.splitscreen) {
     maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_INFECT");
     maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_INFECT");
   } else {
@@ -99,8 +99,8 @@ func_6BAF() {
   maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_INFECT_HINT");
   maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_INFECT_HINT");
   lib_050D::func_10E4();
-  var_00[0] = level.var_3FDC;
-  maps\mp\gametypes\_gameobjects::func_00F9(var_00);
+  var_00[0] = level.gametype;
+  maps\mp\gametypes\_gameobjects::main(var_00);
   level.var_7895 = 1;
   level.var_17EF = 1;
   level.var_510F = 0;
@@ -111,8 +111,8 @@ func_6BAF() {
   level.var_5116["allies"] = 0;
   level.var_5115 = [];
   level.mgnestsdisabled = 1;
-  level thread maps\mp\gametypes\_raid_tripwire::runtripwirelogic();
-  level thread func_6B6C();
+  level thread maps / mp / gametypes / _raid_tripwire::runtripwirelogic();
+  level thread onplayerconnect();
   level thread func_3FD8();
 }
 
@@ -127,7 +127,7 @@ func_3FD8() {
     level waittill("update_game_time", var_04, var_05);
     var_01 = undefined;
     if(isDefined(var_05) && var_05) {
-      var_01 = maps\mp\_utility::func_46E3() / -5536 + var_02;
+      var_01 = maps\mp\_utility::gettimepassed() / -5536 + var_02;
     } else if(isDefined(var_04) && var_04 == 1) {
       var_06 = var_03 * 0.1666667 + var_02;
     } else {
@@ -157,7 +157,7 @@ func_A91E(param_00) {
   level notify("update_game_time", param_00);
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
     var_00.var_511C = 0;
@@ -172,7 +172,7 @@ func_6B6C() {
       }
     }
 
-    if(isDefined(level.var_5115[var_00.var_0109])) {
+    if(isDefined(level.var_5115[var_00.name])) {
       var_00.var_511C = 1;
     }
 
@@ -231,12 +231,12 @@ disconnectifnobuttonPressed() {
   self notifyonplayercommandremove("buttonPressed", "+smoke");
   if(!self ishost()) {
     kick(self getentitynumber(), "EXE_PLAYERKICKED_INACTIVE");
-    level thread maps\mp\gametypes\_gamelogic::func_A11E();
+    level thread maps\mp\gametypes\_gamelogic::updategameevents();
   }
 }
 
 infectedmovespeedscale() {
-  if(self.var_012C["team"] == "axis") {
+  if(self.pers["team"] == "axis") {
     if(isDefined(self.infectedboost) && self.infectedboost) {
       return 1.35;
     }
@@ -257,11 +257,11 @@ func_5117() {
 }
 
 func_511A() {
-  self.var_012C["class"] = "gamemode";
-  self.var_012C["lastClass"] = "";
-  self.var_012C["gamemodeLoadout"] = level.var_5114[self.var_012C["team"]];
-  self.var_2319 = self.var_012C["class"];
-  self.var_5B84 = self.var_012C["lastClass"];
+  self.pers["class"] = "gamemode";
+  self.pers["lastClass"] = "";
+  self.pers["gamemodeLoadout"] = level.var_5114[self.pers["team"]];
+  self.var_2319 = self.pers["class"];
+  self.var_5B84 = self.pers["lastClass"];
   func_7685();
 }
 
@@ -284,8 +284,8 @@ func_7685() {
 
 func_6BA7() {
   if(isDefined(self.var_984E)) {
-    self.var_012C["gamemodeLoadout"] = level.var_5114[self.var_012C["team"]];
-    maps\mp\gametypes\_class::func_4790(self.var_01A7, self.var_2319);
+    self.pers["gamemodeLoadout"] = level.var_5114[self.pers["team"]];
+    maps\mp\gametypes\_class::func_4790(self.team, self.var_2319);
     thread func_637D();
   }
 
@@ -302,14 +302,14 @@ func_6BA7() {
       level notify("infect_stopCountdown");
       level.var_5111 = 1;
       level.var_510F = 1;
-      foreach(var_01 in level.var_744A) {
+      foreach(var_01 in level.players) {
         if(isDefined(var_01.var_5113)) {
           var_01.var_5113 = undefined;
         }
       }
     }
 
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       if(isDefined(var_01.var_5726)) {
         var_01 thread func_86B1();
       }
@@ -323,8 +323,8 @@ func_6BA7() {
   }
 
   if(isDefined(self.var_5726)) {
-    self.var_012C["gamemodeLoadout"] = level.var_5114["axis_initial"];
-    maps\mp\gametypes\_class::func_4790(self.var_01A7, self.var_2319);
+    self.pers["gamemodeLoadout"] = level.var_5114["axis_initial"];
+    maps\mp\gametypes\_class::func_4790(self.team, self.var_2319);
   }
 
   thread func_6BA4();
@@ -339,11 +339,11 @@ func_6BA4() {
 }
 
 func_A12F() {
-  if(self.var_012C["team"] == "allies") {
+  if(self.pers["team"] == "allies") {
     self method_8626("mute_non_infected_vo");
   }
 
-  if(self.var_012C["team"] == "axis") {
+  if(self.pers["team"] == "axis") {
     maps\mp\killstreaks\_killstreaks::func_2400();
     thread func_86AF();
     thread func_86AE();
@@ -364,8 +364,8 @@ func_A12F() {
     }
 
     if(isDefined(self.infectedboost) && self.infectedboost) {
-      self.var_00FB = 200;
-      self.var_00BC = 200;
+      self.maxhealth = 200;
+      self.health = 200;
     }
 
     self method_82CD();
@@ -377,31 +377,31 @@ playzombienoises() {
   self endon("death");
   level endon("game_ended");
   self method_8626("mute_non_infected_vo");
-  self method_8617("zvox_gen_spawn");
+  self playSound("zvox_gen_spawn");
   for(;;) {
     switch (randomint(7)) {
       case 0:
-        self method_8617("zvox_gen_snarl");
+        self playSound("zvox_gen_snarl");
         break;
 
       case 1:
-        self method_8617("zvox_gen_growl_lev1");
+        self playSound("zvox_gen_growl_lev1");
         break;
 
       case 3:
-        self method_8617("zvox_gen_pain_lrg");
+        self playSound("zvox_gen_pain_lrg");
         break;
 
       case 5:
-        self method_8617("zvox_gen_sneakattack_success");
+        self playSound("zvox_gen_sneakattack_success");
         break;
 
       case 6:
-        self method_8617("zvox_gen_taunt");
+        self playSound("zvox_gen_taunt");
         break;
 
       default:
-        self method_8617("zvox_gen_snarl");
+        self playSound("zvox_gen_snarl");
         break;
     }
 
@@ -432,7 +432,7 @@ func_220B() {
   var_00 = 15;
   setomnvar("ui_match_countdown_title", 7);
   setomnvar("ui_match_countdown_toggle", 1);
-  while(var_00 > 0 && !level.var_3F9D) {
+  while(var_00 > 0 && !level.gameended) {
     var_00--;
     setomnvar("ui_match_countdown", var_00 + 1);
     maps\mp\gametypes\_hostmigration::func_A6F5(1);
@@ -444,17 +444,17 @@ func_220B() {
   level.var_5112 = 0;
   var_01 = [];
   var_02 = undefined;
-  foreach(var_04 in level.var_744A) {
-    if(maps\mp\_utility::func_602B() && level.var_744A.size > 1 && var_04 ishost()) {
+  foreach(var_04 in level.players) {
+    if(maps\mp\_utility::func_602B() && level.players.size > 1 && var_04 ishost()) {
       var_02 = var_04;
       continue;
     }
 
-    if(var_04.var_01A7 == "spectator") {
+    if(var_04.team == "spectator") {
       continue;
     }
 
-    if(!var_04.var_4B96) {
+    if(!var_04.hasspawned) {
       continue;
     }
 
@@ -468,7 +468,7 @@ func_220B() {
   var_06 = var_01[randomint(var_01.size)];
   var_06 func_8682(1);
   lib_0380::func_6844("mp_zmb_infect_turn_init", undefined, var_06);
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     if(var_04 == var_06) {
       continue;
     }
@@ -494,10 +494,10 @@ randomcarepackagespawner() {
 
 getrandomnodenearsurvivor() {
   var_00 = undefined;
-  foreach(var_02 in common_scripts\utility::func_0F92(level.var_9859["allies"])) {
-    var_00 = getnodesinradius(var_02.var_0116, 800, 0, 1000, "Path");
+  foreach(var_02 in common_scripts\utility::func_F92(level.var_9859["allies"])) {
+    var_00 = getnodesinradius(var_02.origin, 800, 0, 1000, "Path");
     if(isDefined(var_00) && var_00.size > 0) {
-      foreach(var_04 in common_scripts\utility::func_0F92(var_00)) {
+      foreach(var_04 in common_scripts\utility::func_F92(var_00)) {
         if(isDefined(var_04) && nodeexposedtosky(var_04)) {
           return var_04;
         }
@@ -507,7 +507,7 @@ getrandomnodenearsurvivor() {
 
   var_00 = getnodesinradius((0, 0, 0), 10000, 0, 10000, "Path");
   var_07 = undefined;
-  foreach(var_04 in common_scripts\utility::func_0F92(var_00)) {
+  foreach(var_04 in common_scripts\utility::func_F92(var_00)) {
     if(isDefined(var_04) && nodeexposedtosky(var_04)) {
       return var_04;
     }
@@ -518,9 +518,9 @@ getrandomnodenearsurvivor() {
 
 callinrandomcarepackage(param_00) {
   var_01 = undefined;
-  var_02 = common_scripts\utility::func_0F92(level.var_744A);
+  var_02 = common_scripts\utility::func_F92(level.players);
   foreach(var_04 in var_02) {
-    if(var_04.var_01A7 != "allies") {
+    if(var_04.team != "allies") {
       continue;
     }
 
@@ -534,7 +534,7 @@ callinrandomcarepackage(param_00) {
 
   var_06 = common_scripts\utility::func_7A33(["tripwire", "tripwire", "flamethrower", "flamethrower", "v2_rocket"]);
   var_07 = lib_0527::func_4570();
-  var_01 thread lib_0527::func_9302(var_01.var_5CC6, [param_00.var_0116], [var_07], "carepackage", undefined, "allies", var_06);
+  var_01 thread lib_0527::func_9302(var_01.var_5CC6, [param_00.origin], [var_07], "carepackage", undefined, "allies", var_06);
 }
 
 func_76A2() {
@@ -570,7 +570,7 @@ func_8682(param_00) {
   func_76A2();
   if(param_00) {
     self.var_5113 = 1;
-    maps\mp\gametypes\_menus::func_09FC("axis", undefined, 1);
+    maps\mp\gametypes\_menus::func_9FC("axis", undefined, 1);
     thread func_637D();
     level.var_5111 = 1;
     self.var_5113 = undefined;
@@ -579,7 +579,7 @@ func_8682(param_00) {
     level notify("update_game_time", 0, 1);
     func_A175();
     level.var_510F = 1;
-    level.var_5115[self.var_0109] = 1;
+    level.var_5115[self.name] = 1;
     if(!isai(self) && !function_026D(self)) {
       var_01 = undefined;
       if(self issplitscreenplayer()) {
@@ -598,8 +598,8 @@ func_8682(param_00) {
   self.var_5726 = 1;
   self.var_8C0E = 1;
   self notify("faux_spawn");
-  self.var_012C["gamemodeLoadout"] = level.var_5114["axis_initial"];
-  maps\mp\gametypes\_class::func_4773(self.var_01A7, "gamemode");
+  self.pers["gamemodeLoadout"] = level.var_5114["axis_initial"];
+  maps\mp\gametypes\_class::func_4773(self.team, "gamemode");
   func_A12F();
   thread maps\mp\_events::func_3C69();
   self method_860F("mp_inf_got_infected", self);
@@ -613,14 +613,14 @@ func_86B1() {
   func_76A2();
   self notify("gotFirstInfectedKill");
   if(isDefined(self.infectedboost) && self.infectedboost) {
-    self.var_00FB = 100;
+    self.maxhealth = 100;
     self.infectedboost = 0;
   }
 
   self notify("faux_spawn");
-  self.var_012C["gamemodeLoadout"] = level.var_5114["axis"];
+  self.pers["gamemodeLoadout"] = level.var_5114["axis"];
   thread func_6BA4();
-  maps\mp\gametypes\_class::func_4773(self.var_01A7, "gamemode");
+  maps\mp\gametypes\_class::func_4773(self.team, "gamemode");
 }
 
 watchforfirstinfectedkill() {
@@ -632,8 +632,8 @@ watchforfirstinfectedkill() {
   if(getdvarint("spv_infect_throwing_knives_enabled", 0) == 1) {
     level.var_5114["axis_initial"]["loadoutEquipmentStruct"] = maps\mp\_utility::func_473C(16818176, 0);
     if(maps\mp\_utility::func_57A0(self)) {
-      self.var_012C["gamemodeLoadout"] = level.var_5114["axis_initial"];
-      maps\mp\gametypes\_class::func_4773(self.var_01A7, "gamemode");
+      self.pers["gamemodeLoadout"] = level.var_5114["axis_initial"];
+      maps\mp\gametypes\_class::func_4773(self.team, "gamemode");
       func_A12F();
       if(isDefined(self.var_872A)) {
         maps\mp\perks\_perkfunctions::func_2D54(self.var_872A);
@@ -642,8 +642,8 @@ watchforfirstinfectedkill() {
   }
 
   if(maps\mp\_utility::func_57A0(self)) {
-    self.var_00FB = 200;
-    self.var_00BC = 200;
+    self.maxhealth = 200;
+    self.health = 200;
     maps\mp\gametypes\_weapons::func_A13B();
   }
 }
@@ -653,13 +653,13 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  if(self.var_01A7 == "axis" && isPlayer(param_01) && param_01.var_01A7 == "allies" && maps\mp\_utility::func_5755(param_03)) {
-    param_01 maps\mp\gametypes\_missions::func_7750("ch_infect_tooclose");
+  if(self.team == "axis" && isPlayer(param_01) && param_01.team == "allies" && maps\mp\_utility::ismeleemod(param_03)) {
+    param_01 maps\mp\gametypes\_missions::processchallenge("ch_infect_tooclose");
   }
 
-  if(self.var_01A7 == "axis") {
+  if(self.team == "axis") {
     if(getdvarint("spv_tesla_mp_active", 0) == 1) {
-      level thread maps\mp\gametypes\_weapons::potentiallyspawnteslagun(self.var_0116, 10);
+      level thread maps\mp\gametypes\_weapons::potentiallyspawnteslagun(self.origin, 10);
     }
 
     param_01 lib_0468::ae_sendzombiekillevent(param_04, param_03);
@@ -672,21 +672,21 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   level notify("update_game_time");
-  foreach(var_0C in level.var_744A) {
+  foreach(var_0C in level.players) {
     var_0C thread maps\mp\gametypes\_hud_message::func_9102("infect_time_added");
   }
 
   self notify("delete_explosive_drones");
   self.var_984E = 1;
-  maps\mp\gametypes\_menus::func_09FC("axis");
+  maps\mp\gametypes\_menus::func_9FC("axis");
   func_8738(1);
   func_511A();
   func_A175();
   maps\mp\_utility::func_74D9("mp_enemy_obj_captured", "allies");
   maps\mp\_utility::func_74D9("mp_war_objective_taken", "axis");
-  level.var_5115[self.var_0109] = 1;
+  level.var_5115[self.name] = 1;
   level thread maps\mp\_utility::func_9863("callout_got_infected", self, "allies");
-  lib_0380::func_6845("mp_zmb_infect_turn_3d", level.var_744A, self, self);
+  lib_0380::func_6845("mp_zmb_infect_turn_3d", level.players, self, self);
   lib_0380::func_6840("mp_zmb_infect_turn_plr", self);
   if(!var_0A) {
     param_01 maps\mp\_utility::func_2CED(0.05, ::maps\mp\_events::func_511D);
@@ -699,7 +699,7 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   if(level.var_5116["axis"] == 2) {
-    foreach(var_0C in level.var_744A) {
+    foreach(var_0C in level.players) {
       if(isDefined(var_0C.var_5726)) {
         var_0C thread func_86B1();
       }
@@ -717,12 +717,12 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 }
 
 func_6B37() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(!isDefined(var_01)) {
       continue;
     }
 
-    if(var_01.var_01A7 != "allies") {
+    if(var_01.team != "allies") {
       continue;
     }
 
@@ -746,16 +746,16 @@ func_3B60(param_00) {
   level endon("infect_lateJoiner");
   level thread func_36EE(param_00);
   var_01 = 0;
-  level.var_014C["axis"] = "normal_radar";
-  foreach(var_03 in level.var_744A) {
-    if(var_03.var_01A7 == "axis") {
-      var_03.var_014C = "normal_radar";
+  level.radarmode["axis"] = "normal_radar";
+  foreach(var_03 in level.players) {
+    if(var_03.team == "axis") {
+      var_03.radarmode = "normal_radar";
     }
   }
 
   setteamradarstrength("axis", 1);
   for(;;) {
-    var_05 = param_00.var_0116;
+    var_05 = param_00.origin;
     wait(4);
     if(var_01) {
       setteamradar("axis", 0);
@@ -763,11 +763,11 @@ func_3B60(param_00) {
     }
 
     wait(6);
-    if(distance(var_05, param_00.var_0116) < 200) {
+    if(distance(var_05, param_00.origin) < 200) {
       setteamradar("axis", 1);
       var_01 = 1;
-      foreach(var_03 in level.var_744A) {
-        var_03 method_8615("recondrone_tag");
+      foreach(var_03 in level.players) {
+        var_03 playlocalsound("recondrone_tag");
       }
     }
   }
@@ -794,7 +794,7 @@ func_637D() {
   self endon("eliminated");
   self notify("infect_monitor_disconnect");
   self endon("infect_monitor_disconnect");
-  var_00 = self.var_01A7;
+  var_00 = self.team;
   if(!isDefined(var_00) && isDefined(self.var_1AFA)) {
     var_00 = self.var_1AFA;
   }
@@ -806,8 +806,8 @@ func_637D() {
       if(var_00 == "allies" && level.var_5116["allies"] == 1) {
         func_6B37();
       } else if(var_00 == "axis" && level.var_5116["axis"] == 1) {
-        foreach(var_02 in level.var_744A) {
-          if(var_02 != self && var_02.var_01A7 == "axis") {
+        foreach(var_02 in level.players) {
+          if(var_02 != self && var_02.team == "axis") {
             var_02 func_8682(0);
           }
         }
@@ -817,7 +817,7 @@ func_637D() {
     } else if(level.var_5116["axis"] == 0) {
       if(level.var_5116["allies"] == 1) {
         level.var_3B5C = "allies";
-        level thread maps\mp\gametypes\_gamelogic::func_36B9("allies", game["end_reason"]["infected_eliminated"]);
+        level thread maps\mp\gametypes\_gamelogic::endgame("allies", game["end_reason"]["infected_eliminated"]);
       } else if(level.var_5116["allies"] > 1) {
         level.var_5111 = 0;
         level thread func_220B();
@@ -836,8 +836,8 @@ func_6AE2(param_00) {}
 
 func_6BB6() {
   level.var_3B5C = "allies";
-  foreach(var_01 in level.var_744A) {
-    if(isDefined(var_01.var_01A7) && var_01.var_01A7 == "axis") {
+  foreach(var_01 in level.players) {
+    if(isDefined(var_01.team) && var_01.team == "axis") {
       if(!isai(var_01) && !function_026D(var_01)) {
         var_02 = undefined;
         if(var_01 issplitscreenplayer()) {
@@ -851,13 +851,13 @@ func_6BB6() {
     }
   }
 
-  level thread maps\mp\gametypes\_gamelogic::func_36B9("allies", game["end_reason"]["time_limit_reached"]);
+  level thread maps\mp\gametypes\_gamelogic::endgame("allies", game["end_reason"]["time_limit_reached"]);
 }
 
 func_6BB3() {
   level.var_3B5C = "axis";
-  foreach(var_01 in level.var_744A) {
-    if(isDefined(var_01.var_01A7) && var_01.var_01A7 == "axis") {
+  foreach(var_01 in level.players) {
+    if(isDefined(var_01.team) && var_01.team == "axis") {
       if(!isai(var_01) && !function_026D(var_01)) {
         var_02 = undefined;
         if(var_01 issplitscreenplayer()) {
@@ -871,17 +871,17 @@ func_6BB3() {
     }
   }
 
-  level thread maps\mp\gametypes\_gamelogic::func_36B9("axis", game["end_reason"]["survivors_eliminated"]);
+  level thread maps\mp\gametypes\_gamelogic::endgame("axis", game["end_reason"]["survivors_eliminated"]);
 }
 
 func_46D7(param_00) {
   var_01 = 0;
-  foreach(var_03 in level.var_744A) {
-    if(var_03.var_0178 == "spectator" && !var_03.var_0188) {
+  foreach(var_03 in level.players) {
+    if(var_03.sessionstate == "spectator" && !var_03.spectatekillcam) {
       continue;
     }
 
-    if(var_03.var_01A7 == param_00) {
+    if(var_03.team == param_00) {
       var_01++;
     }
   }
@@ -901,7 +901,7 @@ func_A175() {
 func_872E() {
   if(isusingmatchrulesdata() && getmatchrulesdata("defaultClasses", "allies", "defaultClass", 0, "class", "inUse")) {
     level.var_5114["allies"] = maps\mp\_utility::func_4573("allies", 0);
-  } else if(level.var_7A67) {
+  } else if(level.rankedmatch) {
     level.var_5114["allies"] = maps\mp\gametypes\_class::func_44B4();
     level.var_5114["allies"]["loadoutDivision"] = 0;
     level.var_5114["allies"]["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::func_473C(16953344, 0);

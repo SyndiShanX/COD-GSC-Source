@@ -42,7 +42,7 @@ func_43DC(param_00) {
 }
 
 func_4295(param_00) {
-  var_01 = maps\mp\gametypes\_division_change::func_0995(self, 2, param_00, 1, 0);
+  var_01 = maps\mp\gametypes\_division_change::setflashfrac(self, 2, param_00, 1, 0);
   return var_01;
 }
 
@@ -57,7 +57,7 @@ func_2FEE() {
 }
 
 func_3A66() {
-  self iclientprintlnbold(&"WEAPON_PLANT_BLOCKED");
+  self iprintlnbold(&"WEAPON_PLANT_BLOCKED");
 }
 
 func_8B6B() {

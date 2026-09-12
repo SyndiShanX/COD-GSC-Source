@@ -3,20 +3,20 @@
  * Script: maps\mp\mp_zombie_nest_01.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   level.var_AC31 = 0;
-  level.var_0C19 = 0;
+  level.var_C19 = 0;
   level.var_AC2E = 2;
-  lib_04BF::func_00F9();
-  lib_0426::func_00F9();
-  lib_04BE::func_00F9();
+  lib_04BF::main();
+  lib_0426::main();
+  lib_04BE::main();
   if(getDvar("233") == "1") {
     func_6B91();
   }
 
-  maps\mp\_load::func_00F9();
-  maps\mp\mp_zombie_nest_01_lighting::func_00F9();
-  maps\mp\mp_zombie_nest_01_aud::func_00F9();
+  maps\mp\_load::main();
+  maps / mp / mp_zombie_nest_01_lighting::main();
+  maps / mp / mp_zombie_nest_01_aud::main();
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   setDvar("1520", "-1 -1 -1 5");
@@ -26,17 +26,17 @@ func_00F9() {
   common_scripts\utility::func_3C87("flag_generator_grate_look");
   common_scripts\utility::func_3C87("flag_fuse_pickedup");
   common_scripts\utility::func_3C87("flag_bunker_lights_off");
-  lib_055A::func_00D5();
+  lib_055A::init();
   level.var_8C96 = ::func_666B;
-  maps\mp\_water::func_00D5();
+  maps\mp\_water::init();
   func_5339();
-  maps\mp\mp_zombie_falldamage_modifier::func_00F9();
-  maps\mp\mp_zombie_nest_pneumos::func_00F9();
+  maps / mp / mp_zombie_falldamage_modifier::main();
+  maps / mp / mp_zombie_nest_pneumos::main();
   thread lib_0551::func_3D50(0);
   func_5375();
   level thread func_531C();
-  thread maps\mp\zombies\_zombies_money::func_00D5();
-  thread lib_055D::func_00D5();
+  thread maps\mp\zombies\_zombies_money::init();
+  thread lib_055D::init();
   thread func_347A();
   level.var_ABD3 = 0;
   level.var_324B = ::func_76D0;
@@ -49,21 +49,21 @@ func_00F9() {
   }
 
   thread func_3FD2();
-  thread maps\mp\mp_zombie_nest_pneumos::func_2037();
+  thread maps / mp / mp_zombie_nest_pneumos::func_2037();
   thread func_83FA("bunker_light_switch", 0);
   thread func_7EAC();
   thread func_2033();
   thread func_1D8F();
   thread func_3C23();
-  level.var_0C11 = 0;
-  thread maps\mp\_utility::func_6F74(::maps\mp\mp_zombie_nest_ee_util::func_73B8);
+  level.var_C11 = 0;
+  thread maps\mp\_utility::func_6F74(::maps / mp / mp_zombie_nest_ee_util::func_73B8);
   thread maps\mp\_utility::func_6F74(::func_742E);
   thread func_3BF9();
   thread func_3DCE();
   thread func_18DE();
-  level thread maps\mp\zquests\dlc1_secrets_mp_zombie_nest_01::init_dlc1_secrets_mp_zombie_nest_01();
+  level thread maps / mp / zquests / dlc1_secrets_mp_zombie_nest_01::init_dlc1_secrets_mp_zombie_nest_01();
   if(maps\mp\_utility::isproductionlevelactive(10)) {
-    level thread maps\mp\zombies\_zombies_lo_events::init_zm_lo_events();
+    level thread maps / mp / zombies / _zombies_lo_events::init_zm_lo_events();
   }
 
   lib_0565::func_7C07("raven_set");
@@ -77,16 +77,16 @@ func_00F9() {
 }
 
 func_531E() {
-  lib_055F::func_00D5();
-  lib_0568::func_00D5();
+  lib_055F::init();
+  lib_0568::init();
   lib_0564::func_3BFB(1);
 }
 
 func_531D() {
   thread lib_057D::func_5162();
-  lib_0580::func_00D5();
+  lib_0580::init();
   lib_057E::func_51CF();
-  lib_057F::func_00D5();
+  lib_057F::init();
 }
 
 func_6B5A() {
@@ -104,54 +104,54 @@ func_AA3C() {
 
 func_5339() {
   lib_0557::func_786C();
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_fire_well::func_418E());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_fire_well::func_40E8());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_enigma::func_430C());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_cart::func_43E8());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_cart::func_43E9());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_cart::func_43E7());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_fuses::func_4303());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_overcharge::func_41E7());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_paintings::func_43CC());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_overcharge::func_40C0(1));
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_overcharge::func_40C0(2));
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_overcharge::func_40C0(3));
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_fire_well::func_418E());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_fire_well::func_40E8());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_enigma::func_430C());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_cart::func_43E8());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_cart::func_43E9());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_cart::func_43E7());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_fuses::func_4303());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_overcharge::func_41E7());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_paintings::func_43CC());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_overcharge::func_40C0(1));
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_overcharge::func_40C0(2));
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_overcharge::func_40C0(3));
   lib_0557::func_AB8D("collectible_armor_purchased");
   level thread maps\mp\_utility::func_6F74(::func_7827);
   lib_0557::func_AB8D(lib_0569::func_42A5());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_final_boss::func_40E2());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_hc_toy_arms::func_40AC(1));
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_hc_toy_arms::func_40AC(2));
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_hc_toy_arms::func_40AC(3));
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_hc_toy_arms::func_42F3());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_42ED("blood"));
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_42ED("moon"));
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_42ED("death"));
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_42ED("storm"));
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_hc_tools_of_the_trade::func_42EF());
-  lib_0557::func_AB8C(maps\mp\mp_zombie_nest_ee_hc_true_voice::func_42EE());
-  thread maps\mp\mp_zombie_nest_ee_fire_well::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_enigma::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_cart::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_shard::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_fuses::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_tower_battle::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_overcharge::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_paintings::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_boss_blimp::func_00F9();
-  thread lib_0560::func_00D5();
-  thread maps\mp\mp_zombie_nest_ee_final_boss::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_00F9();
-  level thread maps\mp\mp_zombie_nest_ee_util::func_50F3();
-  thread lib_0562::func_00D5();
-  thread maps\mp\mp_zombie_nest_ee_wave_manipulation::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_hc_toy_arms::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_hc_restore_pub_power::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_hc_tools_of_the_trade::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_hc_pub_fight::func_00F9();
-  thread maps\mp\mp_zombie_nest_straub_appearances::func_00F9();
-  thread maps\mp\mp_zombie_nest_ee_hc_true_voice::func_00F9();
-  level thread lib_053D::func_00D5();
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_final_boss::func_40E2());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_hc_toy_arms::func_40AC(1));
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_hc_toy_arms::func_40AC(2));
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_hc_toy_arms::func_40AC(3));
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_hc_toy_arms::func_42F3());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_42ED("blood"));
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_42ED("moon"));
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_42ED("death"));
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_42ED("storm"));
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_hc_tools_of_the_trade::func_42EF());
+  lib_0557::func_AB8C(maps / mp / mp_zombie_nest_ee_hc_true_voice::func_42EE());
+  thread maps / mp / mp_zombie_nest_ee_fire_well::main();
+  thread maps / mp / mp_zombie_nest_ee_enigma::main();
+  thread maps / mp / mp_zombie_nest_ee_cart::main();
+  thread maps / mp / mp_zombie_nest_ee_shard::main();
+  thread maps / mp / mp_zombie_nest_ee_fuses::main();
+  thread maps / mp / mp_zombie_nest_ee_tower_battle::main();
+  thread maps / mp / mp_zombie_nest_ee_overcharge::main();
+  thread maps / mp / mp_zombie_nest_ee_paintings::main();
+  thread maps / mp / mp_zombie_nest_ee_boss_blimp::main();
+  thread lib_0560::init();
+  thread maps / mp / mp_zombie_nest_ee_final_boss::main();
+  thread maps / mp / mp_zombie_nest_ee_hc_raven_weapon_upgrades::main();
+  level thread maps / mp / mp_zombie_nest_ee_util::func_50F3();
+  thread lib_0562::init();
+  thread maps / mp / mp_zombie_nest_ee_wave_manipulation::main();
+  thread maps / mp / mp_zombie_nest_ee_hc_toy_arms::main();
+  thread maps / mp / mp_zombie_nest_ee_hc_restore_pub_power::main();
+  thread maps / mp / mp_zombie_nest_ee_hc_tools_of_the_trade::main();
+  thread maps / mp / mp_zombie_nest_ee_hc_pub_fight::main();
+  thread maps / mp / mp_zombie_nest_straub_appearances::main();
+  thread maps / mp / mp_zombie_nest_ee_hc_true_voice::main();
+  level thread lib_053D::init();
   level.var_6662 = common_scripts\utility::func_46B7("objective_testing_spawners", "targetname");
   level.var_6664 = common_scripts\utility::func_46B7("objective_testing_spawners_salt", "targetname");
   level.var_6663 = common_scripts\utility::func_46B7("objective_testing_spawners_com", "targetname");
@@ -162,7 +162,7 @@ func_7827() {
   common_scripts\utility::func_3799("collectible_armor_purchased");
   for(;;) {
     self waittill("perkmachine_activated", var_00);
-    if(isDefined(var_00) && var_00.var_0109 == "armor") {
+    if(isDefined(var_00) && var_00.name == "armor") {
       break;
     }
   }
@@ -184,24 +184,24 @@ func_5375() {
   lib_055A::func_530A("zone3_3_rnd", 0);
   lib_055A::func_530A("zone4_1_mine", 0);
   lib_055A::func_530A("zone4_2_hilt", 0);
-  lib_055A::func_0993("zone1_3_riverside", "zone1_1_start", "start_to_riverside");
-  lib_055A::func_0993("zone1_1_start", "zone1_2_gallows", "start_to_gallows");
-  lib_055A::func_0993("zone1_2_gallows", "zone1_3_riverside", "gallows_to_riverside");
-  lib_055A::func_0993("zone1_4_bridge", "zone1_3_riverside", "riverside_to_bridge");
-  lib_055A::func_0993("zone1_4_bridge", "zone1_1_start", "start_to_bridge");
-  lib_055A::func_0993("zone1_4_bridge", "zone1_4_bridge_tower", "safe_haven_to_bridge");
-  lib_055A::func_0993("zone1_2_gallows", "zone2_1_well", "gallows_to_well");
-  lib_055A::func_0993("zone2_2_catacombs", "zone2_1_well", "well_to_underground");
-  lib_055A::func_0993("zone2_2_catacombs", "zone1_3_riverside", "underground_to_riverside1");
-  lib_055A::func_0993("zone1_5_rooftops", "zone1_3_riverside", "riverside_to_rooftops");
-  lib_055A::func_0993("zone3_1_com", "zone1_2_gallows", "gallows_to_com");
-  lib_055A::func_0993("zone3_1_com", "zone3_3_rnd", "com_to_rnd");
-  lib_055A::func_0993("zone3_1_com", "zone3_2_med", "com_to_med");
-  lib_055A::func_0993("zone3_2_med", "zone2_2_catacombs", "med_to_underground");
-  lib_055A::func_0993("zone3_3_rnd", "zone1_5_rooftops", "activate_rooftops");
-  lib_055A::func_0993("zone3_1_com", "zone4_1_mine", "com_to_mine");
-  lib_055A::func_0993("zone3_3_rnd", "zone4_1_mine", "rnd_to_mine");
-  lib_055A::func_0993("zone4_1_mine", "zone4_2_hilt", "activate_mine");
+  lib_055A::func_993("zone1_3_riverside", "zone1_1_start", "start_to_riverside");
+  lib_055A::func_993("zone1_1_start", "zone1_2_gallows", "start_to_gallows");
+  lib_055A::func_993("zone1_2_gallows", "zone1_3_riverside", "gallows_to_riverside");
+  lib_055A::func_993("zone1_4_bridge", "zone1_3_riverside", "riverside_to_bridge");
+  lib_055A::func_993("zone1_4_bridge", "zone1_1_start", "start_to_bridge");
+  lib_055A::func_993("zone1_4_bridge", "zone1_4_bridge_tower", "safe_haven_to_bridge");
+  lib_055A::func_993("zone1_2_gallows", "zone2_1_well", "gallows_to_well");
+  lib_055A::func_993("zone2_2_catacombs", "zone2_1_well", "well_to_underground");
+  lib_055A::func_993("zone2_2_catacombs", "zone1_3_riverside", "underground_to_riverside1");
+  lib_055A::func_993("zone1_5_rooftops", "zone1_3_riverside", "riverside_to_rooftops");
+  lib_055A::func_993("zone3_1_com", "zone1_2_gallows", "gallows_to_com");
+  lib_055A::func_993("zone3_1_com", "zone3_3_rnd", "com_to_rnd");
+  lib_055A::func_993("zone3_1_com", "zone3_2_med", "com_to_med");
+  lib_055A::func_993("zone3_2_med", "zone2_2_catacombs", "med_to_underground");
+  lib_055A::func_993("zone3_3_rnd", "zone1_5_rooftops", "activate_rooftops");
+  lib_055A::func_993("zone3_1_com", "zone4_1_mine", "com_to_mine");
+  lib_055A::func_993("zone3_3_rnd", "zone4_1_mine", "rnd_to_mine");
+  lib_055A::func_993("zone4_1_mine", "zone4_2_hilt", "activate_mine");
   lib_053F::func_7BE6(&"ZOMBIE_NEST_DOOR_GALLOWS", "start_to_gallows", 0);
   lib_053F::func_7BE6(&"ZOMBIE_NEST_DOOR_GALLOWS", "start_to_gallows", 1);
   lib_053F::func_7BE6(&"ZOMBIE_NEST_DOOR_TWR", "safe_haven_to_bridge", 0);
@@ -239,10 +239,10 @@ func_5375() {
   lib_0547::func_3C8A("rnd_to_mine", "activate_rooftops");
   lib_0547::func_3C8A("com_to_mine", "activate_mine");
   lib_0547::func_3C8A("rnd_to_mine", "activate_mine");
-  lib_055A::func_088A();
+  lib_055A::func_88A();
   common_scripts\utility::func_3C8F("flag_zone1_start");
-  maps\mp\gametypes\zombies::func_0997("zone1", ::func_AC9A, ::func_AC90, ::func_AC97);
-  maps\mp\gametypes\zombies::func_5294("zone1");
+  maps / mp / gametypes / zombies::flashthread("zone1", ::func_AC9A, ::func_AC90, ::func_AC97);
+  maps / mp / gametypes / zombies::func_5294("zone1");
 }
 
 func_6B5B() {
@@ -254,11 +254,11 @@ func_6B5B() {
 }
 
 func_666A() {
-  var_00 = common_scripts\utility::func_7A33(level.var_744A);
+  var_00 = common_scripts\utility::func_7A33(level.players);
   switch (level.var_A980) {
     case 5:
       wait(4);
-      common_scripts\utility::func_0FB2(level.var_744A, ::lib_0367::func_8E3C, "sprinterflies");
+      common_scripts\utility::array_thread(level.players, ::lib_0367::func_8E3C, "sprinterflies");
       break;
 
     case 6:
@@ -283,7 +283,7 @@ func_666A() {
     case 21:
       wait(3);
       if(lib_0557::func_783E("6B Left Hand overcharge", "activate left hand") && !lib_0557::func_783E("7 Voice paintings", "find code pieces")) {
-        foreach(var_02 in level.var_744A) {
+        foreach(var_02 in level.players) {
           if(!common_scripts\utility::func_3C77("flag_player_has_head")) {
             if(common_scripts\utility::func_3C77("flag_both_hints_seen")) {
               var_02 thread lib_0367::func_8E3C("firemanheadneed");
@@ -310,12 +310,12 @@ func_531C() {
 
 func_6669() {
   if((common_scripts\utility::func_3C77("gallows_to_com") || common_scripts\utility::func_3C77("med_to_underground") || common_scripts\utility::func_3C77("riverside_to_rooftops")) && !lib_0557::func_783E("8A The Hilt", "Shoot Hilt")) {
-    thread maps\mp\mp_zombie_nest_straub_appearances::func_74E2();
+    thread maps / mp / mp_zombie_nest_straub_appearances::func_74E2();
   }
 }
 
 func_6668(param_00) {
-  if(self.var_0A4B != "zombie_generic") {
+  if(self.var_A4B != "zombie_generic") {
     return undefined;
   }
 
@@ -341,8 +341,8 @@ func_6668(param_00) {
   var_07 = var_03 * 1000;
   var_08 = var_04;
   var_09 = var_05;
-  if(var_02 > var_06 && lib_0547::func_5565(self.var_0108, "sprint")) {
-    lib_054D::func_099B("rageBuff", func_4641());
+  if(var_02 > var_06 && lib_0547::func_5565(self.var_108, "sprint")) {
+    lib_054D::setheight("rageBuff", func_4641());
   }
 
   if(var_02 > var_09) {
@@ -444,17 +444,17 @@ func_83FA(param_00, param_01) {
 
 func_6B2D() {
   var_00 = getEntArray("trig_oneway_grate_trigger", "targetname");
-  common_scripts\utility::func_0FB2(var_00, ::func_6B2E);
+  common_scripts\utility::array_thread(var_00, ::func_6B2E);
 }
 
 func_6B2E() {
   var_00 = self;
-  var_00.var_24A7 = getEnt(var_00.var_01A2, "targetname");
-  var_01 = var_00.var_24A7.var_0116;
+  var_00.var_24A7 = getEnt(var_00.target, "targetname");
+  var_01 = var_00.var_24A7.origin;
   var_02 = (150, 0, 0);
   for(;;) {
     var_00 waittill("trigger", var_03);
-    var_00.var_24A7 moveTo(var_00.var_24A7.var_0116 + var_02, 1);
+    var_00.var_24A7 moveTo(var_00.var_24A7.origin + var_02, 1);
     while(var_03 istouching(var_00)) {
       wait 0.05;
     }
@@ -483,7 +483,7 @@ func_AC9A() {
   thread func_2E93();
   thread func_3C0C();
   thread func_1CC8();
-  maps\mp\gametypes\zombies::func_8028(0);
+  maps / mp / gametypes / zombies::func_8028(0);
   wait(5);
 }
 
@@ -491,10 +491,10 @@ func_9CF8() {
   level.var_9CFB = 1;
   level.var_62B5 = 1;
   maps\mp\zombies\_zombies_traps::func_7BD7("gj_zmb_drop_gate_switch_01", "gj_zmb_drop_gate_switch_01", "gj_zmb_drop_gate_switch_01", "gj_zmb_drop_gate_switch_01");
-  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_rnd", "active", ::maps\mp\mp_zombie_nest_trap_rnd::func_9CC0);
-  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_roof", "active", ::maps\mp\mp_zombie_nest_trap_betty::func_9C97);
-  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_med", "active", ::maps\mp\mp_zombie_nest_trap_med::func_9CB8);
-  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_catacombs", "active", ::maps\mp\mp_zombie_nest_trap_catacombs::func_9C9A);
+  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_rnd", "active", ::maps / mp / mp_zombie_nest_trap_rnd::func_9CC0);
+  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_roof", "active", ::maps / mp / mp_zombie_nest_trap_betty::func_9C97);
+  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_med", "active", ::maps / mp / mp_zombie_nest_trap_med::func_9CB8);
+  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_catacombs", "active", ::maps / mp / mp_zombie_nest_trap_catacombs::func_9C9A);
   level thread func_9E92();
   maps\mp\zombies\_zombies_traps::func_9CC7("trap_rnd", &"ZOMBIE_NEST_RND_TRAP", &"ZOMBIES_TRAP_COOLDOWN", "rnd");
   maps\mp\zombies\_zombies_traps::func_9CC7("trap_roof", &"ZOMBIE_NEST_BETTY_TRAP", &"ZOMBIES_TRAP_COOLDOWN", "betty");
@@ -507,7 +507,7 @@ func_9E92() {
   var_00 = common_scripts\utility::func_46B5("trap_firewell", "script_noteworthy");
   var_00 func_52E1();
   var_00 thread maps\mp\zombies\_zombies_traps::func_9CAF(1, var_00.var_9DC2, var_00.var_3F4E, var_00.var_9CBA);
-  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_firewell", "active", ::maps\mp\mp_zombie_nest_trap_firewell::func_9CAA);
+  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_firewell", "active", ::maps / mp / mp_zombie_nest_trap_firewell::func_9CAA);
   maps\mp\zombies\_zombies_traps::func_9CC7("trap_firewell", &"ZOMBIE_NEST_WELL_TRAP", &"ZOMBIES_TRAP_COOLDOWN", "firewell");
 }
 
@@ -515,23 +515,23 @@ func_52E1() {
   self.var_9DC2 = [];
   self.var_9CBA = [];
   self.var_3F4E = [];
-  var_00 = common_scripts\utility::func_44BE(self.var_01A2, "targetname");
+  var_00 = common_scripts\utility::func_44BE(self.target, "targetname");
   foreach(var_02 in var_00) {
-    if(!isDefined(var_02.var_0165)) {
+    if(!isDefined(var_02.script_noteworthy)) {
       continue;
     }
 
-    switch (var_02.var_0165) {
+    switch (var_02.script_noteworthy) {
       case "activate_model":
-        self.var_9CBA = common_scripts\utility::func_0F6F(self.var_9CBA, var_02);
+        self.var_9CBA = common_scripts\utility::func_F6F(self.var_9CBA, var_02);
         break;
 
       case "activate":
-        self.var_9DC2 = common_scripts\utility::func_0F6F(self.var_9DC2, var_02);
+        self.var_9DC2 = common_scripts\utility::func_F6F(self.var_9DC2, var_02);
         break;
 
       case "fx_ready":
-        self.var_3F4E = common_scripts\utility::func_0F6F(self.var_3F4E, var_02);
+        self.var_3F4E = common_scripts\utility::func_F6F(self.var_3F4E, var_02);
         break;
 
       default:
@@ -541,8 +541,8 @@ func_52E1() {
 
   var_04 = common_scripts\utility::func_46B5("zmb_flamethrower_trap_light", "script_noteworthy");
   var_05 = getEnt("pilot_light_trigger", "targetname");
-  self.var_3F4E = common_scripts\utility::func_0F6F(self.var_3F4E, var_04);
-  self.var_9DC2 = common_scripts\utility::func_0F6F(self.var_9DC2, var_05);
+  self.var_3F4E = common_scripts\utility::func_F6F(self.var_3F4E, var_04);
+  self.var_9DC2 = common_scripts\utility::func_F6F(self.var_9DC2, var_05);
 }
 
 func_2E9F() {
@@ -654,20 +654,20 @@ func_2E77() {
     if(!isPlayer(var_02)) {
       wait(0.5);
       continue;
-    } else if(!common_scripts\utility::func_0F79(var_01, var_02)) {
+    } else if(!common_scripts\utility::func_F79(var_01, var_02)) {
       if(isDefined(var_02.var_3069)) {
-        var_01 = common_scripts\utility::func_0F6F(var_01, var_02);
+        var_01 = common_scripts\utility::func_F6F(var_01, var_02);
         continue;
       }
 
       var_03 = var_02 lib_0367::func_8E3D("saltminedoor");
       if(isDefined(var_03)) {
-        var_01 = common_scripts\utility::func_0F6F(var_01, var_02);
+        var_01 = common_scripts\utility::func_F6F(var_01, var_02);
       }
 
       var_04 = 1;
-      foreach(var_06 in level.var_744A) {
-        if(!common_scripts\utility::func_0F79(var_01, var_06)) {
+      foreach(var_06 in level.players) {
+        if(!common_scripts\utility::func_F79(var_01, var_06)) {
           var_04 = 0;
         }
       }
@@ -690,7 +690,7 @@ func_2E99(param_00) {
 
 func_2E94() {
   wait(5);
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 thread lib_0367::func_8E3C("villageintro");
   }
 }
@@ -712,7 +712,7 @@ func_2E90() {
   level endon("flag_ww_part_02_picked_up");
   var_00 = function_021F("med_untotenpresse_smasher", "targetname");
   if(isDefined(var_00)) {
-    childthread maps\mp\mp_zombie_nest_ee_util::func_720B("conv_juicerintro", var_00[0].var_0116, 250, 50);
+    childthread maps / mp / mp_zombie_nest_ee_util::func_720B("conv_juicerintro", var_00[0].origin, 250, 50);
   }
 }
 
@@ -729,15 +729,15 @@ func_2E89() {
     if(!isPlayer(var_02)) {
       wait(0.5);
       continue;
-    } else if(!common_scripts\utility::func_0F79(var_01, var_02)) {
+    } else if(!common_scripts\utility::func_F79(var_01, var_02)) {
       var_03 = var_02 lib_0367::func_8E3D("forgestartup2");
       if(isDefined(var_03)) {
-        var_01 = common_scripts\utility::func_0F6F(var_01, var_02);
+        var_01 = common_scripts\utility::func_F6F(var_01, var_02);
       }
 
       var_04 = 1;
-      foreach(var_06 in level.var_744A) {
-        if(!common_scripts\utility::func_0F79(var_01, var_06)) {
+      foreach(var_06 in level.players) {
+        if(!common_scripts\utility::func_F79(var_01, var_06)) {
           var_04 = 0;
         }
       }
@@ -764,15 +764,15 @@ func_2E95() {
     if(!isPlayer(var_02)) {
       wait(0.5);
       continue;
-    } else if(!common_scripts\utility::func_0F79(var_01, var_02)) {
+    } else if(!common_scripts\utility::func_F79(var_01, var_02)) {
       var_03 = var_02 lib_0367::func_8E3D("medofficereaction");
       if(isDefined(var_03)) {
-        var_01 = common_scripts\utility::func_0F6F(var_01, var_02);
+        var_01 = common_scripts\utility::func_F6F(var_01, var_02);
       }
 
       var_04 = 1;
-      foreach(var_06 in level.var_744A) {
-        if(!common_scripts\utility::func_0F79(var_01, var_06)) {
+      foreach(var_06 in level.players) {
+        if(!common_scripts\utility::func_F79(var_01, var_06)) {
           var_04 = 0;
         }
       }
@@ -812,7 +812,7 @@ func_3C0C() {
 }
 
 func_3C0B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
-  if(self.var_0A4B == "zombie_fireman") {
+  if(self.var_A4B == "zombie_fireman") {
     if(isDefined(param_01)) {
       if(isPlayer(param_01) && !common_scripts\utility::func_3C77("flag_vo_fireman_head_spotted")) {
         param_01 thread lib_0367::func_8E3C("firemankilled");
@@ -916,12 +916,12 @@ func_AC91() {
       thread func_3541(var_04);
     }
 
-    var_05 = maps\mp\mp_zombie_nest_ee_util::func_4649();
+    var_05 = maps / mp / mp_zombie_nest_ee_util::func_4649();
     if(isDefined(var_05)) {
       level thread func_3254(var_04, var_05);
     }
 
-    level thread common_scripts\_exploder::func_088E(207);
+    level thread common_scripts\_exploder::func_88E(207);
     wait(var_04);
     level notify("zone1EarthquakeEnd");
   }
@@ -960,7 +960,7 @@ func_353F(param_00) {
 }
 
 func_3540() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_02 = undefined;
     var_03 = undefined;
     var_04 = function_032F();
@@ -970,8 +970,8 @@ func_3540() {
       }
 
       var_06 = getglassorigin(var_05);
-      var_07 = common_scripts\utility::func_5D93(distance(var_06, var_01.var_0116), 0, -15536, 1, 0);
-      var_08 = vectordot(anglesToForward(var_01.var_001D), var_06 - var_01.var_0116);
+      var_07 = common_scripts\utility::func_5D93(distance(var_06, var_01.origin), 0, -15536, 1, 0);
+      var_08 = vectordot(anglesToForward(var_01.angles), var_06 - var_01.origin);
       var_09 = common_scripts\utility::func_5D93(var_08, 0.5, 1, 0, 1);
       var_0A = var_07 * var_09 * 3 + randomfloat(0.2);
       if(!isDefined(var_03) || var_0A > var_03) {
@@ -981,15 +981,15 @@ func_3540() {
     }
 
     if(isDefined(var_02)) {
-      var_0B = vectorNormalize(vectorNormalize(var_01.var_0116 - getglassorigin(var_02)) + common_scripts\utility::func_7A5F(0.3));
+      var_0B = vectorNormalize(vectorNormalize(var_01.origin - getglassorigin(var_02)) + common_scripts\utility::func_7A5F(0.3));
       destroyglass(var_02, var_0B);
     }
   }
 }
 
 func_3254(param_00, param_01) {
-  earthquake(0.3, param_00, param_01.var_0116, 850, param_01);
-  function_01BC("tank_rumble", param_01.var_0116);
+  earthquake(0.3, param_00, param_01.origin, 850, param_01);
+  function_01BC("tank_rumble", param_01.origin);
   thread func_2E99(param_01);
   wait(param_00);
   function_01BD();
@@ -1016,7 +1016,7 @@ func_AC97() {}
 
 func_1CC8() {
   wait(1);
-  level thread common_scripts\_exploder::func_088E(238);
+  level thread common_scripts\_exploder::func_88E(238);
 }
 
 func_5CB9() {}
@@ -1041,9 +1041,9 @@ func_2033() {
 
 func_1D8F() {
   var_00 = common_scripts\utility::func_46B7("bunker_door_indicator", "targetname");
-  common_scripts\utility::func_0FB2(var_00, ::maps\mp\mp_zombie_nest_ee_util::func_A16D, "red");
+  common_scripts\utility::array_thread(var_00, ::maps / mp / mp_zombie_nest_ee_util::func_A16D, "red");
   common_scripts\utility::func_3C9F("gallows_to_com");
-  common_scripts\utility::func_0FB2(var_00, ::maps\mp\mp_zombie_nest_ee_util::func_A16D, "green");
+  common_scripts\utility::array_thread(var_00, ::maps / mp / mp_zombie_nest_ee_util::func_A16D, "green");
 }
 
 func_3C23() {
@@ -1066,7 +1066,7 @@ func_3C23() {
 func_742E() {
   self endon("disconnect");
   for(;;) {
-    common_scripts\utility::func_A70A("new_wallbuy_weapon", "new_equipment");
+    common_scripts\utility::waittill_any("new_wallbuy_weapon", "new_equipment");
     var_00 = 0;
     if(common_scripts\utility::func_24A6()) {
       var_00 = 1;
@@ -1160,9 +1160,9 @@ func_18DF() {
     wait(0.5);
   }
 
-  var_01 = common_scripts\utility::func_46B7(self.var_01A2, "targetname");
+  var_01 = common_scripts\utility::func_46B7(self.target, "targetname");
   foreach(var_03 in var_01) {
-    if(isDefined(var_03.var_0165) && var_03.var_0165 == "zombie_sky_spawner") {
+    if(isDefined(var_03.script_noteworthy) && var_03.script_noteworthy == "zombie_sky_spawner") {
       var_03.var_8C95 = 1;
     }
 
@@ -1180,7 +1180,7 @@ func_3BF9() {
   common_scripts\utility::func_3C9F("flag_ww_part_02_picked_up");
   if(!level.var_3BFE > 0) {
     var_02 = 0;
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       if(lib_055A::func_7413(var_04, "zone3_1_com")) {
         var_02 = 1;
         var_00 = var_01;
@@ -1189,7 +1189,7 @@ func_3BF9() {
     }
 
     if(!var_02) {
-      lib_0378::func_8D74("fireman_intro_scream", var_00.var_0116);
+      lib_0378::func_8D74("fireman_intro_scream", var_00.origin);
     }
 
     if(!var_02) {
@@ -1205,19 +1205,19 @@ func_3BF9() {
       return;
     }
 
-    var_0B = lib_0564::func_3C11(0, var_00);
+    var_0B = lib_0564::func_3C11(0, var_01);
   }
 }
 
 func_3BF6() {
   var_00 = common_scripts\utility::func_46B7("fireman_intro_explosion", "script_noteworthy");
-  var_01 = var_00[0].var_0116;
+  var_01 = var_00[0].origin;
   lib_0378::func_8D74("well_explosion", var_01);
   lib_0378::func_8D74("fireman_intro_scream", var_01);
   lib_0378::func_8D74("aud_fireman_fire_emitters", var_01);
-  level thread common_scripts\_exploder::func_088E(215);
+  level thread common_scripts\_exploder::func_88E(215);
   foreach(var_03 in var_00) {
-    earthquake(0.3, 4, var_03.var_0116, 850);
+    earthquake(0.3, 4, var_03.origin, 850);
     wait(0.4);
   }
 
@@ -1226,9 +1226,9 @@ func_3BF6() {
 
 func_6E18() {
   var_00 = getEnt("move_cart_button_console", "targetname");
-  playFXOnTag(level.var_0611["zmb_com_room_fire_panel"], var_00, "tag_origin");
+  playFXOnTag(level.var_611["zmb_com_room_fire_panel"], var_00, "tag_origin");
   wait(18);
-  stopFXOnTag(level.var_0611["zmb_com_room_fire_panel"], var_00, "tag_origin");
+  stopFXOnTag(level.var_611["zmb_com_room_fire_panel"], var_00, "tag_origin");
 }
 
 func_3BF7(param_00) {
@@ -1237,10 +1237,10 @@ func_3BF7(param_00) {
     return;
   }
 
-  self.var_00CA = 1;
+  self.ignoreall = 1;
   self.var_5748 = 1;
   self.var_57E8 = 1;
-  lib_053C::func_06CE(var_01.var_0116);
+  lib_053C::func_6CE(var_01.origin);
   var_02 = gettime();
   var_03 = 0;
   for(;;) {
@@ -1250,7 +1250,7 @@ func_3BF7(param_00) {
       break;
     }
 
-    if(distance(self.var_0116, var_01.var_0116) > 16) {
+    if(distance(self.origin, var_01.origin) > 16) {
       wait(0.1);
       continue;
     }
@@ -1261,24 +1261,24 @@ func_3BF7(param_00) {
   if(!var_03) {
     self scragentsetscripted(1);
     self method_839C("anim deltas");
-    self scragentsetorientmode("face angle abs", var_01.var_001D, var_01.var_001D);
-    maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "firemanintro");
+    self scragentsetorientmode("face angle abs", var_01.angles, var_01.angles);
+    maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "firemanintro");
     thread func_3BF5();
-    var_05 = common_scripts\utility::func_A715("fireman_intro_finished", "damage");
+    var_05 = common_scripts\utility::waittill_any_return("fireman_intro_finished", "damage");
     if(var_05 == "damage") {
-      stopFXOnTag(level.var_0611["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
+      stopFXOnTag(level.var_611["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
       lib_0378::func_8D74("flamethrower_stop", "tag_flamethrower_fx");
     }
 
-    maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "firemanintro");
+    maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "firemanintro");
     self scragentsetscripted(0);
   }
 
   var_06 = common_scripts\utility::func_46B5("first_fireman_end_point", "targetname");
   if(isDefined(var_06)) {
-    lib_053C::func_06CE(var_06.var_0116);
+    lib_053C::func_6CE(var_06.origin);
     for(;;) {
-      if(distance(self.var_0116, var_06.var_0116) > 16) {
+      if(distance(self.origin, var_06.origin) > 16) {
         wait(0.1);
         continue;
       }
@@ -1287,7 +1287,7 @@ func_3BF7(param_00) {
     }
   }
 
-  self.var_00CA = 0;
+  self.ignoreall = 0;
   self.var_5748 = 0;
   self.var_57E8 = 0;
   self method_855C();
@@ -1295,12 +1295,12 @@ func_3BF7(param_00) {
 
 func_3BF5() {
   self endon("damage");
-  maps\mp\agents\_scripted_agent_anim_util::func_8415("s2_fireman_intro_flame", 0, 1);
+  maps / mp / agents / _scripted_agent_anim_util::func_8415("s2_fireman_intro_flame", 0, 1);
   wait(2.333333);
-  playFXOnTag(level.var_0611["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
+  playFXOnTag(level.var_611["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
   lib_0378::func_8D74("flamethrower_start", "tag_flamethrower_fx");
   wait(2.666667);
-  stopFXOnTag(level.var_0611["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
+  stopFXOnTag(level.var_611["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
   lib_0378::func_8D74("flamethrower_stop", "tag_flamethrower_fx");
   wait(0.3333333);
   self notify("fireman_intro_finished");
@@ -1349,7 +1349,7 @@ func_666B() {
     return 1;
   }
 
-  if(isDefined(level.var_179A) && distance2dsquared(self.var_0116, level.var_179A.var_0116) < var_00) {
+  if(isDefined(level.var_179A) && distance2dsquared(self.origin, level.var_179A.origin) < var_00) {
     return 1;
   }
 
@@ -1395,11 +1395,11 @@ func_415E(param_00) {
   }
 
   foreach(var_03 in level.var_AC1D) {
-    if(!isDefined(var_03.var_819A) || !common_scripts\utility::func_0F79(param_00, var_03.var_819A)) {
+    if(!isDefined(var_03.var_819A) || !common_scripts\utility::func_F79(param_00, var_03.var_819A)) {
       continue;
     }
 
-    var_01 = common_scripts\utility::func_0F6F(var_01, var_03);
+    var_01 = common_scripts\utility::func_F6F(var_01, var_03);
   }
 
   return var_01;

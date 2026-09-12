@@ -3,7 +3,7 @@
  * Script: maps\mp\bots\_bots_gametype_sd.gsc
 **********************************************/
 
-func_00F9() {
+main() {
   func_87A7();
   func_1ABF();
 }
@@ -46,8 +46,8 @@ func_2734(param_00) {
 func_8799() {
   level.var_1B3B = 1;
   level.var_52D4 = 3000;
-  maps\mp\bots\_bots_gametype_common::func_1ADB();
-  maps\mp\bots\_bots_util::func_1B20();
+  maps / mp / bots / _bots_gametype_common::func_1ADB();
+  maps / mp / bots / _bots_util::func_1B20();
   level.var_1ABE = [];
   level.var_1ABE["axis"] = [];
   level.var_1ABE["allies"] = [];
@@ -60,10 +60,10 @@ func_8799() {
   level.var_199D["defender"] = ::func_2C7C;
   level.var_199D["backstabber"] = ::func_14ED;
   level.var_199D["random_killer"] = ::func_7A3B;
-  var_00 = maps\mp\bots\_bots_gametype_common::func_1B1D(["_a", "_b"]);
+  var_00 = maps / mp / bots / _bots_gametype_common::func_1B1D(["_a", "_b"]);
   if(var_00) {
     foreach(var_02 in level.var_1913) {
-      var_02 thread maps\mp\bots\_bots_gametype_common::func_62EA();
+      var_02 thread maps / mp / bots / _bots_gametype_common::func_62EA();
     }
 
     thread func_1ABD();
@@ -109,10 +109,10 @@ func_1AC0() {
     level.var_52CB = function_00BA(level.var_832F.var_28D4);
   }
 
-  if(self.var_01A7 == var_00 && !isDefined(level.var_1F1B)) {
+  if(self.team == var_00 && !isDefined(level.var_1F1B)) {
     var_02 = 0;
     if(!level.var_6510) {
-      var_03 = maps\mp\bots\_bots_gametype_common::func_41FB(var_00);
+      var_03 = maps / mp / bots / _bots_gametype_common::func_41FB(var_00);
       foreach(var_05 in var_03) {
         if(!isai(var_05)) {
           var_02 = 1;
@@ -129,7 +129,7 @@ func_1AC0() {
 
   for(;;) {
     wait(randomintrange(1, 3) * 0.05);
-    if(self.var_00BC <= 0) {
+    if(self.health <= 0) {
       continue;
     }
 
@@ -142,13 +142,13 @@ func_1AC0() {
       continue;
     }
 
-    if(self.var_01A7 == var_00) {
+    if(self.team == var_00) {
       if(!level.var_6510 && isDefined(level.var_1F1B) && gettime() < level.var_1F1B && !isDefined(level.var_832F.var_2006)) {
-        if(!maps\mp\bots\_bots_util::func_1A2E(level.var_832F.var_28D4)) {
+        if(!maps / mp / bots / _bots_util::func_1A2E(level.var_832F.var_28D4)) {
           var_08 = function_00BA(level.var_832F.var_28D4);
           if(isDefined(var_08)) {
             var_09["nearest_node_to_center"] = var_08;
-            maps\mp\bots\_bots_strategy::func_1AA6(level.var_832F.var_28D4, 900, var_09);
+            maps / mp / bots / _bots_strategy::func_1AA6(level.var_832F.var_28D4, 900, var_09);
           } else {
             level.var_1F1B = gettime();
           }
@@ -161,7 +161,7 @@ func_1AC0() {
     }
 
     if(level.var_18F9 && isDefined(level.var_8330)) {
-      if(distancesquared(self.var_0116, level.var_8330.var_0116) > squared(level.var_7790 * 2)) {
+      if(distancesquared(self.origin, level.var_8330.origin) > squared(level.var_7790 * 2)) {
         if(!isDefined(self.var_2C7B)) {
           self.var_2C7B = 1;
           self botsetpathingstyle("scripted");
@@ -173,9 +173,9 @@ func_1AC0() {
     }
 
     if(level.var_18F9 && isDefined(level.var_18B5) && isDefined(level.var_8330) && self.var_7ECA != "defuser") {
-      if(!maps\mp\bots\_bots_util::func_1A2E(level.var_8330.var_0116)) {
+      if(!maps / mp / bots / _bots_util::func_1A2E(level.var_8330.origin)) {
         self method_8358();
-        maps\mp\bots\_bots_strategy::func_1AA6(level.var_8330.var_0116, level.var_7790);
+        maps / mp / bots / _bots_strategy::func_1AA6(level.var_8330.origin, level.var_7790);
       }
 
       continue;
@@ -198,8 +198,8 @@ func_18D9(param_00) {
 
 func_10F8() {
   self endon("new_role");
-  if(maps\mp\bots\_bots_util::func_1A2D()) {
-    maps\mp\bots\_bots_strategy::func_19A3();
+  if(maps / mp / bots / _bots_util::func_1A2D()) {
+    maps / mp / bots / _bots_strategy::func_19A3();
   }
 
   if(isDefined(level.var_832F) && isDefined(level.var_832F.var_2006) && isalive(level.var_832F.var_2006) && level.var_832F.var_2006 != self) {
@@ -229,8 +229,8 @@ func_10F8() {
       }
 
       if(isDefined(var_02)) {
-        self botsetscriptgoal(var_02.var_0116, 20, "critical");
-        maps\mp\bots\_bots_util::func_1B21();
+        self botsetscriptgoal(var_02.origin, 20, "critical");
+        maps / mp / bots / _bots_util::func_1B21();
         if(isDefined(level.var_832F) && !isDefined(level.var_832F.var_2006)) {
           level.var_832F maps\mp\gametypes\_gameobjects::func_86F9(self);
         }
@@ -242,7 +242,7 @@ func_10F8() {
     if(!self method_8367()) {
       var_06 = 15;
       var_07 = 32;
-      var_08 = maps\mp\bots\_bots_util::func_1AA8("BotGetClosestNavigablePoint", ::maps\mp\bots\_bots_util::func_3F03, level.var_832F.var_28D4, var_06 + var_07, self);
+      var_08 = maps / mp / bots / _bots_util::func_1AA8("BotGetClosestNavigablePoint", ::maps / mp / bots / _bots_util::func_3F03, level.var_832F.var_28D4, var_06 + var_07, self);
       if(isDefined(var_08)) {
         var_09 = self botsetscriptgoal(level.var_832F.var_28D4, 0, "critical");
         if(var_09) {
@@ -255,12 +255,12 @@ func_10F8() {
 
       var_01 = getnodesinradiussorted(level.var_832F.var_28D4, 512, 0);
       if(var_08.size > 0) {
-        self botsetscriptgoal(var_08[0].var_0116, 0, "critical");
-        maps\mp\bots\_bots_util::func_1B21();
+        self botsetscriptgoal(var_08[0].origin, 0, "critical");
+        maps / mp / bots / _bots_util::func_1B21();
       }
 
       if(isDefined(level.var_832F) && !isDefined(level.var_832F.var_2006)) {
-        var_07 = maps\mp\bots\_bots_util::func_1AA8("BotGetClosestNavigablePoint", ::maps\mp\bots\_bots_util::func_3F03, level.var_832F.var_28D4, var_05 + var_06, self);
+        var_07 = maps / mp / bots / _bots_util::func_1AA8("BotGetClosestNavigablePoint", ::maps / mp / bots / _bots_util::func_3F03, level.var_832F.var_28D4, var_05 + var_06, self);
         if(!isDefined(var_07)) {
           level.var_832F maps\mp\gametypes\_gameobjects::func_86F9(self);
           return;
@@ -294,24 +294,24 @@ func_10F8() {
   self method_8358();
   if(level.var_115F == "rush") {
     self botsetpathingstyle("scripted");
-    var_0B = maps\mp\bots\_bots_gametype_common::func_40DF(var_0A, 1);
-    self botsetscriptgoal(var_0B.var_0116, 0, "critical");
+    var_0B = maps / mp / bots / _bots_gametype_common::func_40DF(var_0A, 1);
+    self botsetscriptgoal(var_0B.origin, 0, "critical");
   }
 
-  var_0C = maps\mp\bots\_bots_util::func_1B21();
+  var_0C = maps / mp / bots / _bots_util::func_1B21();
   if(var_0C == "goal") {
     var_0D = func_4308() - gettime();
     var_0E = var_0D - level.var_7078 * 2 * 1000;
     var_0F = gettime() + var_0E;
     if(var_0E > 0) {
-      maps\mp\bots\_bots_util::func_1B22(var_0E);
+      maps / mp / bots / _bots_util::func_1B22(var_0E);
     }
 
     var_10 = gettime() >= var_0F;
-    var_11 = maps\mp\bots\_bots_gametype_common::func_1911(level.var_7078 + 2, "bomb_planted", var_10);
+    var_11 = maps / mp / bots / _bots_gametype_common::func_1911(level.var_7078 + 2, "bomb_planted", var_10);
     self method_8358();
     if(var_11) {
-      maps\mp\bots\_bots_strategy::func_19BC();
+      maps / mp / bots / _bots_strategy::func_19BC();
       func_1AD7("defend_planted_bomb");
       return;
     }
@@ -353,9 +353,9 @@ func_23CF() {
       if(!isDefined(self.var_84E9)) {
         if(!level.var_6510) {
           var_00["nearest_node_to_center"] = level.var_52CB;
-          maps\mp\bots\_bots_strategy::func_1AA6(level.var_52CA, 900, var_00);
+          maps / mp / bots / _bots_strategy::func_1AA6(level.var_52CA, 900, var_00);
           wait(randomfloatrange(0, 4));
-          maps\mp\bots\_bots_strategy::func_19A3();
+          maps / mp / bots / _bots_strategy::func_19A3();
         }
 
         self.var_84E9 = 1;
@@ -370,14 +370,14 @@ func_23CF() {
       } else if(isDefined(level.var_18D1)) {
         var_01 = level.var_18D1;
       } else {
-        var_01 = maps\mp\bots\_bots_gametype_common::func_3B69(level.var_10F6);
+        var_01 = maps / mp / bots / _bots_gametype_common::func_3B69(level.var_10F6);
       }
 
-      if(!maps\mp\bots\_bots_util::func_1A2E(var_01.var_28D4)) {
+      if(!maps / mp / bots / _bots_util::func_1A2E(var_01.var_28D4)) {
         var_01["min_goal_time"] = 2;
         var_01["max_goal_time"] = 4;
         var_01["override_origin_node"] = common_scripts\utility::func_7A33(var_01.var_1B49);
-        maps\mp\bots\_bots_strategy::func_1AA6(var_01.var_28D4, level.var_7790, var_01);
+        maps / mp / bots / _bots_strategy::func_1AA6(var_01.var_28D4, level.var_7790, var_01);
         return;
       }
     }
@@ -391,9 +391,9 @@ func_2C3B() {
       func_2F3A();
     }
 
-    if(!maps\mp\bots\_bots_util::func_1A2E(level.var_8330.var_0116)) {
+    if(!maps / mp / bots / _bots_util::func_1A2E(level.var_8330.origin)) {
       var_00["score_flags"] = "strongly_avoid_center";
-      maps\mp\bots\_bots_strategy::func_1AA6(level.var_8330.var_0116, level.var_7790, var_00);
+      maps / mp / bots / _bots_strategy::func_1AA6(level.var_8330.origin, level.var_7790, var_00);
     }
   }
 }
@@ -409,8 +409,8 @@ func_18B6() {
     return;
   }
 
-  var_01 = common_scripts\utility::func_40B0(level.var_8330.var_0116, var_00.var_1B49);
-  var_02 = (level.var_8330.var_0116[0], level.var_8330.var_0116[1], var_01[0].var_0116[2]);
+  var_01 = common_scripts\utility::func_40B0(level.var_8330.origin, var_00.var_1B49);
+  var_02 = (level.var_8330.origin[0], level.var_8330.origin[1], var_01[0].origin[2]);
   if(self.var_2CA5 <= 1) {
     var_03 = func_2056(var_02, undefined);
   } else {
@@ -422,7 +422,7 @@ func_18B6() {
     return;
   }
 
-  var_04 = maps\mp\bots\_bots_util::func_1B21();
+  var_04 = maps / mp / bots / _bots_util::func_1B21();
   if(var_04 == "bad_path") {
     self.var_2CA5++;
     if(self.var_2CA5 >= 4) {
@@ -437,11 +437,11 @@ func_18B6() {
             break;
           }
         } else {
-          self botsetscriptgoal(var_06[var_07].var_0116, 20, "critical");
+          self botsetscriptgoal(var_05[var_06].origin, 20, "critical");
         }
 
-        var_05 = maps\mp\bots\_bots_util::func_1B21();
-        if(var_05 == "bad_path") {
+        var_04 = maps / mp / bots / _bots_util::func_1B21();
+        if(var_04 == "bad_path") {
           self.var_2CA5++;
           continue;
         }
@@ -451,35 +451,35 @@ func_18B6() {
     }
   }
 
-  if(var_06 == "goal") {
+  if(var_04 == "goal") {
     var_08 = func_4308() - gettime();
     var_09 = var_08 - level.var_2CA9 * 2 * 1000;
     var_0A = gettime() + var_09;
     if(var_09 > 0) {
-      maps\mp\bots\_bots_util::func_1B22(var_09);
+      maps / mp / bots / _bots_util::func_1B22(var_09);
     }
 
     var_0B = gettime() >= var_0A;
-    var_0C = level.var_8330.var_0116[2] - self.var_0116[2];
-    var_0D = maps\mp\bots\_bots_gametype_common::func_1911(level.var_2CA9 + 2, "bomb_defused", var_0B, var_0C > 40);
+    var_0C = level.var_8330.origin[2] - self.origin[2];
+    var_0D = maps / mp / bots / _bots_gametype_common::func_1911(level.var_2CA9 + 2, "bomb_defused", var_0B, var_0C > 40);
     if(!var_0D && self.var_2CA5 >= 4) {
       self.var_2CA5++;
     }
 
     self method_8358();
-    maps\mp\bots\_bots_strategy::func_19BC();
+    maps / mp / bots / _bots_strategy::func_19BC();
   }
 }
 
 func_551A() {
   self endon("new_role");
-  if(maps\mp\bots\_bots_util::func_1A2D()) {
-    maps\mp\bots\_bots_strategy::func_19A3();
+  if(maps / mp / bots / _bots_util::func_1A2D()) {
+    maps / mp / bots / _bots_strategy::func_19A3();
   }
 
-  var_00 = maps\mp\bots\_bots_gametype_common::func_3B69(self);
+  var_00 = maps / mp / bots / _bots_gametype_common::func_3B69(self);
   self botsetscriptgoalnode(common_scripts\utility::func_7A33(var_00.var_1B49), "critical");
-  var_01 = maps\mp\bots\_bots_util::func_1B21();
+  var_01 = maps / mp / bots / _bots_util::func_1B21();
   if(var_01 == "goal") {
     wait(2);
     func_1AD7(self.var_76C6);
@@ -490,32 +490,32 @@ func_1ECB() {
   self endon("new_role");
   if(isDefined(level.var_832F.var_2006)) {
     if(self.var_76C6 == "defender") {
-      self.var_2C75 = maps\mp\bots\_bots_gametype_common::func_3B69(self);
+      self.var_2C75 = maps / mp / bots / _bots_gametype_common::func_3B69(self);
     }
 
     func_1AD7(self.var_76C6);
     return;
   }
 
-  if(!maps\mp\bots\_bots_util::func_1A2E(level.var_832F.var_28D4)) {
+  if(!maps / mp / bots / _bots_util::func_1A2E(level.var_832F.var_28D4)) {
     var_00["nearest_node_to_center"] = level.var_832F.var_6639;
-    maps\mp\bots\_bots_strategy::func_1AA6(level.var_832F.var_28D4, level.var_7790, var_00);
+    maps / mp / bots / _bots_strategy::func_1AA6(level.var_832F.var_28D4, level.var_7790, var_00);
   }
 }
 
 func_2C7C() {
   self endon("new_role");
-  if(!maps\mp\bots\_bots_util::func_1A2E(self.var_2C75.var_28D4)) {
+  if(!maps / mp / bots / _bots_util::func_1A2E(self.var_2C75.var_28D4)) {
     var_00["score_flags"] = "strict_los";
     var_00["override_origin_node"] = common_scripts\utility::func_7A33(self.var_2C75.var_1B49);
-    maps\mp\bots\_bots_strategy::func_1AA6(self.var_2C75.var_28D4, level.var_7790, var_00);
+    maps / mp / bots / _bots_strategy::func_1AA6(self.var_2C75.var_28D4, level.var_7790, var_00);
   }
 }
 
 func_14ED() {
   self endon("new_role");
-  if(maps\mp\bots\_bots_util::func_1A2D()) {
-    maps\mp\bots\_bots_strategy::func_19A3();
+  if(maps / mp / bots / _bots_util::func_1A2D()) {
+    maps / mp / bots / _bots_strategy::func_19A3();
   }
 
   if(!isDefined(self.var_14EC)) {
@@ -548,7 +548,7 @@ func_14ED() {
     self botsetpathingstyle("scripted");
     var_09 = self botsetscriptgoalnode(var_04, "guard");
     if(var_09) {
-      var_0A = maps\mp\bots\_bots_util::func_1B21();
+      var_0A = maps / mp / bots / _bots_util::func_1B21();
       if(var_0A == "goal") {
         wait(randomfloatrange(1, 4));
         self.var_14EC = "2_move_to_enemy_spawn";
@@ -560,9 +560,9 @@ func_14ED() {
     var_0B = lib_050D::func_46A0("allies");
     var_0C = common_scripts\utility::func_7A33(var_0B);
     self botsetpathingstyle("scripted");
-    var_09 = self botsetscriptgoal(var_0C.var_0116, 250, "guard");
+    var_09 = self botsetscriptgoal(var_0C.origin, 250, "guard");
     if(var_09) {
-      var_0A = maps\mp\bots\_bots_util::func_1B21();
+      var_0A = maps / mp / bots / _bots_util::func_1B21();
       if(var_0A == "goal") {
         self.var_14EC = "3_move_to_bombzone";
       }
@@ -575,9 +575,9 @@ func_14ED() {
     }
 
     self botsetpathingstyle(undefined);
-    var_09 = self botsetscriptgoal(common_scripts\utility::func_7A33(level.var_1913[self.var_1910].var_1B49).var_0116, 160, "objective");
+    var_09 = self botsetscriptgoal(common_scripts\utility::func_7A33(level.var_1913[self.var_1910].var_1B49).origin, 160, "objective");
     if(var_09) {
-      var_0A = maps\mp\bots\_bots_util::func_1B21();
+      var_0A = maps / mp / bots / _bots_util::func_1B21();
       if(var_0A == "goal") {
         self method_8358();
         self.var_14EC = "2_move_to_enemy_spawn";
@@ -590,24 +590,24 @@ func_14ED() {
 
 func_7A3B() {
   self endon("new_role");
-  if(maps\mp\bots\_bots_util::func_1A2D()) {
-    maps\mp\bots\_bots_strategy::func_19A3();
+  if(maps / mp / bots / _bots_util::func_1A2D()) {
+    maps / mp / bots / _bots_strategy::func_19A3();
   }
 
   self[[self.var_6F7F]]();
 }
 
 func_84A4() {
-  if(!isDefined(self.var_0CB2)) {
+  if(!isDefined(self.var_CB2)) {
     self botsetflag("force_sprint", 1);
-    self.var_0CB2 = 1;
+    self.var_CB2 = 1;
   }
 }
 
 func_2F3A() {
-  if(isDefined(self.var_0CB2)) {
+  if(isDefined(self.var_CB2)) {
     self botsetflag("force_sprint", 0);
-    self.var_0CB2 = undefined;
+    self.var_CB2 = undefined;
   }
 }
 
@@ -621,9 +621,9 @@ func_8578() {
 func_2056(param_00, param_01) {
   var_02 = level.var_1FB1;
   var_03["entrance_points_index"] = param_01;
-  maps\mp\bots\_bots_strategy::func_196A(param_00, var_02, var_03);
+  maps / mp / bots / _bots_strategy::func_196A(param_00, var_02, var_03);
   wait 0.05;
-  while(distancesquared(self.var_0116, param_00) > var_02 * var_02 && maps\mp\bots\_bots_util::func_1A2D()) {
+  while(distancesquared(self.origin, param_00) > var_02 * var_02 && maps / mp / bots / _bots_util::func_1A2D()) {
     if(func_4308() - gettime() < 20000) {
       func_8578();
       func_84A4();
@@ -633,15 +633,15 @@ func_2056(param_00, param_01) {
     wait 0.05;
   }
 
-  if(maps\mp\bots\_bots_util::func_1A2D()) {
-    maps\mp\bots\_bots_strategy::func_19A3();
+  if(maps / mp / bots / _bots_util::func_1A2D()) {
+    maps / mp / bots / _bots_strategy::func_19A3();
   }
 
   return self botsetscriptgoal(param_00, 20, "critical");
 }
 
 func_67F5(param_00) {
-  var_01 = maps\mp\bots\_bots_gametype_common::func_4065(param_00);
+  var_01 = maps / mp / bots / _bots_gametype_common::func_4065(param_00);
   foreach(var_03 in var_01) {
     if(isDefined(var_03.var_7ECA)) {
       var_03 func_1AD7("investigate_someone_using_bomb");
@@ -658,13 +658,13 @@ func_8B7D(param_00) {
     }
 
     var_03 = 0;
-    var_04 = common_scripts\utility::func_416F(self.var_01A7);
-    foreach(var_06 in level.var_744A) {
-      if(!isDefined(var_06.var_01A7)) {
+    var_04 = common_scripts\utility::func_416F(self.team);
+    foreach(var_06 in level.players) {
+      if(!isDefined(var_06.team)) {
         continue;
       }
 
-      if(isalive(var_06) && var_06.var_01A7 == var_04) {
+      if(isalive(var_06) && var_06.team == var_04) {
         var_03 = 1;
       }
     }
@@ -672,23 +672,23 @@ func_8B7D(param_00) {
     return var_03;
   }
 
-  return distancesquared(self.var_0116, self.var_19A7) <= var_02 && self method_8377();
+  return distancesquared(self.origin, self.var_19A7) <= var_07 && self method_8377();
 }
 
 func_42B6(param_00) {
   var_01 = [];
-  var_02 = maps\mp\bots\_bots_gametype_common::func_41FB(game["defenders"]);
+  var_02 = maps / mp / bots / _bots_gametype_common::func_41FB(game["defenders"]);
   foreach(var_04 in var_02) {
     if(isai(var_04) && isDefined(var_04.var_7ECA) && var_04.var_7ECA == "defender") {
       if(isDefined(var_04.var_2C75) && var_04.var_2C75 == param_00) {
-        var_01 = common_scripts\utility::func_0F6F(var_01, var_04);
+        var_01 = common_scripts\utility::func_F6F(var_01, var_04);
       }
 
       continue;
     }
 
-    if(distancesquared(var_04.var_0116, param_00.var_28D4) < level.var_7790 * level.var_7790) {
-      var_01 = common_scripts\utility::func_0F6F(var_01, var_04);
+    if(distancesquared(var_04.origin, param_00.var_28D4) < level.var_7790 * level.var_7790) {
+      var_01 = common_scripts\utility::func_F6F(var_01, var_04);
     }
   }
 
@@ -698,7 +698,7 @@ func_42B6(param_00) {
 func_3B82() {
   if(isDefined(level.var_99C0)) {
     foreach(var_01 in level.var_1913) {
-      if(distancesquared(level.var_99C0.var_0116, var_01.var_28D4) < 90000) {
+      if(distancesquared(level.var_99C0.origin, var_01.var_28D4) < 90000) {
         return var_01;
       }
     }
@@ -710,7 +710,7 @@ func_3B82() {
 func_4343(param_00) {
   param_00 = "_" + tolower(param_00);
   for(var_01 = 0; var_01 < level.var_1913.size; var_01++) {
-    if(level.var_1913[var_01].var_00E5 == param_00) {
+    if(level.var_1913[var_01].label == param_00) {
       return level.var_1913[var_01];
     }
   }
@@ -719,14 +719,14 @@ func_4343(param_00) {
 func_18E7() {
   self endon("stopped_being_bomb_carrier");
   self endon("new_role");
-  common_scripts\utility::func_A70A("death", "disconnect");
+  common_scripts\utility::waittill_any("death", "disconnect");
   level.var_10F6 = undefined;
   level.var_5B15 = gettime();
   if(isDefined(self)) {
     self.var_7ECA = undefined;
   }
 
-  var_00 = maps\mp\bots\_bots_gametype_common::func_41FB(game["attackers"], 1);
+  var_00 = maps / mp / bots / _bots_gametype_common::func_41FB(game["attackers"], 1);
   func_3DE4(var_00, undefined);
 }
 
@@ -752,7 +752,7 @@ func_8532() {
   }
 
   if(isai(self)) {
-    maps\mp\bots\_bots_strategy::func_19B0();
+    maps / mp / bots / _bots_strategy::func_19B0();
     if(level.var_115F == "rush" && self botgetdifficultysetting("strategyLevel") > 0) {
       func_84A4();
     }
@@ -760,7 +760,7 @@ func_8532() {
 }
 
 func_52E9() {
-  if(self.var_01A7 == game["attackers"]) {
+  if(self.team == game["attackers"]) {
     if(level.var_18F9) {
       func_1AD7("defend_planted_bomb");
       return;
@@ -784,7 +784,7 @@ func_52E9() {
   var_02 = level.var_1A92[self.var_6F7D];
   var_03 = self botgetdifficultysetting("strategyLevel");
   if(var_02 == "active") {
-    if(!isDefined(self.var_7ECA) && level.var_0C10 && var_03 > 0) {
+    if(!isDefined(self.var_7ECA) && level.var_C10 && var_03 > 0) {
       if(var_00.size == 0) {
         func_1AD7("backstabber");
       } else {
@@ -812,20 +812,20 @@ func_52E9() {
 
     if(!isDefined(self.var_7ECA)) {
       var_09 = randomint(4);
-      if(var_09 == 3 && level.var_0C18 && var_03 > 0) {
+      if(var_09 == 3 && level.var_C18 && var_03 > 0) {
         func_1AD7("random_killer");
-      } else if(var_09 == 2 && level.var_0C10 && var_03 > 0) {
+      } else if(var_09 == 2 && level.var_C10 && var_03 > 0) {
         func_1AD7("backstabber");
       } else {
         func_1AD7("defender");
       }
     }
-  } else if(var_03 == "stationary") {
+  } else if(var_02 == "stationary") {
     if(!isDefined(self.var_7ECA)) {
-      if(var_02.size < 4) {
+      if(var_01.size < 4) {
         func_1AD7("defender");
       } else {
-        foreach(var_0B in var_02) {
+        foreach(var_0B in var_01) {
           var_0C = level.var_1A92[var_0B.var_6F7D];
           if(var_0C == "active") {
             func_1AD7("defender");
@@ -836,8 +836,8 @@ func_52E9() {
       }
     }
 
-    if(!isDefined(self.var_7ECA) && level.var_0C10 && var_09 > 0) {
-      if(var_01.size == 0) {
+    if(!isDefined(self.var_7ECA) && level.var_C10 && var_03 > 0) {
+      if(var_00.size == 0) {
         func_1AD7("backstabber");
       }
     }
@@ -849,8 +849,8 @@ func_52E9() {
 
   if(self.var_7ECA == "defender") {
     var_0E = level.var_1913;
-    if(func_4B38(self.var_01A7)) {
-      var_0E = func_427A(self.var_01A7);
+    if(func_4B38(self.team)) {
+      var_0E = func_427A(self.team);
     }
 
     if(var_0E.size == 1) {
@@ -877,7 +877,7 @@ func_52E9() {
 
 func_1AD7(param_00) {
   if(isai(self)) {
-    maps\mp\bots\_bots_strategy::func_19A3();
+    maps / mp / bots / _bots_strategy::func_19A3();
     self botsetpathingstyle(undefined);
   }
 
@@ -929,19 +929,19 @@ func_1ABD() {
   level notify("bot_sd_ai_director_update");
   level endon("bot_sd_ai_director_update");
   level endon("game_ended");
-  level.var_0C10 = randomint(3) <= 1;
-  level.var_0C18 = randomint(3) <= 1;
+  level.var_C10 = randomint(3) <= 1;
+  level.var_C18 = randomint(3) <= 1;
   level.var_115F = "rush";
   level.var_7790 = 725;
   level.var_1FB1 = 140;
   for(;;) {
     if(isDefined(level.var_832F) && isDefined(level.var_832F.var_2006) && !isai(level.var_832F.var_2006)) {
-      level.var_18D1 = maps\mp\bots\_bots_gametype_common::func_3B69(level.var_832F.var_2006);
+      level.var_18D1 = maps / mp / bots / _bots_gametype_common::func_3B69(level.var_832F.var_2006);
     }
 
     var_00 = 0;
     if(!level.var_18F9) {
-      var_01 = maps\mp\bots\_bots_gametype_common::func_41FB(game["attackers"]);
+      var_01 = maps / mp / bots / _bots_gametype_common::func_41FB(game["attackers"]);
       foreach(var_03 in var_01) {
         if(var_03.var_568D) {
           level.var_1F1B = gettime();
@@ -962,14 +962,14 @@ func_1ABD() {
         if(isDefined(var_05)) {
           level.var_832F.var_6639 = var_05;
           var_06 = 0;
-          var_07 = maps\mp\bots\_bots_gametype_common::func_41FB(game["defenders"], 1);
+          var_07 = maps / mp / bots / _bots_gametype_common::func_41FB(game["defenders"], 1);
           foreach(var_09 in var_07) {
             var_0A = var_09 getnearestnode();
             var_0B = var_09 botgetdifficultysetting("strategyLevel");
             if(var_0B > 0 && var_09.var_7ECA != "camp_bomb" && isDefined(var_0A) && function_01F4(var_05, var_0A, 1)) {
               var_0C = var_09 method_8375();
-              if(common_scripts\utility::func_AA4A(var_09.var_0116, var_09 getangles(), level.var_832F.var_28D4, var_0C)) {
-                if(var_0B >= 2 || distancesquared(var_09.var_0116, level.var_832F.var_28D4) < squared(700)) {
+              if(common_scripts\utility::func_AA4A(var_09.origin, var_09 getplayerangles(), level.var_832F.var_28D4, var_0C)) {
+                if(var_0B >= 2 || distancesquared(var_09.origin, level.var_832F.var_28D4) < squared(700)) {
                   var_06 = 1;
                   break;
                 }
@@ -1000,13 +1000,13 @@ func_1ABD() {
             var_15 = [];
             foreach(var_03 in var_13) {
               if(isai(var_03)) {
-                var_15 = common_scripts\utility::func_0F6F(var_15, var_03);
+                var_15 = common_scripts\utility::func_F6F(var_15, var_03);
               }
             }
 
             if(var_15.size > 0) {
               var_18 = common_scripts\utility::func_7A33(var_15);
-              var_18 maps\mp\bots\_bots_strategy::func_19A3();
+              var_18 maps / mp / bots / _bots_strategy::func_19A3();
               var_18.var_2C75 = var_10[var_12];
             }
           }
@@ -1031,17 +1031,17 @@ func_1ABD() {
         }
 
         if(var_19.size > 0 && isDefined(level.var_8330)) {
-          var_1D = common_scripts\utility::func_40B0(level.var_8330.var_0116, var_19);
+          var_1D = common_scripts\utility::func_40B0(level.var_8330.origin, var_19);
           level.var_18B5 = var_1D[0];
           level.var_18B5 func_1AD7("defuser");
-          level.var_18B5 maps\mp\bots\_bots_strategy::func_19B0();
+          level.var_18B5 maps / mp / bots / _bots_strategy::func_19B0();
           level.var_18B5 thread func_2CA6();
         }
       }
 
       if(!isDefined(level.var_8327)) {
         level.var_8327 = 1;
-        var_1E = maps\mp\bots\_bots_gametype_common::func_41FB(game["attackers"]);
+        var_1E = maps / mp / bots / _bots_gametype_common::func_41FB(game["attackers"]);
         foreach(var_03 in var_1E) {
           if(isDefined(var_03.var_7ECA)) {
             if(var_03.var_7ECA == "atk_bomber") {
@@ -1062,6 +1062,6 @@ func_1ABD() {
 }
 
 func_2CA6() {
-  common_scripts\utility::func_A70A("death", "disconnect");
+  common_scripts\utility::waittill_any("death", "disconnect");
   level.var_18B5 = undefined;
 }

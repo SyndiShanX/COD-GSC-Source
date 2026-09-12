@@ -25,7 +25,7 @@ do_damage_propeller(param_00, param_01) {
   for(;;) {
     param_00 waittill("trigger", var_02);
     if(isPlayer(var_02)) {
-      var_02 dodamage(10, self.var_116, param_00, param_00, "MOD_EXPLOSIVE", "trap_zm_mp");
+      var_02 dodamage(10, self.origin, param_00, param_00, "MOD_EXPLOSIVE", "trap_zm_mp");
     } else {
       var_02 toss_ragdoll(param_01, param_00);
       param_00 lib_0378::func_8D74("trap_prop_damage");
@@ -54,7 +54,7 @@ do_ground_blood(param_00, param_01) {
 
 toss_ragdoll(param_00, param_01) {
   var_02 = self gettagorigin("J_Head");
-  var_03 = vectorNormalize(var_02 - param_00.var_116);
+  var_03 = vectorNormalize(var_02 - param_00.origin);
   var_04 = ["head", "neck"];
   var_05 = common_scripts\utility::func_7A33(var_04);
   lib_0547::func_5A85(var_05, 500 * var_03, param_01, "trap_zm_mp");

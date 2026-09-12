@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\weapons\_zombie_weapon_artillery_paper.gsc
 **********************************************************************/
 
-func_00D5() {}
+init() {}
 
 flourish_map(param_00) {
   thread preview_map(param_00);
@@ -13,17 +13,17 @@ use_map() {
   self allowjump(0);
   self method_8113(0);
   self method_8114(0);
-  self method_81E1(0);
+  self setmovespeedscale(0);
   var_00 = self getcurrentweapon();
   lib_0586::func_78C("papermap_zm");
   lib_0586::func_78E("papermap_zm");
-  self method_8326();
+  self disableweaponswitch();
   var_01 = wait_for_user_input();
-  self method_8327();
+  self enableweaponswitch();
   lib_0586::func_78E(var_00);
   wait(1);
   lib_0586::func_790("papermap_zm");
-  self method_81E1(1);
+  self setmovespeedscale(1);
   self allowjump(1);
   self method_8113(1);
   self method_8114(1);
@@ -58,11 +58,11 @@ preview_map(param_00) {
   var_01 = self getcurrentweapon();
   lib_0586::func_78C(param_00);
   lib_0586::func_78E(param_00);
-  self method_8326();
+  self disableweaponswitch();
   wait(1.5);
   iprintlnbold("DIALOG: We\'ll need to check out the sub pens first.");
   wait(1.5);
-  self method_8327();
+  self enableweaponswitch();
   lib_0586::func_78E(var_01);
   wait(1);
   lib_0586::func_790(param_00);

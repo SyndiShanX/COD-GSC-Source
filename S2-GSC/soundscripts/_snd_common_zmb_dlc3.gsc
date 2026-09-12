@@ -85,7 +85,7 @@ dlc3_giest_bomb_revive(param_00, param_01) {
 dlc3_giest_bomb_arm(param_00) {
   param_00.giest_bomb_armed_strt = lib_0380::func_6844("zmb_geistbomb_strt", undefined, param_00.var_8203);
   param_00.giest_bomb_armed_lp = lib_0380::func_6844("zmb_geistbomb_activated_lp", undefined, param_00.var_8203, 0.1);
-  param_00 common_scripts\utility::knock_off_battery("geist_bomb_cleanup", "geist_bomb_end_priming");
+  param_00 common_scripts\utility::waittill_any("geist_bomb_cleanup", "geist_bomb_end_priming");
   lib_0380::func_6850(param_00.giest_bomb_armed_lp, 0.3);
   param_00.giest_bomb_armed_end = lib_0380::func_6844("zmb_geistbomb_end", undefined, param_00.var_8203);
 }
@@ -116,12 +116,12 @@ dlc3_carepackage_parachute() {
   var_03 = lib_0380::func_6844("ks_crpkg_parachute_lp", undefined, var_00, var_01);
   var_00 waittill("detach");
   lib_0380::func_6850(var_03, var_02);
-  lib_0380::func_6842("ks_crpkg_parachute_release", undefined, var_00.var_116);
+  lib_0380::func_6842("ks_crpkg_parachute_release", undefined, var_00.origin);
 }
 
 dlc3_carepackage_firstimpact() {
   var_00 = self;
-  if(self.var_1A7 == "allies") {
+  if(self.team == "allies") {
     lib_0380::func_6844("mp_ks_crpkg_imp_allies", undefined, self);
     return;
   }
@@ -133,7 +133,7 @@ dlc3_player_repair_start(param_00, param_01) {
   var_02 = self;
   wait(1.2);
   if(param_00 == "war_wrench_assemble_mp") {
-    level.var_11CB.repair_wrench_snd = lib_0380::func_2889("buildable_barbed_wire_wrench", undefined, param_01.var_116);
+    level.var_11CB.repair_wrench_snd = lib_0380::func_2889("buildable_barbed_wire_wrench", undefined, param_01.origin);
   }
 }
 
@@ -147,7 +147,7 @@ dlc3_player_repair_stop(param_00) {
 dlc3_start_escape_music() {
   if(!isDefined(level.var_11CB.escape_music_playing)) {
     level.var_11CB.escape_music_playing = 1;
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       var_01 lib_0366::snd_set_auto_wave_music_enabled(0);
       var_01 notify("kill_dlc3_wave_mus_switcher");
       var_01 lib_0366::func_8E31("escape_01", 0.25, 3);
@@ -159,18 +159,18 @@ dlc3_stop_escape_music(param_00) {
   var_01 = lib_0378::func_8D49(0, param_00);
   if(isDefined(level.var_11CB.escape_music_playing)) {
     var_02 = 10;
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       var_04 thread dlc3_play_escape_complete_stinger(var_02);
     }
 
     wait(var_02);
     wait(var_01);
     var_06 = 10;
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       var_04 lib_0366::func_8E32(var_06);
     }
 
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       var_04 lib_0366::snd_set_auto_wave_music_enabled(1);
       var_04 thread dlc3_wave_mus_switcher();
     }
@@ -196,7 +196,7 @@ dlc3_fireman_enable_shield(param_00) {
     wait 0.05;
   }
 
-  lib_0380::func_6842("dlc3_fireman_shield_begin", undefined, param_00.var_116);
+  lib_0380::func_6842("dlc3_fireman_shield_begin", undefined, param_00.origin);
   param_00.aud_fireman_shield_loop = lib_0380::func_6846("dlc3_fireman_shield_lp", undefined, param_00, 0.5, 1, 2);
 }
 
@@ -204,7 +204,7 @@ dlc3_fireman_disable_shield(param_00) {
   if(isDefined(param_00)) {
     lib_0380::func_6850(param_00.aud_fireman_shield_loop, 2);
     param_00.aud_fireman_shield_loop = undefined;
-    lib_0380::func_6842("dlc3_fireman_shield_end", undefined, param_00.var_116);
+    lib_0380::func_6842("dlc3_fireman_shield_end", undefined, param_00.origin);
   }
 }
 
@@ -345,7 +345,7 @@ dlc3_bob_engine(param_00) {
 dlc_handle_bob_spawned_music() {
   if(!isDefined(level.var_11CB.bob_music_playing) && !isDefined(level.var_11CB.bob_is_dead)) {
     level.var_11CB.bob_music_playing = 1;
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       var_01 lib_0366::snd_set_auto_wave_music_enabled(0);
       var_01 notify("kill_wave_mus_switcher");
       var_01 lib_0366::func_8E31("bob_fight", 0.25, 3);
@@ -356,7 +356,7 @@ dlc_handle_bob_spawned_music() {
 dlc_handle_bob_killed_music() {
   level.var_11CB.bob_music_playing = undefined;
   level.var_11CB.bob_is_dead = 1;
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 thread dlc_play_boss_killed_stinger();
   }
 }
@@ -511,7 +511,7 @@ dlc3_wave_mus_switcher() {
   var_08 = 0;
   var_09 = 0;
   var_0A = 1;
-  var_0B = var_00.var_116;
+  var_0B = var_00.origin;
   var_0C = 1;
   var_0D = 6;
   var_0E = 14;
@@ -526,8 +526,8 @@ dlc3_wave_mus_switcher() {
 
     var_11 = gettime() - var_06;
     var_12 = var_00 lib_0366::func_8E14();
-    var_13 = var_00.var_116 != var_0B;
-    var_0B = var_00.var_116;
+    var_13 = var_00.origin != var_0B;
+    var_0B = var_00.origin;
     var_14 = var_04;
     if(var_13) {
       if(!var_0A) {

@@ -3,12 +3,12 @@
  * Script: maps\mp\mp_zombie_house_lighting.gsc
 ************************************************/
 
-func_00F9() {
+main() {
   func_84F8();
-  thread func_6B82();
+  thread onplayerspawned();
 }
 
-func_6B82() {
+onplayerspawned() {
   for(;;) {
     level waittill("player_spawned", var_00);
     var_00 thread setplayerlightset();
@@ -36,50 +36,50 @@ func_84F8() {
 func_6504(param_00, param_01) {
   if(!isDefined(self.var_A2BF)) {
     self.var_A2BF = newhudelem();
-    self.var_A2BF.maxsightdistsqrd = 0;
-    self.var_A2BF.var_1D7 = 0;
+    self.var_A2BF.x = 0;
+    self.var_A2BF.y = 0;
     self.var_A2BF setshader(param_01, 640, 480);
-    self.var_A2BF.accuracy = "left";
-    self.var_A2BF.var_11 = "top";
-    self.var_A2BF.var_C6 = "fullscreen";
-    self.var_A2BF.var_1CA = "fullscreen";
-    self.var_A2BF.var_18 = param_00;
+    self.var_A2BF.alignx = "left";
+    self.var_A2BF.aligny = "top";
+    self.var_A2BF.horzalign = "fullscreen";
+    self.var_A2BF.vertalign = "fullscreen";
+    self.var_A2BF.alpha = param_00;
   }
 
-  if(isDefined(self.var_A2BF) && self.var_A2BF.var_18 > 0 && param_00 == 0) {
+  if(isDefined(self.var_A2BF) && self.var_A2BF.alpha > 0 && param_00 == 0) {
     self.var_A2BF setshader(param_01, 640, 480);
-    self.var_A2BF.var_18 = 0;
+    self.var_A2BF.alpha = 0;
   }
 
-  if(isDefined(self.var_A2BF) && self.var_A2BF.var_18 < 1 && param_00 == 1) {
+  if(isDefined(self.var_A2BF) && self.var_A2BF.alpha < 1 && param_00 == 1) {
     self.var_A2BF setshader(param_01, 640, 480);
-    self.var_A2BF.var_18 = 1;
+    self.var_A2BF.alpha = 1;
   }
 }
 
 func_80E4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
   var_08 = newhudelem();
-  var_08.maxsightdistsqrd = 0;
-  var_08.var_1D7 = 0;
+  var_08.x = 0;
+  var_08.y = 0;
   var_08.var_910A = 1;
-  var_08.accuracy = "left";
-  var_08.var_11 = "top";
-  var_08.ignoreme = 1;
-  var_08.var_A0 = 0;
-  var_08.var_C6 = "fullscreen";
-  var_08.var_1CA = "fullscreen";
-  var_08.var_18 = param_04;
+  var_08.alignx = "left";
+  var_08.aligny = "top";
+  var_08.sort = 1;
+  var_08.foreground = 0;
+  var_08.horzalign = "fullscreen";
+  var_08.vertalign = "fullscreen";
+  var_08.alpha = param_04;
   var_08 thread func_236B();
   if(isDefined(param_05)) {
-    var_08.maxsightdistsqrd = param_05;
+    var_08.x = param_05;
   }
 
   if(isDefined(param_06)) {
-    var_08.var_1D7 = param_06;
+    var_08.y = param_06;
   }
 
   if(isDefined(param_07)) {
-    var_08.ignoreme = param_07;
+    var_08.sort = param_07;
   }
 
   if(isarray(param_01)) {
@@ -91,7 +91,7 @@ func_80E4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   if(param_00 > 0) {
-    var_08.var_18 = 0;
+    var_08.alpha = 0;
     var_0C = 1;
     if(isDefined(param_02)) {
       var_0C = param_02;
@@ -112,25 +112,25 @@ func_80E4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       var_10 = 0;
       var_11 = var_0E / var_0C / var_0F;
       while(var_10 < var_0E) {
-        var_08.var_18 = var_10;
+        var_08.alpha = var_10;
         var_10 = var_10 + var_11;
         wait(var_0F);
       }
     }
 
-    var_08.var_18 = var_0E;
+    var_08.alpha = var_0E;
     wait(param_00 - var_0C + var_0D);
     if(var_0D > 0) {
       var_10 = var_0E;
       var_12 = var_0E / var_0D / var_0F;
       while(var_10 > 0) {
-        var_08.var_18 = var_10;
+        var_08.alpha = var_10;
         var_10 = var_10 - var_12;
         wait(var_0F);
       }
     }
 
-    var_08.var_18 = 0;
+    var_08.alpha = 0;
     var_08 destroy();
   }
 

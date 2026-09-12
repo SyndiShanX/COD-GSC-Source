@@ -19,13 +19,13 @@ override_wall_buys_by_class() {
   foreach(var_02 in level.var_A7DE) {
     if(isDefined(var_02.var_81C7) && var_02.var_81C7 == "rand_wallbuy") {
       level.rand_wallbuys = common_scripts\utility::func_F6F(level.rand_wallbuys, var_02);
-      var_03 = common_scripts\utility::func_4461(var_02.var_116, var_00);
+      var_03 = common_scripts\utility::func_4461(var_02.origin, var_00);
       if(isDefined(var_03)) {
         var_02.scriptable_light = var_03;
       }
 
       foreach(var_05 in var_02.var_A7E3) {
-        var_05.weapon_class = lib_0547::zm_get_weapon_class(var_02.var_165);
+        var_05.weapon_class = lib_0547::zm_get_weapon_class(var_02.script_noteworthy);
         var_02.weapon_class = var_05.weapon_class;
         level.active_zombie_models_to_outline = common_scripts\utility::func_F6F(level.active_zombie_models_to_outline, var_05);
       }
@@ -53,7 +53,7 @@ show_wallbuy_waypoints(param_00) {
 
   foreach(var_05 in level.active_zombie_models_to_outline) {
     if(!isDefined(var_05.weapon_class)) {
-      var_06 = common_scripts\utility::func_40B0(var_05.var_116, level.active_zombie_models_to_outline);
+      var_06 = common_scripts\utility::func_40B0(var_05.origin, level.active_zombie_models_to_outline);
       foreach(var_08 in var_06) {
         if(isDefined(var_08.weapon_class)) {
           var_05.weapon_class = var_08.weapon_class;
@@ -74,12 +74,12 @@ show_wallbuy_waypoints(param_00) {
 
     var_02 = newclienthudelem(param_00);
     var_02 setshader(level.zombies_shotgun_weapon_waypoints[var_05.weapon_class], 1, 1);
-    var_02.var_18 = 1;
-    var_02.var_18 = 1;
-    var_02.var_56 = (1, 1, 1);
-    var_02.maxsightdistsqrd = var_05.var_116[0];
-    var_02.var_1D7 = var_05.var_116[1];
-    var_02.var_1D9 = var_05.var_116[2] + 35;
+    var_02.alpha = 1;
+    var_02.alpha = 1;
+    var_02.color = (1, 1, 1);
+    var_02.x = var_05.origin[0];
+    var_02.y = var_05.origin[1];
+    var_02.z = var_05.origin[2] + 35;
     var_02 setwaypoint(0, 0, 0);
     if(!isDefined(param_00.shwaypoints)) {
       param_00.shwaypoints = [];
@@ -116,7 +116,7 @@ run_wallbuy_mysterybox_mod() {
     lib_0547::func_8A4F(var_01, ::assignwallbuymysterypurchasetoplayer, ::func_4D1B);
   }
 
-  var_03 = lib_0547::zm_get_weapon_class(self.var_165);
+  var_03 = lib_0547::zm_get_weapon_class(self.script_noteworthy);
   if(isDefined(self.wallbuyguncard)) {
     var_04 = get_wallbuy_gun_card_model(var_03);
     if(isDefined(var_04)) {
@@ -206,8 +206,8 @@ slide_left() {
       break;
   }
 
-  var_01 = self.var_116;
-  self.var_116 = self.var_116 + var_00 * vectorNormalize(anglesToForward(self.var_1D));
+  var_01 = self.origin;
+  self.origin = self.origin + var_00 * vectorNormalize(anglesToForward(self.angles));
 }
 
 run_wallbuy_trigger_mysterybox_mod(param_00, param_01) {
@@ -260,15 +260,15 @@ run_wallbuy_trigger_mysterybox_mod(param_00, param_01) {
     level.var_11CB.var_65F4 = lib_0380::func_2889("zmb_mystery_box_elec", undefined, var_02.var_A9E3);
     var_02.var_586E showtoclient(var_0D);
     if(!isDefined(var_02.var_586E.var_6C4E)) {
-      var_02.var_586E.var_6C4E = var_02.var_586E.var_116;
+      var_02.var_586E.var_6C4E = var_02.var_586E.origin;
     }
 
     if(!isDefined(var_02.itementlink.var_6C4E)) {
-      var_02.itementlink.var_6C4E = var_02.itementlink.var_116;
+      var_02.itementlink.var_6C4E = var_02.itementlink.origin;
     }
 
-    var_02.var_586E.var_116 = var_02.var_586E.var_6C4E;
-    var_02.itementlink.var_116 = var_02.itementlink.var_6C4E;
+    var_02.var_586E.origin = var_02.var_586E.var_6C4E;
+    var_02.itementlink.origin = var_02.itementlink.var_6C4E;
     var_02.var_586E unlink();
     var_02.var_586E slide_left();
     var_02.var_586E method_8449(var_02.itementlink);
@@ -367,7 +367,7 @@ replace_wallbuy_weapon(param_00, param_01) {
   }
 
   var_04 = spawn("weapon_" + param_01, var_02, 1);
-  var_04.var_1D = var_03;
+  var_04.angles = var_03;
   return var_04;
 }
 
@@ -388,14 +388,14 @@ showwaywallbuypointping(param_00) {
     var_02 setshader(level.zmb_sg_wallbuy_waypoint_icon, 1, 1);
   }
 
-  var_02.var_18 = 0;
-  var_02.var_56 = (1, 1, 1);
-  var_02.maxsightdistsqrd = var_03[0];
-  var_02.var_1D7 = var_03[1];
-  var_02.var_1D9 = var_03[2] + 15;
+  var_02.alpha = 0;
+  var_02.color = (1, 1, 1);
+  var_02.x = var_03[0];
+  var_02.y = var_03[1];
+  var_02.z = var_03[2] + 15;
   var_02 setwaypoint(0, 1, 0);
   var_02 fadeovertime(0.1);
-  var_02.var_18 = 1;
+  var_02.alpha = 1;
   wait(2);
   if(!waypoint_exists(var_02)) {
     return;
@@ -408,7 +408,7 @@ showwaywallbuypointping(param_00) {
   }
 
   var_02 fadeovertime(2);
-  var_02.var_18 = 0;
+  var_02.alpha = 0;
   wait(2);
   if(waypoint_exists(var_02)) {
     var_02 destroy();
@@ -506,7 +506,7 @@ getwallbuytriggercost(param_00) {
 }
 
 should_run_buildable_logic(param_00) {
-  return common_scripts\utility::func_562E(level.buildablewallbuys) && common_scripts\utility::func_F79(level.validbuildablewallbuys, lib_0547::zm_get_weapon_class(param_00.var_165));
+  return common_scripts\utility::func_562E(level.buildablewallbuys) && common_scripts\utility::func_F79(level.validbuildablewallbuys, lib_0547::zm_get_weapon_class(param_00.script_noteworthy));
 }
 
 watch_for_player_purchase() {
@@ -518,11 +518,11 @@ watch_for_player_purchase() {
       continue;
     }
 
-    if(!var_00 maps\mp\gametypes\zombies::func_1F32(var_01) || !common_scripts\utility::func_562E(self.canusewb)) {
+    if(!var_00 maps / mp / gametypes / zombies::func_1F32(var_01) || !common_scripts\utility::func_562E(self.canusewb)) {
       continue;
     }
 
-    if(!var_00 maps\mp\gametypes\zombies::func_11C2(var_01)) {
+    if(!var_00 maps / mp / gametypes / zombies::func_11C2(var_01)) {
       var_00 thread lib_054E::func_695("needmoney");
       continue;
     } else {
@@ -625,7 +625,7 @@ get_use_player() {
 
 re_enabble_hammer() {
   wait 0.05;
-  self method_8323();
+  self enableweapons();
 }
 
 start_hammer() {
@@ -641,14 +641,14 @@ start_hammer() {
   }
 
   maps\mp\zombies\_zombies_magicbox::func_A7D6(var_00, "war_hammer_assemble_mp");
-  var_00 method_8326();
+  var_00 disableweaponswitch();
   return var_03;
 }
 
 take_hammer(param_00) {
   var_01 = self;
   var_01 lib_0586::func_790("war_hammer_assemble_mp");
-  var_01 method_8327();
+  var_01 enableweaponswitch();
   if(isDefined(param_00)) {
     var_01 lib_0586::func_78E(param_00);
   }
@@ -740,7 +740,7 @@ assignwallbuymysterypurchasetoplayer(param_00) {
   var_02 = lib_0552::func_7BE1(param_00, self);
   lib_0559::func_7BE2(param_00, self, "wallbuy_dlc3");
   var_01.var_65DC = var_02;
-  var_02.var_4028 = lib_0552::func_44FF(get_state_for_weapon_class(lib_0547::zm_get_weapon_class(var_01.wallbuy.var_165)));
+  var_02.var_4028 = lib_0552::func_44FF(get_state_for_weapon_class(lib_0547::zm_get_weapon_class(var_01.wallbuy.script_noteworthy)));
   var_02.var_2F74 = 0;
   var_02.var_6642 = 1;
   var_01.canusewb = 0;
@@ -767,18 +767,18 @@ assignwallbuymysterypurchasetoplayer(param_00) {
     var_02.var_401E = var_01 getwallbuytriggercost(param_00);
     var_02.var_2F74 = 0;
     var_02.var_6642 = 1;
-    var_02.var_4028 = lib_0552::func_44FF(get_state_for_weapon_class(lib_0547::zm_get_weapon_class(var_01.wallbuy.var_165)));
+    var_02.var_4028 = lib_0552::func_44FF(get_state_for_weapon_class(lib_0547::zm_get_weapon_class(var_01.wallbuy.script_noteworthy)));
     var_01.canusewb = 1;
     var_01 wallbuymysterytogglegate(1, param_00);
     var_07 = common_scripts\utility::func_A70E(var_01, "mystery_wallbuy_used", var_04, var_05);
     var_08 = var_07[0];
     var_09 = var_07[1];
-    var_02.var_4028 = lib_0552::func_44FF(get_state_for_weapon_class(lib_0547::zm_get_weapon_class(var_01.wallbuy.var_165)));
+    var_02.var_4028 = lib_0552::func_44FF(get_state_for_weapon_class(lib_0547::zm_get_weapon_class(var_01.wallbuy.script_noteworthy)));
     var_02.var_6642 = 1;
     if(var_08 == "mystery_wallbuy_used") {
       var_02.var_2F74 = 1;
       var_01 waittill("mystery_wallbuy_done");
-      var_02.var_4028 = lib_0552::func_44FF(get_state_for_weapon_class(lib_0547::zm_get_weapon_class(var_01.wallbuy.var_165)));
+      var_02.var_4028 = lib_0552::func_44FF(get_state_for_weapon_class(lib_0547::zm_get_weapon_class(var_01.wallbuy.script_noteworthy)));
       var_02.var_401E = var_01 getwallbuytriggercost(param_00);
       var_02.var_6642 = 1;
       param_00 lib_0577::func_A236();

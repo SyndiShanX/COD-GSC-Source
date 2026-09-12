@@ -3,15 +3,15 @@
  * Script: maps\mp\zombies\sg_events_v1\very_important_zombie.gsc
 ******************************************************************/
 
-func_00D5() {
+init() {
   precacheshader("zm_hud_type_escort_icon");
   precacheshader("zm_hud_type_escort_icon");
   basic_vip_init();
-  maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::sg_obj_register_defaults("type_assassinate_common", ::basic_assassinate_run, 30, 0, 1);
+  maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::sg_obj_register_defaults("type_assassinate_common", ::basic_assassinate_run, 30, 0, 1);
 }
 
 basic_assassinate_run(param_00) {
-  if(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::not_the_final_objective()) {
+  if(maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::not_the_final_objective()) {
     level.var_1CC0 = ["zombie_generic"];
   }
 
@@ -26,7 +26,7 @@ basic_assassinate_skip_cleanup(param_00) {
   level endon("flag_sg_VIP_complete");
   level endon("flag_sg_VIP_timeout");
   level waittill("skipWave");
-  param_00 lib_0563::func_AB99(undefined, undefined, 1000, undefined, "MOD_BULLET", "m1911_zm", param_00.var_116, (0, 0, 0), "tag_origin", 0, "tag_weapon");
+  param_00 lib_0563::func_AB99(undefined, undefined, 1000, undefined, "MOD_BULLET", "m1911_zm", param_00.origin, (0, 0, 0), "tag_origin", 0, "tag_weapon");
 }
 
 basic_assassinate_model_swap() {
@@ -57,9 +57,9 @@ wait_for_low_health_or_lack_of_patience() {
   level endon("flag_sg_VIP_complete");
   level endon("flag_sg_VIP_timeout");
   var_00 = 0;
-  var_01 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_run_start");
-  var_02 = self.var_BC;
-  while(self.var_BC > var_02 / 2 && var_00 < var_01) {
+  var_01 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_run_start");
+  var_02 = self.health;
+  while(self.health > var_02 / 2 && var_00 < var_01) {
     var_00 = var_00 + 0.15;
     wait(0.15);
   }
@@ -67,14 +67,14 @@ wait_for_low_health_or_lack_of_patience() {
 
 basic_vip_run(param_00, param_01) {
   lib_0547::func_A6F6();
-  var_02 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_other_zombies_count");
-  var_03 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_repitions");
+  var_02 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_other_zombies_count");
+  var_03 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_repitions");
   if(!lib_0547::func_5565(param_01, "assassinate_common")) {
     var_03 = 1;
   }
 
   if(level.objectivescompleted == 0) {
-    var_04 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_assassinate_common_repitions_first_max");
+    var_04 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_difficulty_setting("type_assassinate_common_repitions_first_max");
     if(var_03 > var_04) {
       var_03 = var_04;
     }
@@ -83,12 +83,12 @@ basic_vip_run(param_00, param_01) {
   var_05 = undefined;
   switch (param_01) {
     case "assassinate_common":
-      level thread maps\mp\zombies\shotgun\_zombies_shotgun_rideau_global::run_rideau_bomber_comment();
+      level thread maps / mp / zombies / shotgun / _zombies_shotgun_rideau_global::run_rideau_bomber_comment();
       var_05 = common_scripts\utility::func_46B7("sg_assassinate_spawn_point", "targetname");
       break;
 
     case "type_escort":
-      level thread maps\mp\zombies\shotgun\_zombies_shotgun_rideau_global::run_rideau_escort_bomber_comment();
+      level thread maps / mp / zombies / shotgun / _zombies_shotgun_rideau_global::run_rideau_escort_bomber_comment();
       var_05 = common_scripts\utility::func_46B7("sg_escort_spawn_point", "targetname");
       break;
   }
@@ -106,18 +106,18 @@ basic_vip_run(param_00, param_01) {
   var_0A = 1;
   var_0B = 0;
   if(lib_0547::func_5565(param_01, "assassinate_common")) {
-    var_0C = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_red_skull_repitions");
+    var_0C = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_red_skull_repitions");
     if(var_0C > 0) {
       var_03 = var_0C;
     }
 
-    var_0D = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_red_skull_count");
+    var_0D = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_red_skull_count");
     if(var_0D > 0) {
       var_0A = var_0D;
     }
 
-    if(var_0C == 0 && level.objectivescompleted >= 2 && level.var_744A.size > 1) {
-      var_0B = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_double_trouble_chance");
+    if(var_0C == 0 && level.objectivescompleted >= 2 && level.players.size > 1) {
+      var_0B = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_double_trouble_chance");
     }
   }
 
@@ -135,7 +135,7 @@ basic_vip_run(param_00, param_01) {
 
     var_10 = spawn_new_important_bomber(param_00, param_01, var_02, var_05, var_09, var_0A);
     var_09++;
-    maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::clear_all_waypoints();
+    maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::clear_all_waypoints();
     if(!common_scripts\utility::func_562E(var_10)) {
       break;
     } else {
@@ -143,11 +143,11 @@ basic_vip_run(param_00, param_01) {
     }
 
     if(var_0F != var_03 - 1) {
-      wait(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_next_spawn_time"));
+      wait(maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("type_assassinate_common_next_spawn_time"));
     }
   }
 
-  level thread maps\mp\_utility::func_6F74(::maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::set_waypoints_to_enemy, 0, "sg_VIP_finished");
+  level thread maps\mp\_utility::func_6F74(::maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::set_waypoints_to_enemy, 0, "sg_VIP_finished");
   level notify("sg_VIP_finished");
   if(lib_0547::func_5565(param_01, "assassinate_common")) {
     if(common_scripts\utility::func_3C77("flag_sg_VIP_complete")) {
@@ -179,8 +179,8 @@ basic_vip_run(param_00, param_01) {
 basic_vip_get_waypoints(param_00) {
   var_01 = self;
   var_02 = [];
-  while(isDefined(var_01.var_1A2)) {
-    var_03 = common_scripts\utility::func_46B5(var_01.var_1A2, "targetname");
+  while(isDefined(var_01.target)) {
+    var_03 = common_scripts\utility::func_46B5(var_01.target, "targetname");
     var_02[var_02.size] = var_03;
     var_01 = var_03;
   }
@@ -190,14 +190,14 @@ basic_vip_get_waypoints(param_00) {
 
 get_player_push_nodes(param_00, param_01) {
   var_02 = 14;
-  var_03 = param_00.var_116;
+  var_03 = param_00.origin;
   var_04 = [];
-  var_05 = distance(param_00.var_116, param_01.var_116);
+  var_05 = distance(param_00.origin, param_01.origin);
   var_06 = 0;
-  var_07 = vectortoangles(param_01.var_116 - param_00.var_116);
+  var_07 = vectortoangles(param_01.origin - param_00.origin);
   while(var_06 < var_05 - var_02) {
     var_06 = var_06 + var_02;
-    var_08 = getclosestpointonnavmesh(vectorlerp(param_00.var_116, param_01.var_116, var_06 / var_05), self);
+    var_08 = getclosestpointonnavmesh(vectorlerp(param_00.origin, param_01.origin, var_06 / var_05), self);
     var_09 = var_08 + var_02 * vectorNormalize(anglestoright(var_07));
     var_0A = var_08 + var_02 * vectorNormalize(anglestoright(var_07 + (0, 180, 0)));
     var_04 = common_scripts\utility::func_F6F(var_04, var_09);
@@ -213,7 +213,7 @@ basic_vip_skip_cleanup(param_00) {
   level endon("flag_sg_VIP_complete");
   level endon("flag_sg_VIP_killed");
   level waittill("skipWave");
-  param_00 lib_0563::func_AB99(undefined, undefined, 1000, undefined, "MOD_BULLET", "m1911_zm", param_00.var_116, (0, 0, 0), "tag_origin", 0, "tag_weapon");
+  param_00 lib_0563::func_AB99(undefined, undefined, 1000, undefined, "MOD_BULLET", "m1911_zm", param_00.origin, (0, 0, 0), "tag_origin", 0, "tag_weapon");
 }
 
 basic_vip_move_to_destination(param_00, param_01) {
@@ -224,10 +224,10 @@ basic_vip_move_to_destination(param_00, param_01) {
   }
 
   if(param_01 < 2) {
-    level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::single_ent_health_display_start(var_02, -40, 1);
+    level thread maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::single_ent_health_display_start(var_02, -40, 1);
   }
 
-  var_02 thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::important_zombie_show_destination(param_00, var_02.waypoints[var_02.waypoints.size - 1].var_116);
+  var_02 thread maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::important_zombie_show_destination(param_00, var_02.waypoints[var_02.waypoints.size - 1].origin);
   var_02 childthread pushplayervib();
   for(var_03 = 0; var_03 < var_02.waypoints.size; var_03++) {
     var_02.var_1928 = var_02.waypoints[var_03];
@@ -237,14 +237,14 @@ basic_vip_move_to_destination(param_00, param_01) {
       var_02.previousbosswaitingpoint = var_02.waypoints[var_03];
     }
 
-    while(distance(var_02.var_116, var_02.waypoints[var_03].var_116) > 75) {
+    while(distance(var_02.origin, var_02.waypoints[var_03].origin) > 75) {
       wait 0.05;
     }
   }
 
   common_scripts\utility::func_3C8F("flag_sg_VIP_complete");
   var_02.exploder_godmode = 0;
-  var_02 lib_0563::func_AB99(undefined, undefined, var_02.var_BC + 1, undefined, "MOD_BULLET", "m1911_zm", var_02.var_116, (0, 0, 0), "tag_origin", 0, "tag_weapon");
+  var_02 lib_0563::func_AB99(undefined, undefined, var_02.health + 1, undefined, "MOD_BULLET", "m1911_zm", var_02.origin, (0, 0, 0), "tag_origin", 0, "tag_weapon");
   var_02 endon("death");
   wait 0.05;
   if(isDefined(var_02)) {
@@ -258,9 +258,9 @@ pushplayervib() {
   var_02 = 32;
   for(;;) {
     var_03 = 0;
-    var_04 = self.var_116 + var_01 * vectorNormalize(anglesToForward(self.var_1D));
-    foreach(var_06 in level.var_744A) {
-      if(var_06 istouching(self) || distance2d(var_06.var_116, var_04) < var_02 && abs(var_06.var_116[2] - var_04[2]) < 64) {
+    var_04 = self.origin + var_01 * vectorNormalize(anglesToForward(self.angles));
+    foreach(var_06 in level.players) {
+      if(var_06 istouching(self) || distance2d(var_06.origin, var_04) < var_02 && abs(var_06.origin[2] - var_04[2]) < 64) {
         if(!isDefined(var_06.lastvibpush)) {
           var_06.lastvibpush = gettime();
         }
@@ -268,11 +268,11 @@ pushplayervib() {
         if(var_06 isonground() && gettime() - var_06.lastvibpush > 300) {
           var_03 = 1;
           var_06.lastvibpush = gettime();
-          var_07 = var_06.var_116 - self.var_116;
+          var_07 = var_06.origin - self.origin;
           var_07 = (var_07[0], var_07[1], 0);
           var_08 = var_00 * vectorNormalize(var_07);
           var_08 = (var_08[0], var_08[1], 50);
-          var_06 dodamage(20, self.var_116, self, self);
+          var_06 dodamage(20, self.origin, self, self);
           var_06 setvelocity(var_08);
         }
       }
@@ -310,9 +310,9 @@ basic_vip_waitfor_done_death_or_timeout(param_00, param_01, param_02) {
 
 basic_vip_timeout_listener(param_00) {
   level endon("sg_VIP_finished");
-  level common_scripts\utility::knock_off_battery("sg_obj_timeout", "round complete");
+  level common_scripts\utility::waittill_any("sg_obj_timeout", "round complete");
   common_scripts\utility::func_3C8F("flag_sg_VIP_timeout");
-  param_00 lib_0563::func_AB99(level.var_721C, level.var_721C, 1000, undefined, "MOD_BULLET", "m1911_zm", param_00.var_116, (0, 0, 0), "tag_origin", 0, "tag_weapon");
+  param_00 lib_0563::func_AB99(level.player, level.player, 1000, undefined, "MOD_BULLET", "m1911_zm", param_00.origin, (0, 0, 0), "tag_origin", 0, "tag_weapon");
 }
 
 basic_vip_kill_listener(param_00) {
@@ -326,7 +326,7 @@ basic_vip_kill_listener(param_00) {
 }
 
 any_vib_alive(param_00) {
-  foreach(var_02 in maps\mp\agents\_agent_utility::func_43FD("all")) {
+  foreach(var_02 in maps / mp / agents / _agent_utility::func_43FD("all")) {
     if(common_scripts\utility::func_562E(var_02.sgvip)) {
       return 1;
     }
@@ -364,14 +364,14 @@ spawn_new_important_bomber(param_00, param_01, param_02, param_03, param_04, par
       var_06[var_06.size] = new_important_bomber(param_00, param_01, param_02, param_03[var_0A], param_05);
     }
 
-    level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::double_ent_health_display_setup(var_06[0], var_06[1]);
+    level thread maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::double_ent_health_display_setup(var_06[0], var_06[1]);
   } else {
     var_06[var_06.size] = new_important_bomber(param_00, param_01, param_02, param_03[param_04], param_05);
   }
 
   var_0B = spawnStruct();
   var_0B.zombie_count = param_02;
-  var_0B thread maps\mp\mp_zombie_nest_ee_wave_manipulation::enforce_zombie_limit("stop_modifying_wave");
+  var_0B thread maps / mp / mp_zombie_nest_ee_wave_manipulation::enforce_zombie_limit("stop_modifying_wave");
   return basic_vip_waitfor_done_death_or_timeout(level.zmb_sg_objectives[param_00].timeout_win, var_06, var_0B);
 }
 
@@ -405,9 +405,9 @@ new_important_bomber(param_00, param_01, param_02, param_03, param_04) {
   var_05.noenergyholdsecondary = 1;
   var_05.notthrowable = 1;
   if(isDefined(param_01) && param_01 == "assassinate_common") {
-    level thread maps\mp\_utility::func_6F74(::maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::set_waypoints_to_enemy, 2, "sg_VIP_finished");
-    var_05.var_9 = &"ZOMBIE_DLC3_IMPORTANT_TARGET";
-    var_05 maps\mp\agents\_agent_common::func_83FD(maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_assassinate_common_health"));
+    level thread maps\mp\_utility::func_6F74(::maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::set_waypoints_to_enemy, 2, "sg_VIP_finished");
+    var_05.agentname = &"ZOMBIE_DLC3_IMPORTANT_TARGET";
+    var_05 maps / mp / agents / _agent_common::func_83FD(maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_difficulty_setting("type_assassinate_common_health"));
     var_05 thread basic_vip_move_to_destination("zm_hud_type_escort_icon", param_04);
     var_05 thread basic_assassinate_sprint_when_near_death();
     var_05.exploder_godmode = 1;
@@ -415,16 +415,16 @@ new_important_bomber(param_00, param_01, param_02, param_03, param_04) {
       var_05 basic_assassinate_model_swap();
     }
 
-    var_06 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_assassinate_common_energy_hold");
+    var_06 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_difficulty_setting("type_assassinate_common_energy_hold");
     if(var_06 != 1) {
       var_05.noenergyhold = 1;
     }
   } else {
-    level thread maps\mp\_utility::func_6F74(::maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::set_waypoints_to_enemy, 1, "sg_VIP_finished");
-    var_05 maps\mp\agents\_agent_utility::func_83FE(level.var_746E);
-    var_07 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_escort_health");
-    var_07 = var_07 * maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_escort_health_redskull");
-    var_05 maps\mp\agents\_agent_common::func_83FD(int(var_07));
+    level thread maps\mp\_utility::func_6F74(::maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::set_waypoints_to_enemy, 1, "sg_VIP_finished");
+    var_05 maps / mp / agents / _agent_utility::func_83FE(level.var_746E);
+    var_07 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_difficulty_setting("type_escort_health");
+    var_07 = var_07 * maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("type_escort_health_redskull");
+    var_05 maps / mp / agents / _agent_common::func_83FD(int(var_07));
     var_05 thread basic_vip_move_to_destination("zm_hud_type_escort_icon");
   }
 

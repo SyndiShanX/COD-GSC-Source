@@ -3,11 +3,11 @@
  * Script: maps\mp\gametypes\scorestreak_training.gsc
 ******************************************************/
 
-func_00F9() {
+main() {
   setdvarifuninitialized("previousScorestreakSelected", 0);
   level.var_80C0 = 8;
   level.var_80BF = 4;
-  maps\mp\gametypes\_globallogic::func_00D5();
+  maps\mp\gametypes\_globallogic::init();
   lib_01DD::func_8A0C();
   maps\mp\gametypes\_globallogic::func_8A0C();
   if(isusingmatchrulesdata()) {
@@ -15,13 +15,13 @@ func_00F9() {
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.var_3FDC, 0, 0, 9);
-    maps\mp\_utility::func_7BFA(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BF9(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BF7(level.var_3FDC, 0);
-    maps\mp\_utility::func_7C04(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BF1(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BE5(level.var_3FDC, 0);
+    maps\mp\_utility::func_7BF8(level.gametype, 0, 0, 9);
+    maps\mp\_utility::func_7BFA(level.gametype, 0);
+    maps\mp\_utility::func_7BF9(level.gametype, 0);
+    maps\mp\_utility::func_7BF7(level.gametype, 0);
+    maps\mp\_utility::func_7C04(level.gametype, 0);
+    maps\mp\_utility::func_7BF1(level.gametype, 0);
+    maps\mp\_utility::func_7BE5(level.gametype, 0);
     setdynamicdvar("scr_game_allowkillcam", 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
@@ -57,7 +57,7 @@ func_00F9() {
   level.var_4696 = ::func_4696;
   level.var_6BA7 = ::func_6B81;
   level.var_6BAF = ::func_6BAF;
-  level.var_6B5C = ::func_6B5C;
+  level.onnormaldeath = ::onnormaldeath;
   level.var_6B7F = ::func_6B7F;
   level.var_1DEA = ::func_80BE;
   game["switchedsides"] = 0;
@@ -104,7 +104,7 @@ func_6BAF() {
   setclientnamemode("auto_change");
   maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_SCORESTREAK_TRAINING");
   maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_SCORESTREAK_TRAINING");
-  if(level.var_910F) {
+  if(level.splitscreen) {
     maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_SCORESTREAK_TRAINING");
     maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_SCORESTREAK_TRAINING");
   } else {
@@ -116,35 +116,35 @@ func_6BAF() {
   maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_SCORESTREAK_TRAINING_HINT");
   lib_050D::func_10E4();
   var_00[0] = "scorestreak_training";
-  maps\mp\gametypes\_gameobjects::func_00F9(var_00);
-  level thread func_6B6C();
-  level.var_7691 = 0;
-  level.var_7692 = 0;
+  maps\mp\gametypes\_gameobjects::main(var_00);
+  level thread onplayerconnect();
+  level.prematchperiod = 0;
+  level.prematchperiodend = 0;
   level.var_5A70 = 0;
   level.var_17EF = 1;
   level.var_7895 = 1;
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
-    if(level.var_7A67) {
+    if(level.rankedmatch) {
       var_00 func_7D57();
     }
   }
 }
 
-func_6B5C(param_00, param_01, param_02) {
+onnormaldeath(param_00, param_01, param_02) {
   self setclientomnvar("ui_show_scorestreak_training_hud", 0);
   var_03 = 0;
-  foreach(var_05 in level.var_744A) {
-    if(isDefined(var_05.var_015C) && var_05.var_015C > var_03) {
-      var_03 = var_05.var_015C;
+  foreach(var_05 in level.players) {
+    if(isDefined(var_05.score) && var_05.score > var_03) {
+      var_03 = var_05.score;
     }
   }
 
-  if(game["state"] == "postgame" && param_01.var_015C >= var_03) {
-    param_01.var_3B4B = 1;
+  if(game["state"] == "postgame" && param_01.score >= var_03) {
+    param_01.finalkill = 1;
   }
 }
 
@@ -173,7 +173,7 @@ func_57BC(param_00, param_01) {
     case "fritzx_kill":
     case "fighter_strike_kill":
       if(isDefined(param_01) && param_01) {
-        maps\mp\gametypes\_missions::func_7750("ch_scorestreaktraining_kills");
+        maps\mp\gametypes\_missions::processchallenge("ch_scorestreaktraining_kills");
       }
       return 1;
 
@@ -197,9 +197,9 @@ func_57BA(param_00, param_01) {
     case "counter_uav_destroyed":
     case "uav_destroyed":
       if(isDefined(param_01) && param_01) {
-        maps\mp\gametypes\_missions::func_7750("ch_scorestreaktraining_flakMaster");
-        self.var_012C["scorestreaksDowned"]++;
-        maps\mp\_utility::func_867C(self.var_012C["scorestreaksDowned"]);
+        maps\mp\gametypes\_missions::processchallenge("ch_scorestreaktraining_flakMaster");
+        self.pers["scorestreaksDowned"]++;
+        maps\mp\_utility::func_867C(self.pers["scorestreaksDowned"]);
       }
       return 1;
 
@@ -229,7 +229,7 @@ func_872E() {
 
 func_6B81() {
   thread func_47A9();
-  if(isbot(self) && self.var_01A7 == "axis" && !isDefined(level.var_80C2) || !level.var_80C2) {
+  if(isbot(self) && self.team == "axis" && !isDefined(level.var_80C2) || !level.var_80C2) {
     level thread func_638D(self);
     level.var_80C2 = 1;
   }
@@ -250,22 +250,22 @@ func_6B81() {
 
 func_80BE() {
   var_00 = isPlayer(self) && !isbot(self) && !function_01EF(self);
-  self.var_012C["class"] = "gamemode";
-  self.var_012C["lastClass"] = "";
+  self.pers["class"] = "gamemode";
+  self.pers["lastClass"] = "";
   if(var_00) {
-    self.var_012C["gamemodeLoadout"] = level.var_80B3;
-  } else if(self.var_01A7 == "allies") {
-    self.var_012C["gamemodeLoadout"] = level.var_80B1;
+    self.pers["gamemodeLoadout"] = level.var_80B3;
+  } else if(self.team == "allies") {
+    self.pers["gamemodeLoadout"] = level.var_80B1;
   } else {
-    self.var_012C["gamemodeLoadout"] = level.var_80B2;
+    self.pers["gamemodeLoadout"] = level.var_80B2;
   }
 
-  self.var_2319 = self.var_012C["class"];
-  self.var_5B84 = self.var_012C["lastClass"];
-  maps\mp\gametypes\_class::func_4790(self.var_01A7, self.var_2319);
+  self.var_2319 = self.pers["class"];
+  self.var_5B84 = self.pers["lastClass"];
+  maps\mp\gametypes\_class::func_4790(self.team, self.var_2319);
   if(var_00) {
     thread func_47A9();
-    self.var_00CE = 1;
+    self.ignoreme = 1;
     maps\mp\_utility::func_47A2("specialty_eagleeyes");
   }
 }
@@ -280,8 +280,8 @@ func_7D57() {
 }
 
 func_7D56(param_00) {
-  maps\mp\gametypes\_hud_util::func_209F(param_00, 1);
-  maps\mp\gametypes\_hud_util::func_209E(param_00, 0);
+  maps\mp\gametypes\_hud_util::ch_setstate(param_00, 1);
+  maps\mp\gametypes\_hud_util::ch_setprogress(param_00, 0);
 }
 
 func_47A9() {
@@ -292,23 +292,23 @@ func_47A9() {
   self endon("unlimitedAmmoEnabled");
   for(;;) {
     var_00 = self getcurrentweapon();
-    if(var_00 != "none" && !maps\mp\_utility::func_5740(var_00)) {
+    if(var_00 != "none" && !maps\mp\_utility::iskillstreakweapon(var_00)) {
       var_01 = self getfractionmaxammo(var_00);
       if(var_01 < 0.2) {
         self givemaxammo(var_00);
       }
     }
 
-    var_02 = self method_831F();
-    if(var_02 != "none" && !maps\mp\_utility::func_5740(var_02)) {
+    var_02 = self getplayersoffhands();
+    if(var_02 != "none" && !maps\mp\_utility::iskillstreakweapon(var_02)) {
       var_01 = self getfractionmaxammo(var_02);
       if(var_01 < 0.4) {
         self givemaxammo(var_02);
       }
     }
 
-    var_03 = self method_834A();
-    if(var_03 != "none" && !maps\mp\_utility::func_5740(var_03)) {
+    var_03 = self getplayersequipment();
+    if(var_03 != "none" && !maps\mp\_utility::iskillstreakweapon(var_03)) {
       var_01 = self getfractionmaxammo(var_03);
       if(var_01 < 0.4) {
         self givemaxammo(var_03);
@@ -337,7 +337,7 @@ func_A93E() {
     var_02 = maps\mp\_utility::func_4544(var_01);
     thread maps\mp\gametypes\_hud_message::func_5A78(var_02, maps\mp\killstreaks\_killstreaks::func_46B4(var_02), undefined, 0);
     thread maps\mp\killstreaks\_killstreaks::func_478D(var_02, 0, 0, self);
-    lib_0468::func_0A2A("streakTraining");
+    lib_0468::func_A2A("streakTraining");
   }
 }
 
@@ -348,9 +348,9 @@ func_244D() {
 func_4696(param_00) {
   var_01 = self;
   if(!isDefined(var_01)) {
-    for(var_02 = 0; var_02 < level.var_744A.size; var_02++) {
+    for(var_02 = 0; var_02 < level.players.size; var_02++) {
       if(var_02 == param_00) {
-        var_01 = level.var_744A[var_02];
+        var_01 = level.players[var_02];
         break;
       }
     }
@@ -360,7 +360,7 @@ func_4696(param_00) {
     return func_6FBD(var_01);
   }
 
-  return level.var_908F[var_01.var_01A7][randomint(level.var_908F[var_01.var_01A7].size)];
+  return level.var_908F[var_01.team][randomint(level.var_908F[var_01.team].size)];
 }
 
 func_6FBD(param_00) {
@@ -377,14 +377,14 @@ func_638D(param_00) {
   param_00 endon("disconnect");
   wait(5);
   for(;;) {
-    if(!level.var_9854[param_00.var_01A7]) {
+    if(!level.var_9854[param_00.team]) {
       var_01 = "";
       var_02 = randomint(100);
       if(var_02 > 60) {
         param_00 thread maps\mp\killstreaks\_flak_gun::func_A20C("counter_uav");
         var_01 = "counter_uav";
       } else {
-        level thread maps\mp\killstreaks\_uav::func_5C30(param_00, param_00.var_01A7, "uav");
+        level thread maps\mp\killstreaks\_uav::func_5C30(param_00, param_00.team, "uav");
         var_01 = "uav";
       }
 
@@ -400,23 +400,23 @@ deleteunusedentities() {
   level endon("game_ended");
   var_00 = [];
   var_01 = getEntArray("jerry_can_spawn", "targetname");
-  var_00 = common_scripts\utility::func_0F73(var_00, var_01);
+  var_00 = common_scripts\utility::func_F73(var_00, var_01);
   var_01 = getEntArray("reactive_swing_target", "targetname");
-  var_00 = common_scripts\utility::func_0F73(var_00, var_01);
+  var_00 = common_scripts\utility::func_F73(var_00, var_01);
   var_01 = getEntArray("reactive_reset_target", "targetname");
-  var_00 = common_scripts\utility::func_0F73(var_00, var_01);
+  var_00 = common_scripts\utility::func_F73(var_00, var_01);
   var_01 = getEntArray("flip_target", "targetname");
-  var_00 = common_scripts\utility::func_0F73(var_00, var_01);
+  var_00 = common_scripts\utility::func_F73(var_00, var_01);
   var_01 = getEntArray("flip_target_reset", "targetname");
-  var_00 = common_scripts\utility::func_0F73(var_00, var_01);
+  var_00 = common_scripts\utility::func_F73(var_00, var_01);
   var_01 = getEntArray("popup_target", "targetname");
-  var_00 = common_scripts\utility::func_0F73(var_00, var_01);
+  var_00 = common_scripts\utility::func_F73(var_00, var_01);
   var_01 = getEntArray("plate_sequence", "targetname");
-  var_00 = common_scripts\utility::func_0F73(var_00, var_01);
+  var_00 = common_scripts\utility::func_F73(var_00, var_01);
   var_01 = getEntArray("reactive_explosive_target", "targetname");
-  var_00 = common_scripts\utility::func_0F73(var_00, var_01);
+  var_00 = common_scripts\utility::func_F73(var_00, var_01);
   var_01 = getEntArray("interactive_chair_trigger", "targetname");
-  var_00 = common_scripts\utility::func_0F73(var_00, var_01);
+  var_00 = common_scripts\utility::func_F73(var_00, var_01);
   foreach(var_03 in var_00) {
     var_03 delete();
     wait 0.05;

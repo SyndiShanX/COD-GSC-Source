@@ -3,9 +3,9 @@
  * Script: maps\mp\mp_zombie_nest_ee_tower_battle.gsc
 ******************************************************/
 
-func_00F9() {
+main() {
   level.var_7AC8 = ["clear_tower_behavior", "is_tower_battle_distracted"];
-  thread maps\mp\mp_zombie_nest_ee_tower_battle_zombie_states::func_528A();
+  thread maps / mp / mp_zombie_nest_ee_tower_battle_zombie_states::func_528A();
   common_scripts\utility::func_3C87("flag_fuse_entered_correct");
   common_scripts\utility::func_3C87("aud_stop_rod_movement_sounds");
   func_52ED();
@@ -40,7 +40,7 @@ func_27CD(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_0C.var_7B8C = var_0C;
   var_0C.var_38C3 = "zombie_tower_rumble_" + var_0A["battleID"];
   var_0C.var_38C4 = func_46EE(var_0A["battleID"]);
-  maps\mp\mp_zombie_nest_special_event_creator::func_3135(::func_A69B, var_09["main_trigger"], var_09["attack_positions"], var_0A["battleID"], var_0A["notifications"], var_09["activation_triggers"], "zone1_4_bridge_tower", var_0B.var_0116, ::func_6A77, ::func_6A76, ::func_6A78, var_0C, ::func_6A7D, "tower_attack_on_deck_positions_struct");
+  maps / mp / mp_zombie_nest_special_event_creator::func_3135(::func_A69B, var_09["main_trigger"], var_09["attack_positions"], var_0A["battleID"], var_0A["notifications"], var_09["activation_triggers"], "zone1_4_bridge_tower", var_0B.origin, ::func_6A77, ::func_6A76, ::func_6A78, var_0C, ::func_6A7D, "tower_attack_on_deck_positions_struct");
   [[param_08]]();
 }
 
@@ -48,7 +48,7 @@ func_6A77(param_00, param_01, param_02) {
   var_03 = common_scripts\utility::func_46B5("tower_battle_sfx_top", "targetname");
   var_03 thread lib_0378::func_8D74("aud_tower_alarm");
   foreach(var_05 in param_00) {
-    var_05.var_08BC = level.var_A980;
+    var_05.var_8BC = level.var_A980;
   }
 
   if(!param_01) {
@@ -67,7 +67,7 @@ func_6A77(param_00, param_01, param_02) {
 func_6A78(param_00, param_01, param_02) {
   var_03 = common_scripts\utility::func_46B5("tower_battle_sfx_top", "targetname");
   var_03 thread lib_0378::func_8D74("aud_tower_alarm_stop");
-  level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("mp_zombie_nest_01_tower_battle", get_lowest_attack_spot_health(param_01));
+  level thread maps / mp / gametypes / zombies::orders_and_contracts_report_event("mp_zombie_nest_01_tower_battle", get_lowest_attack_spot_health(param_01));
   foreach(var_05 in param_00.var_65E8) {
     var_05 func_A180(5, 1, 0);
     var_05 func_A180(5, 1, 2);
@@ -107,8 +107,8 @@ func_6A76(param_00, param_01) {
   }
 
   param_00.var_65E8[0] thread lib_0378::func_8D74("aud_tower_machine_destroyed");
-  foreach(var_07 in level.var_744A) {
-    if(distance(var_07.var_0116, param_01[0].var_0116) < 300) {
+  foreach(var_07 in level.players) {
+    if(distance(var_07.origin, param_01[0].origin) < 300) {
       var_07 maps\mp\_utility::func_2CED(4, ::lib_0367::func_8E3C, "lightningrodbroke");
     }
   }
@@ -122,12 +122,12 @@ func_6A7D(param_00, param_01, param_02) {
   }
 
   if(param_02 && !level.var_9B19) {
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       if(lib_0547::func_577E(var_04)) {
         continue;
       }
 
-      if(distance(var_04.var_0116, param_00.var_0116) < 300) {
+      if(distance(var_04.origin, param_00.origin) < 300) {
         var_04 thread lib_0367::func_8E3C("rodmachineassault");
         level.var_9B19 = 1;
       }
@@ -162,8 +162,8 @@ func_A0E2(param_00, param_01) {
         self.var_299D delete();
       }
 
-      var_02 = anglesToForward(self.var_001D);
-      self.var_299D = spawnfx(level.var_0611["zmb_ee_fuse_dmg_lt"], self.var_0116, var_02);
+      var_02 = anglesToForward(self.angles);
+      self.var_299D = spawnfx(level.var_611["zmb_ee_fuse_dmg_lt"], self.origin, var_02);
       triggerfx(self.var_299D);
       self.var_28FC = 1;
       return;
@@ -172,14 +172,14 @@ func_A0E2(param_00, param_01) {
     return;
   }
 
-  if(param_00 <= param_01 * 0.5 && param_00 > param_01 * 0.25) {
+  if(param_01 <= var_02 * 0.5 && param_01 > var_02 * 0.25) {
     if(self.var_28FC != 2) {
       if(isDefined(self.var_299D)) {
         self.var_299D delete();
       }
 
-      var_02 = anglesToForward(self.var_001D);
-      self.var_299D = spawnfx(level.var_0611["zmb_ee_fuse_dmg_med"], self.var_0116, var_02);
+      var_02 = anglesToForward(self.angles);
+      self.var_299D = spawnfx(level.var_611["zmb_ee_fuse_dmg_med"], self.origin, var_02);
       triggerfx(self.var_299D);
       self.var_28FC = 2;
       return;
@@ -188,14 +188,14 @@ func_A0E2(param_00, param_01) {
     return;
   }
 
-  if(param_00 <= param_01 * 0.25 && param_00 > 0) {
+  if(param_01 <= var_02 * 0.25 && param_01 > 0) {
     if(self.var_28FC != 3) {
       if(isDefined(self.var_299D)) {
         self.var_299D delete();
       }
 
-      var_02 = anglesToForward(self.var_001D);
-      self.var_299D = spawnfx(level.var_0611["zmb_ee_fuse_dmg_hvy"], self.var_0116, var_02);
+      var_02 = anglesToForward(self.angles);
+      self.var_299D = spawnfx(level.var_611["zmb_ee_fuse_dmg_hvy"], self.origin, var_02);
       triggerfx(self.var_299D);
       self.var_28FC = 3;
       return;
@@ -204,14 +204,14 @@ func_A0E2(param_00, param_01) {
     return;
   }
 
-  if(param_00 <= 0) {
+  if(param_01 <= 0) {
     if(self.var_28FC != 4) {
       if(isDefined(self.var_299D)) {
         self.var_299D delete();
       }
 
-      var_02 = anglesToForward(self.var_001D);
-      self.var_299D = spawnfx(common_scripts\utility::func_44F5("ee_fuse_blowout"), self.var_0116, var_02);
+      var_02 = anglesToForward(self.angles);
+      self.var_299D = spawnfx(common_scripts\utility::func_44F5("ee_fuse_blowout"), self.origin, var_02);
       triggerfx(self.var_299D);
       self.var_28FC = 4;
       return;
@@ -253,7 +253,7 @@ func_A69B(param_00, param_01, param_02) {
     }
 
     var_06 setHintString(&"ZOMBIE_NEST_LIFT_RODS");
-    var_07 = common_scripts\utility::func_4461(var_06.var_0116, param_02);
+    var_07 = common_scripts\utility::func_4461(var_06.origin, param_02);
     var_06 thread func_A6C0(var_04, var_07);
   }
 
@@ -262,7 +262,7 @@ func_A69B(param_00, param_01, param_02) {
   while(var_09 < param_00.size) {
     level waittill("ee trigger was repaired", var_03, var_06);
     var_0A = var_03;
-    if(common_scripts\utility::func_0F79(param_00, var_06)) {
+    if(common_scripts\utility::func_F79(param_00, var_06)) {
       var_09++;
     }
   }
@@ -274,7 +274,7 @@ func_A69B(param_00, param_01, param_02) {
 
 func_A6AE(param_00) {
   foreach(var_02 in param_00) {
-    if(!isDefined(var_02.var_08BC)) {
+    if(!isDefined(var_02.var_8BC)) {
       return;
     }
   }
@@ -285,7 +285,7 @@ func_A6AE(param_00) {
     var_02 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
   }
 
-  while(param_00[0].var_08BC == level.var_A980) {
+  while(param_00[0].var_8BC == level.var_A980) {
     wait(1);
   }
 }
@@ -303,8 +303,8 @@ func_46EF(param_00) {
 }
 
 func_8A05() {
-  self.var_1170 = getEnt(self.var_01A2, "targetname");
-  self.var_1170.var_834D = getEntArray(self.var_1170.var_01A2, "targetname");
+  self.var_1170 = getEnt(self.target, "targetname");
+  self.var_1170.var_834D = getEntArray(self.var_1170.target, "targetname");
   self.var_1170.var_65F7 = self;
 }
 
@@ -326,7 +326,7 @@ func_A6C0(param_00, param_01) {
       param_01.var_299D delete();
     }
 
-    if(param_00 == 0 || var_02 maps\mp\gametypes\zombies::func_11C2(param_00)) {
+    if(param_00 == 0 || var_02 maps / mp / gametypes / zombies::func_11C2(param_00)) {
       self.var_28D5 = 0;
       self.var_57A4 = 1;
     }
@@ -399,7 +399,7 @@ func_64AC(param_00) {
     var_01.var_7EC3 = 0;
     var_01.var_7EBE = 0;
     var_01.var_7EC0 = "zmb_tower_rod_idle_bottom";
-    if(self.var_01A5 == "inner_spire_lever") {
+    if(self.targetname == "inner_spire_lever") {
       var_01.var_7EC4 = "zmb_tower_rod_mid_up";
       var_01.var_7EC2 = "zmb_tower_rod_mid_down";
       var_01.var_7EC7 = "zmb_tower_rod_mid_idle_top";
@@ -462,25 +462,25 @@ func_7EC8() {
 }
 
 func_9EC7() {
-  self hidepart("TAG_LIGHT_ON", self.var_0106);
-  self showpart("TAG_LIGHT_OFF", self.var_0106);
+  self hidepart("TAG_LIGHT_ON", self.model);
+  self showpart("TAG_LIGHT_OFF", self.model);
 }
 
 func_9EC6() {
   self.var_65E6 endon("lightning rod state change complete");
   for(;;) {
-    self hidepart("TAG_LIGHT_ON", self.var_0106);
-    self showpart("TAG_LIGHT_OFF", self.var_0106);
+    self hidepart("TAG_LIGHT_ON", self.model);
+    self showpart("TAG_LIGHT_OFF", self.model);
     wait(0.75);
-    self hidepart("TAG_LIGHT_OFF", self.var_0106);
-    self showpart("TAG_LIGHT_ON", self.var_0106);
+    self hidepart("TAG_LIGHT_OFF", self.model);
+    self showpart("TAG_LIGHT_ON", self.model);
     wait(0.75);
   }
 }
 
 func_9EC8() {
-  self hidepart("TAG_LIGHT_OFF", self.var_0106);
-  self showpart("TAG_LIGHT_ON", self.var_0106);
+  self hidepart("TAG_LIGHT_OFF", self.model);
+  self showpart("TAG_LIGHT_ON", self.model);
 }
 
 func_8A4B() {
@@ -494,8 +494,8 @@ func_2E7C() {
   wait(3);
   var_00 = getEnt("inner_spire", "targetname");
   if(isDefined(var_00)) {
-    foreach(var_02 in level.var_744A) {
-      if(distance2d(var_02.var_0116, var_00.var_0116) < 750) {
+    foreach(var_02 in level.players) {
+      if(distance2d(var_02.origin, var_00.origin) < 750) {
         var_02 thread lib_0367::func_8E3C("lightningrodpart2");
       }
     }
@@ -521,9 +521,9 @@ func_52FA(param_00) {
   var_02 = [];
   for(var_03 = 0; var_03 < param_00.size; var_03++) {
     var_04 = getEnt(param_00[var_03], "targetname");
-    var_04.var_65E6 = getEnt(var_04.var_01A2, "targetname");
-    func_5DA3(var_04.var_65E6.var_01A2, var_04);
-    var_01 = common_scripts\utility::func_0F6F(var_01, var_04);
+    var_04.var_65E6 = getEnt(var_04.target, "targetname");
+    func_5DA3(var_04.var_65E6.target, var_04);
+    var_01 = common_scripts\utility::func_F6F(var_01, var_04);
   }
 
   self.var_65E8 = var_01;
@@ -541,15 +541,15 @@ func_52ED() {
   var_00 setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
   var_00 thread func_2EB2();
   var_00.var_65E7 = getEnt("inner_spire_lever", "targetname");
-  var_00.var_65E7.var_65E6 = getEnt(var_00.var_65E7.var_01A2, "targetname");
+  var_00.var_65E7.var_65E6 = getEnt(var_00.var_65E7.target, "targetname");
   var_00.var_65E7 func_A180(0);
   var_00.var_65E7 func_A180(4);
   var_01 = getEntArray("nest_ee_fuse_outter_objectives", "targetname");
   foreach(var_03 in var_01) {
     var_03 setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
     var_03 thread func_2EB2();
-    var_03.var_65E7 = getEnt(var_03.var_01A2, "targetname");
-    var_03.var_65E7.var_65E6 = getEnt(var_03.var_65E7.var_01A2, "targetname");
+    var_03.var_65E7 = getEnt(var_03.target, "targetname");
+    var_03.var_65E7.var_65E6 = getEnt(var_03.var_65E7.target, "targetname");
     var_03.var_65E7 func_A180(0);
     var_03.var_65E7 func_A180(4);
   }
@@ -583,7 +583,7 @@ func_46ED(param_00, param_01, param_02) {
   var_03["attack_positions"] = [];
   for(var_04 = 0; var_04 < param_02.size; var_04++) {
     var_03["attack_positions"][var_04] = getEnt(param_02[var_04], "targetname");
-    var_03["attack_positions"][var_04].var_AC6A = common_scripts\utility::func_46B7(var_03["attack_positions"][var_04].var_01A2, "targetname");
+    var_03["attack_positions"][var_04].var_AC6A = common_scripts\utility::func_46B7(var_03["attack_positions"][var_04].target, "targetname");
   }
 
   return var_03;

@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_nest_ee_cart.gsc
 **********************************************/
 
-func_00F9() {
+main() {
   level.var_2DA8 = 0;
   level.var_2DA9 = 0;
   level.var_305F = 0;
@@ -35,7 +35,7 @@ func_7865() {
   level.var_3571.var_692A = 1;
   level.var_3571.var_5787 = 0;
   var_00 = common_scripts\utility::func_46B5("cart_align_node", "targetname");
-  level.var_3571.var_0BBE = var_00;
+  level.var_3571.var_BBE = var_00;
   thread func_9033();
   thread lib_0378::func_8D74("aud_cart_lights_off");
   level thread func_A0EF(level.var_3573, 0);
@@ -92,7 +92,7 @@ func_7863() {
   }
 
   level.var_3E3B.var_4D91 = lib_0559::func_7BE3(level.var_3E3B.var_6FC5, "tesla_barrel");
-  var_02 = level.var_3E3B maps\mp\mp_zombie_nest_ee_util::func_8BEC();
+  var_02 = level.var_3E3B maps / mp / mp_zombie_nest_ee_util::func_8BEC();
   level.var_3E3B.var_4D91.var_2F74 = 1;
   common_scripts\utility::func_3C8F("flag_ww_part_01_picked_up");
   var_02 func_2EBE(1);
@@ -118,7 +118,7 @@ func_7864() {
   }
 
   level.var_5981.var_4D91 = lib_0559::func_7BE3(level.var_5981.var_6FC5, "tesla_core");
-  var_02 = level.var_5981 maps\mp\mp_zombie_nest_ee_util::func_8BEC();
+  var_02 = level.var_5981 maps / mp / mp_zombie_nest_ee_util::func_8BEC();
   level.var_5981.var_4D91.var_2F74 = 1;
   common_scripts\utility::func_3C8F("flag_ww_part_02_picked_up");
   var_02 func_2EBE(2);
@@ -153,8 +153,8 @@ func_784A() {
   }
 
   common_scripts\utility::func_3C9F("flag_ww_forged");
-  level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("geistcraft_device_powered");
-  foreach(var_02 in level.var_744A) {
+  level thread maps / mp / gametypes / zombies::orders_and_contracts_report_event("geistcraft_device_powered");
+  foreach(var_02 in level.players) {
     var_02 thread func_2EB1();
   }
 
@@ -162,14 +162,14 @@ func_784A() {
 }
 
 func_2020() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 maps\mp\zombies\_zombies_rank::func_AC23("escortclaw");
   }
 }
 
 func_52DE() {
-  maps\mp\mp_zombie_nest_ee_util::func_8A53();
-  maps\mp\mp_zombie_nest_ee_workbench::func_536B();
+  maps / mp / mp_zombie_nest_ee_util::func_8A53();
+  maps / mp / mp_zombie_nest_ee_workbench::func_536B();
   thread func_2EAD();
   level.var_3571 = getEnt("ee_shard", "targetname");
   level.var_3571.var_9B8C = [];
@@ -191,9 +191,9 @@ func_52DE() {
   var_01 = func_8A2B("beam_zm_objective", "light_zm_lgtbeam", "lightbeam", "lightbeamoff", "glow");
   level.var_3574 = func_8A2B("light_zm_objective_med", "light_zm_puzzl_med", "flicker", "cycle1a", "puzzlelight");
   level.var_3575 = func_8A2B("light_zm_objective_rnd", "light_zm_puzzle_test", "flicker", "lightoff", "puzzlelight");
-  level.var_3573 = common_scripts\utility::func_0F73(var_00, var_01);
-  level.var_3573 = common_scripts\utility::func_0F73(level.var_3573, level.var_3575);
-  level.var_3573 = common_scripts\utility::func_0F73(level.var_3573, level.var_3574);
+  level.var_3573 = common_scripts\utility::func_F73(var_00, var_01);
+  level.var_3573 = common_scripts\utility::func_F73(level.var_3573, level.var_3575);
+  level.var_3573 = common_scripts\utility::func_F73(level.var_3573, level.var_3574);
   foreach(var_03 in level.var_3573) {
     var_03.var_760E = [];
     func_A12E(var_03, "facility", 1, 0);
@@ -265,7 +265,7 @@ func_2023(param_00) {
   thread func_08B9(param_00);
   if(param_00 == "rnd") {
     level waittill(param_00 + "_show_ww_part");
-    level.var_3E3B.var_6FC2 method_805B();
+    level.var_3E3B.var_6FC2 show();
   }
 
   level waittill(param_00 + "_create_ww_part");
@@ -303,7 +303,7 @@ func_6A9F() {
 }
 
 func_91C5(param_00, param_01) {
-  maps\mp\mp_zombie_nest_special_event_creator::func_170B(param_00, 250, undefined, "zmb_cart_zombie_killed", undefined, "tag_fx");
+  maps / mp / mp_zombie_nest_special_event_creator::func_170B(param_00, 250, undefined, "zmb_cart_zombie_killed", undefined, "tag_fx");
   common_scripts\utility::func_3C8F(param_01);
 }
 
@@ -322,10 +322,10 @@ func_202D(param_00) {
     case "med_2":
     case "rnd_3":
     case "rnd_2":
-      playFXOnTag(level.var_0611["zmb_gk_claw_full"], self, "TAG_FX");
-      playFXOnTag(level.var_0611["zmb_gk_claw_battery_full_1"], self, "flap1_shroud");
-      playFXOnTag(level.var_0611["zmb_gk_claw_battery_full_2"], self, "flap2_shroud");
-      playFXOnTag(level.var_0611["zmb_gk_claw_battery_full_3"], self, "flap3_shroud");
+      playFXOnTag(level.var_611["zmb_gk_claw_full"], self, "TAG_FX");
+      playFXOnTag(level.var_611["zmb_gk_claw_battery_full_1"], self, "flap1_shroud");
+      playFXOnTag(level.var_611["zmb_gk_claw_battery_full_2"], self, "flap2_shroud");
+      playFXOnTag(level.var_611["zmb_gk_claw_battery_full_3"], self, "flap3_shroud");
       break;
 
     case "med_1":
@@ -336,7 +336,7 @@ func_202D(param_00) {
   var_01 = self.var_9B8C[param_00];
   var_02 = getanimlength(var_01);
   var_03 = getanimname(var_01);
-  self method_8495(var_03, self.var_0BBE.var_0116, self.var_0BBE.var_001D);
+  self method_8495(var_03, self.var_BBE.origin, self.var_BBE.angles);
   wait(var_02);
 }
 
@@ -356,15 +356,15 @@ func_08B9(param_00) {
   var_01 = undefined;
   switch (param_00) {
     case "rnd":
-      var_01 = ::maps\mp\mp_zombie_nest_ee_util::func_08B6;
+      var_01 = ::maps / mp / mp_zombie_nest_ee_util::func_8B6;
       break;
 
     case "med":
-      var_01 = ::maps\mp\mp_zombie_nest_ee_util::func_08B0;
+      var_01 = ::maps / mp / mp_zombie_nest_ee_util::func_8B0;
       break;
 
     case "com":
-      var_01 = ::maps\mp\mp_zombie_nest_ee_util::func_08A8;
+      var_01 = ::maps / mp / mp_zombie_nest_ee_util::func_8A8;
       break;
 
     default:
@@ -419,12 +419,12 @@ func_2E7B() {
   level endon("flag_ww_part_01_picked_up");
   var_00 = lib_0557::func_7838("4 cart", "head to rnd");
   var_01 = getEnt("cart_dialog_trig", "targetname");
-  var_01.var_0CA5 = 0;
+  var_01.var_CA5 = 0;
   var_02 = level.var_3571;
   if(isDefined(var_02)) {
-    var_01.var_5ED1 = var_02.var_0116;
+    var_01.var_5ED1 = var_02.origin;
   } else {
-    var_01.var_5ED1 = var_01.var_0116;
+    var_01.var_5ED1 = var_01.origin;
   }
 
   while(!common_scripts\utility::func_3C77(var_00)) {
@@ -434,9 +434,9 @@ func_2E7B() {
     }
 
     if(isDefined(var_02)) {
-      var_01.var_5ED1 = var_02.var_0116;
+      var_01.var_5ED1 = var_02.origin;
     } else {
-      var_01.var_5ED1 = var_01.var_0116;
+      var_01.var_5ED1 = var_01.origin;
     }
 
     var_04 = var_01 func_2025(var_03);
@@ -454,12 +454,12 @@ func_2E7B() {
 }
 
 func_2E84() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(lib_0547::func_577E(var_01)) {
       continue;
     }
 
-    if(distance(var_01.var_0116, level.var_3571.var_0116) < 500) {
+    if(distance(var_01.origin, level.var_3571.origin) < 500) {
       var_01 thread lib_0367::func_8E3C("clawmove2");
     }
   }
@@ -490,13 +490,13 @@ func_9033() {
   wait(6);
   var_00 = "zmb_uberschnalle_light";
   var_01 = level.var_3571 gettagorigin("TAG_FX");
-  maps\mp\mp_zombie_nest_ee_util::func_9066(level.var_3571, "TAG_FX", var_01, var_00, "flag_cart_reached_end");
+  maps / mp / mp_zombie_nest_ee_util::func_9066(level.var_3571, "TAG_FX", var_01, var_00, "flag_cart_reached_end");
 }
 
 func_2025(param_00) {
   var_01 = self.var_5ED1 - param_00 getEye();
   var_02 = vectorNormalize((var_01[0], var_01[1], 0));
-  var_03 = anglesToForward(param_00.var_001D);
+  var_03 = anglesToForward(param_00.angles);
   var_04 = vectorNormalize((var_03[0], var_03[1], 0));
   var_05 = vectordot(var_02, var_04);
   var_05 = clamp(var_05, -1, 1);
@@ -546,12 +546,12 @@ func_A12E(param_00, param_01, param_02, param_03) {
     param_03 = 1;
   }
 
-  if(param_02 == common_scripts\utility::func_0F79(param_00.var_760E, param_01)) {
+  if(param_02 == common_scripts\utility::func_F79(param_00.var_760E, param_01)) {
     return;
   }
 
   if(param_02) {
-    param_00.var_760E = common_scripts\utility::func_0F6F(param_00.var_760E, param_01);
+    param_00.var_760E = common_scripts\utility::func_F6F(param_00.var_760E, param_01);
     if(param_00.var_760E.size == 1 && param_03) {
       func_5D7B(param_00, 1);
       return;
@@ -560,7 +560,7 @@ func_A12E(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  param_00.var_760E = common_scripts\utility::func_0F93(param_00.var_760E, param_01);
+  param_00.var_760E = common_scripts\utility::func_F93(param_00.var_760E, param_01);
   if(param_00.var_760E.size == 0 && param_03) {
     func_5D7B(param_00, 0);
   }

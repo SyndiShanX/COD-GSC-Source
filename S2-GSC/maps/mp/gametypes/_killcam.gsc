@@ -3,8 +3,8 @@
  * Script: maps\mp\gametypes\_killcam.gsc
 *********************************************/
 
-func_00D5() {
-  level.var_5A29 = maps\mp\gametypes\_tweakables::func_46F7("game", "allowkillcam");
+init() {
+  level.var_5A29 = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "allowkillcam");
   setDvar("5364", 8);
 }
 
@@ -172,27 +172,27 @@ func_74C9() {
   self setclientomnvar("ui_killcam_action", 0);
   self setclientomnvar("ui_killcam_type", 3);
   self setclientomnvar("ui_killcam_killedby_id", level.var_74CA);
-  maps\mp\_utility::func_A165("spectator");
-  self.var_0188 = 1;
+  maps\mp\_utility::updatesessionstate("spectator");
+  self.spectatekillcam = 1;
   self method_8533(0);
   function_03B7(0);
-  self.var_00E1 = -1;
-  self.var_0020 = var_02 + var_00;
-  self.var_009F = level.var_74CA;
+  self.killcamentity = -1;
+  self.archivetime = var_02 + var_00;
+  self.forcespectatorclient = level.var_74CA;
   self.var_5A2F = var_02;
-  self.var_014A = 0;
+  self.psoffsettime = 0;
   thread maps\mp\gametypes\_potg::func_772D();
   self allowspectateteam("allies", 1);
   self allowspectateteam("axis", 1);
   self allowspectateteam("freelook", 1);
   self allowspectateteam("none", 1);
-  if(level.var_6520) {
-    foreach(var_05 in level.var_985B) {
+  if(level.multiteambased) {
+    foreach(var_05 in level.teamnamelist) {
       self allowspectateteam(var_05, 1);
     }
   }
 
-  foreach(var_05 in level.var_985B) {
+  foreach(var_05 in level.teamnamelist) {
     self allowspectateteam(var_05, 1);
   }
 
@@ -232,13 +232,13 @@ switchkillcamentityovertime() {
       var_01[var_04].var_1EB5 = var_03.var_1EB5;
       var_01[var_04].victimnum = var_03.victimnum;
       var_01[var_04].var_3FD7 = var_03.var_3FD7;
-      var_01[var_04].var_A490 = var_03.var_A490;
-      var_01[var_04].var_01D0 = var_03.var_01D0;
+      var_01[var_04].victim = var_03.victim;
+      var_01[var_04].var_1D0 = var_03.var_1D0;
     }
   }
 
   if(var_01.size > 1) {
-    var_01 = common_scripts\utility::func_0FA4(var_01, ::potgcomparekilltimes);
+    var_01 = common_scripts\utility::func_FA4(var_01, ::potgcomparekilltimes);
   }
 
   if(var_01.size < 1) {
@@ -282,23 +282,23 @@ potgcomparekilltimes() {
 
 setpotgkillcamentity(param_00) {
   var_01 = 0;
-  if(isDefined(param_00.var_1EB5) && isDefined(param_00.var_A490)) {
-    var_01 = func_86B7(level.var_74CA, param_00.var_1EB5, param_00.var_01D0, param_00.var_A490, 0);
+  if(isDefined(param_00.var_1EB5) && isDefined(param_00.victim)) {
+    var_01 = func_86B7(level.var_74CA, param_00.var_1EB5, param_00.var_1D0, param_00.victim, 0);
   }
 
   if(!var_01 && isDefined(param_00.var_1EB5)) {
     if(param_00.var_1EB5 != level.var_74CA) {
-      self.var_00E1 = param_00.var_1EB5;
+      self.killcamentity = param_00.var_1EB5;
       if(isDefined(param_00.victimnum)) {
-        self.var_00E2 = param_00.victimnum;
+        self.killcamentitylookat = param_00.victimnum;
       }
 
       return;
     }
   }
 
-  self.var_00E1 = -1;
-  self.var_009F = level.var_74CA;
+  self.killcamentity = -1;
+  self.forcespectatorclient = level.var_74CA;
 }
 
 canincludeattachmentsforweapon(param_00) {
@@ -378,7 +378,7 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   if(isDefined(param_04)) {
-    if(maps\mp\_utility::func_5740(param_04)) {
+    if(maps\mp\_utility::iskillstreakweapon(param_04)) {
       var_14 = maps\mp\_utility::func_4545(level.var_5A7D[param_04]);
       self setclientomnvar("ui_killcam_killedby_killstreak", var_14);
       self setclientomnvar("ui_killcam_killedby_weapon", -1);
@@ -407,7 +407,7 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         var_19 = -1;
         if(isDefined(var_18) && var_18 != 0) {
           if(var_17 == "cond2" || var_17 == "cond1") {
-            var_1A = maps\mp\_utility::func_4431(var_16);
+            var_1A = maps\mp\_utility::getbaseweaponname(var_16);
             var_1B = maps\mp\_utility::func_452A(var_1A);
             if(isDefined(var_1B) && var_1B != 0) {
               var_1C = tablelookup("mp/statstable.csv", 18, maps\mp\_utility::unsignedint_to_hexstring_fixed(var_1B), 34);
@@ -425,23 +425,23 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
             }
           }
 
-          var_1D = maps\mp\_utility::unsignedint_to_hexstring_fixed(var_1B);
-          var_1C = tablelookuprownum("mp/statstable.csv", 18, var_1D);
+          var_1D = maps\mp\_utility::unsignedint_to_hexstring_fixed(var_18);
+          var_19 = tablelookuprownum("mp/statstable.csv", 18, var_1D);
         } else {
-          var_1C = tablelookuprownum("mp/statstable.csv", 2, var_19);
+          var_19 = tablelookuprownum("mp/statstable.csv", 2, var_16);
         }
 
-        self setclientomnvar("ui_killcam_killedby_weapon", var_1C);
+        self setclientomnvar("ui_killcam_killedby_weapon", var_19);
         self setclientomnvar("ui_killcam_killedby_killstreak", -1);
         self setclientomnvar("ui_killcam_killedby_weaponReputation", 0);
-        if(canincludeattachmentsforweapon(var_19)) {
-          var_18 = function_0061(param_07);
+        if(canincludeattachmentsforweapon(var_16)) {
+          var_15 = function_0061(param_04);
         }
 
-        var_18 = common_scripts\utility::func_0F93(var_18, "special_grip");
-        if(!level.var_8C03 && maps\mp\_utility::func_761E() && isPlayer(param_0C) && !isbot(self) && !function_01EF(self) && maps\mp\gametypes\_class::func_5E0A(param_0C)) {
+        var_15 = common_scripts\utility::func_F93(var_15, "special_grip");
+        if(!level.var_8C03 && maps\mp\_utility::practiceroundgame() && isPlayer(param_09) && !isbot(self) && !function_01EF(self) && maps\mp\gametypes\_class::func_5E0A(param_09)) {
           self setclientomnvar("ui_killcam_copycat", 1);
-          thread func_A68A(param_0C);
+          thread func_A68A(param_09);
         } else {
           self setclientomnvar("ui_killcam_copycat", 0);
         }
@@ -452,8 +452,8 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       }
 
       for(var_1E = 0; var_1E < 4; var_1E++) {
-        if(isDefined(var_1B[var_1E])) {
-          var_1F = tablelookuprownum("mp/attachmenttable.csv", 3, maps\mp\_utility::func_1150(var_1B[var_1E]));
+        if(isDefined(var_15[var_1E])) {
+          var_1F = tablelookuprownum("mp/attachmenttable.csv", 3, maps\mp\_utility::func_1150(var_15[var_1E]));
           self setclientomnvar("ui_killcam_killedby_attachment" + var_1E + 1, var_1F);
           continue;
         }
@@ -468,9 +468,9 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     self setclientomnvar("ui_killcam_killedby_weaponReputation", 0);
   }
 
-  if(!var_18 && isDefined(var_11.var_5DFA) && var_11.var_5DFA.size > 4) {
-    var_20 = var_11.var_5DFA[0];
-    var_21 = var_11.var_5DFA[3];
+  if(!var_0F && isDefined(param_09.var_5DFA) && param_09.var_5DFA.size > 4) {
+    var_20 = param_09.var_5DFA[0];
+    var_21 = param_09.var_5DFA[3];
     if(var_20 != 0) {
       var_22 = maps\mp\_utility::func_452B(var_20);
       var_23 = int(tablelookup(maps\mp\_utility::func_4604(), 1, var_22, 0));
@@ -486,14 +486,14 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       self setclientomnvar("ui_killcam_killedby_perk_" + var_1E, -1);
     }
 
-    self setclientomnvar("ui_killcam_killedby_division", var_11.var_0079);
-  } else if(!var_1A) {
+    self setclientomnvar("ui_killcam_killedby_division", param_09.var_79);
+  } else if(!var_0F) {
     for(var_1E = 1; var_1E <= 9; var_1E++) {
       self setclientomnvar("ui_killcam_killedby_perk_" + var_1E, -1);
     }
 
-    self setclientomnvar("ui_killcam_killedby_division", var_13.var_0079);
-  } else if(var_1A) {
+    self setclientomnvar("ui_killcam_killedby_division", param_09.var_79);
+  } else if(var_0F) {
     for(var_1E = 1; var_1E <= 9; var_1E++) {
       self setclientomnvar("ui_killcam_killedby_perk_" + var_1E, -1);
     }
@@ -501,8 +501,8 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     self setclientomnvar("ui_killcam_killedby_division", -1);
   }
 
-  if(!level.var_3F9D && var_17 != "replay" && var_17 != "playofthegame") {
-    if(var_11) {
+  if(!level.gameended && param_0C != "replay" && param_0C != "playofthegame") {
+    if(param_07) {
       self setclientomnvar("ui_killcam_action", 2);
     } else {
       self setclientomnvar("ui_killcam_action", 1);
@@ -511,7 +511,7 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     self setclientomnvar("ui_killcam_action", 0);
   }
 
-  switch (var_17) {
+  switch (param_0C) {
     case "replay":
       self setclientomnvar("ui_killcam_type", 2);
       break;
@@ -530,73 +530,73 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       break;
   }
 
-  var_26 = var_1C + var_0F + var_1B;
+  var_26 = var_11 + param_05 + var_10;
   var_27 = gettime();
   self notify("begin_killcam", var_27);
-  if(!var_1A && !function_01EF(var_13) && isDefined(var_13) && isPlayer(var_15)) {
-    var_13 method_82A8(var_15);
+  if(!var_0F && !function_01EF(param_09) && isDefined(param_09) && isPlayer(param_0A)) {
+    param_09 method_82A8(param_0A);
   }
 
-  maps\mp\_utility::func_A165("spectator");
-  self.var_0188 = 1;
-  if(function_01EF(var_13) && var_17 != "replay" && var_17 != "playofthegame") {
-    param_0B = var_15 getentitynumber();
+  maps\mp\_utility::updatesessionstate("spectator");
+  self.spectatekillcam = 1;
+  if(function_01EF(param_09) && param_0C != "replay" && param_0C != "playofthegame") {
+    param_01 = param_0A getentitynumber();
   }
 
   self method_8533(0);
-  if(var_1A) {
-    self.var_009F = var_15 getentitynumber();
+  if(var_0F) {
+    self.forcespectatorclient = param_0A getentitynumber();
   } else {
-    self.var_009F = param_0B;
+    self.forcespectatorclient = param_01;
   }
 
-  self.var_00E2 = var_15 getentitynumber();
-  self.var_00E1 = -1;
-  var_28 = func_86B7(param_0B, param_0C, param_0E, var_15, var_1C);
+  self.killcamentitylookat = param_0A getentitynumber();
+  self.killcamentity = -1;
+  var_28 = func_86B7(param_01, param_02, param_04, param_0A, var_11);
   if(!var_28) {
-    thread func_86B6(param_0C, var_26, param_0D);
+    thread func_86B6(param_02, var_26, param_03);
   }
 
-  if(var_1A) {
+  if(var_0F) {
     if(var_26 > gettime() / 1000) {
       var_26 = gettime() / 1000;
     }
-  } else if(var_26 > var_18) {
-    var_26 = var_18;
+  } else if(var_26 > param_0D) {
+    var_26 = param_0D;
   }
 
-  self.var_0020 = var_26;
-  self.var_5A2F = var_21;
-  self.var_014A = var_10;
+  self.archivetime = var_26;
+  self.var_5A2F = var_13;
+  self.psoffsettime = param_06;
   self allowspectateteam("allies", 1);
   self allowspectateteam("axis", 1);
   self allowspectateteam("freelook", 1);
   self allowspectateteam("none", 1);
-  if(level.var_6520) {
-    foreach(var_2A in level.var_985B) {
+  if(level.multiteambased) {
+    foreach(var_2A in level.teamnamelist) {
       self allowspectateteam(var_2A, 1);
     }
   }
 
-  foreach(var_2A in level.var_985B) {
+  foreach(var_2A in level.teamnamelist) {
     self allowspectateteam(var_2A, 1);
   }
 
-  thread func_36B5(var_17, var_13);
-  thread func_6164(var_17, var_13);
+  thread func_36B5(param_0C, param_09);
+  thread func_6164(param_0C, param_09);
   wait 0.05;
   if(!isDefined(self)) {
     return;
   }
 
-  if(self.var_0020 < var_26) {}
+  if(self.archivetime < var_26) {}
 
-  var_1C = self.var_0020 - 0.05 - var_0F;
-  var_21 = var_1C + var_20;
-  self.var_5A2F = var_21;
-  if(var_1C <= 0) {
-    if(var_17 != "replay" && var_17 != "playofthegame") {
-      maps\mp\_utility::func_A165("dead");
+  var_11 = self.archivetime - 0.05 - param_05;
+  var_13 = var_11 + var_12;
+  self.var_5A2F = var_13;
+  if(var_11 <= 0) {
+    if(param_0C != "replay" && param_0C != "playofthegame") {
+      maps\mp\_utility::updatesessionstate("dead");
     }
 
     maps\mp\_utility::func_23FF();
@@ -604,17 +604,17 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  self setclientomnvar("ui_killcam_end_milliseconds", int(var_21 * 1000) + gettime());
+  self setclientomnvar("ui_killcam_end_milliseconds", int(var_13 * 1000) + gettime());
   if(level.var_8C03) {
-    thread func_318D(var_1C);
+    thread func_318D(var_11);
   }
 
   self.var_5A29 = 1;
-  thread func_9046(var_17, var_13);
+  thread func_9046(param_0C, param_09);
   self.var_8C8A = 0;
   self.var_5A31 = maps\mp\_utility::func_44FA();
   if(!level.var_8C03) {
-    thread func_A6FB(var_11);
+    thread func_A6FB(param_07);
   } else {
     self notify("showing_final_killcam");
   }
@@ -622,17 +622,17 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   thread func_36D6();
   func_A784();
   if(level.var_8C03) {
-    if(self == var_13) {
-      var_13 maps\mp\gametypes\_missions::func_7750("ch_precision_moviestar");
+    if(self == param_09) {
+      param_09 maps\mp\gametypes\_missions::processchallenge("ch_precision_moviestar");
     }
 
-    if(level.var_74CA < 0 || var_17 != "playofthegame") {
+    if(level.var_74CA < 0 || param_0C != "playofthegame") {
       thread maps\mp\gametypes\_playerlogic::func_9049();
       return;
     }
   }
 
-  thread func_5A2B(1, var_17, var_13);
+  thread func_5A2B(1, param_0C, param_09);
 }
 
 func_318D(param_00) {
@@ -673,14 +673,14 @@ func_86B6(param_00, param_01, param_02) {
   var_03 = gettime() - param_01 * 1000;
   if(param_02 > var_03) {
     wait 0.05;
-    param_01 = self.var_0020;
+    param_01 = self.archivetime;
     var_03 = gettime() - param_01 * 1000;
     if(param_02 > var_03) {
       wait(param_02 - var_03 / 1000);
     }
   }
 
-  self.var_00E1 = param_00;
+  self.killcamentity = param_00;
 }
 
 func_A6FB(param_00) {
@@ -695,8 +695,8 @@ func_A6FB(param_00) {
   }
 
   self.var_8C8A = 1;
-  if(isDefined(self.var_012C["totalKillcamsSkipped"])) {
-    self.var_012C["totalKillcamsSkipped"]++;
+  if(isDefined(self.pers["totalKillcamsSkipped"])) {
+    self.pers["totalKillcamsSkipped"]++;
   }
 
   if(param_00 <= 0) {
@@ -721,7 +721,7 @@ func_A68A(param_00) {
   self notifyonplayercommand("KillCamCopyCat", "+weapnext");
   self waittill("KillCamCopyCat");
   self setclientomnvar("ui_killcam_copycat", 0);
-  self method_8617("copycat_steal_class");
+  self playSound("copycat_steal_class");
   maps\mp\gametypes\_class::func_8657(param_00);
 }
 
@@ -729,7 +729,7 @@ func_36D6() {
   self endon("disconnect");
   self endon("killcam_ended");
   for(;;) {
-    if(self.var_0020 <= 0) {
+    if(self.archivetime <= 0) {
       break;
     }
 
@@ -769,7 +769,7 @@ func_5A2B(param_00, param_01, param_02) {
     setmatchdata("lives", self.var_5CC6, "killcam_watch_duration", maps\mp\_utility::func_2314(var_03 - self.var_5A31));
   }
 
-  if(!level.var_3F9D) {
+  if(!level.gameended) {
     maps\mp\_utility::func_2401("kc_info");
   }
 
@@ -780,14 +780,14 @@ func_5A2B(param_00, param_01, param_02) {
   }
 
   if(param_01 != "replay" && param_01 != "playofthegame") {
-    maps\mp\_utility::func_A165("dead");
+    maps\mp\_utility::updatesessionstate("dead");
   }
 
-  if(isPlayer(self) && isDefined(param_02) && param_02 maps\mp\_utility::func_0649("specialty_perception") || param_02 maps\mp\_utility::func_0649("specialty_class_perception")) {
+  if(isPlayer(self) && isDefined(param_02) && param_02 maps\mp\_utility::_hasperk("specialty_perception") || param_02 maps\mp\_utility::_hasperk("specialty_class_perception")) {
     thread func_238F(param_02);
   }
 
-  if(isPlayer(self) && isDefined(param_02) && isDefined(param_02.var_0079)) {
+  if(isPlayer(self) && isDefined(param_02) && isDefined(param_02.var_79)) {
     thread func_237D(param_02);
   }
 
@@ -804,7 +804,7 @@ func_238F(param_00) {
 
 func_237D(param_00) {
   wait(0.1);
-  maps\mp\gametypes\_division_change::func_2F7B(param_00.var_0079, param_00 maps\mp\gametypes\_divisions::func_461C(param_00.var_0079), param_00);
+  maps\mp\gametypes\_division_change::func_2F7B(param_00.var_79, param_00 maps\mp\gametypes\_divisions::func_461C(param_00.var_79), param_00);
 }
 
 func_1F41() {
@@ -823,16 +823,16 @@ func_1F43() {
 func_1F40() {
   self setclientomnvar("ui_show_skip_killcam", 0);
   self.var_1F3F = 1;
-  if(isDefined(self.var_012C["totalKillcamsInterrupted"])) {
-    self.var_012C["totalKillcamsInterrupted"]++;
+  if(isDefined(self.pers["totalKillcamsInterrupted"])) {
+    self.pers["totalKillcamsInterrupted"]++;
   }
 }
 
 func_1F44() {
   self.var_1F3F = 1;
   self.var_A7F5 = 1;
-  if(isDefined(self.var_012C["totalKillcamsInterrupted"])) {
-    self.var_012C["totalKillcamsInterrupted"]++;
+  if(isDefined(self.pers["totalKillcamsInterrupted"])) {
+    self.pers["totalKillcamsInterrupted"]++;
   }
 }
 

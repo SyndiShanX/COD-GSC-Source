@@ -3,11 +3,11 @@
  * Script: maps\mp\gametypes\_dev.gsc
 *********************************************/
 
-func_00D5() {}
+init() {}
 
 func_6B3A() {}
 
-func_6B6C() {}
+onplayerconnect() {}
 
 func_A15A() {}
 

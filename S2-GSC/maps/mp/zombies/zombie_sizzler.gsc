@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\zombie_sizzler.gsc
 **********************************************/
 
-func_00D5() {
+init() {
   level.var_A41["zombie_sizzler"] = level.var_A41["zombie"];
   level.var_A41["zombie_sizzler"]["think"] = ::zombie_sizzler_think;
   level.var_A41["zombie_sizzler"]["move_mode"] = ::zombie_sizzler_move_mode_func;
@@ -117,10 +117,10 @@ zombie_make_sizzler(param_00, param_01) {
   var_06.var_8109 = var_02;
   var_07 = self method_83DB(var_03);
   if(isDefined(param_00)) {
-    var_09 = anglesToForward(self.var_1D);
+    var_09 = anglesToForward(self.angles);
     var_0A = vectordot(var_09, param_00);
     if(var_0A > -0.707 && var_0A < 0.707) {
-      var_0B = anglestoright(self.var_1D);
+      var_0B = anglestoright(self.angles);
       var_0A = vectordot(var_0B, param_00);
       if(var_0A > 0) {
         var_0C = 2;
@@ -143,10 +143,10 @@ zombie_make_sizzler(param_00, param_01) {
   }
 
   var_0D = self method_83D8(var_03, var_06.optional_script_anim_index);
-  var_0E = maps\mp\agents\_scripted_agent_anim_util::func_45B9(var_0D, var_05, 0);
+  var_0E = maps / mp / agents / _scripted_agent_anim_util::func_45B9(var_0D, var_05, 0);
   var_0F = getmovedelta(var_0D, 0, var_0E);
   var_10 = self localtoworldcoords(var_0F);
-  if(!lib_0547::func_1F5B(self.var_116, var_10)) {
+  if(!lib_0547::func_1F5B(self.origin, var_10)) {
     if(param_01) {
       var_06.optional_script_anim_index = 2;
     } else {
@@ -154,7 +154,7 @@ zombie_make_sizzler(param_00, param_01) {
     }
 
     var_0D = self method_83D8(var_03, var_06.optional_script_anim_index);
-    var_0E = maps\mp\agents\_scripted_agent_anim_util::func_45B9(var_0D, var_05, 0);
+    var_0E = maps / mp / agents / _scripted_agent_anim_util::func_45B9(var_0D, var_05, 0);
   }
 
   var_12 = getsizzlerboltoffsets(param_01, var_0C);
@@ -174,16 +174,16 @@ zombie_make_sizzler(param_00, param_01) {
   var_17 = [];
   var_17["end_notetrack"] = var_05;
   self.transformingtosizzler = 1;
-  thread maps\mp\agents\humanoid\_humanoid_util::func_8318(self.var_116, self.var_1D, var_03, var_06.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_17);
+  thread maps / mp / agents / humanoid / _humanoid_util::func_8318(self.origin, self.angles, var_03, var_06.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_17);
   lib_0378::func_8D74("vox_request", "transform");
-  var_18 = self.var_116;
+  var_18 = self.origin;
   wait(var_06.optional_timeoffset - 0.05);
   level notify("spawn_sizzler_start");
-  playFX(common_scripts\utility::func_44F5("zmb_ber_szlr_burst_1"), self.var_116);
+  playFX(common_scripts\utility::func_44F5("zmb_ber_szlr_burst_1"), self.origin);
   lib_0378::func_8D74("zmb_siz_trans_fx_burst", var_18);
   killfxontag(level.var_611["zmb_ber_bolt_rod_gk_attach"], var_15, "TAG_ORIGIN");
-  var_06.var_116 = self gettagorigin("tag_origin");
-  var_06.var_1D = self gettagangles("tag_origin");
+  var_06.origin = self gettagorigin("tag_origin");
+  var_06.angles = self gettagangles("tag_origin");
   var_06.ignoreforcedzombietype = 1;
   var_19 = lib_054D::func_90BA("zombie_sizzler", var_06, "zombie sizzler spawn", 1, 0, 1);
   level notify("spawn_sizzler_complete");
@@ -192,7 +192,7 @@ zombie_make_sizzler(param_00, param_01) {
     var_15 linkTo(var_19, var_04, var_13, var_14);
     playFXOnTag(level.var_611["zmb_ber_bolt_rod_gk_attach"], var_15, "TAG_ORIGIN");
     var_15 thread monitor_sizzler_bolt(var_19);
-    thread maps\mp\agents\humanoid\_humanoid_util::func_8318(self.var_116, self.var_1D, var_03, var_06.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_17);
+    thread maps / mp / agents / humanoid / _humanoid_util::func_8318(self.origin, self.angles, var_03, var_06.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_17);
     level.numactivesizzlers++;
   }
 
@@ -213,13 +213,13 @@ zombie_make_sizzler_simple() {
   var_05 = 1;
   var_03.optional_script_anim_index = var_05;
   var_06 = self method_83D8(var_01, var_03.optional_script_anim_index);
-  var_07 = maps\mp\agents\_scripted_agent_anim_util::func_45B9(var_06, var_02, 0);
+  var_07 = maps / mp / agents / _scripted_agent_anim_util::func_45B9(var_06, var_02, 0);
   var_08 = getmovedelta(var_06, 0, var_07);
   var_09 = self localtoworldcoords(var_08);
-  if(!lib_0547::func_1F5B(self.var_116, var_09)) {
+  if(!lib_0547::func_1F5B(self.origin, var_09)) {
     var_03.optional_script_anim_index = 4;
     var_06 = self method_83D8(var_01, var_03.optional_script_anim_index);
-    var_07 = maps\mp\agents\_scripted_agent_anim_util::func_45B9(var_06, var_02, 0);
+    var_07 = maps / mp / agents / _scripted_agent_anim_util::func_45B9(var_06, var_02, 0);
   }
 
   var_0B = getanimlength(var_06);
@@ -227,19 +227,19 @@ zombie_make_sizzler_simple() {
   var_0C = [];
   var_0C["end_notetrack"] = var_02;
   self.transformingtosizzler = 1;
-  thread maps\mp\agents\humanoid\_humanoid_util::func_8318(self.var_116, self.var_1D, var_01, var_03.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_0C);
+  thread maps / mp / agents / humanoid / _humanoid_util::func_8318(self.origin, self.angles, var_01, var_03.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_0C);
   lib_0378::func_8D74("vox_request", "transform");
-  var_0D = self.var_116;
+  var_0D = self.origin;
   wait(var_03.optional_timeoffset - 0.05);
   level notify("spawn_sizzler_start");
-  playFX(common_scripts\utility::func_44F5("zmb_ber_szlr_burst_1"), self.var_116);
+  playFX(common_scripts\utility::func_44F5("zmb_ber_szlr_burst_1"), self.origin);
   lib_0378::func_8D74("zmb_siz_trans_fx_burst", var_0D);
-  var_03.var_116 = self gettagorigin("tag_origin");
-  var_03.var_1D = self gettagangles("tag_origin");
+  var_03.origin = self gettagorigin("tag_origin");
+  var_03.angles = self gettagangles("tag_origin");
   var_0E = lib_054D::func_90BA("zombie_sizzler", var_03, "zombie sizzler spawn", 1, 0, 1);
   level notify("spawn_sizzler_complete", var_0E, self);
   if(isDefined(var_0E)) {
-    thread maps\mp\agents\humanoid\_humanoid_util::func_8318(self.var_116, self.var_1D, var_01, var_03.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_0C);
+    thread maps / mp / agents / humanoid / _humanoid_util::func_8318(self.origin, self.angles, var_01, var_03.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_0C);
     level.numactivesizzlers++;
   }
 
@@ -310,7 +310,7 @@ monitor_bolt_damage(param_00) {
   for(;;) {
     self waittill("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_0A);
     playFXOnTag(level.var_611["zmb_ber_szlr_geistkraftexplode_1"], self, "TAG_ORIGIN");
-    param_00 dodamage(param_00.var_BC, var_02.var_116, var_02, self, var_05, var_0A, var_04);
+    param_00 dodamage(param_00.health, var_02.origin, var_02, self, var_05, var_0A, var_04);
   }
 }
 
@@ -321,7 +321,7 @@ getsizzlerbolt() {
 
   var_00 = undefined;
   if(level.sizzlerbolts.size < 14) {
-    var_00 = spawn("script_model", self.var_116);
+    var_00 = spawn("script_model", self.origin);
     level.sizzlerbolts[level.sizzlerbolts.size] = var_00;
     var_00 setModel("npc_zom_wonderweapon_bolt");
   } else {
@@ -333,7 +333,7 @@ getsizzlerbolt() {
   }
 
   var_00 solid();
-  var_00 method_805B();
+  var_00 show();
   return var_00;
 }
 

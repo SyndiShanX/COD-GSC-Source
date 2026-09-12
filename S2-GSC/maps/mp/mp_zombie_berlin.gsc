@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_berlin.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   precacherumble("viewmodel_small");
   precacherumble("damage_light");
   precacherumble("damage_heavy");
@@ -14,18 +14,18 @@ func_00F9() {
   level.var_scaling_reach_min_wave = 15;
   level.var_scaling_reach_max_wave = 28;
   level.var_8AF = ::lib_0547::razergunmaxammo;
-  maps\mp\mp_zombie_berlin_precache::func_F9();
-  maps\createart\mp_zombie_berlin_art::func_F9();
-  maps\mp\mp_zombie_berlin_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_zombie_berlin_lighting::func_F9();
-  maps\mp\mp_zombie_berlin_aud::func_F9();
-  maps\mp\mp_zombie_nest_ee_wave_manipulation::func_F9();
-  maps\mp\mp_zombie_berlin_anim::func_F9();
-  maps\mp\mp_zombie_berlin_traps::func_F9();
-  maps\mp\mp_zombie_berlin_vo::func_F9();
-  thread maps\mp\zombies\vignettes::vignette_init();
-  maps\mp\_compass::func_8A2F("compass_map_mp_zombie_berlin");
+  maps / mp / mp_zombie_berlin_precache::main();
+  maps / createart / mp_zombie_berlin_art::main();
+  maps / mp / mp_zombie_berlin_fx::main();
+  maps\mp\_load::main();
+  maps / mp / mp_zombie_berlin_lighting::main();
+  maps / mp / mp_zombie_berlin_aud::main();
+  maps / mp / mp_zombie_nest_ee_wave_manipulation::main();
+  maps / mp / mp_zombie_berlin_anim::main();
+  maps / mp / mp_zombie_berlin_traps::main();
+  maps / mp / mp_zombie_berlin_vo::main();
+  thread maps / mp / zombies / vignettes::vignette_init();
+  maps\mp\_compass::setupminimap("compass_map_mp_zombie_berlin");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   setDvar("4341", "0");
@@ -37,7 +37,7 @@ func_00F9() {
   level.var_343A = "mp_zombie_berlin_drone";
   level.var_A853 = "mp_zombie_berlin_warbird";
   level.var_A852 = "mp_zombie_berlin_warbird";
-  level.upgrade_machine_reveal_func = ::maps\mp\mp_zombie_berlin_ee::wait_for_upgrade_machine_arrived;
+  level.upgrade_machine_reveal_func = ::maps / mp / mp_zombie_berlin_ee::wait_for_upgrade_machine_arrived;
   level.showels_beautiful_wallbuys = 1;
   level.use_zombie_unresolved_collision = 1;
   thread paired_door_handler();
@@ -55,18 +55,18 @@ func_00F9() {
   thread setup_objective_flags();
   thread init_casual_melee_pickups();
   thread airship_wunderbuss_picker();
-  thread maps\mp\zombies\_zombies_money::func_D5();
-  level thread maps\mp\zquests\zmb_secret_challenges_util::init_challenges_utility();
-  level thread maps\mp\zquests\dlc2_trophies_mp_zombie_berlin::func_D5();
-  level thread maps\mp\zombies\_zombies_audio_dlc2::initdlc2audio();
+  thread maps\mp\zombies\_zombies_money::init();
+  level thread maps / mp / zquests / zmb_secret_challenges_util::init_challenges_utility();
+  level thread maps / mp / zquests / dlc2_trophies_mp_zombie_berlin::init();
+  level thread maps / mp / zombies / _zombies_audio_dlc2::initdlc2audio();
   level thread maps\mp\_utility::func_6F74(::mute_audio_on_intro);
-  level thread maps\mp\zquests\dlc2_secrets_mp_zombie_berlin::init_dlc2_secrets_mp_zombie_berlin();
+  level thread maps / mp / zquests / dlc2_secrets_mp_zombie_berlin::init_dlc2_secrets_mp_zombie_berlin();
   level thread lib_0557::manage_mtx5_event();
   performance_stuff();
 }
 
 init_zones() {
-  lib_055A::func_D5();
+  lib_055A::init();
   lib_055A::func_530A("zone_underbelly_start", 1);
   lib_055A::func_530A("zone_underbelly_rubble", 0);
   lib_055A::func_530A("zone_underbelly_intact", 0);
@@ -124,7 +124,7 @@ init_zones() {
   lib_053F::func_7BE6(&"ZOMBIE_BERLIN_AREA_CHURCH_GARDEN", "garden_to_church", 0);
   lib_053F::func_7BE6(&"ZOMBIE_BERLIN_AREA_CHURCH_INTERIOR", "garden_to_church", 1);
   lib_055A::func_88A();
-  level.var_6BB0 = ::maps\mp\mp_zombie_berlin_utils::onberlinstartgame;
+  level.var_6BB0 = ::maps / mp / mp_zombie_berlin_utils::onberlinstartgame;
 }
 
 init_drop_pod_doors() {
@@ -144,8 +144,8 @@ init_drop_pod_doors() {
 init_quests() {
   common_scripts\utility::func_3C87("berlin_cinematic_done");
   lib_0557::func_786C();
-  thread maps\mp\mp_zombie_berlin_ee::func_D5();
-  thread maps\mp\mp_zombie_berlin_ee_hc::func_D5();
+  thread maps / mp / mp_zombie_berlin_ee::init();
+  thread maps / mp / mp_zombie_berlin_ee_hc::init();
   thread init_berlin_quest_notebook();
 }
 
@@ -161,8 +161,8 @@ all_flags_exist(param_00) {
 
 init_berlin_quest_notebook() {
   var_00 = "flag_hc_projector_notebook";
-  var_01 = ["flag_quest_wunderbuss_battery_collected", "flag_quest_wunderbuss_geistbolt_collected", maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("wunderbuss_zm"), "pap_ww_blasted_2", "flag_hc_quest_bat_step01_contact_survivor_complete", "flag_hc_quest_bat_step02_give_weapon_complete", "flag_hc_quest_bat_step02_give_jolts_complete", maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("bat"), lib_0557::func_7838("quest_contact_hq", "step_use_radio"), "quest_contact_soviets", lib_0557::func_7838("quest_draw_airship", "step_ignite_flare"), lib_0557::func_7838("quest_bring_down_airship", "step_reel_anchors"), "apartment_dagger_painting_found", var_00, maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("dagger"), "flag_hc_quest_finale_door_open", "statue_puzzle_success", maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("sword"), "flag_hc_quest_axe_step02_obtained_scale_cup", "flag_hc_quest_axe_step03_placed_sizzler_armored_head", maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("pickaxe"), "quest_bring_down_airship", "quest_defeat_straub", "berlin_cinematic_done"];
-  foreach(var_03 in [maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("bat"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("sword"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("pickaxe"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("dagger"), maps\mp\mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("wunderbuss_zm"), var_00]) {
+  var_01 = ["flag_quest_wunderbuss_battery_collected", "flag_quest_wunderbuss_geistbolt_collected", maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("wunderbuss_zm"), "pap_ww_blasted_2", "flag_hc_quest_bat_step01_contact_survivor_complete", "flag_hc_quest_bat_step02_give_weapon_complete", "flag_hc_quest_bat_step02_give_jolts_complete", maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("bat"), lib_0557::func_7838("quest_contact_hq", "step_use_radio"), "quest_contact_soviets", lib_0557::func_7838("quest_draw_airship", "step_ignite_flare"), lib_0557::func_7838("quest_bring_down_airship", "step_reel_anchors"), "apartment_dagger_painting_found", var_00, maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("dagger"), "flag_hc_quest_finale_door_open", "statue_puzzle_success", maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("sword"), "flag_hc_quest_axe_step02_obtained_scale_cup", "flag_hc_quest_axe_step03_placed_sizzler_armored_head", maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("pickaxe"), "quest_bring_down_airship", "quest_defeat_straub", "berlin_cinematic_done"];
+  foreach(var_03 in [maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("bat"), maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("sword"), maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("pickaxe"), maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("dagger"), maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("wunderbuss_zm"), var_00]) {
     common_scripts\utility::func_3C87(var_03);
   }
 
@@ -178,17 +178,17 @@ init_berlin_quest_notebook() {
 }
 
 init_berlin_traps() {
-  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_tank", "active", ::maps\mp\mp_zombie_berlin_trap_tank::trap_tank);
-  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_bomber_prop", "active", ::maps\mp\mp_zombie_berlin_trap_bomber_prop::trap_bomber_prop);
-  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_cage_blitz", "active", ::maps\mp\mp_zombie_berlin_trap_cage_blitz::trap_cage_blitz);
+  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_tank", "active", ::maps / mp / mp_zombie_berlin_trap_tank::trap_tank);
+  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_bomber_prop", "active", ::maps / mp / mp_zombie_berlin_trap_bomber_prop::trap_bomber_prop);
+  thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_cage_blitz", "active", ::maps / mp / mp_zombie_berlin_trap_cage_blitz::trap_cage_blitz);
 }
 
 init_weapons() {
-  maps\mp\zombies\weapons\_zombie_wunderbuss::func_D5();
-  level thread maps\mp\zombies\weapons\_zombie_dlc2_melee::func_D5();
+  maps / mp / zombies / weapons / _zombie_wunderbuss::init();
+  level thread maps / mp / zombies / weapons / _zombie_dlc2_melee::init();
   level thread lib_057D::func_5162();
-  level thread maps\mp\zombies\weapons\_zombie_razer_gun::func_D5();
-  level thread lib_0580::func_D5();
+  level thread maps / mp / zombies / weapons / _zombie_razer_gun::init();
+  level thread lib_0580::init();
 }
 
 setup_objective_flags() {}
@@ -200,8 +200,8 @@ paired_door_handler() {
 }
 
 init_new_zombie_types() {
-  maps\mp\zombies\zombie_sizzler::func_D5();
-  maps\mp\zombies\zombie_bob::func_D5();
+  maps / mp / zombies / zombie_sizzler::init();
+  maps / mp / zombies / zombie_bob::init();
 }
 
 init_sizzler_arrival() {
@@ -222,7 +222,7 @@ make_fodders_sizzler_airship() {
 
   while(common_scripts\utility::func_3C77("flag_sizzlers_active")) {
     if(common_scripts\utility::func_562E(level.straub_airship.canmakesizzlers)) {
-      maps\mp\mp_zombie_berlin_utils::airship_turret_update_valid_targets();
+      maps / mp / mp_zombie_berlin_utils::airship_turret_update_valid_targets();
     }
 
     wait(5);
@@ -254,14 +254,14 @@ mute_audio_on_intro() {
   while(!level.var_3FA6) {
     self freezecontrols(1);
     self method_812B(0);
-    self method_8324();
+    self disableoffhandweapons();
     self method_84CB();
     wait 0.05;
   }
 
   self freezecontrols(0);
   self method_812B(1);
-  self method_8325();
+  self enableoffhandweapons();
   self method_84CC();
   self method_8627("berl_intro_movie");
 }
@@ -275,10 +275,10 @@ init_casual_melee_pickups() {
   var_01 setHintString(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_BAT");
   var_02 setHintString(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_AXE");
   var_03 setHintString(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_SHOVEL");
-  level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_01, "bat_casual");
-  level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_00, "dagger_casual");
-  level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_02, "pickaxe_casual");
-  level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_03, "shovel_casual");
+  level thread maps / mp / mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_01, "bat_casual");
+  level thread maps / mp / mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_00, "dagger_casual");
+  level thread maps / mp / mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_02, "pickaxe_casual");
+  level thread maps / mp / mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_03, "shovel_casual");
 }
 
 performance_stuff() {
@@ -322,7 +322,7 @@ tether_fakery() {
   level.tether_fakery_vol = getEnt("tether_fakery_vol", "targetname");
   var_00 = 225;
   for(;;) {
-    foreach(var_02 in level.var_744A) {
+    foreach(var_02 in level.players) {
       var_02 tether_fakery_update(var_00);
     }
 

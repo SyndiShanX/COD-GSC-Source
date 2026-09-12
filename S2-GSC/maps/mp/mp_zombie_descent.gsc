@@ -3,35 +3,35 @@
  * Script: maps\mp\mp_zombie_descent.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   level.use_zombie_unresolved_collision = 1;
-  level.pack_a_punc_pre_func = ::maps\mp\mp_zombie_descent_ee_main::raise_machine_to_unlock_pack_a_punch;
+  level.pack_a_punc_pre_func = ::maps / mp / mp_zombie_descent_ee_main::raise_machine_to_unlock_pack_a_punch;
   level.var_8B96 = ::descent_player_ignore_extra;
   level.zmb_player_safe_teleport_on_perk_buy = 1;
-  maps\mp\mp_zombie_descent_precache::func_F9();
-  maps\createart\mp_zombie_descent_art::func_F9();
-  maps\mp\mp_zombie_descent_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_zombie_descent_lighting::func_F9();
-  maps\mp\mp_zombie_descent_aud::func_F9();
+  maps / mp / mp_zombie_descent_precache::main();
+  maps / createart / mp_zombie_descent_art::main();
+  maps / mp / mp_zombie_descent_fx::main();
+  maps\mp\_load::main();
+  maps / mp / mp_zombie_descent_lighting::main();
+  maps / mp / mp_zombie_descent_aud::main();
   common_scripts\utility::func_3C87("flag_closet_to_basement_1");
   hack_swap_basement_cloest_door_flag();
-  maps\mp\_compass::func_8A2F("compass_map_mp_zombie_descent");
+  maps\mp\_compass::setupminimap("compass_map_mp_zombie_descent");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   level.zmcharactervariantid = 1;
   level.var_6BB0 = ::on_game_start_descent;
   level.pairedmeleeclipwarningonce = 0;
-  level.var_902A = ::maps\mp\mp_zombie_descent_utils::func_902A;
+  level.var_902A = ::maps / mp / mp_zombie_descent_utils::func_902A;
   level.pap_camo_ref_override = "camo_pap_04";
   level.var_AC71 = ::initdescentweapons;
-  level.means_of_skipping_rounds_func = ::maps\mp\mp_zombie_nest_ee_wave_manipulation::skiproundwait2;
+  level.means_of_skipping_rounds_func = ::maps / mp / mp_zombie_nest_ee_wave_manipulation::skiproundwait2;
   level.door_data_out_of_date = 0;
   level.var_73BD = ::no_points_for_thule;
   level.usenavmeshforuber = 1;
   level.var_783F = 0;
   level.zombiespawnfxcount = 0;
-  level thread maps\mp\zquests\zmb_secret_challenges_util::init_challenges_utility();
+  level thread maps / mp / zquests / zmb_secret_challenges_util::init_challenges_utility();
   level.var_AC2E = 8;
   level thread maps\mp\_utility::func_6F74(::mute_audio_on_intro);
   init_blood_plates();
@@ -42,19 +42,19 @@ func_00F9() {
   initflags();
   level thread door_death_fix();
   level.var_ABD3 = -3500;
-  level thread maps\mp\zombies\_zombies_audio_dlc2::initdlc2audio();
-  maps\mp\zombies\_zombies_money::func_D5();
-  level thread maps\mp\zombies\_zombies_harmonic_kinetic_accelerator::func_D5();
-  level thread maps\mp\zombies\_zombies_orbital_gravity_entangler::func_D5();
-  level thread maps\mp\zombies\_zombies_blood_tubes::func_D5();
-  level thread soundscripts\_snd_common_zmb_dlc4::snd_zmb_init_dlc4();
-  level thread maps\mp\zquests\dlc4_secrets_mp_zombie_descent::init_dlc4_secrets_mp_zombie_descent();
-  level thread maps\mp\zquests\dlc4_trophies_mp_zombie_descent::func_D5();
-  maps\mp\mp_zombie_nest_ee_wave_manipulation::func_F9();
-  level thread maps\mp\mp_zombie_descent_utils::vo_intro();
+  level thread maps / mp / zombies / _zombies_audio_dlc2::initdlc2audio();
+  maps\mp\zombies\_zombies_money::init();
+  level thread maps / mp / zombies / _zombies_harmonic_kinetic_accelerator::init();
+  level thread maps / mp / zombies / _zombies_orbital_gravity_entangler::init();
+  level thread maps / mp / zombies / _zombies_blood_tubes::init();
+  level thread soundscripts / _snd_common_zmb_dlc4::snd_zmb_init_dlc4();
+  level thread maps / mp / zquests / dlc4_secrets_mp_zombie_descent::init_dlc4_secrets_mp_zombie_descent();
+  level thread maps / mp / zquests / dlc4_trophies_mp_zombie_descent::init();
+  maps / mp / mp_zombie_nest_ee_wave_manipulation::main();
+  level thread maps / mp / mp_zombie_descent_utils::vo_intro();
   level thread spawn_ice_breakers_on_door_open();
   level thread handle_door_orb_blockers();
-  level thread maps\mp\zombies\zombie_corpse_eater::periodically_spawn_corpse_eaters();
+  level thread maps / mp / zombies / zombie_corpse_eater::periodically_spawn_corpse_eaters();
   level thread handle_boss_battle_playtest();
   level thread setup_text_log_reveals();
   level thread handle_conditional_spawners();
@@ -73,15 +73,15 @@ no_points_for_thule(param_00, param_01) {
 spawnfadein() {
   self.var_6772 = newclienthudelem(self);
   self.var_6772 setshader("black", 640, 480);
-  self.var_6772.ignoreme = 999;
-  self.var_6772.var_C6 = "fullscreen";
-  self.var_6772.var_1CA = "fullscreen";
-  self.var_6772.var_A0 = 0;
+  self.var_6772.sort = 999;
+  self.var_6772.horzalign = "fullscreen";
+  self.var_6772.vertalign = "fullscreen";
+  self.var_6772.foreground = 0;
   while(!level.var_3FA6) {
     wait 0.05;
   }
 
-  thread animscripts\notetracks_common::do_fade_from_black(1.15);
+  thread animscripts / notetracks_common::do_fade_from_black(1.15);
 }
 
 player_clear_stuff_on_death() {
@@ -126,8 +126,8 @@ player_clear_stuff_on_death() {
 
 handle_conditional_spawners() {
   foreach(var_01 in common_scripts\utility::func_46B7("zombie_spawner", "script_noteworthy")) {
-    if(isDefined(var_01.var_1A2)) {
-      var_01.player_exclusion_zones = common_scripts\utility::func_46B7(var_01.var_1A2, "targetname");
+    if(isDefined(var_01.target)) {
+      var_01.player_exclusion_zones = common_scripts\utility::func_46B7(var_01.target, "targetname");
       var_01 thread toggle_active();
     }
   }
@@ -135,7 +135,7 @@ handle_conditional_spawners() {
 
 toggle_active() {
   var_00 = self;
-  while(!isDefined(level.var_744A) || level.var_744A.size == 0) {
+  while(!isDefined(level.players) || level.players.size == 0) {
     wait 0.05;
   }
 
@@ -146,8 +146,8 @@ toggle_active() {
         return;
       }
 
-      foreach(var_04 in level.var_744A) {
-        if(distance2d(var_04.var_116, var_02.var_116) < var_02.var_14F && abs(var_04.var_116[2] - var_02.var_116[2]) < var_02.var_BD) {
+      foreach(var_04 in level.players) {
+        if(distance2d(var_04.origin, var_02.origin) < var_02.var_14F && abs(var_04.origin[2] - var_02.origin[2]) < var_02.height) {
           var_00.is_zombies_spawner_script_disabled = 1;
           break;
         }
@@ -171,14 +171,14 @@ mute_audio_on_intro() {
   while(!level.var_3FA6) {
     self freezecontrols(1);
     self method_812B(0);
-    self method_8324();
+    self disableoffhandweapons();
     self method_84CB();
     wait 0.05;
   }
 
   self freezecontrols(0);
   self method_812B(1);
-  self method_8325();
+  self enableoffhandweapons();
   self method_84CC();
   self method_8627("intro_movie");
 }
@@ -195,10 +195,10 @@ handle_boss_battle_playtest() {
   level.var_A980 = 18;
   level thread maps\mp\_utility::func_6F74(::give_all_boss_battle_perks);
   wait(1);
-  var_00 = common_scripts\utility::func_7A33(level.var_744A);
+  var_00 = common_scripts\utility::func_7A33(level.players);
   var_00 lib_057D::func_4766();
   wait(5);
-  maps\mp\mp_zombie_descent_ee_main::get_available_players();
+  maps / mp / mp_zombie_descent_ee_main::func_784C();
 }
 
 give_all_boss_battle_perks() {
@@ -228,7 +228,7 @@ give_all_boss_battle_perks() {
   var_00 lib_0586::func_78E("m1911_pap_zm");
   var_00 lib_056A::func_47B5();
   var_00 lib_056A::func_4784();
-  var_00 lib_056A::cp_zmb_escape_init();
+  var_00 lib_056A::func_4775();
   var_00 lib_056A::func_47B1();
   var_00 lib_056A::func_47B8();
 }
@@ -245,44 +245,44 @@ init_blood_plates() {
     if(isDefined(var_03.var_8260) && var_03.var_8260 == "plate_trial_room") {
       level.blood_plates["trial"] = var_03;
       var_04 = var_01;
-      var_04 = function_01AC(var_04, var_03.var_116, 150);
+      var_04 = function_01AC(var_04, var_03.origin, 150);
       if(isDefined(var_04[0])) {
         var_03.blood_pool = var_04[0];
-        var_03.blood_pool.min_pos = var_03.blood_pool.var_116;
-        var_03.blood_pool.max_pos = var_03.blood_pool.var_116 + (0, 0, 28);
+        var_03.blood_pool.min_pos = var_03.blood_pool.origin;
+        var_03.blood_pool.max_pos = var_03.blood_pool.origin + (0, 0, 28);
       }
     }
 
     if(isDefined(var_03.var_8260) && var_03.var_8260 == "plate_boss_room") {
       level.blood_plates[level.blood_plates.size] = var_03;
       var_04 = var_01;
-      var_04 = function_01AC(var_04, var_03.var_116, 150);
+      var_04 = function_01AC(var_04, var_03.origin, 150);
       if(isDefined(var_04[0])) {
         var_03.blood_pool = var_04[0];
-        var_03.blood_pool.min_pos = var_03.blood_pool.var_116;
-        var_03.blood_pool.max_pos = var_03.blood_pool.var_116 + (0, 0, 28);
+        var_03.blood_pool.min_pos = var_03.blood_pool.origin;
+        var_03.blood_pool.max_pos = var_03.blood_pool.origin + (0, 0, 28);
       }
     }
 
     if(isDefined(var_03.var_8260) && var_03.var_8260 == "plate_bonus_room") {
       level.blood_plates["bonus"] = var_03;
       var_04 = var_01;
-      var_04 = function_01AC(var_04, var_03.var_116, 150);
+      var_04 = function_01AC(var_04, var_03.origin, 150);
       if(isDefined(var_04[0])) {
         var_03.blood_pool = var_04[0];
-        var_03.blood_pool.min_pos = var_03.blood_pool.var_116;
-        var_03.blood_pool.max_pos = var_03.blood_pool.var_116 + (0, 0, 28);
+        var_03.blood_pool.min_pos = var_03.blood_pool.origin;
+        var_03.blood_pool.max_pos = var_03.blood_pool.origin + (0, 0, 28);
       }
     }
 
     if(isDefined(var_03.var_8260) && var_03.var_8260 == "plate_shelf") {
       level.blood_plates["shelf"] = var_03;
       var_04 = var_01;
-      var_04 = function_01AC(var_04, var_03.var_116, 150);
+      var_04 = function_01AC(var_04, var_03.origin, 150);
       if(isDefined(var_04[0])) {
         var_03.blood_pool = var_04[0];
-        var_03.blood_pool.min_pos = var_03.blood_pool.var_116;
-        var_03.blood_pool.max_pos = var_03.blood_pool.var_116 + (0, 0, 28);
+        var_03.blood_pool.min_pos = var_03.blood_pool.origin;
+        var_03.blood_pool.max_pos = var_03.blood_pool.origin + (0, 0, 28);
       }
     }
   }
@@ -297,7 +297,7 @@ init_blood_plates() {
 setup_blood_plates(param_00) {
   var_01 = self;
   if(isDefined(self.blood_pool)) {
-    var_01.blood_pool moveTo(var_01.blood_pool.var_116 + (0, 0, 30), 0.05);
+    var_01.blood_pool moveTo(var_01.blood_pool.origin + (0, 0, 30), 0.05);
   }
 
   var_02 = "flag_plate_filled_" + param_00;
@@ -306,7 +306,7 @@ setup_blood_plates(param_00) {
   common_scripts\utility::func_3C87(var_03);
   var_01.blood_health = 0;
   var_01.blood_health_max = 100;
-  var_01.var_D4 = param_00;
+  var_01.index = param_00;
   var_01.death_ping = "dig_blood_plate_ping" + param_00;
   var_01.filled_flagname = var_02;
   var_01.pressed_flagname = var_03;
@@ -322,9 +322,9 @@ setup_blood_plates(param_00) {
     var_01.souls_max = 6;
   }
 
-  var_04 = common_scripts\utility::func_44BE(var_01.var_1A2, "targetname");
+  var_04 = common_scripts\utility::func_44BE(var_01.target, "targetname");
   foreach(var_06 in var_04) {
-    var_07 = var_06.var_165;
+    var_07 = var_06.script_noteworthy;
     if(!isDefined(var_07)) {
       continue;
     }
@@ -342,7 +342,7 @@ setup_blood_plates(param_00) {
 
       case "plate_model":
         var_01.plate_model = var_06;
-        var_01.model_start_origin = var_06.var_116;
+        var_01.model_start_origin = var_06.origin;
         break;
 
       case "plate_trig":
@@ -479,7 +479,7 @@ plate_blood_collect_think() {
   var_00 endon("blood_empty");
   var_00.onzombiesacrificedfunc = ::on_zombie_soul_collected_func;
   var_00.optionaldisablearclightning = 1;
-  var_00 thread maps\mp\mp_zombies_soul_collection::beginazombiesoulcollectionobjectiveonstruct(var_00.souls_max, 300, 60, "plate_blood_collect_" + var_00.var_D4, undefined, "TAG_ORIGIN", undefined, "TAG_ORIGIN", undefined, var_00.plate_model, (0, 0, 16), undefined, 1);
+  var_00 thread maps / mp / mp_zombies_soul_collection::beginazombiesoulcollectionobjectiveonstruct(var_00.souls_max, 300, 60, "plate_blood_collect_" + var_00.index, undefined, "TAG_ORIGIN", undefined, "TAG_ORIGIN", undefined, var_00.plate_model, (0, 0, 16), undefined, 1);
   while(var_00.isbloodfull != 1) {
     wait 0.05;
   }
@@ -599,12 +599,12 @@ on_zombie_soul_collected_func(param_00) {
     level.blood_plate_zombie_souls_on_field = 0;
   }
 
-  plate_souls_incriment(param_00.var_116);
+  plate_souls_incriment(param_00.origin);
   if(level.blood_plate_zombie_souls_on_field < level.zmb_max_soul_collection_beams) {
     thread blood_plate_soul_fx(param_00);
   }
 
-  maps\mp\mp_zombies_soul_collection::try_play_scripted_soul_suck_anim("scripted_blood_plate");
+  maps / mp / mp_zombies_soul_collection::try_play_scripted_soul_suck_anim("scripted_blood_plate");
 }
 
 plate_souls_incriment(param_00) {
@@ -735,16 +735,16 @@ init_ice_blocks() {
     var_01.is_ice_block = 1;
     var_01.ice_health = 100;
     var_01.drop_distance = 112;
-    var_02 = getEntArray(var_01.var_1A2, "targetname");
+    var_02 = getEntArray(var_01.target, "targetname");
     foreach(var_04 in var_02) {
-      switch (var_04.var_165) {
+      switch (var_04.script_noteworthy) {
         case "mdl_ice_block":
           var_01.mdl = var_04;
           break;
 
         case "mdl_ice_block_broken":
           var_01.mdl_broke = var_04;
-          var_04 method_805C();
+          var_04 hide();
           break;
 
         case "clip_ice_block":
@@ -775,7 +775,7 @@ setup_text_log_reveals() {
   var_00 = getEntArray("lore_primary", "script_noteworthy");
   common_scripts\utility::func_3C87("flag_force_log_reveal");
   foreach(var_02 in var_00) {
-    var_03 = getEntArray(var_02.var_1A2, "targetname");
+    var_03 = getEntArray(var_02.target, "targetname");
     var_02.trigs = var_03;
     var_04 = function_0337(var_02.var_8260, "lore");
     common_scripts\utility::func_3C87("flag_log_reveal_" + var_04);
@@ -802,7 +802,7 @@ text_log_reveal_think(param_00) {
 text_log_enable_when_unseen() {
   for(;;) {
     var_00 = 0;
-    foreach(var_02 in level.var_744A) {
+    foreach(var_02 in level.players) {
       if(text_log_player_near_or_looking(var_02, self)) {
         var_00 = 1;
       }
@@ -821,7 +821,7 @@ text_log_enable_when_unseen() {
 }
 
 text_log_player_near_or_looking(param_00, param_01) {
-  var_02 = distancesquared(param_00.var_116, param_01.var_116);
+  var_02 = distancesquared(param_00.origin, param_01.origin);
   if(var_02 < 16384) {
     return 1;
   }
@@ -830,14 +830,14 @@ text_log_player_near_or_looking(param_00, param_01) {
     return 0;
   }
 
-  if(!sighttracepassed(param_00.var_116, param_01.var_116, 0, param_01, param_00)) {
+  if(!sighttracepassed(param_00.origin, param_01.origin, 0, param_01, param_00)) {
     return 0;
   }
 
   var_03 = param_00 getEye();
   var_04 = param_00 geteyeangles();
   var_05 = anglesToForward(var_04);
-  var_06 = vectorNormalize(param_01.var_116 - var_03);
+  var_06 = vectorNormalize(param_01.origin - var_03);
   if(vectordot(var_05, var_06) > 0.766) {
     return 1;
   }
@@ -852,7 +852,7 @@ text_log_enable(param_00) {
 
 text_log_disable(param_00) {
   param_00.trigs[0] common_scripts\utility::func_9D9F();
-  param_00 method_805C();
+  param_00 hide();
 }
 
 handle_door_orb_blockers() {
@@ -862,7 +862,7 @@ handle_door_orb_blockers() {
 
   var_00 = getEntArray("door_orb_blocker", "targetname");
   foreach(var_02 in var_00) {
-    var_02 thread door_orb_blocker_wait_for_door_open(var_02.var_165);
+    var_02 thread door_orb_blocker_wait_for_door_open(var_02.script_noteworthy);
   }
 }
 
@@ -887,9 +887,9 @@ spawn_ice_breakers_on_door_open() {
     level.ice_breaker_sacrifices = common_scripts\utility::func_F6F(level.ice_breaker_sacrifices, var_04);
   }
 
-  var_06 = common_scripts\utility::func_4461(var_01[0].var_116, level.var_744A);
+  var_06 = common_scripts\utility::func_4461(var_01[0].origin, level.players);
   if(isPlayer(var_06)) {
-    var_06 maps\mp\_utility::func_2CED(4, ::maps\mp\mp_zombie_descent_utils::vo_see_corpse_eater);
+    var_06 maps\mp\_utility::func_2CED(4, ::maps / mp / mp_zombie_descent_utils::vo_see_corpse_eater);
   }
 
   wait(0.5);
@@ -897,8 +897,8 @@ spawn_ice_breakers_on_door_open() {
 }
 
 player_trial_vision_test() {
-  foreach(var_01 in level.var_744A) {
-    var_01 thread maps\mp\mp_zombie_descent_ee_main::run_weapon_trial_vision();
+  foreach(var_01 in level.players) {
+    var_01 thread maps / mp / mp_zombie_descent_ee_main::run_weapon_trial_vision();
     var_01.istrialvisiontest = 1;
     var_01 thread disable_trial_vision_test();
   }
@@ -912,16 +912,16 @@ disable_trial_vision_test() {
 spawn_ice_breakers(param_00) {
   var_01 = getEntArray("org_ice_block_scripted", "targetname");
   foreach(var_03 in var_01) {
-    var_04 = getEntArray(var_03.var_1A2, "targetname");
+    var_04 = getEntArray(var_03.target, "targetname");
     foreach(var_06 in var_04) {
-      switch (var_06.var_165) {
+      switch (var_06.script_noteworthy) {
         case "mdl_ice_block":
           var_03.mdl = var_06;
           break;
 
         case "mdl_ice_block_broken":
           var_03.mdl_broke = var_06;
-          var_06 method_805C();
+          var_06 hide();
           break;
 
         case "clip_ice_block":
@@ -945,8 +945,8 @@ spawn_ice_breakers(param_00) {
   var_0A.startcorpseeater = 1;
   var_0A.cenerfedexplosion = 1;
   wait(0.5);
-  playFX(level.var_611["zmb_desc_ice_falling"], var_09.var_116);
-  if(level.var_744A.size >= 3 || common_scripts\utility::func_562E(param_00)) {
+  playFX(level.var_611["zmb_desc_ice_falling"], var_09.origin);
+  if(level.players.size >= 3 || common_scripts\utility::func_562E(param_00)) {
     var_0B = common_scripts\utility::func_46B5("spawn_cave_ice_breaker_main_2", "targetname");
     var_0C = lib_054D::func_90BA("zombie_dlc4", var_0B, "corpse_eater", 0, 1, 0);
     maps\mp\_utility::func_2CED(0.15, ::spawn_ice_breaker_ice, var_0C);
@@ -954,26 +954,26 @@ spawn_ice_breakers(param_00) {
   }
 
   wait(0.25);
-  if(level.var_744A.size >= 4 || common_scripts\utility::func_562E(param_00)) {
+  if(level.players.size >= 4 || common_scripts\utility::func_562E(param_00)) {
     var_0D = common_scripts\utility::func_46B5("spawn_cave_ice_breaker_main_3", "targetname");
     var_0E = lib_054D::func_90BA("zombie_dlc4", var_0D, "corpse_eater", 0, 1, 0);
     thread spawn_ice_breaker_ice(var_0E);
     var_0E.startcorpseeater = 1;
     foreach(var_03 in var_01) {
-      var_03 maps\mp\mp_zombie_descent_ee_main::ice_block_break();
+      var_03 maps / mp / mp_zombie_descent_ee_main::ice_block_break();
     }
   }
 }
 
 spawn_ice_breaker_ice(param_00) {
-  playFX(common_scripts\utility::func_44F5("ice_destruct_chunk"), param_00.var_116, anglesToForward(param_00.var_1D), anglestoup(param_00.var_1D));
+  playFX(common_scripts\utility::func_44F5("ice_destruct_chunk"), param_00.origin, anglesToForward(param_00.angles), anglestoup(param_00.angles));
 }
 
 on_game_start_descent() {
-  maps\mp\zombies\zombie_sizzler::func_D5();
-  maps\mp\zombies\zombie_corpse_eater::func_D5();
-  maps\mp\zombies\zombie_king::func_D5();
-  thread maps\mp\mp_zombie_descent_utils::initwavestories();
+  maps / mp / zombies / zombie_sizzler::init();
+  maps / mp / zombies / zombie_corpse_eater::init();
+  maps / mp / zombies / zombie_king::init();
+  thread maps / mp / mp_zombie_descent_utils::initwavestories();
   thread traps_init();
   level.roundstartfuncgeneric = ::descent_round_start;
   level.roundendfuncgeneric = ::descent_round_end;
@@ -1022,14 +1022,14 @@ descent_round_end() {
 
 descent_attempt_wave_story() {
   wait(randomintrange(1, 3));
-  if(level.var_A980 >= 3 && !common_scripts\utility::func_562E(level.has_played_radio_convo_1) && common_scripts\utility::func_562E(maps\mp\mp_zombie_descent_utils::vo_can_play_radio_convo())) {
-    level thread maps\mp\mp_zombie_descent_utils::vo_radio_convo_map_start();
+  if(level.var_A980 >= 3 && !common_scripts\utility::func_562E(level.has_played_radio_convo_1) && common_scripts\utility::func_562E(maps / mp / mp_zombie_descent_utils::vo_can_play_radio_convo())) {
+    level thread maps / mp / mp_zombie_descent_utils::vo_radio_convo_map_start();
     return;
   }
 
   if(common_scripts\utility::func_24A6()) {
     if(!common_scripts\utility::func_562E(level.bossceremonyactive)) {
-      level thread maps\mp\zombies\_zombies_audio_dlc2::playnextwavestory();
+      level thread maps / mp / zombies / _zombies_audio_dlc2::playnextwavestory();
       return;
     }
   }
@@ -1041,13 +1041,13 @@ initprecache() {
 
 initdescentweapons() {
   thread lib_057D::func_5162();
-  level thread lib_0580::func_D5();
-  maps\mp\zombies\weapons\_zombie_dlc4_melee::func_D5();
-  maps\mp\mp_zombie_descent_utils::vo_init_weapon_whispers();
+  level thread lib_0580::init();
+  maps / mp / zombies / weapons / _zombie_dlc4_melee::init();
+  maps / mp / mp_zombie_descent_utils::vo_init_weapon_whispers();
 }
 
 func_5375() {
-  lib_055A::func_D5();
+  lib_055A::init();
   lib_055A::func_530A("zone_crash", 1);
   lib_055A::func_530A("zone_cave");
   lib_055A::func_530A("zone_archives");
@@ -1116,9 +1116,9 @@ hack_swap_basement_cloest_door_flag() {
   }
 
   foreach(var_08 in var_02) {
-    if(distance(var_04, var_08.var_116) < 150) {
+    if(distance(var_04, var_08.origin) < 150) {
       var_05 = var_08;
-      var_06 = getEntArray(var_08.var_1A2, "targetname");
+      var_06 = getEntArray(var_08.target, "targetname");
     }
   }
 
@@ -1132,9 +1132,9 @@ hack_swap_basement_cloest_door_flag() {
 
 func_5339() {
   lib_0557::func_786C();
-  maps\mp\mp_zombie_descent_ee_main::func_D5();
-  maps\mp\mp_zombie_descent_ee_side::func_D5();
-  maps\mp\mp_zombie_descent_ee_boss_fight::func_D5();
+  maps / mp / mp_zombie_descent_ee_main::init();
+  maps / mp / mp_zombie_descent_ee_side::init();
+  maps / mp / mp_zombie_descent_ee_boss_fight::init();
   thread initquestnotebook();
 }
 
@@ -1205,7 +1205,7 @@ trap_archives_spikes_handle_damage() {
 
   while(self.var_565F) {
     for(var_06 = 0; var_06 < var_01.size; var_06++) {
-      var_07 = spawnfx(common_scripts\utility::func_44F5("spikeTrap"), var_01[var_06].var_116, anglesToForward(var_01[var_06].var_1D));
+      var_07 = spawnfx(common_scripts\utility::func_44F5("spikeTrap"), var_01[var_06].origin, anglesToForward(var_01[var_06].angles));
       triggerfx(var_07);
       thread trap_archives_spikes_damage_zombies(var_01[var_06]);
       thread trap_archives_spikes_damage_players(var_01[var_06]);
@@ -1215,7 +1215,7 @@ trap_archives_spikes_handle_damage() {
     }
 
     for(var_06 = var_01.size - 1; var_06 >= 0; var_06--) {
-      var_07 = spawnfx(common_scripts\utility::func_44F5("spikeTrap"), var_01[var_06].var_116, anglesToForward(var_01[var_06].var_1D));
+      var_07 = spawnfx(common_scripts\utility::func_44F5("spikeTrap"), var_01[var_06].origin, anglesToForward(var_01[var_06].angles));
       triggerfx(var_07);
       thread trap_archives_spikes_damage_zombies(var_01[var_06]);
       thread trap_archives_spikes_damage_players(var_01[var_06]);
@@ -1229,25 +1229,25 @@ trap_archives_spikes_handle_damage() {
 }
 
 trap_archives_spikes_check_for_end() {
-  common_scripts\utility::knock_off_battery("cooldown", "no_power", "ready", "deactivate");
+  common_scripts\utility::waittill_any("cooldown", "no_power", "ready", "deactivate");
   self.var_565F = 0;
 }
 
 trap_archives_spikes_damage_zombies(param_00) {
   var_01 = lib_0547::func_408F();
   foreach(var_03 in var_01) {
-    var_04 = distance2d(var_03.var_116, param_00.var_116);
-    if(var_04 < 100 && var_03.var_116[2] < self.var_116[2]) {
+    var_04 = distance2d(var_03.origin, param_00.origin);
+    if(var_04 < 100 && var_03.origin[2] < self.origin[2]) {
       if(isalive(var_03) && var_03.var_BA4 != "traverse") {
         if(var_03 lib_0547::func_580A()) {
-          var_03 dodamage(var_03.var_BC * 0.1, self.var_116, level.traparchivespikes, level.traparchivespikes, "MOD_EXPLOSIVE", "trap_zm_mp");
+          var_03 dodamage(var_03.health * 0.1, self.origin, level.traparchivespikes, level.traparchivespikes, "MOD_EXPLOSIVE", "trap_zm_mp");
           continue;
         }
 
-        var_03 dodamage(var_03.var_BC + 666, self.var_116, level.traparchivespikes, level.traparchivespikes, "MOD_EXPLOSIVE", "trap_zm_mp");
+        var_03 dodamage(var_03.health + 666, self.origin, level.traparchivespikes, level.traparchivespikes, "MOD_EXPLOSIVE", "trap_zm_mp");
         if(!isDefined(var_03.hitbytrap)) {
-          foreach(var_06 in level.var_744A) {
-            var_06 maps\mp\gametypes\zombies::func_47C7("kill_trap");
+          foreach(var_06 in level.players) {
+            var_06 maps / mp / gametypes / zombies::func_47C7("kill_trap");
             var_03.hitbytrap = 1;
           }
         }
@@ -1257,7 +1257,7 @@ trap_archives_spikes_damage_zombies(param_00) {
 }
 
 trap_archives_spikes_damage_players(param_00) {
-  var_01 = level.var_744A;
+  var_01 = level.players;
   foreach(var_03 in var_01) {
     if(!isalive(var_03)) {
       continue;
@@ -1267,10 +1267,10 @@ trap_archives_spikes_damage_players(param_00) {
       continue;
     }
 
-    var_04 = distance2d(var_03.var_116, param_00.var_116);
-    if(var_04 < 100 && var_03.var_116[2] < self.var_116[2]) {
+    var_04 = distance2d(var_03.origin, param_00.origin);
+    if(var_04 < 100 && var_03.origin[2] < self.origin[2]) {
       if(isalive(var_03) && !lib_0547::func_577E(var_03)) {
-        var_03 dodamage(5, self.var_116, undefined, undefined, "MOD_CRUSH");
+        var_03 dodamage(5, self.origin, undefined, undefined, "MOD_CRUSH");
       }
     }
   }
@@ -1317,7 +1317,7 @@ assign_collision_handling(param_00, param_01, param_02) {
 
 assign_door_collision_node(param_00, param_01) {
   var_02 = spawnStruct();
-  var_02.var_116 = getclosestpointonnavmesh(param_00.var_116 + pow(-1, !common_scripts\utility::func_562E(param_01)) * 32 * vectorNormalize(anglestoright(param_00.var_1D)));
+  var_02.origin = getclosestpointonnavmesh(param_00.origin + pow(-1, !common_scripts\utility::func_562E(param_01)) * 32 * vectorNormalize(anglestoright(param_00.angles)));
   self.var_A048 = common_scripts\utility::func_F6F(self.var_A048, var_02);
 }
 

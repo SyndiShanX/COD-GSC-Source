@@ -3,7 +3,7 @@
  * Script: maps\mp\_minimap_location_callout.gsc
 *************************************************/
 
-func_00D5() {
+init() {
   level.var_620F = getEntArray("minimap_location_callout", "targetname");
 }
 
@@ -25,9 +25,9 @@ func_21D1(param_00) {
   var_01 = 0;
   var_02 = -1;
   foreach(var_04 in level.var_620F) {
-    if(var_04 method_858B(self.var_0116)) {
+    if(var_04 method_858B(self.origin)) {
       var_01 = 1;
-      var_02 = int(var_04.var_0165);
+      var_02 = int(var_04.script_noteworthy);
       continue;
     }
   }

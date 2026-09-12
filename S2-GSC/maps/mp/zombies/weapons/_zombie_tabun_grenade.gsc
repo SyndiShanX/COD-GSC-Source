@@ -3,10 +3,10 @@
  * Script: maps\mp\zombies\weapons\_zombie_tabun_grenade.gsc
 *************************************************************/
 
-func_00D5() {
+init() {
   level.zm_grenade_funcs["tabun_grenade_zm"] = ::tabunzm_onfired;
   level.zombietacticalweapon["tabun_grenade_zm"] = 1;
-  level.var_611["zmb_tabun_stun"] = loadfx("vfx/zombie/abilities_perks\zmb_storm_zmb_debuff");
+  level.var_611["zmb_tabun_stun"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_zmb_debuff");
   level.currentconverts = 0;
 }
 
@@ -20,7 +20,7 @@ tabun_player_give_tabun() {
   self.var_60A0 = 2;
   self method_831E(var_00);
   lib_0586::func_78C(var_00);
-  self method_82FA(var_00, 2);
+  self setweaponammoclip(var_00, 2);
 }
 
 tabunzm_onfired(param_00, param_01) {
@@ -61,7 +61,7 @@ tabunzm_managedamage(param_00, param_01, param_02) {
         continue;
       }
 
-      if(tabunzm_collisionpassed(var_06.var_116, param_00.var_6C2C, param_00.var_14F)) {
+      if(tabunzm_collisionpassed(var_06.origin, param_00.var_6C2C, param_00.var_14F)) {
         if(tabunzm_zombieishittable(var_06, param_00.var_6C2C)) {
           if(isDefined(param_01) && isDefined(level.currentconverts) && level.currentconverts < 8) {
             level tabunzm_convertzombie(var_06, param_01);
@@ -75,7 +75,7 @@ tabunzm_managedamage(param_00, param_01, param_02) {
 }
 
 tabunzm_convertzombie(param_00, param_01) {
-  param_00 maps\mp\agents\_agent_utility::func_83FE("allies", param_01);
+  param_00 maps / mp / agents / _agent_utility::func_83FE("allies", param_01);
   param_00 thread tabunzm_handletimeout();
   level thread tabunzm_onzombiedeath(param_00);
   param_00.var_6816 = 1;
@@ -95,7 +95,7 @@ tabunzm_handletimeout() {
   wait(60);
   self notify("kill_tabun_listener");
   level.currentconverts--;
-  self dodamage(self.var_8 + 666, self.var_116, undefined, undefined, "MOD_EXPLOSIVE", tabun_get_weapon_name());
+  self dodamage(self.agenthealth + 666, self.origin, undefined, undefined, "MOD_EXPLOSIVE", tabun_get_weapon_name());
 }
 
 tabunzm_collisionpassed(param_00, param_01, param_02) {
@@ -103,9 +103,9 @@ tabunzm_collisionpassed(param_00, param_01, param_02) {
 }
 
 tabunzm_zombieishittable(param_00, param_01) {
-  if(param_00.var_116[2] <= param_01[2]) {
-    return bullettracepassed(param_00.var_116 + (0, 0, 10), (param_00.var_116[0], param_00.var_116[1], param_01[2] + 10), 0, param_00) && bullettracepassed(param_01 + (0, 0, 10), (param_00.var_116[0], param_00.var_116[1], param_01[2] + 10), 0, param_00);
+  if(param_00.origin[2] <= param_01[2]) {
+    return bullettracepassed(param_00.origin + (0, 0, 10), (param_00.origin[0], param_00.origin[1], param_01[2] + 10), 0, param_00) && bullettracepassed(param_01 + (0, 0, 10), (param_00.origin[0], param_00.origin[1], param_01[2] + 10), 0, param_00);
   }
 
-  return bullettracepassed(param_01 + (0, 0, 10), (param_01[0], param_01[1], param_00.var_116[2] + 10), 0, param_00) && bullettracepassed(param_00.var_116 + (0, 0, 10), (param_01[0], param_01[1], param_00.var_116[2] + 10), 0, param_00);
+  return bullettracepassed(param_01 + (0, 0, 10), (param_01[0], param_01[1], param_00.origin[2] + 10), 0, param_00) && bullettracepassed(param_00.origin + (0, 0, 10), (param_01[0], param_01[1], param_00.origin[2] + 10), 0, param_00);
 }

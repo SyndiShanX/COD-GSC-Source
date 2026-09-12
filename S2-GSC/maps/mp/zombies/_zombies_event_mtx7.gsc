@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\_zombies_event_mtx7.gsc
 ***************************************************/
 
-func_00D5() {
+init() {
   level.zmb_total_fish_collected = 0;
   var_00 = getdvarint("spv_zmb_event_mtx7_active", -1);
   if(var_00 == -1) {
@@ -32,7 +32,7 @@ func_00D5() {
     return;
   }
 
-  common_scripts\utility::func_092C("mtx_fish_despawn", "vfx/map/mp_zombie_island/zmb_isl_beach_fish_flop_mtx7");
+  common_scripts\utility::func_92C("mtx_fish_despawn", "vfx/map/mp_zombie_island/zmb_isl_beach_fish_flop_mtx7");
   if(maps\mp\_utility::func_4571() == "mp_zombie_island") {
     level thread run_fish_quest();
   }
@@ -55,7 +55,7 @@ limit_oceanic_zombies(param_00) {
   }
 
   if(var_01 >= var_05) {
-    param_00 = common_scripts\utility::func_0F94(param_00, ["oceana", "oceanb"]);
+    param_00 = common_scripts\utility::func_F94(param_00, ["oceana", "oceanb"]);
   }
 
   return param_00;
@@ -80,7 +80,7 @@ spawn_fish_on_zombies() {
     return;
   }
 
-  if(!lib_0547::func_5565(self.var_0A4B, "zombie_generic")) {
+  if(!lib_0547::func_5565(self.var_A4B, "zombie_generic")) {
     return;
   }
 
@@ -91,7 +91,7 @@ spawn_fish_on_zombies() {
   var_00 = get_random_attached_prop();
   var_01 = spawn("script_model", (0, 0, 0));
   var_01 setModel(var_00.char_model);
-  var_01 method_8449(self, var_00.joint, var_00.pos_offset, var_00.var_0DD2);
+  var_01 method_8449(self, var_00.joint, var_00.pos_offset, var_00.var_DD2);
   self.attached_ocean_model = var_01;
 }
 
@@ -101,7 +101,7 @@ remove_fish_from_zombies(param_00, param_01, param_02, param_03, param_04, param
   }
 
   if(lib_0547::is_wet_zombie(undefined, self)) {
-    level thread spawn_pickupable_fish(self.var_0116, self geteyeangles());
+    level thread spawn_pickupable_fish(self.origin, self geteyeangles());
   }
 }
 
@@ -114,12 +114,12 @@ spawn_pickupable_fish(param_00, param_01) {
   if(level.mtx7_fish_array.size < 2) {
     var_02 = spawn("script_model", param_00);
     var_02 setModel("zmi_fish_single_01");
-    level.mtx7_fish_array = common_scripts\utility::func_0F6F(level.mtx7_fish_array, var_02);
+    level.mtx7_fish_array = common_scripts\utility::func_F6F(level.mtx7_fish_array, var_02);
   } else {
     foreach(var_04 in level.mtx7_fish_array) {
-      if(!common_scripts\utility::func_562E(var_04.var_08BE)) {
+      if(!common_scripts\utility::func_562E(var_04.var_8BE)) {
         var_02 = var_04;
-        var_02 method_805B();
+        var_02 show();
         break;
       }
     }
@@ -130,17 +130,17 @@ spawn_pickupable_fish(param_00, param_01) {
   }
 
   var_02 thread fall_onto_ground(param_00, param_01);
-  var_02.var_08BE = 1;
+  var_02.var_8BE = 1;
   var_06 = var_02 wait_for_player_close_to_fish(60, 1);
   if(isDefined(var_06)) {
-    var_06 thread maps\mp\_events_z::contracts_report_player_picked_up_fish();
-    var_06 thread maps\mp\gametypes\zombies::func_4798(10);
+    var_06 thread maps / mp / _events_z::contracts_report_player_picked_up_fish();
+    var_06 thread maps / mp / gametypes / zombies::func_4798(10);
     if(!common_scripts\utility::func_562E(var_06.foundafish) && maps\mp\_utility::func_4571() == "mp_zombie_island") {
       lib_0555::func_83DD("fish_single", var_06);
       var_06.foundafish = 1;
     }
 
-    lib_0378::func_8D74("zmb_points_pickup", var_06.var_0116);
+    lib_0378::func_8D74("zmb_points_pickup", var_06.origin);
     level.zmb_total_fish_collected++;
   }
 
@@ -149,23 +149,23 @@ spawn_pickupable_fish(param_00, param_01) {
 
 fall_onto_ground(param_00, param_01) {
   var_02 = 0.4;
-  self.var_0116 = param_00 + (0, 0, 40) + 18 * vectorNormalize(anglesToForward(param_01));
-  self.var_001D = (0, randomint(360), 0);
+  self.origin = param_00 + (0, 0, 40) + 18 * vectorNormalize(anglesToForward(param_01));
+  self.angles = (0, randomint(360), 0);
   self gravitymove((0, 0, 175), 2);
-  self.var_6C48 = self.var_001D;
+  self.var_6C48 = self.angles;
   self rotateby((180, 180, 0), var_02);
   wait(var_02);
-  self.var_001D = self.var_6C48;
-  self.var_0116 = param_00;
+  self.angles = self.var_6C48;
+  self.origin = param_00;
 }
 
 remove_fish(param_00) {
   if(!common_scripts\utility::func_562E(param_00)) {
-    playFX(common_scripts\utility::func_44F5("mtx_fish_despawn"), self.var_0116);
+    playFX(common_scripts\utility::func_44F5("mtx_fish_despawn"), self.origin);
   }
 
   self method_8511();
-  self.var_08BE = 0;
+  self.var_8BE = 0;
 }
 
 wait_for_player_close_to_fish(param_00, param_01) {
@@ -175,8 +175,8 @@ wait_for_player_close_to_fish(param_00, param_01) {
       return;
     }
 
-    foreach(var_04 in level.var_744A) {
-      if(distance(var_04.var_0116, self.var_0116) < param_00) {
+    foreach(var_04 in level.players) {
+      if(distance(var_04.origin, self.origin) < param_00) {
         return var_04;
       }
     }
@@ -190,8 +190,8 @@ register_prop_placement(param_00, param_01, param_02, param_03) {
   var_04.char_model = param_00;
   var_04.joint = param_01;
   var_04.pos_offset = param_02;
-  var_04.var_0DD2 = param_03;
-  level.zmb_mtx7_event_attached_props = common_scripts\utility::func_0F6F(level.zmb_mtx7_event_attached_props, var_04);
+  var_04.var_DD2 = param_03;
+  level.zmb_mtx7_event_attached_props = common_scripts\utility::func_F6F(level.zmb_mtx7_event_attached_props, var_04);
 }
 
 get_random_attached_prop() {
@@ -199,18 +199,18 @@ get_random_attached_prop() {
 }
 
 add_ocean_zombie_look() {
-  if(!isDefined(level.var_0A50)) {
-    level.var_0A50 = [];
+  if(!isDefined(level.var_A50)) {
+    level.var_A50 = [];
   }
 
   var_00 = ["zombie_generic", "zombie_heavy"];
   foreach(var_02 in var_00) {
-    if(!isDefined(level.var_0A50[var_02])) {
-      level.var_0A50[var_02] = [];
+    if(!isDefined(level.var_A50[var_02])) {
+      level.var_A50[var_02] = [];
     }
 
-    if(!isDefined(level.var_0A50[var_02].var_5ED2)) {
-      level.var_0A50[var_02].var_5ED2 = [];
+    if(!isDefined(level.var_A50[var_02].var_5ED2)) {
+      level.var_A50[var_02].var_5ED2 = [];
     }
   }
 
@@ -220,39 +220,39 @@ add_ocean_zombie_look() {
 }
 
 add_ocean_look_follower() {
-  level.var_0A50["zombie_heavy"].var_5ED2["ocean"]["whole_body"] = "zom_follower_wet_base";
+  level.var_A50["zombie_heavy"].var_5ED2["ocean"]["whole_body"] = "zom_follower_wet_base";
 }
 
 add_ocean_look(param_00) {
-  level.var_0A50["zombie_generic"].var_5ED2["ocean" + param_00] = [];
-  level.var_0A50["zombie_generic"].var_5ED2["ocean" + param_00]["whole_body"] = "zom_infantry" + param_00 + "_wet_bodywhole";
-  level.var_0A50["zombie_generic"].var_5ED2["ocean" + param_00]["torso"] = "zom_infantry" + param_00 + "_wet_torso_slice";
-  level.var_0A50["zombie_generic"].var_5ED2["ocean" + param_00]["left_arm"] = "zom_infantrya_wet_l_arm_slice";
-  level.var_0A50["zombie_generic"].var_5ED2["ocean" + param_00]["left_leg"] = "zom_infantrya_wet_l_leg_slice";
-  level.var_0A50["zombie_generic"].var_5ED2["ocean" + param_00]["right_arm"] = "zom_infantrya_wet_r_arm_slice";
-  level.var_0A50["zombie_generic"].var_5ED2["ocean" + param_00]["right_leg"] = "zom_infantrya_wet_r_leg_slice";
-  level.var_0A50["zombie_generic"].var_5ED2["ocean" + param_00]["heads"] = ["zom_head_wet_fdr02_org1", "zom_head_wet_fdr03_org1", "zom_head_wet_fdr04_org1"];
-  level.var_0A50["zombie_generic"].var_5ED2["ocean" + param_00]["helmets"] = level.var_0A50["zombie_generic"].var_5ED2["guts"]["helmets"];
-  level.var_0A50["zombie_generic"].var_5ED2["ocean" + param_00]["facegear"] = level.var_0A50["zombie_generic"].var_5ED2["guts"]["facegear"];
+  level.var_A50["zombie_generic"].var_5ED2["ocean" + param_00] = [];
+  level.var_A50["zombie_generic"].var_5ED2["ocean" + param_00]["whole_body"] = "zom_infantry" + param_00 + "_wet_bodywhole";
+  level.var_A50["zombie_generic"].var_5ED2["ocean" + param_00]["torso"] = "zom_infantry" + param_00 + "_wet_torso_slice";
+  level.var_A50["zombie_generic"].var_5ED2["ocean" + param_00]["left_arm"] = "zom_infantrya_wet_l_arm_slice";
+  level.var_A50["zombie_generic"].var_5ED2["ocean" + param_00]["left_leg"] = "zom_infantrya_wet_l_leg_slice";
+  level.var_A50["zombie_generic"].var_5ED2["ocean" + param_00]["right_arm"] = "zom_infantrya_wet_r_arm_slice";
+  level.var_A50["zombie_generic"].var_5ED2["ocean" + param_00]["right_leg"] = "zom_infantrya_wet_r_leg_slice";
+  level.var_A50["zombie_generic"].var_5ED2["ocean" + param_00]["heads"] = ["zom_head_wet_fdr02_org1", "zom_head_wet_fdr03_org1", "zom_head_wet_fdr04_org1"];
+  level.var_A50["zombie_generic"].var_5ED2["ocean" + param_00]["helmets"] = level.var_A50["zombie_generic"].var_5ED2["guts"]["helmets"];
+  level.var_A50["zombie_generic"].var_5ED2["ocean" + param_00]["facegear"] = level.var_A50["zombie_generic"].var_5ED2["guts"]["facegear"];
 }
 
 has_body_model() {
   var_00 = ["zombie_assassin"];
-  return common_scripts\utility::func_0F79(var_00, self.var_0A4B) || isDefined(self.var_18A8) && self.var_18A8.var_0106 == "";
+  return common_scripts\utility::func_F79(var_00, self.var_A4B) || isDefined(self.var_18A8) && self.var_18A8.model == "";
 }
 
 run_fish_quest() {
   var_00 = spawn("script_model", (432, 1824, -8));
-  var_00.var_001D = (0, 174, 0);
+  var_00.angles = (0, 174, 0);
   var_00 setModel("zdu_red_herring_obj_01");
   var_00 scriptmodelplayanim("zmb_follow_the_fish_loop", undefined, 0, 0.4);
   var_01 = spawn("script_model", (432, 1824, -8));
-  var_01.var_001D = (13, 80, -7);
+  var_01.angles = (13, 80, -7);
   var_01 setModel("ger_crate_ammo_closed_01_dirty");
-  var_01.var_0116 = var_01.var_0116 + (0, 0, -32);
+  var_01.origin = var_01.origin + (0, 0, -32);
   var_00 thread move_current();
   wait_for_required_fish();
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     lib_0555::func_83DD("fish_total_ee", var_03);
   }
 
@@ -262,7 +262,7 @@ run_fish_quest() {
   var_00 movez(-12, 2, 1);
   var_00 rotateYaw(170, 3);
   wait(3);
-  var_01 moveTo(var_01.var_0116 + (0, 0, 32), 6, 0, 1);
+  var_01 moveTo(var_01.origin + (0, 0, 32), 6, 0, 1);
   var_01 thread vibrate_box();
   var_01 lib_0547::func_AC41(&"ZOMBIES_EMPTY_STRING", (0, 0, 16));
   level thread maps\mp\_utility::func_6F74(::collect_teslaguns, var_01);
@@ -281,7 +281,7 @@ wait_for_required_fish() {
 
 vibrate_box() {
   for(;;) {
-    self vibrate(anglesToForward(self.var_001D), 2.1, 3, 3);
+    self vibrate(anglesToForward(self.angles), 2.1, 3, 3);
     wait(3);
   }
 }
@@ -290,14 +290,14 @@ ee_give_teslagun_rental(param_00) {
   var_01 = self;
   var_01 endon("death");
   var_01 endon("disconnect");
-  var_01 lib_0586::func_078C(param_00);
-  var_01 lib_0586::func_078E(param_00);
+  var_01 lib_0586::func_78C(param_00);
+  var_01 lib_0586::func_78E(param_00);
   lib_0555::func_83DD("teslagun_found", var_01);
   wait_for_usage_done(param_00);
   if(var_01 hasweapon(param_00)) {
     var_02 = var_01 getweaponslistprimaries();
-    var_01 lib_0586::func_0790(param_00);
-    var_01 lib_0586::func_078E(var_02[0]);
+    var_01 lib_0586::func_790(param_00);
+    var_01 lib_0586::func_78E(var_02[0]);
   }
 }
 
@@ -315,8 +315,8 @@ force_take_tesla() {
 
 move_current() {
   self endon("leaving");
-  var_00 = self.var_0116 + 7 * vectorNormalize(anglestoright(self.var_001D));
-  self.var_6C4E = self.var_0116;
+  var_00 = self.origin + 7 * vectorNormalize(anglestoright(self.angles));
+  self.var_6C4E = self.origin;
   for(;;) {
     self moveTo(var_00, 2, 1, 1);
     wait(2);

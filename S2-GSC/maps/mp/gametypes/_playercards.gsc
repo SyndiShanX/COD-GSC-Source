@@ -3,11 +3,11 @@
  * Script: maps\mp\gametypes\_playercards.gsc
 **********************************************/
 
-func_00D5() {
-  level thread func_6B6C();
+init() {
+  level thread onplayerconnect();
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
     if(!isai(var_00)) {}

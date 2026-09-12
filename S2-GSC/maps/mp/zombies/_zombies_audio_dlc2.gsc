@@ -222,11 +222,11 @@ should_play_a_wave_story(param_00) {
 }
 
 zombie_wave_maxed() {
-  return maps\mp\mp_zombie_nest_ee_wave_manipulation::is_zombie_wave_maxed();
+  return maps / mp / mp_zombie_nest_ee_wave_manipulation::is_zombie_wave_maxed();
 }
 
 players_already_talking() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(common_scripts\utility::func_562E(var_01.var_57DE)) {
       return 1;
     }
@@ -281,7 +281,7 @@ try_run_conversation(param_00, param_01, param_02, param_03) {
     var_08 = undefined;
     var_09 = 0;
     var_0A = 0;
-    foreach(var_0C in level.var_744A) {
+    foreach(var_0C in level.players) {
       if(isDefined(var_0C.var_20D8)) {
         var_0D = lib_0378::func_307B(var_0C.var_20D8);
         if(var_0D == var_07) {
@@ -296,9 +296,9 @@ try_run_conversation(param_00, param_01, param_02, param_03) {
     var_0F = undefined;
     if(var_0A && isDefined(var_08)) {
       var_10 = gettime();
-      var_08 lib_0378::func_307E(var_06.var_BB4, level.var_744A, undefined, param_01);
+      var_08 lib_0378::func_307E(var_06.var_BB4, level.players, undefined, param_01);
     } else if(isDefined(var_08)) {
-      var_08 lib_0378::func_307E(var_06.var_BB4, level.var_744A, undefined, param_01);
+      var_08 lib_0378::func_307E(var_06.var_BB4, level.players, undefined, param_01);
     }
 
     wait(var_06.post_delay);
@@ -318,7 +318,7 @@ timeout_conversation(param_00) {
 }
 
 radio_message_all(param_00) {
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 thread plr_play_radio_message(param_00);
   }
 }
@@ -338,7 +338,7 @@ get_speaker_alive(param_00) {
     return 0;
   }
 
-  if(param_00.var_178 == "spectator") {
+  if(param_00.sessionstate == "spectator") {
     return 0;
   }
 
@@ -360,7 +360,7 @@ validate_players_in_story(param_00) {
 }
 
 is_character_present(param_00, param_01) {
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(lib_0378::func_307B(var_03.var_20D8) == param_00) {
       if(common_scripts\utility::func_562E(param_01) && !get_speaker_alive(var_03)) {
         return 0;
@@ -375,7 +375,7 @@ is_character_present(param_00, param_01) {
 
 get_all_alive_player_character_names() {
   var_00 = [];
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_03 = "";
     switch (var_02.var_20D8) {
       case 0:

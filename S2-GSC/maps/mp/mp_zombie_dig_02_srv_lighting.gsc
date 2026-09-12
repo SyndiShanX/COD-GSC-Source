@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_dig_02_srv_lighting.gsc
 *****************************************************/
 
-func_00F9() {
+main() {
   func_84F8();
 }
 

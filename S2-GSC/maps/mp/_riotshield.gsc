@@ -3,12 +3,12 @@
  * Script: maps\mp\_riotshield.gsc
 *********************************************/
 
-func_00D5() {
+init() {
   level.var_7E95 = [];
   level.var_7E95[level.var_7E95.size] = "riotshield_mp";
 }
 
-func_4B8C() {
+hasriotshieldequipped() {
   return isDefined(self.var_3EF6) || isDefined(self.var_14EA);
 }
 
@@ -63,7 +63,7 @@ func_A118(param_00, param_01) {
     self.var_3EF6 = getweaponmodel(param_00);
     if(isDefined(self.riotshield_backpack) && self.var_267E[3] == 0) {
       self.var_267E[3] = self.riotshield_backpack;
-      self setcostumemodels(self.var_267E, self.var_01A7, 1);
+      self setcostumemodels(self.var_267E, self.team, 1);
       self.riotshield_backpack = undefined;
     }
   }
@@ -77,7 +77,7 @@ func_A118(param_00, param_01) {
 
     if(isDefined(self.riotshield_backpack) && self.var_267E[3] != 0) {
       self.var_267E[3] = 0;
-      self setcostumemodels(self.var_267E, self.var_01A7, 1);
+      self setcostumemodels(self.var_267E, self.team, 1);
     }
   }
 
@@ -88,7 +88,7 @@ func_A118(param_00, param_01) {
   self method_84D2(param_00, param_01);
 }
 
-func_7E96() {
+riotshield_clear() {
   self.var_3EF6 = undefined;
   self.var_14EA = undefined;
   self.riotshield_backpack = undefined;
@@ -193,7 +193,7 @@ func_9BC6() {
   }
 
   func_A118(self.var_2954, var_00);
-  if(!func_4B8C()) {
+  if(!hasriotshieldequipped()) {
     if(function_0367()) {
       self.activeshieldthread = 0;
     }
@@ -213,7 +213,7 @@ func_9BC6() {
     }
 
     if(func_A9C9(var_02)) {
-      if(func_4B8C()) {
+      if(hasriotshieldequipped()) {
         if(isDefined(self.var_7EA3)) {
           self takeweapon(self.var_7EA3);
           self.var_7EA3 = undefined;
@@ -240,7 +240,7 @@ func_A15C(param_00, param_01) {
 }
 
 func_5832(param_00) {
-  if(maps\mp\_utility::func_5740(param_00)) {
+  if(maps\mp\_utility::iskillstreakweapon(param_00)) {
     return 0;
   }
 
@@ -265,6 +265,6 @@ func_5832(param_00) {
 
 func_A93C(param_00, param_01) {
   param_00 endon("death");
-  common_scripts\utility::func_A70A("damageThenDestroyRiotshield", "death", "disconnect", "weapon_change", "deploy_riotshield");
+  common_scripts\utility::waittill_any("damageThenDestroyRiotshield", "death", "disconnect", "weapon_change", "deploy_riotshield");
   param_00 method_81D6(param_01);
 }

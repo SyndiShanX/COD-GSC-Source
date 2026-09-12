@@ -3,23 +3,23 @@
  * Script: maps\mp\mp_zombie_nest_ee_overcharge.gsc
 ****************************************************/
 
-func_00F9() {
+main() {
   for(var_00 = 1; var_00 <= 3; var_00++) {
     common_scripts\utility::func_3C87("quest_item_blimp_uberschnelle_" + var_00);
   }
 
-  var_01 = maps\mp\mp_zombie_nest_ee_util::func_44C8("blimp_uberschnell_deposit");
+  var_01 = maps / mp / mp_zombie_nest_ee_util::func_44C8("blimp_uberschnell_deposit");
   foreach(var_03 in var_01) {
-    var_03 method_805C();
+    var_03 hide();
   }
 
   var_05 = getEnt("lhog_control", "targetname");
   if(isDefined(var_05)) {
-    var_05 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("off");
+    var_05 thread maps / mp / mp_zombie_nest_ee_util::func_4D77("off");
   }
 
-  var_01[0] method_805B();
-  playFXOnTag(level.var_0611["zmb_uberschnelle_charge"], var_01[0], "tag_origin");
+  var_01[0] show();
+  playFXOnTag(level.var_611["zmb_uberschnelle_charge"], var_01[0], "tag_origin");
   lib_0557::func_7846("6B Left Hand overcharge", ::func_6C9E, ["5 Right Hand fuses"], &"ZOMBIE_NEST_HINT_QUEST_OVERCHARGE", "ZOMBIE_NEST_HINT_QUEST_OVERCHARGE");
   lib_0557::func_781E("6B Left Hand overcharge", "examine left hand", ::func_7862, ::lib_0557::func_30D8, &"ZOMBIE_NEST_STUDY_LEFT_HAND");
   lib_0557::func_781E("6B Left Hand overcharge", "activate left hand", ::func_7861, ::func_714D, &"ZOMBIE_NEST_HINT_STEP_INTERACT_LEFT_HAND");
@@ -30,7 +30,7 @@ func_00F9() {
 }
 
 func_6C9E() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 maps\mp\zombies\_zombies_rank::func_AC23("lefthandofgod");
     var_01 lib_0378::func_8D74("objective_complete", "lefthandofgod");
   }
@@ -38,7 +38,7 @@ func_6C9E() {
 
 func_714D() {
   var_00 = getEnt("left_hand_of_god_model", "targetname");
-  playFXOnTag(level.var_0611["zmb_lhog_init"], var_00, "tag_origin");
+  playFXOnTag(level.var_611["zmb_lhog_init"], var_00, "tag_origin");
 }
 
 func_7862() {
@@ -50,7 +50,7 @@ func_7862() {
   var_01 = getEnt("left_hand_of_god_model", "targetname");
   var_02 = getEnt("lhog_control", "targetname");
   if(isDefined(var_02)) {
-    var_02 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("red");
+    var_02 thread maps / mp / mp_zombie_nest_ee_util::func_4D77("red");
   }
 
   if(1) {
@@ -59,7 +59,7 @@ func_7862() {
   }
 
   var_01 thread func_20C7(var_00);
-  var_04 = maps\mp\mp_zombie_nest_ee_util::func_44C8("blimp_uberschnell_deposit");
+  var_04 = maps / mp / mp_zombie_nest_ee_util::func_44C8("blimp_uberschnell_deposit");
   var_00 thread func_8C24();
   while(var_00.var_17A9 < 3) {
     level thread func_92B6(var_00);
@@ -76,8 +76,8 @@ func_7862() {
         thread func_2E9C(3, var_08);
       }
 
-      var_04[var_00.var_17A9] method_805B();
-      playFXOnTag(level.var_0611["zmb_uberschnelle_charge"], var_04[var_00.var_17A9], "tag_origin");
+      var_04[var_00.var_17A9] show();
+      playFXOnTag(level.var_611["zmb_uberschnelle_charge"], var_04[var_00.var_17A9], "tag_origin");
       lib_0378::func_8D74("aud_uberschnelle_place_altar");
       func_86A4();
       common_scripts\utility::func_3C8F("quest_item_blimp_uberschnelle_" + var_00.var_17A9);
@@ -106,16 +106,16 @@ func_92B6(param_00) {
 
 func_179C() {
   self.var_686D = randomint(3) + 1;
-  if(isDefined(self.var_01A2)) {
-    self.var_301B = common_scripts\utility::func_46B5(self.var_01A2, "targetname");
+  if(isDefined(self.target)) {
+    self.var_301B = common_scripts\utility::func_46B5(self.target, "targetname");
   }
 
   while(self.var_686D > 0) {
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       if(isDefined(self.var_301B)) {
-        var_02 = distance(self.var_301B.var_0116, var_01.var_0116) < 150;
+        var_02 = distance(self.var_301B.origin, var_01.origin) < 150;
       } else {
-        var_02 = distance(var_01.var_0116, self.var_0116) < 512;
+        var_02 = distance(var_01.origin, self.origin) < 512;
       }
 
       if(var_01 lib_0586::func_72C3() && var_02) {
@@ -148,24 +148,24 @@ func_7861() {
   var_01 waittill("trigger", var_03);
   var_04 = getEnt("lhog_control", "targetname");
   if(isDefined(var_04)) {
-    var_04 thread maps\mp\mp_zombie_nest_ee_util::func_4D76();
-    var_04 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("green");
+    var_04 thread maps / mp / mp_zombie_nest_ee_util::func_4D76();
+    var_04 thread maps / mp / mp_zombie_nest_ee_util::func_4D77("green");
   }
 
   thread func_2E73(var_03);
   var_01 common_scripts\utility::func_9D9F();
   var_00 lib_0378::func_8D74("aud_activate_left_hand_of_god");
-  thread maps\mp\mp_zombie_nest_ee_util::func_4D78(2);
+  thread maps / mp / mp_zombie_nest_ee_util::func_4D78(2);
   lib_0557::func_782D("6B Left Hand overcharge", "activate left hand");
 }
 
 func_8C24() {
   self endon("stop_hide_show");
-  var_00 = self.var_0116;
+  var_00 = self.origin;
   for(;;) {
     var_01 = 0;
-    foreach(var_03 in level.var_744A) {
-      if(var_03 lib_0586::func_72C3() && distance(var_03.var_0116, var_00) < 256) {
+    foreach(var_03 in level.players) {
+      if(var_03 lib_0586::func_72C3() && distance(var_03.origin, var_00) < 256) {
         var_01 = 1;
         break;
       }
@@ -185,8 +185,8 @@ func_784B() {
   level.var_179A lib_0560::func_AB83();
   var_00 = 0;
   while(!var_00) {
-    foreach(var_02 in level.var_744A) {
-      if(var_02 maps\mp\mp_zombie_nest_ee_util::func_740A()) {
+    foreach(var_02 in level.players) {
+      if(var_02 maps / mp / mp_zombie_nest_ee_util::func_740A()) {
         var_00 = 1;
         break;
       }
@@ -256,7 +256,7 @@ func_A788(param_00, param_01) {
 func_A787(param_00) {
   level endon(param_00);
   for(;;) {
-    var_01 = common_scripts\utility::func_4461(self.var_0116, level.var_744A, 200);
+    var_01 = common_scripts\utility::func_4461(self.origin, level.players, 200);
     if(isDefined(var_01)) {
       break;
     } else {
@@ -280,7 +280,7 @@ func_86A7(param_00) {
   }
 
   lib_0557::func_7822("6A Left Hand blimp parts", &"ZOMBIE_NEST_SHOOT_BLIMP_GUN");
-  level common_scripts\utility::func_A70A("destroyed_blimp_gun", "blimp_ee_look_for_battery");
+  level common_scripts\utility::waittill_any("destroyed_blimp_gun", "blimp_ee_look_for_battery");
   if(0) {
     lib_0557::func_7847("6A Left Hand blimp parts", var_01);
   }
@@ -346,7 +346,7 @@ func_20C7(param_00) {
 
   param_00 thread func_2EB0();
   param_00 thread func_2E8D();
-  param_00 common_scripts\utility::func_A70A("trigger", "soft_triggered", "bypassed");
+  param_00 common_scripts\utility::waittill_any("trigger", "soft_triggered", "bypassed");
   lib_0557::func_7822("6B Left Hand overcharge", &"ZOMBIE_NEST_HINT_STEP_BATTERIES");
   param_00 setHintString(&"ZOMBIE_NEST_PLACE_UBER");
   param_00 notify("discovered");
@@ -370,8 +370,8 @@ func_2EB0() {
   var_03 = undefined;
   for(;;) {
     var_04 = 0;
-    foreach(var_06 in level.var_744A) {
-      if(distance(var_06.var_0116, self.var_0116) < 64) {
+    foreach(var_06 in level.players) {
+      if(distance(var_06.origin, self.origin) < 64) {
         var_04 = 1;
         var_03 = var_06;
       }

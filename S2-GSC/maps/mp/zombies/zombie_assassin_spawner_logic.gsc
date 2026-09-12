@@ -54,11 +54,11 @@ spawn_an_assassin(param_00, param_01, param_02, param_03, param_04, param_05, pa
   }
 
   if(isDefined(param_01)) {
-    var_0D.var_FB = param_01;
-    var_0D.var_BC = var_0D.var_FB;
-  } else if(var_0D.var_BC <= 17500) {
-    var_0D.var_FB = 17500;
-    var_0D.var_BC = var_0D.var_FB;
+    var_0D.maxhealth = param_01;
+    var_0D.health = var_0D.maxhealth;
+  } else if(var_0D.health <= 17500) {
+    var_0D.maxhealth = 17500;
+    var_0D.health = var_0D.maxhealth;
   } else {}
 
   if(common_scripts\utility::func_562E(param_03)) {
@@ -90,7 +90,7 @@ get_valid_assassin_spawner(param_00, param_01, param_02, param_03, param_04, par
   if(!isDefined(param_00)) {
     var_06 = [];
     var_07 = undefined;
-    foreach(var_09 in level.var_744A) {
+    foreach(var_09 in level.players) {
       if(!isalive(var_09) || common_scripts\utility::func_562E(var_09.var_5378)) {
         continue;
       }
@@ -99,14 +99,14 @@ get_valid_assassin_spawner(param_00, param_01, param_02, param_03, param_04, par
     }
 
     if(var_06.size) {
-      param_00 = common_scripts\utility::func_7A33(var_06).var_116;
+      param_00 = common_scripts\utility::func_7A33(var_06).origin;
     }
   }
 
   var_0B = [];
   var_0C = common_scripts\utility::func_46B7("zmb_assassin_spawnpoint", "targetname");
   foreach(var_0E in var_0C) {
-    if(!lib_0547::func_5565(var_0E.var_165, "zombie_spawner")) {
+    if(!lib_0547::func_5565(var_0E.script_noteworthy, "zombie_spawner")) {
       continue;
     }
 
@@ -183,7 +183,7 @@ get_valid_assassin_exit_points(param_00) {
         continue;
       }
 
-      if(lib_0547::func_5565(self.previoushole, var_06) && distance(self.var_116, self.previoushole.var_116) < 512) {
+      if(lib_0547::func_5565(self.previoushole, var_06) && distance(self.origin, self.previoushole.origin) < 512) {
         continue;
       }
 
@@ -211,7 +211,7 @@ get_valid_assassin_exit_points(param_00) {
 seek_exit_that_maintains_momentum(param_00) {
   self endon("death");
   var_01 = get_valid_assassin_exit_points(param_00);
-  var_01 = common_scripts\utility::func_40B0(self.var_116, var_01);
+  var_01 = common_scripts\utility::func_40B0(self.origin, var_01);
   var_02 = [];
   var_03 = [];
   var_04 = [];
@@ -256,16 +256,16 @@ set_assassin_removed_from_game() {
 killassassinzombie() {
   self.var_6701 = 1;
   self.var_2A9D = "idle_noncombat";
-  if(maps\mp\zombies\zombie_assassin::is_boss_assassin()) {
+  if(maps / mp / zombies / zombie_assassin::is_boss_assassin()) {
     self suicide();
     return;
   }
 
-  self dodamage(self.var_BC + 500000, self.var_116);
+  self dodamage(self.health + 500000, self.origin);
 }
 
 respawnanassassinzombie() {
-  var_00 = self.var_BC;
+  var_00 = self.health;
   var_01 = common_scripts\utility::func_46B7("zombie_assassin_pagan_room_spawner", "targetname");
   if(everyone_in_pommel_room()) {
     var_02 = spawn_an_assassin(undefined, undefined, common_scripts\utility::func_7A33(var_01), undefined, "Phase 1: Entrance", 1, 1);
@@ -286,8 +286,8 @@ everyone_in_pommel_room(param_00, param_01) {
   }
 
   var_02 = [];
-  foreach(var_04 in level.var_744A) {
-    if(var_04.var_178 == "spectator") {
+  foreach(var_04 in level.players) {
+    if(var_04.sessionstate == "spectator") {
       continue;
     }
 
@@ -324,7 +324,7 @@ set_new_assassin_origin(param_00) {
     wait 0.05;
   }
 
-  var_02 = spawn("script_model", self.var_116);
+  var_02 = spawn("script_model", self.origin);
   var_02 setModel("tag_origin");
   self linkTo(var_02);
   var_02 thread lib_0547::func_2D19(self);
@@ -333,13 +333,13 @@ set_new_assassin_origin(param_00) {
   }
 
   self unlink();
-  self setOrigin(var_01.var_116);
+  self setOrigin(var_01.origin);
   if(isDefined(var_02)) {
     var_02 delete();
   }
 
-  if(isDefined(var_01.var_1D)) {
-    self.var_1D = var_01.var_1D;
+  if(isDefined(var_01.angles)) {
+    self.angles = var_01.angles;
   }
 
   self.previoushole = var_01;
@@ -349,11 +349,11 @@ set_new_assassin_origin(param_00) {
   thread restore_assassin_ability(6);
   if(lib_0547::func_5565(var_01.var_8109, "spawn_riser")) {
     self scragentsetscripted(1);
-    var_03 = maps\mp\agents\_scripted_agent_anim_util::func_434D("spawn_riser");
-    var_04 = maps\mp\agents\_scripted_agent_anim_util::func_7A35(var_03);
+    var_03 = maps / mp / agents / _scripted_agent_anim_util::func_434D("spawn_riser");
+    var_04 = maps / mp / agents / _scripted_agent_anim_util::func_7A35(var_03);
     self method_839C("anim deltas");
-    self scragentsetorientmode("face angle abs", self.var_1D);
-    maps\mp\agents\_scripted_agent_anim_util::func_71FA(var_03, var_04, 1, "spawn_riser");
+    self scragentsetorientmode("face angle abs", self.angles);
+    maps / mp / agents / _scripted_agent_anim_util::func_71FA(var_03, var_04, 1, "spawn_riser");
     self scragentsetscripted(0);
   }
 }
@@ -371,7 +371,7 @@ restore_assassin_ability(param_00) {
     self.assassin_special_wait = undefined;
     self.remaining_special_activations = self.max_special_activations;
     self.is_being_asked_to_leave_soon = 0;
-    thread maps\mp\zombies\zombie_assassin::recharge_special_ability(0);
+    thread maps / mp / zombies / zombie_assassin::recharge_special_ability(0);
   }
 }
 
@@ -438,7 +438,7 @@ get_ideal_spawner_near_origin(param_00, param_01, param_02) {
 
 get_ideal_spawner_near_player(param_00, param_01, param_02) {
   var_03 = [];
-  var_03 = common_scripts\utility::func_40B0(param_00.var_116, param_01);
+  var_03 = common_scripts\utility::func_40B0(param_00.origin, param_01);
   foreach(var_05 in var_03) {
     var_08 = [];
     if(isDefined(param_02)) {
@@ -504,9 +504,9 @@ apply_modifier(param_00) {
       self.assassinabilityactivateaction = "assassin_activate_attack";
       set_number_of_assassin_specials(3);
       self.reverse_assassin_specials_visuals = 1;
-      self.assassin_seek_func = ::maps\mp\zombies\zombie_assassin_frontline::seek_special_ability_use;
-      self.assassin_attack_func = ::maps\mp\zombies\zombie_assassin_frontline::activate_special_ability;
-      self.assassin_special_damage_callback = ::maps\mp\zombies\zombie_assassin_frontline::special_assassin_damaged;
+      self.assassin_seek_func = ::maps / mp / zombies / zombie_assassin_frontline::seek_special_ability_use;
+      self.assassin_attack_func = ::maps / mp / zombies / zombie_assassin_frontline::activate_special_ability;
+      self.assassin_special_damage_callback = ::maps / mp / zombies / zombie_assassin_frontline::special_assassin_damaged;
       break;
 
     case "zombie_assassin_freefire":
@@ -514,43 +514,43 @@ apply_modifier(param_00) {
       self.assassinabilityactivateaction = "assassin_active_shoot_straight";
       self.player_facing_times["assassin_active_shoot_straight"] = 1.85;
       set_number_of_assassin_specials(2);
-      self.assassinabilityactivateactionnotetrackhandler = ::maps\mp\zombies\zombie_assassin_freefire::assassin_throw_notetrack_handler;
-      self.assassin_seek_func = ::maps\mp\zombies\zombie_assassin_freefire::seek_special_ability_use;
-      self.assassin_attack_func = ::maps\mp\zombies\zombie_assassin_freefire::activate_special_ability;
-      self.assassin_special_damage_callback = ::maps\mp\zombies\zombie_assassin_freefire::special_assassin_damaged;
+      self.assassinabilityactivateactionnotetrackhandler = ::maps / mp / zombies / zombie_assassin_freefire::assassin_throw_notetrack_handler;
+      self.assassin_seek_func = ::maps / mp / zombies / zombie_assassin_freefire::seek_special_ability_use;
+      self.assassin_attack_func = ::maps / mp / zombies / zombie_assassin_freefire::activate_special_ability;
+      self.assassin_special_damage_callback = ::maps / mp / zombies / zombie_assassin_freefire::special_assassin_damaged;
       break;
 
     case "zombie_assassin_shellshock":
       self.var_2A9D = "death_stand_elt";
       self.assassinabilityactivateaction = "assassin_active_stunning_burst";
       set_number_of_assassin_specials(2);
-      self.assassinabilityactivateactionnotetrackhandler = ::maps\mp\zombies\zombie_assassin_shellshock::assassin_stunning_burst_notetrack_handler;
-      self.assassin_seek_func = ::maps\mp\zombies\zombie_assassin_shellshock::seek_special_ability_use;
-      self.assassin_attack_func = ::maps\mp\zombies\zombie_assassin_shellshock::activate_special_ability;
-      self.assassin_special_damage_callback = ::maps\mp\zombies\zombie_assassin_shellshock::special_assassin_damaged;
+      self.assassinabilityactivateactionnotetrackhandler = ::maps / mp / zombies / zombie_assassin_shellshock::assassin_stunning_burst_notetrack_handler;
+      self.assassin_seek_func = ::maps / mp / zombies / zombie_assassin_shellshock::seek_special_ability_use;
+      self.assassin_attack_func = ::maps / mp / zombies / zombie_assassin_shellshock::activate_special_ability;
+      self.assassin_special_damage_callback = ::maps / mp / zombies / zombie_assassin_shellshock::special_assassin_damaged;
       break;
 
     case "zombie_assassin_camoflauge":
       self.var_2A9D = "death_stand_elt";
       self.assassinabilityactivateaction = "assassin_activate_attack";
       set_number_of_assassin_specials(1);
-      self.assassinabilityactivateactionnotetrackhandler = ::maps\mp\zombies\zombie_assassin_camoflauge::assassin_camo_notetrack_handler;
-      self.assassin_seek_func = ::maps\mp\zombies\zombie_assassin_camoflauge::seek_special_ability_use;
-      self.assassin_attack_func = ::maps\mp\zombies\zombie_assassin_camoflauge::activate_special_ability;
-      self.assassin_special_damage_callback = ::maps\mp\zombies\zombie_assassin_camoflauge::special_assassin_damaged;
+      self.assassinabilityactivateactionnotetrackhandler = ::maps / mp / zombies / zombie_assassin_camoflauge::assassin_camo_notetrack_handler;
+      self.assassin_seek_func = ::maps / mp / zombies / zombie_assassin_camoflauge::seek_special_ability_use;
+      self.assassin_attack_func = ::maps / mp / zombies / zombie_assassin_camoflauge::activate_special_ability;
+      self.assassin_special_damage_callback = ::maps / mp / zombies / zombie_assassin_camoflauge::special_assassin_damaged;
       break;
   }
 }
 
 set_number_of_assassin_specials(param_00) {
-  if(level.var_744A.size == 1) {
+  if(level.players.size == 1) {
     param_00 = common_scripts\utility::func_7A33([1, 1, 1, 2]);
   }
 
   self.max_special_activations = param_00;
   self.remaining_special_activations = self.max_special_activations;
   if(!common_scripts\utility::func_562E(self.reverse_assassin_specials_visuals)) {
-    maps\mp\zombies\zombie_assassin::enable_assassin_chest_fx();
+    maps / mp / zombies / zombie_assassin::enable_assassin_chest_fx();
   }
 }
 

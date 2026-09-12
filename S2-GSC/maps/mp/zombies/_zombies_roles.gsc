@@ -3,19 +3,19 @@
  * Script: maps\mp\zombies\_zombies_roles.gsc
 **********************************************/
 
-func_00D5() {
+init() {
   level.var_AB43 = 0;
 }
 
 func_7BF6() {
-  lib_0533::func_7BCE("role_ability_camo_zm", ::lib_0537::func_00D5, ::lib_0537::func_3662, ::lib_0537::func_2F9E);
-  lib_0533::func_7BCE("role_ability_mad_minute_zm", ::lib_0538::func_00D5, ::lib_0538::func_3662, ::lib_0538::func_2F9E);
-  lib_0533::func_7BCE("role_ability_melee_frenzy_zm", ::lib_0539::func_00D5, ::lib_0539::func_3662, ::lib_0539::func_2F9E);
-  lib_0533::func_7BCE("role_ability_taunt_zm", ::lib_053B::func_00D5, ::lib_053B::func_3662, ::lib_053B::func_2F9E);
-  lib_0533::func_7BCE("role_ability_stunning_burst_zm", ::lib_053A::func_00D5, ::lib_053A::func_3662, ::lib_053A::func_2F9E);
+  lib_0533::func_7BCE("role_ability_camo_zm", ::lib_0537::init, ::lib_0537::func_3662, ::lib_0537::func_2F9E);
+  lib_0533::func_7BCE("role_ability_mad_minute_zm", ::lib_0538::init, ::lib_0538::func_3662, ::lib_0538::func_2F9E);
+  lib_0533::func_7BCE("role_ability_melee_frenzy_zm", ::lib_0539::init, ::lib_0539::func_3662, ::lib_0539::func_2F9E);
+  lib_0533::func_7BCE("role_ability_taunt_zm", ::lib_053B::init, ::lib_053B::func_3662, ::lib_053B::func_2F9E);
+  lib_0533::func_7BCE("role_ability_stunning_burst_zm", ::lib_053A::init, ::lib_053A::func_3662, ::lib_053A::func_2F9E);
 }
 
-func_6B6C(param_00) {
+onplayerconnect(param_00) {
   param_00.var_7ECB = 1200;
   if(common_scripts\utility::func_562E(0)) {
     var_01 = getarraykeys(level.var_7ED0);
@@ -28,7 +28,7 @@ func_6B6C(param_00) {
 func_6B81() {
   if(common_scripts\utility::func_562E(0)) {
     if(isDefined(self.var_7A3F)) {
-      lib_0586::func_078C(self.var_7A3F);
+      lib_0586::func_78C(self.var_7A3F);
     }
   }
 }
@@ -48,8 +48,8 @@ func_6AB2(param_00) {
   level.var_400E[level.var_400E.size] = ["bat_elite_set 4 -1", self];
   if(level.var_AB43) {
     thread func_6AB3();
-    lib_0586::func_078E(param_00);
-    common_scripts\utility::func_0603();
+    lib_0586::func_78E(param_00);
+    common_scripts\utility::func_603();
     var_02 = undefined;
     for(;;) {
       self waittill("weapon_change", var_03);
@@ -114,15 +114,15 @@ func_956B(param_00) {
   }
 
   var_01 = lib_0547::func_AB2B();
-  common_scripts\utility::func_0617();
-  lib_0586::func_078E(var_01);
+  common_scripts\utility::func_617();
+  lib_0586::func_78E(var_01);
   self notify("zm_role_putaway");
 }
 
 func_6AB3() {
   self endon("zm_role_putaway");
-  common_scripts\utility::func_A70A("death", "begin_last_stand");
-  common_scripts\utility::func_0617();
+  common_scripts\utility::waittill_any("death", "begin_last_stand");
+  common_scripts\utility::func_617();
 }
 
 func_6B84(param_00, param_01, param_02) {
@@ -136,13 +136,13 @@ func_6B84(param_00, param_01, param_02) {
   }
 
   var_05 = param_00 / self.var_7ECB;
-  lib_0533::func_0F37(var_05);
+  lib_0533::func_F37(var_05);
 }
 
 func_4789() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(maps\mp\_utility::func_57A0(var_01)) {
-      var_01 lib_0533::func_0F37(1, 1, 1);
+      var_01 lib_0533::func_F37(1, 1, 1);
     }
   }
 }

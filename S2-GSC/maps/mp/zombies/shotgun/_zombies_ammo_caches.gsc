@@ -7,18 +7,18 @@ ammo_cache_setup() {
   var_00 = common_scripts\utility::func_44BE("ammo_cache", "targetname");
   var_01 = 500;
   foreach(var_03 in var_00) {
-    var_04 = common_scripts\utility::func_44BE(var_03.var_1A2, "targetname");
+    var_04 = common_scripts\utility::func_44BE(var_03.target, "targetname");
     var_03.var_9DC2 = [];
     var_03.var_629F = [];
     foreach(var_06 in var_04) {
-      var_07 = var_06.var_165;
+      var_07 = var_06.script_noteworthy;
       if(!isDefined(var_07)) {
         continue;
       }
 
       switch (var_07) {
         case "ammo_cache_trigger":
-          var_06.look_pos = var_03.var_116;
+          var_06.look_pos = var_03.origin;
           var_06.var_267B = var_01;
           var_03.var_9DC2[var_03.var_9DC2.size] = var_06;
           break;
@@ -30,8 +30,8 @@ ammo_cache_setup() {
     }
 
     foreach(var_0A in var_03.var_9DC2) {
-      var_0A usetouchtriggerrequirefacingposition(1, var_03.var_116);
-      var_0A.face_pos = var_03.var_116;
+      var_0A usetouchtriggerrequirefacingposition(1, var_03.origin);
+      var_0A.face_pos = var_03.origin;
       if(lib_0547::func_5819(var_0A)) {
         lib_0547::func_8A4F(var_0A, ::ammo_cache_update_hints_for_player);
       } else {}
@@ -112,7 +112,7 @@ ammo_cache_think(param_00, param_01) {
       continue;
     }
 
-    if(var_04 maps\mp\gametypes\zombies::func_11C2(var_02.var_267B)) {
+    if(var_04 maps / mp / gametypes / zombies::func_11C2(var_02.var_267B)) {
       maps\mp\zombies\_zombies_magicbox::func_3AC1(var_04, var_06);
       var_04.ammo_cache_uses++;
       var_04.ammo_cache_available_uses--;
@@ -152,7 +152,7 @@ ammo_cache_low_ammo_highlight() {
   var_00 = self;
   var_00 endon("disconnect");
   if(!isalive(var_00)) {
-    var_00 common_scripts\utility::knock_off_battery("spawned_player", "faux_spawn");
+    var_00 common_scripts\utility::waittill_any("spawned_player", "faux_spawn");
   }
 
   var_00.caches_highlighted = 0;

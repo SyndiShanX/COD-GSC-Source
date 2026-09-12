@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_dig_02_aud.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   lib_0367::func_8E3E("bp_thule");
   func_7BBA();
   func_5C22();
@@ -69,34 +69,34 @@ func_35E1() {
 }
 
 func_7248() {
-  soundscripts\_snd_common_zmb_dlc3::dlc3_altered_state_init();
+  soundscripts / _snd_common_zmb_dlc3::dlc3_altered_state_init();
   if(!isDefined(self.var_11CB)) {
     self.var_11CB = spawnStruct();
   }
 }
 
 func_7330() {
-  soundscripts\_snd_common_zmb_dlc3::dlc3_player_spawned();
+  soundscripts / _snd_common_zmb_dlc3::dlc3_player_spawned();
 }
 
 func_A979(param_00) {
-  soundscripts\_snd_common_zmb_dlc3::dlc3_wave_begin(param_00);
+  soundscripts / _snd_common_zmb_dlc3::dlc3_wave_begin(param_00);
 }
 
 func_A97A() {
-  soundscripts\_snd_common_zmb_dlc3::dlc3_wave_end();
+  soundscripts / _snd_common_zmb_dlc3::dlc3_wave_end();
 }
 
 aud_blood_plate_filled(param_00) {}
 
 aud_blood_plate_absorb(param_00) {
   var_01 = self;
-  var_02 = spawn("script_origin", var_01.var_116);
+  var_02 = spawn("script_origin", var_01.origin);
   var_03 = 0;
   var_04 = 0.875;
   lib_0380::func_288B("zombie_soul_suck", undefined, var_02, 0, var_04);
   lib_0380::func_288B("zmb_dig_soul_suck_blood", undefined, var_02);
-  var_02 moveTo(param_00.var_116, 1.9);
+  var_02 moveTo(param_00.origin, 1.9);
   wait(2);
   var_02 delete();
 }
@@ -115,7 +115,7 @@ aud_blood_plate_release(param_00) {
 }
 
 aud_turn_on_bloodfalls(param_00) {
-  if(param_00.var_1A5 == "blood_fount_NE") {
+  if(param_00.targetname == "blood_fount_NE") {
     param_00.fall_snd_ne = lib_0380::func_6842("zmb_dig_bloodfall_lp", undefined, (125, 1552, 473), 0.75);
     param_00.splat_snd_ne = lib_0380::func_6842("zmb_dig_bloodfall_splats_lp", undefined, (125, 1552, 131), 0.75);
     if(!isDefined(level.var_11CB.fallcount)) {
@@ -125,7 +125,7 @@ aud_turn_on_bloodfalls(param_00) {
     }
   }
 
-  if(param_00.var_1A5 == "blood_fount_SE") {
+  if(param_00.targetname == "blood_fount_SE") {
     param_00.fall_snd_se = lib_0380::func_6842("zmb_dig_bloodfall_lp_2", undefined, (113, 1379, 473), 0.75);
     param_00.splat_snd_se = lib_0380::func_6842("zmb_dig_bloodfall_splats_lp", undefined, (113, 1379, 131), 0.75);
     if(!isDefined(level.var_11CB.fallcount)) {
@@ -135,7 +135,7 @@ aud_turn_on_bloodfalls(param_00) {
     }
   }
 
-  if(param_00.var_1A5 == "blood_fount_SW") {
+  if(param_00.targetname == "blood_fount_SW") {
     param_00.fall_snd_sw = lib_0380::func_6842("zmb_dig_bloodfall_lp_3", undefined, (-88, 1381, 473), 0.75);
     param_00.splat_snd_sw = lib_0380::func_6842("zmb_dig_bloodfall_splats_lp", undefined, (-88, 1381, 131), 0.75);
     if(!isDefined(level.var_11CB.fallcount)) {
@@ -145,7 +145,7 @@ aud_turn_on_bloodfalls(param_00) {
     }
   }
 
-  if(param_00.var_1A5 == "blood_fount_NW") {
+  if(param_00.targetname == "blood_fount_NW") {
     param_00.fall_snd_nw = lib_0380::func_6842("zmb_dig_bloodfall_lp_4", undefined, (-90, 1541, 473), 0.75);
     param_00.splat_snd_nw = lib_0380::func_6842("zmb_dig_bloodfall_splats_lp", undefined, (-90, 1541, 131), 0.75);
     if(!isDefined(level.var_11CB.fallcount)) {
@@ -161,7 +161,7 @@ aud_turn_on_bloodfalls(param_00) {
 }
 
 aud_resonator_hit(param_00) {
-  level.var_11CB.resonator_pos = param_00.var_116;
+  level.var_11CB.resonator_pos = param_00.origin;
   var_01 = lib_0380::func_2889("zmb_dig_resonator_hit", undefined, level.var_11CB.resonator_pos);
 }
 
@@ -201,7 +201,7 @@ aud_scavenge_generator_turn_on(param_00) {
 }
 
 aud_rune_pressed(param_00) {
-  var_01 = param_00.var_116 + (0, -10, 0);
+  var_01 = param_00.origin + (0, -10, 0);
   param_00.press_snd = lib_0380::func_2889("zmb_dig_rune_press", undefined, var_01);
 }
 
@@ -219,18 +219,18 @@ aud_rune_all_runes_unpressed(param_00) {
 aud_place_sword_piece(param_00) {
   switch (param_00.piece) {
     case "hilt":
-      lib_0380::func_2889("zmb_dig_barb_place_hilt", undefined, param_00.plate_core.var_116);
-      level.var_11CB.sword_piece_place_lp_01 = lib_0380::func_6842("zmb_dig_forge_sword_place_lp_01", undefined, param_00.plate_core.var_116, 1);
+      lib_0380::func_2889("zmb_dig_barb_place_hilt", undefined, param_00.plate_core.origin);
+      level.var_11CB.sword_piece_place_lp_01 = lib_0380::func_6842("zmb_dig_forge_sword_place_lp_01", undefined, param_00.plate_core.origin, 1);
       break;
 
     case "pommel":
-      lib_0380::func_2889("zmb_dig_barb_place_pommel", undefined, param_00.plate_core.var_116);
-      level.var_11CB.sword_piece_place_lp_02 = lib_0380::func_6842("zmb_dig_forge_sword_place_lp_02", undefined, param_00.plate_core.var_116, 1);
+      lib_0380::func_2889("zmb_dig_barb_place_pommel", undefined, param_00.plate_core.origin);
+      level.var_11CB.sword_piece_place_lp_02 = lib_0380::func_6842("zmb_dig_forge_sword_place_lp_02", undefined, param_00.plate_core.origin, 1);
       break;
 
     case "blade":
-      lib_0380::func_2889("zmb_dig_barb_place_blade", undefined, param_00.plate_core.var_116);
-      level.var_11CB.sword_piece_place_lp_03 = lib_0380::func_6842("zmb_dig_forge_sword_place_lp_03", undefined, param_00.plate_core.var_116, 1);
+      lib_0380::func_2889("zmb_dig_barb_place_blade", undefined, param_00.plate_core.origin);
+      level.var_11CB.sword_piece_place_lp_03 = lib_0380::func_6842("zmb_dig_forge_sword_place_lp_03", undefined, param_00.plate_core.origin, 1);
       break;
   }
 }
@@ -249,10 +249,10 @@ aud_assemble_sword() {
     lib_0380::func_6850(level.var_11CB.sword_piece_place_lp_03, 0.75);
   }
 
-  lib_0380::func_2889("zmb_dig_forge_sword_buildup", undefined, var_00.var_116);
-  level.var_11CB.sword_assamble_lp = lib_0380::func_6842("zmb_dig_forge_sword_lp", undefined, var_00.var_116, 3);
-  thread sword_assemble_elec_oneshots(var_00.var_116);
-  thread sword_assemble_whoosh_oneshots(var_00.var_116);
+  lib_0380::func_2889("zmb_dig_forge_sword_buildup", undefined, var_00.origin);
+  level.var_11CB.sword_assamble_lp = lib_0380::func_6842("zmb_dig_forge_sword_lp", undefined, var_00.origin, 3);
+  thread sword_assemble_elec_oneshots(var_00.origin);
+  thread sword_assemble_whoosh_oneshots(var_00.origin);
 }
 
 sword_pieces_combine(param_00, param_01) {
@@ -304,7 +304,7 @@ aud_fount_elec_drop() {}
 
 aud_brazier_light() {
   var_00 = self;
-  var_00.snd_handle = lib_0380::func_6842("zmb_dig_torch_sml", undefined, var_00.var_116, 0.5);
+  var_00.snd_handle = lib_0380::func_6842("zmb_dig_torch_sml", undefined, var_00.origin, 0.5);
 }
 
 aud_brazier_light_stop() {
@@ -320,7 +320,7 @@ aud_basalt_move() {
 }
 
 aud_dig_earthquake(param_00, param_01, param_02) {
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     var_04 method_8626("dig_earthquake_mix");
   }
 
@@ -381,7 +381,7 @@ aud_dig_earthquake(param_00, param_01, param_02) {
 
 aud_dig_earthquake_stop(param_00) {
   lib_0366::func_8E30(1, param_00);
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 method_8627("dig_earthquake_mix");
   }
 

@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_training_aud.gsc
 **********************************************/
 
-func_00F9() {
+main() {
   lib_0367::func_8E3E("train");
   func_7BBA();
   thread func_526E();
@@ -58,7 +58,7 @@ func_7330() {
 }
 
 func_A7B1() {
-  level.var_721C method_8626("wake_up");
+  level.player method_8626("wake_up");
   level.var_11CB.var_A7A5 = lib_0380::func_2888("training_intro_fire", undefined, 2);
   lib_0378::func_8D14(level.var_11CB.var_A7A5);
   level.var_11CB.var_A7A6 = lib_0380::func_2888("zmb_training_intro_hit");
@@ -80,7 +80,7 @@ func_5460() {
   level.var_11CB.var_A7A4 = lib_0380::func_2888("zmb_training_intro_end");
   lib_0378::func_8D14(level.var_11CB.var_A7A4);
   wait(4);
-  level.var_721C method_8627("wake_up");
+  level.player method_8627("wake_up");
 }
 
 func_9C46() {
@@ -98,12 +98,12 @@ func_8380() {
 func_404B() {
   var_00 = self;
   wait(6.4);
-  level.var_721C method_8626("german_soldiers_encounter", 0.25);
+  level.player method_8626("german_soldiers_encounter", 0.25);
   lib_0380::func_6844("training_dying_soldier_foley", undefined, var_00);
   wait(1.5);
   lib_0380::func_6844("zmb_soldier_death_vox", undefined, var_00);
   wait(3);
-  level.var_721C method_8627("german_soldiers_encounter", 5);
+  level.player method_8627("german_soldiers_encounter", 5);
 }
 
 func_6FC4() {
@@ -117,25 +117,25 @@ func_2676() {
 }
 
 func_7A3A(param_00) {
-  lib_0380::func_2889("training_z_growl", undefined, param_00.var_0116);
+  lib_0380::func_2889("training_z_growl", undefined, param_00.origin);
 }
 
 func_403F(param_00, param_01) {
-  lib_0380::func_2889("zmb_train_gsld1_heyoverhereiheardsomeone", undefined, param_00.var_0116, 0, 0.7);
+  lib_0380::func_2889("zmb_train_gsld1_heyoverhereiheardsomeone", undefined, param_00.origin, 0, 0.7);
 }
 
 func_403A(param_00) {
-  lib_0380::func_2889("zmb_train_gsld2_haltoverhere", undefined, param_00.var_0116, 0, 0.8);
+  lib_0380::func_2889("zmb_train_gsld2_haltoverhere", undefined, param_00.origin, 0, 0.8);
   wait(1);
-  lib_0380::func_2889("zmb_training_dist_zombies", undefined, param_00.var_0116, 0, 1);
+  lib_0380::func_2889("zmb_training_dist_zombies", undefined, param_00.origin, 0, 1);
   wait(1.5);
-  lib_0380::func_2889("zmb_train_gsld1_whatherrstraubsaidtheywer", undefined, param_00.var_0116, 0, 1);
+  lib_0380::func_2889("zmb_train_gsld1_whatherrstraubsaidtheywer", undefined, param_00.origin, 0, 1);
   wait(2.5);
-  lib_0380::func_2889("zmb_train_gsld2_gethelp", undefined, param_00.var_0116, 0, 0.9);
+  lib_0380::func_2889("zmb_train_gsld2_gethelp", undefined, param_00.origin, 0, 0.9);
   wait(1.5);
-  lib_0380::func_2889("zmb_train_gsld1_aaaahhhh", undefined, param_00.var_0116, 0, 0.8);
+  lib_0380::func_2889("zmb_train_gsld1_aaaahhhh", undefined, param_00.origin, 0, 0.8);
   wait(1.5);
-  lib_0380::func_2889("zmb_train_gsld2_run", undefined, param_00.var_0116, 0, 0.7);
+  lib_0380::func_2889("zmb_train_gsld2_run", undefined, param_00.origin, 0, 0.7);
 }
 
 func_2767() {
@@ -148,21 +148,21 @@ func_2768() {}
 func_326F() {}
 
 func_3257() {
-  level.var_120E = lib_0380::func_2889("training_house_door_close", undefined, self.var_0116);
+  level.var_120E = lib_0380::func_2889("training_house_door_close", undefined, self.origin);
   lib_0378::func_8D14(level.var_120E);
-  if(isDefined(level.var_744A)) {
-    foreach(var_01 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_01 in level.players) {
       var_01 aud_start_player_vox();
     }
   }
 }
 
 func_3577() {
-  lib_0380::func_2889("training_pressure", undefined, self.var_0116);
+  lib_0380::func_2889("training_pressure", undefined, self.origin);
 }
 
 func_3598() {
-  lib_0380::func_2889("training_crow_caw", undefined, self.var_0116);
+  lib_0380::func_2889("training_crow_caw", undefined, self.origin);
 }
 
 func_9FE2() {
@@ -195,8 +195,8 @@ func_726F() {
   for(;;) {
     var_04 = lib_0366::func_8E1A();
     foreach(var_06 in var_04) {
-      var_07 = var_06.var_0116[2];
-      if(var_07 >= var_01 && level.var_721C.var_0116[2] < var_02 && var_00 <= var_03) {
+      var_07 = var_06.origin[2];
+      if(var_07 >= var_01 && level.player.origin[2] < var_02 && var_00 <= var_03) {
         if(!isDefined(var_06.var_A1C6)) {
           var_06.var_A1C6 = lib_0380::func_288B("zmb_house_upstairs_fs_lp", undefined, var_06);
         }

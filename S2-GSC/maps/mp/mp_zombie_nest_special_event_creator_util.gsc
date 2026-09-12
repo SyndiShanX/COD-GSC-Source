@@ -9,15 +9,15 @@ func_2C2C(param_00, param_01) {
   foreach(var_05 in var_02) {
     if(isDefined(var_05.var_819A)) {
       var_05.var_68A2 = 0;
-      var_03 = common_scripts\utility::func_0F6F(var_03, var_05);
+      var_03 = common_scripts\utility::func_F6F(var_03, var_05);
     }
   }
 
   param_00 thread func_2D33(var_03);
-  var_07 = maps\mp\agents\_agent_utility::func_43FD("all");
-  var_07 = common_scripts\utility::func_0F92(var_07);
+  var_07 = maps / mp / agents / _agent_utility::func_43FD("all");
+  var_07 = common_scripts\utility::func_F92(var_07);
   foreach(var_09 in var_07) {
-    if(!var_09 maps\mp\mp_zombie_nest_ee_tower_battle_zombie_states::func_A7F2()) {
+    if(!var_09 maps / mp / mp_zombie_nest_ee_tower_battle_zombie_states::func_A7F2()) {
       var_09 notify("lose_focus");
       var_09.var_1924 = undefined;
       var_09.var_8BA3 = 0;
@@ -34,15 +34,15 @@ func_2C2C(param_00, param_01) {
       continue;
     }
 
-    if(!isDefined(var_09.var_0A4B)) {
+    if(!isDefined(var_09.var_A4B)) {
       continue;
     }
 
-    if(var_09.var_000A == level.var_746E) {
+    if(var_09.agentteam == level.var_746E) {
       continue;
     }
 
-    if(var_09.var_0A4B != "zombie_generic" && var_09.var_0A4B != "zombie_berserker") {
+    if(var_09.var_A4B != "zombie_generic" && var_09.var_A4B != "zombie_berserker") {
       continue;
     }
 
@@ -50,7 +50,7 @@ func_2C2C(param_00, param_01) {
       continue;
     }
 
-    var_0A = distance(var_09.var_0116, param_00.var_ABEA.var_38B7);
+    var_0A = distance(var_09.origin, param_00.var_ABEA.var_38B7);
     if(var_0A < param_01) {
       continue;
     }
@@ -90,11 +90,11 @@ func_9408() {
   self notify("stop_sould_bucket_leak");
 }
 
-func_2B65(param_00, param_01) {}
+showelem(param_00, param_01) {}
 
 func_2D33(param_00) {
   level waittill("tower battle reset despawners");
-  var_01 = maps\mp\agents\_agent_utility::func_43FD("all");
+  var_01 = maps / mp / agents / _agent_utility::func_43FD("all");
   foreach(var_03 in var_01) {
     var_03.var_1924 = undefined;
     var_03.var_8BA3 = 0;
@@ -107,7 +107,7 @@ func_20C6(param_00, param_01) {
   self endon("death");
   self.var_9966 = 1;
   wait(randomint(4) + 1);
-  if(!isDefined(self.var_0A4B) || !isalive(self)) {
+  if(!isDefined(self.var_A4B) || !isalive(self)) {
     return;
   }
 
@@ -124,9 +124,9 @@ func_20C6(param_00, param_01) {
 }
 
 func_410B(param_00) {
-  var_01 = common_scripts\utility::func_40B0(self.var_0116, param_00);
+  var_01 = common_scripts\utility::func_40B0(self.origin, param_00);
   for(var_02 = 0; var_02 < var_01.size; var_02++) {
-    if(var_01[var_02].var_68A2 <= 4 && abs(var_01[var_02].var_0116[2] - self.var_0116[2]) < 256) {
+    if(var_01[var_02].var_68A2 <= 4 && abs(var_01[var_02].origin[2] - self.origin[2]) < 256) {
       return var_01[var_02];
     }
   }
@@ -144,15 +144,15 @@ func_2B79(param_00) {
 func_9E20() {
   self endon("death");
   self endon("lose_focus");
-  var_00 = self.var_0A4B;
-  while(isalive(self) && isDefined(self.var_1924) && distance(self.var_0116, self.var_1924.var_0116) > 48) {
+  var_00 = self.var_A4B;
+  while(isalive(self) && isDefined(self.var_1924) && distance(self.origin, self.var_1924.origin) > 48) {
     wait(0.1);
   }
 
   self suicide();
   self.var_1924 = undefined;
-  if(lib_0547::func_0796()) {
-    var_01 = lib_055A::func_4696(var_00, 0, 0, maps\mp\mp_zombie_nest_special_event_creator_interface::func_405B());
+  if(lib_0547::func_796()) {
+    var_01 = lib_055A::func_4696(var_00, 0, 0, maps / mp / mp_zombie_nest_special_event_creator_interface::func_405B());
     var_02 = lib_054D::func_90BA(var_00, var_01, "tower_respawn");
   }
 }
@@ -161,13 +161,13 @@ func_ABE1() {
   self endon("death");
   self.var_4B9F = 1;
   var_00 = "board_taunt";
-  var_01 = maps\mp\agents\_scripted_agent_anim_util::func_434D(var_00, undefined, 1);
+  var_01 = maps / mp / agents / _scripted_agent_anim_util::func_434D(var_00, undefined, 1);
   if(isDefined(var_01)) {
-    var_02 = maps\mp\agents\_scripted_agent_anim_util::func_7A35(var_01);
+    var_02 = maps / mp / agents / _scripted_agent_anim_util::func_7A35(var_01);
     self method_839C("anim deltas");
-    self scragentsetorientmode("face angle abs", self.var_001D);
+    self scragentsetorientmode("face angle abs", self.angles);
     self scragentsetscripted(1);
-    maps\mp\agents\_scripted_agent_anim_util::func_71FA(var_01, var_02, 1, "taunt_anim");
+    maps / mp / agents / _scripted_agent_anim_util::func_71FA(var_01, var_02, 1, "taunt_anim");
     self scragentsetscripted(0);
   }
 }
@@ -180,11 +180,11 @@ func_27CE(param_00) {
   var_01 = [];
   for(var_02 = 0; var_02 + 1 < param_00.size; var_02 = var_02 + 2) {
     for(var_03 = 0; var_03 < param_00[var_02 + 1]; var_03++) {
-      var_01 = common_scripts\utility::func_0F6F(var_01, param_00[var_02]);
+      var_01 = common_scripts\utility::func_F6F(var_01, param_00[var_02]);
     }
   }
 
-  return common_scripts\utility::func_0F92(var_01);
+  return common_scripts\utility::func_F92(var_01);
 }
 
 func_11B2(param_00) {
@@ -210,7 +210,7 @@ func_8A06(param_00, param_01) {
   param_00.var_3012 = "ui_zm_waypoint_ent_" + param_01;
   param_00.var_3013 = "ui_zm_waypoint_float_" + param_01;
   param_00 setModel("tag_origin");
-  param_00 method_805B();
+  param_00 show();
   setomnvar(param_00.var_3012, param_00 getentitynumber());
   setomnvar(param_00.var_3013, 1);
 }
@@ -275,7 +275,7 @@ func_45BC() {
   var_00 = 0;
   var_01 = lib_0547::func_408F();
   foreach(var_03 in var_01) {
-    if(isalive(var_03) && isDefined(var_03.var_9ACD) && var_03.var_9ACD == "attacking point" && distance2dsquared(var_03.var_0116, self.var_0116) < 4096) {
+    if(isalive(var_03) && isDefined(var_03.var_9ACD) && var_03.var_9ACD == "attacking point" && distance2dsquared(var_03.origin, self.origin) < 4096) {
       var_00++;
     }
   }
@@ -284,11 +284,11 @@ func_45BC() {
 }
 
 func_600B() {
-  if(level.var_744A.size > 1) {
-    var_00 = maps\mp\mp_zombie_nest_special_event_creator_interface::func_9959();
-    var_01 = maps\mp\mp_zombie_nest_special_event_creator_interface::func_55C0();
+  if(level.players.size > 1) {
+    var_00 = maps / mp / mp_zombie_nest_special_event_creator_interface::func_9959();
+    var_01 = maps / mp / mp_zombie_nest_special_event_creator_interface::func_55C0();
     return var_00 && !var_01;
   }
 
-  return !maps\mp\mp_zombie_nest_special_event_creator_interface::func_55C0();
+  return !maps / mp / mp_zombie_nest_special_event_creator_interface::func_55C0();
 }

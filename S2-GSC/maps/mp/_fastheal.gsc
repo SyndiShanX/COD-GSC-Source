@@ -43,7 +43,7 @@ func_9E29() {
 func_92CC() {
   self endon("ClearFastHeal");
   self endon("death");
-  self method_8615("earn_superbonus");
+  self playlocalsound("earn_superbonus");
   self.var_56E9 = 1;
   self.var_50A0 = 1;
   self.var_98E1 = 1.5;
@@ -87,7 +87,7 @@ func_7723() {
   self endon("EndFastHeal");
   self endon("death");
   for(;;) {
-    iprintlnbold(self.var_00BC);
+    iprintlnbold(self.health);
     wait(1);
   }
 }

@@ -3,7 +3,7 @@
  * Script: maps\mp\_mp_lights.gsc
 *********************************************/
 
-func_00D5() {
+init() {
   if(!isDefined(level.var_94E5)) {
     level.var_94E5 = getdvarint("1084", 1);
   }
@@ -25,8 +25,8 @@ func_00D5() {
   }
 
   thread func_63C5();
-  if(!isDefined(level.var_0672)) {
-    level.var_0672 = spawnStruct();
+  if(!isDefined(level.var_672)) {
+    level.var_672 = spawnStruct();
     func_5D25();
     func_5D11();
   }
@@ -60,8 +60,8 @@ func_8588(param_00, param_01, param_02, param_03, param_04) {
 }
 
 func_63C5() {
-  if(isDefined(level.var_744A)) {
-    foreach(var_01 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_01 in level.players) {
       var_01 func_5330();
     }
   }
@@ -137,8 +137,8 @@ func_8599(param_00, param_01) {
 }
 
 func_5C9B(param_00, param_01, param_02, param_03) {
-  level notify("changing_sunsamplesizenear" + param_03.var_0109);
-  level endon("changing_sunsamplesizenear" + param_03.var_0109);
+  level notify("changing_sunsamplesizenear" + param_03.name);
+  level endon("changing_sunsamplesizenear" + param_03.name);
   if(param_00 == param_01) {
     return;
   }
@@ -172,8 +172,8 @@ func_5D25() {
 }
 
 func_279A(param_00, param_01, param_02, param_03, param_04, param_05) {
-  if(!isDefined(level.var_0672.var_3D62)) {
-    level.var_0672.var_3D62 = [];
+  if(!isDefined(level.var_672.var_3D62)) {
+    level.var_672.var_3D62 = [];
   }
 
   var_06 = spawnStruct();
@@ -181,13 +181,13 @@ func_279A(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06.var_24F4 = param_02;
   var_06.var_61BE = param_03;
   var_06.var_607C = param_04;
-  var_06.var_00D8 = param_05;
-  level.var_0672.var_3D62[param_00] = var_06;
+  var_06.var_D8 = param_05;
+  level.var_672.var_3D62[param_00] = var_06;
 }
 
 func_4198(param_00) {
-  if(isDefined(level.var_0672.var_3D62) && isDefined(level.var_0672.var_3D62[param_00])) {
-    return level.var_0672.var_3D62[param_00];
+  if(isDefined(level.var_672.var_3D62) && isDefined(level.var_672.var_3D62[param_00])) {
+    return level.var_672.var_3D62[param_00];
   }
 
   return undefined;
@@ -209,10 +209,10 @@ func_711E(param_00, param_01, param_02) {
       param_02 = 0;
     }
 
-    var_04.var_00D8 = param_02;
+    var_04.var_D8 = param_02;
   }
 
-  var_03 method_81DF(var_04.var_00D8);
+  var_03 method_81DF(var_04.var_D8);
   var_03.var_5749 = 1;
   var_03.var_574A = 0;
   var_03 thread func_351B(var_04.var_24F2, var_04.var_24F4, var_04.var_61BE, var_04.var_607C);
@@ -316,7 +316,7 @@ func_6284(param_00, param_01, param_02, param_03) {
     }
 
     foreach(var_08 in var_04) {
-      var_08 method_805B();
+      var_08 show();
     }
 
     wait(var_06);
@@ -325,7 +325,7 @@ func_6284(param_00, param_01, param_02, param_03) {
     }
 
     foreach(var_08 in var_04) {
-      var_08 method_805C();
+      var_08 hide();
     }
 
     var_05++;
@@ -334,33 +334,33 @@ func_6284(param_00, param_01, param_02, param_03) {
 }
 
 func_5D11() {
-  level.var_0672.var_611B = [];
+  level.var_672.var_611B = [];
 }
 
 func_5D09() {}
 
 func_5D1F(param_00, param_01) {
-  level.var_0672.var_611B[param_00] = param_01;
+  level.var_672.var_611B[param_00] = param_01;
 }
 
 func_5D10(param_00, param_01, param_02, param_03) {
-  if(isDefined(level.var_0672.var_611B[param_00])) {
+  if(isDefined(level.var_672.var_611B[param_00])) {
     if(isDefined(param_03)) {
-      thread[[level.var_0672.var_611B[param_00]]](param_01, param_02, param_03);
+      thread[[level.var_672.var_611B[param_00]]](param_01, param_02, param_03);
       return;
     }
 
     if(isDefined(param_02)) {
-      thread[[level.var_0672.var_611B[param_00]]](param_01, param_02);
+      thread[[level.var_672.var_611B[param_00]]](param_01, param_02);
       return;
     }
 
     if(isDefined(param_01)) {
-      thread[[level.var_0672.var_611B[param_00]]](param_01);
+      thread[[level.var_672.var_611B[param_00]]](param_01);
       return;
     }
 
-    thread[[level.var_0672.var_611B[param_00]]]();
+    thread[[level.var_672.var_611B[param_00]]]();
     return;
   }
 }
@@ -384,29 +384,31 @@ func_93C7(param_00) {
     return;
   }
 
-  for(var_05 = 0; var_05 < level.var_2804.size; var_05++) {
-    var_03 = level.var_2804[var_05];
-    if(!isDefined(var_03)) {
+  var_05 = 0;
+  while(var_03 < level.var_2804.size) {
+    var_05 = level.var_2804[var_03];
+    if(!isDefined(var_05)) {
       continue;
     }
 
-    if(var_03.var_A265["type"] != "exploder") {
+    if(var_05.var_A265["type"] != "exploder") {
       continue;
     }
 
-    if(!isDefined(var_03.var_A265["exploder"])) {
+    if(!isDefined(var_05.var_A265["exploder"])) {
       continue;
     }
 
-    if(var_03.var_A265["exploder"] + "" != param_00) {
+    if(var_05.var_A265["exploder"] + "" != var_02) {
       continue;
     }
 
-    if(!isDefined(var_03.var_5EED)) {
+    if(!isDefined(var_05.var_5EED)) {
       continue;
     }
 
-    var_03.var_5EED delete();
+    var_05.var_5EED delete();
+    var_03++;
   }
 }
 

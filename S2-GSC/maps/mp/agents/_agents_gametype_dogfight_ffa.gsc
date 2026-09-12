@@ -3,4 +3,4 @@
  * Script: maps\mp\agents\_agents_gametype_dogfight_ffa.gsc
 ************************************************************/
 
-func_00F9() {}
+main() {}

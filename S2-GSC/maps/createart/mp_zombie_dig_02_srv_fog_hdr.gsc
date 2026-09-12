@@ -3,9 +3,9 @@
  * Script: maps\createart\mp_zombie_dig_02_srv_fog_hdr.gsc
 ***********************************************************/
 
-func_00F9() {
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_dig_02_srv");
-  var_00.var_9C83 = 0;
+main() {
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_dig_02_srv");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.0262996, 0.0395539, 0.0617854);
   var_00.var_1108 = (0.5, 0.5, 0.5);
@@ -48,15 +48,15 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_dig_02_srv_underwater");
-  var_00.var_92C6 = 5;
-  var_00.var_497B = 200;
-  var_00.var_7B4C = 0.74661;
-  var_00.var_4848 = 0.999995;
-  var_00.var_180C = 0.87276;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_dig_02_srv_underwater");
+  var_00.startdist = 5;
+  var_00.halfwaydist = 200;
+  var_00.red = 0.74661;
+  var_00.green = 0.999995;
+  var_00.blue = 0.87276;
   var_00.hdrcolorintensity = 13.3491;
-  var_00.var_608F = 1;
-  var_00.var_9C83 = 0;
+  var_00.maxopacity = 1;
+  var_00.transitiontime = 0;
   var_00.sunfogenabled = 1;
   var_00.sunred = 0.584985;
   var_00.sungreen = 0.601561;
@@ -66,12 +66,12 @@ func_00F9() {
   var_00.sunbeginfadeangle = 0;
   var_00.sunendfadeangle = 150;
   var_00.normalfogscale = 0.125;
-  var_00.var_8C98 = 0;
-  var_00.var_8C9A = 0;
-  var_00.var_8C99 = 0;
-  var_00.var_4C37 = 0;
-  var_00.var_4C36 = 0;
-  var_00.var_4C38 = 1000;
+  var_00.skyfogintensity = 0;
+  var_00.skyfogminangle = 0;
+  var_00.skyfogmaxangle = 0;
+  var_00.heightfogenabled = 0;
+  var_00.heightfogbaseheight = 0;
+  var_00.heightfoghalfplanedistance = 1000;
   var_00.var_1103 = 0;
   var_00.var_1128 = (0.891419, 0.891419, 0.891419);
   var_00.var_1108 = (0.955511, 0.955511, 0.955511);
@@ -90,8 +90,8 @@ func_00F9() {
   var_00.var_110C = 0;
   var_00.var_110B = 4481.58;
   var_00.var_110D = 1276.3;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_dig_02");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_dig_02");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.0262996, 0.0395539, 0.0617854);
   var_00.var_1108 = (0.5, 0.5, 0.5);
@@ -134,8 +134,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_dig_02_altered");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_dig_02_altered");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.0262996, 0.0395539, 0.0617854);
   var_00.var_1108 = (0.5, 0.5, 0.5);
@@ -178,8 +178,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_dig_02_altered_near_death");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_dig_02_altered_near_death");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.0262996, 0.0395539, 0.0617854);
   var_00.var_1108 = (0.5, 0.5, 0.5);
@@ -222,8 +222,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_dig_02_interior");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_dig_02_interior");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.0262996, 0.0395539, 0.0617854);
   var_00.var_1108 = (0.5, 0.5, 0.5);
@@ -266,8 +266,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_dig_02_bloodroom");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_dig_02_bloodroom");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.562006, 0.671346, 0.84312);
   var_00.var_1108 = (0.5, 0.5, 0.5);
@@ -310,8 +310,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_dig_02_sacrifice");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_dig_02_sacrifice");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.0259142, 0.0382909, 0.0590503);
   var_00.var_1108 = (0.5, 0.5, 0.5);
@@ -354,8 +354,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_dig_02_hazeroom");
-  var_00.var_9C83 = 0.5;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_dig_02_hazeroom");
+  var_00.transitiontime = 0.5;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.0707537, 0.0938313, 0.079269);
   var_00.var_1108 = (0.5, 0.5, 0.5);
@@ -398,8 +398,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_dig_02_rage");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_dig_02_rage");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.0262996, 0.0395539, 0.0617854);
   var_00.var_1108 = (0.5, 0.5, 0.5);
@@ -442,8 +442,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 0;
   var_00.var_1128 = (0.0390588, 0.0938313, 0.0592692);
   var_00.var_1108 = (0.5, 0.5, 0.5);

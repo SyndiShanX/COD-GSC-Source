@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_nest_pneumos.gsc
 **********************************************/
 
-func_00F9() {
+main() {
   common_scripts\utility::func_3C87("flag_all_tubes_ridden");
   common_scripts\utility::func_3C87("flag_pap_available");
   common_scripts\utility::func_3C87("flag_cage_not_moving");
@@ -24,13 +24,13 @@ func_00F9() {
       var_03.var_9E42 = 0;
       var_03.var_3A6A = 0;
       var_03.var_3A6B = 0;
-      var_04 = common_scripts\utility::func_44BE(var_03.var_01A2, "targetname");
+      var_04 = common_scripts\utility::func_44BE(var_03.target, "targetname");
       foreach(var_06 in var_04) {
-        if(!isDefined(var_06.var_0165)) {
+        if(!isDefined(var_06.script_noteworthy)) {
           continue;
         }
 
-        var_07 = var_06.var_0165;
+        var_07 = var_06.script_noteworthy;
         switch (var_07) {
           case "tube_trig":
             var_03.var_A1F7 = var_06;
@@ -49,9 +49,9 @@ func_00F9() {
         }
       }
 
-      var_09 = common_scripts\utility::func_46B5(var_03.var_3A68.var_01A2, "targetname");
-      var_0A = maps\mp\mp_zombie_nest_ee_util::func_44C8("pnuemo_tube_node_begin", 1);
-      var_0A = common_scripts\utility::func_0F6F(var_0A, var_09);
+      var_09 = common_scripts\utility::func_46B5(var_03.var_3A68.target, "targetname");
+      var_0A = maps / mp / mp_zombie_nest_ee_util::func_44C8("pnuemo_tube_node_begin", 1);
+      var_0A = common_scripts\utility::func_F6F(var_0A, var_09);
       var_03.var_6EB7 = var_0A;
       var_03 thread func_8A3B(var_00);
     }
@@ -62,17 +62,17 @@ func_00F9() {
   level.var_6E33 = func_8A0B();
   var_0C = common_scripts\utility::func_46B7("cage_button", "targetname");
   foreach(var_0E in var_0C) {
-    var_0F = common_scripts\utility::func_44BE(var_0E.var_01A2, "targetname");
+    var_0F = common_scripts\utility::func_44BE(var_0E.target, "targetname");
     foreach(var_06 in var_0F) {
-      if(!isDefined(var_06.var_0165)) {
+      if(!isDefined(var_06.script_noteworthy)) {
         continue;
       }
 
-      var_07 = var_06.var_0165;
+      var_07 = var_06.script_noteworthy;
       switch (var_07) {
         case "cage_button_trig":
           var_0E.var_1E2C = var_06;
-          if(lib_0547::func_5565(var_0E.var_0165, "first_button")) {
+          if(lib_0547::func_5565(var_0E.script_noteworthy, "first_button")) {
             var_0E.var_1E2C setHintString(&"ZOMBIE_NEST_PNEUMO_TUBE_ACTIVATE");
           } else {
             var_0E.var_1E2C setHintString(&"ZOMBIES_SWITCH_HINT_GENERIC_BUTTON");
@@ -129,7 +129,7 @@ func_9E43() {
   while(!common_scripts\utility::func_3C77("flag_all_tubes_ridden")) {
     var_01 = 1;
     level waittill("pneumo_tube_ridden", var_02);
-    if(!common_scripts\utility::func_0F79(var_00, var_02)) {
+    if(!common_scripts\utility::func_F79(var_00, var_02)) {
       var_02.var_9E42 = 1;
       var_00[var_00.size] = var_02;
     }
@@ -177,17 +177,17 @@ func_8A3B(param_00) {
   var_01 = function_021F("scriptable_pnuemo_tube", "targetname");
   var_02 = undefined;
   if(isDefined(var_01) && var_01.size > 0) {
-    var_02 = common_scripts\utility::func_4461(self.var_A1F7.var_0116, var_01);
+    var_02 = common_scripts\utility::func_4461(self.var_A1F7.origin, var_01);
   }
 
   if(isDefined(var_02)) {
-    self.var_A1F7 usetouchtriggerrequirefacingposition(1, var_02.var_0116);
+    self.var_A1F7 usetouchtriggerrequirefacingposition(1, var_02.origin);
   }
 
   level thread func_63B8(self.var_A1F7);
   var_03 = undefined;
   if(isDefined(var_02)) {
-    var_03 = lib_0552::func_7BE1(undefined, self.var_A1F7, 1, var_02.var_0116);
+    var_03 = lib_0552::func_7BE1(undefined, self.var_A1F7, 1, var_02.origin);
   } else {
     var_03 = lib_0552::func_7BE1(undefined, self.var_A1F7);
   }
@@ -220,8 +220,8 @@ func_8A3B(param_00) {
         continue;
       }
 
-      if(lib_055A::func_586A(self.var_0165)) {
-        if(var_05 maps\mp\gametypes\zombies::func_11C2(250)) {
+      if(lib_055A::func_586A(self.script_noteworthy)) {
+        if(var_05 maps / mp / gametypes / zombies::func_11C2(250)) {
           if(lib_057E::func_314D(var_05)) {
             var_05 lib_057E::func_95CB();
           }
@@ -244,21 +244,21 @@ func_86E5(param_00) {
   lib_0378::func_8D74("aud_start_pneumo_tube");
   var_01 = param_00.var_6EB7;
   self.var_53F0 = 1;
-  var_02 = maps\mp\mp_zombie_nest_ee_util::func_90A9(self.var_0116);
-  var_02.var_0116 = var_01[0].var_0116;
-  var_02.var_001D = var_01[0].var_001D;
-  self.var_0116 = var_02.var_0116;
+  var_02 = maps / mp / mp_zombie_nest_ee_util::func_90A9(self.origin);
+  var_02.origin = var_01[0].origin;
+  var_02.angles = var_01[0].angles;
+  self.origin = var_02.origin;
   thread func_7533();
-  self setangles(var_02.var_001D);
+  self setplayerangles(var_02.angles);
   self playerlinktoblend(var_02, "tag_origin", 0.8);
   self method_8003();
-  maps\mp\mp_zombie_nest_ee_util::func_3E23();
+  maps / mp / mp_zombie_nest_ee_util::func_3E23();
   var_03 = [];
   for(var_04 = 0; var_04 < var_01.size - 1; var_04++) {
     var_03[var_04] = var_01[var_04];
   }
 
-  var_02 thread maps\mp\mp_zombie_nest_ee_util::func_649B(var_03, 450, 0);
+  var_02 thread maps / mp / mp_zombie_nest_ee_util::func_649B(var_03, 450, 0);
   func_38F5();
   var_02 waittill("path complete");
   func_A072(var_02, param_00);
@@ -267,7 +267,7 @@ func_86E5(param_00) {
 func_7533() {
   self.var_1782 = func_2787("black", 1, self, (1, 1, 1));
   self.var_1782 fadeovertime(0.75);
-  self.var_1782.var_0018 = 0;
+  self.var_1782.alpha = 0;
   wait(0.75);
   if(isDefined(self) && isDefined(self.var_1782)) {
     self.var_1782 destroy();
@@ -281,18 +281,18 @@ func_2787(param_00, param_01, param_02, param_03) {
     var_04 = newhudelem();
   }
 
-  var_04.var_01D3 = 0;
-  var_04.var_01D7 = 0;
+  var_04.x = 0;
+  var_04.y = 0;
   var_04 setshader(param_00, 640, 480);
-  var_04.var_0010 = "left";
-  var_04.var_0011 = "top";
-  var_04.var_0184 = 1;
-  var_04.var_00C6 = "fullscreen";
-  var_04.var_01CA = "fullscreen";
-  var_04.var_0018 = param_01;
-  var_04.var_00A0 = 1;
+  var_04.alignx = "left";
+  var_04.aligny = "top";
+  var_04.sort = 1;
+  var_04.horzalign = "fullscreen";
+  var_04.vertalign = "fullscreen";
+  var_04.alpha = param_01;
+  var_04.foreground = 1;
   if(isDefined(param_03)) {
-    var_04.var_0056 = param_03;
+    var_04.color = param_03;
   }
 
   return var_04;
@@ -301,11 +301,11 @@ func_2787(param_00, param_01, param_02, param_03) {
 func_A072(param_00, param_01) {
   var_02 = param_01.var_6EB7;
   self unlink();
-  self setangles(var_02[var_02.size - 1].var_001D);
-  self setOrigin(var_02[var_02.size - 1].var_0116);
+  self setplayerangles(var_02[var_02.size - 1].angles);
+  self setOrigin(var_02[var_02.size - 1].origin);
   self method_8004();
-  maps\mp\mp_zombie_nest_ee_util::func_1F3D();
-  var_03 = 150 * lib_055F::func_A01F(var_02[var_02.size - 1].var_001D);
+  maps / mp / mp_zombie_nest_ee_util::func_1F3D();
+  var_03 = 150 * lib_055F::func_A01F(var_02[var_02.size - 1].angles);
   self setvelocity(var_03);
   param_00 delete();
   level notify("pneumo_tube_ridden", param_01);
@@ -315,7 +315,7 @@ func_A072(param_00, param_01) {
 
   for(;;) {
     if(self isonground()) {
-      playFX(level.var_0611["zmb_pneumo_exit_splash"], self.var_0116 + (0, 0, 20));
+      playFX(level.var_611["zmb_pneumo_exit_splash"], self.origin + (0, 0, 20));
     }
 
     break;
@@ -328,17 +328,17 @@ func_A072(param_00, param_01) {
 func_38F5() {
   wait(2);
   if(self.var_53F0 == 1) {
-    playfxontagforclients(level.var_0611["zmb_pneumo_tube_exit_cam"], self, "TAG_ORIGIN", self);
+    playfxontagforclients(level.var_611["zmb_pneumo_tube_exit_cam"], self, "TAG_ORIGIN", self);
   }
 }
 
 func_1DE0() {
-  if(lib_0547::func_5565(self.var_0165, "first_button")) {
+  if(lib_0547::func_5565(self.script_noteworthy, "first_button")) {
     thread func_17BF();
   }
 
   self.var_1E2C waittill("trigger", var_00);
-  if(lib_0547::func_5565(self.var_0165, "first_button")) {
+  if(lib_0547::func_5565(self.script_noteworthy, "first_button")) {
     common_scripts\utility::func_3C8F("flag_pneumos_activated");
   }
 
@@ -379,13 +379,13 @@ func_203D() {
 func_1E34() {
   common_scripts\utility::func_3C9F("flag_pap_available");
   func_6E42();
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01.var_6E34 = 1;
   }
 }
 
 func_6E42() {
-  foreach(var_01 in level.var_744A) {}
+  foreach(var_01 in level.players) {}
 
   level.var_400E[level.var_400E.size] = ["raven_set 3 1", "all"];
   level.var_400E[level.var_400E.size] = ["assassin_set 1 -1", "all"];
@@ -510,7 +510,7 @@ func_1E33() {
     common_scripts\utility::func_3C8F("flag_cage_power_outage_triggered");
     level.var_6E33.var_1E31 lib_0378::func_8D74("zmb_pap_fuse");
     thread func_203B();
-    level thread common_scripts\_exploder::func_088E(207);
+    level thread common_scripts\_exploder::func_88E(207);
     wait(1);
     level.var_6E33.var_1E31 lib_0378::func_8D74("catacombs_scare", "power_down_main");
     level.var_1E32 = [];
@@ -538,7 +538,7 @@ func_1E33() {
 
 func_1E35(param_00) {
   param_00 waittill("death");
-  level.var_1E32 = common_scripts\utility::func_0F93(level.var_1E32, param_00);
+  level.var_1E32 = common_scripts\utility::func_F93(level.var_1E32, param_00);
   if(level.var_1E32.size == 0) {
     level notify("cage_zombies_dead");
   }
@@ -699,21 +699,21 @@ func_17B8(param_00) {
   if(!isDefined(param_00.var_17B7)) {
     param_00.var_17B7 = newclienthudelem(param_00);
     param_00.var_17B7 setshader("black", 640, 480);
-    param_00.var_17B7.var_0010 = "left";
-    param_00.var_17B7.var_0011 = "top";
-    param_00.var_17B7.var_01D3 = 0;
-    param_00.var_17B7.var_01D7 = 0;
-    param_00.var_17B7.var_00C6 = "fullscreen";
-    param_00.var_17B7.var_01CA = "fullscreen";
+    param_00.var_17B7.alignx = "left";
+    param_00.var_17B7.aligny = "top";
+    param_00.var_17B7.x = 0;
+    param_00.var_17B7.y = 0;
+    param_00.var_17B7.horzalign = "fullscreen";
+    param_00.var_17B7.vertalign = "fullscreen";
     param_00 method_8483("mp_zombie_nest_01_bunker_darkness");
   }
 
-  param_00.var_17B7.var_0018 = 1;
+  param_00.var_17B7.alpha = 1;
 }
 
 func_7C76(param_00) {
   if(isDefined(param_00.var_17B7)) {
-    param_00.var_17B7.var_0018 = 0;
+    param_00.var_17B7.alpha = 0;
     param_00 method_8483("", 1);
   }
 }
@@ -722,12 +722,12 @@ func_3B66(param_00, param_01) {
   var_02 = getEntArray(param_00, param_01);
   var_03 = [];
   foreach(var_05 in var_02) {
-    if(!isDefined(var_05.var_003A) || var_05.var_003A != "trigger_multiple") {
+    if(!isDefined(var_05.classname) || var_05.classname != "trigger_multiple") {
       continue;
     }
 
-    if(isDefined(var_05.var_01A2)) {
-      var_05.var_1CB1 = getEnt(var_05.var_01A2, "targetname");
+    if(isDefined(var_05.target)) {
+      var_05.var_1CB1 = getEnt(var_05.target, "targetname");
     }
 
     var_03[var_03.size] = var_05;
@@ -779,7 +779,7 @@ func_2A6C(param_00) {
 func_088C() {
   common_scripts\utility::func_9DA3();
   if(isDefined(self.var_1CB1)) {
-    self.var_1CB1 method_805B();
+    self.var_1CB1 show();
   }
 }
 

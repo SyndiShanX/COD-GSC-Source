@@ -3,12 +3,12 @@
  * Script: maps\mp\gametypes\sd.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   if(getDvar("1673") == "mp_background") {
     return;
   }
 
-  maps\mp\gametypes\_globallogic::func_00D5();
+  maps\mp\gametypes\_globallogic::init();
   lib_01DD::func_8A0C();
   maps\mp\gametypes\_globallogic::func_8A0C();
   if(isusingmatchrulesdata()) {
@@ -16,29 +16,29 @@ func_00F9() {
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.var_3FDC, 3, 0, 9);
-    maps\mp\_utility::func_7BFA(level.var_3FDC, 2.5);
-    maps\mp\_utility::func_7BF9(level.var_3FDC, 1);
-    maps\mp\_utility::func_7BF7(level.var_3FDC, 0);
-    maps\mp\_utility::func_7C04(level.var_3FDC, 4);
-    maps\mp\_utility::func_7BF1(level.var_3FDC, 1);
-    maps\mp\_utility::func_7BE5(level.var_3FDC, 0);
+    maps\mp\_utility::func_7BF8(level.gametype, 3, 0, 9);
+    maps\mp\_utility::func_7BFA(level.gametype, 2.5);
+    maps\mp\_utility::func_7BF9(level.gametype, 1);
+    maps\mp\_utility::func_7BF7(level.gametype, 0);
+    maps\mp\_utility::func_7C04(level.gametype, 4);
+    maps\mp\_utility::func_7BF1(level.gametype, 1);
+    maps\mp\_utility::func_7BE5(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
 
   level.var_6933 = 1;
   maps\mp\_utility::func_873B(1);
-  level.var_6B86 = ::maps\mp\gametypes\common_sd_sr::func_6B86;
+  level.var_6B86 = ::maps / mp / gametypes / common_sd_sr::func_6B86;
   level.var_6BAF = ::func_6BAF;
   level.var_6BA7 = ::func_6BA7;
   level.var_6B7B = ::func_6B7B;
-  level.var_6AE2 = ::maps\mp\gametypes\common_sd_sr::func_6AE2;
-  level.var_6B5E = ::maps\mp\gametypes\common_sd_sr::func_6B5E;
-  level.var_6BB6 = ::maps\mp\gametypes\common_sd_sr::func_6BB6;
-  level.var_6B5C = ::maps\mp\gametypes\common_sd_sr::func_6B5C;
-  level.var_3FC7 = ::maps\mp\gametypes\common_sd_sr::func_5782;
-  level.var_0C25 = 0;
+  level.var_6AE2 = ::maps / mp / gametypes / common_sd_sr::func_6AE2;
+  level.var_6B5E = ::maps / mp / gametypes / common_sd_sr::func_6B5E;
+  level.var_6BB6 = ::maps / mp / gametypes / common_sd_sr::func_6BB6;
+  level.onnormaldeath = ::maps / mp / gametypes / common_sd_sr::onnormaldeath;
+  level.var_3FC7 = ::maps / mp / gametypes / common_sd_sr::func_5782;
+  level.var_C25 = 0;
   if(level.var_6031 || level.var_6035) {
     level.var_62AD = ::maps\mp\gametypes\_damage::func_3FC8;
   }
@@ -92,11 +92,11 @@ func_6BAF() {
 
   setomnvar("ui_war_attacker_team", maps\mp\_utility::func_46D4(game["attackers"]));
   setclientnamemode("manual_change");
-  level.var_0611["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
-  level.var_0611["search_dstry_bomb_arming_light"] = loadfx("vfx/unique/search_dstry_bomb_arming_light");
+  level.var_611["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
+  level.var_611["search_dstry_bomb_arming_light"] = loadfx("vfx/unique/search_dstry_bomb_arming_light");
   maps\mp\_utility::func_86DC(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
   maps\mp\_utility::func_86DC(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
-  if(level.var_910F) {
+  if(level.splitscreen) {
     maps\mp\_utility::func_86DB(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
     maps\mp\_utility::func_86DB(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
@@ -110,10 +110,10 @@ func_6BAF() {
   var_02[0] = "sd";
   var_02[1] = "bombzone";
   var_02[2] = "blocker_sd";
-  maps\mp\gametypes\_gameobjects::func_00F9(var_02);
-  thread maps\mp\gametypes\common_sd_sr::func_A121();
-  maps\mp\gametypes\common_sd_sr::func_872D();
-  thread maps\mp\gametypes\common_sd_sr::func_18FD();
+  maps\mp\gametypes\_gameobjects::main(var_02);
+  thread maps / mp / gametypes / common_sd_sr::func_A121();
+  maps / mp / gametypes / common_sd_sr::func_872D();
+  thread maps / mp / gametypes / common_sd_sr::func_18FD();
   thread func_832D();
 }
 
@@ -124,12 +124,12 @@ func_6BA7() {
     self.var_56C2 = 0;
     if(!var_00) {
       self.var_568D = 0;
-      self.var_0112 = 0;
+      self.objective = 0;
     }
   }
 
   if(isPlayer(self) && !var_00) {
-    if(level.var_6510 && self.var_012C["team"] == game["attackers"]) {
+    if(level.var_6510 && self.pers["team"] == game["attackers"]) {
       self setclientomnvar("ui_carrying_bomb", 1);
       thread maps\mp\gametypes\_hud_message::func_9102("bomb_pickedup");
     } else {
@@ -138,17 +138,17 @@ func_6BA7() {
   }
 
   maps\mp\_utility::func_867B(0);
-  if(isDefined(self.var_012C["plants"])) {
-    maps\mp\_utility::func_867B(self.var_012C["plants"]);
+  if(isDefined(self.pers["plants"])) {
+    maps\mp\_utility::func_867B(self.pers["plants"]);
   }
 
   maps\mp\_utility::func_867C(0);
-  if(isDefined(self.var_012C["defuses"])) {
-    maps\mp\_utility::func_867C(self.var_012C["defuses"]);
+  if(isDefined(self.pers["defuses"])) {
+    maps\mp\_utility::func_867C(self.pers["defuses"]);
   }
 
-  if(isDefined(self.var_012C["cur_kill_streak"])) {
-    self.var_00E4 = self.var_012C["cur_kill_streak"];
+  if(isDefined(self.pers["cur_kill_streak"])) {
+    self.killstreakcount = self.pers["cur_kill_streak"];
   }
 
   self.var_57A7 = undefined;
@@ -160,8 +160,8 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     self setclientomnvar("ui_carrying_bomb", 0);
   }
 
-  thread maps\mp\gametypes\common_sd_sr::func_21AB();
-  maps\mp\gametypes\common_sd_sr::func_254C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
+  thread maps / mp / gametypes / common_sd_sr::func_21AB();
+  maps / mp / gametypes / common_sd_sr::func_254C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
 }
 
 func_832D() {
@@ -186,7 +186,7 @@ func_832D() {
     var_07 = "none";
     var_08 = "none";
     var_09 = gettime();
-    foreach(var_0B in level.var_744A) {
+    foreach(var_0B in level.players) {
       if(isDefined(var_0B.var_568D) && var_0B.var_568D) {
         var_05 = var_0B;
         break;
@@ -195,19 +195,19 @@ func_832D() {
 
     if(!isDefined(var_05)) {
       if(isDefined(level.var_832F)) {
-        var_06 = level.var_832F.var_9D65.var_0116;
+        var_06 = level.var_832F.var_9D65.origin;
       }
     } else {
-      var_06 = var_05.var_0116;
-      var_07 = var_05.var_0109;
+      var_06 = var_05.origin;
+      var_07 = var_05.name;
     }
 
     if(isDefined(level.var_18F9) && level.var_18F9 && isDefined(level.var_7069)) {
       var_08 = level.var_7069.var_9D65.var_81E8;
-      var_06 = level.var_7069.var_9D65.var_0116;
+      var_06 = level.var_7069.var_9D65.origin;
     }
 
-    function_00F5("script_mp_sd: gameTime %d, bomb_a_loc %v, bomb_b_loc %v, bomb_loc %v, bomb_carrier %s, planted_location %s", var_09, var_00.var_9D65.var_0116, var_01.var_9D65.var_0116, var_06, var_07, var_08);
+    function_00F5("script_mp_sd: gameTime %d, bomb_a_loc %v, bomb_b_loc %v, bomb_loc %v, bomb_carrier %s, planted_location %s", var_09, var_00.var_9D65.origin, var_01.var_9D65.origin, var_06, var_07, var_08);
     wait(0.2);
   }
 }

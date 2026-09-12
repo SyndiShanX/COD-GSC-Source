@@ -9,7 +9,7 @@ onassassinzombiechooseturn() {
   var_01 = 0.1;
   var_02 = int(var_01 * 20);
   for(;;) {
-    if(maps\mp\agents\humanoid\_humanoid_move::func_5810()) {
+    if(maps / mp / agents / humanoid / _humanoid_move::func_5810()) {
       self.var_1E22 = undefined;
     } else {
       var_03 = nocornerturnassassin();
@@ -23,7 +23,7 @@ onassassinzombiechooseturn() {
       } else {
         var_05 = var_04["position"];
         var_06 = var_04["angle"];
-        var_07 = distance2dsquared(self.var_116, var_05);
+        var_07 = distance2dsquared(self.origin, var_05);
         if(var_07 > squared(150)) {} else {
           var_0A = !isDefined(self.var_1E22) || self.var_1E22.var_266C != var_05 || abs(angleclamp180(self.var_1E22.var_266F - var_06)) > 20;
           if(var_0A) {
@@ -33,7 +33,7 @@ onassassinzombiechooseturn() {
                 self.var_1E22 = spawnStruct();
                 self.var_1E22.var_266C = var_05;
                 self.var_1E22.var_266F = var_06;
-                var_0B = self[[maps\mp\agents\_agent_utility::func_A59("get_action_params")]]();
+                var_0B = self[[maps / mp / agents / _agent_utility::func_A59("get_action_params")]]();
                 var_0C = "turn_" + self.var_108;
                 self.var_1E22.var_6748 = lib_054D::func_9031(var_0C, var_0B, var_06);
                 var_0C = var_0C + "_quick";
@@ -78,22 +78,22 @@ nocornerturnassassin() {
     return;
   }
 
-  var_02 = self.var_1D[1];
+  var_02 = self.angles[1];
   var_03 = vectortoyaw(var_01);
   var_04 = angleclamp180(var_03 - var_02);
   if(abs(var_04) < var_00) {
     return;
   }
 
-  var_05 = self[[maps\mp\agents\_agent_utility::func_A59("get_action_params")]]();
+  var_05 = self[[maps / mp / agents / _agent_utility::func_A59("get_action_params")]]();
   var_06 = "turn_" + self.var_108;
-  var_07 = maps\mp\agents\_scripted_agent_anim_util::func_87C(var_06, var_05);
+  var_07 = maps / mp / agents / _scripted_agent_anim_util::func_87C(var_06, var_05);
   if(!isDefined(var_07)) {
     return;
   }
 
   var_08 = self method_83DB(var_07);
-  var_09 = maps\mp\agents\_scripted_agent_anim_util::func_4416(var_04, var_08);
+  var_09 = maps / mp / agents / _scripted_agent_anim_util::func_4416(var_04, var_08);
   var_0A = var_09 == int(var_08 * 0.5);
   if(var_0A) {
     return;
@@ -105,15 +105,15 @@ nocornerturnassassin() {
   var_0F = length(var_0E);
   var_10 = self method_85D5(var_0F);
   var_11 = self localtoworldcoords(var_0E);
-  if(vectordot(var_11 - self.var_116, var_10 - self.var_116) > 0) {
-    var_12 = distance(self.var_116, var_10);
+  if(vectordot(var_11 - self.origin, var_10 - self.origin) > 0) {
+    var_12 = distance(self.origin, var_10);
     var_13 = 50;
     if(var_0F + var_13 > var_12) {
       return;
     }
   }
 
-  var_14 = function_02E6(var_11, self) && function_02DE(self.var_116, var_11, self);
+  var_14 = function_02E6(var_11, self) && function_02DE(self.origin, var_11, self);
   if(!var_14) {
     return;
   }
@@ -124,6 +124,6 @@ nocornerturnassassin() {
   var_16.var_EC1 = var_09;
   var_16.var_EC3 = "anim deltas";
   var_16.var_6C37 = "face angle abs";
-  var_16.var_6C38 = (self.var_1D[0], self.var_1D[1] + var_04 - getangledelta(var_0D), self.var_1D[2]);
+  var_16.var_6C38 = (self.angles[0], self.angles[1] + var_04 - getangledelta(var_0D), self.angles[2]);
   return var_16;
 }

@@ -13,15 +13,15 @@ serumhadperk(param_00) {
 
 serumcreateoverlay(param_00) {
   var_01 = newclienthudelem(self);
-  var_01.var_01D3 = 0;
-  var_01.var_01D7 = 0;
-  var_01.var_0184 = -5;
-  var_01.var_00C6 = "fullscreen";
-  var_01.var_01CA = "fullscreen";
+  var_01.x = 0;
+  var_01.y = 0;
+  var_01.sort = -5;
+  var_01.horzalign = "fullscreen";
+  var_01.vertalign = "fullscreen";
   var_01 setshader(param_00, 640, 480);
-  var_01.var_00C2 = 1;
-  var_01.var_0180 = 0;
-  var_01.var_0018 = 1;
+  var_01.hidewheninmenu = 1;
+  var_01.showinkillcam = 0;
+  var_01.alpha = 1;
   return var_01;
 }
 
@@ -157,9 +157,9 @@ altered_state_fade_in(param_00, param_01) {
     var_02.altered_state_overlay_fade = altered_state_create_client_overlay("white", param_01, var_02);
   }
 
-  var_02.altered_state_overlay_fade.var_0018 = 0;
+  var_02.altered_state_overlay_fade.alpha = 0;
   var_02.altered_state_overlay_fade fadeovertime(param_00);
-  var_02.altered_state_overlay_fade.var_0018 = param_01;
+  var_02.altered_state_overlay_fade.alpha = param_01;
   wait(param_00);
 }
 
@@ -176,9 +176,9 @@ altered_state_fade_out(param_00, param_01) {
     return;
   }
 
-  var_02.altered_state_overlay_fade.var_0018 = param_01;
+  var_02.altered_state_overlay_fade.alpha = param_01;
   var_02.altered_state_overlay_fade fadeovertime(param_00);
-  var_02.altered_state_overlay_fade.var_0018 = 0;
+  var_02.altered_state_overlay_fade.alpha = 0;
   wait(param_00);
 }
 
@@ -194,23 +194,23 @@ altered_state_create_client_overlay(param_00, param_01, param_02, param_03) {
     var_05 = newhudelem();
   }
 
-  var_05.var_01D3 = 0;
-  var_05.var_01D7 = 0;
+  var_05.x = 0;
+  var_05.y = 0;
   var_05 setshader(param_00, 640, 480);
-  var_05.var_0010 = "left";
-  var_05.var_0011 = "top";
-  var_05.var_0184 = 1;
-  var_05.var_00C6 = "fullscreen";
-  var_05.var_01CA = "fullscreen";
-  var_05.var_0018 = param_01;
-  var_05.var_00A0 = var_04;
+  var_05.alignx = "left";
+  var_05.aligny = "top";
+  var_05.sort = 1;
+  var_05.horzalign = "fullscreen";
+  var_05.vertalign = "fullscreen";
+  var_05.alpha = param_01;
+  var_05.foreground = var_04;
   return var_05;
 }
 
 altered_state_hide_client_overlay() {
   var_00 = self;
   if(isDefined(var_00.altered_state_overlay_fade)) {
-    var_00.altered_state_overlay_fade.var_0018 = 0;
+    var_00.altered_state_overlay_fade.alpha = 0;
   }
 }
 
@@ -269,7 +269,7 @@ pickupisserum(param_00) {
 handleserumpickup(param_00) {
   var_01 = 1;
   if(common_scripts\utility::func_562E(param_00.raidserumactive) && !common_scripts\utility::func_562E(param_00.basictrainingserumactive)) {
-    param_00 iclientprintlnbold(&"KILLSTREAKS_DLC4_ONE_SERUM_AT_A_TIME");
+    param_00 iprintlnbold(&"KILLSTREAKS_DLC4_ONE_SERUM_AT_A_TIME");
     var_01 = 0;
   }
 
@@ -288,9 +288,9 @@ handledisableserumonpickup(param_00, param_01) {
 
 getserumkillstreakslot(param_00, param_01, param_02, param_03) {
   var_04 = undefined;
-  for(var_05 = 0; var_05 < self.var_012C["killstreaks"].size; var_05++) {
-    if(isDefined(self.var_012C["killstreaks"][var_05]) && isDefined(self.var_012C["killstreaks"][var_05].var_944C)) {
-      if(self.var_012C["killstreaks"][var_05].var_944C == param_00 || (isDefined(param_01) && self.var_012C["killstreaks"][var_05].var_944C == param_01) || (isDefined(param_02) && self.var_012C["killstreaks"][var_05].var_944C == param_02) || isDefined(param_03) && self.var_012C["killstreaks"][var_05].var_944C == param_03) {
+  for(var_05 = 0; var_05 < self.pers["killstreaks"].size; var_05++) {
+    if(isDefined(self.pers["killstreaks"][var_05]) && isDefined(self.pers["killstreaks"][var_05].var_944C)) {
+      if(self.pers["killstreaks"][var_05].var_944C == param_00 || (isDefined(param_01) && self.pers["killstreaks"][var_05].var_944C == param_01) || (isDefined(param_02) && self.pers["killstreaks"][var_05].var_944C == param_02) || isDefined(param_03) && self.pers["killstreaks"][var_05].var_944C == param_03) {
         var_04 = var_05;
         break;
       }
@@ -304,7 +304,7 @@ disableserumdeathlistener(param_00) {
   self endon("disconnect");
   level endon("game_ended");
   self waittill("death");
-  self.var_012C["killstreaks"][param_00].var_13AF = 1;
+  self.pers["killstreaks"][param_00].var_13AF = 1;
   maps\mp\killstreaks\_killstreaks::func_A170();
 }
 
@@ -313,9 +313,9 @@ disableserum(param_00) {
   self endon("disconnect");
   level endon("game_ended");
   thread disableserumdeathlistener(param_00);
-  self.var_012C["killstreaks"][param_00].var_13AF = 0;
+  self.pers["killstreaks"][param_00].var_13AF = 0;
   maps\mp\killstreaks\_killstreaks::func_A170();
   self waittill("serum_finished");
-  self.var_012C["killstreaks"][param_00].var_13AF = 1;
+  self.pers["killstreaks"][param_00].var_13AF = 1;
   maps\mp\killstreaks\_killstreaks::func_A170();
 }

@@ -3,7 +3,7 @@
  * Script: 1212.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   level.var_611["zmb_rat_flock_short_runner"] = loadfx("vfx/map/mp_zombie_training/zmb_rat_flock_short_runner");
   level.var_611["zmb_zmb_key_light"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zmb_key_light");
   level.var_611["zmb_on_fire_01"] = loadfx("vfx/fire/zmb_on_fire_01");
@@ -12,7 +12,7 @@ func_00F9() {
   level.var_611["zmb_headlight_bright_01_rt_spot"] = loadfx("vfx/lights/zmb_headlight_bright_01_rt_spot");
   level.var_611["zmb_headlight_bright_01_lt_spot"] = loadfx("vfx/lights/zmb_headlight_bright_01_lt_spot");
   level.var_611["headlight_kubelwagen_bright_02_lt_spot"] = loadfx("vfx/lights/headlight_kubelwagen_bright_02_lt_spot");
-  level.var_611["zmb_electroschnelle_reg_chg_wv"] = loadfx("vfx/zombie/abilities_perks\zmb_electroschnelle_reg_chg_wv");
+  level.var_611["zmb_electroschnelle_reg_chg_wv"] = loadfx("vfx/zombie/abilities_perks/zmb_electroschnelle_reg_chg_wv");
   level.var_611["zmb_electroschnelle_giestkraft"] = loadfx("vfx/zombie/zmb_electroschnelle_giestkraft");
   level.var_611["zmb_smk_chimney_vf"] = loadfx("vfx/map/mp_zombie_training/zmb_smk_chimney_vf");
   level.var_611["zmb_fireplace_fire"] = loadfx("vfx/map/mp_zombie_nest/zmb_fireplace_fire");

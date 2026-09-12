@@ -35,7 +35,7 @@ vignette_init() {
   level.vignette_solodeath_time_min = 15;
   level.vignette_solodeath_time_max = 30;
   level.vignette_solodeath_chance = 1;
-  while(!isDefined(level.var_744A) || level.var_744A.size == 0) {
+  while(!isDefined(level.players) || level.players.size == 0) {
     wait 0.05;
   }
 
@@ -57,22 +57,22 @@ vignette_init() {
 
 vignette_handler(param_00) {
   var_01 = spawnStruct();
-  var_01.var_116 = self.var_116;
+  var_01.origin = self.origin;
   var_01 thread vignette_monitor_last_seen();
   var_01 thread vignette_watch_zone_expire();
   level.vignettes_all[level.vignettes_all.size] = var_01;
   for(;;) {
     switch (param_00) {
       case "groundkill":
-        thread vignette_start_listener(var_01, self.var_116, level.vignette_groundkill_dist, level.vignette_groundkill_chance, 1);
+        thread vignette_start_listener(var_01, self.origin, level.vignette_groundkill_dist, level.vignette_groundkill_chance, 1);
         break;
 
       case "wallkill":
-        thread vignette_start_listener(var_01, self.var_116, level.vignette_wallkill_dist, level.vignette_wallkill_chance, 1);
+        thread vignette_start_listener(var_01, self.origin, level.vignette_wallkill_dist, level.vignette_wallkill_chance, 1);
         break;
 
       case "solodeath":
-        thread vignette_start_listener(var_01, self.var_116, level.vignette_solodeath_dist, level.vignette_solodeath_chance, 0);
+        thread vignette_start_listener(var_01, self.origin, level.vignette_solodeath_dist, level.vignette_solodeath_chance, 0);
         break;
 
       default:
@@ -102,7 +102,7 @@ vignette_handler(param_00) {
 vignette_start_listener(param_00, param_01, param_02, param_03, param_04) {
   param_00 endon("vignette_start");
   param_00 endon("vignette_cleanup");
-  while(!isDefined(level.var_744A) || level.var_744A.size == 0) {
+  while(!isDefined(level.players) || level.players.size == 0) {
     wait 0.05;
   }
 
@@ -112,7 +112,7 @@ vignette_start_listener(param_00, param_01, param_02, param_03, param_04) {
   }
 
   var_06 = 50;
-  var_07 = self.var_116 + (0, 0, var_06);
+  var_07 = self.origin + (0, 0, var_06);
   var_05 = lib_055A::func_578B(var_07, 0);
   param_00.ent_zone_name = var_05;
   for(;;) {
@@ -130,7 +130,7 @@ vignette_start_listener(param_00, param_01, param_02, param_03, param_04) {
 
     param_00.radial_cooldown_is_safe = 1;
     if(isDefined(level.vignette_radial_cooldown_loc)) {
-      param_00.radial_cooldown_is_safe = distance(level.vignette_radial_cooldown_loc, self.var_116) > level.vignette_radial_cooldown_dist;
+      param_00.radial_cooldown_is_safe = distance(level.vignette_radial_cooldown_loc, self.origin) > level.vignette_radial_cooldown_dist;
     }
 
     param_00.not_over_zombie_limit = var_08.size < level.vignette_max_level_zombies_allowed;
@@ -141,17 +141,17 @@ vignette_start_listener(param_00, param_01, param_02, param_03, param_04) {
     if(param_00.not_over_zombie_limit && param_00.wave_isnt_over && param_00.is_in_player_zone && param_00.is_in_recently_enabled_zone && level.var_A980 != 0 && level.var_7F2A != "zombie_dog" && level.vignette_cooldown_current <= 0 && param_00.limit_not_reached && param_00.radial_cooldown_is_safe && param_00.players_not_seen_for_time && param_00.req_zombs_remaining) {
       var_0A = [];
       var_0B = [];
-      foreach(var_0D in level.var_744A) {
+      foreach(var_0D in level.players) {
         var_0E = 0;
-        if(isDefined(self.var_165)) {
-          var_0E = common_scripts\utility::func_9468(self.var_165);
+        if(isDefined(self.script_noteworthy)) {
+          var_0E = common_scripts\utility::func_9468(self.script_noteworthy);
         }
 
-        var_0F = common_scripts\utility::func_AA4A(var_0D getEye(), var_0D.var_1D, var_07, cos(32.5));
-        var_10 = distance(var_07, var_0D.var_116) < param_02;
-        var_11 = distance(var_07, var_0D.var_116) < level.vignette_min_dist;
+        var_0F = common_scripts\utility::func_AA4A(var_0D getEye(), var_0D.angles, var_07, cos(32.5));
+        var_10 = distance(var_07, var_0D.origin) < param_02;
+        var_11 = distance(var_07, var_0D.origin) < level.vignette_min_dist;
         var_12 = 0;
-        if(abs(var_0D.var_116[2] - self.var_116[2]) < 150) {
+        if(abs(var_0D.origin[2] - self.origin[2]) < 150) {
           var_12 = 1;
         }
 
@@ -163,7 +163,7 @@ vignette_start_listener(param_00, param_01, param_02, param_03, param_04) {
           var_0A[var_0A.size] = var_0D;
         }
 
-        var_13 = common_scripts\utility::func_AA4A(self.var_116, self.var_1D + (0, var_0E, 0), var_0D.var_116, cos(60));
+        var_13 = common_scripts\utility::func_AA4A(self.origin, self.angles + (0, var_0E, 0), var_0D.origin, cos(60));
         var_14 = 1;
         if(param_04 && !var_13) {
           var_14 = 0;
@@ -174,7 +174,7 @@ vignette_start_listener(param_00, param_01, param_02, param_03, param_04) {
         }
       }
 
-      if(var_0B.size > 0 && var_0B.size + var_0A.size == level.var_744A.size) {
+      if(var_0B.size > 0 && var_0B.size + var_0A.size == level.players.size) {
         param_00 notify("vignette_start");
       }
 
@@ -193,7 +193,7 @@ vignette_run(param_00, param_01, param_02, param_03, param_04, param_05, param_0
   var_09 = 1;
   var_0A = lib_054D::func_90BA("zombie_generic", self, "vignette", 0, var_09, 0, common_scripts\utility::func_7A33(var_08));
   if(isDefined(var_0A)) {
-    var_0A.var_BC = 1;
+    var_0A.health = 1;
     var_0A.is_fellow_human = 1;
     var_0A.not_valid_sacrifice = 1;
     var_0A lib_0547::func_84CB();
@@ -213,10 +213,10 @@ vignette_run(param_00, param_01, param_02, param_03, param_04, param_05, param_0
   }
 
   if(isDefined(param_07) && isalive(var_0A)) {
-    var_0C = var_0A maps\mp\agents\_scripted_agent_anim_util::func_434D(param_07);
+    var_0C = var_0A maps / mp / agents / _scripted_agent_anim_util::func_434D(param_07);
     var_0D = var_0A method_83D8(var_0C, 0);
-    var_0E = getstartorigin(self.var_116, self.var_1D, var_0D);
-    var_0F = getstartangles(self.var_116, self.var_1D, var_0D);
+    var_0E = getstartorigin(self.origin, self.angles, var_0D);
+    var_0F = getstartangles(self.origin, self.angles, var_0D);
     var_0A vignette_actor_enter_safe_state();
     var_0A vignette_actor_run_anim_entry(var_0E, var_0F, var_0C, 30);
   } else {
@@ -243,22 +243,22 @@ vignette_run(param_00, param_01, param_02, param_03, param_04, param_05, param_0
   }
 
   var_0A.var_78D2 = 1;
-  var_0A dodamage(1000, var_0A.var_116);
+  var_0A dodamage(1000, var_0A.origin);
   param_00 notify("vignette_end");
   level.vignettes_active = common_scripts\utility::func_F93(level.vignettes_active, self);
   level.vignettes_all = common_scripts\utility::func_F93(level.vignettes_all, param_00);
 }
 
 vignette_execute_paired_scene(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = param_00 maps\mp\agents\_scripted_agent_anim_util::func_434D(param_02);
+  var_05 = param_00 maps / mp / agents / _scripted_agent_anim_util::func_434D(param_02);
   var_06 = param_00 method_83D8(var_05, 0);
-  var_07 = getstartorigin(self.var_116, self.var_1D, var_06);
-  var_08 = getstartangles(self.var_116, self.var_1D, var_06);
+  var_07 = getstartorigin(self.origin, self.angles, var_06);
+  var_08 = getstartangles(self.origin, self.angles, var_06);
   var_09 = getanimlength(var_06);
-  var_0A = param_00 maps\mp\agents\_scripted_agent_anim_util::func_434D(param_03);
+  var_0A = param_00 maps / mp / agents / _scripted_agent_anim_util::func_434D(param_03);
   var_0B = param_00 method_83D8(var_0A, 0);
-  var_0C = getstartorigin(self.var_116, self.var_1D, var_0B);
-  var_0D = getstartangles(self.var_116, self.var_1D, var_0B);
+  var_0C = getstartorigin(self.origin, self.angles, var_0B);
+  var_0D = getstartangles(self.origin, self.angles, var_0B);
   var_0E = undefined;
   if(param_04) {
     var_0E = randomfloatrange(level.vignette_loop_min_timeout, level.vignette_loop_max_timeout);
@@ -273,7 +273,7 @@ vignette_actor_run_anim_entry(param_00, param_01, param_02, param_03) {
   self endon("damage");
   self endon("death");
   self setOrigin(param_00, 0);
-  self.var_1D = param_01;
+  self.angles = param_01;
   self method_839C("anim deltas");
   self scragentsetorientmode("face angle abs", param_01);
   self method_839A(1, 1);
@@ -283,7 +283,7 @@ vignette_actor_run_anim_entry(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  maps\mp\agents\_scripted_agent_anim_util::func_71FD(param_02, 0, "scripted_anim");
+  maps / mp / agents / _scripted_agent_anim_util::func_71FD(param_02, 0, "scripted_anim");
 }
 
 vignette_zombie_run_loop(param_00, param_01) {
@@ -292,7 +292,7 @@ vignette_zombie_run_loop(param_00, param_01) {
     thread vignette_loop_timeout_or_timeout_notify("loop_end", param_01);
   }
 
-  maps\mp\agents\_scripted_agent_anim_util::func_71FD(param_00, 0, "scripted_anim");
+  maps / mp / agents / _scripted_agent_anim_util::func_71FD(param_00, 0, "scripted_anim");
 }
 
 vignette_actor_enter_safe_state() {
@@ -301,7 +301,7 @@ vignette_actor_enter_safe_state() {
   }
 
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "vignette spawn");
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "vignette spawn");
   self.var_509A = 1;
   thread vignette_damage_listener();
 }
@@ -316,7 +316,7 @@ vignette_actor_leave_safe_state() {
   }
 
   self scragentsetscripted(0);
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "vignette spawn");
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "vignette spawn");
 }
 
 vignette_damage_listener() {
@@ -335,8 +335,8 @@ vignette_loop_timeout_or_timeout_notify(param_00, param_01) {
 
 vignette_loop_player_close_notify(param_00, param_01) {
   for(;;) {
-    foreach(var_03 in level.var_744A) {
-      if(distance(var_03.var_116, param_00.var_116) < level.vignette_loop_interrupt_radius) {
+    foreach(var_03 in level.players) {
+      if(distance(var_03.origin, param_00.origin) < level.vignette_loop_interrupt_radius) {
         param_00 notify(param_01);
       }
     }
@@ -358,7 +358,7 @@ vignette_cooldown_run() {
 }
 
 vignette_radial_cooldown_run() {
-  level.vignette_radial_cooldown_loc = self.var_116;
+  level.vignette_radial_cooldown_loc = self.origin;
   var_00 = level.vignette_radial_cooldown_time;
   while(var_00 > 0) {
     var_00 = var_00 - 0.1;
@@ -387,8 +387,8 @@ vignette_monitor_last_seen() {
 
     var_01 = lib_055A::func_4626(var_00.ent_zone_name, 1, 0);
     foreach(var_03 in var_01) {
-      var_04 = common_scripts\utility::func_AA4A(var_03 getEye(), var_03.var_1D, var_00.var_116, cos(32.5));
-      var_05 = var_04 && sighttracepassed(var_03 getEye(), var_00.var_116 + (0, 0, 36), 0, 0);
+      var_04 = common_scripts\utility::func_AA4A(var_03 getEye(), var_03.angles, var_00.origin, cos(32.5));
+      var_05 = var_04 && sighttracepassed(var_03 getEye(), var_00.origin + (0, 0, 36), 0, 0);
       if(var_05) {
         self.time_since_loc_seen = 0;
         break;
@@ -435,7 +435,7 @@ vignette_gunshots(param_00, param_01) {
     }
 
     for(var_06 = 0; var_06 < var_05; var_06++) {
-      magicbullet(var_04, param_01.var_116, param_01.var_116 - (0, 0, 10));
+      magicbullet(var_04, param_01.origin, param_01.origin - (0, 0, 10));
       wait(randomfloatrange(0.15, 0.4));
     }
   }
@@ -508,7 +508,7 @@ vignette_listen_when_zone_activated() {
 vignette_is_not_near_zombies() {
   var_00 = lib_0547::func_408F();
   foreach(var_02 in var_00) {
-    if(distance(var_02.var_116, self.var_116) < level.vignette_min_dist_from_other_zombies) {
+    if(distance(var_02.origin, self.origin) < level.vignette_min_dist_from_other_zombies) {
       return 0;
     }
   }

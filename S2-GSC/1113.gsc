@@ -3,7 +3,7 @@
  * Script: 1113.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   var_00 = common_scripts\utility::func_281B("zmb_snow_fall_slow");
   var_00 common_scripts\_createfx::func_8543((-2628.58, 6346.91, 1085.63), (270, 0, -130));
   var_00.var_A265["fxid"] = "zmb_snow_fall_slow";

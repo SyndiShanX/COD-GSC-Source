@@ -21,7 +21,7 @@ canusearmor(param_00) {
 }
 
 usearmor(param_00) {
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 lib_056A::func_4775();
     var_02 thread maps\mp\gametypes\_hud_message::func_9102("zm_shattered_maxarmor_splash");
   }

@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\_zombies_perks.gsc
 **********************************************/
 
-func_00D5() {
+init() {
   level.var_AB22 = [];
   level.var_AB23 = [];
   level.var_AB25 = [];
@@ -69,7 +69,7 @@ func_00D5() {
   level.var_AB25["specialty_class_fast_hands_zm"] = ::func_A05F;
   level.var_AB23["specialty_class_hoarder_zm"] = ::func_86A8;
   level.var_AB25["specialty_class_hoarder_zm"] = ::func_A06A;
-  level.var_0611["zmb_moon_speed_down"] = loadfx("vfx/zombie/abilities_perks\zmb_moon_speed_down");
+  level.var_611["zmb_moon_speed_down"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_speed_down");
 }
 
 func_0F35(param_00) {}
@@ -149,7 +149,7 @@ func_A27B(param_00, param_01) {
   }
 }
 
-func_6B6C(param_00) {
+onplayerconnect(param_00) {
   param_00.var_AB24 = [];
 }
 
@@ -171,7 +171,7 @@ func_868A() {
 }
 
 func_A066() {
-  maps\mp\_utility::func_0735("specialty_stockpile");
+  maps\mp\_utility::func_735("specialty_stockpile");
 }
 
 func_8683() {
@@ -179,11 +179,11 @@ func_8683() {
 }
 
 func_A062() {
-  maps\mp\_utility::func_0735("specialty_immune_grenade_suicide");
+  maps\mp\_utility::func_735("specialty_immune_grenade_suicide");
 }
 
 func_0633() {
-  if(lib_0547::func_0F0F("specialty_class_longlasting_zm")) {
+  if(lib_0547::func_F0F("specialty_class_longlasting_zm")) {
     return 5;
   }
 
@@ -195,7 +195,7 @@ func_8697() {
 }
 
 func_A068() {
-  maps\mp\_utility::func_0735("specialty_grenade_extra_zm");
+  maps\mp\_utility::func_735("specialty_grenade_extra_zm");
 }
 
 func_8665() {
@@ -203,7 +203,7 @@ func_8665() {
 }
 
 func_A058() {
-  maps\mp\_utility::func_0735("specialty_discipline_zm");
+  maps\mp\_utility::func_735("specialty_discipline_zm");
 }
 
 func_866F() {
@@ -230,8 +230,8 @@ func_869B() {
 }
 
 func_A069() {
-  maps\mp\_utility::func_0735("specialty_sprintfire");
-  maps\mp\_utility::func_0735("specialty_mantlefire");
+  maps\mp\_utility::func_735("specialty_sprintfire");
+  maps\mp\_utility::func_735("specialty_mantlefire");
 }
 
 func_867D() {
@@ -240,8 +240,8 @@ func_867D() {
 }
 
 func_A05F() {
-  maps\mp\_utility::func_0735("specialty_quickswap");
-  maps\mp\_utility::func_0735("specialty_fastoffhand");
+  maps\mp\_utility::func_735("specialty_quickswap");
+  maps\mp\_utility::func_735("specialty_fastoffhand");
 }
 
 func_86A8() {
@@ -265,10 +265,10 @@ func_466B(param_00) {
 }
 
 func_0F38(param_00) {
-  lib_054D::func_099B("suppressive_fire", func_46BB(param_00));
+  lib_054D::setheight("suppressive_fire", func_46BB(param_00));
   if(isalive(self)) {
-    playFXOnTag(level.var_0611["zmb_moon_speed_down"], self, "J_Knee_RI");
-    playFXOnTag(level.var_0611["zmb_moon_speed_down"], self, "J_Knee_LE");
+    playFXOnTag(level.var_611["zmb_moon_speed_down"], self, "J_Knee_RI");
+    playFXOnTag(level.var_611["zmb_moon_speed_down"], self, "J_Knee_LE");
   }
 }
 
@@ -279,7 +279,7 @@ func_46BB(param_00) {
   }
 
   var_01.var_5CC8 = 1;
-  var_01.var_721C = param_00;
+  var_01.player = param_00;
   return var_01;
 }
 
@@ -288,7 +288,7 @@ func_90A8() {
   var_00.var_1CF0 = ::func_7CFD;
   var_00.var_5CC8 = 1;
   var_01 = 1;
-  var_02 = lib_0547::func_0A51(self.var_0A4B);
+  var_02 = lib_0547::func_A51(self.var_A4B);
   if(isDefined(var_02.suppressive_fire_speed_multiplier)) {
     var_01 = var_02.suppressive_fire_speed_multiplier;
   }
@@ -300,6 +300,6 @@ func_90A8() {
 
 func_7CFD(param_00) {
   self notify("speed_debuffs_changed");
-  stopFXOnTag(level.var_0611["zmb_moon_speed_down"], self, "J_Knee_RI");
-  stopFXOnTag(level.var_0611["zmb_moon_speed_down"], self, "J_Knee_LE");
+  stopFXOnTag(level.var_611["zmb_moon_speed_down"], self, "J_Knee_RI");
+  stopFXOnTag(level.var_611["zmb_moon_speed_down"], self, "J_Knee_LE");
 }

@@ -3,10 +3,10 @@
  * Script: 1214.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   level.var_611["zmb_brute_cinematic_steamrise"] = loadfx("vfx/map/mp_zombie_nest/zmb_brute_cinematic_steamrise");
   level.var_611["zmb_brute_intro_embers"] = loadfx("vfx/map/mp_zombie_nest/zmb_brute_intro_embers");
-  level.var_611["zmb_electroschnelle_reg_chg_wv"] = loadfx("vfx/zombie/abilities_perks\zmb_electroschnelle_reg_chg_wv");
+  level.var_611["zmb_electroschnelle_reg_chg_wv"] = loadfx("vfx/zombie/abilities_perks/zmb_electroschnelle_reg_chg_wv");
   level.var_611["zmb_tesla_tube_rack_idle"] = loadfx("vfx/zombie/tesla_guns/zmb_tesla_tube_rack_idle");
   level.var_611["zmb_trap_elec_tunnel_ambient"] = loadfx("vfx/map/mp_zombie_nest/zmb_trap_elec_tunnel_ambient");
   level.var_611["zmb_tesla_barrel_prop_idle"] = loadfx("vfx/zombie/tesla_guns/zmb_tesla_barrel_prop_idle");
@@ -72,8 +72,8 @@ func_00F9() {
   level.var_611["zmb_projector_lightbeam"] = loadfx("vfx/lights/mp_zombie_nest/zmb_projector_lightbeam");
   level.var_611["zmb_fuse_chain_box"] = loadfx("vfx/map/mp_zombie_nest/zmb_fuse_chain_box");
   level.var_611["zmb_fuse_chain_wire"] = loadfx("vfx/map/mp_zombie_nest/zmb_fuse_chain_wire");
-  level.var_611["zmb_lhog_init"] = loadfx("vfx/zombie/abilities_perks\zmb_lhog_init");
-  level.var_611["zmb_uberschnelle_charge"] = loadfx("vfx/zombie/abilities_perks\zmb_gk_uber_charge_stg_3");
+  level.var_611["zmb_lhog_init"] = loadfx("vfx/zombie/abilities_perks/zmb_lhog_init");
+  level.var_611["zmb_uberschnelle_charge"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_3");
   level.var_611["projector_lightbeam"] = loadfx("vfx/lights/projector_lightbeam");
   level.var_611["zmb_rhog_init"] = loadfx("vfx/map/mp_zombie_nest/zmb_rhog_init");
   level.var_611["zmb_rhog_on"] = loadfx("vfx/map/mp_zombie_nest/zmb_rhog_on");
@@ -299,26 +299,26 @@ func_00F9() {
   level.var_611["bouncing_betty_explode"] = loadfx("vfx/zombie/prototype_fx/bouncing_betty_explode");
   level.var_611["bouncing_betty_explosion"] = loadfx("vfx/explosion/zmb_bouncing_betty_explosion");
   level.var_611["catacombs_saw_blade"] = loadfx("vfx/zombie/prototype_fx/catacombs_saw_blade");
-  level.var_611["death_raven_hc_ee_uber"] = loadfx("vfx/zombie/abilities_perks\zmb_death_uberschnelle_charge");
-  level.var_611["moon_raven_hc_ee_uber"] = loadfx("vfx/zombie/abilities_perks\zmb_moon_uberschnelle_charge");
-  level.var_611["blood_raven_hc_ee_uber"] = loadfx("vfx/zombie/abilities_perks\zmb_blood_uberschnelle_charge");
-  level.var_611["storm_raven_hc_ee_uber"] = loadfx("vfx/zombie/abilities_perks\zmb_storm_uberschnelle_charge");
-  level.var_611["blood_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks\zmb_blood_uber_charge_stg_1");
-  level.var_611["blood_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks\zmb_blood_uber_charge_stg_2");
-  level.var_611["blood_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks\zmb_blood_uber_charge_stg_3");
-  level.var_611["death_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks\zmb_death_uber_charge_stg_1");
-  level.var_611["death_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks\zmb_death_uber_charge_stg_2");
-  level.var_611["death_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks\zmb_death_uber_charge_stg_3");
-  level.var_611["moon_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks\zmb_moon_uber_charge_stg_1");
-  level.var_611["moon_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks\zmb_moon_uber_charge_stg_2");
-  level.var_611["moon_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks\zmb_moon_uber_charge_stg_3");
-  level.var_611["storm_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks\zmb_storm_uber_charge_stg_1");
-  level.var_611["storm_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks\zmb_storm_uber_charge_stg_2");
-  level.var_611["storm_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks\zmb_storm_uber_charge_stg_3");
-  level.var_611["gk_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks\zmb_gk_uber_charge_stg_1");
-  level.var_611["gk_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks\zmb_gk_uber_charge_stg_2");
-  level.var_611["gk_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks\zmb_gk_uber_charge_stg_3");
-  level.var_611["gk_raven_hc_ee_uber_attached"] = loadfx("vfx/zombie/abilities_perks\zmb_gk_uber_attached");
+  level.var_611["death_raven_hc_ee_uber"] = loadfx("vfx/zombie/abilities_perks/zmb_death_uberschnelle_charge");
+  level.var_611["moon_raven_hc_ee_uber"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_uberschnelle_charge");
+  level.var_611["blood_raven_hc_ee_uber"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_uberschnelle_charge");
+  level.var_611["storm_raven_hc_ee_uber"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_uberschnelle_charge");
+  level.var_611["blood_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_uber_charge_stg_1");
+  level.var_611["blood_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_uber_charge_stg_2");
+  level.var_611["blood_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_uber_charge_stg_3");
+  level.var_611["death_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks/zmb_death_uber_charge_stg_1");
+  level.var_611["death_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks/zmb_death_uber_charge_stg_2");
+  level.var_611["death_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_death_uber_charge_stg_3");
+  level.var_611["moon_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_uber_charge_stg_1");
+  level.var_611["moon_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_uber_charge_stg_2");
+  level.var_611["moon_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_uber_charge_stg_3");
+  level.var_611["storm_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_uber_charge_stg_1");
+  level.var_611["storm_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_uber_charge_stg_2");
+  level.var_611["storm_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_uber_charge_stg_3");
+  level.var_611["gk_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_1");
+  level.var_611["gk_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_2");
+  level.var_611["gk_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_3");
+  level.var_611["gk_raven_hc_ee_uber_attached"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_attached");
   level.var_611["zmb_receiver_charge_pnt"] = loadfx("vfx/map/mp_zombie_nest/zmb_receiver_charge_pnt");
   level.var_611["zmb_receiver_charge_lost"] = loadfx("vfx/map/mp_zombie_nest/zmb_receiver_charge_lost");
   level.var_611["zmb_receiver_full"] = loadfx("vfx/map/mp_zombie_nest/zmb_receiver_full");

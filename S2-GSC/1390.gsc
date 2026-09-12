@@ -3,21 +3,21 @@
  * Script: 1390.gsc
 *********************************************/
 
-lib_056E::func_52A4() {
-  lib_0561::func_52A5("attack_dogs", "Attack Dogs", ::lib_056E::func_A1FA, ::lib_056E::func_1F2D, ::lib_056E::func_4423);
-  level thread maps\mp\killstreaks\_dog_killstreak::func_00D5();
+func_52A4() {
+  lib_0561::func_52A5("attack_dogs", "Attack Dogs", ::func_A1FA, ::func_1F2D, ::func_4423);
+  level thread maps\mp\killstreaks\_dog_killstreak::init();
 }
 
-lib_056E::func_1F2D() {
+func_1F2D() {
   return 1;
 }
 
-lib_056E::func_A1FA() {
-  self method_8615("zmb_pickup_general");
+func_A1FA() {
+  self playlocalsound("zmb_pickup_general");
   thread maps\mp\killstreaks\_dog_killstreak::func_9E26();
 }
 
-lib_056E::func_4423(param_00) {
+func_4423(param_00) {
   if(!isDefined(param_00)) {
     param_00 = "";
   }

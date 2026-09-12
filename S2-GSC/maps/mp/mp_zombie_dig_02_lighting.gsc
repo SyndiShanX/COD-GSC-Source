@@ -3,9 +3,9 @@
  * Script: maps\mp\mp_zombie_dig_02_lighting.gsc
 *************************************************/
 
-func_00F9() {}
+main() {}
 
-func_6B82() {
+onplayerspawned() {
   for(;;) {
     level waittill("player_spawned", var_00);
     var_00 thread setplayerlightset();

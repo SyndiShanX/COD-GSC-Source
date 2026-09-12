@@ -21,7 +21,7 @@ func_A907() {
   }
 }
 
-func_00D5() {
+init() {
   precachemodel("weapon_c4");
   precachemodel("weapon_c4_bombsquad");
   level.var_3960 = spawnStruct();
@@ -82,10 +82,10 @@ func_A906(param_00) {
 func_939D(param_00) {
   self endon("earlyNotify");
   param_00 waittill("missile_stuck");
-  var_01 = bulletTrace(param_00.var_0116, param_00.var_0116 - (0, 0, 4), 0, param_00);
-  var_02 = bulletTrace(param_00.var_0116, param_00.var_0116 + (0, 0, 4), 0, param_00);
-  var_03 = anglesToForward(param_00.var_001D);
-  var_04 = bulletTrace(param_00.var_0116 + (0, 0, 4), param_00.var_0116 + var_03 * 4, 0, param_00);
+  var_01 = bulletTrace(param_00.origin, param_00.origin - (0, 0, 4), 0, param_00);
+  var_02 = bulletTrace(param_00.origin, param_00.origin + (0, 0, 4), 0, param_00);
+  var_03 = anglesToForward(param_00.angles);
+  var_04 = bulletTrace(param_00.origin + (0, 0, 4), param_00.origin + var_03 * 4, 0, param_00);
   var_05 = undefined;
   var_06 = 0;
   var_07 = 0;
@@ -112,19 +112,19 @@ func_939D(param_00) {
   var_0A = vectorNormalize(var_05["normal"]);
   var_0B = vectortoangles(var_0A);
   var_0B = var_0B + (90, 0, 0);
-  var_09.var_001D = var_0B;
+  var_09.angles = var_0B;
   var_09 setModel(level.var_3960.var_9489);
-  var_09.var_0117 = self;
+  var_09.owner = self;
   var_09 setotherent(self);
   var_09.var_5A30 = (0, 0, 55);
-  var_09.var_5A2C = spawn("script_model", var_09.var_0116 + var_09.var_5A30);
+  var_09.var_5A2C = spawn("script_model", var_09.origin + var_09.var_5A30);
   var_09.var_94B9 = 0;
   var_09.var_A9E0 = "explosive_gel_mp";
   param_00 delete();
   level.var_61ED[level.var_61ED.size] = var_09;
   var_09 thread func_27D0(level.var_3960.var_4010, "tag_origin", self);
   var_09 thread func_61D0();
-  var_09 thread func_8679(self.var_01A7);
+  var_09 thread func_8679(self.team);
   var_09 thread func_61DD();
   var_09 thread func_395F(self);
   return var_09;
@@ -132,7 +132,7 @@ func_939D(param_00) {
 
 func_27D0(param_00, param_01, param_02) {
   var_03 = spawn("script_model", (0, 0, 0));
-  var_03 method_805C();
+  var_03 hide();
   wait 0.05;
   var_03 thread maps\mp\gametypes\_weapons::func_1908(param_02);
   var_03 setModel(param_00);
@@ -157,16 +157,16 @@ func_61D0() {
 
 func_61D1(param_00, param_01) {
   self endon("death");
-  var_02 = self.var_0117.var_01A7;
+  var_02 = self.owner.team;
   wait 0.05;
   triggerfx(param_00["friendly"]);
   triggerfx(param_00["enemy"]);
   for(;;) {
-    param_00["friendly"] method_805C();
-    param_00["enemy"] method_805C();
-    foreach(var_04 in level.var_744A) {
-      if(level.var_984D) {
-        if(var_04.var_01A7 == var_02) {
+    param_00["friendly"] hide();
+    param_00["enemy"] hide();
+    foreach(var_04 in level.players) {
+      if(level.teambased) {
+        if(var_04.team == var_02) {
           param_00["friendly"] showtoclient(var_04);
         } else {
           param_00["enemy"] showtoclient(var_04);
@@ -175,7 +175,7 @@ func_61D1(param_00, param_01) {
         continue;
       }
 
-      if(var_04 == self.var_0117) {
+      if(var_04 == self.owner) {
         param_00["friendly"] showtoclient(var_04);
         continue;
       }
@@ -190,7 +190,7 @@ func_61D1(param_00, param_01) {
 func_8679(param_00) {
   self endon("death");
   wait 0.05;
-  if(level.var_984D) {
+  if(level.teambased) {
     if(self.var_5817 == 1 || self.var_56F9 == 1) {
       maps\mp\_entityheadicons::func_873C(param_00, (0, 0, 28), undefined, 1);
       return;
@@ -200,13 +200,13 @@ func_8679(param_00) {
     return;
   }
 
-  if(isDefined(self.var_0117)) {
+  if(isDefined(self.owner)) {
     if(self.var_5817 == 1) {
-      maps\mp\_entityheadicons::func_86FC(self.var_0117, (28, 0, 28));
+      maps\mp\_entityheadicons::func_86FC(self.owner, (28, 0, 28));
       return;
     }
 
-    maps\mp\_entityheadicons::func_86FC(self.var_0117, (0, 0, 28));
+    maps\mp\_entityheadicons::func_86FC(self.owner, (0, 0, 28));
     return;
   }
 }
@@ -216,8 +216,8 @@ func_61DD() {
   self endon("mine_selfdestruct");
   self endon("death");
   self setCanDamage(1);
-  self.var_00FB = 100000;
-  self.var_00BC = self.var_00FB;
+  self.maxhealth = 100000;
+  self.health = self.maxhealth;
   var_00 = undefined;
   for(;;) {
     self waittill("damage", var_01, var_00, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
@@ -225,7 +225,7 @@ func_61DD() {
       continue;
     }
 
-    if(!maps\mp\gametypes\_weapons::func_3ECD(self.var_0117, var_00)) {
+    if(!maps\mp\gametypes\_weapons::func_3ECD(self.owner, var_00)) {
       continue;
     }
 
@@ -253,13 +253,13 @@ func_61DD() {
     var_00 maps\mp\gametypes\_damagefeedback::func_A102("bouncing_betty");
   }
 
-  if(level.var_984D) {
-    if(isDefined(var_00) && isDefined(var_00.var_012C["team"]) && isDefined(self.var_0117) && isDefined(self.var_0117.var_012C["team"])) {
-      if(var_00.var_012C["team"] != self.var_0117.var_012C["team"]) {
+  if(level.teambased) {
+    if(isDefined(var_00) && isDefined(var_00.pers["team"]) && isDefined(self.owner) && isDefined(self.owner.pers["team"])) {
+      if(var_00.pers["team"] != self.owner.pers["team"]) {
         var_00 notify("destroyed_explosive");
       }
     }
-  } else if(isDefined(self.var_0117) && isDefined(var_00) && var_00 != self.var_0117) {
+  } else if(isDefined(self.owner) && isDefined(var_00) && var_00 != self.owner) {
     var_00 notify("destroyed_explosive");
   }
 
@@ -267,30 +267,30 @@ func_61DD() {
 }
 
 func_61E3(param_00) {
-  if(!isDefined(self) || !isDefined(self.var_0117)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
   if(!isDefined(param_00)) {
-    param_00 = self.var_0117;
+    param_00 = self.owner;
   }
 
-  self method_8617("null");
+  self playSound("null");
   var_01 = self gettagorigin("tag_fx");
   playFX(level.var_3960.var_4011, var_01);
   wait 0.05;
-  if(!isDefined(self) || !isDefined(self.var_0117)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
-  self method_805C();
-  self entityradiusdamage(self.var_0116, 192, 100, 100, param_00, "MOD_EXPLOSIVE");
-  if(isDefined(self.var_0117) && isDefined(level.var_5C44)) {
-    self.var_0117 thread[[level.var_5C44]]("mine_destroyed", undefined, undefined, self.var_0116);
+  self hide();
+  self entityradiusdamage(self.origin, 192, 100, 100, param_00, "MOD_EXPLOSIVE");
+  if(isDefined(self.owner) && isDefined(level.var_5C44)) {
+    self.owner thread[[level.var_5C44]]("mine_destroyed", undefined, undefined, self.origin);
   }
 
   wait(0.2);
-  if(!isDefined(self) || !isDefined(self.var_0117)) {
+  if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
 
@@ -300,7 +300,7 @@ func_61E3(param_00) {
     self.var_6FD8 delete();
   }
 
-  self method_805C();
+  self hide();
 }
 
 func_3537(param_00) {
@@ -314,7 +314,7 @@ func_0F1B() {
   wait(3);
   self.var_5A2C delete();
   self delete();
-  level.var_61ED = common_scripts\utility::func_0FA0(level.var_61ED);
+  level.var_61ED = common_scripts\utility::func_FA0(level.var_61ED);
 }
 
 func_395F(param_00) {

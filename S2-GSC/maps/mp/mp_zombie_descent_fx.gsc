@@ -3,14 +3,14 @@
  * Script: maps\mp\mp_zombie_descent_fx.gsc
 *********************************************/
 
-func_00F9() {
-  level.var_611["gk_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks\zmb_gk_uber_charge_stg_3");
+main() {
+  level.var_611["gk_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_3");
   level.var_611["zmb_desc_bloodtube_drip_exit"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_bloodtube_drip_exit");
   level.var_611["zmb_desc_bloodroom_mist_pckt"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_bloodroom_mist_pckt");
   level.var_611["zmb_desc_bloodroom_mist"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_bloodroom_mist");
   level.var_611["force_zombie_bubble_pop"] = loadfx("vfx/zombie/prototype_fx/dlc4/force_zombie_bubble_pop");
   level.var_611["zmb_red_zmb_blind"] = loadfx("vfx/zombie/zmb_red_zmb_blind");
-  level.var_611["zmb_storm_hammer_gem_charge_vm"] = loadfx("vfx/zombie/rvn_weapons\zmb_storm_hammer_gem_charge_vm");
+  level.var_611["zmb_storm_hammer_gem_charge_vm"] = loadfx("vfx/zombie/rvn_weapons/zmb_storm_hammer_gem_charge_vm");
   level.var_611["zmb_player_attached_light_wide"] = loadfx("vfx/lights/mp_zombie_descent/zmb_player_attached_light_wide");
   level.var_611["dark_energy_burst"] = loadfx("vfx/zombie/dark_energy_burst");
   level.var_611["zmb_desc_ice_falling"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_ice_falling");
@@ -104,16 +104,16 @@ func_00F9() {
   level.var_611["zmb_giestbomb_radius_128"] = loadfx("vfx/zombie/zmb_giestbomb_radius_128");
   level.var_611["zmb_desc_screen_fx_exit_bloody"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_screen_fx_exit_bloody");
   level.var_611["zmb_desc_screen_fx_plunge_bloody"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_screen_fx_plunge_bloody");
-  level.var_611["zmb_death_scythe_forge_endstage"] = loadfx("vfx/zombie/rvn_weapons\zmb_death_scythe_forge_endstage");
+  level.var_611["zmb_death_scythe_forge_endstage"] = loadfx("vfx/zombie/rvn_weapons/zmb_death_scythe_forge_endstage");
   level.var_611["zmb_impact_brick_sml"] = loadfx("vfx/rock/zmb_impact_brick_sml");
   level.var_611["force_zombie_bubble"] = loadfx("vfx/zombie/prototype_fx/dlc4/force_zombie_bubble");
   level.var_611["light_beacon_hardpoint_white"] = loadfx("vfx/lights/light_beacon_hardpoint_white");
   level.var_611["tesla_gun_explosion"] = loadfx("vfx/explosion/tesla_gun_explosion");
   level.var_611["zmb_tesla_blood_trail_geo"] = loadfx("vfx/trail/zmb_tesla_blood_trail_geo");
-  level.var_611["zmb_blood_zmb_bolt"] = loadfx("vfx/zombie/abilities_perks\zmb_blood_zmb_bolt");
+  level.var_611["zmb_blood_zmb_bolt"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_zmb_bolt");
   level.var_611["zmb_desc_stormraven_plat_obv"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_stormraven_plat_obv");
-  level.var_611["zmb_death_scythe_forge_stage2"] = loadfx("vfx/zombie/rvn_weapons\zmb_death_scythe_forge_stage2");
-  level.var_611["zmb_death_scythe_forge"] = loadfx("vfx/zombie/rvn_weapons\zmb_death_scythe_forge");
+  level.var_611["zmb_death_scythe_forge_stage2"] = loadfx("vfx/zombie/rvn_weapons/zmb_death_scythe_forge_stage2");
+  level.var_611["zmb_death_scythe_forge"] = loadfx("vfx/zombie/rvn_weapons/zmb_death_scythe_forge");
   level.var_611["dlc_zmb_dig02_blood_plate_head"] = loadfx("vfx/map/mp_zombie_dig02/dlc_zmb_dig02_blood_plate_head");
   level.var_611["zmb_desc_torch_fire_nosmk"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_torch_fire_nosmk");
   level.var_611["zmb_desc_torch_fire"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_torch_fire");
@@ -129,14 +129,14 @@ func_00F9() {
   level.var_611["zmb_desc_storm_p_rune_charge"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_storm_p_rune_charge");
   level.var_611["zmb_desc_storm_rune_strike"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_storm_rune_strike");
   level.var_611["zmb_desc_storm_hmr_zmb_transfer"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_storm_hmr_zmb_transfer");
-  level.var_611["zmb_storm_hammer_charge_vm"] = loadfx("vfx/zombie/rvn_weapons\zmb_storm_hammer_charge_vm");
+  level.var_611["zmb_storm_hammer_charge_vm"] = loadfx("vfx/zombie/rvn_weapons/zmb_storm_hammer_charge_vm");
   level.var_611["zmb_desc_storm_rune_charge"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_storm_rune_charge");
   level.var_611["zmb_desc_storm_uber_charge_tip"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_storm_uber_charge_tip");
   level.var_611["zmb_desc_storm_uber_charge"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_storm_uber_charge");
   level.var_611["zmb_desc_dustfall_bookshelf_01"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_dustfall_bookshelf_01");
   level.var_611["zmb_desc_hammer_rod_charge"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_hammer_rod_charge");
-  level.var_611["zmb_storm_hammer_teleport_flash"] = loadfx("vfx/zombie/rvn_weapons\zmb_storm_hammer_teleport_flash");
-  level.var_611["zmb_storm_hammer_charge"] = loadfx("vfx/zombie/rvn_weapons\zmb_storm_hammer_charge");
+  level.var_611["zmb_storm_hammer_teleport_flash"] = loadfx("vfx/zombie/rvn_weapons/zmb_storm_hammer_teleport_flash");
+  level.var_611["zmb_storm_hammer_charge"] = loadfx("vfx/zombie/rvn_weapons/zmb_storm_hammer_charge");
   level.var_611["zmb_desc_candle_flame"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_candle_flame");
   level.var_611["zmb_desc_candle_flame_sml"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_candle_flame_sml");
   level.var_611["zmb_desc_blood_fall_ctdl_lrg_01"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_blood_fall_ctdl_lrg_01");
@@ -149,11 +149,11 @@ func_00F9() {
   level.var_611["zmb_desc_trls_smk_smolder"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_trls_smk_smolder");
   level.var_611["zmb_desc_trls_platform_mist"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_trls_platform_mist");
   level.var_611["zmb_king_gk_levitation"] = loadfx("vfx/zombie/zmb_king_gk_levitation");
-  level.var_611["zmb_blood_shield_block_emp"] = loadfx("vfx/zombie/rvn_weapons\zmb_blood_shield_block_emp");
-  level.var_611["zmb_blood_shield_bash_emp"] = loadfx("vfx/zombie/rvn_weapons\zmb_blood_shield_bash_emp");
+  level.var_611["zmb_blood_shield_block_emp"] = loadfx("vfx/zombie/rvn_weapons/zmb_blood_shield_block_emp");
+  level.var_611["zmb_blood_shield_bash_emp"] = loadfx("vfx/zombie/rvn_weapons/zmb_blood_shield_bash_emp");
   level.var_611["zmb_orrery_gears_geist_01"] = loadfx("vfx/map/mp_zombie_descent/zmb_orrery_gears_geist_01");
-  level.var_611["zmb_blood_shield_bash"] = loadfx("vfx/zombie/rvn_weapons\zmb_blood_shield_bash");
-  level.var_611["zmb_blood_shield_block"] = loadfx("vfx/zombie/rvn_weapons\zmb_blood_shield_block");
+  level.var_611["zmb_blood_shield_bash"] = loadfx("vfx/zombie/rvn_weapons/zmb_blood_shield_bash");
+  level.var_611["zmb_blood_shield_block"] = loadfx("vfx/zombie/rvn_weapons/zmb_blood_shield_block");
   level.var_611["zmb_desc_snow_altar_01"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_snow_altar_01");
   level.var_611["zmb_desc_fire_burst_rnr_01"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_fire_burst_rnr_01");
   level.var_611["zmb_desc_chladni_fig_1_sml_lp"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_fig_1_sml_lp");
@@ -311,7 +311,7 @@ func_00F9() {
   level.var_611["zmb_desc_chladni_11_to_1"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_11_to_1");
   level.var_611["zmb_desc_chladni_11_to_9"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_11_to_9");
   level.var_611["zmb_desc_chladni_success"] = loadfx("vfx/map/mp_zombie_descent/zmb_desc_chladni_success");
-  level.var_611["moneyCloud"] = loadfx("vfx/gameplay\mp\zombie/gj_pickup_zombies_01_money");
+  level.var_611["moneyCloud"] = loadfx("vfx/gameplay/mp/zombie/gj_pickup_zombies_01_money");
   level.var_611["redGlow"] = loadfx("vfx/lights/red_dot_light_intense");
   level.var_611["greenGlow"] = loadfx("vfx/lights/green_dot_light");
   level.var_611["blueGlow"] = loadfx("vfx/lights/blue_dot_light");

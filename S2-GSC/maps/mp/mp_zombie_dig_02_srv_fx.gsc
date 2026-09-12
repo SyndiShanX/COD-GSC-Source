@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_dig_02_srv_fx.gsc
 ***********************************************/
 
-func_00F9() {
+main() {
   level.var_611["test_effect"] = loadfx("vfx/test/test_fx");
   level.var_611["dlc_zmb_dig02_sword_looping"] = loadfx("vfx/map/mp_zombie_dig02/dlc_zmb_dig02_sword_looping");
   level.var_611["dlc_zmb_dig_02_spike_trap_on_rnr"] = loadfx("vfx/map/mp_zombie_dig02/dlc_zmb_dig_02_spike_trap_on_rnr");
@@ -29,7 +29,7 @@ func_00F9() {
   level.var_611["zmb_receiver_full"] = loadfx("vfx/map/mp_zombie_nest/zmb_receiver_full");
   level.var_611["zmb_zmb_key_light"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zmb_key_light");
   level.var_611["vehicle_warbird_explosion_midair"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
-  level.var_611["zmb_death_hand_to_hand_melee_hit"] = loadfx("vfx/zombie/abilities_perks\zmb_death_hand_to_hand_melee_hit");
+  level.var_611["zmb_death_hand_to_hand_melee_hit"] = loadfx("vfx/zombie/abilities_perks/zmb_death_hand_to_hand_melee_hit");
   level.var_611["dlc_zmb_dig02_blood_plates_sparse"] = loadfx("vfx/map/mp_zombie_dig02/dlc_zmb_dig02_blood_plates_sparse");
   level.var_611["dlc_zmb_dig02_generator_malfunc_ger"] = loadfx("vfx/map/mp_zombie_dig02/dlc_zmb_dig02_generator_malfunc_ger");
   level.var_611["dlc_zmb_dig02_eq_dust_lrg"] = loadfx("vfx/map/mp_zombie_dig02/dlc_zmb_dig02_eq_dust_lrg");

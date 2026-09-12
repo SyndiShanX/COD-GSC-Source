@@ -3,15 +3,15 @@
  * Script: maps\mp\_load.gsc
 *********************************************/
 
-func_00F9() {
-  if(isDefined(level.var_0674)) {
+main() {
+  if(isDefined(level.var_674)) {
     return;
   }
 
-  level.var_0674 = 1;
+  level.var_674 = 1;
   level.var_A559 = getdvarint("4017", 0);
   level.var_6508 = issubstr(maps\mp\_utility::func_4571(), "mp_hub_");
-  level.var_53C7 = level.var_3FDC == "scorestreak_training";
+  level.var_53C7 = level.gametype == "scorestreak_training";
   level.var_53C6 = maps\mp\_utility::func_4571() == "mp_scorestreak_training";
   maps\mp\_utility::func_843E();
   level.var_27F6 = getDvar("1459") != "";
@@ -26,11 +26,11 @@ func_00F9() {
     level.var_3CC6 = [];
   }
 
-  level.var_7D23 = getdvarfloat("scr_RequiredMapAspectratio", 1);
-  level.var_27D9 = ::maps\mp\gametypes\_hud_util::func_27ED;
-  level.var_4F76 = ::maps\mp\gametypes\_hud_util::func_8707;
+  level.requiredmapaspectratio = getdvarfloat("scr_RequiredMapAspectratio", 1);
+  level.var_27D9 = ::maps\mp\gametypes\_hud_util::createfontstring;
+  level.var_4F76 = ::maps\mp\gametypes\_hud_util::setpoint;
   level.var_5C44 = ::maps\mp\_utility::func_5C43;
-  thread maps\mp\gametypes\_tweakables::func_00D5();
+  thread maps\mp\gametypes\_tweakables::init();
   if(!isDefined(level.var_3F02)) {
     level.var_3F02 = [];
   }
@@ -39,19 +39,19 @@ func_00F9() {
   level.var_3F02["scriptModelPlayAnim"] = ::scriptmodelplayanim;
   level.var_3F02["scriptModelClearAnim"] = ::scriptmodelclearanim;
   if(!level.var_27F6) {
-    thread maps\mp\_movers::func_00D5();
-    thread maps\mp\_shutter::func_00F9();
-    thread maps\mp\_destructables::func_00D5();
-    thread common_scripts\_elevator::func_00D5();
-    thread maps\mp\_dynamic_world::func_00D5();
-    thread common_scripts\_destructible::func_00D5();
+    thread maps\mp\_movers::init();
+    thread maps\mp\_shutter::main();
+    thread maps\mp\_destructables::init();
+    thread common_scripts\_elevator::init();
+    thread maps\mp\_dynamic_world::init();
+    thread common_scripts\_destructible::init();
   }
 
   game["thermal_vision"] = "default";
   visionsetnaked("", 0);
   visionsetnight("default_night_mp");
   visionsetthermal(game["thermal_vision"]);
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     visionsetpain("near_death_hdr_zm", 0);
   } else {
     visionsetmissilecam("orbital_strike");
@@ -64,23 +64,23 @@ func_00F9() {
   }
 
   lib_0378::func_8D89();
-  maps\mp\_audio::func_5163();
-  maps\mp\_art::func_00F9();
+  maps\mp\_audio::init_audio();
+  maps\mp\_art::main();
   func_8A1A();
   thread common_scripts\_fx::func_52BD();
   if(level.var_27F6) {
     lib_050D::func_86C5();
-    maps\mp\_createfx::func_27EE();
+    maps\mp\_createfx::createfx();
   }
 
   if(getDvar("233") == "1") {
     func_2D35();
     lib_050D::func_86C5();
-    maps\mp\_global_fx::func_00F9();
+    maps\mp\_global_fx::main();
     level waittill("eternity");
   }
 
-  thread maps\mp\_global_fx::func_00F9();
+  thread maps\mp\_global_fx::main();
   for(var_02 = 0; var_02 < 6; var_02++) {
     switch (var_02) {
       case 0:
@@ -126,7 +126,7 @@ func_00F9() {
   }
 
   level.var_6246 = getEntArray("trigger_multiple_missile_dud", "classname");
-  thread maps\mp\_animatedmodels::func_00F9();
+  thread maps\mp\_animatedmodels::main();
   func_527B();
   level.var_3F02["damagefeedback"] = ::maps\mp\gametypes\_damagefeedback::func_A102;
   level.var_3F02["setTeamHeadIcon"] = ::maps\mp\_entityheadicons::func_873C;
@@ -207,8 +207,8 @@ func_3938(param_00) {
   level endon("killexplodertridgers" + param_00.var_8186);
   param_00 waittill("trigger");
   if(isDefined(param_00.var_8136) && randomfloat(1) > param_00.var_8136) {
-    if(isDefined(param_00.var_0161)) {
-      wait(param_00.var_0161);
+    if(isDefined(param_00.var_161)) {
+      wait(param_00.var_161);
     } else {
       wait(4);
     }
@@ -234,19 +234,19 @@ func_8A1A() {
     }
 
     if(isDefined(var_00[var_02].var_8186)) {
-      if(var_00[var_02].var_0106 == "fx" && !isDefined(var_00[var_02].var_01A5) || var_00[var_02].var_01A5 != "exploderchunk") {
-        var_00[var_02] method_805C();
+      if(var_00[var_02].model == "fx" && !isDefined(var_00[var_02].targetname) || var_00[var_02].targetname != "exploderchunk") {
+        var_00[var_02] hide();
         continue;
       }
 
-      if(isDefined(var_00[var_02].var_01A5) && var_00[var_02].var_01A5 == "exploder") {
-        var_00[var_02] method_805C();
+      if(isDefined(var_00[var_02].targetname) && var_00[var_02].targetname == "exploder") {
+        var_00[var_02] hide();
         var_00[var_02] notsolid();
         continue;
       }
 
-      if(isDefined(var_00[var_02].var_01A5) && var_00[var_02].var_01A5 == "exploderchunk") {
-        var_00[var_02] method_805C();
+      if(isDefined(var_00[var_02].targetname) && var_00[var_02].targetname == "exploderchunk") {
+        var_00[var_02] hide();
         var_00[var_02] notsolid();
       }
     }
@@ -294,14 +294,13 @@ func_8A1A() {
   var_05["exploderchunk visible"] = 1;
   var_05["exploderchunk"] = 1;
   var_05["exploder"] = 1;
-  var_02 = 0;
-  while(var_02 < var_03.size) {
+  for(var_02 = 0; var_02 < var_03.size; var_02++) {
     var_06 = var_03[var_02];
     var_07 = common_scripts\utility::func_27E7(var_06.var_81BB);
     var_07.var_A265 = [];
-    var_07.var_A265["origin"] = var_06.var_0116;
-    var_07.var_A265["angles"] = var_06.var_001D;
-    var_07.var_A265["delay"] = var_06.var_0161;
+    var_07.var_A265["origin"] = var_06.origin;
+    var_07.var_A265["angles"] = var_06.angles;
+    var_07.var_A265["delay"] = var_06.var_161;
     var_07.var_A265["firefx"] = var_06.var_8193;
     var_07.var_A265["firefxdelay"] = var_06.var_8194;
     var_07.var_A265["firefxsound"] = var_06.var_8195;
@@ -313,10 +312,10 @@ func_8A1A() {
     var_07.var_A265["repeat"] = var_06.var_8278;
     var_07.var_A265["delay_min"] = var_06.var_8154;
     var_07.var_A265["delay_max"] = var_06.var_8153;
-    var_07.var_A265["target"] = var_06.var_01A2;
+    var_07.var_A265["target"] = var_06.target;
     var_07.var_A265["ender"] = var_06.var_817E;
     var_07.var_A265["type"] = "exploder";
-    if(isDefined(var_06.var_0106)) {
+    if(isDefined(var_06.model)) {
       var_07.var_A265["radiant"] = 1;
     }
 
@@ -331,47 +330,46 @@ func_8A1A() {
       var_07.var_A265["delay"] = 0;
     }
 
-    if(isDefined(var_06.var_01A2)) {
+    if(isDefined(var_06.target)) {
       var_08 = getEntArray(var_07.var_A265["target"], "targetname")[0];
       if(isDefined(var_08)) {
-        var_09 = var_08.var_0116;
+        var_09 = var_08.origin;
         var_07.var_A265["angles"] = vectortoangles(var_09 - var_07.var_A265["origin"]);
       } else {
         var_08 = common_scripts\utility::func_4375(var_07.var_A265["target"]);
         if(isDefined(var_08)) {
-          var_09 = var_08.var_0116;
+          var_09 = var_08.origin;
           var_07.var_A265["angles"] = vectortoangles(var_09 - var_07.var_A265["origin"]);
         }
       }
     }
 
-    if(var_07.var_003A == "script_brushmodel" || isDefined(var_07.var_0106)) {
-      var_08.var_0106 = var_07;
-      var_08.var_0106.var_2FBF = var_07.var_8166;
+    if(var_06.classname == "script_brushmodel" || isDefined(var_06.model)) {
+      var_07.model = var_06;
+      var_07.model.var_2FBF = var_06.var_8166;
     }
 
-    if(isDefined(var_07.var_01A5) && isDefined(var_06[var_07.var_01A5])) {
-      var_08.var_A265["exploder_type"] = var_07.var_01A5;
+    if(isDefined(var_06.targetname) && isDefined(var_05[var_06.targetname])) {
+      var_07.var_A265["exploder_type"] = var_06.targetname;
     } else {
-      var_08.var_A265["exploder_type"] = "normal";
+      var_07.var_A265["exploder_type"] = "normal";
     }
 
-    var_08 common_scripts\_createfx::func_75BE();
-    var_03++;
+    var_07 common_scripts\_createfx::func_75BE();
   }
 }
 
 func_5AFD() {
-  common_scripts\_fx::func_5EEE("lantern_light", self.var_0116, 0.3, self.var_0116 + (0, 0, 1));
+  common_scripts\_fx::func_5EEE("lantern_light", self.origin, 0.3, self.origin + (0, 0, 1));
 }
 
 func_4FF4() {
   level endon("game_ended");
   wait(randomfloat(1));
   for(;;) {
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       if(var_01 istouching(self) && maps\mp\_utility::func_57A0(var_01)) {
-        var_01 maps\mp\_utility::func_0728();
+        var_01 maps\mp\_utility::_suicide();
       }
     }
 
@@ -384,39 +382,39 @@ func_8A15() {
   foreach(var_02 in var_00) {
     switch (getDvar("1673")) {
       case "mp_interchange":
-        if(var_02.var_0116[2] > 150) {
+        if(var_02.origin[2] > 150) {
           break;
         }
         break;
     }
 
-    var_03 = var_02.var_0116 + (0, 0, 5);
-    var_04 = var_02.var_0116 + (0, 0, 128);
+    var_03 = var_02.origin + (0, 0, 5);
+    var_04 = var_02.origin + (0, 0, 128);
     var_05 = bulletTrace(var_03, var_04, 0, var_02);
     var_02.var_5A2C = spawn("script_model", var_05["position"]);
-    var_02.var_5A2C.var_01A5 = "killCamEnt_destructible_vehicle";
+    var_02.var_5A2C.targetname = "killCamEnt_destructible_vehicle";
     var_02.var_5A2C setscriptmoverkillcam("explosive");
     var_02 thread func_2D34();
   }
 
   var_07 = getEntArray("destructible_toy", "targetname");
   foreach(var_02 in var_07) {
-    var_03 = var_02.var_0116 + (0, 0, 5);
-    var_04 = var_02.var_0116 + (0, 0, 128);
+    var_03 = var_02.origin + (0, 0, 5);
+    var_04 = var_02.origin + (0, 0, 128);
     var_05 = bulletTrace(var_03, var_04, 0, var_02);
     var_02.var_5A2C = spawn("script_model", var_05["position"]);
-    var_02.var_5A2C.var_01A5 = "killCamEnt_destructible_toy";
+    var_02.var_5A2C.targetname = "killCamEnt_destructible_toy";
     var_02.var_5A2C setscriptmoverkillcam("explosive");
     var_02 thread func_2D34();
   }
 
   var_0A = getEntArray("explodable_barrel", "targetname");
   foreach(var_02 in var_0A) {
-    var_03 = var_02.var_0116 + (0, 0, 5);
-    var_04 = var_02.var_0116 + (0, 0, 128);
+    var_03 = var_02.origin + (0, 0, 5);
+    var_04 = var_02.origin + (0, 0, 128);
     var_05 = bulletTrace(var_03, var_04, 0, var_02);
     var_02.var_5A2C = spawn("script_model", var_05["position"]);
-    var_02.var_5A2C.var_01A5 = "killCamEnt_explodable_barrel";
+    var_02.var_5A2C.targetname = "killCamEnt_explodable_barrel";
     var_02.var_5A2C setscriptmoverkillcam("explosive");
     var_02 thread func_2D34();
   }
@@ -436,8 +434,8 @@ func_2D34() {
 func_2D35() {
   var_00 = getEntArray("hp_zone_center", "targetname");
   foreach(var_02 in var_00) {
-    if(isDefined(var_02.var_01A2)) {
-      var_03 = getEntArray(var_02.var_01A2, "targetname");
+    if(isDefined(var_02.target)) {
+      var_03 = getEntArray(var_02.target, "targetname");
       foreach(var_05 in var_03) {
         var_05 delete();
       }

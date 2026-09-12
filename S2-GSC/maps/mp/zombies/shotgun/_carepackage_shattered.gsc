@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\shotgun\_carepackage_shattered.gsc
 **************************************************************/
 
-func_00D5() {
+init() {
   level thread init_supply_drop_triggers();
   level.zombie_crate_timeout_callback = ::zombie_handle_crate_timeout;
   level thread highlight_next_carepackage();
@@ -11,7 +11,7 @@ func_00D5() {
 
 zombie_handle_crate_timeout(param_00) {
   var_01 = common_scripts\utility::func_46B7("carepackage_dz", "targetname");
-  var_02 = common_scripts\utility::func_4461(param_00.var_116, var_01);
+  var_02 = common_scripts\utility::func_4461(param_00.origin, var_01);
   if(common_scripts\utility::func_562E(var_02.no_crate_timeout)) {
     return;
   }
@@ -36,14 +36,14 @@ spawn_player_carepackage(param_00) {
   level endon("new_carepackage_reward");
   var_01 = 4;
   var_02 = 125;
-  maps\mp\zombies\zombie_carepackage::zm_care_spawn(common_scripts\utility::func_7A33(level.var_744A), level.care_package_lz);
+  maps / mp / zombies / zombie_carepackage::zm_care_spawn(common_scripts\utility::func_7A33(level.players), level.care_package_lz);
   for(;;) {
     level waittill("zombies_crate_captured", var_03, var_04, var_05);
     if(common_scripts\utility::func_562E(var_04.is_objective_package)) {
       continue;
     }
 
-    if(distance2dsquared(var_05, level.care_package_lz.var_116) < 250000) {
+    if(distance2dsquared(var_05, level.care_package_lz.origin) < 250000) {
       break;
     }
   }
@@ -63,21 +63,21 @@ spawn_player_carepackage(param_00) {
     var_07[var_07.size - 1] = common_scripts\utility::func_7A33(var_06.upgrades);
   }
 
-  foreach(var_0C in level.var_744A) {
+  foreach(var_0C in level.players) {
     for(var_0D = 0; var_0D < 4; var_0D++) {
-      level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::run_mini_monies(var_0C, level.zmb_shotgun_carepackage_rewards["money_" + param_00], level.care_package_lz.var_116 + (randomint(120) - 120, randomint(120) - 120, 0));
+      level thread maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::run_mini_monies(var_0C, level.zmb_shotgun_carepackage_rewards["money_" + param_00], level.care_package_lz.origin + (randomint(120) - 120, randomint(120) - 120, 0));
     }
   }
 
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::run_armor_powerup(level.care_package_lz.var_116);
-  maps\mp\gametypes\zombies::func_281C("ammo", level.care_package_lz.var_116, "random", 0, 0);
-  var_0F = randomint(level.var_744A.size);
-  foreach(var_0E, var_0C in level.var_744A) {
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::run_armor_powerup(level.care_package_lz.origin);
+  maps / mp / gametypes / zombies::func_281C("ammo", level.care_package_lz.origin, "random", 0, 0);
+  var_0F = randomint(level.players.size);
+  foreach(var_0E, var_0C in level.players) {
     if(var_0F == var_0E && isDefined(var_06.var_90C5)) {
       var_07[0] = var_06.var_90C5;
     }
 
-    level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::spawn_player_rewards(level.care_package_lz, var_07, var_02, var_01, var_0C);
+    level thread maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::spawn_player_rewards(level.care_package_lz, var_07, var_02, var_01, var_0C);
   }
 }
 
@@ -115,7 +115,7 @@ start_care_package_reward_all(param_00) {
 }
 
 reward_care_package_to_players(param_00, param_01) {
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_rideau_global::run_rideau_supply_drop_comment();
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_rideau_global::run_rideau_supply_drop_comment();
   level thread spawn_player_carepackage(param_00);
 }
 

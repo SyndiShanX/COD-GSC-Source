@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_nest_straub_appearances.gsc
 *********************************************************/
 
-func_00F9() {
+main() {
   level.var_943B = spawnStruct();
   level.var_943B.var_5049 = [];
   level.var_943B.var_5049["s2_zom_straub_window_gaze_idle"] = % s2_zom_straub_window_gaze_idle;
@@ -19,7 +19,7 @@ func_00F9() {
   level.var_943B.var_38E6["s2_zom_straub_table_cleaver_exit_6"] = % s2_zom_straub_table_cleaver_exit_6;
   level.var_943B.var_38E6["s2_zom_straub_table_hacksaw_exit_6"] = % s2_zom_straub_table_hacksaw_exit_6;
   level.var_943B.var_241F = getEnt("straub_bullet_clip", "targetname");
-  level.var_0611["temp_straub_radius"] = loadfx("vfx/weaponimpact/zmb_straub_impact");
+  level.var_611["temp_straub_radius"] = loadfx("vfx/weaponimpact/zmb_straub_impact");
   level.var_943B.var_9097 = func_9442();
   if(!isDefined(level.var_943B.var_9097) || level.var_943B.var_9097.size <= 0) {
     return;
@@ -66,8 +66,8 @@ func_943D(param_00) {
     }
 
     if(isDefined(level.var_943B.var_2913)) {
-      if(isDefined(level.var_943B.var_2913.var_00B9)) {
-        level.var_943B.var_2913.var_00B9 delete();
+      if(isDefined(level.var_943B.var_2913.var_B9)) {
+        level.var_943B.var_2913.var_B9 delete();
       }
 
       if(isDefined(level.var_943B.var_2913.var_9A8E)) {
@@ -93,12 +93,12 @@ func_9446() {
     var_04 = func_943C(var_03);
     if(!var_04) {
       var_01 = var_03;
-      level.var_943B.var_9097 = common_scripts\utility::func_0F93(level.var_943B.var_9097, var_03);
+      level.var_943B.var_9097 = common_scripts\utility::func_F93(level.var_943B.var_9097, var_03);
       var_00 = 1;
       continue;
     }
 
-    var_02 = common_scripts\utility::func_0F93(var_02, var_03);
+    var_02 = common_scripts\utility::func_F93(var_02, var_03);
     if(var_02.size <= 0) {
       break;
     }
@@ -110,33 +110,33 @@ func_9446() {
 func_9442() {
   var_00 = common_scripts\utility::func_46B7("Straub", "targetname");
   foreach(var_02 in var_00) {
-    var_03 = common_scripts\utility::func_44BE(var_02.var_01A2, "targetname");
+    var_03 = common_scripts\utility::func_44BE(var_02.target, "targetname");
     foreach(var_05 in var_03) {
-      if(!isDefined(var_05.var_0165)) {
+      if(!isDefined(var_05.script_noteworthy)) {
         var_02.var_65F8 = var_05;
         var_02.var_65F8.var_565E = 0;
         continue;
       }
 
-      switch (var_05.var_0165) {
+      switch (var_05.script_noteworthy) {
         case "straub_trig":
           var_02.var_65F8 = var_05;
           var_02.var_65F8.var_565E = 0;
           break;
 
         case "straub_look_origin":
-          var_02.var_5EB4 = var_05.var_0116;
+          var_02.var_5EB4 = var_05.origin;
           break;
       }
     }
 
     var_02.var_4B56 = 0;
     var_02.var_9A8E = undefined;
-    var_02.var_5046 = var_02.var_0165;
-    var_02.var_38E4 = var_02.var_0EA4;
+    var_02.var_5046 = var_02.script_noteworthy;
+    var_02.var_38E4 = var_02.animation;
     var_02.var_38E5 = var_02.var_819A;
     if(!isDefined(var_02.var_5EB4)) {
-      var_02.var_5EB4 = var_02.var_0116;
+      var_02.var_5EB4 = var_02.origin;
     }
   }
 
@@ -146,12 +146,12 @@ func_9442() {
 func_9448() {
   level endon("stop_straub");
   childthread func_944A();
-  self.var_18A8 = spawn("script_model", self.var_0116);
-  self.var_18A8.var_001D = self.var_001D;
+  self.var_18A8 = spawn("script_model", self.origin);
+  self.var_18A8.angles = self.angles;
   self.var_18A8 setModel("zom_hero_straub_wholebody");
-  self.var_00B9 = spawn("script_model", self.var_0116);
-  self.var_00B9 setModel("zom_head_kier_org1");
-  self.var_00B9 linkTo(self.var_18A8, "j_spineupper", (0, 0, 0), (0, 0, 0));
+  self.var_B9 = spawn("script_model", self.origin);
+  self.var_B9 setModel("zom_head_kier_org1");
+  self.var_B9 linkTo(self.var_18A8, "j_spineupper", (0, 0, 0), (0, 0, 0));
   if(isDefined(level.var_943B.var_241F)) {
     thread func_943F();
   }
@@ -167,20 +167,20 @@ func_9448() {
   }
 
   if(isDefined(var_00)) {
-    self.var_9A8E = spawn("script_model", self.var_0116);
+    self.var_9A8E = spawn("script_model", self.origin);
     self.var_9A8E setModel(var_00);
     self.var_9A8E linkTo(self.var_18A8, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
   }
 
   while(!self.var_65F8.var_565E) {
     self.var_18A8 method_8278(self.var_5046);
-    self.var_00B9 method_8278(self.var_5046);
+    self.var_B9 method_8278(self.var_5046);
     wait(getanimlength(level.var_943B.var_5049[self.var_5046]));
   }
 
   level.var_943B.var_5B51 = gettime();
   self.var_18A8 method_8278(self.var_38E4);
-  self.var_00B9 method_8278(self.var_38E4);
+  self.var_B9 method_8278(self.var_38E4);
   var_02 = 0;
   if(isDefined(self.var_9A8E)) {
     var_03 = getnotetracktimes(level.var_943B.var_38E6[self.var_38E4], "drop_tool");
@@ -197,7 +197,7 @@ func_9448() {
     }
 
     killfxontag(common_scripts\utility::func_44F5("temp_straub_radius"), self.var_18A8, "J_MainRoot");
-    self.var_00B9 delete();
+    self.var_B9 delete();
     if(isDefined(self.var_9A8E)) {
       self.var_9A8E delete();
     }
@@ -209,7 +209,7 @@ func_9448() {
 
 func_943F() {
   self endon("straub_destroyed");
-  level.var_943B.var_241F.var_0116 = self.var_18A8.var_0116;
+  level.var_943B.var_241F.origin = self.var_18A8.origin;
   level.var_943B.var_241F linkTo(self.var_18A8, "tag_origin", (0, 0, 32), (0, 0, 0));
   level.var_943B.var_241F setCanDamage(1);
   level.var_943B.var_241F thread maps\mp\gametypes\_damage::func_8676(1, undefined, ::func_9440, ::func_943E);
@@ -218,7 +218,7 @@ func_943F() {
 func_943E(param_00, param_01, param_02, param_03) {
   thread func_9449();
   if(isDefined(param_00) && isPlayer(param_00)) {
-    param_00 maps\mp\gametypes\zombies::func_47C8("ZM_STRAUB");
+    param_00 maps / mp / gametypes / zombies::func_47C8("ZM_STRAUB");
   }
 
   return 0;
@@ -226,7 +226,7 @@ func_943E(param_00, param_01, param_02, param_03) {
 
 func_9449() {
   if(!common_scripts\utility::func_562E(self.var_299E)) {
-    playFX(common_scripts\utility::func_44F5("temp_straub_radius"), self.var_0116 + (0, 0, 32));
+    playFX(common_scripts\utility::func_44F5("temp_straub_radius"), self.origin + (0, 0, 32));
     self.var_299E = 1;
     wait(0.25);
     self.var_299E = 0;
@@ -234,7 +234,7 @@ func_9449() {
 }
 
 func_9440(param_00, param_01, param_02, param_03) {
-  playFX(common_scripts\utility::func_44F5("temp_straub_radius"), self.var_0116 + (0, 0, 48));
+  playFX(common_scripts\utility::func_44F5("temp_straub_radius"), self.origin + (0, 0, 48));
 }
 
 func_944A() {
@@ -265,7 +265,7 @@ func_9444(param_00) {
 func_9441(param_00) {
   var_01 = self.var_5EB4 - param_00 getEye();
   var_02 = vectorNormalize((var_01[0], var_01[1], 0));
-  var_03 = anglesToForward(param_00.var_001D);
+  var_03 = anglesToForward(param_00.angles);
   var_04 = vectorNormalize((var_03[0], var_03[1], 0));
   var_05 = vectordot(var_02, var_04);
   var_05 = clamp(var_05, -1, 1);
@@ -283,7 +283,7 @@ func_943C(param_00) {
     return 0;
   }
 
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(param_00 func_9444(var_02)) {
       return 1;
     }
@@ -298,11 +298,11 @@ func_9447() {
   level.var_6DD7 = [];
   level.var_6DD6 = [];
   foreach(var_01 in level.var_6DD4) {
-    if(!isDefined(var_01.var_0165)) {
+    if(!isDefined(var_01.script_noteworthy)) {
       continue;
     }
 
-    var_02 = var_01.var_0165;
+    var_02 = var_01.script_noteworthy;
     switch (var_02) {
       case "bunker_speaker":
         level.var_6DD5[level.var_6DD5.size] = var_01;
@@ -341,7 +341,7 @@ func_9447() {
 
 func_09EF(param_00, param_01, param_02, param_03) {
   self.var_5D99[param_00] = spawnStruct();
-  self.var_5D99[param_00].var_0BB4 = param_01;
+  self.var_5D99[param_00].var_BB4 = param_01;
   self.var_5D99[param_00].var_3511 = param_02;
   self.var_5D99[param_00].var_3DD3 = param_03;
   if(!issubstr(param_00, "_2") && !issubstr(param_00, "_3") && !issubstr(param_00, "_4")) {
@@ -351,12 +351,12 @@ func_09EF(param_00, param_01, param_02, param_03) {
 
 func_7CFC(param_00) {
   if(!issubstr(param_00, "_2") && !issubstr(param_00, "_3") && !issubstr(param_00, "_4")) {
-    level.var_943B.var_13B1 = common_scripts\utility::func_0F93(level.var_943B.var_13B1, param_00);
+    level.var_943B.var_13B1 = common_scripts\utility::func_F93(level.var_943B.var_13B1, param_00);
   }
 }
 
 func_46B3(param_00) {
-  var_01 = level.var_943B.var_5D99[param_00].var_0BB4;
+  var_01 = level.var_943B.var_5D99[param_00].var_BB4;
   var_02 = level.var_943B.var_5D99[param_00].var_3511;
   var_03 = undefined;
   if(isDefined(level.var_943B.var_5D99[param_00].var_3DD3)) {
@@ -395,10 +395,10 @@ func_74E2(param_00, param_01) {
       if(func_943C(level.var_943B.var_2913)) {
         return;
       } else if(isDefined(level.var_943B.var_2913.var_18A8)) {
-        level.var_943B.var_2913.var_18A8 method_805C();
-        level.var_943B.var_2913.var_00B9 method_805C();
+        level.var_943B.var_2913.var_18A8 hide();
+        level.var_943B.var_2913.var_B9 hide();
         if(isDefined(level.var_943B.var_2913.var_9A8E)) {
-          level.var_943B.var_2913.var_9A8E method_805C();
+          level.var_943B.var_2913.var_9A8E hide();
         }
       }
     }
@@ -479,10 +479,10 @@ func_74E2(param_00, param_01) {
 
   if(level.var_943B.var_50D6) {
     if(isDefined(level.var_943B.var_2913) && isDefined(level.var_943B.var_2913.var_18A8)) {
-      level.var_943B.var_2913.var_18A8 method_805B();
-      level.var_943B.var_2913.var_00B9 method_805B();
+      level.var_943B.var_2913.var_18A8 show();
+      level.var_943B.var_2913.var_B9 show();
       if(isDefined(level.var_943B.var_2913.var_9A8E)) {
-        level.var_943B.var_2913.var_9A8E method_805B();
+        level.var_943B.var_2913.var_9A8E show();
         return;
       }
     }

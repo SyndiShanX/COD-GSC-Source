@@ -3,7 +3,7 @@
  * Script: maps\mp\bots\_bots_loadout.gsc
 *********************************************/
 
-func_00D5() {
+init() {
   func_51B7();
   func_523A();
   func_526C();
@@ -156,7 +156,7 @@ func_1A68(param_00, param_01, param_02) {
   var_05 = "";
   switch (param_00) {
     case "weapon":
-      var_05 = maps\mp\_utility::func_472A(param_01);
+      var_05 = maps\mp\_utility::getweaponclass(param_01);
       break;
 
     case "attachment":
@@ -191,7 +191,7 @@ func_1A68(param_00, param_01, param_02) {
 func_1A5A(param_00) {
   var_01 = 0;
   var_02 = ["veteran", "hardened", "regular", "recruit"];
-  var_02 = common_scripts\utility::func_0F92(var_02);
+  var_02 = common_scripts\utility::func_F92(var_02);
   foreach(var_04 in var_02) {
     var_01 = func_1A61("weap_statstable", param_00, "loadoutPrimaryGUID", self.var_6F7D, var_04);
     if(var_01 != 0) {
@@ -200,7 +200,7 @@ func_1A5A(param_00) {
   }
 
   if(isDefined(level.var_1A91)) {
-    var_06 = common_scripts\utility::func_0F92(level.var_1A91);
+    var_06 = common_scripts\utility::func_F92(level.var_1A91);
     foreach(var_08 in var_06) {
       foreach(var_04 in var_02) {
         var_01 = func_1A61("weap_statstable", param_00, "loadoutPrimaryGUID", var_08, var_04);
@@ -241,11 +241,11 @@ func_1A5A(param_00) {
 }
 
 func_1A6C() {
-  if(!isDefined(level.var_984D) || !level.var_984D) {
+  if(!isDefined(level.teambased) || !level.teambased) {
     return "allies";
   }
 
-  return maps\mp\bots\_bots::func_19FD();
+  return maps / mp / bots / _bots::func_19FD();
 }
 
 func_199C() {
@@ -279,7 +279,7 @@ func_1A97(param_00) {
     if(isDefined(var_02)) {
       var_03 = strtok(var_02, "| ");
       if(var_03.size > 0) {
-        maps\mp\bots\_bots_util::func_1AD5(common_scripts\utility::func_7A33(var_03));
+        maps / mp / bots / _bots_util::func_1AD5(common_scripts\utility::func_7A33(var_03));
         return;
       }
     }
@@ -389,7 +389,7 @@ func_1B1A(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     var_07[var_07.size] = param_06;
   }
 
-  var_0A = maps\mp\_utility::func_4723(var_08);
+  var_0A = maps\mp\_utility::getweaponattachmentfromstats(var_08);
   for(var_0B = var_09; var_0B < var_07.size; var_0B++) {
     var_0C = maps\mp\_utility::func_1150(var_07[var_0B]);
     if(var_0C != var_07[var_0B]) {
@@ -400,7 +400,7 @@ func_1B1A(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
       return 0;
     }
 
-    if(!common_scripts\utility::func_0F79(var_0A, var_07[var_0B])) {
+    if(!common_scripts\utility::func_F79(var_0A, var_07[var_0B])) {
       return 0;
     }
 
@@ -409,7 +409,7 @@ func_1B1A(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
       if(var_07[var_0B] == var_07[var_0E]) {
         var_0D++;
         if(var_0D == 1) {
-          if(!isDefined(level.var_0C1A[var_07[var_0B]])) {
+          if(!isDefined(level.var_C1A[var_07[var_0B]])) {
             return 0;
           }
         } else if(var_0D > 1) {
@@ -689,10 +689,10 @@ func_1A5E(param_00, param_01) {
       break;
 
     case "loadoutOffhandGUID":
-      return maps\mp\gametypes\_class::func_9587(level.var_2324, var_03);
+      return maps\mp\gametypes\_class::func_9587(level.var_2324, var_02);
 
     case "loadoutOffhandNumExtra":
-      var_04 = maps\mp\gametypes\_class::func_9588(level.var_2324, var_03);
+      var_04 = maps\mp\gametypes\_class::func_9588(level.var_2324, var_02);
       if(function_030D(var_04) || isstringinteger(var_04)) {
         return var_04;
       } else {
@@ -702,16 +702,16 @@ func_1A5E(param_00, param_01) {
       break;
 
     case "loadoutStreakGUID1":
-      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_04, 0);
+      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_02, 0);
 
     case "loadoutStreakGUID2":
-      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_04, 1);
+      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_02, 1);
 
     case "loadoutStreakGUID3":
-      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_04, 2);
+      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_02, 2);
 
     case "loadoutStreakGUID4":
-      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_04, 3);
+      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_02, 3);
 
     case "loadoutPerkGUID3":
     case "loadoutPerkGUID2":
@@ -722,11 +722,11 @@ func_1A5E(param_00, param_01) {
     case "loadoutPerkGUID6":
     case "loadoutPerkGUID5":
     case "loadoutPerkGUID4":
-      var_05 = int(getsubstr(var_03, 15)) - 1;
-      return maps\mp\gametypes\_class::func_9589(level.var_2324, var_04, var_05);
+      var_05 = int(getsubstr(param_01, 15)) - 1;
+      return maps\mp\gametypes\_class::func_9589(level.var_2324, var_02, var_05);
   }
 
-  return var_03;
+  return param_01;
 }
 
 func_1A5D(param_00, param_01) {
@@ -894,7 +894,7 @@ func_516F() {
           level.var_193C[var_06] = [];
         }
 
-        if(!common_scripts\utility::func_0F79(level.var_193C[var_06], var_01)) {
+        if(!common_scripts\utility::func_F79(level.var_193C[var_06], var_01)) {
           var_07 = level.var_193C[var_06].size;
           level.var_193C[var_06][var_07] = var_01;
         }
@@ -905,7 +905,7 @@ func_516F() {
   }
 
   level.var_1A24 = [];
-  level.var_0C1A = [];
+  level.var_C1A = [];
   var_09 = 0;
   for(;;) {
     var_09++;
@@ -924,7 +924,7 @@ func_516F() {
 
       if(var_0B == var_0A) {
         if(tablelookupbyrow("mp/attachmentcombos_mtx12.csv", var_00, var_09) != "no") {
-          level.var_0C1A[var_0B] = 1;
+          level.var_C1A[var_0B] = 1;
         }
 
         continue;
@@ -995,7 +995,7 @@ func_1A5F(param_00, param_01, param_02, param_03, param_04) {
     }
   }
 
-  return var_06;
+  return var_05;
 }
 
 func_5170() {
@@ -1042,7 +1042,7 @@ func_1A5C(param_00, param_01, param_02, param_03, param_04) {
     }
   }
 
-  return var_06;
+  return var_05;
 }
 
 func_1A69(param_00, param_01, param_02) {
@@ -1065,7 +1065,7 @@ func_1A69(param_00, param_01, param_02) {
   }
 
   if(!isDefined(self.var_7A66)) {
-    self.var_7A66 = self.var_012C["rank"];
+    self.var_7A66 = self.pers["rank"];
     if(!isDefined(self.var_7A66)) {
       self.var_7A66 = level.var_1ABA[param_02][0];
     }
@@ -1116,8 +1116,8 @@ func_1A6D(param_00, param_01, param_02, param_03) {
 
     case "loadoutPrimaryGUID":
       var_05 = param_03;
-      if(maps\mp\_utility::func_5856(var_05)) {
-        var_05 = maps\mp\gametypes\_class::func_4432(var_05);
+      if(maps\mp\_utility::islootweapon(var_05)) {
+        var_05 = maps\mp\gametypes\_class::getbasefromlootversion(var_05);
       }
 
       var_04 = func_1A68("weapon", var_05, undefined);
@@ -1207,8 +1207,8 @@ func_1A6D(param_00, param_01, param_02, param_03) {
 
       var_04 = param_03 != maps\mp\_utility::func_452B(param_01["loadoutPrimaryGUID"]);
       var_05 = param_03;
-      if(maps\mp\_utility::func_5856(var_05)) {
-        var_05 = maps\mp\gametypes\_class::func_4432(var_05);
+      if(maps\mp\_utility::islootweapon(var_05)) {
+        var_05 = maps\mp\gametypes\_class::getbasefromlootversion(var_05);
       }
 
       var_04 = var_04 && func_1A68("weapon", var_05, undefined);
@@ -1275,7 +1275,7 @@ func_1A6D(param_00, param_01, param_02, param_03) {
     case "loadoutStreakGUID3":
     case "loadoutStreakGUID2":
     case "loadoutStreakGUID1":
-      var_04 = maps\mp\bots\_bots_ks::func_1A49(param_03, "bots", undefined);
+      var_04 = maps / mp / bots / _bots_ks::func_1A49(param_03, "bots", undefined);
       var_04 = var_04 && func_1A68("killstreak", param_03, undefined);
       break;
 
@@ -1309,7 +1309,7 @@ func_1A60(param_00, param_01, param_02, param_03, param_04) {
   var_06 = undefined;
   var_07 = undefined;
   var_08 = 0;
-  if(common_scripts\utility::func_0F79(param_00, "specialty_null")) {
+  if(common_scripts\utility::func_F79(param_00, "specialty_null")) {
     var_05 = "specialty_null";
   } else if(param_03 == "loadoutEquipmentGUID" || param_03 == "loadoutOffhandGUID" || issubstr(tolower(param_03), "perk")) {
     var_05 = "specialty_null";
@@ -1435,7 +1435,7 @@ func_1A62(param_00) {
 func_1A65() {
   var_00 = self botgetdifficulty();
   if(var_00 == "default") {
-    maps\mp\bots\_bots_util::func_1AD3("default");
+    maps / mp / bots / _bots_util::func_1AD3("default");
     var_00 = self botgetdifficulty();
   }
 
@@ -1443,8 +1443,8 @@ func_1A65() {
 }
 
 func_19FF() {
-  if(isDefined(self.var_012C["botCustomClasses"])) {
-    return self.var_012C["botCustomClasses"];
+  if(isDefined(self.pers["botCustomClasses"])) {
+    return self.pers["botCustomClasses"];
   }
 
   return [];
@@ -1452,9 +1452,9 @@ func_19FF() {
 
 func_1A00() {
   if(func_19FF().size > 0) {
-    if(isDefined(self.var_012C["botLauncherClassIndex"])) {
-      var_00 = self.var_012C["botLauncherClassIndex"];
-      return self.var_012C["botCustomClasses"][var_00];
+    if(isDefined(self.pers["botLauncherClassIndex"])) {
+      var_00 = self.pers["botLauncherClassIndex"];
+      return self.pers["botCustomClasses"][var_00];
     }
   }
 
@@ -1464,7 +1464,7 @@ func_1A00() {
 func_1936() {
   if(common_scripts\utility::func_562E(self.var_1A95)) {
     return 0;
-  } else if(!isDefined(self.var_012C["botLastLoadout"])) {
+  } else if(!isDefined(self.pers["botLastLoadout"])) {
     return 0;
   } else if(common_scripts\utility::func_562E(self.var_7DB2)) {
     return 0;
@@ -1493,17 +1493,17 @@ func_1A63(param_00) {
   }
 
   self.var_1A56 = self.var_1994;
-  if(isDefined(self.var_012C["botLastLoadout"]) && common_scripts\utility::func_562E(param_00)) {
-    return self.var_012C["botLastLoadout"];
+  if(isDefined(self.pers["botLastLoadout"]) && common_scripts\utility::func_562E(param_00)) {
+    return self.pers["botLastLoadout"];
   }
 
-  var_04 = !isDefined(self.var_012C["botLastLoadoutDifficulty"]) || self.var_012C["botLastLoadoutDifficulty"] == var_02;
-  var_05 = !isDefined(self.var_012C["botLastLoadoutPersonality"]) || self.var_012C["botLastLoadoutPersonality"] == var_03;
+  var_04 = !isDefined(self.pers["botLastLoadoutDifficulty"]) || self.pers["botLastLoadoutDifficulty"] == var_02;
+  var_05 = !isDefined(self.pers["botLastLoadoutPersonality"]) || self.pers["botLastLoadoutPersonality"] == var_03;
   var_06 = 0;
   if(!var_04 || !var_05) {
-    self.var_012C["botLastLoadout"] = undefined;
-    self.var_012C["botCustomClasses"] = undefined;
-    self.var_012C["botLauncherClassIndex"] = undefined;
+    self.pers["botLastLoadout"] = undefined;
+    self.pers["botCustomClasses"] = undefined;
+    self.pers["botLauncherClassIndex"] = undefined;
     var_06 = 1;
   }
 
@@ -1512,7 +1512,7 @@ func_1A63(param_00) {
     var_08 = 0.1;
     var_0A = randomfloat(1) > var_08;
     if(var_0A) {
-      return self.var_012C["botLastLoadout"];
+      return self.pers["botLastLoadout"];
     }
   }
 
@@ -1544,74 +1544,74 @@ func_1A63(param_00) {
       }
     }
 
-    if(isDefined(var_0E)) {
+    if(isDefined(var_0C)) {
       self.var_1994++;
-      self.var_012C["botLastLoadout"] = var_0E;
-      return var_0E;
+      self.pers["botLastLoadout"] = var_0C;
+      return var_0C;
     }
   }
 
   var_0F = undefined;
   var_10 = func_1995();
   if(var_10) {
-    var_0F = func_1A6A(var_07, var_06);
-    var_05 = func_1A62(var_0F);
+    var_0F = func_1A6A(var_03, var_02);
+    var_01 = func_1A62(var_0F);
     if(isDefined(level.var_19D5["gametype_loadout_modify"])) {
-      var_05 = self[[level.var_19D5["gametype_loadout_modify"]]](var_05);
+      var_01 = self[[level.var_19D5["gametype_loadout_modify"]]](var_01);
     }
 
-    if(func_1A78(var_05)) {
+    if(func_1A78(var_01)) {
       var_10 = 0;
     }
   }
 
   if(!var_10) {
-    var_05 = func_199C();
-    func_1A97(var_05["loadoutPrimaryGUID"]);
+    var_01 = func_199C();
+    func_1A97(var_01["loadoutPrimaryGUID"]);
   }
 
-  if(var_05["loadoutPrimaryGUID"] == 0) {
+  if(var_01["loadoutPrimaryGUID"] == 0) {
     self.var_19C2 = undefined;
-    var_05["loadoutPrimaryGUID"] = func_1A5A(var_05);
-    var_05["loadoutPrimaryCamoGUID"] = 0;
-    var_05["loadoutPrimaryAttachmentGUID1"] = 0;
-    var_05["loadoutPrimaryAttachmentGUID2"] = 0;
-    var_05["loadoutPrimaryAttachmentGUID3"] = 0;
-    var_05["loadoutPrimaryReticleGUID"] = 0;
-    var_05["loadoutPrimaryPaintjobId"] = 0;
-    var_05["loadoutPrimaryCharmGUID"] = 0;
+    var_01["loadoutPrimaryGUID"] = func_1A5A(var_01);
+    var_01["loadoutPrimaryCamoGUID"] = 0;
+    var_01["loadoutPrimaryAttachmentGUID1"] = 0;
+    var_01["loadoutPrimaryAttachmentGUID2"] = 0;
+    var_01["loadoutPrimaryAttachmentGUID3"] = 0;
+    var_01["loadoutPrimaryReticleGUID"] = 0;
+    var_01["loadoutPrimaryPaintjobId"] = 0;
+    var_01["loadoutPrimaryCharmGUID"] = 0;
     if(isDefined(self.var_19C2)) {
       if(self.var_19C2 == "weapon") {
-        func_1A97(var_05["loadoutPrimaryGUID"]);
+        func_1A97(var_01["loadoutPrimaryGUID"]);
       } else {
-        maps\mp\bots\_bots_util::func_1AD5(self.var_19C2);
+        maps / mp / bots / _bots_util::func_1AD5(self.var_19C2);
       }
 
-      var_07 = self.var_6F7D;
+      var_03 = self.var_6F7D;
       self.var_19C2 = undefined;
     }
   }
 
   var_14 = isDefined(self.var_7DB2);
-  if(var_10 && maps\mp\bots\_bots::func_1A39()) {
-    if(isDefined(var_05["loadoutPrimaryCamoGUID"]) && var_05["loadoutPrimaryCamoGUID"] != 0 && !isDefined(self.var_1B34)) {
-      self.var_1B34 = var_05["loadoutPrimaryCamoGUID"];
+  if(var_10 && maps / mp / bots / _bots::func_1A39()) {
+    if(isDefined(var_01["loadoutPrimaryCamoGUID"]) && var_01["loadoutPrimaryCamoGUID"] != 0 && !isDefined(self.var_1B34)) {
+      self.var_1B34 = var_01["loadoutPrimaryCamoGUID"];
     }
 
-    if(isDefined(var_05["loadoutSecondaryCamoGUID"]) && var_05["loadoutSecondaryCamoGUID"] != 0 && !isDefined(self.var_1B35)) {
-      self.var_1B35 = var_05["loadoutSecondaryCamoGUID"];
+    if(isDefined(var_01["loadoutSecondaryCamoGUID"]) && var_01["loadoutSecondaryCamoGUID"] != 0 && !isDefined(self.var_1B35)) {
+      self.var_1B35 = var_01["loadoutSecondaryCamoGUID"];
     }
 
     if(var_14) {
       var_15 = level.var_1AB6[self botgetdifficulty()];
       if(func_1A68("weapon", var_15, undefined)) {
-        var_05["loadoutSecondaryGUID"] = var_15;
-        var_05["loadoutSecondaryAttachmentGUID1"] = 0;
-        var_05["loadoutSecondaryAttachmentGUID2"] = 0;
-        var_05["loadoutSecondaryAttachmentGUID3"] = 0;
-        var_05["loadoutSecondaryAttachmentGUID4"] = 0;
-        var_05["loadoutSecondaryAttachmentGUID5"] = 0;
-        var_05["loadoutSecondaryAttachmentGUID6"] = 0;
+        var_01["loadoutSecondaryGUID"] = var_15;
+        var_01["loadoutSecondaryAttachmentGUID1"] = 0;
+        var_01["loadoutSecondaryAttachmentGUID2"] = 0;
+        var_01["loadoutSecondaryAttachmentGUID3"] = 0;
+        var_01["loadoutSecondaryAttachmentGUID4"] = 0;
+        var_01["loadoutSecondaryAttachmentGUID5"] = 0;
+        var_01["loadoutSecondaryAttachmentGUID6"] = 0;
         self.var_1A95 = 1;
       }
 
@@ -1619,37 +1619,37 @@ func_1A63(param_00) {
     }
   }
 
-  maps\mp\gametypes\_class::func_582D(var_05["loadoutStreakGUID1"]);
-  maps\mp\gametypes\_class::func_582D(var_05["loadoutStreakGUID2"]);
-  maps\mp\gametypes\_class::func_582D(var_05["loadoutStreakGUID3"]);
-  var_05["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::func_473C(var_05["loadoutPrimaryGUID"], 0);
-  var_05["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::func_473C(var_05["loadoutSecondaryGUID"], 0);
-  var_05["loadoutEquipmentStruct"] = maps\mp\_utility::func_44CE(var_05["loadoutEquipmentGUID"], 0);
-  var_05["loadoutEquipmentNumExtra"] = int(var_05["loadoutEquipmentNumExtra"]);
-  var_05["loadoutOffhandStruct"] = maps\mp\_utility::func_44CE(var_05["loadoutOffhandGUID"], 0);
-  var_05["loadoutOffhandNumExtra"] = int(var_05["loadoutOffhandNumExtra"]);
-  var_05["loadoutPrimaryAttachmentsGUID"] = [];
-  var_05["loadoutSecondaryAttachmentsGUID"] = [];
+  maps\mp\gametypes\_class::func_582D(var_01["loadoutStreakGUID1"]);
+  maps\mp\gametypes\_class::func_582D(var_01["loadoutStreakGUID2"]);
+  maps\mp\gametypes\_class::func_582D(var_01["loadoutStreakGUID3"]);
+  var_01["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::func_473C(var_01["loadoutPrimaryGUID"], 0);
+  var_01["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::func_473C(var_01["loadoutSecondaryGUID"], 0);
+  var_01["loadoutEquipmentStruct"] = maps\mp\_utility::func_44CE(var_01["loadoutEquipmentGUID"], 0);
+  var_01["loadoutEquipmentNumExtra"] = int(var_01["loadoutEquipmentNumExtra"]);
+  var_01["loadoutOffhandStruct"] = maps\mp\_utility::func_44CE(var_01["loadoutOffhandGUID"], 0);
+  var_01["loadoutOffhandNumExtra"] = int(var_01["loadoutOffhandNumExtra"]);
+  var_01["loadoutPrimaryAttachmentsGUID"] = [];
+  var_01["loadoutSecondaryAttachmentsGUID"] = [];
   for(var_16 = 0; var_16 < 6; var_16++) {
-    var_05["loadoutPrimaryAttachmentsGUID"][var_16] = var_05["loadoutPrimaryAttachmentGUID" + var_16 + 1];
-    var_05["loadoutSecondaryAttachmentsGUID"][var_16] = var_05["loadoutSecondaryAttachmentGUID" + var_16 + 1];
+    var_01["loadoutPrimaryAttachmentsGUID"][var_16] = var_01["loadoutPrimaryAttachmentGUID" + var_16 + 1];
+    var_01["loadoutSecondaryAttachmentsGUID"][var_16] = var_01["loadoutSecondaryAttachmentGUID" + var_16 + 1];
   }
 
   self.var_1994++;
-  self.var_012C["botLastLoadout"] = var_05;
-  self.var_012C["botLastLoadoutDifficulty"] = var_06;
-  self.var_012C["botLastLoadoutPersonality"] = var_07;
-  if(!isDefined(self.var_012C["botCustomClasses"])) {
-    self.var_012C["botCustomClasses"] = [];
+  self.pers["botLastLoadout"] = var_01;
+  self.pers["botLastLoadoutDifficulty"] = var_02;
+  self.pers["botLastLoadoutPersonality"] = var_03;
+  if(!isDefined(self.pers["botCustomClasses"])) {
+    self.pers["botCustomClasses"] = [];
   }
 
-  var_17 = self.var_012C["botCustomClasses"].size;
-  self.var_012C["botCustomClasses"][var_17] = var_05;
+  var_17 = self.pers["botCustomClasses"].size;
+  self.pers["botCustomClasses"][var_17] = var_01;
   if(var_14) {
-    self.var_012C["botLauncherClassIndex"] = var_17;
+    self.pers["botLauncherClassIndex"] = var_17;
   }
 
-  return var_05;
+  return var_01;
 }
 
 func_1A78(param_00) {
@@ -1671,7 +1671,7 @@ func_1ADE() {
     return 1;
   }
 
-  var_03 = getsubstr(self.var_0109, 0, self.var_0109.size - 10);
+  var_03 = getsubstr(self.name, 0, self.name.size - 10);
   self.var_231D = undefined;
   return 0;
 }

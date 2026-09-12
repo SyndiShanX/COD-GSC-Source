@@ -3,7 +3,7 @@
  * Script: maps\createfx\mp_zombie_descent_fx.gsc
 **************************************************/
 
-func_00F9() {
+main() {
   var_00 = common_scripts\utility::func_281B("fx_sunflare_zombie_descent_dlc4");
   var_00 common_scripts\_createfx::func_8543((-14247, 2847.06, 80.1415), (270, 0, 0));
   var_00.var_A265["fxid"] = "fx_sunflare_zombie_descent_dlc4";

@@ -41,10 +41,10 @@ do_damage(param_00) {
   for(;;) {
     param_00 waittill("trigger", var_01);
     if(isPlayer(var_01)) {
-      var_01 dodamage(15, self.var_116, param_00, param_00, "MOD_EXPLOSIVE", "trap_zm_mp");
+      var_01 dodamage(15, self.origin, param_00, param_00, "MOD_EXPLOSIVE", "trap_zm_mp");
     } else {
       var_01 maps\mp\zombies\_zombies_traps::mark_electrified();
-      var_01 dodamage(var_01.var_BC + 666, self.var_116, param_00, param_00, "MOD_EXPLOSIVE", "trap_zm_mp");
+      var_01 dodamage(var_01.health + 666, self.origin, param_00, param_00, "MOD_EXPLOSIVE", "trap_zm_mp");
       var_01 lib_0378::func_8D74("trap_tank_damage");
     }
 
@@ -62,7 +62,7 @@ trap_puddle_arcs() {
 trap_puddle_current() {
   self endon("stop_fx");
   for(;;) {
-    playFX(level.var_611["cage_trap_current"], self.var_116);
+    playFX(level.var_611["cage_trap_current"], self.origin);
     wait(randomfloatrange(0.2, 0.5));
   }
 }

@@ -3,24 +3,24 @@
  * Script: 1339.gsc
 *********************************************/
 
-lib_053B::func_00D5() {
+init() {
   self.var_983B = 0;
-  level.var_0611["taunt_burst_aoe"] = loadfx("vfx/zombie/abilities_perks\zmb_storm_taunt_aoe");
-  level.var_0611["taunt_lure"] = loadfx("vfx/zombie/abilities_perks\zmb_storm_zmb_lure");
-  level.var_0611["zmb_moon_zmb_instakill"] = loadfx("vfx/zombie/abilities_perks\zmb_moon_zmb_instakill");
-  level.var_0611["zmb_death_hand_to_hand_melee_hit"] = loadfx("vfx/zombie/abilities_perks\zmb_death_hand_to_hand_melee_hit");
+  level.var_611["taunt_burst_aoe"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_taunt_aoe");
+  level.var_611["taunt_lure"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_zmb_lure");
+  level.var_611["zmb_moon_zmb_instakill"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_zmb_instakill");
+  level.var_611["zmb_death_hand_to_hand_melee_hit"] = loadfx("vfx/zombie/abilities_perks/zmb_death_hand_to_hand_melee_hit");
 }
 
-lib_053B::func_3662() {
+func_3662() {
   maps\mp\zombies\_zombies_roles::func_6AB2("role_ability_taunt_zm");
   self.var_983B = 1;
-  var_00 = self.var_0116;
+  var_00 = self.origin;
   var_01 = 0;
   playFX(common_scripts\utility::func_44F5("taunt_burst_aoe"), var_00 + (0, 0, var_01));
   lib_0378::func_8D74("aud_taunt_use");
   var_02 = lib_0547::func_408F();
   foreach(var_04 in var_02) {
-    thread lib_053B::func_983E(var_04);
+    thread func_983E(var_04);
   }
 
   if(lib_0547::func_4BA7("specialty_class_improvised_def_zm")) {
@@ -33,7 +33,7 @@ lib_053B::func_3662() {
   }
 
   if(lib_0547::func_4BA7("specialty_class_team_effort_zm")) {
-    foreach(var_08 in level.var_744A) {
+    foreach(var_08 in level.players) {
       if(var_08 == self) {
         continue;
       }
@@ -42,10 +42,10 @@ lib_053B::func_3662() {
     }
   }
 
-  thread lib_053B::func_A95A();
+  thread func_A95A();
 }
 
-lib_053B::func_2F9E() {
+func_2F9E() {
   if(common_scripts\utility::func_562E(self.var_983B)) {
     self notify("taunt_expired");
     self.var_983B = 0;
@@ -54,7 +54,7 @@ lib_053B::func_2F9E() {
     }
 
     if(lib_0547::func_4BA7("specialty_class_team_effort_zm")) {
-      foreach(var_01 in level.var_744A) {
+      foreach(var_01 in level.players) {
         if(var_01 == self) {
           continue;
         }
@@ -65,7 +65,7 @@ lib_053B::func_2F9E() {
   }
 }
 
-lib_053B::func_983E(param_00) {
+func_983E(param_00) {
   if(common_scripts\utility::func_562E(param_00.var_57FD)) {
     return;
   }
@@ -73,16 +73,16 @@ lib_053B::func_983E(param_00) {
   param_00 endon("death");
   self endon("disconnect");
   thread handlezombietauntfx(param_00, "taunt_lure", "J_Spine4", 1.5);
-  param_00 maps\mp\agents\humanoid\_humanoid_util::func_867E(self);
+  param_00 maps / mp / agents / humanoid / _humanoid_util::func_867E(self);
   param_00 notify("watchFavoriteEnemyDeath");
   if(!isDefined(param_00.var_983C)) {
     param_00.var_983C = [];
   }
 
-  param_00.var_983C = common_scripts\utility::func_0F6F(param_00.var_983C, self);
-  common_scripts\utility::func_A70A("taunt_expired", "disconnect");
-  param_00 maps\mp\agents\humanoid\_humanoid_util::func_867E(undefined);
-  param_00.var_983C = common_scripts\utility::func_0F93(param_00.var_983C, self);
+  param_00.var_983C = common_scripts\utility::func_F6F(param_00.var_983C, self);
+  common_scripts\utility::waittill_any("taunt_expired", "disconnect");
+  param_00 maps / mp / agents / humanoid / _humanoid_util::func_867E(undefined);
+  param_00.var_983C = common_scripts\utility::func_F93(param_00.var_983C, self);
 }
 
 handlezombietauntfx(param_00, param_01, param_02, param_03) {
@@ -103,15 +103,15 @@ handlezombietauntfx(param_00, param_01, param_02, param_03) {
   }
 }
 
-lib_053B::func_A95A() {
+func_A95A() {
   self endon("taunt_expired");
   for(;;) {
     level waittill("zombie_spawned", var_00);
-    thread lib_053B::func_983E(var_00);
+    thread func_983E(var_00);
   }
 }
 
-lib_053B::func_62A6(param_00, param_01, param_02) {
+func_62A6(param_00, param_01, param_02) {
   var_03 = 1;
   if(!common_scripts\utility::func_562E(self.var_57FD) && isDefined(self.var_983C)) {
     foreach(var_05 in self.var_983C) {
@@ -129,7 +129,7 @@ lib_053B::func_62A6(param_00, param_01, param_02) {
       }
     }
 
-    if(maps\mp\_utility::func_5755(param_02) && common_scripts\utility::func_562E(param_01.var_983B) && param_01 lib_0547::func_4BA7("specialty_class_come_get_zm")) {
+    if(maps\mp\_utility::ismeleemod(param_02) && common_scripts\utility::func_562E(param_01.var_983B) && param_01 lib_0547::func_4BA7("specialty_class_come_get_zm")) {
       var_03 = var_03 * 4;
       thread play_crit_melee_effects();
       param_01 luinotifyeventextraplayer(&"trigger_mod_proc", 1, "specialty_class_come_get_zm");
@@ -149,19 +149,19 @@ play_crit_melee_effects() {
     return;
   }
 
-  var_01 = spawnlinkedfx(level.var_0611["zmb_death_hand_to_hand_melee_hit"], var_00, "J_Head");
+  var_01 = spawnlinkedfx(level.var_611["zmb_death_hand_to_hand_melee_hit"], var_00, "J_Head");
   triggerfx(var_01);
   wait(1);
   var_01 delete();
 }
 
-lib_053B::func_6B73(param_00) {
+func_6B73(param_00) {
   if(isDefined(param_00) && isai(param_00) && common_scripts\utility::func_562E(self.var_983B) && lib_0547::func_4BA7("specialty_class_hit_em_hard_zm")) {
-    playFX(level.var_0611["zmb_moon_zmb_instakill"], param_00.var_0116 + (0, 0, 40));
-    var_01 = param_00.var_00BC + 1;
+    playFX(level.var_611["zmb_moon_zmb_instakill"], param_00.origin + (0, 0, 40));
+    var_01 = param_00.health + 1;
     var_02 = 0;
-    if(isDefined(param_00.var_0A4B)) {
-      switch (param_00.var_0A4B) {
+    if(isDefined(param_00.var_A4B)) {
+      switch (param_00.var_A4B) {
         case "zombie_heavy":
         case "zombie_boss_village":
         case "zombie_fireman":
@@ -175,15 +175,15 @@ lib_053B::func_6B73(param_00) {
     }
 
     if(var_02) {
-      var_01 = maps\mp\gametypes\zombies::func_1E59(lib_0547::func_0A51("zombie_generic"), level.var_A980);
+      var_01 = maps / mp / gametypes / zombies::func_1E59(lib_0547::func_A51("zombie_generic"), level.var_A980);
     }
 
-    param_00 thread lib_053B::func_AB11(0.1, var_01, param_00.var_0116, self, undefined, undefined, "hitem_hard_zm");
+    param_00 thread func_AB11(0.1, var_01, param_00.origin, self, undefined, undefined, "hitem_hard_zm");
     self luinotifyeventextraplayer(&"trigger_mod_proc", 1, "specialty_class_hit_em_hard_zm");
   }
 }
 
-lib_053B::func_AB11(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+func_AB11(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   self endon("death");
   if(!isDefined(param_00) || param_00 < 0.05) {
     param_00 = 1;

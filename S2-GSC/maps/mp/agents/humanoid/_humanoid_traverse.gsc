@@ -3,7 +3,7 @@
  * Script: maps\mp\agents\humanoid\_humanoid_traverse.gsc
 **********************************************************/
 
-func_00F9() {
+main() {
   if(!isDefined(level.var_AC6C) || !isDefined(level.var_AC6C["humanoid"])) {
     func_52C7();
   }
@@ -12,16 +12,16 @@ func_00F9() {
 }
 
 func_4232(param_00) {
-  return getmovedelta(param_00, 0, maps\mp\agents\_scripted_agent_anim_util::func_446A(param_00));
+  return getmovedelta(param_00, 0, maps / mp / agents / _scripted_agent_anim_util::func_446A(param_00));
 }
 
 func_4392(param_00, param_01) {
-  if(param_00.var_01B9 == "Begin 3D") {
-    var_02 = param_00.var_0116 + (0, 0, -16);
+  if(param_00.type == "Begin 3D") {
+    var_02 = param_00.origin + (0, 0, -16);
   } else {
-    var_02 = getgroundposition(param_01.var_0116, var_02, 32, 32, 0);
+    var_02 = getgroundposition(param_01.origin, var_02, 32, 32, 0);
     if(!isDefined(var_02)) {
-      var_02 = param_00.var_0116;
+      var_02 = param_00.origin;
     }
   }
 
@@ -35,50 +35,50 @@ func_2CE5(param_00) {
 
 func_32B7() {
   var_00 = self method_8198();
-  var_01 = func_4392(var_00, self.var_014F);
+  var_01 = func_4392(var_00, self.var_14F);
   var_02 = self method_857F();
   self setOrigin(var_01, 0);
-  self.var_001D = var_00.var_001D;
-  var_03 = level.var_AC6C[self.var_90DC][var_00.var_001E];
-  var_04 = self[[maps\mp\agents\_agent_utility::func_0A59("get_action_params")]]();
-  var_05 = maps\mp\agents\_scripted_agent_anim_util::func_087C(var_03, var_04);
+  self.angles = var_00.angles;
+  var_03 = level.var_AC6C[self.var_90DC][var_00.animscript];
+  var_04 = self[[maps / mp / agents / _agent_utility::func_A59("get_action_params")]]();
+  var_05 = maps / mp / agents / _scripted_agent_anim_util::func_87C(var_03, var_04);
   if(!isDefined(var_05)) {
     func_2CE5(self);
     return;
   }
 
-  var_07 = maps\mp\agents\_scripted_agent_anim_util::func_7A35(var_05);
+  var_07 = maps / mp / agents / _scripted_agent_anim_util::func_7A35(var_05);
   var_08 = self method_83D8(var_05, var_07);
   func_62AC(var_00, var_08);
   self endon("killanimscript");
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "DoTraverse");
-  self scragentsetorientmode("face angle abs", var_00.var_001D);
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "DoTraverse");
+  self scragentsetorientmode("face angle abs", var_00.angles);
   self method_839C("anim deltas");
   self method_839D("noclip");
   self method_839A(1, 1);
-  maps\mp\agents\_scripted_agent_anim_util::func_8415(var_05, var_07, self.var_9D0D);
+  maps / mp / agents / _scripted_agent_anim_util::func_8415(var_05, var_07, self.var_9D0D);
   var_09 = getanimlength(var_08);
-  var_0A = maps\mp\agents\_scripted_agent_anim_util::func_446A(var_08);
-  var_0B = transformmove(var_01, var_00.var_001D, (0, 0, 0), (0, 0, 0), getmovedelta(var_08, 0, var_0A), (0, 0, 0));
+  var_0A = maps / mp / agents / _scripted_agent_anim_util::func_446A(var_08);
+  var_0B = transformmove(var_01, var_00.angles, (0, 0, 0), (0, 0, 0), getmovedelta(var_08, 0, var_0A), (0, 0, 0));
   var_0C = (var_0B["origin"][0], var_0B["origin"][1], var_02[2]);
-  var_0D = getgroundposition(var_0C, self.var_014F, 32, 32, 0);
+  var_0D = getgroundposition(var_0C, self.var_14F, 32, 32, 0);
   if(!isDefined(var_0D)) {
     var_0D = var_0B["origin"];
   }
 
   self.var_9D07 = vectorNormalize(var_0D - var_01);
   if(animhasnotetrack(var_08, "traverse_jump_start")) {
-    var_0E = maps\mp\agents\_scripted_agent_anim_util::func_45B9(var_08, "traverse_jump_start");
-    var_0F = maps\mp\agents\_scripted_agent_anim_util::func_45B9(var_08, "traverse_jump_end");
+    var_0E = maps / mp / agents / _scripted_agent_anim_util::func_45B9(var_08, "traverse_jump_start");
+    var_0F = maps / mp / agents / _scripted_agent_anim_util::func_45B9(var_08, "traverse_jump_end");
     wait(var_0E * var_09 / self.var_9D0D);
     var_10 = getmovedelta(var_08, var_0E, var_0F)[2];
     var_11 = getmovedelta(var_08, var_0E, var_0A)[2];
-    var_12 = self.var_0116[2] + var_11;
+    var_12 = self.origin[2] + var_11;
     var_13 = var_12 - var_0D[2];
     if(abs(var_10) < 5) {
       self method_839A(1, 0);
       var_14 = var_0F - var_0E * var_09 / self.var_9D0D;
-      childthread func_9D0A(self.var_0116[2], self.var_0116[2] + var_10 - var_13, var_14);
+      childthread func_9D0A(self.origin[2], self.origin[2] + var_10 - var_13, var_14);
       wait(var_14);
       self method_839A(1, 1);
     } else {
@@ -98,23 +98,23 @@ func_32B7() {
     var_14 = var_0A - var_0F * var_09 / self.var_9D0D;
     wait(var_14);
   } else {
-    var_14 = var_0F * var_10 / self.var_9D0D;
-    wait(var_13);
+    var_14 = var_0A * var_0B / self.var_9D0D;
+    wait(var_14);
   }
 
-  var_1A = getclosestpointonnavmesh(self.var_0116, self);
+  var_1A = getclosestpointonnavmesh(self.origin, self);
   var_1B = self method_857F();
-  if(distance2d(var_1A, self.var_0116) > 4 || abs(var_1A[2] - self.var_0116[2]) > 16) {
-    var_1C = getgroundposition(var_1B, self.var_014F, 32, 32, 1);
+  if(distance2d(var_1A, self.origin) > 4 || abs(var_1A[2] - self.origin[2]) > 16) {
+    var_1C = getgroundposition(var_1B, self.var_14F, 32, 32, 1);
     self setOrigin(var_1C, 0);
-  } else if(distance2d(self.var_0116, var_1B) > 96 || abs(self.var_0116[2] - var_1B[2]) > 16) {
-    var_1C = getgroundposition(getclosestpointonnavmesh(var_1B, self), self.var_014F, 32, 32, 1);
+  } else if(distance2d(self.origin, var_1B) > 96 || abs(self.origin[2] - var_1B[2]) > 16) {
+    var_1C = getgroundposition(getclosestpointonnavmesh(var_1B, self), self.var_14F, 32, 32, 1);
     self setOrigin(var_1C, 0);
   }
 
   self.var_9D0C = gettime();
-  self.var_9D0B = max(0.2, 1 - var_0F * var_0E / self.var_9D0D);
-  self notify("traverse_end", var_07);
+  self.var_9D0B = max(0.2, 1 - var_0A * var_09 / self.var_9D0D);
+  self notify("traverse_end", var_00);
 }
 
 func_62AC(param_00, param_01) {
@@ -125,7 +125,7 @@ func_62AC(param_00, param_01) {
   var_06 = var_05 * 1000;
   var_02 = int(var_06);
   if(animhasnotetrack(param_01, var_04)) {
-    var_07 = maps\mp\agents\_scripted_agent_anim_util::func_45B9(param_01, var_04);
+    var_07 = maps / mp / agents / _scripted_agent_anim_util::func_45B9(param_01, var_04);
     var_02 = int(var_07 * var_06);
   }
 
@@ -158,14 +158,14 @@ func_9D0A(param_00, param_01, param_02) {
     }
 
     var_06 = lerp(param_00, param_01, var_05);
-    self setOrigin((self.var_0116[0], self.var_0116[1], var_06), 0);
+    self setOrigin((self.origin[0], self.origin[1], var_06), 0);
     wait 0.05;
   }
 }
 
 func_0085() {
   self method_839A(1, 1);
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "Traverse end_script");
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "Traverse end_script");
   lib_0547::func_84CB();
   self.var_9D07 = undefined;
 }

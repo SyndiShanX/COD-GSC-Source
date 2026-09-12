@@ -3,30 +3,30 @@
  * Script: maps\mp\killstreaks\_firebomb.gsc
 *********************************************/
 
-func_00D5() {
+init() {
   setdvarifuninitialized("firebomb_debug", 0);
   level.var_80B7["firebomb"] = 230;
   level.var_80B8["firebomb"] = 65;
   level.var_80B6["firebomb"] = -1;
   level.var_80B9["firebomb"] = 6;
   level.var_80B5["firebomb"] = 24;
-  level.var_5A61["firebomb"] = ::func_9E2B;
+  level.killstreakfuncs["firebomb"] = ::func_9E2B;
   level.var_5A7D["firebomb_bomb_mp"] = "firebomb";
   level.var_5A7D["firebomb_bomb_axis_mp"] = "firebomb";
   level.var_5A7D["firebomb_bomb_grenadier_mp"] = "firebomb";
   level.var_5A7D["firebomb_bomb_axis_grenadier_mp"] = "firebomb";
   level.var_5A7D["firebomb_flames_mp"] = "firebomb";
-  level.var_08D5 = 0;
+  level.var_8D5 = 0;
 }
 
 func_9E2B(param_00) {
-  if(isDefined(level.var_08D5) && level.var_08D5 > 0) {
-    self iclientprintlnbold(&"KILLSTREAKS_FIREBOMB_ALREADY_ACTIVE");
+  if(isDefined(level.var_8D5) && level.var_8D5 > 0) {
+    self iprintlnbold(&"KILLSTREAKS_FIREBOMB_ALREADY_ACTIVE");
     return 0;
   }
 
   if(isDefined(self.var_6E6B) && self.var_6E6B) {
-    self iclientprintlnbold(&"KILLSTREAKS_DLC4_CANT_USE_STREAK_WHILE_PARATROOPING");
+    self iprintlnbold(&"KILLSTREAKS_DLC4_CANT_USE_STREAK_WHILE_PARATROOPING");
     return 0;
   }
 
@@ -40,15 +40,15 @@ func_9E2B(param_00) {
 
 func_27EC(param_00) {
   self waittill("death");
-  if(!isDefined(self) || !isDefined(self.var_0116)) {
+  if(!isDefined(self) || !isDefined(self.origin)) {
     return;
   }
 
-  var_01 = self.var_0116;
-  var_02 = self.var_001D;
-  var_03 = self.var_0117;
-  var_04 = self.var_01A7;
-  level.var_08D5++;
+  var_01 = self.origin;
+  var_02 = self.angles;
+  var_03 = self.owner;
+  var_04 = self.team;
+  level.var_8D5++;
   wait(1);
   level thread func_749A(var_01, param_00);
   level thread func_6393(var_01, var_02, var_03, var_04, param_00);
@@ -56,7 +56,7 @@ func_27EC(param_00) {
 
 func_749B(param_00, param_01) {
   var_02 = undefined;
-  var_02 = spawnfx(level.var_0611["fire_bomb_fire"], param_00);
+  var_02 = spawnfx(level.var_611["fire_bomb_fire"], param_00);
   triggerfx(var_02);
   wait(12);
   if(isDefined(var_02)) {
@@ -93,18 +93,18 @@ func_6393(param_00, param_01, param_02, param_03, param_04) {
   }
 
   while(var_06 < var_08) {
-    foreach(var_0A in level.var_744A) {
+    foreach(var_0A in level.players) {
       if(function_0279(var_0A)) {
         continue;
       }
 
-      if(var_0A.var_01A7 != param_03 || (isDefined(param_02) && var_0A == param_02) || isDefined(level.var_4B17) && level.var_4B17) {
+      if(var_0A.team != param_03 || (isDefined(param_02) && var_0A == param_02) || isDefined(level.hardcoremode) && level.hardcoremode) {
         if(!isDefined(var_0A.var_A019)) {
           if(!isDefined(var_0A.var_5B9A) || var_0A.var_5B9A != gettime()) {
             if(func_73E1(var_0A, param_00, var_07)) {
               if(func_740F(var_0A, param_00)) {
                 var_0A.var_5B9A = gettime();
-                var_0A dodamage(40, var_0A.var_0116, param_02, undefined, "MOD_BURNED", "firebomb_flames_mp");
+                var_0A dodamage(40, var_0A.origin, param_02, undefined, "MOD_BURNED", "firebomb_flames_mp");
               }
             }
           }
@@ -116,7 +116,7 @@ func_6393(param_00, param_01, param_02, param_03, param_04) {
     var_06 = gettime() - var_05 / 1000;
   }
 
-  level.var_08D5--;
+  level.var_8D5--;
 }
 
 func_73E1(param_00, param_01, param_02) {
@@ -138,7 +138,7 @@ func_2825(param_00, param_01, param_02) {
   var_03 = spawnStruct();
   var_04 = param_01 * param_02;
   var_05 = vectorcross(param_01, (0, 0, 1)) * param_02;
-  var_03.var_0794 = param_00 + var_04 - var_05;
+  var_03.var_794 = param_00 + var_04 - var_05;
   var_03.var_14C2 = param_00 + var_04 + var_05;
   var_03.var_1DEC = param_00 - var_04 + var_05;
   var_03.var_298F = param_00 - var_04 - var_05;
@@ -146,15 +146,15 @@ func_2825(param_00, param_01, param_02) {
 }
 
 func_740F(param_00, param_01) {
-  if(param_00.var_0116[2] <= param_01[2]) {
-    return bullettracepassed(param_00.var_0116 + (0, 0, 10), (param_00.var_0116[0], param_00.var_0116[1], param_01[2] + 10), 0, param_00) && bullettracepassed(param_01 + (0, 0, 10), (param_00.var_0116[0], param_00.var_0116[1], param_01[2] + 10), 0, param_00);
+  if(param_00.origin[2] <= param_01[2]) {
+    return bullettracepassed(param_00.origin + (0, 0, 10), (param_00.origin[0], param_00.origin[1], param_01[2] + 10), 0, param_00) && bullettracepassed(param_01 + (0, 0, 10), (param_00.origin[0], param_00.origin[1], param_01[2] + 10), 0, param_00);
   }
 
-  return bullettracepassed(param_01 + (0, 0, 10), (param_01[0], param_01[1], param_00.var_0116[2] + 10), 0, param_00) && bullettracepassed(param_00.var_0116 + (0, 0, 10), (param_01[0], param_01[1], param_00.var_0116[2] + 10), 0, param_00);
+  return bullettracepassed(param_01 + (0, 0, 10), (param_01[0], param_01[1], param_00.origin[2] + 10), 0, param_00) && bullettracepassed(param_00.origin + (0, 0, 10), (param_01[0], param_01[1], param_00.origin[2] + 10), 0, param_00);
 }
 
 func_7542(param_00, param_01) {
-  return func_803F(param_00, param_01.var_0794, param_01.var_14C2, param_01.var_298F) && func_803F(param_00, param_01.var_14C2, param_01.var_1DEC, param_01.var_0794) && func_803F(param_00, param_01.var_1DEC, param_01.var_298F, param_01.var_14C2) && func_803F(param_00, param_01.var_298F, param_01.var_0794, param_01.var_1DEC);
+  return func_803F(param_00, param_01.var_794, param_01.var_14C2, param_01.var_298F) && func_803F(param_00, param_01.var_14C2, param_01.var_1DEC, param_01.var_794) && func_803F(param_00, param_01.var_1DEC, param_01.var_298F, param_01.var_14C2) && func_803F(param_00, param_01.var_298F, param_01.var_794, param_01.var_1DEC);
 }
 
 func_803F(param_00, param_01, param_02, param_03) {

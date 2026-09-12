@@ -3,24 +3,24 @@
  * Script: maps\mp\gametypes\_music_and_dialog.gsc
 ***************************************************/
 
-func_00D5() {
-  if(isDefined(level.var_585D) && level.var_585D) {
+init() {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
-  if(level.var_6520) {
-    for(var_01 = 0; var_01 < level.var_985B.size; var_01++) {
-      var_02 = "spawn_" + level.var_985B[var_01];
-      var_03 = "defeat_" + level.var_985B[var_01];
-      var_04 = "victory_" + level.var_985B[var_01];
-      var_05 = "winning_" + level.var_985B[var_01];
-      var_06 = "losing_" + level.var_985B[var_01];
+  if(level.multiteambased) {
+    for(var_01 = 0; var_01 < level.teamnamelist.size; var_01++) {
+      var_02 = "spawn_" + level.teamnamelist[var_01];
+      var_03 = "defeat_" + level.teamnamelist[var_01];
+      var_04 = "victory_" + level.teamnamelist[var_01];
+      var_05 = "winning_" + level.teamnamelist[var_01];
+      var_06 = "losing_" + level.teamnamelist[var_01];
       game["music"][var_02] = maps\mp\gametypes\_teams::func_46D9("allies") + "spawn_music";
       game["music"][var_03] = maps\mp\gametypes\_teams::func_46D9("allies") + "defeat_music";
       game["music"][var_04] = maps\mp\gametypes\_teams::func_46D9("allies") + "victory_music";
       game["music"][var_05] = maps\mp\gametypes\_teams::func_46D9("allies") + "winning_music";
       game["music"][var_06] = maps\mp\gametypes\_teams::func_46D9("allies") + "losing_music";
-      game["voice"][level.var_985B[var_01]] = maps\mp\gametypes\_teams::func_46D9("allies") + "anr0_";
+      game["voice"][level.teamnamelist[var_01]] = maps\mp\gametypes\_teams::func_46D9("allies") + "anr0_";
     }
   } else {
     game["music"]["spawn_allies"] = maps\mp\gametypes\_teams::func_46D9("allies") + "spawn_music";
@@ -183,17 +183,17 @@ func_00D5() {
   game["dialog"]["planegun_destroyed"] = "ss_planegun_destroyed";
   game["dialog"]["planegun_bailout"] = "ss_planegun_bailout";
   game["dialog"]["cpkg_destroyed"] = "ss_cpkg_destroyed";
-  level thread func_6B6C();
+  level thread onplayerconnect();
   level thread func_6B4C();
   level thread func_65BC();
   level thread func_6B3E();
   level thread func_6B99();
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
-    var_00 thread func_6B82();
+    var_00 thread onplayerspawned();
     var_00 thread func_3B5D();
   }
 }
@@ -203,8 +203,8 @@ func_74CF() {
     return;
   }
 
-  level.var_7622 method_805C();
-  foreach(var_01 in level.var_744A) {
+  level.var_7622 hide();
+  foreach(var_01 in level.players) {
     if(var_01 == self) {
       continue;
     }
@@ -222,7 +222,7 @@ func_74CF() {
 }
 
 init_end_game_music_ent() {
-  if(!level.var_4B17) {
+  if(!level.hardcoremode) {
     if(!isDefined(level.end_game_music_ent)) {
       level.end_game_music_ent = spawn("script_origin", (0, 0, 0));
     }
@@ -231,13 +231,13 @@ init_end_game_music_ent() {
 
 end_game_music_ent_origin_update(param_00) {
   if(isDefined(level.end_game_music_ent)) {
-    level.end_game_music_ent.var_0116 = param_00;
+    level.end_game_music_ent.origin = param_00;
   }
 }
 
 play_end_game_music(param_00) {
   if(isDefined(level.end_game_music_ent)) {
-    level.end_game_music_ent method_8617(param_00);
+    level.end_game_music_ent playSound(param_00);
   }
 }
 
@@ -275,7 +275,7 @@ func_7620() {
     level.var_7622 endon("death");
     level endon("practiceRoundMusicEnding");
     level thread func_36E0();
-    level.var_7622 method_805C();
+    level.var_7622 hide();
     wait(12);
     self.var_7623 = 1;
     level.var_7622 method_861D("mus_practice_round_backing_track");
@@ -321,28 +321,28 @@ func_36E0() {
   level.var_7622 delete();
 }
 
-func_6B82() {
+onplayerspawned() {
   self endon("disconnect");
   self waittill("spawned_player");
   if(getDvar("4017") == "0" && !function_0367()) {
-    if(!level.var_910F || level.var_910F && !isDefined(level.var_7217)) {
+    if(!level.splitscreen || level.splitscreen && !isDefined(level.var_7217)) {
       if(!self issplitscreenplayer() || self method_82ED()) {
-        self method_8615(game["music"]["spawn_" + self.var_01A7]);
+        self playlocalsound(game["music"]["spawn_" + self.team]);
       }
 
-      if(level.var_910F) {
+      if(level.splitscreen) {
         level.var_7217 = 1;
       }
     }
 
-    if(maps\mp\_utility::func_761E()) {
+    if(maps\mp\_utility::practiceroundgame()) {
       thread func_7620();
     }
 
-    if(isDefined(game["dialog"]["gametype"]) && !level.var_910F || self == level.var_744A[0]) {
-      if(isDefined(game["dialog"]["allies_gametype"]) && self.var_01A7 == "allies") {
+    if(isDefined(game["dialog"]["gametype"]) && !level.splitscreen || self == level.players[0]) {
+      if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies") {
         maps\mp\_utility::func_5C43("allies_gametype");
-      } else if(isDefined(game["dialog"]["axis_gametype"]) && self.var_01A7 == "axis") {
+      } else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
         maps\mp\_utility::func_5C43("axis_gametype");
       } else if(!self issplitscreenplayer() || self method_82ED()) {
         maps\mp\_utility::func_5C43("gametype");
@@ -356,7 +356,7 @@ func_6B82() {
 
     wait(5);
     maps\mp\_utility::func_3FA5("prematch_done");
-    if(self.var_01A7 == game["attackers"]) {
+    if(self.team == game["attackers"]) {
       if(!self issplitscreenplayer() || self method_82ED()) {
         maps\mp\_utility::func_5C43("offense_obj", "introboost");
         return;
@@ -388,7 +388,7 @@ func_6B99() {
   level waittill("round_switch", var_00);
   switch (var_00) {
     case "halftime":
-      foreach(var_02 in level.var_744A) {
+      foreach(var_02 in level.players) {
         if(var_02 issplitscreenplayer() && !var_02 method_82ED()) {
           continue;
         }
@@ -398,7 +398,7 @@ func_6B99() {
       break;
 
     case "overtime":
-      foreach(var_02 in level.var_744A) {
+      foreach(var_02 in level.players) {
         if(var_02 issplitscreenplayer() && !var_02 method_82ED()) {
           continue;
         }
@@ -408,7 +408,7 @@ func_6B99() {
       break;
 
     default:
-      foreach(var_02 in level.var_744A) {
+      foreach(var_02 in level.players) {
         if(var_02 issplitscreenplayer() && !var_02 method_82ED()) {
           continue;
         }
@@ -424,8 +424,8 @@ func_6B3E() {
   level thread func_3FE1();
   level waittill("game_win", var_00);
   thread stop_end_game_music();
-  if(level.var_984D) {
-    if(level.var_910F) {
+  if(level.teambased) {
+    if(level.splitscreen) {
       if(var_00 == "allies") {
         maps\mp\_utility::func_74D9(game["music"]["victory_allies"], "allies");
         return;
@@ -458,23 +458,23 @@ func_6B3E() {
     return;
   }
 
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 issplitscreenplayer() && !var_02 method_82ED()) {
       continue;
     }
 
-    if(var_02.var_012C["team"] != "allies" && var_02.var_012C["team"] != "axis") {
-      var_02 method_8615(game["music"]["draw_allies"]);
+    if(var_02.pers["team"] != "allies" && var_02.pers["team"] != "axis") {
+      var_02 playlocalsound(game["music"]["draw_allies"]);
       continue;
     }
 
     if(isDefined(var_00) && isPlayer(var_00) && var_02 == var_00) {
-      var_02 method_8615(game["music"]["victory_" + var_02.var_012C["team"]]);
+      var_02 playlocalsound(game["music"]["victory_" + var_02.pers["team"]]);
       continue;
     }
 
-    if(!level.var_910F) {
-      var_02 method_8615(game["music"]["defeat_" + var_02.var_012C["team"]]);
+    if(!level.splitscreen) {
+      var_02 playlocalsound(game["music"]["defeat_" + var_02.pers["team"]]);
     }
   }
 }
@@ -496,7 +496,7 @@ func_7F2E() {
     return;
   }
 
-  if(maps\mp\_utility::func_761E()) {
+  if(maps\mp\_utility::practiceroundgame()) {
     return;
   }
 
@@ -524,10 +524,10 @@ func_3FE1() {
     wait(var_01);
   }
 
-  if(!level.var_984D && isDefined(var_00) && isPlayer(var_00)) {
+  if(!level.teambased && isDefined(var_00) && isPlayer(var_00)) {
     var_02 = [var_00];
     var_03 = [];
-    foreach(var_05 in level.var_744A) {
+    foreach(var_05 in level.players) {
       if(var_05 == var_00) {
         continue;
       } else {
@@ -539,21 +539,21 @@ func_3FE1() {
     maps\mp\_utility::func_5C39("ffa_lost", "allies", undefined, var_02);
   }
 
-  if(!isDefined(var_05) || isPlayer(var_05)) {
+  if(!isDefined(var_00) || isPlayer(var_00)) {
     return;
   }
 
-  if(maps\mp\_utility::func_761E()) {
+  if(maps\mp\_utility::practiceroundgame()) {
     return;
   }
 
-  if(var_05 == "allies") {
+  if(var_00 == "allies") {
     maps\mp\_utility::func_5C39("mission_success", "allies");
     maps\mp\_utility::func_5C39("mission_failure", "axis");
     return;
   }
 
-  if(var_05 == "axis") {
+  if(var_00 == "axis") {
     maps\mp\_utility::func_5C39("mission_success", "axis");
     maps\mp\_utility::func_5C39("mission_failure", "allies");
     return;
@@ -567,7 +567,7 @@ func_65BC() {
   init_end_game_music_ent();
   level waittill("match_ending_soon", var_00);
   if(var_00 == "time") {
-    if(level.var_984D) {
+    if(level.teambased) {
       if(game["teamScores"]["allies"] > game["teamScores"]["axis"]) {
         maps\mp\_utility::func_5C39("winning_time", "allies");
         maps\mp\_utility::func_5C39("losing_time", "axis");
@@ -579,7 +579,7 @@ func_65BC() {
       maps\mp\_utility::func_5C39("timesup");
     }
   } else if(var_00 == "score") {
-    if(level.var_984D) {
+    if(level.teambased) {
       if(game["teamScores"]["allies"] > game["teamScores"]["axis"]) {
         maps\mp\_utility::func_5C39("winning_score", "allies");
         maps\mp\_utility::func_5C39("losing_score", "axis");
@@ -595,7 +595,7 @@ func_65BC() {
     }
   }
 
-  if(!level.var_4B17 && !maps\mp\_utility::func_579B() && !maps\mp\_utility::func_585F() && getdvarint("enable_end_game_music", 1) && !maps\mp\_utility::func_56B1()) {
+  if(!level.hardcoremode && !maps\mp\_utility::func_579B() && !maps\mp\_utility::func_585F() && getdvarint("enable_end_game_music", 1) && !maps\mp\_utility::func_56B1()) {
     play_end_game_music(game["music"]["match_ending_soon"]);
   }
 

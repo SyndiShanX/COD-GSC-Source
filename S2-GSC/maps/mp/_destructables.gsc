@@ -3,7 +3,7 @@
  * Script: maps\mp\_destructables.gsc
 *********************************************/
 
-func_00D5() {
+init() {
   var_00 = getEntArray("destructable", "targetname");
   if(getDvar("scr_destructables") == "0") {
     for(var_01 = 0; var_01 < var_00.size; var_01++) {
@@ -64,7 +64,7 @@ func_2DE0() {
   }
 
   if(isDefined(var_00.var_3F2F)) {
-    playFX(var_00.var_3F2F, var_00.var_0116 + (0, 0, 6));
+    playFX(var_00.var_3F2F, var_00.origin + (0, 0, 6));
   }
 
   var_00 delete();

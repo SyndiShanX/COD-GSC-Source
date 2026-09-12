@@ -3,7 +3,7 @@
  * Script: maps\mp\zquests\dlc4_trophies_mp_zombie_descent.gsc
 ***************************************************************/
 
-func_00D5() {
+init() {
   level thread run_shattered_trophy_event_1();
   level thread run_shattered_trophy_event_2();
   level thread run_shattered_trophy_event_3();
@@ -12,7 +12,7 @@ func_00D5() {
 }
 
 complete_descent_trophy_event_1(param_00) {
-  maps\mp\gametypes\zombies::func_47A8("DLC4_ZM_DESCENT", param_00, 1);
+  maps / mp / gametypes / zombies::func_47A8("DLC4_ZM_DESCENT", param_00, 1);
 }
 
 run_shattered_trophy_event_1() {
@@ -21,7 +21,7 @@ run_shattered_trophy_event_1() {
 }
 
 complete_descent_trophy_event_2(param_00) {
-  maps\mp\gametypes\zombies::func_47A8("DLC4_ZM_SUPERIOR", undefined, 1);
+  maps / mp / gametypes / zombies::func_47A8("DLC4_ZM_SUPERIOR", undefined, 1);
 }
 
 run_shattered_trophy_event_2() {
@@ -34,7 +34,7 @@ run_shattered_trophy_event_2() {
 }
 
 complete_descent_trophy_event_3(param_00) {
-  maps\mp\gametypes\zombies::func_47A8("DLC4_ZM_BLOOD", undefined, 1);
+  maps / mp / gametypes / zombies::func_47A8("DLC4_ZM_BLOOD", undefined, 1);
 }
 
 run_shattered_trophy_event_3() {
@@ -64,7 +64,7 @@ run_shattered_trophy_event_3() {
 }
 
 complete_descent_trophy_event_4(param_00) {
-  maps\mp\gametypes\zombies::func_47A8("DLC4_ZM_LONG", param_00, 1);
+  maps / mp / gametypes / zombies::func_47A8("DLC4_ZM_LONG", param_00, 1);
 }
 
 run_shattered_trophy_event_4() {
@@ -75,26 +75,26 @@ run_shattered_trophy_event_4() {
 
 complete_descent_trophy_event_5(param_00) {
   param_00.craftedweapons++;
-  maps\mp\gametypes\zombies::func_47A8("DLC4_ZM_MOONRAVEN", param_00, 1);
+  maps / mp / gametypes / zombies::func_47A8("DLC4_ZM_MOONRAVEN", param_00, 1);
 }
 
 complete_descent_trophy_event_6(param_00) {
   param_00.craftedweapons++;
-  maps\mp\gametypes\zombies::func_47A8("DLC4_ZM_BLOODRAVEN", param_00, 1);
+  maps / mp / gametypes / zombies::func_47A8("DLC4_ZM_BLOODRAVEN", param_00, 1);
 }
 
 complete_descent_trophy_event_7(param_00) {
   param_00.craftedweapons++;
-  maps\mp\gametypes\zombies::func_47A8("DLC4_ZM_DEATHRAVEN", param_00, 1);
+  maps / mp / gametypes / zombies::func_47A8("DLC4_ZM_DEATHRAVEN", param_00, 1);
 }
 
 complete_descent_trophy_event_8(param_00) {
   param_00.craftedweapons++;
-  maps\mp\gametypes\zombies::func_47A8("DLC4_ZM_STORMRAVEN", param_00, 1);
+  maps / mp / gametypes / zombies::func_47A8("DLC4_ZM_STORMRAVEN", param_00, 1);
 }
 
 complete_descent_trophy_event_9(param_00) {
-  maps\mp\gametypes\zombies::func_47A8("DLC4_ZM_WEAPON", param_00, 1);
+  maps / mp / gametypes / zombies::func_47A8("DLC4_ZM_WEAPON", param_00, 1);
 }
 
 run_shattered_trophy_event_9(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
@@ -133,7 +133,7 @@ run_shattered_trophy_event_9(param_00, param_01, param_02, param_03, param_04, p
 }
 
 complete_descent_trophy_event_10(param_00) {
-  maps\mp\gametypes\zombies::func_47A8("DLC4_ZM_KINGFALL", undefined, 1);
+  maps / mp / gametypes / zombies::func_47A8("DLC4_ZM_KINGFALL", undefined, 1);
 }
 
 wait_for_moon_raven_orb_gap(param_00, param_01) {

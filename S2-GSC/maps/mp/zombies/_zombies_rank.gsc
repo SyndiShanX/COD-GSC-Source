@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\_zombies_rank.gsc
 *********************************************/
 
-func_00D5() {
+init() {
   level.var_AB42 = [];
   level.var_AB36 = int(tablelookup("mp/cp_rankTable.csv", 0, "maxrank", 1));
   level.zmmaxrankfinalprestige = int(tablelookup("mp/cp_rankTable.csv", 0, "maxrankfinalprestige", 1));
@@ -172,12 +172,12 @@ zombieplayerxpupdatethink() {
   for(;;) {
     if(!common_scripts\utility::func_562E(self.notifiedlootservice) && self.var_AB46["pendingXP"] > 0) {
       self.notifiedlootservice = 1;
-      lootservicevalidateplaytime(self.var_01D6);
+      lootservicevalidateplaytime(self.var_1D6);
     }
 
     zombieupdateplayerxp(self.var_AB46["pendingXP"]);
     self.var_AB46["pendingXP"] = 0;
-    level common_scripts\utility::func_A74B("round complete", level.zmxpupdatetimer);
+    level common_scripts\utility::waittill_notify_or_timeout("round complete", level.zmxpupdatetimer);
   }
 }
 
@@ -237,7 +237,7 @@ zombieplayerstatsupdatethink() {
   self endon("disconnect");
   level endon("game_ended");
   for(;;) {
-    level common_scripts\utility::func_A74B("round complete", level.zmstatsupdatetimer);
+    level common_scripts\utility::waittill_notify_or_timeout("round complete", level.zmstatsupdatetimer);
     zombiewritestats();
   }
 }
@@ -245,25 +245,25 @@ zombieplayerstatsupdatethink() {
 zombiewritestats() {
   var_00 = self;
   lib_0547::func_8A6C(var_00, "totalRounds", self.var_AB46["totalRounds"] + level.var_A980, 0);
-  lib_0547::func_8A6C(var_00, "totalKills", self.var_AB46["totalKills"] + var_00.var_00E3, 0);
-  lib_0547::func_8A6C(var_00, "totalRevives", self.var_AB46["totalRevives"] + var_00.var_0021, 0);
+  lib_0547::func_8A6C(var_00, "totalKills", self.var_AB46["totalKills"] + var_00.kills, 0);
+  lib_0547::func_8A6C(var_00, "totalRevives", self.var_AB46["totalRevives"] + var_00.assists, 0);
   lib_0547::func_8A6C(var_00, "totalMoneyEarned", self.var_AB46["totalMoneyEarned"] + var_00.var_62D7, 0);
   lib_0547::func_8A6C(var_00, "totalMoneySpent", self.var_AB46["totalMoneySpent"] + var_00.var_62D7 - var_00.var_62D6, 0);
   lib_0547::func_8A6C(var_00, "totalMagicBox", self.var_AB46["totalMagicBox"] + var_00.var_5F7C, 0);
   lib_0547::func_8A6C(var_00, "totalTraps", self.var_AB46["totalTraps"] + var_00.var_9CFF, 0);
   lib_0547::func_8A6C(var_00, "totalHeadshots", self.var_AB46["totalHeadshots"] + var_00.var_4BF7, 0);
   lib_0547::func_8A6C(var_00, "totalMeleeKills", self.var_AB46["totalMeleeKills"] + var_00.var_60EC, 0);
-  lib_0547::func_8A6C(var_00, "totalTimePlayed", self.var_AB46["totalTimePlayed"] + var_00.var_9A06["total"], 0);
+  lib_0547::func_8A6C(var_00, "totalTimePlayed", self.var_AB46["totalTimePlayed"] + var_00.timeplayed["total"], 0);
   lib_0547::func_8A6C(var_00, "highestRound", level.var_A980, 2);
-  lib_0547::func_8A6C(var_00, "mostKillsGame", var_00.var_00E3, 2);
-  lib_0547::func_8A6C(var_00, "mostRevives", var_00.var_0021, 2);
+  lib_0547::func_8A6C(var_00, "mostKillsGame", var_00.kills, 2);
+  lib_0547::func_8A6C(var_00, "mostRevives", var_00.assists, 2);
   lib_0547::func_8A6C(var_00, "mostMoneyEarned", var_00.var_62D7, 2);
   lib_0547::func_8A6C(var_00, "mostMoneySpent", var_00.var_62D7 - var_00.var_62D6, 2);
   lib_0547::func_8A6C(var_00, "mostMagicBox", var_00.var_5F7C, 2);
   lib_0547::func_8A6C(var_00, "mostTraps", var_00.var_9CFF, 2);
   lib_0547::func_8A6C(var_00, "mostHeadshotsGame", var_00.var_4BF7, 2);
   lib_0547::func_8A6C(var_00, "mostMeleeKills", var_00.var_60EC, 2);
-  lib_0547::func_8A6C(var_00, "mostTimePlayed", var_00.var_9A06["total"], 2);
+  lib_0547::func_8A6C(var_00, "mostTimePlayed", var_00.timeplayed["total"], 2);
   lib_0547::func_8A6C(var_00, "mostXP", var_00.var_AB46["xp"] - var_00.var_AB46["totalXP"], 2);
 }
 
@@ -304,20 +304,20 @@ func_AC39(param_00) {
   }
 
   for(var_05 = var_04; var_05 <= var_03; var_05++) {
-    lib_0468::func_0A25(var_05, "zm");
+    lib_0468::func_A25(var_05, "zm");
   }
 
   if(self.var_AB46["prestigeLevel"] == level.zmmaxprestige && var_03 == level.var_AB36 + 1 + 1) {
-    lib_0468::func_0A2A("zombie", 11);
+    lib_0468::func_A2A("zombie", 11);
   }
 
   if(self.var_AB46["prestigeLevel"] == level.zmmaxprestige) {
     if(var_02 == 199) {
-      lib_0468::func_0A2B("master_prestige_200");
+      lib_0468::func_A2B("master_prestige_200");
     } else if(var_02 == 499) {
-      lib_0468::func_0A2B("master_prestige_500");
+      lib_0468::func_A2B("master_prestige_500");
     } else if(var_02 == 999) {
-      lib_0468::func_0A2B("master_prestige_1000");
+      lib_0468::func_A2B("master_prestige_1000");
     }
   }
 
@@ -344,7 +344,7 @@ zombieplayershotgunlvlup(param_00) {
 
   self.var_AB46["shotgunLevel"] = zmgetshotgunlevelbyxp(self.var_AB46["shotgunXP"]);
   self notify("shotgun_level_up");
-  maps\mp\zombies\_zombies_progression::apply_zm_shotgun_level_perks();
+  maps / mp / zombies / _zombies_progression::apply_zm_shotgun_level_perks();
 }
 
 func_AB2C(param_00) {
@@ -367,8 +367,7 @@ zmgetshotgunlevelbyxp(param_00) {
     return level.zmshotgunmaxlevel;
   }
 
-  var_01 = 0;
-  while(var_01 <= level.zmshotgunmaxlevel) {
+  for(var_01 = 0; var_01 <= level.zmshotgunmaxlevel; var_01++) {
     if(param_00 < zmgetshotgunlevelxprequirement(var_01)) {
       var_02 = var_01 - 1;
       if(var_02 <= 0) {
@@ -377,8 +376,6 @@ zmgetshotgunlevelbyxp(param_00) {
         return var_02;
       }
     }
-
-    var_02++;
   }
 
   var_01--;

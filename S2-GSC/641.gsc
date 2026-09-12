@@ -3,17 +3,17 @@
  * Script: 641.gsc
 *********************************************/
 
-lib_0281::func_86CC(param_00) {
+func_86CC(param_00) {
   self setModel(param_00[randomint(param_00.size)]);
 }
 
-lib_0281::func_7653(param_00) {
+func_7653(param_00) {
   for(var_01 = 0; var_01 < param_00.size; var_01++) {
     precachemodel(param_00[var_01]);
   }
 }
 
-lib_0281::func_114A(param_00, param_01) {
+func_114A(param_00, param_01) {
   if(!isDefined(level.var_20D0)) {
     level.var_20D0 = [];
   }
@@ -24,10 +24,10 @@ lib_0281::func_114A(param_00, param_01) {
 
   var_02 = level.var_20D0[param_00] + 1 % param_01.size;
   level.var_20D0[param_00] = var_02;
-  lib_0281::func_86A0(param_01[var_02]);
+  func_86A0(param_01[var_02]);
 }
 
-lib_0281::func_86A0(param_00) {
+func_86A0(param_00) {
   if(isDefined(self.var_4BF2)) {
     self method_802E(self.var_4BF2);
   }
@@ -36,7 +36,7 @@ lib_0281::func_86A0(param_00) {
   self.var_4BF2 = param_00;
 }
 
-lib_0281::func_1149(param_00, param_01) {
+func_1149(param_00, param_01) {
   if(!isDefined(level.var_20CF)) {
     level.var_20CF = [];
   }
@@ -51,24 +51,24 @@ lib_0281::func_1149(param_00, param_01) {
   self.var_4BA9 = param_01[var_02];
 }
 
-lib_0281::func_6685() {
+func_6685() {
   self detachall();
-  var_00 = self.var_0E14;
+  var_00 = self.var_E14;
   if(!isDefined(var_00)) {
     return;
   }
 
-  self.var_0E14 = "none";
+  self.var_E14 = "none";
   self[[level.var_77C6]](var_00);
 }
 
-lib_0281::func_8055() {
-  var_00["gunHand"] = self.var_0E14;
-  var_00["gunInHand"] = self.var_0E15;
-  var_00["model"] = self.var_0106;
+func_8055() {
+  var_00["gunHand"] = self.var_E14;
+  var_00["gunInHand"] = self.var_E15;
+  var_00["model"] = self.model;
   var_00["hatModel"] = self.var_4BA9;
-  if(isDefined(self.var_0109)) {
-    var_00["name"] = self.var_0109;
+  if(isDefined(self.name)) {
+    var_00["name"] = self.name;
   } else {}
 
   var_01 = self getattachsize();
@@ -80,14 +80,14 @@ lib_0281::func_8055() {
   return var_00;
 }
 
-lib_0281::func_5DDF(param_00) {
+func_5DDF(param_00) {
   self detachall();
-  self.var_0E14 = param_00["gunHand"];
-  self.var_0E15 = param_00["gunInHand"];
+  self.var_E14 = param_00["gunHand"];
+  self.var_E15 = param_00["gunInHand"];
   self setModel(param_00["model"]);
   self.var_4BA9 = param_00["hatModel"];
   if(isDefined(param_00["name"])) {
-    self.var_0109 = param_00["name"];
+    self.name = param_00["name"];
   } else {}
 
   var_01 = param_00["attach"];
@@ -97,7 +97,7 @@ lib_0281::func_5DDF(param_00) {
   }
 }
 
-lib_0281::func_0136(param_00) {
+func_0136(param_00) {
   if(isDefined(param_00["name"])) {} else {}
 
   precachemodel(param_00["model"]);
@@ -108,20 +108,20 @@ lib_0281::func_0136(param_00) {
   }
 }
 
-lib_0281::func_42DF(param_00) {
-  if(isDefined(self.var_003A)) {
-    var_01 = strtok(self.var_003A, "_");
+func_42DF(param_00) {
+  if(isDefined(self.classname)) {
+    var_01 = strtok(self.classname, "_");
   } else {
     var_01 = [];
   }
 
   if(!common_scripts\utility::func_57D7()) {
-    if(isDefined(self.var_012C["modelIndex"]) && self.var_012C["modelIndex"] < param_00) {
-      return self.var_012C["modelIndex"];
+    if(isDefined(self.pers["modelIndex"]) && self.pers["modelIndex"] < param_00) {
+      return self.pers["modelIndex"];
     }
 
     var_02 = randomint(param_00);
-    self.var_012C["modelIndex"] = var_02;
+    self.pers["modelIndex"] = var_02;
     return var_02;
   } else if(var_02.size <= 2) {
     return randomint(var_01);
@@ -139,11 +139,11 @@ lib_0281::func_42DF(param_00) {
   }
 
   if(!isDefined(level.var_20D1[var_04][var_02])) {
-    lib_0281::func_52DF(var_04, var_02, param_00);
+    func_52DF(var_04, var_02, param_00);
   }
 
   if(!isDefined(var_03)) {
-    var_03 = lib_0281::func_41E6(var_04, var_02);
+    var_03 = func_41E6(var_04, var_02);
     if(!isDefined(var_03)) {
       var_03 = randomint(5000);
     }
@@ -157,7 +157,7 @@ lib_0281::func_42DF(param_00) {
   return var_03;
 }
 
-lib_0281::func_41E6(param_00, param_01) {
+func_41E6(param_00, param_01) {
   var_02 = [];
   var_03 = level.var_20D1[param_00][param_01][0];
   var_02[0] = 0;
@@ -174,24 +174,24 @@ lib_0281::func_41E6(param_00, param_01) {
     var_02[var_02.size] = var_04;
   }
 
-  return lib_0281::func_7A33(var_02);
+  return func_7A33(var_02);
 }
 
-lib_0281::func_52DF(param_00, param_01, param_02) {
+func_52DF(param_00, param_01, param_02) {
   for(var_03 = 0; var_03 < param_02; var_03++) {
     level.var_20D1[param_00][param_01][var_03] = 0;
   }
 }
 
-lib_0281::func_42EA(param_00) {
+func_42EA(param_00) {
   return randomint(param_00);
 }
 
-lib_0281::func_7A33(param_00) {
+func_7A33(param_00) {
   return param_00[randomint(param_00.size)];
 }
 
-lib_0281::func_5563(param_00, param_01) {
+func_5563(param_00, param_01) {
   var_02 = function_0060(param_00);
   var_03 = 1;
   foreach(var_05 in var_02) {
@@ -204,11 +204,11 @@ lib_0281::func_5563(param_00, param_01) {
   return var_03;
 }
 
-lib_0281::func_1D32(param_00, param_01) {
+func_1D32(param_00, param_01) {
   var_02 = param_00;
   if(isDefined(param_01)) {
     foreach(var_04 in param_01) {
-      if(!lib_0281::func_5563(param_00, var_04)) {
+      if(!func_5563(param_00, var_04)) {
         var_02 = var_02 + "+" + var_04;
       }
     }

@@ -3,20 +3,20 @@
  * Script: maps\mp\killstreaks\_airstrike.gsc
 **********************************************/
 
-func_00D5() {
+init() {
   level.var_80B7["airstrike"] = 400;
   level.var_80B8["airstrike"] = 75;
   level.var_80B6["airstrike"] = -1;
   level.var_80B9["airstrike"] = 6;
   level.var_80B5["airstrike"] = 8;
-  level.var_5A61["airstrike"] = ::func_9E23;
+  level.killstreakfuncs["airstrike"] = ::func_9E23;
   level.var_5A7D["airstrike_bomb_mp"] = "airstrike";
   level.var_5A7D["airstrike_bomb_axis_mp"] = "airstrike";
 }
 
 func_9E23(param_00) {
   if(lib_0527::func_9E35(param_00, "airstrike")) {
-    self.var_0B95 = 0;
+    self.var_B95 = 0;
     return 1;
   }
 
@@ -34,15 +34,15 @@ func_0B9A(param_00, param_01, param_02, param_03, param_04, param_05) {
     param_02 thread func_6B75();
   }
 
-  if(maps\mp\_utility::func_579B() && isDefined(param_03) && isDefined(level.var_79C2.var_80B0) && isDefined(level.var_79C2.var_80B0.var_0B9C)) {
-    thread[[level.var_79C2.var_80B0.var_0B9C]](4);
+  if(maps\mp\_utility::func_579B() && isDefined(param_03) && isDefined(level.var_79C2.var_80B0) && isDefined(level.var_79C2.var_80B0.var_B9C)) {
+    thread[[level.var_79C2.var_80B0.var_B9C]](4);
   } else {
     thread func_11DA();
   }
 
   var_06 = 0;
   if(isDefined(param_02)) {
-    var_06 = param_02 maps\mp\_utility::func_0649("specialty_improvedstreaks");
+    var_06 = param_02 maps\mp\_utility::_hasperk("specialty_improvedstreaks");
   }
 
   var_07 = 3;
@@ -50,16 +50,16 @@ func_0B9A(param_00, param_01, param_02, param_03, param_04, param_05) {
     var_07 = 4;
   }
 
-  if(maps\mp\_utility::func_579B() && isDefined(param_03) && isDefined(level.var_79C2.var_80B0) && isDefined(level.var_79C2.var_80B0.var_0B98)) {
-    var_07 = exp(3 * level.var_79C2.var_80B0.var_0B98);
+  if(maps\mp\_utility::func_579B() && isDefined(param_03) && isDefined(level.var_79C2.var_80B0) && isDefined(level.var_79C2.var_80B0.var_B98)) {
+    var_07 = exp(3 * level.var_79C2.var_80B0.var_B98);
   }
 
-  if(isDefined(level.var_0811) && level.var_0811) {
+  if(isDefined(level.var_811) && level.var_811) {
     var_07 = 1;
   }
 
   for(var_08 = 0; var_08 < var_07 && !maps\mp\_utility::func_5668(0, param_03); var_08++) {
-    if(isDefined(level.var_0811) && level.var_0811) {
+    if(isDefined(level.var_811) && level.var_811) {
       wait(1);
     } else {
       wait(4);
@@ -73,7 +73,7 @@ func_0B9A(param_00, param_01, param_02, param_03, param_04, param_05) {
     var_0A = [];
     for(var_0B = -5; var_0B < 6; var_0B++) {
       var_0C = spawnStruct();
-      var_0C.var_0116 = (level.var_5FEB[0] + cos(var_09 + 90) * var_0B * 700, level.var_5FEB[1] + sin(var_09 + 90) * var_0B * 700, level.var_5FEB[2]);
+      var_0C.origin = (level.var_5FEB[0] + cos(var_09 + 90) * var_0B * 700, level.var_5FEB[1] + sin(var_09 + 90) * var_0B * 700, level.var_5FEB[2]);
       var_0C.var_7F31 = abs(abs(var_0B) - 5 / 50);
       var_0A[var_0A.size] = var_0C;
     }
@@ -87,11 +87,11 @@ func_0B9A(param_00, param_01, param_02, param_03, param_04, param_05) {
         thread lib_0527::func_9302(param_00, [param_04], [var_09], param_01, param_03);
       } else {
         var_0D = func_4435(var_0A, var_09, param_03);
-        thread lib_0527::func_9302(param_00, [var_0D.var_0116], [var_09], param_01, param_03);
+        thread lib_0527::func_9302(param_00, [var_0D.origin], [var_09], param_01, param_03);
       }
     } else {
       var_0D = param_02 func_4435(var_0A, var_09);
-      param_02 thread lib_0527::func_9302(param_00, [var_0D.var_0116], [var_09], param_01);
+      param_02 thread lib_0527::func_9302(param_00, [var_0D.origin], [var_09], param_01);
     }
 
     if(var_06) {
@@ -115,20 +115,20 @@ func_11DA() {
 }
 
 func_4435(param_00, param_01, param_02) {
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     if(!maps\mp\_utility::func_57A0(var_04)) {
       continue;
     }
 
     if(isDefined(param_02)) {
-      if(level.var_984D && var_04.var_01A7 == param_02) {
+      if(level.teambased && var_04.team == param_02) {
         continue;
       }
-    } else if(level.var_984D && var_04.var_01A7 == self.var_01A7 && var_04 != self) {
+    } else if(level.teambased && var_04.team == self.team && var_04 != self) {
       continue;
     }
 
-    if(var_04.var_01A7 == "spectator") {
+    if(var_04.team == "spectator") {
       continue;
     }
 
@@ -137,7 +137,7 @@ func_4435(param_00, param_01, param_02) {
     var_07 = 999999999;
     var_08 = undefined;
     foreach(var_0A in param_00) {
-      var_0B = distance2d((var_0A.var_0116[0] * cos(param_01 + 90), var_0A.var_0116[1] * sin(param_01 + 90), 0), (var_04.var_0116[0] * cos(param_01 + 90), var_04.var_0116[1] * sin(param_01 + 90), 0));
+      var_0B = distance2d((var_0A.origin[0] * cos(param_01 + 90), var_0A.origin[1] * sin(param_01 + 90), 0), (var_04.origin[0] * cos(param_01 + 90), var_04.origin[1] * sin(param_01 + 90), 0));
       if(var_0B <= var_05) {
         var_07 = var_05;
         var_08 = var_06;
@@ -150,7 +150,7 @@ func_4435(param_00, param_01, param_02) {
 
       if(isDefined(self) && var_04 == self && var_0B <= 1000) {
         if(maps\mp\_utility::func_4571() != "mp_shipment_s2" && maps\mp\_utility::func_4571() != "mp_sandbox_01") {
-          if(!bullettracepassed(var_04.var_0116 + (0, 0, 32), var_04.var_0116 + (0, 0, 10000), 0, var_04)) {
+          if(!bullettracepassed(var_04.origin + (0, 0, 32), var_04.origin + (0, 0, 10000), 0, var_04)) {
             var_0A.var_7F31 = var_0A.var_7F31 - 3.25;
             continue;
           }
@@ -163,7 +163,7 @@ func_4435(param_00, param_01, param_02) {
     if(isDefined(self) && var_04 == self) {
       continue;
     } else {
-      if(!bullettracepassed(var_04.var_0116 + (0, 0, 32), var_04.var_0116 + (0, 0, 10000), 0, var_04)) {
+      if(!bullettracepassed(var_04.origin + (0, 0, 32), var_04.origin + (0, 0, 10000), 0, var_04)) {
         var_06.var_7F31 = var_06.var_7F31 + 0.75;
         var_08.var_7F31 = var_08.var_7F31 + 0.5;
         continue;
@@ -177,16 +177,16 @@ func_4435(param_00, param_01, param_02) {
   if(isDefined(param_02)) {
     var_0E = param_02;
   } else {
-    var_0E = self.var_01A7;
+    var_0E = self.team;
   }
 
   var_0F = level.var_7AD1[maps\mp\_utility::func_45DE(var_0E)];
-  if(!level.var_984D) {
+  if(!level.teambased) {
     var_0F = level.var_7AD1["all"];
   }
 
   foreach(var_11 in var_0F) {
-    if(!level.var_984D && var_11["player"] == self.var_48CA) {
+    if(!level.teambased && var_11["player"] == self.guid) {
       continue;
     }
 
@@ -195,7 +195,7 @@ func_4435(param_00, param_01, param_02) {
     var_07 = 999999999;
     var_08 = undefined;
     foreach(var_0A in param_00) {
-      var_0B = distance2d((var_0A.var_0116[0] * cos(param_01 + 90), var_0A.var_0116[1] * sin(param_01 + 90), 0), (var_11["position"][0] * cos(param_01 + 90), var_11["position"][1] * sin(param_01 + 90), 0));
+      var_0B = distance2d((var_0A.origin[0] * cos(param_01 + 90), var_0A.origin[1] * sin(param_01 + 90), 0), (var_11["position"][0] * cos(param_01 + 90), var_11["position"][1] * sin(param_01 + 90), 0));
       if(var_0B <= var_05) {
         var_07 = var_05;
         var_08 = var_06;
@@ -241,6 +241,6 @@ func_6B75() {
   self endon("carpetBombingEnded");
   self waittill("disconnect");
   level.var_2000 = undefined;
-  level.var_0B93 = undefined;
+  level.var_B93 = undefined;
   level notify("aud_carpet_bomb_killed");
 }

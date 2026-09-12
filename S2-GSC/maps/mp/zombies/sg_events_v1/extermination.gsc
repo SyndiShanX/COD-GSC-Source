@@ -3,16 +3,16 @@
  * Script: maps\mp\zombies\sg_events_v1\extermination.gsc
 **********************************************************/
 
-func_00D5() {
-  maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::sg_obj_register_defaults("type_extermination_common", ::basic_extermination_run, 120, 0, 0);
+init() {
+  maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::sg_obj_register_defaults("type_extermination_common", ::basic_extermination_run, 120, 0, 0);
 }
 
 basic_extermination_run(param_00) {
   var_01 = level.zmb_sg_objectives[param_00];
   var_02 = ["zombie_exploder"];
   var_03 = undefined;
-  level.zmb_temp_zombie_health_buff = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_extermination_health_multiplier");
-  level.zmb_disable_all_hitreacts = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_extermination_hitreacts_enabled");
+  level.zmb_temp_zombie_health_buff = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_extermination_health_multiplier");
+  level.zmb_disable_all_hitreacts = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_extermination_hitreacts_enabled");
   if(level.zmb_temp_zombie_health_buff == 1) {
     level.zmb_temp_zombie_health_buff = undefined;
   }
@@ -44,10 +44,10 @@ basic_extermination_run(param_00) {
     }
 
     if(common_scripts\utility::func_F79(var_02, "zombie_sizzler") || common_scripts\utility::func_F79(var_02, "zombie_generic")) {
-      level thread maps\mp\zombies\shotgun\_zombies_shotgun_rideau_global::run_extermination_dialog();
+      level thread maps / mp / zombies / shotgun / _zombies_shotgun_rideau_global::run_extermination_dialog();
     }
 
-    var_07 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting(param_00 + "_delay");
+    var_07 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_difficulty_setting(param_00 + "_delay");
     if(!isDefined(var_07) && isDefined(var_01.var_2A35.ext_spawn_delay)) {
       var_07 = var_01.var_2A35.ext_spawn_delay;
     }
@@ -56,8 +56,8 @@ basic_extermination_run(param_00) {
       level.sg_manual_spawn_delay = var_07;
     }
 
-    var_08 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting(param_00 + "_count");
-    var_09 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_player_level_extension");
+    var_08 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_difficulty_setting(param_00 + "_count");
+    var_09 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_player_level_extension");
     var_08 = int(var_08 * var_09);
     lib_0547::func_7BA9(::exterminationkillcounter);
     level thread notify_on_extermination_kill_requirement(var_08);
@@ -95,7 +95,7 @@ notify_on_extermination_kill_requirement(param_00) {
   level endon("round complete");
   level.plr_extermination_kills = 0;
   level.currentexterminationgoal = param_00;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 setclientomnvar("ui_onevone_class_3", level.currentexterminationgoal);
     var_02 setclientomnvar("ui_onevone_class_4", level.plr_extermination_kills);
   }
@@ -128,7 +128,7 @@ exterminationkillcounter(param_00, param_01, param_02, param_03, param_04, param
   if(var_09) {
     level.plr_extermination_kills++;
     if(isDefined(level.currentexterminationgoal)) {
-      foreach(var_0B in level.var_744A) {
+      foreach(var_0B in level.players) {
         var_0B setclientomnvar("ui_onevone_class_3", level.currentexterminationgoal);
         var_0B setclientomnvar("ui_onevone_class_4", level.plr_extermination_kills);
       }
@@ -139,7 +139,7 @@ exterminationkillcounter(param_00, param_01, param_02, param_03, param_04, param
 objective_extermination_bomber_movemode() {
   if(!isDefined(self.bomberforceruntimestart)) {
     self.bomberforceruntimestart = gettime();
-    self.bomberforcerundelay = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_bomber_force_run_start");
+    self.bomberforcerundelay = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_bomber_force_run_start");
   }
 
   if(gettime() - self.bomberforceruntimestart / 1000 >= self.bomberforcerundelay) {
@@ -158,8 +158,8 @@ basic_extermination_skip_cleanup() {
 
 objective_extermination_sizzler_handler() {
   level endon("round complete");
-  level.max_sizzlers = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("extermination_common_sizzler_maximum");
-  level.max_sizzlers = level.max_sizzlers + maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_sizzler_add");
+  level.max_sizzlers = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_difficulty_setting("extermination_common_sizzler_maximum");
+  level.max_sizzlers = level.max_sizzlers + maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("extermination_common_sizzler_add");
   var_00 = 0.05;
   var_01 = 0.15;
   wait(randomfloatrange(var_00, var_01));
@@ -225,23 +225,23 @@ objective_extermination_sizzler_choose_best_generic(param_00) {
 objective_extermination_sizzler_think(param_00) {
   self endon("death");
   if(!common_scripts\utility::func_562E(param_00)) {
-    thread func_5D67(self.var_116);
+    thread func_5D67(self.origin);
   }
 
-  thread maps\mp\zombies\zombie_sizzler::zombie_make_sizzler();
+  thread maps / mp / zombies / zombie_sizzler::zombie_make_sizzler();
 }
 
 func_5D67(param_00) {
   var_01 = 5000;
   var_02 = spawn("script_model", param_00 + (0, 0, var_01));
   var_02 setModel("tag_origin");
-  var_02.var_1D = var_02.var_1D + (90, 0, 0);
+  var_02.angles = var_02.angles + (90, 0, 0);
   var_03 = spawn("script_model", param_00);
   var_03 setModel("tag_origin");
-  var_03.var_1D = var_03.var_1D + (-90, 0, 0);
+  var_03.angles = var_03.angles + (-90, 0, 0);
   var_04 = launchbeam("zmb_wm_lightning_beam", var_02, "tag_origin", var_03, "tag_origin");
   playFXOnTag(level.var_611["zmb_wm_lightning_impact_base_rnr"], var_03, "tag_origin");
-  lib_0378::func_8D74("lightning_strike", var_02.var_116, param_00);
+  lib_0378::func_8D74("lightning_strike", var_02.origin, param_00);
   wait(randomfloatrange(0.25, 0.35));
   var_04 delete();
   var_02 delete();

@@ -3,44 +3,44 @@
  * Script: 1362.gsc
 *********************************************/
 
-lib_0552::func_00D5() {
+init() {
   level.var_ABD1 = [];
   for(var_00 = 0; var_00 < 4; var_00++) {
     var_01 = spawnStruct();
     var_01.var_4DBA = 0;
     var_01.var_2903 = undefined;
     var_01.var_A902 = [];
-    level.var_ABD1 = common_scripts\utility::func_0F6F(level.var_ABD1, var_01);
+    level.var_ABD1 = common_scripts\utility::func_F6F(level.var_ABD1, var_01);
   }
 
   level.var_47DF = [];
-  level thread lib_0552::func_540F();
+  level thread func_540F();
 }
 
-lib_0552::func_540F() {
+func_540F() {
   for(;;) {
     level waittill("connected", var_00);
-    level thread lib_0552::func_09B1(var_00);
-    level thread lib_0552::func_A151(var_00);
-    level thread lib_0552::func_540E(var_00);
+    level thread func_09B1(var_00);
+    level thread func_A151(var_00);
+    level thread func_540E(var_00);
   }
 }
 
-lib_0552::func_09B1(param_00) {
+func_09B1(param_00) {
   var_01 = param_00 getentitynumber();
   var_02 = level.var_ABD1[var_01];
   foreach(var_04 in level.var_47DF) {
-    var_02.var_A902 = common_scripts\utility::func_0F6F(var_02.var_A902, var_04);
+    var_02.var_A902 = common_scripts\utility::func_F6F(var_02.var_A902, var_04);
   }
 }
 
-lib_0552::func_540E(param_00) {
+func_540E(param_00) {
   var_01 = param_00 getentitynumber();
   param_00 waittill("disconnect");
-  lib_0552::func_2391(var_01);
+  func_2391(var_01);
 }
 
-lib_0552::func_2391(param_00) {
+func_2391(param_00) {
   var_01 = level.var_ABD1[param_00];
   var_01.var_4DBA = 0;
   var_01.var_2903 = undefined;
@@ -51,68 +51,68 @@ lib_0552::func_2391(param_00) {
   }
 }
 
-lib_0552::func_7BFE(param_00, param_01, param_02, param_03) {
-  return lib_0552::func_7BF4(param_00, 1, param_01, param_02, param_03);
+func_7BFE(param_00, param_01, param_02, param_03) {
+  return func_7BF4(param_00, 1, param_01, param_02, param_03);
 }
 
-lib_0552::func_7BF3(param_00, param_01, param_02, param_03) {
+func_7BF3(param_00, param_01, param_02, param_03) {
   if(!isDefined(param_02)) {
     param_02 = 1;
   }
 
-  return lib_0552::func_7BF4(param_00, 2, param_01, param_02, param_03);
+  return func_7BF4(param_00, 2, param_01, param_02, param_03);
 }
 
-lib_0552::func_7BED(param_00, param_01) {
-  return lib_0552::func_7BF4(param_00, 3, param_01, 0);
+func_7BED(param_00, param_01) {
+  return func_7BF4(param_00, 3, param_01, 0);
 }
 
-lib_0552::func_7BFC(param_00) {
-  return lib_0552::func_7BE4(4, param_00, 0);
+func_7BFC(param_00) {
+  return func_7BE4(4, param_00, 0);
 }
 
-lib_0552::func_7BDD(param_00) {
-  return lib_0552::func_7BE4(5, param_00, 0);
+func_7BDD(param_00) {
+  return func_7BE4(5, param_00, 0);
 }
 
-lib_0552::func_7BE1(param_00, param_01, param_02, param_03, param_04) {
+func_7BE1(param_00, param_01, param_02, param_03, param_04) {
   if(!isDefined(param_02)) {
     param_02 = 0;
   }
 
   if(isDefined(param_00)) {
-    return lib_0552::func_7BF4(param_00, 6, param_01, param_02, param_03, param_04);
+    return func_7BF4(param_00, 6, param_01, param_02, param_03, param_04);
   }
 
-  return lib_0552::func_7BE4(6, param_01, param_02, param_03, param_04);
+  return func_7BE4(6, param_01, param_02, param_03, param_04);
 }
 
-lib_0552::func_7BE4(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = lib_0552::func_2823(param_00, param_01, param_02, param_03, param_04);
-  level.var_47DF = common_scripts\utility::func_0F6F(level.var_47DF, var_05);
-  level thread maps\mp\_utility::func_6F74(::lib_0552::func_09E2, var_05);
+func_7BE4(param_00, param_01, param_02, param_03, param_04) {
+  var_05 = func_2823(param_00, param_01, param_02, param_03, param_04);
+  level.var_47DF = common_scripts\utility::func_F6F(level.var_47DF, var_05);
+  level thread maps\mp\_utility::func_6F74(::func_09E2, var_05);
   return var_05.var_9FD3;
 }
 
-lib_0552::func_09E2(param_00) {
+func_09E2(param_00) {
   var_01 = self getentitynumber();
   var_02 = level.var_ABD1[var_01];
-  var_02.var_A902 = common_scripts\utility::func_0F6F(var_02.var_A902, param_00);
+  var_02.var_A902 = common_scripts\utility::func_F6F(var_02.var_A902, param_00);
 }
 
-lib_0552::func_7BF4(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = lib_0552::func_2823(param_01, param_02, param_03, param_04, param_05);
-  param_00 lib_0552::func_09E2(var_06);
+func_7BF4(param_00, param_01, param_02, param_03, param_04, param_05) {
+  var_06 = func_2823(param_01, param_02, param_03, param_04, param_05);
+  param_00 func_09E2(var_06);
   return var_06.var_9FD3;
 }
 
-lib_0552::func_2823(param_00, param_01, param_02, param_03, param_04) {
+func_2823(param_00, param_01, param_02, param_03, param_04) {
   var_05 = spawnStruct();
-  var_05.var_01B9 = param_00;
+  var_05.type = param_00;
   var_05.var_9D65 = param_01;
   var_05.var_6641 = param_02;
   if(!isDefined(param_03)) {
-    param_03 = param_01.var_0116;
+    param_03 = param_01.origin;
   }
 
   if(!isDefined(param_04)) {
@@ -148,7 +148,7 @@ lib_0552::func_2823(param_00, param_01, param_02, param_03, param_04) {
 
   var_06.var_6642 = 0;
   var_06.var_2F74 = 0;
-  var_06.var_0C13 = 0;
+  var_06.var_C13 = 0;
   var_06.refresh_internal_time = 0;
   var_06.refresh_internal_times_per_player = [];
   var_06.disabled_internal_per_player = [];
@@ -156,12 +156,12 @@ lib_0552::func_2823(param_00, param_01, param_02, param_03, param_04) {
   return var_05;
 }
 
-lib_0552::func_44FF(param_00) {
+func_44FF(param_00) {
   var_01 = tablelookup("mp/zombieInteractTable.csv", 2, param_00, 1);
   return int(var_01);
 }
 
-lib_0552::func_267D(param_00, param_01) {
+func_267D(param_00, param_01) {
   if(isDefined(param_01)) {
     return param_01;
   }
@@ -169,24 +169,24 @@ lib_0552::func_267D(param_00, param_01) {
   return param_00;
 }
 
-lib_0552::func_8C05(param_00, param_01, param_02) {
+func_8C05(param_00, param_01, param_02) {
   var_03 = 0;
   var_04 = 0;
   var_05 = param_00 getentitynumber();
   markrefreshed(var_05, param_01);
-  if(param_01.var_01B9 == 1 && isDefined(param_01.var_9FD3.var_A9B4)) {
+  if(param_01.type == 1 && isDefined(param_01.var_9FD3.var_A9B4)) {
     var_06 = tablelookuprownum("mp/zombieInteractTable.csv", 2, param_01.var_9FD3.var_A9B4);
     var_07 = int(tablelookupbyrow("mp/zombieInteractTable.csv", var_06, 0));
     var_08 = int(tablelookupbyrow("mp/zombieInteractTable.csv", var_06, 1));
     var_03 = var_07 | var_08 << 4;
-    var_04 = lib_0552::func_267D(param_01.var_9FD3.var_A9A5, param_02);
-  } else if(param_01.var_01B9 == 2 && isDefined(param_01.var_9FD3.var_6F58)) {
+    var_04 = func_267D(param_01.var_9FD3.var_A9A5, param_02);
+  } else if(param_01.type == 2 && isDefined(param_01.var_9FD3.var_6F58)) {
     var_06 = tablelookuprownum("mp/zombieInteractTable.csv", 2, param_01.var_9FD3.var_6F58);
     var_07 = int(tablelookupbyrow("mp/zombieInteractTable.csv", var_06, 0));
     var_08 = int(tablelookupbyrow("mp/zombieInteractTable.csv", var_06, 1));
     var_03 = var_07 | var_08 << 4;
-    var_04 = lib_0552::func_267D(param_01.var_9FD3.var_6F56, param_02);
-  } else if(param_01.var_01B9 == 3 && param_01.var_9FD3.var_1B73 != 0) {
+    var_04 = func_267D(param_01.var_9FD3.var_6F56, param_02);
+  } else if(param_01.type == 3 && param_01.var_9FD3.var_1B73 != 0) {
     var_06 = tablelookuprownum("mp/zombieInteractTable.csv", 2, "mysterybox");
     var_07 = int(tablelookupbyrow("mp/zombieInteractTable.csv", var_06, 0));
     var_08 = 0;
@@ -196,22 +196,22 @@ lib_0552::func_8C05(param_00, param_01, param_02) {
     }
 
     var_03 = var_07 | var_08 << 4;
-    var_04 = lib_0552::func_267D(param_01.var_9FD3.var_1B6F, param_02) | param_01.var_9FD3.var_1B73 << 16;
-  } else if(param_01.var_01B9 == 4) {
+    var_04 = func_267D(param_01.var_9FD3.var_1B6F, param_02) | param_01.var_9FD3.var_1B73 << 16;
+  } else if(param_01.type == 4) {
     var_07 = 4;
     var_0A = param_01.var_9FD3.var_9CCA;
     var_0B = param_01.var_9FD3.var_9CBE;
     var_0C = param_01.var_9FD3.var_9C9B;
     var_03 = var_07 | var_0A << 4 | var_0B << 8;
-    var_04 = lib_0552::func_267D(param_01.var_9FD3.var_9C9D, param_02) | var_0C << 16;
-  } else if(param_01.var_01B9 == 5) {
+    var_04 = func_267D(param_01.var_9FD3.var_9C9D, param_02) | var_0C << 16;
+  } else if(param_01.type == 5) {
     var_07 = 5;
     var_03 = var_07 | param_01.var_9FD3.var_3264 << 4;
-    var_04 = lib_0552::func_267D(param_01.var_9FD3.var_3259, param_02);
-  } else if(param_01.var_01B9 == 6) {
+    var_04 = func_267D(param_01.var_9FD3.var_3259, param_02);
+  } else if(param_01.type == 6) {
     var_07 = 6;
     var_03 = var_07 | param_01.var_9FD3.var_4028 << 4;
-    var_04 = lib_0552::func_267D(param_01.var_9FD3.var_401E, param_02);
+    var_04 = func_267D(param_01.var_9FD3.var_401E, param_02);
   }
 
   param_00 setclientomnvar("ui_zm_interaction_flags", var_03);
@@ -226,39 +226,39 @@ hideinteractprompt(param_00, param_01) {
   param_00 setclientomnvar("ui_zm_interaction_flags", 0);
 }
 
-lib_0552::func_4205(param_00, param_01, param_02) {
+func_4205(param_00, param_01, param_02) {
   if(isDefined(param_02)) {
     var_03 = param_02 - param_00 getEye();
   } else {
-    var_03 = param_02.var_0116 - param_01 getEye();
+    var_03 = param_02.origin - param_01 getEye();
   }
 
   var_04 = vectorNormalize((var_03[0], var_03[1], 0));
-  var_05 = anglesToForward(param_00.var_001D);
+  var_05 = anglesToForward(param_00.angles);
   var_06 = vectorNormalize((var_05[0], var_05[1], 0));
   var_07 = vectordot(var_04, var_06);
   var_08 = acos(clamp(var_07, -1, 1));
   return var_08;
 }
 
-lib_0552::func_990A(param_00) {
+func_990A(param_00) {
   var_01 = param_00 < 60;
   return var_01;
 }
 
-lib_0552::func_55E2(param_00, param_01, param_02) {
-  var_03 = lib_0552::func_4205(param_00, param_01, param_02);
-  var_04 = lib_0552::func_990A(var_03);
+func_55E2(param_00, param_01, param_02) {
+  var_03 = func_4205(param_00, param_01, param_02);
+  var_04 = func_990A(var_03);
   return var_04;
 }
 
-lib_0552::func_21B8(param_00, param_01) {
-  if(param_01.var_01B9 == 3) {
+func_21B8(param_00, param_01) {
+  if(param_01.type == 3) {
     var_02 = param_01.var_9FD3.var_1B72 maps\mp\zombies\_zombies_magicbox::func_43FF(param_00);
     if(param_01.var_9FD3.var_1B6F != var_02) {
       return int(var_02);
     }
-  } else if(param_01.var_01B9 == 5) {
+  } else if(param_01.type == 5) {
     var_03 = param_00 lib_0577::func_4687();
     if(var_03 != 1) {
       return int(var_03 * param_01.var_9FD3.var_3259);
@@ -348,7 +348,7 @@ check_progressive_interact_input(param_00, param_01) {
   self luinotifyeventextraplayer(&"remove_progressive_interact", 0);
 }
 
-lib_0552::func_A151(param_00) {
+func_A151(param_00) {
   param_00 endon("disconnect");
   var_01 = param_00 getentitynumber();
   var_02 = level.var_ABD1[var_01];
@@ -359,11 +359,11 @@ lib_0552::func_A151(param_00) {
       if(!isDefined(var_03) || var_02.var_2903.var_9D65 != var_03) {
         hideinteractprompt(param_00, var_02);
       } else {
-        var_04 = lib_0552::func_21B8(param_00, var_02.var_2903);
+        var_04 = func_21B8(param_00, var_02.var_2903);
         var_05 = needsrefresh(var_01, var_02.var_2903);
         if(var_05 || isDefined(var_04)) {
           param_00 luinotifyeventextraplayer(&"add_progressive_interact", 1, var_02.var_2903.var_9D65);
-          lib_0552::func_8C05(param_00, var_02.var_2903, var_04);
+          func_8C05(param_00, var_02.var_2903, var_04);
         }
       }
     } else if(isDefined(var_03)) {
@@ -372,9 +372,9 @@ lib_0552::func_A151(param_00) {
         if(var_07.var_9D65 == var_03) {
           var_02.var_4DBA = 1;
           var_02.var_2903 = var_07;
-          var_04 = lib_0552::func_21B8(param_00, var_02.var_2903);
+          var_04 = func_21B8(param_00, var_02.var_2903);
           param_00 luinotifyeventextraplayer(&"add_progressive_interact", 1, var_07.var_9D65);
-          lib_0552::func_8C05(param_00, var_07, var_04);
+          func_8C05(param_00, var_07, var_04);
           param_00 childthread check_progressive_interact_input(var_02, var_07);
           break;
         }

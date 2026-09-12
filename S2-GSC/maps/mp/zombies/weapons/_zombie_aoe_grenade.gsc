@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\weapons\_zombie_aoe_grenade.gsc
 ***********************************************************/
 
-func_00D5() {
+init() {
   initialize_pommel_grenade_pickups();
   register_pommel_step_func(::apply_health_to_players, "players", 1);
   register_pommel_step_func(::apply_damage_buff_to_players, "players", 1);
@@ -12,11 +12,11 @@ func_00D5() {
   lib_054D::register_persistent_tactical_zombie_equipment("island_grenade_hc_zm");
   level.damagebuffzonemultiplier = 1.6;
   level.powerbuffzonemultiplier = 1.8;
-  level.var_0611["zmb_pommel_zmb_dmg"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_zmb_dmg");
-  level.var_0611["zmb_pommel_energy_field"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_energy_field");
-  level.var_0611["zmb_pommel_energy_field_burst"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_energy_field_burst");
-  level.var_0611["zmb_pommel_pickup_energy"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_pickup_energy");
-  level.var_0611["zmb_isl_geis_pommel_float"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_geis_pommel_float");
+  level.var_611["zmb_pommel_zmb_dmg"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_zmb_dmg");
+  level.var_611["zmb_pommel_energy_field"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_energy_field");
+  level.var_611["zmb_pommel_energy_field_burst"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_energy_field_burst");
+  level.var_611["zmb_pommel_pickup_energy"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_pickup_energy");
+  level.var_611["zmb_isl_geis_pommel_float"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_geis_pommel_float");
   lib_0547::func_7BA9(::handle_pommel_kills);
   if(maps\mp\_utility::func_4571() != "mp_zombie_island") {
     init_pommel_aud();
@@ -67,13 +67,13 @@ handle_aoe_state_change(param_00, param_01, param_02) {
 initialize_pommel_grenade_pickups() {
   var_00 = common_scripts\utility::func_46B7("zmb_hc_grenade_pickup", "targetname");
   foreach(var_02 in var_00) {
-    var_03 = common_scripts\utility::func_44BE(var_02.var_01A2, "targetname");
+    var_03 = common_scripts\utility::func_44BE(var_02.target, "targetname");
     foreach(var_05 in var_03) {
-      switch (var_05.var_0165) {
+      switch (var_05.script_noteworthy) {
         case "pommel_spawn":
-          var_02.model_spawn = spawn("script_model", var_05.var_0116);
+          var_02.model_spawn = spawn("script_model", var_05.origin);
           var_02.model_spawn setModel("npc_zom_barb_pommel");
-          var_02.model_spawn method_805C();
+          var_02.model_spawn hide();
           var_02.var_3F2F = lib_0547::func_8FBA(var_05, "zmb_isl_geis_pommel_float");
           break;
 
@@ -89,7 +89,7 @@ spawn_pommel_special_pickup(param_00, param_01, param_02) {
   var_03 = common_scripts\utility::func_46B7("zmb_hc_grenade_pickup", "targetname");
   var_04 = undefined;
   foreach(var_06 in var_03) {
-    if(lib_0547::func_5565(var_06.var_0165, param_00)) {
+    if(lib_0547::func_5565(var_06.script_noteworthy, param_00)) {
       var_04 = var_06;
       break;
     }
@@ -98,7 +98,7 @@ spawn_pommel_special_pickup(param_00, param_01, param_02) {
   if(isDefined(param_02)) {
     var_04 = spawn("script_model", param_02);
     var_04 setModel("tag_origin");
-    var_04.var_0116 = param_02;
+    var_04.origin = param_02;
     var_04.model_spawn = spawn("script_model", param_02);
     var_04.model_spawn setModel("npc_zom_barb_pommel");
     var_04.var_3F2F = spawnlinkedfx(common_scripts\utility::func_44F5("zmb_isl_geis_pommel_float"), var_04, "tag_origin");
@@ -107,25 +107,25 @@ spawn_pommel_special_pickup(param_00, param_01, param_02) {
   }
 
   triggerfx(var_04.var_3F2F);
-  var_04.model_spawn method_805B();
+  var_04.model_spawn show();
   var_04.model_spawn lib_0378::func_8D74("pommel_pickup");
   var_04 thread rotate_pommel();
   var_08 = 1;
   for(;;) {
     var_04.var_9D65 waittill("trigger", var_09);
-    if(common_scripts\utility::func_0F79(var_09 getweaponslistall(), "island_grenade_hc_zm")) {
+    if(common_scripts\utility::func_F79(var_09 getweaponslistall(), "island_grenade_hc_zm")) {
       continue;
     }
 
     if(var_08) {
       var_08 = 0;
       if(maps\mp\_utility::func_4571() == "mp_zombie_island") {
-        maps\mp\gametypes\zombies::func_47A8("DLC1_ZM_DARKER");
+        maps / mp / gametypes / zombies::func_47A8("DLC1_ZM_DARKER");
       }
     }
 
     level thread maps\mp\zombies\_zombies_magicbox::func_A7D5(var_09, "island_grenade_hc_zm", undefined);
-    var_09 thread lib_0367::func_8E3C("pommelpickup", level.var_744A);
+    var_09 thread lib_0367::func_8E3C("pommelpickup", level.players);
     common_scripts\utility::func_3C8F(param_01);
   }
 }
@@ -153,18 +153,18 @@ register_pommel_step_func(param_00, param_01, param_02) {
   var_03.looping = param_02;
   switch (param_01) {
     case "players":
-      level.pommel_step_funcs_players = common_scripts\utility::func_0F6F(level.pommel_step_funcs_players, var_03);
+      level.pommel_step_funcs_players = common_scripts\utility::func_F6F(level.pommel_step_funcs_players, var_03);
       break;
   }
 }
 
 apply_health_to_players() {
-  if(self.var_00BC < self.var_00FB) {
-    self.var_00BC = self.var_00BC + 4;
+  if(self.health < self.maxhealth) {
+    self.health = self.health + 4;
   }
 
-  if(self.var_00BC > self.var_00FB) {
-    self.var_00BC = self.var_00FB;
+  if(self.health > self.maxhealth) {
+    self.health = self.maxhealth;
   }
 }
 
@@ -189,16 +189,16 @@ track_player_aoe_grenade() {
       if(!lib_0547::func_5565(var_03[1], "timeout")) {
         var_04 = var_01 replace_projectile_with_model();
         var_04 common_scripts\utility::func_3799("pommel_stone_running");
-        level.zmb_active_pommel_grenades = common_scripts\utility::func_0F6F(level.zmb_active_pommel_grenades, var_04);
-        playFX(level.var_0611["zmb_pommel_energy_field_burst"], var_04.var_0116);
-        lib_0378::func_8D74("zmb_pomel_grenade_detonate", var_04.var_0116);
+        level.zmb_active_pommel_grenades = common_scripts\utility::func_F6F(level.zmb_active_pommel_grenades, var_04);
+        playFX(level.var_611["zmb_pommel_energy_field_burst"], var_04.origin);
+        lib_0378::func_8D74("zmb_pomel_grenade_detonate", var_04.origin);
         var_05 = var_04 initial_burst(self);
         var_00 = thread handle_pommel_energy_field(var_04);
         var_04 thread run_pommel_aoe(var_05);
         var_04 common_scripts\utility::func_379C("pommel_stone_running");
-        level.zmb_active_pommel_grenades = common_scripts\utility::func_0F93(level.zmb_active_pommel_grenades, var_04);
-        playFX(level.var_0611["zmb_pommel_energy_field_burst"], var_04.var_0116);
-        lib_0378::func_8D74("zmb_pomel_grenade_final_explosion", var_04.var_0116);
+        level.zmb_active_pommel_grenades = common_scripts\utility::func_F93(level.zmb_active_pommel_grenades, var_04);
+        playFX(level.var_611["zmb_pommel_energy_field_burst"], var_04.origin);
+        lib_0378::func_8D74("zmb_pomel_grenade_final_explosion", var_04.origin);
         var_05 = var_04 initial_burst(self);
         if(isDefined(var_00)) {
           var_00 delete();
@@ -208,8 +208,8 @@ track_player_aoe_grenade() {
         var_06 = 999;
         wait(8);
         for(;;) {
-          var_07 = self.var_0116 + (0, 0, 48);
-          var_06 = distance(var_07, var_04.var_0116);
+          var_07 = self.origin + (0, 0, 48);
+          var_06 = distance(var_07, var_04.origin);
           var_08 = var_06 / 950;
           if(var_08 < 0.125) {
             break;
@@ -233,7 +233,7 @@ track_player_aoe_grenade() {
 
 handle_pommel_energy_field(param_00) {
   var_01 = spawnlinkedfx(common_scripts\utility::func_44F5("zmb_pommel_energy_field"), param_00.var_95AB, "TAG_ORIGIN");
-  lib_0378::func_8D74("zmb_pomel_grenade_force_field", param_00.var_0116);
+  lib_0378::func_8D74("zmb_pomel_grenade_force_field", param_00.origin);
   triggerfx(var_01);
   return var_01;
 }
@@ -262,7 +262,7 @@ initial_burst(param_00) {
   var_01 = [];
   var_02 = lib_0547::func_408F();
   if(isDefined(level.additional_pommel_targets)) {
-    var_02 = common_scripts\utility::func_0F73(var_02, level.additional_pommel_targets);
+    var_02 = common_scripts\utility::func_F73(var_02, level.additional_pommel_targets);
   }
 
   foreach(var_04 in var_02) {
@@ -271,7 +271,7 @@ initial_burst(param_00) {
       continue;
     }
 
-    var_01 = common_scripts\utility::func_0F6F(var_01, var_04);
+    var_01 = common_scripts\utility::func_F6F(var_01, var_04);
   }
 
   var_07 = 0;
@@ -290,14 +290,14 @@ initial_burst(param_00) {
 }
 
 apply_pommel_damage(param_00, param_01) {
-  var_02 = maps\mp\gametypes\zombies::func_1E59(lib_0547::func_0A51("zombie_generic"), 30);
+  var_02 = maps / mp / gametypes / zombies::func_1E59(lib_0547::func_A51("zombie_generic"), 30);
   if(param_01 > 8) {
     var_02 = var_02 / 2;
   }
 
-  self dodamage(var_02 / 2, self.var_0116, param_00, self, "MOD_RIFLE_BULLET", "island_grenade_hc_zm");
+  self dodamage(var_02 / 2, self.origin, param_00, self, "MOD_RIFLE_BULLET", "island_grenade_hc_zm");
   wait 0.05;
-  self dodamage(var_02 / 2, self.var_0116, param_00, self, "MOD_RIFLE_BULLET", "island_grenade_hc_zm");
+  self dodamage(var_02 / 2, self.origin, param_00, self, "MOD_RIFLE_BULLET", "island_grenade_hc_zm");
 }
 
 register_as_pommel_grenade_target(param_00) {
@@ -305,14 +305,14 @@ register_as_pommel_grenade_target(param_00) {
     level.additional_pommel_targets = [];
   }
 
-  level.additional_pommel_targets = common_scripts\utility::func_0F6F(level.additional_pommel_targets, param_00);
+  level.additional_pommel_targets = common_scripts\utility::func_F6F(level.additional_pommel_targets, param_00);
 }
 
 zap_zombies_vfx() {
   self endon("death");
-  self.pommel_damage = spawnlinkedfx(level.var_0611["zmb_pommel_zmb_dmg"], self, "J_Spine4");
+  self.pommel_damage = spawnlinkedfx(level.var_611["zmb_pommel_zmb_dmg"], self, "J_Spine4");
   triggerfx(self.pommel_damage);
-  maps\mp\agents\_agent_utility::deleteentonagentdeath(self.pommel_damage);
+  maps / mp / agents / _agent_utility::deleteentonagentdeath(self.pommel_damage);
   wait(0.5);
   if(isDefined(self.pommel_damage)) {
     self.pommel_damage delete();
@@ -328,11 +328,11 @@ apply_pommel_funcs(param_00, param_01) {
 }
 
 is_close_to(param_00) {
-  if(distance(param_00.var_0116, self.var_0116) > 128) {
+  if(distance(param_00.origin, self.origin) > 128) {
     return 0;
   }
 
-  if(abs(param_00.var_0116[2] - self.var_0116[2]) > 64) {
+  if(abs(param_00.origin[2] - self.origin[2]) > 64) {
     return 0;
   }
 
@@ -344,11 +344,11 @@ apply_aoe_func(param_00) {
 }
 
 replace_projectile_with_model() {
-  var_00 = spawn("script_model", self.var_0116);
+  var_00 = spawn("script_model", self.origin);
   var_00 setModel("npc_zom_barb_pommel");
-  var_00.var_95AB = spawn("script_model", var_00.var_0116);
+  var_00.var_95AB = spawn("script_model", var_00.origin);
   var_00.var_95AB setModel("tag_origin");
-  var_00.var_95AB.var_001D = (-90, 0, 0);
+  var_00.var_95AB.angles = (-90, 0, 0);
   self delete();
   return var_00;
 }
@@ -362,7 +362,7 @@ handle_pommel_kills(param_00, param_01, param_02, param_03, param_04, param_05, 
     param_01.pommelkills++;
     param_01.lifetimepommelkills++;
     if(param_01.lifetimepommelkills == 250 && maps\mp\_utility::func_4571() == "mp_zombie_island") {
-      param_01 maps\mp\gametypes\zombies::func_47C8("DLC1_ZM_POMMEL");
+      param_01 maps / mp / gametypes / zombies::func_47C8("DLC1_ZM_POMMEL");
     }
   }
 }
@@ -436,7 +436,7 @@ zmb_pommel_grenade_retrieval() {
 
 zmb_pommel_grenade_pickup() {
   var_00 = self;
-  var_01 = var_00.var_0116;
+  var_01 = var_00.origin;
   var_02 = lib_0380::func_6844("zmb_pommel_energy_lp", undefined, var_00, 1.5);
   level waittill("aud_stop_pommel_energy_loop");
   lib_0380::func_6850(var_02);

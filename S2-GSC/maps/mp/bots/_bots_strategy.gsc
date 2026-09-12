@@ -6,7 +6,7 @@
 func_19A0() {
   var_00 = func_199F(self.var_28C8);
   if(isDefined(var_00) && var_00.size > 0) {
-    return common_scripts\utility::func_7A33(var_00).var_0116;
+    return common_scripts\utility::func_7A33(var_00).origin;
   }
 
   return undefined;
@@ -14,7 +14,7 @@ func_19A0() {
 
 func_199F(param_00, param_01) {
   if(isDefined(self.var_2C16)) {
-    return maps\mp\bots\_bots_util::func_19F1(param_00, self.var_2C16, param_01);
+    return maps / mp / bots / _bots_util::func_19F1(param_00, self.var_2C16, param_01);
   }
 
   return [];
@@ -53,7 +53,7 @@ func_19ED(param_00, param_01, param_02) {
 
   foreach(var_0E, var_0A in var_03) {
     foreach(var_07 in var_05) {
-      if(maps\mp\bots\_bots_util::func_1A3A(var_0A, var_07)) {
+      if(maps / mp / bots / _bots_util::func_1A3A(var_0A, var_07)) {
         param_01["purpose"] = var_0A;
         if(function_01DA(var_06) || function_027E(var_06)) {
           var_0E["item_action"] = "throw";
@@ -93,8 +93,8 @@ func_1AD0(param_00, param_01, param_02, param_03, param_04) {
         continue;
       }
 
-      if(distancesquared(var_09.var_0116, param_02.var_0116) > 90000) {
-        if(vectordot(var_07, vectorNormalize(var_09.var_0116 - param_02.var_0116)) < 0.4) {
+      if(distancesquared(var_09.origin, param_02.origin) > 90000) {
+        if(vectordot(var_07, vectorNormalize(var_09.origin - param_02.origin)) < 0.4) {
           var_06[var_06.size] = var_09;
         }
       }
@@ -102,7 +102,7 @@ func_1AD0(param_00, param_01, param_02, param_03, param_04) {
 
     if(var_06.size > 0) {
       var_05 = common_scripts\utility::func_7A33(var_06);
-      var_0B = getnodesinradius(var_05.var_0116, 300, 50);
+      var_0B = getnodesinradius(var_05.origin, 300, 50);
       var_0C = [];
       foreach(var_0E in var_0B) {
         if(!isDefined(var_0E.var_1938)) {
@@ -118,7 +118,7 @@ func_1AD0(param_00, param_01, param_02, param_03, param_04) {
   if(isDefined(param_04)) {
     var_10 = undefined;
     if(param_00["purpose"] == "trap_directional" && isDefined(var_05)) {
-      var_11 = vectortoangles(var_05.var_0116 - param_04.var_0116);
+      var_11 = vectortoangles(var_05.origin - param_04.origin);
       var_10 = var_11[1];
     }
 
@@ -128,20 +128,20 @@ func_1AD0(param_00, param_01, param_02, param_03, param_04) {
 
     var_12 = self botsetscriptgoalnode(param_04, "guard", var_10);
     if(var_12) {
-      var_13 = maps\mp\bots\_bots_util::func_1B21();
+      var_13 = maps / mp / bots / _bots_util::func_1B21();
       if(var_13 == "goal") {
-        thread maps\mp\bots\_bots_util::func_19D4("stand", 4);
-        if(!isDefined(self.var_0088) || !self method_8371(self.var_0088)) {
-          thread maps\mp\bots\_bots_util::func_19AF(4);
+        thread maps / mp / bots / _bots_util::func_19D4("stand", 4);
+        if(!isDefined(self.enemy) || !self method_8371(self.enemy)) {
+          thread maps / mp / bots / _bots_util::func_19AF(4);
           var_14 = (0, 0, 0);
           if(param_00["weap_name"] == "h1_claymore_mp") {
             var_14 = (0, 0, 55);
           }
 
           if(isDefined(var_10)) {
-            self botlookatpoint(var_05.var_0116 + var_14, 3, "script_forced");
+            self botlookatpoint(var_05.origin + var_14, 3, "script_forced");
           } else {
-            self botlookatpoint(self.var_0116 + var_14 + anglesToForward(self getangles()) * 50, 3, "script_forced");
+            self botlookatpoint(self.origin + var_14 + anglesToForward(self getplayerangles()) * 50, 3, "script_forced");
           }
 
           self switchtoweapon(param_00["weap_name"]);
@@ -150,18 +150,18 @@ func_1AD0(param_00, param_01, param_02, param_03, param_04) {
           }
 
           func_1B0B(param_00["item_action"]);
-          self.var_0D8F = undefined;
+          self.var_D8F = undefined;
           thread func_1AD1("grenade_fire");
           thread func_1AD1("missile_fire");
           var_15 = common_scripts\utility::func_98E7(param_00["purpose"] == "tacticalinsertion", 6, 3);
           common_scripts\utility::func_A71A(var_15, "missile_fire", "grenade_fire");
           wait 0.05;
           self notify("ambush_trap_ent");
-          if(isDefined(self.var_0D8F) && param_00["purpose"] == "c4") {
-            thread func_1B26(self.var_0D8F, 300);
+          if(isDefined(self.var_D8F) && param_00["purpose"] == "c4") {
+            thread func_1B26(self.var_D8F, 300);
           }
 
-          self.var_0D8F = undefined;
+          self.var_D8F = undefined;
           wait(randomfloat(0.25));
           self notify("bot_force_stance_for_time");
           self botsetstance("none");
@@ -194,7 +194,7 @@ func_1AD1(param_00) {
   self endon("ambush_trap_ent");
   level endon("game_ended");
   self waittill(param_00, var_01);
-  self.var_0D8F = var_01;
+  self.var_D8F = var_01;
 }
 
 func_1B26(param_00, param_01) {
@@ -204,8 +204,8 @@ func_1B26(param_00, param_01) {
   level endon("game_ended");
   var_02 = param_01 * param_01;
   for(;;) {
-    if(distancesquared(self.var_0116, param_00.var_0116) > var_02) {
-      var_03 = self getclosestenemysqdist(param_00.var_0116, 1);
+    if(distancesquared(self.origin, param_00.origin) > var_02) {
+      var_03 = self getclosestenemysqdist(param_00.origin, 1);
       if(var_03 < var_02) {
         self botpressbutton("use", 0.25);
         wait(0.5);
@@ -374,22 +374,22 @@ func_19A4(param_00, param_01, param_02, param_03) {
     }
 
     if(!isDefined(var_07)) {
-      var_07 = function_00BA(maps\mp\bots\_bots_util::func_2C6C());
+      var_07 = function_00BA(maps / mp / bots / _bots_util::func_2C6C());
     }
 
     if(!isDefined(var_07)) {
-      var_08 = maps\mp\bots\_bots_util::func_2C6C();
+      var_08 = maps / mp / bots / _bots_util::func_2C6C();
       var_09 = getnodesinradiussorted(var_08, 256, 0);
       for(var_0A = 0; var_0A < var_09.size; var_0A++) {
-        var_0B = vectorNormalize(var_09[var_0A].var_0116 - var_08);
+        var_0B = vectorNormalize(var_09[var_0A].origin - var_08);
         var_0C = var_08 + var_0B * 15;
-        if(sighttracepassed(var_0C, var_09[var_0A].var_0116, 0, undefined)) {
+        if(sighttracepassed(var_0C, var_09[var_0A].origin, 0, undefined)) {
           var_07 = var_09[var_0A];
           break;
         }
 
         wait 0.05;
-        if(sighttracepassed(var_0C + (0, 0, 55), var_09[var_0A].var_0116 + (0, 0, 55), 0, undefined)) {
+        if(sighttracepassed(var_0C + (0, 0, 55), var_09[var_0A].origin + (0, 0, 55), 0, undefined)) {
           var_07 = var_09[var_0A];
           break;
         }
@@ -413,7 +413,7 @@ func_19A4(param_00, param_01, param_02, param_03) {
 
   var_0E = 0;
   var_0F = 0;
-  if(maps\mp\bots\_bots_util::func_1A28()) {
+  if(maps / mp / bots / _bots_util::func_1A28()) {
     var_0E = 1;
     var_0F = isDefined(param_03) && isDefined(param_03["entrance_points_index"]) && isarray(param_03["entrance_points_index"]);
   } else if(isDefined(param_03) && common_scripts\utility::func_562E(param_03["random_stance"])) {
@@ -437,7 +437,7 @@ func_19A4(param_00, param_01, param_02, param_03) {
     self.var_28C7 = undefined;
     self.var_28C8 = func_1E44(var_0E, var_0F);
     var_11 = self method_835F();
-    var_12 = maps\mp\bots\_bots_util::func_1A0B(var_04, var_11);
+    var_12 = maps / mp / bots / _bots_util::func_1A0B(var_04, var_11);
     if(!var_12) {
       wait(0.25);
       continue;
@@ -456,8 +456,8 @@ func_19A4(param_00, param_01, param_02, param_03) {
       self.var_28C6 = self.var_2C85;
       self.var_2C85 = undefined;
     } else {
-      if(isDefined(level.var_0A2C) && level.var_0A2C[self.var_01A7]) {
-        if(!common_scripts\utility::func_0F79(self.var_2C89, "avoid_aerial_enemies")) {
+      if(isDefined(level.var_A2C) && level.var_A2C[self.team]) {
+        if(!common_scripts\utility::func_F79(self.var_2C89, "avoid_aerial_enemies")) {
           self.var_2C89[self.var_2C89.size] = "avoid_aerial_enemies";
         }
       }
@@ -468,10 +468,10 @@ func_19A4(param_00, param_01, param_02, param_03) {
     self method_8358();
     var_16 = "";
     if(isDefined(self.var_28C6) || isDefined(self.var_28C7)) {
-      if(var_15 && maps\mp\bots\_bots_util::func_1A33() && !isPlayer(param_00) && isDefined(self.var_2C16)) {
+      if(var_15 && maps / mp / bots / _bots_util::func_1A33() && !isPlayer(param_00) && isDefined(self.var_2C16)) {
         var_17 = func_19ED("trap_directional", "trap", "c4");
         if(isDefined(var_17)) {
-          var_18 = maps\mp\bots\_bots_util::func_19F1(undefined, self.var_2C16);
+          var_18 = maps / mp / bots / _bots_util::func_19F1(undefined, self.var_2C16);
           func_1AD0(var_17, var_18, self.var_6709);
         }
       }
@@ -497,7 +497,7 @@ func_19A4(param_00, param_01, param_02, param_03) {
 
       var_1A = self method_835C();
       self notify("new_defend_goal");
-      maps\mp\bots\_bots_util::func_A8CB();
+      maps / mp / bots / _bots_util::func_A8CB();
       if(var_04 == "objective") {
         func_2C82();
         self botsetawareness(1);
@@ -506,8 +506,8 @@ func_19A4(param_00, param_01, param_02, param_03) {
 
       if(self method_8367()) {
         var_1B = self method_835C();
-        if(maps\mp\bots\_bots_util::func_1B1C(var_1B, var_1A)) {
-          var_16 = maps\mp\bots\_bots_util::func_1B21(20, "defend_force_node_recalculation");
+        if(maps / mp / bots / _bots_util::func_1B1C(var_1B, var_1A)) {
+          var_16 = maps / mp / bots / _bots_util::func_1B21(20, "defend_force_node_recalculation");
         }
       }
 
@@ -517,8 +517,8 @@ func_19A4(param_00, param_01, param_02, param_03) {
         }
 
         childthread func_2C8D();
-        if(var_15 && maps\mp\bots\_bots_util::func_1A33() && !isPlayer(param_00) && isDefined(self.var_2C16)) {
-          maps\mp\bots\_bots_personality::func_1B0A();
+        if(var_15 && maps / mp / bots / _bots_util::func_1A33() && !isPlayer(param_00) && isDefined(self.var_2C16)) {
+          maps / mp / bots / _bots_personality::func_1B0A();
         }
       }
     }
@@ -540,7 +540,7 @@ func_19A4(param_00, param_01, param_02, param_03) {
     }
 
     if(var_16 == "timeout" && !var_10) {
-      maps\mp\bots\_bots_util::func_1B22();
+      maps / mp / bots / _bots_util::func_1B22();
     }
   }
 }
@@ -587,7 +587,7 @@ func_1E44(param_00, param_01) {
     }
   }
 
-  return var_07;
+  return var_02;
 }
 
 func_8B7A(param_00) {
@@ -602,10 +602,10 @@ func_8B7A(param_00) {
       return 0;
     }
 
-    return distancesquared(self.var_0116, self.var_19A7) > var_02 * 0.75 * 0.75;
+    return distancesquared(self.origin, self.var_19A7) > var_02 * 0.75 * 0.75;
   }
 
-  if(self method_8377() && distancesquared(self.var_0116, self.var_19A7) < var_02) {
+  if(self method_8377() && distancesquared(self.origin, self.var_19A7) < var_02) {
     var_03 = self method_837E();
     return 0 <= var_03 && var_03 <= var_01;
   }
@@ -616,12 +616,12 @@ func_8B7A(param_00) {
 func_8868(param_00, param_01) {
   var_02 = spawnStruct();
   if(isDefined(param_01)) {
-    var_02.var_0116 = param_01;
+    var_02.origin = param_01;
   } else {
-    var_02.var_0116 = param_00.var_0116;
+    var_02.origin = param_00.origin;
   }
 
-  var_02.var_010D = param_00;
+  var_02.node = param_00;
   var_02.var_3E73 = 0;
   return var_02;
 }
@@ -652,7 +652,7 @@ func_2C82() {
     }
 
     var_05 = self method_835C();
-    if(!maps\mp\bots\_bots_util::func_1B1C(var_00, var_05)) {
+    if(!maps / mp / bots / _bots_util::func_1B1C(var_00, var_05)) {
       return;
     }
 
@@ -694,10 +694,10 @@ func_2C82() {
 
   var_0B = 5 + self botgetdifficultysetting("strategyLevel") * 2;
   var_0C = int(min(var_0B, var_0A.size));
-  var_0D = self botnodepickmultiple(var_0A, 15, var_0C, "node_protect", maps\mp\bots\_bots_util::func_2C6C(), "ignore_occupancy");
+  var_0D = self botnodepickmultiple(var_0A, 15, var_0C, "node_protect", maps / mp / bots / _bots_util::func_2C6C(), "ignore_occupancy");
   for(var_0E = 0; var_0E < var_0D.size; var_0E++) {
     var_0F = func_8868(var_0D[var_0E]);
-    self.var_5E5F = common_scripts\utility::func_0F6F(self.var_5E5F, var_0F);
+    self.var_5E5F = common_scripts\utility::func_F6F(self.var_5E5F, var_0F);
   }
 
   var_10 = botgetmemoryevents(0, gettime() - -5536, 1, "death", 0, self);
@@ -706,16 +706,16 @@ func_2C82() {
       var_13 = function_00BA(var_12);
       if(isDefined(var_13)) {
         var_0F = func_8868(var_13, var_12);
-        self.var_5E5F = common_scripts\utility::func_0F6F(self.var_5E5F, var_0F);
+        self.var_5E5F = common_scripts\utility::func_F6F(self.var_5E5F, var_0F);
       }
     }
   }
 
   if(isDefined(self.var_2C16)) {
-    var_15 = maps\mp\bots\_bots_util::func_19F1("stand", self.var_2C16);
+    var_15 = maps / mp / bots / _bots_util::func_19F1("stand", self.var_2C16);
     for(var_0E = 0; var_0E < var_15.size; var_0E++) {
       var_0F = func_8868(var_15[var_0E]);
-      self.var_5E5F = common_scripts\utility::func_0F6F(self.var_5E5F, var_0F);
+      self.var_5E5F = common_scripts\utility::func_F6F(self.var_5E5F, var_0F);
     }
   }
 
@@ -729,7 +729,7 @@ func_2C82() {
   var_18 = self method_835E();
   wait 0.05;
   for(var_19 = 1; var_19 < var_07.size - 2; var_19++) {
-    maps\mp\bots\_bots_util::func_1B22();
+    maps / mp / bots / _bots_util::func_1B22();
     var_1A = function_0204(var_07[var_19]);
     if(var_1A.size == 0) {
       continue;
@@ -737,14 +737,14 @@ func_2C82() {
 
     var_1B = [];
     for(var_0E = 0; var_0E < var_1A.size; var_0E++) {
-      if(!common_scripts\utility::func_AA4A(self.var_0116, self getangles(), var_1A[var_0E].var_0116, 0)) {
+      if(!common_scripts\utility::func_AA4A(self.origin, self getplayerangles(), var_1A[var_0E].origin, 0)) {
         continue;
       }
 
       for(var_1C = 0; var_1C < self.var_5E5F.size; var_1C++) {
         var_12 = self.var_5E5F[var_1C];
-        if(function_01F4(var_12.var_010D, var_1A[var_0E], 1)) {
-          var_1B = common_scripts\utility::func_0F6F(var_1B, var_1A[var_0E]);
+        if(function_01F4(var_12.node, var_1A[var_0E], 1)) {
+          var_1B = common_scripts\utility::func_F6F(var_1B, var_1A[var_0E]);
           var_1C = self.var_5E5F.size;
         }
       }
@@ -758,9 +758,9 @@ func_2C82() {
     if(isDefined(var_1D)) {
       var_1E = [];
       for(var_0E = 0; var_0E < self.var_5E5F.size; var_0E++) {
-        if(function_01F4(self.var_5E5F[var_0E].var_010D, var_1D, 1)) {
-          if(distance2dsquared(self.var_5E5F[var_0E].var_0116, var_1D.var_0116) > 3600) {
-            var_1E = common_scripts\utility::func_0F6F(var_1E, self.var_5E5F[var_0E]);
+        if(function_01F4(self.var_5E5F[var_0E].node, var_1D, 1)) {
+          if(distance2dsquared(self.var_5E5F[var_0E].origin, var_1D.origin) > 3600) {
+            var_1E = common_scripts\utility::func_F6F(var_1E, self.var_5E5F[var_0E]);
           }
         }
       }
@@ -768,7 +768,7 @@ func_2C82() {
       self method_8358();
       self botsetscriptgoalnode(var_1D, "critical");
       childthread func_62F3();
-      var_1F = maps\mp\bots\_bots_util::func_1B21(undefined, "cautious_approach_early_out");
+      var_1F = maps / mp / bots / _bots_util::func_1B21(undefined, "cautious_approach_early_out");
       self notify("stop_cautious_approach_early_out_monitor");
       if(var_1F == "cautious_approach_early_out") {
         break;
@@ -776,13 +776,13 @@ func_2C82() {
 
       if(var_1F == "goal") {
         for(var_0E = 0; var_0E < var_1E.size; var_0E++) {
-          if(distance2dsquared(self.var_0116, var_1E[var_0E].var_0116) < 1600) {
+          if(distance2dsquared(self.origin, var_1E[var_0E].origin) < 1600) {
             continue;
           }
 
           var_04 = 0;
           while(var_1E[var_0E].var_3E73 < 18 && var_04 < 3.6) {
-            self botlookatpoint(var_1E[var_0E].var_0116 + (0, 0, self getviewheight()), 0.25, "script_search");
+            self botlookatpoint(var_1E[var_0E].origin + (0, 0, self getviewheight()), 0.25, "script_search");
             wait(0.25);
             var_04 = var_04 + 0.25;
           }
@@ -816,7 +816,7 @@ func_62F3() {
 
   wait 0.05;
   for(;;) {
-    if(distancesquared(self.var_0116, self.var_19A7) < var_00) {
+    if(distancesquared(self.origin, self.var_19A7) < var_00) {
       self notify("cautious_approach_early_out");
     }
 
@@ -832,10 +832,10 @@ func_62F2() {
     if(isDefined(var_01)) {
       var_02 = self method_8375();
       for(var_03 = 0; var_03 < self.var_5E5F.size; var_03++) {
-        if(function_01F4(var_01, self.var_5E5F[var_03].var_010D, 1)) {
-          var_04 = common_scripts\utility::func_AA4A(self.var_0116, self getangles(), self.var_5E5F[var_03].var_0116, var_02);
+        if(function_01F4(var_01, self.var_5E5F[var_03].node, 1)) {
+          var_04 = common_scripts\utility::func_AA4A(self.origin, self getplayerangles(), self.var_5E5F[var_03].origin, var_02);
           var_05 = !var_04 || self.var_5E5F[var_03].var_3E73 < 17;
-          if(var_05 && distancesquared(self.var_0116, self.var_5E5F[var_03].var_0116) < var_00) {
+          if(var_05 && distancesquared(self.origin, self.var_5E5F[var_03].origin) < var_00) {
             var_04 = 1;
             self.var_5E5F[var_03].var_3E73 = 18;
           }
@@ -884,14 +884,14 @@ func_7792() {
         var_07.var_5B2C = var_04 - 10001;
       }
 
-      if(var_07.var_00BC == 0 && isDefined(var_07.var_2AB8) && var_04 - var_07.var_2AB8 < 5000) {
+      if(var_07.health == 0 && isDefined(var_07.var_2AB8) && var_04 - var_07.var_2AB8 < 5000) {
         if(var_04 - var_07.var_5B2C > 10000 && var_04 > var_00[var_08]) {
-          if(isDefined(var_07.var_00E6) && isDefined(var_07.var_00E6.var_01A7) && var_07.var_00E6.var_01A7 == common_scripts\utility::func_416F(self.var_01A7)) {
-            if(distancesquared(var_07.var_18A8.var_0116, self.var_0116) < var_02) {
-              self method_8379(var_07.var_00E6, var_07.var_18A8.var_0116);
-              var_09 = function_00BA(var_07.var_18A8.var_0116);
+          if(isDefined(var_07.lastattacker) && isDefined(var_07.lastattacker.team) && var_07.lastattacker.team == common_scripts\utility::func_416F(self.team)) {
+            if(distancesquared(var_07.var_18A8.origin, self.origin) < var_02) {
+              self method_8379(var_07.lastattacker, var_07.var_18A8.origin);
+              var_09 = function_00BA(var_07.var_18A8.origin);
               if(isDefined(var_09)) {
-                self.var_2C87 = var_09.var_0116;
+                self.var_2C87 = var_09.origin;
                 self notify("defend_force_node_recalculation");
               }
 
@@ -913,12 +913,12 @@ func_2C86() {
     return self.var_2C88;
   }
 
-  if(maps\mp\bots\_bots_util::func_1A28()) {
+  if(maps / mp / bots / _bots_util::func_1A28()) {
     return func_199F(self.var_28C8, 1);
   }
 
-  if(maps\mp\bots\_bots_util::func_1A33() || maps\mp\bots\_bots_util::func_1A27()) {
-    var_00 = findentrances(self.var_0116);
+  if(maps / mp / bots / _bots_util::func_1A33() || maps / mp / bots / _bots_util::func_1A27()) {
+    var_00 = findentrances(self.origin);
     return var_00;
   }
 }
@@ -930,32 +930,32 @@ func_2C8D() {
   self endon("script_goal_changed");
   var_00 = self getnearestnode();
   var_01 = undefined;
-  if(maps\mp\bots\_bots_util::func_1A28()) {
+  if(maps / mp / bots / _bots_util::func_1A28()) {
     var_02 = func_2C86();
     var_01 = [];
     if(isDefined(var_00)) {
       foreach(var_04 in var_02) {
         if(function_01F4(var_00, var_04, 1)) {
-          var_01 = common_scripts\utility::func_0F6F(var_01, var_04);
+          var_01 = common_scripts\utility::func_F6F(var_01, var_04);
         }
       }
     }
 
     if(var_01.size == 0) {
-      var_01 = findentrances(self.var_0116);
+      var_01 = findentrances(self.origin);
     }
-  } else if(maps\mp\bots\_bots_util::func_1A33() || maps\mp\bots\_bots_util::func_1A27()) {
+  } else if(maps / mp / bots / _bots_util::func_1A33() || maps / mp / bots / _bots_util::func_1A27()) {
     var_01 = func_2C86();
     if(isDefined(var_00) && !issubstr(self getcurrentweapon(), "riotshield") && isDefined(self.var_6709)) {
       if(function_01F4(var_00, self.var_6709, 1)) {
-        var_01 = common_scripts\utility::func_0F6F(var_01, self.var_6709);
+        var_01 = common_scripts\utility::func_F6F(var_01, self.var_6709);
       }
     }
   }
 
   if(isDefined(var_01)) {
-    childthread maps\mp\bots\_bots_util::func_1B2A(var_01);
-    if(maps\mp\bots\_bots_util::func_1A27()) {
+    childthread maps / mp / bots / _bots_util::func_1B2A(var_01);
+    if(maps / mp / bots / _bots_util::func_1A27()) {
       childthread func_1A83();
       return;
     }
@@ -984,7 +984,7 @@ func_1A82() {
   for(;;) {
     var_01 = 0.8;
     var_02 = 1;
-    if(common_scripts\utility::func_0F79(self.var_2C89, "strict_los")) {
+    if(common_scripts\utility::func_F79(self.var_2C89, "strict_los")) {
       var_01 = 1;
       var_02 = 0.5;
     }
@@ -1030,11 +1030,11 @@ func_1A83() {
   }
 
   for(;;) {
-    var_00 = anglesToForward(self.var_19A1 getangles()) * (1, 1, 0);
+    var_00 = anglesToForward(self.var_19A1 getplayerangles()) * (1, 1, 0);
     var_00 = vectorNormalize(var_00);
     foreach(var_02 in self.var_A8C9) {
       var_02.var_A8C7[self.var_37CD] = var_02.var_A8C6[self.var_37CD];
-      var_03 = var_02.var_0116 - self.var_19A1.var_0116;
+      var_03 = var_02.origin - self.var_19A1.origin;
       var_03 = vectorNormalize(var_03);
       var_04 = vectordot(var_00, var_03);
       if(var_04 > 0.6) {
@@ -1054,13 +1054,13 @@ func_1A83() {
 
 func_37DE(param_00) {
   var_01 = getnodezone(param_00);
-  var_02 = vectorNormalize(param_00.var_0116 - self.var_0116);
+  var_02 = vectorNormalize(param_00.origin - self.origin);
   for(var_03 = 0; var_03 < level.var_AC9C; var_03++) {
-    if(botzonegetcount(var_03, self.var_01A7, "enemy_predict") > 0) {
+    if(botzonegetcount(var_03, self.team, "enemy_predict") > 0) {
       if(isDefined(var_01) && var_03 == var_01) {
         return 1;
       } else {
-        var_04 = vectorNormalize(getzoneorigin(var_03) - self.var_0116);
+        var_04 = vectorNormalize(getzoneorigin(var_03) - self.origin);
         var_05 = vectordot(var_02, var_04);
         if(var_05 > 0.2) {
           return 1;
@@ -1079,7 +1079,7 @@ func_7733(param_00) {
 
   var_01 = self.var_A8C9;
   for(var_02 = 0; var_02 < level.var_AC9C; var_02++) {
-    if(botzonegetcount(var_02, self.var_01A7, "enemy_predict") <= 0) {
+    if(botzonegetcount(var_02, self.team, "enemy_predict") <= 0) {
       continue;
     }
 
@@ -1087,14 +1087,14 @@ func_7733(param_00) {
       break;
     }
 
-    var_03 = vectorNormalize(getzoneorigin(var_02) - self.var_0116);
+    var_03 = vectorNormalize(getzoneorigin(var_02) - self.origin);
     for(var_04 = 0; var_04 < var_01.size; var_04++) {
       var_05 = getnodezone(var_01[var_04]);
       var_06 = 0;
       if(isDefined(var_05) && var_02 == var_05) {
         var_06 = 1;
       } else {
-        var_07 = vectorNormalize(var_01[var_04].var_0116 - self.var_0116);
+        var_07 = vectorNormalize(var_01[var_04].origin - self.origin);
         var_08 = vectordot(var_07, var_03);
         if(var_08 > 0.2) {
           var_06 = 1;
@@ -1128,8 +1128,8 @@ func_37E0(param_00) {
 }
 
 func_37E1(param_00, param_01) {
-  var_02 = anglesToForward(param_00 getangles());
-  var_03 = vectorNormalize(param_01.var_0116 - param_00.var_0116);
+  var_02 = anglesToForward(param_00 getplayerangles());
+  var_03 = vectorNormalize(param_01.origin - param_00.origin);
   var_04 = vectordot(var_02, var_03);
   if(var_04 > 0.6) {
     return 1;
@@ -1140,10 +1140,10 @@ func_37E1(param_00, param_01) {
 
 func_1A05(param_00) {
   var_01 = [];
-  var_02 = func_1A06(self.var_0116, 1000);
+  var_02 = func_1A06(self.origin, 1000);
   foreach(var_04 in var_02) {
-    if(!isai(var_04) || var_04 maps\mp\bots\_bots_util::func_1A2D() && var_04.var_19AD == param_00) {
-      var_01 = common_scripts\utility::func_0F6F(var_01, var_04);
+    if(!isai(var_04) || var_04 maps / mp / bots / _bots_util::func_1A2D() && var_04.var_19AD == param_00) {
+      var_01 = common_scripts\utility::func_F6F(var_01, var_04);
     }
   }
 
@@ -1162,8 +1162,8 @@ func_1A04(param_00, param_01) {
   var_02 = [];
   var_03 = func_1A06(param_00, param_01);
   foreach(var_05 in var_03) {
-    if(!isai(var_05) || var_05 maps\mp\bots\_bots_util::func_1A2E(param_00)) {
-      var_02 = common_scripts\utility::func_0F6F(var_02, var_05);
+    if(!isai(var_05) || var_05 maps / mp / bots / _bots_util::func_1A2E(param_00)) {
+      var_02 = common_scripts\utility::func_F6F(var_02, var_05);
     }
   }
 
@@ -1175,9 +1175,9 @@ func_1A06(param_00, param_01) {
   var_03 = [];
   for(var_04 = 0; var_04 < level.var_6E97.size; var_04++) {
     var_05 = level.var_6E97[var_04];
-    if(var_05 != self && isDefined(var_05.var_01A7) && var_05.var_01A7 == self.var_01A7 && maps\mp\_utility::func_5800(var_05)) {
-      if(distancesquared(param_00, var_05.var_0116) < var_02) {
-        var_03 = common_scripts\utility::func_0F6F(var_03, var_05);
+    if(var_05 != self && isDefined(var_05.team) && var_05.team == self.team && maps\mp\_utility::func_5800(var_05)) {
+      if(distancesquared(param_00, var_05.origin) < var_02) {
+        var_03 = common_scripts\utility::func_F6F(var_03, var_05);
       }
     }
   }
@@ -1225,13 +1225,13 @@ func_19A3() {
 func_2C1D(param_00) {
   var_01 = [];
   foreach(var_03 in level.var_6E97) {
-    if(!isDefined(var_03.var_01A7)) {
+    if(!isDefined(var_03.team)) {
       continue;
     }
 
-    if(var_03.var_01A7 == self.var_01A7 && var_03 != self && isai(var_03) && var_03 maps\mp\bots\_bots_util::func_1A2D() && isDefined(var_03.var_28C8) && var_03.var_28C8 == param_00) {
-      if(var_03.var_19AC == self.var_19AC && maps\mp\bots\_bots_util::func_1A2E(var_03.var_19A7)) {
-        var_01 = common_scripts\utility::func_0F6F(var_01, var_03);
+    if(var_03.team == self.team && var_03 != self && isai(var_03) && var_03 maps / mp / bots / _bots_util::func_1A2D() && isDefined(var_03.var_28C8) && var_03.var_28C8 == param_00) {
+      if(var_03.var_19AC == self.var_19AC && maps / mp / bots / _bots_util::func_1A2E(var_03.var_19A7)) {
+        var_01 = common_scripts\utility::func_F6F(var_01, var_03);
       }
     }
   }
@@ -1242,7 +1242,7 @@ func_2C1D(param_00) {
 func_62FD() {
   var_00 = 0;
   var_01 = 175;
-  var_02 = self.var_19A1.var_0116;
+  var_02 = self.var_19A1.origin;
   var_03 = 0;
   var_04 = 0;
   for(;;) {
@@ -1250,7 +1250,7 @@ func_62FD() {
       thread func_19A3();
     }
 
-    self.var_19A7 = self.var_19A1.var_0116;
+    self.var_19A7 = self.var_19A1.origin;
     self.var_6709 = self.var_19A1 getnearestnode();
     if(!isDefined(self.var_6709)) {
       self.var_6709 = self getnearestnode();
@@ -1262,10 +1262,10 @@ func_62FD() {
       var_07 = lengthsquared(var_06);
       if(var_07 > 100) {
         var_00 = 0;
-        if(distancesquared(var_02, self.var_19A1.var_0116) > var_01 * var_01) {
-          var_02 = self.var_19A1.var_0116;
+        if(distancesquared(var_02, self.var_19A1.origin) > var_01 * var_01) {
+          var_02 = self.var_19A1.origin;
           var_04 = 1;
-          var_08 = vectorNormalize(var_05 - self.var_19A1.var_0116);
+          var_08 = vectorNormalize(var_05 - self.var_19A1.origin);
           var_09 = vectorNormalize(var_06);
           if(vectordot(var_08, var_09) < 0.1) {
             self notify("defend_force_node_recalculation");
@@ -1275,7 +1275,7 @@ func_62FD() {
       } else {
         var_00 = var_00 + 0.05;
         if(var_03 > 100 && var_04) {
-          var_02 = self.var_19A1.var_0116;
+          var_02 = self.var_19A1.origin;
           var_04 = 0;
         }
 
@@ -1289,7 +1289,7 @@ func_62FD() {
       }
 
       var_03 = var_07;
-      if(abs(self.var_19A1.var_0116[2] - var_05[2]) >= 50) {
+      if(abs(self.var_19A1.origin[2] - var_05[2]) >= 50) {
         self notify("defend_force_node_recalculation");
         wait(0.25);
       }
@@ -1301,13 +1301,13 @@ func_62FD() {
 
 func_3B6F() {
   var_00 = func_19A0();
-  var_01 = maps\mp\bots\_bots_util::func_19CC(maps\mp\bots\_bots_util::func_2C6C(), self.var_19AA, var_00);
+  var_01 = maps / mp / bots / _bots_util::func_19CC(maps / mp / bots / _bots_util::func_2C6C(), self.var_19AA, var_00);
   if(isDefined(var_01)) {
     if(isDefined(var_00)) {
-      var_02 = vectorNormalize(var_00 - var_01.var_0116);
+      var_02 = vectorNormalize(var_00 - var_01.origin);
       self.var_28C5 = vectortoangles(var_02);
     } else {
-      var_03 = vectorNormalize(var_01.var_0116 - maps\mp\bots\_bots_util::func_2C6C());
+      var_03 = vectorNormalize(var_01.origin - maps / mp / bots / _bots_util::func_2C6C());
       self.var_28C5 = vectortoangles(var_03);
     }
 
@@ -1320,18 +1320,18 @@ func_3B6F() {
     return;
   }
 
-  func_1A0F(undefined, maps\mp\bots\_bots_util::func_2C6C());
+  func_1A0F(undefined, maps / mp / bots / _bots_util::func_2C6C());
 }
 
 func_3B70() {
   var_00 = func_19A0();
-  var_01 = maps\mp\bots\_bots_util::func_19CD(self.var_19A8, var_00);
+  var_01 = maps / mp / bots / _bots_util::func_19CD(self.var_19A8, var_00);
   if(isDefined(var_01)) {
     if(isDefined(var_00)) {
-      var_02 = vectorNormalize(var_00 - var_01.var_0116);
+      var_02 = vectorNormalize(var_00 - var_01.origin);
       self.var_28C5 = vectortoangles(var_02);
     } else {
-      var_03 = vectorNormalize(var_01.var_0116 - maps\mp\bots\_bots_util::func_2C6C());
+      var_03 = vectorNormalize(var_01.origin - maps / mp / bots / _bots_util::func_2C6C());
       self.var_28C5 = vectortoangles(var_03);
     }
 
@@ -1344,33 +1344,33 @@ func_3B70() {
     return;
   }
 
-  func_1A0F(undefined, maps\mp\bots\_bots_util::func_2C6C());
+  func_1A0F(undefined, maps / mp / bots / _bots_util::func_2C6C());
 }
 
 func_3B72() {
-  var_00 = maps\mp\bots\_bots_util::func_19CB(maps\mp\bots\_bots_util::func_2C6C(), self.var_19AA);
+  var_00 = maps / mp / bots / _bots_util::func_19CB(maps / mp / bots / _bots_util::func_2C6C(), self.var_19AA);
   if(isDefined(var_00)) {
-    var_01 = vectorNormalize(maps\mp\bots\_bots_util::func_2C6C() - var_00.var_0116);
+    var_01 = vectorNormalize(maps / mp / bots / _bots_util::func_2C6C() - var_00.origin);
     self.var_28C5 = vectortoangles(var_01);
     self.var_28C6 = var_00;
     return;
   }
 
-  func_1A0F(maps\mp\bots\_bots_util::func_2C6C(), undefined);
+  func_1A0F(maps / mp / bots / _bots_util::func_2C6C(), undefined);
 }
 
 func_3B73() {
-  var_00 = maps\mp\bots\_bots_util::func_19CF(self.var_19A8, maps\mp\bots\_bots_util::func_2C6C());
+  var_00 = maps / mp / bots / _bots_util::func_19CF(self.var_19A8, maps / mp / bots / _bots_util::func_2C6C());
   if(isDefined(var_00)) {
     self.var_28C6 = var_00;
     return;
   }
 
-  func_1A0F(maps\mp\bots\_bots_util::func_2C6C(), undefined);
+  func_1A0F(maps / mp / bots / _bots_util::func_2C6C(), undefined);
 }
 
 func_3B6E() {
-  var_00 = maps\mp\bots\_bots_util::func_19CE(maps\mp\bots\_bots_util::func_2C6C(), self.var_19AA);
+  var_00 = maps / mp / bots / _bots_util::func_19CE(maps / mp / bots / _bots_util::func_2C6C(), self.var_19AA);
   if(isDefined(var_00)) {
     self.var_28C6 = var_00;
     return;
@@ -1382,12 +1382,12 @@ func_3B6E() {
     return;
   }
 
-  self.var_28C7 = self.var_0116;
+  self.var_28C7 = self.origin;
 }
 
 func_3B71() {
   var_00 = undefined;
-  var_01 = getnodesinradius(maps\mp\bots\_bots_util::func_2C6C(), self.var_19AA, 0);
+  var_01 = getnodesinradius(maps / mp / bots / _bots_util::func_2C6C(), self.var_19AA, 0);
   if(isDefined(var_01) && var_01.size > 0) {
     var_00 = self method_8366(var_01, 1 + var_01.size * 0.5, "node_traffic");
   }
@@ -1397,19 +1397,19 @@ func_3B71() {
     return;
   }
 
-  func_1A0F(undefined, maps\mp\bots\_bots_util::func_2C6C());
+  func_1A0F(undefined, maps / mp / bots / _bots_util::func_2C6C());
 }
 
 func_1A0F(param_00, param_01) {
   if(self.var_19AC == "protect_zone") {
-    self.var_28C7 = common_scripts\utility::func_7A33(self.var_19A8).var_0116;
+    self.var_28C7 = common_scripts\utility::func_7A33(self.var_19A8).origin;
     return;
   }
 
   if(self.var_19AC == "capture_zone") {
-    self.var_28C7 = maps\mp\bots\_bots_util::func_1A98(maps\mp\bots\_bots_util::func_2C6C(), self.var_19A8, ::func_1966);
+    self.var_28C7 = maps / mp / bots / _bots_util::func_1A98(maps / mp / bots / _bots_util::func_2C6C(), self.var_19A8, ::func_1966);
   } else {
-    self.var_28C7 = maps\mp\bots\_bots_util::func_1A99(maps\mp\bots\_bots_util::func_2C6C(), self.var_19AA, ::func_1966, 0.15, 0.9);
+    self.var_28C7 = maps / mp / bots / _bots_util::func_1A99(maps / mp / bots / _bots_util::func_2C6C(), self.var_19AA, ::func_1966, 0.15, 0.9);
   }
 
   if(isDefined(param_00)) {
@@ -1435,10 +1435,10 @@ func_1966(param_00) {
 func_196F(param_00, param_01, param_02, param_03) {
   for(var_04 = 0; var_04 < level.var_6E97.size; var_04++) {
     var_05 = level.var_6E97[var_04];
-    if(var_05.var_01A7 == self.var_01A7 && var_05 != self) {
+    if(var_05.team == self.team && var_05 != self) {
       if(isai(var_05)) {
         if(param_02) {
-          if(distancesquared(param_00, var_05.var_0116) < 441) {
+          if(distancesquared(param_00, var_05.origin) < 441) {
             return 1;
           }
         }
@@ -1454,7 +1454,7 @@ func_196F(param_00, param_01, param_02, param_03) {
       }
 
       if(param_01) {
-        if(distancesquared(param_00, var_05.var_0116) < 441) {
+        if(distancesquared(param_00, var_05.origin) < 441) {
           return 1;
         }
       }
@@ -1468,7 +1468,7 @@ func_196C() {
   var_00 = 0;
   if(isDefined(self.var_19A8)) {
     foreach(var_02 in self.var_19A8) {
-      var_03 = distance(self.var_19A7, var_02.var_0116);
+      var_03 = distance(self.var_19A7, var_02.origin);
       var_00 = max(var_03, var_00);
     }
   }
@@ -1485,9 +1485,9 @@ func_1B04() {
   self.var_959E = [];
   self.var_959D = 0;
   for(;;) {
-    if(self.var_959E.size > 0 && !maps\mp\bots\_bots_util::func_1A36()) {
+    if(self.var_959E.size > 0 && !maps / mp / bots / _bots_util::func_1A36()) {
       var_00 = self.var_959E[0];
-      if(!isDefined(var_00.var_0843)) {
+      if(!isDefined(var_00.var_843)) {
         self notify("start_tactical_goal");
         if(isDefined(var_00.var_9296)) {
           self[[var_00.var_9296]](var_00);
@@ -1504,12 +1504,12 @@ func_1B04() {
         }
 
         self botsetscriptgoal(var_00.var_4805, var_00.var_4806, var_01, var_00.var_480A, var_00.var_691E, var_00.var_8B2D);
-        var_02 = maps\mp\bots\_bots_util::func_1B21(undefined, "stop_tactical_goal");
+        var_02 = maps / mp / bots / _bots_util::func_1B21(undefined, "stop_tactical_goal");
         self notify("stop_goal_aborted_watch");
         if(var_02 == "goal") {
-          if(isDefined(var_00.var_087F)) {
+          if(isDefined(var_00.var_87F)) {
             self.var_959D = 1;
-            self[[var_00.var_087F]](var_00);
+            self[[var_00.var_87F]](var_00);
             self.var_959D = 0;
           }
         }
@@ -1523,7 +1523,7 @@ func_1B04() {
         }
       }
 
-      self.var_959E = common_scripts\utility::func_0F93(self.var_959E, var_00);
+      self.var_959E = common_scripts\utility::func_F93(self.var_959E, var_00);
     }
 
     wait 0.05;
@@ -1535,7 +1535,7 @@ func_A8B8(param_00) {
   self endon("stop_goal_aborted_watch");
   wait 0.05;
   for(;;) {
-    if(isDefined(param_00.var_0843) || isDefined(param_00.var_8B3E) && self[[param_00.var_8B3E]](param_00)) {
+    if(isDefined(param_00.var_843) || isDefined(param_00.var_8B3E) && self[[param_00.var_8B3E]](param_00)) {
       self notify("stop_tactical_goal");
     }
 
@@ -1545,10 +1545,10 @@ func_A8B8(param_00) {
 
 func_1A85(param_00, param_01, param_02, param_03) {
   var_04 = spawnStruct();
-  var_04.var_01B9 = param_00;
+  var_04.type = param_00;
   var_04.var_4805 = param_01;
   if(isDefined(self.var_6B4F)) {
-    if(!common_scripts\utility::func_0F79(self.var_6B4F, param_00)) {
+    if(!common_scripts\utility::func_F79(self.var_6B4F, param_00)) {
       return;
     }
   }
@@ -1565,7 +1565,7 @@ func_1A85(param_00, param_01, param_02, param_03) {
   var_04.var_9296 = param_03.var_9296;
   var_04.var_36AC = param_03.var_36AC;
   var_04.var_8B3E = param_03.var_8B3E;
-  var_04.var_087F = param_03.var_087F;
+  var_04.var_87F = param_03.var_87F;
   var_04.var_691E = param_03.var_691E;
   var_04.var_8B2D = param_03.var_8B2D;
   var_04.var_6C13 = param_03.var_6C13;
@@ -1590,7 +1590,7 @@ func_1A14(param_00, param_01) {
 
   if(isDefined(param_00)) {
     foreach(var_03 in self.var_959E) {
-      if(var_03.var_01B9 == param_00) {
+      if(var_03.type == param_00) {
         if(isDefined(param_01) && isDefined(var_03.var_68FB)) {
           return var_03.var_68FB == param_01;
         } else {
@@ -1609,7 +1609,7 @@ func_19EB(param_00) {
   var_01 = [];
   if(isDefined(self.var_959E)) {
     foreach(var_03 in self.var_959E) {
-      if(!common_scripts\utility::func_562E(var_03.var_0843) && var_03.var_01B9 == param_00) {
+      if(!common_scripts\utility::func_562E(var_03.var_843) && var_03.type == param_00) {
         var_01[var_01.size] = var_03;
       }
     }
@@ -1624,16 +1624,16 @@ func_192C(param_00, param_01) {
   }
 
   foreach(var_03 in self.var_959E) {
-    if(var_03.var_01B9 == param_00) {
+    if(var_03.type == param_00) {
       if(isDefined(param_01)) {
         if(isDefined(var_03.var_68FB) && var_03.var_68FB == param_01) {
-          var_03.var_0843 = 1;
+          var_03.var_843 = 1;
         }
 
         continue;
       }
 
-      var_03.var_0843 = 1;
+      var_03.var_843 = 1;
     }
   }
 }
@@ -1641,8 +1641,8 @@ func_192C(param_00, param_01) {
 func_19B0() {
   self.var_6B4F[0] = "map_interactive_object";
   foreach(var_01 in self.var_959E) {
-    if(var_01.var_01B9 != "map_interactive_object") {
-      var_01.var_0843 = 1;
+    if(var_01.type != "map_interactive_object") {
+      var_01.var_843 = 1;
     }
   }
 }
@@ -1660,21 +1660,21 @@ func_1A7A() {
       return 0;
     }
 
-    if(isDefined(self.var_0088) && self method_8371(self.var_0088)) {
+    if(isDefined(self.enemy) && self method_8371(self.enemy)) {
       return 0;
     }
 
-    var_02 = getzonenearest(self.var_0116);
+    var_02 = getzonenearest(self.origin);
     if(!isDefined(var_02)) {
       return 0;
     }
 
-    var_03 = botzonenearestcount(var_02, self.var_01A7, 1, "enemy_predict", ">", 0);
+    var_03 = botzonenearestcount(var_02, self.team, 1, "enemy_predict", ">", 0);
     if(!isDefined(var_03)) {
       return 0;
     }
 
-    var_04 = getnodesinradius(self.var_0116, 500, 0);
+    var_04 = getnodesinradius(self.origin, 500, 0);
     if(var_04.size <= 0) {
       return 0;
     }

@@ -20,7 +20,7 @@ run_rideau_supply_drop_comment() {
     return;
   }
 
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_vo_util::play_global_vo(var_02, 1, 1);
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_vo_util::play_global_vo(var_02, 1, 1);
 }
 
 run_rideau_bomber_comment() {
@@ -30,7 +30,7 @@ run_rideau_bomber_comment() {
     return;
   }
 
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_vo_util::play_global_vo("zmb_dlc3_gbl_ride_thatbomberisheadingtoward", 1, 1);
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_vo_util::play_global_vo("zmb_dlc3_gbl_ride_thatbomberisheadingtoward", 1, 1);
 }
 
 run_rideau_defense_comment() {
@@ -40,7 +40,7 @@ run_rideau_defense_comment() {
     return;
   }
 
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_vo_util::play_global_vo("zmb_dlc3_gbl_ride_wewereabletogetoutofgerma", 1, 1);
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_vo_util::play_global_vo("zmb_dlc3_gbl_ride_wewereabletogetoutofgerma", 1, 1);
 }
 
 run_rideau_escort_bomber_comment() {
@@ -50,7 +50,7 @@ run_rideau_escort_bomber_comment() {
     return;
   }
 
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_vo_util::play_global_vo("zmb_bp_wind_ride_nobodytouchthatbomberwene", 1, 1);
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_vo_util::play_global_vo("zmb_bp_wind_ride_nobodytouchthatbomberwene", 1, 1);
 }
 
 run_rideau_zeppelin_comment() {
@@ -60,16 +60,16 @@ run_rideau_zeppelin_comment() {
     return;
   }
 
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_vo_util::play_global_vo("zmb_bp_wind_ride_theyvegotairsupportwatchy", 1, 1);
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_vo_util::play_global_vo("zmb_bp_wind_ride_theyvegotairsupportwatchy", 1, 1);
 }
 
 run_extermination_dialog() {
-  maps\mp\zombies\shotgun\_zombies_shotgun_vo_util::try_run_conversation(level.extermination_story, 1);
+  maps / mp / zombies / shotgun / _zombies_shotgun_vo_util::try_run_conversation(level.extermination_story, 1);
 }
 
 dlg_played_on_hidden_character(param_00, param_01) {
-  if(maps\mp\zombies\shotgun\_zombies_shotgun_vo_util::is_character_present_in_match(param_00)) {
-    level thread maps\mp\zombies\shotgun\_zombies_shotgun_vo_util::random_valid_character_player(param_00, param_01);
+  if(maps / mp / zombies / shotgun / _zombies_shotgun_vo_util::is_character_present_in_match(param_00)) {
+    level thread maps / mp / zombies / shotgun / _zombies_shotgun_vo_util::random_valid_character_player(param_00, param_01);
     return 1;
   }
 

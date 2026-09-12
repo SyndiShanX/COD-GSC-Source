@@ -3,9 +3,9 @@
  * Script: 1365.gsc
 *********************************************/
 
-lib_0555::func_531F() {}
+func_531F() {}
 
-lib_0555::func_83DD(param_00, param_01, param_02, param_03) {
+func_83DD(param_00, param_01, param_02, param_03) {
   var_04 = tablelookuprownum("mp/zombieNotificationTable.csv", 1, param_00);
   if(var_04 != -1) {
     var_05 = int(tablelookupbyrow("mp/zombieNotificationTable.csv", var_04, 0));

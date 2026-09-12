@@ -16,7 +16,7 @@ sg_init_obj_air_attack() {
   aa_gun_power_init();
   aud_air_attack_init();
   plane_init();
-  maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::sg_obj_register_defaults("air_attack", ::run_air_attack, 120, 0, 1);
+  maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::sg_obj_register_defaults("air_attack", ::run_air_attack, 120, 0, 1);
 }
 
 run_air_attack(param_00) {
@@ -44,7 +44,7 @@ air_attack_skip_cleanup() {
 }
 
 air_attack_set_rules() {
-  level.aagun_ee_difficulty = level.var_744A.size;
+  level.aagun_ee_difficulty = level.players.size;
   if(level.aagun_ee_difficulty == 1) {
     level.points_to_win = 10;
   }
@@ -60,7 +60,7 @@ air_attack_set_rules() {
 
 air_attack_adjust_rules() {
   var_00 = level.aagun_ee_difficulty;
-  var_01 = level.var_744A.size;
+  var_01 = level.players.size;
   if(var_01 >= var_00) {
     if(var_01 == 2) {
       level.points_to_win = 12;
@@ -89,23 +89,23 @@ air_attack_cloud_handler() {
   var_03 = common_scripts\utility::func_46B7("struct_cloud_fx_spawner_d", "targetname");
   var_04 = common_scripts\utility::func_46B7("struct_cloud_fx_spawner_f", "targetname");
   foreach(var_06 in var_00) {
-    playFX(common_scripts\utility::func_44F5("zmb_clouds_puff_static"), var_06.var_116, (1, 1, 0));
+    playFX(common_scripts\utility::func_44F5("zmb_clouds_puff_static"), var_06.origin, (1, 1, 0));
   }
 
   foreach(var_06 in var_01) {
-    playFX(common_scripts\utility::func_44F5("zmb_clouds_puff_static"), var_06.var_116, (1, -1, 0));
+    playFX(common_scripts\utility::func_44F5("zmb_clouds_puff_static"), var_06.origin, (1, -1, 0));
   }
 
   foreach(var_06 in var_02) {
-    playFX(common_scripts\utility::func_44F5("zmb_clouds_puff_static"), var_06.var_116, (-1, -1, 0));
+    playFX(common_scripts\utility::func_44F5("zmb_clouds_puff_static"), var_06.origin, (-1, -1, 0));
   }
 
   foreach(var_06 in var_03) {
-    playFX(common_scripts\utility::func_44F5("zmb_clouds_puff_static"), var_06.var_116, (-1, 1, 0));
+    playFX(common_scripts\utility::func_44F5("zmb_clouds_puff_static"), var_06.origin, (-1, 1, 0));
   }
 
   foreach(var_06 in var_04) {
-    playFX(common_scripts\utility::func_44F5("zmb_clouds_puff_static"), var_06.var_116, (0, -1, 0));
+    playFX(common_scripts\utility::func_44F5("zmb_clouds_puff_static"), var_06.origin, (0, -1, 0));
   }
 }
 
@@ -159,7 +159,7 @@ air_attack_spawn_plane_wave() {
     var_00 = common_scripts\utility::func_F6F(var_00, var_04);
   }
 
-  var_06 = var_00[0].var_1A5;
+  var_06 = var_00[0].targetname;
   thread air_attack_bonus_point_counter(var_00, var_06);
   return var_00;
 }
@@ -203,10 +203,10 @@ aa_gun_get_all_turrets() {
 }
 
 aa_gun_trap_prep() {
-  var_00 = common_scripts\utility::func_44BE(self.var_1A2, "targetname");
+  var_00 = common_scripts\utility::func_44BE(self.target, "targetname");
   self.var_1176 = [];
   foreach(var_02 in var_00) {
-    switch (var_02.var_165) {
+    switch (var_02.script_noteworthy) {
       case "trig_use":
         self.var_9D65 = var_02;
         self.var_9D65.hint_string_available = &"ZOMBIE_ISLAND_BUY_FLAK";
@@ -226,7 +226,7 @@ aa_gun_trap_prep() {
 
       case "sbm_wall":
         self.wall_model = var_02;
-        self.wall_model.var_BC = 500;
+        self.wall_model.health = 500;
         self.wall_model common_scripts\utility::func_3799("this_turret_is_done");
         break;
     }
@@ -262,7 +262,7 @@ aa_gun_use_think() {
       var_00 = var_01;
     }
 
-    if(!var_00 maps\mp\gametypes\zombies::func_11C2(self.var_9D65.var_267B)) {
+    if(!var_00 maps / mp / gametypes / zombies::func_11C2(self.var_9D65.var_267B)) {
       var_00 thread lib_054E::func_695("needmoney");
       continue;
     } else {
@@ -270,11 +270,11 @@ aa_gun_use_think() {
       self.wall_model thread aa_gun_close_gate();
       self.wall_model aa_gun_set_player_using(var_00, self.var_9EDD);
       var_03 = ["zombie_generic", "zombie_berserker"];
-      self.wall_model thread maps\mp\mp_zombies_attack_object::create_inanimate_zombie_enemy(3, 400, "this_turret_is_done", 1024, 512, ::aa_gun_terminate_nuke, [::aa_gun_player_left_listen, ::aa_gun_player_death_listen, ::aa_gun_player_disconnect_listen], self.var_1176, var_03, ["zombie_is_passive", "zombie_is_crawler", "zombie_is_objective", "zombie_is_stunned"], var_00);
+      self.wall_model thread maps / mp / mp_zombies_attack_object::create_inanimate_zombie_enemy(3, 400, "this_turret_is_done", 1024, 512, ::aa_gun_terminate_nuke, [::aa_gun_player_left_listen, ::aa_gun_player_death_listen, ::aa_gun_player_disconnect_listen], self.var_1176, var_03, ["zombie_is_passive", "zombie_is_crawler", "zombie_is_objective", "zombie_is_stunned"], var_00);
       self.wall_model common_scripts\utility::func_379C("this_turret_is_done");
       self.wall_model aa_gun_unset_player_using(var_00, self.var_9EDD);
       self.wall_model common_scripts\utility::func_3796("this_turret_is_done");
-      playFX(level.var_611["zmb_isl_aa_gun_gk_energy"], self.wall_model.var_116, anglesToForward(self.wall_model.var_1D));
+      playFX(level.var_611["zmb_isl_aa_gun_gk_energy"], self.wall_model.origin, anglesToForward(self.wall_model.angles));
       var_00 lib_0378::func_8D74("aud_stunning_burst_use");
       self.wall_model thread aa_gun_open_gate();
       wait(1);
@@ -297,16 +297,16 @@ aa_gun_power_init() {
 }
 
 aa_gun_power_switch_init() {
-  var_00 = common_scripts\utility::func_44BE(self.var_1A2, "targetname");
+  var_00 = common_scripts\utility::func_44BE(self.target, "targetname");
   var_01 = function_021F("power_switch_aagun", "targetname");
-  self.computer_panels = common_scripts\utility::func_4461(self.var_116, var_01);
+  self.computer_panels = common_scripts\utility::func_4461(self.origin, var_01);
   self.computer_panels setscriptablepartstate("cbreaker", "standby_idle");
   self.computer_panels setscriptablepartstate("light_red", "on");
   self.computer_panels setscriptablepartstate("light_green", "off");
   self.computer_panels setscriptablepartstate("light_power", "off");
   self.computer_panels setscriptablepartstate("light_graph", "off");
   foreach(var_03 in var_00) {
-    switch (var_03.var_165) {
+    switch (var_03.script_noteworthy) {
       case "use_trigger":
         self.var_9D65 = var_03;
         self.var_9D65 setHintString(&"ZOMBIES_POWER_ON");
@@ -369,7 +369,7 @@ aa_gun_open_gate() {
 aa_gun_terminate_nuke() {
   var_00 = lib_0547::func_408F();
   var_01 = 0;
-  foreach(var_03 in common_scripts\utility::func_40B0(self.var_116, var_00, undefined, undefined, 200)) {
+  foreach(var_03 in common_scripts\utility::func_40B0(self.origin, var_00, undefined, undefined, 200)) {
     if(lib_0547::func_5565(var_03.var_A4B, "zombie_generic") || lib_0547::func_5565(var_03.var_A4B, "zombie_berserker")) {
       var_03 lib_056D::func_5A86();
     }
@@ -379,7 +379,7 @@ aa_gun_terminate_nuke() {
 aa_gun_set_player_using(param_00, param_01) {
   self.turret_player = param_00;
   self.var_9EDD = param_01;
-  param_00.var_CE = 1;
+  param_00.ignoreme = 1;
   param_00.on_aa_gun = 1;
   param_01 useby(param_00);
   param_00.var_480F = 1;
@@ -390,7 +390,7 @@ aa_gun_set_player_using(param_00, param_01) {
 }
 
 aa_gun_unset_player_using(param_00, param_01) {
-  param_00.var_CE = 0;
+  param_00.ignoreme = 0;
   param_00.on_aa_gun = 0;
   param_00 method_85E9();
   param_00.var_480F = 0;
@@ -458,13 +458,13 @@ plane_init() {
 plane_spawn_plane() {
   var_00 = "ger_bomber_stuka_hub";
   var_01 = "ger_bomber_stuka_vista";
-  var_02 = spawnhelicopter(self.var_116, self.var_1D, var_00, var_01);
-  var_02.var_1A5 = self.var_1A5;
+  var_02 = spawnhelicopter(self.origin, self.angles, var_00, var_01);
+  var_02.targetname = self.targetname;
   level.active_planes[level.active_planes.size] = var_02;
   var_02 method_80B1();
   var_02 notify("forward");
-  var_02.var_1C7 = "forward";
-  var_02.var_1C1 = "forward";
+  var_02.veh_transmission = "forward";
+  var_02.veh_pathdir = "forward";
   var_02.var_17DC = 0;
   var_02.var_931A = "forward";
   var_02 lib_0378::func_8D74("aud_plane_spawn");
@@ -472,7 +472,7 @@ plane_spawn_plane() {
   var_02 startpath(self);
   var_02 thread plane_vehicle_paths_non_heli(self);
   var_02 thread maps\mp\gametypes\_damage::func_8676(100);
-  var_02.var_BC = 60;
+  var_02.health = 60;
   var_02.var_29B5 = ::plane_on_damage;
   var_02 thread plane_handle_flak_projectile_proximity();
   var_02 thread plane_cleanup();
@@ -482,7 +482,7 @@ plane_spawn_plane() {
 plane_cleanup() {
   wait(4);
   for(;;) {
-    if(isDefined(self) && self.var_1C4 <= 0) {
+    if(isDefined(self) && self.veh_speed <= 0) {
       level.active_planes = common_scripts\utility::func_F93(level.active_planes, self);
       self notify("death");
       self delete();
@@ -497,7 +497,7 @@ plane_damage_player() {
   self endon("death");
   var_00 = getEnt("vol_plane_damage_area", "targetname");
   while(common_scripts\utility::func_3794("turret_on")) {
-    var_01 = self.var_116;
+    var_01 = self.origin;
     var_02 = anglesToForward(self gettagangles("TAG_MUZZLE_FX_1"));
     var_03 = 10000;
     var_04 = 180;
@@ -508,14 +508,14 @@ plane_damage_player() {
       var_07 = function_01AC(var_07, var_06, var_04, 1);
       foreach(var_09 in var_07) {
         if(bullettracepassed(var_06 + (0, 0, 25), var_09 getEye(), 0)) {
-          var_09 dodamage(80, self.var_116);
+          var_09 dodamage(80, self.origin);
         }
       }
 
-      var_0B = function_01AC(level.var_744A, var_06, var_04, 1);
+      var_0B = function_01AC(level.players, var_06, var_04, 1);
       foreach(var_0D in var_0B) {
-        if(bullettracepassed(var_06 + (0, 0, 25), var_0D.var_116, 0) || bullettracepassed(var_06 + (0, 0, 25), var_0D gettagorigin("j_spine4"), 0) || bullettracepassed(var_06 + (0, 0, 25), var_0D getEye(), 0)) {
-          var_0D dodamage(23, self.var_116);
+        if(bullettracepassed(var_06 + (0, 0, 25), var_0D.origin, 0) || bullettracepassed(var_06 + (0, 0, 25), var_0D gettagorigin("j_spine4"), 0) || bullettracepassed(var_06 + (0, 0, 25), var_0D getEye(), 0)) {
+          var_0D dodamage(23, self.origin);
           var_0D notify("aagun_damage");
         }
       }
@@ -548,12 +548,12 @@ plane_on_damage(param_00, param_01, param_02, param_03, param_04, param_05, para
     return;
   }
 
-  if(isDefined(param_01.maxhealth) && !isPlayer(param_01)) {
+  if(isDefined(param_01.var_1D1) && !isPlayer(param_01)) {
     param_01 = param_01 method_80E2();
   }
 
-  if(isDefined(self.var_6E74)) {
-    var_0C = self.var_6E74;
+  if(isDefined(self.parent)) {
+    var_0C = self.parent;
   } else {
     var_0C = self;
   }
@@ -562,8 +562,8 @@ plane_on_damage(param_00, param_01, param_02, param_03, param_04, param_05, para
     param_02 = 1;
   }
 
-  var_0C.var_BC = var_0C.var_BC - param_02;
-  if(var_0C.var_BC <= 0) {
+  var_0C.health = var_0C.health - param_02;
+  if(var_0C.health <= 0) {
     if(isDefined(param_01)) {
       param_01 maps\mp\gametypes\_damagefeedback::func_A102("killshot");
       if(isDefined(level.zmb_events_player_destroyed_stuka)) {
@@ -586,7 +586,7 @@ plane_on_damage(param_00, param_01, param_02, param_03, param_04, param_05, para
 
 plane_on_death(param_00, param_01, param_02, param_03) {
   self endon("death");
-  self.var_1180 = param_00;
+  self.attacker = param_00;
 }
 
 plane_crashy() {
@@ -617,10 +617,10 @@ plane_crashy() {
       var_02 = (0, cos(var_01), sin(var_01));
       var_03 = (randomfloatrange(-1000, 1000), randomfloatrange(-1000, 1000), randomfloatrange(-1000, 1000));
       var_04 = 1.2;
-      self method_8224(level.var_721C.var_116 + var_03, self method_8283() * var_04, var_02);
+      self method_8224(level.player.origin + var_03, self method_8283() * var_04, var_02);
     }
 
-    common_scripts\utility::func_A74B("veh_collision", randomfloatrange(0.5, 3));
+    common_scripts\utility::waittill_notify_or_timeout("veh_collision", randomfloatrange(0.5, 3));
   }
 
   if(!isDefined(self.crashingspecial) || self.crashingspecial == 0) {
@@ -649,13 +649,13 @@ plane_go_boom(param_00) {
     return;
   }
 
-  var_01 = anglesToForward(self.var_1D);
+  var_01 = anglesToForward(self.angles);
   if(!common_scripts\utility::func_562E(param_00)) {
-    playFX(level.var_611["plane_death"], self.var_116, var_01);
-    lib_0378::func_8D74("aud_plane_explode", self.var_116);
+    playFX(level.var_611["plane_death"], self.origin, var_01);
+    lib_0378::func_8D74("aud_plane_explode", self.origin);
   }
 
-  level notify(self.var_1A5);
+  level notify(self.targetname);
   level notify("air_attack_plane_killed");
   self notify("delete");
   waittillframeend;
@@ -682,9 +682,9 @@ plane_flak_projectile_zombie_proximity_detonate(param_00, param_01) {
   level endon("game_ended");
   param_00 endon("death");
   var_02 = 64;
-  var_03 = common_scripts\utility::func_4461(param_00.var_116, lib_0547::func_408F());
+  var_03 = common_scripts\utility::func_4461(param_00.origin, lib_0547::func_408F());
   for(;;) {
-    if(isDefined(var_03) && distance2d(var_03 getEye(), param_00.var_116) < var_02 && abs(param_00.var_116[2] - var_03.var_116[2]) < 120) {
+    if(isDefined(var_03) && distance2d(var_03 getEye(), param_00.origin) < var_02 && abs(param_00.origin[2] - var_03.origin[2]) < 120) {
       param_01 maps\mp\gametypes\_damagefeedback::func_A102("standard");
       param_00 detonateusingweapon("turretweapon_ger_btry_flak38_mp_zombie", param_01, param_00);
       break;
@@ -702,8 +702,8 @@ plane_flak_projectile_proximity_detonate(param_00, param_01) {
   param_00 endon("death");
   var_02 = 250000;
   for(;;) {
-    var_03 = self.var_116;
-    var_04 = distancesquared(param_00.var_116, var_03);
+    var_03 = self.origin;
+    var_04 = distancesquared(param_00.origin, var_03);
     if(var_04 < var_02) {
       param_00 notify("plane_death");
       self dodamage(500, var_03, param_01, param_00, "MOD_PROJECTILE", param_00.var_A9E0);
@@ -735,7 +735,7 @@ plane_get_path_getfunc_reverse(param_00) {
 }
 
 plane_death_roll_on() {
-  if(self.var_BC > 0) {
+  if(self.health > 0) {
     self.var_7ED6 = 1;
   }
 }
@@ -784,11 +784,11 @@ plane_wait_til_node_wait_triggered(param_00, param_01, param_02, param_03) {
   while(isDefined(param_02) && var_04 < 3) {
     var_04++;
     thread plane_node_wait_triggered(param_00, param_01, param_02);
-    if(!isDefined(param_02.var_1A2)) {
+    if(!isDefined(param_02.target)) {
       return;
     }
 
-    param_02 = [[param_03]](param_02.var_1A2);
+    param_02 = [[param_03]](param_02.target);
   }
 }
 
@@ -821,7 +821,7 @@ plane_vehicle_paths_non_heli(param_00) {
   var_04 = var_01;
   var_05 = plane_get_path_getfunc(var_01);
   var_06 = plane_get_path_getfunc_reverse(var_01);
-  if(self.var_1C1 == "reverse") {
+  if(self.veh_pathdir == "reverse") {
     var_07 = var_06;
   } else {
     var_07 = var_06;
@@ -834,9 +834,9 @@ plane_vehicle_paths_non_heli(param_00) {
     }
 
     self.var_2944 = var_04;
-    if(isDefined(var_04.var_165)) {
-      self notify(var_04.var_165);
-      self notify("noteworthy", var_04.var_165);
+    if(isDefined(var_04.script_noteworthy)) {
+      self notify(var_04.script_noteworthy);
+      self notify("noteworthy", var_04.script_noteworthy);
     }
 
     waittillframeend;
@@ -874,16 +874,16 @@ plane_vehicle_paths_non_heli(param_00) {
       common_scripts\utility::func_3C7B(var_04.var_819B);
     }
 
-    if(isDefined(var_04.var_165)) {
-      if(var_04.var_165 == "godon") {
+    if(isDefined(var_04.script_noteworthy)) {
+      if(var_04.script_noteworthy == "godon") {
         self.var_480F = 1;
       }
 
-      if(var_04.var_165 == "godoff") {
+      if(var_04.script_noteworthy == "godoff") {
         self.var_480F = 0;
       }
 
-      if(var_04.var_165 == "engineoff") {
+      if(var_04.script_noteworthy == "engineoff") {
         self method_828D();
       }
     }
@@ -919,15 +919,15 @@ plane_vehicle_paths_non_heli(param_00) {
     }
 
     if(isDefined(var_04.var_812B)) {
-      self.var_1C0 = var_04.var_812B;
+      self.veh_brake = var_04.var_812B;
     }
 
     if(isDefined(var_04.var_8265)) {
-      self.var_1C3 = var_04.var_8265;
+      self.veh_pathtype = var_04.var_8265;
     }
 
     if(isDefined(var_04.var_8262)) {
-      self.var_1C1 = var_04.var_8262;
+      self.veh_pathdir = var_04.var_8262;
     }
 
     if(isDefined(var_04.var_8184)) {
@@ -951,23 +951,23 @@ plane_vehicle_paths_non_heli(param_00) {
     }
 
     var_03 = var_04;
-    if(!isDefined(var_04.var_1A2)) {
+    if(!isDefined(var_04.target)) {
       break;
     }
 
-    if(self.var_1C1 == "reverse") {
+    if(self.veh_pathdir == "reverse") {
       var_07 = var_06;
     } else {
       var_07 = var_05;
     }
 
-    var_04 = [[var_07]](var_04.var_1A2);
+    var_04 = [[var_07]](var_04.target);
     if(!isDefined(var_04)) {
       var_04 = var_03;
       break;
-    } else if(!isDefined(var_04.var_1A2) || isDefined(var_04.var_82CA)) {
+    } else if(!isDefined(var_04.target) || isDefined(var_04.var_82CA)) {
       var_0B = max(0.01, length(self method_8289()));
-      var_0C = distance(self.var_116, var_04.var_116);
+      var_0C = distance(self.origin, var_04.origin);
       var_0D = max(0.01, var_0C / var_0B);
       self notify("about_to_stop", var_0D);
     }
@@ -1024,7 +1024,7 @@ aud_aa_gun_gate_down() {
 aud_plane_mission_start() {
   level endon("stop_plane_int_submix");
   for(;;) {
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       if(var_01.current_volume_is_interior) {
         var_01 method_8626("isl_plane_interior_mix");
         continue;
@@ -1039,7 +1039,7 @@ aud_plane_mission_start() {
 
 aud_plane_spawn() {
   var_00 = self;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 thread aud_plane_spawn_watcher(var_00);
   }
 }
@@ -1048,7 +1048,7 @@ aud_plane_spawn_watcher(param_00) {
   param_00 endon("death");
   var_01 = self;
   while(1 && isDefined(param_00)) {
-    var_02 = distance(param_00.var_116, var_01.var_116);
+    var_02 = distance(param_00.origin, var_01.origin);
     if(var_02 <= 8000) {
       var_03 = lib_0380::func_288B("plane_flyby", undefined, param_00);
       lib_0380::func_288F(var_03, param_00, "plane_sound_done");
@@ -1073,8 +1073,8 @@ aud_plane_damage_player() {
   lib_0380::func_2888("bullet_large_flesh_plr");
   if(lib_0378::func_8D1B(0.3)) {
     wait(0.1);
-    var_01 = var_00.var_116 + (randomintrange(25, 50), randomintrange(25, 50), var_00.var_116[2]);
-    lib_0380::func_2889("whizby_near", undefined, var_00.var_116);
+    var_01 = var_00.origin + (randomintrange(25, 50), randomintrange(25, 50), var_00.origin[2]);
+    lib_0380::func_2889("whizby_near", undefined, var_00.origin);
   }
 }
 

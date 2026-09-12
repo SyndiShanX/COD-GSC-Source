@@ -3,7 +3,7 @@
  * Script: maps\mp\_breadcrumbdata.gsc
 *********************************************/
 
-func_00D5() {
+init() {
   if(!isDefined(game["gamestarted"])) {
     function_0377("mp/ddl/breadcrumbdata.ddl");
     function_0378();

@@ -73,12 +73,12 @@ func_4558(param_00, param_01) {
   switch (param_00) {
     case 2:
     case 1:
-      return self.var_0116 + (0, 0, var_02);
+      return self.origin + (0, 0, var_02);
 
     case 8:
     case 4:
       var_03 = self gettagorigin(param_01);
-      return (self.var_0116[0], self.var_0116[1], var_03[2]);
+      return (self.origin[0], self.origin[1], var_03[2]);
 
     case 16:
       return self gettagorigin(var_02);
@@ -131,8 +131,8 @@ func_52A9() {
   level.var_2FDE[8]["dismemberSound"] = "zmb_dism_leg";
   level.var_2FDE[16]["dismemberSound"] = "zmb_dism_head";
   level.var_2FDE["full"]["dismemberSound"] = "zmb_dism_instakill_explosion";
-  level.var_0611["torso_arm_loss_right"] = loadfx("vfx/blood/mp_torso_loss_arm_ri");
-  level.var_0611["torso_loss_left"] = loadfx("vfx/blood/mp_torso_loss_impact_le");
+  level.var_611["torso_arm_loss_right"] = loadfx("vfx/blood/mp_torso_loss_arm_ri");
+  level.var_611["torso_loss_left"] = loadfx("vfx/blood/mp_torso_loss_impact_le");
   setdvarifuninitialized("scr_dismemberment_style", 0);
 }
 
@@ -181,9 +181,9 @@ func_4AAB(param_00) {
   }
 
   var_07 = self.var_267E;
-  if(self.var_003A == "script_model") {
-    if(isDefined(self.var_01A7)) {
-      var_02 = self.var_01A7;
+  if(self.classname == "script_model") {
+    if(isDefined(self.team)) {
+      var_01 = self.team;
     }
   }
 
@@ -193,8 +193,8 @@ func_4AAB(param_00) {
 
   var_07[2] = 0;
   var_07[3] = 0;
-  var_07[var_05[2]] = var_05[1];
-  self.var_65D2 = var_05[4];
-  self.var_65D1 = var_05[5];
-  self setcostumemodels(var_07, var_02, 1);
+  var_07[var_04[2]] = var_04[1];
+  self.var_65D2 = var_04[4];
+  self.var_65D1 = var_04[5];
+  self setcostumemodels(var_07, var_01, 1);
 }

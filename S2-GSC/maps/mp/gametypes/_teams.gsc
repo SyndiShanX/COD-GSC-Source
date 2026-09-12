@@ -3,14 +3,14 @@
  * Script: maps\mp\gametypes\_teams.gsc
 *********************************************/
 
-func_00D5() {
+init() {
   func_534C();
   level.var_984C = getdvarint("scr_teambalance");
   level.var_6079 = getdvarint("2299");
   func_86FF();
   level.var_3E8B = [];
-  if(level.var_984D) {
-    level thread func_6B6C();
+  if(level.teambased) {
+    level thread onplayerconnect();
     level thread func_A171();
     wait(0.15);
     level thread func_A153();
@@ -41,7 +41,7 @@ func_534C() {
   setDvar("4832", "1 .45 .5");
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
     var_00 thread func_6B49();
@@ -69,7 +69,7 @@ func_6B48() {
   self endon("disconnect");
   for(;;) {
     self waittill("joined_spectators");
-    self.var_012C["teamTime"] = undefined;
+    self.pers["teamTime"] = undefined;
   }
 }
 
@@ -82,24 +82,24 @@ func_9BC3() {
       }
     }
 
-    lootservicestarttrackingplaytime(self.var_01D6);
+    lootservicestarttrackingplaytime(self.var_1D6);
     self.loot_service_started_tracking_playtime = 1;
   }
 
-  self.var_9A06["allies"] = 0;
-  self.var_9A06["axis"] = 0;
-  self.var_9A06["other"] = 0;
+  self.timeplayed["allies"] = 0;
+  self.timeplayed["axis"] = 0;
+  self.timeplayed["other"] = 0;
   maps\mp\_utility::func_3FA5("prematch_done");
   for(;;) {
     if(game["state"] == "playing") {
-      if(self.var_0179 == "allies") {
-        self.var_9A06["allies"]++;
-        self.var_9A06["total"]++;
-      } else if(self.var_0179 == "axis") {
-        self.var_9A06["axis"]++;
-        self.var_9A06["total"]++;
-      } else if(self.var_0179 == "spectator") {
-        self.var_9A06["other"]++;
+      if(self.sessionteam == "allies") {
+        self.timeplayed["allies"]++;
+        self.timeplayed["total"]++;
+      } else if(self.sessionteam == "axis") {
+        self.timeplayed["axis"]++;
+        self.timeplayed["total"]++;
+      } else if(self.sessionteam == "spectator") {
+        self.timeplayed["other"]++;
       }
     }
 
@@ -108,14 +108,14 @@ func_9BC3() {
 }
 
 func_A153() {
-  if(!level.var_7A67) {
+  if(!level.rankedmatch) {
     return;
   }
 
   level endon("game_ended");
   for(;;) {
     maps\mp\gametypes\_hostmigration::func_A782();
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       var_01 func_A14E();
     }
 
@@ -128,35 +128,35 @@ func_A14E() {
     return;
   }
 
-  if(!maps\mp\_utility::func_7A69()) {
+  if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
 
-  if(self.var_9A06["allies"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedAllies", self.var_9A06["allies"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.var_9A06["allies"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.var_9A06["allies"]);
+  if(self.timeplayed["allies"]) {
+    maps\mp\gametypes\_persistence::func_9315("timePlayedAllies", self.timeplayed["allies"]);
+    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["allies"]);
+    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["allies"]);
   }
 
-  if(self.var_9A06["axis"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedOpfor", self.var_9A06["axis"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.var_9A06["axis"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.var_9A06["axis"]);
+  if(self.timeplayed["axis"]) {
+    maps\mp\gametypes\_persistence::func_9315("timePlayedOpfor", self.timeplayed["axis"]);
+    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["axis"]);
+    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["axis"]);
   }
 
-  if(self.var_9A06["other"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedOther", self.var_9A06["other"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.var_9A06["other"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.var_9A06["other"]);
+  if(self.timeplayed["other"]) {
+    maps\mp\gametypes\_persistence::func_9315("timePlayedOther", self.timeplayed["other"]);
+    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["other"]);
+    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["other"]);
   }
 
   if(game["state"] == "postgame") {
     return;
   }
 
-  self.var_9A06["allies"] = 0;
-  self.var_9A06["axis"] = 0;
-  self.var_9A06["other"] = 0;
+  self.timeplayed["allies"] = 0;
+  self.timeplayed["axis"] = 0;
+  self.timeplayed["other"] = 0;
 }
 
 func_A176() {
@@ -164,7 +164,7 @@ func_A176() {
     return;
   }
 
-  self.var_012C["teamTime"] = gettime();
+  self.pers["teamTime"] = gettime();
 }
 
 func_A172() {
@@ -226,21 +226,21 @@ func_A171() {
 }
 
 func_46C4() {
-  level.var_01A7["allies"] = 0;
-  level.var_01A7["axis"] = 0;
-  var_00 = level.var_744A;
+  level.team["allies"] = 0;
+  level.team["axis"] = 0;
+  var_00 = level.players;
   for(var_01 = 0; var_01 < var_00.size; var_01++) {
-    if(isDefined(var_00[var_01].var_012C["team"]) && var_00[var_01].var_012C["team"] == "allies") {
-      level.var_01A7["allies"]++;
+    if(isDefined(var_00[var_01].pers["team"]) && var_00[var_01].pers["team"] == "allies") {
+      level.team["allies"]++;
       continue;
     }
 
-    if(isDefined(var_00[var_01].var_012C["team"]) && var_00[var_01].var_012C["team"] == "axis") {
-      level.var_01A7["axis"]++;
+    if(isDefined(var_00[var_01].pers["team"]) && var_00[var_01].pers["team"] == "axis") {
+      level.team["axis"]++;
     }
   }
 
-  if(level.var_01A7["allies"] > level.var_01A7["axis"] + level.var_984C || level.var_01A7["axis"] > level.var_01A7["allies"] + level.var_984C) {
+  if(level.team["allies"] > level.team["axis"] + level.var_984C || level.team["axis"] > level.team["allies"] + level.var_984C) {
     return 0;
   }
 
@@ -251,18 +251,18 @@ func_1502() {
   iprintlnbold(game["strings"]["autobalance"]);
   var_00 = [];
   var_01 = [];
-  var_02 = level.var_744A;
+  var_02 = level.players;
   for(var_03 = 0; var_03 < var_02.size; var_03++) {
-    if(!isDefined(var_02[var_03].var_012C["teamTime"])) {
+    if(!isDefined(var_02[var_03].pers["teamTime"])) {
       continue;
     }
 
-    if(isDefined(var_02[var_03].var_012C["team"]) && var_02[var_03].var_012C["team"] == "allies") {
+    if(isDefined(var_02[var_03].pers["team"]) && var_02[var_03].pers["team"] == "allies") {
       var_00[var_00.size] = var_02[var_03];
       continue;
     }
 
-    if(isDefined(var_02[var_03].var_012C["team"]) && var_02[var_03].var_012C["team"] == "axis") {
+    if(isDefined(var_02[var_03].pers["team"]) && var_02[var_03].pers["team"] == "axis") {
       var_01[var_01.size] = var_02[var_03];
     }
   }
@@ -280,7 +280,7 @@ func_1502() {
           continue;
         }
 
-        if(var_00[var_05].var_012C["teamTime"] > var_04.var_012C["teamTime"]) {
+        if(var_00[var_05].pers["teamTime"] > var_04.pers["teamTime"]) {
           var_04 = var_00[var_05];
         }
       }
@@ -297,7 +297,7 @@ func_1502() {
           continue;
         }
 
-        if(var_01[var_05].var_012C["teamTime"] > var_04.var_012C["teamTime"]) {
+        if(var_01[var_05].pers["teamTime"] > var_04.pers["teamTime"]) {
           var_04 = var_01[var_05];
         }
       }
@@ -308,14 +308,14 @@ func_1502() {
     var_04 = undefined;
     var_00 = [];
     var_01 = [];
-    var_02 = level.var_744A;
+    var_02 = level.players;
     for(var_03 = 0; var_03 < var_02.size; var_03++) {
-      if(isDefined(var_02[var_03].var_012C["team"]) && var_02[var_03].var_012C["team"] == "allies") {
+      if(isDefined(var_02[var_03].pers["team"]) && var_02[var_03].pers["team"] == "allies") {
         var_00[var_00.size] = var_02[var_03];
         continue;
       }
 
-      if(isDefined(var_02[var_03].var_012C["team"]) && var_02[var_03].var_012C["team"] == "axis") {
+      if(isDefined(var_02[var_03].pers["team"]) && var_02[var_03].pers["team"] == "axis") {
         var_01[var_01.size] = var_02[var_03];
       }
     }
@@ -327,9 +327,9 @@ func_8692(param_00) {}
 func_873E(param_00, param_01) {}
 
 func_86FF() {
-  if(level.var_6520) {
-    for(var_00 = 0; var_00 < level.var_985B.size; var_00++) {
-      func_873E(level.var_985B[var_00], game[level.var_985B[var_00]]);
+  if(level.multiteambased) {
+    for(var_00 = 0; var_00 < level.teamnamelist.size; var_00++) {
+      func_873E(level.teamnamelist[var_00], game[level.teamnamelist[var_00]]);
     }
   } else {
     func_873E("allies", game["allies"]);
@@ -375,8 +375,8 @@ func_448C() {
 }
 
 func_4430() {
-  if(isDefined(self.var_0079)) {
-    var_00 = getdivisioncostume(self.var_0079, 0);
+  if(isDefined(self.var_79)) {
+    var_00 = getdivisioncostume(self.var_79, 0);
   } else {
     var_00 = function_0332();
   }
@@ -391,8 +391,8 @@ func_4636() {
   }
 
   var_00 = 0;
-  for(var_01 = 0; var_01 < level.var_744A.size; var_01++) {
-    if(level.var_744A[var_01] == self) {
+  for(var_01 = 0; var_01 < level.players.size; var_01++) {
+    if(level.players[var_01] == self) {
       var_00 = var_01;
       break;
     }
@@ -405,7 +405,7 @@ func_4636() {
 
 func_4503() {
   var_00 = 2;
-  if(self.var_012C["team"] == "axis") {
+  if(self.pers["team"] == "axis") {
     var_00 = 1;
   }
 
@@ -414,28 +414,28 @@ func_4503() {
 }
 
 func_7427(param_00, param_01) {
-  var_02 = self.var_01A7;
+  var_02 = self.team;
   var_03 = func_73CA();
   self notify("player_model_set");
 }
 
-func_2697() {
+countplayers() {
   var_00 = [];
-  for(var_01 = 0; var_01 < level.var_985B.size; var_01++) {
-    var_00[level.var_985B[var_01]] = 0;
+  for(var_01 = 0; var_01 < level.teamnamelist.size; var_01++) {
+    var_00[level.teamnamelist[var_01]] = 0;
   }
 
-  for(var_01 = 0; var_01 < level.var_744A.size; var_01++) {
-    if(level.var_744A[var_01] == self) {
+  for(var_01 = 0; var_01 < level.players.size; var_01++) {
+    if(level.players[var_01] == self) {
       continue;
     }
 
-    if(level.var_744A[var_01].var_012C["team"] == "spectator") {
+    if(level.players[var_01].pers["team"] == "spectator") {
       continue;
     }
 
-    if(isDefined(level.var_744A[var_01].var_012C["team"])) {
-      var_00[level.var_744A[var_01].var_012C["team"]]++;
+    if(isDefined(level.players[var_01].pers["team"])) {
+      var_00[level.players[var_01].pers["team"]]++;
     }
   }
 
@@ -451,23 +451,23 @@ func_9BA7() {
       }
     }
 
-    lootservicestarttrackingplaytime(self.var_01D6);
+    lootservicestarttrackingplaytime(self.var_1D6);
     self.loot_service_started_tracking_playtime = 1;
   }
 
-  self.var_9A06["allies"] = 0;
-  self.var_9A06["axis"] = 0;
-  self.var_9A06["other"] = 0;
+  self.timeplayed["allies"] = 0;
+  self.timeplayed["axis"] = 0;
+  self.timeplayed["other"] = 0;
   for(;;) {
     if(game["state"] == "playing") {
-      if(isDefined(self.var_012C["team"]) && self.var_012C["team"] == "allies" && self.var_0179 != "spectator") {
-        self.var_9A06["allies"]++;
-        self.var_9A06["total"]++;
-      } else if(isDefined(self.var_012C["team"]) && self.var_012C["team"] == "axis" && self.var_0179 != "spectator") {
-        self.var_9A06["axis"]++;
-        self.var_9A06["total"]++;
+      if(isDefined(self.pers["team"]) && self.pers["team"] == "allies" && self.sessionteam != "spectator") {
+        self.timeplayed["allies"]++;
+        self.timeplayed["total"]++;
+      } else if(isDefined(self.pers["team"]) && self.pers["team"] == "axis" && self.sessionteam != "spectator") {
+        self.timeplayed["axis"]++;
+        self.timeplayed["total"]++;
       } else {
-        self.var_9A06["other"]++;
+        self.timeplayed["other"]++;
       }
     }
 
@@ -476,19 +476,19 @@ func_9BA7() {
 }
 
 func_A115() {
-  if(!level.var_7A67) {
+  if(!level.rankedmatch) {
     return;
   }
 
   var_00 = 0;
   for(;;) {
     var_00++;
-    if(var_00 >= level.var_744A.size) {
+    if(var_00 >= level.players.size) {
       var_00 = 0;
     }
 
-    if(isDefined(level.var_744A[var_00])) {
-      level.var_744A[var_00] func_A114();
+    if(isDefined(level.players[var_00])) {
+      level.players[var_00] func_A114();
     }
 
     wait(1);
@@ -496,7 +496,7 @@ func_A115() {
 }
 
 func_A114() {
-  if(!maps\mp\_utility::func_7A69()) {
+  if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
 
@@ -504,31 +504,31 @@ func_A114() {
     return;
   }
 
-  if(self.var_9A06["allies"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedAllies", self.var_9A06["allies"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.var_9A06["allies"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.var_9A06["allies"]);
+  if(self.timeplayed["allies"]) {
+    maps\mp\gametypes\_persistence::func_9315("timePlayedAllies", self.timeplayed["allies"]);
+    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["allies"]);
+    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["allies"]);
   }
 
-  if(self.var_9A06["axis"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedOpfor", self.var_9A06["axis"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.var_9A06["axis"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.var_9A06["axis"]);
+  if(self.timeplayed["axis"]) {
+    maps\mp\gametypes\_persistence::func_9315("timePlayedOpfor", self.timeplayed["axis"]);
+    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["axis"]);
+    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["axis"]);
   }
 
-  if(self.var_9A06["other"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedOther", self.var_9A06["other"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.var_9A06["other"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.var_9A06["other"]);
+  if(self.timeplayed["other"]) {
+    maps\mp\gametypes\_persistence::func_9315("timePlayedOther", self.timeplayed["other"]);
+    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["other"]);
+    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["other"]);
   }
 
   if(game["state"] == "postgame") {
     return;
   }
 
-  self.var_9A06["allies"] = 0;
-  self.var_9A06["axis"] = 0;
-  self.var_9A06["other"] = 0;
+  self.timeplayed["allies"] = 0;
+  self.timeplayed["axis"] = 0;
+  self.timeplayed["other"] = 0;
 }
 
 func_452D(param_00) {
@@ -536,7 +536,7 @@ func_452D(param_00) {
     return 1;
   }
 
-  if(level.var_3FDC == "infect") {
+  if(level.gametype == "infect") {
     return 1;
   }
 
@@ -545,10 +545,10 @@ func_452D(param_00) {
   }
 
   var_01 = 0;
-  var_02 = level.var_744A;
+  var_02 = level.players;
   for(var_03 = 0; var_03 < var_02.size; var_03++) {
     var_04 = var_02[var_03];
-    if(isDefined(var_04.var_012C["team"]) && var_04.var_012C["team"] == param_00) {
+    if(isDefined(var_04.pers["team"]) && var_04.pers["team"] == param_00) {
       var_01++;
       if(isbot(var_04)) {
         return 1;
@@ -564,7 +564,7 @@ func_452D(param_00) {
 }
 
 func_650C(param_00) {
-  return function_01AF("mp/MTTable.csv", 0, param_00, 1);
+  return tablelookupistring("mp/MTTable.csv", 0, param_00, 1);
 }
 
 func_650B(param_00) {
@@ -576,19 +576,19 @@ func_650A(param_00) {
 }
 
 func_46D5(param_00) {
-  return function_01AF("mp/factionTable.csv", 0, game[param_00], 1);
+  return tablelookupistring("mp/factionTable.csv", 0, game[param_00], 1);
 }
 
 func_46D6(param_00) {
-  return function_01AF("mp/factionTable.csv", 0, game[param_00], 2);
+  return tablelookupistring("mp/factionTable.csv", 0, game[param_00], 2);
 }
 
 func_46D0(param_00) {
-  return function_01AF("mp/factionTable.csv", 0, game[param_00], 4);
+  return tablelookupistring("mp/factionTable.csv", 0, game[param_00], 4);
 }
 
 func_46C9(param_00) {
-  return function_01AF("mp/factionTable.csv", 0, game[param_00], 3);
+  return tablelookupistring("mp/factionTable.csv", 0, game[param_00], 3);
 }
 
 func_46D3(param_00) {

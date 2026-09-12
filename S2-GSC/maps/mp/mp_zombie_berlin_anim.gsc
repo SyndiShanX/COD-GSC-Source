@@ -3,4 +3,4 @@
  * Script: maps\mp\mp_zombie_berlin_anim.gsc
 *********************************************/
 
-func_00F9() {}
+main() {}

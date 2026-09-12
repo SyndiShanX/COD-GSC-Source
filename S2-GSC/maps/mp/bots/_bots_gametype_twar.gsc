@@ -3,7 +3,7 @@
  * Script: maps\mp\bots\_bots_gametype_twar.gsc
 ************************************************/
 
-func_00F9() {
+main() {
   level.var_1A1B = 0;
   func_87A7();
   func_879A();
@@ -18,12 +18,12 @@ func_87A7() {
 }
 
 func_879A() {
-  maps\mp\bots\_bots_util::func_1B20();
+  maps / mp / bots / _bots_util::func_1B20();
   for(var_00 = 0; var_00 < level.var_9FC2.size; var_00++) {
     level.var_9FC2[var_00].var_81E8 = "_" + var_00;
   }
 
-  maps\mp\bots\_bots_gametype_common::func_194F(level.var_9FC2, "zone", level.var_1A1B);
+  maps / mp / bots / _bots_gametype_common::func_194F(level.var_9FC2, "zone", level.var_1A1B);
   var_01 = 55;
   var_02 = 0;
   foreach(var_04 in level.var_9FC2) {
@@ -32,7 +32,7 @@ func_879A() {
     }
 
     var_04 thread func_6358();
-    var_05 = var_04.var_0116 - (0, 0, var_01) + var_04.var_0116 + (0, 0, level.var_AC87) / 2;
+    var_05 = var_04.origin - (0, 0, var_01) + var_04.origin + (0, 0, level.var_AC87) / 2;
     var_06 = level.var_AC87 + var_01 / 2;
     var_04.var_671A = getnodesinradius(var_05, level.var_AC8B, 0, var_06);
     if(var_04.var_671A.size < 6) {
@@ -56,13 +56,13 @@ func_6358() {
   level endon("game_ended");
   for(;;) {
     wait(1);
-    var_00 = self.var_0117;
+    var_00 = self.owner;
     if(var_00 == "none" && level.var_9FC0.var_A22B > 0) {
       var_00 = level.var_9FC0.var_230F;
     }
 
     if(var_00 != "none") {
-      var_01 = getzonenearest(self.var_0116);
+      var_01 = getzonenearest(self.origin);
       if(isDefined(var_01)) {
         botzonesetteam(var_01, var_00);
       }
@@ -98,11 +98,11 @@ func_1B0C(param_00) {
   var_01["entrance_points_index"] = func_1B0E(param_00);
   var_01["nearest_node_to_center"] = param_00.var_6638;
   var_01["objective_radius"] = 500;
-  maps\mp\bots\_bots_strategy::func_196A(param_00.var_0116, level.var_AC8B, var_01);
+  maps / mp / bots / _bots_strategy::func_196A(param_00.origin, level.var_AC8B, var_01);
 }
 
 func_1B10(param_00) {
-  if(maps\mp\bots\_bots_util::func_1A28()) {
+  if(maps / mp / bots / _bots_util::func_1A28()) {
     if(self.var_291F == param_00) {
       return 1;
     }
@@ -114,19 +114,19 @@ func_1B10(param_00) {
 func_1B0D(param_00) {
   var_01 = 0;
   var_02 = func_1B0E(level.var_9FC0.var_AC7C);
-  var_03 = func_1B0F(self.var_01A7);
+  var_03 = func_1B0F(self.team);
   var_01 = 0;
   foreach(var_05 in var_03) {
-    if(param_00 maps\mp\bots\_bots_util::func_670D(var_02, func_1B0E(var_05))) {
+    if(param_00 maps / mp / bots / _bots_util::func_670D(var_02, func_1B0E(var_05))) {
       var_01 = 1;
       break;
     }
   }
 
   if(var_01) {
-    var_07 = func_1B0F(common_scripts\utility::func_416F(self.var_01A7));
+    var_07 = func_1B0F(common_scripts\utility::func_416F(self.team));
     foreach(var_09 in var_07) {
-      if(param_00 maps\mp\bots\_bots_util::func_670D(var_02, func_1B0E(var_09))) {
+      if(param_00 maps / mp / bots / _bots_util::func_670D(var_02, func_1B0E(var_09))) {
         var_01 = 0;
         break;
       }
@@ -143,7 +143,7 @@ func_1B0D(param_00) {
 func_1B0F(param_00) {
   var_01 = [];
   foreach(var_03 in level.var_9FC2) {
-    if(var_03.var_0117 == param_00) {
+    if(var_03.owner == param_00) {
       var_01[var_01.size] = var_03;
     }
   }

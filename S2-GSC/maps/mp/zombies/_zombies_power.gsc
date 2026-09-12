@@ -3,40 +3,40 @@
  * Script: maps\mp\zombies\_zombies_power.gsc
 **********************************************/
 
-func_00D5() {
+init() {
   level.var_7606 = [];
   level.var_7F21 = [];
   var_00 = common_scripts\utility::func_46B7("power_switch", "targetname");
-  common_scripts\utility::func_0FB2(var_00, ::func_7603);
+  common_scripts\utility::array_thread(var_00, ::func_7603);
   var_01 = getEntArray("power_show", "targetname");
-  common_scripts\utility::func_0FB2(var_01, ::func_75FE);
+  common_scripts\utility::array_thread(var_01, ::func_75FE);
   var_02 = getEntArray("power_hide", "targetname");
-  common_scripts\utility::func_0FB2(var_02, ::func_75FA);
+  common_scripts\utility::array_thread(var_02, ::func_75FA);
 }
 
 func_7603() {
   if(!isDefined(self.var_819A)) {
-    func_75F9("Power switch at " + self.var_0116 + " missing use script_flag.");
+    func_75F9("Power switch at " + self.origin + " missing use script_flag.");
     return;
   }
 
   common_scripts\utility::func_3C87(self.var_819A);
   self.var_8BF7 = [];
   self.var_4D07 = [];
-  var_00 = getEntArray(self.var_01A2, "targetname");
+  var_00 = getEntArray(self.target, "targetname");
   foreach(var_02 in var_00) {
     func_7601(var_02);
   }
 
   self.var_9835 = var_00;
-  var_04 = common_scripts\utility::func_46B7(self.var_01A2, "targetname");
+  var_04 = common_scripts\utility::func_46B7(self.target, "targetname");
   foreach(var_06 in var_04) {
     func_7605(var_06);
   }
 
   self.target_structs = var_04;
   if(!isDefined(self.var_9D65)) {
-    func_75F9("Power switch at " + self.var_0116 + " missing use trigger.");
+    func_75F9("Power switch at " + self.origin + " missing use trigger.");
     return;
   }
 
@@ -47,9 +47,9 @@ func_7603() {
 }
 
 func_7601(param_00) {
-  var_01 = param_00.var_0165;
+  var_01 = param_00.script_noteworthy;
   if(!isDefined(var_01)) {
-    switch (param_00.var_003A) {
+    switch (param_00.classname) {
       case "script_model":
         var_01 = "anim_model";
         break;
@@ -98,13 +98,13 @@ func_7601(param_00) {
       break;
 
     default:
-      func_75F9("Unknown ent type \'" + var_01 + "\' on entity at " + param_00.var_0116 + ".");
+      func_75F9("Unknown ent type \'" + var_01 + "\' on entity at " + param_00.origin + ".");
       break;
   }
 }
 
 func_7605(param_00) {
-  var_01 = param_00.var_0165;
+  var_01 = param_00.script_noteworthy;
   switch (var_01) {
     case "indicator_light_on_fx":
       self.var_5105 = param_00;
@@ -123,11 +123,11 @@ func_7604() {
   for(;;) {
     lib_0378::func_8D74("generator_power_switch_state", "stopped");
     foreach(var_04 in self.var_8BF7) {
-      var_04 method_805C();
+      var_04 hide();
     }
 
     foreach(var_04 in self.var_4D07) {
-      var_04 method_805B();
+      var_04 show();
     }
 
     self.var_9D65 setCursorHint("HINT_NOICON");
@@ -157,7 +157,7 @@ func_7604() {
     }
 
     level.var_400E[level.var_400E.size] = ["survivalist_set 2 -1", "all"];
-    var_08 maps\mp\gametypes\zombies::func_47AE("power_on");
+    var_08 maps / mp / gametypes / zombies::func_47AE("power_on");
     var_08 lib_054E::func_743B();
     level.var_7F21[level.var_7F21.size] = self.var_7602;
     level notify("power_on");
@@ -171,8 +171,8 @@ func_7604() {
     }
 
     if(isDefined(self.var_5105)) {
-      var_02 = spawn("script_model", self.var_5105.var_0116);
-      var_02.var_001D = self.var_5105.var_001D;
+      var_02 = spawn("script_model", self.var_5105.origin);
+      var_02.angles = self.var_5105.angles;
       var_02 setModel("tag_origin");
       if(isDefined(self.var_5105.var_81C7)) {
         var_02 linkTo(self.var_6298, self.var_5105.var_81C7);
@@ -193,11 +193,11 @@ func_7604() {
 
     lib_0378::func_8D74("generator_power_switch_state", "running");
     foreach(var_04 in self.var_8BF7) {
-      var_04 method_805B();
+      var_04 show();
     }
 
     foreach(var_04 in self.var_4D07) {
-      var_04 method_805C();
+      var_04 hide();
     }
 
     level waittill("zombie_power_penalty_start");
@@ -210,11 +210,11 @@ func_7604() {
     }
 
     foreach(var_04 in self.var_8BF7) {
-      var_04 method_805C();
+      var_04 hide();
     }
 
     foreach(var_04 in self.var_4D07) {
-      var_04 method_805B();
+      var_04 show();
     }
 
     level waittill("zombie_power_penalty_end");
@@ -227,7 +227,7 @@ func_7600() {
   }
 
   var_00 = 0.4;
-  var_01 = self.var_1DC7.var_0116;
+  var_01 = self.var_1DC7.origin;
   var_02 = var_01 + (0, 0, 16);
   for(;;) {
     self waittill("on");
@@ -240,14 +240,14 @@ func_7600() {
 func_75FE() {
   self endon("death");
   if(!isDefined(self.var_819A)) {
-    func_75F9("Power show entity at " + self.var_0116 + " missing script_flag.");
+    func_75F9("Power show entity at " + self.origin + " missing script_flag.");
     return;
   }
 
   for(;;) {
-    self method_805C();
+    self hide();
     common_scripts\utility::func_3C9F(self.var_819A);
-    self method_805B();
+    self show();
     common_scripts\utility::func_3CA9(self.var_819A);
   }
 }
@@ -255,14 +255,14 @@ func_75FE() {
 func_75FA() {
   self endon("death");
   if(!isDefined(self.var_819A)) {
-    func_75F9("Power hide entity at " + self.var_0116 + " missing script_flag.");
+    func_75F9("Power hide entity at " + self.origin + " missing script_flag.");
     return;
   }
 
   for(;;) {
-    self method_805B();
+    self show();
     common_scripts\utility::func_3C9F(self.var_819A);
-    self method_805C();
+    self hide();
     common_scripts\utility::func_3CA9(self.var_819A);
   }
 }

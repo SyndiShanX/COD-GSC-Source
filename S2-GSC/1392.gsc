@@ -3,11 +3,11 @@
  * Script: 1392.gsc
 *********************************************/
 
-lib_0570::func_52A4() {
-  lib_0561::initconsumablesfromtable("full_meter", ::lib_0570::func_A20D, ::lib_0570::func_1F7E, ::lib_0570::func_44F3);
+func_52A4() {
+  lib_0561::initconsumablesfromtable("full_meter", ::func_A20D, ::func_1F7E, ::func_44F3);
 }
 
-lib_0570::func_1F7E(param_00) {
+func_1F7E(param_00) {
   if(!lib_0561::func_1F7B()) {
     return 0;
   }
@@ -15,11 +15,11 @@ lib_0570::func_1F7E(param_00) {
   return 1;
 }
 
-lib_0570::func_A20D(param_00) {
-  maps\mp\gametypes\zombies::func_0840(self, 1);
+func_A20D(param_00) {
+  maps / mp / gametypes / zombies::func_840(self, 1);
 }
 
-lib_0570::func_44F3(param_00) {
+func_44F3(param_00) {
   if(!isDefined(param_00)) {
     param_00 = "";
   }

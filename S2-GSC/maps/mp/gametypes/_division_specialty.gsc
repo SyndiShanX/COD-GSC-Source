@@ -4,7 +4,7 @@
 *****************************************************/
 
 func_8667(param_00) {
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
@@ -46,7 +46,7 @@ func_8667(param_00) {
     case "specialty_class_armored_master":
       maps\mp\_utility::func_47A2("specialty_blastshield2");
       self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale", 35) / 100;
-      if(isDefined(level.var_4B17) && level.var_4B17) {
+      if(isDefined(level.hardcoremode) && level.hardcoremode) {
         self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale_HC", 9) / 100;
       }
 
@@ -55,7 +55,7 @@ func_8667(param_00) {
     case "specialty_class_armored_expert":
       maps\mp\_utility::func_47A2("specialty_fireshield");
       self.var_90D8 = maps\mp\_utility::func_4529("perk_fireShieldScale", 35) / 100;
-      if(isDefined(level.var_4B17) && level.var_4B17) {
+      if(isDefined(level.hardcoremode) && level.hardcoremode) {
         self.var_90D8 = maps\mp\_utility::func_4529("perk_fireShieldScale_HC", 9) / 100;
       }
 
@@ -143,7 +143,7 @@ func_8667(param_00) {
 }
 
 setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(param_00) {
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
@@ -222,13 +222,13 @@ setdivisiontrainingbasedonprogressionglobaloverhaulmtx4(param_00) {
       maps\mp\_utility::func_47A2("specialty_throwback");
       maps\mp\_utility::func_47A2("specialty_blastshield2");
       self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale", 20) / 100;
-      if(isDefined(level.var_4B17) && level.var_4B17) {
+      if(isDefined(level.hardcoremode) && level.hardcoremode) {
         self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale_HC", 5) / 100;
       }
 
       maps\mp\_utility::func_47A2("specialty_fireshield");
       self.var_90D8 = maps\mp\_utility::func_4529("perk_fireShieldScale", 20) / 100;
-      if(isDefined(level.var_4B17) && level.var_4B17) {
+      if(isDefined(level.hardcoremode) && level.hardcoremode) {
         self.var_90D8 = maps\mp\_utility::func_4529("perk_fireShieldScale_HC", 5) / 100;
       }
       break;

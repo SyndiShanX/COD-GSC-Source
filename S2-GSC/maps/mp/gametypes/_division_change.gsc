@@ -87,14 +87,14 @@ func_A07E(param_00) {
 
     case "bayonet_level3":
     case "shield_charge":
-      if(maps\mp\_utility::func_0649("specialty_sprintmeleechargelonger")) {
-        maps\mp\_utility::func_0735("specialty_sprintmeleechargelonger");
+      if(maps\mp\_utility::_hasperk("specialty_sprintmeleechargelonger")) {
+        maps\mp\_utility::func_735("specialty_sprintmeleechargelonger");
       }
       break;
 
     case "bayonet_level2":
-      if(maps\mp\_utility::func_0649("specialty_sprintmeleecharge")) {
-        maps\mp\_utility::func_0735("specialty_sprintmeleecharge");
+      if(maps\mp\_utility::_hasperk("specialty_sprintmeleecharge")) {
+        maps\mp\_utility::func_735("specialty_sprintmeleecharge");
       }
       break;
 
@@ -108,12 +108,12 @@ func_A07E(param_00) {
 
     case "sharpshooter_level3":
     case "sharpshooter_level2":
-      if(maps\mp\_utility::func_0649("specialty_marksmanvision")) {
-        maps\mp\_utility::func_0735("specialty_marksmanvision");
+      if(maps\mp\_utility::_hasperk("specialty_marksmanvision")) {
+        maps\mp\_utility::func_735("specialty_marksmanvision");
       }
 
-      if(maps\mp\_utility::func_0649("specialty_improvedholdbreath")) {
-        maps\mp\_utility::func_0735("specialty_improvedholdbreath");
+      if(maps\mp\_utility::_hasperk("specialty_improvedholdbreath")) {
+        maps\mp\_utility::func_735("specialty_improvedholdbreath");
       }
       break;
 
@@ -195,11 +195,11 @@ func_8725(param_00, param_01) {
 }
 
 func_5830(param_00) {
-  return !maps\mp\_utility::func_568F(param_00) && !maps\mp\_utility::func_5740(param_00) && maps\mp\_utility::func_472A(param_00) == "weapon_heavy" && !issubstr(param_00, "bipod");
+  return !maps\mp\_utility::func_568F(param_00) && !maps\mp\_utility::iskillstreakweapon(param_00) && maps\mp\_utility::getweaponclass(param_00) == "weapon_heavy" && !issubstr(param_00, "bipod");
 }
 
 func_574C(param_00) {
-  return isDefined(param_00) && maps\mp\_utility::func_472A(param_00) == "weapon_heavy" && issubstr(param_00, "bipod");
+  return isDefined(param_00) && maps\mp\_utility::getweaponclass(param_00) == "weapon_heavy" && issubstr(param_00, "bipod");
 }
 
 func_63AC(param_00) {
@@ -218,7 +218,7 @@ func_63AC(param_00) {
     self waittill("weapon_change", var_01);
     wait 0.05;
     if(var_01 != param_00 && func_5830(var_01)) {
-      if(maps\mp\_utility::isdivisionsglobaloverhaulenabled() && self.var_0079 == 6 && isDefined(self.var_012C["resistanceScramblerIndicatorActive"])) {} else {
+      if(maps\mp\_utility::isdivisionsglobaloverhaulenabled() && self.var_79 == 6 && isDefined(self.pers["resistanceScramblerIndicatorActive"])) {} else {
         common_scripts\_plant_weapon::func_5369(var_01);
       }
     } else if(function_0367() && !common_scripts\utility::func_562E(self.var_5721) || common_scripts\utility::func_562E(self.var_572A)) {
@@ -292,10 +292,10 @@ func_4B98(param_00, param_01) {
 func_440E(param_00, param_01, param_02, param_03, param_04, param_05) {
   if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
     var_06 = [];
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 2, param_02, param_03, param_04, param_05));
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 3, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 2, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 3, param_02, param_03, param_04, param_05));
     if(param_01 == 7) {
-      var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 7, param_02, param_03, param_04, param_05));
+      var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 7, param_02, param_03, param_04, param_05));
     }
 
     return var_06;
@@ -309,16 +309,16 @@ func_440E(param_00, param_01, param_02, param_03, param_04, param_05) {
   if(1) {
     var_06 = func_4688(param_00, param_01, param_02, param_03, param_04, param_05);
   } else {
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 0, param_02, param_03, param_04, param_05));
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 1, param_02, param_03, param_04, param_05));
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 2, param_02, param_03, param_04, param_05));
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 3, param_02, param_03, param_04, param_05));
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 4, param_02, param_03, param_04, param_05));
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 6, param_02, param_03, param_04, param_05));
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 7, param_02, param_03, param_04, param_05));
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 8, param_02, param_03, param_04, param_05));
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 9, param_02, param_03, param_04, param_05));
-    var_06 = common_scripts\utility::func_0F73(var_06, func_4688(param_00, 10, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 0, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 1, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 2, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 3, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 4, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 6, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 7, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 8, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 9, param_02, param_03, param_04, param_05));
+    var_06 = common_scripts\utility::func_F73(var_06, func_4688(param_00, 10, param_02, param_03, param_04, param_05));
   }
 
   return var_06;
@@ -363,7 +363,7 @@ func_4688(param_00, param_01, param_02, param_03, param_04, param_05) {
 
       var_0D = !maps\mp\_utility::func_56B1() && !function_03AF();
       if(!param_04 && var_0D) {
-        if(maps\mp\_utility::func_472A(param_02) == "weapon_shotgun") {
+        if(maps\mp\_utility::getweaponclass(param_02) == "weapon_shotgun") {
           var_0E = "";
           switch (var_07) {
             case "model21_mp":
@@ -408,7 +408,7 @@ func_4688(param_00, param_01, param_02, param_03, param_04, param_05) {
       }
 
       if(param_03) {
-        if(maps\mp\_utility::func_472A(param_02) == "weapon_heavy") {
+        if(maps\mp\_utility::getweaponclass(param_02) == "weapon_heavy") {
           var_0F = "bipod";
           var_0F = var_0F + var_0A;
           var_06[var_06.size] = var_0F;
@@ -419,7 +419,7 @@ func_4688(param_00, param_01, param_02, param_03, param_04, param_05) {
     case "bayonet_level1":
     case "bayonet_level3":
     case "bayonet_level2":
-      if(maps\mp\_utility::func_472A(param_02) == "weapon_assault") {
+      if(maps\mp\_utility::getweaponclass(param_02) == "weapon_assault") {
         var_10 = "";
         switch (var_07) {
           case "bar_mp":
@@ -467,7 +467,7 @@ func_4688(param_00, param_01, param_02, param_03, param_04, param_05) {
         var_0B = "_1";
       }
 
-      if(maps\mp\_utility::func_472A(param_02) == "weapon_smg") {
+      if(maps\mp\_utility::getweaponclass(param_02) == "weapon_smg") {
         var_11 = "";
         switch (var_07) {
           case "mas38_mp":
@@ -509,7 +509,7 @@ func_4688(param_00, param_01, param_02, param_03, param_04, param_05) {
         var_0C = "_1";
       }
 
-      if(maps\mp\_utility::func_472A(param_02) == "weapon_sniper") {
+      if(maps\mp\_utility::getweaponclass(param_02) == "weapon_sniper") {
         var_12 = "hold_breath";
         var_12 = var_12 + var_0C;
         var_06[var_06.size] = var_12;
@@ -517,7 +517,7 @@ func_4688(param_00, param_01, param_02, param_03, param_04, param_05) {
       break;
 
     case "tacticalknife_level3":
-      if(maps\mp\_utility::func_472A(param_02) == "weapon_pistol") {
+      if(maps\mp\_utility::getweaponclass(param_02) == "weapon_pistol") {
         var_13 = "tactical_knife";
         var_06[var_06.size] = var_13;
       }
@@ -525,7 +525,7 @@ func_4688(param_00, param_01, param_02, param_03, param_04, param_05) {
 
     case "riflegrenade_level3":
       if(!param_04) {
-        if(maps\mp\_utility::func_472A(param_02) == "weapon_assault") {
+        if(maps\mp\_utility::getweaponclass(param_02) == "weapon_assault") {
           var_14 = "";
           switch (var_07) {
             case "bar_mp":
@@ -578,7 +578,7 @@ func_56CA(param_00, param_01) {
     return 0;
   }
 
-  var_02 = maps\mp\_utility::func_472A(param_00);
+  var_02 = maps\mp\_utility::getweaponclass(param_00);
   switch (var_02) {
     case "weapon_shotgun":
       if(issubstr(param_01, "dragon_breath_")) {
@@ -666,7 +666,7 @@ removealtmodeattachmentsfromweapon(param_00) {
   return var_02;
 }
 
-func_0995(param_00, param_01, param_02, param_03, param_04) {
+setflashfrac(param_00, param_01, param_02, param_03, param_04) {
   if(param_01 == 5) {
     return param_02;
   }
@@ -684,10 +684,10 @@ func_0995(param_00, param_01, param_02, param_03, param_04) {
   var_07 = maps\mp\_utility::func_473A(param_02);
   var_08 = maps\mp\_utility::func_472F(param_02);
   var_09 = function_0061(param_02);
-  var_09 = common_scripts\utility::func_0F93(var_09, "special_grip");
+  var_09 = common_scripts\utility::func_F93(var_09, "special_grip");
   var_0A = func_440E(param_00, param_01, param_02, param_03, param_04, var_09);
-  var_09 = common_scripts\utility::func_0F73(var_09, var_0A);
-  var_09 = common_scripts\utility::func_0C9E(var_09);
+  var_09 = common_scripts\utility::func_F73(var_09, var_0A);
+  var_09 = common_scripts\utility::func_C9E(var_09);
   var_0B = getweapondisplayname(param_02);
   var_0C = var_0B;
   foreach(var_0E in var_09) {
@@ -718,7 +718,7 @@ func_56C9(param_00) {
     return 0;
   }
 
-  switch (maps\mp\_utility::func_472A(param_00)) {
+  switch (maps\mp\_utility::getweaponclass(param_00)) {
     case "weapon_other":
     case "weapon_pistol":
     case "weapon_heavy":
@@ -978,19 +978,19 @@ func_2F7B(param_00, param_01, param_02, param_03) {
 func_A8FA(param_00, param_01) {
   self endon("disconnect");
   self endon("removeDivisionVignette");
-  common_scripts\utility::func_A70A("death", "weapon_change");
+  common_scripts\utility::waittill_any("death", "weapon_change");
   thread func_2F7B(param_00, param_01);
 }
 
 func_4499(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(param_03) || !isDefined(param_01) || !isDefined(param_01.var_0079) || param_01.var_0079 == 5) {
+  if(!isDefined(param_03) || !isDefined(param_01) || !isDefined(param_01.var_79) || param_01.var_79 == 5) {
     return param_00;
   }
 
   var_05 = 1;
-  switch (maps\mp\_utility::func_472A(param_03)) {
+  switch (maps\mp\_utility::getweaponclass(param_03)) {
     case "weapon_assault":
-      if(isDefined(param_01.var_165B) && param_01.var_165B && isDefined(param_04) && maps\mp\_utility::func_5755(param_04)) {
+      if(isDefined(param_01.var_165B) && param_01.var_165B && isDefined(param_04) && maps\mp\_utility::ismeleemod(param_04)) {
         return "divisions_infantry_kill";
       }
       break;
@@ -1021,7 +1021,7 @@ func_4499(param_00, param_01, param_02, param_03, param_04) {
       break;
 
     case "weapon_pistol":
-      if(issubstr(param_03, "tactical_knife") && isDefined(param_04) && maps\mp\_utility::func_5755(param_04)) {
+      if(issubstr(param_03, "tactical_knife") && isDefined(param_04) && maps\mp\_utility::ismeleemod(param_04)) {
         return "division_resistance_kill";
       }
       break;

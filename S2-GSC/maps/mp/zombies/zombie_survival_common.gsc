@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\zombie_survival_common.gsc
 ******************************************************/
 
-func_00D5() {
+init() {
   level.var_2986 = "mp/zombieEnemyWavesSurvival.csv";
   level.var_ACA3 = 1;
   level.var_7F24 = 9999;
@@ -18,11 +18,11 @@ func_00D5() {
   setomnvar("ui_zm_intermission_swaptime_1", 6);
   setomnvar("ui_zm_intermission_swaptime_2", 2);
   setDvar("2494", "0.12, 0, 0");
-  thread maps\mp\zombies\_zombies_money::func_D5();
-  level thread soundscripts\_snd_common_zmb_dlc3::snd_zmb_init_dlc3();
-  level thread maps\mp\zombies\_zombies_audio_dlc2::initdlc2audio();
+  thread maps\mp\zombies\_zombies_money::init();
+  level thread soundscripts / _snd_common_zmb_dlc3::snd_zmb_init_dlc3();
+  level thread maps / mp / zombies / _zombies_audio_dlc2::initdlc2audio();
   level.var_902A = ::func_902A;
-  maps\mp\mp_zombie_nest_ee_wave_manipulation::func_F9();
+  maps / mp / mp_zombie_nest_ee_wave_manipulation::main();
   thread srv_gameplay();
   common_scripts\utility::func_3C87("ripsaw_punch_active");
   common_scripts\utility::func_3C87("pap_fuse_placed");
@@ -61,11 +61,11 @@ srv_init_miniboss_rounds() {
 
 initsurvivalweapons() {
   thread lib_057D::func_5162();
-  level thread lib_0580::func_D5();
-  level thread maps\mp\zombies\weapons\_zombie_razer_gun::func_D5();
-  level thread maps\mp\zombies\weapons\_zombie_dlc2_melee::func_D5();
-  level maps\mp\zombies\weapons\_zombie_dlc3_melee::func_D5();
-  level thread maps\mp\zombies\weapons\_zombie_dlc3_melee::sword_delivery_init();
+  level thread lib_0580::init();
+  level thread maps / mp / zombies / weapons / _zombie_razer_gun::init();
+  level thread maps / mp / zombies / weapons / _zombie_dlc2_melee::init();
+  level maps / mp / zombies / weapons / _zombie_dlc3_melee::init();
+  level thread maps / mp / zombies / weapons / _zombie_dlc3_melee::sword_delivery_init();
 }
 
 srvadduberwwtomystery() {
@@ -114,8 +114,8 @@ srvroundend() {}
 srvshowpapfuse() {
   var_00 = common_scripts\utility::func_46B5("srv_pap_fuse_loc", "targetname");
   if(isDefined(var_00)) {
-    var_01 = spawn("script_model", var_00.var_116);
-    var_01.var_1D = var_00.var_1D;
+    var_01 = spawn("script_model", var_00.origin);
+    var_01.angles = var_00.angles;
     var_01 setModel("zmb_fuse_04");
     common_scripts\utility::func_3C8F("pap_fuse_placed");
     common_scripts\utility::func_3C8F("ripsaw_punch_active");
@@ -136,7 +136,7 @@ collect_souls_to_unlock_pack_a_punch() {
   var_02 = common_scripts\utility::func_46B7("zmb_sg_availablility_light_display", "targetname");
   var_03 = function_021F("zmb_sg_reciver_scriptable", "targetname");
   foreach(var_05 in var_03) {
-    var_05 thread maps\mp\mp_zombie_nest_hilt_altar_reciever::func_84DC();
+    var_05 thread maps / mp / mp_zombie_nest_hilt_altar_reciever::func_84DC();
   }
 
   if(var_01.size < 3) {
@@ -149,9 +149,9 @@ collect_souls_to_unlock_pack_a_punch() {
     common_scripts\utility::func_3C87("zmb_sg_soul_collect_ready_flag_" + var_01[var_07].var_81E1);
   }
 
-  common_scripts\utility::func_FB2(var_01, ::set_pack_key_unlocked);
-  common_scripts\utility::func_FB2(var_00, ::handle_unlock_lights, "zmb_sg_soul_collect_flag_");
-  common_scripts\utility::func_FB2(var_02, ::handle_unlock_lights, "zmb_sg_soul_collect_ready_flag_", "zmb_sg_soul_collect_flag_");
+  common_scripts\utility::array_thread(var_01, ::set_pack_key_unlocked);
+  common_scripts\utility::array_thread(var_00, ::handle_unlock_lights, "zmb_sg_soul_collect_flag_");
+  common_scripts\utility::array_thread(var_02, ::handle_unlock_lights, "zmb_sg_soul_collect_ready_flag_", "zmb_sg_soul_collect_flag_");
   maps\mp\_utility::func_2CED(3, ::unlock_next_reciever);
   wait_for_pap_available();
   wait(0.5);
@@ -200,7 +200,7 @@ handle_unlock_lights(param_00, param_01) {
 
 set_pack_key_unlocked() {
   var_00 = self.var_81E1;
-  var_01 = spawn("script_model", self.var_116);
+  var_01 = spawn("script_model", self.origin);
   var_01 setModel("tag_origin");
   common_scripts\utility::func_3C9F("zmb_sg_soul_collect_ready_flag_" + self.var_81E1);
   var_02 = 400;
@@ -209,9 +209,9 @@ set_pack_key_unlocked() {
   }
 
   var_01.ignoresighttrace = 1;
-  var_01 maps\mp\mp_zombies_soul_collection::func_170B(10, var_02, 70, "zmb_sg_soul_collect_ping_" + var_00, undefined, "tag_origin", undefined, "tag_origin");
+  var_01 maps / mp / mp_zombies_soul_collection::func_170B(10, var_02, 70, "zmb_sg_soul_collect_ping_" + var_00, undefined, "tag_origin", undefined, "tag_origin");
   common_scripts\utility::func_3C8F("zmb_sg_soul_collect_flag_" + self.var_81E1);
-  level thread maps\mp\gametypes\zombies::orders_and_contracts_report_event("geistcraft_device_powered");
+  level thread maps / mp / gametypes / zombies::orders_and_contracts_report_event("geistcraft_device_powered");
 }
 
 func_902A(param_00) {
@@ -336,10 +336,10 @@ zombiespawnfx(param_00) {
     return;
   }
 
-  var_01 = spawnfx(common_scripts\utility::func_44F5(param_00), self.var_116, anglesToForward(self.var_1D), anglestoup(self.var_1D));
+  var_01 = spawnfx(common_scripts\utility::func_44F5(param_00), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
   triggerfx(var_01);
   level.zombiespawnfxcount++;
-  common_scripts\utility::func_A74B("death", 2);
+  common_scripts\utility::waittill_notify_or_timeout("death", 2);
   level.zombiespawnfxcount--;
   var_01 delete();
 }

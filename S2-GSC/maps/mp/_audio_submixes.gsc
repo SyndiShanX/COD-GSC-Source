@@ -9,14 +9,14 @@ func_524C() {
 }
 
 func_1E76(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
-  foreach(var_0C in level.var_744A) {
+  foreach(var_0C in level.players) {
     if(issplitscreen() == 1) {
       if(var_0C issplitscreenplayer() == 1 && var_0C method_82ED() == 0) {
         continue;
       }
     }
 
-    if(isDefined(param_00) == 1 && isDefined(var_0C.var_012C["team"]) == 1 && var_0C.var_012C["team"] != param_00) {
+    if(isDefined(param_00) == 1 && isDefined(var_0C.pers["team"]) == 1 && var_0C.pers["team"] != param_00) {
       continue;
     }
 
@@ -185,9 +185,9 @@ func_7A39(param_00, param_01, param_02, param_03) {
     param_02 = "shared_default";
   }
 
-  if(!isDefined(level.var_05AB)) {
-    level.var_05AB = spawnStruct();
-    level.var_05AB.var_00E5 = 0;
+  if(!isDefined(level.var_5AB)) {
+    level.var_5AB = spawnStruct();
+    level.var_5AB.label = 0;
   }
 
   param_03 = clamp(param_03, 0, 1);
@@ -204,7 +204,7 @@ func_7A39(param_00, param_01, param_02, param_03) {
   }
 
   var_06 = var_06 + param_01 * 0.5;
-  var_07 = level.var_05AB.var_00E5;
+  var_07 = level.var_5AB.label;
   var_08 = param_01 - param_00;
   var_09 = var_08 * 0.5;
   if(abs(var_07 - var_06) < var_08 * 0.2) {
@@ -212,7 +212,7 @@ func_7A39(param_00, param_01, param_02, param_03) {
     var_06 = clamp(var_06, param_00, param_01);
   }
 
-  level.var_05AB.var_00E5 = var_06;
+  level.var_5AB.label = var_06;
   return var_06;
 }
 

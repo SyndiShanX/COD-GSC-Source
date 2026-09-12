@@ -9,14 +9,14 @@ func_50F3() {
     return;
   }
 
-  var_01 = common_scripts\utility::func_46B7(var_00.var_01A2, "targetname");
+  var_01 = common_scripts\utility::func_46B7(var_00.target, "targetname");
   var_02 = lib_0557::func_7838("6B Left Hand overcharge", "activate left hand");
   var_03 = lib_0557::func_7838("7 Voice paintings", "enter code pieces");
   var_04 = lib_0557::func_7838("5 Right Hand fuses", "tower confirm hand");
   foreach(var_06 in var_01) {
-    switch (var_06.var_0165) {
+    switch (var_06.script_noteworthy) {
       case "right":
-        var_06.var_3F80 = common_scripts\utility::func_46B5(var_06.var_0165 + "_to_center_fx", "script_noteworthy");
+        var_06.var_3F80 = common_scripts\utility::func_46B5(var_06.script_noteworthy + "_to_center_fx", "script_noteworthy");
         if(!isDefined(var_06.var_3F80)) {
           return;
         }
@@ -38,7 +38,7 @@ func_50F3() {
         break;
 
       case "left":
-        var_06.var_3F80 = common_scripts\utility::func_46B5(var_06.var_0165 + "_to_center_fx", "script_noteworthy");
+        var_06.var_3F80 = common_scripts\utility::func_46B5(var_06.script_noteworthy + "_to_center_fx", "script_noteworthy");
         if(!isDefined(var_06.var_3F80)) {
           return;
         }
@@ -52,9 +52,9 @@ func_50F3() {
     }
   }
 
-  var_08 = getEntArray(var_00.var_01A2, "targetname");
+  var_08 = getEntArray(var_00.target, "targetname");
   foreach(var_0A in var_08) {
-    switch (var_0A.var_0165) {
+    switch (var_0A.script_noteworthy) {
       case "final_boss_tesla_trigger":
         var_0A thread func_A6A0(var_00, var_03);
         break;
@@ -64,7 +64,7 @@ func_50F3() {
 
 func_7A8C(param_00, param_01) {
   common_scripts\utility::func_3CA2(param_00, param_01);
-  self.var_001D = (270, 270, 90);
+  self.angles = (270, 270, 90);
   if(isDefined(self.var_3F80)) {
     var_02 = lib_0547::func_8FBA(self.var_3F80, "hiltroom_connection");
     triggerfx(var_02);
@@ -76,7 +76,7 @@ func_7A8C(param_00, param_01) {
 func_7EB3(param_00) {
   for(;;) {
     level waittill("end hilt grabbed", var_01);
-    level thread common_scripts\_exploder::func_088E(222);
+    level thread common_scripts\_exploder::func_88E(222);
     earthquake(0.3, 7, var_01, 1000);
   }
 }
@@ -96,12 +96,12 @@ func_A6A0(param_00, param_01) {
   var_02 lib_0378::func_8D74("aud_start_hilt_sphere_sound");
   wait(5);
   self setCanDamage(1);
-  for(var_03 = []; var_03.size < level.var_744A.size; var_03 = []) {
+  for(var_03 = []; var_03.size < level.players.size; var_03 = []) {
     var_04 = func_A6CE(self, "brute tesla activation fail");
     lib_0378::func_8D74("aud_hilt_destroy");
     if(isDefined(var_04)) {
-      if(!common_scripts\utility::func_0F79(var_03, var_04)) {
-        var_03 = common_scripts\utility::func_0F6F(var_03, var_04);
+      if(!common_scripts\utility::func_F79(var_03, var_04)) {
+        var_03 = common_scripts\utility::func_F6F(var_03, var_04);
       }
 
       if(var_03.size == 1) {
@@ -112,19 +112,19 @@ func_A6A0(param_00, param_01) {
     }
   }
 
-  playFX(level.var_0611["zmb_hilt_sphere_explosion"], param_00.var_0116, anglesToForward(param_00.var_001D));
+  playFX(level.var_611["zmb_hilt_sphere_explosion"], param_00.origin, anglesToForward(param_00.angles));
   level.var_4D74 delete();
   var_05 = getEnt("nest_ee_shard_intro_start_trig", "targetname");
   var_05 common_scripts\utility::func_9DA3();
   var_06 = undefined;
-  foreach(var_08 in level.var_744A) {
+  foreach(var_08 in level.players) {
     if(var_08 func_7403()) {
       var_06 = var_08;
     }
   }
 
   if(!isDefined(var_06)) {
-    var_06 = common_scripts\utility::func_7A33(level.var_744A);
+    var_06 = common_scripts\utility::func_7A33(level.players);
   }
 
   var_06 thread lib_0367::func_8E3B("conv_hiltrecovered");
@@ -142,7 +142,7 @@ func_A6A0(param_00, param_01) {
   }
 
   wait(2);
-  level notify("end hilt grabbed", var_04.var_0116);
+  level notify("end hilt grabbed", var_04.origin);
   var_04 thread lib_0367::func_8E3B("conv_hiltroomcollapse");
   wait(5);
   thread func_3BEC();
@@ -157,7 +157,7 @@ func_4030(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     level.var_6666 = 0;
   }
 
-  var_09 = common_scripts\utility::func_4461(self.var_0116, level.var_08E3);
+  var_09 = common_scripts\utility::func_4461(self.origin, level.var_8E3);
   var_0A = 0;
   if(isDefined(var_09) && isDefined(var_09.var_7D24)) {
     if(isarray(var_09.var_7D24)) {
@@ -176,7 +176,7 @@ func_4030(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     }
   }
 
-  if(level.var_08E3.size == 0 || common_scripts\utility::func_562E(self.var_8F2B) || var_0A) {
+  if(level.var_8E3.size == 0 || common_scripts\utility::func_562E(self.var_8F2B) || var_0A) {
     return;
   }
 
@@ -190,7 +190,7 @@ func_4030(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       var_0F = var_0F + var_09.var_8C48;
     }
   } else {
-    var_0F = var_0A.var_0116;
+    var_0F = var_0A.origin;
   }
 
   if(isDefined(var_09.var_8C47)) {
@@ -206,7 +206,7 @@ func_4030(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       thread func_2024(var_09, var_09.var_2E37, var_09.var_2DA5, var_09.var_2DA6);
     }
 
-    if(!common_scripts\utility::func_562E(self.var_2FDA) && !lib_0547::func_5565(self.var_0A4B, "zombie_fireman")) {
+    if(!common_scripts\utility::func_562E(self.var_2FDA) && !lib_0547::func_5565(self.var_A4B, "zombie_fireman")) {
       func_865C("scripted_soul_eat", 0);
     }
 
@@ -254,7 +254,7 @@ func_A6CF(param_00, param_01) {
       continue;
     }
 
-    return level.var_744A[0];
+    return level.players[0];
   }
 
   return var_02;
@@ -339,11 +339,11 @@ func_1CC9() {
 func_283B(param_00) {
   var_01 = newhudelem();
   var_01 setshader("hud_destructibledeathicon", 1, 1);
-  var_01.var_0018 = 1;
-  var_01.var_0056 = (1, 1, 1);
-  var_01.var_01D3 = param_00.var_0116[0];
-  var_01.var_01D7 = param_00.var_0116[1];
-  var_01.var_01D9 = param_00.var_0116[2];
+  var_01.alpha = 1;
+  var_01.color = (1, 1, 1);
+  var_01.x = param_00.origin[0];
+  var_01.y = param_00.origin[1];
+  var_01.z = param_00.origin[2];
   var_01 setwaypoint(1);
   var_01 settargetEnt(param_00);
   return var_01;
@@ -422,23 +422,23 @@ func_7403() {
 }
 
 func_56B0(param_00, param_01, param_02, param_03) {
-  var_04 = param_00.var_0116;
+  var_04 = param_00.origin;
   if(isDefined(param_00.var_2E37)) {
     var_04 = param_00 gettagorigin(param_00.var_2E37);
   }
 
   if(common_scripts\utility::func_562E(param_03)) {
-    var_05 = sighttracepassed(self.var_0116, var_04, 0, self, param_00, 0);
+    var_05 = sighttracepassed(self.origin, var_04, 0, self, param_00, 0);
     if(!var_05) {
       return 0;
     }
   }
 
   if(isDefined(param_02)) {
-    return distance2d(var_04, self.var_0116) < param_01 && abs(var_04[2] - self.var_0116[2]) < param_02;
+    return distance2d(var_04, self.origin) < param_01 && abs(var_04[2] - self.origin[2]) < param_02;
   }
 
-  return distance2d(var_04, self.var_0116) < param_01 && self.var_0116[2] < var_04[2];
+  return distance2d(var_04, self.origin) < param_01 && self.origin[2] < var_04[2];
 }
 
 func_2024(param_00, param_01, param_02, param_03) {
@@ -470,11 +470,11 @@ func_2024(param_00, param_01, param_02, param_03) {
     var_07 = var_04;
   }
 
-  playFXOnTag(level.var_0611[var_06], param_00, var_07);
-  playFXOnTag(level.var_0611["zmb_gk_claw_battery_charge_1"], level.var_3571, "flap1_shroud");
-  playFXOnTag(level.var_0611["zmb_gk_claw_battery_charge_2"], level.var_3571, "flap2_shroud");
-  playFXOnTag(level.var_0611["zmb_gk_claw_battery_charge_3"], level.var_3571, "flap3_shroud");
-  lib_0378::func_8D74("zombie_soul_suck", var_04.var_0116, param_00.var_0116);
+  playFXOnTag(level.var_611[var_06], param_00, var_07);
+  playFXOnTag(level.var_611["zmb_gk_claw_battery_charge_1"], level.var_3571, "flap1_shroud");
+  playFXOnTag(level.var_611["zmb_gk_claw_battery_charge_2"], level.var_3571, "flap2_shroud");
+  playFXOnTag(level.var_611["zmb_gk_claw_battery_charge_3"], level.var_3571, "flap3_shroud");
+  lib_0378::func_8D74("zombie_soul_suck", var_04.origin, param_00.origin);
   wait(0.45);
   var_05 delete();
   level.var_6666--;
@@ -486,11 +486,11 @@ func_9030(param_00, param_01, param_02) {
   }
 
   for(var_03 = 0; var_03 < param_02; var_03++) {
-    var_04 = spawn("script_model", self.var_0116);
+    var_04 = spawn("script_model", self.origin);
     var_04 setModel("tag_origin");
     playFXOnTag(common_scripts\utility::func_44F5("zmb_elec_trail"), var_04, "tag_origin");
-    var_05 = distance(self.var_0116, param_00.var_0116) / param_01;
-    var_04 moveTo(param_00.var_0116, var_05);
+    var_05 = distance(self.origin, param_00.origin) / param_01;
+    var_04 moveTo(param_00.origin, var_05);
     wait(var_05);
     var_04 delete();
   }
@@ -498,7 +498,7 @@ func_9030(param_00, param_01, param_02) {
 
 func_283C(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = spawn("script_model", param_00);
-  var_06.var_001D = vectortoangles(param_01 + (0, 0, -50) - param_00);
+  var_06.angles = vectortoangles(param_01 + (0, 0, -50) - param_00);
   var_06 setModel(param_04);
   var_06 scriptmodelplayanim(param_05, "", param_02);
   var_06 rotateroll(randomfloat(param_03), 1, 0.1, 0.1);
@@ -507,7 +507,7 @@ func_283C(param_00, param_01, param_02, param_03, param_04, param_05) {
 }
 
 func_9066(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(level.var_0611[param_03])) {
+  if(!isDefined(level.var_611[param_03])) {
     return;
   }
 
@@ -536,8 +536,7 @@ func_649B(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     self.var_9D02 = param_04;
   }
 
-  var_09 = 1;
-  while(var_09 < param_00.size) {
+  for(var_09 = 1; var_09 < param_00.size; var_09++) {
     var_0A = param_00[var_09 - 1];
     var_0B = param_00[var_09];
     var_0C = param_00[var_09 + 1];
@@ -547,7 +546,7 @@ func_649B(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     }
 
     if(!func_8B8D(var_0B) || var_09 + 1 == param_00.size) {
-      var_0E = distance(var_0B.var_0116, var_0A.var_0116) / param_01;
+      var_0E = distance(var_0B.origin, var_0A.origin) / param_01;
       if(var_0D) {
         var_0F = var_0E / 3;
       } else {
@@ -556,26 +555,24 @@ func_649B(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 
       func_64D3(var_0B, var_0E, var_0F);
     } else {
-      var_0A = var_0A + 1;
-      var_10 = var_0B.var_0116;
-      var_11 = var_0C.var_0116;
-      var_12 = var_0D.var_0116;
-      func_64A1(var_10, var_11, var_12, var_09, param_02);
+      var_09 = var_09 + 1;
+      var_10 = var_0A.origin;
+      var_11 = var_0B.origin;
+      var_12 = var_0C.origin;
+      func_64A1(var_10, var_11, var_12, var_08, param_01);
     }
 
     self waittill("reached node");
-    if(var_0E) {
+    if(var_0D) {
       func_9416();
       func_A699();
       wait(1);
     }
-
-    var_0A++;
   }
 
   if(param_05) {
     param_06 unlink();
-    var_13 = vectorNormalize(param_00[param_00.size - 1].var_0116 - param_00[param_00.size - 2].var_0116);
+    var_13 = vectorNormalize(param_00[param_00.size - 1].origin - param_00[param_00.size - 2].origin);
     var_14 = param_01;
     var_15 = (var_14 * var_13[0], var_14 * var_13[1], var_14 * var_13[2]);
     param_06 setvelocity(var_15);
@@ -616,8 +613,8 @@ func_0FB8() {
 func_3C28() {
   self endon("flame_jets_done");
   var_00 = common_scripts\utility::func_46B5("well_explosion", "script_noteworthy");
-  var_01 = common_scripts\utility::func_46B5(var_00.var_01A2, "targetname");
-  var_02 = common_scripts\utility::func_46B5(var_01.var_01A2, "targetname");
+  var_01 = common_scripts\utility::func_46B5(var_00.target, "targetname");
+  var_02 = common_scripts\utility::func_46B5(var_01.target, "targetname");
   var_03 = 2;
   var_04 = [];
   for(var_05 = 0; var_05 < var_03; var_05++) {
@@ -625,7 +622,7 @@ func_3C28() {
     var_04[var_05] = func_45FF("fire_path_launch_side_" + var_05 + 1);
   }
 
-  foreach(var_07 in level.var_744A) {
+  foreach(var_07 in level.players) {
     thread func_A6A1(var_07, var_00, var_01, var_02, var_04);
   }
 }
@@ -634,22 +631,22 @@ func_A6A1(param_00, param_01, param_02, param_03, param_04) {
   self endon("flame_jets_done");
   var_05 = [];
   for(var_06 = 0; var_06 < param_04.size; var_06++) {
-    if(!param_04[var_06][0].var_01A5 == "fire_path_launch_side_1") {
-      var_05 = common_scripts\utility::func_0F6F(var_05, param_04[var_06]);
+    if(!param_04[var_06][0].targetname == "fire_path_launch_side_1") {
+      var_05 = common_scripts\utility::func_F6F(var_05, param_04[var_06]);
     }
   }
 
   for(;;) {
     param_00 waittill("fire_touched");
     if(!common_scripts\utility::func_562E(param_00.var_5685) && common_scripts\utility::func_562E(level.var_665A)) {
-      if(distance2d(param_00.var_0116, param_01.var_0116) < param_01.var_014F) {
+      if(distance2d(param_00.origin, param_01.origin) < param_01.var_14F) {
         param_00.var_5685 = 1;
         param_00 thread func_2FAD();
         param_00 thread func_8CD6(param_01, param_02, param_03);
         continue;
       }
 
-      if(param_00.var_0116[2] < param_01.var_0116[2]) {
+      if(param_00.origin[2] < param_01.origin[2]) {
         param_00.var_5685 = 1;
         param_00 thread func_2FAD();
         if(common_scripts\utility::func_562E(level.var_1CBA)) {
@@ -665,17 +662,17 @@ func_A6A1(param_00, param_01, param_02, param_03, param_04) {
 
 func_2FAD() {
   var_00 = self getcurrentweapon();
-  self method_8322();
+  self disableweapons();
   self shellshock("frag_grenade_mp", 1);
   wait(0.25);
-  self method_8323();
+  self enableweapons();
 }
 
 func_47C2(param_00, param_01, param_02) {
   wait(param_02);
-  lib_0586::func_0790(param_00);
-  self method_8327();
-  lib_0586::func_078E(param_01);
+  lib_0586::func_790(param_00);
+  self enableweaponswitch();
+  lib_0586::func_78E(param_01);
 }
 
 func_3C25(param_00) {
@@ -683,14 +680,14 @@ func_3C25(param_00) {
   var_02 = -1;
   var_03 = undefined;
   for(var_04 = 0; var_04 < param_00.size; var_04++) {
-    var_05 = distance(self.var_0116, param_00[var_04][0].var_0116);
+    var_05 = distance(self.origin, param_00[var_04][0].origin);
     if(var_02 == -1 || var_05 < var_02) {
       var_03 = param_00[var_04];
       var_02 = var_05;
     }
   }
 
-  var_06 = lib_053F::func_44A6(var_03[0].var_0165);
+  var_06 = lib_053F::func_44A6(var_03[0].script_noteworthy);
   if(isDefined(var_06) && !common_scripts\utility::func_562E(var_06.var_6BE1)) {
     return;
   }
@@ -709,8 +706,8 @@ func_9DC8(param_00, param_01) {
   var_02 = 0;
   var_03 = -1;
   for(var_04 = 1; var_04 < param_00.size; var_04++) {
-    var_05 = distance(param_01.var_0116, param_00[var_04].var_0116);
-    var_06 = distance(param_01.var_0116, param_00[var_02].var_0116);
+    var_05 = distance(param_01.origin, param_00[var_04].origin);
+    var_06 = distance(param_01.origin, param_00[var_02].origin);
     if(var_03 == -1 || var_05 < var_06) {
       var_02 = var_04;
       var_03 = var_05;
@@ -723,18 +720,18 @@ func_9DC8(param_00, param_01) {
   }
 
   if(var_07.size >= 3) {
-    var_07 = common_scripts\utility::func_0F93(var_07, var_07[0]);
+    var_07 = common_scripts\utility::func_F93(var_07, var_07[0]);
   }
 
   return var_07;
 }
 
 func_86E4(param_00) {
-  var_01 = func_90A9(self.var_0116);
-  var_01.var_0116 = param_00[0].var_0116;
-  var_01.var_001D = param_00[0].var_001D;
-  self.var_0116 = var_01.var_0116;
-  self setangles(var_01.var_001D);
+  var_01 = func_90A9(self.origin);
+  var_01.origin = param_00[0].origin;
+  var_01.angles = param_00[0].angles;
+  self.origin = var_01.origin;
+  self setplayerangles(var_01.angles);
   self playerlinktoabsolute(var_01);
   var_01 thread func_649B(param_00, 1000, 0, undefined, undefined, 1, self);
   var_01 waittill("path complete");
@@ -745,32 +742,32 @@ func_86E4(param_00) {
 func_8CD6(param_00, param_01, param_02) {
   var_03 = 800;
   var_04 = 800;
-  var_05 = param_00.var_0116 + (0, 0, 32);
-  var_06 = var_05[2] - self.var_0116[2];
+  var_05 = param_00.origin + (0, 0, 32);
+  var_06 = var_05[2] - self.origin[2];
   if(var_06 > 0) {
     var_07 = common_scripts\utility::func_8FFC();
     self playerlinkTo(var_07);
     var_08 = var_06 / var_04;
-    var_07 moveTo((self.var_0116[0], self.var_0116[1], var_05[2]), var_08);
+    var_07 moveTo((self.origin[0], self.origin[1], var_05[2]), var_08);
     wait(var_08);
     self unlink();
     var_07 delete();
   }
 
   var_09 = -64;
-  var_0A = abs(param_01.var_0116[2] - self.var_0116[2]);
+  var_0A = abs(param_01.origin[2] - self.origin[2]);
   var_0A = var_0A + var_09;
-  var_0B = abs(distance2d(var_05, param_02.var_0116) - distance2d(var_05, self.var_0116));
+  var_0B = abs(distance2d(var_05, param_02.origin) - distance2d(var_05, self.origin));
   var_0C = sqrt(2 * var_03 * var_0A);
-  var_0D = abs(func_8F12(0.5 * var_03, var_0C, var_05[2] - self.var_0116[2]));
+  var_0D = abs(func_8F12(0.5 * var_03, var_0C, var_05[2] - self.origin[2]));
   var_0E = var_0C / var_03;
-  var_0F = vectorNormalize(self.var_0116 - (var_05[0], var_05[1], self.var_0116[2]));
+  var_0F = vectorNormalize(self.origin - (var_05[0], var_05[1], self.origin[2]));
   var_10 = var_0B / var_0D;
   var_11 = (var_10 * var_0F[0], var_10 * var_0F[1], var_0C);
   var_12 = common_scripts\utility::func_46B5("nest_ee_arm_fire_objective_angle", "targetname");
   self setvelocity(var_11);
-  thread func_7726(var_0E, param_01.var_0116[2] + var_09);
-  thread func_7722(var_0D, distance2d(var_05, param_02.var_0116), var_05);
+  thread func_7726(var_0E, param_01.origin[2] + var_09);
+  thread func_7722(var_0D, distance2d(var_05, param_02.origin), var_05);
 }
 
 func_A016(param_00, param_01) {
@@ -822,8 +819,8 @@ func_64D3(param_00, param_01, param_02) {
 }
 
 func_321A(param_00, param_01, param_02) {
-  self moveTo(param_00.var_0116, param_01, 0, param_02);
-  self rotateTo(param_00.var_001D, param_01 / 2);
+  self moveTo(param_00.origin, param_01, 0, param_02);
+  self rotateTo(param_00.angles, param_01 / 2);
   wait(param_01);
   self notify("reached node");
 }
@@ -872,15 +869,15 @@ func_A699(param_00, param_01) {
 }
 
 func_56AF(param_00, param_01) {
-  return distance2d(param_00, self.var_0116) < param_01;
+  return distance2d(param_00, self.origin) < param_01;
 }
 
 func_5687(param_00) {
-  return self.var_0116[2] < param_00[2];
+  return self.origin[2] < param_00[2];
 }
 
 func_565C(param_00) {
-  return self.var_0116[2] > param_00[2];
+  return self.origin[2] > param_00[2];
 }
 
 func_1E4C(param_00, param_01, param_02, param_03) {
@@ -888,11 +885,11 @@ func_1E4C(param_00, param_01, param_02, param_03) {
 }
 
 func_8B8A(param_00) {
-  return distance(self.var_0116, param_00) < 64 && isalive(self) && !common_scripts\utility::func_562E(self.var_98EF) && !common_scripts\utility::func_562E(self.var_AC06);
+  return distance(self.origin, param_00) < 64 && isalive(self) && !common_scripts\utility::func_562E(self.var_98EF) && !common_scripts\utility::func_562E(self.var_AC06);
 }
 
 func_A6BB() {
-  while(!isDefined(level.var_744A)) {
+  while(!isDefined(level.players)) {
     wait(0.1);
   }
 }
@@ -900,7 +897,7 @@ func_A6BB() {
 func_9484(param_00) {
   var_01 = [];
   for(var_02 = 0; var_02 < param_00.size; var_02++) {
-    var_01[var_02] = param_00[var_02].var_0116;
+    var_01[var_02] = param_00[var_02].origin;
   }
 
   return var_01;
@@ -908,23 +905,23 @@ func_9484(param_00) {
 
 func_45FF(param_00) {
   var_01 = common_scripts\utility::func_46B5(param_00, "targetname");
-  for(var_02 = [var_01]; !var_01 func_5773(); var_02 = common_scripts\utility::func_0F6F(var_02, var_01)) {
-    var_01 = common_scripts\utility::func_46B5(var_01.var_01A2, "targetname");
+  for(var_02 = [var_01]; !var_01 func_5773(); var_02 = common_scripts\utility::func_F6F(var_02, var_01)) {
+    var_01 = common_scripts\utility::func_46B5(var_01.target, "targetname");
   }
 
   return var_02;
 }
 
 func_5773() {
-  return isDefined(self.var_0165) && self.var_0165 == "path_end";
+  return isDefined(self.script_noteworthy) && self.script_noteworthy == "path_end";
 }
 
 func_576F() {
-  return isDefined(self.var_0165) && self.var_0165 == "spline_start";
+  return isDefined(self.script_noteworthy) && self.script_noteworthy == "spline_start";
 }
 
 func_56AC() {
-  return isDefined(self.var_0165) && self.var_0165 == "destination_point";
+  return isDefined(self.script_noteworthy) && self.script_noteworthy == "destination_point";
 }
 
 func_A16D(param_00) {
@@ -947,7 +944,7 @@ func_A16D(param_00) {
   }
 
   if(isDefined(var_01)) {
-    self.var_3F3F = spawnfx(common_scripts\utility::func_44F5(var_01), self.var_0116, anglesToForward(self.var_001D), anglestoup(self.var_001D));
+    self.var_3F3F = spawnfx(common_scripts\utility::func_44F5(var_01), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     self.var_2916 = param_00;
   }
 
@@ -969,14 +966,14 @@ func_865C(param_00, param_01) {
     return;
   }
 
-  if(self.var_0BA4 != "traverse") {
+  if(self.var_BA4 != "traverse") {
     self.var_2A9D = param_00;
   }
 }
 
 func_64DC(param_00, param_01, param_02, param_03) {
   self endon(param_02);
-  var_04 = self.var_0116;
+  var_04 = self.origin;
   var_05 = param_01 / param_03;
   for(var_06 = 0; var_06 < param_01; var_06 = var_06 + var_05) {
     self moveTo(vectorlerp(var_04, param_00, var_06 / param_01), var_05);
@@ -1008,8 +1005,8 @@ func_2CEB(param_00) {
 }
 
 func_8A64(param_00) {
-  lib_0586::func_078C(param_00);
-  lib_0586::func_078E(param_00);
+  lib_0586::func_78C(param_00);
+  lib_0586::func_78E(param_00);
 }
 
 func_2CDD(param_00) {
@@ -1018,12 +1015,12 @@ func_2CDD(param_00) {
 }
 
 func_745D(param_00, param_01, param_02) {
-  if(!isDefined(level.var_744A)) {
+  if(!isDefined(level.players)) {
     return [0, undefined];
   }
 
-  foreach(var_04 in level.var_744A) {
-    if(distance2d(var_04.var_0116, param_00) < param_01 && abs(var_04.var_0116[2] - param_00[2]) < param_02 / 2) {
+  foreach(var_04 in level.players) {
+    if(distance2d(var_04.origin, param_00) < param_01 && abs(var_04.origin[2] - param_00[2]) < param_02 / 2) {
       return [1, var_04];
     }
   }
@@ -1043,13 +1040,13 @@ func_44C8(param_00, param_01) {
     var_02[0] = getEnt(param_00, "targetname");
   }
 
-  while(isDefined(var_02[var_02.size - 1].var_01A2)) {
+  while(isDefined(var_02[var_02.size - 1].target)) {
     if(param_01) {
-      var_02 = common_scripts\utility::func_0F6F(var_02, common_scripts\utility::func_46B5(var_02[var_02.size - 1].var_01A2, "targetname"));
+      var_02 = common_scripts\utility::func_F6F(var_02, common_scripts\utility::func_46B5(var_02[var_02.size - 1].target, "targetname"));
       continue;
     }
 
-    var_02 = common_scripts\utility::func_0F6F(var_02, getEnt(var_02[var_02.size - 1].var_01A2, "targetname"));
+    var_02 = common_scripts\utility::func_F6F(var_02, getEnt(var_02[var_02.size - 1].target, "targetname"));
   }
 
   return var_02;
@@ -1160,14 +1157,14 @@ func_7EB0(param_00, param_01) {
 }
 
 func_74D2() {
-  earthquake(0.25, 0.25, self.var_0116, 500);
-  function_01BB("artillery_rumble", self.var_0116);
+  earthquake(0.25, 0.25, self.origin, 500);
+  playrumbleonposition("artillery_rumble", self.origin);
 }
 
 func_08A8() {
   var_00 = getEntArray("com_control_elec", "targetname");
   foreach(var_02 in var_00) {
-    var_02.schnelleeffects = spawnfx(level.var_0611["zmb_electroschnelle_reg_chg_wv"], var_02.var_0116, anglesToForward(var_02.var_001D));
+    var_02.schnelleeffects = spawnfx(level.var_611["zmb_electroschnelle_reg_chg_wv"], var_02.origin, anglesToForward(var_02.angles));
     triggerfx(var_02.schnelleeffects);
   }
 
@@ -1179,9 +1176,9 @@ func_08A8() {
     var_09 setscriptablepartstate("inner", "up", 0);
   }
 
-  playFXOnTag(level.var_0611["zmb_gk_claw_battery_full_1"], level.var_3571, "flap1_shroud");
-  playFXOnTag(level.var_0611["zmb_gk_claw_battery_full_2"], level.var_3571, "flap2_shroud");
-  playFXOnTag(level.var_0611["zmb_gk_claw_battery_full_3"], level.var_3571, "flap3_shroud");
+  playFXOnTag(level.var_611["zmb_gk_claw_battery_full_1"], level.var_3571, "flap1_shroud");
+  playFXOnTag(level.var_611["zmb_gk_claw_battery_full_2"], level.var_3571, "flap2_shroud");
+  playFXOnTag(level.var_611["zmb_gk_claw_battery_full_3"], level.var_3571, "flap3_shroud");
   wait(var_05);
   foreach(var_09 in var_04) {
     var_09 setscriptablepartstate("inner", "up_idle", 0);
@@ -1201,19 +1198,19 @@ func_08A8() {
 func_8A53() {
   var_00 = spawnStruct();
   var_00.var_6FC5 = getEnt("ww_part_01_pickup", "targetname");
-  var_00.var_6FC2 = getEnt(var_00.var_6FC5.var_01A2, "targetname");
-  playFXOnTag(level.var_0611["zmb_tesla_barrel_prop_idle"], var_00.var_6FC2, "TAG_ORIGIN");
+  var_00.var_6FC2 = getEnt(var_00.var_6FC5.target, "targetname");
+  playFXOnTag(level.var_611["zmb_tesla_barrel_prop_idle"], var_00.var_6FC2, "TAG_ORIGIN");
   var_01 = spawnStruct();
   var_01.var_6FC5 = getEnt("ww_part_02_pickup", "targetname");
-  var_01.var_6FC2 = getEnt(var_01.var_6FC5.var_01A2, "targetname");
-  playFXOnTag(level.var_0611["zmb_tesla_tube_prop_idle"], var_01.var_6FC2, "TAG_ORIGIN");
+  var_01.var_6FC2 = getEnt(var_01.var_6FC5.target, "targetname");
+  playFXOnTag(level.var_611["zmb_tesla_tube_prop_idle"], var_01.var_6FC2, "TAG_ORIGIN");
   var_00.var_6FC5 common_scripts\utility::func_9D9F();
   var_01.var_6FC5 common_scripts\utility::func_9D9F();
   var_00.var_6FC5 useTriggerRequireLookAt();
   var_01.var_6FC5 useTriggerRequireLookAt();
   if(isDefined(var_00.var_6FC2) && isDefined(var_01.var_6FC2)) {
-    var_00.var_6FC2 method_805C();
-    var_01.var_6FC2 method_805C();
+    var_00.var_6FC2 hide();
+    var_01.var_6FC2 hide();
   }
 
   var_02 = function_021F("rnd_forge_machine_parts", "targetname");
@@ -1231,7 +1228,7 @@ func_8BEC(param_00, param_01, param_02, param_03) {
     common_scripts\utility::func_3C9F(param_00);
   }
 
-  self.var_6FC2 method_805B();
+  self.var_6FC2 show();
   if(isDefined(param_02)) {
     common_scripts\utility::func_3C9F(param_02);
   }
@@ -1243,7 +1240,7 @@ func_8BEC(param_00, param_01, param_02, param_03) {
   }
 
   self.var_6FC5 common_scripts\utility::func_9D9F();
-  self.var_6FC2 method_805C();
+  self.var_6FC2 hide();
   return var_04;
 }
 
@@ -1357,9 +1354,9 @@ func_4649() {
 
 func_440D() {
   var_00 = [];
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(isalive(var_02) && !var_02.var_5378) {
-      var_00 = common_scripts\utility::func_0F6F(var_00, var_02);
+      var_00 = common_scripts\utility::func_F6F(var_00, var_02);
     }
   }
 
@@ -1369,7 +1366,7 @@ func_440D() {
 func_8A38(param_00, param_01, param_02) {
   var_03 = undefined;
   foreach(var_05 in level.var_A2A0) {
-    if(lib_0547::func_5565(var_05.var_01A5, param_00)) {
+    if(lib_0547::func_5565(var_05.targetname, param_00)) {
       var_03 = var_05;
     }
   }
@@ -1418,19 +1415,19 @@ func_44BA(param_00) {
   var_07 = lib_0547::func_9470(tablelookupbyrow(var_01, var_03 + 3, 2));
   var_08 = lib_0547::func_9470(tablelookupbyrow(var_01, var_03 + 4, 2));
   for(var_09 = 0; var_09 < var_04; var_09++) {
-    var_02 = common_scripts\utility::func_0F6F(var_02, "zombie_generic");
+    var_02 = common_scripts\utility::func_F6F(var_02, "zombie_generic");
   }
 
   for(var_09 = 0; var_09 < var_05; var_09++) {
-    var_02 = common_scripts\utility::func_0F6F(var_02, "zombie_berserker");
+    var_02 = common_scripts\utility::func_F6F(var_02, "zombie_berserker");
   }
 
   for(var_09 = 0; var_09 < var_06; var_09++) {
-    var_02 = common_scripts\utility::func_0F6F(var_02, "zombie_exploder");
+    var_02 = common_scripts\utility::func_F6F(var_02, "zombie_exploder");
   }
 
   for(var_09 = 0; var_09 < var_07; var_09++) {
-    var_02 = common_scripts\utility::func_0F6F(var_02, "zombie_heavy");
+    var_02 = common_scripts\utility::func_F6F(var_02, "zombie_heavy");
   }
 
   level.var_2932 = 0;
@@ -1438,7 +1435,7 @@ func_44BA(param_00) {
     level.var_2932++;
   }
 
-  return common_scripts\utility::func_0F92(var_02);
+  return common_scripts\utility::func_F92(var_02);
 }
 
 func_44BB(param_00) {
@@ -1453,7 +1450,7 @@ func_A7DF() {
   level notify("exited_special_event");
   wait 0.05;
   maps\mp\zombies\_zombies_magicbox::func_A7E5(0);
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 notify("special_event_update");
   }
 }
@@ -1461,7 +1458,7 @@ func_A7DF() {
 func_A7E0() {
   level endon("exited_special_event");
   maps\mp\zombies\_zombies_magicbox::func_A7E5(1);
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 notify("special_event_update");
   }
 

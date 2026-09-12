@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\_zombies_blood_tubes.gsc
 ****************************************************/
 
-func_00D5() {
+init() {
   precacherumble("damage_heavy");
   link_teleporters("bt_limbo_entrance_2", "zone_crash", "bt_archives_entrance_1", "zone_archives_closet");
   link_teleporters("bt_archives_entrance_1", "zone_archives_closet", "bt_alter_entrance_1", "zone_alter");
@@ -15,7 +15,7 @@ func_00D5() {
   level.nextcorpseeaterpunishment = 2;
   level.totaltrips = 0;
   var_00 = getEntArray("struct_bt_main", "targetname");
-  common_scripts\utility::func_FB2(var_00, ::run_my_teleporter);
+  common_scripts\utility::array_thread(var_00, ::run_my_teleporter);
   level thread handle_blood_tube_upgrade_overrides();
 }
 
@@ -45,8 +45,8 @@ handle_blood_tube_upgrade_overrides() {
 }
 
 handle_pap_button(param_00) {
-  var_01 = param_00.stone.var_116;
-  var_02 = param_00.stone.var_116 - 2 * vectorNormalize(anglesToForward(param_00.stone.var_1D));
+  var_01 = param_00.stone.origin;
+  var_02 = param_00.stone.origin - 2 * vectorNormalize(anglesToForward(param_00.stone.angles));
   for(;;) {
     param_00.var_9D65 waittill("trigger", var_03);
     param_00.stone moveTo(var_02, 0.5, 0, 0.1);
@@ -67,7 +67,7 @@ init_pap_button(param_00) {
   var_01 = common_scripts\utility::func_44BE(param_00, "script_noteworthy");
   var_02 = spawnStruct();
   foreach(var_04 in var_01) {
-    switch (var_04.var_1A5) {
+    switch (var_04.targetname) {
       case "zmb_upgrade_stone_trig":
         var_02.var_9D65 = var_04;
         break;
@@ -109,23 +109,23 @@ run_my_teleporter() {
 }
 
 tube_setup() {
-  var_00 = getEntArray(self.var_1A2, "targetname");
+  var_00 = getEntArray(self.target, "targetname");
   foreach(var_02 in var_00) {
-    switch (var_02.var_165) {
+    switch (var_02.script_noteworthy) {
       case "bt_blood_fill":
         self.blood_fill = var_02;
         self.blood_fill.var_A796 = 3;
-        self.blood_fill.var_9269 = var_02.var_116;
+        self.blood_fill.var_9269 = var_02.origin;
         break;
 
       case "bt_water":
         self.blood_fill_water = var_02;
-        self.blood_fill_water.var_9269 = self.var_116;
+        self.blood_fill_water.var_9269 = self.origin;
         break;
 
       case "bt_waterlevel":
         self.blood_fill_waterlevel = var_02;
-        self.blood_fill_waterlevel.var_9269 = self.var_116;
+        self.blood_fill_waterlevel.var_9269 = self.origin;
         break;
 
       case "trig_bt_interact":
@@ -142,8 +142,8 @@ tube_setup() {
 
       case "door_l_pivot":
         self.door_l_pivot = var_02;
-        self.door_l_pivot.initialangles = self.door_l_pivot.var_1D;
-        self.door_l.var_241F = getEnt(self.door_l_pivot.var_1A2, "targetname");
+        self.door_l_pivot.initialangles = self.door_l_pivot.angles;
+        self.door_l.var_241F = getEnt(self.door_l_pivot.target, "targetname");
         self.door_l.var_241F.var_A045 = ::transport_unresolved_collide;
         self.door_l.var_241F.var_206B = self;
         self.door_l.var_241F method_8449(self.door_l_pivot);
@@ -151,8 +151,8 @@ tube_setup() {
 
       case "door_r_pivot":
         self.door_r_pivot = var_02;
-        self.door_r_pivot.initialangles = self.door_r_pivot.var_1D;
-        self.door_r.var_241F = getEnt(self.door_r_pivot.var_1A2, "targetname");
+        self.door_r_pivot.initialangles = self.door_r_pivot.angles;
+        self.door_r.var_241F = getEnt(self.door_r_pivot.target, "targetname");
         self.door_r.var_241F.var_A045 = ::transport_unresolved_collide;
         self.door_r.var_241F.var_206B = self;
         self.door_r.var_241F method_8449(self.door_r_pivot);
@@ -216,7 +216,7 @@ tube_wait_for_interact() {
         continue;
       }
 
-      if(!var_01 maps\mp\gametypes\zombies::func_11C2(level.bloodtubecost, 0, 0, 1)) {
+      if(!var_01 maps / mp / gametypes / zombies::func_11C2(level.bloodtubecost, 0, 0, 1)) {
         continue;
       }
     }
@@ -284,13 +284,13 @@ tube_transport_logic(param_00) {
     foreach(var_0C in var_06) {
       var_0C thread handle_players_with_uber();
       var_0C childthread do_transport_rumble(2, 1);
-      var_0C thread run_blood_intro(self.blood_fill_waterlevel.var_9269, var_01.var_116);
+      var_0C thread run_blood_intro(self.blood_fill_waterlevel.var_9269, var_01.origin);
     }
 
     wait(2);
     wait(var_03);
     if(isDefined(var_01.var_82EC) && var_01.var_82EC != "bt_gallery_entrance_1" && var_01.var_82EC != "bt_gluttony_entrance_1") {
-      maps\mp\mp_zombie_descent_ee_side::dark_passenger_test(var_05);
+      maps / mp / mp_zombie_descent_ee_side::dark_passenger_test(var_05);
     }
 
     send_players_to_destination_location(var_05, var_01);
@@ -312,13 +312,13 @@ tube_transport_logic(param_00) {
 
     level thread remove_godmode_for_players(var_06);
     foreach(var_0C in get_players_departing(var_02)) {
-      lib_0547::playfxclient("zmb_desc_screen_fx_exit_bloody", var_02.var_116, var_0C, 5);
+      lib_0547::playfxclient("zmb_desc_screen_fx_exit_bloody", var_02.origin, var_0C, 5);
     }
 
     var_01 transport_open();
     foreach(var_17 in var_05) {
       if(isPlayer(var_17)) {
-        var_17 thread maps\mp\mp_zombie_descent_utils::vo_blood_tube_exit();
+        var_17 thread maps / mp / mp_zombie_descent_utils::vo_blood_tube_exit();
       }
     }
 
@@ -378,7 +378,7 @@ do_transport_rumble(param_00, param_01) {
   var_02 notify("new_transport_rumble");
   var_02 endon("new_transport_rumble");
   var_03 = gettime();
-  var_02 method_8322();
+  var_02 disableweapons();
   while(gettime() - var_03 < param_00 * 1000) {
     wait(randomfloat(0.4) + 0.7);
     var_02 playRumbleOnEntity("damage_heavy");
@@ -393,7 +393,7 @@ do_transport_rumble(param_00, param_01) {
   }
 
   if(!param_01) {
-    var_02 method_8323();
+    var_02 enableweapons();
   }
 }
 
@@ -422,7 +422,7 @@ tube_do_transport(param_00, param_01, param_02) {
   param_01 = check_for_quest_detour(param_01);
   thread handle_blood_vision(param_01);
   if(!isDefined(param_01.blood_spawns)) {
-    param_01.blood_spawns = common_scripts\utility::func_46B7(param_01.var_1A2, "targetname");
+    param_01.blood_spawns = common_scripts\utility::func_46B7(param_01.target, "targetname");
   }
 
   if(param_02 >= param_01.blood_spawns.size) {
@@ -441,26 +441,26 @@ tube_do_transport(param_00, param_01, param_02) {
     }
   }
 
-  self setOrigin(param_01.blood_spawns[param_02].var_116);
+  self setOrigin(param_01.blood_spawns[param_02].origin);
   if(isDefined(self.wing_fx)) {
-    thread maps\mp\zombies\zombie_king::spawn_wings();
+    thread maps / mp / zombies / zombie_king::spawn_wings();
   }
 
   if(isDefined(self.mooncontrolledfx)) {
-    thread maps\mp\zombies\weapons\_zombie_dlc4_melee::moonorb_mind_control_fx(1);
+    thread maps / mp / zombies / weapons / _zombie_dlc4_melee::moonorb_mind_control_fx(1);
   }
 
   if(isDefined(self.darkhostfx)) {
-    thread maps\mp\mp_zombie_descent_ee_side::dark_host_control_fx();
+    thread maps / mp / mp_zombie_descent_ee_side::dark_host_control_fx();
   }
 
   if(isDefined(self.poweredupfx)) {
-    thread maps\mp\zombies\zombie_corpse_eater::zombie_corpse_eater_vfx(1);
+    thread maps / mp / zombies / zombie_corpse_eater::zombie_corpse_eater_vfx(1);
   }
 
-  lib_0378::func_8D74("aud_blood_tube_splash", param_01.blood_spawns[param_02].var_116);
-  if(isPlayer(self) && isDefined(param_01.blood_spawns[param_02].var_1D)) {
-    self setangles(param_01.blood_spawns[param_02].var_1D);
+  lib_0378::func_8D74("aud_blood_tube_splash", param_01.blood_spawns[param_02].origin);
+  if(isPlayer(self) && isDefined(param_01.blood_spawns[param_02].angles)) {
+    self setplayerangles(param_01.blood_spawns[param_02].angles);
   }
 
   self.ontransportcooldown = 0;
@@ -471,7 +471,7 @@ is_passenger_pap_valid(param_00) {
     return 0;
   }
 
-  if(maps\mp\mp_zombie_descent_ee_side::playerinsewers()) {
+  if(maps / mp / mp_zombie_descent_ee_side::playerinsewers()) {
     return 0;
   }
 
@@ -489,7 +489,7 @@ try_to_reroute_to_upgrade_machine_room(param_00, param_01) {
       set_next_pap_unlock_flag();
     }
 
-    maps\mp\mp_zombie_descent_ee_main::set_weapon_upgrade_blood_tube_route("zom_pap_trial_destination");
+    maps / mp / mp_zombie_descent_ee_main::set_weapon_upgrade_blood_tube_route("zom_pap_trial_destination");
   }
 }
 
@@ -498,13 +498,13 @@ play_blood_vision_for_players(param_00, param_01) {
   foreach(var_02 in param_00) {
     var_02 thread handle_blood_vision(param_01);
     var_02 lib_0378::func_8D74("aud_blood_tube_filling_up");
-    var_02 thread maps\mp\mp_zombie_descent_utils::vo_blood_tube_enter();
+    var_02 thread maps / mp / mp_zombie_descent_utils::vo_blood_tube_enter();
   }
 }
 
 get_players_departing(param_00) {
   var_01 = [];
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(var_03 player_is_in_pod(param_00)) {
       var_01[var_01.size] = var_03;
       continue;
@@ -542,9 +542,9 @@ get_zombies_departing(param_00) {
 
 get_all_zombies_include_mooncontrolled() {
   var_00 = [];
-  var_01 = maps\mp\agents\_agent_utility::func_43FD("all");
+  var_01 = maps / mp / agents / _agent_utility::func_43FD("all");
   foreach(var_03 in var_01) {
-    if(isDefined(var_03.var_A) && var_03.var_A == level.var_746E && !common_scripts\utility::func_562E(var_03.ismooncontrolled)) {
+    if(isDefined(var_03.agentteam) && var_03.agentteam == level.var_746E && !common_scripts\utility::func_562E(var_03.ismooncontrolled)) {
       continue;
     }
 
@@ -590,7 +590,7 @@ players_occupy_this_tube() {
 
 num_players_in_tube() {
   var_00 = 0;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 istouching(self.use_trig)) {
       var_00++;
     }
@@ -600,7 +600,7 @@ num_players_in_tube() {
 }
 
 doors_fully_open() {
-  return lib_0547::func_5565(self.door_r_pivot.var_1D, self.door_r_pivot.initialangles + (0, -60, 0));
+  return lib_0547::func_5565(self.door_r_pivot.angles, self.door_r_pivot.initialangles + (0, -60, 0));
 }
 
 set_next_pap_unlock_flag() {
@@ -656,7 +656,7 @@ handle_blood_vision(param_00) {
 }
 
 test_eyes_below_water(param_00) {
-  if(self getEye()[2] < param_00.var_116[2]) {
+  if(self getEye()[2] < param_00.origin[2]) {
     return 1;
   }
 
@@ -680,10 +680,10 @@ disable_blood_vision() {
 check_for_quest_detour(param_00) {
   if(has_objective_destination()) {
     var_01 = common_scripts\utility::func_46B5("zmb_trials_router", "targetname");
-    var_02 = common_scripts\utility::func_46B7(var_01.var_1A2, "targetname");
+    var_02 = common_scripts\utility::func_46B7(var_01.target, "targetname");
     foreach(var_04 in var_02) {
-      if(lib_0547::func_5565(var_04.var_165, self.forcedblooddest)) {
-        thread maps\mp\mp_zombie_descent_ee_main::run_weapon_ritual(var_04.var_165, param_00);
+      if(lib_0547::func_5565(var_04.script_noteworthy, self.forcedblooddest)) {
+        thread maps / mp / mp_zombie_descent_ee_main::run_weapon_ritual(var_04.script_noteworthy, param_00);
         self.old_destination = param_00;
         param_00 = var_04;
         self.forcedblooddest = undefined;
@@ -758,7 +758,7 @@ update_transport_prompt_think() {
 }
 
 some_one_hitching_a_ride() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(common_scripts\utility::func_562E(var_01.hitchingaride)) {
       return 1;
     }
@@ -796,7 +796,7 @@ transport_open(param_00) {
     wait(self.blood_fill.var_A796);
   }
 
-  playFX(level.var_611["zmb_desc_bloodtube_drip_exit"], self.door_l_pivot.var_116);
+  playFX(level.var_611["zmb_desc_bloodtube_drip_exit"], self.door_l_pivot.origin);
   var_02 = 3;
   self.door_r_pivot rotateTo(self.door_r_pivot.initialangles + (0, -60, 0), var_02);
   self.door_l_pivot rotateTo(self.door_l_pivot.initialangles + (0, 60, 0), var_02);
@@ -863,17 +863,17 @@ boss_tube_wait_for_interact() {
 
     var_01 = 0;
     foreach(var_03 in level.ravenweaponmanager) {
-      if(isDefined(var_03.var_117)) {
+      if(isDefined(var_03.owner)) {
         var_01++;
       }
     }
 
-    if(var_01 < level.var_744A.size) {
+    if(var_01 < level.players.size) {
       continue;
     }
 
     var_05 = 1;
-    foreach(var_00 in level.var_744A) {
+    foreach(var_00 in level.players) {
       if(!var_00 istouching(self.use_trig)) {
         var_05 = 0;
         break;
@@ -919,16 +919,16 @@ boss_tube_toggle_hint() {
 boss_tube_check_for_activation() {
   var_00 = 0;
   foreach(var_02 in level.ravenweaponmanager) {
-    if(isDefined(var_02.var_117)) {
+    if(isDefined(var_02.owner)) {
       var_00++;
     }
   }
 
-  if(var_00 < level.var_744A.size) {
+  if(var_00 < level.players.size) {
     return 0;
   }
 
-  foreach(var_05 in level.var_744A) {
+  foreach(var_05 in level.players) {
     if(!var_05 istouching(self.use_trig)) {
       return 0;
     }
@@ -988,13 +988,13 @@ bonus_tube_wait_for_interact() {
         continue;
       }
 
-      if(!var_00 maps\mp\gametypes\zombies::func_11C2(level.bloodtubecost, 0, 0, 1)) {
+      if(!var_00 maps / mp / gametypes / zombies::func_11C2(level.bloodtubecost, 0, 0, 1)) {
         continue;
       }
     }
 
     if(!common_scripts\utility::func_562E(var_00.hasenteredbonustrial) && !isDefined(var_00.forcedblooddest)) {
-      if(!lib_055A::func_5780("zone_sewers") && var_00 maps\mp\gametypes\zombies::func_1F32(6666, 1)) {
+      if(!lib_055A::func_5780("zone_sewers") && var_00 maps / mp / gametypes / zombies::func_1F32(6666, 1)) {
         var_00.forcedblooddest = "zom_bonus_trial_destination";
         var_00.hasenteredbonustrial = 1;
         var_00.inasneakyplace = 1;
@@ -1021,7 +1021,7 @@ bonus_tube_slow_cash_bleed() {
       self.var_62D6 = var_02;
     }
 
-    maps\mp\gametypes\zombies::func_90F5(var_02, 0);
+    maps / mp / gametypes / zombies::func_90F5(var_02, 0);
     if(self.var_62D6 <= 0) {
       break;
     }

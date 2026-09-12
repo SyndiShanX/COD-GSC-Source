@@ -3,14 +3,14 @@
  * Script: maps\mp\mp_zombie_windmill_srv.gsc
 **********************************************/
 
-func_00F9() {
-  maps\mp\mp_zombie_windmill_srv_precache::func_F9();
-  maps\createart\mp_zombie_windmill_srv_art::func_F9();
-  maps\mp\mp_zombie_windmill_srv_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_zombie_windmill_lighting::func_F9();
-  maps\mp\mp_zombie_windmill_aud::func_F9();
-  maps\mp\_compass::func_8A2F("compass_map_mp_zombie_windmill_srv");
+main() {
+  maps / mp / mp_zombie_windmill_srv_precache::main();
+  maps / createart / mp_zombie_windmill_srv_art::main();
+  maps / mp / mp_zombie_windmill_srv_fx::main();
+  maps\mp\_load::main();
+  maps / mp / mp_zombie_windmill_lighting::main();
+  maps / mp / mp_zombie_windmill_aud::main();
+  maps\mp\_compass::setupminimap("compass_map_mp_zombie_windmill_srv");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   level.var_AC2E = 5;
@@ -29,46 +29,46 @@ func_00F9() {
   level.var_C11 = 0;
   common_scripts\utility::func_3C87("power_sz2");
   func_5375();
-  maps\mp\zombies\zombie_survival_common::func_D5();
-  thread maps\mp\mp_zombie_windmill_util::windmill_think();
+  maps / mp / zombies / zombie_survival_common::init();
+  thread maps / mp / mp_zombie_windmill_util::windmill_think();
   thread windmill_srv_ee();
   level thread add_windmill_ceiling_patch();
-  maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_fx::func_D5();
-  level.upgrade_machine_upgrade_func = ::maps\mp\zombies\shotgun\_zombies_shotgun_gamemode::collect_souls_to_unlock_pack_a_punch;
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode::run_pack_a_punch_log();
+  maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_fx::init();
+  level.upgrade_machine_upgrade_func = ::maps / mp / zombies / shotgun / _zombies_shotgun_gamemode::collect_souls_to_unlock_pack_a_punch;
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_gamemode::run_pack_a_punch_log();
 }
 
 initwindmillweapons() {
   level.sworddelivery_checkradius = 128;
-  level thread maps\mp\zombies\zombie_survival_common::initsurvivalweapons();
+  level thread maps / mp / zombies / zombie_survival_common::initsurvivalweapons();
 }
 
 add_windmill_ceiling_patch() {
   var_00 = common_scripts\utility::func_46B7("ceiling_stuff_patches_05", "targetname");
   var_01 = common_scripts\utility::func_46B7("ceiling_stuff_patches_04", "targetname");
   foreach(var_03 in var_00) {
-    var_04 = spawn("script_model", var_03.var_116);
-    var_04.var_1D = var_03.var_1D;
+    var_04 = spawn("script_model", var_03.origin);
+    var_04.angles = var_03.angles;
     var_04 setModel("cob_floor_dmg_section_wood_05");
   }
 
   foreach(var_03 in var_01) {
-    var_04 = spawn("script_model", var_03.var_116);
-    var_04.var_1D = var_03.var_1D;
+    var_04 = spawn("script_model", var_03.origin);
+    var_04.angles = var_03.angles;
     var_04 setModel("cob_floor_dmg_section_wood_04");
   }
 }
 
 func_5375() {
-  lib_055A::func_D5();
+  lib_055A::init();
   lib_055A::func_530A("zone_plaza", 1);
   lib_055A::func_88A();
   thread house_door_listener();
 }
 
 init_new_zombie_types() {
-  maps\mp\zombies\zombie_sizzler::func_D5();
-  maps\mp\zombies\zombie_survival_common::srv_init_miniboss_rounds();
+  maps / mp / zombies / zombie_sizzler::init();
+  maps / mp / zombies / zombie_survival_common::srv_init_miniboss_rounds();
 }
 
 house_door_listener() {
@@ -87,11 +87,11 @@ onwindmillstartgame() {
 }
 
 windmill_srv_round_start() {
-  level thread maps\mp\zombies\zombie_survival_common::srvroundstart();
+  level thread maps / mp / zombies / zombie_survival_common::srvroundstart();
 }
 
 windmill_srv_round_end() {
-  level thread maps\mp\zombies\zombie_survival_common::srvroundend();
+  level thread maps / mp / zombies / zombie_survival_common::srvroundend();
 }
 
 windmill_srv_ee() {
@@ -104,19 +104,19 @@ windmill_srv_ee() {
     var_04 setModel("zmw_belongings_toy_duck_01");
   }
 
-  var_02.target_struct = common_scripts\utility::func_46B5(var_02.var_1A2, "targetname");
-  var_02.var_926A = var_02.var_116;
-  var_02.raised_position = var_02.target_struct.var_116;
+  var_02.target_struct = common_scripts\utility::func_46B5(var_02.target, "targetname");
+  var_02.var_926A = var_02.origin;
+  var_02.raised_position = var_02.target_struct.origin;
   var_02.is_dog = 1;
   var_06 = getEnt("srv_pap_fuse_spawn_loc", "targetname");
   var_06 linkTo(var_02);
   var_07 = getEnt("srv_pap_fuse_pickup_trig", "targetname");
   var_07 common_scripts\utility::func_9D9F();
   foreach(var_04 in var_01) {
-    var_04.var_926A = var_04.var_116;
+    var_04.var_926A = var_04.origin;
     var_04.var_931A = "lowered";
-    var_04.target_struct = common_scripts\utility::func_46B5(var_04.var_1A2, "targetname");
-    var_04.raised_position = var_04.target_struct.var_116;
+    var_04.target_struct = common_scripts\utility::func_46B5(var_04.target, "targetname");
+    var_04.raised_position = var_04.target_struct.origin;
     var_04.var_29B5 = ::ee_dmg_listen;
   }
 
@@ -155,7 +155,7 @@ windmill_srv_ee() {
         var_04 thread ee_raise();
       }
 
-      level common_scripts\utility::func_A74B("all_ducks_in_window_killed", var_00);
+      level common_scripts\utility::waittill_notify_or_timeout("all_ducks_in_window_killed", var_00);
       if(level.ducks_killed_in_window >= level.ducks_per_window) {
         if(var_0D == 3 || var_0D == 5) {
           level.ducks_per_window++;
@@ -190,7 +190,7 @@ windmill_srv_ee() {
 ee_show_dog_fail() {
   self moveTo(self.raised_position, 1, 0.1, 0.1);
   wait(1);
-  self vibrate(anglestoright(self.var_1D), 0.3, 0.3, 5);
+  self vibrate(anglestoright(self.angles), 0.3, 0.3, 5);
   wait(5);
   self moveTo(self.var_926A, 3, 0.1, 0.1);
   wait(3);
@@ -212,13 +212,13 @@ ee_show_dog_success(param_00) {
 ee_toss_fuse() {
   var_00 = self;
   var_01 = common_scripts\utility::func_46B5("srv_pap_fuse_land_path", "targetname");
-  var_00 moveTo(var_01.var_116, 0.15);
-  var_02 = common_scripts\utility::func_46B5(var_01.var_1A2, "targetname");
+  var_00 moveTo(var_01.origin, 0.15);
+  var_02 = common_scripts\utility::func_46B5(var_01.target, "targetname");
   wait(0.15);
   while(isDefined(var_02)) {
-    var_00 moveTo(var_02.var_116, 0.15);
-    if(isDefined(var_02.var_1A2)) {
-      var_02 = common_scripts\utility::func_46B5(var_02.var_1A2, "targetname");
+    var_00 moveTo(var_02.origin, 0.15);
+    if(isDefined(var_02.target)) {
+      var_02 = common_scripts\utility::func_46B5(var_02.target, "targetname");
       continue;
     }
 
@@ -232,7 +232,7 @@ ee_toss_fuse() {
   var_03 waittill("trigger");
   var_00 delete();
   var_03 common_scripts\utility::func_9D9F();
-  level thread maps\mp\zombies\zombie_survival_common::srvshowpapfuse();
+  level thread maps / mp / zombies / zombie_survival_common::srvshowpapfuse();
 }
 
 ee_raise(param_00) {
@@ -249,7 +249,7 @@ ee_raise(param_00) {
   }
 
   if(param_00 <= 0) {
-    self.var_116 = self.raised_position;
+    self.origin = self.raised_position;
   } else {
     self moveTo(self.raised_position, param_00, 0.1, 0.1);
     wait(param_00);

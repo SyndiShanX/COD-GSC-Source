@@ -4,13 +4,13 @@
 ***************************************************/
 
 _achievment_engine_z_report_event(param_00, param_01, param_02, param_03) {
-  if(!maps\mp\_events_z::is_contracts_game_online()) {
+  if(!maps / mp / _events_z::is_contracts_game_online()) {
     return;
   }
 
   var_04 = self;
   if(param_01.size > 0) {
-    if(!maps\mp\_events_z::get_testing_contracts_offline()) {
+    if(!maps / mp / _events_z::get_testing_contracts_offline()) {
       var_04 ae_reportcomplexgameevent(param_00, param_01);
     }
   }
@@ -30,7 +30,7 @@ ae_zm_sendkillevent(param_00, param_01, param_02, param_03, param_04, param_05) 
   var_08 = add_player_kill_special(var_08, param_05);
   var_08 = add_key_and_value(var_08, 8, int(level.var_A980));
   if(is_community_kill(var_07, param_00)) {
-    var_09 = level.var_744A;
+    var_09 = level.players;
   } else {
     var_09 = [var_07];
   }
@@ -110,8 +110,11 @@ ae_sendwavesurvivalevent_zm(param_00, param_01, param_02, param_03) {
   param_00 _achievment_engine_z_report_event(37, var_04, param_01);
 }
 
-ae_sendzombiesspecial_zm(param_00 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** * /,param_01,param_02,param_03) {
-  var_04 = []; var_05 = undefined; var_06 = undefined; var_07 = [];
+ae_sendzombiesspecial_zm(param_00, param_01, param_02, param_03) {
+  var_04 = [];
+  var_05 = undefined;
+  var_06 = undefined;
+  var_07 = [];
   switch (param_01) {
     case "player_zombie_kills_fireman_tank":
       var_04 = add_key_and_value(var_04, 1, 1);
@@ -142,7 +145,7 @@ ae_sendzombiesspecial_zm(param_00 ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** *
       }
 
       if(isDefined(var_08)) {
-        var_07 = common_scripts\utility::func_0F6F(var_07, var_08);
+        var_07 = common_scripts\utility::func_F6F(var_07, var_08);
         var_05 = get_bitwise_value(var_07);
         var_04 = add_key_and_value(var_04, 128, var_05);
       }
@@ -439,7 +442,7 @@ add_weapon_type(param_00, param_01, param_02) {
 
     case "other":
       param_00 = add_melee_info_if_valid(param_00, param_02);
-      if(maps\mp\_events_z::weapon_is_trap(undefined, undefined, param_01)) {
+      if(maps / mp / _events_z::weapon_is_trap(undefined, undefined, param_01)) {
         param_00[param_00.size] = 1;
         param_00[param_00.size] = 11;
       }
@@ -474,7 +477,7 @@ add_death_means_info(param_00, param_01, param_02, param_03) {
   } else if(isDefined(param_02) && maps\mp\_utility::func_56E5(param_02)) {
     param_00[param_00.size] = 3;
     param_00[param_00.size] = 3;
-  } else if(isDefined(param_01.var_5033) && param_01.var_5033 &level.var_503B) {
+  } else if(isDefined(param_01.idflags) && param_01.idflags &level.var_503B) {
     param_00[param_00.size] = 3;
     param_00[param_00.size] = 4;
   } else if(isDefined(param_02) && param_02 == "MOD_MELEE") {
@@ -495,7 +498,7 @@ add_hit_location(param_00, param_01) {
 }
 
 get_player_current_ability(param_00, param_01, param_02, param_03) {
-  var_04 = param_00 maps\mp\_events_z::get_current_active_ability();
+  var_04 = param_00 maps / mp / _events_z::get_current_active_ability();
   var_05 = undefined;
   switch (var_04) {
     case "role_ability_mad_minute_zm":
@@ -528,12 +531,12 @@ get_player_kill_special(param_00, param_01, param_02, param_03, param_04) {
   foreach(var_08 in level.register_unique_kill_funcs) {
     var_09 = [[var_08.var_3F02]](param_01, param_02, param_03, param_04);
     if(isDefined(var_08.var_A281) && var_09) {
-      var_05 = common_scripts\utility::func_0F6F(var_05, var_08.var_A281);
+      var_05 = common_scripts\utility::func_F6F(var_05, var_08.var_A281);
       continue;
     }
 
     if(!isDefined(var_08.var_A281) && isDefined(var_09)) {
-      var_05 = common_scripts\utility::func_0F6F(var_05, var_09);
+      var_05 = common_scripts\utility::func_F6F(var_05, var_09);
     }
   }
 
@@ -808,7 +811,7 @@ is_damage_electrical(param_00, param_01, param_02, param_03) {
     return 1;
   }
 
-  if(common_scripts\utility::func_562E(param_01.var_0103) && param_02 == "razergun_zm" || param_02 == "razergun_pap_zm") {
+  if(common_scripts\utility::func_562E(param_01.meleeheavycasualty) && param_02 == "razergun_zm" || param_02 == "razergun_pap_zm") {
     return 1;
   }
 

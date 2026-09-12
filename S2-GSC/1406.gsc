@@ -3,15 +3,15 @@
  * Script: 1406.gsc
 *********************************************/
 
-lib_057E::func_51CF() {
+func_51CF() {
   var_00 = spawnStruct();
   var_00.var_6F9A = (0, 0, 0);
   var_00.var_6F9C = 500;
   var_00.var_6F9B = 360;
-  common_scripts\utility::func_092C("vision_beam", "vfx/lights/mp_zombie_nest/zmb_sentry_vision_light");
-  level.var_6FBF["Fireman Head"]["func"] = ::lib_057E::func_3C09;
+  common_scripts\utility::func_92C("vision_beam", "vfx/lights/mp_zombie_nest/zmb_sentry_vision_light");
+  level.var_6FBF["Fireman Head"]["func"] = ::func_3C09;
   level.var_6FBF["Fireman Head"]["model"] = "npc_zom_fireman_head";
-  level.var_6FBF["Fireman Head"]["canBeDroppedByZombies"] = ::maps\mp\gametypes\zombies::func_6FC7;
+  level.var_6FBF["Fireman Head"]["canBeDroppedByZombies"] = ::maps / mp / gametypes / zombies::func_6FC7;
   level.var_6FBF["Fireman Head"]["phys_overrides"] = var_00;
   level.var_6FBF["Fireman Head"]["posOffset"] = (0, 0, 0);
   level.var_6FBF["Fireman Head"]["extraTimeoutSecs"] = 180;
@@ -20,21 +20,21 @@ lib_057E::func_51CF() {
     level.var_4BDF = [];
   }
 
-  level thread maps\mp\_utility::func_6F74(::lib_057E::func_AC25);
+  level thread maps\mp\_utility::func_6F74(::func_AC25);
 }
 
-lib_057E::func_AC25(param_00) {
+func_AC25(param_00) {
   var_01 = self;
   var_01 endon("disconnect");
-  var_01 childthread lib_057E::func_6312();
+  var_01 childthread func_6312();
 }
 
-lib_057E::func_314D(param_00) {
+func_314D(param_00) {
   var_01 = param_00 getweaponslistall();
-  return common_scripts\utility::func_0F79(var_01, "sentryhead_zm");
+  return common_scripts\utility::func_F79(var_01, "sentryhead_zm");
 }
 
-lib_057E::func_6312() {
+func_6312() {
   var_00 = self;
   var_00.var_5605 = 0;
   var_01 = 0.2;
@@ -61,18 +61,18 @@ lib_057E::func_6312() {
     }
 
     foreach(var_0A in level.var_4BDF) {
-      if(!var_00 lib_057E::func_5626(var_0A)) {
+      if(!var_00 func_5626(var_0A)) {
         continue;
       }
 
       level thread[[var_0A.var_7E39]](var_0A, var_00);
-      lib_057E::func_7CC2(var_0A);
+      func_7CC2(var_0A);
     }
   }
 }
 
-lib_057E::func_437B(param_00) {
-  var_01 = param_00.var_0116;
+func_437B(param_00) {
+  var_01 = param_00.origin;
   if(isDefined(param_00.var_218D)) {
     var_01 = param_00.var_218D;
   }
@@ -80,9 +80,9 @@ lib_057E::func_437B(param_00) {
   return var_01;
 }
 
-lib_057E::func_5626(param_00) {
+func_5626(param_00) {
   var_01 = self;
-  var_02 = lib_057E::func_437B(param_00);
+  var_02 = func_437B(param_00);
   var_03 = var_01 getEye();
   if(distancesquared(var_03, var_02) > squared(300)) {
     return 0;
@@ -95,7 +95,7 @@ lib_057E::func_5626(param_00) {
   }
 
   var_06 = var_04 / var_05;
-  var_07 = anglesToForward(var_01 getangles());
+  var_07 = anglesToForward(var_01 getplayerangles());
   var_08 = acos(vectordot(var_07, var_06));
   if(var_08 > 30) {
     return 0;
@@ -108,10 +108,10 @@ lib_057E::func_5626(param_00) {
   return 1;
 }
 
-lib_057E::func_0984(param_00, param_01, param_02) {
-  var_03 = param_00.var_0116;
+func_0984(param_00, param_01, param_02) {
+  var_03 = param_00.origin;
   if(isDefined(param_01)) {
-    var_03 = param_01.var_0116;
+    var_03 = param_01.origin;
   }
 
   param_00.var_218D = var_03;
@@ -120,40 +120,40 @@ lib_057E::func_0984(param_00, param_01, param_02) {
     level.var_4BDF = [];
   }
 
-  level.var_4BDF = common_scripts\utility::func_0F6F(level.var_4BDF, param_00);
+  level.var_4BDF = common_scripts\utility::func_F6F(level.var_4BDF, param_00);
 }
 
-lib_057E::func_7CC2(param_00) {
-  level.var_4BDF = common_scripts\utility::func_0F93(level.var_4BDF, param_00);
+func_7CC2(param_00) {
+  level.var_4BDF = common_scripts\utility::func_F93(level.var_4BDF, param_00);
 }
 
-lib_057E::func_3C09(param_00) {
+func_3C09(param_00) {
   var_01 = self;
-  if(common_scripts\utility::func_562E(var_01.var_558F) || lib_057E::func_314D(param_00) || param_00 lib_0586::func_72C3()) {
+  if(common_scripts\utility::func_562E(var_01.var_558F) || func_314D(param_00) || param_00 lib_0586::func_72C3()) {
     return;
   }
 
   var_01.var_558F = 1;
-  param_00 lib_0586::func_078C("sentryhead_zm");
-  param_00 lib_0586::func_078E("sentryhead_zm");
-  level thread maps\mp\gametypes\zombies::func_7CED(var_01);
+  param_00 lib_0586::func_78C("sentryhead_zm");
+  param_00 lib_0586::func_78E("sentryhead_zm");
+  level thread maps / mp / gametypes / zombies::func_7CED(var_01);
 }
 
-lib_057E::func_418D() {
+func_418D() {
   return "sentryhead_zm";
 }
 
-lib_057E::func_4758() {
-  lib_0586::func_078C("sentryhead_zm");
-  lib_0586::func_078E("sentryhead_zm");
+func_4758() {
+  lib_0586::func_78C("sentryhead_zm");
+  lib_0586::func_78E("sentryhead_zm");
   maps\mp\_utility::func_47A2("specialty_ballcarrier");
   self method_8112(1);
   self method_8113(0);
   self method_8114(0);
-  thread lib_057E::func_6360();
+  thread func_6360();
 }
 
-lib_057E::func_95CB() {
+func_95CB() {
   if(self getcurrentweapon() == "sentryhead_zm") {
     var_00 = self.var_5B98;
     if(!isDefined(var_00) || var_00 == "none") {
@@ -166,34 +166,34 @@ lib_057E::func_95CB() {
       }
     }
 
-    lib_0586::func_078E(var_00);
+    lib_0586::func_78E(var_00);
   }
 
-  lib_0586::func_0790("sentryhead_zm");
-  maps\mp\_utility::func_0735("specialty_ballcarrier");
+  lib_0586::func_790("sentryhead_zm");
+  maps\mp\_utility::func_735("specialty_ballcarrier");
   self method_8112(1);
   self method_8113(1);
   self method_8114(1);
-  level thread lib_057E::func_8FA7(self.var_0116 + (0, 0, 10), "respawning on drop");
+  level thread func_8FA7(self.origin + (0, 0, 10), "respawning on drop");
 }
 
-lib_057E::func_6360() {
+func_6360() {
   for(;;) {
-    common_scripts\utility::func_A70A("weapon_change", "begin_last_stand");
+    common_scripts\utility::waittill_any("weapon_change", "begin_last_stand");
     if(self getcurrentweapon() == "sentryhead_zm") {
       continue;
     }
 
-    if(lib_057E::func_314D(self)) {
-      lib_057E::func_95CB();
+    if(func_314D(self)) {
+      func_95CB();
     }
   }
 }
 
-lib_057E::func_8FA7(param_00, param_01) {
+func_8FA7(param_00, param_01) {
   if(!isDefined(level.var_3C0A)) {
     level.var_3C0A = [];
-    level thread lib_057E::func_633A();
+    level thread func_633A();
   }
 
   var_02 = undefined;
@@ -210,7 +210,7 @@ lib_057E::func_8FA7(param_00, param_01) {
     }
 
     var_02 = level.var_3C0A[var_03];
-    level.var_3C0A = common_scripts\utility::func_0F9A(level.var_3C0A, var_03);
+    level.var_3C0A = common_scripts\utility::func_F9A(level.var_3C0A, var_03);
     level.var_3C0A[level.var_3C0A.size] = var_02;
   } else {
     var_02 = spawn("script_model", param_00);
@@ -223,17 +223,17 @@ lib_057E::func_8FA7(param_00, param_01) {
   var_06 = 0.1;
   var_07 = (0, 0, 5);
   var_02 method_808C();
-  var_02.var_0116 = param_00;
+  var_02.origin = param_00;
   var_02 makeusable();
-  var_02 method_805B();
+  var_02 show();
   var_02 setHintString(&"ZOMBIE_NEST_PICKUP_HEAD");
-  var_02 physicslaunchserver(var_02.var_0116 + var_07, var_04, var_05, var_06);
+  var_02 physicslaunchserver(var_02.origin + var_07, var_04, var_05, var_06);
   var_02.var_558F = 0;
   var_02 notify("recycle_fireman_head");
   var_02 endon("recycle_fireman_head");
   for(;;) {
     var_02 waittill("trigger", var_08);
-    if(lib_057E::func_314D(var_08) || var_08 lib_0586::func_72C3()) {
+    if(func_314D(var_08) || var_08 lib_0586::func_72C3()) {
       wait(0.25);
       continue;
     }
@@ -241,17 +241,17 @@ lib_057E::func_8FA7(param_00, param_01) {
     break;
   }
 
-  var_08 lib_057E::func_4758();
+  var_08 func_4758();
   var_02.var_558F = 1;
   var_02 method_84E0();
   var_02 makeunusable();
   var_02 hudoutlinedisable();
   var_02 setHintString(&"ZOMBIES_EMPTY_STRING");
-  var_02 method_805B();
+  var_02 show();
   var_02 method_8511();
 }
 
-lib_057E::func_633A() {
+func_633A() {
   for(;;) {
     level waittill("on togglescore");
     var_00 = lib_0557::func_42B9();

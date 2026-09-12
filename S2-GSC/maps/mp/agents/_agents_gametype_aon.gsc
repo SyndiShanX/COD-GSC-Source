@@ -3,4 +3,4 @@
  * Script: maps\mp\agents\_agents_gametype_aon.gsc
 ***************************************************/
 
-func_00F9() {}
+main() {}

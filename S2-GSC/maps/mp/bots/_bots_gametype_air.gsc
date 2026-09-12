@@ -3,7 +3,7 @@
  * Script: maps\mp\bots\_bots_gametype_air.gsc
 ***********************************************/
 
-func_00F9() {
+main() {
   func_87A7();
   func_879B();
 }

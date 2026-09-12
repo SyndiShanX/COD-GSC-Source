@@ -4,18 +4,18 @@
 ****************************************************************/
 
 seek_special_ability_use() {
-  return !common_scripts\utility::func_562E(self.specialoverheated) && maps\mp\zombies\zombie_assassin_basic::there_is_close_player(180);
+  return !common_scripts\utility::func_562E(self.specialoverheated) && maps / mp / zombies / zombie_assassin_basic::there_is_close_player(180);
 }
 
 activate_special_ability() {
-  thread maps\mp\zombies\zombie_assassin_basic::recharge_special_ability(13.5);
+  thread maps / mp / zombies / zombie_assassin_basic::recharge_special_ability(13.5);
   lib_0378::func_8D74("aud_assassin_use_camoflage");
 }
 
 spawn_a_blinding_area() {
-  playFX(common_scripts\utility::func_44F5("zmi_assassin_teleport"), self.var_116);
+  playFX(common_scripts\utility::func_44F5("zmi_assassin_teleport"), self.origin);
   wait(0.125);
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(!isalive(var_01)) {
       continue;
     }
@@ -24,11 +24,11 @@ spawn_a_blinding_area() {
       continue;
     }
 
-    if(!common_scripts\utility::func_562E(self.nochill) && distance(self.var_116, var_01.var_116) > 275) {
+    if(!common_scripts\utility::func_562E(self.nochill) && distance(self.origin, var_01.origin) > 275) {
       continue;
     }
 
-    var_01 thread play_assassin_blur(distance(self.var_116, var_01.var_116) / 275);
+    var_01 thread play_assassin_blur(distance(self.origin, var_01.origin) / 275);
   }
 }
 

@@ -3,4 +3,4 @@
  * Script: maps\mp\bots\_bots_gametype_aon.gsc
 ***********************************************/
 
-func_00F9() {}
+main() {}

@@ -3,8 +3,8 @@
  * Script: maps\mp\killstreaks\_killstreaks_init.gsc
 *****************************************************/
 
-func_00D5() {
-  if(isDefined(level.var_585D) && level.var_585D && !isDefined(level.zombiekillstreaksenabled) || isDefined(level.zombiekillstreaksenabled) && !level.zombiekillstreaksenabled) {
+init() {
+  if(isDefined(level.iszombiegame) && level.iszombiegame && !isDefined(level.zombiekillstreaksenabled) || isDefined(level.zombiekillstreaksenabled) && !level.zombiekillstreaksenabled) {
     return;
   }
 
@@ -17,7 +17,7 @@ func_00D5() {
   }
 
   level.var_5A70 = maps\mp\_utility::func_4529("scr_game_killstreakdelay", 10);
-  level.var_5A61 = [];
+  level.killstreakfuncs = [];
   level.var_5A75 = [];
   level.var_5A7D = [];
   if(maps\mp\_utility::func_585F() && isDefined(level.zombiekillstreaksenabled) && level.zombiekillstreaksenabled) {
@@ -26,11 +26,11 @@ func_00D5() {
   }
 
   func_5312();
-  level thread maps\mp\killstreaks\_killstreaks::func_6B6C();
+  level thread maps\mp\killstreaks\_killstreaks::onplayerconnect();
   if(maps\mp\_utility::func_579B() || maps\mp\_utility::isprophuntgametype()) {
     level thread lib_0527::func_52F7();
-    level thread maps\mp\killstreaks\_paratroopers::func_00D5();
-    level thread maps\mp\killstreaks\_basic_training_serum::func_00D5();
+    level thread maps\mp\killstreaks\_paratroopers::init();
+    level thread maps / mp / killstreaks / _basic_training_serum::init();
     return;
   }
 
@@ -57,23 +57,23 @@ func_00D5() {
   level thread lib_0529::func_52F4();
   level thread maps\mp\killstreaks\_v2_missle_strike::func_52F5();
   level thread lib_0528::func_52F3();
-  level thread maps\mp\killstreaks\_uav::func_00D5();
-  level thread maps\mp\killstreaks\_missile_strike::func_00D5();
-  level thread maps\mp\killstreaks\_airstrike::func_00D5();
-  level thread maps\mp\killstreaks\_glidebomb::func_00D5();
-  level thread lib_0517::func_00D5();
-  level thread maps\mp\killstreaks\_mortarstrike::func_00D5();
-  level thread lib_0518::func_00D5();
-  level thread maps\mp\killstreaks\_dog_killstreak::func_00D5();
-  level thread maps\mp\killstreaks\_firebomb::func_00D5();
-  level thread maps\mp\killstreaks\_flamethrower::func_00D5();
-  level thread maps\mp\killstreaks\_v2_nuke::func_00D5();
-  level thread maps\mp\killstreaks\_flak_gun::func_00D5();
-  level thread maps\mp\killstreaks\_plane_gunner::func_00D5();
-  level thread maps\mp\killstreaks\_fighter_strike::func_00D5();
-  level thread maps\mp\killstreaks\_paratroopers::func_00D5();
-  level thread maps\mp\killstreaks\_molotovs::func_00D5();
-  level thread maps\mp\killstreaks\_basic_training_serum::func_00D5();
+  level thread maps\mp\killstreaks\_uav::init();
+  level thread maps\mp\killstreaks\_missile_strike::init();
+  level thread maps\mp\killstreaks\_airstrike::init();
+  level thread maps\mp\killstreaks\_glidebomb::init();
+  level thread lib_0517::init();
+  level thread maps\mp\killstreaks\_mortarstrike::init();
+  level thread lib_0518::init();
+  level thread maps\mp\killstreaks\_dog_killstreak::init();
+  level thread maps\mp\killstreaks\_firebomb::init();
+  level thread maps\mp\killstreaks\_flamethrower::init();
+  level thread maps\mp\killstreaks\_v2_nuke::init();
+  level thread maps\mp\killstreaks\_flak_gun::init();
+  level thread maps\mp\killstreaks\_plane_gunner::init();
+  level thread maps\mp\killstreaks\_fighter_strike::init();
+  level thread maps\mp\killstreaks\_paratroopers::init();
+  level thread maps\mp\killstreaks\_molotovs::init();
+  level thread maps / mp / killstreaks / _basic_training_serum::init();
 }
 
 func_5312() {

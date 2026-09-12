@@ -10,9 +10,9 @@ ee_init() {
   lib_0557::func_781E("quest_frank", "step_find_frank", ::ee_quest_step_find_frank, ::lib_0557::func_30D8, lib_0557::removed_quest_hint());
   lib_0557::func_781E("quest_frank", "step_find_rope", ::ee_quest_step_find_rope, ::lib_0557::func_30D8, lib_0557::removed_quest_hint());
   lib_0557::func_781E("quest_frank", "step_find_rods", ::ee_quest_step_find_rods, ::lib_0557::func_30D8, lib_0557::removed_quest_hint());
-  lib_0557::func_781E("quest_frank", "step_hang_frank", ::ee_quest_step_hang_frank, ::maps\mp\zombies\shotgun\_zombies_shotgun_exp_events::award_exp_small, lib_0557::removed_quest_hint());
-  lib_0557::func_781E("quest_frank", "step_call_lightning", ::ee_quest_step_call_lightning, ::maps\mp\zombies\shotgun\_zombies_shotgun_exp_events::award_exp_small, lib_0557::removed_quest_hint());
-  lib_0557::func_781E("quest_frank", "step_defend_frank", ::ee_quest_step_defend_frank, ::maps\mp\zombies\shotgun\_zombies_shotgun_exp_events::award_exp_smallish, lib_0557::removed_quest_hint());
+  lib_0557::func_781E("quest_frank", "step_hang_frank", ::ee_quest_step_hang_frank, ::maps / mp / zombies / shotgun / _zombies_shotgun_exp_events::award_exp_small, lib_0557::removed_quest_hint());
+  lib_0557::func_781E("quest_frank", "step_call_lightning", ::ee_quest_step_call_lightning, ::maps / mp / zombies / shotgun / _zombies_shotgun_exp_events::award_exp_small, lib_0557::removed_quest_hint());
+  lib_0557::func_781E("quest_frank", "step_defend_frank", ::ee_quest_step_defend_frank, ::maps / mp / zombies / shotgun / _zombies_shotgun_exp_events::award_exp_smallish, lib_0557::removed_quest_hint());
   lib_0557::func_781E("quest_frank", "step_escort_frank", ::ee_quest_step_escort_frank, ::windmill_completion_rewards, lib_0557::removed_quest_hint());
   lib_0557::func_7848("quest_frank");
   thread ee_quest_step_find_frank_init();
@@ -23,9 +23,9 @@ ee_init() {
 }
 
 windmill_completion_rewards() {
-  maps\mp\zombies\shotgun\_zombies_shotgun_exp_events::award_exp_med();
+  maps / mp / zombies / shotgun / _zombies_shotgun_exp_events::award_exp_med();
   common_scripts\utility::func_3C8F("zmb_objectives_quest_end");
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 lib_056A::func_4772(1);
     var_01 thread maps\mp\gametypes\_hud_message::func_9102("zm_dlc3_ee_1_complete");
     if(function_02A3()) {
@@ -62,8 +62,8 @@ ee_init_flags() {
 
 audio_log_init() {
   var_00 = getEnt("lore_primary", "script_noteworthy");
-  var_00.var_9D5E = getEnt(var_00.var_1A2, "targetname");
-  var_00 method_805C();
+  var_00.var_9D5E = getEnt(var_00.target, "targetname");
+  var_00 hide();
   var_00.var_9D5E common_scripts\utility::func_9D9F();
   audio_log_listen(var_00);
 }
@@ -72,16 +72,16 @@ audio_log_listen(param_00) {
   var_01 = getEnt("audio_log_hanging_model", "targetname");
   var_01 setCanDamage(1);
   var_01 waittill("damage");
-  var_02 = param_00.var_116 - var_01.var_116;
+  var_02 = param_00.origin - var_01.origin;
   var_03 = sqrt(abs(var_02[2] * 2 / 800));
   var_04 = 1 / var_03;
   var_05 = var_02 * (var_04, var_04, 0);
   var_01 gravitymove(var_05, var_03);
-  var_01 rotateTo(param_00.var_1D, var_03);
+  var_01 rotateTo(param_00.angles, var_03);
   wait(var_03);
-  var_01.var_116 = param_00.var_116;
+  var_01.origin = param_00.origin;
   var_01 delete();
-  param_00 method_805B();
+  param_00 show();
   param_00.var_9D5E common_scripts\utility::func_9DA3();
 }
 
@@ -117,17 +117,17 @@ ee_quest_step_find_frank_part_think(param_00) {
   var_01 = self;
   if(!isDefined(var_01.showing_part) || !var_01.showing_part) {
     var_01.showing_part = 1;
-    var_02 = spawn("script_model", var_01.var_116);
-    var_02.var_1D = var_01.var_1D;
+    var_02 = spawn("script_model", var_01.origin);
+    var_02.angles = var_01.angles;
     var_02 setModel(ee_quest_step_find_frank_get_modelname_by_partname(param_00));
     var_03 = 0;
     var_04 = 72;
     var_05 = 70;
     while(!var_03) {
       wait 0.05;
-      var_06 = level.var_744A;
+      var_06 = level.players;
       foreach(var_08 in var_06) {
-        if(distance2d(var_08.var_116, var_02.var_116) > var_04) {
+        if(distance2d(var_08.origin, var_02.origin) > var_04) {
           var_06 = common_scripts\utility::func_F93(var_06, var_08);
         }
       }
@@ -147,7 +147,7 @@ ee_quest_step_find_frank_part_think(param_00) {
       }
 
       foreach(var_08 in var_06) {
-        if(!common_scripts\utility::func_AA4A(var_08 getEye(), var_08.var_1D, var_02.var_116, cos(var_05))) {
+        if(!common_scripts\utility::func_AA4A(var_08 getEye(), var_08.angles, var_02.origin, cos(var_05))) {
           var_06 = common_scripts\utility::func_F93(var_06, var_08);
         }
       }
@@ -158,7 +158,7 @@ ee_quest_step_find_frank_part_think(param_00) {
 
       wait(0.2);
       foreach(var_08 in var_06) {
-        if(!common_scripts\utility::func_AA4A(var_08 getEye(), var_08.var_1D, var_02.var_116, cos(var_05))) {
+        if(!common_scripts\utility::func_AA4A(var_08 getEye(), var_08.angles, var_02.origin, cos(var_05))) {
           var_06 = common_scripts\utility::func_F93(var_06, var_08);
         }
 
@@ -304,7 +304,7 @@ ee_quest_step_find_rope_waitfor_rope_recovered() {
   }
 
   var_02 waittill("trigger");
-  var_00 method_8495("zmb_windmill_branch_end", var_00.var_116, var_00.var_1D);
+  var_00 method_8495("zmb_windmill_branch_end", var_00.origin, var_00.angles);
   var_00 hidepart("rope");
   var_00 hidepart("bit_T");
   var_00 hidepart("bit_B");
@@ -317,7 +317,7 @@ ee_quest_step_find_rope_waitfor_rope_recovered() {
 }
 
 ee_quest_step_find_rope_return_branch_pulled(param_00) {
-  var_01 = level.var_744A;
+  var_01 = level.players;
   var_02 = param_00;
   var_03 = 0;
   foreach(var_05 in var_01) {
@@ -347,10 +347,10 @@ warp_rope_recovered() {
 ________________step_find_rods_______________________() {}
 
 ee_quest_step_find_rods_init() {
-  maps\mp\zombies\shotgun\_zombies_shotgun_drop_pod::func_D5();
+  maps / mp / zombies / shotgun / _zombies_shotgun_drop_pod::init();
   level.drop_pod_rods = getEntArray("drop_pod_rod", "targetname");
   foreach(var_01 in level.drop_pod_rods) {
-    var_01 method_805C();
+    var_01 hide();
   }
 
   level.num_rods_to_find = level.drop_pod_rods.size;
@@ -369,17 +369,17 @@ ee_quest_step_find_rods() {
 ee_quest_step_find_rods_spawn_pod_and_rods() {
   level endon("ee_find_rods_rods_found");
   var_00 = common_scripts\utility::func_46B5("drop_pod_position", "targetname");
-  thread maps\mp\zombies\shotgun\_zombies_shotgun_drop_pod::drop_pod_spawn_drop();
+  thread maps / mp / zombies / shotgun / _zombies_shotgun_drop_pod::drop_pod_spawn_drop();
   if(!common_scripts\utility::func_3C77("ee_find_rods_rods_found")) {
     while(!isDefined(var_00.spawned_model)) {
       wait 0.05;
     }
 
     foreach(var_02 in level.drop_pod_rods) {
-      var_03 = var_00.spawned_model.var_116 - var_00.pod_model.var_116;
-      var_02.var_116 = var_02.var_116 + var_03;
+      var_03 = var_00.spawned_model.origin - var_00.pod_model.origin;
+      var_02.origin = var_02.origin + var_03;
       var_02 method_8449(var_00.spawned_model);
-      var_02 common_scripts\utility::func_2CBE(0.05, ::method_805B);
+      var_02 common_scripts\utility::func_2CBE(0.05, ::show);
     }
 
     while(isDefined(var_00.clip_fall)) {
@@ -398,10 +398,10 @@ ee_quest_step_find_rods_throw_rod(param_00, param_01) {
   level endon("ee_find_rods_rods_found");
   param_00 unlink();
   var_02 = 0.25;
-  param_00 moveTo(param_01.var_116, var_02);
-  param_00 rotateTo(param_01.var_1D, var_02);
+  param_00 moveTo(param_01.origin, var_02);
+  param_00 rotateTo(param_01.angles, var_02);
   wait(var_02);
-  param_00.var_116 = param_01.var_116;
+  param_00.origin = param_01.origin;
 }
 
 ee_quest_step_find_rods_use_rod(param_00) {
@@ -462,13 +462,13 @@ ee_quest_step_hang_frank_acquire_wustling_arm_spawn_func() {
     if(var_00.size > 1) {
       var_00 = common_scripts\utility::func_F93(var_00, self);
       foreach(var_02 in var_00) {
-        if(distance(var_02.var_116, self.var_116) <= 64 && isDefined(var_02.var_5542) && var_02.var_5542 == 1) {
+        if(distance(var_02.origin, self.origin) <= 64 && isDefined(var_02.var_5542) && var_02.var_5542 == 1) {
           var_03 = 36;
           if(isDefined(var_02.var_28D2)) {
-            var_04 = distance(self.var_116, var_02.var_28D2.var_116);
-            var_05 = distance(var_02.var_116, var_02.var_28D2.var_116) - var_03;
+            var_04 = distance(self.origin, var_02.var_28D2.origin);
+            var_05 = distance(var_02.origin, var_02.var_28D2.origin) - var_03;
             if(var_04 <= var_05) {
-              thread ee_quest_step_hang_frank_acquire_wustling_arm_drop_arm(self.var_116 - var_02.var_116);
+              thread ee_quest_step_hang_frank_acquire_wustling_arm_drop_arm(self.origin - var_02.origin);
               return;
             }
           }
@@ -486,16 +486,16 @@ ee_quest_step_hang_frank_acquire_wustling_arm_spawn_func() {
 ee_quest_step_hang_frank_acquire_wustling_arm_drop_arm(param_00) {
   var_01 = self;
   wait(1.25);
-  var_02 = var_01.var_116;
-  lib_0547::func_5A85(self.var_116, param_00);
+  var_02 = var_01.origin;
+  lib_0547::func_5A85(self.origin, param_00);
   var_02 = common_scripts\utility::func_348B(var_02, 32);
   var_03 = spawn("script_model", var_02 + (0, 0, 4));
   var_03 setModel("zmw_wustling_arm_01");
-  var_03 hudoutlineenableforclients(level.var_744A, 2, 1);
+  var_03 hudoutlineenableforclients(level.players, 2, 1);
   common_scripts\utility::func_3C8F("ee_hang_frank_arm_dropped");
   var_03 lib_0547::func_AC41(" ");
   var_03 waittill("player_used");
-  var_03 hudoutlinedisableforclients(level.var_744A);
+  var_03 hudoutlinedisableforclients(level.players);
   var_03 delete();
   common_scripts\utility::func_3C8F("ee_hang_frank_arm_acquired");
 }
@@ -505,26 +505,26 @@ ee_quest_step_hang_frank_jam_windmill() {
   var_01 = getEnt("wustling_arm_jam_model", "targetname");
   var_02 = getEnt("wustling_arm_jam_model_start", "targetname");
   var_03 = getEnt("wustling_arm_jam_model_end", "targetname");
-  var_01.var_116 = var_02.var_116;
-  var_01.var_1D = var_02.var_1D;
-  var_01 method_805C();
+  var_01.origin = var_02.origin;
+  var_01.angles = var_02.angles;
+  var_01 hide();
   common_scripts\utility::func_3C9F("ee_hang_frank_arm_acquired");
   for(;;) {
     var_00 waittill("trigger");
     level thread common_scripts\_exploder::func_88E(204);
     var_01 lib_0378::func_8D74("wustling_arm_jam");
-    maps\mp\mp_zombie_windmill_util::windmill_stop_idle();
-    var_01 method_805B();
-    var_01 moveTo(var_03.var_116, 0.5, 0, 0.05);
-    var_01 rotateTo(var_03.var_1D, 0.5, 0, 0.05);
+    maps / mp / mp_zombie_windmill_util::windmill_stop_idle();
+    var_01 show();
+    var_01 moveTo(var_03.origin, 0.5, 0, 0.05);
+    var_01 rotateTo(var_03.angles, 0.5, 0, 0.05);
     level waittill("done_accelerating");
     iprintlnbold("JAMMED");
     common_scripts\utility::func_3C8F("ee_hang_frank_windmill_jammed");
     var_00 waittill("trigger");
-    maps\mp\mp_zombie_windmill_util::windmill_idle_with_speed(1);
-    var_01 method_805C();
-    var_01.var_116 = var_02.var_116;
-    var_01.var_1D = var_02.var_1D;
+    maps / mp / mp_zombie_windmill_util::windmill_idle_with_speed(1);
+    var_01 hide();
+    var_01.origin = var_02.origin;
+    var_01.angles = var_02.angles;
     level waittill("done_accelerating");
     iprintlnbold("UN-JAMMED");
     common_scripts\utility::func_3C7B("ee_hang_frank_windmill_jammed");
@@ -542,14 +542,14 @@ ee_quest_step_hang_frank_place_parts_think() {
   var_05 = getEntArray("frank_fanblade_models", "script_noteworthy");
   foreach(var_07 in var_05) {
     var_07 method_8449(var_04);
-    var_07 method_805C();
+    var_07 hide();
   }
 
   var_04 method_8449(var_03);
   common_scripts\utility::func_3C9F("ee_hang_frank_arm_acquired");
   while(var_00 < 6 || var_01 < level.drop_pod_rods.size) {
     common_scripts\utility::func_3C9F("ee_hang_frank_windmill_jammed");
-    var_09 = abs(var_03.var_1D[0] % 90);
+    var_09 = abs(var_03.angles[0] % 90);
     var_0A = 5;
     if(ee_quest_step_hang_frank_check_if_fan_rot_correct(var_03)) {
       while(var_00 < 6 || var_01 < level.drop_pod_rods.size) {
@@ -626,10 +626,10 @@ ee_quest_step_hang_frank_place_acquired_parts() {
 
 ee_quest_step_hang_frank_show_part_with_targetname(param_00) {
   var_01 = getEnt(param_00, "targetname");
-  var_02 = getEntArray(var_01.var_1A2, "targetname");
-  var_01 method_805B();
+  var_02 = getEntArray(var_01.target, "targetname");
+  var_01 show();
   foreach(var_04 in var_02) {
-    var_04 method_805B();
+    var_04 show();
   }
 }
 
@@ -639,7 +639,7 @@ ee_quest_step_hang_frank_delete_part_with_targetname(param_00) {
     return;
   }
 
-  var_02 = getEntArray(var_01.var_1A2, "targetname");
+  var_02 = getEntArray(var_01.target, "targetname");
   if(var_02.size > 0) {
     foreach(var_04 in var_02) {
       var_04 unlink();
@@ -654,11 +654,11 @@ ee_quest_step_hang_frank_delete_part_with_targetname(param_00) {
 }
 
 ee_quest_step_hang_frank_check_if_fan_rot_correct(param_00) {
-  var_01 = abs(param_00.var_1D[0] % 90);
+  var_01 = abs(param_00.angles[0] % 90);
   var_02 = 5;
   if(var_01 < var_02 || var_01 > 90 - var_02) {
     if(isDefined(level.required_fan_org_angle)) {
-      if(abs(level.required_fan_org_angle - param_00.var_1D[0]) < var_02) {
+      if(abs(level.required_fan_org_angle - param_00.angles[0]) < var_02) {
         return 1;
       }
 
@@ -682,7 +682,7 @@ warp_hang_frank() {
   var_00 = getEnt("windmill_fan", "targetname");
   var_00.current_speed = 0;
   wait(1);
-  var_00.var_1D = (270, var_00.var_1D[1], var_00.var_1D[2]);
+  var_00.angles = (270, var_00.angles[1], var_00.angles[2]);
   wait(2);
 }
 
@@ -709,7 +709,7 @@ ee_quest_step_call_lightning_think() {
     level.windmill_charged = 0;
     while(!level.windmill_charged) {
       ee_quest_step_call_lightning_monitor_progress_for_round(var_00);
-      if(var_00.var_1D[0] != 270 || var_00.current_speed != 0) {
+      if(var_00.angles[0] != 270 || var_00.current_speed != 0) {
         level.windmill_charged = 0;
         wait(10);
       }
@@ -725,7 +725,7 @@ ee_quest_step_call_lightning_think() {
 ee_quest_step_call_lightning_monitor_progress_for_round(param_00) {
   level endon("round complete");
   for(;;) {
-    if(param_00.var_1D[0] == 270 && param_00.current_speed == 0) {
+    if(param_00.angles[0] == 270 && param_00.current_speed == 0) {
       level.windmill_charged = 1;
     } else {
       level.windmill_charged = 0;
@@ -738,13 +738,13 @@ ee_quest_step_call_lightning_monitor_progress_for_round(param_00) {
 ee_quest_step_call_lightning_do_strike() {
   common_scripts\utility::func_3C9F("ee_call_lightning_complete");
   var_00 = getEnt("frank_fanblade_models_org", "targetname");
-  maps\mp\zombies\sg_events_v1\extermination::func_5D67(var_00.var_116 - (0, 0, 40));
+  maps / mp / zombies / sg_events_v1 / extermination::func_5D67(var_00.origin - (0, 0, 40));
   level thread common_scripts\_exploder::func_88E(202);
   wait(randomfloatrange(0.05, 0.07));
-  maps\mp\zombies\sg_events_v1\extermination::func_5D67(var_00.var_116 - (0, 0, 40));
+  maps / mp / zombies / sg_events_v1 / extermination::func_5D67(var_00.origin - (0, 0, 40));
   wait(randomfloatrange(0.05, 0.07));
-  thread maps\mp\zombies\sg_events_v1\extermination::func_5D67(var_00.var_116 - (0, 0, 40));
-  lib_0378::func_8D74("call_lightning_do_strike", var_00.var_116 - (0, 0, 40));
+  thread maps / mp / zombies / sg_events_v1 / extermination::func_5D67(var_00.origin - (0, 0, 40));
+  lib_0378::func_8D74("call_lightning_do_strike", var_00.origin - (0, 0, 40));
   ee_quest_step_hang_frank_delete_part_with_targetname("frank_hang_head");
   ee_quest_step_hang_frank_delete_part_with_targetname("frank_hang_torso");
   ee_quest_step_hang_frank_delete_part_with_targetname("frank_hang_ll");
@@ -756,33 +756,33 @@ ee_quest_step_call_lightning_do_strike() {
 
 ee_quest_step_call_lightning_frank_fall() {
   level.frank_escort_health = 100;
-  maps\mp\mp_zombie_windmill_util::spawn_frank();
-  level.frank_dudebroman method_805C();
+  maps / mp / mp_zombie_windmill_util::spawn_frank();
+  level.frank_dudebroman hide();
   var_00 = getEnt("frank_fall_animorg", "targetname");
-  level.frank_dudebroman setOrigin(var_00.var_116 - (0, 0, 20), 0);
-  level.frank_dudebroman.var_1D = var_00.var_1D - (0, 90, 0);
+  level.frank_dudebroman setOrigin(var_00.origin - (0, 0, 20), 0);
+  level.frank_dudebroman.angles = var_00.angles - (0, 90, 0);
   wait 0.05;
   var_01 = "s2_zom_frank_lightning_fall";
   level.frank_dudebroman scragentsetscripted(1);
-  level.frank_dudebroman maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "ScriptedAnimation");
+  level.frank_dudebroman maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "ScriptedAnimation");
   level.frank_dudebroman method_839C("anim deltas");
-  level.frank_dudebroman scragentsetorientmode("face angle abs", var_00.var_1D - (0, 90, 0));
+  level.frank_dudebroman scragentsetorientmode("face angle abs", var_00.angles - (0, 90, 0));
   level.frank_dudebroman method_839D("noclip");
-  level.frank_dudebroman common_scripts\utility::func_2CBE(0.05, ::method_805B);
+  level.frank_dudebroman common_scripts\utility::func_2CBE(0.05, ::show);
   lib_0378::func_8D74("call_lightning_frank_fall", level.frank_dudebroman);
-  level.frank_dudebroman maps\mp\agents\_scripted_agent_anim_util::func_71FA(var_01, 0, 1, "scripted_anim");
-  level.frank_dudebroman maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "ScriptedAnimation");
+  level.frank_dudebroman maps / mp / agents / _scripted_agent_anim_util::func_71FA(var_01, 0, 1, "scripted_anim");
+  level.frank_dudebroman maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "ScriptedAnimation");
   level.frank_dudebroman scragentsetscripted(0);
   level.frank_dudebroman method_839D("gravity");
   wait 0.05;
   var_00 = getEnt("frank_fall_animorg", "targetname");
   level.frank_dudebroman scragentsetscripted(1);
-  level.frank_dudebroman maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "ScriptedAnimation");
+  level.frank_dudebroman maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "ScriptedAnimation");
   level.frank_dudebroman method_839C("anim deltas");
-  level.frank_dudebroman scragentsetorientmode("face angle abs", var_00.var_1D);
+  level.frank_dudebroman scragentsetorientmode("face angle abs", var_00.angles);
   level.frank_dudebroman method_839D("noclip");
   var_01 = "s2_zom_frank_lightning_lay_loop";
-  level.frank_dudebroman thread maps\mp\agents\_scripted_agent_anim_util::func_71FA(var_01, 0, 1, "frank_getup");
+  level.frank_dudebroman thread maps / mp / agents / _scripted_agent_anim_util::func_71FA(var_01, 0, 1, "frank_getup");
   common_scripts\utility::func_3C8F("ee_call_lightning_frank_fell");
 }
 
@@ -819,7 +819,7 @@ ee_quest_step_defend_frank_think() {
     level.frank_escort_health = 100;
     level.defend_tag_org = spawn("script_model", level.frank_dudebroman gettagorigin("J_SpineLower"));
     level.defend_tag_org setModel("tag_origin");
-    level.defend_tag_org thread maps\mp\mp_zombies_soul_collection::func_170B(999, 256, 512, "soul_collected_for_frank", undefined, "tag_origin", undefined, "tag_origin");
+    level.defend_tag_org thread maps / mp / mp_zombies_soul_collection::func_170B(999, 256, 512, "soul_collected_for_frank", undefined, "tag_origin", undefined, "tag_origin");
     var_00 = 250;
     var_01 = 1;
     for(;;) {
@@ -876,9 +876,9 @@ _____________step_escort_frank____________() {}
 
 ee_quest_step_escort_frank_init() {
   var_00 = getEnt("escort_battery", "targetname");
-  var_00 method_805C();
+  var_00 hide();
   var_01 = getEnt("wine_cellar_batt", "targetname");
-  var_01 method_805C();
+  var_01 hide();
 }
 
 ee_quest_step_escort_frank() {
@@ -904,7 +904,7 @@ ee_quest_step_escort_frank() {
 
     wait(var_01);
     level.frank_dudebroman.var_480F = 0;
-    level.frank_dudebroman.var_CE = 0;
+    level.frank_dudebroman.ignoreme = 0;
   }
 
   if(!common_scripts\utility::func_3C77("ee_escort_frank_reached_basement")) {
@@ -930,7 +930,7 @@ ee_quest_step_escort_frank() {
     killfxontag(level.var_611["battery_glow_finished"], level.frank_battery.fx_tag, "tag_origin");
   } else {
     killfxontag(level.var_611["battery_glow"], level.frank_battery.fx_tag, "tag_origin");
-    playFX(level.var_611["dlc_zmb_dig_02_uber_explode"], level.frank_battery.fx_tag.var_116);
+    playFX(level.var_611["dlc_zmb_dig_02_uber_explode"], level.frank_battery.fx_tag.origin);
   }
 
   level.frank_battery.fx_tag delete();
@@ -942,22 +942,22 @@ ee_quest_step_escort_frank_wake_up_anim() {
   common_scripts\utility::func_3C9F("ee_call_lightning_frank_fell");
   if(isDefined(level.frank_dudebroman) && isalive(level.frank_dudebroman)) {
     level.frank_dudebroman endon("death");
-    level.frank_dudebroman maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "ScriptedAnimation");
+    level.frank_dudebroman maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "ScriptedAnimation");
     level.frank_dudebroman scragentsetscripted(0);
     level.frank_dudebroman method_839D("gravity");
     wait 0.05;
     var_00 = getEnt("frank_fall_animorg", "targetname");
     level.frank_dudebroman scragentsetscripted(1);
-    level.frank_dudebroman maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "ScriptedAnimation");
+    level.frank_dudebroman maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "ScriptedAnimation");
     level.frank_dudebroman method_839C("anim deltas");
-    level.frank_dudebroman scragentsetorientmode("face angle abs", var_00.var_1D - (0, 90, 0));
+    level.frank_dudebroman scragentsetorientmode("face angle abs", var_00.angles - (0, 90, 0));
     level.frank_dudebroman method_839D("noclip");
     var_01 = "s2_zom_frank_lightning_getup";
-    level.frank_dudebroman maps\mp\agents\_scripted_agent_anim_util::func_71FA(var_01, 0, 1, "scripted_anim");
+    level.frank_dudebroman maps / mp / agents / _scripted_agent_anim_util::func_71FA(var_01, 0, 1, "scripted_anim");
     level.frank_dudebroman.var_480F = 0;
-    level.frank_dudebroman.var_CE = 0;
-    level.frank_dudebroman maps\mp\agents\_agent_common::func_83FD(level.frank_escort_health);
-    level.frank_dudebroman maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "ScriptedAnimation");
+    level.frank_dudebroman.ignoreme = 0;
+    level.frank_dudebroman maps / mp / agents / _agent_common::func_83FD(level.frank_escort_health);
+    level.frank_dudebroman maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "ScriptedAnimation");
     level.frank_dudebroman scragentsetscripted(0);
     level.frank_dudebroman method_839D("gravity");
   }
@@ -968,15 +968,15 @@ ee_quest_step_escort_frank_move_to_battery_destination() {
   level.frank_dudebroman endon("death");
   for(var_00 = 0; var_00 < level.frank_dudebroman.waypoints.size; var_00++) {
     level.frank_dudebroman.var_1928 = level.frank_dudebroman.waypoints[var_00];
-    while(distance(level.frank_dudebroman.var_116, level.frank_dudebroman.waypoints[var_00].var_116) > 48) {
+    while(distance(level.frank_dudebroman.origin, level.frank_dudebroman.waypoints[var_00].origin) > 48) {
       wait 0.05;
     }
 
-    if(isDefined(level.frank_dudebroman.waypoints[var_00].var_165)) {
-      var_01 = level.frank_dudebroman.waypoints[var_00].var_165;
+    if(isDefined(level.frank_dudebroman.waypoints[var_00].script_noteworthy)) {
+      var_01 = level.frank_dudebroman.waypoints[var_00].script_noteworthy;
       if(var_01 == "frank_start_godon_node") {
         level.frank_dudebroman.var_480F = 1;
-        level.frank_dudebroman.var_CE = 1;
+        level.frank_dudebroman.ignoreme = 1;
       }
     }
   }
@@ -991,21 +991,21 @@ ee_quest_step_escort_frank_unset_goal() {
 ee_quest_step_escort_frank_move_to_door_destination() {
   level.frank_dudebroman endon("death");
   level endon("ee_escort_frank_reached_basement");
-  level.battery_drop_org = level.frank_dudebroman.var_116;
+  level.battery_drop_org = level.frank_dudebroman.origin;
   ee_quest_step_escort_frank_battery_setup();
   thread ee_quest_step_escort_frank_soul_collection();
   var_00 = common_scripts\utility::func_46B5("frank_second_path_start", "targetname");
-  level.frank_dudebroman.waypoints = var_00 maps\mp\zombies\sg_events_v1\very_important_zombie::basic_vip_get_waypoints(level.frank_dudebroman);
+  level.frank_dudebroman.waypoints = var_00 maps / mp / zombies / sg_events_v1 / very_important_zombie::basic_vip_get_waypoints(level.frank_dudebroman);
   for(var_01 = 0; var_01 < level.frank_dudebroman.waypoints.size; var_01++) {
     level.frank_dudebroman.var_1928 = level.frank_dudebroman.waypoints[var_01];
-    while(distance(level.frank_dudebroman.var_116, level.frank_dudebroman.waypoints[var_01].var_116) > 48) {
-      level.battery_drop_org = level.frank_dudebroman.var_116;
+    while(distance(level.frank_dudebroman.origin, level.frank_dudebroman.waypoints[var_01].origin) > 48) {
+      level.battery_drop_org = level.frank_dudebroman.origin;
       wait 0.05;
     }
   }
 
   if(isDefined(level.frank_dudebroman)) {
-    level.frank_dudebroman common_scripts\utility::func_2CBE(0.05, ::dodamage, level.frank_dudebroman.var_BC * 2, level.frank_dudebroman.var_116);
+    level.frank_dudebroman common_scripts\utility::func_2CBE(0.05, ::dodamage, level.frank_dudebroman.health * 2, level.frank_dudebroman.origin);
   }
 
   return 1;
@@ -1014,16 +1014,16 @@ ee_quest_step_escort_frank_move_to_door_destination() {
 ee_quest_step_escort_frank_battery_setup() {
   if(!isDefined(level.frank_battery) || !isDefined(level.frank_battery.fx_tag)) {
     level.frank_battery = getEnt("escort_battery", "targetname");
-    level.frank_battery method_805B();
-    level.frank_battery.fx_tag = spawn("script_model", level.frank_battery.var_116);
+    level.frank_battery show();
+    level.frank_battery.fx_tag = spawn("script_model", level.frank_battery.origin);
     level.frank_battery.fx_tag setModel("tag_origin");
     level.frank_battery.fx_tag method_8449(level.frank_battery, "tag_origin");
     playFXOnTag(level.var_611["battery_glow"], level.frank_battery.fx_tag, "tag_origin");
-    level.frank_battery.var_116 = level.frank_dudebroman gettagorigin("J_Wrist_LE");
-    level.frank_battery.var_1D = level.frank_dudebroman gettagangles("J_Wrist_LE");
-    level.frank_battery.var_116 = level.frank_battery.var_116 - anglestoup(level.frank_battery.var_1D) * 2;
-    level.frank_battery.var_116 = level.frank_battery.var_116 + anglesToForward(level.frank_battery.var_1D) * 3;
-    level.frank_battery.var_116 = level.frank_battery.var_116 - anglestoright(level.frank_battery.var_1D) * 3;
+    level.frank_battery.origin = level.frank_dudebroman gettagorigin("J_Wrist_LE");
+    level.frank_battery.angles = level.frank_dudebroman gettagangles("J_Wrist_LE");
+    level.frank_battery.origin = level.frank_battery.origin - anglestoup(level.frank_battery.angles) * 2;
+    level.frank_battery.origin = level.frank_battery.origin + anglesToForward(level.frank_battery.angles) * 3;
+    level.frank_battery.origin = level.frank_battery.origin - anglestoright(level.frank_battery.angles) * 3;
     level.frank_battery method_8449(level.frank_dudebroman, "J_Wrist_LE");
   }
 }
@@ -1032,7 +1032,7 @@ ee_quest_step_escort_frank_soul_collection() {
   level.frank_dudebroman endon("death");
   level.frank_battery.fx_tag endon("death");
   var_00 = 30;
-  level.frank_battery.fx_tag maps\mp\mp_zombies_soul_collection::func_170B(var_00, 256, 64, "battery_soul_collected", undefined, "tag_origin", undefined, "tag_origin", undefined, undefined, (0, 0, 64), undefined, undefined, undefined, 0);
+  level.frank_battery.fx_tag maps / mp / mp_zombies_soul_collection::func_170B(var_00, 256, 64, "battery_soul_collected", undefined, "tag_origin", undefined, "tag_origin", undefined, undefined, (0, 0, 64), undefined, undefined, undefined, 0);
   killfxontag(level.var_611["battery_glow"], level.frank_battery.fx_tag, "tag_origin");
   playFXOnTag(level.var_611["battery_glow_finished"], level.frank_battery.fx_tag, "tag_origin");
   common_scripts\utility::func_3C8F("ee_escort_frank_soul_collection_complete");
@@ -1042,25 +1042,25 @@ ee_quest_step_escort_frank_drop_charged_battery() {
   var_00 = level.battery_drop_org;
   if(isDefined(level.frank_dudebroman) && isalive(level.frank_dudebroman)) {
     level.frank_dudebroman.var_480F = 0;
-    level.frank_dudebroman dodamage(level.frank_dudebroman.var_BC * 2, level.frank_dudebroman.var_116);
+    level.frank_dudebroman dodamage(level.frank_dudebroman.health * 2, level.frank_dudebroman.origin);
   }
 
   level.frank_battery unlink();
   var_00 = common_scripts\utility::func_348B(var_00, 32) + (0, 0, 2);
-  var_01 = var_00 - level.frank_battery.var_116;
+  var_01 = var_00 - level.frank_battery.origin;
   var_02 = sqrt(abs(var_01[2] * 2 / 800));
   var_03 = 1 / var_02;
   var_04 = var_01 * (var_03, var_03, 0);
   level.frank_battery gravitymove(var_04, var_02);
   level.frank_battery rotateTo((0, 0, 0), var_02);
   wait(var_02);
-  level.frank_battery.var_116 = var_00;
+  level.frank_battery.origin = var_00;
   level.var_8E3 = common_scripts\utility::func_F93(level.var_8E3, level.frank_battery.fx_tag);
   level.frank_battery.fx_tag delete();
-  level.frank_battery hudoutlineenableforclients(level.var_744A, 2, 1);
+  level.frank_battery hudoutlineenableforclients(level.players, 2, 1);
   level.frank_battery lib_0547::func_AC41(" ");
   level.frank_battery waittill("player_used");
-  level.frank_battery hudoutlinedisableforclients(level.var_744A);
+  level.frank_battery hudoutlinedisableforclients(level.players);
   level.frank_battery delete();
   common_scripts\utility::func_3C8F("ee_escort_frank_battery_collected");
 }
@@ -1072,13 +1072,13 @@ ee_quest_step_escort_frank_collect_prize_think() {
   var_03 = getEnt("wine_cellar_door", "targetname");
   var_02 method_8449(var_03);
   var_00 waittill("trigger", var_04);
-  level thread maps\mp\zombies\weapons\_zombie_dlc3_melee::sword_post_ee_complete_handler();
-  var_01 method_805B();
+  level thread maps / mp / zombies / weapons / _zombie_dlc3_melee::sword_post_ee_complete_handler();
+  var_01 show();
   level thread common_scripts\_exploder::func_88E(205);
   var_00 delete();
   var_03 rotateby((0, -120, 0), 1, 0.25, 0.25);
   var_02 method_8060();
-  lib_0378::func_8D74("wine_cellar_door_open", var_03.var_116);
+  lib_0378::func_8D74("wine_cellar_door_open", var_03.origin);
   var_05 = getEnt("sword_hilt", "targetname");
   var_05 lib_0547::func_AC41(&"ZOMBIE_DLC3_PICKUP_PART_1");
   var_05 waittill("player_used", var_04);
@@ -1093,7 +1093,7 @@ warp_skip_escort_part01() {
   common_scripts\utility::func_3C8F("ee_escort_frank_reached_battery");
   common_scripts\utility::func_3C9F("ee_call_lightning_frank_fell");
   var_00 = common_scripts\utility::func_46B5("frank_first_half_escort_end", "script_noteworthy");
-  level.frank_dudebroman setOrigin(var_00.var_116);
+  level.frank_dudebroman setOrigin(var_00.origin);
 }
 
 warp_skip_escort_part02() {
@@ -1101,11 +1101,11 @@ warp_skip_escort_part02() {
   common_scripts\utility::func_3C8F("ee_escort_frank_reached_basement");
   common_scripts\utility::func_3C8F("ee_escort_frank_soul_collection_complete");
   var_00 = common_scripts\utility::func_46B5("frank_second_half_escort_end", "script_noteworthy");
-  level.battery_drop_org = var_00.var_116;
-  level.frank_dudebroman setOrigin(var_00.var_116);
+  level.battery_drop_org = var_00.origin;
+  level.frank_dudebroman setOrigin(var_00.origin);
   ee_quest_step_escort_frank_battery_setup();
   level.frank_dudebroman.var_480F = 0;
-  level.frank_dudebroman dodamage(level.frank_dudebroman.var_BC * 2, level.frank_dudebroman.var_116);
+  level.frank_dudebroman dodamage(level.frank_dudebroman.health * 2, level.frank_dudebroman.origin);
 }
 
 cheat_frank_godon_toggle() {
@@ -1121,12 +1121,12 @@ cheat_frank_godon_toggle() {
 
 cheat_frank_notarget_toggle() {
   if(isDefined(level.frank_dudebroman)) {
-    if(level.frank_dudebroman.var_CE) {
-      level.frank_dudebroman.var_CE = 0;
+    if(level.frank_dudebroman.ignoreme) {
+      level.frank_dudebroman.ignoreme = 0;
       return;
     }
 
-    level.frank_dudebroman.var_CE = 1;
+    level.frank_dudebroman.ignoreme = 1;
   }
 }
 
@@ -1136,11 +1136,11 @@ cheat_frank_run_toggle() {
       return;
     }
 
-    if(level.frank_dudebroman.var_297D == ::maps\mp\zombies\sg_events_v1\very_important_zombie::basic_vip_custom_movemode_walk) {
-      level.frank_dudebroman.var_297D = ::maps\mp\zombies\sg_events_v1\very_important_zombie::basic_vip_custom_movemode_sprint;
+    if(level.frank_dudebroman.var_297D == ::maps / mp / zombies / sg_events_v1 / very_important_zombie::basic_vip_custom_movemode_walk) {
+      level.frank_dudebroman.var_297D = ::maps / mp / zombies / sg_events_v1 / very_important_zombie::basic_vip_custom_movemode_sprint;
       return;
     }
 
-    level.frank_dudebroman.var_297D = ::maps\mp\zombies\sg_events_v1\very_important_zombie::basic_vip_custom_movemode_walk;
+    level.frank_dudebroman.var_297D = ::maps / mp / zombies / sg_events_v1 / very_important_zombie::basic_vip_custom_movemode_walk;
   }
 }

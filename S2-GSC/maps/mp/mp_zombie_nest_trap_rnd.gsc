@@ -4,17 +4,17 @@
 ***********************************************/
 
 func_9CC0(param_00) {
-  var_01 = getEntArray(param_00.var_01A2, "targetname");
+  var_01 = getEntArray(param_00.target, "targetname");
   level.var_9CC0 = var_01[0];
   level.var_9CC0.var_9C92 = param_00;
-  level.var_9CC0.var_9CBB = param_00.var_0165;
+  level.var_9CC0.var_9CBB = param_00.script_noteworthy;
   thread lib_0378::func_8D74("aud_trap_elec_start");
   foreach(var_03 in var_01) {
-    if(!isDefined(var_03.var_0165)) {
+    if(!isDefined(var_03.script_noteworthy)) {
       continue;
     }
 
-    if(var_03.var_0165 == "damage_over_time") {
+    if(var_03.script_noteworthy == "damage_over_time") {
       param_00 thread func_9CC2(var_03);
       param_00 thread func_9CC3(var_03);
       wait 0.05;
@@ -40,7 +40,7 @@ func_9CC2(param_00) {
   while(var_01 < var_03) {
     wait(var_02);
     var_01 = var_01 + var_02;
-    foreach(var_05 in level.var_744A) {
+    foreach(var_05 in level.players) {
       if(!var_05 istouching(param_00)) {
         continue;
       }
@@ -80,8 +80,8 @@ func_9CC3(param_00) {
         continue;
       }
 
-      maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_6FEE(var_06);
-      var_06 lib_054D::func_099B("electroBuff", var_06 func_44B0(self.var_0117));
+      maps / mp / mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_6FEE(var_06);
+      var_06 lib_054D::setheight("electroBuff", var_06 func_44B0(self.owner));
     }
   }
 }
@@ -99,12 +99,12 @@ func_44B0(param_00) {
     var_01 = func_9048();
   }
 
-  if(isDefined(self.var_0A4B) && self.var_0A4B == "zombie_heavy") {
+  if(isDefined(self.var_A4B) && self.var_A4B == "zombie_heavy") {
     var_01.var_29D5 = 600 * lib_054D::func_4441();
   }
 
   var_01.var_5CC8 = 0.2;
-  var_01.var_721C = param_00;
+  var_01.player = param_00;
   return var_01;
 }
 
@@ -121,14 +121,14 @@ func_9048() {
 
 func_A10B(param_00) {
   if(lib_0547::func_580A()) {
-    self dodamage(param_00.var_29D5 * 0.25, self.var_0116, level.var_9CC0, level.var_9CC0, "MOD_ENERGY", "trap_zm_mp");
+    self dodamage(param_00.var_29D5 * 0.25, self.origin, level.var_9CC0, level.var_9CC0, "MOD_ENERGY", "trap_zm_mp");
     return;
   }
 
-  self dodamage(param_00.var_29D5, self.var_0116, level.var_9CC0, level.var_9CC0, "MOD_ENERGY", "trap_zm_mp");
+  self dodamage(param_00.var_29D5, self.origin, level.var_9CC0, level.var_9CC0, "MOD_ENERGY", "trap_zm_mp");
   if(!isDefined(self.hitbytrap)) {
-    foreach(var_02 in level.var_744A) {
-      var_02 maps\mp\gametypes\zombies::func_47C7("kill_trap");
+    foreach(var_02 in level.players) {
+      var_02 maps / mp / gametypes / zombies::func_47C7("kill_trap");
       self.hitbytrap = 1;
     }
   }

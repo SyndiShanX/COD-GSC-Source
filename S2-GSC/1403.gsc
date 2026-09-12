@@ -3,17 +3,17 @@
  * Script: 1403.gsc
 *********************************************/
 
-lib_057B::func_00D5() {
+init() {
   level.var_1EB9 = 20;
-  level.var_5A61["zm_camouflage"] = ::lib_057B::func_9E3E;
+  level.killstreakfuncs["zm_camouflage"] = ::func_9E3E;
 }
 
-lib_057B::func_9E3E(param_00, param_01) {
-  thread lib_057B::func_73BA();
+func_9E3E(param_00, param_01) {
+  thread func_73BA();
   return 1;
 }
 
-lib_057B::func_73BA(param_00) {
+func_73BA(param_00) {
   if(!isDefined(param_00)) {
     param_00 = level.var_1EB9;
   }
@@ -31,18 +31,18 @@ lib_057B::func_73BA(param_00) {
     self.var_2747 = 0;
   }
 
-  self method_8615("zmb_ss_camo_use");
+  self playlocalsound("zmb_ss_camo_use");
   self.var_2747++;
   lib_0547::func_8A6D(1);
   self setclientomnvar("ui_zm_camo", var_01);
-  lib_057B::func_73BB(param_00);
+  func_73BB(param_00);
   if(isDefined(self)) {
     lib_0547::func_8A6D(0);
     self.var_2747--;
   }
 }
 
-lib_057B::func_73BB(param_00) {
+func_73BB(param_00) {
   self endon("playerCamouflageMode");
   wait(param_00);
 }

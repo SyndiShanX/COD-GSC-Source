@@ -3,7 +3,7 @@
  * Script: maps\mp\bots\_bots_gametype_ctf.gsc
 ***********************************************/
 
-func_00F9() {
+main() {
   func_87A7();
   func_8791();
 }
@@ -21,20 +21,20 @@ func_8791() {
   level.var_19D7 = ::func_4092;
   level.var_19D9 = ::func_1984;
   level.var_19E3 = ::func_1990;
-  maps\mp\bots\_bots_util::func_1B20();
+  maps / mp / bots / _bots_util::func_1B20();
   while(!isDefined(level.var_9853)) {
     wait 0.05;
   }
 
   level.var_9853["allies"].var_81E8 = "allies";
   level.var_9853["axis"].var_81E8 = "axis";
-  maps\mp\bots\_bots_gametype_common::func_194F(level.var_9853, "flag_");
-  var_00 = getzonenearest(level.var_9853["allies"].var_0116);
+  maps / mp / bots / _bots_gametype_common::func_194F(level.var_9853, "flag_");
+  var_00 = getzonenearest(level.var_9853["allies"].origin);
   if(isDefined(var_00)) {
     botzonesetteam(var_00, "allies");
   }
 
-  var_00 = getzonenearest(level.var_9853["axis"].var_0116);
+  var_00 = getzonenearest(level.var_9853["axis"].origin);
   if(isDefined(var_00)) {
     botzonesetteam(var_00, "axis");
   }
@@ -54,7 +54,7 @@ func_2734(param_00) {
     return 0;
   }
 
-  return func_1986(self.var_01A7);
+  return func_1986(self.team);
 }
 
 func_1993() {
@@ -74,17 +74,17 @@ func_1993() {
   var_01 = 0;
   for(;;) {
     wait 0.05;
-    if(self.var_00BC <= 0) {
+    if(self.health <= 0) {
       continue;
     }
 
     if(!isDefined(self.var_7ECA)) {
-      maps\mp\bots\_bots_gametype_common::func_19E7();
+      maps / mp / bots / _bots_gametype_common::func_19E7();
     }
 
-    if(func_1986(self.var_01A7)) {
-      if(isDefined(level.var_1A53) && isDefined(level.var_1A53[level.var_6C63[self.var_01A7]])) {
-        level.var_1A53[level.var_6C63[self.var_01A7]] = undefined;
+    if(func_1986(self.team)) {
+      if(isDefined(level.var_1A53) && isDefined(level.var_1A53[level.var_6C63[self.team]])) {
+        level.var_1A53[level.var_6C63[self.team]] = undefined;
       }
     }
 
@@ -93,16 +93,16 @@ func_1993() {
       if(func_1991()) {
         var_02 = 1;
       } else if(!func_1985()) {
-        var_02 = distancesquared(self.var_0116, level.var_9853[level.var_6C63[self.var_01A7]].var_28D4) < squared(func_4195());
+        var_02 = distancesquared(self.origin, level.var_9853[level.var_6C63[self.team]].var_28D4) < squared(func_4195());
       }
-    } else if(!func_1986(self.var_01A7)) {
+    } else if(!func_1986(self.team)) {
       var_02 = !func_1989();
     }
 
     self botsetflag("force_sprint", var_02);
     var_01 = 0;
     if(func_1991()) {
-      if(func_1986(self.var_01A7)) {
+      if(func_1986(self.team)) {
         func_23B2();
         var_01 = 1;
         if(!var_00) {
@@ -110,15 +110,15 @@ func_1993() {
           self botsetpathingstyle("scripted");
         }
 
-        self botsetscriptgoal(level.var_1FC6[self.var_01A7].var_28D4, 16, "critical");
-      } else if(maps\mp\bots\_bots_gametype_common::func_19E1(self.var_01A7) == 1) {
+        self botsetscriptgoal(level.var_1FC6[self.team].var_28D4, 16, "critical");
+      } else if(maps / mp / bots / _bots_gametype_common::func_19E1(self.team) == 1) {
         func_1992();
       } else if(gettime() > self.var_66A7) {
         func_23B2();
-        var_03 = getnodesinradius(level.var_1FC6[self.var_01A7].var_28D4, 900, 0, 300);
+        var_03 = getnodesinradius(level.var_1FC6[self.team].var_28D4, 900, 0, 300);
         var_04 = self method_8366(var_03, var_03.size * 0.15, "node_hide_anywhere");
         if(!isDefined(var_04)) {
-          var_04 = level.var_1FC6[self.var_01A7].var_6638;
+          var_04 = level.var_1FC6[self.team].var_6638;
         }
 
         var_05 = self botsetscriptgoalnode(var_04, "critical");
@@ -128,11 +128,11 @@ func_1993() {
       }
     } else if(self.var_7ECA == "attacker") {
       if(func_1985()) {
-        if(!maps\mp\bots\_bots_util::func_1A27()) {
+        if(!maps / mp / bots / _bots_util::func_1A27()) {
           func_23B2();
           self method_8358();
-          var_06 = level.var_9853[level.var_6C63[self.var_01A7]].var_2006;
-          maps\mp\bots\_bots_strategy::func_1A0C(var_06, 500);
+          var_06 = level.var_9853[level.var_6C63[self.team]].var_2006;
+          maps / mp / bots / _bots_strategy::func_1A0C(var_06, 500);
         }
       } else {
         func_23B2();
@@ -140,16 +140,16 @@ func_1993() {
           self method_8358();
         }
 
-        self botsetscriptgoal(level.var_9853[level.var_6C63[self.var_01A7]].var_28D4, 16, "objective", undefined, 300);
+        self botsetscriptgoal(level.var_9853[level.var_6C63[self.team]].var_28D4, 16, "objective", undefined, 300);
       }
-    } else if(!func_1986(self.var_01A7)) {
+    } else if(!func_1986(self.team)) {
       func_1992();
     } else if(!func_55F2()) {
       self method_8358();
       var_07["score_flags"] = "strict_los";
-      var_07["entrance_points_index"] = "flag_" + level.var_9853[self.var_01A7].var_81E8;
-      var_07["nearest_node_to_center"] = level.var_9853[self.var_01A7].var_6638;
-      maps\mp\bots\_bots_strategy::func_1AA6(level.var_9853[self.var_01A7].var_28D4, func_4195(), var_07);
+      var_07["entrance_points_index"] = "flag_" + level.var_9853[self.team].var_81E8;
+      var_07["nearest_node_to_center"] = level.var_9853[self.team].var_6638;
+      maps / mp / bots / _bots_strategy::func_1AA6(level.var_9853[self.team].var_28D4, func_4195(), var_07);
     }
 
     if(var_00 && !var_01) {
@@ -161,30 +161,30 @@ func_1993() {
 
 func_1992() {
   var_00 = undefined;
-  var_01 = level.var_9853[self.var_01A7];
+  var_01 = level.var_9853[self.team];
   var_02 = var_01.var_2006;
   if(!isDefined(var_02)) {
     var_00 = var_01.var_28D4;
   } else if(self method_8371(var_02)) {
-    var_00 = var_02.var_0116;
-    if(self botgetdifficultysetting("strategyLevel") > 0 && !func_1986(self.var_01A7)) {
+    var_00 = var_02.origin;
+    if(self botgetdifficultysetting("strategyLevel") > 0 && !func_1986(self.team)) {
       if(!isDefined(level.var_1A53)) {
         level.var_1A53 = [];
       }
 
-      if(!isDefined(level.var_1A53[var_02.var_01A7])) {
-        level.var_1A53[var_02.var_01A7] = [];
+      if(!isDefined(level.var_1A53[var_02.team])) {
+        level.var_1A53[var_02.team] = [];
       }
 
-      level.var_1A53[var_02.var_01A7]["origin"] = var_00;
-      level.var_1A53[var_02.var_01A7]["time"] = gettime();
+      level.var_1A53[var_02.team]["origin"] = var_00;
+      level.var_1A53[var_02.team]["time"] = gettime();
     }
   } else if(isDefined(var_01.var_28CF)) {
     if(isDefined(var_01.var_2562["friendly"])) {
       if(var_01.var_6990) {
         var_00 = var_01.var_28CF;
       } else {
-        var_00 = var_02.var_0116;
+        var_00 = var_02.origin;
       }
     }
   } else {
@@ -200,10 +200,10 @@ func_1992() {
   var_03 = undefined;
   var_04 = undefined;
   if(self botgetdifficultysetting("strategyLevel") > 0) {
-    if(isDefined(level.var_1A53) && isDefined(level.var_1A53[var_02.var_01A7])) {
-      var_04 = gettime() - level.var_1A53[var_02.var_01A7]["time"];
+    if(isDefined(level.var_1A53) && isDefined(level.var_1A53[var_02.team])) {
+      var_04 = gettime() - level.var_1A53[var_02.team]["time"];
       if(var_04 < 10000) {
-        var_03 = level.var_1A53[var_02.var_01A7]["origin"];
+        var_03 = level.var_1A53[var_02.team]["origin"];
       }
     }
   }
@@ -215,9 +215,9 @@ func_1992() {
       return;
     }
 
-    if(!maps\mp\bots\_bots_util::func_1A32()) {
-      maps\mp\bots\_bots_strategy::func_19A3();
-      maps\mp\bots\_bots_strategy::func_1A8D(var_03, 400);
+    if(!maps / mp / bots / _bots_util::func_1A32()) {
+      maps / mp / bots / _bots_strategy::func_19A3();
+      maps / mp / bots / _bots_strategy::func_1A8D(var_03, 400);
       return;
     }
 
@@ -230,17 +230,17 @@ func_1992() {
     self method_8358();
   }
 
-  maps\mp\bots\_bots_personality::func_A0C0();
+  maps / mp / bots / _bots_personality::func_A0C0();
 }
 
 func_23B2() {
-  if(maps\mp\bots\_bots_util::func_1A2D()) {
-    maps\mp\bots\_bots_strategy::func_19A3();
+  if(maps / mp / bots / _bots_util::func_1A2D()) {
+    maps / mp / bots / _bots_strategy::func_19A3();
   }
 }
 
 func_55F2() {
-  return maps\mp\bots\_bots_util::func_1A33();
+  return maps / mp / bots / _bots_util::func_1A33();
 }
 
 func_4195() {
@@ -258,7 +258,7 @@ func_4195() {
 }
 
 func_2897(param_00) {
-  var_01 = maps\mp\bots\_bots_gametype_common::func_19E1(param_00);
+  var_01 = maps / mp / bots / _bots_gametype_common::func_19E1(param_00);
   if(var_01 == 1) {
     return 1;
   }
@@ -282,23 +282,23 @@ func_2897(param_00) {
 }
 
 func_2898(param_00) {
-  var_01 = maps\mp\bots\_bots_gametype_common::func_19E1(param_00);
+  var_01 = maps / mp / bots / _bots_gametype_common::func_19E1(param_00);
   return var_01 - func_2897(param_00);
 }
 
 func_4091(param_00) {
-  return maps\mp\bots\_bots_gametype_common::func_19DF(param_00, level.var_1FC6[param_00].var_28D4, func_4195());
+  return maps / mp / bots / _bots_gametype_common::func_19DF(param_00, level.var_1FC6[param_00].var_28D4, func_4195());
 }
 
 func_4092(param_00) {
-  return maps\mp\bots\_bots_gametype_common::func_19E0(param_00, level.var_1FC6[param_00].var_28D4, func_4195());
+  return maps / mp / bots / _bots_gametype_common::func_19E0(param_00, level.var_1FC6[param_00].var_28D4, func_4195());
 }
 
 func_1983() {
   level notify("bot_ctf_ai_director_update");
   level endon("bot_ctf_ai_director_update");
   level endon("game_ended");
-  thread maps\mp\bots\_bots_gametype_common::func_19DA();
+  thread maps / mp / bots / _bots_gametype_common::func_19DA();
 }
 
 func_1988(param_00) {
@@ -310,7 +310,7 @@ func_1988(param_00) {
     return 1;
   }
 
-  var_01 = param_00 maps\mp\bots\_bots_util::func_670D("flag_allies", "flag_axis");
+  var_01 = param_00 maps / mp / bots / _bots_util::func_670D("flag_allies", "flag_axis");
   if(var_01) {
     return 1;
   }
@@ -327,11 +327,11 @@ func_1987(param_00) {
 }
 
 func_1989() {
-  return func_1987(self.var_01A7);
+  return func_1987(self.team);
 }
 
 func_1985() {
-  return func_1987(level.var_6C63[self.var_01A7]);
+  return func_1987(level.var_6C63[self.team]);
 }
 
 func_1991() {

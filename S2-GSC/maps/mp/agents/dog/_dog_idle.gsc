@@ -3,13 +3,13 @@
  * Script: maps\mp\agents\dog\_dog_idle.gsc
 *********************************************/
 
-func_00F9() {
-  self.var_0EEA = "none";
+main() {
+  self.var_EEA = "none";
   func_8745();
   self.var_99FF = self.var_99FF + 2000;
   self.var_173F = 0;
-  self method_8395(self.var_0116);
-  self scragentsetorientmode("face angle abs", self.var_001D);
+  self method_8395(self.origin);
+  self scragentsetorientmode("face angle abs", self.angles);
   self method_839C("anim deltas");
   self method_839D("gravity");
   func_A16C();
@@ -26,14 +26,14 @@ func_A16C() {
   self endon("killanimscript");
   self endon("cancelidleloop");
   for(;;) {
-    var_00 = self.var_0EEA;
+    var_00 = self.var_EEA;
     var_01 = func_2E61();
-    if(var_01 != self.var_0EEA) {
+    if(var_01 != self.var_EEA) {
       func_37BF(var_01);
     }
 
     func_A0DE();
-    switch (self.var_0EEA) {
+    switch (self.var_EEA) {
       case "idle_combat":
         wait(0.2);
         break;
@@ -62,8 +62,8 @@ func_2E61() {
 }
 
 func_37BF(param_00) {
-  func_38F6(self.var_0EEA);
-  self.var_0EEA = param_00;
+  func_38F6(self.var_EEA);
+  self.var_EEA = param_00;
   func_74A8();
 }
 
@@ -75,7 +75,7 @@ func_38F6(param_00) {
 }
 
 func_74A8() {
-  if(self.var_0EEA == "idle_combat") {
+  if(self.var_EEA == "idle_combat") {
     self method_83D7("attack_idle");
     return;
   }
@@ -85,23 +85,23 @@ func_74A8() {
 
 func_A0DE() {
   var_00 = undefined;
-  if(isDefined(self.var_0088) && distancesquared(self.var_0088.var_0116, self.var_0116) < 1048576) {
-    var_00 = self.var_0088;
-  } else if(isDefined(self.var_0117) && distancesquared(self.var_0117.var_0116, self.var_0116) > 576) {
-    var_00 = self.var_0117;
+  if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.origin) < 1048576) {
+    var_00 = self.enemy;
+  } else if(isDefined(self.owner) && distancesquared(self.owner.origin, self.origin) > 576) {
+    var_00 = self.owner;
   }
 
   if(isDefined(var_00)) {
-    var_01 = var_00.var_0116 - self.var_0116;
+    var_01 = var_00.origin - self.origin;
     var_02 = vectortoangles(var_01);
-    if(abs(angleclamp180(var_02[1] - self.var_001D[1])) > 1) {
+    if(abs(angleclamp180(var_02[1] - self.angles[1])) > 1) {
       func_9ED9(var_02[1]);
     }
   }
 }
 
 func_8B86() {
-  return isDefined(self.var_0088) && maps\mp\_utility::func_57A0(self.var_0088) && distancesquared(self.var_0116, self.var_0088.var_0116) < 1000000;
+  return isDefined(self.enemy) && maps\mp\_utility::func_57A0(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 1000000;
 }
 
 func_46F0(param_00) {
@@ -129,7 +129,7 @@ func_46F0(param_00) {
 }
 
 func_9ED9(param_00) {
-  var_01 = self.var_001D[1];
+  var_01 = self.angles[1];
   var_02 = angleclamp180(param_00 - var_01);
   if(-0.5 < var_02 && var_02 < 0.5) {
     return;
@@ -146,21 +146,21 @@ func_9ED9(param_00) {
   var_06 = getangledelta3d(var_04);
   self method_839C("anim angle delta");
   if(animhasnotetrack(var_04, "turn_begin") && animhasnotetrack(var_04, "turn_end")) {
-    maps\mp\agents\_scriptedagents::func_71FC(var_03, 0, "turn_in_place");
+    maps / mp / agents / _scriptedagents::func_71FC(var_03, 0, "turn_in_place");
     var_07 = getnotetracktimes(var_04, "turn_begin");
     var_08 = getnotetracktimes(var_04, "turn_end");
     var_09 = var_08[0] - var_07[0] * var_05;
     var_0A = angleclamp180(var_02 - var_06[1]);
     var_0B = abs(var_0A) / var_09 / 20;
     var_0B = var_0B * 3.14159 / 180;
-    var_0C = (0, angleclamp180(self.var_001D[1] + var_0A), 0);
+    var_0C = (0, angleclamp180(self.angles[1] + var_0A), 0);
     self.var_76EA = self method_83A0();
     self method_839F(var_0B);
     self scragentsetorientmode("face angle abs", var_0C);
-    maps\mp\agents\_scriptedagents::func_A79E("turn_in_place", "turn_end");
+    maps / mp / agents / _scriptedagents::func_A79E("turn_in_place", "turn_end");
     self method_839F(self.var_76EA);
     self.var_76EA = undefined;
-    maps\mp\agents\_scriptedagents::func_A79E("turn_in_place", "end");
+    maps / mp / agents / _scriptedagents::func_A79E("turn_in_place", "end");
   } else {
     self.var_76EA = self method_83A0();
     var_0B = abs(angleclamp180(var_04 - var_0C[1])) / var_0B / 20;
@@ -168,7 +168,7 @@ func_9ED9(param_00) {
     self method_839F(var_0C);
     var_0C = (0, angleclamp180(var_01 - var_0B[1]), 0);
     self scragentsetorientmode("face angle abs", var_0C);
-    maps\mp\agents\_scriptedagents::func_71FC(var_03, 0, "turn_in_place");
+    maps / mp / agents / _scriptedagents::func_71FC(var_03, 0, "turn_in_place");
     self method_839F(self.var_76EA);
     self.var_76EA = undefined;
   }
@@ -178,13 +178,13 @@ func_9ED9(param_00) {
 }
 
 func_7EEF(param_00, param_01) {
-  if(abs(angleclamp180(param_00 - self.var_001D[1])) <= param_01) {
+  if(abs(angleclamp180(param_00 - self.angles[1])) <= param_01) {
     return;
   }
 
   var_02 = (0, param_00, 0);
   self scragentsetorientmode("face angle abs", var_02);
-  while(angleclamp180(param_00 - self.var_001D[1]) > param_01) {
+  while(angleclamp180(param_00 - self.angles[1]) > param_01) {
     wait(0.1);
   }
 }
@@ -195,9 +195,9 @@ func_8745() {
 
 func_31FC(param_00) {
   self.var_17E8 = 1;
-  self.var_018F = 1;
+  self.statelocked = 1;
   self.var_173F = 1;
-  var_01 = angleclamp180(param_00 - self.var_001D[1]);
+  var_01 = angleclamp180(param_00 - self.angles[1]);
   if(var_01 > 0) {
     var_02 = 1;
   } else {
@@ -206,13 +206,13 @@ func_31FC(param_00) {
 
   self notify("cancelidleloop");
   self method_839C("anim deltas");
-  self scragentsetorientmode("face angle abs", self.var_001D);
-  maps\mp\agents\_scriptedagents::func_71FC("stand_pain", var_02, "stand_pain");
+  self scragentsetorientmode("face angle abs", self.angles);
+  maps / mp / agents / _scriptedagents::func_71FC("stand_pain", var_02, "stand_pain");
   self.var_17E8 = 0;
-  self.var_018F = 0;
+  self.statelocked = 0;
   self.var_173F = 0;
-  self scragentsetorientmode("face angle abs", self.var_001D);
-  self.var_0EEA = "none";
+  self scragentsetorientmode("face angle abs", self.angles);
+  self.var_EEA = "none";
   thread func_A16C();
 }
 
@@ -231,5 +231,5 @@ func_6B3B(param_00, param_01, param_02, param_03, param_04, param_05) {
     return;
   }
 
-  func_31FC(self.var_001D[1] + 180);
+  func_31FC(self.angles[1] + 180);
 }

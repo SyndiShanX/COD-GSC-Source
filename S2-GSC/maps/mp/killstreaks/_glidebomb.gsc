@@ -3,21 +3,21 @@
  * Script: maps\mp\killstreaks\_glidebomb.gsc
 **********************************************/
 
-func_00D5() {
-  level.var_067B = [];
-  level.var_067B["Particle_FX"] = spawnStruct();
-  level.var_0611["fritz_streamers"] = loadfx("vfx/trail/fritzx_streamers");
-  level.var_0611["fritz_explosion_1P"] = loadfx("vfx/explosion/fritzx_explosion_01_1p");
-  level.var_0611["fritz_flying_1P"] = loadfx("vfx/vehicle/fritzx_flying_1p");
-  level.var_0611["glidebomb_hatchdoors_light_bright"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_bright");
-  level.var_0611["glidebomb_hatchdoors_light_med"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_med");
-  level.var_0611["glidebomb_hatchdoors_light_low"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_low");
-  level.var_067B["Audio"] = spawnStruct();
-  level.var_067B["Launch_Value"] = spawnStruct();
-  level.var_067B["Launch_Value"].var_A416 = 24000;
-  level.var_067B["Launch_Value"].var_4DF8 = 7000;
-  level.var_067B["Launch_Value"].var_9826 = 1500;
-  level.var_5A61["fritzx"] = ::func_9E2F;
+init() {
+  level.var_67B = [];
+  level.var_67B["Particle_FX"] = spawnStruct();
+  level.var_611["fritz_streamers"] = loadfx("vfx/trail/fritzx_streamers");
+  level.var_611["fritz_explosion_1P"] = loadfx("vfx/explosion/fritzx_explosion_01_1p");
+  level.var_611["fritz_flying_1P"] = loadfx("vfx/vehicle/fritzx_flying_1p");
+  level.var_611["glidebomb_hatchdoors_light_bright"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_bright");
+  level.var_611["glidebomb_hatchdoors_light_med"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_med");
+  level.var_611["glidebomb_hatchdoors_light_low"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_low");
+  level.var_67B["Audio"] = spawnStruct();
+  level.var_67B["Launch_Value"] = spawnStruct();
+  level.var_67B["Launch_Value"].var_A416 = 24000;
+  level.var_67B["Launch_Value"].var_4DF8 = 7000;
+  level.var_67B["Launch_Value"].var_9826 = 1500;
+  level.killstreakfuncs["fritzx"] = ::func_9E2F;
   level.var_5A7D["fritzx_projectile_mp"] = "fritzx";
   level.var_5A7D["azon_projectile_mp"] = "fritzx";
   level.var_5A7D["fritzx_projectile_grenadier_mp"] = "fritzx";
@@ -30,12 +30,12 @@ func_9E2F(param_00) {
   }
 
   if(isDefined(self.var_6E6B) && self.var_6E6B) {
-    self iclientprintlnbold(&"KILLSTREAKS_DLC4_CANT_USE_STREAK_WHILE_PARATROOPING");
+    self iprintlnbold(&"KILLSTREAKS_DLC4_CANT_USE_STREAK_WHILE_PARATROOPING");
     return 0;
   }
 
   if(isDefined(self.var_4B69)) {
-    self iclientprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   }
 
@@ -43,7 +43,7 @@ func_9E2F(param_00) {
   if(var_01 != "success") {
     wait(0.75);
     var_02 = self getcurrentweapon();
-    if(var_02 == "none" || maps\mp\_utility::func_5740(var_02)) {
+    if(var_02 == "none" || maps\mp\_utility::iskillstreakweapon(var_02)) {
       self switchtoweapon(common_scripts\utility::func_4550());
     }
 
@@ -53,7 +53,7 @@ func_9E2F(param_00) {
   maps\mp\_utility::func_744E();
   maps\mp\_utility::func_8A5B("fritzx");
   self.var_3EE8 = 0;
-  thread func_92D3(param_00);
+  thread func_92D3(var_01);
   return 1;
 }
 
@@ -66,8 +66,8 @@ func_92D3(param_00) {
 
   thread lib_0526::func_8A61(0.05, level.var_5A7C, var_01);
   lib_0526::func_A232(1);
-  if(level.var_3FDC == "scorestreak_training") {
-    maps\mp\gametypes\scorestreak_training::func_244D();
+  if(level.gametype == "scorestreak_training") {
+    maps / mp / gametypes / scorestreak_training::func_244D();
   }
 
   var_02 = func_49DA();
@@ -77,7 +77,7 @@ func_92D3(param_00) {
 func_3EEA(param_00, param_01) {
   var_02 = 0;
   if(isDefined(param_00)) {
-    var_02 = param_00 maps\mp\_utility::func_0649("specialty_improvedstreaks");
+    var_02 = param_00 maps\mp\_utility::_hasperk("specialty_improvedstreaks");
   }
 
   var_03 = 0;
@@ -137,17 +137,17 @@ func_49DA() {
   thread func_700F();
   var_03 = spawn("script_model", var_02.var_92FA);
   var_03 setModel("tag_origin");
-  var_03.var_001D = (90, 0, 0);
-  self method_81E2(var_03, "tag_origin");
+  var_03.angles = (90, 0, 0);
+  self cameralinkTo(var_03, "tag_origin");
   var_04 = spawn("script_model", var_02.var_92FA + (-1 * var_01, 0, -1 * var_00 - 52));
   var_04 notsolid();
-  if(isDefined(self.var_01A7) && self.var_01A7 == "allies") {
+  if(isDefined(self.team) && self.team == "allies") {
     var_04 setModel("usa_glidebomb_hatchdoors");
   } else {
     var_04 setModel("ger_glidebomb_hatchdoors");
   }
 
-  var_04 method_805C();
+  var_04 hide();
   var_04 showtoclient(self);
   var_04 scriptmodelplayanim("ks_usa_glidebomb_hatchdoors_open");
   var_05 = spawn("script_model", var_02.var_92FA + (-1 * var_01, 0, -1 * var_00));
@@ -160,18 +160,18 @@ func_49DA() {
   thread func_5A06(var_04);
   var_06 = getnorthyaw();
   if(var_06 != 0) {
-    var_03.var_001D = var_03.var_001D + (0, var_06, 0);
-    var_04.var_001D = var_04.var_001D + (0, var_06, 0);
-    var_05.var_001D = var_05.var_001D + (0, var_06, 0);
+    var_03.angles = var_03.angles + (0, var_06, 0);
+    var_04.angles = var_04.angles + (0, var_06, 0);
+    var_05.angles = var_05.angles + (0, var_06, 0);
   }
 
   var_07 = "ger_glidebomb_fritzx";
-  if(isDefined(self.var_01A7) && self.var_01A7 == "allies") {
+  if(isDefined(self.team) && self.team == "allies") {
     var_07 = "usa_glidebomb_azon";
   }
 
   var_05 setModel(var_07);
-  var_05 method_805C();
+  var_05 hide();
   var_05 showtoclient(self);
   if(isDefined(level.var_47CD)) {
     self lightsetforplayer(level.var_47CD);
@@ -189,7 +189,7 @@ func_49DA() {
   var_08.var_1E99 = var_03;
   var_08.var_3DBF = var_00;
   var_08.var_4C35 = var_01;
-  var_08.var_3EE5 = var_05.var_001D;
+  var_08.var_3EE5 = var_05.angles;
   return var_08;
 }
 
@@ -206,34 +206,34 @@ func_5A06(param_00) {
 func_3496(param_00, param_01) {
   var_02 = param_01.var_92FA;
   var_03 = param_01.var_92FA + (-1 * param_01.var_4C35 + 68, 0, -1 * param_01.var_3DBF);
-  var_04 = maps\mp\_utility::func_0649("specialty_improvedstreaks");
+  var_04 = maps\mp\_utility::_hasperk("specialty_improvedstreaks");
   if(isDefined(var_04) && var_04) {
     var_05 = "azon_projectile_grenadier_mp";
-    if(isDefined(self.var_01A7) && self.var_01A7 == "axis") {
+    if(isDefined(self.team) && self.team == "axis") {
       var_05 = "fritzx_projectile_grenadier_mp";
     }
   } else {
     var_05 = "azon_projectile_mp";
-    if(isDefined(self.var_01A7) && self.var_01A7 == "axis") {
+    if(isDefined(self.team) && self.team == "axis") {
       var_05 = "fritzx_projectile_mp";
     }
   }
 
-  param_01.var_8203 method_805C();
+  param_01.var_8203 hide();
   param_01.var_8203 delete();
   var_06 = var_02 + (-1 * param_01.var_4C35, 0, -1 * param_01.var_3DBF);
   var_07 = var_02 + (0, getnorthyaw(), 0);
   var_08 = magicbullet(var_05, var_06, var_07, self);
-  var_08.var_001D = param_01.var_3EE5;
+  var_08.angles = param_01.var_3EE5;
   var_08 method_866D(1, 1);
   var_08 thread func_49F7(self);
   var_08.var_5A2C = param_01.var_1E99;
   var_08.var_5A2C setscriptmoverkillcam("script_entity");
   var_08.var_5A2C.var_5A32 = gettime();
-  var_08.var_0117 = self;
-  var_08.var_01A7 = self.var_01A7;
+  var_08.owner = self;
+  var_08.team = self.team;
   var_08.var_5CC6 = param_00;
-  var_08.var_01B9 = "remote";
+  var_08.type = "remote";
   var_08.var_4C35 = param_01.var_4C35;
   var_08.var_3DBF = param_01.var_3DBF;
   thread func_3162(var_07, var_06);
@@ -243,7 +243,7 @@ func_3496(param_00, param_01) {
   level.var_7C66 = 1;
   var_08 thread maps\mp\gametypes\_damage::func_8676(10, undefined, ::func_624B, undefined, 1);
   var_08 func_3EEA(self, var_03);
-  maps\mp\_matchdata::func_5E9A("fritzx", var_08.var_0116);
+  maps\mp\_matchdata::func_5E9A("fritzx", var_08.origin);
   thread func_2380(var_08, param_01);
 }
 
@@ -271,7 +271,7 @@ func_49F7(param_00) {
   }
 
   var_02 = [];
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     if(!isDefined(param_00) || var_04 != param_00) {
       var_02[var_02.size] = var_04;
     }
@@ -287,14 +287,14 @@ func_3EE7(param_00, param_01) {
   var_02 = lib_0380::func_6844("ks_fritz_plr_inc", [param_01], param_00);
   param_00 waittill("death");
   lib_0380::func_6850(var_02);
-  lib_0380::func_6842("ks_fritz_plr_exp_trans", [param_01], param_00.var_0116);
+  lib_0380::func_6842("ks_fritz_plr_exp_trans", [param_01], param_00.origin);
 }
 
 func_3EE6(param_00, param_01) {
   var_02 = lib_0380::func_6844("ks_fritz_npc_inc", param_01, param_00);
   param_00 waittill("death");
   lib_0380::func_6850(var_02);
-  lib_0380::func_6842("ks_fritz_exp_trans", param_01, param_00.var_0116);
+  lib_0380::func_6842("ks_fritz_exp_trans", param_01, param_00.origin);
 }
 
 func_1E9A(param_00, param_01) {
@@ -303,21 +303,21 @@ func_1E9A(param_00, param_01) {
   param_01 endon("ms_early_exit");
   param_00 endon("death");
   var_02 = (param_00.var_4C35, 0, param_00.var_3DBF);
-  self.var_0116 = param_00.var_0116 + var_02;
-  self.var_001D = vectortoangles((0, 0, -1));
-  var_03 = param_00.var_0116;
+  self.origin = param_00.origin + var_02;
+  self.angles = vectortoangles((0, 0, -1));
+  var_03 = param_00.origin;
   var_04 = 0;
   var_05 = 0;
   var_06 = getnorthyaw();
   if(var_06 != 0) {
-    self.var_001D = self.var_001D + (0, var_06, 0);
+    self.angles = self.angles + (0, var_06, 0);
   }
 
   level notify("bomb_start");
   for(;;) {
     var_07 = param_00.var_3DBF;
     var_08 = param_00.var_4C35;
-    var_09 = param_00.var_0116 - var_03;
+    var_09 = param_00.origin - var_03;
     if(length(var_09) > 0.01) {
       var_0A = vectorNormalize(var_09);
       if(var_04) {
@@ -327,46 +327,46 @@ func_1E9A(param_00, param_01) {
           var_0B = var_0B * -1 * var_08 + (0, -1 * var_09, 0);
         }
 
-        var_0C = self.var_001D;
+        var_0C = self.angles;
         if(var_05 < 1) {
           var_02 = vectorlerp(var_02, var_0B, var_05);
-          var_0C = angleslerp(self.var_001D, param_00.var_001D, var_05);
+          var_0C = angleslerp(self.angles, param_00.angles, var_05);
           var_05 = var_05 + 0.05;
         } else {
           var_02 = var_0B;
-          var_0C = param_00.var_001D;
+          var_0C = param_00.angles;
         }
 
-        self.var_0116 = param_00.var_0116 + var_02;
-        self.var_001D = var_0C;
+        self.origin = param_00.origin + var_02;
+        self.angles = var_0C;
       } else {
         var_0D = (0, 0, -1);
-        var_0E = anglesToForward(var_02.var_001D);
+        var_0E = anglesToForward(param_00.angles);
         var_0F = vectordot(var_0D, var_0E);
         if(var_0F > 0.99) {
-          var_06 = 1;
-          var_03 maps\mp\_utility::func_3E8E(0);
+          var_04 = 1;
+          param_01 maps\mp\_utility::func_3E8E(0);
           if(getdvarint("5270", 1)) {
-            var_03 setclientomnvar("ui_show_fritzx_hud", 1);
+            param_01 setclientomnvar("ui_show_fritzx_hud", 1);
           }
 
-          var_03 thread func_7CF0(var_02, var_03);
-          playFXOnTag(common_scripts\utility::func_44F5("fritz_streamers"), var_02, "tag_tip_fx");
-          playfxontagforclients(common_scripts\utility::func_44F5("fritz_flying_1P"), var_02, "tag_tip_fx", var_03);
-          var_0B = var_0C * -1 * var_09;
-          var_03 = vectorlerp(var_03, var_0F, var_06);
-          self.var_0116 = param_01.var_0116 + var_03;
-          self.var_001D = angleslerp(self.var_001D, param_01.var_001D, var_06);
-          var_06 = var_06 + 0.05;
-          var_02 thread func_5C81(param_01);
+          param_01 thread func_7CF0(param_00, param_01);
+          playFXOnTag(common_scripts\utility::func_44F5("fritz_streamers"), param_00, "tag_tip_fx");
+          playfxontagforclients(common_scripts\utility::func_44F5("fritz_flying_1P"), param_00, "tag_tip_fx", param_01);
+          var_0B = var_0A * -1 * var_07;
+          var_02 = vectorlerp(var_02, var_0B, var_05);
+          self.origin = param_00.origin + var_02;
+          self.angles = angleslerp(self.angles, param_00.angles, var_05);
+          var_05 = var_05 + 0.05;
+          param_01 thread func_5C81(param_00);
         } else {
-          self.var_0116 = var_02.var_0116 + (var_0A, 0, var_09);
+          self.origin = param_00.origin + (var_08, 0, var_07);
         }
       }
     }
 
-    var_09 = var_06.var_0116;
-    var_07 playRumbleOnEntity("damage_light");
+    var_03 = param_00.origin;
+    param_01 playRumbleOnEntity("damage_light");
     wait 0.05;
   }
 }
@@ -438,16 +438,16 @@ func_4434(param_00) {
     var_03.var_9099 = 0;
   }
 
-  foreach(var_06 in level.var_744A) {
+  foreach(var_06 in level.players) {
     if(!maps\mp\_utility::func_57A0(var_06)) {
       continue;
     }
 
-    if(var_06.var_01A7 == self.var_01A7) {
+    if(var_06.team == self.team) {
       continue;
     }
 
-    if(var_06.var_01A7 == "spectator") {
+    if(var_06.team == "spectator") {
       continue;
     }
 
@@ -455,7 +455,7 @@ func_4434(param_00) {
     var_08 = undefined;
     foreach(var_03 in param_00) {
       var_03.var_A280[var_03.var_A280.size] = var_06;
-      var_0A = distance2d(var_03.var_01A4.var_0116, var_06.var_0116);
+      var_0A = distance2d(var_03.targetent.origin, var_06.origin);
       if(var_0A <= var_07) {
         var_07 = var_0A;
         var_08 = var_03;
@@ -469,7 +469,7 @@ func_4434(param_00) {
   foreach(var_03 in param_00) {
     foreach(var_06 in var_03.var_A280) {
       var_03.var_9099 = var_03.var_9099 + 1;
-      if(bullettracepassed(var_06.var_0116 + (0, 0, 32), var_03.var_0116, 0, var_06)) {
+      if(bullettracepassed(var_06.origin + (0, 0, 32), var_03.origin, 0, var_06)) {
         var_03.var_9099 = var_03.var_9099 + 3;
       }
 
@@ -490,7 +490,7 @@ func_4434(param_00) {
 }
 
 func_624B(param_00, param_01, param_02, param_03) {
-  playFX(level.var_7C65["explode"], self.var_0116);
+  playFX(level.var_7C65["explode"], self.origin);
   var_04 = "fritzx_destroyed";
   maps\mp\gametypes\_damage::func_6B4B(param_00, param_01, param_02, param_03, var_04, undefined, undefined, 0);
   func_3EE9();
@@ -501,8 +501,8 @@ func_4433() {
   var_00 = spawnStruct();
   var_01 = common_scripts\utility::func_44BE("remoteMissileSpawn", "targetname");
   foreach(var_03 in var_01) {
-    if(isDefined(var_03.var_01A2)) {
-      var_03.var_01A4 = getEnt(var_03.var_01A2, "targetname");
+    if(isDefined(var_03.target)) {
+      var_03.targetent = getEnt(var_03.target, "targetname");
     }
   }
 
@@ -515,8 +515,8 @@ func_4433() {
   var_00.var_92FA = undefined;
   var_00.var_9834 = undefined;
   if(isDefined(var_05)) {
-    var_00.var_92FA = var_05.var_0116;
-    var_00.var_9834 = var_05.var_01A4.var_0116;
+    var_00.var_92FA = var_05.origin;
+    var_00.var_9834 = var_05.targetent.origin;
     var_06 = 5500;
     if(isDefined(level.var_7C62)) {
       var_06 = level.var_7C62;
@@ -525,12 +525,12 @@ func_4433() {
     var_07 = vectorNormalize(var_00.var_92FA - var_00.var_9834);
     var_00.var_92FA = var_07 * var_06 + var_00.var_9834;
   } else {
-    var_08 = (0, 0, level.var_067B["Launch_Value"].var_A416);
-    var_06 = level.var_067B["Launch_Value"].var_4DF8;
-    var_09 = level.var_067B["Launch_Value"].var_9826;
-    var_0A = anglesToForward(self.var_001D);
-    var_00.var_92FA = self.var_0116 + var_08 + var_0A * var_06 * -1;
-    var_00.var_9834 = self.var_0116 + var_0A * var_09;
+    var_08 = (0, 0, level.var_67B["Launch_Value"].var_A416);
+    var_06 = level.var_67B["Launch_Value"].var_4DF8;
+    var_09 = level.var_67B["Launch_Value"].var_9826;
+    var_0A = anglesToForward(self.angles);
+    var_00.var_92FA = self.origin + var_08 + var_0A * var_06 * -1;
+    var_00.var_9834 = self.origin + var_0A * var_09;
   }
 
   return var_00;
@@ -547,7 +547,7 @@ func_7445() {
   maps\mp\_utility::func_3E8E(1);
   func_7CEF(self);
   self setclientomnvar("ui_show_fritzx_hud", 0);
-  if(!level.var_3F9D || isDefined(self.var_3B4B)) {
+  if(!level.gameended || isDefined(self.finalkill)) {
     lib_0526::func_745C();
   }
 
@@ -559,7 +559,7 @@ func_7445() {
   lib_0526::func_A232(0);
   wait 0.05;
   self method_84B6();
-  self method_81E3();
+  self cameraunlink();
   maps\mp\_utility::func_3E8E(0);
   if(maps\mp\_utility::func_581D()) {
     maps\mp\_utility::func_2414();
@@ -575,7 +575,7 @@ func_7445() {
 func_7244(param_00) {
   param_00 endon("death");
   self endon("disconnect");
-  common_scripts\utility::func_A70A("joined_team", "joined_spectators");
+  common_scripts\utility::waittill_any("joined_team", "joined_spectators");
   self notify("missile_strike_complete");
   level.var_7C66 = undefined;
 }
@@ -589,8 +589,8 @@ func_7EB5() {
 }
 
 func_7242(param_00, param_01) {
-  common_scripts\utility::func_A70A("ms_early_exit", "missile_strike_complete", "disconnect");
-  param_00.var_3290 method_805C();
+  common_scripts\utility::waittill_any("ms_early_exit", "missile_strike_complete", "disconnect");
+  param_00.var_3290 hide();
   param_00.var_3290 delete();
   if(isDefined(self)) {
     self method_8201();

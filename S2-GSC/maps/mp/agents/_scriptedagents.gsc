@@ -90,17 +90,17 @@ func_441C(param_00, param_01, param_02) {
     } else if(var_05 > 0) {
       var_07 = var_03 / var_05;
     }
-  } else if(var_07 > 0) {
-    var_09 = var_05 / var_07;
+  } else if(var_05 > 0) {
+    var_07 = var_03 / var_05;
   }
 
-  if(abs(var_08) > 0.001 && var_08 * var_06 >= 0) {
-    var_0A = var_06 / var_08;
+  if(abs(var_06) > 0.001 && var_06 * var_04 >= 0) {
+    var_08 = var_04 / var_06;
   }
 
   var_0B = spawnStruct();
-  var_0B.var_AAE3 = var_09;
-  var_0B.var_01D9 = var_0A;
+  var_0B.var_AAE3 = var_07;
+  var_0B.z = var_08;
   return var_0B;
 }
 
@@ -123,7 +123,7 @@ func_34A6(param_00, param_01) {
 
   var_02 = param_00 + (0, 0, param_01);
   var_03 = param_00 + (0, 0, param_01 * -1);
-  var_04 = self method_83EB(var_02, var_03, self.var_014F, self.var_00BD, 1);
+  var_04 = self method_83EB(var_02, var_03, self.var_14F, self.height, 1);
   if(abs(var_04[2] - var_02[2]) < 0.1) {
     return undefined;
   }
@@ -141,13 +141,13 @@ func_1F5B(param_00, param_01, param_02, param_03) {
   }
 
   if(!isDefined(param_03)) {
-    param_03 = self.var_014F;
+    param_03 = self.var_14F;
   }
 
   var_04 = (0, 0, 1) * param_02;
   var_05 = param_00 + var_04;
   var_06 = param_01 + var_04;
-  return self method_83EC(var_05, var_06, param_03, self.var_00BD - param_02, 1);
+  return self method_83EC(var_05, var_06, param_03, self.height - param_02, 1);
 }
 
 func_470B(param_00, param_01, param_02) {
@@ -158,15 +158,15 @@ func_470B(param_00, param_01, param_02) {
   var_03 = (0, 0, 1) * param_02;
   var_04 = param_00 + var_03;
   var_05 = param_01 + var_03;
-  return self method_83EB(var_04, var_05, self.var_014F + 4, self.var_00BD - param_02, 1);
+  return self method_83EB(var_04, var_05, self.var_14F + 4, self.height - param_02, 1);
 }
 
 func_466C(param_00) {
   var_01 = getmovedelta(param_00);
   var_02 = self localtoworldcoords(var_01);
-  var_03 = func_470B(self.var_0116, var_02);
-  var_04 = distance(self.var_0116, var_03);
-  var_05 = distance(self.var_0116, var_02);
+  var_03 = func_470B(self.origin, var_02);
+  var_04 = distance(self.origin, var_03);
+  var_05 = distance(self.origin, var_02);
   return min(1, var_04 / var_05);
 }
 
@@ -200,6 +200,6 @@ func_464A(param_00) {
 
 func_4415(param_00) {
   var_01 = vectortoangles(param_00);
-  var_02 = angleclamp180(var_01[1] - self.var_001D[1]);
+  var_02 = angleclamp180(var_01[1] - self.angles[1]);
   return func_4414(var_02);
 }

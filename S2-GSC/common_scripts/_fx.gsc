@@ -12,53 +12,53 @@ func_52BD() {
     level.var_3F02["create_triggerfx"] = ::func_27C2;
   }
 
-  if(!isDefined(level.var_062E)) {
-    level.var_062E = spawnStruct();
+  if(!isDefined(level.var_62E)) {
+    level.var_62E = spawnStruct();
   }
 
   common_scripts\utility::func_27A6("createfx_looper", 20);
   level.var_3F70 = 1;
-  level.var_062E.var_3945 = ::common_scripts\_exploder::func_392D;
+  level.var_62E.var_3945 = ::common_scripts\_exploder::func_392D;
   waittillframeend;
   waittillframeend;
-  level.var_062E.var_3945 = ::common_scripts\_exploder::func_392B;
-  level.var_062E.var_83F3 = 0;
+  level.var_62E.var_3945 = ::common_scripts\_exploder::func_392B;
+  level.var_62E.var_83F3 = 0;
   if(getdvarint("1189") == 1) {
-    level.var_062E.var_83F3 = 1;
+    level.var_62E.var_83F3 = 1;
   }
 
   if(level.var_27F6) {
-    level.var_062E.var_83F3 = 0;
+    level.var_62E.var_83F3 = 0;
   }
 
   if(level.var_27F6) {
     level waittill("createfx_common_done");
   }
 
-  level.var_062E.var_8F32 = [];
+  level.var_62E.var_8F32 = [];
   for(var_00 = 0; var_00 < level.var_2804.size; var_00++) {
     var_01 = level.var_2804[var_00];
     var_01 common_scripts\_createfx::func_84A8();
     switch (var_01.var_A265["type"]) {
       case "loopfx":
-        var_01 thread func_5EF5();
+        var_01 thread loopfxthread();
         break;
 
       case "oneshotfx":
-        var_01 thread func_6B11();
+        var_01 thread oneshotfxthread();
         break;
 
       case "soundfx":
-        var_01 thread func_27A8();
-        if(isDefined(var_01.var_A265["end_notify"]) && !common_scripts\utility::func_0F79(level.var_062E.var_8F32, var_01.var_A265["end_notify"])) {
-          level.var_062E.var_8F32[level.var_062E.var_8F32.size] = var_01.var_A265["end_notify"];
+        var_01 thread create_loopsound();
+        if(isDefined(var_01.var_A265["end_notify"]) && !common_scripts\utility::func_F79(level.var_62E.var_8F32, var_01.var_A265["end_notify"])) {
+          level.var_62E.var_8F32[level.var_62E.var_8F32.size] = var_01.var_A265["end_notify"];
         }
         break;
 
       case "soundfx_interval":
         var_01 thread func_27A1();
-        if(isDefined(var_01.var_A265["end_notify"]) && !common_scripts\utility::func_0F79(level.var_062E.var_8F32, var_01.var_A265["end_notify"])) {
-          level.var_062E.var_8F32[level.var_062E.var_8F32.size] = var_01.var_A265["end_notify"];
+        if(isDefined(var_01.var_A265["end_notify"]) && !common_scripts\utility::func_F79(level.var_62E.var_8F32, var_01.var_A265["end_notify"])) {
+          level.var_62E.var_8F32[level.var_62E.var_8F32.size] = var_01.var_A265["end_notify"];
         }
         break;
 
@@ -90,7 +90,7 @@ func_770F(param_00, param_01, param_02, param_03) {
 func_7085() {
   if(isDefined(self.var_A265["platform"])) {
     var_00 = self.var_A265["platform"];
-    if((var_00 == "ng" && !level.var_010B) || (var_00 == "pc" && !level.var_0122) || (var_00 == "xb3" && !level.var_01D4) || (var_00 == "ps4" && !level.var_0148) || (var_00 == "!ng" && level.var_010B) || (var_00 == "!pc" && level.var_0122) || (var_00 == "!xb3" && level.var_01D4) || var_00 == "!ps4" && level.var_0148) {
+    if((var_00 == "ng" && !level.var_10B) || (var_00 == "pc" && !level.var_122) || (var_00 == "xb3" && !level.var_1D4) || (var_00 == "ps4" && !level.var_148) || (var_00 == "!ng" && level.var_10B) || (var_00 == "!pc" && level.var_122) || (var_00 == "!xb3" && level.var_1D4) || var_00 == "!ps4" && level.var_148) {
       return 0;
     }
   }
@@ -125,32 +125,32 @@ func_3946(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   var_14 = spawn("script_origin", (0, 0, 0));
-  var_14.var_0116 = param_02;
-  var_14.var_001D = vectortoangles(param_04 - param_02);
-  var_14.var_8186 = param_00;
-  var_14.var_81BB = param_01;
-  var_14.var_0161 = param_03;
-  var_14.var_8193 = param_05;
-  var_14.var_8194 = param_06;
-  var_14.var_8195 = param_07;
-  var_14.var_828A = param_08;
-  var_14.var_817B = param_09;
-  var_14.var_8146 = param_0A;
-  var_14.var_8276 = param_0F;
-  var_14.var_828B = param_0B;
-  var_14.var_8196 = param_10;
-  var_14.var_8278 = param_0C;
-  var_14.var_8154 = param_0D;
-  var_14.var_8153 = param_0E;
-  var_14.var_8188 = param_11;
-  var_15 = anglesToForward(var_14.var_001D);
+  var_14.origin = param_03;
+  var_14.angles = vectortoangles(param_05 - param_03);
+  var_14.var_8186 = param_01;
+  var_14.var_81BB = param_02;
+  var_14.var_161 = param_04;
+  var_14.var_8193 = param_06;
+  var_14.var_8194 = param_07;
+  var_14.var_8195 = param_08;
+  var_14.var_828A = param_09;
+  var_14.var_817B = param_0A;
+  var_14.var_8146 = param_0B;
+  var_14.var_8276 = param_10;
+  var_14.var_828B = param_0C;
+  var_14.var_8196 = param_11;
+  var_14.var_8278 = param_0D;
+  var_14.var_8154 = param_0E;
+  var_14.var_8153 = param_0F;
+  var_14.var_8188 = var_12;
+  var_15 = anglesToForward(var_14.angles);
   var_15 = var_15 * 150;
-  var_14.var_9834 = param_02 + var_15;
-  if(!isDefined(level.var_06CC)) {
-    level.var_06CC = [];
+  var_14.var_9834 = param_03 + var_15;
+  if(!isDefined(level.var_6CC)) {
+    level.var_6CC = [];
   }
 
-  level.var_06CC[level.var_06CC.size] = var_14;
+  level.var_6CC[level.var_6CC.size] = var_14;
 }
 
 func_5EEE(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
@@ -165,11 +165,11 @@ func_5EEE(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 }
 
 func_27A7() {
-  self.var_5EED = playloopedfx(level.var_0611[self.var_A265["fxid"]], self.var_A265["delay"], self.var_A265["origin"], 0, self.var_A265["forward"], self.var_A265["up"]);
-  func_27A8();
+  self.var_5EED = playloopedfx(level.var_611[self.var_A265["fxid"]], self.var_A265["delay"], self.var_A265["origin"], 0, self.var_A265["forward"], self.var_A265["up"]);
+  create_loopsound();
 }
 
-func_27A8() {
+create_loopsound() {
   if(!func_7085()) {
     return;
   }
@@ -191,7 +191,7 @@ func_27A8() {
     } else {
       var_01 = "stop_loop";
     }
-  } else if(level.var_062E.var_83F3 && isDefined(self.var_A265["server_culled"])) {
+  } else if(level.var_62E.var_83F3 && isDefined(self.var_A265["server_culled"])) {
     var_00 = self.var_A265["server_culled"];
   }
 
@@ -258,15 +258,15 @@ func_2794() {
   }
 
   if(isDefined(self.var_29FB)) {
-    level.var_721C stopdynamicambience(self.var_29FB.var_A01E);
+    level.player stopdynamicambience(self.var_29FB.var_A01E);
   }
 
   self.var_29FB = spawnStruct();
   self.var_29FB common_scripts\utility::func_10DA();
-  level.var_721C playdynamicambience(self.var_A265["ambiencename"], self.var_A265["origin"], self.var_A265["dynamic_distance"], self.var_29FB.var_A01E);
+  level.player playdynamicambience(self.var_A265["ambiencename"], self.var_A265["origin"], self.var_A265["dynamic_distance"], self.var_29FB.var_A01E);
 }
 
-func_5EF5() {
+loopfxthread() {
   wait 0.05;
   if(isDefined(self.var_3F7E)) {
     level waittill("start fx" + self.var_3F7E);
@@ -304,7 +304,7 @@ func_5EF2(param_00) {
   self endon("death");
   for(;;) {
     param_00 waittill("effect org changed", var_01);
-    self.var_0116 = var_01;
+    self.origin = var_01;
   }
 }
 
@@ -331,7 +331,7 @@ func_5F02(param_00, param_01, param_02) {
 
 func_5F06(param_00, param_01, param_02) {
   var_03 = spawn("script_origin", param_01);
-  var_03.var_0116 = param_01;
+  var_03.origin = param_01;
   var_03 method_861D(param_00);
 }
 
@@ -366,7 +366,7 @@ func_48E2(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   var_0D = param_02;
   var_0E = param_03 - param_02;
-  var_0F = spawnfx(level.var_0611[param_00], param_01);
+  var_0F = spawnfx(level.var_611[param_00], param_01);
   if(!level.var_27F6) {
     var_0F method_80D4();
   }
@@ -414,7 +414,7 @@ func_48E4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_0E = param_03;
   var_0F = param_04 - param_03;
   param_02 = vectorNormalize(param_02 - param_01);
-  var_10 = spawnfx(level.var_0611[param_00], param_01, param_02);
+  var_10 = spawnfx(level.var_611[param_00], param_01, param_02);
   if(!level.var_27F6) {
     var_10 method_80D4();
   }
@@ -441,22 +441,22 @@ func_8681(param_00) {
 }
 
 func_8834() {
-  if(!isDefined(self.var_81BB) || !isDefined(self.var_81BA) || !isDefined(self.var_0161)) {
+  if(!isDefined(self.var_81BB) || !isDefined(self.var_81BA) || !isDefined(self.var_161)) {
     return;
   }
 
-  if(isDefined(self.var_0106)) {
-    if(self.var_0106 == "toilet") {
+  if(isDefined(self.model)) {
+    if(self.model == "toilet") {
       thread func_1DB1();
       return;
     }
   }
 
   var_00 = undefined;
-  if(isDefined(self.var_01A2)) {
-    var_01 = getEnt(self.var_01A2, "targetname");
+  if(isDefined(self.target)) {
+    var_01 = getEnt(self.target, "targetname");
     if(isDefined(var_01)) {
-      var_00 = var_01.var_0116;
+      var_00 = var_01.origin;
     }
   }
 
@@ -471,24 +471,24 @@ func_8834() {
   }
 
   if(self.var_81BA == "OneShotfx") {
-    func_6B10(self.var_81BB, self.var_0116, self.var_0161, var_00);
+    func_6B10(self.var_81BB, self.origin, self.var_161, var_00);
   }
 
   if(self.var_81BA == "loopfx") {
-    func_5EEE(self.var_81BB, self.var_0116, self.var_0161, var_00, var_02, var_03);
+    func_5EEE(self.var_81BB, self.origin, self.var_161, var_00, var_02, var_03);
   }
 
   if(self.var_81BA == "loopsound") {
-    func_5F02(self.var_81BB, self.var_0116, self.var_0161);
+    func_5F02(self.var_81BB, self.origin, self.var_161);
   }
 
   self delete();
 }
 
 func_1DB1() {
-  var_00 = (0, 0, self.var_001D[1]);
-  var_01 = level.var_0611[self.var_81BB];
-  var_02 = self.var_0116;
+  var_00 = (0, 0, self.angles[1]);
+  var_01 = level.var_611[self.var_81BB];
+  var_02 = self.origin;
   wait(1);
   level thread func_1DB2(var_00, var_02, var_01);
   self delete();
@@ -506,25 +506,25 @@ func_27C2() {
     return;
   }
 
-  self.var_5EED = spawnfx(level.var_0611[self.var_A265["fxid"]], self.var_A265["origin"], self.var_A265["forward"], self.var_A265["up"]);
+  self.var_5EED = spawnfx(level.var_611[self.var_A265["fxid"]], self.var_A265["origin"], self.var_A265["forward"], self.var_A265["up"]);
   triggerfx(self.var_5EED, self.var_A265["delay"]);
   if(!level.var_27F6) {
     self.var_5EED method_80D4();
   }
 
-  func_27A8();
+  create_loopsound();
 }
 
 func_A411(param_00) {
-  if(isDefined(level.var_0611[param_00])) {
+  if(isDefined(level.var_611[param_00])) {
     return 1;
   }
 
-  if(!isDefined(level.var_067C)) {
-    level.var_067C = [];
+  if(!isDefined(level.var_67C)) {
+    level.var_67C = [];
   }
 
-  level.var_067C[self.var_A265["fxid"]] = param_00;
+  level.var_67C[self.var_A265["fxid"]] = param_00;
   func_A412(param_00);
   return 0;
 }
@@ -534,13 +534,13 @@ func_A412(param_00) {
   level endon("verify_effects_assignment_print");
   wait 0.05;
   var_01 = "";
-  var_02 = getarraykeys(level.var_067C);
+  var_02 = getarraykeys(level.var_67C);
   foreach(var_04 in var_02) {
     var_01 = var_01 + var_04 + "\n";
   }
 }
 
-func_6B11() {
+oneshotfxthread() {
   wait 0.05;
   if(!func_7085()) {
     return;
@@ -562,16 +562,16 @@ func_0958() {
     return;
   }
 
-  if(!isDefined(level.var_062E.var_7AB0)) {
-    level.var_062E.var_7AB0 = 1;
+  if(!isDefined(level.var_62E.var_7AB0)) {
+    level.var_62E.var_7AB0 = 1;
     level thread func_7AAE();
   }
 
-  if(!isDefined(level.var_062E.var_7AAD)) {
-    level.var_062E.var_7AAD = [];
+  if(!isDefined(level.var_62E.var_7AAD)) {
+    level.var_62E.var_7AAD = [];
   }
 
-  level.var_062E.var_7AAD[level.var_062E.var_7AAD.size] = self;
+  level.var_62E.var_7AAD[level.var_62E.var_7AAD.size] = self;
   self.var_66AE = 3000;
 }
 
@@ -582,7 +582,7 @@ func_7AAE() {
     }
   }
 
-  level.var_062E.var_7AAF = [];
+  level.var_62E.var_7AAF = [];
   var_00 = 256;
   for(;;) {
     level waittill("code_damageradius", var_01, var_00, var_02, var_03);
@@ -600,7 +600,7 @@ func_A2B8(param_00) {
 func_8F21(param_00, param_01) {
   var_02 = [];
   var_03 = gettime();
-  foreach(var_05 in level.var_062E.var_7AAD) {
+  foreach(var_05 in level.var_62E.var_7AAD) {
     if(var_05.var_66AE > var_03) {
       continue;
     }
@@ -613,8 +613,8 @@ func_8F21(param_00, param_01) {
   }
 
   foreach(var_05 in var_02) {
-    var_09 = func_A2B8(var_05.var_A265["origin"] - level.var_721C.var_0116);
-    var_0A = func_A2B8(param_00 - level.var_721C.var_0116);
+    var_09 = func_A2B8(var_05.var_A265["origin"] - level.player.origin);
+    var_0A = func_A2B8(param_00 - level.player.origin);
     var_0B = vectorNormalize(var_09);
     var_0C = vectorNormalize(var_0A);
     var_05.var_32B1 = vectordot(var_0B, var_0C);
@@ -631,7 +631,7 @@ func_8F21(param_00, param_01) {
   }
 
   foreach(var_05 in var_02) {
-    var_05.var_0116 = undefined;
+    var_05.origin = undefined;
     var_05.var_32B1 = undefined;
   }
 
@@ -649,14 +649,14 @@ func_718B(param_00) {
   }
 
   self.var_66AE = gettime() + 3000;
-  var_01.var_0116 = self.var_A265["origin"];
+  var_01.origin = self.var_A265["origin"];
   var_01.var_55E4 = 1;
   wait(param_00 * randomfloatrange(0.05, 0.1));
   if(common_scripts\utility::func_57D7()) {
-    var_01 method_8617(self.var_A265["soundalias"], "sounddone");
+    var_01 playSound(self.var_A265["soundalias"], "sounddone");
     var_01 waittill("sounddone");
   } else {
-    var_01 method_8617(self.var_A265["soundalias"]);
+    var_01 playSound(self.var_A265["soundalias"]);
     wait(2);
   }
 
@@ -665,16 +665,16 @@ func_718B(param_00) {
 }
 
 func_42F0() {
-  foreach(var_01 in level.var_062E.var_7AAF) {
+  foreach(var_01 in level.var_62E.var_7AAF) {
     if(!var_01.var_55E4) {
       return var_01;
     }
   }
 
-  if(level.var_062E.var_7AAF.size < 4) {
+  if(level.var_62E.var_7AAF.size < 4) {
     var_01 = spawn("script_origin", (0, 0, 0));
     var_01.var_55E4 = 0;
-    level.var_062E.var_7AAF[level.var_062E.var_7AAF.size] = var_01;
+    level.var_62E.var_7AAF[level.var_62E.var_7AAF.size] = var_01;
     return var_01;
   }
 
@@ -683,7 +683,7 @@ func_42F0() {
 
 func_8F33() {
   for(;;) {
-    var_00 = level common_scripts\utility::func_A712(level.var_062E.var_8F32);
+    var_00 = level common_scripts\utility::func_A712(level.var_62E.var_8F32);
     for(var_01 = 0; var_01 < level.var_2804.size; var_01++) {
       var_02 = level.var_2804[var_01];
       if(var_02.var_A265["type"] == "soundfx_interval" || var_02.var_A265["type"] == "soundfx") {

@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_nest_ee_paintings.gsc
 ***************************************************/
 
-func_00F9() {
+main() {
   level.var_3589 = 3000;
   level.var_3582 = 4;
   level.var_3583 = 5;
@@ -104,7 +104,7 @@ func_7877() {
   }
 
   common_scripts\utility::func_3C9F("flag_correct_code_entered");
-  thread maps\mp\mp_zombie_nest_ee_util::func_4D78(3);
+  thread maps / mp / mp_zombie_nest_ee_util::func_4D78(3);
   level.var_357F common_scripts\utility::func_9D9F();
   if(!lib_0557::func_783E("7 Voice paintings", "find code pieces")) {
     lib_0557::func_782D("7 Voice paintings", "find code pieces");
@@ -114,7 +114,7 @@ func_7877() {
 }
 
 func_6DF3() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 maps\mp\zombies\_zombies_rank::func_AC23("voiceofgod");
     var_01 lib_0378::func_8D74("objective_complete", "voiceofgod");
   }
@@ -146,7 +146,7 @@ func_8A24() {
     }
 
     var_02 = 1;
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       if(!common_scripts\utility::func_562E(var_04.var_306F)) {
         var_02 = 0;
         break;
@@ -182,7 +182,7 @@ func_8A25() {
     }
 
     var_02 = 1;
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       if(!common_scripts\utility::func_562E(var_04.var_3070)) {
         var_02 = 0;
         break;
@@ -204,9 +204,9 @@ func_8A25() {
 func_8A46() {
   level.var_357F = getEnt("sonic_amp_confirm_code_trig", "targetname");
   level.var_357F common_scripts\utility::func_9D9F();
-  level.var_357F.var_0CAB = getEnt("sonic_amp_control", "targetname");
-  if(isDefined(level.var_357F.var_0CAB)) {
-    level.var_357F.var_0CAB thread maps\mp\mp_zombie_nest_ee_util::func_4D77("off");
+  level.var_357F.var_CAB = getEnt("sonic_amp_control", "targetname");
+  if(isDefined(level.var_357F.var_CAB)) {
+    level.var_357F.var_CAB thread maps / mp / mp_zombie_nest_ee_util::func_4D77("off");
   }
 
   var_00 = common_scripts\utility::func_46B7("sonic_amp_tumbler", "targetname");
@@ -215,20 +215,20 @@ func_8A46() {
     var_04 = var_03.var_8260;
     var_05 = getsubstr(var_04, var_01.size, var_04.size);
     var_05 = int(common_scripts\utility::func_9468(var_05)) - 1;
-    var_06 = common_scripts\utility::func_44BE(var_03.var_01A2, "targetname");
+    var_06 = common_scripts\utility::func_44BE(var_03.target, "targetname");
     foreach(var_08 in var_06) {
-      if(!isDefined(var_08.var_0165)) {
+      if(!isDefined(var_08.script_noteworthy)) {
         continue;
       }
 
-      var_09 = var_08.var_0165;
+      var_09 = var_08.script_noteworthy;
       switch (var_09) {
         case "amp_trig":
           var_03.var_9E46 = var_08;
           break;
 
         case "amp_model":
-          var_03.var_0DBE = var_08;
+          var_03.var_DBE = var_08;
           break;
 
         default:
@@ -247,9 +247,9 @@ func_8A46() {
 }
 
 func_3664(param_00) {
-  if(isDefined(level.var_357F.var_0CAB) && !param_00) {
+  if(isDefined(level.var_357F.var_CAB) && !param_00) {
     level.var_357F.var_4D91 = lib_0559::func_7BE3(level.var_357F, "vog");
-    level.var_357F.var_0CAB thread maps\mp\mp_zombie_nest_ee_util::func_4D77("red");
+    level.var_357F.var_CAB thread maps / mp / mp_zombie_nest_ee_util::func_4D77("red");
   }
 
   level.var_357F common_scripts\utility::func_9DA3();
@@ -285,7 +285,7 @@ func_5308() {
       level.var_3580[var_00] thread func_8B29(var_00);
     }
 
-    if(isDefined(level.var_3580[var_00].var_0DBE)) {
+    if(isDefined(level.var_3580[var_00].var_DBE)) {
       level.var_3580[var_00] thread func_8C28();
     }
   }
@@ -325,25 +325,25 @@ func_2580(param_00) {
       }
     }
 
-    if(isDefined(level.var_357F.var_0CAB)) {
-      level.var_357F.var_0CAB thread maps\mp\mp_zombie_nest_ee_util::func_4D76();
+    if(isDefined(level.var_357F.var_CAB)) {
+      level.var_357F.var_CAB thread maps / mp / mp_zombie_nest_ee_util::func_4D76();
     }
 
     if(var_03) {
-      if(isDefined(level.var_357F.var_0CAB)) {
-        level.var_357F.var_0CAB thread maps\mp\mp_zombie_nest_ee_util::func_4D77("green");
+      if(isDefined(level.var_357F.var_CAB)) {
+        level.var_357F.var_CAB thread maps / mp / mp_zombie_nest_ee_util::func_4D77("green");
       }
 
       if(!param_00) {
-        level.var_357F.var_0CAB lib_0378::func_8D74("voice_of_god_start", level.var_3580, level.var_3581);
+        level.var_357F.var_CAB lib_0378::func_8D74("voice_of_god_start", level.var_3580, level.var_3581);
       }
 
       var_05 = common_scripts\utility::func_46B7("sonic_amp_tumbler", "targetname");
       foreach(var_07 in var_05) {
-        var_08 = getEntArray(var_07.var_01A2, "targetname");
+        var_08 = getEntArray(var_07.target, "targetname");
         foreach(var_0A in var_08) {
-          if(var_0A.var_003A == "script_model") {
-            playFXOnTag(level.var_0611["zmb_vog_code_correct"], var_0A, "Flute");
+          if(var_0A.classname == "script_model") {
+            playFXOnTag(level.var_611["zmb_vog_code_correct"], var_0A, "Flute");
           }
         }
       }
@@ -355,13 +355,13 @@ func_2580(param_00) {
 
       break;
     } else {
-      level.var_357F.var_0CAB lib_0378::func_8D74("voice_of_god_fail");
+      level.var_357F.var_CAB lib_0378::func_8D74("voice_of_god_fail");
       var_05 = common_scripts\utility::func_46B7("sonic_amp_tumbler", "targetname");
       foreach(var_07 in var_05) {
-        var_08 = getEntArray(var_07.var_01A2, "targetname");
+        var_08 = getEntArray(var_07.target, "targetname");
         foreach(var_0A in var_08) {
-          if(var_0A.var_003A == "script_model") {
-            playFXOnTag(level.var_0611["zmb_vog_code_incorrect"], var_0A, "Flute");
+          if(var_0A.classname == "script_model") {
+            playFXOnTag(level.var_611["zmb_vog_code_incorrect"], var_0A, "Flute");
           }
         }
       }
@@ -379,9 +379,9 @@ func_2580(param_00) {
 func_8B29(param_00) {
   level endon("game_ended");
   level endon("vog_disabled");
-  var_01 = common_scripts\utility::func_46B5(self.var_9E46.var_01A2, "targetname");
+  var_01 = common_scripts\utility::func_46B5(self.var_9E46.target, "targetname");
   if(isDefined(var_01)) {
-    self.var_9E46 usetouchtriggerrequirefacingposition(1, var_01.var_0116);
+    self.var_9E46 usetouchtriggerrequirefacingposition(1, var_01.origin);
   }
 
   for(;;) {
@@ -426,25 +426,25 @@ func_2EBA(param_00, param_01) {
 }
 
 func_8C28() {
-  self.var_0DBE hidepart("TAG_BLOOD");
-  self.var_0DBE hidepart("TAG_DEATH");
-  self.var_0DBE hidepart("TAG_MOON");
-  self.var_0DBE hidepart("TAG_STORM");
+  self.var_DBE hidepart("TAG_BLOOD");
+  self.var_DBE hidepart("TAG_DEATH");
+  self.var_DBE hidepart("TAG_MOON");
+  self.var_DBE hidepart("TAG_STORM");
   switch (self.var_9E45) {
     case 0:
-      self.var_0DBE showpart("TAG_BLOOD");
+      self.var_DBE showpart("TAG_BLOOD");
       break;
 
     case 1:
-      self.var_0DBE showpart("TAG_MOON");
+      self.var_DBE showpart("TAG_MOON");
       break;
 
     case 2:
-      self.var_0DBE showpart("TAG_DEATH");
+      self.var_DBE showpart("TAG_DEATH");
       break;
 
     case 3:
-      self.var_0DBE showpart("TAG_STORM");
+      self.var_DBE showpart("TAG_STORM");
       break;
   }
 }
@@ -481,23 +481,23 @@ func_A185(param_00) {
     return;
   }
 
-  self.var_0DBE lib_0378::func_8D74("voice_of_god_update_tumbler", var_02);
+  self.var_DBE lib_0378::func_8D74("voice_of_god_update_tumbler", var_02);
   var_04 = getanimlength(var_03);
-  self.var_0DBE scriptmodelplayanim(getanimname(var_03));
+  self.var_DBE scriptmodelplayanim(getanimname(var_03));
   wait(var_04);
 }
 
 func_8A39() {
   level.var_3581 = func_7A54();
   level.var_358A = common_scripts\utility::func_46B7("code_painting", "targetname");
-  level.var_358A common_scripts\utility::func_0F92(level.var_358A);
+  level.var_358A common_scripts\utility::func_F92(level.var_358A);
   for(var_00 = 0; var_00 < level.var_358A.size; var_00++) {
     level.var_358A[var_00].var_248B = undefined;
     level.var_358A[var_00].var_8CA4 = undefined;
     level.var_358A[var_00].var_9DC2 = [];
-    var_01 = common_scripts\utility::func_44BE(level.var_358A[var_00].var_01A2, "targetname");
+    var_01 = common_scripts\utility::func_44BE(level.var_358A[var_00].target, "targetname");
     foreach(var_03 in var_01) {
-      var_04 = var_03.var_0165;
+      var_04 = var_03.script_noteworthy;
       if(!isDefined(var_04)) {
         continue;
       }
@@ -538,11 +538,11 @@ func_8A39() {
     if(var_00 > level.var_3582) {}
 
     for(var_07 = 0; var_07 < 4; var_07++) {
-      level.var_358A[var_00].var_9DC2[var_07].var_6DF0 = level.var_358A[var_00].var_0165;
+      level.var_358A[var_00].var_9DC2[var_07].var_6DF0 = level.var_358A[var_00].script_noteworthy;
       thread lib_0547::func_8A4F(level.var_358A[var_00].var_9DC2[var_07], ::func_10E0);
     }
 
-    lib_057E::func_0984(level.var_358A[var_00], level.var_358A[var_00].var_6DEF, ::func_6DF2);
+    lib_057E::func_984(level.var_358A[var_00], level.var_358A[var_00].var_6DEF, ::func_6DF2);
   }
 }
 
@@ -614,10 +614,10 @@ func_45FA(param_00) {
 }
 
 func_8A22() {
-  maps\mp\mp_zombie_nest_ee_util::func_A6BB();
+  maps / mp / mp_zombie_nest_ee_util::func_A6BB();
   var_00 = 0;
   while(!var_00) {
-    foreach(var_02 in level.var_744A) {
+    foreach(var_02 in level.players) {
       if(lib_057E::func_314D(var_02)) {
         var_00 = 1;
       }
@@ -651,7 +651,7 @@ func_2E7D(param_00) {
 
   foreach(var_05 in level.var_358A) {
     foreach(var_07 in var_05.var_9DC2) {
-      if(var_01 lib_0547::func_0696(var_07)) {
+      if(var_01 lib_0547::func_696(var_07)) {
         var_07 disableplayeruse(var_01);
         var_07 setHintString(&"ZOMBIES_EMPTY_STRING");
         var_07 notify("player_checked_a_painting");
@@ -741,15 +741,15 @@ func_6DF2(param_00, param_01) {
 
 func_455A() {
   var_00 = [];
-  var_01 = self.var_01A2;
+  var_01 = self.target;
   for(;;) {
     var_02 = getEnt(var_01, "targetname");
-    if(common_scripts\utility::func_0F79(var_00, var_02)) {
+    if(common_scripts\utility::func_F79(var_00, var_02)) {
       break;
     } else {
       var_00[var_00.size] = var_02;
-      if(isDefined(var_00[var_00.size - 1].var_01A2)) {
-        var_01 = var_00[var_00.size - 1].var_01A2;
+      if(isDefined(var_00[var_00.size - 1].target)) {
+        var_01 = var_00[var_00.size - 1].target;
         continue;
       }
 

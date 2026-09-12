@@ -3,9 +3,9 @@
  * Script: maps\mp\killstreaks\_paratroopers.gsc
 *************************************************/
 
-func_00D5() {
+init() {
   thread func_87A7();
-  level.var_0611["paratrooper_landing"] = loadfx("vfx/code/paratrooper_land_medium");
+  level.var_611["paratrooper_landing"] = loadfx("vfx/code/paratrooper_land_medium");
   level.var_6E5E = getEntArray("paratrooper_bad_lz", "targetname");
   level.var_6E71 = [];
   setDvar("show_bad_paratrooper_origins", 0);
@@ -42,17 +42,17 @@ func_87A7() {
   level.paratrooper_chute_deploy_anims_vm = ["human_parachute_raids_deploy_a", "human_parachute_raids_deploy_a", "human_parachute_raids_deploy_a", "human_parachute_raids_deploy_a", "human_parachute_raids_deploy_a"];
   level.paratrooper_chute_loop_anims_vm = ["human_parachute_raids_loop_a", "human_parachute_raids_loop_a", "human_parachute_raids_loop_a", "human_parachute_raids_loop_a", "human_parachute_raids_loop_a"];
   level.var_5A7D["agent_mp"] = "paratroopers";
-  level.var_5A61["paratroopers"] = ::func_9E36;
-  level.var_0A41["paratroopers"] = [];
-  level.var_0A41["paratroopers"]["spawn"] = ::func_8FE1;
-  level.var_0A41["paratroopers"]["think"] = ::func_6E69;
-  level.var_0A41["paratroopers"]["on_killed"] = ::func_6AA6;
-  while(!isDefined(level.var_0A41) || !isDefined(level.var_0A41["player"])) {
+  level.killstreakfuncs["paratroopers"] = ::func_9E36;
+  level.var_A41["paratroopers"] = [];
+  level.var_A41["paratroopers"]["spawn"] = ::func_8FE1;
+  level.var_A41["paratroopers"]["think"] = ::func_6E69;
+  level.var_A41["paratroopers"]["on_killed"] = ::func_6AA6;
+  while(!isDefined(level.var_A41) || !isDefined(level.var_A41["player"])) {
     wait 0.05;
   }
 
-  level.var_0A41["paratroopers"]["on_damaged"] = level.var_0A41["player"]["on_damaged"];
-  level.var_0A41["paratroopers"]["on_damaged_finished"] = level.var_0A41["player"]["on_damaged_finished"];
+  level.var_A41["paratroopers"]["on_damaged"] = level.var_A41["player"]["on_damaged"];
+  level.var_A41["paratroopers"]["on_damaged_finished"] = level.var_A41["player"]["on_damaged_finished"];
 }
 
 func_9E36(param_00) {
@@ -61,19 +61,19 @@ func_9E36(param_00) {
   }
 
   if(level.var_6E70 > 0) {
-    self iclientprintlnbold(&"KILLSTREAKS_TOO_MANY_PARATROOPERS");
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_PARATROOPERS");
     return 0;
   }
 
-  if(maps\mp\agents\_agent_utility::func_45BB("paratroopers") >= 1) {
-    self iclientprintlnbold(&"KILLSTREAKS_TOO_MANY_PARATROOPERS");
+  if(maps / mp / agents / _agent_utility::func_45BB("paratroopers") >= 1) {
+    self iprintlnbold(&"KILLSTREAKS_TOO_MANY_PARATROOPERS");
     return 0;
   }
 
-  var_01 = maps\mp\_utility::func_0649("specialty_improvedstreaks");
-  var_02 = maps\mp\agents\_agent_utility::get_max_agents();
-  if(maps\mp\agents\_agent_utility::func_45BB() >= var_02) {
-    self iclientprintlnbold(&"KILLSTREAKS_UNAVAILABLE");
+  var_01 = maps\mp\_utility::_hasperk("specialty_improvedstreaks");
+  var_02 = maps / mp / agents / _agent_utility::get_max_agents();
+  if(maps / mp / agents / _agent_utility::func_45BB() >= var_02) {
+    self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE");
     return 0;
   }
 
@@ -83,8 +83,8 @@ func_9E36(param_00) {
 
   if(isDefined(level.var_7043)) {
     foreach(var_04 in level.var_7043) {
-      if(isDefined(var_04.var_01C8) && var_04.var_01C8 == "paratroopers") {
-        self iclientprintlnbold(&"KILLSTREAKS_TOO_MANY_PARATROOPERS");
+      if(isDefined(var_04.var_1C8) && var_04.var_1C8 == "paratroopers") {
+        self iprintlnbold(&"KILLSTREAKS_TOO_MANY_PARATROOPERS");
         return 0;
       }
     }
@@ -92,7 +92,7 @@ func_9E36(param_00) {
 
   func_3B7C();
   if(!isDefined(self.var_6E68) || (!var_01 && self.var_6E68.size < 4) || var_01 && self.var_6E68.size < 5) {
-    self iclientprintlnbold(&"KILLSTREAKS_NO_PARATROOPER_LZ");
+    self iprintlnbold(&"KILLSTREAKS_NO_PARATROOPER_LZ");
     return 0;
   }
 
@@ -101,29 +101,29 @@ func_9E36(param_00) {
 }
 
 func_A1EA(param_00, param_01) {
-  maps\mp\_matchdata::func_5E9A("paratroopers", self.var_0116);
+  maps\mp\_matchdata::func_5E9A("paratroopers", self.origin);
   var_02 = lib_0527::func_4570();
-  lib_0527::func_9302(param_00, [self.var_0116], [var_02], param_01);
+  lib_0527::func_9302(param_00, [self.origin], [var_02], param_01);
   return 1;
 }
 
 func_3B7C() {
   if(level.var_53C6) {
-    var_00 = getnodesinradiussorted(self.var_0116, 1000, 0, 2000, "Path");
+    var_00 = getnodesinradiussorted(self.origin, 1000, 0, 2000, "Path");
   } else {
-    var_00 = getnodesinradiussorted(self.var_0116, 700, 0, 128, "Path");
+    var_00 = getnodesinradiussorted(self.origin, 700, 0, 128, "Path");
   }
 
   self.var_6E68 = [];
   foreach(var_02 in var_00) {
     if(isDefined(var_02) && nodeexposedtosky(var_02, 1)) {
-      if(!func_5536(var_02.var_0116)) {
+      if(!func_5536(var_02.origin)) {
         self.var_6E68[self.var_6E68.size] = var_02;
       }
     }
   }
 
-  var_04 = maps\mp\_utility::func_0649("specialty_improvedstreaks");
+  var_04 = maps\mp\_utility::_hasperk("specialty_improvedstreaks");
   if(var_04) {
     var_05 = 5;
   } else {
@@ -136,7 +136,7 @@ func_3B7C() {
   while(var_07 >= 0 && var_06 < var_05) {
     var_09 = 1;
     for(var_0A = 0; var_09 == 1 && var_0A < var_08.size; var_0A++) {
-      if(distance2d(self.var_6E68[var_07].var_0116, var_08[var_0A].var_0116) < 200) {
+      if(distance2d(self.var_6E68[var_07].origin, var_08[var_0A].origin) < 200) {
         var_09 = 0;
       }
     }
@@ -190,17 +190,17 @@ func_8FE2() {
   self endon("joined_team");
   level.var_6E72 = 0;
   for(var_00 = 0; var_00 < self.var_6E68.size; var_00++) {
-    var_01 = self.var_6E68[var_00].var_0116 + (0, 0, 2000);
-    var_02 = self.var_6E68[var_00].var_001D;
-    self.var_6E71 = common_scripts\utility::func_0FA0(self.var_6E71);
+    var_01 = self.var_6E68[var_00].origin + (0, 0, 2000);
+    var_02 = self.var_6E68[var_00].angles;
+    self.var_6E71 = common_scripts\utility::func_FA0(self.var_6E71);
     var_03 = self.var_6E71.size;
-    var_04 = [[level.var_0A4D]]("paratroopers", self.var_01A7, undefined, var_01, var_02, self, 0, 0, level.var_6E66[level.var_6E72]);
+    var_04 = [[level.var_A4D]]("paratroopers", self.team, undefined, var_01, var_02, self, 0, 0, level.var_6E66[level.var_6E72]);
     if(!isDefined(var_04)) {
       continue;
     }
 
     self.var_6E71[var_03] = var_04;
-    var_04 thread do_paratrooper_drop(level.var_6E72, self.var_6E68[var_00].var_0116[2]);
+    var_04 thread do_paratrooper_drop(level.var_6E72, self.var_6E68[var_00].origin[2]);
     level.var_6E72++;
     wait(0.3);
   }
@@ -220,8 +220,8 @@ changeweaponusagestatewrapper(param_00) {
     if(param_00) {
       if(!self method_85EB() && self getcurrentweapon() == "emote_weapon_mp") {
         self takeweapon("emote_weapon_mp");
-        self switchtoweapon(self.var_7704);
-        self method_8327();
+        self switchtoweapon(self.primaryweapon);
+        self enableweaponswitch();
         return;
       }
 
@@ -231,7 +231,7 @@ changeweaponusagestatewrapper(param_00) {
     self giveweapon("emote_weapon_mp");
     self switchtoweaponimmediate("emote_weapon_mp");
     self setspawnweapon("emote_weapon_mp");
-    self method_8326();
+    self disableweaponswitch();
   }
 }
 
@@ -241,14 +241,14 @@ func_A8D2(param_00) {
   self endon("disconnect");
   if(isscriptmodel(self)) {
     thread script_model_fake_gravity_fall_if_parachute_gone(param_00);
-    while(self.var_0116[2] > param_00) {
+    while(self.origin[2] > param_00) {
       wait 0.05;
     }
 
     self scriptmodelplayanim("mp_smg_stand_jump_land_heavy", "finished_paratrooper_deploy");
   } else {
     while(!self isonground()) {
-      if(isDefined(self.playerparachuteweaponsactiveatcertaindropheight) && self.var_0116[2] <= param_00 + self.playerparachuteweaponsactiveatcertaindropheight) {
+      if(isDefined(self.playerparachuteweaponsactiveatcertaindropheight) && self.origin[2] <= param_00 + self.playerparachuteweaponsactiveatcertaindropheight) {
         changeweaponusagestatewrapper(1);
       }
 
@@ -261,7 +261,7 @@ func_A8D2(param_00) {
   }
 
   if(isDefined(self) && !common_scripts\utility::func_562E(self.no_fx)) {
-    playFX(level.var_0611["paratrooper_landing"], self.var_0116);
+    playFX(level.var_611["paratrooper_landing"], self.origin);
   }
 
   if(isPlayer(self) && (!isDefined(self.playerparachutemovementenabled) && 0) || isDefined(self.playerparachutemovementenabled) && self.playerparachutemovementenabled == 0) {
@@ -299,16 +299,16 @@ func_1132(param_00, param_01) {
   var_04 = level.var_6E62[param_00];
   var_05 = level.paratrooper_chute_deploy_anims_vm[param_00];
   if(isscriptmodel(self)) {
-    self.var_001D = self.var_001D - level.paratrooper_bindattach_to_animattach_delta_ang[param_00];
+    self.angles = self.angles - level.paratrooper_bindattach_to_animattach_delta_ang[param_00];
     dontinterpolatesafe();
   } else if(function_01EF(self)) {} else {
-    self.angles_original = self.var_001D;
-    self setangles(self.var_001D - level.paratrooper_bindattach_to_animattach_delta_ang[param_00]);
+    self.angles_original = self.angles;
+    self setplayerangles(self.angles - level.paratrooper_bindattach_to_animattach_delta_ang[param_00]);
     dontinterpolatesafe();
   }
 
-  self.var_6E4F = spawn("script_model", self.var_0116);
-  self.var_6E4F.var_0117 = self;
+  self.var_6E4F = spawn("script_model", self.origin);
+  self.var_6E4F.owner = self;
   self.var_6E4F.deploy_time = gettime();
   self.var_6E4F.var_6E72 = param_00;
   thread func_4ADE(param_01);
@@ -317,14 +317,14 @@ func_1132(param_00, param_01) {
   }
 
   if(isscriptmodel(self)) {
-    func_988F(self.var_6E4F, "tag_attach", self.var_0116, self.var_001D);
+    func_988F(self.var_6E4F, "tag_attach", self.origin, self.angles);
     self.var_6E4F dontinterpolatesafe();
   } else if(function_01EF(self)) {
-    self.var_001D = self.var_6E4F gettagangles("tag_attach");
-    self.var_0116 = self.var_6E4F gettagorigin("tag_attach");
+    self.angles = self.var_6E4F gettagangles("tag_attach");
+    self.origin = self.var_6E4F gettagorigin("tag_attach");
     dontinterpolatesafe();
   } else {
-    func_988F(self.var_6E4F, "TAG_ATTACH", self.var_0116, self.var_001D);
+    func_988F(self.var_6E4F, "TAG_ATTACH", self.origin, self.angles);
     self.var_6E4F dontinterpolatesafe();
   }
 
@@ -358,7 +358,7 @@ func_1132(param_00, param_01) {
   }
 
   if(isPlayer(self) && isDefined(self.angles_original)) {
-    self setangles(self.angles_original);
+    self setplayerangles(self.angles_original);
     dontinterpolatesafe();
     self.angles_original = undefined;
   }
@@ -381,11 +381,11 @@ func_1132(param_00, param_01) {
   }
 
   if(function_01EF(self) || isPlayer(self) && (!isDefined(self.playerparachutedamageenabled) && 0) || isDefined(self.playerparachutedamageenabled) && self.playerparachutedamageenabled) {
-    var_06 = spawn("script_model", self.var_6E4F.var_0116);
-    var_06.var_001D = self.var_6E4F.var_001D;
+    var_06 = spawn("script_model", self.var_6E4F.origin);
+    var_06.angles = self.var_6E4F.angles;
     var_06 setModel("ger_carepackage_parachute");
     var_06 setCanDamage(1);
-    var_06 method_805C();
+    var_06 hide();
     var_06 method_8449(self.var_6E4F);
     self.var_6E4F.parachute_collision = var_06;
   }
@@ -435,8 +435,8 @@ play_idle_loop_when_ready(param_00, param_01, param_02) {
 func_6E5F(param_00, param_01, param_02) {
   level endon("game_ended");
   var_03 = self.var_6E4F;
-  var_04 = self.var_01A7;
-  var_05 = common_scripts\utility::func_A715("death", "paratrooper_released", "disconnect");
+  var_04 = self.team;
+  var_05 = common_scripts\utility::waittill_any_return("death", "paratrooper_released", "disconnect");
   if(isDefined(level.var_4E09)) {
     maps\mp\gametypes\_hostmigration::func_A782();
   }
@@ -504,16 +504,16 @@ func_A8D1(param_00) {
   for(;;) {
     param_00 waittill("damage", var_01, var_02);
     if(isDefined(var_02)) {
-      if((level.var_984D && isDefined(var_02.var_01A7) && var_02.var_01A7 != self.var_01A7) || !level.var_984D && isDefined(self.var_0117) && var_02 != self.var_0117) {
+      if((level.teambased && isDefined(var_02.team) && var_02.team != self.team) || !level.teambased && isDefined(self.owner) && var_02 != self.owner) {
         var_02 thread maps\mp\gametypes\_damagefeedback::func_A102("standard");
         self.var_6E4B = var_02;
         param_00.var_22DF = param_00.var_22DF - var_01;
         if(param_00.var_22DF <= 0) {
           if(isDefined(self.var_6E6B) && self.var_6E6B) {
             changeweaponusagestatewrapper(1);
-            self dodamage(1, var_02.var_0116, var_02);
+            self dodamage(1, var_02.origin, var_02);
             self.var_5723 = 1;
-            if(maps\mp\_utility::func_0649("specialty_falldamage")) {
+            if(maps\mp\_utility::_hasperk("specialty_falldamage")) {
               self.var_3A0F = 0.93;
             }
 
@@ -563,16 +563,16 @@ watchforhostmigrationparachutemove(param_00) {
   self endon("death");
   self endon("paratrooper_released");
   self endon("disconnect");
-  if(isDefined(self.var_0117)) {
-    self.var_0117 endon("joined_team");
-    self.var_0117 endon("joined_spectators");
+  if(isDefined(self.owner)) {
+    self.owner endon("joined_team");
+    self.owner endon("joined_spectators");
   }
 
   level waittill("host_migration_begin");
   var_01 = gettime() * 0.001;
-  self moveTo(self.var_0116, 0.05);
+  self moveTo(self.origin, 0.05);
   if(1 && isDefined(self.parachute_model_vm)) {
-    self.parachute_model_vm moveTo(self.var_0116, 0.05);
+    self.parachute_model_vm moveTo(self.origin, 0.05);
   }
 
   level waittill("host_migration_end");
@@ -588,13 +588,13 @@ watchforparachutemovegoalchange(param_00) {
   self endon("death");
   self endon("paratrooper_released");
   self endon("disconnect");
-  if(isDefined(self.var_0117)) {
-    self.var_0117 endon("joined_team");
-    self.var_0117 endon("joined_spectators");
+  if(isDefined(self.owner)) {
+    self.owner endon("joined_team");
+    self.owner endon("joined_spectators");
   }
 
-  self.var_0117 waittill("changeParachuteEndpoint", var_01);
-  self.var_4805 = var_01 - self.var_0116 * 2 + self.var_0116;
+  self.owner waittill("changeParachuteEndpoint", var_01);
+  self.var_4805 = var_01 - self.origin * 2 + self.origin;
   var_02 = gettime() * 0.001;
   var_03 = param_00 - var_02;
   self moveTo(self.var_4805, var_03);
@@ -610,14 +610,14 @@ func_64B8(param_00) {
   var_02 = undefined;
   var_03 = undefined;
   var_04 = undefined;
-  var_05 = self.var_0117;
+  var_05 = self.owner;
   var_06 = 2700;
   if(isDefined(var_05.playerparachutedropheight)) {
     var_06 = var_05.playerparachutedropheight;
   }
 
   var_07 = (0, 0, 0);
-  var_08 = self.var_001D - var_05.var_001D;
+  var_08 = self.angles - var_05.angles;
   if(isDefined(var_05.var_6E6B) && var_05.var_6E6B) {
     var_05 thread watchparatrooperinsertaccelerateddescent();
   }
@@ -644,7 +644,7 @@ func_64B8(param_00) {
       if(abs(var_09[0]) > 0.5 || abs(var_09[1]) > 0.5) {
         var_0A = (var_09[0], -1 * var_09[1], 0);
         var_0A = var_0A * 6.6675;
-        var_01 = rotatevector(var_0A, var_05.var_001D);
+        var_01 = rotatevector(var_0A, var_05.angles);
         if(var_05 issprinting()) {
           var_01 = var_01 * 2;
         }
@@ -652,7 +652,7 @@ func_64B8(param_00) {
         var_04 = var_04 + var_01;
       }
 
-      self.var_001D = var_05.var_001D + var_08;
+      self.angles = var_05.angles + var_08;
       var_04 = applyplayercliptest(var_04, var_05, var_01);
       if((1 || 0) && isDefined(self.parachute_model_pitchingvm)) {
         match_vm_parachute(var_05, var_04, var_07);
@@ -670,7 +670,7 @@ func_64B8(param_00) {
         var_03 = var_0C * 0.05;
       }
 
-      self.var_4805 = self.var_0116 + var_02;
+      self.var_4805 = self.origin + var_02;
       self moveTo(self.var_4805, var_03);
       if(1 && isDefined(self.parachute_model_vm)) {
         self.parachute_model_vm moveTo(self.var_4805, var_03);
@@ -692,7 +692,7 @@ func_4ADE(param_00) {
   self endon("cancel_fadein");
   if(!common_scripts\utility::func_562E(param_00)) {
     self.var_6E4F setmaterialscriptparam(1, 1, 0);
-    if(self.var_01A7 == "allies") {
+    if(self.team == "allies") {
       self.var_6E4F setModel("usa_human_parachute_fade");
     } else {
       self.var_6E4F setModel("ger_human_parachute_fade");
@@ -703,7 +703,7 @@ func_4ADE(param_00) {
     wait(var_01);
   }
 
-  if(self.var_01A7 == "allies") {
+  if(self.team == "allies") {
     self.var_6E4F setModel("usa_human_parachute");
     return;
   }
@@ -716,14 +716,14 @@ func_2605(param_00) {
   self endon("death");
   self endon("paratrooper_released");
   self endon("disconnect");
-  var_01 = playerphysicstrace(self.var_0116, (self.var_0116[0], self.var_0116[1], self.var_0116[2] - 2700));
+  var_01 = playerphysicstrace(self.origin, (self.origin[0], self.origin[1], self.origin[2] - 2700));
   for(;;) {
     if(isPlayer(self) && (!isDefined(self.playerparachutemovementenabled) && 1) || isDefined(self.playerparachutemovementenabled) && self.playerparachutemovementenabled) {
-      var_02 = getgroundposition(self.var_0116, 8, 100, 0, 1);
-      if(self.var_0116[2] < var_02[2] + 100) {
+      var_02 = getgroundposition(self.origin, 8, 100, 0, 1);
+      if(self.origin[2] < var_02[2] + 100) {
         break;
       }
-    } else if(self.var_0116[2] < var_01[2] + 100) {
+    } else if(self.origin[2] < var_01[2] + 100) {
       break;
     }
 
@@ -743,28 +743,28 @@ func_8FE1(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     wait(randomintrange(6, 10));
   }
 
-  maps\mp\agents\_agent_utility::func_5334(1);
+  maps / mp / agents / _agent_utility::func_5334(1);
   if(isDefined(param_00) && isDefined(param_01)) {
     var_07 = param_00;
     var_08 = param_01;
     self.var_5BE0 = spawnStruct();
-    self.var_5BE0.var_0116 = var_07;
-    self.var_5BE0.var_001D = var_08;
+    self.var_5BE0.origin = var_07;
+    self.var_5BE0.angles = var_08;
   } else {
     self method_856C();
     var_09 = [[level.var_4696]]();
-    var_07 = var_09.var_0116;
-    var_08 = var_09.var_001D;
+    var_07 = var_09.origin;
+    var_08 = var_09.angles;
     self.var_5BE0 = var_09;
   }
 
-  maps\mp\agents\_agent_utility::func_08A7();
-  self.var_5CC6 = maps\mp\agents\_agent_utility::func_45AE(param_02.var_0109);
+  maps / mp / agents / _agent_utility::func_8A7();
+  self.var_5CC6 = maps / mp / agents / _agent_utility::func_45AE(param_02.name);
   self.var_5BE2 = gettime();
-  if(level.var_984D) {
+  if(level.teambased) {
     var_0A["position"] = var_07;
     var_0A["time"] = self.var_5BE2;
-    level.var_7AD4[self.var_01A7][level.var_7AD4[self.var_01A7].size] = var_0A;
+    level.var_7AD4[self.team][level.var_7AD4[self.team].size] = var_0A;
   }
 
   var_0B = var_07 + (0, 0, 25);
@@ -776,11 +776,11 @@ func_8FE1(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 
   self method_838F(var_07, var_08);
   if(isDefined(param_05)) {
-    self.var_0A43 = param_05;
+    self.var_A43 = param_05;
   }
 
-  if(isDefined(self.var_0A43)) {
-    if(self.var_0A43 == "follow_code_and_dev_dvar") {
+  if(isDefined(self.var_A43)) {
+    if(self.var_A43 == "follow_code_and_dev_dvar") {
       self[[level.var_19D5["bot_set_difficulty"]]](self botgetdifficulty(), 1);
     } else {
       self[[level.var_19D5["bot_set_difficulty"]]](param_05);
@@ -790,33 +790,33 @@ func_8FE1(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   }
 
   self[[level.var_19D5["bot_set_personality"]]](level.var_6E6A[level.var_6E72]);
-  maps\mp\agents\_agent_common::func_83FD(getdvarint("scr_player_maxhealth", 100));
+  maps / mp / agents / _agent_common::func_83FD(getdvarint("scr_player_maxhealth", 100));
   if(isDefined(param_04) && param_04) {
     self.var_7DAD = 1;
   }
 
   if(isDefined(param_02)) {
-    maps\mp\agents\_agent_utility::func_83FE(param_02.var_01A7, param_02);
+    maps / mp / agents / _agent_utility::func_83FE(param_02.team, param_02);
   }
 
-  if(isDefined(self.var_0117)) {
-    self thread[[level.var_0A55]](self.var_0117);
+  if(isDefined(self.owner)) {
+    self thread[[level.var_A55]](self.owner);
   }
 
   thread maps\mp\_flashgrenades::func_6394();
   self method_83D6(0);
   if(isDefined(param_06)) {
-    self.var_0BA6 = param_06;
+    self.var_BA6 = param_06;
     self method_858A(param_06);
-    maps\mp\agents\_agent_common::func_83FD(getdvarint("scr_player_maxhealth", 100));
+    maps / mp / agents / _agent_common::func_83FD(getdvarint("scr_player_maxhealth", 100));
     maps\mp\gametypes\_class::func_4774();
   } else {
-    self[[level.var_0A5B]]();
-    maps\mp\gametypes\_class::func_4773(self.var_01A7, self.var_2319, 1);
+    self[[level.var_A5B]]();
+    maps\mp\gametypes\_class::func_4773(self.team, self.var_2319, 1);
   }
 
   self setperk("specialty_radarparatrooper", 1, 0);
-  if(isDefined(self.var_0117) && self.var_0117 maps\mp\_utility::func_0649("specialty_improvedstreaks")) {
+  if(isDefined(self.owner) && self.owner maps\mp\_utility::_hasperk("specialty_improvedstreaks")) {
     maps\mp\_utility::func_47A2("specialty_sprintreload");
     maps\mp\_utility::func_47A2("specialty_fastreload");
     maps\mp\_utility::func_47A2("specialty_silentmovement");
@@ -835,7 +835,7 @@ func_8FE1(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     maps\mp\_utility::func_47A2("specialty_paint_pro");
     maps\mp\_utility::func_47A2("specialty_blastshield2");
     self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale", 35) / 100;
-    if(isDefined(level.var_4B17) && level.var_4B17) {
+    if(isDefined(level.hardcoremode) && level.hardcoremode) {
       self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale_HC", 9) / 100;
     }
 
@@ -845,24 +845,24 @@ func_8FE1(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     self.var_94BE = 0.1;
     maps\mp\_utility::func_47A2("specialty_fireshield");
     self.var_90D8 = maps\mp\_utility::func_4529("perk_fireShieldScale", 35) / 100;
-    if(isDefined(level.var_4B17) && level.var_4B17) {
+    if(isDefined(level.hardcoremode) && level.hardcoremode) {
       self.var_90D8 = maps\mp\_utility::func_4529("perk_fireShieldScale_HC", 9) / 100;
     }
   }
 
   self thread[[level.var_19D5["bot_think_watch_enemy"]]](1);
   self thread[[level.var_19D5["bot_think_tactical_goals"]]]();
-  self thread[[maps\mp\agents\_agent_utility::func_0A59("think")]]();
+  self thread[[maps / mp / agents / _agent_utility::func_A59("think")]]();
   if(!self.var_4B60) {
-    lib_050D::func_09FA();
+    lib_050D::func_9FA();
   }
 
   thread maps\mp\gametypes\_weapons::func_9B90();
   self.var_4B60 = 0;
   thread maps\mp\gametypes\_healthoverlay::func_73FC();
-  self.var_0009 = &"KILLSTREAKS_PARATROOPER";
+  self.agentname = &"KILLSTREAKS_PARATROOPER";
   if(maps\mp\_utility::func_4571() != "mp_sandbox_01") {
-    if(self.var_01A7 == "allies") {
+    if(self.team == "allies") {
       self setModel("usa_paratrooper_streak_org1_mp");
       self attach(level.paratrooper_head);
     } else {
@@ -870,7 +870,7 @@ func_8FE1(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
       self attach(level.paratrooper_head);
     }
   } else {
-    self method_8528(13, self.var_01A7);
+    self method_8528(13, self.team);
   }
 
   self botsetflag("disable_attack", 1);
@@ -898,15 +898,15 @@ func_6AA6(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_01 = self.var_6E4B;
   }
 
-  self[[level.var_0A5D]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, 1);
+  self[[level.var_A5D]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, 1);
   var_09 = maps\mp\_events::func_43D6(param_04, param_03);
-  if(isPlayer(param_01) && (!isDefined(self.var_0117) || param_01 != self.var_0117) && !isDefined(self.var_672C) || !self.var_672C) {
+  if(isPlayer(param_01) && (!isDefined(self.owner) || param_01 != self.owner) && !isDefined(self.var_672C) || !self.var_672C) {
     if(var_09 == "kill") {
       maps\mp\gametypes\_damage::func_6B4B(param_01, param_04, param_03, param_02, "paratroopers_destroyed");
     } else {
       var_0A = func_5643(param_01);
       if(isDefined(var_0A)) {
-        var_0A maps\mp\_utility::func_50EA(var_09, 1);
+        var_0A maps\mp\_utility::incplayerstat(var_09, 1);
         level thread maps\mp\gametypes\_rank::func_1457(var_09, var_0A, param_04, undefined, param_03);
       }
     }
@@ -920,41 +920,41 @@ func_6AA6(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   if(self.var_565F) {
     self.var_4B60 = 1;
     if(maps\mp\_utility::func_44FC() != 1 && isDefined(self.var_7DAD) && self.var_7DAD) {
-      self thread[[maps\mp\agents\_agent_utility::func_0A59("spawn")]]();
+      self thread[[maps / mp / agents / _agent_utility::func_A59("spawn")]]();
     } else {
-      maps\mp\agents\_agent_utility::func_2A73();
+      maps / mp / agents / _agent_utility::func_2A73();
     }
   }
 
   level.var_6E70--;
   if(level.var_6E70 <= 0) {
     level.var_6E72 = 0;
-    if(isDefined(self.var_0117)) {
-      self.var_0117 notify("paratroopers_ended");
+    if(isDefined(self.owner)) {
+      self.owner notify("paratroopers_ended");
     }
   }
 }
 
 func_5643(param_00) {
   var_01 = undefined;
-  if(isDefined(param_00) && isDefined(self.var_0117)) {
-    if(isDefined(param_00.var_0117) && isPlayer(param_00.var_0117)) {
-      param_00 = param_00.var_0117;
+  if(isDefined(param_00) && isDefined(self.owner)) {
+    if(isDefined(param_00.owner) && isPlayer(param_00.owner)) {
+      param_00 = param_00.owner;
     }
 
-    if(param_00 == self.var_0117) {
+    if(param_00 == self.owner) {
       return;
     }
 
-    if(issentient(self.var_0117) && issentient(param_00)) {
-      if(!isalliedsentient(self.var_0117, param_00)) {
+    if(issentient(self.owner) && issentient(param_00)) {
+      if(!isalliedsentient(self.owner, param_00)) {
         var_01 = param_00;
       }
-    } else if(level.var_984D) {
-      if(self.var_0117.var_01A7 != param_00.var_01A7) {
+    } else if(level.teambased) {
+      if(self.owner.team != param_00.team) {
         var_01 = param_00;
       }
-    } else if(self.var_0117 != param_00) {
+    } else if(self.owner != param_00) {
       var_01 = param_00;
     }
   }
@@ -967,10 +967,10 @@ func_3694() {
   self endon("paratroopers_ended");
   var_00 = common_scripts\utility::func_A71B(80, "disconnect", "joined_team");
   foreach(var_02 in self.var_6E71) {
-    maps\mp\agents\_agent_utility::func_5A28(var_02);
+    maps / mp / agents / _agent_utility::func_5A28(var_02);
   }
 
-  level.var_6E71 = common_scripts\utility::func_0FA0(level.var_6E71);
+  level.var_6E71 = common_scripts\utility::func_FA0(level.var_6E71);
 }
 
 do_paratrooper_drop(param_00, param_01, param_02, param_03) {
@@ -981,7 +981,7 @@ do_paratrooper_drop(param_00, param_01, param_02, param_03) {
 }
 
 isscriptmodel(param_00) {
-  return isDefined(param_00.var_003A) && param_00.var_003A == "script_model";
+  return isDefined(param_00.classname) && param_00.classname == "script_model";
 }
 
 script_model_fake_gravity_fall_if_parachute_gone(param_00) {
@@ -990,7 +990,7 @@ script_model_fake_gravity_fall_if_parachute_gone(param_00) {
     wait 0.05;
   }
 
-  var_01 = param_00 - 3 - self.var_0116[2];
+  var_01 = param_00 - 3 - self.origin[2];
   if(isDefined(self) && isDefined(self.playerparachutedropunitsperframeoverride)) {
     var_02 = self.playerparachutedropunitsperframeoverride;
   } else {
@@ -998,17 +998,17 @@ script_model_fake_gravity_fall_if_parachute_gone(param_00) {
   }
 
   var_03 = abs(var_01 / var_02) * 0.05;
-  var_04 = (self.var_0116[0], self.var_0116[1], param_00);
+  var_04 = (self.origin[0], self.origin[1], param_00);
   self moveTo(var_04, var_03);
 }
 
 paratroopers_beacon() {
-  var_00 = self.var_0116;
+  var_00 = self.origin;
   waittillframeend;
   var_01 = spawn("script_model", var_00 - (0, 0, 32));
   var_01 setModel("npc_soccer_ball_zombie_01");
   var_01 method_8511();
-  var_01.var_0117 = self;
+  var_01.owner = self;
   var_01.isplayersteerable = 1;
   var_01 thread maps\mp\gametypes\_weapons::func_95A0();
   if(isDefined(var_01.var_359B["friendly"])) {
@@ -1029,7 +1029,7 @@ applyplayercliptest(param_00, param_01, param_02) {
     return param_00;
   }
 
-  var_04 = param_01.var_0116 + (0, 0, param_00[2]);
+  var_04 = param_01.origin + (0, 0, param_00[2]);
   var_05 = param_02 / var_03;
   var_04 = var_04 + var_05 * 15;
   var_06 = var_03 + 55 - 15;
@@ -1089,7 +1089,7 @@ player_paratrooper(param_00, param_01, param_02) {
   if(isDefined(param_00)) {
     var_03 = param_00;
   } else {
-    var_03 = self.var_0116;
+    var_03 = self.origin;
   }
 
   var_04 = 2700;
@@ -1123,8 +1123,8 @@ player_paratroopers_spawn_thread(param_00, param_01, param_02) {
   }
 
   if(isDefined(param_02) && param_02) {
-    foreach(var_04 in level.var_744A) {
-      if((!isDefined(param_00) || var_04.var_01A7 == param_00) && !isDefined(var_04.var_0178) || var_04.var_0178 != "spectator") {
+    foreach(var_04 in level.players) {
+      if((!isDefined(param_00) || var_04.team == param_00) && !isDefined(var_04.sessionstate) || var_04.sessionstate != "spectator") {
         var_05 = undefined;
         if(maps\mp\_utility::func_579B() && isDefined(var_04.spawnpos_postraidvignette)) {
           var_05 = var_04.spawnpos_postraidvignette;
@@ -1140,11 +1140,11 @@ player_paratroopers_spawn_thread(param_00, param_01, param_02) {
   }
 
   for(;;) {
-    level waittill("player_spawned", var_06);
-    if(!isDefined(param_02) || var_06.var_01A7 == param_02 || param_02 == "all") {
-      var_06 thread player_paratrooper();
-      var_06 lib_0378::func_8D74("aud_player_parachute_open");
-      var_06 lib_0378::func_8D74("aud_player_parachute_submix");
+    level waittill("player_spawned", var_04);
+    if(!isDefined(param_00) || var_04.team == param_00 || param_00 == "all") {
+      var_04 thread player_paratrooper();
+      var_04 lib_0378::func_8D74("aud_player_parachute_open");
+      var_04 lib_0378::func_8D74("aud_player_parachute_submix");
     }
   }
 }
@@ -1162,12 +1162,12 @@ player_paratroopers_spawn_after_raidvignette(param_00) {
 }
 
 showtoallexceptplayer(param_00) {
-  self method_805B();
+  self show();
   self hidefromclient(param_00);
 }
 
 hidefromallexceptplayer(param_00) {
-  self method_805C();
+  self hide();
   self showtoclient(param_00);
 }
 
@@ -1177,14 +1177,14 @@ attach_parachute_model_vm() {
   }
 
   if(1) {
-    var_00 = spawn("script_model", self.var_6E4F.var_0116);
-    if(self.var_01A7 == "allies") {
+    var_00 = spawn("script_model", self.var_6E4F.origin);
+    if(self.team == "allies") {
       var_00 setModel("usa_human_parachute");
     } else {
       var_00 setModel("ger_human_parachute");
     }
 
-    var_00.var_001D = self.var_6E4F.var_001D;
+    var_00.angles = self.var_6E4F.angles;
     if(isPlayer(self)) {
       var_00 thread hidefromallexceptplayer(self);
     }
@@ -1192,14 +1192,14 @@ attach_parachute_model_vm() {
     self.var_6E4F.parachute_model_pitchingvm = var_00;
   }
 
-  var_01 = spawn("script_model", self.var_6E4F.var_0116);
-  if(self.var_01A7 == "allies") {
+  var_01 = spawn("script_model", self.var_6E4F.origin);
+  if(self.team == "allies") {
     var_01 setModel("usa_human_parachute_fade");
   } else {
     var_01 setModel("ger_human_parachute_fade");
   }
 
-  var_01.var_001D = self.var_6E4F.var_001D;
+  var_01.angles = self.var_6E4F.angles;
   if(isPlayer(self)) {
     var_01 thread hidefromallexceptplayer(self);
   }
@@ -1241,18 +1241,18 @@ get_offset_for_single(param_00) {
 
 func_988F(param_00, param_01, param_02, param_03) {
   var_04 = undefined;
-  var_05 = param_00.var_0116;
-  var_06 = param_00.var_001D;
+  var_05 = param_00.origin;
+  var_06 = param_00.angles;
   var_07 = invertangles(var_06);
   if(isDefined(param_01)) {
     var_04 = param_00 gettagangles(param_01);
   } else {
-    var_04 = param_00.var_001D;
+    var_04 = param_00.angles;
   }
 
   var_08 = invertangles(var_04);
   var_09 = combineangles(param_03, var_08);
-  var_0A = combineangles(param_00.var_001D, var_09);
+  var_0A = combineangles(param_00.angles, var_09);
   var_0B = undefined;
   if(isDefined(param_01)) {
     var_0C = param_00 gettagorigin(param_01) - var_05;
@@ -1263,8 +1263,8 @@ func_988F(param_00, param_01, param_02, param_03) {
 
   var_0D = rotatevector(var_0B, var_0A);
   param_00 dontinterpolatesafe();
-  param_00.var_0116 = param_02 - var_0D;
-  param_00.var_001D = var_0A;
+  param_00.origin = param_02 - var_0D;
+  param_00.angles = var_0A;
   return [param_02, var_0A];
 }
 
@@ -1285,7 +1285,7 @@ rotate_ent_relative_to(param_00, param_01, param_02, param_03, param_04) {
 }
 
 match_vm_parachute(param_00, param_01, param_02) {
-  self.parachute_model_vm.var_001D = self.var_001D;
+  self.parachute_model_vm.angles = self.angles;
 }
 
 vm_model_linkto_if_needed() {
@@ -1294,7 +1294,7 @@ vm_model_linkto_if_needed() {
   }
 
   if((1 || 0) && isDefined(self.var_6E4F.parachute_model_vm)) {
-    func_988F(self.var_6E4F.parachute_model_vm, "TAG_ATTACH", self.var_0116, self.var_001D);
+    func_988F(self.var_6E4F.parachute_model_vm, "TAG_ATTACH", self.origin, self.angles);
   }
 }
 

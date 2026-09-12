@@ -3,12 +3,12 @@
  * Script: maps\mp\gametypes\lockdown.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   if(getDvar("1673") == "mp_background") {
     return;
   }
 
-  maps\mp\gametypes\_globallogic::func_00D5();
+  maps\mp\gametypes\_globallogic::init();
   lib_01DD::func_8A0C();
   maps\mp\gametypes\_globallogic::func_8A0C();
   if(isusingmatchrulesdata()) {
@@ -16,28 +16,28 @@ func_00F9() {
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BFA(level.var_3FDC, 30);
-    maps\mp\_utility::func_7BF9(level.var_3FDC, 25);
-    maps\mp\_utility::func_7BF7(level.var_3FDC, 1);
-    maps\mp\_utility::func_7C04(level.var_3FDC, 1);
-    maps\mp\_utility::func_7BF1(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BE5(level.var_3FDC, 1);
+    maps\mp\_utility::func_7BFA(level.gametype, 30);
+    maps\mp\_utility::func_7BF9(level.gametype, 25);
+    maps\mp\_utility::func_7BF7(level.gametype, 1);
+    maps\mp\_utility::func_7C04(level.gametype, 1);
+    maps\mp\_utility::func_7BF1(level.gametype, 0);
+    maps\mp\_utility::func_7BE5(level.gametype, 1);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
 
   maps\mp\_utility::func_873B(1);
-  level.var_0C27 = 1;
+  level.var_C27 = 1;
   level.var_6BAF = ::func_6BAF;
   level.var_6B7B = ::func_6B7B;
   level.var_6BA7 = ::func_6BA7;
   level.var_5E69 = gettime();
   level.var_320D = maps\mp\_utility::func_44E8("scr_lockdown_capture_time", 10);
-  level.var_0BDB["axis"]["time"] = 0;
-  level.var_0BDB["axis"]["awarded"] = 0;
-  level.var_0BDB["allies"]["time"] = 0;
-  level.var_0BDB["allies"]["awarded"] = 0;
-  level.var_0BF4 = [];
+  level.var_BDB["axis"]["time"] = 0;
+  level.var_BDB["axis"]["awarded"] = 0;
+  level.var_BDB["allies"]["time"] = 0;
+  level.var_BDB["allies"]["awarded"] = 0;
+  level.var_BF4 = [];
   level.var_147A = [];
   level.var_3208 = spawnStruct();
   if(level.var_6031 || level.var_6035) {
@@ -88,7 +88,7 @@ func_6BAF() {
 
   maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_LOCKDOWN");
   maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_LOCKDOWN");
-  if(level.var_910F) {
+  if(level.splitscreen) {
     maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_LOCKDOWN");
     maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_LOCKDOWN");
   } else {
@@ -102,7 +102,7 @@ func_6BAF() {
   lib_050D::func_10E4();
   func_7651();
   var_02[0] = "dom";
-  maps\mp\gametypes\_gameobjects::func_00F9(var_02);
+  maps\mp\gametypes\_gameobjects::main(var_02);
   setomnvar("ui_broadcaster_game_mode_status_1", 0);
   setomnvar("ui_broadcaster_game_mode_status_2", 0);
   setomnvar("ui_broadcaster_game_mode_status_3", 0);
@@ -110,7 +110,7 @@ func_6BAF() {
   level thread func_A109();
   level thread func_A160();
   level.var_4958 = maps\mp\_utility::func_3517("halftimeswitchsides", 1, 0, 1);
-  level.var_0C27 = maps\mp\_utility::func_3517("allowNeutral", 1, 0, 1);
+  level.var_C27 = maps\mp\_utility::func_3517("allowNeutral", 1, 0, 1);
 }
 
 func_A160() {
@@ -124,51 +124,51 @@ func_A160() {
 
 func_A0F1() {
   waittillframeend;
-  maps\mp\_utility::func_867B(self.var_012C["captures"]);
+  maps\mp\_utility::func_867B(self.pers["captures"]);
 }
 
 func_A108() {
   waittillframeend;
-  maps\mp\_utility::func_867C(self.var_012C["defends"]);
+  maps\mp\_utility::func_867C(self.pers["defends"]);
 }
 
 func_A0EA() {
   level endon("game_ended");
   for(;;) {
-    foreach(var_01 in level.var_744A) {
-      var_01.var_0112 = 0;
+    foreach(var_01 in level.players) {
+      var_01.objective = 0;
       foreach(var_03 in level.var_3211) {
         if(var_01 istouching(var_03.var_5CBA)) {
           if(var_03.var_689F["axis"] * var_03.var_689F["allies"] > 0) {
-            var_01.var_0112 = 1;
+            var_01.objective = 1;
           } else if(var_03.var_6DB2 == "neutral") {
-            if(var_01.var_01A7 == "allies") {
-              var_01.var_0112 = 2;
+            if(var_01.team == "allies") {
+              var_01.objective = 2;
             } else {
-              var_01.var_0112 = 3;
+              var_01.objective = 3;
             }
           } else if(var_03.var_6DB2 == "allies") {
-            if(var_01.var_01A7 == "allies") {
-              var_01.var_0112 = 4;
+            if(var_01.team == "allies") {
+              var_01.objective = 4;
             } else {
-              var_01.var_0112 = 5;
+              var_01.objective = 5;
             }
           } else if(var_03.var_6DB2 == "axis") {
-            if(var_01.var_01A7 == "axis") {
-              var_01.var_0112 = 6;
+            if(var_01.team == "axis") {
+              var_01.objective = 6;
             } else {
-              var_01.var_0112 = 7;
+              var_01.objective = 7;
             }
           }
 
-          if(var_01.var_0112 > 0) {
-            if(var_03.var_00E5 == "_b") {
-              var_01.var_0112 = var_01.var_0112 + 7;
+          if(var_01.objective > 0) {
+            if(var_03.label == "_b") {
+              var_01.objective = var_01.objective + 7;
               continue;
             }
 
-            if(var_03.var_00E5 == "_c") {
-              var_01.var_0112 = var_01.var_0112 + 14;
+            if(var_03.label == "_c") {
+              var_01.objective = var_01.objective + 14;
             }
           }
         }
@@ -207,19 +207,19 @@ func_4638(param_00) {
   var_03 = func_46C8(var_02);
   var_04 = [];
   for(var_05 = 0; var_05 < level.var_3211.size; var_05++) {
-    var_04[level.var_3211[var_05].var_00E5] = 0;
+    var_04[level.var_3211[var_05].label] = 0;
   }
 
   if(var_01.size == level.var_3211.size) {
     var_06 = param_00;
     var_07 = level.var_1731[param_00];
-    var_04[var_07.var_A222.var_00E5] = 1;
+    var_04[var_07.var_A222.label] = 1;
     return var_04;
   }
 
-  if(var_01.size == 1 && var_03.size == level.var_3211.size - 1) {
-    var_02 = maps\mp\_utility::func_45DE(self.var_01A7);
-    var_08 = maps\mp\gametypes\_gamescore::func_063E(var_02) - maps\mp\gametypes\_gamescore::func_063E(self.var_01A7);
+  if(var_03.size == 1 && var_05.size == level.var_3211.size - 1) {
+    var_04 = maps\mp\_utility::func_45DE(self.team);
+    var_08 = maps\mp\gametypes\_gamescore::func_63E(var_04) - maps\mp\gametypes\_gamescore::func_63E(self.team);
     if(var_08 > 25) {
       var_09 = 0;
       foreach(var_0B in level.var_3211) {
@@ -230,36 +230,36 @@ func_4638(param_00) {
       }
 
       if(!var_09) {
-        return var_04;
+        return var_06;
       }
     }
   }
 
-  if(var_01.size > 0) {
-    foreach(var_0E in var_01) {
-      var_04[var_0E.var_00E5] = 1;
+  if(var_03.size > 0) {
+    foreach(var_0E in var_03) {
+      var_06[var_0E.label] = 1;
     }
 
-    return var_04;
+    return var_06;
   } else {
-    var_06 = var_03;
-    var_05 = maps\mp\_utility::func_45DE(var_06);
-    var_07 = level.var_1731[var_06];
-    if(var_0D.size > 0 && var_0D.size < level.var_3211.size) {
-      var_07 = func_44E0(var_06, undefined, 0);
-      level.var_1731[var_06] = var_07;
+    var_06 = var_05;
+    var_06 = maps\mp\_utility::func_45DE(var_0F);
+    var_07 = level.var_1731[var_0F];
+    if(var_06.size > 0 && var_06.size < level.var_3211.size) {
+      var_0F = func_44E0(var_0E, undefined, 0);
+      level.var_1731[var_0E] = var_0F;
     }
 
-    if(var_07 == level.var_1731[var_05]) {
-      var_07 = func_44E0(var_06, level.var_1731[var_05], 1);
-      level.var_1731[var_06] = var_07;
+    if(var_0F == level.var_1731[var_05]) {
+      var_0F = func_44E0(var_0E, level.var_1731[var_05], 1);
+      level.var_1731[var_0E] = var_0F;
     }
 
-    var_0E[var_07.var_A222.var_00E5] = 1;
-    return var_0E;
+    var_07[var_0F.var_A222.label] = 1;
+    return var_07;
   }
 
-  return var_06;
+  return var_0E;
 }
 
 func_46E6(param_00) {
@@ -305,12 +305,12 @@ func_3211() {
     level.var_3CC5 = var_01;
     for(var_02 = 0; var_02 < level.var_3CC5.size; var_02++) {
       var_03 = level.var_3CC5[var_02];
-      var_04 = spawn("trigger_radius", var_03.var_0116 + (0, 0, -1), 0, 160, 128);
-      var_04.var_001D = var_03.var_001D;
+      var_04 = spawn("trigger_radius", var_03.origin + (0, 0, -1), 0, 160, 128);
+      var_04.angles = var_03.angles;
       var_04.var_81E8 = var_03.var_81E8;
-      var_04.var_0165 = var_03.var_0165;
-      var_04.var_01A2 = var_03.var_01A2;
-      var_04.var_01A5 = var_03.var_01A5;
+      var_04.script_noteworthy = var_03.script_noteworthy;
+      var_04.target = var_03.target;
+      var_04.targetname = var_03.targetname;
       level.var_3CC5[var_02] delete();
       level.var_3CC5[var_02] = var_04;
     }
@@ -319,15 +319,15 @@ func_3211() {
   level.var_3211 = [];
   for(var_02 = 0; var_02 < level.var_3CC5.size; var_02++) {
     var_03 = level.var_3CC5[var_02];
-    var_05[0] = spawn("script_model", var_03.var_0116);
-    var_05[0].var_001D = var_03.var_001D;
+    var_05[0] = spawn("script_model", var_03.origin);
+    var_05[0].angles = var_03.angles;
     var_05[0] setModel(level.var_3CB6);
     var_06 = maps\mp\gametypes\_gameobjects::func_2837("neutral", var_03, var_05, (0, 0, 100));
-    var_06 maps\mp\gametypes\_gameobjects::func_0C30("enemy");
+    var_06 maps\mp\gametypes\_gameobjects::func_C30("enemy");
     var_06 maps\mp\gametypes\_gameobjects::func_8A5A(level.var_320D);
     var_06 maps\mp\gametypes\_gameobjects::func_8A59(&"MP_SECURING_POSITION");
     var_07 = var_06 maps\mp\gametypes\_gameobjects::func_454C();
-    var_06.var_00E5 = var_07;
+    var_06.label = var_07;
     var_06 maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_defend" + var_07);
     var_06 maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_defend" + var_07);
     var_06 maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_captureneutral" + var_07);
@@ -343,14 +343,14 @@ func_3211() {
     var_06.var_502A = "domFlag";
     var_06.var_4B25 = 0;
     var_06.var_3C66 = 1;
-    var_08 = var_05[0].var_0116 + (0, 0, 32);
-    var_09 = var_05[0].var_0116 + (0, 0, -32);
+    var_08 = var_05[0].origin + (0, 0, 32);
+    var_09 = var_05[0].origin + (0, 0, -32);
     var_0A = bulletTrace(var_08, var_09, 0, var_05[0]);
     var_0B = vectortoangles(var_0A["normal"]);
     var_06.var_15F9 = anglesToForward(var_0B);
     var_06.var_15FB = anglestoright(var_0B);
     var_06.var_15FA = var_0A["position"];
-    var_05[0].var_0116 = var_0A["position"];
+    var_05[0].origin = var_0A["position"];
     var_06 thread func_A192(1);
     level.var_3CC5[var_02].var_A222 = var_06;
     var_06.var_5CBA = level.var_3CC5[var_02];
@@ -359,8 +359,8 @@ func_3211() {
 
   var_0C = lib_050D::func_46A0("axis");
   var_0D = lib_050D::func_46A0("allies");
-  level.var_92FA["allies"] = var_0D[0].var_0116;
-  level.var_92FA["axis"] = var_0C[0].var_0116;
+  level.var_92FA["allies"] = var_0D[0].origin;
+  level.var_92FA["axis"] = var_0C[0].origin;
   level.var_1731 = [];
   level.var_1731["allies"] = func_44E0("allies", undefined, 0);
   level.var_1731["axis"] = func_44E0("axis", level.var_1731["allies"], 0);
@@ -368,7 +368,7 @@ func_3211() {
   wait(1);
   var_0E = gettime();
   for(var_02 = 0; var_02 < level.var_3211.size; var_02++) {
-    function_00F6(level.var_3211[var_02].var_A582[0].var_0116, "script_mp_captures: team %s, gameTime %d", "neutral", var_0E);
+    function_00F6(level.var_3211[var_02].var_A582[0].origin, "script_mp_captures: team %s, gameTime %d", "neutral", var_0E);
   }
 }
 
@@ -381,7 +381,7 @@ func_44E0(param_00, param_01, param_02) {
       continue;
     }
 
-    var_07 = distancesquared(var_06.var_0116, level.var_92FA[param_00]);
+    var_07 = distancesquared(var_06.origin, level.var_92FA[param_00]);
     if((!isDefined(param_01) || var_06 != param_01) && !isDefined(var_03) || var_07 < var_04) {
       var_04 = var_07;
       var_03 = var_06;
@@ -396,7 +396,7 @@ func_6ABC(param_00) {
   self.var_2EE9 = 0;
   maps\mp\gametypes\_gameobjects::func_8A5A(level.var_320D);
   if(var_01 == "neutral") {
-    func_933E("securing" + self.var_00E5, param_00.var_01A7);
+    func_933E("securing" + self.label, param_00.team);
     if(self.var_3C66 || self.var_28D5 == 0) {
       maps\mp\gametypes\_gameobjects::func_8A5A(level.var_320D);
     }
@@ -405,36 +405,36 @@ func_6ABC(param_00) {
   }
 
   if(var_01 == "allies") {
-    level.var_0BF4[level.var_0BF4.size] = self.var_00E5;
+    level.var_BF4[level.var_BF4.size] = self.label;
     var_02 = "axis";
     return;
   }
 
-  level.var_147A[level.var_147A.size] = self.var_00E5;
+  level.var_147A[level.var_147A.size] = self.label;
   var_02 = "allies";
 }
 
 func_6BCB(param_00, param_01, param_02) {
   var_03 = maps\mp\gametypes\_gameobjects::func_45F7();
   if(param_01 > 0.05 && param_02 && !self.var_2EE9) {
-    maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_taking" + self.var_00E5);
-    maps\mp\gametypes\_gameobjects::func_860E("enemy", "waypoint_taking" + self.var_00E5);
-    maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_losing" + self.var_00E5);
-    maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_losing" + self.var_00E5);
+    maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_taking" + self.label);
+    maps\mp\gametypes\_gameobjects::func_860E("enemy", "waypoint_taking" + self.label);
+    maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_losing" + self.label);
+    maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_losing" + self.label);
     self.var_2EE9 = 1;
     return;
   }
 
-  if(level.var_0C27 && param_01 > 0.49 && param_02 && self.var_2EE9 && var_03 != "neutral") {
+  if(level.var_C27 && param_01 > 0.49 && param_02 && self.var_2EE9 && var_03 != "neutral") {
     var_04 = maps\mp\gametypes\_gameobjects::func_44AF();
     var_05 = gettime();
-    function_00F6(self.var_A582[0].var_0116, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_04.var_0109, var_04.var_5CC6, "neutral", var_05);
+    function_00F6(self.var_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", var_04.name, var_04.var_5CC6, "neutral", var_05);
     maps\mp\gametypes\_gameobjects::func_86EC("neutral");
     func_A192();
-    func_933E("lost" + self.var_00E5, var_03, 1);
+    func_933E("lost" + self.label, var_03, 1);
     level thread maps\mp\_utility::func_74D9("mp_obj_notify_pos_lrg", param_00);
     level thread maps\mp\_utility::func_74D9("mp_obj_notify_neg_lrg", var_03);
-    func_A189(self.var_00E5, "neutral");
+    func_A189(self.label, "neutral");
     thread func_4787(self.var_9AC3[param_00]);
   }
 }
@@ -457,23 +457,23 @@ func_6AFA(param_00, param_01, param_02) {
 
   var_03 = maps\mp\gametypes\_gameobjects::func_45F7();
   if(var_03 != "neutral") {
-    maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_capture" + self.var_00E5);
-    maps\mp\gametypes\_gameobjects::func_860E("enemy", "waypoint_capture" + self.var_00E5);
-    maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_defend" + self.var_00E5);
-    maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_defend" + self.var_00E5);
+    maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_capture" + self.label);
+    maps\mp\gametypes\_gameobjects::func_860E("enemy", "waypoint_capture" + self.label);
+    maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_defend" + self.label);
+    maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_defend" + self.label);
   } else {
-    maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_captureneutral" + self.var_00E5);
-    maps\mp\gametypes\_gameobjects::func_860E("enemy", "waypoint_captureneutral" + self.var_00E5);
-    maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_captureneutral" + self.var_00E5);
-    maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_captureneutral" + self.var_00E5);
+    maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_captureneutral" + self.label);
+    maps\mp\gametypes\_gameobjects::func_860E("enemy", "waypoint_captureneutral" + self.label);
+    maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_captureneutral" + self.label);
+    maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_captureneutral" + self.label);
   }
 
   if(param_00 == "allies") {
-    common_scripts\utility::func_0F93(level.var_0BF4, self.var_00E5);
+    common_scripts\utility::func_F93(level.var_BF4, self.label);
     return;
   }
 
-  common_scripts\utility::func_0F93(level.var_0BF4, self.var_00E5);
+  common_scripts\utility::func_F93(level.var_BF4, self.label);
 }
 
 func_A192(param_00) {
@@ -483,7 +483,7 @@ func_A192(param_00) {
 
   if(!function_0279(self.var_A582[0])) {
     var_01 = self.var_A582[0];
-    func_3EC2(var_01.var_0116, anglestoup(var_01.var_001D));
+    func_3EC2(var_01.origin, anglestoup(var_01.angles));
   }
 }
 
@@ -548,13 +548,13 @@ func_A189(param_00, param_01) {
 
 func_6BBF(param_00) {
   var_01 = gettime();
-  var_02 = param_00.var_01A7;
+  var_02 = param_00.team;
   var_03 = maps\mp\gametypes\_gameobjects::func_45F7();
   var_04 = 0;
   var_05 = 0;
-  if(self.var_3C66 && self.var_00E5 == func_45DB()) {
+  if(self.var_3C66 && self.label == func_45DB()) {
     var_04 = 1;
-  } else if(self.var_3C66 && self.var_00E5 != func_45DB()) {
+  } else if(self.var_3C66 && self.label != func_45DB()) {
     var_05 = 1;
   }
 
@@ -567,26 +567,26 @@ func_6BBF(param_00) {
     self.var_6DA9 = 1;
   }
 
-  function_00F6(self.var_A582[0].var_0116, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", param_00.var_0109, param_00.var_5CC6, var_02, var_01);
+  function_00F6(self.var_A582[0].origin, "script_mp_captures: player_name %s, life_id %d, team %s, gameTime %d", param_00.name, param_00.var_5CC6, var_02, var_01);
   maps\mp\gametypes\_gameobjects::func_86EC(var_02);
-  maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_capture" + self.var_00E5);
-  maps\mp\gametypes\_gameobjects::func_860E("enemy", "waypoint_capture" + self.var_00E5);
-  maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_defend" + self.var_00E5);
-  maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_defend" + self.var_00E5);
+  maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_capture" + self.label);
+  maps\mp\gametypes\_gameobjects::func_860E("enemy", "waypoint_capture" + self.label);
+  maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_defend" + self.label);
+  maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_defend" + self.label);
   func_A192();
-  level.var_A239 = 0;
+  level.usestartspawns = 0;
   if(var_03 == "neutral") {
     var_06 = maps\mp\_utility::func_45DE(var_02);
-    func_933E("secured" + self.var_00E5, var_02, 1);
-    func_933E("enemy_has" + self.var_00E5, var_06, 1);
+    func_933E("secured" + self.label, var_02, 1);
+    func_933E("enemy_has" + self.label, var_06, 1);
     level thread maps\mp\_utility::func_74D9("mp_obj_notify_pos_lrg", var_02);
   } else {
     if(func_46CC(var_02) == level.var_3CC5.size) {
       func_933E("secure_all", var_02);
       func_933E("lost_all", var_03);
     } else {
-      func_933E("secured" + self.var_00E5, var_02, 1);
-      func_933E("lost" + self.var_00E5, var_03, 1);
+      func_933E("secured" + self.label, var_02, 1);
+      func_933E("lost" + self.label, var_03, 1);
     }
 
     level thread maps\mp\_utility::func_74D9("mp_obj_notify_pos_lrg", var_02);
@@ -594,27 +594,27 @@ func_6BBF(param_00) {
     level.var_1731[var_03] = self.var_5CBA;
   }
 
-  func_A189(self.var_00E5, var_02);
-  param_00 thread maps\mp\_audio::func_8DAE("mp_obj_notify_pos_lrg", "mp_obj_notify_neg_lrg");
+  func_A189(self.label, var_02);
+  param_00 thread maps\mp\_audio::snd_play_team_splash("mp_obj_notify_pos_lrg", "mp_obj_notify_neg_lrg");
   thread func_4786(self.var_9AC3[var_02], var_04, var_05);
 }
 
 func_4786(param_00, param_01, param_02) {
   level endon("game_ended");
   var_03 = maps\mp\gametypes\_gameobjects::func_44AF();
-  if(isDefined(var_03.var_0117)) {
-    var_03 = var_03.var_0117;
+  if(isDefined(var_03.owner)) {
+    var_03 = var_03.owner;
   }
 
   if(isPlayer(var_03)) {
-    level thread maps\mp\_utility::func_9863("callout_securedposition" + self.var_00E5, var_03);
+    level thread maps\mp\_utility::func_9863("callout_securedposition" + self.label, var_03);
   }
 
   var_04 = getarraykeys(param_00);
   for(var_05 = 0; var_05 < var_04.size; var_05++) {
-    var_03 = param_00[var_04[var_05]].var_721C;
-    if(isDefined(var_03.var_0117)) {
-      var_03 = var_03.var_0117;
+    var_03 = param_00[var_04[var_05]].player;
+    if(isDefined(var_03.owner)) {
+      var_03 = var_03.owner;
     }
 
     if(!isPlayer(var_03)) {
@@ -630,19 +630,19 @@ func_4786(param_00, param_01, param_02) {
 func_4787(param_00) {
   level endon("game_ended");
   var_01 = maps\mp\gametypes\_gameobjects::func_44AF();
-  if(isDefined(var_01.var_0117)) {
-    var_01 = var_01.var_0117;
+  if(isDefined(var_01.owner)) {
+    var_01 = var_01.owner;
   }
 
   if(isPlayer(var_01)) {
-    level thread maps\mp\_utility::func_9863("callout_neutralized_position" + self.var_00E5, var_01);
+    level thread maps\mp\_utility::func_9863("callout_neutralized_position" + self.label, var_01);
   }
 
   var_02 = getarraykeys(param_00);
   for(var_03 = 0; var_03 < var_02.size; var_03++) {
-    var_01 = param_00[var_02[var_03]].var_721C;
-    if(isDefined(var_01.var_0117)) {
-      var_01 = var_01.var_0117;
+    var_01 = param_00[var_02[var_03]].player;
+    if(isDefined(var_01.owner)) {
+      var_01 = var_01.owner;
     }
 
     if(!isPlayer(var_01)) {
@@ -657,20 +657,20 @@ func_4787(param_00) {
 func_2CDB(param_00, param_01) {
   level endon("game_ended");
   wait(0.1);
-  maps\mp\_utility::func_A790();
+  maps\mp\_utility::waittillslowprocessallowed();
   maps\mp\_utility::func_5C39(param_00, param_01);
 }
 
 func_2CDC(param_00, param_01, param_02, param_03) {
   level endon("game_ended");
   wait(0.1);
-  maps\mp\_utility::func_A790();
+  maps\mp\_utility::waittillslowprocessallowed();
   maps\mp\_utility::func_5C3E(param_00, param_01, param_02, param_03);
 }
 
 func_A109() {
   level endon("game_ended");
-  while(!level.var_3F9D) {
+  while(!level.gameended) {
     var_00 = func_45F5();
     if(var_00.size) {
       var_01 = undefined;
@@ -704,37 +704,37 @@ func_A109() {
         maps\mp\gametypes\_gamescore::func_47BD("axis", var_04 - var_03, 1);
       }
 
-      if(level.var_3211.size == var_00.size && var_02 != "none" && level.var_744A.size > 5) {
-        level.var_0BDB[var_02]["time"] = gettime() - var_01;
-        level.var_0BDB[maps\mp\_utility::func_45DE(var_02)]["time"] = 0;
-        if(level.var_0BDB[var_02]["time"] > -5536 && level.var_0BDB["axis"]["awarded"] == 0) {
-          level.var_0BDB["axis"]["awarded"] = 1;
-          foreach(var_0A in level.var_744A) {
-            if(var_0A.var_01A7 != var_02) {
+      if(level.var_3211.size == var_00.size && var_02 != "none" && level.players.size > 5) {
+        level.var_BDB[var_02]["time"] = gettime() - var_01;
+        level.var_BDB[maps\mp\_utility::func_45DE(var_02)]["time"] = 0;
+        if(level.var_BDB[var_02]["time"] > -5536 && level.var_BDB["axis"]["awarded"] == 0) {
+          level.var_BDB["axis"]["awarded"] = 1;
+          foreach(var_0A in level.players) {
+            if(var_0A.team != var_02) {
               continue;
             }
 
-            var_0A maps\mp\gametypes\_missions::func_7750("ch_dom_tripcap");
+            var_0A maps\mp\gametypes\_missions::processchallenge("ch_dom_tripcap");
           }
         }
       } else {
-        level.var_0BDB["axis"]["time"] = 0;
-        level.var_0BDB["allies"]["time"] = 0;
+        level.var_BDB["axis"]["time"] = 0;
+        level.var_BDB["allies"]["time"] = 0;
       }
     }
 
-    var_04 = 1;
-    var_05 = func_454E();
-    foreach(var_07 in level.var_3211) {
-      if((var_07.var_00E5 == "_a" || var_07.var_00E5 == var_05) && var_07.var_4B25 == 0) {
-        var_04 = 0;
+    var_0C = 1;
+    var_0D = func_454E();
+    foreach(var_0F in level.var_3211) {
+      if((var_0F.label == "_a" || var_0F.label == var_0D) && var_0F.var_4B25 == 0) {
+        var_0C = 0;
         break;
       }
     }
 
-    if(maps\mp\_utility::func_602B() && !level.var_0C27 && !var_04 && func_44A5() > 120000 && !getdvarint("850")) {
+    if(maps\mp\_utility::func_602B() && !level.var_C27 && !var_0C && func_44A5() > 120000 && !getdvarint("850")) {
       level.var_3B5C = "none";
-      thread maps\mp\gametypes\_gamelogic::func_36B9("none", game["end_reason"]["time_limit_reached"]);
+      thread maps\mp\gametypes\_gamelogic::endgame("none", game["end_reason"]["time_limit_reached"]);
       return;
     }
 
@@ -752,7 +752,7 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  if(maps\mp\gametypes\_damage::func_56FA(self, param_01)) {
+  if(maps\mp\gametypes\_damage::isfriendlyfire(self, param_01)) {
     return;
   }
 
@@ -776,7 +776,7 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     }
 
     var_12 = var_0D.var_A222.var_6DB2;
-    if(param_01.var_01A7 != var_12) {
+    if(param_01.team != var_12) {
       param_01 thread maps\mp\_events::func_5A82(var_0B, param_09, param_04);
       var_0A = 1;
     }
@@ -785,16 +785,16 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_14 = 90000;
   foreach(var_0D in level.var_3CC5) {
     var_12 = var_0D.var_A222.var_6DB2;
-    var_16 = distancesquared(var_0D.var_0116, var_0B.var_0116);
-    var_17 = distancesquared(var_0D.var_0116, param_01.var_0116);
+    var_16 = distancesquared(var_0D.origin, var_0B.origin);
+    var_17 = distancesquared(var_0D.origin, param_01.origin);
     if(var_16 < var_14) {
       param_01 thread maps\mp\gametypes\_missions::func_80BB(param_04, param_03);
     }
 
-    if(var_12 == param_01.var_01A7) {
+    if(var_12 == param_01.team) {
       if(var_16 < var_14 || var_17 < var_14) {
         param_01 thread maps\mp\_events::func_2C80(var_0B, param_09, param_04);
-        param_01 maps\mp\_utility::func_867C(param_01.var_012C["defends"]);
+        param_01 maps\mp\_utility::func_867C(param_01.pers["defends"]);
       }
     }
 
@@ -802,7 +802,7 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       break;
     }
 
-    if(var_12 == var_0B.var_01A7) {
+    if(var_12 == var_0B.team) {
       if(var_17 < var_14 || var_16 < var_14) {
         param_01 thread maps\mp\_events::func_10BA(self, param_09, param_04);
       }
@@ -839,13 +839,13 @@ func_44E3() {
 func_3CC7() {
   var_00 = lib_050D::func_448A();
   foreach(var_02 in var_00) {
-    if(isDefined(var_02.var_0165) && issubstr(var_02.var_0165, "_override")) {
-      var_02.var_766F = "_" + getsubstr(var_02.var_0165, 0, 1);
+    if(isDefined(var_02.script_noteworthy) && issubstr(var_02.script_noteworthy, "_override")) {
+      var_02.var_766F = "_" + getsubstr(var_02.script_noteworthy, 0, 1);
       continue;
     }
 
     var_02.var_663E = func_459D(var_02);
-    var_02.var_766F = var_02.var_663E.var_A222.var_00E5;
+    var_02.var_766F = var_02.var_663E.var_A222.label;
   }
 }
 
@@ -856,11 +856,11 @@ func_459D(param_00) {
   foreach(var_05 in level.var_3211) {
     var_06 = undefined;
     if(var_01) {
-      var_06 = getpathdist(param_00.var_0116, var_05.var_5CBA.var_0116, 999999);
+      var_06 = getpathdist(param_00.origin, var_05.var_5CBA.origin, 999999);
     }
 
     if(!isDefined(var_06) || var_06 == -1) {
-      var_06 = distancesquared(var_05.var_5CBA.var_0116, param_00.var_0116);
+      var_06 = distancesquared(var_05.var_5CBA.origin, param_00.origin);
     }
 
     if(!isDefined(var_02) || var_06 < var_03) {

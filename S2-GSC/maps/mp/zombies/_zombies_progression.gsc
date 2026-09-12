@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\_zombies_progression.gsc
 ****************************************************/
 
-func_00D5() {
+init() {
   setdvarifuninitialized("spv_zm_difficulty_enabled", 1);
   setdvarifuninitialized("spv_zm_shotgun_difficulty", 1);
   setdvarifuninitialized("spv_zm_shotgun_health_mod", 1);
@@ -102,7 +102,7 @@ debug_show_shotgun_player_levels() {
   level endon("game_ended");
   for(;;) {
     if(getdvarint("zm_shotgun_show_level", 0)) {
-      foreach(var_01 in level.var_744A) {
+      foreach(var_01 in level.players) {
         var_02 = var_01 get_zm_shotgun_player_level();
       }
     }
@@ -115,7 +115,7 @@ debug_show_shotgun_player_xp() {
   level endon("game_ended");
   for(;;) {
     if(getdvarint("zm_shotgun_show_xp", 0)) {
-      foreach(var_01 in level.var_744A) {
+      foreach(var_01 in level.players) {
         var_02 = var_01 get_zm_shotgun_player_xp();
       }
     }

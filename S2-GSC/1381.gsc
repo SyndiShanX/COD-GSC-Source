@@ -3,8 +3,8 @@
  * Script: 1381.gsc
 *********************************************/
 
-lib_0565::func_5373() {
-  level thread lib_0565::func_400A();
+func_5373() {
+  level thread func_400A();
 }
 
 unlocksurvivalmaps() {
@@ -108,7 +108,7 @@ getzombiegeareventvalue(param_00) {
   }
 }
 
-lib_0565::func_7C07(param_00) {
+func_7C07(param_00) {
   if(!isDefined(level.var_400C)) {
     level.var_400C = [];
   }
@@ -116,7 +116,7 @@ lib_0565::func_7C07(param_00) {
   level.var_400C[param_00] = 16;
 }
 
-lib_0565::func_400A() {
+func_400A() {
   level endon("game_over");
   self endon("disconnect");
   if(!isDefined(level.var_400E)) {
@@ -160,19 +160,19 @@ lib_0565::func_400A() {
 
         if(common_scripts\utility::func_562E(level.var_6B4D)) {
           if(isstring(var_06) && var_06 == "all") {
-            if(!isDefined(level.var_744A)) {
+            if(!isDefined(level.players)) {
               continue;
             }
 
-            foreach(var_0A in level.var_744A) {
-              var_0A lib_0565::func_83DB(var_08, var_04, var_05, var_03);
+            foreach(var_0A in level.players) {
+              var_0A func_83DB(var_08, var_04, var_05, var_03);
             }
 
             continue;
           }
 
           if(!function_0279(var_06) && isPlayer(var_06)) {
-            var_06 lib_0565::func_83DB(var_08, var_04, var_05, var_03);
+            var_06 func_83DB(var_08, var_04, var_05, var_03);
           }
         }
       }
@@ -184,7 +184,7 @@ lib_0565::func_400A() {
   }
 }
 
-lib_0565::func_83DB(param_00, param_01, param_02, param_03) {
+func_83DB(param_00, param_01, param_02, param_03) {
   if(!common_scripts\utility::func_562E(self.var_596A)) {
     return;
   }
@@ -200,7 +200,7 @@ lib_0565::func_83DB(param_00, param_01, param_02, param_03) {
 
   self.var_400B[var_04] = 1;
   thread maps\mp\gametypes\_hud_message::func_9102(var_04 + "_objective_complete");
-  lib_0468::func_0A2B(param_03, param_01);
+  lib_0468::func_A2B(param_03, param_01);
 }
 
 getchallengesplashref(param_00, param_01) {
@@ -209,7 +209,7 @@ getchallengesplashref(param_00, param_01) {
 
 zombiegearchallengecompleteall(param_00, param_01) {
   var_02 = get_is_testing_offline();
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     var_04 zombiegearchallengecomplete(param_00, param_01, var_02);
   }
 }

@@ -3,7 +3,7 @@
  * Script: maps\mp\bots\_bots_gametype_ball.gsc
 ************************************************/
 
-func_00F9() {
+main() {
   func_87A7();
   func_878F();
 }
@@ -18,7 +18,7 @@ func_878F() {
   level.var_19DE = ::func_1941;
   level.var_19D6 = ::func_4091;
   level.var_19D7 = ::func_4092;
-  maps\mp\bots\_bots_util::func_1B20();
+  maps / mp / bots / _bots_util::func_1B20();
   while(!isDefined(level.var_152B)) {
     wait 0.05;
   }
@@ -26,12 +26,12 @@ func_878F() {
   level.var_152B["allies"].var_81E8 = "allies";
   level.var_152B["axis"].var_81E8 = "axis";
   bot_setup_ball_goal_node();
-  var_00 = getzonenearest(level.var_152B["allies"].var_0116);
+  var_00 = getzonenearest(level.var_152B["allies"].origin);
   if(isDefined(var_00)) {
     botzonesetteam(var_00, "allies");
   }
 
-  var_00 = getzonenearest(level.var_152B["axis"].var_0116);
+  var_00 = getzonenearest(level.var_152B["axis"].origin);
   if(isDefined(var_00)) {
     botzonesetteam(var_00, "axis");
   }
@@ -41,16 +41,16 @@ func_878F() {
   }
 
   var_04 = 0;
-  thread maps\mp\bots\_bots_gametype_common::func_19DA();
+  thread maps / mp / bots / _bots_gametype_common::func_19DA();
   level.var_19E8 = 1;
 }
 
 func_62E7() {
-  var_00 = self.var_A582[0].var_0116;
+  var_00 = self.var_A582[0].origin;
   self.var_6638 = function_00BA(var_00);
   for(;;) {
-    var_01 = self.var_A582[0].var_0116;
-    self.var_150B = maps\mp\bots\_bots_util::func_1B1C(var_00, var_01);
+    var_01 = self.var_A582[0].origin;
+    self.var_150B = maps / mp / bots / _bots_util::func_1B1C(var_00, var_01);
     if(!self.var_150B) {
       var_02 = function_00BA(var_01);
       if(!isDefined(var_02)) {
@@ -73,9 +73,9 @@ func_62E7() {
 bot_setup_ball_goal_node() {
   wait(1);
   foreach(var_01 in level.var_152B) {
-    var_01.var_6638 = function_00BA(var_01.var_0116);
+    var_01.var_6638 = function_00BA(var_01.origin);
     if(!isDefined(var_01.var_6638)) {
-      var_02 = getnodesinradiussorted(var_01.var_0116, 375, 0);
+      var_02 = getnodesinradiussorted(var_01.origin, 375, 0);
       if(var_02.size > 0) {
         var_01.var_6638 = var_02[0];
       }
@@ -86,15 +86,15 @@ bot_setup_ball_goal_node() {
 }
 
 func_1947(param_00, param_01, param_02) {
-  var_03 = func_1949(param_00, param_01.var_0116);
+  var_03 = func_1949(param_00, param_01.origin);
   if(isDefined(param_02) && param_02) {
     if(!var_03) {
-      var_04 = param_01.var_0116 - (0, 0, param_01.var_014F * 0.5);
+      var_04 = param_01.origin - (0, 0, param_01.var_14F * 0.5);
       var_03 = func_1949(param_00, var_04);
     }
 
     if(!var_03) {
-      var_04 = param_01.var_0116 + (0, 0, param_01.var_014F * 0.5);
+      var_04 = param_01.origin + (0, 0, param_01.var_14F * 0.5);
       var_03 = func_1949(param_00, var_04);
     }
   }
@@ -142,18 +142,18 @@ func_1948() {
   self.var_150C = randomint(100) < self botgetdifficultysetting("strategyLevel") * 25;
   self.var_150D = randomint(100) < self botgetdifficultysetting("strategyLevel") * 25;
   self.var_150F = randomint(100) < self botgetdifficultysetting("strategyLevel") * 25;
-  var_02 = level.var_152B[self.var_01A7];
-  var_03 = level.var_152B[common_scripts\utility::func_416F(self.var_01A7)];
+  var_02 = level.var_152B[self.team];
+  var_03 = level.var_152B[common_scripts\utility::func_416F(self.team)];
   childthread func_A87E();
   for(;;) {
     var_04 = !isDefined(self.var_7ECA);
     if(var_04) {
-      maps\mp\bots\_bots_gametype_common::func_19E7();
+      maps / mp / bots / _bots_gametype_common::func_19E7();
     }
 
     self botsetflag("force_sprint", 0);
-    var_05 = func_1942(self.var_01A7);
-    var_06 = func_1942(common_scripts\utility::func_416F(self.var_01A7));
+    var_05 = func_1942(self.team);
+    var_06 = func_1942(common_scripts\utility::func_416F(self.team));
     foreach(var_08 in var_06) {
       var_09 = var_08 func_1945() - (0, 0, 75);
       self method_8379(var_08.var_2006, var_09);
@@ -162,8 +162,8 @@ func_1948() {
     if(func_4B23()) {
       self botsetflag("force_sprint", 1);
       func_23B3();
-      self botsetscriptgoal(var_03.var_0116, 0, "critical");
-      maps\mp\bots\_bots_util::func_1B21(undefined, "bot_no_longer_has_ball");
+      self botsetscriptgoal(var_03.origin, 0, "critical");
+      maps / mp / bots / _bots_util::func_1B21(undefined, "bot_no_longer_has_ball");
       self method_8358();
     } else if(self.var_7ECA == "attacker") {
       var_0B = func_1944();
@@ -175,52 +175,52 @@ func_1948() {
             if(gettime() > var_01) {
               var_01 = gettime() + 5000;
               var_0E = undefined;
-              var_0F = getnodesonpath(var_0D, var_02.var_6638.var_0116);
+              var_0F = getnodesonpath(var_0D, var_02.var_6638.origin);
               if(isDefined(var_0F) && var_0F.size > 0) {
-                var_0E = var_0F[int(var_0F.size * randomfloatrange(0.25, 0.75))].var_0116;
+                var_0E = var_0F[int(var_0F.size * randomfloatrange(0.25, 0.75))].origin;
               }
 
               func_23B3();
-              if(isDefined(var_0E) && maps\mp\bots\_bots_personality::func_3B64(var_0E, 512)) {
-                self botsetscriptgoalnode(self.var_6708, "guard", self.var_0D94);
+              if(isDefined(var_0E) && maps / mp / bots / _bots_personality::func_3B64(var_0E, 512)) {
+                self botsetscriptgoalnode(self.var_6708, "guard", self.var_D94);
               } else {
                 self botsetscriptgoal(var_0D, 16, "guard");
               }
             }
           } else {
             func_23B3();
-            self botsetscriptgoal(var_0F, 16, "guard");
+            self botsetscriptgoal(var_0D, 16, "guard");
           }
-        } else if(var_07.size > 0) {
-          if(!maps\mp\bots\_bots_util::func_1A27()) {
-            var_10 = func_1943(var_07);
+        } else if(var_05.size > 0) {
+          if(!maps / mp / bots / _bots_util::func_1A27()) {
+            var_10 = func_1943(var_05);
             func_23B3();
-            maps\mp\bots\_bots_strategy::func_1A0C(var_10.var_2006, 500);
+            maps / mp / bots / _bots_strategy::func_1A0C(var_10.var_2006, 500);
           }
         } else {
-          var_11 = common_scripts\utility::func_40B0(self.var_0116, level.var_1554);
+          var_11 = common_scripts\utility::func_40B0(self.origin, level.var_1554);
           func_23B3();
-          self botsetscriptgoal(var_11[0].var_0116, 16, "guard");
+          self botsetscriptgoal(var_11[0].origin, 16, "guard");
         }
       } else {
-        var_12 = func_1943(var_0D);
+        var_12 = func_1943(var_0B);
         func_23B3("objective");
         if(var_12.var_150B) {
           var_13 = var_12 func_1945();
-          if(!self method_8367() || !maps\mp\bots\_bots_util::func_1B1C(var_13, self method_835C())) {
+          if(!self method_8367() || !maps / mp / bots / _bots_util::func_1B1C(var_13, self method_835C())) {
             self botsetscriptgoal(var_13, 16, "objective", undefined, 180);
           }
         } else {
-          self botsetscriptgoal(var_12.var_6638.var_0116, 16, "objective", undefined, 180);
+          self botsetscriptgoal(var_12.var_6638.origin, 16, "objective", undefined, 180);
         }
       }
     } else {
       var_14 = undefined;
-      var_12 = func_1944();
-      foreach(var_0B in var_12) {
-        var_16 = distance2dsquared(var_0B func_1945(), var_05.var_0116);
+      var_0B = func_1944();
+      foreach(var_08 in var_0B) {
+        var_16 = distance2dsquared(var_08 func_1945(), var_02.origin);
         if(var_16 < squared(func_40BB())) {
-          var_14 = var_0B;
+          var_14 = var_08;
           break;
         }
       }
@@ -230,15 +230,15 @@ func_1948() {
         if(var_14.var_150B) {
           self botsetscriptgoal(var_14 func_1945(), 16, "guard");
         } else {
-          self botsetscriptgoal(var_14.var_6638.var_0116, 16, "guard");
+          self botsetscriptgoal(var_14.var_6638.origin, 16, "guard");
         }
 
-        maps\mp\bots\_bots_util::func_1B21(1);
-      } else if(!maps\mp\bots\_bots_util::func_1A33()) {
+        maps / mp / bots / _bots_util::func_1B21(1);
+      } else if(!maps / mp / bots / _bots_util::func_1A33()) {
         self method_8358();
         var_18["score_flags"] = "strict_los";
-        var_18["override_origin_node"] = var_05.var_6638;
-        maps\mp\bots\_bots_strategy::func_1AA6(var_05.var_6638.var_0116, func_40BB(), var_18);
+        var_18["override_origin_node"] = var_02.var_6638;
+        maps / mp / bots / _bots_strategy::func_1AA6(var_02.var_6638.origin, func_40BB(), var_18);
       }
     }
 
@@ -265,21 +265,21 @@ func_A87E() {
 
 func_632C() {
   self endon("bot_no_longer_has_ball");
-  var_00 = level.var_152B[self.var_01A7];
-  var_01 = level.var_152B[common_scripts\utility::func_416F(self.var_01A7)];
+  var_00 = level.var_152B[self.team];
+  var_01 = level.var_152B[common_scripts\utility::func_416F(self.team)];
   for(;;) {
     if(self.var_150C) {
       if(isDefined(self.var_6EA9)) {
         var_02 = 1;
         if(var_02) {
-          var_03 = distancesquared(self.var_0116, var_01.var_0116);
-          var_04 = distancesquared(self.var_6EA9.var_0116, var_01.var_0116);
+          var_03 = distancesquared(self.origin, var_01.origin);
+          var_04 = distancesquared(self.var_6EA9.origin, var_01.origin);
           if(var_04 <= var_03) {
-            var_05 = anglesToForward(self getangles());
-            var_06 = vectorNormalize(self.var_6EA9.var_0116 - self.var_0116);
+            var_05 = anglesToForward(self getplayerangles());
+            var_06 = vectorNormalize(self.var_6EA9.origin - self.origin);
             var_07 = vectordot(var_05, var_06);
             if(var_07 > 0.7) {
-              self botlookatpoint(self.var_6EA9.var_0116 + (0, 0, 40), 1.25, "script_forced");
+              self botlookatpoint(self.var_6EA9.origin + (0, 0, 40), 1.25, "script_forced");
               wait(0.25);
               self botpressbutton("throw");
               wait(1);
@@ -290,21 +290,21 @@ func_632C() {
     }
 
     if(self.var_150D) {
-      if(isDefined(self.var_0088) && isalive(self.var_0088) && self method_8371(self.var_0088)) {
+      if(isDefined(self.enemy) && isalive(self.enemy) && self method_8371(self.enemy)) {
         var_08 = 1;
         if(var_08) {
-          var_09 = distancesquared(self.var_0116, var_00.var_0116);
+          var_09 = distancesquared(self.origin, var_00.origin);
           var_0A = var_09 < squared(func_40BB());
-          if(!var_0A && distancesquared(self.var_0116, self.var_0088.var_0116) < squared(350)) {
-            var_0B = anglesToForward(self.var_0088 getangles());
-            var_0C = vectorNormalize(self.var_0116 - self.var_0088.var_0116);
+          if(!var_0A && distancesquared(self.origin, self.enemy.origin) < squared(350)) {
+            var_0B = anglesToForward(self.enemy getplayerangles());
+            var_0C = vectorNormalize(self.origin - self.enemy.origin);
             var_07 = vectordot(var_0B, var_0C);
             if(var_07 > 0.5) {
-              var_05 = anglesToForward(self getangles());
+              var_05 = anglesToForward(self getplayerangles());
               var_0D = -1 * var_0C;
               var_07 = vectordot(var_05, var_0D);
               if(var_07 > 0.77) {
-                self botlookatpoint(self.var_0088.var_0116 + (0, 0, 40), 1.25, "script_forced");
+                self botlookatpoint(self.enemy.origin + (0, 0, 40), 1.25, "script_forced");
                 wait(0.25);
                 self botpressbutton("attack");
                 wait(1);
@@ -316,15 +316,15 @@ func_632C() {
     }
 
     if(self.var_150F) {
-      if(self.var_00BC < 100 && func_1947(self.var_0116, var_01)) {
-        self botlookatpoint(var_01.var_0116, 1.25, "script_forced");
+      if(self.health < 100 && func_1947(self.origin, var_01)) {
+        self botlookatpoint(var_01.origin, 1.25, "script_forced");
         wait(0.25);
         self botpressbutton("attack");
         wait(1);
       } else if(self.var_7ECA == "defender") {
-        var_09 = distancesquared(self.var_0116, var_00.var_0116);
+        var_09 = distancesquared(self.origin, var_00.origin);
         if(var_09 < squared(func_40BB())) {
-          var_0E = anglesToForward(self getangles() * (0, 1, 1) + (-30, 0, 0));
+          var_0E = anglesToForward(self getplayerangles() * (0, 1, 1) + (-30, 0, 0));
           self botlookatpoint(self getEye() + var_0E * 200, 1.25, "script_forced");
           wait(0.25);
           self botpressbutton("attack");
@@ -368,7 +368,7 @@ func_1943(param_00) {
   var_01 = 99999999;
   var_02 = undefined;
   foreach(var_04 in param_00) {
-    var_05 = distancesquared(self.var_0116, var_04 func_1945());
+    var_05 = distancesquared(self.origin, var_04 func_1945());
     if(var_05 < var_01) {
       var_01 = var_05;
       var_02 = var_04;
@@ -383,12 +383,12 @@ func_1945() {
     return self.var_28D4;
   }
 
-  return self.var_A582[0].var_0116;
+  return self.var_A582[0].origin;
 }
 
 func_23B3(param_00) {
-  if(maps\mp\bots\_bots_util::func_1A2D()) {
-    maps\mp\bots\_bots_strategy::func_19A3();
+  if(maps / mp / bots / _bots_util::func_1A2D()) {
+    maps / mp / bots / _bots_strategy::func_19A3();
   }
 
   if(self method_835F() == "objective") {
@@ -425,7 +425,7 @@ func_1942(param_00) {
       continue;
     }
 
-    if(isDefined(var_03.var_2006) && var_03.var_2006.var_01A7 == param_00) {
+    if(isDefined(var_03.var_2006) && var_03.var_2006.team == param_00) {
       var_01[var_01.size] = var_03;
     }
   }
@@ -434,7 +434,7 @@ func_1942(param_00) {
 }
 
 func_1940(param_00) {
-  var_01 = maps\mp\bots\_bots_gametype_common::func_19E1(param_00);
+  var_01 = maps / mp / bots / _bots_gametype_common::func_19E1(param_00);
   var_02 = var_01 * 0.67;
   var_03 = floor(var_02);
   var_04 = ceil(var_02);
@@ -450,7 +450,7 @@ func_1940(param_00) {
 }
 
 func_1941(param_00) {
-  var_01 = maps\mp\bots\_bots_gametype_common::func_19E1(param_00);
+  var_01 = maps / mp / bots / _bots_gametype_common::func_19E1(param_00);
   return var_01 - func_1940(param_00);
 }
 
@@ -469,9 +469,9 @@ func_40BB() {
 }
 
 func_4091(param_00) {
-  return maps\mp\bots\_bots_gametype_common::func_19DF(param_00, level.var_152B[param_00].var_0116, func_40BB());
+  return maps / mp / bots / _bots_gametype_common::func_19DF(param_00, level.var_152B[param_00].origin, func_40BB());
 }
 
 func_4092(param_00) {
-  return maps\mp\bots\_bots_gametype_common::func_19E0(param_00, level.var_152B[param_00].var_0116, func_40BB());
+  return maps / mp / bots / _bots_gametype_common::func_19E0(param_00, level.var_152B[param_00].origin, func_40BB());
 }

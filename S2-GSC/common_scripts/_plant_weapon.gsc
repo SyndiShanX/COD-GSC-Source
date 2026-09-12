@@ -27,15 +27,15 @@ func_5369(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   self.var_7076 = undefined;
   self.var_76E7 = undefined;
   self.var_76EC = undefined;
-  self.var_201C = param_01;
+  self.var_201C = param_00;
   self.var_7073 = undefined;
   self.var_A6B4 = 0;
   self.var_A1FC = 0;
-  self.var_706A = func_4295(param_01);
-  if(isDefined(param_06) && param_06) {
+  self.var_706A = func_4295(param_00);
+  if(isDefined(param_05) && param_05) {
     self.var_7077 = "STATE_CARRY_TO_PLANT";
-    self.var_7073 = var_07;
-    self.var_7075 = var_07;
+    self.var_7073 = param_06;
+    self.var_7075 = param_06;
   } else {
     self.var_7077 = "STATE_FIRST_CARRY";
     if(func_43DD() == "SCRIPTED_ALTSWITCH" || func_43DD() == "NATIVE_DPAD_LEFT") {
@@ -119,10 +119,10 @@ func_2399(param_00) {
 func_9EA3() {
   var_00 = undefined;
   if(isDefined(self.var_76EC)) {
-    var_00 = lengthsquared(self.var_001D - self.var_76EC);
+    var_00 = lengthsquared(self.angles - self.var_76EC);
   }
 
-  self.var_76EC = self.var_001D;
+  self.var_76EC = self.angles;
   var_01 = getdvarfloat("weapon_plant_max_turn_angle_vect_distance_sq", 70);
   if(isDefined(var_00) && var_00 > var_01) {
     return 1;
@@ -194,10 +194,10 @@ func_2F97() {
   self method_812A(1);
   func_6518(1);
   if(func_8B6B()) {
-    common_scripts\utility::func_0617();
+    common_scripts\utility::func_617();
   }
 
-  self method_8325();
+  self enableoffhandweapons();
   self enableusability();
 }
 
@@ -205,7 +205,7 @@ func_707A() {
   var_00 = func_43D9();
   var_01 = getdvarfloat("weapon_plant_limits_forward_offset", 0);
   var_02 = getdvarfloat("weapon_plant_limits_upward_offset", 5);
-  var_03 = self.var_001D;
+  var_03 = self.angles;
   if(isDefined(self.var_7075)) {
     self.var_7073 = self.var_7075;
     self.var_7076 = "stand";
@@ -233,9 +233,9 @@ func_707A() {
 
   var_09 = undefined;
   if(var_07 == "prone") {
-    var_09 = vectortoangles(self.var_7073 - self.var_0116);
+    var_09 = vectortoangles(self.var_7073 - self.origin);
   } else {
-    var_09 = self.var_001D;
+    var_09 = self.angles;
   }
 
   var_0A = func_4355(var_07);
@@ -248,7 +248,7 @@ func_707A() {
   var_11 = var_0D;
   var_12 = var_0E;
   if(func_8B53()) {
-    var_13 = common_scripts\_hit_found::func_43D8(self.var_0116[2], self.var_7073, var_06, var_09, var_02, var_01, var_00, var_0B, var_0C, var_0D, var_0E, func_4074());
+    var_13 = common_scripts\_hit_found::func_43D8(self.origin[2], self.var_7073, var_06, var_09, var_02, var_01, var_00, var_0B, var_0C, var_0D, var_0E, func_4074());
     var_0F = var_13[0];
     var_10 = var_13[1];
     var_11 = var_13[2];
@@ -273,20 +273,20 @@ func_707A() {
   self method_812A(0);
   func_6518(0);
   if(func_8B6B()) {
-    common_scripts\utility::func_0603();
+    common_scripts\utility::func_603();
   }
 
-  self method_8324();
+  self disableoffhandweapons();
   self disableusability();
   self playerweaponplantenable(self.var_7073, var_0F, var_10, var_11, var_12);
-  func_707B(var_07, self.var_7073, self.var_001D);
+  func_707B(var_07, self.var_7073, self.angles);
   if(func_43DD() == "SCRIPTED_SWAP") {
     var_14 = self getweaponammoclip(self.var_201C);
     var_15 = self getweaponammostock(self.var_201C);
     var_16 = get_weapon_paintjobid();
     var_17 = get_weapon_charmguid();
     self giveweapon(self.var_706A, undefined, 1, self, var_16, var_17);
-    self method_82FA(self.var_706A, var_14);
+    self setweaponammoclip(self.var_706A, var_14);
     self setweaponammostock(self.var_706A, var_15);
     self switchtoweapon(self.var_706A);
     self waittill("weapon_change");
@@ -309,7 +309,7 @@ func_707A() {
     if(self getcurrentweapon() != self.var_706A) {}
   }
 
-  self notify("WEAPON_PLANT_MOUNTED", var_07, self.var_7073, self.var_001D, self.var_706D);
+  self notify("WEAPON_PLANT_MOUNTED", var_07, self.var_7073, self.angles, self.var_706D);
 }
 
 func_14F3(param_00) {
@@ -344,7 +344,7 @@ func_2FED(param_00) {
         self switchtoweapon(self.var_201C);
       }
 
-      self method_82FA(self.var_201C, var_01);
+      self setweaponammoclip(self.var_201C, var_01);
       self setweaponammostock(self.var_201C, var_02);
       common_scripts\utility::func_A71A(1, "weapon_change");
       if(self getcurrentweapon() == self.var_706A) {
@@ -417,12 +417,12 @@ func_A6A5(param_00) {
   func_98DF();
   if(isDefined(param_00)) {
     childthread func_21D0(param_00);
-    var_01 = common_scripts\utility::func_A715("plant_button_down", "plantOnEntityRemoved", "native_dpad_force_plant");
+    var_01 = common_scripts\utility::waittill_any_return("plant_button_down", "plantOnEntityRemoved", "native_dpad_force_plant");
     if(isDefined(var_01) && var_01 == "plantOnEntityRemoved") {
       return 1;
     }
   } else {
-    var_01 = common_scripts\utility::func_A715("plant_button_down", "native_dpad_force_plant");
+    var_01 = common_scripts\utility::waittill_any_return("plant_button_down", "native_dpad_force_plant");
   }
 
   if(func_43DD() != "NATIVE_DPAD_LEFT") {
@@ -579,9 +579,9 @@ func_9963() {
         break;
     }
 
-    if(var_01 == var_03) {
-      var_02++;
-      if(var_02 > 5) {
+    if(var_00 == var_02) {
+      var_01++;
+      if(var_01 > 5) {
         wait 0.05;
       }
 
@@ -631,7 +631,7 @@ func_A123() {
             var_00 = self getweaponammoclip(self.var_706A);
             var_01 = self getweaponammostock(self.var_706A);
             if(var_01 == 0 && var_00 < 2) {
-              self method_82FA(self.var_201C, var_00);
+              self setweaponammoclip(self.var_201C, var_00);
               self setweaponammostock(self.var_201C, var_01);
             }
           }
@@ -703,7 +703,7 @@ func_62DA() {
             self.var_7076 = undefined;
             var_0D = getdvarfloat("3235", 48);
             var_0E = getdvarfloat("1492", 34);
-            var_0F = var_0B[2] - self.var_0116[2];
+            var_0F = var_0B[2] - self.origin[2];
             if(var_0F >= var_0D) {
               var_10 = func_43DE();
               var_11 = var_0D + var_10;
@@ -713,15 +713,15 @@ func_62DA() {
                 self.var_7073 = undefined;
                 break;
               }
-            } else if(var_11 > var_10) {
+            } else if(var_0F > var_0E) {
               self.var_7076 = "stand";
             }
 
             if(!isDefined(self.var_7076)) {
-              if(var_11 <= var_10) {
+              if(var_0F <= var_0E) {
                 var_12 = func_43DA();
-                var_13 = var_10 - var_12;
-                if(var_11 >= var_13 - 0.001) {
+                var_13 = var_0E - var_12;
+                if(var_0F >= var_13 - 0.001) {
                   self.var_7076 = "crouch";
                 } else {
                   self.var_7073 = undefined;
@@ -733,14 +733,14 @@ func_62DA() {
         }
 
         if(isDefined(self.var_7075)) {
-          var_08 = self.var_7075;
+          var_00 = self.var_7075;
         } else if(isDefined(self.var_7073)) {
           if(isDefined(self.var_706F) && self.var_706F) {
             self.var_7070 = self.var_7073;
             self.var_7073 = undefined;
           } else {
-            self.var_706D = var_11;
-            var_08 = self.var_7073;
+            self.var_706D = var_09;
+            var_00 = self.var_7073;
           }
         }
         break;
@@ -806,7 +806,7 @@ func_62DA() {
       }
 
       if(self.var_7077 == "STATE_CARRY" && !self method_85EC() && self method_86B1("to_alt")) {
-        self.var_7073 = var_0F;
+        self.var_7073 = var_00;
         self notify("native_dpad_force_plant");
       }
     }
@@ -820,7 +820,7 @@ func_6370() {
   self endon("cleanupWeaponPlantImmediate");
   self notify("monitor_planted_weapon_cleanup");
   self endon("monitor_planted_weapon_cleanup");
-  var_00 = common_scripts\utility::func_A716("weapon_plant_cleanup", "weapon_change", "death", "joined_team", "joined_spectators", "weaponPlantFiringRange");
+  var_00 = common_scripts\utility::waittill_any_return_no_endon_death("weapon_plant_cleanup", "weapon_change", "death", "joined_team", "joined_spectators", "weaponPlantFiringRange");
   if(var_00 == "weapon_change") {
     var_01 = 0;
     var_02 = 0;
@@ -892,15 +892,15 @@ func_21D0(param_00) {
   }
 
   var_05 = param_00 func_8C6C();
-  var_06 = param_00.var_0106;
+  var_06 = param_00.model;
   var_07 = "";
-  if(param_00.var_003A == "scriptable") {
+  if(param_00.classname == "scriptable") {
     var_07 = param_00 getscriptablepartstate(0);
   }
 
   if(func_5778(param_00)) {
-    var_02 = param_00.var_0116;
-    var_03 = param_00.var_001D;
+    var_02 = param_00.origin;
+    var_03 = param_00.angles;
     if(param_00 method_8221() && param_00 gettagangles("TAG_YAW") != -1) {
       var_04 = param_00 gettagangles("TAG_YAW");
     }
@@ -909,17 +909,17 @@ func_21D0(param_00) {
   for(;;) {
     if(!isDefined(param_00)) {
       var_01 = 1;
-    } else if(isDefined(var_05) && !var_05 && (param_00.var_003A == "script_brushmodel" || param_00.var_003A == "script_model") && param_00 func_8C6C()) {
+    } else if(isDefined(var_05) && !var_05 && (param_00.classname == "script_brushmodel" || param_00.classname == "script_model") && param_00 func_8C6C()) {
       var_01 = 1;
-    } else if((param_00.var_003A == "script_brushmodel" || param_00.var_003A == "script_model") && !param_00 method_86A9()) {
+    } else if((param_00.classname == "script_brushmodel" || param_00.classname == "script_model") && !param_00 method_86A9()) {
       var_01 = 1;
-    } else if(param_00.var_003A == "scriptable" && param_00 getscriptablepartstate(0) != var_07) {
+    } else if(param_00.classname == "scriptable" && param_00 getscriptablepartstate(0) != var_07) {
       var_01 = 1;
-    } else if(isDefined(param_00.var_0106) && param_00.var_0106 != "" && param_00 isentdestructible() && param_00 getdestructibledestroyedpercent() > 0) {
+    } else if(isDefined(param_00.model) && param_00.model != "" && param_00 isentdestructible() && param_00 getdestructibledestroyedpercent() > 0) {
       var_01 = 1;
-    } else if(isDefined(var_02) && distance2dsquared(var_02, param_00.var_0116) > 1) {
+    } else if(isDefined(var_02) && distance2dsquared(var_02, param_00.origin) > 1) {
       var_01 = 1;
-    } else if(isDefined(var_03) && distancesquared(var_03, param_00.var_001D) > 1) {
+    } else if(isDefined(var_03) && distancesquared(var_03, param_00.angles) > 1) {
       var_01 = 1;
     } else if(isDefined(var_04) && distance2dsquared(var_04, param_00 gettagangles("TAG_YAW")) > 1) {
       var_01 = 1;

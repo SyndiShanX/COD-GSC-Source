@@ -3,7 +3,7 @@
  * Script: 1349.gsc
 *********************************************/
 
-lib_0545::func_00D5() {
+init() {
   if(!isDefined(level.var_954F)) {
     level.var_954F = [];
   }
@@ -17,34 +17,34 @@ lib_0545::func_00D5() {
   }
 
   var_00 = common_scripts\utility::func_46B7("switch", "targetname");
-  common_scripts\utility::func_0FB2(var_00, ::lib_0545::func_955B);
+  common_scripts\utility::array_thread(var_00, ::func_955B);
 }
 
-lib_0545::func_9557(param_00, param_01) {
+func_9557(param_00, param_01) {
   level.var_954F[param_00] = param_01;
 }
 
-lib_0545::func_9556(param_00, param_01) {
+func_9556(param_00, param_01) {
   level.var_954E[param_00] = param_01;
 }
 
-lib_0545::func_9558(param_00, param_01) {
+func_9558(param_00, param_01) {
   level.var_9550[param_00] = param_01;
 }
 
-lib_0545::func_955B() {
+func_955B() {
   self.var_8BC8 = [];
   self.var_4CE1 = [];
   self.var_8BCC = [];
   self.var_4CE5 = [];
-  var_00 = getEntArray(self.var_01A2, "targetname");
+  var_00 = getEntArray(self.target, "targetname");
   foreach(var_02 in var_00) {
-    lib_0545::func_954A(var_02);
+    func_954A(var_02);
   }
 
-  var_04 = common_scripts\utility::func_46B7(self.var_01A2, "targetname");
+  var_04 = common_scripts\utility::func_46B7(self.target, "targetname");
   foreach(var_06 in var_04) {
-    lib_0545::func_955A(var_06);
+    func_955A(var_06);
   }
 
   common_scripts\utility::func_3799("needs_update");
@@ -53,33 +53,33 @@ lib_0545::func_955B() {
   }
 
   waittillframeend;
-  thread lib_0545::func_9560(self.var_819A);
+  thread func_9560(self.var_819A);
   if(isDefined(self.var_81A1)) {
     self.var_81A2 = strtok(self.var_81A1, " ");
     foreach(var_09 in self.var_81A2) {
-      thread lib_0545::func_9560(var_09);
+      thread func_9560(var_09);
     }
   }
 
   if(isDefined(self.var_819E)) {
     self.var_819F = strtok(self.var_819E, " ");
     foreach(var_09 in self.var_819F) {
-      thread lib_0545::func_9560(var_09);
+      thread func_9560(var_09);
     }
   }
 
-  thread lib_0545::func_9561();
+  thread func_9561();
   common_scripts\utility::func_379A("needs_update");
   for(;;) {
     common_scripts\utility::func_379C("needs_update");
-    lib_0545::func_955F();
+    func_955F();
   }
 }
 
-lib_0545::func_954A(param_00) {
-  var_01 = param_00.var_0165;
+func_954A(param_00) {
+  var_01 = param_00.script_noteworthy;
   if(!isDefined(var_01)) {
-    switch (param_00.var_003A) {
+    switch (param_00.classname) {
       case "script_model":
         var_01 = "anim_model";
         break;
@@ -125,31 +125,31 @@ lib_0545::func_954A(param_00) {
   }
 }
 
-lib_0545::func_955A(param_00) {
-  var_01 = param_00.var_0165;
+func_955A(param_00) {
+  var_01 = param_00.script_noteworthy;
   switch (var_01) {
     case "indicator_light_on_fx":
       self.var_8BCC[self.var_8BCC.size] = param_00;
-      lib_0545::func_954C(param_00);
+      func_954C(param_00);
       break;
 
     case "indicator_light_off_fx":
       self.var_4CE5[self.var_4CE5.size] = param_00;
-      lib_0545::func_954C(param_00);
+      func_954C(param_00);
       break;
   }
 }
 
-lib_0545::func_9561() {
+func_9561() {
   if(!isDefined(self.var_9D65)) {
     return;
   }
 
   for(;;) {
     self.var_9D65 waittill("trigger", var_00);
-    if(lib_0545::func_9551()) {
-      if(lib_0545::func_9552()) {
-        if(lib_0545::func_9547()) {
+    if(func_9551()) {
+      if(func_9552()) {
+        if(func_9547()) {
           common_scripts\utility::func_3C7B(self.var_819A);
           common_scripts\utility::func_379A("needs_update");
         }
@@ -163,7 +163,7 @@ lib_0545::func_9561() {
   }
 }
 
-lib_0545::func_9560(param_00) {
+func_9560(param_00) {
   for(;;) {
     common_scripts\utility::func_3C9F(param_00);
     common_scripts\utility::func_379A("needs_update");
@@ -172,11 +172,11 @@ lib_0545::func_9560(param_00) {
   }
 }
 
-lib_0545::func_9551() {
-  return !isDefined(lib_0545::func_7AC7());
+func_9551() {
+  return !isDefined(func_7AC7());
 }
 
-lib_0545::func_7AC7() {
+func_7AC7() {
   if(isDefined(self.var_81A2)) {
     foreach(var_01 in self.var_81A2) {
       if(!common_scripts\utility::func_3C77(var_01)) {
@@ -196,24 +196,24 @@ lib_0545::func_7AC7() {
   return undefined;
 }
 
-lib_0545::func_9552() {
+func_9552() {
   return common_scripts\utility::func_3C77(self.var_819A);
 }
 
-lib_0545::func_9547() {
-  return lib_0545::func_9551() && lib_0545::func_9552() && isDefined(level.var_954E[self.var_819A]);
+func_9547() {
+  return func_9551() && func_9552() && isDefined(level.var_954E[self.var_819A]);
 }
 
-lib_0545::func_955F() {
+func_955F() {
   if(isDefined(self.var_9D65)) {
-    if(lib_0545::func_9551()) {
-      if(lib_0545::func_9552()) {
+    if(func_9551()) {
+      if(func_9552()) {
         var_00 = level.var_954E[self.var_819A];
       } else {
         var_00 = level.var_954F[self.var_819A];
       }
-    } else if(!lib_0545::func_9552() || lib_0545::func_9547()) {
-      var_00 = level.var_9550[lib_0545::func_7AC7()];
+    } else if(!func_9552() || func_9547()) {
+      var_00 = level.var_9550[func_7AC7()];
     } else {
       var_00 = undefined;
     }
@@ -226,43 +226,43 @@ lib_0545::func_955F() {
     }
   }
 
-  if(lib_0545::func_9552()) {
+  if(func_9552()) {
     foreach(var_02 in self.var_8BCC) {
-      lib_0545::func_954D(var_02);
+      func_954D(var_02);
     }
 
     foreach(var_05 in self.var_8BC8) {
-      var_05 method_805B();
+      var_05 show();
     }
 
     foreach(var_02 in self.var_4CE5) {
-      thread lib_0545::func_954B(var_02);
+      thread func_954B(var_02);
     }
 
     foreach(var_05 in self.var_4CE1) {
-      var_05 method_805C();
+      var_05 hide();
     }
   } else {
     foreach(var_02 in self.var_4CE5) {
-      lib_0545::func_954D(var_02);
+      func_954D(var_02);
     }
 
     foreach(var_05 in self.var_4CE1) {
-      var_05 method_805B();
+      var_05 show();
     }
 
     foreach(var_02 in self.var_8BCC) {
-      thread lib_0545::func_954B(var_02);
+      thread func_954B(var_02);
     }
 
     foreach(var_05 in self.var_8BC8) {
-      var_05 method_805C();
+      var_05 hide();
     }
   }
 
   if(isDefined(self.var_6298)) {
-    if(isDefined(self.var_9546) && self.var_9546 != lib_0545::func_9552()) {
-      if(lib_0545::func_9552()) {
+    if(isDefined(self.var_9546) && self.var_9546 != func_9552()) {
+      if(func_9552()) {
         var_13 = self.var_6298.var_9E90;
       } else {
         var_13 = self.var_6298.var_9E87;
@@ -276,40 +276,40 @@ lib_0545::func_955F() {
       self.var_9546 = undefined;
     }
 
-    if(!isDefined(self.var_9546) || self.var_9546 != lib_0545::func_9552()) {
-      if(lib_0545::func_9552()) {
+    if(!isDefined(self.var_9546) || self.var_9546 != func_9552()) {
+      if(func_9552()) {
         var_13 = self.var_6298.var_5051;
       } else {
         var_13 = self.var_6298.var_504F;
       }
 
       self.var_6298 scriptmodelplayanim(var_13);
-      self.var_9546 = lib_0545::func_9552();
+      self.var_9546 = func_9552();
     }
   }
 
   common_scripts\utility::func_3796("needs_update");
 }
 
-lib_0545::func_954C(param_00) {
-  if(!isDefined(level.var_0611[param_00.var_81BB])) {
-    level.var_0611[param_00.var_81BB] = loadfx(param_00.var_81BB);
+func_954C(param_00) {
+  if(!isDefined(level.var_611[param_00.var_81BB])) {
+    level.var_611[param_00.var_81BB] = loadfx(param_00.var_81BB);
   }
 }
 
-lib_0545::func_954D(param_00) {
+func_954D(param_00) {
   if(isDefined(param_00.var_3F3F)) {
     return;
   }
 
   if(isDefined(param_00.var_81C7)) {
-    param_00.var_5DA5 = spawn("script_model", param_00.var_0116);
-    param_00.var_5DA5.var_001D = param_00.var_001D;
+    param_00.var_5DA5 = spawn("script_model", param_00.origin);
+    param_00.var_5DA5.angles = param_00.angles;
     param_00.var_5DA5 setModel("tag_origin");
     param_00.var_5DA5 linkTo(self.var_6298, param_00.var_81C7);
     param_00.var_3F3F = spawnlinkedfx(common_scripts\utility::func_44F5(param_00.var_81BB), param_00.var_5DA5, "tag_origin");
   } else {
-    param_00.var_3F3F = spawnfx(common_scripts\utility::func_44F5(param_00.var_81BB), param_00.var_0116, anglesToForward(param_00.var_001D), anglestoup(param_00.var_001D));
+    param_00.var_3F3F = spawnfx(common_scripts\utility::func_44F5(param_00.var_81BB), param_00.origin, anglesToForward(param_00.angles), anglestoup(param_00.angles));
   }
 
   if(gettime() < 500) {
@@ -320,7 +320,7 @@ lib_0545::func_954D(param_00) {
   triggerfx(param_00.var_3F3F);
 }
 
-lib_0545::func_954B(param_00) {
+func_954B(param_00) {
   wait 0.05;
   if(isDefined(param_00.var_5DA5)) {
     param_00.var_5DA5 delete();

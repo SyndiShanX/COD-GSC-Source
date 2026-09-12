@@ -3,7 +3,7 @@
  * Script: maps\mp\_audio_debug.gsc
 *********************************************/
 
-func_00F9() {}
+main() {}
 
 func_06EC(param_00) {
   var_01 = getdvarint("snd_debugRavenAudioHUDY");
@@ -36,19 +36,19 @@ func_06ED(param_00, param_01, param_02, param_03) {
 
 func_06E9() {
   var_00 = undefined;
-  if(isDefined(self.var_0116) == 1) {
-    var_00 = self.var_0116;
+  if(isDefined(self.origin) == 1) {
+    var_00 = self.origin;
   }
 
   if(isDefined(self.var_A265) == 1) {
     var_00 = self.var_A265["origin"];
-    self.var_0116 = var_00;
+    self.origin = var_00;
     self.var_6C3F = 1;
   }
 
   if(lib_02F0::func_8006(self) == "clientsnd") {
     if(isDefined(self.var_8F45) == 1) {
-      var_00 = self.var_8F45.var_0116;
+      var_00 = self.var_8F45.origin;
       self.var_8F46 = var_00;
       if(isDefined(self.var_8F49) == 1) {
         var_00 = var_00 + self.var_8F49;
@@ -62,7 +62,7 @@ func_06E9() {
       var_00 = self.var_8F49;
     }
 
-    self.var_0116 = var_00;
+    self.origin = var_00;
     self.var_6C3F = 1;
   }
 
@@ -136,25 +136,25 @@ func_06E2(param_00, param_01) {
   var_05 = param_00 geteyeangles();
   var_06 = getdvarfloat("cg_fov", 65);
   var_07 = cos(var_06);
-  if(isDefined(level.var_05B0) == 1 && param_01 >= 3) {
-    var_03 = func_06E3(var_03, level.var_05B0, var_04, var_05, var_07, var_02);
+  if(isDefined(level.var_5B0) == 1 && param_01 >= 3) {
+    var_03 = func_06E3(var_03, level.var_5B0, var_04, var_05, var_07, var_02);
   }
 
-  if(isDefined(level.var_071D) == 1 && isDefined(level.var_071D.var_0623) == 1) {
-    var_03 = func_06E3(var_03, level.var_071D.var_0623, var_04, var_05, var_07, var_02);
+  if(isDefined(level.var_71D) == 1 && isDefined(level.var_71D.var_623) == 1) {
+    var_03 = func_06E3(var_03, level.var_71D.var_623, var_04, var_05, var_07, var_02);
   }
 
-  if(isDefined(level.var_06B2) == 1) {
-    if(isDefined(level.var_06B2.var_061A) == 1) {
-      var_03 = func_06E3(var_03, level.var_06B2.var_061A, var_04, var_05, var_07, var_02);
+  if(isDefined(level.var_6B2) == 1) {
+    if(isDefined(level.var_6B2.var_61A) == 1) {
+      var_03 = func_06E3(var_03, level.var_6B2.var_61A, var_04, var_05, var_07, var_02);
     }
 
-    if(isDefined(level.var_06B2.var_0720) == 1) {
-      var_03 = func_06E3(var_03, level.var_06B2.var_0720, var_04, var_05, var_07, var_02);
+    if(isDefined(level.var_6B2.var_720) == 1) {
+      var_03 = func_06E3(var_03, level.var_6B2.var_720, var_04, var_05, var_07, var_02);
     }
 
-    if(isDefined(level.var_06B2.var_05E5) == 1) {
-      var_03 = func_06E3(var_03, level.var_06B2.var_05E5, var_04, var_05, var_07, var_02);
+    if(isDefined(level.var_6B2.var_5E5) == 1) {
+      var_03 = func_06E3(var_03, level.var_6B2.var_5E5, var_04, var_05, var_07, var_02);
     }
   }
 
@@ -168,8 +168,8 @@ func_06E6() {
   var_03 = getdvarfloat("snd_debugRavenAudioRadius");
   var_04 = var_03;
   var_05 = 0;
-  if(isDefined(self.var_001D) == 1) {
-    var_01 = self.var_001D;
+  if(isDefined(self.angles) == 1) {
+    var_01 = self.angles;
   }
 
   if(var_02 != "unknown") {
@@ -182,11 +182,11 @@ func_06E6() {
   }
 
   var_07 = 0;
-  foreach(var_09 in level.var_744A) {
+  foreach(var_09 in level.players) {
     var_0A = var_09 getEye();
-    var_07 = lib_02EF::func_578C(var_0A, var_01, var_05);
+    var_07 = lib_02EF::func_578C(var_0A, var_00, var_04);
     if(var_07 == 1) {
-      var_05 = var_04;
+      var_04 = var_03;
       break;
     }
   }
@@ -194,8 +194,8 @@ func_06E6() {
   var_0C = getdvarfloat("snd_debugRavenAudioColorScale");
   var_0D = lib_02EF::func_A2BB((1, 1, 1), var_0C);
   var_0E = 0.5;
-  if(var_07 == 1 || var_06 == 1) {
-    lib_02EF::func_28BB(var_01, var_02, var_05, var_0D, var_0E, 0, 1);
+  if(var_07 == 1 || var_05 == 1) {
+    lib_02EF::func_28BB(var_00, var_01, var_04, var_0D, var_0E, 0, 1);
   }
 }
 
@@ -279,45 +279,45 @@ func_06E4(param_00) {
     return;
   }
 
-  if(isDefined(level.var_744A) == 0) {
-    if(isDefined(level.var_27EE) == 0 || isDefined(level.var_721C) == 0) {
+  if(isDefined(level.players) == 0) {
+    if(isDefined(level.createfx) == 0 || isDefined(level.player) == 0) {
       return;
     } else {
-      level.var_744A = [];
-      level.var_744A[level.var_744A.size] = level.var_721C;
+      level.players = [];
+      level.players[level.players.size] = level.player;
     }
   }
 
-  level.var_05B8 = [];
-  foreach(var_02 in level.var_744A) {
+  level.var_5B8 = [];
+  foreach(var_02 in level.players) {
     var_03 = [];
     var_03 = func_06E2(var_02, param_00);
-    level.var_05B8 = common_scripts\utility::func_0F73(level.var_05B8, var_03);
+    level.var_5B8 = common_scripts\utility::func_F73(level.var_5B8, var_03);
   }
 
-  if(level.var_744A.size > 1) {
-    level.var_05B8 = common_scripts\utility::func_0F97(level.var_05B8);
+  if(level.players.size > 1) {
+    level.var_5B8 = common_scripts\utility::func_F97(level.var_5B8);
   }
 
   var_05 = getdvarint("snd_debugRavenAudioDrawLimit");
   var_06 = 0;
-  if(level.var_05B8.size >= var_05) {
+  if(level.var_5B8.size >= var_05) {
     var_07 = [];
-    foreach(var_02 in level.var_744A) {
+    foreach(var_02 in level.players) {
       var_07[var_07.size] = var_02 getEye();
     }
 
     var_0A = common_scripts\utility::func_A2B9(var_07);
-    level.var_05B8 = function_01AC(level.var_05B8, var_0A);
-    foreach(var_0C in level.var_05B8) {
+    level.var_5B8 = function_01AC(level.var_5B8, var_0A);
+    foreach(var_0C in level.var_5B8) {
       if(isDefined(var_0C.var_6C3F) == 1) {
-        var_0C.var_0116 = undefined;
+        var_0C.origin = undefined;
         var_0C.var_6C3F = undefined;
       }
     }
   }
 
-  foreach(var_0F in level.var_05B8) {
+  foreach(var_0F in level.var_5B8) {
     if(var_05 > 0 && var_06 >= var_05) {
       func_06ED(520, 2, "** " + var_05 + " LIMITED **", (1, 0, 0));
       break;
@@ -328,11 +328,11 @@ func_06E4(param_00) {
   }
 
   var_11 = [];
-  foreach(var_02 in level.var_744A) {
-    var_13 = func_06E7(var_02, level.var_05B8, param_00);
+  foreach(var_02 in level.players) {
+    var_13 = func_06E7(var_02, level.var_5B8, param_00);
     if(isDefined(var_13) == 1) {
       var_13 func_06E5(var_02, param_00);
-      var_11 = common_scripts\utility::func_0F6F(var_11, var_13);
+      var_11 = common_scripts\utility::func_F6F(var_11, var_13);
       var_06 = var_06 + 1;
     }
   }
@@ -348,37 +348,37 @@ func_06EB(param_00) {
   var_07 = "";
   var_08 = "";
   var_09 = 0;
-  if(isDefined(level.var_05B0) == 1) {
-    var_02 = level.var_05B2;
-    var_03 = level.var_05B1;
+  if(isDefined(level.var_5B0) == 1) {
+    var_02 = level.var_5B2;
+    var_03 = level.var_5B1;
   }
 
-  if(isDefined(level.var_071D) == 1 && isDefined(level.var_071D.var_0623) == 1) {
-    var_04 = level.var_071D.var_0623.size;
+  if(isDefined(level.var_71D) == 1 && isDefined(level.var_71D.var_623) == 1) {
+    var_04 = level.var_71D.var_623.size;
   }
 
-  if(isDefined(level.var_06B2) == 1 && isDefined(level.var_06B2.var_061A) == 1) {
-    var_04 = var_04 + level.var_06B2.var_061A.size;
+  if(isDefined(level.var_6B2) == 1 && isDefined(level.var_6B2.var_61A) == 1) {
+    var_04 = var_04 + level.var_6B2.var_61A.size;
   }
 
-  if(isDefined(level.var_06B2) == 1 && isDefined(level.var_06B2.var_0720) == 1) {
-    var_05 = level.var_06B2.var_0720.size;
+  if(isDefined(level.var_6B2) == 1 && isDefined(level.var_6B2.var_720) == 1) {
+    var_05 = level.var_6B2.var_720.size;
   }
 
-  if(isDefined(level.var_06B2) == 1 && isDefined(level.var_06B2.var_05E5) == 1) {
-    var_06 = level.var_06B2.var_05E5.size;
+  if(isDefined(level.var_6B2) == 1 && isDefined(level.var_6B2.var_5E5) == 1) {
+    var_06 = level.var_6B2.var_5E5.size;
   }
 
-  if(isDefined(level.var_05B8) == 1 && level.var_05B8.size > 0 && param_00 >= 3) {
-    var_07 = var_07 + " (" + level.var_05B8.size + " visible)";
+  if(isDefined(level.var_5B8) == 1 && level.var_5B8.size > 0 && param_00 >= 3) {
+    var_07 = var_07 + " (" + level.var_5B8.size + " visible)";
   }
 
   if(isDefined(var_01) == 1 && var_01 != "") {
     var_08 = var_08 + "\" + var_01 + "\";
   }
 
-  if(isDefined(level.var_05C5) == 1) {
-    var_09 = level.var_05C5.size;
+  if(isDefined(level.var_5C5) == 1) {
+    var_09 = level.var_5C5.size;
   }
 
   func_06ED(0, 0, "Audio Entity count: " + var_04);
@@ -392,8 +392,8 @@ func_06EB(param_00) {
     func_06ED(0, var_0A, " CreateFX sfx_interval count: " + var_03);
     var_0A++;
     var_0B = "";
-    if(isDefined(level.var_05B8) == 1 && level.var_05B8.size > 0) {
-      var_0B = var_0B + level.var_05B8.size;
+    if(isDefined(level.var_5B8) == 1 && level.var_5B8.size > 0) {
+      var_0B = var_0B + level.var_5B8.size;
     } else {
       var_0B = var_0B + "0";
     }
@@ -412,27 +412,27 @@ func_06E1(param_00) {
   var_02 = getdvarint("snd_debugRavenAudioCrosshair");
   var_03 = getdvarfloat("snd_debugRavenAudioCrosshairAlpha");
   var_04 = getdvarfloat("snd_debugRavenAudioCrosshairRadius", "64");
-  if(var_02 != 0 && isDefined(level.var_05B4) == 0) {
+  if(var_02 != 0 && isDefined(level.var_5B4) == 0) {
     var_05 = newhudelem();
-    var_05.var_01D3 = 320;
-    var_05.var_01D7 = 240;
-    var_05.var_0010 = "center";
-    var_05.var_0011 = "middle";
-    var_05.var_00C6 = "fullscreen";
-    var_05.var_01CA = "fullscreen";
-    var_05.var_00A0 = 1;
-    var_05.var_0184 = 1;
-    level.var_05B4 = var_05;
+    var_05.x = 320;
+    var_05.y = 240;
+    var_05.alignx = "center";
+    var_05.aligny = "middle";
+    var_05.horzalign = "fullscreen";
+    var_05.vertalign = "fullscreen";
+    var_05.foreground = 1;
+    var_05.sort = 1;
+    level.var_5B4 = var_05;
   }
 
-  if(var_02 != 0 && isDefined(level.var_05B4) == 1) {
-    level.var_05B4 setshader("widg_circle", int(var_04 * 2 * var_01), int(var_04 * 2));
-    level.var_05B4.var_0018 = var_03;
+  if(var_02 != 0 && isDefined(level.var_5B4) == 1) {
+    level.var_5B4 setshader("widg_circle", int(var_04 * 2 * var_01), int(var_04 * 2));
+    level.var_5B4.alpha = var_03;
   }
 
-  if(var_02 == 0 && isDefined(level.var_05B4) == 1) {
-    level.var_05B4 destroy();
-    level.var_05B4 = undefined;
+  if(var_02 == 0 && isDefined(level.var_5B4) == 1) {
+    level.var_5B4 destroy();
+    level.var_5B4 = undefined;
   }
 }
 
@@ -442,11 +442,11 @@ func_06E0(param_00) {
   }
 
   if(getDvar("1459") != "on") {
-    if(isDefined(level.var_05B0) == 1 && level.var_05B0.size > 0) {
+    if(isDefined(level.var_5B0) == 1 && level.var_5B0.size > 0) {
       return;
     }
   } else {
-    while(isDefined(level.var_27EE) == 0) {
+    while(isDefined(level.createfx) == 0) {
       wait 0.05;
     }
   }
@@ -455,9 +455,9 @@ func_06E0(param_00) {
     wait 0.05;
   }
 
-  level.var_05B0 = [];
-  level.var_05B2 = 0;
-  level.var_05B1 = 0;
+  level.var_5B0 = [];
+  level.var_5B2 = 0;
+  level.var_5B1 = 0;
   for(var_01 = 0; var_01 < level.var_2804.size; var_01++) {
     var_02 = level.var_2804[var_01];
     if(isDefined(var_02.var_A265["type"]) == 0) {
@@ -465,13 +465,13 @@ func_06E0(param_00) {
     }
 
     if(var_02.var_A265["type"] == "soundfx") {
-      level.var_05B2++;
-      level.var_05B0[level.var_05B0.size] = var_02;
+      level.var_5B2++;
+      level.var_5B0[level.var_5B0.size] = var_02;
     }
 
     if(var_02.var_A265["type"] == "soundfx_interval") {
-      level.var_05B1++;
-      level.var_05B0[level.var_05B0.size] = var_02;
+      level.var_5B1++;
+      level.var_5B0[level.var_5B0.size] = var_02;
     }
   }
 }

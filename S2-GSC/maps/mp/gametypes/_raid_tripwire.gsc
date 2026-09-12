@@ -7,15 +7,15 @@ runtripwirelogic() {
   setdvarifuninitialized("wall_test_debug", "0");
   level.tripwireplantedmodels = [];
   runtripwirefx();
-  level.var_5A61["tripwire"] = ::tripwire_killstreak_helper;
+  level.killstreakfuncs["tripwire"] = ::tripwire_killstreak_helper;
   level.var_5A7D["war_tripwire_mp"] = "tripwire";
   setdvarifuninitialized("scorestreak_enabled_tripwire", 1);
   thread tripwire_preget_animation_distance();
 }
 
 runtripwirefx() {
-  level.var_0611["trip_wire_exposion"] = loadfx("vfx/explosion/frag_grenade_concrete");
-  level.var_0611["trip_wire_dust_on_bomb_plant"] = loadfx("vfx/weaponimpact/large_dirt_1");
+  level.var_611["trip_wire_exposion"] = loadfx("vfx/explosion/frag_grenade_concrete");
+  level.var_611["trip_wire_dust_on_bomb_plant"] = loadfx("vfx/weaponimpact/large_dirt_1");
 }
 
 watch_allow_fire() {
@@ -36,15 +36,15 @@ tripwire_preget_animation_distance() {
   var_00 = (0, 0, 0);
   var_01 = spawn("script_model", var_00);
   var_01 setModel("prop_hus_tripwire_01_sheen_blue");
-  var_01 method_805C();
+  var_01 hide();
   var_01 notsolid();
   var_02 = spawn("script_model", var_00);
   var_02 setModel("tripwire_standing");
-  var_02 method_805C();
+  var_02 hide();
   var_02 notsolid();
   var_03 = spawn("script_model", var_00);
   var_03 setModel("tripwire_standing");
-  var_03 method_805C();
+  var_03 hide();
   var_03 notsolid();
   var_02 scriptmodelplayanim("tripwire_standin_anim", "wire", 0, 0.01);
   var_02 scriptmodelpauseanim(1);
@@ -69,7 +69,7 @@ check_wall_under_player_reticle_think(param_00, param_01) {
   self endon("disconnect");
   self endon("weapon_change");
   var_04 = (10.9, 0, 0);
-  param_01 method_805C();
+  param_01 hide();
   thread watch_allow_fire();
   thread watch_tripwire_preview_cleanup(param_00, param_01);
   var_05 = (0, 0, 0);
@@ -86,25 +86,25 @@ check_wall_under_player_reticle_think(param_00, param_01) {
     if(!self issprinting() && !self method_83B8()) {
       if(is_normal_a_wall(var_0D, var_0E, 20)) {
         param_00 showtoclient(self);
-        if(param_00.var_0106 != "prop_hus_tripwire_01_sheen_blue") {
+        if(param_00.model != "prop_hus_tripwire_01_sheen_blue") {
           param_00 setModel("prop_hus_tripwire_01_sheen_blue");
         }
 
         param_01 showtoclient(self);
-        param_00.var_001D = combineangles(vectortoangles(var_0D), (0, 0, 0));
-        param_00.var_0116 = var_0E;
-        var_0F = rotatevector(var_04, param_00.var_001D);
-        var_02 = param_00.var_0116 + var_0F;
-        param_01.var_001D = (0, param_00.var_001D[1], param_00.var_001D[2]);
+        param_00.angles = combineangles(vectortoangles(var_0D), (0, 0, 0));
+        param_00.origin = var_0E;
+        var_0F = rotatevector(var_04, param_00.angles);
+        var_02 = param_00.origin + var_0F;
+        param_01.angles = (0, param_00.angles[1], param_00.angles[2]);
         if(0) {
-          param_01.var_0116 = var_02;
-        } else if(param_00.var_001D[0] != 0) {
-          var_10 = (0, param_00.var_001D[1], 0);
+          param_01.origin = var_02;
+        } else if(param_00.angles[0] != 0) {
+          var_10 = (0, param_00.angles[1], 0);
           var_11 = rotatevector(var_04, var_10);
           var_12 = var_02 - var_11;
-          param_01.var_0116 = var_12;
+          param_01.origin = var_12;
         } else {
-          param_01.var_0116 = param_00.var_0116;
+          param_01.origin = param_00.origin;
         }
 
         var_13 = undefined;
@@ -134,16 +134,16 @@ check_wall_under_player_reticle_think(param_00, param_01) {
           var_1B = var_19 * var_1A;
           param_01 scriptmodelplayanim("tripwire_standin_anim", "wire", var_1B, 0.01);
           param_01 scriptmodelpauseanim(1);
-          var_05 = param_00.var_0116;
-          var_06 = param_00.var_001D;
-          var_07 = param_01.var_0116;
-          var_08 = param_01.var_001D;
+          var_05 = param_00.origin;
+          var_06 = param_00.angles;
+          var_07 = param_01.origin;
+          var_08 = param_01.angles;
           var_09 = var_13["position"];
           var_0A = var_02;
           var_0B = var_1B;
         } else {
           thread disable_fire();
-          if(param_00.var_0106 != "prop_hus_tripwire_01_sheen_red") {
+          if(param_00.model != "prop_hus_tripwire_01_sheen_red") {
             param_00 setModel("prop_hus_tripwire_01_sheen_red");
           }
 
@@ -153,31 +153,31 @@ check_wall_under_player_reticle_think(param_00, param_01) {
         }
       } else {
         thread disable_fire();
-        var_04 hidefromclient(self);
-        var_05 hidefromclient(self);
+        param_00 hidefromclient(self);
+        param_01 hidefromclient(self);
       }
     } else {
       thread disable_fire();
-      var_04 hidefromclient(self);
-      var_05 hidefromclient(self);
+      param_00 hidefromclient(self);
+      param_01 hidefromclient(self);
     }
 
     if(self method_8127() && !self method_8128()) {
       thread enable_fire();
       self notify("placed_tripwire");
-      var_04 showtoclient(self);
-      if(var_04.var_0106 != "prop_hus_tripwire_01_sheen_blue") {
-        var_04 setModel("prop_hus_tripwire_01_sheen_blue");
+      param_00 showtoclient(self);
+      if(param_00.model != "prop_hus_tripwire_01_sheen_blue") {
+        param_00 setModel("prop_hus_tripwire_01_sheen_blue");
       }
 
-      var_05 showtoclient(self);
-      var_05 scriptmodelplayanim("tripwire_standin_anim", "wire", var_0F, 0.01);
-      var_05 scriptmodelpauseanim(1);
-      var_04.var_0116 = var_09;
-      var_04.var_001D = var_0A;
-      var_05.var_0116 = var_0B;
-      var_05.var_001D = var_0C;
-      return [var_0E, var_0D, var_0F];
+      param_01 showtoclient(self);
+      param_01 scriptmodelplayanim("tripwire_standin_anim", "wire", var_0B, 0.01);
+      param_01 scriptmodelpauseanim(1);
+      param_00.origin = var_05;
+      param_00.angles = var_06;
+      param_01.origin = var_07;
+      param_01.angles = var_08;
+      return [var_0A, var_09, var_0B];
     }
 
     wait 0.05;
@@ -224,7 +224,7 @@ get_average_surface_normal_under_player_reticle(param_00) {
     return [var_05, var_04["position"]];
   }
 
-  return [undefined, var_04["position"]];
+  return [undefined, var_05["position"]];
 }
 
 get_average_surface_normal_from_direction(param_00, param_01, param_02) {
@@ -237,7 +237,7 @@ get_average_surface_normal_from_direction(param_00, param_01, param_02) {
     return [var_05, var_04["position"]];
   }
 
-  return [undefined, var_04["position"]];
+  return [undefined, var_05["position"]];
 }
 
 bullet_trace_for_wall_test(param_00, param_01, param_02) {
@@ -338,13 +338,13 @@ tripwire_place_anywhere_handler(param_00) {
 
   var_01 = spawn("script_model", (0, 0, 0));
   var_01 setModel("prop_hus_tripwire_01_sheen_blue");
-  var_01 method_805C();
+  var_01 hide();
   var_01 showtoclient(self);
   var_01 notsolid();
   var_02 = spawn("script_model", (0, 0, 0));
   var_02 setModel("tripwire_standing_sheen_blue");
   var_02 notsolid();
-  var_02 method_805C();
+  var_02 hide();
   var_03 = check_wall_under_player_reticle_think(var_01, var_02);
   var_04 = var_03[2];
   var_05 = var_03[1] - var_03[0];
@@ -362,11 +362,11 @@ tripwire_place_anywhere_handler(param_00) {
   var_01 solid();
   var_01 setModel("prop_hus_tripwire_01_no_wire");
   var_02 setModel("tripwire_standing");
-  var_01 method_805B();
-  var_02 method_805B();
+  var_01 show();
+  var_02 show();
   wait(0.03);
-  playFXOnTag(level.var_0611["trip_wire_dust_on_bomb_plant"], var_01, "TAG_ORIGIN");
-  var_07 = lib_0380::func_6842("mp_war_tripwire_impact", undefined, var_01.var_0116);
+  playFXOnTag(level.var_611["trip_wire_dust_on_bomb_plant"], var_01, "TAG_ORIGIN");
+  var_07 = lib_0380::func_6842("mp_war_tripwire_impact", undefined, var_01.origin);
   if(1) {
     var_02 scriptmodelplayanim("tripwire_plant_anim", "wire", 0, 1);
     var_08 = 0.7;
@@ -390,7 +390,7 @@ tripwire_place_anywhere_handler(param_00) {
     var_02 scriptmodelpauseanim(1);
   }
 
-  var_0D = lib_0380::func_6842("mp_war_tripwire_plant", undefined, var_02.var_0116);
+  var_0D = lib_0380::func_6842("mp_war_tripwire_plant", undefined, var_02.origin);
   thread tripwire_place_anywhere_placed_handler(var_03, var_01, var_02);
   return 1;
 }
@@ -412,9 +412,9 @@ tripwire_place_anywhere_placed_handler(param_00, param_01, param_02) {
   var_08 = (0, 0, 1);
   var_09 = vectorcross(var_08, var_07);
   var_0A = axistoangles(var_08, var_09, var_07);
-  var_06.var_001D = var_0A;
+  var_06.angles = var_0A;
   param_01.var_9D65 = var_06;
-  level.tripwireplantedmodels = common_scripts\utility::func_0F6F(level.tripwireplantedmodels, param_01);
+  level.tripwireplantedmodels = common_scripts\utility::func_F6F(level.tripwireplantedmodels, param_01);
   param_01 thread setuptripwirekillcament(param_01);
   thread tripwire_spawn_damage_trigger(param_01);
   thread tripwire_trigger_wire(param_01, var_06);
@@ -427,7 +427,7 @@ tripwire_place_anywhere_placed_handler(param_00, param_01, param_02) {
 
   param_01 waittill("tripwire_triggered", var_0B);
   if(var_0B == "player") {
-    lib_0380::func_6842("mp_wpn_betty_triggered", undefined, param_01.var_0116);
+    lib_0380::func_6842("mp_wpn_betty_triggered", undefined, param_01.origin);
     wait(0.1);
     tripwire_detonate(param_01);
     return;
@@ -445,12 +445,12 @@ tripwire_trigger_wire(param_00, param_01) {
   param_00 endon("tripwire_defused");
   param_00 endon("tripwire_triggered");
   var_02 = self;
-  var_03 = var_02.var_01A7;
+  var_03 = var_02.team;
   if(!isDefined(var_03)) {
     var_03 = "none";
   }
 
-  while((!isDefined(var_02) && !isDefined(var_02.var_01A7)) || (isDefined(var_02) && !isstring(var_02) && isDefined(var_02.var_01A7) && var_02.var_01A7 == var_03) || isstring(var_02) && var_02 != "explode") {
+  while((!isDefined(var_02) && !isDefined(var_02.team)) || (isDefined(var_02) && !isstring(var_02) && isDefined(var_02.team) && var_02.team == var_03) || isstring(var_02) && var_02 != "explode") {
     param_01 waittill("trigger", var_02);
   }
 
@@ -466,10 +466,10 @@ tripwire_monitor_placed_location(param_00, param_01) {
   param_00 endon("tripwire_defused");
   param_00 endon("tripwire_triggered");
   waittillframeend;
-  var_02 = anglesToForward(param_00.var_001D);
+  var_02 = anglesToForward(param_00.angles);
   var_03 = vectorNormalize(var_02);
-  var_04 = param_00.var_0116 + 2 * var_03;
-  var_05 = param_00.var_0116 - 2 * var_03;
+  var_04 = param_00.origin + 2 * var_03;
+  var_05 = param_00.origin - 2 * var_03;
   while(isDefined(param_00)) {
     if(bullet_trace_for_wall_test_passed(var_04, var_05, param_00) || bullet_trace_for_wall_test_passed(param_01.spikestart, param_01.spikeend, param_01)) {
       param_00 notify("tripwire_triggered", "wall_destroyed");
@@ -489,36 +489,36 @@ disarm_enable_use_watcher(param_00) {
   param_00 endon("tripwire_triggered");
   param_00 endon("tripwire_defused");
   param_00 endon("tripwire_delete");
-  var_01 = self.var_01A7;
-  foreach(var_03 in level.var_744A) {
-    if(isDefined(level.var_3FDC) && level.var_3FDC == "infect") {
+  var_01 = self.team;
+  foreach(var_03 in level.players) {
+    if(isDefined(level.gametype) && level.gametype == "infect") {
       param_00 disableplayeruse(var_03);
       continue;
     }
 
-    if(var_03.var_01A7 == var_01 || var_03.var_01A7 == "spectator") {
+    if(var_03.team == var_01 || var_03.team == "spectator") {
       param_00 disableplayeruse(var_03);
       continue;
     }
 
-    if(var_03.var_01A7 != var_01) {
+    if(var_03.team != var_01) {
       param_00 enableplayeruse(var_03);
     }
   }
 
   for(;;) {
     level waittill("joined_team", var_03);
-    if(isDefined(level.var_3FDC) && level.var_3FDC == "infect") {
+    if(isDefined(level.gametype) && level.gametype == "infect") {
       param_00 disableplayeruse(var_03);
       continue;
     }
 
-    if(var_03.var_01A7 == var_01 || var_03.var_01A7 == "spectator") {
+    if(var_03.team == var_01 || var_03.team == "spectator") {
       param_00 disableplayeruse(var_03);
       continue;
     }
 
-    if(var_03.var_01A7 != var_01) {
+    if(var_03.team != var_01) {
       param_00 enableplayeruse(var_03);
     }
   }
@@ -536,7 +536,7 @@ tripwire_disarm(param_00) {
   thread disarm_enable_use_watcher(param_00);
   for(;;) {
     param_00 waittill("trigger", var_01);
-    if(var_01.var_01A7 == self.var_01A7 && var_01.var_01A7 != "spectator") {
+    if(var_01.team == self.team && var_01.team != "spectator") {
       continue;
     }
 
@@ -546,9 +546,9 @@ tripwire_disarm(param_00) {
 }
 
 tripwire_detonate(param_00) {
-  param_00 entityradiusdamage(param_00.var_0116, 200, 200, 50, self, "MOD_EXPLOSIVE", "war_tripwire_mp");
-  playFX(common_scripts\utility::func_44F5("trip_wire_exposion"), param_00.var_0116);
-  lib_0380::func_6842("mp_war_bomb_explo", undefined, param_00.var_0116);
+  param_00 entityradiusdamage(param_00.origin, 200, 200, 50, self, "MOD_EXPLOSIVE", "war_tripwire_mp");
+  playFX(common_scripts\utility::func_44F5("trip_wire_exposion"), param_00.origin);
+  lib_0380::func_6842("mp_war_bomb_explo", undefined, param_00.origin);
   param_00 notify("tripwire_delete");
 }
 
@@ -566,7 +566,7 @@ tripwire_cleanup(param_00, param_01, param_02) {
     param_02 delete();
   }
 
-  level.tripwireplantedmodels = common_scripts\utility::func_0FA0(level.tripwireplantedmodels);
+  level.tripwireplantedmodels = common_scripts\utility::func_FA0(level.tripwireplantedmodels);
 }
 
 tripwire_watch_delete(param_00, param_01, param_02) {
@@ -583,20 +583,20 @@ tripwire_spawn_damage_trigger(param_00) {
   param_00 endon("tripwire_defused");
   param_00 endon("tripwire_triggered");
   param_00 setCanDamage(1);
-  param_00.var_00FB = 100000;
-  param_00 setnormalhealth(self.var_00FB);
+  param_00.maxhealth = 100000;
+  param_00 setnormalhealth(self.maxhealth);
   param_00 waittill("damage");
   param_00 notify("tripwire_triggered", "damage");
 }
 
 setuptripwirekillcament(param_00) {
-  var_01 = param_00.var_0116 + (0, 0, 5);
-  var_02 = param_00.var_0116 + anglestoright(param_00.var_001D + (0, 90, 0)) * 2 + (0, 0, 15);
+  var_01 = param_00.origin + (0, 0, 5);
+  var_02 = param_00.origin + anglestoright(param_00.angles + (0, 90, 0)) * 2 + (0, 0, 15);
   var_03 = bulletTrace(var_01, var_02, 0, param_00);
   var_04 = spawn("script_model", var_03["position"]);
   var_04 setModel("tag_origin");
-  var_05 = param_00.var_0116 - var_03["position"];
-  var_04.var_001D = vectortoangles(var_05);
+  var_05 = param_00.origin - var_03["position"];
+  var_04.angles = vectortoangles(var_05);
   var_04 setscriptmoverkillcam("explosive");
   self.var_5A2C = var_04;
 }

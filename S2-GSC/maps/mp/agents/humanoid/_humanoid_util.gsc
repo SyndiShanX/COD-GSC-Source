@@ -16,7 +16,7 @@ func_1F51(param_00, param_01, param_02) {
     var_06 = 0;
   }
 
-  return capsuletracepassed(var_04, self.var_014F, self.var_00BD - param_02, self, var_06, 0, 0, var_05);
+  return capsuletracepassed(var_04, self.var_14F, self.height - param_02, self, var_06, 0, 0, var_05);
 }
 
 func_45C6() {
@@ -48,20 +48,20 @@ func_A275(param_00) {
       self.var_60F3[param_00][var_01] = spawnStruct();
       self.var_60F3[param_00][var_01].var_9A18 = 0;
       self.var_60F3[param_00][var_01].var_230B = undefined;
-      self.var_60F3[param_00][var_01].var_0116 = undefined;
+      self.var_60F3[param_00][var_01].origin = undefined;
       self.var_60F3[param_00][var_01].var_686A = var_01;
     }
   }
 }
 
 func_45DC(param_00) {
-  var_01 = param_00.var_0116;
+  var_01 = param_00.origin;
   if(isDefined(param_00.var_4883)) {
     var_01 = param_00.var_4883;
     if(isDefined(self.var_3043) && param_00 == self.var_3043 && func_4B59()) {
       var_02 = func_459E();
       if(isDefined(var_02)) {
-        var_01 = var_02.var_0116;
+        var_01 = var_02.origin;
       }
     }
   } else if(isPlayer(param_00) && param_00 method_83B8() || param_00 method_83B9()) {
@@ -70,7 +70,7 @@ func_45DC(param_00) {
     }
 
     if(gettime() > param_00.var_73F1) {
-      param_00.var_73F0 = getgroundposition(param_00.var_0116, 15);
+      param_00.var_73F0 = getgroundposition(param_00.origin, 15);
       param_00.var_73F1 = gettime();
     }
 
@@ -86,7 +86,7 @@ func_4BA3(param_00, param_01) {
   for(var_02 = 0; var_02 < func_45C6(); var_02++) {
     var_03 = param_00 func_4582(param_01);
     var_04 = var_03[var_02];
-    if(isDefined(var_04.var_0116)) {
+    if(isDefined(var_04.origin)) {
       return 1;
     }
   }
@@ -192,7 +192,7 @@ func_4583(param_00, param_01) {
   param_00 func_A275(self.var_60F5);
   var_02 = param_00 func_4582(self.var_60F5);
   var_04 = param_01;
-  var_05 = self.var_0116 - var_04;
+  var_05 = self.origin - var_04;
   var_06 = lengthsquared(var_05);
   if(var_06 < 256) {
     var_07 = -1;
@@ -236,18 +236,18 @@ func_4583(param_00, param_01) {
 
       var_09 = var_02[var_13];
       if(!isDefined(var_0C) && gettime() - var_09.var_9A18 >= self.var_60F6) {
-        if(isDefined(level.var_9E16) && isDefined(level.var_9E16[self.var_0A4B])) {
-          [[level.var_9E16[self.var_0A4B]]](var_09, var_04, self.var_11AB, self.var_014F);
+        if(isDefined(level.var_9E16) && isDefined(level.var_9E16[self.var_A4B])) {
+          [[level.var_9E16[self.var_A4B]]](var_09, var_04, self.var_11AB, self.var_14F);
         } else {
-          func_9E16(var_09, var_04, self.var_11AB, self.var_014F);
+          func_9E16(var_09, var_04, self.var_11AB, self.var_14F);
         }
       }
 
-      if(!isDefined(var_0C) && isDefined(var_09.var_0116)) {
+      if(!isDefined(var_0C) && isDefined(var_09.origin)) {
         var_14 = 0;
         if(isDefined(var_09.var_230B) && var_09.var_230B != self) {
-          var_15 = vectorNormalize(var_04 - var_09.var_230B.var_0116) * self.var_014F * 2;
-          var_14 = distancesquared(var_09.var_230B.var_0116 + var_15, var_04);
+          var_15 = vectorNormalize(var_04 - var_09.var_230B.origin) * self.var_14F * 2;
+          var_14 = distancesquared(var_09.var_230B.origin + var_15, var_04);
         }
 
         if(!isalive(var_09.var_230B) || !isDefined(var_09.var_230B.var_28D2) || var_09.var_230B.var_28D2 != param_00 || var_09.var_230B == self || var_06 < var_14) {
@@ -262,7 +262,7 @@ func_4583(param_00, param_01) {
 
           self.var_836C = var_09;
           var_09.var_230B = self;
-          var_0C = var_09.var_0116;
+          var_0C = var_09.origin;
           thread func_63DD(var_09);
         }
       }
@@ -281,14 +281,14 @@ func_63DD(param_00) {
   self notify("monitorSectorClaim");
   self endon("monitorSectorClaim");
   self endon("lostSectorClaim");
-  common_scripts\utility::func_A70A("death", "disconnect");
+  common_scripts\utility::waittill_any("death", "disconnect");
   param_00.var_230B = undefined;
 }
 
 func_9E16(param_00, param_01, param_02, param_03) {
   if(gettime() - param_00.var_9A18 >= 50) {
-    param_00.var_0116 = func_60F4(param_01, param_00.var_686A, param_02);
-    param_00.var_0116 = func_34AB(param_00.var_0116, param_03, self.var_00BD - 5);
+    param_00.origin = func_60F4(param_01, param_00.var_686A, param_02);
+    param_00.origin = func_34AB(param_00.origin, param_03, self.height - 5);
     param_00.var_9A18 = gettime();
   }
 }
@@ -370,7 +370,7 @@ func_3141(param_00, param_01, param_02, param_03) {
   self.var_3137 = ["back", "right", "left"];
   self.var_3138 = [];
   foreach(var_06, var_05 in self.var_3137) {
-    self.var_3138[var_06] = level.var_0611[param_03 + var_05];
+    self.var_3138[var_06] = level.var_611[param_03 + var_05];
   }
 }
 
@@ -431,30 +431,30 @@ func_5C51() {
 func_20C3(param_00, param_01) {
   self endon("death");
   self scragentsetscripted(1);
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "ChangeAnimClass");
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "ChangeAnimClass");
   self.var_5381 = 1;
-  self scragentsetorientmode("face angle abs", (0, self.var_001D[1], 0));
+  self scragentsetorientmode("face angle abs", (0, self.angles[1], 0));
   self method_839C("anim deltas");
   self method_839A(1, 1);
-  var_02 = maps\mp\agents\_scripted_agent_anim_util::func_434D(param_01);
-  var_03 = maps\mp\agents\_scripted_agent_anim_util::func_7A35(var_02);
-  maps\mp\agents\_scripted_agent_anim_util::func_71FD(var_02, var_03, "change_anim_class");
+  var_02 = maps / mp / agents / _scripted_agent_anim_util::func_434D(param_01);
+  var_03 = maps / mp / agents / _scripted_agent_anim_util::func_7A35(var_02);
+  maps / mp / agents / _scripted_agent_anim_util::func_71FD(var_02, var_03, "change_anim_class");
   self method_83D5(param_00);
   func_A18C();
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "ChangeAnimClass");
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "ChangeAnimClass");
   self.var_5381 = 0;
   self scragentsetscripted(0);
 }
 
 func_20C4(param_00) {
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "ChangeAnimClass");
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "ChangeAnimClass");
   self.var_5381 = 0;
   self scragentsetscripted(0);
   self method_83D5(param_00);
   func_A18C();
   var_01 = "idle_noncombat";
-  var_02 = maps\mp\agents\_scripted_agent_anim_util::func_434D(var_01);
-  maps\mp\agents\_scripted_agent_anim_util::func_8415(var_02);
+  var_02 = maps / mp / agents / _scripted_agent_anim_util::func_434D(var_01);
+  maps / mp / agents / _scripted_agent_anim_util::func_8415(var_02);
 }
 
 func_A18C() {
@@ -501,11 +501,11 @@ func_8318(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   if(param_07) {
     if(!lib_0547::func_5816(param_08)) {
-      var_0B = common_scripts\utility::func_0F73(var_0B, [level, param_08]);
+      var_0B = common_scripts\utility::func_F73(var_0B, [level, param_08]);
     }
 
     if(!lib_0547::func_5816(param_09)) {
-      var_0B = common_scripts\utility::func_0F73(var_0B, [self, param_09]);
+      var_0B = common_scripts\utility::func_F73(var_0B, [self, param_09]);
     }
   }
 
@@ -513,7 +513,7 @@ func_8318(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   param_04 = isDefined(param_04) && param_04;
   if(isDefined(var_0C) && var_0C > 0) {
     self scragentsetscripted(1);
-    maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "ScriptedAnimation");
+    maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "ScriptedAnimation");
     if(param_04) {
       self.var_53D9 = 1;
     }
@@ -529,7 +529,7 @@ func_8318(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     self method_839D(var_0D);
     var_0E = undefined;
     if(!isDefined(param_03)) {
-      param_03 = maps\mp\agents\_scripted_agent_anim_util::func_7A35(param_02);
+      param_03 = maps / mp / agents / _scripted_agent_anim_util::func_7A35(param_02);
     } else if(isDefined(param_0A) && isDefined(param_0A["timeOffset"])) {
       var_0E = float(param_0A["timeOffset"]);
     }
@@ -538,10 +538,10 @@ func_8318(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       func_5CA6(param_02, param_03);
     }
 
-    self.var_0116 = param_00;
-    self.var_001D = param_01;
+    self.origin = param_00;
+    self.angles = param_01;
     if(param_07) {
-      maps\mp\agents\_scripted_agent_anim_util::func_8415(param_02, param_03, 1, var_0E);
+      maps / mp / agents / _scripted_agent_anim_util::func_8415(param_02, param_03, 1, var_0E);
       common_scripts\utility::func_8133(::common_scripts\utility::func_A70E, var_0B);
     } else {
       var_0F = "end";
@@ -549,10 +549,10 @@ func_8318(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         var_0F = param_0A["end_notetrack"];
       }
 
-      maps\mp\agents\_scripted_agent_anim_util::func_71FD(param_02, param_03, "scripted_anim", var_0F, param_05, var_0E);
+      maps / mp / agents / _scripted_agent_anim_util::func_71FD(param_02, param_03, "scripted_anim", var_0F, param_05, var_0E);
     }
 
-    maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "ScriptedAnimation");
+    maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "ScriptedAnimation");
     if(param_04) {
       self.var_53D9 = undefined;
       lib_0547::func_84CB();
@@ -564,7 +564,7 @@ func_8318(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
 func_5429() {
   self notify("ScriptedAnimationInterrupt");
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "ScriptedAnimationInterrupt");
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "ScriptedAnimationInterrupt");
   self scragentsetscripted(0);
 }
 
@@ -583,8 +583,8 @@ func_4718(param_00) {
   var_02 = 32;
   var_03 = 72;
   var_04 = getmovedelta(param_00);
-  var_04 = rotatevector(var_04, self.var_001D);
-  var_05 = self.var_0116 + var_04;
+  var_04 = rotatevector(var_04, self.angles);
+  var_05 = self.origin + var_04;
   var_06 = (0, 0, var_01);
   var_07 = self method_83EB(var_05 + var_06, var_05 - var_06, var_02, var_03);
   var_08 = var_07 - var_05;
@@ -595,8 +595,8 @@ func_462E(param_00, param_01) {
   var_02 = getanimlength(param_00);
   var_03 = param_01 / var_02;
   var_04 = getmovedelta(param_00, 0, var_03);
-  var_05 = rotatevector(var_04, self.var_001D);
-  return self.var_0116 + var_05;
+  var_05 = rotatevector(var_04, self.angles);
+  return self.origin + var_05;
 }
 
 func_4552(param_00) {
@@ -609,7 +609,7 @@ func_6F54(param_00, param_01) {
   self endon("death");
   self endon("killanimscript");
   level endon("game_ended");
-  self method_83A4(self.var_0116, param_00, param_01);
+  self method_83A4(self.origin, param_00, param_01);
   wait(param_01);
   self method_839C("anim deltas");
 }
@@ -626,17 +626,17 @@ func_45F8(param_00, param_01) {
     }
   }
 
-  return var_04;
+  return var_02;
 }
 
 func_56DD(param_00) {
-  var_01 = self.var_0116[2] + self.var_00BD;
-  if(param_00.var_0116[2] < var_01) {
+  var_01 = self.origin[2] + self.height;
+  if(param_00.origin[2] < var_01) {
     return 0;
   }
 
-  var_02 = self.var_0116[2] + self.var_00BD + 2 * self.var_014F;
-  if(param_00.var_0116[2] > var_02) {
+  var_02 = self.origin[2] + self.height + 2 * self.var_14F;
+  if(param_00.origin[2] > var_02) {
     return 0;
   }
 
@@ -648,13 +648,13 @@ func_56DD(param_00) {
   }
 
   var_04 = 15;
-  if(isDefined(param_00.var_014F)) {
-    var_04 = param_00.var_014F;
+  if(isDefined(param_00.var_14F)) {
+    var_04 = param_00.var_14F;
   }
 
-  var_05 = self.var_014F + var_04;
+  var_05 = self.var_14F + var_04;
   var_05 = var_05 * var_05;
-  if(distance2dsquared(self.var_0116, param_00.var_0116) > var_05) {
+  if(distance2dsquared(self.origin, param_00.origin) > var_05) {
     return 0;
   }
 
@@ -662,7 +662,7 @@ func_56DD(param_00) {
 }
 
 func_867E(param_00) {
-  self.var_0094 = param_00;
+  self.var_94 = param_00;
   self agentsetfavoriteenemy(param_00);
 }
 
@@ -721,9 +721,9 @@ func_8859() {
   var_00 = clamp(level.var_A980 / 20, 0, 1);
   var_01 = lerp(0.35, 0.55, var_00);
   var_02 = lerp(0.06, 0.12, var_00);
-  func_5F4E(5, self.var_60F0 * 2, self.var_60F0 * 1.5, "attack_lunge_boost", level.var_0611["boost_lunge"]);
+  func_5F4E(5, self.var_60F0 * 2, self.var_60F0 * 1.5, "attack_lunge_boost", level.var_611["boost_lunge"]);
   func_3141(5, var_01, "dodge_boost", "boost_dodge_");
-  func_5C5B(10, 2, var_02, 550, 350, "leap_boost", level.var_0611["boost_jump"]);
+  func_5C5B(10, 2, var_02, 550, 350, "leap_boost", level.var_611["boost_jump"]);
 }
 
 func_362C() {
@@ -750,7 +750,7 @@ func_70C9(param_00) {
 
 func_3B85(param_00) {
   var_01 = [];
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(lib_0547::func_577E(var_03)) {
       var_01[var_01.size] = var_03;
     }
@@ -764,7 +764,7 @@ func_3B85(param_00) {
 
     var_08 = 0;
     foreach(var_03 in var_01) {
-      if(distancesquared(var_07.var_0116, var_03.var_0116) < 65536) {
+      if(distancesquared(var_07.origin, var_03.origin) < 65536) {
         var_08 = 1;
         break;
       }
@@ -789,7 +789,7 @@ func_AA51(param_00) {
     return func_AA52(param_00);
   }
 
-  var_01 = distancesquared(self.var_0116, param_00.var_0116) <= func_4581();
+  var_01 = distancesquared(self.origin, param_00.origin) <= func_4581();
   return var_01;
 }
 
@@ -798,17 +798,17 @@ func_AA52(param_00) {
     param_00 = self.var_28D2;
   }
 
-  var_01 = distancesquared(self.var_0116, param_00.var_0116) <= self.var_60F1;
+  var_01 = distancesquared(self.origin, param_00.origin) <= self.var_60F1;
   if(!var_01 && isPlayer(param_00) || function_01EF(param_00)) {
     var_02 = param_00 method_8551();
-    if(isDefined(var_02) && isDefined(var_02.var_01A5) && var_02.var_01A5 == "care_package") {
-      var_01 = distancesquared(self.var_0116, param_00.var_0116) <= self.var_60F1 * 4;
+    if(isDefined(var_02) && isDefined(var_02.targetname) && var_02.targetname == "care_package") {
+      var_01 = distancesquared(self.origin, param_00.origin) <= self.var_60F1 * 4;
     }
   }
 
   if(!var_01 && isPlayer(param_00) && common_scripts\utility::func_562E(param_00.var_571F)) {
     if(length(self getvelocity()) < 5) {
-      var_01 = distancesquared(self.var_0116, param_00.var_0116) <= self.var_60F1 * 4;
+      var_01 = distancesquared(self.origin, param_00.origin) <= self.var_60F1 * 4;
     }
   }
 

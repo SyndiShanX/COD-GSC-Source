@@ -11,21 +11,21 @@ func_5159(param_00) {
     var_02[var_02.size] = func_5DE0(param_00, var_01, var_04);
   }
 
-  if(!isDefined(level.var_087B)) {
-    level.var_087B = [];
+  if(!isDefined(level.var_87B)) {
+    level.var_87B = [];
   }
 
   foreach(var_06 in var_02) {
     foreach(var_08 in var_06["actions"]) {
-      if(!isDefined(level.var_087B[param_00])) {
-        level.var_087B[param_00] = [];
+      if(!isDefined(level.var_87B[param_00])) {
+        level.var_87B[param_00] = [];
       }
 
-      if(!isDefined(level.var_087B[param_00][var_08])) {
-        level.var_087B[param_00][var_08] = [];
+      if(!isDefined(level.var_87B[param_00][var_08])) {
+        level.var_87B[param_00][var_08] = [];
       }
 
-      level.var_087B[param_00][var_08][level.var_087B[param_00][var_08].size] = var_06;
+      level.var_87B[param_00][var_08][level.var_87B[param_00][var_08].size] = var_06;
     }
   }
 
@@ -54,7 +54,7 @@ func_5159(param_00) {
     }
   }
 
-  level.var_087E[param_00] = var_0B;
+  level.var_87E[param_00] = var_0B;
 }
 
 func_5DE0(param_00, param_01, param_02) {
@@ -88,7 +88,7 @@ func_82D0(param_00, param_01) {
 }
 
 func_087A(param_00, param_01) {
-  var_02 = level.var_087B[param_01];
+  var_02 = level.var_87B[param_01];
   if(!isDefined(var_02)) {
     return undefined;
   }
@@ -103,11 +103,11 @@ func_087C(param_00, param_01, param_02) {
   }
 
   foreach(var_05 in var_03) {
-    if(isDefined(param_01["dismember_state"]) && !common_scripts\utility::func_0F79(var_05["dismember_states"], param_01["dismember_state"])) {
+    if(isDefined(param_01["dismember_state"]) && !common_scripts\utility::func_F79(var_05["dismember_states"], param_01["dismember_state"])) {
       continue;
     }
 
-    if(isDefined(param_01["zombie_subtype"]) && !common_scripts\utility::func_0F79(var_05["zombie_subtypes"], param_01["zombie_subtype"])) {
+    if(isDefined(param_01["zombie_subtype"]) && !common_scripts\utility::func_F79(var_05["zombie_subtypes"], param_01["zombie_subtype"])) {
       continue;
     }
 
@@ -150,8 +150,8 @@ func_087C(param_00, param_01, param_02) {
   }
 
   if(isDefined(param_01["source_project"])) {
-    var_09 = common_scripts\utility::func_0F7E(level.var_087D, param_01["source_project"]);
-    var_0A = level.var_087D[var_09 + 1];
+    var_09 = common_scripts\utility::func_F7E(level.var_87D, param_01["source_project"]);
+    var_0A = level.var_87D[var_09 + 1];
     var_07 = param_01;
     var_07["source_project"] = var_0A;
     var_05 = func_087C(param_00, var_07, param_02);
@@ -173,7 +173,7 @@ func_087C(param_00, param_01, param_02) {
 }
 
 func_6E76(param_00) {
-  var_01 = lib_0547::func_0A51(param_00);
+  var_01 = lib_0547::func_A51(param_00);
   var_02 = var_01.parenttype;
   return var_02;
 }
@@ -185,7 +185,7 @@ func_4081(param_00, param_01, param_02) {
     foreach(var_06 in var_04) {
       foreach(var_08 in var_06["anims"]) {
         var_09 = getanimationfromname(param_02, var_08);
-        if(!common_scripts\utility::func_0F79(var_03, var_09)) {
+        if(!common_scripts\utility::func_F79(var_03, var_09)) {
           var_03[var_03.size] = var_09;
         }
       }
@@ -299,7 +299,7 @@ func_5ED7(param_00, param_01, param_02) {
 }
 
 func_434D(param_00, param_01, param_02) {
-  var_03 = self[[maps\mp\agents\_agent_utility::func_0A59("get_action_params")]]();
+  var_03 = self[[maps / mp / agents / _agent_utility::func_A59("get_action_params")]]();
   if(isDefined(param_01)) {
     foreach(var_06, var_05 in param_01) {
       var_03[var_06] = var_05;
@@ -377,28 +377,28 @@ func_441C(param_00, param_01, param_02) {
     } else if(var_05 > 0) {
       var_07 = var_03 / var_05;
     }
-  } else if(var_07 > 0) {
-    var_09 = var_05 / var_07;
+  } else if(var_05 > 0) {
+    var_07 = var_03 / var_05;
   }
 
-  if(abs(var_08) > 0.001 && var_06 != 0 && var_08 * var_06 > 0) {
-    var_0A = var_06 / var_08;
+  if(abs(var_06) > 0.001 && var_04 != 0 && var_06 * var_04 > 0) {
+    var_08 = var_04 / var_06;
   }
 
   var_0B = spawnStruct();
-  var_0B.var_AAE3 = var_09;
-  var_0B.var_01D9 = var_0A;
+  var_0B.var_AAE3 = var_07;
+  var_0B.z = var_08;
   return var_0B;
 }
 
 func_6AFF(param_00, param_01) {
   self notify("killanimscript");
-  if(isDefined(self.var_0EAD.var_6B2F[param_00])) {
-    self[[self.var_0EAD.var_6B2F[param_00]]]();
+  if(isDefined(self.var_EAD.var_6B2F[param_00])) {
+    self[[self.var_EAD.var_6B2F[param_00]]]();
   }
 
   func_38ED(param_00);
-  if(!isDefined(self.var_0EAD.var_6AFE[param_01])) {
+  if(!isDefined(self.var_EAD.var_6AFE[param_01])) {
     return;
   }
 
@@ -406,13 +406,13 @@ func_6AFF(param_00, param_01) {
     return;
   }
 
-  self.var_0BA4 = param_01;
+  self.var_BA4 = param_01;
   func_37B8(param_01);
-  self[[self.var_0EAD.var_6AFE[param_01]]]();
+  self[[self.var_EAD.var_6AFE[param_01]]]();
 }
 
 func_37B8(param_00) {
-  self.var_0BA4 = param_00;
+  self.var_BA4 = param_00;
   switch (param_00) {
     case "idle":
       self.var_173C = 0;
@@ -431,11 +431,11 @@ func_38ED(param_00) {
 }
 
 func_57E2() {
-  return self.var_018F;
+  return self.statelocked;
 }
 
 func_8732(param_00, param_01) {
-  self.var_018F = param_00;
+  self.statelocked = param_00;
 }
 
 func_43C9(param_00) {

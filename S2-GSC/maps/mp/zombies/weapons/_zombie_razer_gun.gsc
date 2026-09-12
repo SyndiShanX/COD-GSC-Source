@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\weapons\_zombie_razer_gun.gsc
 *********************************************************/
 
-func_00D5() {
+init() {
   var_03 = (34.222, -0.23, 0);
   var_04 = length(var_03);
   var_05 = [];
@@ -27,24 +27,24 @@ func_00D5() {
   level.var_6DF9["heavy"]["razergun_melee_zm"] = level.var_6DF9["heavy"]["razergun_zm"];
   level.var_6DF9["default"]["razergun_pap_zm"] = level.var_6DF9["default"]["razergun_zm"];
   level.var_6DF9["heavy"]["razergun_pap_zm"] = level.var_6DF9["heavy"]["razergun_zm"];
-  common_scripts\utility::func_092C("razergun_projectile", "vfx/zombie/prototype_fx/razergun_projectile");
-  common_scripts\utility::func_092C("razergun_projectile_trail", "vfx/zombie/prototype_fx/razergun_projectile_trail");
-  common_scripts\utility::func_092C("zmb_razergun_white_trail", "vfx/map/mp_zombie_island/zmb_razergun_white_trail");
-  common_scripts\utility::func_092C("zmb_razergun_white_trail", "vfx/map/mp_zombie_island/zmb_razergun_white_trail_int");
-  common_scripts\utility::func_092C("zmb_razergun_cyan_trail", "vfx/map/mp_zombie_island/zmb_razergun_cyan_trail");
-  common_scripts\utility::func_092C("zmb_razergun_cyan_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_cyan_trail_int");
-  common_scripts\utility::func_092C("zmb_razergun_magenta_trail", "vfx/map/mp_zombie_island/zmb_razergun_magenta_trail");
-  common_scripts\utility::func_092C("zmb_razergun_magenta_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_magenta_trail_int");
-  common_scripts\utility::func_092C("zmb_razergun_yellow_trail", "vfx/map/mp_zombie_island/zmb_razergun_yellow_trail");
-  common_scripts\utility::func_092C("zmb_razergun_yellow_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_yellow_trail_int");
-  common_scripts\utility::func_092C("zmb_razergun_blue_trail", "vfx/map/mp_zombie_island/zmb_razergun_blue_trail");
-  common_scripts\utility::func_092C("zmb_razergun_blue_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_blue_trail_int");
-  common_scripts\utility::func_092C("zmb_razergun_green_trail", "vfx/map/mp_zombie_island/zmb_razergun_green_trail");
-  common_scripts\utility::func_092C("zmb_razergun_green_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_green_trail_int");
-  common_scripts\utility::func_092C("zmb_razergun_red_trail_runner", "vfx/map/mp_zombie_island/zmb_razergun_red_trail_runner");
-  common_scripts\utility::func_092C("zmb_razergun_red_trail", "vfx/map/mp_zombie_island/zmb_razergun_red_trail");
-  common_scripts\utility::func_092C("zmb_razergun_red_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_red_trail_int");
-  common_scripts\utility::func_092C("razergun_projectile_assassin", "vfx/zombie/prototype_fx/razergun_projectile_assassin");
+  common_scripts\utility::func_92C("razergun_projectile", "vfx/zombie/prototype_fx/razergun_projectile");
+  common_scripts\utility::func_92C("razergun_projectile_trail", "vfx/zombie/prototype_fx/razergun_projectile_trail");
+  common_scripts\utility::func_92C("zmb_razergun_white_trail", "vfx/map/mp_zombie_island/zmb_razergun_white_trail");
+  common_scripts\utility::func_92C("zmb_razergun_white_trail", "vfx/map/mp_zombie_island/zmb_razergun_white_trail_int");
+  common_scripts\utility::func_92C("zmb_razergun_cyan_trail", "vfx/map/mp_zombie_island/zmb_razergun_cyan_trail");
+  common_scripts\utility::func_92C("zmb_razergun_cyan_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_cyan_trail_int");
+  common_scripts\utility::func_92C("zmb_razergun_magenta_trail", "vfx/map/mp_zombie_island/zmb_razergun_magenta_trail");
+  common_scripts\utility::func_92C("zmb_razergun_magenta_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_magenta_trail_int");
+  common_scripts\utility::func_92C("zmb_razergun_yellow_trail", "vfx/map/mp_zombie_island/zmb_razergun_yellow_trail");
+  common_scripts\utility::func_92C("zmb_razergun_yellow_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_yellow_trail_int");
+  common_scripts\utility::func_92C("zmb_razergun_blue_trail", "vfx/map/mp_zombie_island/zmb_razergun_blue_trail");
+  common_scripts\utility::func_92C("zmb_razergun_blue_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_blue_trail_int");
+  common_scripts\utility::func_92C("zmb_razergun_green_trail", "vfx/map/mp_zombie_island/zmb_razergun_green_trail");
+  common_scripts\utility::func_92C("zmb_razergun_green_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_green_trail_int");
+  common_scripts\utility::func_92C("zmb_razergun_red_trail_runner", "vfx/map/mp_zombie_island/zmb_razergun_red_trail_runner");
+  common_scripts\utility::func_92C("zmb_razergun_red_trail", "vfx/map/mp_zombie_island/zmb_razergun_red_trail");
+  common_scripts\utility::func_92C("zmb_razergun_red_trail_int", "vfx/map/mp_zombie_island/zmb_razergun_red_trail_int");
+  common_scripts\utility::func_92C("razergun_projectile_assassin", "vfx/zombie/prototype_fx/razergun_projectile_assassin");
   level.var_A9C8["razergun_melee_zm"] = ::razergun_heavy_melee_fatal;
   level.var_A9C8["razergun_zm"] = ::razergun_heavy_melee_fatal;
   level.var_A9C8["razergun_pap_zm"] = ::razergun_heavy_melee_fatal;
@@ -126,8 +126,8 @@ notify_razergun_taken() {
 
     if(var_00 method_82D5() == "none") {
       var_02 = maps\mp\zombies\_zombies_magicbox::func_454B(var_00, "shovel_zm");
-      var_00 lib_0586::func_078C(var_02);
-      var_00 lib_0586::func_078E(var_02);
+      var_00 lib_0586::func_78C(var_02);
+      var_00 lib_0586::func_78E(var_02);
     }
   }
 }
@@ -187,7 +187,7 @@ razer_bayochargewatcher() {
 
     self.israzerguncharging = 1;
     togglemarathonability(0);
-    maps\mp\_utility::func_0735("specialty_marathon");
+    maps\mp\_utility::func_735("specialty_marathon");
     lib_0380::func_6844("wpn_ripsaw_bayonet_charge_start", undefined, self);
     self.razer_bayochargestophandle = lib_0380::func_6844("wpn_ripsaw_bayonet_charge_loop", undefined, self, 0.2);
     thread razer_bayochargedeathtracking();
@@ -196,7 +196,7 @@ razer_bayochargewatcher() {
 
 razer_bayochargedeathtracking() {
   self endon("disconnect");
-  var_00 = common_scripts\utility::func_A715("death", "sprint_melee_charge_end", "sprint_melee_charge_attack");
+  var_00 = common_scripts\utility::waittill_any_return("death", "sprint_melee_charge_end", "sprint_melee_charge_attack");
   self.israzerguncharging = 0;
   togglemarathonability(1);
   if(var_00 == "sprint_melee_charge_end" && isDefined(self)) {
@@ -220,18 +220,18 @@ togglemarathonability(param_00) {
     return;
   }
 
-  maps\mp\_utility::func_0735("specialty_marathon");
+  maps\mp\_utility::func_735("specialty_marathon");
 }
 
 zombie_on_electric_charge() {
   var_00 = self;
   var_01 = common_scripts\utility::func_44F5("zmb_elec_cherry_zombie");
-  var_02 = var_00.var_0116 + (0, 0, 40);
+  var_02 = var_00.origin + (0, 0, 40);
   playFX(var_01, var_02);
 }
 
 do_electric_charge(param_00, param_01) {
-  var_02 = self.var_0116;
+  var_02 = self.origin;
   var_03 = self getcurrentweapon();
   if(isDefined(var_03) && !issubstr(var_03, "razergun_zm") && !issubstr(var_03, "razergun_pap_zm")) {
     return;
@@ -274,9 +274,9 @@ handle_reflection(param_00, param_01, param_02) {
       param_02 = "zmb_razergun_red_trail";
     }
 
-    var_04 = lib_055A::func_4562(self.var_0116);
+    var_04 = lib_055A::func_4562(self.origin);
     if(lib_0547::func_5565(var_04, "sub_pens_1_zone")) {
-      if(isDefined(level.var_0611[param_02 + "_int"])) {
+      if(isDefined(level.var_611[param_02 + "_int"])) {
         param_02 = param_02 + "_int";
       }
     }
@@ -305,7 +305,7 @@ handle_razer_blade_touch() {
     if(isDefined(level.razer_touch_trigs)) {
       foreach(var_01 in level.razer_touch_trigs) {
         if(!isDefined(var_01) || function_0279(var_01)) {
-          level.razer_touch_trigs = common_scripts\utility::func_0F93(level.razer_touch_trigs, var_01);
+          level.razer_touch_trigs = common_scripts\utility::func_F93(level.razer_touch_trigs, var_01);
           continue;
         }
 
@@ -362,27 +362,27 @@ do_zombie_trace_damage(param_00, param_01, param_02, param_03, param_04) {
   var_07 = var_05 + var_06 * var_05 + var_06;
   var_08 = lib_0547::func_408F();
   if(common_scripts\utility::func_562E(self.damage_players)) {
-    var_08 = level.var_744A;
+    var_08 = level.players;
   }
 
   foreach(var_0A in var_08) {
-    if(sqrd_dist_between_segments(param_00, param_01, var_0A.var_0116, var_0A.var_0116 + (0, 0, 60)) <= var_07) {
+    if(sqrd_dist_between_segments(param_00, param_01, var_0A.origin, var_0A.origin + (0, 0, 60)) <= var_07) {
       if(common_scripts\utility::func_562E(var_0A.ripsaw_hardened)) {
-        var_0A dodamage(400, self.var_0116, param_02, param_03, undefined, param_04);
+        var_0A dodamage(400, self.origin, param_02, param_03, undefined, param_04);
         continue;
       }
 
-      if(!isDefined(var_0A.zombie_shielding_func) && !common_scripts\utility::func_562E(self.damage_players) && common_scripts\utility::func_562E(var_0A.var_0A4B == "zombie_generic" || var_0A.var_0A4B == "zombie_berserker" || var_0A.var_0A4B == "zombie_exploder")) {
-        var_0A dodamage(var_0A.var_00BC + 1, self.var_0116, param_02, param_03, undefined, param_04);
+      if(!isDefined(var_0A.zombie_shielding_func) && !common_scripts\utility::func_562E(self.damage_players) && common_scripts\utility::func_562E(var_0A.var_A4B == "zombie_generic" || var_0A.var_A4B == "zombie_berserker" || var_0A.var_A4B == "zombie_exploder")) {
+        var_0A dodamage(var_0A.health + 1, self.origin, param_02, param_03, undefined, param_04);
         continue;
       }
 
-      if(lib_0547::func_5565(var_0A.var_0A4B, "zombie_assassin") && isDefined(var_0A.assassinabilityactivateaction)) {
-        var_0A dodamage(1800, self.var_0116, param_02, param_03, undefined, param_04);
+      if(lib_0547::func_5565(var_0A.var_A4B, "zombie_assassin") && isDefined(var_0A.assassinabilityactivateaction)) {
+        var_0A dodamage(1800, self.origin, param_02, param_03, undefined, param_04);
         continue;
       }
 
-      var_0A dodamage(4000, self.var_0116, param_02, param_03, undefined, param_04);
+      var_0A dodamage(4000, self.origin, param_02, param_03, undefined, param_04);
     }
   }
 }
@@ -396,14 +396,14 @@ watch_for_bounces(param_00, param_01, param_02) {
 }
 
 do_zombie_damage_better(param_00, param_01, param_02) {
-  self.razer_old_pos = self.var_0116;
+  self.razer_old_pos = self.origin;
   childthread watch_for_bounces(param_00, param_01, param_02);
   while(isDefined(self)) {
     wait 0.05;
     waittillframeend;
     if(isDefined(self)) {
-      do_zombie_trace_damage(self.razer_old_pos, self.var_0116, param_00, param_01, param_02);
-      self.razer_old_pos = self.var_0116;
+      do_zombie_trace_damage(self.razer_old_pos, self.origin, param_00, param_01, param_02);
+      self.razer_old_pos = self.origin;
     }
   }
 }
@@ -412,13 +412,13 @@ do_zombie_damage_inefficient(param_00, param_01, param_02) {
   while(isDefined(self)) {
     var_03 = lib_0547::func_408F();
     foreach(var_05 in var_03) {
-      if(distance(var_05.var_0116 + (0, 0, 48), self.var_0116) < 32) {
-        if(common_scripts\utility::func_562E(var_05.var_0A4B == "zombie_generic" || var_05.var_0A4B == "zombie_berserker" || var_05.var_0A4B == "zombie_exploder")) {
-          var_05 dodamage(var_05.var_00BC + 1, self.var_0116, param_00, param_01, undefined, param_02);
+      if(distance(var_05.origin + (0, 0, 48), self.origin) < 32) {
+        if(common_scripts\utility::func_562E(var_05.var_A4B == "zombie_generic" || var_05.var_A4B == "zombie_berserker" || var_05.var_A4B == "zombie_exploder")) {
+          var_05 dodamage(var_05.health + 1, self.origin, param_00, param_01, undefined, param_02);
           continue;
         }
 
-        var_05 dodamage(4000, self.var_0116, param_00, param_01, undefined, param_02);
+        var_05 dodamage(4000, self.origin, param_00, param_01, undefined, param_02);
       }
     }
 
@@ -427,17 +427,17 @@ do_zombie_damage_inefficient(param_00, param_01, param_02) {
 }
 
 get_projectile_path() {
-  var_00 = self.var_0116;
+  var_00 = self.origin;
   wait 0.05;
-  var_01 = self.var_0116;
+  var_01 = self.origin;
   return 10000 * vectorNormalize(anglesToForward(vectortoangles(var_01 - var_00)));
 }
 
 draw_destination() {
   while(isDefined(self)) {
-    var_00 = self.var_0116;
+    var_00 = self.origin;
     wait(0.125);
-    var_01 = self.var_0116;
+    var_01 = self.origin;
     if(!isDefined(var_01)) {
       break;
     }
@@ -458,7 +458,7 @@ monitor_razergun_kills(param_00, param_01, param_02, param_03, param_04, param_0
   if(isDefined(param_00) && common_scripts\utility::func_562E(param_00.is_razergun_projectile)) {
     param_00.total_kills++;
     if(param_00.total_kills == 13 && maps\mp\_utility::func_4571() == "mp_zombie_island") {
-      param_01 maps\mp\gametypes\zombies::func_47C8("DLC1_ZM_BAKERS");
+      param_01 maps / mp / gametypes / zombies::func_47C8("DLC1_ZM_BAKERS");
     }
 
     if(param_00 should_razgun_expire(param_00.total_kills, param_04)) {

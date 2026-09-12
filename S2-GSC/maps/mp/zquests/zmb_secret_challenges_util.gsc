@@ -42,7 +42,7 @@ register_on_player_down_func(param_00, param_01) {
 report_player_entered_last_stand() {
   for(;;) {
     var_00 = self;
-    var_00 common_scripts\utility::knock_off_battery("enter_last_stand");
+    var_00 common_scripts\utility::waittill_any("enter_last_stand");
     foreach(var_02 in level.zmb_challenges_on_entered_laststand_funcs) {
       level thread[[var_02.var_3F02]](var_02.param);
     }
@@ -121,7 +121,7 @@ is_lethal_or_tactical(param_00, param_01, param_02) {
   foreach(var_05 in param_02) {
     var_06 = var_05[0];
     var_07 = var_05[1];
-    var_06 = var_03 maps\mp\_events_z::set_last_checked_weapon(var_06);
+    var_06 = var_03 maps / mp / _events_z::set_last_checked_weapon(var_06);
     var_08 = 0;
     if(lib_0547::func_585C(var_06)) {
       var_08 = 1;
@@ -144,7 +144,7 @@ is_headshot_class_exclusive(param_00, param_01, param_02) {
   foreach(var_05 in param_02) {
     var_06 = var_05[0];
     var_07 = var_05[1];
-    var_06 = var_03 maps\mp\_events_z::set_last_checked_weapon(var_06);
+    var_06 = var_03 maps / mp / _events_z::set_last_checked_weapon(var_06);
     var_08 = 0;
     var_09 = lib_0547::zm_get_weapon_class(var_06);
     if(is_challenge_headshot(var_03, var_06, var_07) && lib_0547::func_5565(var_09, param_00)) {
@@ -177,7 +177,7 @@ wait_for_consecutive_waves_with_condition(param_00, param_01, param_02, param_03
   var_0A.var_502A = param_01;
   var_0A.success_notification = param_01;
   var_0A.var_2566 = 0;
-  var_0A.var_109 = param_07;
+  var_0A.name = param_07;
   var_0A.conditions_check_func = [::no_check_on_wave_break];
   var_0A.add_player_progress_func = ::add_one_wave_survived;
   if(isDefined(param_03)) {
@@ -214,7 +214,7 @@ wait_for_required_zombie_kills(param_00, param_01, param_02, param_03, param_04,
   var_09.var_502A = param_01;
   var_09.var_7DB9 = var_08;
   var_09.var_2566 = 0;
-  var_09.var_109 = param_05;
+  var_09.name = param_05;
   var_07.special_zombie_kills_tracking_array[param_01] = var_09;
   while(var_07.special_zombie_kills_tracking_array[param_01].var_5C < param_00) {
     wait(0.125);
@@ -226,7 +226,7 @@ wait_for_required_zombie_kills(param_00, param_01, param_02, param_03, param_04,
 
 wait_for_gekocht_stage_challenge(param_00) {
   var_01 = common_scripts\utility::func_46B5("stage_check_struct", "targetname");
-  var_02 = getEnt(var_01.var_1A2, "targetname");
+  var_02 = getEnt(var_01.target, "targetname");
   var_03 = 0;
   var_04 = 0.5;
   for(;;) {
@@ -312,7 +312,7 @@ register_zombie_killed_response(param_00, param_01, param_02, param_03, param_04
 
     if((var_07 || isDefined(var_0A)) && !lib_0547::func_5565(var_09, "trap_zm_mp")) {
       if(!var_07) {
-        var_0B = maps\mp\_utility::func_4431(var_0A);
+        var_0B = maps\mp\_utility::getbaseweaponname(var_0A);
       } else {
         var_0B = var_0A;
       }
@@ -344,12 +344,12 @@ try_clear_progress_with_conditions(param_00, param_01, param_02) {
   for(;;) {
     var_05 = 0;
     lib_0547::func_A6F6();
-    if(!isDefined(level.var_721C) || !isDefined(level.var_744A)) {
+    if(!isDefined(level.player) || !isDefined(level.players)) {
       wait 0.05;
     }
 
     if(common_scripts\utility::func_F79(param_00, "all_players_in_common_zone")) {
-      var_06 = lib_055A::func_4562(level.var_744A[0].var_116);
+      var_06 = lib_055A::func_4562(level.players[0].origin);
       if(!isDefined(var_06)) {
         continue;
       }
@@ -400,7 +400,7 @@ clear_player_wave_progress(param_00, param_01, param_02, param_03, param_04, par
 
 get_players_to_reset(param_00, param_01) {
   if(clear_everyones_progress(param_00)) {
-    var_02 = level.var_744A;
+    var_02 = level.players;
   } else {
     var_02 = [var_02];
   }
@@ -411,7 +411,7 @@ get_players_to_reset(param_00, param_01) {
 reset_progress_when_off_stage(param_00) {
   var_01 = self;
   var_02 = common_scripts\utility::func_46B5("stage_check_struct", "targetname");
-  var_03 = getEnt(var_02.var_1A2, "targetname");
+  var_03 = getEnt(var_02.target, "targetname");
   for(;;) {
     lib_0547::func_A6F6();
     if(!var_01 is_agent_on_stage(var_03)) {
@@ -537,7 +537,7 @@ is_using_correct_weapon(param_00, param_01) {
 
 try_add_progress_with_conditions(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   if(isDefined(param_06) && isDefined(param_06.var_9C92)) {
-    param_02 = param_06.var_9C92.var_117;
+    param_02 = param_06.var_9C92.owner;
   }
 
   if(!isPlayer(param_02)) {
@@ -555,10 +555,10 @@ try_add_progress_with_conditions(param_00, param_01, param_02, param_03, param_0
       var_0A = param_06.var_9CBB;
     }
 
-    var_0B = maps\mp\_utility::func_4431(param_01);
+    var_0B = maps\mp\_utility::getbaseweaponname(param_01);
     var_0C = [];
     foreach(var_0E in var_09.conditions_check_func) {
-      var_0F = [[var_0E]](param_04, var_09.success_notification, var_09.valid_weapons, maps\mp\_utility::func_4431(param_01), param_02, var_09.valid_zombie_types, var_0A, param_05);
+      var_0F = [[var_0E]](param_04, var_09.success_notification, var_09.valid_weapons, maps\mp\_utility::getbaseweaponname(param_01), param_02, var_09.valid_zombie_types, var_0A, param_05);
       var_0C = common_scripts\utility::func_F6F(var_0C, var_0F);
     }
 
@@ -600,7 +600,7 @@ add_one_wave_survived(param_00, param_01, param_02) {
 
 skip_equipment_check_on_wave_break(param_00) {
   foreach(var_02 in param_00.valid_weapons) {
-    if(lib_0547::func_585C(maps\mp\_utility::func_4431(var_02)) || lib_0547::func_5565(var_02, "trap_zm_mp")) {
+    if(lib_0547::func_585C(maps\mp\_utility::getbaseweaponname(var_02)) || lib_0547::func_5565(var_02, "trap_zm_mp")) {
       return 1;
     }
   }
@@ -762,7 +762,7 @@ reset_trap_kill_array(param_00) {
 
 all_traps_full(param_00, param_01) {
   foreach(var_03 in param_00.trap_progress_tracker) {
-    if(var_03.var_109 == "trap_zm_mp") {
+    if(var_03.name == "trap_zm_mp") {
       continue;
     }
 

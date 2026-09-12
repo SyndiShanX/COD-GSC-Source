@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_descent_aud.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   lib_0367::func_8E3E("dlc4_fzn_dwn");
   func_7BBA();
   func_51D8();
@@ -407,15 +407,15 @@ func_7248() {
 }
 
 func_7330() {
-  soundscripts\_snd_common_zmb_dlc4::dlc4_player_spawned();
+  soundscripts / _snd_common_zmb_dlc4::dlc4_player_spawned();
 }
 
 func_A979(param_00) {
-  soundscripts\_snd_common_zmb_dlc4::dlc4_wave_begin(param_00);
+  soundscripts / _snd_common_zmb_dlc4::dlc4_wave_begin(param_00);
 }
 
 func_A97A() {
-  soundscripts\_snd_common_zmb_dlc4::dlc4_wave_end();
+  soundscripts / _snd_common_zmb_dlc4::dlc4_wave_end();
 }
 
 stormraven_uberschnell_place() {
@@ -663,15 +663,15 @@ moonraven_constellation_done() {
 
 aud_blood_plate_absorb(param_00) {
   var_01 = self;
-  var_02 = spawn("script_origin", var_01.var_116);
+  var_02 = spawn("script_origin", var_01.origin);
   var_03 = 0;
   var_04 = 0.875;
   lib_0380::func_288B("zombie_soul_suck", undefined, var_02, 0, var_04);
   lib_0380::func_288B("zmb_dig_soul_suck_blood", undefined, var_02);
-  var_02 moveTo(param_00.var_116, 1.9);
+  var_02 moveTo(param_00.origin, 1.9);
   wait(2);
   var_02 delete();
-  lib_0380::func_2889("zombie_soul_suck_threshold", undefined, var_01.var_116);
+  lib_0380::func_2889("zombie_soul_suck_threshold", undefined, var_01.origin);
 }
 
 aud_blood_plate_press(param_00) {
@@ -830,7 +830,7 @@ moonraven_orrery_lower_gears_move() {
   self endon("disconnect");
   while(!common_scripts\utility::func_3C77("moonraven_gears_stop_rotation")) {
     if(!isDefined(self.lower_gear_lp)) {
-      self.lower_gear_lp = lib_0380::func_6842("zmb_orrery_gears_lower_lp", undefined, self.var_116 + (0, 50, 0), 0.2);
+      self.lower_gear_lp = lib_0380::func_6842("zmb_orrery_gears_lower_lp", undefined, self.origin + (0, 50, 0), 0.2);
     }
 
     wait 0.05;
@@ -1011,34 +1011,34 @@ bloodraven_bloodpool_ready() {
 }
 
 bloodraven_reveal_bloodpool_code(param_00) {
-  lib_0380::func_6842("zmb_dsnt_bloodpool_code_lp", undefined, param_00.var_116, 0.2);
+  lib_0380::func_6842("zmb_dsnt_bloodpool_code_lp", undefined, param_00.origin, 0.2);
   switch (param_00.blood_fx_index) {
     case 1:
-      lib_0380::func_6842("zmb_dsnt_chaldni_e2_sml_lp", undefined, param_00.var_116, 0.2);
+      lib_0380::func_6842("zmb_dsnt_chaldni_e2_sml_lp", undefined, param_00.origin, 0.2);
       break;
 
     case 3:
-      lib_0380::func_6842("zmb_dsnt_chaldni_g2_sharp_sml_lp", undefined, param_00.var_116, 0.2);
+      lib_0380::func_6842("zmb_dsnt_chaldni_g2_sharp_sml_lp", undefined, param_00.origin, 0.2);
       break;
 
     case 5:
-      lib_0380::func_6842("zmb_dsnt_chaldni_b2_sml_lp", undefined, param_00.var_116, 0.2);
+      lib_0380::func_6842("zmb_dsnt_chaldni_b2_sml_lp", undefined, param_00.origin, 0.2);
       break;
 
     case 7:
-      lib_0380::func_6842("zmb_dsnt_chaldni_c3_sml_lp", undefined, param_00.var_116, 0.2);
+      lib_0380::func_6842("zmb_dsnt_chaldni_c3_sml_lp", undefined, param_00.origin, 0.2);
       break;
 
     case 8:
-      lib_0380::func_6842("zmb_dsnt_chaldni_c3_sharp_sml_lp", undefined, param_00.var_116, 0.2);
+      lib_0380::func_6842("zmb_dsnt_chaldni_c3_sharp_sml_lp", undefined, param_00.origin, 0.2);
       break;
 
     case 9:
-      lib_0380::func_6842("zmb_dsnt_chaldni_d3_sharp_sml_lp", undefined, param_00.var_116, 0.2);
+      lib_0380::func_6842("zmb_dsnt_chaldni_d3_sharp_sml_lp", undefined, param_00.origin, 0.2);
       break;
 
     case 11:
-      lib_0380::func_6842("zmb_dsnt_chaldni_e3_sml_lp", undefined, param_00.var_116, 0.2);
+      lib_0380::func_6842("zmb_dsnt_chaldni_e3_sml_lp", undefined, param_00.origin, 0.2);
       break;
   }
 }
@@ -1232,7 +1232,7 @@ citadel_entrance(param_00) {
 }
 
 aud_gdk_intro() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 method_8626("god_king_intro", 2);
   }
 
@@ -1255,7 +1255,7 @@ aud_gdk_intro() {
     var_03 = undefined;
   }
 
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 method_8627("god_king_intro");
   }
 }
@@ -1272,13 +1272,13 @@ gdk_intro_magic() {
 
 boss_music_start() {
   wait(1);
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 method_8626("god_king_fight", 2);
   }
 
   if(!isDefined(level.var_11CB.boss_music_playing) && !isDefined(level.var_11CB.boss_is_dead)) {
     level.var_11CB.boss_music_playing = 1;
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       var_01 lib_0366::func_8E47(1);
       var_01 lib_0366::snd_set_auto_wave_music_enabled(0);
       var_01 notify("kill_wave_mus_switcher");
@@ -1290,7 +1290,7 @@ boss_music_start() {
 dlc_handle_boss_killed_music() {
   level.var_11CB.boss_music_playing = undefined;
   level.var_11CB.boss_is_dead = 1;
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 lib_0366::func_8E09();
     var_01 thread dlc_play_boss_killed_stinger();
   }
@@ -1305,7 +1305,7 @@ dlc_play_boss_killed_stinger() {
 }
 
 archives_spike_trap(param_00) {
-  lib_0380::func_2889("trap_spikes", undefined, param_00.var_116);
+  lib_0380::func_2889("trap_spikes", undefined, param_00.origin);
 }
 
 damage_ice() {
@@ -1328,17 +1328,17 @@ spawn_raven() {
 
 raven_fly_away() {
   lib_0380::func_2893(level.var_11CB.crow_amb_caw, 0.1);
-  lib_0380::func_2889("training_crow_caw", undefined, self.var_116);
+  lib_0380::func_2889("training_crow_caw", undefined, self.origin);
 }
 
 outro_vo_submix_start() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 method_8626("outro_vo");
   }
 }
 
 outro_vo_submix_end() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 method_8627("outro_vo");
   }
 }

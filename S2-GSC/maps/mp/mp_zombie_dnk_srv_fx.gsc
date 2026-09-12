@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_dnk_srv_fx.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   level.var_611["snow_chunk_impact"] = loadfx("vfx/weaponimpact/snow_chunk_impact");
   level.var_611["water_splash_small"] = loadfx("vfx/water/water_splash_small");
   level.var_611["snow_chunk_impact_small"] = loadfx("vfx/weaponimpact/snow_chunk_impact_small");

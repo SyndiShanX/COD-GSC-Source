@@ -3,7 +3,7 @@
  * Script: maps\createfx\mp_zombie_dig_02_srv_fx.gsc
 *****************************************************/
 
-func_00F9() {
+main() {
   var_00 = common_scripts\utility::func_281B("dlc_zmb_dig02_snow_fall");
   var_00 common_scripts\_createfx::func_8543((1495.11, 1282.75, 461.21), (293.089, 188.105, -83.6989));
   var_00.var_A265["fxid"] = "dlc_zmb_dig02_snow_fall";

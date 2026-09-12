@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\weapons\_zombie_raven_gun.gsc
 *********************************************************/
 
-func_00D5() {
+init() {
   level.ravengunisactive = 0;
   common_scripts\utility::func_3C87("flag_outlaw_raven_puzzle_complete");
   common_scripts\utility::func_3C9F("flag_outlaw_raven_puzzle_complete");
@@ -26,7 +26,7 @@ raven_gun_modify_damage(param_00, param_01, param_02, param_03, param_04, param_
     return param_02;
   }
 
-  if(param_00[[param_00 maps\mp\agents\_agent_utility::func_A59("is_hit_weak_point")]](self, param_01, param_01, param_02, param_03, param_04, undefined, param_06, param_07)) {
+  if(param_00[[param_00 maps / mp / agents / _agent_utility::func_A59("is_hit_weak_point")]](self, param_01, param_01, param_02, param_03, param_04, undefined, param_06, param_07)) {
     return param_02 * 4;
   }
 
@@ -51,7 +51,7 @@ raven_gun_check_for_crit(param_00, param_01, param_02, param_03, param_04, param
     return;
   }
 
-  if(!self[[maps\mp\agents\_agent_utility::func_A59("is_hit_weak_point")]](self, param_00, param_01, param_02, param_04, param_05, undefined, param_07, param_08)) {
+  if(!self[[maps / mp / agents / _agent_utility::func_A59("is_hit_weak_point")]](self, param_00, param_01, param_02, param_04, param_05, undefined, param_07, param_08)) {
     return;
   }
 
@@ -60,7 +60,7 @@ raven_gun_check_for_crit(param_00, param_01, param_02, param_03, param_04, param
 
 raven_gun_refund_ammo(param_00, param_01) {
   var_02 = param_00 getweaponammoclip(param_01);
-  param_00 method_82FA(param_01, var_02 + 1);
+  param_00 setweaponammoclip(param_01, var_02 + 1);
 }
 
 raven_gun_pap_check_for_crit_kill(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
@@ -76,7 +76,7 @@ raven_gun_pap_check_for_crit_kill(param_00, param_01, param_02, param_03, param_
     return;
   }
 
-  if(!self[[maps\mp\agents\_agent_utility::func_A59("is_hit_weak_point")]](self, param_00, param_01, param_02, param_03, param_04, undefined, param_05, param_06)) {
+  if(!self[[maps / mp / agents / _agent_utility::func_A59("is_hit_weak_point")]](self, param_00, param_01, param_02, param_03, param_04, undefined, param_05, param_06)) {
     return;
   }
 
@@ -85,14 +85,14 @@ raven_gun_pap_check_for_crit_kill(param_00, param_01, param_02, param_03, param_
   }
 
   level.ravengunisactive = 1;
-  var_09 = spawn("script_model", self.var_116 + (0, 0, 64));
-  var_09.var_1D = (0, param_01.var_1D[1], 180);
+  var_09 = spawn("script_model", self.origin + (0, 0, 64));
+  var_09.angles = (0, param_01.angles[1], 180);
   var_09 setModel("tag_origin");
-  raven_feather_poof(var_09.var_116);
+  raven_feather_poof(var_09.origin);
   var_09.ravenfx = playFXOnTag(common_scripts\utility::func_44F5("raven_fly"), var_09, "tag_origin");
-  var_0A = randomfloatrange(var_09.var_116[0] - 32, var_09.var_116[0] + 32);
-  var_0B = randomfloatrange(var_09.var_116[1] - 32, var_09.var_116[1] + 32);
-  var_0C = randomfloatrange(var_09.var_116[2] + 32, var_09.var_116[2] + 64);
+  var_0A = randomfloatrange(var_09.origin[0] - 32, var_09.origin[0] + 32);
+  var_0B = randomfloatrange(var_09.origin[1] - 32, var_09.origin[1] + 32);
+  var_0C = randomfloatrange(var_09.origin[2] + 32, var_09.origin[2] + 64);
   var_09 moveTo((var_0A, var_0B, var_0C), 2, 0.5, 1.5);
   wait(2);
   var_09 raven_seek_targets(param_01, param_04, param_03);
@@ -102,18 +102,18 @@ raven_gun_pap_check_for_crit_kill(param_00, param_01, param_02, param_03, param_
 raven_seek_targets(param_00, param_01, param_02) {
   for(var_03 = 0; var_03 < 5; var_03++) {
     var_04 = undefined;
-    var_04 = common_scripts\utility::func_4461(self.var_116, lib_0547::func_408F(), 200);
+    var_04 = common_scripts\utility::func_4461(self.origin, lib_0547::func_408F(), 200);
     if(isDefined(var_04)) {
-      self moveTo(var_04.var_116 + (0, 0, 48), 0.15);
+      self moveTo(var_04.origin + (0, 0, 48), 0.15);
       wait(0.15);
-      var_05 = maps\mp\gametypes\zombies::func_1E59(lib_0547::func_A51("zombie_generic"), level.var_A980);
-      var_04 dodamage(var_05, self.var_116, param_00, param_00, param_02, param_01);
-      raven_feather_poof(var_04.var_116);
+      var_05 = maps / mp / gametypes / zombies::func_1E59(lib_0547::func_A51("zombie_generic"), level.var_A980);
+      var_04 dodamage(var_05, self.origin, param_00, param_00, param_02, param_01);
+      raven_feather_poof(var_04.origin);
     }
 
     wait 0.05;
     if(!isDefined(var_04) || isalive(var_04)) {
-      raven_feather_poof(self.var_116);
+      raven_feather_poof(self.origin);
       break;
     }
 

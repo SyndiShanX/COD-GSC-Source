@@ -3,11 +3,11 @@
  * Script: maps\mp\zombies\weapons\_zombie_dlc2_melee.gsc
 **********************************************************/
 
-func_00D5() {
+init() {
   level.var_611["zmb_blood_blast"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_med_trap_gib");
   level.var_611["zmb_bat_long_hit_crit_blood"] = loadfx("vfx/blood/zmb_bat_long_hit_crit_blood");
   level.var_611["zmb_raven_sword_barb_burst"] = loadfx("vfx/zombie/zmb_sword_barb_burst");
-  level.var_611["zmb_melee_drain_player"] = loadfx("vfx/gameplay\mp\zombie/zmb_melee_drain_player");
+  level.var_611["zmb_melee_drain_player"] = loadfx("vfx/gameplay/mp/zombie/zmb_melee_drain_player");
   level.var_611["zmb_giestkraft_impact"] = loadfx("vfx/zombie/zmb_giestkraft_impact");
   if(!isDefined(level.var_6DF9)) {
     level.var_6DF9 = [];
@@ -46,7 +46,7 @@ watch_melee_weapon_ownership(param_00) {
       var_01 = var_02;
     }
 
-    common_scripts\utility::knock_off_battery("weapon_taken", "weapon_given");
+    common_scripts\utility::waittill_any("weapon_taken", "weapon_given");
   }
 }
 
@@ -57,7 +57,7 @@ scale_damage() {
 
   var_00 = 1;
   for(;;) {
-    var_01 = maps\mp\gametypes\zombies::func_1E59(lib_0547::func_A51("zombie_generic"), var_00);
+    var_01 = maps / mp / gametypes / zombies::func_1E59(lib_0547::func_A51("zombie_generic"), var_00);
     level.batdamage = max(850, var_01 * 0.25);
     level.batcolumndamage = max(450, var_01 * 0.15);
     level.bathcdamage = max(1700, var_01 * 0.7);
@@ -80,7 +80,7 @@ setup_heavy_melee_abilityinfo(param_00, param_01, param_02, param_03) {
   }
 
   var_04 = spawnStruct();
-  var_04.var_953E = param_00;
+  var_04.sweapon = param_00;
   var_04.firedelay = param_01;
   var_04.weaponlostendon = param_02;
   var_04.firingfunction = param_03;
@@ -94,7 +94,7 @@ run_heavy_melee_ability(param_00) {
 
   for(;;) {
     self waittill("melee_fired", var_01);
-    if(issubstr(var_01, param_00.var_953E) && self method_8661()) {
+    if(issubstr(var_01, param_00.sweapon) && self method_8661()) {
       if(isDefined(param_00.firedelay)) {
         wait(param_00.firedelay);
       }
@@ -141,7 +141,7 @@ bayochargecleanup(param_00, param_01) {
 bayochargeendingtracking(param_00) {
   self endon("disconnect");
   self endon("bayoCleanup");
-  var_01 = common_scripts\utility::func_A715("death", "sprint_melee_charge_end");
+  var_01 = common_scripts\utility::waittill_any_return("death", "sprint_melee_charge_end");
   waittillframeend;
   thread bayochargecleanup(param_00, var_01);
 }
@@ -213,7 +213,7 @@ bat_think() {
 
 bat_cone(param_00) {
   var_01 = lib_0586::zombies_hit_by_melee_cone(90, 15);
-  var_01 = function_01AC(var_01, self.var_116);
+  var_01 = function_01AC(var_01, self.origin);
   for(var_02 = 0; var_02 < var_01.size; var_02++) {
     thread delayed_bat_hit(var_01[var_02], var_02);
   }
@@ -226,8 +226,8 @@ delayed_bat_hit(param_00, param_01) {
   }
 
   var_03 = spawnStruct();
-  var_03.var_721C = self;
-  var_03.var_ABE6 = param_00.var_116;
+  var_03.player = self;
+  var_03.var_ABE6 = param_00.origin;
   var_03.var_4DCF = "none";
   var_03.var_60B8 = undefined;
   var_03.var_1D0 = "baseballbat_aoe_zm";
@@ -305,14 +305,14 @@ bat_hc_blast(param_00) {
   var_04 = var_01 getEye() + var_03["forward"] * 12 + var_03["up"] * 0;
   var_05 = bulletTrace(var_04, var_04 + 500 * var_03["forward"], 0, undefined, 0, 0, 0, 0, 0, 0, 0);
   var_06 = spawn("script_model", var_04);
-  var_06.var_1D = var_01.var_1D;
+  var_06.angles = var_01.angles;
   var_06 setModel("tag_origin");
   var_06.var_2DA7 = var_05["position"];
-  var_06.var_2F0C = vectorNormalize(var_06.var_2DA7 - var_06.var_116);
+  var_06.var_2F0C = vectorNormalize(var_06.var_2DA7 - var_06.origin);
   var_06.var_9B7F = var_05["fraction"];
-  var_06.var_721C = var_01;
-  var_06.var_953E = "baseballbat_hc_aoe_zm";
-  var_06.var_18A = 1000;
+  var_06.player = var_01;
+  var_06.sweapon = "baseballbat_hc_aoe_zm";
+  var_06.speed = 1000;
   var_06.hit_radius = 30;
   var_06.hit_height = 30;
   var_06.already_hit = [];
@@ -321,13 +321,13 @@ bat_hc_blast(param_00) {
 
 bat_hc_blast_think(param_00) {
   param_00 endon("death");
-  var_01 = distance(param_00.var_116, param_00.var_2DA7);
-  var_02 = var_01 / param_00.var_18A;
+  var_01 = distance(param_00.origin, param_00.var_2DA7);
+  var_02 = var_01 / param_00.speed;
   if(var_02 > 0) {
     param_00 moveTo(param_00.var_2DA7, var_02, 0, 0);
   }
 
-  var_03 = param_00.var_116 - param_00.hit_height * 0.5 * (0, 0, 1);
+  var_03 = param_00.origin - param_00.hit_height * 0.5 * (0, 0, 1);
   param_00.var_9D65 = spawn("trigger_radius", var_03, 0, param_00.hit_radius, param_00.hit_height);
   param_00.var_9D65 enablelinkTo();
   param_00.var_9D65 linkTo(param_00);
@@ -344,7 +344,7 @@ bat_hc_blast_watch_collision(param_00) {
   param_00 endon("death");
   for(;;) {
     param_00.var_9D65 waittill("trigger", var_01);
-    if(isDefined(var_01.var_1A7) && !isenemyteam(param_00.var_721C.var_1A7, var_01.var_1A7)) {
+    if(isDefined(var_01.team) && !isenemyteam(param_00.player.team, var_01.team)) {
       continue;
     }
 
@@ -362,8 +362,8 @@ bat_hc_blast_hit(param_00, param_01) {
   param_01.already_hit[param_00 getentitynumber()] = 1;
   if(function_01EF(param_00)) {
     var_03 = spawnStruct();
-    var_03.var_721C = self;
-    var_03.var_ABE6 = param_00.var_116;
+    var_03.player = self;
+    var_03.var_ABE6 = param_00.origin;
     var_03.var_4DCF = "none";
     var_03.var_60B8 = undefined;
     var_03.var_1D0 = "baseballbat_aoe_zm";
@@ -721,7 +721,7 @@ trench_knife_hc_think() {}
 
 trench_knife_hc_on_zombie_killed(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
   if(isDefined(param_01) && isPlayer(param_01) && param_01 has_trench_knife_hc()) {
-    if(common_scripts\utility::func_562E(self.var_103)) {
+    if(common_scripts\utility::func_562E(self.meleeheavycasualty)) {
       param_01 trench_knife_hc_spec_effect();
     }
   }
@@ -730,11 +730,11 @@ trench_knife_hc_on_zombie_killed(param_00, param_01, param_02, param_03, param_0
 trench_knife_hc_spec_effect() {
   var_00 = self;
   wait(1.38);
-  if(var_00.var_BC < var_00.var_FB) {
-    if(var_00.var_BC + 10 <= var_00.var_FB) {
-      var_00.var_BC = var_00.var_BC + 10;
+  if(var_00.health < var_00.maxhealth) {
+    if(var_00.health + 10 <= var_00.maxhealth) {
+      var_00.health = var_00.health + 10;
     } else {
-      var_00.var_BC = var_00.var_FB;
+      var_00.health = var_00.maxhealth;
     }
 
     var_00 notify("immediateHealthRegen");
@@ -812,14 +812,14 @@ blade_think() {
 
 blade_melee_cone(param_00) {
   var_01 = lib_0586::zombies_hit_by_melee_cone(350, 100);
-  var_01 = function_01AC(var_01, self.var_116);
+  var_01 = function_01AC(var_01, self.origin);
   for(var_02 = 0; var_02 < var_01.size; var_02++) {
     thread delayed_blade_hit(var_01[var_02], var_02);
   }
 
   var_03 = common_scripts\utility::func_44F5("zmb_raven_sword_barb_burst");
-  playFX(var_03, self.var_116 + (0, 0, 50), anglesToForward(self.var_1D));
-  lib_0378::func_8D74("zmb_sword_aoe", self.var_116);
+  playFX(var_03, self.origin + (0, 0, 50), anglesToForward(self.angles));
+  lib_0378::func_8D74("zmb_sword_aoe", self.origin);
 }
 
 delayed_blade_hit(param_00, param_01) {
@@ -828,7 +828,7 @@ delayed_blade_hit(param_00, param_01) {
     wait 0.05;
   }
 
-  lib_0378::func_8D74("zmb_sword_melee_hit_delayed", param_00.var_116);
+  lib_0378::func_8D74("zmb_sword_melee_hit_delayed", param_00.origin);
   param_00 dodamage(level.bladecleavedamage, self getEye(), self, self, "MOD_MELEE", "blade_aoe_zm", "none");
   playFXOnTag(level.var_611["zmb_giestkraft_impact"], param_00, "J_Spine4");
   if(isDefined(param_00.var_A4B)) {
@@ -848,7 +848,7 @@ blade_onenemykilled(param_00, param_01, param_02, param_03, param_04, param_05, 
 playzombiekilledbeamexplodefx() {
   var_00 = self gettagorigin("J_MainRoot");
   if(!isDefined(var_00)) {
-    var_00 = self.var_116;
+    var_00 = self.origin;
   }
 
   playFX(common_scripts\utility::func_44F5("zmb_blood_blast"), var_00);

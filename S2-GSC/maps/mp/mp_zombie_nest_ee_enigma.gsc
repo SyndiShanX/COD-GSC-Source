@@ -7,7 +7,7 @@ func_430C() {
   return "salt_mine_opened";
 }
 
-func_00F9() {
+main() {
   level.var_36B0 = 1;
   level.var_3592 = 1;
   level.var_3594 = 1;
@@ -48,7 +48,7 @@ func_784F() {
   }
 
   if(isDefined(var_02) && isDefined(var_02.var_6298)) {
-    var_06 = lib_0557::func_782F(var_02.var_6298.var_0116 + (0, 0, 30), [var_02.var_6298]);
+    var_06 = lib_0557::func_782F(var_02.var_6298.origin + (0, 0, 30), [var_02.var_6298]);
     lib_0557::func_781D("2 open salt mine", var_06);
   } else {}
 
@@ -66,7 +66,7 @@ func_7851() {
 
 func_7867() {
   if(1) {
-    if(!1 || 1 && level.var_744A.size == 1) {
+    if(!1 || 1 && level.players.size == 1) {
       level thread quest_step_reroute_power_helper();
     }
   }
@@ -104,7 +104,7 @@ quest_step_reroute_power_helper() {
     if(0) {
       level.rotor_objective_helper_tripped = 1;
       foreach(var_03 in level.var_358F) {
-        foreach(var_05 in level.var_744A) {
+        foreach(var_05 in level.players) {
           var_03 hudoutlineenableforclient(var_05, 0, 0);
         }
       }
@@ -123,13 +123,13 @@ func_5348() {
   var_02 = var_00[0];
   var_03 = var_01[0];
   foreach(var_05 in var_00) {
-    if(var_05.var_003A == "script_model" && var_05.var_0106 == "zmb_circuit_breaker_02") {
+    if(var_05.classname == "script_model" && var_05.model == "zmb_circuit_breaker_02") {
       var_02 = var_05;
     }
   }
 
   foreach(var_05 in var_01) {
-    if(var_05.var_003A == "script_model" && var_05.var_0106 == "zmb_circuit_breaker_02") {
+    if(var_05.classname == "script_model" && var_05.model == "zmb_circuit_breaker_02") {
       var_03 = var_05;
     }
   }
@@ -148,7 +148,7 @@ func_785F() {
     if(0) {
       if(common_scripts\utility::func_562E(level.rotor_objective_helper_tripped)) {
         foreach(var_03 in level.var_358F) {
-          foreach(var_05 in level.var_744A) {
+          foreach(var_05 in level.players) {
             var_03 hudoutlinedisableforclient(var_05);
           }
         }
@@ -160,7 +160,7 @@ func_785F() {
 }
 
 func_378A() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 maps\mp\zombies\_zombies_rank::func_AC23("shardroom");
     var_01 lib_0378::func_8D74("objective_complete", "shardroom");
   }
@@ -199,7 +199,7 @@ func_3B98() {
 
 func_8035() {
   level.var_3593 = 1;
-  if(!maps\mp\mp_zombie_nest_ee_hc_tools_of_the_trade::func_8B98()) {
+  if(!maps / mp / mp_zombie_nest_ee_hc_tools_of_the_trade::func_8B98()) {
     var_00 = getEntArray("enigma_place", "targetname");
     foreach(var_02 in var_00) {
       var_02 delete();
@@ -208,14 +208,14 @@ func_8035() {
 
   if(level.var_36B0) {
     var_04 = func_4470();
-    var_05 = var_04.var_8301[0].var_0116;
+    var_05 = var_04.var_8301[0].origin;
     common_scripts\utility::func_3C9F("com_to_mine");
     common_scripts\utility::func_3C8F("flag_salt_mine_main_ent_opened");
-    thread maps\mp\mp_zombie_nest_ee_util::func_7213("entermine", var_05, 200, 512);
+    thread maps / mp / mp_zombie_nest_ee_util::func_7213("entermine", var_05, 200, 512);
   }
 
   var_06 = func_4587();
-  var_06 notify("open", level.var_744A[0]);
+  var_06 notify("open", level.players[0]);
   thread func_A10A("med", "green");
   thread func_A10A("rnd", "green");
   lib_0557::func_782D("2 open salt mine", "salt mine door open");
@@ -223,7 +223,7 @@ func_8035() {
 }
 
 func_7EFD() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 maps\mp\zombies\_zombies_rank::func_AC23("rotor");
     var_01 lib_0378::func_8D74("objective_complete", "rotor");
   }
@@ -258,7 +258,7 @@ func_7D6C() {
   for(var_00 = 0; var_00 < level.var_358E.size; var_00++) {
     level.var_358E[var_00].var_5F59 func_8718();
     level.var_358E[var_00] func_8713();
-    level.var_358E[var_00].var_08A9 = 0;
+    level.var_358E[var_00].var_8A9 = 0;
   }
 }
 
@@ -270,17 +270,17 @@ func_7AAC() {
 
 func_8A3F() {
   self useTriggerRequireLookAt();
-  self.var_5F59 = getEnt(self.var_01A2, "targetname");
-  if(isDefined(self.var_5F59.var_01A2)) {
-    self.var_6643 = common_scripts\utility::func_44BD(self.var_5F59.var_01A2, "targetname");
+  self.var_5F59 = getEnt(self.target, "targetname");
+  if(isDefined(self.var_5F59.target)) {
+    self.var_6643 = common_scripts\utility::func_44BD(self.var_5F59.target, "targetname");
   }
 
-  if(isDefined(self.var_6643) && isDefined(self.var_6643.var_01A2)) {
-    self.var_6646 = common_scripts\utility::func_44BD(self.var_6643.var_01A2, "targetname");
+  if(isDefined(self.var_6643) && isDefined(self.var_6643.target)) {
+    self.var_6646 = common_scripts\utility::func_44BD(self.var_6643.target, "targetname");
   }
 
-  if(isDefined(self.var_6646) && isDefined(self.var_6646.var_01A2)) {
-    self.var_6647 = common_scripts\utility::func_44BD(self.var_6646.var_01A2, "targetname");
+  if(isDefined(self.var_6646) && isDefined(self.var_6646.target)) {
+    self.var_6647 = common_scripts\utility::func_44BD(self.var_6646.target, "targetname");
   }
 }
 
@@ -300,14 +300,14 @@ func_7EFC() {
       }
     }
 
-    if(!isDefined(self.var_08A9)) {
-      self.var_08A9 = 0;
+    if(!isDefined(self.var_8A9)) {
+      self.var_8A9 = 0;
     }
 
     self.var_5F59 thread func_8717();
-    if(self.var_08A9 == 0) {
+    if(self.var_8A9 == 0) {
       common_scripts\utility::func_9D9F();
-      self.var_08A9 = 1;
+      self.var_8A9 = 1;
       level.var_3591++;
       var_00 thread func_2EB7();
       if(level.var_3591 == 1 && 1) {
@@ -375,8 +375,8 @@ func_86C0() {
     return;
   }
 
-  self hidepart("TAG_POWER_ON", self.var_0106);
-  self showpart("TAG_POWER_OFF", self.var_0106);
+  self hidepart("TAG_POWER_ON", self.model);
+  self showpart("TAG_POWER_OFF", self.model);
 }
 
 func_86C1() {
@@ -385,18 +385,18 @@ func_86C1() {
     return;
   }
 
-  self hidepart("TAG_POWER_OFF", self.var_0106);
-  self showpart("TAG_POWER_ON", self.var_0106);
+  self hidepart("TAG_POWER_OFF", self.model);
+  self showpart("TAG_POWER_ON", self.model);
 }
 
 func_86BD() {
   self.var_568A = 1;
   while(common_scripts\utility::func_562E(self.var_568A)) {
-    self hidepart("TAG_POWER_ON", self.var_0106);
-    self showpart("TAG_POWER_OFF", self.var_0106);
+    self hidepart("TAG_POWER_ON", self.model);
+    self showpart("TAG_POWER_OFF", self.model);
     wait(0.5);
-    self hidepart("TAG_POWER_OFF", self.var_0106);
-    self showpart("TAG_POWER_ON", self.var_0106);
+    self hidepart("TAG_POWER_OFF", self.model);
+    self showpart("TAG_POWER_ON", self.model);
     if(common_scripts\utility::func_562E(self.var_56B6)) {
       self.var_568A = 0;
       return;
@@ -423,11 +423,11 @@ func_8716(param_00) {
 
 func_A10E(param_00, param_01) {
   for(var_02 = 0; var_02 < param_00.size; var_02++) {
-    self hidepart(param_00[var_02], self.var_0106);
+    self hidepart(param_00[var_02], self.model);
   }
 
   for(var_02 = 0; var_02 < param_01.size; var_02++) {
-    self showpart(param_01[var_02], self.var_0106);
+    self showpart(param_01[var_02], self.model);
   }
 }
 
@@ -511,8 +511,8 @@ func_92C4() {
   thread lib_0378::func_8D74("aud_fuse_timer_start", level.var_358E);
   while(!level.var_3593 && !var_01) {
     if(var_00 < 10) {
-      foreach(var_06 in level.var_744A) {
-        if(var_06 maps\mp\mp_zombie_nest_ee_util::func_7402()) {
+      foreach(var_06 in level.players) {
+        if(var_06 maps / mp / mp_zombie_nest_ee_util::func_7402()) {
           thread lib_0378::func_8D74("aud_start_enigma_timer", var_00, var_01);
         }
       }
@@ -521,8 +521,8 @@ func_92C4() {
     var_00--;
     wait(1 / level.var_3594);
     if(var_00 <= 0 && !level.var_3593) {
-      foreach(var_06 in level.var_744A) {
-        if(var_06 maps\mp\mp_zombie_nest_ee_util::func_7402()) {
+      foreach(var_06 in level.players) {
+        if(var_06 maps / mp / mp_zombie_nest_ee_util::func_7402()) {
           thread lib_0378::func_8D74("aud_start_enigma_timer", var_00, var_01);
           var_06 thread func_2EA7();
         }
@@ -545,9 +545,9 @@ func_9300(param_00) {
     return;
   }
 
-  self.var_6643 moveTo(self.var_6647.var_0116, 0.1, 0, 0);
+  self.var_6643 moveTo(self.var_6647.origin, 0.1, 0, 0);
   wait(0.1);
-  self.var_6643 moveTo(self.var_6646.var_0116, param_00 - 0.1, 0, 0);
+  self.var_6643 moveTo(self.var_6646.origin, param_00 - 0.1, 0, 0);
 }
 
 func_8714() {
@@ -555,7 +555,7 @@ func_8714() {
     return;
   }
 
-  self.var_6643 moveTo(self.var_6647.var_0116, 0.5, 0, 0);
+  self.var_6643 moveTo(self.var_6647.origin, 0.5, 0, 0);
 }
 
 func_8713() {
@@ -563,7 +563,7 @@ func_8713() {
     return;
   }
 
-  self.var_6643 moveTo(self.var_6646.var_0116, 0.5, 0, 0);
+  self.var_6643 moveTo(self.var_6646.origin, 0.5, 0, 0);
 }
 
 func_2EA6() {

@@ -3,16 +3,16 @@
  * Script: maps\mp\gametypes\_serversettings.gsc
 *************************************************/
 
-func_00D5() {
+init() {
   level.var_4E0E = getDvar("5656");
   if(level.var_4E0E == "") {
     level.var_4E0E = "CoDHost";
   }
 
   setDvar("5656", level.var_4E0E);
-  level.var_0C32 = getdvarint("4372", 1);
-  setDvar("4372", level.var_0C32);
-  level.var_3EC4 = maps\mp\gametypes\_tweakables::func_46F7("team", "fftype");
+  level.var_C32 = getdvarint("4372", 1);
+  setDvar("4372", level.var_C32);
+  level.friendlyfire = maps\mp\gametypes\_tweakables::gettweakablevalue("team", "fftype");
   func_2596(getDvar("1924"));
   for(;;) {
     func_A164();
@@ -27,13 +27,13 @@ func_A164() {
   }
 
   var_01 = getdvarint("4372", 1);
-  if(level.var_0C32 != var_01) {
-    level.var_0C32 = var_01;
+  if(level.var_C32 != var_01) {
+    level.var_C32 = var_01;
   }
 
-  var_02 = maps\mp\gametypes\_tweakables::func_46F7("team", "fftype");
-  if(level.var_3EC4 != var_02) {
-    level.var_3EC4 = var_02;
+  var_02 = maps\mp\gametypes\_tweakables::gettweakablevalue("team", "fftype");
+  if(level.friendlyfire != var_02) {
+    level.friendlyfire = var_02;
   }
 }
 

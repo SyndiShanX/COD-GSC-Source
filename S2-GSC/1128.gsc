@@ -3,8 +3,8 @@
  * Script: 1128.gsc
 *********************************************/
 
-lib_0468::func_0A23(param_00, param_01, param_02, param_03) {
-  if(!maps\mp\_utility::func_7A69() || function_0367()) {
+func_0A23(param_00, param_01, param_02, param_03) {
+  if(!maps\mp\_utility::rankingenabled() || function_0367()) {
     return 0;
   }
 
@@ -44,7 +44,7 @@ lib_0468::func_0A23(param_00, param_01, param_02, param_03) {
     param_03[param_03.size] = "playerProne";
   }
 
-  switch (maps\mp\_utility::func_472A(param_01)) {
+  switch (maps\mp\_utility::getweaponclass(param_01)) {
     case "weapon_assault":
       var_04[var_04.size] = 1;
       var_04[var_04.size] = 1;
@@ -91,7 +91,7 @@ lib_0468::func_0A23(param_00, param_01, param_02, param_03) {
         }
       }
 
-      var_08 = self method_831F();
+      var_08 = self getplayersoffhands();
       if(!var_05 && isDefined(var_08) && var_08 == param_01) {
         var_04[var_04.size] = 8;
         var_04[var_04.size] = 1;
@@ -141,7 +141,7 @@ lib_0468::func_0A23(param_00, param_01, param_02, param_03) {
     }
   }
 
-  if(maps\mp\_utility::func_0649("specialty_class_wanderlust")) {
+  if(maps\mp\_utility::_hasperk("specialty_class_wanderlust")) {
     param_03[param_03.size] = "wanderlustEquipped";
   }
 
@@ -169,74 +169,74 @@ lib_0468::func_0A23(param_00, param_01, param_02, param_03) {
     }
   }
 
-  if(isDefined(self.var_0079)) {
-    switch (self.var_0079) {
+  if(isDefined(self.var_79)) {
+    switch (self.var_79) {
       case 0:
         var_09 = var_09 | 64;
-        if(maps\mp\_utility::func_472A(param_01) != "weapon_assault") {
+        if(maps\mp\_utility::getweaponclass(param_01) != "weapon_assault") {
           param_03[param_03.size] = "infantry_no_rifle";
         }
         break;
 
       case 1:
         var_09 = var_09 | 128;
-        if(maps\mp\_utility::func_472A(param_01) != "weapon_smg") {
+        if(maps\mp\_utility::getweaponclass(param_01) != "weapon_smg") {
           param_03[param_03.size] = "airborne_no_smg";
         }
         break;
 
       case 2:
         var_09 = var_09 | 256;
-        if(maps\mp\_utility::func_472A(param_01) != "weapon_heavy") {
+        if(maps\mp\_utility::getweaponclass(param_01) != "weapon_heavy") {
           param_03[param_03.size] = "armored_no_lmg";
         }
         break;
 
       case 3:
         var_09 = var_09 | 512;
-        if(maps\mp\_utility::func_472A(param_01) != "weapon_sniper") {
+        if(maps\mp\_utility::getweaponclass(param_01) != "weapon_sniper") {
           param_03[param_03.size] = "mountain_no_sniper";
         }
         break;
 
       case 4:
         var_09 = var_09 | 1024;
-        if(maps\mp\_utility::func_472A(param_01) != "weapon_shotgun") {
+        if(maps\mp\_utility::getweaponclass(param_01) != "weapon_shotgun") {
           param_03[param_03.size] = "expeditionary_no_shotgun";
         }
         break;
 
       case 6:
         var_09 = var_09 | 4096;
-        if(maps\mp\_utility::func_472A(param_01) != "weapon_pistol") {
+        if(maps\mp\_utility::getweaponclass(param_01) != "weapon_pistol") {
           param_03[param_03.size] = "resistance_no_pistol";
         }
         break;
 
       case 7:
         var_09 = var_09 | 16384;
-        if(maps\mp\_utility::func_472A(param_01) != "weapon_assault") {
+        if(maps\mp\_utility::getweaponclass(param_01) != "weapon_assault") {
           param_03[param_03.size] = "grenadier_no_rifle";
         }
         break;
 
       case 8:
         var_09 = var_09 | 65536;
-        if(maps\mp\_utility::func_472A(param_01) != "weapon_smg") {
+        if(maps\mp\_utility::getweaponclass(param_01) != "weapon_smg") {
           param_03[param_03.size] = "commando_no_smg";
         }
         break;
 
       case 9:
         var_09 = var_09 | 262144;
-        if(maps\mp\_utility::func_472A(param_01) != "weapon_sniper") {
+        if(maps\mp\_utility::getweaponclass(param_01) != "weapon_sniper") {
           param_03[param_03.size] = "scout_no_sniper";
         }
         break;
 
       case 10:
         var_09 = var_09 | 1048576;
-        if(maps\mp\_utility::func_472A(param_01) != "weapon_assault") {
+        if(maps\mp\_utility::getweaponclass(param_01) != "weapon_assault") {
           param_03[param_03.size] = "artillery_no_rifle";
         }
         break;
@@ -245,8 +245,8 @@ lib_0468::func_0A23(param_00, param_01, param_02, param_03) {
 
   var_04[var_04.size] = 130;
   var_04[var_04.size] = var_09;
-  if(isDefined(param_00.var_0079)) {
-    switch (param_00.var_0079) {
+  if(isDefined(param_00.var_79)) {
+    switch (param_00.var_79) {
       case 7:
         param_03[param_03.size] = "killed_cavalry";
         break;
@@ -259,7 +259,7 @@ lib_0468::func_0A23(param_00, param_01, param_02, param_03) {
   } else if(isDefined(param_02) && maps\mp\_utility::func_56E5(param_02)) {
     var_04[var_04.size] = 3;
     var_04[var_04.size] = 3;
-  } else if(isDefined(param_00.var_5033) && param_00.var_5033 &level.var_503B) {
+  } else if(isDefined(param_00.idflags) && param_00.idflags &level.var_503B) {
     var_04[var_04.size] = 3;
     var_04[var_04.size] = 4;
   } else if(isDefined(param_02) && param_02 == "MOD_MELEE") {
@@ -276,30 +276,30 @@ lib_0468::func_0A23(param_00, param_01, param_02, param_03) {
     param_03[param_03.size] = "winter_map_kill";
   }
 
-  if(self.var_01A7 != param_00.var_01A7 && isDefined(param_00.var_2013)) {
+  if(self.team != param_00.team && isDefined(param_00.var_2013)) {
     param_03[param_03.size] = "flag_carrier_kill";
   }
 
-  if(level.var_3FDC == "hp" && isDefined(level.var_AC7C.var_9D5E) && self istouching(level.var_AC7C.var_9D5E)) {
+  if(level.gametype == "hp" && isDefined(level.var_AC7C.var_9D5E) && self istouching(level.var_AC7C.var_9D5E)) {
     param_03[param_03.size] = "kill_on_hp";
   }
 
-  if(level.var_3FDC == "relic" && isDefined(self.relicpasskill)) {
+  if(level.gametype == "relic" && isDefined(self.relicpasskill)) {
     param_03[param_03.size] = "skulduggery";
     self.relicpasskill = undefined;
   }
 
-  if(level.var_3FDC == "infect") {
-    if(self.var_01A7 == "axis") {
+  if(level.gametype == "infect") {
+    if(self.team == "axis") {
       param_03[param_03.size] = "survivor_killed";
-    } else if(self.var_01A7 == "allies") {
+    } else if(self.team == "allies") {
       param_03[param_03.size] = "infected_killed";
     }
   }
 
-  if(!maps\mp\_utility::func_5740(param_01) && maps\mp\_utility::func_5695(param_02) && !maps\mp\_utility::isdogfightgametype()) {
-    if(isDefined(self.var_3BE0)) {
-      var_0C = self.var_3BE0;
+  if(!maps\mp\_utility::iskillstreakweapon(param_01) && maps\mp\_utility::func_5695(param_02) && !maps\mp\_utility::isdogfightgametype()) {
+    if(isDefined(self.firedads)) {
+      var_0C = self.firedads;
     } else {
       var_0C = self playerads();
     }
@@ -311,10 +311,10 @@ lib_0468::func_0A23(param_00, param_01, param_02, param_03) {
     }
   }
 
-  if(isDefined(var_04) && var_04.size > 0) {
+  if(isDefined(param_03) && param_03.size > 0) {
     var_0D = 0;
     var_0E = 0;
-    foreach(var_10 in var_04) {
+    foreach(var_10 in param_03) {
       if(var_10 == "flag_carrier_kill") {
         var_0E = var_0E | 2;
         continue;
@@ -492,33 +492,33 @@ lib_0468::func_0A23(param_00, param_01, param_02, param_03) {
     }
 
     if(var_0D > 0) {
-      var_05[var_05.size] = 128;
-      var_05[var_05.size] = var_0D;
+      var_04[var_04.size] = 128;
+      var_04[var_04.size] = var_0D;
     }
 
     if(var_0E > 0) {
-      var_05[var_05.size] = 129;
-      var_05[var_05.size] = var_0E;
+      var_04[var_04.size] = 129;
+      var_04[var_04.size] = var_0E;
     }
   }
 
-  if(var_05.size > 0) {
-    self ae_reportcomplexgameevent(1, var_05);
+  if(var_04.size > 0) {
+    self ae_reportcomplexgameevent(1, var_04);
   }
 }
 
-lib_0468::func_0A24(param_00, param_01) {
-  if(!maps\mp\_utility::func_7A69() || function_0367()) {
+func_0A24(param_00, param_01) {
+  if(!maps\mp\_utility::rankingenabled() || function_0367()) {
     return 0;
   }
 
   var_02 = [];
-  switch (maps\mp\_utility::func_472A(param_00)) {
+  switch (maps\mp\_utility::getweaponclass(param_00)) {
     case "weapon_grenade":
       var_02[var_02.size] = 1;
       var_02[var_02.size] = 1;
       if(isDefined(param_01) && param_01 != "doublekill" && maps\mp\_utility::func_579B()) {
-        lib_0468::func_0A22("warTripleNade");
+        func_0A22("warTripleNade");
       }
       break;
 
@@ -557,7 +557,7 @@ lib_0468::func_0A24(param_00, param_01) {
   var_02[var_02.size] = 1;
   var_02 = checkgamemode(var_02, 3);
   var_02 = checkspecialmodes(var_02);
-  if(level.var_3FDC == "dom" && isDefined(self.var_9AC5)) {
+  if(level.gametype == "dom" && isDefined(self.var_9AC5)) {
     foreach(var_04 in self.var_9AC5) {
       var_05 = 0;
       foreach(var_07 in level.var_3CC5) {
@@ -571,7 +571,7 @@ lib_0468::func_0A24(param_00, param_01) {
         continue;
       }
 
-      lib_0468::func_0A22("multikillOnDomPt");
+      func_0A22("multikillOnDomPt");
       break;
     }
   }
@@ -581,8 +581,8 @@ lib_0468::func_0A24(param_00, param_01) {
   }
 }
 
-lib_0468::func_0A22(param_00) {
-  if(!maps\mp\_utility::func_7A69() || function_0367()) {
+func_0A22(param_00) {
+  if(!maps\mp\_utility::rankingenabled() || function_0367()) {
     return 0;
   }
 
@@ -710,8 +710,8 @@ lib_0468::func_0A22(param_00) {
   }
 
   var_02 = 0;
-  if(isDefined(self.var_0079)) {
-    switch (self.var_0079) {
+  if(isDefined(self.var_79)) {
+    switch (self.var_79) {
       case 0:
         var_02 = var_02 | 64;
         break;
@@ -762,8 +762,8 @@ lib_0468::func_0A22(param_00) {
   }
 }
 
-lib_0468::func_0A28(param_00) {
-  if(!maps\mp\_utility::func_7A69() || function_0367()) {
+func_0A28(param_00) {
+  if(!maps\mp\_utility::rankingenabled() || function_0367()) {
     return 0;
   }
 
@@ -813,8 +813,8 @@ lib_0468::func_0A28(param_00) {
   }
 
   var_02 = 0;
-  if(isDefined(self.var_0079)) {
-    switch (self.var_0079) {
+  if(isDefined(self.var_79)) {
+    switch (self.var_79) {
       case 0:
         var_02 = var_02 | 64;
         break;
@@ -867,8 +867,8 @@ lib_0468::func_0A28(param_00) {
   }
 }
 
-lib_0468::func_0A1E(param_00, param_01, param_02, param_03) {
-  if(!maps\mp\_utility::func_7A69() || function_0367()) {
+func_0A1E(param_00, param_01, param_02, param_03) {
+  if(!maps\mp\_utility::rankingenabled() || function_0367()) {
     return 0;
   }
 
@@ -893,7 +893,7 @@ lib_0468::func_0A1E(param_00, param_01, param_02, param_03) {
   if(isPlayer(param_03)) {
     var_06 = maps\mp\gametypes\_gamescore::func_450B(3);
     var_07 = 2;
-    if(level.var_744A.size > 5) {
+    if(level.players.size > 5) {
       foreach(var_09 in var_06) {
         if(self.var_2418 == var_09.var_2418) {
           var_07 = 1;
@@ -902,10 +902,10 @@ lib_0468::func_0A1E(param_00, param_01, param_02, param_03) {
     } else if(param_03 == self) {
       var_07 = 1;
     }
-  } else if(isDefined(var_05)) {
-    if(isDefined(self.var_01A7) && var_05 == self.var_01A7) {
+  } else if(isDefined(var_04)) {
+    if(isDefined(self.team) && var_04 == self.team) {
       var_07 = 1;
-    } else if(var_05 == "tie" || var_05 == "overtime") {
+    } else if(var_04 == "tie" || var_04 == "overtime") {
       var_07 = 3;
     } else {
       var_07 = 2;
@@ -914,47 +914,47 @@ lib_0468::func_0A1E(param_00, param_01, param_02, param_03) {
     var_07 = 2;
   }
 
-  var_05[var_05.size] = var_06;
-  var_05[var_05.size] = 8;
-  var_05[var_05.size] = self.var_012C["score"];
+  var_04[var_04.size] = var_07;
+  var_04[var_04.size] = 8;
+  var_04[var_04.size] = self.pers["score"];
   if(self getentitynumber() == level.var_74CA) {
-    var_05[var_05.size] = 5;
-    var_05[var_05.size] = 1;
+    var_04[var_04.size] = 5;
+    var_04[var_04.size] = 1;
   }
 
   var_0B = 1;
-  foreach(var_0D in level.var_744A) {
-    if(self.var_015C < var_0D.var_015C) {
+  foreach(var_0D in level.players) {
+    if(self.score < var_0D.score) {
       var_0B++;
     }
   }
 
-  var_05[var_05.size] = 6;
-  var_05[var_05.size] = var_0B;
-  var_05[var_05.size] = 7;
+  var_04[var_04.size] = 6;
+  var_04[var_04.size] = var_0B;
+  var_04[var_04.size] = 7;
   if(function_03AF()) {
     var_0F = function_03B5();
     var_10 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_0F, "ranked_games_total");
     var_11 = !self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_0F, "mmr_was_adjusted");
     if(!var_11 || var_10 >= getdvarint("4697", 10)) {
-      var_05[var_05.size] = 3;
+      var_04[var_04.size] = 3;
     } else {
-      var_05[var_05.size] = 2;
+      var_04[var_04.size] = 2;
     }
   } else {
-    var_0B[var_0B.size] = 1;
+    var_04[var_04.size] = 1;
   }
 
-  if(var_0B.size > 0) {
-    self ae_reportcomplexgameevent(5, var_0B);
+  if(var_04.size > 0) {
+    self ae_reportcomplexgameevent(5, var_04);
   }
 }
 
-lib_0468::func_0A21(param_00) {
+func_0A21(param_00) {
   self ae_reportcomplexgameevent(6, [1, 1, 2, param_00]);
 }
 
-lib_0468::func_0A1C(param_00, param_01, param_02) {
+func_0A1C(param_00, param_01, param_02) {
   var_03 = [];
   switch (param_00) {
     case "win":
@@ -988,7 +988,7 @@ lib_0468::func_0A1C(param_00, param_01, param_02) {
   }
 }
 
-lib_0468::func_0A20(param_00) {
+func_0A20(param_00) {
   var_01 = [];
   switch (param_00) {
     case "completedSequence":
@@ -1012,7 +1012,7 @@ lib_0468::func_0A20(param_00) {
   }
 }
 
-lib_0468::func_0A26(param_00, param_01) {
+func_0A26(param_00, param_01) {
   var_02 = [];
   var_02[var_02.size] = 1;
   switch (param_00) {
@@ -1039,7 +1039,7 @@ lib_0468::func_0A26(param_00, param_01) {
   }
 }
 
-lib_0468::func_0A27(param_00) {
+func_0A27(param_00) {
   var_01 = [];
   switch (param_00) {
     case "passBall":
@@ -1063,7 +1063,7 @@ lib_0468::func_0A27(param_00) {
   }
 }
 
-lib_0468::func_0A2A(param_00, param_01, param_02) {
+func_0A2A(param_00, param_01, param_02) {
   var_03 = [];
   switch (param_00) {
     case "theater":
@@ -1139,7 +1139,7 @@ lib_0468::func_0A2A(param_00, param_01, param_02) {
   }
 }
 
-lib_0468::func_0A29(param_00, param_01, param_02) {
+func_0A29(param_00, param_01, param_02) {
   var_03 = [];
   switch (param_00) {
     case "openSD":
@@ -1162,11 +1162,11 @@ lib_0468::func_0A29(param_00, param_01, param_02) {
   }
 }
 
-lib_0468::func_0A1F() {
+func_0A1F() {
   self ae_reportcomplexgameevent(13, [1, 1]);
 }
 
-lib_0468::func_0A25(param_00, param_01) {
+func_0A25(param_00, param_01) {
   if(param_01 == "mp") {
     self ae_reportcomplexgameevent(14, [2, 1, 1, param_00]);
     return;
@@ -1188,7 +1188,7 @@ ae_sendmasterprestigerankevent(param_00, param_01) {
   }
 }
 
-lib_0468::func_0A1D(param_00, param_01) {
+func_0A1D(param_00, param_01) {
   var_02 = [];
   var_02[var_02.size] = 1;
   switch (param_00) {
@@ -1240,7 +1240,7 @@ lib_0468::func_0A1D(param_00, param_01) {
   }
 }
 
-lib_0468::func_0A2B(param_00, param_01) {
+func_0A2B(param_00, param_01) {
   var_02 = [];
   switch (param_00) {
     case "killBoss":
@@ -1319,14 +1319,14 @@ ae_sendrankedplayrankupevent(param_00) {
 }
 
 ae_sendassistevent(param_00) {
-  if(!maps\mp\_utility::func_7A69() || function_0367()) {
+  if(!maps\mp\_utility::rankingenabled() || function_0367()) {
     return 0;
   }
 
   var_01 = [];
   var_02 = 0;
-  if(isDefined(self.var_0079)) {
-    switch (self.var_0079) {
+  if(isDefined(self.var_79)) {
+    switch (self.var_79) {
       case 0:
         var_02 = var_02 | 64;
         break;
@@ -1384,7 +1384,7 @@ ae_sendassistevent(param_00) {
 }
 
 ae_sendzombiekillevent(param_00, param_01) {
-  if(!maps\mp\_utility::func_7A69() || function_0367()) {
+  if(!maps\mp\_utility::rankingenabled() || function_0367()) {
     return 0;
   }
 
@@ -1396,7 +1396,7 @@ ae_sendzombiekillevent(param_00, param_01) {
     var_03[var_03.size] = 1;
   }
 
-  if(level.var_3FDC == "undead" && isDefined(level.var_AC7C.var_9D5E) && self istouching(level.var_AC7C.var_9D5E)) {
+  if(level.gametype == "undead" && isDefined(level.var_AC7C.var_9D5E) && self istouching(level.var_AC7C.var_9D5E)) {
     var_02[var_02.size] = "kill_on_hp";
   }
 
@@ -1515,8 +1515,8 @@ ae_sendzmskinunlockevent(param_00) {
   }
 }
 
-lib_0468::func_0A1A(param_00, param_01, param_02, param_03, param_04) {
-  if(!param_01 maps\mp\_utility::func_7A69() || function_0367()) {
+func_0A1A(param_00, param_01, param_02, param_03, param_04) {
+  if(!param_01 maps\mp\_utility::rankingenabled() || function_0367()) {
     return 0;
   }
 
@@ -1525,35 +1525,35 @@ lib_0468::func_0A1A(param_00, param_01, param_02, param_03, param_04) {
   }
 
   if(!isDefined(param_01.var_80BD)) {
-    param_01 thread lib_0468::func_A93F();
+    param_01 thread func_A93F();
   }
 
-  if(!isDefined(param_01.var_012C["deflects"])) {
+  if(!isDefined(param_01.pers["deflects"])) {
     param_01 thread watchshielddeflect();
   }
 
   switch (param_00) {
     case "killstreak10":
-      param_01 lib_0468::func_0A28("kill");
+      param_01 func_0A28("kill");
       break;
 
     case "starting_flag":
     case "opening_move":
     case "capture":
-      param_01 lib_0468::func_0A22("domCap");
-      if(isDefined(param_01.var_012C["domCaps"])) {
-        param_01.var_012C["domCaps"]++;
+      param_01 func_0A22("domCap");
+      if(isDefined(param_01.pers["domCaps"])) {
+        param_01.pers["domCaps"]++;
       } else {
-        param_01.var_012C["domCaps"] = 1;
+        param_01.pers["domCaps"] = 1;
       }
 
-      if(param_01.var_012C["domCaps"] == 6) {
-        param_01 lib_0468::func_0A22("domCap6");
+      if(param_01.pers["domCaps"] == 6) {
+        param_01 func_0A22("domCap6");
       }
       break;
 
     case "flag_capture":
-      param_01 lib_0468::func_0A22("ctfCapFlag");
+      param_01 func_0A22("ctfCapFlag");
       break;
 
     case "touchdown":
@@ -1563,17 +1563,17 @@ lib_0468::func_0A1A(param_00, param_01, param_02, param_03, param_04) {
 
       self.touchdowns++;
       if(self.touchdowns == 2) {
-        param_01 lib_0468::func_0A22("touchdown");
+        param_01 func_0A22("touchdown");
       }
       break;
 
     case "kill_confirmed":
-      param_01 lib_0468::func_0A22("enemyTag");
+      param_01 func_0A22("enemyTag");
       break;
 
     case "kill_denied_retrieved":
     case "kill_denied":
-      param_01 lib_0468::func_0A22("friendlyTag");
+      param_01 func_0A22("friendlyTag");
       break;
 
     case "multikill":
@@ -1584,7 +1584,7 @@ lib_0468::func_0A1A(param_00, param_01, param_02, param_03, param_04) {
     case "fourkill":
     case "triplekill":
     case "doublekill":
-      param_01 lib_0468::func_0A24(param_02, param_00);
+      param_01 func_0A24(param_02, param_00);
       break;
 
     case "plane_gunner_destroyed":
@@ -1596,21 +1596,21 @@ lib_0468::func_0A1A(param_00, param_01, param_02, param_03, param_04) {
     case "airstrike_destroyed":
     case "counter_uav_destroyed":
     case "uav_destroyed":
-      param_01 lib_0468::func_0A28("destroy");
+      param_01 func_0A28("destroy");
       break;
 
     case "raids_construct":
-      param_01 lib_0468::func_0A22("warConstruct");
+      param_01 func_0A22("warConstruct");
       break;
 
     case "sharepackage":
-      param_01 lib_0468::func_0A28("sharepackage");
+      param_01 func_0A28("sharepackage");
       break;
 
     case "shield_dmg_taken":
-      param_01.var_012C["deflects"]++;
-      if(param_01.var_012C["deflects"] == 5) {
-        param_01 lib_0468::func_0A22("shieldDeflect5");
+      param_01.pers["deflects"]++;
+      if(param_01.pers["deflects"] == 5) {
+        param_01 func_0A22("shieldDeflect5");
         param_01 notify("stopWatchingShieldDeflect");
       }
 
@@ -1620,12 +1620,12 @@ lib_0468::func_0A1A(param_00, param_01, param_02, param_03, param_04) {
       if(issubstr(param_00, "_earned")) {
         param_01.var_80BD++;
         if(param_01.var_80BD == 3) {
-          param_01 lib_0468::func_0A28("scorestreak3");
+          param_01 func_0A28("scorestreak3");
           param_01 notify("stopWatchingScorestreaks");
         }
 
         if(maps\mp\_utility::areexperimentalbasictrainingsenabled()) {
-          param_01 lib_0468::func_0A28("throwbackStreakEarned");
+          param_01 func_0A28("throwbackStreakEarned");
         }
       }
       break;
@@ -1633,7 +1633,7 @@ lib_0468::func_0A1A(param_00, param_01, param_02, param_03, param_04) {
 }
 
 checkgamemode(param_00, param_01) {
-  switch (level.var_3FDC) {
+  switch (level.gametype) {
     case "war":
       param_00[param_00.size] = param_01;
       param_00[param_00.size] = 1;
@@ -1714,7 +1714,7 @@ checkgamemode(param_00, param_01) {
 }
 
 checkspecialmodes(param_00) {
-  if(isDefined(level.var_4B17) && level.var_4B17 == 1) {
+  if(isDefined(level.hardcoremode) && level.hardcoremode == 1) {
     if(getdvarint("spv_ground_war_active", 0) == 1) {
       param_00[param_00.size] = 9;
       param_00[param_00.size] = 6;
@@ -1734,7 +1734,7 @@ checkspecialmodes(param_00) {
   } else if(getdvarint("scr_oneShot", 0) == 1) {
     param_00[param_00.size] = 9;
     param_00[param_00.size] = 2;
-  } else if(level.var_3FDC == "undead" || level.var_3FDC == "relic" || level.var_3FDC == "infect") {
+  } else if(level.gametype == "undead" || level.gametype == "relic" || level.gametype == "infect") {
     param_00[param_00.size] = 9;
     param_00[param_00.size] = 7;
   }
@@ -1742,23 +1742,23 @@ checkspecialmodes(param_00) {
   return param_00;
 }
 
-lib_0468::func_0A1B() {
+func_0A1B() {
   self endon("disconnect");
   level endon("game_ended");
   for(;;) {
     self waittill("luinotifyserver", var_00, var_01);
     if(var_00 == "ae_completeddaily") {
-      thread maps\mp\gametypes\_missions::func_7750("ch_hq_daily", 1);
+      thread maps\mp\gametypes\_missions::processchallenge("ch_hq_daily", 1);
       continue;
     }
 
     if(var_00 == "ae_completedweekly") {
-      thread maps\mp\gametypes\_missions::func_7750("ch_hq_weekly", 1);
+      thread maps\mp\gametypes\_missions::processchallenge("ch_hq_weekly", 1);
     }
   }
 }
 
-lib_0468::func_A93F() {
+func_A93F() {
   level endon("game_ended");
   self endon("disconnect");
   self endon("stopWatchingScorestreaks");
@@ -1773,12 +1773,12 @@ watchshielddeflect() {
   self endon("disconnect");
   self endon("stopWatchingShieldDeflect");
   for(;;) {
-    self.var_012C["deflects"] = 0;
+    self.pers["deflects"] = 0;
     self waittill("death");
   }
 }
 
-lib_0468::func_5DD2() {
+func_5DD2() {
   for(;;) {
     self waittill("luinotifyserver", var_00, var_01);
     if(var_00 != "hub_onboarding") {
@@ -1829,4 +1829,4 @@ hasthrowbacktrainingequipped() {
   return maps\mp\_utility::_hasexperimentalbtperk("specialty_class_stopping_power") || maps\mp\_utility::_hasexperimentalbtperk("specialty_class_juggernaut") || maps\mp\_utility::_hasexperimentalbtperk("specialty_class_danger_close") || maps\mp\_utility::_hasexperimentalbtperk("specialty_class_one_man_army") || maps\mp\_utility::_hasexperimentalbtperk("specialty_class_commando_pro") || maps\mp\_utility::_hasexperimentalbtperk("specialty_class_last_stand") || maps\mp\_utility::_hasexperimentalbtperk("specialty_class_martyrdom");
 }
 
-lib_0468::func_2565() {}
+func_2565() {}

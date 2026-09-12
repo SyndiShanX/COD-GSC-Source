@@ -3,10 +3,10 @@
  * Script: maps\mp\agents\_agents_gametype_ctf.gsc
 ***************************************************/
 
-func_00F9() {
+main() {
   func_87A7();
 }
 
 func_87A7() {
-  level.var_0A41["player"]["think"] = ::maps\mp\bots\_bots_gametype_ctf::func_1993;
+  level.var_A41["player"]["think"] = ::maps / mp / bots / _bots_gametype_ctf::func_1993;
 }

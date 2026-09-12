@@ -3,37 +3,37 @@
  * Script: maps\mp\zombies\sg_events_v1\interact_repair.gsc
 ************************************************************/
 
-func_00D5() {
+init() {
   basic_keypoint_interact_init_build();
   basic_keypoint_interact_init_repair();
   basic_keypoint_interact_init_bomb();
 }
 
 basic_keypoint_interact_init_build() {
-  maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::sg_obj_register_defaults("keypoint_interact_build", ::basic_keypoint_interact_run, 120, 0, 1);
+  maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::sg_obj_register_defaults("keypoint_interact_build", ::basic_keypoint_interact_run, 120, 0, 1);
 }
 
 basic_keypoint_interact_init_repair() {
-  maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::sg_obj_register_defaults("type_keypoint_interact_repair_common", ::basic_keypoint_interact_run, 120, 0, 1);
+  maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::sg_obj_register_defaults("type_keypoint_interact_repair_common", ::basic_keypoint_interact_run, 120, 0, 1);
 }
 
 basic_keypoint_interact_init_bomb() {
-  maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::sg_obj_register_defaults("keypoint_interact_bomb", ::basic_keypoint_interact_run, 120, 0, 1);
+  maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::sg_obj_register_defaults("keypoint_interact_bomb", ::basic_keypoint_interact_run, 120, 0, 1);
 }
 
 basic_keypoint_interact_run(param_00) {
-  maps\mp\zombies\sg_events_v1\_options::apply_option(param_00);
+  maps / mp / zombies / sg_events_v1 / _options::apply_option(param_00);
   level.kpishouldchain = 1;
   if(param_00 == "dnk_kpi_bomb_defusal") {
-    maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::register_banned_objective("keypoint_interact_repair_common");
+    maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::register_banned_objective("keypoint_interact_repair_common");
   }
 
   if(param_00 == "keypoint_interact_repair_common") {
-    maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::register_banned_objective("dnk_kpi_bomb_defusal");
+    maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::register_banned_objective("dnk_kpi_bomb_defusal");
   }
 
   if(!isDefined(level.keypointinteracttool)) {
-    switch (level.zmb_sg_objectives[param_00].var_1B9) {
+    switch (level.zmb_sg_objectives[param_00].type) {
       case "keypoint_interact_build":
         level.keypointinteracttool = "war_hammer_assemble_mp";
         break;
@@ -52,12 +52,12 @@ basic_keypoint_interact_run(param_00) {
     }
   }
 
-  level.keypointinteractholdtime = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_keypoint_interact_repair_common_time");
+  level.keypointinteractholdtime = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_difficulty_setting("type_keypoint_interact_repair_common_time");
   if(!isDefined(level.keypointinteractkeypoints)) {
     level.keypointinteractkeypoints = 3;
   }
 
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 setclientomnvar("ui_onevone_class_3", level.keypointinteractkeypoints);
     var_02 setclientomnvar("ui_onevone_class_4", 0);
   }
@@ -65,7 +65,7 @@ basic_keypoint_interact_run(param_00) {
   var_04 = [];
   var_05 = getEntArray("keypoint_interact_trigger", "targetname");
   foreach(var_07 in var_05) {
-    if((isDefined(var_07.var_165) && var_07.var_165 == param_00) || !isDefined(var_07.var_165)) {
+    if((isDefined(var_07.script_noteworthy) && var_07.script_noteworthy == param_00) || !isDefined(var_07.script_noteworthy)) {
       var_04 = common_scripts\utility::func_F6F(var_04, var_07);
     }
   }
@@ -105,10 +105,10 @@ basic_keypoint_interact_trigger_listen(param_00) {
 
     var_02 thread basic_keypoint_interact_trigger_hints();
     level thread maps\mp\_utility::func_6F74(::basic_keypoint_interact_draw_waypoint, var_02);
-    var_03 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_keypoint_interact_repair_common_guard_timing_info");
-    var_04 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_difficulty_setting("type_keypoint_interact_repair_common_guard_min_objective_count");
+    var_03 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("type_keypoint_interact_repair_common_guard_timing_info");
+    var_04 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_difficulty_setting("type_keypoint_interact_repair_common_guard_min_objective_count");
     if(var_05 + 1 >= var_03 && level.objectivescompleted + 1 >= var_04) {
-      level thread spawn_zombie_interact_defenders(var_02.var_116);
+      level thread spawn_zombie_interact_defenders(var_02.origin);
     }
 
     if(common_scripts\utility::func_562E(level.kpishouldchain)) {
@@ -121,7 +121,7 @@ basic_keypoint_interact_trigger_listen(param_00) {
 }
 
 spawn_zombie_interact_defenders(param_00) {
-  var_01 = maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::get_player_level_setting("type_keypoint_interact_repair_common_guard_info");
+  var_01 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("type_keypoint_interact_repair_common_guard_info");
   for(var_02 = 0; var_02 < var_01[0]; var_02++) {
     var_03 = lib_0547::get_closest_spawn_by_type(param_00, var_01[1]);
     var_04 = lib_054D::func_90BA(var_01[1], var_03, "event_forced_spawn", 0, 1, 0);
@@ -190,7 +190,7 @@ basic_keypoint_interact_trigger_use() {
         }
 
         level.keypointsinteracted++;
-        foreach(var_02 in level.var_744A) {
+        foreach(var_02 in level.players) {
           var_02 setclientomnvar("ui_onevone_class_4", level.keypointsinteracted);
         }
 
@@ -303,13 +303,13 @@ basic_keypoint_interact_start_tool(param_00) {
 
   maps\mp\zombies\_zombies_magicbox::func_A7D6(var_01, level.keypointinteracttool);
   lib_0378::func_8D74("dlc3_player_repair_start", level.keypointinteracttool, param_00);
-  var_01 method_8326();
+  var_01 disableweaponswitch();
   return var_04;
 }
 
 basic_keypoint_interact_stop_tool(param_00) {
   var_01 = self;
-  var_01 method_8327();
+  var_01 enableweaponswitch();
   if(isDefined(param_00)) {
     var_01 lib_0586::func_78E(param_00);
   }
@@ -333,18 +333,18 @@ basic_keypoint_interact_draw_waypoint(param_00) {
   var_02 = self;
   var_03 = newclienthudelem(var_02);
   var_03 setshader(var_01, 1, 1);
-  var_03.var_18 = 0;
-  var_03.var_56 = (1, 1, 1);
-  var_03.maxsightdistsqrd = param_00.var_116[0];
-  var_03.var_1D7 = param_00.var_116[1];
-  var_03.var_1D9 = param_00.var_116[2];
+  var_03.alpha = 0;
+  var_03.color = (1, 1, 1);
+  var_03.x = param_00.origin[0];
+  var_03.y = param_00.origin[1];
+  var_03.z = param_00.origin[2];
   var_03 setwaypoint(0, 1, 0);
   var_03 fadeovertime(0.1);
-  var_03.var_18 = 1;
-  param_00 common_scripts\utility::knock_off_battery("interact_completed", "sg_obj_timeout");
+  var_03.alpha = 1;
+  param_00 common_scripts\utility::waittill_any("interact_completed", "sg_obj_timeout");
   var_03 setwaypoint(0, 0, 0);
   var_03 fadeovertime(0.5);
-  var_03.var_18 = 0;
+  var_03.alpha = 0;
   wait(0.5);
   var_03 destroy();
 }

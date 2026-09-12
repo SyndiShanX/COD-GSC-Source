@@ -3,7 +3,7 @@
  * Script: maps\mp\gametypes\_quickmessages.gsc
 ************************************************/
 
-func_00D5() {
+init() {
   game["menu_quickcommands"] = "quickcommands";
   game["menu_quickstatements"] = "quickstatements";
   game["menu_quickresponses"] = "quickresponses";
@@ -37,7 +37,7 @@ func_00D5() {
 
 func_7892(param_00) {
   self endon("disconnect");
-  if(!isDefined(self.var_012C["team"]) || self.var_012C["team"] == "spectator" || isDefined(self.var_8F67)) {
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.var_8F67)) {
     return;
   }
 
@@ -92,7 +92,7 @@ func_7892(param_00) {
 }
 
 func_789C(param_00) {
-  if(!isDefined(self.var_012C["team"]) || self.var_012C["team"] == "spectator" || isDefined(self.var_8F67)) {
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.var_8F67)) {
     return;
   }
 
@@ -142,7 +142,7 @@ func_789C(param_00) {
 }
 
 func_7896(param_00) {
-  if(!isDefined(self.var_012C["team"]) || self.var_012C["team"] == "spectator" || isDefined(self.var_8F67)) {
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.var_8F67)) {
     return;
   }
 
@@ -187,47 +187,47 @@ func_7896(param_00) {
 }
 
 func_329E(param_00, param_01) {
-  if(self.var_0178 != "playing") {
+  if(self.sessionstate != "playing") {
     return;
   }
 
-  var_02 = [[level.var_46D9]](self.var_01A7);
+  var_02 = [[level.var_46D9]](self.team);
   if(isDefined(level.var_7895) && level.var_7895) {
-    self.var_00BB = "none";
-    self.var_00BA = "talkingicon";
-    self method_8617(var_02 + param_00);
+    self.headiconteam = "none";
+    self.headicon = "talkingicon";
+    self playSound(var_02 + param_00);
     self sayall(param_01);
     return;
   }
 
-  if(self.var_0179 == "allies") {
-    self.var_00BB = "allies";
-  } else if(self.var_0179 == "axis") {
-    self.var_00BB = "axis";
+  if(self.sessionteam == "allies") {
+    self.headiconteam = "allies";
+  } else if(self.sessionteam == "axis") {
+    self.headiconteam = "axis";
   }
 
-  self.var_00BA = "talkingicon";
-  self method_8617(var_02 + param_00);
+  self.headicon = "talkingicon";
+  self playSound(var_02 + param_00);
   self sayteam(param_01);
   self pingplayer();
 }
 
 func_8069() {
-  if(isDefined(self.var_00BA)) {
-    self.var_6A5A = self.var_00BA;
+  if(isDefined(self.headicon)) {
+    self.var_6A5A = self.headicon;
   }
 
-  if(isDefined(self.var_00BB)) {
-    self.var_6A5B = self.var_00BB;
+  if(isDefined(self.headiconteam)) {
+    self.var_6A5B = self.headiconteam;
   }
 }
 
 func_7DF2() {
   if(isDefined(self.var_6A5A)) {
-    self.var_00BA = self.var_6A5A;
+    self.headicon = self.var_6A5A;
   }
 
   if(isDefined(self.var_6A5B)) {
-    self.var_00BB = self.var_6A5B;
+    self.headiconteam = self.var_6A5B;
   }
 }

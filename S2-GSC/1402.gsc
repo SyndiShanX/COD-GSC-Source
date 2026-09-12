@@ -3,16 +3,16 @@
  * Script: 1402.gsc
 *********************************************/
 
-lib_057A::func_52A4() {
-  lib_0561::initconsumablesfromtable("weapons", ::lib_057A::func_A249, ::lib_057A::func_1F8A, ::lib_057A::func_472E);
+func_52A4() {
+  lib_0561::initconsumablesfromtable("weapons", ::func_A249, ::func_1F8A, ::func_472E);
 }
 
-lib_057A::func_1F8A(param_00) {
+func_1F8A(param_00) {
   if(!lib_0561::func_1F7B()) {
     return 0;
   }
 
-  if(!common_scripts\utility::func_0668()) {
+  if(!common_scripts\utility::func_668()) {
     return 0;
   }
 
@@ -20,14 +20,14 @@ lib_057A::func_1F8A(param_00) {
     return 1;
   }
 
-  if(isDefined(self.var_A9C1) && lib_057A::func_259B(param_00) == self.var_A9C1) {
+  if(isDefined(self.var_A9C1) && func_259B(param_00) == self.var_A9C1) {
     return 0;
   }
 
   return 1;
 }
 
-lib_057A::func_472E(param_00) {
+func_472E(param_00) {
   if(!isDefined(param_00)) {
     param_00 = "";
   }
@@ -50,29 +50,29 @@ lib_057A::func_472E(param_00) {
   }
 }
 
-lib_057A::func_A249(param_00) {
+func_A249(param_00) {
   self endon("disconnect");
   self endon("begin_last_stand");
-  var_01 = self.var_259F[param_00].var_0109;
-  lib_057A::func_259C(var_01);
-  thread lib_057A::func_259E(var_01);
+  var_01 = self.var_259F[param_00].name;
+  func_259C(var_01);
+  thread func_259E(var_01);
   level.var_400E[level.var_400E.size] = ["survivalist_set 3 -1", self];
   level.var_400E[level.var_400E.size] = ["survivalist_set 4 -1", self];
   self endon("weapon_consumable_used");
-  childthread lib_057A::func_A9A6();
+  childthread func_A9A6();
   var_02 = 0;
-  var_03 = common_scripts\utility::func_A715("death", "weapon_consumable_timeout", "weapon_consumable_force_take");
+  var_03 = common_scripts\utility::waittill_any_return("death", "weapon_consumable_timeout", "weapon_consumable_force_take");
   if(var_03 == "weapon_consumable_force_take") {
     var_02 = 1;
   }
 
-  lib_057A::func_259D(var_02);
+  func_259D(var_02);
 }
 
-lib_057A::func_259E(param_00, param_01) {
+func_259E(param_00, param_01) {
   var_02 = consumable_getappendstring(param_00);
   if(!isDefined(param_01)) {
-    param_01 = lib_057A::func_A9A8();
+    param_01 = func_A9A8();
   }
 
   self setclientomnvar("ui_zm_" + var_02, gettime() + int(param_01 * 1000));
@@ -87,7 +87,7 @@ consumable_uisplash_kill(param_00, param_01) {
   if(isDefined(param_01)) {
     common_scripts\utility::func_A70D(param_01, self, "weapon_consumable_taken", self, "weapon_consumable_used");
   } else {
-    common_scripts\utility::func_A70A("weapon_consumable_taken", "weapon_consumable_used");
+    common_scripts\utility::waittill_any("weapon_consumable_taken", "weapon_consumable_used");
   }
 
   self setclientomnvar("ui_zm_" + var_02, 0);
@@ -115,7 +115,7 @@ consumable_getappendstring(param_00) {
   }
 }
 
-lib_057A::func_259B(param_00) {
+func_259B(param_00) {
   if(!isDefined(param_00)) {
     return "";
   }
@@ -135,11 +135,11 @@ lib_057A::func_259B(param_00) {
   }
 }
 
-lib_057A::func_259C(param_00) {
-  self method_8615("zmb_pickup_general");
-  if(lib_057A::func_A260()) {
+func_259C(param_00) {
+  self playlocalsound("zmb_pickup_general");
+  if(func_A260()) {
     if(isDefined(self.var_A9C1) && self hasweapon(self.var_A9C1)) {
-      lib_0586::func_0790(self.var_A9C1);
+      lib_0586::func_790(self.var_A9C1);
       if(self.var_A9C1 == "flamethrower_zm") {
         self method_802E("npc_usa_flamethrower_backpack");
       }
@@ -150,21 +150,21 @@ lib_057A::func_259C(param_00) {
     self.var_5B98 = self getcurrentprimaryweapon();
   }
 
-  self.var_A9C1 = lib_057A::func_259B(param_00);
+  self.var_A9C1 = func_259B(param_00);
   self.var_4BA6 = 1;
-  lib_0586::func_078C(self.var_A9C1);
-  lib_0586::func_078E(self.var_A9C1);
+  lib_0586::func_78C(self.var_A9C1);
+  lib_0586::func_78E(self.var_A9C1);
   thread lib_054E::playeruseconsumableweapon();
   if(self.var_A9C1 == "flamethrower_zm") {
     self attach("npc_usa_flamethrower_backpack");
   }
 
-  childthread lib_057A::func_A9B6();
+  childthread func_A9B6();
   childthread weapon_switch_listener(self.var_A9C1);
 }
 
-lib_057A::func_259D(param_00) {
-  if(!lib_057A::func_A260()) {
+func_259D(param_00) {
+  if(!func_A260()) {
     return;
   }
 
@@ -192,12 +192,12 @@ lib_057A::func_259D(param_00) {
       }
     }
 
-    lib_0586::func_078E(var_02);
+    lib_0586::func_78E(var_02);
     self.var_5B98 = undefined;
   }
 
   if(self hasweapon(self.var_A9C1)) {
-    lib_0586::func_0790(self.var_A9C1);
+    lib_0586::func_790(self.var_A9C1);
   }
 
   if(self.var_A9C1 == "flamethrower_zm") {
@@ -207,15 +207,15 @@ lib_057A::func_259D(param_00) {
   self.var_A9C1 = undefined;
 }
 
-lib_057A::func_A260() {
+func_A260() {
   return isDefined(self.var_4BA6) && self.var_4BA6;
 }
 
-lib_057A::func_A9A6() {
+func_A9A6() {
   self endon("death");
   self endon("weapon_consumable_used");
   self endon("weapon_consumable_taken");
-  var_00 = lib_057A::func_A9A8();
+  var_00 = func_A9A8();
   wait(var_00);
   self notify("weapon_consumable_timeout");
 }
@@ -245,7 +245,7 @@ weapon_switch_listener(param_00) {
   self notify("weapon_consumable_force_take");
 }
 
-lib_057A::func_A9B6() {
+func_A9B6() {
   self endon("weapon_consumable_timeout");
   self endon("weapon_consumable_used");
   self endon("weapon_consumable_taken");
@@ -260,6 +260,6 @@ lib_057A::func_A9B6() {
   }
 }
 
-lib_057A::func_A9A8() {
-  return 30 + maps\mp\zombies\_zombies_perks::func_0633();
+func_A9A8() {
+  return 30 + maps\mp\zombies\_zombies_perks::func_633();
 }

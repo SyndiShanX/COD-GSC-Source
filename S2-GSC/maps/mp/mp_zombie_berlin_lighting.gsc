@@ -3,13 +3,13 @@
  * Script: maps\mp\mp_zombie_berlin_lighting.gsc
 *************************************************/
 
-func_00F9() {
+main() {
   func_84F8();
   if(level.var_1D4 && getDvar("2695") != "true") {
     xbox_optimizations();
   }
 
-  level thread maps\mp\_utility::func_6F74(::func_6B82);
+  level thread maps\mp\_utility::func_6F74(::onplayerspawned);
   thread set_anchor_pulse_lights_off();
   thread set_airship_corrupsing_spark_off();
 }
@@ -21,7 +21,7 @@ func_84F8() {
   setDvar("sm_spotDynamics", 8);
 }
 
-func_6B82() {
+onplayerspawned() {
   var_00 = self;
   var_00 endon("disconnect");
   wait(0.5);

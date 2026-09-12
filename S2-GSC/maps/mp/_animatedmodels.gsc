@@ -3,33 +3,33 @@
  * Script: maps\mp\_animatedmodels.gsc
 *********************************************/
 
-func_00F9() {
-  if(!isDefined(level.var_0E2F)) {
-    level.var_0E2F = [];
+main() {
+  if(!isDefined(level.anim_prop_models)) {
+    level.anim_prop_models = [];
   }
 
-  var_00 = getarraykeys(level.var_0E2F);
+  var_00 = getarraykeys(level.anim_prop_models);
   foreach(var_02 in var_00) {
-    var_03 = getarraykeys(level.var_0E2F[var_02]);
+    var_03 = getarraykeys(level.anim_prop_models[var_02]);
     foreach(var_05 in var_03) {
-      precachempanim(level.var_0E2F[var_02][var_05]);
+      precachempanim(level.anim_prop_models[var_02][var_05]);
     }
   }
 
   waittillframeend;
-  level.var_515E = [];
+  level.init_animatedmodels = [];
   var_08 = getEntArray("animated_model", "targetname");
-  common_scripts\utility::func_0FB2(var_08, ::func_0E9F);
-  level.var_515E = undefined;
+  common_scripts\utility::array_thread(var_08, ::animatemodel);
+  level.init_animatedmodels = undefined;
 }
 
-func_0E9F() {
-  if(isDefined(self.var_0EA4)) {
-    var_00 = self.var_0EA4;
+animatemodel() {
+  if(isDefined(self.animation)) {
+    var_00 = self.animation;
   } else {
-    var_01 = getarraykeys(level.var_0E2F[self.var_0106]);
+    var_01 = getarraykeys(level.anim_prop_models[self.model]);
     var_02 = var_01[randomint(var_01.size)];
-    var_00 = level.var_0E2F[self.var_0106][var_02];
+    var_00 = level.anim_prop_models[self.model][var_02];
   }
 
   self scriptmodelplayanim(var_00);

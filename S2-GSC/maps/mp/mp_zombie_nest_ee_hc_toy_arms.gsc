@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_nest_ee_hc_toy_arms.gsc
 *****************************************************/
 
-func_00F9() {
+main() {
   level.var_665D = [];
   level.var_665F = [randomint(12) + 1, randomint(12) + 1, randomint(12) + 1];
   common_scripts\utility::func_3C87("flag_nest_hc_ee_record_acquired");
@@ -25,14 +25,14 @@ func_47A4() {
 }
 
 func_7E3C(param_00, param_01) {
-  param_00 method_805C();
+  param_00 hide();
   level waittill("hc_nest_toy_obj_complete");
   var_02 = getEnt("nest_hc_record_drawer", "targetname");
-  var_03 = common_scripts\utility::func_46B5(var_02.var_01A2, "targetname");
-  param_00 method_805B();
+  var_03 = common_scripts\utility::func_46B5(var_02.target, "targetname");
+  param_00 show();
   param_00 method_8449(var_02);
   var_02 lib_0378::func_8D74("aud_spinning_top_drawer_open");
-  var_02 moveTo(var_03.var_0116, 1.5, 0, 0.5);
+  var_02 moveTo(var_03.origin, 1.5, 0, 0.5);
   wait(1.5);
   param_00 unlink();
   param_00 func_A665(param_01);
@@ -51,12 +51,12 @@ func_A665(param_00) {
 }
 
 func_8F6F(param_00, param_01) {
-  var_02 = spawn("script_model", self.var_0116);
-  var_02 setModel("zmb_ob_topper_0" + self.var_0165);
-  var_02.var_001D = self.var_001D;
-  var_02.var_01A2 = self.var_01A2;
-  var_02.var_0F5E = param_00;
-  var_02.var_01A5 = "nest_ee_hc_shootable_arm_spawn";
+  var_02 = spawn("script_model", self.origin);
+  var_02 setModel("zmb_ob_topper_0" + self.script_noteworthy);
+  var_02.angles = self.angles;
+  var_02.target = self.target;
+  var_02.var_F5E = param_00;
+  var_02.targetname = "nest_ee_hc_shootable_arm_spawn";
   var_02 thread func_8B1B();
   if(common_scripts\utility::func_562E(param_01)) {
     var_02 hudoutlineenable(param_00, 0);
@@ -66,13 +66,13 @@ func_8F6F(param_00, param_01) {
 func_8573(param_00, param_01) {
   var_02 = common_scripts\utility::func_46B7(param_00, "targetname");
   foreach(var_04 in var_02) {
-    var_05 = common_scripts\utility::func_44BE(var_04.var_01A2, "targetname");
+    var_05 = common_scripts\utility::func_44BE(var_04.target, "targetname");
     foreach(var_07 in var_05) {
-      if(!isDefined(var_07.var_0165)) {
+      if(!isDefined(var_07.script_noteworthy)) {
         continue;
       }
 
-      switch (var_07.var_0165) {
+      switch (var_07.script_noteworthy) {
         case "hc_dial_1":
           var_04.var_4BCC = var_07;
           break;
@@ -132,7 +132,7 @@ func_171D(param_00) {
     var_0E = var_01;
     var_01++;
     common_scripts\utility::func_3C87("flag_nest_hc_ee_has_arm_" + var_01);
-    var_08 = common_scripts\utility::func_46B7(var_07.var_01A2, "targetname");
+    var_08 = common_scripts\utility::func_46B7(var_07.target, "targetname");
     var_0F = common_scripts\utility::func_7A33(var_08);
     var_0F func_8F6F(var_0E);
   }
@@ -141,11 +141,11 @@ func_171D(param_00) {
   level.var_47CC = 0;
   var_12 = [];
   for(var_13 = 0; var_13 < 3; var_13++) {
-    var_12[var_13] = spawn("script_model", param_00["trigger"].var_65DD[var_13].var_0116);
-    var_12[var_13].var_01A5 = "nest_ee_hc_top_interact";
+    var_12[var_13] = spawn("script_model", param_00["trigger"].var_65DD[var_13].origin);
+    var_12[var_13].targetname = "nest_ee_hc_top_interact";
     var_12[var_13].var_65E9 = "zmb_ob_topper_0" + var_13 + 1;
     var_12[var_13] setModel("tag_origin");
-    var_12[var_13].var_001D = var_11[5].var_001D;
+    var_12[var_13].angles = var_11[5].angles;
     var_12[var_13].var_65E0 = 6;
   }
 
@@ -159,22 +159,22 @@ func_171D(param_00) {
   }
 
   var_17 = getEnt("firewell_grab_test", "targetname");
-  var_18 = getEnt(var_17.var_01A2, "targetname");
+  var_18 = getEnt(var_17.target, "targetname");
   level thread func_4833(var_17, var_04);
 }
 
 func_4CEA() {
-  self.var_4BCC method_805C();
-  self.var_4BCD method_805C();
-  self.var_4BD2 method_805C();
-  self.var_4BD1 method_805C();
+  self.var_4BCC hide();
+  self.var_4BCD hide();
+  self.var_4BD2 hide();
+  self.var_4BD1 hide();
 }
 
 func_8BD2() {
-  self.var_4BCC method_805B();
-  self.var_4BCD method_805B();
-  self.var_4BD2 method_805B();
-  self.var_4BD1 method_805B();
+  self.var_4BCC show();
+  self.var_4BCD show();
+  self.var_4BD2 show();
+  self.var_4BD1 show();
 }
 
 func_7A50(param_00) {
@@ -214,7 +214,7 @@ func_6803(param_00) {
 func_7EEC(param_00) {
   level endon("hc_nest_toy_obj_complete");
   self.var_65E0 = 6;
-  self.var_001D = param_00[5].var_001D;
+  self.angles = param_00[5].angles;
   var_01 = 0;
   var_02 = getglass("window_shatter_toyshop");
   while(!var_01) {
@@ -223,9 +223,9 @@ func_7EEC(param_00) {
       destroyglass(var_02);
     }
 
-    if(common_scripts\utility::func_0F79(level.var_665D, self.var_65E5 + 1)) {
+    if(common_scripts\utility::func_F79(level.var_665D, self.var_65E5 + 1)) {
       var_01 = 1;
-      level.var_665D = common_scripts\utility::func_0F93(level.var_665D, self.var_65E5 + 1);
+      level.var_665D = common_scripts\utility::func_F93(level.var_665D, self.var_65E5 + 1);
       lib_0378::func_8D74("aud_spinning_top_place");
     }
   }
@@ -234,12 +234,12 @@ func_7EEC(param_00) {
   for(;;) {
     self waittill("top_interact", var_03);
     self.var_65E0 = common_scripts\utility::func_98E7(self.var_65E0 == 12, 1, self.var_65E0 + 1);
-    var_04 = param_00[self.var_65E0 - 1].var_001D;
+    var_04 = param_00[self.var_65E0 - 1].angles;
     lib_0378::func_8D74("aud_spinning_top_turn");
     self rotateby((-30, 0, 0), 0.05);
     wait 0.05;
     if(self.var_65E0 == 9) {
-      self.var_001D = var_04;
+      self.angles = var_04;
     }
 
     level notify("nest_ee_arm_code_check");
@@ -250,13 +250,13 @@ func_4833(param_00, param_01) {
   param_00 lib_0547::func_AC41(&"ZOMBIES_EMPTY_STRING");
   param_00 waittill("player_used");
   var_02 = common_scripts\utility::func_46B5("monkey_hc_dropper", "targetname");
-  var_03 = common_scripts\utility::func_46B7(var_02.var_01A2, "targetname");
+  var_03 = common_scripts\utility::func_46B7(var_02.target, "targetname");
   var_04 = function_021F("monkey_destructible", "targetname");
   var_05 = var_04[0];
   var_05 thread func_2DB2();
   foreach(var_07 in var_03) {
     var_08 = undefined;
-    switch (var_07.var_0165) {
+    switch (var_07.script_noteworthy) {
       case "zmb_code_dial_01":
         var_08 = "zmb_code_dial_01";
         break;
@@ -266,9 +266,9 @@ func_4833(param_00, param_01) {
       continue;
     }
 
-    var_09 = spawn("script_model", var_07.var_0116);
+    var_09 = spawn("script_model", var_07.origin);
     var_09 setModel(var_08);
-    var_09.var_001D = var_07.var_001D;
+    var_09.angles = var_07.angles;
   }
 
   param_01 func_8BD2();
@@ -279,19 +279,19 @@ func_4833(param_00, param_01) {
 func_2DB2() {
   self setscriptablepartstate("Sign", "Fractured");
   wait 0.05;
-  physicsexplosionsphere(self.var_0116, 100, 90, 1);
+  physicsexplosionsphere(self.origin, 100, 90, 1);
 }
 
 func_8B1B() {
   self setCanDamage(1);
   self waittill("damage");
   lib_0378::func_8D74("aud_spinning_top_shot");
-  self.var_65E2 = common_scripts\utility::func_46B5(self.var_01A2, "targetname");
+  self.var_65E2 = common_scripts\utility::func_46B5(self.target, "targetname");
   func_348C(self.var_65E2);
   lib_0378::func_8D74("aud_spinning_top_fall");
   lib_0547::func_AC41(&"ZOMBIES_EMPTY_STRING", (0, 0, 64));
   self waittill("player_used", var_00);
-  switch (self.var_0F5E) {
+  switch (self.var_F5E) {
     case 0:
       lib_0557::func_4BC8("toy 0 get");
       break;
@@ -305,24 +305,24 @@ func_8B1B() {
       break;
   }
 
-  level.var_665D = common_scripts\utility::func_0F6F(level.var_665D, self.var_0F5E + 1);
-  common_scripts\utility::func_3C8F("flag_nest_hc_ee_has_arm_" + self.var_0F5E + 1);
+  level.var_665D = common_scripts\utility::func_F6F(level.var_665D, self.var_F5E + 1);
+  common_scripts\utility::func_3C8F("flag_nest_hc_ee_has_arm_" + self.var_F5E + 1);
   lib_0547::func_AC40();
   self delete();
 }
 
 func_348C(param_00) {
   var_01 = (0, 0, -800);
-  var_02 = param_00.var_0116 - self.var_0116;
+  var_02 = param_00.origin - self.origin;
   var_03 = sqrt(abs(var_02[2] * 2 / 800));
   var_04 = 1 / var_03;
   var_05 = var_02 * (var_04, var_04, 0);
   self gravitymove(var_05, var_03);
   self rotateby((720, 720, 720), var_03, 0, var_03 / 2);
   wait(var_03);
-  self.var_0116 = param_00.var_0116;
-  if(isDefined(param_00.var_001D)) {
-    self.var_001D = param_00.var_001D;
+  self.origin = param_00.origin;
+  if(isDefined(param_00.angles)) {
+    self.angles = param_00.angles;
   }
 }
 
@@ -355,7 +355,7 @@ func_40AC(param_00) {
 }
 
 func_6FCD() {
-  var_00 = spawn("trigger_radius", self.var_0116, 0, 64, 64);
+  var_00 = spawn("trigger_radius", self.origin, 0, 64, 64);
   var_01 = undefined;
   while(!isDefined(var_01) || !isPlayer(var_01)) {
     var_00 waittill("trigger", var_01);
@@ -377,9 +377,9 @@ func_4421() {
 
 func_52EE() {
   var_00 = common_scripts\utility::func_46B5("nest_ee_hc_arm_models_struct", "targetname");
-  var_01 = common_scripts\utility::func_46B7(var_00.var_01A2, "targetname");
+  var_01 = common_scripts\utility::func_46B7(var_00.target, "targetname");
   var_02 = getEnt("nest_ee_hc_arm_trig", "targetname");
-  var_03 = maps\mp\mp_zombie_nest_ee_util::func_44C8("nest_ee_hc_arm_model_window", 1);
+  var_03 = maps / mp / mp_zombie_nest_ee_util::func_44C8("nest_ee_hc_arm_model_window", 1);
   var_02.var_65DD = var_03;
   var_04 = [];
   var_04["trigger"] = var_02;
@@ -389,7 +389,7 @@ func_52EE() {
 }
 
 getrecordreward() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 maps\mp\zombies\_zombies_rank::func_AC23("record");
   }
 }

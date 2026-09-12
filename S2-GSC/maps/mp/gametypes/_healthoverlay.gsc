@@ -3,25 +3,25 @@
  * Script: maps\mp\gametypes\_healthoverlay.gsc
 ************************************************/
 
-func_00D5() {
-  level.var_4C1D = 0.55;
+init() {
+  level.healthoverlaycutoff = 0.55;
   var_00 = 4;
-  var_00 = maps\mp\gametypes\_tweakables::func_46F7("player", "healthregentime");
+  var_00 = maps\mp\gametypes\_tweakables::gettweakablevalue("player", "healthregentime");
   level.var_73FA = var_00 * 1000;
   level.playerhealth_grenadierregendelay = int(max(var_00 - 1, 0) * 1000);
   level.var_73FB = 1.5;
   level.var_4C1E = level.var_73FA <= 0;
-  level thread func_6B6C();
+  level thread onplayerconnect();
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
-    var_00 thread func_6B82();
+    var_00 thread onplayerspawned();
   }
 }
 
-func_6B82() {
+onplayerspawned() {
   self endon("disconnect");
   for(;;) {
     self waittill("spawned_player");
@@ -38,7 +38,7 @@ func_73FC() {
   self endon("joined_spectators");
   self endon("goliath_equipped");
   level endon("game_ended");
-  if(self.var_00BC <= 0) {
+  if(self.health <= 0) {
     return;
   }
 
@@ -50,13 +50,13 @@ func_73FC() {
   thread func_7434();
   for(;;) {
     self waittill("damage", var_01, var_02, var_03, var_04, var_05);
-    if(self.var_00BC <= 0) {
+    if(self.health <= 0) {
       return;
     }
 
     var_00 = gettime();
-    var_06 = self.var_00BC / self.var_00FB;
-    if(var_06 <= level.var_4C1D) {
+    var_06 = self.health / self.maxhealth;
+    if(var_06 <= level.healthoverlaycutoff) {
       self.var_10F4 = 1;
     }
 
@@ -92,11 +92,11 @@ func_1BC0(param_00, param_01, param_02) {
     func_720E(param_00);
   }
 
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
-  var_03 = maps\mp\_utility::func_0649("specialty_fasterhealthregen");
+  var_03 = maps\mp\_utility::_hasperk("specialty_fasterhealthregen");
   var_04 = level.var_73FA;
   if(var_03) {
     var_04 = level.playerhealth_grenadierregendelay;
@@ -113,7 +113,7 @@ func_1BC0(param_00, param_01, param_02) {
     wait(1.4 * var_04 / 1000);
   }
 
-  if(!level.var_3F9D && isDefined(self.var_10F4) && self.var_10F4 == 1) {
+  if(!level.gameended && isDefined(self.var_10F4) && self.var_10F4 == 1) {
     self method_8627("mute_breath");
     self.breathmute_submix_active = 0;
     self.var_10F4 = 0;
@@ -134,16 +134,16 @@ func_720E(param_00) {
   var_01 = randomintrange(1, 8);
   self method_8626("mute_breath");
   self.breathmute_submix_active = 1;
-  if(self.var_01A7 == "axis") {
+  if(self.team == "axis") {
     if(self method_843D()) {
-      self method_8617("generic_pain_enemy_fm_" + var_01, "pain_sound_done");
+      self playSound("generic_pain_enemy_fm_" + var_01, "pain_sound_done");
     } else {
-      self method_8617("generic_pain_enemy_" + var_01, "pain_sound_done");
+      self playSound("generic_pain_enemy_" + var_01, "pain_sound_done");
     }
   } else if(self method_843D()) {
-    self method_8617("generic_pain_friendly_fm_" + var_01, "pain_sound_done");
+    self playSound("generic_pain_friendly_fm_" + var_01, "pain_sound_done");
   } else {
-    self method_8617("generic_pain_friendly_" + var_01, "pain_sound_done");
+    self playSound("generic_pain_friendly_" + var_01, "pain_sound_done");
   }
 
   self waittill("pain_sound_done");
@@ -171,7 +171,7 @@ func_4C20() {
   }
 
   var_00 = isDefined(self.var_10F4) && self.var_10F4;
-  var_01 = maps\mp\_utility::func_0649("specialty_fasterhealthregen");
+  var_01 = maps\mp\_utility::_hasperk("specialty_fasterhealthregen");
   var_02 = level.var_73FA;
   if(var_01) {
     var_02 = level.playerhealth_grenadierregendelay;
@@ -183,7 +183,7 @@ func_4C20() {
 
   if(!isDefined(self.var_50A0) || !self.var_50A0) {
     if(maps\mp\_utility::func_585F()) {
-      common_scripts\utility::func_A74B("immediateHealthRegen", var_02 / 1000);
+      common_scripts\utility::waittill_notify_or_timeout("immediateHealthRegen", var_02 / 1000);
     } else {
       wait(var_02 / 1000);
     }
@@ -192,11 +192,11 @@ func_4C20() {
   }
 
   if(var_01) {
-    if(self.var_00BC < self.var_00FB) {}
+    if(self.health < self.maxhealth) {}
 
-    self.var_00BC = self.var_00FB;
+    self.health = self.maxhealth;
   } else {
-    var_03 = float(self.var_00BC);
+    var_03 = float(self.health);
     for(;;) {
       wait 0.05;
       var_04 = level.var_73FB;
@@ -204,12 +204,12 @@ func_4C20() {
         var_04 = self.var_98E2;
       }
 
-      var_05 = self.var_00FB;
-      if(self.var_00BC < var_05) {
+      var_05 = self.maxhealth;
+      if(self.health < var_05) {
         var_03 = var_03 + var_04;
-        self.var_00BC = int(var_03);
-        if(self.var_00BC > var_05) {
-          self.var_00BC = var_05;
+        self.health = int(var_03);
+        if(self.health > var_05) {
+          self.health = var_05;
         }
 
         continue;
@@ -226,7 +226,7 @@ func_4C20() {
     return;
   }
 
-  maps\mp\gametypes\_missions::func_4C1F();
+  maps\mp\gametypes\_missions::healthregenerated();
 }
 
 func_A651() {
@@ -235,7 +235,7 @@ func_A651() {
   self endon("death");
   level endon("game_ended");
   self waittill("stopped_using_remote");
-  maps\mp\_utility::func_7E50(0);
+  maps\mp\_utility::revertvisionsetforplayer(0);
 }
 
 func_7434() {
@@ -252,18 +252,18 @@ func_7434() {
     return;
   }
 
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
   wait(3);
   for(;;) {
     wait(0.2);
-    if(self.var_00BC <= 0) {
+    if(self.health <= 0) {
       return;
     }
 
-    if(self.var_00BC >= self.var_00FB * level.var_4C1D) {
+    if(self.health >= self.maxhealth * level.healthoverlaycutoff) {
       continue;
     }
 
@@ -285,9 +285,9 @@ func_7434() {
     }
 
     if(self method_843D()) {
-      self method_8615("deaths_door_mp_female");
+      self playlocalsound("deaths_door_mp_female");
     } else {
-      self method_8615("deaths_door_mp_male");
+      self playlocalsound("deaths_door_mp_male");
     }
 
     wait(1.284);
@@ -323,12 +323,12 @@ func_7467() {
     return;
   }
 
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
   for(;;) {
     self waittill("sprint_jog_begin");
-    self method_8615("sprint_jog_male");
+    self playlocalsound("sprint_jog_male");
   }
 }

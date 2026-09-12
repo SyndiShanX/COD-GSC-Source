@@ -9,7 +9,7 @@ seek_special_ability_use() {
 
 activate_special_ability() {
   self endon("death");
-  childthread maps\mp\zombies\zombie_assassin::recharge_special_ability(14);
+  childthread maps / mp / zombies / zombie_assassin::recharge_special_ability(14);
   childthread buff_nearby_zombies();
   lib_0378::func_8D74("aud_assassin_use_taunt");
 }
@@ -25,7 +25,7 @@ buff_nearby_zombies() {
   while(gettime() - var_01 / 1000 < 8) {
     var_02 = lib_0547::func_408F();
     foreach(var_04 in var_02) {
-      if(isDefined(var_04.assassin_modifier) && var_04 maps\mp\zombies\zombie_assassin::is_boss_assassin()) {
+      if(isDefined(var_04.assassin_modifier) && var_04 maps / mp / zombies / zombie_assassin::is_boss_assassin()) {
         continue;
       }
 
@@ -33,7 +33,7 @@ buff_nearby_zombies() {
         continue;
       }
 
-      if(distance(self.var_116, var_04.var_116) > 256) {
+      if(distance(self.origin, var_04.origin) > 256) {
         continue;
       }
 
@@ -44,7 +44,7 @@ buff_nearby_zombies() {
   }
 
   self.assassinabilitysustained = 0;
-  maps\mp\zombies\zombie_assassin::disable_assassin_chest_fx();
+  maps / mp / zombies / zombie_assassin::disable_assassin_chest_fx();
 }
 
 apply_boss_buff(param_00) {
@@ -77,7 +77,7 @@ spawn_assassin_frontline_fx() {
   }
 
   var_00 = spawnlinkedfx(common_scripts\utility::func_44F5("zmi_assassin_buff"), self, "J_Spine4");
-  maps\mp\agents\_agent_utility::deleteentonagentdeath(var_00);
+  maps / mp / agents / _agent_utility::deleteentonagentdeath(var_00);
   triggerfx(var_00);
   self.bufffx = var_00;
 }
@@ -94,10 +94,10 @@ set_boss_buff() {
     }
 
     self scragentsetscripted(1);
-    maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "assassin intro taunt");
-    var_00 = maps\mp\agents\_scripted_agent_anim_util::func_7A35("board_taunt_base");
-    maps\mp\agents\_scripted_agent_anim_util::func_71FA("board_taunt_base", var_00, 1, "taunt_anim");
-    maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "assassin intro taunt");
+    maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "assassin intro taunt");
+    var_00 = maps / mp / agents / _scripted_agent_anim_util::func_7A35("board_taunt_base");
+    maps / mp / agents / _scripted_agent_anim_util::func_71FA("board_taunt_base", var_00, 1, "taunt_anim");
+    maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "assassin intro taunt");
     self scragentsetscripted(0);
   }
 }

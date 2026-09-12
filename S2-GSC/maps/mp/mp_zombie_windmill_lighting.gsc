@@ -3,9 +3,9 @@
  * Script: maps\mp\mp_zombie_windmill_lighting.gsc
 ***************************************************/
 
-func_00F9() {
+main() {
   func_84F8();
-  level thread maps\mp\_utility::func_6F74(::func_6B82);
+  level thread maps\mp\_utility::func_6F74(::onplayerspawned);
   var_00 = function_021F("auto62", "targetname");
   foreach(var_02 in var_00) {
     var_02 setscriptablepartstate("lightpart", "off");
@@ -23,7 +23,7 @@ func_84F8() {
   setDvar("5153", 1);
 }
 
-func_6B82() {
+onplayerspawned() {
   var_00 = self;
   var_00 endon("disconnect");
   wait(1.5);

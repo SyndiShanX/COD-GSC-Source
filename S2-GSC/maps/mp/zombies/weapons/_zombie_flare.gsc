@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\weapons\_zombie_flare.gsc
 *****************************************************/
 
-func_00D5(param_00) {
+init(param_00) {
   common_scripts\utility::func_92C("signal_flare_zombie", "vfx/smoke/signal_flare_volumetric_runner");
   common_scripts\utility::func_92C("signal_flare_zombie_spec", "vfx/zombie/prototype_fx/dig/zmd_flare_volumetric_runner");
   level.zombietacticalweapon["signal_flare_zm"] = 1;
@@ -24,7 +24,7 @@ flare_player_give_flare() {
   self.var_60A0 = 3;
   self method_831E(var_00);
   lib_0586::func_78C(var_00);
-  self method_82FA(var_00, 3);
+  self setweaponammoclip(var_00, 3);
 }
 
 flare_player_throw_monitor() {
@@ -80,14 +80,14 @@ flare_handle_effects(param_00, param_01) {
   }
 
   var_02 = spawnStruct();
-  var_02.landing_point = self.var_116;
-  var_02.var_117 = self.var_117;
+  var_02.landing_point = self.origin;
+  var_02.owner = self.owner;
   var_02.var_3D33 = 1750;
   var_02.burn_duration = 1750;
   var_02.var_3D37 = 16384;
   var_02.var_3F83 = common_scripts\utility::func_8FFC();
   var_02.var_3F83 method_8449(self);
-  var_02.var_3F83 method_805B();
+  var_02.var_3F83 show();
   playFXOnTag(common_scripts\utility::func_44F5("signal_flare_zombie"), var_02.var_3F83, "TAG_ORIGIN");
   thread flare_handle_cleanup(var_02);
   wait(1);
@@ -103,9 +103,9 @@ flare_handle_effects(param_00, param_01) {
         continue;
       }
 
-      if(distancesquared(var_05.var_116, var_02.landing_point) < var_02.var_3D37 / 2) {
-        if(bullettracepassed(var_05.var_116, var_02.landing_point, 0, var_05, self)) {
-          var_05 setonfire(var_05.var_FB / 10, 0.5, 5, "none", 1, self.var_117, "dot_generic_zm");
+      if(distancesquared(var_05.origin, var_02.landing_point) < var_02.var_3D37 / 2) {
+        if(bullettracepassed(var_05.origin, var_02.landing_point, 0, var_05, self)) {
+          var_05 setonfire(var_05.maxhealth / 10, 0.5, 5, "none", 1, self.owner, "dot_generic_zm");
           var_05 thread flare_zombie_burn(2.5);
           var_05.on_fire = 1;
         }

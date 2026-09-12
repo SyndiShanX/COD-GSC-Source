@@ -3,11 +3,11 @@
  * Script: 1394.gsc
 *********************************************/
 
-lib_0572::func_52A4() {
-  lib_0561::initconsumablesfromtable("max_ammo", ::lib_0572::func_A21A, ::lib_0572::func_1F82, ::lib_0572::func_4575);
+func_52A4() {
+  lib_0561::initconsumablesfromtable("max_ammo", ::func_A21A, ::func_1F82, ::func_4575);
 }
 
-lib_0572::func_1F82(param_00) {
+func_1F82(param_00) {
   if(!lib_0561::func_1F7B()) {
     return 0;
   }
@@ -15,11 +15,11 @@ lib_0572::func_1F82(param_00) {
   return 1;
 }
 
-lib_0572::func_A21A(param_00) {
-  maps\mp\gametypes\zombies::func_0DB9(self, 1);
+func_A21A(param_00) {
+  maps / mp / gametypes / zombies::func_DB9(self, 1);
 }
 
-lib_0572::func_4575(param_00) {
+func_4575(param_00) {
   if(!isDefined(param_00)) {
     param_00 = "";
   }

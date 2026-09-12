@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_windmill_aud.gsc
 **********************************************/
 
-func_00F9() {
+main() {
   lib_0367::func_8E3E("bp_wind");
   func_7BBA();
   func_5C22();
@@ -65,17 +65,17 @@ func_7248() {
 }
 
 func_7330() {
-  soundscripts\_snd_common_zmb_dlc3::dlc3_player_spawned();
+  soundscripts / _snd_common_zmb_dlc3::dlc3_player_spawned();
   self method_8626("windmill_default_mix");
 }
 
 func_A979(param_00) {
-  soundscripts\_snd_common_zmb_dlc3::dlc3_wave_begin(param_00);
+  soundscripts / _snd_common_zmb_dlc3::dlc3_wave_begin(param_00);
   self method_8627("wm_intermission_mix");
 }
 
 func_A97A() {
-  soundscripts\_snd_common_zmb_dlc3::dlc3_wave_end();
+  soundscripts / _snd_common_zmb_dlc3::dlc3_wave_end();
   self method_8626("wm_intermission_mix");
 }
 
@@ -113,7 +113,7 @@ lightning_strike_in_play_space(param_00, param_01) {
 
 bomber_barricade_explosion(param_00) {
   foreach(var_02 in param_00) {
-    lib_0380::func_2889("bomber_barricade_explo_debris", undefined, var_02.var_116);
+    lib_0380::func_2889("bomber_barricade_explo_debris", undefined, var_02.origin);
     wait(0.25);
   }
 }
@@ -121,7 +121,7 @@ bomber_barricade_explosion(param_00) {
 start_windmill_rotate(param_00) {
   var_01 = self;
   if(param_00 > 0) {
-    var_02 = var_01.var_116 + (0, -150, 0);
+    var_02 = var_01.origin + (0, -150, 0);
     lib_0380::func_2889("zmb_dig_windmill_strt", undefined, var_02);
     level.var_11CB.windmill_lp = lib_0380::func_6842("zmb_dig_windmill_lp", undefined, var_02, 0.3);
     thread windmill_rotate_wood_creaks(var_02, param_00);
@@ -153,7 +153,7 @@ windmill_rotate_metal_creaks(param_00, param_01) {
 
 stop_windmill(param_00) {
   var_01 = self;
-  var_02 = var_01.var_116 + (0, -150, 0);
+  var_02 = var_01.origin + (0, -150, 0);
   lib_0380::func_6850(level.var_11CB.windmill_lp, param_00);
   lib_0380::func_2889("zmb_dig_windmill_stop", undefined, var_02);
   self notify("windmill_snd_stopped");
@@ -161,7 +161,7 @@ stop_windmill(param_00) {
 
 start_gears(param_00) {
   var_01 = param_00[0];
-  var_02 = var_01.var_116 + (75, 10, 100);
+  var_02 = var_01.origin + (75, 10, 100);
   level.var_11CB.gears_lp = lib_0380::func_6842("zmb_windmill_gears_lp", undefined, var_02, 0.3);
   gear_one_shots(var_02, var_01);
 }
@@ -179,7 +179,7 @@ gear_one_shots(param_00, param_01) {
 
 stop_gears(param_00) {
   var_01 = param_00[0];
-  var_02 = var_01.var_116 + (75, 10, 100);
+  var_02 = var_01.origin + (75, 10, 100);
   lib_0380::func_6850(level.var_11CB.gears_lp, 0.5);
   lib_0380::func_2889("zmb_windmill_gears_stop", undefined, var_02);
   var_01 notify("gear_sounds_stopped");
@@ -195,14 +195,14 @@ drop_bombs_fall(param_00, param_01) {
   var_03 = 4;
   var_04 = 0.666;
   var_05 = var_02 * randomfloatrange(0.25, 0.75);
-  maps\mp\_utility::func_2CED(param_01 - var_02, ::lib_0380::func_6842, "zmb_bomb_drop_incoming_whistle", level.var_744A, param_00.var_116, var_05);
-  maps\mp\_utility::func_2CED(param_01 - var_03, ::lib_0380::func_6842, "zmb_bomb_drop_incoming", level.var_744A, param_00.var_116);
-  maps\mp\_utility::func_2CED(param_01 - var_04, ::lib_0380::func_6842, "zmb_bomb_drop_incoming_close", level.var_744A, param_00.var_116);
+  maps\mp\_utility::func_2CED(param_01 - var_02, ::lib_0380::func_6842, "zmb_bomb_drop_incoming_whistle", level.players, param_00.origin, var_05);
+  maps\mp\_utility::func_2CED(param_01 - var_03, ::lib_0380::func_6842, "zmb_bomb_drop_incoming", level.players, param_00.origin);
+  maps\mp\_utility::func_2CED(param_01 - var_04, ::lib_0380::func_6842, "zmb_bomb_drop_incoming_close", level.players, param_00.origin);
 }
 
 drop_bombs_explosion(param_00) {
   drop_bombs_fall_stop_fall_sounds(param_00);
-  var_01 = lib_0380::func_6842("zmb_bomb_drop_explo", undefined, param_00.var_116);
+  var_01 = lib_0380::func_6842("zmb_bomb_drop_explo", undefined, param_00.origin);
 }
 
 drop_bombs_fall_stop_fall_sounds(param_00) {
@@ -227,7 +227,7 @@ func_ABF8(param_00, param_01) {
 frank_rope_shot() {
   var_00 = self;
   wait 0.05;
-  lib_0380::func_2889("zmb_windmill_rope_shot", undefined, var_00.var_116);
+  lib_0380::func_2889("zmb_windmill_rope_shot", undefined, var_00.origin);
 }
 
 frank_pull_branch(param_00) {

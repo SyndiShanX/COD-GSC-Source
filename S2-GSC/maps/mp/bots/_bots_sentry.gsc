@@ -13,11 +13,11 @@ func_1A4D(param_00, param_01, param_02, param_03) {
     wait(1);
   }
 
-  if(isDefined(self.var_0088) && self.var_0088.var_00BC > 0 && self method_8371(self.var_0088)) {
+  if(isDefined(self.enemy) && self.enemy.health > 0 && self method_8371(self.enemy)) {
     return 1;
   }
 
-  var_04 = self.var_0116;
+  var_04 = self.origin;
   if(param_03 != "hide_nonlethal") {
     var_04 = func_1ACA(param_03);
     if(!isDefined(var_04)) {
@@ -26,7 +26,7 @@ func_1A4D(param_00, param_01, param_02, param_03) {
   }
 
   func_1AC5(param_00, var_04, param_03, param_01);
-  while(maps\mp\bots\_bots_strategy::func_1A14("sentry_placement")) {
+  while(maps / mp / bots / _bots_strategy::func_1A14("sentry_placement")) {
     wait(0.5);
   }
 
@@ -40,7 +40,7 @@ func_1967(param_00) {
 func_1AC5(param_00, param_01, param_02, param_03) {
   var_04 = func_1AC9(param_00, param_01, param_02, param_03);
   if(isDefined(var_04)) {
-    maps\mp\bots\_bots_strategy::func_192C("sentry_placement");
+    maps / mp / bots / _bots_strategy::func_192C("sentry_placement");
     var_05 = spawnStruct();
     var_05.var_68FB = var_04;
     var_05.var_81CA = var_04.var_AAE8;
@@ -48,9 +48,9 @@ func_1AC5(param_00, param_01, param_02, param_03) {
     var_05.var_9296 = ::func_1ACD;
     var_05.var_36AC = ::func_1AC6;
     var_05.var_8B3E = ::func_1ACF;
-    var_05.var_087F = ::func_1AC4;
+    var_05.var_87F = ::func_1AC4;
     self.var_7009 = param_00.var_944C;
-    maps\mp\bots\_bots_strategy::func_1A85("sentry_placement", var_04.var_010D.var_0116, 0, var_05);
+    maps / mp / bots / _bots_strategy::func_1A85("sentry_placement", var_04.node.origin, 0, var_05);
   }
 }
 
@@ -58,7 +58,7 @@ func_1ACF(param_00) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  if(isDefined(self.var_0088) && self.var_0088.var_00BC > 0 && self method_8371(self.var_0088)) {
+  if(isDefined(self.enemy) && self.enemy.health > 0 && self method_8371(self.enemy)) {
     return 1;
   }
 
@@ -73,7 +73,7 @@ func_1AC7() {
   self endon("bot_sentry_ensure_exit");
   level endon("game_ended");
   for(;;) {
-    if(isDefined(self.var_0088) && self.var_0088.var_00BC > 0 && self method_8371(self.var_0088)) {
+    if(isDefined(self.enemy) && self.enemy.health > 0 && self method_8371(self.enemy)) {
       thread func_1AC6();
     }
 
@@ -93,11 +93,11 @@ func_1ACE(param_00) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  while(isDefined(param_00.var_68FB) && isDefined(param_00.var_68FB.var_01D0)) {
-    if(distance2d(self.var_0116, param_00.var_68FB.var_010D.var_0116) < 400) {
-      thread maps\mp\bots\_bots_util::func_19D4("stand", 5);
+  while(isDefined(param_00.var_68FB) && isDefined(param_00.var_68FB.var_1D0)) {
+    if(distance2d(self.origin, param_00.var_68FB.node.origin) < 400) {
+      thread maps / mp / bots / _bots_util::func_19D4("stand", 5);
       thread func_1AC7();
-      maps\mp\bots\_bots_ks::func_1AF4(param_00.var_68FB.var_5A5C, param_00.var_68FB.var_5A72, param_00.var_68FB.var_01D0);
+      maps / mp / bots / _bots_ks::func_1AF4(param_00.var_68FB.var_5A5C, param_00.var_68FB.var_5A72, param_00.var_68FB.var_1D0);
       return;
     }
 
@@ -106,16 +106,16 @@ func_1ACE(param_00) {
 }
 
 func_1ACA(param_00) {
-  var_01 = maps\mp\bots\_bots_util::func_2C6C();
+  var_01 = maps / mp / bots / _bots_util::func_2C6C();
   if(isDefined(var_01)) {
     return var_01;
   }
 
   if(isDefined(self.var_6708)) {
-    return self.var_6708.var_0116;
+    return self.var_6708.origin;
   }
 
-  var_02 = getnodesinradius(self.var_0116, 1000, 0, 512);
+  var_02 = getnodesinradius(self.origin, 1000, 0, 512);
   var_03 = 5;
   if(param_00 != "turret") {
     if(self botgetdifficultysetting("strategyLevel") == 1) {
@@ -132,7 +132,7 @@ func_1ACA(param_00) {
   }
 
   if(isDefined(var_04)) {
-    return var_04.var_0116;
+    return var_04.origin;
   }
 }
 
@@ -160,14 +160,14 @@ func_1AC9(param_00, param_01, param_02, param_03) {
 
   if(isDefined(var_07)) {
     var_04 = spawnStruct();
-    var_04.var_010D = var_07;
-    if(param_01 != var_07.var_0116 && param_02 != "hide_nonlethal") {
-      var_04.var_AAE8 = vectortoyaw(param_01 - var_07.var_0116);
+    var_04.node = var_07;
+    if(param_01 != var_07.origin && param_02 != "hide_nonlethal") {
+      var_04.var_AAE8 = vectortoyaw(param_01 - var_07.origin);
     } else {
       var_04.var_AAE8 = undefined;
     }
 
-    var_04.var_01D0 = param_00.var_01D0;
+    var_04.var_1D0 = param_00.var_1D0;
     var_04.var_5A5C = param_00;
     var_04.var_5A72 = param_03;
   }
@@ -197,7 +197,7 @@ func_1AC4(param_00) {
     if(!var_02.var_1F2F) {
       var_04 = 0.75;
       var_05 = gettime();
-      var_06 = self getangles()[1];
+      var_06 = self getplayerangles()[1];
       if(isDefined(param_00.var_68FB.var_AAE8)) {
         var_06 = param_00.var_68FB.var_AAE8;
       }
@@ -208,12 +208,12 @@ func_1AC4(param_00) {
       var_07[2] = var_06 - 135;
       var_08 = 1000;
       foreach(var_0A in var_07) {
-        var_0B = playerphysicstrace(param_00.var_68FB.var_010D.var_0116, param_00.var_68FB.var_010D.var_0116 + anglesToForward((0, var_0A + 180, 0)) * 100);
-        var_0C = distance2d(var_0B, param_00.var_68FB.var_010D.var_0116);
+        var_0B = playerphysicstrace(param_00.var_68FB.node.origin, param_00.var_68FB.node.origin + anglesToForward((0, var_0A + 180, 0)) * 100);
+        var_0C = distance2d(var_0B, param_00.var_68FB.node.origin);
         if(var_0C < var_08) {
           var_08 = var_0C;
           self botsetscriptmove(var_0A, var_04);
-          self botlookatpoint(param_00.var_68FB.var_010D.var_0116, var_04, "script_forced");
+          self botlookatpoint(param_00.var_68FB.node.origin, var_04, "script_forced");
         }
       }
 
@@ -247,8 +247,8 @@ func_1AC3() {
 
 func_1AC2() {
   self switchtoweapon("none");
-  self method_8323();
-  self method_8327();
+  self enableweapons();
+  self enableweaponswitch();
   self notify("cancel_sentry");
   self notify("cancel_turret");
   self notify("cancelPlaceable");
@@ -270,8 +270,8 @@ func_1ACB() {
   self switchtoweapon("none");
   self method_8358();
   self botsetstance("none");
-  self method_8323();
-  self method_8327();
+  self enableweapons();
+  self enableweaponswitch();
   wait(0.25);
   var_00 = 0;
   while(isDefined(func_1AC8())) {
@@ -291,6 +291,6 @@ func_1ACC() {
   self.var_2005 = undefined;
   self.var_2003 = undefined;
   self switchtoweapon("none");
-  self method_8323();
-  self method_8327();
+  self enableweapons();
+  self enableweaponswitch();
 }

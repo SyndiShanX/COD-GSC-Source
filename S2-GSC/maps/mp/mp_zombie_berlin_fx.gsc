@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_berlin_fx.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   level.var_611["zmb_ber_zep_tether_fake_green"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_zep_tether_fake_green");
   level.var_611["zmb_ber_tet_wire_chrg_rnr_idl_far"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_tet_wire_chrg_rnr_idl_far");
   level.var_611["zmb_ber_tether_wire_charge2_far"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_tether_wire_charge2_far");
@@ -99,7 +99,7 @@ func_00F9() {
   level.var_611["test_effect"] = loadfx("vfx/test/test_fx");
   level.var_611["zmb_jolts_out"] = loadfx("vfx/zombie/zmb_jolts_out");
   level.var_611["landing_dust"] = loadfx("vfx/dust/drill_impact_dust");
-  level.var_611["moneyCloud"] = loadfx("vfx/gameplay\mp\zombie/gj_pickup_zombies_01_money");
+  level.var_611["moneyCloud"] = loadfx("vfx/gameplay/mp/zombie/gj_pickup_zombies_01_money");
   level.var_611["zmb_ber_zeppelin_spotlight"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_zeppelin_spotlight");
   level.var_611["elevator_crash"] = loadfx("vfx/dust/dust_impact_ground_lrg");
   level.var_611["flare_sparks"] = loadfx("vfx/sparks/zmb_ee_switch_sparks");

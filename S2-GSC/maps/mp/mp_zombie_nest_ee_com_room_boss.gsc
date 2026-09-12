@@ -3,6 +3,6 @@
  * Script: maps\mp\mp_zombie_nest_ee_com_room_boss.gsc
 *******************************************************/
 
-func_00F9() {}
+main() {}
 
 func_784C() {}

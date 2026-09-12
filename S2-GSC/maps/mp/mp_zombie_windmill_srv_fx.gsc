@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_windmill_srv_fx.gsc
 *************************************************/
 
-func_00F9() {
+main() {
   level.var_611["zmb_wm_ground_fire_a"] = loadfx("vfx/map/mp_zombie_windmill/zmb_wm_ground_fire_a");
   level.var_611["zmb_wm_fire_lp_m_tall"] = loadfx("vfx/map/mp_zombie_windmill/zmb_wm_fire_lp_m_tall");
   level.var_611["zmb_ber_elec_sparks_pzl_battery_on"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_elec_sparks_pzl_battery_on");

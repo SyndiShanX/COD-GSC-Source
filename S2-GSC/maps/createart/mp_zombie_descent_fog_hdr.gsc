@@ -3,9 +3,9 @@
  * Script: maps\createart\mp_zombie_descent_fog_hdr.gsc
 ********************************************************/
 
-func_00F9() {
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_descent");
-  var_00.var_9C83 = 3;
+main() {
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_descent");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.330943, 0.442065, 0.492188);
   var_00.var_1108 = (0.273438, 0.191954, 0.125235);
@@ -48,8 +48,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_descent_interior");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_descent_interior");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.36627, 0.656109, 0.667247);
   var_00.var_1108 = (1, 0.607841, 0);
@@ -92,8 +92,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_descent_caves");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_descent_caves");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.780359, 0, 0);
   var_00.var_1108 = (0.7363, 0.7363, 0.7363);
@@ -136,8 +136,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_descent_godking");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_descent_godking");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.780359, 0, 0);
   var_00.var_1108 = (0.7363, 0.7363, 0.7363);
@@ -180,8 +180,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_descent_underwater");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_descent_underwater");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.330943, 0.442065, 0.492188);
   var_00.var_1108 = (0.273438, 0.191954, 0.125235);
@@ -224,8 +224,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_descent_packapunch");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_descent_packapunch");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.383619, 0, 0);
   var_00.var_1108 = (0, 0, 0);
@@ -268,8 +268,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_descent_moonravengreen");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_descent_moonravengreen");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.330943, 0.442065, 0.492188);
   var_00.var_1108 = (0.273438, 0.191954, 0.125235);
@@ -312,8 +312,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_descent_secrettrial");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_descent_secrettrial");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (1, 1, 1);
   var_00.var_1108 = (1, 1, 1);
@@ -356,8 +356,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("");
+  var_00.transitiontime = 0;
   var_00.var_1105 = 0;
   var_00.var_110E = 0;
   var_00.var_110F = 0;

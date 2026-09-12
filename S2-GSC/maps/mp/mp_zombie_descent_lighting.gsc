@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_descent_lighting.gsc
 **************************************************/
 
-func_00F9() {
+main() {
   func_84F8();
 }
 
@@ -55,7 +55,7 @@ func_84F8() {
   setDvar("2664", 1);
 }
 
-func_6B82() {
+onplayerspawned() {
   var_00 = self;
   var_00 endon("disconnect");
   wait(15);

@@ -69,7 +69,7 @@ func_170B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   if(!common_scripts\utility::func_562E(self.disable_end_sound)) {
-    lib_0378::func_8D74("zombie_soul_suck_threshold", self.var_116);
+    lib_0378::func_8D74("zombie_soul_suck_threshold", self.origin);
   }
 
   if(isDefined(param_04) && !common_scripts\utility::func_562E(self.disable_auto_deregister)) {
@@ -82,7 +82,7 @@ func_170B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 beginazombiesoulcollectionobjectiveonstruct(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C, param_0D, param_0E) {
   var_0F = self;
   var_10 = var_0F common_scripts\utility::func_8FFC();
-  var_10 method_805B();
+  var_10 show();
   var_0F.collector = var_10;
   if(isDefined(self.onzombiesacrificedfunc)) {
     var_0F.collector.onzombiesacrificedfunc = self.onzombiesacrificedfunc;
@@ -121,7 +121,7 @@ func_4030(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     level.var_6666 = 0;
   }
 
-  var_09 = common_scripts\utility::func_4461(self.var_116, level.var_8E3);
+  var_09 = common_scripts\utility::func_4461(self.origin, level.var_8E3);
   if(!isDefined(var_09)) {
     return;
   }
@@ -168,7 +168,7 @@ func_4030(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       var_0F = var_0F + var_09.var_8C48;
     }
   } else {
-    var_0F = var_0A.var_116;
+    var_0F = var_0A.origin;
   }
 
   if(isDefined(var_09.ignoresighttrace) && var_09.ignoresighttrace) {
@@ -246,7 +246,7 @@ func_2024(param_00, param_01, param_02, param_03) {
     playFXOnTag(level.var_611["zmb_gk_claw_battery_charge_3"], level.var_3571, "flap3_shroud");
   }
 
-  lib_0378::func_8D74("zombie_soul_suck", var_04.var_116, param_00.var_116);
+  lib_0378::func_8D74("zombie_soul_suck", var_04.origin, param_00.origin);
   wait(0.45);
   if(isDefined(var_05)) {
     var_05 delete();
@@ -260,7 +260,7 @@ func_21CF(param_00, param_01, param_02, param_03) {
 }
 
 func_56B0(param_00, param_01, param_02, param_03) {
-  var_04 = param_00.var_116;
+  var_04 = param_00.origin;
   if(isDefined(param_00.var_2E37)) {
     var_04 = param_00 gettagorigin(param_00.var_2E37);
   }
@@ -270,17 +270,17 @@ func_56B0(param_00, param_01, param_02, param_03) {
   }
 
   if(common_scripts\utility::func_562E(param_03)) {
-    var_05 = sighttracepassed(self.var_116, var_04, 0, self, param_00, 0);
+    var_05 = sighttracepassed(self.origin, var_04, 0, self, param_00, 0);
     if(!var_05) {
       return 0;
     }
   }
 
   if(isDefined(param_02)) {
-    return distance2d(var_04, self.var_116) < param_01 && abs(var_04[2] - self.var_116[2]) < param_02;
+    return distance2d(var_04, self.origin) < param_01 && abs(var_04[2] - self.origin[2]) < param_02;
   }
 
-  return distance2d(var_04, self.var_116) < param_01 && self.var_116[2] < var_04[2];
+  return distance2d(var_04, self.origin) < param_01 && self.origin[2] < var_04[2];
 }
 
 func_865C(param_00, param_01) {

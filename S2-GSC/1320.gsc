@@ -3,7 +3,7 @@
  * Script: 1320.gsc
 *********************************************/
 
-lib_0528::func_52F3() {
+func_52F3() {
   level.var_9854["allies"] = 0;
   level.var_9854["axis"] = 0;
   level.var_9850["allies"] = 0;
@@ -12,21 +12,21 @@ lib_0528::func_52F3() {
   level.var_2694 = undefined;
 }
 
-lib_0528::func_A0E0() {
-  foreach(var_01 in level.var_744A) {
-    if(level.var_984D) {
-      var_01 lib_0528::func_A150();
+func_A0E0() {
+  foreach(var_01 in level.players) {
+    if(level.teambased) {
+      var_01 func_A150();
       continue;
     }
 
-    var_01 lib_0528::func_A14F();
+    var_01 func_A14F();
   }
 }
 
-lib_0528::func_A150() {
+func_A150() {
   var_00 = 0;
   var_01 = "allies";
-  if(self.var_01A7 == "axis") {
+  if(self.team == "axis") {
     var_01 = "axis";
   }
 
@@ -43,7 +43,7 @@ lib_0528::func_A150() {
   self setclientomnvar("ui_minimap_antiair_state", var_00);
 }
 
-lib_0528::func_A14F() {
+func_A14F() {
   var_00 = 0;
   if(isDefined(level.var_3CE0)) {
     var_00 = 2;

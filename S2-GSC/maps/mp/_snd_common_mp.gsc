@@ -12,9 +12,9 @@ func_8D80() {
 func_51D8() {}
 
 func_8D81() {
-  level.var_071D.var_351F = 0;
-  if(isDefined(level.var_744A) && level.var_744A.size > 0) {
-    foreach(var_01 in level.var_744A) {
+  level.var_71D.var_351F = 0;
+  if(isDefined(level.players) && level.players.size > 0) {
+    foreach(var_01 in level.players) {
       var_01 method_8626("mp_init_mix");
       wait 0.05;
       var_01 method_8626("mp_pre_event_mix");
@@ -24,9 +24,9 @@ func_8D81() {
 }
 
 func_8D82() {
-  level.var_071D.var_351F = 1;
-  if(isDefined(level.var_744A) && level.var_744A.size > 0) {
-    foreach(var_01 in level.var_744A) {
+  level.var_71D.var_351F = 1;
+  if(isDefined(level.players) && level.players.size > 0) {
+    foreach(var_01 in level.players) {
       var_01 method_8627("mp_pre_event_mix");
       wait 0.05;
       var_01 method_8626("mp_post_event_mix");
@@ -82,7 +82,7 @@ func_7247() {
   self method_85A7("ClientScriptInit", "mp");
   self method_8626("mp_init_mix");
   thread func_8D7F();
-  if(!isDefined(level.var_071D.var_351F) || !level.var_071D.var_351F) {
+  if(!isDefined(level.var_71D.var_351F) || !level.var_71D.var_351F) {
     self method_8626("mp_pre_event_mix");
     return;
   }
@@ -171,20 +171,20 @@ func_5ABC() {
 func_5ABA() {
   var_00 = self;
   var_00 waittill("death");
-  if(!isDefined(var_00) || !isDefined(var_00.var_0116)) {
+  if(!isDefined(var_00) || !isDefined(var_00.origin)) {
     return;
   }
 
-  var_01 = var_00.var_0116;
-  var_02 = var_00.var_001D;
-  var_03 = var_00.var_0117;
-  var_04 = var_00.var_01A7;
+  var_01 = var_00.origin;
+  var_02 = var_00.angles;
+  var_03 = var_00.owner;
+  var_04 = var_00.team;
   lib_0380::func_6842("ks_bomb_run_exp", undefined, var_01);
 }
 
 func_5ABB() {
   var_00 = self;
-  var_01 = var_00.var_0116;
+  var_01 = var_00.origin;
   wait(1.5);
   if(isDefined(var_00)) {
     lib_0380::func_6842("ks_bomb_run_final_tail", undefined, var_01);
@@ -212,12 +212,12 @@ func_1FF8() {
   var_03 = lib_0380::func_6844("ks_crpkg_parachute_lp", undefined, var_00, var_01);
   var_00 waittill("detach");
   lib_0380::func_6850(var_03, var_02);
-  lib_0380::func_6842("ks_crpkg_parachute_release", undefined, var_00.var_0116);
+  lib_0380::func_6842("ks_crpkg_parachute_release", undefined, var_00.origin);
 }
 
 func_1FF7() {
   var_00 = self;
-  if(self.var_01A7 == "allies") {
+  if(self.team == "allies") {
     lib_0380::func_6844("mp_ks_crpkg_imp_allies", undefined, self);
     return;
   }
@@ -230,15 +230,15 @@ func_6E73() {
   var_01 = 0.5;
   var_02 = 0.5;
   var_03 = lib_0380::func_288B("ks_ptps_parachute_lp", undefined, var_00, var_01);
-  var_00 common_scripts\utility::func_A70A("paratrooper_released", "detach");
+  var_00 common_scripts\utility::waittill_any("paratrooper_released", "detach");
   lib_0380::func_2893(var_03, var_02);
-  lib_0380::func_2889("ks_ptps_parachute_release", undefined, var_00.var_0116);
+  lib_0380::func_2889("ks_ptps_parachute_release", undefined, var_00.origin);
 }
 
 player_parachute_open() {
   lib_0380::func_6847("player_parachute_lp", self, self, 0, 1, 1, self, "aud_stop_parachute_loop");
   lib_0380::func_6847("player_parachute_jingles_lp", self, self, 0, 1, 1, self, "aud_stop_parachute_loop");
-  common_scripts\utility::func_A70A("paratrooper_released", "detach");
+  common_scripts\utility::waittill_any("paratrooper_released", "detach");
   lib_0380::func_6844("player_parachute_release", self, self);
   self notify("aud_stop_parachute_loop");
 }
@@ -248,7 +248,7 @@ func_5AC6(param_00) {
   var_02 = param_00 - 0.05;
   lib_0380::func_6844("ks_plane_destruct_deathspin", undefined, var_01);
   wait(var_02);
-  var_03 = var_01.var_0116;
+  var_03 = var_01.origin;
   lib_0380::func_6842("ks_plane_destruct_explode", undefined, var_03);
 }
 
@@ -300,21 +300,21 @@ func_5AC5(param_00) {
   var_03 = 75;
   var_04 = "mortar_strike";
   if(param_00 == var_02) {
-    lib_0380::func_6842("ks_mstrike_fire", undefined, var_01.var_0116);
+    lib_0380::func_6842("ks_mstrike_fire", undefined, var_01.origin);
     lib_0380::func_6844("mp_ks_incoming", undefined, var_01);
     var_01 waittill("death");
     if(isDefined(var_01)) {
-      var_05 = var_01.var_0116;
+      var_05 = var_01.origin;
       lib_0380::func_6842("ks_mstrike_exp", undefined, var_05);
     }
   }
 
   if(param_00 == var_04) {
-    lib_0380::func_6842("ks_mortar_strike_fire", undefined, var_01.var_0116);
+    lib_0380::func_6842("ks_mortar_strike_fire", undefined, var_01.origin);
     lib_0380::func_6844("ks_mortar_strike_inc", undefined, var_01);
     var_01 waittill("death");
     if(isDefined(var_01)) {
-      var_05 = var_01.var_0116;
+      var_05 = var_01.origin;
       lib_0380::func_6842("ks_mstrike_exp", undefined, var_05);
     }
   }
@@ -349,7 +349,7 @@ v2_explosion() {
 
 player_parachute_submix() {
   self method_8626("mp_tunisia_parachute_mix");
-  common_scripts\utility::func_A70A("paratrooper_released", "detach");
+  common_scripts\utility::waittill_any("paratrooper_released", "detach");
   self method_8627("mp_tunisia_parachute_mix");
 }
 
@@ -407,7 +407,7 @@ undead_hardpoint_zombie_spawn(param_00) {
 
 func_4F26() {
   var_00 = self;
-  lib_0380::func_6842("ui_in_hub_level_up_flair", undefined, var_00.var_0116);
+  lib_0380::func_6842("ui_in_hub_level_up_flair", undefined, var_00.origin);
 }
 
 func_4F27() {
@@ -463,5 +463,5 @@ func_4F28(param_00) {
 
 func_4F29() {
   var_00 = self;
-  lib_0380::func_6842("ui_in_hub_level_up_flair", undefined, var_00.var_0116);
+  lib_0380::func_6842("ui_in_hub_level_up_flair", undefined, var_00.origin);
 }

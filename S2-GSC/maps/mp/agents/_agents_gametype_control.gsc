@@ -3,7 +3,7 @@
  * Script: maps\mp\agents\_agents_gametype_control.gsc
 *******************************************************/
 
-func_00F9() {
+main() {
   func_87A7();
 }
 

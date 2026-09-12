@@ -3,7 +3,7 @@
  * Script: maps\mp\gametypes\_broadcaster.gsc
 **********************************************/
 
-func_00D5() {
+init() {
   level.broadcasters = [];
 }
 
@@ -29,7 +29,7 @@ monitorpuckcolor(param_00) {
       if(var_06 == self getentitynumber()) {
         var_07 = var_05 % 100;
         var_08 = tablelookupbyrow(var_01, var_07 - 1, var_02);
-        level.var_0611[var_03 + "_" + param_00] = loadfx("vfx/ui/" + var_08);
+        level.var_611[var_03 + "_" + param_00] = loadfx("vfx/ui/" + var_08);
         break;
       }
     }
@@ -51,8 +51,8 @@ monitorzoom() {
 }
 
 initializeclientvalues() {
-  if(!isDefined(level.var_0611["broadcaster_followed_player"])) {
-    level.var_0611["broadcaster_followed_player"] = loadfx("vfx/ui/esports_ui_puck_selected");
+  if(!isDefined(level.var_611["broadcaster_followed_player"])) {
+    level.var_611["broadcaster_followed_player"] = loadfx("vfx/ui/esports_ui_puck_selected");
   }
 
   thread monitorpuckcolor("allies");
@@ -70,9 +70,9 @@ func_1CAD() {
   setdvarifuninitialized("broadcaster_player_target_vfx", 0);
   setdvarifuninitialized("broadcaster_follower_killer", 1);
   setdvarifuninitialized("broadcaster_team_pucks", 1);
-  self.var_01A7 = "spectator";
-  self.var_0179 = "spectator";
-  maps\mp\_utility::func_A165("spectator");
+  self.team = "spectator";
+  self.sessionteam = "spectator";
+  maps\mp\_utility::updatesessionstate("spectator");
   maps\mp\gametypes\_spectating::func_872F();
   self allowspectateteam("allies", 1);
   self allowspectateteam("axis", 1);
@@ -93,8 +93,8 @@ func_1CAD() {
 func_44DC() {
   level endon("game_ended");
   for(;;) {
-    foreach(var_01 in level.var_744A) {
-      if(!var_01 method_8436() && var_01.var_4B96) {
+    foreach(var_01 in level.players) {
+      if(!var_01 method_8436() && var_01.hasspawned) {
         wait(0.15);
         thread func_1CA7(var_01 getentitynumber());
         return;
@@ -167,7 +167,7 @@ func_1C9E(param_00) {
 
 func_1CAA() {
   if(self.var_1E99.var_77AC) {
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       if(!var_01 method_8436()) {
         var_01 thread func_1CA9();
       }
@@ -181,7 +181,7 @@ func_1CA9() {
   var_00 = self;
   foreach(var_02 in level.broadcasters) {
     if(isDefined(var_02.var_1E99) && isDefined(var_02.var_1E99.var_77AC) && var_02.var_1E99.var_77AC) {
-      while(self.var_4B96 == 0) {
+      while(self.hasspawned == 0) {
         wait 0.05;
       }
 
@@ -193,9 +193,9 @@ func_1CA9() {
       var_03 = "broadcaster_" + var_02 getentitynumber() + "_player_puck";
       var_04 = var_03 + "_allies";
       var_05 = var_03 + "_axis";
-      if(var_00.var_01A7 == "allies" && common_scripts\utility::func_3F6F(var_04)) {
+      if(var_00.team == "allies" && common_scripts\utility::func_3F6F(var_04)) {
         playfxontagforclients(common_scripts\utility::func_44F5(var_04), var_00, "tag_origin", var_02);
-      } else if(var_00.var_01A7 == "axis" && common_scripts\utility::func_3F6F(var_05)) {
+      } else if(var_00.team == "axis" && common_scripts\utility::func_3F6F(var_05)) {
         playfxontagforclients(common_scripts\utility::func_44F5(var_05), var_00, "tag_origin", var_02);
       }
 
@@ -230,12 +230,12 @@ func_1CAB(param_00) {
   var_01 = "broadcaster_" + param_00 getentitynumber() + "_player_puck";
   var_02 = var_01 + "_allies";
   var_03 = var_01 + "_axis";
-  if(self.var_01A7 == "allies" && common_scripts\utility::func_3F6F(var_02)) {
+  if(self.team == "allies" && common_scripts\utility::func_3F6F(var_02)) {
     function_0295(common_scripts\utility::func_44F5(var_02), self, "tag_origin", param_00);
     return;
   }
 
-  if(self.var_01A7 == "axis" && common_scripts\utility::func_3F6F(var_03)) {
+  if(self.team == "axis" && common_scripts\utility::func_3F6F(var_03)) {
     function_0295(common_scripts\utility::func_44F5(var_03), self, "tag_origin", param_00);
   }
 }
@@ -246,9 +246,9 @@ broadcasterkillteampuck() {
       var_02 = "broadcaster_" + var_01 getentitynumber() + "_player_puck";
       var_03 = var_02 + "_allies";
       var_04 = var_02 + "_axis";
-      if(self.var_01A7 == "allies" && common_scripts\utility::func_3F6F(var_03)) {
+      if(self.team == "allies" && common_scripts\utility::func_3F6F(var_03)) {
         function_0295(common_scripts\utility::func_44F5(var_03), self, "tag_origin", var_01);
-      } else if(self.var_01A7 == "axis" && common_scripts\utility::func_3F6F(var_04)) {
+      } else if(self.team == "axis" && common_scripts\utility::func_3F6F(var_04)) {
         function_0295(common_scripts\utility::func_44F5(var_04), self, "tag_origin", var_01);
       }
     }
@@ -377,7 +377,7 @@ func_1CA7(param_00) {
   }
 
   if(self.var_1E99.var_A4A8 == "first_person") {
-    self.var_009F = param_00;
+    self.forcespectatorclient = param_00;
     self waittill("forced_spectator_client_loaded");
   }
 
@@ -414,8 +414,8 @@ func_A0E8(param_00) {
   var_01 = 3;
   var_02 = param_00.var_90E4;
   if(isDefined(var_02)) {
-    func_A0E9(var_02.var_7709.var_48CA, "primary_weapon");
-    func_A0E9(var_02.var_835D.var_48CA, "secondary_weapon");
+    func_A0E9(var_02.var_7709.guid, "primary_weapon");
+    func_A0E9(var_02.var_835D.guid, "secondary_weapon");
     for(var_03 = 0; var_03 < 4; var_03++) {
       func_A0E9(var_02.var_76F3[var_03], "primary_attachment_" + var_03);
       if(var_03 < 2) {
@@ -435,15 +435,15 @@ func_A0E8(param_00) {
     }
 
     self setclientomnvar("ui_broadcaster_loadout_training", var_07);
-    self setclientomnvar("ui_broadcaster_loadout_division", var_02.var_0079);
-    if(var_02.var_37FE.var_48CA != var_05) {
-      func_A0E9(var_02.var_37FE.var_48CA, "equipment_0");
+    self setclientomnvar("ui_broadcaster_loadout_division", var_02.var_79);
+    if(var_02.var_37FE.guid != var_05) {
+      func_A0E9(var_02.var_37FE.guid, "equipment_0");
     } else {
       func_A0E9(undefined, "equipment_0");
     }
 
-    if(var_02.var_69AD.var_48CA != var_05) {
-      func_A0E9(var_02.var_69AD.var_48CA, "equipment_1");
+    if(var_02.var_69AD.guid != var_05) {
+      func_A0E9(var_02.var_69AD.guid, "equipment_1");
       return;
     }
 
@@ -458,11 +458,11 @@ func_1C93() {
 
   var_00 = self.var_1E99;
   var_01 = var_00.var_9815;
-  var_02 = bulletTrace(var_00.var_0116, var_00.var_0116 + anglesToForward(var_00.var_001D) * 5000, 0);
+  var_02 = bulletTrace(var_00.origin, var_00.origin + anglesToForward(var_00.angles) * 5000, 0);
   var_03 = 1000;
-  foreach(var_05 in level.var_744A) {
+  foreach(var_05 in level.players) {
     if(var_05 != var_00.var_9815 && !var_05 method_8436()) {
-      var_06 = distance(var_05.var_0116, var_02["position"]);
+      var_06 = distance(var_05.origin, var_02["position"]);
       if(var_06 < var_03 && isalive(var_05)) {
         var_03 = var_06;
         var_01 = var_05;
@@ -480,10 +480,10 @@ func_1C93() {
 func_1CA4() {
   var_00 = self;
   var_01 = getEnt("mp_global_intermission", "classname");
-  var_02 = var_01.var_0116;
-  var_03 = var_01.var_001D;
+  var_02 = var_01.origin;
+  var_03 = var_01.angles;
   var_04 = spawn("script_model", var_02);
-  var_04.var_001D = var_03;
+  var_04.angles = var_03;
   var_04 setModel("tag_player");
   var_04.var_92F0 = var_02;
   var_04.var_92B8 = var_03;
@@ -494,13 +494,13 @@ func_1CA4() {
   var_04.var_3DC2 = 0;
   var_04.var_77AC = 1;
   var_04.broadcasterballcamenabled = 1;
-  var_00 setOrigin(var_04.var_0116);
-  var_00 setangles(var_04.var_001D);
+  var_00 setOrigin(var_04.origin);
+  var_00 setplayerangles(var_04.angles);
   var_00 playerlinkTo(var_04, "tag_player");
-  var_00 method_81E2(var_04, "tag_player");
+  var_00 cameralinkTo(var_04, "tag_player");
   var_00 method_812B(0);
   var_00.var_1E99 = var_04;
-  var_04.var_721C = var_00;
+  var_04.player = var_00;
   var_00 visionsetnakedforplayer("airplane", 5);
 }
 
@@ -516,14 +516,14 @@ func_1CA3() {
 }
 
 func_1C9A(param_00) {
-  self.var_009F = self getentitynumber();
+  self.forcespectatorclient = self getentitynumber();
   maps\mp\gametypes\_spectating::func_872F();
   self.var_1E99.var_A4A8 = "third_person";
   function_0327(&"broadcaster_view_skycam_applied", 1, self getentitynumber());
   level notify("broadcaster_ball_end", self.var_9815);
   self notify("changeGoalFx");
   wait 0.05;
-  self method_81E2(self.var_1E99, "tag_player");
+  self cameralinkTo(self.var_1E99, "tag_player");
   thread func_1CAA();
   thread func_1CA8();
   if(isDefined(level.var_AC7C) && isDefined(level.var_AC7C.broadcastermesh)) {
@@ -556,7 +556,7 @@ func_1C99(param_00) {
 
   self allowspectateteam("allies", 1);
   self allowspectateteam("axis", 1);
-  self.var_009F = self.var_1E99.var_9815 getentitynumber();
+  self.forcespectatorclient = self.var_1E99.var_9815 getentitynumber();
   setDvar("scr_game_lockspectatorpov", 1);
   self forcespectatepov(self getxuid(), "first_person");
   self.var_1E99.var_A4A8 = "first_person";
@@ -569,12 +569,12 @@ func_1C8D(param_00, param_01) {
   var_02 = 0.05;
   var_03 = 0;
   var_04 = self.var_9815;
-  var_05 = anglesToForward(var_04.var_001D);
-  var_06 = self.var_0116 - var_04.var_0116 + var_05 * -100 + param_01;
-  var_07 = self.var_001D;
+  var_05 = anglesToForward(var_04.angles);
+  var_06 = self.origin - var_04.origin + var_05 * -100 + param_01;
+  var_07 = self.angles;
   var_08 = 0;
   for(;;) {
-    var_09 = var_04.var_0116 + param_01;
+    var_09 = var_04.origin + param_01;
     var_0A = var_03 / param_00;
     var_03 = var_03 + var_02;
     if(var_0A >= 1) {
@@ -585,9 +585,9 @@ func_1C8D(param_00, param_01) {
       var_0B = 1.25;
       var_0C = min(var_0A * var_0B, 1);
       var_0C = 0.5 * 1 - cos(var_0C * 180);
-      var_0D = var_09 - self.var_0116;
+      var_0D = var_09 - self.origin;
       var_0E = axistoangles(var_0D, vectorcross(var_0D, (0, 0, 1)), (0, 0, 1));
-      self.var_001D = angleslerp(var_07, var_0E, var_0C);
+      self.angles = angleslerp(var_07, var_0E, var_0C);
       if(var_0C >= 1) {
         self settargetingflag(var_04, "fixedoffset", param_01);
         var_08 = 1;
@@ -595,8 +595,8 @@ func_1C8D(param_00, param_01) {
     }
 
     var_0A = 0.5 * 1 - cos(var_0A * 180);
-    var_05 = anglesToForward(var_04.var_001D);
-    self.var_0116 = var_09 + var_05 * -100 + var_06 * 1 - var_0A;
+    var_05 = anglesToForward(var_04.angles);
+    self.origin = var_09 + var_05 * -100 + var_06 * 1 - var_0A;
     wait 0.05;
   }
 }
@@ -604,7 +604,7 @@ func_1C8D(param_00, param_01) {
 func_1C95(param_00) {
   self notify("end_follows");
   self.var_9815 endon("disconnect");
-  self.var_721C endon("disconnect");
+  self.player endon("disconnect");
   level endon("game_ended");
   self endon("end_follows");
   var_01 = self.var_9815;
@@ -617,9 +617,9 @@ func_1C95(param_00) {
       self settargetingflag(var_01, "fixedoffset", var_02);
     }
 
-    var_04 = anglesToForward(var_01.var_001D);
-    var_05 = var_01.var_0116 + var_04 * -100 + var_02;
-    self.var_0116 = var_05;
+    var_04 = anglesToForward(var_01.angles);
+    var_05 = var_01.origin + var_04 * -100 + var_02;
+    self.origin = var_05;
     var_03 = var_01;
     wait 0.05;
   }
@@ -632,10 +632,10 @@ func_1C8F(param_00, param_01, param_02, param_03) {
 
   var_04 = 0.05;
   var_05 = 0;
-  var_06 = self.var_0116 - self.var_9815.var_0116;
-  var_07 = self.var_9815.var_001D;
+  var_06 = self.origin - self.var_9815.origin;
+  var_07 = self.var_9815.angles;
   for(;;) {
-    var_08 = self.var_9815.var_0116;
+    var_08 = self.var_9815.origin;
     var_09 = var_05 / param_00;
     var_05 = var_05 + var_04;
     if(var_09 >= 1) {
@@ -645,11 +645,11 @@ func_1C8F(param_00, param_01, param_02, param_03) {
     var_0A = 3;
     var_0B = min(var_09 * var_0A, 1);
     var_0B = 0.5 * 1 - cos(var_0B * 180);
-    self.var_001D = angleslerp(var_07, param_03, var_0B);
+    self.angles = angleslerp(var_07, param_03, var_0B);
     var_09 = 0.5 * 1 - cos(var_09 * 180);
     var_0C = (var_08[0], var_08[1] + param_02 * var_09, var_08[2] + param_01 * var_09);
     var_0C = var_0C + var_06 * 1 - var_09;
-    self.var_0116 = var_0C;
+    self.origin = var_0C;
     wait 0.05;
   }
 }
@@ -671,19 +671,19 @@ func_1C8E(param_00, param_01, param_02, param_03) {
       break;
     }
 
-    var_08 = var_06.var_0116;
+    var_08 = var_06.origin;
     var_09 = (var_08[0], var_08[1] + param_02, var_08[2] + param_01);
-    var_0A = param_03.var_0116;
+    var_0A = param_03.origin;
     var_0B = (var_0A[0] + self.var_53C0, var_0A[1] + self.var_53C1 + param_02, var_0A[2] + param_01);
     var_07 = sin(var_07 * 90);
-    self.var_0116 = vectorlerp(var_0B, var_09, var_07);
+    self.origin = vectorlerp(var_0B, var_09, var_07);
     wait 0.05;
   }
 }
 
 func_1C8C(param_00) {
   self notify("end_follows");
-  self.var_721C endon("disconnect");
+  self.player endon("disconnect");
   level endon("game_ended");
   self endon("end_follows");
   var_01 = self.var_9815;
@@ -698,8 +698,8 @@ func_1C8C(param_00) {
   self.var_164B = 0;
   var_03 = (70, 270, 0);
   self.var_1C92 = 1;
-  if(!isDefined(level.var_5FF0)) {
-    level.var_5FF0 = 1024;
+  if(!isDefined(level.mapsize)) {
+    level.mapsize = 1024;
   }
 
   for(;;) {
@@ -723,20 +723,20 @@ func_1C8C(param_00) {
     var_08 = self.var_53C0 - 150 * var_06;
     var_09 = self.var_53C1 - 150 * var_07;
     if(self.var_164B && isDefined(self.var_7436)) {
-      var_0A = level.var_5FF0;
+      var_0A = level.mapsize;
       var_0B = level.var_5FEB;
       var_08 = clamp(var_08 + self.var_7436[0] - var_0B[0], var_0A * -1, var_0A) - self.var_7436[0] + var_0B[0];
       var_09 = clamp(var_09 + self.var_7436[1] - var_0B[1], var_0A * -1, var_0A) - self.var_7436[1] + var_0B[1];
     } else {
-      self.var_7436 = var_01.var_0116;
+      self.var_7436 = var_01.origin;
       var_08 = clamp(var_08, -1000, 1000);
       var_09 = clamp(var_09, -1000, 1000);
     }
 
     self.var_53C0 = var_08;
     self.var_53C1 = var_09;
-    self.var_0116 = (self.var_7436[0] + var_08, self.var_7436[1] + var_09 + var_05, max(self.var_7436[2] + var_04, var_01.var_9092[2] + var_05));
-    self.var_001D = var_03;
+    self.origin = (self.var_7436[0] + var_08, self.var_7436[1] + var_09 + var_05, max(self.var_7436[2] + var_04, var_01.var_9092[2] + var_05));
+    self.angles = var_03;
     wait 0.05;
     var_02 = var_01;
   }
@@ -752,7 +752,7 @@ func_1C96() {
   self endon("broadcaster_follow_killer_stop");
   var_00 = self.var_1E99.var_9815;
   var_00 waittill("death");
-  thread func_1CA7(var_00.var_00E6 getentitynumber());
+  thread func_1CA7(var_00.lastattacker getentitynumber());
 }
 
 func_1C97() {
@@ -779,7 +779,7 @@ broadcasterkillballcam() {
     self.var_1E99.watchedball = undefined;
     self allowspectateteam("allies", 1);
     self allowspectateteam("axis", 1);
-    self.var_009F = self.var_1E99.var_9815 getentitynumber();
+    self.forcespectatorclient = self.var_1E99.var_9815 getentitynumber();
     setDvar("scr_game_lockspectatorpov", 1);
     self forcespectatepov(self getxuid(), "first_person");
     self.var_1E99 func_1C95(0.5);
@@ -799,13 +799,13 @@ broadcasterstartballcam() {
     self.var_1E99 notify("end_follows");
     self notify("changeGoalFx");
     self.var_1E99.watchedball = var_01.var_A582[0];
-    self.var_009F = self getentitynumber();
+    self.forcespectatorclient = self getentitynumber();
     wait 0.05;
-    self method_81E2(self.var_1E99, "tag_player", 1);
+    self cameralinkTo(self.var_1E99, "tag_player", 1);
     self.var_1E99 method_8472();
-    var_03 = broadcastermoveballcam(self.var_1E99.watchedball.var_0116, var_02);
+    var_03 = broadcastermoveballcam(self.var_1E99.watchedball.origin, var_02);
     self.var_1E99 moveTo(var_03, 10.5, 5.25, 5.25);
-    self.var_1E99.var_001D = vectortoangles(var_02);
+    self.var_1E99.angles = vectortoangles(var_02);
     self.var_1E99 thread updateballcam();
     thread broadcasterstopballcam();
   }
@@ -831,7 +831,7 @@ broadcasterstopballcam() {
 
     self allowspectateteam("allies", 1);
     self allowspectateteam("axis", 1);
-    self.var_009F = self.var_1E99.var_9815 getentitynumber();
+    self.forcespectatorclient = self.var_1E99.var_9815 getentitynumber();
     setDvar("scr_game_lockspectatorpov", 1);
     self forcespectatepov(self getxuid(), "first_person");
     self.var_1E99 func_1C95(0.5);
@@ -840,31 +840,31 @@ broadcasterstopballcam() {
 }
 
 updateballcam() {
-  self.var_721C endon("disconnect");
-  self.var_721C endon("game_ended");
-  self.var_721C endon("broadcaster_view_set_sky_cam");
-  self.var_721C endon("broadcaster_kill_ballcam");
-  self.var_721C endon("broadcaster_view_player_has_changed");
+  self.player endon("disconnect");
+  self.player endon("game_ended");
+  self.player endon("broadcaster_view_set_sky_cam");
+  self.player endon("broadcaster_kill_ballcam");
+  self.player endon("broadcaster_view_player_has_changed");
   level endon("broadcaster_ball_end");
   for(;;) {
     if(!isDefined(self.watchedball)) {
       break;
     }
 
-    var_00 = self.watchedball.var_0116;
-    var_01 = self.var_0116;
+    var_00 = self.watchedball.origin;
+    var_01 = self.origin;
     var_02 = distance2d(var_00, var_01);
     var_03 = var_00 - var_01;
     var_04 = (var_03[0], var_03[1], 0);
     var_04 = vectorNormalize(var_04);
     var_05 = broadcastermoveballcam(var_00, var_04);
     if(var_02 > 600) {
-      self.var_0116 = var_05;
+      self.origin = var_05;
     } else {
       self moveTo(var_05, 0.5, 0, 0.2);
     }
 
-    self.var_001D = vectortoangles(var_03);
+    self.angles = vectortoangles(var_03);
     wait 0.05;
   }
 }
@@ -875,7 +875,7 @@ func_1C9B() {
   setomnvar("lighting_state", var_01);
   if(!getdvarint("233")) {
     foreach(var_03 in var_00) {
-      if(isDefined(var_03.var_5D56) && isDefined(var_03.var_003A) && var_03.var_003A == "script_brushmodel" || var_03.var_003A == "script_model") {
+      if(isDefined(var_03.var_5D56) && isDefined(var_03.classname) && var_03.classname == "script_brushmodel" || var_03.classname == "script_model") {
         if(var_03.var_5D56 == 0) {
           continue;
         }

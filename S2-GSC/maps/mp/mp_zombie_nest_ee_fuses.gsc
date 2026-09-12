@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_nest_ee_fuses.gsc
 ***********************************************/
 
-func_00F9() {
+main() {
   common_scripts\utility::func_3C87("flag_fuse_entered_correct");
   common_scripts\utility::func_3C87("flag_player_inspected_right_hand");
   common_scripts\utility::func_3C87("flag_cycle_started_once");
@@ -24,11 +24,11 @@ func_00F9() {
 func_784D() {
   level thread lib_0560::func_9009(1);
   thread func_2E9D();
-  maps\mp\mp_zombie_nest_ee_tower_battle::func_170D();
+  maps / mp / mp_zombie_nest_ee_tower_battle::func_170D();
 }
 
 func_7860() {
-  maps\mp\mp_zombie_nest_ee_tower_battle::func_1715();
+  maps / mp / mp_zombie_nest_ee_tower_battle::func_1715();
 }
 
 func_785C() {
@@ -38,10 +38,10 @@ func_785C() {
   var_02 = getEntArray("inner_spire", "targetname");
   var_01 thread lib_0378::func_8D74("aud_tower_shockwave", var_02);
   wait(2.75);
-  level thread maps\mp\gametypes\zombies::func_08B2(var_01.var_0116);
-  var_03 = common_scripts\utility::func_40B0(var_01.var_0116, level.var_744A, undefined, undefined, 3000);
+  level thread maps / mp / gametypes / zombies::func_8B2(var_01.origin);
+  var_03 = common_scripts\utility::func_40B0(var_01.origin, level.players, undefined, undefined, 3000);
   foreach(var_05 in var_03) {
-    var_05 thread func_9B68(var_01.var_0116);
+    var_05 thread func_9B68(var_01.origin);
   }
 
   var_01 thread func_9B69();
@@ -51,11 +51,11 @@ func_785C() {
   func_A689();
   var_07 = getEnt("rhog_control", "targetname");
   if(isDefined(var_07)) {
-    var_07 thread maps\mp\mp_zombie_nest_ee_util::func_4D76();
-    var_07 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("green");
+    var_07 thread maps / mp / mp_zombie_nest_ee_util::func_4D76();
+    var_07 thread maps / mp / mp_zombie_nest_ee_util::func_4D77("green");
   }
 
-  thread maps\mp\mp_zombie_nest_ee_util::func_4D78(1);
+  thread maps / mp / mp_zombie_nest_ee_util::func_4D78(1);
   lib_0557::func_782D("5 Right Hand fuses", "tower confirm hand");
 }
 
@@ -68,9 +68,9 @@ func_9B69(param_00, param_01) {
     param_01 = 0.1;
   }
 
-  playFX(common_scripts\utility::func_44F5("lightning_burst"), self.var_0116);
+  playFX(common_scripts\utility::func_44F5("lightning_burst"), self.origin);
   level thread func_9B71();
-  level thread common_scripts\_exploder::func_088E(213);
+  level thread common_scripts\_exploder::func_88E(213);
   wait(0.1);
   thread lib_0378::func_8D74("aud_tower_strike");
   level thread func_9DC1("tower_lightning_chain_A_1", param_00, param_01);
@@ -96,7 +96,7 @@ func_9B72() {
     var_02 setscriptablepartstate("lightpart", "on");
   }
 
-  level thread common_scripts\_exploder::func_088E(254);
+  level thread common_scripts\_exploder::func_88E(254);
 }
 
 func_9B68(param_00) {
@@ -118,12 +118,12 @@ func_9B68(param_00) {
   wait(var_03);
   lib_0378::func_8D74("zone1Earthquake", "earthquake", var_04);
   if(!common_scripts\utility::func_3C77("flag_bunker_lights_off")) {
-    thread maps\mp\mp_zombie_nest_01::func_3541(var_04);
+    thread maps / mp / mp_zombie_nest_01::func_3541(var_04);
   }
 
-  level thread common_scripts\_exploder::func_088E(207);
+  level thread common_scripts\_exploder::func_88E(207);
   earthquake(0.3, var_04, param_00, 6000, self);
-  function_01BC("tank_rumble", self.var_0116);
+  function_01BC("tank_rumble", self.origin);
   wait(var_04);
   thread func_9B71();
   function_01BD();
@@ -131,7 +131,7 @@ func_9B68(param_00) {
 }
 
 func_9DC1(param_00, param_01, param_02) {
-  var_03 = maps\mp\mp_zombie_nest_ee_util::func_44C8(param_00, 1);
+  var_03 = maps / mp / mp_zombie_nest_ee_util::func_44C8(param_00, 1);
   for(var_04 = 0; var_04 < var_03.size - 4; var_04++) {
     thread func_7203("zmb_electricity_reg_beam_lrg", var_03[var_04], var_03[var_04 + 1], param_01);
     wait(param_02);
@@ -148,36 +148,36 @@ func_9DC1(param_00, param_01, param_02) {
 }
 
 func_9DBC(param_00, param_01) {
-  var_02 = maps\mp\mp_zombie_nest_ee_util::func_44C8(param_00, 1);
+  var_02 = maps / mp / mp_zombie_nest_ee_util::func_44C8(param_00, 1);
   for(var_03 = 0; var_03 < var_02.size - 1; var_03++) {
     thread func_7218(var_02[var_03], var_02[var_03 + 1], param_01);
     wait(param_01);
   }
 
-  level thread common_scripts\_exploder::func_088E(214);
+  level thread common_scripts\_exploder::func_88E(214);
   var_04 = getEnt("right_hand_of_god_model", "targetname");
-  playFXOnTag(level.var_0611["zmb_rhog_on"], var_04, "Tag_Origin");
+  playFXOnTag(level.var_611["zmb_rhog_on"], var_04, "Tag_Origin");
   var_04 lib_0378::func_8D74("aud_right_hand_of_god_ready");
 }
 
 func_7203(param_00, param_01, param_02, param_03) {
-  var_04 = spawn("script_model", param_01.var_0116);
+  var_04 = spawn("script_model", param_01.origin);
   var_04 setModel("tag_origin");
-  var_05 = spawn("script_model", param_02.var_0116);
+  var_05 = spawn("script_model", param_02.origin);
   var_05 setModel("tag_origin");
-  var_04.var_001D = param_01.var_001D;
-  var_06 = anglesToForward(param_02.var_001D);
+  var_04.angles = param_01.angles;
+  var_06 = anglesToForward(param_02.angles);
   var_07 = vectortoangles(var_06 * -1);
-  var_05.var_001D = var_07;
+  var_05.angles = var_07;
   var_08 = launchbeam(param_00, var_04, "tag_origin", var_05, "tag_origin");
-  thread func_16FD(var_04, lib_0547::func_9470(param_01.var_0165), param_03);
-  thread func_16FD(var_05, lib_0547::func_9470(param_02.var_0165), param_03);
+  thread func_16FD(var_04, lib_0547::func_9470(param_01.script_noteworthy), param_03);
+  thread func_16FD(var_05, lib_0547::func_9470(param_02.script_noteworthy), param_03);
   var_09 = 30;
   for(var_0A = 0; var_0A < var_09 / 2; var_0A++) {
     wait(param_03 / var_09);
-    var_08 method_805C();
+    var_08 hide();
     wait(param_03 / var_09);
-    var_08 method_805B();
+    var_08 show();
   }
 
   wait(param_03);
@@ -187,19 +187,19 @@ func_7203(param_00, param_01, param_02, param_03) {
 }
 
 func_7218(param_00, param_01, param_02) {
-  var_03 = spawn("script_model", param_00.var_0116);
+  var_03 = spawn("script_model", param_00.origin);
   var_03 setModel("tag_origin");
-  var_04 = anglesToForward(param_00.var_001D);
-  var_05 = anglestoup(param_00.var_001D);
-  if(param_00.var_0165 == "wire") {
-    playFX(level.var_0611["zmb_fuse_chain_wire"], var_03.var_0116, var_04, var_05);
+  var_04 = anglesToForward(param_00.angles);
+  var_05 = anglestoup(param_00.angles);
+  if(param_00.script_noteworthy == "wire") {
+    playFX(level.var_611["zmb_fuse_chain_wire"], var_03.origin, var_04, var_05);
   }
 
-  if(param_00.var_0165 == "fusebox") {
-    playFX(level.var_0611["zmb_fuse_chain_box"], var_03.var_0116, var_04, var_05);
+  if(param_00.script_noteworthy == "fusebox") {
+    playFX(level.var_611["zmb_fuse_chain_box"], var_03.origin, var_04, var_05);
   }
 
-  var_03 moveTo(param_01.var_0116, param_02);
+  var_03 moveTo(param_01.origin, param_02);
   wait(param_02);
   var_03 delete();
 }
@@ -216,13 +216,13 @@ func_A689() {
   var_01 maps\mp\_utility::func_2CED(2, ::lib_0367::func_8E3C, "righthandgodtouch");
   var_00 common_scripts\utility::func_9D9F();
   var_02 = getEnt("right_hand_of_god_model", "targetname");
-  playFXOnTag(level.var_0611["zmb_rhog_init"], var_02, "Tag_Origin");
+  playFXOnTag(level.var_611["zmb_rhog_init"], var_02, "Tag_Origin");
 }
 
 func_785D() {
   var_00 = getEnt("rhog_control", "targetname");
   if(isDefined(var_00)) {
-    var_00 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("red");
+    var_00 thread maps / mp / mp_zombie_nest_ee_util::func_4D77("red");
   }
 
   func_7E91(1);
@@ -230,7 +230,7 @@ func_785D() {
   level thread func_5413();
   level thread func_3F26();
   if(1) {
-    if(!1 || 1 && level.var_744A.size == 1) {
+    if(!1 || 1 && level.players.size == 1) {
       level thread quest_step_match_fuses_helper();
     }
   }
@@ -291,7 +291,7 @@ func_3F2B(param_00) {
       if(!common_scripts\utility::func_3C77("flag_fuses_highlighted")) {
         if(0) {
           foreach(var_06 in var_01) {
-            foreach(var_08 in level.var_744A) {
+            foreach(var_08 in level.players) {
               var_06 hudoutlineenableforclient(var_08, 0, 0);
             }
           }
@@ -309,7 +309,7 @@ func_3F2B(param_00) {
     if(common_scripts\utility::func_3C77("flag_fuses_highlighted")) {
       if(0) {
         foreach(var_06 in var_01) {
-          foreach(var_08 in level.var_744A) {
+          foreach(var_08 in level.players) {
             var_06 hudoutlinedisableforclient(var_08);
           }
         }
@@ -410,12 +410,12 @@ func_8A1E() {
   func_4873(0);
   lib_0557::func_7822("5 Right Hand fuses", &"ZOMBIE_NEST_HINT_STEP_MATCH_FUSES");
   foreach(var_01 in level.var_665B) {
-    var_02 = function_021F(var_01.var_01A2, "targetname");
+    var_02 = function_021F(var_01.target, "targetname");
     if(var_02.size > 0) {
       var_01.var_5F58 = var_02[0];
     }
 
-    var_03 = common_scripts\utility::func_44BE(var_01.var_01A2, "targetname");
+    var_03 = common_scripts\utility::func_44BE(var_01.target, "targetname");
     foreach(var_05 in var_03) {
       if(!isDefined(var_05.var_8260)) {
         continue;
@@ -442,7 +442,7 @@ func_8A1E() {
 
   func_3F2B(1);
   foreach(var_01 in level.var_665B) {
-    if(lib_0547::func_9470(var_01.var_0165) != 1) {
+    if(lib_0547::func_9470(var_01.script_noteworthy) != 1) {
       var_01 thread func_2E9E();
     }
   }
@@ -454,7 +454,7 @@ func_8A1E() {
 func_9E1F() {
   level endon("nest_ee_fuses_complete");
   level endon("flag_fuse_entered_correct");
-  if(level.var_744A.size > 1) {
+  if(level.players.size > 1) {
     var_00 = 65;
   } else {
     var_00 = 75;
@@ -478,9 +478,9 @@ func_92D6(param_00) {
     return;
   }
 
-  self.var_6643 moveTo(self.var_6647.var_0116, 0.1, 0, 0);
+  self.var_6643 moveTo(self.var_6647.origin, 0.1, 0, 0);
   wait(0.1);
-  self.var_6643 moveTo(self.var_6646.var_0116, param_00 - 0.1, 0, 0);
+  self.var_6643 moveTo(self.var_6646.origin, param_00 - 0.1, 0, 0);
 }
 
 func_868D() {
@@ -488,7 +488,7 @@ func_868D() {
     return;
   }
 
-  self.var_6643 moveTo(self.var_6647.var_0116, 0.5, 0, 0);
+  self.var_6643 moveTo(self.var_6647.origin, 0.5, 0, 0);
 }
 
 func_868C() {
@@ -496,7 +496,7 @@ func_868C() {
     return;
   }
 
-  self.var_6643 moveTo(self.var_6646.var_0116, 0.5, 0, 0);
+  self.var_6643 moveTo(self.var_6646.origin, 0.5, 0, 0);
 }
 
 func_9ED3() {
@@ -505,7 +505,7 @@ func_9ED3() {
 }
 
 func_6B34() {
-  common_scripts\utility::func_0FB2(level.var_665B, ::func_868C);
+  common_scripts\utility::array_thread(level.var_665B, ::func_868C);
   lib_0557::func_7822("5 Right Hand fuses", &"ZOMBIE_NEST_HINT_STEP_RESET_FUSES");
   func_3F2B(0);
   func_4873(1);
@@ -516,7 +516,7 @@ func_6B34() {
 }
 
 func_2EA4() {
-  var_00 = common_scripts\utility::func_7A33(level.var_744A);
+  var_00 = common_scripts\utility::func_7A33(level.players);
   var_00 thread lib_0367::func_8E3C("circuitmapfail");
 }
 
@@ -524,8 +524,8 @@ func_2E9A() {
   wait(2);
   var_00 = getEnt("inner_spire", "targetname");
   if(isDefined(var_00)) {
-    foreach(var_02 in level.var_744A) {
-      if(distance2d(var_02.var_0116, var_00.var_0116) < 750) {
+    foreach(var_02 in level.players) {
+      if(distance2d(var_02.origin, var_00.origin) < 750) {
         var_02 thread lib_0367::func_8E3C("lightningrodscomplete");
       }
     }
@@ -533,14 +533,14 @@ func_2E9A() {
 
   wait(9);
   if(isDefined(var_00)) {
-    foreach(var_02 in level.var_744A) {
-      if(distance2d(var_02.var_0116, var_00.var_0116) < 750) {
+    foreach(var_02 in level.players) {
+      if(distance2d(var_02.origin, var_00.origin) < 750) {
         var_02 thread lib_0367::func_8E3C("lightningflow");
       }
     }
   }
 
-  var_02 = maps\mp\mp_zombie_nest_ee_util::func_4649();
+  var_02 = maps / mp / mp_zombie_nest_ee_util::func_4649();
   var_02 thread lib_0367::func_8E3B("conv_righthandaltarfinish");
 }
 
@@ -660,25 +660,25 @@ func_3D63() {
 
 func_98A3() {
   wait(1.5);
-  level.var_744A[0] setOrigin((954.139, -3445.2, 1502.04));
-  level.var_744A[0] setangles((0, -152.705, 0));
+  level.players[0] setOrigin((954.139, -3445.2, 1502.04));
+  level.players[0] setplayerangles((0, -152.705, 0));
 }
 
 func_3F29() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 maps\mp\zombies\_zombies_rank::func_AC23("righthandofgod");
     var_01 lib_0378::func_8D74("objective_complete", "righthandofgod");
   }
 }
 
 func_6BFF() {
-  while(!isDefined(level.var_AC1D) && !isDefined(level.var_744A)) {
+  while(!isDefined(level.var_AC1D) && !isDefined(level.players)) {
     wait 0.05;
   }
 
   foreach(var_01 in level.var_AC1D) {
     if(var_01.var_819A == "safe_haven_to_bridge") {
-      var_01 notify("open", level.var_744A[0]);
+      var_01 notify("open", level.players[0]);
     }
   }
 }
@@ -723,16 +723,16 @@ func_3F28() {
 
 func_2E9E() {
   level endon("nest_ee_fuses_complete");
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(!isDefined(var_01.var_306C)) {
       var_01.var_306C = 0;
     }
   }
 
   for(;;) {
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       if(!var_01.var_306C) {
-        if(distance(self.var_0116, var_01.var_0116) < 128) {
+        if(distance(self.origin, var_01.origin) < 128) {
           var_04 = var_01 lib_0367::func_8E3D("circuitclue");
           if(isDefined(var_04)) {
             var_01.var_306C = 1;
@@ -748,8 +748,8 @@ func_2E9E() {
 func_2E9D() {
   wait(13);
   var_00 = undefined;
-  foreach(var_02 in level.var_744A) {
-    if(var_02 maps\mp\mp_zombie_nest_ee_util::func_740A()) {
+  foreach(var_02 in level.players) {
+    if(var_02 maps / mp / mp_zombie_nest_ee_util::func_740A()) {
       var_00 = var_02;
       break;
     }
@@ -949,7 +949,7 @@ func_9ECC() {
 func_36B8() {
   common_scripts\utility::func_3C8F("flag_fuse_entered_correct");
   func_8624();
-  common_scripts\utility::func_0FB2(level.var_665B, ::func_868D);
+  common_scripts\utility::array_thread(level.var_665B, ::func_868D);
   lib_0557::func_782D("5 Right Hand fuses", "fuse matching start");
   level notify("nest_ee_fuses_complete");
 }
@@ -996,7 +996,7 @@ func_8BF2() {
       for(var_02 = 0; var_02 < level.var_24A2.size; var_02++) {
         if(level.var_292A[var_02] == level.var_24A2[var_02]) {
           if(var_02 == var_01) {
-            playclientsound("zm_ctcms_fuse", undefined, var_00.var_0116);
+            playclientsound("zm_ctcms_fuse", undefined, var_00.origin);
           }
         }
       }
@@ -1101,20 +1101,20 @@ func_250B(param_00) {
 }
 
 func_8C06() {
-  self method_805B();
+  self show();
 }
 
 func_4D0F() {
-  self method_805C();
+  self hide();
 }
 
 func_52E4() {
   level thread func_8BF2();
   var_00 = getEntArray("nest_ee_fuse_trigger", "targetname");
-  var_00 = common_scripts\utility::func_0FA5(var_00, ::func_8323);
+  var_00 = common_scripts\utility::func_FA5(var_00, ::func_8323);
   var_01 = getEnt("rhog_control", "targetname");
   if(isDefined(var_01)) {
-    var_01 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("off");
+    var_01 thread maps / mp / mp_zombie_nest_ee_util::func_4D77("off");
   }
 
   level.var_665B = var_00;
@@ -1139,5 +1139,5 @@ func_52E3() {
 }
 
 func_8323(param_00, param_01) {
-  return lib_0547::func_9470(param_00.var_0165) < lib_0547::func_9470(param_01.var_0165);
+  return lib_0547::func_9470(param_00.script_noteworthy) < lib_0547::func_9470(param_01.script_noteworthy);
 }

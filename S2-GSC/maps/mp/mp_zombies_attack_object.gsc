@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombies_attack_object.gsc
 ************************************************/
 
-func_00D5() {
+init() {
   lib_0547::func_7BD0("zombie_attack_tower_lever", ::preform_zombie_object_melee, ::preform_zombie_object_melee_interrupt, 3.75);
 }
 
@@ -12,8 +12,8 @@ create_inanimate_zombie_enemy(param_00, param_01, param_02, param_03, param_04, 
   self endon("entitydeleted");
   self.optionalattackpositions = param_07;
   self.maxzombies = param_00;
-  self.var_FB = param_01;
-  self.var_BC = param_01;
+  self.maxhealth = param_01;
+  self.health = param_01;
   self.shouldterminate = 0;
   var_0B = 0.125;
   foreach(var_0D in param_06) {
@@ -27,11 +27,11 @@ create_inanimate_zombie_enemy(param_00, param_01, param_02, param_03, param_04, 
   var_0F = get_cur_objective_health();
   while(var_0F > 0 && !self.shouldterminate) {
     if(isDefined(param_0A)) {
-      param_0A setclientomnvar("ui_zm_turret_health", self.var_BC * 0.0025);
+      param_0A setclientomnvar("ui_zm_turret_health", self.health * 0.0025);
     }
 
-    var_10 = lib_0547::func_43F0(self.var_116, param_04, param_03, 1);
-    var_10 = common_scripts\utility::func_40B0(self.var_116, var_10);
+    var_10 = lib_0547::func_43F0(self.origin, param_04, param_03, 1);
+    var_10 = common_scripts\utility::func_40B0(self.origin, var_10);
     foreach(var_12 in var_10) {
       if(var_12 has_a_distraction()) {
         if(lib_0547::func_5565(var_12.enemy_object, self)) {
@@ -85,7 +85,7 @@ get_cur_objective_health() {
   if(isDefined(self.capture_health)) {
     var_00 = self.capture_health;
   } else {
-    var_00 = self.var_BC;
+    var_00 = self.health;
   }
 
   return var_00;
@@ -108,7 +108,7 @@ aa_gun_health_check(param_00) {
   param_00 endon("left_aa_gun");
   for(;;) {
     param_00 waittill("aagun_damage");
-    self.var_BC = self.var_BC - 5;
+    self.health = self.health - 5;
   }
 }
 
@@ -132,10 +132,10 @@ preform_zombie_object_melee(param_00) {
     return;
   }
 
-  var_01 = self[[maps\mp\agents\_agent_utility::func_A59("get_action_params")]]();
+  var_01 = self[[maps / mp / agents / _agent_utility::func_A59("get_action_params")]]();
   var_02 = undefined;
   foreach(var_04 in ["zombie_attack_tower_lever", "attack_stand"]) {
-    var_02 = maps\mp\agents\_scripted_agent_anim_util::func_87C(var_04, var_01);
+    var_02 = maps / mp / agents / _scripted_agent_anim_util::func_87C(var_04, var_01);
     if(isDefined(var_02)) {
       break;
     }
@@ -146,12 +146,12 @@ preform_zombie_object_melee(param_00) {
   }
 
   self scragentsetscripted(1);
-  self scragentsetorientmode("face angle abs", self.var_9B61.var_1D);
-  self setOrigin(param_00.var_116, 0);
+  self scragentsetorientmode("face angle abs", self.var_9B61.angles);
+  self setOrigin(param_00.origin, 0);
   for(;;) {
     var_06 = self method_83DB(var_02);
     var_07 = randomint(var_06);
-    maps\mp\agents\_scripted_agent_anim_util::func_71FA(var_02, var_07, 1, "scripted_anim");
+    maps / mp / agents / _scripted_agent_anim_util::func_71FA(var_02, var_07, 1, "scripted_anim");
     if(isDefined(self.enemy_object)) {
       self.enemy_object take_objective_health(45);
       if(isDefined(self.enemy_object.ondamagetakenfunc)) {
@@ -167,7 +167,7 @@ take_objective_health(param_00) {
     return;
   }
 
-  self.var_BC = self.var_BC - param_00;
+  self.health = self.health - param_00;
 }
 
 preform_zombie_object_melee_interrupt(param_00) {
@@ -217,13 +217,13 @@ travel_and_attack_position(param_00, param_01) {
     self.var_6941 = 1;
   }
 
-  while(distance(self.var_116, self.var_9B61.var_116) > 64) {
+  while(distance(self.origin, self.var_9B61.origin) > 64) {
     wait 0.05;
   }
 
   if(lib_0547::func_5565(self.var_A4B, "zombie_exploder")) {
-    param_01.var_BC = param_01.var_BC - int(param_01.var_FB / 5);
-    lib_0563::func_AB99(undefined, undefined, self.var_BC + 1, undefined, "MOD_BULLET", "m1911_zm", self.var_116, (0, 0, 0), "tag_origin", 0, "tag_weapon");
+    param_01.health = param_01.health - int(param_01.maxhealth / 5);
+    lib_0563::func_AB99(undefined, undefined, self.health + 1, undefined, "MOD_BULLET", "m1911_zm", self.origin, (0, 0, 0), "tag_origin", 0, "tag_weapon");
     return;
   }
 

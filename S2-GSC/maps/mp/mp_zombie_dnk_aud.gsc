@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_dnk_aud.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   lib_0367::func_8E3E("bp_ship");
   func_7BBA();
   func_5C22();
@@ -54,22 +54,22 @@ start_intermission_music_override_callback() {
 }
 
 func_7248() {
-  soundscripts\_snd_common_zmb_dlc3::dlc3_altered_state_init();
+  soundscripts / _snd_common_zmb_dlc3::dlc3_altered_state_init();
   if(!isDefined(self.var_11CB)) {
     self.var_11CB = spawnStruct();
   }
 }
 
 func_7330() {
-  soundscripts\_snd_common_zmb_dlc3::dlc3_player_spawned();
+  soundscripts / _snd_common_zmb_dlc3::dlc3_player_spawned();
 }
 
 func_A979(param_00) {
-  soundscripts\_snd_common_zmb_dlc3::dlc3_wave_begin(param_00);
+  soundscripts / _snd_common_zmb_dlc3::dlc3_wave_begin(param_00);
 }
 
 func_A97A() {
-  soundscripts\_snd_common_zmb_dlc3::dlc3_wave_end();
+  soundscripts / _snd_common_zmb_dlc3::dlc3_wave_end();
 }
 
 func_ABF8(param_00, param_01) {
@@ -87,7 +87,7 @@ func_ABF9(param_00) {
 }
 
 start_water_trap(param_00) {
-  var_01 = param_00.var_117.var_116;
+  var_01 = param_00.owner.origin;
   lib_0380::func_2889("zmb_dnk_trap_water_activate", undefined, var_01);
 }
 
@@ -217,8 +217,8 @@ zmb_dnk_ship_tilt(param_00) {
     var_02 = -1 * var_02;
   }
 
-  foreach(var_04 in level.var_744A) {
-    var_05 = var_04.var_116 + (var_02, 0, 0);
+  foreach(var_04 in level.players) {
+    var_05 = var_04.origin + (var_02, 0, 0);
     lib_0380::func_2889("mp_bat_waves_low", var_04, var_05);
     wait(0.3);
     lib_0380::func_2888("zmb_dnk_ship_tilt", var_04);
@@ -230,7 +230,7 @@ start_vehicle_slide(param_00, param_01) {
   var_02 = self;
   switch (param_01) {
     case "ship_tilting_starboard":
-      if(self.var_116 != self.starboardorigin) {
+      if(self.origin != self.starboardorigin) {
         var_02.slide_strt = lib_0380::func_288B("zmb_dnk_truck_slide_strt", undefined, var_02);
         var_02.slide_lp = lib_0380::func_6844("zmb_dnk_truck_slide_lp", undefined, var_02, 0.5);
         var_02 thread metal_wronk_oneshot(param_00);
@@ -243,7 +243,7 @@ start_vehicle_slide(param_00, param_01) {
       break;
 
     case "ship_tilting_port":
-      if(self.var_116 != self.portorigin) {
+      if(self.origin != self.portorigin) {
         var_02.slide_strt = lib_0380::func_288B("zmb_dnk_truck_slide_strt", undefined, var_02);
         var_02.slide_lp = lib_0380::func_6844("zmb_dnk_truck_slide_lp", undefined, var_02, 0.5);
         var_02 thread metal_wronk_oneshot(param_00);
@@ -256,7 +256,7 @@ start_vehicle_slide(param_00, param_01) {
       break;
 
     case "ship_tilting_original":
-      if(self.var_116 != self.var_6C55) {
+      if(self.origin != self.var_6C55) {
         var_02.slide_strt = lib_0380::func_288B("zmb_dnk_truck_slide_strt", undefined, var_02);
         var_02.slide_lp = lib_0380::func_6844("zmb_dnk_truck_slide_lp", undefined, var_02, 0.5);
         var_02 thread metal_wronk_oneshot(param_00);
@@ -299,11 +299,11 @@ tire_squeak_oneshot(param_00) {
 repair_leaking_water() {
   var_00 = self;
   level endon("sg_obj_timeout");
-  lib_0380::func_6842("mp_bat_pipe_burst", undefined, var_00.var_116);
+  lib_0380::func_6842("mp_bat_pipe_burst", undefined, var_00.origin);
   wait(0.5);
-  var_00.spraying_snd = lib_0380::func_6842("emt_water_pipe_spray_lp", undefined, var_00.var_116, 0.1);
-  var_00.dripping_snd = lib_0380::func_6842("mp_bat_hose_water_lp", undefined, var_00.var_116, 0.1);
-  var_00.humming_snd = lib_0380::func_6842("emt_pipe_water_hum_in_lp", undefined, var_00.var_116, 0.1);
+  var_00.spraying_snd = lib_0380::func_6842("emt_water_pipe_spray_lp", undefined, var_00.origin, 0.1);
+  var_00.dripping_snd = lib_0380::func_6842("mp_bat_hose_water_lp", undefined, var_00.origin, 0.1);
+  var_00.humming_snd = lib_0380::func_6842("emt_pipe_water_hum_in_lp", undefined, var_00.origin, 0.1);
   self waittill("interact_completed");
   lib_0380::func_6850(var_00.spraying_snd, 0.75);
   lib_0380::func_6850(var_00.dripping_snd, 0.75);
@@ -324,7 +324,7 @@ zmb_dnk_uber_leak_stop() {
 }
 
 zmb_fish_jump(param_00) {
-  lib_0380::func_2889("zmb_fish_jump", undefined, param_00.var_116);
+  lib_0380::func_2889("zmb_fish_jump", undefined, param_00.origin);
 }
 
 ee_follow_fish_earthquake(param_00) {
@@ -339,8 +339,8 @@ ee_follow_fish_earthquake(param_00) {
 }
 
 ctf_void_enter() {
-  foreach(var_01 in level.var_744A) {
-    var_01 soundscripts\_snd_common_zmb_dlc3::dlc3_altered_state_clear();
+  foreach(var_01 in level.players) {
+    var_01 soundscripts / _snd_common_zmb_dlc3::dlc3_altered_state_clear();
     var_01 method_8626("enter_the_void", 3);
     var_01 notify("kill_dlc3_wave_mus_switcher");
     var_01 thread play_void_music();
@@ -352,7 +352,7 @@ ctf_void_enter() {
 }
 
 ctf_void_exit() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 method_8627("enter_the_void", 3);
     var_01 lib_0366::func_8E09();
     var_01 notify("kill_void_music_thread");

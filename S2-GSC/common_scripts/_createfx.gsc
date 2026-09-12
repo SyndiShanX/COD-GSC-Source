@@ -200,8 +200,8 @@ func_84A8() {
 func_2619() {
   setdvarifuninitialized("curr_exp_num", 1);
   var_00 = getdvarint("curr_exp_num");
-  for(var_01 = 0; var_01 < level.var_05ED.var_83A3.size; var_01++) {
-    var_02 = level.var_05ED.var_83A3[var_01];
+  for(var_01 = 0; var_01 < level._createfx.var_83A3.size; var_01++) {
+    var_02 = level._createfx.var_83A3[var_01];
     if(var_02.var_A265["type"] == "oneshotfx") {
       function_014E(var_02.var_5EED, 1);
       wait 0.05;
@@ -210,7 +210,7 @@ func_2619() {
       var_02.var_A265["exploder"] = var_00;
       var_02.var_A265["delay"] = 0;
       var_02.var_A265["exploder_type"] = "normal";
-      var_02 common_scripts\utility::func_0894();
+      var_02 common_scripts\utility::func_894();
       continue;
     }
 
@@ -224,20 +224,20 @@ func_2619() {
     }
   }
 
-  level.var_05ED.var_5991 = 1;
+  level._createfx.var_5991 = 1;
 }
 
-func_27F4() {
-  level.var_05ED = spawnStruct();
-  level.var_05ED.var_00B1 = spawn("script_origin", (0, 0, 0));
-  level.var_05ED.var_00B1.var_3F2F = loadfx("vfx/explosion/frag_grenade_default");
-  level.var_05ED.var_00B1.var_8F2C = "null";
-  level.var_05ED.var_00B1.var_014F = 256;
+createfx_common() {
+  level._createfx = spawnStruct();
+  level._createfx.var_B1 = spawn("script_origin", (0, 0, 0));
+  level._createfx.var_B1.var_3F2F = loadfx("vfx/explosion/frag_grenade_default");
+  level._createfx.var_B1.var_8F2C = "null";
+  level._createfx.var_B1.var_14F = 256;
   wait 0.05;
   common_scripts\utility::func_3C87("createfx_saving");
   common_scripts\utility::func_3C87("createfx_started");
-  if(!isDefined(level.var_27EE)) {
-    level.var_27EE = [];
+  if(!isDefined(level.createfx)) {
+    level.createfx = [];
   }
 
   level.var_27FD = 0;
@@ -246,33 +246,33 @@ func_27F4() {
 }
 
 func_51F6() {
-  level.var_05ED.var_83AA = 0;
-  level.var_05ED.var_83A8 = 0;
-  level.var_05ED.var_83A9 = 0;
-  level.var_05ED.var_83AB = 0;
-  level.var_05ED.var_83AC = 0;
-  level.var_05ED.var_83AD = 0;
-  level.var_05ED.var_83A2 = [];
-  level.var_05ED.var_83A3 = [];
-  level.var_05ED.var_5991 = 0;
-  level.var_05ED.var_8C29 = 0;
-  level.var_05ED.var_8BF0 = 0;
-  level.var_05ED.var_7A76 = 1;
-  level.var_05ED.var_8CFC = 0;
-  level.var_05ED.var_8CFE = 0;
-  level.var_05ED.var_5E43 = 0;
-  level.var_05ED.var_1486 = 0;
-  level.var_05ED.var_838D = 0;
-  level.var_05ED.var_7332 = getdvarfloat("5502");
+  level._createfx.var_83AA = 0;
+  level._createfx.var_83A8 = 0;
+  level._createfx.var_83A9 = 0;
+  level._createfx.var_83AB = 0;
+  level._createfx.var_83AC = 0;
+  level._createfx.var_83AD = 0;
+  level._createfx.var_83A2 = [];
+  level._createfx.var_83A3 = [];
+  level._createfx.var_5991 = 0;
+  level._createfx.var_8C29 = 0;
+  level._createfx.var_8BF0 = 0;
+  level._createfx.var_7A76 = 1;
+  level._createfx.var_8CFC = 0;
+  level._createfx.var_8CFE = 0;
+  level._createfx.var_5E43 = 0;
+  level._createfx.var_1486 = 0;
+  level._createfx.var_838D = 0;
+  level._createfx.player_speed = getdvarfloat("5502");
 }
 
 func_51FE() {
-  level.var_05ED.var_5E6F = [];
-  level.var_05ED.var_5E6F["escape"] = 1;
-  level.var_05ED.var_5E6F["BUTTON_LSHLDR"] = 1;
-  level.var_05ED.var_5E6F["BUTTON_RSHLDR"] = 1;
-  level.var_05ED.var_5E6F["mouse1"] = 1;
-  level.var_05ED.var_5E6F["ctrl"] = 1;
+  level._createfx.var_5E6F = [];
+  level._createfx.var_5E6F["escape"] = 1;
+  level._createfx.var_5E6F["BUTTON_LSHLDR"] = 1;
+  level._createfx.var_5E6F["BUTTON_RSHLDR"] = 1;
+  level._createfx.var_5E6F["mouse1"] = 1;
+  level._createfx.var_5E6F["ctrl"] = 1;
 }
 
 func_5194() {
@@ -301,29 +301,29 @@ func_5194() {
   var_00["soundfx_dynamic"]["selected"] = (1, 1, 0.2);
   var_00["soundfx_dynamic"]["highlighted"] = (0.3, 1, 0.3);
   var_00["soundfx_dynamic"]["default"] = (0.1, 1, 0.1);
-  level.var_05ED.var_2508 = var_00;
+  level._createfx.var_2508 = var_00;
 }
 
 func_1B6D() {
-  if(level.var_64F8) {
+  if(level.mp_createfx) {
     for(;;) {
-      if(level.var_05ED.var_8BF0) {}
+      if(level._createfx.var_8BF0) {}
 
       wait(0.1);
     }
   }
 }
 
-func_2808() {
+createfxlogic() {
   waittillframeend;
   wait 0.05;
   wait(10);
-  if(!isDefined(level.var_0611)) {
-    level.var_0611 = [];
+  if(!isDefined(level.var_611)) {
+    level.var_611 = [];
   }
 
   if(getDvar("5855") == "") {} else if(getDvar("5855") == common_scripts\utility::func_4381()) {
-    [[level.var_3F0C]]();
+    [[level.func_position_player]]();
   }
 
   func_51A1();
@@ -343,8 +343,8 @@ func_2808() {
   level.var_1DDB = [];
   var_00 = (0, 0, 0);
   common_scripts\utility::func_3C8F("createfx_started");
-  if(!level.var_64F8) {
-    var_00 = level.var_721C.var_0116;
+  if(!level.mp_createfx) {
+    var_00 = level.player.origin;
   }
 
   var_01 = undefined;
@@ -365,14 +365,14 @@ func_2808() {
   thread func_1B6D();
   thread func_0646();
   for(;;) {
-    level.var_721C notify("releasepadmonitors", "createfx");
+    level.player notify("releasepadmonitors", "createfx");
     var_06 = 0;
-    var_07 = anglestoright(level.var_721C getangles());
-    var_08 = anglesToForward(level.var_721C getangles());
-    var_09 = anglestoup(level.var_721C getangles());
+    var_07 = anglestoright(level.player getplayerangles());
+    var_08 = anglesToForward(level.player getplayerangles());
+    var_09 = anglestoup(level.player getplayerangles());
     var_0A = 0.85;
     var_0B = var_08 * 750;
-    level.var_2803 = bulletTrace(level.var_721C getEye(), level.var_721C getEye() + var_0B, 0, undefined);
+    level.var_2803 = bulletTrace(level.player getEye(), level.player getEye() + var_0B, 0, undefined);
     var_0C = undefined;
     level.var_1DD8 = [];
     level.var_1DD0 = [];
@@ -490,13 +490,13 @@ func_2808() {
       }
     }
 
-    if(isDefined(level.var_05ED.var_83A4)) {
+    if(isDefined(level._createfx.var_83A4)) {
       common_scripts\_createfxmenu::func_610E();
     }
 
     for(var_12 = 0; var_12 < level.var_2804.size; var_12++) {
       var_03 = level.var_2804[var_12];
-      var_13 = level.var_721C getvieworigin();
+      var_13 = level.player getvieworigin();
       var_14 = vectorNormalize(var_03.var_A265["origin"] - var_13);
       var_15 = vectordot(var_08, var_14);
       if(var_15 < var_0A) {
@@ -531,8 +531,8 @@ func_2808() {
       func_A0CA();
     }
 
-    if(!level.var_64F8) {
-      var_00 = [[level.var_3F0D]](var_00);
+    if(!level.mp_createfx) {
+      var_00 = [[level.func_position_player_get]](var_00);
     }
 
     var_01 = var_0C;
@@ -542,8 +542,8 @@ func_2808() {
       common_scripts\_createfxmenu::func_86C9("none");
     }
 
-    if(level.var_05ED.var_83A3.size) {
-      var_05 = level.var_05ED.var_83A3[level.var_05ED.var_83A3.size - 1];
+    if(level._createfx.var_83A3.size) {
+      var_05 = level._createfx.var_83A3[level._createfx.var_83A3.size - 1];
       continue;
     }
 
@@ -556,33 +556,33 @@ func_62A4() {
   var_01 = func_1DCF("ctrl");
   if(func_1DCF(".")) {
     if(var_01) {
-      if(level.var_05ED.var_7332 < 190) {
-        level.var_05ED.var_7332 = 190;
+      if(level._createfx.player_speed < 190) {
+        level._createfx.player_speed = 190;
       } else {
-        level.var_05ED.var_7332 = level.var_05ED.var_7332 + 10;
+        level._createfx.player_speed = level._createfx.player_speed + 10;
       }
     } else {
-      level.var_05ED.var_7332 = level.var_05ED.var_7332 + 5;
+      level._createfx.player_speed = level._createfx.player_speed + 5;
     }
 
     var_00 = 1;
   } else if(func_1DCF(",")) {
     if(var_01) {
-      if(level.var_05ED.var_7332 > 190) {
-        level.var_05ED.var_7332 = 190;
+      if(level._createfx.player_speed > 190) {
+        level._createfx.player_speed = 190;
       } else {
-        level.var_05ED.var_7332 = level.var_05ED.var_7332 - 10;
+        level._createfx.player_speed = level._createfx.player_speed - 10;
       }
     } else {
-      level.var_05ED.var_7332 = level.var_05ED.var_7332 - 5;
+      level._createfx.player_speed = level._createfx.player_speed - 5;
     }
 
     var_00 = 1;
   }
 
   if(var_00) {
-    level.var_05ED.var_7332 = clamp(level.var_05ED.var_7332, 5, 500);
-    [[level.var_3F0B]]();
+    level._createfx.player_speed = clamp(level._createfx.player_speed, 5, 500);
+    [[level.func_player_speed]]();
   }
 }
 
@@ -628,8 +628,8 @@ func_5FCF(param_00, param_01, param_02, param_03, param_04) {
     return;
   }
 
-  if(level.var_05ED.var_838D) {
-    level.var_05ED.var_838D = 0;
+  if(level._createfx.var_838D) {
+    level._createfx.var_838D = 0;
     param_00 = undefined;
   } else if(func_838F()) {
     param_00 = undefined;
@@ -656,7 +656,7 @@ func_5FCF(param_00, param_01, param_02, param_03, param_04) {
         level.var_27F9 = 0;
         level.var_2801 = !var_08;
         if(!param_03) {
-          var_09 = level.var_05ED.var_83A3.size;
+          var_09 = level._createfx.var_83A3.size;
           func_23B6();
           if(var_08 && var_09 == 1) {
             func_8390(var_05, var_06);
@@ -690,9 +690,9 @@ func_5FCF(param_00, param_01, param_02, param_03, param_04) {
 }
 
 func_33C3(param_00, param_01) {
-  var_02 = level.var_721C getvieworigin();
-  var_03 = level.var_721C getangles();
-  var_04 = level.var_05ED.var_2508[self.var_A265["type"]][param_01];
+  var_02 = level.player getvieworigin();
+  var_03 = level.player getplayerangles();
+  var_04 = level._createfx.var_2508[self.var_A265["type"]][param_01];
   var_05 = 0;
   var_06 = 1;
   var_07 = (0, 0, 0);
@@ -739,7 +739,7 @@ func_2800(param_00, param_01, param_02) {
   if(self.var_9929 > 0) {
     var_05 = func_42CE();
     var_06 = param_02 * var_05.size * -2.93 * param_01;
-    var_07 = level.var_05ED.var_2508[self.var_A265["type"]][param_00];
+    var_07 = level._createfx.var_2508[self.var_A265["type"]][param_00];
     if(isDefined(self.var_55E4)) {
       var_07 = (1, 0.5, 0);
     }
@@ -803,30 +803,30 @@ func_838E() {
 }
 
 func_8C29() {
-  if(level.var_05ED.var_8C29) {} else {}
+  if(level._createfx.var_8C29) {} else {}
 
-  level.var_05ED.var_8C29 = !level.var_05ED.var_8C29;
+  level._createfx.var_8C29 = !level._createfx.var_8C29;
 }
 
 func_8BF0() {
-  if(level.var_64F8) {
-    level.var_05ED.var_8BF0 = !level.var_05ED.var_8BF0;
+  if(level.mp_createfx) {
+    level._createfx.var_8BF0 = !level._createfx.var_8BF0;
   }
 }
 
 func_4A5A(param_00) {
-  if(level.var_05ED.var_83A3.size > 0 && level.var_27F9 == 0) {
+  if(level._createfx.var_83A3.size > 0 && level.var_27F9 == 0) {
     param_00 = func_83A1(param_00);
     if(!func_2906("selected_ents")) {
       func_6691("selected_ents");
     }
 
-    if(!isDefined(level.var_05ED.var_7A77)) {
-      level.var_05ED.var_7A77 = "";
+    if(!isDefined(level._createfx.var_7A77)) {
+      level._createfx.var_7A77 = "";
     }
 
-    func_85A6("Rate", level.var_05ED.var_7A77);
-    if(level.var_05ED.var_8CFC) {
+    func_85A6("Rate", level._createfx.var_7A77);
+    if(level._createfx.var_8CFC) {
       var_01 = "on";
       var_02 = (0, 1, 0);
     } else {
@@ -835,7 +835,7 @@ func_4A5A(param_00) {
     }
 
     func_85A6("Snap2Normal( S ):", var_01, var_02);
-    if(level.var_05ED.var_8CFE) {
+    if(level._createfx.var_8CFE) {
       var_03 = "on";
       var_04 = (0, 1, 0);
     } else {
@@ -844,7 +844,7 @@ func_4A5A(param_00) {
     }
 
     func_85A6("90deg Snap( L ):", var_03, var_04);
-    if(level.var_05ED.var_5E43) {
+    if(level._createfx.var_5E43) {
       var_05 = "on";
       var_06 = (0, 1, 0);
     } else {
@@ -854,14 +854,14 @@ func_4A5A(param_00) {
 
     func_85A6("Local Rotation( R ):", var_05, var_06);
     func_85A6("Selection:", func_7E32());
-    func_85A6("Camera Speed( </>):", level.var_05ED.var_7332);
-    if(!level.var_64F8) {
-      func_85A6("Dist To Cam", level.var_05ED.var_83B0);
+    func_85A6("Camera Speed( </>):", level._createfx.player_speed);
+    if(!level.mp_createfx) {
+      func_85A6("Dist To Cam", level._createfx.var_83B0);
     }
 
-    if(level.var_05ED.var_1486 && level.var_05ED.var_83A3.size > 0) {
-      level.var_05ED.var_7A77 = "of Rotation( -/+ ): " + level.var_05ED.var_7A76;
-      thread[[level.var_3F0E]]();
+    if(level._createfx.var_1486 && level._createfx.var_83A3.size > 0) {
+      level._createfx.var_7A77 = "of Rotation( -/+ ): " + level._createfx.var_7A76;
+      thread[[level.func_process_fx_rotater]]();
       if(func_1DCE("p")) {
         func_7D2B();
       }
@@ -874,23 +874,23 @@ func_4A5A(param_00) {
         func_2662();
       }
 
-      for(var_07 = 0; var_07 < level.var_05ED.var_83A3.size; var_07++) {
-        level.var_05ED.var_83A3[var_07] func_33A1();
+      for(var_07 = 0; var_07 < level._createfx.var_83A3.size; var_07++) {
+        level._createfx.var_83A3[var_07] func_33A1();
       }
 
       if(level.var_83AB != 0 || level.var_83AD != 0 || level.var_83AC != 0) {
         param_00 = 1;
       }
     } else {
-      level.var_05ED.var_7A77 = "of Movement( -/+ ): " + level.var_05ED.var_7A76;
+      level._createfx.var_7A77 = "of Movement( -/+ ): " + level._createfx.var_7A76;
       var_08 = func_431D();
-      for(var_07 = 0; var_07 < level.var_05ED.var_83A3.size; var_07++) {
-        var_09 = level.var_05ED.var_83A3[var_07];
-        if(isDefined(var_09.var_0106)) {
+      for(var_07 = 0; var_07 < level._createfx.var_83A3.size; var_07++) {
+        var_09 = level._createfx.var_83A3[var_07];
+        if(isDefined(var_09.model)) {
           continue;
         }
 
-        if(level.var_64F8 && func_55E9(var_09.var_A265["origin"] + var_08) != 1) {
+        if(level.mp_createfx && func_55E9(var_09.var_A265["origin"] + var_08) != 1) {
           func_27F1("Can\'t place FX outisde map bounds");
           var_08 = (0, 0, 0);
         }
@@ -908,7 +908,7 @@ func_4A5A(param_00) {
     func_23D2();
   }
 
-  return var_06;
+  return param_00;
 }
 
 func_83A1(param_00) {
@@ -949,40 +949,40 @@ func_62A5() {
   var_01 = func_1DCF("ctrl");
   if(func_1DCE("=")) {
     if(var_00) {
-      level.var_05ED.var_7A76 = level.var_05ED.var_7A76 + 0.025;
+      level._createfx.var_7A76 = level._createfx.var_7A76 + 0.025;
     } else if(var_01) {
-      if(level.var_05ED.var_7A76 < 1) {
-        level.var_05ED.var_7A76 = 1;
+      if(level._createfx.var_7A76 < 1) {
+        level._createfx.var_7A76 = 1;
       } else {
-        level.var_05ED.var_7A76 = level.var_05ED.var_7A76 + 10;
+        level._createfx.var_7A76 = level._createfx.var_7A76 + 10;
       }
     } else {
-      level.var_05ED.var_7A76 = level.var_05ED.var_7A76 + 0.1;
+      level._createfx.var_7A76 = level._createfx.var_7A76 + 0.1;
     }
   } else if(func_1DCE("-")) {
     if(var_00) {
-      level.var_05ED.var_7A76 = level.var_05ED.var_7A76 - 0.025;
+      level._createfx.var_7A76 = level._createfx.var_7A76 - 0.025;
     } else if(var_01) {
-      if(level.var_05ED.var_7A76 > 1) {
-        level.var_05ED.var_7A76 = 1;
+      if(level._createfx.var_7A76 > 1) {
+        level._createfx.var_7A76 = 1;
       } else {
-        level.var_05ED.var_7A76 = 0.1;
+        level._createfx.var_7A76 = 0.1;
       }
     } else {
-      level.var_05ED.var_7A76 = level.var_05ED.var_7A76 - 0.1;
+      level._createfx.var_7A76 = level._createfx.var_7A76 - 0.1;
     }
   }
 
-  level.var_05ED.var_7A76 = clamp(level.var_05ED.var_7A76, 0.025, 100);
+  level._createfx.var_7A76 = clamp(level._createfx.var_7A76, 0.025, 100);
 }
 
 func_9A6D() {
-  level.var_05ED.var_1486 = !level.var_05ED.var_1486;
+  level._createfx.var_1486 = !level._createfx.var_1486;
 }
 
 func_9A7A() {
-  level.var_05ED.var_8CFC = !level.var_05ED.var_8CFC;
-  if(level.var_05ED.var_8CFC) {
+  level._createfx.var_8CFC = !level._createfx.var_8CFC;
+  if(level._createfx.var_8CFC) {
     var_00 = "on";
     var_01 = (0, 1, 0);
   } else {
@@ -994,8 +994,8 @@ func_9A7A() {
 }
 
 func_9A7B() {
-  level.var_05ED.var_8CFE = !level.var_05ED.var_8CFE;
-  if(level.var_05ED.var_8CFE) {
+  level._createfx.var_8CFE = !level._createfx.var_8CFE;
+  if(level._createfx.var_8CFE) {
     var_00 = "on";
     var_01 = (0, 1, 0);
   } else {
@@ -1007,8 +1007,8 @@ func_9A7B() {
 }
 
 func_9A75() {
-  level.var_05ED.var_5E43 = !level.var_05ED.var_5E43;
-  if(level.var_05ED.var_5E43) {
+  level._createfx.var_5E43 = !level._createfx.var_5E43;
+  if(level._createfx.var_5E43) {
     var_00 = "on";
     var_01 = (0, 1, 0);
   } else {
@@ -1020,36 +1020,36 @@ func_9A75() {
 }
 
 func_A163() {
-  if(level.var_05ED.var_83A3.size < 1) {
-    level.var_05ED.var_83B0 = 0;
+  if(level._createfx.var_83A3.size < 1) {
+    level._createfx.var_83B0 = 0;
     return;
   }
 
-  if(level.var_05ED.var_83A3.size == 1) {
-    var_00 = level.var_05ED.var_83A3[0].var_A265["origin"];
+  if(level._createfx.var_83A3.size == 1) {
+    var_00 = level._createfx.var_83A3[0].var_A265["origin"];
   } else {
-    var_00 = func_40ED(level.var_05ED.var_83A3);
+    var_00 = func_40ED(level._createfx.var_83A3);
   }
 
-  level.var_05ED.var_83B0 = distance(var_00, level.var_721C getEye());
+  level._createfx.var_83B0 = distance(var_00, level.player getEye());
 }
 
 func_7E32() {
-  if(level.var_05ED.var_83A3.size < 1) {
+  if(level._createfx.var_83A3.size < 1) {
     return "";
   }
 
-  if(level.var_05ED.var_83A3.size == 1) {
+  if(level._createfx.var_83A3.size == 1) {
     var_00 = "fxid";
-    if(level.var_05ED.var_83A3[0].var_A265["fxid"] == "No FX") {
-      if(isDefined(level.var_05ED.var_83A3[0].var_A265["soundalias"]) && level.var_05ED.var_83A3[0].var_A265["soundalias"] != "null") {
+    if(level._createfx.var_83A3[0].var_A265["fxid"] == "No FX") {
+      if(isDefined(level._createfx.var_83A3[0].var_A265["soundalias"]) && level._createfx.var_83A3[0].var_A265["soundalias"] != "null") {
         var_00 = "soundalias";
-      } else if(isDefined(level.var_05ED.var_83A3[0].var_A265["ambiencename"]) && level.var_05ED.var_83A3[0].var_A265["ambiencename"] != "null") {
+      } else if(isDefined(level._createfx.var_83A3[0].var_A265["ambiencename"]) && level._createfx.var_83A3[0].var_A265["ambiencename"] != "null") {
         var_00 = "ambiencename";
       }
     }
 
-    var_01 = level.var_05ED.var_83A3[0].var_A265[var_00];
+    var_01 = level._createfx.var_83A3[0].var_A265[var_00];
     var_02 = [];
     foreach(var_05, var_04 in level.var_2804) {
       if(isDefined(var_04.var_A265[var_00]) && issubstr(var_04.var_A265[var_00], var_01)) {
@@ -1068,7 +1068,7 @@ func_7E32() {
     var_06 = 0;
     if(var_02.size > 1) {
       for(var_05 = 0; var_05 < var_02.size; var_05++) {
-        if(level.var_2804[var_02[var_05]] == level.var_05ED.var_83A3[0]) {
+        if(level.var_2804[var_02[var_05]] == level._createfx.var_83A3[0]) {
           var_06 = var_05;
         }
       }
@@ -1077,15 +1077,15 @@ func_7E32() {
     return var_06 + 1 + " of " + var_02.size + " placed";
   }
 
-  return level.var_05ED.var_83A3.size + " entities";
+  return level._createfx.var_83A3.size + " entities";
 }
 
 func_2662() {
   thread func_805C();
   level notify("new_ent_selection");
-  for(var_00 = 0; var_00 < level.var_05ED.var_83A3.size; var_00++) {
-    var_01 = level.var_05ED.var_83A3[var_00];
-    var_01.var_A265["angles"] = level.var_05ED.var_83A3[level.var_05ED.var_83A3.size - 1].var_A265["angles"];
+  for(var_00 = 0; var_00 < level._createfx.var_83A3.size; var_00++) {
+    var_01 = level._createfx.var_83A3[var_00];
+    var_01.var_A265["angles"] = level._createfx.var_83A3[level._createfx.var_83A3.size - 1].var_A265["angles"];
     var_01 func_84A8();
   }
 
@@ -1096,15 +1096,15 @@ func_2662() {
 func_0B60() {
   thread func_805C();
   level notify("new_ent_selection");
-  var_00 = level.var_05ED.var_83A3[level.var_05ED.var_83A3.size - 1];
-  if(level.var_05ED.var_83A3.size == 1 && !level.var_64F8) {
-    var_01 = level.var_05ED.var_83A3[0];
+  var_00 = level._createfx.var_83A3[level._createfx.var_83A3.size - 1];
+  if(level._createfx.var_83A3.size == 1 && !level.mp_createfx) {
+    var_01 = level._createfx.var_83A3[0];
     var_02 = vectortoangles(-1 * [[level.var_3F0F]]());
     var_01.var_A265["angles"] = var_02;
     var_01 func_84A8();
   } else {
-    for(var_03 = 0; var_03 < level.var_05ED.var_83A3.size - 1; var_03++) {
-      var_01 = level.var_05ED.var_83A3[var_03];
+    for(var_03 = 0; var_03 < level._createfx.var_83A3.size - 1; var_03++) {
+      var_01 = level._createfx.var_83A3[var_03];
       var_02 = vectortoangles(var_00.var_A265["origin"] - var_01.var_A265["origin"]);
       var_01.var_A265["angles"] = var_02;
       var_01 func_84A8();
@@ -1118,8 +1118,8 @@ func_0B60() {
 func_7A4E() {
   thread func_805C();
   level notify("new_ent_selection");
-  for(var_00 = 0; var_00 < level.var_05ED.var_83A3.size; var_00++) {
-    var_01 = level.var_05ED.var_83A3[var_00];
+  for(var_00 = 0; var_00 < level._createfx.var_83A3.size; var_00++) {
+    var_01 = level._createfx.var_83A3[var_00];
     var_01.var_A265["delay"] = randomfloatrange(-30, -1);
   }
 
@@ -1130,8 +1130,8 @@ func_7A4E() {
 func_7D2B() {
   level notify("new_ent_selection");
   thread func_805C();
-  for(var_00 = 0; var_00 < level.var_05ED.var_83A3.size; var_00++) {
-    var_01 = level.var_05ED.var_83A3[var_00];
+  for(var_00 = 0; var_00 < level._createfx.var_83A3.size; var_00++) {
+    var_01 = level._createfx.var_83A3[var_00];
     var_01.var_A265["angles"] = (0, 0, 0);
     var_01 func_84A8();
   }
@@ -1149,13 +1149,13 @@ func_5B47(param_00) {
     return common_scripts\_createfxmenu::func_37C4();
   }
 
-  return param_00 != level.var_05ED.var_83A3[level.var_05ED.var_83A3.size - 1];
+  return param_00 != level._createfx.var_83A3[level._createfx.var_83A3.size - 1];
 }
 
 func_348A() {
   thread func_805C();
-  for(var_00 = 0; var_00 < level.var_05ED.var_83A3.size; var_00++) {
-    var_01 = level.var_05ED.var_83A3[var_00];
+  for(var_00 = 0; var_00 < level._createfx.var_83A3.size; var_00++) {
+    var_01 = level._createfx.var_83A3[var_00];
     var_02 = bulletTrace(var_01.var_A265["origin"], var_01.var_A265["origin"] + (0, 0, -2048), 0, undefined);
     var_01.var_A265["origin"] = var_02["position"];
   }
@@ -1166,8 +1166,8 @@ func_348A() {
 func_8541() {
   level notify("createfx_exploder_reset");
   var_00 = [];
-  for(var_01 = 0; var_01 < level.var_05ED.var_83A3.size; var_01++) {
-    var_02 = level.var_05ED.var_83A3[var_01];
+  for(var_01 = 0; var_01 < level._createfx.var_83A3.size; var_01++) {
+    var_02 = level._createfx.var_83A3[var_01];
     if(isDefined(var_02.var_A265["exploder"])) {
       var_00[var_02.var_A265["exploder"]] = 1;
     }
@@ -1182,8 +1182,8 @@ func_8541() {
 func_9E8B() {
   level notify("createfx_exploder_reset");
   var_00 = [];
-  for(var_01 = 0; var_01 < level.var_05ED.var_83A3.size; var_01++) {
-    var_02 = level.var_05ED.var_83A3[var_01];
+  for(var_01 = 0; var_01 < level._createfx.var_83A3.size; var_01++) {
+    var_02 = level._createfx.var_83A3[var_01];
     if(isDefined(var_02.var_A265["exploder"])) {
       var_00[var_02.var_A265["exploder"]] = 1;
     }
@@ -1204,7 +1204,7 @@ func_33B3() {
     var_01 = var_01 * var_01;
     for(var_02 = 0; var_02 < level.var_2804.size; var_02++) {
       var_03 = level.var_2804[var_02];
-      var_03.var_33DB = distancesquared(level.var_721C.var_0116, var_03.var_A265["origin"]) <= var_01;
+      var_03.var_33DB = distancesquared(level.player.origin, var_03.var_A265["origin"]) <= var_01;
       var_00++;
       if(var_00 > 100) {
         var_00 = 0;
@@ -1245,14 +1245,14 @@ func_7EE2(param_00, param_01) {
 
     wait 0.05;
     param_00 func_33A1();
-    for(var_04 = 0; var_04 < level.var_05ED.var_83A3.size; var_04++) {
-      var_05 = level.var_05ED.var_83A3[var_04];
-      if(isDefined(var_05.var_0106)) {
+    for(var_04 = 0; var_04 < level._createfx.var_83A3.size; var_04++) {
+      var_05 = level._createfx.var_83A3[var_04];
+      if(isDefined(var_05.model)) {
         continue;
       }
 
-      var_05.var_A265["origin"] = param_01[var_04].var_0116;
-      var_05.var_A265["angles"] = param_01[var_04].var_001D;
+      var_05.var_A265["origin"] = param_01[var_04].origin;
+      var_05.var_A265["angles"] = param_01[var_04].angles;
     }
   }
 }
@@ -1267,11 +1267,11 @@ func_2D24() {
 }
 
 func_7CB4() {
-  if(!isDefined(level.var_05ED.var_83A4)) {
+  if(!isDefined(level._createfx.var_83A4)) {
     return;
   }
 
-  var_00 = level.var_05ED.var_6C1E[level.var_05ED.var_83A4]["name"];
+  var_00 = level._createfx.var_6C1E[level._createfx.var_83A4]["name"];
   for(var_01 = 0; var_01 < level.var_2804.size; var_01++) {
     var_02 = level.var_2804[var_01];
     if(!func_37A8(var_02)) {
@@ -1308,8 +1308,8 @@ func_2D27() {
   }
 
   level.var_2804 = var_00;
-  level.var_05ED.var_83A2 = [];
-  level.var_05ED.var_83A3 = [];
+  level._createfx.var_83A2 = [];
+  level._createfx.var_83A3 = [];
   func_23BA();
   func_805A();
 }
@@ -1317,25 +1317,25 @@ func_2D27() {
 func_648C() {
   thread func_805C();
   var_00 = level.var_2803["position"];
-  if(level.var_05ED.var_83A3.size <= 0) {
+  if(level._createfx.var_83A3.size <= 0) {
     return;
   }
 
-  if(level.var_64F8 && func_55E9(var_00) != 1) {
+  if(level.mp_createfx && func_55E9(var_00) != 1) {
     func_27F1("Can\'t Place FX Outside Map Bounds");
     return;
   }
 
-  var_01 = func_40ED(level.var_05ED.var_83A3);
+  var_01 = func_40ED(level._createfx.var_83A3);
   var_02 = var_01 - var_00;
-  for(var_03 = 0; var_03 < level.var_05ED.var_83A3.size; var_03++) {
-    var_04 = level.var_05ED.var_83A3[var_03];
-    if(isDefined(var_04.var_0106)) {
+  for(var_03 = 0; var_03 < level._createfx.var_83A3.size; var_03++) {
+    var_04 = level._createfx.var_83A3[var_03];
+    if(isDefined(var_04.model)) {
       continue;
     }
 
     var_04.var_A265["origin"] = var_04.var_A265["origin"] - var_02;
-    if(level.var_05ED.var_8CFC) {
+    if(level._createfx.var_8CFC) {
       if(isDefined(level.var_2803["normal"])) {
         var_04.var_A265["angles"] = vectortoangles(level.var_2803["normal"]);
       }
@@ -1363,7 +1363,7 @@ func_7D27() {
 
 func_838B(param_00) {
   var_01 = [];
-  foreach(var_03 in level.var_05ED.var_83A3) {
+  foreach(var_03 in level._createfx.var_83A3) {
     if(!isDefined(var_03.var_A265[param_00])) {
       continue;
     }
@@ -1395,7 +1395,7 @@ func_838B(param_00) {
 
 func_838C(param_00) {
   var_01 = [];
-  foreach(var_03 in level.var_05ED.var_83A3) {
+  foreach(var_03 in level._createfx.var_83A3) {
     if(!isDefined(var_03.var_A265[param_00]) || var_03.var_A265["type"] != "oneshotfx") {
       continue;
     }
@@ -1426,13 +1426,13 @@ func_838C(param_00) {
 }
 
 func_2666() {
-  if(level.var_05ED.var_83A3.size <= 0) {
+  if(level._createfx.var_83A3.size <= 0) {
     return;
   }
 
   var_00 = [];
-  for(var_01 = 0; var_01 < level.var_05ED.var_83A3.size; var_01++) {
-    var_02 = level.var_05ED.var_83A3[var_01];
+  for(var_01 = 0; var_01 < level._createfx.var_83A3.size; var_01++) {
+    var_02 = level._createfx.var_83A3[var_01];
     var_03 = spawnStruct();
     var_03.var_A265 = var_02.var_A265;
     var_03 func_75BE();
@@ -1540,8 +1540,8 @@ func_7EF3() {
 }
 
 func_770E(param_00, param_01, param_02) {
-  for(var_03 = 0; var_03 < level.var_05ED.var_6C1E.size; var_03++) {
-    var_04 = level.var_05ED.var_6C1E[var_03];
+  for(var_03 = 0; var_03 < level._createfx.var_6C1E.size; var_03++) {
+    var_04 = level._createfx.var_6C1E[var_03];
     if(isDefined(var_04["nowrite"]) && var_04["nowrite"]) {
       continue;
     }
@@ -1555,7 +1555,7 @@ func_770E(param_00, param_01, param_02) {
       continue;
     }
 
-    if(!level.var_64F8) {
+    if(!level.mp_createfx) {
       if(common_scripts\_createfxmenu::func_6015("fx", param_00.var_A265["type"]) && var_05 == "fxid") {
         continue;
       }
@@ -1565,7 +1565,7 @@ func_770E(param_00, param_01, param_02) {
       }
 
       var_06 = param_00.var_A265["type"] + "/" + var_05;
-      if(isDefined(level.var_05ED.var_2BD2[var_06]) && level.var_05ED.var_2BD2[var_06] == param_00.var_A265[var_05]) {
+      if(isDefined(level._createfx.var_2BD2[var_06]) && level._createfx.var_2BD2[var_06] == param_00.var_A265[var_05]) {
         continue;
       }
     }
@@ -1622,18 +1622,18 @@ func_37CB() {
 
 func_23CB() {
   level.var_27FB = 0;
-  level.var_05ED.var_83A4 = undefined;
+  level._createfx.var_83A4 = undefined;
   func_7D35();
 }
 
 func_7D35() {
-  for(var_00 = 0; var_00 < level.var_05ED.var_4F6C; var_00++) {
-    level.var_05ED.var_4F6E[var_00].var_0056 = (1, 1, 1);
+  for(var_00 = 0; var_00 < level._createfx.var_4F6C; var_00++) {
+    level._createfx.var_4F6E[var_00].color = (1, 1, 1);
   }
 }
 
 func_9A6F(param_00, param_01) {
-  if(isDefined(level.var_05ED.var_83A2[param_00])) {
+  if(isDefined(level._createfx.var_83A2[param_00])) {
     func_2D94(param_00, param_01);
     return;
   }
@@ -1642,15 +1642,15 @@ func_9A6F(param_00, param_01) {
 }
 
 func_8390(param_00, param_01) {
-  if(isDefined(level.var_05ED.var_83A2[param_00])) {
+  if(isDefined(level._createfx.var_83A2[param_00])) {
     return;
   }
 
   func_23CB();
   level notify("new_ent_selection");
   param_01 thread func_37CB();
-  level.var_05ED.var_83A2[param_00] = 1;
-  level.var_05ED.var_83A3[level.var_05ED.var_83A3.size] = param_01;
+  level._createfx.var_83A2[param_00] = 1;
+  level._createfx.var_83A3[level._createfx.var_83A3.size] = param_01;
   level.var_27FE = 0;
 }
 
@@ -1663,34 +1663,34 @@ func_37A7(param_00) {
 }
 
 func_2D94(param_00, param_01) {
-  if(!isDefined(level.var_05ED.var_83A2[param_00])) {
+  if(!isDefined(level._createfx.var_83A2[param_00])) {
     return;
   }
 
   func_23CB();
   level notify("new_ent_selection");
-  level.var_05ED.var_83A2[param_00] = undefined;
+  level._createfx.var_83A2[param_00] = undefined;
   if(!func_37A7(param_01)) {
     param_01 thread func_37CA();
   }
 
   var_02 = [];
-  for(var_03 = 0; var_03 < level.var_05ED.var_83A3.size; var_03++) {
-    if(level.var_05ED.var_83A3[var_03] != param_01) {
-      var_02[var_02.size] = level.var_05ED.var_83A3[var_03];
+  for(var_03 = 0; var_03 < level._createfx.var_83A3.size; var_03++) {
+    if(level._createfx.var_83A3[var_03] != param_01) {
+      var_02[var_02.size] = level._createfx.var_83A3[var_03];
     }
   }
 
-  level.var_05ED.var_83A3 = var_02;
+  level._createfx.var_83A3 = var_02;
 }
 
 func_5102(param_00) {
-  return isDefined(level.var_05ED.var_83A2[param_00]);
+  return isDefined(level._createfx.var_83A2[param_00]);
 }
 
 func_37A8(param_00) {
-  for(var_01 = 0; var_01 < level.var_05ED.var_83A3.size; var_01++) {
-    if(level.var_05ED.var_83A3[var_01] == param_00) {
+  for(var_01 = 0; var_01 < level._createfx.var_83A3.size; var_01++) {
+    if(level._createfx.var_83A3[var_01] == param_00) {
       return 1;
     }
   }
@@ -1699,14 +1699,14 @@ func_37A8(param_00) {
 }
 
 func_23B6() {
-  for(var_00 = 0; var_00 < level.var_05ED.var_83A3.size; var_00++) {
-    if(!func_37A7(level.var_05ED.var_83A3[var_00])) {
-      level.var_05ED.var_83A3[var_00] thread func_37CA();
+  for(var_00 = 0; var_00 < level._createfx.var_83A3.size; var_00++) {
+    if(!func_37A7(level._createfx.var_83A3[var_00])) {
+      level._createfx.var_83A3[var_00] thread func_37CA();
     }
   }
 
-  level.var_05ED.var_83A2 = [];
-  level.var_05ED.var_83A3 = [];
+  level._createfx.var_83A2 = [];
+  level._createfx.var_83A3 = [];
 }
 
 func_33A1() {}
@@ -1724,13 +1724,13 @@ func_27F2(param_00) {
 }
 
 func_431D() {
-  var_00 = level.var_721C getangles()[1];
+  var_00 = level.player getplayerangles()[1];
   var_01 = (0, var_00, 0);
   var_02 = anglestoright(var_01);
   var_03 = anglesToForward(var_01);
   var_04 = anglestoup(var_01);
   var_05 = 0;
-  var_06 = level.var_05ED.var_7A76;
+  var_06 = level._createfx.var_7A76;
   if(func_1DD9("DPAD_UP")) {
     if(level.var_83A8 < 0) {
       level.var_83A8 = 0;
@@ -1787,8 +1787,8 @@ func_431D() {
 }
 
 func_840E() {
-  if(!level.var_05ED.var_8CFE) {
-    var_00 = level.var_05ED.var_7A76;
+  if(!level._createfx.var_8CFE) {
+    var_00 = level._createfx.var_7A76;
   } else {
     var_00 = 90;
   }
@@ -1848,12 +1848,12 @@ func_840E() {
 
 func_A0CA() {
   var_00 = 0;
-  foreach(var_02 in level.var_05ED.var_83A3) {
+  foreach(var_02 in level._createfx.var_83A3) {
     if(var_02.var_A265["type"] == "reactive_fx") {
       var_00 = 1;
     }
 
-    var_02[[level.var_3F10]]();
+    var_02[[level.func_updatefx]]();
   }
 
   if(var_00) {
@@ -1874,22 +1874,22 @@ func_93D7() {
   common_scripts\utility::func_3F51();
 }
 
-func_3F06() {
-  if(!isDefined(level.var_0612)) {
-    var_00 = getarraykeys(level.var_0611);
+func_get_level_fx() {
+  if(!isDefined(level.var_612)) {
+    var_00 = getarraykeys(level.var_611);
   } else {
-    var_00 = getarraykeys(level.var_0611);
-    if(var_00.size == level.var_0612.size) {
-      return level.var_0612;
+    var_00 = getarraykeys(level.var_611);
+    if(var_00.size == level.var_612.size) {
+      return level.var_612;
     }
   }
 
-  var_00 = common_scripts\utility::func_0C9E(var_00);
-  level.var_0612 = var_00;
+  var_00 = common_scripts\utility::func_C9E(var_00);
+  level.var_612 = var_00;
   return var_00;
 }
 
-func_7DCD() {
+restart_fx_looper() {
   func_93CD();
   func_84A8();
   switch (self.var_A265["type"]) {
@@ -1902,7 +1902,7 @@ func_7DCD() {
       break;
 
     case "soundfx":
-      common_scripts\_fx::func_27A8();
+      common_scripts\_fx::create_loopsound();
       break;
 
     case "soundfx_interval":
@@ -1916,16 +1916,16 @@ func_7DCD() {
 }
 
 func_7B8E() {
-  level.var_062E.var_7AAD = undefined;
+  level.var_62E.var_7AAD = undefined;
   foreach(var_01 in level.var_2804) {
     if(var_01.var_A265["type"] == "reactive_fx") {
       var_01 func_84A8();
-      var_01 common_scripts\_fx::func_0958();
+      var_01 common_scripts\_fx::func_958();
     }
   }
 }
 
-func_774A() {
+process_fx_rotater() {
   if(level.var_3F4F) {
     thread func_805C();
     level.var_27FC = 0;
@@ -1938,15 +1938,15 @@ func_774A() {
   }
 
   level.var_3F4F = 1;
-  if(level.var_05ED.var_83A3.size > 1 && !level.var_05ED.var_5E43) {
-    var_00 = func_40ED(level.var_05ED.var_83A3);
+  if(level._createfx.var_83A3.size > 1 && !level._createfx.var_5E43) {
+    var_00 = func_40ED(level._createfx.var_83A3);
     var_01 = spawn("script_origin", var_00);
-    var_01.var_A265["angles"] = level.var_05ED.var_83A3[0].var_A265["angles"];
+    var_01.var_A265["angles"] = level._createfx.var_83A3[0].var_A265["angles"];
     var_01.var_A265["origin"] = var_00;
     var_02 = [];
-    for(var_03 = 0; var_03 < level.var_05ED.var_83A3.size; var_03++) {
-      var_02[var_03] = spawn("script_origin", level.var_05ED.var_83A3[var_03].var_A265["origin"]);
-      var_02[var_03].var_001D = level.var_05ED.var_83A3[var_03].var_A265["angles"];
+    for(var_03 = 0; var_03 < level._createfx.var_83A3.size; var_03++) {
+      var_02[var_03] = spawn("script_origin", level._createfx.var_83A3[var_03].var_A265["origin"]);
+      var_02[var_03].angles = level._createfx.var_83A3[var_03].var_A265["angles"];
       var_02[var_03] method_8449(var_01);
     }
 
@@ -1955,10 +1955,10 @@ func_774A() {
     for(var_03 = 0; var_03 < var_02.size; var_03++) {
       var_02[var_03] delete();
     }
-  } else if(level.var_05ED.var_83A3.size > 0) {
-    foreach(var_05 in level.var_05ED.var_83A3) {
+  } else if(level._createfx.var_83A3.size > 0) {
+    foreach(var_05 in level._createfx.var_83A3) {
       var_02 = spawn("script_origin", (0, 0, 0));
-      var_02.var_001D = var_05.var_A265["angles"];
+      var_02.angles = var_05.var_A265["angles"];
       if(level.var_83AB != 0) {
         var_02 addpitch(level.var_83AB);
       } else if(level.var_83AD != 0) {
@@ -1967,7 +1967,7 @@ func_774A() {
         var_02 addroll(level.var_83AC);
       }
 
-      var_05.var_A265["angles"] = var_02.var_001D;
+      var_05.var_A265["angles"] = var_02.angles;
       var_02 delete();
     }
 
@@ -1978,10 +1978,10 @@ func_774A() {
 }
 
 func_8FBB() {
-  playFX(level.var_05ED.var_00B1.var_3F2F, level.var_2803["position"]);
-  level.var_05ED.var_00B1 method_8617(level.var_05ED.var_00B1.var_8F2C);
-  radiusdamage(level.var_2803["position"], level.var_05ED.var_00B1.var_014F, 50, 5, undefined, "MOD_EXPLOSIVE");
-  level notify("code_damageradius", undefined, level.var_05ED.var_00B1.var_014F, level.var_2803["position"]);
+  playFX(level._createfx.var_B1.var_3F2F, level.var_2803["position"]);
+  level._createfx.var_B1 playSound(level._createfx.var_B1.var_8F2C);
+  radiusdamage(level.var_2803["position"], level._createfx.var_B1.var_14F, 50, 5, undefined, "MOD_EXPLOSIVE");
+  level notify("code_damageradius", undefined, level._createfx.var_B1.var_14F, level.var_2803["position"]);
 }
 
 func_8BCE() {
@@ -2006,10 +2006,10 @@ func_4014(param_00) {}
 func_AAB7(param_00, param_01) {
   var_02 = "\t";
   if(getdvarint("scr_map_exploder_dump")) {
-    if(!isDefined(param_00.var_0106)) {
+    if(!isDefined(param_00.model)) {
       return;
     }
-  } else if(isDefined(param_00.var_0106)) {
+  } else if(isDefined(param_00.model)) {
     return;
   }
 
@@ -2022,7 +2022,7 @@ func_AAB7(param_00, param_01) {
   }
 
   if(param_00.var_A265["type"] == "exploder") {
-    if(isDefined(param_00.var_A265["exploder"]) && !level.var_64F8) {
+    if(isDefined(param_00.var_A265["exploder"]) && !level.mp_createfx) {
       func_208A(var_02 + "ent = createExploderEx( \" + param_00.var_A265["fxid "] + "\", \" + param_00.var_A265["exploder "] + "\" );");
     } else {
       func_208A(var_02 + "ent = createExploder( \" + param_00.var_A265["fxid "] + "\" );");
@@ -2054,739 +2054,739 @@ func_AAB8(param_00, param_01, param_02, param_03, param_04) {
     var_05 = "\t";
     func_208C();
     func_208A("func_208A("#include common_scripts\\utility;"); func_208A("#include common_scripts\\_createfx;\n"); func_208A(""); func_208A("main()"); func_208A("{"); var_06 = param_00.size;
-
-      if(isDefined(param_04)) {
-        var_07 = 0;
-        foreach(var_09 in param_04) {
-          if(!isDefined(var_09["radiant"])) {
-            var_07++;
-          }
-        }
-
-        var_06 = var_06 + var_07;
-      }
-
-      func_208A(var_05 + "foreach(var_0C in param_00) {
-        if(level.var_27FD > 16) {
-          level.var_27FD = 0;
-          wait(0.1);
-        }
-
-        level.var_27FD++; func_AAB7(var_0C, param_02);
-      }
-
-      if(isDefined(param_04)) {
-        foreach(var_09 in param_04) {
-          if(level.var_27FD > 16) {
-            level.var_27FD = 0;
-            wait(0.1);
+        if(isDefined(param_04)) {
+          var_07 = 0;
+          foreach(var_09 in param_04) {
+            if(!isDefined(var_09["radiant"])) {
+              var_07++;
+            }
           }
 
-          if(!isDefined(var_09["radiant"])) {
+          var_06 = var_06 + var_07;
+        }
+
+        func_208A(var_05 + "foreach(var_0C in param_00) {
+            if(level.var_27FD > 16) {
+              level.var_27FD = 0;
+              wait(0.1);
+            }
+
             level.var_27FD++;
-            var_0C = spawnStruct();
-            var_0C.var_A265 = var_09;
             func_AAB7(var_0C, param_02);
           }
-        }
-      }
 
-      func_208A("}"); func_208A(" "); func_208B(param_02, param_03, param_01);
-    }
-
-    func_27EF() {
-      var_00 = 0.1;
-      foreach(var_02 in level.var_2804) {
-        var_03 = [];
-        var_04 = [];
-        for(var_05 = 0; var_05 < 3; var_05++) {
-          var_03[var_05] = var_02.var_A265["origin"][var_05];
-          var_04[var_05] = var_02.var_A265["angles"][var_05];
-          if(var_03[var_05] < var_00 && var_03[var_05] > var_00 * -1) {
-            var_03[var_05] = 0;
-          }
-
-          if(var_04[var_05] < var_00 && var_04[var_05] > var_00 * -1) {
-            var_04[var_05] = 0;
-          }
-        }
-
-        var_02.var_A265["origin"] = (var_03[0], var_03[1], var_03[2]);
-        var_02.var_A265["angles"] = (var_04[0], var_04[1], var_04[2]);
-      }
-    }
-
-    func_4125(param_00) {
-      var_01 = func_4126(param_00);
-      var_02 = [];
-      foreach(var_05, var_04 in var_01) {
-        var_02[var_05] = [];
-      }
-
-      foreach(var_07 in level.var_2804) {
-        var_08 = 0;
-        foreach(var_05, param_00 in var_01) {
-          if(var_07.var_A265["type"] != param_00) {
-            continue;
-          }
-
-          var_08 = 1;
-          var_02[var_05][var_02[var_05].size] = var_07;
-          break;
-        }
-      }
-
-      var_0B = [];
-      for(var_0C = 0; var_0C < var_01.size; var_0C++) {
-        foreach(var_07 in var_02[var_0C]) {
-          var_0B[var_0B.size] = var_07;
-        }
-      }
-
-      return var_0B;
-    }
-
-    func_4126(param_00) {
-      var_01 = [];
-      if(param_00 == "fx") {
-        var_01[0] = "loopfx";
-        var_01[1] = "oneshotfx";
-        var_01[2] = "exploder";
-      } else {
-        var_01[0] = "soundfx";
-        var_01[1] = "soundfx_interval";
-        var_01[2] = "reactive_fx";
-        var_01[3] = "soundfx_dynamic";
-      }
-
-      return var_01;
-    }
-
-    func_5556(param_00, param_01) {
-      var_02 = func_4126(param_01);
-      foreach(var_04 in var_02) {
-        if(param_00.var_A265["type"] == var_04) {
-          return 1;
-        }
-      }
-
-      return 0;
-    }
-
-    func_27F8() {
-      var_00 = [];
-      var_00[0] = "soundfx";
-      var_00[1] = "loopfx";
-      var_00[2] = "oneshotfx";
-      var_00[3] = "exploder";
-      var_00[4] = "soundfx_interval";
-      var_00[5] = "reactive_fx";
-      var_00[6] = "soundfx_dynamic";
-      var_01 = [];
-      foreach(var_04, var_03 in var_00) {
-        var_01[var_04] = [];
-      }
-
-      foreach(var_06 in level.var_2804) {
-        var_07 = 0;
-        foreach(var_04, var_09 in var_00) {
-          if(var_06.var_A265["type"] != var_09) {
-            continue;
-          }
-
-          var_07 = 1;
-          var_01[var_04][var_01[var_04].size] = var_06;
-          break;
-        }
-      }
-
-      var_0B = [];
-      for(var_0C = 0; var_0C < var_00.size; var_0C++) {
-        foreach(var_06 in var_01[var_0C]) {
-          var_0B[var_0B.size] = var_06;
-        }
-      }
-
-      level.var_2804 = var_0B;
-    }
-
-    func_208C() {
-      common_scripts\utility::func_3AB5();
-    }
-
-    func_208A(param_00) {
-      common_scripts\utility::func_3AB3(param_00);
-    }
-
-    func_208B(param_00, param_01, param_02) {
-      var_03 = 1;
-      if(param_01 != "" || param_00) {
-        var_03 = 0;
-      }
-
-      if(common_scripts\utility::func_57D7()) {
-        var_04 = common_scripts\utility::func_4381() + param_01 + "_" + param_02 + ".gsc";
-        if(param_00) {
-          var_04 = "backup_" + param_02 + ".gsc";
-        }
-      } else {
-        var_04 = common_scripts\utility::func_4381() + param_02 + "_" + var_03 + ".gsc";
-        if(param_00) {
-          var_04 = "backup.gsc";
-        }
-      }
-
-      common_scripts\utility::func_3AB4("/share/raw/maps\createfx/" + var_04, var_03);
-    }
-
-    func_7745() {
-      func_0905("mouse1");
-      func_0905("BUTTON_RSHLDR");
-      func_0905("BUTTON_LSHLDR");
-      func_0905("BUTTON_RSTICK");
-      func_0905("BUTTON_LSTICK");
-      func_0905("BUTTON_A");
-      func_0905("BUTTON_B");
-      func_0905("BUTTON_X");
-      func_0905("BUTTON_Y");
-      func_0905("DPAD_UP");
-      func_0905("DPAD_LEFT");
-      func_0905("DPAD_RIGHT");
-      func_0905("DPAD_DOWN");
-      func_0938("shift");
-      func_0938("ctrl");
-      func_0938("escape");
-      func_0938("F1");
-      func_0938("F5");
-      func_0938("F4");
-      func_0938("F2");
-      func_0938("a");
-      func_0938("b");
-      func_0938("g");
-      func_0938("c");
-      func_0938("h");
-      func_0938("i");
-      func_0938("j");
-      func_0938("f");
-      func_0938("k");
-      func_0938("l");
-      func_0938("m");
-      func_0938("o");
-      func_0938("p");
-      func_0938("r");
-      func_0938("s");
-      func_0938("u");
-      func_0938("v");
-      func_0938("x");
-      func_0938("y");
-      func_0938("z");
-      func_0938("del");
-      func_0938("end");
-      func_0938("tab");
-      func_0938("ins");
-      func_0938("add");
-      func_0938("space");
-      func_0938("enter");
-      func_0938("1");
-      func_0938("2");
-      func_0938("3");
-      func_0938("4");
-      func_0938("5");
-      func_0938("6");
-      func_0938("7");
-      func_0938("8");
-      func_0938("9");
-      func_0938("0");
-      func_0938("-");
-      func_0938("=");
-      func_0938(",");
-      func_0938(".");
-      func_0938("[");
-      func_0938("]");
-      func_0938("leftarrow");
-      func_0938("rightarrow");
-      func_0938("uparrow");
-      func_0938("downarrow");
-    }
-
-    func_5E6A(param_00) {
-      if(isDefined(level.var_05ED.var_5E6F[param_00])) {
-        return 0;
-      }
-
-      return func_5996(param_00);
-    }
-
-    func_5996(param_00) {
-      return level.var_27FB && isDefined(level.var_1DD0[param_00]);
-    }
-
-    func_0905(param_00) {
-      if(func_5E6A(param_00)) {
-        return;
-      }
-
-      if(!isDefined(level.var_1DDB[param_00])) {
-        if(level.var_721C buttonpresseddevonly(param_00)) {
-          level.var_1DDB[param_00] = 1;
-          level.var_1DD8[param_00] = 1;
-          return;
-        }
-
-        return;
-      }
-
-      if(!level.var_721C buttonpresseddevonly(param_00)) {
-        level.var_1DDB[param_00] = undefined;
-      }
-    }
-
-    func_0938(param_00) {
-      level.var_1DD0[param_00] = 1;
-      func_0905(param_00);
-    }
-
-    func_1DD9(param_00, param_01) {
-      return func_1DDE(param_00) || func_1DDE(param_01);
-    }
-
-    func_1DDE(param_00) {
-      if(!isDefined(param_00)) {
-        return 0;
-      }
-
-      if(func_5996(param_00)) {
-        return 0;
-      }
-
-      return level.var_721C buttonpresseddevonly(param_00);
-    }
-
-    func_1DCF(param_00, param_01) {
-      if(isDefined(param_01)) {
-        if(isDefined(level.var_1DDB[param_01])) {
-          return 1;
-        }
-      }
-
-      return isDefined(level.var_1DDB[param_00]);
-    }
-
-    func_1DCE(param_00, param_01) {
-      if(isDefined(param_01)) {
-        if(isDefined(level.var_1DD8[param_01])) {
-          return 1;
-        }
-      }
-
-      return isDefined(level.var_1DD8[param_00]);
-    }
-
-    func_51E1() {
-      level.var_05ED.var_4F6E = [];
-      level.var_05ED.var_4F6C = 20;
-      level.var_2411 = newhudelem();
-      level.var_2411.var_0018 = 0;
-      for(var_00 = 0; var_00 < level.var_05ED.var_4F6C; var_00++) {
-        var_01 = newhudelem();
-        var_01.var_0010 = "left";
-        var_01.var_5E55 = 0;
-        var_01.var_00A0 = 1;
-        var_01.var_009B = 1.4;
-        var_01.var_0184 = 20;
-        var_01.var_0018 = 1;
-        var_01.var_01D7 = 60 + var_00 * 15;
-        level.var_05ED.var_4F6E[var_00] = var_01;
-      }
-
-      var_01 = newhudelem();
-      var_01.var_0010 = "center";
-      var_01.var_5E55 = 0;
-      var_01.var_00A0 = 1;
-      var_01.var_009B = 1.4;
-      var_01.var_0184 = 20;
-      var_01.var_0018 = 1;
-      var_01.var_0056 = (1, 1, 0);
-      var_01.var_01D3 = 320;
-      var_01.var_01D7 = 240;
-      level.var_27F1 = var_01;
-    }
-
-    func_51A1() {
-      var_00 = newhudelem();
-      var_00.var_5E55 = 0;
-      var_00.var_0010 = "center";
-      var_00.var_0011 = "middle";
-      var_00.var_00A0 = 1;
-      var_00.var_009B = 2;
-      var_00.var_0184 = 20;
-      var_00.var_0018 = 1;
-      var_00.var_01D3 = 320;
-      var_00.var_01D7 = 233;
-    }
-
-    func_23BA() {
-      level.var_2411 clearalltextafterhudelem();
-      for(var_00 = 0; var_00 < level.var_05ED.var_4F6C; var_00++) {}
-
-      level.var_3F72 = 0;
-    }
-
-    func_84AD(param_00) {
-      level.var_3F72++;
-    }
-
-    func_5272() {
-      if(!isDefined(level.var_05ED.var_9A91)) {
-        level.var_05ED.var_9A91 = [];
-      }
-
-      if(!isDefined(level.var_05ED.var_9A90)) {
-        level.var_05ED.var_9A90 = 1;
-      }
-
-      if(!isDefined(level.var_05ED.var_9A8F)) {
-        level.var_05ED.var_9A8F = "";
-      }
-    }
-
-    func_6691(param_00) {
-      foreach(var_03, var_02 in level.var_05ED.var_9A91) {
-        if(isDefined(var_02.var_A282)) {
-          var_02.var_A282 destroy();
-        }
-
-        var_02 destroy();
-        level.var_05ED.var_9A91[var_03] = undefined;
-      }
-
-      level.var_05ED.var_9A8F = param_00;
-    }
-
-    func_2906(param_00) {
-      return level.var_05ED.var_9A8F == param_00;
-    }
-
-    func_23D2() {
-      func_6691("");
-    }
-
-    func_6692(param_00) {
-      var_01 = newhudelem();
-      var_01.var_0010 = "left";
-      var_01.var_5E55 = 0;
-      var_01.var_00A0 = 1;
-      var_01.var_009B = 1.2;
-      var_01.var_0018 = 1;
-      var_01.var_01D3 = 0;
-      var_01.var_01D7 = 320 + param_00 * 15;
-      return var_01;
-    }
-
-    func_4386(param_00) {
-      if(isDefined(level.var_05ED.var_9A91[param_00])) {
-        return level.var_05ED.var_9A91[param_00];
-      }
-
-      return undefined;
-    }
-
-    func_85A6(param_00, param_01, param_02) {
-      var_03 = func_4386(param_00);
-      if(!isDefined(var_03)) {
-        var_03 = func_6692(level.var_05ED.var_9A91.size);
-        level.var_05ED.var_9A91[param_00] = var_03;
-        var_03.var_991F = param_00;
-      }
-
-      if(isDefined(param_01)) {
-        if(!isDefined(param_02)) {
-          param_02 = (1, 1, 1);
-        }
-
-        var_03.var_0056 = param_02;
-      }
-    }
-
-    func_838F() {
-      var_00 = getDvar("select_by_substring");
-      if(var_00 == "") {
-        return 0;
-      }
-
-      setDvar("select_by_substring", "");
-      var_01 = [];
-      foreach(var_04, var_03 in level.var_2804) {
-        if(issubstr(var_03.var_A265["fxid"], var_00)) {
-          var_01[var_01.size] = var_04;
-        }
-      }
-
-      if(var_01.size == 0) {
-        return 0;
-      }
-
-      func_2D93();
-      func_8391(var_01);
-      foreach(var_06 in var_01) {
-        var_03 = level.var_2804[var_06];
-        func_8390(var_06, var_03);
-      }
-
-      return 1;
-    }
-
-    func_8391(param_00) {
-      foreach(var_02 in param_00) {
-        var_03 = level.var_2804[var_02];
-        func_8390(var_02, var_03);
-      }
-    }
-
-    func_2D93() {
-      foreach(var_01 in level.var_05ED.var_83A3) {
-        var_02 = func_44C7(var_01);
-        func_2D94(var_02, var_01);
-      }
-    }
-
-    func_8875() {
-      wait(0.5);
-      for(;;) {
-        level.var_27FC = level.var_27FC + 0.05;
-        if(level.var_27FC == 0.15) {
-          foreach(var_01 in level.var_05ED.var_83A3) {
-            if(var_01.var_A265["type"] == "exploder") {
-              var_01 common_scripts\utility::func_0894();
+          if(isDefined(param_04)) {
+            foreach(var_09 in param_04) {
+              if(level.var_27FD > 16) {
+                level.var_27FD = 0;
+                wait(0.1);
+              }
+
+              if(!isDefined(var_09["radiant"])) {
+                level.var_27FD++;
+                var_0C = spawnStruct();
+                var_0C.var_A265 = var_09;
+                func_AAB7(var_0C, param_02);
+              }
             }
           }
 
-          common_scripts\_createfxmenu::func_2FF2();
-          func_805A();
+          func_208A("}"); func_208A(" "); func_208B(param_02, param_03, param_01);
         }
 
-        if(level.var_27FC == 0.05) {
-          var_01 = common_scripts\_createfxmenu::func_41E4();
-          common_scripts\_createfxmenu::func_2FF2();
-        }
+        func_27EF() {
+          var_00 = 0.1;
+          foreach(var_02 in level.var_2804) {
+            var_03 = [];
+            var_04 = [];
+            for(var_05 = 0; var_05 < 3; var_05++) {
+              var_03[var_05] = var_02.var_A265["origin"][var_05];
+              var_04[var_05] = var_02.var_A265["angles"][var_05];
+              if(var_03[var_05] < var_00 && var_03[var_05] > var_00 * -1) {
+                var_03[var_05] = 0;
+              }
 
-        wait 0.05;
-      }
-    }
-
-    func_3E70() {
-      if(level.var_05ED.var_83A3.size < 1) {
-        return;
-      }
-
-      if(level.var_05ED.var_83A3.size > 1) {
-        var_00 = func_40ED(level.var_05ED.var_83A3);
-        var_01 = func_42D8(level.var_05ED.var_83A3) + 200;
-      } else {
-        var_00 = level.var_05ED.var_83A3[0].var_A265["origin"];
-        var_01 = 200;
-      }
-
-      var_02 = anglesToForward(level.var_721C getangles());
-      var_03 = var_02 * -1 * var_01;
-      var_04 = level.var_721C getEye();
-      var_05 = var_04 - level.var_721C.var_0116;
-      level.var_721C setOrigin(var_00 + var_03 - var_05);
-    }
-
-    func_5984(param_00) {
-      if(level.var_05ED.var_83A3.size < 1) {
-        return;
-      }
-
-      var_01 = "fxid";
-      if(level.var_05ED.var_83A3[0].var_A265["fxid"] == "No FX" && level.var_05ED.var_83A3[0].var_A265["soundalias"] != "null") {
-        var_01 = "soundalias";
-      }
-
-      var_02 = level.var_05ED.var_83A3[0].var_A265[var_01];
-      var_03 = [];
-      foreach(var_06, var_05 in level.var_2804) {
-        if(isDefined(var_05.var_A265[var_01]) && issubstr(var_05.var_A265[var_01], var_02)) {
-          if(var_01 == "soundalias") {
-            if(var_05.var_A265["type"] == "soundfx_interval" || var_05.var_A265["type"] == "soundfx") {
-              var_03[var_03.size] = var_06;
+              if(var_04[var_05] < var_00 && var_04[var_05] > var_00 * -1) {
+                var_04[var_05] = 0;
+              }
             }
 
-            continue;
-          }
-
-          var_03[var_03.size] = var_06;
-        }
-      }
-
-      var_07 = 0;
-      if(var_03.size > 1) {
-        for(var_06 = 0; var_06 < var_03.size; var_06++) {
-          if(level.var_2804[var_03[var_06]] == level.var_05ED.var_83A3[0]) {
-            var_07 = var_06;
+            var_02.var_A265["origin"] = (var_03[0], var_03[1], var_03[2]);
+            var_02.var_A265["angles"] = (var_04[0], var_04[1], var_04[2]);
           }
         }
 
-        if(var_07 >= var_03.size - 1 && param_00 == "next") {
-          var_08 = var_03[0];
-        } else if(var_08 == 0 && var_01 == "prev") {
-          var_08 = var_04[var_04.size - 1];
-        } else if(var_01 == "next") {
-          var_08 = var_04[var_08 + 1];
-        } else {
-          var_08 = var_04[var_08 - 1];
-        }
-
-        func_2D93();
-        func_8390(var_08, level.var_2804[var_08]);
-        func_3E70();
-      }
-    }
-
-    func_239F() {
-      foreach(var_01 in level.var_2804) {
-        if(isDefined(var_01.var_5EED)) {
-          var_01.var_5EED delete();
-        }
-
-        var_01 func_93D7();
-      }
-    }
-
-    func_7DCF() {
-      foreach(var_01 in level.var_2804) {
-        if(var_01.var_A265["type"] == "oneshotfx") {
-          var_01 func_7DCD();
-        }
-      }
-    }
-
-    func_7DD0() {
-      foreach(var_01 in level.var_05ED.var_83A3) {
-        if(isDefined(var_01) && var_01.var_A265["type"] == "exploder") {
-          var_01 common_scripts\utility::func_0894();
-        }
-      }
-    }
-
-    func_805C() {
-      if(isDefined(level.var_2804) && level.var_27FC > 0.15) {
-        level.var_2806 = func_266A(level.var_2804);
-      }
-    }
-
-    func_805A() {
-      if(isDefined(level.var_2804)) {
-        level.var_2805 = func_266A(level.var_2804);
-      }
-    }
-
-    func_A01B() {
-      if(isDefined(level.var_2806)) {
-        func_239F();
-        level.var_2804 = [];
-        level.var_2804 = func_266A(level.var_2806);
-        func_23BA();
-        func_7D27();
-        func_7DCF();
-        func_7DD0();
-      }
-    }
-
-    func_7B4F() {
-      if(isDefined(level.var_2805)) {
-        func_239F();
-        level.var_2804 = [];
-        level.var_2804 = func_266A(level.var_2805);
-        func_23BA();
-        func_7D27();
-        func_7DCF();
-        func_7DD0();
-      }
-    }
-
-    func_266A(param_00) {
-      var_01 = [];
-      if(param_00.size > 0) {
-        for(var_02 = 0; var_02 < param_00.size; var_02++) {
-          var_03 = spawnStruct();
-          if(isDefined(param_00[var_02].var_A265)) {
-            var_03.var_A265 = [];
-            var_03.var_A265["type"] = param_00[var_02].var_A265["type"];
-            var_03.var_A265["fxid"] = param_00[var_02].var_A265["fxid"];
-            var_03.var_A265["soundalias"] = param_00[var_02].var_A265["soundalias"];
-            var_03.var_A265["loopsound"] = param_00[var_02].var_A265["loopsound"];
-            var_03.var_A265["angles"] = param_00[var_02].var_A265["angles"];
-            var_03.var_A265["origin"] = param_00[var_02].var_A265["origin"];
-            var_03.var_A265["exploder"] = param_00[var_02].var_A265["exploder"];
-            var_03.var_A265["flag"] = param_00[var_02].var_A265["flag"];
-            var_03.var_A265["exploder_type"] = param_00[var_02].var_A265["exploder_type"];
-            var_03.var_A265["server_culled"] = param_00[var_02].var_A265["server_culled"];
-            var_03.var_A265["delay_min"] = param_00[var_02].var_A265["delay_min"];
-            var_03.var_A265["delay_max"] = param_00[var_02].var_A265["delay_max"];
-            var_03.var_A265["delay"] = param_00[var_02].var_A265["delay"];
-            var_03.var_A265["forward"] = param_00[var_02].var_A265["forward"];
-            var_03.var_A265["up"] = param_00[var_02].var_A265["up"];
-            var_01[var_02] = var_03;
+        func_4125(param_00) {
+          var_01 = func_4126(param_00);
+          var_02 = [];
+          foreach(var_05, var_04 in var_01) {
+            var_02[var_05] = [];
           }
 
-          var_01[var_02].var_33DB = param_00[var_02].var_33DB;
-          var_01[var_02].var_9929 = param_00[var_02].var_9929;
+          foreach(var_07 in level.var_2804) {
+            var_08 = 0;
+            foreach(var_05, param_00 in var_01) {
+              if(var_07.var_A265["type"] != param_00) {
+                continue;
+              }
+
+              var_08 = 1;
+              var_02[var_05][var_02[var_05].size] = var_07;
+              break;
+            }
+          }
+
+          var_0B = [];
+          for(var_0C = 0; var_0C < var_01.size; var_0C++) {
+            foreach(var_07 in var_02[var_0C]) {
+              var_0B[var_0B.size] = var_07;
+            }
+          }
+
+          return var_0B;
         }
-      }
 
-      return var_01;
-    }
+        func_4126(param_00) {
+          var_01 = [];
+          if(param_00 == "fx") {
+            var_01[0] = "loopfx";
+            var_01[1] = "oneshotfx";
+            var_01[2] = "exploder";
+          } else {
+            var_01[0] = "soundfx";
+            var_01[1] = "soundfx_interval";
+            var_01[2] = "reactive_fx";
+            var_01[3] = "soundfx_dynamic";
+          }
 
-    func_7CE2(param_00) {
-      var_01 = [];
-      foreach(var_03 in level.var_2804) {
-        if(isDefined(var_03.var_0106) && var_03.var_0106 == param_00) {
-          continue;
-        }
-
-        var_01[var_01.size] = var_03;
-      }
-
-      level.var_2804 = var_01;
-    }
-
-    func_44C7(param_00) {
-      for(var_01 = 0; var_01 < level.var_2804.size; var_01++) {
-        if(param_00 == level.var_2804[var_01]) {
           return var_01;
         }
-      }
-    }
 
-    func_55E9(param_00) {
-      var_01 = level.var_5FEB - (32768, 32768, 32768);
-      var_02 = level.var_5FEB + (32768, 32768, 32768);
-      var_03 = param_00[0] > var_01[0] && param_00[0] < var_02[0];
-      var_04 = param_00[1] > var_01[1] && param_00[1] < var_02[1];
-      var_05 = param_00[2] > var_01[2] && param_00[2] < var_02[2];
-      if(var_03 && var_04 && var_05) {
-        return 1;
-      }
+        func_5556(param_00, param_01) {
+          var_02 = func_4126(param_01);
+          foreach(var_04 in var_02) {
+            if(param_00.var_A265["type"] == var_04) {
+              return 1;
+            }
+          }
 
-      return 0;
-    }
-
-    func_0646() {
-      wait(0.25);
-      level.var_05ED.var_83A3 = [];
-      for(var_00 = 0; var_00 < level.var_2804.size; var_00++) {
-        var_01 = level.var_2804[var_00];
-        if(isDefined(var_01.var_A265["type"]) == 0) {
-          continue;
+          return 0;
         }
 
-        if(var_01.var_A265["type"] == "soundfx") {
-          level.var_05ED.var_83A3[level.var_05ED.var_83A3.size] = var_01;
-        }
-      }
+        func_27F8() {
+          var_00 = [];
+          var_00[0] = "soundfx";
+          var_00[1] = "loopfx";
+          var_00[2] = "oneshotfx";
+          var_00[3] = "exploder";
+          var_00[4] = "soundfx_interval";
+          var_00[5] = "reactive_fx";
+          var_00[6] = "soundfx_dynamic";
+          var_01 = [];
+          foreach(var_04, var_03 in var_00) {
+            var_01[var_04] = [];
+          }
 
-      func_A0CA();
-      level.var_05ED.var_83A3 = [];
-    }
+          foreach(var_06 in level.var_2804) {
+            var_07 = 0;
+            foreach(var_04, var_09 in var_00) {
+              if(var_06.var_A265["type"] != var_09) {
+                continue;
+              }
+
+              var_07 = 1;
+              var_01[var_04][var_01[var_04].size] = var_06;
+              break;
+            }
+          }
+
+          var_0B = [];
+          for(var_0C = 0; var_0C < var_00.size; var_0C++) {
+            foreach(var_06 in var_01[var_0C]) {
+              var_0B[var_0B.size] = var_06;
+            }
+          }
+
+          level.var_2804 = var_0B;
+        }
+
+        func_208C() {
+          common_scripts\utility:: fileprint_launcher_start_file();
+        }
+
+        func_208A(param_00) {
+          common_scripts\utility:: fileprint_launcher(param_00);
+        }
+
+        func_208B(param_00, param_01, param_02) {
+          var_03 = 1;
+          if(param_01 != "" || param_00) {
+            var_03 = 0;
+          }
+
+          if(common_scripts\utility::func_57D7()) {
+            var_04 = common_scripts\utility::func_4381() + param_01 + "_" + param_02 + ".gsc";
+            if(param_00) {
+              var_04 = "backup_" + param_02 + ".gsc";
+            }
+          } else {
+            var_04 = common_scripts\utility::func_4381() + param_02 + "_" + var_03 + ".gsc";
+            if(param_00) {
+              var_04 = "backup.gsc";
+            }
+          }
+
+          common_scripts\utility:: fileprint_launcher_end_file("/share/raw/maps/createfx/" + var_04,var_03);
+        }
+
+        func_7745() {
+          func_0905("mouse1");
+          func_0905("BUTTON_RSHLDR");
+          func_0905("BUTTON_LSHLDR");
+          func_0905("BUTTON_RSTICK");
+          func_0905("BUTTON_LSTICK");
+          func_0905("BUTTON_A");
+          func_0905("BUTTON_B");
+          func_0905("BUTTON_X");
+          func_0905("BUTTON_Y");
+          func_0905("DPAD_UP");
+          func_0905("DPAD_LEFT");
+          func_0905("DPAD_RIGHT");
+          func_0905("DPAD_DOWN");
+          func_0938("shift");
+          func_0938("ctrl");
+          func_0938("escape");
+          func_0938("F1");
+          func_0938("F5");
+          func_0938("F4");
+          func_0938("F2");
+          func_0938("a");
+          func_0938("b");
+          func_0938("g");
+          func_0938("c");
+          func_0938("h");
+          func_0938("i");
+          func_0938("j");
+          func_0938("f");
+          func_0938("k");
+          func_0938("l");
+          func_0938("m");
+          func_0938("o");
+          func_0938("p");
+          func_0938("r");
+          func_0938("s");
+          func_0938("u");
+          func_0938("v");
+          func_0938("x");
+          func_0938("y");
+          func_0938("z");
+          func_0938("del");
+          func_0938("end");
+          func_0938("tab");
+          func_0938("ins");
+          func_0938("add");
+          func_0938("space");
+          func_0938("enter");
+          func_0938("1");
+          func_0938("2");
+          func_0938("3");
+          func_0938("4");
+          func_0938("5");
+          func_0938("6");
+          func_0938("7");
+          func_0938("8");
+          func_0938("9");
+          func_0938("0");
+          func_0938("-");
+          func_0938("=");
+          func_0938(",");
+          func_0938(".");
+          func_0938("[");
+          func_0938("]");
+          func_0938("leftarrow");
+          func_0938("rightarrow");
+          func_0938("uparrow");
+          func_0938("downarrow");
+        }
+
+        func_5E6A(param_00) {
+          if(isDefined(level._createfx.var_5E6F[param_00])) {
+            return 0;
+          }
+
+          return func_5996(param_00);
+        }
+
+        func_5996(param_00) {
+          return level.var_27FB && isDefined(level.var_1DD0[param_00]);
+        }
+
+        func_0905(param_00) {
+          if(func_5E6A(param_00)) {
+            return;
+          }
+
+          if(!isDefined(level.var_1DDB[param_00])) {
+            if(level.player buttonpresseddevonly(param_00)) {
+              level.var_1DDB[param_00] = 1;
+              level.var_1DD8[param_00] = 1;
+              return;
+            }
+
+            return;
+          }
+
+          if(!level.player buttonpresseddevonly(param_00)) {
+            level.var_1DDB[param_00] = undefined;
+          }
+        }
+
+        func_0938(param_00) {
+          level.var_1DD0[param_00] = 1;
+          func_0905(param_00);
+        }
+
+        func_1DD9(param_00, param_01) {
+          return func_1DDE(param_00) || func_1DDE(param_01);
+        }
+
+        func_1DDE(param_00) {
+          if(!isDefined(param_00)) {
+            return 0;
+          }
+
+          if(func_5996(param_00)) {
+            return 0;
+          }
+
+          return level.player buttonpresseddevonly(param_00);
+        }
+
+        func_1DCF(param_00, param_01) {
+          if(isDefined(param_01)) {
+            if(isDefined(level.var_1DDB[param_01])) {
+              return 1;
+            }
+          }
+
+          return isDefined(level.var_1DDB[param_00]);
+        }
+
+        func_1DCE(param_00, param_01) {
+          if(isDefined(param_01)) {
+            if(isDefined(level.var_1DD8[param_01])) {
+              return 1;
+            }
+          }
+
+          return isDefined(level.var_1DD8[param_00]);
+        }
+
+        func_51E1() {
+          level._createfx.var_4F6E = [];
+          level._createfx.var_4F6C = 20;
+          level.var_2411 = newhudelem();
+          level.var_2411.alpha = 0;
+          for(var_00 = 0; var_00 < level._createfx.var_4F6C; var_00++) {
+            var_01 = newhudelem();
+            var_01.alignx = "left";
+            var_01.location = 0;
+            var_01.foreground = 1;
+            var_01.fontscale = 1.4;
+            var_01.sort = 20;
+            var_01.alpha = 1;
+            var_01.y = 60 + var_00 * 15;
+            level._createfx.var_4F6E[var_00] = var_01;
+          }
+
+          var_01 = newhudelem();
+          var_01.alignx = "center";
+          var_01.location = 0;
+          var_01.foreground = 1;
+          var_01.fontscale = 1.4;
+          var_01.sort = 20;
+          var_01.alpha = 1;
+          var_01.color = (1, 1, 0);
+          var_01.x = 320;
+          var_01.y = 240;
+          level.var_27F1 = var_01;
+        }
+
+        func_51A1() {
+          var_00 = newhudelem();
+          var_00.location = 0;
+          var_00.alignx = "center";
+          var_00.aligny = "middle";
+          var_00.foreground = 1;
+          var_00.fontscale = 2;
+          var_00.sort = 20;
+          var_00.alpha = 1;
+          var_00.x = 320;
+          var_00.y = 233;
+        }
+
+        func_23BA() {
+          level.var_2411 method_80BE();
+          for(var_00 = 0; var_00 < level._createfx.var_4F6C; var_00++) {}
+
+          level.var_3F72 = 0;
+        }
+
+        func_84AD(param_00) {
+          level.var_3F72++;
+        }
+
+        func_5272() {
+          if(!isDefined(level._createfx.var_9A91)) {
+            level._createfx.var_9A91 = [];
+          }
+
+          if(!isDefined(level._createfx.var_9A90)) {
+            level._createfx.var_9A90 = 1;
+          }
+
+          if(!isDefined(level._createfx.var_9A8F)) {
+            level._createfx.var_9A8F = "";
+          }
+        }
+
+        func_6691(param_00) {
+          foreach(var_03, var_02 in level._createfx.var_9A91) {
+            if(isDefined(var_02.var_A282)) {
+              var_02.var_A282 destroy();
+            }
+
+            var_02 destroy();
+            level._createfx.var_9A91[var_03] = undefined;
+          }
+
+          level._createfx.var_9A8F = param_00;
+        }
+
+        func_2906(param_00) {
+          return level._createfx.var_9A8F == param_00;
+        }
+
+        func_23D2() {
+          func_6691("");
+        }
+
+        func_6692(param_00) {
+          var_01 = newhudelem();
+          var_01.alignx = "left";
+          var_01.location = 0;
+          var_01.foreground = 1;
+          var_01.fontscale = 1.2;
+          var_01.alpha = 1;
+          var_01.x = 0;
+          var_01.y = 320 + param_00 * 15;
+          return var_01;
+        }
+
+        func_4386(param_00) {
+          if(isDefined(level._createfx.var_9A91[param_00])) {
+            return level._createfx.var_9A91[param_00];
+          }
+
+          return undefined;
+        }
+
+        func_85A6(param_00, param_01, param_02) {
+          var_03 = func_4386(param_00);
+          if(!isDefined(var_03)) {
+            var_03 = func_6692(level._createfx.var_9A91.size);
+            level._createfx.var_9A91[param_00] = var_03;
+            var_03.var_991F = param_00;
+          }
+
+          if(isDefined(param_01)) {
+            if(!isDefined(param_02)) {
+              param_02 = (1, 1, 1);
+            }
+
+            var_03.color = param_02;
+          }
+        }
+
+        func_838F() {
+          var_00 = getDvar("select_by_substring");
+          if(var_00 == "") {
+            return 0;
+          }
+
+          setDvar("select_by_substring", "");
+          var_01 = [];
+          foreach(var_04, var_03 in level.var_2804) {
+            if(issubstr(var_03.var_A265["fxid"], var_00)) {
+              var_01[var_01.size] = var_04;
+            }
+          }
+
+          if(var_01.size == 0) {
+            return 0;
+          }
+
+          func_2D93();
+          func_8391(var_01);
+          foreach(var_06 in var_01) {
+            var_03 = level.var_2804[var_06];
+            func_8390(var_06, var_03);
+          }
+
+          return 1;
+        }
+
+        func_8391(param_00) {
+          foreach(var_02 in param_00) {
+            var_03 = level.var_2804[var_02];
+            func_8390(var_02, var_03);
+          }
+        }
+
+        func_2D93() {
+          foreach(var_01 in level._createfx.var_83A3) {
+            var_02 = func_44C7(var_01);
+            func_2D94(var_02, var_01);
+          }
+        }
+
+        func_8875() {
+          wait(0.5);
+          for(;;) {
+            level.var_27FC = level.var_27FC + 0.05;
+            if(level.var_27FC == 0.15) {
+              foreach(var_01 in level._createfx.var_83A3) {
+                if(var_01.var_A265["type"] == "exploder") {
+                  var_01 common_scripts\utility::func_894();
+                }
+              }
+
+              common_scripts\_createfxmenu::func_2FF2();
+              func_805A();
+            }
+
+            if(level.var_27FC == 0.05) {
+              var_01 = common_scripts\_createfxmenu::func_41E4();
+              common_scripts\_createfxmenu::func_2FF2();
+            }
+
+            wait 0.05;
+          }
+        }
+
+        func_3E70() {
+          if(level._createfx.var_83A3.size < 1) {
+            return;
+          }
+
+          if(level._createfx.var_83A3.size > 1) {
+            var_00 = func_40ED(level._createfx.var_83A3);
+            var_01 = func_42D8(level._createfx.var_83A3) + 200;
+          } else {
+            var_00 = level._createfx.var_83A3[0].var_A265["origin"];
+            var_01 = 200;
+          }
+
+          var_02 = anglesToForward(level.player getplayerangles());
+          var_03 = var_02 * -1 * var_01;
+          var_04 = level.player getEye();
+          var_05 = var_04 - level.player.origin;
+          level.player setOrigin(var_00 + var_03 - var_05);
+        }
+
+        func_5984(param_00) {
+          if(level._createfx.var_83A3.size < 1) {
+            return;
+          }
+
+          var_01 = "fxid";
+          if(level._createfx.var_83A3[0].var_A265["fxid"] == "No FX" && level._createfx.var_83A3[0].var_A265["soundalias"] != "null") {
+            var_01 = "soundalias";
+          }
+
+          var_02 = level._createfx.var_83A3[0].var_A265[var_01];
+          var_03 = [];
+          foreach(var_06, var_05 in level.var_2804) {
+            if(isDefined(var_05.var_A265[var_01]) && issubstr(var_05.var_A265[var_01], var_02)) {
+              if(var_01 == "soundalias") {
+                if(var_05.var_A265["type"] == "soundfx_interval" || var_05.var_A265["type"] == "soundfx") {
+                  var_03[var_03.size] = var_06;
+                }
+
+                continue;
+              }
+
+              var_03[var_03.size] = var_06;
+            }
+          }
+
+          var_07 = 0;
+          if(var_03.size > 1) {
+            for(var_06 = 0; var_06 < var_03.size; var_06++) {
+              if(level.var_2804[var_03[var_06]] == level._createfx.var_83A3[0]) {
+                var_07 = var_06;
+              }
+            }
+
+            if(var_07 >= var_03.size - 1 && param_00 == "next") {
+              var_08 = var_03[0];
+            } else if(var_08 == 0 && var_01 == "prev") {
+              var_08 = var_04[var_04.size - 1];
+            } else if(var_01 == "next") {
+              var_08 = var_04[var_08 + 1];
+            } else {
+              var_08 = var_04[var_08 - 1];
+            }
+
+            func_2D93();
+            func_8390(var_08, level.var_2804[var_08]);
+            func_3E70();
+          }
+        }
+
+        func_239F() {
+          foreach(var_01 in level.var_2804) {
+            if(isDefined(var_01.var_5EED)) {
+              var_01.var_5EED delete();
+            }
+
+            var_01 func_93D7();
+          }
+        }
+
+        func_7DCF() {
+          foreach(var_01 in level.var_2804) {
+            if(var_01.var_A265["type"] == "oneshotfx") {
+              var_01 restart_fx_looper();
+            }
+          }
+        }
+
+        func_7DD0() {
+          foreach(var_01 in level._createfx.var_83A3) {
+            if(isDefined(var_01) && var_01.var_A265["type"] == "exploder") {
+              var_01 common_scripts\utility::func_894();
+            }
+          }
+        }
+
+        func_805C() {
+          if(isDefined(level.var_2804) && level.var_27FC > 0.15) {
+            level.var_2806 = func_266A(level.var_2804);
+          }
+        }
+
+        func_805A() {
+          if(isDefined(level.var_2804)) {
+            level.var_2805 = func_266A(level.var_2804);
+          }
+        }
+
+        func_A01B() {
+          if(isDefined(level.var_2806)) {
+            func_239F();
+            level.var_2804 = [];
+            level.var_2804 = func_266A(level.var_2806);
+            func_23BA();
+            func_7D27();
+            func_7DCF();
+            func_7DD0();
+          }
+        }
+
+        func_7B4F() {
+          if(isDefined(level.var_2805)) {
+            func_239F();
+            level.var_2804 = [];
+            level.var_2804 = func_266A(level.var_2805);
+            func_23BA();
+            func_7D27();
+            func_7DCF();
+            func_7DD0();
+          }
+        }
+
+        func_266A(param_00) {
+          var_01 = [];
+          if(param_00.size > 0) {
+            for(var_02 = 0; var_02 < param_00.size; var_02++) {
+              var_03 = spawnStruct();
+              if(isDefined(param_00[var_02].var_A265)) {
+                var_03.var_A265 = [];
+                var_03.var_A265["type"] = param_00[var_02].var_A265["type"];
+                var_03.var_A265["fxid"] = param_00[var_02].var_A265["fxid"];
+                var_03.var_A265["soundalias"] = param_00[var_02].var_A265["soundalias"];
+                var_03.var_A265["loopsound"] = param_00[var_02].var_A265["loopsound"];
+                var_03.var_A265["angles"] = param_00[var_02].var_A265["angles"];
+                var_03.var_A265["origin"] = param_00[var_02].var_A265["origin"];
+                var_03.var_A265["exploder"] = param_00[var_02].var_A265["exploder"];
+                var_03.var_A265["flag"] = param_00[var_02].var_A265["flag"];
+                var_03.var_A265["exploder_type"] = param_00[var_02].var_A265["exploder_type"];
+                var_03.var_A265["server_culled"] = param_00[var_02].var_A265["server_culled"];
+                var_03.var_A265["delay_min"] = param_00[var_02].var_A265["delay_min"];
+                var_03.var_A265["delay_max"] = param_00[var_02].var_A265["delay_max"];
+                var_03.var_A265["delay"] = param_00[var_02].var_A265["delay"];
+                var_03.var_A265["forward"] = param_00[var_02].var_A265["forward"];
+                var_03.var_A265["up"] = param_00[var_02].var_A265["up"];
+                var_01[var_02] = var_03;
+              }
+
+              var_01[var_02].var_33DB = param_00[var_02].var_33DB;
+              var_01[var_02].var_9929 = param_00[var_02].var_9929;
+            }
+          }
+
+          return var_01;
+        }
+
+        func_7CE2(param_00) {
+          var_01 = [];
+          foreach(var_03 in level.var_2804) {
+            if(isDefined(var_03.model) && var_03.model == param_00) {
+              continue;
+            }
+
+            var_01[var_01.size] = var_03;
+          }
+
+          level.var_2804 = var_01;
+        }
+
+        func_44C7(param_00) {
+          for(var_01 = 0; var_01 < level.var_2804.size; var_01++) {
+            if(param_00 == level.var_2804[var_01]) {
+              return var_01;
+            }
+          }
+        }
+
+        func_55E9(param_00) {
+          var_01 = level.var_5FEB - (32768, 32768, 32768);
+          var_02 = level.var_5FEB + (32768, 32768, 32768);
+          var_03 = param_00[0] > var_01[0] && param_00[0] < var_02[0];
+          var_04 = param_00[1] > var_01[1] && param_00[1] < var_02[1];
+          var_05 = param_00[2] > var_01[2] && param_00[2] < var_02[2];
+          if(var_03 && var_04 && var_05) {
+            return 1;
+          }
+
+          return 0;
+        }
+
+        func_0646() {
+          wait(0.25);
+          level._createfx.var_83A3 = [];
+          for(var_00 = 0; var_00 < level.var_2804.size; var_00++) {
+            var_01 = level.var_2804[var_00];
+            if(isDefined(var_01.var_A265["type"]) == 0) {
+              continue;
+            }
+
+            if(var_01.var_A265["type"] == "soundfx") {
+              level._createfx.var_83A3[level._createfx.var_83A3.size] = var_01;
+            }
+          }
+
+          func_A0CA();
+          level._createfx.var_83A3 = [];
+        }

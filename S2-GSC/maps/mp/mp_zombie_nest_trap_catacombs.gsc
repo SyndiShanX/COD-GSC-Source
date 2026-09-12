@@ -25,26 +25,26 @@ func_9098(param_00) {
 
 func_6F70(param_00) {
   var_01 = get_riverside_door();
-  var_02 = distance(param_00.var_0116, var_01.var_0116) < 512;
+  var_02 = distance(param_00.origin, var_01.origin) < 512;
   var_03 = (0, 0, 0);
   if(var_02 && !common_scripts\utility::func_3C77("underground_to_riverside1")) {
     return;
   } else if(var_02) {
-    var_03 = -4 * vectorNormalize(anglesToForward(param_00.var_001D));
-    var_03 = var_03 + 96 * vectorNormalize(anglestoright(param_00.var_001D));
+    var_03 = -4 * vectorNormalize(anglesToForward(param_00.angles));
+    var_03 = var_03 + 96 * vectorNormalize(anglestoright(param_00.angles));
     var_03 = var_03 + (0, 0, -2);
   }
 
-  var_04 = spawn("script_model", param_00.var_0116 + (0, 0, -128) + var_03);
+  var_04 = spawn("script_model", param_00.origin + (0, 0, -128) + var_03);
   var_04.var_9C92 = self;
-  var_04.var_9CBB = self.var_0165;
+  var_04.var_9CBB = self.script_noteworthy;
   var_04 setModel("zmb_catacomb_trap_saw_02");
-  var_04.var_001D = param_00.var_001D;
+  var_04.angles = param_00.angles;
   var_04 rotateby((0, 0, -36000), 100);
   var_04 movez(128, 1, 0, 0.5);
   var_04 thread func_6F72(self);
   var_04 thread func_6F73(self);
-  common_scripts\utility::func_A70A("cooldown", "no_power", "deactivate", "ready");
+  common_scripts\utility::waittill_any("cooldown", "no_power", "deactivate", "ready");
   var_04 movez(-128, 1, 0, 0.5);
   wait(0.5);
   var_04 delete();
@@ -62,24 +62,24 @@ get_riverside_door() {
 
 func_902B(param_00) {
   var_01 = common_scripts\utility::func_7A33(self);
-  var_02 = common_scripts\utility::func_46B5(var_01.var_01A2, "targetname");
-  var_03 = spawn("script_model", var_01.var_0116 + (0, 0, -128));
+  var_02 = common_scripts\utility::func_46B5(var_01.target, "targetname");
+  var_03 = spawn("script_model", var_01.origin + (0, 0, -128));
   var_03.var_9C92 = param_00;
-  var_03.var_9CBB = param_00.var_0165;
+  var_03.var_9CBB = param_00.script_noteworthy;
   var_03 setModel("zmb_catacomb_trap_saw_02");
-  var_03.var_001D = var_01.var_001D + (180, 0, 0);
+  var_03.angles = var_01.angles + (180, 0, 0);
   var_03 rotatevelocity((0, 0, -1000), 10);
-  var_04 = spawn("script_model", var_01.var_0116);
+  var_04 = spawn("script_model", var_01.origin);
   var_04 setModel("tag_origin");
-  var_04.var_001D = var_01.var_001D;
+  var_04.angles = var_01.angles;
   var_03 movez(128, 0.5);
-  playFXOnTag(level.var_0611["zmb_catacombs_saw_on"], var_04, "tag_origin");
+  playFXOnTag(level.var_611["zmb_catacombs_saw_on"], var_04, "tag_origin");
   var_03 lib_0378::func_8D74("aud_saw_blade_sound");
   wait(0.5);
-  var_03 moveTo(var_02.var_0116, 2.5, 0.25, 0.25);
-  var_04 moveTo(var_02.var_0116, 2.5, 0.25, 0.25);
+  var_03 moveTo(var_02.origin, 2.5, 0.25, 0.25);
+  var_04 moveTo(var_02.origin, 2.5, 0.25, 0.25);
   var_03 func_8075(2.5, param_00);
-  stopFXOnTag(level.var_0611["zmb_catacombs_saw_on"], var_04, "tag_origin");
+  stopFXOnTag(level.var_611["zmb_catacombs_saw_on"], var_04, "tag_origin");
   var_03 movez(-128, 1);
   var_03 lib_0378::func_8D74("aud_saw_blade_end");
   wait(1);
@@ -107,15 +107,15 @@ func_6F72(param_00) {
         continue;
       }
 
-      if(distance(self.var_0116, var_03.var_0116) > 64) {
+      if(distance(self.origin, var_03.origin) > 64) {
         continue;
       }
 
       if(var_03 lib_0547::func_580A()) {
-        var_03 dodamage(var_03.var_00BC * 0.25, self.var_0116, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
+        var_03 dodamage(var_03.health * 0.25, self.origin, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
       } else {
-        param_00 maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_6FEE(var_03);
-        var_04 = 500 * vectorNormalize(var_03.var_0116 - self.var_0116);
+        param_00 maps / mp / mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_6FEE(var_03);
+        var_04 = 500 * vectorNormalize(var_03.origin - self.origin);
         var_03 lib_0547::func_5A85("torso_lower", (var_04[0], var_04[1], 1500), self, "trap_zm_mp");
       }
 
@@ -132,7 +132,7 @@ func_6F73(param_00) {
   param_00 endon("deactivate");
   param_00 endon("ready");
   for(;;) {
-    foreach(var_02 in level.var_744A) {
+    foreach(var_02 in level.players) {
       if(!isalive(var_02)) {
         continue;
       }
@@ -141,7 +141,7 @@ func_6F73(param_00) {
         continue;
       }
 
-      if(distance(self.var_0116, var_02.var_0116) > 64) {
+      if(distance(self.origin, var_02.origin) > 64) {
         continue;
       }
 
@@ -151,7 +151,7 @@ func_6F73(param_00) {
       }
 
       if(isalive(var_02) && var_03 > var_02.var_A86A + 500 && !lib_0547::func_577E(var_02)) {
-        var_02 dodamage(5, self.var_0116, undefined, undefined, "MOD_CRUSH");
+        var_02 dodamage(5, self.origin, undefined, undefined, "MOD_CRUSH");
         var_02.var_A86A = gettime();
         wait 0.05;
       }
@@ -165,7 +165,7 @@ func_8075(param_00, param_01) {
   var_02 = 0;
   while(var_02 < param_00) {
     var_03 = lib_0547::func_408F();
-    var_04 = common_scripts\utility::func_0F73(var_03, level.var_744A);
+    var_04 = common_scripts\utility::func_F73(var_03, level.players);
     foreach(var_06 in var_04) {
       if(!isDefined(var_06) || !isalive(var_06)) {
         continue;
@@ -179,21 +179,21 @@ func_8075(param_00, param_01) {
         continue;
       }
 
-      if(distance(self.var_0116, var_06.var_0116) > 64) {
+      if(distance(self.origin, var_06.origin) > 64) {
         continue;
       }
 
       if(isPlayer(var_06)) {
-        var_06 dodamage(5, self.var_0116, undefined, undefined, "MOD_CRUSH");
+        var_06 dodamage(5, self.origin, undefined, undefined, "MOD_CRUSH");
       } else if(var_06 lib_0547::func_580A()) {
-        var_06 dodamage(var_06.var_00BC * 0.25, self.var_0116, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
+        var_06 dodamage(var_06.health * 0.25, self.origin, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
       } else {
-        param_01 maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_6FEE(var_06);
-        var_07 = 500 * vectorNormalize(var_06.var_0116 - self.var_0116);
+        param_01 maps / mp / mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_6FEE(var_06);
+        var_07 = 500 * vectorNormalize(var_06.origin - self.origin);
         var_06 lib_0547::func_5A85("torso_lower", (var_07[0], var_07[1], 1500), self, "trap_zm_mp");
         if(!isDefined(self.hitbytrap)) {
-          foreach(var_09 in level.var_744A) {
-            var_09 maps\mp\gametypes\zombies::func_47C7("kill_trap");
+          foreach(var_09 in level.players) {
+            var_09 maps / mp / gametypes / zombies::func_47C7("kill_trap");
             self.hitbytrap = 1;
           }
         }

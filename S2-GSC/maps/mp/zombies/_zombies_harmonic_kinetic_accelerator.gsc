@@ -3,7 +3,7 @@
  * Script: maps\mp\zombies\_zombies_harmonic_kinetic_accelerator.gsc
 *********************************************************************/
 
-func_00D5() {
+init() {
   common_scripts\utility::func_3C87("zmb_double_points_available");
   common_scripts\utility::func_92C("dlc_zmb_dig02_sword_looping", "vfx/map/mp_zombie_dig02/dlc_zmb_dig02_sword_looping");
   common_scripts\utility::func_92C("side_ee_reward_green", "vfx/zombie/prototype_fx/dlc4/side_ee_reward_green");
@@ -26,15 +26,15 @@ rungenerator_jump() {
     }
 
     foreach(var_03 in var_01) {
-      if(distance(var_00.var_116, var_03.var_116) < 65) {
+      if(distance(var_00.origin, var_03.origin) < 65) {
         var_04 = level.oribital_rotator_2;
-        if(issubstr(var_03.var_165, "b")) {
+        if(issubstr(var_03.script_noteworthy, "b")) {
           var_04 = level.oribital_rotator_1;
         }
 
         var_05 = level.oribital_rotator_1 common_scripts\utility::func_8FFC();
         var_00 maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_05);
-        var_05 method_805B();
+        var_05 show();
         if(var_04 == level.oribital_rotator_2) {
           var_05 rotateYaw(-310, 1.7, 0, 0.8);
         } else {
@@ -42,10 +42,10 @@ rungenerator_jump() {
         }
 
         var_00 setstance("crouch");
-        var_00 setangles(var_03.var_1D);
+        var_00 setplayerangles(var_03.angles);
         var_00 playerlinktoabsolute(var_05);
         var_06 = common_scripts\utility::func_F93(var_01, var_03);
-        var_00 method_8322();
+        var_00 disableweapons();
         var_00 childthread renable_weaps();
         wait(1.7);
         var_00 unlink();
@@ -62,7 +62,7 @@ rungenerator_jump() {
 renable_weaps() {
   var_00 = self;
   wait(1.2);
-  var_00 method_8323();
+  var_00 enableweapons();
 }
 
 run_troubled_double_points(param_00) {
@@ -70,8 +70,8 @@ run_troubled_double_points(param_00) {
   common_scripts\utility::func_3C87("troubled_double_points_1");
   common_scripts\utility::func_3C87("troubled_double_points_2");
   var_01 = common_scripts\utility::func_46B5("side_raven_ee", "targetname");
-  var_02 = getEntArray(var_01.var_1A2, "targetname");
-  common_scripts\utility::func_FB2(var_02, ::set_flag_on_damage);
+  var_02 = getEntArray(var_01.target, "targetname");
+  common_scripts\utility::array_thread(var_02, ::set_flag_on_damage);
   for(;;) {
     var_03 = 1;
     foreach(var_05 in var_02) {
@@ -89,10 +89,10 @@ run_troubled_double_points(param_00) {
   }
 
   var_07 = common_scripts\utility::func_46B5("troubled_double_points", "targetname");
-  var_08 = common_scripts\utility::func_46B7(var_07.var_1A2, "targetname");
+  var_08 = common_scripts\utility::func_46B7(var_07.target, "targetname");
   var_09 = var_07 common_scripts\utility::func_8FFC();
-  var_09.var_1D = (0, 30, 0);
-  var_09 method_805B();
+  var_09.angles = (0, 30, 0);
+  var_09 show();
   var_0A = ["troubled_double_points_spawn", "troubled_double_points_spawn_2", "troubled_double_points_spawn_3"];
   foreach(var_0D, var_0C in var_0A) {
     if(!common_scripts\utility::func_3C77("troubled_double_points_" + var_0D)) {
@@ -105,10 +105,10 @@ run_troubled_double_points(param_00) {
       var_09.var_3F2F delete();
     }
 
-    var_09.var_116 = (0, 0, 0);
+    var_09.origin = (0, 0, 0);
   }
 
-  level thread maps\mp\gametypes\zombies::func_8AA();
+  level thread maps / mp / gametypes / zombies::func_8AA();
   var_0E = common_scripts\utility::func_46B5("zmb_dlc4_size_ee_final", "targetname");
   var_0F = 0;
   while(!common_scripts\utility::func_562E(var_0F)) {
@@ -128,26 +128,26 @@ run_troubled_double_points(param_00) {
 }
 
 run_mini_game(param_00) {
-  var_01 = common_scripts\utility::func_46B7(param_00.var_1A2, "targetname");
+  var_01 = common_scripts\utility::func_46B7(param_00.target, "targetname");
   var_02 = var_01[0] common_scripts\utility::func_8FFC();
-  var_02 method_805B();
-  var_02.var_21F6 = [];
+  var_02 show();
+  var_02.children = [];
   var_02 thread rotate_target();
   var_02 set_orbiters(20);
   var_03 = var_02 run_game_sequence(var_01, param_00);
   var_04 = common_scripts\utility::func_46B5("dlc4_ee_weap_reward", "targetname");
-  var_05 = common_scripts\utility::func_46B5(var_04.var_1A2, "targetname");
-  foreach(var_07 in var_02.var_21F6) {
-    var_07 method_805B();
+  var_05 = common_scripts\utility::func_46B5(var_04.target, "targetname");
+  foreach(var_07 in var_02.children) {
+    var_07 show();
   }
 
   var_02 set_orbiters(10);
-  var_02.var_116 = var_05.var_116 + (0, 0, -10);
-  var_02.var_1D = (90, 0, 0);
-  var_09 = spawn_a_floating_weapon_award(maps\mp\zombies\_zombies_magicbox::func_454B(var_03, "blunderbuss_pap_zm"), var_04.var_116, var_03);
-  var_09.linkent.var_116 = var_04.var_116;
+  var_02.origin = var_05.origin + (0, 0, -10);
+  var_02.angles = (90, 0, 0);
+  var_09 = spawn_a_floating_weapon_award(maps\mp\zombies\_zombies_magicbox::func_454B(var_03, "blunderbuss_pap_zm"), var_04.origin, var_03);
+  var_09.linkent.origin = var_04.origin;
   var_0A = undefined;
-  var_09.linkent moveTo(var_05.var_116, 4, 0, 1);
+  var_09.linkent moveTo(var_05.origin, 4, 0, 1);
   wait(3.5);
   while(!isDefined(var_0A) || var_0A != var_03) {
     var_0A = get_new_player(var_09);
@@ -159,7 +159,7 @@ run_mini_game(param_00) {
   var_09.linkent delete();
   var_02 movez(-512, 8, 3);
   wait(2);
-  foreach(var_0C in var_02.var_21F6) {
+  foreach(var_0C in var_02.children) {
     var_0C delete();
   }
 
@@ -175,7 +175,7 @@ spawn_a_floating_weapon_award(param_00, param_01, param_02) {
     if(isDefined(param_02)) {
       var_06 = [param_02];
     } else {
-      var_06 = level.var_744A;
+      var_06 = level.players;
     }
 
     var_07 = 1;
@@ -206,18 +206,18 @@ show_prespawned_floating_award(param_00) {
 
 prespawn_a_floating_award(param_00, param_01, param_02) {
   var_03 = spawn("weapon_" + param_00, getclosestpointonnavmesh(param_01) + (0, 0, 8));
-  var_03.var_1D = (var_03.var_1D[0] - 30, randomint(360), var_03.var_1D[2]);
+  var_03.angles = (var_03.angles[0] - 30, randomint(360), var_03.angles[2]);
   var_03 makeunusable();
   var_03 set_hidden_but_sent_to_player(param_02);
   var_04 = var_03 common_scripts\utility::func_8FFC();
-  var_04.var_116 = var_04.var_116 + (0, 0, 8);
+  var_04.origin = var_04.origin + (0, 0, 8);
   var_04 set_hidden_but_sent_to_player(param_02);
-  var_03.var_116 = var_04.var_116;
+  var_03.origin = var_04.origin;
   var_03 method_8449(var_04, "tag_origin");
   var_03.linkent = var_04;
   var_04 rotateYaw(-29536, 850);
   var_05 = spawnStruct();
-  var_05.var_116 = var_03.var_116;
+  var_05.origin = var_03.origin;
   return var_03;
 }
 
@@ -228,12 +228,12 @@ set_hidden_but_sent_to_player(param_00) {
 
 set_shown_only_to_player(param_00) {
   if(isDefined(param_00)) {
-    self method_805C();
+    self hide();
     self showtoclient(param_00);
     return;
   }
 
-  self method_805B();
+  self show();
 }
 
 run_game_sequence(param_00, param_01) {
@@ -243,8 +243,8 @@ run_game_sequence(param_00, param_01) {
   while(!var_03) {
     param_01.var_3F2F = lib_0547::func_8FBA(param_01, "zmf_descent_vision_blood_ready");
     triggerfx(param_01.var_3F2F);
-    foreach(var_06 in var_02.var_21F6) {
-      var_06 method_805C();
+    foreach(var_06 in var_02.children) {
+      var_06 hide();
     }
 
     var_04 = get_new_player(param_01);
@@ -254,28 +254,28 @@ run_game_sequence(param_00, param_01) {
     var_08 = level.var_A980;
     var_03 = 0;
     foreach(var_0A in param_00) {
-      foreach(var_06 in var_02.var_21F6) {
-        var_06 method_805C();
+      foreach(var_06 in var_02.children) {
+        var_06 hide();
       }
 
-      var_02.var_116 = var_0A.var_116;
-      var_02.var_1D = vectortoangles(var_02.var_116 - param_01.var_116);
+      var_02.origin = var_0A.origin;
+      var_02.angles = vectortoangles(var_02.origin - param_01.origin);
       wait(1);
-      foreach(var_06 in var_02.var_21F6) {
-        var_06 method_805B();
+      foreach(var_06 in var_02.children) {
+        var_06 show();
       }
 
       var_03 = var_02 wait_for_success_or_timeout();
       if(var_03) {
-        foreach(var_06 in var_02.var_21F6) {
-          playFX(common_scripts\utility::func_44F5("proj_trail_green_os"), var_06.var_116);
+        foreach(var_06 in var_02.children) {
+          playFX(common_scripts\utility::func_44F5("proj_trail_green_os"), var_06.origin);
         }
 
         continue;
       }
 
-      foreach(var_06 in var_02.var_21F6) {
-        var_06 method_805C();
+      foreach(var_06 in var_02.children) {
+        var_06 hide();
       }
 
       break;
@@ -304,24 +304,24 @@ set_orbiters(param_00) {
   var_02[1] = (0, -1 * param_00, 0);
   var_02[2] = (0, 0, param_00);
   var_02[3] = (0, 0, -1 * param_00);
-  if(!isDefined(var_01.var_21F6)) {
-    var_01.var_21F6 = [];
+  if(!isDefined(var_01.children)) {
+    var_01.children = [];
   }
 
-  foreach(var_04 in var_01.var_21F6) {
+  foreach(var_04 in var_01.children) {
     stopFXOnTag(common_scripts\utility::func_44F5("proj_trail_white"), var_04, "tag_origin");
   }
 
-  if(!isDefined(var_01.var_21F6) || var_01.var_21F6.size == 0) {
+  if(!isDefined(var_01.children) || var_01.children.size == 0) {
     for(var_06 = 0; var_06 < 4; var_06++) {
       var_07 = var_01 common_scripts\utility::func_8FFC();
-      var_07 method_805B();
+      var_07 show();
       var_07 method_8449(var_01, "tag_origin", var_02[var_06], (0, 0, 0));
-      var_01.var_21F6[var_01.var_21F6.size] = var_07;
+      var_01.children[var_01.children.size] = var_07;
     }
   } else {
     for(var_06 = 0; var_06 < 4; var_06++) {
-      var_07 = var_01.var_21F6[var_06];
+      var_07 = var_01.children[var_06];
       var_07 unlink();
       var_07 method_8449(var_01, "tag_origin", var_02[var_06], (0, 0, 0));
     }
@@ -333,7 +333,7 @@ set_orbiters(param_00) {
 reset_fx() {
   var_00 = self;
   wait 0.05;
-  foreach(var_02 in var_00.var_21F6) {
+  foreach(var_02 in var_00.children) {
     playFXOnTag(common_scripts\utility::func_44F5("proj_trail_white"), var_02, "tag_origin");
   }
 }
@@ -341,8 +341,8 @@ reset_fx() {
 wait_for_success_or_timeout() {
   var_00 = gettime();
   while(gettime() - var_00 < 5000) {
-    foreach(var_02 in maps\mp\zombies\_zombies_orbital_gravity_entangler::get_all_magical_grenades()) {
-      if(distance(var_02.var_116, self.var_116) < 40) {
+    foreach(var_02 in maps / mp / zombies / _zombies_orbital_gravity_entangler::get_all_magical_grenades()) {
+      if(distance(var_02.origin, self.origin) < 40) {
         return 1;
       }
     }
@@ -372,12 +372,12 @@ maintain_grenades() {
 
 get_new_player(param_00) {
   for(;;) {
-    foreach(var_02 in level.var_744A) {
+    foreach(var_02 in level.players) {
       if(!isDefined(var_02.zmb_dlc4_size_ee_final_hold_time)) {
         var_02.zmb_dlc4_size_ee_final_hold_time = 0;
       }
 
-      if(distance(param_00.var_116, var_02.var_116) > 60) {
+      if(distance(param_00.origin, var_02.origin) > 60) {
         var_02.zmb_dlc4_size_ee_final_hold_time = 0;
         continue;
       }
@@ -409,18 +409,18 @@ set_flag_on_damage() {
   }
 
   self.var_8A9 = 1;
-  if(self.var_3A == "script_model") {
+  if(self.classname == "script_model") {
     var_0A = (0, 0, 13);
   } else {
     var_0A = (0, 0, 5);
   }
 
-  var_0B = self.var_1D;
+  var_0B = self.angles;
   if(!isDefined(var_0B)) {
     var_0B = (0, 0, 0);
   }
 
-  playFX(common_scripts\utility::func_44F5("ee_lamp_fx"), self.var_116 + var_0A, anglesToForward(var_0B), anglestoup(var_0B));
+  playFX(common_scripts\utility::func_44F5("ee_lamp_fx"), self.origin + var_0A, anglesToForward(var_0B), anglestoup(var_0B));
   lib_0378::func_8D74("aud_raven_fly_away");
 }
 
@@ -433,11 +433,11 @@ move_around(param_00) {
   }
 
   var_01 = common_scripts\utility::func_7A33(param_00);
-  self.var_116 = var_01.var_116;
+  self.origin = var_01.origin;
   var_02 = common_scripts\utility::func_7A33(level.zmb_side_ee_colors);
-  self.ee_color = maps\mp\zombies\_zombies_orbital_gravity_entangler::get_color_for_grenade(var_02);
+  self.ee_color = maps / mp / zombies / _zombies_orbital_gravity_entangler::get_color_for_grenade(var_02);
   for(;;) {
-    self.var_1D = (randomint(360), randomint(360), randomint(360));
+    self.angles = (randomint(360), randomint(360), randomint(360));
     self.var_3F2F = lib_0547::func_8FBA(self, var_02);
     triggerfx(self.var_3F2F);
     wait(7);
@@ -446,8 +446,8 @@ move_around(param_00) {
     }
 
     var_01 = common_scripts\utility::func_7A33(param_00);
-    playFX(level.var_611["zmb_dnk_geistkraftexplode"], self.var_116);
-    lib_0378::func_8D74("aud_dlc4_magic_poof", self.var_116);
+    playFX(level.var_611["zmb_dnk_geistkraftexplode"], self.origin);
+    lib_0378::func_8D74("aud_dlc4_magic_poof", self.origin);
     if(isDefined(self.var_3F2F)) {
       self.var_3F2F delete();
     }
@@ -457,24 +457,24 @@ move_around(param_00) {
       return;
     }
 
-    self.var_116 = var_01.var_116;
-    playFX(level.var_611["zmb_dnk_geistkraftexplode"], var_01.var_116);
-    lib_0378::func_8D74("dlc3_magic_poof", self.var_116);
+    self.origin = var_01.origin;
+    playFX(level.var_611["zmb_dnk_geistkraftexplode"], var_01.origin);
+    lib_0378::func_8D74("dlc3_magic_poof", self.origin);
   }
 }
 
 wait_for_grab(param_00) {
   self endon("double_points_grabbed");
-  while(!isDefined(level.var_744A)) {
+  while(!isDefined(level.players)) {
     wait 0.05;
   }
 
   var_01 = 0;
   var_02 = undefined;
   while(!var_01) {
-    var_03 = maps\mp\zombies\_zombies_orbital_gravity_entangler::get_all_magical_grenades();
+    var_03 = maps / mp / zombies / _zombies_orbital_gravity_entangler::get_all_magical_grenades();
     foreach(var_05 in var_03) {
-      if(distance(var_05.var_116, self.var_116) > 90 || !lib_0547::func_5565(var_05.ee_color, self.ee_color)) {
+      if(distance(var_05.origin, self.origin) > 90 || !lib_0547::func_5565(var_05.ee_color, self.ee_color)) {
         continue;
       } else {
         var_01 = 1;
@@ -517,7 +517,7 @@ launchplayers(param_00) {
 
     var_01.launchpadfx[param_00.var_82EC] = lib_0547::func_8FBA(param_00.plate_model, "dlc_zmb_dig02_sword_looping", var_01);
     triggerfx(var_01.launchpadfx[param_00.var_82EC]);
-    while(!var_01 jumpbuttonPressed() || distance(var_01.var_116, param_00.var_116) > 132) {
+    while(!var_01 jumpbuttonPressed() || distance(var_01.origin, param_00.origin) > 132) {
       wait 0.05;
     }
 
@@ -525,22 +525,22 @@ launchplayers(param_00) {
       var_01.launchpadfx[param_00.var_82EC] delete();
     }
 
-    var_04 = distance(var_01.var_116, param_00.dest_path.landing.var_116) < 512;
-    lib_0378::func_8D74("tesla_hc_energy_lamp_destruct", var_01.var_116);
+    var_04 = distance(var_01.origin, param_00.dest_path.landing.origin) < 512;
+    lib_0378::func_8D74("tesla_hc_energy_lamp_destruct", var_01.origin);
     if(!var_04) {
       var_05 = var_01 common_scripts\utility::func_8FFC();
-      var_05 method_805B();
+      var_05 show();
       var_06 = var_01 common_scripts\utility::func_8FFC();
-      var_06 method_805B();
+      var_06 show();
       var_01 playerlinkTo(var_05, "tag_player");
-      var_07 = get_required_velocity(param_00.dest_path.var_116, var_01.var_116);
-      var_08 = param_00.dest_path.landing.var_116[2] - var_01.var_116[2];
+      var_07 = get_required_velocity(param_00.dest_path.origin, var_01.origin);
+      var_08 = param_00.dest_path.landing.origin[2] - var_01.origin[2];
       var_03 = func_8F12(var_02 / 2, var_07[2], -1 * var_08);
       var_05 gravitymove(var_07, var_03);
       var_09 = 0;
       var_0A = var_05 track_velocity();
       var_01 unlink();
-      var_06.var_116 = var_05.var_116;
+      var_06.origin = var_05.origin;
       var_01 playerlinkTo(var_06, "tag_player");
       var_06 moveTo(var_0A, 0.3);
       wait(0.3);
@@ -551,7 +551,7 @@ launchplayers(param_00) {
       var_0B = var_01 geteyeangles();
       var_0B = common_scripts\utility::func_3D5C(var_0B);
       var_0C = vectorNormalize(anglesToForward(var_0B));
-      var_07 = get_required_velocity((var_01.var_116[0] + 128 * var_0C[0], var_01.var_116[1] + 128 * var_0C[1], param_00.dest_path.var_116[2]), var_01.var_116);
+      var_07 = get_required_velocity((var_01.origin[0] + 128 * var_0C[0], var_01.origin[1] + 128 * var_0C[1], param_00.dest_path.origin[2]), var_01.origin);
       var_01 setvelocity(var_07);
     }
 
@@ -576,20 +576,20 @@ track_velocity() {
   var_07 = 0;
   var_08 = undefined;
   for(;;) {
-    var_01 = func_4231(self.var_116[0], var_04, var_07);
-    var_02 = func_4231(self.var_116[1], var_05, var_07);
-    var_03 = func_4231(self.var_116[2], var_06, var_07);
+    var_01 = func_4231(self.origin[0], var_04, var_07);
+    var_02 = func_4231(self.origin[1], var_05, var_07);
+    var_03 = func_4231(self.origin[2], var_06, var_07);
     self.my_velocity = (var_01, var_02, var_03);
-    var_04 = self.var_116[0];
-    var_05 = self.var_116[1];
-    var_06 = self.var_116[2];
+    var_04 = self.origin[0];
+    var_05 = self.origin[1];
+    var_06 = self.origin[2];
     var_07 = gettime();
     if(self.my_velocity[2] < 0) {
       var_09 = vectorNormalize(self.my_velocity);
-      var_0A = self.var_116;
+      var_0A = self.origin;
       var_0B = var_0A + 1000 * var_09;
       var_08 = bulletTrace(var_0A, var_0B, 0);
-      if(distance(self.var_116, var_08["position"]) < 150) {
+      if(distance(self.origin, var_08["position"]) < 150) {
         return var_08["position"] + (0, 0, 1);
       }
     }
@@ -628,11 +628,11 @@ get_required_velocity(param_00, param_01) {
 
 initialize_plate() {
   var_00 = self;
-  var_01 = common_scripts\utility::func_44BE(var_00.var_1A2, "targetname");
+  var_01 = common_scripts\utility::func_44BE(var_00.target, "targetname");
   var_00.dest_path = common_scripts\utility::func_46B5("launch_path_" + var_00.var_82EC, "script_noteworthy");
-  var_00.dest_path.landing = common_scripts\utility::func_46B5(var_00.dest_path.var_1A2, "targetname");
+  var_00.dest_path.landing = common_scripts\utility::func_46B5(var_00.dest_path.target, "targetname");
   foreach(var_03 in var_01) {
-    var_04 = var_03.var_165;
+    var_04 = var_03.script_noteworthy;
     if(!isDefined(var_04)) {
       continue;
     }
@@ -648,7 +648,7 @@ initialize_plate() {
 
       case "plate_model":
         var_00.plate_model = var_03;
-        var_00.model_start_origin = var_03.var_116;
+        var_00.model_start_origin = var_03.origin;
         break;
 
       case "plate_trig":

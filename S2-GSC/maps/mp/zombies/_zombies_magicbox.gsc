@@ -5,21 +5,21 @@
 
 func_5305() {
   level.var_2B6F = 1;
-  level.var_2B70 = 0;
-  level.var_2B6E = 15;
+  level.transitionfadeout = 0;
+  level.transitionfadein = 15;
   if(0) {
     level.var_4400 = ::func_4403;
     level.var_451F = ::func_4521;
   }
 
-  level.var_08AD = ::func_08B7;
+  level.var_8AD = ::func_08B7;
   level.var_2A77 = ::func_2A7A;
   level.var_6C08 = ::func_6C0A;
   level.var_2448 = ::func_244B;
   level.var_6AD1 = ::func_6B9A;
   level.var_74C4 = ::func_64C6;
-  level.var_0611["magic_box_light"] = loadfx("vfx/zombie/zmb_box_light_marker");
-  level.var_0611["zmb_mystery_box_gun_gk"] = loadfx("vfx/zombie/zmb_mystery_box_gun_gk");
+  level.var_611["magic_box_light"] = loadfx("vfx/zombie/zmb_box_light_marker");
+  level.var_611["zmb_mystery_box_gun_gk"] = loadfx("vfx/zombie/zmb_mystery_box_gun_gk");
   func_09E8();
 }
 
@@ -120,7 +120,7 @@ func_4D18(param_00, param_01) {
 
   if(isDefined(param_00.var_6298)) {
     param_00.var_6298 hidepart("TAG_FX");
-    if(isDefined(level.var_0611["magic_box_light"]) && isDefined(param_00.var_6298) && isDefined(param_00.var_6298.var_1B78)) {
+    if(isDefined(level.var_611["magic_box_light"]) && isDefined(param_00.var_6298) && isDefined(param_00.var_6298.var_1B78)) {
       stopFXOnTag(common_scripts\utility::func_44F5("magic_box_light"), param_00.var_6298.var_1B78, "tag_origin");
       return;
     }
@@ -158,13 +158,13 @@ func_08B7(param_00) {
   var_01 = func_456D(param_00);
   if(isDefined(param_00.var_6298)) {
     if(!isDefined(param_00.var_6298.var_1B78)) {
-      param_00.var_6298.var_1B78 = spawn("script_model", (param_00.var_6298.var_0116[0], param_00.var_6298.var_0116[1], 1650));
+      param_00.var_6298.var_1B78 = spawn("script_model", (param_00.var_6298.origin[0], param_00.var_6298.origin[1], 1650));
       param_00.var_6298.var_1B78 setModel("tag_origin");
-      param_00.var_6298.var_1B78.var_001D = (-90, -90, -90);
+      param_00.var_6298.var_1B78.angles = (-90, -90, -90);
     }
 
-    if(isDefined(level.var_0611["magic_box_light"]) && isDefined(param_00.var_6298.var_1B78)) {
-      playFXOnTag(level.var_0611["magic_box_light"], param_00.var_6298.var_1B78, "tag_origin");
+    if(isDefined(level.var_611["magic_box_light"]) && isDefined(param_00.var_6298.var_1B78)) {
+      playFXOnTag(level.var_611["magic_box_light"], param_00.var_6298.var_1B78, "tag_origin");
     }
   }
 
@@ -218,7 +218,7 @@ func_801A(param_00, param_01) {
   if(isDefined(param_00.var_586E)) {
     param_00.var_586E method_848E(param_01);
   } else {
-    param_00.var_586E = spawn("weapon_" + param_01, param_00.var_A9EA.var_0116);
+    param_00.var_586E = spawn("weapon_" + param_01, param_00.var_A9EA.origin);
     var_02 = (0, 0, 0);
     param_00.var_586E linkTo(param_00.var_A9EA, "tag_origin", var_02, (0, 0, 0));
   }
@@ -272,7 +272,7 @@ choosepreviewweapon(param_00) {
     }
   }
 
-  var_05 = worldweaponsloadedbyplayers(level.var_744A, level.magicboxpreviewweapons);
+  var_05 = worldweaponsloadedbyplayers(level.players, level.magicboxpreviewweapons);
   if(var_05.size < 2) {
     var_05 = worldweaponsloadedbyplayers([param_00], level.magicboxpreviewweapons);
   }
@@ -292,7 +292,7 @@ func_6C0A(param_00, param_01) {
   var_09 = getdvarint("scr_zombieDebugS2MagicBoxDraw");
   var_0A = [];
   var_0B = func_456D(param_00);
-  var_0A = anglestoaxis(var_0B.var_001D);
+  var_0A = anglestoaxis(var_0B.angles);
   var_0C = var_0B method_8549(0, 0, -1);
   var_0D = var_0A["up"] * var_07[2];
   var_0D = var_0D + var_0A["right"] * var_07[1];
@@ -300,11 +300,11 @@ func_6C0A(param_00, param_01) {
   var_0D = var_0D + var_0C;
   if(isDefined(param_00.var_A9EA)) {
     param_00.var_A9EA method_808C();
-    param_00.var_A9EA.var_0116 = var_0D;
+    param_00.var_A9EA.origin = var_0D;
   } else {
     param_00.var_A9EA = spawn("script_origin", var_0D);
     param_00.var_A9EA setModel("tag_origin");
-    param_00.var_A9EA method_805C();
+    param_00.var_A9EA hide();
   }
 
   if(isDefined(param_00.var_6298)) {
@@ -316,13 +316,13 @@ func_6C0A(param_00, param_01) {
   lib_0378::func_8D74("mystery_box_open", var_0B);
   lib_0378::func_8D74("mystery_box_attract_open", var_0B);
   wait(1);
-  param_00.var_A9EA.var_001D = combineangles(var_0B.var_001D, (0, 0, 0));
+  param_00.var_A9EA.angles = combineangles(var_0B.angles, (0, 0, 0));
   param_00.var_A9EA movez(var_08, var_02, var_04, var_03);
-  playFXOnTag(level.var_0611["zmb_mystery_box_gun_gk"], param_00.var_A9EA, "tag_origin");
+  playFXOnTag(level.var_611["zmb_mystery_box_gun_gk"], param_00.var_A9EA, "tag_origin");
   lib_0378::func_8D74("mystery_box_elec", var_0B, 1);
   wait(1);
   var_11 = [];
-  foreach(var_13 in level.var_744A) {
+  foreach(var_13 in level.players) {
     if(var_13 == param_01) {
       continue;
     } else {
@@ -336,7 +336,7 @@ func_6C0A(param_00, param_01) {
 
   func_83B2(param_01, param_00);
   var_15 = param_00.var_A9C4["selectedWeapon"];
-  var_16 = spawn("weapon_" + var_15, param_00.var_A9EA.var_0116, 1);
+  var_16 = spawn("weapon_" + var_15, param_00.var_A9EA.origin, 1);
   var_16 makeunusable();
   var_16 method_86B3(0);
   var_16 method_8511();
@@ -397,11 +397,11 @@ func_244B(param_00) {
 func_64C6(param_00, param_01) {
   wait(1);
   var_02 = func_456D(param_00);
-  lib_0380::func_2889("interact_mystery_box_move", undefined, var_02.var_0116);
+  lib_0380::func_2889("interact_mystery_box_move", undefined, var_02.origin);
   func_4D18(param_00);
 }
 
-func_00D5() {
+init() {
   level thread func_5FF2();
   level thread func_A7D8();
   level thread func_5F7B();
@@ -413,9 +413,9 @@ func_A7D8() {
   level.var_A7F1 = [];
   level.var_A7DE = [];
   var_00 = getEntArray("wallbuy", "targetname");
-  level.var_A7DE = common_scripts\utility::func_0F73(level.var_A7DE, var_00);
+  level.var_A7DE = common_scripts\utility::func_F73(level.var_A7DE, var_00);
   var_06 = common_scripts\utility::func_46B7("wallbuy", "targetname");
-  level.var_A7DE = common_scripts\utility::func_0F73(level.var_A7DE, var_06);
+  level.var_A7DE = common_scripts\utility::func_F73(level.var_A7DE, var_06);
   foreach(var_08 in level.var_A7DE) {
     level thread func_A7E6(var_08);
   }
@@ -423,7 +423,7 @@ func_A7D8() {
 
 func_A7E5(param_00) {
   foreach(var_02 in level.var_A7DE) {
-    var_03 = getEntArray(var_02.var_01A2, "targetname");
+    var_03 = getEntArray(var_02.target, "targetname");
     foreach(var_05 in var_03) {
       if(param_00) {
         var_05 common_scripts\utility::func_9D9F();
@@ -475,7 +475,7 @@ func_10E6(param_00) {
   var_02 = func_454B(param_00, var_01.var_A9E0);
   var_03 = "weapon_" + var_02;
   var_04 = spawn(var_03, var_01.var_A9E3, 1);
-  var_04.var_001D = var_01.var_A9BD;
+  var_04.angles = var_01.var_A9BD;
   var_04.var_A9E0 = var_02;
   var_04 makeunusable();
   var_04 method_86B3(0);
@@ -530,9 +530,9 @@ func_A7EB(param_00) {
       continue;
     }
 
-    var_04 = param_00 lib_0586::func_078A(self.var_A9E0);
+    var_04 = param_00 lib_0586::func_78A(self.var_A9E0);
     if(isDefined(var_04)) {
-      self.var_2925 = self.var_0DB5;
+      self.var_2925 = self.var_DB5;
       if(lib_0569::func_55D4(var_04)) {
         self.var_2925 = 4000;
       }
@@ -569,14 +569,14 @@ func_A7EB(param_00) {
 
 func_A7EC(param_00) {
   for(;;) {
-    param_00 common_scripts\utility::func_A70A("weapon_change", "new_equipment");
+    param_00 common_scripts\utility::waittill_any("weapon_change", "new_equipment");
     self.var_A7D7 = 1;
   }
 }
 
 func_A7ED(param_00) {
   for(;;) {
-    param_00 common_scripts\utility::func_A70A("weapon_change", "new_equipment", "money_update", "special_event_update");
+    param_00 common_scripts\utility::waittill_any("weapon_change", "new_equipment", "money_update", "special_event_update");
     waittillframeend;
     if(isDefined(self.var_3006)) {
       if(common_scripts\utility::func_562E(self.var_5611) || param_00.var_62D6 < self.var_3006) {
@@ -590,13 +590,13 @@ func_A7ED(param_00) {
 }
 
 func_A7E6(param_00) {
-  var_01 = param_00.var_0116;
-  var_02 = param_00.var_001D;
+  var_01 = param_00.origin;
+  var_02 = param_00.angles;
   if(!isDefined(var_02)) {
     var_02 = (0, 0, 0);
   }
 
-  var_03 = param_00.var_0165;
+  var_03 = param_00.script_noteworthy;
   var_04 = [];
   if(isDefined(param_00.var_8260)) {
     var_04 = strtok(param_00.var_8260, ",");
@@ -625,11 +625,11 @@ func_A7E6(param_00) {
 
   var_10 = [];
   var_11 = undefined;
-  var_12 = getEntArray(param_00.var_01A2, "targetname");
+  var_12 = getEntArray(param_00.target, "targetname");
   foreach(var_14 in var_12) {
-    var_15 = var_14.var_0165;
+    var_15 = var_14.script_noteworthy;
     if(!isDefined(var_15)) {
-      var_10 = common_scripts\utility::func_0F6F(var_10, var_14);
+      var_10 = common_scripts\utility::func_F6F(var_10, var_14);
       continue;
     }
 
@@ -640,12 +640,12 @@ func_A7E6(param_00) {
     }
   }
 
-  var_17 = function_021F(param_00.var_01A2, "targetname");
+  var_17 = function_021F(param_00.target, "targetname");
   param_00.var_A7E9 = var_10;
   param_00.var_A7E3 = var_17;
   if(isDefined(var_11)) {
     param_00.wallbuyguncard = var_11;
-    param_00.wallbuyguncard method_805C();
+    param_00.wallbuyguncard hide();
   }
 
   for(var_18 = 0; var_18 < 4; var_18++) {
@@ -673,7 +673,7 @@ func_A7EA(param_00, param_01, param_02, param_03, param_04, param_05) {
   param_00.var_2955 = param_03;
   param_00.var_A9C2 = param_03;
   param_00.var_2925 = param_04;
-  param_00.var_0DB5 = param_04;
+  param_00.var_DB5 = param_04;
   param_00.var_A9E0 = param_02;
   param_00.var_6C5C = param_02;
   param_00.var_9DA0 = 0;
@@ -722,9 +722,9 @@ func_A7EA(param_00, param_01, param_02, param_03, param_04, param_05) {
     }
 
     if(var_0B == "token") {
-      var_0A maps\mp\gametypes\zombies::func_90F6(param_00.var_9A84);
-    } else if(!var_0A maps\mp\gametypes\zombies::func_11C2(var_0E)) {
-      var_0A thread lib_054E::func_0695("needmoney");
+      var_0A maps / mp / gametypes / zombies::func_90F6(param_00.var_9A84);
+    } else if(!var_0A maps / mp / gametypes / zombies::func_11C2(var_0E)) {
+      var_0A thread lib_054E::func_695("needmoney");
       continue;
     }
 
@@ -737,17 +737,17 @@ func_A7EA(param_00, param_01, param_02, param_03, param_04, param_05) {
       wallbuygivemelee(var_0A, var_0F);
     } else {
       func_A7D6(var_0A, var_0F, undefined, 0);
-      lib_0547::func_0A00(var_0A, var_0F);
+      lib_0547::func_A00(var_0A, var_0F);
     }
 
-    func_ABE9("normal_wallbuy", self.var_0116, var_0E, var_0F);
+    func_ABE9("normal_wallbuy", self.origin, var_0E, var_0F);
     if(maps\mp\_utility::func_4571() == "mp_zombie_island") {
       var_10 = var_0A maps\mp\gametypes\_playerlogic::func_4005();
       if(!isDefined(var_0A.magicboxweaponsrolled)) {
         var_0A.magicboxweaponsrolled = [];
       }
 
-      if(common_scripts\utility::func_0F79(var_10, var_0F) || !common_scripts\utility::func_0F79(var_0A.magicboxweaponsrolled, var_0F)) {
+      if(common_scripts\utility::func_F79(var_10, var_0F) || !common_scripts\utility::func_F79(var_0A.magicboxweaponsrolled, var_0F)) {
         var_0A notify("invalid_wallbuy");
       }
     }
@@ -781,7 +781,7 @@ func_A7E4(param_00) {
   }
 
   if(self.var_82EF.var_82A0 && !common_scripts\utility::func_562E(param_00)) {
-    self.var_82EF.var_09B6 = 1;
+    self.var_82EF.var_9B6 = 1;
     return;
   }
 
@@ -811,7 +811,7 @@ func_A7E4(param_00) {
   var_03 = 0;
   switch (self.var_82EF.var_829E) {
     case 2:
-      if(!var_02) {
+      if(!var_01) {
         var_04 = lib_0380::func_2889("zmb_wallbuy_open", undefined, self.var_A9E3);
         lib_0378::func_8D14(var_04);
         self.var_82EF.var_829E = 3;
@@ -828,7 +828,7 @@ func_A7E4(param_00) {
       break;
 
     case 0:
-      if(var_02) {
+      if(var_01) {
         var_05 = lib_0380::func_2889("zmb_wallbuy_close", undefined, self.var_A9E3);
         lib_0378::func_8D14(var_05);
         self.var_82EF setscriptablepartstate("base", "buy_loop_closing");
@@ -848,8 +848,8 @@ func_A7E4(param_00) {
       break;
   }
 
-  if(var_03 && common_scripts\utility::func_562E(self.var_82EF.var_09B6)) {
-    self.var_82EF.var_09B6 = undefined;
+  if(var_03 && common_scripts\utility::func_562E(self.var_82EF.var_9B6)) {
+    self.var_82EF.var_9B6 = undefined;
     thread func_A7E4(0);
   }
 }
@@ -915,15 +915,15 @@ func_2079(param_00, param_01, param_02) {
     var_03 = param_02;
   }
 
-  var_04 = param_00.var_0116;
-  var_05 = anglestoaxis(param_00.var_001D);
+  var_04 = param_00.origin;
+  var_05 = anglestoaxis(param_00.angles);
   var_04 = var_04 + var_05["forward"] * var_03[0];
   var_04 = var_04 + var_05["right"] * var_03[1];
   var_04 = var_04 + var_05["up"] * var_03[2];
   var_06 = param_01 method_8549(0, 1, 0);
   var_07 = var_04 - var_06;
   param_01 method_808C();
-  param_01.var_0116 = param_01.var_0116 + var_07;
+  param_01.origin = param_01.origin + var_07;
 }
 
 func_4B6A(param_00, param_01) {
@@ -978,8 +978,8 @@ func_473B() {
 
 wallbuygivemelee(param_00, param_01) {
   if(lib_0547::func_5864(param_01)) {
-    param_00 lib_0586::func_078C(param_01);
-    param_00 lib_0586::func_078E(param_01);
+    param_00 lib_0586::func_78C(param_01);
+    param_00 lib_0586::func_78E(param_01);
   }
 }
 
@@ -1003,17 +1003,17 @@ func_A7D6(param_00, param_01, param_02, param_03) {
   }
 
   if(function_01D4(param_01) == "primary") {
-    if(!param_00 lib_0586::func_05DF(param_01)) {
-      var_04 = param_00 lib_0586::func_0637();
+    if(!param_00 lib_0586::func_5DF(param_01)) {
+      var_04 = param_00 lib_0586::func_637();
       if(param_03 && func_8B57(var_04)) {
         param_00 func_348F(var_04);
       } else if(function_01A9(var_04) != "melee") {
-        param_00 lib_0586::func_0790(var_04);
+        param_00 lib_0586::func_790(var_04);
       }
     }
   }
 
-  maps\mp\gametypes\zombies::func_283D(param_00, param_01);
+  maps / mp / gametypes / zombies::func_283D(param_00, param_01);
   if(isDefined(param_00.var_7F10)) {
     param_00.var_7F10 = param_00.var_7F10 + 1;
   }
@@ -1022,16 +1022,16 @@ func_A7D6(param_00, param_01, param_02, param_03) {
   var_06 = lib_0547::func_AAF9(param_01, 0, 0);
   if(var_06 != "none") {
     var_07 = function_02FF(var_06, "_zm") + "_mp";
-    var_08 = maps\mp\zombies\zombie_weapon_kits_shared::func_5842(var_07);
+    var_08 = maps / mp / zombies / zombie_weapon_kits_shared::func_5842(var_07);
     if(var_08) {
       var_05 = param_00 getrankedplayerdata(common_scripts\utility::func_46A8(), "weaponBuildKits", var_07, "charm");
     }
   }
 
-  param_00 lib_0586::func_078C(param_01, undefined, undefined, var_05);
+  param_00 lib_0586::func_78C(param_01, undefined, undefined, var_05);
   param_00 givemaxammo(param_01);
   param_00 func_4796(param_01);
-  param_00 lib_0586::func_078E(param_01);
+  param_00 lib_0586::func_78E(param_01);
   param_00 notify("new_wallbuy_weapon");
   func_AABC(param_00);
 }
@@ -1085,23 +1085,23 @@ func_A7D9() {
     }
 
     foreach(var_05 in level.var_A7DE) {
-      if(common_scripts\utility::func_0F79(var_00.var_4D4D, var_05)) {
+      if(common_scripts\utility::func_F79(var_00.var_4D4D, var_05)) {
         continue;
       }
 
-      var_06 = var_05.var_0165;
+      var_06 = var_05.script_noteworthy;
       if(lib_0547::func_5816(var_06)) {
         continue;
       }
 
-      var_07 = lib_0586::func_0791(var_02, var_06);
+      var_07 = lib_0586::func_791(var_02, var_06);
       wait(var_01);
       if(common_scripts\utility::func_562E(var_07)) {
         foreach(var_09 in var_05.var_A7E3) {
           var_09 hudoutlineenableforclient(var_00, 0, 0);
         }
 
-        var_00.var_4D4D = common_scripts\utility::func_0F6F(var_00.var_4D4D, var_05);
+        var_00.var_4D4D = common_scripts\utility::func_F6F(var_00.var_4D4D, var_05);
       }
     }
   }
@@ -1135,11 +1135,11 @@ func_348F(param_00) {
   }
 
   var_05 method_817E(var_01, var_03, var_02);
-  var_05.var_0117 = self;
-  var_05.var_01A5 = "dropped_weapon";
+  var_05.owner = self;
+  var_05.targetname = "dropped_weapon";
   var_05 thread maps\mp\gametypes\_weapons::func_A934();
   var_05 thread maps\mp\gametypes\_weapons::func_2D45();
-  lib_0586::func_0790(param_00);
+  lib_0586::func_790(param_00);
 }
 
 func_AABC(param_00) {
@@ -1170,26 +1170,26 @@ func_AABC(param_00) {
 
 func_A7D5(param_00, param_01, param_02) {
   if(lib_0547::func_5863(param_01)) {
-    var_03 = param_00 method_834A();
+    var_03 = param_00 getplayersequipment();
     if(var_03 != param_01) {
-      param_00 lib_0586::func_0790(var_03);
+      param_00 lib_0586::func_790(var_03);
       param_00 method_8349(param_01);
-      param_00 lib_0586::func_078C(param_01);
+      param_00 lib_0586::func_78C(param_01);
       func_3AC1(param_00, param_01);
       param_00 notify("new_equipment");
       return;
     }
 
-    param_00 method_82FA(param_01, param_00 getweaponammoclip(param_01) + 1);
+    param_00 setweaponammoclip(param_01, param_00 getweaponammoclip(param_01) + 1);
     return;
   }
 
   if(lib_0547::func_5866(param_01)) {
-    var_04 = param_00 method_831F();
+    var_04 = param_00 getplayersoffhands();
     if(var_04 != param_01) {
-      param_00 lib_0586::func_0790(var_04);
+      param_00 lib_0586::func_790(var_04);
       param_00 method_831E(param_01);
-      param_00 lib_0586::func_078C(param_01);
+      param_00 lib_0586::func_78C(param_01);
       func_3AC1(param_00, param_01);
       param_00.zmb_plr_tactical = param_01;
       if(param_01 == "jack_in_box_decoy_zm") {
@@ -1204,7 +1204,7 @@ func_A7D5(param_00, param_01, param_02) {
       return;
     }
 
-    param_00 method_82FA(param_01, param_00 getweaponammoclip(param_01) + 1);
+    param_00 setweaponammoclip(param_01, param_00 getweaponammoclip(param_01) + 1);
     return;
   }
 }
@@ -1216,7 +1216,7 @@ func_3AC1(param_00, param_01) {
   }
 
   var_03 = weaponclipsize(param_01, var_02);
-  param_00 method_82FA(param_01, var_03);
+  param_00 setweaponammoclip(param_01, var_03);
 }
 
 is_grenadier_immune_weapon(param_00) {
@@ -1224,29 +1224,29 @@ is_grenadier_immune_weapon(param_00) {
     return 0;
   }
 
-  return common_scripts\utility::func_0F79(level.zmb_grenadier_immune_weapons, param_00);
+  return common_scripts\utility::func_F79(level.zmb_grenadier_immune_weapons, param_00);
 }
 
 func_AC57(param_00, param_01) {
-  param_01 = param_00 lib_0586::func_078A(param_01);
+  param_01 = param_00 lib_0586::func_78A(param_01);
   if(!isDefined(param_01)) {
     return;
   }
 
   var_02 = weaponclipsize(param_01, param_00);
-  param_00 method_82FA(param_01, var_02, "right");
+  param_00 setweaponammoclip(param_01, var_02, "right");
   if(issubstr(param_01, "akimbo")) {
-    param_00 method_82FA(param_01, var_02, "left");
+    param_00 setweaponammoclip(param_01, var_02, "left");
   }
 
   param_00 givemaxammo(param_01);
   param_00 func_4796(param_01);
-  param_00 lib_0586::func_078E(param_01, 1);
+  param_00 lib_0586::func_78E(param_01, 1);
 }
 
 func_4796(param_00) {
   if(issubstr(param_00, "iw5_em1zm_mp")) {
-    maps\mp\gametypes\zombies::func_7456();
+    maps / mp / gametypes / zombies::func_7456();
   }
 
   if(isDefined(level.var_4797)) {
@@ -1256,24 +1256,24 @@ func_4796(param_00) {
 
 func_5F79() {
   var_00 = common_scripts\utility::func_46B7("magic_box_map", "targetname");
-  common_scripts\utility::func_0FB2(var_00, ::func_5F77);
+  common_scripts\utility::array_thread(var_00, ::func_5F77);
 }
 
 func_5F77() {
   self.var_1B71 = [];
-  var_00 = getEntArray(self.var_01A2, "targetname");
-  var_01 = common_scripts\utility::func_46B7(self.var_01A2, "targetname");
-  var_02 = common_scripts\utility::func_0F73(var_00, var_01);
+  var_00 = getEntArray(self.target, "targetname");
+  var_01 = common_scripts\utility::func_46B7(self.target, "targetname");
+  var_02 = common_scripts\utility::func_F73(var_00, var_01);
   foreach(var_04 in var_02) {
-    switch (var_04.var_0165) {
+    switch (var_04.script_noteworthy) {
       case "current":
-        var_04 method_805C();
+        var_04 hide();
         self.var_28F5 = var_04;
         break;
 
       case "all":
-        var_04 method_805C();
-        self.var_0BCD = var_04;
+        var_04 hide();
+        self.var_BCD = var_04;
         break;
 
       case "box_loc":
@@ -1320,36 +1320,36 @@ func_5F76(param_00) {
       continue;
     }
 
-    self.var_28F5 method_805B();
-    self.var_28F5.var_0116 = param_00.var_0116;
+    self.var_28F5 show();
+    self.var_28F5.origin = param_00.origin;
     common_scripts\utility::func_3CA9(param_00.var_81A1);
   }
 }
 
 func_5F75() {
   for(;;) {
-    self.var_0BCD method_805C();
+    self.var_BCD hide();
     maps\mp\_utility::func_3FA5("fire_sale");
-    self.var_0BCD method_805B();
-    self.var_28F5 method_805C();
+    self.var_BCD show();
+    self.var_28F5 hide();
     while(maps\mp\_utility::func_3FA0("fire_sale")) {
       wait 0.05;
     }
 
-    self.var_28F5 method_805B();
+    self.var_28F5 show();
   }
 }
 
 func_5F78() {
   for(;;) {
     maps\mp\_utility::func_3FA5("power_off");
-    self.var_0BCD method_805C();
-    self.var_28F5 method_805C();
+    self.var_BCD hide();
+    self.var_28F5 hide();
     while(maps\mp\_utility::func_3FA0("power_off")) {
       wait 0.05;
     }
 
-    self.var_28F5 method_805B();
+    self.var_28F5 show();
   }
 }
 
@@ -1453,7 +1453,7 @@ func_7CEA(param_00) {
   }
 
   if(isDefined(var_01)) {
-    level.var_5F7F = common_scripts\utility::func_0F9A(level.var_5F7F, var_01);
+    level.var_5F7F = common_scripts\utility::func_F9A(level.var_5F7F, var_01);
   }
 }
 
@@ -1472,28 +1472,28 @@ func_5F7B() {
   var_00 = undefined;
   foreach(var_02 in level.var_5F74) {
     level thread maps\mp\_utility::func_6F74(::magicboxweaponvisibility, var_02);
-    var_03 = getEntArray(var_02.var_01A2, "targetname");
+    var_03 = getEntArray(var_02.target, "targetname");
     foreach(var_05 in var_03) {
-      if(var_05.var_003A == "script_brushmodel") {
+      if(var_05.classname == "script_brushmodel") {
         var_02.var_24E3 = var_05;
         continue;
       }
 
-      if(var_05.var_003A == "script_model") {
+      if(var_05.classname == "script_model") {
         var_02.var_6298 = var_05;
       }
     }
 
-    var_07 = function_021F(var_02.var_01A2, "targetname");
+    var_07 = function_021F(var_02.target, "targetname");
     foreach(var_05 in var_07) {
       var_02.var_82EF = var_05;
     }
 
     var_0A = func_456D(var_02);
     if(isDefined(var_02.var_6298)) {
-      if(isDefined(var_02.var_6298.var_01A2)) {
-        var_0B = getEnt(var_02.var_6298.var_01A2, "targetname");
-        if(isDefined(var_0B) && var_0B.var_003B == "light") {
+      if(isDefined(var_02.var_6298.target)) {
+        var_0B = getEnt(var_02.var_6298.target, "targetname");
+        if(isDefined(var_0B) && var_0B.code_classname == "light") {
           var_02.var_5CCE = var_0B;
           var_02.var_5CCE.var_5D70 = var_02.var_5CCE method_81DE();
           var_02.var_5CCE.var_5D6F = 0.1;
@@ -1501,7 +1501,7 @@ func_5F7B() {
       }
     }
 
-    var_02.var_08BE = 0;
+    var_02.var_8BE = 0;
     var_02.var_56C7 = 0;
     var_02.var_5759 = 0;
     if(isDefined(var_02.var_819A)) {
@@ -1521,7 +1521,7 @@ func_5F7B() {
     var_00 = common_scripts\utility::func_7A33(level.var_5F74);
   }
 
-  var_00.var_08BE = 1;
+  var_00.var_8BE = 1;
   wait(2);
   foreach(var_02 in level.var_5F74) {
     func_6AE1(var_02);
@@ -1557,13 +1557,13 @@ func_5F7B() {
     }
 
     if(var_0F.size > 0) {
-      var_00.var_08BE = 0;
+      var_00.var_8BE = 0;
       while(isDefined(var_00.var_2A75)) {
         wait 0.05;
       }
 
       var_00 = var_0F[randomint(var_0F.size)];
-      var_00.var_08BE = 1;
+      var_00.var_8BE = 1;
     }
   }
 }
@@ -1594,8 +1594,8 @@ func_2A7B(param_00, param_01) {
 }
 
 func_6AB4(param_00) {
-  if(isDefined(level.var_08AD)) {
-    [[level.var_08AD]](param_00);
+  if(isDefined(level.var_8AD)) {
+    [[level.var_8AD]](param_00);
   }
 
   var_01 = func_456D(param_00);
@@ -1640,7 +1640,7 @@ func_5F73() {
 
 func_135C(param_00) {
   if(!isDefined(param_00.var_8F40)) {
-    var_01 = param_00.var_0116;
+    var_01 = param_00.origin;
     if(isDefined(level.var_456E)) {
       var_01 = [[level.var_456E]](param_00);
     }
@@ -1691,7 +1691,7 @@ func_5F7E() {
 }
 
 func_57C1(param_00) {
-  return isDefined(param_00.var_0165) && param_00.var_0165 == "scripted_magic_box";
+  return isDefined(param_00.script_noteworthy) && param_00.script_noteworthy == "scripted_magic_box";
 }
 
 func_7BEE() {
@@ -1701,7 +1701,7 @@ func_7BEE() {
     self.var_53FB = [];
     for(var_00 = 0; var_00 < 4; var_00++) {
       var_01 = spawnStruct();
-      self.var_53FB = common_scripts\utility::func_0F6F(self.var_53FB, var_01);
+      self.var_53FB = common_scripts\utility::func_F6F(self.var_53FB, var_01);
     }
   }
 
@@ -1709,7 +1709,7 @@ func_7BEE() {
     self.var_4DBB = [];
     for(var_00 = 0; var_00 < 4; var_00++) {
       var_01 = spawnStruct();
-      self.var_4DBB = common_scripts\utility::func_0F6F(self.var_4DBB, var_01);
+      self.var_4DBB = common_scripts\utility::func_F6F(self.var_4DBB, var_01);
     }
   }
 
@@ -1722,7 +1722,7 @@ func_7BEE() {
 
 func_A041() {
   self notify("unregister_prompts");
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_02 = var_01 getentitynumber();
     var_03 = self.var_53FB[var_02];
     func_2A7B(self, var_03.var_7778);
@@ -1754,7 +1754,7 @@ func_8A32(param_00) {
 
 func_86D1() {
   if(1) {
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       func_8A32(var_01);
     }
   }
@@ -1762,7 +1762,7 @@ func_86D1() {
 
 func_861C() {
   foreach(var_01 in level.var_5F74) {
-    if(var_01.var_08BE) {
+    if(var_01.var_8BE) {
       var_01 func_86D1();
     }
   }
@@ -1781,7 +1781,7 @@ func_A922(param_00, param_01) {
   var_03 = 0;
   var_04 = randomintrange(4, 7);
   var_05 = func_456D(param_00);
-  var_06 = var_05.var_0116;
+  var_06 = var_05.origin;
   param_00.var_5C10 = "";
   if(isDefined(level.var_86C4)) {
     [[level.var_86C4]](param_00);
@@ -1818,16 +1818,16 @@ func_A922(param_00, param_01) {
       continue;
     }
 
-    if(var_0F && !var_09 maps\mp\gametypes\zombies::func_1F32(var_10)) {
-      var_09 thread lib_054E::func_0695("needmoney");
+    if(var_0F && !var_09 maps / mp / gametypes / zombies::func_1F32(var_10)) {
+      var_09 thread lib_054E::func_695("needmoney");
       continue;
     }
 
     if(!var_0F && !isDefined(self.var_2A75)) {
       if(var_0A == "token") {
-        var_09 maps\mp\gametypes\zombies::func_90F6(param_00.var_9A84);
-      } else if(!var_09 maps\mp\gametypes\zombies::func_11C2(var_10)) {
-        var_09 thread lib_054E::func_0695("needmoney");
+        var_09 maps / mp / gametypes / zombies::func_90F6(param_00.var_9A84);
+      } else if(!var_09 maps / mp / gametypes / zombies::func_11C2(var_10)) {
+        var_09 thread lib_054E::func_695("needmoney");
         continue;
       }
     }
@@ -1929,18 +1929,18 @@ func_A922(param_00, param_01) {
       param_00 releaseclaimedtrigger();
       param_00.var_586E notify("stop_flashing");
       param_00.var_586E.is_flashing = 0;
-      param_00.var_586E method_805C();
+      param_00.var_586E hide();
       var_1A = var_12["selectedWeapon"];
-      func_ABE9("magicbox", self.var_0116, var_10, var_1A);
+      func_ABE9("magicbox", self.origin, var_10, var_1A);
       if(isDefined(level.zmb_events_player_zombie_weapon_from_box)) {
-        var_09 thread[[level.zmb_events_player_zombie_weapon_from_box]](maps\mp\_utility::func_4431(var_1A));
+        var_09 thread[[level.zmb_events_player_zombie_weapon_from_box]](maps\mp\_utility::getbaseweaponname(var_1A));
       }
 
       if(isDefined(param_00.var_5F72)) {
         param_00[[param_00.var_5F72]](var_16, var_09);
       } else if(var_16 == "trigger" && maps\mp\_utility::func_57A0(var_09) && !lib_0547::func_577E(var_09)) {
         if(lib_0547::func_73F9(var_09, var_1A)) {
-          var_09 lib_0586::func_0790(var_1A);
+          var_09 lib_0586::func_790(var_1A);
         }
 
         var_09 thread lib_054E::playerbuyweapon();
@@ -1953,7 +1953,7 @@ func_A922(param_00, param_01) {
         }
       }
 
-      level.var_6AE8 = common_scripts\utility::func_0F93(level.var_6AE8, var_12["fullName"]);
+      level.var_6AE8 = common_scripts\utility::func_F93(level.var_6AE8, var_12["fullName"]);
       param_00.var_56C7 = 0;
       param_00 notify("magicBoxUseEnd");
       if(isDefined(level.var_2448)) {
@@ -2002,7 +2002,7 @@ func_3D5B(param_00) {
   for(;;) {
     param_00 method_8511();
     wait(0.35);
-    foreach(var_02 in level.var_744A) {
+    foreach(var_02 in level.players) {
       if(var_02 method_8530(param_00.var_A9E0)) {
         param_00 showtoclient(var_02);
       }
@@ -2069,13 +2069,13 @@ func_83B2(param_00, param_01) {
   if(param_00 lib_0579::func_4BA5()) {
     var_11 = param_00 lib_0579::func_A246();
     foreach(var_0B in level.var_5F7F) {
-      if(lib_0586::func_0791(var_0B["baseNameNoMP"], var_11)) {
+      if(lib_0586::func_791(var_0B["baseNameNoMP"], var_11)) {
         var_03 = var_0B;
         break;
       }
     }
   } else if(level.var_2B6F) {
-    if(randomint(100) < level.var_2B70) {
+    if(randomint(100) < level.transitionfadeout) {
       var_11 = "jack_in_box_decoy_zm";
       foreach(var_0B in level.var_5F7F) {
         if(var_11 == var_0B["baseNameNoMP"]) {
@@ -2084,7 +2084,7 @@ func_83B2(param_00, param_01) {
         }
       }
     } else {
-      level.var_2B70 = level.var_2B70 + level.var_2B6E;
+      level.transitionfadeout = level.transitionfadeout + level.transitionfadein;
     }
   }
 
@@ -2101,7 +2101,7 @@ func_83B2(param_00, param_01) {
 
   if(issubstr(var_03["fullName"], "_pap_")) {
     var_1A = lib_0569::func_40BD(var_19);
-    var_19 = param_00 lib_0586::func_078B(var_1A);
+    var_19 = param_00 lib_0586::func_78B(var_1A);
   }
 
   var_03["selectedWeapon"] = var_19;
@@ -2114,9 +2114,9 @@ func_574B(param_00) {
   }
 
   var_01 = level.var_6AE8;
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     var_04 = var_03 getweaponslistall();
-    var_01 = common_scripts\utility::func_0F73(var_01, var_04);
+    var_01 = common_scripts\utility::func_F73(var_01, var_04);
   }
 
   var_06 = 0;
@@ -2178,16 +2178,16 @@ func_4794() {}
 func_A9D4() {
   func_529E();
   level.var_A9D3 = getEntArray("weapon_level_box", "targetname");
-  common_scripts\utility::func_0FB2(level.var_A9D3, ::func_A9D7);
+  common_scripts\utility::array_thread(level.var_A9D3, ::func_A9D7);
 }
 
 func_A9D6() {
-  if(!isDefined(self.var_6298) || !isDefined(self.var_6298.var_01A2) || isDefined(self.var_6298.var_5CCE)) {
+  if(!isDefined(self.var_6298) || !isDefined(self.var_6298.target) || isDefined(self.var_6298.var_5CCE)) {
     return;
   }
 
-  var_00 = getEnt(self.var_6298.var_01A2, "targetname");
-  if(isDefined(var_00) && var_00.var_003B == "light") {
+  var_00 = getEnt(self.var_6298.target, "targetname");
+  if(isDefined(var_00) && var_00.code_classname == "light") {
     self.var_6298.var_5CCE = var_00;
     self.var_6298.var_5CCE.var_5D70 = self.var_6298.var_5CCE method_81DE();
     self.var_6298.var_5CCE.var_5D6F = 0.1;
@@ -2210,7 +2210,7 @@ func_A9D8() {
 }
 
 func_57DF(param_00) {
-  return isDefined(param_00.var_0165) && param_00.var_0165 == "special";
+  return isDefined(param_00.script_noteworthy) && param_00.script_noteworthy == "special";
 }
 
 func_A9D5(param_00, param_01) {
@@ -2222,7 +2222,7 @@ func_A9DA(param_00) {
   for(;;) {
     var_01 = param_00 lib_0547::func_A718("weapon_change", "no_upgrades");
     var_02 = undefined;
-    if(var_01[0] == "no_upgrades" && self.var_0C2F) {
+    if(var_01[0] == "no_upgrades" && self.var_C2F) {
       continue;
     }
 
@@ -2263,8 +2263,8 @@ func_7AAB() {
 
 func_A9D7() {
   level endon("game_ended");
-  self.var_6298 = getEnt(self.var_01A2, "targetname");
-  self.var_0C2F = 1;
+  self.var_6298 = getEnt(self.target, "targetname");
+  self.var_C2F = 1;
   if(func_57DF(self)) {
     func_A9D6();
     func_A9D8();
@@ -2309,34 +2309,34 @@ func_A9D7() {
     }
 
     if(var_06 == "token") {
-      var_05 maps\mp\gametypes\zombies::func_90F6(self.var_9A84);
-    } else if(!var_05 maps\mp\gametypes\zombies::func_11C2(var_01)) {
-      var_05 thread lib_054E::func_0695("needmoney");
+      var_05 maps / mp / gametypes / zombies::func_90F6(self.var_9A84);
+    } else if(!var_05 maps / mp / gametypes / zombies::func_11C2(var_01)) {
+      var_05 thread lib_054E::func_695("needmoney");
       continue;
     }
 
-    self.var_0C2F = 0;
-    foreach(var_0A in level.var_744A) {
+    self.var_C2F = 0;
+    foreach(var_0A in level.players) {
       var_0A notify("no_upgrades");
     }
 
     var_0C = undefined;
-    if(level.var_010B) {
+    if(level.var_10B) {
       var_0D = func_3B8D(var_08);
-      var_0C = spawn("script_model", self.var_0116);
-      var_0C.var_001D = var_00 - (0, 90, 0);
+      var_0C = spawn("script_model", self.origin);
+      var_0C.angles = var_00 - (0, 90, 0);
       var_0C setModel(var_0D);
       var_0E = [15, 0, -6];
       if(var_08 == "iw5_exocrossbowzm_mp") {
         var_0E = [13, 0, -13];
-        var_0C.var_001D = var_0C.var_001D + (0, 0, -90);
+        var_0C.angles = var_0C.angles + (0, 0, -90);
       }
 
       level thread func_2079(self.var_6298, var_0C, var_0E);
     }
 
     lib_0547::func_74A5(common_scripts\utility::func_44F5("station_upgrade_weapon"), self.var_6298, "tag_origin", 1);
-    self.var_6298 method_8617("interact_weapon_upgrade");
+    self.var_6298 playSound("interact_weapon_upgrade");
     if(func_57DF(self)) {
       func_8A65(var_05, var_07, 25);
     } else {
@@ -2348,7 +2348,7 @@ func_A9D7() {
     wait(1.2);
     if(var_05.var_A9EB[var_08]["level"] > 19) {
       lib_0547::func_74A5(common_scripts\utility::func_44F5("weapon_level_20"), self.var_6298, "tag_origin", 1);
-      self.var_6298 method_8617("interact_weapon_upgrade_fwks");
+      self.var_6298 playSound("interact_weapon_upgrade_fwks");
     }
 
     wait(0.75);
@@ -2356,21 +2356,21 @@ func_A9D7() {
       var_0C delete();
     }
 
-    self.var_0C2F = 1;
-    foreach(var_0A in level.var_744A) {
+    self.var_C2F = 1;
+    foreach(var_0A in level.players) {
       var_0A notify("allow_upgrades");
     }
   }
 }
 
 func_8A65(param_00, param_01, param_02) {
-  param_00 lib_0586::func_0790(param_01);
+  param_00 lib_0586::func_790(param_01);
   var_03 = getweapondisplayname(param_01);
   param_00.var_A9EB[var_03]["level"] = param_02;
   var_04 = func_454B(param_00, var_03);
   func_A7D6(param_00, var_04, 0);
   if(issubstr(var_04, "iw5_em1zm_mp")) {
-    param_00 maps\mp\gametypes\zombies::func_7456();
+    param_00 maps / mp / gametypes / zombies::func_7456();
   }
 
   if(isDefined(level.var_8A66)) {
@@ -2429,11 +2429,11 @@ func_454B(param_00, param_01) {
       var_06 = var_08.var_297C;
     }
 
-    var_07 = common_scripts\utility::func_0F73(var_07, var_08.var_114C);
+    var_07 = common_scripts\utility::func_F73(var_07, var_08.var_114C);
   }
 
   var_0A = getweapondisplayname(param_01);
-  var_07 = lib_0547::func_0FB9(var_07);
+  var_07 = lib_0547::func_FB9(var_07);
   while(var_07.size < 6) {
     var_07[var_07.size] = 0;
   }
@@ -2657,13 +2657,13 @@ func_A7E8(param_00) {
 }
 
 func_A7D3(param_00) {
-  param_00.var_A9C6 method_805C();
+  param_00.var_A9C6 hide();
   lib_0547::func_5A48(common_scripts\utility::func_44F5("station_buy_weapon_pwr_on"), param_00.var_6298, "tag_origin");
   func_A7E7(param_00);
 }
 
 func_A7D4(param_00) {
-  param_00.var_A9C6 method_805B();
+  param_00.var_A9C6 show();
   lib_0547::func_74A5(common_scripts\utility::func_44F5("station_buy_weapon_pwr_on"), param_00.var_6298, "tag_origin");
   func_A7E8(param_00);
 }
@@ -2708,8 +2708,8 @@ func_0DB8(param_00, param_01) {
       continue;
     }
 
-    if(var_03 maps\mp\gametypes\zombies::func_11C2(param_01)) {
-      var_03 iclientprintlnbold("refill");
+    if(var_03 maps / mp / gametypes / zombies::func_11C2(param_01)) {
+      var_03 iprintlnbold("refill");
       func_3AC1(var_03, var_05);
       var_03 givemaxammo(var_05);
       var_03 thread lib_054E::func_62D9();

@@ -3,7 +3,7 @@
  * Script: maps\mp\gametypes\_shellshock.gsc
 *********************************************/
 
-func_00D5() {}
+init() {}
 
 func_8AF0(param_00, param_01) {
   if(maps\mp\_flashgrenades::func_56F3()) {
@@ -16,7 +16,7 @@ func_8AF0(param_00, param_01) {
 
   if(param_00 == "MOD_EXPLOSIVE" || param_00 == "MOD_GRENADE" || param_00 == "MOD_GRENADE_SPLASH" || param_00 == "MOD_PROJECTILE" || param_00 == "MOD_PROJECTILE_SPLASH") {
     if(param_01 > 10) {
-      if(!maps\mp\_utility::func_0649("specialty_stun_resistance") && !isDefined(self.var_4B64) || !self.var_4B64) {
+      if(!maps\mp\_utility::_hasperk("specialty_stun_resistance") && !isDefined(self.var_4B64) || !self.var_4B64) {
         self shellshock("frag_grenade_mp", 0.5);
         return;
       }
@@ -34,33 +34,33 @@ func_485C() {
   thread func_36DC();
   self endon("make_dud");
   self endon("end_explode");
-  var_00 = self.var_0117;
+  var_00 = self.owner;
   var_01 = undefined;
   if(isDefined(var_00)) {
-    var_01 = var_00.var_01A7;
+    var_01 = var_00.team;
   }
 
   self waittill("explode", var_02);
   if(function_0367()) {} else {
-    function_01BB("grenade_rumble", var_02);
+    playrumbleonposition("grenade_rumble", var_02);
     earthquake(0.4, 0.75, var_02, 256);
   }
 
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     if(!isalive(var_04) || var_04 maps\mp\_utility::func_581D() || var_04 maps\mp\_utility::func_572D()) {
       continue;
     }
 
-    if(distancesquared(var_02, var_04.var_0116) > 22500) {
+    if(distancesquared(var_02, var_04.origin) > 22500) {
       continue;
     }
 
-    if(isDefined(level.var_984D) && level.var_984D && isDefined(var_00) && isDefined(var_01) && isDefined(var_04.var_01A7) && var_04 != var_00 && var_04.var_01A7 == var_01) {
+    if(isDefined(level.teambased) && level.teambased && isDefined(var_00) && isDefined(var_01) && isDefined(var_04.team) && var_04 != var_00 && var_04.team == var_01) {
       continue;
     }
 
     if(var_04 method_81D7(var_02)) {
-      if(!var_04 maps\mp\_utility::func_0649("specialty_stun_resistance")) {
+      if(!var_04 maps\mp\_utility::_hasperk("specialty_stun_resistance")) {
         var_04 shellshock("ear_ring_mp", 1, 0, 0);
       }
     }
@@ -77,9 +77,9 @@ func_2F13(param_00) {
     return;
   }
 
-  var_01 = vectorNormalize(anglesToForward(self.var_001D));
-  var_02 = vectorNormalize(anglestoright(self.var_001D));
-  var_03 = vectorNormalize(param_00 - self.var_0116);
+  var_01 = vectorNormalize(anglesToForward(self.angles));
+  var_02 = vectorNormalize(anglestoright(self.angles));
+  var_03 = vectorNormalize(param_00 - self.origin);
   var_04 = vectordot(var_03, var_01);
   var_05 = vectordot(var_03, var_02);
   var_06 = ["death", "damage"];
@@ -110,9 +110,9 @@ func_17FE(param_00) {
     return;
   }
 
-  var_01 = vectorNormalize(anglesToForward(self.var_001D));
-  var_02 = vectorNormalize(anglestoright(self.var_001D));
-  var_03 = vectorNormalize(param_00 - self.var_0116);
+  var_01 = vectorNormalize(anglesToForward(self.angles));
+  var_02 = vectorNormalize(anglestoright(self.angles));
+  var_03 = vectorNormalize(param_00 - self.origin);
   var_04 = vectordot(var_03, var_01);
   var_05 = vectordot(var_03, var_02);
   var_06 = ["death", "damage"];
@@ -136,7 +136,7 @@ func_17FF() {
   self endon("disconnect");
   wait(0.5);
   if(isalive(self)) {
-    common_scripts\utility::func_A74B("death", 1.5);
+    common_scripts\utility::waittill_notify_or_timeout("death", 1.5);
   }
 }
 
@@ -144,21 +144,21 @@ func_1DEE() {
   thread func_36DC();
   self endon("end_explode");
   self endon("make_dud");
-  var_00 = self.var_0117;
-  var_01 = self.var_0117.var_01A7;
+  var_00 = self.owner;
+  var_01 = self.owner.team;
   self waittill("explode", var_02);
-  function_01BB("grenade_rumble", var_02);
+  playrumbleonposition("grenade_rumble", var_02);
   earthquake(0.4, 0.75, var_02, 256);
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     if(var_04 maps\mp\_utility::func_581D() || var_04 maps\mp\_utility::func_572D()) {
       continue;
     }
 
-    if(distance(var_02, var_04.var_0116) > 150) {
+    if(distance(var_02, var_04.origin) > 150) {
       continue;
     }
 
-    if(isDefined(level.var_984D) && level.var_984D && isDefined(var_00) && isDefined(var_01) && isDefined(var_04.var_01A7) && var_04 != var_00 && var_04.var_01A7 == var_01) {
+    if(isDefined(level.teambased) && level.teambased && isDefined(var_00) && isDefined(var_01) && isDefined(var_04.team) && var_04 != var_00 && var_04.team == var_01) {
       continue;
     }
 
@@ -171,15 +171,15 @@ func_1DEE() {
 }
 
 func_15C5() {
-  var_00 = self.var_0116;
-  function_01BB("grenade_rumble", var_00);
+  var_00 = self.origin;
+  playrumbleonposition("grenade_rumble", var_00);
   earthquake(0.4, 0.5, var_00, 512);
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 maps\mp\_utility::func_581D() || var_02 maps\mp\_utility::func_572D()) {
       continue;
     }
 
-    if(distance(var_00, var_02.var_0116) > 512) {
+    if(distance(var_00, var_02.origin) > 512) {
       continue;
     }
 
@@ -190,15 +190,15 @@ func_15C5() {
 }
 
 func_0FD9() {
-  var_00 = self.var_0116;
-  function_01BB("artillery_rumble", self.var_0116);
-  earthquake(0.7, 0.5, self.var_0116, 800);
-  foreach(var_02 in level.var_744A) {
+  var_00 = self.origin;
+  playrumbleonposition("artillery_rumble", self.origin);
+  earthquake(0.7, 0.5, self.origin, 800);
+  foreach(var_02 in level.players) {
     if(var_02 maps\mp\_utility::func_581D() || var_02 maps\mp\_utility::func_572D()) {
       continue;
     }
 
-    if(distance(var_00, var_02.var_0116) > 600) {
+    if(distance(var_00, var_02.origin) > 600) {
       continue;
     }
 
@@ -209,14 +209,14 @@ func_0FD9() {
 }
 
 func_938E(param_00) {
-  function_01BB("grenade_rumble", param_00);
+  playrumbleonposition("grenade_rumble", param_00);
   earthquake(0.6, 0.6, param_00, 2000);
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 maps\mp\_utility::func_581D() || var_02 maps\mp\_utility::func_572D()) {
       continue;
     }
 
-    if(distance(param_00, var_02.var_0116) > 1000) {
+    if(distance(param_00, var_02.origin) > 1000) {
       continue;
     }
 
@@ -227,14 +227,14 @@ func_938E(param_00) {
 }
 
 func_0B94(param_00) {
-  function_01BB("artillery_rumble", param_00);
+  playrumbleonposition("artillery_rumble", param_00);
   earthquake(0.7, 0.75, param_00, 1000);
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 maps\mp\_utility::func_581D() || var_02 maps\mp\_utility::func_572D()) {
       continue;
     }
 
-    if(distance(param_00, var_02.var_0116) > 900) {
+    if(distance(param_00, var_02.origin) > 900) {
       continue;
     }
 

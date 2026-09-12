@@ -3,15 +3,15 @@
  * Script: 1335.gsc
 *********************************************/
 
-lib_0537::func_00D5() {
+init() {
   self.var_569F = 0;
-  level.var_0611["zmb_moon_zmb_blind"] = loadfx("vfx/zombie/abilities_perks\zmb_moon_zmb_blind");
-  level.var_0611["zmb_moon_player_camo_cam"] = loadfx("vfx/zombie/abilities_perks\zmb_moon_player_camo_cam");
-  level.var_0611["zmb_moon_player_camo_wv"] = loadfx("vfx/zombie/abilities_perks\zmb_moon_player_camo_wv");
-  level.var_0611["zmb_moon_speed_up"] = loadfx("vfx/zombie/abilities_perks\zmb_moon_speed_up");
+  level.var_611["zmb_moon_zmb_blind"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_zmb_blind");
+  level.var_611["zmb_moon_player_camo_cam"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_player_camo_cam");
+  level.var_611["zmb_moon_player_camo_wv"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_player_camo_wv");
+  level.var_611["zmb_moon_speed_up"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_speed_up");
 }
 
-lib_0537::func_3662() {
+func_3662() {
   maps\mp\zombies\_zombies_roles::func_6AB2("role_ability_camo_zm");
   self.var_569F = 1;
   lib_0547::func_8A6D(1);
@@ -21,9 +21,9 @@ lib_0537::func_3662() {
     self[[level.custom_camo_func_on]]();
   }
 
-  playfxontagforclients(level.var_0611["zmb_moon_player_camo_cam"], self, "Tag_Origin", self);
+  playfxontagforclients(level.var_611["zmb_moon_player_camo_cam"], self, "Tag_Origin", self);
   lib_0378::func_8D74("aud_camo_use");
-  thread lib_0537::func_17BB();
+  thread func_17BB();
   thread camoplayerfx();
   lib_0547::func_7ACD();
   if(lib_0547::func_4BA7("specialty_class_survivalist_zm")) {
@@ -36,22 +36,22 @@ lib_0537::func_3662() {
 
 camoplayerfx() {
   if(lib_0547::func_4BA7("specialty_class_mobilization_zm")) {
-    var_00 = spawnlinkedfx(level.var_0611["zmb_moon_speed_up"], self, "J_Knee_LE");
-    var_01 = spawnlinkedfx(level.var_0611["zmb_moon_speed_up"], self, "J_Knee_RI");
+    var_00 = spawnlinkedfx(level.var_611["zmb_moon_speed_up"], self, "J_Knee_LE");
+    var_01 = spawnlinkedfx(level.var_611["zmb_moon_speed_up"], self, "J_Knee_RI");
     triggerfx(var_00);
     triggerfx(var_01);
-    common_scripts\utility::func_A70A("camo_ended", "disconnect");
+    common_scripts\utility::waittill_any("camo_ended", "disconnect");
     var_00 delete();
     var_01 delete();
   }
 }
 
-lib_0537::func_17BB() {
+func_17BB() {
   self endon("camo_ended");
   while(self.var_569F) {
     foreach(var_01 in lib_0547::func_408F()) {
       if(!isDefined(var_01.var_5689) || var_01.var_5689 == 0) {
-        playfxontagforclients(level.var_0611["zmb_moon_zmb_blind"], var_01, "J_Head", self);
+        playfxontagforclients(level.var_611["zmb_moon_zmb_blind"], var_01, "J_Head", self);
         var_01.var_5689 = 1;
       }
     }
@@ -60,7 +60,7 @@ lib_0537::func_17BB() {
   }
 }
 
-lib_0537::func_2F9E() {
+func_2F9E() {
   if(common_scripts\utility::func_562E(self.var_569F)) {
     self.var_569F = 0;
     self notify("camo_ended");
@@ -69,7 +69,7 @@ lib_0537::func_2F9E() {
     }
 
     foreach(var_01 in lib_0547::func_408F()) {
-      stopFXOnTag(level.var_0611["zmb_moon_zmb_blind"], var_01, "J_Head");
+      stopFXOnTag(level.var_611["zmb_moon_zmb_blind"], var_01, "J_Head");
     }
 
     lib_0547::func_8A6D(0);
@@ -83,7 +83,7 @@ lib_0537::func_2F9E() {
   }
 }
 
-lib_0537::func_62A6(param_00, param_01, param_02, param_03, param_04) {
+func_62A6(param_00, param_01, param_02, param_03, param_04) {
   var_05 = 0;
   if(isDefined(param_01)) {
     var_05 = common_scripts\utility::func_562E(param_01.var_3BE1);
@@ -102,7 +102,7 @@ lib_0537::func_62A6(param_00, param_01, param_02, param_03, param_04) {
   return param_00;
 }
 
-lib_0537::func_6ADC(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
+func_6ADC(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
   if(isDefined(param_01)) {
     var_0A = 0;
     if(isDefined(param_00) && param_00 != param_01) {
@@ -112,16 +112,16 @@ lib_0537::func_6ADC(param_00, param_01, param_02, param_03, param_04, param_05, 
     }
 
     if(var_0A) {
-      if(maps\mp\_utility::func_5755(param_04) && isPlayer(param_01) && param_01 lib_0547::func_4BA7("specialty_class_serrated_edge_zm")) {
-        param_01 thread lib_0537::func_83F1(self);
+      if(maps\mp\_utility::ismeleemod(param_04) && isPlayer(param_01) && param_01 lib_0547::func_4BA7("specialty_class_serrated_edge_zm")) {
+        param_01 thread func_83F1(self);
         param_01 luinotifyeventextraplayer(&"trigger_mod_proc", 1, "specialty_class_serrated_edge_zm");
       }
 
       if(isPlayer(param_01)) {
         if(!0 || maps\mp\_utility::func_4571() == "mp_zombie_island") {
-          if(!0 || isDefined(self.var_0A4B) && self.var_0A4B == "zombie_assassin") {
+          if(!0 || isDefined(self.var_A4B) && self.var_A4B == "zombie_assassin") {
             var_0B = 0 - param_02 * 0 - 0;
-            param_01 lib_0533::func_0F37(var_0B, 0, 1);
+            param_01 lib_0533::func_F37(var_0B, 0, 1);
             return;
           }
 
@@ -134,17 +134,17 @@ lib_0537::func_6ADC(param_00, param_01, param_02, param_03, param_04, param_05, 
   }
 }
 
-lib_0537::func_6B7E(param_00) {
+func_6B7E(param_00) {
   if(!isPlayer(self)) {
     return;
   }
 
   if(isPlayer(param_00) && common_scripts\utility::func_562E(param_00.var_569F) && param_00 lib_0547::func_4BA7("specialty_class_covert_exfiltration_zm")) {
-    thread lib_0537::func_3F91(param_00);
+    thread func_3F91(param_00);
   }
 }
 
-lib_0537::func_3F91(param_00) {
+func_3F91(param_00) {
   self endon("disconnect");
   lib_0547::func_8A6D(1);
   self luinotifyeventextraplayer(&"add_teammate_mod_buffs", 3, "specialty_class_covert_exfiltration_zm", 0, param_00);
@@ -154,7 +154,7 @@ lib_0537::func_3F91(param_00) {
   lib_0547::func_8A6D(0);
 }
 
-lib_0537::func_83F1(param_00) {
+func_83F1(param_00) {
   var_01 = "serratedEdgeApplied" + self getentitynumber();
   var_02 = "serratedEdgeExpired" + self getentitynumber();
   param_00 notify(var_01);
@@ -168,17 +168,17 @@ lib_0537::func_83F1(param_00) {
     param_00.var_83F2 = [];
   }
 
-  if(!common_scripts\utility::func_0F79(param_00.var_83F2, self)) {
+  if(!common_scripts\utility::func_F79(param_00.var_83F2, self)) {
     param_00.var_83F2[param_00.var_83F2.size] = self;
   }
 
-  var_04 = maps\mp\gametypes\zombies::func_1E59(lib_0547::func_0A51("zombie_generic"), level.var_A980);
+  var_04 = maps / mp / gametypes / zombies::func_1E59(lib_0547::func_A51("zombie_generic"), level.var_A980);
   var_05 = var_04 * 0.03;
   param_00 childthread lib_0547::func_AC38(param_00, var_05, self, 1.5, 30, "dot_generic_zm");
-  param_00 common_scripts\utility::func_A74B("death", 30);
+  param_00 common_scripts\utility::waittill_notify_or_timeout("death", 30);
   var_06 = 0;
   if(isDefined(param_00.var_83F2)) {
-    param_00.var_83F2 = common_scripts\utility::func_0F93(param_00.var_83F2, self);
+    param_00.var_83F2 = common_scripts\utility::func_F93(param_00.var_83F2, self);
     var_06 = param_00.var_83F2.size == 0;
   } else if(isDefined(var_03) && !function_0279(var_03)) {
     var_06 = 1;
@@ -252,14 +252,14 @@ powerlosswhenfiring() {
       }
 
       if(!lib_0547::func_5565(self.rentingability, "role_ability_camo_zm")) {
-        lib_0533::func_0F37(var_03, 0, 1);
+        lib_0533::func_F37(var_03, 0, 1);
       }
     }
   }
 }
 
 getzombieweaponclass(param_00) {
-  var_01 = maps\mp\_utility::func_4431(param_00);
+  var_01 = maps\mp\_utility::getbaseweaponname(param_00);
   var_02 = level.zombieweaponclass[var_01];
   if(isDefined(var_02)) {
     return var_02;

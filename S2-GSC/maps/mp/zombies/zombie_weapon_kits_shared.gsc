@@ -39,7 +39,7 @@ getweaponkitmp(param_00, param_01) {
       continue;
     }
 
-    var_08 = common_scripts\utility::func_0F6F(var_08, var_0A);
+    var_08 = common_scripts\utility::func_F6F(var_08, var_0A);
   }
 
   var_0B = var_02;
@@ -72,6 +72,6 @@ func_5842(param_00) {
 }
 
 isvalidguid(param_00) {
-  var_01 = !common_scripts\utility::func_0F79([0, -1], param_00);
+  var_01 = !common_scripts\utility::func_F79([0, -1], param_00);
   return var_01;
 }

@@ -3,4 +3,4 @@
  * Script: maps\mp\mp_zombie_nest_ee_boss_blimp.gsc
 ****************************************************/
 
-func_00F9() {}
+main() {}

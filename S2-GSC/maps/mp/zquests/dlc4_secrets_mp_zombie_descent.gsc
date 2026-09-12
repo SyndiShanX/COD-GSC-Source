@@ -4,7 +4,7 @@
 **************************************************************/
 
 init_dlc4_secrets_mp_zombie_descent() {
-  level.callbackplayerdamagesecondaryhandling = ::maps\mp\zquests\zmb_secret_challenges_util::report_player_damaged;
+  level.callbackplayerdamagesecondaryhandling = ::maps / mp / zquests / zmb_secret_challenges_util::report_player_damaged;
   lib_0547::register_postenemykilledfunc(::run_secret_challenges_kill_tracking);
   lib_0565::zombiegearchallengeregister("african_set", [::african_set_0, ::african_set_1, ::african_set_2, ::african_set_3, ::african_set_4], "african_set_kill");
   lib_0565::zombiegearchallengeregister("outlaw_set", [::outlaw_set_0, ::outlaw_set_1, ::outlaw_set_2, ::outlaw_set_3, ::outlaw_set_4], "outlaw_set_kill");
@@ -16,7 +16,7 @@ african_set_0() {
   var_01 = "african_set_0";
   level endon(var_01);
   common_scripts\utility::func_3C9F(lib_0557::func_7838("quest_deathraven", "quest_deathraven_activate_rush"));
-  level thread maps\mp\zquests\zmb_secret_challenges_util::register_on_player_dmg_func(::maps\mp\zquests\zmb_secret_challenges_util::kill_hidden_challenge, var_01, ::maps\mp\zquests\zmb_secret_challenges_util::agent_is_zombie);
+  level thread maps / mp / zquests / zmb_secret_challenges_util::register_on_player_dmg_func(::maps / mp / zquests / zmb_secret_challenges_util::kill_hidden_challenge, var_01, ::maps / mp / zquests / zmb_secret_challenges_util::agent_is_zombie);
   common_scripts\utility::func_3C9F(lib_0557::func_7838("quest_deathraven", "quest_deathraven_pickup_weap"));
   if(self istouching(getEnt("zone_gallery_deathravent_event", "targetname"))) {
     return 1;
@@ -53,9 +53,9 @@ african_set_3() {
   var_00 = self;
   var_00 endon("disconnect");
   level endon("another_player_joined1");
-  level childthread maps\mp\zquests\zmb_secret_challenges_util::fail_on_another_player_joined(self, "another_player_joined", 1);
+  level childthread maps / mp / zquests / zmb_secret_challenges_util::fail_on_another_player_joined(self, "another_player_joined", 1);
   common_scripts\utility::func_3C9F("flag_boss_complete");
-  return level.var_A980 <= 25 && level.var_744A.size == 1;
+  return level.var_A980 <= 25 && level.players.size == 1;
 }
 
 african_set_4() {
@@ -120,7 +120,7 @@ outlaw_set_2() {
     wait(1);
   }
 
-  if(common_scripts\utility::func_3C77("moon_constellation_3_complete") && lib_0547::func_5565(level.ravenweaponmanager["spike"].var_117, self)) {
+  if(common_scripts\utility::func_3C77("moon_constellation_3_complete") && lib_0547::func_5565(level.ravenweaponmanager["spike"].owner, self)) {
     return 1;
   }
 
@@ -206,7 +206,7 @@ run_secret_challenges_kill_tracking(param_00, param_01, param_02, param_03, para
 
   if(common_scripts\utility::func_562E(self.throwingzombie)) {
     var_09 = common_scripts\utility::func_46B5("zmb_bloodraven_code_display", "targetname");
-    if(distance2d(self.var_116, var_09.var_116) < 260) {
+    if(distance2d(self.origin, var_09.origin) < 260) {
       level.zombie_slam_dunks++;
     }
   }

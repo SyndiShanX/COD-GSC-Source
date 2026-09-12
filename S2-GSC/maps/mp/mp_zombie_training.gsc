@@ -3,15 +3,15 @@
  * Script: maps\mp\mp_zombie_training.gsc
 *********************************************/
 
-func_00F9() {
-  lib_04C1::func_00F9();
-  lib_0428::func_00F9();
-  lib_04C0::func_00F9();
-  maps\mp\_load::func_00F9();
-  maps\mp\mp_zombie_training_lighting::func_00F9();
-  maps\mp\mp_zombie_training_aud::func_00F9();
+main() {
+  lib_04C1::main();
+  lib_0428::main();
+  lib_04C0::main();
+  maps\mp\_load::main();
+  maps / mp / mp_zombie_training_lighting::main();
+  maps / mp / mp_zombie_training_aud::main();
   precacheshader("vignette_hud");
-  maps\mp\_compass::func_8A2F("compass_map_mp_zombie_training");
+  maps\mp\_compass::setupminimap("compass_map_mp_zombie_training");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   level.var_6BA5 = ::func_9C4C;
@@ -20,7 +20,7 @@ func_00F9() {
   level.var_2986 = "mp/zombieEnemyWavesTraining.csv";
   level.var_8C8D = 1;
   level.var_ACA3 = 1;
-  level.var_0C25 = 0;
+  level.var_C25 = 0;
   level.var_ABDA = 1;
   level.var_7F24 = 1000;
   level.var_3230 = 1;
@@ -28,7 +28,7 @@ func_00F9() {
   level.var_7F1B = 10;
   level.var_3C5E = 1;
   level.var_4EF0 = 0;
-  level.var_0BCE = 1;
+  level.var_BCE = 1;
   level.var_323A = 1;
   level.var_8C7C = 1;
   level.block_self_revive_use = 1;
@@ -55,17 +55,17 @@ func_00F9() {
   level.var_9C48["exit"] = &"ZOMBIE_TRAINING_POPUP_ENOUGH_CASH";
   level.var_9C48["blitz"] = &"ZOMBIE_TRAINING_POPUP_BLITZ";
   level.var_9C48["armor"] = &"ZOMBIE_TRAINING_POPUP_ARMOR";
-  lib_055A::func_00D5();
+  lib_055A::init();
   lib_055A::func_530A("zone_training_start", 1);
   lib_055A::func_530A("zone_training_field", 0);
   lib_055A::func_530A("zone_training_yard", 0);
   lib_055A::func_530A("zone_training_house", 0);
   lib_055A::func_530A("zone_training_end", 0);
-  lib_055A::func_0993("zone_training_start", "zone_training_field", "flag_link_field");
-  lib_055A::func_0993("zone_training_field", "zone_training_yard", "field_to_yard");
-  lib_055A::func_0993("zone_training_yard", "zone_training_house", "flag_link_house");
-  lib_055A::func_0993("zone_training_house", "zone_training_end", "house_to_end");
-  lib_055A::func_088A();
+  lib_055A::func_993("zone_training_start", "zone_training_field", "flag_link_field");
+  lib_055A::func_993("zone_training_field", "zone_training_yard", "field_to_yard");
+  lib_055A::func_993("zone_training_yard", "zone_training_house", "flag_link_house");
+  lib_055A::func_993("zone_training_house", "zone_training_end", "house_to_end");
+  lib_055A::func_88A();
   common_scripts\utility::func_3C8F("flag_link_field");
   common_scripts\utility::func_3C8F("flag_link_house");
   common_scripts\utility::func_3C87("flag_dlg_german_death_done");
@@ -104,7 +104,7 @@ func_00F9() {
   common_scripts\utility::func_3C87("flag_spawn_crawler");
   common_scripts\utility::func_3C87("flag_show_inventory");
   thread func_327D();
-  level.var_0C11 = 0;
+  level.var_C11 = 0;
   thread func_357A();
   thread func_4055();
   level.var_28F0 = 0;
@@ -112,8 +112,8 @@ func_00F9() {
   func_5338();
   thread lib_057D::func_5162();
   thread lib_0551::func_3D50(0);
-  thread maps\mp\mp_zombie_falldamage_modifier::func_00F9();
-  level thread maps\mp\zquests\dlc1_secrets_mp_zombie_training::init_dlc1_secrets_mp_zombie_training();
+  thread maps / mp / mp_zombie_falldamage_modifier::main();
+  level thread maps / mp / zquests / dlc1_secrets_mp_zombie_training::init_dlc1_secrets_mp_zombie_training();
   lib_0565::func_7C07("mountain_man_set");
   thread func_3FD2();
   level thread maps\mp\_utility::func_6F74(::func_9FFA);
@@ -294,13 +294,13 @@ func_3FD2() {
   thread func_7331();
   level.var_1F4F["normal"] = ::func_9C49;
   level.var_7F22["normal"] = ::func_9C4D;
-  level.var_0A41["zombie_generic"]["move_mode"] = ::func_9C4E;
+  level.var_A41["zombie_generic"]["move_mode"] = ::func_9C4E;
   level.var_AC80.var_9065 = ::lib_055A::func_1E58;
-  level.var_0611["zmb_player_attached_light"] = loadfx("vfx/lights/mp_zombie_training/zmb_player_attached_light_2");
+  level.var_611["zmb_player_attached_light"] = loadfx("vfx/lights/mp_zombie_training/zmb_player_attached_light_2");
   func_327C();
   var_01 = func_325F();
   var_01 thread func_3263();
-  var_00 maps\mp\gametypes\zombies::func_7D63(0);
+  var_00 maps / mp / gametypes / zombies::func_7D63(0);
   func_737F(0);
   lib_0547::func_7BA9(::func_ABD4);
   func_9FF1(var_00);
@@ -340,7 +340,7 @@ func_3FD2() {
       thread func_AC02();
       thread func_3AA2();
       thread func_284F();
-      var_00 maps\mp\_utility::func_2CED(0.5, ::maps\mp\gametypes\zombies::func_7D63, 850);
+      var_00 maps\mp\_utility::func_2CED(0.5, ::maps / mp / gametypes / zombies::func_7D63, 850);
       var_00 maps\mp\_utility::func_2CED(0.5, ::player_stripmods);
       var_00 maps\mp\_utility::func_2CED(0.5, ::lib_0547::func_7454, 0);
       var_00.zombietrainingmovespeedscale = 0.3;
@@ -366,7 +366,7 @@ func_3FD2() {
       var_00 maps\mp\_utility::func_2CED(0.5, ::func_728D);
       var_00 maps\mp\_utility::func_2CED(0.5, ::lib_0547::func_7454, 0);
       var_00 maps\mp\_utility::func_2CED(0.5, ::player_stripmods);
-      var_00 maps\mp\_utility::func_2CED(0.5, ::maps\mp\gametypes\zombies::func_7D63, 1000);
+      var_00 maps\mp\_utility::func_2CED(0.5, ::maps / mp / gametypes / zombies::func_7D63, 1000);
       var_00 method_8670();
       thread func_4EE6(var_00);
       thread func_2846();
@@ -414,15 +414,15 @@ func_284F() {
   var_02 = common_scripts\utility::func_46B5("shovel_lerp_struct", "targetname");
   var_03 = undefined;
   if(isDefined(var_02)) {
-    var_03 = spawn("script_model", var_01.var_0116);
+    var_03 = spawn("script_model", var_01.origin);
     var_03 setModel("tag_origin");
-    var_04 = var_02.var_001D * (1, 0, 0) + var_01.var_001D * (0, 1, 0);
-    var_03.var_001D = var_04;
+    var_04 = var_02.angles * (1, 0, 0) + var_01.angles * (0, 1, 0);
+    var_03.angles = var_04;
     var_01 playerlinktoblend(var_03, "tag_origin", 0.25);
-    var_03 moveTo(var_02.var_0116, 0.25);
-    var_03 rotateTo(var_02.var_001D, 0.25);
-    var_05 = var_00.var_0116 - var_01 getEye();
-    var_01 setangles(vectortoangles(var_05));
+    var_03 moveTo(var_02.origin, 0.25);
+    var_03 rotateTo(var_02.angles, 0.25);
+    var_05 = var_00.origin - var_01 getEye();
+    var_01 setplayerangles(vectortoangles(var_05));
     wait(0.25);
     lib_0378::func_8D74("aud_pickup_shovel");
   }
@@ -435,8 +435,8 @@ func_284F() {
   lib_0555::func_83DD("training_melee_2", var_01);
   var_01 thread creek_firstzombiekillnotifyhide();
   var_01 maps\mp\_utility::func_3E8E(0);
-  if(!var_01 common_scripts\utility::func_0668()) {
-    var_01 common_scripts\utility::func_0617();
+  if(!var_01 common_scripts\utility::func_668()) {
+    var_01 common_scripts\utility::func_617();
   }
 
   var_01 method_812B(1);
@@ -461,7 +461,7 @@ creek_firstzombiekillnotifyhide() {
 }
 
 func_284B() {
-  var_00 = level.var_721C;
+  var_00 = level.player;
   var_00.zombietrainingmovespeedscale = 0.3;
   var_00 maps\mp\gametypes\_weapons::func_A13B();
   var_00 = lib_0547::func_AAFA("trig_awaken_first_z_tree", "targetname");
@@ -469,7 +469,7 @@ func_284B() {
   func_AC00();
   level.var_3C5F.var_8386 = 1;
   level.var_3C5F thread func_ABAF();
-  level.var_721C lib_0378::func_8D74("first_zombie_tree_jumpscare");
+  level.player lib_0378::func_8D74("first_zombie_tree_jumpscare");
   wait(0.3333333);
   common_scripts\utility::func_3C8F("flag_player_close_to_first_zombie");
   func_ABAE(level.var_3C5F, var_00, 1);
@@ -502,13 +502,13 @@ func_5C82(param_00, param_01) {
   var_02 = common_scripts\utility::func_46B5(param_01, "targetname");
   var_03 = undefined;
   if(isDefined(var_02)) {
-    var_03 = spawn("script_model", param_00.var_0116);
+    var_03 = spawn("script_model", param_00.origin);
     var_03 setModel("tag_origin");
-    var_04 = var_02.var_001D * (1, 0, 0) + param_00.var_001D * (0, 1, 0);
-    var_03.var_001D = var_04;
+    var_04 = var_02.angles * (1, 0, 0) + param_00.angles * (0, 1, 0);
+    var_03.angles = var_04;
     param_00 playerlinktoblend(var_03, "tag_origin", 0.15);
-    var_03 moveTo(var_02.var_0116, 0.15);
-    var_03 rotateTo(var_02.var_001D, 0.15);
+    var_03 moveTo(var_02.origin, 0.15);
+    var_03 rotateTo(var_02.angles, 0.15);
     wait(0.15);
   }
 
@@ -529,7 +529,7 @@ func_0A37() {
   var_01 = 0;
   var_02 = 0.1;
   for(;;) {
-    var_03 = distance((0, 0, 0), level.var_721C getvelocity());
+    var_03 = distance((0, 0, 0), level.player getvelocity());
     var_00 = var_00 + var_03 * 0.026 * level.var_A089;
     if(var_03 == 0) {
       var_00 = var_00 + 1.5;
@@ -562,15 +562,15 @@ func_0A39() {
   var_00 = getEnt("trig_see_corpse", "targetname");
   var_00 common_scripts\utility::func_A71A(5, "trigger");
   level.var_A089 = 2;
-  level.var_721C setscriptmotionblurparams(1.5, 0.75, 0.75);
+  level.player setscriptmotionblurparams(1.5, 0.75, 0.75);
   var_00 = getEnt("trig_see_corpse_2", "targetname");
   var_00 common_scripts\utility::func_A71A(5, "trigger");
   level.var_A089 = 1;
-  level.var_721C setscriptmotionblurparams(1, 0.5, 0.5);
+  level.player setscriptmotionblurparams(1, 0.5, 0.5);
   var_00 = getEnt("trig_reach_shovel", "targetname");
   var_00 common_scripts\utility::func_A71A(5, "trigger");
   level.var_A089 = 0.5;
-  level.var_721C setscriptmotionblurparams(0.5, 0.25, 0.25);
+  level.player setscriptmotionblurparams(0.5, 0.25, 0.25);
 }
 
 func_0A38() {
@@ -579,14 +579,14 @@ func_0A38() {
   level.var_953D rotateTo((0, 0, 0), var_00, var_00 * 0.5, var_00 * 0.5);
   wait(var_00);
   level.var_953D delete();
-  level.var_721C playersetgroundreferenceent(undefined);
+  level.player playersetgroundreferenceent(undefined);
   setslowmotion(0.95, 1, 0.5);
 }
 
 func_0A3A() {
   thread func_0A3B();
   level endon("flag_stop_aftermath_sway");
-  level.var_721C setscriptmotionblurparams(2, 1, 1);
+  level.player setscriptmotionblurparams(2, 1, 1);
   for(;;) {
     wait 0.05;
     if(randomint(50) > 10) {
@@ -596,30 +596,30 @@ func_0A3A() {
     var_00 = randomint(5) + 2;
     var_01 = randomfloatrange(0.3, 0.9);
     var_02 = randomfloatrange(0.3, 1);
-    level.var_721C setblurforplayer(var_00 * 1.2, var_01);
+    level.player setblurforplayer(var_00 * 1.2, var_01);
     wait(var_01);
-    level.var_721C setblurforplayer(0, var_02);
+    level.player setblurforplayer(0, var_02);
     wait(var_02);
   }
 }
 
 func_0A3B() {
   common_scripts\utility::func_3C9F("flag_stop_aftermath_sway");
-  level.var_721C setblurforplayer(0, 0.1);
-  level.var_721C method_8670();
+  level.player setblurforplayer(0, 0.1);
+  level.player method_8670();
 }
 
 func_2850() {
   lib_0378::func_8D74("aud_wakeup_submix_start");
   var_00 = common_scripts\utility::func_46B5("player_start_crawl_pos", "targetname");
   var_01 = common_scripts\utility::func_46B5("player_wakeup_point", "targetname");
-  level.var_7317 = spawn("script_model", var_00.var_0116);
-  level.var_7317.var_001D = var_00.var_001D;
+  level.var_7317 = spawn("script_model", var_00.origin);
+  level.var_7317.angles = var_00.angles;
   level.var_7317 setModel("player_zom_marie_world_arms");
   self setstance("stand");
   self method_848D();
-  self setOrigin(level.var_7317.var_0116);
-  self setangles(level.var_7317.var_001D);
+  self setOrigin(level.var_7317.origin);
+  self setplayerangles(level.var_7317.angles);
   self playerlinktoabsolute(level.var_7317, "tag_player");
   level.var_7317 method_8278("s2_zom_va_intro_wake_up");
   var_02 = getanimlength(%s2_zom_va_intro_wake_up);
@@ -634,7 +634,7 @@ func_2850() {
   var_04 = level.var_7317 gettagorigin("tag_player");
   var_04 = var_04 + (0, 0, 64);
   level.var_7317 scriptmodelclearanim();
-  level.var_7317.var_0116 = level.var_7317.var_0116 + (0, 0, 32);
+  level.var_7317.origin = level.var_7317.origin + (0, 0, 32);
   self unlink();
   level.var_7317 delete();
   self method_812A(0);
@@ -646,8 +646,8 @@ func_2850() {
   waittillframeend;
   self method_8112(0);
   maps\mp\_utility::func_3E8E(1);
-  self setOrigin(var_01.var_0116);
-  self setangles(var_01.var_001D);
+  self setOrigin(var_01.origin);
+  self setplayerangles(var_01.angles);
   self allowmovement(0);
   wait(0.5);
   self method_848C();
@@ -657,8 +657,8 @@ func_2850() {
 
   self method_8112(0);
   func_737F(1);
-  lib_0586::func_078C("training_unarmed_zm");
-  lib_0586::func_078E("training_unarmed_zm");
+  lib_0586::func_78C("training_unarmed_zm");
+  lib_0586::func_78E("training_unarmed_zm");
   self setspawnweapon("training_unarmed_zm", 0, 0);
   level.var_953D = spawn("script_model", (0, 0, 0));
   self playersetgroundreferenceent(level.var_953D);
@@ -736,7 +736,7 @@ func_4EE8() {
   }
 
   if(var_00.var_62D6 < 960) {
-    var_00 maps\mp\gametypes\zombies::func_4798(960 - var_00.var_62D6 + var_04);
+    var_00 maps / mp / gametypes / zombies::func_4798(960 - var_00.var_62D6 + var_04);
   }
 
   foreach(var_06 in level.var_4EE7) {
@@ -817,7 +817,7 @@ func_5FED() {
   var_00 thread func_36A6();
   var_00 setdemigod(1);
   var_00 func_3698();
-  foreach(var_02 in maps\mp\agents\_agent_utility::func_43FD("all")) {
+  foreach(var_02 in maps / mp / agents / _agent_utility::func_43FD("all")) {
     var_02 suicide();
   }
 
@@ -826,9 +826,9 @@ func_5FED() {
   level.var_8C7C = 0;
   level.var_7DD2 = 0;
   level.var_3B5C = level.var_746E;
-  level thread maps\mp\gametypes\_gamelogic::func_36B9(level.var_746E, game["end_reason"]["zombies_completed"]);
+  level thread maps\mp\gametypes\_gamelogic::endgame(level.var_746E, game["end_reason"]["zombies_completed"]);
   setnojipscore(0);
-  thread maps\mp\_achievement_engine_z_utils::ae_sendmapwon_zm(var_00);
+  thread maps / mp / _achievement_engine_z_utils::ae_sendmapwon_zm(var_00);
   wait 0.05;
   lib_0554::func_20CB("game_over");
 }
@@ -840,14 +840,14 @@ func_3698() {
   maps\mp\gametypes\_weapons::func_A13B();
   self method_8308(0);
   var_02 = newclienthudelem(self);
-  var_02.var_01D3 = 0;
-  var_02.var_01D7 = 0;
+  var_02.x = 0;
+  var_02.y = 0;
   var_02 setshader("vignette_hud", 640, 480);
-  var_02.var_0010 = "left";
-  var_02.var_0011 = "top";
-  var_02.var_00C6 = "fullscreen";
-  var_02.var_01CA = "fullscreen";
-  var_02.var_0018 = 0;
+  var_02.alignx = "left";
+  var_02.aligny = "top";
+  var_02.horzalign = "fullscreen";
+  var_02.vertalign = "fullscreen";
+  var_02.alpha = 0;
   var_02 thread func_9FF3(2, 1);
   self setclientomnvar("ui_hide_hud", 1);
   lib_0555::func_83DD("force_hide", self);
@@ -867,7 +867,7 @@ func_36A6() {
 func_7331() {
   for(;;) {
     level waittill("player_spawned", var_00);
-    if(level.var_744A.size > 1) {
+    if(level.players.size > 1) {
       var_01 = var_00 getentitynumber();
       kick(var_01, "EXE_PLAYERKICKED_BOT_BALANCE");
     }
@@ -875,7 +875,7 @@ func_7331() {
 }
 
 func_725C() {
-  level common_scripts\utility::func_A70A("player_disconnected", "exitLevel_called");
+  level common_scripts\utility::waittill_any("player_disconnected", "exitLevel_called");
   level.var_28F0 = 0;
   func_737F(0);
   setDvar("scr_zombieCheckpoint", 0);
@@ -891,7 +891,7 @@ func_7254() {
   }
 
   foreach(var_01 in level.var_A7DE) {
-    var_02 = function_021F(var_01.var_01A2, "targetname");
+    var_02 = function_021F(var_01.target, "targetname");
     foreach(var_04 in var_02) {
       var_04 hudoutlinedisable();
     }
@@ -948,13 +948,13 @@ func_728D() {
 
   if(0) {
     self method_8349("frag_grenade_zm");
-    maps\mp\_utility::func_0642("frag_grenade_zm");
-    self method_82FA("frag_grenade_zm", 4);
+    maps\mp\_utility::func_642("frag_grenade_zm");
+    self setweaponammoclip("frag_grenade_zm", 4);
   }
 
   var_00 = "shovel_zm";
-  lib_0586::func_078C(var_00, 0, undefined, undefined, 1);
-  lib_0586::func_078E(var_00);
+  lib_0586::func_78C(var_00, 0, undefined, undefined, 1);
+  lib_0586::func_78E(var_00);
   self setspawnweapon(var_00, 1, 1);
 }
 
@@ -973,7 +973,7 @@ player_stripmods() {
 func_737F(param_00) {}
 
 func_7268() {
-  maps\mp\_utility::func_0642("role_ability_mad_minute_zm");
+  maps\mp\_utility::func_642("role_ability_mad_minute_zm");
   level.var_AB43 = 1;
   common_scripts\utility::func_3C8F("flag_player_ability_enabled");
   if(0) {
@@ -998,10 +998,10 @@ func_1319(param_00) {
 func_4051() {
   var_00 = spawnStruct();
   var_00.var_6ED0 = common_scripts\utility::func_46B5("ridge_patrol_path_1", "targetname");
-  var_00.var_6EC2 = common_scripts\utility::func_46B5(var_00.var_6ED0.var_01A2, "targetname");
+  var_00.var_6EC2 = common_scripts\utility::func_46B5(var_00.var_6ED0.target, "targetname");
   var_01 = spawnStruct();
   var_01.var_6ED0 = common_scripts\utility::func_46B5("ridge_patrol_path_2", "targetname");
-  var_01.var_6EC2 = common_scripts\utility::func_46B5(var_01.var_6ED0.var_01A2, "targetname");
+  var_01.var_6EC2 = common_scripts\utility::func_46B5(var_01.var_6ED0.target, "targetname");
   var_02 = common_scripts\utility::func_46B5("ger_death_pos", "targetname");
   var_03 = var_02 common_scripts\utility::func_8FFC();
   var_04 = common_scripts\utility::func_46B5("ger2_death_pos", "targetname");
@@ -1019,16 +1019,16 @@ func_404A() {
   var_02 = undefined;
   var_03 = undefined;
   if(isDefined(var_00)) {
-    var_01 = getEnt(var_00.var_01A2, "targetname");
+    var_01 = getEnt(var_00.target, "targetname");
   }
 
   if(isDefined(var_01)) {
-    var_02 = getEnt(var_01.var_01A2, "targetname");
+    var_02 = getEnt(var_01.target, "targetname");
     var_02 linkTo(var_01, "J_Head");
   }
 
   if(isDefined(var_02)) {
-    var_03 = getEnt(var_02.var_01A2, "targetname");
+    var_03 = getEnt(var_02.target, "targetname");
     var_03 linkTo(var_00);
   }
 
@@ -1041,9 +1041,9 @@ func_404A() {
 
     var_04 linkTo(var_00, "J_MainRoot");
     playFXOnTag(common_scripts\utility::func_44F5("zmb_electroschnelle_reg_chg_wv"), var_04, "J_Gun");
-    var_00 method_8495(var_00.var_8109, var_00.var_0116, var_00.var_001D);
+    var_00 method_8495(var_00.var_8109, var_00.origin, var_00.angles);
     if(isDefined(var_03)) {
-      var_03 method_8495(var_00.var_8109, var_00.var_0116, var_00.var_001D);
+      var_03 method_8495(var_00.var_8109, var_00.origin, var_00.angles);
     }
 
     wait(1);
@@ -1076,15 +1076,15 @@ func_4049() {
   var_02 = undefined;
   var_03 = undefined;
   if(isDefined(var_00)) {
-    var_01 = getEnt(var_00.var_01A2, "targetname");
+    var_01 = getEnt(var_00.target, "targetname");
   }
 
   if(isDefined(var_01)) {
-    var_02 = getEnt(var_01.var_01A2, "targetname");
+    var_02 = getEnt(var_01.target, "targetname");
   }
 
   if(isDefined(var_02)) {
-    var_03 = getEnt(var_02.var_01A2, "targetname");
+    var_03 = getEnt(var_02.target, "targetname");
   }
 
   var_04 = getEnt("crawler_elec", "targetname");
@@ -1131,13 +1131,13 @@ func_2849() {
   common_scripts\utility::func_3C8F("flag_player_got_electro");
   var_00 playersetgroundreferenceent(undefined);
   thread func_2E9B();
-  var_00 common_scripts\utility::func_0603();
-  var_00 common_scripts\utility::func_0600();
+  var_00 common_scripts\utility::func_603();
+  var_00 common_scripts\utility::func_600();
   var_00 allowmovement(0);
   var_00 allowlook(0);
-  var_00 lib_0586::func_078C("elec_inspect_zm");
+  var_00 lib_0586::func_78C("elec_inspect_zm");
   wait(0.25);
-  var_00 lib_0586::func_078E("elec_inspect_zm", 1);
+  var_00 lib_0586::func_78E("elec_inspect_zm", 1);
   wait(2.083);
   var_00 thread lib_0378::func_8D74("play_revive_sound");
   func_737F(0);
@@ -1158,15 +1158,15 @@ func_2849() {
   wait(3.017);
   var_00.zombietrainingmovespeedscale = 0.3;
   common_scripts\utility::func_3C8F("flag_player_revived");
-  var_00 maps\mp\gametypes\zombies::func_4798(850);
+  var_00 maps / mp / gametypes / zombies::func_4798(850);
   thread func_0A37();
   thread func_0A3A();
   wait(0.25);
-  var_00 lib_0586::func_078E(var_00 lib_0547::func_AB2B());
-  var_00 common_scripts\utility::func_0617();
-  var_00 common_scripts\utility::func_0614();
+  var_00 lib_0586::func_78E(var_00 lib_0547::func_AB2B());
+  var_00 common_scripts\utility::func_617();
+  var_00 common_scripts\utility::func_614();
   if(var_00 hasweapon("elec_inspect_zm")) {
-    var_00 lib_0586::func_0790("elec_inspect_zm");
+    var_00 lib_0586::func_790("elec_inspect_zm");
   }
 
   var_00 allowmovement(1);
@@ -1201,8 +1201,8 @@ func_2843() {
   var_03 = lib_0547::func_AAFB("trig_buckle_beam");
   thread lib_0378::func_8D74("crawl_beam_buckle");
   if(isDefined(var_00) && isDefined(var_01)) {
-    var_00 moveTo(var_01.var_0116, 0.15, 0.05, 0);
-    var_00 rotateTo(var_01.var_001D, 0.15, 0.05, 0);
+    var_00 moveTo(var_01.origin, 0.15, 0.05, 0);
+    var_00 rotateTo(var_01.angles, 0.15, 0.05, 0);
   }
 
   if(isDefined(var_02)) {
@@ -1210,7 +1210,7 @@ func_2843() {
     triggerfx(var_04);
   }
 
-  level thread common_scripts\_exploder::func_088E(203);
+  level thread common_scripts\_exploder::func_88E(203);
 }
 
 func_2844() {
@@ -1225,8 +1225,8 @@ func_2844() {
   var_04 = lib_0547::func_AAFB("trig_spawn_crawler2");
   thread lib_0378::func_8D74("crawl_beam_collapse");
   if(isDefined(var_00) && isDefined(var_01)) {
-    var_00 moveTo(var_01.var_0116, 0.15, 0.05, 0);
-    var_00 rotateTo(var_01.var_001D, 0.15, 0.05, 0);
+    var_00 moveTo(var_01.origin, 0.15, 0.05, 0);
+    var_00 rotateTo(var_01.angles, 0.15, 0.05, 0);
   }
 
   if(isDefined(var_02)) {
@@ -1250,13 +1250,13 @@ func_284C() {
   }
 
   if(isDefined(var_00)) {
-    var_00 moveTo(var_01.var_0116, 0.15, 0.05, 0);
-    var_00 rotateTo(var_01.var_001D, 0.15, 0.05, 0);
+    var_00 moveTo(var_01.origin, 0.15, 0.05, 0);
+    var_00 rotateTo(var_01.angles, 0.15, 0.05, 0);
   }
 
   if(isDefined(var_02)) {
-    var_02 moveTo(var_03.var_0116, 0.15, 0.05, 0);
-    var_02 rotateTo(var_03.var_001D, 0.15, 0.05, 0);
+    var_02 moveTo(var_03.origin, 0.15, 0.05, 0);
+    var_02 rotateTo(var_03.angles, 0.15, 0.05, 0);
   }
 }
 
@@ -1293,7 +1293,7 @@ func_8387() {
 func_4EF3(param_00) {
   var_01 = common_scripts\utility::func_46B7("farmhouse_upper_traverse", "script_noteworthy");
   foreach(var_03 in var_01) {
-    var_04 = getnodesinradius(var_03.var_0116, 15, 0, 90);
+    var_04 = getnodesinradius(var_03.origin, 15, 0, 90);
     foreach(var_06 in var_04) {
       if(lib_0547::func_55C2(var_06)) {
         setnavlinkenabled(var_06, param_00);
@@ -1305,10 +1305,10 @@ func_4EF3(param_00) {
 func_74BB() {
   lib_0378::func_8D74("aud_pre_flare");
   wait(18);
-  level thread common_scripts\_exploder::func_088E(201);
+  level thread common_scripts\_exploder::func_88E(201);
   lib_0378::func_8D74("aud_intro_flare");
   wait(1.4);
-  level thread common_scripts\_exploder::func_088E(201);
+  level thread common_scripts\_exploder::func_88E(201);
 }
 
 func_ABD0() {
@@ -1344,10 +1344,10 @@ func_ABFF() {
     level.var_3C5F lib_0547::func_84CB();
     level.var_3C5F scragentsetscripted(1);
     level.var_3C5F method_839C("anim deltas");
-    level.var_3C5F maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "training");
+    level.var_3C5F maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "training");
     level.var_3C5F.var_509A = 1;
-    level.var_3C5F.var_00CA = 1;
-    level.var_3C5F maps\mp\agents\_scripted_agent_anim_util::func_71FD("s2_training_entry", 0, "scripted_anim");
+    level.var_3C5F.ignoreall = 1;
+    level.var_3C5F maps / mp / agents / _scripted_agent_anim_util::func_71FD("s2_training_entry", 0, "scripted_anim");
     level.var_3C5F func_ABAD(0);
   }
 }
@@ -1376,12 +1376,12 @@ func_AC02() {
   level.var_3C60 func_ABD9();
   level.var_3C60 scragentsetscripted(1);
   level.var_3C60 method_839C("anim deltas");
-  level.var_3C60 maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "training");
+  level.var_3C60 maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "training");
   level.var_3C60.var_509A = 1;
-  level.var_3C60.var_00CA = 1;
+  level.var_3C60.ignoreall = 1;
   level.var_3C60 thread func_ABD8();
   level.var_3C60.var_56DC = 1;
-  level.var_3C60 maps\mp\agents\_scripted_agent_anim_util::func_71FD("s2_training_entry", 0, "scripted_anim");
+  level.var_3C60 maps / mp / agents / _scripted_agent_anim_util::func_71FD("s2_training_entry", 0, "scripted_anim");
   level.var_3C60 func_ABAD(0);
   level.var_3C60.var_56DC = 0;
 }
@@ -1417,16 +1417,16 @@ func_ABFC() {
 func_ABAD(param_00) {
   self scragentsetscripted(1);
   self.var_57C0 = 1;
-  maps\mp\agents\_scripted_agent_anim_util::func_8415("passive_idle", param_00);
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "training");
+  maps / mp / agents / _scripted_agent_anim_util::func_8415("passive_idle", param_00);
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "training");
 }
 
 func_ABAC() {
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "training");
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "training");
   self scragentsetscripted(0);
   self.var_57C0 = 0;
   self.var_509A = 0;
-  self.var_00CA = 0;
+  self.ignoreall = 0;
 }
 
 func_ABAF() {
@@ -1434,14 +1434,14 @@ func_ABAF() {
   level endon("flag_player_in_house");
   self endon("death");
   for(;;) {
-    if(common_scripts\utility::func_AA4A(level.var_721C.var_0116, level.var_721C.var_001D, self.var_0116, cos(45)) && distance2dsquared(level.var_721C.var_0116, self.var_0116) < squared(500)) {
+    if(common_scripts\utility::func_AA4A(level.player.origin, level.player.angles, self.origin, cos(45)) && distance2dsquared(level.player.origin, self.origin) < squared(500)) {
       if(!self.var_8386) {
-        lib_0555::func_83DD("training_melee_2", level.var_721C);
-        level.var_721C thread creek_firstzombiekillnotifyhide();
+        lib_0555::func_83DD("training_melee_2", level.player);
+        level.player thread creek_firstzombiekillnotifyhide();
         self.var_8386 = 1;
       }
 
-      if(distance2dsquared(level.var_721C.var_0116, self.var_0116) < squared(75)) {
+      if(distance2dsquared(level.player.origin, self.origin) < squared(75)) {
         common_scripts\utility::func_3C8F("flag_player_close_to_first_zombie");
         break;
       }
@@ -1486,7 +1486,7 @@ func_ABAE(param_00, param_01, param_02) {
 
   if(var_03) {
     var_04 = param_00.var_5ED1 - param_01 getEye();
-    param_01 setangles(vectortoangles(var_04));
+    param_01 setplayerangles(vectortoangles(var_04));
   }
 }
 
@@ -1498,8 +1498,8 @@ func_ABDC(param_00) {
   }
 
   for(;;) {
-    if(common_scripts\utility::func_AA4A(level.var_721C.var_0116, level.var_721C.var_001D, self.var_0116, cos(45)) && distance2dsquared(level.var_721C.var_0116, self.var_0116) < squared(150)) {
-      lib_0555::func_83DD("training_melee_1", level.var_721C);
+    if(common_scripts\utility::func_AA4A(level.player.origin, level.player.angles, self.origin, cos(45)) && distance2dsquared(level.player.origin, self.origin) < squared(150)) {
+      lib_0555::func_83DD("training_melee_1", level.player);
       common_scripts\utility::func_3C8F("flag_light_melee_popup_shown");
       break;
     }
@@ -1562,7 +1562,7 @@ func_AC01() {
     var_0A func_ABB1();
   }
 
-  level.var_52D3 = common_scripts\utility::func_0F73(level.var_52D1, level.var_52D2);
+  level.var_52D3 = common_scripts\utility::func_F73(level.var_52D1, level.var_52D2);
   foreach(var_0A in level.var_52D3) {
     var_0A func_ABB1();
   }
@@ -1580,7 +1580,7 @@ func_ABD4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       }
 
       if(level.var_4EF0 > 15) {
-        level.var_721C func_7268();
+        level.player func_7268();
       }
     }
   }
@@ -1599,14 +1599,14 @@ func_ABD4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         break;
 
       case 3:
-        level.var_3A72 = common_scripts\utility::func_0F93(level.var_3A72, self);
+        level.var_3A72 = common_scripts\utility::func_F93(level.var_3A72, self);
         if(level.var_3A72.size == 0) {
           common_scripts\utility::func_3C8F("flag_all_field_zombies_dead");
         }
         break;
 
       case 4:
-        level.var_52D3 = common_scripts\utility::func_0F93(level.var_52D3, self);
+        level.var_52D3 = common_scripts\utility::func_F93(level.var_52D3, self);
         if(level.var_52D3.size == 0) {
           common_scripts\utility::func_3C8F("flag_all_initial_house_zombies_dead");
         }
@@ -1621,18 +1621,18 @@ func_ABD4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 func_ABB1(param_00) {
   self scragentsetscripted(1);
   self.var_57C0 = 1;
-  self.var_00CA = 1;
-  maps\mp\agents\_scripted_agent_anim_util::func_8415("passive_idle", param_00);
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "training");
+  self.ignoreall = 1;
+  maps / mp / agents / _scripted_agent_anim_util::func_8415("passive_idle", param_00);
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "training");
   self.var_509A = 1;
 }
 
 func_AB50() {
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "training");
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "training");
   self scragentsetscripted(0);
   self.var_57C0 = 0;
   self.var_509A = 0;
-  self.var_00CA = 0;
+  self.ignoreall = 0;
 }
 
 func_9FAF() {
@@ -1648,7 +1648,7 @@ func_9FAF() {
   wait 0.05;
   setslowmotion(1, 0.25, 0.05);
   self setdemigod(1);
-  common_scripts\utility::func_A74B("zm_role_putaway", 4);
+  common_scripts\utility::waittill_notify_or_timeout("zm_role_putaway", 4);
   setslowmotion(0.25, 1, 0.05);
   self setdemigod(0);
   level.var_AB43 = 0;
@@ -1679,7 +1679,7 @@ func_9FB0() {
     if(var_00 && !func_9FFB()) {
       common_scripts\utility::func_3C7B("flag_player_used_ability");
       level.var_5B5D = gettime();
-      if(!level.var_258F && !common_scripts\utility::func_55E0()) {
+      if(!level.console && !common_scripts\utility::func_55E0()) {
         lib_0555::func_83DD("training_special_pc", self);
       } else {
         lib_0555::func_83DD("training_special", self);
@@ -1756,14 +1756,14 @@ func_9FA5() {
   var_00 = 0;
   var_01 = [];
   foreach(var_03 in level.var_A7DE) {
-    if(isDefined(var_03.var_0165)) {
-      var_01[var_01.size] = var_03.var_0165;
+    if(isDefined(var_03.script_noteworthy)) {
+      var_01[var_01.size] = var_03.script_noteworthy;
     }
   }
 
   for(;;) {
     var_05 = self getcurrentweapon();
-    if(common_scripts\utility::func_0F79(var_01, var_05)) {
+    if(common_scripts\utility::func_F79(var_01, var_05)) {
       var_06 = self getfractionmaxammo(var_05);
       if(var_06 < 0.25 && !var_00 && !func_9FFB()) {
         lib_0555::func_83DD("training_ammo", self);
@@ -1785,8 +1785,8 @@ func_9FA6() {
   var_02 = [];
   var_03 = 0;
   foreach(var_05 in level.var_A7DE) {
-    if(isDefined(var_05.var_0165)) {
-      var_01[var_01.size] = var_05.var_0165;
+    if(isDefined(var_05.script_noteworthy)) {
+      var_01[var_01.size] = var_05.script_noteworthy;
     }
   }
 
@@ -1821,16 +1821,16 @@ func_9FA6() {
     var_0C = undefined;
     var_0D = [];
     foreach(var_05 in level.var_A7DE) {
-      if(isDefined(var_05.var_0165)) {
-        if(var_05.var_0165 == getweapondisplayname(var_07)) {
+      if(isDefined(var_05.script_noteworthy)) {
+        if(var_05.script_noteworthy == getweapondisplayname(var_07)) {
           var_0C = var_05;
-          var_0D = function_021F(var_0C.var_01A2, "targetname");
+          var_0D = function_021F(var_0C.target, "targetname");
         }
       }
     }
 
     if(!func_9FFB()) {
-      if(common_scripts\utility::func_0F79(var_01, var_07)) {
+      if(common_scripts\utility::func_F79(var_01, var_07)) {
         level.var_5B5E = gettime();
         lib_0555::func_83DD("training_ammo", self);
         if(isDefined(var_0C)) {
@@ -1854,13 +1854,13 @@ func_9FAB() {
   lib_0555::func_83DD("training_hint_1", self);
   common_scripts\utility::func_3C8F("flag_show_inventory");
   self notifyonplayercommand("toggleScoresDown", "togglescores");
-  self.var_00CE = 1;
+  self.ignoreme = 1;
   setslowmotion(1, 0.25, 0.5);
   thread func_A002(self, 0.25, 0, 1, 0, "vignette_hud");
-  common_scripts\utility::func_A74B("toggleScoresDown", 2);
+  common_scripts\utility::waittill_notify_or_timeout("toggleScoresDown", 2);
   lib_0557::func_7848("Training Quest");
   lib_0555::func_83DD("training_hint_2", self);
-  self.var_00CE = 0;
+  self.ignoreme = 0;
   setslowmotion(0.25, 1, 0.5);
   thread func_A002(self, 0.25, 1, 0, 1);
   self notifyonplayercommandremove("toggleScoresDown", "togglescores");
@@ -1908,7 +1908,7 @@ func_9FAE() {
     wait(5);
     if(!func_9FFB()) {
       if(!common_scripts\utility::func_3C77("flag_shovel_popup_shown")) {
-        lib_0555::func_83DD("training_shovel", level.var_721C);
+        lib_0555::func_83DD("training_shovel", level.player);
         common_scripts\utility::func_3C8F("flag_shovel_popup_shown");
         break;
       }
@@ -1922,12 +1922,12 @@ func_9FB2() {
   common_scripts\utility::func_3C9F("flag_player_in_house");
   var_00 = [];
   foreach(var_02 in level.var_A7DE) {
-    if(isDefined(var_02.var_0165)) {
-      var_00[var_00.size] = var_02.var_0165;
+    if(isDefined(var_02.script_noteworthy)) {
+      var_00[var_00.size] = var_02.script_noteworthy;
     }
 
     var_02 thread func_9FB1(self);
-    var_03 = function_021F(var_02.var_01A2, "targetname");
+    var_03 = function_021F(var_02.target, "targetname");
     foreach(var_05 in var_03) {
       var_05 hudoutlineenableforclient(self, 0, 0);
     }
@@ -1941,7 +1941,7 @@ func_9FB2() {
     }
 
     foreach(var_0B in var_00) {
-      if(lib_0586::func_0791(var_0B, var_09)) {
+      if(lib_0586::func_791(var_0B, var_09)) {
         thread func_2EB9();
         common_scripts\utility::func_3C8F("flag_wallbuy_bought");
         if(!0) {
@@ -1958,7 +1958,7 @@ func_9FB2() {
   }
 
   foreach(var_02 in level.var_A7DE) {
-    var_03 = function_021F(var_02.var_01A2, "targetname");
+    var_03 = function_021F(var_02.target, "targetname");
     foreach(var_05 in var_03) {
       var_05 hudoutlinedisable();
     }
@@ -1974,7 +1974,7 @@ func_9FB1(param_00) {
       continue;
     }
 
-    if(distance2dsquared(param_00.var_0116, self.var_0116) < squared(100)) {
+    if(distance2dsquared(param_00.origin, self.origin) < squared(100)) {
       level.var_5B64 = gettime();
       lib_0555::func_83DD("training_wallbuy", self);
       thread tut_playerboughtwallbuynotifyhide();
@@ -2022,7 +2022,7 @@ func_A00F(param_00, param_01, param_02, param_03) {
       common_scripts\utility::func_3C9F(param_02);
     }
 
-    if(func_9FFB() && level.var_9C47.var_0018 == 1 && lib_0547::func_5565(level.var_9C47.var_2940, param_00)) {
+    if(func_9FFB() && level.var_9C47.alpha == 1 && lib_0547::func_5565(level.var_9C47.var_2940, param_00)) {
       level.var_9C47 thread func_9FF3(var_05, 0);
       level.var_9C47.var_2940 = undefined;
       return;
@@ -2038,7 +2038,7 @@ func_A00E(param_00, param_01, param_02) {
 
 func_9FF4(param_00) {
   if(common_scripts\utility::func_562E(param_00)) {
-    level.var_9C47.var_0018 = 0;
+    level.var_9C47.alpha = 0;
   } else {
     level.var_9C47 func_9FF3(0.35, 0);
   }
@@ -2047,24 +2047,24 @@ func_9FF4(param_00) {
 }
 
 func_9FFB() {
-  return level.var_9C47.var_0018 > 0;
+  return level.var_9C47.alpha > 0;
 }
 
 func_9FF1(param_00) {
   level.var_9C47 = newclienthudelem(param_00);
-  level.var_9C47.var_00A0 = 1;
-  level.var_9C47.var_0184 = 2;
-  level.var_9C47.var_00C2 = 0;
-  level.var_9C47.var_0010 = "center";
-  level.var_9C47.var_0011 = "bottom";
-  level.var_9C47.var_00C6 = "center";
-  level.var_9C47.var_01CA = "top";
-  level.var_9C47.var_017A = 1;
-  level.var_9C47.var_009B = 1.25;
-  level.var_9C47.var_01D3 = 0;
-  level.var_9C47.var_01D7 = 100;
-  level.var_9C47.var_0056 = (1, 1, 1);
-  level.var_9C47.var_0018 = 0;
+  level.var_9C47.foreground = 1;
+  level.var_9C47.sort = 2;
+  level.var_9C47.hidewheninmenu = 0;
+  level.var_9C47.alignx = "center";
+  level.var_9C47.aligny = "bottom";
+  level.var_9C47.horzalign = "center";
+  level.var_9C47.vertalign = "top";
+  level.var_9C47.shadowed = 1;
+  level.var_9C47.fontscale = 1.25;
+  level.var_9C47.x = 0;
+  level.var_9C47.y = 100;
+  level.var_9C47.color = (1, 1, 1);
+  level.var_9C47.alpha = 0;
 }
 
 func_A002(param_00, param_01, param_02, param_03, param_04, param_05) {
@@ -2074,14 +2074,14 @@ func_A002(param_00, param_01, param_02, param_03, param_04, param_05) {
 
   if(!isDefined(param_00.var_1780)) {
     param_00.var_1780 = newclienthudelem(param_00);
-    param_00.var_1780.var_01D3 = 0;
-    param_00.var_1780.var_01D7 = 0;
+    param_00.var_1780.x = 0;
+    param_00.var_1780.y = 0;
     param_00.var_1780 setshader(param_05, 640, 480);
-    param_00.var_1780.var_0010 = "left";
-    param_00.var_1780.var_0011 = "top";
-    param_00.var_1780.var_00C6 = "fullscreen";
-    param_00.var_1780.var_01CA = "fullscreen";
-    param_00.var_1780.var_0018 = param_02;
+    param_00.var_1780.alignx = "left";
+    param_00.var_1780.aligny = "top";
+    param_00.var_1780.horzalign = "fullscreen";
+    param_00.var_1780.vertalign = "fullscreen";
+    param_00.var_1780.alpha = param_02;
   }
 
   param_00.var_1780 func_9FF3(param_01, param_03);
@@ -2092,27 +2092,27 @@ func_A002(param_00, param_01, param_02, param_03, param_04, param_05) {
 
 func_9FF3(param_00, param_01) {
   self fadeovertime(param_00);
-  self.var_0018 = param_01;
+  self.alpha = param_01;
   wait(param_00);
 }
 
 func_2EBC() {
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_whatwasthatthing");
+  level.player thread lib_0378::func_307E("zmb_train_mari_whatwasthatthing");
 }
 
 func_2E80() {
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_maybesomebodysurvivedthey");
+  level.player thread lib_0378::func_307E("zmb_train_mari_maybesomebodysurvivedthey");
 }
 
 func_2E78() {
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_drostenoliviajefferson");
+  level.player thread lib_0378::func_307E("zmb_train_mari_drostenoliviajefferson");
   wait(4);
   common_scripts\utility::func_3C8F("flag_germans_start_search");
   wait(1);
   var_00 = common_scripts\utility::func_46B5("ger_start_pos", "targetname");
   thread lib_0378::func_8D74("ger_search", var_00, level.var_404C);
   wait(2);
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_ohshit");
+  level.player thread lib_0378::func_307E("zmb_train_mari_ohshit");
   if(0) {
     wait(2.6);
     common_scripts\utility::func_3C8F("flag_patrol_spots_zombie");
@@ -2140,72 +2140,72 @@ func_2E8C() {
 
 func_2EA8() {
   wait(1.5);
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_whatwhatinthehell");
+  level.player thread lib_0378::func_307E("zmb_train_mari_whatwhatinthehell");
 }
 
 func_2EAE() {
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_ohgodnono");
+  level.player thread lib_0378::func_307E("zmb_train_mari_ohgodnono");
 }
 
 func_2EAF() {
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_ihavetogetawayihavetomove");
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_thatsoldieraheadmaybeheha");
+  level.player thread lib_0378::func_307E("zmb_train_mari_ihavetogetawayihavetomove");
+  level.player thread lib_0378::func_307E("zmb_train_mari_thatsoldieraheadmaybeheha");
 }
 
 func_2E9B() {
-  level.var_721C lib_0378::func_8D74("uber_battery_pickup");
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_whatisthisklausmentioneds");
+  level.player lib_0378::func_8D74("uber_battery_pickup");
+  level.player thread lib_0378::func_307E("zmb_train_mari_whatisthisklausmentioneds");
 }
 
 func_2EB8() {
   wait(0.5);
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_itclosedmywounds");
+  level.player thread lib_0378::func_307E("zmb_train_mari_itclosedmywounds");
 }
 
 func_2E7F() {
   wait(1);
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_gottimhimmel");
+  level.player thread lib_0378::func_307E("zmb_train_mari_gottimhimmel");
 }
 
 func_2E91() {
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_thatsoldierheshouldnotbea");
+  level.player thread lib_0378::func_307E("zmb_train_mari_thatsoldierheshouldnotbea");
 }
 
 func_2E97() {}
 
 func_2EA9() {
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_irememberthatfarmhouseits");
+  level.player thread lib_0378::func_307E("zmb_train_mari_irememberthatfarmhouseits");
 }
 
 func_2E74() {
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_moreofthosebrokensoldiers");
+  level.player thread lib_0378::func_307E("zmb_train_mari_moreofthosebrokensoldiers");
 }
 
 func_2EBD(param_00) {
   wait(2);
   if(param_00 == 3) {
-    level.var_721C thread lib_0367::func_8E3C("comeinwaves");
+    level.player thread lib_0367::func_8E3C("comeinwaves");
     return;
   }
 
   if(param_00 == 4) {
-    level.var_721C thread lib_0367::func_8E3C("gettingstronger");
+    level.player thread lib_0367::func_8E3C("gettingstronger");
   }
 }
 
 func_2EAC() {}
 
 func_2EB9() {
-  level.var_721C thread lib_0378::func_307E("zmb_train_mari_thenazisusethisenergyfrom");
+  level.player thread lib_0378::func_307E("zmb_train_mari_thenazisusethisenergyfrom");
 }
 
 func_2EAB() {
-  level.var_721C thread lib_0367::func_8E3C("opendoor");
+  level.player thread lib_0367::func_8E3C("opendoor");
 }
 
 func_2E82() {
-  level.var_721C thread lib_0367::func_8E3C("townahead", undefined, 1, 1);
-  level.var_721C thread lib_0367::func_8E3C("hopealive", undefined, 1, 1);
+  level.player thread lib_0367::func_8E3C("townahead", undefined, 1, 1);
+  level.player thread lib_0367::func_8E3C("hopealive", undefined, 1, 1);
 }
 
 func_357A() {
@@ -2262,13 +2262,13 @@ func_3579() {
   self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
   self.var_4DC9 = 1;
   var_0A = (0, 0, 0);
-  if(self.var_0106 == "ger_oil_lamp_01_a") {
+  if(self.model == "ger_oil_lamp_01_a") {
     var_0A = (0, 0, 8);
-  } else if(self.var_0106 == "ger_oil_lamp_01_b") {
+  } else if(self.model == "ger_oil_lamp_01_b") {
     var_0A = (0, 0, -22);
   }
 
-  playFX(common_scripts\utility::func_44F5("ee_lamp_fx"), self.var_0116 + var_0A, anglesToForward(self.var_001D), anglestoup(self.var_001D));
+  playFX(common_scripts\utility::func_44F5("ee_lamp_fx"), self.origin + var_0A, anglesToForward(self.angles), anglestoup(self.angles));
   thread lib_0378::func_8D74("ee_update");
   var_0B = 1;
   foreach(var_0D in level.var_5AF2) {
@@ -2298,36 +2298,36 @@ func_AA3D() {
 func_327D() {
   level.var_65F6 = getEntArray("mysterybox_door", "targetname");
   foreach(var_01 in level.var_65F6) {
-    var_02 = getEntArray(var_01.var_01A2, "targetname");
+    var_02 = getEntArray(var_01.target, "targetname");
     foreach(var_04 in var_02) {
-      if(!isDefined(var_04.var_0165)) {
+      if(!isDefined(var_04.script_noteworthy)) {
         continue;
       }
 
-      var_05 = var_04.var_0165;
+      var_05 = var_04.script_noteworthy;
       switch (var_05) {
         case "door_model":
           var_01.var_326B = var_04;
-          var_06 = common_scripts\utility::func_46B5(var_04.var_01A2, "targetname");
-          var_07 = common_scripts\utility::func_46B5(var_06.var_01A2, "targetname");
-          var_01.var_6BE3 = var_06.var_001D;
-          var_01.var_2443 = var_07.var_001D;
+          var_06 = common_scripts\utility::func_46B5(var_04.target, "targetname");
+          var_07 = common_scripts\utility::func_46B5(var_06.target, "targetname");
+          var_01.var_6BE3 = var_06.angles;
+          var_01.var_2443 = var_07.angles;
           break;
 
         case "door_model_r":
           var_01.var_326D = var_04;
-          var_08 = common_scripts\utility::func_46B5(var_04.var_01A2, "targetname");
-          var_09 = common_scripts\utility::func_46B5(var_08.var_01A2, "targetname");
-          var_01.var_6BF2 = var_08.var_0116;
-          var_01.var_2446 = var_09.var_0116;
+          var_08 = common_scripts\utility::func_46B5(var_04.target, "targetname");
+          var_09 = common_scripts\utility::func_46B5(var_08.target, "targetname");
+          var_01.var_6BF2 = var_08.origin;
+          var_01.var_2446 = var_09.origin;
           break;
 
         case "door_model_l":
           var_01.var_326C = var_04;
-          var_0A = common_scripts\utility::func_46B5(var_04.var_01A2, "targetname");
-          var_0B = common_scripts\utility::func_46B5(var_0A.var_01A2, "targetname");
-          var_01.var_6BF1 = var_0A.var_0116;
-          var_01.var_2445 = var_0B.var_0116;
+          var_0A = common_scripts\utility::func_46B5(var_04.target, "targetname");
+          var_0B = common_scripts\utility::func_46B5(var_0A.target, "targetname");
+          var_01.var_6BF1 = var_0A.origin;
+          var_01.var_2445 = var_0B.origin;
           break;
 
         default:
@@ -2342,26 +2342,26 @@ func_327D() {
 func_327C() {
   level.var_4EE7 = getEntArray("house_door", "targetname");
   foreach(var_01 in level.var_4EE7) {
-    var_02 = getEnt(var_01.var_01A2, "targetname");
-    var_03 = common_scripts\utility::func_46B5(var_02.var_01A2, "targetname");
-    var_04 = common_scripts\utility::func_46B5(var_03.var_01A2, "targetname");
+    var_02 = getEnt(var_01.target, "targetname");
+    var_03 = common_scripts\utility::func_46B5(var_02.target, "targetname");
+    var_04 = common_scripts\utility::func_46B5(var_03.target, "targetname");
     var_01.var_326B = var_02;
-    var_01.var_6BE3 = var_03.var_001D;
-    var_01.var_2443 = var_04.var_001D;
+    var_01.var_6BE3 = var_03.angles;
+    var_01.var_2443 = var_04.angles;
   }
 }
 
 func_3281(param_00, param_01) {
   if(common_scripts\utility::func_562E(param_01)) {
     if(isDefined(param_00.var_326C) && isDefined(param_00.var_326D)) {
-      if(param_00.var_326C.var_0116 != param_00.var_6BF1) {
+      if(param_00.var_326C.origin != param_00.var_6BF1) {
         param_00.var_326C moveTo(param_00.var_6BF1, 1, 0.25, 0.5);
       }
 
-      if(param_00.var_326D.var_0116 != param_00.var_6BF2) {
+      if(param_00.var_326D.origin != param_00.var_6BF2) {
         param_00.var_326D moveTo(param_00.var_6BF2, 1, 0.25, 0.5);
       }
-    } else if(param_00.var_326B.var_001D != param_00.var_6BE3) {
+    } else if(param_00.var_326B.angles != param_00.var_6BE3) {
       param_00.var_326B rotateTo(param_00.var_6BE3, 1, 0.25, 0.5);
     }
 
@@ -2372,14 +2372,14 @@ func_3281(param_00, param_01) {
   }
 
   if(isDefined(param_00.var_326C) && isDefined(param_00.var_326D)) {
-    if(param_00.var_326C.var_0116 != param_00.var_2445) {
+    if(param_00.var_326C.origin != param_00.var_2445) {
       param_00.var_326C moveTo(param_00.var_2445, 1, 0.25, 0.5);
     }
 
-    if(param_00.var_326D.var_0116 != param_00.var_2446) {
+    if(param_00.var_326D.origin != param_00.var_2446) {
       param_00.var_326D moveTo(param_00.var_2446, 1, 0.25, 0.5);
     }
-  } else if(param_00.var_326B.var_001D != param_00.var_2443) {
+  } else if(param_00.var_326B.angles != param_00.var_2443) {
     param_00.var_326B rotateTo(param_00.var_2443, 1, 0.25, 0.5);
   }
 
@@ -2450,7 +2450,7 @@ func_9C4C() {
   }
 
   if(lib_0547::func_5767(self) && isPlayer(self)) {
-    lib_0586::func_078F();
+    lib_0586::func_78F();
   }
 
   player_stripmods();
@@ -2461,7 +2461,7 @@ func_9C4E() {
   if(isDefined(level.var_A980)) {
     if(level.var_A980 <= 1) {
       if(common_scripts\utility::func_562E(self.var_56F1) || common_scripts\utility::func_562E(self.var_5750)) {
-        if(self.var_00CA) {
+        if(self.ignoreall) {
           return "walk";
         }
 
@@ -2489,7 +2489,7 @@ func_9C4D() {
 
   switch (level.var_A980) {
     case 2:
-      if(level.var_0BCE) {
+      if(level.var_BCE) {
         common_scripts\utility::func_3C8F("flag_enable_all_1st_floor_spawns");
       }
       break;
@@ -2497,7 +2497,7 @@ func_9C4D() {
     case 3:
       thread func_2EBD(3);
       maps\mp\_utility::func_2CED(5, ::lib_0555::func_83DD, "training_rounds", self);
-      if(!level.var_0BCE) {
+      if(!level.var_BCE) {
         common_scripts\utility::func_3C8F("flag_enable_all_1st_floor_spawns");
       }
       break;
@@ -2514,13 +2514,13 @@ func_9C4D() {
       var_00 = func_325F();
       if(isDefined(var_00.var_8301)) {
         foreach(var_02 in var_00.var_8301) {
-          var_02 hudoutlinedisableforclient(level.var_721C);
+          var_02 hudoutlinedisableforclient(level.player);
         }
       }
       break;
 
     case 20:
-      maps\mp\gametypes\zombies::func_47A8("ZM_TRAINING_20");
+      maps / mp / gametypes / zombies::func_47A8("ZM_TRAINING_20");
       break;
   }
 }
@@ -2543,34 +2543,34 @@ func_74EC(param_00, param_01, param_02) {
     param_02 = 0;
   }
 
-  common_scripts\utility::func_0603();
-  common_scripts\utility::func_0600();
+  common_scripts\utility::func_603();
+  common_scripts\utility::func_600();
   maps\mp\_utility::func_3E8E(1);
-  lib_0586::func_078C(param_00);
+  lib_0586::func_78C(param_00);
   wait(0.25);
   if(param_02) {
-    lib_0586::func_078E(param_00, 1);
+    lib_0586::func_78E(param_00, 1);
   } else {
-    lib_0586::func_078E(param_00);
+    lib_0586::func_78E(param_00);
   }
 
   wait(param_01);
-  lib_0586::func_078E(lib_0547::func_AB2B());
-  common_scripts\utility::func_0617();
-  common_scripts\utility::func_0614();
+  lib_0586::func_78E(lib_0547::func_AB2B());
+  common_scripts\utility::func_617();
+  common_scripts\utility::func_614();
   if(self hasweapon(param_00)) {
-    lib_0586::func_0790(param_00);
+    lib_0586::func_790(param_00);
   }
 
   maps\mp\_utility::func_3E8E(0);
 }
 
 func_5CA4(param_00) {
-  var_01 = self getangles();
+  var_01 = self getplayerangles();
   var_02 = 0;
   while(var_02 <= 1) {
     var_03 = func_3886(var_01, param_00, var_02);
-    self setangles(var_03);
+    self setplayerangles(var_03);
     var_02 = var_02 + 0.1;
     wait 0.05;
   }
@@ -2588,11 +2588,11 @@ func_4205(param_00) {
   if(isDefined(self.var_5ED1)) {
     var_01 = self.var_5ED1 - param_00 getEye();
   } else {
-    var_01 = self.var_0116 - var_01 getEye();
+    var_01 = self.origin - var_01 getEye();
   }
 
   var_02 = vectorNormalize((var_01[0], var_01[1], 0));
-  var_03 = anglesToForward(param_00.var_001D);
+  var_03 = anglesToForward(param_00.angles);
   var_04 = vectorNormalize((var_03[0], var_03[1], 0));
   var_05 = vectordot(var_02, var_04);
   var_05 = clamp(var_05, -1, 1);

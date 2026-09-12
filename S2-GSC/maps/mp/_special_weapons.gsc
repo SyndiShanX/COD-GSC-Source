@@ -3,7 +3,7 @@
  * Script: maps\mp\_special_weapons.gsc
 *********************************************/
 
-func_00D5() {
+init() {
   level.var_A85D = [];
   level.var_A85D["flamethrower"] = &"MP_FLAMETHROWER_PICKUP";
   level.var_A85D["molotovs"] = &"MP_MOLOTOV_PICKUP";
@@ -16,10 +16,10 @@ func_00D5() {
   level.var_A85D["raid_ss_serum_c"] = &"RAIDS_SERUM_PICKUP";
   level.var_A85D["incendiary_can"] = &"MP_MOLOTOV_PICKUP";
   thread func_5356();
-  thread func_6B6C();
+  thread onplayerconnect();
 }
 
-func_6B6C() {
+onplayerconnect() {
   level waittill("connected", var_00);
   var_00 method_8512(["killstreak_air_strike_mp"]);
 }
@@ -30,12 +30,12 @@ func_5356() {
   level.all_crates = [];
   level.all_empty_crates = [];
   foreach(var_02 in var_00) {
-    var_02.var_272F = getEnt(var_02.var_01A2, "targetname");
-    var_02.crate_empty = getEnt(var_02.var_272F.var_01A2, "targetname");
-    var_02.crate_empty method_805C();
-    var_02.var_9D65 = getEnt(var_02.crate_empty.var_01A2, "targetname");
+    var_02.var_272F = getEnt(var_02.target, "targetname");
+    var_02.crate_empty = getEnt(var_02.var_272F.target, "targetname");
+    var_02.crate_empty hide();
+    var_02.var_9D65 = getEnt(var_02.crate_empty.target, "targetname");
     var_02.var_5A6E = var_02.var_9D65.var_8260;
-    var_02.var_00C5 = tablelookup("mp/killstreaktable.csv", 1, var_02.var_5A6E, 2);
+    var_02.var_C5 = tablelookup("mp/killstreaktable.csv", 1, var_02.var_5A6E, 2);
     var_02.var_5A68 = tablelookup("mp/killstreaktable.csv", 1, var_02.var_5A6E, 19);
     if(issubstr(var_02.var_5A6E, "serum")) {
       level.raidserumstreaks = ["raid_ss_serum_a", "raid_ss_serum_b", "raid_ss_serum_c"];
@@ -48,11 +48,11 @@ func_5356() {
     }
 
     var_02.var_9D65 setHintString(level.var_A85D[var_02.var_5A6E]);
-    var_02.var_A582 = getEntArray(var_02.var_9D65.var_01A2, "targetname");
+    var_02.var_A582 = getEntArray(var_02.var_9D65.target, "targetname");
     var_02.oncooldown = 0;
     var_02.var_6210 = undefined;
     lib_0502::func_1D39(var_02);
-    var_02 lib_0502::func_1D3A(var_02.var_272F.var_0116, !var_02.oncooldown);
+    var_02 lib_0502::func_1D3A(var_02.var_272F.origin, !var_02.oncooldown);
     var_02 lib_0502::func_1D3B(!var_02.oncooldown);
     if(var_02.var_5A6E == "tripwire") {
       var_02.refillcount = var_02.var_81E1;
@@ -82,8 +82,8 @@ weaponsetupfinishonconnect() {
     thread disablespecialweaponpickup();
   }
 
-  if(isDefined(self.var_9D65.var_0165) && self.var_9D65.var_0165 == "attackers" || self.var_9D65.var_0165 == "defenders") {
-    var_01 = game[self.var_9D65.var_0165];
+  if(isDefined(self.var_9D65.script_noteworthy) && self.var_9D65.script_noteworthy == "attackers" || self.var_9D65.script_noteworthy == "defenders") {
+    var_01 = game[self.var_9D65.script_noteworthy];
     self.var_9D65 setteamfortrigger(var_01);
   }
 }
@@ -94,22 +94,22 @@ weaponplayerconnect() {
   var_00 = self;
   for(;;) {
     level waittill("connected", var_01);
-    var_01 thread func_6B82(var_00);
+    var_01 thread onplayerspawned(var_00);
   }
 }
 
-func_6B82(param_00) {
+onplayerspawned(param_00) {
   self endon("disconnect");
   level endon("game_ended");
   level endon("runBomberObjective");
   for(;;) {
     self waittill("spawned_player");
     var_01 = param_00.var_9D65 getpickuptriggerteam();
-    var_02 = common_scripts\utility::func_0F79(var_01, self);
-    if(isDefined(param_00.var_9D65.var_0165)) {
+    var_02 = common_scripts\utility::func_F79(var_01, self);
+    if(isDefined(param_00.var_9D65.script_noteworthy)) {
       var_03 = 0;
       var_01 = getpickuptriggerteam();
-      if((isDefined(var_01) && !common_scripts\utility::func_0F79(var_01, self)) || lib_0502::func_573E(var_03, self) == 0 || isDefined(self.var_A9F6) && self.var_A9F6 == "war_tripwire_mp" || self.var_A9F6 == "killstreak_molotov_cocktail_mp" || self.var_A9F6 == "killstreak_molotov_cocktail_grenadier_mp") {
+      if((isDefined(var_01) && !common_scripts\utility::func_F79(var_01, self)) || lib_0502::func_573E(var_03, self) == 0 || isDefined(self.var_A9F6) && self.var_A9F6 == "war_tripwire_mp" || self.var_A9F6 == "killstreak_molotov_cocktail_mp" || self.var_A9F6 == "killstreak_molotov_cocktail_grenadier_mp") {
         if(param_00.oncooldown == 0) {
           if(isDefined(param_00.refillcount) && param_00.refillcount > 0) {
             weapsethighlight(param_00, var_02);
@@ -146,16 +146,16 @@ func_A943() {
   level endon("game_ended");
   level endon("runBomberObjective");
   self.var_9D65 waittill("trigger", var_00);
-  var_01 = maps\mp\killstreaks\_raid_ss_serum_util::pickupisserum(self.var_5A6E);
+  var_01 = maps / mp / killstreaks / _raid_ss_serum_util::pickupisserum(self.var_5A6E);
   if(var_01) {
-    while(!maps\mp\killstreaks\_raid_ss_serum_util::handleserumpickup(var_00)) {
+    while(!maps / mp / killstreaks / _raid_ss_serum_util::handleserumpickup(var_00)) {
       self.var_9D65 waittill("trigger", var_00);
     }
   }
 
   var_02 = 0;
   var_03 = getpickuptriggerteam();
-  if((isDefined(var_03) && !common_scripts\utility::func_0F79(var_03, var_00)) || lib_0502::func_573E(var_02, var_00) == 0 || isDefined(var_00.var_A9F6) && var_00.var_A9F6 == "war_tripwire_mp" || var_00.var_A9F6 == "killstreak_molotov_cocktail_mp" || var_00.var_A9F6 == "killstreak_molotov_cocktail_grenadier_mp" || var_00.var_A9F6 == "flamethrower_mp" || var_00.var_A9F6 == "flamethrower_grenadier_mp" || var_00.var_A9F6 == "flamethrower_german_mp" || var_00.var_A9F6 == "flamethrower_german_grenadier_mp") {
+  if((isDefined(var_03) && !common_scripts\utility::func_F79(var_03, var_00)) || lib_0502::func_573E(var_02, var_00) == 0 || isDefined(var_00.var_A9F6) && var_00.var_A9F6 == "war_tripwire_mp" || var_00.var_A9F6 == "killstreak_molotov_cocktail_mp" || var_00.var_A9F6 == "killstreak_molotov_cocktail_grenadier_mp" || var_00.var_A9F6 == "flamethrower_mp" || var_00.var_A9F6 == "flamethrower_grenadier_mp" || var_00.var_A9F6 == "flamethrower_german_mp" || var_00.var_A9F6 == "flamethrower_german_grenadier_mp") {
     thread func_A943();
     return;
   }
@@ -165,12 +165,12 @@ func_A943() {
   var_00 maps\mp\killstreaks\_killstreaks::func_478D(self.var_5A6E, 0, 0, var_00, var_02);
   var_00 thread maps\mp\gametypes\_hud_message::func_5A78(self.var_5A6E, 500, undefined, undefined);
   if(var_01) {
-    thread maps\mp\killstreaks\_raid_ss_serum_util::handledisableserumonpickup(self.var_5A6E, var_00);
+    thread maps / mp / killstreaks / _raid_ss_serum_util::handledisableserumonpickup(self.var_5A6E, var_00);
   }
 
-  self.var_4F6B.var_0018 = 0;
+  self.var_4F6B.alpha = 0;
   foreach(var_05 in self.var_A582) {
-    var_05 method_805C();
+    var_05 hide();
   }
 
   self.var_272F hudoutlinedisable();
@@ -180,9 +180,9 @@ func_A943() {
 
 disablespecialweaponpickup() {
   self.var_9D65 makeunusable();
-  self.var_4F6B.var_0018 = 0;
+  self.var_4F6B.alpha = 0;
   foreach(var_01 in self.var_A582) {
-    var_01 method_805C();
+    var_01 hide();
   }
 
   self.var_272F hudoutlinedisable();
@@ -190,9 +190,9 @@ disablespecialweaponpickup() {
 
 enablespecialweaponpickup() {
   self.var_9D65 makeusable();
-  self.var_4F6B.var_0018 = 1;
+  self.var_4F6B.alpha = 1;
   foreach(var_01 in self.var_A582) {
-    var_01 method_805B();
+    var_01 show();
   }
 
   self.var_272F hudoutlineenable(2, 1);
@@ -208,9 +208,9 @@ trackvisualmodelsshow() {
       if(isDefined(var_03.var_81E1)) {
         var_04 = var_03.var_81E1;
         if(var_04 > self.refillcount / var_01 * var_00.size) {
-          var_03 method_805C();
+          var_03 hide();
         } else {
-          var_03 method_805B();
+          var_03 show();
         }
       }
     }
@@ -222,8 +222,8 @@ trackvisualmodelsshow() {
 }
 
 getpickuptriggerteam() {
-  if(isDefined(self.var_0165)) {
-    var_00 = lib_0502::func_4627(game[self.var_0165]);
+  if(isDefined(self.script_noteworthy)) {
+    var_00 = lib_0502::func_4627(game[self.script_noteworthy]);
     return var_00;
   }
 
@@ -255,11 +255,11 @@ func_7DB5() {
   lib_0502::func_1D3B(!self.oncooldown);
   self.var_9D65 makeusable();
   foreach(var_01 in self.var_A582) {
-    var_01 method_805B();
+    var_01 show();
   }
 
   self.var_272F hudoutlineenable(2, 1);
-  self.var_4F6B.var_0018 = 0.4;
+  self.var_4F6B.alpha = 0.4;
   wait 0.05;
   thread func_A943();
 }
@@ -271,19 +271,19 @@ playerholdingkillstreakwatcher(param_00) {
   param_00 lib_0502::replacehintstringclient(&"MP_MOLOTOV_PICKUP", &"RAIDS_TRIPWIRE_BLANK");
   param_00 lib_0502::replacehintstringclient(&"RAIDS_TRIPWIRE_COLLECT", &"RAIDS_TRIPWIRE_BLANK");
   while(lib_0502::func_573E(var_01, param_00) == 0 || isDefined(param_00.var_A9F6) && param_00.var_A9F6 == "killstreak_molotov_cocktail_mp" || param_00.var_A9F6 == "killstreak_molotov_cocktail_grenadier_mp") {
-    common_scripts\utility::func_0F71(level.all_crates, ::hidefromclient, param_00);
-    common_scripts\utility::func_0F71(level.all_empty_crates, ::showtoclient, param_00);
+    common_scripts\utility::func_F71(level.all_crates, ::hidefromclient, param_00);
+    common_scripts\utility::func_F71(level.all_empty_crates, ::showtoclient, param_00);
     wait 0.05;
   }
 
   param_00 lib_0502::replacehintstringclient(&"MP_MOLOTOV_PICKUP", undefined);
   param_00 lib_0502::replacehintstringclient(&"RAIDS_TRIPWIRE_COLLECT", undefined);
-  common_scripts\utility::func_0F71(level.all_empty_crates, ::hidefromclient, param_00);
-  common_scripts\utility::func_0F71(level.all_crates, ::showtoclient, param_00);
+  common_scripts\utility::func_F71(level.all_empty_crates, ::hidefromclient, param_00);
+  common_scripts\utility::func_F71(level.all_crates, ::showtoclient, param_00);
 }
 
 func_283A(param_00, param_01, param_02, param_03) {
-  if(!isDefined(param_00) || !isDefined(param_00.var_0116)) {
+  if(!isDefined(param_00) || !isDefined(param_00.origin)) {
     return;
   }
 
@@ -296,23 +296,23 @@ func_283A(param_00, param_01, param_02, param_03) {
   }
 
   var_04 = undefined;
-  if(isDefined(param_00.var_0165) && param_00.var_0165 == "attackers" || param_00.var_0165 == "defenders") {
-    var_05 = game[param_00.var_0165];
+  if(isDefined(param_00.script_noteworthy) && param_00.script_noteworthy == "attackers" || param_00.script_noteworthy == "defenders") {
+    var_05 = game[param_00.script_noteworthy];
     var_04 = newteamhudelem(var_05);
   } else {
     var_04 = newhudelem();
   }
 
   var_04 setshader(param_01, 0, 0, 7);
-  var_04.var_0018 = 0.4;
+  var_04.alpha = 0.4;
   var_04 setwaypoint(1, 0, 0, 0, 0, 0, 0, param_03);
-  var_04.var_01D3 = param_00.var_0116[0];
-  var_04.var_01D7 = param_00.var_0116[1];
-  var_04.var_01D9 = param_00.var_0116[2] + 10 - param_02;
-  var_04.var_35B2 = "icon";
-  var_04.var_6E74 = level.var_A012;
-  level.var_90DB = common_scripts\utility::func_0F6F(level.var_90DB, var_04);
-  level.var_90DB = common_scripts\utility::func_0F97(level.var_90DB);
+  var_04.x = param_00.origin[0];
+  var_04.y = param_00.origin[1];
+  var_04.z = param_00.origin[2] + 10 - param_02;
+  var_04.elemtype = "icon";
+  var_04.parent = level.uiparent;
+  level.var_90DB = common_scripts\utility::func_F6F(level.var_90DB, var_04);
+  level.var_90DB = common_scripts\utility::func_F97(level.var_90DB);
   return var_04;
 }
 

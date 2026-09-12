@@ -15,16 +15,16 @@ func_8601(param_00) {
 }
 
 func_85A9() {
-  if(common_scripts\utility::func_562E(self.var_0C29) || !isDefined(self.var_0C29)) {
-    self.var_0C2A = 1;
-    self.var_0C29 = 0;
+  if(common_scripts\utility::func_562E(self.var_C29) || !isDefined(self.var_C29)) {
+    self.var_C2A = 1;
+    self.var_C29 = 0;
   }
 }
 
 func_85AA() {
-  if(common_scripts\utility::func_562E(self.var_0C2A)) {
-    self.var_0C2A = undefined;
-    self.var_0C29 = 1;
+  if(common_scripts\utility::func_562E(self.var_C2A)) {
+    self.var_C2A = undefined;
+    self.var_C29 = 1;
   }
 }
 
@@ -71,8 +71,8 @@ func_23A0() {
     }
   }
 
-  foreach(var_05 in level.var_08CB) {
-    maps\mp\mp_zombie_nest_special_event_creator_interface::func_23C4(var_05);
+  foreach(var_05 in level.var_8CB) {
+    maps / mp / mp_zombie_nest_special_event_creator_interface::func_23C4(var_05);
   }
 }
 
@@ -189,19 +189,19 @@ func_7679(param_00, param_01) {
   self endon("death");
   self endon("clear_tower_behavior_handled");
   thread func_49A2(level.var_7AC8);
-  self.var_001D = param_00.var_001D;
-  self setOrigin(param_00.var_0116);
-  maps\mp\mp_zombie_nest_ee_util::func_8579(param_00.var_001D);
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "tower_objective");
-  var_02 = maps\mp\agents\_scripted_agent_anim_util::func_434D(param_01, undefined, 1);
+  self.angles = param_00.angles;
+  self setOrigin(param_00.origin);
+  maps / mp / mp_zombie_nest_ee_util::func_8579(param_00.angles);
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(1, "tower_objective");
+  var_02 = maps / mp / agents / _scripted_agent_anim_util::func_434D(param_01, undefined, 1);
   for(;;) {
     if(common_scripts\utility::func_562E(self.var_2FDA)) {
       func_8605(1);
       break;
     }
 
-    var_03 = maps\mp\mp_zombie_nest_ee_util::func_7AC3(var_02);
-    maps\mp\agents\_scripted_agent_anim_util::func_71FA(var_02, var_03, 1, "scripted_anim");
+    var_03 = maps / mp / mp_zombie_nest_ee_util::func_7AC3(var_02);
+    maps / mp / agents / _scripted_agent_anim_util::func_71FA(var_02, var_03, 1, "scripted_anim");
   }
 }
 
@@ -218,10 +218,10 @@ func_5629() {
 }
 
 func_9E0E(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = maps\mp\mp_zombie_nest_special_event_creator_interface::func_9959();
+  var_05 = maps / mp / mp_zombie_nest_special_event_creator_interface::func_9959();
   for(var_06 = 0; var_06 < param_00.size; var_06++) {
     var_07 = common_scripts\utility::func_7A33(param_01);
-    if(maps\mp\mp_zombie_nest_special_event_creator_interface::func_ABD2(param_00[var_06])) {
+    if(maps / mp / mp_zombie_nest_special_event_creator_interface::func_ABD2(param_00[var_06])) {
       continue;
     }
 
@@ -271,7 +271,7 @@ func_9E0E(param_00, param_01, param_02, param_03, param_04) {
 
 func_5552(param_00) {
   for(var_01 = 0; var_01 < param_00.size; var_01++) {
-    if(isDefined(self.var_0A4B) && self.var_0A4B == param_00[var_01]) {
+    if(isDefined(self.var_A4B) && self.var_A4B == param_00[var_01]) {
       return 1;
     }
   }
@@ -317,7 +317,7 @@ func_561C() {
 }
 
 func_A658(param_00, param_01, param_02) {
-  while(distance(param_00.var_0116, self.var_0116) > param_01) {
+  while(distance(param_00.origin, self.origin) > param_01) {
     wait(0.1);
   }
 }
@@ -332,7 +332,7 @@ func_49A2(param_00) {
   self notify("clear_tower_behavior_handled");
   func_8605();
   wait 0.05;
-  maps\mp\agents\_scripted_agent_anim_util::func_8732(0, "tower_objective");
+  maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "tower_objective");
   self scragentsetscripted(0);
   self method_839D("gravity");
 }
@@ -347,7 +347,7 @@ func_A645(param_00) {
 func_AB87(param_00, param_01, param_02) {
   var_03 = [];
   for(var_04 = 0; var_04 < param_01.size; var_04++) {
-    if(isDefined(param_01[var_04].var_9ACD) && common_scripts\utility::func_562E(param_01[var_04].var_9ACD != "attacking point") && distance(param_00.var_0116, param_02.var_0116) < distance(param_01[var_04].var_0116, param_02.var_0116)) {
+    if(isDefined(param_01[var_04].var_9ACD) && common_scripts\utility::func_562E(param_01[var_04].var_9ACD != "attacking point") && distance(param_00.origin, param_02.origin) < distance(param_01[var_04].origin, param_02.origin)) {
       return param_01[var_04];
     }
   }
@@ -417,7 +417,7 @@ func_412A(param_00) {
   for(var_03 = 0; var_03 < param_00.var_AB4E.size; var_03++) {
     var_04 = param_00.var_AB4E[var_03].var_65FB;
     if(isDefined(var_04) && isalive(var_04)) {
-      var_02 = common_scripts\utility::func_0F6F(var_02, var_04);
+      var_02 = common_scripts\utility::func_F6F(var_02, var_04);
     }
   }
 
@@ -425,8 +425,8 @@ func_412A(param_00) {
 }
 
 func_8F14(param_00, param_01) {
-  foreach(var_03 in level.var_744A) {
-    if(distance(param_00, var_03.var_0116) < param_01) {
+  foreach(var_03 in level.players) {
+    if(distance(param_00, var_03.origin) < param_01) {
       return 1;
     }
   }
@@ -438,7 +438,7 @@ func_425A(param_00, param_01) {
   var_02 = [];
   for(var_03 = 0; var_03 < param_00.size; var_03++) {
     var_04 = lib_0547::func_4090(param_00[var_03]);
-    var_02 = common_scripts\utility::func_0F73(var_02, var_04);
+    var_02 = common_scripts\utility::func_F73(var_02, var_04);
   }
 
   var_02 = common_scripts\utility::func_40B0(param_01, var_02);
@@ -448,9 +448,9 @@ func_425A(param_00, param_01) {
 func_4082(param_00) {
   var_01 = [];
   for(var_02 = 0; var_02 < param_00.size; var_02++) {
-    var_03 = param_00[var_02] maps\mp\mp_zombie_nest_ee_util::func_442B();
+    var_03 = param_00[var_02] maps / mp / mp_zombie_nest_ee_util::func_442B();
     if(isDefined(var_03)) {
-      var_01 = common_scripts\utility::func_0F6F(var_01, param_00[var_02]);
+      var_01 = common_scripts\utility::func_F6F(var_01, param_00[var_02]);
     }
   }
 
@@ -468,7 +468,7 @@ func_10CD(param_00, param_01, param_02) {
 func_52DD(param_00) {
   for(var_01 = 0; var_01 < self.size; var_01++) {
     var_02 = param_00.var_38C4["objectiveHealth"];
-    self[var_01].var_AB4E = common_scripts\utility::func_46B7(self[var_01].var_01A2, "targetname");
+    self[var_01].var_AB4E = common_scripts\utility::func_46B7(self[var_01].target, "targetname");
     for(var_03 = 0; var_03 < self[var_01].var_AB4E.size; var_03++) {
       self[var_01].var_AB4E[var_03].var_38B2 = param_00.var_38C3;
       self[var_01].var_AB4E[var_03].var_69A5 = 0;
@@ -479,7 +479,7 @@ func_52DD(param_00) {
     self[var_01].var_6057 = var_02;
     if(isDefined(self[var_01].var_65E8)) {
       foreach(var_05 in self[var_01].var_65E8) {
-        var_06 = common_scripts\utility::func_4461(var_05.var_0116, param_00.var_ABEA.var_1176, 250);
+        var_06 = common_scripts\utility::func_4461(var_05.origin, param_00.var_ABEA.var_1176, 250);
         if(isDefined(var_06)) {
           var_05.var_65DE = var_06;
         }
@@ -490,7 +490,7 @@ func_52DD(param_00) {
 
 func_459C(param_00) {
   for(var_01 = 0; var_01 < param_00.size; var_01++) {
-    if(param_00[var_01] maps\mp\mp_zombie_nest_ee_util::func_996A()) {
+    if(param_00[var_01] maps / mp / mp_zombie_nest_ee_util::func_996A()) {
       return param_00[var_01];
     }
   }
@@ -515,7 +515,7 @@ func_7591(param_00) {
 func_9E0B(param_00) {
   var_01 = spawnStruct();
   var_01.var_7588 = param_00;
-  var_01.var_9110 = var_01.var_7588 maps\mp\mp_zombie_nest_ee_util::func_442B();
+  var_01.var_9110 = var_01.var_7588 maps / mp / mp_zombie_nest_ee_util::func_442B();
   if(isDefined(var_01.var_7588) && isDefined(var_01.var_9110)) {
     return var_01;
   }

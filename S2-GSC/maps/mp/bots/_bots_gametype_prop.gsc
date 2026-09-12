@@ -3,7 +3,7 @@
  * Script: maps\mp\bots\_bots_gametype_prop.gsc
 ************************************************/
 
-func_00F9() {
+main() {
   func_87A7();
 }
 
@@ -22,12 +22,12 @@ bot_prop_think() {
   var_00 = 0;
   for(;;) {
     wait 0.05;
-    if(self.var_00BC <= 0) {
+    if(self.health <= 0) {
       continue;
     }
 
     if(self method_8368() != "run_and_gun") {
-      maps\mp\bots\_bots_util::func_1AD5("run_and_gun");
+      maps / mp / bots / _bots_util::func_1AD5("run_and_gun");
     }
 
     if(bot_is_on_prop_team()) {
@@ -55,9 +55,9 @@ bot_prop_think() {
 
     if(!common_scripts\utility::func_562E(self.phfrozen)) {
       if(!self method_86C2() && gettime() - var_00 > 10000) {
-        var_05 = self.var_0088;
+        var_05 = self.enemy;
         if(!isDefined(var_05)) {
-          foreach(var_07 in level.var_744A) {
+          foreach(var_07 in level.players) {
             if(!isalliedsentient(self, var_07)) {
               var_05 = var_07;
             }
@@ -66,7 +66,7 @@ bot_prop_think() {
 
         if(isDefined(var_05) && !self method_8371(var_05)) {
           var_09 = common_scripts\utility::func_7A33(getallnodes());
-          self method_8379(var_05, var_09.var_0116);
+          self method_8379(var_05, var_09.origin);
           var_00 = gettime();
         } else {
           self[[level.var_1A8F["default"]]]();
@@ -77,7 +77,7 @@ bot_prop_think() {
 }
 
 bot_is_on_prop_team() {
-  return self.var_01A7 == game["defenders"];
+  return self.team == game["defenders"];
 }
 
 array_randomly_reduce_to_size(param_00, param_01) {

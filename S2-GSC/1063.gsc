@@ -3,9 +3,9 @@
  * Script: 1063.gsc
 *********************************************/
 
-lib_0427::func_00F9() {
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_nest_01");
-  var_00.var_9C83 = 0;
+main() {
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_nest_01");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.138796, 0.213537, 0.282868);
   var_00.var_1108 = (0.450758, 0.479576, 0.49963);
@@ -48,8 +48,8 @@ lib_0427::func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_nest_01_bunker");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_nest_01_bunker");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.812936, 0.773289, 0.773289);
   var_00.var_1108 = (0.450758, 0.479576, 0.49963);
@@ -92,8 +92,8 @@ lib_0427::func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_nest_01_hilt");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_nest_01_hilt");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (1, 0.993378, 0.913396);
   var_00.var_1108 = (0.450758, 0.479576, 0.49963);
@@ -136,8 +136,8 @@ lib_0427::func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_nest_01_mines");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_nest_01_mines");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.442685, 0.490626, 0.524344);
   var_00.var_1108 = (0.450758, 0.479576, 0.49963);
@@ -180,8 +180,8 @@ lib_0427::func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_nest_01_catacombs");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_nest_01_catacombs");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.428359, 0.433116, 0.478836);
   var_00.var_1108 = (0.450758, 0.479576, 0.49963);
@@ -224,8 +224,8 @@ lib_0427::func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_nest_01_underground");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_nest_01_underground");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.8799, 0.951153, 1);
   var_00.var_1108 = (0.450758, 0.479576, 0.49963);
@@ -268,8 +268,8 @@ lib_0427::func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_nest_01_rnd");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_nest_01_rnd");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.299166, 0.412065, 0.496883);
   var_00.var_1108 = (0.450758, 0.479576, 0.49963);
@@ -312,8 +312,8 @@ lib_0427::func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_zombie_nest_01_bunker_darkness");
-  var_00.var_9C83 = 3;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_zombie_nest_01_bunker_darkness");
+  var_00.transitiontime = 3;
   var_00.var_1103 = 0;
   var_00.var_1128 = (0.292018, 0.349016, 0.470395);
   var_00.var_1108 = (0.0926465, 0.155852, 0.24037);
@@ -356,8 +356,8 @@ lib_0427::func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 0;
   var_00.var_1128 = (0.292018, 0.349016, 0.470395);
   var_00.var_1108 = (0.0926465, 0.155852, 0.24037);
@@ -402,4 +402,4 @@ lib_0427::func_00F9() {
   var_00.var_1121 = 0;
 }
 
-lib_0427::func_8A1D() {}
+func_8A1D() {}

@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_nest_ee_hc_restore_pub_power.gsc
 **************************************************************/
 
-func_00F9() {
+main() {
   lib_0557::func_4BC9("pub powered", "powering pub", "CONST_HC_ANALYTICS_PUB_POWERED");
   common_scripts\utility::func_3C87("flag_nest_hc_ee_record_player_active");
   common_scripts\utility::func_3C87("flag_nest_hc_ee_weathervane_switch_shot");
@@ -21,16 +21,16 @@ func_8B28(param_00, param_01) {
     wait(0.3);
   }
 
-  var_04 = vectortoangles(var_02.var_0116 - self["weather_vane"].var_0116);
+  var_04 = vectortoangles(var_02.origin - self["weather_vane"].origin);
   var_05 = common_scripts\utility::func_98E7(var_04[1] + 180 > 360, var_04[1] - 180, var_04[1] + 180);
-  self["weather_vane"] rotateTo((self["weather_vane"].var_001D[0], var_05, self["weather_vane"].var_001D[2]), 0.15);
+  self["weather_vane"] rotateTo((self["weather_vane"].angles[0], var_05, self["weather_vane"].angles[2]), 0.15);
   lib_0378::func_8D74("aud_weathervane_rotate", "short");
   wait(0.15);
   var_02 setscriptablepartstate("fuse", "open");
   wait(var_03);
   var_02 setscriptablepartstate("fuse", "open_idle");
   var_02 waittill("damage");
-  playFXOnTag(level.var_0611["zmb_ee_switch_sparks"], var_02, "tag_origin");
+  playFXOnTag(level.var_611["zmb_ee_switch_sparks"], var_02, "tag_origin");
   var_02 lib_0378::func_8D74("aud_switch_damaged");
   common_scripts\utility::func_3C8F("flag_nest_hc_ee_weathervane_switch_shot");
   thread func_8B1C();
@@ -38,11 +38,11 @@ func_8B28(param_00, param_01) {
 
 func_3B8F(param_00, param_01, param_02, param_03) {
   var_04 = cos(param_02);
-  var_05 = (param_01.var_0116[0], param_01.var_0116[1], param_00.var_0116[2]);
-  var_06 = anglesToForward(param_00.var_001D);
-  var_07 = var_05 - param_00.var_0116;
+  var_05 = (param_01.origin[0], param_01.origin[1], param_00.origin[2]);
+  var_06 = anglesToForward(param_00.angles);
+  var_07 = var_05 - param_00.origin;
   if(isDefined(param_03)) {
-    var_07 = param_00.var_0116 - var_05;
+    var_07 = param_00.origin - var_05;
   }
 
   var_06 = var_06 * (1, 1, 0);
@@ -59,16 +59,16 @@ func_3B8F(param_00, param_01, param_02, param_03) {
 
 func_8B1C() {
   self["electric_panel"] method_8449(self["waterwheel"]);
-  level thread common_scripts\_exploder::func_088E(223);
+  level thread common_scripts\_exploder::func_88E(223);
   self["waterwheel"] rotateroll(155, 12, 1, 1);
   thread func_9419();
   self["waterwheel"] lib_0378::func_8D74("aud_waterwheel");
   common_scripts\utility::func_3C9F(lib_0557::func_7838("5 Right Hand fuses", "lift outter rods"));
   self["electric_panel"] setCanDamage(1);
-  self["electric_panel"] thread maps\mp\gametypes\_damage::func_8676(1, "head_gibs", ::maps\mp\mp_zombie_nest_ee_util::func_9902, ::maps\mp\mp_zombie_nest_ee_util::func_9903);
+  self["electric_panel"] thread maps\mp\gametypes\_damage::func_8676(1, "head_gibs", ::maps / mp / mp_zombie_nest_ee_util::func_9902, ::maps / mp / mp_zombie_nest_ee_util::func_9903);
   self["electric_panel"] waittill("death", var_00, var_01, var_02);
   thread func_77AB();
-  playFX(level.var_0611["zmb_elec_coil_charge"], self["electric_panel"].var_0116, anglesToForward(self["electric_panel"].var_001D));
+  playFX(level.var_611["zmb_elec_coil_charge"], self["electric_panel"].origin, anglesToForward(self["electric_panel"].angles));
   self["electric_panel"] lib_0378::func_8D74("aud_wonder_weapon_elec_coil_charge");
   thread func_08B4();
 }
@@ -135,8 +135,8 @@ func_9485() {
 func_A787(param_00) {
   var_01 = 0;
   while(!var_01) {
-    foreach(var_03 in level.var_744A) {
-      if(distance(var_03.var_0116, self.var_0116) < param_00) {
+    foreach(var_03 in level.players) {
+      if(distance(var_03.origin, self.origin) < param_00) {
         var_01 = 1;
         break;
       }
@@ -148,14 +148,14 @@ func_A787(param_00) {
 
 func_52E7() {
   var_00 = common_scripts\utility::func_46B5("hc_objective_weather_vane_hint_struct", "targetname");
-  var_01 = getEnt(var_00.var_01A2, "targetname");
-  var_01.var_693D = common_scripts\utility::func_46B5(var_01.var_01A2, "targetname");
+  var_01 = getEnt(var_00.target, "targetname");
+  var_01.var_693D = common_scripts\utility::func_46B5(var_01.target, "targetname");
   var_02 = common_scripts\utility::func_46B5("objective_2_possible_locations_struct", "targetname");
-  var_03 = function_021F(var_02.var_01A2, "targetname");
+  var_03 = function_021F(var_02.target, "targetname");
   var_04 = common_scripts\utility::func_44BD("objective_2_waterwheel_struct", "targetname");
-  var_05 = common_scripts\utility::func_44BD(var_04.var_01A2, "targetname");
+  var_05 = common_scripts\utility::func_44BD(var_04.target, "targetname");
   var_06 = common_scripts\utility::func_46B5("objective_2_pub_panel", "targetname");
-  var_07 = getEnt(var_06.var_01A2, "targetname");
+  var_07 = getEnt(var_06.target, "targetname");
   var_08 = common_scripts\utility::func_46B5("objective_2_pub_record_player", "targetname");
   var_09 = function_021F("zmb_phonograph_model", "targetname");
   var_0A = var_09[0];

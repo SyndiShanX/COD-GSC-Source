@@ -3,7 +3,7 @@
  * Script: maps\mp\_global_fx.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   maps\mp\_global_fx_code::func_47DC("ch_streetlight_02_FX_origin", "vfx/test/test_fx");
   maps\mp\_global_fx_code::func_47DC("me_streetlight_01_FX_origin", "vfx/test/test_fx");
   maps\mp\_global_fx_code::func_47DC("ch_street_light_01_on", "vfx/test/test_fx");

@@ -3,12 +3,12 @@
  * Script: maps\mp\gametypes\ball.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   if(getDvar("1673") == "mp_background") {
     return;
   }
 
-  maps\mp\gametypes\_globallogic::func_00D5();
+  maps\mp\gametypes\_globallogic::init();
   lib_01DD::func_8A0C();
   maps\mp\gametypes\_globallogic::func_8A0C();
   if(isusingmatchrulesdata()) {
@@ -16,13 +16,13 @@ func_00F9() {
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.var_3FDC, 0, 0, 9);
-    maps\mp\_utility::func_7BFA(level.var_3FDC, 10);
-    maps\mp\_utility::func_7BF9(level.var_3FDC, 50);
-    maps\mp\_utility::func_7BF7(level.var_3FDC, 1);
-    maps\mp\_utility::func_7C04(level.var_3FDC, 1);
-    maps\mp\_utility::func_7BF1(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BE5(level.var_3FDC, 1);
+    maps\mp\_utility::func_7BF8(level.gametype, 0, 0, 9);
+    maps\mp\_utility::func_7BFA(level.gametype, 10);
+    maps\mp\_utility::func_7BF9(level.gametype, 50);
+    maps\mp\_utility::func_7BF7(level.gametype, 1);
+    maps\mp\_utility::func_7C04(level.gametype, 1);
+    maps\mp\_utility::func_7BF1(level.gametype, 0);
+    maps\mp\_utility::func_7BE5(level.gametype, 1);
     setdynamicdvar("scr_ball_num_balls", 1);
     level.var_6031 = 0;
     level.var_6035 = 0;
@@ -42,7 +42,7 @@ func_00F9() {
   level.var_4959 = 1;
   level.var_6CD1 = 1;
   level.var_6BAF = ::func_6BAF;
-  level.var_6B5C = ::func_6B5C;
+  level.onnormaldeath = ::onnormaldeath;
   level.var_3FC9 = ::func_6BBC;
   if(level.var_6031 || level.var_6035) {
     level.var_62AD = ::maps\mp\gametypes\_damage::func_3FC8;
@@ -127,7 +127,7 @@ func_6BAF() {
 
   maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_BALL");
   maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_BALL");
-  if(level.var_910F) {
+  if(level.splitscreen) {
     maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_BALL");
     maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_BALL");
   } else {
@@ -142,9 +142,9 @@ func_6BAF() {
   level.iconneutralball = "waypoint_caster_neutral_ball";
   level.iconheldball = "waypoint_caster_held_ball";
   func_151C();
-  var_02[0] = level.var_3FDC;
+  var_02[0] = level.gametype;
   var_02[1] = "blocker_ball";
-  maps\mp\gametypes\_gameobjects::func_00F9(var_02);
+  maps\mp\gametypes\_gameobjects::main(var_02);
   level thread func_7F58();
   lib_050D::func_10E4();
 }
@@ -182,8 +182,8 @@ func_6BB6() {
     var_00 = "overtime_halftime";
   }
 
-  function_018D("time limit, win: " + var_00 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
-  level thread maps\mp\gametypes\_gamelogic::func_36B9(var_00, game["end_reason"]["time_limit_reached"]);
+  logstring("time limit, win: " + var_00 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
+  level thread maps\mp\gametypes\_gamelogic::endgame(var_00, game["end_reason"]["time_limit_reached"]);
 }
 
 func_6BBC(param_00) {
@@ -205,9 +205,9 @@ func_6BBC(param_00) {
   self.var_1561 = undefined;
 }
 
-func_6B5C(param_00, param_01, param_02) {
-  if(game["state"] == "postgame" && game["teamScores"][param_01.var_01A7] > game["teamScores"][level.var_6C63[param_01.var_01A7]]) {
-    param_01.var_3B4B = 1;
+onnormaldeath(param_00, param_01, param_02) {
+  if(game["state"] == "postgame" && game["teamScores"][param_01.team] > game["teamScores"][level.var_6C63[param_01.team]]) {
+    param_01.finalkill = 1;
   }
 }
 
@@ -232,20 +232,20 @@ func_7F58() {
   func_1519(var_00);
   func_151B("allies");
   func_151B("axis");
-  level.var_0611["ball_trail"] = loadfx("vfx/trail/vfx_uplink_ball_trl");
-  level.var_0611["ball_download"] = loadfx("vfx/trail/vfx_uplink_ball_trl2");
-  level.var_0611["ball_download_end"] = loadfx("vfx/unique/vfx_uplink_ball_impact");
-  level.var_0611["ball_goal_allies_blue"] = loadfx("vfx/unique/gridiron_goal_allies_blue");
-  level.var_0611["ball_goal_allies_red"] = loadfx("vfx/unique/gridiron_goal_allies_red");
-  level.var_0611["ball_goal_axis_blue"] = loadfx("vfx/unique/gridiron_goal_axis_blue");
-  level.var_0611["ball_goal_axis_red"] = loadfx("vfx/unique/gridiron_goal_axis_red");
-  level.var_0611["ball_goal_activated_red"] = loadfx("vfx/unique/vfx_uplink_ball_score");
-  level.var_0611["ball_goal_activated_green"] = loadfx("vfx/unique/vfx_uplink_ball_score");
-  level.var_0611["ball_goal_activated_blue"] = loadfx("vfx/unique/vfx_uplink_ball_score_friendly");
-  level.var_0611["ball_goal_activated_orange"] = loadfx("vfx/unique/vfx_uplink_ball_score_friendly");
-  level.var_0611["ball_goal_activated_yellow"] = loadfx("vfx/unique/vfx_uplink_ball_score");
-  level.var_0611["ball_teleport"] = loadfx("vfx/unique/vfx_uplink_ball_glow");
-  level.var_0611["ball_physics_impact"] = loadfx("vfx/treadfx/footstep_dust");
+  level.var_611["ball_trail"] = loadfx("vfx/trail/vfx_uplink_ball_trl");
+  level.var_611["ball_download"] = loadfx("vfx/trail/vfx_uplink_ball_trl2");
+  level.var_611["ball_download_end"] = loadfx("vfx/unique/vfx_uplink_ball_impact");
+  level.var_611["ball_goal_allies_blue"] = loadfx("vfx/unique/gridiron_goal_allies_blue");
+  level.var_611["ball_goal_allies_red"] = loadfx("vfx/unique/gridiron_goal_allies_red");
+  level.var_611["ball_goal_axis_blue"] = loadfx("vfx/unique/gridiron_goal_axis_blue");
+  level.var_611["ball_goal_axis_red"] = loadfx("vfx/unique/gridiron_goal_axis_red");
+  level.var_611["ball_goal_activated_red"] = loadfx("vfx/unique/vfx_uplink_ball_score");
+  level.var_611["ball_goal_activated_green"] = loadfx("vfx/unique/vfx_uplink_ball_score");
+  level.var_611["ball_goal_activated_blue"] = loadfx("vfx/unique/vfx_uplink_ball_score_friendly");
+  level.var_611["ball_goal_activated_orange"] = loadfx("vfx/unique/vfx_uplink_ball_score_friendly");
+  level.var_611["ball_goal_activated_yellow"] = loadfx("vfx/unique/vfx_uplink_ball_score");
+  level.var_611["ball_teleport"] = loadfx("vfx/unique/vfx_uplink_ball_glow");
+  level.var_611["ball_physics_impact"] = loadfx("vfx/treadfx/footstep_dust");
   level thread func_1518();
   func_152E();
   for(var_01 = 0; var_01 < var_00 && var_01 < level.var_1554.size; var_01++) {
@@ -264,15 +264,15 @@ func_151C() {
   foreach(var_02 in var_00) {
     switch (var_02.var_81E8) {
       case "_a":
-        level.var_2B9D[game["attackers"]] = var_02.var_0116;
+        level.var_2B9D[game["attackers"]] = var_02.origin;
         break;
 
       case "_b":
-        level.var_2B93 = var_02.var_0116;
+        level.var_2B93 = var_02.origin;
         break;
 
       case "_c":
-        level.var_2B9D[game["defenders"]] = var_02.var_0116;
+        level.var_2B9D[game["defenders"]] = var_02.origin;
         break;
     }
   }
@@ -284,8 +284,8 @@ func_152E() {
   var_00 = getallnodes();
   if(var_00.size > 0) {
     foreach(var_02 in var_00) {
-      level.var_1532 = lib_050D::func_3915(level.var_1532, var_02.var_0116);
-      level.var_1531 = lib_050D::func_3914(level.var_1531, var_02.var_0116);
+      level.var_1532 = lib_050D::func_3915(level.var_1532, var_02.origin);
+      level.var_1531 = lib_050D::func_3914(level.var_1531, var_02.origin);
     }
 
     return;
@@ -297,8 +297,8 @@ func_152E() {
 
 func_152A() {
   foreach(var_02, var_01 in level.var_152B) {
-    var_01.var_9D65 = spawn("trigger_radius", var_01.var_0116 - (0, 0, var_01.var_014F), 0, var_01.var_014F, var_01.var_014F * 2);
-    var_01.var_A223 = maps\mp\gametypes\_gameobjects::func_2837(var_02, var_01.var_9D65, [], (0, 0, var_01.var_014F * 2.1));
+    var_01.var_9D65 = spawn("trigger_radius", var_01.origin - (0, 0, var_01.var_14F), 0, var_01.var_14F, var_01.var_14F * 2);
+    var_01.var_A223 = maps\mp\gametypes\_gameobjects::func_2837(var_02, var_01.var_9D65, [], (0, 0, var_01.var_14F * 2.1));
     var_01.var_A223.var_4800 = var_01;
     var_01.var_A223 maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_ball_defend");
     var_01.var_A223 maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_ball_goal");
@@ -311,7 +311,7 @@ func_152A() {
     }
 
     var_01.var_A223 maps\mp\gametypes\_gameobjects::func_8A60("any");
-    var_01.var_A223 maps\mp\gametypes\_gameobjects::func_0C30("enemy");
+    var_01.var_A223 maps\mp\gametypes\_gameobjects::func_C30("enemy");
     var_01.var_A223 maps\mp\gametypes\_gameobjects::func_86B5(level.var_1562);
     var_01.var_A223 maps\mp\gametypes\_gameobjects::func_8A5A(0);
     var_01.var_A223.var_6BBF = ::func_1513;
@@ -321,12 +321,12 @@ func_152A() {
 }
 
 func_8A29() {
-  var_00 = spawn("script_origin", self.var_0116);
-  var_00.var_001D = self.var_001D;
+  var_00 = spawn("script_origin", self.origin);
+  var_00.angles = self.angles;
   var_00 rotateYaw(-45, 0.05);
   wait 0.05;
-  var_01 = self.var_0116 + (0, 0, 5);
-  var_02 = self.var_0116 + anglesToForward(var_00.var_001D) * 100 + (0, 0, 128);
+  var_01 = self.origin + (0, 0, 5);
+  var_02 = self.origin + anglesToForward(var_00.angles) * 100 + (0, 0, 128);
   var_03 = bulletTrace(var_01, var_02, 0, self);
   var_04 = var_03["position"];
   if(var_03["fraction"] < 1) {
@@ -340,34 +340,34 @@ func_8A29() {
 
 func_1528() {
   foreach(var_02, var_01 in level.var_152B) {
-    var_01.var_80A4["friendly"] = spawnfx(common_scripts\utility::func_44F5("ball_goal_activated_blue"), var_01.var_0116, (1, 0, 0));
-    var_01.var_80A4["enemy"] = spawnfx(common_scripts\utility::func_44F5("ball_goal_activated_red"), var_01.var_0116, (1, 0, 0));
+    var_01.var_80A4["friendly"] = spawnfx(common_scripts\utility::func_44F5("ball_goal_activated_blue"), var_01.origin, (1, 0, 0));
+    var_01.var_80A4["enemy"] = spawnfx(common_scripts\utility::func_44F5("ball_goal_activated_red"), var_01.origin, (1, 0, 0));
     if(var_02 == "allies") {
-      var_01.var_80A4["broadcaster"] = spawnfx(common_scripts\utility::func_44F5("ball_goal_activated_orange"), var_01.var_0116, (1, 0, 0));
+      var_01.var_80A4["broadcaster"] = spawnfx(common_scripts\utility::func_44F5("ball_goal_activated_orange"), var_01.origin, (1, 0, 0));
       continue;
     }
 
-    var_01.var_80A4["broadcaster"] = spawnfx(common_scripts\utility::func_44F5("ball_goal_activated_yellow"), var_01.var_0116, (1, 0, 0));
+    var_01.var_80A4["broadcaster"] = spawnfx(common_scripts\utility::func_44F5("ball_goal_activated_yellow"), var_01.origin, (1, 0, 0));
   }
 
   level thread func_1548();
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     func_1529(var_04);
   }
 }
 
 func_1552(param_00) {
   var_01 = level.var_1554[param_00];
-  var_02 = spawn("script_model", var_01.var_0116);
+  var_02 = spawn("script_model", var_01.origin);
   var_02 setModel("npc_soccer_ball_01");
   var_02 notsolid();
   var_02 thread func_6FA2();
   var_03 = 24;
   var_04 = getEnt("ball_pickup_" + param_00 + 1, "targetname");
   if(isDefined(var_04)) {
-    var_04.var_0116 = var_02.var_0116;
+    var_04.origin = var_02.origin;
   } else {
-    var_04 = spawn("trigger_radius", var_02.var_0116 - (0, 0, var_03 / 2), 0, var_03, var_03);
+    var_04 = spawn("trigger_radius", var_02.origin - (0, 0, var_03 / 2), 0, var_03, var_03);
   }
 
   var_04 enablelinkTo();
@@ -376,12 +376,12 @@ func_1552(param_00) {
   var_05 = [var_02];
   var_06 = maps\mp\gametypes\_gameobjects::func_27D6("any", var_04, var_05, (0, 0, 32), 1, 0, 1);
   var_06.var_695F = 1;
-  var_06 maps\mp\gametypes\_gameobjects::func_0C1D("any");
+  var_06 maps\mp\gametypes\_gameobjects::func_C1D("any");
   var_06 func_155D();
   var_06 maps\mp\gametypes\_gameobjects::func_8A60("any");
   var_06.var_698F = 1;
   var_06.var_6993 = 1;
-  var_06.var_0C33 = 0;
+  var_06.var_C33 = 0;
   var_06.var_201C = "iw5_carrydrone_mp";
   var_06.var_59D8 = 1;
   var_06.var_A965 = 0;
@@ -407,15 +407,15 @@ func_6FA2() {
   self endon("death");
   for(;;) {
     self waittill("physics_impact", var_00, var_01, var_02, var_03);
-    var_04 = level.var_0611["ball_physics_impact"];
-    if(isDefined(var_03) && isDefined(level.var_0611["ball_physics_impact_" + var_03])) {
-      var_04 = level.var_0611["ball_physics_impact_" + var_03];
+    var_04 = level.var_611["ball_physics_impact"];
+    if(isDefined(var_03) && isDefined(level.var_611["ball_physics_impact_" + var_03])) {
+      var_04 = level.var_611["ball_physics_impact_" + var_03];
     }
 
     playFX(var_04, var_00, var_01);
     var_05 = vectordot(var_02, var_01);
     if(var_05 > 0.5) {
-      self method_8617("grid_ball_bounce");
+      self playSound("grid_ball_bounce");
     }
 
     wait(0.3);
@@ -428,7 +428,7 @@ func_1530(param_00) {
   }
 
   for(;;) {
-    var_01 = common_scripts\utility::func_A715("pickup_object", "dropped", "reset");
+    var_01 = common_scripts\utility::waittill_any_return("pickup_object", "dropped", "reset");
     switch (var_01) {
       case "pickup_object":
         setomnvar("ui_uplink_ball_carrier" + param_00 + 1, self.var_2006 getentitynumber());
@@ -537,7 +537,7 @@ func_153E() {
     }
 
     if(!isDefined(self.var_6EA9)) {
-      self iclientprintlnbold("No Pass Target");
+      self iprintlnbold("No Pass Target");
       continue;
     }
 
@@ -547,7 +547,7 @@ func_153E() {
   if(isDefined(self.var_2016)) {
     thread func_153B();
     var_01 = self.var_6EA9;
-    var_02 = self.var_6EA9.var_0116;
+    var_02 = self.var_6EA9.origin;
     wait(0.15);
     if(isDefined(self.var_6EA9)) {
       var_01 = self.var_6EA9;
@@ -560,13 +560,13 @@ func_153E() {
 func_153C(param_00, param_01, param_02) {
   func_1550(1);
   if(isDefined(param_01)) {
-    param_02 = param_01.var_0116;
+    param_02 = param_01.origin;
   }
 
   var_03 = (0, 0, 40);
-  var_04 = vectorNormalize(param_02 + var_03 - self.var_A582[0].var_0116);
+  var_04 = vectorNormalize(param_02 + var_03 - self.var_A582[0].origin);
   var_05 = var_04 * 1000;
-  self.var_776C = magicgrenademanual("gamemode_ball", self.var_A582[0].var_0116, var_05, 30, param_00, 1, 1);
+  self.var_776C = magicgrenademanual("gamemode_ball", self.var_A582[0].origin, var_05, 30, param_00, 1, 1);
   if(isDefined(param_01)) {
     self.var_776C method_81D9(param_01);
   }
@@ -585,7 +585,7 @@ func_151A() {
     self.var_5A2C delete();
   }
 
-  self.var_5A2C = spawn("script_model", self.var_A582[0].var_0116);
+  self.var_5A2C = spawn("script_model", self.var_A582[0].origin);
   self.var_5A2C linkTo(self.var_A582[0]);
   self.var_5A2C method_80B1();
   self.var_5A2C setscriptmoverkillcam("explosive");
@@ -612,7 +612,7 @@ func_1536() {
   self.var_776C waittill("death");
   var_00 = self.var_A582[0];
   if(!isDefined(self.var_2006) && !self.var_50CB) {
-    if(var_00.var_0116 != var_00.var_162D + (0, 0, 4000)) {
+    if(var_00.origin != var_00.var_162D + (0, 0, 4000)) {
       func_1542((0, 0, 10));
     }
   }
@@ -638,13 +638,13 @@ func_1551() {
   }
 
   if(isDefined(self.var_2016)) {
-    var_03 = self getangles();
+    var_03 = self getplayerangles();
     var_03 = var_03 + (var_00, 0, 0);
     var_03 = (clamp(var_03[0], -85, 85), var_03[1], var_03[2]);
     var_04 = anglesToForward(var_03);
     thread func_153B();
     wait 0.05;
-    self method_8617("grid_ball_throw");
+    self playSound("grid_ball_throw");
     thread func_1515(self.var_2016);
     self.var_2016 func_151A();
     self.var_2016 thread func_1543(var_04 * var_01, self);
@@ -674,7 +674,7 @@ func_1542(param_00, param_01) {
   var_02.var_6C43 = undefined;
   func_1522();
   level notify("broadcaster_throw_ball", self.var_5B7E, self, vectorNormalize(param_00));
-  var_02 physicslaunchserver(var_02.var_0116, param_00);
+  var_02 physicslaunchserver(var_02.origin, param_00);
   thread func_1544();
   thread func_1545(param_01);
   thread func_1540();
@@ -685,8 +685,8 @@ func_1542(param_00, param_01) {
 func_154D() {
   self.var_50CB = 0;
   var_00 = self.var_A582[0];
-  playsoundatpos(var_00.var_0116, "grid_ball_out_of_bounds");
-  playFX(common_scripts\utility::func_44F5("ball_teleport"), var_00.var_0116);
+  playsoundatpos(var_00.origin, "grid_ball_out_of_bounds");
+  playFX(common_scripts\utility::func_44F5("ball_teleport"), var_00.origin);
   thread maps\mp\gametypes\_gameobjects::func_7E30();
 }
 
@@ -702,13 +702,13 @@ func_1544() {
   var_02[2] = 200;
   for(;;) {
     for(var_03 = 0; var_03 < 2; var_03++) {
-      if(var_00.var_0116[var_03] > level.var_1531[var_03] + var_01[var_03]) {
+      if(var_00.origin[var_03] > level.var_1531[var_03] + var_01[var_03]) {
         level notify("broadcaster_ball_end", var_00, 1);
         func_154D();
         return;
       }
 
-      if(var_00.var_0116[var_03] < level.var_1532[var_03] - var_02[var_03]) {
+      if(var_00.origin[var_03] < level.var_1532[var_03] - var_02[var_03]) {
         level notify("broadcaster_ball_end", var_00, 1);
         func_154D();
         return;
@@ -746,15 +746,15 @@ func_1545(param_00) {
     var_01 = var_01 - var_03;
   }
 
-  setomnvar("ui_broadcaster_game_mode_status_1", int(var_02));
+  setomnvar("ui_broadcaster_game_mode_status_1", int(var_01));
   setomnvar("ui_broadcaster_game_mode_status_2", -1);
   setomnvar("ui_broadcaster_game_mode_status_3", 0);
-  if(var_02 > 4) {
+  if(var_01 > 4) {
     wait(4);
     level notify("broadcaster_ball_end", self.var_A582[0], 1);
-    wait(var_02 - 4);
+    wait(var_01 - 4);
   } else {
-    wait(var_02);
+    wait(var_01);
     level notify("broadcaster_ball_end", self.var_A582[0], 1);
   }
 
@@ -808,7 +808,7 @@ func_1546(param_00) {
       continue;
     }
 
-    if(var_01.var_0116 == var_01.var_162D + (0, 0, 4000)) {
+    if(var_01.origin == var_01.var_162D + (0, 0, 4000)) {
       continue;
     }
 
@@ -828,7 +828,7 @@ func_1541() {
   var_02 = length(var_01) / 10;
   var_03 = -1 * vectorNormalize(var_01);
   var_00 method_84E0();
-  var_00 physicslaunchserver(var_00.var_0116, var_03 * var_02);
+  var_00 physicslaunchserver(var_00.origin, var_03 * var_02);
 }
 
 func_153D() {
@@ -848,15 +848,15 @@ func_1558(param_00) {
         continue;
       }
 
-      var_03 = distance(param_00.var_0116, var_02.var_0116);
-      if(var_03 <= var_02.var_014F) {
+      var_03 = distance(param_00.origin, var_02.origin);
+      if(var_03 <= var_02.var_14F) {
         level notify("broadcaster_ball_end", param_00, 0);
         thread func_1559(var_02);
         return;
       }
 
       if(isDefined(param_00.var_6C43)) {
-        var_04 = func_5D90(param_00.var_6C43, param_00.var_0116, var_02.var_0116, var_02.var_014F);
+        var_04 = func_5D90(param_00.var_6C43, param_00.origin, var_02.origin, var_02.var_14F);
         if(var_04) {
           level notify("broadcaster_ball_end", param_00, 0);
           thread func_1559(var_02);
@@ -892,14 +892,14 @@ func_1513(param_00) {
   param_00 maps\mp\_events::func_9ABB(var_01);
   func_1514(param_00, 1);
   param_00 thread func_155A();
-  var_02 = self.var_4800.var_01A7;
+  var_02 = self.var_4800.team;
   var_03 = maps\mp\_utility::func_45DE(var_02);
   thread func_2CDB("enemy_throw_score", var_02, "status");
   thread func_2CDB("ally_throw_score", var_03, "status");
   if(func_8B6F(var_03, var_01)) {
     var_04 = self.var_4800.var_5A2C;
     var_05 = var_04 getentitynumber();
-    var_06 = var_04.var_002B;
+    var_06 = var_04.birthtime;
     if(!isDefined(var_06)) {
       var_06 = 0;
     }
@@ -924,16 +924,16 @@ func_1513(param_00) {
 
 func_155A() {
   waittillframeend;
-  var_00 = maps\mp\_utility::func_4628("fieldgoal");
-  var_01 = maps\mp\_utility::func_4628("touchdown");
+  var_00 = maps\mp\_utility::getplayerstat("fieldgoal");
+  var_01 = maps\mp\_utility::getplayerstat("touchdown");
   var_02 = getdvarint("scr_ball_points_fieldgoal", 1);
   var_03 = getdvarint("scr_ball_points_touchdown", 2);
   maps\mp\_utility::func_867B(var_00 * var_02 + var_01 * var_03);
 }
 
 func_8B6F(param_00, param_01) {
-  var_02 = maps\mp\gametypes\_gamescore::func_063E(param_00);
-  var_03 = maps\mp\gametypes\_gamescore::func_063E(maps\mp\_utility::func_45DE(param_00));
+  var_02 = maps\mp\gametypes\_gamescore::func_63E(param_00);
+  var_03 = maps\mp\gametypes\_gamescore::func_63E(maps\mp\_utility::func_45DE(param_00));
   return var_02 + param_01 >= var_03;
 }
 
@@ -955,7 +955,7 @@ func_1559(param_00) {
   }
 
   self.var_80AA = gettime() + 10000;
-  var_02 = param_00.var_01A7;
+  var_02 = param_00.team;
   var_03 = maps\mp\_utility::func_45DE(var_02);
   thread func_2CDB("enemy_throw_score", var_02, "status");
   thread func_2CDB("ally_throw_score", var_03, "status");
@@ -967,7 +967,7 @@ func_1559(param_00) {
     if(isDefined(self.var_5A2C) && func_8B6F(var_03, var_01)) {
       var_04 = self.var_5A2C;
       var_05 = var_04 getentitynumber();
-      var_06 = var_04.var_002B;
+      var_06 = var_04.birthtime;
       if(!isDefined(var_06)) {
         var_06 = 0;
       }
@@ -1006,15 +1006,15 @@ func_1526(param_00, param_01) {
   if(game["status"] == "overtime") {
     game["ball_overtime_team"] = param_00;
     game["round_time_to_beat"] = maps\mp\_utility::func_4589();
-    level thread maps\mp\gametypes\_gamelogic::func_36B9("overtime_halftime", game["end_reason"]["switching_sides"]);
+    level thread maps\mp\gametypes\_gamelogic::endgame("overtime_halftime", game["end_reason"]["switching_sides"]);
     return;
   }
 
   if(game["status"] == "overtime_halftime") {
-    var_02 = maps\mp\gametypes\_gamescore::func_063E(param_00);
-    var_03 = maps\mp\gametypes\_gamescore::func_063E(maps\mp\_utility::func_45DE(param_00));
+    var_02 = maps\mp\gametypes\_gamescore::func_63E(param_00);
+    var_03 = maps\mp\gametypes\_gamescore::func_63E(maps\mp\_utility::func_45DE(param_00));
     if(var_02 >= var_03) {
-      level thread maps\mp\gametypes\_gamelogic::func_36B9(param_00, game["end_reason"]["score_limit_reached"]);
+      level thread maps\mp\gametypes\_gamelogic::endgame(param_00, game["end_reason"]["score_limit_reached"]);
       return;
     }
   }
@@ -1030,21 +1030,21 @@ func_154E(param_00) {
   }
 
   var_01 method_84E0();
-  maps\mp\gametypes\_gameobjects::func_0C1D("none");
+  maps\mp\gametypes\_gameobjects::func_C1D("none");
   func_155E();
   var_02 = 0.4;
   var_03 = 1.2;
   var_04 = 1;
-  playsoundatpos(param_00.var_0116, "grid_goal_scored");
+  playsoundatpos(param_00.origin, "grid_goal_scored");
   var_05 = var_02 + var_04;
   var_06 = var_05 + var_03;
-  var_01 moveTo(param_00.var_0116, var_02, 0, var_02);
+  var_01 moveTo(param_00.origin, var_02, 0, var_02);
   var_01 rotatevelocity((1080, 1080, 0), var_06, var_06, 0);
   wait(var_05);
   param_00.var_152C = 0;
   var_01 movez(4000, var_03, var_03 * 0.1, 0);
   wait(var_03);
-  maps\mp\gametypes\_gameobjects::func_0C1D("any");
+  maps\mp\gametypes\_gameobjects::func_C1D("any");
   func_154D();
 }
 
@@ -1059,22 +1059,22 @@ func_1514(param_00, param_01) {
 
   param_00.var_6EB3 maps\mp\_events::func_1563();
   if(param_01) {
-    param_00 maps\mp\gametypes\_missions::func_7750("ch_ball_alleyoop");
+    param_00 maps\mp\gametypes\_missions::processchallenge("ch_ball_alleyoop");
   }
 }
 
 func_154A(param_00) {
-  param_00.var_80A4["friendly"] method_805C();
-  param_00.var_80A4["enemy"] method_805C();
-  param_00.var_80A4["broadcaster"] method_805C();
-  foreach(var_02 in level.var_744A) {
+  param_00.var_80A4["friendly"] hide();
+  param_00.var_80A4["enemy"] hide();
+  param_00.var_80A4["broadcaster"] hide();
+  foreach(var_02 in level.players) {
     var_03 = func_1525(var_02);
     if(var_03 == "broadcaster") {
       param_00.var_80A4["broadcaster"] showtoclient(var_02);
       continue;
     }
 
-    if(var_03 == param_00.var_01A7) {
+    if(var_03 == param_00.team) {
       param_00.var_80A4["friendly"] showtoclient(var_02);
       continue;
     }
@@ -1093,14 +1093,14 @@ func_154F(param_00) {
 
 func_1549(param_00, param_01, param_02) {
   var_03 = maps\mp\_utility::func_45DE(param_00);
-  foreach(var_05 in level.var_744A) {
-    if(var_05.var_01A7 == param_00) {
-      var_05 method_8615(param_01);
+  foreach(var_05 in level.players) {
+    if(var_05.team == param_00) {
+      var_05 playlocalsound(param_01);
       continue;
     }
 
-    if(var_05.var_01A7 == var_03) {
-      var_05 method_8615(param_02);
+    if(var_05.team == var_03) {
+      var_05 playlocalsound(param_02);
     }
   }
 }
@@ -1172,7 +1172,7 @@ func_A267(param_00) {
     return 0;
   }
 
-  if(maps\mp\_utility::func_5740(param_00) && param_00 != "flamethrower_mp" && param_00 != "flamethrower_german_mp" && param_00 != "flamethrower_grenadier_mp" && param_00 != "flamethrower_german_grenadier_mp" && param_00 != "killstreak_molotov_cocktail_mp" && param_00 != "killstreak_molotov_cocktail_grenadier_mp") {
+  if(maps\mp\_utility::iskillstreakweapon(param_00) && param_00 != "flamethrower_mp" && param_00 != "flamethrower_german_mp" && param_00 != "flamethrower_grenadier_mp" && param_00 != "flamethrower_german_grenadier_mp" && param_00 != "killstreak_molotov_cocktail_mp" && param_00 != "killstreak_molotov_cocktail_grenadier_mp") {
     return 0;
   }
 
@@ -1185,7 +1185,7 @@ func_72F0() {
 
 func_1535(param_00) {
   level notify("broadcaster_ball_end", self.var_A582[0], 1);
-  level.var_A239 = 0;
+  level.usestartspawns = 0;
   var_01 = self.var_A582[0] getlinkedparent();
   if(isDefined(var_01)) {
     self.var_A582[0] unlink();
@@ -1193,7 +1193,7 @@ func_1535(param_00) {
 
   self.var_A582[0] method_84E0();
   self.var_A582[0] maps\mp\_movers::func_67F9();
-  self.var_A582[0] method_805B();
+  self.var_A582[0] show();
   self.var_A582[0] method_8511();
   self.var_9D65 maps\mp\_movers::func_93CE();
   self.var_2915.var_50D5 = 0;
@@ -1203,14 +1203,14 @@ func_1535(param_00) {
     self.var_776C delete();
   }
 
-  var_03 = param_00.var_01A7;
-  var_04 = maps\mp\_utility::func_45DE(param_00.var_01A7);
+  var_03 = param_00.team;
+  var_04 = maps\mp\_utility::func_45DE(param_00.team);
   if(var_02) {
-    if(self.var_5B80 == param_00.var_01A7) {
+    if(self.var_5B80 == param_00.team) {
       maps\mp\_utility::func_5C39("pass_complete", var_03, "status");
       param_00.var_6EB4 = gettime();
       param_00.var_6EB3 = self.var_5B7E;
-      param_00 thread maps\mp\_matchdata::func_5E93("pass", param_00.var_0116);
+      param_00 thread maps\mp\_matchdata::func_5E93("pass", param_00.origin);
     } else {
       maps\mp\_utility::func_5C39("you_own_drone", var_03, "status");
       maps\mp\_utility::func_5C39("enemy_own_drone", var_04, "status");
@@ -1219,17 +1219,17 @@ func_1535(param_00) {
   } else {
     maps\mp\_utility::func_5C39("you_own_drone", var_03, "status");
     maps\mp\_utility::func_5C39("enemy_own_drone", var_04, "status");
-    param_00 thread maps\mp\_matchdata::func_5E93("pickup", param_00.var_0116);
+    param_00 thread maps\mp\_matchdata::func_5E93("pickup", param_00.origin);
   }
 
-  param_00 method_8617("grid_ball_pickup");
+  param_00 playSound("grid_ball_pickup");
   lib_0380::func_288B("grid_ball_pickup_plr", param_00, param_00);
   func_1549(var_03, "mp_obj_notify_pos_sml", "mp_obj_notify_neg_sml");
   func_1524();
   self.var_5B7F = 0;
   self.var_5B7E = param_00;
-  self.var_5B80 = param_00.var_01A7;
-  self.var_6DB2 = param_00.var_01A7;
+  self.var_5B80 = param_00.team;
+  self.var_6DB2 = param_00.team;
   func_155C();
   if(!isDefined(param_00.var_200D)) {
     param_00.var_200D = 1;
@@ -1237,14 +1237,14 @@ func_1535(param_00) {
     param_00.var_200D = param_00.var_200D + 1;
   }
 
-  param_00 method_82FA("iw5_carrydrone_mp", 1);
+  param_00 setweaponammoclip("iw5_carrydrone_mp", 1);
   param_00.var_1561 = getdvarint("scr_ball_water_drop_delay", 10);
   param_00 maps\mp\_utility::func_47A2("specialty_ballcarrier");
   param_00.var_1510 = self;
-  param_00.var_0112 = 1;
+  param_00.objective = 1;
   setomnvar("ui_broadcaster_game_mode_status_1", -1);
   setomnvar("ui_broadcaster_game_mode_status_2", self.var_2006 getentitynumber());
-  if(self.var_2006.var_01A7 == "allies") {
+  if(self.var_2006.team == "allies") {
     setomnvar("ui_broadcaster_game_mode_status_3", 1);
   } else {
     setomnvar("ui_broadcaster_game_mode_status_3", 2);
@@ -1252,9 +1252,9 @@ func_1535(param_00) {
 
   param_00.var_4B7F = param_00 hasperk("specialty_sprintfire", 1);
   param_00 maps\mp\_utility::func_47A2("specialty_sprintfire");
-  param_00 common_scripts\utility::func_0601();
+  param_00 common_scripts\utility::func_601();
   var_05 = getdvarint("scr_ball_armor", 100);
-  if(param_00 maps\mp\_utility::func_0649("specialty_improvedobjectives")) {
+  if(param_00 maps\mp\_utility::_hasperk("specialty_improvedobjectives")) {
     var_05 = var_05 + 30;
     self.var_6993 = 2;
   } else {
@@ -1277,7 +1277,7 @@ drop_ball_if_invalid_carrier(param_00) {
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
-  common_scripts\utility::func_A74B("mount_force_drop", 1.5);
+  common_scripts\utility::waittill_notify_or_timeout("mount_force_drop", 1.5);
   if(isDefined(param_00.var_2006) && param_00.var_2006 == self) {
     var_01 = self getcurrentweapon();
     if(var_01 != "iw5_carrydrone_mp") {
@@ -1295,7 +1295,7 @@ func_1515(param_00) {
   var_01 thread func_9A0F(1.5);
   param_00 waittill("pickup_object");
   var_01 func_9A09();
-  if(!isDefined(param_00.var_2006) || param_00.var_2006.var_01A7 == self.var_01A7) {
+  if(!isDefined(param_00.var_2006) || param_00.var_2006.team == self.team) {
     return;
   }
 
@@ -1332,11 +1332,11 @@ func_7389(param_00) {
   for(;;) {
     var_02 = undefined;
     if(!self method_801D()) {
-      var_03 = anglesToForward(self getangles());
+      var_03 = anglesToForward(self getplayerangles());
       var_04 = self getEye();
       var_05 = [];
-      foreach(var_07 in level.var_744A) {
-        if(var_07.var_01A7 != self.var_01A7) {
+      foreach(var_07 in level.players) {
+        if(var_07.team != self.team) {
           continue;
         }
 
@@ -1386,25 +1386,25 @@ func_738A() {
     return;
   }
 
-  self hudoutlinedisableforclients(level.var_744A);
-  foreach(var_01 in level.var_744A) {
+  self hudoutlinedisableforclients(level.players);
+  foreach(var_01 in level.players) {
     var_01 hudoutlinedisableforclient(self);
   }
 
   var_03 = [];
   var_04 = [];
-  var_05 = maps\mp\_utility::func_45DE(self.var_01A7);
-  foreach(var_01 in level.var_744A) {
+  var_05 = maps\mp\_utility::func_45DE(self.team);
+  foreach(var_01 in level.players) {
     if(var_01 == self) {
       continue;
     }
 
-    if(var_01.var_01A7 == self.var_01A7) {
+    if(var_01.team == self.team) {
       var_03[var_03.size] = var_01;
       continue;
     }
 
-    if(var_01.var_01A7 == var_05) {
+    if(var_01.team == var_05) {
       var_04[var_04.size] = var_01;
     }
   }
@@ -1446,8 +1446,8 @@ func_7321(param_00) {
     self.var_6EA5 = param_00 maps\mp\_entityheadicons::func_869E(self, "waypoint_ball_pass_oh", var_01, 30, 30, 0, 0.05, 0, 1, 0, 0);
     self.var_6EA9 = param_00;
     var_02 = [];
-    foreach(var_04 in level.var_744A) {
-      if(var_04.var_01A7 == self.var_01A7 && var_04 != self && var_04 != param_00) {
+    foreach(var_04 in level.players) {
+      if(var_04.team == self.team && var_04 != self && var_04 != param_00) {
         var_02[var_02.size] = var_04;
       }
     }
@@ -1464,8 +1464,8 @@ func_7245() {
 
   self setclientomnvar("ui_uplink_can_pass", 0);
   var_00 = [];
-  foreach(var_02 in level.var_744A) {
-    if(var_02.var_01A7 == self.var_01A7 && var_02 != self) {
+  foreach(var_02 in level.players) {
+    if(var_02.team == self.team && var_02 != self) {
       var_00[var_00.size] = var_02;
     }
   }
@@ -1487,8 +1487,8 @@ func_1550(param_00) {
   self.var_34B1 = gettime();
   self notify("dropped");
   var_01 = self.var_2006;
-  if(isDefined(var_01) && var_01.var_01A7 != "spectator") {
-    var_02 = var_01.var_0116;
+  if(isDefined(var_01) && var_01.team != "spectator") {
+    var_02 = var_01.origin;
     if(var_01 getstance() == "stand") {
       if(param_00 == 1) {
         var_02 = var_02 + (0, 0, 60);
@@ -1507,14 +1507,14 @@ func_1550(param_00) {
 
   var_03 = (0, 0, 0);
   for(var_04 = 0; var_04 < self.var_A582.size; var_04++) {
-    self.var_A582[var_04].var_0116 = var_02;
-    self.var_A582[var_04].var_001D = var_03;
-    self.var_A582[var_04] method_805B();
+    self.var_A582[var_04].origin = var_02;
+    self.var_A582[var_04].angles = var_03;
+    self.var_A582[var_04] show();
   }
 
-  self.var_9D65.var_0116 = var_02;
+  self.var_9D65.origin = var_02;
   func_151D();
-  self.var_28D4 = self.var_9D65.var_0116;
+  self.var_28D4 = self.var_9D65.origin;
   func_1511();
   func_1522();
   self.var_6DB2 = "any";
@@ -1542,7 +1542,7 @@ func_1539(param_00) {}
 
 func_1509() {
   var_00 = undefined;
-  var_01 = common_scripts\utility::func_0F92(level.var_1554);
+  var_01 = common_scripts\utility::func_F92(level.var_1554);
   foreach(var_03 in var_01) {
     if(var_03.var_50D5) {
       continue;
@@ -1561,10 +1561,10 @@ func_1509() {
 
 func_150A(param_00) {
   foreach(var_02 in self.var_A582) {
-    var_02.var_162D = param_00.var_0116;
+    var_02.var_162D = param_00.origin;
   }
 
-  self.var_9D65.var_162D = param_00.var_0116;
+  self.var_9D65.var_162D = param_00.origin;
   self.var_2915 = param_00;
   param_00.var_50D5 = 1;
 }
@@ -1616,9 +1616,9 @@ func_1538() {
 }
 
 func_151E(param_00, param_01) {
-  playFXOnTag(level.var_0611["ball_download"], param_00, "tag_weapon");
-  common_scripts\utility::func_A74B("pickup_object", param_01);
-  stopFXOnTag(level.var_0611["ball_download"], param_00, "tag_weapon");
+  playFXOnTag(level.var_611["ball_download"], param_00, "tag_weapon");
+  common_scripts\utility::waittill_notify_or_timeout("pickup_object", param_01);
+  stopFXOnTag(level.var_611["ball_download"], param_00, "tag_weapon");
   self.var_80AA = 0;
 }
 
@@ -1626,7 +1626,7 @@ func_151F(param_00) {
   self endon("pickup_object");
   wait(param_00);
   func_155D();
-  playFX(level.var_0611["ball_download_end"], self.var_2915.var_487A);
+  playFX(level.var_611["ball_download_end"], self.var_2915.var_487A);
   func_1522();
 }
 
@@ -1636,23 +1636,23 @@ func_1511() {
     self.var_2006.var_6735 = gettime() + 500;
     self.var_2006 func_7245();
     self.var_2006 notify("cancel_update_pass_target");
-    self.var_2006 maps\mp\_utility::func_0735("specialty_ballcarrier");
+    self.var_2006 maps\mp\_utility::func_735("specialty_ballcarrier");
     self.var_2006.var_1510 = undefined;
     self.var_2006 thread maps\mp\perks\_perkfunctions::func_A06E();
     if(!self.var_2006.var_4B7F) {
-      self.var_2006 maps\mp\_utility::func_0735("specialty_sprintfire");
+      self.var_2006 maps\mp\_utility::func_735("specialty_sprintfire");
     }
 
-    self.var_2006 common_scripts\utility::func_0615();
+    self.var_2006 common_scripts\utility::func_615();
     self.var_2006 setballpassallowed(0);
     self.var_2006 setclientomnvar("ui_uplink_can_pass", 0);
-    self.var_2006.var_0112 = 0;
+    self.var_2006.objective = 0;
   }
 }
 
 func_1520(param_00) {
-  var_01 = self.var_0116 + (0, 0, 32);
-  var_02 = self.var_0116 + (0, 0, -1000);
+  var_01 = self.origin + (0, 0, 32);
+  var_02 = self.origin + (0, 0, -1000);
   self.var_487A = playerphysicstrace(var_01, var_02);
 }
 
@@ -1665,24 +1665,24 @@ func_151B(param_00) {
   var_02 = common_scripts\utility::func_46B5("ball_goal_" + var_01, "targetname");
   if(isDefined(var_02)) {
     var_02 func_1520();
-    var_02.var_0116 = var_02.var_487A;
+    var_02.origin = var_02.var_487A;
   } else {
     var_02 = spawnStruct();
-    switch (level.var_015D) {
+    switch (level.script) {
       default:
         break;
     }
 
-    if(!isDefined(var_02.var_0116)) {
-      var_02.var_0116 = level.var_2B9D[param_00];
+    if(!isDefined(var_02.origin)) {
+      var_02.origin = level.var_2B9D[param_00];
     }
 
     var_02 func_1520();
-    var_02.var_0116 = var_02.var_487A;
+    var_02.origin = var_02.var_487A;
   }
 
-  var_02.var_014F = 70;
-  var_02.var_01A7 = param_00;
+  var_02.var_14F = 70;
+  var_02.team = param_00;
   var_02.var_152C = 0;
   var_02.var_4D3F = 0;
   var_02.var_645F = -1;
@@ -1691,7 +1691,7 @@ func_151B(param_00) {
 
 func_1519(param_00) {
   var_01 = common_scripts\utility::func_46B7("ball_start", "targetname");
-  var_01 = common_scripts\utility::func_0F92(var_01);
+  var_01 = common_scripts\utility::func_F92(var_01);
   foreach(var_03 in var_01) {
     if(!isDefined(var_03.var_81E1)) {
       var_03.var_81E1 = 100;
@@ -1700,13 +1700,13 @@ func_1519(param_00) {
 
   var_01 = common_scripts\utility::func_7897(var_01, ::func_2554);
   foreach(var_03 in var_01) {
-    func_1508(var_03.var_0116);
+    func_1508(var_03.origin);
   }
 
   var_07 = 30;
   if(var_01.size == 0) {
     var_08 = (0, 0, 0);
-    switch (level.var_015D) {
+    switch (level.script) {
       default:
         break;
     }
@@ -1723,19 +1723,19 @@ func_1519(param_00) {
     return;
   }
 
-  var_0A = level.var_1554[0].var_0116;
+  var_0A = level.var_1554[0].origin;
   var_0B = getnodesinradius(var_0A, 175, 20, 50);
   for(var_0C = 0; var_0C < var_09 && var_0C < var_0B.size; var_0C++) {
-    func_1508(var_0B[var_0C].var_0116);
+    func_1508(var_0B[var_0C].origin);
   }
 }
 
 func_1508(param_00) {
   var_01 = 30;
   var_02 = spawnStruct();
-  var_02.var_0116 = param_00;
+  var_02.origin = param_00;
   var_02 func_1520();
-  var_02.var_0116 = var_02.var_487A + (0, 0, var_01);
+  var_02.origin = var_02.var_487A + (0, 0, var_01);
   var_02.var_50D5 = 0;
   level.var_1554[level.var_1554.size] = var_02;
 }
@@ -1767,7 +1767,7 @@ func_1529(param_00) {
   foreach(var_06, var_03 in level.var_152B) {
     if(var_01 == "broadcaster") {
       var_04 = common_scripts\utility::func_98E7(var_06 == "allies", "ball_goal_allies_blue", "ball_goal_axis_red");
-    } else if(var_03.var_01A7 == "allies") {
+    } else if(var_03.team == "allies") {
       if(var_01 == "axis") {
         var_04 = "ball_goal_allies_red";
       } else {
@@ -1779,7 +1779,7 @@ func_1529(param_00) {
       var_04 = "ball_goal_axis_red";
     }
 
-    var_05 = spawnfxforclient(common_scripts\utility::func_44F5(var_04), var_03.var_0116 + (0, 0, 15), param_00);
+    var_05 = spawnfxforclient(common_scripts\utility::func_44F5(var_04), var_03.origin + (0, 0, 15), param_00);
     function_014E(var_05, 1);
     param_00.var_1528[var_04] = var_05;
     triggerfx(var_05);
@@ -1787,7 +1787,7 @@ func_1529(param_00) {
 }
 
 func_1525(param_00) {
-  var_01 = param_00.var_01A7;
+  var_01 = param_00.team;
   if(param_00 method_8436()) {
     var_01 = "broadcaster";
   } else if(var_01 != "allies" && var_01 != "axis") {
@@ -1806,20 +1806,20 @@ monitorbroadcasterfxchanged() {
     foreach(var_04, var_01 in level.var_152B) {
       var_02 = common_scripts\utility::func_98E7(var_04 == "allies", "ball_goal_allies_blue", "ball_goal_axis_red");
       if(self.var_1E99.var_A4A8 == "first_person") {
-        if(var_01.var_01A7 == "allies") {
-          if(var_04 == self.var_1E99.var_9815.var_01A7) {
+        if(var_01.team == "allies") {
+          if(var_04 == self.var_1E99.var_9815.team) {
             var_02 = "ball_goal_allies_blue";
           } else {
             var_02 = "ball_goal_allies_red";
           }
-        } else if(var_04 == self.var_1E99.var_9815.var_01A7) {
+        } else if(var_04 == self.var_1E99.var_9815.team) {
           var_02 = "ball_goal_axis_blue";
         } else {
           var_02 = "ball_goal_axis_red";
         }
       }
 
-      var_03 = spawnfxforclient(common_scripts\utility::func_44F5(var_02), var_01.var_0116 + (0, 0, 15), self);
+      var_03 = spawnfxforclient(common_scripts\utility::func_44F5(var_02), var_01.origin + (0, 0, 15), self);
       function_014E(var_03, 1);
       self.var_1528[var_02] = var_03;
       triggerfx(var_03);

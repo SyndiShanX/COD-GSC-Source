@@ -3,4 +3,4 @@
  * Script: maps\mp\agents\_agents_gametype_ball.gsc
 ****************************************************/
 
-func_00F9() {}
+main() {}

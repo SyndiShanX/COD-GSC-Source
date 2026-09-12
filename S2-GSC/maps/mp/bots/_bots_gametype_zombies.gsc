@@ -3,7 +3,7 @@
  * Script: maps\mp\bots\_bots_gametype_zombies.gsc
 ***************************************************/
 
-func_00F9() {
+main() {
   func_87A7();
   func_879C();
 }
@@ -25,13 +25,13 @@ func_1B2E() {
   level endon("game_ended");
   for(;;) {
     if(self method_8368() != "run_and_gun") {
-      maps\mp\bots\_bots_util::func_1AD5("run_and_gun");
+      maps / mp / bots / _bots_util::func_1AD5("run_and_gun");
     }
 
     if(!isDefined(self.var_19A1)) {
       var_00 = 9999;
       var_01 = undefined;
-      foreach(var_03 in level.var_744A) {
+      foreach(var_03 in level.players) {
         if(isbot(var_03)) {
           continue;
         }
@@ -47,7 +47,7 @@ func_1B2E() {
       }
 
       if(isDefined(var_01)) {
-        thread maps\mp\bots\_bots_strategy::func_1A0C(var_01, 800);
+        thread maps / mp / bots / _bots_strategy::func_1A0C(var_01, 800);
         var_01.var_489E++;
       }
     }

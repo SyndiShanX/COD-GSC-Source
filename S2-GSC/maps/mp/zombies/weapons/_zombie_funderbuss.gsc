@@ -3,12 +3,12 @@
  * Script: maps\mp\zombies\weapons\_zombie_funderbuss.gsc
 **********************************************************/
 
-func_00D5() {
+init() {
   level.zmb_blundergrenades = [];
   level thread monitor_active_grenades();
   level thread maps\mp\_utility::func_6F74(::shoot_happiness);
   wait 0.05;
-  common_scripts\utility::func_092C("vfx_clown_ball_trl", "vfx/map/mp_clowntown/vfx_clown_ball_trl");
+  common_scripts\utility::func_92C("vfx_clown_ball_trl", "vfx/map/mp_clowntown/vfx_clown_ball_trl");
 }
 
 shoot_happiness() {
@@ -38,7 +38,7 @@ fire_funderbuss_grenades(param_00, param_01) {
   if(!isDefined(var_02.zmb_blundergrenades)) {
     var_02.zmb_blundergrenades = [];
   } else {
-    var_02.zmb_blundergrenades = common_scripts\utility::func_0FA0(var_02.zmb_blundergrenades);
+    var_02.zmb_blundergrenades = common_scripts\utility::func_FA0(var_02.zmb_blundergrenades);
   }
 
   if(var_02.zmb_blundergrenades.size > 0) {
@@ -46,7 +46,7 @@ fire_funderbuss_grenades(param_00, param_01) {
   }
 
   for(var_07 = 0; var_07 < 3; var_07++) {
-    level.zmb_blundergrenades = common_scripts\utility::func_0FA0(level.zmb_blundergrenades);
+    level.zmb_blundergrenades = common_scripts\utility::func_FA0(level.zmb_blundergrenades);
     if(level.zmb_blundergrenades.size >= 6) {
       continue;
     }
@@ -71,15 +71,15 @@ fire_funderbuss_grenades(param_00, param_01) {
     var_0A = anglesToForward(var_03 + (0, -1 * var_09 + var_07 * var_09, 0));
     var_0B = 2;
     var_0C = magicgrenademanual("frag_grenade_funderbuss_zm", var_08, 2250 * vectorNormalize(var_0A), var_0B, var_02);
-    var_0C.var_0117 = var_02;
-    var_02.zmb_blundergrenades = common_scripts\utility::func_0F6F(var_02.zmb_blundergrenades, var_0C);
-    level.zmb_blundergrenades = common_scripts\utility::func_0F6F(level.zmb_blundergrenades, var_0C);
+    var_0C.owner = var_02;
+    var_02.zmb_blundergrenades = common_scripts\utility::func_F6F(var_02.zmb_blundergrenades, var_0C);
+    level.zmb_blundergrenades = common_scripts\utility::func_F6F(level.zmb_blundergrenades, var_0C);
   }
 }
 
 monitor_active_grenades() {
   for(;;) {
-    var_00 = common_scripts\utility::func_0FA0(level.zmb_blundergrenades);
+    var_00 = common_scripts\utility::func_FA0(level.zmb_blundergrenades);
     foreach(var_02 in var_00) {
       if(!isDefined(var_02.life)) {
         var_02.life = 0;
@@ -88,9 +88,9 @@ monitor_active_grenades() {
       var_02.life = var_02.life + 0.1;
       if(var_02.life > 2.4) {
         var_03 = var_02 common_scripts\utility::func_8FFC();
-        var_03 method_805B();
+        var_03 show();
         if(isDefined(var_03)) {
-          var_03 detonateusingweapon("frag_grenade_funderbuss_zm", var_02.var_0117, var_03);
+          var_03 detonateusingweapon("frag_grenade_funderbuss_zm", var_02.owner, var_03);
           var_02 delete();
           var_03 delete();
         }

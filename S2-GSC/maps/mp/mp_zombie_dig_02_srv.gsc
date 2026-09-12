@@ -3,14 +3,14 @@
  * Script: maps\mp\mp_zombie_dig_02_srv.gsc
 *********************************************/
 
-func_00F9() {
-  maps\mp\mp_zombie_dig_02_srv_precache::func_F9();
-  maps\createart\mp_zombie_dig_02_srv_art::func_F9();
-  maps\mp\mp_zombie_dig_02_srv_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_zombie_dig_02_lighting::func_F9();
-  maps\mp\mp_zombie_dig_02_aud::func_F9();
-  maps\mp\_compass::func_8A2F("compass_map_mp_zombie_dig_02_srv");
+main() {
+  maps / mp / mp_zombie_dig_02_srv_precache::main();
+  maps / createart / mp_zombie_dig_02_srv_art::main();
+  maps / mp / mp_zombie_dig_02_srv_fx::main();
+  maps\mp\_load::main();
+  maps / mp / mp_zombie_dig_02_lighting::main();
+  maps / mp / mp_zombie_dig_02_aud::main();
+  maps\mp\_compass::setupminimap("compass_map_mp_zombie_dig_02_srv");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   setDvar("2494", "0.12, 0, 0");
@@ -32,32 +32,32 @@ func_00F9() {
   level.pap_camo_ref_override = "zom_madmin_01";
   var_00 = getEntArray("mp_global_intermission", "classname");
   foreach(var_02 in var_00) {
-    var_02.var_1D = (0, 90, 0);
-    var_02.var_116 = (10, 196, 139.9);
+    var_02.angles = (0, 90, 0);
+    var_02.origin = (10, 196, 139.9);
   }
 
   common_scripts\utility::func_3C87("power_sz2");
   common_scripts\utility::func_3C87("outer_to_arena");
-  maps\mp\zombies\zombie_survival_common::func_D5();
+  maps / mp / zombies / zombie_survival_common::init();
   level thread dig_kill_z_listener();
   init_dig_srv_zones();
   thread srv_rune_wall_init();
   thread srv_basalt_init();
   thread srv_kf_ee_init();
-  maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_fx::func_D5();
-  level.upgrade_machine_upgrade_func = ::maps\mp\zombies\shotgun\_zombies_shotgun_gamemode::collect_souls_to_unlock_pack_a_punch;
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_gamemode::run_pack_a_punch_log();
+  maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_fx::init();
+  level.upgrade_machine_upgrade_func = ::maps / mp / zombies / shotgun / _zombies_shotgun_gamemode::collect_souls_to_unlock_pack_a_punch;
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_gamemode::run_pack_a_punch_log();
 }
 
 initdigsrvweapons() {
   level.sworddelivery_uselargeradius = 1;
   level.sworddelivery_checkradius = 256;
-  level thread maps\mp\zombies\zombie_survival_common::initsurvivalweapons();
-  level thread maps\mp\zombies\weapons\_zombie_tabun_grenade::func_D5();
+  level thread maps / mp / zombies / zombie_survival_common::initsurvivalweapons();
+  level thread maps / mp / zombies / weapons / _zombie_tabun_grenade::init();
 }
 
 init_dig_srv_zones() {
-  lib_055A::func_D5();
+  lib_055A::init();
   lib_055A::func_530A("zone_under_arena", 0);
   lib_055A::func_530A("zone_under_outer", 1);
   lib_055A::func_993("zone_under_outer", "zone_under_arena", "outer_to_arena");
@@ -66,23 +66,23 @@ init_dig_srv_zones() {
 }
 
 init_new_zombie_types() {
-  maps\mp\zombies\zombie_sizzler::func_D5();
-  maps\mp\zombies\zombie_survival_common::srv_init_miniboss_rounds();
+  maps / mp / zombies / zombie_sizzler::init();
+  maps / mp / zombies / zombie_survival_common::srv_init_miniboss_rounds();
 }
 
 ondigsrvstartgame() {
   level.roundstartfuncgeneric = ::dig_srv_round_start;
   level.roundendfuncgeneric = ::dig_srv_round_end;
-  thread maps\mp\mp_zombie_dig_02_trap::dig_trap_init();
+  thread maps / mp / mp_zombie_dig_02_trap::dig_trap_init();
   thread dig_srv_blood_founts();
 }
 
 dig_srv_round_start() {
-  level thread maps\mp\zombies\zombie_survival_common::srvroundstart();
+  level thread maps / mp / zombies / zombie_survival_common::srvroundstart();
 }
 
 dig_srv_round_end() {
-  level thread maps\mp\zombies\zombie_survival_common::srvroundend();
+  level thread maps / mp / zombies / zombie_survival_common::srvroundend();
 }
 
 dig_srv_blood_founts() {
@@ -128,29 +128,29 @@ dig_kill_z_listener() {
 
 srv_rune_wall_init() {
   var_00 = common_scripts\utility::func_46B5("rune_wall_struct", "targetname");
-  if(!isDefined(var_00.var_1A2)) {
+  if(!isDefined(var_00.target)) {
     return;
   }
 
-  var_01 = common_scripts\utility::func_44BE(var_00.var_1A2, "targetname");
+  var_01 = common_scripts\utility::func_44BE(var_00.target, "targetname");
   var_00.rune_models = [];
   var_00.special_runes = [];
   foreach(var_03 in var_01) {
-    var_04 = var_03.var_165;
+    var_04 = var_03.script_noteworthy;
     if(!isDefined(var_04)) {
       continue;
     }
 
     switch (var_04) {
       case "rune_wall_rune":
-        var_05 = function_036D(var_03.var_106, "zmd_runes_objects_");
+        var_05 = function_036D(var_03.model, "zmd_runes_objects_");
         var_06 = int(var_05) - 1;
         var_00.rune_models[var_06] = var_03;
         var_00.rune_models[var_06] setCanDamage(1);
         var_00.rune_models[var_06] setdamagecallbackon(1);
         var_00.rune_models[var_06].my_index = var_06;
-        var_00.rune_models[var_06].my_base_model = var_03.var_106;
-        var_00.rune_models[var_06].my_highlight_model = var_03.var_106 + "a";
+        var_00.rune_models[var_06].my_base_model = var_03.model;
+        var_00.rune_models[var_06].my_highlight_model = var_03.model + "a";
         var_00.rune_models[var_06].var_29B5 = ::rune_damaged;
         break;
 
@@ -233,23 +233,23 @@ rune_damaged(param_00, param_01, param_02, param_03, param_04, param_05, param_0
 
 srv_basalt_init() {
   var_00 = common_scripts\utility::func_46B5("basalt_reveal", "targetname");
-  var_01 = common_scripts\utility::func_44BE(var_00.var_1A2, "targetname");
+  var_01 = common_scripts\utility::func_44BE(var_00.target, "targetname");
   var_00.bottom_pieces = [];
   var_00.top_pieces = [];
   foreach(var_03 in var_01) {
-    var_04 = var_03.var_165;
+    var_04 = var_03.script_noteworthy;
     if(!isDefined(var_04)) {
       continue;
     }
 
     switch (var_04) {
       case "basalt_reveal_top":
-        var_03.dest_pos = common_scripts\utility::func_46B5(var_03.var_1A2, "targetname");
+        var_03.dest_pos = common_scripts\utility::func_46B5(var_03.target, "targetname");
         var_00.top_pieces = common_scripts\utility::func_F6F(var_00.top_pieces, var_03);
         break;
 
       case "basalt_reveal_bottom":
-        var_03.dest_pos = common_scripts\utility::func_46B5(var_03.var_1A2, "targetname");
+        var_03.dest_pos = common_scripts\utility::func_46B5(var_03.target, "targetname");
         var_00.bottom_pieces = common_scripts\utility::func_F6F(var_00.bottom_pieces, var_03);
         break;
 
@@ -270,7 +270,7 @@ srv_basalt_init() {
     var_00.elec_model = var_06;
   }
 
-  var_00.var_6FC5 usetouchtriggerrequirefacingposition(1, var_00.elec_model.var_116);
+  var_00.var_6FC5 usetouchtriggerrequirefacingposition(1, var_00.elec_model.origin);
   level.dig_objective_assets["basalt"] = var_00;
   var_00 thread srv_basalt_event();
 }
@@ -288,13 +288,13 @@ srv_basalt_event() {
   var_00.var_6FC5 waittill("trigger", var_05);
   var_00.elec_model delete();
   var_00.var_6FC5 common_scripts\utility::func_9D9F();
-  level thread maps\mp\zombies\zombie_survival_common::srvshowpapfuse();
+  level thread maps / mp / zombies / zombie_survival_common::srvshowpapfuse();
 }
 
 srv_basalt_move_to_dest() {
   level thread common_scripts\_exploder::func_88E(212);
   var_00 = self;
-  var_00 moveTo(var_00.dest_pos.var_116, 5, 1, 1);
+  var_00 moveTo(var_00.dest_pos.origin, 5, 1, 1);
   wait(5);
 }
 
@@ -308,9 +308,9 @@ srv_kf_ee_init() {
   level.srv_kf_ee_expected = var_00.size;
   thread srv_flare_crate_init();
   foreach(var_02 in var_00) {
-    var_02.sign_model = spawn("script_model", var_02.var_116);
+    var_02.sign_model = spawn("script_model", var_02.origin);
     var_02.sign_model setModel("zmd_sign_objective_01");
-    var_02.sign_model.var_1D = var_02.var_1D;
+    var_02.sign_model.angles = var_02.angles;
     if(isDefined(var_02.var_8276)) {
       var_02.sign_model.test_radius = var_02.var_8276;
     } else {
@@ -330,7 +330,7 @@ srv_kf_ee_dmg_listen() {
       continue;
     }
 
-    if(distance(var_00, self.var_116) <= self.test_radius) {
+    if(distance(var_00, self.origin) <= self.test_radius) {
       break;
     }
   }
@@ -345,9 +345,9 @@ srv_kf_ee_dmg_listen() {
 
 srv_flare_crate_init() {
   var_00 = common_scripts\utility::func_46B5("pickaxe_struct", "targetname");
-  var_01 = common_scripts\utility::func_44BE(var_00.var_1A2, "targetname");
+  var_01 = common_scripts\utility::func_44BE(var_00.target, "targetname");
   foreach(var_03 in var_01) {
-    var_04 = var_03.var_165;
+    var_04 = var_03.script_noteworthy;
     if(!isDefined(var_04)) {
       continue;
     }
@@ -361,11 +361,11 @@ srv_flare_crate_init() {
 
       case "flare_crate_model":
         var_00.flare_crate_model = var_03;
-        if(isDefined(var_03.var_1A2)) {
-          var_05 = common_scripts\utility::func_44BE(var_03.var_1A2, "targetname");
+        if(isDefined(var_03.target)) {
+          var_05 = common_scripts\utility::func_44BE(var_03.target, "targetname");
           foreach(var_07 in var_05) {
             var_07 linkTo(var_03);
-            if(isDefined(var_07.var_165) && var_07.var_165 == "tabun_model") {
+            if(isDefined(var_07.script_noteworthy) && var_07.script_noteworthy == "tabun_model") {
               var_00.flare_model = var_07;
             }
           }
@@ -379,7 +379,7 @@ srv_flare_crate_init() {
   }
 
   if(isDefined(var_00.var_6FC5) && isDefined(var_00.land_dest)) {
-    var_00.var_6FC5 usetouchtriggerrequirefacingposition(1, var_00.land_dest.var_116);
+    var_00.var_6FC5 usetouchtriggerrequirefacingposition(1, var_00.land_dest.origin);
   }
 
   var_00 thread srv_flare_crate_drop_to_ground();
@@ -413,7 +413,7 @@ srv_flare_crate_drop() {
   }
 
   if(isDefined(var_00.flare_crate_model)) {
-    var_00.flare_crate_model method_8495("zom_berlin_flare_box_open", var_00.flare_crate_model.var_116, var_00.flare_crate_model.var_1D);
+    var_00.flare_crate_model method_8495("zom_berlin_flare_box_open", var_00.flare_crate_model.origin, var_00.flare_crate_model.angles);
   }
 
   var_00 thread srv_flare_crate_pickup_think();
@@ -425,12 +425,12 @@ srv_flare_crate_pickup_think() {
   var_00.var_6FC5 common_scripts\utility::func_9DA3();
   for(;;) {
     var_00.var_6FC5 waittill("trigger", var_01);
-    var_01 maps\mp\zombies\weapons\_zombie_tabun_grenade::tabun_player_give_tabun();
+    var_01 maps / mp / zombies / weapons / _zombie_tabun_grenade::tabun_player_give_tabun();
     var_00.var_6FC5 lib_0378::func_8D74("aud_pickup_flare");
-    var_00.flare_model method_805C();
+    var_00.flare_model hide();
     level waittill("zombie_wave_started");
     level waittill("zombie_wave_started");
-    var_00.flare_model method_805B();
+    var_00.flare_model show();
   }
 }
 
@@ -461,7 +461,7 @@ srv_dig_earthquake_trigger(param_00) {
     level thread common_scripts\_exploder::func_88E(205);
   }
 
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     level thread srv_dig_earthquake_do_on_player(var_02, var_04, param_00);
   }
 
@@ -490,8 +490,8 @@ srv_dig_earthquake_do_on_player(param_00, param_01, param_02) {
     var_03 = var_03 * var_04;
   }
 
-  earthquake(var_03, param_00, param_01.var_116, 850, param_01);
-  function_01BC("tank_rumble", param_01.var_116);
+  earthquake(var_03, param_00, param_01.origin, 850, param_01);
+  function_01BC("tank_rumble", param_01.origin);
   wait(param_00);
   function_01BD();
 }

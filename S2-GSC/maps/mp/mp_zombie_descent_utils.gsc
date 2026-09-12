@@ -13,7 +13,7 @@ complete_quest_on_trigger(param_00, param_01) {
 
 earthquake_alive_players(param_00, param_01, param_02) {
   var_03 = [];
-  foreach(var_05 in level.var_744A) {
+  foreach(var_05 in level.players) {
     if(isalive(var_05)) {
       var_03[var_03.size] = var_05;
     }
@@ -24,14 +24,14 @@ earthquake_alive_players(param_00, param_01, param_02) {
 
 earthquake_alive_players_with_origin(param_00, param_01, param_02, param_03) {
   var_04 = [];
-  foreach(var_06 in level.var_744A) {
-    if(isalive(var_06) && distance(var_06.var_116, param_03.var_116) <= param_02) {
+  foreach(var_06 in level.players) {
+    if(isalive(var_06) && distance(var_06.origin, param_03.origin) <= param_02) {
       var_04[var_04.size] = var_06;
     }
   }
 
   if(var_04.size > 0) {
-    earthquake(param_00, param_01, param_03.var_116, param_02, var_04);
+    earthquake(param_00, param_01, param_03.origin, param_02, var_04);
   }
 }
 
@@ -49,7 +49,7 @@ flag_try_set(param_00) {
 
 lockin_system_monitor_death() {
   self endon("stop_using_station");
-  common_scripts\utility::knock_off_battery("death", "enter_last_stand", "begin_last_stand");
+  common_scripts\utility::waittill_any("death", "enter_last_stand", "begin_last_stand");
   self notify("stop_using_station");
 }
 
@@ -144,7 +144,7 @@ set_default_room_for_player(param_00) {}
 _____________________vo___________________________() {}
 
 initwavestories() {
-  maps\mp\zombies\_zombies_audio_dlc2::initwavestories();
+  maps / mp / zombies / _zombies_audio_dlc2::initwavestories();
   thread vo_radio_convo_boss_start();
   level.descent_wave_stories = [];
   var_01 = [];
@@ -155,7 +155,7 @@ initwavestories() {
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_mari_youweretheonlyonewatching", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_yeahwellforsomestrangerea", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_cutthechatterfolkswevegot", 1];
-  level.descent_wave_stories["intro"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1, "intro");
+  level.descent_wave_stories["intro"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1, "intro");
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_everybodyokanybodyhurt", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_mari_imokwhatwasthat", 1];
@@ -163,48 +163,48 @@ initwavestories() {
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_mari_youweretheonlyonewatching", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_yeahwellforsomestrangerea", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_cutthechatterfolkswevegot", 1];
-  level.descent_wave_stories["intro_no_oliv"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1, "intro_no_oliv");
+  level.descent_wave_stories["intro_no_oliv"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1, "intro_no_oliv");
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_sowerealljustgoingtoprete", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_isawfireandthenwewerefall", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_wellitmusthavebackfiredto", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_mari_itoldyoutoleavemethereito", 1];
-  level.descent_wave_stories["banter_1"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1);
+  level.descent_wave_stories["banter_1"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1);
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_anybodyelsegetthefeelingt", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_thosemarkingsbackatourlas", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_areyousayingthiswasacity", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_noimsayingitwasanempire", 1];
-  level.descent_wave_stories["banter_2"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1);
+  level.descent_wave_stories["banter_2"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1);
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_thisplaceitdoesntmakeanys", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_thatsnotsostrangeitaughtc", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_noyoudontunderstandtheseb", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_howinthehell", 1];
-  level.descent_wave_stories["banter_3"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1);
+  level.descent_wave_stories["banter_3"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1);
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_soyouretellingmethatthese", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_noimsayingthattheytaughtt", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_gahnowyouregoingtosaythat", 1];
-  level.descent_wave_stories["banter_4"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1);
+  level.descent_wave_stories["banter_4"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1);
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_idontknowyouthinkthesetal", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_notjustonecivilizationsee", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_youlearnedallofthishangin", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_notjustamuseumthelouvreth", 1];
-  level.descent_wave_stories["banter_5"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1);
+  level.descent_wave_stories["banter_5"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1);
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_okaysoourhistorybookswere", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_yourestillnotseeingitprof", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_thisisbakedlimestonefromt", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_dros_bloodyhell", 1];
-  level.descent_wave_stories["banter_6"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1);
+  level.descent_wave_stories["banter_6"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1);
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_igrewuparoundamuseumaswel", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_yesicouldspendanentireday", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_itsoundslikeyoumissit", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_yesimissitdearlybuticanne", 1];
-  level.descent_wave_stories["banter_7"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1);
+  level.descent_wave_stories["banter_7"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1);
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_youcantgobacktothelouvret", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_idonotwishtotalkaboutthis", 1];
@@ -212,24 +212,24 @@ initwavestories() {
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_iappreciateyourconcernbut", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_iunderstandhopeyouknowhow", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_jeff_chucklesyouvesavedmyassmo", 1];
-  level.descent_wave_stories["banter_8"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1);
+  level.descent_wave_stories["banter_8"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1);
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_mari_oliviayoudonthavetotalkif", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_thankyoumariemyfatherwork", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_mari_ohiamsosorryiknowthatdisp", 1];
-  level.descent_wave_stories["banter_9"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1);
+  level.descent_wave_stories["banter_9"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1);
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_ioweyouanapologymarieearl", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_mari_wellideservedthatiputyoua", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_ihavebeenthinkingabouttha", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_anythingallihaveleftismya", 1];
-  level.descent_wave_stories["banter_10"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1);
+  level.descent_wave_stories["banter_10"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1);
   var_01 = [];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_mari_allofmyangerallofmydesper", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_noyoureffortsbroughtustog", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_mari_iknowthatidontdeservethis", 1];
   var_01[var_01.size] = ["zmb_dlc4_fzn_dwn_oliv_iforgaveyouthemomentyoupu", 1];
-  level.descent_wave_stories["banter_11"] = maps\mp\zombies\_zombies_audio_dlc2::addwavestory(var_01, 1);
+  level.descent_wave_stories["banter_11"] = maps / mp / zombies / _zombies_audio_dlc2::addwavestory(var_01, 1);
   level thread maps\mp\_utility::func_6F74(::vo_see_feed_listen);
 }
 
@@ -241,7 +241,7 @@ vo_intro() {
   lib_0547::func_A78B();
   wait(5);
   var_00 = 0;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(lib_0547::func_5565(lib_0378::func_307B(var_02.var_20D8), "oliv")) {
       var_00 = 1;
       break;
@@ -249,11 +249,11 @@ vo_intro() {
   }
 
   if(var_00) {
-    maps\mp\zombies\_zombies_audio_dlc2::try_run_conversation(level.descent_wave_stories["intro"], 1, 35);
+    maps / mp / zombies / _zombies_audio_dlc2::try_run_conversation(level.descent_wave_stories["intro"], 1, 35);
     return;
   }
 
-  maps\mp\zombies\_zombies_audio_dlc2::try_run_conversation(level.descent_wave_stories["intro_no_oliv"], 1, 35);
+  maps / mp / zombies / _zombies_audio_dlc2::try_run_conversation(level.descent_wave_stories["intro_no_oliv"], 1, 35);
 }
 
 vo_blood_tube_enter(param_00) {
@@ -342,7 +342,7 @@ vo_hear_klaus(param_00) {
     var_01 = "ohhellisthatwhoithinkitis";
   } else if(lib_0547::func_5565(lib_0378::func_307B(self.var_20D8), "oliv")) {
     var_02 = 0;
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       if(lib_0547::func_5565(lib_0378::func_307B(var_04.var_20D8), "mari")) {
         var_02 = 1;
       }
@@ -395,7 +395,7 @@ vo_see_corpse_eater(param_00) {
   }
 
   lib_0367::func_8E3D(var_01);
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     var_03.dlg_playedseecorpseeaterline = 1;
   }
 }
@@ -404,7 +404,7 @@ vo_see_feed_listen() {
   self endon("disconnect");
   for(;;) {
     level waittill("corpse_eater_start_feed", var_00);
-    if(isDefined(var_00) && distancesquared(var_00.var_116, self.var_116) < -25536 && !common_scripts\utility::func_562E(self.dlg_playedseecorpseeaterfeedline)) {
+    if(isDefined(var_00) && distancesquared(var_00.origin, self.origin) < -25536 && !common_scripts\utility::func_562E(self.dlg_playedseecorpseeaterfeedline)) {
       vo_see_corpse_eater_feed();
       if(common_scripts\utility::func_562E(self.dlg_playedseecorpseeaterfeedline)) {
         break;
@@ -528,7 +528,7 @@ vo_radio_convo_boss_end(param_00) {
 }
 
 vo_play_radio_convo_on_all_players(param_00, param_01) {
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     var_03 thread vo_play_radio_convo_on_player(param_00, param_01);
   }
 }
@@ -805,10 +805,10 @@ zombiespawnfx(param_00) {
     return;
   }
 
-  var_01 = spawnfx(common_scripts\utility::func_44F5(param_00), self.var_116, anglesToForward(self.var_1D), anglestoup(self.var_1D));
+  var_01 = spawnfx(common_scripts\utility::func_44F5(param_00), self.origin, anglesToForward(self.angles), anglestoup(self.angles));
   triggerfx(var_01);
   level.zombiespawnfxcount++;
-  common_scripts\utility::func_A74B("death", 2);
+  common_scripts\utility::waittill_notify_or_timeout("death", 2);
   level.zombiespawnfxcount--;
   var_01 delete();
 }
@@ -835,7 +835,7 @@ start_screenshake(param_00) {
     var_02 = 0.55 + randomfloat(0.55);
     param_00 = param_00 - var_02;
     var_01 playRumbleOnEntity("damage_heavy");
-    earthquake(0.4, var_02, self.var_116, 96);
+    earthquake(0.4, var_02, self.origin, 96);
     wait(var_02);
   }
 }
@@ -912,7 +912,7 @@ set_fx(param_00, param_01) {
   self.var_3F2F = spawnlinkedfx(common_scripts\utility::func_44F5(param_00), self, param_01);
   triggerfx(self.var_3F2F);
   if(function_01EF(self)) {
-    maps\mp\agents\_agent_utility::deleteentonagentdeath(self.var_3F2F);
+    maps / mp / agents / _agent_utility::deleteentonagentdeath(self.var_3F2F);
     return;
   }
 
@@ -921,8 +921,8 @@ set_fx(param_00, param_01) {
 
 wait_for_player_close(param_00) {
   for(;;) {
-    foreach(var_02 in level.var_744A) {
-      if(distance(var_02.var_116, self.var_116) < param_00) {
+    foreach(var_02 in level.players) {
+      if(distance(var_02.origin, self.origin) < param_00) {
         return var_02;
       }
     }

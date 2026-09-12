@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_dnk_lighting.gsc
 **********************************************/
 
-func_00F9() {
+main() {
   func_84F8();
   if(level.var_1D4 && getDvar("2695") != "true") {
     xbox_optimizations();

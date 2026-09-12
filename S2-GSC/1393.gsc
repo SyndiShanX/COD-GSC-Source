@@ -3,11 +3,11 @@
  * Script: 1393.gsc
 *********************************************/
 
-lib_0571::func_52A4() {
-  lib_0561::initconsumablesfromtable("insta_kill", ::lib_0571::func_A218, ::lib_0571::func_1F80, ::lib_0571::func_4525);
+func_52A4() {
+  lib_0561::initconsumablesfromtable("insta_kill", ::func_A218, ::func_1F80, ::func_4525);
 }
 
-lib_0571::func_1F80(param_00) {
+func_1F80(param_00) {
   if(!lib_0561::func_1F7B()) {
     return 0;
   }
@@ -15,11 +15,11 @@ lib_0571::func_1F80(param_00) {
   return 1;
 }
 
-lib_0571::func_A218(param_00) {
-  maps\mp\gametypes\zombies::func_53DD(self, 1);
+func_A218(param_00) {
+  maps / mp / gametypes / zombies::func_53DD(self, 1);
 }
 
-lib_0571::func_4525(param_00) {
+func_4525(param_00) {
   if(!isDefined(param_00)) {
     param_00 = "";
   }

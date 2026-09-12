@@ -3,7 +3,7 @@
  * Script: maps\createfx\mp_zombie_berlin_fx.gsc
 *************************************************/
 
-func_00F9() {
+main() {
   var_00 = common_scripts\utility::func_281B("fire_lp_m_no_light");
   var_00 common_scripts\_createfx::func_8543((2010.77, -1148.34, 1226.8), (324.993, 100.813, 97.4294));
   var_00.var_A265["fxid"] = "fire_lp_m_no_light";

@@ -368,15 +368,15 @@ func_A748(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       continue;
     }
 
-    var_0A waittill("returned");
-    var_0A.var_996E--;
+    var_09 waittill("returned");
+    var_09.var_996E--;
   }
 
   var_09 notify("die");
   return var_0A;
 }
 
-func_A715(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
+waittill_any_return(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
   if((!isDefined(param_00) || param_00 != "death") && (!isDefined(param_01) || param_01 != "death") && (!isDefined(param_02) || param_02 != "death") && (!isDefined(param_03) || param_03 != "death") && (!isDefined(param_04) || param_04 != "death") && (!isDefined(param_05) || param_05 != "death") && (!isDefined(param_06) || param_06 != "death") && (!isDefined(param_07) || param_07 != "death") && !isDefined(param_08) || param_08 != "death") {
     self endon("death");
   }
@@ -576,7 +576,7 @@ func_A763(param_00, param_01, param_02) {
   param_00 notify("returned", "timeout");
 }
 
-func_A716(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+waittill_any_return_no_endon_death(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   var_07 = spawnStruct();
   if(isDefined(param_00)) {
     childthread func_A75E(param_00, var_07);
@@ -743,7 +743,7 @@ func_A71B(param_00, param_01, param_02, param_03, param_04, param_05) {
   return var_07;
 }
 
-func_A70A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
+waittill_any(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
   if(isDefined(param_01)) {
     self endon(param_01);
   }
@@ -880,7 +880,7 @@ func_A70D(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_0D endon(param_0E);
   }
 
-  param_01 func_A74B(param_02, param_00);
+  param_01 waittill_notify_or_timeout(param_02, param_00);
 }
 
 func_A70B(param_00, param_01) {
@@ -895,8 +895,8 @@ func_A70B(param_00, param_01) {
 }
 
 func_0161() {
-  if(isDefined(self.var_0161) && self.var_0161 > 0) {
-    wait(self.var_0161);
+  if(isDefined(self.var_161) && self.var_161 > 0) {
+    wait(self.var_161);
     return 1;
   } else if(isDefined(self.var_8154) && isDefined(self.var_8153)) {
     wait(randomfloatrange(self.var_8154, self.var_8153));
@@ -907,7 +907,7 @@ func_0161() {
 }
 
 func_4B3F() {
-  if(isDefined(self.var_0161)) {
+  if(isDefined(self.var_161)) {
     return 1;
   }
 
@@ -1027,7 +1027,7 @@ func_0F91(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
 func_56F4() {
   var_00 = gettime();
-  if(isDefined(self.var_3D48) && var_00 < self.var_3D48) {
+  if(isDefined(self.flashendtime) && var_00 < self.flashendtime) {
     return 1;
   }
 
@@ -1315,7 +1315,7 @@ func_A732(param_00, param_01) {
   self waittill(param_01);
 }
 
-func_0FB2(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
+array_thread(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
   if(isDefined(param_0A)) {
     foreach(var_0C in param_00) {
       var_0C thread[[param_01]](param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A);
@@ -1324,72 +1324,72 @@ func_0FB2(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  if(isDefined(param_09)) {
-    foreach(var_0C in param_00) {
-      var_0C thread[[param_01]](param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
+  if(isDefined(var_0C)) {
+    foreach(var_0E in param_03) {
+      var_0E thread[[param_03]](param_04, param_05, param_06, param_07, param_08, param_09, param_0A, var_0B);
     }
 
     return;
   }
 
-  if(isDefined(param_08)) {
-    foreach(var_0C in param_00) {
-      var_0C thread[[param_01]](param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+  if(isDefined(var_0D)) {
+    foreach(var_10 in param_05) {
+      var_10 thread[[param_05]](param_06, param_07, param_08, param_09, param_0A, var_0B, var_0C);
     }
 
     return;
   }
 
-  if(isDefined(param_07)) {
-    foreach(var_0C in param_00) {
-      var_0C thread[[param_01]](param_02, param_03, param_04, param_05, param_06, param_07);
+  if(isDefined(var_0E)) {
+    foreach(var_12 in param_07) {
+      var_12 thread[[param_07]](param_08, param_09, param_0A, var_0B, var_0C, var_0D);
     }
 
     return;
   }
 
-  if(isDefined(param_06)) {
-    foreach(var_0C in param_00) {
-      var_0C thread[[param_01]](param_02, param_03, param_04, param_05, param_06);
+  if(isDefined(var_0F)) {
+    foreach(var_14 in param_09) {
+      var_14 thread[[param_09]](param_0A, var_0B, var_0C, var_0D, var_0E);
     }
 
     return;
   }
 
-  if(isDefined(param_05)) {
-    foreach(var_0C in param_00) {
-      var_0C thread[[param_01]](param_02, param_03, param_04, param_05);
+  if(isDefined(var_10)) {
+    foreach(var_16 in var_0B) {
+      var_16 thread[[var_0B]](var_0C, var_0D, var_0E, var_0F);
     }
 
     return;
   }
 
-  if(isDefined(param_04)) {
-    foreach(var_0C in param_00) {
-      var_0C thread[[param_01]](param_02, param_03, param_04);
+  if(isDefined(var_11)) {
+    foreach(var_18 in var_0D) {
+      var_18 thread[[var_0D]](var_0E, var_0F, var_10);
     }
 
     return;
   }
 
-  if(isDefined(param_03)) {
-    foreach(var_0C in param_00) {
-      var_0C thread[[param_01]](param_02, param_03);
+  if(isDefined(var_12)) {
+    foreach(var_1A in var_0F) {
+      var_1A thread[[var_0F]](var_10, var_11);
     }
 
     return;
   }
 
-  if(isDefined(param_02)) {
-    foreach(var_0C in param_00) {
-      var_0C thread[[param_01]](param_02);
+  if(isDefined(var_13)) {
+    foreach(var_1C in var_11) {
+      var_1C thread[[var_11]](var_12);
     }
 
     return;
   }
 
-  foreach(var_0C in param_00) {
-    var_0C thread[[param_01]]();
+  foreach(var_1E in var_13) {
+    var_1E thread[[var_13]]();
   }
 }
 
@@ -1402,32 +1402,32 @@ func_0F71(param_00, param_01, param_02, param_03, param_04, param_05) {
     return;
   }
 
-  if(isDefined(param_04)) {
-    foreach(var_07 in param_00) {
-      var_07[[param_01]](param_02, param_03, param_04);
+  if(isDefined(var_07)) {
+    foreach(var_09 in param_03) {
+      var_09[[param_03]](param_04, param_05, var_06);
     }
 
     return;
   }
 
-  if(isDefined(param_03)) {
-    foreach(var_07 in param_00) {
-      var_07[[param_01]](param_02, param_03);
+  if(isDefined(var_08)) {
+    foreach(var_0B in param_05) {
+      var_0B[[param_05]](var_06, var_07);
     }
 
     return;
   }
 
-  if(isDefined(param_02)) {
-    foreach(var_07 in param_00) {
-      var_07[[param_01]](param_02);
+  if(isDefined(var_09)) {
+    foreach(var_0D in var_07) {
+      var_0D[[var_07]](var_08);
     }
 
     return;
   }
 
-  foreach(var_07 in param_00) {
-    var_07[[param_01]]();
+  foreach(var_0F in var_09) {
+    var_0F[[var_09]]();
   }
 }
 
@@ -1440,39 +1440,39 @@ func_6753(param_00, param_01, param_02, param_03, param_04) {
     return;
   }
 
-  if(isDefined(param_03)) {
-    foreach(var_06 in param_00) {
-      [[param_01]](var_06, param_02, param_03);
+  if(isDefined(var_06)) {
+    foreach(var_08 in param_03) {
+      [[param_03]](var_08, param_04, var_05);
     }
 
     return;
   }
 
-  if(isDefined(param_02)) {
-    foreach(var_06 in param_00) {
-      [[param_01]](var_06, param_02);
+  if(isDefined(var_07)) {
+    foreach(var_0A in var_05) {
+      [[var_05]](var_0A, var_06);
     }
 
     return;
   }
 
-  foreach(var_06 in param_00) {
-    [[param_01]](var_06);
+  foreach(var_0C in var_07) {
+    [[var_07]](var_0C);
   }
 }
 
 func_0FB5(param_00, param_01, param_02, param_03, param_04, param_05) {
-  func_0FB2(param_00, param_01, param_02, param_03, param_04, param_05);
+  array_thread(param_00, param_01, param_02, param_03, param_04, param_05);
 }
 
 func_0FB6(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  func_0FB2(param_00, param_01, param_02, param_03, param_04, param_05, param_06);
+  array_thread(param_00, param_01, param_02, param_03, param_04, param_05, param_06);
 }
 
 func_9DA3(param_00, param_01) {
   if(isDefined(param_00) && isDefined(param_01)) {
     var_02 = getEntArray(param_00, param_01);
-    func_0FB2(var_02, ::func_9DA4);
+    array_thread(var_02, ::func_9DA4);
     return;
   }
 
@@ -1481,7 +1481,7 @@ func_9DA3(param_00, param_01) {
 
 func_9DA4() {
   if(isDefined(self.var_7AC4)) {
-    self.var_0116 = self.var_7AC4;
+    self.origin = self.var_7AC4;
   }
 
   self.var_9D9F = undefined;
@@ -1490,7 +1490,7 @@ func_9DA4() {
 func_9D9F(param_00, param_01) {
   if(isDefined(param_00) && isDefined(param_01)) {
     var_02 = getEntArray(param_00, param_01);
-    func_0FB2(var_02, ::func_9DA1);
+    array_thread(var_02, ::func_9DA1);
     return;
   }
 
@@ -1499,11 +1499,11 @@ func_9D9F(param_00, param_01) {
 
 func_9DA1() {
   if(!isDefined(self.var_7AC4)) {
-    self.var_7AC4 = self.var_0116;
+    self.var_7AC4 = self.origin;
   }
 
-  if(self.var_0116 == self.var_7AC4) {
-    self.var_0116 = self.var_0116 + (0, 0, -10000);
+  if(self.origin == self.var_7AC4) {
+    self.origin = self.origin + (0, 0, -10000);
   }
 
   self.var_9D9F = 1;
@@ -1515,7 +1515,7 @@ func_85AF(param_00) {
   }
 
   level.var_9D7B[param_00] = func_0FA0(level.var_9D7B[param_00]);
-  func_0FB2(level.var_9D7B[param_00], ::func_A0D3);
+  array_thread(level.var_9D7B[param_00], ::func_A0D3);
 }
 
 func_A0D3() {
@@ -1654,40 +1654,40 @@ func_947B() {
 }
 
 func_096C(param_00) {
-  if(isDefined(param_00.var_01A5)) {
-    if(!isDefined(level.var_947C["targetname"][param_00.var_01A5])) {
-      level.var_947C["targetname"][param_00.var_01A5] = [];
+  if(isDefined(param_00.targetname)) {
+    if(!isDefined(level.var_947C["targetname"][param_00.targetname])) {
+      level.var_947C["targetname"][param_00.targetname] = [];
     }
 
-    var_01 = level.var_947C["targetname"][param_00.var_01A5].size;
-    level.var_947C["targetname"][param_00.var_01A5][var_01] = param_00;
+    var_01 = level.var_947C["targetname"][param_00.targetname].size;
+    level.var_947C["targetname"][param_00.targetname][var_01] = param_00;
   }
 
-  if(isDefined(param_00.var_01A2)) {
-    if(!isDefined(level.var_947C["target"][param_00.var_01A2])) {
-      level.var_947C["target"][param_00.var_01A2] = [];
+  if(isDefined(param_00.target)) {
+    if(!isDefined(level.var_947C["target"][param_00.target])) {
+      level.var_947C["target"][param_00.target] = [];
     }
 
-    var_01 = level.var_947C["target"][param_00.var_01A2].size;
-    level.var_947C["target"][param_00.var_01A2][var_01] = param_00;
+    var_01 = level.var_947C["target"][param_00.target].size;
+    level.var_947C["target"][param_00.target][var_01] = param_00;
   }
 
-  if(isDefined(param_00.var_0165)) {
-    if(!isDefined(level.var_947C["script_noteworthy"][param_00.var_0165])) {
-      level.var_947C["script_noteworthy"][param_00.var_0165] = [];
+  if(isDefined(param_00.script_noteworthy)) {
+    if(!isDefined(level.var_947C["script_noteworthy"][param_00.script_noteworthy])) {
+      level.var_947C["script_noteworthy"][param_00.script_noteworthy] = [];
     }
 
-    var_01 = level.var_947C["script_noteworthy"][param_00.var_0165].size;
-    level.var_947C["script_noteworthy"][param_00.var_0165][var_01] = param_00;
+    var_01 = level.var_947C["script_noteworthy"][param_00.script_noteworthy].size;
+    level.var_947C["script_noteworthy"][param_00.script_noteworthy][var_01] = param_00;
   }
 
-  if(isDefined(param_00.var_0164)) {
-    if(!isDefined(level.var_947C["script_linkname"][param_00.var_0164])) {
-      level.var_947C["script_linkname"][param_00.var_0164] = [];
+  if(isDefined(param_00.script_linkname)) {
+    if(!isDefined(level.var_947C["script_linkname"][param_00.script_linkname])) {
+      level.var_947C["script_linkname"][param_00.script_linkname] = [];
     }
 
-    var_01 = level.var_947C["script_linkname"][param_00.var_0164].size;
-    level.var_947C["script_linkname"][param_00.var_0164][var_01] = param_00;
+    var_01 = level.var_947C["script_linkname"][param_00.script_linkname].size;
+    level.var_947C["script_linkname"][param_00.script_linkname][var_01] = param_00;
   }
 }
 
@@ -1804,24 +1804,24 @@ func_0F8A(param_00, param_01, param_02, param_03, param_04) {
     return;
   }
 
-  if(isDefined(param_03)) {
-    foreach(var_06 in param_00) {
-      thread[[param_01]](var_06, param_02, param_03);
+  if(isDefined(var_06)) {
+    foreach(var_08 in param_03) {
+      thread[[param_03]](var_08, param_04, var_05);
     }
 
     return;
   }
 
-  if(isDefined(param_02)) {
-    foreach(var_06 in param_00) {
-      thread[[param_01]](var_06, param_02);
+  if(isDefined(var_07)) {
+    foreach(var_0A in var_05) {
+      thread[[var_05]](var_0A, var_06);
     }
 
     return;
   }
 
-  foreach(var_06 in param_00) {
-    thread[[param_01]](var_06);
+  foreach(var_0C in var_07) {
+    thread[[var_07]](var_0C);
   }
 }
 
@@ -1834,24 +1834,24 @@ func_0F89(param_00, param_01, param_02, param_03, param_04) {
     return;
   }
 
-  if(isDefined(param_03)) {
-    foreach(var_06 in param_00) {
-      [[param_01]](var_06, param_02, param_03);
+  if(isDefined(var_06)) {
+    foreach(var_08 in param_03) {
+      [[param_03]](var_08, param_04, var_05);
     }
 
     return;
   }
 
-  if(isDefined(param_02)) {
-    foreach(var_06 in param_00) {
-      [[param_01]](var_06, param_02);
+  if(isDefined(var_07)) {
+    foreach(var_0A in var_05) {
+      [[var_05]](var_0A, var_06);
     }
 
     return;
   }
 
-  foreach(var_06 in param_00) {
-    [[param_01]](var_06);
+  foreach(var_0C in var_07) {
+    [[var_07]](var_0C);
   }
 }
 
@@ -1945,7 +1945,7 @@ func_3CA6(param_00, param_01) {
       return param_01;
     }
 
-    var_02 = level func_A715(param_00, param_01);
+    var_02 = level waittill_any_return(param_00, param_01);
     return var_02;
   }
 }
@@ -2016,7 +2016,7 @@ func_3CA2(param_00, param_01, param_02, param_03, param_04, param_05) {
       }
     }
 
-    level func_A70A(param_00, param_01, param_02, param_03, param_04, param_05);
+    level waittill_any(param_00, param_01, param_02, param_03, param_04, param_05);
   }
 }
 
@@ -2051,7 +2051,7 @@ func_3CA4(param_00, param_01, param_02, param_03, param_04) {
       }
     }
 
-    var_06 = level func_A715(param_01, param_02, param_03, param_04, var_05);
+    var_06 = level waittill_any_return(param_01, param_02, param_03, param_04, var_05);
     return var_07;
   }
 }
@@ -2204,7 +2204,7 @@ func_2CB7(param_00) {
   }
 
   if(isDefined(self)) {
-    self method_805B();
+    self show();
   }
 }
 
@@ -2409,7 +2409,7 @@ func_6755(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
 func_57D7() {
   if(!isDefined(level.var_57D7)) {
-    level.var_57D7 = !func_9467(getDvar("1673"), "mp_");
+    level.var_57D7 = !string_starts_with(getDvar("1673"), "mp_");
   }
 
   return level.var_57D7;
@@ -2417,13 +2417,13 @@ func_57D7() {
 
 func_57D8() {
   if(!isDefined(level.var_57D8)) {
-    level.var_57D8 = func_9467(getDvar("1673"), "so_td_");
+    level.var_57D8 = string_starts_with(getDvar("1673"), "so_td_");
   }
 
   return level.var_57D8;
 }
 
-func_9467(param_00, param_01) {
+string_starts_with(param_00, param_01) {
   if(param_00.size < param_01.size) {
     return 0;
   }
@@ -2793,24 +2793,24 @@ func_41F3() {
 
 func_7F77(param_00, param_01, param_02, param_03, param_04) {
   var_05 = getEntArray(param_00, "targetname");
-  func_0FB2(var_05, param_01, param_02, param_03, param_04);
+  array_thread(var_05, param_01, param_02, param_03, param_04);
   var_05 = func_46B7(param_00, "targetname");
-  func_0FB2(var_05, param_01, param_02, param_03, param_04);
+  array_thread(var_05, param_01, param_02, param_03, param_04);
   var_05 = [[level.var_45B1]](param_00, "targetname");
-  func_0FB2(var_05, param_01, param_02, param_03, param_04);
+  array_thread(var_05, param_01, param_02, param_03, param_04);
   var_05 = function_01DC(param_00, "targetname");
-  func_0FB2(var_05, param_01, param_02, param_03, param_04);
+  array_thread(var_05, param_01, param_02, param_03, param_04);
 }
 
 func_7F76(param_00, param_01, param_02, param_03, param_04) {
   var_05 = getEntArray(param_00, "script_noteworthy");
-  func_0FB2(var_05, param_01, param_02, param_03, param_04);
+  array_thread(var_05, param_01, param_02, param_03, param_04);
   var_05 = func_46B7(param_00, "script_noteworthy");
-  func_0FB2(var_05, param_01, param_02, param_03, param_04);
+  array_thread(var_05, param_01, param_02, param_03, param_04);
   var_05 = [[level.var_45B1]](param_00, "script_noteworthy");
-  func_0FB2(var_05, param_01, param_02, param_03, param_04);
+  array_thread(var_05, param_01, param_02, param_03, param_04);
   var_05 = function_01DC(param_00, "script_noteworthy");
-  func_0FB2(var_05, param_01, param_02, param_03, param_04);
+  array_thread(var_05, param_01, param_02, param_03, param_04);
 }
 
 func_339D(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
@@ -2927,11 +2927,11 @@ func_339C(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 }
 
 func_44F5(param_00) {
-  return level.var_0611[param_00];
+  return level.var_611[param_00];
 }
 
 func_3F6F(param_00) {
-  return isDefined(level.var_0611[param_00]);
+  return isDefined(level.var_611[param_00]);
 }
 
 func_770A(param_00, param_01) {
@@ -2990,7 +2990,7 @@ func_0602() {
   }
 
   self.var_2F81++;
-  self method_8322();
+  self disableweapons();
 }
 
 func_0616() {
@@ -3000,7 +3000,7 @@ func_0616() {
 
   self.var_2F81--;
   if(!self.var_2F81) {
-    self method_8323();
+    self enableweapons();
   }
 }
 
@@ -3014,7 +3014,7 @@ func_0603() {
   }
 
   self.var_2F82++;
-  self method_8326();
+  self disableweaponswitch();
 }
 
 func_0617() {
@@ -3024,7 +3024,7 @@ func_0617() {
 
   self.var_2F82--;
   if(!self.var_2F82) {
-    self method_8327();
+    self enableweaponswitch();
   }
 }
 
@@ -3038,7 +3038,7 @@ func_0600() {
   }
 
   self.var_2F7E++;
-  self method_8324();
+  self disableoffhandweapons();
 }
 
 func_0614() {
@@ -3048,7 +3048,7 @@ func_0614() {
 
   self.var_2F7E--;
   if(!self.var_2F7E) {
-    self method_8325();
+    self enableoffhandweapons();
   }
 }
 
@@ -3124,19 +3124,19 @@ func_7A45(param_00) {
 func_8FFC() {
   var_00 = spawn("script_model", (0, 0, 0));
   var_00 setModel("tag_origin");
-  var_00 method_805C();
-  if(isDefined(self.var_0116)) {
-    var_00.var_0116 = self.var_0116;
+  var_00 hide();
+  if(isDefined(self.origin)) {
+    var_00.origin = self.origin;
   }
 
-  if(isDefined(self.var_001D)) {
-    var_00.var_001D = self.var_001D;
+  if(isDefined(self.angles)) {
+    var_00.angles = self.angles;
   }
 
   return var_00;
 }
 
-func_A74B(param_00, param_01) {
+waittill_notify_or_timeout(param_00, param_01) {
   self endon(param_00);
   wait(param_01);
 }
@@ -3147,13 +3147,15 @@ func_A74D(param_00, param_01) {
   return "timeout";
 }
 
-func_3AB5() {
+fileprint_launcher_start_file()
+{
   level.var_3ABD = 0;
-  level.var_3AB3 = 1;
-  func_3AB3("GAMEPRINTSTARTFILE:");
+  level. fileprint_launcher = 1;
+  fileprint_launcher("GAMEPRINTSTARTFILE:");
 }
 
-func_3AB3(param_00) {
+fileprint_launcher(param_00)
+{
   level.var_3ABD++;
   if(level.var_3ABD > 200) {
     wait 0.05;
@@ -3161,15 +3163,16 @@ func_3AB3(param_00) {
   }
 }
 
-func_3AB4(param_00, param_01) {
+fileprint_launcher_end_file(param_00,param_01)
+{
   if(!isDefined(param_01)) {
     param_01 = 0;
   }
 
   if(param_01) {
-    func_3AB3("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + param_00);
+    fileprint_launcher("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + param_00);
   } else {
-    func_3AB3("GAMEPRINTENDFILE:" + param_00);
+    fileprint_launcher("GAMEPRINTENDFILE:" + param_00);
   }
 
   var_02 = gettime() + 4000;
@@ -3179,24 +3182,24 @@ func_3AB4(param_00, param_01) {
 
   if(!gettime() < var_02) {
     iprintlnbold("LAUNCHER_PRINT_FAIL:( TIMEOUT ): launcherconflict? restart launcher and try again? ");
-    level.var_3AB3 = undefined;
+    level. fileprint_launcher = undefined;
     return 0;
   }
 
   var_03 = getDvar("LAUNCHER_PRINT_FAIL");
   if(var_03 != "0") {
     iprintlnbold("LAUNCHER_PRINT_FAIL:( " + var_03 + " ): launcherconflict? restart launcher and try again? ");
-    level.var_3AB3 = undefined;
+    level. fileprint_launcher = undefined;
     return 0;
   }
 
-  level.var_3AB3 = undefined;
+  level. fileprint_launcher = undefined;
   return 1;
 }
 
 func_5C25(param_00) {
   level.var_3ABD = 0;
-  func_3AB3("LAUNCHER_CLIP:" + param_00);
+  fileprint_launcher("LAUNCHER_CLIP:" + param_00);
 }
 
 func_56C3() {
@@ -3204,7 +3207,7 @@ func_56C3() {
     return 0;
   }
 
-  return isDefined(self.var_0075);
+  return isDefined(self.var_75);
 }
 
 func_6F21() {
@@ -3212,12 +3215,12 @@ func_6F21() {
 }
 
 func_0894() {
-  common_scripts\_exploder::func_0895();
+  common_scripts\_exploder::func_895();
 }
 
 func_4375(param_00) {
   if(!isDefined(param_00)) {
-    param_00 = self.var_01A2;
+    param_00 = self.target;
   }
 
   var_01 = getEnt(param_00, "targetname");
@@ -3279,10 +3282,10 @@ func_7157(param_00, param_01) {
 
   var_02 = spawn("script_origin", (0, 0, 0));
   if(!isDefined(param_01)) {
-    param_01 = self.var_0116;
+    param_01 = self.origin;
   }
 
-  var_02.var_0116 = param_01;
+  var_02.origin = param_01;
   var_02 method_861D(param_00);
   return var_02;
 }
@@ -3294,15 +3297,15 @@ func_71AA(param_00, param_01, param_02, param_03) {
 
   var_04 = spawn("script_origin", (0, 0, 1));
   if(!isDefined(param_01)) {
-    param_01 = self.var_0116;
+    param_01 = self.origin;
   }
 
-  var_04.var_0116 = param_01;
-  var_04.var_001D = param_02;
+  var_04.origin = param_01;
+  var_04.angles = param_02;
   if(isDefined(param_03) && param_03) {
     var_04 method_861C(param_00, "sounddone");
   } else {
-    var_04 method_8617(param_00, "sounddone");
+    var_04 playSound(param_00, "sounddone");
   }
 
   var_04 waittill("sounddone");
@@ -3450,12 +3453,12 @@ func_7153(param_00, param_01) {
   var_02 endon("death");
   thread func_2D18(var_02);
   if(isDefined(param_01)) {
-    var_02.var_0116 = self.var_0116 + param_01;
-    var_02.var_001D = self.var_001D;
+    var_02.origin = self.origin + param_01;
+    var_02.angles = self.angles;
     var_02 method_8449(self);
   } else {
-    var_02.var_0116 = self.var_0116;
-    var_02.var_001D = self.var_001D;
+    var_02.origin = self.origin;
+    var_02.angles = self.angles;
     var_02 method_8449(self);
   }
 
@@ -3471,7 +3474,7 @@ func_93D5(param_00) {
 
 func_2D18(param_00) {
   param_00 endon("death");
-  func_A70A("death", "disconnect");
+  waittill_any("death", "disconnect");
   if(isDefined(param_00)) {
     param_00 delete();
   }
@@ -3483,7 +3486,7 @@ func_2793(param_00, param_01) {
   setdvarifuninitialized(param_00, param_01);
 }
 
-func_A60A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C, param_0D) {}
+void(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C, param_0D) {}
 
 func_95AC(param_00, param_01) {
   var_02 = self gettagorigin(param_00);
@@ -3512,7 +3515,7 @@ func_27A6(param_00, param_01) {
 
   var_02 = spawnStruct();
   var_02.var_6048 = param_01;
-  var_02.var_005C = 0;
+  var_02.var_5C = 0;
   level.var_5E61[param_00] = var_02;
 }
 
@@ -3525,14 +3528,14 @@ func_5E62(param_00) {
 }
 
 func_5E61(param_00) {
-  for(var_01 = level.var_5E61[param_00]; var_01.var_005C >= var_01.var_6048; var_01 waittill("unlocked")) {}
+  for(var_01 = level.var_5E61[param_00]; var_01.var_5C >= var_01.var_6048; var_01 waittill("unlocked")) {}
 
-  var_01.var_005C++;
+  var_01.var_5C++;
 }
 
 func_55B2(param_00) {
   var_01 = level.var_5E61[param_00];
-  return var_01.var_005C > var_01.var_6048;
+  return var_01.var_5C > var_01.var_6048;
 }
 
 func_A03A(param_00) {
@@ -3547,12 +3550,12 @@ func_A038(param_00) {
 func_A039(param_00) {
   wait 0.05;
   var_01 = level.var_5E61[param_00];
-  var_01.var_005C--;
+  var_01.var_5C--;
   var_01 notify("unlocked");
 }
 
 func_4381() {
-  var_00 = level.var_015D;
+  var_00 = level.script;
   if(isDefined(level.var_98DC)) {
     var_00 = level.var_98DC;
   }
@@ -3625,7 +3628,7 @@ func_40B0(param_00, param_01, param_02, param_03, param_04, param_05) {
       continue;
     }
 
-    var_0F = distancesquared(param_00, var_0A.var_0116);
+    var_0F = distancesquared(param_00, var_0A.origin);
     if(isDefined(var_06) && var_0F > var_06) {
       continue;
     }
@@ -3651,7 +3654,7 @@ func_40B0(param_00, param_01, param_02, param_03, param_04, param_05) {
 }
 
 func_55E0() {
-  if(!level.var_258F) {
+  if(!level.console) {
     var_00 = self method_834E();
     if(isDefined(var_00)) {
       return var_00;
@@ -3725,13 +3728,13 @@ func_7237(param_00, param_01, param_02) {
   }
 
   param_00.var_7453[var_03] = var_04;
-  if(!func_AA4A(self.var_0116, self geteyeangles(), param_00.var_0116, var_05)) {
+  if(!func_AA4A(self.origin, self geteyeangles(), param_00.origin, var_05)) {
     param_00.var_7452[var_03] = 0;
     return 0;
   }
 
   var_06 = self getEye();
-  var_07 = param_00.var_0116;
+  var_07 = param_00.origin;
   if(sighttracepassed(var_06, var_07, 1, self, param_00)) {
     param_00.var_7452[var_03] = 1;
     return 1;
@@ -3761,10 +3764,10 @@ func_37CE(param_00) {
   var_01 = 0;
   self.var_3E18 = 0;
   for(;;) {
-    var_02 = self.var_0116;
+    var_02 = self.origin;
     var_03 = func_A71A(param_00, "path_disconnect");
     var_04 = 0;
-    var_05 = distancesquared(self.var_0116, var_02) > 0;
+    var_05 = distancesquared(self.origin, var_02) > 0;
     if(var_05) {
       var_04 = 1;
     }
@@ -3778,7 +3781,7 @@ func_37CE(param_00) {
     }
 
     foreach(var_07 in function_02D1()) {
-      if(isai(var_07) && distancesquared(self.var_0116, var_07.var_0116) < 250000) {
+      if(isai(var_07) && distancesquared(self.origin, var_07.origin) < 250000) {
         var_04 = 1;
         self.var_3E18 = max(gettime() + 30000, self.var_3E18);
       }
@@ -3823,22 +3826,22 @@ func_0A63(param_00) {
 }
 
 func_841D(param_00, param_01, param_02) {
-  if(!isDefined(level.var_0E2F)) {
-    level.var_0E2F = [];
+  if(!isDefined(level.anim_prop_models)) {
+    level.anim_prop_models = [];
   }
 
   var_03 = tolower(getDvar("1673"));
   var_04 = 1;
-  if(func_9467(var_03, "mp_")) {
+  if(string_starts_with(var_03, "mp_")) {
     var_04 = 0;
   }
 
   if(var_04) {
-    level.var_0E2F[param_00]["basic"] = param_01;
+    level.anim_prop_models[param_00]["basic"] = param_01;
     return;
   }
 
-  level.var_0E2F[param_00]["basic"] = param_02;
+  level.anim_prop_models[param_00]["basic"] = param_02;
 }
 
 func_4461(param_00, param_01, param_02) {
@@ -3852,7 +3855,7 @@ func_4461(param_00, param_01, param_02) {
       continue;
     }
 
-    var_06 = distance(var_05.var_0116, param_00);
+    var_06 = distance(var_05.origin, param_00);
     if(var_06 >= param_02) {
       continue;
     }
@@ -3886,7 +3889,7 @@ func_44D6(param_00, param_01, param_02) {
   var_03 = 0;
   var_04 = undefined;
   foreach(var_06 in param_01) {
-    var_07 = distance(var_06.var_0116, param_00);
+    var_07 = distance(var_06.origin, param_00);
     if(var_07 <= var_03 || var_07 >= param_02) {
       continue;
     }
@@ -3941,7 +3944,7 @@ func_2616(param_00) {
   }
 }
 
-func_84A0(param_00, param_01) {
+set_fog_to_ent_values(param_00, param_01) {
   if(!isDefined(param_01)) {
     param_01 = 0;
   }
@@ -3949,7 +3952,7 @@ func_84A0(param_00, param_01) {
   func_2617(param_00);
   func_2616(param_00);
   if(isDefined(param_00.var_1103)) {
-    if(level.var_010B) {
+    if(level.var_10B) {
       if(param_00.var_1103) {
         if(isPlayer(self)) {
           self playersetatmosfog(param_00.var_1103, param_01, param_00.var_1128, param_00.var_1108, param_00.var_110A, param_00.var_1109, param_00.var_1105, param_00.var_1106, param_00.var_1110, param_00.var_1107, param_00.var_1126, param_00.var_1102, int(param_00.var_1112), param_00.var_1111, param_00.var_1114, param_00.var_1113, param_00.var_1127, param_00.var_110C, param_00.var_110B, param_00.var_110D, param_00.var_110E, param_00.var_110F, param_00.var_1104, param_00.var_10FF, param_00.var_1100, param_00.var_1101, param_00.var_111F, param_00.var_1120, param_00.var_1115, param_00.var_1116, param_00.var_1117, param_00.var_111C, param_00.var_111D, param_00.var_111E, param_00.var_1122, param_00.var_1125, param_00.var_1123, param_00.var_111B, param_00.var_1124, param_00.var_1118, param_00.var_1119, param_00.var_111A, param_00.var_1121);
@@ -3972,11 +3975,11 @@ func_84A0(param_00, param_01) {
 }
 
 func_092C(param_00, param_01) {
-  if(!isDefined(level.var_0611)) {
-    level.var_0611 = [];
+  if(!isDefined(level.var_611)) {
+    level.var_611 = [];
   }
 
-  level.var_0611[param_00] = loadfx(param_01);
+  level.var_611[param_00] = loadfx(param_01);
 }
 
 func_0FA4(param_00, param_01) {
@@ -4018,7 +4021,7 @@ func_4CEB() {
     self.var_6A55 = self method_80B1();
   }
 
-  self method_805C();
+  self hide();
 }
 
 func_8BE0() {
@@ -4030,7 +4033,7 @@ func_8BE0() {
     self method_80B0(self.var_6A55);
   }
 
-  self method_805B();
+  self show();
 }
 
 func_A2BE() {
@@ -4082,7 +4085,7 @@ func_86BE(param_00) {
   setomnvar("lighting_state", param_00);
   if(!getdvarint("233")) {
     foreach(var_03 in var_01) {
-      if(isDefined(var_03.var_5D56) && isDefined(var_03.var_003A) && var_03.var_003A == "script_brushmodel" || var_03.var_003A == "script_model") {
+      if(isDefined(var_03.var_5D56) && isDefined(var_03.classname) && var_03.classname == "script_brushmodel" || var_03.classname == "script_model") {
         if(var_03.var_5D56 == 0) {
           continue;
         }
@@ -4099,7 +4102,7 @@ func_86BE(param_00) {
 }
 
 func_46AE() {
-  if(func_562E(level.var_585D)) {
+  if(func_562E(level.iszombiegame)) {
     return "zombiePlayerStats";
   }
 
@@ -4110,7 +4113,7 @@ func_46A8() {
   return "zombiePlayerStats";
 }
 
-func_46A7() {
+getstatgamemode() {
   return "commonData";
 }
 
@@ -4151,12 +4154,12 @@ func_339E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_02 = 100;
   }
 
-  if(!isDefined(param_01) && isDefined(self.var_001D)) {
-    param_01 = self.var_001D;
+  if(!isDefined(param_01) && isDefined(self.angles)) {
+    param_01 = self.angles;
   }
 
-  if(!isDefined(param_00) && isDefined(self.var_0116)) {
-    param_00 = self.var_0116;
+  if(!isDefined(param_00) && isDefined(self.origin)) {
+    param_00 = self.origin;
   }
 
   var_08 = 16;
@@ -4336,9 +4339,9 @@ func_40B5() {
   var_01 = getDvar("r_mode", "1280x720 [16:9]");
   var_02 = strtok(var_01, " ");
   var_03 = strtok(var_02[0], "x");
-  var_00.var_01D2 = func_9468(var_03[0]);
-  var_00.var_00BD = func_9468(var_03[1]);
-  var_00.var_1083 = func_7F03(var_00.var_01D2 / var_00.var_00BD, 3);
+  var_00.width = func_9468(var_03[0]);
+  var_00.height = func_9468(var_03[1]);
+  var_00.var_1083 = func_7F03(var_00.width / var_00.height, 3);
   return var_00;
 }
 
@@ -4377,8 +4380,7 @@ func_6FA9(param_00, param_01, param_02, param_03, param_04, param_05) {
 
   var_07["is_hit"] = 0;
   var_07["arc_end"] = var_08[var_0D];
-  var_0D = 0;
-  while(var_0D < var_08.size - 1) {
+  for(var_0D = 0; var_0D < var_08.size - 1; var_0D++) {
     var_10 = var_08[var_0D];
     var_11 = var_08[var_0D + 1];
     if(!isDefined(param_05)) {
@@ -4392,23 +4394,21 @@ func_6FA9(param_00, param_01, param_02, param_03, param_04, param_05) {
       }
     }
 
-    var_13 = undefined;
-    if(!func_5646(var_14, var_12)) {
-      var_15 = rotatevector(var_14 - param_01, var_0C);
-      var_13 = asin(var_15[1] / param_03);
-      if(var_08["is_hit"] == 0) {
-        var_08["hit_angle"] = var_13;
-        var_08["hit_point"] = var_14;
-        var_08["is_hit"] = 1;
-      } else if(!var_07) {
+    var_14 = undefined;
+    if(!func_5646(var_12, var_11)) {
+      var_15 = rotatevector(var_12 - param_00, var_0B);
+      var_14 = asin(var_15[1] / param_02);
+      if(var_07["is_hit"] == 0) {
+        var_07["hit_angle"] = var_14;
+        var_07["hit_point"] = var_12;
+        var_07["is_hit"] = 1;
+      } else if(!var_06) {
         break;
       }
     }
-
-    var_0F++;
   }
 
-  return var_08;
+  return var_07;
 }
 
 func_5646(param_00, param_01) {
@@ -4491,7 +4491,7 @@ func_9530(param_00, param_01, param_02) {
 }
 
 func_73F5(param_00) {
-  foreach(var_02 in param_00.var_012C["killstreaks"]) {
+  foreach(var_02 in param_00.pers["killstreaks"]) {
     if(var_02.var_13AF == 1) {
       return 1;
     }

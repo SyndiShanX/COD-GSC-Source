@@ -3,7 +3,7 @@
  * Script: maps\createfx\mp_zombie_dnk_srv_fx.gsc
 **************************************************/
 
-func_00F9() {
+main() {
   var_00 = common_scripts\utility::func_281B("zmb_dnk_snow_attach_player_hvy");
   var_00 common_scripts\_createfx::func_8543((409.436, -443.887, 30), (270, 0, 0));
   var_00.var_A265["fxid"] = "zmb_dnk_snow_attach_player_hvy";

@@ -3,38 +3,38 @@
  * Script: maps\mp\gametypes\hub.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   if(getDvar("1673") == "mp_background") {
     return;
   }
 
   setDvar("4014", 1);
-  maps\mp\gametypes\_globallogic::func_00D5();
+  maps\mp\gametypes\_globallogic::init();
   lib_01DD::func_8A0C();
   maps\mp\gametypes\_globallogic::func_8A0C();
-  level.var_7A67 = 0;
+  level.rankedmatch = 0;
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.var_3FDC, 0, 0, 9);
-    maps\mp\_utility::func_7BFA(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BF9(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BF7(level.var_3FDC, 0);
-    maps\mp\_utility::func_7C04(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BF1(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BE5(level.var_3FDC, 0);
+    maps\mp\_utility::func_7BF8(level.gametype, 0, 0, 9);
+    maps\mp\_utility::func_7BFA(level.gametype, 0);
+    maps\mp\_utility::func_7BF9(level.gametype, 0);
+    maps\mp\_utility::func_7BF7(level.gametype, 0);
+    maps\mp\_utility::func_7C04(level.gametype, 0);
+    maps\mp\_utility::func_7BF1(level.gametype, 0);
+    maps\mp\_utility::func_7BE5(level.gametype, 0);
   }
 
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   setteammode("hub");
   maps\mp\_utility::func_873B(1);
-  level.var_1E77 = ::onhubplayerconnect;
+  level.callbackplayerconnect = ::onhubplayerconnect;
   level.var_746E = function_02EE();
   level.var_6BAF = ::func_6BAF;
-  level.var_6B5C = ::func_6B5C;
+  level.onnormaldeath = ::onnormaldeath;
   level.var_4696 = ::func_4696;
   level.var_2F85 = 1;
   level.var_1B3E = 1;
@@ -50,19 +50,19 @@ func_00F9() {
 
 onhubplayerconnect() {
   self method_8506(0);
-  [[::maps\mp\gametypes\_playerlogic::func_1E67]]();
+  [[::maps\mp\gametypes\_playerlogic::callback_playerconnect]]();
 }
 
 func_4F48() {
-  if(!isDefined(self.var_012C["team"])) {
+  if(!isDefined(self.pers["team"])) {
     if(function_02EE() == "axis") {
       thread maps\mp\gametypes\_menus::func_873A("axis");
-      self.var_0179 = "axis";
+      self.sessionteam = "axis";
       return;
     }
 
     thread maps\mp\gametypes\_menus::func_873A("allies");
-    self.var_0179 = "allies";
+    self.sessionteam = "allies";
   }
 }
 
@@ -89,10 +89,10 @@ func_5300() {
   maps\mp\_utility::func_7BE5("hub", 0);
 }
 
-func_6B5C(param_00, param_01, param_02) {
-  level maps\mp\gametypes\_gamescore::func_47BD(param_01.var_012C["team"], 1, 0);
-  if(game["state"] == "postgame" && game["teamScores"][param_01.var_01A7] > game["teamScores"][level.var_6C63[param_01.var_01A7]]) {
-    param_01.var_3B4B = 1;
+onnormaldeath(param_00, param_01, param_02) {
+  level maps\mp\gametypes\_gamescore::func_47BD(param_01.pers["team"], 1, 0);
+  if(game["state"] == "postgame" && game["teamScores"][param_01.team] > game["teamScores"][level.var_6C63[param_01.team]]) {
+    param_01.finalkill = 1;
   }
 }
 
@@ -110,11 +110,11 @@ func_6BB6() {
     var_00 = "allies";
   }
 
-  if(maps\mp\_utility::func_761E()) {
+  if(maps\mp\_utility::practiceroundgame()) {
     var_00 = "none";
   }
 
-  thread maps\mp\gametypes\_gamelogic::func_36B9(var_00, game["end_reason"]["time_limit_reached"]);
+  thread maps\mp\gametypes\_gamelogic::endgame(var_00, game["end_reason"]["time_limit_reached"]);
 }
 
 func_6BAF() {
@@ -132,7 +132,7 @@ func_6BAF() {
 
   maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_HUB");
   maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_HUB");
-  if(level.var_910F) {
+  if(level.splitscreen) {
     maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_HUB");
     maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_HUB");
   } else {
@@ -143,8 +143,8 @@ func_6BAF() {
   maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_WAR_HINT");
   maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_WAR_HINT");
   lib_050D::func_10E4();
-  var_02[0] = level.var_3FDC;
-  maps\mp\gametypes\_gameobjects::func_00F9(var_02);
+  var_02[0] = level.gametype;
+  maps\mp\gametypes\_gameobjects::main(var_02);
 }
 
 func_4696() {

@@ -5,7 +5,7 @@
 
 func_6784(param_00) {
   if(isDefined(self) && function_0344(param_00)) {
-    self method_8617(param_00);
+    self playSound(param_00);
   }
 }
 
@@ -39,7 +39,7 @@ func_7BF0() {
   level.var_67D0["dismember_novfx_right_arm"] = ::func_67A2;
   level.var_67D0["dismember_novfx_left_leg"] = ::func_67A0;
   level.var_67D0["dismember_novfx_right_leg"] = ::func_67A4;
-  if(getdvarint("fov_notetracks_code_handling") == 0 && !function_025F()) {
+  if(getdvarint("fov_notetracks_code_handling") == 0 && !isdedicatedserver()) {
     level.var_67D4["fov_"] = ::func_67B2;
   }
 
@@ -65,8 +65,8 @@ func_7BF0() {
   level.var_67D4["killfxontagforclient"] = ::notetrackkillfxontagforclient;
   level.var_67D4["hidepart"] = ::notetrackhidepart;
   level.var_67D4["showpart"] = ::notetrackshowpart;
-  if(isDefined(level.var_0686)) {
-    var_00 = getarraykeys(level.var_0686);
+  if(isDefined(level.var_686)) {
+    var_00 = getarraykeys(level.var_686);
     foreach(var_02 in var_00) {
       level.var_67D0[var_02] = ::func_297E;
     }
@@ -137,17 +137,17 @@ func_67A4(param_00, param_01, param_02) {
 }
 
 func_297E(param_00, param_01) {
-  if(isDefined(self.var_00B5)) {
-    var_02 = self.var_00B5;
+  if(isDefined(self.var_B5)) {
+    var_02 = self.var_B5;
   } else {
     var_02 = "dirt";
   }
 
   var_03 = undefined;
-  if(isDefined(level.var_0686[param_00][var_02])) {
-    var_03 = level.var_0686[param_00][var_02];
-  } else if(isDefined(level.var_0686[param_00]["all"])) {
-    var_03 = level.var_0686[param_00]["all"];
+  if(isDefined(level.var_686[param_00][var_02])) {
+    var_03 = level.var_686[param_00][var_02];
+  } else if(isDefined(level.var_686[param_00]["all"])) {
+    var_03 = level.var_686[param_00]["all"];
   }
 
   if(!isDefined(var_03)) {
@@ -284,8 +284,8 @@ func_A6E0(param_00, param_01, param_02) {
     var_03 = self gettagorigin(param_01);
     var_04 = self gettagangles(param_01);
   } else {
-    var_03 = self.var_0116;
-    var_04 = self.var_001D;
+    var_03 = self.origin;
+    var_04 = self.angles;
   }
 
   wait 0.05;
@@ -297,8 +297,8 @@ func_A6E0(param_00, param_01, param_02) {
     var_05 = self gettagorigin(param_01);
     var_06 = self gettagangles(param_01);
   } else {
-    var_05 = self.var_0116;
-    var_06 = self.var_001D;
+    var_05 = self.origin;
+    var_06 = self.angles;
   }
 
   var_07 = var_03 - var_05;
@@ -310,8 +310,8 @@ func_6FA0(param_00, param_01, param_02, param_03, param_04, param_05) {
     var_06 = vectorNormalize(param_04) * param_05;
     var_07 = spawn("script_model", param_02);
     var_07 setModel(param_00);
-    var_07.var_001D = param_03;
-    var_08 = var_07.var_0116;
+    var_07.angles = param_03;
+    var_08 = var_07.origin;
     var_07 method_82C5(var_08, var_06);
   }
 }
@@ -334,8 +334,8 @@ func_67A6(param_00, param_01, param_02) {
     var_03 = self gettagorigin(var_07);
     var_04 = self gettagangles(var_07);
   } else {
-    var_03 = self.var_0116;
-    var_04 = self.var_001D;
+    var_03 = self.origin;
+    var_04 = self.angles;
   }
 
   var_08 = (0, 0, -1);
@@ -382,9 +382,9 @@ notetrackplayfxontag_internal(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  if(!isDefined(level.var_0611[var_05])) {
-    level.var_0611[var_05] = loadfx(var_05);
-    if(!isDefined(level.var_0611[var_05])) {
+  if(!isDefined(level.var_611[var_05])) {
+    level.var_611[var_05] = loadfx(var_05);
+    if(!isDefined(level.var_611[var_05])) {
       return;
     }
   }
@@ -399,23 +399,23 @@ notetrackplayfxontag_internal(param_00, param_01, param_02, param_03) {
 
   var_07 = 1;
   if(param_00 == "PlayFxOnTag") {
-    playFXOnTag(level.var_0611[var_05], self, var_06);
+    playFXOnTag(level.var_611[var_05], self, var_06);
     return;
   }
 
   if(param_00 == "StopFxOnTag") {
-    stopFXOnTag(level.var_0611[var_05], self, var_06);
+    stopFXOnTag(level.var_611[var_05], self, var_06);
     return;
   }
 
   if(param_00 == "KillFXOnTag") {
-    killfxontag(level.var_0611[var_05], self, var_06);
+    killfxontag(level.var_611[var_05], self, var_06);
     return;
   }
 
   if(param_00 == "PlayFXOnTagForClient") {
     foreach(var_09 in param_03) {
-      playfxontagforclients(level.var_0611[var_05], self, var_06, var_09);
+      playfxontagforclients(level.var_611[var_05], self, var_06, var_09);
     }
 
     return;
@@ -423,7 +423,7 @@ notetrackplayfxontag_internal(param_00, param_01, param_02, param_03) {
 
   if(param_00 == "StopFXOnTagForClient") {
     foreach(var_09 in param_03) {
-      function_0294(level.var_0611[var_05], self, var_06, var_09);
+      function_0294(level.var_611[var_05], self, var_06, var_09);
     }
 
     return;
@@ -431,7 +431,7 @@ notetrackplayfxontag_internal(param_00, param_01, param_02, param_03) {
 
   if(param_00 == "KillFXOnTagForClient") {
     foreach(var_09 in param_03) {
-      function_0295(level.var_0611[var_05], self, var_06, var_09);
+      function_0295(level.var_611[var_05], self, var_06, var_09);
     }
 
     return;
@@ -604,7 +604,7 @@ func_67AD(param_00, param_01, param_02, param_03) {
 }
 
 notetrackresetfades() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(isDefined(var_01) && isDefined(var_01.var_6772)) {
       var_01 thread do_fade_from_black(0);
     }
@@ -618,18 +618,18 @@ func_30B4(param_00) {
   if(!isDefined(self.var_6772)) {
     self.var_6772 = newclienthudelem(self);
     self.var_6772 setshader("black", 640, 480);
-    self.var_6772.var_0184 = 1;
-    self.var_6772.var_00C6 = "fullscreen";
-    self.var_6772.var_01CA = "fullscreen";
-    self.var_6772.var_00A0 = 1;
+    self.var_6772.sort = 1;
+    self.var_6772.horzalign = "fullscreen";
+    self.var_6772.vertalign = "fullscreen";
+    self.var_6772.foreground = 1;
   }
 
   if(param_00 > 0) {
-    self.var_6772.var_0018 = 0;
+    self.var_6772.alpha = 0;
     self.var_6772 fadeovertime(param_00);
   }
 
-  self.var_6772.var_0018 = 1;
+  self.var_6772.alpha = 1;
   wait(param_00);
 }
 
@@ -640,18 +640,18 @@ do_fade_from_black(param_00) {
   if(!isDefined(self.var_6772)) {
     self.var_6772 = newclienthudelem(self);
     self.var_6772 setshader("black", 640, 480);
-    self.var_6772.var_0184 = 1;
-    self.var_6772.var_00C6 = "fullscreen";
-    self.var_6772.var_01CA = "fullscreen";
-    self.var_6772.var_00A0 = 1;
+    self.var_6772.sort = 1;
+    self.var_6772.horzalign = "fullscreen";
+    self.var_6772.vertalign = "fullscreen";
+    self.var_6772.foreground = 1;
   }
 
   if(param_00 > 0) {
-    self.var_6772.var_0018 = 1;
+    self.var_6772.alpha = 1;
     self.var_6772 fadeovertime(param_00);
   }
 
-  self.var_6772.var_0018 = 0;
+  self.var_6772.alpha = 0;
   wait(param_00);
   self.var_6772 destroy();
 }
@@ -716,13 +716,13 @@ func_67A7(param_00, param_01, param_02) {
 
   if(isDefined(param_02)) {
     foreach(var_08 in param_02) {
-      earthquake(var_04, var_05, self.var_0116, var_06, var_08);
+      earthquake(var_04, var_05, self.origin, var_06, var_08);
     }
 
     return;
   }
 
-  earthquake(var_04, var_05, self.var_0116, var_06);
+  earthquake(var_04, var_05, self.origin, var_06);
 }
 
 func_0EC0(param_00, param_01) {
@@ -836,16 +836,16 @@ func_4627(param_00, param_01) {
   } else if(param_00 == "non_spectator" && param_01) {}
 
   var_02 = [];
-  foreach(var_04 in level.var_744A) {
-    if(!isDefined(var_04.var_01A7)) {
+  foreach(var_04 in level.players) {
+    if(!isDefined(var_04.team)) {
       continue;
     }
 
-    if(!param_01 && var_04.var_0178 == "spectator" || var_04.var_01A7 == "spectator") {
+    if(!param_01 && var_04.sessionstate == "spectator" || var_04.team == "spectator") {
       continue;
     }
 
-    if(param_00 == "all" || var_04.var_01A7 == param_00) {
+    if(param_00 == "all" || var_04.team == param_00) {
       var_02[var_02.size] = var_04;
     }
   }
@@ -864,7 +864,7 @@ func_831D(param_00, param_01, param_02, param_03, param_04) {
 }
 
 fov_notetrack_team_setter(param_00) {
-  if(getdvarint("fov_notetracks_code_handling") == 0 && !function_025F()) {
+  if(getdvarint("fov_notetracks_code_handling") == 0 && !isdedicatedserver()) {
     return;
   }
 
@@ -883,9 +883,9 @@ fov_notetrack_team_setter(param_00) {
   }
 
   if(isarray(param_00)) {
-    self method_805C();
+    self hide();
     foreach(var_03 in param_00) {
-      var_04 = var_03.var_0178 == "spectator";
+      var_04 = var_03.sessionstate == "spectator";
       if(!var_04) {
         self showtoclient(var_03);
       }
@@ -895,7 +895,7 @@ fov_notetrack_team_setter(param_00) {
   }
 
   if(isPlayer(param_00)) {
-    self method_805C();
+    self hide();
     self showtoclient(param_00);
     return;
   }
@@ -910,28 +910,28 @@ func_8C21(param_00, param_01) {
     param_01 = 1;
   }
 
-  self method_805C();
-  foreach(var_03 in level.var_744A) {
-    var_04 = var_03.var_0178 == "spectator";
-    if(var_03.var_01A7 == param_00 && !var_04) {
+  self hide();
+  foreach(var_03 in level.players) {
+    var_04 = var_03.sessionstate == "spectator";
+    if(var_03.team == param_00 && !var_04) {
       self showtoclient(var_03);
     }
 
-    if(param_01 && (var_03.var_01A7 == "spectator" || var_04) && param_00 == "allies") {
+    if(param_01 && (var_03.team == "spectator" || var_04) && param_00 == "allies") {
       self showtoclient(var_03);
     }
   }
 
   for(;;) {
-    level common_scripts\utility::func_A70A("joined_team", "joined_spectators", "spawn_after_spectator", "class_select_cancel_spectator");
-    self method_805C();
-    foreach(var_03 in level.var_744A) {
-      var_04 = var_03.var_0178 == "spectator";
-      if(var_03.var_01A7 == param_00 && !var_04) {
+    level common_scripts\utility::waittill_any("joined_team", "joined_spectators", "spawn_after_spectator", "class_select_cancel_spectator");
+    self hide();
+    foreach(var_03 in level.players) {
+      var_04 = var_03.sessionstate == "spectator";
+      if(var_03.team == param_00 && !var_04) {
         self showtoclient(var_03);
       }
 
-      if(param_01 && (var_03.var_01A7 == "spectator" || var_04) && param_00 == "allies") {
+      if(param_01 && (var_03.team == "spectator" || var_04) && param_00 == "allies") {
         self showtoclient(var_03);
       }
     }

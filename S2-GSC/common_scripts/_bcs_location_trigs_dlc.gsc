@@ -19,19 +19,19 @@ bcs_dlc_trigs_assign_aliases() {
   var_00 = getEntArray();
   var_01 = [];
   foreach(var_03 in var_00) {
-    if(isDefined(var_03.var_003A) && issubstr(var_03.var_003A, "trigger_multiple_bcs")) {
+    if(isDefined(var_03.classname) && issubstr(var_03.classname, "trigger_multiple_bcs")) {
       var_01[var_01.size] = var_03;
     }
   }
 
   foreach(var_03 in var_01) {
-    if(!isDefined(level.var_166F[var_03.var_003A])) {
+    if(!isDefined(level.var_166F[var_03.classname])) {
       continue;
     }
 
-    var_06 = func_6E89(level.var_166F[var_03.var_003A]);
+    var_06 = func_6E89(level.var_166F[var_03.classname]);
     if(var_06.size > 1) {
-      var_06 = common_scripts\utility::func_0F92(var_06);
+      var_06 = common_scripts\utility::func_F92(var_06);
     }
 
     var_03.var_5E5C = var_06;
@@ -64,7 +64,7 @@ func_0903(param_00, param_01) {
     return;
   }
 
-  level.var_166F[param_00] = param_01;
+  level.var_166F[var_09] = var_0A;
 }
 
 bcs_dlc_location_trigger_mapping() {

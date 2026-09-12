@@ -3,62 +3,62 @@
  * Script: maps\mp\_audio.gsc
 *********************************************/
 
-func_5163() {
-  if(!isDefined(level.var_1355)) {
-    level.var_1355 = spawnStruct();
+init_audio() {
+  if(!isDefined(level.audio)) {
+    level.audio = spawnStruct();
   }
 
-  func_5255();
-  func_5286();
-  level.var_6B6D = ::func_6B6D;
+  init_reverb();
+  init_whizby();
+  level.onplayerconnectaudioinit = ::onplayerconnectaudioinit;
 }
 
-func_6B6D() {
-  func_0F2B("default");
+onplayerconnectaudioinit() {
+  apply_reverb("default");
 }
 
-func_5255() {
-  func_095A("default", "generic", 0.15, 0.9, 2);
+init_reverb() {
+  add_reverb("default", "generic", 0.15, 0.9, 2);
 }
 
-func_095A(param_00, param_01, param_02, param_03, param_04) {
+add_reverb(param_00, param_01, param_02, param_03, param_04) {
   var_05 = [];
-  func_55FC(param_01);
+  is_roomtype_valid(param_01);
   var_05["roomtype"] = param_01;
   var_05["wetlevel"] = param_02;
   var_05["drylevel"] = param_03;
   var_05["fadetime"] = param_04;
-  level.var_1355.var_7E43[param_00] = var_05;
+  level.audio.reverb_settings[param_00] = var_05;
 }
 
-func_55FC(param_00) {}
+is_roomtype_valid(param_00) {}
 
-func_0F2B(param_00) {
-  if(!isDefined(level.var_1355.var_7E43[param_00])) {
-    var_01 = level.var_1355.var_7E43["default"];
+apply_reverb(param_00) {
+  if(!isDefined(level.audio.reverb_settings[param_00])) {
+    var_01 = level.audio.reverb_settings["default"];
   } else {
-    var_01 = level.var_1355.var_7E43[var_01];
+    var_01 = level.audio.reverb_settings[var_01];
   }
 
   self method_8631("snd_enveffectsprio_level", var_01["roomtype"], var_01["drylevel"], var_01["wetlevel"], var_01["fadetime"]);
 }
 
-func_5286() {
-  level.var_1355.var_AA1C = [];
-  func_85F5(15, 30, 50);
-  func_85F6(150, 250, 350);
+init_whizby() {
+  level.audio.whizby_settings = [];
+  set_whizby_radius(15, 30, 50);
+  set_whizby_spread(150, 250, 350);
 }
 
-func_85F5(param_00, param_01, param_02) {
-  level.var_1355.var_AA1C["radius"] = [param_00, param_01, param_02];
+set_whizby_radius(param_00, param_01, param_02) {
+  level.audio.whizby_settings["radius"] = [param_00, param_01, param_02];
 }
 
-func_85F6(param_00, param_01, param_02) {
-  level.var_1355.var_AA1C["spread"] = [param_00, param_01, param_02];
+set_whizby_spread(param_00, param_01, param_02) {
+  level.audio.whizby_settings["spread"] = [param_00, param_01, param_02];
 }
 
-func_0F2E() {
-  var_00 = level.var_1355.var_AA1C;
+apply_whizby() {
+  var_00 = level.audio.whizby_settings;
   var_01 = var_00["spread"];
   var_02 = var_00["radius"];
   self setwhizbyspreads(0, var_01[0], var_01[1], var_01[2]);
@@ -96,7 +96,7 @@ func_8D29(param_00, param_01) {
   }
 }
 
-func_8DAE(param_00, param_01) {
+snd_play_team_splash(param_00, param_01) {
   if(!isDefined(param_00)) {
     param_00 = "null";
   }
@@ -105,63 +105,63 @@ func_8DAE(param_00, param_01) {
     param_01 = "null";
   }
 
-  if(level.var_984D) {
-    foreach(var_03 in level.var_744A) {
-      if(isDefined(var_03) && issentient(var_03) && issentient(self) && var_03.var_01A7 != self.var_01A7) {
+  if(level.teambased) {
+    foreach(var_03 in level.players) {
+      if(isDefined(var_03) && issentient(var_03) && issentient(self) && var_03.team != self.team) {
         if(function_0344(param_01)) {
-          var_03 method_8615(param_01);
+          var_03 playlocalsound(param_01);
         }
 
         continue;
       }
 
-      if(isDefined(var_03) && issentient(var_03) && issentient(self) && var_03.var_01A7 == self.var_01A7) {
+      if(isDefined(var_03) && issentient(var_03) && issentient(self) && var_03.team == self.team) {
         if(function_0344(param_00)) {
-          var_03 method_8615(param_00);
+          var_03 playlocalsound(param_00);
         }
       }
     }
   }
 }
 
-func_8DAC(param_00, param_01, param_02, param_03) {}
+snd_play_on_notetrack_timer(param_00, param_01, param_02, param_03) {}
 
-func_8DAB(param_00, param_01, param_02) {
+snd_play_on_notetrack(param_00, param_01, param_02) {
   self endon("stop_sequencing_notetracks");
   self endon("death");
-  func_8E8B(param_00, param_01, param_02);
+  sndx_play_on_notetrack_internal(param_00, param_01, param_02);
 }
 
-func_8E8B(param_00, param_01, param_02) {
+sndx_play_on_notetrack_internal(param_00, param_01, param_02) {
   for(;;) {
     self waittill(param_01, var_03);
     if(isDefined(var_03) && var_03 != "end") {
       if(isarray(param_00)) {
         var_04 = param_00[var_03];
         if(isDefined(var_04)) {
-          self method_8617(var_04);
+          self playSound(var_04);
         }
 
         continue;
       }
 
       if(param_01 == var_03) {
-        self method_8617(param_00);
+        self playSound(param_00);
       }
     }
   }
 }
 
-func_831E(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+scriptmodelplayanimwithnotify(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   if(isDefined(param_04)) {
     level endon(param_04);
   }
 
   param_00 method_8278(param_01, param_02);
-  thread func_831F(param_00, param_02, param_03, param_04, param_05, param_06);
+  thread scriptmodelplayanimwithnotify_notetracks(param_00, param_02, param_03, param_04, param_05, param_06);
 }
 
-func_831F(param_00, param_01, param_02, param_03, param_04, param_05) {
+scriptmodelplayanimwithnotify_notetracks(param_00, param_01, param_02, param_03, param_04, param_05) {
   if(isDefined(param_03)) {
     level endon(param_03);
   }
@@ -178,7 +178,7 @@ func_831F(param_00, param_01, param_02, param_03, param_04, param_05) {
   for(;;) {
     param_00 waittill(param_01, var_06);
     if(isDefined(var_06) && var_06 == param_01) {
-      param_00 method_8617(param_02);
+      param_00 playSound(param_02);
     }
   }
 }
@@ -213,7 +213,7 @@ func_8320(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
       if(isDefined(var_08)) {
         for(var_09 = 0; var_09 < var_07; var_09++) {
           if(var_08 == param_02[var_09]) {
-            param_00 method_8617(param_03[var_09]);
+            param_00 playSound(param_03[var_09]);
           }
         }
       }
@@ -225,21 +225,21 @@ func_8320(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   for(;;) {
     param_00 waittill(param_01, var_08);
     if(isDefined(var_08) && var_08 == param_02) {
-      param_00 method_8617(param_03);
+      param_00 playSound(param_03);
     }
   }
 }
 
-func_8DF9(param_00, param_01, param_02) {
+snd_veh_play_loops(param_00, param_01, param_02) {
   var_03 = self;
   var_04 = [param_00, param_01, param_02];
-  var_05[0] = spawn("script_origin", var_03.var_0116);
+  var_05[0] = spawn("script_origin", var_03.origin);
   var_05[0] method_8449(var_03);
   var_05[0] method_861D(param_00);
-  var_05[1] = spawn("script_origin", var_03.var_0116);
+  var_05[1] = spawn("script_origin", var_03.origin);
   var_05[1] method_8449(var_03);
   var_05[1] method_861D(param_01);
-  var_05[2] = spawn("script_origin", var_03.var_0116);
+  var_05[2] = spawn("script_origin", var_03.origin);
   var_05[2] method_8449(var_03);
   var_05[2] method_861D(param_02);
   var_03 waittill("death");
@@ -251,7 +251,7 @@ func_8DF9(param_00, param_01, param_02) {
   }
 }
 
-func_2D76(param_00, param_01) {
+deprecated_aud_map(param_00, param_01) {
   var_02 = 0;
   var_03 = param_01.size;
   var_04 = param_01[0];
@@ -273,7 +273,7 @@ func_2D76(param_00, param_01) {
   return var_02;
 }
 
-func_8DA8(param_00, param_01, param_02, param_03) {
+snd_play_loop_in_space(param_00, param_01, param_02, param_03) {
   var_04 = 0.2;
   if(isDefined(param_03)) {
     var_04 = param_03;
@@ -281,11 +281,11 @@ func_8DA8(param_00, param_01, param_02, param_03) {
 
   var_05 = spawn("script_origin", param_01);
   var_05 method_861D(param_00);
-  thread func_8E89(var_05, param_02, var_04);
+  thread sndx_play_loop_in_space_internal(var_05, param_02, var_04);
   return var_05;
 }
 
-func_8E89(param_00, param_01, param_02) {
+sndx_play_loop_in_space_internal(param_00, param_01, param_02) {
   level waittill(param_01);
   if(isDefined(param_00)) {
     param_00 method_861B(0, param_02);
@@ -294,16 +294,16 @@ func_8E89(param_00, param_01, param_02) {
   }
 }
 
-func_8DCD(param_00) {
-  level.var_9A0E = 0;
+snd_script_timer(param_00) {
+  level.timer_number = 0;
   if(!isDefined(param_00)) {
     param_00 = 0.1;
   }
 
   for(;;) {
-    iprintln(level.var_9A0E);
+    iprintln(level.timer_number);
     wait(param_00);
-    level.var_9A0E = level.var_9A0E + param_00;
+    level.timer_number = level.timer_number + param_00;
   }
 }
 
@@ -333,10 +333,10 @@ func_8DA4(param_00, param_01, param_02) {
 }
 
 func_12A4(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  thread func_136C(param_00, param_01, param_02, param_03, param_04, param_05, param_06);
+  thread aud_print_3d_on_ent(param_00, param_01, param_02, param_03, param_04, param_05, param_06);
 }
 
-func_136C(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+aud_print_3d_on_ent(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   if(isDefined(self)) {
     var_07 = (1, 1, 1);
     var_08 = (1, 0, 0);
@@ -380,7 +380,7 @@ func_136C(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     }
 
     if(isDefined(param_04)) {
-      thread func_136D(param_04);
+      thread audx_print_3d_timer(param_04);
     }
 
     if(!isDefined(param_06)) {
@@ -401,7 +401,7 @@ func_136C(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   }
 }
 
-func_136D(param_00) {
+audx_print_3d_timer(param_00) {
   self endon("death");
   wait(param_00);
   if(isDefined(self)) {
@@ -409,4 +409,4 @@ func_136D(param_00) {
   }
 }
 
-func_8DFA() {}
+snd_vehicle_mp() {}

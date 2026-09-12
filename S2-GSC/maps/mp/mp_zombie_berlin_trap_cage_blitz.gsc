@@ -45,13 +45,13 @@ trap_cage_do_damage(param_00) {
   for(;;) {
     param_00 waittill("trigger", var_01);
     if(isPlayer(var_01)) {
-      var_01 dodamage(15, self.var_116, param_00, param_00, "MOD_EXPLOSIVE", "trap_zm_mp");
+      var_01 dodamage(15, self.origin, param_00, param_00, "MOD_EXPLOSIVE", "trap_zm_mp");
       var_01 lib_0378::func_8D74("trap_cage_damage");
     } else {
       var_01 maps\mp\zombies\_zombies_traps::mark_electrified();
-      var_01 dodamage(var_01.var_BC + 666, self.var_116, param_00, param_00, "MOD_EXPLOSIVE", "trap_zm_mp");
+      var_01 dodamage(var_01.health + 666, self.origin, param_00, param_00, "MOD_EXPLOSIVE", "trap_zm_mp");
       var_01 lib_0378::func_8D74("trap_cage_damage");
-      playFX(common_scripts\utility::func_44F5("tesla_stun_sparks"), self.var_116);
+      playFX(common_scripts\utility::func_44F5("tesla_stun_sparks"), self.origin);
     }
 
     wait(0.5);
@@ -69,7 +69,7 @@ trap_cage_arcs() {
 trap_cage_current() {
   self endon("stop_fx");
   for(;;) {
-    playFX(level.var_611["cage_trap_current"], self.var_116);
+    playFX(level.var_611["cage_trap_current"], self.origin);
     wait(randomfloatrange(0.2, 0.5));
   }
 }
@@ -79,7 +79,7 @@ trap_cage_idle_spark() {
   for(;;) {
     while(!common_scripts\utility::func_3C77("flag_trap_on")) {
       wait(randomfloatrange(3, 5));
-      playFX(level.var_611["tank_trap_sparks"], self.var_116);
+      playFX(level.var_611["tank_trap_sparks"], self.origin);
     }
 
     wait(1);

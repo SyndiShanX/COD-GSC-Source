@@ -18,7 +18,7 @@ func_9303(param_00, param_01, param_02, param_03, param_04) {
     if(isDefined(param_04)) {
       thread func_3216(param_00, var_06, undefined, param_04, param_02, param_04);
     } else {
-      thread func_3216(param_00, var_06, self, self.var_012C["team"], param_02);
+      thread func_3216(param_00, var_06, self, self.pers["team"], param_02);
     }
 
     wait(func_46E0(param_02));
@@ -45,7 +45,7 @@ func_3216(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     }
 
     for(var_0A = 0; var_0A < var_08.size; var_0A++) {
-      if(var_08[var_0A].var_0165 != var_09) {
+      if(var_08[var_0A].script_noteworthy != var_09) {
         var_08[var_0A] = var_08[var_08.size - 1];
         var_08[var_08.size - 1] = undefined;
         var_0A--;
@@ -55,38 +55,38 @@ func_3216(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 
   var_0B = 99999999;
   var_0C = level.var_5FEB + (10000, 10000, 1000);
-  foreach(var_0E in var_09) {
-    var_0F = distance2d(var_0E.var_0116, param_02);
+  foreach(var_0E in var_08) {
+    var_0F = distance2d(var_0E.origin, param_01);
     if(var_0F < var_0B) {
-      var_0C = var_0E.var_0116;
+      var_0C = var_0E.origin;
       var_0B = var_0F;
     }
   }
 
   var_11 = 1;
-  if(maps\mp\_utility::func_579B() && isDefined(param_06) && isDefined(level.var_79C2.var_80B0) && common_scripts\utility::func_562E(level.var_79C2.var_80B0.var_4D10)) {
+  if(maps\mp\_utility::func_579B() && isDefined(param_05) && isDefined(level.var_79C2.var_80B0) && common_scripts\utility::func_562E(level.var_79C2.var_80B0.var_4D10)) {
     var_11 = 0;
   }
 
   var_12 = undefined;
   var_13 = undefined;
   if(var_11) {
-    var_12 = spawnplane("script_model", param_02);
-    var_13 = spawnplane("script_model", param_02);
-    thread func_8C0B(param_05, param_03, var_12, var_13, param_06);
-    if(isDefined(param_03)) {
-      param_03 thread func_624C(var_12, var_13);
+    var_12 = spawnplane("script_model", param_01);
+    var_13 = spawnplane("script_model", param_01);
+    thread func_8C0B(param_04, param_02, var_12, var_13, param_05);
+    if(isDefined(param_02)) {
+      param_02 thread func_624C(var_12, var_13);
     }
   }
 
-  lib_0526::func_280E(param_02, 0, param_05, param_04);
-  thread lib_0526::func_5FCB(param_02, param_05);
+  lib_0526::func_280E(param_01, 0, param_04, param_03);
+  thread lib_0526::func_5FCB(param_01, param_04);
   var_14 = 0;
-  if(isDefined(param_03)) {
-    var_14 = param_03 maps\mp\_utility::func_0649("specialty_improvedstreaks");
+  if(isDefined(param_02)) {
+    var_14 = param_02 maps\mp\_utility::_hasperk("specialty_improvedstreaks");
   }
 
-  var_15 = func_45C0(param_05, var_08, var_14);
+  var_15 = func_45C0(param_04, var_07, var_14);
   var_16 = [];
   for(var_0A = 0; var_0A < var_15; var_0A++) {
     if(var_14) {
@@ -105,45 +105,45 @@ func_3216(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   }
 
   for(var_0A = 0; var_0A < var_15; var_0A++) {
-    var_19 = func_458A(param_05);
-    var_1A = func_458A(param_05);
-    var_1B = func_3B99(param_02[0] + var_19, param_02[1] + var_1A);
+    var_19 = func_458A(param_04);
+    var_1A = func_458A(param_04);
+    var_1B = func_3B99(param_01[0] + var_19, param_01[1] + var_1A);
     var_1C = var_0C;
-    if(isDefined(var_07)) {
-      var_1D = var_07;
+    if(isDefined(param_06)) {
+      var_1D = param_06;
     } else {
-      var_1D = func_458D(param_05, param_04);
+      var_1D = func_458D(param_04, param_03);
     }
 
     var_1E = 2.5;
-    if(var_14 && param_05 == "mortar_strike") {
+    if(var_14 && param_04 == "mortar_strike") {
       var_1E = 1.5;
     }
 
-    var_1F = magicartillery(var_1D, var_1C, var_1B, var_1E, func_4578(), param_03, getdiveheightformap());
-    if(isDefined(param_06)) {
-      var_1F.var_01A7 = param_04;
+    var_1F = magicartillery(var_1D, var_1C, var_1B, var_1E, func_4578(), param_02, getdiveheightformap());
+    if(isDefined(param_05)) {
+      var_1F.team = param_03;
     }
 
-    if(isDefined(var_07) && var_07 == "mortar_strike_projectile_d_day_mp") {
+    if(isDefined(param_06) && param_06 == "mortar_strike_projectile_d_day_mp") {
       var_1F lib_0378::func_8D74("aud_beach_mortar");
     } else {
-      var_1F thread func_4A1F(param_05);
+      var_1F thread func_4A1F(param_04);
     }
 
     if(var_0A + 1 >= var_15) {
-      var_1F thread func_7EBD(param_05, var_12, var_13);
+      var_1F thread func_7EBD(param_04, var_12, var_13);
     }
 
-    if(isDefined(param_03)) {
-      var_1F thread func_624F(param_03);
+    if(isDefined(param_02)) {
+      var_1F thread func_624F(param_02);
     }
 
     wait(var_16[var_0A]);
   }
 
-  if(isDefined(param_03)) {
-    param_03 notify("missileStrikeComplete");
+  if(isDefined(param_02)) {
+    param_02 notify("missileStrikeComplete");
   }
 }
 
@@ -163,7 +163,7 @@ func_3B99(param_00, param_01) {
   var_02 = (param_00, param_01, func_4578());
   var_03 = var_02 + (0, 0, -10000);
   var_04 = bulletTrace(var_02, var_03, 0);
-  for(var_05 = var_04["entity"]; isDefined(var_05) && isDefined(var_05.var_01C8); var_05 = var_04["entity"]) {
+  for(var_05 = var_04["entity"]; isDefined(var_05) && isDefined(var_05.var_1C8); var_05 = var_04["entity"]) {
     var_02 = var_04["position"];
     var_04 = bulletTrace(var_02, var_03, 0, var_05);
   }
@@ -513,7 +513,7 @@ getdiveheightformap() {
 
 func_9E39(param_00, param_01) {
   if(isDefined(self.var_6E6B) && self.var_6E6B) {
-    self iclientprintlnbold(&"KILLSTREAKS_DLC4_CANT_USE_STREAK_WHILE_PARATROOPING");
+    self iprintlnbold(&"KILLSTREAKS_DLC4_CANT_USE_STREAK_WHILE_PARATROOPING");
     return 0;
   }
 
@@ -522,17 +522,17 @@ func_9E39(param_00, param_01) {
     return 0;
   }
 
-  maps\mp\_matchdata::func_5E9A(param_01, self.var_0116);
+  maps\mp\_matchdata::func_5E9A(param_01, self.origin);
   return 1;
 }
 
 func_83BB(param_00, param_01) {
   self endon("stop_location_selection");
   var_02 = 0;
-  var_03 = maps\mp\_utility::func_0649("specialty_improvedstreaks");
+  var_03 = maps\mp\_utility::_hasperk("specialty_improvedstreaks");
   var_04 = func_45C1(param_01, var_03);
   self setclientomnvar("ui_map_location_num_targets", var_04);
-  maps\mp\_utility::func_05D4(param_01, "map_artillery_selector", var_02, func_46C2(param_01), 0.5);
+  maps\mp\_utility::func_5D4(param_01, "map_artillery_selector", var_02, func_46C2(param_01), 0.5);
   thread func_A6AB();
   var_05 = [];
   for(var_06 = 0; var_06 < var_04; var_06++) {
@@ -552,8 +552,8 @@ func_83BB(param_00, param_01) {
     var_05[var_06] = var_07;
   }
 
-  lib_0380::func_6844("mstrike_entry_npc", maps\mp\_utility::func_45DE(self.var_01A7), self);
-  lib_0380::func_6845("mstrike_entry_npc", self.var_01A7, self, self);
+  lib_0380::func_6844("mstrike_entry_npc", maps\mp\_utility::func_45DE(self.team), self);
+  lib_0380::func_6845("mstrike_entry_npc", self.team, self, self);
   self setblurforplayer(0, 0.3);
   self notify("location_selection_complete");
   self setclientomnvar("ui_map_location_num_targets", 0);
@@ -573,8 +573,8 @@ func_A6AB() {
 }
 
 func_46C2(param_00) {
-  if(!isDefined(level.var_5FF0)) {
-    level.var_5FF0 = 1024;
+  if(!isDefined(level.mapsize)) {
+    level.mapsize = 1024;
   }
 
   var_01 = 0;
@@ -592,7 +592,7 @@ func_46C2(param_00) {
       break;
   }
 
-  if(level.var_910F) {
+  if(level.splitscreen) {
     var_01 = var_01 * 1.5;
   }
 

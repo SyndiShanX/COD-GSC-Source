@@ -3,36 +3,36 @@
  * Script: 752.gsc
 *********************************************/
 
-lib_02F0::func_7FE7() {
-  level.var_06B2 = spawnStruct();
-  level.var_06B2.var_061A = [];
-  level.var_06B2.var_0720 = [];
-  level.var_06B2.var_05E5 = [];
-  level.var_06B2.var_05F8 = "entity";
-  level.var_06B2.var_05F7 = 0.05;
-  level.var_06B2.var_0622 = spawn("script_origin", (0, 0, 0));
+func_7FE7() {
+  level.var_6B2 = spawnStruct();
+  level.var_6B2.var_61A = [];
+  level.var_6B2.var_720 = [];
+  level.var_6B2.var_5E5 = [];
+  level.var_6B2.var_5F8 = "entity";
+  level.var_6B2.var_5F7 = 0.05;
+  level.var_6B2.var_622 = spawn("script_origin", (0, 0, 0));
 }
 
 rv_audio_update_entnotify_origin(param_00) {
-  level.var_06B2.var_0622.var_0116 = param_00;
+  level.var_6B2.var_622.origin = param_00;
 }
 
-lib_02F0::func_800B(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = level.var_06B2.var_05F8;
-  var_07 = lib_02F0::func_06C7(var_06, param_00, param_01, param_02, param_03, param_04, param_05);
+func_800B(param_00, param_01, param_02, param_03, param_04, param_05) {
+  var_06 = level.var_6B2.var_5F8;
+  var_07 = func_06C7(var_06, param_00, param_01, param_02, param_03, param_04, param_05);
   return var_07;
 }
 
-lib_02F0::func_800A(param_00, param_01, param_02, param_03) {
-  var_04 = level.var_06B2.var_05F8;
+func_800A(param_00, param_01, param_02, param_03) {
+  var_04 = level.var_6B2.var_5F8;
   var_05 = undefined;
   var_06 = undefined;
   var_07 = param_01;
-  var_08 = lib_02F0::func_06C7(var_04, param_00, var_05, var_06, var_07, param_02, param_03);
+  var_08 = func_06C7(var_04, param_00, var_05, var_06, var_07, param_02, param_03);
   return var_08;
 }
 
-lib_02F0::func_800E(param_00, param_01, param_02) {
+func_800E(param_00, param_01, param_02) {
   if(isDefined(param_00) == 0) {
     return;
   }
@@ -40,69 +40,69 @@ lib_02F0::func_800E(param_00, param_01, param_02) {
   if(isarray(param_00) == 1) {
     foreach(var_04 in param_00) {
       if(function_0279(var_04) == 0) {
-        var_04 thread lib_02F0::func_06C9(var_04, param_01);
+        var_04 thread func_06C9(var_04, param_01);
       }
     }
 
     return;
   }
 
-  param_00 thread lib_02F0::func_06C9(param_00, param_01);
+  param_00 thread func_06C9(param_00, param_01);
 }
 
-lib_02F0::func_800F(param_00, param_01, param_02, param_03) {
-  param_01 thread lib_02F0::func_06CA(param_00, param_01, param_02, param_03);
+func_800F(param_00, param_01, param_02, param_03) {
+  param_01 thread func_06CA(param_00, param_01, param_02, param_03);
 }
 
-lib_02F0::func_8007(param_00) {
+func_8007(param_00) {
   return lib_02EF::func_8AAB(param_00);
 }
 
-lib_02F0::func_800D(param_00, param_01, param_02, param_03, param_04) {
+func_800D(param_00, param_01, param_02, param_03, param_04) {
   param_00 lib_02EF::func_8AAF(param_01, param_02, param_03, param_04);
 }
 
-lib_02F0::func_8005(param_00) {
+func_8005(param_00) {
   return lib_02EF::func_8AAA(param_00);
 }
 
-lib_02F0::func_800C(param_00, param_01, param_02, param_03, param_04) {
+func_800C(param_00, param_01, param_02, param_03, param_04) {
   param_00 lib_02EF::func_8AAC(param_01, param_02, param_03, param_04);
 }
 
-lib_02F0::func_8013(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  param_00 = lib_02F0::func_8015(param_00);
-  var_07 = lib_02F0::func_06C7(param_00, param_01, param_02, param_03, param_04, param_05, param_06);
+func_8013(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+  param_00 = func_8015(param_00);
+  var_07 = func_06C7(param_00, param_01, param_02, param_03, param_04, param_05, param_06);
   return var_07;
 }
 
-lib_02F0::func_8012(param_00, param_01, param_02, param_03, param_04) {
-  param_00 = lib_02F0::func_8015(param_00);
+func_8012(param_00, param_01, param_02, param_03, param_04) {
+  param_00 = func_8015(param_00);
   var_05 = undefined;
   var_06 = undefined;
   var_07 = param_02;
-  var_08 = lib_02F0::func_06C7(param_00, param_01, var_05, var_06, var_07, param_03, param_04);
+  var_08 = func_06C7(param_00, param_01, var_05, var_06, var_07, param_03, param_04);
   return var_08;
 }
 
-lib_02F0::func_8010() {
+func_8010() {
   return "entity";
 }
 
-lib_02F0::func_8011() {
-  return level.var_06B2.var_05F8;
+func_8011() {
+  return level.var_6B2.var_5F8;
 }
 
-lib_02F0::func_8014(param_00) {
+func_8014(param_00) {
   var_01 = undefined;
   if(isDefined(param_00) == 0) {
     param_00 = "entity";
   }
 
-  level.var_06B2.var_05F8 = lib_02F0::func_8015(param_00);
+  level.var_6B2.var_5F8 = func_8015(param_00);
 }
 
-lib_02F0::func_8006(param_00) {
+func_8006(param_00) {
   if(isDefined(param_00.var_8F4E) == 1) {
     return param_00.var_8F4E;
   }
@@ -110,7 +110,7 @@ lib_02F0::func_8006(param_00) {
   return "";
 }
 
-lib_02F0::func_8015(param_00) {
+func_8015(param_00) {
   var_01 = undefined;
   switch (param_00) {
     case 0:
@@ -149,16 +149,16 @@ lib_02F0::func_8015(param_00) {
   return var_01;
 }
 
-lib_02F0::func_06B5(param_00, param_01) {}
+func_06B5(param_00, param_01) {}
 
-lib_02F0::func_06B4(param_00, param_01) {}
+func_06B4(param_00, param_01) {}
 
-lib_02F0::func_06B3() {
+func_06B3() {
   var_00 = self.var_8F4E;
   self waittill("death");
 }
 
-lib_02F0::func_06BE(param_00, param_01, param_02, param_03) {
+func_06BE(param_00, param_01, param_02, param_03) {
   if(isDefined(param_02) == 1) {
     param_03 = param_02 lib_02EF::func_46BD(param_03);
     var_04 = (0, 0, 0);
@@ -171,7 +171,7 @@ lib_02F0::func_06BE(param_00, param_01, param_02, param_03) {
   }
 }
 
-lib_02F0::func_06BC(param_00, param_01, param_02, param_03, param_04, param_05) {
+func_06BC(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = undefined;
   var_07 = undefined;
   var_08 = 0;
@@ -181,7 +181,7 @@ lib_02F0::func_06BC(param_00, param_01, param_02, param_03, param_04, param_05) 
   } else if(isDefined(param_02) == 1 && isDefined(param_03) == 1) {
     var_07 = param_02 gettagorigin(param_03);
   } else if(isDefined(param_02) == 1) {
-    var_07 = param_02.var_0116;
+    var_07 = param_02.origin;
   } else if(isDefined(param_02) == 0 && isDefined(param_01) == 0) {
     var_07 = (-32768, -32768, -32768);
   } else {
@@ -189,19 +189,19 @@ lib_02F0::func_06BC(param_00, param_01, param_02, param_03, param_04, param_05) 
   }
 
   var_06 = spawn("script_origin", var_07);
-  lib_02F0::func_06BE(var_06, param_01, param_02, param_03);
+  func_06BE(var_06, param_01, param_02, param_03);
   var_06.var_8F45 = param_02;
   var_06.var_8F4E = "entity";
   return var_06;
 }
 
-lib_02F0::func_06BD(param_00) {
+func_06BD(param_00) {
   if(isDefined(param_00) == 1 && function_0279(param_00) == 0) {
     param_00 delete();
   }
 }
 
-lib_02F0::func_06BF(param_00, param_01, param_02, param_03) {
+func_06BF(param_00, param_01, param_02, param_03) {
   var_04 = param_00;
   var_05 = undefined;
   if(isDefined(param_00.var_8F45) == 1) {
@@ -211,7 +211,7 @@ lib_02F0::func_06BF(param_00, param_01, param_02, param_03) {
     }
   }
 
-  var_05 = lib_02F0::func_8007(var_04);
+  var_05 = func_8007(var_04);
   if(isDefined(param_02) == 0 && isDefined(var_05) == 1) {
     param_02 = var_05;
   }
@@ -220,29 +220,29 @@ lib_02F0::func_06BF(param_00, param_01, param_02, param_03) {
     var_04 method_861D(param_01, param_02);
   } else {
     var_06 = "sounddone";
-    var_04 method_8617(param_01, var_06, undefined, undefined, undefined, param_02);
+    var_04 playSound(param_01, var_06, undefined, undefined, undefined, param_02);
     var_07 = getsndaliasvalue(param_01, "secondaryaliasname");
     if(isDefined(var_07) == 1 && var_07 != "") {
-      var_04 thread lib_02F0::func_06C1(param_01);
+      var_04 thread func_06C1(param_01);
     } else {
-      var_04 thread lib_02F0::func_06C2(var_06);
+      var_04 thread func_06C2(var_06);
     }
   }
 
-  var_06.var_8F3E = param_03;
+  var_04.var_8F3E = param_01;
 }
 
-lib_02F0::func_06C0(param_00) {
+func_06C0(param_00) {
   param_00 endon("death");
   var_01 = param_00;
   if(isDefined(var_01) == 1 && function_0279(var_01) == 0) {
     var_01 method_8614();
     wait 0.05;
-    lib_02F0::func_06BD(var_01);
+    func_06BD(var_01);
   }
 }
 
-lib_02F0::func_06C1(param_00) {
+func_06C1(param_00) {
   var_01 = self;
   var_01 endon("death");
   var_02 = lookupsoundlength(param_00);
@@ -252,17 +252,17 @@ lib_02F0::func_06C1(param_00) {
   }
 
   wait(var_02);
-  lib_02F0::func_06BD(var_01);
+  func_06BD(var_01);
 }
 
-lib_02F0::func_06C2(param_00) {
+func_06C2(param_00) {
   var_01 = self;
   var_01 endon("death");
   var_01 waittill(param_00);
-  lib_02F0::func_06BD(var_01);
+  func_06BD(var_01);
 }
 
-lib_02F0::func_06C3(param_00, param_01, param_02, param_03, param_04, param_05) {
+func_06C3(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = 1;
   var_07 = 0;
   if(isDefined(param_04) == 0) {
@@ -279,7 +279,7 @@ lib_02F0::func_06C3(param_00, param_01, param_02, param_03, param_04, param_05) 
   return var_08;
 }
 
-lib_02F0::func_06C4(param_00, param_01, param_02, param_03) {
+func_06C4(param_00, param_01, param_02, param_03) {
   if(isDefined(param_03) == 0) {
     param_03 = lib_02EF::func_4625();
   }
@@ -288,7 +288,7 @@ lib_02F0::func_06C4(param_00, param_01, param_02, param_03) {
   param_00.var_8F3E = param_01;
 }
 
-lib_02F0::func_06C5(param_00) {
+func_06C5(param_00) {
   var_01 = param_00;
   if(isDefined(var_01) == 1) {
     var_02 = 0;
@@ -296,7 +296,7 @@ lib_02F0::func_06C5(param_00) {
   }
 }
 
-lib_02F0::func_06B9(param_00, param_01) {
+func_06B9(param_00, param_01) {
   var_02 = param_01.var_8F4E;
   var_03 = param_01.var_4983;
   var_04 = "_rvsnd_clientsnd_notify_" + var_03;
@@ -306,7 +306,7 @@ lib_02F0::func_06B9(param_00, param_01) {
   param_01 notify("death");
 }
 
-lib_02F0::func_06B8(param_00, param_01, param_02, param_03, param_04, param_05) {
+func_06B8(param_00, param_01, param_02, param_03, param_04, param_05) {
   if(isDefined(param_01) == 0) {
     param_01 = (0, 0, 0);
   }
@@ -315,7 +315,7 @@ lib_02F0::func_06B8(param_00, param_01, param_02, param_03, param_04, param_05) 
     param_03 = param_02 lib_02EF::func_46BD(param_03);
     var_06 = param_02 gettagorigin(param_03);
     if(isDefined(var_06) == 1) {
-      param_01 = var_06 - param_02.var_0116;
+      param_01 = var_06 - param_02.origin;
     }
   }
 
@@ -326,7 +326,7 @@ lib_02F0::func_06B8(param_00, param_01, param_02, param_03, param_04, param_05) 
   return var_07;
 }
 
-lib_02F0::func_06BA(param_00, param_01, param_02, param_03) {
+func_06BA(param_00, param_01, param_02, param_03) {
   var_04 = param_00.var_8F49;
   var_05 = param_00.var_8F45;
   var_06 = param_00.var_8F44;
@@ -363,7 +363,7 @@ lib_02F0::func_06BA(param_00, param_01, param_02, param_03) {
   return param_00;
 }
 
-lib_02F0::func_06BB(param_00) {
+func_06BB(param_00) {
   if(isDefined(param_00) == 1 && isDefined(param_00.var_4983) == 1) {
     var_01 = 0;
     stopclientsound(param_00.var_4983, var_01);
@@ -371,7 +371,7 @@ lib_02F0::func_06BB(param_00) {
   }
 }
 
-lib_02F0::func_06C7(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+func_06C7(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   var_07 = undefined;
   var_08 = param_04;
   var_09 = undefined;
@@ -379,13 +379,13 @@ lib_02F0::func_06C7(param_00, param_01, param_02, param_03, param_04, param_05, 
     return undefined;
   }
 
-  if(isDefined(level.var_06B2.var_05F8) == 0) {
-    param_00 = level.var_06B2.var_05F8;
+  if(isDefined(level.var_6B2.var_5F8) == 0) {
+    param_00 = level.var_6B2.var_5F8;
   }
 
   if(isDefined(param_05) == 0) {
     if(issoundaliaslooping(param_01) == 1) {
-      param_05 = level.var_06B2.var_05F7;
+      param_05 = level.var_6B2.var_5F7;
     } else {
       param_05 = 0;
     }
@@ -398,18 +398,18 @@ lib_02F0::func_06C7(param_00, param_01, param_02, param_03, param_04, param_05, 
   switch (param_00) {
     case "entity":
     default:
-      var_07 = lib_02F0::func_06BC(param_01, var_08, param_02, param_03, var_09, param_06);
-      var_07 thread lib_02F0::func_06BF(var_07, param_01, var_09, param_06);
+      var_07 = func_06BC(param_01, var_08, param_02, param_03, var_09, param_06);
+      var_07 thread func_06BF(var_07, param_01, var_09, param_06);
       break;
 
     case "sndentity":
-      var_07 = lib_02F0::func_06C3(param_01, var_08, param_02, param_03, var_09, param_06);
-      var_07 thread lib_02F0::func_06C4(var_07, param_01, var_09, param_06);
+      var_07 = func_06C3(param_01, var_08, param_02, param_03, var_09, param_06);
+      var_07 thread func_06C4(var_07, param_01, var_09, param_06);
       break;
 
     case "clientsnd":
-      var_07 = lib_02F0::func_06B8(param_01, var_08, param_02, param_03, var_09, param_06);
-      var_07 = lib_02F0::func_06BA(var_07, param_01, var_09, param_06);
+      var_07 = func_06B8(param_01, var_08, param_02, param_03, var_09, param_06);
+      var_07 = func_06BA(var_07, param_01, var_09, param_06);
       break;
   }
 
@@ -419,22 +419,22 @@ lib_02F0::func_06C7(param_00, param_01, param_02, param_03, param_04, param_05, 
       var_0B = 0.05;
     }
 
-    var_07 thread lib_02F0::func_06C8(var_07, param_05, var_0B);
+    var_07 thread func_06C8(var_07, param_05, var_0B);
   }
 
   return var_07;
 }
 
-lib_02F0::func_06C9(param_00, param_01) {
+func_06C9(param_00, param_01) {
   param_00 endon("death");
   var_02 = param_00.var_8F4E;
   var_03 = param_00.var_8F3E;
   if(isDefined(var_03) == 1 && issoundaliaslooping(param_00.var_8F3E) == 1 && isDefined(param_01) == 0) {
-    param_01 = level.var_06B2.var_05F7;
+    param_01 = level.var_6B2.var_5F7;
   }
 
   if(isDefined(param_01) == 1) {
-    lib_02F0::func_800D(param_00, 0, param_01);
+    func_800D(param_00, 0, param_01);
     wait(param_01 + 0.05);
     if(function_0279(param_00) == 1) {
       return;
@@ -446,27 +446,27 @@ lib_02F0::func_06C9(param_00, param_01) {
   switch (var_02) {
     case "entity":
     default:
-      lib_02F0::func_06C0(param_00);
+      func_06C0(param_00);
       break;
 
     case "sndentity":
-      lib_02F0::func_06C5(param_00);
+      func_06C5(param_00);
       break;
 
     case "clientsnd":
-      lib_02F0::func_06BB(param_00);
+      func_06BB(param_00);
       break;
   }
 }
 
-lib_02F0::func_06CA(param_00, param_01, param_02, param_03) {
+func_06CA(param_00, param_01, param_02, param_03) {
   param_00 endon("death");
-  param_01 common_scripts\utility::func_A70A("death", "deleted");
-  lib_02F0::func_06C9(param_00, param_02);
+  param_01 common_scripts\utility::waittill_any("death", "deleted");
+  func_06C9(param_00, param_02);
 }
 
-lib_02F0::func_06C8(param_00, param_01, param_02) {
-  lib_02F0::func_800D(param_00, 0, 0);
+func_06C8(param_00, param_01, param_02) {
+  func_800D(param_00, 0, 0);
   if(isDefined(param_02) == 1 && param_02 > 0) {
     param_00 endon("rvSndAbortInitialFadeIn");
     wait(param_02);
@@ -474,11 +474,11 @@ lib_02F0::func_06C8(param_00, param_01, param_02) {
   }
 
   if(isDefined(param_00) && !function_0279(param_00)) {
-    lib_02F0::func_800D(param_00, 1, param_01);
+    func_800D(param_00, 1, param_01);
   }
 }
 
-lib_02F0::func_8009(param_00, param_01, param_02, param_03) {
+func_8009(param_00, param_01, param_02, param_03) {
   var_04 = self;
   if(isDefined(param_02) == 0) {
     param_02 = 0;
@@ -512,7 +512,7 @@ lib_02F0::func_8009(param_00, param_01, param_02, param_03) {
   }
 }
 
-lib_02F0::func_8008(param_00) {
+func_8008(param_00) {
   if(isDefined(param_00) == 1 && isDefined(param_00.var_8F4E) == 1) {
     switch (param_00.var_8F4E) {
       default:

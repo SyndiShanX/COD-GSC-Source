@@ -3,7 +3,7 @@
  * Script: maps\mp\bots\_bots_gametype_scorestreak_training.gsc
 ****************************************************************/
 
-func_00F9() {
+main() {
   func_87A7();
 }
 

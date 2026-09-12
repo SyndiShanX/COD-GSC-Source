@@ -9,17 +9,17 @@ map_start_utilities() {
 }
 
 ambient_lightning_strikes() {
-  while(!isDefined(level.var_744A) || level.var_744A.size < 1) {
+  while(!isDefined(level.players) || level.players.size < 1) {
     wait 0.05;
   }
 
   wait(5);
-  var_00 = spawn("script_model", level.var_744A[0].var_116 + (0, 0, 4900));
+  var_00 = spawn("script_model", level.players[0].origin + (0, 0, 4900));
   var_00 setModel("tag_origin");
-  var_00.var_1D = var_00.var_1D + (90, 0, 0);
-  var_01 = spawn("script_model", level.var_744A[0].var_116 - (0, 0, 100));
+  var_00.angles = var_00.angles + (90, 0, 0);
+  var_01 = spawn("script_model", level.players[0].origin - (0, 0, 100));
   var_01 setModel("tag_origin");
-  var_01.var_1D = var_01.var_1D + (-90, 0, 0);
+  var_01.angles = var_01.angles + (-90, 0, 0);
   var_01 method_8449(var_00);
   var_02 = getEntArray("lightning_strike_vol", "targetname");
   var_03 = 4900;
@@ -33,8 +33,8 @@ ambient_lightning_strikes() {
       continue;
     }
 
-    var_00.var_116 = var_05 + (0, 0, var_03);
-    var_00.var_1D = (var_00.var_1D[0], var_00.var_1D[1] + randomintrange(45, 315), var_00.var_1D[2]);
+    var_00.origin = var_05 + (0, 0, var_03);
+    var_00.angles = (var_00.angles[0], var_00.angles[1] + randomintrange(45, 315), var_00.angles[2]);
     wait 0.05;
     var_06 = launchbeam("zmb_wm_lightning_beam", var_00, "tag_origin", var_01, "tag_origin");
     var_06 common_scripts\utility::func_2CBE(randomfloatrange(0.15, 0.25), ::delete);
@@ -42,17 +42,17 @@ ambient_lightning_strikes() {
 }
 
 ambient_lightning_strikes_forvfx() {
-  while(!isDefined(level.var_744A) || level.var_744A.size < 1) {
+  while(!isDefined(level.players) || level.players.size < 1) {
     wait 0.05;
   }
 
   wait(5);
-  var_00 = spawn("script_model", level.var_744A[0].var_116 + (0, 0, 4900));
+  var_00 = spawn("script_model", level.players[0].origin + (0, 0, 4900));
   var_00 setModel("tag_origin");
-  var_00.var_1D = var_00.var_1D + (90, 0, 0);
-  var_01 = spawn("script_model", level.var_744A[0].var_116 - (0, 0, 0));
+  var_00.angles = var_00.angles + (90, 0, 0);
+  var_01 = spawn("script_model", level.players[0].origin - (0, 0, 0));
   var_01 setModel("tag_origin");
-  var_01.var_1D = var_01.var_1D + (-90, 0, 0);
+  var_01.angles = var_01.angles + (-90, 0, 0);
   wait 0.05;
   wait 0.05;
   var_01 method_8449(var_00);
@@ -72,13 +72,13 @@ ambient_lightning_strikes_forvfx() {
       continue;
     }
 
-    var_00.var_116 = var_04 + (0, 0, var_03);
-    var_00.var_1D = (var_00.var_1D[0], var_00.var_1D[1] + randomintrange(45, 315), var_00.var_1D[2]);
+    var_00.origin = var_04 + (0, 0, var_03);
+    var_00.angles = (var_00.angles[0], var_00.angles[1] + randomintrange(45, 315), var_00.angles[2]);
     wait 0.05;
     var_05 = launchbeam("zmb_wm_lightning_beam", var_00, "tag_origin", var_01, "tag_origin");
     playFXOnTag(level.var_611["zmb_wm_lightning_impact_base_rnr"], var_01, "tag_origin");
     if(getdvarint("snd_zmb_debug_lighting_strike")) {
-      lib_0378::func_8D74("lightning_strike", var_00.var_116, var_04);
+      lib_0378::func_8D74("lightning_strike", var_00.origin, var_04);
     }
 
     var_05 common_scripts\utility::func_2CBE(randomfloatrange(0.15, 0.25), ::delete);
@@ -94,7 +94,7 @@ spawn_frank() {
     level.var_1CC0 = var_01;
     level.frank_dudebroman.var_57E8 = 1;
     level.frank_dudebroman.var_55AB = 1;
-    level.frank_dudebroman.waypoints = var_00 maps\mp\zombies\sg_events_v1\very_important_zombie::basic_vip_get_waypoints(level.frank_dudebroman);
+    level.frank_dudebroman.waypoints = var_00 maps / mp / zombies / sg_events_v1 / very_important_zombie::basic_vip_get_waypoints(level.frank_dudebroman);
     level.frank_dudebroman.var_1928 = level.frank_dudebroman.waypoints[0];
     level.frank_dudebroman.var_6701 = 1;
     level.frank_dudebroman.var_55AB = 1;
@@ -103,16 +103,16 @@ spawn_frank() {
     level.frank_dudebroman.shouldnotpreventlaststand = 1;
     level.frank_dudebroman.var_6816 = 1;
     level.frank_dudebroman.var_C29 = 0;
-    level.frank_dudebroman.var_297D = ::maps\mp\zombies\sg_events_v1\very_important_zombie::basic_vip_custom_movemode_walk;
+    level.frank_dudebroman.var_297D = ::maps / mp / zombies / sg_events_v1 / very_important_zombie::basic_vip_custom_movemode_walk;
     level.frank_dudebroman.failsafe_exempt = 1;
-    level.frank_dudebroman.var_CF = 1;
+    level.frank_dudebroman.ignorenpcs = 1;
     level.frank_dudebroman.var_480F = 1;
-    level.frank_dudebroman.var_CE = 1;
+    level.frank_dudebroman.ignoreme = 1;
     level.frank_dudebroman.var_509A = 1;
     level.frank_dudebroman.var_5748 = 1;
     level.frank_dudebroman.nomutilate = 1;
-    level.frank_dudebroman maps\mp\agents\_agent_utility::func_83FE(level.var_746E);
-    level.frank_dudebroman maps\mp\agents\_agent_common::func_83FD(level.frank_escort_health);
+    level.frank_dudebroman maps / mp / agents / _agent_utility::func_83FE(level.var_746E);
+    level.frank_dudebroman maps / mp / agents / _agent_common::func_83FD(level.frank_escort_health);
   }
 }
 
@@ -168,7 +168,7 @@ windmill_part_slow_to_stop() {
 
 windmill_play_anim_on_gear() {
   var_00 = self;
-  var_01 = "dun_windmill_combat_windmill_gear_0" + var_00.var_165;
+  var_01 = "dun_windmill_combat_windmill_gear_0" + var_00.script_noteworthy;
   var_00.anim_rate = 0.05;
   var_00.previous_anim_rate = 0.05;
   var_00.total_anim_time = 10.36667;
@@ -237,8 +237,8 @@ windmill_rotateby_accelerate_to_speed(param_00, param_01, param_02) {
     lib_0378::func_8D74("stop_windmill", var_07);
     wait(var_07);
     var_09 = var_06 / 2;
-    var_0A = self.var_1D[0];
-    var_0B = abs(var_03.var_1D[0] % var_09);
+    var_0A = self.angles[0];
+    var_0B = abs(var_03.angles[0] % var_09);
     if(var_0B < var_09 / 2) {
       var_0B = var_0B + var_09;
     }
@@ -250,7 +250,7 @@ windmill_rotateby_accelerate_to_speed(param_00, param_01, param_02) {
     wait(var_0C / 2);
     var_0D = var_0A - var_0B;
     var_0D = var_0D % 360;
-    self.var_1D = (var_0D, self.var_1D[1], self.var_1D[2]);
+    self.angles = (var_0D, self.angles[1], self.angles[2]);
   }
 
   var_03.current_speed = param_00;
@@ -265,7 +265,7 @@ func_8C92() {
   level.var_ABEC maps\mp\_utility::func_5DC7();
   level.var_ABED maps\mp\_utility::func_5DC7();
   level.var_AC12 maps\mp\_utility::func_5DC7();
-  var_00 = maps\mp\agents\_agent_utility::func_43FD("all");
+  var_00 = maps / mp / agents / _agent_utility::func_43FD("all");
   foreach(var_02 in var_00) {
     if(lib_0547::func_5565(var_02.var_A4B, "zombie_boss_village")) {
       continue;
@@ -293,7 +293,7 @@ vo_master_handler() {
   level.objective_round_intermission = 30;
   level.regular_round_intermission = 20;
   thread vo_character_connected_to_game_handler();
-  while(!isDefined(level.var_721C) || level.var_744A.size <= 0) {
+  while(!isDefined(level.player) || level.players.size <= 0) {
     wait 0.05;
   }
 
@@ -318,7 +318,7 @@ vo_can_character_speak(param_00) {
     return 0;
   }
 
-  if(lib_0547::func_5565(param_00.var_178, "spectator") || lib_0547::func_5565(param_00.var_178, "dead")) {
+  if(lib_0547::func_5565(param_00.sessionstate, "spectator") || lib_0547::func_5565(param_00.sessionstate, "dead")) {
     return 0;
   }
 
@@ -330,7 +330,7 @@ vo_play_line_safe(param_00, param_01) {
     return 0;
   }
 
-  param_00 lib_0378::func_307E(param_01, level.var_744A, undefined, 0);
+  param_00 lib_0378::func_307E(param_01, level.players, undefined, 0);
   return 1;
 }
 
@@ -387,15 +387,15 @@ vo_round01_start() {
       return;
     }
 
-    if(level.var_744A.size > 1) {
-      var_00 lib_0378::func_307E("zmb_bp_wind_ride_alrightlistenuprecruitsye", level.var_744A, undefined, 0);
+    if(level.players.size > 1) {
+      var_00 lib_0378::func_307E("zmb_bp_wind_ride_alrightlistenuprecruitsye", level.players, undefined, 0);
       return;
     }
 
     return;
   }
 
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_vo_util::play_global_vo("zmb_bp_wind_ride_alrightlistenuprecruitsye", 1, 1);
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_vo_util::play_global_vo("zmb_bp_wind_ride_alrightlistenuprecruitsye", 1, 1);
 }
 
 vo_round01_end() {
@@ -441,15 +441,15 @@ vo_round01_end() {
       return;
     }
 
-    if(level.var_744A.size > 1) {
-      var_01 lib_0378::func_307E("zmb_bp_wind_ride_idontknowifthiswasanambus", level.var_744A, undefined, 0);
+    if(level.players.size > 1) {
+      var_01 lib_0378::func_307E("zmb_bp_wind_ride_idontknowifthiswasanambus", level.players, undefined, 0);
       return;
     }
 
     return;
   }
 
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_vo_util::play_global_vo("zmb_bp_wind_ride_idontknowifthiswasanambus", 1, 1);
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_vo_util::play_global_vo("zmb_bp_wind_ride_idontknowifthiswasanambus", 1, 1);
 }
 
 vo_round04_end() {
@@ -529,7 +529,7 @@ vo_round09_end() {
   var_03 = vo_get_character_if_present("hunt");
   wait(10);
   if(vo_characters_are_defined([var_01])) {
-    if(level.var_744A.size > 1) {
+    if(level.players.size > 1) {
       var_04 = vo_play_line_safe(var_01, "zmb_bp_wind_mount_idonotthinkwearedonehere");
       if(vo_characters_are_defined([var_00])) {
         if(var_04) {
@@ -541,12 +541,12 @@ vo_round09_end() {
 
   vo_waitfor_start_of_round_number(10);
   wait(4);
-  if(vo_characters_are_defined([var_02]) && level.var_744A.size > 1) {
-    var_02 lib_0378::func_307E("zmb_bp_wind_bata_itmusthaveanuberschnalleb", level.var_744A, undefined, 0);
+  if(vo_characters_are_defined([var_02]) && level.players.size > 1) {
+    var_02 lib_0378::func_307E("zmb_bp_wind_bata_itmusthaveanuberschnalleb", level.players, undefined, 0);
   }
 
-  if(vo_characters_are_defined([var_03]) && level.var_744A.size > 1) {
-    var_03 lib_0378::func_307E("zmb_bp_wind_hunt_carajooursmallarmscantbre", level.var_744A, undefined, 0);
+  if(vo_characters_are_defined([var_03]) && level.players.size > 1) {
+    var_03 lib_0378::func_307E("zmb_bp_wind_hunt_carajooursmallarmscantbre", level.players, undefined, 0);
   }
 }
 
@@ -565,15 +565,15 @@ vo_round10_end() {
       if(var_03) {
         var_03 = vo_play_line_safe(var_00, "zmb_bp_wind_ride_strongworkharrishavedelto");
       }
-    } else if(level.var_744A.size > 1) {
-      var_00 lib_0378::func_307E("zmb_bp_wind_ride_welldonehurrynowletsgetlo", level.var_744A, undefined, 0);
+    } else if(level.players.size > 1) {
+      var_00 lib_0378::func_307E("zmb_bp_wind_ride_welldonehurrynowletsgetlo", level.players, undefined, 0);
     }
   }
 
   vo_waitfor_start_of_round_number(11);
   wait(3);
-  if(vo_characters_are_defined([var_02]) && level.var_744A.size > 1) {
-    var_02 lib_0378::func_307E("zmb_bp_wind_slay_itwouldappearwearenotleav", level.var_744A, undefined, 0);
+  if(vo_characters_are_defined([var_02]) && level.players.size > 1) {
+    var_02 lib_0378::func_307E("zmb_bp_wind_slay_itwouldappearwearenotleav", level.players, undefined, 0);
   }
 }
 
@@ -585,7 +585,7 @@ vo_round11_end() {
   var_00 = vo_get_character_if_present("ride");
   var_01 = vo_get_character_if_present("bata");
   if(vo_characters_are_defined([var_00])) {
-    if(level.var_744A.size > 1) {
+    if(level.players.size > 1) {
       var_02 = vo_play_line_safe(var_00, "zmb_bp_wind_ride_alrightletsgetontheroadim");
       if(vo_characters_are_defined([var_01])) {
         if(var_02) {
@@ -607,7 +607,7 @@ vo_round11_end() {
     return;
   }
 
-  level thread maps\mp\zombies\shotgun\_zombies_shotgun_vo_util::play_global_vo("zmb_bp_wind_ride_alrightletsgetontheroadim", 1, 1);
+  level thread maps / mp / zombies / shotgun / _zombies_shotgun_vo_util::play_global_vo("zmb_bp_wind_ride_alrightletsgetontheroadim", 1, 1);
 }
 
 vo_character_connected_to_game_handler() {
@@ -644,7 +644,7 @@ vo_get_character_if_present(param_00) {
       break;
   }
 
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(vo_check_index_against_character(var_03.var_20D8, var_01)) {
       return var_03;
     }
@@ -731,7 +731,7 @@ vo_characters_are_defined(param_00) {
       return 0;
     }
 
-    if(var_02.var_178 == "spectator" || var_02.var_178 == "dead") {
+    if(var_02.sessionstate == "spectator" || var_02.sessionstate == "dead") {
       return 0;
     }
   }

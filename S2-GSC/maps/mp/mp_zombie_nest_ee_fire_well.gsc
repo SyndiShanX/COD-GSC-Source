@@ -11,7 +11,7 @@ func_418E() {
   return "fire trap active";
 }
 
-func_00F9() {
+main() {
   var_00 = ["start_to_gallows", "gallows_to_riverside"];
   lib_0557::func_7846("explore village", ::lib_0557::func_30D8, [], &"ZOMBIE_NEST_HINT_QUEST_VILLAGE", "ZOMBIE_NEST_HINT_QUEST_VILLAGE");
   lib_0557::func_781E("explore village", "find bunker entrance", ::func_7830, ::lib_0557::func_30D8, &"ZOMBIE_NEST_HINT_STEP_LOCATE_BUNKER_ENT");
@@ -59,7 +59,7 @@ func_785E() {
       var_05[var_05.size] = var_07.var_6298;
     }
 
-    var_09 = common_scripts\utility::func_0F73(var_05, var_00.var_8301);
+    var_09 = common_scripts\utility::func_F73(var_05, var_00.var_8301);
     var_03 = lib_0557::func_782F(undefined, var_09);
     lib_0557::func_781D("explore village", var_03);
   }
@@ -83,7 +83,7 @@ func_785E() {
     var_0D = func_A776([var_00, var_01, var_02]);
     thread func_1DA7();
     thread func_1DA5();
-    level thread common_scripts\_exploder::func_088E(209);
+    level thread common_scripts\_exploder::func_88E(209);
   }
 
   lib_0557::func_782D("explore village", "Restore Bunker Door Power");
@@ -124,7 +124,7 @@ func_680E() {
 }
 
 func_1DA5() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 maps\mp\zombies\_zombies_rank::func_AC23("bunker");
     var_01 lib_0378::func_8D74("objective_complete", "bunker");
   }
@@ -136,20 +136,20 @@ func_44F7() {
 
 func_AA06() {
   var_00 = getEnt("well_clip_bottom", "script_noteworthy");
-  var_00.var_0116 = var_00.var_0116 + (0, 0, 128);
+  var_00.origin = var_00.origin + (0, 0, 128);
   var_00.var_50D0 = 0;
   wait 0.05;
   var_00 notsolid();
   var_01 = getEnt("well_clip_top_plug", "script_noteworthy");
-  var_01.var_0116 = var_01.var_0116 + (0, 0, -128);
+  var_01.origin = var_01.origin + (0, 0, -128);
   var_01.var_50D0 = 1;
   wait 0.05;
   var_01 method_805F();
   var_02 = getEnt("well_clip_door", "script_noteworthy");
-  var_02.var_0116 = var_02.var_0116 + (0, 0, -128);
+  var_02.origin = var_02.origin + (0, 0, -128);
   var_02.var_50D0 = 1;
   var_03 = getEnt("well_clip_door_ai", "script_noteworthy");
-  var_03.var_0116 = var_03.var_0116 + (0, 0, -128);
+  var_03.origin = var_03.origin + (0, 0, -128);
   var_03.var_50D0 = 1;
   wait 0.05;
   var_03 method_805F();
@@ -173,7 +173,7 @@ func_AA05() {
 func_AA04() {
   var_00 = getEnt("well_clip_bottom", "script_noteworthy");
   if(!var_00.var_50D0) {
-    var_00.var_0116 = var_00.var_0116 + (0, 0, -128);
+    var_00.origin = var_00.origin + (0, 0, -128);
     var_00.var_50D0 = 1;
   }
 
@@ -190,7 +190,7 @@ func_AA04() {
 func_AA07() {
   var_00 = getEnt("well_clip_bottom", "script_noteworthy");
   if(!var_00.var_50D0) {
-    var_00.var_0116 = var_00.var_0116 + (0, 0, -128);
+    var_00.origin = var_00.origin + (0, 0, -128);
     var_00.var_50D0 = 1;
   }
 
@@ -221,7 +221,7 @@ func_0985() {
   var_00 = self;
   var_01 = undefined;
   if(0) {
-    var_01 = lib_0557::func_782F(var_00.var_0116 + (0, 0, 46), [var_00]);
+    var_01 = lib_0557::func_782F(var_00.origin + (0, 0, 46), [var_00]);
     lib_0557::func_781D("1 fire well", var_01);
   }
 
@@ -262,9 +262,9 @@ func_7855() {
   var_00 = ["fuel_valve_1", "fuel_valve_2", "fuel_valve_3"];
   level.var_3EFB = [];
   foreach(var_02 in level.var_A2A0) {
-    if(lib_0547::func_5565(var_02.var_01A5, "fuel_valve")) {
+    if(lib_0547::func_5565(var_02.targetname, "fuel_valve")) {
       var_02 thread func_A29E();
-      level.var_3EFB = common_scripts\utility::func_0F6F(level.var_3EFB, var_02);
+      level.var_3EFB = common_scripts\utility::func_F6F(level.var_3EFB, var_02);
     }
   }
 
@@ -300,29 +300,29 @@ func_A29E() {
   var_00 = self;
   var_01 = common_scripts\utility::func_46B7("gas_vfx", "script_noteworthy");
   var_02 = common_scripts\utility::func_46B7("indicator_light_vfx", "script_noteworthy");
-  var_03 = common_scripts\utility::func_4461(self.var_0116, var_02);
+  var_03 = common_scripts\utility::func_4461(self.origin, var_02);
   var_04 = common_scripts\utility::func_46B7("indicator_light_vfx_top", "script_noteworthy");
-  var_05 = common_scripts\utility::func_4461(self.var_0116, var_04);
-  var_06 = spawnfx(common_scripts\utility::func_44F5("zmb_nest_generator_light_red"), var_03.var_0116, anglesToForward(var_03.var_001D), anglestoup(var_03.var_001D));
-  var_07 = spawnfx(common_scripts\utility::func_44F5("zmb_nest_generator_bulb_red"), var_05.var_0116, anglesToForward(var_05.var_001D), anglestoup(var_05.var_001D));
+  var_05 = common_scripts\utility::func_4461(self.origin, var_04);
+  var_06 = spawnfx(common_scripts\utility::func_44F5("zmb_nest_generator_light_red"), var_03.origin, anglesToForward(var_03.angles), anglestoup(var_03.angles));
+  var_07 = spawnfx(common_scripts\utility::func_44F5("zmb_nest_generator_bulb_red"), var_05.origin, anglesToForward(var_05.angles), anglestoup(var_05.angles));
   triggerfx(var_06, 0.5);
   triggerfx(var_07, 0.5);
   common_scripts\utility::func_3C9F(self.var_819A);
   var_06 delete();
   var_07 delete();
-  var_06 = spawnfx(common_scripts\utility::func_44F5("zmb_nest_generator_light_green"), var_03.var_0116, anglesToForward(var_03.var_001D), anglestoup(var_03.var_001D));
-  var_07 = spawnfx(common_scripts\utility::func_44F5("zmb_nest_generator_bulb_green"), var_05.var_0116, anglesToForward(var_05.var_001D), anglestoup(var_05.var_001D));
+  var_06 = spawnfx(common_scripts\utility::func_44F5("zmb_nest_generator_light_green"), var_03.origin, anglesToForward(var_03.angles), anglestoup(var_03.angles));
+  var_07 = spawnfx(common_scripts\utility::func_44F5("zmb_nest_generator_bulb_green"), var_05.origin, anglesToForward(var_05.angles), anglestoup(var_05.angles));
   triggerfx(var_06);
   triggerfx(var_07);
 }
 
 func_7854() {
   if(!isDefined(level.var_6FEB)) {
-    level.var_6FEB = level.var_721C;
+    level.var_6FEB = level.player;
   }
 
   var_00 = common_scripts\utility::func_46B7("well_explosion", "script_noteworthy");
-  var_01 = var_00[0].var_0116;
+  var_01 = var_00[0].origin;
   lib_0378::func_8D74("well_explosion_ignite", var_01);
   wait(0.4);
   lib_0378::func_8D74("well_explosion", var_01);
@@ -341,15 +341,15 @@ func_7854() {
   thread func_3BEA();
   if(!common_scripts\utility::func_562E(level.var_6659)) {
     foreach(var_03 in var_00) {
-      earthquake(0.3, 4, var_03.var_0116, 850);
-      playFX(common_scripts\utility::func_44F5("zmb_firepit_blast"), var_03.var_0116);
-      level thread common_scripts\_exploder::func_088E(201);
+      earthquake(0.3, 4, var_03.origin, 850);
+      playFX(common_scripts\utility::func_44F5("zmb_firepit_blast"), var_03.origin);
+      level thread common_scripts\_exploder::func_88E(201);
       wait(0.4);
-      level thread common_scripts\_exploder::func_088E(202);
+      level thread common_scripts\_exploder::func_88E(202);
       wait(0.4);
-      level thread common_scripts\_exploder::func_088E(203);
+      level thread common_scripts\_exploder::func_88E(203);
       wait(1);
-      level thread common_scripts\_exploder::func_088E(204);
+      level thread common_scripts\_exploder::func_88E(204);
     }
   }
 
@@ -370,11 +370,11 @@ func_7854() {
 
 func_9CAB(param_00) {
   if(!isDefined(level.var_6FEB)) {
-    level.var_6FEB = level.var_721C;
+    level.var_6FEB = level.player;
   }
 
   var_01 = common_scripts\utility::func_46B7("well_explosion", "script_noteworthy");
-  var_02 = var_01[0].var_0116;
+  var_02 = var_01[0].origin;
   lib_0378::func_8D74("well_explosion_ignite", var_02);
   wait(0.4);
   lib_0378::func_8D74("well_explosion", var_02);
@@ -393,13 +393,13 @@ func_9CAB(param_00) {
   thread func_3BEA();
   if(!common_scripts\utility::func_562E(level.var_6659)) {
     foreach(var_04 in var_01) {
-      earthquake(0.3, 4, var_04.var_0116, 850);
-      playFX(common_scripts\utility::func_44F5("zmb_firepit_blast"), var_04.var_0116);
-      level thread common_scripts\_exploder::func_088E(201);
+      earthquake(0.3, 4, var_04.origin, 850);
+      playFX(common_scripts\utility::func_44F5("zmb_firepit_blast"), var_04.origin);
+      level thread common_scripts\_exploder::func_88E(201);
       wait(0.4);
-      level thread common_scripts\_exploder::func_088E(202);
+      level thread common_scripts\_exploder::func_88E(202);
       wait(0.4);
-      level thread common_scripts\_exploder::func_088E(203);
+      level thread common_scripts\_exploder::func_88E(203);
     }
   }
 
@@ -422,7 +422,7 @@ func_3C26() {
   wait(0.25);
   var_00 = getEntArray("well_cover", "script_noteworthy");
   foreach(var_02 in var_00) {
-    if(var_02.var_0106 == "zmb_well_grate_01") {
+    if(var_02.model == "zmb_well_grate_01") {
       var_02 setModel("zmb_well_grate_01_brkn");
       continue;
     }
@@ -472,7 +472,7 @@ func_3C29(param_00, param_01, param_02) {
 
 func_A691() {
   var_00 = common_scripts\utility::func_A70B(level.var_3EFB, "valve_complete");
-  return var_00.var_721C;
+  return var_00.player;
 }
 
 func_AC9B() {
@@ -500,7 +500,7 @@ func_2EB3(param_00, param_01) {
       }
 
       if(isDefined(var_02)) {
-        foreach(var_04 in level.var_744A) {
+        foreach(var_04 in level.players) {
           var_04.var_3073 = 1;
           var_04.var_306A = 1;
           var_04.var_3076 = 1;
@@ -520,7 +520,7 @@ func_2EB3(param_00, param_01) {
       }
 
       if(isDefined(var_02)) {
-        foreach(var_04 in level.var_744A) {
+        foreach(var_04 in level.players) {
           var_04.var_3074 = 1;
           var_04.var_3068 = 1;
         }
@@ -528,7 +528,7 @@ func_2EB3(param_00, param_01) {
       break;
 
     case 3:
-      foreach(var_04 in level.var_744A) {
+      foreach(var_04 in level.players) {
         var_04.var_3076 = 0;
       }
       break;
@@ -683,11 +683,11 @@ func_2E86() {
 
 func_3C20(param_00) {
   self endon("flame_jets_done");
-  thread maps\mp\mp_zombie_nest_ee_util::func_3C28();
+  thread maps / mp / mp_zombie_nest_ee_util::func_3C28();
   var_01 = getEntArray("flame_jets", "script_noteworthy");
   if(common_scripts\utility::func_3C77("fire trap active")) {
     var_02 = getEntArray("gallows_sewer_jumpscare", "targetname");
-    var_01 = common_scripts\utility::func_0F73(var_01, var_02);
+    var_01 = common_scripts\utility::func_F73(var_01, var_02);
   }
 
   foreach(var_04 in var_01) {
@@ -696,18 +696,18 @@ func_3C20(param_00) {
 
   var_06 = common_scripts\utility::func_46B5("well_explosion_zombie_grab_radius", "script_noteworthy");
   if(!isDefined(level.var_3BD3)) {
-    level.var_3BD3 = spawn("trigger_radius", var_06.var_0116, 0, var_06.var_014F, 128);
+    level.var_3BD3 = spawn("trigger_radius", var_06.origin, 0, var_06.var_14F, 128);
   }
 
   if(isDefined(param_00)) {
     level.fire_well_trap = level.var_3BD3;
     level.fire_well_trap.var_9C92 = param_00;
-    level.fire_well_trap.var_9CBB = param_00.var_0165;
+    level.fire_well_trap.var_9CBB = param_00.script_noteworthy;
   }
 
   level.var_3BD3 thread func_3C21();
   wait(4);
-  foreach(var_08 in level.var_744A) {
+  foreach(var_08 in level.players) {
     var_08.var_5685 = 0;
   }
 
@@ -720,11 +720,11 @@ func_3C21() {
   for(;;) {
     self waittill("trigger", var_01);
     if(!isPlayer(var_01) && function_01EF(var_01) && common_scripts\utility::func_562E(var_01.var_565F) && !var_01 lib_054D::func_56E1()) {
-      if(lib_0547::func_5565(var_01.var_01A7, level.var_746E)) {
+      if(lib_0547::func_5565(var_01.team, level.var_746E)) {
         continue;
       }
 
-      if(lib_0547::func_5565(var_01.var_0A4B, "zombie_fireman")) {
+      if(lib_0547::func_5565(var_01.var_A4B, "zombie_fireman")) {
         continue;
       }
 
@@ -732,22 +732,22 @@ func_3C21() {
         if(common_scripts\utility::func_3C77("fire trap active")) {
           if(func_3C27()) {
             var_01.var_6B38 = 1;
-            var_02 = 5000 * vectorNormalize(var_01.var_0116 - var_00.var_0116);
+            var_02 = 5000 * vectorNormalize(var_01.origin - var_00.origin);
             var_01 lib_0547::func_5A85("torso_lower", (var_02[0], var_02[1], 5000), level.fire_well_trap, "trap_zm_mp");
             if(!isDefined(self.hitbytrap)) {
-              foreach(var_04 in level.var_744A) {
-                var_04 maps\mp\gametypes\zombies::func_47C7("kill_trap");
+              foreach(var_04 in level.players) {
+                var_04 maps / mp / gametypes / zombies::func_47C7("kill_trap");
                 self.hitbytrap = 1;
               }
             }
           } else if(var_01 lib_0547::func_580A()) {
-            var_01 dodamage(var_01.var_00BC * 0.25, var_00.var_0116, level.fire_well_trap, level.fire_well_trap, "MOD_EXPLOSIVE", "trap_zm_mp");
+            var_01 dodamage(var_01.health * 0.25, var_00.origin, level.fire_well_trap, level.fire_well_trap, "MOD_EXPLOSIVE", "trap_zm_mp");
             var_01 setonfire(0, 1.5, 1, "none", 1);
           } else {
             thread lib_0547::func_1DB3(var_01, 1.5);
             if(!isDefined(self.hitbytrap)) {
-              foreach(var_04 in level.var_744A) {
-                var_04 maps\mp\gametypes\zombies::func_47C7("kill_trap");
+              foreach(var_04 in level.players) {
+                var_04 maps / mp / gametypes / zombies::func_47C7("kill_trap");
                 self.hitbytrap = 1;
               }
             }
@@ -763,8 +763,8 @@ func_3C21() {
     if(isPlayer(var_01)) {
       if(!isDefined(var_01.var_6B39) || gettime() - var_01.var_6B39 >= 1000) {
         var_01.var_6B39 = gettime();
-        var_01 dodamage(5, var_01.var_0116);
-        if(!common_scripts\utility::func_562E(var_01.var_5685) && self.var_003A != "trigger_radius") {
+        var_01 dodamage(5, var_01.origin);
+        if(!common_scripts\utility::func_562E(var_01.var_5685) && self.classname != "trigger_radius") {
           var_01 notify("fire_touched");
         }
       }

@@ -8,8 +8,8 @@ func_194E() {
   var_01 = [];
   var_02 = 0;
   foreach(var_04 in level.var_1913) {
-    var_00[var_02] = common_scripts\utility::func_7A33(var_04.var_1B49).var_0116;
-    var_01[var_02] = "zone" + var_04.var_00E5;
+    var_00[var_02] = common_scripts\utility::func_7A33(var_04.var_1B49).origin;
+    var_01[var_02] = "zone" + var_04.label;
     var_02++;
   }
 
@@ -23,11 +23,11 @@ func_194F(param_00, param_01, param_02, param_03) {
   var_06 = 0;
   foreach(var_0A, var_08 in param_00) {
     if(isDefined(param_00[var_0A].var_1B48)) {
-      var_04[var_06] = param_00[var_0A].var_1B48.var_0116;
+      var_04[var_06] = param_00[var_0A].var_1B48.origin;
     } else {
-      param_00[var_0A].var_6638 = function_00BA(param_00[var_0A].var_0116);
+      param_00[var_0A].var_6638 = function_00BA(param_00[var_0A].origin);
       if(!isDefined(param_00[var_0A].var_6638) || param_00[var_0A].var_6638 method_8389()) {
-        var_09 = getnodesinradiussorted(param_00[var_0A].var_0116, 256, 0);
+        var_09 = getnodesinradiussorted(param_00[var_0A].origin, 256, 0);
         if(var_09.size > 0) {
           param_00[var_0A].var_6638 = var_09[0];
         }
@@ -37,12 +37,12 @@ func_194F(param_00, param_01, param_02, param_03) {
         continue;
       }
 
-      if(distance(param_00[var_0A].var_6638.var_0116, param_00[var_0A].var_0116) > 128) {
+      if(distance(param_00[var_0A].var_6638.origin, param_00[var_0A].origin) > 128) {
         param_00[var_0A].var_6638 = undefined;
         continue;
       }
 
-      var_04[var_06] = param_00[var_0A].var_6638.var_0116;
+      var_04[var_06] = param_00[var_0A].var_6638.origin;
     }
 
     var_05[var_06] = param_01 + param_00[var_0A].var_81E8;
@@ -71,9 +71,9 @@ func_194D(param_00, param_01, param_02, param_03) {
     for(var_0D = 0; var_0D < var_0A[var_0C].size; var_0D++) {
       var_0E = var_0A[var_0C][var_0D];
       var_0E.var_55F0 = 1;
-      var_0E.var_7779[var_0C] = maps\mp\bots\_bots_util::func_37DF(var_0E.var_0116, param_00[var_0B], "prone");
+      var_0E.var_7779[var_0C] = maps / mp / bots / _bots_util::func_37DF(var_0E.origin, param_00[var_0B], "prone");
       wait 0.05;
-      var_0E.var_2864[var_0C] = maps\mp\bots\_bots_util::func_37DF(var_0E.var_0116, param_00[var_0B], "crouch");
+      var_0E.var_2864[var_0C] = maps / mp / bots / _bots_util::func_37DF(var_0E.origin, param_00[var_0B], "crouch");
       wait 0.05;
     }
   }
@@ -82,7 +82,7 @@ func_194D(param_00, param_01, param_02, param_03) {
   if(var_04) {
     for(var_0B = 0; var_0B < param_00.size; var_0B++) {
       for(var_0D = var_0B + 1; var_0D < param_00.size; var_0D++) {
-        var_10 = maps\mp\bots\_bots_util::func_4187(param_00[var_0B], param_00[var_0D]);
+        var_10 = maps / mp / bots / _bots_util::func_4187(param_00[var_0B], param_00[var_0D]);
         foreach(var_08 in var_10) {
           var_08.var_6AA8[param_01[var_0B]][param_01[var_0D]] = 1;
         }
@@ -107,22 +107,22 @@ func_194D(param_00, param_01, param_02, param_03) {
     level.var_37DA = param_01;
     level.var_37DC = var_0A;
   } else {
-    level.var_37DB = common_scripts\utility::func_0F73(level.var_37DB, param_00);
-    level.var_37DA = common_scripts\utility::func_0F73(level.var_37DA, param_01);
-    level.var_37DC = common_scripts\utility::func_0F76(level.var_37DC, var_0A);
+    level.var_37DB = common_scripts\utility::func_F73(level.var_37DB, param_00);
+    level.var_37DA = common_scripts\utility::func_F73(level.var_37DA, param_01);
+    level.var_37DC = common_scripts\utility::func_F76(level.var_37DC, var_0A);
   }
 
   level.var_37DD = 1;
 }
 
 func_192E(param_00, param_01) {
-  if(param_01.var_003A == "trigger_radius") {
-    var_02 = getnodesinradius(param_01.var_0116, param_01.var_014F, 0, 100);
-    var_03 = common_scripts\utility::func_0F94(var_02, param_00);
+  if(param_01.classname == "trigger_radius") {
+    var_02 = getnodesinradius(param_01.origin, param_01.var_14F, 0, 100);
+    var_03 = common_scripts\utility::func_F94(var_02, param_00);
     if(var_03.size > 0) {
-      param_00 = common_scripts\utility::func_0F73(param_00, var_03);
+      param_00 = common_scripts\utility::func_F73(param_00, var_03);
     }
-  } else if(param_01.var_003A == "trigger_multiple" || param_01.var_003A == "trigger_use_touch") {
+  } else if(param_01.classname == "trigger_multiple" || param_01.classname == "trigger_use_touch") {
     var_04[0] = param_01 method_8216(1, 1, 1);
     var_04[1] = param_01 method_8216(1, 1, -1);
     var_04[2] = param_01 method_8216(1, -1, 1);
@@ -133,17 +133,17 @@ func_192E(param_00, param_01) {
     var_04[7] = param_01 method_8216(-1, -1, -1);
     var_05 = 0;
     foreach(var_07 in var_04) {
-      var_08 = distance(var_07, param_01.var_0116);
+      var_08 = distance(var_07, param_01.origin);
       if(var_08 > var_05) {
         var_05 = var_08;
       }
     }
 
-    var_02 = getnodesinradius(param_01.var_0116, var_05, 0, 200);
+    var_02 = getnodesinradius(param_01.origin, var_05, 0, 200);
     foreach(var_0B in var_02) {
-      if(!ispointinvolume(var_0B.var_0116, param_01)) {
-        if(ispointinvolume(var_0B.var_0116 + (0, 0, 40), param_01) || ispointinvolume(var_0B.var_0116 + (0, 0, 80), param_01) || ispointinvolume(var_0B.var_0116 + (0, 0, 120), param_01)) {
-          param_00 = common_scripts\utility::func_0F6F(param_00, var_0B);
+      if(!ispointinvolume(var_0B.origin, param_01)) {
+        if(ispointinvolume(var_0B.origin + (0, 0, 40), param_01) || ispointinvolume(var_0B.origin + (0, 0, 80), param_01) || ispointinvolume(var_0B.origin + (0, 0, 120), param_01)) {
+          param_00 = common_scripts\utility::func_F6F(param_00, var_0B);
         }
       }
     }
@@ -169,7 +169,7 @@ func_1ADC(param_00) {
 func_19E1(param_00) {
   var_01 = 0;
   foreach(var_03 in level.var_6E97) {
-    if(maps\mp\_utility::func_5800(var_03) && isDefined(var_03.var_01A7) && var_03.var_01A7 == param_00) {
+    if(maps\mp\_utility::func_5800(var_03) && isDefined(var_03.team) && var_03.team == param_00) {
       var_01++;
     }
   }
@@ -179,10 +179,10 @@ func_19E1(param_00) {
 
 func_19DF(param_00, param_01, param_02) {
   var_03 = func_19E2("attacker", param_00);
-  foreach(var_05 in level.var_744A) {
-    if(!isai(var_05) && isDefined(var_05.var_01A7) && var_05.var_01A7 == param_00) {
-      if(var_05 func_19E4() || distancesquared(param_01, var_05.var_0116) > squared(param_02)) {
-        var_03 = common_scripts\utility::func_0F6F(var_03, var_05);
+  foreach(var_05 in level.players) {
+    if(!isai(var_05) && isDefined(var_05.team) && var_05.team == param_00) {
+      if(var_05 func_19E4() || distancesquared(param_01, var_05.origin) > squared(param_02)) {
+        var_03 = common_scripts\utility::func_F6F(var_03, var_05);
       }
     }
   }
@@ -192,10 +192,10 @@ func_19DF(param_00, param_01, param_02) {
 
 func_19E0(param_00, param_01, param_02) {
   var_03 = func_19E2("defender", param_00);
-  foreach(var_05 in level.var_744A) {
-    if(!isai(var_05) && isDefined(var_05.var_01A7) && var_05.var_01A7 == param_00) {
-      if(var_05 func_19E5() || distancesquared(param_01, var_05.var_0116) <= squared(param_02)) {
-        var_03 = common_scripts\utility::func_0F6F(var_03, var_05);
+  foreach(var_05 in level.players) {
+    if(!isai(var_05) && isDefined(var_05.team) && var_05.team == param_00) {
+      if(var_05 func_19E5() || distancesquared(param_01, var_05.origin) <= squared(param_02)) {
+        var_03 = common_scripts\utility::func_F6F(var_03, var_05);
       }
     }
   }
@@ -222,13 +222,13 @@ func_19E5() {
 func_19E9(param_00) {
   self.var_7ECA = param_00;
   self method_8358();
-  maps\mp\bots\_bots_strategy::func_19A3();
+  maps / mp / bots / _bots_strategy::func_19A3();
 }
 
 func_19E2(param_00, param_01) {
   var_02 = [];
   foreach(var_04 in level.var_6E97) {
-    if(isDefined(var_04.var_01A7) && isalive(var_04) && maps\mp\_utility::func_5800(var_04) && var_04.var_01A7 == param_01 && isDefined(var_04.var_7ECA) && var_04.var_7ECA == param_00) {
+    if(isDefined(var_04.team) && isalive(var_04) && maps\mp\_utility::func_5800(var_04) && var_04.team == param_01 && isDefined(var_04.var_7ECA) && var_04.var_7ECA == param_00) {
       var_02[var_02.size] = var_04;
     }
   }
@@ -237,10 +237,10 @@ func_19E2(param_00, param_01) {
 }
 
 func_19E7() {
-  var_00 = [[level.var_19D6]](self.var_01A7);
-  var_01 = [[level.var_19D7]](self.var_01A7);
-  var_02 = [[level.var_19DB]](self.var_01A7);
-  var_03 = [[level.var_19DE]](self.var_01A7);
+  var_00 = [[level.var_19D6]](self.team);
+  var_01 = [[level.var_19D7]](self.team);
+  var_02 = [[level.var_19DB]](self.team);
+  var_03 = [[level.var_19DE]](self.team);
   var_04 = level.var_1A92[self.var_6F7D];
   if(var_04 == "active") {
     if(var_00.size >= var_02) {
@@ -315,7 +315,7 @@ func_19DA() {
                 var_09 = 1;
                 break;
               } else {
-                var_08 = common_scripts\utility::func_0F6F(var_08, var_0B);
+                var_08 = common_scripts\utility::func_F6F(var_08, var_0B);
               }
             }
           }
@@ -325,17 +325,17 @@ func_19DA() {
           }
         }
 
-        if(var_09.size > var_0B) {
+        if(var_05.size > var_07) {
           var_0D = [];
           var_0E = 0;
-          foreach(var_10 in var_09) {
+          foreach(var_10 in var_05) {
             if(isai(var_10) && var_10 func_195A()) {
               if(level.var_1A92[var_10.var_6F7D] == "active") {
                 var_10 func_19E9("attacker");
                 var_0E = 1;
                 break;
               } else {
-                var_0D = common_scripts\utility::func_0F6F(var_0D, var_10);
+                var_0D = common_scripts\utility::func_F6F(var_0D, var_10);
               }
             }
           }
@@ -382,7 +382,7 @@ func_1A08(param_00) {
   var_01 = getnodesintrigger(param_00, 1);
   var_02 = [];
   foreach(var_04 in var_01) {
-    if(!var_04 method_8389() && var_04.var_01B9 != "Begin" && var_04.var_01B9 != "End") {
+    if(!var_04 method_8389() && var_04.type != "Begin" && var_04.type != "End") {
       var_02[var_02.size] = var_04;
     }
   }
@@ -402,7 +402,7 @@ func_1951(param_00) {
     var_07 = [(0, 0, 0), (1, 1, 0), (1, -1, 0), (-1, 1, 0), (-1, -1, 0)];
     foreach(var_09 in var_07) {
       var_0A = func_AC85(var_05, var_09[0], var_09[1]);
-      var_01[var_03] = var_0A.var_0116;
+      var_01[var_03] = var_0A.origin;
       var_0B = var_05.var_81E8 + "_" + var_06;
       var_02[var_03] = var_0B;
       var_05.var_37DA[var_05.var_37DA.size] = var_0B;
@@ -419,13 +419,13 @@ func_1E4B(param_00) {
   var_01.var_61B1 = (999999, 999999, 999999);
   var_01.var_605E = (-999999, -999999, -999999);
   foreach(var_03 in param_00.var_671A) {
-    var_01.var_61B1 = (min(var_03.var_0116[0], var_01.var_61B1[0]), min(var_03.var_0116[1], var_01.var_61B1[1]), min(var_03.var_0116[2], var_01.var_61B1[2]));
-    var_01.var_605E = (max(var_03.var_0116[0], var_01.var_605E[0]), max(var_03.var_0116[1], var_01.var_605E[1]), max(var_03.var_0116[2], var_01.var_605E[2]));
+    var_01.var_61B1 = (min(var_03.origin[0], var_01.var_61B1[0]), min(var_03.origin[1], var_01.var_61B1[1]), min(var_03.origin[2], var_01.var_61B1[2]));
+    var_01.var_605E = (max(var_03.origin[0], var_01.var_605E[0]), max(var_03.origin[1], var_01.var_605E[1]), max(var_03.origin[2], var_01.var_605E[2]));
   }
 
   var_01.var_206B = (var_01.var_61B1[0] + var_01.var_605E[0] / 2, var_01.var_61B1[1] + var_01.var_605E[1] / 2, var_01.var_61B1[2] + var_01.var_605E[2] / 2);
   var_01.var_4954 = (var_01.var_605E[0] - var_01.var_206B[0], var_01.var_605E[1] - var_01.var_206B[1], var_01.var_605E[2] - var_01.var_206B[2]);
-  var_01.var_014F = max(var_01.var_4954[0], var_01.var_4954[1]);
+  var_01.var_14F = max(var_01.var_4954[0], var_01.var_4954[1]);
   return var_01;
 }
 
@@ -434,7 +434,7 @@ func_AC85(param_00, param_01, param_02) {
   var_04 = undefined;
   var_05 = 9999999;
   foreach(var_07 in param_00.var_671A) {
-    var_08 = distance2dsquared(var_07.var_0116, var_03);
+    var_08 = distance2dsquared(var_07.origin, var_03);
     if(var_08 < var_05) {
       var_05 = var_08;
       var_04 = var_07;
@@ -449,7 +449,7 @@ func_6361() {
   self endon("monitor_zone_control");
   self endon("death");
   level endon("game_ended");
-  var_00 = getzonenearest(self.var_0116);
+  var_00 = getzonenearest(self.origin);
   for(;;) {
     var_01 = "none";
     if(isDefined(self.var_3FCA)) {
@@ -492,7 +492,7 @@ func_3B69(param_00) {
   var_01 = undefined;
   var_02 = 999999999;
   foreach(var_04 in level.var_1913) {
-    var_05 = distancesquared(var_04.var_28D4, param_00.var_0116);
+    var_05 = distancesquared(var_04.var_28D4, param_00.origin);
     if(var_05 < var_02) {
       var_01 = var_04;
       var_02 = var_05;
@@ -505,11 +505,11 @@ func_3B69(param_00) {
 func_41FB(param_00, param_01) {
   var_02 = [];
   foreach(var_04 in level.var_6E97) {
-    if(!isDefined(var_04.var_01A7)) {
+    if(!isDefined(var_04.team)) {
       continue;
     }
 
-    if(maps\mp\_utility::func_57A0(var_04) && maps\mp\_utility::func_5800(var_04) && var_04.var_01A7 == param_00) {
+    if(maps\mp\_utility::func_57A0(var_04) && maps\mp\_utility::func_5800(var_04) && var_04.team == param_00) {
       if(!isDefined(param_01) || param_01 && isai(var_04) && isDefined(var_04.var_7ECA)) {
         var_02[var_02.size] = var_04;
       }
@@ -529,9 +529,9 @@ func_40DF(param_00, param_01) {
 
     var_03 = self botgetdifficultysetting("strategyLevel") * 0.3;
     var_04 = self botgetdifficultysetting("strategyLevel") + 1 * 0.15;
-    var_05 = common_scripts\utility::func_0F92(param_00.var_1B49);
+    var_05 = common_scripts\utility::func_F92(param_00.var_1B49);
     foreach(var_07 in var_05) {
-      if(!common_scripts\utility::func_0F79(var_02, var_07)) {
+      if(!common_scripts\utility::func_F79(var_02, var_07)) {
         var_02[var_02.size] = var_07;
       }
     }
@@ -554,9 +554,9 @@ func_40DE(param_00) {
   var_01 = self method_8382(param_00.var_1B49, "node_hide_anywhere", "ignore_occupancy");
   var_02 = self botgetdifficultysetting("strategyLevel") * 0.3;
   var_03 = self botgetdifficultysetting("strategyLevel") + 1 * 0.15;
-  var_04 = common_scripts\utility::func_0F92(param_00.var_1B49);
+  var_04 = common_scripts\utility::func_F92(param_00.var_1B49);
   foreach(var_06 in var_04) {
-    if(!common_scripts\utility::func_0F79(var_01, var_06)) {
+    if(!common_scripts\utility::func_F79(var_01, var_06)) {
       var_01[var_01.size] = var_06;
     }
   }
@@ -591,7 +591,7 @@ func_1911(param_00, param_01, param_02, param_03) {
   }
 
   self botpressbutton("use", param_00);
-  var_05 = maps\mp\bots\_bots_util::func_1B16(param_00, param_01, "use_interrupted");
+  var_05 = maps / mp / bots / _bots_util::func_1B16(param_00, param_01, "use_interrupted");
   self botsetstance("none");
   self botclearbutton("use");
   var_06 = var_05 == param_01;
@@ -602,7 +602,7 @@ func_6800() {
   self endon("stop_usebutton_watcher");
   var_00 = func_3B69(self);
   self waittill("bulletwhizby", var_01);
-  if(!isDefined(var_01.var_01A7) || var_01.var_01A7 != self.var_01A7) {
+  if(!isDefined(var_01.team) || var_01.team != self.team) {
     var_02 = var_00.var_A23F - var_00.var_28D5;
     if(var_02 > 1000) {
       self notify("use_interrupted");
@@ -613,14 +613,14 @@ func_6800() {
 func_67FA() {
   self endon("stop_usebutton_watcher");
   self waittill("damage", var_00, var_01);
-  if(!isDefined(var_01.var_01A7) || var_01.var_01A7 != self.var_01A7) {
+  if(!isDefined(var_01.team) || var_01.team != self.team) {
     self notify("use_interrupted");
   }
 }
 
 func_4065(param_00) {
   var_01 = [];
-  var_02 = func_41FB(common_scripts\utility::func_416F(self.var_01A7));
+  var_02 = func_41FB(common_scripts\utility::func_416F(self.team));
   foreach(var_04 in var_02) {
     if(!isai(var_04)) {
       continue;
@@ -633,7 +633,7 @@ func_4065(param_00) {
       var_05 = 500 + var_04 botgetdifficultysetting("strategyLevel") * 500;
     }
 
-    if(distancesquared(var_04.var_0116, self.var_0116) < squared(var_05)) {
+    if(distancesquared(var_04.origin, self.origin) < squared(var_05)) {
       var_01[var_01.size] = var_04;
     }
   }

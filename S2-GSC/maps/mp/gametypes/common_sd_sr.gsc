@@ -50,14 +50,14 @@ func_872D() {
 func_5782(param_00) {
   if(isDefined(level.var_1913)) {
     foreach(var_02 in level.var_1913) {
-      if(distancesquared(self.var_0116, var_02.var_9D65.var_0116) < 16384) {
+      if(distancesquared(self.origin, var_02.var_9D65.origin) < 16384) {
         return 0;
       }
     }
   }
 
   if(isDefined(level.var_832F)) {
-    if(distancesquared(self.var_0116, level.var_832F.var_9D65.var_0116) < 16384) {
+    if(distancesquared(self.origin, level.var_832F.var_9D65.origin) < 16384) {
       return 0;
     }
   }
@@ -65,9 +65,9 @@ func_5782(param_00) {
   return 1;
 }
 
-func_6B5C(param_00, param_01, param_02) {
-  if(game["state"] == "postgame" && param_00.var_01A7 == game["defenders"] || !level.var_18F9) {
-    param_01.var_3B4B = 1;
+onnormaldeath(param_00, param_01, param_02) {
+  if(game["state"] == "postgame" && param_00.team == game["defenders"] || !level.var_18F9) {
+    param_01.finalkill = 1;
   }
 
   if(func_A870(param_00, param_01)) {
@@ -83,21 +83,21 @@ func_254C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   if(isDefined(self.var_568D) && self.var_568D) {
     self.var_568D = 0;
-    if(self.var_01A7 == game["attackers"]) {
+    if(self.team == game["attackers"]) {
       var_0A = 0;
-      foreach(var_0C in level.var_744A) {
-        if(var_0C != self && var_0C.var_01A7 == self.var_01A7 && isalive(var_0C)) {
+      foreach(var_0C in level.players) {
+        if(var_0C != self && var_0C.team == self.team && isalive(var_0C)) {
           var_0A++;
         }
       }
 
       if(var_0A > 0) {
-        maps\mp\_utility::func_5C39("bomb_lost", self.var_01A7);
+        maps\mp\_utility::func_5C39("bomb_lost", self.team);
       }
     }
   }
 
-  if(maps\mp\gametypes\_damage::func_56FA(self, param_01)) {
+  if(maps\mp\gametypes\_damage::isfriendlyfire(self, param_01)) {
     return;
   }
 
@@ -110,18 +110,18 @@ func_254C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_01 thread maps\mp\_events::func_2C80(var_0E, param_09, param_04);
     param_01 thread maps\mp\gametypes\_missions::func_80BB(param_04, param_03);
     if(var_0E.var_5777) {
-      param_01 maps\mp\gametypes\_missions::func_7750("ch_" + level.var_3FDC + "_interrupt");
+      param_01 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_interrupt");
     }
 
     if(var_0E.var_56C2) {
-      param_01 maps\mp\gametypes\_missions::func_7750("ch_" + level.var_3FDC + "_protector");
-      maps\mp\_utility::func_863E(13, param_01.var_01A7, param_01 getentitynumber());
+      param_01 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_protector");
+      maps\mp\_utility::func_863E(13, param_01.team, param_01 getentitynumber());
     }
   }
 }
 
 func_A870(param_00, param_01) {
-  if(maps\mp\gametypes\_damage::func_56FA(param_00, param_01)) {
+  if(maps\mp\gametypes\_damage::isfriendlyfire(param_00, param_01)) {
     return 0;
   }
 
@@ -134,33 +134,33 @@ func_A870(param_00, param_01) {
 
 func_6B62(param_00) {
   param_00.var_568D = 1;
-  if(param_00.var_01A7 == "allies") {
-    param_00.var_0112 = 1;
+  if(param_00.team == "allies") {
+    param_00.objective = 1;
   } else {
-    param_00.var_0112 = 2;
+    param_00.objective = 2;
   }
 
   if(isPlayer(param_00)) {
-    param_00 thread maps\mp\_matchdata::func_5E93("pickup", param_00.var_0116);
+    param_00 thread maps\mp\_matchdata::func_5E93("pickup", param_00.origin);
     param_00 setclientomnvar("ui_carrying_bomb", 1);
     param_00 thread maps\mp\gametypes\_hud_message::func_9102("bomb_pickedup");
-    maps\mp\_utility::func_863E(15, param_00.var_01A7, param_00 getentitynumber());
+    maps\mp\_utility::func_863E(15, param_00.team, param_00 getentitynumber());
   }
 
   maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_escort");
   maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_escort", undefined, 1);
-  if(isDefined(level.var_832B) && isDefined(level.var_832B[param_00.var_01A7])) {
+  if(isDefined(level.var_832B) && isDefined(level.var_832B[param_00.team])) {
     param_00.var_57A7 = 1;
     param_00 thread func_0F2F();
   }
 
   if(!level.var_18D3) {
-    maps\mp\_utility::func_9863("callout_bombtaken", param_00, param_00.var_01A7);
-    maps\mp\_utility::func_5C39("bomb_taken", param_00.var_012C["team"]);
+    maps\mp\_utility::func_9863("callout_bombtaken", param_00, param_00.team);
+    maps\mp\_utility::func_5C39("bomb_taken", param_00.pers["team"]);
   }
 
   maps\mp\_utility::func_74D9(game["bomb_recovered_sound"], game["attackers"]);
-  param_00 method_8615(game["bomb_grabbed_sound"]);
+  param_00 playlocalsound(game["bomb_grabbed_sound"]);
   param_00 setgametypevip(1);
 }
 
@@ -187,7 +187,7 @@ func_18FD() {
   var_01[0] setModel("npc_gen_s_and_d_bomb");
   if(!level.var_6510) {
     level.var_832F = maps\mp\gametypes\_gameobjects::func_27D6(game["attackers"], var_00, var_01, (0, 0, 32), 0, 0, 1);
-    level.var_832F maps\mp\gametypes\_gameobjects::func_0C1D("friendly");
+    level.var_832F maps\mp\gametypes\_gameobjects::func_C1D("friendly");
     level.var_832F maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_bomb");
     level.var_832F maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_bomb", undefined, 1);
     level.var_832F maps\mp\gametypes\_gameobjects::func_8A60("friendly");
@@ -197,7 +197,7 @@ func_18FD() {
       maps\mp\_utility::func_863F(level.var_832F, level.iconbomb, 2, 1);
     }
 
-    level.var_832F.var_0C33 = 1;
+    level.var_832F.var_C33 = 1;
     level.var_832F.var_6B62 = ::func_6B62;
     level.var_832F.var_6AEF = ::func_6AEF;
     level.var_832F.var_1F84 = ::func_1F79;
@@ -210,9 +210,9 @@ func_18FD() {
   var_02 = getEntArray("bombzone", "targetname");
   for(var_03 = 0; var_03 < var_02.size; var_03++) {
     var_00 = var_02[var_03];
-    var_01 = getEntArray(var_02[var_03].var_01A2, "targetname");
+    var_01 = getEntArray(var_02[var_03].target, "targetname");
     var_04 = maps\mp\gametypes\_gameobjects::func_2837(game["defenders"], var_00, var_01, (0, 0, 64));
-    var_04 maps\mp\gametypes\_gameobjects::func_0C30("enemy");
+    var_04 maps\mp\gametypes\_gameobjects::func_C30("enemy");
     var_04 maps\mp\gametypes\_gameobjects::func_8A5A(level.var_7078);
     var_04 maps\mp\gametypes\_gameobjects::func_8A57(&"PLATFORM_HOLD_TO_PLANT_EXPLOSIVES");
     if(!level.var_6510) {
@@ -220,7 +220,7 @@ func_18FD() {
     }
 
     var_05 = var_04 maps\mp\gametypes\_gameobjects::func_454C();
-    var_04.var_00E5 = var_05;
+    var_04.label = var_05;
     var_04 maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_defend" + var_05);
     var_04 maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_defend" + var_05, undefined, 1);
     var_04 maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_target" + var_05);
@@ -249,9 +249,9 @@ func_18FD() {
     }
 
     level.var_1913[level.var_1913.size] = var_04;
-    var_04.var_18D5 = getEnt(var_01[0].var_01A2, "targetname");
-    var_04.var_18D5.var_0116 = var_04.var_18D5.var_0116 + (0, 0, -10000);
-    var_04.var_18D5.var_00E5 = var_05;
+    var_04.var_18D5 = getEnt(var_01[0].target, "targetname");
+    var_04.var_18D5.origin = var_04.var_18D5.origin + (0, 0, -10000);
+    var_04.var_18D5.label = var_05;
     var_04.var_18D5 usetriggertouchcheckstance(1);
   }
 
@@ -270,7 +270,7 @@ func_18FD() {
 }
 
 func_6BC8(param_00) {
-  if(!maps\mp\gametypes\_gameobjects::func_56FB(param_00.var_012C["team"])) {
+  if(!maps\mp\gametypes\_gameobjects::func_56FB(param_00.pers["team"])) {
     level thread func_18F9(self, param_00);
     if(isDefined(param_00.var_568D) && param_00.var_568D) {
       param_00.var_568D = 0;
@@ -295,17 +295,17 @@ func_6BC8(param_00) {
     self.var_18F9 = 1;
     param_00 notify("bomb_planted");
     var_03 = 2;
-    if(self.var_00E5 == "_a") {
+    if(self.label == "_a") {
       var_03 = 1;
     }
 
-    maps\mp\_utility::func_863E(3, param_00.var_01A7, param_00 getentitynumber(), var_03);
-    var_04 = func_4CB0(self.var_00E5);
+    maps\mp\_utility::func_863E(3, param_00.team, param_00 getentitynumber(), var_03);
+    var_04 = func_4CB0(self.label);
     param_00 thread maps\mp\_events::func_18FC(var_04);
     maps\mp\_utility::func_5C39("bomb_planted");
     maps\mp\_utility::func_74D9(game["bomb_planted_sound"], game["attackers"]);
     maps\mp\_utility::func_74D9(game["bomb_planted_enemy_sound"], game["defenders"]);
-    if(isDefined(level.var_832B) && isDefined(level.var_832B[param_00.var_01A7])) {
+    if(isDefined(level.var_832B) && isDefined(level.var_832B[param_00.team])) {
       param_00 thread func_7CD2();
     }
 
@@ -318,7 +318,7 @@ func_6BC8(param_00) {
 }
 
 func_7156(param_00) {
-  var_01 = common_scripts\utility::func_0F93(level.var_744A, param_00);
+  var_01 = common_scripts\utility::func_F93(level.players, param_00);
   if(var_01.size) {
     param_00 maps\mp\_utility::func_74C3("snd_bomb_wheels_lp", undefined, var_01);
   }
@@ -329,12 +329,12 @@ func_93D6(param_00) {
 }
 
 func_8A29(param_00) {
-  var_01 = spawn("script_origin", self.var_0116);
-  var_01.var_001D = self.var_001D;
+  var_01 = spawn("script_origin", self.origin);
+  var_01.angles = self.angles;
   var_01 rotateYaw(-45, 0.05);
   wait 0.05;
-  var_02 = self.var_0116 + (0, 0, 5);
-  var_03 = self.var_0116 + anglesToForward(var_01.var_001D) * 100 + (0, 0, 160);
+  var_02 = self.origin + (0, 0, 5);
+  var_03 = self.origin + anglesToForward(var_01.angles) * 100 + (0, 0, 160);
   var_04 = bulletTrace(var_02, var_03, 0, self);
   self.var_5A2C = spawn("script_model", var_04["position"]);
   self.var_5A2C setscriptmoverkillcam("explosive");
@@ -344,39 +344,39 @@ func_8A29(param_00) {
 
 func_6ABC(param_00) {
   param_00 method_812A(0);
-  if(maps\mp\gametypes\_gameobjects::func_56FB(param_00.var_012C["team"])) {
-    if(!level.var_8C56 && !param_00 maps\mp\_utility::func_0649("specialty_improvedobjectives")) {
+  if(maps\mp\gametypes\_gameobjects::func_56FB(param_00.pers["team"])) {
+    if(!level.var_8C56 && !param_00 maps\mp\_utility::_hasperk("specialty_improvedobjectives")) {
       param_00 maps\mp\_utility::func_67F4("defuse");
       level thread func_7156(param_00);
     }
 
     param_00.var_56C2 = 1;
-    var_01 = func_4CB0(self.var_00E5);
-    param_00 thread maps\mp\_matchdata::func_5E93("bomb_defuse_start", param_00.var_0116, var_01);
+    var_01 = func_4CB0(self.label);
+    param_00 thread maps\mp\_matchdata::func_5E93("bomb_defuse_start", param_00.origin, var_01);
     param_00 setgametypevip(1);
-    maps\mp\_utility::func_863E(4, param_00.var_01A7, param_00 getentitynumber());
+    maps\mp\_utility::func_863E(4, param_00.team, param_00 getentitynumber());
     if(isDefined(level.var_8330)) {
-      level.var_8330 method_805C();
+      level.var_8330 hide();
       stopFXOnTag(common_scripts\utility::func_44F5("search_dstry_bomb_arming_light"), level.var_8330, "tag_fx");
     }
   } else {
     var_02 = 2;
-    if(self.var_00E5 == "_a") {
+    if(self.label == "_a") {
       var_02 = 1;
     }
 
-    maps\mp\_utility::func_863E(14, param_00.var_01A7, param_00 getentitynumber(), var_02);
-    if(!level.var_8C56 && !param_00 maps\mp\_utility::func_0649("specialty_improvedobjectives")) {
+    maps\mp\_utility::func_863E(14, param_00.team, param_00 getentitynumber(), var_02);
+    if(!level.var_8C56 && !param_00 maps\mp\_utility::_hasperk("specialty_improvedobjectives")) {
       param_00 maps\mp\_utility::func_67F4("plant");
       level thread func_7156(param_00);
     }
 
     param_00.var_5777 = 1;
-    var_01 = func_4CB0(self.var_00E5);
-    param_00 thread maps\mp\_matchdata::func_5E93("bomb_plant_start", param_00.var_0116, var_01);
+    var_01 = func_4CB0(self.label);
+    param_00 thread maps\mp\_matchdata::func_5E93("bomb_plant_start", param_00.origin, var_01);
     if(level.var_6510) {
       for(var_03 = 0; var_03 < self.var_6C61.size; var_03++) {
-        self.var_6C61[var_03] maps\mp\gametypes\_gameobjects::func_0C30("none");
+        self.var_6C61[var_03] maps\mp\gametypes\_gameobjects::func_C30("none");
         self.var_6C61[var_03] maps\mp\gametypes\_gameobjects::func_8A60("friendly");
       }
     }
@@ -398,13 +398,13 @@ func_6AFA(param_00, param_01, param_02) {
   }
 
   level thread func_93D6(param_01);
-  if(maps\mp\gametypes\_gameobjects::func_56FB(param_01.var_012C["team"])) {
+  if(maps\mp\gametypes\_gameobjects::func_56FB(param_01.pers["team"])) {
     if(isDefined(level.var_8330) && !param_02) {
       level.var_8330 thread common_scripts\utility::func_2CB7();
     }
   } else if(level.var_6510 && !param_02) {
     for(var_03 = 0; var_03 < self.var_6C61.size; var_03++) {
-      self.var_6C61[var_03] maps\mp\gametypes\_gameobjects::func_0C30("enemy");
+      self.var_6C61[var_03] maps\mp\gametypes\_gameobjects::func_C30("enemy");
       self.var_6C61[var_03] maps\mp\gametypes\_gameobjects::func_8A60("any");
     }
   }
@@ -428,7 +428,7 @@ func_18F9(param_00, param_01) {
   maps\mp\gametypes\_gamelogic::func_6F27();
   level.var_18F9 = 1;
   level.var_7069 = param_00;
-  param_01.var_0112 = 0;
+  param_01.objective = 0;
   if(isPlayer(param_01)) {
     param_01 setclientomnvar("ui_carrying_bomb", 0);
   }
@@ -439,21 +439,21 @@ func_18F9(param_00, param_01) {
   level.var_2CA0 = int(gettime() + level.var_1909 * 1000);
   setgameendtime(level.var_2CA0);
   if(!level.var_6510) {
-    level.var_832F maps\mp\gametypes\_gameobjects::func_0C1D("none");
+    level.var_832F maps\mp\gametypes\_gameobjects::func_C1D("none");
     level.var_832F maps\mp\gametypes\_gameobjects::func_8A60("none");
     maps\mp\_utility::func_863F(level.var_832F, undefined, undefined, 1);
     level.var_832F maps\mp\gametypes\_gameobjects::func_866E(0.6);
     level.var_8330 = level.var_832F.var_A582[0];
-    param_01 lib_0468::func_0A22("sdPlant");
+    param_01 lib_0468::func_A22("sdPlant");
   } else {
-    level.var_8330 = spawn("script_model", param_01.var_0116);
-    level.var_8330.var_001D = param_01.var_001D;
+    level.var_8330 = spawn("script_model", param_01.origin);
+    level.var_8330.angles = param_01.angles;
     level.var_8330 setModel("npc_gen_s_and_d_bomb");
   }
 
   level.bomboutlineactive = 1;
   var_02 = maps\mp\_utility::func_46D4(game["attackers"]);
-  level.var_8330 method_86CC(level.var_744A, var_02, 0);
+  level.var_8330 method_86CC(level.players, var_02, 0);
   foreach(var_04 in level.broadcasters) {
     if(var_04.var_1E99.var_A4A8 == "third_person") {
       level.var_8330 hudoutlineenableforclient(var_04, var_02, 0);
@@ -464,15 +464,15 @@ func_18F9(param_00, param_01) {
   }
 
   playFXOnTag(common_scripts\utility::func_44F5("search_dstry_bomb_arming_light"), level.var_8330, "tag_fx");
-  param_00 maps\mp\gametypes\_gameobjects::func_0C30("none");
+  param_00 maps\mp\gametypes\_gameobjects::func_C30("none");
   param_00 maps\mp\gametypes\_gameobjects::func_8A60("none");
   var_06 = param_00 maps\mp\gametypes\_gameobjects::func_454C();
   setomnvar("ui_bomb" + var_06 + "_state", 1);
   var_07 = param_00.var_18D5;
-  var_07.var_0116 = level.var_8330.var_0116;
+  var_07.origin = level.var_8330.origin;
   var_08 = [];
   var_09 = maps\mp\gametypes\_gameobjects::func_2837(game["defenders"], var_07, var_08, (0, 0, 32));
-  var_09 maps\mp\gametypes\_gameobjects::func_0C30("friendly");
+  var_09 maps\mp\gametypes\_gameobjects::func_C30("friendly");
   var_09 maps\mp\gametypes\_gameobjects::func_8A5A(level.var_2CA9);
   var_09 maps\mp\gametypes\_gameobjects::func_8A57(&"PLATFORM_HOLD_TO_DEFUSE_EXPLOSIVES");
   var_09 maps\mp\gametypes\_gameobjects::func_8A60("any");
@@ -480,7 +480,7 @@ func_18F9(param_00, param_01) {
   var_09 maps\mp\gametypes\_gameobjects::func_860A("enemy", "waypoint_defend" + var_06);
   var_09 maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_defuse" + var_06, undefined, 1);
   var_09 maps\mp\gametypes\_gameobjects::func_860E("enemy", "waypoint_defend" + var_06, undefined, 1);
-  var_09.var_00E5 = var_06;
+  var_09.label = var_06;
   var_09.var_6ABC = ::func_6ABC;
   var_09.var_6AFA = ::func_6AFA;
   var_09.var_6BBF = ::func_6BC3;
@@ -493,12 +493,12 @@ func_18F9(param_00, param_01) {
     setomnvar("ui_broadcaster_game_mode_status_1", 2);
   }
 
-  maps\mp\_utility::func_74D8("mp_snd_bomb_drop", level.var_8330.var_0116 + (0, 0, 1));
+  maps\mp\_utility::func_74D8("mp_snd_bomb_drop", level.var_8330.origin + (0, 0, 1));
   func_190B(var_06);
   param_00.var_A582[0] maps\mp\gametypes\_gamelogic::func_9415();
   level.bomboutlineactive = 0;
   level.var_8330 hudoutlinedisable();
-  if(level.var_3F9D || level.var_18D3) {
+  if(level.gameended || level.var_18D3) {
     return;
   }
 
@@ -508,19 +508,19 @@ func_18F9(param_00, param_01) {
   if(isDefined(level.var_832C)) {
     level thread[[level.var_832C]]();
   } else {
-    var_0A = level.var_8330.var_0116;
+    var_0A = level.var_8330.origin;
     var_0B = var_0A;
     var_0A = var_0A + (0, 0, 10);
-    level.var_8330 method_805C();
+    level.var_8330 hide();
     stopFXOnTag(common_scripts\utility::func_44F5("search_dstry_bomb_arming_light"), level.var_8330, "tag_fx");
     if(isDefined(param_01)) {
       param_00.var_A582[0] entityradiusdamage(var_0A, 512, 300, 20, param_01, "MOD_EXPLOSIVE", "bomb_site_mp");
-      param_00.var_A582[0] entityradiusdamage(param_00.var_A582[0].var_0116 + (0, 0, 75), 512, 300, 20, param_01, "MOD_EXPLOSIVE", "bomb_site_mp");
+      param_00.var_A582[0] entityradiusdamage(param_00.var_A582[0].origin + (0, 0, 75), 512, 300, 20, param_01, "MOD_EXPLOSIVE", "bomb_site_mp");
       var_0C = func_4CB0(var_06);
       param_01 thread maps\mp\_events::func_18D6(var_0C);
     } else {
       param_00.var_A582[0] entityradiusdamage(var_0A, 512, 300, 20, undefined, "MOD_EXPLOSIVE", "bomb_site_mp");
-      param_00.var_A582[0] entityradiusdamage(param_00.var_A582[0].var_0116 + (0, 0, 75), 512, 300, 20, param_01, "MOD_EXPLOSIVE", "bomb_site_mp");
+      param_00.var_A582[0] entityradiusdamage(param_00.var_A582[0].origin + (0, 0, 75), 512, 300, 20, param_01, "MOD_EXPLOSIVE", "bomb_site_mp");
     }
 
     var_0D = "bomb_explosion";
@@ -529,10 +529,10 @@ func_18F9(param_00, param_01) {
     }
 
     var_0E = randomfloat(360);
-    var_0F = spawnfx(level.var_0611[var_0D], var_0B, (0, 0, 1), (cos(var_0E), sin(var_0E), 0));
+    var_0F = spawnfx(level.var_611[var_0D], var_0B, (0, 0, 1), (cos(var_0E), sin(var_0E), 0));
     triggerfx(var_0F);
     physicsexplosionsphere(var_0B, 200, 100, 3);
-    function_01BB("grenade_rumble", var_0A);
+    playrumbleonposition("grenade_rumble", var_0A);
     earthquake(0.75, 2, var_0A, 2000);
     thread maps\mp\_utility::func_74D8("mp_snd_bomb_detonated", var_0A);
     if(isDefined(param_00.var_3947)) {
@@ -544,7 +544,7 @@ func_18F9(param_00, param_01) {
     level.var_1913[var_10] maps\mp\gametypes\_gameobjects::func_2F93();
   }
 
-  var_0B maps\mp\gametypes\_gameobjects::func_2F93();
+  var_09 maps\mp\gametypes\_gameobjects::func_2F93();
   setgameendtime(0);
   wait(3);
   if(common_scripts\utility::func_562E(level.var_5677)) {
@@ -603,7 +603,7 @@ func_6BC3(param_00) {
   param_00 notify("bomb_defused");
   level thread func_18D3();
   maps\mp\gametypes\_gameobjects::func_2F93();
-  setomnvar("ui_bomb" + self.var_00E5 + "_state", 0);
+  setomnvar("ui_bomb" + self.label + "_state", 0);
   maps\mp\_utility::func_5C39("bomb_defused_attackers", game["attackers"]);
   maps\mp\_utility::func_5C39("bomb_defused_defenders", game["defenders"]);
   maps\mp\_utility::func_74D9(game["bomb_disarm_enemy_sound"], game["attackers"]);
@@ -617,17 +617,17 @@ func_6BC3(param_00) {
     var_01 = "last_man_defuse";
   }
 
-  var_02 = func_4CB0(self.var_00E5, var_01);
+  var_02 = func_4CB0(self.label, var_01);
   param_00 thread maps\mp\_events::func_18D4(var_01, var_02);
 }
 
 func_5742(param_00) {
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 == param_00) {
       continue;
     }
 
-    if(var_02.var_01A7 != param_00.var_01A7) {
+    if(var_02.team != param_00.team) {
       continue;
     }
 
@@ -654,7 +654,7 @@ func_18D3() {
 }
 
 func_6AC9(param_00) {
-  param_00 iclientprintlnbold(&"MP_CANT_PLANT_WITHOUT_BOMB");
+  param_00 iprintlnbold(&"MP_CANT_PLANT_WITHOUT_BOMB");
 }
 
 func_6BB6() {
@@ -678,19 +678,19 @@ func_832A(param_00, param_01) {
   }
 
   maps\mp\gametypes\_gamescore::func_47BD(param_00, 1, 1);
-  thread maps\mp\gametypes\_gamelogic::func_36B9(param_00, param_01);
+  thread maps\mp\gametypes\_gamelogic::endgame(param_00, param_01);
 }
 
 func_21AB() {
   wait 0.05;
   var_00 = 0;
-  if(!level.var_0BC3[game["attackers"]]) {
-    level.var_90E2[game["attackers"]].var_0C22 = 1;
+  if(!level.var_BC3[game["attackers"]]) {
+    level.var_90E2[game["attackers"]].var_C22 = 1;
     var_00 = 1;
   }
 
-  if(!level.var_0BC3[game["defenders"]]) {
-    level.var_90E2[game["defenders"]].var_0C22 = 1;
+  if(!level.var_BC3[game["defenders"]]) {
+    level.var_90E2[game["defenders"]].var_C22 = 1;
     var_00 = 1;
   }
 
@@ -743,12 +743,12 @@ func_478F() {
   self endon("disconnect");
   level endon("game_ended");
   maps\mp\_utility::func_A78E(3);
-  var_00 = maps\mp\_utility::func_45DE(self.var_012C["team"]);
-  level thread maps\mp\_utility::func_9863("callout_lastteammemberalive", self, self.var_012C["team"]);
+  var_00 = maps\mp\_utility::func_45DE(self.pers["team"]);
+  level thread maps\mp\_utility::func_9863("callout_lastteammemberalive", self, self.pers["team"]);
   level thread maps\mp\_utility::func_9863("callout_lastenemyalive", self, var_00);
   level notify("last_alive", self);
-  maps\mp\_utility::func_863E(16, self.var_01A7, self getentitynumber());
-  maps\mp\gametypes\_missions::func_5BBD();
+  maps\mp\_utility::func_863E(16, self.team, self getentitynumber());
+  maps\mp\gametypes\_missions::lastmansd();
 }
 
 func_6B93() {}
@@ -770,15 +770,15 @@ func_0F2F() {
     wait 0.05;
   }
 
-  self.var_012C["gamemodeLoadout"] = level.var_832B[self.var_01A7];
+  self.pers["gamemodeLoadout"] = level.var_832B[self.team];
   self.var_3FC5 = self.var_2319;
   self.var_3FC4 = 1;
-  self.var_012C["class"] = "gamemode";
-  self.var_012C["lastClass"] = "gamemode";
+  self.pers["class"] = "gamemode";
+  self.pers["lastClass"] = "gamemode";
   self.var_2319 = "gamemode";
   self.var_5B84 = "gamemode";
   self notify("faux_spawn");
-  maps\mp\gametypes\_class::func_4773(self.var_01A7, "gamemode");
+  maps\mp\gametypes\_class::func_4773(self.team, "gamemode");
   if(self.var_5DF6) {
     maps\mp\killstreaks\_killstreaks::func_A129(1);
   }
@@ -810,9 +810,9 @@ func_7CD2() {
     wait 0.05;
   }
 
-  self.var_012C["gamemodeLoadout"] = undefined;
+  self.pers["gamemodeLoadout"] = undefined;
   self notify("faux_spawn");
-  maps\mp\gametypes\_class::func_4773(self.var_01A7, self.var_2319);
+  maps\mp\gametypes\_class::func_4773(self.team, self.var_2319);
   if(self.var_5DF6) {
     maps\mp\killstreaks\_killstreaks::func_A129(1);
   }

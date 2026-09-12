@@ -3,7 +3,7 @@
  * Script: maps\mp\agents\dog\_dog_traverse.gsc
 ************************************************/
 
-func_00F9() {
+main() {
   self endon("killanimscript");
   if(!isDefined(level.var_31FA)) {
     func_52AE();
@@ -11,31 +11,31 @@ func_00F9() {
 
   var_00 = self method_8198();
   var_01 = self method_8199();
-  if(var_00.var_001E == "bot_walk_forward") {
-    var_02 = var_01.var_0116 - var_00.var_0116;
+  if(var_00.animscript == "bot_walk_forward") {
+    var_02 = var_01.origin - var_00.origin;
     var_03 = length(var_02) / 256;
     var_04 = (var_02[0], var_02[1], 0);
     var_05 = vectortoangles(var_04);
     self scragentsetorientmode("face angle abs", var_05);
-    self method_83A4(var_00.var_0116, var_01.var_0116, var_03);
+    self method_83A4(var_00.origin, var_01.origin, var_03);
     self method_839D("noclip");
-    maps\mp\agents\_scriptedagents::func_71F7("run", var_03);
+    maps / mp / agents / _scriptedagents::func_71F7("run", var_03);
     return;
   }
 
   var_06 = undefined;
-  var_06 = level.var_31FA[var_00.var_001E];
+  var_06 = level.var_31FA[var_04.animscript];
   if(!isDefined(var_06)) {
     return;
   }
 
   self.var_17E8 = 1;
-  var_02 = var_01.var_0116 - var_00.var_0116;
-  var_04 = (var_02[0], var_02[1], 0);
-  var_05 = vectortoangles(var_04);
-  self scragentsetorientmode("face angle abs", var_05);
+  var_02 = var_05.origin - var_04.origin;
+  var_04 = (var_06[0], var_06[1], 0);
+  var_05 = vectortoangles(var_06);
+  self scragentsetorientmode("face angle abs", var_06);
   self method_839C("anim deltas");
-  var_07 = self method_83D8(var_06, 0);
+  var_07 = self method_83D8(var_03, 0);
   var_08 = getnotetracktimes(var_07, "code_move");
   if(var_08.size > 0) {
     var_09 = getmovedelta(var_07, 0, var_08[0]);
@@ -43,30 +43,30 @@ func_00F9() {
     var_09 = getmovedelta(var_08, 0, 1);
   }
 
-  var_0A = maps\mp\agents\_scriptedagents::func_441C(var_02, var_09);
+  var_0A = maps / mp / agents / _scriptedagents::func_441C(var_04, var_09);
   self method_839D("noclip");
-  if(var_02[2] > 0) {
+  if(var_04[2] > 0) {
     if(var_09[2] > 0) {
       var_0B = getnotetracktimes(var_07, "traverse_jump_start");
       if(var_0B.size > 0) {
         var_0C = 1;
         var_0D = 1;
-        if(length2dsquared(var_04) < 0.64 * length2dsquared(var_09)) {
+        if(length2dsquared(var_05) < 0.64 * length2dsquared(var_09)) {
           var_0C = 0.4;
         }
 
-        if(var_02[2] < 0.75 * var_09[2]) {
+        if(var_04[2] < 0.75 * var_09[2]) {
           var_0D = 0.5;
         }
 
         self method_839A(var_0C, var_0D);
-        maps\mp\agents\_scriptedagents::func_71FC(var_06, 0, "traverse", "traverse_jump_start");
+        maps / mp / agents / _scriptedagents::func_71FC(var_03, 0, "traverse", "traverse_jump_start");
         var_0E = getnotetracktimes(var_07, "traverse_jump_end");
         var_0F = getmovedelta(var_07, 0, var_0B[0]);
         var_10 = getmovedelta(var_07, 0, var_0E[0]);
         var_0C = 1;
         var_0D = 1;
-        var_11 = var_01.var_0116 - self.var_0116;
+        var_11 = var_02.origin - self.origin;
         var_12 = var_09 - var_0F;
         if(length2dsquared(var_11) < 0.5625 * length2dsquared(var_12)) {
           var_0C = 0.75;
@@ -78,75 +78,75 @@ func_00F9() {
 
         var_13 = var_09 - var_10;
         var_14 = (var_13[0] * var_0C, var_13[1] * var_0C, var_13[2] * var_0D);
-        var_15 = rotatevector(var_14, var_05);
-        var_16 = var_01.var_0116 - var_15;
+        var_15 = rotatevector(var_14, var_06);
+        var_16 = var_02.origin - var_15;
         var_17 = var_10 - var_0F;
-        var_18 = rotatevector(var_17, var_05);
-        var_19 = var_16 - self.var_0116;
-        var_0A = maps\mp\agents\_scriptedagents::func_441C(var_19, var_18, 1);
-        self method_839A(var_0A.var_AAE3, var_0A.var_01D9);
-        maps\mp\agents\_scriptedagents::func_A79E("traverse", "traverse_jump_end");
+        var_18 = rotatevector(var_17, var_06);
+        var_19 = var_16 - self.origin;
+        var_0A = maps / mp / agents / _scriptedagents::func_441C(var_19, var_18, 1);
+        self method_839A(var_0A.var_AAE3, var_0A.z);
+        maps / mp / agents / _scriptedagents::func_A79E("traverse", "traverse_jump_end");
         self method_839A(var_0C, var_0D);
-        maps\mp\agents\_scriptedagents::func_A79E("traverse", "code_move");
+        maps / mp / agents / _scriptedagents::func_A79E("traverse", "code_move");
         return;
       }
 
-      self method_839A(var_0A.var_AAE3, var_0A.var_01D9);
-      maps\mp\agents\_scriptedagents::func_71FC(var_06, 0, "traverse");
+      self method_839A(var_0A.var_AAE3, var_0A.z);
+      maps / mp / agents / _scriptedagents::func_71FC(var_03, 0, "traverse");
       return;
     }
 
     var_1A = getnotetracktimes(var_07, "gravity on");
     if(var_1A.size > 0) {
-      var_1B = var_00 func_46BF();
+      var_1B = var_01 func_46BF();
       if(isDefined(var_1B)) {
-        var_1C = var_1B - self.var_0116;
-        var_1D = var_01.var_0116 - var_1B;
+        var_1C = var_1B - self.origin;
+        var_1D = var_02.origin - var_1B;
         var_1E = getmovedelta(var_07, 0, var_1A[0]);
-        var_0A = maps\mp\agents\_scriptedagents::func_441C(var_1C, var_1E);
-        self method_839A(var_0A.var_AAE3, var_0A.var_01D9);
-        maps\mp\agents\_scriptedagents::func_71FC(var_06, 0, "traverse", "gravity on");
+        var_0A = maps / mp / agents / _scriptedagents::func_441C(var_1C, var_1E);
+        self method_839A(var_0A.var_AAE3, var_0A.z);
+        maps / mp / agents / _scriptedagents::func_71FC(var_03, 0, "traverse", "gravity on");
         var_1F = getmovedelta(var_07, var_1A[0], 1);
-        var_0A = maps\mp\agents\_scriptedagents::func_441C(var_1D, var_1F);
-        self method_839A(var_0A.var_AAE3, var_0A.var_01D9);
-        maps\mp\agents\_scriptedagents::func_A79E("traverse", "code_move");
+        var_0A = maps / mp / agents / _scriptedagents::func_441C(var_1D, var_1F);
+        self method_839A(var_0A.var_AAE3, var_0A.z);
+        maps / mp / agents / _scriptedagents::func_A79E("traverse", "code_move");
         return;
       }
     }
 
-    var_20 = getanimlength(var_07);
-    self method_83A4(var_00.var_0116, var_01.var_0116, var_20);
-    maps\mp\agents\_scriptedagents::func_71FC(var_06, 0, "traverse");
+    var_20 = getanimlength(var_1A);
+    self method_83A4(var_05.origin, var_06.origin, var_20);
+    maps / mp / agents / _scriptedagents::func_71FC(var_07, 0, "traverse");
     return;
   }
 
-  var_1A = getnotetracktimes(var_07, "gravity on");
-  if(var_1A.size > 0) {
-    self method_839A(var_0A.var_AAE3, 1);
-    maps\mp\agents\_scriptedagents::func_71FC(var_06, 0, "traverse", "gravity on");
-    var_21 = getmovedelta(var_07, 0, var_1A[0]);
-    var_22 = var_21[2] - var_09[2];
+  var_1A = getnotetracktimes(var_1C, "gravity on");
+  if(var_20.size > 0) {
+    self method_839A(var_1E.var_AAE3, 1);
+    maps / mp / agents / _scriptedagents::func_71FC(var_08, 0, "traverse", "gravity on");
+    var_21 = getmovedelta(var_1B, 0, var_20[0]);
+    var_22 = var_21[2] - var_1D[2];
     if(abs(var_22) > 0) {
-      var_23 = self.var_0116[2] - var_01.var_0116[2];
+      var_23 = self.origin[2] - var_07.origin[2];
       var_0D = var_23 / var_22;
-      self method_839A(var_0A.var_AAE3, var_0D);
+      self method_839A(var_1E.var_AAE3, var_0D);
       var_24 = clamp(2 / var_0D, 0.5, 1);
-      var_25 = var_06 + "_norestart";
+      var_25 = var_08 + "_norestart";
       self method_83D7(var_25, 0, var_24);
     }
 
-    maps\mp\agents\_scriptedagents::func_A79E("traverse", "code_move");
+    maps / mp / agents / _scriptedagents::func_A79E("traverse", "code_move");
   } else {
-    self method_839A(var_0A.var_AAE3, var_0A.var_01D9);
-    var_24 = clamp(2 / var_0A.var_01D9, 0.5, 1);
-    var_0E = getnotetracktimes(var_07, "traverse_jump_end");
+    self method_839A(var_1E.var_AAE3, var_1E.z);
+    var_24 = clamp(2 / var_1E.z, 0.5, 1);
+    var_0E = getnotetracktimes(var_1B, "traverse_jump_end");
     if(var_0E.size > 0) {
-      maps\mp\agents\_scriptedagents::func_71F9(var_06, 0, var_24, "traverse", "traverse_jump_end");
-      var_25 = var_06 + "_norestart";
+      maps / mp / agents / _scriptedagents::func_71F9(var_08, 0, var_24, "traverse", "traverse_jump_end");
+      var_25 = var_08 + "_norestart";
       self method_83D7(var_25, 0, 1);
-      maps\mp\agents\_scriptedagents::func_A79E("traverse", "code_move");
+      maps / mp / agents / _scriptedagents::func_A79E("traverse", "code_move");
     } else {
-      maps\mp\agents\_scriptedagents::func_71FC(var_06, 0, "traverse");
+      maps / mp / agents / _scriptedagents::func_71FC(var_08, 0, "traverse");
     }
   }
 
@@ -163,12 +163,12 @@ func_46BF() {
     return self.var_9829;
   }
 
-  var_00 = getEnt(self.var_01A2, "targetname");
+  var_00 = getEnt(self.target, "targetname");
   if(!isDefined(var_00)) {
     return undefined;
   }
 
-  self.var_9829 = var_00.var_0116;
+  self.var_9829 = var_00.origin;
   var_00 delete();
   return self.var_9829;
 }

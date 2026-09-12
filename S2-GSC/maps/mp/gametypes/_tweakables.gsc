@@ -88,7 +88,7 @@ func_46F4(param_00, param_01) {
   return var_02;
 }
 
-func_46F7(param_00, param_01, param_02) {
+gettweakablevalue(param_00, param_01, param_02) {
   switch (param_00) {
     case "rule":
       var_03 = level.var_7F46[param_01].var_A281;
@@ -345,7 +345,7 @@ func_7BFD(param_00, param_01, param_02, param_03, param_04) {
   }
 }
 
-func_00D5() {
+init() {
   level.var_241B = [];
   level.var_9FC5 = 1;
   level.var_7F46 = [];
@@ -356,7 +356,7 @@ func_00D5() {
   level.var_A9F3 = [];
   level.var_4B1E = [];
   level.var_4F7C = [];
-  if(level.var_258F) {
+  if(level.console) {
     func_7BFD("game", "graceperiod", "scr_game_graceperiod", 20);
     func_7BFD("game", "graceperiod_ds", "scr_game_graceperiod_ds", 25);
     func_7BFD("game", "graceperiod_raid_ds", "scr_game_graceperiod_raid_ds", 40);

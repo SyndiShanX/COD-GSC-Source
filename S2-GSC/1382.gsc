@@ -3,11 +3,11 @@
  * Script: 1382.gsc
 *********************************************/
 
-lib_0566::func_00D5() {
-  level.var_0A41["zombie_generic"] = level.var_0A41["zombie"];
-  level.var_0A41["zombie_generic"]["think"] = ::lib_0566::func_ABB3;
-  level.var_0A41["zombie_generic"]["on_damaged"] = ::lib_0566::func_ABB2;
-  level.var_0A41["zombie_generic"]["get_action_params"] = ::zombie_generic_get_action_params;
+init() {
+  level.var_A41["zombie_generic"] = level.var_A41["zombie"];
+  level.var_A41["zombie_generic"]["think"] = ::func_ABB3;
+  level.var_A41["zombie_generic"]["on_damaged"] = ::func_ABB2;
+  level.var_A41["zombie_generic"]["get_action_params"] = ::zombie_generic_get_action_params;
   var_00 = ["zom_head_fdr02_org1", "zom_head_fdr03_org1", "zom_head_fdr04_org1"];
   var_01 = ["zom_m40helmet_net1", "zom_m40helmet_org1", "zom_m40helmet_org2"];
   var_02 = ["zom_m34cap_org1", "zom_m40officercap_org1", "zom_m42cap_org1", "zom_m43cap_org1", "zom_m43cap_org2", "zom_m43overseacap_org1"];
@@ -47,9 +47,9 @@ lib_0566::func_00D5() {
   var_06.var_5ED2["soldier"]["request only"] = 1;
   var_06.var_5ED2["soldier_rus"]["whole_body"] = "zom_rus_infantry_org1";
   var_06.var_5ED2["soldier_rus"]["request only"] = 1;
-  var_06.var_0A4B = "zombie_generic";
-  var_06.var_0EAE = "zombie_animclass";
-  var_06.var_0879 = "zombie_generic";
+  var_06.var_A4B = "zombie_generic";
+  var_06.var_EAE = "zombie_animclass";
+  var_06.var_879 = "zombie_generic";
   var_06.var_4C12 = 1;
   var_06.var_60E2 = 40;
   var_06.var_8302 = 65;
@@ -68,21 +68,21 @@ lib_0566::func_00D5() {
     var_06 = [[level.var_62AB]](var_06);
   }
 
-  lib_0547::func_0A52(var_06, "zombie_generic");
-  lib_0547::registeranimtree("ombie_generic", #animtree);
+  lib_0547::func_A52(var_06, "zombie_generic");
+  lib_0547::registeranimtree("zombie_generic", #animtree);
 }
 
-lib_0566::func_ABB5() {
-  maps\mp\agents\humanoid\_humanoid::func_8A27();
+func_ABB5() {
+  maps / mp / agents / humanoid / _humanoid::func_8A27();
   thread lib_054D::func_AC15();
   thread lib_0547::func_A692();
-  thread lib_0566::func_AB4F();
+  thread func_AB4F();
   thread lib_054D::func_A0EE();
   thread lib_054D::func_A146();
-  thread lib_053C::func_0778();
+  thread lib_053C::func_778();
   thread lib_053C::func_4F95();
   thread lib_053C::func_635C();
-  if(self.var_0A4B == "zombie_generic") {
+  if(self.var_A4B == "zombie_generic") {
     if(!isDefined(level.var_scaling_reach_max_wave)) {
       var_00 = 47;
     } else {
@@ -102,9 +102,9 @@ lib_0566::func_ABB5() {
   }
 }
 
-lib_0566::func_ABB3() {
+func_ABB3() {
   self method_85A1("zombie");
-  lib_0566::func_ABB4();
+  func_ABB4();
 }
 
 zombie_generic_think_wait(param_00) {
@@ -116,51 +116,51 @@ zombie_generic_think_wait(param_00) {
   self.has_think_waited = 1;
 }
 
-lib_0566::func_ABB4() {
+func_ABB4() {
   self endon("death");
   level endon("game_ended");
   self endon("owner_disconnect");
-  lib_0566::func_ABB5();
+  func_ABB5();
   for(;;) {
     if(lib_053C::func_4F8C()) {} else if(lib_053C::func_4F84()) {} else if(lib_053C::func_4F9B()) {} else if(lib_053C::func_4F9A()) {} else {
-      lib_053C::func_0647();
+      lib_053C::func_647();
     }
 
     zombie_generic_think_wait();
   }
 }
 
-lib_0566::func_AB4F() {
+func_AB4F() {
   self endon("death");
   for(;;) {
     var_00 = common_scripts\utility::func_A717("attack_hit", "attack_miss");
     switch (var_00[0]) {
       case "attack_hit":
-        if(isDefined(self.var_071D)) {
-          thread lib_054E::func_3102("attack_hit", self.var_071D.var_0A47);
+        if(isDefined(self.var_71D)) {
+          thread lib_054E::func_3102("attack_hit", self.var_71D.var_A47);
         }
 
         var_01 = var_00[1];
         if(isDefined(var_01) && isPlayer(var_01)) {
-          if(self.var_0A4B == "zombie_generic" || self.var_0A4B == "zombie_assassin" || self.var_0A4B == "zombie_sizzler") {
+          if(self.var_A4B == "zombie_generic" || self.var_A4B == "zombie_assassin" || self.var_A4B == "zombie_sizzler") {
             if(isalive(var_01)) {
               var_01 lib_0380::func_2888("zmb_hit", var_01);
             } else {
               var_01 lib_0380::func_288B("zmb_hit", var_01, var_01);
             }
-          } else if(self.var_0A4B == "zombie_heavy" && isDefined(self.var_1F52)) {
+          } else if(self.var_A4B == "zombie_heavy" && isDefined(self.var_1F52)) {
             if(isalive(var_01)) {
               var_01 lib_0380::func_2888("zmb_follower_mace_imp", var_01);
             } else {
               var_01 lib_0380::func_288B("zmb_follower_mace_imp", var_01, var_01);
             }
-          } else if(self.var_0A4B == "zombie_bob" && isDefined(self.var_1F52)) {
+          } else if(self.var_A4B == "zombie_bob" && isDefined(self.var_1F52)) {
             if(isalive(var_01)) {
               var_01 lib_0380::func_2888("zmb_bob_melee_hit", var_01);
             } else {
               var_01 lib_0380::func_288B("zmb_bob_melee_hit", var_01, var_01);
             }
-          } else if(self.var_0A4B == "zombie_guardian" && isDefined(self.var_1F52)) {
+          } else if(self.var_A4B == "zombie_guardian" && isDefined(self.var_1F52)) {
             if(isalive(var_01)) {
               var_01 lib_0380::func_2888("zmb_hit", var_01);
             } else {
@@ -171,15 +171,15 @@ lib_0566::func_AB4F() {
         break;
 
       case "attack_miss":
-        thread lib_054E::func_3102("attack_miss", self.var_0A4B);
+        thread lib_054E::func_3102("attack_miss", self.var_A4B);
         break;
     }
   }
 }
 
-lib_0566::func_ABB2(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
+func_ABB2(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
   if(param_05 == "panzerschreck_zm" || param_05 == "bazooka_zm") {
-    param_02 = self.var_00FB;
+    param_02 = self.maxhealth;
   }
 
   if(param_05 == "turretweapon_zeppelin_gun_zm") {
@@ -193,15 +193,15 @@ lib_0566::func_ABB2(param_00, param_01, param_02, param_03, param_04, param_05, 
 
   if(isDefined(self.prop_decorator)) {
     if(param_08 == "head") {
-      if(self.prop_decorator.var_0106 == "usa_water_bucket_01" || self.prop_decorator.var_0106 == "aac_kitchen_skillet_01") {
-        var_0B = spawn("script_model", self.prop_decorator.var_0116);
-        var_0B setModel(self.prop_decorator.var_0106);
-        var_0B.var_001D = self.prop_decorator.var_001D;
+      if(self.prop_decorator.model == "usa_water_bucket_01" || self.prop_decorator.model == "aac_kitchen_skillet_01") {
+        var_0B = spawn("script_model", self.prop_decorator.origin);
+        var_0B setModel(self.prop_decorator.model);
+        var_0B.angles = self.prop_decorator.angles;
         self.prop_decorator delete();
         param_02 = 1;
-        var_0C = spawn("script_model", var_0B.var_0116);
+        var_0C = spawn("script_model", var_0B.origin);
         var_0C setModel("helmet_collision");
-        var_0C.var_001D = var_0B.var_001D;
+        var_0C.angles = var_0B.angles;
         var_0B linkTo(var_0C);
         var_0C.var_6292 = var_0B;
         var_0C thread decoratorlaunch(param_07);
@@ -218,14 +218,14 @@ decoratorlaunch(param_00) {
   var_01 = 5000;
   var_02 = 3000;
   if(!isDefined(param_00)) {
-    param_00 = anglesToForward(self.var_001D);
+    param_00 = anglesToForward(self.angles);
   }
 
   var_03 = param_00;
   var_04 = var_03[0] * var_01;
   var_05 = var_03[1] * var_01;
   var_06 = var_03[2] * var_02;
-  var_07 = self.var_0116 + param_00 * -5;
+  var_07 = self.origin + param_00 * -5;
   self method_82C5(var_07, (var_04, var_05, var_06));
   wait(15);
   self.var_6292 delete();

@@ -5,7 +5,7 @@
 
 func_1E65() {
   level.var_4E08 = 0;
-  if(level.var_3F9D) {
+  if(level.gameended) {
     return;
   }
 
@@ -31,7 +31,7 @@ func_1E65() {
 
     var_02 thread func_4E0A();
     if(isPlayer(var_02)) {
-      var_02 setclientomnvar("ui_session_state", var_02.var_0178);
+      var_02 setclientomnvar("ui_session_state", var_02.sessionstate);
       var_02 luinotifyevent(&"host_migration_show_hud", 0);
     }
   }
@@ -43,7 +43,7 @@ func_1E65() {
   setDvar("ui_inhostmigration", 0);
   level notify("host_migration_end");
   maps\mp\gametypes\_gamelogic::func_A17B();
-  level thread maps\mp\gametypes\_gamelogic::func_A11E();
+  level thread maps\mp\gametypes\_gamelogic::updategameevents();
 }
 
 func_4E0C() {
@@ -73,8 +73,8 @@ func_4E07(param_00) {
     var_01 = param_00.var_37CD;
   }
 
-  if(isPlayer(param_00) && isDefined(param_00.var_0109)) {
-    var_02 = param_00.var_0109;
+  if(isPlayer(param_00) && isDefined(param_00.name)) {
+    var_02 = param_00.name;
   }
 
   if(isPlayer(param_00)) {

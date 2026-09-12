@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_nest_ee_wave_manipulation.gsc
 ***********************************************************/
 
-func_00F9() {
+main() {
   level.var_294B = "wave_mod_normal";
 }
 
@@ -52,7 +52,7 @@ func_3DF2(param_00) {
     var_01 = lib_0547::func_408F();
     foreach(var_03 in var_01) {
       var_03.var_6816 = 1;
-      if(common_scripts\utility::func_562E(level.maxed_zombies_sprint) && lib_0547::func_5565(var_03.var_0A4B, "zombie_generic")) {
+      if(common_scripts\utility::func_562E(level.maxed_zombies_sprint) && lib_0547::func_5565(var_03.var_A4B, "zombie_generic")) {
         var_03.var_6941 = 1;
       }
     }
@@ -117,32 +117,32 @@ restore_normal_rounds(param_00) {
 }
 
 func_4DA1(param_00) {
-  if(level.var_258F) {
-    self.var_35D5.var_009B = 1;
+  if(level.console) {
+    self.var_35D5.fontscale = 1;
   } else {
-    self.var_35D5.var_009B = 0.08;
+    self.var_35D5.fontscale = 0.08;
   }
 
-  self.var_35D5.var_01D3 = 0;
-  self.var_35D5.var_01D7 = -40;
-  self.var_35D5.var_0010 = "left";
-  self.var_35D5.var_0011 = "bottom";
-  self.var_35D5.var_00C6 = "left";
-  self.var_35D5.var_01CA = "middle";
-  self.var_35D5.var_0184 = 1;
-  self.var_35D5.var_0018 = 0.8;
+  self.var_35D5.x = 0;
+  self.var_35D5.y = -40;
+  self.var_35D5.alignx = "left";
+  self.var_35D5.aligny = "bottom";
+  self.var_35D5.horzalign = "left";
+  self.var_35D5.vertalign = "middle";
+  self.var_35D5.sort = 1;
+  self.var_35D5.alpha = 0.8;
   if(!isDefined(self.var_1739)) {
     return;
   }
 
-  self.var_1739.var_01D3 = 0;
-  self.var_1739.var_01D7 = -40;
-  self.var_1739.var_0010 = "center";
-  self.var_1739.var_0011 = "middle";
-  self.var_1739.var_00C6 = "center";
-  self.var_1739.var_01CA = "middle";
-  self.var_1739.var_0184 = -1;
-  if(level.var_258F) {
+  self.var_1739.x = 0;
+  self.var_1739.y = -40;
+  self.var_1739.alignx = "center";
+  self.var_1739.aligny = "middle";
+  self.var_1739.horzalign = "center";
+  self.var_1739.vertalign = "middle";
+  self.var_1739.sort = -1;
+  if(level.console) {
     self.var_1739 setshader("popmenu_bg", 650, 52);
   } else {
     self.var_1739 setshader("popmenu_bg", 650, 42);
@@ -152,5 +152,5 @@ func_4DA1(param_00) {
     param_00 = 0.5;
   }
 
-  self.var_1739.var_0018 = param_00;
+  self.var_1739.alpha = param_00;
 }

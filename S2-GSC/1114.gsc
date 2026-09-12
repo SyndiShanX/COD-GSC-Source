@@ -3,7 +3,7 @@
  * Script: 1114.gsc
 *********************************************/
 
-lib_045A::func_00F9() {
+main() {
   var_00 = common_scripts\utility::func_281B("test_effect");
   var_00 common_scripts\_createfx::func_8543((0, 0, 64), (270, 0, 0));
   var_00.var_A265["fxid"] = "test_effect";

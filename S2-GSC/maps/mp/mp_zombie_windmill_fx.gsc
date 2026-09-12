@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_windmill_fx.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   level.var_611["zmb_wm_ground_fire_a"] = loadfx("vfx/map/mp_zombie_windmill/zmb_wm_ground_fire_a");
   level.var_611["zmb_wm_fire_lp_m_tall"] = loadfx("vfx/map/mp_zombie_windmill/zmb_wm_fire_lp_m_tall");
   level.var_611["zmb_ber_elec_sparks_pzl_battery_on"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_elec_sparks_pzl_battery_on");
@@ -79,7 +79,7 @@ func_00F9() {
   level.var_611["zmb_wm_fire_roof_02"] = loadfx("vfx/map/mp_zombie_windmill/zmb_wm_fire_roof_02");
   level.var_611["zmb_wm_fire_falling_rnr"] = loadfx("vfx/map/mp_zombie_windmill/zmb_wm_fire_falling_rnr");
   level.var_611["fx_sunflare_zombie_windmill_dlc3"] = loadfx("vfx/lensflare/dlc/fx_sunflare_zombie_windmill_dlc3");
-  level.var_611["moneyCloud"] = loadfx("vfx/gameplay\mp\zombie/gj_pickup_zombies_01_money");
+  level.var_611["moneyCloud"] = loadfx("vfx/gameplay/mp/zombie/gj_pickup_zombies_01_money");
   level.var_611["zmb_snipe_boss_energy_field"] = loadfx("vfx/map/mp_zombie_snipe/zmb_snipe_boss_pommel_shield");
   level.var_611["zmb_snipe_boss_energy_field_burst"] = loadfx("vfx/map/mp_zombie_snipe/zmb_snipe_boss_pommel_shield_burst");
   level.var_611["bombing_run_targeting"] = loadfx("vfx/map/mp_zombie_windmill/zmb_wm_target_sphere");

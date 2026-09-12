@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_island_fog_behavior.gsc
 *****************************************************/
 
-func_00D5() {
+init() {
   level thread maps\mp\_utility::func_6F74(::monitor_fog_shots);
   level thread maps\mp\_utility::func_6F74(::monitor_reload);
   level thread maps\mp\_utility::func_6F74(::monitor_grenades);
@@ -73,7 +73,7 @@ fog_turn_zombies_passive_thread() {
     return;
   }
 
-  thread maps\mp\mp_zombie_island_fog_zones::run_fog_callbacks(undefined, 1);
+  thread maps / mp / mp_zombie_island_fog_zones::run_fog_callbacks(undefined, 1);
   self.custom_passive_action = ::zombie_passive_with_turns;
   var_01 = 0.125;
   var_02 = int(20 * var_01);
@@ -84,8 +84,8 @@ fog_turn_zombies_passive_thread() {
         var_05 = 0;
         var_06 = 512;
         var_07 = squared(var_06);
-        foreach(var_09 in level.var_744A) {
-          if(distancesquared(self.var_116, var_09.var_116) > var_07) {
+        foreach(var_09 in level.players) {
+          if(distancesquared(self.origin, var_09.origin) > var_07) {
             continue;
           }
 
@@ -110,23 +110,23 @@ fog_turn_zombies_passive_thread() {
 zombie_passive_with_taunt_wakeup() {
   self endon("death");
   self endon("assassin_awoken");
-  var_00 = maps\mp\agents\_scripted_agent_anim_util::func_434D("idle_noncombat");
-  var_01 = maps\mp\agents\_scripted_agent_anim_util::func_7A35(var_00);
+  var_00 = maps / mp / agents / _scripted_agent_anim_util::func_434D("idle_noncombat");
+  var_01 = maps / mp / agents / _scripted_agent_anim_util::func_7A35(var_00);
   self method_839C("anim deltas");
-  self scragentsetorientmode("face angle abs", self.var_1D);
-  maps\mp\agents\_scripted_agent_anim_util::func_71FA(var_00, var_01, 1, "idle_anim");
+  self scragentsetorientmode("face angle abs", self.angles);
+  maps / mp / agents / _scripted_agent_anim_util::func_71FA(var_00, var_01, 1, "idle_anim");
 }
 
 zombie_passive_with_turns() {
   self endon("zombie_passive");
   self endon("death");
   for(;;) {
-    var_00 = maps\mp\agents\_scripted_agent_anim_util::func_434D("idle_noncombat_turn");
-    var_01 = maps\mp\agents\_scripted_agent_anim_util::func_7A35(var_00);
+    var_00 = maps / mp / agents / _scripted_agent_anim_util::func_434D("idle_noncombat_turn");
+    var_01 = maps / mp / agents / _scripted_agent_anim_util::func_7A35(var_00);
     self method_839C("anim deltas");
-    self scragentsetorientmode("face angle abs", self.var_1D);
-    maps\mp\agents\_scripted_agent_anim_util::func_71FA(var_00, var_01, 1, "idle_anim");
-    maps\mp\agents\_scripted_agent_anim_util::func_8410("idle_noncombat");
+    self scragentsetorientmode("face angle abs", self.angles);
+    maps / mp / agents / _scripted_agent_anim_util::func_71FA(var_00, var_01, 1, "idle_anim");
+    maps / mp / agents / _scripted_agent_anim_util::func_8410("idle_noncombat");
     wait(randomint(4) + 4);
   }
 }
@@ -148,7 +148,7 @@ island_fog_is_thick() {
 }
 
 island_fog_is_active() {
-  return maps\mp\mp_zombie_island_ee_fog_manager::get_is_fog_active();
+  return maps / mp / mp_zombie_island_ee_fog_manager::get_is_fog_active();
 }
 
 island_fog_is_settled_long_enough() {
@@ -214,21 +214,21 @@ delete_after(param_00) {
 
 alarm_fog_zombies(param_00, param_01, param_02) {
   if(!isDefined(param_01)) {
-    param_01 = self.var_116;
+    param_01 = self.origin;
   }
 
   var_03 = lib_0547::func_408F();
   var_04 = squared(param_00);
   foreach(var_06 in var_03) {
     if(lib_0547::func_5565(var_06.var_A4B, "zombie_assassin")) {
-      var_06 maps\mp\zombies\zombie_assassin::assassin_notify_gunshot();
+      var_06 maps / mp / zombies / zombie_assassin::assassin_notify_gunshot();
     }
 
     if(!var_06 common_scripts\utility::func_3794("zombie_passive")) {
       continue;
     }
 
-    if(distancesquared(var_06.var_116, param_01) > var_04) {
+    if(distancesquared(var_06.origin, param_01) > var_04) {
       continue;
     }
 
@@ -254,16 +254,16 @@ can_see_a_player() {
 
   var_01 = self gettagangles("j_head");
   var_02 = anglestoright(var_01);
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     if(!lib_053C::humanoid_is_valid_target(var_04)) {
       continue;
     }
 
-    if(distance(self.var_116, var_04.var_116) > 96) {
+    if(distance(self.origin, var_04.origin) > 96) {
       continue;
     }
 
-    if(!maps\mp\_utility::findisfacingvectors(var_00, var_02, var_04.var_116, 30)) {
+    if(!maps\mp\_utility::findisfacingvectors(var_00, var_02, var_04.origin, 30)) {
       continue;
     }
 

@@ -47,15 +47,15 @@ cleanupkeybindings() {
 
 propcontrolshud() {
   self.currenthudy = 26;
-  self.changepropkey = maps\mp\gametypes\prop::addupperrighthudelem(&"MP_PH_CHANGE", 0);
-  self.spinpropkey = maps\mp\gametypes\prop::addupperrighthudelem(&"MP_PH_SPIN", undefined, undefined, &"MP_PH_SPIN_PC");
-  self.lockpropkey = maps\mp\gametypes\prop::addupperrighthudelem(&"MP_PH_LOCK");
-  self.matchslopekey = maps\mp\gametypes\prop::addupperrighthudelem(&"MP_PH_SLOPE", undefined, undefined, &"MP_PH_SLOPE_PC");
-  self.abilitykey = maps\mp\gametypes\prop::addupperrighthudelem();
-  self.clonekey = maps\mp\gametypes\prop::addupperrighthudelem(&"MP_PH_CLONE");
+  self.changepropkey = maps / mp / gametypes / prop::addupperrighthudelem(&"MP_PH_CHANGE", 0);
+  self.spinpropkey = maps / mp / gametypes / prop::addupperrighthudelem(&"MP_PH_SPIN", undefined, undefined, &"MP_PH_SPIN_PC");
+  self.lockpropkey = maps / mp / gametypes / prop::addupperrighthudelem(&"MP_PH_LOCK");
+  self.matchslopekey = maps / mp / gametypes / prop::addupperrighthudelem(&"MP_PH_SLOPE", undefined, undefined, &"MP_PH_SLOPE_PC");
+  self.abilitykey = maps / mp / gametypes / prop::addupperrighthudelem();
+  self.clonekey = maps / mp / gametypes / prop::addupperrighthudelem(&"MP_PH_CLONE");
   setnewabilityhud();
-  self.zoomkey = maps\mp\gametypes\prop::addupperrighthudelem(&"MP_PH_ZOOM");
-  self.spectatekey = maps\mp\gametypes\prop::addupperrighthudelem(&"MP_PH_SPECKEY");
+  self.zoomkey = maps / mp / gametypes / prop::addupperrighthudelem(&"MP_PH_ZOOM");
+  self.spectatekey = maps / mp / gametypes / prop::addupperrighthudelem(&"MP_PH_SPECKEY");
   thread updatetextongamepadchange();
 }
 
@@ -89,7 +89,7 @@ updatetextongamepadchange() {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
-  if(level.var_258F) {
+  if(level.console) {
     return;
   }
 
@@ -101,14 +101,14 @@ updatetextongamepadchange() {
       var_00 = var_01;
       if(var_01) {
         if(!common_scripts\utility::func_562E(self.slopelocked)) {
-          self.matchslopekey.var_00E5 = &"MP_PH_SLOPE";
+          self.matchslopekey.label = &"MP_PH_SLOPE";
         } else {
-          self.matchslopekey.var_00E5 = &"MP_PH_SLOPED";
+          self.matchslopekey.label = &"MP_PH_SLOPED";
         }
       } else if(!common_scripts\utility::func_562E(self.slopelocked)) {
-        self.matchslopekey.var_00E5 = &"MP_PH_SLOPE_PC";
+        self.matchslopekey.label = &"MP_PH_SLOPE_PC";
       } else {
-        self.matchslopekey.var_00E5 = &"MP_PH_SLOPED_PC";
+        self.matchslopekey.label = &"MP_PH_SLOPED_PC";
       }
     }
 
@@ -136,7 +136,7 @@ propinputwatch() {
   self.endingpropspecate = 0;
   self.debugnextpropindex = 1;
   for(;;) {
-    var_00 = common_scripts\utility::func_A715("lock", "changeProp", "setToSlope", "propAbility", "cloneProp");
+    var_00 = common_scripts\utility::waittill_any_return("lock", "changeProp", "setToSlope", "propAbility", "cloneProp");
     if(!isDefined(var_00)) {
       continue;
     }
@@ -206,7 +206,7 @@ propchange() {
     return;
   }
 
-  if(common_scripts\utility::func_562E(level.var_0122)) {
+  if(common_scripts\utility::func_562E(level.var_122)) {
     var_00 = 300;
     if(isDefined(self.lastpropchangetime) && gettime() - self.lastpropchangetime < var_00) {
       return;
@@ -217,15 +217,15 @@ propchange() {
 
   self notify("changed_prop");
   registerpreviousprop(self);
-  self.var_777D.var_5135 = maps\mp\gametypes\prop::getnextprop(self);
+  self.var_777D.var_5135 = maps / mp / gametypes / prop::getnextprop(self);
   propchangeto(self.var_777D.var_5135);
-  self.var_00FB = int(maps\mp\gametypes\prop::getprophealth(self.var_777D.var_5135));
+  self.maxhealth = int(maps / mp / gametypes / prop::getprophealth(self.var_777D.var_5135));
   self setnormalhealth(1);
   setnewabilitycount(self.currentability);
   setnewabilitycount("CLONE");
-  if(maps\mp\gametypes\prop::useprophudserver()) {
-    self.abilitykey.var_0018 = 1;
-    self.clonekey.var_0018 = 1;
+  if(maps / mp / gametypes / prop::useprophudserver()) {
+    self.abilitykey.alpha = 1;
+    self.clonekey.alpha = 1;
   }
 
   propdeductchange();
@@ -242,10 +242,10 @@ propdeductchange() {
 propsetchangesleft(param_00) {
   self.changesleft = param_00;
   self setclientomnvar("ui_ph_num_changes_left", self.changesleft);
-  if(maps\mp\gametypes\prop::useprophudserver()) {
+  if(maps / mp / gametypes / prop::useprophudserver()) {
     self.changepropkey setvalue(self.changesleft);
     if(self.changesleft <= 0) {
-      self.changepropkey.var_0018 = 0.5;
+      self.changepropkey.alpha = 0.5;
     }
   }
 }
@@ -256,25 +256,25 @@ propchangeto(param_00) {
   self.var_777D.anglesoffset = param_00.anglesoffset;
   self.var_777D unlink();
   self.propent unlink();
-  self.propent.var_0116 = self.propanchor.var_0116;
-  self.var_777D.var_0116 = self.propent.var_0116;
-  self.propent.var_001D = (self.var_001D[0], self.propent.var_001D[1], self.var_001D[2]);
-  self.var_777D.var_001D = self.propent.var_001D;
+  self.propent.origin = self.propanchor.origin;
+  self.var_777D.origin = self.propent.origin;
+  self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
+  self.var_777D.angles = self.propent.angles;
   if(common_scripts\utility::func_562E(self.isangleoffset)) {
-    self.var_777D.var_001D = self.var_001D;
+    self.var_777D.angles = self.angles;
     self.isangleoffset = 0;
   }
 
-  maps\mp\gametypes\prop::applyxyzoffset();
-  maps\mp\gametypes\prop::applyanglesoffset();
+  maps / mp / gametypes / prop::applyxyzoffset();
+  maps / mp / gametypes / prop::applyanglesoffset();
   self.var_777D method_8449(self.propent, "J_prop_1");
   if(self.slopelocked && common_scripts\utility::func_562E(self.var_5E61)) {
     self.propent set_pitch_roll_for_ground_normal(self.var_777D);
   }
 
   self.propent method_8449(self.propanchor);
-  self.thirdpersonrange = maps\mp\gametypes\prop::getthirdpersonrangeforpropinfo(param_00);
-  self.thirdpersonheightoffset = maps\mp\gametypes\prop::getthirdpersonheightoffsetforpropinfo(param_00);
+  self.thirdpersonrange = maps / mp / gametypes / prop::getthirdpersonrangeforpropinfo(param_00);
+  self.thirdpersonheightoffset = maps / mp / gametypes / prop::getthirdpersonheightoffsetforpropinfo(param_00);
   self method_86BD(1, self.thirdpersonrange, self.thirdpersonheightoffset);
 }
 
@@ -288,13 +288,13 @@ propmatchslope() {
       self.propent method_8449(self.propanchor);
     }
 
-    if(maps\mp\gametypes\prop::useprophudserver()) {
+    if(maps / mp / gametypes / prop::useprophudserver()) {
       if(common_scripts\utility::func_55E0()) {
-        self.matchslopekey.var_00E5 = &"MP_PH_SLOPED";
+        self.matchslopekey.label = &"MP_PH_SLOPED";
         return;
       }
 
-      self.matchslopekey.var_00E5 = &"MP_PH_SLOPED_PC";
+      self.matchslopekey.label = &"MP_PH_SLOPED_PC";
       return;
     }
 
@@ -305,18 +305,18 @@ propmatchslope() {
   self setclientomnvar("ui_ph_matching_slope", 0);
   if(common_scripts\utility::func_562E(self.var_5E61)) {
     self.propent unlink();
-    self.propent.var_001D = (self.var_001D[0], self.propent.var_001D[1], self.var_001D[2]);
-    self.propent.var_0116 = self.propanchor.var_0116;
+    self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
+    self.propent.origin = self.propanchor.origin;
     self.propent method_8449(self.propanchor);
   }
 
-  if(maps\mp\gametypes\prop::useprophudserver()) {
+  if(maps / mp / gametypes / prop::useprophudserver()) {
     if(common_scripts\utility::func_55E0()) {
-      self.matchslopekey.var_00E5 = &"MP_PH_SLOPE";
+      self.matchslopekey.label = &"MP_PH_SLOPE";
       return;
     }
 
-    self.matchslopekey.var_00E5 = &"MP_PH_SLOPE_PC";
+    self.matchslopekey.label = &"MP_PH_SLOPE_PC";
     return;
   }
 }
@@ -350,10 +350,10 @@ propdeductclonechange() {
 propsetclonesleft(param_00) {
   self.clonesleft = param_00;
   self setclientomnvar("ui_ph_num_clones_left", self.clonesleft);
-  if(maps\mp\gametypes\prop::useprophudserver()) {
+  if(maps / mp / gametypes / prop::useprophudserver()) {
     self.clonekey setvalue(self.clonesleft);
     if(self.clonesleft <= 0) {
-      self.clonekey.var_0018 = 0.5;
+      self.clonekey.alpha = 0.5;
     }
   }
 }
@@ -369,10 +369,10 @@ propdeductflash() {
 propsetflashesleft(param_00) {
   self.abilityleft = param_00;
   self setclientomnvar("ui_ph_num_flashes_left", self.abilityleft);
-  if(maps\mp\gametypes\prop::useprophudserver()) {
+  if(maps / mp / gametypes / prop::useprophudserver()) {
     self.abilitykey setvalue(self.abilityleft);
     if(self.abilityleft <= 0) {
-      self.abilitykey.var_0018 = 0.5;
+      self.abilitykey.alpha = 0.5;
     }
   }
 }
@@ -383,8 +383,8 @@ set_pitch_roll_for_ground_normal(param_00) {
     return;
   }
 
-  var_02 = anglesToForward(self.var_001D);
-  var_03 = anglestoright(self.var_001D);
+  var_02 = anglesToForward(self.angles);
+  var_03 = anglestoright(self.angles);
   var_04 = vectortoangles(var_01);
   var_05 = angleclamp180(var_04[0] + 90);
   var_04 = (0, var_04[1], 0);
@@ -399,7 +399,7 @@ set_pitch_roll_for_ground_normal(param_00) {
   var_08 = vectordot(var_06, var_02);
   var_09 = var_08 * var_05;
   var_0A = 1 - abs(var_08) * var_05 * var_07;
-  self.var_001D = (var_09, self.var_001D[1], var_0A);
+  self.angles = (var_09, self.angles[1], var_0A);
 }
 
 get_ground_normal(param_00, param_01) {
@@ -409,12 +409,12 @@ get_ground_normal(param_00, param_01) {
     var_02 = param_01;
   }
 
-  var_03 = [self.var_0116];
+  var_03 = [self.origin];
   if(getdvarint("scr_ph_useBoundsForGroundNormal", 1)) {
     for(var_04 = -1; var_04 <= 1; var_04 = var_04 + 2) {
       for(var_05 = -1; var_05 <= 1; var_05 = var_05 + 2) {
         var_06 = var_02 method_8549(var_04, var_05, 0);
-        var_06 = (var_06[0], var_06[1], self.var_0116[2]);
+        var_06 = (var_06[0], var_06[1], self.origin[2]);
         var_03[var_03.size] = var_06;
       }
     }
@@ -472,16 +472,16 @@ unlockprop() {
   self unlink();
   if(self.slopelocked) {
     self.propent unlink();
-    self.propent.var_001D = (self.var_001D[0], self.propent.var_001D[1], self.var_001D[2]);
-    self.propent.var_0116 = self.propanchor.var_0116;
+    self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
+    self.propent.origin = self.propanchor.origin;
     self.propent method_8449(self.propanchor);
   }
 
   self.propanchor method_8449(self);
   self.var_5E61 = 0;
   self setclientomnvar("ui_ph_is_locked", 0);
-  if(maps\mp\gametypes\prop::useprophudserver()) {
-    self.lockpropkey.var_00E5 = &"MP_PH_LOCK";
+  if(maps / mp / gametypes / prop::useprophudserver()) {
+    self.lockpropkey.label = &"MP_PH_LOCK";
   }
 }
 
@@ -491,7 +491,7 @@ lockprop() {
   }
 
   self.propanchor unlink();
-  self.propanchor.var_0116 = self.var_0116;
+  self.propanchor.origin = self.origin;
   self playerlinkTo(self.propanchor);
   if(self.slopelocked) {
     self.propent unlink();
@@ -502,14 +502,14 @@ lockprop() {
   self.var_5E61 = 1;
   self notify("locked");
   self setclientomnvar("ui_ph_is_locked", 1);
-  if(maps\mp\gametypes\prop::useprophudserver()) {
-    self.lockpropkey.var_00E5 = &"MP_PH_LOCKED";
+  if(maps / mp / gametypes / prop::useprophudserver()) {
+    self.lockpropkey.label = &"MP_PH_LOCKED";
   }
 }
 
 canlock() {
   if(!self isonground()) {
-    var_00 = getgroundposition(self.var_0116, 15, 30000, 0);
+    var_00 = getgroundposition(self.origin, 15, 30000, 0);
     var_01 = getEntArray("trigger_hurt", "classname");
     foreach(var_03 in var_01) {
       if(ispointinvolume(var_00, var_03)) {
@@ -530,7 +530,7 @@ propspectate() {
   }
 
   for(;;) {
-    var_00 = common_scripts\utility::func_A715("spectate");
+    var_00 = common_scripts\utility::waittill_any_return("spectate");
     if(self.endingpropspecate) {
       continue;
     }
@@ -541,7 +541,7 @@ propspectate() {
         continue;
       }
 
-      maps\mp\gametypes\prop::createpropspeclist();
+      maps / mp / gametypes / prop::createpropspeclist();
       if(self.spectatableprops.size <= 1) {
         continue;
       }
@@ -564,7 +564,7 @@ propspectatekeys() {
   }
 
   for(;;) {
-    var_00 = common_scripts\utility::func_A715("zoomin", "zoomout");
+    var_00 = common_scripts\utility::waittill_any_return("zoomin", "zoomout");
     if(self.endingpropspecate) {
       continue;
     }
@@ -644,19 +644,19 @@ propspectateendwatch() {
 }
 
 createpropspecatehud() {
-  self.spectatecommands = maps\mp\gametypes\_hud_util::func_27ED("default", 1);
-  self.spectatecommands.var_00E5 = &"MP_PH_SPECCOMMANDS";
-  self.spectatecommands.var_01D3 = 20;
-  self.spectatecommands.var_01D7 = -80;
-  self.spectatecommands.var_0010 = "center";
-  self.spectatecommands.var_0011 = "middle";
-  self.spectatecommands.var_00C6 = "center_adjustable";
-  self.spectatecommands.var_01CA = "bottom_adjustable";
-  self.spectatecommands.var_001F = 1;
-  self.spectatecommands.var_009B = 1;
-  self.spectatecommands.var_0018 = 1;
-  self.spectatecommands.var_00AA = 0.5;
-  self.spectatecommands.var_00C2 = 0;
+  self.spectatecommands = maps\mp\gametypes\_hud_util::createfontstring("default", 1);
+  self.spectatecommands.label = &"MP_PH_SPECCOMMANDS";
+  self.spectatecommands.x = 20;
+  self.spectatecommands.y = -80;
+  self.spectatecommands.alignx = "center";
+  self.spectatecommands.aligny = "middle";
+  self.spectatecommands.horzalign = "center_adjustable";
+  self.spectatecommands.vertalign = "bottom_adjustable";
+  self.spectatecommands.archived = 1;
+  self.spectatecommands.fontscale = 1;
+  self.spectatecommands.alpha = 1;
+  self.spectatecommands.glowalpha = 0.5;
+  self.spectatecommands.hidewheninmenu = 0;
 }
 
 destroypropspecatehud() {
@@ -669,30 +669,30 @@ spectateprop() {
   var_00 = self.spectatableprops[self.spectatenumber];
   self.spectatingthisplayer = var_00;
   self.propanchor unlink();
-  self.propanchor.var_0116 = self.var_0116;
-  self setOrigin(var_00.var_0116);
-  self.var_001D = var_00.var_001D;
+  self.propanchor.origin = self.origin;
+  self setOrigin(var_00.origin);
+  self.angles = var_00.angles;
   self playerlinkTo(var_00.propanchor);
 }
 
 movetonewprop() {
   var_00 = self.spectatableprops[self.spectatenumber];
   self unlink();
-  self.var_0116 = var_00.var_0116;
-  self.var_001D = var_00.var_001D;
+  self.origin = var_00.origin;
+  self.angles = var_00.angles;
   self playerlinkTo(var_00.propanchor);
 }
 
 returntoprop() {
   self unlink();
-  self setOrigin(self.propanchor.var_0116);
+  self setOrigin(self.propanchor.origin);
   if(self.var_5E61) {
     self playerlinkTo(self.propanchor);
     return;
   }
 
   self.propanchor method_8449(self);
-  self.propanchor.var_0116 = self.var_0116;
+  self.propanchor.origin = self.origin;
 }
 
 nospectatablepropswatch() {
@@ -702,9 +702,9 @@ nospectatablepropswatch() {
 }
 
 propcamerazoom() {
-  self.thirdpersonrange = maps\mp\gametypes\prop::getthirdpersonrangeforpropinfo(self.var_777D.var_5135);
+  self.thirdpersonrange = maps / mp / gametypes / prop::getthirdpersonrangeforpropinfo(self.var_777D.var_5135);
   for(;;) {
-    var_00 = common_scripts\utility::func_A715("zoomin", "zoomout");
+    var_00 = common_scripts\utility::waittill_any_return("zoomin", "zoomout");
     if(common_scripts\utility::func_562E(self.endingpropspecate)) {
       continue;
     }
@@ -728,7 +728,7 @@ propcamerazoom() {
     }
 
     if(var_00 == "zoomout") {
-      if(self.thirdpersonrange >= max(maps\mp\gametypes\prop::getthirdpersonrangeforpropinfo(self.var_777D.var_5135), 240)) {
+      if(self.thirdpersonrange >= max(maps / mp / gametypes / prop::getthirdpersonrangeforpropinfo(self.var_777D.var_5135), 240)) {
         continue;
       }
 
@@ -755,7 +755,7 @@ proprotate() {
 setnewabilityhud() {
   switch (self.currentability) {
     case "FLASH":
-      self.abilitykey.var_00E5 = &"MP_PH_FLASH";
+      self.abilitykey.label = &"MP_PH_FLASH";
       break;
 
     default:
@@ -797,12 +797,12 @@ flashenemies(param_00, param_01) {
   }
 
   if(!isDefined(param_01)) {
-    param_01 = self.var_0116;
+    param_01 = self.origin;
   }
 
   playFX(common_scripts\utility::func_44F5("propFlash"), param_01 + (0, 0, 4));
   playsoundatpos(param_01, "prop_flashbang");
-  foreach(var_0C, var_03 in level.var_744A) {
+  foreach(var_0C, var_03 in level.players) {
     if(var_03 == param_00) {
       continue;
     }
@@ -811,7 +811,7 @@ flashenemies(param_00, param_01) {
       continue;
     }
 
-    if(!isDefined(var_03) || !isalive(var_03) || !isDefined(var_03.var_01A7) || var_03.var_01A7 != game["attackers"]) {
+    if(!isDefined(var_03) || !isalive(var_03) || !isDefined(var_03.team) || var_03.team != game["attackers"]) {
       continue;
     }
 
@@ -827,9 +827,9 @@ flashenemies(param_00, param_01) {
       }
 
       var_09 = vectorNormalize(var_04);
-      var_0A = anglesToForward(var_03 getangles());
+      var_0A = anglesToForward(var_03 getplayerangles());
       var_0B = vectordot(var_0A, var_09);
-      var_03 notify("flashbang", param_01 + (0, 0, 4), var_08, var_0B, param_00, param_00.var_01A7, 2);
+      var_03 notify("flashbang", param_01 + (0, 0, 4), var_08, var_0B, param_00, param_00.team, 2);
       param_00 thread maps\mp\gametypes\_damagefeedback::func_A102("standard", param_00);
     }
   }
@@ -880,18 +880,18 @@ cloneprop() {
     deletepropsifatmax();
   }
 
-  var_00 = spawn("script_model", self.var_777D.var_0116);
-  var_00.var_01A5 = "propClone";
-  var_00 setModel(self.var_777D.var_0106);
-  var_00.var_001D = self.var_777D.var_001D;
-  var_00.var_00BC = 50;
+  var_00 = spawn("script_model", self.var_777D.origin);
+  var_00.targetname = "propClone";
+  var_00 setModel(self.var_777D.model);
+  var_00.angles = self.var_777D.angles;
+  var_00.health = 50;
   var_00.var_7433 = self;
   var_00 setCanDamage(1);
   var_00 setdamagecallbackon(1);
   var_00.var_29B5 = ::damageclonewatch;
   var_00 thread deleteclone(self);
-  var_00 thread maps\mp\gametypes\prop::highlighttoteam(game["defenders"], 0, self);
-  var_00 common_scripts\utility::func_5FA9(self.var_01A7);
+  var_00 thread maps / mp / gametypes / prop::highlighttoteam(game["defenders"], 0, self);
+  var_00 common_scripts\utility::func_5FA9(self.team);
   self.propclones[self.propclones.size] = var_00;
 }
 
@@ -906,7 +906,7 @@ damageclonewatch(param_00, param_01, param_02, param_03, param_04, param_05, par
     }
 
     param_01 thread maps\mp\gametypes\_damagefeedback::func_A102("raid_buildable", self);
-    self.var_00E6 = param_00;
+    self.lastattacker = param_00;
     self finishentitydamage(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
   }
 }
@@ -917,8 +917,8 @@ deleteclone(param_00) {
   self endon("maxDelete");
   var_01 = 0.25;
   param_00 common_scripts\utility::func_A70C(self, "death");
-  if(isDefined(self.var_00E6)) {
-    level thread maps\mp\gametypes\_rank::func_1457("clone_destroyed", self.var_00E6);
+  if(isDefined(self.lastattacker)) {
+    level thread maps\mp\gametypes\_rank::func_1457("clone_destroyed", self.lastattacker);
     if(isDefined(self.var_7433)) {
       level thread maps\mp\gametypes\_rank::func_1457("clone_was_destroyed", self.var_7433);
     }
@@ -930,8 +930,8 @@ deleteclone(param_00) {
 
   var_02 = "prop_death";
   var_03 = "propDeathFX";
-  playsoundatpos(self.var_0116 + (0, 0, 4), var_02);
-  playFX(common_scripts\utility::func_44F5(var_03), self.var_0116 + (0, 0, 4));
+  playsoundatpos(self.origin + (0, 0, 4), var_02);
+  playFX(common_scripts\utility::func_44F5(var_03), self.origin + (0, 0, 4));
   if(isDefined(self)) {
     self delete();
   }
@@ -953,27 +953,27 @@ fadetoblackforxsec(param_00, param_01, param_02) {
   }
 
   var_03 = newclienthudelem(self);
-  var_03.var_00A0 = 0;
-  var_03.var_01D3 = 0;
-  var_03.var_01D7 = 0;
+  var_03.foreground = 0;
+  var_03.x = 0;
+  var_03.y = 0;
   var_03 setshader("black", 640, 480);
-  var_03.var_0010 = "left";
-  var_03.var_0011 = "top";
-  var_03.var_00C6 = "fullscreen";
-  var_03.var_01CA = "fullscreen";
-  var_03.var_0018 = 0;
+  var_03.alignx = "left";
+  var_03.aligny = "top";
+  var_03.horzalign = "fullscreen";
+  var_03.vertalign = "fullscreen";
+  var_03.alpha = 0;
   wait 0.05;
   if(param_01 > 0) {
     var_03 fadeovertime(param_01);
   }
 
-  var_03.var_0018 = 1;
+  var_03.alpha = 1;
   maps\mp\gametypes\_hostmigration::func_A6F5(param_00 - param_02);
   if(param_02 > 0) {
     var_03 fadeovertime(param_02);
   }
 
-  var_03.var_0018 = 0;
+  var_03.alpha = 0;
   maps\mp\gametypes\_hostmigration::func_A6F5(param_02);
   wait 0.05;
   safedestroy(var_03);
@@ -991,20 +991,20 @@ watchspecialgrenadethrow() {
 
 hidehudintermission() {
   level waittill("game_ended");
-  if(maps\mp\gametypes\prop::useprophudserver()) {
-    level.elim_hud.var_0018 = 0;
-    level.phwhistletimer.var_0018 = 0;
-    level.whistling.var_0018 = 0;
+  if(maps / mp / gametypes / prop::useprophudserver()) {
+    level.elim_hud.alpha = 0;
+    level.phwhistletimer.alpha = 0;
+    level.whistling.alpha = 0;
   }
 
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 propabilitykeysvisible(0);
   }
 }
 
 safesetalpha(param_00, param_01) {
   if(isDefined(param_00)) {
-    param_00.var_0018 = param_01;
+    param_00.alpha = param_01;
   }
 }
 
@@ -1015,7 +1015,7 @@ propabilitykeysvisible(param_00, param_01) {
     var_02 = 0;
   }
 
-  if(maps\mp\gametypes\prop::useprophudserver() || common_scripts\utility::func_562E(param_01)) {
+  if(maps / mp / gametypes / prop::useprophudserver() || common_scripts\utility::func_562E(param_01)) {
     safesetalpha(self.changepropkey, var_02);
     safesetalpha(self.spinpropkey, var_02);
     safesetalpha(self.lockpropkey, var_02);

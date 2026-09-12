@@ -3,28 +3,28 @@
  * Script: 1395.gsc
 *********************************************/
 
-lib_0573::func_52A4() {
-  lib_0561::initconsumablesfromtable("mys_box_key", ::lib_0573::func_A21F, ::lib_0573::func_1F5C, ::lib_0573::func_4598);
+func_52A4() {
+  lib_0561::initconsumablesfromtable("mys_box_key", ::func_A21F, ::func_1F5C, ::func_4598);
 }
 
-lib_0573::func_1F5C(param_00) {
+func_1F5C(param_00) {
   if(!lib_0561::func_1F7B()) {
     return 0;
   }
 
-  if(lib_0573::func_4B7B()) {
+  if(func_4B7B()) {
     return 0;
   }
 
   return 1;
 }
 
-lib_0573::func_A21F(param_00) {
-  self method_8615("zmb_pickup_general");
-  var_01 = self.var_259F[param_00].var_01B9;
+func_A21F(param_00) {
+  self playlocalsound("zmb_pickup_general");
+  var_01 = self.var_259F[param_00].type;
   self.var_65EC = spawnStruct();
-  self.var_65EC.var_01B9 = var_01;
-  self.var_65EC.var_267C = 1 - lib_0573::func_4599(var_01);
+  self.var_65EC.type = var_01;
+  self.var_65EC.var_267C = 1 - func_4599(var_01);
   if(common_scripts\utility::func_562E(level.reworkedconsumabledenabled)) {
     self.var_65EC.flatdiscount = 1250;
   }
@@ -33,7 +33,7 @@ lib_0573::func_A21F(param_00) {
   maps\mp\zombies\_zombies_magicbox::func_861C();
 }
 
-lib_0573::func_4598(param_00) {
+func_4598(param_00) {
   if(!isDefined(param_00)) {
     param_00 = "";
   }
@@ -56,7 +56,7 @@ lib_0573::func_4598(param_00) {
   }
 }
 
-lib_0573::func_4599(param_00) {
+func_4599(param_00) {
   if(!isDefined(param_00)) {
     param_00 = "";
   }
@@ -73,7 +73,7 @@ lib_0573::func_4599(param_00) {
   }
 }
 
-lib_0573::func_4B7B() {
+func_4B7B() {
   if(isDefined(self.var_65EC)) {
     return 1;
   }
@@ -81,8 +81,8 @@ lib_0573::func_4B7B() {
   return 0;
 }
 
-lib_0573::func_A21E() {
-  if(!lib_0573::func_4B7B()) {
+func_A21E() {
+  if(!func_4B7B()) {
     return;
   }
 

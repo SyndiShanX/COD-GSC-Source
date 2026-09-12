@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_dnk_fx.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   level.var_611["zmb_dnk_altered_bunkerdoor"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_bunkerdoor");
   level.var_611["zmb_dnk_electrical_sparks_runner"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_electrical_sparks_runner");
   level.var_611["zmb_dnk_electric_wires"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_electric_wires");
@@ -88,7 +88,7 @@ func_00F9() {
   level.var_611["zmb_med_trap_gib"] = loadfx("vfx/zombie/zmb_med_trap_gib");
   level.var_611["water_jet"] = loadfx("vfx/water/water_jet");
   level.var_611["boss_bomb_explode"] = loadfx("vfx/destructible/veh_sedan_police_explo_1_no_door");
-  level.var_611["gk_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks\zmb_gk_uber_charge_stg_3");
+  level.var_611["gk_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_3");
   level.var_611["spider_web_mesh"] = loadfx("vfx/unique/spider_web_mesh");
   level.var_611["insects_flies_landing_sm"] = loadfx("vfx/animal/insects_flies_landing_sm");
   level.var_611["zmb_dnk_altered_fake_tether"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_fake_tether");
@@ -100,5 +100,5 @@ func_00F9() {
   level.var_611["zmb_dnk_altered_fire_vertical"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_fire_vertical");
   level.var_611["zmb_dnk_altered_ash_cloud"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_ash_cloud");
   level.var_611["zmb_dnk_altered_zepellin"] = loadfx("vfx/map/mp_zombie_dnk/zmb_dnk_altered_zepellin");
-  level.var_611["moneyCloud"] = loadfx("vfx/gameplay\mp\zombie/gj_pickup_zombies_01_money");
+  level.var_611["moneyCloud"] = loadfx("vfx/gameplay/mp/zombie/gj_pickup_zombies_01_money");
 }

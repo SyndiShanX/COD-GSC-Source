@@ -3,7 +3,7 @@
  * Script: maps\mp\mp_zombie_house_aud.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   lib_0367::func_8E3E("house");
   func_7BBA();
   thread func_526E();
@@ -57,16 +57,16 @@ func_3689() {}
 func_326F() {}
 
 func_3257() {
-  level.var_120E = lib_0380::func_2889("training_house_door_close", undefined, self.var_116);
+  level.var_120E = lib_0380::func_2889("training_house_door_close", undefined, self.origin);
   lib_0378::func_8D14(level.var_120E);
 }
 
 func_3577() {
-  lib_0380::func_2889("house_ee_door_open", undefined, self.var_116);
+  lib_0380::func_2889("house_ee_door_open", undefined, self.origin);
 }
 
 func_3598() {
-  lib_0380::func_2889("training_crow_caw", undefined, self.var_116);
+  lib_0380::func_2889("training_crow_caw", undefined, self.origin);
 }
 
 func_358B(param_00, param_01) {

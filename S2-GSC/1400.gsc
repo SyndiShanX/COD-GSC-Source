@@ -3,28 +3,28 @@
  * Script: 1400.gsc
 *********************************************/
 
-lib_0578::func_52A4() {
-  lib_0561::initconsumablesfromtable("vending_machine", ::lib_0578::func_A244, ::lib_0578::func_1F8B, ::lib_0578::func_4716);
+func_52A4() {
+  lib_0561::initconsumablesfromtable("vending_machine", ::func_A244, ::func_1F8B, ::func_4716);
 }
 
-lib_0578::func_1F8B(param_00) {
+func_1F8B(param_00) {
   if(!lib_0561::func_1F7B()) {
     return 0;
   }
 
-  if(lib_0578::func_4BA4()) {
+  if(func_4BA4()) {
     return 0;
   }
 
   return 1;
 }
 
-lib_0578::func_A244(param_00) {
+func_A244(param_00) {
   self.var_4B7D = 1;
   self notify("perk_discount_applied");
 }
 
-lib_0578::func_4716(param_00) {
+func_4716(param_00) {
   if(!isDefined(param_00)) {
     param_00 = "";
   }
@@ -47,25 +47,25 @@ lib_0578::func_4716(param_00) {
   }
 }
 
-lib_0578::func_4717(param_00) {
+func_4717(param_00) {
   if(lib_056B::func_9D19(param_00.var_6F63)) {
     return 0;
   }
 
-  if(lib_0578::func_4BA4()) {
+  if(func_4BA4()) {
     return 0.5;
   }
 
   return 1;
 }
 
-lib_0578::func_4BA4() {
+func_4BA4() {
   return isDefined(self.var_4B7D) && self.var_4B7D;
 }
 
-lib_0578::func_A245() {
+func_A245() {
   var_00 = self;
-  if(var_00 lib_0578::func_4BA4()) {
+  if(var_00 func_4BA4()) {
     var_00.var_4B7D = undefined;
   }
 

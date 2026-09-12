@@ -3,15 +3,15 @@
  * Script: maps\mp\zombies\_zombies_orbital_gravity_entangler.gsc
 ******************************************************************/
 
-func_00D5() {
+init() {
   var_00 = common_scripts\utility::func_46B5("orbital_gravity_entangler", "targetname");
-  var_01 = common_scripts\utility::func_46B5(var_00.var_1A2, "targetname");
-  var_00.var_14F = distance(var_00.var_116, var_01.var_116);
+  var_01 = common_scripts\utility::func_46B5(var_00.target, "targetname");
+  var_00.var_14F = distance(var_00.origin, var_01.origin);
   var_02 = var_00 common_scripts\utility::func_8FFC();
-  var_02 method_805B();
+  var_02 show();
   var_02 thread rotate_me();
   var_03 = var_00 common_scripts\utility::func_8FFC();
-  var_03 method_805B();
+  var_03 show();
   var_03 thread rotate_me(1);
   level.oribital_rotator_1 = var_02;
   level.oribital_rotator_2 = var_03;
@@ -51,7 +51,7 @@ watch_for_grab() {
     }
 
     level.grenades_in_orbit = common_scripts\utility::func_FA0(level.grenades_in_orbit);
-    var_01 = common_scripts\utility::func_40B0(var_00.var_116, level.grenades_in_orbit);
+    var_01 = common_scripts\utility::func_40B0(var_00.origin, level.grenades_in_orbit);
     var_01 = common_scripts\utility::func_FA0(var_01);
     if(var_01.size == 0) {
       continue;
@@ -61,7 +61,7 @@ watch_for_grab() {
       continue;
     }
 
-    if(distance2d(var_00.var_116, var_01[0].var_116) > 70) {
+    if(distance2d(var_00.origin, var_01[0].origin) > 70) {
       continue;
     }
 
@@ -85,13 +85,13 @@ watch_for_entanglements() {
           continue;
         }
 
-        if(var_04 != var_02 && distance2d(var_04.var_116, var_02.var_116) < 60) {
+        if(var_04 != var_02 && distance2d(var_04.origin, var_02.origin) < 60) {
           level.grenades_in_orbit = common_scripts\utility::func_F93(level.grenades_in_orbit, var_04);
           var_05 = get_hyper_color(var_02.var_3F74, var_04.var_3F74);
           if(isDefined(var_05)) {
             var_02 set_fx(var_05);
           } else {
-            var_02 detonateusingweapon(var_02.var_A9E0, var_02.var_117, var_02);
+            var_02 detonateusingweapon(var_02.var_A9E0, var_02.owner, var_02);
             var_02 remove_fake_projectile();
           }
 
@@ -145,7 +145,7 @@ watch_for_grenades_and_projectiles(param_00) {
   var_02 = 1200;
   var_01 endon("disconnect");
   var_03 = param_00.var_14F;
-  var_04 = param_00.var_116;
+  var_04 = param_00.origin;
   childthread watch_for_grab();
   var_05 = ["frag_grenade_zm", "c4_zm", "semtex_zm", "throwingknife_zm"];
   common_scripts\utility::func_3C9F(lib_0557::func_7838("quest_deathraven", "quest_deathraven_survive_rush"));
@@ -155,7 +155,7 @@ watch_for_grenades_and_projectiles(param_00) {
       continue;
     }
 
-    if(abs(self.var_116[2] - var_04[2]) > 60 || distance2d(var_06.var_116, var_04) > var_03) {
+    if(abs(self.origin[2] - var_04[2]) > 60 || distance2d(var_06.origin, var_04) > var_03) {
       if(var_01.grenadecolorsheld.size > 0) {
         var_08 = var_06 spawn_a_fake_grenade(var_01, var_07);
         if(function_0279(var_08)) {
@@ -186,7 +186,7 @@ watch_for_grenades_and_projectiles(param_00) {
     }
 
     var_08.var_A9E0 = var_07;
-    var_08.var_117 = self;
+    var_08.owner = self;
     level.grenades_in_orbit = common_scripts\utility::func_F6F(level.grenades_in_orbit, var_08);
     var_08 thread handle_detonation(self, var_07);
   }
@@ -216,8 +216,8 @@ spawn_a_fake_grenade(param_00, param_01) {
 
   var_02 = self;
   var_03 = var_02 common_scripts\utility::func_8FFC();
-  var_03 method_805B();
-  var_03.var_1D = (30, 0, 15);
+  var_03 show();
+  var_03.angles = (30, 0, 15);
   var_04 = getzombielethalmodel(param_01);
   var_03 setModel(var_04);
   var_03 childthread seek_enemy_targets(param_00, param_01);
@@ -245,7 +245,7 @@ get_all_magical_grenades() {
 
 get_is_facing_against_circle(param_00, param_01) {
   var_02 = get_player_angle_flat();
-  var_03 = (param_00.var_116[0], param_00.var_116[1], param_01[2]);
+  var_03 = (param_00.origin[0], param_00.origin[1], param_01[2]);
   var_04 = get_circle_angle_compare(var_03, param_01);
   var_05 = var_02 - var_04;
   var_06 = int(var_05 < -200 || var_05 <= 90 && var_05 >= 0);
@@ -351,7 +351,7 @@ seek_enemy_targets(param_00, param_01) {
 
     var_04 = lib_0547::func_408F();
     foreach(var_06 in var_04) {
-      if(distance(self.var_116, var_06.var_116) < 96) {
+      if(distance(self.origin, var_06.origin) < 96) {
         var_02 = 1;
         break;
       }
@@ -373,9 +373,9 @@ seek_enemy_targets(param_00, param_01) {
     }
 
     if(self.lethallevel == 0) {
-      var_06 = common_scripts\utility::func_4461(self.var_116, lib_0547::func_408F());
-      if(isDefined(var_06) && distance(self.var_116, var_06.var_116) < 96) {
-        var_06 dodamage(var_06.var_BC + 1, self.var_116, param_00, self, "MOD_MELEE", param_01);
+      var_06 = common_scripts\utility::func_4461(self.origin, lib_0547::func_408F());
+      if(isDefined(var_06) && distance(self.origin, var_06.origin) < 96) {
+        var_06 dodamage(var_06.health + 1, self.origin, param_00, self, "MOD_MELEE", param_01);
         remove_fake_projectile();
         return;
       }

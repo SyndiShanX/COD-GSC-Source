@@ -3,7 +3,7 @@
  * Script: maps\mp\gametypes\_damagefeedback.gsc
 *************************************************/
 
-func_00D5() {}
+init() {}
 
 func_A102(param_00, param_01) {
   if(!isPlayer(self) || !isDefined(param_00)) {
@@ -18,7 +18,7 @@ func_A102(param_00, param_01) {
     case "resupply_scorestreak":
     case "resupply_intel":
     case "escalation_activated":
-      if(!level.var_4B17) {
+      if(!level.hardcoremode) {
         setdamagepickupclientomnvar(param_00);
       }
       break;
@@ -39,15 +39,15 @@ func_A102(param_00, param_01) {
       break;
 
     case "weakpoint":
-      if(isDefined(level.var_585D) && level.var_585D) {
+      if(isDefined(level.iszombiegame) && level.iszombiegame) {
         func_865B("headshot");
       }
       break;
 
     case "headshot":
-      if(isDefined(level.var_585D) && level.var_585D) {
+      if(isDefined(level.iszombiegame) && level.iszombiegame) {
         func_865B("headshot");
-      } else if(!level.var_258F) {
+      } else if(!level.console) {
         func_865B("standard");
       } else {
         func_865B("headshot");
@@ -67,7 +67,7 @@ func_A102(param_00, param_01) {
       break;
 
     case "minor":
-      if(isDefined(level.var_585D) && level.var_585D) {
+      if(isDefined(level.iszombiegame) && level.iszombiegame) {
         func_865B("minor");
       } else {
         func_865B("standard");

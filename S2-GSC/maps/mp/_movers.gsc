@@ -3,7 +3,7 @@
  * Script: maps\mp\_movers.gsc
 *********************************************/
 
-func_00F9() {
+main() {
   if(getDvar("233") == "1") {
     return;
   }
@@ -24,10 +24,10 @@ func_00F9() {
   var_00 = [];
   var_01 = func_8213();
   foreach(var_03 in var_01) {
-    var_00 = common_scripts\utility::func_0F73(var_00, getEntArray(var_03, "classname"));
+    var_00 = common_scripts\utility::func_F73(var_00, getEntArray(var_03, "classname"));
   }
 
-  common_scripts\utility::func_0FB2(var_00, ::func_821E);
+  common_scripts\utility::array_thread(var_00, ::func_821E);
 }
 
 func_8213() {
@@ -41,7 +41,7 @@ func_8222() {
 
   var_00 = func_8213();
   foreach(var_02 in var_00) {
-    if(self.var_003A == var_02) {
+    if(self.classname == var_02) {
       self.var_820A = 1;
       return 1;
     }
@@ -80,8 +80,8 @@ func_820B(param_00, param_01, param_02, param_03) {
   }
 
   var_04 = spawnStruct();
-  var_04.var_0EC4 = param_01;
-  var_04.var_0ED1 = param_02;
+  var_04.var_EC4 = param_01;
+  var_04.var_ED1 = param_02;
   level.var_8211[param_00][param_03] = var_04;
 }
 
@@ -92,31 +92,31 @@ func_821E() {
   self.var_A1F9 = [];
   self.var_5DAB = [];
   var_00 = [];
-  if(isDefined(self.var_01A2)) {
-    var_00 = common_scripts\utility::func_46B7(self.var_01A2, "targetname");
+  if(isDefined(self.target)) {
+    var_00 = common_scripts\utility::func_46B7(self.target, "targetname");
   }
 
   foreach(var_02 in var_00) {
-    if(!isDefined(var_02.var_0165)) {
+    if(!isDefined(var_02.script_noteworthy)) {
       continue;
     }
 
-    switch (var_02.var_0165) {
+    switch (var_02.script_noteworthy) {
       case "origin":
-        if(!isDefined(var_02.var_001D)) {
-          var_02.var_001D = (0, 0, 0);
+        if(!isDefined(var_02.angles)) {
+          var_02.angles = (0, 0, 0);
         }
 
-        self.var_6C3E = spawn("script_model", var_02.var_0116);
-        self.var_6C3E.var_001D = var_02.var_001D;
+        self.var_6C3E = spawn("script_model", var_02.origin);
+        self.var_6C3E.angles = var_02.angles;
         self.var_6C3E setModel("tag_origin");
         self.var_6C3E linkTo(self);
         break;
 
       case "scene_node":
       case "scripted_node":
-        if(!isDefined(var_02.var_001D)) {
-          var_02.var_001D = (0, 0, 0);
+        if(!isDefined(var_02.angles)) {
+          var_02.angles = (0, 0, 0);
         }
 
         self.var_830E = var_02;
@@ -128,16 +128,16 @@ func_821E() {
   }
 
   var_04 = [];
-  if(isDefined(self.var_01A2)) {
-    var_04 = getEntArray(self.var_01A2, "targetname");
+  if(isDefined(self.target)) {
+    var_04 = getEntArray(self.target, "targetname");
   }
 
   foreach(var_02 in var_04) {
-    if(!isDefined(var_02.var_0165)) {
+    if(!isDefined(var_02.script_noteworthy)) {
       continue;
     }
 
-    var_06 = strtok(var_02.var_0165, ";");
+    var_06 = strtok(var_02.script_noteworthy, ";");
     foreach(var_08 in var_06) {
       switch (var_08) {
         case "use_trigger_link":
@@ -187,8 +187,8 @@ func_8237() {
 }
 
 func_8230() {
-  self.var_64C0 = self.var_0116;
-  self.var_64BF = self.var_001D;
+  self.var_64C0 = self.origin;
+  self.var_64BF = self.angles;
 }
 
 func_822F(param_00) {
@@ -197,8 +197,8 @@ func_822F(param_00) {
     self scriptmodelclearanim();
   }
 
-  self.var_0116 = self.var_64C0;
-  self.var_001D = self.var_64BF;
+  self.origin = self.var_64C0;
+  self.angles = self.var_64BF;
   self notify("new_path");
   wait 0.05;
   func_8237();
@@ -240,21 +240,21 @@ func_822D() {
   self.var_64C5 = [];
   var_00 = [];
   var_01 = [];
-  if(isDefined(self.var_01A2)) {
-    var_00 = common_scripts\utility::func_46B7(self.var_01A2, "targetname");
-    var_01 = getEntArray(self.var_01A2, "targetname");
+  if(isDefined(self.target)) {
+    var_00 = common_scripts\utility::func_46B7(self.target, "targetname");
+    var_01 = getEntArray(self.target, "targetname");
   }
 
   for(var_02 = 0; var_02 < var_00.size; var_02++) {
     var_03 = var_00[var_02];
-    if(!isDefined(var_03.var_0165)) {
-      var_03.var_0165 = "goal";
+    if(!isDefined(var_03.script_noteworthy)) {
+      var_03.script_noteworthy = "goal";
     }
 
-    switch (var_03.var_0165) {
+    switch (var_03.script_noteworthy) {
       case "ignore":
-        if(isDefined(var_03.var_01A2)) {
-          var_04 = common_scripts\utility::func_46B7(var_03.var_01A2, "targetname");
+        if(isDefined(var_03.target)) {
+          var_04 = common_scripts\utility::func_46B7(var_03.target, "targetname");
           foreach(var_06 in var_04) {
             var_00[var_00.size] = var_06;
           }
@@ -290,7 +290,7 @@ func_822D() {
 }
 
 func_822A(param_00) {
-  if(!isDefined(param_00.var_0165)) {
+  if(!isDefined(param_00.script_noteworthy)) {
     return;
   }
 
@@ -298,7 +298,7 @@ func_822A(param_00) {
     param_00 waittill("script_mover_init");
   }
 
-  var_01 = strtok(param_00.var_0165, ";");
+  var_01 = strtok(param_00.script_noteworthy, ";");
   foreach(var_03 in var_01) {
     var_04 = strtok(var_03, "_");
     if(var_04.size < 3 || var_04[1] != "on") {
@@ -338,7 +338,7 @@ func_822A(param_00) {
         break;
 
       case "show":
-        param_00 method_805C();
+        param_00 hide();
         thread func_821A(param_00, var_06, ::func_8235, ::func_821C);
         break;
 
@@ -400,11 +400,11 @@ func_8218(param_00) {
 }
 
 func_821C(param_00) {
-  self method_805C();
+  self hide();
 }
 
 func_8235(param_00) {
-  self method_805B();
+  self show();
 }
 
 func_8238(param_00) {
@@ -482,11 +482,11 @@ func_822E(param_00, param_01) {
   }
 
   if(isDefined(self.var_830E)) {
-    self method_8495(param_00.var_0EC4, self.var_830E.var_0116, self.var_830E.var_001D, "script_mover_anim");
+    self method_8495(param_00.var_EC4, self.var_830E.origin, self.var_830E.angles, "script_mover_anim");
     return;
   }
 
-  self method_8278(param_00.var_0EC4, "script_mover_anim");
+  self method_8278(param_00.var_EC4, "script_mover_anim");
 }
 
 func_821B() {
@@ -530,10 +530,10 @@ func_8225(param_00) {
     var_05 = var_02.var_6E5C["decel_time"];
     var_06 = 0;
     var_07 = 0;
-    var_08 = transformmove(var_01.var_0116, var_01.var_001D, self.var_6C3E.var_0116, self.var_6C3E.var_001D, self.var_0116, self.var_001D);
-    if(var_02.var_0116 != var_01.var_0116) {
+    var_08 = transformmove(var_01.origin, var_01.angles, self.var_6C3E.origin, self.var_6C3E.angles, self.origin, self.angles);
+    if(var_02.origin != var_01.origin) {
       if(isDefined(var_02.var_6E5C["move_speed"])) {
-        var_09 = distance(var_02.var_0116, var_01.var_0116);
+        var_09 = distance(var_02.origin, var_01.origin);
         var_03 = var_09 / var_02.var_6E5C["move_speed"];
       }
 
@@ -547,7 +547,7 @@ func_8225(param_00) {
 
       if(var_03 <= 0) {
         var_02 method_808C();
-        var_02.var_0116 = var_08["origin"];
+        var_02.origin = var_08["origin"];
       } else {
         var_02 moveTo(var_08["origin"], var_03, var_04, var_05);
       }
@@ -555,10 +555,10 @@ func_8225(param_00) {
       var_06 = 1;
     }
 
-    if(func_0DDE(var_08["angles"]) != func_0DDE(var_02.var_001D)) {
+    if(func_0DDE(var_08["angles"]) != func_0DDE(var_02.angles)) {
       if(var_03 <= 0) {
         var_02 method_808C();
-        var_02.var_001D = var_08["angles"];
+        var_02.angles = var_08["angles"];
       } else {
         var_02 rotateTo(var_08["angles"], var_03, var_04, var_05);
       }
@@ -628,11 +628,11 @@ func_823D(param_00, param_01) {
 
 func_821F() {
   self.var_6E5C = [];
-  if(!isDefined(self.var_001D)) {
-    self.var_001D = (0, 0, 0);
+  if(!isDefined(self.angles)) {
+    self.angles = (0, 0, 0);
   }
 
-  self.var_001D = func_0DDE(self.var_001D);
+  self.angles = func_0DDE(self.angles);
   func_822B(self.var_8260);
 }
 
@@ -708,7 +708,7 @@ func_822C(param_00) {
     }
   }
 
-  return var_03;
+  return var_01;
 }
 
 func_8212(param_00) {
@@ -780,14 +780,14 @@ func_8232() {
 }
 
 func_8221() {
-  return isDefined(self.var_0187) && self.var_0187 & 1;
+  return isDefined(self.spawnflags) && self.spawnflags & 1;
 }
 
 func_8220() {
   return isDefined(self.var_6E5C["animation"]);
 }
 
-func_00D5() {
+init() {
   level thread func_8214();
   level thread func_820E();
 }
@@ -815,7 +815,7 @@ func_7388() {
   self.var_A043 = 0;
   for(;;) {
     self waittill("unresolved_collision", var_00);
-    if(function_01EF(self) && isDefined(self.var_0EAE)) {
+    if(function_01EF(self) && isDefined(self.var_EAE)) {
       if(self method_8554() == "noclip") {
         continue;
       }
@@ -856,17 +856,17 @@ func_23D3() {
 
 func_A04A(param_00) {
   var_01 = self;
-  if(!isDefined(var_01.var_0117)) {
+  if(!isDefined(var_01.owner)) {
     param_00 func_64C1();
     return;
   }
 
   var_02 = 0;
-  if(level.var_984D) {
-    if(isDefined(var_01.var_0117.var_01A7) && var_01.var_0117.var_01A7 != param_00.var_01A7) {
+  if(level.teambased) {
+    if(isDefined(var_01.owner.team) && var_01.owner.team != param_00.team) {
       var_02 = 1;
     }
-  } else if(param_00 != var_01.var_0117) {
+  } else if(param_00 != var_01.owner) {
     var_02 = 1;
   }
 
@@ -880,7 +880,7 @@ func_A04A(param_00) {
     var_03 = var_01.var_A044;
   }
 
-  param_00 dodamage(var_03, var_01.var_0116, var_01.var_0117, var_01, "MOD_CRUSH");
+  param_00 dodamage(var_03, var_01.origin, var_01.owner, var_01, "MOD_CRUSH");
 }
 
 func_A047(param_00, param_01) {
@@ -891,33 +891,33 @@ func_A047(param_00, param_01) {
       var_02 = [];
     }
 
-    var_04 = getclosestpointonnavmesh(param_00.var_0116);
+    var_04 = getclosestpointonnavmesh(param_00.origin);
     if(isDefined(var_04)) {
       var_03 = spawnStruct();
-      var_03.var_0116 = getclosestpointonnavmesh(param_00.var_0116);
-      var_02 = common_scripts\utility::func_0F6F(var_02, var_03);
+      var_03.origin = getclosestpointonnavmesh(param_00.origin);
+      var_02 = common_scripts\utility::func_F6F(var_02, var_03);
     }
 
-    var_02 = common_scripts\utility::func_0F73(var_02, getnodesinradius(param_00.var_0116, 300, 0, 200, "End 3D"));
+    var_02 = common_scripts\utility::func_F73(var_02, getnodesinradius(param_00.origin, 300, 0, 200, "End 3D"));
     if(isDefined(level.failsafe_collision_nodes) && isarray(level.failsafe_collision_nodes)) {
-      var_02 = common_scripts\utility::func_0F73(var_02, level.failsafe_collision_nodes);
+      var_02 = common_scripts\utility::func_F73(var_02, level.failsafe_collision_nodes);
     }
   }
 
   if(isDefined(var_02)) {
-    var_02 = function_01AC(var_02, param_00.var_0116);
+    var_02 = function_01AC(var_02, param_00.origin);
   } else {
-    var_02 = getnodesinradius(param_00.var_0116, 300, 0, 200);
-    var_02 = function_01AC(var_02, param_00.var_0116);
+    var_02 = getnodesinradius(param_00.origin, 300, 0, 200);
+    var_02 = function_01AC(var_02, param_00.origin);
   }
 
   var_05 = (0, 0, -100);
   param_00 method_843C();
   param_00 method_808C();
-  param_00 setOrigin(param_00.var_0116 + var_05);
+  param_00 setOrigin(param_00.origin + var_05);
   for(var_06 = 0; var_06 < var_02.size; var_06++) {
     var_07 = var_02[var_06];
-    var_08 = var_07.var_0116;
+    var_08 = var_07.origin;
     if(!canspawn(var_08)) {
       continue;
     }
@@ -938,7 +938,7 @@ func_A047(param_00, param_01) {
     return;
   }
 
-  if(level.var_015D == "mp_hub_allies_slim" && var_02.size == 0) {
+  if(level.script == "mp_hub_allies_slim" && var_02.size == 0) {
     if(param_00 playerisweaponplantenabled()) {
       param_00 common_scripts\_plant_weapon::forcedismountweapon();
     }
@@ -946,7 +946,7 @@ func_A047(param_00, param_01) {
     return;
   }
 
-  param_00 setOrigin(param_00.var_0116 - var_05);
+  param_00 setOrigin(param_00.origin - var_05);
   if(!isDefined(param_01)) {
     param_01 = 1;
   }
@@ -959,7 +959,7 @@ func_A047(param_00, param_01) {
 func_A04B(param_00) {}
 
 func_64C1() {
-  maps\mp\_utility::func_0728();
+  maps\mp\_utility::_suicide();
 }
 
 func_7305(param_00) {
@@ -1002,7 +1002,7 @@ func_774B(param_00, param_01) {
   }
 
   if(isDefined(param_00.var_720F)) {
-    playFX(common_scripts\utility::func_44F5("airdrop_crate_destroy"), self.var_0116);
+    playFX(common_scripts\utility::func_44F5("airdrop_crate_destroy"), self.origin);
   }
 
   if(isDefined(param_00.var_2AA8)) {

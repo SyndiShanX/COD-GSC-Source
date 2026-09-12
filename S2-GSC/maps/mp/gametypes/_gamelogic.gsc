@@ -11,7 +11,7 @@ func_6B3C(param_00) {
   level endon("abort_forfeit");
   level thread func_3E3A();
   level.var_3E39 = 1;
-  if(!level.var_984D && level.var_744A.size > 1) {
+  if(!level.teambased && level.players.size > 1) {
     wait(10);
   } else {
     wait(1.05);
@@ -25,7 +25,7 @@ func_6B3C(param_00) {
   if(!isDefined(param_00)) {
     level.var_3B5C = "none";
     var_02 = game["end_reason"]["players_forfeited"];
-    var_03 = level.var_744A[0];
+    var_03 = level.players[0];
   } else if(var_01 == "axis") {
     level.var_3B5C = "axis";
     if(maps\mp\_utility::func_579B() && game["switchedsides"]) {
@@ -34,7 +34,7 @@ func_6B3C(param_00) {
       var_03 = game["end_reason"]["allies_forfeited"];
     }
 
-    if(level.var_3FDC == "infect") {
+    if(level.gametype == "infect") {
       var_03 = game["end_reason"]["survivors_forfeited"];
     }
 
@@ -47,26 +47,26 @@ func_6B3C(param_00) {
       var_03 = game["end_reason"]["axis_forfeited"];
     }
 
-    if(level.var_3FDC == "infect") {
+    if(level.gametype == "infect") {
       var_03 = game["end_reason"]["infected_forfeited"];
     }
 
     var_03 = "allies";
-  } else if(level.var_6520 && issubstr(var_01, "team_")) {
+  } else if(level.multiteambased && issubstr(var_01, "team_")) {
     var_03 = var_01;
   } else {
     level.var_3B5C = "none";
     var_03 = "tie";
   }
 
-  level.var_3E16 = 1;
+  level.forcedend = 1;
   if(isPlayer(var_03)) {
-    function_018D("forfeit, win: " + var_03 getxuid() + "(" + var_03.var_0109 + ")");
+    logstring("forfeit, win: " + var_03 getxuid() + "(" + var_03.name + ")");
   } else {
-    function_018D("forfeit, win: " + var_03 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
+    logstring("forfeit, win: " + var_03 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
   }
 
-  thread func_36B9(var_03, var_02);
+  thread endgame(var_03, var_02);
 }
 
 func_3E3A() {
@@ -83,7 +83,7 @@ func_602A(param_00) {
   level endon("match_forfeit_timer_beginning");
   setomnvar("ui_match_countdown_title", 3);
   setomnvar("ui_match_countdown_toggle", 1);
-  while(param_00 > 0 && !level.var_3F9D && !level.var_3E38 && !level.var_5139) {
+  while(param_00 > 0 && !level.gameended && !level.var_3E38 && !level.var_5139) {
     setomnvar("ui_match_countdown", param_00);
     wait(1);
     param_00--;
@@ -102,38 +102,38 @@ func_6029(param_00) {
 func_2BAD(param_00) {
   level.var_3B5C = "none";
   if(param_00 == "allies") {
-    function_018D("team eliminated, win: opfor, allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
+    logstring("team eliminated, win: opfor, allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
     level.var_3B5C = "axis";
-    thread func_36B9("axis", game["end_reason"]["allies_eliminated"]);
+    thread endgame("axis", game["end_reason"]["allies_eliminated"]);
     return;
   }
 
   if(param_00 == "axis") {
-    function_018D("team eliminated, win: allies, allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
+    logstring("team eliminated, win: allies, allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
     level.var_3B5C = "allies";
-    thread func_36B9("allies", game["end_reason"]["axis_eliminated"]);
+    thread endgame("allies", game["end_reason"]["axis_eliminated"]);
     return;
   }
 
-  function_018D("tie, allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
+  logstring("tie, allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
   level.var_3B5C = "none";
-  if(level.var_984D) {
-    thread func_36B9("tie", game["end_reason"]["tie"]);
+  if(level.teambased) {
+    thread endgame("tie", game["end_reason"]["tie"]);
     return;
   }
 
-  thread func_36B9(undefined, game["end_reason"]["tie"]);
+  thread endgame(undefined, game["end_reason"]["tie"]);
 }
 
 func_2BAF(param_00) {
-  if(level.var_984D) {
+  if(level.teambased) {
     var_01 = maps\mp\_utility::func_454F(param_00);
     var_01 thread func_478F();
   } else {
     var_01 = maps\mp\_utility::func_454F();
-    function_018D("last one alive, win: " + var_01.var_0109);
+    logstring("last one alive, win: " + var_01.name);
     level.var_3B5C = "none";
-    thread func_36B9(var_01, game["end_reason"]["enemies_eliminated"]);
+    thread endgame(var_01, game["end_reason"]["enemies_eliminated"]);
   }
 
   return 1;
@@ -142,7 +142,7 @@ func_2BAF(param_00) {
 func_2BB0() {
   var_00 = undefined;
   level.var_3B5C = "none";
-  if(level.var_984D) {
+  if(level.teambased) {
     if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
       if(function_037E()) {
         var_00 = "overtime";
@@ -157,38 +157,38 @@ func_2BB0() {
       var_00 = "allies";
     }
 
-    if(maps\mp\_utility::func_761E()) {
+    if(maps\mp\_utility::practiceroundgame()) {
       var_00 = "none";
     }
 
-    function_018D("time limit, win: " + var_00 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
+    logstring("time limit, win: " + var_00 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
   } else {
     var_00 = maps\mp\gametypes\_gamescore::func_450A();
     if(isDefined(var_00)) {
-      function_018D("time limit, win: " + var_00.var_0109);
+      logstring("time limit, win: " + var_00.name);
     } else {
-      function_018D("time limit, tie");
+      logstring("time limit, tie");
     }
   }
 
-  thread func_36B9(var_00, game["end_reason"]["time_limit_reached"]);
+  thread endgame(var_00, game["end_reason"]["time_limit_reached"]);
 }
 
 func_2BAE(param_00) {
   var_01 = undefined;
   level.var_3B5C = "none";
-  thread func_36B9("halftime", game["end_reason"][param_00]);
+  thread endgame("halftime", game["end_reason"][param_00]);
 }
 
 func_3E1A() {
-  if(level.var_4DFE || level.var_3E16) {
+  if(level.hostforcedend || level.forcedend) {
     return;
   }
 
   setnojiptime(1);
   var_00 = undefined;
   level.var_3B5C = "none";
-  if(level.var_984D) {
+  if(level.teambased) {
     if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
       var_00 = "tie";
     } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
@@ -199,37 +199,37 @@ func_3E1A() {
       var_00 = "allies";
     }
 
-    function_018D("host ended game, win: " + var_00 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
+    logstring("host ended game, win: " + var_00 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
   } else {
     var_00 = maps\mp\gametypes\_gamescore::func_450A();
     if(isDefined(var_00)) {
-      function_018D("host ended game, win: " + var_00.var_0109);
+      logstring("host ended game, win: " + var_00.name);
     } else {
-      function_018D("host ended game, tie");
+      logstring("host ended game, tie");
     }
   }
 
-  level.var_3E16 = 1;
-  level.var_4DFE = 1;
-  if(level.var_910F) {
+  level.forcedend = 1;
+  level.hostforcedend = 1;
+  if(level.splitscreen) {
     var_01 = game["end_reason"]["ended_game"];
   } else {
     var_01 = game["end_reason"]["host_ended_game"];
   }
 
-  thread func_36B9(var_00, var_01);
+  thread endgame(var_00, var_01);
 }
 
 func_6B9B() {
   var_00 = game["end_reason"]["score_limit_reached"];
   var_01 = undefined;
   level.var_3B5C = "none";
-  if(level.var_6520) {
+  if(level.multiteambased) {
     var_01 = maps\mp\gametypes\_gamescore::func_473F();
     if(var_01 == "none") {
       var_01 = "tie";
     }
-  } else if(level.var_984D) {
+  } else if(level.teambased) {
     if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
       var_01 = "tie";
     } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
@@ -240,35 +240,35 @@ func_6B9B() {
       level.var_3B5C = "allies";
     }
 
-    function_018D("scorelimit, win: " + var_01 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
+    logstring("scorelimit, win: " + var_01 + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
   } else {
     var_01 = maps\mp\gametypes\_gamescore::func_450A();
     if(isDefined(var_01)) {
-      function_018D("scorelimit, win: " + var_01.var_0109);
+      logstring("scorelimit, win: " + var_01.name);
     } else {
-      function_018D("scorelimit, tie");
+      logstring("scorelimit, tie");
     }
   }
 
-  thread func_36B9(var_01, var_00);
+  thread endgame(var_01, var_00);
   return 1;
 }
 
-func_A11E() {
+updategameevents() {
   if(maps\mp\_utility::func_602B() && !level.var_5139 && !getdvarint("850") && !getdvarint("5357") && !isDefined(level.var_2F85) || !level.var_2F85) {
-    if(level.var_6520) {
+    if(level.multiteambased) {
       var_00 = 0;
       var_01 = 0;
-      for(var_02 = 0; var_02 < level.var_985B.size; var_02++) {
-        var_00 = var_00 + level.var_984F[level.var_985B[var_02]];
-        if(level.var_984F[level.var_985B[var_02]]) {
+      for(var_02 = 0; var_02 < level.teamnamelist.size; var_02++) {
+        var_00 = var_00 + level.teamcount[level.teamnamelist[var_02]];
+        if(level.teamcount[level.teamnamelist[var_02]]) {
           var_01 = var_01 + 1;
         }
       }
 
-      for(var_02 = 0; var_02 < level.var_985B.size; var_02++) {
-        if(var_00 == level.var_984F[level.var_985B[var_02]] && game["state"] == "playing") {
-          thread func_6B3C(level.var_985B[var_02]);
+      for(var_02 = 0; var_02 < level.teamnamelist.size; var_02++) {
+        if(var_00 == level.teamcount[level.teamnamelist[var_02]] && game["state"] == "playing") {
+          thread func_6B3C(level.teamnamelist[var_02]);
           return;
         }
       }
@@ -277,29 +277,29 @@ func_A11E() {
         level.var_3E39 = undefined;
         level notify("abort_forfeit");
       }
-    } else if(level.var_984D) {
-      if(level.var_984F["allies"] < 1 && level.var_984F["axis"] > 0 && game["state"] == "playing") {
+    } else if(level.teambased) {
+      if(level.teamcount["allies"] < 1 && level.teamcount["axis"] > 0 && game["state"] == "playing") {
         thread func_6B3C("axis");
         return;
       }
 
-      if(level.var_984F["axis"] < 1 && level.var_984F["allies"] > 0 && game["state"] == "playing") {
+      if(level.teamcount["axis"] < 1 && level.teamcount["allies"] > 0 && game["state"] == "playing") {
         thread func_6B3C("allies");
         return;
       }
 
-      if(level.var_984F["axis"] > 0 && level.var_984F["allies"] > 0) {
+      if(level.teamcount["axis"] > 0 && level.teamcount["allies"] > 0) {
         level.var_3E39 = undefined;
         level notify("abort_forfeit");
       }
     } else {
-      var_03 = level.var_984F["allies"] + level.var_984F["axis"];
+      var_03 = level.teamcount["allies"] + level.teamcount["axis"];
       if(var_03 == 1 && game["state"] == "playing") {
         thread func_6B3C();
         return;
       }
 
-      if(level.var_984F["axis"] + level.var_984F["allies"] > 1) {
+      if(level.teamcount["axis"] + level.teamcount["allies"] > 1) {
         level.var_3E39 = undefined;
         level notify("abort_forfeit");
       }
@@ -318,11 +318,11 @@ func_A11E() {
     return;
   }
 
-  if(level.var_6520) {
+  if(level.multiteambased) {
     return;
   }
 
-  if(level.var_984D) {
+  if(level.teambased) {
     var_04["allies"] = level.var_5DDB["allies"];
     var_04["axis"] = level.var_5DDB["axis"];
     if(isDefined(level.var_2F9F) && level.var_2F9F) {
@@ -330,24 +330,24 @@ func_A11E() {
       var_04["axis"] = 0;
     }
 
-    if(!level.var_0BC3["allies"] && !level.var_0BC3["axis"] && !var_04["allies"] && !var_04["axis"]) {
+    if(!level.var_BC3["allies"] && !level.var_BC3["axis"] && !var_04["allies"] && !var_04["axis"]) {
       return [[level.var_6AE2]]("all");
     }
 
-    if(!level.var_0BC3["allies"] && !var_04["allies"]) {
+    if(!level.var_BC3["allies"] && !var_04["allies"]) {
       return [[level.var_6AE2]]("allies");
     }
 
-    if(!level.var_0BC3["axis"] && !var_04["axis"]) {
+    if(!level.var_BC3["axis"] && !var_04["axis"]) {
       return [[level.var_6AE2]]("axis");
     }
 
-    var_05 = level.var_0BC3["allies"] == 1 && !var_04["allies"];
-    var_06 = level.var_0BC3["axis"] == 1 && !var_04["axis"];
+    var_05 = level.var_BC3["allies"] == 1 && !var_04["allies"];
+    var_06 = level.var_BC3["axis"] == 1 && !var_04["axis"];
     if((var_05 || var_06) && !isDefined(level.var_1AED)) {
       var_07 = undefined;
-      if(var_05 && !isDefined(level.var_6AF5["allies"])) {
-        level.var_6AF5["allies"] = gettime();
+      if(var_05 && !isDefined(level.onelefttime["allies"])) {
+        level.onelefttime["allies"] = gettime();
         var_08 = [[level.var_6B5E]]("allies");
         if(isDefined(var_08)) {
           if(!isDefined(var_07)) {
@@ -358,8 +358,8 @@ func_A11E() {
         }
       }
 
-      if(var_06 && !isDefined(level.var_6AF5["axis"])) {
-        level.var_6AF5["axis"] = gettime();
+      if(var_06 && !isDefined(level.onelefttime["axis"])) {
+        level.onelefttime["axis"] = gettime();
         var_09 = [[level.var_6B5E]]("axis");
         if(isDefined(var_09)) {
           if(!isDefined(var_07)) {
@@ -376,7 +376,7 @@ func_A11E() {
     return;
   }
 
-  if(!level.var_0BC3["allies"] && !level.var_0BC3["axis"] && !level.var_5DDB["allies"] && !level.var_5DDB["axis"]) {
+  if(!level.var_BC3["allies"] && !level.var_BC3["axis"] && !level.var_5DDB["allies"] && !level.var_5DDB["axis"]) {
     return [[level.var_6AE2]]("all");
   }
 
@@ -407,7 +407,7 @@ func_99F4(param_00) {
   }
 }
 
-func_A6BA(param_00) {
+waitforplayers(param_00) {
   var_01 = gettime();
   var_02 = var_01 + param_00 * 1000 - 200;
   if(param_00 > 5) {
@@ -416,12 +416,12 @@ func_A6BA(param_00) {
     var_03 = 0;
   }
 
-  if(isDefined(level.var_585D) && level.var_585D) {
-    var_04 = level.var_2584;
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
+    var_04 = level.connectingplayers;
   } else if(function_03AF()) {
-    var_04 = level.var_2584;
+    var_04 = level.connectingplayers;
   } else {
-    var_04 = level.var_2584 / 3;
+    var_04 = level.connectingplayers / 3;
   }
 
   for(;;) {
@@ -429,7 +429,7 @@ func_A6BA(param_00) {
       break;
     }
 
-    var_05 = level.var_6094;
+    var_05 = level.maxplayercount;
     var_06 = gettime();
     if((var_05 >= var_04 && var_06 > var_03) || var_06 > var_02) {
       break;
@@ -439,11 +439,11 @@ func_A6BA(param_00) {
   }
 }
 
-func_7691() {
+prematchperiod() {
   level endon("game_ended");
-  level.var_2584 = getdvarint("5458");
+  level.connectingplayers = getdvarint("5458");
   level thread func_92C3();
-  if(level.var_7691 > 0) {
+  if(level.prematchperiod > 0) {
     level.var_A6EB = 1;
     func_603A();
     level.var_A6EB = 0;
@@ -451,12 +451,12 @@ func_7691() {
     func_6039();
   }
 
-  for(var_00 = 0; var_00 < level.var_744A.size; var_00++) {
-    level.var_744A[var_00] maps\mp\_utility::func_3E8F(1);
-    level.var_744A[var_00] method_8323();
-    level.var_744A[var_00] method_800E();
-    var_02 = maps\mp\_utility::func_45CD(level.var_744A[var_00].var_012C["team"]);
-    if(!isDefined(var_02) || !level.var_744A[var_00].var_4B96) {
+  for(var_00 = 0; var_00 < level.players.size; var_00++) {
+    level.players[var_00] maps\mp\_utility::func_3E8F(1);
+    level.players[var_00] enableweapons();
+    level.players[var_00] method_800E();
+    var_02 = maps\mp\_utility::func_45CD(level.players[var_00].pers["team"]);
+    if(!isDefined(var_02) || !level.players[var_00].hasspawned) {
       continue;
     }
   }
@@ -487,7 +487,7 @@ func_483A() {
     return;
   }
 
-  level thread func_A11E();
+  level thread updategameevents();
 }
 
 func_869D(param_00, param_01) {
@@ -496,7 +496,7 @@ func_869D(param_00, param_01) {
   var_02 = !isDefined(param_00.var_4B61) || !param_00.var_4B61;
   if(var_02 && param_01 && !function_0367()) {
     param_00.var_4B61 = 1;
-    if(isDefined(param_00.var_012C["hasMatchLoss"]) && param_00.var_012C["hasMatchLoss"]) {
+    if(isDefined(param_00.pers["hasMatchLoss"]) && param_00.pers["hasMatchLoss"]) {
       return;
     }
 
@@ -513,20 +513,20 @@ func_A199(param_00) {
     return;
   }
 
-  if(!param_00 maps\mp\_utility::func_7A69()) {
+  if(!param_00 maps\mp\_utility::rankingenabled()) {
     return;
   }
 
-  if((!isDefined(param_00.var_4B61) || !param_00.var_4B61) && !level.var_3FDC == "infect" && !maps\mp\_utility::isprophuntgametype()) {
+  if((!isDefined(param_00.var_4B61) || !param_00.var_4B61) && !level.gametype == "infect" && !maps\mp\_utility::isprophuntgametype()) {
     return;
   }
 
-  if(isDefined(param_00.var_012C["recordedLoss"]) && param_00.var_012C["recordedLoss"]) {
+  if(isDefined(param_00.pers["recordedLoss"]) && param_00.pers["recordedLoss"]) {
     param_00 maps\mp\gametypes\_persistence::func_9314("losses", -1);
   }
 
   var_01 = 1;
-  if(maps\mp\_utility::func_579B() && isDefined(game["game_one_winner"]) && param_00.var_01A7 == game["game_one_winner"]) {
+  if(maps\mp\_utility::func_579B() && isDefined(game["game_one_winner"]) && param_00.team == game["game_one_winner"]) {
     var_01 = 2;
   }
 
@@ -535,67 +535,67 @@ func_A199(param_00) {
   param_00 maps\mp\gametypes\_persistence::func_9314("currentWinStreak", var_01);
   var_02 = param_00 maps\mp\gametypes\_persistence::func_932F("currentWinStreak");
   if(var_02 > param_00 maps\mp\gametypes\_persistence::func_932F("winStreak")) {
-    param_00 maps\mp\gametypes\_persistence::func_9338("winStreak", var_02);
+    param_00 maps\mp\gametypes\_persistence::statset("winStreak", var_02);
   }
 
-  param_00 maps\mp\gametypes\_persistence::func_933A("round", "win", 1);
-  param_00 maps\mp\gametypes\_persistence::func_933A("round", "loss", 0);
-  param_00 maps\mp\gametypes\_missions::func_7750("ch_" + level.var_3FDC + "_wins");
-  param_00 maps\mp\gametypes\_missions::func_7750("ch_victories_careerwins");
+  param_00 maps\mp\gametypes\_persistence::statsetchild("round", "win", 1);
+  param_00 maps\mp\gametypes\_persistence::statsetchild("round", "loss", 0);
+  param_00 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_wins");
+  param_00 maps\mp\gametypes\_missions::processchallenge("ch_victories_careerwins");
   param_00.var_2533 = 1;
-  param_00.var_012C["combatRecordLoss"] = undefined;
-  if(level.var_744A.size > 5) {
-    switch (level.var_3FDC) {
+  param_00.pers["combatRecordLoss"] = undefined;
+  if(level.players.size > 5) {
+    switch (level.gametype) {
       case "war":
-        if(game["teamScores"][param_00.var_01A7] >= game["teamScores"][maps\mp\_utility::func_45DE(param_00.var_01A7)] + 20) {
-          param_00 maps\mp\gametypes\_missions::func_7750("ch_war_crushing");
+        if(game["teamScores"][param_00.team] >= game["teamScores"][maps\mp\_utility::func_45DE(param_00.team)] + 20) {
+          param_00 maps\mp\gametypes\_missions::processchallenge("ch_war_crushing");
         }
         break;
 
       case "hp":
-        if(game["teamScores"][param_00.var_01A7] >= game["teamScores"][maps\mp\_utility::func_45DE(param_00.var_01A7)] + 70) {
-          param_00 maps\mp\gametypes\_missions::func_7750("ch_hp_crushing");
+        if(game["teamScores"][param_00.team] >= game["teamScores"][maps\mp\_utility::func_45DE(param_00.team)] + 70) {
+          param_00 maps\mp\gametypes\_missions::processchallenge("ch_hp_crushing");
         }
         break;
 
       case "conf":
-        if(game["teamScores"][param_00.var_01A7] >= game["teamScores"][maps\mp\_utility::func_45DE(param_00.var_01A7)] + 15) {
-          param_00 maps\mp\gametypes\_missions::func_7750("ch_conf_crushing");
+        if(game["teamScores"][param_00.team] >= game["teamScores"][maps\mp\_utility::func_45DE(param_00.team)] + 15) {
+          param_00 maps\mp\gametypes\_missions::processchallenge("ch_conf_crushing");
         }
         break;
 
       case "ball":
-        if(game["teamScores"][param_00.var_01A7] >= game["teamScores"][maps\mp\_utility::func_45DE(param_00.var_01A7)] + 7) {
-          param_00 maps\mp\gametypes\_missions::func_7750("ch_ball_crushing");
+        if(game["teamScores"][param_00.team] >= game["teamScores"][maps\mp\_utility::func_45DE(param_00.team)] + 7) {
+          param_00 maps\mp\gametypes\_missions::processchallenge("ch_ball_crushing");
         }
         break;
 
       case "dm":
-        if(isDefined(level.var_7006["all"][0])) {
-          var_03 = level.var_7006["all"][0];
+        if(isDefined(level.placement["all"][0])) {
+          var_03 = level.placement["all"][0];
           var_04 = 9999;
           if(param_00 == var_03) {
-            foreach(var_06 in level.var_744A) {
+            foreach(var_06 in level.players) {
               if(param_00 == var_06) {
                 continue;
               }
 
-              var_07 = param_00.var_015C - var_06.var_015C;
+              var_07 = param_00.score - var_06.score;
               if(var_07 < var_04) {
                 var_04 = var_07;
               }
             }
 
             if(var_04 >= 7) {
-              param_00 maps\mp\gametypes\_missions::func_7750("ch_dm_crushing");
+              param_00 maps\mp\gametypes\_missions::processchallenge("ch_dm_crushing");
             }
           }
         }
         break;
 
       case "ctf":
-        if(game["shut_out"][param_00.var_01A7]) {
-          param_00 maps\mp\gametypes\_missions::func_7750("ch_" + level.var_3FDC + "_crushing");
+        if(game["shut_out"][param_00.team]) {
+          param_00 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_crushing");
         }
         break;
     }
@@ -635,63 +635,63 @@ rankedlosschallengeupdate() {
 func_94F0(param_00) {
   var_01 = 0;
   var_02 = 9999;
-  foreach(var_04 in level.var_744A) {
-    if(var_04.var_00E3 > var_01) {
-      var_01 = var_04.var_00E3;
+  foreach(var_04 in level.players) {
+    if(var_04.kills > var_01) {
+      var_01 = var_04.kills;
     } else if(maps\mp\_utility::func_579B() && isDefined(var_04.var_79A2) && var_04.var_79A2 > var_01) {
       var_01 = var_04.var_79A2;
     }
 
-    if(var_04.var_0070 < var_02) {
-      var_02 = var_04.var_0070;
+    if(var_04.deaths < var_02) {
+      var_02 = var_04.deaths;
     }
   }
 
   if(isPlayer(param_00)) {
     var_06 = maps\mp\gametypes\_gamescore::func_450B(3);
   } else {
-    var_06 = level.var_744A;
+    var_06 = level.players;
   }
 
   foreach(var_04 in var_06) {
-    if(isPlayer(param_00) || var_04.var_01A7 == param_00) {
-      var_08 = var_04.var_00E3;
+    if(isPlayer(param_00) || var_04.team == param_00) {
+      var_08 = var_04.kills;
       if(maps\mp\_utility::func_579B() && isDefined(var_04.var_79A2)) {
         var_08 = var_04.var_79A2;
       }
 
-      if(var_08 >= var_01 && var_04.var_0070 <= var_02 && var_08 > 0 && !isai(var_04)) {
-        var_04 maps\mp\gametypes\_missions::func_7750("ch_" + level.var_3FDC + "_star");
-        var_04 maps\mp\gametypes\_missions::func_7750("ch_heroics_superstar");
+      if(var_08 >= var_01 && var_04.deaths <= var_02 && var_08 > 0 && !isai(var_04)) {
+        var_04 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_star");
+        var_04 maps\mp\gametypes\_missions::processchallenge("ch_heroics_superstar");
       }
     }
   }
 }
 
 func_21C1() {
-  if(level.var_3FDC == "dom") {
+  if(level.gametype == "dom") {
     foreach(var_01 in level.var_3211) {
       if(!isDefined(var_01.var_6DA9) || !var_01.var_6DA9) {
         continue;
       }
 
       var_02 = var_01 maps\mp\gametypes\_gameobjects::func_45F7();
-      foreach(var_04 in level.var_744A) {
-        if(var_04.var_01A7 != var_02) {
+      foreach(var_04 in level.players) {
+        if(var_04.team != var_02) {
           continue;
         }
 
-        switch (var_01.var_00E5) {
+        switch (var_01.label) {
           case "_a":
-            var_04 maps\mp\gametypes\_missions::func_7750("ch_dom_alphalock");
+            var_04 maps\mp\gametypes\_missions::processchallenge("ch_dom_alphalock");
             break;
 
           case "_b":
-            var_04 maps\mp\gametypes\_missions::func_7750("ch_dom_bravolock");
+            var_04 maps\mp\gametypes\_missions::processchallenge("ch_dom_bravolock");
             break;
 
           case "_c":
-            var_04 maps\mp\gametypes\_missions::func_7750("ch_dom_charlielock");
+            var_04 maps\mp\gametypes\_missions::processchallenge("ch_dom_charlielock");
             break;
         }
       }
@@ -708,7 +708,7 @@ func_A130(param_00) {
     return;
   }
 
-  if(!param_00 maps\mp\_utility::func_7A69()) {
+  if(!param_00 maps\mp\_utility::rankingenabled()) {
     return;
   }
 
@@ -716,7 +716,7 @@ func_A130(param_00) {
     return;
   }
 
-  param_00.var_012C["hasMatchLoss"] = 1;
+  param_00.pers["hasMatchLoss"] = 1;
   if(!isDefined(param_00.var_5969) || !param_00.var_5969) {
     var_01 = 1;
     if(maps\mp\_utility::func_579B() && common_scripts\utility::func_562E(game["switchedsides"])) {
@@ -731,13 +731,13 @@ func_A130(param_00) {
 
       param_00 maps\mp\gametypes\_persistence::func_9314("losses", var_02);
       param_00 maps\mp\_utility::func_A14B("winLossRatio", "wins", "losses");
-      param_00.var_012C["recordedLoss"] = 1;
-      param_00.var_012C["combatRecordLoss"] = 1;
+      param_00.pers["recordedLoss"] = 1;
+      param_00.pers["combatRecordLoss"] = 1;
     }
   }
 
   param_00 maps\mp\gametypes\_persistence::func_9314("gamesPlayed", 1);
-  param_00 maps\mp\gametypes\_persistence::func_933A("round", "loss", 1);
+  param_00 maps\mp\gametypes\_persistence::statsetchild("round", "loss", 1);
 }
 
 func_A178(param_00) {
@@ -749,7 +749,7 @@ func_A178(param_00) {
     return;
   }
 
-  if(!param_00 maps\mp\_utility::func_7A69()) {
+  if(!param_00 maps\mp\_utility::rankingenabled()) {
     return;
   }
 
@@ -757,15 +757,15 @@ func_A178(param_00) {
     return;
   }
 
-  if(isDefined(param_00.var_012C["recordedLoss"]) && param_00.var_012C["recordedLoss"]) {
+  if(isDefined(param_00.pers["recordedLoss"]) && param_00.pers["recordedLoss"]) {
     param_00 maps\mp\gametypes\_persistence::func_9314("losses", -1);
-    param_00 maps\mp\gametypes\_persistence::func_9338("currentWinStreak", 0);
+    param_00 maps\mp\gametypes\_persistence::statset("currentWinStreak", 0);
   }
 
   param_00 maps\mp\gametypes\_persistence::func_9314("ties", 1);
   param_00 maps\mp\_utility::func_A14B("winLossRatio", "wins", "losses");
   param_00.var_2532 = 1;
-  param_00.var_012C["combatRecordLoss"] = undefined;
+  param_00.pers["combatRecordLoss"] = undefined;
   param_00 thread rankedlosschallengeupdate();
 }
 
@@ -791,7 +791,7 @@ func_50E3(param_00, param_01) {
 }
 
 func_255B(param_00, param_01) {
-  return !isDefined(param_01) || isDefined(param_00) && param_00.var_015C > param_01.var_015C;
+  return !isDefined(param_01) || isDefined(param_00) && param_00.score > param_01.score;
 }
 
 func_A152(param_00) {
@@ -800,8 +800,8 @@ func_A152(param_00) {
   }
 
   var_01 = function_0363();
-  var_02 = self.var_00E3;
-  var_03 = self.var_0070;
+  var_02 = self.kills;
+  var_03 = self.deaths;
   var_04 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "lastSessionID");
   if(var_04 != var_01) {
     func_86FD(var_02, var_03, param_00, 0);
@@ -834,7 +834,7 @@ func_A152(param_00) {
 }
 
 didplayerjipgametwo(param_00) {
-  if(!common_scripts\utility::func_562E(param_00.var_012C["jip_game_one"]) && common_scripts\utility::func_562E(param_00.var_5969)) {
+  if(!common_scripts\utility::func_562E(param_00.pers["jip_game_one"]) && common_scripts\utility::func_562E(param_00.var_5969)) {
     return 1;
   }
 
@@ -842,14 +842,14 @@ didplayerjipgametwo(param_00) {
 }
 
 updategameonewinners() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(didplayerjipgametwo(var_01)) {
       continue;
     }
 
-    if(var_01.var_01A7 == game["game_one_winner"]) {
+    if(var_01.team == game["game_one_winner"]) {
       var_01 maps\mp\gametypes\_persistence::func_9314("wins", 1);
-      if(isDefined(var_01.var_012C["recordedLoss"]) && var_01.var_012C["recordedLoss"]) {
+      if(isDefined(var_01.pers["recordedLoss"]) && var_01.pers["recordedLoss"]) {
         var_01 maps\mp\gametypes\_persistence::func_9314("losses", -1);
       }
 
@@ -857,7 +857,7 @@ updategameonewinners() {
     }
 
     if(!isDefined(var_01.var_5969) || !var_01.var_5969) {
-      var_01 maps\mp\gametypes\_persistence::func_9338("currentWinStreak", 0);
+      var_01 maps\mp\gametypes\_persistence::statset("currentWinStreak", 0);
       var_01 thread rankedlosschallengeupdate();
     }
   }
@@ -868,11 +868,11 @@ func_A198(param_00) {
     return;
   }
 
-  if(maps\mp\_utility::func_761E()) {
+  if(maps\mp\_utility::practiceroundgame()) {
     return;
   }
 
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
@@ -883,13 +883,13 @@ func_A198(param_00) {
 
   if(var_01) {
     if(!isDefined(param_00) || isDefined(param_00) && isstring(param_00) && param_00 == "tie") {
-      foreach(var_03 in level.var_744A) {
+      foreach(var_03 in level.players) {
         if(isDefined(var_03.var_2583)) {
           continue;
         }
 
-        if(level.var_4DFE && var_03 ishost()) {
-          var_03 maps\mp\gametypes\_persistence::func_9338("currentWinStreak", 0);
+        if(level.hostforcedend && var_03 ishost()) {
+          var_03 maps\mp\gametypes\_persistence::statset("currentWinStreak", 0);
           var_03 thread rankedlosschallengeupdate();
           continue;
         }
@@ -898,7 +898,7 @@ func_A198(param_00) {
       }
     } else if(isPlayer(param_00)) {
       var_05[0] = param_00;
-      if(level.var_744A.size > 5) {
+      if(level.players.size > 5) {
         var_05 = maps\mp\gametypes\_gamescore::func_450B(3);
       }
 
@@ -912,8 +912,8 @@ func_A198(param_00) {
           continue;
         }
 
-        if(level.var_4DFE && var_03 ishost()) {
-          var_03 maps\mp\gametypes\_persistence::func_9338("currentWinStreak", 0);
+        if(level.hostforcedend && var_03 ishost()) {
+          var_03 maps\mp\gametypes\_persistence::statset("currentWinStreak", 0);
           var_03 thread rankedlosschallengeupdate();
           continue;
         }
@@ -925,13 +925,13 @@ func_A198(param_00) {
         updategameonewinners();
       }
 
-      foreach(var_03 in level.var_744A) {
+      foreach(var_03 in level.players) {
         if(isDefined(var_03.var_2583)) {
           continue;
         }
 
-        if(level.var_4DFE && var_03 ishost()) {
-          var_03 maps\mp\gametypes\_persistence::func_9338("currentWinStreak", 0);
+        if(level.hostforcedend && var_03 ishost()) {
+          var_03 maps\mp\gametypes\_persistence::statset("currentWinStreak", 0);
           var_03 thread rankedlosschallengeupdate();
           continue;
         }
@@ -941,13 +941,13 @@ func_A198(param_00) {
           continue;
         }
 
-        if(var_03.var_012C["team"] == param_00) {
+        if(var_03.pers["team"] == param_00) {
           func_A199(var_03);
           continue;
         }
 
-        if(isDefined(var_03.var_012C["recordedLoss"]) && var_03.var_012C["recordedLoss"]) {
-          var_03 maps\mp\gametypes\_persistence::func_9338("currentWinStreak", 0);
+        if(isDefined(var_03.pers["recordedLoss"]) && var_03.pers["recordedLoss"]) {
+          var_03 maps\mp\gametypes\_persistence::statset("currentWinStreak", 0);
         }
 
         var_03 thread rankedlosschallengeupdate();
@@ -955,7 +955,7 @@ func_A198(param_00) {
     }
   }
 
-  level.var_8F26 = common_scripts\utility::func_0FA5(level.var_744A, ::func_255B);
+  level.var_8F26 = common_scripts\utility::func_FA5(level.players, ::func_255B);
   var_0B = 1;
   foreach(var_03 in level.var_8F26) {
     if(isDefined(var_03.var_2583)) {
@@ -966,17 +966,17 @@ func_A198(param_00) {
     var_0B++;
   }
 
-  if(level.var_744A.size > 5) {
+  if(level.players.size > 5) {
     func_94F0(param_00);
     var_05 = maps\mp\gametypes\_gamescore::func_450B(3);
     for(var_0E = 0; var_0E < var_05.size; var_0E++) {
       if(var_0E == 0) {
-        var_05[var_0E] maps\mp\gametypes\_missions::func_7750("ch_" + level.var_3FDC + "_mvp");
-        var_05[var_0E] maps\mp\gametypes\_missions::func_7750("ch_heroics_topdog");
+        var_05[var_0E] maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_mvp");
+        var_05[var_0E] maps\mp\gametypes\_missions::processchallenge("ch_heroics_topdog");
       }
 
-      var_05[var_0E] maps\mp\gametypes\_missions::func_7750("ch_" + level.var_3FDC + "_superior");
-      var_05[var_0E] maps\mp\gametypes\_missions::func_7750("ch_heroics_topscorer");
+      var_05[var_0E] maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_superior");
+      var_05[var_0E] maps\mp\gametypes\_missions::processchallenge("ch_heroics_topscorer");
     }
   }
 }
@@ -992,14 +992,14 @@ func_9412(param_00) {
   self closeingamemenu();
   wait(param_00);
   self method_84CB();
-  self method_8324();
+  self disableoffhandweapons();
   self allowmovement(0);
   self allowjump(0);
   self method_812C(0);
   self method_812B(0);
   self method_8309(0);
   self method_850D(0);
-  self method_8326();
+  self disableweaponswitch();
   self allowlook(0);
   self allowads(0);
   self method_812A(0);
@@ -1016,11 +1016,11 @@ func_A133(param_00) {
     return;
   }
 
-  if(maps\mp\_utility::func_761E()) {
+  if(maps\mp\_utility::practiceroundgame()) {
     return;
   }
 
-  if(level.var_984D) {
+  if(level.teambased) {
     if(param_00 == "allies") {
       var_01 = "allies";
       var_02 = "axis";
@@ -1036,20 +1036,20 @@ func_A133(param_00) {
       setwinningteam(var_01);
     }
 
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       if(isDefined(var_04.var_2583)) {
         continue;
       }
 
-      if(!var_04 maps\mp\_utility::func_7A69()) {
+      if(!var_04 maps\mp\_utility::rankingenabled()) {
         continue;
       }
 
-      if(var_04.var_9A06["total"] < 1 || var_04.var_012C["participation"] < 1) {
+      if(var_04.timeplayed["total"] < 1 || var_04.pers["participation"] < 1) {
         continue;
       }
 
-      if(level.var_4DFE && var_04 ishost()) {
+      if(level.hostforcedend && var_04 ishost()) {
         continue;
       }
 
@@ -1059,95 +1059,95 @@ func_A133(param_00) {
 
       var_05 = 0;
       if(var_01 == "tie") {
-        var_05 = maps\mp\gametypes\_rank::func_4671("tie");
+        var_05 = maps\mp\gametypes\_rank::getscoreinfovalue("tie");
         var_04.var_2EEB = 1;
         var_04.var_5858 = 0;
-      } else if(isDefined(var_04.var_012C["team"]) && var_04.var_012C["team"] == var_01) {
-        var_05 = maps\mp\gametypes\_rank::func_4671("win");
+      } else if(isDefined(var_04.pers["team"]) && var_04.pers["team"] == var_01) {
+        var_05 = maps\mp\gametypes\_rank::getscoreinfovalue("win");
         var_04.var_5858 = 1;
-      } else if(isDefined(var_04.var_012C["team"]) && var_04.var_012C["team"] == var_02) {
-        var_05 = maps\mp\gametypes\_rank::func_4671("loss");
+      } else if(isDefined(var_04.pers["team"]) && var_04.pers["team"] == var_02) {
+        var_05 = maps\mp\gametypes\_rank::getscoreinfovalue("loss");
         var_04.var_5858 = 0;
       }
 
-      var_04.var_6024 = int(var_05);
+      var_04.matchbonus = int(var_05);
     }
   } else {
-    foreach(var_03 in level.var_744A) {
-      if(isDefined(var_03.var_2583)) {
+    foreach(var_04 in level.players) {
+      if(isDefined(var_04.var_2583)) {
         continue;
       }
 
-      if(!var_03 maps\mp\_utility::func_7A69()) {
+      if(!var_04 maps\mp\_utility::rankingenabled()) {
         continue;
       }
 
-      if(var_03.var_9A06["total"] < 1 || var_03.var_012C["participation"] < 1) {
+      if(var_04.timeplayed["total"] < 1 || var_04.pers["participation"] < 1) {
         continue;
       }
 
-      if(level.var_4DFE && var_03 ishost()) {
+      if(level.hostforcedend && var_04 ishost()) {
         continue;
       }
 
-      if(!isDefined(var_03.var_4B61) || !var_03.var_4B61) {
+      if(!isDefined(var_04.var_4B61) || !var_04.var_4B61) {
         continue;
       }
 
-      var_03.var_5858 = 0;
-      for(var_08 = 0; var_08 < min(level.var_7006["all"].size, 3); var_08++) {
-        if(level.var_7006["all"][var_08] != var_03) {
+      var_04.var_5858 = 0;
+      for(var_08 = 0; var_08 < min(level.placement["all"].size, 3); var_08++) {
+        if(level.placement["all"][var_08] != var_04) {
           continue;
         }
 
-        var_03.var_5858 = 1;
+        var_04.var_5858 = 1;
       }
 
-      var_06 = 0;
-      if(var_03.var_5858) {
-        var_06 = maps\mp\gametypes\_rank::func_4671("win");
+      var_05 = 0;
+      if(var_04.var_5858) {
+        var_05 = maps\mp\gametypes\_rank::getscoreinfovalue("win");
       } else {
-        var_06 = maps\mp\gametypes\_rank::func_4671("loss");
+        var_05 = maps\mp\gametypes\_rank::getscoreinfovalue("loss");
       }
 
-      var_03.var_6024 = int(var_06);
+      var_04.matchbonus = int(var_05);
     }
   }
 
-  foreach(var_08 in level.var_744A) {
-    if(!isDefined(var_08)) {
+  foreach(var_04 in level.players) {
+    if(!isDefined(var_04)) {
       continue;
     }
 
-    if(!isDefined(var_08.var_5858)) {
+    if(!isDefined(var_04.var_5858)) {
       continue;
     }
 
     var_0B = "loss";
-    if(var_08.var_5858) {
+    if(var_04.var_5858) {
       var_0B = "win";
     }
 
-    if(isDefined(var_08.var_2EEB) && var_08.var_2EEB) {
+    if(isDefined(var_04.var_2EEB) && var_04.var_2EEB) {
       var_0B = "tie";
     }
 
-    var_08 thread func_4795(var_0B, var_08.var_6024);
-    var_08 thread maps\mp\gametypes\_rank::givexpfromactiveboosts();
+    var_04 thread func_4795(var_0B, var_04.matchbonus);
+    var_04 thread maps\mp\gametypes\_rank::givexpfromactiveboosts();
   }
 
   if(isDefined(level.var_2F98) && !level.var_2F98) {
-    foreach(var_08 in level.var_744A) {
-      if(!var_08 maps\mp\_utility::func_7A69()) {
+    foreach(var_04 in level.players) {
+      if(!var_04 maps\mp\_utility::rankingenabled()) {
         continue;
       }
 
-      var_0E = var_08 getrankedplayerdata(common_scripts\utility::func_46AE(), "matchesCompleted");
+      var_0E = var_04 getrankedplayerdata(common_scripts\utility::func_46AE(), "matchesCompleted");
       if(var_0E == 0) {
-        var_08 maps\mp\gametypes\_rank::func_099C();
+        var_04 maps\mp\gametypes\_rank::setsize();
       }
 
-      var_08 setrankedplayerdata(common_scripts\utility::func_46AE(), "matchesCompleted", var_0E + 1);
+      var_04 setrankedplayerdata(common_scripts\utility::func_46AE(), "matchesCompleted", var_0E + 1);
     }
   }
 }
@@ -1155,7 +1155,7 @@ func_A133(param_00) {
 func_4795(param_00, param_01) {
   self endon("disconnect");
   level waittill("give_match_bonus");
-  maps\mp\gametypes\_rank::func_47B2(param_00, param_01);
+  maps\mp\gametypes\_rank::giverankxp(param_00, param_01);
   maps\mp\_utility::func_5EB0();
 }
 
@@ -1164,7 +1164,7 @@ func_8700(param_00) {
     return;
   }
 
-  if(!isDefined(param_00.var_00E3) || !isDefined(param_00.var_0070)) {
+  if(!isDefined(param_00.kills) || !isDefined(param_00.deaths)) {
     return;
   }
 
@@ -1172,20 +1172,20 @@ func_8700(param_00) {
     return;
   }
 
-  var_01 = param_00.var_9A06["total"] / 60;
+  var_01 = param_00.timeplayed["total"] / 60;
   if(var_01 < 2) {
     return;
   }
 
-  var_02 = param_00.var_00E3;
-  var_03 = param_00.var_0070;
+  var_02 = param_00.kills;
+  var_03 = param_00.deaths;
   var_04 = float(var_02 - var_03) * 1000;
   var_05 = int(var_04 / var_01);
   setplayerteamrank(param_00, param_00.var_2418, var_05);
 }
 
 func_8A6A(param_00) {
-  var_01 = level.var_744A;
+  var_01 = level.players;
   for(var_02 = 0; var_02 < var_01.size; var_02++) {
     var_03 = var_01[var_02];
     func_8700(var_03);
@@ -1202,7 +1202,7 @@ func_21EC(param_00) {
     return;
   }
 
-  if(level.var_3FDC == "hub") {
+  if(level.gametype == "hub") {
     return;
   }
 
@@ -1254,7 +1254,7 @@ func_21C3() {
     return 0;
   }
 
-  if(!level.var_984D) {
+  if(!level.teambased) {
     return 0;
   }
 
@@ -1270,7 +1270,7 @@ func_21C3() {
 
     var_01 = int(var_00 / 2 + 0.5);
     if(game["teamScores"]["allies"] >= var_01 || game["teamScores"]["axis"] >= var_01) {
-      game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::func_46E3();
+      game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::gettimepassed();
       game["round_time_to_beat"] = maps\mp\_utility::func_4589();
       return 1;
     }
@@ -1280,7 +1280,7 @@ func_21C3() {
 }
 
 func_21C2(param_00) {
-  if(!level.var_984D) {
+  if(!level.teambased) {
     return 0;
   }
 
@@ -1290,13 +1290,13 @@ func_21C2(param_00) {
 
   if(maps\mp\_utility::func_46E2()) {
     var_01 = maps\mp\_utility::func_46E2() * 60 * 1000 * 0.5;
-    if(maps\mp\_utility::func_46E3() >= var_01 && param_00 < var_01 && param_00 > 0) {
+    if(maps\mp\_utility::gettimepassed() >= var_01 && param_00 < var_01 && param_00 > 0) {
       if(isDefined(level.var_2D64) && level.var_2D64 == 1 && isDefined(level.var_18EE) && level.var_18EE == 1 && isDefined(level.var_3992)) {
-        game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::func_46E3() - level.var_3992 * 60 * 1000;
-      } else if(level.var_3FDC == "ctf" && isDefined(level.var_289F) && level.var_289F && isDefined(level.var_3992)) {
-        game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::func_46E3() - level.var_3992 * 60 * 1000;
+        game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::gettimepassed() - level.var_3992 * 60 * 1000;
+      } else if(level.gametype == "ctf" && isDefined(level.var_289F) && level.var_289F && isDefined(level.var_3992)) {
+        game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::gettimepassed() - level.var_3992 * 60 * 1000;
       } else {
-        game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::func_46E3();
+        game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::gettimepassed();
       }
 
       return 1;
@@ -1307,7 +1307,7 @@ func_21C2(param_00) {
 }
 
 func_46E5() {
-  var_00 = maps\mp\_utility::func_46E3();
+  var_00 = maps\mp\_utility::gettimepassed();
   var_01 = maps\mp\_utility::func_46E2() * 60 * 1000;
   if(maps\mp\_utility::func_4502() && game["status"] == "halftime" && isDefined(level.var_3C68)) {
     var_02 = var_01 * 0.5;
@@ -1320,7 +1320,7 @@ func_46E5() {
     }
   }
 
-  return var_02 - var_01;
+  return var_01 - var_00;
 }
 
 func_21EA(param_00) {
@@ -1332,15 +1332,15 @@ func_21EA(param_00) {
     return;
   }
 
-  if(level.var_3FDC == "conf" || level.var_3FDC == "sd" || level.var_3FDC == "hp" || level.var_3FDC == "ctf" || level.var_3FDC == "gun" || level.var_3FDC == "infect" || level.var_3FDC == "undead" || level.var_3FDC == "relic") {
+  if(level.gametype == "conf" || level.gametype == "sd" || level.gametype == "hp" || level.gametype == "ctf" || level.gametype == "gun" || level.gametype == "infect" || level.gametype == "undead" || level.gametype == "relic") {
     return;
   }
 
-  if(!level.var_984D) {
+  if(!level.teambased) {
     return;
   }
 
-  if(maps\mp\_utility::func_46E3() < -5536) {
+  if(maps\mp\_utility::gettimepassed() < -5536) {
     return;
   }
 
@@ -1355,11 +1355,11 @@ func_21D2() {
     return;
   }
 
-  if(level.var_984D) {
+  if(level.teambased) {
     return;
   }
 
-  if(maps\mp\_utility::func_46E3() < -5536) {
+  if(maps\mp\_utility::gettimepassed() < -5536) {
     return;
   }
 
@@ -1388,10 +1388,10 @@ func_21E3() {
 
   if(maps\mp\_utility::func_4502() && func_21C3()) {
     return [[level.var_6B42]]("score_limit_reached");
-  } else if(level.var_6520) {
+  } else if(level.multiteambased) {
     var_00 = 0;
-    for(var_01 = 0; var_01 < level.var_985B.size; var_01++) {
-      if(game["teamScores"][level.var_985B[var_01]] >= maps\mp\_utility::func_471A("scorelimit")) {
+    for(var_01 = 0; var_01 < level.teamnamelist.size; var_01++) {
+      if(game["teamScores"][level.teamnamelist[var_01]] >= maps\mp\_utility::func_471A("scorelimit")) {
         var_00 = 1;
       }
     }
@@ -1399,7 +1399,7 @@ func_21E3() {
     if(!var_00) {
       return 0;
     }
-  } else if(level.var_984D) {
+  } else if(level.teambased) {
     if(game["teamScores"]["allies"] < maps\mp\_utility::func_471A("scorelimit") && game["teamScores"]["axis"] < maps\mp\_utility::func_471A("scorelimit")) {
       return 0;
     }
@@ -1408,12 +1408,12 @@ func_21E3() {
       return 0;
     }
 
-    if(self.var_015C < maps\mp\_utility::func_471A("scorelimit")) {
+    if(self.score < maps\mp\_utility::func_471A("scorelimit")) {
       return 0;
     }
   }
 
-  if(issubstr(level.var_3FDC, "dom")) {
+  if(issubstr(level.gametype, "dom")) {
     if(game["teamScores"]["allies"] > maps\mp\_utility::func_471A("scorelimit") && game["teamScores"]["axis"] < maps\mp\_utility::func_471A("scorelimit")) {
       game["teamScores"]["allies"] = maps\mp\_utility::func_471A("scorelimit");
     } else if(game["teamScores"]["axis"] > maps\mp\_utility::func_471A("scorelimit") && game["teamScores"]["allies"] > maps\mp\_utility::func_471A("scorelimit")) {
@@ -1441,19 +1441,19 @@ func_A121() {
 func_603A() {
   setomnvar("ui_match_countdown_title", 6);
   setomnvar("ui_match_countdown_toggle", 0);
-  if(level.var_7692 > 0) {
+  if(level.prematchperiodend > 0) {
     level.var_245A = undefined;
     maps\mp\_utility::func_3FA4("useCountdownClut");
   }
 
-  func_A6BA(level.var_7691);
+  waitforplayers(level.prematchperiod);
   if(isDefined(level.var_A6BC)) {
     [[level.var_A6BC]]();
   }
 
   maps\mp\_utility::func_3FA4("prematch_waitforplayers_done");
-  if(level.var_7692 > 0 && !isDefined(level.var_4E09)) {
-    func_6037(level.var_7692);
+  if(level.prematchperiodend > 0 && !isDefined(level.var_4E09)) {
+    func_6037(level.prematchperiodend);
   }
 }
 
@@ -1462,24 +1462,24 @@ func_6038(param_00) {
   level endon("match_start_timer_beginning");
   setomnvar("ui_match_countdown_title", 1);
   setomnvar("ui_match_countdown_toggle", 1);
-  while(param_00 > 0 && !level.var_3F9D) {
+  while(param_00 > 0 && !level.gameended) {
     setomnvar("ui_match_countdown", param_00);
     param_00--;
     wait(1);
   }
 
-  if(function_03AF() && getdvarint("scr_rankedplay_void_time_enabled", 1) == 1 && function_03C0() < level.var_2584) {
+  if(function_03AF() && getdvarint("scr_rankedplay_void_time_enabled", 1) == 1 && function_03C0() < level.connectingplayers) {
     level.var_3B5C = "none";
-    level.var_3E16 = 1;
+    level.forcedend = 1;
     var_01 = game["end_reason"]["ranked_play_void_match"];
     var_02 = "tie";
-    func_36B9(var_02, var_01);
+    endgame(var_02, var_01);
     return;
   }
 
-  if(!maps\mp\_utility::func_773F() && !maps\mp\_utility::func_761E() && !isDefined(level.var_585D) && level.var_585D) {
-    foreach(var_04 in level.var_744A) {
-      if(!isDefined(var_04.var_012C["hasSeenDoubleXPSplashes"]) || !var_04.var_012C["hasSeenDoubleXPSplashes"]) {
+  if(!maps\mp\_utility::func_773F() && !maps\mp\_utility::practiceroundgame() && !isDefined(level.iszombiegame) && level.iszombiegame) {
+    foreach(var_04 in level.players) {
+      if(!isDefined(var_04.pers["hasSeenDoubleXPSplashes"]) || !var_04.pers["hasSeenDoubleXPSplashes"]) {
         if(level.var_7A6E > 2) {
           var_04 thread maps\mp\gametypes\_hud_message::func_9102("quad_rank_xp");
         } else if(level.var_7A6E > 1) {
@@ -1504,7 +1504,7 @@ func_6038(param_00) {
           var_04 thread maps\mp\gametypes\_hud_message::func_9102("double_loot");
         }
 
-        var_04.var_012C["hasSeenDoubleXPSplashes"] = 1;
+        var_04.pers["hasSeenDoubleXPSplashes"] = 1;
       }
     }
   }
@@ -1532,8 +1532,8 @@ func_6037(param_00) {
     level notify("countdownClut_fadeup");
     wait(3);
   } else {
-    if(!maps\mp\_utility::func_773F() && !maps\mp\_utility::func_761E() && !isDefined(level.var_585D) && level.var_585D) {
-      foreach(var_03 in level.var_744A) {
+    if(!maps\mp\_utility::func_773F() && !maps\mp\_utility::practiceroundgame() && !isDefined(level.iszombiegame) && level.iszombiegame) {
+      foreach(var_03 in level.players) {
         if(level.var_7A6E > 2) {
           var_03 thread maps\mp\gametypes\_hud_message::func_9102("quad_rank_xp");
         } else if(level.var_7A6E > 1) {
@@ -1568,12 +1568,12 @@ func_6037(param_00) {
     level notify("countdownClut_fadeup");
   }
 
-  level thread func_6B6C();
+  level thread onplayerconnect();
 }
 
 func_6039() {
   maps\mp\_utility::func_3FA4("prematch_waitforplayers_done");
-  level thread func_6B6C();
+  level thread onplayerconnect();
 }
 
 func_5FCA() {
@@ -1626,8 +1626,8 @@ func_92C3() {
     return;
   }
 
-  if(isDefined(level.var_744A)) {
-    foreach(var_01 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_01 in level.players) {
       var_01 thread func_5FCA();
     }
   }
@@ -1638,11 +1638,11 @@ func_92C3() {
   }
 }
 
-func_6B6C() {
+onplayerconnect() {
   level endon("game_ended");
   for(;;) {
     level waittill("connected", var_00);
-    if(isDefined(var_00) && isDefined(var_00.var_2418) && var_00 maps\mp\_utility::func_7A69() && !function_0367()) {
+    if(isDefined(var_00) && isDefined(var_00.var_2418) && var_00 maps\mp\_utility::rankingenabled() && !function_0367()) {
       setmatchdata("players", var_00.var_2418, "playermatchtime_start_ms", gettime());
     }
 
@@ -1671,7 +1671,7 @@ func_6B99() {
 }
 
 func_21E1() {
-  if(!level.var_984D) {
+  if(!level.teambased) {
     return 0;
   }
 
@@ -1688,7 +1688,7 @@ func_21E1() {
 }
 
 func_9A1B() {
-  if(level.var_3F9D) {
+  if(level.gameended) {
     var_00 = gettime() - level.var_3F9F / 1000;
     var_01 = level.var_75EE - var_00;
     if(var_01 < 0) {
@@ -1708,41 +1708,41 @@ func_9A1B() {
 
   var_02 = maps\mp\_utility::func_46E2();
   var_00 = gettime() - level.var_9309 / 1000;
-  var_01 = maps\mp\_utility::func_46E2() * 60 - var_00;
+  var_01 = maps\mp\_utility::func_46E2() * 60 - var_02;
   if(isDefined(level.var_2FB1)) {
-    var_01 = var_01 + level.var_2FB1;
+    var_02 = var_02 + level.var_2FB1;
   }
 
-  return var_01 + level.var_75EE;
+  return var_02 + level.var_75EE;
 }
 
 func_3E89() {
   if(isDefined(self.var_6F5B)) {
     if(isDefined(self.var_6F5B[0])) {
-      self.var_6F5B[0] maps\mp\gametypes\_hud_util::func_2DCC();
-      self.var_6F63[0] maps\mp\gametypes\_hud_util::func_2DCC();
+      self.var_6F5B[0] maps\mp\gametypes\_hud_util::destroyelem();
+      self.var_6F63[0] maps\mp\gametypes\_hud_util::destroyelem();
     }
 
     if(isDefined(self.var_6F5B[1])) {
-      self.var_6F5B[1] maps\mp\gametypes\_hud_util::func_2DCC();
-      self.var_6F63[1] maps\mp\gametypes\_hud_util::func_2DCC();
+      self.var_6F5B[1] maps\mp\gametypes\_hud_util::destroyelem();
+      self.var_6F63[1] maps\mp\gametypes\_hud_util::destroyelem();
     }
 
     if(isDefined(self.var_6F5B[2])) {
-      self.var_6F5B[2] maps\mp\gametypes\_hud_util::func_2DCC();
-      self.var_6F63[2] maps\mp\gametypes\_hud_util::func_2DCC();
+      self.var_6F5B[2] maps\mp\gametypes\_hud_util::destroyelem();
+      self.var_6F63[2] maps\mp\gametypes\_hud_util::destroyelem();
     }
   }
 
   self notify("perks_hidden");
-  self.var_5F29 maps\mp\gametypes\_hud_util::func_2DCC();
-  self.var_5F30 maps\mp\gametypes\_hud_util::func_2DCC();
+  self.var_5F29 maps\mp\gametypes\_hud_util::destroyelem();
+  self.var_5F30 maps\mp\gametypes\_hud_util::destroyelem();
   if(isDefined(self.var_7794)) {
-    self.var_7794 maps\mp\gametypes\_hud_util::func_2DCC();
+    self.var_7794 maps\mp\gametypes\_hud_util::destroyelem();
   }
 
   if(isDefined(self.var_7795)) {
-    self.var_7795 maps\mp\gametypes\_hud_util::func_2DCC();
+    self.var_7795 maps\mp\gametypes\_hud_util::destroyelem();
   }
 }
 
@@ -1757,7 +1757,7 @@ func_4514() {
 
 func_4DFF() {
   var_00 = func_4514();
-  if(isDefined(var_00) && !var_00.var_4B96 && !isDefined(var_00.var_83A7)) {
+  if(isDefined(var_00) && !var_00.hasspawned && !isDefined(var_00.var_83A7)) {
     return 1;
   }
 
@@ -1768,7 +1768,7 @@ func_A792() {
   waittillframeend;
   var_00 = 0;
   while(!var_00) {
-    var_01 = level.var_744A;
+    var_01 = level.players;
     var_00 = 1;
     foreach(var_03 in var_01) {
       if(!isDefined(var_03.var_3202)) {
@@ -1787,7 +1787,7 @@ func_A792() {
 }
 
 func_7F19(param_00, param_01) {
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     var_03 maps\mp\gametypes\_final_killcam::func_9456();
   }
 
@@ -1798,7 +1798,7 @@ func_7F19(param_00, param_01) {
   func_A792();
   if(!param_01) {
     wait(param_00);
-    var_05 = level.var_744A;
+    var_05 = level.players;
     foreach(var_03 in var_05) {
       var_03 setclientomnvar("ui_round_end", 0);
     }
@@ -1807,13 +1807,13 @@ func_7F19(param_00, param_01) {
     return;
   }
 
-  wait(param_00 / 2);
+  wait(var_03 / 2);
   level notify("give_match_bonus");
-  wait(param_00 / 2);
+  wait(var_03 / 2);
   func_A792();
-  var_05 = level.var_744A;
-  foreach(var_03 in var_05) {
-    var_03 setclientomnvar("ui_round_end", 0);
+  var_05 = level.players;
+  foreach(var_05 in var_07) {
+    var_05 setclientomnvar("ui_round_end", 0);
   }
 
   level notify("round_end_finished");
@@ -1824,20 +1824,20 @@ func_7F17(param_00) {
 }
 
 func_5367() {
-  if(level.var_3FDC == "relic") {
+  if(level.gametype == "relic") {
     level.var_A992["waypoint_ball"] = "waypoint_relic_icon";
   } else {
     level.var_A992["waypoint_ball"] = "waypoint_ball_icon";
   }
 
   level.var_A990["waypoint_ball"] = "friendly";
-  if(level.var_3FDC == "relic") {
+  if(level.gametype == "relic") {
     level.var_A98F["waypoint_ball"] = "";
   } else {
     level.var_A98F["waypoint_ball"] = "waypoint_empty_icon";
   }
 
-  if(level.var_3FDC == "relic") {
+  if(level.gametype == "relic") {
     level.var_A992["waypoint_ball_friendly"] = "waypoint_small_relic_icon";
   } else {
     level.var_A992["waypoint_ball_friendly"] = "waypoint_small_ball_icon";
@@ -1854,7 +1854,7 @@ func_5367() {
   level.var_A992["waypoint_ball_defend"] = "waypoint_small_triangle_up";
   level.var_A990["waypoint_ball_defend"] = "friendly";
   level.var_A98F["waypoint_ball_defend"] = "waypoint_background_triangle_up";
-  if(level.var_3FDC == "relic") {
+  if(level.gametype == "relic") {
     level.var_A992["waypoint_caster_neutral_ball"] = "waypoint_relic_icon";
   } else {
     level.var_A992["waypoint_caster_neutral_ball"] = "waypoint_ball_icon";
@@ -1862,7 +1862,7 @@ func_5367() {
 
   level.var_A990["waypoint_caster_neutral_ball"] = "neutral";
   level.var_A98F["waypoint_caster_neutral_ball"] = "waypoint_empty_icon";
-  if(level.var_3FDC == "relic") {
+  if(level.gametype == "relic") {
     level.var_A992["waypoint_caster_held_ball"] = "waypoint_small_relic_icon";
   } else {
     level.var_A992["waypoint_caster_held_ball"] = "waypoint_small_ball_icon";
@@ -2095,12 +2095,12 @@ func_5367() {
 }
 
 func_1E70() {
-  maps\mp\_load::func_00F9();
+  maps\mp\_load::main();
   maps\mp\_utility::func_5CBC("round_over", 0);
   maps\mp\_utility::func_5CBC("game_over", 0);
   maps\mp\_utility::func_5CBC("block_notifies", 0);
-  level.var_7691 = 0;
-  level.var_7692 = 0;
+  level.prematchperiod = 0;
+  level.prematchperiodend = 0;
   level.var_75E4 = 0;
   level.var_541D = 0;
   setDvar("4899", getDvar("scr_game_forceuav"));
@@ -2125,14 +2125,14 @@ func_1E70() {
       }
     }
 
-    if(level.var_6520) {
+    if(level.multiteambased) {
       var_02 = getmapcustom("allieschar");
       if(!isDefined(var_02) || var_02 == "") {
         var_02 = "delta_multicam";
       }
 
-      for(var_03 = 0; var_03 < level.var_985B.size; var_03++) {
-        game[level.var_985B[var_03]] = var_02;
+      for(var_03 = 0; var_03 < level.teamnamelist.size; var_03++) {
+        game[level.teamnamelist[var_03]] = var_02;
       }
     }
 
@@ -2154,7 +2154,7 @@ func_1E70() {
       game["state"] = "playing";
     }
 
-    if(level.var_984D) {
+    if(level.teambased) {
       game["strings"]["waiting_for_teams"] = &"MP_WAITING_FOR_TEAMS";
       game["strings"]["opponent_forfeiting_in"] = &"MP_OPPONENT_FORFEITING_IN";
     } else {
@@ -2207,69 +2207,69 @@ func_1E70() {
 
     [[level.var_6B86]]();
     setdvarifuninitialized("min_wait_for_players", 5);
-    if(level.var_258F) {
-      if(!level.var_910F) {
-        if(function_025F()) {
+    if(level.console) {
+      if(!level.splitscreen) {
+        if(isdedicatedserver()) {
           if(maps\mp\_utility::func_579B()) {
-            level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "graceperiod_raid_ds");
+            level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "graceperiod_raid_ds");
           } else if(function_03AF()) {
-            level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "graceperiod_ranked_ds");
+            level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "graceperiod_ranked_ds");
           } else {
-            level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "graceperiod_ds");
+            level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "graceperiod_ds");
           }
         } else {
-          level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "graceperiod");
+          level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "graceperiod");
         }
 
-        level.var_7692 = maps\mp\gametypes\_tweakables::func_46F7("game", "matchstarttime");
+        level.prematchperiodend = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "matchstarttime");
       }
     } else {
-      if(function_025F()) {
+      if(isdedicatedserver()) {
         if(maps\mp\_utility::func_579B()) {
-          level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "playerwaittime_raid_ds");
+          level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "playerwaittime_raid_ds");
         } else if(function_03AF()) {
-          level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "playerwaittime_ranked_ds");
+          level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "playerwaittime_ranked_ds");
         } else {
-          level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "playerwaittime_ds");
+          level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "playerwaittime_ds");
         }
       } else {
-        level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "playerwaittime");
+        level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "playerwaittime");
       }
 
-      level.var_7692 = maps\mp\gametypes\_tweakables::func_46F7("game", "matchstarttime");
+      level.prematchperiodend = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "matchstarttime");
     }
 
     if(function_0154() == "hub") {
-      level.var_7691 = 1;
-      level.var_7692 = 1;
+      level.prematchperiod = 1;
+      level.prematchperiodend = 1;
     }
   } else {
     setdvarifuninitialized("min_wait_for_players", 5);
-    if(level.var_258F) {
-      if(!level.var_910F) {
-        level.var_7691 = 5;
-        level.var_7692 = maps\mp\gametypes\_tweakables::func_46F7("game", "roundstarttime");
+    if(level.console) {
+      if(!level.splitscreen) {
+        level.prematchperiod = 5;
+        level.prematchperiodend = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "roundstarttime");
         if(maps\mp\_utility::func_579B()) {
-          if(function_025F()) {
-            level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "graceperiod_raid_ds");
+          if(isdedicatedserver()) {
+            level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "graceperiod_raid_ds");
           } else {
-            level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "graceperiod");
+            level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "graceperiod");
           }
 
-          level.var_7692 = maps\mp\gametypes\_tweakables::func_46F7("game", "matchstarttime");
+          level.prematchperiodend = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "matchstarttime");
         }
       }
     } else {
-      level.var_7691 = 5;
-      level.var_7692 = maps\mp\gametypes\_tweakables::func_46F7("game", "roundstarttime");
+      level.prematchperiod = 5;
+      level.prematchperiodend = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "roundstarttime");
       if(maps\mp\_utility::func_579B()) {
-        if(function_025F()) {
-          level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "playerwaittime_raid_ds");
+        if(isdedicatedserver()) {
+          level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "playerwaittime_raid_ds");
         } else {
-          level.var_7691 = maps\mp\gametypes\_tweakables::func_46F7("game", "playerwaittime");
+          level.prematchperiod = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "playerwaittime");
         }
 
-        level.var_7692 = maps\mp\gametypes\_tweakables::func_46F7("game", "matchstarttime");
+        level.prematchperiodend = maps\mp\gametypes\_tweakables::gettweakablevalue("game", "matchstarttime");
       }
     }
   }
@@ -2281,9 +2281,9 @@ func_1E70() {
   if(game["status"] != "overtime" && game["status"] != "halftime" && game["status"] != "overtime_halftime") {
     game["teamScores"]["allies"] = 0;
     game["teamScores"]["axis"] = 0;
-    if(level.var_6520) {
-      for(var_03 = 0; var_03 < level.var_985B.size; var_03++) {
-        game["teamScores"][level.var_985B[var_03]] = 0;
+    if(level.multiteambased) {
+      for(var_03 = 0; var_03 < level.teamnamelist.size; var_03++) {
+        game["teamScores"][level.teamnamelist[var_03]] = 0;
       }
     }
   }
@@ -2302,7 +2302,7 @@ func_1E70() {
     game["roundsWon"] = [];
   }
 
-  if(level.var_984D) {
+  if(level.teambased) {
     if(!isDefined(game["roundsWon"]["axis"])) {
       game["roundsWon"]["axis"] = 0;
     }
@@ -2311,98 +2311,97 @@ func_1E70() {
       game["roundsWon"]["allies"] = 0;
     }
 
-    if(level.var_6520) {
-      for(var_03 = 0; var_03 < level.var_985B.size; var_03++) {
-        if(!isDefined(game["roundsWon"][level.var_985B[var_03]])) {
-          game["roundsWon"][level.var_985B[var_03]] = 0;
+    if(level.multiteambased) {
+      for(var_03 = 0; var_03 < level.teamnamelist.size; var_03++) {
+        if(!isDefined(game["roundsWon"][level.teamnamelist[var_03]])) {
+          game["roundsWon"][level.teamnamelist[var_03]] = 0;
         }
       }
     }
   }
 
-  level.var_3F9D = 0;
-  level.var_3E16 = 0;
-  level.var_4DFE = 0;
-  level.var_4B17 = getdvarint("2043");
-  if(level.var_4B17) {
-    function_018D("game mode: hardcore");
+  level.gameended = 0;
+  level.forcedend = 0;
+  level.hostforcedend = 0;
+  level.hardcoremode = getdvarint("2043");
+  if(level.hardcoremode) {
+    logstring("game mode: hardcore");
   }
 
-  level.var_2EF3 = getdvarint("scr_diehard");
-  if(!level.var_984D) {
-    level.var_2EF3 = 0;
+  level.diehardmode = getdvarint("scr_diehard");
+  if(!level.teambased) {
+    level.diehardmode = 0;
   }
 
-  if(level.var_2EF3) {
-    function_018D("game mode: diehard");
+  if(level.diehardmode) {
+    logstring("game mode: diehard");
   }
 
-  level.var_5A6F = getdvarint("scr_game_hardpoints");
-  if(!isDefined(level.var_585D)) {
-    level.var_585D = 0;
+  level.killstreakrewards = getdvarint("scr_game_hardpoints");
+  if(!isDefined(level.iszombiegame)) {
+    level.iszombiegame = 0;
   }
 
   if(maps\mp\_utility::func_56B1() || function_03AF() || isDefined(level.mgnestsdisabled) && level.mgnestsdisabled) {
     maps\mp\_utility::removemgnestsfromlevel();
   }
 
-  level.var_A239 = 1;
-  level.var_696A = 1;
-  level.var_162E = 1;
-  level.var_6072 = 2;
-
-  thread maps\mp\_teleport::func_00F9();
-  thread maps\mp\gametypes\_persistence::func_00D5();
-  thread maps\mp\gametypes\_menus::func_00D5();
-  thread maps\mp\gametypes\_hud::func_00D5();
-  thread maps\mp\gametypes\_serversettings::func_00D5();
-  thread maps\mp\gametypes\_teams::func_00D5();
-  thread maps\mp\gametypes\_weapons::func_00D5();
-  thread maps\mp\gametypes\_killcam::func_00D5();
-  thread maps\mp\gametypes\_shellshock::func_00D5();
-  thread maps\mp\gametypes\_deathicons::func_00D5();
-  thread maps\mp\gametypes\_damagefeedback::func_00D5();
-  thread maps\mp\gametypes\_healthoverlay::func_00D5();
-  thread maps\mp\gametypes\_spectating::func_00D5();
-  thread maps\mp\gametypes\_objpoints::func_00D5();
-  thread maps\mp\gametypes\_gameobjects::func_00D5();
-  thread lib_050D::func_00D5();
-  thread maps\mp\gametypes\_battlechatter_mp::func_00D5();
-  thread maps\mp\gametypes\_ranked_play::func_00D5();
-  thread maps\mp\_minimap_location_callout::func_00D5();
-  thread maps\mp\gametypes\_music_and_dialog::func_00D5();
-  thread maps\mp\_matchdata::func_00D5();
-  thread maps\mp\gametypes\_spawnscoring::func_00D5();
-  thread maps\mp\_leprechauns::func_00D5();
-  if(isDefined(level.var_585D) && level.var_585D) {
-    if(isDefined(level.var_0788)) {
-      thread[[level.var_0788]]();
+  level.usestartspawns = 1;
+  level.objectivepointsmod = 1;
+  level.baseplayermovescale = 1;
+  level.maxallowedteamkills = 2;
+  thread maps\mp\_teleport::main();
+  thread maps\mp\gametypes\_persistence::init();
+  thread maps\mp\gametypes\_menus::init();
+  thread maps\mp\gametypes\_hud::init();
+  thread maps\mp\gametypes\_serversettings::init();
+  thread maps\mp\gametypes\_teams::init();
+  thread maps\mp\gametypes\_weapons::init();
+  thread maps\mp\gametypes\_killcam::init();
+  thread maps\mp\gametypes\_shellshock::init();
+  thread maps\mp\gametypes\_deathicons::init();
+  thread maps\mp\gametypes\_damagefeedback::init();
+  thread maps\mp\gametypes\_healthoverlay::init();
+  thread maps\mp\gametypes\_spectating::init();
+  thread maps\mp\gametypes\_objpoints::init();
+  thread maps\mp\gametypes\_gameobjects::init();
+  thread lib_050D::init();
+  thread maps\mp\gametypes\_battlechatter_mp::init();
+  thread maps\mp\gametypes\_ranked_play::init();
+  thread maps\mp\_minimap_location_callout::init();
+  thread maps\mp\gametypes\_music_and_dialog::init();
+  thread maps\mp\_matchdata::init();
+  thread maps\mp\gametypes\_spawnscoring::init();
+  thread maps / mp / _leprechauns::init();
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
+    if(isDefined(level.var_788)) {
+      thread[[level.var_788]]();
     }
   } else {
-    thread maps\mp\_breadcrumbdata::func_00D5();
+    thread maps\mp\_breadcrumbdata::init();
   }
 
-  thread maps\mp\_awards::func_00D5();
-  thread maps\mp\_skill::func_00D5();
-  thread maps\mp\_battlecry::func_00D5();
+  thread maps\mp\_awards::init();
+  thread maps\mp\_skill::init();
+  thread maps\mp\_battlecry::init();
   if(!maps\mp\_utility::func_551F() && getDvar("1924") != "hub") {
-    thread maps\mp\killstreaks\_killstreaks_init::func_00D5();
-    thread lib_0533::func_00D5();
+    thread maps\mp\killstreaks\_killstreaks_init::init();
+    thread lib_0533::init();
   }
 
-  thread maps\mp\perks\_perks::func_00D5();
-  thread maps\mp\_events::func_00D5();
+  thread maps\mp\perks\_perks::init();
+  thread maps\mp\_events::init();
   thread maps\mp\gametypes\_final_killcam::func_52B8();
   if(!isDefined(level.var_1152)) {
     thread maps\mp\_utility::func_1D3E();
   }
 
-  if(level.var_984D) {
-    thread maps\mp\gametypes\_friendicons::func_00D5();
+  if(level.teambased) {
+    thread maps\mp\gametypes\_friendicons::init();
   }
 
-  thread maps\mp\gametypes\_hud_message::func_00D5();
-  thread maps\mp\gametypes\_divisions::func_00D5();
+  thread maps\mp\gametypes\_hud_message::init();
+  thread maps\mp\gametypes\_divisions::init();
   foreach(var_05 in game["strings"]) {
     precachestring(var_05);
   }
@@ -2412,22 +2411,22 @@ func_1E70() {
   }
 
   game["gamestarted"] = 1;
-  level.var_6094 = 0;
+  level.maxplayercount = 0;
   level.var_A982["allies"] = 0;
   level.var_A982["axis"] = 0;
   level.var_5C0F["allies"] = 0;
   level.var_5C0F["axis"] = 0;
   level.var_A987["allies"] = 0;
   level.var_A987["axis"] = 0;
-  level.var_0BC4["allies"] = [];
-  level.var_0BC4["axis"] = [];
-  level.var_08DC = [];
-  if(level.var_6520) {
-    for(var_03 = 0; var_03 < level.var_985B.size; var_03++) {
-      level.var_077C[level.var_985B[var_03]] = 0;
-      level.var_066E[level.var_985B[var_03]] = 0;
-      level.var_077D[level.var_985B[var_03]] = 0;
-      level.var_0598[level.var_985B[var_03]] = [];
+  level.var_BC4["allies"] = [];
+  level.var_BC4["axis"] = [];
+  level.var_8DC = [];
+  if(level.multiteambased) {
+    for(var_03 = 0; var_03 < level.teamnamelist.size; var_03++) {
+      level.var_77C[level.teamnamelist[var_03]] = 0;
+      level.var_66E[level.teamnamelist[var_03]] = 0;
+      level.var_77D[level.teamnamelist[var_03]] = 0;
+      level.var_598[level.teamnamelist[var_03]] = [];
     }
   }
 
@@ -2439,7 +2438,7 @@ func_1E70() {
     setDvar("2335", 1);
   }
 
-  var_0A = getdvarfloat("scr_" + level.var_3FDC + "_waverespawndelay");
+  var_0A = getdvarfloat("scr_" + level.gametype + "_waverespawndelay");
   var_0B = isDefined(level.var_7DB3) && level.var_7DB3 == 2;
   if(var_0A > 0 || var_0B) {
     if(var_0B) {
@@ -2457,10 +2456,10 @@ func_1E70() {
 
     level.var_5C0F["allies"] = 0;
     level.var_5C0F["axis"] = 0;
-    if(level.var_6520) {
-      for(var_03 = 0; var_03 < level.var_985B.size; var_03++) {
-        level.var_077C[level.var_985B[var_03]] = var_0A;
-        level.var_066E[level.var_985B[var_03]] = 0;
+    if(level.multiteambased) {
+      for(var_03 = 0; var_03 < level.teamnamelist.size; var_03++) {
+        level.var_77C[level.teamnamelist[var_03]] = var_0A;
+        level.var_66E[level.teamnamelist[var_03]] = 0;
       }
     }
 
@@ -2474,7 +2473,7 @@ func_1E70() {
     level.var_483A = 15;
   }
 
-  if(function_0154() == "hub" || level.var_3FDC == "onevone") {
+  if(function_0154() == "hub" || level.gametype == "onevone") {
     level.var_483A = 1;
   }
 
@@ -2483,12 +2482,12 @@ func_1E70() {
   level.var_7F16 = 4;
   level.var_495A = 4;
   level.var_6738 = getEntArray("noragdoll", "targetname");
-  if(level.var_984D) {
+  if(level.teambased) {
     maps\mp\gametypes\_gamescore::func_A174("axis");
     maps\mp\gametypes\_gamescore::func_A174("allies");
-    if(level.var_6520) {
-      for(var_03 = 0; var_03 < level.var_985B.size; var_03++) {
-        maps\mp\gametypes\_gamescore::func_A174(level.var_985B[var_03]);
+    if(level.multiteambased) {
+      for(var_03 = 0; var_03 < level.teamnamelist.size; var_03++) {
+        maps\mp\gametypes\_gamescore::func_A174(level.teamnamelist[var_03]);
       }
     }
   } else {
@@ -2501,9 +2500,9 @@ func_1E70() {
   }
 
   [[level.var_6BAF]]();
-  level.var_80AC = getdvarint("scr_" + level.var_3FDC + "_score_percentage_cut_off", 80);
-  level.var_9A05 = getdvarint("scr_" + level.var_3FDC + "_time_percentage_cut_off", 80);
-  level.var_7F20 = getdvarint("scr_" + level.var_3FDC + "_round_num_cut_off", 4);
+  level.var_80AC = getdvarint("scr_" + level.gametype + "_score_percentage_cut_off", 80);
+  level.var_9A05 = getdvarint("scr_" + level.gametype + "_time_percentage_cut_off", 80);
+  level.var_7F20 = getdvarint("scr_" + level.gametype + "_round_num_cut_off", 4);
   if(common_scripts\utility::func_562E(level.iszombiesshotgun)) {
     level.var_7F20 = 1;
   }
@@ -2511,7 +2510,7 @@ func_1E70() {
   var_0C = getdvarint("ds_bot_test");
   if(var_0C == 0) {}
 
-  if(!level.var_258F && getDvar("dedicated") == "dedicated LAN server" || getDvar("dedicated") == "dedicated internet server") {
+  if(!level.console && getDvar("dedicated") == "dedicated LAN server" || getDvar("dedicated") == "dedicated internet server") {
     thread func_A415();
   }
 
@@ -2549,14 +2548,14 @@ func_8633() {
 
 func_1E62() {
   function_016F();
-  if(!level.var_3F9D) {
+  if(!level.gameended) {
     level thread func_3E1A();
   }
 }
 
 func_A415() {
   for(;;) {
-    if(level.var_7A67) {
+    if(level.rankedmatch) {
       exitlevel(0);
     }
 
@@ -2574,10 +2573,10 @@ func_A415() {
 
 func_99F6() {
   level endon("game_ended");
-  var_00 = maps\mp\_utility::func_46E3();
+  var_00 = maps\mp\_utility::gettimepassed();
   while(game["state"] == "playing") {
     thread func_21EC(var_00);
-    var_00 = maps\mp\_utility::func_46E3();
+    var_00 = maps\mp\_utility::gettimepassed();
     if(isDefined(level.var_9309)) {
       if(func_46E5() < 3000) {
         wait(0.1);
@@ -2608,7 +2607,7 @@ func_74E5() {
   level endon("game_ended");
   var_00 = level.var_1909;
   for(;;) {
-    self method_8617("mp_s2_obj_timer_tick_1s");
+    self playSound("mp_s2_obj_timer_tick_1s");
     if(var_00 > 10) {
       var_00 = var_00 - 1;
       wait(1);
@@ -2640,7 +2639,7 @@ func_99F3() {
         var_01 = var_01 - var_02;
       }
 
-      if(var_01 >= 30 && var_01 <= 60 && level.var_3FDC != "sd" && level.var_3FDC != "hp" && level.var_3FDC != "undead" && level.var_3FDC != "relic") {
+      if(var_01 >= 30 && var_01 <= 60 && level.gametype != "sd" && level.gametype != "hp" && level.gametype != "undead" && level.gametype != "relic") {
         level notify("match_ending_soon", "time");
       }
 
@@ -2713,17 +2712,17 @@ func_7DFC() {
 
 resetplayerdataonstartgameorconnect(param_00) {
   if(!function_0367()) {
-    param_00 setrankedplayerdata(common_scripts\utility::func_46A7(), "round", "challengeNumCompleted", 0);
-    param_00 setrankedplayerdata(common_scripts\utility::func_46A7(), "round", "weaponsUsed", 0, "none");
-    param_00 setrankedplayerdata(common_scripts\utility::func_46A7(), "round", "weaponsUsed", 1, "none");
-    param_00 setrankedplayerdata(common_scripts\utility::func_46A7(), "round", "weaponsUsed", 2, "none");
-    param_00 setrankedplayerdata(common_scripts\utility::func_46A7(), "round", "weaponXpEarned", 0, 0);
-    param_00 setrankedplayerdata(common_scripts\utility::func_46A7(), "round", "weaponXpEarned", 1, 0);
-    param_00 setrankedplayerdata(common_scripts\utility::func_46A7(), "round", "weaponXpEarned", 2, 0);
+    param_00 setrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "challengeNumCompleted", 0);
+    param_00 setrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "weaponsUsed", 0, "none");
+    param_00 setrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "weaponsUsed", 1, "none");
+    param_00 setrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "weaponsUsed", 2, "none");
+    param_00 setrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "weaponXpEarned", 0, 0);
+    param_00 setrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "weaponXpEarned", 1, 0);
+    param_00 setrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "weaponXpEarned", 2, 0);
     for(var_01 = 0; var_01 <= 10; var_01++) {
       if(var_01 != 5) {
         var_02 = param_00 maps\mp\gametypes\_divisions::func_44A0(var_01);
-        param_00 setrankedplayerdata(common_scripts\utility::func_46A7(), "round", "divisionMatchExperience", var_02, 0);
+        param_00 setrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "divisionMatchExperience", var_02, 0);
       }
     }
 
@@ -2739,13 +2738,13 @@ func_92DA() {
   }
 
   setDvar("ui_inprematch", 1);
-  func_7691();
+  prematchperiod();
   maps\mp\_utility::func_3FA4("prematch_done");
   level notify("prematch_over");
   setDvar("ui_inprematch", 0);
   level.var_7690 = gettime();
   maps\mp\_utility::func_2CED(8, ::maps\mp\_utility::func_3FA4, "team_collision_on");
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(!function_0367()) {
       setmatchdata("players", var_01.var_2418, "playermatchtime_start_ms", gettime());
     }
@@ -2758,10 +2757,10 @@ func_92DA() {
   func_A17B();
   thread func_99F3();
   thread func_483A();
-  thread maps\mp\gametypes\_missions::func_7F13();
+  thread maps\mp\gametypes\_missions::roundbegin();
   thread maps\mp\_matchdata::func_6036();
   thread maps\mp\gametypes\_spawnscoring::func_5EAC();
-  var_03 = isDefined(level.var_585D) && level.var_585D;
+  var_03 = isDefined(level.iszombiegame) && level.iszombiegame;
   if(var_03) {
     thread func_A11D();
   }
@@ -2787,13 +2786,13 @@ func_A98B() {
       level.var_A987["axis"] = 0;
     }
 
-    if(level.var_6520) {
-      for(var_01 = 0; var_01 < level.var_985B.size; var_01++) {
-        if(var_00 - level.var_5C0F[level.var_985B[var_01]] > level.var_077C[level.var_985B[var_01]] * 1000) {
-          var_02 = "wave_rewpawn_" + level.var_985B[var_01];
+    if(level.multiteambased) {
+      for(var_01 = 0; var_01 < level.teamnamelist.size; var_01++) {
+        if(var_00 - level.var_5C0F[level.teamnamelist[var_01]] > level.var_77C[level.teamnamelist[var_01]] * 1000) {
+          var_02 = "wave_rewpawn_" + level.teamnamelist[var_01];
           level notify(var_02);
-          level.var_5C0F[level.var_985B[var_01]] = var_00;
-          level.var_A987[level.var_985B[var_01]] = 0;
+          level.var_5C0F[level.teamnamelist[var_01]] = var_00;
+          level.var_A987[level.teamnamelist[var_01]] = 0;
         }
       }
     }
@@ -2809,13 +2808,12 @@ func_4439() {
   var_01["axis"] = 0;
   var_02["allies"] = 0;
   var_02["axis"] = 0;
-
-  foreach(var_04 in level.var_744A) {
-    var_05 = var_04.var_012C["team"];
+  foreach(var_04 in level.players) {
+    var_05 = var_04.pers["team"];
     if(isDefined(var_05) && var_05 == "allies" || var_05 == "axis") {
-      var_00[var_05] = var_00[var_05] + var_04.var_015C;
-      var_01[var_05] = var_01[var_05] + var_04.var_00E3;
-      var_02[var_05] = var_02[var_05] + var_04.var_0070;
+      var_00[var_05] = var_00[var_05] + var_04.score;
+      var_01[var_05] = var_01[var_05] + var_04.kills;
+      var_02[var_05] = var_02[var_05] + var_04.deaths;
     }
   }
 
@@ -2849,7 +2847,7 @@ func_7A68(param_00, param_01) {
     return;
   }
 
-  if(isDefined(level.var_585D) && level.var_585D) {
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
     return;
   }
 
@@ -2867,8 +2865,8 @@ func_7A68(param_00, param_01) {
     }
 
     if(func_4DFF()) {
-      level.var_4DFE = 1;
-      function_018D("host idled out");
+      level.hostforcedend = 1;
+      logstring("host idled out");
       function_00ED();
     }
 
@@ -2879,13 +2877,13 @@ func_7A68(param_00, param_01) {
 }
 
 func_3015(param_00, param_01) {
-  if(!maps\mp\_utility::func_761E()) {
-    foreach(var_03 in level.var_744A) {
-      if(isDefined(var_03.var_2583) || var_03.var_012C["team"] == "spectator" && !var_03 method_8436()) {
+  if(!maps\mp\_utility::practiceroundgame()) {
+    foreach(var_03 in level.players) {
+      if(isDefined(var_03.var_2583) || var_03.pers["team"] == "spectator" && !var_03 method_8436()) {
         continue;
       }
 
-      if(level.var_984D) {
+      if(level.teambased) {
         var_03 thread maps\mp\gametypes\_hud_message::func_985C(param_00, 1, param_01);
         continue;
       }
@@ -2911,14 +2909,14 @@ func_300B(param_00, param_01) {
     return [[level.var_300C]](param_00, param_01);
   }
 
-  if(!maps\mp\_utility::func_761E()) {
-    foreach(var_03 in level.var_744A) {
-      if(isDefined(var_03.var_2583) || var_03.var_012C["team"] == "spectator" && !var_03 method_8436()) {
+  if(!maps\mp\_utility::practiceroundgame()) {
+    foreach(var_03 in level.players) {
+      if(isDefined(var_03.var_2583) || var_03.pers["team"] == "spectator" && !var_03 method_8436()) {
         var_03 setclientomnvar("ui_round_end_spectator", 1);
         continue;
       }
 
-      if(level.var_984D) {
+      if(level.teambased) {
         var_03 thread maps\mp\gametypes\_hud_message::func_985C(param_00, 0, param_01, 1);
         continue;
       }
@@ -2952,8 +2950,8 @@ func_3016() {
   }
 
   level notify("round_switch", var_00);
-  foreach(var_02 in level.var_744A) {
-    if(isDefined(var_02.var_2583) || var_02.var_012C["team"] == "spectator" && !var_02 method_8436()) {
+  foreach(var_02 in level.players) {
+    if(isDefined(var_02.var_2583) || var_02.pers["team"] == "spectator" && !var_02 method_8436()) {
       continue;
     }
 
@@ -2968,7 +2966,7 @@ func_3E8C(param_00, param_01) {
     param_00 = 0;
   }
 
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     var_03 method_800F();
     var_03 thread func_9412(param_00);
     var_03 thread func_7F17(4);
@@ -2982,8 +2980,8 @@ func_3E8C(param_00, param_01) {
     var_03 setclientdvars("3724", 1);
   }
 
-  if(isDefined(level.var_0A4E)) {
-    foreach(var_06 in level.var_0A4E) {
+  if(isDefined(level.var_A4E)) {
+    foreach(var_06 in level.var_A4E) {
       var_06 maps\mp\_utility::func_3E8E(1);
     }
   }
@@ -2992,15 +2990,15 @@ func_3E8C(param_00, param_01) {
 func_36BF(param_00, param_01) {
   setDvar("4899", 0);
   func_3E8C(1, 1);
-  foreach(var_03 in level.var_744A) {
-    var_03.var_012C["stats"] = var_03.var_9337;
-    var_03.var_012C["segments"] = var_03.var_838A;
+  foreach(var_03 in level.players) {
+    var_03.pers["stats"] = var_03.stats;
+    var_03.pers["segments"] = var_03.var_838A;
   }
 
   level notify("round_switch", "overtime");
   var_05 = 0;
   var_06 = param_00 == "overtime";
-  if(level.var_3FDC == "ctf") {
+  if(level.gametype == "ctf") {
     param_00 = "tie";
     var_05 = 1;
     if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
@@ -3012,12 +3010,12 @@ func_36BF(param_00, param_01) {
     }
   }
 
-  foreach(var_03 in level.var_744A) {
-    if(isDefined(var_03.var_2583) || var_03.var_012C["team"] == "spectator" && !var_03 method_8436()) {
+  foreach(var_03 in level.players) {
+    if(isDefined(var_03.var_2583) || var_03.pers["team"] == "spectator" && !var_03 method_8436()) {
       continue;
     }
 
-    if(level.var_984D) {
+    if(level.teambased) {
       var_03 thread maps\mp\gametypes\_hud_message::func_985C(param_00, var_05, param_01);
       continue;
     }
@@ -3026,30 +3024,30 @@ func_36BF(param_00, param_01) {
   }
 
   func_7F19(level.var_7F16, 0);
-  if(level.var_3FDC == "ctf") {
+  if(level.gametype == "ctf") {
     param_00 = "overtime_halftime";
   }
 
   if(isDefined(level.var_3B5C) && var_06) {
     level.var_3B57[level.var_3B5C] = maps\mp\_utility::func_467B();
-    foreach(var_03 in level.var_744A) {
+    foreach(var_03 in level.players) {
       var_03 notify("reset_outcome");
     }
 
     level notify("game_cleanup");
     level notify("nuke_cancelled");
     func_A77D();
-    if(level.var_3FDC == "ctf") {
+    if(level.gametype == "ctf") {
       param_00 = "overtime";
       param_01 = game["end_reason"]["tie"];
     }
 
-    foreach(var_03 in level.var_744A) {
-      if(isDefined(var_03.var_2583) || var_03.var_012C["team"] == "spectator" && !var_03 method_8436()) {
+    foreach(var_03 in level.players) {
+      if(isDefined(var_03.var_2583) || var_03.pers["team"] == "spectator" && !var_03 method_8436()) {
         continue;
       }
 
-      if(level.var_984D) {
+      if(level.teambased) {
         var_03 thread maps\mp\gametypes\_hud_message::func_985C(param_00, 0, param_01);
         continue;
       }
@@ -3064,7 +3062,7 @@ func_36BF(param_00, param_01) {
   level notify("restarting");
   game["state"] = "playing";
   setDvar("2523", game["state"]);
-  maprestart(1);
+  map_restart(1);
 }
 
 func_36BC(param_00) {
@@ -3083,7 +3081,7 @@ func_36BC(param_00) {
   }
 
   func_3E8C(1, 1);
-  if(level.var_3FDC == "ctf") {
+  if(level.gametype == "ctf") {
     var_03 = param_00;
     var_01 = "tie";
     if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
@@ -3109,24 +3107,24 @@ func_36BC(param_00) {
     }
   }
 
-  foreach(var_07 in level.var_744A) {
-    var_07.var_012C["stats"] = var_07.var_9337;
-    var_07.var_012C["segments"] = var_07.var_838A;
+  foreach(var_07 in level.players) {
+    var_07.pers["stats"] = var_07.stats;
+    var_07.pers["segments"] = var_07.var_838A;
   }
 
   level notify("round_switch", "halftime");
-  foreach(var_07 in level.var_744A) {
-    if(isDefined(var_07.var_2583) || var_07.var_012C["team"] == "spectator" && !var_07 method_8436()) {
+  foreach(var_07 in level.players) {
+    if(isDefined(var_07.var_2583) || var_07.pers["team"] == "spectator" && !var_07 method_8436()) {
       continue;
     }
 
-    var_07 thread maps\mp\gametypes\_hud_message::func_985C(var_03, 1, var_05);
+    var_07 thread maps\mp\gametypes\_hud_message::func_985C(var_01, 1, var_03);
   }
 
   func_7F19(level.var_7F16, 0);
   if(isDefined(level.var_3B5C)) {
     level.var_3B57[level.var_3B5C] = maps\mp\_utility::func_467B();
-    foreach(var_07 in level.var_744A) {
+    foreach(var_07 in level.players) {
       var_07 notify("reset_outcome");
     }
 
@@ -3137,12 +3135,12 @@ func_36BC(param_00) {
       [[level.var_495C]]();
     } else {
       var_0D = game["end_reason"]["switching_sides"];
-      if(!var_04) {
-        var_0D = var_05;
+      if(!var_02) {
+        var_0D = var_03;
       }
 
-      foreach(var_07 in level.var_744A) {
-        if(isDefined(var_07.var_2583) || var_07.var_012C["team"] == "spectator" && !var_07 method_8436()) {
+      foreach(var_07 in level.players) {
+        if(isDefined(var_07.var_2583) || var_07.pers["team"] == "spectator" && !var_07 method_8436()) {
           continue;
         }
 
@@ -3157,7 +3155,7 @@ func_36BC(param_00) {
   level notify("restarting");
   game["state"] = "playing";
   setDvar("2523", game["state"]);
-  maprestart(1);
+  map_restart(1);
 }
 
 func_A11D() {
@@ -3186,7 +3184,7 @@ func_6028(param_00, param_01, param_02) {
     var_03 = gettime();
     var_04 = "_gamelogic.gsc";
     var_05 = "all";
-    if(level.var_984D && isDefined(param_00)) {
+    if(level.teambased && isDefined(param_00)) {
       var_05 = param_00;
     }
 
@@ -3349,7 +3347,7 @@ func_6028(param_00, param_01, param_02) {
       function_00F5("@"script_mp_round_end: script_file % s, gameTime % d, match_winner % s, win_reason % s, version % d, joinCount % d, botJoinCount % d, spawnCount % d, deathCount % d, trapSpawnDiedTooFastCount % d, trapSpawnKilledTooFastCount % d, trapSpawnDmgDealtCount % d, trapSpawnDmgReceivedCount % d, trapSpawnByAnyMeansCount % d, spawnFlipCount % d, qaPlayList % d ",var_04,var_03,var_05,var_06,var_08,var_09,var_0D,var_0A,var_0E,var_0F,var_10,var_11,var_12,var_13,var_14,var_0C);
       }
 
-      func_36B9(param_00, param_01, param_02) {
+      endgame(param_00, param_01, param_02) {
         if(isDefined(level.var_36BA)) {
           return [[level.var_36BA]](param_00, param_01, param_02);
         }
@@ -3358,14 +3356,14 @@ func_6028(param_00, param_01, param_02) {
           param_02 = 0;
         }
 
-        if(game["state"] == "postgame" || level.var_3F9D) {
+        if(game["state"] == "postgame" || level.gameended) {
           return;
         }
 
         game["state"] = "postgame";
         setDvar("2523", "postgame");
         level.var_3F9F = gettime();
-        level.var_3F9D = 1;
+        level.gameended = 1;
         level.var_5139 = 0;
         level notify("game_ended", param_00);
         maps\mp\_utility::func_5CBE("game_over");
@@ -3378,9 +3376,9 @@ func_6028(param_00, param_01, param_02) {
         var_05 = getsystemtime();
         setmatchdata("match_common", "game_length_seconds", var_03);
         setmatchdata("match_common", "utc_end_time", var_05);
-        setmatchdata("match_common", "player_count_end", level.var_744A.size);
+        setmatchdata("match_common", "player_count_end", level.players.size);
         if(!function_0367()) {
-          foreach(var_07 in level.var_744A) {
+          foreach(var_07 in level.players) {
             var_08 = getmatchdata("players", var_07.var_2418, "playermatchtime_start_ms");
             var_09 = getmatchdata("players", var_07.var_2418, "playermatchtime_total_ms");
             var_09 = var_09 + level.var_3F9F - var_08;
@@ -3388,12 +3386,12 @@ func_6028(param_00, param_01, param_02) {
             setmatchdata("players", var_07.var_2418, "utc_disconnect_time_s", var_05);
             setmatchdata("players", var_07.var_2418, "disconnect_reason", "EXE_MATCHENDED");
             if(!isDefined(var_07.has_recently_done_damage)) {
-              if(isDefined(var_07.var_012C["rounds_without_damage"])) {
-                var_07.var_012C["rounds_without_damage"]++;
+              if(isDefined(var_07.pers["rounds_without_damage"])) {
+                var_07.pers["rounds_without_damage"]++;
                 continue;
               }
 
-              var_07.var_012C["rounds_without_damage"] = 1;
+              var_07.pers["rounds_without_damage"] = 1;
             }
           }
         }
@@ -3422,27 +3420,27 @@ func_6028(param_00, param_01, param_02) {
           level.var_3B57[level.var_3B5C] = maps\mp\_utility::func_467B();
         }
 
-        if(level.var_3FDC != "raid") {
+        if(level.gametype != "raid") {
           setomnvar("ui_current_round", game["roundsPlayed"]);
         }
 
-        if(level.var_984D) {
-          if((param_00 == "axis" || param_00 == "allies") && level.var_3FDC != "ctf") {
+        if(level.teambased) {
+          if((param_00 == "axis" || param_00 == "allies") && level.gametype != "ctf") {
             game["roundsWon"][param_00]++;
           }
 
           maps\mp\gametypes\_gamescore::func_A174("axis");
           maps\mp\gametypes\_gamescore::func_A174("allies");
         } else if(isDefined(param_00) && isPlayer(param_00)) {
-          game["roundsWon"][param_00.var_48CA]++;
+          game["roundsWon"][param_00.guid]++;
         }
 
         maps\mp\gametypes\_gamescore::func_A14D();
-        foreach(var_07 in level.var_744A) {
+        foreach(var_07 in level.players) {
           var_07 setclientdvar("3635", 1);
           if(maps\mp\_utility::func_A875() || maps\mp\_utility::func_A872()) {
             var_07 maps\mp\killstreaks\_killstreaks::func_2400(1);
-            var_07.var_012C["supportStreaksEarned"] = undefined;
+            var_07.pers["supportStreaksEarned"] = undefined;
           }
         }
 
@@ -3450,7 +3448,7 @@ func_6028(param_00, param_01, param_02) {
         setDvar("ui_allow_teamchange", 0);
         setDvar("4899", 0);
         func_3E8C(1, 1);
-        var_0D = isDefined(level.var_585D) && level.var_585D;
+        var_0D = isDefined(level.iszombiegame) && level.iszombiegame;
         if(var_0D) {
           var_0E = 0;
           if(isDefined(level.zmb_shotgun_game_won)) {
@@ -3460,19 +3458,19 @@ func_6028(param_00, param_01, param_02) {
           }
 
           if(var_0E) {
-            foreach(var_07 in level.var_744A) {
+            foreach(var_07 in level.players) {
               [[level.zmb_events_on_map_won]](var_07);
             }
           }
         } else {
-          maps\mp\_matchdata::func_5E91(var_05, getteamscore("axis"), getteamscore("allies"));
+          maps\mp\_matchdata::func_5E91(var_04, getteamscore("axis"), getteamscore("allies"));
         }
 
-        if(!maps\mp\_utility::func_A875() && !var_03 && !level.var_3E16) {
-          func_3015(param_01, param_02);
+        if(!maps\mp\_utility::func_A875() && !param_02 && !level.forcedend) {
+          func_3015(param_00, param_01);
           if(isDefined(level.var_3B5C)) {
-            foreach(var_0C in level.var_744A) {
-              var_0C notify("reset_outcome");
+            foreach(var_07 in level.players) {
+              var_07 notify("reset_outcome");
             }
 
             level notify("game_cleanup");
@@ -3486,26 +3484,26 @@ func_6028(param_00, param_01, param_02) {
               func_3016();
             }
 
-            foreach(var_0C in level.var_744A) {
-              var_0C.var_012C["stats"] = var_0C.var_9337;
-              var_0C.var_012C["segments"] = var_0C.var_838A;
+            foreach(var_07 in level.players) {
+              var_07.pers["stats"] = var_07.stats;
+              var_07.pers["segments"] = var_07.var_838A;
             }
 
             level notify("restarting");
             game["state"] = "playing";
             setDvar("2523", "playing");
-            func_6028(param_01, param_02, 0);
+            func_6028(param_00, param_01, 0);
             maps\mp\gametypes\_spawnscoring::func_5E90();
-            foreach(var_0C in level.var_744A) {
-              game["firstbloodcount"][var_0C.var_48CA] = var_0C.var_0097;
+            foreach(var_07 in level.players) {
+              game["firstbloodcount"][var_07.guid] = var_07.firstbloodcount;
             }
 
-            maprestart(1);
+            map_restart(1);
             return;
           }
 
-          if(!level.var_3E16) {
-            param_02 = func_A10C(param_01);
+          if(!level.forcedend) {
+            var_05 = func_A10C(var_04);
           }
         }
 
@@ -3514,22 +3512,22 @@ func_6028(param_00, param_01, param_02) {
           setclientmatchdatadef(game["clientMatchDataDef"]);
         }
 
-        func_7A68(param_01, param_02);
-        maps\mp\gametypes\_missions::func_7F15(param_01);
-        param_01 = func_44FD(param_01, 1);
-        if(level.var_984D) {
+        func_7A68(var_04, var_05);
+        maps\mp\gametypes\_missions::roundend(var_04);
+        var_04 = func_44FD(var_04, 1);
+        if(level.teambased) {
           setomnvar("ui_game_victor", 0);
-          if(param_01 == "allies") {
+          if(var_04 == "allies") {
             setomnvar("ui_game_victor", 2);
-          } else if(param_01 == "axis") {
+          } else if(var_04 == "axis") {
             setomnvar("ui_game_victor", 1);
           }
         }
 
-        func_300B(param_01, param_02);
+        func_300B(var_04, var_05);
         if(isDefined(level.var_3B5C) && maps\mp\_utility::func_A875()) {
-          foreach(var_0C in level.var_744A) {
-            var_0C notify("reset_outcome");
+          foreach(var_14 in level.players) {
+            var_14 notify("reset_outcome");
           }
 
           level notify("game_cleanup");
@@ -3544,33 +3542,33 @@ func_6028(param_00, param_01, param_02) {
         maps\mp\_utility::func_5CBB("block_notifies");
         level.var_541D = 1;
         level notify("spawning_intermission");
-        foreach(var_0C in level.var_744A) {
-          if(function_02A3() && !function_0371() && !isDefined(level.var_585D) || !level.var_585D) {
-            var_0C maps\mp\gametypes\_class::func_1FA2(common_scripts\utility::func_46AF());
+        foreach(var_14 in level.players) {
+          if(function_02A3() && !function_0371() && !isDefined(level.iszombiegame) || !level.iszombiegame) {
+            var_14 maps\mp\gametypes\_class::func_1FA2(common_scripts\utility::func_46AF());
           }
 
-          var_0C closepopupmenu();
-          var_0C closeingamemenu();
-          var_0C notify("reset_outcome");
-          var_0C thread maps\mp\gametypes\_playerlogic::func_9073();
+          var_14 closepopupmenu();
+          var_14 closeingamemenu();
+          var_14 notify("reset_outcome");
+          var_14 thread maps\mp\gametypes\_playerlogic::func_9073();
         }
 
         func_7758();
-        maps\mp\_skill::func_7743();
+        maps\mp\_skill::process();
         func_21BC();
-        func_A0F8(param_01);
-        if(!level.var_585D) {
-          if(level.var_984D) {
-            if(param_01 == "axis" || param_01 == "allies") {
-              setmatchdata("victor", param_01);
+        func_A0F8(var_04);
+        if(!level.iszombiegame) {
+          if(level.teambased) {
+            if(var_04 == "axis" || var_04 == "allies") {
+              setmatchdata("victor", var_04);
             } else {
               setmatchdata("victor", "none");
-              if(param_01 == "tie") {
+              if(var_04 == "tie") {
                 setmatchdata("is_draw", 1);
               }
             }
 
-            function_0229(param_01);
+            function_0229(var_04);
           } else {
             setmatchdata("victor", "none");
           }
@@ -3578,23 +3576,23 @@ func_6028(param_00, param_01, param_02) {
 
         level maps\mp\_matchdata::func_36DB();
         var_1B = maps\mp\gametypes\_gamescore::func_450B(3);
-        foreach(var_0C in level.var_744A) {
-          if(var_0C maps\mp\_utility::func_7A69()) {
-            var_0C maps\mp\_matchdata::func_5E92();
-            var_0C lib_0468::func_0A1E(var_0C.var_00E3, var_0C.var_0070, level.var_3FDC, param_01);
+        foreach(var_14 in level.players) {
+          if(var_14 maps\mp\_utility::rankingenabled()) {
+            var_14 maps\mp\_matchdata::func_5E92();
+            var_14 lib_0468::func_A1E(var_14.kills, var_14.deaths, level.gametype, var_04);
           }
 
-          var_0C maps\mp\gametypes\_playerlogic::func_5EA9();
-          if(!level.var_585D && !function_0367()) {
-            if(level.var_984D) {
-              if(param_01 == "tie") {
-                setmatchdata("players", var_0C.var_2418, "match_result", "draw");
-              } else if(param_01 == "axis" || param_01 == "allies") {
-                if(isDefined(var_0C.var_01A7)) {
-                  if(var_0C.var_01A7 == param_01) {
-                    setmatchdata("players", var_0C.var_2418, "match_result", "win");
+          var_14 maps\mp\gametypes\_playerlogic::func_5EA9();
+          if(!level.iszombiegame && !function_0367()) {
+            if(level.teambased) {
+              if(var_04 == "tie") {
+                setmatchdata("players", var_14.var_2418, "match_result", "draw");
+              } else if(var_04 == "axis" || var_04 == "allies") {
+                if(isDefined(var_14.team)) {
+                  if(var_14.team == var_04) {
+                    setmatchdata("players", var_14.var_2418, "match_result", "win");
                   } else {
-                    setmatchdata("players", var_0C.var_2418, "match_result", "loss");
+                    setmatchdata("players", var_14.var_2418, "match_result", "loss");
                   }
                 }
               }
@@ -3602,20 +3600,20 @@ func_6028(param_00, param_01, param_02) {
               continue;
             }
 
-            if(isPlayer(param_01)) {
-              setmatchdata("players", var_0C.var_2418, "match_result", "loss");
-              if(level.var_744A.size > 5) {
+            if(isPlayer(var_04)) {
+              setmatchdata("players", var_14.var_2418, "match_result", "loss");
+              if(level.players.size > 5) {
                 foreach(var_1E in var_1B) {
-                  if(var_0C.var_2418 == var_1E.var_2418) {
-                    setmatchdata("players", var_0C.var_2418, "match_result", "win");
+                  if(var_14.var_2418 == var_1E.var_2418) {
+                    setmatchdata("players", var_14.var_2418, "match_result", "win");
                   }
                 }
 
                 continue;
               }
 
-              if(var_0C.var_2418 == param_01.var_2418) {
-                setmatchdata("players", var_0C.var_2418, "match_result", "win");
+              if(var_14.var_2418 == var_04.var_2418) {
+                setmatchdata("players", var_14.var_2418, "match_result", "win");
               }
             }
           }
@@ -3625,7 +3623,7 @@ func_6028(param_00, param_01, param_02) {
         if(maps\mp\_utility::func_602B()) {
           setmatchdata("match_common", "playlist_version", function_0260());
           setmatchdata("match_common", "playlist_id", function_0261());
-          setmatchdata("match_common", "isDedicated", function_025F());
+          setmatchdata("match_common", "isDedicated", isdedicatedserver());
         }
 
         setmatchdata("match_common", "levelMaxClients", level.var_6079);
@@ -3661,24 +3659,24 @@ func_6028(param_00, param_01, param_02) {
         function_038D();
         function_0125();
         function_0376();
-        if(maps\mp\gametypes\_spawnscoring::func_57DC(level.var_3FDC) && isDefined(level.var_903C)) {
+        if(maps\mp\gametypes\_spawnscoring::func_57DC(level.gametype) && isDefined(level.var_903C)) {
           function_0379();
         }
 
         function_037D();
-        foreach(var_0C in level.var_744A) {
-          var_0C.var_012C["stats"] = var_0C.var_9337;
-          var_0C.var_012C["segments"] = var_0C.var_838A;
+        foreach(var_14 in level.players) {
+          var_14.pers["stats"] = var_14.stats;
+          var_14.pers["segments"] = var_14.var_838A;
         }
 
         function_022A();
         var_27 = 0;
-        if(maps\mp\_utility::func_761E()) {
+        if(maps\mp\_utility::practiceroundgame()) {
           var_27 = 5;
         }
 
         if(isDefined(level.var_36C3)) {
-          [[level.var_36C3]](var_03, level.var_75E4, var_27, param_01);
+          [[level.var_36C3]](var_0B, level.var_75E4, var_27, var_04);
         }
 
         if(function_03A9()) {
@@ -3689,24 +3687,24 @@ func_6028(param_00, param_01, param_02) {
           wait(1);
         }
 
-        func_6028(param_01, param_02, 1);
+        func_6028(var_04, var_05, 1);
         maps\mp\gametypes\_spawnscoring::func_5E90();
-        if(!common_scripts\utility::func_562E(level.var_3E16) && maps\mp\_utility::func_579B() && isDefined(game["switchedsides"]) && !game["switchedsides"]) {
+        if(!common_scripts\utility::func_562E(level.forcedend) && maps\mp\_utility::func_579B() && isDefined(game["switchedsides"]) && !game["switchedsides"]) {
           if(isDefined(level.var_36C0)) {
             [[level.var_36C0]]();
           }
 
-          game["game_one_winner"] = param_01;
+          game["game_one_winner"] = var_04;
           game["roundsPlayed"] = 0;
           game["switchedsides"] = 1;
           game["state"] = "playing";
           setDvar("2523", game["state"]);
-          maprestart(1);
+          map_restart(1);
           return;
         }
 
         if(common_scripts\utility::func_562E(level.var_7DD2)) {
-          maprestart(0);
+          map_restart(0);
           return;
         }
 
@@ -3724,7 +3722,7 @@ func_6028(param_00, param_01, param_02) {
         }
 
         var_02 = param_00;
-        if(level.var_984D && (maps\mp\_utility::func_57B2() || level.var_3FDC == "ctf") && level.var_3F9D && !isDefined(level.var_3E39)) {
+        if(level.teambased && (maps\mp\_utility::func_57B2() || level.gametype == "ctf") && level.gameended && !isDefined(level.var_3E39)) {
           var_03 = "roundsWon";
           if(isDefined(level.var_AA24) && level.var_AA24) {
             var_03 = "teamScores";
@@ -3739,15 +3737,15 @@ func_6028(param_00, param_01, param_02) {
           }
         }
 
-        if(var_02 && var_03 == "allies" || var_03 == "axis") {
-          level.var_3B5C = var_03;
+        if(param_01 && var_02 == "allies" || var_02 == "axis") {
+          level.var_3B5C = var_02;
         }
 
-        return var_03;
+        return var_02;
       }
 
       func_A10C(param_00) {
-        if(!level.var_984D) {
+        if(!level.teambased) {
           return 1;
         }
 
@@ -3776,9 +3774,9 @@ func_6028(param_00, param_01, param_02) {
       func_4673(param_00) {
         var_01 = maps\mp\_utility::func_471A("scorelimit");
         var_02 = maps\mp\_utility::func_46E2();
-        var_03 = maps\mp\_utility::func_46E3() / -5536 + 0.0001;
+        var_03 = maps\mp\_utility::gettimepassed() / -5536 + 0.0001;
         if(isPlayer(self)) {
-          var_04 = self.var_015C / var_03;
+          var_04 = self.score / var_03;
         } else {
           var_04 = getteamscore(var_01) / var_04;
         }
@@ -3789,7 +3787,7 @@ func_6028(param_00, param_01, param_02) {
       func_4674(param_00) {
         var_01 = maps\mp\_utility::func_471A("scorelimit");
         if(isPlayer(self)) {
-          var_02 = var_01 - self.var_015C;
+          var_02 = var_01 - self.score;
         } else {
           var_02 = var_02 - getteamscore(var_01);
         }
@@ -3802,15 +3800,15 @@ func_6028(param_00, param_01, param_02) {
         self endon("disconnect");
         level endon("game_ended");
         maps\mp\_utility::func_A78E(3);
-        thread maps\mp\_utility::func_9863("callout_lastteammemberalive", self, self.var_012C["team"]);
-        if(level.var_6520) {
-          foreach(var_01 in level.var_985B) {
-            if(self.var_012C["team"] != var_01) {
+        thread maps\mp\_utility::func_9863("callout_lastteammemberalive", self, self.pers["team"]);
+        if(level.multiteambased) {
+          foreach(var_01 in level.teamnamelist) {
+            if(self.pers["team"] != var_01) {
               thread maps\mp\_utility::func_9863("callout_lastenemyalive", self, var_01);
             }
           }
         } else {
-          var_03 = maps\mp\_utility::func_45DE(self.var_012C["team"]);
+          var_03 = maps\mp\_utility::func_45DE(self.pers["team"]);
           thread maps\mp\_utility::func_9863("callout_lastenemyalive", self, var_03);
         }
 
@@ -3819,22 +3817,22 @@ func_6028(param_00, param_01, param_02) {
 
       func_7758() {
         var_00 = 0;
-        foreach(var_02 in level.var_744A) {
+        foreach(var_02 in level.players) {
           if(!isDefined(var_02)) {
             continue;
           }
 
           var_02.var_241A = var_00;
           var_00++;
-          if(isDefined(level.var_585D) && level.var_585D) {
+          if(isDefined(level.iszombiegame) && level.iszombiegame) {
             var_02.var_241A = var_02 getentitynumber();
           }
 
-          setclientmatchdata("players", var_02.var_241A, "name", maps\mp\gametypes\_playerlogic::func_9E05(var_02.var_0109));
-          setclientmatchdata("players", var_02.var_241A, "xuid", var_02.var_01D6);
+          setclientmatchdata("players", var_02.var_241A, "name", maps\mp\gametypes\_playerlogic::func_9E05(var_02.name));
+          setclientmatchdata("players", var_02.var_241A, "xuid", var_02.var_1D6);
         }
 
-        maps\mp\_awards::func_10DD();
+        maps\mp\_awards::assignawards();
         maps\mp\_scoreboard::func_7759();
         sendclientmatchdata();
         if(!function_0367()) {
@@ -3850,29 +3848,29 @@ func_6028(param_00, param_01, param_02) {
         if(isDefined(self) && isPlayer(self)) {
           if(param_01 != "MOD_FALLING") {
             thread func_996D(param_00, 1, "kills");
-            if(maps\mp\_utility::func_5755(param_01) && issubstr(param_00, "tactical")) {
+            if(maps\mp\_utility::ismeleemod(param_01) && issubstr(param_00, "tactical")) {
               return;
             }
 
-            if(maps\mp\_utility::func_5755(param_01) && !issubstr(param_00, "riotshield") && !issubstr(param_00, "combatknife")) {
+            if(maps\mp\_utility::ismeleemod(param_01) && !issubstr(param_00, "riotshield") && !issubstr(param_00, "combatknife")) {
               return;
             }
 
             var_03 = 0;
-            if(isDefined(param_02) && isDefined(param_02.var_3BE0)) {
-              var_03 = param_02.var_3BE0;
+            if(isDefined(param_02) && isDefined(param_02.firedads)) {
+              var_03 = param_02.firedads;
             } else {
               var_03 = self playerads();
             }
 
             if(var_03 < 0.2) {
               thread func_996D(param_00, 1, "hipfirekills");
-              if(isDefined(self.var_0079) && self.var_0079 == 7) {}
+              if(isDefined(self.var_79) && self.var_79 == 7) {}
             }
           }
 
-          if(param_02 == "MOD_HEAD_SHOT") {
-            thread func_996D(param_01, 1, "headShots");
+          if(param_01 == "MOD_HEAD_SHOT") {
+            thread func_996D(param_00, 1, "headShots");
           }
         }
       }
@@ -3886,12 +3884,12 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        var_03 = maps\mp\_utility::func_472A(param_00);
+        var_03 = maps\mp\_utility::getweaponclass(param_00);
         if(var_03 == "killstreak" || var_03 == "other") {
           return;
         }
 
-        if(maps\mp\_utility::func_56DF(param_00)) {
+        if(maps\mp\_utility::isenvironmentweapon(param_00)) {
           return;
         }
 
@@ -3921,11 +3919,11 @@ func_6028(param_00, param_01, param_02) {
             if(param_02 == "kills") {
               maps\mp\gametypes\_persistence::func_A195();
               self.var_9BBB = var_05;
-              self.var_9BBA++;
+              self.trackingweaponkills++;
               maps\mp\gametypes\_persistence::func_A195();
               if(!maps\mp\_utility::func_773F()) {
                 var_07 = maps\mp\_utility::func_45B5(var_05);
-                if(maps\mp\_utility::func_5699(var_07) || maps\mp\_utility::func_569A(var_07)) {
+                if(maps\mp\_utility::func_5699(var_07) || maps\mp\_utility::iscacsecondaryweapon(var_07)) {
                   var_08 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "weaponStats", var_07, "kills");
                   self setcurrentweaponkillcount(var_08);
                 }
@@ -3936,7 +3934,7 @@ func_6028(param_00, param_01, param_02) {
           }
 
           if(var_05 != var_06) {
-            if(maps\mp\_utility::func_5740(var_06)) {
+            if(maps\mp\_utility::iskillstreakweapon(var_06)) {
               return;
             }
 
@@ -3963,15 +3961,15 @@ func_6028(param_00, param_01, param_02) {
             break;
 
           case "headShots":
-            self.var_9BB7++;
+            self.trackingweaponheadshots++;
             break;
 
           case "kills":
-            self.var_9BBA++;
+            self.trackingweaponkills++;
             break;
 
           case "hipfirekills":
-            self.var_9BB8++;
+            self.trackingweaponhipfirekills++;
             break;
 
           case "timeInUse":
@@ -3989,16 +3987,16 @@ func_6028(param_00, param_01, param_02) {
 
         if(isDefined(param_00) && param_00 != "none" && param_02 == "kills" && !maps\mp\_utility::func_773F()) {
           var_07 = maps\mp\_utility::func_45B5(param_00);
-          if(maps\mp\_utility::func_5699(var_07) || maps\mp\_utility::func_569A(var_07)) {
+          if(maps\mp\_utility::func_5699(var_07) || maps\mp\_utility::iscacsecondaryweapon(var_07)) {
             var_08 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "weaponStats", var_07, "kills");
-            var_08 = var_08 + self.var_9BBA;
+            var_08 = var_08 + self.trackingweaponkills;
             self setcurrentweaponkillcount(var_08);
           }
         }
 
         if(param_02 == "deaths") {
-          var_09 = maps\mp\_utility::func_4431(param_00);
-          if(!maps\mp\_utility::func_5699(var_09) && !maps\mp\_utility::func_569A(var_09)) {
+          var_09 = maps\mp\_utility::getbaseweaponname(param_00);
+          if(!maps\mp\_utility::func_5699(var_09) && !maps\mp\_utility::iscacsecondaryweapon(var_09)) {
             return;
           }
 
@@ -4046,18 +4044,18 @@ func_6028(param_00, param_01, param_02) {
       }
 
       func_21BC() {
-        foreach(var_01 in level.var_744A) {
+        foreach(var_01 in level.players) {
           if(!isDefined(var_01)) {
             continue;
           }
 
-          if(var_01 maps\mp\_utility::func_7A69()) {
-            var_02 = var_01.var_012C["summary"]["xp"];
+          if(var_01 maps\mp\_utility::rankingenabled()) {
+            var_02 = var_01.pers["summary"]["xp"];
             if(!isDefined(level.disableallplayerstats) || !level.disableallplayerstats) {
               var_03 = getmatchdata("players", var_01.var_2418, "playermatchtime_total_ms");
-              var_04 = var_01 getrankedplayerdata(common_scripts\utility::func_46A7(), "round", "kills");
-              var_05 = var_01 getrankedplayerdata(common_scripts\utility::func_46A7(), "round", "deaths");
-              var_06 = var_01.var_015C;
+              var_04 = var_01 getrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "kills");
+              var_05 = var_01 getrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "deaths");
+              var_06 = var_01.score;
               var_07 = 0;
               if(var_03 > 0) {
                 var_07 = var_06 / var_03 / 3600;
@@ -4100,29 +4098,29 @@ func_6028(param_00, param_01, param_02) {
             }
 
             var_01 maps\mp\_matchdata::func_5EAA(var_02, "total_xp");
-            var_01 maps\mp\_matchdata::func_5EAA(var_01.var_012C["summary"]["score"], "score_xp");
-            var_01 maps\mp\_matchdata::func_5EAA(var_01.var_012C["summary"]["challenge"], "challenge_xp");
-            var_01 maps\mp\_matchdata::func_5EAA(var_01.var_012C["summary"]["match"], "bonus_xp");
-            var_01 maps\mp\_matchdata::func_5EAA(var_01.var_012C["summary"]["misc"] + var_01.var_012C["summary"]["entitlementXP"] + var_01.var_012C["summary"]["doubleXp"], "misc_xp");
+            var_01 maps\mp\_matchdata::func_5EAA(var_01.pers["summary"]["score"], "score_xp");
+            var_01 maps\mp\_matchdata::func_5EAA(var_01.pers["summary"]["challenge"], "challenge_xp");
+            var_01 maps\mp\_matchdata::func_5EAA(var_01.pers["summary"]["match"], "bonus_xp");
+            var_01 maps\mp\_matchdata::func_5EAA(var_01.pers["summary"]["misc"] + var_01.pers["summary"]["entitlementXP"] + var_01.pers["summary"]["doubleXp"], "misc_xp");
           }
 
-          if(isDefined(var_01.var_012C["confirmed"])) {
+          if(isDefined(var_01.pers["confirmed"])) {
             var_01 maps\mp\_matchdata::func_5E97();
           }
 
-          if(isDefined(var_01.var_012C["denied"])) {
+          if(isDefined(var_01.pers["denied"])) {
             var_01 maps\mp\_matchdata::func_5E98();
           }
         }
       }
 
       func_4668(param_00) {
-        var_01 = float(param_00 getrankedplayerdata(common_scripts\utility::func_46AE(), "totalShots") - param_00.var_012C["previous_shots"]);
+        var_01 = float(param_00 getrankedplayerdata(common_scripts\utility::func_46AE(), "totalShots") - param_00.pers["previous_shots"]);
         if(var_01 == 0) {
           return 0;
         }
 
-        var_02 = float(param_00 getrankedplayerdata(common_scripts\utility::func_46AE(), "hits") - param_00.var_012C["previous_hits"]);
+        var_02 = float(param_00 getrankedplayerdata(common_scripts\utility::func_46AE(), "hits") - param_00.pers["previous_hits"]);
         var_03 = clamp(var_02 / var_01, 0, 1) * 10000;
         return int(var_03);
       }
@@ -4135,7 +4133,7 @@ func_6028(param_00, param_01, param_02) {
         var_04 = "";
         for(var_05 = 0; var_05 < var_00.size; var_05++) {
           var_06 = var_00[var_05];
-          var_06 = maps\mp\_utility::func_4431(var_06);
+          var_06 = maps\mp\_utility::getbaseweaponname(var_06);
           if(!function_0367() && maps\mp\_utility::func_5716(var_06)) {
             continue;
           }
@@ -4144,11 +4142,11 @@ func_6028(param_00, param_01, param_02) {
             continue;
           }
 
-          var_07 = maps\mp\_utility::func_472A(var_06);
-          if(!maps\mp\_utility::func_5740(var_06) && var_07 != "killstreak" && var_07 != "other") {
+          var_07 = maps\mp\_utility::getweaponclass(var_06);
+          if(!maps\mp\_utility::iskillstreakweapon(var_06) && var_07 != "killstreak" && var_07 != "other") {
             var_08 = 0;
-            if(isDefined(self.var_012C["mpWeaponStats"][var_06]) && isDefined(self.var_012C["mpWeaponStats"][var_06]["kills"])) {
-              var_08 = self.var_012C["mpWeaponStats"][var_06]["kills"];
+            if(isDefined(self.pers["mpWeaponStats"][var_06]) && isDefined(self.pers["mpWeaponStats"][var_06]["kills"])) {
+              var_08 = self.pers["mpWeaponStats"][var_06]["kills"];
               if(var_08 > var_03) {
                 var_03 = var_08;
                 var_04 = var_06;
@@ -4160,28 +4158,28 @@ func_6028(param_00, param_01, param_02) {
         if(var_03 > var_01) {
           self setrankedplayerdata(common_scripts\utility::func_46AE(), "bestWeapon", "kills", var_03);
           var_09 = 0;
-          if(isDefined(self.var_012C["mpWeaponStats"][var_04]["shots"])) {
-            var_09 = self.var_012C["mpWeaponStats"][var_04]["shots"];
+          if(isDefined(self.pers["mpWeaponStats"][var_04]["shots"])) {
+            var_09 = self.pers["mpWeaponStats"][var_04]["shots"];
           }
 
           var_0A = 0;
-          if(isDefined(self.var_012C["mpWeaponStats"][var_04]["headShots"])) {
-            var_0A = self.var_012C["mpWeaponStats"][var_04]["headShots"];
+          if(isDefined(self.pers["mpWeaponStats"][var_04]["headShots"])) {
+            var_0A = self.pers["mpWeaponStats"][var_04]["headShots"];
           }
 
           var_0B = 0;
-          if(isDefined(self.var_012C["mpWeaponStats"][var_04]["hits"])) {
-            var_0B = self.var_012C["mpWeaponStats"][var_04]["hits"];
+          if(isDefined(self.pers["mpWeaponStats"][var_04]["hits"])) {
+            var_0B = self.pers["mpWeaponStats"][var_04]["hits"];
           }
 
           var_0C = 0;
-          if(isDefined(self.var_012C["mpWeaponStats"][var_04]["deaths"])) {
-            var_0C = self.var_012C["mpWeaponStats"][var_04]["deaths"];
+          if(isDefined(self.pers["mpWeaponStats"][var_04]["deaths"])) {
+            var_0C = self.pers["mpWeaponStats"][var_04]["deaths"];
           }
 
           var_0D = 0;
-          if(isDefined(self.var_012C["mpWeaponStats"][var_04]["assists"])) {
-            var_0D = self.var_012C["mpWeaponStats"][var_04]["assists"];
+          if(isDefined(self.pers["mpWeaponStats"][var_04]["assists"])) {
+            var_0D = self.pers["mpWeaponStats"][var_04]["assists"];
           }
 
           self setrankedplayerdata(common_scripts\utility::func_46AE(), "bestWeapon", "shots", var_09);
@@ -4213,25 +4211,25 @@ func_6028(param_00, param_01, param_02) {
         }
 
         var_04 = maps\mp\_utility::func_46E7();
-        if(isDefined(self.var_00E3)) {
-          var_05 = self.var_00E3;
+        if(isDefined(self.kills)) {
+          var_05 = self.kills;
         } else {
           var_05 = 0;
         }
 
-        if(isDefined(self.var_0070)) {
-          var_06 = self.var_0070;
+        if(isDefined(self.deaths)) {
+          var_06 = self.deaths;
         } else {
           var_06 = 0;
         }
 
-        if(isDefined(self.var_015C)) {
-          var_07 = self.var_015C;
+        if(isDefined(self.score)) {
+          var_07 = self.score;
         } else {
           var_07 = 0;
         }
 
-        var_08 = maps\mp\_utility::func_4607("headshots");
+        var_08 = maps\mp\_utility::getpersstat("headshots");
         var_09 = getmatchdata("players", self.var_2418, "playermatchtime_total_ms");
         var_0A = getmatchdata("players", self.var_2418, "total_xp");
         self setrankedplayerdata(common_scripts\utility::func_46AE(), "combatRecord", "trend", var_03 - 1, "timestamp", var_04);
@@ -4241,8 +4239,8 @@ func_6028(param_00, param_01, param_02) {
         self setrankedplayerdata(common_scripts\utility::func_46AE(), "combatRecord", "trend", var_03 - 1, "headshots", var_08);
         self setrankedplayerdata(common_scripts\utility::func_46AE(), "combatRecord", "trend", var_03 - 1, "timeplayed", var_09);
         self setrankedplayerdata(common_scripts\utility::func_46AE(), "combatRecord", "trend", var_03 - 1, "totalXp", var_0A);
-        if(level.var_3FDC == "ctf" || level.var_3FDC == "dom") {
-          var_0B = maps\mp\_utility::func_4607("captures");
+        if(level.gametype == "ctf" || level.gametype == "dom") {
+          var_0B = maps\mp\_utility::getpersstat("captures");
           self setrankedplayerdata(common_scripts\utility::func_46AE(), "combatRecord", "trend", var_03 - 1, "captures", var_0B);
         }
 
@@ -4263,8 +4261,8 @@ func_6028(param_00, param_01, param_02) {
           var_03 = var_02 - var_00;
         }
 
-        if(isDefined(self.var_00E3)) {
-          var_04 = self.var_00E3;
+        if(isDefined(self.kills)) {
+          var_04 = self.kills;
         } else {
           var_04 = 0;
         }
@@ -4288,19 +4286,19 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(isDefined(self.var_00E3)) {
-          var_00 = self.var_00E3;
+        if(isDefined(self.kills)) {
+          var_00 = self.kills;
         } else {
           var_00 = 0;
         }
 
-        if(isDefined(self.var_0070)) {
-          var_01 = self.var_0070;
+        if(isDefined(self.deaths)) {
+          var_01 = self.deaths;
         } else {
           var_01 = 0;
         }
 
-        var_02 = maps\mp\_utility::func_4607("headshots");
+        var_02 = maps\mp\_utility::getpersstat("headshots");
         var_03 = int(getmatchdata("players", self.var_2418, "playermatchtime_total_ms") / 1000);
         var_04 = function_03B5();
         var_05 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_04, "kills");
@@ -4317,10 +4315,10 @@ func_6028(param_00, param_01, param_02) {
       updatecombatrecordraiddata() {
         var_00 = maps\mp\_utility::func_46E7();
         func_8651("timeStampLastGame", var_00);
-        func_50FB("timePlayed", self.var_9A06["total"]);
-        func_50FB("xpEarned", self.var_012C["summary"]["xp"]);
-        if(isDefined(self.var_015C) && self.var_015C > 0) {
-          func_50FB("score", self.var_015C);
+        func_50FB("timePlayed", self.timeplayed["total"]);
+        func_50FB("xpEarned", self.pers["summary"]["xp"]);
+        if(isDefined(self.score) && self.score > 0) {
+          func_50FB("score", self.score);
         }
 
         if(game["switchedsides"]) {
@@ -4331,12 +4329,12 @@ func_6028(param_00, param_01, param_02) {
             var_02--;
           }
 
-          if(isDefined(game["game_one_winner"]) && self.var_01A7 == game["game_one_winner"] && !didplayerjipgametwo(self)) {
+          if(isDefined(game["game_one_winner"]) && self.team == game["game_one_winner"] && !didplayerjipgametwo(self)) {
             var_01++;
             var_02--;
           }
 
-          if(common_scripts\utility::func_562E(self.var_5969) && !common_scripts\utility::func_562E(self.var_012C["recordedLoss"])) {
+          if(common_scripts\utility::func_562E(self.var_5969) && !common_scripts\utility::func_562E(self.pers["recordedLoss"])) {
             var_02 = 0;
           }
 
@@ -4358,8 +4356,8 @@ func_6028(param_00, param_01, param_02) {
           }
         }
 
-        var_03 = level.var_3FDC;
-        if(isDefined(level.var_4B17) && level.var_4B17) {
+        var_03 = level.gametype;
+        if(isDefined(level.hardcoremode) && level.hardcoremode) {
           var_03 = var_03 + "_hc";
         }
 
@@ -4377,10 +4375,10 @@ func_6028(param_00, param_01, param_02) {
         var_00 = maps\mp\_utility::func_46E7();
         func_8651("timeStampLastGame", var_00);
         func_50FB("numMatches", 1);
-        func_50FB("timePlayed", self.var_9A06["total"]);
-        func_50FB("kills", self.var_00E3);
-        func_50FB("deaths", self.var_0070);
-        func_50FB("xpEarned", self.var_012C["summary"]["xp"]);
+        func_50FB("timePlayed", self.timeplayed["total"]);
+        func_50FB("kills", self.kills);
+        func_50FB("deaths", self.deaths);
+        func_50FB("xpEarned", self.pers["summary"]["xp"]);
         if(isDefined(self.var_2533)) {
           func_50FB("wins", 1);
         }
@@ -4389,16 +4387,16 @@ func_6028(param_00, param_01, param_02) {
           func_50FB("ties", 1);
         }
 
-        if(isDefined(self.var_012C["combatRecordLoss"])) {
+        if(isDefined(self.pers["combatRecordLoss"])) {
           func_50FB("losses", 1);
         }
 
-        if(isDefined(self.var_015C) && self.var_015C > 0) {
-          func_50FB("score", self.var_015C);
+        if(isDefined(self.score) && self.score > 0) {
+          func_50FB("score", self.score);
         }
 
-        var_01 = level.var_3FDC;
-        if(isDefined(level.var_4B17) && level.var_4B17) {
+        var_01 = level.gametype;
+        if(isDefined(level.hardcoremode) && level.hardcoremode) {
           var_01 = var_01 + "_hc";
         }
 
@@ -4407,28 +4405,28 @@ func_6028(param_00, param_01, param_02) {
           func_8651("timeStampFirstGame", var_00);
         }
 
-        if(isDefined(self.var_012C["badSpawnByAnyMeansCount"])) {
-          func_50FE("badSpawnByAnyMeansCount", self.var_012C["badSpawnByAnyMeansCount"]);
+        if(isDefined(self.pers["badSpawnByAnyMeansCount"])) {
+          func_50FE("badSpawnByAnyMeansCount", self.pers["badSpawnByAnyMeansCount"]);
         }
 
-        if(isDefined(self.var_012C["immediateActionSpawnCount"])) {
-          func_50FE("immediateActionSpawnCount", self.var_012C["immediateActionSpawnCount"]);
+        if(isDefined(self.pers["immediateActionSpawnCount"])) {
+          func_50FE("immediateActionSpawnCount", self.pers["immediateActionSpawnCount"]);
         }
 
-        if(isDefined(self.var_012C["victimSpawnCount"])) {
-          func_50FE("victimSpawnCount", self.var_012C["victimSpawnCount"]);
+        if(isDefined(self.pers["victimSpawnCount"])) {
+          func_50FE("victimSpawnCount", self.pers["victimSpawnCount"]);
         }
 
-        if(isDefined(self.var_012C["causedBadSpawnByAnyMeansCount"])) {
-          func_50FE("causedBadSpawnByAnyMeansCount", self.var_012C["causedBadSpawnByAnyMeansCount"]);
+        if(isDefined(self.pers["causedBadSpawnByAnyMeansCount"])) {
+          func_50FE("causedBadSpawnByAnyMeansCount", self.pers["causedBadSpawnByAnyMeansCount"]);
         }
 
-        if(isDefined(self.var_012C["causedImmediateActionSpawnCount"])) {
-          func_50FE("causedImmediateActionSpawnCount", self.var_012C["causedImmediateActionSpawnCount"]);
+        if(isDefined(self.pers["causedImmediateActionSpawnCount"])) {
+          func_50FE("causedImmediateActionSpawnCount", self.pers["causedImmediateActionSpawnCount"]);
         }
 
-        if(isDefined(self.var_012C["causedVictimSpawnCount"])) {
-          func_50FE("causedVictimSpawnCount", self.var_012C["causedVictimSpawnCount"]);
+        if(isDefined(self.pers["causedVictimSpawnCount"])) {
+          func_50FE("causedVictimSpawnCount", self.pers["causedVictimSpawnCount"]);
         }
       }
 
@@ -4447,8 +4445,8 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        var_02 = level.var_3FDC;
-        if(isDefined(level.var_4B17) && level.var_4B17) {
+        var_02 = level.gametype;
+        if(isDefined(level.hardcoremode) && level.hardcoremode) {
           var_02 = var_02 + "_hc";
         }
 
@@ -4462,8 +4460,8 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        var_02 = level.var_3FDC;
-        if(isDefined(level.var_4B17) && level.var_4B17) {
+        var_02 = level.gametype;
+        if(isDefined(level.hardcoremode) && level.hardcoremode) {
           var_02 = var_02 + "_hc";
         }
 
@@ -4471,8 +4469,8 @@ func_6028(param_00, param_01, param_02) {
       }
 
       func_446D(param_00) {
-        var_01 = level.var_3FDC;
-        if(isDefined(level.var_4B17) && level.var_4B17) {
+        var_01 = level.gametype;
+        if(isDefined(level.hardcoremode) && level.hardcoremode) {
           var_01 = var_01 + "_hc";
         }
 
@@ -4480,8 +4478,8 @@ func_6028(param_00, param_01, param_02) {
       }
 
       func_8652(param_00, param_01) {
-        var_02 = level.var_3FDC;
-        if(isDefined(level.var_4B17) && level.var_4B17) {
+        var_02 = level.gametype;
+        if(isDefined(level.hardcoremode) && level.hardcoremode) {
           var_02 = var_02 + "_hc";
         }
 
@@ -4492,8 +4490,8 @@ func_6028(param_00, param_01, param_02) {
       }
 
       setcombatrecordstatifgreaterflagmatchdata(param_00, param_01, param_02) {
-        var_03 = level.var_3FDC;
-        if(isDefined(level.var_4B17) && level.var_4B17) {
+        var_03 = level.gametype;
+        if(isDefined(level.hardcoremode) && level.hardcoremode) {
           var_03 = var_03 + "_hc";
         }
 
@@ -4505,29 +4503,29 @@ func_6028(param_00, param_01, param_02) {
       }
 
       func_A0FB(param_00) {
-        if(level.var_3FDC == "war" || level.var_3FDC == "dm" || level.var_3FDC == "onevone") {
+        if(level.gametype == "war" || level.gametype == "dm" || level.gametype == "onevone") {
           func_A0F9();
-          var_01 = self.var_0070;
+          var_01 = self.deaths;
           if(var_01 == 0) {
             var_01 = 1;
           }
 
-          var_02 = int(self.var_00E3 / var_01) * 1000;
-          if(level.var_3FDC == "war" || level.var_3FDC == "dm") {
-            var_03 = maps\mp\_utility::func_4607("headshots");
+          var_02 = int(self.kills / var_01) * 1000;
+          if(level.gametype == "war" || level.gametype == "dm") {
+            var_03 = maps\mp\_utility::getpersstat("headshots");
             func_50FB("headshots", var_03);
-            func_50FB("assists", self.var_0021);
+            func_50FB("assists", self.assists);
           }
 
-          setcombatrecordstatifgreaterflagmatchdata("mostkills", self.var_00E3, "best_kills");
+          setcombatrecordstatifgreaterflagmatchdata("mostkills", self.kills, "best_kills");
           setcombatrecordstatifgreaterflagmatchdata("bestkdr", var_02, "best_kdr");
           return;
         }
 
-        if(level.var_3FDC == "ctf") {
+        if(level.gametype == "ctf") {
           func_A0F9();
-          var_04 = maps\mp\_utility::func_4607("captures");
-          var_05 = maps\mp\_utility::func_4607("returns");
+          var_04 = maps\mp\_utility::getpersstat("captures");
+          var_05 = maps\mp\_utility::getpersstat("returns");
           func_50FB("captures", var_04);
           func_50FB("returns", var_05);
           func_8652("mostcaptures", var_04);
@@ -4535,10 +4533,10 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "dom" || level.var_3FDC == "control") {
+        if(level.gametype == "dom" || level.gametype == "control") {
           func_A0F9();
-          var_04 = maps\mp\_utility::func_4607("captures");
-          var_06 = maps\mp\_utility::func_4607("defends");
+          var_04 = maps\mp\_utility::getpersstat("captures");
+          var_06 = maps\mp\_utility::getpersstat("defends");
           func_50FB("captures", var_04);
           func_50FB("defends", var_06);
           func_8652("mostcaptures", var_04);
@@ -4546,10 +4544,10 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "conf") {
+        if(level.gametype == "conf") {
           func_A0F9();
-          var_07 = maps\mp\_utility::func_4607("confirmed");
-          var_08 = maps\mp\_utility::func_4607("denied");
+          var_07 = maps\mp\_utility::getpersstat("confirmed");
+          var_08 = maps\mp\_utility::getpersstat("denied");
           func_50FB("confirms", var_07);
           func_50FB("denies", var_08);
           func_8652("mostconfirms", var_07);
@@ -4557,11 +4555,11 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "sd" || level.var_3FDC == "demo") {
+        if(level.gametype == "sd" || level.gametype == "demo") {
           func_A0F9();
-          var_09 = maps\mp\_utility::func_4607("plants");
-          var_0A = maps\mp\_utility::func_4607("defuses");
-          var_0B = maps\mp\_utility::func_4607("destructions");
+          var_09 = maps\mp\_utility::getpersstat("plants");
+          var_0A = maps\mp\_utility::getpersstat("defuses");
+          var_0B = maps\mp\_utility::getpersstat("destructions");
           func_50FB("plants", var_09);
           func_50FB("defuses", var_0A);
           func_50FB("detonates", var_0B);
@@ -4571,11 +4569,11 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "hp") {
+        if(level.gametype == "hp") {
           func_A0F9();
-          var_04 = maps\mp\_utility::func_4607("captures");
-          var_06 = maps\mp\_utility::func_4607("defends");
-          var_0C = maps\mp\_utility::func_4607("time");
+          var_04 = maps\mp\_utility::getpersstat("captures");
+          var_06 = maps\mp\_utility::getpersstat("defends");
+          var_0C = maps\mp\_utility::getpersstat("time");
           func_50FB("totalHPTime", var_0C);
           func_50FB("captures", var_04);
           func_50FB("defends", var_06);
@@ -4584,13 +4582,13 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "sr") {
+        if(level.gametype == "sr") {
           func_A0F9();
-          var_09 = maps\mp\_utility::func_4607("plants");
-          var_0A = maps\mp\_utility::func_4607("defuses");
-          var_0B = maps\mp\_utility::func_4607("destructions");
-          var_07 = maps\mp\_utility::func_4607("confirmed");
-          var_08 = maps\mp\_utility::func_4607("denied");
+          var_09 = maps\mp\_utility::getpersstat("plants");
+          var_0A = maps\mp\_utility::getpersstat("defuses");
+          var_0B = maps\mp\_utility::getpersstat("destructions");
+          var_07 = maps\mp\_utility::getpersstat("confirmed");
+          var_08 = maps\mp\_utility::getpersstat("denied");
           func_50FB("plants", var_09);
           func_50FB("defuses", var_0A);
           func_50FB("detonates", var_0B);
@@ -4604,10 +4602,10 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "infect") {
+        if(level.gametype == "infect") {
           func_A0F9();
-          var_0D = maps\mp\_utility::func_4628("contagious");
-          var_0E = self.var_00E3 - var_0D;
+          var_0D = maps\mp\_utility::getplayerstat("contagious");
+          var_0E = self.kills - var_0D;
           func_50FB("infectedKills", var_0E);
           func_50FB("survivorKills", var_0D);
           func_8652("mostInfectedKills", var_0E);
@@ -4615,10 +4613,10 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "gun") {
+        if(level.gametype == "gun") {
           func_A0F9();
-          var_0F = maps\mp\_utility::func_4628("levelup");
-          var_10 = maps\mp\_utility::func_4628("humiliation");
+          var_0F = maps\mp\_utility::getplayerstat("levelup");
+          var_10 = maps\mp\_utility::getplayerstat("humiliation");
           func_50FB("gunPromotions", var_0F);
           func_50FB("stabs", var_10);
           func_8652("mostGunPromotions", var_0F);
@@ -4626,10 +4624,10 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "ball") {
+        if(level.gametype == "ball") {
           func_A0F9();
-          var_11 = maps\mp\_utility::func_4628("fieldgoal") + maps\mp\_utility::func_4628("touchdown") * 2;
-          var_12 = maps\mp\_utility::func_4628("killedBallCarrier");
+          var_11 = maps\mp\_utility::getplayerstat("fieldgoal") + maps\mp\_utility::getplayerstat("touchdown") * 2;
+          var_12 = maps\mp\_utility::getplayerstat("killedBallCarrier");
           var_13 = 0;
           if(isDefined(self.var_200D)) {
             var_13 = self.var_200D;
@@ -4643,10 +4641,10 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "twar") {
+        if(level.gametype == "twar") {
           func_A0F9();
-          var_04 = maps\mp\_utility::func_4607("captures");
-          var_14 = maps\mp\_utility::func_4628("kill_while_capture");
+          var_04 = maps\mp\_utility::getpersstat("captures");
+          var_14 = maps\mp\_utility::getplayerstat("kill_while_capture");
           func_50FB("captures", var_04);
           func_50FB("killWhileCaptures", var_14);
           func_8652("mostCaptures", var_04);
@@ -4654,10 +4652,10 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "lockdown") {
+        if(level.gametype == "lockdown") {
           func_A0F9();
-          var_04 = maps\mp\_utility::func_4607("captures");
-          var_06 = maps\mp\_utility::func_4607("defends");
+          var_04 = maps\mp\_utility::getpersstat("captures");
+          var_06 = maps\mp\_utility::getpersstat("defends");
           func_50FB("captures", var_04);
           func_50FB("defends", var_06);
           func_8652("mostcaptures", var_04);
@@ -4665,10 +4663,10 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "blades") {
+        if(level.gametype == "blades") {
           func_A0F9();
-          var_15 = maps\mp\_utility::func_4607("throwingKnifeKills");
-          var_16 = maps\mp\_utility::func_4607("meleeKnifeKills");
+          var_15 = maps\mp\_utility::getpersstat("throwingKnifeKills");
+          var_16 = maps\mp\_utility::getpersstat("meleeKnifeKills");
           func_50FB("throwingKnifeKills", var_15);
           func_50FB("meleeKnifeKills", var_16);
           func_8652("mostThrowingKnifeKillss", var_15);
@@ -4676,10 +4674,10 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "scorestreak_training") {
+        if(level.gametype == "scorestreak_training") {
           func_A0F9();
-          var_17 = maps\mp\_utility::func_4607("scorestreaksCalled");
-          var_18 = maps\mp\_utility::func_4607("scorestreaksDowned");
+          var_17 = maps\mp\_utility::getpersstat("scorestreaksCalled");
+          var_18 = maps\mp\_utility::getpersstat("scorestreaksDowned");
           func_50FB("scorestreaksCalled", var_17);
           func_50FB("scorestreaksDowned", var_18);
           func_8652("mostScorestreaksCalled", var_17);
@@ -4687,13 +4685,13 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "raid") {
+        if(level.gametype == "raid") {
           updatecombatrecordraiddata();
           func_633D(param_00);
-          var_19 = maps\mp\_utility::func_4607("raidKillz");
-          var_06 = maps\mp\_utility::func_4607("defends");
-          var_1A = maps\mp\_utility::func_4607("constructs");
-          var_1B = maps\mp\_utility::func_4607("destructs");
+          var_19 = maps\mp\_utility::getpersstat("raidKillz");
+          var_06 = maps\mp\_utility::getpersstat("defends");
+          var_1A = maps\mp\_utility::getpersstat("constructs");
+          var_1B = maps\mp\_utility::getpersstat("destructs");
           func_50FB("kills", var_19);
           func_50FB("defends", var_06);
           func_50FB("constructs", var_1A);
@@ -4706,7 +4704,7 @@ func_6028(param_00, param_01, param_02) {
       }
 
       func_633D(param_00) {
-        if(isDefined(param_00) && !self.var_01A7 == param_00) {
+        if(isDefined(param_00) && !self.team == param_00) {
           return;
         }
 
@@ -4715,11 +4713,11 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(!game["switchedsides"] && isDefined(param_00) && self.var_01A7 == param_00) {
+        if(!game["switchedsides"] && isDefined(param_00) && self.team == param_00) {
           var_01++;
         }
 
-        if(maps\mp\_utility::func_7A69() && level.var_3FDC == "raid" && var_01 >= 5) {
+        if(maps\mp\_utility::rankingenabled() && level.gametype == "raid" && var_01 >= 5) {
           self giveachievement("MP_WAR_5");
         }
       }
@@ -4739,24 +4737,24 @@ func_6028(param_00, param_01, param_02) {
       }
 
       func_A0F8(param_00) {
-        foreach(var_02 in level.var_744A) {
+        foreach(var_02 in level.players) {
           if(!isDefined(var_02) || !isDefined(var_02.var_2582) || !var_02.var_2582) {
             continue;
           }
 
-          if(var_02 maps\mp\_utility::func_7A69()) {
+          if(var_02 maps\mp\_utility::rankingenabled()) {
             var_02 func_A0FA(param_00);
           }
 
-          if(!isDefined(level.var_585D) && level.var_585D) {
+          if(!isDefined(level.iszombiegame) && level.iszombiegame) {
             level maps\mp\gametypes\_playerlogic::func_AABB(var_02);
           }
 
-          if(maps\mp\_utility::func_761E()) {
+          if(maps\mp\_utility::practiceroundgame()) {
             level maps\mp\gametypes\_playerlogic::func_21DF(var_02);
           }
 
-          if(isDefined(level.var_585D) && level.var_585D) {
+          if(isDefined(level.iszombiegame) && level.iszombiegame) {
             var_02 updatecombatrecordforplayerzombies(param_00);
           }
         }
@@ -4775,7 +4773,7 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(isDefined(level.var_585D) && level.var_585D) {
+        if(isDefined(level.iszombiegame) && level.iszombiegame) {
           return;
         }
 
@@ -4783,7 +4781,7 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(!maps\mp\_utility::func_7A69() && !maps\mp\_utility::func_761E()) {
+        if(!maps\mp\_utility::rankingenabled() && !maps\mp\_utility::practiceroundgame()) {
           return;
         }
 
@@ -4791,7 +4789,7 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        if(level.var_3FDC == "gun" || level.var_3FDC == "blades" || level.var_3FDC == "infect" || level.var_3FDC == "prop" || level.var_3FDC == "br" || level.var_3FDC == "aon" || level.var_3FDC == "oitc" || getdvarint("scr_oneShot", 0) == 1) {
+        if(level.gametype == "gun" || level.gametype == "blades" || level.gametype == "infect" || level.gametype == "prop" || level.gametype == "br" || level.gametype == "aon" || level.gametype == "oitc" || getdvarint("scr_oneShot", 0) == 1) {
           return;
         }
 
@@ -4799,16 +4797,16 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        var_03 = maps\mp\_utility::func_4431(param_00);
-        if(maps\mp\_utility::func_5856(var_03)) {
-          var_03 = maps\mp\gametypes\_class::func_4432(var_03);
+        var_03 = maps\mp\_utility::getbaseweaponname(param_00);
+        if(maps\mp\_utility::islootweapon(var_03)) {
+          var_03 = maps\mp\gametypes\_class::getbasefromlootversion(var_03);
         }
 
-        if(!self method_85FD(var_03)) {
+        if(!self isitemunlocked(var_03)) {
           return;
         }
 
-        if(maps\mp\_utility::func_5740(var_03)) {
+        if(maps\mp\_utility::iskillstreakweapon(var_03)) {
           return;
         }
 
@@ -4820,7 +4818,7 @@ func_6028(param_00, param_01, param_02) {
           return;
         }
 
-        switch (level.var_3FDC) {
+        switch (level.gametype) {
           case "war":
             var_04 = 1;
             break;
@@ -4892,21 +4890,21 @@ func_6028(param_00, param_01, param_02) {
         }
 
         var_05 = int(tablelookup(getweaponlevelingtablename(), 0, param_01, var_04));
-        if(!isDefined(self.var_012C["summary"]["weaponXpToScaleWithActiveBoosts"][var_03])) {
-          self.var_012C["summary"]["weaponXpToScaleWithActiveBoosts"][var_03]["xp"] = 0;
-          self.var_012C["summary"]["weaponXpToScaleWithActiveBoosts"][var_03]["weaponName"] = var_03;
+        if(!isDefined(self.pers["summary"]["weaponXpToScaleWithActiveBoosts"][var_03])) {
+          self.pers["summary"]["weaponXpToScaleWithActiveBoosts"][var_03]["xp"] = 0;
+          self.pers["summary"]["weaponXpToScaleWithActiveBoosts"][var_03]["weaponName"] = var_03;
         }
 
-        self.var_012C["summary"]["weaponXpToScaleWithActiveBoosts"][var_03]["xp"] = self.var_012C["summary"]["weaponXpToScaleWithActiveBoosts"][var_03]["xp"] + var_05;
+        self.pers["summary"]["weaponXpToScaleWithActiveBoosts"][var_03]["xp"] = self.pers["summary"]["weaponXpToScaleWithActiveBoosts"][var_03]["xp"] + var_05;
         if(var_05 > 0) {
           thread func_47C3(param_00, var_05);
         }
       }
 
       func_47C3(param_00, param_01) {
-        var_02 = maps\mp\_utility::func_4431(param_00);
-        if(maps\mp\_utility::func_5856(var_02)) {
-          var_02 = maps\mp\gametypes\_class::func_4432(var_02);
+        var_02 = maps\mp\_utility::getbaseweaponname(param_00);
+        if(maps\mp\_utility::islootweapon(var_02)) {
+          var_02 = maps\mp\gametypes\_class::getbasefromlootversion(var_02);
         }
 
         var_03 = tablelookuprownum(getweaponlevelingtablename(), 0, var_02);
@@ -4919,25 +4917,25 @@ func_6028(param_00, param_01, param_02) {
         var_09 = var_08 + param_01;
         var_09 = int(min(var_05, var_09));
         param_01 = var_09 - var_08;
-        if(!isDefined(self.var_012C["weaponsUsed"])) {
-          self.var_012C["weaponsUsed"] = [];
-          self.var_012C["weaponXpEarned"] = [];
+        if(!isDefined(self.pers["weaponsUsed"])) {
+          self.pers["weaponsUsed"] = [];
+          self.pers["weaponXpEarned"] = [];
         }
 
         var_0A = 0;
         var_0B = 999;
-        for(var_0C = 0; var_0C < self.var_012C["weaponsUsed"].size; var_0C++) {
-          if(self.var_012C["weaponsUsed"][var_0C] == var_02) {
+        for(var_0C = 0; var_0C < self.pers["weaponsUsed"].size; var_0C++) {
+          if(self.pers["weaponsUsed"][var_0C] == var_02) {
             var_0A = 1;
             var_0B = var_0C;
           }
         }
 
         if(var_0A) {
-          self.var_012C["weaponXpEarned"][var_0B] = self.var_012C["weaponXpEarned"][var_0B] + param_01;
+          self.pers["weaponXpEarned"][var_0B] = self.pers["weaponXpEarned"][var_0B] + param_01;
         } else {
-          self.var_012C["weaponsUsed"][self.var_012C["weaponsUsed"].size] = var_02;
-          self.var_012C["weaponXpEarned"][self.var_012C["weaponXpEarned"].size] = param_01;
+          self.pers["weaponsUsed"][self.pers["weaponsUsed"].size] = var_02;
+          self.pers["weaponXpEarned"][self.pers["weaponXpEarned"].size] = param_01;
         }
 
         var_0D = 1;
@@ -4948,7 +4946,7 @@ func_6028(param_00, param_01, param_02) {
             var_0F = int(tablelookupbyrow(getweaponlevelingtablename(), var_0E, 1));
             if(var_09 >= var_0F) {
               var_10 = int(tablelookupbyrow(getweaponlevelingtablename(), var_0E, 3));
-              thread maps\mp\gametypes\_rank::func_47B2("weaponLevel", var_10);
+              thread maps\mp\gametypes\_rank::giverankxp("weaponLevel", var_10);
               var_06 = var_06 + 1;
               self setrankedplayerdata(common_scripts\utility::func_46AE(), "weaponStats", var_02, "level", var_06 - 1);
               maps\mp\_matchdata::func_5EAF(var_02, "level", 1, param_00);
@@ -4957,7 +4955,7 @@ func_6028(param_00, param_01, param_02) {
                 var_11 = -1;
               }
 
-              function_00F5("script_mp_rankup_weapon: playerName %s, weaponName %s, oldLevel %d, newLevel %d, xpGain %d, timeInUse %d", self.var_0109, var_02, var_07, var_06, param_01, var_11);
+              function_00F5("script_mp_rankup_weapon: playerName %s, weaponName %s, oldLevel %d, newLevel %d, xpGain %d, timeInUse %d", self.name, var_02, var_07, var_06, param_01, var_11);
               thread func_A9DE(var_02, var_06);
               if(var_06 > var_04) {
                 var_09 = var_0F + 1;
@@ -4966,8 +4964,8 @@ func_6028(param_00, param_01, param_02) {
               }
             }
 
-            self setrankedplayerdata(common_scripts\utility::func_46AE(), "weaponStats", var_04, "experience", var_0B);
-            maps\mp\_matchdata::func_5EAF(var_04, "experience", var_03, var_02);
+            self setrankedplayerdata(common_scripts\utility::func_46AE(), "weaponStats", var_02, "experience", var_09);
+            maps\mp\_matchdata::func_5EAF(var_02, "experience", param_01, param_00);
           }
         }
       }

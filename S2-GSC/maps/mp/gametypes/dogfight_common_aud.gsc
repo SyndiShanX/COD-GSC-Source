@@ -14,8 +14,8 @@ init_dogfight_audio() {
 
 init_plane_data() {
   self.var_11CB = spawnStruct();
-  self.var_11CB.var_0CAC = 0;
-  self.var_11CB.var_0863 = 0;
+  self.var_11CB.var_CAC = 0;
+  self.var_11CB.var_863 = 0;
   self.var_11CB.p47_throttle_pitch = 1;
   self.var_11CB.p47_throttle_on = 0;
   self.var_11CB.p47_brake_on = 0;
@@ -46,8 +46,8 @@ fighter_spawn() {
   var_00 = self method_8251();
   var_00 maps\mp\_audio_submixes::func_8A9D("mp_dogfight");
   self.var_11CB = spawnStruct();
-  self.var_11CB.var_0CAC = 0;
-  self.var_11CB.var_0863 = 0;
+  self.var_11CB.var_CAC = 0;
+  self.var_11CB.var_863 = 0;
   self.var_11CB.p47_throttle_pitch = 1;
   self.var_11CB.p47_throttle_on = 0;
   self.var_11CB.p47_brake_on = 0;
@@ -83,8 +83,8 @@ func_6DBE() {
   thread main_engine_loop(var_01);
   thread func_1585(var_02, var_03);
   thread func_AA25(var_04);
-  var_00 thread raid_flyby_watcher(var_00.var_01A7);
-  thread dogfight_close_loop(var_00, var_00.var_01A7);
+  var_00 thread raid_flyby_watcher(var_00.team);
+  thread dogfight_close_loop(var_00, var_00.team);
   thread p47_watch_game_end(var_00, self);
 }
 
@@ -215,9 +215,9 @@ func_1585(param_00, param_01) {
   var_18 = 1;
   var_19 = 0.1;
   while(isDefined(self) == 1) {
-    var_1A = self.var_001D[2];
+    var_1A = self.angles[2];
     var_1B = abs(var_1A);
-    var_1C = abs(self.var_001D[0]);
+    var_1C = abs(self.angles[0]);
     var_1D = var_02 getnormalizedmovementx();
     var_1E = lib_02EF::func_8086(var_1B, var_06, var_13, 0, 1);
     var_1F = var_1E;
@@ -234,19 +234,19 @@ func_1585(param_00, param_01) {
       if(var_11 > 8 && var_12 > 20) {
         var_04 = 1;
         var_12 = 0;
-        if(isDefined(self.var_11CB.var_05C4)) {
-          lib_0380::func_6850(self.var_11CB.var_05C4, 1);
+        if(isDefined(self.var_11CB.var_5C4)) {
+          lib_0380::func_6850(self.var_11CB.var_5C4, 1);
         }
 
-        self.var_11CB.var_05C4 = lib_0380::func_6844("blg_p47_banking", var_02, self);
+        self.var_11CB.var_5C4 = lib_0380::func_6844("blg_p47_banking", var_02, self);
       } else if(var_04 == 0) {
         var_04 = 1;
         var_12 = 0;
-        if(isDefined(self.var_11CB.var_05C4)) {
-          lib_0380::func_6850(self.var_11CB.var_05C4, 1);
+        if(isDefined(self.var_11CB.var_5C4)) {
+          lib_0380::func_6850(self.var_11CB.var_5C4, 1);
         }
 
-        self.var_11CB.var_05C4 = lib_0380::func_6844("blg_p47_banking", var_02, self);
+        self.var_11CB.var_5C4 = lib_0380::func_6844("blg_p47_banking", var_02, self);
       }
 
       if(var_19 < 1) {
@@ -319,11 +319,11 @@ func_1585(param_00, param_01) {
       self.var_11CB.hard_bank = 0;
     }
 
-    if(isDefined(self.var_11CB.var_05C4)) {
+    if(isDefined(self.var_11CB.var_5C4)) {
       var_21 = lib_02EF::func_8086(var_1E, 0, 1, 0.05, 1);
-      lib_0380::func_684E(self.var_11CB.var_05C4, var_21, 0.05);
+      lib_0380::func_684E(self.var_11CB.var_5C4, var_21, 0.05);
       var_22 = lib_02EF::func_8086(self.var_11CB.engine_pitch_multiplier, 0.8, 1.6, 0.9, 1.3);
-      lib_0380::func_684D(self.var_11CB.var_05C4, var_22, 0.05);
+      lib_0380::func_684D(self.var_11CB.var_5C4, var_22, 0.05);
     }
 
     if(var_17 > 1) {
@@ -407,14 +407,14 @@ raid_flyby_watcher(param_00) {
   var_11 = ["blg_dogfight_flyby_mid_01", "blg_dogfight_flyby_mid_02", "blg_dogfight_flyby_mid_03", "blg_dogfight_flyby_mid_04", "blg_dogfight_flyby_mid_05", "blg_dogfight_flyby_mid_06", "blg_dogfight_flyby_mid_07", "blg_dogfight_flyby_mid_08", "blg_dogfight_flyby_mid_09", "blg_dogfight_flyby_mid_10", "blg_dogfight_flyby_mid_11", "blg_dogfight_flyby_mid_12", "blg_dogfight_flyby_mid_13", "blg_dogfight_flyby_mid_14"];
   var_12 = ["blg_dogfight_flyby_far_01", "blg_dogfight_flyby_far_02", "blg_dogfight_flyby_far_03", "blg_dogfight_flyby_far_04", "blg_dogfight_flyby_far_05", "blg_dogfight_flyby_far_06", "blg_dogfight_flyby_far_07", "blg_dogfight_flyby_far_08", "blg_dogfight_flyby_far_09", "blg_dogfight_flyby_far_10", "blg_dogfight_flyby_far_11", "blg_dogfight_flyby_far_12", "blg_dogfight_flyby_far_13", "blg_dogfight_flyby_far_14", "blg_dogfight_flyby_far_15", "blg_dogfight_flyby_far_16", "blg_dogfight_flyby_far_17"];
   for(;;) {
-    foreach(var_14 in level.var_744A) {
+    foreach(var_14 in level.players) {
       var_15 = var_14.var_2418;
       var_16 = var_14 method_85E2();
       if(var_14 == self || !isDefined(var_16)) {
         continue;
       }
 
-      if(var_14.var_01A7 == self.var_01A7) {
+      if(var_14.team == self.team) {
         var_0B = var_0C;
       } else {
         var_0B = 1;
@@ -434,13 +434,13 @@ raid_flyby_watcher(param_00) {
       }
 
       self.plane_data[var_15].lastdistance = self.plane_data[var_15].var_3018;
-      self.plane_data[var_15].var_3018 = distance(self.var_0116, var_14.var_0116);
+      self.plane_data[var_15].var_3018 = distance(self.origin, var_14.origin);
       self.plane_data[var_15].approachspeed = self.plane_data[var_15].lastdistance - self.plane_data[var_15].var_3018;
       if(self.plane_data[var_15].var_3018 < var_07) {
         if(self.plane_data[var_15].approachspeed > var_08 && self.plane_data[var_15].closeoneshotstarted == 0 && self.plane_data[var_15].closetimer >= var_0A) {
           self.plane_data[var_15].closeoneshotstarted = 1;
           self.plane_data[var_15].closetimer = 0;
-          var_0E = common_scripts\utility::func_AA4A(self.var_0116, self.var_001D, var_16.var_0116, cos(45));
+          var_0E = common_scripts\utility::func_AA4A(self.origin, self.angles, var_16.origin, cos(45));
           if(isDefined(var_0E) && var_0E == 0) {
             var_0B = var_0B * var_0D;
           }
@@ -517,7 +517,7 @@ dogfight_close_loop(param_00, param_01) {
 }
 
 close_loop_death_watcher(param_00) {
-  common_scripts\utility::func_A70A("death", "stop_p47_sounds", "stop_damage_engine_loop");
+  common_scripts\utility::waittill_any("death", "stop_p47_sounds", "stop_damage_engine_loop");
   lib_0380::func_6850(param_00, 0.5);
   param_00 = undefined;
 }

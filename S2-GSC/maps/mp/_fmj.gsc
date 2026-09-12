@@ -10,10 +10,10 @@ func_3D93() {
   self.var_4B2D = 0;
   for(;;) {
     if(!self.var_4B2D) {
-      if(maps\mp\_utility::func_0649("specialty_bulletpenetration")) {
-        maps\mp\_utility::func_0735("specialty_bulletpenetration");
-        if(!maps\mp\_utility::func_0649("specialty_superbulletpenetration")) {
-          maps\mp\_utility::func_0735("specialty_armorpiercing");
+      if(maps\mp\_utility::_hasperk("specialty_bulletpenetration")) {
+        maps\mp\_utility::func_735("specialty_bulletpenetration");
+        if(!maps\mp\_utility::_hasperk("specialty_superbulletpenetration")) {
+          maps\mp\_utility::func_735("specialty_armorpiercing");
         }
       }
 
@@ -21,7 +21,7 @@ func_3D93() {
       continue;
     }
 
-    if(!maps\mp\_utility::func_0649("specialty_bulletpenetration")) {
+    if(!maps\mp\_utility::_hasperk("specialty_bulletpenetration")) {
       maps\mp\_utility::func_47A2("specialty_bulletpenetration");
       maps\mp\_utility::func_47A2("specialty_armorpiercing");
     }

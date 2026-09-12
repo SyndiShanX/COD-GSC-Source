@@ -28,7 +28,7 @@ func_2392() {
       self.var_75F8[var_01].var_8CA6 = 0;
       self.var_75F8[var_01].var_1EB5 = undefined;
       self.var_75F8[var_01].victimnum = undefined;
-      self.var_75F8[var_01].var_01D0 = "none";
+      self.var_75F8[var_01].var_1D0 = "none";
     }
   }
 }
@@ -66,8 +66,8 @@ func_942E(param_00) {
       level.var_74CB[var_01].var_8CA6 = 0;
       level.var_74CB[var_01].var_1EB5 = undefined;
       level.var_74CB[var_01].victimnum = undefined;
-      level.var_74CB[var_01].var_01D0 = "none";
-      level.var_74CB[var_01].var_A490 = undefined;
+      level.var_74CB[var_01].var_1D0 = "none";
+      level.var_74CB[var_01].victim = undefined;
     }
   }
 
@@ -80,8 +80,8 @@ func_942E(param_00) {
         level.var_74CB[var_01].var_3FD7 = self.var_75F8[var_01].var_3FD7;
         level.var_74CB[var_01].var_1EB5 = self.var_75F8[var_01].var_1EB5;
         level.var_74CB[var_01].victimnum = self.var_75F8[var_01].victimnum;
-        level.var_74CB[var_01].var_01D0 = self.var_75F8[var_01].var_01D0;
-        level.var_74CB[var_01].var_A490 = self.var_75F8[var_01].var_A490;
+        level.var_74CB[var_01].var_1D0 = self.var_75F8[var_01].var_1D0;
+        level.var_74CB[var_01].victim = self.var_75F8[var_01].victim;
         continue;
       }
 
@@ -138,7 +138,7 @@ func_09EE(param_00, param_01, param_02, param_03, param_04) {
           param_02 = "none";
         }
 
-        self.var_75F8[var_05].var_01D0 = param_02;
+        self.var_75F8[var_05].var_1D0 = param_02;
         break;
       }
     }
@@ -185,21 +185,20 @@ func_4AE2(param_00, param_01, param_02, param_03) {
       self.var_75F8[var_05].var_8CA6 = 0;
       self.var_75F8[var_05].var_1EB5 = undefined;
       self.var_75F8[var_05].victimnum = undefined;
-      self.var_75F8[var_05].var_01D0 = "none";
+      self.var_75F8[var_05].var_1D0 = "none";
     }
   }
 
   if(isDefined(self.var_75F8)) {
     func_2392();
-    var_05 = 0;
-    while(var_05 < 40) {
+    for(var_05 = 0; var_05 < 40; var_05++) {
       if(self.var_75F8[var_05].var_8CA6 == 0) {
         self.var_75F8[var_05].var_3FD7 = maps\mp\_utility::func_44FA();
         self.var_75F8[var_05].var_AA00 = var_04;
         self.var_75F8[var_05].var_1458 = param_00;
         self.var_75F8[var_05].var_8CA6 = 1;
         if(isDefined(param_02)) {
-          self.var_75F8[var_05].var_A490 = param_02;
+          self.var_75F8[var_05].victim = param_02;
         }
 
         if(!isDefined(self.var_75F8[var_05].var_1EB5) && isDefined(param_02) && isDefined(param_01)) {
@@ -211,22 +210,20 @@ func_4AE2(param_00, param_01, param_02, param_03) {
             self.var_75F8[var_05].var_1EB5 = self getentitynumber();
           }
         } else {
-          self.var_75F8[var_06].var_1EB5 = self getentitynumber();
+          self.var_75F8[var_05].var_1EB5 = self getentitynumber();
         }
 
-        if(!isDefined(param_02)) {
-          param_02 = "none";
+        if(!isDefined(param_01)) {
+          param_01 = "none";
         }
 
-        self.var_75F8[var_06].var_01D0 = param_02;
-        if(maps\mp\_events::iskillevent(self.var_75F8[var_06].var_1458) && self.var_75F8[getlastkillplay(var_06)].var_01D0 != param_02) {
+        self.var_75F8[var_05].var_1D0 = param_01;
+        if(maps\mp\_events::iskillevent(self.var_75F8[var_05].var_1458) && self.var_75F8[getlastkillplay(var_05)].var_1D0 != param_01) {
           func_09EE("POTG_weapon_Swap", func_4631("POTG_weapon_Swap"), "none", undefined, undefined);
         }
 
         break;
       }
-
-      var_06++;
     }
   }
 
