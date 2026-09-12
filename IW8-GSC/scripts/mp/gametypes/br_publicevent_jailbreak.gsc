@@ -9,13 +9,10 @@ function init() {
   var_0.ref_140cf = &ref_140cf;
   var_0.attackerswaittime = &attackerswaittime;
   var_0.ref_14382 = &ref_14382;
-  var_0.‹Á¿ ø {
-    ÏXX;
-    â # / = &postinitfunc;
-    var_0.ref_11b78 = getdvarint("scr_br_pe_jailbreak_max_times", 1);
-    var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("jailbreak", "00 5 10105 5 1");
-    var_0.£¼#w]
-  j‹ ƒ½ Ï‚ UÀíÌI¸ Û« = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("jailbreak");
+  var_0.postinitfunc = &postinitfunc;
+  var_0.ref_11b78 = getdvarint("scr_br_pe_jailbreak_max_times", 1);
+  var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("jailbreak", "00 5 10105 5 1");
+  var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("jailbreak");
   scripts\mp\gametypes\br_publicevents::ref_12b35(3, var_0);
 }
 

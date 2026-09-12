@@ -10,13 +10,10 @@ function init() {
   var_0.ref_14382 = &ref_14382;
   var_0.attackerswaittime = &attackerswaittime;
   var_0.isfeaturedisabled = &isfeaturedisabled;
-  var_0.‹Á¿ ø {
-    ÏXX;
-    â # / = &postinitfunc;
-    var_0.ref_11b78 = getdvarint("scr_br_pe_restock_max_times", 2);
-    var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("restock", "00 5 5 10151513");
-    var_0.£¼#w]
-  j‹ ƒ½ Ï‚ UÀíÌI¸ Û« = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("restock");
+  var_0.postinitfunc = &postinitfunc;
+  var_0.ref_11b78 = getdvarint("scr_br_pe_restock_max_times", 2);
+  var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("restock", "00 5 5 10151513");
+  var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("restock");
   scripts\mp\gametypes\br_publicevents::ref_12b35(6, var_0);
 }
 

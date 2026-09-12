@@ -311,7 +311,7 @@ function setkeyearningpoolsize(var_0) {
     return;
   }
 
-  self.†¹¨Ÿ± à óc35oû° hLò = var_0;
+  self.keyearningpoolsize = var_0;
 }
 
 function startkeyearning() {
@@ -357,7 +357,7 @@ function stopkeyearning(var_0) {
     ref_13168(255);
   }
 
-  if(!isDefined(self.†¹¨Ÿ± à óc35oû° hLò)) {
+  if(!isDefined(self.keyearningpoolsize)) {
     setkeyearningpoolsize(255);
   }
 
@@ -448,7 +448,7 @@ function stopkeyearning(var_0) {
 
   var_13 = scripts\cp\vehicles\vehicle_compass_cp::relic_squadlink_onsteppedclose();
   var_14 = 0;
-  var_15 = int(self.vehicle_tracking_cp_post_spawn / self.†¹¨Ÿ± à óc35oû° hLò * 100);
+  var_15 = int(self.vehicle_tracking_cp_post_spawn / self.keyearningpoolsize * 100);
   var_16 = 0;
 
   if(isDefined(self.pers["totalDistTraveledByFoot"])) {

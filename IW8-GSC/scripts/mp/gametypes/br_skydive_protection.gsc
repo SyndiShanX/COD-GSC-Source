@@ -15,12 +15,9 @@ function init() {
     level.ref_133f4 = getdvarint("scr_skydiveSpawnProtectionScaleHeightBottom", 750);
     level.ref_133f3 = getdvarfloat("scr_skydiveSpawnProtectionModifierTop", 0.25);
     level.ref_133f2 = getdvarfloat("scr_skydiveSpawnProtectionModifierBottom", 0.25);
-    level.›p &Üµ— Œ–;
-    V
-  }›
-  Á° îæ8 'íG¬±–Þ¹ÍÂ™•G—‘-›°¹±V = getdvarfloat( "scr_skydiveSpawnProtectionSafetyDistance", 750 );
-  return;
-}
+    level.skydive_spawnprotectionsafetydistance = getdvarfloat("scr_skydiveSpawnProtectionSafetyDistance", 750);
+    return;
+  }
 }
 
 function toma_strike_munitionused(var_0) {
@@ -45,9 +42,7 @@ function ending_zplanes() {
   self endon("skydive_remove_spawn_protection");
   self.ref_133ef = 1;
 
-  for(var_0 = brskydive_getdistancetoclosestgroundedplayer(); !self isonground() && brskydive_getdistanceoffground() >= level.ref_133f4 && (!isDefined(var_0) || var_0 >= level.›p &Üµ— Œ–; V
-    }›
-    Á° îæ8 'íG¬±–Þ¹ÍÂ™•G—‘-›°¹±V ) ; var_0 = brskydive_getdistancetoclosestgroundedplayer() ) {
+  for(var_0 = brskydive_getdistancetoclosestgroundedplayer(); !self isonground() && brskydive_getdistanceoffground() >= level.ref_133f4 && (!isDefined(var_0) || var_0 >= level.skydive_spawnprotectionsafetydistance); var_0 = brskydive_getdistancetoclosestgroundedplayer()) {
     waitframe();
   }
 

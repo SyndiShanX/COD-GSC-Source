@@ -66,7 +66,7 @@ function init()
 Xí$5£Ğœ = getdvarint( "scr_br_zxp_human_nb_syringe_drop_on_death", 2 );
     level.disable_super_in_turret.ref_11b5b = getdvarint( "scr_br_zxp_max_tags", 100 );
     level.disable_super_in_turret.spawndomplateflagtestmap = getdvarint( "scr_br_zxp_human_loadout_restore", 1 );
-    level.disable_super_in_turret.šÜ¡öwÈí³:Î¹{CºÖ›7 = getdvarint( "scr_br_zxp_show_tags_to_humans", 1 );
+    level.disable_super_in_turret.showdogtagstohumans = getdvarint( "scr_br_zxp_show_tags_to_humans", 1 );
     level.disable_super_in_turret.ref_12cb0 = [];
     level.disable_super_in_turret.ref_12cb1 = [];
     level.disable_super_in_turret.respawnitems = [];
@@ -215,8 +215,7 @@ function ref_12691( var0 )
 // Size: 0x4c
 function ref_1269c( var0 )
 {
-    if ( istrue( level.disable_super_in_turret.¢~{è8ú
-kö-‚ Ø·Û+ğ<’§µ ) )
+    if ( istrue( level.disable_super_in_turret.zombiecanseeandopenloot ) )
     {
         if ( isdefined( var0.type ) && var0.type == "brloot_zmb_stim" )
         {
@@ -843,7 +842,7 @@ function onplayerkilled( var0 )
 // Size: 0x6e, Type: bool
 function ref_13306( var0 )
 {
-    if ( !level.disable_super_in_turret.º}r•šh%ó°ãyãİ}eûï’{ó )
+    if ( !level.disable_super_in_turret.zombierespawnonexecute )
     {
         return false;
     }
@@ -858,7 +857,7 @@ function ref_13306( var0 )
         return false;
     }
     
-    if ( !level.disable_super_in_turret.‚ X_µ¾pÍ¥Ëÿ!w×°@æ¤bF|(”!€ÑpØŠçÍãH && istrue( var0.victim.inlaststand ) )
+    if ( !level.disable_super_in_turret.zombierespawnonlaststandexecute && istrue( var0.victim.inlaststand ) )
     {
         return false;
     }
@@ -931,7 +930,7 @@ function ref_13302( var0, var1 )
     
     if ( var1 == "MOD_EXECUTION" && var0 scripts\mp\gametypes\br_public::ref_125f3() )
     {
-        if ( !level.disable_super_in_turret.‚ X_µ¾pÍ¥Ëÿ!w×°@æ¤bF|(”!€ÑpØŠçÍãH && !istrue( self.inlaststand ) )
+        if ( !level.disable_super_in_turret.zombierespawnonlaststandexecute && !istrue( self.inlaststand ) )
         {
             return false;
         }
@@ -1367,7 +1366,7 @@ function ref_12cb2( var0 )
 {
     if ( isent( self ) )
     {
-        if ( istrue( level.disable_super_in_turret.šÜ¡öwÈí³:Î¹{CºÖ›7 ) || var0 scripts\mp\gametypes\br_public::ref_125f3() )
+        if ( istrue( level.disable_super_in_turret.showdogtagstohumans ) || var0 scripts\mp\gametypes\br_public::ref_125f3() )
         {
             self showtoplayer( var0 );
             return;
@@ -1472,7 +1471,7 @@ function playerupdatetagobjectives()
         return;
     }
     
-    if ( !istrue( level.disable_super_in_turret.šÜ¡öwÈí³:Î¹{CºÖ›7 ) && !scripts\mp\gametypes\br_public::ref_125f3() )
+    if ( !istrue( level.disable_super_in_turret.showdogtagstohumans ) && !scripts\mp\gametypes\br_public::ref_125f3() )
     {
         return;
     }
@@ -1888,7 +1887,7 @@ function initzombieais()
     _testing_ending::teamplunderexfiltimer();
     access_card::initzombievariables();
     level.ref_13304 = &zai_ignoreent;
-    level.¶pOŞ­Ä¥¬,Ñ:…6­n4Ûº†¥GlÆØ¶ = &zai_zombieattackshouldhitcallback;
+    level.¶pOŞ­Ä¥¬,Ñ:…6­n4Ûº†¥GlÆØ¶ = &zai_zombieattackshouldhitcallback;
     level.agent_funcs[ "zombie" ][ "gametype_on_damaged" ] = &zai_gametypeondamaged;
     waitframe();
     scripts\mp\flags::gameflagwait( "prematch_fade_done" );

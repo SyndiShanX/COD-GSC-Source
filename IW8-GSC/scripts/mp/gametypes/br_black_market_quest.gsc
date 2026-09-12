@@ -1,896 +1,669 @@
+/**********************************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\mp\gametypes\br_black_market_quest.gsc
+**********************************************************/
 
-// Params 0
-// Size: 0x12f
-function init()
-{
-    var0 = scripts\mp\gametypes\br_quest_util::registerquestcategory( "black_market", 1 );
-    
-    if ( !var0 )
-    {
+function init() {
+  var_0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("black_market", 1);
+
+  if(!var_0) {
+    return;
+  }
+
+  level.black_market_quest = spawnStruct();
+  init_dvars();
+  scripts\mp\gametypes\br_quest_util::registerremovequestinstance("black_market", &on_remove_quest_instance);
+  scripts\mp\gametypes\br_quest_util::registeronplayerkilled("black_market", &ref_11ff1);
+  scripts\mp\gametypes\br_quest_util::ref_12b2e("black_market", &on_player_disconnect);
+  scripts\mp\gametypes\br_quest_util::ref_12b2d("black_market", &on_enter_gulag);
+  scripts\mp\gametypes\br_quest_util::ref_12b30("black_market", &on_respawn);
+  scripts\mp\gametypes\br_quest_util::registerquestcircletick("black_market", &on_circle_tick);
+  scripts\mp\gametypes\br_quest_util::ref_1297c("black_market", 1);
+  scripts\mp\gametypes\br_quest_util::ref_12b31("black_market", &on_timer_expired);
+  thread contract_cleanup_watcher();
+  game["dialog"]["mission_blm_accept"] = "mission_mission_gen_accept";
+  game["dialog"]["mission_blm_dropnotify"] = "blkmrkt_contract_contract_start";
+  game["dialog"]["mission_blm_success"] = "blkmrkt_contract_contract_complete";
+  game["dialog"]["mission_blm_fail"] = "blkmrkt_contract_contract_fail";
+  game["dialog"]["mission_blm_timer_warn"] = "blkmrkt_contract_timer_remaining";
+  game["dialog"]["mission_blm_kiosk_nearby"] = "blkmrkt_contract_buy_station_proximity";
+  scripts\engine\scriptable::ref_12f5b("br_black_market_kiosk", &kiosk_on_use);
+  scripts\mp\utility\sound::besttime("br_event_black_market");
+}
+
+function init_dvars() {
+  level.black_market_quest.i_quest_time = getdvarint("scr_br_black_market_quest_time", 120);
+  level.black_market_quest.i_circle_index_to_hide = getdvarint("scr_br_black_market_circle_index_to_hide", 4);
+  level.black_market_quest.f_quest_circle_delay = getdvarfloat("scr_br_black_market_quest_circle_delay", 1.5);
+  level.black_market_quest.i_drop_notify_radius = getdvarint("scr_br_black_market_drop_notify_radius", 10000);
+  level.black_market_quest.i_kiosk_destroy_timeout = getdvarint("scr_br_black_market_kiosk_destroy_timeout", 120);
+  level.black_market_quest.i_quest_circle_start_radius = getdvarint("scr_br_black_market_quest_circle_start_radius", 4000);
+  level.black_market_quest.i_quest_circle_end_radius = getdvarint("scr_br_black_market_quest_circle_end_radius", 500);
+  level.black_market_quest.i_quest_circle_steps = getdvarint("scr_br_black_market_quest_circle_steps", 3);
+  level.black_market_quest.i_audio_ping_interval = getdvarfloat("scr_br_black_market_audio_ping_interval", 2);
+  level.black_market_quest.f_audio_echo_min_interval = getdvarfloat("scr_br_black_market_audio_echo_min_interval", 0.1);
+  level.black_market_quest.f_audio_echo_max_interval = getdvarfloat("scr_br_black_market_audio_echo_max_interval", 0.9);
+  level.black_market_quest.f_audio_echo_min_range = getdvarfloat("scr_br_black_market_audio_echo_min_range", 100);
+  level.black_market_quest.f_audio_echo_max_range = getdvarfloat("scr_br_black_market_audio_echo_max_range", 5000);
+  level.black_market_quest.i_kiosk_activation_radius = getdvarint("scr_br_black_market_kiosk_activation_radius", 250);
+  level.black_market_quest.b_audio_ping_enabled = getdvarint("scr_br_black_market_audio_ping_enabled", 1);
+  level.black_market_quest.b_circle_shrinking_enabled = getdvarint("scr_br_black_market_circle_shrinking_enabled", 1);
+  level.black_market_quest.i_max_spawn_distance_sqr = squared(getdvarint("scr_br_black_market_max_spawn_distance", 10000));
+  level.black_market_quest.i_min_spawn_distance_sqr = squared(getdvarint("scr_br_black_market_min_spawn_distance", 4000));
+  level.black_market_quest.i_kiosk_max_lifetime = level.black_market_quest.i_quest_time + level.black_market_quest.i_kiosk_destroy_timeout;
+}
+
+function is_enabled() {
+  return scripts\mp\gametypes\br_quest_util::upload_station_players_manager("black_market", 1);
+}
+
+function __quest_state() {}
+
+function takequestitem(var_0) {
+  var_1 = scripts\mp\gametypes\br_quest_util::createquestinstance("black_market", self.team, var_0.index, var_0);
+  var_1 scripts\mp\gametypes\br_quest_util::registerteamonquest(self.team, self);
+  scripts\mp\gametypes\br_quest_util::searchfunc(self.team, "br_mission_pickup_tablet");
+  var_1.semtex_stuckplayer = self;
+  var_1.team = self.team;
+  var_1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "players");
+  hud_setup_visibility(var_1);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_1297d(level.black_market_quest.i_quest_time, 4);
+  thread play_time_warning_dialog(var_1);
+  scripts\mp\gametypes\br_quest_util::addquestinstance("black_market", var_1);
+  scripts\mp\gametypes\br_quest_util::ref_13879("black_market", self, self.team);
+  var_2 = spawnStruct();
+  var_2.excludedplayers = [];
+  var_2.excludedplayers[0] = var_1.semtex_stuckplayer;
+  var_2.ogangles = [];
+  var_2.ogangles[0] = var_1.team;
+  var_2.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("black_market", scripts\mp\gametypes\br_quest_util::ringing(self.team));
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(var_1.team, "br_black_market_start_team", var_2);
+  scripts\mp\gametypes\br_quest_util::displayplayersplash(var_1.semtex_stuckplayer, "br_black_market_start_tablet_finder", var_2);
+  level thread scripts\mp\gametypes\br_public::dmztutdropcash("mission_blm_accept", var_1.team, var_1.semtex_stuckplayer, 1, 0.5);
+  level thread scripts\mp\gametypes\br_public::dmztut_endgamewithreward("mission_blm_accept", var_1.semtex_stuckplayer, 1, 0.5);
+  thread kiosk_spawn();
+}
+
+function handle_fail_quest(var_0) {
+  switch (var_0) {
+    case 2:
+      scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_black_market_circle_failure");
+      break;
+    case 1:
+      scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_black_market_timer_expired");
+      break;
+    default:
+      scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_black_market_failure");
+      break;
+  }
+
+  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_blm_fail", self.team, 1, 1);
+
+  if(isDefined(self.kiosk)) {
+    kiosk_destroy(self.kiosk);
+    return;
+  }
+}
+
+function complete_quest() {
+  var_0 = spawnStruct();
+  var_1 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
+  var_2 = scripts\mp\gametypes\br_quest_util::getquestindex("black_market");
+  var_3 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("black_market"));
+  var_4 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining(self.semtex_stuckplayer);
+  var_0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_2, var_1, var_3, undefined, var_4);
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_black_market_complete", var_0);
+  level thread scripts\mp\gametypes\br_public::dmztutdropcash("mission_blm_success", self.team, self.semtex_stuckplayer, 1, 0, 0.5);
+  level thread scripts\mp\gametypes\br_public::dmztut_endgamewithreward("mission_blm_success", self.semtex_stuckplayer, 1, 0, 0.5);
+  self.kiosk setscriptablepartstate("br_black_market_kiosk", "opening");
+  thread kiosk_destroy_after_delay();
+  self.kiosk.quest = undefined;
+
+  foreach(var_6 in level.players) {
+    self.kiosk enablescriptableplayeruse(var_6);
+  }
+
+  self.ref_12d2d = undefined;
+  self.ref_12d2e = self.semtex_stuckplayer.origin;
+  self.ref_12d2b = self.semtex_stuckplayer.angles;
+  self.result = "success";
+  thread scripts\mp\gametypes\br_quest_util::removequestinstance();
+}
+
+function kiosk_distance_watcher() {
+  level endon("game_ended");
+  self endon("marked_to_remove");
+  var_0 = scripts\mp\utility\teams::getteamdata(self.team, "players");
+  var_1 = squared(level.black_market_quest.i_kiosk_activation_radius);
+  var_2 = squared(level.black_market_quest.i_quest_circle_start_radius);
+
+  for(;;) {
+    foreach(var_4 in var_0) {
+      if(!isDefined(var_4) || !isalive(var_4)) {
+        continue;
+      }
+
+      var_5 = distancesquared(var_4.origin, self.kiosk.origin);
+
+      if(var_5 < var_1) {
+        var_6 = var_4 getEye();
+        var_7 = self.kiosk.origin + (0, 0, 32);
+        var_8 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle"]);
+        var_9 = [self.kiosk, var_4];
+        var_10 = physics_raycast(var_6, var_7, var_8, var_9, 0, "physicsquery_closest", 1);
+
+        if(!(isDefined(var_10) && var_10.size > 0)) {
+          show_kiosk();
+          complete_quest();
+        }
+
+        waitframe();
+      }
+    }
+
+    if(!self.kiosk_found && level.black_market_quest.b_circle_shrinking_enabled) {
+      var_12 = var_2;
+
+      foreach(var_4 in var_0) {
+        var_12 = min(distance2dsquared(var_4.origin, self.v_next_circle), var_12);
+      }
+
+      if(var_12 < self.i_next_circle_distance) {
+        quest_circle_tick();
+      }
+    }
+
+    wait 1;
+  }
+}
+
+function show_kiosk() {
+  if(self.kiosk_found) {
+    return;
+  }
+
+  self.kiosk_found = 1;
+  self notify("kiosk_found");
+  thread quest_circle_animate([self.i_circle_step - 1], self.kiosk.origin, 2, 1);
+  var_0 = scripts\mp\utility\teams::getteamdata(self.team, "players");
+
+  foreach(var_2 in var_0) {
+    var_2 playlocalsound("br_black_market_chest_discovered");
+  }
+
+  objective_state(self.ref_11f64, "current");
+  objective_setshowoncompass(self.ref_11f64, 0);
+  playencryptedcinematicforall(self.ref_11f64, 0);
+  function_0442(self.ref_11f64, 0);
+  objective_setshowdistance(self.ref_11f64, 1);
+}
+
+function play_time_warning_dialog(var_0) {
+  level endon("game_ended");
+  self endon("marked_to_remove");
+  var_1 = max(level.black_market_quest.i_quest_time - var_0, 0);
+  wait var_1;
+  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_blm_timer_warn", self.team, 1, 1);
+}
+
+function contract_cleanup_watcher() {
+  level endon("game_ended");
+
+  for(;;) {
+    level waittill("br_circle_set", var_0);
+
+    if(var_0 >= level.black_market_quest.i_circle_index_to_hide) {
+      var_1 = getlootscriptablearrayinradius(scripts\mp\gametypes\br_quest_util::removepatchablecollision_delayed("black_market"));
+
+      foreach(var_3 in var_1) {
+        var_3.invalidforreplace = 1;
+        scripts\mp\gametypes\br_pickups::ref_11a21(var_3);
+      }
+    }
+  }
+}
+
+function __hud() {}
+
+function hud_setup_visibility() {
+  var_0 = scripts\mp\gametypes\br_quest_util::sortvalidplayersinarray(scripts\mp\utility\teams::getteamdata(self.team, "players"));
+
+  foreach(var_2 in var_0["valid"]) {
+    var_2 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("black_market");
+  }
+
+  foreach(var_2 in var_0["invalid"]) {
+    var_2 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
+  }
+}
+
+function hud_show_to_player(var_0) {
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("black_market");
+}
+
+function hud_hide_from_player(var_0) {
+  var_0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
+}
+
+function hud_delete() {
+  foreach(var_1 in scripts\mp\utility\teams::getteamdata(self.team, "players")) {
+    hud_hide_from_player(var_1);
+  }
+}
+
+function __event_handlers() {}
+
+function on_remove_quest_instance() {
+  hud_delete();
+  scripts\mp\objidpoolmanager::returnreservedobjectiveid(self.ref_11f64);
+
+  if(isDefined(self.mapcircle)) {
+    scripts\mp\gametypes\br_quest_util::lastdirtyscore();
+  }
+
+  if(isDefined(self.obj_icon_mover)) {
+    self.obj_icon_mover delete();
+  }
+
+  scripts\mp\gametypes\br_quest_util::releaseteamonquest(self.team);
+}
+
+function ref_11ff1(var_0, var_1) {
+  on_player_removed(var_1, var_0);
+}
+
+function on_player_disconnect(var_0) {
+  if(var_0.team == self.team) {
+    var_1 = scripts\mp\utility\teams::getteamdata(self.team, "players");
+    scripts\mp\gametypes\br_quest_util::getquestinstancedata("black_market", self.team).playerlist = var_1;
+
+    if(isDefined(self.kiosk) && var_1.size) {
+      self.kiosk setotherent(var_1[0]);
+    }
+
+    if(!scripts\mp\gametypes\br_quest_util::isteamvalid(var_0.team)) {
+      self.result = "fail";
+      scripts\mp\gametypes\br_quest_util::removequestinstance();
+    }
+  }
+
+  on_player_removed(var_0);
+}
+
+function on_enter_gulag(var_0) {
+  hud_hide_from_player(var_0);
+  scripts\mp\gametypes\br_quest_util::spawn_dogtags(var_0);
+}
+
+function on_respawn(var_0) {
+  if(var_0.team == self.team) {
+    hud_show_to_player(var_0);
+    scripts\mp\gametypes\br_quest_util::ref_1336a(var_0);
+    start_player_threads(var_0);
+    return;
+  }
+}
+
+function on_player_removed(var_0, var_1) {}
+
+function on_timer_expired() {
+  handle_fail_quest(1);
+}
+
+function on_circle_tick(var_0, var_1) {
+  if(scripts\mp\gametypes\br_circle::getsafecircleradius() > 0) {
+    var_2 = squared(scripts\mp\gametypes\br_circle::getdangercircleradius());
+
+    if(!isDefined(self.lastcircletick)) {
+      self.lastcircletick = -1;
+    }
+
+    var_3 = gettime();
+
+    if(self.lastcircletick == var_3) {
+      return;
+    }
+
+    self.lastcircletick = var_3;
+
+    if(isDefined(self.kiosk)) {
+      var_4 = distance2dsquared(self.kiosk.origin, var_0);
+
+      if(var_4 > var_2) {
+        handle_fail_quest(2);
+        self.result = "fail";
+        scripts\mp\gametypes\br_quest_util::removequestinstance();
         return;
+      }
+
+      return;
     }
-    
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£ = spawnstruct();
-    init_dvars();
-    scripts\mp\gametypes\br_quest_util::registerremovequestinstance( "black_market", &on_remove_quest_instance );
-    scripts\mp\gametypes\br_quest_util::registeronplayerkilled( "black_market", &ref_11ff1 );
-    scripts\mp\gametypes\br_quest_util::ref_12b2e( "black_market", &on_player_disconnect );
-    scripts\mp\gametypes\br_quest_util::ref_12b2d( "black_market", &on_enter_gulag );
-    scripts\mp\gametypes\br_quest_util::ref_12b30( "black_market", &on_respawn );
-    scripts\mp\gametypes\br_quest_util::registerquestcircletick( "black_market", &on_circle_tick );
-    scripts\mp\gametypes\br_quest_util::ref_1297c( "black_market", 1 );
-    scripts\mp\gametypes\br_quest_util::ref_12b31( "black_market", &on_timer_expired );
-    thread contract_cleanup_watcher();
-    game[ "dialog" ][ "mission_blm_accept" ] = "mission_mission_gen_accept";
-    game[ "dialog" ][ "mission_blm_dropnotify" ] = "blkmrkt_contract_contract_start";
-    game[ "dialog" ][ "mission_blm_success" ] = "blkmrkt_contract_contract_complete";
-    game[ "dialog" ][ "mission_blm_fail" ] = "blkmrkt_contract_contract_fail";
-    game[ "dialog" ][ "mission_blm_timer_warn" ] = "blkmrkt_contract_timer_remaining";
-    game[ "dialog" ][ "mission_blm_kiosk_nearby" ] = "blkmrkt_contract_buy_station_proximity";
-    scripts\engine\scriptable::ref_12f5b( "br_black_market_kiosk", &kiosk_on_use );
-    scripts\mp\utility\sound::besttime( "br_event_black_market" );
+
+    return;
+  }
 }
 
-// Params 0
-// Size: 0x1c9
-function init_dvars()
-{
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.∫k¢…”søK%Gd≥Pg = getdvarint( "scr_br_black_market_quest_time", 120 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.•À˚˛X/:RÎÈ@GÓ-M8ûh
-3…ó = getdvarint( "scr_br_black_market_circle_index_to_hide", 4 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.äáıgjòùÁcˆyöÀFàáè	{Ã÷∞ = getdvarfloat( "scr_br_black_market_quest_circle_delay", 1.5 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.ΩÔT†Ÿ3wŸìèòh6À◊NﬁèS˚ = getdvarint( "scr_br_black_market_drop_notify_radius", 10000 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.∫%•Ø⁄ñﬁ‹µ◊Fïn£N∑/˙£Z∂+{]Ë = getdvarint( "scr_br_black_market_kiosk_destroy_timeout", 120 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.áW¥æ\ÆVné}çñ'ç ıÕË∞'ËØ'∞»•∫Ê = getdvarint( "scr_br_black_market_quest_circle_start_radius", 4000 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.¨ﬁqó€-„∑‰(‡åBó‘Q=ê-F0IxB = getdvarint( "scr_br_black_market_quest_circle_end_radius", 500 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.ÉmÄóH3ñKﬂR£Ω#∏øÅZìêÁ = getdvarint( "scr_br_black_market_quest_circle_steps", 3 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.ô±x˘◊∏I≥‡}O˜PX5„ü = getdvarfloat( "scr_br_black_market_audio_ping_interval", 2 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.á¥◊#YÃjYÄÇ§>Wô»†IãÀìÚ„ê– = getdvarfloat( "scr_br_black_market_audio_echo_min_interval", 0.1 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.ôÙÃÎÖ´F•Ì˙ï∆°ˆ˙∂·◊¥‹G¨ú;,6 = getdvarfloat( "scr_br_black_market_audio_echo_max_interval", 0.9 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.ìYa5®‹Ô«ªD(Ëè∫–Ê€o‡¯˜ = getdvarfloat( "scr_br_black_market_audio_echo_min_range", 100 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.≠√ﬂh;˚€òâ“·£y–†∑ÖØı = getdvarfloat( "scr_br_black_market_audio_echo_max_range", 5000 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.ßÖ•◊≠ñˆ7[˙∞±éZŒG“∑‹Øì¬ZÍπ = getdvarint( "scr_br_black_market_kiosk_activation_radius", 250 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.Ñ‹Rj[J„pfqáÿÈn°PÀjWÚ = getdvarint( "scr_br_black_market_audio_ping_enabled", 1 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.ñ2÷ø4‡°…*P;ªze`árgq
-sBır  = getdvarint( "scr_br_black_market_circle_shrinking_enabled", 1 );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.íáf9àaGÿ—W∞KSõCËÜﬂâËk“ = squared( getdvarint( "scr_br_black_market_max_spawn_distance", 10000 ) );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.∏Äê°ƒ6@„â¨Ë·BbﬂsJË“M¡âC = squared( getdvarint( "scr_br_black_market_min_spawn_distance", 4000 ) );
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.ärRO5h/_e”ÿÒÉãÅ
-+P97 = level.í âç∞≠ØkÖNµ GØ∫≤‹£.∫k¢…”søK%Gd≥Pg + level.í âç∞≠ØkÖNµ GØ∫≤‹£.∫%•Ø⁄ñﬁ‹µ◊Fïn£N∑/˙£Z∂+{]Ë;
-}
+function __drop_logic() {}
 
-// Params 0
-// Size: 0xf
-function is_enabled()
-{
-    return scripts\mp\gametypes\br_quest_util::upload_station_players_manager( "black_market", 1 );
-}
+function find_kiosk_spawn_location(var_0) {
+  var_1 = [];
+  var_2 = undefined;
+  var_3 = -1;
 
-// Params 0
-// Size: 0x2
-function __quest_state()
-{
-    
-}
-
-// Params 1
-// Size: 0x165
-function takequestitem( var0 )
-{
-    var1 = scripts\mp\gametypes\br_quest_util::createquestinstance( "black_market", self.team, var0.index, var0 );
-    var1 scripts\mp\gametypes\br_quest_util::registerteamonquest( self.team, self );
-    scripts\mp\gametypes\br_quest_util::searchfunc( self.team, "br_mission_pickup_tablet" );
-    var1.semtex_stuckplayer = self;
-    var1.team = self.team;
-    var1.playerlist = scripts\mp\utility\teams::getteamdata( self.team, "players" );
-    hud_setup_visibility( var1 );
-    var1 scripts\mp\gametypes\br_quest_util::ref_1297d( level.í âç∞≠ØkÖNµ GØ∫≤‹£.∫k¢…”søK%Gd≥Pg, 4 );
-    thread play_time_warning_dialog( var1 );
-    scripts\mp\gametypes\br_quest_util::addquestinstance( "black_market", var1 );
-    scripts\mp\gametypes\br_quest_util::ref_13879( "black_market", self, self.team );
-    var2 = spawnstruct();
-    var2.excludedplayers = [];
-    var2.excludedplayers[ 0 ] = var1.semtex_stuckplayer;
-    var2.ogangles = [];
-    var2.ogangles[ 0 ] = var1.team;
-    var2.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier( "black_market", scripts\mp\gametypes\br_quest_util::ringing( self.team ) );
-    scripts\mp\gametypes\br_quest_util::displayteamsplash( var1.team, "br_black_market_start_team", var2 );
-    scripts\mp\gametypes\br_quest_util::displayplayersplash( var1.semtex_stuckplayer, "br_black_market_start_tablet_finder", var2 );
-    level thread scripts\mp\gametypes\br_public::dmztutdropcash( "mission_blm_accept", var1.team, var1.semtex_stuckplayer, 1, 0.5 );
-    level thread scripts\mp\gametypes\br_public::dmztut_endgamewithreward( "mission_blm_accept", var1.semtex_stuckplayer, 1, 0.5 );
-    thread kiosk_spawn();
-}
-
-// Params 1
-// Size: 0x8b
-function handle_fail_quest( var0 )
-{
-    switch ( var0 )
-    {
-        case 2:
-            scripts\mp\gametypes\br_quest_util::displayteamsplash( self.team, "br_black_market_circle_failure" );
-            break;
-        case 1:
-            scripts\mp\gametypes\br_quest_util::displayteamsplash( self.team, "br_black_market_timer_expired" );
-            break;
-        default:
-            scripts\mp\gametypes\br_quest_util::displayteamsplash( self.team, "br_black_market_failure" );
-            break;
+  foreach(var_5 in level.black_market_quest.wait_display_pavelow_boss_health_bar) {
+    if(!istrue(var_5.available) || !scripts\mp\gametypes\br_circle::vandalize_minigun_speed(var_5.origin, 1, level.black_market_quest.i_quest_time)) {
+      continue;
     }
-    
-    level thread scripts\mp\gametypes\br_public::dmztut_luicallback( "mission_blm_fail", self.team, 1, 1 );
-    
-    if ( isdefined( self.¥çL∏Ë„: ) )
-    {
-        kiosk_destroy( self.¥çL∏Ë„: );
-        return;
+
+    var_6 = distance2dsquared(var_0, var_5.origin);
+
+    if(!isDefined(var_2) || var_6 > var_3) {
+      var_2 = var_5;
+      var_3 = var_6;
     }
+
+    if(var_6 >= level.black_market_quest.i_min_spawn_distance_sqr && var_6 <= level.black_market_quest.i_max_spawn_distance_sqr) {
+      var_1 = var_5;
+    }
+  }
+
+  if(var_1.size > 0) {
+    var_8 = randomint(var_1.size);
+    return var_1[var_8];
+  }
+
+  if(isDefined(var_3)) {
+    return var_3;
+  }
+
+  return undefined;
 }
 
-// Params 0
-// Size: 0x124
-function complete_quest()
-{
-    var0 = spawnstruct();
-    var1 = scripts\mp\gametypes\br_quest_util::ringing( self.team );
-    var2 = scripts\mp\gametypes\br_quest_util::getquestindex( "black_market" );
-    var3 = scripts\mp\gametypes\br_quest_util::rewardtovalue( scripts\mp\gametypes\br_quest_util::rewardtotype( "black_market" ) );
-    var4 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining( self.semtex_stuckplayer );
-    var0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9( var2, var1, var3, undefined, var4 );
-    scripts\mp\gametypes\br_quest_util::displayteamsplash( self.team, "br_black_market_complete", var0 );
-    level thread scripts\mp\gametypes\br_public::dmztutdropcash( "mission_blm_success", self.team, self.semtex_stuckplayer, 1, 0, 0.5 );
-    level thread scripts\mp\gametypes\br_public::dmztut_endgamewithreward( "mission_blm_success", self.semtex_stuckplayer, 1, 0, 0.5 );
-    self.¥çL∏Ë„: setscriptablepartstate( "br_black_market_kiosk", "opening" );
-    thread kiosk_destroy_after_delay();
-    self.¥çL∏Ë„:.ä›…ØC = undefined;
-    
-    foreach ( var6 in level.players )
-    {
-        self.¥çL∏Ë„: enablescriptableplayeruse( var6 );
-    }
-    
-    self.ref_12d2d = undefined;
-    self.ref_12d2e = self.semtex_stuckplayer.origin;
-    self.ref_12d2b = self.semtex_stuckplayer.angles;
-    self.result = "success";
+function __kiosk_logic() {}
+
+function kiosk_spawn() {
+  var_0 = undefined;
+  var_1 = find_kiosk_spawn_location(self.semtex_stuckplayer.origin);
+
+  if(!isDefined(var_1)) {
+    waitframe();
+    self.result = "no_locale";
     thread scripts\mp\gametypes\br_quest_util::removequestinstance();
-}
+    return;
+  }
 
-// Params 0
-// Size: 0x183
-function kiosk_distance_watcher()
-{
-    level endon( "game_ended" );
-    self endon( "marked_to_remove" );
-    var0 = scripts\mp\utility\teams::getteamdata( self.team, "players" );
-    var1 = squared( level.í âç∞≠ØkÖNµ GØ∫≤‹£.ßÖ•◊≠ñˆ7[˙∞±éZŒG“∑‹Øì¬ZÍπ );
-    var2 = squared( level.í âç∞≠ØkÖNµ GØ∫≤‹£.áW¥æ\ÆVné}çñ'ç ıÕË∞'ËØ'∞»•∫Ê );
-    
-    for ( ;; )
-    {
-        foreach ( var4 in var0 )
-        {
-            if ( !isdefined( var4 ) || !isalive( var4 ) )
-            {
-                continue;
-            }
-            
-            var5 = distancesquared( var4.origin, self.¥çL∏Ë„:.origin );
-            
-            if ( var5 < var1 )
-            {
-                var6 = var4 geteye();
-                var7 = self.¥çL∏Ë„:.origin + ( 0, 0, 32 );
-                var8 = physics_createcontents( [ "physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_sky", "physicscontents_item", "physicscontents_vehicle" ] );
-                var9 = [ self.¥çL∏Ë„:, var4 ];
-                var10 = physics_raycast( var6, var7, var8, var9, 0, "physicsquery_closest", 1 );
-                
-                if ( !( isdefined( var10 ) && var10.size > 0 ) )
-                {
-                    show_kiosk();
-                    complete_quest();
-                }
-                
-                waitframe();
-            }
-        }
-        
-        if ( !self.ì∫˙`¯üå°≠•† && level.í âç∞≠ØkÖNµ GØ∫≤‹£.ñ2÷ø4‡°…*P;ªze`árgq
-sBır  )
-        {
-            var12 = var2;
-            
-            foreach ( var4 in var0 )
-            {
-                var12 = min( distance2dsquared( var4.origin, self.õJÔH}p‡Q¶SŒ◊ã% ), var12 );
-            }
-            
-            if ( var12 < self.ÑÎÇ˛ èÄóSQ•PM˜¿Ò´#k>– )
-            {
-                quest_circle_tick();
-            }
-        }
-        
-        wait 1;
+  var_1.available = 0;
+  var_0 = spawn("script_model", var_1.origin);
+  var_0.angles = var_1.angles;
+  var_0 setModel("x2_mercenary_buy_station_rig_skeleton");
+  var_0 setscriptablepartstate("br_black_market_kiosk", "visible", 0);
+  var_0.isblackmarketkiosk = 1;
+  var_0.loot_point = var_1;
+  var_0.visible = 1;
+  var_0.quest = self;
+  self.kiosk = var_0;
+  self.kiosk_found = 0;
+  self.kiosk setotherent(self.semtex_stuckplayer);
+
+  foreach(var_3 in level.players) {
+    if(var_3.team != self.team) {
+      var_0 disablescriptableplayeruse(var_3);
     }
+  }
+
+  var_5 = spawnStruct();
+  var_5.excludedplayers = [];
+  var_5.excludedplayers[0] = self.semtex_stuckplayer;
+  var_5.ogangles = [];
+  var_5.ogangles[0] = self.team;
+  scripts\mp\gametypes\br_quest_util::look_at_heli("br_black_market_crate_drop", var_1.origin, level.black_market_quest.i_drop_notify_radius, level.questinfo.defaultfilter, var_5);
+  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_blm_dropnotify", self.team, 1, 1);
+  wait level.black_market_quest.f_quest_circle_delay;
+  quest_circle_setup(var_1.origin);
+  var_6 = scripts\mp\utility\teams::getteamdata(self.team, "players");
+
+  foreach(var_3 in var_6) {
+    scripts\mp\gametypes\br_quest_util::ref_1336a(var_3);
+    start_player_threads(var_3);
+  }
+
+  thread kiosk_distance_watcher();
 }
 
-// Params 0
-// Size: 0xb0
-function show_kiosk()
-{
-    if ( self.ì∫˙`¯üå°≠•† )
-    {
-        return;
+function kiosk_on_use(var_0, var_1, var_2, var_3, var_4) {
+  if(!isDefined(var_0.entity)) {
+    return;
+  }
+
+  if(isDefined(var_0.entity.quest)) {
+    show_kiosk(var_0.entity.quest);
+    complete_quest(var_0.entity.quest);
+  }
+
+  thread run_black_market_purchase_menu(var_3);
+}
+
+function kiosk_destroy_after_delay() {
+  level endon("game_ended");
+  self endon("death");
+  wait level.black_market_quest.i_kiosk_destroy_timeout;
+  kiosk_destroy();
+}
+
+function kiosk_destroy() {
+  self.loot_point.available = 1;
+  playFX(scripts\engine\utility::getfx("vfx_br3_pbs_dmg"), self.origin);
+  playsoundatpos(self.origin, "mp_equip_destroyed");
+  self delete();
+}
+
+function run_black_market_purchase_menu(var_0) {
+  var_1 = self;
+  level endon("game_ended");
+  var_1 endon("disconnect");
+  var_1 endon("death");
+  var_1.delay_kick_inactive_player = var_0;
+  var_1 setclientomnvar("ui_br_purchase_file_override", 8);
+  var_1 setclientomnvar("ui_br_purchase_killstreak_response", 0);
+  var_1 setclientomnvar("ui_br_open_purchase_killstreak", 1);
+  var_1.armorykioskpurchaseallowed = 1;
+  scripts\mp\gametypes\br_analytics::destructable_car(var_1, "menu_open");
+  var_1 thread scripts\mp\gametypes\br_armory_kiosk::apc_target_enemies(var_0);
+  var_1 setsoundsubmix("iw8_br_plunder_kiosk_menu");
+}
+
+function __kiosk_location() {}
+
+function ref_12ae8(var_0, var_1) {
+  if(!isDefined(level.black_market_quest.wait_display_pavelow_boss_health_bar)) {
+    level.black_market_quest.wait_display_pavelow_boss_health_bar = [];
+  }
+
+  var_2 = spawnStruct();
+  var_2.origin = var_0;
+  var_2.angles = var_1;
+  var_2.available = 1;
+  level.black_market_quest.wait_display_pavelow_boss_health_bar[level.black_market_quest.wait_display_pavelow_boss_health_bar.size] = var_2;
+}
+
+function __player_logic() {}
+
+function start_player_threads(var_0) {
+  if(self.kiosk_found) {
+    return;
+  }
+
+  if(level.black_market_quest.b_audio_ping_enabled) {
+    thread player_start_audio_ping(var_0);
+    return;
+  }
+}
+
+function player_start_audio_ping(var_0) {
+  level endon("game_ended");
+  self endon("death_or_disconnect");
+  var_0 endon("marked_to_remove");
+  var_0 endon("kiosk_found");
+  var_1 = squared(level.black_market_quest.f_audio_echo_min_range);
+  var_2 = squared(level.black_market_quest.f_audio_echo_max_range);
+  var_3 = var_0.kiosk.origin;
+
+  for(;;) {
+    var_4 = distance2dsquared(self.origin, var_3);
+
+    if(var_4 <= var_2) {
+      self playlocalsound("br_black_market_ping_plr");
+      var_5 = scripts\engine\math::remap(var_4, var_1, var_2, level.black_market_quest.f_audio_echo_min_interval, level.black_market_quest.f_audio_echo_max_interval);
+      wait var_5;
+      self playlocalsound("br_black_market_echo_plr");
+      wait level.black_market_quest.i_audio_ping_interval - var_5;
+      continue;
     }
-    
-    self.ì∫˙`¯üå°≠•† = 1;
-    self notify( "kiosk_found" );
-    thread quest_circle_animate( self.ì=
-zëØ<´1a5;[ self.∫·-ıÿZ'çcVæÕË¨8 - 1 ], self.¥çL∏Ë„:.origin, 2, 1 );
-    var0 = scripts\mp\utility\teams::getteamdata( self.team, "players" );
-    
-    foreach ( var2 in var0 )
-    {
-        var2 playlocalsound( "br_black_market_chest_discovered" );
+
+    wait level.black_market_quest.i_audio_ping_interval;
+  }
+}
+
+function __quest_circle_logic() {}
+
+function quest_circle_setup(var_0) {
+  var_1 = var_0 + scripts\engine\math::random_vector_2d() * randomfloatrange(0, level.black_market_quest.i_quest_circle_start_radius * 0.9);
+  var_2 = (var_1[0], var_1[1], level.black_market_quest.i_quest_circle_start_radius);
+  scripts\mp\gametypes\br_quest_util::init_tactical_boxes(4, 0, 0, var_2);
+  self.a_circles = [];
+  var_3 = self.guard_spawners - self.kiosk.origin;
+  var_4 = level.black_market_quest.i_quest_circle_end_radius / level.black_market_quest.i_quest_circle_start_radius;
+  var_5 = self.kiosk.origin + var_3 * var_4;
+  var_5 = (var_5[0], var_5[1], level.black_market_quest.i_quest_circle_end_radius);
+  var_6 = 1 / level.black_market_quest.i_quest_circle_steps;
+
+  for(var_7 = 0; var_7 <= level.black_market_quest.i_quest_circle_steps; var_7++) {
+    self.a_circles[var_7] = vectorlerp(self.guard_spawners, var_5, var_6 * var_7);
+  }
+
+  self.i_circle_step = 0;
+  self.v_next_circle = self.a_circles[1];
+  self.i_next_circle_distance = squared(self.v_next_circle[2]);
+  var_8 = scripts\mp\objidpoolmanager::requestobjectiveid(1);
+
+  if(var_8 > -1) {
+    self.obj_icon_mover = spawn("script_model", self.semtex_stuckplayer.origin);
+    objective_onentity(var_8, self.obj_icon_mover);
+    objective_state(var_8, "active");
+    objective_setplayintro(var_8, 1);
+    objective_setshowoncompass(var_8, 1);
+    objective_setshowdistance(var_8, 0);
+    playencryptedcinematicforall(var_8, 1);
+    getscriptcachecontents(var_8, 0.5, 0.7);
+    objective_icon(var_8, "ui_mp_br_mapmenu_icon_blackmarket_objective");
+    objective_setbackground(var_8, 1);
+    objective_addteamtomask(var_8, self.team);
+    objective_setzoffset(var_8, 32);
+    function_0442(var_8, 1);
+    self.ref_11f64 = var_8;
+  }
+
+  thread quest_circle_animate(self.semtex_stuckplayer.origin, self.a_circles[0], 2);
+}
+
+function quest_circle_tick() {
+  self.i_circle_step++;
+
+  if(self.i_circle_step + 1 < self.a_circles.size) {
+    thread quest_circle_animate(self.i_circle_step - 1], self.i_circle_step], 2);
+self.v_next_circle = self.i_circle_step + 1];
+self.i_next_circle_distance = squared(self.v_next_circle[2]);
+
+if(self.i_circle_step == self.a_circles.size - 2) {
+  level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_blm_kiosk_nearby", self.team, 1, 1);
+  return;
+}
+
+return;
+}
+
+show_kiosk();
+}
+
+function quest_circle_animate(var_0, var_1, var_2, var_3) {
+  self notify("stop_circle_anim");
+  level endon("game_ended");
+  self endon("marked_to_remove");
+  self endon("stop_circle_anim");
+  var_4 = var_2 * 1000;
+  var_5 = gettime() + var_4;
+  var_6 = 0;
+  self.obj_icon_mover moveTo((var_1[0], var_1[1], self.kiosk.origin[2]), var_2);
+
+  while(var_6 < 1) {
+    var_6 = 1 - (var_5 - gettime()) / var_4;
+    var_7 = vectorlerp(var_0, var_1, var_6);
+    var_8 = var_7;
+
+    if(istrue(var_3)) {
+      var_8 = (var_7[0], var_7[1], scripts\engine\math::lerp(var_0[2], 0, var_6));
     }
-    
-    objective_state( self.ref_11f64, "current" );
-    objective_setshowoncompass( self.ref_11f64, 0 );
-    playencryptedcinematicforall( self.ref_11f64, 0 );
-    function_0442( self.ref_11f64, 0 );
-    objective_setshowdistance( self.ref_11f64, 1 );
+
+    scripts\mp\gametypes\br_quest_util::ref_11dae(var_8);
+    waitframe();
+  }
 }
 
-// Params 1
-// Size: 0x3c
-function play_time_warning_dialog( var0 )
-{
-    level endon( "game_ended" );
-    self endon( "marked_to_remove" );
-    var1 = max( level.í âç∞≠ØkÖNµ GØ∫≤‹£.∫k¢…”søK%Gd≥Pg - var0, 0 );
-    wait var1;
-    level thread scripts\mp\gametypes\br_public::dmztut_luicallback( "mission_blm_timer_warn", self.team, 1, 1 );
+function __kiosk() {}
+
+function redacted_weapon_purchase(var_0, var_1, var_2, var_3, var_4, var_5) {
+  if(var_0 calloutmarkerping_entityzoffset("ui_br_purchase_file_override") == 8) {
+    var_0 reportchallengeuserevent("collect_item", "dragons_den_blackmarket");
+  }
+
+  if(istrue(var_5)) {
+    var_0 scripts\mp\gametypes\br_pickups::minsteps(var_1, var_3, var_4, var_5);
+    return true;
+  }
+
+  var_6 = spawnStruct();
+  var_6.scriptablename = var_1;
+  var_6.origin = var_0.origin + (0, 0, 12);
+  var_6.count = 0;
+  var_6.maxcount = level.br_pickups.maxcounts[var_6.scriptablename];
+  var_6.stackable = level.br_pickups.stackable[var_6.scriptablename];
+  var_6.impulsefx = 0;
+
+  if(isDefined(var_3)) {
+    var_6.count = var_3;
+  }
+
+  if(!var_6.count && isDefined(level.br_pickups.counts[var_6.scriptablename])) {
+    var_6.count = level.br_pickups.counts[var_6.scriptablename];
+  }
+
+  var_7 = var_0 scripts\mp\gametypes\br_pickups::cantakepickup(var_6);
+
+  if(var_7 == 1) {
+    thread redacted_weapon_give_ammo_on_pickup();
+    var_0 scripts\mp\gametypes\br_pickups::onusecompleted(var_6, var_2, undefined, var_4);
+    return true;
+  }
+
+  return false;
 }
 
-// Params 0
-// Size: 0x6b
-function contract_cleanup_watcher()
-{
-    level endon( "game_ended" );
-    
-    for ( ;; )
-    {
-        level waittill( "br_circle_set", var0 );
-        
-        if ( var0 >= level.í âç∞≠ØkÖNµ GØ∫≤‹£.•À˚˛X/:RÎÈ@GÓ-M8ûh
-3…ó )
-        {
-            var1 = getlootscriptablearrayinradius( scripts\mp\gametypes\br_quest_util::removepatchablecollision_delayed( "black_market" ) );
-            
-            foreach ( var3 in var1 )
-            {
-                var3.éπÃ†uäÃàà+PÉΩ„)O÷G = 1;
-                scripts\mp\gametypes\br_pickups::ref_11a21( var3 );
-            }
-        }
-    }
-}
+function redacted_weapon_give_ammo_on_pickup() {
+  level endon("game_ended");
+  self endon("death_or_disconnect");
+  self waittill("pickedupweapon", var_0, var_1);
 
-// Params 0
-// Size: 0x2
-function __hud()
-{
-    
+  switch (var_1.basename) {
+    case "s4_mg_mgolf42_mp":
+    case "s4_mr_moscar_mp":
+    case "s4_sh_bromeo5_mp":
+    case "s4_sm_owhiskey_mp":
+    case "s4_ar_asierra44_mp":
+      self givemaxammo(var_1);
+      break;
+    case "iw8_lm_dblmg_mp":
+      self setweaponammoclip(var_1, weaponclipsize(var_1));
+      level thread _luidecision::getsquadspawnlocations(self, var_1, weaponclipsize(var_1));
+      break;
+  }
 }
-
-// Params 0
-// Size: 0x77
-function hud_setup_visibility()
-{
-    var0 = scripts\mp\gametypes\br_quest_util::sortvalidplayersinarray( scripts\mp\utility\teams::getteamdata( self.team, "players" ) );
-    
-    foreach ( var2 in var0[ "valid" ] )
-    {
-        var2 scripts\mp\gametypes\br_quest_util::uiobjectiveshow( "black_market" );
-    }
-    
-    foreach ( var2 in var0[ "invalid" ] )
-    {
-        var2 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
-    }
-}
-
-// Params 1
-// Size: 0x10
-function hud_show_to_player( var0 )
-{
-    var0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow( "black_market" );
-}
-
-// Params 1
-// Size: 0xb
-function hud_hide_from_player( var0 )
-{
-    var0 scripts\mp\gametypes\br_quest_util::uiobjectivehide();
-}
-
-// Params 0
-// Size: 0x38
-function hud_delete()
-{
-    foreach ( var1 in scripts\mp\utility\teams::getteamdata( self.team, "players" ) )
-    {
-        hud_hide_from_player( var1 );
-    }
-}
-
-// Params 0
-// Size: 0x2
-function __event_handlers()
-{
-    
-}
-
-// Params 0
-// Size: 0x3d
-function on_remove_quest_instance()
-{
-    hud_delete();
-    scripts\mp\objidpoolmanager::returnreservedobjectiveid( self.ref_11f64 );
-    
-    if ( isdefined( self.mapcircle ) )
-    {
-        scripts\mp\gametypes\br_quest_util::lastdirtyscore();
-    }
-    
-    if ( isdefined( self.ì˘{ò©Î•l€7Î∂ﬁÏ¨N ) )
-    {
-        self.ì˘{ò©Î•l€7Î∂ﬁÏ¨N delete();
-    }
-    
-    scripts\mp\gametypes\br_quest_util::releaseteamonquest( self.team );
-}
-
-// Params 2
-// Size: 0xd
-function ref_11ff1( var0, var1 )
-{
-    on_player_removed( var1, var0 );
-}
-
-// Params 1
-// Size: 0x7e
-function on_player_disconnect( var0 )
-{
-    if ( var0.team == self.team )
-    {
-        var1 = scripts\mp\utility\teams::getteamdata( self.team, "players" );
-        scripts\mp\gametypes\br_quest_util::getquestinstancedata( "black_market", self.team ).playerlist = var1;
-        
-        if ( isdefined( self.¥çL∏Ë„: ) && var1.size )
-        {
-            self.¥çL∏Ë„: setotherent( var1[ 0 ] );
-        }
-        
-        if ( !scripts\mp\gametypes\br_quest_util::isteamvalid( var0.team ) )
-        {
-            self.result = "fail";
-            scripts\mp\gametypes\br_quest_util::removequestinstance();
-        }
-    }
-    
-    on_player_removed( var0 );
-}
-
-// Params 1
-// Size: 0x12
-function on_enter_gulag( var0 )
-{
-    hud_hide_from_player( var0 );
-    scripts\mp\gametypes\br_quest_util::spawn_dogtags( var0 );
-}
-
-// Params 1
-// Size: 0x2a
-function on_respawn( var0 )
-{
-    if ( var0.team == self.team )
-    {
-        hud_show_to_player( var0 );
-        scripts\mp\gametypes\br_quest_util::ref_1336a( var0 );
-        start_player_threads( var0 );
-        return;
-    }
-}
-
-// Params 2
-// Size: 0x5
-function on_player_removed( var0, var1 )
-{
-    
-}
-
-// Params 0
-// Size: 0xa
-function on_timer_expired()
-{
-    handle_fail_quest( 1 );
-}
-
-// Params 2
-// Size: 0x77
-function on_circle_tick( var0, var1 )
-{
-    if ( scripts\mp\gametypes\br_circle::getsafecircleradius() > 0 )
-    {
-        var2 = squared( scripts\mp\gametypes\br_circle::getdangercircleradius() );
-        
-        if ( !isdefined( self.lastcircletick ) )
-        {
-            self.lastcircletick = -1;
-        }
-        
-        var3 = gettime();
-        
-        if ( self.lastcircletick == var3 )
-        {
-            return;
-        }
-        
-        self.lastcircletick = var3;
-        
-        if ( isdefined( self.¥çL∏Ë„: ) )
-        {
-            var4 = distance2dsquared( self.¥çL∏Ë„:.origin, var0 );
-            
-            if ( var4 > var2 )
-            {
-                handle_fail_quest( 2 );
-                self.result = "fail";
-                scripts\mp\gametypes\br_quest_util::removequestinstance();
-                return;
-            }
-            
-            return;
-        }
-        
-        return;
-    }
-}
-
-// Params 0
-// Size: 0x2
-function __drop_logic()
-{
-    
-}
-
-// Params 1
-// Size: 0xcd
-function find_kiosk_spawn_location( var0 )
-{
-    var1 = [];
-    var2 = undefined;
-    var3 = -1;
-    
-    foreach ( var5 in level.í âç∞≠ØkÖNµ GØ∫≤‹£.wait_display_pavelow_boss_health_bar )
-    {
-        if ( !istrue( var5.available ) || !scripts\mp\gametypes\br_circle::vandalize_minigun_speed( var5.origin, 1, level.í âç∞≠ØkÖNµ GØ∫≤‹£.∫k¢…”søK%Gd≥Pg ) )
-        {
-            continue;
-        }
-        
-        var6 = distance2dsquared( var0, var5.origin );
-        
-        if ( !isdefined( var2 ) || var6 > var3 )
-        {
-            var2 = var5;
-            var3 = var6;
-        }
-        
-        if ( var6 >= level.í âç∞≠ØkÖNµ GØ∫≤‹£.∏Äê°ƒ6@„â¨Ë·BbﬂsJË“M¡âC && var6 <= level.í âç∞≠ØkÖNµ GØ∫≤‹£.íáf9àaGÿ—W∞KSõCËÜﬂâËk“ )
-        {
-            var1 = var5;
-        }
-    }
-    
-    if ( var1.size > 0 )
-    {
-        var8 = randomint( var1.size );
-        return var1[ var8 ];
-    }
-    
-    if ( isdefined( var3 ) )
-    {
-        return var3;
-    }
-    
-    return undefined;
-}
-
-// Params 0
-// Size: 0x2
-function __kiosk_logic()
-{
-    
-}
-
-// Params 0
-// Size: 0x1bc
-function kiosk_spawn()
-{
-    var0 = undefined;
-    var1 = find_kiosk_spawn_location( self.semtex_stuckplayer.origin );
-    
-    if ( !isdefined( var1 ) )
-    {
-        waitframe();
-        self.result = "no_locale";
-        thread scripts\mp\gametypes\br_quest_util::removequestinstance();
-        return;
-    }
-    
-    var1.available = 0;
-    var0 = spawn( "script_model", var1.origin );
-    var0.angles = var1.angles;
-    var0 setmodel( "x2_mercenary_buy_station_rig_skeleton" );
-    var0 setscriptablepartstate( "br_black_market_kiosk", "visible", 0 );
-    var0.æ<„C∂HóØ™∏!#W]@°gOÛ = 1;
-    var0.ä”•e0{)˜Äáê5 = var1;
-    var0.visible = 1;
-    var0.ä›…ØC = self;
-    self.¥çL∏Ë„: = var0;
-    self.ì∫˙`¯üå°≠•† = 0;
-    self.¥çL∏Ë„: setotherent( self.semtex_stuckplayer );
-    
-    foreach ( var3 in level.players )
-    {
-        if ( var3.team != self.team )
-        {
-            var0 disablescriptableplayeruse( var3 );
-        }
-    }
-    
-    var5 = spawnstruct();
-    var5.excludedplayers = [];
-    var5.excludedplayers[ 0 ] = self.semtex_stuckplayer;
-    var5.ogangles = [];
-    var5.ogangles[ 0 ] = self.team;
-    scripts\mp\gametypes\br_quest_util::look_at_heli( "br_black_market_crate_drop", var1.origin, level.í âç∞≠ØkÖNµ GØ∫≤‹£.ΩÔT†Ÿ3wŸìèòh6À◊NﬁèS˚, level.questinfo.defaultfilter, var5 );
-    level thread scripts\mp\gametypes\br_public::dmztut_luicallback( "mission_blm_dropnotify", self.team, 1, 1 );
-    wait level.í âç∞≠ØkÖNµ GØ∫≤‹£.äáıgjòùÁcˆyöÀFàáè	{Ã÷∞;
-    quest_circle_setup( var1.origin );
-    var6 = scripts\mp\utility\teams::getteamdata( self.team, "players" );
-    
-    foreach ( var3 in var6 )
-    {
-        scripts\mp\gametypes\br_quest_util::ref_1336a( var3 );
-        start_player_threads( var3 );
-    }
-    
-    thread kiosk_distance_watcher();
-}
-
-// Params 5
-// Size: 0x59
-function kiosk_on_use( var0, var1, var2, var3, var4 )
-{
-    if ( !isdefined( var0.entity ) )
-    {
-        return;
-    }
-    
-    if ( isdefined( var0.entity.ä›…ØC ) )
-    {
-        show_kiosk( var0.entity.ä›…ØC );
-        complete_quest( var0.entity.ä›…ØC );
-    }
-    
-    thread run_black_market_purchase_menu( var3 );
-}
-
-// Params 0
-// Size: 0x21
-function kiosk_destroy_after_delay()
-{
-    level endon( "game_ended" );
-    self endon( "death" );
-    wait level.í âç∞≠ØkÖNµ GØ∫≤‹£.∫%•Ø⁄ñﬁ‹µ◊Fïn£N∑/˙£Z∂+{]Ë;
-    kiosk_destroy();
-}
-
-// Params 0
-// Size: 0x36
-function kiosk_destroy()
-{
-    self.ä”•e0{)˜Äáê5.available = 1;
-    playfx( scripts\engine\utility::getfx( "vfx_br3_pbs_dmg" ), self.origin );
-    playsoundatpos( self.origin, "mp_equip_destroyed" );
-    self delete();
-}
-
-// Params 1
-// Size: 0x70
-function run_black_market_purchase_menu( var0 )
-{
-    var1 = self;
-    level endon( "game_ended" );
-    var1 endon( "disconnect" );
-    var1 endon( "death" );
-    var1.delay_kick_inactive_player = var0;
-    var1 setclientomnvar( "ui_br_purchase_file_override", 8 );
-    var1 setclientomnvar( "ui_br_purchase_killstreak_response", 0 );
-    var1 setclientomnvar( "ui_br_open_purchase_killstreak", 1 );
-    var1.armorykioskpurchaseallowed = 1;
-    scripts\mp\gametypes\br_analytics::destructable_car( var1, "menu_open" );
-    var1 thread scripts\mp\gametypes\br_armory_kiosk::apc_target_enemies( var0 );
-    var1 setsoundsubmix( "iw8_br_plunder_kiosk_menu" );
-}
-
-// Params 0
-// Size: 0x2
-function __kiosk_location()
-{
-    
-}
-
-// Params 2
-// Size: 0x5c
-function ref_12ae8( var0, var1 )
-{
-    if ( !isdefined( level.í âç∞≠ØkÖNµ GØ∫≤‹£.wait_display_pavelow_boss_health_bar ) )
-    {
-        level.í âç∞≠ØkÖNµ GØ∫≤‹£.wait_display_pavelow_boss_health_bar = [];
-    }
-    
-    var2 = spawnstruct();
-    var2.origin = var0;
-    var2.angles = var1;
-    var2.available = 1;
-    level.í âç∞≠ØkÖNµ GØ∫≤‹£.wait_display_pavelow_boss_health_bar[ level.í âç∞≠ØkÖNµ GØ∫≤‹£.wait_display_pavelow_boss_health_bar.size ] = var2;
-}
-
-// Params 0
-// Size: 0x2
-function __player_logic()
-{
-    
-}
-
-// Params 1
-// Size: 0x24
-function start_player_threads( var0 )
-{
-    if ( self.ì∫˙`¯üå°≠•† )
-    {
-        return;
-    }
-    
-    if ( level.í âç∞≠ØkÖNµ GØ∫≤‹£.Ñ‹Rj[J„pfqáÿÈn°PÀjWÚ )
-    {
-        thread player_start_audio_ping( var0 );
-        return;
-    }
-}
-
-// Params 1
-// Size: 0xbb
-function player_start_audio_ping( var0 )
-{
-    level endon( "game_ended" );
-    self endon( "death_or_disconnect" );
-    var0 endon( "marked_to_remove" );
-    var0 endon( "kiosk_found" );
-    var1 = squared( level.í âç∞≠ØkÖNµ GØ∫≤‹£.ìYa5®‹Ô«ªD(Ëè∫–Ê€o‡¯˜ );
-    var2 = squared( level.í âç∞≠ØkÖNµ GØ∫≤‹£.≠√ﬂh;˚€òâ“·£y–†∑ÖØı );
-    var3 = var0.¥çL∏Ë„:.origin;
-    
-    for ( ;; )
-    {
-        var4 = distance2dsquared( self.origin, var3 );
-        
-        if ( var4 <= var2 )
-        {
-            self playlocalsound( "br_black_market_ping_plr" );
-            var5 = scripts\engine\math::remap( var4, var1, var2, level.í âç∞≠ØkÖNµ GØ∫≤‹£.á¥◊#YÃjYÄÇ§>Wô»†IãÀìÚ„ê–, level.í âç∞≠ØkÖNµ GØ∫≤‹£.ôÙÃÎÖ´F•Ì˙ï∆°ˆ˙∂·◊¥‹G¨ú;,6 );
-            wait var5;
-            self playlocalsound( "br_black_market_echo_plr" );
-            wait level.í âç∞≠ØkÖNµ GØ∫≤‹£.ô±x˘◊∏I≥‡}O˜PX5„ü - var5;
-            continue;
-        }
-        
-        wait level.í âç∞≠ØkÖNµ GØ∫≤‹£.ô±x˘◊∏I≥‡}O˜PX5„ü;
-    }
-}
-
-// Params 0
-// Size: 0x2
-function __quest_circle_logic()
-{
-    
-}
-
-// Params 1
-// Size: 0x1ab
-function quest_circle_setup( var0 )
-{
-    var1 = var0 + scripts\engine\math::random_vector_2d() * randomfloatrange( 0, level.í âç∞≠ØkÖNµ GØ∫≤‹£.áW¥æ\ÆVné}çñ'ç ıÕË∞'ËØ'∞»•∫Ê * 0.9 );
-    var2 = ( var1[ 0 ], var1[ 1 ], level.í âç∞≠ØkÖNµ GØ∫≤‹£.áW¥æ\ÆVné}çñ'ç ıÕË∞'ËØ'∞»•∫Ê );
-    scripts\mp\gametypes\br_quest_util::init_tactical_boxes( 4, 0, 0, var2 );
-    self.ì=
-zëØ<´1a5; = [];
-    var3 = self.guard_spawners - self.¥çL∏Ë„:.origin;
-    var4 = level.í âç∞≠ØkÖNµ GØ∫≤‹£.¨ﬁqó€-„∑‰(‡åBó‘Q=ê-F0IxB / level.í âç∞≠ØkÖNµ GØ∫≤‹£.áW¥æ\ÆVné}çñ'ç ıÕË∞'ËØ'∞»•∫Ê;
-    var5 = self.¥çL∏Ë„:.origin + var3 * var4;
-    var5 = ( var5[ 0 ], var5[ 1 ], level.í âç∞≠ØkÖNµ GØ∫≤‹£.¨ﬁqó€-„∑‰(‡åBó‘Q=ê-F0IxB );
-    var6 = 1 / level.í âç∞≠ØkÖNµ GØ∫≤‹£.ÉmÄóH3ñKﬂR£Ω#∏øÅZìêÁ;
-    
-    for ( var7 = 0; var7 <= level.í âç∞≠ØkÖNµ GØ∫≤‹£.ÉmÄóH3ñKﬂR£Ω#∏øÅZìêÁ ; var7++ )
-    {
-        self.ì=
-zëØ<´1a5;[ var7 ] = vectorlerp( self.guard_spawners, var5, var6 * var7 );
-    }
-    
-    self.∫·-ıÿZ'çcVæÕË¨8 = 0;
-    self.õJÔH}p‡Q¶SŒ◊ã% = self.ì=
-zëØ<´1a5;[ 1 ];
-    self.ÑÎÇ˛ èÄóSQ•PM˜¿Ò´#k>– = squared( self.õJÔH}p‡Q¶SŒ◊ã%[ 2 ] );
-    var8 = scripts\mp\objidpoolmanager::requestobjectiveid( 1 );
-    
-    if ( var8 > -1 )
-    {
-        self.ì˘{ò©Î•l€7Î∂ﬁÏ¨N = spawn( "script_model", self.semtex_stuckplayer.origin );
-        objective_onentity( var8, self.ì˘{ò©Î•l€7Î∂ﬁÏ¨N );
-        objective_state( var8, "active" );
-        objective_setplayintro( var8, 1 );
-        objective_setshowoncompass( var8, 1 );
-        objective_setshowdistance( var8, 0 );
-        playencryptedcinematicforall( var8, 1 );
-        getscriptcachecontents( var8, 0.5, 0.7 );
-        objective_icon( var8, "ui_mp_br_mapmenu_icon_blackmarket_objective" );
-        objective_setbackground( var8, 1 );
-        objective_addteamtomask( var8, self.team );
-        objective_setzoffset( var8, 32 );
-        function_0442( var8, 1 );
-        self.ref_11f64 = var8;
-    }
-    
-    thread quest_circle_animate( self.semtex_stuckplayer.origin, self.ì=
-zëØ<´1a5;[ 0 ], 2 );
-}
-
-// Params 0
-// Size: 0x8e
-function quest_circle_tick()
-{
-    self.∫·-ıÿZ'çcVæÕË¨8++;
-    
-    if ( self.∫·-ıÿZ'çcVæÕË¨8 + 1 < self.ì=
-zëØ<´1a5;.size )
-    {
-        thread quest_circle_animate( self.ì=
-zëØ<´1a5;[ self.∫·-ıÿZ'çcVæÕË¨8 - 1 ], self.ì=
-zëØ<´1a5;[ self.∫·-ıÿZ'çcVæÕË¨8 ], 2 );
-        self.õJÔH}p‡Q¶SŒ◊ã% = self.ì=
-zëØ<´1a5;[ self.∫·-ıÿZ'çcVæÕË¨8 + 1 ];
-        self.ÑÎÇ˛ èÄóSQ•PM˜¿Ò´#k>– = squared( self.õJÔH}p‡Q¶SŒ◊ã%[ 2 ] );
-        
-        if ( self.∫·-ıÿZ'çcVæÕË¨8 == self.ì=
-zëØ<´1a5;.size - 2 )
-        {
-            level thread scripts\mp\gametypes\br_public::dmztut_luicallback( "mission_blm_kiosk_nearby", self.team, 1, 1 );
-            return;
-        }
-        
-        return;
-    }
-    
-    show_kiosk();
-}
-
-// Params 4
-// Size: 0x9f
-function quest_circle_animate( var0, var1, var2, var3 )
-{
-    self notify( "stop_circle_anim" );
-    level endon( "game_ended" );
-    self endon( "marked_to_remove" );
-    self endon( "stop_circle_anim" );
-    var4 = var2 * 1000;
-    var5 = gettime() + var4;
-    var6 = 0;
-    self.ì˘{ò©Î•l€7Î∂ﬁÏ¨N moveto( ( var1[ 0 ], var1[ 1 ], self.¥çL∏Ë„:.origin[ 2 ] ), var2 );
-    
-    while ( var6 < 1 )
-    {
-        var6 = 1 - ( var5 - gettime() ) / var4;
-        var7 = vectorlerp( var0, var1, var6 );
-        var8 = var7;
-        
-        if ( istrue( var3 ) )
-        {
-            var8 = ( var7[ 0 ], var7[ 1 ], scripts\engine\math::lerp( var0[ 2 ], 0, var6 ) );
-        }
-        
-        scripts\mp\gametypes\br_quest_util::ref_11dae( var8 );
-        waitframe();
-    }
-}
-
-// Params 0
-// Size: 0x2
-function __kiosk()
-{
-    
-}
-
-// Params 6
-// Size: 0x123, Type: bool
-function redacted_weapon_purchase( var0, var1, var2, var3, var4, var5 )
-{
-    if ( var0 calloutmarkerping_entityzoffset( "ui_br_purchase_file_override" ) == 8 )
-    {
-        var0 reportchallengeuserevent( "collect_item", "dragons_den_blackmarket" );
-    }
-    
-    if ( istrue( var5 ) )
-    {
-        var0 scripts\mp\gametypes\br_pickups::minsteps( var1, var3, var4, var5 );
-        return true;
-    }
-    
-    var6 = spawnstruct();
-    var6.scriptablename = var1;
-    var6.origin = var0.origin + ( 0, 0, 12 );
-    var6.count = 0;
-    var6.maxcount = level.br_pickups.maxcounts[ var6.scriptablename ];
-    var6.stackable = level.br_pickups.stackable[ var6.scriptablename ];
-    var6.impulsefx = 0;
-    
-    if ( isdefined( var3 ) )
-    {
-        var6.count = var3;
-    }
-    
-    if ( !var6.count && isdefined( level.br_pickups.counts[ var6.scriptablename ] ) )
-    {
-        var6.count = level.br_pickups.counts[ var6.scriptablename ];
-    }
-    
-    var7 = var0 scripts\mp\gametypes\br_pickups::cantakepickup( var6 );
-    
-    if ( var7 == 1 )
-    {
-        thread redacted_weapon_give_ammo_on_pickup();
-        var0 scripts\mp\gametypes\br_pickups::onusecompleted( var6, var2, undefined, var4 );
-        return true;
-    }
-    
-    return false;
-}
-
-// Params 0
-// Size: 0x7b
-function redacted_weapon_give_ammo_on_pickup()
-{
-    level endon( "game_ended" );
-    self endon( "death_or_disconnect" );
-    self waittill( "pickedupweapon", var0, var1 );
-    
-    switch ( var1.basename )
-    {
-        case "s4_mg_mgolf42_mp":
-        case "s4_mr_moscar_mp":
-        case "s4_sh_bromeo5_mp":
-        case "s4_sm_owhiskey_mp":
-        case "s4_ar_asierra44_mp":
-            self givemaxammo( var1 );
-            break;
-        case "iw8_lm_dblmg_mp":
-            self setweaponammoclip( var1, weaponclipsize( var1 ) );
-            level thread _luidecision::getsquadspawnlocations( self, var1, weaponclipsize( var1 ) );
-            break;
-    }
-}
-

@@ -238,8 +238,8 @@ function little_bird_create(var_0, var_1) {
   var_2.flareslive = [];
   var_2.player_is_trying_self_revive = 1;
 
-  if(isDefined(level.…S© ÄÛq õ Èèã7°½ ª£¢ ? Úo hç.©ï)) {
-    var_2.ref_120b4 = level.…S© ÄÛq õ Èèã7°½ ª£¢ ? Úo hç.©ï;
+  if(isDefined(level.littlebird_overrideoobseconds)) {
+    var_2.ref_120b4 = level.littlebird_overrideoobseconds;
   }
 
   if(level.gametype == "br") {

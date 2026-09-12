@@ -4,7 +4,7 @@
 ****************************************************/
 
 function init() {
-  level.©­¢ = spawnStruct();
+  level.mmp = spawnStruct();
   level.decoyassists = &groundz;
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("plunderSites");
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("giveStartFieldUpgrade");

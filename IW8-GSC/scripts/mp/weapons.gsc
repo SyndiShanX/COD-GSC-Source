@@ -78,8 +78,7 @@ function init() {
     thread savegraverobberammo();
   }
 
-  level.ô€ s«õ ü8˘J #ó ’x£
-  ÈC–„k› = getdvarint("scr_br_scavengerPlunderAmount", 5);
+  level.scavengerplunderamount = getdvarint("scr_br_scavengerPlunderAmount", 5);
 }
 
 function savegraverobberammo() {
@@ -1735,7 +1734,7 @@ function ref_12082(var_0) {
 
   scavengergiveammo(var_0);
   var_0 scripts\mp\equipment::givescavengerammo();
-  var_0 scripts\mp\gametypes\br_plunder::ref_12627(level.ô€ s«õ ü8˘J #ó ’x£ ÈC–„k›);
+  var_0 scripts\mp\gametypes\br_plunder::ref_12627(level.scavengerplunderamount);
 }
 
 function handlescavengerbagpickup(var_0) {

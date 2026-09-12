@@ -243,14 +243,14 @@ function takeweaponpickup(var_0) {
       var_21 = !scripts\mp\gametypes\br_extract_quest::operatorsfxalias(var_8);
 
       if(var_21) {
-        if(isDefined(var_3.tracknonoobplayerlocation) && isDefined(var_3.tracknonoobplayerlocation.ƒj× ëuW ésò / ) k² oø E\¯‘€ 2[)) {
-          var_22 = var_3.tracknonoobplayerlocation.ƒj× ëuW ésò / ) k² oø E\¯‘€ 2[; var_23 = strtok(var_8.basename, "_");
+        if(isDefined(var_3.tracknonoobplayerlocation) && isDefined(var_3.tracknonoobplayerlocation.specific_placement_angles)) {
+          var_22 = var_3.tracknonoobplayerlocation.specific_placement_angles;
+          var_23 = strtok(var_8.basename, "_");
 
           if(scripts\mp\class::update_health_bar_to_players(var_8) || var_23[1] == "me") {
             var_22 += (0, 90, 0);
           }
-        }
-        else {
+        } else {
           var_22 = (0, var_21, 0);
         }
 

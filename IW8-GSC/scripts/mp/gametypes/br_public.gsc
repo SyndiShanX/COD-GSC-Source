@@ -1,2527 +1,1891 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: scripts\mp\gametypes\br_public.gsc
+***********************************************/
 
-// Params 1
-// Size: 0xd, Type: bool
-function iswaitingtoentergulag( var0 )
-{
-    return istrue( var0.entergulagwait );
+function iswaitingtoentergulag(var_0) {
+  return istrue(var_0.entergulagwait);
 }
 
-// Params 1
-// Size: 0xd, Type: bool
-function update_current_solution( var0 )
-{
-    return istrue( var0.set_relic_steelballs_perks );
+function update_current_solution(var_0) {
+  return istrue(var_0.set_relic_steelballs_perks);
 }
 
-// Params 1
-// Size: 0xd, Type: bool
-function use_csm( var0 )
-{
-    return istrue( var0.respawningfromtoken );
+function use_csm(var_0) {
+  return istrue(var_0.respawningfromtoken);
 }
 
-// Params 0
-// Size: 0x1f, Type: bool
-function isplayeringulag()
-{
-    var0 = self;
-    return isdefined( var0 ) && ( istrue( var0.jailed ) || istrue( var0.gulagarena ) );
+function isplayeringulag() {
+  var_0 = self;
+  return isDefined(var_0) && (istrue(var_0.jailed) || istrue(var_0.gulagarena));
 }
 
-// Params 0
-// Size: 0x2a, Type: bool
-function updateinstantclassswapallowedinternal()
-{
-    var0 = self;
-    return isdefined( var0 ) && ( istrue( var0.jailed ) || istrue( var0.gulagarena ) || istrue( var0.gulag ) );
+function updateinstantclassswapallowedinternal() {
+  var_0 = self;
+  return isDefined(var_0) && (istrue(var_0.jailed) || istrue(var_0.gulagarena) || istrue(var_0.gulag));
 }
 
-// Params 0
-// Size: 0x14, Type: bool
-function ref_1443c()
-{
-    var0 = self;
-    return isdefined( var0 ) && istrue( var0.ref_14439 );
+function ref_1443c() {
+  var_0 = self;
+  return isDefined(var_0) && istrue(var_0.ref_14439);
 }
 
-// Params 0
-// Size: 0x1f, Type: bool
-function isplayerwaitingrebirthrespawn()
-{
-    var0 = self;
-    return isdefined( var0 ) && isdefined( var0.ref_12ca1 ) && var0.ref_12ca1 > 0;
+function isplayerwaitingrebirthrespawn() {
+  var_0 = self;
+  return isDefined(var_0) && isDefined(var_0.ref_12ca1) && var_0.ref_12ca1 > 0;
 }
 
-// Params 0
-// Size: 0x2b, Type: bool
-function unlockscriptabledoors()
-{
-    var0 = self;
-    return ( istrue( var0.delay_enter_combat_after_investigating_grenade ) && !isalive( var0 ) || ref_125f3( var0 ) ) && !istrue( var0.gulag );
+function unlockscriptabledoors() {
+  var_0 = self;
+  return (istrue(var_0.delay_enter_combat_after_investigating_grenade) && !isalive(var_0) || ref_125f3(var_0)) && !istrue(var_0.gulag);
 }
 
-// Params 0
-// Size: 0x9, Type: bool
-function ref_125f3()
-{
-    return istrue( self.iszombie );
+function ref_125f3() {
+  return istrue(self.iszombie);
 }
 
-// Params 0
-// Size: 0x13, Type: bool
-function ref_125ec()
-{
-    return istrue( self.unset_relic_gun_game ) || istrue( self.scn_infil_tango_npc_2_sfx );
+function ref_125ec() {
+  return istrue(self.unset_relic_gun_game) || istrue(self.scn_infil_tango_npc_2_sfx);
 }
 
-// Params 0
-// Size: 0x2a
-function watchhealend()
-{
-    self endon( "heal_end" );
-    self endon( "death_or_disconnect" );
-    self endon( "br_armor_plate_done" );
-    level endon( "game_ended" );
-    GscBinSkip4( 0x35 );
-    // Unknown operator ( 0x35, iw8, PC )
+function watchhealend() {
+  self endon("heal_end");
+  self endon("death_or_disconnect");
+  self endon("br_armor_plate_done");
+  level endon("game_ended");
+  GscBinSkip4(0x35);
 }
 
-// Params 0
-// Size: 0x44
-function heal_removeonplayernotifies()
-{
-    self notifyonplayercommand( "try_heal_cancel", "+weapnext" );
-    self notifyonplayercommand( "try_heal_cancel", "+attack" );
-    self notifyonplayercommand( "try_heal_cancel", "+breath_sprint" );
-    scripts\engine\utility::ref_143a5( "death", "try_heal_cancel" );
+function heal_removeonplayernotifies() {
+  self notifyonplayercommand("try_heal_cancel", "+weapnext");
+  self notifyonplayercommand("try_heal_cancel", "+attack");
+  self notifyonplayercommand("try_heal_cancel", "+breath_sprint");
+  scripts\engine\utility::ref_143a5("death", "try_heal_cancel");
+  healend();
+}
+
+function heal_removeondamage() {
+  for(;;) {
+    self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+
+    if(level.gametype == "br" && (var_4 == "MOD_TRIGGER_HURT" || var_4 == "MOD_UNKNOWN")) {
+      continue;
+    }
+
     healend();
+  }
 }
 
-// Params 0
-// Size: 0x61
-function heal_removeondamage()
-{
-    for ( ;; )
-    {
-        self waittill( "damage", var0, var1, var2, var3, var4, var5, var6, var7, var8, var9 );
-        
-        if ( level.gametype == "br" && ( var4 == "MOD_TRIGGER_HURT" || var4 == "MOD_UNKNOWN" ) )
-        {
-            continue;
-        }
-        
-        healend();
-    }
+function healend() {
+  self notifyonplayercommandremove("try_heal_cancel", "+weapnext");
+  self notifyonplayercommandremove("try_heal_cancel", "+attack");
+  self notifyonplayercommandremove("try_heal_cancel", "+breath_sprint");
+  self notify("heal_end");
 }
 
-// Params 0
-// Size: 0x37
-function healend()
-{
-    self notifyonplayercommandremove( "try_heal_cancel", "+weapnext" );
-    self notifyonplayercommandremove( "try_heal_cancel", "+attack" );
-    self notifyonplayercommandremove( "try_heal_cancel", "+breath_sprint" );
-    self notify( "heal_end" );
+function removeitemfrominventory(var_0) {
+  self.br_inventory_slots[var_0] = undefined;
 }
 
-// Params 1
-// Size: 0xb
-function removeitemfrominventory( var0 )
-{
-    self.br_inventory_slots[ var0 ] = undefined;
+function ishelmet(var_0) {
+  return isDefined(level.br_pickups.br_itemtype[var_0]) && level.br_pickups.br_itemtype[var_0] == "armor" && issubstr(var_0, "helmet");
 }
 
-// Params 1
-// Size: 0x36, Type: bool
-function ishelmet( var0 )
-{
-    return isdefined( level.br_pickups.br_itemtype[ var0 ] ) && level.br_pickups.br_itemtype[ var0 ] == "armor" && issubstr( var0, "helmet" );
+function isarmor(var_0) {
+  return ishelmet(var_0);
 }
 
-// Params 1
-// Size: 0xb, Type: bool
-function isarmor( var0 )
-{
-    return ishelmet( var0 );
+function isarmorplate(var_0) {
+  return var_0 == "brloot_armor_plate";
 }
 
-// Params 1
-// Size: 0xc, Type: bool
-function isarmorplate( var0 )
-{
-    return var0 == "brloot_armor_plate";
+function ishealitem(var_0) {
+  return var_0 == "brloot_health_bandages" || var_0 == "brloot_health_firstaid" || var_0 == "brloot_health_adrenaline";
 }
 
-// Params 1
-// Size: 0x20, Type: bool
-function ishealitem( var0 )
-{
-    return var0 == "brloot_health_bandages" || var0 == "brloot_health_firstaid" || var0 == "brloot_health_adrenaline";
+function isequipment(var_0) {
+  return isarmorplate(var_0) || ishealitem(var_0) || isDefined(level.br_pickups.br_itemtype[var_0]) && (level.br_pickups.br_itemtype[var_0] == "lethal" || level.br_pickups.br_itemtype[var_0] == "tactical");
 }
 
-// Params 1
-// Size: 0x51, Type: bool
-function isequipment( var0 )
-{
-    return isarmorplate( var0 ) || ishealitem( var0 ) || isdefined( level.br_pickups.br_itemtype[ var0 ] ) && ( level.br_pickups.br_itemtype[ var0 ] == "lethal" || level.br_pickups.br_itemtype[ var0 ] == "tactical" );
+function isammo(var_0) {
+  return isDefined(level.br_pickups.br_itemtype[var_0]) && level.br_pickups.br_itemtype[var_0] == "ammo";
 }
 
-// Params 1
-// Size: 0x29, Type: bool
-function isammo( var0 )
-{
-    return isdefined( level.br_pickups.br_itemtype[ var0 ] ) && level.br_pickups.br_itemtype[ var0 ] == "ammo";
-}
-
-// Params 0
-// Size: 0x5f, Type: bool
-function ref_12518()
-{
-    if ( self isswitchingweapon() || self isreloading() || self ismantling() || self isthrowinggrenade() || self israisingweapon() || self ismeleeing() || self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "player", "isPlayerADS" ) ]]() || istrue( self.tracking_max_health ) )
-    {
-        return false;
-    }
-    
-    var0 = self getcurrentweapon();
-    
-    if ( nullweapon( var0 ) )
-    {
-        return false;
-    }
-    
-    return true;
-}
-
-// Params 2
-// Size: 0x29
-function ref_12616( var0, var1 )
-{
-    self endon( "death_or_disconnect" );
-    var2 = getcompleteweaponname( var0 );
-    self giveandfireoffhand( var2 );
-    wait var1;
-    
-    if ( self hasweapon( var2 ) )
-    {
-        self takeweapon( var2 );
-        return;
-    }
-}
-
-// Params 0
-// Size: 0xe, Type: bool
-function hasrespawntoken()
-{
-    var0 = self;
-    return istrue( var0.hasrespawntoken );
-}
-
-// Params 0
-// Size: 0xe, Type: bool
-function hasgulagtoken()
-{
-    var0 = self;
-    return istrue( var0.ÜŸ4,Êv´∆¬ù:Ω÷≤õ );
-}
-
-// Params 0
-// Size: 0xe, Type: bool
-function shouldgetnewspawnpoint()
-{
-    var0 = self;
-    return istrue( var0.shouldgetnewspawnpoint );
-}
-
-// Params 0
-// Size: 0xe, Type: bool
-function should_use_velo_forward()
-{
-    var0 = self;
-    return istrue( var0.should_use_velo_forward );
-}
-
-// Params 0
-// Size: 0xe, Type: bool
-function shouldlink()
-{
-    var0 = self;
-    return istrue( var0.should_enter_combat_after_checking_decoy_grenade );
-}
-
-// Params 1
-// Size: 0x2e
-function should_damage_pavelow_boss( var0 )
-{
-    var1 = self;
-    
-    if ( !isdefined( var0 ) || !isdefined( var1.armorylights ) )
-    {
-        return isdefined( var1.armorylights );
-    }
-    
-    return var0 == var1.armorylights;
-}
-
-// Params 0
-// Size: 0x2d, Type: bool
-function isusinginfilselection()
-{
-    if ( istrue( level.infilcanusemap ) )
-    {
-        switch ( level.infilselectionmethod )
-        {
-            case "exclusion":
-                return true;
-            default:
-                return false;
-        }
-    }
-    
+function ref_12518() {
+  if(self isswitchingweapon() || self isreloading() || self ismantling() || self isthrowinggrenade() || self israisingweapon() || self ismeleeing() || self[[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "isPlayerADS")]]() || istrue(self.tracking_max_health)) {
     return false;
+  }
+
+  var_0 = self getcurrentweapon();
+
+  if(nullweapon(var_0)) {
+    return false;
+  }
+
+  return true;
 }
 
-// Params 0
-// Size: 0x1c
-function handleinfilspawnselectstart()
-{
-    var0 = level.infilselectionmethod;
-    var1 = getinfilspawnselectstartfunc( var0 );
-    
-    if ( !isdefined( var1 ) )
-    {
-        return;
-    }
-    
-    return level [[ var1 ]]();
+function ref_12616(var_0, var_1) {
+  self endon("death_or_disconnect");
+  var_2 = getcompleteweaponname(var_0);
+  self giveandfireoffhand(var_2);
+  wait var_1;
+
+  if(self hasweapon(var_2)) {
+    self takeweapon(var_2);
+    return;
+  }
 }
 
-// Params 0
-// Size: 0x1c
-function handleinfilspawnselectend()
-{
-    var0 = level.infilselectionmethod;
-    var1 = getinfilspawnselectendfunc( var0 );
-    
-    if ( !isdefined( var1 ) )
-    {
-        return;
-    }
-    
-    return level [[ var1 ]]();
+function hasrespawntoken() {
+  var_0 = self;
+  return istrue(var_0.hasrespawntoken);
 }
 
-// Params 1
-// Size: 0x27
-function getinfilspawnselectstartfunc( var0 )
-{
-    if ( !isdefined( level.br_infillocationselectionhandlers ) )
-    {
-        return undefined;
-    }
-    
-    var1 = level.br_infillocationselectionhandlers[ var0 ];
-    
-    if ( !isdefined( var1 ) )
-    {
-        return undefined;
-    }
-    
-    return var1.spawnselectstartfunc;
+function hasgulagtoken() {
+  var_0 = self;
+  return istrue(var_0.hasgulagtoken);
 }
 
-// Params 1
-// Size: 0x27
-function getinfilspawnselectendfunc( var0 )
-{
-    if ( !isdefined( level.br_infillocationselectionhandlers ) )
-    {
-        return undefined;
-    }
-    
-    var1 = level.br_infillocationselectionhandlers[ var0 ];
-    
-    if ( !isdefined( var1 ) )
-    {
-        return undefined;
-    }
-    
-    return var1.spawnselectendfunc;
+function shouldgetnewspawnpoint() {
+  var_0 = self;
+  return istrue(var_0.shouldgetnewspawnpoint);
 }
 
-// Params 1
-// Size: 0x1de
-function cleanac130struct( var0 )
-{
-    if ( isdefined( var0.playerslot1 ) )
-    {
-        if ( isdefined( var0.playerslot1.head ) )
-        {
-            var0.playerslot1.head delete();
-        }
-        
-        if ( isdefined( var0.playerslot1.helmet ) )
-        {
-            var0.playerslot1.helmet delete();
-        }
-        
-        var0.playerslot1 delete();
-    }
-    
-    if ( isdefined( var0.playerslot2 ) )
-    {
-        if ( isdefined( var0.playerslot2.head ) )
-        {
-            var0.playerslot2.head delete();
-        }
-        
-        var0.playerslot2 delete();
-    }
-    
-    if ( isdefined( var0.playerslot3 ) )
-    {
-        var0.playerslot3 delete();
-    }
-    
-    if ( isdefined( var0.playerslot4 ) )
-    {
-        var0.playerslot4 delete();
-    }
-    
-    if ( isdefined( var0.aidoorchief ) )
-    {
-        var0.aidoorchief delete();
-    }
-    
-    if ( isdefined( var0.cameraent ) )
-    {
-        var0.cameraent delete();
-    }
-    
-    if ( isdefined( var0.gas_trigger ) )
-    {
-        var0.gas_trigger delete();
-    }
-    
-    if ( isdefined( var0.playerpositionents ) )
-    {
-        foreach ( var2 in var0.playerpositionents )
-        {
-            var2 delete();
-        }
-    }
-    
-    if ( isdefined( var0.helicratedelete ) )
-    {
-        var0.helicratedelete delete();
-    }
-    
-    if ( isdefined( var0.staticc130 ) && istrue( var0.staticc130.cleanme ) )
-    {
-        var0.staticc130 delete();
-    }
-    
-    if ( isdefined( var0.movingc130 ) && istrue( var0.movingc130.cleanme ) )
-    {
-        if ( isdefined( var0.movingc130.innards ) && istrue( var0.movingc130.innards.cleanme ) )
-        {
-            var0.movingc130.innards delete();
-        }
-        
-        var0.movingc130 delete();
-        return;
-    }
+function should_use_velo_forward() {
+  var_0 = self;
+  return istrue(var_0.should_use_velo_forward);
 }
 
-// Params 0
-// Size: 0xa, Type: bool
-function turn_on_nearby_model_screen()
-{
-    return level.stop_wave == 0;
+function shouldlink() {
+  var_0 = self;
+  return istrue(var_0.should_enter_combat_after_checking_decoy_grenade);
 }
 
-// Params 0
-// Size: 0xb, Type: bool
-function tv_station_intro_already_played()
-{
-    return level.stop_wave == 1;
+function should_damage_pavelow_boss(var_0) {
+  var_1 = self;
+
+  if(!isDefined(var_0) || !isDefined(var_1.armorylights)) {
+    return isDefined(var_1.armorylights);
+  }
+
+  return var_0 == var_1.armorylights;
 }
 
-// Params 0
-// Size: 0xb, Type: bool
-function usefailcapacitymsg()
-{
-    return level.stop_wave == 2;
+function isusinginfilselection() {
+  if(istrue(level.infilcanusemap)) {
+    switch (level.infilselectionmethod) {
+      case "exclusion":
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  return false;
 }
 
-// Params 1
-// Size: 0x7a
-function remove_old_wheelsons( var0 )
-{
-    var1 = 1;
-    
-    if ( isdefined( var0.infilanimindex ) )
-    {
-        var1 = var0.infilanimindex;
-    }
-    
-    if ( tv_station_intro_already_played() )
-    {
-        if ( istrue( var0.stop_counter_beep_sfx_on_bomb_vests ) )
-        {
-            var2 = "cam_orbit_br_chopper_solo";
-            return var2;
-        }
-        
-        var2 = "cam_orbit_br_chopper_squad_player" + var2;
-        return var2;
-    }
-    
-    if ( usefailcapacitymsg() )
-    {
-        if ( istrue( var2.stop_counter_beep_sfx_on_bomb_vests ) )
-        {
-            var2 = "cam_orbit_br_skilo_solo";
-            return var2;
-        }
-        
-        var2 = "cam_orbit_br_skilo_squad_player" + var2;
-        return var2;
-    }
-    
-    var2 = "cam_orbit_br_ac130_player" + var2;
-    return var2;
+function handleinfilspawnselectstart() {
+  var_0 = level.infilselectionmethod;
+  var_1 = getinfilspawnselectstartfunc(var_0);
+
+  if(!isDefined(var_1)) {
+    return;
+  }
+
+  return level[[var_1]]();
 }
 
-// Params 1
-// Size: 0x7e
-function orbitcam( var0 )
-{
-    self endon( "death" );
-    
-    if ( isdefined( level.infil_vignette_anim_type ) && level.infil_vignette_anim_type == "script_model" )
-    {
-        self.angles = var0.angles;
-        self playerlinkto( var0, "" );
-        self playerhide();
-    }
-    
-    if ( isdefined( level.ref_142d1 ) )
-    {
-        scripts\mp\utility\player::_visionsetnaked( level.ref_142d1, 0 );
-    }
-    else
-    {
-        scripts\mp\utility\player::_visionsetnaked( "", 0 );
-    }
-    
-    self setplayerangles( var0.angles );
-    var1 = remove_old_wheelsons( self );
-    self cameraset( var1 );
+function handleinfilspawnselectend() {
+  var_0 = level.infilselectionmethod;
+  var_1 = getinfilspawnselectendfunc(var_0);
+
+  if(!isDefined(var_1)) {
+    return;
+  }
+
+  return level[[var_1]]();
 }
 
-// Params 0
-// Size: 0xa
-function ref_1264d()
-{
-    var0 = self;
-    var0 method_87a9();
+function getinfilspawnselectstartfunc(var_0) {
+  if(!isDefined(level.br_infillocationselectionhandlers)) {
+    return undefined;
+  }
+
+  var_1 = level.br_infillocationselectionhandlers[var_0];
+
+  if(!isDefined(var_1)) {
+    return undefined;
+  }
+
+  return var_1.spawnselectstartfunc;
 }
 
-// Params 2
-// Size: 0x1e2
-function updatebrscoreboardstat( var0, var1 )
-{
-    var2 = self;
-    var3 = 0;
-    var4 = 0;
-    var5 = 0;
-    
-    switch ( var0 )
-    {
-        case "reviveCount":
-            var6 = [ 0, 8, 0 ];
-            var3 = var6[ 0 ];
-            var4 = var6[ 1 ];
-            var5 = var6[ 2 ];
-            var6 = undefined;
-            break;
-        case "objTime":
-            var7 = [ 0, 12, 0 ];
-            var3 = var7[ 0 ];
-            var4 = var7[ 1 ];
-            var5 = var7[ 2 ];
-            var7 = undefined;
-            break;
-        case "tomahDamage":
-            var8 = [ 0, 16, 0 ];
-            var3 = var8[ 0 ];
-            var4 = var8[ 1 ];
-            var5 = var8[ 2 ];
-            var8 = undefined;
-            break;
-        case "respawnInSeconds":
-            var9 = [ 0, 7, 1 ];
-            var3 = var9[ 0 ];
-            var4 = var9[ 1 ];
-            var5 = var9[ 2 ];
-            var9 = undefined;
-            break;
-        case "isInInfilPlane":
-            var10 = [ 7, 1, 1 ];
-            var3 = var10[ 0 ];
-            var4 = var10[ 1 ];
-            var5 = var10[ 2 ];
-            var10 = undefined;
-            break;
-        case "armorHealthRatio":
-            var11 = [ 0, 8, 2 ];
-            var3 = var11[ 0 ];
-            var4 = var11[ 1 ];
-            var5 = var11[ 2 ];
-            var11 = undefined;
-            break;
-        case "missionsCompleted":
-            var12 = [ 8, 4, 2 ];
-            var3 = var12[ 0 ];
-            var4 = var12[ 1 ];
-            var5 = var12[ 2 ];
-            var12 = undefined;
-            break;
-        case "bunkerKeycardType":
-            var13 = [ 12, 4, 2 ];
-            var3 = var13[ 0 ];
-            var4 = var13[ 1 ];
-            var5 = var13[ 2 ];
-            var13 = undefined;
-            break;
-        case "damageDealt":
-            var14 = [ 0, 16, 3 ];
-            var3 = var14[ 0 ];
-            var4 = var14[ 1 ];
-            var5 = var14[ 2 ];
-            var14 = undefined;
-            break;
-        case "isBeingRevived":
-        case "isDowned":
-        case "activeSpectators":
-        case "jumpMasterState":
-        case "isRespawning":
-        case "cleanups":
-        case "playersDowned":
-            return;
-        default:
-            return;
-    }
-    
-    packstatintoextrainfo( var2, var1, var3, var4, var5 );
+function getinfilspawnselectendfunc(var_0) {
+  if(!isDefined(level.br_infillocationselectionhandlers)) {
+    return undefined;
+  }
+
+  var_1 = level.br_infillocationselectionhandlers[var_0];
+
+  if(!isDefined(var_1)) {
+    return undefined;
+  }
+
+  return var_1.spawnselectendfunc;
 }
 
-// Params 4
-// Size: 0xc3
-function packstatintoextrainfo( var0, var1, var2, var3 )
-{
-    var4 = self;
-    var5 = [ var4.extrascore0, var4.extrascore1, var4.extrascore2, var4.extrascore3 ];
-    var6 = int( pow( 2, var2 ) ) - 1;
-    var7 = ( var0 & var6 ) << var1;
-    var8 = ~( var6 << var1 );
-    var9 = var5[ var3 ];
-    var10 = var9 & var8;
-    var11 = var10 + var7;
-    
-    switch ( var3 )
-    {
-        case 0:
-            var4.extrascore0 = var11;
-            break;
-        case 1:
-            var4.extrascore1 = var11;
-            break;
-        case 2:
-            var4.extrascore2 = var11;
-            break;
-        case 3:
-            var4.extrascore3 = var11;
-            break;
-        default:
-            break;
+function cleanac130struct(var_0) {
+  if(isDefined(var_0.playerslot1)) {
+    if(isDefined(var_0.playerslot1.head)) {
+      var_0.playerslot1.head delete();
     }
+
+    if(isDefined(var_0.playerslot1.helmet)) {
+      var_0.playerslot1.helmet delete();
+    }
+
+    var_0.playerslot1 delete();
+  }
+
+  if(isDefined(var_0.playerslot2)) {
+    if(isDefined(var_0.playerslot2.head)) {
+      var_0.playerslot2.head delete();
+    }
+
+    var_0.playerslot2 delete();
+  }
+
+  if(isDefined(var_0.playerslot3)) {
+    var_0.playerslot3 delete();
+  }
+
+  if(isDefined(var_0.playerslot4)) {
+    var_0.playerslot4 delete();
+  }
+
+  if(isDefined(var_0.aidoorchief)) {
+    var_0.aidoorchief delete();
+  }
+
+  if(isDefined(var_0.cameraent)) {
+    var_0.cameraent delete();
+  }
+
+  if(isDefined(var_0.gas_trigger)) {
+    var_0.gas_trigger delete();
+  }
+
+  if(isDefined(var_0.playerpositionents)) {
+    foreach(var_2 in var_0.playerpositionents) {
+      var_2 delete();
+    }
+  }
+
+  if(isDefined(var_0.helicratedelete)) {
+    var_0.helicratedelete delete();
+  }
+
+  if(isDefined(var_0.staticc130) && istrue(var_0.staticc130.cleanme)) {
+    var_0.staticc130 delete();
+  }
+
+  if(isDefined(var_0.movingc130) && istrue(var_0.movingc130.cleanme)) {
+    if(isDefined(var_0.movingc130.innards) && istrue(var_0.movingc130.innards.cleanme)) {
+      var_0.movingc130.innards delete();
+    }
+
+    var_0.movingc130 delete();
+    return;
+  }
 }
 
-// Params 2
-// Size: 0x6e
-function updatebrextradata( var0, var1 )
-{
-    var2 = self;
-    var3 = 0;
-    var4 = 0;
-    
-    switch ( var0 )
-    {
-        case "selectedKillstreakId":
-            var5 = [ 0, 4 ];
-            var3 = var5[ 0 ];
-            var4 = var5[ 1 ];
-            var5 = undefined;
-            break;
-        case "armorPlateCount":
-            var6 = [ 4, 4 ];
-            var3 = var6[ 0 ];
-            var4 = var6[ 1 ];
-            var6 = undefined;
-            break;
-        default:
-            return;
-    }
-    
-    packdataintoextrainfo( var2, var1, var3, var4 );
+function turn_on_nearby_model_screen() {
+  return level.stop_wave == 0;
 }
 
-// Params 3
-// Size: 0x48
-function packdataintoextrainfo( var0, var1, var2 )
-{
-    var1 = 20 + var1;
-    
-    if ( var1 + var2 > 31 )
-    {
-        return;
-    }
-    
-    var3 = int( pow( 2, var2 ) ) - 1;
-    var4 = ( var0 & var3 ) << var1;
-    var5 = ~( var3 << var1 );
-    var6 = self.game_extrainfo;
-    var7 = var6 & var5;
-    var8 = var7 + var4;
-    self.game_extrainfo = var8;
+function tv_station_intro_already_played() {
+  return level.stop_wave == 1;
 }
 
-// Params 1
-// Size: 0x28
-function ref_1319e( var0 )
-{
-    if ( istrue( var0 ) )
-    {
-        self.game_extrainfo |= 512;
-        return;
-    }
-    
-    self.game_extrainfo &= ~512;
+function usefailcapacitymsg() {
+  return level.stop_wave == 2;
 }
 
-// Params 1
-// Size: 0x28
-function ref_1319c( var0 )
-{
-    if ( istrue( var0 ) )
-    {
-        self.game_extrainfo |= 1024;
-        return;
+function remove_old_wheelsons(var_0) {
+  var_1 = 1;
+
+  if(isDefined(var_0.infilanimindex)) {
+    var_1 = var_0.infilanimindex;
+  }
+
+  if(tv_station_intro_already_played()) {
+    if(istrue(var_0.stop_counter_beep_sfx_on_bomb_vests)) {
+      var_2 = "cam_orbit_br_chopper_solo";
+      return var_2;
     }
-    
-    self.game_extrainfo &= ~1024;
+
+    var_2 = "cam_orbit_br_chopper_squad_player" + var_2;
+    return var_2;
+  }
+
+  if(usefailcapacitymsg()) {
+    if(istrue(var_2.stop_counter_beep_sfx_on_bomb_vests)) {
+      var_2 = "cam_orbit_br_skilo_solo";
+      return var_2;
+    }
+
+    var_2 = "cam_orbit_br_skilo_squad_player" + var_2;
+    return var_2;
+  }
+
+  var_2 = "cam_orbit_br_ac130_player" + var_2;
+  return var_2;
 }
 
-// Params 1
-// Size: 0x28
-function ref_131a6( var0 )
-{
-    if ( istrue( var0 ) )
-    {
-        self.game_extrainfo |= 2048;
-        return;
-    }
-    
-    self.game_extrainfo &= ~2048;
+function orbitcam(var_0) {
+  self endon("death");
+
+  if(isDefined(level.infil_vignette_anim_type) && level.infil_vignette_anim_type == "script_model") {
+    self.angles = var_0.angles;
+    self playerlinkTo(var_0, "");
+    self playerhide();
+  }
+
+  if(isDefined(level.ref_142d1)) {
+    scripts\mp\utility\player::_visionsetnaked(level.ref_142d1, 0);
+  } else {
+    scripts\mp\utility\player::_visionsetnaked("", 0);
+  }
+
+  self setplayerangles(var_0.angles);
+  var_1 = remove_old_wheelsons(self);
+  self cameraset(var_1);
 }
 
-// Params 1
-// Size: 0x28
-function ref_131a4( var0 )
-{
-    if ( istrue( var0 ) )
-    {
-        self.game_extrainfo |= 8192;
-        return;
-    }
-    
-    self.game_extrainfo &= ~8192;
+function ref_1264d() {
+  var_0 = self;
+  var_0 method_87a9();
 }
 
-// Params 1
-// Size: 0x1c, Type: bool
-function updatelootleadersonfixedinterval( var0 )
-{
-    return isdefined( var0.game_extrainfo ) && var0.game_extrainfo & 8192;
+function updatebrscoreboardstat(var_0, var_1) {
+  var_2 = self;
+  var_3 = 0;
+  var_4 = 0;
+  var_5 = 0;
+
+  switch (var_0) {
+    case "reviveCount":
+      var_6 = [0, 8, 0];
+      var_3 = var_6[0];
+      var_4 = var_6[1];
+      var_5 = var_6[2];
+      var_6 = undefined;
+      break;
+    case "objTime":
+      var_7 = [0, 12, 0];
+      var_3 = var_7[0];
+      var_4 = var_7[1];
+      var_5 = var_7[2];
+      var_7 = undefined;
+      break;
+    case "tomahDamage":
+      var_8 = [0, 16, 0];
+      var_3 = var_8[0];
+      var_4 = var_8[1];
+      var_5 = var_8[2];
+      var_8 = undefined;
+      break;
+    case "respawnInSeconds":
+      var_9 = [0, 7, 1];
+      var_3 = var_9[0];
+      var_4 = var_9[1];
+      var_5 = var_9[2];
+      var_9 = undefined;
+      break;
+    case "isInInfilPlane":
+      var_10 = [7, 1, 1];
+      var_3 = var_10[0];
+      var_4 = var_10[1];
+      var_5 = var_10[2];
+      var_10 = undefined;
+      break;
+    case "armorHealthRatio":
+      var_11 = [0, 8, 2];
+      var_3 = var_11[0];
+      var_4 = var_11[1];
+      var_5 = var_11[2];
+      var_11 = undefined;
+      break;
+    case "missionsCompleted":
+      var_12 = [8, 4, 2];
+      var_3 = var_12[0];
+      var_4 = var_12[1];
+      var_5 = var_12[2];
+      var_12 = undefined;
+      break;
+    case "bunkerKeycardType":
+      var_13 = [12, 4, 2];
+      var_3 = var_13[0];
+      var_4 = var_13[1];
+      var_5 = var_13[2];
+      var_13 = undefined;
+      break;
+    case "damageDealt":
+      var_14 = [0, 16, 3];
+      var_3 = var_14[0];
+      var_4 = var_14[1];
+      var_5 = var_14[2];
+      var_14 = undefined;
+      break;
+    case "isBeingRevived":
+    case "isDowned":
+    case "activeSpectators":
+    case "jumpMasterState":
+    case "isRespawning":
+    case "cleanups":
+    case "playersDowned":
+      return;
+    default:
+      return;
+  }
+
+  packstatintoextrainfo(var_2, var_1, var_3, var_4, var_5);
 }
 
-// Params 1
-// Size: 0x28
-function ref_1315c( var0 )
-{
-    if ( istrue( var0 ) )
-    {
-        self.game_extrainfo |= 16384;
-        return;
-    }
-    
-    self.game_extrainfo &= ~16384;
+function packstatintoextrainfo(var_0, var_1, var_2, var_3) {
+  var_4 = self;
+  var_5 = [var_4.extrascore0, var_4.extrascore1, var_4.extrascore2, var_4.extrascore3];
+  var_6 = int(pow(2, var_2)) - 1;
+  var_7 = (var_0 &var_6) << var_1;
+  var_8 = ~(var_6 << var_1);
+  var_9 = var_5[var_3];
+  var_10 = var_9 &var_8;
+  var_11 = var_10 + var_7;
+
+  switch (var_3) {
+    case 0:
+      var_4.extrascore0 = var_11;
+      break;
+    case 1:
+      var_4.extrascore1 = var_11;
+      break;
+    case 2:
+      var_4.extrascore2 = var_11;
+      break;
+    case 3:
+      var_4.extrascore3 = var_11;
+      break;
+    default:
+      break;
+  }
 }
 
-// Params 1
-// Size: 0x28
-function ref_1315b( var0 )
-{
-    if ( istrue( var0 ) )
-    {
-        self.game_extrainfo |= 32768;
-        return;
-    }
-    
-    self.game_extrainfo &= ~32768;
+function updatebrextradata(var_0, var_1) {
+  var_2 = self;
+  var_3 = 0;
+  var_4 = 0;
+
+  switch (var_0) {
+    case "selectedKillstreakId":
+      var_5 = [0, 4];
+      var_3 = var_5[0];
+      var_4 = var_5[1];
+      var_5 = undefined;
+      break;
+    case "armorPlateCount":
+      var_6 = [4, 4];
+      var_3 = var_6[0];
+      var_4 = var_6[1];
+      var_6 = undefined;
+      break;
+    default:
+      return;
+  }
+
+  packdataintoextrainfo(var_2, var_1, var_3, var_4);
 }
 
-// Params 0
-// Size: 0x43
-function incrementplayersdownedstat()
-{
-    var0 = self;
-    
-    if ( !isdefined( var0.br_playersdowned ) )
-    {
-        var0.br_playersdowned = 0;
-    }
-    
-    var0.br_playersdowned++;
-    updatebrscoreboardstat( var0, "playersDowned", var0.br_playersdowned );
-    var0 scripts\mp\utility\stats::incpersstat( "downs", 1 );
+function packdataintoextrainfo(var_0, var_1, var_2) {
+  var_1 = 20 + var_1;
+
+  if(var_1 + var_2 > 31) {
+    return;
+  }
+
+  var_3 = int(pow(2, var_2)) - 1;
+  var_4 = (var_0 &var_3) << var_1;
+  var_5 = ~(var_3 << var_1);
+  var_6 = self.game_extrainfo;
+  var_7 = var_6 &var_5;
+  var_8 = var_7 + var_4;
+  self.game_extrainfo = var_8;
 }
 
-// Params 1
-// Size: 0x7a
-function sethasgasmaskextrainfo( var0 )
-{
-    if ( var0 == 1 )
-    {
-        self.game_extrainfo |= 65536;
-        self.game_extrainfo &= ~131072;
-        return;
-    }
-    
-    if ( var0 == 2 )
-    {
-        self.game_extrainfo &= ~65536;
-        self.game_extrainfo |= 131072;
-        return;
-    }
-    
-    self.game_extrainfo &= ~65536;
+function ref_1319e(var_0) {
+  if(istrue(var_0)) {
+    self.game_extrainfo |= 512;
+    return;
+  }
+
+  self.game_extrainfo &= ~512;
+}
+
+function ref_1319c(var_0) {
+  if(istrue(var_0)) {
+    self.game_extrainfo |= 1024;
+    return;
+  }
+
+  self.game_extrainfo &= ~1024;
+}
+
+function ref_131a6(var_0) {
+  if(istrue(var_0)) {
+    self.game_extrainfo |= 2048;
+    return;
+  }
+
+  self.game_extrainfo &= ~2048;
+}
+
+function ref_131a4(var_0) {
+  if(istrue(var_0)) {
+    self.game_extrainfo |= 8192;
+    return;
+  }
+
+  self.game_extrainfo &= ~8192;
+}
+
+function updatelootleadersonfixedinterval(var_0) {
+  return isDefined(var_0.game_extrainfo) && var_0.game_extrainfo & 8192;
+}
+
+function ref_1315c(var_0) {
+  if(istrue(var_0)) {
+    self.game_extrainfo |= 16384;
+    return;
+  }
+
+  self.game_extrainfo &= ~16384;
+}
+
+function ref_1315b(var_0) {
+  if(istrue(var_0)) {
+    self.game_extrainfo |= 32768;
+    return;
+  }
+
+  self.game_extrainfo &= ~32768;
+}
+
+function incrementplayersdownedstat() {
+  var_0 = self;
+
+  if(!isDefined(var_0.br_playersdowned)) {
+    var_0.br_playersdowned = 0;
+  }
+
+  var_0.br_playersdowned++;
+  updatebrscoreboardstat(var_0, "playersDowned", var_0.br_playersdowned);
+  var_0 scripts\mp\utility\stats::incpersstat("downs", 1);
+}
+
+function sethasgasmaskextrainfo(var_0) {
+  if(var_0 == 1) {
+    self.game_extrainfo |= 65536;
     self.game_extrainfo &= ~131072;
+    return;
+  }
+
+  if(var_0 == 2) {
+    self.game_extrainfo &= ~65536;
+    self.game_extrainfo |= 131072;
+    return;
+  }
+
+  self.game_extrainfo &= ~65536;
+  self.game_extrainfo &= ~131072;
 }
 
-// Params 1
-// Size: 0x2c
-function sethasplatepouchextrainfo( var0 )
-{
-    if ( istrue( var0 ) )
-    {
-        self.game_extrainfo |= 262144;
-        return;
-    }
-    
-    self.game_extrainfo &= ~262144;
+function sethasplatepouchextrainfo(var_0) {
+  if(istrue(var_0)) {
+    self.game_extrainfo |= 262144;
+    return;
+  }
+
+  self.game_extrainfo &= ~262144;
 }
 
-// Params 1
-// Size: 0x2c
-function setcanusegulagextrainfo( var0 )
-{
-    if ( istrue( var0 ) )
-    {
-        self.game_extrainfo |= 524288;
-        return;
-    }
-    
-    self.game_extrainfo &= ~524288;
+function setcanusegulagextrainfo(var_0) {
+  if(istrue(var_0)) {
+    self.game_extrainfo |= 524288;
+    return;
+  }
+
+  self.game_extrainfo &= ~524288;
 }
 
-// Params 0
-// Size: 0x1c, Type: bool
-function updatedragonsbreath()
-{
-    var0 = self;
-    return istrue( var0.tutorial_usingparachute ) && var0.game_extrainfo & 64;
+function updatedragonsbreath() {
+  var_0 = self;
+  return istrue(var_0.tutorial_usingparachute) && var_0.game_extrainfo & 64;
 }
 
-// Params 6
-// Size: 0x53
-function dmztutdropcash( var0, var1, var2, var3, var4, var5 )
-{
-    foreach ( var7 in level.teamdata[ var1 ][ "players" ] )
-    {
-        if ( !isdefined( var7 ) )
-        {
-            continue;
-        }
-        
-        if ( var7 != var2 )
-        {
-            dmztut_endgamewithreward( var0, var7, var3, var4, var5 );
-        }
+function dmztutdropcash(var_0, var_1, var_2, var_3, var_4, var_5) {
+  foreach(var_7 in level.teamdata[var_1]["players"]) {
+    if(!isDefined(var_7)) {
+      continue;
     }
+
+    if(var_7 != var_2) {
+      dmztut_endgamewithreward(var_0, var_7, var_3, var_4, var_5);
+    }
+  }
 }
 
-// Params 6
-// Size: 0x21
-function dmztut_luicallback( var0, var1, var2, var3, var4, var5 )
-{
-    brleaderdialog( var0, var2, level.teamdata[ var1 ][ "players" ], var5, var3, var4 );
+function dmztut_luicallback(var_0, var_1, var_2, var_3, var_4, var_5) {
+  brleaderdialog(var_0, var_2, level.teamdata[var_1]["players"], var_5, var_3, var_4);
 }
 
-// Params 7
-// Size: 0x4e
-function brleaderdialog( var0, var1, var2, var3, var4, var5, var6 )
-{
-    if ( !isdefined( game[ "dialog" ][ var0 ] ) )
-    {
-        return;
-    }
-    
-    var7 = level.players;
-    
-    if ( isdefined( var2 ) )
-    {
-        var7 = var2;
-    }
-    
-    for ( var8 = 0; var8 < var7.size ; var8++ )
-    {
-        var9 = var7[ var8 ];
-        thread dmztut_endgamewithreward( var0, var9, var1, var3, var4, var5, var6 );
-    }
+function brleaderdialog(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  if(!isDefined(game["dialog"][var_0])) {
+    return;
+  }
+
+  var_7 = level.players;
+
+  if(isDefined(var_2)) {
+    var_7 = var_2;
+  }
+
+  for(var_8 = 0; var_8 < var_7.size; var_8++) {
+    var_9 = var_7[var_8];
+    thread dmztut_endgamewithreward(var_0, var_9, var_1, var_3, var_4, var_5, var_6);
+  }
 }
 
-// Params 2
-// Size: 0x97, Type: bool
-function ref_11c7d( var0, var1 )
-{
-    if ( !isdefined( var1 ) )
-    {
-        var1 = 1;
+function ref_11c7d(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = 1;
+  }
+
+  if(istrue(var_1) && isplayeringulag()) {
+    return true;
+  }
+
+  if(istrue(self.ref_12742)) {
+    return true;
+  }
+
+  if(tutorial_playSound()) {
+    if(istrue(self.ref_12749)) {
+      return true;
     }
-    
-    if ( istrue( var1 ) && isplayeringulag() )
-    {
+
+    if(var_0 == "deploy_squad_leader" || var_0 == "prematch_enter") {
+      return true;
+    }
+
+    if((var_0 == "circle_closing" || var_0 == "first_circle") && !istrue(level.ref_126d5)) {
+      return true;
+    }
+  }
+
+  var_2 = level.maxteamsize == 1;
+
+  if(var_2) {
+    switch (var_0) {
+      case "deploy_squad_leader":
         return true;
     }
-    
-    if ( istrue( self.ref_12742 ) )
-    {
-        return true;
-    }
-    
-    if ( tutorial_playsound() )
-    {
-        if ( istrue( self.ref_12749 ) )
-        {
-            return true;
-        }
-        
-        if ( var0 == "deploy_squad_leader" || var0 == "prematch_enter" )
-        {
-            return true;
-        }
-        
-        if ( ( var0 == "circle_closing" || var0 == "first_circle" ) && !istrue( level.ref_126d5 ) )
-        {
-            return true;
-        }
-    }
-    
-    var2 = level.maxteamsize == 1;
-    
-    if ( var2 )
-    {
-        switch ( var0 )
-        {
-            case "deploy_squad_leader":
-                return true;
-        }
-    }
-    
-    return false;
+  }
+
+  return false;
 }
 
-// Params 1
-// Size: 0x40
-function disableannouncer( var0 )
-{
-    var1 = var0.defaultoperatorteam;
-    
-    if ( isai( var0 ) )
-    {
-        var1 = var0.botoperatorteam;
-    }
-    
-    if ( validtousesticker() || tutorial_playsound() )
-    {
-        var1 = "allies";
-    }
-    
-    if ( !isplayer( var0 ) )
-    {
-        var1 = "axis";
-    }
-    
-    return var1;
+function disableannouncer(var_0) {
+  var_1 = var_0.defaultoperatorteam;
+
+  if(isai(var_0)) {
+    var_1 = var_0.botoperatorteam;
+  }
+
+  if(validtousesticker() || tutorial_playSound()) {
+    var_1 = "allies";
+  }
+
+  if(!isPlayer(var_0)) {
+    var_1 = "axis";
+  }
+
+  return var_1;
 }
 
-// Params 7
-// Size: 0x179
-function dmztut_endgamewithreward( var0, var1, var2, var3, var4, var5, var6 )
-{
-    var1 endon( "disconnect" );
-    level endon( "game_ended" );
-    
-    if ( !isdefined( var1 ) )
-    {
-        return;
+function dmztut_endgamewithreward(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_1 endon("disconnect");
+  level endon("game_ended");
+
+  if(!isDefined(var_1)) {
+    return;
+  }
+
+  if(!isalive(var_1) && !istrue(var_3)) {
+    return;
+  }
+
+  if(var_1 issplitscreenplayer() && !var_1 issplitscreenplayerprimary()) {
+    return;
+  }
+
+  if(ref_11c7d(var_1, var_0, var_2)) {
+    return;
+  }
+
+  if(validtousesticker() || tutorial_playSound()) {
+    if(var_0 == "mission_scav_accept" || var_0 == "mission_obj_next_nptarget") {
+      return;
     }
-    
-    if ( !isalive( var1 ) && !istrue( var3 ) )
-    {
-        return;
+  }
+
+  if(isDefined(var_6)) {
+    var_7 = var_6;
+  } else {
+    jumpiffalse(var_2 scripts\cp_mp\utility\game_utility::ref_140a8()) LOC_00000091;
+    var_7 = "bchr";
+    goto LOC_000000a8;
+  }
+
+  LOC_000000a8:
+    var_9 = "dx_bra_" + var_7 + "_" + game["dialog"][var_2];
+
+  if(istrue(level.vehicle_collision_getleveldata)) {
+    var_10 = "dx_brm_" + var_7 + "_" + game["dialog"][var_2];
+
+    if(soundexists(var_10)) {
+      var_9 = var_10;
     }
-    
-    if ( var1 issplitscreenplayer() && !var1 issplitscreenplayerprimary() )
-    {
-        return;
+  } else if(isDefined(level.overridevoice)) {
+    var_11 = "dx_bra_" + level.overridevoice + "_" + game["dialog"][var_2];
+
+    if(soundexists(var_11)) {
+      var_9 = var_11;
     }
-    
-    if ( ref_11c7d( var1, var0, var2 ) )
-    {
-        return;
+  }
+
+  if(isDefined(game["dialogForAllTeams"]) && istrue(game["dialogForAllTeams"][var_2])) {
+    var_9 = game["dialog"][var_2];
+  }
+
+  if(isDefined(var_9)) {
+    var_9 = tolower(var_9);
+    var_12 = lookupsoundlength(var_9, 1) / 1000;
+
+    if(isDefined(var_6)) {
+      wait var_6;
     }
-    
-    if ( validtousesticker() || tutorial_playsound() )
-    {
-        if ( var0 == "mission_scav_accept" || var0 == "mission_obj_next_nptarget" )
-        {
-            return;
-        }
-    }
-    
-    if ( isdefined( var6 ) )
-    {
-        var7 = var6;
-    }
-    else
-    {
-        jumpiffalse(var2 scripts\cp_mp\utility\game_utility::ref_140a8()) LOC_00000091;
-        var7 = "bchr";
-        goto LOC_000000a8;
-    }
-    
-LOC_000000a8:
-    var9 = "dx_bra_" + var7 + "_" + game[ "dialog" ][ var2 ];
-    
-    if ( istrue( level.vehicle_collision_getleveldata ) )
-    {
-        var10 = "dx_brm_" + var7 + "_" + game[ "dialog" ][ var2 ];
-        
-        if ( soundexists( var10 ) )
-        {
-            var9 = var10;
-        }
-    }
-    else if ( isdefined( level.¢∑Œ/Û%úä¯h¥?© ) )
-    {
-        var11 = "dx_bra_" + level.¢∑Œ/Û%úä¯h¥?© + "_" + game[ "dialog" ][ var2 ];
-        
-        if ( soundexists( var11 ) )
-        {
-            var9 = var11;
-        }
-    }
-    
-    if ( isdefined( game[ "dialogForAllTeams" ] ) && istrue( game[ "dialogForAllTeams" ][ var2 ] ) )
-    {
-        var9 = game[ "dialog" ][ var2 ];
-    }
-    
-    if ( isdefined( var9 ) )
-    {
-        var9 = tolower( var9 );
-        var12 = lookupsoundlength( var9, 1 ) / 1000;
-        
-        if ( isdefined( var6 ) )
-        {
-            wait var6;
-        }
-        
-        var3 queuedialogforplayer( var9, var2, var12 );
-        return;
-    }
+
+    var_3 queuedialogforplayer(var_9, var_2, var_12);
+    return;
+  }
 }
 
-// Params 2
-// Size: 0x30
-function endgamevo( var0, var1 )
-{
-    game[ "dialog" ][ var0 ] = var1;
-    
-    if ( !isdefined( game[ "dialogForAllTeams" ] ) )
-    {
-        game[ "dialogForAllTeams" ] = [];
+function endgamevo(var_0, var_1) {
+  game["dialog"][var_0] = var_1;
+
+  if(!isDefined(game["dialogForAllTeams"])) {
+    game["dialogForAllTeams"] = [];
+  }
+
+  game["dialogForAllTeams"][var_0] = 1;
+}
+
+function uniquelootitemid() {
+  return isDefined(level.script) && level.script == "mp_bm_tut";
+}
+
+function validtousesticker() {
+  var_0 = getDvar("wz_tutorial_map", "mp_br_tut2");
+  return isDefined(level.script) && (level.script == var_0 || level.script == "mp_lc_br_tut");
+}
+
+function tutorial_playSound() {
+  return isDefined(level.script) && level.script == "mp_br_quarry";
+}
+
+function uniquelootcallbacks() {
+  return isDefined(level.script) && level.script == "mp_br_money";
+}
+
+function turret_headicon() {
+  return validtousesticker() || uniquelootitemid() || tutorial_playSound() || uniquelootcallbacks();
+}
+
+function ref_12570() {
+  var_0 = self getweaponslistprimaries();
+
+  foreach(var_2 in var_0) {
+    var_3 = var_2.basename;
+
+    if(weaponclass(var_2) == "pistol" && var_3 != "iw8_fists_mp" && var_3 != "iw8_me_riotshield_mp" && var_3 != "iw8_knifestab_mp" && var_3 != "iw8_throwingknife_fire_melee_mp" && var_3 != "iw8_throwingknife_electric_melee_mp" && var_3 != "iw8_throwingknife_drill_melee_mp") {
+      return var_2;
     }
-    
-    game[ "dialogForAllTeams" ][ var0 ] = 1;
+  }
 }
 
-// Params 0
-// Size: 0x17, Type: bool
-function uniquelootitemid()
-{
-    return isdefined( level.script ) && level.script == "mp_bm_tut";
+function ref_126ed() {
+  if(istrue(self.ref_12875)) {
+    self waittill("playerPrestreamComplete");
+    return;
+  }
 }
 
-// Params 0
-// Size: 0x30, Type: bool
-function validtousesticker()
-{
-    var0 = getdvar( "wz_tutorial_map", "mp_br_tut2" );
-    return isdefined( level.script ) && ( level.script == var0 || level.script == "mp_lc_br_tut" );
+function getinfilspawnoffset() {
+  if(istrue(level.infilcanusemap)) {
+    return getdvarfloat("scr_map_selection_height_offset", 2000);
+  }
+
+  return getdvarfloat("scr_br_dropSpawnOffsetMinZ", 12000);
 }
 
-// Params 0
-// Size: 0x17, Type: bool
-function tutorial_playsound()
-{
-    return isdefined( level.script ) && level.script == "mp_br_quarry";
+function ref_126b8(var_0, var_1) {
+  if(!isDefined(var_1)) {
+    var_1 = getinfilspawnoffset();
+  }
+
+  var_2 = getdvarint("scr_br_streamDistFromGround", 4500);
+
+  if(var_2 >= 0) {
+    var_3 = var_1 - var_2;
+    var_4 = scripts\engine\trace::create_contents(0, 1, 1, 1, 0, 0, 1);
+    var_0 = scripts\engine\utility::drop_to_ground(var_0, 0, -1 * var_3, undefined, var_4);
+  }
+
+  return var_0;
 }
 
-// Params 0
-// Size: 0x17, Type: bool
-function uniquelootcallbacks()
-{
-    return isdefined( level.script ) && level.script == "mp_br_money";
+function ref_126b9(var_0, var_1, var_2, var_3, var_4) {
+  thread ref_126ba(var_0, var_1, var_2, var_3, var_4);
 }
 
-// Params 0
-// Size: 0x1d, Type: bool
-function turret_headicon()
-{
-    return validtousesticker() || uniquelootitemid() || tutorial_playsound() || uniquelootcallbacks();
-}
+function ref_126ba(var_0, var_1, var_2, var_3, var_4) {
+  self notify("playerPrestreamLocationWait");
+  self endon("playerPrestreamLocationWait");
+  self endon("disconnect");
+  var_5 = !self calloutmarkerping_getEnt();
 
-// Params 0
-// Size: 0x7f
-function ref_12570()
-{
-    var0 = self getweaponslistprimaries();
-    
-    foreach ( var2 in var0 )
-    {
-        var3 = var2.basename;
-        
-        if ( weaponclass( var2 ) == "pistol" && var3 != "iw8_fists_mp" && var3 != "iw8_me_riotshield_mp" && var3 != "iw8_knifestab_mp" && var3 != "iw8_throwingknife_fire_melee_mp" && var3 != "iw8_throwingknife_electric_melee_mp" && var3 != "iw8_throwingknife_drill_melee_mp" )
-        {
-            return var2;
-        }
-    }
-}
+  if(!isDefined(var_1)) {
+    var_1 = relic_nuketimer_gettimeformission();
+  }
 
-// Params 0
-// Size: 0x14
-function ref_126ed()
-{
-    if ( istrue( self.ref_12875 ) )
-    {
-        self waittill( "playerPrestreamComplete" );
-        return;
-    }
-}
+  var_6 = gettime() + var_1;
+  self.ref_12875 = 1;
 
-// Params 0
-// Size: 0x23
-function getinfilspawnoffset()
-{
-    if ( istrue( level.infilcanusemap ) )
-    {
-        return getdvarfloat( "scr_map_selection_height_offset", 2000 );
-    }
-    
-    return getdvarfloat( "scr_br_dropSpawnOffsetMinZ", 12000 );
-}
-
-// Params 2
-// Size: 0x4c
-function ref_126b8( var0, var1 )
-{
-    if ( !isdefined( var1 ) )
-    {
-        var1 = getinfilspawnoffset();
-    }
-    
-    var2 = getdvarint( "scr_br_streamDistFromGround", 4500 );
-    
-    if ( var2 >= 0 )
-    {
-        var3 = var1 - var2;
-        var4 = scripts\engine\trace::create_contents( 0, 1, 1, 1, 0, 0, 1 );
-        var0 = scripts\engine\utility::drop_to_ground( var0, 0, -1 * var3, undefined, var4 );
-    }
-    
-    return var0;
-}
-
-// Params 5
-// Size: 0x13
-function ref_126b9( var0, var1, var2, var3, var4 )
-{
-    thread ref_126ba( var0, var1, var2, var3, var4 );
-}
-
-// Params 5
-// Size: 0x11d
-function ref_126ba( var0, var1, var2, var3, var4 )
-{
-    self notify( "playerPrestreamLocationWait" );
-    self endon( "playerPrestreamLocationWait" );
-    self endon( "disconnect" );
-    var5 = !self calloutmarkerping_getent();
-    
-    if ( !isdefined( var1 ) )
-    {
-        var1 = relic_nuketimer_gettimeformission();
-    }
-    
-    var6 = gettime() + var1;
-    self.ref_12875 = 1;
-    
-    if ( !self ispredictedstreamposready() )
-    {
-        self clearpredictedstreampos();
-    }
-    
-    var7 = gettime();
-    
-    if ( var5 )
-    {
-        while ( !istrue( self.pers[ "streamSyncComplete" ] ) && gettime() < var6 )
-        {
-            waitframe();
-        }
-    }
-    
-    self predictstreampos( var0, 1 );
-    
-    if ( istrue( var2 ) )
-    {
-        self loadcustomizationplayerview( self );
-    }
-    
-    if ( var5 )
-    {
-        waitframe();
-        
-        while ( ( !self ispredictedstreamposready() || istrue( var2 ) && !self hasloadedcustomizationplayerview( self ) ) && gettime() < var6 )
-        {
-            waitframe();
-        }
-        
-        if ( istrue( var3 ) )
-        {
-            var9 = gettime() + getdvarint( "scr_br_stream_hint_extra_time", 5000 );
-            
-            while ( gettime() < var9 )
-            {
-                waitframe();
-            }
-        }
-        
-        if ( isdefined( var4 ) )
-        {
-            var10 = getdvarint( "keep_alive_update_time", 2000 );
-            var6 = gettime() + var4;
-            var11 = 0;
-            
-            while ( gettime() < var6 )
-            {
-                if ( gettime() > var11 )
-                {
-                    self predictstreampos( var0, 1 );
-                    var11 = gettime() + var10;
-                }
-                
-                waitframe();
-            }
-        }
-    }
-    
-    self.ref_12875 = undefined;
-    self notify( "playerPrestreamComplete" );
-}
-
-// Params 0
-// Size: 0xe
-function relic_nuketimer_gettimeformission()
-{
-    return getdvarint( "scr_br_stream_hint_timeout", 9000 );
-}
-
-// Params 0
-// Size: 0xf
-function ref_1252b()
-{
-    self notify( "playerPrestreamLocationWait" );
+  if(!self ispredictedstreamposready()) {
     self clearpredictedstreampos();
-}
+  }
 
-// Params 0
-// Size: 0x105
-function ref_1264c()
-{
-    self cancelmantle();
-    
-    if ( self isskydiving() )
-    {
-        self skydive_interrupt();
+  var_7 = gettime();
+
+  if(var_5) {
+    while(!istrue(self.pers["streamSyncComplete"]) && gettime() < var_6) {
+      waitframe();
     }
-    
-    if ( istrue( self.inlaststand ) )
-    {
-        scripts\mp\laststand::playanim_aibegindismountturret( "self_revive_success", self );
+  }
+
+  self predictstreampos(var_0, 1);
+
+  if(istrue(var_2)) {
+    self loadcustomizationplayerview(self);
+  }
+
+  if(var_5) {
+    waitframe();
+
+    while((!self ispredictedstreamposready() || istrue(var_2) && !self hasloadedcustomizationplayerview(self)) && gettime() < var_6) {
+      waitframe();
     }
-    
-    if ( isdefined( self.burninginfo ) )
-    {
-        scripts\mp\equipment\molotov::molotov_clear_burning();
+
+    if(istrue(var_3)) {
+      var_9 = gettime() + getdvarint("scr_br_stream_hint_extra_time", 5000);
+
+      while(gettime() < var_9) {
+        waitframe();
+      }
     }
-    
-    if ( istrue( self.usingascender ) )
-    {
-        scripts\cp_mp\auto_ascender::canseesafecircleui();
-    }
-    
-    if ( scripts\cp_mp\utility\player_utility::isinvehicle( 1 ) )
-    {
-        var0 = spawnstruct();
-        var0.allowairexit = 1;
-        var0.onprematchfadedone2 = "INVOLUNTARY";
-        thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_exit( self.vehicle, undefined, self, var0, 1 );
-    }
-    
-    if ( isdefined( self.remoteuav ) )
-    {
-        self.remoteuav scripts\mp\killstreaks\remoteuav::remoteuav_leave();
-    }
-    
-    if ( isdefined( self.currentturret ) )
-    {
-        scripts\cp_mp\killstreaks\manual_turret::manualturret_endplayeruse( self.currentturret );
-    }
-    
-    if ( isdefined( self.usingremote ) )
-    {
-        var1 = vehicle_getarray();
-        
-        foreach ( var3 in var1 )
-        {
-            if ( isdefined( var3.owner ) && var3.owner == self )
-            {
-                if ( isdefined( var3.helperdronetype ) )
-                {
-                    var3 scripts\cp_mp\killstreaks\helper_drone::helperdroneexplode( 1 );
-                }
-            }
+
+    if(isDefined(var_4)) {
+      var_10 = getdvarint("keep_alive_update_time", 2000);
+      var_6 = gettime() + var_4;
+      var_11 = 0;
+
+      while(gettime() < var_6) {
+        if(gettime() > var_11) {
+          self predictstreampos(var_0, 1);
+          var_11 = gettime() + var_10;
         }
+
+        waitframe();
+      }
     }
-    
-    scripts\mp\javelin::vehicle_damage_deregistervisualpercentcallback();
+  }
+
+  self.ref_12875 = undefined;
+  self notify("playerPrestreamComplete");
 }
 
-// Params 1
-// Size: 0x10
-function playerloadoutsaveselected( var0 )
-{
-    var1 = undefined;
-    var1 = scripts\mp\class::preloadandqueueclass( var0 );
-    return var1;
+function relic_nuketimer_gettimeformission() {
+  return getdvarint("scr_br_stream_hint_timeout", 9000);
 }
 
-// Params 0
-// Size: 0x17
-function forcedisablelaststand()
-{
-    var0 = self.origin - anglestoforward( self.angles ) * 150;
-    return var0;
+function ref_1252b() {
+  self notify("playerPrestreamLocationWait");
+  self clearpredictedstreampos();
 }
 
-// Params 0
-// Size: 0x13, Type: bool
-function hasarmor()
-{
-    return isdefined( self.br_armorhealth ) && self.br_armorhealth > 0;
-}
+function ref_1264c() {
+  self cancelmantle();
 
-// Params 0
-// Size: 0x9, Type: bool
-function hashelmet()
-{
-    return isdefined( self.br_helmetlevel );
-}
+  if(self isskydiving()) {
+    self skydive_interrupt();
+  }
 
-// Params 2
-// Size: 0xfb
-function damagearmor( var0, var1 )
-{
-    if ( !hasarmor() )
-    {
-        return var0;
-    }
-    
-    var2 = int( min( self.br_armorhealth, var0 ) );
-    var3 = var0 - var2;
-    var4 = self.br_armorhealth / self.br_maxarmorhealth;
-    self.br_armorhealth -= var2;
-    scripts\cp\vehicles\vehicle_compass_cp::ref_12000( var2 );
-    self.br_armorhealth = max( 0, self.br_armorhealth );
-    var5 = self.br_armorhealth / self.br_maxarmorhealth;
-    
-    if ( isplayer( self ) )
-    {
-        if ( !istrue( var1 ) )
-        {
-            if ( self.br_armorhealth == 0 && var2 > 0 )
-            {
-                self playsoundtoplayer( "hit_marker_3d_armor_break", self );
-                
-                if ( scripts\mp\utility\perk::_hasperk( "specialty_br_reinforced" ) )
-                {
-                    self setscriptablepartstate( "armor_break", "reinforced_armor_break", 0 );
-                }
-                else
-                {
-                    self setscriptablepartstate( "armor_break", "armor_break", 0 );
-                }
-            }
+  if(istrue(self.inlaststand)) {
+    scripts\mp\laststand::playanim_aibegindismountturret("self_revive_success", self);
+  }
+
+  if(isDefined(self.burninginfo)) {
+    scripts\mp\equipment\molotov::molotov_clear_burning();
+  }
+
+  if(istrue(self.usingascender)) {
+    scripts\cp_mp\auto_ascender::canseesafecircleui();
+  }
+
+  if(scripts\cp_mp\utility\player_utility::isinvehicle(1)) {
+    var_0 = spawnStruct();
+    var_0.allowairexit = 1;
+    var_0.onprematchfadedone2 = "INVOLUNTARY";
+    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_exit(self.vehicle, undefined, self, var_0, 1);
+  }
+
+  if(isDefined(self.remoteuav)) {
+    self.remoteuav scripts\mp\killstreaks\remoteuav::remoteuav_leave();
+  }
+
+  if(isDefined(self.currentturret)) {
+    scripts\cp_mp\killstreaks\manual_turret::manualturret_endplayeruse(self.currentturret);
+  }
+
+  if(isDefined(self.usingremote)) {
+    var_1 = vehicle_getarray();
+
+    foreach(var_3 in var_1) {
+      if(isDefined(var_3.owner) && var_3.owner == self) {
+        if(isDefined(var_3.helperdronetype)) {
+          var_3 scripts\cp_mp\killstreaks\helper_drone::helperdroneexplode(1);
         }
-        
-        self setclientomnvar( "ui_br_armor_damage", var5 );
-        scripts\mp\equipment\armor_plate::debug_state( self.br_armorhealth );
-        var6 = spawnstruct();
-        var6.is_spawner_position_valid = var2;
-        var6.isaccesscard = var3;
-        var6.stack_patch_waittill_stack = var1;
-        runbrgametypefuncwrapper( "onPlayerArmorDamaged", var6 );
+      }
     }
-    
-    return var3;
+  }
+
+  scripts\mp\javelin::vehicle_damage_deregistervisualpercentcallback();
 }
 
-// Params 0
-// Size: 0x14, Type: bool
-function ishelmetpopenabled()
-{
-    if ( getdvarint( "scr_br_helmet_pop", 1 ) )
-    {
-        return true;
-    }
-    
-    return false;
+function playerloadoutsaveselected(var_0) {
+  var_1 = undefined;
+  var_1 = scripts\mp\class::preloadandqueueclass(var_0);
+  return var_1;
 }
 
-// Params 0
-// Size: 0x8
-function breakhelmet()
-{
-    self.br_helmetlevel = undefined;
+function forcedisablelaststand() {
+  var_0 = self.origin - anglesToForward(self.angles) * 150;
+  return var_0;
 }
 
-// Params 3
-// Size: 0x83
-function damagehelmet( var0, var1, var2 )
-{
-    if ( !isdefined( var1 ) || !ishelmetpopenabled() )
-    {
-        var1 = 0;
-    }
-    
-    var3 = 1;
-    
-    switch ( self.br_helmetlevel )
-    {
-        case 1:
-            var3 = 0.85;
-            break;
-        case 2:
-            var3 = 0.7;
-            break;
-        case 3:
-            var3 = 0.7;
-            break;
-        default:
-            break;
-    }
-    
-    if ( var1 )
-    {
-        breakhelmet();
-        
-        if ( isdefined( level.ref_1203e ) )
-        {
-            [[ level.ref_1203e ]]( self, var2 );
+function hasarmor() {
+  return isDefined(self.br_armorhealth) && self.br_armorhealth > 0;
+}
+
+function hashelmet() {
+  return isDefined(self.br_helmetlevel);
+}
+
+function damagearmor(var_0, var_1) {
+  if(!hasarmor()) {
+    return var_0;
+  }
+
+  var_2 = int(min(self.br_armorhealth, var_0));
+  var_3 = var_0 - var_2;
+  var_4 = self.br_armorhealth / self.br_maxarmorhealth;
+  self.br_armorhealth -= var_2;
+  scripts\cp\vehicles\vehicle_compass_cp::ref_12000(var_2);
+  self.br_armorhealth = max(0, self.br_armorhealth);
+  var_5 = self.br_armorhealth / self.br_maxarmorhealth;
+
+  if(isPlayer(self)) {
+    if(!istrue(var_1)) {
+      if(self.br_armorhealth == 0 && var_2 > 0) {
+        self playsoundtoplayer("hit_marker_3d_armor_break", self);
+
+        if(scripts\mp\utility\perk::_hasperk("specialty_br_reinforced")) {
+          self setscriptablepartstate("armor_break", "reinforced_armor_break", 0);
+        } else {
+          self setscriptablepartstate("armor_break", "armor_break", 0);
         }
+      }
     }
-    
-    return var3;
+
+    self setclientomnvar("ui_br_armor_damage", var_5);
+    scripts\mp\equipment\armor_plate::debug_state(self.br_armorhealth);
+    var_6 = spawnStruct();
+    var_6.is_spawner_position_valid = var_2;
+    var_6.isaccesscard = var_3;
+    var_6.stack_patch_waittill_stack = var_1;
+    runbrgametypefuncwrapper("onPlayerArmorDamaged", var_6);
+  }
+
+  return var_3;
 }
 
-// Params 1
-// Size: 0x14d
-function ref_1285e( var0 )
-{
-    setglobalsoundcontext( "lobby_fade", "on", 3 );
-    
-    if ( !isdefined( level.ref_133b4 ) )
-    {
-        level.ref_133b4 = 1;
+function ishelmetpopenabled() {
+  if(getdvarint("scr_br_helmet_pop", 1)) {
+    return true;
+  }
+
+  return false;
+}
+
+function breakhelmet() {
+  self.br_helmetlevel = undefined;
+}
+
+function damagehelmet(var_0, var_1, var_2) {
+  if(!isDefined(var_1) || !ishelmetpopenabled()) {
+    var_1 = 0;
+  }
+
+  var_3 = 1;
+
+  switch (self.br_helmetlevel) {
+    case 1:
+      var_3 = 0.85;
+      break;
+    case 2:
+      var_3 = 0.7;
+      break;
+    case 3:
+      var_3 = 0.7;
+      break;
+    default:
+      break;
+  }
+
+  if(var_1) {
+    breakhelmet();
+
+    if(isDefined(level.ref_1203e)) {
+      [[level.ref_1203e]](self, var_2);
     }
-    
-    thread stop_priming_gesture();
-    
-    if ( level.matchcountdowntime > 13 )
-    {
-        var1 = level.matchcountdowntime - 13;
-        wait var1;
-        var2 = scripts\mp\utility\teams::getteamdata( var0, "players" );
-        
-        if ( istrue( level.vehicle_collision_getleveldata ) )
-        {
-            setmusicstate( "event01_lobby_outro" );
+  }
+
+  return var_3;
+}
+
+function ref_1285e(var_0) {
+  setglobalsoundcontext("lobby_fade", "on", 3);
+
+  if(!isDefined(level.ref_133b4)) {
+    level.ref_133b4 = 1;
+  }
+
+  thread stop_priming_gesture();
+
+  if(level.matchcountdowntime > 13) {
+    var_1 = level.matchcountdowntime - 13;
+    wait var_1;
+    var_2 = scripts\mp\utility\teams::getteamdata(var_0, "players");
+
+    if(istrue(level.vehicle_collision_getleveldata)) {
+      setmusicstate("event01_lobby_outro");
+    } else {
+      var_3 = game["music"]["br_lobby_outro"].size;
+
+      foreach(var_5 in var_2) {
+        if(isDefined(var_5)) {
+          var_6 = randomint(var_3);
+          var_5 setplayermusicstate(game["music"]["br_lobby_outro"][var_6]);
+          var_5 setsoundsubmix("mp_br_lobby_fade", 8);
         }
-        else
-        {
-            var3 = game[ "music" ][ "br_lobby_outro" ].size;
-            
-            foreach ( var5 in var2 )
-            {
-                if ( isdefined( var5 ) )
-                {
-                    var6 = randomint( var3 );
-                    var5 setplayermusicstate( game[ "music" ][ "br_lobby_outro" ][ var6 ] );
-                    var5 setsoundsubmix( "mp_br_lobby_fade", 8 );
-                }
-            }
+      }
+    }
+
+    wait level.matchcountdowntime;
+
+    if(!istrue(level.br_infil_music_played)) {
+      foreach(var_5 in var_2) {
+        if(isDefined(var_5)) {
+          var_5 setplayermusicstate("");
         }
-        
-        wait level.matchcountdowntime;
-        
-        if ( !istrue( level.áÍ+0N¡J}•y3”ôëÒ€õ0b2 ) )
-        {
-            foreach ( var5 in var2 )
-            {
-                if ( isdefined( var5 ) )
-                {
-                    var5 setplayermusicstate( "" );
-                }
-            }
+      }
+    }
+
+    var_10 = istrue(level.br_infils_disabled);
+
+    if(var_10) {
+      foreach(var_5 in var_2) {
+        if(isDefined(var_5)) {
+          var_5 clearsoundsubmix("mp_br_lobby_fade", 1.5);
         }
-        
-        var10 = istrue( level.br_infils_disabled );
-        
-        if ( var10 )
-        {
-            foreach ( var5 in var2 )
-            {
-                if ( isdefined( var5 ) )
-                {
-                    var5 clearsoundsubmix( "mp_br_lobby_fade", 1.5 );
-                }
-            }
-            
-            return;
+      }
+
+      return;
+    }
+
+    return;
+  }
+}
+
+function stop_priming_gesture() {
+  if(istrue(level.br_infil_music_called)) {
+    return;
+  }
+
+  if(getdvarint("scr_br_c130_intro_s2", 0) == 1) {
+    return;
+  }
+
+  level.br_infil_music_called = 1;
+
+  if(tv_station_intro_already_played()) {
+    var_0 = level.matchcountdowntime + 1 + 3.5 - 1;
+
+    if(scripts\cp_mp\utility\game_utility::unlink_on_ai_death()) {
+      var_0 = level.matchcountdowntime - 0.05;
+    }
+
+    wait var_0;
+  } else if(usefailcapacitymsg()) {
+    scripts\mp\utility\sound::besttime("br_infil_skilo");
+    var_0 = level.matchcountdowntime + 1 + 3.5;
+    wait var_0;
+  } else {
+    var_0 = level.matchcountdowntime + 1 + 3.5;
+    wait var_0;
+  }
+
+  waittillframeend();
+  level.br_infil_music_played = 1;
+
+  foreach(var_2 in level.players) {
+    var_3 = game["music"]["br_infil_intro"].size;
+    var_4 = randomint(var_3);
+    var_5 = game["music"]["br_infil_intro"][var_4];
+    var_2 setplayermusicstate(var_5);
+  }
+
+  wait 24;
+  level.br_infil_music_played = undefined;
+  level.br_infil_music_called = undefined;
+}
+
+function ref_12854(var_0) {
+  if(validtousesticker()) {
+    return;
+  }
+
+  if(level.matchcountdowntime > 3) {
+    var_1 = level.matchcountdowntime - 3;
+    wait var_1;
+    dmztut_luicallback("prematch_end", var_0);
+    return;
+  }
+}
+
+function loadoutcustomfiresalediscount(var_0) {
+  if(!getdvarint("scr_prematch_disable_executions", 1)) {
+    return;
+  }
+
+  if(istrue(level.ref_12856)) {
+    return;
+  }
+
+  level.ref_12856 = 1;
+  var_1 = getdvarint("scr_prematch_disable_execution_buffer", 2);
+  var_2 = level.players;
+  var_3 = ["execution_attack", "execution_victim"];
+
+  foreach(var_5 in var_2) {
+    if(!isDefined(var_5)) {
+      continue;
+    }
+
+    var_5 scripts\common\utility::allow_array(var_3, 0);
+  }
+
+  wait var_0 + var_1;
+
+  foreach(var_5 in var_2) {
+    if(!isDefined(var_5) || var_5 scripts\common\utility::can_execute()) {
+      continue;
+    }
+
+    var_5 scripts\common\utility::allow_array(var_3, 1);
+  }
+
+  level.ref_12856 = undefined;
+}
+
+function calculateeventstarttime() {
+  if(getdvarint("scr_bmo_use_spawn_fix", 1) == 0) {
+    return;
+  }
+
+  var_0 = 5;
+  var_1 = level.matchcountdowntime - var_0;
+
+  if(var_1 > 0) {
+    wait var_1;
+  }
+
+  foreach(var_3 in level.players) {
+    var_3.plotarmor = 1;
+  }
+
+  thread loadoutcustomfiresalediscount(level);
+}
+
+function delay_then_run_wave_override() {
+  var_0 = self;
+  damagearmor(var_0, 150, 1);
+}
+
+function defend_wave_1() {
+  if(!isfeatureenabledwrapper("allowLateJoiners")) {
+    level endon("game_ended");
+    var_0 = getdvarint("scr_br_nojip_delay", 30);
+    wait var_0;
+    setnojipscore(1, 1);
+    setnojiptime(1, 1);
+    level.nojip = 1;
+    return;
+  }
+}
+
+function ref_12a1c(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+  var_7 = scripts\engine\trace::ray_trace(var_0 + (var_1, var_2, var_3), var_0 + (var_1, var_2, var_4), var_6, var_5);
+  return var_7;
+}
+
+function reset_button_init(var_0, var_1) {
+  if(!isDefined(level.cratedata) || !isDefined(level.cratedata.crates)) {
+    return;
+  }
+
+  var_2 = var_1 * var_1;
+  var_3 = [];
+
+  foreach(var_5 in level.cratedata.crates) {
+    if(!isDefined(var_5)) {
+      continue;
+    }
+
+    var_6 = distance2dsquared(var_5.origin, var_0);
+
+    if(var_6 < var_2) {
+      var_3 = var_5;
+    }
+  }
+
+  return var_3;
+}
+
+function semtex_used() {
+  var_0 = 4000;
+
+  if(isDefined(level.br_level) && isDefined(level.br_level.spawn_exfil_enemies)) {
+    var_0 = level.br_level.spawn_exfil_enemies;
+  }
+
+  return var_0;
+}
+
+function send_all_ai_to_players() {
+  var_0 = -1200;
+
+  if(isDefined(level.br_level) && isDefined(level.br_level.ref_11a5b)) {
+    var_0 = level.br_level.ref_11a5b;
+  }
+
+  return var_0;
+}
+
+function modifyplayer_damage(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = modifyscenenode(var_0, var_1, var_2, var_3, var_4);
+  return var_5["position"];
+}
+
+function modifytriggerlocation(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = modifyscenenode(var_0, var_1, var_2, var_3, var_4);
+  return var_5;
+}
+
+function modifyscenenode(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = send_all_ai_to_players();
+  var_6 = semtex_used();
+  var_7 = 2500;
+  var_8 = -19000 + var_5;
+  var_9 = 15;
+
+  if(!isDefined(var_1)) {
+    var_1 = getdvarint("scr_br_trace_up", var_7);
+  }
+
+  if(!isDefined(var_2)) {
+    var_2 = getdvarint("scr_br_trace_down", var_8);
+  }
+
+  var_10 = getdvarint("scr_br_trace_low", var_5);
+  var_11 = getdvarint("scr_br_trace_high", var_6);
+  var_12 = undefined;
+
+  if(isDefined(var_3)) {
+    var_12 = var_3;
+  } else {
+    var_12 = scripts\engine\trace::create_contents(0, 1, 1, 1, 0, 0, 1);
+  }
+
+  if(!isDefined(var_4)) {
+    var_4 = [];
+  }
+
+  var_13 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldata();
+
+  if(isDefined(var_13.instancesbyref["little_bird"])) {
+    var_4 = scripts\engine\utility::array_combine(var_4, var_13.instancesbyref["little_bird"]);
+  }
+
+  if(isDefined(var_13.instancesbyref["little_bird_mg"])) {
+    var_4 = scripts\engine\utility::array_combine(var_4, var_13.instancesbyref["little_bird_mg"]);
+  }
+
+  var_14 = reset_button_init(var_0, 100);
+
+  if(isDefined(var_14) && var_14.size > 0) {
+    var_4 = scripts\engine\utility::array_combine(var_4, var_14);
+  }
+
+  if(getdvarint("scr_br_trace_ignore_balloons", 1) > 0) {
+    var_15 = getnearbyskyhookballoons2d(var_0, 100);
+
+    if(var_15.size > 0) {
+      var_4 = scripts\engine\utility::array_combine(var_4, var_15);
+    }
+  }
+
+  var_16 = ref_12a1c(var_0, 0, 0, var_1, var_2, var_12, var_4);
+
+  if(ref_13c32(var_16, var_10)) {
+    return var_16;
+  }
+
+  var_16 = ref_12a1c(var_0, var_9, 0, var_1, var_2, var_12, var_4);
+
+  if(ref_13c32(var_16, var_10)) {
+    return var_16;
+  }
+
+  var_16 = ref_12a1c(var_0, 0, var_9, var_1, var_2, var_12, var_4);
+
+  if(ref_13c32(var_16, var_10)) {
+    return var_16;
+  }
+
+  var_16 = ref_12a1c(var_0, -1 * var_9, 0, var_1, var_2, var_12, var_4);
+
+  if(ref_13c32(var_16, var_10)) {
+    return var_16;
+  }
+
+  var_16 = ref_12a1c(var_0, 0, -1 * var_9, var_1, var_2, var_12, var_4);
+
+  if(ref_13c32(var_16, var_10)) {
+    return var_16;
+  }
+
+  var_16 = [];
+  var_16["position"] = (var_0[0], var_0[1], var_11);
+  var_16["fraction"] = 0;
+  return var_16;
+}
+
+function ref_13c32(var_0, var_1) {
+  return var_0["fraction"] != 1 && var_0["position"][2] > var_1;
+}
+
+function getnearbyskyhookballoons2d(var_0, var_1) {
+  var_2 = [];
+
+  if(isDefined(level.ref_13400)) {
+    var_3 = var_1 * var_1;
+
+    foreach(var_5 in level.ref_13400.areas_remaining) {
+      if(isDefined(var_5.chopperexfil_sfx_before_sh070)) {
+        var_6 = distance2dsquared(var_0, var_5.chopperexfil_sfx_before_sh070.origin);
+
+        if(var_6 < var_3) {
+          var_2 = var_5.chopperexfil_sfx_before_sh070;
         }
-        
-        return;
+      }
     }
+  }
+
+  return var_2;
 }
 
-// Params 0
-// Size: 0x107
-function stop_priming_gesture()
-{
-    if ( istrue( level.ãÍmq‘+§∞bYå¯Ocq˘PÀ ) )
-    {
-        return;
-    }
-    
-    if ( getdvarint( "scr_br_c130_intro_s2", 0 ) == 1 )
-    {
-        return;
-    }
-    
-    level.ãÍmq‘+§∞bYå¯Ocq˘PÀ = 1;
-    
-    if ( tv_station_intro_already_played() )
-    {
-        var0 = level.matchcountdowntime + 1 + 3.5 - 1;
-        
-        if ( scripts\cp_mp\utility\game_utility::unlink_on_ai_death() )
-        {
-            var0 = level.matchcountdowntime - 0.05;
-        }
-        
-        wait var0;
-    }
-    else if ( usefailcapacitymsg() )
-    {
-        scripts\mp\utility\sound::besttime( "br_infil_skilo" );
-        var0 = level.matchcountdowntime + 1 + 3.5;
-        wait var0;
-    }
-    else
-    {
-        var0 = level.matchcountdowntime + 1 + 3.5;
-        wait var0;
-    }
-    
-    waittillframeend();
-    level.áÍ+0N¡J}•y3”ôëÒ€õ0b2 = 1;
-    
-    foreach ( var2 in level.players )
-    {
-        var3 = game[ "music" ][ "br_infil_intro" ].size;
-        var4 = randomint( var3 );
-        var5 = game[ "music" ][ "br_infil_intro" ][ var4 ];
-        var2 setplayermusicstate( var5 );
-    }
-    
-    wait 24;
-    level.áÍ+0N¡J}•y3”ôëÒ€õ0b2 = undefined;
-    level.ãÍmq‘+§∞bYå¯Ocq˘PÀ = undefined;
+function timeoutonabandonedcallback() {
+  if(!getdvarint("scr_br_lightweightGameObject", 1)) {
+    return;
+  }
+
+  if(self.triggertype == "proximity" && !self.usetime) {
+    self.touchlist = [];
+    self.touchlist["neutral"] = [];
+    self.touchlist["none"] = [];
+    self.assisttouchlist = undefined;
+    return;
+  }
 }
 
-// Params 1
-// Size: 0x30
-function ref_12854( var0 )
-{
-    if ( validtousesticker() )
-    {
-        return;
-    }
-    
-    if ( level.matchcountdowntime > 3 )
-    {
-        var1 = level.matchcountdowntime - 3;
-        wait var1;
-        dmztut_luicallback( "prematch_end", var0 );
-        return;
-    }
+function ref_1266c(var_0, var_1) {
+  var_2 = self calloutmarkerping_entityzoffset("br_archived_flags");
+
+  if(istrue(var_1)) {
+    var_2 |= var_0;
+  } else {
+    var_2 &= ~var_0;
+  }
+
+  self setclientomnvar("br_archived_flags", var_2);
 }
 
-// Params 1
-// Size: 0xc2
-function loadoutcustomfiresalediscount( var0 )
-{
-    if ( !getdvarint( "scr_prematch_disable_executions", 1 ) )
-    {
-        return;
-    }
-    
-    if ( istrue( level.ref_12856 ) )
-    {
-        return;
-    }
-    
-    level.ref_12856 = 1;
-    var1 = getdvarint( "scr_prematch_disable_execution_buffer", 2 );
-    var2 = level.players;
-    var3 = [ "execution_attack", "execution_victim" ];
-    
-    foreach ( var5 in var2 )
-    {
-        if ( !isdefined( var5 ) )
-        {
-            continue;
-        }
-        
-        var5 scripts\common\utility::allow_array( var3, 0 );
-    }
-    
-    wait var0 + var1;
-    
-    foreach ( var5 in var2 )
-    {
-        if ( !isdefined( var5 ) || var5 scripts\common\utility::can_execute() )
-        {
-            continue;
-        }
-        
-        var5 scripts\common\utility::allow_array( var3, 1 );
-    }
-    
-    level.ref_12856 = undefined;
+function ref_125cf(var_0) {
+  ref_1266c(1, var_0);
 }
 
-// Params 0
-// Size: 0x5e
-function calculateeventstarttime()
-{
-    if ( getdvarint( "scr_bmo_use_spawn_fix", 1 ) == 0 )
-    {
-        return;
+function round_enemy_stuck_logic(var_0, var_1) {
+  if(scripts\mp\menus::ref_13733()) {
+    if(!isDefined(var_1) && scripts\mp\menus::brking_updateteamscore()) {
+      return [];
     }
-    
-    var0 = 5;
-    var1 = level.matchcountdowntime - var0;
-    
-    if ( var1 > 0 )
-    {
-        wait var1;
-    }
-    
-    foreach ( var3 in level.players )
-    {
-        var3.plotarmor = 1;
-    }
-    
-    thread loadoutcustomfiresalediscount( level );
+
+    return level.squaddata[var_0][var_1].players;
+  }
+
+  return level.teamdata[var_0]["players"];
 }
 
-// Params 0
-// Size: 0x10
-function delay_then_run_wave_override()
-{
-    var0 = self;
-    damagearmor( var0, 150, 1 );
+function rotationrefsbyseatandweapon(var_0, var_1) {
+  if(scripts\mp\menus::ref_13733()) {
+    var_2 = [];
+
+    foreach(var_4 in level.squaddata[var_0][var_1].players) {
+      if(isalive(var_4)) {
+        var_2 = var_4;
+      }
+    }
+
+    return var_2;
+  }
+
+  return level.teamdata[var_4]["alivePlayers"];
 }
 
-// Params 0
-// Size: 0x3c
-function defend_wave_1()
-{
-    if ( !isfeatureenabledwrapper( "allowLateJoiners" ) )
-    {
-        level endon( "game_ended" );
-        var0 = getdvarint( "scr_br_nojip_delay", 30 );
-        wait var0;
-        setnojipscore( 1, 1 );
-        setnojiptime( 1, 1 );
-        level.nojip = 1;
-        return;
+function rotationids(var_0, var_1) {
+  if(scripts\mp\menus::ref_13733()) {
+    var_2 = 0;
+
+    foreach(var_4 in level.squaddata[var_0][var_1].players) {
+      if(isalive(var_4)) {
+        var_2++;
+      }
     }
+
+    return var_2;
+  }
+
+  return level.teamdata[var_4]["aliveCount"];
 }
 
-// Params 7
-// Size: 0x23
-function ref_12a1c( var0, var1, var2, var3, var4, var5, var6 )
-{
-    var7 = scripts\engine\trace::ray_trace( var0 + ( var1, var2, var3 ), var0 + ( var1, var2, var4 ), var6, var5 );
-    return var7;
+function round_enemies_fallback_logic(var_0) {
+  if(scripts\mp\menus::ref_13733()) {
+    return getarraykeys(level.squaddata[var_0]);
+  }
+
+  return [0];
 }
 
-// Params 2
-// Size: 0x7b
-function reset_button_init( var0, var1 )
-{
-    if ( !isdefined( level.cratedata ) || !isdefined( level.cratedata.crates ) )
-    {
-        return;
-    }
-    
-    var2 = var1 * var1;
-    var3 = [];
-    
-    foreach ( var5 in level.cratedata.crates )
-    {
-        if ( !isdefined( var5 ) )
-        {
-            continue;
-        }
-        
-        var6 = distance2dsquared( var5.origin, var0 );
-        
-        if ( var6 < var2 )
-        {
-            var3 = var5;
-        }
-    }
-    
-    return var3;
+function replace_sat_piece_on_deathordisconnect() {
+  if(scripts\mp\menus::ref_13733()) {
+    return level.maxsquadsize;
+  }
+
+  return level.maxteamsize;
 }
 
-// Params 0
-// Size: 0x2e
-function semtex_used()
-{
-    var0 = 4000;
-    
-    if ( isdefined( level.br_level ) && isdefined( level.br_level.spawn_exfil_enemies ) )
-    {
-        var0 = level.br_level.spawn_exfil_enemies;
+function ref_131c3(var_0, var_1, var_2, var_3) {
+  if(scripts\mp\menus::ref_13733()) {
+    if(!isDefined(level.squaddata[var_0][var_1].difficultytabledata)) {
+      level.squaddata[var_0][var_1].difficultytabledata = [];
     }
-    
-    return var0;
+
+    level.squaddata[var_0][var_1].difficultytabledata[var_2] = var_3;
+    return;
+  }
+
+  level.teamdata[var_0][var_2] = var_3;
 }
 
-// Params 0
-// Size: 0x2e
-function send_all_ai_to_players()
-{
-    var0 = -1200;
-    
-    if ( isdefined( level.br_level ) && isdefined( level.br_level.ref_11a5b ) )
-    {
-        var0 = level.br_level.ref_11a5b;
+function round_at_max(var_0, var_1, var_2) {
+  if(scripts\mp\menus::ref_13733()) {
+    if(!isDefined(level.squaddata[var_0][var_1].difficultytabledata) || !isDefined(level.squaddata[var_0][var_1].difficultytabledata[var_2])) {
+      return;
     }
-    
-    return var0;
+
+    return level.squaddata[var_0][var_1].difficultytabledata[var_2];
+  }
+
+  return level.teamdata[var_0][var_2];
 }
 
-// Params 5
-// Size: 0x1c
-function modifyplayer_damage( var0, var1, var2, var3, var4 )
-{
-    var5 = modifyscenenode( var0, var1, var2, var3, var4 );
-    return var5[ "position" ];
+function ref_1276a(var_0, var_1, var_2, var_3, var_4) {
+  if(scripts\mp\menus::ref_13733()) {
+    var_5 = round_enemy_stuck_logic(var_2.team, var_2.squadindex);
+
+    foreach(var_7 in var_5) {
+      if(!isDefined(var_3) || var_7 != var_3) {
+        self playsoundtoplayer(var_0, var_7, var_4);
+      }
+    }
+
+    return;
+  }
+
+  self playsoundtoteam(var_0, var_1, var_3, var_4);
 }
 
-// Params 5
-// Size: 0x16
-function modifytriggerlocation( var0, var1, var2, var3, var4 )
-{
-    var5 = modifyscenenode( var0, var1, var2, var3, var4 );
-    return var5;
+function updatesquadmemberlaststandreviveprogress(var_0, var_1, var_2) {
+  var_3 = (var_0[0], var_0[1], 0);
+  var_4 = (var_1[0], var_1[1], 0);
+  var_5 = (var_2[0], var_2[1], 0);
+  var_6 = vectorNormalize(var_3 - var_4);
+  var_7 = vectorNormalize(var_5 - var_4);
+  var_8 = vectordot(var_6, var_7);
+  return var_8 > 0;
 }
 
-// Params 5
-// Size: 0x1e1
-function modifyscenenode( var0, var1, var2, var3, var4 )
-{
-    var5 = send_all_ai_to_players();
-    var6 = semtex_used();
-    var7 = 2500;
-    var8 = -19000 + var5;
-    var9 = 15;
-    
-    if ( !isdefined( var1 ) )
-    {
-        var1 = getdvarint( "scr_br_trace_up", var7 );
-    }
-    
-    if ( !isdefined( var2 ) )
-    {
-        var2 = getdvarint( "scr_br_trace_down", var8 );
-    }
-    
-    var10 = getdvarint( "scr_br_trace_low", var5 );
-    var11 = getdvarint( "scr_br_trace_high", var6 );
-    var12 = undefined;
-    
-    if ( isdefined( var3 ) )
-    {
-        var12 = var3;
-    }
-    else
-    {
-        var12 = scripts\engine\trace::create_contents( 0, 1, 1, 1, 0, 0, 1 );
-    }
-    
-    if ( !isdefined( var4 ) )
-    {
-        var4 = [];
-    }
-    
-    var13 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldata();
-    
-    if ( isdefined( var13.instancesbyref[ "little_bird" ] ) )
-    {
-        var4 = scripts\engine\utility::array_combine( var4, var13.instancesbyref[ "little_bird" ] );
-    }
-    
-    if ( isdefined( var13.instancesbyref[ "little_bird_mg" ] ) )
-    {
-        var4 = scripts\engine\utility::array_combine( var4, var13.instancesbyref[ "little_bird_mg" ] );
-    }
-    
-    var14 = reset_button_init( var0, 100 );
-    
-    if ( isdefined( var14 ) && var14.size > 0 )
-    {
-        var4 = scripts\engine\utility::array_combine( var4, var14 );
-    }
-    
-    if ( getdvarint( "scr_br_trace_ignore_balloons", 1 ) > 0 )
-    {
-        var15 = getnearbyskyhookballoons2d( var0, 100 );
-        
-        if ( var15.size > 0 )
-        {
-            var4 = scripts\engine\utility::array_combine( var4, var15 );
-        }
-    }
-    
-    var16 = ref_12a1c( var0, 0, 0, var1, var2, var12, var4 );
-    
-    if ( ref_13c32( var16, var10 ) )
-    {
-        return var16;
-    }
-    
-    var16 = ref_12a1c( var0, var9, 0, var1, var2, var12, var4 );
-    
-    if ( ref_13c32( var16, var10 ) )
-    {
-        return var16;
-    }
-    
-    var16 = ref_12a1c( var0, 0, var9, var1, var2, var12, var4 );
-    
-    if ( ref_13c32( var16, var10 ) )
-    {
-        return var16;
-    }
-    
-    var16 = ref_12a1c( var0, -1 * var9, 0, var1, var2, var12, var4 );
-    
-    if ( ref_13c32( var16, var10 ) )
-    {
-        return var16;
-    }
-    
-    var16 = ref_12a1c( var0, 0, -1 * var9, var1, var2, var12, var4 );
-    
-    if ( ref_13c32( var16, var10 ) )
-    {
-        return var16;
-    }
-    
-    var16 = [];
-    GscBinSkip0( 0x2e, "position", ( var0[ 0 ], var0[ 1 ], var11 ) );
-    // Unknown operator ( 0x2e, iw8, PC )
+function woods_two_death_func(var_0, var_1, var_2, var_3) {
+  var_4 = var_0[0] - var_2[0];
+  var_5 = var_0[1] - var_2[1];
+  var_6 = var_1[0] - var_2[0];
+  var_7 = var_1[1] - var_2[1];
+  var_8 = float(var_3);
+  var_9 = var_6 - var_4;
+  var_10 = var_7 - var_5;
+  var_11 = var_9 * var_9 + var_10 * var_10;
+  var_12 = var_4 * var_7 - var_6 * var_5;
+  var_13 = var_8 * var_8 * var_11 - var_12 * var_12;
+
+  if(var_13 < 0) {
+    return;
+  }
+
+  if(var_13 == 0) {
+    var_14 = var_12 * var_10 / var_11 + var_2[0];
+    var_15 = -1 * var_12 * var_9 / var_11 + var_2[1];
+    return (var_14, var_15, 0);
+  }
+
+  var_16 = sqrt(var_15);
+  var_17 = var_14 * var_12;
+  var_18 = scripts\engine\utility::sign(var_12) * var_11 * var_16;
+  var_19 = (var_17 + var_18) / var_13 + var_4[0];
+  var_20 = (var_17 - var_18) / var_13 + var_4[0];
+  var_21 = -1 * var_14 * var_11;
+  var_22 = abs(var_12) * var_16;
+  var_23 = (var_21 + var_22) / var_13 + var_4[1];
+  var_24 = (var_21 - var_22) / var_13 + var_4[1];
+  return [(var_19, var_23, 0), (var_20, var_24, 0)];
 }
 
-// Params 2
-// Size: 0x1f, Type: bool
-function ref_13c32( var0, var1 )
-{
-    return var0[ "fraction" ] != 1 && var0[ "position" ][ 2 ] > var1;
+function registersuperextraweapon(var_0, var_1, var_2) {
+  var_3 = woods_two_death_func(var_0, var_1, var_2.origin, var_2.radius);
+
+  if(!isDefined(var_3)) {
+    return;
+  }
+
+  if(!isarray(var_3)) {
+    if(updatesquadmemberlaststandreviveprogress(var_3, var_0, var_1)) {
+      return var_3;
+    }
+
+    return;
+  }
+
+  var_4 = updatesquadmemberlaststandreviveprogress(var_3[0], var_0, var_1);
+  var_5 = updatesquadmemberlaststandreviveprogress(var_3[1], var_0, var_1);
+
+  if(!var_4 && !var_5) {
+    return;
+  }
+
+  if(var_4 && !var_5) {
+    return var_3[0];
+  }
+
+  if(var_5 && !var_4) {
+    return var_3[1];
+  }
+
+  var_6 = distance2dsquared(var_0, var_3[0]);
+  var_7 = distance2dsquared(var_0, var_3[1]);
+
+  if(var_6 < var_7) {
+    return var_3[0];
+  }
+
+  return var_3[1];
 }
 
-// Params 2
-// Size: 0x78
-function getnearbyskyhookballoons2d( var0, var1 )
-{
-    var2 = [];
-    
-    if ( isdefined( level.ref_13400 ) )
-    {
-        var3 = var1 * var1;
-        
-        foreach ( var5 in level.ref_13400.areas_remaining )
-        {
-            if ( isdefined( var5.chopperexfil_sfx_before_sh070 ) )
-            {
-                var6 = distance2dsquared( var0, var5.chopperexfil_sfx_before_sh070.origin );
-                
-                if ( var6 < var3 )
-                {
-                    var2 = var5.chopperexfil_sfx_before_sh070;
-                }
-            }
-        }
-    }
-    
-    return var2;
+function safehouse_struct(var_0, var_1, var_2) {
+  var_3 = var_1[0] - var_0[0];
+  var_4 = var_1[1] - var_0[1];
+  var_5 = var_1[2] - var_0[2];
+
+  if(var_3 != 0) {
+    var_6 = (var_2[0] - var_0[0]) / var_3;
+  } else {
+    var_6 = (var_3[1] - var_1[1]) / var_5;
+  }
+
+  var_7 = var_1[2] + var_6 * var_6;
+  return var_7;
 }
 
-// Params 0
-// Size: 0x4e
-function timeoutonabandonedcallback()
-{
-    if ( !getdvarint( "scr_br_lightweightGameObject", 1 ) )
-    {
-        return;
-    }
-    
-    if ( self.triggertype == "proximity" && !self.usetime )
-    {
-        self.touchlist = [];
-        self.touchlist[ "neutral" ] = [];
-        self.touchlist[ "none" ] = [];
-        self.assisttouchlist = undefined;
-        return;
-    }
+function updaterectangularzone(var_0, var_1) {
+  var_2 = var_1.origin[2];
+  var_3 = var_2 + var_1.height;
+  return var_0[2] >= var_2 && var_0[2] <= var_3;
 }
 
-// Params 2
-// Size: 0x2e
-function ref_1266c( var0, var1 )
-{
-    var2 = self calloutmarkerping_entityzoffset( "br_archived_flags" );
-    
-    if ( istrue( var1 ) )
-    {
-        var2 |= var0;
+function registertabletinit(var_0, var_1, var_2) {
+  var_3 = woods_two_death_func(var_0, var_1, var_2.origin, var_2.radius);
+
+  if(!isDefined(var_3)) {
+    return;
+  }
+
+  if(!isarray(var_3)) {
+    if(updatesquadmemberlaststandreviveprogress(var_3, var_0, var_1)) {
+      var_4 = safehouse_struct(var_0, var_1, var_3);
+      var_3 = (var_3[0], var_3[1], var_4);
+
+      if(updaterectangularzone(var_3, var_2)) {
+        return var_3;
+      }
+
+      return;
     }
-    else
-    {
-        var2 &= ~var0;
+
+    return;
+  }
+
+  var_5 = updatesquadmemberlaststandreviveprogress(var_4[0], var_1, var_2);
+  var_6 = updatesquadmemberlaststandreviveprogress(var_4[1], var_1, var_2);
+
+  if(!var_5 && !var_6) {
+    return;
+  }
+
+  if(var_5 && !var_6) {
+    var_4 = safehouse_struct(var_1, var_2, var_4[0]);
+    var_4 = (var_4[0][0], var_4[0][1], var_4);
+
+    if(updaterectangularzone(var_4[0], var_3)) {
+      return var_4[0];
     }
-    
-    self setclientomnvar( "br_archived_flags", var2 );
+
+    return;
+  }
+
+  if(var_4 && !var_6) {
+    var_4 = safehouse_struct(var_2, var_3, var_5[1]);
+    var_5 = (var_5[1][0], var_5[1][1], var_4);
+
+    if(updaterectangularzone(var_5[1], var_4)) {
+      return var_5[1];
+    }
+
+    return;
+  }
+
+  var_4 = safehouse_struct(var_3, var_4, var_6[0]);
+  var_6 = (var_6[0][0], var_6[0][1], var_4);
+  var_7 = updaterectangularzone(var_6[0], var_5);
+  var_4 = safehouse_struct(var_3, var_4, var_6[1]);
+  var_6 = (var_6[1][0], var_6[1][1], var_4);
+  var_8 = updaterectangularzone(var_6[1], var_5);
+
+  if(!var_7 && !var_8) {
+    return;
+  }
+
+  if(var_7 && !var_8) {
+    return var_6[0];
+  }
+
+  if(var_8 && !var_7) {
+    return var_6[1];
+  }
+
+  var_9 = distance2dsquared(var_3, var_6[0]);
+  var_10 = distance2dsquared(var_3, var_6[1]);
+
+  if(var_9 < var_10) {
+    return var_6[0];
+  }
+
+  return var_6[1];
 }
 
-// Params 1
-// Size: 0xd
-function ref_125cf( var0 )
-{
-    ref_1266c( 1, var0 );
+function ref_12a18(var_0, var_1, var_2) {
+  var_3 = [];
+
+  foreach(var_5 in var_2) {
+    var_6 = registersuperextraweapon(var_0, var_1, var_5);
+
+    if(isDefined(var_6)) {
+      var_3 = var_6;
+    }
+  }
+
+  var_8 = undefined;
+  var_9 = 0;
+
+  foreach(var_6 in var_3) {
+    var_11 = distance2dsquared(var_0, var_6);
+
+    if(!isDefined(var_8) || var_11 < var_9) {
+      var_8 = var_6;
+      var_9 = var_11;
+    }
+  }
+
+  return var_8;
 }
 
-// Params 2
-// Size: 0x3e
-function round_enemy_stuck_logic( var0, var1 )
-{
-    if ( scripts\mp\menus::ref_13733() )
-    {
-        if ( !isdefined( var1 ) && scripts\mp\menus::brking_updateteamscore() )
-        {
-            return [];
-        }
-        
-        return level.squaddata[ var0 ][ var1 ].players;
+function ref_12a19(var_0, var_1, var_2) {
+  var_3 = [];
+
+  foreach(var_5 in var_2) {
+    var_6 = registertabletinit(var_0, var_1, var_5);
+
+    if(isDefined(var_6)) {
+      var_3 = var_6;
     }
-    
-    return level.teamdata[ var0 ][ "players" ];
+  }
+
+  var_8 = undefined;
+  var_9 = 0;
+
+  foreach(var_6 in var_3) {
+    var_11 = distancesquared(var_0, var_6);
+
+    if(!isDefined(var_8) || var_11 < var_9) {
+      var_8 = var_6;
+      var_9 = var_11;
+    }
+  }
+
+  return var_8;
 }
 
-// Params 2
-// Size: 0x5d
-function rotationrefsbyseatandweapon( var0, var1 )
-{
-    if ( scripts\mp\menus::ref_13733() )
-    {
-        var2 = [];
-        
-        foreach ( var4 in level.squaddata[ var0 ][ var1 ].players )
-        {
-            if ( isalive( var4 ) )
-            {
-                var2 = var4;
-            }
-        }
-        
-        return var2;
-    }
-    
-    return level.teamdata[ var4 ][ "alivePlayers" ];
+function nuke_vault_suicidebombers() {
+  return isalive(self) && (scripts\common\vehicle::isvehicle() || isDefined(self.classname) && self.classname == "script_vehicle");
 }
 
-// Params 2
-// Size: 0x5b
-function rotationids( var0, var1 )
-{
-    if ( scripts\mp\menus::ref_13733() )
-    {
-        var2 = 0;
-        
-        foreach ( var4 in level.squaddata[ var0 ][ var1 ].players )
-        {
-            if ( isalive( var4 ) )
-            {
-                var2++;
-            }
-        }
-        
-        return var2;
-    }
-    
-    return level.teamdata[ var4 ][ "aliveCount" ];
+function shouldusegoldbarassets() {
+  return getdvarint("scr_br_plunder_use_gold_bar_assets", 0) != 0;
 }
 
-// Params 1
-// Size: 0x1c
-function round_enemies_fallback_logic( var0 )
-{
-    if ( scripts\mp\menus::ref_13733() )
-    {
-        return getarraykeys( level.squaddata[ var0 ] );
-    }
-    
-    return [ 0 ];
+function runbrgametypefuncwrapper(var_0, var_1, var_2) {
+  if(isDefined(level.disable_super_in_turret) && isDefined(level.disable_super_in_turret.ref_12e05)) {
+    return [[level.disable_super_in_turret.ref_12e05]](var_0, var_1, var_2);
+  }
 }
 
-// Params 0
-// Size: 0x17
-function replace_sat_piece_on_deathordisconnect()
-{
-    if ( scripts\mp\menus::ref_13733() )
-    {
-        return level.maxsquadsize;
-    }
-    
-    return level.maxteamsize;
+function isbrgametypefuncdefinedwrapper(var_0) {
+  if(isDefined(level.disable_super_in_turret) && isDefined(level.disable_super_in_turret.tutorial_showtext)) {
+    return [[level.disable_super_in_turret.tutorial_showtext]](var_0);
+  }
+
+  return 0;
 }
 
-// Params 4
-// Size: 0x52
-function ref_131c3( var0, var1, var2, var3 )
-{
-    if ( scripts\mp\menus::ref_13733() )
-    {
-        if ( !isdefined( level.squaddata[ var0 ][ var1 ].difficultytabledata ) )
-        {
-            level.squaddata[ var0 ][ var1 ].difficultytabledata = [];
-        }
-        
-        level.squaddata[ var0 ][ var1 ].difficultytabledata[ var2 ] = var3;
-        return;
-    }
-    
-    level.teamdata[ var0 ][ var2 ] = var3;
+function isfeatureenabledwrapper(var_0) {
+  if(isDefined(level.disable_super_in_turret) && isDefined(level.disable_super_in_turret.unset_relic_aggressive_melee_params)) {
+    return [[level.disable_super_in_turret.unset_relic_aggressive_melee_params]](var_0);
+  }
+
+  return 0;
 }
 
-// Params 3
-// Size: 0x56
-function round_at_max( var0, var1, var2 )
-{
-    if ( scripts\mp\menus::ref_13733() )
-    {
-        if ( !isdefined( level.squaddata[ var0 ][ var1 ].difficultytabledata ) || !isdefined( level.squaddata[ var0 ][ var1 ].difficultytabledata[ var2 ] ) )
-        {
-            return;
-        }
-        
-        return level.squaddata[ var0 ][ var1 ].difficultytabledata[ var2 ];
-    }
-    
-    return level.teamdata[ var0 ][ var2 ];
-}
+function gunship_spawnvfx() {
+  level endon("game_ended");
 
-// Params 5
-// Size: 0x67
-function ref_1276a( var0, var1, var2, var3, var4 )
-{
-    if ( scripts\mp\menus::ref_13733() )
-    {
-        var5 = round_enemy_stuck_logic( var2.team, var2.squadindex );
-        
-        foreach ( var7 in var5 )
-        {
-            if ( !isdefined( var3 ) || var7 != var3 )
-            {
-                self playsoundtoplayer( var0, var7, var4 );
-            }
-        }
-        
-        return;
-    }
-    
-    self playsoundtoteam( var0, var1, var3, var4 );
-}
-
-// Params 3
-// Size: 0x42, Type: bool
-function updatesquadmemberlaststandreviveprogress( var0, var1, var2 )
-{
-    var3 = ( var0[ 0 ], var0[ 1 ], 0 );
-    var4 = ( var1[ 0 ], var1[ 1 ], 0 );
-    var5 = ( var2[ 0 ], var2[ 1 ], 0 );
-    var6 = vectornormalize( var3 - var4 );
-    var7 = vectornormalize( var5 - var4 );
-    var8 = vectordot( var6, var7 );
-    return var8 > 0;
-}
-
-// Params 4
-// Size: 0xf6
-function woods_two_death_func( var0, var1, var2, var3 )
-{
-    var4 = var0[ 0 ] - var2[ 0 ];
-    var5 = var0[ 1 ] - var2[ 1 ];
-    var6 = var1[ 0 ] - var2[ 0 ];
-    var7 = var1[ 1 ] - var2[ 1 ];
-    var8 = float( var3 );
-    var9 = var6 - var4;
-    var10 = var7 - var5;
-    var11 = var9 * var9 + var10 * var10;
-    var12 = var4 * var7 - var6 * var5;
-    var13 = var8 * var8 * var11 - var12 * var12;
-    
-    if ( var13 < 0 )
-    {
-        return;
-    }
-    
-    if ( var13 == 0 )
-    {
-        var14 = var12 * var10 / var11 + var2[ 0 ];
-        var15 = -1 * var12 * var9 / var11 + var2[ 1 ];
-        return ( var14, var15, 0 );
-    }
-    
-    var16 = sqrt( var15 );
-    var17 = var14 * var12;
-    var18 = scripts\engine\utility::sign( var12 ) * var11 * var16;
-    var19 = ( var17 + var18 ) / var13 + var4[ 0 ];
-    var20 = ( var17 - var18 ) / var13 + var4[ 0 ];
-    var21 = -1 * var14 * var11;
-    var22 = abs( var12 ) * var16;
-    var23 = ( var21 + var22 ) / var13 + var4[ 1 ];
-    var24 = ( var21 - var22 ) / var13 + var4[ 1 ];
-    return [ ( var19, var23, 0 ), ( var20, var24, 0 ) ];
-}
-
-// Params 3
-// Size: 0xa6
-function registersuperextraweapon( var0, var1, var2 )
-{
-    var3 = woods_two_death_func( var0, var1, var2.origin, var2.radius );
-    
-    if ( !isdefined( var3 ) )
-    {
-        return;
-    }
-    
-    if ( !isarray( var3 ) )
-    {
-        if ( updatesquadmemberlaststandreviveprogress( var3, var0, var1 ) )
-        {
-            return var3;
-        }
-        
-        return;
-    }
-    
-    var4 = updatesquadmemberlaststandreviveprogress( var3[ 0 ], var0, var1 );
-    var5 = updatesquadmemberlaststandreviveprogress( var3[ 1 ], var0, var1 );
-    
-    if ( !var4 && !var5 )
-    {
-        return;
-    }
-    
-    if ( var4 && !var5 )
-    {
-        return var3[ 0 ];
-    }
-    
-    if ( var5 && !var4 )
-    {
-        return var3[ 1 ];
-    }
-    
-    var6 = distance2dsquared( var0, var3[ 0 ] );
-    var7 = distance2dsquared( var0, var3[ 1 ] );
-    
-    if ( var6 < var7 )
-    {
-        return var3[ 0 ];
-    }
-    
-    return var3[ 1 ];
-}
-
-// Params 3
-// Size: 0x54
-function safehouse_struct( var0, var1, var2 )
-{
-    var3 = var1[ 0 ] - var0[ 0 ];
-    var4 = var1[ 1 ] - var0[ 1 ];
-    var5 = var1[ 2 ] - var0[ 2 ];
-    
-    if ( var3 != 0 )
-    {
-        var6 = ( var2[ 0 ] - var0[ 0 ] ) / var3;
-    }
-    else
-    {
-        var6 = ( var3[ 1 ] - var1[ 1 ] ) / var5;
-    }
-    
-    var7 = var1[ 2 ] + var6 * var6;
-    return var7;
-}
-
-// Params 2
-// Size: 0x2c, Type: bool
-function updaterectangularzone( var0, var1 )
-{
-    var2 = var1.origin[ 2 ];
-    var3 = var2 + var1.height;
-    return var0[ 2 ] >= var2 && var0[ 2 ] <= var3;
-}
-
-// Params 3
-// Size: 0x1a3
-function registertabletinit( var0, var1, var2 )
-{
-    var3 = woods_two_death_func( var0, var1, var2.origin, var2.radius );
-    
-    if ( !isdefined( var3 ) )
-    {
-        return;
-    }
-    
-    if ( !isarray( var3 ) )
-    {
-        if ( updatesquadmemberlaststandreviveprogress( var3, var0, var1 ) )
-        {
-            var4 = safehouse_struct( var0, var1, var3 );
-            var3 = ( var3[ 0 ], var3[ 1 ], var4 );
-            
-            if ( updaterectangularzone( var3, var2 ) )
-            {
-                return var3;
-            }
-            
-            return;
-        }
-        
-        return;
-    }
-    
-    var5 = updatesquadmemberlaststandreviveprogress( var4[ 0 ], var1, var2 );
-    var6 = updatesquadmemberlaststandreviveprogress( var4[ 1 ], var1, var2 );
-    
-    if ( !var5 && !var6 )
-    {
-        return;
-    }
-    
-    if ( var5 && !var6 )
-    {
-        var4 = safehouse_struct( var1, var2, var4[ 0 ] );
-        var4 = ( var4[ 0 ][ 0 ], var4[ 0 ][ 1 ], var4 );
-        
-        if ( updaterectangularzone( var4[ 0 ], var3 ) )
-        {
-            return var4[ 0 ];
-        }
-        
-        return;
-    }
-    
-    if ( var4 && !var6 )
-    {
-        var4 = safehouse_struct( var2, var3, var5[ 1 ] );
-        var5 = ( var5[ 1 ][ 0 ], var5[ 1 ][ 1 ], var4 );
-        
-        if ( updaterectangularzone( var5[ 1 ], var4 ) )
-        {
-            return var5[ 1 ];
-        }
-        
-        return;
-    }
-    
-    var4 = safehouse_struct( var3, var4, var6[ 0 ] );
-    var6 = ( var6[ 0 ][ 0 ], var6[ 0 ][ 1 ], var4 );
-    var7 = updaterectangularzone( var6[ 0 ], var5 );
-    var4 = safehouse_struct( var3, var4, var6[ 1 ] );
-    var6 = ( var6[ 1 ][ 0 ], var6[ 1 ][ 1 ], var4 );
-    var8 = updaterectangularzone( var6[ 1 ], var5 );
-    
-    if ( !var7 && !var8 )
-    {
-        return;
-    }
-    
-    if ( var7 && !var8 )
-    {
-        return var6[ 0 ];
-    }
-    
-    if ( var8 && !var7 )
-    {
-        return var6[ 1 ];
-    }
-    
-    var9 = distance2dsquared( var3, var6[ 0 ] );
-    var10 = distance2dsquared( var3, var6[ 1 ] );
-    
-    if ( var9 < var10 )
-    {
-        return var6[ 0 ];
-    }
-    
-    return var6[ 1 ];
-}
-
-// Params 3
-// Size: 0x89
-function ref_12a18( var0, var1, var2 )
-{
-    var3 = [];
-    
-    foreach ( var5 in var2 )
-    {
-        var6 = registersuperextraweapon( var0, var1, var5 );
-        
-        if ( isdefined( var6 ) )
-        {
-            var3 = var6;
-        }
-    }
-    
-    var8 = undefined;
-    var9 = 0;
-    
-    foreach ( var6 in var3 )
-    {
-        var11 = distance2dsquared( var0, var6 );
-        
-        if ( !isdefined( var8 ) || var11 < var9 )
-        {
-            var8 = var6;
-            var9 = var11;
-        }
-    }
-    
-    return var8;
-}
-
-// Params 3
-// Size: 0x89
-function ref_12a19( var0, var1, var2 )
-{
-    var3 = [];
-    
-    foreach ( var5 in var2 )
-    {
-        var6 = registertabletinit( var0, var1, var5 );
-        
-        if ( isdefined( var6 ) )
-        {
-            var3 = var6;
-        }
-    }
-    
-    var8 = undefined;
-    var9 = 0;
-    
-    foreach ( var6 in var3 )
-    {
-        var11 = distancesquared( var0, var6 );
-        
-        if ( !isdefined( var8 ) || var11 < var9 )
-        {
-            var8 = var6;
-            var9 = var11;
-        }
-    }
-    
-    return var8;
-}
-
-// Params 0
-// Size: 0x25, Type: bool
-function nuke_vault_suicidebombers()
-{
-    return isalive( self ) && ( scripts\common\vehicle::isvehicle() || isdefined( self.classname ) && self.classname == "script_vehicle" );
-}
-
-// Params 0
-// Size: 0xe, Type: bool
-function shouldusegoldbarassets()
-{
-    return getdvarint( "scr_br_plunder_use_gold_bar_assets", 0 ) != 0;
-}
-
-// Params 3
-// Size: 0x31
-function runbrgametypefuncwrapper( var0, var1, var2 )
-{
-    if ( isdefined( level.disable_super_in_turret ) && isdefined( level.disable_super_in_turret.ref_12e05 ) )
-    {
-        return [[ level.disable_super_in_turret.ref_12e05 ]]( var0, var1, var2 );
-    }
-}
-
-// Params 1
-// Size: 0x2e
-function isbrgametypefuncdefinedwrapper( var0 )
-{
-    if ( isdefined( level.disable_super_in_turret ) && isdefined( level.disable_super_in_turret.tutorial_showtext ) )
-    {
-        return [[ level.disable_super_in_turret.tutorial_showtext ]]( var0 );
-    }
-    
-    return 0;
-}
-
-// Params 1
-// Size: 0x2e
-function isfeatureenabledwrapper( var0 )
-{
-    if ( isdefined( level.disable_super_in_turret ) && isdefined( level.disable_super_in_turret.unset_relic_aggressive_melee_params ) )
-    {
-        return [[ level.disable_super_in_turret.unset_relic_aggressive_melee_params ]]( var0 );
-    }
-    
-    return 0;
-}
-
-// Params 0
-// Size: 0x65
-function gunship_spawnvfx()
-{
-    level endon( "game_ended" );
-    
-    if ( level.gametype == "br" )
-    {
-        wait 0.1;
-        
-        if ( !isdefined( level.debugforcesre2 ) )
-        {
-            level.debugforcesre2 = "br_fx";
-        }
-        
-        self setscriptablepartstate( level.debugforcesre2, "clouds" );
-        return;
-    }
-    
-    var0 = level._effect[ "vfx_snatch_ac130_clouds" ];
-    
-    if ( !isdefined( var0 ) )
-    {
-        return;
-    }
-    
+  if(level.gametype == "br") {
     wait 0.1;
-    playfxontag( var0, self, "tag_body" );
+
+    if(!isDefined(level.debugforcesre2)) {
+      level.debugforcesre2 = "br_fx";
+    }
+
+    self setscriptablepartstate(level.debugforcesre2, "clouds");
+    return;
+  }
+
+  var_0 = level._effect["vfx_snatch_ac130_clouds"];
+
+  if(!isDefined(var_0)) {
+    return;
+  }
+
+  wait 0.1;
+  playFXOnTag(var_0, self, "tag_body");
 }
 
-// Params 1
-// Size: 0x9b
-function makepathstruct( var0 )
-{
-    var1 = var0.r;
-    var2 = var0.randomangle;
-    var3 = var0.endangleoffset;
-    var4 = var0.centerpt;
-    var5 = ( var2 + var3 ) % 360;
-    var6 = ( var1 * cos( var2 ), var1 * sin( var2 ), scripts\cp_mp\parachute::getc130height() ) + var4;
-    var7 = ( var1 * cos( var5 ), var1 * sin( var5 ), scripts\cp_mp\parachute::getc130height() ) + var4;
-    var8 = vectornormalize( var7 - var6 );
-    var7 += var8 * var1;
-    var6 -= var8 * var1 * 2;
-    var9 = spawnstruct();
-    var9.startpt = var6;
-    var9.endpt = var7;
-    var9.angle = vectortoangles( var8 );
-    return var9;
+function makepathstruct(var_0) {
+  var_1 = var_0.r;
+  var_2 = var_0.randomangle;
+  var_3 = var_0.endangleoffset;
+  var_4 = var_0.centerpt;
+  var_5 = (var_2 + var_3) % 360;
+  var_6 = (var_1 * cos(var_2), var_1 * sin(var_2), scripts\cp_mp\parachute::getc130height()) + var_4;
+  var_7 = (var_1 * cos(var_5), var_1 * sin(var_5), scripts\cp_mp\parachute::getc130height()) + var_4;
+  var_8 = vectorNormalize(var_7 - var_6);
+  var_7 += var_8 * var_1;
+  var_6 -= var_8 * var_1 * 2;
+  var_9 = spawnStruct();
+  var_9.startpt = var_6;
+  var_9.endpt = var_7;
+  var_9.angle = vectortoangles(var_8);
+  return var_9;
 }
 
-// Params 0
-// Size: 0x17
-function calctrailpoint()
-{
-    var0 = self.origin - anglestoforward( self.angles ) * 150;
-    return var0;
+function calctrailpoint() {
+  var_0 = self.origin - anglesToForward(self.angles) * 150;
+  return var_0;
 }
-

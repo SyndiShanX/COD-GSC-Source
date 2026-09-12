@@ -63,36 +63,36 @@ function init_quest_util() {
     }
   }
 
-  if(isDefined(level.ƒó« Ç2J‹ ÿ0Û;¥ 6‹ ü·)) {
-    [[level.ƒó« Ç2J‹ ÿ0Û;¥6‹ ü·]]();
+  if(isDefined(level.disablelootfunction)) {
+    [[level.disablelootfunction]]();
   }
 
-  if(isDefined(level.½3‘–¹ ÆÊ± Þ½ G3] æl– Þ¹ ä² ÖX£ Æ† È·› Y)) {
-  thread disablelootfunctionprematchdone(level.½3‘–¹ ÆÊ± Þ½ G3] æl– Þ¹ ä² ÖX£ Æ† È·› Y);
-}
+  if(isDefined(level.disablelootfunctionprematchdone)) {
+    thread disablelootfunctionprematchdone(level.disablelootfunctionprematchdone);
+  }
 
-thread inittablets();
-thread ref_13234();
-game["dialog"]["mission_gen_accept"] = "mission_mission_gen_accept";
-game["dialog"]["mission_misc_success"] = "contract_misc_success";
-game["dialog"]["mission_obj_change"] = "mission_mission_obj_change";
-game["dialog"]["mission_obj_moved"] = "mission_mission_obj_moved";
-game["dialog"]["mission_obj_next_ptarget"] = "mission_mission_obj_next_ptarget";
-game["dialog"]["mission_obj_next_nptarget"] = "mission_mission_obj_next_nptarget";
-game["dialog"]["mission_obj_warning_time"] = "mission_mission_obj_warning_time";
-game["dialog"]["mission_obj_warning_capture"] = "mission_mission_obj_warning_capture";
-game["dialog"]["mission_obj_circle_fail"] = "mission_mission_obj_circle_fail";
-game["dialog"]["mission_gen_fail"] = "mission_mission_gen_fail";
-game["dialog"]["mission_teammate_down"] = "mission_teammate_down";
-game["dialog"]["mission_enemy_down"] = "mission_enemy_down";
-level._effect["vfx_dom_flare"] = loadfx("vfx/iw8_br/gameplay/vfx_br_flare_dom");
-level._effect["vfx_doom_flare"] = loadfx("vfx/iw8_br/island/gameplay/vfx_br3_flare_doomstation.vfx");
-level._effect["vfx_revive_flare"] = loadfx("vfx/iw8_br/gameplay/vfx_br_flare_revive");
-level._effect["vfx_smktrail_mortar"] = loadfx("vfx/iw8_br/gameplay/vfx_br_flare_smktrail");
-level._effect["vfx_marker_base_orange_pulse"] = loadfx("vfx/iw8_br/gameplay/vfx_br_tr_marker.vfx");
-level.elevator_lights_toggle = undefined;
-level.questinfo.hotfootabsloops = 1;
-level.ref_14060 = getdvarint("scr_br_usealtrewardtable", 0);
+  thread inittablets();
+  thread ref_13234();
+  game["dialog"]["mission_gen_accept"] = "mission_mission_gen_accept";
+  game["dialog"]["mission_misc_success"] = "contract_misc_success";
+  game["dialog"]["mission_obj_change"] = "mission_mission_obj_change";
+  game["dialog"]["mission_obj_moved"] = "mission_mission_obj_moved";
+  game["dialog"]["mission_obj_next_ptarget"] = "mission_mission_obj_next_ptarget";
+  game["dialog"]["mission_obj_next_nptarget"] = "mission_mission_obj_next_nptarget";
+  game["dialog"]["mission_obj_warning_time"] = "mission_mission_obj_warning_time";
+  game["dialog"]["mission_obj_warning_capture"] = "mission_mission_obj_warning_capture";
+  game["dialog"]["mission_obj_circle_fail"] = "mission_mission_obj_circle_fail";
+  game["dialog"]["mission_gen_fail"] = "mission_mission_gen_fail";
+  game["dialog"]["mission_teammate_down"] = "mission_teammate_down";
+  game["dialog"]["mission_enemy_down"] = "mission_enemy_down";
+  level._effect["vfx_dom_flare"] = loadfx("vfx/iw8_br/gameplay/vfx_br_flare_dom");
+  level._effect["vfx_doom_flare"] = loadfx("vfx/iw8_br/island/gameplay/vfx_br3_flare_doomstation.vfx");
+  level._effect["vfx_revive_flare"] = loadfx("vfx/iw8_br/gameplay/vfx_br_flare_revive");
+  level._effect["vfx_smktrail_mortar"] = loadfx("vfx/iw8_br/gameplay/vfx_br_flare_smktrail");
+  level._effect["vfx_marker_base_orange_pulse"] = loadfx("vfx/iw8_br/gameplay/vfx_br_tr_marker.vfx");
+  level.elevator_lights_toggle = undefined;
+  level.questinfo.hotfootabsloops = 1;
+  level.ref_14060 = getdvarint("scr_br_usealtrewardtable", 0);
 }
 
 function ref_11963() {
@@ -155,11 +155,11 @@ function disabletabletsaroundorigin(var_0, var_1, var_2) {
 
     foreach(var_7 in var_5) {
       if(tv_station_marker_player_connect_monitor(var_0[2], var_7.origin[2], var_2)) {
-        var_7.Ž¹ Ì uŠÌˆˆ + Pƒ½ ã) OÖG = 1;
-      scripts\mp\gametypes\br_pickups::ref_11a21(var_7);
+        var_7.invalidforreplace = 1;
+        scripts\mp\gametypes\br_pickups::ref_11a21(var_7);
+      }
     }
   }
-}
 }
 
 function tv_station_marker_player_connect_monitor(var_0, var_1, var_2) {
@@ -400,54 +400,54 @@ function ref_139e9(var_0) {
   while(var_3 < var_4) {
     var_8 = var_0[var_3];
 
-    if(istrue(var_8.Ž¹ Ì uŠÌˆˆ + Pƒ½ ã) OÖG)) {
-    var_3++;
-    continue;
-  }
-
-  level waittill("quest_started");
-  var_9 = obj_room_fire_01(var_8);
-
-  if(var_9 < 1) {
-    var_10 = 0;
-
-    while(var_3 < var_4) {
-      if(var_9 == 1 && var_8.circleindex >= relic_mythic_modifyplayerdamage()) {
-        break;
-      }
-
-      if(var_9 == 0 && var_8.circleindex >= relic_mythic_modifyplayerdamage()) {
-        var_0 = var_8;
-      }
-
+    if(istrue(var_8.invalidforreplace)) {
       var_3++;
-      var_8 = var_0[var_3];
-      var_9 = obj_room_fire_01(var_8);
+      continue;
     }
-  }
 
-  if(var_3 == var_4) {
-    var_4 = var_0.size;
-    continue;
-  }
+    level waittill("quest_started");
+    var_9 = obj_room_fire_01(var_8);
 
-  if(isDefined(level.ref_139ea) && level.ref_139ea != -1) {
-    var_1++;
+    if(var_9 < 1) {
+      var_10 = 0;
 
-    if(var_1 >= var_2) {
-      tabletshow(var_8);
-      var_2 += level.ref_139ea;
-      var_3++;
+      while(var_3 < var_4) {
+        if(var_9 == 1 && var_8.circleindex >= relic_mythic_modifyplayerdamage()) {
+          break;
+        }
+
+        if(var_9 == 0 && var_8.circleindex >= relic_mythic_modifyplayerdamage()) {
+          var_0 = var_8;
+        }
+
+        var_3++;
+        var_8 = var_0[var_3];
+        var_9 = obj_room_fire_01(var_8);
+      }
+    }
+
+    if(var_3 == var_4) {
       var_4 = var_0.size;
+      continue;
     }
 
-    continue;
-  }
+    if(isDefined(level.ref_139ea) && level.ref_139ea != -1) {
+      var_1++;
 
-  tabletshow(var_8);
-  var_3++;
-  var_4 = var_0.size;
-}
+      if(var_1 >= var_2) {
+        tabletshow(var_8);
+        var_2 += level.ref_139ea;
+        var_3++;
+        var_4 = var_0.size;
+      }
+
+      continue;
+    }
+
+    tabletshow(var_8);
+    var_3++;
+    var_4 = var_0.size;
+  }
 }
 
 function ks_airdropcratearmor(var_0) {

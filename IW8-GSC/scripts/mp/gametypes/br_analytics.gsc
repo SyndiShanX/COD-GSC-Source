@@ -5,13 +5,13 @@
 
 function destroycrateinbadtrigger() {
   level.ref_11b22 = &ref_1205b;
-  level.º: ] û© ý] oe°„)¡˜ jÃ) û3 #Èû’¨— = &branalytics_revive;
+  level.br_branalytics_revivefunc = &branalytics_revive;
 
-if(getdvarint("NNNQSOPLKR", 0)) {
-  level.kothtotaltime = [];
-  analyticsaddevent();
-  return;
-}
+  if(getdvarint("NNNQSOPLKR", 0)) {
+    level.kothtotaltime = [];
+    analyticsaddevent();
+    return;
+  }
 }
 
 function add_outline() {

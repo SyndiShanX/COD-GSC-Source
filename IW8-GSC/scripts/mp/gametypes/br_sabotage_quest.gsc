@@ -55,7 +55,7 @@ function takequestitem(var_0) {
   var_1.team = self.team;
   var_1.semtex_stuckplayer = self;
   var_1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "players");
-  var_1.ŽK / ÃsˆE÷£ èûË = 1;
+  var_1.activequest = 1;
   var_3 = ref_12e41();
   var_4 = ref_12e4c(var_1, var_3);
   var_1.ref_14261 = sortbydistance(var_4[0], var_1.semtex_stuckplayer.origin);
@@ -215,7 +215,7 @@ function ref_12e45() {
 
 function ref_12e4b() {
   level notify("calloutmarkerping_warzoneKillQuestIconGlobal_" + self.objectiveiconid);
-  self.ŽK / ÃsˆE÷£ èûË = 0;
+  self.activequest = 0;
   ref_12e3d();
   scripts\mp\gametypes\br_quest_util::releaseteamonquest(self.team);
 }
@@ -350,7 +350,7 @@ function ref_12e3c() {
 }
 
 function ref_12e4a() {
-  if(isDefined(self.ref_13a92) && self.ŽK / ÃsˆE÷£ èûË == 1) {
+  if(isDefined(self.ref_13a92) && self.activequest == 1) {
     if(sabotage_isvehicleincircle(self.ref_13a92)) {
       scripts\mp\gametypes\br_quest_util::ref_11db0(self.ref_13a92.veh_origin);
       return;
@@ -393,7 +393,22 @@ function ref_12e41() {
 
 function ref_12e4c(var_0) {
   var_1 = [];
-  GscBinSkip0(0x2e, 0, []);
+  var_1[0] = [];
+  var_1[1] = [];
+
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
+    var_3 = distance2d(self.semtex_stuckplayer.origin, var_0[var_2].veh_origin);
+
+    if(abs(var_3) > getdvarint("scr_br_sabotage_sort_dist", 5905) && abs(var_3) < getdvarint("scr_br_sabotage_max_dist", 13780)) {
+      var_1[0][var_1[0].size] = var_0[var_2];
+      continue;
+    }
+
+    if(abs(var_3) < getdvarint("scr_br_sabotage_max_dist", 13780))
+      var_1[1][var_1[1].size] = var_0[var_2];
+  }
+
+  return var_1;
 }
 
 function sabotage_isvehicleincircle(var_0) {
@@ -414,8 +429,8 @@ function sabotage_isvehicleincircle(var_0) {
 function ref_12e42(var_0, var_1) {
   level endon("game_ended");
 
-  if(isDefined(var_1.ŽK / ÃsˆE÷£ èûË)) {
-    if(var_1.ŽK / ÃsˆE÷£ èûË == 1) {
+  if(isDefined(var_1.activequest)) {
+    if(var_1.activequest == 1) {
       if(isDefined(var_0.center_node)) {
         var_2 = 0;
 
