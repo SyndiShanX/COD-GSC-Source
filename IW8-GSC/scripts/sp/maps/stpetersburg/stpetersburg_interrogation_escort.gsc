@@ -67,8 +67,8 @@ function escort_suit_toggle(var_0) {
 function set_escort_player_pitch_bounds(var_0, var_1) {
   var_0 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, 10);
   var_1 = scripts\engine\utility::ter_op(isDefined(var_0), var_1, 30);
-  setsaveddvar("NNSNKNRTPL", var_0);
-  setsaveddvar("LOMLPPTKO", var_1);
+  setsaveddvar("player_view_pitch_up", var_0);
+  setsaveddvar("player_view_pitch_down", var_1);
 }
 
 function set_escort_phase(var_0) {

@@ -664,7 +664,7 @@ function eventsplashesthink() {
     var_0 = 1;
   }
 
-  var_1 = getdvarint("OLLOKOKKSM", 0) == 1 || !isgamebattlematch();
+  var_1 = getdvarint("mlg_gamebattles_enable_xp", 0) == 1 || !isgamebattlematch();
 
   if(!var_1) {
     var_0 = 0;
@@ -695,23 +695,23 @@ function eventsplashesthink() {
   var_2 = self getprivatepartysize() > 1;
 
   if(var_0) {
-    if(getdvarint("LKKNORQKTP") == 2 || var_2 && getdvarint("NTLKOKLKRS") == 2 || self isps4player() && getdvarfloat("MPPRMTPSLT") == 2) {
+    if(getdvarint("online_mp_xpscale") == 2 || var_2 && getdvarint("online_mp_party_xpscale") == 2 || self isps4player() && getdvarfloat("MPPRMTPSLT") == 2) {
       showsplash("event_double_xp");
     }
 
-    if(getdvarint("PMORNPNTK") == 2 || var_2 && getdvarint("LNQMMNNPSR") == 2) {
+    if(getdvarint("online_mp_weapon_xpscale") == 2 || var_2 && getdvarint("online_mp_party_weapon_xpscale") == 2) {
       showsplash("event_double_weapon_xp");
     }
 
-    if(getdvarint("LTKKKPSRSK") == 2) {
+    if(getdvarint("online_battle_xpscale") == 2) {
       showsplash("event_double_battle_xp");
     }
 
-    if(getdvarint("LPORTLTMNP") > 0) {
+    if(getdvarint("online_double_keys") > 0) {
       showsplash("event_double_keys");
     }
 
-    if(getdvarint("OMPLRMMKML") == 2 || var_2 && getdvarint("NTPRTMORKK") == 2) {
+    if(getdvarint("online_mp_missionteam_xpscale") == 2 || var_2 && getdvarint("online_mp_party_missionteam_xpscale") == 2) {
       showsplash("event_double_xp_teams");
       return;
     }

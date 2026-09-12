@@ -36,7 +36,7 @@ function init_airstrike_params() {
     level.eairstrikeheight.targetname = "airstrikeheight";
   }
 
-  if(getdvarint("LLQQOPKTKM", 0) == 1) {
+  if(getdvarint("r_reflectionProbeGenerate", 0) == 1) {
     return;
   } else {
     wait 10;

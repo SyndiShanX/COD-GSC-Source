@@ -5,7 +5,7 @@
 
 function init() {
   track_consecutive_kills();
-  var_0 = getdvarint("PMORNPNTK", 1);
+  var_0 = getdvarint("online_mp_weapon_xpscale", 1);
   addglobalweaponrankxpmultiplier(var_0, "online_mp_weapon_xpscale");
   thread onplayerconnect();
 }
@@ -16,7 +16,7 @@ function onplayerconnect() {
 
     if(!isai(var_0)) {
       if(level.weaponxpenabled) {
-        var_1 = getdvarint("LNQMMNNPSR");
+        var_1 = getdvarint("online_mp_party_weapon_xpscale");
         var_2 = var_0 getprivatepartysize() > 1;
 
         if(var_2) {
@@ -100,7 +100,7 @@ function isplayerweaponatmaxxp(var_0) {
 }
 
 function weaponshouldgetxp(var_0) {
-  if(self.pers["rank"] < 3 && !getdvarint("OSPNSPSKL")) {
+  if(self.pers["rank"] < 3 && !getdvarint("force_ranking")) {
     return false;
   }
 

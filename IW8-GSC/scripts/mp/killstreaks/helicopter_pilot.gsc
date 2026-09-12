@@ -149,7 +149,7 @@ function starthelipilot(var_0) {
   var_0 endon("death");
   scripts\mp\utility\player::setusingremote(var_0.helipilottype);
 
-  if(getdvarint("NOSLRNTRKL")) {
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\player::setthirdpersondof(0);
   }
 
@@ -384,7 +384,7 @@ function helipilot_endride(var_0) {
       scripts\mp\utility\player::clearusingremote();
     }
 
-    if(getdvarint("NOSLRNTRKL")) {
+    if(getdvarint("camera_thirdPerson")) {
       scripts\mp\utility\player::setthirdpersondof(1);
     }
 

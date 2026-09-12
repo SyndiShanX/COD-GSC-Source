@@ -20,7 +20,7 @@ function delete_objective_on_death_safe() {
 }
 
 function initarrays() {
-  level.brloottablename = getDvar("RKMMNSQKO", "mp/loot/br/default/loot_item_defs.csv");
+  level.brloottablename = getDvar("loot_table_name", "mp/loot/br/default/loot_item_defs.csv");
 
   if(!isDefined(level.br_pickups)) {
     level.br_pickups = spawnStruct();

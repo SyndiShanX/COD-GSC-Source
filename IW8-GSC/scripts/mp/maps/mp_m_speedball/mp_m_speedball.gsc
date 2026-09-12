@@ -14,9 +14,9 @@ function main() {
   scripts\mp\compass::setupminimap("compass_map_mp_m_speedball", "codcaster_compass_map_mp_m_speedball");
   scripts\cp_mp\utility\game_utility::registerarenamap();
   level.requiresminstartspawns = 0;
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NSSMQLPRNT", 0.01);
-  setDvar("NQTLPTNSSO", 500);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
+  setDvar("cg_defaultWindStrength", 500);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "woodland";

@@ -4,7 +4,7 @@
 ***********************************************/
 
 function main() {
-  game["isLaunchChunk"] = getdvarint("MPNRKLKOKR", 0) != 0;
+  game["isLaunchChunk"] = getdvarint("fastfileAltLaunch", 0) != 0;
 
   if(getDvar("mapname") == "mp_background") {
     return;
@@ -262,7 +262,7 @@ function updategametypedvars() {
   }
 
   if(getdvarint("allow_enemy_proxchat", 0) == 1) {
-    setDvar("LOSOOOTNMS", 1);
+    setDvar("voice_proximity_enemy", 1);
     var_0 = 128;
     var_1 = getdvarint("proxchat_radius_override", 0);
 
@@ -270,7 +270,7 @@ function updategametypedvars() {
       var_0 = var_1;
     }
 
-    setDvar("NNMLSMNTOQ", var_0);
+    setDvar("voice_proximity_radius", var_0);
   }
 
   level.arenaloadouts = scripts\mp\utility\dvars::dvarintvalue("arenaLoadouts", 1, 1, 16);

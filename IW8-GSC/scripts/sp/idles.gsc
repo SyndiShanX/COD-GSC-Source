@@ -538,7 +538,7 @@ function wait_check_player_anim_interference(var_0, var_1, var_2) {
 
   var_3 = length2d(level.player.origin - var_2.origin);
   var_4 = length2d(level.player.origin - var_2 scripts\anim\utility::getanimendpos(var_1));
-  var_5 = float(getDvar("NSRPQNLSNK")) * 0.25;
+  var_5 = float(getDvar("g_speed")) * 0.25;
 
   for(;;) {
     if(var_3 / var_5 > getanimlength(var_1) && var_4 / var_5 > getanimlength(var_1)) {
@@ -551,7 +551,7 @@ function wait_check_player_anim_interference(var_0, var_1, var_2) {
 
     var_3 = length2d(level.player.origin - var_2.origin);
     var_4 = length2d(level.player.origin - var_2 scripts\anim\utility::getanimendpos(var_1));
-    var_5 = float(getDvar("NSRPQNLSNK")) * 0.25;
+    var_5 = float(getDvar("g_speed")) * 0.25;
     var_6 = getanimlength(var_0);
     wait var_6;
   }
@@ -562,7 +562,7 @@ function wait_check_player_anim_interference_group(var_0, var_1, var_2) {
   self endon("ambient_idle_scene_end");
   var_3 = undefined;
   var_4 = undefined;
-  var_5 = float(getDvar("NSRPQNLSNK")) * 0.25;
+  var_5 = float(getDvar("g_speed")) * 0.25;
 
   for(;;) {
     var_6 = 0;
@@ -571,7 +571,7 @@ function wait_check_player_anim_interference_group(var_0, var_1, var_2) {
       var_8 = var_2[var_7];
       var_3 = length2d(level.player.origin - var_8.origin);
       var_4 = length2d(level.player.origin - var_8 scripts\anim\utility::getanimendpos(var_1[var_7]));
-      var_5 = float(getDvar("NSRPQNLSNK")) * 0.25;
+      var_5 = float(getDvar("g_speed")) * 0.25;
 
       if(var_3 / var_5 > getanimlength(var_1[var_7]) && var_4 / var_5 > getanimlength(var_1[var_7])) {
         var_6++;

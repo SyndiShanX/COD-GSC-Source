@@ -270,7 +270,7 @@ function alley_bldg_door_handler() {
 }
 
 function murderhole_breach_main() {
-  setsaveddvar("TLOLRMSL", 1);
+  setsaveddvar("fx_lights_radius_scale", 1);
   thread scripts\sp\maps\marines\marines_utility::transient_waittill("get_to_mgs", "marines_hospital_fake_geo_tr", ["marines_hospital_geo_tr", "marines_lobby_geo_tr", "marines_groundfloor_geo_tr"]);
   thread scripts\sp\maps\marines\marines_utility::propane_rockets_init();
   thread stairs_climb_third_floor_dialogue_handler();
@@ -446,7 +446,7 @@ function murderhole_breach_catchup() {
   scripts\engine\utility::flag_set("alex_civ_dialogue");
   scripts\engine\utility::flag_set("mg_team_alerted");
   scripts\engine\utility::flag_set("mg_guys_dead");
-  setsaveddvar("TLOLRMSL", 1);
+  setsaveddvar("fx_lights_radius_scale", 1);
 }
 
 function retreat_window_glass_shatter() {

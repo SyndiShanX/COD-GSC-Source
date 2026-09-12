@@ -9,12 +9,12 @@ function main() {
   setdvarifuninitialized("scr_squad_leader_max", 2);
   setdvarifuninitialized("scr_ai_squad_move_type", "1");
   setdvarifuninitialized("scr_smoketest", "0");
-  setsaveddvar("MQPQKNPQOK", 2);
-  setsaveddvar("MRNRKKOPLN", 2);
-  setsaveddvar("NQTLPTNSSO", 3);
-  setsaveddvar("OLSKLTPPMR", 0.7);
-  setsaveddvar("LQLSPQOPKM", 50);
-  setsaveddvar("NTMMTOLQMQ", (-550, 0, 0));
+  setsaveddvar("cg_defaultWindAmplitudeScale", 2);
+  setsaveddvar("cg_defaultWindFrequencyScale", 2);
+  setsaveddvar("cg_defaultWindStrength", 3);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.7);
+  setsaveddvar("cg_defaultWindAreaScale", 50);
+  setsaveddvar("cg_defaultWindDir", (-550, 0, 0));
   scripts\cp\utility::coop_mode_enable();
   registerscriptedagents();
   scripts\engine\utility::create_func_ref("set_vehicle_anims_umike", &scripts\cp\vehicle::ref_13119);
@@ -22,11 +22,11 @@ function main() {
   scripts\cp\maps\cp_so_safehouse\cp_so_safehouse_precache::main();
   scripts\cp\maps\cp_so_safehouse\gen\cp_so_safehouse_art::main();
   scripts\cp\maps\cp_so_safehouse\cp_so_safehouse_fx::main();
-  setDvar("NPONLLLSPL", 1.25);
-  setDvar("PKKMTTRQO", 4);
-  setDvar("NKLMONNPNN", 2048);
-  setDvar("MROOOROPKL", 8);
-  setDvar("LTQMSPKRKO", 8);
+  setDvar("sm_sunSampleSizeNear", 1.25);
+  setDvar("r_umbraMinObjectContribution", 4);
+  setDvar("r_umbraAccurateOcclusionThreshold", 2048);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotUpdateLimit", 8);
 
   if(level.createfx_enabled) {
     return;

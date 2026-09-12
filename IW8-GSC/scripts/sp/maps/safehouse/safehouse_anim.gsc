@@ -613,15 +613,15 @@ function disguise_intro_remove_fov_user_scale(var_0) {
 
 function plant_add_zplanes_override(var_0) {
   if(level.player ispcplayer()) {
-    level.og_zplanes = getDvar("OMNONNMOTP");
-    setsaveddvar("OMNONNMOTP", "0.1 500 2.5 10000");
+    level.og_zplanes = getDvar("r_zPlanes");
+    setsaveddvar("r_zPlanes", "0.1 500 2.5 10000");
     return;
   }
 }
 
 function plant_remove_zplanes_override(var_0) {
   if(level.player ispcplayer() && isDefined(level.og_zplanes)) {
-    setsaveddvar("OMNONNMOTP", level.og_zplanes);
+    setsaveddvar("r_zPlanes", level.og_zplanes);
     level.og_zplanes = undefined;
     return;
   }

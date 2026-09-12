@@ -13,9 +13,9 @@ function main() {
   scripts\sp\maps\lab\lab_precache::main();
   scripts\sp\maps\lab\lab_anim::main();
   init_introscreen();
-  setsaveddvar("MKNNNONLSK", 4);
-  setsaveddvar("NOSQLKNSQO", 45);
-  setsaveddvar("MMLNNQSTTL", 5);
+  setsaveddvar("fx_lightmap_max_level", 4);
+  setsaveddvar("r_tessellationFactor", 45);
+  setsaveddvar("fx_alphaThreshold", 5);
   setDvar("ballistics_muzzleSpeed", 16000);
   scripts\common\basic_wind::load_all_wind();
   lab_starts();
@@ -84,7 +84,7 @@ function preload() {
   scripts\sp\maps\lab\lab_pipes::pipes_outdoor_preload();
   scripts\sp\maps\lab\lab_finale::finale_preload();
   scripts\engine\sp\utility::add_hint_string("lab_melee", &"LAB/COSTOM_MELEE");
-  setsaveddvar("MQLRQNRRPR", 0);
+  setsaveddvar("sm_sunStageBounds", 0);
 }
 
 function postload() {

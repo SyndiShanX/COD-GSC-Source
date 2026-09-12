@@ -5,8 +5,8 @@
 
 function main() {
   setDvar("r_useCompressedSunShadow", 1);
-  setDvar("TMNTMTQRM", 0);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 2);
-  setDvar("MQLRQNRRPR", 1);
+  setDvar("sm_sunDistantShadows", 0);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 2);
+  setDvar("sm_sunStageBounds", 1);
 }

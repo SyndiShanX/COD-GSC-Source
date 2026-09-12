@@ -12,7 +12,7 @@ function main() {
   scripts\mp\load::main();
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_emporium", "codcaster_compass_map_mp_emporium");
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   setDvar("scr_ignore_frontline_anchor", 1);
   game["attackers"] = "allies";
   game["defenders"] = "axis";

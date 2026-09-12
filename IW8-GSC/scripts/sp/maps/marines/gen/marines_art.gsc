@@ -285,7 +285,7 @@ function setvisionsetnaked(var_0, var_1, var_2) {
 
 function enable_volumetrics() {
   scripts\engine\utility::flag_wait("enable_volumetrics");
-  setsaveddvar("QPLMKRON", 1);
+  setsaveddvar("r_volumetrics", 1);
   scripts\engine\utility::flag_clear("enable_volumetrics");
   wait 1;
   thread enable_volumetrics();
@@ -293,7 +293,7 @@ function enable_volumetrics() {
 
 function disable_volumetrics() {
   scripts\engine\utility::flag_wait("disable_volumetrics");
-  setsaveddvar("QPLMKRON", 0);
+  setsaveddvar("r_volumetrics", 0);
   scripts\engine\utility::flag_clear("disable_volumetrics");
   wait 1;
   thread disable_volumetrics();

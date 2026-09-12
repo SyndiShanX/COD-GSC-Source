@@ -55,7 +55,7 @@ function main() {
   level._effect["sas_muzzle_flash"] = loadfx("vfx/iw8_mp/muzflash/vfx_muz_si_ar_w.vfx");
   level._effect["blood_splat"] = loadfx("vfx/iw8/weap/_impact/flesh/vfx_imp_flesh_lrg_exit.vfx");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\townhoused\gen\townhoused_fx::main();
     scripts\sp\maps\townhoused\gen\townhoused_sound::main();
     return;

@@ -163,7 +163,7 @@ function take_player_currency(var_0, var_1, var_2, var_3) {
   var_5 = max(0, var_4 - var_0);
   var_6 = int(var_4 - var_5);
 
-  if(getDvar("MOLPOSLOMO") != "zombie") {
+  if(getDvar("ui_gametype") != "zombie") {
     set_player_currency(var_5);
     return;
   }
@@ -332,7 +332,7 @@ function eog_player_tracking_init() {
     for(var_3 = 0; var_3 < level.eogtracking.size; var_3++) {
       var_12 = var_9 getplayerdata("cp", "EoGPlayer", var_0, level.eogtracking[var_3]);
 
-      if(level.eogtracking[var_3] != "currency" && getDvar("MOLPOSLOMO") != "cp_pvpve") {
+      if(level.eogtracking[var_3] != "currency" && getDvar("ui_gametype") != "cp_pvpve") {
         self setplayerdata("cp", "EoGPlayer", var_0, level.eogtracking[var_3], var_12);
       }
     }

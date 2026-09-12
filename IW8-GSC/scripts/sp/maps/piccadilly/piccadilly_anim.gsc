@@ -1248,8 +1248,8 @@ function police_die(var_0) {
 }
 
 function start_countdown(var_0) {
-  setsaveddvar("MMRNLMPPLT", "0");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicFullscreen", "0");
+  setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame("sp_piccadilly_vest_timer");
 }
 
@@ -1270,9 +1270,9 @@ function start_explosion(var_0) {
   var_3 = var_2 + 1;
   var_4 = scripts\sp\endmission::getlevelbink(var_3);
   level.endmission_bink_skip = 1;
-  setsaveddvar("LNSNKKLPLL", "0");
-  setsaveddvar("MMRNLMPPLT", "0");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicAboveUI", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
+  setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame(var_4, 1, 1, 1, 0, 0, 1);
 }
 

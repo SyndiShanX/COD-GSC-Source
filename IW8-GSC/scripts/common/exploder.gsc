@@ -690,7 +690,7 @@ function shouldrunserversideeffects() {
     return 1;
   }
 
-  return getDvar("OKOLRTLORL") != "1";
+  return getDvar("clientSideEffects") != "1";
 }
 
 function exploder_before_load(var_0, var_1, var_2) {

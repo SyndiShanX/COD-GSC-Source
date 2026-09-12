@@ -556,12 +556,12 @@ function infil_setup_ui() {
   setomnvar("ui_always_show_nameplates", 1);
   level.bypassclasschoicefunc = undefined;
   level.infil_in_progress = 1;
-  var_6 = getdvarint("LOPKSRNTTS");
-  var_7 = getdvarint("LROTSRRQMQ");
-  var_8 = getdvarint("NKMOPQSPMO");
-  setDvar("LOPKSRNTTS", 0);
-  setDvar("LROTSRRQMQ", 1);
-  setDvar("NKMOPQSPMO", 1);
+  var_6 = getdvarint("cg_drawCrosshair");
+  var_7 = getdvarint("cg_drawCrosshairNames");
+  var_8 = getdvarint("cg_drawFriendlyNamesAlways");
+  setDvar("cg_drawCrosshair", 0);
+  setDvar("cg_drawCrosshairNames", 1);
+  setDvar("cg_drawFriendlyNamesAlways", 1);
   level waittill("prematch_over");
 
   foreach(var_1 in level.players) {
@@ -570,9 +570,9 @@ function infil_setup_ui() {
   }
 
   setomnvar("ui_always_show_nameplates", var_5);
-  setDvar("LOPKSRNTTS", var_6);
-  setDvar("LROTSRRQMQ", var_7);
-  setDvar("NKMOPQSPMO", var_8);
+  setDvar("cg_drawCrosshair", var_6);
+  setDvar("cg_drawCrosshairNames", var_7);
+  setDvar("cg_drawFriendlyNamesAlways", var_8);
   level.infil_in_progress = undefined;
   wait 2;
   level.infil_in_progress_buffer = undefined;

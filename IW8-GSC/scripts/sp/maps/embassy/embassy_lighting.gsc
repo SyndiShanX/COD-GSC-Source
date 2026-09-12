@@ -71,15 +71,15 @@ function post_load() {
 }
 
 function lighting_setup_dvars() {
-  setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
-  setsaveddvar("LTQMSPKRKO", 6);
-  level.spotupdatelimit = getdvarint("LTQMSPKRKO");
-  setsaveddvar("MROOOROPKL", 8);
-  level.roundrobinlimit = getdvarint("MROOOROPKL");
-  setsaveddvar("LKOLRONRNQ", 750);
-  level.spotdistcull = getdvarint("LKOLRONRNQ");
-  setsaveddvar("MNQKPNLOPT", 1);
-  setsaveddvar("NRSOTSLSSO", 1);
+  setsaveddvar("r_volumetricDepth", "128 384 640 1024");
+  setsaveddvar("sm_spotUpdateLimit", 6);
+  level.spotupdatelimit = getdvarint("sm_spotUpdateLimit");
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
+  level.roundrobinlimit = getdvarint("sm_roundRobinPrioritySpotShadows");
+  setsaveddvar("sm_spotDistCull", 750);
+  level.spotdistcull = getdvarint("sm_spotDistCull");
+  setsaveddvar("sm_spotShadowScoreSystem", 1);
+  setsaveddvar("sm_spotUpdateMoreDynEnt", 1);
 }
 
 function lt_truck_crash_start() {
@@ -103,7 +103,7 @@ function truck_wreck_vision() {
 
 function green_beam_pickup() {
   thread green_beam_fade_on_lighting();
-  setsaveddvar("MPOKKOPMTN", "32 64 128 256");
+  setsaveddvar("r_volumetricDepth", "32 64 128 256");
   visionsetnaked("embassy_green_beam_pickup", 0.5);
   level.green_beam thread scripts\engine\sp\utility::dof_enable_autofocus(1.8, 20, undefined, undefined, "j_gun");
   wait 4;
@@ -112,7 +112,7 @@ function green_beam_pickup() {
   thread green_beam_fade_off_lighting();
   wait 2.5;
   visionsetnaked("", 0.5);
-  setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
+  setsaveddvar("r_volumetricDepth", "128 384 640 1024");
   level thread scripts\engine\sp\utility::dof_disable_autofocus();
 }
 
@@ -173,7 +173,7 @@ function bpg_combat_window_exterior_light_on_and_off() {
   var_0 setlightintensity(0);
   var_1 setlightintensity(0);
 
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     var_0 setlightintensity(1.5);
     var_1 setlightintensity(1.5);
     return;
@@ -221,7 +221,7 @@ function all_lights_off() {
   level.bpg_car_fire_light = getEnt("bpg_scene_car_fire_light_01", "targetname");
   level.bpg_car_fire_light setlightintensity(0);
 
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level.bpg_car_fire_light setlightintensity(40);
     return;
   }
@@ -244,8 +244,8 @@ function heli_crash_fire_lights() {
 
 function lt_infil_helicopter_start() {
   thread setup_infil_lights();
-  setsaveddvar("MPOKKOPMTN", "64 192 320 512");
-  setsaveddvar("LKOLRONRNQ", 450);
+  setsaveddvar("r_volumetricDepth", "64 192 320 512");
+  setsaveddvar("sm_spotDistCull", 450);
   waitframe();
   visionsetnaked("embassy_infil_heli", 0);
   level.player enablephysicaldepthoffieldscripting();
@@ -256,7 +256,7 @@ function lt_infil_helicopter_start() {
   level.kyle thread scripts\engine\sp\utility::dof_enable_autofocus(2.8, 4, undefined, undefined, "tag_eye", undefined, 1);
   wait 2;
   scripts\engine\utility::flag_set("heli_door");
-  setsaveddvar("MPOKKOPMTN", "128 768 1280 2048");
+  setsaveddvar("r_volumetricDepth", "128 768 1280 2048");
   visionsetnaked("embassy_infil", 0.5);
   wait 0.5;
   level thread scripts\engine\sp\utility::dof_enable(2.2, 3000, 4, 2, undefined, undefined);
@@ -270,7 +270,7 @@ function lt_infil_helicopter_start() {
   thread rocket_hit_blur();
   level waittill("spawn_hat");
   wait 2.75;
-  setsaveddvar("MPOKKOPMTN", "64 128 256 512");
+  setsaveddvar("r_volumetricDepth", "64 128 256 512");
   level.infil_heli thread scripts\engine\sp\utility::dof_enable_autofocus(4, 10, 10, undefined, "tag_origin", [level.player], 1);
   wait 2;
   level.price thread scripts\engine\sp\utility::dof_enable_autofocus(1.4, 10, 10, undefined, "tag_origin", [level.player], 1);
@@ -288,7 +288,7 @@ function lt_infil_helicopter_start() {
   wait 1;
   level thread scripts\engine\sp\utility::dof_disable_autofocus();
   level.player.rig dontcastshadows();
-  setsaveddvar("NPONLLLSPL", 0.26);
+  setsaveddvar("sm_sunSampleSizeNear", 0.26);
 }
 
 function lt_embassy_roof_start() {
@@ -309,7 +309,7 @@ function roof_heli_explosion_vision() {
 }
 
 function roof_heli_explosion_light() {
-  setsaveddvar("LKOLRONRNQ", 750);
+  setsaveddvar("sm_spotDistCull", 750);
   var_0 = 40;
   var_1 = 0.15;
   var_2 = 1;
@@ -817,13 +817,13 @@ function vision_set_manager() {
 function spotcull_mortar_and_triage() {
   for(;;) {
     scripts\engine\utility::flag_wait("spot_dist_cull_field");
-    setsaveddvar("LKOLRONRNQ", 900);
-    setsaveddvar("LTQMSPKRKO", 4);
-    setsaveddvar("MROOOROPKL", 6);
+    setsaveddvar("sm_spotDistCull", 900);
+    setsaveddvar("sm_spotUpdateLimit", 4);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", 6);
     scripts\engine\utility::flag_waitopen("spot_dist_cull_field");
-    setsaveddvar("LKOLRONRNQ", level.spotdistcull);
-    setsaveddvar("LTQMSPKRKO", level.spotupdatelimit);
-    setsaveddvar("MROOOROPKL", level.roundrobinlimit);
+    setsaveddvar("sm_spotDistCull", level.spotdistcull);
+    setsaveddvar("sm_spotUpdateLimit", level.spotupdatelimit);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", level.roundrobinlimit);
     waitframe();
   }
 }
@@ -838,8 +838,8 @@ function offices() {
 
     scripts\engine\utility::flag_wait("lt_offices");
     scripts\engine\utility::flag_set("offices_level_04_strobe");
-    setsaveddvar("LKOLRONRNQ", 680);
-    setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
+    setsaveddvar("sm_spotDistCull", 680);
+    setsaveddvar("r_volumetricDepth", "128 384 640 1024");
     scripts\engine\utility::flag_waitopen("lt_offices");
     scripts\engine\utility::flag_clear("offices_level_04_strobe");
     waitframe();
@@ -855,7 +855,7 @@ function stairwell_upper() {
     }
 
     scripts\engine\utility::flag_wait("lt_stairwell_upper");
-    setsaveddvar("LKOLRONRNQ", 1000);
+    setsaveddvar("sm_spotDistCull", 1000);
     scripts\engine\utility::flag_waitopen("lt_stairwell_upper");
     waitframe();
   }
@@ -870,7 +870,7 @@ function stairwell_lower() {
     }
 
     scripts\engine\utility::flag_wait("lt_stairwell_lower");
-    setsaveddvar("LKOLRONRNQ", 420);
+    setsaveddvar("sm_spotDistCull", 420);
     scripts\engine\utility::flag_waitopen("lt_stairwell_lower");
     waitframe();
   }
@@ -885,7 +885,7 @@ function bpg_metal_detectors() {
     }
 
     scripts\engine\utility::flag_wait("lt_bpg_metal_detectors");
-    setsaveddvar("LKOLRONRNQ", 350);
+    setsaveddvar("sm_spotDistCull", 350);
     scripts\engine\utility::flag_set("bpg_metal_detectors_strobe");
     scripts\engine\utility::flag_waitopen("lt_bpg_metal_detectors");
     scripts\engine\utility::flag_clear("bpg_metal_detectors_strobe");
@@ -902,9 +902,9 @@ function bpg_scene() {
     }
 
     scripts\engine\utility::flag_wait("lt_bpg_scene");
-    setsaveddvar("LKOLRONRNQ", 400);
-    setsaveddvar("LTQMSPKRKO", 7);
-    setsaveddvar("MROOOROPKL", 9);
+    setsaveddvar("sm_spotDistCull", 400);
+    setsaveddvar("sm_spotUpdateLimit", 7);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", 9);
     thread fire_flicker_bpg_car();
     scripts\engine\utility::flag_waitopen("lt_bpg_scene");
     level.bpg_car_fire_light notify("stop_fire_flicker_bpg_car");
@@ -922,9 +922,9 @@ function bpg_scene_exit() {
     }
 
     scripts\engine\utility::flag_wait("lt_bpg_scene_exit");
-    setsaveddvar("LKOLRONRNQ", level.spotdistcull);
-    setsaveddvar("LTQMSPKRKO", level.spotupdatelimit);
-    setsaveddvar("MROOOROPKL", level.roundrobinlimit);
+    setsaveddvar("sm_spotDistCull", level.spotdistcull);
+    setsaveddvar("sm_spotUpdateLimit", level.spotupdatelimit);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", level.roundrobinlimit);
     scripts\engine\utility::flag_waitopen("lt_bpg_scene_exit");
     waitframe();
   }
@@ -939,10 +939,10 @@ function truck_office_enter() {
     }
 
     scripts\engine\utility::flag_wait("lt_truck_office_enter");
-    setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
-    setsaveddvar("LKOLRONRNQ", level.spotdistcull);
-    setsaveddvar("LTQMSPKRKO", level.spotupdatelimit);
-    setsaveddvar("MROOOROPKL", level.roundrobinlimit);
+    setsaveddvar("r_volumetricDepth", "128 384 640 1024");
+    setsaveddvar("sm_spotDistCull", level.spotdistcull);
+    setsaveddvar("sm_spotUpdateLimit", level.spotupdatelimit);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", level.roundrobinlimit);
     scripts\engine\utility::flag_waitopen("lt_truck_office_enter");
     waitframe();
   }
@@ -957,10 +957,10 @@ function truck_office() {
     }
 
     scripts\engine\utility::flag_wait("lt_truck_office");
-    setsaveddvar("LKOLRONRNQ", 700);
-    setsaveddvar("MPOKKOPMTN", "64 128 256 512");
-    setsaveddvar("LTQMSPKRKO", 5);
-    setsaveddvar("MROOOROPKL", 6);
+    setsaveddvar("sm_spotDistCull", 700);
+    setsaveddvar("r_volumetricDepth", "64 128 256 512");
+    setsaveddvar("sm_spotUpdateLimit", 5);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", 6);
     scripts\engine\utility::flag_waitopen("lt_truck_office");
     waitframe();
   }
@@ -975,10 +975,10 @@ function bpg_combat() {
     }
 
     scripts\engine\utility::flag_wait("lt_bpg_combat");
-    setsaveddvar("LKOLRONRNQ", 400);
-    setsaveddvar("MPOKKOPMTN", "64 128 256 512");
-    setsaveddvar("LTQMSPKRKO", 5);
-    setsaveddvar("MROOOROPKL", 7);
+    setsaveddvar("sm_spotDistCull", 400);
+    setsaveddvar("r_volumetricDepth", "64 128 256 512");
+    setsaveddvar("sm_spotUpdateLimit", 5);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", 7);
     scripts\engine\utility::flag_waitopen("lt_bpg_combat");
     waitframe();
   }
@@ -993,10 +993,10 @@ function basement() {
     }
 
     scripts\engine\utility::flag_wait("lt_basement");
-    setsaveddvar("LKOLRONRNQ", 300);
-    setsaveddvar("MPOKKOPMTN", "64 128 256 512");
-    setsaveddvar("LTQMSPKRKO", 4);
-    setsaveddvar("MROOOROPKL", 6);
+    setsaveddvar("sm_spotDistCull", 300);
+    setsaveddvar("r_volumetricDepth", "64 128 256 512");
+    setsaveddvar("sm_spotUpdateLimit", 4);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", 6);
     scripts\engine\utility::flag_waitopen("lt_basement");
     waitframe();
   }
@@ -1011,10 +1011,10 @@ function saferoom() {
     }
 
     scripts\engine\utility::flag_wait("lt_saferoom");
-    setsaveddvar("LKOLRONRNQ", 250);
-    setsaveddvar("MPOKKOPMTN", "64 128 256 512");
-    setsaveddvar("LTQMSPKRKO", 4);
-    setsaveddvar("MROOOROPKL", 6);
+    setsaveddvar("sm_spotDistCull", 250);
+    setsaveddvar("r_volumetricDepth", "64 128 256 512");
+    setsaveddvar("sm_spotUpdateLimit", 4);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", 6);
     scripts\engine\utility::flag_waitopen("lt_saferoom");
     waitframe();
   }
@@ -1029,13 +1029,13 @@ function garage() {
     }
 
     scripts\engine\utility::flag_wait("lt_garage");
-    setsaveddvar("NKKPQSTMRL", 3);
-    setsaveddvar("LKOLRONRNQ", 800);
-    setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
-    setsaveddvar("LTQMSPKRKO", 6);
-    setsaveddvar("MROOOROPKL", 8);
+    setsaveddvar("r_primaryLightMotionDetect", 3);
+    setsaveddvar("sm_spotDistCull", 800);
+    setsaveddvar("r_volumetricDepth", "128 384 640 1024");
+    setsaveddvar("sm_spotUpdateLimit", 6);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
     scripts\engine\utility::flag_waitopen("lt_garage");
-    setsaveddvar("NKKPQSTMRL", 1);
+    setsaveddvar("r_primaryLightMotionDetect", 1);
     waitframe();
   }
 }
@@ -1047,10 +1047,10 @@ function garage_exit() {
     }
 
     scripts\engine\utility::flag_wait("lt_garage_exit");
-    setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
-    setsaveddvar("LKOLRONRNQ", level.spotdistcull);
-    setsaveddvar("LTQMSPKRKO", level.spotupdatelimit);
-    setsaveddvar("MROOOROPKL", level.roundrobinlimit);
+    setsaveddvar("r_volumetricDepth", "128 384 640 1024");
+    setsaveddvar("sm_spotDistCull", level.spotdistcull);
+    setsaveddvar("sm_spotUpdateLimit", level.spotupdatelimit);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", level.roundrobinlimit);
     scripts\engine\utility::flag_waitopen("lt_garage_exit");
     waitframe();
   }
@@ -1072,9 +1072,9 @@ function alley_heli_crash() {
 function alley_enter() {
   for(;;) {
     scripts\engine\utility::flag_wait("lt_alley_enter");
-    setsaveddvar("LKOLRONRNQ", level.spotdistcull);
-    setsaveddvar("LTQMSPKRKO", level.spotupdatelimit);
-    setsaveddvar("MROOOROPKL", level.roundrobinlimit);
+    setsaveddvar("sm_spotDistCull", level.spotdistcull);
+    setsaveddvar("sm_spotUpdateLimit", level.spotupdatelimit);
+    setsaveddvar("sm_roundRobinPrioritySpotShadows", level.roundrobinlimit);
     scripts\engine\utility::flag_waitopen("lt_alley_enter");
     waitframe();
   }
@@ -1087,7 +1087,7 @@ function alley() {
     }
 
     scripts\engine\utility::flag_wait("lt_alley");
-    setsaveddvar("LKOLRONRNQ", 450);
+    setsaveddvar("sm_spotDistCull", 450);
     scripts\engine\utility::flag_waitopen("lt_alley");
     waitframe();
   }
@@ -1100,7 +1100,7 @@ function compound_residence() {
     }
 
     scripts\engine\utility::flag_wait("lt_compound_residence");
-    setsaveddvar("LKOLRONRNQ", 700);
+    setsaveddvar("sm_spotDistCull", 700);
     scripts\engine\utility::flag_waitopen("lt_compound_residence");
     waitframe();
   }
@@ -1113,7 +1113,7 @@ function compound_residence_exit() {
     }
 
     scripts\engine\utility::flag_wait("lt_compound_residence_exit");
-    setsaveddvar("LKOLRONRNQ", level.spotdistcull);
+    setsaveddvar("sm_spotDistCull", level.spotdistcull);
     scripts\engine\utility::flag_waitopen("lt_compound_residence_exit");
     waitframe();
   }
@@ -1122,9 +1122,9 @@ function compound_residence_exit() {
 function triage_scene() {
   for(;;) {
     scripts\engine\utility::flag_wait("lt_triage_scene");
-    setsaveddvar("LKOLRONRNQ", 300);
+    setsaveddvar("sm_spotDistCull", 300);
     scripts\engine\utility::flag_waitopen("lt_triage_scene");
-    setsaveddvar("LKOLRONRNQ", level.spotdistcull);
+    setsaveddvar("sm_spotDistCull", level.spotdistcull);
     waitframe();
   }
 }
@@ -1135,11 +1135,11 @@ function mortar_wave_settings() {
   }
 
   scripts\engine\utility::flag_wait("front_1");
-  setsaveddvar("MPOKKOPMTN", "256 768 1280 2048");
+  setsaveddvar("r_volumetricDepth", "256 768 1280 2048");
   scripts\engine\utility::flag_wait("front_2");
-  setsaveddvar("MPOKKOPMTN", "128 420 880 1300");
+  setsaveddvar("r_volumetricDepth", "128 420 880 1300");
   scripts\engine\utility::flag_wait("front_3");
-  setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
+  setsaveddvar("r_volumetricDepth", "128 384 640 1024");
 }
 
 function mortar_building_attack_lighting(var_0) {
@@ -1147,7 +1147,7 @@ function mortar_building_attack_lighting(var_0) {
     var_0 = 1;
   }
 
-  setsaveddvar("LKOLRONRNQ", 1250);
+  setsaveddvar("sm_spotDistCull", 1250);
   visionsetnaked("embassy_mortar_building_attack", var_0);
 }
 
@@ -1156,13 +1156,13 @@ function compound_return_lighting(var_0) {
     var_0 = 1;
   }
 
-  setsaveddvar("LKOLRONRNQ", 1250);
+  setsaveddvar("sm_spotDistCull", 1250);
   visionsetnaked("embassy_compound_return", var_0);
 }
 
 function lt_escape_start() {
   thread escape_start_fade_on_lighting();
-  setsaveddvar("MPOKKOPMTN", "32 64 128 256");
+  setsaveddvar("r_volumetricDepth", "32 64 128 256");
 
   while(!isDefined(level.kyle)) {
     waitframe();
@@ -1173,7 +1173,7 @@ function lt_escape_start() {
   level thread scripts\engine\sp\utility::dof_enable(2.8, 150, 4, 2, undefined, undefined);
   wait 1;
   thread escape_start_fade_off_lighting();
-  setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
+  setsaveddvar("r_volumetricDepth", "128 384 640 1024");
   wait 1;
   level thread scripts\engine\sp\utility::dof_disable();
 }
@@ -1255,11 +1255,11 @@ function sun_disable() {
   setsuncolorandintensity(0);
   waitframe();
   waitframe();
-  setsaveddvar("MQRQQONQSL", 0);
+  setsaveddvar("sm_sunEnable", 0);
 }
 
 function sun_enable() {
-  setsaveddvar("MQRQQONQSL", 1);
+  setsaveddvar("sm_sunEnable", 1);
   waitframe();
   setsuncolorandintensity(0.0045);
 }
@@ -1296,9 +1296,9 @@ function mortar_moment() {
 }
 
 function wolf_door_light() {
-  setsaveddvar("LKOLRONRNQ", 100);
-  setsaveddvar("LTQMSPKRKO", level.spotupdatelimit);
-  setsaveddvar("MROOOROPKL", level.roundrobinlimit);
+  setsaveddvar("sm_spotDistCull", 100);
+  setsaveddvar("sm_spotUpdateLimit", level.spotupdatelimit);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", level.roundrobinlimit);
   thread generic_lerp_value(level.wolfdoor_key_light, 0, 0.3, 1);
 }
 

@@ -122,8 +122,8 @@ function evaluatefobspawns() {
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("gulag");
   scripts\mp\gametypes\br_gametypes::move_molotov_mortar("circleEarlyStart");
   level.decoyassists = &escort_vehicle_push_clip;
-  setDvar("LKTPRPKPMR", 1);
-  setDvar("NNMLSMNTOQ", -1);
+  setDvar("voice_proximity_team", 1);
+  setDvar("voice_proximity_radius", -1);
 }
 
 function execute_combat_action() {
@@ -2091,9 +2091,9 @@ function extractupdatehud(var_0) {
   }
 
   wait var_0;
-  setDvar("NPONLLLSPL", 0.8);
-  setDvar("LSNRQTOKRR", 1);
-  setDvar("NTLKNLNPLK", 2);
+  setDvar("sm_sunSampleSizeNear", 0.8);
+  setDvar("sm_sunCascadeSizeMultiplier1", 1);
+  setDvar("sm_sunCascadeSizeMultiplier2", 2);
   level.disable_super_in_turret.ref_119dc = [];
   thread equipname();
   var_2 = 210;
@@ -2702,7 +2702,7 @@ function explosivemodoverride(var_0, var_1) {
       thread extactionstart(var_5);
       thread enemy_spawners();
       var_5 setclientdvar("LTMOQONPQ", 1);
-      var_5 setclientdvar("QTSPTNLOL", 90);
+      var_5 setclientdvar("cg_fov", 90);
     }
 
     scripts\engine\utility::ref_143bf(10, "strike_4");
@@ -2712,7 +2712,7 @@ function explosivemodoverride(var_0, var_1) {
 
     foreach(var_5 in level.players) {
       var_5 setclientdvar("LTMOQONPQ", 0);
-      var_5 setclientdvar("QTSPTNLOL", 65);
+      var_5 setclientdvar("cg_fov", 65);
     }
   }
 

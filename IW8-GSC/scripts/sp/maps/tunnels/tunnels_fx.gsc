@@ -151,7 +151,7 @@ function main() {
   level._effect["vfx_mines_bridge_collapse_01"] = loadfx("vfx/iw8/level/zd30/vfx_mines_bridge_collapse_01.vfx");
   level._effect["vfx_mines_bridge_collapse_oil_fire_system"] = loadfx("vfx/iw8/level/zd30/vfx_mines_bridge_collapse_oil_fire_system.vfx");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\tunnels\gen\tunnels_fx::main();
     scripts\sp\maps\tunnels\gen\tunnels_sound::main();
   }

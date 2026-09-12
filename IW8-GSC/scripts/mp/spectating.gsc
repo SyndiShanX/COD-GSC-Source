@@ -11,7 +11,7 @@ function init() {
   scripts\mp\utility\lui_game_event_aggregator::registeronluieventcallback(&freecamcallback);
   scripts\mp\utility\join_team_aggregator::registeronplayerjointeamcallback(&onjoinedteam);
 
-  if(getdvarint("OLNMMRPTTS", 0) != 0) {
+  if(getdvarint("cg_mlg_static_cameras", 0) != 0) {
     thread getlevelmlgcams();
     return;
   }

@@ -23,11 +23,11 @@ function main() {
   scripts\cp\maps\cp_so_aniyah\cp_so_aniyah_precache::main();
   scripts\cp\maps\cp_so_aniyah\gen\cp_so_aniyah_art::main();
   scripts\cp\maps\cp_so_aniyah\cp_so_aniyah_fx::main();
-  setDvar("NPONLLLSPL", 1.25);
-  setDvar("PKKMTTRQO", 4);
-  setDvar("NKLMONNPNN", 2048);
-  setDvar("MROOOROPKL", 8);
-  setDvar("LTQMSPKRKO", 8);
+  setDvar("sm_sunSampleSizeNear", 1.25);
+  setDvar("r_umbraMinObjectContribution", 4);
+  setDvar("r_umbraAccurateOcclusionThreshold", 2048);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotUpdateLimit", 8);
 
   if(level.createfx_enabled) {
     return;
@@ -271,7 +271,7 @@ function interaction_trigger_properties(var_0, var_1, var_2) {
 function ref_1247b(var_0) {}
 
 function ref_14379() {
-  while(level.hostdamagefactorlow < getdvarint("NKSQNMMRRQ")) {
+  while(level.hostdamagefactorlow < getdvarint("party_partyPlayerCountNum")) {
     waitframe();
   }
 }

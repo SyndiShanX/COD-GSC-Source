@@ -142,7 +142,7 @@ function main() {
   level._effect["vfx_cpt_waterboard_face_drip_persistent"] = loadfx("vfx/iw8/level/captive/vfx_cpt_waterboard_face_drip_persistent.vfx");
   level._effect["vfx_lab_fire"] = loadfx("vfx/iw8/level/captive/vfx_cpt_chamber_fire.vfx");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\captive\gen\captive_sound::main();
     return;
   }

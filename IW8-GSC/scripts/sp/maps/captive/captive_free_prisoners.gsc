@@ -36,7 +36,7 @@ function free_prisoners_start() {
 function free_prisoners_main() {
   var_0 = getEnt("ai_locker_idle_clip", "targetname");
   var_0 notsolid();
-  setsaveddvar("NPONLLLSPL", 0.78);
+  setsaveddvar("sm_sunSampleSizeNear", 0.78);
   level.weaponslockerref = scripts\engine\utility::getStruct("weapons_locker_ref", "targetname");
   level.akproxies = [];
 
@@ -58,7 +58,7 @@ function free_prisoners_main() {
   level.weaponlocker.animname = "weapons_locker";
   level.weaponlocker scripts\engine\sp\utility::assign_animtree();
   level.weaponslockerref thread scripts\common\anim::anim_first_frame_solo(level.weaponlocker, "weapon_locker_open");
-  setsaveddvar("NPONLLLSPL", 0.78);
+  setsaveddvar("sm_sunSampleSizeNear", 0.78);
   scripts\sp\maps\captive\captive_util::spawn_prisoners();
 
   foreach(var_5 in level.allprisoners) {

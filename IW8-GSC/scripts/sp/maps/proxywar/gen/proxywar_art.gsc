@@ -6,5 +6,5 @@
 function main() {
   level.tweakfile = 1;
   level.player = getEntArray("player", "classname")[0];
-  setsaveddvar("NPONLLLSPL", 1);
+  setsaveddvar("sm_sunSampleSizeNear", 1);
 }

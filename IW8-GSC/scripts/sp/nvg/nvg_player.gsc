@@ -274,19 +274,19 @@ function nvg_mb_on(var_0) {
     return;
   }
 
-  thread scripts\engine\sp\utility::lerp_saveddvar("OMRQKMSSPP", 10.5, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0.025, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0.8, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0.006, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideChromaticAberration", 10.5, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideDistortion", 0.025, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideRadius", 0.8, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideStrength", 0.006, var_0);
   level.player setlensprofiledistort("compact portable", 0, 0, 0.9, 0.93);
 }
 
 function nvg_mb_off() {
   var_0 = 0.1;
-  thread scripts\engine\sp\utility::lerp_saveddvar("OMRQKMSSPP", 0, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideChromaticAberration", 0, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideDistortion", 0, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideRadius", 0, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideStrength", 0, var_0);
   level.player setlensprofiledistort("none");
 }
 

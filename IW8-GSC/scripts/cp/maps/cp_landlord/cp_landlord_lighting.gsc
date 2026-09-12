@@ -8,12 +8,12 @@ function main() {
 }
 
 function lighting_setup_dvars() {
-  setDvar("TMNTMTQRM", 0);
-  setDvar("NPONLLLSPL", 0.75);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 1);
-  setDvar("LTQMSPKRKO", 4);
-  setDvar("MROOOROPKL", 8);
-  setDvar("MNQKPNLOPT", 1);
-  setDvar("NRSOTSLSSO", 1);
+  setDvar("sm_sunDistantShadows", 0);
+  setDvar("sm_sunSampleSizeNear", 0.75);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 1);
+  setDvar("sm_spotUpdateLimit", 4);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotShadowScoreSystem", 1);
+  setDvar("sm_spotUpdateMoreDynEnt", 1);
 }

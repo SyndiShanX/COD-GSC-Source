@@ -523,7 +523,7 @@ function stance_carry_icon_enable(var_0) {
     level.stance_carry destroy();
   }
 
-  setsaveddvar("MPNNTKMQTS", "0");
+  setsaveddvar("hud_showStance", "0");
   level.stance_carry = newhudelem();
   level.stance_carry.x = -75;
 
@@ -551,7 +551,7 @@ function stance_carry_icon_disable() {
     level.stance_carry destroy();
   }
 
-  setsaveddvar("MPNNTKMQTS", "1");
+  setsaveddvar("hud_showStance", "1");
 }
 
 function create_mantle() {

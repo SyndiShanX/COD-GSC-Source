@@ -649,7 +649,7 @@ function waitforplayers(var_0) {
   if(istrue(game["isLaunchChunk"])) {
     var_2 = 0;
   } else if(var_1 > 5) {
-    var_2 = gettime() + getdvarint("MSKKKKOPKS") * 1000;
+    var_2 = gettime() + getdvarint("min_wait_for_players") * 1000;
   } else {
     var_2 = 0;
   }
@@ -750,7 +750,7 @@ function prematchperiod() {
     return;
   }
 
-  level.connectingplayers = getdvarint("NKSQNMMRRQ");
+  level.connectingplayers = getdvarint("party_partyPlayerCountNum");
 
   if(getdvarint("scr_live_lobby", 0) == 1 && !istrue(level.ref_133e0)) {
     if(scripts\mp\utility\game::getgametype() != "br") {
@@ -2637,9 +2637,9 @@ function callback_startgametype() {
   level.prematchperiodend = 0;
   level.postgamenotifies = 0;
   level.intermission = 0;
-  setDvar("MPOKQNLPRM", getdvarint("scr_game_forceuav") == 1);
-  setDvar("LSTLQNTLPP", istrue(level.noweaponfalloff));
-  setDvar("MMLMSSTNSP", istrue(level.armoronweaponswitchlongpress));
+  setDvar("bg_compassShowEnemies", getdvarint("scr_game_forceuav") == 1);
+  setDvar("bg_bulletsUseMaxDamageMinRange", istrue(level.noweaponfalloff));
+  setDvar("bg_piggybackArmorOnNVG", istrue(level.armoronweaponswitchlongpress));
 
   if(scripts\mp\utility\game::matchmakinggame()) {
     setDvar("isMatchMakingGame", 1);
@@ -2701,7 +2701,7 @@ function callback_startgametype() {
     game["colors"]["contest"] = (1, 0.858824, 0);
     game["colors"]["neutral"] = (1, 1, 1);
     [[level.onprecachegametype]]();
-    setdvarifuninitialized("MSKKKKOPKS", 5);
+    setdvarifuninitialized("min_wait_for_players", 5);
 
     if(!level.splitscreen) {
       level.prematchperiod = scripts\mp\tweakables::gettweakablevalue("game", "graceperiod");
@@ -2716,7 +2716,7 @@ function callback_startgametype() {
       setnojiptime(0, 1);
     }
   } else {
-    setdvarifuninitialized("MSKKKKOPKS", 5);
+    setdvarifuninitialized("min_wait_for_players", 5);
 
     if(!level.splitscreen) {
       scripts\mp\tweakables::gettweakablevalue("game", "graceperiod");
@@ -2812,7 +2812,7 @@ function callback_startgametype() {
   level.gameended = 0;
   level.forcedend = 0;
   level.hostforcedend = 0;
-  level.hardcoremode = getdvarint("OSMSLRTOP");
+  level.hardcoremode = getdvarint("g_hardcore");
   setdvarifuninitialized("debug_stopAFKCheck", 0);
   setdvarifuninitialized("debug_GLSpectate", 0);
   level.testrandomrealismclients = getdvarint("scr_random_realism_hud", 0) == 1;
@@ -2829,7 +2829,7 @@ function callback_startgametype() {
       level.modifyplayerdamage = &scripts\mp\damage::gamemodemodifyplayerdamage;
     }
 
-    setDvar("LNOKTQPLKO", 1);
+    setDvar("jump_slowdownEnable", 1);
     setDvar("sprintLeap_enabled", 0);
   }
 
@@ -2890,7 +2890,7 @@ function callback_startgametype() {
   level.exfilextracttimer = scripts\mp\utility\dvars::respawn_locations("scr_" + scripts\mp\utility\game::getgametype() + "_exfilExtractTimer", "scr_game_exfilExtractTimer");
   level.useammorestocklocs = scripts\mp\utility\dvars::respawn_locations("scr_" + scripts\mp\utility\game::getgametype() + "_useAmmoRestockLocs", "scr_game_useAmmoRestockLocs");
   level.ref_136d8 = scripts\mp\utility\dvars::respawn_players_into_plane("scr_" + scripts\mp\utility\game::getgametype() + "_allow3rdspectate", "scr_game_allow3rdspectate");
-  setDvar("LKNNQKNTS", level.ref_136d8);
+  setDvar("camera_allow3rdspectate", level.ref_136d8);
   level.laststand = scripts\mp\tweakables::gettweakablevalue("player", "laststand");
   setomnvar("ui_last_stand_type", level.laststand);
 
@@ -2952,7 +2952,7 @@ function callback_startgametype() {
   logstring("Script:" + scripts\mp\utility\game::getgametype());
   logstring("HardCore:" + level.hardcoremode);
   logstring("Diehard: " + level.diehardmode);
-  logstring("3rd Person:" + getdvarint("NOSLRNTRKL"));
+  logstring("3rd Person:" + getdvarint("camera_thirdPerson"));
   logstring("Round: " + game["roundsPlayed"]);
   logstring("scr_" + scripts\mp\utility\game::getgametype() + "_scorelimit " + getDvar("scr_" + scripts\mp\utility\game::getgametype() + "_scorelimit"));
   logstring("scr_" + scripts\mp\utility\game::getgametype() + "_roundlimit " + getDvar("scr_" + scripts\mp\utility\game::getgametype() + "_roundlimit"));
@@ -3168,9 +3168,9 @@ function callback_startgametype() {
   }
 
   if(scripts\mp\utility\game::getgametypenumlives()) {
-    setDvar("SLLNLPRON", 0);
+    setDvar("g_deadChat", 0);
   } else {
-    setDvar("SLLNLPRON", 1);
+    setDvar("g_deadChat", 1);
   }
 
   updatewavespawndelay();
@@ -3284,7 +3284,7 @@ function verifydedicatedconfiguration() {
       exitlevel(0);
     }
 
-    if(!getdvarint("LSTLQTSSRM")) {
+    if(!getdvarint("xblive_privatematch")) {
       exitlevel(0);
     }
 
@@ -3636,8 +3636,8 @@ function startgame() {
   thread graceperiod();
   thread scripts\cp\vehicles\vehicle_compass_cp::roundbegin();
 
-  if(getdvarint("OOTQKOTRM", 0) > 30 && !istrue(level.multiteambased)) {
-    setDvar("LKTPRPKPMR", 1);
+  if(getdvarint("party_maxplayers", 0) > 30 && !istrue(level.multiteambased)) {
+    setDvar("voice_proximity_team", 1);
   }
 
   thread scripts\mp\analyticslog::recordbreadcrumbdata();
@@ -3907,10 +3907,10 @@ function freezeallplayers(var_0, var_1, var_2, var_3) {
     thread freezeplayerforroundend(var_6);
     thread roundenddof(var_6);
     freegameplayhudelems(var_6);
-    var_6 setclientdvars("LQKPQMPRQN", var_4, "cg_drawSpectatorMessages", 0);
+    var_6 setclientdvars("cg_everyoneHearsEveryone", var_4, "cg_drawSpectatorMessages", 0);
 
     if(isDefined(var_1) && isDefined(var_2)) {
-      if(var_1 == "NSSLSNKPN" && var_6 issplitscreenplayer()) {
+      if(var_1 == "cg_fovScale" && var_6 issplitscreenplayer()) {
         var_6 setclientdvars(var_1, 0.75);
       }
 
@@ -4340,7 +4340,7 @@ function endgame_endround(var_0, var_1, var_2, var_3) {
         var_7 thread scripts\mp\hud_message::outcomenotify(var_1, var_2, var_3);
       }
 
-      freezeallplayers(3, "NSSLSNKPN", 1, 1);
+      freezeallplayers(3, "cg_fovScale", 1, 1);
       scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(3);
       goto LOC_000002c1;
     }
@@ -4357,13 +4357,13 @@ function endgame_endround(var_0, var_1, var_2, var_3) {
 
     jumpiftrue(level.gametype == "tac_ops" && isDefined(level.tacopssublevel)) LOC_000002c1;
     thread eomcombatwaitforhitmarkersanddelaystartpostgameui(var_1, var_2, var_3);
-    freezeallplayers(2.5, "NSSLSNKPN", 1, 1);
+    freezeallplayers(2.5, "cg_fovScale", 1, 1);
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(2.5);
     ref_13153(var_1);
     waitframe();
 
     foreach(var_7 in level.players) {
-      var_7 setclientdvar("MQNNLTKNTS", 1);
+      var_7 setclientdvar("ui_opensummary", 1);
 
       if(scripts\mp\utility\game::wasonlyround() || scripts\mp\utility\game::waslastround()) {
         var_7 scripts\mp\killstreaks\killstreaks::clearkillstreaks();
@@ -4381,7 +4381,7 @@ function endgame_endround(var_0, var_1, var_2, var_3) {
     waitframe();
 
     foreach(var_7 in level.players) {
-      var_7 setclientdvar("MQNNLTKNTS", 1);
+      var_7 setclientdvar("ui_opensummary", 1);
 
       if((scripts\mp\utility\game::wasonlyround() || scripts\mp\utility\game::waslastround()) && !istrue(game["isLaunchChunk"])) {
         var_7 scripts\mp\killstreaks\killstreaks::clearkillstreaks();
@@ -4391,7 +4391,7 @@ function endgame_endround(var_0, var_1, var_2, var_3) {
       var_7 setclientomnvar("ui_match_in_progress", 0);
     }
 
-    freezeallplayers(1, "NSSLSNKPN", 1, 0);
+    freezeallplayers(1, "cg_fovScale", 1, 0);
   }
 
   setgameendtime(0);
@@ -4408,9 +4408,9 @@ function endgame_endround(var_0, var_1, var_2, var_3) {
   }
 
   rankedmatchupdates(var_2);
-  setDvar("SLLNLPRON", scripts\mp\utility\game::updatetextongamepadchange());
+  setDvar("g_deadChat", scripts\mp\utility\game::updatetextongamepadchange());
   setDvar("ui_allow_teamchange", 0);
-  setDvar("MPOKQNLPRM", 0);
+  setDvar("bg_compassShowEnemies", 0);
 
   foreach(var_7 in level.players) {
     var_7 scripts\mp\class::loadout_clearperks();
@@ -4624,7 +4624,7 @@ function endgame_endgame(var_0, var_1, var_2, var_3) {
         if(!scripts\mp\gametypes\br_public::tutorial_playSound()) {
           if(isDefined(level.multieventdebug)) {
             wait level.multieventdebug.ref_142ae;
-          } else if(getdvarint("LPRKRTSPQT") == 1) {
+          } else if(getdvarint("lui_ingame_play_again_enabled") == 1) {
             wait 20;
           } else if(scripts\mp\utility\game::privatematch()) {
             wait 6;
@@ -4729,7 +4729,7 @@ function endgame_endgame(var_0, var_1, var_2, var_3) {
 
   scripts\common\utility::ref_13e0a(level.ref_11b35);
 
-  if(getdvarint("TLRPKRKMS") != 0) {
+  if(getdvarint("online_matchdata_enabled") != 0) {
     if(isgamebattlematch()) {
       foreach(var_7 in level.players) {
         var_18 = var_7 getxuid();
@@ -4822,7 +4822,7 @@ function ref_1301f() {
   if(!isDefined(level.needs_power)) {
     getentitylessscriptablearray("dlog_event_server_match_end", ["utc_start_time_s", scripts\mp\matchdata::getmatchstarttimeutc(), "utc_end_time_s", scripts\mp\matchdata::getmatchendtimeutc()]);
 
-    if(getdvarint("TLRPKRKMS") != 0) {
+    if(getdvarint("online_matchdata_enabled") != 0) {
       setmatchdata("host", level.hostname);
 
       if(scripts\mp\utility\game::matchmakinggame()) {
@@ -4830,7 +4830,7 @@ function ref_1301f() {
         setmatchdata("playlistID", getplaylistid());
         setmatchdata("playlist_name", function_041f());
         setmatchdata("isDedicated", isdedicatedserver());
-        setmatchdata("party_maxplayers", getdvarint("OOTQKOTRM", 0));
+        setmatchdata("party_maxplayers", getdvarint("party_maxplayers", 0));
       }
 
       isalliedsentient();
@@ -5111,7 +5111,7 @@ function processlobbydata() {
     ref_128af(var_1);
   }
 
-  if(getdvarint("MTKSQRQLKN") != 0) {
+  if(getdvarint("online_mp_clientmatchdata_enabled") != 0) {
     if(scripts\mp\utility\game::matchmakinggame() && !scripts\mp\utility\game::privatematch()) {
       setclientmatchdata("isPublicMatch", 1);
     } else {
@@ -5121,7 +5121,7 @@ function processlobbydata() {
 
   scripts\mp\scoreboard::processlobbyscoreboards();
 
-  if(getdvarint("MTKSQRQLKN") != 0) {
+  if(getdvarint("online_mp_clientmatchdata_enabled") != 0) {
     sendclientmatchdata();
   }
 
@@ -5148,7 +5148,7 @@ function ref_128af(var_0) {
   cargo_truck_mg_explode(var_0);
   var_1 = var_0.name;
 
-  if(getdvarint("MTKSQRQLKN") != 0) {
+  if(getdvarint("online_mp_clientmatchdata_enabled") != 0) {
     setclientmatchdata("players", var_0.clientmatchdataid, "clanTag", var_0 getclantag());
     setclientmatchdata("players", var_0.clientmatchdataid, "xuidHigh", var_0 getxuidhigh());
     setclientmatchdata("players", var_0.clientmatchdataid, "xuidLow", var_0 getxuidlow());
@@ -6142,19 +6142,19 @@ function ref_12767(var_0, var_1, var_2) {
   self setclientomnvar("ui_br_bink_overlay_state", 12);
   self setsoundsubmix("fade_to_black_all_except_music_and_scripted3", 0.5);
   scripts\mp\utility\player::_freezecontrols(1);
-  self setclientdvar("LQKPQMPRQN", 0);
-  var_3 = getDvar("LKTPRPKPMR");
-  var_4 = getDvar("LOSOOOTNMS");
-  var_5 = getDvar("NNMLSMNTOQ");
-  setDvar("LKTPRPKPMR", 1);
-  setDvar("LOSOOOTNMS", 1);
-  setDvar("NNMLSMNTOQ", -1);
+  self setclientdvar("cg_everyoneHearsEveryone", 0);
+  var_3 = getDvar("voice_proximity_team");
+  var_4 = getDvar("voice_proximity_enemy");
+  var_5 = getDvar("voice_proximity_radius");
+  setDvar("voice_proximity_team", 1);
+  setDvar("voice_proximity_enemy", 1);
+  setDvar("voice_proximity_radius", -1);
   self preloadcinematicforplayer(var_0, 1, var_2);
   var_6 = gettime();
   ref_133dd(var_6, var_1 * 1000);
   self skydive_cutparachuteoff();
   scripts\mp\utility\player::restorebasevisionset(0);
-  self setclientdvar("LQKPQMPRQN", scripts\mp\utility\game::updatetextongamepadchange());
+  self setclientdvar("cg_everyoneHearsEveryone", scripts\mp\utility\game::updatetextongamepadchange());
   setDvar("voiceProximityTeam", var_3);
   setDvar("voiceProximityEnemy", var_4);
   setDvar("voiceProximityRadius", var_5);

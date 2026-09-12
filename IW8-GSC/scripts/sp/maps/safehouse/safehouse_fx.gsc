@@ -11,7 +11,7 @@ function main() {
   init_footstep_fx();
   init_scripted_fx();
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\safehouse\gen\safehouse_fx::main();
     scripts\sp\maps\safehouse\gen\safehouse_sound::main();
     return;

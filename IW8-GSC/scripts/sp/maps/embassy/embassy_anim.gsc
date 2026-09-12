@@ -1112,7 +1112,7 @@ function toss_glowstick(var_0) {
   wait 0.1;
   var_1 = var_0.glowstick;
   var_1 unlink();
-  var_2 = getdvarint("NPOQPMP");
+  var_2 = getdvarint("bg_gravity");
   var_3 = distance(var_1.origin, var_1.og_origin);
   var_4 = round_server_time(var_3 / 175);
   var_5 = var_1.og_origin - var_1.origin;

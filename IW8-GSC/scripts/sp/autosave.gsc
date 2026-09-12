@@ -647,7 +647,7 @@ function startsavedprogression(var_0) {
       return;
     }
 
-    if(getdvarint("MSSSNONPLS") == 0) {
+    if(getdvarint("mis_cheat") == 0) {
       level.player setplayerprogression("currentMission", var_0);
       var_1 = level.player getplayerprogression("missionStateData", var_0);
 

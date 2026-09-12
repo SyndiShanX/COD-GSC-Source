@@ -79,7 +79,7 @@ function retreat_main() {
   scripts\engine\utility::array_thread(level.bombardment_window_air_bullet_spawners, &retreat_building_magic_bullets, var_3, undefined, undefined, 0, 0, 0.1, 1);
   scripts\engine\utility::flag_wait("flag_retreat_spawn_vehicles");
   level.manpile_monitor.maximum_weapons = 22;
-  setsaveddvar("TLOLRMSL", 0.01);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
   level.retreat_assault_vehicle = scripts\sp\maps\marines\marines_utility::setup_named_vehicle("retreat_assault_vehicle", "Dirt Diggler", "retreat_start_node_apc", 0, 1, 0);
   level.retreat_assault_vehicle.targetname = "retreat_assault_vehicle";
   level.retreat_assault_vehicle.godmode = 1;
@@ -1687,7 +1687,7 @@ function retreat_catchup() {
   thread mh_house_exit_door_blocker_clear_path();
   thread retreat_open_hospital_gate();
   thread scripts\sp\maps\marines\marines_gameplay_hospital::hospital_exterior_vehicle_monitor();
-  setsaveddvar("TLOLRMSL", 0.01);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
 }
 
 function mh_civilian_cleanup() {

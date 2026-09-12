@@ -141,7 +141,7 @@ function missileeyes(var_0, var_1) {
     var_0 cameralinkTo(var_1, "tag_origin");
     var_0 controlslinkTo(var_1);
 
-    if(getdvarint("NOSLRNTRKL")) {
+    if(getdvarint("camera_thirdPerson")) {
       var_0 scripts\mp\utility\player::setthirdpersondof(0);
     }
 
@@ -162,7 +162,7 @@ function missileeyes(var_0, var_1) {
     wait 0.5;
     var_0 cameraunlink();
 
-    if(getdvarint("NOSLRNTRKL")) {
+    if(getdvarint("camera_thirdPerson")) {
       var_0 scripts\mp\utility\player::setthirdpersondof(1);
     }
   }
@@ -186,7 +186,7 @@ function player_cleanuponteamchange(var_0) {
     self controlsunlink();
     self cameraunlink();
 
-    if(getdvarint("NOSLRNTRKL")) {
+    if(getdvarint("camera_thirdPerson")) {
       scripts\mp\utility\player::setthirdpersondof(1);
     }
   }
@@ -210,7 +210,7 @@ function player_cleanupongameended(var_0) {
   self controlsunlink();
   self cameraunlink();
 
-  if(getdvarint("NOSLRNTRKL")) {
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\player::setthirdpersondof(1);
     return;
   }

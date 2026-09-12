@@ -98,7 +98,7 @@ function level_getspawnpoint(var_0) {
   level.disablespawning = 0;
   level.ignorescoring = 0;
   level.allowprematchdamage = 1;
-  setDvar("NKOLRNSOKM", 1);
+  setDvar("bot_DisableAllAI", 1);
   setDvar("br_minplayers", 150);
   setDvar("live_lobby_minplayers_start", 150);
   setDvar("scr_br_fc_forceArena", -1);
@@ -1905,7 +1905,7 @@ function run_current_spawn_group(var_0, var_1) {
 }
 
 function addbots(var_0, var_1) {
-  setDvar("MSLNRKRRKK", "1");
+  setDvar("bot_spawnControlledByDvar", "1");
 
   if(!isDefined(var_1)) {
     var_1 = "autoassign";

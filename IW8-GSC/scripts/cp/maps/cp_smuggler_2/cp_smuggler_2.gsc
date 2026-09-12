@@ -11,8 +11,8 @@ function main() {
   scripts\cp\maps\cp_smuggler_2\gen\cp_smuggler_2_art::main();
   scripts\cp\maps\cp_smuggler_2\cp_smuggler_2_fx::main();
   scripts\cp\maps\cp_smuggler_2\cp_smuggler_2_lighting::main();
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NSSMQLPRNT", 0.01);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
   setdvarifuninitialized("scr_use_squads", 1);
 
   if(level.createfx_enabled) {

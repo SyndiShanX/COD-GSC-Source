@@ -145,7 +145,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) 
     var_15 = scripts\cp\utility::getgametype();
 
     if(!isDefined(var_15)) {
-      var_15 = getDvar("NKTMKRMSKR");
+      var_15 = getDvar("g_gametype");
     }
 
     var_16 = level.getallselectableattachments.game_type_col[var_15];
@@ -502,7 +502,7 @@ function ref_12003(var_0) {
   var_3 = scripts\cp\utility::getgametype();
 
   if(!isDefined(var_3)) {
-    var_3 = getDvar("NKTMKRMSKR");
+    var_3 = getDvar("g_gametype");
   }
 
   var_4 = level.getallselectableattachments.game_type_col[var_3];
@@ -525,7 +525,7 @@ function ref_1201f(var_0) {
   var_3 = scripts\cp\utility::getgametype();
 
   if(!isDefined(var_3)) {
-    var_3 = getDvar("NKTMKRMSKR");
+    var_3 = getDvar("g_gametype");
   }
 
   var_4 = level.getallselectableattachments.game_type_col[var_3];
@@ -684,7 +684,7 @@ function killstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     var_15 = scripts\cp\utility::getgametype();
 
     if(!isDefined(var_15)) {
-      var_15 = getDvar("NKTMKRMSKR");
+      var_15 = getDvar("g_gametype");
     }
 
     var_16 = level.getallselectableattachments.game_type_col[var_15];
@@ -880,7 +880,7 @@ function equipmentdestroyed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     var_15 = scripts\cp\utility::getgametype();
 
     if(!isDefined(var_15)) {
-      var_15 = getDvar("NKTMKRMSKR");
+      var_15 = getDvar("g_gametype");
     }
 
     var_16 = level.getallselectableattachments.game_type_col[var_15];
@@ -1046,7 +1046,7 @@ function vehiclekilled(var_0, var_1, var_2, var_3) {
   var_11 = scripts\cp\utility::getgametype();
 
   if(!isDefined(var_11)) {
-    var_11 = getDvar("NKTMKRMSKR");
+    var_11 = getDvar("g_gametype");
   }
 
   var_12 = level.getallselectableattachments.game_type_col[var_11];
@@ -1235,7 +1235,7 @@ function ref_12071(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_15 = scripts\cp\utility::getgametype();
 
     if(!isDefined(var_15)) {
-      var_15 = getDvar("NKTMKRMSKR");
+      var_15 = getDvar("g_gametype");
     }
 
     var_16 = level.getallselectableattachments.game_type_col[var_15];

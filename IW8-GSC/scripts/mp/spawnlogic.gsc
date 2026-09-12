@@ -1478,11 +1478,11 @@ function checkttlosloaded() {
 }
 
 function shoulduseprecomputedlos() {
-  return getdvarint("LSQOPROPRS", 0) == 1 && !isDefined(level.disableprecomputedlos) && !generatinglosdata();
+  return getdvarint("sv_usePrecomputedLOSData", 0) == 1 && !isDefined(level.disableprecomputedlos) && !generatinglosdata();
 }
 
 function generatinglosdata() {
-  return getdvarint("NLRMTTPMTQ", 0) > 0;
+  return getdvarint("sv_generateLOSData", 0) > 0;
 }
 
 function isttlosdataavailable() {

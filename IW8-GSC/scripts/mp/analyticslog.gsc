@@ -4,7 +4,7 @@
 ***********************************************/
 
 function init() {
-  setdvarifuninitialized("OLMQKSKMRS", 0);
+  setdvarifuninitialized("enable_analytics_log", 0);
   level.analyticslog = spawnStruct();
   level.analyticslog.nextplayerid = 0;
   level.analyticslog.nextobjectid = 0;
@@ -37,7 +37,7 @@ function analyticsactive() {
 }
 
 function analyticslogenabled() {
-  return getdvarint("OLMQKSKMRS") == 1;
+  return getdvarint("enable_analytics_log") == 1;
 }
 
 function getuniqueobjectid() {
@@ -119,14 +119,14 @@ function logallplayerposthink() {
 function recordbreadcrumbdata() {
   level endon("game_ended");
 
-  if(getDvar("OLKQSLNLPM") == "0") {
+  if(getDvar("online_breadcrumbing_enabled") == "0") {
     return;
   }
 
   if(isDefined(scripts\mp\utility\game::getgametype()) && scripts\mp\utility\game::getgametype() == "br") {
-    var_0 = getdvarfloat("MQPMTNTSLO", 4);
+    var_0 = getdvarfloat("online_br_breadcrumbing_frequency", 4);
   } else {
-    var_0 = getdvarfloat("NSMKNLRLON", 2);
+    var_0 = getdvarfloat("online_mp_breadcrumbing_frequency", 2);
   }
 
   scripts\mp\flags::gameflagwait("prematch_done");
@@ -356,7 +356,7 @@ function logevent_playerdeath(var_0, var_1, var_2) {
 
   getentitylessscriptablearray("134death", ["playerid", self.analyticslog.playerid, "x", self.origin[0], "y", self.origin[1], "z", self.origin[2], "gun_orientx", var_3[0], "gun_orienty", var_3[1], "gun_orientz", var_3[2], "weapon", var_2, "mean_of_death", scripts\engine\utility::ter_op(isDefined(var_1), var_1, "None"), "attackerid", var_4, "action", buildkilldeathactionvalue(), "server_death_id", var_14, "victim_life_index", self.lifeid, "attacker_life_index", var_12, "victim_team", var_15, "attacker_team", var_11, "attacker_pos_x", var_5, "attacker_pos_y", var_6, "attacker_pos_z", var_7, "attacker_gun_orientx", var_8, "attacker_gun_orienty", var_9, "attacker_gun_orientz", var_10, "victim_weapon", self.primaryweapon]);
 
-  if(getdvarint("NPOPPTKNPS")) {
+  if(getdvarint("mount_bb_analytics")) {
     var_16 = "NO_ATTACKER";
 
     if(isDefined(var_0) && isPlayer(var_0)) {
@@ -517,12 +517,12 @@ function logmatchtags() {
     return;
   }
 
-  if(getdvarint("LSTLQTSSRM")) {
+  if(getdvarint("xblive_privatematch")) {
     logevent_tag("PrivateMatch");
     return;
   }
 
-  if(!getdvarint("LTSNLQNRKO")) {
+  if(!getdvarint("onlinegame")) {
     logevent_tag("OfflineMatch");
     return;
   }
@@ -622,7 +622,7 @@ function logevent_sendplayerindexdata() {
 }
 
 function analyticsspawnlogenabled() {
-  return getdvarint("NTOSMKNMSM") != 0;
+  return getdvarint("enable_analytics_spawn_log") != 0;
 }
 
 function is_spawnid_a_less_than_b(var_0, var_1) {
@@ -661,7 +661,7 @@ function analyticsinitspawndata() {
   level.spawncount = 0;
   level.spawnidstobeinstrumented = [];
   level.nextspawntobeinstrumented = 0;
-  var_3 = getdvarint("SOOKORNPT");
+  var_3 = getdvarint("analytics_spawn_event_log_count");
   var_4 = analytics_getmaxspawneventsforcurrentmode();
   var_5 = [];
 

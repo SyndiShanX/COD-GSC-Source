@@ -4439,7 +4439,7 @@ function player_is_in_jackal() {
 
 function set_createfx_enabled() {
   if(!isDefined(level.createfx_enabled)) {
-    level.createfx_enabled = getDvar("LSTTOTKPNP") != "";
+    level.createfx_enabled = getDvar("createfx") != "";
     return;
   }
 }

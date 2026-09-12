@@ -11,7 +11,7 @@ function main() {
 
 function settessellationvalues() {
   waitframe();
-  setsaveddvar("NOSQLKNSQO", 150);
-  setsaveddvar("LMNOQSTMKN", 700);
-  setsaveddvar("TSPOQPTMS", 600);
+  setsaveddvar("r_tessellationFactor", 150);
+  setsaveddvar("r_tessellationCutoffDistance", 700);
+  setsaveddvar("r_tessellationCutoffFalloff", 600);
 }

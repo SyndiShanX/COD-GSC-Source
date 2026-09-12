@@ -4,7 +4,7 @@
 ***********************************************/
 
 function codecallback_startgametype() {
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
   }
 
@@ -16,7 +16,7 @@ function codecallback_startgametype() {
 }
 
 function codecallback_playeractive() {
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
   }
 
@@ -29,7 +29,7 @@ function codecallback_playeractive() {
 }
 
 function codecallback_playerconnect() {
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
   }
 
@@ -198,7 +198,7 @@ function abortlevel() {
   level.callbackplayerlaststand = &callbackvoid;
   level.callbackplayermigrated = &callbackvoid;
   level.callbackhostmigration = &callbackvoid;
-  setDvar("NKTMKRMSKR", "dm");
+  setDvar("g_gametype", "dm");
   exitlevel(0);
 }
 

@@ -10,8 +10,8 @@ function main() {
   scripts\sp\maps\embassy\embassy_lighting::main();
   scripts\sp\maps\embassy\embassy_precache::main();
   scripts\sp\player\ally_equipment::ally_equipment_init();
-  setsaveddvar("MKNNNONLSK", 4);
-  setsaveddvar("MMLNNQSTTL", 5);
+  setsaveddvar("fx_lightmap_max_level", 4);
+  setsaveddvar("fx_alphaThreshold", 5);
   setdvarifuninitialized("scr_emb_greenlight", 0);
   setdvarifuninitialized("ambo_goal_test", 0);
   setdvarifuninitialized("scr_emb_cctv_safe", 0);

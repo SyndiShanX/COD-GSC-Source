@@ -294,11 +294,11 @@ function wait_hide_key() {
   var_1 notsolid();
   var_1 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 0, "none");
   var_1 setanim($cap_vm_gesture_hide_keys);
-  setsaveddvar("NMLOKNMRSK", 1);
+  setsaveddvar("depthSortViewmodel", 1);
   level.player forceplaygestureviewmodel("cap_vm_gesture_hide_key");
   wait 2;
   scripts\engine\utility::flag_clear("paused_squat_override");
-  setsaveddvar("NMLOKNMRSK", 0);
+  setsaveddvar("depthSortViewmodel", 0);
   var_0 delete();
   var_1 delete();
 }
@@ -770,10 +770,10 @@ function player_tries_to_take_water() {
   var_0 notsolid();
   var_0 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 0, "none");
   var_0 setanim(%cap_cells_020_exercise_drink_reach_restraints);
-  setsaveddvar("NMLOKNMRSK", 1);
+  setsaveddvar("depthSortViewmodel", 1);
   level.player forceplaygestureviewmodel("cap_cells_020_exercise_drink_reach_gesture");
   wait 2.35;
-  setsaveddvar("NMLOKNMRSK", 0);
+  setsaveddvar("depthSortViewmodel", 0);
   var_0 delete();
 }
 
@@ -852,10 +852,10 @@ function attempt_take_stunstick() {
   var_0 notsolid();
   var_0 linktoplayerview(level.player, "j_wrist_le", (0, 0, 0), (0, 0, 0), 0, "none");
   var_0 setanim(%cap_cells_020_exercise_drink_reach_restraints);
-  setsaveddvar("NMLOKNMRSK", 1);
+  setsaveddvar("depthSortViewmodel", 1);
   level.player forceplaygestureviewmodel("cap_cells_020_exercise_drink_reach_gesture");
   wait 2.35;
-  setsaveddvar("NMLOKNMRSK", 0);
+  setsaveddvar("depthSortViewmodel", 0);
   var_0 delete();
 }
 
@@ -1094,8 +1094,8 @@ function break_waterboard_main() {
   level.henchman detach("tool_jerry_can_01", "tag_accessory_left");
   level.jerrycan show();
   level.jerrycan.origin = scripts\engine\utility::getStruct("jerrycan_start", "targetname").origin;
-  setsaveddvar("MLTTMLTKOR", 0);
-  setsaveddvar("LSOPQMRPNR", 0);
+  setsaveddvar("r_mbRadialOverrideDistortion", 0);
+  setsaveddvar("r_mbRadialOverrideStrength", 0);
   setblur(0, 0.05);
   scripts\sp\maps\captive\captive_util::cell_close_doors(1);
   level.player.breathoverlay fadeovertime(0.1);
@@ -1888,7 +1888,7 @@ function waterboard_check_took_breath() {
       if(scripts\engine\utility::flag("is_pouring") && abs(level.pourdistancediff) < level.safebreathrange) {
         level.player forceplaygestureviewmodel("cap_cells_030_waterboard_pour_gesture_plr");
         scripts\sp\maps\captive\captive_vo::clear_effort_sound();
-        setsaveddvar("MLLRKTPNRR", 1);
+        setsaveddvar("painVisionLerpInRate", 1);
         level.player painvisionon();
         level.breathlevel += 1.5;
 
@@ -1925,8 +1925,8 @@ function waterboard_check_took_breath() {
 function waterboard_check_breath_fx() {
   self endon("waterboard_complete");
   var_0 = 0.05;
-  setsaveddvar("OONLORSMO", 2);
-  setsaveddvar("MLLRKTPNRR", 0.1);
+  setsaveddvar("painVisionLerpOutRate", 2);
+  setsaveddvar("painVisionLerpInRate", 0.1);
   visionsetpain("captive_near_death");
   level.player painvisionon();
 
@@ -1953,7 +1953,7 @@ function waterboard_check_breath_fx() {
 function restart_breath_fade() {
   level endon("waterboard_complete");
   wait 0.45;
-  setsaveddvar("MLLRKTPNRR", 0.1);
+  setsaveddvar("painVisionLerpInRate", 0.1);
   level.player painvisionon();
 }
 
@@ -2608,8 +2608,8 @@ function wait_start_choking() {
   level.player.breathoverlay.alpha = 1;
   wait 5;
   thread scripts\sp\maps\captive\captive_lighting::explosion_flicker();
-  setsaveddvar("OONLORSMO", 2);
-  setsaveddvar("MLLRKTPNRR", 0.1);
+  setsaveddvar("painVisionLerpOutRate", 2);
+  setsaveddvar("painVisionLerpInRate", 0.1);
   visionsetpain("captive_near_death");
   level.player painvisionon();
   level waittill("stop_choking");
@@ -3491,7 +3491,7 @@ function player_limp() {
   level.player.limpent = scripts\engine\utility::spawn_tag_origin(self.origin, (0, 0, 0));
   self playersetgroundreferenceent(level.player.limpent);
   var_0 = 0;
-  var_1 = getdvarfloat("NSRPQNLSNK") * getdvarfloat("OLMLOTTLRM");
+  var_1 = getdvarfloat("g_speed") * getdvarfloat("player_sprintSpeedScale");
   var_2 = (level.player.limpmaxroll, 0, level.player.limpmaxpitch);
   var_3 = sqrt(2);
 
@@ -3652,8 +3652,8 @@ function thirsty_tired_effects() {
   var_3 = 0;
   var_4 = var_2;
   level.player.tirednessfactor = 0;
-  setsaveddvar("MLTTMLTKOR", var_0);
-  setsaveddvar("LSOPQMRPNR", var_1);
+  setsaveddvar("r_mbRadialOverrideDistortion", var_0);
+  setsaveddvar("r_mbRadialOverrideStrength", var_1);
 
   while(!scripts\engine\utility::flag("thirsty_awake")) {
     setblur(var_4, 0.05);
@@ -3674,8 +3674,8 @@ function thirsty_tired_effects() {
     var_8 = scripts\engine\math::factor_value(0, var_0, var_7);
     var_9 = scripts\engine\math::factor_value(0, var_1, var_7);
     var_4 = scripts\engine\math::factor_value(0, var_2, var_7);
-    setsaveddvar("MLTTMLTKOR", var_8);
-    setsaveddvar("LSOPQMRPNR", var_9);
+    setsaveddvar("r_mbRadialOverrideDistortion", var_8);
+    setsaveddvar("r_mbRadialOverrideStrength", var_9);
     setblur(var_4, 0.05);
     waitframe();
   }
@@ -3695,8 +3695,8 @@ function thirsty_tired_effects() {
     var_9 = scripts\engine\math::factor_value(0, var_1, var_3);
     var_4 = scripts\engine\math::factor_value(0, var_2, var_3);
     var_13 = var_3;
-    setsaveddvar("MLTTMLTKOR", var_8);
-    setsaveddvar("LSOPQMRPNR", var_9);
+    setsaveddvar("r_mbRadialOverrideDistortion", var_8);
+    setsaveddvar("r_mbRadialOverrideStrength", var_9);
     setblur(var_4, 0.05);
     waitframe();
   }
@@ -3713,8 +3713,8 @@ function thirsty_tired_effects() {
     var_8 = scripts\engine\math::factor_value(0, var_0, var_13);
     var_9 = scripts\engine\math::factor_value(0, var_1, var_13);
     var_4 = scripts\engine\math::factor_value(0, var_2, var_13);
-    setsaveddvar("MLTTMLTKOR", var_8);
-    setsaveddvar("LSOPQMRPNR", var_9);
+    setsaveddvar("r_mbRadialOverrideDistortion", var_8);
+    setsaveddvar("r_mbRadialOverrideStrength", var_9);
     setblur(var_4, 0.05);
 
     if(var_13 == 0) {

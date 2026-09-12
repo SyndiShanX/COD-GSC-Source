@@ -10,7 +10,7 @@ function hudoutline_channels_init() {
 
   level.hudoutlinechannels = [];
   hudoutline_add_channel_internal("default", 0, level.fnhudoutlinedefaultsettings);
-  setsaveddvar("NMROQRRONQ", 1);
+  setsaveddvar("r_hudOutlineEnable", 1);
   var_0 = [[level.fnhudoutlinedefaultsettings]]();
 
   for(var_1 = 0; var_1 < 8; var_1++) {
@@ -397,10 +397,10 @@ function hudoutline_default_settings() {
     var_2 = clamp(var_1 / 1000, 1, 2);
     var_0 = var_2;
   } else {
-    GscBinSkip0(0x2e, "MKOQSSQKLL", 1);
+    GscBinSkip0(0x2e, "r_hudOutlineWidth", 1);
   }
 
-  GscBinSkip0(0x2e, "LRMPROLMKN", "0.9 0.9 0.9 0.5");
+  GscBinSkip0(0x2e, "r_hudOutlineFillColor0", "0.9 0.9 0.9 0.5");
 }
 
 function _get_sorted_list_of_channel_plus_child_channels(var_0, var_1) {

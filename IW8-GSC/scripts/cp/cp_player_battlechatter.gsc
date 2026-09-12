@@ -341,7 +341,7 @@ function init() {
   registerbcsoundtype("ping_weapon_smg", "ping_weapon_smg", 1, 1, 0, 0, 0, 0);
   registerbcsoundtype("ping_weapon_sniper", "ping_weapon_sniper", 1, 1, 0, 0, 0, 0);
   scripts\common\bcs_location_trigs::bcs_location_trigs_init();
-  var_3 = getDvar("NKTMKRMSKR");
+  var_3 = getDvar("g_gametype");
   level.istactical = 1;
 
   if(var_3 == "war" || var_3 == "kc" || var_3 == "dom" || var_3 == "cmd" || var_3 == "arm") {
@@ -2072,7 +2072,7 @@ function runheliextraction(var_0, var_1, var_2) {
   var_9 = soundexists(var_7);
   var_10 = 0.4;
 
-  if(getdvarint("PMKLQQKSO") != 0 && getdvarint("PMKLQQKSO") != 1) {
+  if(getdvarint("loc_language") != 0 && getdvarint("loc_language") != 1) {
     var_10 = 1.4;
   }
 

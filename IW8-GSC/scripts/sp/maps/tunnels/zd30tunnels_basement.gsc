@@ -264,13 +264,13 @@ function basement_intro_scene() {
 
 function basement_tunnel_dof() {
   wait 2;
-  setsaveddvar("OMNONNMOTP", "0.1 400 2 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 2 1000");
   level.alex_wm thread scripts\engine\sp\utility::dof_enable_autofocus(5.6, 1, undefined, undefined, "tag_eye");
   level.farah waittill("glowstick_swap");
   level.farah thread scripts\engine\sp\utility::dof_enable_autofocus(5.6);
   wait 6;
   level.farah thread scripts\engine\sp\utility::dof_disable_autofocus();
-  setsaveddvar("OMNONNMOTP", "0.1 500 4 1000");
+  setsaveddvar("r_zPlanes", "0.1 500 4 1000");
 }
 
 function basement_intro_player_speed_management() {

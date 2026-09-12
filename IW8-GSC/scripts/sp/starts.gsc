@@ -36,7 +36,7 @@ function do_no_game_start() {
     return;
   }
 
-  setsaveddvar("NRTOOSORMS", "1");
+  setsaveddvar("ufoHitsTriggers", "1");
 
   if(isDefined(level.custom_no_game_setupfunc)) {
     level[[level.custom_no_game_setupfunc]]();
@@ -302,7 +302,7 @@ function handle_starts() {
 
   if(isDefined(var_10) && isDefined(var_10["start_in_jackal"])) {
     setomnvar("ui_active_hud", "jackal");
-    setsaveddvar("NKKRMOROTS", 1);
+    setsaveddvar("spaceship_disableViewModelNotetracks", 1);
   } else {
     setomnvar("ui_active_hud", "infantry");
   }

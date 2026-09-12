@@ -61,7 +61,7 @@ function scriptable_adddamagedcallback() {
 }
 
 function spawn_bomb() {
-  var_0 = getDvar("MOLPOSLOMO");
+  var_0 = getDvar("ui_gametype");
 
   if(var_0 == "cp_survival") {
     scripts\cp\utility::hideminimap(1);

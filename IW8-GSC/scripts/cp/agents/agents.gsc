@@ -4,7 +4,7 @@
 ***********************************************/
 
 function init() {
-  if(getdvarint("TLRPKRKMS") != 0 && !isDefined(game["gamestarted"])) {
+  if(getdvarint("online_matchdata_enabled") != 0 && !isDefined(game["gamestarted"])) {
     setmatchdata("commonMatchData", "map", level.script);
 
     if(level.hardcoremode) {
@@ -19,7 +19,7 @@ function init() {
     setmatchdata("commonMatchData", "is_private_match", scripts\cp\utility::privatematch());
   }
 
-  if(getdvarint("TLRPKRKMS") != 0) {
+  if(getdvarint("online_matchdata_enabled") != 0) {
     level.maxlogclients = 30;
   } else {
     level.maxlogclients = 0;
@@ -49,7 +49,7 @@ function onmatchstart() {
   }
 
   var_1 = function_042d();
-  getentitylessscriptablearray("dlog_event_server_match_start", ["map", level.script, "game_type", var_0, "is_playtest", getdvarint("dlog_is_playtest"), "MQQPLSSSLQ", getDvar("MQQPLSSSLQ"), "NOQRRQMOON", var_1]);
+  getentitylessscriptablearray("dlog_event_server_match_start", ["map", level.script, "game_type", var_0, "is_playtest", getdvarint("dlog_is_playtest"), "experiment_name", getDvar("experiment_name"), "playlist_name", var_1]);
   onmatchend();
 }
 
@@ -62,7 +62,7 @@ function onroundend() {
 }
 
 function getmatchstarttimeutc() {
-  if(getdvarint("TLRPKRKMS") == 0) {
+  if(getdvarint("online_matchdata_enabled") == 0) {
     return level.starttimeutcseconds;
   }
 
@@ -70,7 +70,7 @@ function getmatchstarttimeutc() {
 }
 
 function getmatchendtimeutc() {
-  if(getdvarint("TLRPKRKMS") == 0) {
+  if(getdvarint("online_matchdata_enabled") == 0) {
     return level.endtimeutcseconds;
   }
 

@@ -2009,13 +2009,13 @@ function pitch_up_cap_adjust() {
 function pitch_up_think() {
   for(;;) {
     if(level.player istouching(self) || level.player isonladder()) {
-      setsaveddvar("NNSNKNRTPL", 88);
+      setsaveddvar("player_view_pitch_up", 88);
 
       while(level.player istouching(self) || level.player isonladder()) {
         wait 0.05;
       }
     } else {
-      setsaveddvar("NNSNKNRTPL", 68);
+      setsaveddvar("player_view_pitch_up", 68);
 
       while(!level.player istouching(self) && !level.player isonladder()) {
         wait 0.05;
@@ -2028,11 +2028,11 @@ function pitch_up_think() {
 
 function pitch_up_set(var_0) {
   var_0 = clamp(var_0, 2, 88);
-  setsaveddvar("NNSNKNRTPL", var_0);
+  setsaveddvar("player_view_pitch_up", var_0);
 }
 
 function pitch_up_reset() {
-  setsaveddvar("NNSNKNRTPL", 68);
+  setsaveddvar("player_view_pitch_up", 68);
 }
 
 function player_using_flash() {
@@ -2053,15 +2053,15 @@ function fall_damage_remove_think() {
 
   for(;;) {
     if(level.player istouching(self)) {
-      setsaveddvar("NKTQRKRMTS", 1000);
-      setsaveddvar("LKMOLLSKKO", 1500);
+      setsaveddvar("bg_fallDamageMinHeight", 1000);
+      setsaveddvar("bg_fallDamageMaxHeight", 1500);
 
       while(level.player istouching(self)) {
         wait 0.5;
       }
     } else {
-      setsaveddvar("NKTQRKRMTS", 185);
-      setsaveddvar("LKMOLLSKKO", 300);
+      setsaveddvar("bg_fallDamageMinHeight", 185);
+      setsaveddvar("bg_fallDamageMaxHeight", 300);
 
       while(!level.player istouching(self)) {
         wait 0.5;

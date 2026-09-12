@@ -4,7 +4,7 @@
 ***********************************************/
 
 function init() {
-  if(getdvarint("TLRPKRKMS") != 0 && !isDefined(game["gamestarted"])) {
+  if(getdvarint("online_matchdata_enabled") != 0 && !isDefined(game["gamestarted"])) {
     setmatchdatadef("ddl/mp/matchdata.ddl");
     setmatchdata("commonMatchData", "map", level.script);
 
@@ -25,7 +25,7 @@ function init() {
     }
   }
 
-  if(getdvarint("TLRPKRKMS") != 0) {
+  if(getdvarint("online_matchdata_enabled") != 0) {
     if(level.gametype == "br") {
       level.maxlogclients = 200;
     } else {
@@ -82,7 +82,7 @@ function onmatchstart() {
   }
 
   var_2 = getdvarint("dlog_is_playtest");
-  var_3 = getDvar("MQQPLSSSLQ");
+  var_3 = getDvar("experiment_name");
   var_4 = function_042d();
   getentitylessscriptablearray("dlog_event_server_match_start", ["map", level.script, "game_type", var_0, "is_playtest", var_2, "experiment_name", var_3, "dedi_server_guid", isdismembermentenabled(), "sub_game_type", var_1, "playlist_name", var_4]);
 
@@ -102,7 +102,7 @@ function onroundend() {
 }
 
 function getmatchstarttimeutc() {
-  if(getdvarint("TLRPKRKMS") == 0) {
+  if(getdvarint("online_matchdata_enabled") == 0) {
     return level.starttimeutcseconds;
   }
 
@@ -110,7 +110,7 @@ function getmatchstarttimeutc() {
 }
 
 function getmatchendtimeutc() {
-  if(getdvarint("TLRPKRKMS") == 0) {
+  if(getdvarint("online_matchdata_enabled") == 0) {
     return level.endtimeutcseconds;
   }
 
@@ -652,12 +652,12 @@ function logscoreevent(var_0) {
 }
 
 function ref_13154(var_0) {
-  if(getdvarint("OMKTLMMNPT") == 1) {
+  if(getdvarint("ui_tactical") == 1) {
     var_0 setplayerdata("common", "round", "gameModeModifier", "tactical");
     return;
   }
 
-  if(getdvarint("MSQTTNSTNO") == 1) {
+  if(getdvarint("ui_hardcore") == 1) {
     var_0 setplayerdata("common", "round", "gameModeModifier", "hardcore");
     return;
   }
@@ -726,7 +726,7 @@ function endofgamesummarylogger() {
 function ref_12aa9() {
   if(scripts\mp\utility\game::matchmakinggame()) {
     var_0 = tolower(getDvar("mapname"));
-    var_1 = getdvarint("NLTOPSKPQM");
+    var_1 = getdvarint("playlistID");
 
     foreach(var_3 in level.players) {
       for(var_4 = 31; var_4 > 0; var_4--) {

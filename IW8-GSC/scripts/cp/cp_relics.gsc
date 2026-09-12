@@ -2417,7 +2417,7 @@ function parserelicstable() {
       var_10.attachmentref = var_4;
     }
 
-    if(getDvar("MOLPOSLOMO") == "zombie" || getDvar("MOLPOSLOMO") == "cp_strike") {
+    if(getDvar("ui_gametype") == "zombie" || getDvar("ui_gametype") == "cp_strike") {
       var_11 = tablelookupbyrow("cp/zombies/loot_Weapons_Passivetable.csv", var_0, 22);
 
       if(var_11 != "") {

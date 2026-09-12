@@ -289,7 +289,7 @@ function show_safehouse_regroup_text(var_0) {
     var_1 = var_0;
   }
 
-  var_2 = getDvar("NSQLTTMRMP");
+  var_2 = getDvar("ui_mapname");
   var_3 = "cp/" + var_2 + "_objectives.csv";
   var_4 = int(tablelookup(var_3, 1, var_1, 0));
   self setclientomnvar("ui_chyron_mission_index", var_4);

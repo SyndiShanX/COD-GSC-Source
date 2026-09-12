@@ -5,8 +5,8 @@
 
 function init_wave_spawning() {
   if(!isDefined(level.wave_table)) {
-    if(getDvar("MOLPOSLOMO") == "cp_wave_sv") {
-      level.wave_table = "cp/" + getDvar("NSQLTTMRMP") + "_wave_table.csv";
+    if(getDvar("ui_gametype") == "cp_wave_sv") {
+      level.wave_table = "cp/" + getDvar("ui_mapname") + "_wave_table.csv";
     } else {
       level.wave_table = "cp/cp_donetsk_wave_table.csv";
     }

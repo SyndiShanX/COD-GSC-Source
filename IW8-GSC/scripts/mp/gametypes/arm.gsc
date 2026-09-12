@@ -102,7 +102,7 @@ function updategametypedvars() {
   level.objectivescaler = scripts\mp\utility\dvars::dvarfloatvalue("objScalar", 4, 1, 10);
 
   if(getdvarint("allow_team_proxchat", 0) == 1) {
-    setDvar("LKTPRPKPMR", 1);
+    setDvar("voice_proximity_team", 1);
     var_0 = 1000;
     var_1 = getdvarint("proxchat_radius_override", 0);
 
@@ -110,7 +110,7 @@ function updategametypedvars() {
       var_0 = var_1;
     }
 
-    setDvar("NNMLSMNTOQ", var_0);
+    setDvar("voice_proximity_radius", var_0);
     return;
   }
 }

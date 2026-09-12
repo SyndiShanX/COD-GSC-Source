@@ -119,13 +119,13 @@ function infilthink(var_0, var_1) {
   thread vehiclethink(var_0, self.scene_node, var_1);
   thread actorthink(var_0, self.scene_node, var_1);
   level waittill("infil_started");
-  setDvar("TLMMOPMSK", 1);
+  setDvar("r_spotLightEntityShadows", 1);
   level notify("start_scene");
   level waittill("depthSortViewmodel_true");
-  setDvar("NMLOKNMRSK", 1);
+  setDvar("depthSortViewmodel", 1);
   level waittill("prematch_over");
-  setDvar("TLMMOPMSK", 0);
-  setDvar("NMLOKNMRSK", 0);
+  setDvar("r_spotLightEntityShadows", 0);
+  setDvar("depthSortViewmodel", 0);
 
   while(isDefined(self.commander) || isDefined(self.actors)) {
     waitframe();

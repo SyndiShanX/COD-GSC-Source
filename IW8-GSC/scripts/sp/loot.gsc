@@ -4,7 +4,7 @@
 ***********************************************/
 
 function init() {
-  setsaveddvar("MQSNSOSMPN", 1);
+  setsaveddvar("ai_corpseSynch", 1);
   setdvarifuninitialized("debug_loot", 0);
   level.loot = spawnStruct();
   level.loot.types = [];

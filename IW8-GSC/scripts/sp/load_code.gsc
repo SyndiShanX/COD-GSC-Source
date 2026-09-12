@@ -10,11 +10,11 @@ function init_level() {
 }
 
 function init_global_dvars() {
-  setsaveddvar("NRTOOSORMS", "0");
-  setsaveddvar("NSSLSNKPN", "1");
-  setsaveddvar("PPKQNKNMN", !scripts\sp\utility::is_trials_level());
-  setsaveddvar("MROOOROPKL", 4);
-  setsaveddvar("LTQMSPKRKO", 4);
+  setsaveddvar("ufoHitsTriggers", "0");
+  setsaveddvar("cg_fovScale", "1");
+  setsaveddvar("sv_saveOnStartMap", !scripts\sp\utility::is_trials_level());
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 4);
+  setsaveddvar("sm_spotUpdateLimit", 4);
   setsaveddvar("cg_hud_outline_colors_0", "0.000 0.000 0.000 0.000");
   setsaveddvar("cg_hud_outline_colors_1", "0.882 0.882 0.882 1.000");
   setsaveddvar("cg_hud_outline_colors_2", "0.804 0.157 0.157 1.000");
@@ -23,7 +23,7 @@ function init_global_dvars() {
   setsaveddvar("cg_hud_outline_colors_5", "0.784 0.490 0.157 1.000");
   setsaveddvar("cg_hud_outline_colors_6", "0.804 0.804 0.035 1.000");
   setsaveddvar("cg_hud_outline_colors_7", "0.000 0.000 0.000 0.000");
-  setsaveddvar("NLKQTSPTKQ", 0);
+  setsaveddvar("fx_dismemberment_enabled", 0);
   setdvarifuninitialized("scr_damageFeedbackDisabled", 1);
   setdvarifuninitialized("scr_damageFeedbackAudioDisabled", 0);
   setdvarifuninitialized("scr_no_hitmarker", 1);
@@ -125,7 +125,7 @@ function init_objective_colors() {
   var_0 = "1.0 1.0 1.0";
   var_1 = "0.9 0.9 0.9";
   var_2 = "0.85 0.85 0.85";
-  setsaveddvar("NRQKSNRORT", var_0);
+  setsaveddvar("con_typewriterColorBase", var_0);
 }
 
 function do_level_first_frame() {

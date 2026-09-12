@@ -2713,8 +2713,8 @@ function marines_intro_glanceback(var_0, var_1) {
     wait var_0;
   }
 
-  var_2 = getdvarfloat("MOKSKQLLMM");
-  setsaveddvar("MOKSKQLLMM", 2048);
+  var_2 = getdvarfloat("ai_glanceNearAnyPlayerThreshold");
+  setsaveddvar("ai_glanceNearAnyPlayerThreshold", 2048);
   var_3 = getaiarrayinradius(level.griggs.origin, 400, "allies");
 
   if(var_3.size > 0) {
@@ -2736,7 +2736,7 @@ function marines_intro_glanceback(var_0, var_1) {
     }
   }
 
-  setsaveddvar("MOKSKQLLMM", var_2);
+  setsaveddvar("ai_glanceNearAnyPlayerThreshold", var_2);
 }
 
 function waittill_or_timeout(var_0, var_1) {
@@ -2798,7 +2798,7 @@ function ally_equipment_backpack_interact(var_0, var_1, var_2, var_3, var_4) {
     var_8 = var_7 - var_6;
     var_9 = 0;
 
-    if(getDvar("LMMLNRSLKS") == "autobuild") {
+    if(getDvar("package_type") == "autobuild") {
       getentitylessscriptablearray("sp_ally_equipment", ["type", var_3, "levelname", level.script, "x", level.player.origin[0], "y", level.player.origin[1], "z", level.player.origin[2], "checkpoint", level.start_point, "ally", var_0.script_friendname]);
     }
 

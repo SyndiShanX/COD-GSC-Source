@@ -222,7 +222,7 @@ function main() {
   level._effect["vfx_est_bottom_dst_p6"] = loadfx("vfx/iw8/prop/scriptables/vfx_ee_mansion_int_staircase_main_bottom_dst_p6.vfx");
   level._effect["vfx_estate_stairwell_debris_01"] = loadfx("vfx/iw8/level/estate/vfx_estate_stairwell_debris_01.vfx");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\estate\gen\estate_fx::main();
     scripts\sp\maps\estate\gen\estate_sound::main();
     return;

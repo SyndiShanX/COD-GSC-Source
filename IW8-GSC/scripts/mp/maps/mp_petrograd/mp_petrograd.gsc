@@ -20,7 +20,7 @@ function main() {
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "urban";
   battle_tracks_vehicleoccupancyenter(level);
-  setDvar("NSSMQLPRNT", 0.01);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
   thread set_lighting_dvars();
   thread hide_multiple_brush();
   thread scripts\mp\destructible::rockable_cars_init();
@@ -42,13 +42,13 @@ function hide_multiple_brush() {
 }
 
 function set_lighting_dvars() {
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   setDvar("r_useCompressedSunShadow", 1);
-  setDvar("TMNTMTQRM", 0);
-  setDvar("NPONLLLSPL", 0.425);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 4);
-  setDvar("QSLRKRNKL", 2);
+  setDvar("sm_sunDistantShadows", 0);
+  setDvar("sm_sunSampleSizeNear", 0.425);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 4);
+  setDvar("r_compressedSunShadowFiltering", 2);
 }
 
 function ref_141bd() {

@@ -104,7 +104,7 @@ function actorthinkpath_default() {
   waitframe();
   var_10 playLoopSound("zmb_cont_ks_missile_lp");
   playFXOnTag(level._effect["vista_rocket"], var_10, "tag_origin");
-  var_11 = -1 * getdvarint("NPOQPMP", 800);
+  var_11 = -1 * getdvarint("bg_gravity", 800);
   var_12 = trajectorycalculateinitialvelocity(var_7, var_8, (0, 0, var_11), var_9);
   var_10 movegravity(var_12, var_9);
 

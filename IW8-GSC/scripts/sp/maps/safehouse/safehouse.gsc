@@ -139,20 +139,20 @@ function init_level() {
   setdvarifuninitialized("debug_guardLogic", 0);
   setdvarifuninitialized("debug_carnageEnemyLogic", 0);
   setdvarifuninitialized("debug_farahStealthBrokenLogic", 0);
-  setsaveddvar("MRPKQKMNLO", 0);
-  setsaveddvar("MMRNLMPPLT", "0");
-  setsaveddvar("MRNRKKOPLN", 4);
-  setsaveddvar("MQPQKNPQOK", 9);
-  setsaveddvar("LQLSPQOPKM", 50);
-  setsaveddvar("OLSKLTPPMR", 0.3);
-  setsaveddvar("NQTLPTNSSO", 10);
-  setsaveddvar("NTMMTOLQMQ", (-1, 1, 0));
-  setsaveddvar("MKNNNONLSK", 4);
-  setsaveddvar("NKKPQSTMRL", 3);
-  setsaveddvar("MMLNNQSTTL", 10);
-  setsaveddvar("MSMNPKRKSP", 0);
-  setsaveddvar("NLRRTORQPN", 11);
-  setsaveddvar("LTMPKRLLNM", 1500);
+  setsaveddvar("ai_friendlyFireBlockDuration", 0);
+  setsaveddvar("bg_cinematicFullscreen", "0");
+  setsaveddvar("cg_defaultWindFrequencyScale", 4);
+  setsaveddvar("cg_defaultWindAmplitudeScale", 9);
+  setsaveddvar("cg_defaultWindAreaScale", 50);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.3);
+  setsaveddvar("cg_defaultWindStrength", 10);
+  setsaveddvar("cg_defaultWindDir", (-1, 1, 0));
+  setsaveddvar("fx_lightmap_max_level", 4);
+  setsaveddvar("r_primaryLightMotionDetect", 3);
+  setsaveddvar("fx_alphaThreshold", 10);
+  setsaveddvar("mantle_ladder_enable", 0);
+  setsaveddvar("ai_corpseCount", 11);
+  setsaveddvar("r_vertexDeformCutOffDist", 1500);
   scripts\engine\sp\utility::battlechatter_on("axis");
   scripts\engine\sp\utility::add_global_spawn_function("allies", &scripts\engine\sp\utility::set_battlechatter, 0);
   scripts\engine\sp\utility::add_global_spawn_function("axis", &scripts\engine\sp\utility::set_battlechatter, 0);
@@ -160,7 +160,7 @@ function init_level() {
   scripts\engine\sp\utility::add_global_spawn_function("axis", &scripts\engine\sp\utility::disable_long_death);
   scripts\common\vehicle_build::build_light("script_vehicle_iw8_vindia_a1", "headlight_truck_left", "tag_light_front_left", "vfx/iw8/level/safehouse/vfx_veh_headlight_vindia_left_run", "headlights");
   scripts\common\vehicle_build::build_light("script_vehicle_iw8_vindia_a1", "headlight_truck_right", "tag_light_front_right", "vfx/iw8/level/safehouse/vfx_veh_headlight_vindia_right_run", "headlights");
-  setsaveddvar("MMTQQLRRRM", 0);
+  setsaveddvar("ladderEnableWeapon", 0);
   thread level_sandstormfxlogic();
   scripts\sp\maps\safehouse\safehouse_guard::level_guardinit();
   level_playersilencerpickupsinit();
@@ -308,7 +308,7 @@ function intro_moveplayercliphack() {
 }
 
 function intro_setvolumetricdepth() {
-  setsaveddvar("MPOKKOPMTN", "32 64 128 256");
+  setsaveddvar("r_volumetricDepth", "32 64 128 256");
 }
 
 function intro_flarelogic(var_0, var_1) {
@@ -502,7 +502,7 @@ function tunnels_playerinteractpintoedgelogic(var_0, var_1) {
 
   for(;;) {
     waitframe();
-    var_5 = getdvarint("MRNKTKLLKP");
+    var_5 = getdvarint("cg_targetBaseFov");
     var_6 = level.player getplayerangles();
     var_7 = level.player getEye();
     var_8 = anglesToForward(var_6);
@@ -701,7 +701,7 @@ function disguise_playerinteractedlogic(var_0, var_1, var_2) {
   var_4 dontcastshadows();
   var_4 hide();
   var_0 scripts\common\anim::anim_first_frame_solo(var_4, "disguise_exit");
-  setsaveddvar("NLPLNQSNNR", 0.05);
+  setsaveddvar("sv_znear", 0.05);
   var_5 = 0.5;
   thread player_rigenter(var_4, var_5, 5, 5, 5, 5);
   thread disguise_playerfoldeddisguiselogic(var_0);
@@ -715,7 +715,7 @@ function disguise_playerinteractedlogic(var_0, var_1, var_2) {
   var_0 scripts\common\anim::anim_single_solo(var_4, "disguise_exit");
   thread disguise_fovlogic();
   level.player scripts\engine\sp\utility::set_player_demeanor("normal");
-  setsaveddvar("NLPLNQSNNR", 0);
+  setsaveddvar("sv_znear", 0);
   player_rigexit(var_4);
   scripts\engine\sp\utility::autosave_by_name_silent("disguise_finished");
   scripts\sp\maps\safehouse\safehouse_utility::ai_sethackedname(var_1, "Farah");
@@ -762,7 +762,7 @@ function disguise_getfarahfoldeddisguise() {
 
 function disguise_fovlogic() {
   var_0 = 65;
-  var_1 = getdvarint("MRNKTKLLKP");
+  var_1 = getdvarint("cg_targetBaseFov");
   var_2 = 0;
   var_3 = 200;
   var_4 = getEnt("holster_fovTrigger", "targetname");
@@ -772,7 +772,7 @@ function disguise_fovlogic() {
       break;
     }
 
-    var_5 = getdvarint("MRNKTKLLKP");
+    var_5 = getdvarint("cg_targetBaseFov");
     var_6 = distance2d(var_4.origin, level.player.origin);
     var_7 = 1 - scripts\engine\math::normalize_value(var_2, var_3, var_6);
     var_8 = scripts\engine\math::factor_value(50, var_0, var_7);
@@ -787,7 +787,7 @@ function disguise_fovlogic() {
   }
 
   level.player modifybasefov(var_0, 2);
-  setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
+  setsaveddvar("r_volumetricDepth", "128 384 640 1024");
 }
 
 function disguise_getanimationstruct() {
@@ -1785,7 +1785,7 @@ function escape_interiorlogic() {
       break;
     }
 
-    var_7 = getdvarint("MRNKTKLLKP") + 10;
+    var_7 = getdvarint("cg_targetBaseFov") + 10;
     var_8 = scripts\engine\utility::within_fov(var_3, level.player getplayerangles(), var_4, cos(var_7));
 
     if(!var_8) {
@@ -3300,7 +3300,7 @@ function takedown_main() {
   var_0 scripts\engine\utility::set_movement_speed(120);
   var_7 = assassinate_getplayerflanktrigger();
   var_8 = sighttracepassed(level.player getEye(), var_0 getEye(), 0, var_0);
-  var_9 = scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0 getEye(), cos(getdvarint("MRNKTKLLKP")));
+  var_9 = scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0 getEye(), cos(getdvarint("cg_targetBaseFov")));
   var_10 = var_8 && var_9;
 
   if(level.player istouching(var_7) && !var_10) {
@@ -4714,7 +4714,7 @@ function plant_farahshootguardtriggerslogic() {
   var_3 allowedstances("crouch");
   var_2 endon("death");
   var_2 endon("entitydeleted");
-  var_6 = cos(getdvarint("MRNKTKLLKP") * 0.5);
+  var_6 = cos(getdvarint("cg_targetBaseFov") * 0.5);
   scripts\sp\maps\safehouse\safehouse_utility::player_waittilllookingatai(var_2, var_6);
   level.player playRumbleOnEntity("damage_heavy");
   var_7 = scripts\sp\maps\safehouse\safehouse_guard::level_getalertedguards();
@@ -6033,7 +6033,7 @@ function crawl_farahlogic() {
   var_1 = scripts\sp\maps\safehouse\safehouse_utility::level_objectivecreatefollowai(var_0, undefined, &"SAFEHOUSE/FOLLOW_FARAH");
   level thread scripts\sp\maps\safehouse\safehouse_utility::call_on_notify_no_self("level_guardsAllAlerted", &objective_delete, var_1);
   var_0 thread scripts\sp\maps\safehouse\safehouse_utility::dialogue("dx_vom_far_crawl_getdown_11", undefined, undefined, undefined, 1);
-  var_2 = cos(getdvarint("MRNKTKLLKP") * 0.8);
+  var_2 = cos(getdvarint("cg_targetBaseFov") * 0.8);
   scripts\sp\maps\safehouse\safehouse_utility::player_waittilllookingatai(var_0, var_2, 8, level, "level_guardsAllAlerted");
 
   if(scripts\engine\utility::flag("level_guardsAllAlerted")) {
@@ -6932,7 +6932,7 @@ function carnage_start() {
 
 function carnage_main() {
   scripts\engine\sp\utility::autosave_by_name_silent("carnage");
-  setsaveddvar("NLPLNQSNNR", 0.05);
+  setsaveddvar("sv_znear", 0.05);
   thread carnage_doflogic();
   level.player scripts\sp\player::player_movement_state("creep");
   var_0 = level_getfarah();
@@ -7722,7 +7722,7 @@ function advance_main() {
 
   scripts\sp\maps\safehouse\safehouse_utility::level_deletepreviousobjective();
   var_1 = scripts\sp\maps\safehouse\safehouse_utility::level_objectivecreatefollowai(var_2, 10, &"SAFEHOUSE/FOLLOW_FARAH");
-  setsaveddvar("NLPLNQSNNR", 0);
+  setsaveddvar("sv_znear", 0);
   var_2 scripts\sp\maps\safehouse\safehouse_utility::ai_resetstances();
   level.player scripts\sp\player::player_movement_state("creep");
 
@@ -7966,7 +7966,7 @@ function advance_scenefarahscaleanimratehack(var_0, var_1) {
   level.player endon("death");
   var_2 = [var_0, var_1];
   thread scripts\sp\maps\safehouse\safehouse_utility::animation_notifyonnotetrack(var_1, "end");
-  var_3 = cos(getdvarint("MRNKTKLLKP") * 0.6);
+  var_3 = cos(getdvarint("cg_targetBaseFov") * 0.6);
   var_4 = 7;
   var_5 = gettime() + var_4 * 1000;
 
@@ -8577,7 +8577,7 @@ function player_aimingtowardsenemy() {
   var_1 = 85;
 
   foreach(var_3 in var_0) {
-    var_4 = getdvarint("MRNKTKLLKP");
+    var_4 = getdvarint("cg_targetBaseFov");
     var_5 = (var_3.origin + var_3 getEye()) * 0.5;
     var_6 = level.player worldpointtoscreenpos(var_5, var_4);
 

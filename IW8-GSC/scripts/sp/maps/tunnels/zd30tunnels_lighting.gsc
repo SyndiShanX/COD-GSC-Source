@@ -14,16 +14,16 @@ function post_load() {
 }
 
 function setup_lighting_dvars() {
-  setsaveddvar("MQRQQONQSL", 0);
-  setsaveddvar("NPONLLLSPL", 0.05);
-  setsaveddvar("LSNRQTOKRR", 0);
-  setsaveddvar("RNPPKQOTN", 1);
-  setsaveddvar("QPLMKRON", 1);
-  setsaveddvar("MROOOROPKL", 8);
-  setsaveddvar("LTQMSPKRKO", 8);
-  setsaveddvar("OMKTSMSOS", 0);
+  setsaveddvar("sm_sunEnable", 0);
+  setsaveddvar("sm_sunSampleSizeNear", 0.05);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 0);
+  setsaveddvar("sm_spotEnable", 1);
+  setsaveddvar("r_volumetrics", 1);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
+  setsaveddvar("sm_spotUpdateLimit", 8);
+  setsaveddvar("r_usePrebuiltSunShadow", 0);
   wait 5;
-  setsaveddvar("LKOLRONRNQ", 600);
+  setsaveddvar("sm_spotDistCull", 600);
 }
 
 function setup_infil_lights() {

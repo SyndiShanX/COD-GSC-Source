@@ -598,7 +598,7 @@ function cratephysicsoncallback(var_0, var_1) {
   var_3 = var_0 + (0, 0, 5000);
   var_4 = vectorNormalize(var_0 - (var_3[0], var_3[1], 0));
   var_5 = scripts\cp_mp\killstreaks\toma_strike::ref_13bd6(var_0, var_1, var_4);
-  var_6 = (0, 0, -1 * getdvarint("NPOQPMP", 800));
+  var_6 = (0, 0, -1 * getdvarint("bg_gravity", 800));
   var_7 = (var_5.point - 0.5 * var_6 * squared(4) - var_3) / 4;
   var_8 = 3.925 * randomfloatrange(0.95, 1);
   var_9 = var_3 + var_7 * var_8 + 0.5 * var_6 * squared(var_8);

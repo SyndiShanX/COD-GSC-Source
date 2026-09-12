@@ -1007,7 +1007,7 @@ function listenfortauntinput(var_0) {
 function popfov(var_0) {
   foreach(var_2 in level.players) {
     if(!isai(var_2)) {
-      var_2 setclientdvar("QTSPTNLOL", var_0);
+      var_2 setclientdvar("cg_fov", var_0);
     }
   }
 }
@@ -1520,8 +1520,8 @@ function cameraactivatetrack(var_0, var_1, var_2) {
 
 function cameralerpto(var_0, var_1, var_2) {
   if(isDefined(level.lastactivatedcameraobject)) {
-    var_3 = getdvarfloat("NMORQOTSK");
-    setDvar("NMORQOTSK", 2);
+    var_3 = getdvarfloat("r_mbVelocityScale");
+    setDvar("r_mbVelocityScale", 2);
     var_4 = level.lastactivatedcameraobject.origin;
     var_5 = level.lastactivatedcameraobject.angles;
     level.temp_anchor = spawn("script_model", var_4);
@@ -1541,7 +1541,7 @@ function cameralerpto(var_0, var_1, var_2) {
     level.temp_anchor rotateTo(var_0.angles, var_2, 0, var_2 / 2);
     level.lastactivatedcameraobject = level.temp_anchor;
     wait var_2;
-    setDvar("NMORQOTSK", var_3);
+    setDvar("r_mbVelocityScale", var_3);
   } else {
     level.lastactivatedcameraobject = var_1;
   }

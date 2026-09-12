@@ -55,7 +55,7 @@ function finale_postload() {
   scripts\engine\sp\utility::add_hint_string("lab_stab", &"LAB/FINALE_MELEE");
   scripts\engine\sp\utility::add_hint_string("melee_stealth", &"CONTEXT_MELEE/STEALTH_KILL", &melee_hint_break);
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     var_0 = getEnt("finale_heli_reflect_model", "targetname");
 
     if(isDefined(var_0)) {
@@ -95,7 +95,7 @@ function finale_perspective_main() {
   bomb_plant_scene();
 
   if(isDefined(level.og_zplanes)) {
-    setsaveddvar("OMNONNMOTP", level.og_zplanes);
+    setsaveddvar("r_zPlanes", level.og_zplanes);
   }
 
   level.player setclienttriggeraudiozone("lab_helicopter", 0.25);
@@ -376,7 +376,7 @@ function change_yaw_angle(var_0) {
 
 function cine_cam_settings() {
   waitframe();
-  setsaveddvar("SLSMSSTQP", 0.1);
+  setsaveddvar("r_dof_physical_minFocusDistance", 0.1);
   level.barkov scripts\engine\sp\utility::dof_enable_autofocus(2.8, 500, undefined, undefined, "tag_eye", undefined, 1);
   wait 3;
   level scripts\engine\sp\utility::dof_enable(2, 70);
@@ -526,12 +526,12 @@ function finale_cam_player_anims(var_0, var_1) {
 
 function start_heli_shake() {
   level endon("stop_screen_shake");
-  level.og_mbradial = getdvarint("NMORQOTSK");
+  level.og_mbradial = getdvarint("r_mbVelocityScale");
 
   if(isplatformps4()) {
-    setsaveddvar("NMORQOTSK", 3);
+    setsaveddvar("r_mbVelocityScale", 3);
   } else {
-    setsaveddvar("NMORQOTSK", 4);
+    setsaveddvar("r_mbVelocityScale", 4);
   }
 
   for(;;) {
@@ -763,7 +763,7 @@ function finale_heli_start() {
   thread finale_extras_setup();
   level.player modifybasefov(55, 0.05);
   visionsetnaked("lab_ending_sss");
-  level.og_zplanes = getDvar("OMNONNMOTP");
+  level.og_zplanes = getDvar("r_zPlanes");
   level.player hideviewmodel();
   level.player hidelegsandshadow();
   level.alt_rig = scripts\engine\sp\utility::spawn_anim_model("player_rig");
@@ -939,7 +939,7 @@ function finale_kickoff_start() {
   thread finale_extras_setup();
   level.player modifybasefov(55, 0.05);
   visionsetnaked("lab_ending_sss");
-  level.og_zplanes = getDvar("OMNONNMOTP");
+  level.og_zplanes = getDvar("r_zPlanes");
   level.player hideviewmodel();
   level.player hidelegsandshadow();
   level.alt_rig = scripts\engine\sp\utility::spawn_anim_model("player_rig");
@@ -966,7 +966,7 @@ function barkov_kick_out_scene(var_0, var_1) {
   thread can_be_shot_again(var_0);
   dialogue_wheel_start();
   setomnvar("ui_dialogue_prompts_active", 0);
-  setsaveddvar("OMNONNMOTP", "0.1 400 2 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 2 1000");
   scripts\sp\utility::nvidiaansel_scriptdisable(1);
   level notify("barkov_dead");
   level notify("end_longdeath_lines");
@@ -1073,7 +1073,7 @@ function trigger_hill_destruction() {
 }
 
 function finale_skip() {
-  setsaveddvar("OMNONNMOTP", level.og_zplanes);
+  setsaveddvar("r_zPlanes", level.og_zplanes);
   var_0 = scripts\sp\utility::userskip_wait();
 
   if(!var_0) {
@@ -1147,7 +1147,7 @@ function finale_skip() {
 
   scripts\engine\utility::flag_set("barkov_dead");
   thread cleanup_finale_combat_guys(0.1);
-  setsaveddvar("NMORQOTSK", level.og_mbradial);
+  setsaveddvar("r_mbVelocityScale", level.og_mbradial);
   scripts\sp\maps\lab\lab_util::cine_letterboxing_down(0);
   wait 0.2;
   scripts\engine\utility::delaythread(0.05, &scripts\sp\hud_util::fade_in, 0.05);
@@ -1166,7 +1166,7 @@ function kickoff_setup() {
   thread farah_body_swap();
   level.player scripts\engine\utility::delaycall(0.2, &clearcinematicmotionoverride);
   wait 1.5;
-  setsaveddvar("NMORQOTSK", level.og_mbradial);
+  setsaveddvar("r_mbVelocityScale", level.og_mbradial);
   level notify("stop_screen_shake");
   level.player screenshakeonentity(0.2, 0.5, 0.4, 14, 0, 8, 1000, 6, 1.8, 50);
 }
@@ -1264,8 +1264,8 @@ function play_ending_bink() {
   level.player setplayerprogression("currentMission", "none");
   setmusicstate("");
   scripts\engine\utility::delaythread(0.1, &scripts\sp\credits::createmwlogo);
-  setsaveddvar("MMRNLMPPLT", "1");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicFullscreen", "1");
+  setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame("sp_epilogue");
   scripts\engine\utility::flag_init("skipped_ending_bink");
   thread skip_ending_bink_thread();
@@ -1301,7 +1301,7 @@ function play_ending_bink() {
 
 function ending_zplanes() {
   wait 0.5;
-  setsaveddvar("OMNONNMOTP", "1 5 5 10");
+  setsaveddvar("r_zPlanes", "1 5 5 10");
 }
 
 function skip_ending_bink_thread() {
@@ -1438,7 +1438,7 @@ function barkov_damage(var_0) {
   thread barkov_idle_vo();
   var_1 = scripts\engine\utility::waittill_any_return("barkov_is_missed", "barkov_is_stabbed", "barkov_is_shot");
   barkov_struggle_setup(var_0);
-  level.og_zplanes = getDvar("OMNONNMOTP");
+  level.og_zplanes = getDvar("r_zPlanes");
   thread mus_barkov_stab();
 
   switch (var_1) {
@@ -2179,7 +2179,7 @@ function barkov_melee_path(var_0, var_1, var_2) {
 
   self setlookattext("", &"");
   thread barkov_melee_setup();
-  setsaveddvar("OMNONNMOTP", "0.1 400 2 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 2 1000");
   level.player lerpfovscalefactor(0, 0.25);
 
   if(!isalive(level.player)) {
@@ -2379,7 +2379,7 @@ function barkov_stab_loop(var_0, var_1) {
   }
 
   thread scripts\engine\sp\utility::dof_disable_autofocus();
-  setsaveddvar("OMNONNMOTP", level.og_zplanes);
+  setsaveddvar("r_zPlanes", level.og_zplanes);
   level.knife hide();
   barkov_crawl_scene(var_0);
 }
@@ -2434,7 +2434,7 @@ function barkov_crawl_scene(var_0) {
       level notify("stop_crawl_anims");
       level notify("stop_crawling_notify");
       level.player allowmelee(0);
-      setsaveddvar("OMNONNMOTP", "0.1 400 2 1000");
+      setsaveddvar("r_zPlanes", "0.1 400 2 1000");
 
       if(!isDefined(level.player_rig)) {
         level.player_rig = scripts\engine\sp\utility::spawn_anim_model("player_rig");
@@ -2469,7 +2469,7 @@ function barkov_crawl_scene(var_0) {
       finale_stab(var_0, "finale_choke_stab02");
       finale_stab(var_0, "finale_choke_stab03");
       finale_stab(var_0, "finale_choke_stab04");
-      setsaveddvar("OMNONNMOTP", level.og_zplanes);
+      setsaveddvar("r_zPlanes", level.og_zplanes);
       scripts\sp\player_rig::unlink_player_from_rig(undefined, undefined, undefined, 1);
       thread player_rig_end_scene_setup(var_0);
       scripts\engine\utility::flag_set("beg_lines");

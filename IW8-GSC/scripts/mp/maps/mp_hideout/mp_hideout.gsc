@@ -16,9 +16,9 @@ function main() {
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_hideout", "codcaster_compass_map_mp_hideout");
-  setDvar("PKKMTTRQO", 8);
-  setDvar("MTORLPNK", 0.9);
-  setDvar("LTMPKRLLNM", 5000);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_reactiveMotionPlayerPushDecay", 0.9);
+  setDvar("r_vertexDeformCutOffDist", 5000);
   thread lb_pitch_roll_dmg_threshold("destructibleSedan01", "destructibleSedan01_edges", "destructibleSedan01_edges_dst");
   thread lb_pitch_roll_dmg_threshold("destructibleSedan02", "destructibleSedan02_edges", "destructibleSedan02_edges_dst");
   thread lb_pitch_roll_dmg_threshold("destructibleDecho01", "destructibleDecho02_edges", "destructibleDecho02_edges_dst");

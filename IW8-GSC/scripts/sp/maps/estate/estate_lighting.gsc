@@ -19,14 +19,14 @@ function post_load() {
 }
 
 function lighting_setup_dvars() {
-  setsaveddvar("MPOKKOPMTN", "128 384 768 2304");
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NTLKNLNPLK", 2);
+  setsaveddvar("r_volumetricDepth", "128 384 768 2304");
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
   wait 1;
-  setsaveddvar("LTQMSPKRKO", 8);
-  setsaveddvar("MROOOROPKL", 10);
-  setsaveddvar("LKOLRONRNQ", 550);
+  setsaveddvar("sm_spotUpdateLimit", 8);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 10);
+  setsaveddvar("sm_spotDistCull", 550);
 }
 
 function lighting_flags() {
@@ -138,9 +138,9 @@ function lighting_intro() {
 
 function lighting_gate() {
   scripts\engine\utility::flag_wait("at_woods");
-  setsaveddvar("LKOLRONRNQ", 1500);
+  setsaveddvar("sm_spotDistCull", 1500);
   scripts\engine\utility::flag_wait("player_entered_bushes_gate");
-  setsaveddvar("LKOLRONRNQ", 550);
+  setsaveddvar("sm_spotDistCull", 550);
 }
 
 function lighting_mansion_fire_1() {

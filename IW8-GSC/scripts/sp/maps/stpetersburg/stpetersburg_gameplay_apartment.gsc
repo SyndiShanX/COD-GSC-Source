@@ -52,7 +52,7 @@ function apartment_main() {
   thread apt_hallway_door_setup();
   thread canal_start_watcher();
   thread delete_scriptables_in_bar();
-  setsaveddvar("TLOLRMSL", 1);
+  setsaveddvar("fx_lights_radius_scale", 1);
   scripts\engine\utility::flag_wait("flag_grenade_bypass");
   scripts\engine\utility::flag_set("flag_apartment_end");
 }

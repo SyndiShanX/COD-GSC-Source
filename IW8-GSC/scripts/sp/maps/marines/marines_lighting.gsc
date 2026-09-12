@@ -28,20 +28,20 @@ function init_flags() {
 function optimizationdvars() {
   waitframe();
   waitframe();
-  setsaveddvar("MPLORMMQPT", 2);
-  setsaveddvar("MNKLKSPRT", 1500);
-  setsaveddvar("QPLMKRON", 0);
-  setsaveddvar("NQTPSMTLQM", 0);
-  setsaveddvar("MRSTKSMMP", 0);
-  setsaveddvar("MPTNKKPKRK", 4);
-  setsaveddvar("MPRMNMQQKR", 4);
+  setsaveddvar("r_lodScale", 2);
+  setsaveddvar("r_zfar", 1500);
+  setsaveddvar("r_volumetrics", 0);
+  setsaveddvar("r_mbPostfxMaxNumSamples", 0);
+  setsaveddvar("r_dof_physical_enable", 0);
+  setsaveddvar("r_dynamicSpotLightLimit", 4);
+  setsaveddvar("r_dynamicOmniLightLimit", 4);
 }
 
 function call_sung_lighting_setup() {
   setDvar("r_useCompressedSunShadow", 1);
-  setsaveddvar("TMNTMTQRM", 0);
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("LSNRQTOKRR", 2);
+  setsaveddvar("sm_sunDistantShadows", 0);
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
 }
 
 function scriptlights_setup() {
@@ -90,8 +90,8 @@ function wolfroom_light_on() {
   var_2 = getEntArray("wolfroom_light", "targetname");
   var_3 = getEntArray("cinematic_monitor_light", "targetname");
   scripts\engine\sp\utility::trigger_wait("wolfroom_light_on_trig", "targetname");
-  setsaveddvar("LTQMSPKRKO", 6);
-  setsaveddvar("MROOOROPKL", 6);
+  setsaveddvar("sm_spotUpdateLimit", 6);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 6);
 
   foreach(var_5 in var_1) {
     var_5 setlightintensity(0);
@@ -111,16 +111,16 @@ function wolfroom_light_on() {
 
 function hospital_dof_on() {
   scripts\engine\utility::flag_wait("hospital_dof_on");
-  setsaveddvar("LKOLRONRNQ", 600);
+  setsaveddvar("sm_spotDistCull", 600);
   scripts\engine\utility::flag_waitopen("hospital_dof_on");
 }
 
 function murderhole_dof_on() {
   scripts\engine\utility::flag_wait("murderhole_dof_On");
-  setsaveddvar("TMNTMTQRM", 1);
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_sunDistantShadows", 1);
+  setsaveddvar("sm_spotDistCull", 500);
   scripts\engine\utility::flag_waitopen("murderhole_dof_On");
-  setsaveddvar("TMNTMTQRM", 0);
+  setsaveddvar("sm_sunDistantShadows", 0);
 }
 
 function getlighttrigger() {
@@ -176,18 +176,18 @@ function flycam_intro_start() {
 }
 
 function wolf_takedown_cam_start() {
-  setsaveddvar("MPTNKKPKRK", 6);
+  setsaveddvar("r_dynamicSpotLightLimit", 6);
   scripts\engine\utility::flag_wait("flag_wolf_performing_takedown");
   waitframe();
 }
 
 function lighting_setup_dvars() {
   setDvar("r_useCompressedSunShadow", 1);
-  setsaveddvar("TMNTMTQRM", 0);
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("LKOLRONRNQ", 800);
-  setsaveddvar("MROOOROPKL", 4);
-  setsaveddvar("LTQMSPKRKO", 4);
+  setsaveddvar("sm_sunDistantShadows", 0);
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_spotDistCull", 800);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 4);
+  setsaveddvar("sm_spotUpdateLimit", 4);
 }
 
 function turnon() {
@@ -256,7 +256,7 @@ function sun_adjustments_register_trigger(var_0, var_1) {
 
     if(var_4 > 0) {
       waitframe();
-      setsaveddvar("OMKTSMSOS", 3);
+      setsaveddvar("r_usePrebuiltSunShadow", 3);
     }
   }
 

@@ -45,9 +45,9 @@ function intro_start() {
 
 function intro_main() {
   level.player setclienttriggeraudiozone("fade_to_black", 0.01);
-  setsaveddvar("LMPKPQPRMK", 0.01);
-  setsaveddvar("TLMMOPMSK", 1);
-  setsaveddvar("MMLNNQSTTL", 0);
+  setsaveddvar("r_lightTweakSunLight", 0.01);
+  setsaveddvar("r_spotLightEntityShadows", 1);
+  setsaveddvar("fx_alphaThreshold", 0);
   setomnvar("ui_hide_weapon_info", 1);
   scripts\engine\utility::flag_set("lighting_intro");
   thread scripts\sp\hud_util::fade_out(0, "black");
@@ -114,7 +114,7 @@ function intro_main() {
   level.intro_technical = undefined;
   level.intro_started = undefined;
   scripts\sp\player_rig::unlink_player_from_rig();
-  setsaveddvar("TLMMOPMSK", 0);
+  setsaveddvar("r_spotLightEntityShadows", 0);
   setomnvar("ui_hide_weapon_info", 0);
 }
 
@@ -222,7 +222,7 @@ function tall_grass_main() {
   thread gate_light_watcher();
   thread scripts\engine\utility::exploder("millexit");
   scripts\engine\sp\objectives::objective_add("estate", "current", undefined, &"ESTATE/OBJ_DESC_FIND_ENTRANCE");
-  setsaveddvar("MMLNNQSTTL", 0);
+  setsaveddvar("fx_alphaThreshold", 0);
   thread tall_grass_birds();
   scripts\engine\sp\utility::flagwaitthread("price_poi", &toggle_price_poi, 1);
   var_0 = scripts\engine\utility::getStructArray("tall_grass_spline_stayahead", "targetname");
@@ -449,7 +449,7 @@ function woods_main() {
   thread vo_woods();
   thread woods_price_nvgs();
   thread scripts\engine\sp\utility::autosave_by_name("woods");
-  setsaveddvar("MMLNNQSTTL", 0);
+  setsaveddvar("fx_alphaThreshold", 0);
   scripts\engine\sp\utility::flagwaitthread("woods_split", &spawn_infil_bodies);
   scripts\engine\sp\utility::flagwaitthread("woods_split", &toggle_price_poi, 0);
   var_0 = getEnt("lerp_fov_trig", "targetname");
@@ -536,7 +536,7 @@ function gate_main() {
   thread gate_nvg_hint();
   thread vo_gate();
   thread price_hot_or_not();
-  setsaveddvar("MMLNNQSTTL", 0);
+  setsaveddvar("fx_alphaThreshold", 0);
 
   if(isDefined(level.stealth)) {
     level.stealth.detect.range["hidden"]["prone"] = 400;
@@ -943,7 +943,7 @@ function fusebox_tut_main() {
   scripts\engine\utility::delaythread(0.1, &light_tut_light_watcher);
   level.price_color_trigger = 4;
   level.fusebox_animnode = scripts\engine\utility::getStruct("fusebox_tut_animnode", "targetname");
-  setsaveddvar("MMLNNQSTTL", 0);
+  setsaveddvar("fx_alphaThreshold", 0);
   var_0 = initgate(level.fusebox_animnode, "light_tut_entrance_door", %est_li_050_fusebox_tuto_door, 1);
   var_0.og_origin = var_0.origin;
   var_0.og_angles = var_0.angles;
@@ -1673,7 +1673,7 @@ function estate_rappel_main() {
   thread rappel_anim();
   level waittill("on_belay");
   scripts\engine\sp\utility::autosave_by_name("rappel");
-  setsaveddvar("MMLNNQSTTL", 10);
+  setsaveddvar("fx_alphaThreshold", 10);
   var_0 = getaiarray("axis");
 
   if(var_0.size) {
@@ -2665,7 +2665,7 @@ function debug_cutters() {
 
 function player_stay_behind_ai(var_0) {
   level endon("stop_player_stay_behind");
-  setsaveddvar("OLMLOTTLRM", 1.15);
+  setsaveddvar("player_sprintSpeedScale", 1.15);
   var_1 = scripts\engine\utility::ter_op(!isDefined(var_0), 22500, var_0 * var_0);
   var_2 = 0.5;
   var_3 = 0.7;
@@ -2687,7 +2687,7 @@ function player_stay_behind_ai(var_0) {
 }
 
 function shutdown_player_stay_behind_ai() {
-  setsaveddvar("OLMLOTTLRM", 1.4);
+  setsaveddvar("player_sprintSpeedScale", 1.4);
   level notify("stop_player_stay_behind");
   thread scripts\engine\sp\utility::blend_movespeedscale_default(1);
 }

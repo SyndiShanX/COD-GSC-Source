@@ -4,5 +4,5 @@
 ****************************************************************/
 
 function main() {
-  setDvar("LKOLRONRNQ", 1500);
+  setDvar("sm_spotDistCull", 1500);
 }

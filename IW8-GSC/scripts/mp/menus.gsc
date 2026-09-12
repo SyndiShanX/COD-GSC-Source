@@ -218,7 +218,7 @@ function onclasschoicecallback(var_0, var_1) {
 
   self notify("loadout_class_selected", var_0);
 
-  if(level.systemlink && getdvarint("LOMTKQTRTM") && self ismlgspectator()) {
+  if(level.systemlink && getdvarint("xblive_competitionmatch") && self ismlgspectator()) {
     self setclientomnvar("ui_options_menu", 0);
     return;
   }

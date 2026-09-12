@@ -25,7 +25,7 @@ function main() {
   getscriptablelootspawnedcountbyname(400, 1200);
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_promenade_gw");
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   level.music_style = "eastern_europe";
   game["attackers"] = "allies";
   game["defenders"] = "axis";

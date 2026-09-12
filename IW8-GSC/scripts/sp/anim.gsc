@@ -183,7 +183,7 @@ function anim_custom_animmode_on_guy(var_0, var_1, var_2, var_3, var_4, var_5, v
   var_0._custom_anim_loop = var_6;
   var_0._custom_anim_thread = var_7;
 
-  if(getdvarint("LPNQTQRRP", 0) == 1) {
+  if(getdvarint("ai_iw7", 0) == 1) {
     var_0 scripts\asm\asm_sp::asm_animcustom(&scripts\anim\animmode::main, &scripts\asm\asm_sp::asm_stopanimcustom);
     return;
   }

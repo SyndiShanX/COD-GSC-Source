@@ -8,7 +8,7 @@ function door_dynamic_setup(var_0) {
     return;
   }
 
-  setDvar("NSOMOMMLML", 150);
+  setDvar("cg_buttonHintNaturalDistance", 150);
   level.doors = [];
   level.doorsetupstarted = 0;
   thread door_dynamic_setup_adapter("dynamic_door", 0);

@@ -1635,7 +1635,7 @@ function is_looking_at(var_0, var_1, var_2, var_3) {
     var_4 = var_2;
   }
 
-  var_5 = level.player worldpointtoscreenpos(var_4, getdvarint("MRNKTKLLKP"));
+  var_5 = level.player worldpointtoscreenpos(var_4, getdvarint("cg_targetBaseFov"));
 
   if(!isDefined(var_5)) {
     return 0;

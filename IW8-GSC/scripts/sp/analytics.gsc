@@ -202,7 +202,7 @@ function updatetotalgameplaytime() {
 }
 
 function getdifficultylevel() {
-  var_0 = getdvarint("TTMRSTRO") + 1;
+  var_0 = getdvarint("g_gameskill") + 1;
 
   if(scripts\sp\utility::in_specialist_mode()) {
     var_0 = 5;

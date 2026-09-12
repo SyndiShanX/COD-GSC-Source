@@ -360,8 +360,8 @@ function trucks_stolen_main() {
   var_3 = scripts\engine\sp\utility::spawn_anim_model("windshield", level.truck2.origin, level.truck2.angles);
   level.truck2 setModel("veh8_civ_lnd_decho_static_dst_black");
   thread wait_show_cinematic_bars();
-  level.og_zplanes = getDvar("OMNONNMOTP");
-  setsaveddvar("OMNONNMOTP", "0.1 500 1.5 1000");
+  level.og_zplanes = getDvar("r_zPlanes");
+  setsaveddvar("r_zPlanes", "0.1 500 1.5 1000");
   thread alpha1_final_scene(level.alpha1);
   thread bravo3_final_scene(level.bravo1);
   thread wait_play_end_bink();
@@ -369,7 +369,7 @@ function trucks_stolen_main() {
   var_2 scripts\common\anim::anim_single_solo(level.player.bodydouble, "trucks_stolen");
   var_2 thread scripts\common\anim::anim_last_frame_solo(level.player.bodydouble, "trucks_stolen");
   var_2 thread scripts\common\anim::anim_last_frame_solo(level.player_rig, "trucks_stolen");
-  setsaveddvar("OMNONNMOTP", level.og_zplanes);
+  setsaveddvar("r_zPlanes", level.og_zplanes);
 }
 
 function audio_truck3_wake_up_and_away() {
@@ -427,7 +427,7 @@ function check_skip_outro(var_0) {
 
   if(var_1) {
     level.endmission_bink_skip = undefined;
-    setsaveddvar("OMNONNMOTP", level.og_zplanes);
+    setsaveddvar("r_zPlanes", level.og_zplanes);
     scripts\engine\sp\utility::nextmission();
     return;
   }
@@ -442,7 +442,7 @@ function wait_play_end_bink() {
   scripts\engine\utility::delaythread(1.9, &audio_fade_out_over_bink);
   cinematicingame(var_2, 0, 0, 0, 0, 0, 1);
   wait 2;
-  setsaveddvar("OMNONNMOTP", level.og_zplanes);
+  setsaveddvar("r_zPlanes", level.og_zplanes);
   scripts\engine\sp\utility::nextmission();
 }
 

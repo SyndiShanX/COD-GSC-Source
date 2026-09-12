@@ -23,29 +23,29 @@ function main() {
 }
 
 function lighting_setup_dvars() {
-  setDvar("LKOLRONRNQ", 1500);
-  setDvar("LTQMSPKRKO", 4);
-  setDvar("MROOOROPKL", 8);
-  setDvar("PKKMTTRQO", 8);
-  setDvar("MNQKPNLOPT", 1);
-  setDvar("NRSOTSLSSO", 1);
+  setDvar("sm_spotDistCull", 1500);
+  setDvar("sm_spotUpdateLimit", 4);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("sm_spotShadowScoreSystem", 1);
+  setDvar("sm_spotUpdateMoreDynEnt", 1);
   thread ref_14051();
 }
 
 function ref_14051() {
-  setDvar("NPONLLLSPL", 0.25);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 2);
-  setDvar("TMNTMTQRM", 0);
+  setDvar("sm_sunSampleSizeNear", 0.25);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 2);
+  setDvar("sm_sunDistantShadows", 0);
   setDvar("sm_compressedSunShadowFiltering", 1);
   setDvar("sm_compressedSunShadowFilteringMaxRadius", 4);
 }
 
 function ref_11e8d() {
-  setDvar("NPONLLLSPL", 0.25);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 2);
-  setDvar("TMNTMTQRM", 1);
+  setDvar("sm_sunSampleSizeNear", 0.25);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 2);
+  setDvar("sm_sunDistantShadows", 1);
 }
 
 function ref_11d80() {

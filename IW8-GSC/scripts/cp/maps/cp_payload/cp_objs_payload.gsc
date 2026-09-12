@@ -31,7 +31,7 @@ function ref_13868(var_0, var_1) {
 }
 
 function initpayloadobj(var_0, var_1) {
-  setDvar("QOSTSKSTO", 0);
+  setDvar("bg_pathFollowerMinLookaheadDist", 0);
   level.initlocationcircle = "obj_payload";
   level.initlethalmaxoffsetmap = "obj_payload";
   scripts\engine\utility::flag_init("payload_tanks_killed");
@@ -223,11 +223,11 @@ function mp_shipment_patch() {
 function spawn_endgame_camera(var_0) {
   self.ignoreme = 1;
   self cameralinkTo(var_0, "tag_origin", 1);
-  self setclientdvar("LQKPQMPRQN", 1);
+  self setclientdvar("cg_everyoneHearsEveryone", 1);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 
   if(self isconsoleplayer()) {
-    self setclientdvar("QTSPTNLOL", "50");
+    self setclientdvar("cg_fov", "50");
     return;
   }
 }

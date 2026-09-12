@@ -263,7 +263,7 @@ function unset_outline_for_player() {
 }
 
 function save_outline_settings() {
-  var_0 = ["LRMPROLMKN", "NTOSKSTKQQ", "MKOQSSQKLL", "NSNOLMTLLL", "LSRTPRNOLS", "LNNOSQKRTP", "RKSQOKQNK", "cg_hud_outline_colors_0", "cg_hud_outline_colors_1", "cg_hud_outline_colors_2", "cg_hud_outline_colors_3", "cg_hud_outline_colors_4", "cg_hud_outline_colors_5", "cg_hud_outline_colors_6"];
+  var_0 = ["r_hudOutlineFillColor0", "r_hudOutlineFillColor1", "r_hudOutlineWidth", "r_hudOutlineOccludedOutlineColor", "r_hudOutlineOccludedInlineColor", "r_hudOutlineOccludedInteriorColor", "r_hudOutlineOccludedColorFromFill", "cg_hud_outline_colors_0", "cg_hud_outline_colors_1", "cg_hud_outline_colors_2", "cg_hud_outline_colors_3", "cg_hud_outline_colors_4", "cg_hud_outline_colors_5", "cg_hud_outline_colors_6"];
 
   if(!isDefined(level.hudoutlinesettings)) {
     level.hudoutlinesettings = [];
@@ -275,7 +275,7 @@ function save_outline_settings() {
 }
 
 function restore_outline_settings() {
-  var_0 = ["LRMPROLMKN", "NTOSKSTKQQ", "MKOQSSQKLL", "NSNOLMTLLL", "LSRTPRNOLS", "LNNOSQKRTP", "RKSQOKQNK", "cg_hud_outline_colors_0", "cg_hud_outline_colors_1", "cg_hud_outline_colors_2", "cg_hud_outline_colors_3", "cg_hud_outline_colors_4", "cg_hud_outline_colors_5", "cg_hud_outline_colors_6"];
+  var_0 = ["r_hudOutlineFillColor0", "r_hudOutlineFillColor1", "r_hudOutlineWidth", "r_hudOutlineOccludedOutlineColor", "r_hudOutlineOccludedInlineColor", "r_hudOutlineOccludedInteriorColor", "r_hudOutlineOccludedColorFromFill", "cg_hud_outline_colors_0", "cg_hud_outline_colors_1", "cg_hud_outline_colors_2", "cg_hud_outline_colors_3", "cg_hud_outline_colors_4", "cg_hud_outline_colors_5", "cg_hud_outline_colors_6"];
 
   if(!isDefined(level.hudoutlinesettings)) {
     return;
@@ -301,7 +301,7 @@ function hudoutline_channels_init() {
 
   level.hudoutlinechannels = [];
   hudoutline_add_channel_internal("default", 0, level.fnhudoutlinedefaultsettings);
-  setsaveddvar("NMROQRRONQ", 1);
+  setsaveddvar("r_hudOutlineEnable", 1);
   var_0 = [[level.fnhudoutlinedefaultsettings]]();
 
   for(var_1 = 0; var_1 < 8; var_1++) {
@@ -688,10 +688,10 @@ function hudoutline_default_settings() {
     var_2 = clamp(var_1 / 1000, 1, 2);
     var_0 = var_2;
   } else {
-    GscBinSkip0(0x2e, "MKOQSSQKLL", 1);
+    GscBinSkip0(0x2e, "r_hudOutlineWidth", 1);
   }
 
-  GscBinSkip0(0x2e, "LRMPROLMKN", "0.9 0.9 0.9 0.5");
+  GscBinSkip0(0x2e, "r_hudOutlineFillColor0", "0.9 0.9 0.9 0.5");
 }
 
 function _get_sorted_list_of_channel_plus_child_channels(var_0, var_1) {

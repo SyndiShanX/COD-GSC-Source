@@ -352,7 +352,7 @@ function managejumpmasterinfodisplay() {
 
   var_0 = 0;
 
-  if(getdvarint("PMKLQQKSO") != 0 && getdvarint("PMKLQQKSO") != 1) {
+  if(getdvarint("loc_language") != 0 && getdvarint("loc_language") != 1) {
     var_0 = 1.5;
   }
 

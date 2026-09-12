@@ -9,7 +9,7 @@ function main() {
   scripts\sp\maps\stpetersburg\stpetersburg_lighting::main();
   scripts\sp\maps\stpetersburg\stpetersburg_precache::main();
   scripts\sp\maps\stpetersburg\stpetersburg_anim::main();
-  setsaveddvar("MKNNNONLSK", 4);
+  setsaveddvar("fx_lightmap_max_level", 4);
   stpetersburg_starts();
   stpetersburg_transients();
   stpetersburg_preload();
@@ -583,7 +583,7 @@ function stakeout_stp_main() {
   thread audio_music_start_st_pete();
   thread audio_stp_intro_amb();
   thread scripts\sp\maps\stpetersburg\stpetersburg_utility::transient_waittill("flag_stakeout_nikolai_closed_door", undefined, "stpetersburg_alley_script_tr");
-  setsaveddvar("TLOLRMSL", 0.01);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
   set_player_health_fragile();
   scripts\engine\sp\utility::set_start_location("intro_stakeout", [level.player]);
   level.price = scripts\sp\maps\stpetersburg\stpetersburg_utility::setup_named_ai("price", "Captain Price", "start_intro_stakeout_price", undefined, "casual");
@@ -599,7 +599,7 @@ function audio_music_start_st_pete() {
 }
 
 function stakeout_catchup() {
-  setsaveddvar("TLOLRMSL", 0.01);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
   scripts\engine\utility::flag_set("flag_stealth_start_patrols_1");
   scripts\engine\utility::flag_set("flag_alley_stealth_price_at_door");
   scripts\engine\utility::delaythread(0.05, &scripts\sp\maps\stpetersburg\stpetersburg_gameplay_club::intro_stakeout_swap_butcher_vehicle);
@@ -658,7 +658,7 @@ function bar_backroom_start() {
 }
 
 function bar_backroom_stp_main() {
-  setsaveddvar("TLOLRMSL", 1);
+  setsaveddvar("fx_lights_radius_scale", 1);
   set_player_health_semifragile();
   setup_price_silenced_pistol();
   thread scripts\sp\maps\stpetersburg\stpetersburg_gameplay_club::bar_price_handler();
@@ -669,14 +669,14 @@ function bar_backroom_stp_main() {
 }
 
 function bar_backroom_catchup() {
-  setsaveddvar("TLOLRMSL", 1);
+  setsaveddvar("fx_lights_radius_scale", 1);
   scripts\engine\utility::flag_set("flag_player_exit_back_room");
 }
 
 function bar_shootout_start() {
   scripts\engine\sp\utility::set_start_location("stpetersburg_bar_shootout", [level.player]);
   level.price = scripts\sp\maps\stpetersburg\stpetersburg_utility::setup_named_ai("price", "Captain Price", "start_bar_shootout_price_alt");
-  setsaveddvar("NQNQPRLRQM", 0.15);
+  setsaveddvar("fx_lights_intensity_scale", 0.15);
   set_player_health_semifragile();
   setup_player_silenced_pistol();
   scripts\sp\maps\stpetersburg\stpetersburg_gameplay_club::bar_shootout_main();
@@ -710,8 +710,8 @@ function bar_street_start() {
 }
 
 function bar_street_stp_main() {
-  setsaveddvar("TLOLRMSL", 0.01);
-  setsaveddvar("NQNQPRLRQM", 1);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
+  setsaveddvar("fx_lights_intensity_scale", 1);
   thread reduce_friendlyfire_penalties();
   setup_price_smg();
   thread scripts\sp\maps\stpetersburg\stpetersburg_utility::enforcer_reset_fake_health();
@@ -736,7 +736,7 @@ function walla_bar_street() {
 }
 
 function bar_street_catchup() {
-  setsaveddvar("TLOLRMSL", 0.01);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
   scripts\sp\maps\stpetersburg\stpetersburg_utility::trigger_safe_function("bar_street_triggers", "script_noteworthy", "disable");
 }
 
@@ -763,7 +763,7 @@ function apartment_stp_main() {
 
 function apartment_catchup() {
   thread scripts\sp\maps\stpetersburg\stpetersburg_gameplay_apartment::delete_scriptables_in_bar();
-  setsaveddvar("TLOLRMSL", 1);
+  setsaveddvar("fx_lights_radius_scale", 1);
   scripts\engine\utility::flag_set("flag_apartment_enforcer_stairs_vignette");
   scripts\engine\utility::flag_set("flag_canal_enforcer_on_bridge");
   scripts\engine\utility::flag_set("flag_canal_player_jump_down");
@@ -785,7 +785,7 @@ function canal_start() {
 }
 
 function canal_stp_main() {
-  setsaveddvar("TLOLRMSL", 0.01);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
   setup_price_smg();
   thread scripts\sp\maps\stpetersburg\stpetersburg_utility::enforcer_reset_fake_health();
   scripts\engine\sp\utility::autosave_or_timeout("canal_start", 3);
@@ -794,7 +794,7 @@ function canal_stp_main() {
 
 function canal_catchup() {
   thread scripts\sp\maps\stpetersburg\stpetersburg_gameplay_canal::disable_canal_trigs();
-  setsaveddvar("TLOLRMSL", 0.01);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
 }
 
 function acquire_start() {
@@ -827,7 +827,7 @@ function evade_start() {
 }
 
 function evade_stp_main() {
-  setsaveddvar("TLOLRMSL", 1);
+  setsaveddvar("fx_lights_radius_scale", 1);
   setup_price_smg();
   thread scripts\sp\maps\stpetersburg\stpetersburg_utility::enforcer_reset_fake_health();
   scripts\engine\sp\utility::autosave_or_timeout("evade_start", 3);
@@ -835,7 +835,7 @@ function evade_stp_main() {
 }
 
 function evade_catchup() {
-  setsaveddvar("TLOLRMSL", 1);
+  setsaveddvar("fx_lights_radius_scale", 1);
   thread reset_friendlyfire_penalties();
   scripts\engine\utility::flag_set("flag_evade_police_window_vig");
   scripts\engine\utility::flag_set("flag_evade_exit_cafe");
@@ -860,7 +860,7 @@ function gauntlet_stp_main() {
 }
 
 function gauntlet_catchup() {
-  setsaveddvar("TLOLRMSL", 0.01);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
   level.autosave_threat_check_enabled = 1;
 }
 

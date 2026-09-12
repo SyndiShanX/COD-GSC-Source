@@ -1191,7 +1191,7 @@ function bombsite_cankeepusing(var_0, var_1, var_2) {
     return false;
   }
 
-  var_4 = getdvarfloat("MLLSRQSRT", 128) + 16;
+  var_4 = getdvarfloat("player_itemUseRadius", 128) + 16;
   var_5 = var_4 * var_4;
 
   if(distancesquared(var_0.origin, var_1.origin) > var_5) {

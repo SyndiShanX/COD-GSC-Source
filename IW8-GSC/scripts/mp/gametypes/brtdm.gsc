@@ -58,10 +58,10 @@ function onstartgametype() {
 
 function updategametypedvars() {
   scripts\mp\gametypes\common::updatecommongametypedvars();
-  setDvar("NKTQRKRMTS", getdvarint("scr_brtdm_fallDamageMinHeight", 560));
-  setDvar("LKMOLLSKKO", getdvarint("scr_brtdm_fallDamageMaxHeight", 561));
-  setDvar("OMLLLQKQSR", getdvarint("scr_brtdm_softLandingMinHeight", 560));
-  setDvar("LTMMLKRKTR", getdvarint("scr_brtdm_softLandingMaxHeight", 561));
+  setDvar("bg_fallDamageMinHeight", getdvarint("scr_brtdm_fallDamageMinHeight", 560));
+  setDvar("bg_fallDamageMaxHeight", getdvarint("scr_brtdm_fallDamageMaxHeight", 561));
+  setDvar("bg_softLandingMinHeight", getdvarint("scr_brtdm_softLandingMinHeight", 560));
+  setDvar("bg_softLandingMaxHeight", getdvarint("scr_brtdm_softLandingMaxHeight", 561));
   level.checkpoint_objective_id = getdvarint("scr_dmz_autoRespawnWaitTime", 3);
   level.ref_121cc = getdvarfloat("scr_bmo_parachuteDeployDelay", 0.5);
   level.endsuperdisableweaponbr = spawnStruct();

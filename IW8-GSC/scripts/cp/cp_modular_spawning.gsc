@@ -9185,8 +9185,8 @@ function turn_off_steam() {
 function set_wave_settings() {
   if(isDefined(level.wave_table)) {
     var_0 = level.wave_table;
-  } else if(getDvar("MOLPOSLOMO") == "cp_wave_sv") {
-    var_0 = "cp/" + getDvar("NSQLTTMRMP") + "_wave_table.csv";
+  } else if(getDvar("ui_gametype") == "cp_wave_sv") {
+    var_0 = "cp/" + getDvar("ui_mapname") + "_wave_table.csv";
   } else {
     var_0 = "cp/cp_donetsk_wave_table.csv";
   }

@@ -44,7 +44,7 @@ function mine_start() {
 
 function mine_catchup() {
   scripts\engine\utility::flag_set("mine_reached");
-  setsaveddvar("MMRNLMPPLT", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
   cinematicingameloop("sp_embassy_soccer_tv", 1);
   thread mines_second_collapse();
   thread mines_bridge_collapse();
@@ -52,7 +52,7 @@ function mine_catchup() {
 }
 
 function mine() {
-  setsaveddvar("MMRNLMPPLT", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
   cinematicingameloop("sp_embassy_soccer_tv", 1);
   level.player modifybasefov(level.fov_mine, 0.05);
   thread mines_push_cart_checkpoint();
@@ -524,7 +524,7 @@ function shaft_start() {
 function shaft_catchup() {
   scripts\engine\utility::flag_set("player_through_cart");
   scripts\engine\utility::flag_set("entered_shaft");
-  setsaveddvar("NQNQPRLRQM", 1);
+  setsaveddvar("fx_lights_intensity_scale", 1);
   level.player scripts\sp\player::set_player_max_health(level.zd30_player_max_health_shaft);
   thread shaft_epic_fire_catchup();
   thread shaft_fire_victim();
@@ -533,7 +533,7 @@ function shaft_catchup() {
 function shaft() {
   scripts\engine\utility::flag_wait("entered_shaft");
   thread shaft_wolf_pa_vo();
-  thread scripts\engine\sp\utility::lerp_saveddvar("NQNQPRLRQM", 1, 2);
+  thread scripts\engine\sp\utility::lerp_saveddvar("fx_lights_intensity_scale", 1, 2);
   scripts\engine\sp\utility::autosave_by_name("shaft");
   level.player scripts\sp\player::set_player_max_health(level.zd30_player_max_health_shaft);
   waitframe();
@@ -1422,7 +1422,7 @@ function gas_playerexposedeffects() {
   level.player endon("death");
   visionsetnaked("zd30tunnels_shaft_smoke_20", 5);
   level.player_smoke_vision = "zd30tunnels_shaft_smoke_20";
-  setsaveddvar("NKTRSSTMRQ", -1);
+  setsaveddvar("r_mbRadialOverrideRadius", -1);
   var_0 = gettime();
   var_1 = ["ges_ph_cough_a", "ges_ph_cough_b", "ges_ph_cough_c"];
   var_2 = ["gas_player_cough_1", "gas_player_cough_3"];

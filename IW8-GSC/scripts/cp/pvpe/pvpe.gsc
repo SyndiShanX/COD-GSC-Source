@@ -984,7 +984,7 @@ function pvpe_end_game(var_0, var_1) {
     var_3 thread scripts\cp\cp_hud_message::tutorialprint(&"CP_STRIKE/SWITCHING_SIDE", 5);
   }
 
-  scripts\cp\cp_endgame::freezeallplayers(1, "NSSLSNKPN", 1);
+  scripts\cp\cp_endgame::freezeallplayers(1, "cg_fovScale", 1);
   wait 5;
   setomnvar("allow_server_pause", 1);
   setomnvarforallclients("post_game_state", 0);

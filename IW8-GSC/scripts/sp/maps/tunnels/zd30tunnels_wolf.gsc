@@ -747,7 +747,7 @@ function cine_bars_clamp() {
   level.player lerpviewangleclamp(2, 0.5, 0.5, 30, 30, 30, 30);
   level.player setcinematicmotionoverride("disabled");
   wait 9.5;
-  setsaveddvar("NOOPLKSRQT", 2.35);
+  setsaveddvar("bg_cinematicAspectRatio", 2.35);
   hidecinematicletterboxing(2, 0);
   level.player lerpviewangleclamp(2, 0.5, 0.5, 0, 0, 0, 0);
   wait 5.5;
@@ -925,8 +925,8 @@ function vest_timer_countdown() {
 }
 
 function start_phone_countdown() {
-  setsaveddvar("MMRNLMPPLT", "0");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicFullscreen", "0");
+  setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame("sp_tunnels_vest_timer");
 }
 

@@ -9,7 +9,7 @@ function justbecamehvt() {
   thread min_player_health();
   wait 3;
   brevent2();
-  setsaveddvar("NQNQPRLRQM", 1);
+  setsaveddvar("fx_lights_intensity_scale", 1);
   scripts\engine\utility::flag_clear("spawning_in_progress");
   thread keephudhiddentillfadein();
   scripts\engine\utility::flag_wait("transfer_complete");
@@ -18,7 +18,7 @@ function justbecamehvt() {
   has_target_player_with_battle_stations();
   wait 3;
   bonus_targets((-221, -588, 34), 0, 600);
-  setsaveddvar("NQNQPRLRQM", 1);
+  setsaveddvar("fx_lights_intensity_scale", 1);
   scripts\cp\maps\cp_so_embassy\cp_so_embassy::ref_12f4b();
 }
 
@@ -779,7 +779,7 @@ function keep_requesting_spawners() {
 
   wait 6;
   scripts\engine\utility::flag_set("spawning_in_progress");
-  setsaveddvar("NQNQPRLRQM", 0.15);
+  setsaveddvar("fx_lights_intensity_scale", 0.15);
   var_0 = thread ref_135eb(level.ref_13de2, "truck_03");
   scripts\engine\utility::flag_clear("spawning_in_progress");
   wait 1;
@@ -1060,7 +1060,7 @@ function movemortar(var_0, var_1, var_2, var_3, var_4) {
 
   if(getdvarint("scr_mortar_gravity")) {
     var_0.origin = var_1;
-    var_5 = getdvarint("NPOQPMP");
+    var_5 = getdvarint("bg_gravity");
     var_6 = distance(var_1, var_2);
     var_7 = var_2 - var_1;
     var_8 = 0.5 * var_5 * squared(var_3) * -1;

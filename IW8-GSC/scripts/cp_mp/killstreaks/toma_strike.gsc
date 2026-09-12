@@ -1069,7 +1069,7 @@ function findunobstructedfiringinfo(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_8 = vectorNormalize(var_1 - (var_7[0], var_7[1], 0));
   var_9 = ref_13bd6(var_1, var_2, var_8);
-  var_10 = (0, 0, -1 * getdvarint("NPOQPMP", 800));
+  var_10 = (0, 0, -1 * getdvarint("bg_gravity", 800));
   var_11 = (var_9.point - 0.5 * var_10 * squared(4) - var_7) / 4;
   var_13 = var_7 + var_11 * 3.925 + 0.5 * var_10 * squared(3.925);
   var_7.sourcepos = var_7;
@@ -1399,7 +1399,7 @@ function toma_strike_watch_stuck(var_0, var_1, var_2) {
   }
 
   wait 0.05;
-  var_4 = -1 * getdvarint("NPOQPMP", 800);
+  var_4 = -1 * getdvarint("bg_gravity", 800);
   var_5 = (gettime() - var_1) / 1000;
   var_6 = var_2 + (0, 0, var_4 * var_5);
 
@@ -1440,7 +1440,7 @@ function toma_strike_stuck_player(var_0, var_1, var_2, var_3) {
     var_9 = var_8[0]["normal"];
     var_10 = var_8[0]["entity"];
     var_6 -= var_9 * 1;
-    var_11 = -1 * getdvarint("NPOQPMP", 800);
+    var_11 = -1 * getdvarint("bg_gravity", 800);
     var_12 = vectordot(var_6 - var_4, var_5);
     var_13 = sqrt(2 * var_12 / -1 * var_11);
     var_14 = var_9;

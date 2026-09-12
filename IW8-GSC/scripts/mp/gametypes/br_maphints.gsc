@@ -229,7 +229,7 @@ function ref_11ae0() {
 function tank_death() {
   level.trial_enemies_killed = [];
   scripts\mp\flags::gameflaginit("intel_challenges_setup_complete", 0);
-  var_0 = getdvarint("LSQRKOSLTP", 0);
+  var_0 = getdvarint("online_challenge_season_and_week", 0);
   level.ref_129cc = getentitylessscriptablearrayinradius("intel_challenge", "targetname");
 
   for(var_1 = 0;; var_1++) {

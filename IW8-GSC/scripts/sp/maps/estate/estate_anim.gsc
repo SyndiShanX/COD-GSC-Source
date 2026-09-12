@@ -101,7 +101,7 @@ function player_rig_standup_fov_user_scale(var_0) {
   level.player lerpfovscalefactor(1, 2);
 
   if(level.player ispcplayer()) {
-    setsaveddvar("OMNONNMOTP", "0.1 500 4 10000");
+    setsaveddvar("r_zPlanes", "0.1 500 4 10000");
     return;
   }
 }

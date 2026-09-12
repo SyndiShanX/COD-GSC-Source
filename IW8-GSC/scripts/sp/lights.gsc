@@ -42,7 +42,7 @@ function init() {
 function init_pulse() {
   init_light();
 
-  if(getdvarint("LLQQOPKTKM") == 1) {
+  if(getdvarint("r_reflectionProbeGenerate") == 1) {
     return;
   }
 
@@ -52,7 +52,7 @@ function init_pulse() {
 function init_strobe() {
   init_light();
 
-  if(getdvarint("LLQQOPKTKM") == 1) {
+  if(getdvarint("r_reflectionProbeGenerate") == 1) {
     return;
   }
 
@@ -350,7 +350,7 @@ function init_light() {
     }
   }
 
-  if(getdvarint("LLQQOPKTKM") == 1) {
+  if(getdvarint("r_reflectionProbeGenerate") == 1) {
     set_light_parts_off();
     set_lights_values(0);
     return;
@@ -585,7 +585,7 @@ function init_light_generic_iw7(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
     }
   }
 
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     set_lights_values(0, (0, 0, 0));
     return;
   }
@@ -723,7 +723,7 @@ function init_light_flicker(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
 
   init_light_generic_iw7(var_0, var_1, var_4, var_5, var_9, var_10, var_11, 1);
 
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
@@ -969,7 +969,7 @@ function init_light_pulse_iw7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
 
   init_light_generic_iw7(var_0, var_1, var_4, var_5, var_9, var_10, undefined, 1);
 
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 
@@ -1413,7 +1413,7 @@ function generic_pulsing() {
     return;
   }
 
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }
@@ -1457,7 +1457,7 @@ function generic_double_strobe() {
     return;
   }
 
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }
@@ -1534,7 +1534,7 @@ function burning_trash_fire() {
     return;
   }
 
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     self setlightintensity(0);
     return;
   }
@@ -1661,9 +1661,9 @@ function sun_shadow_trigger(var_0) {
 }
 
 function set_sun_shadow_params(var_0) {
-  var_1 = getdvarint("MQRQQONQSL", 1);
+  var_1 = getdvarint("sm_sunEnable", 1);
   var_2 = getdvarfloat("sm_sunshadowscale", 1);
-  var_3 = getdvarfloat("NPONLLLSPL", 0.25);
+  var_3 = getdvarfloat("sm_sunSampleSizeNear", 0.25);
   var_4 = getdvarfloat("sm_qualityspotshadow", 1);
 
   if(isDefined(self.script_sunenable)) {
@@ -1684,10 +1684,10 @@ function set_sun_shadow_params(var_0) {
     var_4 = self.script_qualityspotshadow;
   }
 
-  var_5 = getdvarint("MQRQQONQSL", 1);
+  var_5 = getdvarint("sm_sunEnable", 1);
   var_6 = getdvarfloat("sm_sunshadowscale", 1);
   var_7 = getdvarint("sm_qualityspotshadow", 1);
-  setsaveddvar("MQRQQONQSL", var_1);
+  setsaveddvar("sm_sunEnable", var_1);
   setsaveddvar("sm_sunshadowscale", var_2);
   setsaveddvar("sm_qualityspotshadow", var_4);
   lerp_sunsamplesizenear_overtime(var_3, var_0);
@@ -1696,7 +1696,7 @@ function set_sun_shadow_params(var_0) {
 function lerp_sunsamplesizenear_overtime(var_0, var_1) {
   level notify("changing_sunsamplesizenear");
   level endon("changing_sunsamplesizenear");
-  var_2 = getdvarfloat("NPONLLLSPL", 0.25);
+  var_2 = getdvarfloat("sm_sunSampleSizeNear", 0.25);
 
   if(var_0 == var_2) {
     return;
@@ -1711,12 +1711,12 @@ function lerp_sunsamplesizenear_overtime(var_0, var_1) {
 
     for(var_7 = 0; var_7 < var_4; var_7++) {
       var_6 += var_5;
-      setsaveddvar("NPONLLLSPL", var_6);
+      setsaveddvar("sm_sunSampleSizeNear", var_6);
       wait 0.05;
     }
   }
 
-  setsaveddvar("NPONLLLSPL", var_0);
+  setsaveddvar("sm_sunSampleSizeNear", var_0);
 }
 
 function lerp_intensity(var_0, var_1) {

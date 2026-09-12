@@ -151,7 +151,7 @@ function obj_room_fire_09(var_0, var_1, var_2) {
   var_5.godmode = 0;
   var_5.team = "neutral";
   var_5 setvehicleteam("neutral");
-  var_6 = getdvarint("RRNTNNKNP", 1);
+  var_6 = getdvarint("party_maxSquadSize", 1);
   var_5.health = 5000;
   var_5.maxhealth = 5000;
 
@@ -1738,7 +1738,7 @@ function cratephysicsoncallback(var_0, var_1) {
   var_3 = var_0 + (0, 0, 5000);
   var_4 = vectorNormalize(var_0 - (var_3[0], var_3[1], 0));
   var_5 = scripts\cp_mp\killstreaks\toma_strike::ref_13bd6(var_0, var_1, var_4);
-  var_6 = (0, 0, -1 * getdvarint("NPOQPMP", 800));
+  var_6 = (0, 0, -1 * getdvarint("bg_gravity", 800));
   var_7 = (var_5.point - 0.5 * var_6 * squared(1) - var_3) / 1;
   var_8 = 1 * randomfloatrange(0.95, 1);
   var_9 = var_3 + var_7 * var_8 + 0.5 * var_6 * squared(var_8);

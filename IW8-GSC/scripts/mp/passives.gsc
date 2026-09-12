@@ -35,7 +35,7 @@ function passiveparsetable() {
       var_6.attachmentref = var_3;
     }
 
-    if(getDvar("MOLPOSLOMO") == "zombie") {
+    if(getDvar("ui_gametype") == "zombie") {
       var_7 = tablelookupbyrow("mp/passivetable.csv", var_0, 22);
 
       if(var_7 != "") {

@@ -2006,7 +2006,7 @@ function fan_spin() {
 }
 
 function juggernaut_post_death_cleanup() {
-  setsaveddvar("SLMRSNOSK", 1);
+  setsaveddvar("player_meleeFinisherEnabled", 1);
   scripts\engine\utility::delaythread(0.5, &post_jugg_allies_plant_bombs);
   scripts\engine\utility::delaythread(0.1, &juggernaut_allies_cleanup);
   wait 2.5;
@@ -2386,7 +2386,7 @@ function juggernaut_intro_scene() {
   }
 
   setmusicstate("mx_lab_jugg_combat");
-  setsaveddvar("SLMRSNOSK", 0);
+  setsaveddvar("player_meleeFinisherEnabled", 0);
   thread juggernaut_allies_setup();
   juggernaut_spawn();
   var_1 = getEntArray("cp_5_doors", "script_noteworthy");

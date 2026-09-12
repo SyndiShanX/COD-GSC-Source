@@ -4,19 +4,19 @@
 ************************************************************/
 
 function main() {
-  setDvar("NPONLLLSPL", 0.33);
-  setDvar("TMNTMTQRM", 0);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 2);
+  setDvar("sm_sunSampleSizeNear", 0.33);
+  setDvar("sm_sunDistantShadows", 0);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 2);
   setDvar("r_useCompressedSunShadow", 1);
-  setDvar("QSLRKRNKL", 2);
-  setDvar("QSLRKRNKL", 2);
-  setDvar("OKQKMQMTRQ", 0.4);
-  setDvar("LTQMSPKRKO", 6);
-  setDvar("MROOOROPKL", 8);
-  setDvar("LKOLRONRNQ", 500);
-  setDvar("MNQKPNLOPT", 1);
-  setDvar("NRSOTSLSSO", 1);
-  setDvar("RSLTKLOS", 1);
-  setDvar("LQLMTQMMKQ", 1);
+  setDvar("r_compressedSunShadowFiltering", 2);
+  setDvar("r_compressedSunShadowFiltering", 2);
+  setDvar("sm_cachedSunShadowLODBias", 0.4);
+  setDvar("sm_spotUpdateLimit", 6);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotDistCull", 500);
+  setDvar("sm_spotShadowScoreSystem", 1);
+  setDvar("sm_spotUpdateMoreDynEnt", 1);
+  setDvar("sm_spotUpdateMoreDynObj", 1);
+  setDvar("r_compressedSunShadowClipPlanes", 1);
 }

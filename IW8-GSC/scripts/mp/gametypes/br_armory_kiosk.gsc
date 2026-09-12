@@ -565,7 +565,7 @@ function apc_target_enemies(var_0) {
 function ally1_intro_dialogue(var_0) {
   var_1 = self;
   var_2 = 64;
-  var_3 = getdvarfloat("MLLSRQSRT", 128) + var_2;
+  var_3 = getdvarfloat("player_itemUseRadius", 128) + var_2;
   var_4 = var_3 * var_3;
 
   for(;;) {

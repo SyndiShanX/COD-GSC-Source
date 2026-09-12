@@ -55,11 +55,11 @@ function ballistics_weaponswitchmonitor() {
 
 function ballistsglobalsettings(var_0) {
   if(var_0) {
-    setsaveddvar("MPPNTMTPTS", 0);
+    setsaveddvar("cg_gun_motion_enable_fov_compensation", 0);
     return;
   }
 
-  setsaveddvar("MPPNTMTPTS", 1);
+  setsaveddvar("cg_gun_motion_enable_fov_compensation", 1);
 }
 
 function ballistics_bulletfiremonitor() {

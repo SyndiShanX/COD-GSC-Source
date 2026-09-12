@@ -20,12 +20,12 @@ function post_load() {
 
 function init_lighting_dvars() {
   waitframe();
-  setsaveddvar("NPONLLLSPL", 0.35);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("LTQMSPKRKO", 6);
-  setsaveddvar("MROOOROPKL", 8);
-  setsaveddvar("LKOLRONRNQ", 800);
+  setsaveddvar("sm_sunSampleSizeNear", 0.35);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("sm_spotUpdateLimit", 6);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
+  setsaveddvar("sm_spotDistCull", 800);
 }
 
 function drone_hero_lighting_setup() {

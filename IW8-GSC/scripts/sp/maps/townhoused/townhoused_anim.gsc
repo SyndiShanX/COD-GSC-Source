@@ -28,7 +28,7 @@ function main() {
   vehicle();
   scriptable();
 
-  if(getdvarint("LLQQOPKTKM") || getdvarint("SMNRNLNRN")) {
+  if(getdvarint("r_reflectionProbeGenerate") || getdvarint("g_connectpaths")) {
     return;
   }
 

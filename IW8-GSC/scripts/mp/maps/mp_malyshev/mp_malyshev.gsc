@@ -17,7 +17,7 @@ function main() {
     scripts\mp\compass::setupminimap("compass_map_mp_malyshev", "codcaster_compass_map_mp_malyshev");
   }
 
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

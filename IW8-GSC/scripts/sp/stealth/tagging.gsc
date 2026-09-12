@@ -119,7 +119,7 @@ function tag_flash_entity(var_0, var_1) {
   var_3 = isDefined(self.tagged) && istrue(self.tagged[var_2]);
   var_4 = 1;
 
-  while(var_1 && getdvarint("OKQTSOMTKT", 1)) {
+  while(var_1 && getdvarint("ai_threatSight", 1)) {
     self.tagged_flickered = 1;
 
     if(var_4) {
@@ -172,12 +172,12 @@ function tracking_init() {
   setdvarifuninitialized("tagging_vehicle_ride", 0);
   scripts\engine\sp\utility::hudoutline_add_channel("tagging", -1, &tagging_hudoutline_settings);
   thread lerp_hudoutline_occlusion();
-  setsaveddvar("NMROQRRONQ", 1);
+  setsaveddvar("r_hudOutlineEnable", 1);
 }
 
 function tagging_hudoutline_settings() {
   var_0 = [];
-  GscBinSkip0(0x2e, "LRMPROLMKN", "0.5 0.5 0.5 0");
+  GscBinSkip0(0x2e, "r_hudOutlineFillColor0", "0.5 0.5 0.5 0");
 }
 
 function lerp_hudoutline_occlusion() {
@@ -190,9 +190,9 @@ function lerp_hudoutline_occlusion() {
   for(;;) {
     for(var_5 = 1; var_5 < 11; var_5++) {
       if(isDefined(level.hudoutlinecurchannel) && level.hudoutlinecurchannel == "tagging") {
-        setsaveddvar("NSNOLMTLLL", var_2 + var_0 + "");
-        setsaveddvar("LSRTPRNOLS", var_2 + var_0 + "");
-        setsaveddvar("LNNOSQKRTP", var_2 + var_0 + "");
+        setsaveddvar("r_hudOutlineOccludedOutlineColor", var_2 + var_0 + "");
+        setsaveddvar("r_hudOutlineOccludedInlineColor", var_2 + var_0 + "");
+        setsaveddvar("r_hudOutlineOccludedInteriorColor", var_2 + var_0 + "");
 
         if(var_3) {
           var_0 = scripts\engine\utility::ter_op(var_5 == 10, 0.9, var_0 + 0.1);
@@ -279,7 +279,7 @@ function tag_update_enemy_in_sights() {
 
   if(scripts\stealth\utility::tagging_shield()) {
     var_4 = level.player.tagging["tagging_fade_max"];
-    var_5 = cos(getdvarfloat("QTSPTNLOL"));
+    var_5 = cos(getdvarfloat("cg_fov"));
   }
 
   var_7 = scripts\engine\trace::_bullet_trace(var_1, var_1 + var_2 * 32000, 1, self);

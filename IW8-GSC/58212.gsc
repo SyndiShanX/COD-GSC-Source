@@ -23,7 +23,7 @@ function get_player_who_most_likely_broke_stealth() {
 
 function get_player_recent_pos_adjusted_with_exposure(var_0, var_1) {
   wait var_1;
-  var_2 = getdvarint("LLQQOPKTKM", 0) == 0;
+  var_2 = getdvarint("r_reflectionProbeGenerate", 0) == 0;
 
   if(var_2) {
     foreach(var_4 in var_0) {

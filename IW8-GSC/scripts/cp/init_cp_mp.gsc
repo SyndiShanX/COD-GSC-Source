@@ -4,8 +4,8 @@
 ***********************************************/
 
 function init() {
-  setDvar("NRSOTSLSSO", 1);
-  setDvar("MNQKPNLOPT", 1);
+  setDvar("sm_spotUpdateMoreDynEnt", 1);
+  setDvar("sm_spotShadowScoreSystem", 1);
 
   if(!isDefined(level.players)) {
     level.players = [];

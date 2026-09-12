@@ -64,7 +64,7 @@ function house_enter_main() {
   level notify("house_entered");
   scripts\engine\utility::flag_set("objective_entered_house_complete");
   scripts\engine\utility::flag_set("lighting_house_enter_progression");
-  setsaveddvar("OMNONNMOTP", "0.1 400 2.25 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 2.25 1000");
   level.player scripts\common\utility::allow_melee(1);
   level.dead_dad_blocker = getEnt("dead_dad_blocker", "script_noteworthy");
   level.dead_dad_blocker scripts\engine\sp\utility::hide_entity();
@@ -660,14 +660,14 @@ function house_enter_trigger_monitor() {
 
 function house_boss_main() {
   level thread scripts\sp\utility::context_melee_enable(1);
-  setsaveddvar("OMNONNMOTP", "0.1 400 2.25 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 2.25 1000");
   level.current_knock_off = "drop_all";
   thread scripts\sp\maps\hometown\hometown_util::goliath_delete_weapon_interacts_monitor();
   thread goliath_blood_stab_vfx();
   thread weapon_knock_off_room_monitor();
   thread scripts\sp\maps\hometown\hometown_util::search_ground_hint();
   thread goliath_swipe_awareness();
-  setsaveddvar("TMTPTQNMN", 1);
+  setsaveddvar("xanim_ik_antislide_enable", 1);
   setmusicstate("mx_hometown_06_house_evade_01_lp");
   thread scripts\sp\analytics::analytics_kleenex_update("House Boss Start to First Stab");
   level.father_body_model = scripts\engine\sp\utility::spawn_anim_model("farah_father_body", level.gas_attack_anim_node.origin, level.gas_attack_anim_node.angles);
@@ -714,7 +714,7 @@ function house_boss_main() {
   }
 
   level waittill("goliath_boss_dead");
-  setsaveddvar("TMTPTQNMN", 0);
+  setsaveddvar("xanim_ik_antislide_enable", 0);
   level.goliath_ai scripts\sp\maps\hometown\hometown_util::kill_and_delete_quietly(level.player);
   scripts\sp\maps\hometown\hometown_util::clear_goliath_bloody_footsteps();
   thread scripts\engine\sp\utility::autosave_by_name("boss_dead");
@@ -1132,8 +1132,8 @@ function goliath_strangle_effects() {
   level notify("hadir_stabbed_neck");
   level.eyeshutoverlay fadeovertime(0.75);
   level.eyeshutoverlay.alpha = 0;
-  setsaveddvar("MLTTMLTKOR", 0.01);
-  setsaveddvar("LSOPQMRPNR", 0.002);
+  setsaveddvar("r_mbRadialOverrideDistortion", 0.01);
+  setsaveddvar("r_mbRadialOverrideStrength", 0.002);
   setblur(0, 0.75);
 }
 
@@ -1690,8 +1690,8 @@ function boss_turn_on_hadir_hit() {
 
 function painvision_replacement() {
   visionsetpain("damage_severe");
-  setsaveddvar("MLLRKTPNRR", 0);
-  setsaveddvar("OONLORSMO", 1.9);
+  setsaveddvar("painVisionLerpInRate", 0);
+  setsaveddvar("painVisionLerpOutRate", 1.9);
   level.player shellshock("hometown_boss_intro", 3, undefined, 0);
   setblur(2, 0.01);
   scripts\engine\utility::noself_delaycall(0.1, &setblur, 0, 3);
@@ -1855,7 +1855,7 @@ function melee_weapon_safe_gesture() {
 }
 
 function house_exit_main() {
-  setsaveddvar("OMNONNMOTP", "0.1 400 2.25 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 2.25 1000");
   level.player allowsprint(1);
   level.player allowjump(1);
   level.door_clip_boss_enter notsolid();
@@ -2206,7 +2206,7 @@ function front_door_boost_open_anim() {
   level notify("start_lock_pry");
   var_10 = scripts\engine\utility::spawn_tag_origin(var_4.origin);
   var_10 scripts\sp\player\cursor_hint::create_cursor_hint("tag_origin", (0, 0, 0), &"HOMETOWN/PRY", undefined, undefined, undefined, 1, undefined, undefined, undefined, "duration_none");
-  setsaveddvar("OMNONNMOTP", "0.1 400 0.75 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 0.75 1000");
   var_10 waittill("trigger");
   var_10 delete();
   var_2 notify("stop_exitA_idle");
@@ -2283,9 +2283,9 @@ function front_door_boost_open_anim() {
   scripts\engine\utility::flag_set("lighting_gas_progression");
 
   if(level.player ispcplayer()) {
-    setsaveddvar("OMNONNMOTP", "0.1 400 0.75 1000");
+    setsaveddvar("r_zPlanes", "0.1 400 0.75 1000");
   } else {
-    setsaveddvar("OMNONNMOTP", "0.1 400 3.25 1000");
+    setsaveddvar("r_zPlanes", "0.1 400 3.25 1000");
   }
 
   var_2 thread scripts\common\anim::anim_single_solo(level.hadir_ai, "boost_exitB");
@@ -2349,7 +2349,7 @@ function gas_mask_pickup_playerlogic() {
 }
 
 function player_putgasmaskon() {
-  setsaveddvar("OMNONNMOTP", "0.1 400 0.1 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 0.1 1000");
   wait 2;
   level.gas_mask_overlay = scripts\sp\hud_util::create_client_overlay("gasmask_overlay_russian", 0);
   level.gas_mask_overlay.lowresbackground = 1;
@@ -2360,11 +2360,11 @@ function player_putgasmaskon() {
   wait 2;
 
   if(level.player ispcplayer()) {
-    setsaveddvar("OMNONNMOTP", "0.1 400 0.75 1000");
+    setsaveddvar("r_zPlanes", "0.1 400 0.75 1000");
     return;
   }
 
-  setsaveddvar("OMNONNMOTP", "0.1 400 3.25 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 3.25 1000");
 }
 
 function goliath_investigate() {

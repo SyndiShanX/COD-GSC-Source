@@ -512,16 +512,16 @@ function helicopter_start() {}
 function helicopter_main() {
   level.player setclienttriggeraudiozone("fade_to_black", 0.05);
   level.player scripts\engine\utility::delaycall(0.2, &setclienttriggeraudiozone, "embassy_chopper", 0.1);
-  level.og_zplanes = getDvar("OMNONNMOTP");
-  setsaveddvar("OMNONNMOTP", "0.1 500 2 10000");
-  setsaveddvar("LRTTMPMQOO", 0);
+  level.og_zplanes = getDvar("r_zPlanes");
+  setsaveddvar("r_zPlanes", "0.1 500 2 10000");
+  setsaveddvar("dynEnt_spatialMaxEnts", 0);
   scripts\sp\utility::nvidiaansel_allowduringcinematic(1);
   scripts\sp\utility::nvidiaansel_scriptdisable(1);
-  setsaveddvar("MRNRKKOPLN", 3);
-  setsaveddvar("OLSKLTPPMR", 0.5);
-  setsaveddvar("MQPQKNPQOK", 12);
-  setsaveddvar("LQLSPQOPKM", 40);
-  setsaveddvar("NQTLPTNSSO", 12);
+  setsaveddvar("cg_defaultWindFrequencyScale", 3);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.5);
+  setsaveddvar("cg_defaultWindAmplitudeScale", 12);
+  setsaveddvar("cg_defaultWindAreaScale", 40);
+  setsaveddvar("cg_defaultWindStrength", 12);
   scripts\sp\maps\embassy\embassy_util::spawn_price();
   level.price.anim_playvo_func = &scripts\engine\utility::playsoundontag;
   level.price thread scripts\sp\maps\embassy\embassy_util::halligan_draw();
@@ -1427,9 +1427,9 @@ function temp_draw_world_ap() {
 }
 
 function helicopter_crawl_start() {
-  level.og_zplanes = getDvar("OMNONNMOTP");
-  setsaveddvar("OMNONNMOTP", "0.1 500 2 10000");
-  setsaveddvar("LRTTMPMQOO", 0);
+  level.og_zplanes = getDvar("r_zPlanes");
+  setsaveddvar("r_zPlanes", "0.1 500 2 10000");
+  setsaveddvar("dynEnt_spatialMaxEnts", 0);
   thread audio_crowd_angry_outside();
   scripts\sp\maps\embassy\embassy_util::spawn_price();
   level.price scripts\engine\sp\utility::name_hide();
@@ -1563,10 +1563,10 @@ function helicopter_crawl_catchup() {
 }
 
 function helicopter_crash_start() {
-  level.og_zplanes = getDvar("OMNONNMOTP");
-  setsaveddvar("OMNONNMOTP", "0.1 500 2 10000");
+  level.og_zplanes = getDvar("r_zPlanes");
+  setsaveddvar("r_zPlanes", "0.1 500 2 10000");
   level.crash_start_point = 1;
-  setsaveddvar("LRTTMPMQOO", 0);
+  setsaveddvar("dynEnt_spatialMaxEnts", 0);
   scripts\sp\maps\embassy\embassy_util::spawn_price();
   level.price scripts\engine\sp\utility::name_hide();
   scripts\engine\sp\utility::set_start_location("helicopter_start", [level.player, level.price]);
@@ -1578,11 +1578,11 @@ function helicopter_crash_start() {
 }
 
 function helicopter_crash_main() {
-  setsaveddvar("MRNRKKOPLN", 2);
-  setsaveddvar("OLSKLTPPMR", 0.5);
-  setsaveddvar("MQPQKNPQOK", 7);
-  setsaveddvar("LQLSPQOPKM", 40);
-  setsaveddvar("NQTLPTNSSO", 10);
+  setsaveddvar("cg_defaultWindFrequencyScale", 2);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.5);
+  setsaveddvar("cg_defaultWindAmplitudeScale", 7);
+  setsaveddvar("cg_defaultWindAreaScale", 40);
+  setsaveddvar("cg_defaultWindStrength", 10);
   scripts\engine\sp\utility::autosave_by_name("helicopter_crash");
   scripts\engine\utility::exploder("rooftop_scene_vfx");
   level.infil_heli dontcastshadows();
@@ -1669,7 +1669,7 @@ function helicopter_crash_lerp_ap() {
 
 function reenable_dynents() {
   wait 5;
-  setsaveddvar("LRTTMPMQOO", 600);
+  setsaveddvar("dynEnt_spatialMaxEnts", 600);
 }
 
 function helicopter_player_fall(var_0) {
@@ -1858,8 +1858,8 @@ function embassy_scale_speed_near_price() {
 }
 
 function embassy_roof_start() {
-  level.og_zplanes = getDvar("OMNONNMOTP");
-  setsaveddvar("OMNONNMOTP", "0.1 500 2 10000");
+  level.og_zplanes = getDvar("r_zPlanes");
+  setsaveddvar("r_zPlanes", "0.1 500 2 10000");
   scripts\sp\maps\embassy\embassy_util::spawn_price();
   level.price scripts\engine\sp\utility::name_hide();
   scripts\engine\sp\utility::set_start_location("embassy_roof_start", [level.player, level.price]);
@@ -1876,7 +1876,7 @@ function embassy_roof_start() {
 
 function embassy_roof_main() {
   scripts\engine\sp\utility::autosave_by_name("embassy_roof");
-  setsaveddvar("OMNONNMOTP", level.og_zplanes);
+  setsaveddvar("r_zPlanes", level.og_zplanes);
   level.price scripts\engine\sp\utility::name_show();
 
   if(!scripts\engine\utility::flag("near_roof_door")) {
@@ -2051,7 +2051,7 @@ function ap_stairwell_door_nag_vo() {
 
 function offices_screens() {
   wait 1;
-  setsaveddvar("MMRNLMPPLT", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
   cinematicingameloop("sp_emb_screens_top_floor", 1, 1);
 }
 
@@ -2535,7 +2535,7 @@ function bpg_md_door(var_0) {
 }
 
 function bpg_md_screens() {
-  setsaveddvar("MMRNLMPPLT", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
   cinematicingameloop("sp_emb_screens_bottom_floor", 1, 1);
 }
 
@@ -4896,7 +4896,7 @@ function saferoom_player_uses_buzzer() {
 }
 
 function saferoom_screens() {
-  setsaveddvar("MMRNLMPPLT", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
   cinematicingameloop("sp_embassy_cctv_enter", 1, 1);
 }
 
@@ -5028,7 +5028,7 @@ function saferoom_door_delay_notify_for_keypad() {
 }
 
 function saferoom_escape_screens() {
-  setsaveddvar("MMRNLMPPLT", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
   cinematicingameloop("sp_embassy_cctv_exit_loop", 1, 1);
 }
 
@@ -5294,12 +5294,12 @@ function escape_combat_start() {
 
 function escape_combat_main() {
   scripts\engine\sp\utility::autosave_by_name("escape_exit");
-  setsaveddvar("MQPQKNPQOK", 3);
-  setsaveddvar("MRNRKKOPLN", 2);
-  setsaveddvar("NQTLPTNSSO", 3);
-  setsaveddvar("OLSKLTPPMR", 0.7);
-  setsaveddvar("LQLSPQOPKM", 50);
-  setsaveddvar("NTMMTOLQMQ", (-1, 0, 0));
+  setsaveddvar("cg_defaultWindAmplitudeScale", 3);
+  setsaveddvar("cg_defaultWindFrequencyScale", 2);
+  setsaveddvar("cg_defaultWindStrength", 3);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.7);
+  setsaveddvar("cg_defaultWindAreaScale", 50);
+  setsaveddvar("cg_defaultWindDir", (-1, 0, 0));
   scripts\engine\utility::exploder("landing_car_explode");
   var_0 = getEntArray("middle_cars", "targetname");
   scripts\engine\utility::array_call(var_0, &show);
@@ -5556,12 +5556,12 @@ function escape_combat_catchup() {
     thread periph_traffic("defend_entrance_door_closed");
   }
 
-  setsaveddvar("MQPQKNPQOK", 3);
-  setsaveddvar("MRNRKKOPLN", 2);
-  setsaveddvar("NQTLPTNSSO", 3);
-  setsaveddvar("OLSKLTPPMR", 0.7);
-  setsaveddvar("LQLSPQOPKM", 50);
-  setsaveddvar("NTMMTOLQMQ", (-1, 0, 0));
+  setsaveddvar("cg_defaultWindAmplitudeScale", 3);
+  setsaveddvar("cg_defaultWindFrequencyScale", 2);
+  setsaveddvar("cg_defaultWindStrength", 3);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.7);
+  setsaveddvar("cg_defaultWindAreaScale", 50);
+  setsaveddvar("cg_defaultWindDir", (-1, 0, 0));
 
   if(!scripts\sp\starts::is_after_start("residence_arrival")) {
     scripts\engine\utility::exploder("landing_car_explode");
@@ -5626,7 +5626,7 @@ function alley_main() {
 }
 
 function alley_soccer_screens() {
-  setsaveddvar("MMRNLMPPLT", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
   cinematicingameloop("sp_embassy_soccer_tv", 1, 1);
 }
 

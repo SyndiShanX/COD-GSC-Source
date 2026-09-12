@@ -727,7 +727,7 @@ function garage_knock_vo() {
 }
 
 function garage_tv() {
-  setsaveddvar("MMRNLMPPLT", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
   cinematicingameloop("sp_townhouse_propaganda_temp");
   var_0 = scripts\engine\utility::getStruct("garage_tv_speaker", "targetname");
   var_1 = scripts\engine\utility::play_loopsound_in_space("sp_lvl_townhouse_propaganda_garage", var_0.origin);
@@ -1048,8 +1048,8 @@ function cam_fly_up() {
   var_0 = get_flight_path_up();
   level.player playerlinktoabsolute(level.cammover.mover, "tag_origin");
   cam_fly_path(var_0);
-  setsaveddvar("MMRNLMPPLT", "1");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicFullscreen", "1");
+  setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame("townhouse_temp_transition");
 }
 

@@ -32,7 +32,7 @@ function init_fx_thread() {
   level._fx.exploderfunction = &scripts\common\exploder::exploder_after_load;
   level._fx.server_culled_sounds = 0;
 
-  if(getdvarint("MKOSOKPQPP") == 1) {
+  if(getdvarint("serverCulledSounds") == 1) {
     level._fx.server_culled_sounds = 1;
   }
 
@@ -327,7 +327,7 @@ function oneshotfxthread() {
 }
 
 function add_reactive_fx() {
-  if(!scripts\common\utility::issp() && getDvar("LSTTOTKPNP") == "") {
+  if(!scripts\common\utility::issp() && getDvar("createfx") == "") {
     return;
   }
 
@@ -346,7 +346,7 @@ function add_reactive_fx() {
 
 function reactive_fx_thread() {
   if(!scripts\common\utility::issp()) {
-    if(getDvar("LSTTOTKPNP") == "on") {
+    if(getDvar("createfx") == "on") {
       scripts\engine\utility::flag_wait("createfx_started");
     }
   }

@@ -583,10 +583,10 @@ function set_disguised_default(var_0) {
     level.stealth.proximity_combat_radius_bump = 0;
     level.stealth.proximity_combat_radius_sight = 0;
     level.stealth.proximity_combat_radius_fake_sight = 0;
-    setsaveddvar("LOTQPOLOOP", 0.25);
-    setsaveddvar("NTMTQTQOLK", cos(90));
-    setsaveddvar("RSKOMONOR", 0.025);
-    setsaveddvar("NLLTMQRSKS", 0.25);
+    setsaveddvar("ai_threatSightFacingScale", 0.25);
+    setsaveddvar("ai_threatSightFacingScaleDot", cos(90));
+    setsaveddvar("ai_threatSightDisplaySpikePoint", 0.025);
+    setsaveddvar("ai_threatSightDisplaySpikeValue", 0.25);
   } else {
     level.stealth.disguised = undefined;
     level.stealth.threatsightratescale = undefined;
@@ -594,10 +594,10 @@ function set_disguised_default(var_0) {
     level.stealth.proximity_combat_radius_bump = 100;
     level.stealth.proximity_combat_radius_sight = 150;
     level.stealth.proximity_combat_radius_fake_sight = 60;
-    setsaveddvar("LOTQPOLOOP", 0.5);
-    setsaveddvar("NTMTQTQOLK", cos(180));
-    setsaveddvar("RSKOMONOR", 0.01);
-    setsaveddvar("NLLTMQRSKS", 0.1);
+    setsaveddvar("ai_threatSightFacingScale", 0.5);
+    setsaveddvar("ai_threatSightFacingScaleDot", cos(180));
+    setsaveddvar("ai_threatSightDisplaySpikePoint", 0.01);
+    setsaveddvar("ai_threatSightDisplaySpikeValue", 0.1);
   }
 
   var_1 = getaiarray();

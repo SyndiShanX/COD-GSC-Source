@@ -383,16 +383,16 @@ function disable_dynamic_takedowns() {
 function check_for_close_victim() {
   level endon("stop_context_melee");
 
-  if(getdvarint("LLNPMPRMLN") != 640) {
-    setsaveddvar("LLNPMPRMLN", 640);
+  if(getdvarint("scripted_melee_width") != 640) {
+    setsaveddvar("scripted_melee_width", 640);
   }
 
-  if(getdvarint("OKQOTRLPRQ") != 384) {
-    setsaveddvar("OKQOTRLPRQ", 384);
+  if(getdvarint("scripted_melee_height") != 384) {
+    setsaveddvar("scripted_melee_height", 384);
   }
 
-  if(getdvarint("MOSLLOQQSS") != 100) {
-    setsaveddvar("MOSLLOQQSS", 100);
+  if(getdvarint("scripted_melee_range") != 100) {
+    setsaveddvar("scripted_melee_range", 100);
   }
 
   var_0 = scripts\engine\sp\utility::get_all_closest_living(level.player.origin, getaiarray("team3"), 512, 0);
@@ -575,11 +575,11 @@ function combat_counter_reset() {
 }
 
 function is_enemy_onscreen(var_0) {
-  if(isDefined(level.player worldpointtoscreenpos(var_0 gettagorigin("j_head"), getdvarint("MRNKTKLLKP")))) {
+  if(isDefined(level.player worldpointtoscreenpos(var_0 gettagorigin("j_head"), getdvarint("cg_targetBaseFov")))) {
     return true;
-  } else if(isDefined(level.player worldpointtoscreenpos(var_0 gettagorigin("j_spinelower"), getdvarint("MRNKTKLLKP")))) {
+  } else if(isDefined(level.player worldpointtoscreenpos(var_0 gettagorigin("j_spinelower"), getdvarint("cg_targetBaseFov")))) {
     return true;
-  } else if(isDefined(level.player worldpointtoscreenpos(var_0 gettagorigin("tag_origin"), getdvarint("MRNKTKLLKP")))) {
+  } else if(isDefined(level.player worldpointtoscreenpos(var_0 gettagorigin("tag_origin"), getdvarint("cg_targetBaseFov")))) {
     return true;
   }
 
@@ -978,18 +978,18 @@ function context_melee_launch(var_0, var_1) {
   level.player playRumbleOnEntity("heavy_1s");
   level.player thread scripts\sp\player::radial_distortion(0.05, 0.2, 0.25);
   visionsetpain("damage_severe");
-  setsaveddvar("MLLRKTPNRR", 0);
-  setsaveddvar("OONLORSMO", 1.9);
+  setsaveddvar("painVisionLerpInRate", 0);
+  setsaveddvar("painVisionLerpOutRate", 1.9);
   level.player painvisionon();
   level.player scripts\engine\utility::delaycall(0.2, &painvisionoff);
   waitframe();
   level.player unlink();
   thread launch_push_player2();
-  var_2 = getDvar("OMNONNMOTP");
-  setsaveddvar("OMNONNMOTP", "0.1 400 2 1000");
+  var_2 = getDvar("r_zPlanes");
+  setsaveddvar("r_zPlanes", "0.1 400 2 1000");
   level.player scripts\engine\sp\utility::player_gesture_force("ges_htf_stab_a");
   wait level.player getgestureanimlength("ges_htf_stab_a");
-  setsaveddvar("OMNONNMOTP", var_2);
+  setsaveddvar("r_zPlanes", var_2);
   level.player.context_melee_launching = undefined;
 }
 
@@ -1216,7 +1216,7 @@ function context_melee_ragdoll(var_0) {
 
       var_3 = var_2.origin;
 
-      if(getdvarint("MQSNSOSMPN")) {
+      if(getdvarint("ai_corpseSynch")) {
         var_3 = var_2 getcorpsephysicsorigin();
       }
 

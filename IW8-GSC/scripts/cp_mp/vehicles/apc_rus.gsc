@@ -534,7 +534,7 @@ function c130successfulairdrops(var_0) {
       waitframe();
     }
 
-    var_2 = getdvarint("MQTOLLKKLQ", 250) / 1000;
+    var_2 = getdvarint("bg_useholdtimeshort", 250) / 1000;
 
     for(;;) {
       var_3 = 0;

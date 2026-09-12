@@ -12,7 +12,7 @@ function main() {
   setDvar("mantle_force_legacy_system", 1);
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_herat", "codcaster_compass_map_mp_herat");
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

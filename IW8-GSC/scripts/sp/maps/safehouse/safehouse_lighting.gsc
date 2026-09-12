@@ -14,16 +14,16 @@ function post_load() {
 }
 
 function lighting_setup_dvars() {
-  setsaveddvar("NPONLLLSPL", ".32");
-  setsaveddvar("TLMMOPMSK", "1");
-  setsaveddvar("TMNTMTQRM", "0");
-  setsaveddvar("LLNMKLQQP", "4");
-  setsaveddvar("LSNRQTOKRR", "2");
-  setsaveddvar("NTLKNLNPLK", "2");
-  setsaveddvar("LTQMSPKRKO", 4);
-  setsaveddvar("MROOOROPKL", 6);
+  setsaveddvar("sm_sunSampleSizeNear", ".32");
+  setsaveddvar("r_spotLightEntityShadows", "1");
+  setsaveddvar("sm_sunDistantShadows", "0");
+  setsaveddvar("sm_spotUpdateLimitDynLight", "4");
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", "2");
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", "2");
+  setsaveddvar("sm_spotUpdateLimit", 4);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 6);
   wait 5;
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_spotDistCull", 500);
 }
 
 function lighting_setup_lights() {
@@ -133,7 +133,7 @@ function lighting_tunnels_dof(var_0, var_1, var_2) {
 }
 
 function lighting_disguise(var_0) {
-  setsaveddvar("MPOKKOPMTN", "64 128 256 512");
+  setsaveddvar("r_volumetricDepth", "64 128 256 512");
   var_0 scripts\engine\sp\utility::dof_enable_autofocus(2, 9, undefined, undefined, "tag_eye", undefined, 1);
   thread lerp_value_up(level.lt_tunnel_omni, 0.03, 0, 1);
   thread lerp_value_up(level.lt_room, 0.12, 0.005, 0.2);
@@ -167,12 +167,12 @@ function lighting_disguise(var_0) {
 
 function lighting_holster() {
   var_0 = 2;
-  setsaveddvar("MPOKKOPMTN", "128 256 512 1024");
-  setsaveddvar("NLOTLQMORR", "0.999");
+  setsaveddvar("r_volumetricDepth", "128 256 512 1024");
+  setsaveddvar("r_lightGridTempSmoothingFactor", "0.999");
   wait 0.8;
   thread lerp_value_up(level.ls_sunfill2, 0, var_0, 2);
   wait 2;
-  setsaveddvar("NLOTLQMORR", "0.9");
+  setsaveddvar("r_lightGridTempSmoothingFactor", "0.9");
 }
 
 function lighting_leave() {}
@@ -181,7 +181,7 @@ function lighting_hero_leave() {
   setsuncolorandintensity(0);
   waitframe();
   waitframe();
-  setsaveddvar("MQRQQONQSL", 0);
+  setsaveddvar("sm_sunEnable", 0);
   wait 0.8;
   thread lerp_value_up(level.lt_ceiling, 5, 0, 0.9);
   var_0 = 1.5;
@@ -197,7 +197,7 @@ function lighting_hero_leave() {
   visionsetnaked("safehouse_room_disguise", 1);
   thread lerp_value_up(level.ls_sunfill, 0.7, 0, 2);
   thread lerp_value_up(level.ls_sunfill2, 0.7, 0, 2);
-  setsaveddvar("MPOKKOPMTN", "64 128 256 512");
+  setsaveddvar("r_volumetricDepth", "64 128 256 512");
   wait 2.4;
   level.player modifybasefov(54, 3.5);
   thread lerp_value_up(level.lt_end_rimvol, 0, var_7, 10);

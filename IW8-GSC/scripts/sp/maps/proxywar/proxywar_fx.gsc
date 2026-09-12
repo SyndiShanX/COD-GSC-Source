@@ -200,7 +200,7 @@ function main() {
   level._effect["vfx_pw_veh_taillight_decho_right_nolight_braking"] = loadfx("vfx/iw8/level/proxywar/vfx_pw_veh_taillight_decho_right_nolight_braking.vfx");
   level._effect["vfx_mount_hint_line"] = loadfx("vfx/core/mount/vfx_mount_hint_line.vfx");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\proxywar\gen\proxywar_fx::main();
     scripts\sp\maps\proxywar\gen\proxywar_sound::main();
     return;

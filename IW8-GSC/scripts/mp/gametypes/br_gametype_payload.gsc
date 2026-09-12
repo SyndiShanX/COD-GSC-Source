@@ -131,9 +131,9 @@ function init() {
   level.debug_safehouse_gunshop_start = 1;
   level.disable_super_in_turret.paths = [];
   level.playerzombieupdatetagobjectives = ["apc_russian", "atv", "big_bird", "cargo_truck", "cop_car", "hoopty", "hoopty_truck", "jeep", "large_transport", "light_tank", "little_bird", "little_bird_mg", "medium_transport", "pickup_truck", "tac_rover", "technical", "van", "loot_chopper"];
-  setDvar("LKTPRPKPMR", 1);
-  setDvar("LOSOOOTNMS", 0);
-  setDvar("NNMLSMNTOQ", 0);
+  setDvar("voice_proximity_team", 1);
+  setDvar("voice_proximity_enemy", 0);
+  setDvar("voice_proximity_radius", 0);
   thread toggleusbstickinhand();
   thread delay_start_escort_enter_vehicle_objective();
 }

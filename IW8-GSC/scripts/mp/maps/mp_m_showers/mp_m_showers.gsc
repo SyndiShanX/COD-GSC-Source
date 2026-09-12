@@ -13,8 +13,8 @@ function main() {
   scripts\mp\compass::setupminimap("compass_map_mp_m_showers", "codcaster_compass_map_mp_m_showers");
   scripts\cp_mp\utility\game_utility::registerarenamap();
   level.requiresminstartspawns = 0;
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NSSMQLPRNT", 0.01);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

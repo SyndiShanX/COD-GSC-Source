@@ -465,8 +465,8 @@ function check_price_and_player() {
 
 function hostage_scene() {
   level.scr_model["player_rig"] = "viewhands_fullbody_kyle_sas_urban";
-  var_0 = getDvar("OMNONNMOTP");
-  setsaveddvar("OMNONNMOTP", "0.1 500 1.5 10000");
+  var_0 = getDvar("r_zPlanes");
+  setsaveddvar("r_zPlanes", "0.1 500 1.5 10000");
   var_1 = scripts\engine\utility::getStruct("end_animnode", "targetname");
   var_2 = var_1 scripts\sp\player_rig::link_player_to_rig("end_boom", "stand", 1, 0.3, 0, 35, 35, 20, 10, 1);
   level.rig = var_2;
@@ -482,7 +482,7 @@ function hostage_scene() {
   var_1 scripts\common\anim::anim_last_frame_solo(var_2, "end_boom");
   level.player setclienttriggeraudiozone("fade_to_black", 2);
   pausecinematicingame(0);
-  setsaveddvar("OMNONNMOTP", var_0);
+  setsaveddvar("r_zPlanes", var_0);
 
   foreach(var_5 in level.hostages) {
     if(isDefined(var_5)) {
@@ -527,7 +527,7 @@ function ending_extras() {
   wait 3.6;
   level.player lerpviewangleclamp(1, 0.5, 0.5, 0, 0, 0, 0);
   level.player setcinematicmotionoverride("disabled");
-  setsaveddvar("NOOPLKSRQT", 2.35);
+  setsaveddvar("bg_cinematicAspectRatio", 2.35);
   hidecinematicletterboxing(2, 0);
 }
 
@@ -817,8 +817,8 @@ function price_spec_intro() {
   }
 
   level.player enableinvulnerability();
-  var_0 = getDvar("OMNONNMOTP");
-  setsaveddvar("OMNONNMOTP", "0.1 500 1.5 10000");
+  var_0 = getDvar("r_zPlanes");
+  setsaveddvar("r_zPlanes", "0.1 500 1.5 10000");
   getEnt("price_vehicle", "targetname") show();
   var_1 = scripts\engine\utility::getStruct("spec_price_intro", "targetname");
 
@@ -846,7 +846,7 @@ function price_spec_intro() {
   thread scripts\sp\maps\piccadilly\piccadilly_lighting::lights_on("price_intro");
   thread scripts\sp\maps\piccadilly\piccadilly_lighting::lights_on("spec_pre_hostage");
   thread scripts\sp\maps\piccadilly\piccadilly_lighting::lights_off("spec_hostage");
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_spotDistCull", 500);
   thread func_after_anim(var_2);
   spawn_spec_intro_actors(var_1);
   var_4 = scripts\engine\sp\utility::spawn_targetname("spec_intro_terry", 1);
@@ -877,7 +877,7 @@ function price_spec_intro() {
   var_1 thread scripts\common\anim::anim_single_solo(var_2, "price_spec_intro");
   var_1 thread scripts\common\anim::anim_single(var_1.actors, "price_spec_intro");
   var_1 scripts\common\anim::anim_single_solo(level.price, "price_spec_intro");
-  setsaveddvar("OMNONNMOTP", var_0);
+  setsaveddvar("r_zPlanes", var_0);
 }
 
 function mus_price_intro() {

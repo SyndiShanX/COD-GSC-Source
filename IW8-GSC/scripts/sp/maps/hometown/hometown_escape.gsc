@@ -40,8 +40,8 @@ function gas_main() {
   level.playground_anim_node notify("hadir_loop_stop");
   thread hadir_move_speed_gas_start(1);
   thread audio_music_streets_fade_out();
-  setsaveddvar("LROTTMQLQO", 30);
-  setsaveddvar("MPOOMRMSML", 20);
+  setsaveddvar("cg_corpseFade_inDistanceStart_scriptmodel", 30);
+  setsaveddvar("cg_corpseFade_outDistanceStart_scriptmodel", 20);
   level.gas_crawl_start_blocker scripts\engine\utility::delaycall(4, &delete);
   level.playground_anim_node thread scripts\common\anim::anim_single_solo(level.pipe_dying_boy, "hadir_tunnel_crawl");
   level.playground_anim_node thread scripts\common\anim::anim_single_solo(var_0, "hadir_tunnel_crawl");
@@ -60,8 +60,8 @@ function gas_main() {
   level.playground_anim_node scripts\common\anim::anim_single_solo(level.hadir_ai, "hadir_run_gate");
   level.hadir_ai scripts\engine\sp\utility::enable_ai_color();
   scripts\engine\utility::flag_wait("playground_mid_flag");
-  setsaveddvar("LROTTMQLQO", 60);
-  setsaveddvar("MPOOMRMSML", 50);
+  setsaveddvar("cg_corpseFade_inDistanceStart_scriptmodel", 60);
+  setsaveddvar("cg_corpseFade_outDistanceStart_scriptmodel", 50);
   level.playground_anim_node scripts\sp\anim::anim_reach_solo(level.hadir_ai, "hadir_gate_enter");
   level.playground_anim_node scripts\common\anim::anim_single_solo(level.hadir_ai, "hadir_gate_enter");
   level.playground_anim_node thread scripts\common\anim::anim_loop_solo(level.hadir_ai, "hadir_gate_idle", "hadir_loop_stop");
@@ -122,7 +122,7 @@ function gas_main_setup(var_0) {
   thread hadir_beckon_loop();
   thread gas_blockers();
   thread scripts\sp\maps\hometown\hometown_util::force_ai_see_player_car_flank();
-  setsaveddvar("OLMLOTTLRM", 1);
+  setsaveddvar("player_sprintSpeedScale", 1);
   level.player takeallweapons();
   level.player giveweapon("iw8_gunless_farrah");
   level.player switchtoweapon("iw8_gunless_farrah");
@@ -330,8 +330,8 @@ function gas_exit_main() {
   thread vfx_stop_gas_cam();
   thread gas_mask_swap();
   level.gas_alley_start_blocker scripts\engine\utility::delaycall(2, &delete);
-  setsaveddvar("LROTTMQLQO", 40);
-  setsaveddvar("MPOOMRMSML", 30);
+  setsaveddvar("cg_corpseFade_inDistanceStart_scriptmodel", 40);
+  setsaveddvar("cg_corpseFade_outDistanceStart_scriptmodel", 30);
   level.alley_grab_anim_node thread scripts\common\anim::anim_single_solo(level.alley_grab_guy_model, "alley_grab_scene");
   level.alley_grab_anim_node thread scripts\common\anim::anim_single_solo(level.alley_grab_mask_model, "alley_grab_scene");
   level.alley_grab_anim_node scripts\common\anim::anim_single_solo(level.hadir_ai, "alley_grab_scene");
@@ -348,8 +348,8 @@ function gas_exit_main() {
   }
 
   scripts\engine\utility::flag_wait("gas_last_building_enter_flag");
-  setsaveddvar("LROTTMQLQO", 60);
-  setsaveddvar("MPOOMRMSML", 50);
+  setsaveddvar("cg_corpseFade_inDistanceStart_scriptmodel", 60);
+  setsaveddvar("cg_corpseFade_outDistanceStart_scriptmodel", 50);
   var_0 notify("stop_loop");
   level.hadir_ai scripts\engine\sp\utility::enable_ai_color();
   thread delete_window_blocker();
@@ -796,7 +796,7 @@ function gas_victim_spawn_and_loop(var_0, var_1, var_2, var_3, var_4) {
 }
 
 function poppies_main() {
-  setsaveddvar("OLMLOTTLRM", 1);
+  setsaveddvar("player_sprintSpeedScale", 1);
   setaudiotriggerstate("gas_outsidehouse", "", 1);
   level.hadir_in_gas = 0;
   thread scripts\sp\maps\hometown\hometown_vo::poppies_start_vo();
@@ -878,13 +878,13 @@ function foliage_react_radius_monitor() {
 function foliage_react_radius_set() {
   for(;;) {
     level waittill("hadir_near_branch");
-    setsaveddvar("MPLOLNMSRO", 40);
+    setsaveddvar("r_reactiveMotionActorRadius", 40);
     level notify("hadir_beckon_loop_suspend");
     waitframe();
     level.hadir_ai scripts\asm\gesture::ai_request_gesture("move_branch", level.player, 10000);
     level waittill("hadir_away_from_branch");
     level notify("hadir_beckon_loop_restart");
-    setsaveddvar("MPLOLNMSRO", 20);
+    setsaveddvar("r_reactiveMotionActorRadius", 20);
   }
 }
 
@@ -1267,7 +1267,7 @@ function pistol_skip_fight() {
 }
 
 function pistol_main() {
-  setsaveddvar("OLMLOTTLRM", 1.4);
+  setsaveddvar("player_sprintSpeedScale", 1.4);
 
   if(getdvarint("greenlight") || getdvarint("greenlight_three_stab")) {
     thread greenlight_mission_end_monitor();
@@ -1400,7 +1400,7 @@ function audio_hometown_truck_kid_loaded_gate() {
 
 function player_gesture_cellphone_show() {
   wait 16.5;
-  setsaveddvar("RMLOTKMMM", 0);
+  setsaveddvar("r_mbVelocityScaleViewModel", 0);
   var_0 = spawn("script_model", level.player.origin);
   var_0 setModel("offhand_vm_cellphone_old");
   var_0 notsolid();
@@ -1410,11 +1410,11 @@ function player_gesture_cellphone_show() {
   wait 1;
   var_0 setModel("offhand_vm_cellphone_old_on");
   wait 1.5;
-  setsaveddvar("NMLOKNMRSK", 0);
+  setsaveddvar("depthSortViewmodel", 0);
   var_0 delete();
   waitframe();
   level.player setsuit("iw8_kid");
-  setsaveddvar("RMLOTKMMM", 1);
+  setsaveddvar("r_mbVelocityScaleViewModel", 1);
 }
 
 function hadir_call_interact() {
@@ -1467,7 +1467,7 @@ function player_gesture_cellphone_call() {
       continue;
     }
 
-    setsaveddvar("RMLOTKMMM", 0);
+    setsaveddvar("r_mbVelocityScaleViewModel", 0);
     var_1 = spawn("script_model", level.player.origin);
     var_1 setModel("offhand_vm_cellphone_old");
     var_1 notsolid();
@@ -1488,7 +1488,7 @@ function player_gesture_cellphone_call() {
     wait 1;
     var_1 setModel("offhand_vm_cellphone_old_on");
     wait 1;
-    setsaveddvar("NMLOKNMRSK", 0);
+    setsaveddvar("depthSortViewmodel", 0);
     var_1 delete();
     level.hadir_ai playSound("scn_hometown_cell_call_hadir");
 
@@ -1527,7 +1527,7 @@ function player_gesture_cellphone_call() {
     }
 
     wait 2;
-    setsaveddvar("RMLOTKMMM", 1);
+    setsaveddvar("r_mbVelocityScaleViewModel", 1);
     level notify("use_cellphone_finish");
   }
 }
@@ -2049,7 +2049,7 @@ function drive_main() {
 }
 
 function drive_cine_dof_settings() {
-  setsaveddvar("SLSMSSTQP", ".1");
+  setsaveddvar("r_dof_physical_minFocusDistance", ".1");
   level scripts\engine\sp\utility::dof_enable(5.6, 10);
   level.hadir_ai scripts\engine\utility::delaythread(3, &scripts\engine\sp\utility::dof_enable_autofocus, 2, 3, undefined, undefined, "tag_eye", undefined, 1);
   level.end_barkov_model scripts\engine\utility::delaythread(10, &scripts\engine\sp\utility::dof_enable_autofocus, 2, 50, undefined, undefined, "tag_eye", undefined, 1);
@@ -2067,7 +2067,7 @@ function drive_cine_dof_settings() {
   level.player scripts\engine\utility::delaycall(47, &lerpviewangleclamp, 2, 0.5, 0.5, 0, 0, 0, 0);
   level scripts\engine\utility::delaythread(52, &scripts\engine\sp\utility::dof_disable);
   wait 52;
-  setsaveddvar("SLSMSSTQP", "9");
+  setsaveddvar("r_dof_physical_minFocusDistance", "9");
 }
 
 function drive_caption_vo() {
@@ -2121,8 +2121,8 @@ function bunker_main() {
   thread bunker_hint();
   waitframe();
   scripts\engine\utility::flag_set("objective_return_to_base");
-  setsaveddvar("MTLLLKROOM", 1);
-  setsaveddvar("OMNONNMOTP", "0.1 400 1.5 1000");
+  setsaveddvar("mount_hint_enable", 1);
+  setsaveddvar("r_zPlanes", "0.1 400 1.5 1000");
   level.player scripts\engine\utility::delaycall(1, &setclienttriggeraudiozone, "ht_bunker_ending", 5);
   level.player setentitysoundcontext("gender", "gasmask_male");
   level.player setstance("stand");
@@ -2395,9 +2395,9 @@ function alex_setup() {
   level.player giveweapon("iw8_gunless");
   level.player switchtoweapon("iw8_gunless");
   level.player modifybasefov(65, 0.05);
-  setsaveddvar("NKTRSSTMRQ", 0);
-  setsaveddvar("LSOPQMRPNR", 0);
-  setsaveddvar("MLTTMLTKOR", 0);
+  setsaveddvar("r_mbRadialOverrideRadius", 0);
+  setsaveddvar("r_mbRadialOverrideStrength", 0);
+  setsaveddvar("r_mbRadialOverrideDistortion", 0);
   level.player scripts\sp\utility::allow_cg_drawcrosshair(0);
   level.player scripts\common\utility::allow_weapon_pickup(0);
   level.player setmovespeedscale(0.1);

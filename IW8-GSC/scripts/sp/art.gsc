@@ -15,9 +15,9 @@ function main() {
   mb_init();
   level.special_weapon_dof_funcs = [];
   level.buttons = [];
-  setsaveddvar("PKKMTTRQO", 8);
-  setsaveddvar("LSSLKOQPMQ", 1);
-  setsaveddvar("OMKTSMSOS", 3);
+  setsaveddvar("r_umbraMinObjectContribution", 8);
+  setsaveddvar("r_umbraShadowCasters", 1);
+  setsaveddvar("r_usePrebuiltSunShadow", 3);
 
   if(!isDefined(level.sunflare_settings)) {
     level.sunflare_settings = [];
@@ -69,7 +69,7 @@ function dof_blend_interior_generic(var_0) {
 }
 
 function mb_init() {
-  setsaveddvar("LPSPNKLRPO", 1);
+  setsaveddvar("r_mbEnable", 1);
   scripts\engine\sp\utility::create_motion_blur_defaults(1, 1);
   scripts\engine\sp\utility::motion_blur_enable();
 }
@@ -536,7 +536,7 @@ function dof_update() {
       continue;
     }
 
-    if(getdvarint("MRSTKSMMP")) {
+    if(getdvarint("r_dof_physical_enable")) {
       var_0 = self playerads();
 
       if(var_0 > 0) {
@@ -560,7 +560,7 @@ function dof_update() {
 }
 
 function tess_init() {
-  var_0 = getDvar("MMNMQTSOSP");
+  var_0 = getDvar("r_tessellation");
 
   if(var_0 == "") {
     return;
@@ -572,8 +572,8 @@ function tess_init() {
   level.tess.cutoff_falloff_current = 587;
   level.tess.cutoff_falloff_goal = level.tess.cutoff_falloff_current;
   level.tess.time_remaining = 0;
-  setsaveddvar("LMNOQSTMKN", level.tess.cutoff_distance_current);
-  setsaveddvar("TSPOQPTMS", level.tess.cutoff_falloff_current);
+  setsaveddvar("r_tessellationCutoffDistance", level.tess.cutoff_distance_current);
+  setsaveddvar("r_tessellationCutoffFalloff", level.tess.cutoff_falloff_current);
 
   foreach(var_2 in level.players) {
     thread tess_update();
@@ -605,11 +605,11 @@ function tess_update() {
     }
 
     if(var_0 != level.tess.cutoff_distance_current) {
-      setsaveddvar("LMNOQSTMKN", level.tess.cutoff_distance_current);
+      setsaveddvar("r_tessellationCutoffDistance", level.tess.cutoff_distance_current);
     }
 
     if(var_1 != level.tess.cutoff_falloff_current) {
-      setsaveddvar("TSPOQPTMS", level.tess.cutoff_falloff_current);
+      setsaveddvar("r_tessellationCutoffFalloff", level.tess.cutoff_falloff_current);
     }
   }
 }

@@ -4,13 +4,13 @@
 ************************************************************/
 
 function main() {
-  setDvar("LKOLRONRNQ", 1500);
-  setDvar("LTQMSPKRKO", 6);
-  setDvar("MROOOROPKL", 10);
-  setDvar("MNQKPNLOPT", 1);
-  setDvar("NRSOTSLSSO", 1);
-  setDvar("QSLRKRNKL", 2);
-  setDvar("LQLMTQMMKQ", 1);
-  setDvar("NPONLLLSPL", 0.2);
-  setDvar("LSNRQTOKRR", 2);
+  setDvar("sm_spotDistCull", 1500);
+  setDvar("sm_spotUpdateLimit", 6);
+  setDvar("sm_roundRobinPrioritySpotShadows", 10);
+  setDvar("sm_spotShadowScoreSystem", 1);
+  setDvar("sm_spotUpdateMoreDynEnt", 1);
+  setDvar("r_compressedSunShadowFiltering", 2);
+  setDvar("r_compressedSunShadowClipPlanes", 1);
+  setDvar("sm_sunSampleSizeNear", 0.2);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
 }

@@ -13,11 +13,11 @@ function main() {
   scripts\mp\load::main();
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_crash2", "codcaster_compass_map_mp_crash2");
-  setDvar("MQPQKNPQOK", 3);
-  setDvar("MRNRKKOPLN", 0.5);
-  setDvar("OLSKLTPPMR", 0.5);
-  setDvar("NKLMONNPNN", 512);
-  setDvar("PKKMTTRQO", 3.5);
+  setDvar("cg_defaultWindAmplitudeScale", 3);
+  setDvar("cg_defaultWindFrequencyScale", 0.5);
+  setDvar("cg_defaultWindNoiseScale", 0.5);
+  setDvar("r_umbraAccurateOcclusionThreshold", 512);
+  setDvar("r_umbraMinObjectContribution", 3.5);
   var_0 = scripts\mp\utility\game::getgametype();
 
   if(var_0 == "sd") {

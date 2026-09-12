@@ -379,7 +379,7 @@ function init() {
     scripts\common\bcs_location_trigs::bcs_location_trigs_init();
   }
 
-  var_3 = getDvar("NKTMKRMSKR");
+  var_3 = getDvar("g_gametype");
   level.v_start_pos = 0;
 
   if(var_3 == "sd" || var_3 == "cyber" || var_3 == "arena") {

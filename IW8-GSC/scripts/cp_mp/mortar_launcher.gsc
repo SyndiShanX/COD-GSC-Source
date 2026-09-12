@@ -105,7 +105,7 @@ function movemortar(var_0, var_1, var_2, var_3, var_4) {
 
   if(getdvarint("scr_mortar_gravity")) {
     var_0.origin = var_1;
-    var_5 = getdvarint("NPOQPMP");
+    var_5 = getdvarint("bg_gravity");
     var_6 = distance(var_1, var_2);
     var_7 = var_2 - var_1;
     var_8 = 0.5 * var_5 * squared(var_3) * -1;

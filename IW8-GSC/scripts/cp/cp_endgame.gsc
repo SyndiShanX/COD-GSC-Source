@@ -78,7 +78,7 @@ function endgame(var_0, var_1) {
   setnojiptime(1);
   markgameended();
   level notify("game_ended", var_0);
-  freezeallplayers(1, "NSSLSNKPN", 1);
+  freezeallplayers(1, "cg_fovScale", 1);
   var_12 = tolower(getDvar("mapname"));
 
   foreach(var_3 in level.players) {
@@ -180,9 +180,9 @@ function endgame(var_0, var_1) {
 
   setomnvar("zm_time_survived", level.time_survived);
   ref_131ac(1);
-  setDvar("SLLNLPRON", 1);
+  setDvar("g_deadChat", 1);
   setDvar("ui_allow_teamchange", 0);
-  setDvar("MPOKQNLPRM", 0);
+  setDvar("bg_compassShowEnemies", 0);
   setDvar("scr_gameended", 1);
   setgameendtime(0);
   setslowmotion(1, 1, 0);
@@ -239,7 +239,7 @@ function endgame(var_0, var_1) {
 
   if(!scripts\cp\utility::is_codxp()) {
     foreach(var_13 in level.players) {
-      var_13 setclientdvar("MQNNLTKNTS", 1);
+      var_13 setclientdvar("ui_opensummary", 1);
     }
   }
 
@@ -310,7 +310,7 @@ function ref_13445(var_0, var_1) {
   markgameended();
   level notify("game_ended", var_0);
   scripts\cp\cp_analytics::ref_119b8(var_1);
-  freezeallplayers(1, "NSSLSNKPN", 1);
+  freezeallplayers(1, "cg_fovScale", 1);
   var_9 = tolower(getDvar("mapname"));
 
   foreach(var_3 in level.players) {
@@ -386,12 +386,12 @@ function ref_13445(var_0, var_1) {
 
   setomnvar("ui_so_next_score", var_20.ref_11e84);
   setomnvar("ui_so_iwbest", var_20.vehicle_compass_cp_init);
-  setDvar("SLLNLPRON", 1);
+  setDvar("g_deadChat", 1);
   setDvar("ui_allow_teamchange", 0);
-  setDvar("MPOKQNLPRM", 0);
+  setDvar("bg_compassShowEnemies", 0);
   setgameendtime(0);
 
-  if(getdvarint("LTSNLQNRKO")) {
+  if(getdvarint("onlinegame")) {
     foreach(var_3 in level.players) {
       if(var_20.ref_1376c > 0) {
         ref_1344b(var_3, var_20.ref_1376c, level.time_survived);
@@ -440,7 +440,7 @@ function ref_13447() {
 }
 
 function trygetlastpotentiallivingplayer() {
-  return getdvarint("MRTSTTKTNL") && getdvarint("SNTTNKSRO");
+  return getdvarint("online_challenge_upload_spec_ops_end") && getdvarint("lui_classic_specops_stars_enabled");
 }
 
 function ref_13448(var_0) {
@@ -651,7 +651,7 @@ function freezeallplayers(var_0, var_1, var_2) {
     thread freezeplayerforroundend(var_4);
     thread roundenddof(var_4);
     freegameplayhudelems(var_4);
-    var_4 setclientdvars("LQKPQMPRQN", 1, "cg_drawSpectatorMessages", 0);
+    var_4 setclientdvars("cg_everyoneHearsEveryone", 1, "cg_drawSpectatorMessages", 0);
 
     if(isDefined(var_1) && isDefined(var_2)) {
       var_4 setclientdvars(var_1, var_2);
@@ -749,7 +749,7 @@ function cleanup_player_on_game_end(var_0) {
 }
 
 function should_load_new_map(var_0) {
-  if((var_0 == 1 || var_0 == 2) && getDvar("NSQLTTMRMP") == "cp_jackal_ass") {
+  if((var_0 == 1 || var_0 == 2) && getDvar("ui_mapname") == "cp_jackal_ass") {
     return "cp_titan";
   }
 
@@ -759,8 +759,8 @@ function should_load_new_map(var_0) {
 function load_new_map(var_0) {
   kill_em_all();
   level scripts\engine\utility::ref_143b9(15, "intermission_over");
-  setDvar("NSQLTTMRMP", var_0);
-  setDvar("NKTMKRMSKR", "aliens");
+  setDvar("ui_mapname", var_0);
+  setDvar("g_gametype", "aliens");
   var_1 = "map " + var_0;
 }
 

@@ -1010,7 +1010,7 @@ function vo_cb_wait_see_chair(var_0) {
   var_0 = level.cellchair.origin + (0, 0, 30);
 
   while(!var_1 || !var_2) {
-    var_3 = cos(getdvarint("MRNKTKLLKP") / 1.65);
+    var_3 = cos(getdvarint("cg_targetBaseFov") / 1.65);
     var_1 = level.player scripts\engine\math::point_in_fov(var_0, var_3, 1);
     var_2 = sighttracepassed(level.player getEye(), var_0, 0, undefined);
     waitframe();

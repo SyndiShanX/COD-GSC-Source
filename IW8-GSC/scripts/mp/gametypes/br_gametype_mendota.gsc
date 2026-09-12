@@ -857,7 +857,7 @@ function trial_dlog_pitcher(var_0, var_1) {
   var_4 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_1, var_2, var_3, var_0, undefined, undefined, undefined, 1);
   var_5 = var_4.origin;
   var_6 = abs(self.origin[2] - var_5[2]);
-  var_7 = getdvarint("NPOQPMP", 800);
+  var_7 = getdvarint("bg_gravity", 800);
   var_8 = sqrt(2 * var_6 / var_7) + 0.5;
   var_9 = trajectorycalculateinitialvelocity(self.origin, var_5, (0, 0, -1 * var_7), var_8);
   self movegravity(var_9, var_8);

@@ -49,5 +49,5 @@ function func_position_player() {
 }
 
 function func_player_speed() {
-  setsaveddvar("NSRPQNLSNK", level._createfx.player_speed);
+  setsaveddvar("g_speed", level._createfx.player_speed);
 }

@@ -6447,12 +6447,12 @@ function allow_weapon_first_raise_anims(var_0, var_1) {
   var_2 = scripts\common\input_allow::allow_input_internal("firstRaiseAnims", var_0, var_1);
 
   if(isDefined(var_2) && var_2) {
-    setsaveddvar("MRKKPQPTQR", 0);
+    setsaveddvar("bg_disableWeaponFirstRaiseAnims", 0);
     return;
   }
 
   if(isDefined(var_2) && !var_2) {
-    setsaveddvar("MRKKPQPTQR", 1);
+    setsaveddvar("bg_disableWeaponFirstRaiseAnims", 1);
     return;
   }
 }

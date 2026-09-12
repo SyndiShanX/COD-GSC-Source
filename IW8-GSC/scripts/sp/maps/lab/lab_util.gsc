@@ -154,15 +154,15 @@ function intro_movie() {
 function player_jugg_fight(var_0) {
   if(var_0) {
     level.player setthreatbiasgroup("player");
-    setsaveddvar("MSOOMPMPQS", 1);
-    setsaveddvar("OLMLOTTLRM", 1.8);
+    setsaveddvar("player_sprintUnlimited", 1);
+    setsaveddvar("player_sprintSpeedScale", 1.8);
     level.friendlyfiredisabled = 1;
     return;
   }
 
   level.player setthreatbiasgroup("allies");
-  setsaveddvar("MSOOMPMPQS", 0);
-  setsaveddvar("OLMLOTTLRM", 1.4);
+  setsaveddvar("player_sprintUnlimited", 0);
+  setsaveddvar("player_sprintSpeedScale", 1.4);
   level.friendlyfiredisabled = 0;
 }
 
@@ -1304,12 +1304,12 @@ function wind_setdirection(var_0, var_1, var_2) {
   }
 
   level.ballistics.wind = var_1;
-  setsaveddvar("MQPQKNPQOK", 2);
-  setsaveddvar("MRNRKKOPLN", 2);
-  setsaveddvar("NQTLPTNSSO", 3);
-  setsaveddvar("OLSKLTPPMR", 0.7);
-  setsaveddvar("LQLSPQOPKM", 50);
-  setsaveddvar("NTMMTOLQMQ", level.ballistics.wind);
+  setsaveddvar("cg_defaultWindAmplitudeScale", 2);
+  setsaveddvar("cg_defaultWindFrequencyScale", 2);
+  setsaveddvar("cg_defaultWindStrength", 3);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.7);
+  setsaveddvar("cg_defaultWindAreaScale", 50);
+  setsaveddvar("cg_defaultWindDir", level.ballistics.wind);
 }
 
 function unlink_player_from_rig_lab(var_0, var_1, var_2, var_3) {

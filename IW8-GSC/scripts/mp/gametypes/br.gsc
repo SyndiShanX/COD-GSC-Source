@@ -1131,7 +1131,7 @@ function setup_weapons_at_pos() {
 
   scripts\mp\scoreboard::ref_128b0();
 
-  if(getdvarint("MTKSQRQLKN") != 0) {
+  if(getdvarint("online_mp_clientmatchdata_enabled") != 0) {
     if(scripts\mp\utility\game::matchmakinggame() && !scripts\mp\utility\game::privatematch()) {
       setclientmatchdata("isPublicMatch", 1);
     } else {
@@ -1231,7 +1231,7 @@ function watchprematchdone() {
   setomnvar("scriptable_loot_hide", 0);
 
   foreach(var_6 in level.players) {
-    var_6 setclientdvar("MQNNLTKNTS", 1);
+    var_6 setclientdvar("ui_opensummary", 1);
 
     if(isalive(var_6)) {
       var_6.health = var_6.maxhealth;
@@ -2748,7 +2748,7 @@ function onplayerdisconnect(var_0) {
 function ref_13fcc(var_0) {
   scripts\mp\gamelogic::ref_128af(var_0);
   scripts\mp\scoreboard::ref_128a8(var_0);
-  var_1 = getdvarint("MTKSQRQLKN", 0);
+  var_1 = getdvarint("online_mp_clientmatchdata_enabled", 0);
 
   if(var_1) {
     var_0 setshowinrealism();
@@ -3637,7 +3637,7 @@ function scriptableusepart(var_0, var_1, var_2) {
     return;
   }
 
-  if(!(scripts\mp\utility\game::matchmakinggame() || getdvarint("OSPNSPSKL"))) {
+  if(!(scripts\mp\utility\game::matchmakinggame() || getdvarint("force_ranking"))) {
     return;
   }
 
@@ -6743,7 +6743,7 @@ function ending_fade_in(var_0, var_1, var_2) {
 
 function prematchperiod() {
   if(istrue(game["switchedsides"])) {
-    level.connectingplayers = getdvarint("NKSQNMMRRQ");
+    level.connectingplayers = getdvarint("party_partyPlayerCountNum");
 
     if(getdvarint("scr_live_lobby", 0) == 1 && !istrue(level.ref_133e0)) {
       game["inLiveLobby"] = 0;

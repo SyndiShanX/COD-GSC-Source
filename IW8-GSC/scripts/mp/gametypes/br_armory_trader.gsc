@@ -23,7 +23,7 @@ function init() {
   }
 
   scripts\engine\scriptable::ref_12f5b("br_armory_trader", &camera_loadout_showcase_preview_large_sticker_alt1);
-  level.debug_trap_room.ref_11a20 = strtok(getDvar("MSLKNNLLMN", ""), "|");
+  level.debug_trap_room.ref_11a20 = strtok(getDvar("loot_table_filter", ""), "|");
   level.debug_trap_room.play_lighting_sequence = strtok(getDvar("scr_br_armory_trader_filter", "brloot_offhand_advancedsupplydrop|brloot_plunder_extract|brloot_perk_point_overkill"), "|");
   logtraderfilter();
   tr_detectwinners();
@@ -529,7 +529,7 @@ function ref_13c67() {
 
 function heatcounter() {
   wait 2;
-  var_0 = getdvarfloat("MLLSRQSRT", 128) + 16;
+  var_0 = getdvarfloat("player_itemUseRadius", 128) + 16;
   var_1 = canceljoins(undefined, undefined, self.origin, var_0);
 
   if(getdvarint("scr_armory_trader_use_drop_grid", 1)) {
@@ -604,7 +604,7 @@ function get_aitypes_and_weights_from_call_counter(var_0, var_1) {
     return false;
   }
 
-  var_2 = getdvarfloat("MLLSRQSRT", 128) + 16;
+  var_2 = getdvarfloat("player_itemUseRadius", 128) + 16;
   var_3 = var_2 * var_2;
 
   if(distancesquared(var_0.origin, var_1.origin) > var_3) {

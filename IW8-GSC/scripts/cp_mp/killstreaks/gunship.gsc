@@ -200,7 +200,7 @@ function gunship_startuse(var_0, var_1) {
     GscBinSkip1(0x74, scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash"), "used_gunship", var_0);
   }
 
-  if(getdvarint("NOSLRNTRKL")) {
+  if(getdvarint("camera_thirdPerson")) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "setThirdPersonDOF")) {
       var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "setThirdPersonDOF")]](0);
     }
@@ -468,7 +468,7 @@ function gunship_returnplayer(var_0) {
     var_0 scripts\cp_mp\utility\killstreak_utility::killstreak_restorenvgstate();
     var_0.usinggunship = undefined;
 
-    if(getdvarint("NOSLRNTRKL")) {
+    if(getdvarint("camera_thirdPerson")) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "setThirdPersonDOF")) {
         var_0[[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "setThirdPersonDOF")]](1);
       }

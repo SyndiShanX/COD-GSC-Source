@@ -4,7 +4,7 @@
 ***********************************************/
 
 function main() {
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
 

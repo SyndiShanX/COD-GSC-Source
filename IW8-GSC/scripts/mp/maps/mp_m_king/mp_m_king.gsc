@@ -14,7 +14,7 @@ function main() {
   scripts\mp\compass::setupminimap("compass_map_mp_m_king", "codcaster_compass_map_mp_m_king");
   scripts\cp_mp\utility\game_utility::registerarenamap();
   level.requiresminstartspawns = 0;
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   setDvar("mantle_edge_ledge_check_rise_amount", 15);
   game["attackers"] = "allies";
   game["defenders"] = "axis";

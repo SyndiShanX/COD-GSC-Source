@@ -9,7 +9,7 @@ function initcpvosystem() {
   level.vo_categories = [];
   level.vo_category_last_played_time = [];
   level.vo_dialogue_prefix = [];
-  level.vo_table = "cp/" + getDvar("NSQLTTMRMP") + "_vo_table.csv";
+  level.vo_table = "cp/" + getDvar("ui_mapname") + "_vo_table.csv";
   thread parse_vo_table();
   thread nag_vo_handler();
 }
@@ -484,7 +484,7 @@ function get_sound_length(var_0) {
 
   var_1 = lookupsoundlength(var_0) / 1000 + 0.4;
 
-  if(getdvarint("PMKLQQKSO") != 0 && getdvarint("PMKLQQKSO") != 1) {
+  if(getdvarint("loc_language") != 0 && getdvarint("loc_language") != 1) {
     var_1 += 1.5;
   }
 

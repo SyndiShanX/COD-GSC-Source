@@ -200,7 +200,7 @@ function tagmoveTo(var_0, var_1, var_2, var_3) {
   scripts\mp\gameobjects::allowuse("any");
   thread showtoteam(self.visuals, self);
   self.visuals setasgametypeobjective();
-  var_4 = getdvarint("NPOQPMP");
+  var_4 = getdvarint("bg_gravity");
   var_5 = distance(var_1, var_2);
   var_6 = var_2 - var_1;
   var_7 = 0.5 * var_4 * squared(var_3) * -1;

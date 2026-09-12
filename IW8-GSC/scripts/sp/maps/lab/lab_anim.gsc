@@ -122,36 +122,36 @@ function player() {
 }
 
 function dof_auto_barkov(var_0) {
-  setsaveddvar("SLSMSSTQP", "1");
+  setsaveddvar("r_dof_physical_minFocusDistance", "1");
   level.barkov scripts\engine\sp\utility::dof_enable_autofocus(2, 5, undefined, undefined, "tag_eye", undefined, 1);
   wait 3;
-  setsaveddvar("SLSMSSTQP", "9");
+  setsaveddvar("r_dof_physical_minFocusDistance", "9");
 }
 
 function dof_auto_knife(var_0) {
-  setsaveddvar("SLSMSSTQP", "1");
+  setsaveddvar("r_dof_physical_minFocusDistance", "1");
   level.prompt_knife scripts\engine\sp\utility::dof_enable_autofocus(2, 5, undefined, undefined, "j_gun", undefined, 1);
   wait 2;
-  setsaveddvar("SLSMSSTQP", "9");
+  setsaveddvar("r_dof_physical_minFocusDistance", "9");
 }
 
 function dof_auto_knife_prompt(var_0) {
-  setsaveddvar("SLSMSSTQP", "1");
+  setsaveddvar("r_dof_physical_minFocusDistance", "1");
   level.prompt_knife scripts\engine\sp\utility::dof_enable_autofocus(2, 5, undefined, undefined, "j_gun", undefined, 1);
   wait 2;
   level.barkov scripts\engine\sp\utility::dof_enable_autofocus(2, 5, undefined, undefined, "j_gun", undefined, 1);
   wait 2;
-  setsaveddvar("SLSMSSTQP", "9");
+  setsaveddvar("r_dof_physical_minFocusDistance", "9");
   scripts\engine\sp\utility::dof_disable_autofocus();
 }
 
 function dof_finale_choke_stab01(var_0) {
-  setsaveddvar("SLSMSSTQP", "1");
+  setsaveddvar("r_dof_physical_minFocusDistance", "1");
   level.barkov scripts\engine\sp\utility::dof_enable_autofocus(2, 5, undefined, undefined, "tag_eye", undefined, 1);
 }
 
 function dof_finale_choke_stab04(var_0) {
-  setsaveddvar("SLSMSSTQP", "9");
+  setsaveddvar("r_dof_physical_minFocusDistance", "9");
   wait 1;
   scripts\engine\sp\utility::dof_disable_autofocus();
 }

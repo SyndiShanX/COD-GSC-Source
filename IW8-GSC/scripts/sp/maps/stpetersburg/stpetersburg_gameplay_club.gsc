@@ -155,7 +155,7 @@ function intro_scene_end_skip() {
 function intro_stakeout_player_movement() {
   level.player allowfire(0);
   scripts\sp\player::player_movement_state("creep");
-  setsaveddvar("MNPNORMOMP", 0.65);
+  setsaveddvar("player_viewmodelMoveAnimScale", 0.65);
 
   if(getdvarint("stp_intro_cinematic") > 0) {
     scripts\engine\sp\utility::player_speed_set(10, 0.5);
@@ -1022,7 +1022,7 @@ function move_speed_reset() {
     waitframe();
   }
 
-  setsaveddvar("MNPNORMOMP", 1);
+  setsaveddvar("player_viewmodelMoveAnimScale", 1);
 }
 
 function alley_stealth_enemies() {
@@ -1690,7 +1690,7 @@ function bar_backroom_main() {
   thread backroom_check_if_player_shoots();
   thread backroom_check_if_player_jumps();
   thread backroom_pre_combat_handler();
-  setsaveddvar("NQNQPRLRQM", 0.05);
+  setsaveddvar("fx_lights_intensity_scale", 0.05);
 }
 
 function backroom_check_if_player_shoots() {
@@ -3115,8 +3115,8 @@ function intro_scene_bink() {
   wait 0.5;
 
   if(!iscinematicplaying()) {
-    setsaveddvar("MMRNLMPPLT", "1");
-    setsaveddvar("RKMNLRNS", "1");
+    setsaveddvar("bg_cinematicFullscreen", "1");
+    setsaveddvar("bg_cinematicCanPause", "1");
   }
 
   level.player cleardamageindicators();

@@ -1424,8 +1424,8 @@ function bot_get_team_limit() {
 }
 
 function bot_get_client_limit() {
-  var_0 = getdvarint("OOTQKOTRM", 0);
-  var_0 = max(var_0, getdvarint("ROMTTTNL", 0));
+  var_0 = getdvarint("party_maxplayers", 0);
+  var_0 = max(var_0, getdvarint("party_maxPrivatePartyPlayers", 0));
 
   if(var_0 > level.maxclients) {
     return level.maxclients;

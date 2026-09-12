@@ -224,7 +224,7 @@ function spawnactors(var_0, var_1, var_2) {
 }
 
 function infilthink(var_0, var_1) {
-  var_2 = getdvarfloat("NMORQOTSK", 0.2);
+  var_2 = getdvarfloat("r_mbVelocityScale", 0.2);
 
   foreach(var_4 in getEntArray("infil_delete", "script_noteworthy")) {
     var_4 delete();
@@ -233,16 +233,16 @@ function infilthink(var_0, var_1) {
   thread helithink(var_0, self.scene_node, var_1);
   thread actorthink(var_0, self.scene_node, var_1);
   scripts\mp\flags::gameflagwait("infil_started");
-  setDvar("TLMMOPMSK", 1);
-  setDvar("NMORQOTSK", 1);
+  setDvar("r_spotLightEntityShadows", 1);
+  setDvar("r_mbVelocityScale", 1);
 
   if(level.prematchperiodend > self.infillength) {
     wait level.prematchperiodend - self.infillength;
   }
 
   level waittill("prematch_over");
-  setDvar("TLMMOPMSK", 0);
-  setDvar("NMORQOTSK", var_2);
+  setDvar("r_spotLightEntityShadows", 0);
+  setDvar("r_mbVelocityScale", var_2);
 }
 
 function helithink(var_0, var_1, var_2) {

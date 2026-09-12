@@ -14,11 +14,11 @@ function main() {
   scripts\cp\maps\cp_sv_raid\cp_sv_raid_precache::main();
   scripts\cp\maps\cp_sv_raid\gen\cp_sv_raid_art::main();
   scripts\cp\maps\cp_sv_raid\cp_sv_raid_fx::main();
-  setDvar("NPONLLLSPL", 1.25);
-  setDvar("PKKMTTRQO", 4);
-  setDvar("NKLMONNPNN", 2048);
-  setDvar("MROOOROPKL", 8);
-  setDvar("LTQMSPKRKO", 8);
+  setDvar("sm_sunSampleSizeNear", 1.25);
+  setDvar("r_umbraMinObjectContribution", 4);
+  setDvar("r_umbraAccurateOcclusionThreshold", 2048);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotUpdateLimit", 8);
 
   if(level.createfx_enabled) {
     return;

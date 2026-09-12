@@ -9,7 +9,7 @@ function main() {
   level.music_style = "middle_east";
   var_0 = getentarrayinradius("trial_weapon", "targetname", (-610.39, 705.465, 45.9237), 1)[0];
   var_0.origin += (0, 0, 1);
-  var_1 = getdvarint("LTTRKNNKTQ", 0);
+  var_1 = getdvarint("bg_trial_mission_id", 0);
 
   if(var_1 == 104) {
     level.set_spotlight_target_loc = 0;

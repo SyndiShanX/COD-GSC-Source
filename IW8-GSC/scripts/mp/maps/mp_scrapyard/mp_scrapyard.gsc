@@ -14,7 +14,7 @@ function main() {
   level.music_style = "eastern_europe";
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_scrapyard", "codcaster_compass_map_mp_scrapyard");
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

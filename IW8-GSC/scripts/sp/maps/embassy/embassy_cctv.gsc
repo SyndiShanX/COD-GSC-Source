@@ -18,11 +18,11 @@ function embassy_cctv_init() {}
 
 function cctv_spot_light_limit() {
   scripts\engine\utility::flag_wait("load_finished");
-  setsaveddvar("MROOOROPKL", 8);
-  setsaveddvar("LTQMSPKRKO", 8);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
+  setsaveddvar("sm_spotUpdateLimit", 8);
   scripts\engine\utility::flag_wait("cctv_end");
-  setsaveddvar("MROOOROPKL", 6);
-  setsaveddvar("LTQMSPKRKO", 6);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 6);
+  setsaveddvar("sm_spotUpdateLimit", 6);
 }
 
 function embassy_cctv_fx() {}
@@ -77,7 +77,7 @@ function security_cam_01_start() {}
 function security_cam_01_main() {
   thread objective_manager();
   thread cctv_camera_overlay();
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0.15, 0.05);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideDistortion", 0.15, 0.05);
   thread cctv_spot_light_limit();
   scripts\engine\utility::exploder("cctv_amb_vfx");
   thread scripts\engine\sp\utility::battlechatter_off("axis");
@@ -728,7 +728,7 @@ function security_cam_01_post_intro_start() {
   thread scene_wounded();
   thread scene_wall_kill();
   level notify("drag done");
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0.15, 0.05);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideDistortion", 0.15, 0.05);
 }
 
 function security_cam_01_post_intro_main() {}
@@ -773,7 +773,7 @@ function security_cam_02_start() {
   thread scene_wall_kill();
   thread stacy_hasnt_moved_check();
   scripts\engine\utility::flag_set("first_cam_change");
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0.15, 0.05);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideDistortion", 0.15, 0.05);
 }
 
 function security_cam_02_main() {
@@ -892,7 +892,7 @@ function security_cam_02_main() {
   level.player.ignoreme = 0;
   level.player unlink();
   thread scripts\engine\sp\utility::battlechatter_on("axis");
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0, 1);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideDistortion", 0, 1);
   scripts\engine\utility::flag_set("cctv_end");
   destroynavobstacle(var_2);
 
@@ -1185,7 +1185,7 @@ function focus_ambo_finder() {
 
 function outline_ping() {
   level.stacy scripts\engine\sp\utility::hudoutline_disable("cctv");
-  setsaveddvar("NSNOLMTLLL", "1 1 1 1");
+  setsaveddvar("r_hudOutlineOccludedOutlineColor", "1 1 1 1");
   level endon("player_pushed_focus");
   level endon("cam_switch");
   level.stacy scripts\engine\sp\utility::hudoutline_enable_new("outline_nodepth_red", "cctv");
@@ -1196,14 +1196,14 @@ function outline_ping() {
   var_3 = int(var_1 / var_2);
 
   while(var_3) {
-    setsaveddvar("NSNOLMTLLL", "1 1 1 " + scripts\engine\utility::string(var_0));
+    setsaveddvar("r_hudOutlineOccludedOutlineColor", "1 1 1 " + scripts\engine\utility::string(var_0));
     var_0 -= var_2;
     var_3--;
     wait var_2;
   }
 
   level.stacy scripts\engine\sp\utility::hudoutline_disable("cctv");
-  setsaveddvar("NSNOLMTLLL", "1 1 1 0");
+  setsaveddvar("r_hudOutlineOccludedOutlineColor", "1 1 1 0");
 }
 
 function cctv_save_points() {
@@ -1253,7 +1253,7 @@ function cctv_save_points() {
 
 function hudoutline_cctv_settings() {
   var_0 = [];
-  GscBinSkip0(0x2e, "MKOQSSQKLL", 1.8);
+  GscBinSkip0(0x2e, "r_hudOutlineWidth", 1.8);
 }
 
 function kitchen_enter_init() {

@@ -169,11 +169,11 @@ function setskill(var_0) {
   level.difficultysettings["explosiveDamageMultiplier"]["hardened"] = 1;
   level.difficultysettings["explosiveDamageMultiplier"]["veteran"] = 1;
   level.difficultysettings["explosiveDamageMultiplier"]["realism"] = 1;
-  level.difficultysettings["MSRSPQNQKP"]["easy"] = 0.15;
-  level.difficultysettings["MSRSPQNQKP"]["normal"] = 0.25;
-  level.difficultysettings["MSRSPQNQKP"]["hardened"] = 0.25;
-  level.difficultysettings["MSRSPQNQKP"]["veteran"] = 0.25;
-  level.difficultysettings["MSRSPQNQKP"]["realism"] = 0.25;
+  level.difficultysettings["player_meleeDamageMultiplier"]["easy"] = 0.15;
+  level.difficultysettings["player_meleeDamageMultiplier"]["normal"] = 0.25;
+  level.difficultysettings["player_meleeDamageMultiplier"]["hardened"] = 0.25;
+  level.difficultysettings["player_meleeDamageMultiplier"]["veteran"] = 0.25;
+  level.difficultysettings["player_meleeDamageMultiplier"]["realism"] = 0.25;
   level.difficultysettings["explosivePlantTime"]["easy"] = 10;
   level.difficultysettings["explosivePlantTime"]["normal"] = 10;
   level.difficultysettings["explosivePlantTime"]["hardened"] = 5;
@@ -207,23 +207,23 @@ function setglobaldifficulty() {
   level.explosiveplanttime = scripts\common\gameskill::get_difficultysetting_global("explosivePlantTime");
   anim.min_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_global("min_sniper_burst_delay_time");
   anim.max_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_global("max_sniper_burst_delay_time");
-  setsaveddvar("MPMOMLLQSP", scripts\common\gameskill::get_difficultysetting_global("accuracyDistScale"));
-  level.playermeleedamagemultiplier_dvar = scripts\common\gameskill::get_difficultysetting_global("MSRSPQNQKP");
-  setsaveddvar("MSRSPQNQKP", level.playermeleedamagemultiplier_dvar);
+  setsaveddvar("ai_accuracyDistScale", scripts\common\gameskill::get_difficultysetting_global("accuracyDistScale"));
+  level.playermeleedamagemultiplier_dvar = scripts\common\gameskill::get_difficultysetting_global("player_meleeDamageMultiplier");
+  setsaveddvar("player_meleeDamageMultiplier", level.playermeleedamagemultiplier_dvar);
   scripts\sp\mgturret::setdifficulty();
 
   if(scripts\engine\sp\utility::in_realism_mode()) {
     setomnvar("ui_realism_hud", 1);
-    setsaveddvar("MSQKLQNNSN", 0);
-    setsaveddvar("MTLLLKROOM", 0);
-    setsaveddvar("SMMOTOLTR", 0);
+    setsaveddvar("g_friendlyNameDist", 0);
+    setsaveddvar("mount_hint_enable", 0);
+    setsaveddvar("mantle_draw_hint", 0);
     return;
   }
 
   setomnvar("ui_realism_hud", 0);
-  setsaveddvar("MSQKLQNNSN", 15000);
-  setsaveddvar("MTLLLKROOM", 1);
-  setsaveddvar("SMMOTOLTR", 1);
+  setsaveddvar("g_friendlyNameDist", 15000);
+  setsaveddvar("mount_hint_enable", 1);
+  setsaveddvar("mantle_draw_hint", 1);
 }
 
 function updategameskill() {

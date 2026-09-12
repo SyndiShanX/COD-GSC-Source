@@ -4,12 +4,12 @@
 ************************************************************************/
 
 function main() {
-  setDvar("NPONLLLSPL", 0.25);
-  setDvar("LSNRQTOKRR", 3);
-  setDvar("TMNTMTQRM", 0);
-  setDvar("LKOLRONRNQ", 750);
-  setDvar("TLMMOPMSK", 1);
-  setDvar("MROOOROPKL", 10);
+  setDvar("sm_sunSampleSizeNear", 0.25);
+  setDvar("sm_sunCascadeSizeMultiplier1", 3);
+  setDvar("sm_sunDistantShadows", 0);
+  setDvar("sm_spotDistCull", 750);
+  setDvar("r_spotLightEntityShadows", 1);
+  setDvar("sm_roundRobinPrioritySpotShadows", 10);
   waitframe();
-  setDvar("LTQMSPKRKO", 8);
+  setDvar("sm_spotUpdateLimit", 8);
 }

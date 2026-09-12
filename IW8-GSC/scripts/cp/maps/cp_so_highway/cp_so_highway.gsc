@@ -28,11 +28,11 @@ function main() {
   scripts\vehicle\techo::main("veh8_civ_lnd_techo_rebel", "truck_minimap", "script_vehicle_iw8_truck_techo_rebel");
   scripts\vehicle\techo::main("veh8_civ_lnd_techo_black", "truck_minimap", "script_vehicle_iw8_truck_techo_black");
   scripts\vehicle\mindia8::main("veh8_mil_air_mindia8_open_back_playerride", "mindia8_minimap", "script_vehicle_iw8_mindia8_playerride");
-  setDvar("NPONLLLSPL", 1.25);
-  setDvar("PKKMTTRQO", 4);
-  setDvar("NKLMONNPNN", 2048);
-  setDvar("MROOOROPKL", 8);
-  setDvar("LTQMSPKRKO", 8);
+  setDvar("sm_sunSampleSizeNear", 1.25);
+  setDvar("r_umbraMinObjectContribution", 4);
+  setDvar("r_umbraAccurateOcclusionThreshold", 2048);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotUpdateLimit", 8);
 
   if(level.createfx_enabled) {
     return;

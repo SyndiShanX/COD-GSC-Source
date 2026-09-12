@@ -19,11 +19,11 @@ function main() {
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
   setDvar("r_lightGridEnableTweaks", 1);
   setDvar("r_lightGridIntensity", 1.33);
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NKLMONNPNN", 768);
-  setDvar("NOSQLKNSQO", 40);
-  setDvar("TSPOQPTMS", 256);
-  setDvar("NSSMQLPRNT", 0.01);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_umbraAccurateOcclusionThreshold", 768);
+  setDvar("r_tessellationFactor", 40);
+  setDvar("r_tessellationCutoffFalloff", 256);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
   thread scripts\mp\motiondetectors::init();
   game["attackers"] = "allies";
   game["defenders"] = "axis";

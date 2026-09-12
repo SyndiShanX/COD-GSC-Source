@@ -32,7 +32,7 @@ function exit_demeanor_safe(var_0) {}
 function safe_zoom_think() {
   self endon("entering_new_demeanor");
   self endon("death");
-  self.gestures.safedefaultfov = getdvarint("MRNKTKLLKP");
+  self.gestures.safedefaultfov = getdvarint("cg_targetBaseFov");
   GscBinSkip4(0x35);
 }
 

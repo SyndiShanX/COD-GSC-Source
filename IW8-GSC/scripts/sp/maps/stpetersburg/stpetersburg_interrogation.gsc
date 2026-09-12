@@ -110,7 +110,7 @@ function player_setup() {
   level.player scripts\common\utility::allow_offhand_weapons(0);
   level thread scripts\sp\utility::context_melee_enable(0);
   level.player modifybasefov(55, 0.2);
-  setsaveddvar("MLMROTLMO", 0);
+  setsaveddvar("g_friendlyfireDist", 0);
 }
 
 function family_setup() {
@@ -429,7 +429,7 @@ function interrogation_intro_camera() {
 
 function interrogation_dof_settings(var_0) {
   level endon("intro_skipped");
-  setsaveddvar("SLSMSSTQP", ".1");
+  setsaveddvar("r_dof_physical_minFocusDistance", ".1");
   level.player modifybasefov(65, 0.05);
   level.enforcer thread scripts\engine\sp\utility::dof_enable_autofocus(1.4, 5, undefined, undefined, "tag_eye", undefined, 1);
   wait 17;
@@ -443,7 +443,7 @@ function interrogation_dof_settings(var_0) {
   var_0 thread scripts\engine\sp\utility::dof_enable_autofocus(1.4, 2, undefined, undefined, "tag_eye", undefined, 1);
   wait 2;
   scripts\engine\sp\utility::dof_disable();
-  setsaveddvar("SLSMSSTQP", "9");
+  setsaveddvar("r_dof_physical_minFocusDistance", "9");
 }
 
 function interrogation_cine_letterboxing() {
@@ -1153,7 +1153,7 @@ function player_demeanor_monitor() {
       level.player scripts\engine\sp\utility::set_player_demeanor("relaxed");
       level.player setnextbulletdryfire(1);
       level.player setweaponammoclip(level.revolver, 1);
-      setsaveddvar("MLMROTLMO", 0);
+      setsaveddvar("g_friendlyfireDist", 0);
       break;
     }
 
@@ -1209,7 +1209,7 @@ function switch_family_team_on_intel() {
   scripts\engine\utility::flag_wait("intel_revealed");
   level.enforcerwife.team = "allies";
   level.enforcerson.team = "allies";
-  setsaveddvar("MLMROTLMO", 175);
+  setsaveddvar("g_friendlyfireDist", 175);
   level.enforcerson waittillmatch("single anim", "end");
   target_restore_idle_anim(level.enforcerson);
   temp_performance_flag_clear();
@@ -1427,7 +1427,7 @@ function player_car_enter(var_0) {
     level.player takeweapon(level.revolver);
   }
 
-  setsaveddvar("MLMROTLMO", 175);
+  setsaveddvar("g_friendlyfireDist", 175);
   var_1 = scripts\engine\utility::ter_op(var_0 == "left", "car_interact_left", "car_interact_right");
   interrogation_rig_enable(var_1, "viewhands_hero_kyle_urban", 0.35, level.outeranimnode);
   level.policecar setanimrestart(level.policecar scripts\engine\utility::getanim(var_1));
@@ -1518,7 +1518,7 @@ function player_give_gunless_loadout() {
 
 function player_interrogation_speed_setup() {
   level.player scripts\sp\player::player_movement_state("creep");
-  setsaveddvar("MNPNORMOMP", 0.65);
+  setsaveddvar("player_viewmodelMoveAnimScale", 0.65);
   scripts\engine\sp\utility::player_speed_set(75, 0.5);
 }
 

@@ -122,7 +122,7 @@ function handlenotetrack_vsplayer(var_0, var_1, var_2) {
               var_11 = 10;
               var_12 = 0.7;
               var_13 = 0.5;
-              setsaveddvar("MSRSPQNQKP", 0.05);
+              setsaveddvar("player_meleeDamageMultiplier", 0.05);
             }
 
             var_15 = self melee(undefined, var_8, sqrt(var_7), var_9, var_10);
@@ -145,7 +145,7 @@ function handlenotetrack_vsplayer(var_0, var_1, var_2) {
             }
 
             if(var_14) {
-              setsaveddvar("MSRSPQNQKP", level.playermeleedamagemultiplier_dvar);
+              setsaveddvar("player_meleeDamageMultiplier", level.playermeleedamagemultiplier_dvar);
             }
           } else {
             self.nextmeleechecktime = gettime() + randomintrange(3000, 5000);

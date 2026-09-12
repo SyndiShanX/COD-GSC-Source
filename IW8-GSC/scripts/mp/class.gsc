@@ -2849,7 +2849,7 @@ function loadout_lognewlygivenloadout(var_0, var_1, var_2) {
     thread setmlgspectatorclientloadoutdata(self, var_1);
   }
 
-  if(getdvarint("TLRPKRKMS") == 0) {
+  if(getdvarint("online_matchdata_enabled") == 0) {
     return;
   }
 

@@ -1569,7 +1569,7 @@ function nuke_launchmissile(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = var_5;
   }
 
-  var_8 = (0, 0, -1 * getdvarint("NPOQPMP", 800));
+  var_8 = (0, 0, -1 * getdvarint("bg_gravity", 800));
   var_9 = (var_3 - 0.5 * var_8 * squared(var_4) - var_2) / var_4;
   level.nuke_missile = magicgrenademanual(var_7, var_2, var_9, var_4);
   level.nuke_missile setscriptablepartstate("launch", "on", 0);

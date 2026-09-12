@@ -13,8 +13,8 @@ function main() {
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_broadcast2", "codcaster_compass_map_mp_broadcast2");
-  setDvar("NKLMONNPNN", 512);
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraAccurateOcclusionThreshold", 512);
+  setDvar("r_umbraMinObjectContribution", 8);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

@@ -984,7 +984,7 @@ function lerp_playerspeed_fov_on_ladder() {
 
     if(level.player isonladder()) {
       if(!var_2) {
-        thread scripts\engine\sp\utility::lerp_saveddvar("LOMLPPTKO", 20, 3);
+        thread scripts\engine\sp\utility::lerp_saveddvar("player_view_pitch_down", 20, 3);
         scripts\sp\maps\townhoused\townhoused_lighting::player_onkitchenladder();
         level.player scripts\engine\sp\utility::player_speed_set(40, 0.5);
         var_2 = 1;
@@ -993,7 +993,7 @@ function lerp_playerspeed_fov_on_ladder() {
       level.player scripts\engine\sp\utility::blend_movespeedscale(1);
     } else {
       if(var_2) {
-        setsaveddvar("LOMLPPTKO", 85);
+        setsaveddvar("player_view_pitch_down", 85);
         scripts\sp\maps\townhoused\townhoused_lighting::player_offkitchenladder();
         scripts\sp\player::player_movement_state("creep");
         var_2 = 0;
@@ -1013,7 +1013,7 @@ function lerp_playerspeed_fov_on_ladder() {
   level.player modifybasefov(55, 0.2);
   scripts\sp\player::player_movement_state("creep");
   level.player scripts\engine\sp\utility::blend_movespeedscale(0.666);
-  setsaveddvar("LOMLPPTKO", 85);
+  setsaveddvar("player_view_pitch_down", 85);
 }
 
 function kitchen_mantle_thread() {
@@ -2184,7 +2184,7 @@ function cansee_vertical(var_0, var_1, var_2) {
 }
 
 function cansee_point(var_0) {
-  var_1 = isDefined(level.player worldpointtoscreenpos(var_0, getdvarint("MRNKTKLLKP")));
+  var_1 = isDefined(level.player worldpointtoscreenpos(var_0, getdvarint("cg_targetBaseFov")));
 
   if(var_1) {}
 
@@ -5119,7 +5119,7 @@ function attic_bink_start() {
   level.player setclienttriggeraudiozone("fade_to_black", 1.6);
   pausecinematicingame(0);
   wait 1.4;
-  setsaveddvar("MMRNLMPPLT", "1");
+  setsaveddvar("bg_cinematicFullscreen", "1");
   scripts\engine\utility::flag_set("end_scene_done");
 }
 
@@ -5129,9 +5129,9 @@ function ending_bink_init() {
   var_1 = var_0 + 1;
   var_2 = scripts\sp\endmission::getlevelbink(var_1);
   level.endmission_bink_skip = 1;
-  setsaveddvar("LNSNKKLPLL", "0");
-  setsaveddvar("MMRNLMPPLT", "0");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicAboveUI", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
+  setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame(var_2, 1, 1, 1, 0, 0, 1);
 }
 

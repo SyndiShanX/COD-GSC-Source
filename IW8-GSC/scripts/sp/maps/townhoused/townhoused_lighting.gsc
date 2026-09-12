@@ -20,7 +20,7 @@ function main() {
 function init_2ndfloor_muzzle_flash() {
   var_0 = getEntArray("2nd_floor_muzzle_light", "targetname");
 
-  if(getdvarint("LLQQOPKTKM") > 0) {
+  if(getdvarint("r_reflectionProbeGenerate") > 0) {
     foreach(var_2 in var_0) {
       var_2 delete();
     }
@@ -37,13 +37,13 @@ function init_2ndfloor_muzzle_flash() {
 }
 
 function lt_backyard_start() {
-  setsaveddvar("LKOLRONRNQ", 450);
+  setsaveddvar("sm_spotDistCull", 450);
   thread house_exterior_dof();
   thread stack_up_wooden_gate();
 }
 
 function lt_kitchen_start() {
-  setsaveddvar("LKOLRONRNQ", 750);
+  setsaveddvar("sm_spotDistCull", 750);
   thread house_exterior_dof();
   thread deploy_ladder();
 }
@@ -128,28 +128,28 @@ function onflag_restore_intensity(var_0, var_1, var_2) {
 function lighting_setup_dvars() {
   level.front_door_light = getEnt("front_door_light", "targetname");
   level.front_door_light setlightintensity(0);
-  setsaveddvar("MPOKKOPMTN", "64 128 256 512");
-  setsaveddvar("NPONLLLSPL", 0.2);
-  setsaveddvar("LSNRQTOKRR", 1);
-  setsaveddvar("LTQMSPKRKO", 6);
-  level.spotupdatelimit = getdvarint("LTQMSPKRKO");
-  setsaveddvar("MROOOROPKL", 7);
-  level.roundrobinlimit = getdvarint("MROOOROPKL");
+  setsaveddvar("r_volumetricDepth", "64 128 256 512");
+  setsaveddvar("sm_sunSampleSizeNear", 0.2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 1);
+  setsaveddvar("sm_spotUpdateLimit", 6);
+  level.spotupdatelimit = getdvarint("sm_spotUpdateLimit");
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 7);
+  level.roundrobinlimit = getdvarint("sm_roundRobinPrioritySpotShadows");
 
-  if(getdvarint("LLQQOPKTKM") > 0) {
+  if(getdvarint("r_reflectionProbeGenerate") > 0) {
     return;
   }
 
   if(level.start_point != "backyard_intro" && level.start_point != "backyard" && level.start_point != "kitchen") {
     wait 2;
-    setsaveddvar("LKOLRONRNQ", 375);
+    setsaveddvar("sm_spotDistCull", 375);
     return;
   }
 }
 
 function lt_backyard_intro_start() {
   wait 0;
-  setsaveddvar("LKOLRONRNQ", 450);
+  setsaveddvar("sm_spotDistCull", 450);
   level.player enablephysicaldepthoffieldscripting();
   level.player setphysicaldepthoffield(2, 50, 20, 20);
   wait 0.5;
@@ -173,18 +173,18 @@ function lt_backyard_intro_start() {
 
 function stack_up_wooden_gate() {
   scripts\engine\utility::flag_wait("lt_wooden_gate");
-  setsaveddvar("LKOLRONRNQ", 750);
+  setsaveddvar("sm_spotDistCull", 750);
   thread deploy_ladder();
 }
 
 function deploy_ladder() {
   scripts\engine\utility::flag_wait("player_deploying_kitchen_ladder");
-  setsaveddvar("LKOLRONRNQ", 350);
+  setsaveddvar("sm_spotDistCull", 350);
   scripts\engine\sp\utility::dof_enable(2, 15, 5, 5, undefined, undefined);
   wait 3.25;
   thread house_exterior_dof();
   scripts\engine\utility::flag_wait("lt_kitchen_visible");
-  setsaveddvar("LKOLRONRNQ", 375);
+  setsaveddvar("sm_spotDistCull", 375);
   scripts\engine\utility::flag_wait("player_in_kitchen");
   thread set_sun_disable();
   level thread scripts\engine\sp\utility::dof_disable_autofocus();
@@ -231,8 +231,8 @@ function light_on_touching() {
 
 function price_ending_cinematic() {
   thread price_lighting();
-  setsaveddvar("MPOKKOPMTN", "32 64 128 256");
-  setsaveddvar("LKOLRONRNQ", 100);
+  setsaveddvar("r_volumetricDepth", "32 64 128 256");
+  setsaveddvar("sm_spotDistCull", 100);
   visionsetnaked("townhoused_int_attic_price", 1.5);
   level.player enablephysicaldepthoffieldscripting();
 
@@ -348,9 +348,9 @@ function set_sun_enable_disable() {
 }
 
 function set_sun_enable() {
-  setsaveddvar("MQRQQONQSL", 1);
-  setsaveddvar("NPONLLLSPL", 0.175);
-  setsaveddvar("LSNRQTOKRR", 1);
+  setsaveddvar("sm_sunEnable", 1);
+  setsaveddvar("sm_sunSampleSizeNear", 0.175);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 1);
   setsuncolorandintensity(0.002);
 }
 
@@ -358,8 +358,8 @@ function set_sun_disable() {
   setsuncolorandintensity(0);
   waitframe();
   waitframe();
-  setsaveddvar("MQRQQONQSL", 0);
-  setsaveddvar("LSNRQTOKRR", 2);
+  setsaveddvar("sm_sunEnable", 0);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
 }
 
 function set_train_moment_shadows() {

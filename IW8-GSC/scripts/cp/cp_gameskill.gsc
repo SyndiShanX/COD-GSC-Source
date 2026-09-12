@@ -200,7 +200,7 @@ function setglobaldifficulty() {
   anim.pain_test = scripts\common\gameskill::get_difficultysetting_global("pain_test");
   anim.min_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_global("min_sniper_burst_delay_time");
   anim.max_sniper_burst_delay_time = scripts\common\gameskill::get_difficultysetting_global("max_sniper_burst_delay_time");
-  setsaveddvar("MPMOMLLQSP", scripts\common\gameskill::get_difficultysetting_global("accuracyDistScale"));
+  setsaveddvar("ai_accuracyDistScale", scripts\common\gameskill::get_difficultysetting_global("accuracyDistScale"));
 }
 
 function updategameskill() {
@@ -287,7 +287,7 @@ function wave_difficulty_update(var_0) {
   anim.pain_test = level.difficultysettings["pain_test"][var_1];
   anim.min_sniper_burst_delay_time = level.difficultysettings["min_sniper_burst_delay_time"][var_1];
   anim.max_sniper_burst_delay_time = level.difficultysettings["max_sniper_burst_delay_time"][var_1];
-  setsaveddvar("MPMOMLLQSP", level.difficultysettings["accuracyDistScale"][var_1]);
+  setsaveddvar("ai_accuracyDistScale", level.difficultysettings["accuracyDistScale"][var_1]);
 }
 
 function update_player_attacker_accuracy() {

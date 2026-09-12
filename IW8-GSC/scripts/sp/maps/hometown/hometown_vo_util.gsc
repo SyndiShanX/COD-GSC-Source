@@ -2186,7 +2186,7 @@ function display_ai_keys(var_0) {
         continue;
       }
 
-      var_6 = level.player worldpointtoscreenpos(var_5.origin + (0, 0, 40), getdvarint("MRNKTKLLKP"));
+      var_6 = level.player worldpointtoscreenpos(var_5.origin + (0, 0, 40), getdvarint("cg_targetBaseFov"));
 
       if(!isDefined(var_6) || !var_5 scripts\engine\utility::hastag(var_5.model, "j_head")) {
         continue;

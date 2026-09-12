@@ -66,7 +66,7 @@ function remote_vehicle_setup() {
   }
 
   level.bot_vanguard_height_trace_size = var_8 - level.bot_map_min_z + 100;
-  level.heli_pilot_missile_radius = getdvarfloat("OKMPLOMTNM");
+  level.heli_pilot_missile_radius = getdvarfloat("bg_bulletExplRadius");
 
   while(!isDefined(level.odin_marking_flash_radius_max) || !isDefined(level.odin_marking_flash_radius_min)) {
     wait 0.05;

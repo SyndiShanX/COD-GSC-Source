@@ -58,7 +58,7 @@ function createloopsound() {
   var_0.v["origin"] = (0, 0, 0);
   var_0.v["server_culled"] = 1;
 
-  if(getDvar("MKOSOKPQPP") != "1") {
+  if(getDvar("serverCulledSounds") != "1") {
     var_0.v["server_culled"] = 0;
   }
 
@@ -217,7 +217,7 @@ function init_level_variables() {
   level._createfx.axismode = 0;
   level._createfx.select_by_name = 0;
   level._createfx.drawaxis = 1;
-  level._createfx.player_speed = getdvarfloat("NSRPQNLSNK");
+  level._createfx.player_speed = getdvarfloat("g_speed");
   set_player_speed_hud();
 }
 
@@ -261,7 +261,7 @@ function createfxlogic() {
 
   if(getDvar("createfx_use_f4") == "") {}
 
-  if(getDvar("LSKQLLQTQK") == "") {}
+  if(getDvar("createfx_no_autosave") == "") {}
 
   level.createfx_draw_enabled = 1;
   level.last_displayed_ent = undefined;
@@ -905,10 +905,10 @@ function set_off_exploders() {
 function draw_distance() {
   var_0 = 0;
 
-  if(getdvarint("OLKQQMLKTO") == 0) {}
+  if(getdvarint("createfx_drawdist") == 0) {}
 
   for(;;) {
-    var_1 = getdvarint("OLKQQMLKTO");
+    var_1 = getdvarint("createfx_drawdist");
     var_1 *= var_1;
 
     for(var_2 = 0; var_2 < level.createfxent.size; var_2++) {
@@ -929,13 +929,13 @@ function draw_distance() {
 }
 
 function createfx_autosave() {
-  setdvarifuninitialized("LLSKKNPTRM", "300");
+  setdvarifuninitialized("createfx_autosave_time", "300");
 
   for(;;) {
-    wait getdvarint("LLSKKNPTRM");
+    wait getdvarint("createfx_autosave_time");
     scripts\engine\utility::flag_waitopen("createfx_saving");
 
-    if(getdvarint("LSKQLLQTQK")) {
+    if(getdvarint("createfx_no_autosave")) {
       continue;
     }
 

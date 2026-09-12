@@ -612,7 +612,7 @@ function ref_13b4c(var_0, var_1) {
   var_2 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_1, self.origin, self.angles, var_0, undefined, undefined, undefined, 1);
   var_3 = var_2.origin;
   var_4 = abs(self.origin[2] - var_3[2]);
-  var_5 = getdvarint("NPOQPMP", 800);
+  var_5 = getdvarint("bg_gravity", 800);
   var_6 = sqrt(2 * var_4 / var_5) + 0.5;
   var_7 = trajectorycalculateinitialvelocity(self.origin, var_3, (0, 0, -1 * var_5), var_6);
   self movegravity(var_7, var_6);

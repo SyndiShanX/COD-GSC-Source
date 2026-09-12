@@ -553,7 +553,7 @@ function getwingamebytype() {
 
 function issimultaneouskillenabled() {
   if(!isDefined(level.simultaneouskillenabled)) {
-    level.simultaneouskillenabled = getdvarint("MRSNQSMSPL", 0) == 0;
+    level.simultaneouskillenabled = getdvarint("killswitch_simultaneous_deaths", 0) == 0;
   }
 
   return level.simultaneouskillenabled;
@@ -850,11 +850,11 @@ function onlinestatsenabled() {
 }
 
 function privatematch() {
-  return level.onlinegame && getdvarint("LSTLQTSSRM");
+  return level.onlinegame && getdvarint("xblive_privatematch");
 }
 
 function lobbyteamselectenabled() {
-  return level.systemlink || privatematch() && getdvarint("NQORMNOQQM", 0) || function_0426();
+  return level.systemlink || privatematch() && getdvarint("lobby_team_select", 0) || function_0426();
 }
 
 function matchmakinggame() {
@@ -1150,7 +1150,7 @@ function setcommonrulesfrommatchrulesdata(var_0) {
     setdynamicdvar("scr_team_fftype", getmatchrulesdata("commonOption", "friendlyFire"));
   }
 
-  setDvar("MPOKQNLPRM", getdvarint("scr_game_forceuav") == 1);
+  setDvar("bg_compassShowEnemies", getdvarint("scr_game_forceuav") == 1);
   setdynamicdvar("scr_" + getgametype() + "_enemyDeathLoc", getmatchrulesdata("commonOption", "enemyDeathLoc"));
   setdynamicdvar("scr_" + getgametype() + "_pointsPerKill", getmatchrulesdata("commonOption", "pointsPerKill"));
   setdynamicdvar("scr_" + getgametype() + "_pointsPerDeath", getmatchrulesdata("commonOption", "pointsPerDeath"));
@@ -1162,7 +1162,7 @@ function setcommonrulesfrommatchrulesdata(var_0) {
 
   if(privatematch() || level.systemlink || isanymlgmatch()) {
     level.codcasterenabled = getmatchrulesdata("commonOption", "codcasterEnabled");
-    setDvar("MOSNOQPOSS", level.codcasterenabled);
+    setDvar("com_codcasterEnabled", level.codcasterenabled);
     setdynamicdvar("scr_game_matchStartTime", getmatchrulesdata("commonOption", "matchStartTime"));
     setdynamicdvar("scr_game_roundStartTime", getmatchrulesdata("commonOption", "roundStartTime"));
     return;
@@ -1221,16 +1221,16 @@ function gamehasneutralcrateowner(var_0) {
 
 function isanymlgmatch() {
   if(isusingmatchrulesdata()) {
-    if(getdvarint("NTLNTTNNLQ") == 0 && getmatchrulesdata("cwlRulesEnabled") == 1) {
+    if(getdvarint("killswitch_CDL_restriction_ingame") == 0 && getmatchrulesdata("cwlRulesEnabled") == 1) {
       return true;
     }
   }
 
-  return getdvarint("LOMTKQTRTM") || istrue(level.get_wave_max_count);
+  return getdvarint("xblive_competitionmatch") || istrue(level.get_wave_max_count);
 }
 
 function ismlgsystemlink() {
-  if(level.systemlink && (getdvarint("LOMTKQTRTM") || istrue(level.get_wave_max_count))) {
+  if(level.systemlink && (getdvarint("xblive_competitionmatch") || istrue(level.get_wave_max_count))) {
     return true;
   }
 
@@ -1238,7 +1238,7 @@ function ismlgsystemlink() {
 }
 
 function ismlgprivatematch() {
-  if(privatematch() && (getdvarint("LOMTKQTRTM") || istrue(level.get_wave_max_count))) {
+  if(privatematch() && (getdvarint("xblive_competitionmatch") || istrue(level.get_wave_max_count))) {
     return true;
   }
 
@@ -1394,7 +1394,7 @@ function runleanthreadmode() {
 }
 
 function issquadmode() {
-  return getdvarint("RRNTNNKNP", 0) > 1;
+  return getdvarint("party_maxSquadSize", 0) > 1;
 }
 
 function gamehasinfil() {
@@ -1504,18 +1504,18 @@ function repair_grill_start_enter_foley_sfx() {
 
 function updateobjectivetext() {
   if(self.pers["team"] == "spectator") {
-    self setclientdvar("MSRPQTQOOK", "");
+    self setclientdvar("cg_objectiveText", "");
     return;
   }
 
   if(level.roundscorelimit > 0 && !isobjectivebased()) {
     if(isDefined(getobjectivescoretext(self.pers["team"]))) {
       if(level.splitscreen) {
-        self setclientdvar("MSRPQTQOOK", getobjectivescoretext(self.pers["team"]));
+        self setclientdvar("cg_objectiveText", getobjectivescoretext(self.pers["team"]));
         return;
       }
 
-      self setclientdvar("MSRPQTQOOK", getobjectivescoretext(self.pers["team"]), level.roundscorelimit);
+      self setclientdvar("cg_objectiveText", getobjectivescoretext(self.pers["team"]), level.roundscorelimit);
       return;
     }
 
@@ -1523,7 +1523,7 @@ function updateobjectivetext() {
   }
 
   if(isDefined(getobjectivetext(self.pers["team"]))) {
-    self setclientdvar("MSRPQTQOOK", getobjectivetext(self.pers["team"]));
+    self setclientdvar("cg_objectiveText", getobjectivetext(self.pers["team"]));
     return;
   }
 }

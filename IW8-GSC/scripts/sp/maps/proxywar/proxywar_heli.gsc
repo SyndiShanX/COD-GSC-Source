@@ -34,7 +34,7 @@ function intro_setup() {
   level.infilhelipartnerref = scripts\engine\utility::getStruct("ap_infil_heli_partner", "targetname");
   thread heli_letter_boxing();
   thread scripts\sp\maps\proxywar\proxywar_util::set_wind(3, 0.2, 3, 40, 1);
-  setsaveddvar("NQQSKRQMTS", 0);
+  setsaveddvar("r_reactiveMotionVelocityTailScale", 0);
   level.playerheli = scripts\common\vehicle::spawn_vehicle_from_targetname("infil_heli_player");
   setup_heli(level.playerheli, "infil_heli_player");
   thread attach_player_to_heli();
@@ -71,14 +71,14 @@ function heli_approach_main() {
   thread alpha_team_enter(level.alpha_team);
   scripts\engine\utility::array_thread(level.bravo_team, &allies_approach, level.partnerheli);
   thread wait_infil_player_anim();
-  var_1 = getDvar("OMNONNMOTP");
-  setsaveddvar("OMNONNMOTP", "0.1 500 1.5 1000");
+  var_1 = getDvar("r_zPlanes");
+  setsaveddvar("r_zPlanes", "0.1 500 1.5 1000");
   level.player scripts\engine\utility::delaycall(0.388, &playsound, "scn_wp_intro_heli1_close_lr");
   level.playerheli scripts\engine\utility::delaycall(0.388, &playsound, "scn_wp_intro_heli1_lr");
   level.partnerheli scripts\engine\utility::delaycall(0.388, &playsound, "scn_wp_intro_hel2_lr");
   level scripts\engine\utility::delaythread(12, &audio_clear_audio_zone_heli);
   level.playerheli scripts\common\anim::anim_single_solo(level.player_rig, "infil_player");
-  setsaveddvar("OMNONNMOTP", var_1);
+  setsaveddvar("r_zPlanes", var_1);
   level.player_rig unlink();
   scripts\sp\player_rig::unlink_player_from_rig();
   thread scripts\sp\player::player_movement_state("creep");

@@ -576,10 +576,10 @@ function pull_player_out_of_rig_hide_rig_no_stance_mod(var_0) {
 }
 
 function reactive_foliage_med() {
-  setsaveddvar("NSKKMRPOQQ", 100);
-  setsaveddvar("NMQSKQNQLR", 100);
-  setsaveddvar("MPLOLNMSRO", 150);
-  setsaveddvar("NMQSKQNQLR", 10);
+  setsaveddvar("r_reactiveMotionEffectorStrengthScale", 100);
+  setsaveddvar("r_reactiveMotionActorVelocityMax", 100);
+  setsaveddvar("r_reactiveMotionActorRadius", 150);
+  setsaveddvar("r_reactiveMotionActorVelocityMax", 10);
 
   while(isDefined(level.lerpingreactivefoliage)) {
     iprintln("already lerping reactive foliage");
@@ -589,8 +589,8 @@ function reactive_foliage_med() {
   level.lerpingreactivefoliage = 1;
   level.reactivefoliagestate = "med";
   var_0 = 1;
-  thread scripts\engine\sp\utility::lerp_saveddvar("MRNRKKOPLN", 0.5, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("MQPQKNPQOK", 0.5, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindFrequencyScale", 0.5, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindAmplitudeScale", 0.5, var_0);
   wait var_0;
   level.lerpingreactivefoliage = undefined;
 }
@@ -891,7 +891,7 @@ function heli_shake_stop() {
 }
 
 function within_player_fov(var_0) {
-  return scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0, cos(getdvarfloat("MRNKTKLLKP")));
+  return scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0, cos(getdvarfloat("cg_targetBaseFov")));
 }
 
 function civ_friendly_fire_think() {
@@ -2085,7 +2085,7 @@ function is_looking_at(var_0, var_1, var_2, var_3) {
     var_4 = var_2;
   }
 
-  var_5 = level.player worldpointtoscreenpos(var_4, getdvarint("MRNKTKLLKP"));
+  var_5 = level.player worldpointtoscreenpos(var_4, getdvarint("cg_targetBaseFov"));
 
   if(!isDefined(var_5)) {
     return 0;

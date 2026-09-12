@@ -1872,35 +1872,35 @@ function helicopter_firendly_dmg_text_display(var_0, var_1) {
 }
 
 function stimmodelattached(var_0) {
-  var_1 = getdvarfloat("LKOLRONRNQ");
-  var_2 = getdvarint("LTQMSPKRKO");
-  var_3 = getdvarint("MROOOROPKL");
-  var_4 = getdvarfloat("NPONLLLSPL");
-  setDvar("LKOLRONRNQ", 1000);
-  setDvar("LTQMSPKRKO", 6);
-  setDvar("MROOOROPKL", 8);
-  setDvar("NPONLLLSPL", 0.25);
+  var_1 = getdvarfloat("sm_spotDistCull");
+  var_2 = getdvarint("sm_spotUpdateLimit");
+  var_3 = getdvarint("sm_roundRobinPrioritySpotShadows");
+  var_4 = getdvarfloat("sm_sunSampleSizeNear");
+  setDvar("sm_spotDistCull", 1000);
+  setDvar("sm_spotUpdateLimit", 6);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_sunSampleSizeNear", 0.25);
   var_0 scripts\engine\utility::waittill_either("infil_reset_light_dvars", "stopScene");
-  setDvar("LKOLRONRNQ", var_1);
-  setDvar("LTQMSPKRKO", var_2);
-  setDvar("MROOOROPKL", var_3);
-  setDvar("NPONLLLSPL", var_4);
+  setDvar("sm_spotDistCull", var_1);
+  setDvar("sm_spotUpdateLimit", var_2);
+  setDvar("sm_roundRobinPrioritySpotShadows", var_3);
+  setDvar("sm_sunSampleSizeNear", var_4);
 }
 
 function stompeenemyprogressupdate(var_0) {
-  var_1 = getdvarfloat("LKOLRONRNQ");
-  var_2 = getdvarint("LTQMSPKRKO");
-  var_3 = getdvarint("MROOOROPKL");
-  var_4 = getdvarfloat("NPONLLLSPL");
-  setDvar("LKOLRONRNQ", 1000);
-  setDvar("LTQMSPKRKO", 8);
-  setDvar("MROOOROPKL", 8);
-  setDvar("NPONLLLSPL", 0.25);
+  var_1 = getdvarfloat("sm_spotDistCull");
+  var_2 = getdvarint("sm_spotUpdateLimit");
+  var_3 = getdvarint("sm_roundRobinPrioritySpotShadows");
+  var_4 = getdvarfloat("sm_sunSampleSizeNear");
+  setDvar("sm_spotDistCull", 1000);
+  setDvar("sm_spotUpdateLimit", 8);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_sunSampleSizeNear", 0.25);
   var_0 scripts\engine\utility::waittill_either("infil_reset_light_dvars", "stopScene");
-  setDvar("LKOLRONRNQ", var_1);
-  setDvar("LTQMSPKRKO", var_2);
-  setDvar("MROOOROPKL", var_3);
-  setDvar("NPONLLLSPL", var_4);
+  setDvar("sm_spotDistCull", var_1);
+  setDvar("sm_spotUpdateLimit", var_2);
+  setDvar("sm_roundRobinPrioritySpotShadows", var_3);
+  setDvar("sm_sunSampleSizeNear", var_4);
 }
 
 function givecustomloadout(var_0) {
@@ -1999,7 +1999,7 @@ function ref_12442(var_0, var_1) {
     var_0.gas_trap_weapon = "j_prop_" + var_10.infilanimindex;
     var_10 cameraunlink();
     var_10 cameralinkTo(var_0.cameraent, var_0.gas_trap_weapon, 1, 1);
-    var_10 setclientdvar("QTSPTNLOL", var_2);
+    var_10 setclientdvar("cg_fov", var_2);
     var_10 enablephysicaldepthoffieldscripting();
     var_10 setphysicaldepthoffield(var_3, var_4, var_5, var_6);
     var_10 scripts\mp\utility\player::_freezelookcontrols(1);
@@ -2087,7 +2087,7 @@ function ref_12459(var_0, var_1, var_2, var_3) {
     var_13 = "j_prop_1";
     var_11 cameraunlink();
     var_11 cameralinkTo(var_12, var_13, 1, 1);
-    var_11 setclientdvar("QTSPTNLOL", var_4);
+    var_11 setclientdvar("cg_fov", var_4);
     var_11 setclientdvar("LTMOQONPQ", 1);
     var_11 enablephysicaldepthoffieldscripting();
     var_11 setphysicaldepthoffield(var_5, var_6, var_7, var_8);
@@ -2216,7 +2216,7 @@ function ref_12764(var_0, var_1, var_2, var_3) {
     var_14 = "j_prop_1";
     var_12 cameraunlink();
     var_12 cameralinkTo(var_13, var_14, 1, 1);
-    var_12 setclientdvar("QTSPTNLOL", var_4);
+    var_12 setclientdvar("cg_fov", var_4);
     var_12 setclientdvar("LTMOQONPQ", 1);
     var_12 enablephysicaldepthoffieldscripting();
     var_12 setphysicaldepthoffield(var_5, var_6, var_7, var_8);
@@ -2439,7 +2439,7 @@ function ref_13ce8(var_0, var_1) {
       var_0.gas_trap_weapon = "j_prop_" + var_9.infilanimindex;
       var_9 cameraunlink();
       var_9 cameralinkTo(var_0.gas_trigger, var_0.gas_trap_weapon, 1, 1);
-      var_9 setclientdvar("QTSPTNLOL", var_2);
+      var_9 setclientdvar("cg_fov", var_2);
       var_9 setphysicaldepthoffield(var_3, var_4, var_5, var_6);
     }
 
@@ -2531,7 +2531,7 @@ function ref_13ce9(var_0, var_1) {
       var_11 = "j_prop_1";
       var_9 cameraunlink();
       var_9 cameralinkTo(var_10, var_11, 1, 1);
-      var_9 setclientdvar("QTSPTNLOL", var_2);
+      var_9 setclientdvar("cg_fov", var_2);
       var_9 setclientdvar("LTMOQONPQ", 0);
       var_9 setphysicaldepthoffield(var_3, var_4, var_5, var_6);
     }
@@ -2625,7 +2625,7 @@ function ref_13cf1(var_0, var_1) {
       var_11 = "j_prop_1";
       var_9 cameraunlink();
       var_9 cameralinkTo(var_10, var_11, 1, 1);
-      var_9 setclientdvar("QTSPTNLOL", var_2);
+      var_9 setclientdvar("cg_fov", var_2);
       var_9 setclientdvar("LTMOQONPQ", 0);
       var_9 setphysicaldepthoffield(var_3, var_4, var_5, var_6);
     }
@@ -2703,7 +2703,7 @@ function mp_m_speed_patch(var_0, var_1) {
 
     var_4 calloutmarkerping_getcreatedtime(0);
     var_4 cameraunlink();
-    var_4 setclientdvar("QTSPTNLOL", 65);
+    var_4 setclientdvar("cg_fov", 65);
     var_4 disablephysicaldepthoffieldscripting();
     var_4 scripts\mp\utility\player::setdof_default();
   }
@@ -2727,7 +2727,7 @@ function mp_m_trench_patch_giveplayer_c4(var_0, var_1) {
 
     var_4 calloutmarkerping_getcreatedtime(0);
     var_4 cameraunlink();
-    var_4 setclientdvar("QTSPTNLOL", 65);
+    var_4 setclientdvar("cg_fov", 65);
     var_4 setclientdvar("LTMOQONPQ", 0);
     var_4 disablephysicaldepthoffieldscripting();
     var_4 scripts\mp\utility\player::setdof_default();
@@ -2753,7 +2753,7 @@ function neverspectate(var_0, var_1) {
 
     var_4 calloutmarkerping_getcreatedtime(0);
     var_4 cameraunlink();
-    var_4 setclientdvar("QTSPTNLOL", 65);
+    var_4 setclientdvar("cg_fov", 65);
     var_4 disablephysicaldepthoffieldscripting();
     var_4 scripts\mp\utility\player::setdof_default();
   }

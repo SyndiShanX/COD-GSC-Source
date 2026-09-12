@@ -282,7 +282,7 @@ function process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5
 
   var_33 = var_5.basename;
 
-  if(getDvar("NSQLTTMRMP") == "cp_rave") {
+  if(getDvar("ui_mapname") == "cp_rave") {
     if(isDefined(self.agent_type) && self.agent_type == "zombie_sasquatch") {
       processmerit(var_2, "mt_dlc1_sasquatch_kills");
     }
@@ -310,7 +310,7 @@ function process_agent_on_killed_merits(var_0, var_1, var_2, var_3, var_4, var_5
     }
   }
 
-  if(getDvar("NSQLTTMRMP") == "cp_disco") {
+  if(getDvar("ui_mapname") == "cp_disco") {
     if(var_33 == "iw7_katana_zm_pap2+camo222" || var_33 == "iw7_katana_windforce_zm") {
       processmerit(var_2, "mt_dlc2_pap2_katana");
     } else if(var_33 == "iw7_nunchucks_zm_pap2+camo222") {

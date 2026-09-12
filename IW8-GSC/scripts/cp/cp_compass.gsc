@@ -13,7 +13,7 @@ function setupminimap(var_0, var_1) {
   }
 
   var_3 = [var_4[0], var_4[1]];
-  var_5 = getDvar("NSQLTTMRMP");
+  var_5 = getDvar("ui_mapname");
 
   switch (var_5) {
     case "cp_dntsk_raid":

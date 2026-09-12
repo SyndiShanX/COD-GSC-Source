@@ -368,9 +368,9 @@ function carried_main() {
   thread carried_mix_wait();
 
   if(level.player ispcplayer()) {
-    setsaveddvar("OMNONNMOTP", "0.1 400 0.75 1000");
+    setsaveddvar("r_zPlanes", "0.1 400 0.75 1000");
   } else {
-    setsaveddvar("OMNONNMOTP", "0.1 400 3.25 1000");
+    setsaveddvar("r_zPlanes", "0.1 400 3.25 1000");
   }
 
   if(level.start_point == "carried_start") {

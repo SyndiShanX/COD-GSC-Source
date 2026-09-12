@@ -979,7 +979,7 @@ function tryrunnextobjective(var_0, var_1) {
     var_1 = 1;
   }
 
-  if(getDvar("MOLPOSLOMO") == "cp_survival" && var_0.questtype == "primary") {
+  if(getDvar("ui_gametype") == "cp_survival" && var_0.questtype == "primary") {
     if(var_1 && isDefined(var_0.nextsteps) && var_0.nextsteps.size > 0) {
       thread run_objective(var_0.nextsteps[0], var_0.questtype);
       return;

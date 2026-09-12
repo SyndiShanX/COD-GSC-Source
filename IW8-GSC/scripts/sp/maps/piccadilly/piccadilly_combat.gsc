@@ -58,14 +58,14 @@ function start_right_underground() {
 }
 
 function catchup() {
-  setsaveddvar("TSSONTORK", 0);
+  setsaveddvar("r_reflectionProbeLightingEnabled", 0);
   scripts\engine\utility::exploder("spec");
   scripts\engine\utility::flag_set("combat_start");
   level.player.participation += 200;
 }
 
 function main() {
-  setsaveddvar("TSSONTORK", 0);
+  setsaveddvar("r_reflectionProbeLightingEnabled", 0);
   scripts\engine\utility::flag_wait("init_done");
   scripts\engine\sp\utility::array_spawn_function_targetname("middle_lotus_enemies", &lotus_decho_audio);
   scripts\engine\sp\utility::array_spawn_function_targetname("obj_frontline", &frontline_police_logic);

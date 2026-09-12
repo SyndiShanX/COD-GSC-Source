@@ -6,7 +6,7 @@
 function main() {
   var_0 = createmission();
   level.missionsettings = var_0;
-  level.lowestgameskill = getdvarint("TTMRSTRO");
+  level.lowestgameskill = getdvarint("g_gameskill");
   var_1 = undefined;
   addlevel("proxywar", 0, var_1, 1, var_1, 10, 100, var_1, var_1, 0);
   addlevel("piccadilly", 0, var_1, 1, var_1, 10, 100, var_1, var_1, 0);
@@ -100,9 +100,9 @@ function nextmission_primeloadbink_internal() {
 
   var_0 = getlevelindex(level.script) + 1;
   var_1 = getlevelbink(var_0);
-  setsaveddvar("LNSNKKLPLL", "0");
-  setsaveddvar("MMRNLMPPLT", "0");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicAboveUI", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
+  setsaveddvar("bg_cinematicCanPause", "1");
   stopcinematicingame();
   waitframe();
 
@@ -269,14 +269,14 @@ function nextmission_internal(var_0) {
     level.player freezecontrols(1);
 
     if(scripts\engine\utility::flag("nextmission_transition_bink_primed")) {
-      setsaveddvar("LNSNKKLPLL", "0");
-      setsaveddvar("MMRNLMPPLT", "1");
-      setsaveddvar("RKMNLRNS", "1");
+      setsaveddvar("bg_cinematicAboveUI", "0");
+      setsaveddvar("bg_cinematicFullscreen", "1");
+      setsaveddvar("bg_cinematicCanPause", "1");
       pausecinematicingame(0);
     } else {
-      setsaveddvar("LNSNKKLPLL", "0");
-      setsaveddvar("MMRNLMPPLT", "1");
-      setsaveddvar("RKMNLRNS", "1");
+      setsaveddvar("bg_cinematicAboveUI", "0");
+      setsaveddvar("bg_cinematicFullscreen", "1");
+      setsaveddvar("bg_cinematicCanPause", "1");
       cinematicingame(var_4, 0, 1, 1, 0, 0, 1);
     }
   }
@@ -321,7 +321,7 @@ function getcollateraldamagegrade() {
 function updatesppercent() {
   var_0 = int(gettotalpercentcompletesp() * 100);
 
-  if(getdvarint("MSSSNONPLS") == 0) {
+  if(getdvarint("mis_cheat") == 0) {
     level.player setlocalplayerprofiledata("percentCompleteSP", var_0);
   }
 
@@ -562,7 +562,7 @@ function levelprogressioncomplete(var_0) {
 }
 
 function highestmission_ifnotcheating_set(var_0) {
-  if(getDvar("MSSSNONPLS") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
 
@@ -570,7 +570,7 @@ function highestmission_ifnotcheating_set(var_0) {
 }
 
 function mission_diffstring_ifnotcheating_set(var_0) {
-  if(getDvar("MSSSNONPLS") == "1") {
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
 

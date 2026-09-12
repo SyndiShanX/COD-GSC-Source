@@ -8,7 +8,7 @@ function main() {
     return;
   }
 
-  if(getdvarint("LLQQOPKTKM") == 1) {
+  if(getdvarint("r_reflectionProbeGenerate") == 1) {
     return;
   }
 
@@ -1335,7 +1335,7 @@ function node_within_use_radius_of_crate(var_0, var_1) {
     return (abs(var_0.origin[0] - var_1.origin[0]) < 36 && abs(var_0.origin[0] - var_1.origin[0]) < 36 && abs(var_0.origin[0] - var_1.origin[0]) < 18);
   }
 
-  var_2 = getdvarfloat("MTOQQKKRPS");
+  var_2 = getdvarfloat("player_useRadius");
   var_3 = distancesquared(var_1.origin, var_0.origin + (0, 0, 40));
   return var_3 <= var_2 * var_2;
 }
@@ -1369,7 +1369,7 @@ function crate_calculate_on_path_grid(var_0) {
     var_0.nearest_nodes = var_3;
     var_0.on_path_grid = 1;
   } else {
-    var_4 = getdvarfloat("MTOQQKKRPS");
+    var_4 = getdvarfloat("player_useRadius");
     var_5 = getnodesinradiussorted(var_0.origin, var_4 * 2, 0)[0];
     var_6 = var_0 getpointinbounds(0, 0, -1);
     var_7 = undefined;
@@ -1525,7 +1525,7 @@ function bot_think_crate() {
   self endon("bot_think_crate");
   self endon("death_or_disconnect");
   level endon("game_ended");
-  var_0 = getdvarfloat("MTOQQKKRPS");
+  var_0 = getdvarfloat("player_useRadius");
 
   for(;;) {
     var_1 = randomfloatrange(2, 4);
@@ -1895,7 +1895,7 @@ function bot_think_crate_blocking_path() {
   self endon("bot_think_crate_blocking_path");
   self endon("death_or_disconnect");
   level endon("game_ended");
-  var_0 = getdvarfloat("MTOQQKKRPS");
+  var_0 = getdvarfloat("player_useRadius");
 
   for(;;) {
     wait 3;

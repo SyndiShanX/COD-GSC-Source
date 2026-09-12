@@ -9,7 +9,7 @@ function main() {
   self notify("clearSuppressionAttack");
   self.a.suppressingenemy = 0;
 
-  if(getdvarint("LPNQTQRRP") == 1) {
+  if(getdvarint("ai_iw7") == 1) {
     scripts\asm\asm::asm_clearfacialanim();
     scripts\asm\asm_bb::bb_clearanimScripted();
     scripts\asm\asm_sp::asm_animScripted();

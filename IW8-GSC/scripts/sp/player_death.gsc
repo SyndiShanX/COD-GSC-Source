@@ -104,9 +104,9 @@ function main() {
   setomnvar("ui_hide_weapon_info", 1);
   setomnvar("ui_player_dead", 1);
   setomnvar("ui_gettocover_state", 0);
-  setsaveddvar("MPNNTKMQTS", 0);
-  setsaveddvar("MNRKKQLQPQ", 1);
-  setsaveddvar("LOPKSRNTTS", 0);
+  setsaveddvar("hud_showStance", 0);
+  setsaveddvar("actionSlotsHide", 1);
+  setsaveddvar("cg_drawCrosshair", 0);
   var_10 = get_stance();
   var_11 = playerwasrunning();
   var_12 = get_animated_player_death(var_10, var_11, var_1, var_3, var_0);
@@ -126,7 +126,7 @@ function main() {
   setomnvar("ui_player_dead", 0);
   setDvar("player_death_animated", 1);
   scripts\sp\analytics::playerdeath();
-  setsaveddvar("MMMSPTOSMK", 0);
+  setsaveddvar("g_deathDelay", 0);
   finishplayerdeath(scripts\sp\utility::in_yolo_mode());
 }
 
@@ -569,7 +569,7 @@ function deathfx(var_0) {
   visionsetpain("damage_dead", 0.2);
   scripts\sp\audio::set_slowmo_dialogue_start();
   setslowmotion(1, 0.8, 4.5);
-  setsaveddvar("MLLRKTPNRR", 100);
+  setsaveddvar("painVisionLerpInRate", 100);
   self painvisionon();
 
   if(var_0 == "MOD_FIRE") {

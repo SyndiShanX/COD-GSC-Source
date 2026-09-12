@@ -42,13 +42,13 @@ function main() {
   scripts\engine\sp\utility::transient_init("hometown_periph_tr");
   scripts\engine\sp\utility::transient_init("hometown_bunker_tr");
   hometown_flags();
-  setsaveddvar("MQPQKNPQOK", 1);
-  setsaveddvar("MRNRKKOPLN", 2);
-  setsaveddvar("OLSKLTPPMR", 0.6);
-  setsaveddvar("LQLSPQOPKM", 20);
-  setsaveddvar("NQTLPTNSSO", 1);
-  setsaveddvar("MKNNNONLSK", 4);
-  setsaveddvar("MMLNNQSTTL", 5);
+  setsaveddvar("cg_defaultWindAmplitudeScale", 1);
+  setsaveddvar("cg_defaultWindFrequencyScale", 2);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.6);
+  setsaveddvar("cg_defaultWindAreaScale", 20);
+  setsaveddvar("cg_defaultWindStrength", 1);
+  setsaveddvar("fx_lightmap_max_level", 4);
+  setsaveddvar("fx_alphaThreshold", 5);
   reactive_foliage();
   scripts\sp\audio::set_audio_level_fade_time(0.05);
   scripts\sp\load::main();
@@ -85,7 +85,7 @@ function main() {
   setdvarifuninitialized("greenlight", 0);
   setdvarifuninitialized("greenlight_three_stab", 0);
   setDvar("context_melee_blocked_hints", 0);
-  setsaveddvar("MTLLLKROOM", 0);
+  setsaveddvar("mount_hint_enable", 0);
   level thread scripts\sp\utility::context_melee_enable(0);
   thread helicopters_controller();
   thread trucks_controller();
@@ -363,10 +363,10 @@ function hometown_stealth() {
 }
 
 function reactive_foliage() {
-  setsaveddvar("MKPPNSLNQQ", 30);
-  setsaveddvar("MPLOLNMSRO", 20);
-  setsaveddvar("NSKKMRPOQQ", 40);
-  setsaveddvar("NKOSNKPNKL", 8);
+  setsaveddvar("r_reactiveMotionPlayerRadius", 30);
+  setsaveddvar("r_reactiveMotionActorRadius", 20);
+  setsaveddvar("r_reactiveMotionEffectorStrengthScale", 40);
+  setsaveddvar("r_reactiveMotionPlayerPushAmplitude", 8);
 }
 
 function buried_start() {

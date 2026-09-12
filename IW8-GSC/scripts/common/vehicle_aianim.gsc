@@ -1778,7 +1778,7 @@ function animontag(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       wait var_18;
     }
 
-    if(getdvarint("LPNQTQRRP", 0) == 1) {
+    if(getdvarint("ai_iw7", 0) == 1) {
       var_3 stopanimScripted();
     }
 
@@ -2088,7 +2088,7 @@ function guy_blowup(var_0) {
   var_8 = (0, 0, 1);
   var_9 = var_0.origin;
 
-  if(getDvar("LNLRQKMPKS") == "0") {
+  if(getDvar("ragdoll_enable") == "0") {
     var_0 delete();
     return;
   }

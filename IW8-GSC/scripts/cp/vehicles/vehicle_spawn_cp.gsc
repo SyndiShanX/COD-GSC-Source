@@ -13,7 +13,7 @@ function vehicle_spawn_cp_init() {
 }
 
 function vehicle_spawn_cp_canspawnVehicle(var_0, var_1, var_2) {
-  if(getdvarint("LLQQOPKTKM", 0) == 1) {
+  if(getdvarint("r_reflectionProbeGenerate", 0) == 1) {
     return false;
   }
 

@@ -19,12 +19,12 @@ function main() {
   setdvarifuninitialized("scr_instafail_debug", 0);
   setdvarifuninitialized("scr_show_player_fov", 0);
   setdvarifuninitialized("scr_debug_achievement", 0);
-  setsaveddvar("NPNOOMMTPK", 400);
-  setsaveddvar("LOMSNQRPQN", 150);
-  setsaveddvar("LQPTMLQPPN", 1);
-  setsaveddvar("LTMPKRLLNM", 3700);
-  setsaveddvar("OLPNKQKKTT", 3000);
-  setsaveddvar("MMLNNQSTTL", 10);
+  setsaveddvar("glass_damageToDestroy", 400);
+  setsaveddvar("glass_damageToWeaken", 150);
+  setsaveddvar("ai_hotCombatSpeedEnabled", 1);
+  setsaveddvar("r_vertexDeformCutOffDist", 3700);
+  setsaveddvar("r_vertexDeformFadeDist", 3000);
+  setsaveddvar("fx_alphaThreshold", 10);
   scripts\engine\sp\utility::add_start("infil", &scripts\sp\maps\piccadilly\piccadilly_infil::start, "", &scripts\sp\maps\piccadilly\piccadilly_infil::main, undefined, &scripts\sp\maps\piccadilly\piccadilly_infil::catchup);
   scripts\engine\sp\utility::add_start("infil_car1", &scripts\sp\maps\piccadilly\piccadilly_infil::infil_car1_start, "", &scripts\sp\maps\piccadilly\piccadilly_infil::infil_car1_main, undefined, &scripts\sp\maps\piccadilly\piccadilly_infil::infil_car1_catchup);
   scripts\engine\sp\utility::add_start("post_bomb", &scripts\sp\maps\piccadilly\piccadilly_infil::post_bomb_start, "", &scripts\sp\maps\piccadilly\piccadilly_infil::post_bomb_main, undefined, &scripts\sp\maps\piccadilly\piccadilly_infil::post_bomb_catchup);
@@ -47,9 +47,9 @@ function main() {
   level.cos60 = cos(60);
   thread scripts\sp\maps\piccadilly\piccadilly_ambient::init_script_car_collision();
   level thread scripts\sp\maps\piccadilly\piccadilly_civs::civ_init();
-  setsaveddvar("NPONLLLSPL", 0.5);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("MKNNNONLSK", 4);
+  setsaveddvar("sm_sunSampleSizeNear", 0.5);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("fx_lightmap_max_level", 4);
   init_precache();
   init_flags();
   level.gotachievement = 1;
@@ -99,7 +99,7 @@ function main() {
   thread display_ai();
   setdvarifuninitialized("scr_price_movement", 0);
 
-  if(getdvarint("SMNRNLNRN")) {
+  if(getdvarint("g_connectpaths")) {
     return;
   }
 
@@ -308,10 +308,10 @@ function gameplay_asset_adjustments() {
 
 function e3_audio_demo_start() {
   scripts\sp\starts::start_nogame();
-  setsaveddvar("NPONLLLSPL", 0.5);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("MMRNLMPPLT", "0");
-  setsaveddvar("MKNNNONLSK", 4);
+  setsaveddvar("sm_sunSampleSizeNear", 0.5);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("bg_cinematicFullscreen", "0");
+  setsaveddvar("fx_lightmap_max_level", 4);
   scripts\engine\utility::noself_delaycall(0.15, &cinematicingameloop, "pic_screens_02", 1);
   scripts\engine\utility::exploder("traffic_lights_02");
   scripts\engine\utility::exploder("spec");
@@ -653,11 +653,11 @@ function makeallies() {
   self.maxfacenewenemydist = 200;
 
   if(isai(self)) {
-    setdvarifuninitialized("OLLLOORPLR", 170);
+    setdvarifuninitialized("ai_movementDefaultSpeed", 170);
 
     if(self.unittype == "civilian") {
-      var_0 = getdvarint("LSKTNKPTRT", 200);
-      var_1 = getdvarint("MNMNLKRRQP", 240);
+      var_0 = getdvarint("ai_civSpeedMin", 200);
+      var_1 = getdvarint("ai_civSpeedMax", 240);
 
       if(var_1 <= var_0) {
         var_1 = var_0 + 1;
@@ -667,8 +667,8 @@ function makeallies() {
       return;
     }
 
-    var_0 = getdvarfloat("NNSQQNONNT", 0.94);
-    var_1 = getdvarfloat("NNSQQNONNT", 1.11);
+    var_0 = getdvarfloat("ai_allySpeedScaleMultMin", 0.94);
+    var_1 = getdvarfloat("ai_allySpeedScaleMultMin", 1.11);
 
     if(var_1 <= var_0) {
       var_1 = var_0 + 0.01;
@@ -690,8 +690,8 @@ function maketerrorists() {
 
   if(isai(self)) {
     if(!istrue(self.casualkiller)) {
-      var_0 = getdvarfloat("NSPNRRQRLN", 0.91);
-      var_1 = getdvarfloat("NOPOKQNMR", 1.06);
+      var_0 = getdvarfloat("ai_enemySpeedScaleMultMin", 0.91);
+      var_1 = getdvarfloat("ai_enemySpeedScaleMultMax", 1.06);
       self.speedscalemult = randomfloatrange(var_0, var_1);
       self.allowspeedupwhencombathot = 0;
       scripts\common\ai::set_rebel(1);
@@ -706,7 +706,7 @@ function print_screen_pos_from_center() {
   self endon("death");
 
   for(;;) {
-    var_0 = level.player worldpointtoscreenpos(self gettagorigin("j_spinelower"), getdvarint("MRNKTKLLKP"));
+    var_0 = level.player worldpointtoscreenpos(self gettagorigin("j_spinelower"), getdvarint("cg_targetBaseFov"));
 
     if(isDefined(var_0)) {
       var_1 = length2d(var_0);
@@ -742,7 +742,7 @@ function inventoryweapon() {
 
 function ingame_cinematic_loop() {
   scripts\engine\utility::flag_wait("intro_bink_done");
-  setsaveddvar("MMRNLMPPLT", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
   scripts\engine\utility::noself_delaycall(0.15, &cinematicingameloop, "pic_screens_02", 1);
   wait 0.15;
   scripts\engine\utility::exploder("screens_glow");
@@ -809,7 +809,7 @@ function get_current_fov() {
   var_0 = level.player getcurrentweapon();
 
   if(nullweapon(var_0) || level.player playerads() < 0.5) {
-    return getdvarint("MRNKTKLLKP");
+    return getdvarint("cg_targetBaseFov");
   }
 
   var_1 = undefined;
@@ -850,7 +850,7 @@ function get_weapon_base_ads_fov(var_0) {
     case "sniper":
       return 50;
     default:
-      return getdvarint("MRNKTKLLKP");
+      return getdvarint("cg_targetBaseFov");
   }
 }
 

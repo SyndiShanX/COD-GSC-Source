@@ -8,7 +8,7 @@ function init() {
   var_0 = scripts\cp\utility::getgametype();
 
   if(!isDefined(var_0)) {
-    var_0 = getDvar("NKTMKRMSKR");
+    var_0 = getDvar("g_gametype");
   }
 
   var_1 = 0;

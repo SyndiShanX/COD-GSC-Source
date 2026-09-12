@@ -26,7 +26,7 @@ function main() {
   getscriptablelootspawnedcountbyname(400, 1200);
   scripts\mp\compass::setupminimap("compass_map_mp_boneyard_gw");
   level thread scripts\engine\scriptable_door::system_init();
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -38,7 +38,7 @@ function main() {
 }
 
 function ref_145f0() {
-  var_0 = getdvarint("OKSRMNKKOS", 0);
+  var_0 = getdvarint("gw_gas_circle_size", 0);
   wait 3;
 
   switch (var_0) {

@@ -126,7 +126,7 @@ function player_tango72_infil_think(var_0, var_1) {
   var_1.linktoent scripts\mp\anim::anim_player_solo(self, self.player_rig, "tango72_infil_" + var_1.subtype + "_intro", "body_animate_jnt");
 
   if(isDefined(level.scr_viewmodelanim[self.animname]) && isDefined(level.scr_viewmodelanim[self.animname]["tango72_infil_" + var_1.subtype + "_intro"])) {
-    setDvar("NMLOKNMRSK", 0);
+    setDvar("depthSortViewmodel", 0);
   }
 
   self lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
@@ -156,7 +156,7 @@ function player_infil_end() {
   self notify("remove_rig");
   self clearclienttriggeraudiozone(1);
   scripts\mp\utility\player::setdof_default();
-  setDvar("NMLOKNMRSK", 0);
+  setDvar("depthSortViewmodel", 0);
 }
 
 function ref_13a3c(var_0) {
@@ -210,10 +210,10 @@ function infilthink(var_0, var_1) {
   thread vehiclethink(var_0, self.scene_node, var_1);
   thread actorthink(var_0, self.scene_node, var_1);
   level waittill("infil_started");
-  setDvar("TLMMOPMSK", 1);
+  setDvar("r_spotLightEntityShadows", 1);
   level notify("start_scene");
   level waittill("prematch_over");
-  setDvar("TLMMOPMSK", 0);
+  setDvar("r_spotLightEntityShadows", 0);
 
   while(isDefined(self.actors)) {
     waitframe();

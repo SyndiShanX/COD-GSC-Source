@@ -13,11 +13,11 @@ function post_load() {
 }
 
 function light_dvars() {
-  setsaveddvar("LKOLRONRNQ", 400);
-  setsaveddvar("SLSMSSTQP", 1);
-  setsaveddvar("MPOKKOPMTN", "64 128 256 512");
-  setsaveddvar("LTQMSPKRKO", 6);
-  setsaveddvar("MROOOROPKL", 8);
+  setsaveddvar("sm_spotDistCull", 400);
+  setsaveddvar("r_dof_physical_minFocusDistance", 1);
+  setsaveddvar("r_volumetricDepth", "64 128 256 512");
+  setsaveddvar("sm_spotUpdateLimit", 6);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
 }
 
 function setup_lighting() {
@@ -128,27 +128,27 @@ function dof_off() {
 }
 
 function cells_cascade() {
-  setsaveddvar("NPONLLLSPL", 0.2);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NTLKNLNPLK", 1);
+  setsaveddvar("sm_sunSampleSizeNear", 0.2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 1);
 }
 
 function warehouse_cascade() {
-  setsaveddvar("NPONLLLSPL", 0.41);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NTLKNLNPLK", 1);
+  setsaveddvar("sm_sunSampleSizeNear", 0.41);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 1);
 }
 
 function factory_cascade() {
-  setsaveddvar("NPONLLLSPL", 0.48);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NTLKNLNPLK", 1);
+  setsaveddvar("sm_sunSampleSizeNear", 0.48);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 1);
 }
 
 function exterior_cascade() {
-  setsaveddvar("NPONLLLSPL", 0.6);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NTLKNLNPLK", 2);
+  setsaveddvar("sm_sunSampleSizeNear", 0.6);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
 }
 
 function explosion_flicker() {

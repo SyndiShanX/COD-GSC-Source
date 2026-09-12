@@ -6,7 +6,7 @@
 function main() {}
 
 function soldier() {
-  if(!getdvarint("NTMLLPTNLT")) {
+  if(!getdvarint("master_dismemberment_setting")) {
     level.g_effect["human_gib_fullbody"] = loadfx("vfx/core/blank.vfx");
   } else {
     level.g_effect["human_gib_fullbody"] = loadfx("vfx/iw8/weap/_explo/suicide/vfx_gib_dir1.vfx");
@@ -33,7 +33,7 @@ function civilian() {}
 function dog() {}
 
 function juggernaut() {
-  if(!getdvarint("NTMLLPTNLT")) {
+  if(!getdvarint("master_dismemberment_setting")) {
     level.g_effect["human_gib_fullbody"] = loadfx("vfx/core/blank.vfx");
   } else {
     level.g_effect["human_gib_fullbody"] = loadfx("vfx/iw8/weap/_explo/suicide/vfx_gib_dir1.vfx");

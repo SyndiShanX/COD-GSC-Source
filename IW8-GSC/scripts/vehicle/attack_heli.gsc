@@ -11,7 +11,7 @@ function preload() {
 }
 
 function attack_heli_fx() {
-  if(getdvarint("RNPPKQOTN") && getDvar("r_zfeather") != "0") {
+  if(getdvarint("sm_spotEnable") && getDvar("r_zfeather") != "0") {
     level._effect["_attack_heli_spotlight"] = loadfx("vfx/core/vehicles/hunted_spotlight_model");
     return;
   }

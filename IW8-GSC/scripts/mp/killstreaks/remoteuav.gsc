@@ -435,7 +435,7 @@ function remoteuav_ride(var_0, var_1, var_2) {
   var_1.playerlinked = 1;
   self.restoreangles = self.angles;
 
-  if(getdvarint("NOSLRNTRKL")) {
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\player::setthirdpersondof(0);
   }
 
@@ -467,7 +467,7 @@ function remoteuav_endride(var_0) {
     var_0 notify("end_remote");
     scripts\mp\utility\player::clearusingremote();
 
-    if(getdvarint("NOSLRNTRKL")) {
+    if(getdvarint("camera_thirdPerson")) {
       scripts\mp\utility\player::setthirdpersondof(1);
     }
 

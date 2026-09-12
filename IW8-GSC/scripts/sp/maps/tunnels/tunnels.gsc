@@ -41,9 +41,9 @@ function main() {
   thread intro_screen();
   scripts\sp\audio::set_audio_level_fade_time(0.1);
   scripts\sp\load::main();
-  setsaveddvar("MKNNNONLSK", 4);
-  setsaveddvar("TLMMOPMSK", 1);
-  setsaveddvar("MMLNNQSTTL", 15);
+  setsaveddvar("fx_lightmap_max_level", 4);
+  setsaveddvar("r_spotLightEntityShadows", 1);
+  setsaveddvar("fx_alphaThreshold", 15);
   scripts\engine\sp\utility::battlechatter_on("axis");
   level_inits();
   level_compound_setup();
@@ -70,7 +70,7 @@ function setup_scriptable_lights_for_compile() {
       continue;
     }
 
-    if(getDvar("LLQQOPKTKM") == "1") {
+    if(getDvar("r_reflectionProbeGenerate") == "1") {
       var_2 setlightintensity(0);
       var_2 setlightcolor(0, 0, 0);
     }
@@ -405,18 +405,18 @@ function init_threatbias() {
 }
 
 function level_compound_setup() {
-  level.wind["amp"] = getDvar("MQPQKNPQOK");
-  level.wind["freq"] = getDvar("MRNRKKOPLN");
-  level.wind["area"] = getDvar("LQLSPQOPKM");
-  level.wind["noise"] = getDvar("OLSKLTPPMR");
-  level.wind["str"] = getDvar("NQTLPTNSSO");
-  level.wind["dir"] = getDvar("NTMMTOLQMQ");
-  setsaveddvar("MQPQKNPQOK", 2);
-  setsaveddvar("MRNRKKOPLN", 4);
-  setsaveddvar("LQLSPQOPKM", 50);
-  setsaveddvar("OLSKLTPPMR", 0.7);
-  setsaveddvar("NQTLPTNSSO", 1);
-  setsaveddvar("NTMMTOLQMQ", (1, 0, 0));
+  level.wind["amp"] = getDvar("cg_defaultWindAmplitudeScale");
+  level.wind["freq"] = getDvar("cg_defaultWindFrequencyScale");
+  level.wind["area"] = getDvar("cg_defaultWindAreaScale");
+  level.wind["noise"] = getDvar("cg_defaultWindNoiseScale");
+  level.wind["str"] = getDvar("cg_defaultWindStrength");
+  level.wind["dir"] = getDvar("cg_defaultWindDir");
+  setsaveddvar("cg_defaultWindAmplitudeScale", 2);
+  setsaveddvar("cg_defaultWindFrequencyScale", 4);
+  setsaveddvar("cg_defaultWindAreaScale", 50);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.7);
+  setsaveddvar("cg_defaultWindStrength", 1);
+  setsaveddvar("cg_defaultWindDir", (1, 0, 0));
 
   if(!scripts\sp\starts::is_after_start("2nd_floor")) {
     var_0 = getEnt("power_switch", "targetname");
@@ -431,18 +431,18 @@ function level_compound_setup() {
     scripts\engine\utility::flag_set("did_door_hint");
   }
 
-  setsaveddvar("NQQSKRQMTS", 0);
+  setsaveddvar("r_reactiveMotionVelocityTailScale", 0);
 }
 
 function level_tunnel_setup() {
-  setsaveddvar("MQPQKNPQOK", level.wind["amp"]);
-  setsaveddvar("MRNRKKOPLN", level.wind["freq"]);
-  setsaveddvar("LQLSPQOPKM", level.wind["area"]);
-  setsaveddvar("OLSKLTPPMR", level.wind["noise"]);
-  setsaveddvar("NQTLPTNSSO", level.wind["str"]);
-  setsaveddvar("NTMMTOLQMQ", level.wind["dir"]);
-  setsaveddvar("LKOLRONRNQ", 600);
-  setsaveddvar("NQNQPRLRQM", 10);
+  setsaveddvar("cg_defaultWindAmplitudeScale", level.wind["amp"]);
+  setsaveddvar("cg_defaultWindFrequencyScale", level.wind["freq"]);
+  setsaveddvar("cg_defaultWindAreaScale", level.wind["area"]);
+  setsaveddvar("cg_defaultWindNoiseScale", level.wind["noise"]);
+  setsaveddvar("cg_defaultWindStrength", level.wind["str"]);
+  setsaveddvar("cg_defaultWindDir", level.wind["dir"]);
+  setsaveddvar("sm_spotDistCull", 600);
+  setsaveddvar("fx_lights_intensity_scale", 10);
   setomnvar("ai_fulllight", 1e-07);
   setomnvar("ai_nolight", 0.02);
   level thread scripts\sp\utility::context_melee_enable(0);
@@ -1314,7 +1314,7 @@ function breached_gate_start() {
 function main_breached_gate() {
   thread start_midway_guys();
   scripts\engine\utility::flag_wait("breach_finished");
-  setsaveddvar("MMLNNQSTTL", "0");
+  setsaveddvar("fx_alphaThreshold", "0");
   level.maindoor = getscriptablearray("compound_door", "targetname");
   level.maindoor[0] thread scripts\sp\maps\tunnels\zd30tunnels_infil::maindoor_damage_watcher();
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::alpha_moveup_post_breach();
@@ -1769,7 +1769,7 @@ function main_tea_room() {
   thread scripts\sp\maps\tunnels\zd30tunnels_infil::trap_door_scene();
   level waittill("tunnels_transition");
   visionsetnaked("zd30tunnels_upper", 0.5);
-  setsaveddvar("MMLNNQSTTL", 15);
+  setsaveddvar("fx_alphaThreshold", 15);
   thread cleanup_compound_ents();
   setomnvar("ai_fulllight", 1e-07);
   setomnvar("ai_nolight", 0.02);
@@ -1870,7 +1870,7 @@ function coldopen_bink_move_scene() {
   var_6.origin = level.node.origin;
   var_6.angles = level.node.angles;
   level.player modifybasefov(35, 0.05);
-  setsaveddvar("OMNONNMOTP", "0.1 400 0.5 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 0.5 1000");
   level.player setcinematicmotionoverride("disabled");
   level.node.origin = (221.868, 823.872, 85);
   level.node.angles = (0, 58.1513, 0);

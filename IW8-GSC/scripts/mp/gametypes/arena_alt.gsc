@@ -34,7 +34,7 @@ function main() {
   scripts\mp\utility\game::registerhalftimedvar(scripts\mp\utility\game::getgametype(), 0);
   scripts\mp\utility\game::registerwinbytwoenableddvar(scripts\mp\utility\game::getgametype(), 1);
   scripts\mp\utility\game::registerwinbytwomaxroundsdvar(scripts\mp\utility\game::getgametype(), 4);
-  setDvar("LKNNQKNTS", 0);
+  setDvar("camera_allow3rdspectate", 0);
 
   if(!isDefined(level.tweakablesinitialized)) {
     scripts\mp\tweakables::init();
@@ -156,7 +156,7 @@ function main() {
     level.previewbuildfirstaxis = 1;
   }
 
-  setDvar("OOTQKOTRM", 4);
+  setDvar("party_maxplayers", 4);
   level.teambased = 1;
   level.objectivebased = 1;
   level.ontimelimit = &ontimelimit;
@@ -182,9 +182,9 @@ function main() {
   level.bypassclasschoicefunc = &alwaysgamemodeclass;
   game["dialog"]["gametype"] = "gametype_arena";
 
-  if(getdvarint("OSMSLRTOP")) {
+  if(getdvarint("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  } else if(getdvarint("NOSLRNTRKL")) {
+  } else if(getdvarint("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
   }
 
@@ -430,7 +430,7 @@ function updategametypedvars() {
   }
 
   if(getdvarint("allow_enemy_proxchat", 0) == 1) {
-    setDvar("LOSOOOTNMS", 1);
+    setDvar("voice_proximity_enemy", 1);
     var_0 = 128;
     var_1 = getdvarint("proxchat_radius_override", 0);
 
@@ -438,7 +438,7 @@ function updategametypedvars() {
       var_0 = var_1;
     }
 
-    setDvar("NNMLSMNTOQ", var_0);
+    setDvar("voice_proximity_radius", var_0);
   }
 
   var_2 = 0;

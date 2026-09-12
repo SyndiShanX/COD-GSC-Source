@@ -13,8 +13,8 @@ function main() {
   scripts\mp\load::main();
   setDvar("mantle_force_legacy_system", 1);
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NSSMQLPRNT", 0.01);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

@@ -1692,7 +1692,7 @@ function brking_ontimelimit(var_0, var_1, var_2, var_3, var_4) {
 
 function brking_onplayerkilled(var_0) {
   foreach(var_2 in level.players) {
-    var_2 setclientdvar("QTSPTNLOL", var_0);
+    var_2 setclientdvar("cg_fov", var_0);
   }
 }
 
@@ -1702,7 +1702,7 @@ function allplayers_setforcefov(var_0, var_1) {
       continue;
     }
 
-    var_3 setclientdvar("QTSPTNLOL", var_0);
+    var_3 setclientdvar("cg_fov", var_0);
     var_3 setclientdvar("LTMOQONPQ", 1);
 
     if(istrue(var_1)) {
@@ -1714,7 +1714,7 @@ function allplayers_setforcefov(var_0, var_1) {
 function resetfov() {
   self endon("disconnect");
   scripts\engine\utility::waittill_any_ents(level.defendkill, "all_scenes_end", level.defendkill, "scene_end");
-  self setclientdvar("QTSPTNLOL", 65);
+  self setclientdvar("cg_fov", 65);
   self setclientdvar("LTMOQONPQ", 0);
 }
 

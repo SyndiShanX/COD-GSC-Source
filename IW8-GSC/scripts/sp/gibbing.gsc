@@ -14,7 +14,7 @@ function init_gibbing() {
   precachemodel("fullbody_dog_c_gibbed");
   precachemodel("body_spetsnaz_ar_gibbed");
   precachemodel("p7_skulls_bones_arm_lower");
-  setsaveddvar("NLKQTSPTKQ", 1);
+  setsaveddvar("fx_dismemberment_enabled", 1);
   level.g_effect["vfx_gib_explode"] = loadfx("vfx/iw8/weap/_explo/gib/vfx_body_explode_gib.vfx");
   level.g_effect["vfx_gib_dismember"] = loadfx("vfx/test/vfx_test_dismemberment_flesh_chunk_01.vfx");
   level.g_effect["vfx_blood_spurt"] = loadfx("vfx/iw8/weap/_impact/flesh/vfx_imp_flesh_gushing.vfx");
@@ -89,7 +89,7 @@ function gibbing_gibai(var_0, var_1, var_2) {
 function gibbing_codeversion(var_0, var_1, var_2) {
   var_0 endon("entitydeleted");
 
-  if(!getdvarint("NTMLLPTNLT")) {
+  if(!getdvarint("master_dismemberment_setting")) {
     return;
   }
 

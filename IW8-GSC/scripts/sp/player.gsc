@@ -47,24 +47,24 @@ function main() {
 function initplayerdvars() {
   setdvarifuninitialized("scr_player_armor_enabled", 0);
   setdvarifuninitialized("scr_player_loot_enabled", 1);
-  setsaveddvar("NMLNMLQKQN", 0.1);
-  setsaveddvar("NQSQNSMOPT", 14);
-  setsaveddvar("LRLOLNPOPK", 1);
-  setsaveddvar("LLSLMQOML", 50);
-  setsaveddvar("MMMRTNRMNQ", 2);
-  setsaveddvar("NTMLOQNTMT", 0.8);
-  setsaveddvar("MQQTQTMNQK", 0.8);
-  setsaveddvar("NSTTSKLMSS", 0);
-  setsaveddvar("OLTQMNLKPM", 0);
-  setsaveddvar("MLTSTQKLOQ", 0.007);
-  setsaveddvar("MSLNOOKPTO", 700);
-  setsaveddvar("NKTQRKRMTS", 220);
-  setsaveddvar("NSRPQNLSNK", 150);
-  setsaveddvar("MLLSRQSRT", 75);
-  setsaveddvar("LKTOKQMRQQ", 0.2);
-  setsaveddvar("LOTMTRSTPS", 0.5);
+  setsaveddvar("g_knockbackPlayerScale", 0.1);
+  setsaveddvar("bg_viewKickMinNonADS", 14);
+  setsaveddvar("bg_viewKickMin", 1);
+  setsaveddvar("bg_viewKickMaxNonADS", 50);
+  setsaveddvar("bg_viewKickMax", 2);
+  setsaveddvar("bg_viewKickScaleNonADS", 0.8);
+  setsaveddvar("bg_viewKickScale", 0.8);
+  setsaveddvar("bg_viewBobAmplitudeStanding", 0);
+  setsaveddvar("bg_viewBobAmplitudeDucked", 0);
+  setsaveddvar("bg_viewBobAmplitudeSprinting", 0.007);
+  setsaveddvar("bg_viewBobTransTime", 700);
+  setsaveddvar("bg_fallDamageMinHeight", 220);
+  setsaveddvar("g_speed", 150);
+  setsaveddvar("player_itemUseRadius", 75);
+  setsaveddvar("mount_ai_top_victim_accuracy", 0.2);
+  setsaveddvar("mount_ai_side_victim_accuracy", 0.5);
   setDvar("scr_hideweaponinfo", 0);
-  setsaveddvar("LMSLMNORNR", 0);
+  setsaveddvar("cg_crosshairEnemyColor", 0);
 }
 
 function initplayervfx() {
@@ -277,8 +277,8 @@ function initplayerfocus() {
   set_focus_objectives_update_display(0);
   set_focus_infinite_hold(0);
   setomnvar("ui_show_objectives", 0);
-  setsaveddvar("MSSTMRNSN", 1);
-  setsaveddvar("OLMSOMTOTO", 0);
+  setsaveddvar("objectiveAlphaEnabled", 1);
+  setsaveddvar("objectiveAlpha", 0);
 }
 
 function initplayerdefaultsettings() {
@@ -427,11 +427,11 @@ function tacadsactive() {
   self endon("tacADStoggle");
   self.active = 1;
   self.debounced = 0;
-  setsaveddvar("NSTTSKLMSS", 0.007);
-  setsaveddvar("LQPONSMOKR", "0.005 0.005");
+  setsaveddvar("bg_viewBobAmplitudeStanding", 0.007);
+  setsaveddvar("bg_weaponBobAmplitudeStanding", "0.005 0.005");
   level.player setspreadoverride(1);
   level.player enableslowaim(0.3, 0.3);
-  thread scripts\engine\sp\utility::lerp_saveddvar("NSRPQNLSNK", 105, 0.15);
+  thread scripts\engine\sp\utility::lerp_saveddvar("g_speed", 105, 0.15);
   player_apply_local_view_position((0, 0, -4), 0.15, "tacASD");
   player_apply_local_view_rotation((0, 0, 0), 0.15, "tacASD");
   player_apply_local_weap_position((-6.1, 0.9, 0.4), 0.15, "tacASD");
@@ -442,11 +442,11 @@ function tacadsstop() {
   self notify("tacADStoggle");
   self endon("tacADStoggle");
   self.active = 0;
-  setsaveddvar("NSTTSKLMSS", 0.007);
-  setsaveddvar("LQPONSMOKR", "0.055 0.025");
+  setsaveddvar("bg_viewBobAmplitudeStanding", 0.007);
+  setsaveddvar("bg_weaponBobAmplitudeStanding", "0.055 0.025");
   level.player resetspreadoverride();
   level.player disableslowaim();
-  thread scripts\engine\sp\utility::lerp_saveddvar("NSRPQNLSNK", 150, 0.15);
+  thread scripts\engine\sp\utility::lerp_saveddvar("g_speed", 150, 0.15);
   player_apply_local_view_position((0, 0, 0), 0.15, "tacASD");
   player_apply_local_view_rotation((0, 0, 0), 0.15, "tacASD");
   player_apply_local_weap_position((0, 0, 0), 0.15, "tacASD");
@@ -524,7 +524,7 @@ function gopronone() {
 function goprocamerasettings(var_0) {
   if(var_0) {
     level.player modifybasefov(85, 0.05);
-    setsaveddvar("QTSPTNLOL", 85);
+    setsaveddvar("cg_fov", 85);
 
     if(isDefined(self.goprovision)) {
       visionsetfadetoblack(self.goprovision, 0);
@@ -535,22 +535,22 @@ function goprocamerasettings(var_0) {
     }
 
     givegoproattachments();
-    setsaveddvar("MLTTMLTKOR", 0.1585);
-    setsaveddvar("NKTRSSTMRQ", -0.478);
-    setsaveddvar("LSOPQMRPNR", 0.014);
-    setsaveddvar("OMRQKMSSPP", 1);
-    setsaveddvar("NSPNNSMKSP", 6);
-    setsaveddvar("OLSQPSQLTK", 8);
-    setsaveddvar("NSNOTMNMPP", 2);
-    setsaveddvar("LQTRKQSNMO", 2.1);
-    setsaveddvar("NMORQOTSK", 2);
+    setsaveddvar("r_mbRadialOverrideDistortion", 0.1585);
+    setsaveddvar("r_mbRadialOverrideRadius", -0.478);
+    setsaveddvar("r_mbRadialOverrideStrength", 0.014);
+    setsaveddvar("r_mbRadialOverrideChromaticAberration", 1);
+    setsaveddvar("handheldCameraTranslationScale", 6);
+    setsaveddvar("handheldCameraRotationScale", 8);
+    setsaveddvar("com_viewAnimCameraTranslationScale", 2);
+    setsaveddvar("com_viewAnimCameraRotationScale", 2.1);
+    setsaveddvar("r_mbVelocityScale", 2);
     setomnvar("ui_hide_hud", 1);
-    setsaveddvar("LOPKSRNTTS", 0);
+    setsaveddvar("cg_drawCrosshair", 0);
     return;
   }
 
   level.player modifybasefov(65, 0.05);
-  setsaveddvar("QTSPTNLOL", 65);
+  setsaveddvar("cg_fov", 65);
 
   if(isDefined(self.goprovision)) {
     visionsetfadetoblack("", 0);
@@ -561,17 +561,17 @@ function goprocamerasettings(var_0) {
   }
 
   takegoproattachments();
-  setsaveddvar("MLTTMLTKOR", 0);
-  setsaveddvar("NKTRSSTMRQ", 0);
-  setsaveddvar("LSOPQMRPNR", 0);
-  setsaveddvar("OMRQKMSSPP", 0);
-  setsaveddvar("OLSQPSQLTK", 1);
-  setsaveddvar("NSPNNSMKSP", 1);
-  setsaveddvar("NSNOTMNMPP", 1);
-  setsaveddvar("LQTRKQSNMO", 1);
-  setsaveddvar("NMORQOTSK", 1);
+  setsaveddvar("r_mbRadialOverrideDistortion", 0);
+  setsaveddvar("r_mbRadialOverrideRadius", 0);
+  setsaveddvar("r_mbRadialOverrideStrength", 0);
+  setsaveddvar("r_mbRadialOverrideChromaticAberration", 0);
+  setsaveddvar("handheldCameraRotationScale", 1);
+  setsaveddvar("handheldCameraTranslationScale", 1);
+  setsaveddvar("com_viewAnimCameraTranslationScale", 1);
+  setsaveddvar("com_viewAnimCameraRotationScale", 1);
+  setsaveddvar("r_mbVelocityScale", 1);
   setomnvar("ui_hide_hud", 0);
-  setsaveddvar("LOPKSRNTTS", 1);
+  setsaveddvar("cg_drawCrosshair", 1);
 }
 
 function givegoproattachments() {
@@ -638,8 +638,8 @@ function buttondebounce(var_0) {
 }
 
 function ladderpistol() {
-  setsaveddvar("MMTQQLRRRM", 1);
-  setsaveddvar("OMSLTKKKMK", 1);
+  setsaveddvar("ladderEnableWeapon", 1);
+  setsaveddvar("ladderEnableEnhanced", 1);
 }
 
 function managereloadammo(var_0) {
@@ -721,7 +721,7 @@ function setviewoffset(var_0, var_1, var_2) {
 }
 
 function initplayerviewblender() {
-  setsaveddvar("NPKMRRPSRP", 1);
+  setsaveddvar("useScriptWeaponAndViewOffsets", 1);
   self.viewblender = [];
   self.viewblender["viewPos"] = initviewblenderstruct();
   self.viewblender["viewAng"] = initviewblenderstruct();
@@ -1125,8 +1125,8 @@ function firedamagefx() {
     earthquake(var_4, 0.2, level.player.origin, 2000);
     var_5 = scripts\engine\math::factor_value(0, -0.01, var_0);
     var_6 = scripts\engine\math::factor_value(0, 0.02, var_0);
-    setsaveddvar("MLTTMLTKOR", var_5);
-    setsaveddvar("LSOPQMRPNR", var_6);
+    setsaveddvar("r_mbRadialOverrideDistortion", var_5);
+    setsaveddvar("r_mbRadialOverrideStrength", var_6);
     var_7 = scripts\engine\math::factor_value(0, 1.1, var_0 * var_0);
     var_8 = scripts\engine\math::factor_value(1.7, 2, var_0);
     self.damage.firedronesfx scalevolume(var_7, 0.05);
@@ -1461,7 +1461,7 @@ function disabledeathsdoor(var_0) {
   }
 
   var_2 = getvisionlerprate(var_1);
-  setsaveddvar("OONLORSMO", var_2);
+  setsaveddvar("painVisionLerpOutRate", var_2);
   self painvisionoff();
   setdamageflag(2, 0);
 }
@@ -1577,23 +1577,23 @@ function damageeffects(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
 function firefx_hack_viewkick(var_0) {
   if(var_0) {
-    setsaveddvar("NMLNMLQKQN", 0);
-    setsaveddvar("NQSQNSMOPT", 0);
-    setsaveddvar("LRLOLNPOPK", 0);
-    setsaveddvar("LLSLMQOML", 0);
-    setsaveddvar("MMMRTNRMNQ", 0);
-    setsaveddvar("NTMLOQNTMT", 0);
-    setsaveddvar("MQQTQTMNQK", 0);
+    setsaveddvar("g_knockbackPlayerScale", 0);
+    setsaveddvar("bg_viewKickMinNonADS", 0);
+    setsaveddvar("bg_viewKickMin", 0);
+    setsaveddvar("bg_viewKickMaxNonADS", 0);
+    setsaveddvar("bg_viewKickMax", 0);
+    setsaveddvar("bg_viewKickScaleNonADS", 0);
+    setsaveddvar("bg_viewKickScale", 0);
     return;
   }
 
-  setsaveddvar("NMLNMLQKQN", 0.1);
-  setsaveddvar("NQSQNSMOPT", 14);
-  setsaveddvar("LRLOLNPOPK", 1);
-  setsaveddvar("LLSLMQOML", 50);
-  setsaveddvar("MMMRTNRMNQ", 2);
-  setsaveddvar("NTMLOQNTMT", 0.8);
-  setsaveddvar("MQQTQTMNQK", 0.8);
+  setsaveddvar("g_knockbackPlayerScale", 0.1);
+  setsaveddvar("bg_viewKickMinNonADS", 14);
+  setsaveddvar("bg_viewKickMin", 1);
+  setsaveddvar("bg_viewKickMaxNonADS", 50);
+  setsaveddvar("bg_viewKickMax", 2);
+  setsaveddvar("bg_viewKickScaleNonADS", 0.8);
+  setsaveddvar("bg_viewKickScale", 0.8);
 }
 
 function damagesfx(var_0, var_1, var_2) {
@@ -1699,10 +1699,10 @@ function damageradialdistortion(var_0, var_1, var_2) {
 }
 
 function removeradialdistortion(var_0) {
-  childthread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0, var_0);
-  childthread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0, var_0);
-  childthread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0, var_0);
-  childthread scripts\engine\sp\utility::lerp_saveddvar("NSSPMPLRQL", 0, var_0);
+  childthread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideDistortion", 0, var_0);
+  childthread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideRadius", 0, var_0);
+  childthread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideStrength", 0, var_0);
+  childthread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverridePositionActive", 0, var_0);
 }
 
 function damagepainvision(var_0, var_1, var_2) {
@@ -1730,8 +1730,8 @@ function damagepainvision(var_0, var_1, var_2) {
     var_5 = scripts\engine\math::factor_value(0.05, 0.05, var_4);
   }
 
-  setsaveddvar("MLLRKTPNRR", var_3);
-  setsaveddvar("OONLORSMO", var_4);
+  setsaveddvar("painVisionLerpInRate", var_3);
+  setsaveddvar("painVisionLerpOutRate", var_4);
   self painvisionon();
   wait var_5;
   self painvisionoff();
@@ -2441,11 +2441,11 @@ function setusingarmorvest(var_0) {
 
 function updatedamageindicatortype() {
   if(!hasarmor()) {
-    setsaveddvar("LOLTKOLKON", 0);
+    setsaveddvar("player_healthArmorRatio", 0);
     return;
   }
 
-  setsaveddvar("LOLTKOLKON", 1);
+  setsaveddvar("player_healthArmorRatio", 1);
 }
 
 function updatedamagemultiplier() {
@@ -2460,12 +2460,12 @@ function updatedamagemultiplier() {
 function updateviewkickscale() {
   if(hasarmor()) {
     self setviewkickscale(0.9);
-    setsaveddvar("NMLNMLQKQN", 0.07);
+    setsaveddvar("g_knockbackPlayerScale", 0.07);
     return;
   }
 
   self setviewkickscale(1);
-  setsaveddvar("NMLNMLQKQN", 0.1);
+  setsaveddvar("g_knockbackPlayerScale", 0.1);
 }
 
 function set_normalhealth(var_0) {
@@ -2576,7 +2576,7 @@ function hide_hud_on_death() {
 
 function playerfocusmain() {
   self endon("death");
-  setsaveddvar("RKSQOKQNK", 1);
+  setsaveddvar("r_hudOutlineOccludedColorFromFill", 1);
   GscBinSkip4(0x35);
 }
 
@@ -2606,7 +2606,7 @@ function focusmonitor() {
 
     if(var_0 == "objectives_updated") {
       if(focus_objectives_update_display()) {
-        setsaveddvar("OLMSOMTOTO", 0.6);
+        setsaveddvar("objectiveAlpha", 0.6);
         setomnvar("ui_show_objectives", 1);
         thread focustimeadjust();
 
@@ -2670,7 +2670,7 @@ function forceamount() {
 }
 
 function focusactivate() {
-  var_0 = getdvarfloat("OLMSOMTOTO");
+  var_0 = getdvarfloat("objectiveAlpha");
   var_1 = 1 - scripts\engine\math::normalize_value(0, 0.6, var_0);
   var_2 = var_1 * 0.5;
   var_3 = gettime() + var_2 * 1000;
@@ -2681,15 +2681,15 @@ function focusactivate() {
   setomnvar("ui_show_objectives", 1);
 
   while(gettime() < var_3) {
-    var_0 = getdvarfloat("OLMSOMTOTO");
+    var_0 = getdvarfloat("objectiveAlpha");
     var_7 = clamp(var_0 + var_6, 0, 0.6);
-    setsaveddvar("OLMSOMTOTO", var_7);
+    setsaveddvar("objectiveAlpha", var_7);
     forcesetamount(var_7);
     forcesethudoutlinealpha(var_7);
     waitframe();
   }
 
-  setsaveddvar("OLMSOMTOTO", 0.6);
+  setsaveddvar("objectiveAlpha", 0.6);
 }
 
 function focusdeactivate() {
@@ -2699,7 +2699,7 @@ function focusdeactivate() {
     level endon("objectives_updated");
   }
 
-  var_0 = getdvarfloat("OLMSOMTOTO");
+  var_0 = getdvarfloat("objectiveAlpha");
   var_1 = scripts\engine\math::normalize_value(0, 0.6, var_0);
   var_2 = var_1 * 2.5;
   var_3 = gettime() + var_2 * 1000;
@@ -2709,16 +2709,16 @@ function focusdeactivate() {
   setomnvar("ui_show_objectives", 0);
 
   while(gettime() < var_3) {
-    var_0 = getdvarfloat("OLMSOMTOTO");
+    var_0 = getdvarfloat("objectiveAlpha");
     var_7 = clamp(var_0 - var_6, 0, 0.6);
-    setsaveddvar("OLMSOMTOTO", var_7);
+    setsaveddvar("objectiveAlpha", var_7);
     forcesetamount(var_7);
     forcesethudoutlinealpha(var_7);
     waitframe();
   }
 
   focushighlightadditionalentsdisable();
-  setsaveddvar("OLMSOMTOTO", 0);
+  setsaveddvar("objectiveAlpha", 0);
 }
 
 function focushighlightadditionalentsenable() {
@@ -2950,13 +2950,13 @@ function remove_damage_effects_instantly(var_0) {
 function radial_distortion(var_0, var_1, var_2, var_3) {
   self notify("radialDistortion");
   self endon("radialDistortion");
-  setsaveddvar("MLTTMLTKOR", var_0);
-  setsaveddvar("NKTRSSTMRQ", -1);
-  setsaveddvar("LSOPQMRPNR", var_1);
+  setsaveddvar("r_mbRadialOverrideDistortion", var_0);
+  setsaveddvar("r_mbRadialOverrideRadius", -1);
+  setsaveddvar("r_mbRadialOverrideStrength", var_1);
 
   if(isDefined(var_3)) {
-    setsaveddvar("NSSPMPLRQL", 1);
-    setsaveddvar("MKRSSOQLML", var_3);
+    setsaveddvar("r_mbRadialOverridePositionActive", 1);
+    setsaveddvar("r_mbRadialOverridePosition", var_3);
   }
 
   if(isDefined(var_2)) {

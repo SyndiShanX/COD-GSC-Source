@@ -2313,7 +2313,7 @@ function ref_13fcb(var_0, var_1, var_2) {
     var_3 = gettime();
     var_6 = clamp(1 - (var_4 - var_3) / var_2, 0, 1);
     var_7 = scripts\engine\utility::ter_op(var_0 < var_1, var_5 * var_6 + var_0, var_0 - var_5 * var_6);
-    setDvar("PPRTMPMQM", var_7);
+    setDvar("compassBRCirclePulseDuration", var_7);
 
     if(var_6 == 1) {
       break;

@@ -779,7 +779,7 @@ function scriptables_init() {
     }
 
     if(var_3.classname == "scriptable_un_office_computer_monitor_03_ent") {
-      setsaveddvar("MMRNLMPPLT", "0");
+      setsaveddvar("bg_cinematicFullscreen", "0");
       cinematicingameloop("sp_estate_labvideo", 1);
       var_3 setscriptablepartstate("controller", "full");
       var_3.origin = (352, 3090.5, 489);
@@ -1058,7 +1058,7 @@ function update_vfx_shadow_limit() {
   var_0 = 2;
 
   while(!scripts\engine\utility::flag("grounds_cleared")) {
-    var_1 = getdvarint("LKOLRONRNQ");
+    var_1 = getdvarint("sm_spotDistCull");
     var_2 = getaiarray("axis");
     var_3 = 0;
 
@@ -1080,14 +1080,14 @@ function update_vfx_shadow_limit() {
 
     if(var_3 != var_0) {
       var_0 = var_3;
-      setsaveddvar("LLNMKLQQP", var_0);
+      setsaveddvar("sm_spotUpdateLimitDynLight", var_0);
     }
 
     waitframe();
   }
 
   if(var_0 != 2) {
-    setsaveddvar("LLNMKLQQP", 2);
+    setsaveddvar("sm_spotUpdateLimitDynLight", 2);
     return;
   }
 }

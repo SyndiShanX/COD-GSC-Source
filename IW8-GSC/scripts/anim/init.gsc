@@ -55,7 +55,7 @@ function main() {
 
   thread ondeath();
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     self pushplayer(0);
     scripts\asm\asm::asm_init_blackboard();
     scripts\aitypes\bt_util::bt_init();

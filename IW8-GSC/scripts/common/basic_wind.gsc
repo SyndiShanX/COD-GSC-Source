@@ -93,15 +93,15 @@ function stop_wind(var_0) {
 }
 
 function set_wind_amplitude(var_0) {
-  setsaveddvar("MQPQKNPQOK", var_0);
+  setsaveddvar("cg_defaultWindAmplitudeScale", var_0);
 }
 
 function set_wind_frequency(var_0) {
-  setsaveddvar("MRNRKKOPLN", var_0);
+  setsaveddvar("cg_defaultWindFrequencyScale", var_0);
 }
 
 function set_wind_area_scale(var_0) {
-  setsaveddvar("LQLSPQOPKM", var_0);
+  setsaveddvar("cg_defaultWindAreaScale", var_0);
 }
 
 function spawn_debug_particles(var_0) {

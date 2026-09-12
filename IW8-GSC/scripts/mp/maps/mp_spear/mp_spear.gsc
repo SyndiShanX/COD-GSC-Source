@@ -16,11 +16,11 @@ function main() {
   scripts\mp\compass::setupminimap("compass_map_mp_spear", "codcaster_compass_map_mp_spear");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
   scripts\mp\door::door_system_init("retract_door_trigger");
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NOSQLKNSQO", 40);
-  setDvar("TSPOQPTMS", 256);
-  setDvar("NKLMONNPNN", 768);
-  setDvar("NSSMQLPRNT", 0.01);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_tessellationFactor", 40);
+  setDvar("r_tessellationCutoffFalloff", 256);
+  setDvar("r_umbraAccurateOcclusionThreshold", 768);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "desert";

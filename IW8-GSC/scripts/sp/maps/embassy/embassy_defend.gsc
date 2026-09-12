@@ -4,7 +4,7 @@
 ******************************************************/
 
 function embassy_defend_precache() {
-  setsaveddvar("NLRRTORQPN", 5);
+  setsaveddvar("ai_corpseCount", 5);
   setDvar("VehicleContinuesOnDriverDeath", 1);
   level.first_roof_struct = spawnStruct();
   level.first_roof_struct.origin = (-38, -599, 150);
@@ -2518,8 +2518,8 @@ function scene_triage() {
   scripts\engine\utility::flag_set("green_beam_acquired");
 
   if(level.player ispcplayer()) {
-    level.og_zplanes = getDvar("OMNONNMOTP");
-    setsaveddvar("OMNONNMOTP", "0.1 500 1.5 10000");
+    level.og_zplanes = getDvar("r_zPlanes");
+    setsaveddvar("r_zPlanes", "0.1 500 1.5 10000");
   }
 
   level.green_beam = var_6;
@@ -2540,7 +2540,7 @@ function scene_triage() {
   var_3 = scripts\engine\utility::array_remove_array([level.farah, level.price], var_3);
 
   if(isDefined(level.og_zplanes) && level.player ispcplayer()) {
-    setsaveddvar("OMNONNMOTP", level.og_zplanes);
+    setsaveddvar("r_zPlanes", level.og_zplanes);
     level.og_zplanes = undefined;
   }
 
@@ -4025,7 +4025,7 @@ function defend_wave_4_technicles_start() {
 }
 
 function defend_wave_4_technicles_main() {
-  setsaveddvar("NQNQPRLRQM", 0.15);
+  setsaveddvar("fx_lights_intensity_scale", 0.15);
   visionsetnaked("embassy_field_brighter", 3);
   level.player scripts\sp\utility::set_player_attacker_accuracy(0.5);
   thread dialogue_rooftops_wave_4_technicals();
@@ -4111,7 +4111,7 @@ function defend_wave_4_technicles_main() {
     scripts\engine\sp\utility::display_hint("green_beam_check");
   }
 
-  setsaveddvar("NQNQPRLRQM", 1);
+  setsaveddvar("fx_lights_intensity_scale", 1);
 }
 
 function achievement_watcher() {
@@ -5343,7 +5343,7 @@ function defend_wave_6_start() {
 }
 
 function defend_wave_6_main() {
-  setsaveddvar("NQNQPRLRQM", 0.2);
+  setsaveddvar("fx_lights_intensity_scale", 0.2);
   level.farah scripts\engine\sp\utility::clear_force_color();
   level.farah scripts\engine\sp\utility::set_force_color("b");
   thread compound_technicals();
@@ -9226,7 +9226,7 @@ function movemortar(var_0, var_1, var_2, var_3, var_4) {
 
   if(getdvarint("scr_mortar_gravity")) {
     var_0.origin = var_1;
-    var_5 = getdvarint("NPOQPMP");
+    var_5 = getdvarint("bg_gravity");
     var_6 = distance(var_1, var_2);
     var_7 = var_2 - var_1;
     var_8 = 0.5 * var_5 * squared(var_3) * -1;

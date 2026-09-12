@@ -13,10 +13,10 @@ function main() {
   scripts\mp\compass::setupminimap("compass_map_mp_m_hill", "codcaster_compass_map_mp_m_hill");
   scripts\cp_mp\utility\game_utility::registerarenamap();
   level.requiresminstartspawns = 0;
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NSSMQLPRNT", 0.01);
-  setDvar("MQPQKNPQOK", 3);
-  setDvar("MRNRKKOPLN", 3);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
+  setDvar("cg_defaultWindAmplitudeScale", 3);
+  setDvar("cg_defaultWindFrequencyScale", 3);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "woodland";

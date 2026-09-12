@@ -137,7 +137,7 @@ function trigger_createart_transient(var_0) {
 function createart_transient_thread() {}
 
 function is_transient_createart_enabled() {
-  if(getDvar("LSTTOTKPNP") != "") {
+  if(getDvar("createfx") != "") {
     return true;
   }
 
@@ -558,11 +558,11 @@ function trigger_sun_off(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(getdvarint("MQRQQONQSL") == 0) {
+    if(getdvarint("sm_sunEnable") == 0) {
       continue;
     }
 
-    setsaveddvar("MQRQQONQSL", 0);
+    setsaveddvar("sm_sunEnable", 0);
   }
 }
 
@@ -570,11 +570,11 @@ function trigger_sun_on(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(getdvarint("MQRQQONQSL") == 1) {
+    if(getdvarint("sm_sunEnable") == 1) {
       continue;
     }
 
-    setsaveddvar("MQRQQONQSL", 1);
+    setsaveddvar("sm_sunEnable", 1);
   }
 }
 

@@ -152,7 +152,7 @@ function main() {
   level._effect["car_brakelight_truck_L"] = loadfx("vfx/misc/car_brakelight_truck_l");
   level._effect["car_unlock_fx"] = loadfx("vfx/iw8/level/stpetersburg/vfx_stpburg_veh_parklights_skilo");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\stpetersburg\gen\stpetersburg_fx::main();
     scripts\sp\maps\stpetersburg\gen\stpetersburg_sound::main();
     level._effect["cold_breath"] = loadfx("vfx/iw8/char/blood/vfx_breath.vfx");

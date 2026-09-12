@@ -118,7 +118,7 @@ function get_is_looking_at(var_0, var_1, var_2, var_3) {
     var_4 = var_2;
   }
 
-  var_5 = self worldpointtoscreenpos(var_4, getdvarint("MRNKTKLLKP"));
+  var_5 = self worldpointtoscreenpos(var_4, getdvarint("cg_targetBaseFov"));
 
   if(!isDefined(var_5)) {
     return 0;
@@ -1221,7 +1221,7 @@ function autosavethreatcheck_hometown(var_0, var_1) {
 
 function transient_load_town() {
   wait 2;
-  setsaveddvar("OMNONNMOTP", "0.1 400 0.1 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 0.1 1000");
   scripts\engine\sp\utility::transient_load_array(["hometown_buried_tr", "hometown_main_town_tr", "hometown_main_town_carried_tr"]);
 }
 
@@ -1340,7 +1340,7 @@ function gas_cover_blown_monitor() {
 
       var_2 = var_1 gettagorigin("tag_flash");
 
-      if(isDefined(level.player worldpointtoscreenpos(var_2, getdvarint("MRNKTKLLKP")))) {
+      if(isDefined(level.player worldpointtoscreenpos(var_2, getdvarint("cg_targetBaseFov")))) {
         continue;
       }
 

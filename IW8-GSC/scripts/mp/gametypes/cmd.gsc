@@ -73,7 +73,7 @@ function updategametypedvars() {
   }
 
   level.controltoprogress = 1;
-  setDvar("NSOMOMMLML", 200);
+  setDvar("cg_buttonHintNaturalDistance", 200);
   level.forcedobjectiveindex = getdvarint("scr_cmd_force_index", -1);
 
   if(level.forcedobjectiveindex != -1) {

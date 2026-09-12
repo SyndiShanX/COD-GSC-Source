@@ -47,7 +47,7 @@ function main() {
   level.firstcratedrop = 1;
   game["dialog"]["gametype"] = "hunted";
 
-  if(getdvarint("OSMSLRTOP")) {
+  if(getdvarint("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
   }
 

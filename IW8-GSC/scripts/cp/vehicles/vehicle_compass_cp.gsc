@@ -6,7 +6,7 @@
 function init() {
   level.ismountdisabled = getdvarint("debug_challenges", 0) != 0;
   level.play_intel_collect_vo = getdvarint("OLPQMTTQR", 1) != 0;
-  level.getallactivequestsforteam = getdvarint("LRTSSKLKPK", 1);
+  level.getallactivequestsforteam = getdvarint("current_season", 1);
 
   if(!challengesenabled()) {
     return;
@@ -472,7 +472,7 @@ function relic_amped_is_there_valid_new_victim() {
   }
 
   if(!isDefined(var_0)) {
-    var_0 = getDvar("NKTMKRMSKR");
+    var_0 = getDvar("g_gametype");
   }
 
   if(!isDefined(var_0)) {
@@ -1025,7 +1025,7 @@ function onplayerkillassist(var_0) {
       }
 
       if(!isDefined(var_2)) {
-        var_2 = getDvar("NKTMKRMSKR");
+        var_2 = getDvar("g_gametype");
       }
 
       var_3 = "";
@@ -4343,7 +4343,7 @@ function init_sentry_traps(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
   }
 
   if(!isDefined(var_11)) {
-    var_11 = getDvar("NKTMKRMSKR");
+    var_11 = getDvar("g_gametype");
   }
 
   var_12 = play_station_closed_vo(var_6);
@@ -4376,7 +4376,7 @@ function init_sentry_traps(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
     var_8 = "MOD_CRUSH";
   }
 
-  if(getdvarint("LTSNLQNRKO", 1)) {
+  if(getdvarint("onlinegame", 1)) {
     var_19 = var_1 getfireteammembers();
     var_20 = var_19.size;
   } else {

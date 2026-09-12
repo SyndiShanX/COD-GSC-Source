@@ -22,7 +22,7 @@ function setupcommoncallbacks() {
 
   var_0 = undefined;
 
-  if(getDvar("MOLPOSLOMO") == "arena") {
+  if(getDvar("ui_gametype") == "arena") {
     var_1 = 0;
 
     if(isusingmatchrulesdata()) {
@@ -37,15 +37,15 @@ function setupcommoncallbacks() {
   }
 
   level.maxtagsvisible = 0;
-  var_2 = getdvarint("LTSNLQNRKO") && !getdvarint("LSTLQTSSRM");
+  var_2 = getdvarint("onlinegame") && !getdvarint("xblive_privatematch");
 
   if(var_2) {
     level.maxtagsvisible = getdvarint("scr_game_soccerevent", 0);
 
-    if(getDvar("NSQLTTMRMP") == "mp_m_stadium" && getdvarint("scr_stadium_soccerball", 1)) {
+    if(getDvar("ui_mapname") == "mp_m_stadium" && getdvarint("scr_stadium_soccerball", 1)) {
       level.maxtagsvisible = 1;
     }
-  } else if(getDvar("NSQLTTMRMP") == "mp_m_stadium" && !dotournamentendgame() && !isgamebattlematch()) {
+  } else if(getDvar("ui_mapname") == "mp_m_stadium" && !dotournamentendgame() && !isgamebattlematch()) {
     level.maxtagsvisible = 1;
   }
 
@@ -379,7 +379,7 @@ function onplayerconnectcommon() {
       thread nvghintnotify();
     }
 
-    var_0 setclientdvar("QTSPTNLOL", 65);
+    var_0 setclientdvar("cg_fov", 65);
     var_0 setclientdvar("LTMOQONPQ", 0);
 
     if(level.set_systems_init_flag > 0) {
@@ -1086,7 +1086,7 @@ function ref_1326e() {
     var_0 = scripts\engine\utility::array_randomize(var_0);
     var_1 = var_0[0];
 
-    if(getDvar("NSQLTTMRMP") == "mp_firingrange") {
+    if(getDvar("ui_mapname") == "mp_firingrange") {
       var_1 = (-194, -858, 90);
     }
   }
@@ -1134,7 +1134,7 @@ function init_reach_exhaust_waste(var_0, var_1) {
   var_7 = anglestoup(var_6);
   var_8 = anglesToForward(var_6);
 
-  if(getDvar("NSQLTTMRMP") == "mp_m_stadium") {
+  if(getDvar("ui_mapname") == "mp_m_stadium") {
     var_9 = var_7 * 500 + (0, 0, 80);
   } else {
     var_9 = var_8 * 50 + (0, 0, 80);

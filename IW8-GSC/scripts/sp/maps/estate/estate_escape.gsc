@@ -551,7 +551,7 @@ function hallway_run_start() {
   thread hallway_run_start_post_load();
   thread setup_hallway_scriptables();
   scripts\engine\utility::flag_set("lighting_fire_hallways");
-  setsaveddvar("TLMMOPMSK", 1);
+  setsaveddvar("r_spotLightEntityShadows", 1);
 }
 
 function hallway_run_start_post_load() {
@@ -623,7 +623,7 @@ function stairs_attack_start() {
 
   thread hallway_run_start_post_load();
   scripts\engine\utility::flag_set("lighting_fire_hallways");
-  setsaveddvar("TLMMOPMSK", 1);
+  setsaveddvar("r_spotLightEntityShadows", 1);
 }
 
 function stairs_attack_main() {
@@ -638,7 +638,7 @@ function stairs_attack_main() {
   thread audio_stop_obj_room_fires();
   scripts\engine\utility::flag_wait("explosion_scene_done");
   level.player setmovespeedscale(1);
-  setsaveddvar("OLMLOTTLRM", 1.4);
+  setsaveddvar("player_sprintSpeedScale", 1.4);
   thread scripts\sp\maps\estate\estate_infil::shutdown_player_stay_behind_ai();
 }
 
@@ -795,7 +795,7 @@ function stairs_explosion_scene() {
   level.player clearclienttriggeraudiozone(6);
 
   if(level.player ispcplayer()) {
-    setsaveddvar("OMNONNMOTP", "0.1 500 2.5 10000");
+    setsaveddvar("r_zPlanes", "0.1 500 2.5 10000");
   }
 
   wait 0.05;
@@ -910,7 +910,7 @@ function escape_intro_start() {
   thread spawn_escape_heli();
   level.player.stairs_weapon = level.player getweaponslistprimaries()[0];
   scripts\engine\utility::flag_set("lighting_escape");
-  setsaveddvar("TLMMOPMSK", 1);
+  setsaveddvar("r_spotLightEntityShadows", 1);
   var_0 = scripts\engine\utility::getStruct("escape_getup", "targetname");
   var_0 thread scripts\sp\player_rig::link_player_to_rig("escape_getup", "stand", 0, 0, 0, 10, 10, 5, 5, 1);
 }
@@ -1157,7 +1157,7 @@ function escape_start() {
   scripts\engine\sp\utility::set_start_location("finale", scripts\engine\utility::array_add(level.friendlies, level.player));
   scripts\engine\sp\utility::array_spawn_targetname("escape_start_enemies", 1);
   scripts\engine\utility::flag_set("lighting_escape");
-  setsaveddvar("TLMMOPMSK", 1);
+  setsaveddvar("r_spotLightEntityShadows", 1);
 }
 
 function escape_main() {
@@ -1188,9 +1188,9 @@ function escape_main() {
   scripts\engine\utility::array_thread(var_4, &heli_destructible_ceiling_logic);
   var_5 = getscriptablearray("scriptable_rp_propane_tank_long_01", "classname");
   scripts\engine\utility::array_thread(var_5, &heli_destructible_propane_tank_logic);
-  setsaveddvar("MSOOMPMPQS", 1);
+  setsaveddvar("player_sprintUnlimited", 1);
   scripts\engine\utility::flag_wait("tunnel_approach");
-  setsaveddvar("MSOOMPMPQS", 0);
+  setsaveddvar("player_sprintUnlimited", 0);
 }
 
 function escape_color_trig_think() {
@@ -1521,7 +1521,7 @@ function tunnel_start() {
   level.price.speedscalemult = 1;
   level.hadir.speedscalemult = 1.1;
   scripts\engine\utility::flag_set("lighting_escape");
-  setsaveddvar("TLMMOPMSK", 1);
+  setsaveddvar("r_spotLightEntityShadows", 1);
 }
 
 function tunnel_main() {
@@ -2019,7 +2019,7 @@ function heli_event_obj_room() {
     waitframe();
   }
 
-  setsaveddvar("TLMMOPMSK", 1);
+  setsaveddvar("r_spotLightEntityShadows", 1);
   heli_spotlight_toggle(level.escape_heli, 1);
   level.escape_heli waittill("nav_goal");
   level.escape_heli settargetyaw(var_2.angles[1]);

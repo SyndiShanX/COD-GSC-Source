@@ -57,9 +57,9 @@ function table_getrole() {
   _ispointinbadarea::init();
   _initignoredtabspergamemode::init();
   _keypadscriptableused::init();
-  setDvar("LKTPRPKPMR", 1);
-  setDvar("LOSOOOTNMS", 0);
-  setDvar("NNMLSMNTOQ", -1);
+  setDvar("voice_proximity_team", 1);
+  setDvar("voice_proximity_enemy", 0);
+  setDvar("voice_proximity_radius", -1);
   thread table_getaddblueprintattachments();
 }
 

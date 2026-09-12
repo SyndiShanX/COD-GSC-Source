@@ -18,13 +18,13 @@ function main() {
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
   var_0 = ref_12333(level);
   level.kill_border_triggers = scripts\engine\utility::array_combine(level.kill_border_triggers, var_0);
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NSSMQLPRNT", 0.01);
-  setDvar("LTMPKRLLNM", 8192);
-  setDvar("LTQMSPKRKO", 6);
-  setDvar("MROOOROPKL", 10);
-  setDvar("MNQKPNLOPT", 1);
-  setDvar("NRSOTSLSSO", 1);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
+  setDvar("r_vertexDeformCutOffDist", 8192);
+  setDvar("sm_spotUpdateLimit", 6);
+  setDvar("sm_roundRobinPrioritySpotShadows", 10);
+  setDvar("sm_spotShadowScoreSystem", 1);
+  setDvar("sm_spotUpdateMoreDynEnt", 1);
   setDvar("scr_ignore_frontline_anchor", 1);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -46,7 +46,7 @@ function main() {
 }
 
 function play_movie(var_0) {
-  if(getdvarint("LLQQOPKTKM") == 1) {
+  if(getdvarint("r_reflectionProbeGenerate") == 1) {
     return;
   }
 

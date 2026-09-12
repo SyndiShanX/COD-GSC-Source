@@ -14,16 +14,16 @@ function main() {
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_hackney_am", "codcaster_compass_map_mp_hackney_am");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
-  setDvar("PKKMTTRQO", 8);
-  setDvar("LKOLRONRNQ", 1500);
-  setDvar("MMNMQTSOSP", 0);
-  setDvar("TMNTMTQRM", 0);
-  setDvar("NPONLLLSPL", 0.325);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 4);
-  setDvar("TSSONTORK", 0);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("sm_spotDistCull", 1500);
+  setDvar("r_tessellation", 0);
+  setDvar("sm_sunDistantShadows", 0);
+  setDvar("sm_sunSampleSizeNear", 0.325);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 4);
+  setDvar("r_reflectionProbeLightingEnabled", 0);
   setDvar("r_useCompressedSunShadow", 1);
-  setDvar("NSSMQLPRNT", 0.01);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -46,7 +46,7 @@ function main() {
   thread ref_121f5();
   thread ref_136ad();
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     foreach(var_2 in getEntArray("van_hackney_infil_alpha_lighting_model", "targetname")) {
       var_2 hide();
     }

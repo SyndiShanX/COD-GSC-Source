@@ -1298,8 +1298,8 @@ function ui_createhudelement(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.label = var_0;
   var_7.color = var_3;
   var_8 = 40;
-  var_9 = (1 - getdvarfloat("LQORTPMNLL", 0)) * var_8;
-  var_10 = (1 - getdvarfloat("NPLKLQMNPL", 0)) * var_8 / 2;
+  var_9 = (1 - getdvarfloat("hudBounds_adjusted_horizontal", 0)) * var_8;
+  var_10 = (1 - getdvarfloat("hudBounds_adjusted_vertical", 0)) * var_8 / 2;
   var_7 scripts\mp\hud_util::setpoint(var_4, var_4, 143 + var_9, var_6 + var_10);
 
   if(isDefined(var_1)) {

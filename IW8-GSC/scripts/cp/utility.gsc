@@ -72,8 +72,8 @@ function setupdamagetriggers(var_0) {
   var_1 = getEnt("playable_area", "targetname");
   var_2 = getEnt("boundary_toxic_line", "targetname");
   var_3 = isDefined(var_1);
-  var_4 = getDvar("NSQLTTMRMP");
-  var_5 = getDvar("MOLPOSLOMO");
+  var_4 = getDvar("ui_mapname");
+  var_5 = getDvar("ui_gametype");
   var_0.last_good_pos = undefined;
   var_0.outofbounds = 1;
   var_6 = undefined;
@@ -591,7 +591,7 @@ function gameflagwait(var_0) {
 }
 
 function matchmakinggame() {
-  return level.onlinegame && !getdvarint("LSTLQTSSRM");
+  return level.onlinegame && !getdvarint("xblive_privatematch");
 }
 
 function inovertime() {
@@ -1114,7 +1114,7 @@ function getattachmenttype(var_0) {
   var_1 = tablelookup("mp/attachmenttable.csv", 4, var_0, 2);
 
   if(!isDefined(var_1) || isDefined(var_1) && var_1 == "") {
-    var_2 = getDvar("NKTMKRMSKR");
+    var_2 = getDvar("g_gametype");
 
     if(var_2 == "zombie") {
       var_1 = tablelookup("cp/zombies/zombie_attachmentTable.csv", 4, var_0, 2);
@@ -8892,7 +8892,7 @@ function showminimap() {
 }
 
 function getplayerdataloadoutgroup() {
-  if(getdvarint("LPSPMQSNPQ")) {
+  if(getdvarint("systemlink")) {
     return "privateloadouts";
   }
 
@@ -9638,7 +9638,7 @@ function truck_detachvehiclefromairdropsequence() {
 }
 
 function trialympic_fire() {
-  var_0 = getDvar("NSQLTTMRMP");
+  var_0 = getDvar("ui_mapname");
 
   if(var_0 == "cp_raid_complex" || var_0 == "cp_dntsk_raid") {
     return true;
@@ -9649,7 +9649,7 @@ function trialympic_fire() {
 
 function issimultaneouskillenabled() {
   if(!isDefined(level.simultaneouskillenabled)) {
-    level.simultaneouskillenabled = getdvarint("MRSNQSMSPL", 0) == 0;
+    level.simultaneouskillenabled = getdvarint("killswitch_simultaneous_deaths", 0) == 0;
   }
 
   return level.simultaneouskillenabled;
@@ -9664,7 +9664,7 @@ function onlinestatsenabled() {
 }
 
 function privatematch() {
-  return level.onlinegame && getdvarint("LSTLQTSSRM");
+  return level.onlinegame && getdvarint("xblive_privatematch");
 }
 
 function getenemycount(var_0, var_1) {

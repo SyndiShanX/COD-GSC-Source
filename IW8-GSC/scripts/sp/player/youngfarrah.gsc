@@ -23,21 +23,21 @@ function youngfarrahsetup() {
   thread prone_speedup();
   level.player scripts\sp\player::remove_all_armor();
   level.player scripts\sp\player::set_player_max_health(1);
-  setsaveddvar("MSRSPQNQKP", 2);
-  setsaveddvar("MNPNORMOMP", 1.35);
-  setsaveddvar("NTMRNPKSPM", 0.665);
-  setsaveddvar("MLTSTQKLOQ", 0.012);
-  setsaveddvar("MSLNOOKPTO", 600);
-  setsaveddvar("MKKMRQLKT", 20);
-  setsaveddvar("QLLLONQRS", 0);
-  setsaveddvar("LKQLKNRLQ", 0);
+  setsaveddvar("player_meleeDamageMultiplier", 2);
+  setsaveddvar("player_viewmodelMoveAnimScale", 1.35);
+  setsaveddvar("bg_sprintLoopTimeScale", 0.665);
+  setsaveddvar("bg_viewBobAmplitudeSprinting", 0.012);
+  setsaveddvar("bg_viewBobTransTime", 600);
+  setsaveddvar("mount_side_min_height", 20);
+  setsaveddvar("mount_tuning_shapecast_cylinder_additional_height", 0);
+  setsaveddvar("mount_indicator_inworld", 0);
   level.player modifybasefov(75, 0.05);
   baseraidalblur(0);
 
   if(level.player ispcplayer()) {
-    setsaveddvar("OMNONNMOTP", "0.1 400 0.75 1000");
+    setsaveddvar("r_zPlanes", "0.1 400 0.75 1000");
   } else {
-    setsaveddvar("OMNONNMOTP", "0.1 400 3.25 1000");
+    setsaveddvar("r_zPlanes", "0.1 400 3.25 1000");
   }
 
   scripts\engine\sp\utility::add_hint_string("ads", &"HOMETOWN/ADS", &player_fullads);
@@ -73,17 +73,17 @@ function prone_speedup() {
 }
 
 function weapfireradialblur() {
-  setsaveddvar("NKTRSSTMRQ", 0, 0);
-  setsaveddvar("LSOPQMRPNR", 0.092, 0);
-  setsaveddvar("MLTTMLTKOR", 0.01, 0);
+  setsaveddvar("r_mbRadialOverrideRadius", 0, 0);
+  setsaveddvar("r_mbRadialOverrideStrength", 0.092, 0);
+  setsaveddvar("r_mbRadialOverrideDistortion", 0.01, 0);
   wait 0.05;
   baseraidalblur(0.15);
 }
 
 function baseraidalblur(var_0) {
-  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0.75, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0.002, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0.01, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideRadius", 0.75, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideStrength", 0.002, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideDistortion", 0.01, var_0);
 }
 
 function player_fullads() {
@@ -104,7 +104,7 @@ function adsviewbobhack() {
   for(;;) {
     var_0 = level.player playerads();
     var_1 = scripts\engine\math::factor_value(1.35, 1.3, var_0);
-    setsaveddvar("MNPNORMOMP", var_1);
+    setsaveddvar("player_viewmodelMoveAnimScale", var_1);
     wait 0.05;
   }
 }

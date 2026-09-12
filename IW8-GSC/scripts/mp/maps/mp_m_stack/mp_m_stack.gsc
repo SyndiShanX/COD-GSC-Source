@@ -14,12 +14,12 @@ function main() {
   scripts\mp\compass::setupminimap("compass_map_mp_m_stack", "codcaster_compass_map_mp_m_stack");
   scripts\cp_mp\utility\game_utility::registerarenamap();
   level.requiresminstartspawns = 0;
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NSSMQLPRNT", 0.01);
-  setDvar("TMNTMTQRM", 1);
-  setDvar("NPONLLLSPL", 0.3);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 2);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
+  setDvar("sm_sunDistantShadows", 1);
+  setDvar("sm_sunSampleSizeNear", 0.3);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 2);
   setDvar("r_useCompressedSunShadow", 1);
   game["attackers"] = "allies";
   game["defenders"] = "axis";

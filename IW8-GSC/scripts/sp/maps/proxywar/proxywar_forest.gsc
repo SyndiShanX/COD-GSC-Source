@@ -122,7 +122,7 @@ function forest_trees_start() {
 
 function forest_trees_main() {
   scripts\engine\sp\utility::autosave_by_name("forest_trees");
-  setsaveddvar("MNSOQLKMT", "3.2 0.0006 1 1");
+  setsaveddvar("fx_lighting_params", "3.2 0.0006 1 1");
   scripts\engine\utility::exploder("begin_amb_fx");
   scripts\engine\utility::exploder("begin_flares");
   thread forest_overlook_door();
@@ -552,7 +552,7 @@ function overlook_group_spawn_func() {
 }
 
 function setup_overlook_scene() {
-  setsaveddvar("LKOLRONRNQ", 3000);
+  setsaveddvar("sm_spotDistCull", 3000);
   var_0 = getEnt("watchtower_searchlight_source", "targetname");
   var_1 = scripts\engine\utility::spawn_tag_origin(var_0.origin, (0, 0, 0));
   var_0 linkTo(var_1);
@@ -993,7 +993,7 @@ function wait_searchlight_destroyed() {
   self.tagoffset delete();
   self.searchlightmodel delete();
   self delete();
-  setsaveddvar("LKOLRONRNQ", 1000);
+  setsaveddvar("sm_spotDistCull", 1000);
 }
 
 function forest_overlook_catchup() {
@@ -1481,7 +1481,7 @@ function forest_patrol_main() {
   var_0 = getEnt("opaque_glass_panel", "targetname");
   var_0 delete();
   level thread scripts\sp\maps\proxywar\proxywar_vo::vo_fp_flashlight_nag();
-  setsaveddvar("MNSOQLKMT", "2.8 0.0006 1 1");
+  setsaveddvar("fx_lighting_params", "2.8 0.0006 1 1");
   scripts\engine\utility::stop_exploder("begin_amb_fx");
   scripts\engine\utility::stop_exploder("begin_flares");
   scripts\engine\sp\utility::autosave_by_name("forest_patrol");

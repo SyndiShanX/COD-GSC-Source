@@ -13,7 +13,7 @@ function main() {
   scripts\mp\compass::setupminimap("compass_map_mp_m_cargo", "codcaster_compass_map_mp_m_cargo");
   scripts\cp_mp\utility\game_utility::registerarenamap();
   level.requiresminstartspawns = 0;
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

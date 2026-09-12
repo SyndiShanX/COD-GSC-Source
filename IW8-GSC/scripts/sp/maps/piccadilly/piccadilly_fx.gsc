@@ -126,7 +126,7 @@ function main() {
   level._effect["vfx_smoke_bomb_linger_02"] = loadfx("vfx/iw7/levels/piccadilly/vfx_smoke_bomb_linger_02.vfx");
   level._effect["vfx_pic_fire_dlight_sml_01"] = loadfx("vfx/iw7/levels/piccadilly/vfx_pic_fire_dlight_sml_01.vfx");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\piccadilly\gen\piccadilly_fx::main();
     scripts\sp\maps\piccadilly\gen\piccadilly_sound::main();
     return;

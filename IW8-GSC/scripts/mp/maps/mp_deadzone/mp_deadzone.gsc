@@ -15,10 +15,10 @@ function main() {
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_deadzone", "codcaster_compass_map_mp_deadzone");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NKLMONNPNN", 768);
-  setDvar("NSSMQLPRNT", 0.01);
-  setDvar("NOSQLKNSQO", 45);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_umbraAccurateOcclusionThreshold", 768);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
+  setDvar("r_tessellationFactor", 45);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "woodland";

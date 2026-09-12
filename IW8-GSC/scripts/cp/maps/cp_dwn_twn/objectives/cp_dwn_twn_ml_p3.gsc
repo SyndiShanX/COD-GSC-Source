@@ -1218,11 +1218,11 @@ function mp_shipment_patch() {
 function spawn_endgame_camera(var_0) {
   self.ignoreme = 1;
   self cameralinkTo(var_0, "tag_origin", 1);
-  self setclientdvar("LQKPQMPRQN", 1);
+  self setclientdvar("cg_everyoneHearsEveryone", 1);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 
   if(self isconsoleplayer()) {
-    self setclientdvar("QTSPTNLOL", "50");
+    self setclientdvar("cg_fov", "50");
     return;
   }
 }

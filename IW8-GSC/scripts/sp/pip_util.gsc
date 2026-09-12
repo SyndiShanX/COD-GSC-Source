@@ -64,8 +64,8 @@ function bink_pip(var_0) {
   setomnvar("ui_pip_message_text_top", "script_pip_default_top");
   setomnvar("ui_pip_message_text_bottom", "script_pip_default_bottom");
   stopcinematicingame();
-  setsaveddvar("MMRNLMPPLT", "0");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicFullscreen", "0");
+  setsaveddvar("bg_cinematicCanPause", "1");
   setomnvar("ui_show_pip", 1);
   wait 0.05;
   setomnvar("ui_show_pip", 0);
@@ -84,8 +84,8 @@ function bink_pip(var_0) {
   stopcinematicingame();
   setomnvar("ui_show_pip", 0);
   level.player playSound("ui_pip_off_hud_right");
-  setsaveddvar("MMRNLMPPLT", "1");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicFullscreen", "1");
+  setsaveddvar("bg_cinematicCanPause", "1");
 }
 
 function pip_visionset(var_0) {

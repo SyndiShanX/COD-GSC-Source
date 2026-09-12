@@ -1636,18 +1636,18 @@ function dronescreenfx() {
 }
 
 function dronestaticmbscreenfx(var_0) {
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0.1585, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", -0.478, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0.00389, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("OMRQKMSSPP", 1, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideDistortion", 0.1585, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideRadius", -0.478, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideStrength", 0.00389, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideChromaticAberration", 1, var_0);
 }
 
 function removedronescreeneffects() {
   level scripts\engine\sp\utility::dof_disable();
-  thread scripts\engine\sp\utility::lerp_saveddvar("MLTTMLTKOR", 0, 0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0, 0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0, 0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("OMRQKMSSPP", 0, 0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideDistortion", 0, 0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideRadius", 0, 0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideStrength", 0, 0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideChromaticAberration", 0, 0);
   visionsetfadetoblack("", 0);
   visionsetnaked("", 0);
   level.player clearcinematicmotionoverride();
@@ -2103,8 +2103,8 @@ function dronesprinteffectsinlogic() {
   var_0 = 0.35;
   self.sprinting = 1;
   level.player setcinematicmotionoverride("iw8_rcplane_sprint");
-  thread scripts\engine\sp\utility::lerp_saveddvar("LSOPQMRPNR", 0.08, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("NKTRSSTMRQ", 0.4, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideStrength", 0.08, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("r_mbRadialOverrideRadius", 0.4, var_0);
   earthquake(0.23, 0.5, self.origin, 5000);
   self.sprintinitsfxtag playSound("scn_safehouse_rc_plane_plr_thrust_in");
   self.sprintinitsfxtag scalevolume(1, 1);
@@ -3269,7 +3269,7 @@ function is_looking_at(var_0, var_1, var_2, var_3) {
     var_4 = var_2;
   }
 
-  var_5 = level.player worldpointtoscreenpos(var_4, getdvarint("MRNKTKLLKP"));
+  var_5 = level.player worldpointtoscreenpos(var_4, getdvarint("cg_targetBaseFov"));
 
   if(!isDefined(var_5)) {
     return 0;

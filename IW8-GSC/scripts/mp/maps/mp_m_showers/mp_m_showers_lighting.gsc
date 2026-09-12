@@ -4,10 +4,10 @@
 ******************************************************************/
 
 function main() {
-  setDvar("NPONLLLSPL", 0.25);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 1);
-  setDvar("LTQMSPKRKO", 4);
-  setDvar("MROOOROPKL", 10);
-  setDvar("LKOLRONRNQ", 1500);
+  setDvar("sm_sunSampleSizeNear", 0.25);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 1);
+  setDvar("sm_spotUpdateLimit", 4);
+  setDvar("sm_roundRobinPrioritySpotShadows", 10);
+  setDvar("sm_spotDistCull", 1500);
 }

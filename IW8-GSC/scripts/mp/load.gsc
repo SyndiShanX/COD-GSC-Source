@@ -10,7 +10,7 @@ function main() {
 
   level.func = [];
   level._loadstarted = 1;
-  level.createfx_enabled = getDvar("LSTTOTKPNP") != "";
+  level.createfx_enabled = getDvar("createfx") != "";
   level.players_waiting_for_callback = [];
   level.struct_filter = &filterstructs;
   scripts\engine\utility::init_struct_class();
@@ -74,7 +74,7 @@ function main() {
     scripts\mp\createfx::createfx();
   }
 
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     scripts\mp\dev::reflectionprobe_hide_hp();
     scripts\mp\dev::reflectionprobe_hide_front();
     scripts\mp\spawnlogic::setmapcenterfordev();

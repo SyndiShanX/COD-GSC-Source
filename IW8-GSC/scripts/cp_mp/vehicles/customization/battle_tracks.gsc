@@ -23,7 +23,7 @@ function create_keycard_for_reader() {
 
 function create_intel_model(var_0, var_1) {
   wait var_1;
-  var_2 = getdvarint("LLQQOPKTKM", 0) == 0;
+  var_2 = getdvarint("r_reflectionProbeGenerate", 0) == 0;
 
   if(var_2) {
     foreach(var_4 in var_0) {

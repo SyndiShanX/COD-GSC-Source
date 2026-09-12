@@ -309,7 +309,7 @@ function ac130_startuse(var_0, var_1) {
     return false;
   }
 
-  if(getdvarint("NOSLRNTRKL")) {
+  if(getdvarint("camera_thirdPerson")) {
     var_0 scripts\cp\utility::setthirdpersondof(0);
   }
 
@@ -340,7 +340,7 @@ function ac130_returnplayer(var_0, var_1) {
     var_0 visionsetkillstreakforplayer("");
     var_0 unlink();
 
-    if(getdvarint("NOSLRNTRKL")) {
+    if(getdvarint("camera_thirdPerson")) {
       var_0 scripts\cp\utility::setthirdpersondof(1);
     }
 

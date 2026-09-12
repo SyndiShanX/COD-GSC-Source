@@ -53,10 +53,10 @@ function post_load() {
 }
 
 function light_dvars() {
-  setsaveddvar("LTQMSPKRKO", 6);
-  setsaveddvar("MROOOROPKL", 8);
+  setsaveddvar("sm_spotUpdateLimit", 6);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
   wait 2;
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_spotDistCull", 500);
 }
 
 function infil_start() {

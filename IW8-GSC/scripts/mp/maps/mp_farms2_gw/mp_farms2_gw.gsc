@@ -27,9 +27,9 @@ function main() {
   getscriptablelootspawnedcountbyname(400, 1200);
   scripts\mp\compass::setupminimap("compass_map_mp_farms2_gw");
   level thread scripts\engine\scriptable_door::system_init();
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NSSMQLPRNT", 0.01);
-  setDvar("SRQLQNLMK", 1);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
+  setDvar("r_st_lodDistanceScale", 1);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -139,7 +139,7 @@ function perkpackage_giveoverridefieldupgrades() {
 }
 
 function ref_145f0() {
-  var_0 = getdvarint("OKSRMNKKOS", 0);
+  var_0 = getdvarint("gw_gas_circle_size", 0);
   wait 3;
 
   switch (var_0) {

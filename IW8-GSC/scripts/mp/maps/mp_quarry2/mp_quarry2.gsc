@@ -9,7 +9,7 @@ function main() {
   scripts\mp\maps\mp_quarry2\mp_quarry2_fx::main();
   scripts\mp\maps\mp_quarry2\mp_quarry2_lighting::main();
   scripts\mp\load::main();
-  setDvar("SRQLQNLMK", 1);
+  setDvar("r_st_lodDistanceScale", 1);
   scripts\cp_mp\utility\game_utility::registerlargemap();
 
   if(scripts\mp\utility\game::getgametype() == "br") {
@@ -34,7 +34,7 @@ function main() {
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_quarry2");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   level thread scripts\engine\scriptable_door::system_init();
   game["attackers"] = "allies";
   game["defenders"] = "axis";

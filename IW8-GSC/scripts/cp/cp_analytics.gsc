@@ -260,14 +260,14 @@ function start_game_type(var_0, var_1, var_2) {
 function init_matchdata(var_0, var_1) {
   setclientmatchdatadef(var_1);
 
-  if(getdvarint("TLRPKRKMS") != 0) {
+  if(getdvarint("online_matchdata_enabled") != 0) {
     setmatchdatadef(var_0);
     setmatchdata("commonMatchData", "map", level.script);
-    setmatchdata("commonMatchData", "gametype", getDvar("MOLPOSLOMO"));
+    setmatchdata("commonMatchData", "gametype", getDvar("ui_gametype"));
     setmatchdata("commonMatchData", "build_version", getbuildversion());
     setmatchdata("commonMatchData", "build_number", getbuildnumber());
     setmatchdata("commonMatchData", "utc_start_time_s", getsystemtime());
-    setmatchdata("commonMatchData", "is_private_match", getdvarint("LSTLQTSSRM"));
+    setmatchdata("commonMatchData", "is_private_match", getdvarint("xblive_privatematch"));
     setmatchdata("commonMatchData", "is_ranked_match", 1);
   }
 
@@ -571,7 +571,7 @@ function endgame(var_0, var_1) {
     [[level.analyticsendgame]]();
   }
 
-  if(getdvarint("TLRPKRKMS") != 0) {
+  if(getdvarint("online_matchdata_enabled") != 0) {
     sendmatchdata();
   }
 
@@ -894,7 +894,7 @@ function write_clientmatchdata_for_player(var_0, var_1) {
 }
 
 function lootchopper_getattackerdata() {
-  setdvarifuninitialized("OLMQKSKMRS", 0);
+  setdvarifuninitialized("enable_analytics_log", 0);
   level.analyticslog = spawnStruct();
   level.analyticslog.nextplayerid = 0;
   level.analyticslog.nextobjectid = 0;
@@ -918,7 +918,7 @@ function analyticsactive() {
 }
 
 function analyticslogenabled() {
-  return getdvarint("OLMQKSKMRS") == 1;
+  return getdvarint("enable_analytics_log") == 1;
 }
 
 function getuniqueobjectid() {
@@ -1000,14 +1000,14 @@ function logallplayerposthink() {
 function recordbreadcrumbdata() {
   level endon("game_ended");
 
-  if(getDvar("OLKQSLNLPM") == "0") {
+  if(getDvar("online_breadcrumbing_enabled") == "0") {
     return;
   }
 
   if(isDefined(scripts\cp\utility::getgametype()) && scripts\cp\utility::getgametype() == "br") {
-    var_0 = getdvarfloat("MQPMTNTSLO", 4);
+    var_0 = getdvarfloat("online_br_breadcrumbing_frequency", 4);
   } else {
-    var_0 = getdvarfloat("NSMKNLRLON", 2);
+    var_0 = getdvarfloat("online_mp_breadcrumbing_frequency", 2);
   }
 
   scripts\mp\flags::gameflagwait("prematch_done");
@@ -1337,12 +1337,12 @@ function logmatchtags() {
     return;
   }
 
-  if(getdvarint("LSTLQTSSRM")) {
+  if(getdvarint("xblive_privatematch")) {
     logevent_tag("PrivateMatch");
     return;
   }
 
-  if(!getdvarint("LTSNLQNRKO")) {
+  if(!getdvarint("onlinegame")) {
     logevent_tag("OfflineMatch");
     return;
   }
@@ -1442,7 +1442,7 @@ function logevent_sendplayerindexdata() {
 }
 
 function analyticsspawnlogenabled() {
-  return getdvarint("NTOSMKNMSM") != 0;
+  return getdvarint("enable_analytics_spawn_log") != 0;
 }
 
 function ref_119b9() {

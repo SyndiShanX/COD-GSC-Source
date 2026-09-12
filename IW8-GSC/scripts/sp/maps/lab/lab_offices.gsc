@@ -234,7 +234,7 @@ function scripted_plant_bomb(var_0, var_1) {
 
 function setup_detonator_for_ges() {
   level.player allowsprint(0);
-  setsaveddvar("RMLOTKMMM", 0);
+  setsaveddvar("r_mbVelocityScaleViewModel", 0);
   var_0 = spawn("script_model", level.player.origin);
   var_0 hide();
   var_0 setModel("offhand_vm_clacker_tatical_sp_cinematic_destroyed");
@@ -257,7 +257,7 @@ function setup_detonator_for_ges() {
   var_0 unlinkfromplayerview(level.player);
   var_0 delete();
   var_1 delete();
-  setsaveddvar("RMLOTKMMM", 1);
+  setsaveddvar("r_mbVelocityScaleViewModel", 1);
 }
 
 function fake_detonator_lights_off(var_0, var_1) {

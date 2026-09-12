@@ -13,7 +13,7 @@ function main() {
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_garden", "codcaster_compass_map_mp_garden");
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
@@ -219,7 +219,7 @@ function allow_pickup_atmine(var_0, var_1, var_2, var_3, var_4) {
 }
 
 function play_movie(var_0) {
-  if(getdvarint("LLQQOPKTKM") == 1) {
+  if(getdvarint("r_reflectionProbeGenerate") == 1) {
     return;
   }
 

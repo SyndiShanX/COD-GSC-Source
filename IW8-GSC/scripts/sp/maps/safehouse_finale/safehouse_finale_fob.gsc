@@ -5608,7 +5608,7 @@ function killstreak_chopper_main() {
   level.blackoverlay fadeovertime(1);
   level.blackoverlay.alpha = 0;
   level waittill("apache_transition");
-  setsaveddvar("LMRRNRMLS", 1);
+  setsaveddvar("force_toggle_ads_enabled", 1);
   thread scriptable_cleanup();
   scripts\sp\utility::delete_live_grenades();
   level.incomingapache.ignoreme = 1;
@@ -5689,7 +5689,7 @@ function killstreak_chopper_main() {
 
   level.incomingapache scripts\sp\maps\safehouse_finale\safehouse_finale_utility::say_as_chatter("dx_vom_apap_killstreak_chopper_clear_10");
   scripts\engine\utility::flag_set("killstreak_complete");
-  setsaveddvar("LMRRNRMLS", 0);
+  setsaveddvar("force_toggle_ads_enabled", 0);
   wait 0.2;
 
   foreach(var_30 in level.ks_vehicles) {
@@ -6095,7 +6095,7 @@ function ending_scene_start() {
 function ending_scene_main() {
   level.player clearsoundsubmix("sp_npc_steps_down", 1);
   scripts\engine\utility::exploder("end_scene_fx");
-  setsaveddvar("MNSOQLKMT", "2 0.0006 1 1");
+  setsaveddvar("fx_lighting_params", "2 0.0006 1 1");
   thread ending_scene_bodies();
   thread scripts\sp\maps\safehouse_finale\safehouse_finale_lighting::ending_scene_lights();
   thread ending_scene_lights_off();

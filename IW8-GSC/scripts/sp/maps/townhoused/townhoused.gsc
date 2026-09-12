@@ -42,10 +42,10 @@ function main() {
   init_dvars();
   init_flags();
   scripts\sp\maps\townhoused\townhoused_code::deployable_ladder_init();
-  setsaveddvar("NOSQLKNSQO", 45);
-  setsaveddvar("TLMMOPMSK", 1);
-  setsaveddvar("NKLMONNPNN", 512);
-  setsaveddvar("NQQSKRQMTS", 0);
+  setsaveddvar("r_tessellationFactor", 45);
+  setsaveddvar("r_spotLightEntityShadows", 1);
+  setsaveddvar("r_umbraAccurateOcclusionThreshold", 512);
+  setsaveddvar("r_reactiveMotionVelocityTailScale", 0);
   setdvarifuninitialized("scr_bedguy_alt", 0);
   setdvarifuninitialized("scr_switch_to_ground", 0);
   setdvarifuninitialized("scr_ladder_hack", 0);
@@ -109,7 +109,7 @@ function init_demo() {
     return;
   }
 
-  setsaveddvar("LKQLKNRLQ", 0);
+  setsaveddvar("mount_indicator_inworld", 0);
   var_0 = getspawner("buddy_down_enemy", "script_noteworthy");
   var_0.script_moveoverride = 1;
   var_1 = getnode(var_0.target, "targetname");
@@ -175,7 +175,7 @@ function precache() {
   precachemodel("com_copypaper_box_open");
   precacheshader("hint_mantle");
 
-  if(getdvarint("LLQQOPKTKM") || getdvarint("SMNRNLNRN") > 0) {
+  if(getdvarint("r_reflectionProbeGenerate") || getdvarint("g_connectpaths") > 0) {
     return;
   }
 

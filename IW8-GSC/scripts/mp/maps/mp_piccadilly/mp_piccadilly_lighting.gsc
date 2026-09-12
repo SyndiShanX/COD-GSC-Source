@@ -4,7 +4,7 @@
 ********************************************************************/
 
 function main() {
-  setDvar("MROOOROPKL", 10);
-  setDvar("LTQMSPKRKO", 6);
-  setDvar("LKOLRONRNQ", 2000);
+  setDvar("sm_roundRobinPrioritySpotShadows", 10);
+  setDvar("sm_spotUpdateLimit", 6);
+  setDvar("sm_spotDistCull", 2000);
 }

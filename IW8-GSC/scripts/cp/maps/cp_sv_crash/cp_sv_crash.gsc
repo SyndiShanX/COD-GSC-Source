@@ -16,22 +16,22 @@ function main() {
   scripts\cp\maps\cp_sv_crash\gen\cp_sv_crash_art::main();
   scripts\cp\maps\cp_sv_crash\cp_sv_crash_fx::main();
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
-  setDvar("NPONLLLSPL", 0.33);
-  setDvar("TMNTMTQRM", 0);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 2);
-  setDvar("LKOLRONRNQ", 1000);
+  setDvar("sm_sunSampleSizeNear", 0.33);
+  setDvar("sm_sunDistantShadows", 0);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 2);
+  setDvar("sm_spotDistCull", 1000);
   setDvar("r_useCompressedSunShadow", 1);
-  setDvar("LTQMSPKRKO", 6);
-  setDvar("MROOOROPKL", 8);
-  setDvar("MNQKPNLOPT", 1);
-  setDvar("NRSOTSLSSO", 1);
-  setDvar("RSLTKLOS", 1);
-  setDvar("MQPQKNPQOK", 3);
-  setDvar("MRNRKKOPLN", 0.5);
-  setDvar("OLSKLTPPMR", 0.5);
-  setDvar("NKLMONNPNN", 512);
-  setDvar("PKKMTTRQO", 3.5);
+  setDvar("sm_spotUpdateLimit", 6);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotShadowScoreSystem", 1);
+  setDvar("sm_spotUpdateMoreDynEnt", 1);
+  setDvar("sm_spotUpdateMoreDynObj", 1);
+  setDvar("cg_defaultWindAmplitudeScale", 3);
+  setDvar("cg_defaultWindFrequencyScale", 0.5);
+  setDvar("cg_defaultWindNoiseScale", 0.5);
+  setDvar("r_umbraAccurateOcclusionThreshold", 512);
+  setDvar("r_umbraMinObjectContribution", 3.5);
 
   if(level.createfx_enabled) {
     return;

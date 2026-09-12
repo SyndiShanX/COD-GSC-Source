@@ -236,7 +236,7 @@ function blima_chief_play_sound_func(var_0, var_1, var_2) {
 }
 
 function infilthink(var_0, var_1) {
-  var_2 = getdvarfloat("NMORQOTSK", 0.2);
+  var_2 = getdvarfloat("r_mbVelocityScale", 0.2);
 
   foreach(var_4 in getEntArray("infil_delete", "script_noteworthy")) {
     var_4 delete();
@@ -251,8 +251,8 @@ function infilthink(var_0, var_1) {
     var_4 hide();
   }
 
-  setDvar("TLMMOPMSK", 1);
-  setDvar("NMORQOTSK", 1);
+  setDvar("r_spotLightEntityShadows", 1);
+  setDvar("r_mbVelocityScale", 1);
   level notify("start_scene");
   level waittill("prematch_over");
 
@@ -260,8 +260,8 @@ function infilthink(var_0, var_1) {
     var_4 show();
   }
 
-  setDvar("TLMMOPMSK", 0);
-  setDvar("NMORQOTSK", var_2);
+  setDvar("r_spotLightEntityShadows", 0);
+  setDvar("r_mbVelocityScale", var_2);
   var_11 = getEntArray("van_hackney_infil_alpha_probe", "targetname");
   var_12 = getEntArray("van_probe", "script_noteworthy");
   var_13 = getEntArray("van_probe_fallback", "script_noteworthy");

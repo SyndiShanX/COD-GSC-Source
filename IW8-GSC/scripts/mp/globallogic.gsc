@@ -6,15 +6,15 @@
 function init() {
   level.leanthread = getdvarint("scr_runlean_playerthread_count", 0) == 1;
   level.script = tolower(getDvar("mapname"));
-  level.gametype = tolower(getDvar("NKTMKRMSKR"));
-  level.codcasterenabled = getdvarint("MOSNOQPOSS", 0) == 1;
-  level.systemlink = getdvarint("LPSPMQSNPQ", 0) == 1;
+  level.gametype = tolower(getDvar("g_gametype"));
+  level.codcasterenabled = getdvarint("com_codcasterEnabled", 0) == 1;
+  level.systemlink = getdvarint("systemlink", 0) == 1;
   level.splitscreen = issplitscreen();
-  var_0 = getdvarint("OLLOKOKKSM", 0) == 1 || !isgamebattlematch();
-  level.onlinegame = getdvarint("LTSNLQNRKO");
-  level.rankedmatch = level.onlinegame && !getdvarint("LSTLQTSSRM") && var_0 || getdvarint("OSPNSPSKL");
-  level.matchmakingmatch = level.onlinegame && !getdvarint("LSTLQTSSRM");
-  level.playerxpenabled = level.matchmakingmatch && var_0 || getdvarint("OSPNSPSKL");
+  var_0 = getdvarint("mlg_gamebattles_enable_xp", 0) == 1 || !isgamebattlematch();
+  level.onlinegame = getdvarint("onlinegame");
+  level.rankedmatch = level.onlinegame && !getdvarint("xblive_privatematch") && var_0 || getdvarint("force_ranking");
+  level.matchmakingmatch = level.onlinegame && !getdvarint("xblive_privatematch");
+  level.playerxpenabled = level.matchmakingmatch && var_0 || getdvarint("force_ranking");
   level.weaponxpenabled = level.playerxpenabled;
   level.challengesallowed = level.playerxpenabled || getdvarint("debug_challenges");
   level.enforceantiboosting = level.playerxpenabled || level.weaponxpenabled || level.challengesallowed;
@@ -42,13 +42,13 @@ function init() {
   }
 
   if(scripts\mp\utility\game::matchmakinggame()) {
-    var_1 = " LB_MAP_" + getDvar("NSQLTTMRMP");
+    var_1 = " LB_MAP_" + getDvar("ui_mapname");
     var_2 = "";
     var_3 = "";
     var_3 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
     var_2 = " LB_GM_" + level.gametype;
 
-    if(getdvarint("OSMSLRTOP")) {
+    if(getdvarint("g_hardcore")) {
       var_2 += "_HC";
     }
 
@@ -82,32 +82,32 @@ function endmatchonhostdisconnect() {
 }
 
 function registerdvars() {
-  if(getDvar("LLQQOPKTKM") != "1") {
+  if(getDvar("r_reflectionProbeGenerate") != "1") {
     setomnvar("ui_nuke_end_milliseconds", 0);
   }
 
   setDvar("ui_danger_team", "");
   setDvar("ui_inhostmigration", 0);
   setDvar("ui_override_halftime", 0);
-  setDvar("NOSLRNTRKL", getdvarint("scr_thirdPerson"));
-  setDvar("MKPRSSNNRO", 1750);
+  setDvar("camera_thirdPerson", getdvarint("scr_thirdPerson"));
+  setDvar("compassMaxRange", 1750);
   ref_12b1f();
   ref_12b3e();
 }
 
 function ref_12b1f() {
   if((scripts\mp\utility\game::getgametype() == "arm" || scripts\mp\utility\game::unset_relic_landlocked() || scripts\mp\utility\game::vcloseangles()) && getdvarint("scr_game_forceDefaultFallHeight", 0) != 1) {
-    setDvar("NKTQRKRMTS", getdvarint("scr_subMap_fallDamageMinHeight", 560));
-    setDvar("LKMOLLSKKO", getdvarint("scr_subMap_fallDamageMaxHeight", 561));
-    setDvar("OMLLLQKQSR", getdvarint("scr_subMap_softLandingMinHeight", 560));
-    setDvar("LTMMLKRKTR", getdvarint("scr_subMap_softLandingMaxHeight", 561));
+    setDvar("bg_fallDamageMinHeight", getdvarint("scr_subMap_fallDamageMinHeight", 560));
+    setDvar("bg_fallDamageMaxHeight", getdvarint("scr_subMap_fallDamageMaxHeight", 561));
+    setDvar("bg_softLandingMinHeight", getdvarint("scr_subMap_softLandingMinHeight", 560));
+    setDvar("bg_softLandingMaxHeight", getdvarint("scr_subMap_softLandingMaxHeight", 561));
     return;
   }
 
-  setDvar("NKTQRKRMTS", 200);
-  setDvar("LKMOLLSKKO", 375);
-  setDvar("OMLLLQKQSR", 200);
-  setDvar("LTMMLKRKTR", 375);
+  setDvar("bg_fallDamageMinHeight", 200);
+  setDvar("bg_fallDamageMaxHeight", 375);
+  setDvar("bg_softLandingMinHeight", 200);
+  setDvar("bg_softLandingMaxHeight", 375);
 }
 
 function ref_12b3e() {

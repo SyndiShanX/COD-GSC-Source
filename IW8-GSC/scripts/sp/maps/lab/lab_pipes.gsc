@@ -794,10 +794,10 @@ function waittill_and_return_ent(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   thread waittill_trigger_pipes(var_2, var_3, "ent2_used");
   thread waittill_trigger_pipes(var_4, var_5, "ent3_used");
   thread waittill_trigger_pipes(var_6, var_7, "ent4_used");
-  level.og_zplanes = getDvar("OMNONNMOTP");
+  level.og_zplanes = getDvar("r_zPlanes");
   var_8 = level scripts\engine\utility::waittill_any_return("ent1_used", "ent2_used", "ent3_used", "ent4_used");
   scripts\engine\utility::flag_set("pipes_bomb_planted");
-  setsaveddvar("OMNONNMOTP", "0.1 400 1.5 1000");
+  setsaveddvar("r_zPlanes", "0.1 400 1.5 1000");
 
   switch (var_8) {
     case "ent1_used":

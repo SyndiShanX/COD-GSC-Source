@@ -940,9 +940,9 @@ function spawnspectatormapcam(var_0) {
   }
 
   if(level.splitscreen || self issplitscreenplayer()) {
-    self setclientdvars("NSSLSNKPN", "0.65");
+    self setclientdvars("cg_fovScale", "0.65");
   } else {
-    self setclientdvars("NSSLSNKPN", "1");
+    self setclientdvars("cg_fovScale", "1");
   }
 
   self setclientomnvar("ui_mapshot_camera", 1);
@@ -1476,7 +1476,7 @@ function spawnintermission(var_0, var_1, var_2) {
   scripts\mp\utility\player::_freezecontrols(1, undefined, "spawnIntermission");
 
   if(var_2) {
-    self setclientdvar("LQKPQMPRQN", 1);
+    self setclientdvar("cg_everyoneHearsEveryone", 1);
   }
 
   if(isDefined(level.finalkillcam_winner) && level.finalkillcam_winner != "none" && isDefined(level.match_end_delay) && scripts\mp\utility\game::waslastround() && !istrue(level.doingbroshot)) {
@@ -1568,7 +1568,7 @@ function callback_playerdisconnect(var_0) {
     }
   }
 
-  if(getdvarint("TLRPKRKMS") != 0) {
+  if(getdvarint("online_matchdata_enabled") != 0) {
     var_3 = getmatchdata("commonMatchData", "player_count_left");
     var_3++;
     setmatchdata("commonMatchData", "player_count_left", var_3);
@@ -1729,27 +1729,27 @@ function removeplayerondisconnect() {
 
 function initclientdvarssplitscreenspecific() {
   if(level.splitscreen || self issplitscreenplayer()) {
-    self setclientdvars("NSSLSNKPN", "0.75");
+    self setclientdvars("cg_fovScale", "0.75");
     setDvar("r_materialBloomHQScriptMasterEnable", 0);
     return;
   }
 
-  self setclientdvars("NSSLSNKPN", "1");
+  self setclientdvars("cg_fovScale", "1");
 }
 
 function initclientdvars() {
-  setDvar("LOPKSRNTTS", 1);
-  setDvar("LROTSRRQMQ", 1);
+  setDvar("cg_drawCrosshair", 1);
+  setDvar("cg_drawCrosshairNames", 1);
 
   if(level.hardcoremode) {
-    setDvar("LOPKSRNTTS", 0);
-    setDvar("LROTSRRQMQ", 1);
+    setDvar("cg_drawCrosshair", 0);
+    setDvar("cg_drawCrosshairNames", 1);
   }
 
   if(isDefined(level.alwaysdrawfriendlynames) && level.alwaysdrawfriendlynames) {
-    setDvar("NKMOPQSPMO", 1);
+    setDvar("cg_drawFriendlyNamesAlways", 1);
   } else {
-    setDvar("NKMOPQSPMO", 0);
+    setDvar("cg_drawFriendlyNamesAlways", 0);
   }
 
   self setclientdvars("cg_drawSpectatorMessages", 1);
@@ -1757,16 +1757,16 @@ function initclientdvars() {
 
   if(scripts\mp\utility\game::getgametypenumlives()) {
     if(level.teambased) {
-      self setclientdvars("QKMSSSLPK", 0, "SKNSKQTQR", 1, "OLKRNORMOQ", 1, "LTLQSKRKQM", 0);
+      self setclientdvars("cg_deadChatWithDead", 0, "cg_deadChatWithTeam", 1, "cg_deadHearTeamLiving", 1, "cg_deadHearAllLiving", 0);
     } else {
-      self setclientdvars("QKMSSSLPK", 1, "SKNSKQTQR", 0, "OLKRNORMOQ", 0, "LTLQSKRKQM", 0);
+      self setclientdvars("cg_deadChatWithDead", 1, "cg_deadChatWithTeam", 0, "cg_deadHearTeamLiving", 0, "cg_deadHearAllLiving", 0);
     }
   } else {
-    self setclientdvars("QKMSSSLPK", 0, "SKNSKQTQR", 1, "OLKRNORMOQ", 1, "LTLQSKRKQM", 0);
+    self setclientdvars("cg_deadChatWithDead", 0, "cg_deadChatWithTeam", 1, "cg_deadHearTeamLiving", 1, "cg_deadHearAllLiving", 0);
   }
 
   if(level.teambased) {
-    self setclientdvars("LQKPQMPRQN", 0);
+    self setclientdvars("cg_everyoneHearsEveryone", 0);
   }
 
   self setclientdvar("ui_altscene", 0);
@@ -2106,7 +2106,7 @@ function callback_playerconnect() {
   initplayerstats();
   scripts\mp\accolades::applyaccoladestructtoplayerpers();
 
-  if(getDvar("LLQQOPKTKM") == "1") {
+  if(getDvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
   }
 
@@ -2156,7 +2156,7 @@ function callback_playerconnect() {
 
   self logstatmatchguid();
 
-  if(getdvarint("TLRPKRKMS") != 0) {
+  if(getdvarint("online_matchdata_enabled") != 0) {
     var_9 = getmatchdata("commonMatchData", "player_count");
 
     if(var_7) {
@@ -2343,7 +2343,7 @@ function callback_playerconnect() {
     connect_validateplayerteam();
     var_15 = self.pers["team"];
 
-    if(scripts\mp\utility\game::matchmakinggame() && !isbot(self) && !initmaxspeedforpathlengthtable(self) && !self ismlgspectator() && getdvarint("TLNSRKRQP")) {
+    if(scripts\mp\utility\game::matchmakinggame() && !isbot(self) && !initmaxspeedforpathlengthtable(self) && !self ismlgspectator() && getdvarint("team_consistency_fix")) {
       var_15 = self.sessionteam;
     }
 

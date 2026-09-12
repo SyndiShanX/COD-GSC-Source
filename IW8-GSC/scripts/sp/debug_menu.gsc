@@ -941,7 +941,7 @@ function deselect() {
   }
 
   level.selected = undefined;
-  setsaveddvar("MKOQSSQKLL", 2);
+  setsaveddvar("r_hudOutlineWidth", 2);
 
   if(isDefined(level.followcam_enabled) && isDefined(level.func["followcam"])) {
     [[level.func["followcam"]]](0);
@@ -962,7 +962,7 @@ function select(var_0) {
     thread draw_box_forever(var_0, var_0.origin + (0, 0, 16), 32, (0.2, 1, 0.2), var_0.angles, 32);
   } else {
     var_0 hudoutlineenable("outline_nodepth_cyan");
-    setsaveddvar("MKOQSSQKLL", 2);
+    setsaveddvar("r_hudOutlineWidth", 2);
   }
 
   var_0.selected = 1;

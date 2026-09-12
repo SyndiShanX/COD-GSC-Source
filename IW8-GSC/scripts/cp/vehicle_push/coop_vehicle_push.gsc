@@ -14,7 +14,7 @@ function start_coop_push(var_0) {
   level.unloading_func["umike_covered_physics"] = &ref_129ec;
   scripts\cp\cp_modular_spawning::register_aitype_setup("sniper", "actor_enemy_cp_rus_desert_sniper", undefined, undefined);
   scripts\cp\cp_modular_spawning::register_aitype_setup("rpg_helmet", "actor_enemy_cp_alq_desert_rpg_helmet", undefined, undefined);
-  setDvar("QOSTSKSTO", 0);
+  setDvar("bg_pathFollowerMinLookaheadDist", 0);
   scripts\cp\raid_utility::assignspectatortospectatetryagain(["zone_blockade"]);
   scripts\cp\raid_utility::set_raid_checkpoint("raid_coop_push", "coop_push_player_start");
   hide_enemy_mortar_shell();

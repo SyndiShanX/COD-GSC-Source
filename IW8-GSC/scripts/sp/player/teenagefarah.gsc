@@ -12,7 +12,7 @@ function teenage_farah_setup() {
   scripts\common\utility::allow_armor(0);
 
   if(level.player ispcplayer()) {
-    setsaveddvar("OMNONNMOTP", "0.1 500 1.5 10000");
+    setsaveddvar("r_zPlanes", "0.1 500 1.5 10000");
     return;
   }
 }

@@ -753,12 +753,12 @@ function infil_setup_ui() {
   }
 
   thread infil_show_countdown();
-  var_1 = getdvarint("LOPKSRNTTS");
-  var_2 = getdvarint("LROTSRRQMQ");
-  var_3 = getdvarint("NKMOPQSPMO");
-  setDvar("LOPKSRNTTS", 0);
-  setDvar("LROTSRRQMQ", 1);
-  setDvar("NKMOPQSPMO", 1);
+  var_1 = getdvarint("cg_drawCrosshair");
+  var_2 = getdvarint("cg_drawCrosshairNames");
+  var_3 = getdvarint("cg_drawFriendlyNamesAlways");
+  setDvar("cg_drawCrosshair", 0);
+  setDvar("cg_drawCrosshairNames", 1);
+  setDvar("cg_drawFriendlyNamesAlways", 1);
   level waittill("prematch_done");
   var_4 = scripts\mp\utility\player::alwaysshowminimap();
 
@@ -778,9 +778,9 @@ function infil_setup_ui() {
 
   setomnvar("ui_in_infil", -1);
   setomnvar("ui_always_show_nameplates", var_0);
-  setDvar("LOPKSRNTTS", var_1);
-  setDvar("LROTSRRQMQ", var_2);
-  setDvar("NKMOPQSPMO", var_3);
+  setDvar("cg_drawCrosshair", var_1);
+  setDvar("cg_drawCrosshairNames", var_2);
+  setDvar("cg_drawFriendlyNamesAlways", var_3);
 }
 
 function infil_show_countdown() {

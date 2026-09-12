@@ -43,7 +43,7 @@ function matchrecording_getrecordingtype() {
 
   var_0 = getdvarint("scr_match_recording", 0);
 
-  if(var_0 == 0 && getdvarint("SQNRRQTTQ", 0) == 1) {
+  if(var_0 == 0 && getdvarint("g_logEnable", 0) == 1) {
     var_0 = 1;
   } else if(drawentitybounds()) {
     var_0 = 1;
@@ -66,7 +66,7 @@ function matchrecording_validaterecordingtype(var_0) {
       var_1 = 0;
     }
   } else if(var_0 == 1 || var_0 == 2) {
-    var_3 = getdvarint("SQNRRQTTQ", 0);
+    var_3 = getdvarint("g_logEnable", 0);
     var_4 = drawentitybounds();
     var_1 = var_3 == 1 || var_4 == 1;
   }

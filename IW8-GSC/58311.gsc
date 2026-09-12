@@ -250,7 +250,7 @@ function ref_13d4b(var_0, var_1, var_2, var_3) {
     var_3 = 0;
   }
 
-  var_4 = getDvar("NSNPRRQTOP");
+  var_4 = getDvar("snd_hitmarker_alias");
 
   if(var_3 && var_1) {
     level.player playlocalsound("mp_kill_alert");

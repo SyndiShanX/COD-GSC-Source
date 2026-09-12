@@ -16,7 +16,7 @@ function main() {
   setDvar("mantle_force_legacy_system", 1);
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_t_reflex");
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   scripts\engine\utility::flag_init("endwave_audiocountdown_running");
   game["attackers"] = "allies";
   game["defenders"] = "axis";

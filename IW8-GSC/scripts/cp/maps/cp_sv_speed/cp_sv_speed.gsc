@@ -15,13 +15,13 @@ function main() {
   scripts\cp\maps\cp_sv_speed\gen\cp_sv_speed_art::main();
   scripts\cp\maps\cp_sv_speed\cp_sv_speed_fx::main();
   scripts\cp\cp_compass::setupminimap("compass_map_mp_m_speed");
-  setDvar("PKKMTTRQO", 8);
-  setDvar("LSNRQTOKRR", 1);
-  setDvar("NTLKNLNPLK", 2);
-  setDvar("NPONLLLSPL", 0.3);
-  setDvar("TMNTMTQRM", 0);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("sm_sunCascadeSizeMultiplier1", 1);
+  setDvar("sm_sunCascadeSizeMultiplier2", 2);
+  setDvar("sm_sunSampleSizeNear", 0.3);
+  setDvar("sm_sunDistantShadows", 0);
   setDvar("r_useCompressedSunShadow", 1);
-  setDvar("MPOKKOPMTN", "64 128 256 512");
+  setDvar("r_volumetricDepth", "64 128 256 512");
 
   if(level.createfx_enabled) {
     return;

@@ -56,7 +56,7 @@ function threat_sight_set_dvar(var_0) {
     return;
   }
 
-  setDvar("OKQTSOMTKT", var_0);
+  setDvar("ai_threatSight", var_0);
 }
 
 function update_stealth_spotted_thread() {

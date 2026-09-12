@@ -4,7 +4,7 @@
 ***********************************************/
 
 function main() {
-  setsaveddvar("MMLNNQSTTL", 0);
+  setsaveddvar("fx_alphaThreshold", 0);
   scripts\sp\maps\captive\gen\captive_art::main();
   scripts\sp\maps\captive\captive_fx::main();
   scripts\sp\maps\captive\captive_precache::main();
@@ -17,11 +17,11 @@ function main() {
   init_flags();
   scripts\sp\maps\captive\captive_lighting::setup_lighting();
   starts();
-  setsaveddvar("MRNRKKOPLN", 6);
-  setsaveddvar("MQPQKNPQOK", 3);
-  setsaveddvar("LQLSPQOPKM", 50);
-  setsaveddvar("OLSKLTPPMR", 1);
-  setsaveddvar("NQTLPTNSSO", 3);
+  setsaveddvar("cg_defaultWindFrequencyScale", 6);
+  setsaveddvar("cg_defaultWindAmplitudeScale", 3);
+  setsaveddvar("cg_defaultWindAreaScale", 50);
+  setsaveddvar("cg_defaultWindNoiseScale", 1);
+  setsaveddvar("cg_defaultWindStrength", 3);
   scripts\sp\audio::set_audio_level_fade_time(0.05);
   scripts\sp\load::main();
   var_0 = ["frag_farah", "noisemaker"];
@@ -48,7 +48,7 @@ function main() {
   level.player notifyonplayercommand("use_pressed", "+activate");
   level.player notifyonplayercommand("switch_weapon_pressed", "+weapnext");
   level.player notifyonplayercommand("secondary_offhand_pressed", "+smoke");
-  setsaveddvar("NKTRSSTMRQ", 0.5);
+  setsaveddvar("r_mbRadialOverrideRadius", 0.5);
   scripts\sp\utility::nvidiaansel_overridecollisionradius(8);
   level.playermover = scripts\engine\utility::spawn_script_origin(level.player.origin);
   thread player_breath_context();

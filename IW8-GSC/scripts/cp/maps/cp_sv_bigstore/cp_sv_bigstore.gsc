@@ -15,14 +15,14 @@ function main() {
   scripts\cp\maps\cp_sv_bigstore\gen\cp_sv_bigstore_art::main();
   scripts\cp\maps\cp_sv_bigstore\cp_sv_bigstore_fx::main();
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
-  setDvar("NPONLLLSPL", 0.4);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 2);
-  setDvar("TMNTMTQRM", 0);
-  setDvar("LKOLRONRNQ", 1000);
-  setDvar("LTQMSPKRKO", 6);
-  setDvar("MROOOROPKL", 8);
-  setDvar("PKKMTTRQO", 8);
+  setDvar("sm_sunSampleSizeNear", 0.4);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 2);
+  setDvar("sm_sunDistantShadows", 0);
+  setDvar("sm_spotDistCull", 1000);
+  setDvar("sm_spotUpdateLimit", 6);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
 
   if(level.createfx_enabled) {
     return;

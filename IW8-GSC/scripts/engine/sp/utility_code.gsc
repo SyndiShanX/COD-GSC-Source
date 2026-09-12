@@ -622,11 +622,11 @@ function handsignal(var_0, var_1, var_2, var_3) {
 }
 
 function g_speed_get_func(var_0) {
-  return int(getDvar("NSRPQNLSNK"));
+  return int(getDvar("g_speed"));
 }
 
 function g_speed_set_func(var_0, var_1) {
-  setsaveddvar("NSRPQNLSNK", int(var_0));
+  setsaveddvar("g_speed", int(var_0));
 }
 
 function g_bob_scale_get_func(var_0) {

@@ -10,9 +10,9 @@ function main() {
   scripts\cp\maps\cp_arms_dealer\gen\cp_arms_dealer_art::main();
   scripts\cp\maps\cp_arms_dealer\cp_arms_dealer_fx::main();
   scripts\cp\maps\cp_arms_dealer\cp_arms_dealer_lighting::main();
-  setDvar("PKKMTTRQO", 8);
-  setDvar("SRQLQNLMK", 1);
-  setDvar("NSSMQLPRNT", 0.01);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_st_lodDistanceScale", 1);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
   setdvarifuninitialized("scr_use_squads", 1);
 
   if(level.createfx_enabled) {

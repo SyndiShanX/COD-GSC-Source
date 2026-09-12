@@ -4689,7 +4689,7 @@ function c130_crash_sequence(var_0) {
   var_2 = anglesToForward(vectortoangles(var_3));
   var_0 rotateTo(vectortoangles(var_2), 1);
   var_5 = anglelerpquatfrac(var_0.angles, var_4, 1);
-  var_6 = (0, 0, -1 * getdvarint("NPOQPMP", 800));
+  var_6 = (0, 0, -1 * getdvarint("bg_gravity", 800));
   var_7 = (0, 0, 0);
   var_8 = (100, 30, -360);
   var_9 = 15;
@@ -6354,11 +6354,11 @@ function ref_130a8(var_0) {
 function spawn_endgame_camera(var_0) {
   self.ignoreme = 1;
   self cameralinkTo(var_0, "tag_origin", 1);
-  self setclientdvar("LQKPQMPRQN", 1);
+  self setclientdvar("cg_everyoneHearsEveryone", 1);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 
   if(self isconsoleplayer()) {
-    self setclientdvar("QTSPTNLOL", "50");
+    self setclientdvar("cg_fov", "50");
     return;
   }
 }

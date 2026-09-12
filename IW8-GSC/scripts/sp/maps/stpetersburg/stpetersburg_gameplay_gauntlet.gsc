@@ -49,7 +49,7 @@ function gauntlet_main() {
   thread scripts\sp\maps\stpetersburg\stpetersburg_utility::transient_waittill("interrogation_start", ["stpetersburg_gauntlet_script_tr", "stpetersburg_periph_geo_tr"], undefined);
   thread gauntlet_vfx();
   thread gauntlet_hack_bench_badplace();
-  setsaveddvar("TLOLRMSL", 0.01);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
   thread scripts\sp\maps\stpetersburg\stpetersburg_vig_script_gauntlet::gauntlet_vig_start();
   thread scripts\sp\analytics::analytics_kleenex_update("Van to interrogation");
   scripts\engine\utility::flag_set("flag_gauntlet_start_civs");

@@ -238,7 +238,7 @@ function main() {
   level._effect["vfx_muz_pis_w"] = loadfx("vfx/iw8_mp/muzflash/vfx_muz_pis_w.vfx");
   level._effect["vfx_imp_metal_thick_med"] = loadfx("vfx/iw8/weap/_impact/metal/vfx_imp_metal_thick_med.vfx");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\embassy\gen\embassy_fx::main();
     scripts\sp\maps\embassy\gen\embassy_sound::main();
     return;

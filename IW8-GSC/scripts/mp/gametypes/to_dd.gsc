@@ -73,9 +73,9 @@ function maintacopspostinit() {
   scripts\mp\gametypes\obj_bombzone::setbombtimeromnvars();
   game["dialog"]["gametype"] = "manhunt";
 
-  if(getdvarint("OSMSLRTOP")) {
+  if(getdvarint("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  } else if(getdvarint("NOSLRNTRKL")) {
+  } else if(getdvarint("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
   } else if(getdvarint("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];

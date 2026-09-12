@@ -1174,7 +1174,7 @@ function vehicle_registerturret(var_0) {
   self endon("keepStreamPosFresh");
 
   if(!isDefined(level.ref_145df)) {
-    level.ref_145df = max(getdvarint("NOLPSOTORP", 20000) * 0.5 / 1000, 1);
+    level.ref_145df = max(getdvarint("cg_worldStreamingKeepAliveTimeout", 20000) * 0.5 / 1000, 1);
   }
 
   for(;;) {

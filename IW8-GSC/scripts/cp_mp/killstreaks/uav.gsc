@@ -236,7 +236,7 @@ function useuav(var_0, var_1) {
   scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_call_in_uav_for_operator_mission", 1);
   scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_call_in_uav_for_operator_mission_op2", 1);
 
-  if(getdvarint("LRTSSKLKPK", 1) >= 8) {
+  if(getdvarint("current_season", 1) >= 8) {
     scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_call_in_uav_for_operator_mission_op3", 1);
   }
 

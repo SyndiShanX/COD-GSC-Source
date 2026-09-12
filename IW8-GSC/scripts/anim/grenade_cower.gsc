@@ -6,7 +6,7 @@
 #using_animtree("");
 
 function main() {
-  if(getdvarint("LPNQTQRRP", 0) == 1) {
+  if(getdvarint("ai_iw7", 0) == 1) {
     self endon("killanimscript");
     self endon("death");
     self waittill("killanimscript");

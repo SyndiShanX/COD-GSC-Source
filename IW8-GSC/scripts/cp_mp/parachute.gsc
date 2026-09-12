@@ -291,7 +291,7 @@ function steerfallinginternal(var_0, var_1) {
   var_8 = level.framedurationseconds * var_3;
   var_0.vel = (0, 0, var_7);
   waitframe();
-  var_9 = getdvarint("NPOQPMP");
+  var_9 = getdvarint("bg_gravity");
   var_10 = (0, 0, 0);
 
   for(;;) {

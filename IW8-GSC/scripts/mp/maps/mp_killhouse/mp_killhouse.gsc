@@ -11,8 +11,8 @@ function main() {
   scripts\mp\load::main();
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_killhouse", "codcaster_compass_map_mp_killhouse");
-  setDvar("PKKMTTRQO", 8);
-  setDvar("LTMPKRLLNM", 5000);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_vertexDeformCutOffDist", 5000);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

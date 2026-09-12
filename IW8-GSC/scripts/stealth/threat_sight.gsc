@@ -35,7 +35,7 @@ function threat_sight_set_dvar(var_0) {
     return;
   }
 
-  setsaveddvar("OKQTSOMTKT", var_0);
+  setsaveddvar("ai_threatSight", var_0);
   thread threat_sight_set_dvar_display(level);
 }
 
@@ -48,14 +48,14 @@ function threat_sight_set_dvar_display(var_0) {
   }
 
   if(getdvarint("ai_threatUseDisplay", 0)) {
-    setsaveddvar("NPQNNOSNNL", var_0);
+    setsaveddvar("ai_threatSightDisplay", var_0);
   }
 
   setDvar("scr_ai_threatsightaudio", var_0);
 }
 
 function threat_sight_enabled() {
-  if(!getdvarint("OKQTSOMTKT")) {
+  if(!getdvarint("ai_threatSight")) {
     return false;
   }
 
@@ -376,7 +376,7 @@ function threat_sight_player_entity_state_thread() {
       var_7 = var_6 getentitynumber();
       self.stealth.maxalertlevel = max(self.stealth.maxalertlevel, var_6.alertlevelint);
 
-      if(getdvarint("OKQTSOMTKT", 1)) {
+      if(getdvarint("ai_threatSight", 1)) {
         if(var_6[[var_6.fnisinstealthcombat]]()) {
           continue;
         }
@@ -416,7 +416,7 @@ function threat_sight_player_entity_state_thread() {
 
     var_12 = !var_2 && var_0 > 0 && gettime() - var_0 < 250;
 
-    if(getdvarfloat("LONMKRQKOM") <= 0) {
+    if(getdvarfloat("ai_threatSightFakeThreat") <= 0) {
       thread threat_sight_player_sight_audio(var_12, self.stealth.maxthreat);
     }
 
@@ -432,10 +432,10 @@ function player_is_sprinting_at_me(var_0) {
 function threat_sight_fake(var_0, var_1) {
   self notify("threat_sight_fake");
   self endon("threat_sight_fake");
-  setsaveddvar("LONMKRQKOM", var_1);
-  setsaveddvar("LTQTQNSRQK", var_0[0]);
-  setsaveddvar("OKOMMPSLTN", var_0[1]);
-  setsaveddvar("LSLTTLKNNK", var_0[2]);
+  setsaveddvar("ai_threatSightFakeThreat", var_1);
+  setsaveddvar("ai_threatSightFakeX", var_0[0]);
+  setsaveddvar("ai_threatSightFakeY", var_0[1]);
+  setsaveddvar("ai_threatSightFakeZ", var_0[2]);
 
   if(!isDefined(self.stealth.maxthreat)) {
     self.stealth.maxthreat = 0;

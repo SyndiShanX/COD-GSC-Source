@@ -17,11 +17,11 @@ function main() {
   scripts\cp\maps\cp_so_finale\gen\cp_so_finale_art::main();
   scripts\cp\maps\cp_so_finale\cp_so_finale_fx::main();
   scripts\vehicle\pindia::main("veh8_mil_lnd_pindia_tan", "truck_minimap", "script_vehicle_iw8_truck_pindia_tan");
-  setDvar("NPONLLLSPL", 1.25);
-  setDvar("PKKMTTRQO", 4);
-  setDvar("NKLMONNPNN", 2048);
-  setDvar("MROOOROPKL", 8);
-  setDvar("LTQMSPKRKO", 8);
+  setDvar("sm_sunSampleSizeNear", 1.25);
+  setDvar("r_umbraMinObjectContribution", 4);
+  setDvar("r_umbraAccurateOcclusionThreshold", 2048);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotUpdateLimit", 8);
 
   if(level.createfx_enabled) {
     return;
@@ -2617,7 +2617,7 @@ function movemortar(var_0, var_1, var_2, var_3, var_4) {
 
   if(getdvarint("scr_mortar_gravity")) {
     var_0.origin = var_1;
-    var_5 = getdvarint("NPOQPMP");
+    var_5 = getdvarint("bg_gravity");
     var_6 = distance(var_1, var_2);
     var_7 = var_2 - var_1;
     var_8 = 0.5 * var_5 * squared(var_3) * -1;
@@ -2742,7 +2742,7 @@ function no_csm(var_0, var_1, var_2) {
 
 function ref_11d8e(var_0, var_1, var_2, var_3) {
   var_0.origin = var_1;
-  var_4 = getdvarint("NPOQPMP");
+  var_4 = getdvarint("bg_gravity");
   var_5 = distance(var_1, var_2);
   var_6 = var_2 - var_1;
   var_7 = 0.5 * var_4 * squared(var_3) * -1;

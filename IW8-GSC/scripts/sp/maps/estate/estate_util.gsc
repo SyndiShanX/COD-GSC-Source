@@ -1147,7 +1147,7 @@ function waittill_player_stops_rotating() {
 
 function weapon_switch_monitor() {
   level.player endon("death");
-  var_0 = "MTSOPQRMRT";
+  var_0 = "bullet_penetration_enabled";
   var_1 = getdvarint(var_0);
   var_2 = ["none", "iw8_melee"];
   make_alias_group("nonsuppressed", ["dx_vom_pri_warning_silence_10", "dx_vom_pri_warning_silence_20", "dx_vom_pri_warning_silence_30"]);
@@ -1517,8 +1517,8 @@ function reactive_foliage_low() {
   level.reactivefoliagestate = "low";
   level.lerpingreactivefoliage = 1;
   var_0 = 1;
-  thread scripts\engine\sp\utility::lerp_saveddvar("MRNRKKOPLN", 0.6, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("MQPQKNPQOK", 0.3, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindFrequencyScale", 0.6, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindAmplitudeScale", 0.3, var_0);
   wait var_0;
   level.lerpingreactivefoliage = undefined;
 }
@@ -1532,8 +1532,8 @@ function reactive_foliage_med() {
   level.lerpingreactivefoliage = 1;
   level.reactivefoliagestate = "med";
   var_0 = 1;
-  thread scripts\engine\sp\utility::lerp_saveddvar("MRNRKKOPLN", 0.6, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("MQPQKNPQOK", 0.7, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindFrequencyScale", 0.6, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindAmplitudeScale", 0.7, var_0);
   wait var_0;
   level.lerpingreactivefoliage = undefined;
 }
@@ -1547,8 +1547,8 @@ function reactive_foliage_high() {
   level.lerpingreactivefoliage = 1;
   level.reactivefoliagestate = "high";
   var_0 = 1;
-  thread scripts\engine\sp\utility::lerp_saveddvar("MRNRKKOPLN", 0.6, var_0);
-  thread scripts\engine\sp\utility::lerp_saveddvar("MQPQKNPQOK", 1.3, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindFrequencyScale", 0.6, var_0);
+  thread scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindAmplitudeScale", 1.3, var_0);
   wait var_0;
   level.lerpingreactivefoliage = undefined;
 }

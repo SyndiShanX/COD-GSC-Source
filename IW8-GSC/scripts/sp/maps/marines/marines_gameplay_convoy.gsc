@@ -139,7 +139,7 @@ function convoy_ambush_main() {
     }
   }
 
-  setsaveddvar("TLOLRMSL", 0.01);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
   level.player scripts\engine\sp\utility::blend_movespeedscale_default(1);
   scripts\sp\player::player_movement_state("default");
   thread street_patch_handler();
@@ -220,7 +220,7 @@ function convoy_ambush_catchup() {
   thread street_patch_handler();
   scripts\engine\utility::flag_set("convoy_speed_up");
   var_0 delete();
-  setsaveddvar("TLOLRMSL", 0.01);
+  setsaveddvar("fx_lights_radius_scale", 0.01);
 }
 
 function intro_street_marine_group_a_advance_scene(var_0) {

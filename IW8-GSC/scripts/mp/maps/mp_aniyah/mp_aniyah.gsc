@@ -24,11 +24,11 @@ function main() {
   getscriptablelootspawnedcountbyname(400, 1200);
   scripts\mp\compass::setupminimap("compass_map_mp_aniyah", "codcaster_compass_map_mp_aniyah");
   level thread scripts\engine\scriptable_door::system_init();
-  setDvar("PKKMTTRQO", 3);
-  setDvar("LRKPOKNKRM", 0);
-  setDvar("NOSQLKNSQO", 45);
-  setDvar("MMNMQTSOSP", 0);
-  setDvar("NSSMQLPRNT", 0.01);
+  setDvar("r_umbraMinObjectContribution", 3);
+  setDvar("r_identifyOldMaterial", 0);
+  setDvar("r_tessellationFactor", 45);
+  setDvar("r_tessellation", 0);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "desert";

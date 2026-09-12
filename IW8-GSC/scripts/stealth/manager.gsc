@@ -134,13 +134,13 @@ function manager_thread() {
     scripts\stealth\threat_sight::threat_sight_set_dvar(1);
 
     if(!playerlootenabled()) {
-      setsaveddvar("MQSNSOSMPN", 1);
+      setsaveddvar("ai_corpseSynch", 1);
     }
 
     scripts\engine\utility::flag_wait("stealth_spotted");
 
     if(!playerlootenabled()) {
-      setsaveddvar("MQSNSOSMPN", 0);
+      setsaveddvar("ai_corpseSynch", 0);
     }
 
     if(!scripts\engine\utility::flag("stealth_enabled")) {

@@ -6,7 +6,7 @@
 function init() {
   level.hostname = getserverhostname();
   setfriendlyfire(scripts\mp\tweakables::gettweakablevalue("team", "fftype"));
-  constraingametype(getDvar("NKTMKRMSKR"));
+  constraingametype(getDvar("g_gametype"));
 
   for(;;) {
     updateserversettings();
@@ -80,5 +80,5 @@ function constraingametype(var_0) {
 function setfriendlyfire(var_0) {
   level.friendlyfire = var_0;
   setDvar("ui_friendlyfire", var_0);
-  setDvar("LMQOKPRSML", var_0);
+  setDvar("cg_drawFriendlyHUDGrenades", var_0);
 }

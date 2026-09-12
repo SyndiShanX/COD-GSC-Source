@@ -175,7 +175,7 @@ function placeladder(var_0, var_1) {
   var_1 setplayerangles(var_0.scenenode.angles);
   var_2 = "place";
   var_2 = scripts\engine\utility::ter_op(istrue(var_0.ishighladder), "place_high", "place");
-  setDvar("NMLOKNMRSK", 1);
+  setDvar("depthSortViewmodel", 1);
   thread create_player_rig(var_1, "player");
   var_0.scenenode thread scripts\cp\cp_anim::anim_player_solo(var_1, var_1.player_rig, var_2);
 
@@ -191,7 +191,7 @@ function placeladder(var_0, var_1) {
   var_0.scenenode thread scripts\common\anim::anim_single_solo(var_3, var_2);
   var_4 = getanimlength(level.scr_anim["player"][var_2]);
   wait var_4;
-  setDvar("NMLOKNMRSK", 0);
+  setDvar("depthSortViewmodel", 0);
 
   if(istrue(var_0.cancelladder)) {
     return false;

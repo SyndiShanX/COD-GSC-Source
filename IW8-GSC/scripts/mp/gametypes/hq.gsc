@@ -851,7 +851,7 @@ function setupzones() {
 }
 
 function player_give_loadout(var_0) {
-  var_1 = getDvar("NSQLTTMRMP");
+  var_1 = getDvar("ui_mapname");
 
   if(var_1 == "mp_m_cornfield") {
     foreach(var_3 in var_0) {
@@ -872,7 +872,7 @@ function player_give_loadout(var_0) {
 }
 
 function player_give_chopper(var_0) {
-  var_1 = getDvar("NSQLTTMRMP");
+  var_1 = getDvar("ui_mapname");
 
   if(var_1 == "mp_harbor") {
     level.objectives["5"].visuals[0].origin = level.objectives["5"].visuals[0].origin - (0, 0, 8);

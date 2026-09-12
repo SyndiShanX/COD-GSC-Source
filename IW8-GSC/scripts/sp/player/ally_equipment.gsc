@@ -92,7 +92,7 @@ function ally_equipment_backpack_interact(var_0, var_1, var_2, var_3, var_4) {
     var_8 = var_7 - var_6;
     var_9 = 0;
 
-    if(getDvar("LMMLNRSLKS") == "autobuild") {
+    if(getDvar("package_type") == "autobuild") {
       getentitylessscriptablearray("sp_ally_equipment", ["type", var_3, "levelname", level.script, "x", level.player.origin[0], "y", level.player.origin[1], "z", level.player.origin[2], "checkpoint", level.start_point, "ally", var_0.script_friendname]);
     }
 

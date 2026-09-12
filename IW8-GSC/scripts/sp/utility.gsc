@@ -517,7 +517,7 @@ function allow_cg_drawcrosshair(var_0, var_1) {
   var_2 = scripts\common\input_allow::allow_input_internal("cg_drawcrosshair", var_0, var_1);
 
   if(isDefined(var_2)) {
-    setsaveddvar("LOPKSRNTTS", var_2);
+    setsaveddvar("cg_drawCrosshair", var_2);
     return;
   }
 }
@@ -530,12 +530,12 @@ function allow_weapon_first_raise_anims(var_0, var_1) {
   var_2 = scripts\common\input_allow::allow_input_internal("firstRaiseAnims", var_0, var_1);
 
   if(isDefined(var_2) && var_2) {
-    setsaveddvar("MRKKPQPTQR", 0);
+    setsaveddvar("bg_disableWeaponFirstRaiseAnims", 0);
     return;
   }
 
   if(isDefined(var_2) && !var_2) {
-    setsaveddvar("MRKKPQPTQR", 1);
+    setsaveddvar("bg_disableWeaponFirstRaiseAnims", 1);
     return;
   }
 }
@@ -779,7 +779,7 @@ function hudoutline_ar_callout(var_0, var_1, var_2) {
   level.player endon("stop_ar_callout");
   setomnvar("ui_inworld_ar_ent", undefined);
   wait 0.05;
-  setsaveddvar("NMROQRRONQ", 1);
+  setsaveddvar("r_hudOutlineEnable", 1);
   level.player.ar_callout_ent = scripts\engine\utility::spawn_tag_origin();
   setomnvar("ui_inworld_ar_ent", level.player.ar_callout_ent);
 
@@ -827,7 +827,7 @@ function hudoutline_ar_disable() {
 }
 
 function in_specialist_mode() {
-  if(getdvarint("NPSPRQNQRN")) {
+  if(getdvarint("g_specialistMode")) {
     return 1;
   }
 
@@ -835,7 +835,7 @@ function in_specialist_mode() {
 }
 
 function in_yolo_mode() {
-  if(getdvarint("LQMTORORON")) {
+  if(getdvarint("g_yoloMode")) {
     return 1;
   }
 
@@ -968,8 +968,8 @@ function player_giveachievement_wrapper(var_0) {
 }
 
 function play_skippable_cinematic(var_0, var_1, var_2) {
-  setsaveddvar("MMRNLMPPLT", "1");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicFullscreen", "1");
+  setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame(var_0);
   level.player scripts\sp\player::remove_damage_effects_instantly();
   remove_equipment_immediately();
@@ -1004,8 +1004,8 @@ function play_skippable_cinematic(var_0, var_1, var_2) {
       waitframe();
     }
 
-    setsaveddvar("MMRNLMPPLT", "0");
-    setsaveddvar("RKMNLRNS", "0");
+    setsaveddvar("bg_cinematicFullscreen", "0");
+    setsaveddvar("bg_cinematicCanPause", "0");
     setomnvar("ui_is_bink_skippable", 0);
     stopcinematicingame();
     return;
@@ -1015,8 +1015,8 @@ function play_skippable_cinematic(var_0, var_1, var_2) {
     waitframe();
   }
 
-  setsaveddvar("MMRNLMPPLT", "0");
-  setsaveddvar("RKMNLRNS", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
+  setsaveddvar("bg_cinematicCanPause", "0");
   setomnvar("ui_is_bink_skippable", 0);
   stopcinematicingame();
   level.player scripts\common\utility::allow_weapon(1);
@@ -2280,21 +2280,21 @@ function door_force_open_fully(var_0, var_1) {
 
 function nvidiaansel_scriptdisable(var_0) {
   if(computedropbagpositions()) {
-    setsaveddvar("OPRLTQLTT", var_0);
+    setsaveddvar("com_nvidiaAnsel_scriptDisabled", var_0);
     return;
   }
 }
 
 function nvidiaansel_allowduringcinematic(var_0) {
   if(computedropbagpositions()) {
-    setsaveddvar("NLMKNQLSKL", var_0);
+    setsaveddvar("com_nvidiaAnsel_allowDuringCinematic", var_0);
     return;
   }
 }
 
 function nvidiaansel_overridecollisionradius(var_0) {
   if(computedropbagpositions()) {
-    setsaveddvar("NPTSOTOQSQ", var_0);
+    setsaveddvar("com_nvidiaAnsel_overrideCollisionRadius", var_0);
     return;
   }
 }

@@ -85,7 +85,7 @@ function main() {
   level._effect["vfx_ied_dirt_bubble"] = loadfx("vfx/iw8/level/marines/vfx_ied_dirt_bubble.vfx");
   level._effect["building_explosion_gulag"] = loadfx("vfx/core/expl/building_explosion_gulag.vfx");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\marines\gen\marines_fx::main();
     scripts\sp\maps\marines\gen\marines_sound::main();
     level._effect["ied_explosion"] = loadfx("vfx/iw8/level/highway/ied_explosion.vfx");

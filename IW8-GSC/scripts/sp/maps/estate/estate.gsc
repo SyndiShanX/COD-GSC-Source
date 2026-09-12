@@ -11,14 +11,14 @@ function main() {
   scripts\sp\maps\estate\estate_precache::main();
   scripts\sp\maps\estate\estate_anim::main();
   scripts\sp\utility::nvidiaansel_allowduringcinematic(1);
-  setsaveddvar("MKNNNONLSK", 4);
-  setsaveddvar("MMLNNQSTTL", 10);
+  setsaveddvar("fx_lightmap_max_level", 4);
+  setsaveddvar("fx_alphaThreshold", 10);
   setdvarifuninitialized("greenlight", 0);
   setdvarifuninitialized("use_physics_decho", 1);
   setdvarifuninitialized("use_physics_techo", 1);
   setdvarifuninitialized("swap_flashlight_fx", 1);
-  setsaveddvar("LTMPKRLLNM", 256);
-  setsaveddvar("OLPNKQKKTT", 128);
+  setsaveddvar("r_vertexDeformCutOffDist", 256);
+  setsaveddvar("r_vertexDeformFadeDist", 128);
   estate_precache();
   scripts\engine\sp\utility::transient_init("estate_infil_start_tr");
   scripts\engine\sp\utility::transient_init("estate_infil_mid_tr");
@@ -34,20 +34,20 @@ function main() {
   spawn_funcs();
   thread scripts\sp\maps\estate\estate_util::weapon_switch_monitor();
   thread scripts\sp\maps\estate\estate_util::nvg_exterior_monitor();
-  setsaveddvar("NKSSQOPQQP", 0);
-  setsaveddvar("NKTRLMSRNR", 1);
-  setsaveddvar("LLLTQOOTPO", 4);
-  setsaveddvar("NPNOOMMTPK", 50);
-  setsaveddvar("MRMLLTQQN", 64);
-  setsaveddvar("TLMMOPMSK", 1);
-  setsaveddvar("OKORSKLQRT", 1);
+  setsaveddvar("cg_playerLightSampleFilter", 0);
+  setsaveddvar("cg_playerLightSamplePos", 1);
+  setsaveddvar("cg_playerLightSampleNormal", 4);
+  setsaveddvar("glass_damageToDestroy", 50);
+  setsaveddvar("ai_foliageSeeThroughDist", 64);
+  setsaveddvar("r_spotLightEntityShadows", 1);
+  setsaveddvar("turret_enableLegacyManualTurretTracking", 1);
   var_0 = 850;
-  setsaveddvar("LRTTMPMQOO", var_0);
-  setsaveddvar("NTQKQKNRPQ", var_0);
-  setsaveddvar("RKTKKSMM", var_0);
-  setsaveddvar("NORSNTKLQ", 150);
-  setsaveddvar("TQNRLLORQ", 5);
-  setsaveddvar("LSRNSSQNN", 1);
+  setsaveddvar("dynEnt_spatialMaxEnts", var_0);
+  setsaveddvar("dynEnt_spatialMaxEntsLowPrio", var_0);
+  setsaveddvar("dynEnt_spatialMaxEntsHighPrio", var_0);
+  setsaveddvar("NVG_ScriptBlindWeighted_BlendOutDuration", 150);
+  setsaveddvar("NVG_ScriptBlindWeighted_ScriptValueBlendInSpeed", 5);
+  setsaveddvar("NVG_ScriptBlindWeighted_ScriptValueBlendOutSpeed", 1);
   level.lightswitch_interact_func = &scripts\sp\maps\estate\estate_util::fusebox_interact_anim;
   level.player setviewmodel("viewmodel_arms_kyle_woodland");
   level.player setshadowmodel("default_character_shadow");
@@ -183,17 +183,17 @@ function spawn_funcs() {
 }
 
 function reactive_foliage() {
-  setsaveddvar("MKPPNSLNQQ", 50);
-  setsaveddvar("MPLOLNMSRO", 35);
-  setsaveddvar("NMQSKQNQLR", 7);
-  setsaveddvar("NSKKMRPOQQ", 200);
-  setsaveddvar("NQQSKRQMTS", 1);
-  setsaveddvar("MQPQKNPQOK", 2);
-  setsaveddvar("MRNRKKOPLN", 2);
-  setsaveddvar("NQTLPTNSSO", 3);
-  setsaveddvar("OLSKLTPPMR", 0.7);
-  setsaveddvar("LQLSPQOPKM", 50);
-  setsaveddvar("NTMMTOLQMQ", (1, 1, 0));
+  setsaveddvar("r_reactiveMotionPlayerRadius", 50);
+  setsaveddvar("r_reactiveMotionActorRadius", 35);
+  setsaveddvar("r_reactiveMotionActorVelocityMax", 7);
+  setsaveddvar("r_reactiveMotionEffectorStrengthScale", 200);
+  setsaveddvar("r_reactiveMotionVelocityTailScale", 1);
+  setsaveddvar("cg_defaultWindAmplitudeScale", 2);
+  setsaveddvar("cg_defaultWindFrequencyScale", 2);
+  setsaveddvar("cg_defaultWindStrength", 3);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.7);
+  setsaveddvar("cg_defaultWindAreaScale", 50);
+  setsaveddvar("cg_defaultWindDir", (1, 1, 0));
 }
 
 function fakeactor_spawn() {}

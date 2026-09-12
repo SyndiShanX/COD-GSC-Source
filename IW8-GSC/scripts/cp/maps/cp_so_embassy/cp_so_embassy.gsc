@@ -269,16 +269,16 @@ function display_ai() {
 function ref_12844() {}
 
 function monitoraveragevelocityandupdate() {
-  setsaveddvar("MKNNNONLSK", 4);
-  setsaveddvar("MMLNNQSTTL", 5);
-  setsaveddvar("NQNQPRLRQM", 1);
-  setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
-  setsaveddvar("LTQMSPKRKO", 6);
-  level.spotupdatelimit = getdvarint("LTQMSPKRKO");
-  setsaveddvar("MROOOROPKL", 8);
-  level.roundrobinlimit = getdvarint("MROOOROPKL");
-  setsaveddvar("LKOLRONRNQ", 750);
-  level.spotdistcull = getdvarint("LKOLRONRNQ");
+  setsaveddvar("fx_lightmap_max_level", 4);
+  setsaveddvar("fx_alphaThreshold", 5);
+  setsaveddvar("fx_lights_intensity_scale", 1);
+  setsaveddvar("r_volumetricDepth", "128 384 640 1024");
+  setsaveddvar("sm_spotUpdateLimit", 6);
+  level.spotupdatelimit = getdvarint("sm_spotUpdateLimit");
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
+  level.roundrobinlimit = getdvarint("sm_roundRobinPrioritySpotShadows");
+  setsaveddvar("sm_spotDistCull", 750);
+  level.spotdistcull = getdvarint("sm_spotDistCull");
   var_0 = getEnt("price_green_beam_fill_light", "targetname");
   var_0 setlightintensity(0);
   var_1 = getEnt("price_green_beam_rim_light", "targetname");

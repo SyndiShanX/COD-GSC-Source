@@ -1381,7 +1381,7 @@ function choosespecialdeath(var_0, var_1, var_2) {
 }
 
 function shouldgib() {
-  if(!getdvarint("NTMLLPTNLT")) {
+  if(!getdvarint("master_dismemberment_setting")) {
     return false;
   }
 

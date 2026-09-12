@@ -19,11 +19,11 @@ function main() {
   scripts\engine\utility::flag_init("scriptables_ready");
   scripts\vehicle\decho::main("veh8_civ_lnd_decho_dirty_tan_physics", "decho_physics_sp_minimap", "script_vehicle_iw8_decho_tandirty_physics");
   scripts\vehicle\mindia8::main("veh8_mil_air_mindia8_barkov", "mindia8_minimap", "script_vehicle_iw8_mindia8_east");
-  setDvar("NPONLLLSPL", 1.25);
-  setDvar("PKKMTTRQO", 4);
-  setDvar("NKLMONNPNN", 2048);
-  setDvar("MROOOROPKL", 8);
-  setDvar("LTQMSPKRKO", 8);
+  setDvar("sm_sunSampleSizeNear", 1.25);
+  setDvar("r_umbraMinObjectContribution", 4);
+  setDvar("r_umbraAccurateOcclusionThreshold", 2048);
+  setDvar("sm_roundRobinPrioritySpotShadows", 8);
+  setDvar("sm_spotUpdateLimit", 8);
 
   if(level.createfx_enabled) {
     return;

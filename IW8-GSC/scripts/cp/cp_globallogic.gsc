@@ -47,17 +47,17 @@ function init() {
 
   level.leanthread = getdvarint("scr_runlean_playerthread_count", 0) == 1;
   level.script = tolower(getDvar("mapname"));
-  level.gametype = tolower(getDvar("NKTMKRMSKR"));
-  level.codcasterenabled = getdvarint("MOSNOQPOSS", 0) == 1;
-  level.systemlink = getdvarint("LPSPMQSNPQ", 0) == 1;
-  level.useperbullethitmarkers = getdvarint("OMRLPMMPRL", 0) == 1;
+  level.gametype = tolower(getDvar("g_gametype"));
+  level.codcasterenabled = getdvarint("com_codcasterEnabled", 0) == 1;
+  level.systemlink = getdvarint("systemlink", 0) == 1;
+  level.useperbullethitmarkers = getdvarint("ui_use_per_bullet_hitmarkers", 0) == 1;
   level.splitscreen = issplitscreen();
-  level.onlinegame = getdvarint("LTSNLQNRKO");
-  level.rankedmatch = level.onlinegame || getdvarint("OSPNSPSKL");
-  level.matchmakingmatch = level.onlinegame && !getdvarint("LSTLQTSSRM");
-  level.playerxpenabled = level.matchmakingmatch || getdvarint("OSPNSPSKL");
+  level.onlinegame = getdvarint("onlinegame");
+  level.rankedmatch = level.onlinegame || getdvarint("force_ranking");
+  level.matchmakingmatch = level.onlinegame && !getdvarint("xblive_privatematch");
+  level.playerxpenabled = level.matchmakingmatch || getdvarint("force_ranking");
   level.weaponxpenabled = level.playerxpenabled;
-  level.challengesallowed = level.matchmakingmatch || getdvarint("OSPNSPSKL") || getdvarint("debug_challenges");
+  level.challengesallowed = level.matchmakingmatch || getdvarint("force_ranking") || getdvarint("debug_challenges");
   level.enforceantiboosting = level.playerxpenabled || level.weaponxpenabled || level.challengesallowed;
   level.onlinestatsenabled = level.rankedmatch;
   level.starttimeutcseconds = getsystemtime();
@@ -105,7 +105,7 @@ function init() {
   thread scripts\cp_mp\xmike109::init();
   thread trackplayedtime();
 
-  if(getdvarint("LLQQOPKTKM") != 1) {
+  if(getdvarint("r_reflectionProbeGenerate") != 1) {
     level thread scripts\cp\drone\emp_drone::init();
   }
 
@@ -204,7 +204,7 @@ function cp_struct_filter(var_0) {
 }
 
 function clean_up_structs() {
-  if(getDvar("NSQLTTMRMP") == "cp_landlord_2") {
+  if(getDvar("ui_mapname") == "cp_landlord_2") {
     var_0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
     var_0[0].origin = (4143.57, 61393.6, 774.27);
     var_0[0].angles = (0, 181.31, 0);
@@ -276,18 +276,18 @@ function ref_130f0() {
 
 function setdefaultleveldata() {
   level.splitscreen = issplitscreen();
-  level.onlinegame = getdvarint("LTSNLQNRKO");
+  level.onlinegame = getdvarint("onlinegame");
   level.playerxpenabled = level.onlinegame;
-  level.rankedmatch = level.onlinegame && !getdvarint("LSTLQTSSRM") || getdvarint("OSPNSPSKL");
+  level.rankedmatch = level.onlinegame && !getdvarint("xblive_privatematch") || getdvarint("force_ranking");
   level.script = tolower(getDvar("mapname"));
   level.mapname = scripts\cp_mp\utility\game_utility::getmapname();
-  level.gametype = tolower(getDvar("MOLPOSLOMO"));
+  level.gametype = tolower(getDvar("ui_gametype"));
   level.otherteam["allies"] = "axis";
   level.otherteam["axis"] = "allies";
   level.multiteambased = 0;
   level.teambased = 1;
   level.func = [];
-  level.createfx_enabled = getDvar("LSTTOTKPNP") != "";
+  level.createfx_enabled = getDvar("createfx") != "";
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
   level.hardcoremode = 0;
@@ -301,21 +301,21 @@ function setdefaultleveldata() {
 
 function setdefaultdvars() {
   setDvar("ui_inhostmigration", 0);
-  setDvar("NOSLRNTRKL", getdvarint("scr_thirdPerson"));
-  setDvar("MPOKQNLPRM", getDvar("scr_game_forceuav"));
+  setDvar("camera_thirdPerson", getdvarint("scr_thirdPerson"));
+  setDvar("bg_compassShowEnemies", getDvar("scr_game_forceuav"));
   setDvar("isMatchMakingGame", scripts\cp\utility::matchmakinggame());
   setDvar("ui_overtime", 0);
   setDvar("ui_allow_teamchange", 1);
-  setDvar("SLLNLPRON", 1);
-  setDvar("MSKKKKOPKS", 5);
+  setDvar("g_deadChat", 1);
+  setDvar("min_wait_for_players", 5);
   setDvar("ui_friendlyfire", 0);
-  setDvar("LMQOKPRSML", 0);
-  setDvar("LOPKSRNTTS", scripts\engine\utility::ter_op(level.hardcoremode == 1, 0, 1));
-  setDvar("LROTSRRQMQ", 1);
-  setDvar("NKMOPQSPMO", 0);
+  setDvar("cg_drawFriendlyHUDGrenades", 0);
+  setDvar("cg_drawCrosshair", scripts\engine\utility::ter_op(level.hardcoremode == 1, 0, 1));
+  setDvar("cg_drawCrosshairNames", 1);
+  setDvar("cg_drawFriendlyNamesAlways", 0);
   setDvar("scr_print_dialogue_alias", 0);
   setDvar("scr_init_cs_files", "");
-  setDvar("LSQQNTRKKL", defaultplayermaxhealth());
+  setDvar("hud_health_min_fully_healed", defaultplayermaxhealth());
   setdvarifuninitialized("scr_slowmo", "");
 }
 
@@ -349,7 +349,7 @@ function setupcallbacks() {
   level.endgame = &scripts\cp\cp_endgame::endgame;
   level.forceendgame = &scripts\cp\cp_endgame::forceendgame;
 
-  if(getDvar("MOLPOSLOMO") == "cp_survival") {
+  if(getDvar("ui_gametype") == "cp_survival") {
     level.intermissionfunc = &spawnintermission;
     return;
   }
@@ -662,7 +662,7 @@ function verifydedicatedconfiguration() {
       exitlevel(0);
     }
 
-    if(!getdvarint("LSTLQTSSRM")) {
+    if(!getdvarint("xblive_privatematch")) {
       exitlevel(0);
     }
 
@@ -957,12 +957,12 @@ function demo_debug_outline_button_watcher() {
 }
 
 function demo_debug_outline_settings() {
-  setDvar("LRMPROLMKN", ".5 .5 .5 1");
-  setDvar("NTOSKSTKQQ", "1 1 1 .2");
-  setDvar("NSNOLMTLLL", "1 .25 .25 1");
-  setDvar("LSRTPRNOLS", ".7 .7 .7 1");
-  setDvar("LNNOSQKRTP", "1 0 0 1");
-  setDvar("RKSQOKQNK", 1);
+  setDvar("r_hudOutlineFillColor0", ".5 .5 .5 1");
+  setDvar("r_hudOutlineFillColor1", "1 1 1 .2");
+  setDvar("r_hudOutlineOccludedOutlineColor", "1 .25 .25 1");
+  setDvar("r_hudOutlineOccludedInlineColor", ".7 .7 .7 1");
+  setDvar("r_hudOutlineOccludedInteriorColor", "1 0 0 1");
+  setDvar("r_hudOutlineOccludedColorFromFill", 1);
 }
 
 function ref_13203() {
@@ -1148,22 +1148,22 @@ function setplayerconnectscriptfields() {
 
 function initclientdvars() {
   initclientdvarssplitscreenspecific();
-  self setclientdvars("cg_drawSpectatorMessages", 1, "QKMSSSLPK", 0, "SKNSKQTQR", 1, "OLKRNORMOQ", 1, "LTLQSKRKQM", 0, "ui_altscene", 0);
+  self setclientdvars("cg_drawSpectatorMessages", 1, "cg_deadChatWithDead", 0, "cg_deadChatWithTeam", 1, "cg_deadHearTeamLiving", 1, "cg_deadHearAllLiving", 0, "ui_altscene", 0);
 
   if(level.teambased) {
-    self setclientdvar("LQKPQMPRQN", 0);
+    self setclientdvar("cg_everyoneHearsEveryone", 0);
     return;
   }
 }
 
 function initclientdvarssplitscreenspecific() {
   if(level.splitscreen || self issplitscreenplayer()) {
-    self setclientdvars("NSSLSNKPN", "0.75");
+    self setclientdvars("cg_fovScale", "0.75");
     setDvar("r_materialBloomHQScriptMasterEnable", 0);
     return;
   }
 
-  self setclientdvars("NSSLSNKPN", "1");
+  self setclientdvars("cg_fovScale", "1");
 }
 
 function setupsavedactionslots() {
@@ -1245,11 +1245,11 @@ function spawnintermission(var_0) {
   }
 
   spawnplayer();
-  self setclientdvar("LQKPQMPRQN", 1);
+  self setclientdvar("cg_everyoneHearsEveryone", 1);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 
   if(self isconsoleplayer()) {
-    self setclientdvar("QTSPTNLOL", "90");
+    self setclientdvar("cg_fov", "90");
   }
 
   scripts\cp\utility::updatesessionstate("intermission");
@@ -1257,7 +1257,7 @@ function spawnintermission(var_0) {
 
 function ref_13667(var_0) {
   self visionsetnakedforplayer("flir_0_black_to_white", 0);
-  self setclientdvar("LQKPQMPRQN", 1);
+  self setclientdvar("cg_everyoneHearsEveryone", 1);
   scripts\cp\utility::updatesessionstate("intermission");
 }
 
@@ -1427,7 +1427,7 @@ function spawnplayer_actual(var_0) {
 
   self[[level.custom_giveloadout]](var_0, undefined, self.juggernautoutsidegoalradius);
 
-  if(getdvarint("NOSLRNTRKL")) {
+  if(getdvarint("camera_thirdPerson")) {
     scripts\cp\utility::setthirdpersondof(1);
   }
 
@@ -1558,7 +1558,7 @@ function resetplayerspawneffects() {
   self setdepthoffield(0, 0, 512, 512, 4, 0);
 
   if(self isconsoleplayer()) {
-    self setclientdvar("QTSPTNLOL", "65");
+    self setclientdvar("cg_fov", "65");
     return;
   }
 }
@@ -2213,7 +2213,7 @@ function allow_dvar_infammo() {
 
 function monitor_num_players() {
   scripts\engine\utility::flag_init("player_count_determined");
-  var_0 = getDvar("NKSQNMMRRQ");
+  var_0 = getDvar("party_partyPlayerCountNum");
 
   if(var_0 != "1") {
     level.only_one_player = 0;
@@ -2265,9 +2265,9 @@ function ref_12c58() {
 function binoculars_addheadicon() {
   setDvar("heartbeatSensorEnemyDistanceWarningThreshold", 1500);
   setDvar("heartbeatSensorMaxDrawRange", 1800);
-  setDvar("NLLRSSOQMQ", 1800);
-  setDvar("NSKNMSMOLP", 1000);
-  setDvar("NOQKLLMRO", 1800);
+  setDvar("heartbeatSensorTabletMaxDrawRange", 1800);
+  setDvar("heartbeatSensorTabletNextPingTime", 1000);
+  setDvar("heartbeatSensorTabletRange", 1800);
   setDvar("heartbeatSensorTabletSweepRadius", 500);
   setDvar("heartbeatSensorTabletIconSize", 60);
   setDvar("hearbeatSensorUseCurrentOrientation", 0);

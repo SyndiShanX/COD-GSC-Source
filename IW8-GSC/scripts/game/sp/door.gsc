@@ -323,10 +323,10 @@ function snake_cam_logic() {
     var_7 stoploopsound("snake_cam_roomtone");
     var_5.tempmovesoundent stoploopsound("snake_cam_foley");
     visionsetfadetoblack("", 0.05);
-    setsaveddvar("OMRQKMSSPP", 0);
-    setsaveddvar("MLTTMLTKOR", 0);
-    setsaveddvar("NKTRSSTMRQ", 0);
-    setsaveddvar("LSOPQMRPNR", 0);
+    setsaveddvar("r_mbRadialOverrideChromaticAberration", 0);
+    setsaveddvar("r_mbRadialOverrideDistortion", 0);
+    setsaveddvar("r_mbRadialOverrideRadius", 0);
+    setsaveddvar("r_mbRadialOverrideStrength", 0);
     level.player scripts\engine\sp\utility::allow_nvg(1, "snakeCam");
 
     if(var_1) {
@@ -599,10 +599,10 @@ function snake_door_cam_hud() {
   var_1.fontscale = 0.75;
   var_2 = scripts\sp\hud_util::create_client_overlay("nightvision_overlay_goggles_grain", 1);
   visionsetfadetoblack(level.interactive_doors.snakecamvision, 0.05);
-  setsaveddvar("OMRQKMSSPP", 0.5);
-  setsaveddvar("MLTTMLTKOR", 0.2);
-  setsaveddvar("NKTRSSTMRQ", -0.75);
-  setsaveddvar("LSOPQMRPNR", 0.011);
+  setsaveddvar("r_mbRadialOverrideChromaticAberration", 0.5);
+  setsaveddvar("r_mbRadialOverrideDistortion", 0.2);
+  setsaveddvar("r_mbRadialOverrideRadius", -0.75);
+  setsaveddvar("r_mbRadialOverrideStrength", 0.011);
   return [var_0, var_2, var_1];
 }
 
@@ -627,10 +627,10 @@ function snake_door_cam_hud_blur_v2() {
   var_1.fontscale = 0.75;
   var_2 = scripts\sp\hud_util::create_client_overlay("nightvision_overlay_goggles_grain", 1);
   visionsetfadetoblack(level.interactive_doors.snakecamvision, 0.05);
-  setsaveddvar("OMRQKMSSPP", 0.5);
-  setsaveddvar("MLTTMLTKOR", 0.2);
-  setsaveddvar("NKTRSSTMRQ", -0.75);
-  setsaveddvar("LSOPQMRPNR", 0.011);
+  setsaveddvar("r_mbRadialOverrideChromaticAberration", 0.5);
+  setsaveddvar("r_mbRadialOverrideDistortion", 0.2);
+  setsaveddvar("r_mbRadialOverrideRadius", -0.75);
+  setsaveddvar("r_mbRadialOverrideStrength", 0.011);
   return [var_0, var_2, var_1];
 }
 

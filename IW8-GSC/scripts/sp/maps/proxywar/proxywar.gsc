@@ -20,9 +20,9 @@ function main() {
   scripts\engine\sp\utility::transient_init("pw_trainyard_front_detail_tr");
   scripts\engine\sp\utility::transient_init("pw_trainyard_main_detail_tr");
   scripts\engine\sp\utility::transient_init("pw_trainyard_track_detail_tr");
-  setsaveddvar("MKNNNONLSK", 4);
-  setsaveddvar("MMLNNQSTTL", 5);
-  setsaveddvar("TLMMOPMSK", 1);
+  setsaveddvar("fx_lightmap_max_level", 4);
+  setsaveddvar("fx_alphaThreshold", 5);
+  setsaveddvar("r_spotLightEntityShadows", 1);
   proxywar_precache();
   proxywar_flags();
   proxywar_starts();
@@ -45,10 +45,10 @@ function main() {
   }
 
   precachenightvisioncodeassets();
-  setsaveddvar("TMNTMTQRM", 0);
+  setsaveddvar("sm_sunDistantShadows", 0);
   thread proxywar_tutorials();
-  setsaveddvar("LTMPKRLLNM", 256);
-  setsaveddvar("OLPNKQKKTT", 128);
+  setsaveddvar("r_vertexDeformCutOffDist", 256);
+  setsaveddvar("r_vertexDeformFadeDist", 128);
 }
 
 function proxywar_starts() {

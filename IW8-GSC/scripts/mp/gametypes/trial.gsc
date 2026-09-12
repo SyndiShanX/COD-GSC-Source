@@ -29,7 +29,7 @@ function main() {
   if(getDvar("LOQKLRKQMO") == "1") {
     setDvar("lui_trial_event_ending", 1);
   } else {
-    setDvar("LNSMSSTTSK", 1);
+    setDvar("lui_trial_ending", 1);
   }
 
   setDvar("ai_enable_execution_victim", 0);
@@ -64,7 +64,7 @@ function ref_13d98(var_0, var_1) {
 
 function trial_mission_data_init() {
   var_0 = _tablethide::ref_13d42();
-  var_1 = getdvarint("LTTRKNNKTQ", 0);
+  var_1 = getdvarint("bg_trial_mission_id", 0);
 
   if(var_1 == 0) {
     var_2 = tablelookup(var_0, 2, getDvar("mapname"), 0);

@@ -5,7 +5,7 @@
 
 function init() {
   level.scoreinfo = [];
-  var_0 = getdvarint("LKKNORQKTP");
+  var_0 = getdvarint("online_mp_xpscale");
   level.vip_death_player_hits_million = getdvarint("scr_kill_bracket_scaling_disable", 1);
 
   if(level.vip_death_player_hits_million != 1) {
@@ -20,7 +20,7 @@ function init() {
   }
 
   addglobalrankxpmultiplier(var_0, "online_mp_xpscale");
-  var_1 = getdvarint("LTKKKPSRSK");
+  var_1 = getdvarint("online_battle_xpscale");
 
   if(var_1 > 4 || var_1 < 0) {
     exitlevel(0);
@@ -320,10 +320,10 @@ function onplayerconnect() {
       var_0.pers["summary"]["bonusXP"] = 0;
     }
 
-    var_0 setclientdvar("MQNNLTKNTS", 0);
+    var_0 setclientdvar("ui_opensummary", 0);
 
     if(level.playerxpenabled) {
-      var_5 = getdvarint("NTLKOKLKRS");
+      var_5 = getdvarint("online_mp_party_xpscale");
       var_6 = var_0 getprivatepartysize() > 1;
 
       if(var_6) {

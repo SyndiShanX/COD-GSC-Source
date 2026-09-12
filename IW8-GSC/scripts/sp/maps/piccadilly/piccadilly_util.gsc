@@ -254,8 +254,8 @@ function kill_civs_til_player_sees_me() {
   self setthreatbiasgroup("kill_civs");
   var_0 = 1;
   scripts\asm\juggernaut\juggernaut::enable_casual_killer();
-  var_1 = getdvarfloat("NSPNRRQRLN", 0.91);
-  var_2 = getdvarfloat("NOPOKQNMR", 1.06);
+  var_1 = getdvarfloat("ai_enemySpeedScaleMultMin", 0.91);
+  var_2 = getdvarfloat("ai_enemySpeedScaleMultMax", 1.06);
 
   if(var_2 <= var_1) {
     var_2 = var_1 + 0.01;
@@ -739,7 +739,7 @@ function piccadilly_weapons() {
 
     level.player giveweapon(var_1[var_4], 0, 0, 0, 1);
 
-    if(var_3 == "iw8_pi_papa320" && getdvarint("TTMRSTRO") <= 1) {
+    if(var_3 == "iw8_pi_papa320" && getdvarint("g_gameskill") <= 1) {
       level.player setweaponammostock("iw8_pi_papa320", 40);
     }
   }
@@ -1927,8 +1927,8 @@ function ai_is_shooting() {
 }
 
 function get_random_civilian_speed() {
-  var_0 = getdvarint("LSKTNKPTRT", 170);
-  var_1 = getdvarint("MNMNLKRRQP", 230);
+  var_0 = getdvarint("ai_civSpeedMin", 170);
+  var_1 = getdvarint("ai_civSpeedMax", 230);
 
   if(var_1 <= var_0) {
     var_1 = var_0 + 1;

@@ -23,12 +23,12 @@ function post_load() {
 }
 
 function lighting_setup_dvars() {
-  setsaveddvar("MPOKKOPMTN", "256 512 1024 2048");
-  setsaveddvar("LTQMSPKRKO", 6);
-  setsaveddvar("MROOOROPKL", 8);
+  setsaveddvar("r_volumetricDepth", "256 512 1024 2048");
+  setsaveddvar("sm_spotUpdateLimit", 6);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
   setsuncolorandintensity(0);
-  setsaveddvar("MQRQQONQSL", 0);
-  setsaveddvar("LKOLRONRNQ", 750);
+  setsaveddvar("sm_sunEnable", 0);
+  setsaveddvar("sm_spotDistCull", 750);
 }
 
 function fly_in_lights() {
@@ -91,9 +91,9 @@ function lt_interior_main_start() {
     waitframe();
   }
 
-  setsaveddvar("LKOLRONRNQ", 300);
-  setsaveddvar("LTQMSPKRKO", 6);
-  setsaveddvar("MROOOROPKL", 6);
+  setsaveddvar("sm_spotDistCull", 300);
+  setsaveddvar("sm_spotUpdateLimit", 6);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 6);
   level.hadir thread scripts\engine\sp\utility::dof_enable_autofocus(2.8, 5, undefined, undefined, "tag_eye");
   wait 3.5;
   level.molotov thread scripts\engine\sp\utility::dof_enable_autofocus(2.8, 2.5, undefined, undefined, "tag_accessory");
@@ -102,9 +102,9 @@ function lt_interior_main_start() {
   wait 5.25;
   level.player disablephysicaldepthoffieldscripting();
   visionsetnaked("", 1);
-  setsaveddvar("LKOLRONRNQ", 750);
-  setsaveddvar("LTQMSPKRKO", 6);
-  setsaveddvar("MROOOROPKL", 8);
+  setsaveddvar("sm_spotDistCull", 750);
+  setsaveddvar("sm_spotUpdateLimit", 6);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
 }
 
 function hadir_hero_lights() {

@@ -191,13 +191,13 @@ function infilthink(var_0, var_1) {
   thread vehiclethink(var_0, self.scene_node, var_1);
   thread actorthink(var_0, self.scene_node, var_1);
   scripts\engine\utility::waittill_any_ents(level, "infil_started", self, "infil_started");
-  setDvar("TLMMOPMSK", 1);
+  setDvar("r_spotLightEntityShadows", 1);
   level notify("start_scene");
   self notify("start_scene");
   var_5 = lbravo_get_length(var_1);
   wait var_5;
   scripts\engine\utility::waittill_any_ents(level, "prematch_over", self, "prematch_over");
-  setDvar("TLMMOPMSK", 0);
+  setDvar("r_spotLightEntityShadows", 0);
 
   while(isDefined(self.linktoent) || isDefined(self.actors)) {
     waitframe();

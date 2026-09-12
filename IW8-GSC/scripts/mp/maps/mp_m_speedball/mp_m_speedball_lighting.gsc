@@ -4,9 +4,9 @@
 **********************************************************************/
 
 function main() {
-  setDvar("NPONLLLSPL", 0.32);
-  setDvar("TMNTMTQRM", 0);
-  setDvar("LSNRQTOKRR", 2);
-  setDvar("NTLKNLNPLK", 2);
+  setDvar("sm_sunSampleSizeNear", 0.32);
+  setDvar("sm_sunDistantShadows", 0);
+  setDvar("sm_sunCascadeSizeMultiplier1", 2);
+  setDvar("sm_sunCascadeSizeMultiplier2", 2);
   setDvar("r_useCompressedSunShadow", 1);
 }

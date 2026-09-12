@@ -49,10 +49,10 @@ function ref_12803() {
     return;
   }
 
-  setDvar("NKTQRKRMTS", getdvarint("scr_br_dbd_fallheightmin", 1120));
-  setDvar("LKMOLLSKKO", getdvarint("scr_br_dbd_fallheightmax", 1121));
-  setDvar("OMLLLQKQSR", getdvarint("scr_br_dbd_fallheightmin", 1120));
-  setDvar("LTMMLKRKTR", getdvarint("scr_br_dbd_fallheightmax", 1121));
+  setDvar("bg_fallDamageMinHeight", getdvarint("scr_br_dbd_fallheightmin", 1120));
+  setDvar("bg_fallDamageMaxHeight", getdvarint("scr_br_dbd_fallheightmax", 1121));
+  setDvar("bg_softLandingMinHeight", getdvarint("scr_br_dbd_fallheightmin", 1120));
+  setDvar("bg_softLandingMaxHeight", getdvarint("scr_br_dbd_fallheightmax", 1121));
 }
 
 function modifyplayerdamage(var_0) {

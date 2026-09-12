@@ -107,7 +107,7 @@ function main() {
   level._effect["blima_light_white_blink_lit"] = loadfx("vfx/core/vehicles/aircraft_light_white_blink_lit");
   level._effect["blima_light_wingtip_green_lit"] = loadfx("vfx/core/vehicles/aircraft_light_wingtip_green_lit");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\safehouse_finale\gen\safehouse_finale_fx::main();
     scripts\sp\maps\safehouse_finale\gen\safehouse_finale_sound::main();
     return;

@@ -1140,7 +1140,7 @@ function allow_jog(var_0, var_1) {
   var_2 = scripts\common\input_allow::allow_input_internal("jog", var_0, var_1);
 
   if(isDefined(var_2)) {
-    setsaveddvar("NQLPKOKTPO", var_2);
+    setsaveddvar("enableJog", var_2);
     return;
   }
 }
@@ -1696,7 +1696,7 @@ function is_map_using_locales_only() {
 }
 
 function iswegameplatform() {
-  return getdvarint("MRSQLQKNKP", 0) == 1;
+  return getdvarint("g_wegame_platform", 0) == 1;
 }
 
 function playersnear(var_0, var_1) {

@@ -6,12 +6,12 @@
 function main() {
   scripts\engine\sp\utility::post_load_precache(&post_load);
   flaginit();
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("TMNTMTQRM", 1);
-  setsaveddvar("LSNRQTOKRR", 1);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("MPOKKOPMTN", "64 128 256 512");
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunDistantShadows", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("r_volumetricDepth", "64 128 256 512");
+  setsaveddvar("sm_spotDistCull", 500);
   thread lighting_pre_alley_to_apartments();
   thread lighting_alley_to_apartments();
   thread lighting_in_apartments();
@@ -53,19 +53,19 @@ function post_load() {
 }
 
 function lighting_setup_dvars() {
-  setsaveddvar("MROOOROPKL", 8);
-  setsaveddvar("LTQMSPKRKO", 8);
-  setsaveddvar("MPOKKOPMTN", "64 128 256 512");
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
+  setsaveddvar("sm_spotUpdateLimit", 8);
+  setsaveddvar("r_volumetricDepth", "64 128 256 512");
+  setsaveddvar("sm_spotDistCull", 500);
 }
 
 function flycam_intro_start() {
   level endon("intro_scene_skipped");
-  setsaveddvar("MROOOROPKL", 8);
-  setsaveddvar("LTQMSPKRKO", 8);
-  setsaveddvar("MPOKKOPMTN", "64 128 256 512");
-  setsaveddvar("MRSTKSMMP", 1);
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
+  setsaveddvar("sm_spotUpdateLimit", 8);
+  setsaveddvar("r_volumetricDepth", "64 128 256 512");
+  setsaveddvar("r_dof_physical_enable", 1);
+  setsaveddvar("sm_spotDistCull", 500);
   waitframe();
   waitframe();
   scripts\engine\sp\utility::motion_blur_enable(1, 0.5);
@@ -105,12 +105,12 @@ function motion_blur() {
 
 function lighting_pre_alley_to_apartments() {
   scripts\engine\utility::flag_wait("lighting_pre_alley_to_apartments");
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("TMNTMTQRM", 1);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("QPLMKRON", 1);
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunDistantShadows", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("r_volumetrics", 1);
+  setsaveddvar("sm_spotDistCull", 500);
   scripts\engine\utility::flag_clear("lighting_pre_alley_to_apartments");
   wait 0.2;
   thread lighting_pre_alley_to_apartments();
@@ -118,12 +118,12 @@ function lighting_pre_alley_to_apartments() {
 
 function lighting_alley_to_apartments() {
   scripts\engine\utility::flag_wait("lighting_alley_to_apartments");
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("TMNTMTQRM", 1);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("QPLMKRON", 1);
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunDistantShadows", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("r_volumetrics", 1);
+  setsaveddvar("sm_spotDistCull", 500);
   scripts\engine\utility::flag_clear("lighting_alley_to_apartments");
   wait 0.2;
   thread lighting_alley_to_apartments();
@@ -136,7 +136,7 @@ function lerpalleysunshadow(var_0) {
     var_1 = vectorNormalize(var_0.origin - level.player.origin);
     var_2 = anglesToForward(level.player.angles);
     var_3 = clamp(vectordot(var_1, var_2), 0, 1);
-    setsaveddvar("NPONLLLSPL", 0.47 + 0.3 * var_3);
+    setsaveddvar("sm_sunSampleSizeNear", 0.47 + 0.3 * var_3);
     wait 0.1;
   }
 
@@ -146,12 +146,12 @@ function lerpalleysunshadow(var_0) {
 function lighting_in_apartments() {
   scripts\engine\utility::flag_wait("lighting_in_apartments");
   visionsetnaked("", 0);
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("TMNTMTQRM", 1);
-  setsaveddvar("LSNRQTOKRR", 1);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("QPLMKRON", 1);
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunDistantShadows", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("r_volumetrics", 1);
+  setsaveddvar("sm_spotDistCull", 500);
   scripts\engine\utility::flag_clear("lighting_in_apartments");
   wait 0.2;
   thread lighting_in_apartments();
@@ -160,12 +160,12 @@ function lighting_in_apartments() {
 function lighting_apartments_to_canal() {
   scripts\engine\utility::flag_wait("lighting_apartments_to_canal");
   visionsetnaked("", 0);
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("TMNTMTQRM", 1);
-  setsaveddvar("LSNRQTOKRR", 1);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("QPLMKRON", 1);
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunDistantShadows", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("r_volumetrics", 1);
+  setsaveddvar("sm_spotDistCull", 500);
   scripts\engine\utility::flag_clear("lighting_apartments_to_canal");
   wait 0.2;
   thread lighting_apartments_to_canal();
@@ -174,12 +174,12 @@ function lighting_apartments_to_canal() {
 function lighting_canal_to_cafe() {
   scripts\engine\utility::flag_wait("lighting_canal_to_cafe");
   visionsetnaked("", 0);
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("TMNTMTQRM", 1);
-  setsaveddvar("LSNRQTOKRR", 1);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("QPLMKRON", 1);
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunDistantShadows", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("r_volumetrics", 1);
+  setsaveddvar("sm_spotDistCull", 500);
   scripts\engine\utility::flag_clear("lighting_canal_to_cafe");
   wait 0.2;
   thread lighting_canal_to_cafe();
@@ -188,12 +188,12 @@ function lighting_canal_to_cafe() {
 function lighting_in_cafe() {
   scripts\engine\utility::flag_wait("lighting_in_cafe");
   visionsetnaked("", 0);
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("TMNTMTQRM", 1);
-  setsaveddvar("LSNRQTOKRR", 1);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("QPLMKRON", 1);
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunDistantShadows", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("r_volumetrics", 1);
+  setsaveddvar("sm_spotDistCull", 500);
   scripts\engine\utility::flag_clear("lighting_in_cafe");
   wait 0.2;
   thread lighting_in_cafe();
@@ -214,15 +214,15 @@ function apartment_enforcer_grenade() {
 
 function lighting_interrogation() {
   scripts\engine\utility::flag_wait("lighting_interrogation");
-  setsaveddvar("NPONLLLSPL", 0.45);
-  setsaveddvar("TMNTMTQRM", 1);
-  setsaveddvar("LSNRQTOKRR", 1);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("QPLMKRON", 1);
-  setsaveddvar("MROOOROPKL", 8);
-  setsaveddvar("LTQMSPKRKO", 8);
-  setsaveddvar("MPOKKOPMTN", "32 64 128 256");
-  setsaveddvar("LKOLRONRNQ", 500);
+  setsaveddvar("sm_sunSampleSizeNear", 0.45);
+  setsaveddvar("sm_sunDistantShadows", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("r_volumetrics", 1);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 8);
+  setsaveddvar("sm_spotUpdateLimit", 8);
+  setsaveddvar("r_volumetricDepth", "32 64 128 256");
+  setsaveddvar("sm_spotDistCull", 500);
   visionsetnaked("", 0);
   scripts\engine\utility::flag_clear("lighting_interrogation");
   wait 0.2;
@@ -374,7 +374,7 @@ function lighting_interrogation_outro() {
 }
 
 function dof_interrogation_revolver_pickup() {
-  setsaveddvar("MPOKKOPMTN", "64 128 256 512");
+  setsaveddvar("r_volumetricDepth", "64 128 256 512");
   level.player enablephysicaldepthoffieldscripting(1);
   level.player enablephysicaldepthoffieldscripting();
   level.player setphysicaldepthoffield(8, 10, 0.75, 2);

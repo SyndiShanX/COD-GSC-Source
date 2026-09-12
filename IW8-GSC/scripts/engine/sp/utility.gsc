@@ -3201,7 +3201,7 @@ function set_allowdeath(var_0) {
 }
 
 function set_run_anim(var_0, var_1) {
-  if(getdvarint("LPNQTQRRP", 0) == 1) {
+  if(getdvarint("ai_iw7", 0) == 1) {
     var_2 = "combat";
     set_move_anim(var_2, var_0);
     self.run_overrideanim = level.scr_anim[self.animname][var_0];
@@ -3360,7 +3360,7 @@ function clear_run_anim() {
     return;
   }
 
-  if(getdvarint("LPNQTQRRP", 0) == 1) {
+  if(getdvarint("ai_iw7", 0) == 1) {
     var_0 = "combat";
     self.allowstrafe = 1;
     clear_move_anim(var_0);
@@ -4880,7 +4880,7 @@ function waittill_entity_out_of_range(var_0, var_1) {
 }
 
 function player_speed_percent(var_0, var_1) {
-  var_2 = int(getDvar("NSRPQNLSNK"));
+  var_2 = int(getDvar("g_speed"));
 
   if(!isDefined(level.player.g_speed)) {
     level.player.g_speed = var_2;
@@ -4906,7 +4906,7 @@ function blend_movespeedscale_percent(var_0, var_1, var_2) {
 }
 
 function player_speed_set(var_0, var_1) {
-  var_2 = int(getDvar("NSRPQNLSNK"));
+  var_2 = int(getDvar("g_speed"));
 
   if(!isDefined(level.player.g_speed)) {
     level.player.g_speed = var_2;
@@ -5122,7 +5122,7 @@ function beginsliding(var_0, var_1, var_2) {
     var_3 playerlinktodelta(var_5, "tag_origin", 0, 180, 180, 180, 180);
   }
 
-  setsaveddvar("NMLOKNMRSK", 1);
+  setsaveddvar("depthSortViewmodel", 1);
   var_3 scripts\common\utility::allow_fire(0);
   var_3 scripts\common\utility::allow_prone(0);
   var_3 scripts\common\utility::allow_stand(0);
@@ -5168,7 +5168,7 @@ function endsliding() {
   }
 
   var_0.slidemodel delete();
-  setsaveddvar("NMLOKNMRSK", 0);
+  setsaveddvar("depthSortViewmodel", 0);
   var_0 notify("stop_sliding");
 }
 
@@ -5762,7 +5762,7 @@ function create_sunflare_setting(var_0) {
 }
 
 function mask_exploders_in_volume(var_0) {
-  if(getDvar("LSTTOTKPNP") != "") {
+  if(getDvar("createfx") != "") {
     return;
   }
 
@@ -7325,7 +7325,7 @@ function get_player_demeanor() {
 
 function init_gravity() {
   if(!isDefined(level.gravity_gameplay)) {
-    level.gravity_gameplay = getdvarint("NPOQPMP");
+    level.gravity_gameplay = getdvarint("bg_gravity");
     level.gravity_physics = getomnvar("physics_gravity_z");
     return;
   }
@@ -7335,7 +7335,7 @@ function scale_gravity(var_0, var_1) {
   init_gravity();
 
   if(isDefined(var_0)) {
-    setsaveddvar("NPOQPMP", level.gravity_gameplay * var_0);
+    setsaveddvar("bg_gravity", level.gravity_gameplay * var_0);
   }
 
   if(isDefined(var_1)) {
@@ -7364,7 +7364,7 @@ function set_gravity(var_0, var_1) {
   init_gravity();
 
   if(isDefined(var_0)) {
-    setsaveddvar("NPOQPMP", var_0);
+    setsaveddvar("bg_gravity", var_0);
   }
 
   if(isDefined(var_1)) {
@@ -7374,7 +7374,7 @@ function set_gravity(var_0, var_1) {
 }
 
 function reset_gravity() {
-  setsaveddvar("NPOQPMP", level.gravity_gameplay);
+  setsaveddvar("bg_gravity", level.gravity_gameplay);
   physics_setgravity((0, 0, level.gravity_physics));
 }
 
@@ -7754,7 +7754,7 @@ function get_equipment_ammo(var_0) {
 }
 
 function get_corpse_origin() {
-  if(getdvarint("MQSNSOSMPN")) {
+  if(getdvarint("ai_corpseSynch")) {
     return self getcorpsephysicsorigin();
   }
 
@@ -7800,7 +7800,7 @@ function hudoutline_vis_enemy_settings(var_0) {
     var_0 = 1;
   }
 
-  setsaveddvar("NMROQRRONQ", 1);
+  setsaveddvar("r_hudOutlineEnable", 1);
   var_1 = "0.5 0.5 0.5";
   var_2 = "1 1 1";
 
@@ -7818,12 +7818,12 @@ function hudoutline_vis_enemy_settings(var_0) {
     var_5 = "0.5 0.5 0.5 0.5";
   }
 
-  setsaveddvar("LRMPROLMKN", var_4);
-  setsaveddvar("NTOSKSTKQQ", var_5);
-  setsaveddvar("NSNOLMTLLL", var_3);
-  setsaveddvar("LSRTPRNOLS", var_4);
-  setsaveddvar("LNNOSQKRTP", var_5);
-  setsaveddvar("RKSQOKQNK", 1);
+  setsaveddvar("r_hudOutlineFillColor0", var_4);
+  setsaveddvar("r_hudOutlineFillColor1", var_5);
+  setsaveddvar("r_hudOutlineOccludedOutlineColor", var_3);
+  setsaveddvar("r_hudOutlineOccludedInlineColor", var_4);
+  setsaveddvar("r_hudOutlineOccludedInteriorColor", var_5);
+  setsaveddvar("r_hudOutlineOccludedColorFromFill", 1);
 }
 
 function hudoutline_vis_enemy(var_0, var_1) {
@@ -7832,8 +7832,8 @@ function hudoutline_vis_enemy(var_0, var_1) {
 
 function hud_bink(var_0) {
   setomnvar("ui_show_bink", 1);
-  setsaveddvar("MMRNLMPPLT", "0");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicFullscreen", "0");
+  setsaveddvar("bg_cinematicCanPause", "1");
   cinematicingame(var_0);
 
   while(!iscinematicplaying()) {
@@ -7846,8 +7846,8 @@ function hud_bink(var_0) {
 
   stopcinematicingame();
   setomnvar("ui_show_bink", 0);
-  setsaveddvar("MMRNLMPPLT", "1");
-  setsaveddvar("RKMNLRNS", "1");
+  setsaveddvar("bg_cinematicFullscreen", "1");
+  setsaveddvar("bg_cinematicCanPause", "1");
 }
 
 function hud_fluff_text_message(var_0, var_1) {
@@ -8487,7 +8487,7 @@ function dof_enable(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   level notify("stop_dyndof");
   level notify("stop_dyndof_debug");
-  setsaveddvar("MRSTKSMMP", 1);
+  setsaveddvar("r_dof_physical_enable", 1);
   level.player enablephysicaldepthoffieldscripting();
 
   if(self != level) {
@@ -8531,34 +8531,34 @@ function motion_blur_disable(var_0) {
     var_0 = 0;
   }
 
-  thread lerp_saveddvar("NMORQOTSK", 0, var_0);
-  thread lerp_saveddvar("RMLOTKMMM", 0, var_0);
+  thread lerp_saveddvar("r_mbVelocityScale", 0, var_0);
+  thread lerp_saveddvar("r_mbVelocityScaleViewModel", 0, var_0);
 }
 
 function motion_blur_enable(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
-    var_0 = scripts\engine\utility::ter_op(isDefined(level.motionblur), level.motionblur["velocityScaleDefault"], getdvarfloat("NMORQOTSK"));
+    var_0 = scripts\engine\utility::ter_op(isDefined(level.motionblur), level.motionblur["velocityScaleDefault"], getdvarfloat("r_mbVelocityScale"));
   }
 
   if(!isDefined(var_1)) {
-    var_1 = scripts\engine\utility::ter_op(isDefined(level.motionblur), level.motionblur["velocityScaleViewModelDefault"], getdvarfloat("RMLOTKMMM"));
+    var_1 = scripts\engine\utility::ter_op(isDefined(level.motionblur), level.motionblur["velocityScaleViewModelDefault"], getdvarfloat("r_mbVelocityScaleViewModel"));
   }
 
   if(!isDefined(var_2)) {
     var_2 = 0;
   }
 
-  thread lerp_saveddvar("NMORQOTSK", var_0, var_2);
-  thread lerp_saveddvar("RMLOTKMMM", var_1, var_2);
+  thread lerp_saveddvar("r_mbVelocityScale", var_0, var_2);
+  thread lerp_saveddvar("r_mbVelocityScaleViewModel", var_1, var_2);
 }
 
 function create_motion_blur_defaults(var_0, var_1) {
   if(!isDefined(var_0)) {
-    var_0 = getdvarfloat("NMORQOTSK");
+    var_0 = getdvarfloat("r_mbVelocityScale");
   }
 
   if(!isDefined(var_1)) {
-    var_1 = getdvarfloat("RMLOTKMMM");
+    var_1 = getdvarfloat("r_mbVelocityScaleViewModel");
   }
 
   level.motionblur = [];
@@ -8576,7 +8576,7 @@ function dyndof(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   level notify("stop_dyndof");
-  setsaveddvar("MRSTKSMMP", 1);
+  setsaveddvar("r_dof_physical_enable", 1);
   level.player enablephysicaldepthoffieldscripting();
 
   if(isDefined(level.dyndof)) {
@@ -8712,8 +8712,8 @@ function play_footstep_sound(var_0, var_1) {
     var_2 playsurfacesound(var_0, var_1);
     var_2 scripts\engine\utility::waittill_notify_or_timeout("death", 0.05);
     var_2.origin -= (0, 0, 12);
-    var_4 = getdvarfloat("OLPQMMPMMM", 150);
-    var_5 = getdvarfloat("LQSRRTOKNN", 360);
+    var_4 = getdvarfloat("cg_ceiling_footstep_coneRadius", 150);
+    var_5 = getdvarfloat("cg_ceiling_footstep_coneHeight", 360);
     var_6 = (0, 0, -1);
     var_7 = (1, 0, 0);
     var_8 = atan(var_4 / var_5);

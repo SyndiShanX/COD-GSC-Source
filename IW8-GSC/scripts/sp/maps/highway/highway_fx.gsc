@@ -62,7 +62,7 @@ function main() {
   level._effect["vfx_dust_motes_med"] = loadfx("vfx/iw8_mp/gen_amb/vfx_dust_motes_med.vfx");
   level._effect["vfx_building_crumble_edge_1"] = loadfx("vfx/iw8_mp/level/faridah/vfx_building_crumble_edge_1.vfx");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\highway\gen\highway_fx::main();
     scripts\sp\maps\highway\gen\highway_sound::main();
     return;

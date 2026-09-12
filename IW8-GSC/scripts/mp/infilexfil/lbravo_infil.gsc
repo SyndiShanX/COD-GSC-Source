@@ -360,7 +360,7 @@ function player_van_disconnect() {
 }
 
 function infilthink(var_0, var_1) {
-  var_2 = getdvarfloat("NMORQOTSK", 0.2);
+  var_2 = getdvarfloat("r_mbVelocityScale", 0.2);
 
   foreach(var_4 in getEntArray("infil_delete", "script_noteworthy")) {
     var_4 delete();
@@ -377,8 +377,8 @@ function infilthink(var_0, var_1) {
   thread vehiclethink(var_0, self.scene_node, var_1);
   thread actorthink(var_0, self.scene_node, var_1);
   scripts\mp\flags::gameflagwait("infil_started");
-  setDvar("TLMMOPMSK", 1);
-  setDvar("NMORQOTSK", 1);
+  setDvar("r_spotLightEntityShadows", 1);
+  setDvar("r_mbVelocityScale", 1);
   level notify("start_scene");
   self notify("start_scene");
 
@@ -387,8 +387,8 @@ function infilthink(var_0, var_1) {
   }
 
   scripts\engine\utility::waittill_any_ents(level, "prematch_over", self, "prematch_over");
-  setDvar("TLMMOPMSK", 0);
-  setDvar("NMORQOTSK", var_2);
+  setDvar("r_spotLightEntityShadows", 0);
+  setDvar("r_mbVelocityScale", var_2);
 
   while(isDefined(self.linktoent) || isDefined(self.actors)) {
     waitframe();

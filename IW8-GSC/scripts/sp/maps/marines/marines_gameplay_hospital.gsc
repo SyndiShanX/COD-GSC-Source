@@ -51,7 +51,7 @@ function lobby_main() {
   thread hospital_exterior_vehicle_monitor();
   thread scripts\sp\analytics::analytics_kleenex_update("End of Murderhole to Breach");
   scripts\sp\maps\marines\marines_utility::autosave();
-  setsaveddvar("TLOLRMSL", 1);
+  setsaveddvar("fx_lights_radius_scale", 1);
   level.manpile_monitor.ideal = 10;
   level.manpile_monitor.maximum = 16;
   level.manpile_monitor.maximum_weapons = 16;
@@ -951,7 +951,7 @@ function lobby_start() {
 
 function lobby_catchup() {
   scripts\engine\utility::flag_set("flag_lobby_exiting");
-  setsaveddvar("TLOLRMSL", 1);
+  setsaveddvar("fx_lights_radius_scale", 1);
   thread hospital_dof_monitor();
   thread scripts\sp\maps\marines\marines_gameplay_convoy::apc_cleanup_handler();
   level.griggs_lobby_cleared_vo_done = 1;

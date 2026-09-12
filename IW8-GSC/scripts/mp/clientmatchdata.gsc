@@ -4,7 +4,7 @@
 ***********************************************/
 
 function init() {
-  if(getdvarint("MTKSQRQLKN") != 0 && !isDefined(game["clientMatchDataDef"])) {
+  if(getdvarint("online_mp_clientmatchdata_enabled") != 0 && !isDefined(game["clientMatchDataDef"])) {
     game["clientMatchDataDef"] = "ddl/mp/clientmatchdata.ddl";
     setclientmatchdatadef(game["clientMatchDataDef"]);
     setclientmatchdata("map", level.script);
@@ -26,7 +26,7 @@ function canlogdeath(var_0) {
 }
 
 function logplayerdeath(var_0) {
-  if(getdvarint("MTKSQRQLKN") == 0) {
+  if(getdvarint("online_mp_clientmatchdata_enabled") == 0) {
     return;
   }
 

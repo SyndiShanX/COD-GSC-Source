@@ -164,7 +164,7 @@ function main() {
   level._effect["vfx_hometown_vf_poppyfield"] = loadfx("vfx/iw8/level/hometown/vfx_hometown_vf_poppyfield.vfx");
   level._effect["vfx_htown_gas_camcentr_01"] = loadfx("vfx/iw8/level/hometown/vfx_htown_gas_camcentr_01.vfx");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\hometown\gen\hometown_fx::main();
     scripts\sp\maps\hometown\gen\hometown_sound::main();
     return;

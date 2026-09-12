@@ -4,18 +4,18 @@
 *****************************************************************/
 
 function main() {
-  setsaveddvar("MMLNNQSTTL", 1);
+  setsaveddvar("fx_alphaThreshold", 1);
   setDvar("VehicleContinuesOnDriverDeath", 1);
   init_precache();
   init_anims();
   init_vfx();
-  setsaveddvar("MRNRKKOPLN", 5);
-  setsaveddvar("MQPQKNPQOK", 7);
-  setsaveddvar("LQLSPQOPKM", 50);
-  setsaveddvar("OLSKLTPPMR", 0.3);
-  setsaveddvar("NQTLPTNSSO", 5);
-  setsaveddvar("NTMMTOLQMQ", (-1, 0, 0));
-  setsaveddvar("LTKPSMSTQO", 0);
+  setsaveddvar("cg_defaultWindFrequencyScale", 5);
+  setsaveddvar("cg_defaultWindAmplitudeScale", 7);
+  setsaveddvar("cg_defaultWindAreaScale", 50);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.3);
+  setsaveddvar("cg_defaultWindStrength", 5);
+  setsaveddvar("cg_defaultWindDir", (-1, 0, 0));
+  setsaveddvar("r_enableNoTessBuckets", 0);
   setdvarifuninitialized("scr_shf_invert", 0);
   createthreatbiasgroup("snipers");
   createthreatbiasgroup("shielded");
@@ -350,8 +350,8 @@ function init_level() {
   level.fob_enemies = [];
   level.drone_start_position = undefined;
   level.current_visionset = "";
-  setsaveddvar("OMOLNOMPRO", 0);
-  setsaveddvar("MKNNNONLSK", 4);
+  setsaveddvar("moving_platform_improved_aim", 0);
+  setsaveddvar("fx_lightmap_max_level", 4);
   setdvarifuninitialized("level_convoyVehiclesDebug", 0);
   setdvarifuninitialized("jump_enemyVehicleDebug", 0);
   var_0 = ["molotov", "frag", "flash"];
@@ -1447,9 +1447,9 @@ function level_hellcannonfire(var_0, var_1, var_2) {
 function level_hellcannonmovetank(var_0, var_1, var_2, var_3) {
   var_0 endon("impact");
   var_0.origin = var_1;
-  var_4 = getdvarint("NPOQPMP");
-  setsaveddvar("NPOQPMP", 500);
-  var_5 = getdvarint("NPOQPMP");
+  var_4 = getdvarint("bg_gravity");
+  setsaveddvar("bg_gravity", 500);
+  var_5 = getdvarint("bg_gravity");
   var_6 = var_2 - var_1;
   var_7 = 0.5 * var_5 * squared(var_3) * -1;
   var_8 = (var_6[0] / var_3, var_6[1] / var_3, (var_6[2] - var_7) / var_3);
@@ -1457,7 +1457,7 @@ function level_hellcannonmovetank(var_0, var_1, var_2, var_3) {
   var_0 rotateby((0, 0, -40), var_3);
   wait var_3 + 0.05;
   var_0.origin = var_2;
-  setsaveddvar("NPOQPMP", var_4);
+  setsaveddvar("bg_gravity", var_4);
 }
 
 function level_hellcannonimpactlogic(var_0) {

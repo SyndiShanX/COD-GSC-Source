@@ -53,7 +53,7 @@ function callback_playerconnect() {
 function func_player_speed() {
   var_0 = level._createfx.player_speed / 190;
   level.player setmovespeedscale(var_0);
-  setDvar("NSRPQNLSNK", level._createfx.player_speed);
+  setDvar("g_speed", level._createfx.player_speed);
 }
 
 function reflectionprobe_hide_hp() {}

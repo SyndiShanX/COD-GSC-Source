@@ -29,7 +29,7 @@ function showmwlogo() {
 }
 
 function playcredits() {
-  setsaveddvar("OMNONNMOTP", "1 5 5 10");
+  setsaveddvar("r_zPlanes", "1 5 5 10");
   setomnvar("ui_hide_hud", 1);
   initlocalizedcredits();
 
@@ -51,8 +51,8 @@ function playcredits() {
 
   level.creditscomplete = 0;
   thread inputthread();
-  setsaveddvar("MMRNLMPPLT", 1);
-  setsaveddvar("RKMNLRNS", 1);
+  setsaveddvar("bg_cinematicFullscreen", 1);
+  setsaveddvar("bg_cinematicCanPause", 1);
   cinematicingameloop("credits_loop");
   wait 3;
   level notify("allow_fastforward");

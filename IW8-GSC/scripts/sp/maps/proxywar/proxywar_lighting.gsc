@@ -29,14 +29,14 @@ function init_lights(var_0) {
 }
 
 function init_lighting_dvars() {
-  setsaveddvar("NPONLLLSPL", 0.2);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("TMNTMTQRM", 1);
-  setsaveddvar("LKOLRONRNQ", 800);
+  setsaveddvar("sm_sunSampleSizeNear", 0.2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("sm_sunDistantShadows", 1);
+  setsaveddvar("sm_spotDistCull", 800);
   waitframe();
-  setsaveddvar("LTQMSPKRKO", 6);
-  setsaveddvar("MROOOROPKL", 9);
+  setsaveddvar("sm_spotUpdateLimit", 6);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 9);
 }
 
 function lights_off(var_0) {

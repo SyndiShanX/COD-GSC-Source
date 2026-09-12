@@ -505,7 +505,7 @@ function lightswitchinteraction(var_0, var_1) {
   self.scenenode thread scripts\common\anim::anim_single_solo(self, var_2);
   var_4 = getanimlength(level.scr_anim["lightswitch"][var_2]);
   wait var_4;
-  setDvar("NMLOKNMRSK", 0);
+  setDvar("depthSortViewmodel", 0);
   self notify("interaction_complete");
   return true;
 }

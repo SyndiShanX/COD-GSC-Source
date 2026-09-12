@@ -308,7 +308,7 @@ function pilot_apache_missile_reloader() {
 function apache_modify_damage(var_0) {}
 
 function leave_apache_no_player(var_0) {
-  setsaveddvar("SLTMRTTOM", 1);
+  setsaveddvar("hud_drawHUD", 1);
   var_0 setclientomnvar("ui_apache_controls", 0);
 
   if(self.thermal) {

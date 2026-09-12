@@ -1500,7 +1500,7 @@ function ref_1437a(var_0, var_1) {
     var_0 = 30;
   }
 
-  var_2 = getdvarint("NKSQNMMRRQ");
+  var_2 = getdvarint("party_partyPlayerCountNum");
   var_3 = 1;
   var_4 = 0;
   var_5 = undefined;

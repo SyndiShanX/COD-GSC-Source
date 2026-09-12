@@ -17,24 +17,24 @@ function init_lighting() {
 function lighting_setup_dvars() {
   level.sunangles = getmapsunangles();
   level.introsunangles = (-15, -8, 0);
-  setsaveddvar("TMNTMTQRM", 1);
-  setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
-  setsaveddvar("NPONLLLSPL", 0.35);
-  level.sunsamplesizenear = getdvarfloat("NPONLLLSPL");
-  setsaveddvar("LSNRQTOKRR", 3);
-  level.suncascademult1 = getdvarint("LSNRQTOKRR");
-  setsaveddvar("NTLKNLNPLK", 2);
-  level.suncascademult2 = getdvarint("NTLKNLNPLK");
-  setsaveddvar("LTQMSPKRKO", 8);
-  setsaveddvar("MROOOROPKL", 10);
-  setsaveddvar("LKOLRONRNQ", 750);
-  level.spotdistcull = getdvarint("LKOLRONRNQ");
+  setsaveddvar("sm_sunDistantShadows", 1);
+  setsaveddvar("r_volumetricDepth", "128 384 640 1024");
+  setsaveddvar("sm_sunSampleSizeNear", 0.35);
+  level.sunsamplesizenear = getdvarfloat("sm_sunSampleSizeNear");
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 3);
+  level.suncascademult1 = getdvarint("sm_sunCascadeSizeMultiplier1");
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  level.suncascademult2 = getdvarint("sm_sunCascadeSizeMultiplier2");
+  setsaveddvar("sm_spotUpdateLimit", 8);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 10);
+  setsaveddvar("sm_spotDistCull", 750);
+  level.spotdistcull = getdvarint("sm_spotDistCull");
 }
 
 function ride_lighting(var_0) {
   lerpsunangles(level.sunangles, level.introsunangles, 0.01);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NLOTLQMORR", 0.999);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("r_lightGridTempSmoothingFactor", 0.999);
   level.farah_main_light = getEnt("farah_main", "targetname");
   level.farah_main_light setlightintensity(70);
   level.farah_main_light setlightradius(135);
@@ -59,11 +59,11 @@ function ride_dof(var_0) {
 function ride_end() {
   level.farah_main_light setlightintensity(0);
   level.farah_kick_light setlightintensity(0);
-  setsaveddvar("NPONLLLSPL", level.sunsamplesizenear);
-  setsaveddvar("LSNRQTOKRR", level.suncascademult1);
-  setsaveddvar("NTLKNLNPLK", level.suncascademult2);
+  setsaveddvar("sm_sunSampleSizeNear", level.sunsamplesizenear);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", level.suncascademult1);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", level.suncascademult2);
   scripts\engine\sp\utility::dof_disable_autofocus();
-  setsaveddvar("NLOTLQMORR", 0.9);
+  setsaveddvar("r_lightGridTempSmoothingFactor", 0.9);
 }
 
 function lighting_bunker() {
@@ -95,5 +95,5 @@ function sun_disable() {
   setsuncolorandintensity(0);
   waitframe();
   waitframe();
-  setsaveddvar("MQRQQONQSL", 0);
+  setsaveddvar("sm_sunEnable", 0);
 }

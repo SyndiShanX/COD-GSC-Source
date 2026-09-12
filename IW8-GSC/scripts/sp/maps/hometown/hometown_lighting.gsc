@@ -60,14 +60,14 @@ function post_load() {
 }
 
 function lighting_setup_dvars() {
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("LMPKPQPRMK", 72.4139);
-  setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
-  setsaveddvar("LTQMSPKRKO", 8);
-  setsaveddvar("LKOLRONRNQ", 500);
-  setsaveddvar("MROOOROPKL", 10);
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("r_lightTweakSunLight", 72.4139);
+  setsaveddvar("r_volumetricDepth", "128 384 640 1024");
+  setsaveddvar("sm_spotUpdateLimit", 8);
+  setsaveddvar("sm_spotDistCull", 500);
+  setsaveddvar("sm_roundRobinPrioritySpotShadows", 10);
 }
 
 function hide_gas_shack_window_shadow_brush() {
@@ -175,7 +175,7 @@ function lighting_carried_start() {
   var_2 setlightintensity(0);
   wait 3;
   level thread scripts\engine\sp\utility::dof_enable_autofocus(7, 9, undefined);
-  setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
+  setsaveddvar("r_volumetricDepth", "128 384 640 1024");
   scripts\engine\utility::delaythread(29, &carried_dof);
   wait 4;
   visionsetnaked("", 2);
@@ -188,18 +188,18 @@ function lighting_buried_carried_common() {
   level.player enablephysicaldepthoffieldscripting();
   visionsetnaked("hometown_buried", 0);
   lerpsunangles(level.sunangles, level.buriedsunangles, 0.01);
-  setsaveddvar("NPONLLLSPL", 0.05);
+  setsaveddvar("sm_sunSampleSizeNear", 0.05);
   wait 2;
-  setsaveddvar("MPOKKOPMTN", "32 384 640 1024");
-  setsaveddvar("LRLKLRNRTS", "8 -0.5 1 0");
+  setsaveddvar("r_volumetricDepth", "32 384 640 1024");
+  setsaveddvar("r_sunShadowParams", "8 -0.5 1 0");
 }
 
 function lerp_sun_and_vision() {
   var_0 = 5;
   lerpsunangles(level.buriedsunangles, level.sunangles, var_0, var_0 * 0.25, var_0 * 0.75);
   visionsetnaked("hometown_eye_dim", var_0);
-  setsaveddvar("NPONLLLSPL", 0.15);
-  setsaveddvar("LSNRQTOKRR", 2);
+  setsaveddvar("sm_sunSampleSizeNear", 0.15);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
 }
 
 function carried_dof() {
@@ -208,8 +208,8 @@ function carried_dof() {
   level.player enablephysicaldepthoffieldscripting();
   level.player setphysicaldepthoffield(2.2, 500);
   wait 10;
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("LSNRQTOKRR", 3);
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 3);
   level thread scripts\engine\sp\utility::dof_enable_autofocus(5.6, 10, undefined);
   wait 0.5;
   level.dadchildangles = (-48, -28, 0);
@@ -224,9 +224,9 @@ function carried_dof() {
 function lighting_alley_gas_attack_start() {
   scripts\engine\utility::flag_wait_any("lighting_alley_start", "lighting_alley_progression", "lighting_gas_attack_start");
   level thread scripts\engine\sp\utility::dof_enable_autofocus(8, 4, undefined);
-  setsaveddvar("NPONLLLSPL", 0.25);
-  setsaveddvar("LSNRQTOKRR", 3);
-  setsaveddvar("LRLKLRNRTS", "8 0 1 0");
+  setsaveddvar("sm_sunSampleSizeNear", 0.25);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 3);
+  setsaveddvar("r_sunShadowParams", "8 0 1 0");
   var_0 = getEntArray("shadow_array_brush_house", "targetname");
 
   foreach(var_2 in var_0) {
@@ -238,11 +238,11 @@ function lighting_house_enter_start() {
   scripts\engine\utility::flag_wait_any("lighting_house_enter_start", "lighting_house_boss_start", "lighting_house_exit_start", "lighting_house_enter_progression");
   level.house_fstop = 12;
   level thread scripts\engine\sp\utility::dof_enable_autofocus(level.house_fstop, 5, undefined);
-  setsaveddvar("NPONLLLSPL", 0.22);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("NTLKNLNPLK", 2);
-  setsaveddvar("MPOKKOPMTN", "64 128 256 512");
-  setsaveddvar("TLMMOPMSK", 1);
+  setsaveddvar("sm_sunSampleSizeNear", 0.22);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier2", 2);
+  setsaveddvar("r_volumetricDepth", "64 128 256 512");
+  setsaveddvar("r_spotLightEntityShadows", 1);
   wait 2;
   var_0 = getEntArray("shadow_array_brush_house", "targetname");
 
@@ -251,11 +251,11 @@ function lighting_house_enter_start() {
   }
 
   scripts\engine\utility::flag_wait("lighting_cellphone_moment");
-  setsaveddvar("SLSMSSTQP", "1");
+  setsaveddvar("r_dof_physical_minFocusDistance", "1");
   level.house_intro_phone_farah_model thread scripts\engine\sp\utility::dof_enable_autofocus(6, 40, undefined, undefined, "tag_phone_fx");
   wait 4.5;
   level thread scripts\engine\sp\utility::dof_enable_autofocus(level.house_fstop, 5, undefined);
-  setsaveddvar("SLSMSSTQP", "9");
+  setsaveddvar("r_dof_physical_minFocusDistance", "9");
   scripts\engine\utility::flag_wait("player_went_to_foyer");
 
   while(!isDefined(level.hadir_body_model)) {
@@ -313,11 +313,11 @@ function lighting_gas_progression() {
     var_2 hide();
   }
 
-  setsaveddvar("NPONLLLSPL", 0.5);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("LMPKPQPRMK", 36, 2);
+  setsaveddvar("sm_sunSampleSizeNear", 0.5);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("r_lightTweakSunLight", 36, 2);
   visionsetnaked("hometown_gas_close", 2);
-  setsaveddvar("MPOKKOPMTN", "128 384 640 1024");
+  setsaveddvar("r_volumetricDepth", "128 384 640 1024");
   wait 2.5;
   visionsetnaked("", 0);
   waitframe();
@@ -326,9 +326,9 @@ function lighting_gas_progression() {
 
 function lighting_gas_start() {
   scripts\engine\utility::flag_wait_any("lighting_gas_start", "lighting_gas_mid_start", "lighting_gas_exit_start");
-  setsaveddvar("NPONLLLSPL", 0.5);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("LMPKPQPRMK", 36, 0);
+  setsaveddvar("sm_sunSampleSizeNear", 0.5);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("r_lightTweakSunLight", 36, 0);
   scripts\engine\utility::flag_wait_any("lighting_gas_progression", "lighting_gas_start", "lighting_gas_mid_start", "lighting_gas_exit_start");
   var_0 = getEntArray("shadow_array_brush_house", "targetname");
 
@@ -340,16 +340,16 @@ function lighting_gas_start() {
   waitframe();
   visionsetalternate(1, 0.5);
   scripts\engine\utility::flag_wait("town_exit_alley_mid_flag");
-  setsaveddvar("LSNRQTOKRR", 2);
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
 }
 
 function lighting_poppies_drive_start() {
   scripts\engine\utility::flag_wait_any("lighting_poppies_start", "lighting_drive_start");
   visionsetnaked("hometown_poppy_reveal", 0);
-  setsaveddvar("LSNRQTOKRR", 2);
-  setsaveddvar("LRLKLRNRTS", "8 -0.5 1 0");
+  setsaveddvar("sm_sunCascadeSizeMultiplier1", 2);
+  setsaveddvar("r_sunShadowParams", "8 -0.5 1 0");
   scripts\engine\utility::flag_wait_any("lighting_poppies_start", "lighting_poppies_progression", "lighting_drive_start");
-  setsaveddvar("LMPKPQPRMK", 72.4139, 1);
+  setsaveddvar("r_lightTweakSunLight", 72.4139, 1);
   level thread scripts\engine\sp\utility::dof_disable_autofocus();
   waitframe();
   level.player enablephysicaldepthoffieldscripting();
@@ -359,7 +359,7 @@ function lighting_poppies_drive_start() {
 function lighting_pistol_start() {
   scripts\engine\utility::flag_wait_any("lighting_pistol_start", "lighting_pistol_progression");
   visionsetnaked("hometown_poppy_reveal", 0);
-  setsaveddvar("LRLKLRNRTS", "8 -0.5 1 0");
+  setsaveddvar("r_sunShadowParams", "8 -0.5 1 0");
   level.hadir_ai thread scripts\engine\sp\utility::dof_enable_autofocus(6, 5, undefined, undefined, "j_neck");
   scripts\engine\utility::flag_wait("lighting_cellphone_moment");
   scripts\engine\sp\utility::dof_enable(5, 10.5, 10, 10, undefined, undefined);
@@ -369,7 +369,7 @@ function lighting_pistol_start() {
 
 function lighting_bunker_start() {
   scripts\engine\utility::flag_wait("lighting_bunker_start");
-  setsaveddvar("OMKTSMSOS", 0);
+  setsaveddvar("r_usePrebuiltSunShadow", 0);
   visionsetnaked("hometown_bunker", 0);
   scripts\engine\utility::flag_wait("lighting_bunker_exit");
   wait 18.5;

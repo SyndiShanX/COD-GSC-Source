@@ -147,11 +147,11 @@ function init_level() {
   scripts\engine\utility::flag_init("restock_playerLeftBunker");
   scripts\engine\utility::flag_init("sniper_enemyRelocating");
   scripts\engine\utility::flag_init("bunker_playerFallenBack");
-  setsaveddvar("MKNNNONLSK", 4);
-  setsaveddvar("MMLNNQSTTL", 10);
-  setsaveddvar("LTMPKRLLNM", 25000);
-  setsaveddvar("OLPNKQKKTT", 22000);
-  setsaveddvar("PKKMTTRQO", 4);
+  setsaveddvar("fx_lightmap_max_level", 4);
+  setsaveddvar("fx_alphaThreshold", 10);
+  setsaveddvar("r_vertexDeformCutOffDist", 25000);
+  setsaveddvar("r_vertexDeformFadeDist", 22000);
+  setsaveddvar("r_umbraMinObjectContribution", 4);
   scripts\engine\sp\utility::battlechatter_on("allies");
   scripts\engine\sp\utility::battlechatter_on("axis");
   var_1 = scripts\engine\utility::getStructArray("level_allyStairStruct", "targetname");
@@ -878,8 +878,8 @@ function tutorial_main() {
   var_0 = level_getfarah();
   var_1 = level_gethadir();
   thread tutorial_allieslogic();
-  setsaveddvar("LKKMQRSKTS", 0);
-  setsaveddvar("MMLNNQSTTL", 30);
+  setsaveddvar("cg_drawZoomHint", 0);
+  setsaveddvar("fx_alphaThreshold", 30);
   scripts\sp\maps\highway\highway_utility::level_deletepreviousobjective();
 
   if(!player_isprone()) {
@@ -903,7 +903,7 @@ function tutorial_main() {
   thread tutorial_secondarytargetlogic();
   level.player scripts\engine\utility::waittill_multiple("tutorial_primary_target_shot", "tutorial_secondary_target_shot");
   level_addmissionnarrativeobjective();
-  setsaveddvar("LKKMQRSKTS", 1);
+  setsaveddvar("cg_drawZoomHint", 1);
 }
 
 function tutorial_allieslogic() {
@@ -4363,7 +4363,7 @@ function radio_main() {
   sniper_fireshot(var_13, var_11);
   var_11 = var_10 getEye();
 
-  if(getdvarint("NTMLLPTNLT")) {
+  if(getdvarint("master_dismemberment_setting")) {
     playFX(level.g_effect["vfx_gib_explode"], var_11);
   }
 
@@ -5330,7 +5330,7 @@ function russians_start() {
 
 function russians_main() {
   scripts\engine\sp\utility::autosave_by_name_silent("russians");
-  setsaveddvar("NLRRTORQPN", 3);
+  setsaveddvar("ai_corpseCount", 3);
   var_0 = armor_getvehicles();
   russians_setenemygoalcount(22);
   thread russians_enemyinfinitespawninglogic(var_0);
@@ -5671,7 +5671,7 @@ function crash_playeranimationlogic(var_0) {
   var_2 = 0.4;
 
   if(level.player ispcplayer()) {
-    setsaveddvar("OMNONNMOTP", "0.1 500 2.8 10000");
+    setsaveddvar("r_zPlanes", "0.1 500 2.8 10000");
   }
 
   thread scripts\sp\maps\highway\highway_utility::player_rigenter(var_1, var_2, 10, 10, 10, 10);
@@ -5680,7 +5680,7 @@ function crash_playeranimationlogic(var_0) {
   scripts\sp\maps\highway\highway_utility::player_rigexit(var_1);
 
   if(level.player ispcplayer()) {
-    setsaveddvar("OMNONNMOTP", "0.1 500 4 10000");
+    setsaveddvar("r_zPlanes", "0.1 500 4 10000");
     return;
   }
 }
@@ -6166,7 +6166,7 @@ function drag_main() {
   var_1 = level_gethadir();
   scripts\sp\maps\highway\highway_utility::ai_setname(var_1, "");
   scripts\sp\maps\highway\highway_utility::ai_setname(var_0, "");
-  setsaveddvar("NLPLNQSNNR", 0.05);
+  setsaveddvar("sv_znear", 0.05);
   var_2 = scripts\sp\hud_util::create_client_overlay("black", 1);
   var_3 = scripts\sp\hud_util::create_client_overlay("black", 0);
   var_4 = scripts\sp\hud_util::create_client_overlay("ui_black_circle_vignette", 1);
@@ -6311,7 +6311,7 @@ function bunker_main() {
   thread scripts\sp\maps\highway\highway_lighting::lighting_bunker();
   thread bunker_blackoverlaylogic();
   scripts\engine\sp\utility::transient_unload("highway_main_tr");
-  setsaveddvar("MMLNNQSTTL", 0);
+  setsaveddvar("fx_alphaThreshold", 0);
   scripts\engine\utility::exploder("gas_bunker");
   scripts\engine\utility::delaythread(0.05, &scripts\engine\sp\utility::nextmission_preload, "full", 1);
   level_closebunkerouterdoor();
@@ -6543,9 +6543,9 @@ function player_setsunshadowsforzoom() {
     }
 
     if(var_3 != var_0) {
-      setsaveddvar("NPONLLLSPL", var_0);
-      setsaveddvar("LSNRQTOKRR", var_1);
-      setsaveddvar("NTLKNLNPLK", var_2);
+      setsaveddvar("sm_sunSampleSizeNear", var_0);
+      setsaveddvar("sm_sunCascadeSizeMultiplier1", var_1);
+      setsaveddvar("sm_sunCascadeSizeMultiplier2", var_2);
       var_3 = var_0;
     }
 
@@ -8193,12 +8193,12 @@ function wind_setdirection(var_0, var_1, var_2) {
   level.ballistics.winddirectionstring = level.ballistics.winddirectionstrings[var_2];
   level.ballistics.winddirectionaimstring = level.ballistics.winddirectionaimstrings[var_2];
   level.ballistics.winddirectionindex = var_2;
-  setsaveddvar("MQPQKNPQOK", 2);
-  setsaveddvar("MRNRKKOPLN", 2);
-  setsaveddvar("NQTLPTNSSO", 3);
-  setsaveddvar("OLSKLTPPMR", 0.7);
-  setsaveddvar("LQLSPQOPKM", 50);
-  setsaveddvar("NTMMTOLQMQ", level.ballistics.wind);
+  setsaveddvar("cg_defaultWindAmplitudeScale", 2);
+  setsaveddvar("cg_defaultWindFrequencyScale", 2);
+  setsaveddvar("cg_defaultWindStrength", 3);
+  setsaveddvar("cg_defaultWindNoiseScale", 0.7);
+  setsaveddvar("cg_defaultWindAreaScale", 50);
+  setsaveddvar("cg_defaultWindDir", level.ballistics.wind);
 }
 
 function wind_getrandomdirectionindex() {

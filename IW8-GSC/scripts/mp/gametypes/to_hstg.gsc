@@ -90,7 +90,7 @@ function onstartgametype() {
   createzones();
   seticonnames();
   scripts\mp\tac_ops\hostage_utility::hostagesysteminit();
-  setDvar("MTLTONMMQT", 0.75);
+  setDvar("player_limitedMovementLeftStickInputScale", 0.75);
   level.zoneduration = 120;
   level.hostagestates = [];
   level.hostagecarrystates = [];
@@ -108,7 +108,7 @@ function onstartgametype() {
   level.hostageexitpoints[0] = level.objectives[0];
   scripts\mp\tac_ops\hostage_utility::spawnallhostages();
   level.hostages[0].outlineid = scripts\mp\utility\outline::outlineenableforteam(level.hostages[0].body, level.hostages[0].team, "outline_nodepth_cyan", "killstreak_personal");
-  setDvar("MTLTONMMQT", 0.75);
+  setDvar("player_limitedMovementLeftStickInputScale", 0.75);
   level.zoneduration = 120;
   level.hostagestates = [];
   level.hostagecarrystates = [];

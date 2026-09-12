@@ -19,7 +19,7 @@ function ref_128b0() {
       var_1 setplayerdata("common", "round", "scoreboardType", "multiteam");
     }
 
-    if(getdvarint("MTKSQRQLKN") != 0) {
+    if(getdvarint("online_mp_clientmatchdata_enabled") != 0) {
       setclientmatchdata("alliesScore", -1);
       setclientmatchdata("axisScore", -1);
       setclientmatchdata("alliesKills", -1);
@@ -48,7 +48,7 @@ function ref_128b0() {
     if(scripts\mp\utility\game::inovertime()) {
       if(scripts\mp\utility\game::istimetobeatrulegametype()) {
         if(game["timeToBeatTeam"] == "none") {
-          if(getdvarint("MTKSQRQLKN") != 0) {
+          if(getdvarint("online_mp_clientmatchdata_enabled") != 0) {
             setclientmatchdata("alliesTTB", 0);
             setclientmatchdata("axisTTB", 0);
           }
@@ -61,7 +61,7 @@ function ref_128b0() {
             var_4++;
           }
 
-          if(getdvarint("MTKSQRQLKN") != 0) {
+          if(getdvarint("online_mp_clientmatchdata_enabled") != 0) {
             setclientmatchdata("alliesTTB", scripts\engine\utility::ter_op("allies" == game["timeToBeatTeam"], game["timeToBeat"], game["timeToBeatOld"]));
             setclientmatchdata("axisTTB", scripts\engine\utility::ter_op("axis" == game["timeToBeatTeam"], game["timeToBeat"], game["timeToBeatOld"]));
           }
@@ -77,7 +77,7 @@ function ref_128b0() {
       var_9 = "axis";
     }
 
-    if(getdvarint("MTKSQRQLKN") != 0) {
+    if(getdvarint("online_mp_clientmatchdata_enabled") != 0) {
       setclientmatchdata("alliesScore", var_3);
       setclientmatchdata("axisScore", var_4);
       setclientmatchdata("alliesKills", var_5);
@@ -121,7 +121,7 @@ function ref_128b0() {
     var_1 setplayerdata("common", "round", "scoreboardType", "neutral");
   }
 
-  if(getdvarint("MTKSQRQLKN") != 0) {
+  if(getdvarint("online_mp_clientmatchdata_enabled") != 0) {
     setclientmatchdata("alliesScore", -1);
     setclientmatchdata("axisScore", -1);
     setclientmatchdata("alliesKills", -1);
@@ -144,7 +144,7 @@ function ref_128a8(var_0) {
 }
 
 function setplayerscoreboardinfo() {
-  if(getdvarint("MTKSQRQLKN") == 0) {
+  if(getdvarint("online_mp_clientmatchdata_enabled") == 0) {
     return;
   }
 
@@ -301,7 +301,7 @@ function computescoreboardslot(var_0, var_1) {
 }
 
 function buildscoreboardtype(var_0) {
-  if(getdvarint("MTKSQRQLKN") == 0) {
+  if(getdvarint("online_mp_clientmatchdata_enabled") == 0) {
     return;
   }
 

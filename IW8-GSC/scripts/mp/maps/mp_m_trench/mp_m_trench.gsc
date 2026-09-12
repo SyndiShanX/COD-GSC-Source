@@ -15,7 +15,7 @@ function main() {
   scripts\cp_mp\utility\game_utility::registerarenamap();
   level.requiresminstartspawns = 0;
   level.chopper_gunner_assignedtargetmarkers_onnewai = getnodesinradius((1952, 0, -192), 800, 0, 400);
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

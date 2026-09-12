@@ -723,11 +723,11 @@ function camera() {
 }
 
 function freeplayer() {
-  setDvar("LTNQQOMQSO", "0");
+  setDvar("cl_freemove", "0");
 }
 
 function setplayertocamera(var_0) {
-  setDvar("LTNQQOMQSO", "2");
+  setDvar("cl_freemove", "2");
 }
 
 function deathspawnerpreview() {
@@ -869,7 +869,7 @@ function updateminimapsetting() {
         var_15.origin = var_11 + (0, 0, -62);
         var_15.angles = (90, getnorthyaw(), 0);
         var_9 giveweapon("defaultweapon");
-        setsaveddvar("QTSPTNLOL", var_20);
+        setsaveddvar("cg_fov", var_20);
         level.minimapplayer = var_9;
         level.minimaporigin = var_15;
         thread drawminimapbounds(var_11, var_13, var_12);

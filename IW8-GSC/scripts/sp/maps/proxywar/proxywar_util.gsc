@@ -196,7 +196,7 @@ function within_player_fov(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2 = var_1;
   } else {
-    var_2 = cos(getdvarfloat("MRNKTKLLKP"));
+    var_2 = cos(getdvarfloat("cg_targetBaseFov"));
   }
 
   return scripts\engine\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_1, var_2);
@@ -206,7 +206,7 @@ function within_player_fov_2d(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2 = var_1;
   } else {
-    var_2 = cos(getdvarfloat("MRNKTKLLKP"));
+    var_2 = cos(getdvarfloat("cg_targetBaseFov"));
   }
 
   return scripts\engine\math::within_fov_2d(level.player getEye(), level.player getplayerangles(), var_1, var_2);
@@ -1292,7 +1292,7 @@ function teleport_if_clear(var_0, var_1, var_2, var_3) {
     var_3 = (0, 0, 0);
   }
 
-  var_4 = cos(getdvarfloat("MRNKTKLLKP") + 10);
+  var_4 = cos(getdvarfloat("cg_targetBaseFov") + 10);
   var_5 = 0;
 
   while(!var_5) {
@@ -1307,19 +1307,19 @@ function teleport_if_clear(var_0, var_1, var_2, var_3) {
 }
 
 function set_wind(var_0, var_1, var_2, var_3, var_4) {
-  setsaveddvar("MRNRKKOPLN", var_0);
-  setsaveddvar("OLSKLTPPMR", var_1);
-  setsaveddvar("MQPQKNPQOK", var_2);
-  setsaveddvar("LQLSPQOPKM", var_3);
-  setsaveddvar("NQTLPTNSSO", var_4);
+  setsaveddvar("cg_defaultWindFrequencyScale", var_0);
+  setsaveddvar("cg_defaultWindNoiseScale", var_1);
+  setsaveddvar("cg_defaultWindAmplitudeScale", var_2);
+  setsaveddvar("cg_defaultWindAreaScale", var_3);
+  setsaveddvar("cg_defaultWindStrength", var_4);
 }
 
 function ramp_wind(var_0, var_1, var_2, var_3, var_4, var_5) {
-  scripts\engine\sp\utility::lerp_saveddvar("MRNRKKOPLN", var_1, var_0);
-  scripts\engine\sp\utility::lerp_saveddvar("OLSKLTPPMR", var_2, var_0);
-  scripts\engine\sp\utility::lerp_saveddvar("MQPQKNPQOK", var_3, var_0);
-  scripts\engine\sp\utility::lerp_saveddvar("LQLSPQOPKM", var_4, var_0);
-  scripts\engine\sp\utility::lerp_saveddvar("NQTLPTNSSO", var_5, var_0);
+  scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindFrequencyScale", var_1, var_0);
+  scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindNoiseScale", var_2, var_0);
+  scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindAmplitudeScale", var_3, var_0);
+  scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindAreaScale", var_4, var_0);
+  scripts\engine\sp\utility::lerp_saveddvar("cg_defaultWindStrength", var_5, var_0);
 }
 
 function give_spotter_scope() {

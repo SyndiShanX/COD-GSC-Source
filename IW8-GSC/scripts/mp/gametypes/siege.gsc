@@ -9,7 +9,7 @@ function main() {
   }
 
   level.unset_relic_lfo = 0;
-  var_0 = getdvarint("LTSNLQNRKO") && !getdvarint("LSTLQTSSRM");
+  var_0 = getdvarint("onlinegame") && !getdvarint("xblive_privatematch");
 
   if(var_0) {
     level.unset_relic_lfo = getdvarint("scr_siege_groundwarSiege", 0);

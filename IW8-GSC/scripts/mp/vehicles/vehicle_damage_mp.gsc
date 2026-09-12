@@ -540,7 +540,7 @@ function ref_127f6() {
 }
 
 function ref_1333e(var_0) {
-  var_1 = getDvar("NSQLTTMRMP");
+  var_1 = getDvar("ui_mapname");
   var_2 = "cp/" + var_1 + "_objectives.csv";
   var_3 = int(tablelookup(var_2, 1, var_0, 0));
   self setclientomnvar("ui_hide_hud", 0);

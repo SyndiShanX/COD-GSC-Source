@@ -106,13 +106,13 @@ function initdefaultsettings() {
   level.endgame_write_clientmatchdata_for_player_func = &endgame_clientmatchdata;
   level.hostmigrationend = &hostmigrationend;
   level.onhostmigration = &hostmigrationstart;
-  setDvar("NKTQRKRMTS", 200);
-  setDvar("LKMOLLSKKO", 375);
-  setDvar("OMLLLQKQSR", 200);
-  setDvar("LTMMLKRKTR", 375);
+  setDvar("bg_fallDamageMinHeight", 200);
+  setDvar("bg_fallDamageMaxHeight", 375);
+  setDvar("bg_softLandingMinHeight", 200);
+  setDvar("bg_softLandingMaxHeight", 375);
   level.game_mode_statstable = "cp/zombies/mode_string_tables/zombies_statstable.csv";
   level.game_mode_attachment_map = "cp/zombies/zombie_attachmentmap.csv";
-  var_0 = getDvar("NSQLTTMRMP");
+  var_0 = getDvar("ui_mapname");
   level.power_up_table = "cp/zombies/" + var_0 + "_loot.csv";
 }
 
@@ -940,12 +940,12 @@ function onplayerconnect() {
         var_0.connect_time = gettime();
       }
 
-      var_0.xpscale = getdvarint("MSTMORLPKN");
-      var_0.weaponxpscale = getdvarint("NNKLRNNSOP");
+      var_0.xpscale = getdvarint("online_zombies_xpscale");
+      var_0.weaponxpscale = getdvarint("online_zombie_weapon_xpscale");
 
       if(var_0 scripts\cp\utility::rankingenabled()) {
-        var_1 = getdvarint("LTSPPRQSMO");
-        var_2 = getdvarint("NSRPSMKOMP");
+        var_1 = getdvarint("online_zombie_party_weapon_xpscale");
+        var_2 = getdvarint("online_zombie_party_xpscale");
         var_3 = var_0 getprivatepartysize() > 1;
 
         if(isDefined(var_1)) {
@@ -1054,7 +1054,7 @@ function mission_jumpto_debug() {
     self waittill("luinotifyserver", var_0, var_1);
 
     if(var_0 == "mission_jump") {
-      var_2 = getDvar("NSQLTTMRMP");
+      var_2 = getDvar("ui_mapname");
       var_3 = "cp/" + var_2 + "_objectives.csv";
       var_4 = tablelookup(var_3, 0, var_1, 1);
       var_5 = var_2 + "_start_obj";
@@ -1090,7 +1090,7 @@ function player_hotjoin() {
     self.wave_num_when_joined = level.wave_num;
   }
 
-  var_0 = getDvar("NSQLTTMRMP");
+  var_0 = getDvar("ui_mapname");
 
   if(isDefined(self.introscreen_overlay)) {
     self.introscreen_overlay.alpha = 1;
@@ -1479,7 +1479,7 @@ function prematchfunc() {
 }
 
 function show_introscreen_text() {
-  var_0 = getDvar("NSQLTTMRMP");
+  var_0 = getDvar("ui_mapname");
   var_1 = getDvar(var_0 + "_start_obj", "");
   var_2 = "cp/" + var_0 + "_objectives.csv";
   var_3 = int(tablelookup(var_2, 1, var_1, 0));
@@ -1559,7 +1559,7 @@ function default_strike_player_connect_black_screen(var_0) {
     }
 
     if(var_1 == 0) {
-      var_5 = getdvarint("LKKRLSMRQP", 0);
+      var_5 = getdvarint("sv_delay_cpwave_matchinprogress", 0);
       wait var_5;
       scripts\cp\cp_globallogic::refreshuimatchinprogressomnvarvalue();
       return;
@@ -1580,7 +1580,7 @@ function callbackplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
 }
 
 function precachelb() {
-  var_0 = " LB_" + getDvar("NSQLTTMRMP");
+  var_0 = " LB_" + getDvar("ui_mapname");
 
   if(scripts\cp\utility::isplayingsolo()) {
     var_0 += "_SOLO";
@@ -1964,7 +1964,7 @@ function last_stand_hud_update() {
 
 function monitor_num_players() {
   scripts\engine\utility::flag_init("player_count_determined");
-  var_0 = getDvar("NKSQNMMRRQ");
+  var_0 = getDvar("party_partyPlayerCountNum");
 
   if(var_0 != "1") {
     level.only_one_player = 0;
@@ -2356,11 +2356,11 @@ function mp_t_reflex_containers_collisions() {
 function spawn_endgame_camera(var_0) {
   self.ignoreme = 1;
   self cameralinkTo(var_0, "tag_origin", 1);
-  self setclientdvar("LQKPQMPRQN", 1);
+  self setclientdvar("cg_everyoneHearsEveryone", 1);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 
   if(self isconsoleplayer()) {
-    self setclientdvar("QTSPTNLOL", "50");
+    self setclientdvar("cg_fov", "50");
     return;
   }
 }

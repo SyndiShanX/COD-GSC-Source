@@ -1761,7 +1761,7 @@ function vehicle_occupancy_monitorexitinternal(var_0, var_1, var_2) {
   }
 
   var_5 = level.framedurationseconds;
-  var_6 = getdvarint("MQTOLLKKLQ", 250) / 1000;
+  var_6 = getdvarint("bg_useholdtimeshort", 250) / 1000;
 
   for(;;) {
     var_7 = 0;

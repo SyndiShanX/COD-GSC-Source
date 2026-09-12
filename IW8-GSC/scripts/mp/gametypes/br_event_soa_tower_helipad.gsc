@@ -819,8 +819,8 @@ function ref_13ee0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_7 = scripts\mp\hud_util::createfontstring("default", var_2);
   var_8 = 40;
-  var_9 = (1 - getdvarfloat("LQORTPMNLL", 0)) * var_8;
-  var_10 = (1 - getdvarfloat("NPLKLQMNPL", 0)) * var_8 / 2;
+  var_9 = (1 - getdvarfloat("hudBounds_adjusted_horizontal", 0)) * var_8;
+  var_10 = (1 - getdvarfloat("hudBounds_adjusted_vertical", 0)) * var_8 / 2;
   var_7 scripts\mp\hud_util::setpoint(var_6, var_6, 143 + var_9, var_5 + var_10);
   var_7.color = var_3;
   var_7.label = var_0;
@@ -838,8 +838,8 @@ function ref_13ee1() {
   var_0.width = 0;
   var_0.height = 10;
   var_1 = 40;
-  var_2 = (1 - getdvarfloat("LQORTPMNLL", 0)) * var_1;
-  var_3 = (1 - getdvarfloat("NPLKLQMNPL", 0)) * var_1 / 2;
+  var_2 = (1 - getdvarfloat("hudBounds_adjusted_horizontal", 0)) * var_1;
+  var_3 = (1 - getdvarfloat("hudBounds_adjusted_vertical", 0)) * var_1 / 2;
   var_0.x = 65 + var_2;
   var_0.y = 60 + var_3;
   var_0.xoffset = 25;

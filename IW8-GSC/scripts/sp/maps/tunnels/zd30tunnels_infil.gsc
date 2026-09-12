@@ -1258,11 +1258,11 @@ function compound_lights_sequence() {
   var_0 = ["2f_dataroom_light"];
   compound_lights_on(var_0);
   wait 3;
-  setsaveddvar("LKOLRONRNQ", 1500);
+  setsaveddvar("sm_spotDistCull", 1500);
   var_0 = ["1f_light"];
   compound_lights_on(var_0);
   wait 3;
-  setsaveddvar("LKOLRONRNQ", 400);
+  setsaveddvar("sm_spotDistCull", 400);
 }
 
 function postspawn_infil_dogs() {
@@ -2013,7 +2013,7 @@ function b1_alpha6_vo() {
 }
 
 function tv_image() {
-  setsaveddvar("MMRNLMPPLT", "0");
+  setsaveddvar("bg_cinematicFullscreen", "0");
   cinematicingameloop("sp_embassy_soccer_tv", 1);
 }
 
@@ -3038,7 +3038,7 @@ function power_interact() {
     waitframe();
   }
 
-  setsaveddvar("NLOTLQMORR", 0);
+  setsaveddvar("r_lightGridTempSmoothingFactor", 0);
   scripts\engine\utility::flag_set("power_is_off");
   level.bravo4 stopsounds();
   level.bravo1 stopsounds();
@@ -3061,7 +3061,7 @@ function power_handle_down(var_0) {
   var_1[0] setscriptablepartstate("onoff", "off_blink");
   var_2 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light"];
   compound_lights_off(var_2);
-  setsaveddvar("NLOTLQMORR", 1);
+  setsaveddvar("r_lightGridTempSmoothingFactor", 1);
 }
 
 function power_down_electronics() {
@@ -4280,7 +4280,7 @@ function weapon_fire_3f_enemy1_vo() {
 }
 
 function spawn_3f_enemy2() {
-  setsaveddvar("MTTSOONN", 1);
+  setsaveddvar("bullet_penetrationHitsClients", 1);
   var_0 = scripts\engine\sp\utility::spawn_targetname("3f_enemy_door");
   var_0 scripts\sp\utility::context_melee_allow(0);
   var_0 scripts\engine\sp\utility::set_battlechatter(0);
@@ -4303,7 +4303,7 @@ function bedroom_3f_death() {
   self waittill("death");
   self stopsounds();
   scripts\engine\utility::flag_set("3f_bedroom_guy_dead");
-  setsaveddvar("MTTSOONN", 0);
+  setsaveddvar("bullet_penetrationHitsClients", 0);
 }
 
 function temp_ignore() {
@@ -4729,7 +4729,7 @@ function wait_finish_speaking() {
 
 function lights_on_3f() {
   thread scripts\engine\utility::play_sound_in_space("scn_zd30_lights_back_on", (360, 1330, 337));
-  setsaveddvar("NLOTLQMORR", 0.2);
+  setsaveddvar("r_lightGridTempSmoothingFactor", 0.2);
   var_0 = ["3f_bedroom_light", "2f_dataroom_light", "1f_light", "compound_light", "lgt_outside"];
   thread compound_lights_on(var_0);
   thread power_on_electronics();
@@ -4740,7 +4740,7 @@ function lights_on_3f() {
   }
 
   wait 2;
-  setsaveddvar("NLOTLQMORR", 0.9);
+  setsaveddvar("r_lightGridTempSmoothingFactor", 0.9);
 }
 
 function look_at_player_3f() {
@@ -5219,8 +5219,8 @@ function trap_door_scene() {
   thread trap_door_extras();
   level.player hidelegs();
   thread tunnels_door_player_extras();
-  var_3 = getDvar("OMNONNMOTP");
-  setsaveddvar("OMNONNMOTP", "0.1 500 1 10000");
+  var_3 = getDvar("r_zPlanes");
+  setsaveddvar("r_zPlanes", "0.1 500 1 10000");
   var_4 = var_0 scripts\sp\player_rig::link_player_to_rig("entrance", undefined, 1, 0.2, 1, 0, 0, 0, 0);
   var_0 notify("stop_landing_charlie");
   thread cinematic_camera_settings_tea_house();
@@ -5234,7 +5234,7 @@ function trap_door_scene() {
   level.player freezelookcontrols(0);
   level.player scripts\engine\sp\utility::set_player_demeanor("normal");
   level notify("tunnels_transition");
-  setsaveddvar("OMNONNMOTP", var_3);
+  setsaveddvar("r_zPlanes", var_3);
   thread scripts\sp\analytics::analytics_kleenex_update("Compound");
 }
 
@@ -6021,7 +6021,7 @@ function get_is_looking_at(var_0, var_1, var_2, var_3) {
     var_4 = var_2;
   }
 
-  var_5 = self worldpointtoscreenpos(var_4, getdvarint("MRNKTKLLKP"));
+  var_5 = self worldpointtoscreenpos(var_4, getdvarint("cg_targetBaseFov"));
 
   if(!isDefined(var_5)) {
     return 0;

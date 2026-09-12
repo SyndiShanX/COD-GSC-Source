@@ -1712,13 +1712,13 @@ function damageradialdistortion(var_0, var_1, var_2) {
 function radial_distortion(var_0, var_1, var_2, var_3, var_4) {
   self notify("radialDistortion");
   self endon("radialDistortion");
-  self setclientdvar("MLTTMLTKOR", var_0);
-  self setclientdvar("NKTRSSTMRQ", -1);
-  self setclientdvar("LSOPQMRPNR", var_1);
+  self setclientdvar("r_mbRadialOverrideDistortion", var_0);
+  self setclientdvar("r_mbRadialOverrideRadius", -1);
+  self setclientdvar("r_mbRadialOverrideStrength", var_1);
 
   if(isDefined(var_3)) {
-    self setclientdvar("NSSPMPLRQL", 1);
-    self setclientdvar("MKRSSOQLML", var_3);
+    self setclientdvar("r_mbRadialOverridePositionActive", 1);
+    self setclientdvar("r_mbRadialOverridePosition", var_3);
   }
 
   if(isDefined(var_4)) {
@@ -1762,15 +1762,15 @@ function lerp_saveddvar(var_0, var_1, var_2) {
 }
 
 function removeradialdistortion(var_0) {
-  GscBinSkip4(0x35, "MLTTMLTKOR", 0, var_0);
+  GscBinSkip4(0x35, "r_mbRadialOverrideDistortion", 0, var_0);
 }
 
 function removeradialdistortion_notify(var_0) {
   self waittill(var_0);
-  self setclientdvar("MLTTMLTKOR", 0);
-  self setclientdvar("NKTRSSTMRQ", 0);
-  self setclientdvar("LSOPQMRPNR", 0);
-  self setclientdvar("NSSPMPLRQL", 0);
+  self setclientdvar("r_mbRadialOverrideDistortion", 0);
+  self setclientdvar("r_mbRadialOverrideRadius", 0);
+  self setclientdvar("r_mbRadialOverrideStrength", 0);
+  self setclientdvar("r_mbRadialOverridePositionActive", 0);
 }
 
 function damagepainvision(var_0, var_1, var_2) {

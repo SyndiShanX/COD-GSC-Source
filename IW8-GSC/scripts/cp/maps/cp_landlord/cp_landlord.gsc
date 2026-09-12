@@ -11,8 +11,8 @@ function main() {
   scripts\cp\maps\cp_landlord\cp_landlord_lighting::main();
   level.default_player_spawns = "default_spawn_" + level.script;
   scripts\cp\cp_compass::setupminimap("compass_map_cp_landlord");
-  setDvar("PKKMTTRQO", 8);
-  setDvar("NSSMQLPRNT", 0.01);
+  setDvar("r_umbraMinObjectContribution", 8);
+  setDvar("r_sunIntensityHeatOverride", 0.01);
   setdvarifuninitialized("scr_use_squads", 1);
 
   if(level.createfx_enabled) {

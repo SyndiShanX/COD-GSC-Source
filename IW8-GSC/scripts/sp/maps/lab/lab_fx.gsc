@@ -98,7 +98,7 @@ function main() {
   level._effect["drone_explode_heli"] = loadfx("vfx/iw8/weap/_impact/hellfire/vfx_hellfire_helicopter.vfx");
   level._effect["drone_explode"] = loadfx("vfx/iw8/weap/_impact/hellfire/vfx_hellfire_generic.vfx");
 
-  if(!getdvarint("LLQQOPKTKM")) {
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     scripts\sp\maps\lab\gen\lab_fx::main();
     scripts\sp\maps\lab\gen\lab_sound::main();
     return;

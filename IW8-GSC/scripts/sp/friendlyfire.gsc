@@ -407,10 +407,10 @@ function missionfail(var_0) {
   level notify("mission failed");
   level notify("friendlyfire_mission_fail");
   waittillframeend();
-  setsaveddvar("LPROPSMNKS", 1);
+  setsaveddvar("hud_missionFailed", 1);
   setomnvar("ui_hide_weapon_info", 1);
-  setsaveddvar("MPNNTKMQTS", 0);
-  setsaveddvar("MNRKKQLQPQ", 1);
+  setsaveddvar("hud_showStance", 0);
+  setsaveddvar("actionSlotsHide", 1);
 
   if(isDefined(level.player.failingmission)) {
     return;

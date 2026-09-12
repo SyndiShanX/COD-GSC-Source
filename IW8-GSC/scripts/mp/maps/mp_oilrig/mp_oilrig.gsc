@@ -16,9 +16,9 @@ function main() {
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_oilrig", "codcaster_compass_map_mp_oilrig");
-  setDvar("PKKMTTRQO", 8);
+  setDvar("r_umbraMinObjectContribution", 8);
   setDvar("MTRRKPRML", 2);
-  setDvar("LTMPKRLLNM", 5000);
+  setDvar("r_vertexDeformCutOffDist", 5000);
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";

@@ -70,7 +70,7 @@ function playanim_bomberdeath(var_0, var_1, var_2) {
 function bomber_detonation() {
   self.hasexploded = 1;
 
-  if(getdvarint("NTMLLPTNLT")) {
+  if(getdvarint("master_dismemberment_setting")) {
     if(isDefined(self) && isDefined(self.grenadeweapon) && istrue(self.bomberusegrenade)) {
       var_0 = self magicgrenade(self.origin + (0, 0, 60), self.origin, 0, 0);
     } else {

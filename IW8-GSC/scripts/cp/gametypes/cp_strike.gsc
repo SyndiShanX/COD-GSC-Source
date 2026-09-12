@@ -93,7 +93,7 @@ function initdefaultsettings() {
   level.last_stand_hud_update = &last_stand_hud_update;
   level.game_mode_statstable = "cp/zombies/mode_string_tables/zombies_statstable.csv";
   level.game_mode_attachment_map = "cp/zombies/zombie_attachmentmap.csv";
-  var_0 = getDvar("NSQLTTMRMP");
+  var_0 = getDvar("ui_mapname");
   level.power_up_table = "cp/zombies/" + var_0 + "_loot.csv";
   level.onstartgametype = &onstartgametype;
   level.onspawnplayer = &onspawnplayer;
@@ -254,12 +254,12 @@ function onplayerconnect() {
         var_0.connect_time = gettime();
       }
 
-      var_0.xpscale = getdvarint("MSTMORLPKN");
-      var_0.weaponxpscale = getdvarint("NNKLRNNSOP");
+      var_0.xpscale = getdvarint("online_zombies_xpscale");
+      var_0.weaponxpscale = getdvarint("online_zombie_weapon_xpscale");
 
       if(var_0 scripts\cp\utility::rankingenabled()) {
-        var_1 = getdvarint("LTSPPRQSMO");
-        var_2 = getdvarint("NSRPSMKOMP");
+        var_1 = getdvarint("online_zombie_party_weapon_xpscale");
+        var_2 = getdvarint("online_zombie_party_xpscale");
         var_3 = var_0 getprivatepartysize() > 1;
 
         if(isDefined(var_1)) {
@@ -382,7 +382,7 @@ function player_hotjoin() {
     self.wave_num_when_joined = level.wave_num;
   }
 
-  var_0 = getDvar("NSQLTTMRMP");
+  var_0 = getDvar("ui_mapname");
 
   if(isDefined(self.introscreen_overlay)) {
     self.introscreen_overlay.alpha = 1;
@@ -980,7 +980,7 @@ function dev_damage_show_damage_numbers() {
 }
 
 function precachelb() {
-  var_0 = " LB_" + getDvar("NSQLTTMRMP");
+  var_0 = " LB_" + getDvar("ui_mapname");
 
   if(scripts\cp\utility::isplayingsolo()) {
     var_0 += "_SOLO";
@@ -1175,7 +1175,7 @@ function kick_for_inactivity(var_0) {
   thread check_for_movement();
   var_0.input_has_happened = 0;
   var_1 = gettime();
-  var_2 = level.onlinegame && !getdvarint("LSTLQTSSRM");
+  var_2 = level.onlinegame && !getdvarint("xblive_privatematch");
 
   if(var_2) {
     var_0 notifyonplayercommand("inputReceived", "+speed_throw");
@@ -1226,7 +1226,7 @@ function kick_for_inactivity(var_0) {
 function check_for_movement() {
   level endon("game_ended");
   self endon("disconnect");
-  var_0 = level.onlinegame && !getdvarint("LSTLQTSSRM");
+  var_0 = level.onlinegame && !getdvarint("xblive_privatematch");
 
   if(var_0) {
     var_1 = self getnormalizedmovement();
@@ -1387,7 +1387,7 @@ function armor_meter_monitor(var_0) {
 
 function monitor_num_players() {
   scripts\engine\utility::flag_init("player_count_determined");
-  var_0 = getDvar("NKSQNMMRRQ");
+  var_0 = getDvar("party_partyPlayerCountNum");
 
   if(var_0 != "1") {
     level.only_one_player = 0;

@@ -4,7 +4,7 @@
 ************************************************/
 
 function setlowermessageomnvar(var_0, var_1, var_2) {
-  var_3 = getDvar("MOLPOSLOMO");
+  var_3 = getDvar("ui_gametype");
 
   if(var_3 != "cp_survival" && var_3 != "cp_wave_sv" && var_3 != "cp_specops") {
     self setclientomnvar("ui_lower_message", var_0);
@@ -27,7 +27,7 @@ function clearomnvarsaftertime(var_0) {
   self endon("message_cleared");
   self endon("death_or_disconnect");
   wait var_0;
-  var_1 = getDvar("MOLPOSLOMO");
+  var_1 = getDvar("ui_gametype");
 
   if(var_1 != "cp_survival" && var_1 != "cp_wave_sv" && var_1 != "cp_specops") {
     self setclientomnvar("ui_lower_message", 0);

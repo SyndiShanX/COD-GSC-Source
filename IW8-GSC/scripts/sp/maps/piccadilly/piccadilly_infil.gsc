@@ -276,8 +276,8 @@ function start() {
 function main() {
   var_0 = scripts\engine\utility::getStruct("intro_slammzoom_node", "targetname");
   setglobalsoundcontext("dusty", "yes");
-  var_1 = getDvar("OMNONNMOTP");
-  setsaveddvar("OMNONNMOTP", "0.1 500 1.5 10000");
+  var_1 = getDvar("r_zPlanes");
+  setsaveddvar("r_zPlanes", "0.1 500 1.5 10000");
   thread skippable_intro();
   thread intro_london_bink();
   thread spawn_animated_intro_civs();
@@ -335,7 +335,7 @@ function main() {
   thread intro_car(var_0);
   scripts\engine\utility::flag_wait("boots_on_the_ground");
   level notify("vo_standoff_walla");
-  setsaveddvar("OMNONNMOTP", var_1);
+  setsaveddvar("r_zPlanes", var_1);
   scripts\engine\sp\objectives::objective_update("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_APPROACH_VAN", &"PICCADILLY/CURSOR_TARGET");
   scripts\engine\sp\objectives::objective_set_on_entity("piccadilly_objective", "Target", level.cars_bomb["van"]);
   scripts\engine\sp\objectives::objective_set_z_offset("piccadilly_objective", 120);
@@ -2282,7 +2282,7 @@ function infil_car1_main() {
   thread clip_delete("temp_standoff_clip", "car2_detonation");
   thread temp_approach_standoff_vo();
   scripts\engine\utility::flag_wait("player_at_standoff");
-  setsaveddvar("LTQMSPKRKO", 4);
+  setsaveddvar("sm_spotUpdateLimit", 4);
   scripts\engine\sp\objectives::objective_remove("piccadilly_objective");
   scripts\engine\sp\objectives::objective_add("piccadilly_objective", "current", undefined, &"PICCADILLY/OBJ_MAINTAIN_ROE");
   thread intro_standoff();

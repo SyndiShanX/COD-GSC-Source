@@ -172,7 +172,7 @@ function frontend_camera_watcher(var_0) {
     var_1 = frontendscenegetactivesection();
 
     if(var_1.name == level.active_section.name && var_1.index == level.active_section.index) {
-      if(level.active_section.name == getDvar("NRLKQRRMKK")) {
+      if(level.active_section.name == getDvar("lui_fe_transitioning_scene")) {
         stopclientexploder();
       }
 
@@ -465,20 +465,20 @@ function update_entities_and_camera() {
 
 function ref_13fb2() {
   if(isDefined(level.active_scene_data.ref_1370f)) {
-    setDvar("LTQMSPKRKO", level.active_scene_data.ref_1370f);
+    setDvar("sm_spotUpdateLimit", level.active_scene_data.ref_1370f);
     return;
   }
 
-  setDvar("LTQMSPKRKO", 8);
+  setDvar("sm_spotUpdateLimit", 8);
 }
 
 function ref_13fb3() {
   if(isDefined(level.active_scene_data.ref_13710)) {
-    setDvar("LLNMKLQQP", level.active_scene_data.ref_13710);
+    setDvar("sm_spotUpdateLimitDynLight", level.active_scene_data.ref_13710);
     return;
   }
 
-  setDvar("LLNMKLQQP", 6);
+  setDvar("sm_spotUpdateLimitDynLight", 6);
 }
 
 function move_weapon_to_loc(var_0) {
