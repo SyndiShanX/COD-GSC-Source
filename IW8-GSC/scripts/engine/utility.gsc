@@ -244,7 +244,7 @@ function waittill_multiple(var_0, var_1, var_2, var_3, var_4) {
   var_5 notify("die");
 }
 
-function ref_1439f(var_0, var_1) {
+function ref_1439F(var_0, var_1) {
   self endon("death");
   var_2 = spawnStruct();
   var_2.threads = 0;
@@ -271,7 +271,7 @@ function waittillmatch_notify(var_0, var_1, var_2) {
   self notify(var_2);
 }
 
-function ref_143ac(var_0) {
+function ref_143AC(var_0) {
   if(!isDefined(var_0) || var_0 != "death") {
     self endon("death");
   }
@@ -285,7 +285,7 @@ function ref_143ac(var_0) {
   return var_2;
 }
 
-function ref_143ad(var_0, var_1) {
+function ref_143AD(var_0, var_1) {
   if((!isDefined(var_0) || var_0 != "death") && (!isDefined(var_1) || var_1 != "death")) {
     self endon("death");
   }
@@ -304,7 +304,7 @@ function ref_143ad(var_0, var_1) {
   return var_3;
 }
 
-function ref_143ae(var_0, var_1, var_2) {
+function ref_143AE(var_0, var_1, var_2) {
   if((!isDefined(var_0) || var_0 != "death") && (!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death")) {
     self endon("death");
   }
@@ -327,7 +327,7 @@ function ref_143ae(var_0, var_1, var_2) {
   return var_4;
 }
 
-function ref_143af(var_0, var_1, var_2, var_3) {
+function ref_143AF(var_0, var_1, var_2, var_3) {
   if((!isDefined(var_0) || var_0 != "death") && (!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death")) {
     self endon("death");
   }
@@ -354,7 +354,7 @@ function ref_143af(var_0, var_1, var_2, var_3) {
   return var_5;
 }
 
-function ref_143b0(var_0, var_1, var_2, var_3, var_4) {
+function ref_143B0(var_0, var_1, var_2, var_3, var_4) {
   if((!isDefined(var_0) || var_0 != "death") && (!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death") && (!isDefined(var_4) || var_4 != "death")) {
     self endon("death");
   }
@@ -385,7 +385,7 @@ function ref_143b0(var_0, var_1, var_2, var_3, var_4) {
   return var_6;
 }
 
-function ref_143b1(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_143B1(var_0, var_1, var_2, var_3, var_4, var_5) {
   if((!isDefined(var_0) || var_0 != "death") && (!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death") && (!isDefined(var_4) || var_4 != "death") && (!isDefined(var_5) || var_5 != "death")) {
     self endon("death");
   }
@@ -420,7 +420,7 @@ function ref_143b1(var_0, var_1, var_2, var_3, var_4, var_5) {
   return var_7;
 }
 
-function ref_143b2(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_143B2(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if((!isDefined(var_0) || var_0 != "death") && (!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death") && (!isDefined(var_4) || var_4 != "death") && (!isDefined(var_5) || var_5 != "death") && (!isDefined(var_6) || var_6 != "death")) {
     self endon("death");
   }
@@ -537,7 +537,7 @@ function waittillmatch_any_return(var_0, var_1, var_2, var_3, var_4, var_5, var_
   return var_8;
 }
 
-function ref_143b3(var_0) {
+function ref_143B3(var_0) {
   var_1 = spawnStruct();
   jumpiffalse(isDefined(var_0)) LOC_00000015;
   GscBinSkip4(0x35, var_0, var_1);
@@ -547,7 +547,7 @@ function ref_143b3(var_0) {
   return var_2;
 }
 
-function ref_143b4(var_0, var_1) {
+function ref_143B4(var_0, var_1) {
   var_2 = spawnStruct();
 
   if(isDefined(var_0)) {
@@ -562,7 +562,7 @@ function ref_143b4(var_0, var_1) {
   return var_3;
 }
 
-function ref_143b5(var_0, var_1, var_2) {
+function ref_143B5(var_0, var_1, var_2) {
   var_3 = spawnStruct();
 
   if(isDefined(var_0)) {
@@ -581,7 +581,7 @@ function ref_143b5(var_0, var_1, var_2) {
   return var_4;
 }
 
-function ref_143b6(var_0, var_1, var_2, var_3) {
+function ref_143B6(var_0, var_1, var_2, var_3) {
   var_4 = spawnStruct();
 
   if(isDefined(var_0)) {
@@ -604,7 +604,7 @@ function ref_143b6(var_0, var_1, var_2, var_3) {
   return var_5;
 }
 
-function ref_143b7(var_0, var_1, var_2, var_3, var_4) {
+function ref_143B7(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnStruct();
 
   if(isDefined(var_0)) {
@@ -631,7 +631,7 @@ function ref_143b7(var_0, var_1, var_2, var_3, var_4) {
   return var_6;
 }
 
-function ref_143b8(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_143B8(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = spawnStruct();
 
   if(isDefined(var_0)) {
@@ -776,7 +776,7 @@ function waittill_all_in_array(var_0) {
   }
 }
 
-function ref_143b9(var_0, var_1) {
+function ref_143B9(var_0, var_1) {
   if(!isDefined(var_1) || var_1 != "death") {
     self endon("death");
   }
@@ -790,7 +790,7 @@ function ref_143b9(var_0, var_1) {
   GscBinSkip4(0x6e, var_2, var_0);
 }
 
-function ref_143ba(var_0, var_1, var_2) {
+function ref_143BA(var_0, var_1, var_2) {
   if((!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death")) {
     self endon("death");
   }
@@ -808,7 +808,7 @@ function ref_143ba(var_0, var_1, var_2) {
   GscBinSkip4(0x6e, var_3, var_0);
 }
 
-function ref_143bb(var_0, var_1, var_2, var_3) {
+function ref_143BB(var_0, var_1, var_2, var_3) {
   if((!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death")) {
     self endon("death");
   }
@@ -830,7 +830,7 @@ function ref_143bb(var_0, var_1, var_2, var_3) {
   GscBinSkip4(0x6e, var_4, var_0);
 }
 
-function ref_143bc(var_0, var_1, var_2, var_3, var_4) {
+function ref_143BC(var_0, var_1, var_2, var_3, var_4) {
   if((!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death") && (!isDefined(var_4) || var_4 != "death")) {
     self endon("death");
   }
@@ -856,7 +856,7 @@ function ref_143bc(var_0, var_1, var_2, var_3, var_4) {
   GscBinSkip4(0x6e, var_5, var_0);
 }
 
-function ref_143bd(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_143BD(var_0, var_1, var_2, var_3, var_4, var_5) {
   if((!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death") && (!isDefined(var_4) || var_4 != "death") && (!isDefined(var_5) || var_5 != "death")) {
     self endon("death");
   }
@@ -886,7 +886,7 @@ function ref_143bd(var_0, var_1, var_2, var_3, var_4, var_5) {
   GscBinSkip4(0x6e, var_6, var_0);
 }
 
-function ref_143be(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_143BE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if((!isDefined(var_1) || var_1 != "death") && (!isDefined(var_2) || var_2 != "death") && (!isDefined(var_3) || var_3 != "death") && (!isDefined(var_4) || var_4 != "death") && (!isDefined(var_5) || var_5 != "death") && (!isDefined(var_6) || var_6 != "death")) {
     self endon("death");
   }
@@ -960,7 +960,7 @@ function _timeout(var_0) {
   self notify("returned", "timeout");
 }
 
-function ref_143bf(var_0, var_1) {
+function ref_143BF(var_0, var_1) {
   var_2 = spawnStruct();
 
   if(isDefined(var_1)) {
@@ -970,7 +970,7 @@ function ref_143bf(var_0, var_1) {
   GscBinSkip4(0x6e, var_2, var_0);
 }
 
-function ref_143c0(var_0, var_1, var_2) {
+function ref_143C0(var_0, var_1, var_2) {
   var_3 = spawnStruct();
 
   if(isDefined(var_1)) {
@@ -984,7 +984,7 @@ function ref_143c0(var_0, var_1, var_2) {
   GscBinSkip4(0x6e, var_3, var_0);
 }
 
-function ref_143c1(var_0, var_1, var_2, var_3) {
+function ref_143C1(var_0, var_1, var_2, var_3) {
   var_4 = spawnStruct();
 
   if(isDefined(var_1)) {
@@ -1002,7 +1002,7 @@ function ref_143c1(var_0, var_1, var_2, var_3) {
   GscBinSkip4(0x6e, var_4, var_0);
 }
 
-function ref_143c2(var_0, var_1, var_2, var_3, var_4) {
+function ref_143C2(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnStruct();
 
   if(isDefined(var_1)) {
@@ -1024,7 +1024,7 @@ function ref_143c2(var_0, var_1, var_2, var_3, var_4) {
   GscBinSkip4(0x6e, var_5, var_0);
 }
 
-function ref_143c3(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_143C3(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = spawnStruct();
 
   if(isDefined(var_1)) {
@@ -1076,7 +1076,7 @@ function waittill_any_timeout_no_endon_death(var_0, var_1, var_2, var_3, var_4, 
   GscBinSkip4(0x6e, var_6, var_0);
 }
 
-function ref_143a5(var_0, var_1) {
+function ref_143A5(var_0, var_1) {
   if(isDefined(var_1)) {
     self endon(var_1);
   }
@@ -1084,7 +1084,7 @@ function ref_143a5(var_0, var_1) {
   self waittill(var_0);
 }
 
-function ref_143a6(var_0, var_1, var_2) {
+function ref_143A6(var_0, var_1, var_2) {
   if(isDefined(var_1)) {
     self endon(var_1);
   }
@@ -1096,7 +1096,7 @@ function ref_143a6(var_0, var_1, var_2) {
   self waittill(var_0);
 }
 
-function ref_143a7(var_0, var_1, var_2, var_3) {
+function ref_143A7(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1)) {
     self endon(var_1);
   }
@@ -1112,7 +1112,7 @@ function ref_143a7(var_0, var_1, var_2, var_3) {
   self waittill(var_0);
 }
 
-function ref_143a8(var_0, var_1, var_2, var_3, var_4) {
+function ref_143A8(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_1)) {
     self endon(var_1);
   }
@@ -1132,7 +1132,7 @@ function ref_143a8(var_0, var_1, var_2, var_3, var_4) {
   self waittill(var_0);
 }
 
-function ref_143a9(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_143A9(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_1)) {
     self endon(var_1);
   }
@@ -1156,7 +1156,7 @@ function ref_143a9(var_0, var_1, var_2, var_3, var_4, var_5) {
   self waittill(var_0);
 }
 
-function ref_143aa(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_143AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(var_1)) {
     self endon(var_1);
   }
@@ -1184,7 +1184,7 @@ function ref_143aa(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self waittill(var_0);
 }
 
-function ref_143ab(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+function ref_143AB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(var_1)) {
     self endon(var_1);
   }
@@ -1740,23 +1740,23 @@ function deletestruct_ref(var_0) {
       var_8 = 2500;
       var_9 = 0;
       var_10 = var_8;
-      ref_12c27(var_0, var_9, var_10);
+      ref_12C27(var_0, var_9, var_10);
 
       while(var_10 < level.struct.size) {
         var_9 = var_10 + 1;
         var_10 = ter_op(var_10 + var_8 < level.struct.size, var_10 + var_8, level.struct.size);
-        ref_12c27(var_0, var_9, var_10);
+        ref_12C27(var_0, var_9, var_10);
       }
 
       return;
     }
 
-    ref_12c27(var_0, 0, level.struct.size);
+    ref_12C27(var_0, 0, level.struct.size);
     return;
   }
 }
 
-function ref_12c27(var_0, var_1, var_2) {
+function ref_12C27(var_0, var_1, var_2) {
   for(var_3 = var_1; var_3 <= var_2; var_3++) {
     var_4 = level.struct[var_3];
 
@@ -3206,7 +3206,7 @@ function array_wait(var_0, var_1, var_2) {
 
 function array_wait_proc(var_0, var_1, var_2) {
   var_0 endon("array_wait_success");
-  ref_143a5(var_1, var_2, "death");
+  ref_143A5(var_1, var_2, "death");
   var_0 notify("array_wait_proc");
 }
 
@@ -3262,7 +3262,7 @@ function array_any_wait_return(var_0, var_1) {
 }
 
 function array_any_wait_return_proc(var_0, var_1, var_2) {
-  var_3 = ref_143ad(var_1, var_2, "death");
+  var_3 = ref_143AD(var_1, var_2, "death");
   var_0 notify("array_wait_proc", var_1);
 }
 
@@ -3876,7 +3876,7 @@ function create_empty_func_ref(var_0) {
   }
 }
 
-function func_ref_exist(var_0) {
+function func_ref_EXIST(var_0) {
   return isDefined(level.func) && isDefined(level.func[var_0]);
 }
 
@@ -4504,7 +4504,7 @@ function flag_wait_either_return(var_0, var_1) {
     return var_1;
   }
 
-  var_2 = ref_143ad(level, var_0, var_1);
+  var_2 = ref_143AD(level, var_0, var_1);
   return var_2;
 }
 
@@ -4597,7 +4597,7 @@ function flag_wait_any_return(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  var_6 = ref_143b0(level, var_1, var_2, var_3, var_4, var_5);
+  var_6 = ref_143B0(level, var_1, var_2, var_3, var_4, var_5);
   return var_6;
 }
 
@@ -5353,7 +5353,7 @@ function nuke_playmushroombnk(var_0, var_1, var_2, var_3) {
       break;
     }
 
-    ref_143a7(var_0, var_1, var_2, var_3);
+    ref_143A7(var_0, var_1, var_2, var_3);
   }
 }
 
@@ -5520,7 +5520,7 @@ function updatescrapassistdata(var_0, var_1, var_2) {
   return false;
 }
 
-function ref_12c44(var_0) {
+function ref_12C44(var_0) {
   level endon("game_ended");
   self endon("disconnect");
   self setpredictedstreamloaddist(var_0);
@@ -5539,9 +5539,9 @@ function update_hint_logic_killstreak() {
   var_1 = 0;
 
   if(is_player_gamepad_enabled()) {
-    var_1 = ref_12c44("mountButtonConfig");
+    var_1 = ref_12C44("mountButtonConfig");
   } else {
-    var_1 = ref_12c44("mountButtonConfigKBM");
+    var_1 = ref_12C44("mountButtonConfigKBM");
   }
 
   return var_1 != var_0;

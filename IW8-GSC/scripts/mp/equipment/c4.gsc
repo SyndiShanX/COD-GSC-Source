@@ -212,7 +212,7 @@ function c4_empapplied(var_0) {
 
 function c4_destroyongameend() {
   self endon("death");
-  level scripts\engine\utility::ref_143a5("game_ended", "bro_shot_start");
+  level scripts\engine\utility::ref_143A5("game_ended", "bro_shot_start");
   thread c4_destroy();
 }
 

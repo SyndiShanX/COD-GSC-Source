@@ -225,7 +225,7 @@ function remove_player_rig(var_0) {
 }
 
 function watch_remove_rig(var_0) {
-  scripts\engine\utility::ref_143a6("remove_rig", "death", "disconnect");
+  scripts\engine\utility::ref_143A6("remove_rig", "death", "disconnect");
 }
 
 function add_destructible(var_0, var_1) {
@@ -638,7 +638,7 @@ function showandhidebreachobjectsbasedonavailability() {
   self endon("one_instance_of_showhidebreachobjfunc");
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143ad("disable_breach_hint", "enable_breach_hint");
+    var_0 = scripts\engine\utility::ref_143AD("disable_breach_hint", "enable_breach_hint");
 
     if(!isDefined(var_0)) {
       continue;

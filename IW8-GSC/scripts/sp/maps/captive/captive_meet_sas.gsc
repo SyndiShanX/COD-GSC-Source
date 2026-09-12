@@ -26,7 +26,7 @@ function meet_sas_main() {
   level.player setsoundsubmix("sp_npc_steps_down", 3, 1);
   scripts\engine\utility::delaythread(0.1, &scripts\engine\sp\utility::transient_load, "captive_gas_tr");
   thread warehouse_enter_teleport();
-  level.meetsasref = scripts\engine\utility::getStruct("ref_meet_sas", "targetname");
+  level.meetsasref = scripts\engine\utility::getStruct("ref_MEET_sas", "targetname");
   level.securedoor = scripts\sp\door::get_interactive_door("secure_door");
   thread check_entered_through_secure_door();
   level.securedoor.animname = "secure_door";

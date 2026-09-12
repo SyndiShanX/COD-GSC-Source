@@ -318,7 +318,7 @@ function system_init() {
   }
 
   scripts\engine\scriptable::scriptable_addpostinitcallback(&scriptable_door_postinit);
-  scripts\engine\scriptable::ref_12f5b("door", &scriptable_door_scriptable_used_callback);
+  scripts\engine\scriptable::ref_12F5B("door", &scriptable_door_scriptable_used_callback);
   scripts\engine\scriptable::scriptable_addtouchedcallback(&scriptable_door_scriptable_touched_callback);
   level.scriptable_door_initialized = 1;
 }

@@ -22,7 +22,7 @@ function grenade_crate_init() {
   var_0.onusecallback = &healthbox_onusedeployable;
   var_0.canusecallback = &healthbox_canusedeployable;
   var_0.deployfunc = &healthbox_onusedeployable;
-  var_0.ref_120aa = "ping_response_thanks";
+  var_0.ref_120AA = "ping_response_thanks";
   var_0.usetime = 1000;
   var_0.maxhealth = 100;
   var_0.maxuses = 4;
@@ -77,7 +77,7 @@ function healthbox_onusedeployable(var_0) {
         }
       }
 
-      if(!ref_11b4a(var_5)) {
+      if(!ref_11B4A(var_5)) {
         var_2 = 0;
         self setweaponammoclip(var_5, weaponclipsize(var_5));
         self givemaxammo(var_5);
@@ -85,7 +85,7 @@ function healthbox_onusedeployable(var_0) {
     }
 
     if(var_5.inventorytype == "altmode" && isDefined(var_5.underbarrel) && var_5.underbarrel == "ubshtgn") {
-      if(!ref_11b4a(var_5)) {
+      if(!ref_11B4A(var_5)) {
         var_2 = 0;
         self setweaponammoclip(var_5, weaponclipsize(var_5));
         self setweaponammostock(var_5, 0);
@@ -108,7 +108,7 @@ function healthbox_onusedeployable(var_0) {
   return true;
 }
 
-function ref_11b4a(var_0) {
+function ref_11B4A(var_0) {
   var_1 = self getweaponammoclip(var_0);
   var_2 = self getweaponammostock(var_0);
   var_3 = weaponclipsize(var_0);
@@ -138,7 +138,7 @@ function supportbox_watchplayerweapon(var_0) {
   self notifyonplayercommand("cancel_deploy", "+actionslot 4");
   self notifyonplayercommand("cancel_deploy", "+actionslot 5");
   self notifyonplayercommand("cancel_deploy", "+actionslot 6");
-  var_1 = scripts\engine\utility::ref_143ae("grenade_fire", "cancel_deploy", "weapon_switch_started");
+  var_1 = scripts\engine\utility::ref_143AE("grenade_fire", "cancel_deploy", "weapon_switch_started");
 
   if(!isDefined(var_1)) {
     return;

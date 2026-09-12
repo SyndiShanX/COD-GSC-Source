@@ -31,7 +31,7 @@ function jugg_makejuggernaut(var_0, var_1) {
   self.maxhealth = var_0.maxhealth;
   self.health = self.maxhealth;
 
-  if(istrue(level.ref_12bac) || istrue(level.ref_12b78)) {
+  if(istrue(level.ref_12BAC) || istrue(level.ref_12B78)) {
     var_4 = self getentitynumber();
     scripts\cp\cp_persistence::setcoopplayerdata_for_everyone("EoGPlayer", var_4, "tickettotal", self.maxhealth);
   }
@@ -185,7 +185,7 @@ function jugg_removejuggernaut() {
     self.maxhealth = var_0.prevmaxhealth;
     self.health = var_0.prevhealth;
 
-    if(istrue(level.ref_12bac) || istrue(level.ref_12b78)) {
+    if(istrue(level.ref_12BAC) || istrue(level.ref_12B78)) {
       var_2 = self getentitynumber();
       scripts\cp\cp_persistence::setcoopplayerdata_for_everyone("EoGPlayer", var_2, "tickettotal", self.maxhealth);
     }
@@ -262,7 +262,7 @@ function infiniteammothread(var_0, var_1) {
   var_0 = level.framedurationseconds;
 
   for(;;) {
-    if(!scripts\cp\cp_weapon::ref_124ad(self)) {
+    if(!scripts\cp\cp_weapon::ref_124AD(self)) {
       wait var_0;
       continue;
     }
@@ -360,7 +360,7 @@ function vehicle_incomingcallback() {
   thread scripts\cp\utility::allowridekillstreakplayerexit();
   self waittill("killstreakExit");
 
-  if(istrue(self.ref_11e8f)) {
+  if(istrue(self.ref_11E8F)) {
     thread vehicle_incomingcallback();
     return;
   }

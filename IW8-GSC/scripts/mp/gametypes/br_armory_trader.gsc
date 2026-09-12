@@ -22,14 +22,14 @@ function init() {
     return;
   }
 
-  scripts\engine\scriptable::ref_12f5b("br_armory_trader", &camera_loadout_showcase_preview_large_sticker_alt1);
-  level.debug_trap_room.ref_11a20 = strtok(getDvar("loot_table_filter", ""), "|");
+  scripts\engine\scriptable::ref_12F5B("br_armory_trader", &camera_loadout_showcase_preview_large_sticker_alt1);
+  level.debug_trap_room.ref_11A20 = strtok(getDvar("loot_table_filter", ""), "|");
   level.debug_trap_room.play_lighting_sequence = strtok(getDvar("scr_br_armory_trader_filter", "brloot_offhand_advancedsupplydrop|brloot_plunder_extract|brloot_perk_point_overkill"), "|");
   logtraderfilter();
   tr_detectwinners();
   level.debug_trap_room.xp = [0, 100, 200, 300, 500];
-  level.debug_trap_room.ref_140a2 = [1, 2.5, 3, 3.5, 5];
-  level.debug_trap_room.ref_1409a = ["WTS_rarity_common", "WTS_rarity_uncommon", "WTS_rarity_rare", "WTS_rarity_epic", "WTS_rarity_legendary"];
+  level.debug_trap_room.ref_140A2 = [1, 2.5, 3, 3.5, 5];
+  level.debug_trap_room.ref_1409A = ["WTS_rarity_common", "WTS_rarity_uncommon", "WTS_rarity_rare", "WTS_rarity_epic", "WTS_rarity_legendary"];
 }
 
 function logtraderfilter() {
@@ -45,8 +45,8 @@ function logtraderfilter() {
 }
 
 function tr_detectwinners() {
-  level.debug_trap_room.ref_13c65 = [];
-  level.debug_trap_room.ref_13c65["default"] = tmtyl_bomber_squadafterspawnfunc(getDvar("scr_br_armory_trader_options", "mp/brTraderOptions.csv"));
+  level.debug_trap_room.ref_13C65 = [];
+  level.debug_trap_room.ref_13C65["default"] = tmtyl_bomber_squadafterspawnfunc(getDvar("scr_br_armory_trader_options", "mp/brTraderOptions.csv"));
 }
 
 function tmtyl_bomber_squadafterspawnfunc(var_0) {
@@ -65,12 +65,12 @@ function tmtyl_bomber_squadafterspawnfunc(var_0) {
     if(var_6 == "1") {
       if(!isDefined(var_3) || var_3 != var_6) {
         var_2 = spawnStruct();
-        var_2.ref_13a31 = [];
+        var_2.ref_13A31 = [];
         var_2.entries = [];
         var_1 = scripts\engine\utility::array_add(var_1, var_2);
       }
 
-      var_2.ref_13a31[var_2.ref_13a31.size] = tablelookupbyrow(var_0, var_5, 1);
+      var_2.ref_13A31[var_2.ref_13A31.size] = tablelookupbyrow(var_0, var_5, 1);
     } else if(var_6 == "2" && isDefined(var_2)) {
       var_7 = spawnStruct();
       var_7.weight = int(tablelookupbyrow(var_0, var_5, 1));
@@ -87,7 +87,7 @@ function tmtyl_bomber_squadafterspawnfunc(var_0) {
         var_8 = tablelookupbyrow(var_0, var_5, var_10);
       }
 
-      var_7.ref_12a7f = var_8;
+      var_7.ref_12A7F = var_8;
       var_2.entries[var_2.entries.size] = var_7;
     } else {
       continue;
@@ -107,9 +107,9 @@ function onprematchdone() {
   foreach(var_1 in level.debug_trap_room.scriptables) {
     var_1 setscriptablepartstate("br_armory_trader", "visible");
     var_1.visible = 1;
-    var_1.ref_13c6b = "default";
+    var_1.ref_13C6B = "default";
     var_1.forceextractscriptable = tr_entergulag();
-    var_1.ref_11b72 = int(pow(2, 4)) - 1;
+    var_1.ref_11B72 = int(pow(2, 4)) - 1;
     toma_strike_trace_offset(var_1);
     initdropgrid(var_1);
     thread x1ops7();
@@ -122,7 +122,7 @@ function toma_strike_trace_offset() {
   thread ref_14500(var_0);
   thread ref_14501(var_0);
   thread ref_14369();
-  self.ref_1292c = var_0;
+  self.ref_1292C = var_0;
 }
 
 function ref_14500(var_0) {
@@ -188,18 +188,18 @@ function ref_12030(var_0, var_1) {
     return;
   }
 
-  var_0 notify("weapon_trader_trigger_exited_" + var_1.ref_1292c getentitynumber());
+  var_0 notify("weapon_trader_trigger_exited_" + var_1.ref_1292C getentitynumber());
 }
 
 function monitorweaponchange(var_0) {
   level endon("game_ended");
   self endon("death_or_disconnect");
-  self endon("weapon_trader_trigger_exited_" + var_0.ref_1292c getentitynumber());
+  self endon("weapon_trader_trigger_exited_" + var_0.ref_1292C getentitynumber());
   var_1 = scripts\mp\gametypes\br_weapons::router_use_obj();
 
   for(;;) {
     if(!isDefined(var_1) || var_1.basename != "ks_use_crate_mp" && var_1.basename != "none") {
-      ref_1400e(var_0, self, var_1);
+      ref_1400E(var_0, self, var_1);
     }
 
     self waittill("weapon_change", var_1);
@@ -213,19 +213,19 @@ function x1ops7() {
   self endon("disabled");
 
   for(;;) {
-    level scripts\engine\utility::ref_143a5("public_event_firesale_start", "public_event_firesale_end");
+    level scripts\engine\utility::ref_143A5("public_event_firesale_start", "public_event_firesale_end");
     self.playcrateimpactfx = [];
-    ref_1400d();
+    ref_1400D();
   }
 }
 
-function ref_1400d() {
-  if(isDefined(self.ref_1292c) && isDefined(self.ref_1292c.playersintrigger)) {
-    foreach(var_1 in self.ref_1292c.playersintrigger) {
+function ref_1400D() {
+  if(isDefined(self.ref_1292C) && isDefined(self.ref_1292C.playersintrigger)) {
+    foreach(var_1 in self.ref_1292C.playersintrigger) {
       var_2 = var_1.lastdroppableweaponobj;
 
       if(!isDefined(var_2) || var_2.basename != "ks_use_crate_mp" && var_2.basename != "none") {
-        ref_1400e(var_1, var_2);
+        ref_1400E(var_1, var_2);
       }
     }
 
@@ -268,8 +268,8 @@ function little_bird_mg_mp_ondeathrespawncallback(var_0) {
     var_0 scripts\mp\gametypes\br_quest_util::lastdropedtime();
   }
 
-  if(isDefined(var_0.ref_1292c)) {
-    lb_mg_impulse_dmg_threshold_top(var_0.ref_1292c);
+  if(isDefined(var_0.ref_1292C)) {
+    lb_mg_impulse_dmg_threshold_top(var_0.ref_1292C);
   }
 
   var_0 notify("disabled");
@@ -288,7 +288,7 @@ function registeraccesscardlocs() {
   return var_0;
 }
 
-function ref_131c0(var_0) {
+function ref_131C0(var_0) {
   level.debug_trap_room.scriptables = var_0;
 }
 
@@ -304,7 +304,7 @@ function run_module_pause_funcs(var_0, var_1) {
   return var_2;
 }
 
-function ref_1400e(var_0, var_1) {
+function ref_1400E(var_0, var_1) {
   var_2 = undefined;
   var_3 = 0;
   var_4 = 0;
@@ -318,7 +318,7 @@ function ref_1400e(var_0, var_1) {
   }
 
   if(!isDefined(var_2)) {
-    var_6 = ref_13ffe(0, undefined, 0, 4);
+    var_6 = ref_13FFE(0, undefined, 0, 4);
     var_0 setclientomnvar("ui_br_weapon_trader_trade_data0", var_6);
     return;
   }
@@ -337,19 +337,19 @@ function ref_1400e(var_0, var_1) {
   }
 
   var_11 = 0;
-  var_8 = ref_13ffe(var_8[var_11], var_7, 0, 4);
-  var_12 = run_maze_ai_common_function_stealth(var_1, level.debug_trap_room.ref_13c65[self.ref_13c6b], var_7);
+  var_8 = ref_13FFE(var_8[var_11], var_7, 0, 4);
+  var_12 = run_maze_ai_common_function_stealth(var_1, level.debug_trap_room.ref_13C65[self.ref_13C6B], var_7);
 
   if(isDefined(var_12)) {
     var_13 = 4;
-    var_8 = ref_13ffe(var_8[var_11], var_4, var_13, 4);
+    var_8 = ref_13FFE(var_8[var_11], var_4, var_13, 4);
     var_13 += 4;
-    var_8 = ref_13ffe(var_8[var_11], var_6, var_13, 4);
+    var_8 = ref_13FFE(var_8[var_11], var_6, var_13, 4);
     var_13 += 4;
 
     foreach(var_15 in var_12) {
       var_16 = removenonvipteamlocations(var_15);
-      var_8 = ref_13ffe(var_8[var_11], var_16, var_13, 9);
+      var_8 = ref_13FFE(var_8[var_11], var_16, var_13, 9);
       var_13 += 9;
 
       if(var_13 + 9 >= 32) {
@@ -384,7 +384,7 @@ function relic_vampire_feedback(var_0) {
   return undefined;
 }
 
-function ref_13ffe(var_0, var_1, var_2, var_3) {
+function ref_13FFE(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_1)) {
     var_1 = int(pow(2, var_3 + 1) - 1);
   }
@@ -419,7 +419,7 @@ function get_car_stop_struct(var_0, var_1, var_2) {
     return false;
   }
 
-  if(istrue(var_1 scripts\mp\gametypes\br_gametypes::ref_12e05("playerSkipKioskUse", var_0))) {
+  if(istrue(var_1 scripts\mp\gametypes\br_gametypes::ref_12E05("playerSkipKioskUse", var_0))) {
     return false;
   }
 
@@ -465,11 +465,11 @@ function camera_loadout_showcase_preview_large_sticker_alt1(var_0, var_1, var_2,
   }
 
   var_0 notify("trader_use_start");
-  thread ref_13c6c();
+  thread ref_13C6C();
 
   if(var_2 == "visible") {
     var_0 setscriptablepartstate("br_armory_trader", "opening");
-    thread ref_13c66();
+    thread ref_13C66();
   }
 
   if(istrue(var_3.tracking_max_health)) {
@@ -481,23 +481,23 @@ function camera_loadout_showcase_preview_large_sticker_alt1(var_0, var_1, var_2,
   var_3.camera_character_preview_select_detail.curprogress = 0;
   var_3.camera_character_preview_select_detail.usetime = run_to_retreat_spot(var_0, var_3, var_10);
   var_3.camera_character_preview_select_detail.ref_14099 = rooftop_crate_usefunc(var_0, var_3, var_10);
-  var_3.camera_character_preview_select_detail.ref_145a2 = var_5;
-  ref_1387e(var_3, var_0, var_5);
-  var_11 = ref_1448c(var_3, var_0);
+  var_3.camera_character_preview_select_detail.ref_145A2 = var_5;
+  ref_1387E(var_3, var_0, var_5);
+  var_11 = ref_1448C(var_3, var_0);
 
   if(isDefined(var_3)) {
-    ref_138f4(var_3, var_0, var_11);
+    ref_138F4(var_3, var_0, var_11);
   }
 
   if(istrue(var_11)) {
-    var_3 scripts\cp\vehicles\vehicle_compass_cp::ref_120a8("trader");
+    var_3 scripts\cp\vehicles\vehicle_compass_cp::ref_120A8("trader");
     thread advance_bomb_wire_list(var_3, var_0, var_5, var_7);
   }
 
   var_3.camera_character_preview_select_detail = undefined;
 }
 
-function ref_13c6c() {
+function ref_13C6C() {
   self endon("trader_use_start");
   level endon("game_ended");
 
@@ -511,11 +511,11 @@ function ref_13c6c() {
 
   self setscriptablepartstate("br_armory_trader", "closing");
   self.forceextractscriptable = tr_entergulag();
-  ref_1400d();
-  thread ref_13c67();
+  ref_1400D();
+  thread ref_13C67();
 }
 
-function ref_13c67() {
+function ref_13C67() {
   self endon("trader_use_start");
   level endon("game_ended");
 
@@ -546,14 +546,14 @@ function heatcounter() {
         continue;
       }
 
-      scripts\mp\gametypes\br_pickups::ref_11a21(var_3);
+      scripts\mp\gametypes\br_pickups::ref_11A21(var_3);
     }
 
     return;
   }
 }
 
-function ref_1448c(var_0, var_1) {
+function ref_1448C(var_0, var_1) {
   var_0 endon("disconnect");
   level endon("game_ended");
   var_1.id = "weapon_trade";
@@ -600,7 +600,7 @@ function get_aitypes_and_weights_from_call_counter(var_0, var_1) {
     return false;
   }
 
-  if(!isDefined(var_0.camera_character_preview_select_detail) || !var_0 hasweapon(var_0.camera_character_preview_select_detail.ref_145a2)) {
+  if(!isDefined(var_0.camera_character_preview_select_detail) || !var_0 hasweapon(var_0.camera_character_preview_select_detail.ref_145A2)) {
     return false;
   }
 
@@ -614,7 +614,7 @@ function get_aitypes_and_weights_from_call_counter(var_0, var_1) {
   return true;
 }
 
-function ref_1387e(var_0, var_1, var_2) {
+function ref_1387E(var_0, var_1, var_2) {
   thread camera_loadout_showcase_preview_charm_alt4(var_0);
   var_0 scripts\mp\playeractions::allowactionset("crateUse", 0);
   var_0 scripts\mp\gameobjects::updateuiprogress(var_1, 0, var_0.camera_character_preview_select_detail);
@@ -622,7 +622,7 @@ function ref_1387e(var_0, var_1, var_2) {
   var_0.van_blocker_moves = 1;
 }
 
-function ref_138f4(var_0, var_1, var_2) {
+function ref_138F4(var_0, var_1, var_2) {
   var_0 scripts\mp\playeractions::allowactionset("crateUse", 1);
 
   if(isDefined(var_0.camera_character_preview_select_detail)) {
@@ -651,7 +651,7 @@ function stopusesound(var_0, var_1) {
 function camera_loadout_showcase_preview_charm_alt4(var_0) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\cp_mp\utility\weapon_utility::ref_12eb2();
+  scripts\cp_mp\utility\weapon_utility::ref_12EB2();
   var_1 = getcompleteweaponname("ks_use_crate_mp");
   scripts\cp_mp\utility\inventory_utility::_giveweapon(var_1);
   thread camera_loadout_showcase_preview_large_sticker(var_1, var_0);
@@ -671,14 +671,14 @@ function camera_loadout_showcase_preview_large_sticker(var_0, var_1) {
   scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
 
   if(!istrue(var_2) && isDefined(var_1)) {
-    var_3 = scripts\cp_mp\utility\weapon_utility::ref_12cc7(var_1);
+    var_3 = scripts\cp_mp\utility\weapon_utility::ref_12CC7(var_1);
     self switchtoweapon(var_3);
     thread scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var_3);
     return;
   }
 }
 
-function ref_13c66() {
+function ref_13C66() {
   if(!getdvarint("scr_br_trader_fix_prone_players", 1)) {
     return;
   }
@@ -692,7 +692,7 @@ function advance_bomb_wire_list(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  ref_121e6(var_2);
+  ref_121E6(var_2);
 
   if(var_3 == 11) {
     var_0.playcrateimpactfx = scripts\engine\utility::array_add(var_0.playcrateimpactfx, self);
@@ -705,7 +705,7 @@ function advance_bomb_wire_list(var_0, var_1, var_2, var_3) {
   }
 
   self switchtoweapon("iw8_fists_mp");
-  var_4 = ref_13657(var_0, self, level.debug_trap_room.ref_13c65[var_0.ref_13c6b], var_3);
+  var_4 = ref_13657(var_0, self, level.debug_trap_room.ref_13C65[var_0.ref_13C6B], var_3);
 
   if(level.debug_trap_toggle && !scripts\mp\gametypes\br_public::turret_headicon()) {
     thread scripts\mp\utility\points::giveunifiedpoints("br_armory_trader_use", undefined, safehouse_spawn(var_2));
@@ -726,13 +726,13 @@ function advance_bomb_wire_list(var_0, var_1, var_2, var_3) {
 
 function run_to_retreat_spot(var_0, var_1) {
   if(!isDefined(var_1)) {
-    return getdvarfloat("scr_br_trader_use_time_0", level.debug_trap_room.ref_140a2[0]);
+    return getdvarfloat("scr_br_trader_use_time_0", level.debug_trap_room.ref_140A2[0]);
   } else if(var_1 == 11) {
     return getdvarfloat("scr_br_trader_firesale_use_time", 3);
   }
 
   var_1 = int(clamp(var_1, 0, 4));
-  return getdvarfloat("scr_br_trader_use_time_" + var_1, level.debug_trap_room.ref_140a2[var_1]);
+  return getdvarfloat("scr_br_trader_use_time_" + var_1, level.debug_trap_room.ref_140A2[var_1]);
 }
 
 function rooftop_crate_usefunc(var_0, var_1) {
@@ -743,7 +743,7 @@ function rooftop_crate_usefunc(var_0, var_1) {
   }
 
   var_1 = int(clamp(var_1, 0, 4));
-  return level.debug_trap_room.ref_1409a[var_1];
+  return level.debug_trap_room.ref_1409A[var_1];
 }
 
 function safehouse_spawn(var_0) {
@@ -852,17 +852,17 @@ function removespecialistbonuspickup(var_0) {
   return var_1;
 }
 
-function ref_13c68(var_0, var_1) {
+function ref_13C68(var_0, var_1) {
   var_2 = self.forceextractscriptable;
 
   if(var_1 != 0) {
-    var_2 = scripts\engine\utility::ter_op(var_2 > self.ref_11b72, var_2 >> var_1, var_2 << var_1);
+    var_2 = scripts\engine\utility::ter_op(var_2 > self.ref_11B72, var_2 >> var_1, var_2 << var_1);
   }
 
   return var_2 % var_0;
 }
 
-function ref_13c69(var_0, var_1) {
+function ref_13C69(var_0, var_1) {
   var_2 = 0;
 
   foreach(var_4 in var_0) {
@@ -873,14 +873,14 @@ function ref_13c69(var_0, var_1) {
     return undefined;
   }
 
-  var_6 = ref_13c68(var_2, var_1);
+  var_6 = ref_13C68(var_2, var_1);
   var_7 = 0;
 
   foreach(var_4 in var_0) {
     var_7 += var_4.weight;
 
     if(var_7 >= var_6) {
-      return var_4.ref_12a7f;
+      return var_4.ref_12A7F;
     }
   }
 
@@ -894,7 +894,7 @@ function run_maze_ai_common_function_stealth(var_0, var_1, var_2) {
 
   var_3 = run_lbravos_safehouse(var_2, var_1);
   var_4 = var_1[var_3];
-  var_5 = ref_13c69(var_4.entries, 0);
+  var_5 = ref_13C69(var_4.entries, 0);
   var_5 = vehicle_collision_update(var_5, var_2);
   return scripts\engine\utility::array_removeundefined(var_5);
 }
@@ -940,16 +940,16 @@ function ref_13657(var_0, var_1, var_2) {
   var_4.itemsdropped = 0;
   var_4.intro_ride = &dialog_reachnextcheckpoint;
   var_4.intro_moveplayercliphack = &dialog_play_shieldstow;
-  var_4.ref_13a77 = var_0;
+  var_4.ref_13A77 = var_0;
   var_4.intro_heli_add_player = 60;
   var_4.trader = self;
-  var_6 = var_4 scripts\mp\gametypes\br_lootcache::ref_11a42(var_3, 0, undefined);
+  var_6 = var_4 scripts\mp\gametypes\br_lootcache::ref_11A42(var_3, 0, undefined);
   return var_3;
 }
 
 function lootspawndefault(var_0, var_1) {
   var_2 = [0, 50, -50, 25, -25, 80, -80];
-  var_3 = self.ref_13a77.origin - var_0;
+  var_3 = self.ref_13A77.origin - var_0;
   var_4 = max(length2d(var_3) - 15, 30);
   var_5 = vectorcross(var_3, (0, 0, 1));
   var_5 = vectorNormalize(var_5);
@@ -963,7 +963,7 @@ function lootspawndefault(var_0, var_1) {
 function lootspawndropgrid(var_0, var_1) {
   var_2 = 32.5;
   var_3 = 360 / var_1.totaldropcount * var_1.ml_p3_to_safehouse_transition;
-  var_4 = vectorNormalize(self.ref_13a77.origin - var_0);
+  var_4 = vectorNormalize(self.ref_13A77.origin - var_0);
   var_4 *= var_2;
   var_4 += var_0;
   self.dropgrid = sortpointsbydistance(self.trader.dropgrid, var_4);
@@ -975,7 +975,7 @@ function lootspawndropgrid(var_0, var_1) {
     if(isDefined(var_8) && var_8.size == 0) {
       var_9 = scripts\mp\utility\player::getplayersinradius(var_7, var_2);
 
-      if(var_9.size == 0 || var_9.size == 1 && var_9[0] == self.ref_13a77) {
+      if(var_9.size == 0 || var_9.size == 1 && var_9[0] == self.ref_13A77) {
         var_5 = var_7;
         break;
       }
@@ -1102,7 +1102,7 @@ function run_lbravos_safehouse(var_0, var_1) {
   var_2 = undefined;
 
   foreach(var_4 in var_1) {
-    foreach(var_6 in var_4.ref_13a31) {
+    foreach(var_6 in var_4.ref_13A31) {
       var_7 = risktokenstokeep(var_6);
       var_8 = isint(var_7) && isint(var_0);
       var_8 |= isstring(var_7) && isstring(var_0);
@@ -1130,10 +1130,10 @@ function risktokenstokeep(var_0) {
 }
 
 function get_bombzone_node_to_plant_on(var_0) {
-  return !level.br_pickups.delay_give_lethal_grenade[var_0] && !scripts\engine\utility::array_contains(level.debug_trap_room.ref_11a20, var_0) && !scripts\engine\utility::array_contains(level.debug_trap_room.play_lighting_sequence, var_0);
+  return !level.br_pickups.delay_give_lethal_grenade[var_0] && !scripts\engine\utility::array_contains(level.debug_trap_room.ref_11A20, var_0) && !scripts\engine\utility::array_contains(level.debug_trap_room.play_lighting_sequence, var_0);
 }
 
-function ref_12e83(var_0) {
+function ref_12E83(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -1152,7 +1152,7 @@ function ref_12e83(var_0) {
   return var_1;
 }
 
-function ref_12e84(var_0) {
+function ref_12E84(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -1209,10 +1209,10 @@ function vehicle_collision_update(var_0, var_1) {
 
     if(var_5.size > 1 && isnumber(var_6)) {
       if(var_5[1] == "weapon") {
-        var_7 = ref_12e83(level.br_pickups.delay_safe_spawn_chopper_boss[var_6]);
+        var_7 = ref_12E83(level.br_pickups.delay_safe_spawn_chopper_boss[var_6]);
         var_2 = risk_flagspawnminactivetospawn(var_7, var_1);
       } else if(var_5[1] == "super") {
-        var_7 = ref_12e84(level.br_pickups.br_superreference);
+        var_7 = ref_12E84(level.br_pickups.br_superreference);
         var_7 = play_music_on_wave_reinforce(var_7, var_6);
         var_2 = risk_flagspawnmincount(var_7, var_1);
 
@@ -1220,20 +1220,20 @@ function vehicle_collision_update(var_0, var_1) {
           doadvancedsupplydroperrorcheck(var_7, var_2);
         }
       } else if(var_5[1] == "killstreak") {
-        var_7 = ref_12e84(level.br_pickups.br_killstreakreference);
-        var_7 = ref_12c29(var_7);
+        var_7 = ref_12E84(level.br_pickups.br_killstreakreference);
+        var_7 = ref_12C29(var_7);
         var_7 = play_music_on_wave_reinforce(var_7, var_6);
         var_2 = risk_flagspawnmincount(var_7, var_1);
       } else if(var_5[1] == "perkpoint") {
-        var_7 = ref_12e83(level.br_pickups.br_perkpoints);
+        var_7 = ref_12E83(level.br_pickups.br_perkpoints);
         var_7 = filterpickupitembyrarity_intindexed(var_7, var_6);
         var_2 = risk_flagspawnminactivetospawn(var_7, var_1);
       }
     } else if(var_5[0] == "lethal") {
-      var_7 = ref_12e83(level.br_pickups.delay_push_player_clear_door_way);
+      var_7 = ref_12E83(level.br_pickups.delay_push_player_clear_door_way);
       var_2 = risk_flagspawnminactivetospawn(var_7, var_1);
     } else if(var_5[0] == "tactical") {
-      var_7 = ref_12e83(level.br_pickups.deletesoundents);
+      var_7 = ref_12E83(level.br_pickups.deletesoundents);
       var_2 = risk_flagspawnminactivetospawn(var_7, var_1);
     }
   }
@@ -1269,7 +1269,7 @@ function doadvancedsupplydroperrorcheck(var_0, var_1) {
   }
 }
 
-function ref_12c29(var_0) {
+function ref_12C29(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -1285,7 +1285,7 @@ function risk_flagspawnminactivetospawn(var_0, var_1) {
   var_2 = undefined;
 
   if(isDefined(var_0) && var_0.size > 0) {
-    var_3 = ref_13c68(var_0.size, var_1);
+    var_3 = ref_13C68(var_0.size, var_1);
     var_2 = var_0[var_3];
   }
 
@@ -1296,7 +1296,7 @@ function risk_flagspawnmincount(var_0, var_1) {
   var_2 = undefined;
 
   if(isDefined(var_0) && var_0.size > 0) {
-    var_3 = ref_13c68(var_0.size, var_1);
+    var_3 = ref_13C68(var_0.size, var_1);
     var_4 = 0;
 
     foreach(var_6 in var_0) {
@@ -1312,7 +1312,7 @@ function risk_flagspawnmincount(var_0, var_1) {
   return var_2;
 }
 
-function ref_121e6(var_0) {
+function ref_121E6(var_0) {
   if(var_0 == 4) {
     scripts\cp\vehicles\vehicle_compass_cp::ref_12004("tw_leg");
     return;

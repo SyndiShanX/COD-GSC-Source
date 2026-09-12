@@ -6,26 +6,26 @@
 function init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("sentry_gun", &scripts\cp_mp\killstreaks\sentry_gun::tryusesentryturretfromstruct);
   scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "monitorDamage", &ref_13030);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "createHintObject", &ref_1302b);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "getTargetMarker", &ref_1302c);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "initSentrySettings", &ref_1302e);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "allowPickupOfTurret", &ref_1302a);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "handleMovingPlatform", &scripts\mp\killstreaks\manual_turret_mp::ref_11ac1);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "createHintObject", &ref_1302B);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "getTargetMarker", &ref_1302C);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "initSentrySettings", &ref_1302E);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "allowPickupOfTurret", &ref_1302A);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "handleMovingPlatform", &scripts\mp\killstreaks\manual_turret_mp::ref_11AC1);
 }
 
-function ref_1302c(var_0, var_1) {
+function ref_1302C(var_0, var_1) {
   return scripts\mp\killstreaks\target_marker::gettargetmarker(var_0, var_1);
 }
 
-function ref_1302b(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+function ref_1302B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   return scripts\mp\gameobjects::createhintobject(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
 
 function ref_13030(var_0) {
-  var_0 thread scripts\mp\damage::monitordamage(var_0.maxhealth, "hitequip", &ref_1302d, &ref_1302f, 1);
+  var_0 thread scripts\mp\damage::monitordamage(var_0.maxhealth, "hitequip", &ref_1302D, &ref_1302F, 1);
 }
 
-function ref_1302d(var_0) {
+function ref_1302D(var_0) {
   var_1 = var_0.attacker;
   var_2 = var_0.objweapon;
   var_3 = var_0.meansofdeath;
@@ -47,7 +47,7 @@ function ref_1302d(var_0) {
   self notify("kill_turret", var_8, 1);
 }
 
-function ref_1302f(var_0) {
+function ref_1302F(var_0) {
   var_1 = var_0.attacker;
   var_2 = var_0.objweapon;
   var_3 = var_0.meansofdeath;
@@ -63,7 +63,7 @@ function ref_1302f(var_0) {
   return var_6;
 }
 
-function ref_1302e() {
+function ref_1302E() {
   scripts\mp\killstreaks\sentry_gun_mp::sentryturret_initsentrysettings();
 
   if(isDefined(level.sentrysettings["sentry_turret"])) {
@@ -75,7 +75,7 @@ function ref_1302e() {
   }
 }
 
-function ref_1302a() {
+function ref_1302A() {
   if(scripts\cp_mp\utility\inventory_utility::isanymonitoredweaponswitchinprogress()) {
     return false;
   }

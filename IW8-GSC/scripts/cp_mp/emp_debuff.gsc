@@ -250,9 +250,9 @@ function _update_emp_scramble() {
   self setclientomnvar("ui_scrambler_strength", var_0);
 }
 
-function ref_1241a(var_0, var_1) {
+function ref_1241A(var_0, var_1) {
   play_emp_scramble(var_0, var_1);
-  scripts\engine\utility::ref_143a5("emp_cleared", "death");
+  scripts\engine\utility::ref_143A5("emp_cleared", "death");
 
   if(isDefined(var_0)) {
     stop_emp_scramble(var_0, var_1);

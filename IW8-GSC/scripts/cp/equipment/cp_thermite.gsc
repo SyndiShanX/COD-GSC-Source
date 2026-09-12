@@ -23,7 +23,7 @@ function thermite_watchstuck(var_0, var_1) {
   self endon("death");
   var_2 = undefined;
   jumpiffalse(istrue(var_0)) LOC_0000003e;
-  var_3 = ref_13b20();
+  var_3 = ref_13B20();
 
   if(!istrue(var_3)) {
     thread thermite_delete();
@@ -37,17 +37,17 @@ function thermite_watchstuck(var_0, var_1) {
   goto LOC_0000005b;
 }
 
-function ref_13b20() {
+function ref_13B20() {
   self.see_equipment_dist endon("death");
   self.owner endon("disconnect");
   self.owner endon("joined_team");
   self.owner endon("joined_spectators");
   self.see_equipment_dist waittill("missile_stuck", var_0, var_1, var_2, var_3, var_4, var_5);
-  ref_13b1f(var_0, var_1);
+  ref_13B1F(var_0, var_1);
   return true;
 }
 
-function ref_13b1f(var_0, var_1) {
+function ref_13B1F(var_0, var_1) {
   if(isDefined(var_0)) {
     if(isPlayer(var_0) || isagent(var_0)) {
       if(var_0 scripts\cp_mp\utility\player_utility::_isalive()) {
@@ -80,7 +80,7 @@ function ref_13b1f(var_0, var_1) {
 
 function thermite_watchdisowned() {
   self endon("death");
-  self.owner scripts\engine\utility::ref_143a6("joined_team", "joined_spectators", "disconnect");
+  self.owner scripts\engine\utility::ref_143A6("joined_team", "joined_spectators", "disconnect");
   thread thermite_destroy();
 }
 
@@ -89,7 +89,7 @@ function thermite_destroy() {
 
   if(isDefined(var_0) && isPlayer(var_0)) {
     if(istrue(var_0.inlaststand)) {
-      thread ref_13b1e();
+      thread ref_13B1E();
     }
   }
 
@@ -114,7 +114,7 @@ function thermite_onplayerdamaged(var_0) {
   return true;
 }
 
-function ref_13b1e() {
+function ref_13B1E() {
   self endon("disconnect");
   self notify("newBurnFXLaststand");
   self endon("newBurnFXLaststand");

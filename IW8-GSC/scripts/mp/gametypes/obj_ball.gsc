@@ -483,7 +483,7 @@ function ball_on_pickup(var_0, var_1) {
       var_0 thread scripts\mp\awards::givemidmatchaward("mode_uplink_intercept");
 
       if(isPlayer(var_0)) {
-        var_0 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "pickup_interception", var_0.origin);
+        var_0 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "pickup_interception", var_0.origin);
       }
     }
   } else {
@@ -493,7 +493,7 @@ function ball_on_pickup(var_0, var_1) {
     }
 
     if(isPlayer(var_0)) {
-      var_0 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "pickup", var_0.origin);
+      var_0 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "pickup", var_0.origin);
     }
   }
 
@@ -803,7 +803,7 @@ function ball_on_reset() {
     thread ball_download_fx(var_0, 3);
   }
 
-  thread scripts\common\utility::ref_13e0a(level.ref_11b29, "obj_return", var_0.baseorigin);
+  thread scripts\common\utility::ref_13E0A(level.ref_11B29, "obj_return", var_0.baseorigin);
 }
 
 function ball_clear_contents() {
@@ -950,7 +950,7 @@ function superabilitywatcher() {
       ball_drop_on_ability();
       break;
     case "super_rewind":
-      scripts\engine\utility::ref_143a5("teleport_success", "rewind_success");
+      scripts\engine\utility::ref_143A5("teleport_success", "rewind_success");
       ball_drop_on_ability();
       break;
   }
@@ -1735,7 +1735,7 @@ function ball_physics_bad_trigger_at_rest() {
 
 function ball_location_hud() {
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143af("pickup_object", "dropped", "reset", "ball_ready");
+    var_0 = scripts\engine\utility::ref_143AF("pickup_object", "dropped", "reset", "ball_ready");
 
     switch (var_0) {
       case "pickup_object":

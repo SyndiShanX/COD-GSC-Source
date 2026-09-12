@@ -9,15 +9,15 @@ function main() {
 }
 
 function deactivate_front_trigger_hurt() {
-  ref_131df();
+  ref_131DF();
 }
 
 function setup_callbacks() {
   level.bot_funcs["gametype_think"] = &deactivate_gas_trap;
-  level.bot_funcs["should_start_cautious_approach"] = &ref_132df;
+  level.bot_funcs["should_start_cautious_approach"] = &ref_132DF;
 }
 
-function ref_131df() {
+function ref_131DF() {
   scripts\mp\bots\bots_util::bot_waittill_bots_enabled();
   var_0 = 0;
 
@@ -174,7 +174,7 @@ function custompassengerwaitfunc() {
   self.initpayloadpunish = undefined;
 }
 
-function ref_132df(var_0) {
+function ref_132DF(var_0) {
   if(var_0) {
     var_1 = level.zone scripts\mp\gameobjects::getownerteam();
 

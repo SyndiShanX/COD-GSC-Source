@@ -289,10 +289,10 @@ function processassist(var_0, var_1, var_2) {
     return;
   }
 
-  ref_128a5(var_0, var_1, var_2);
+  ref_128A5(var_0, var_1, var_2);
 }
 
-function ref_128a5(var_0, var_1, var_2) {
+function ref_128A5(var_0, var_1, var_2) {
   self endon("disconnect");
   var_0 endon("disconnect");
 

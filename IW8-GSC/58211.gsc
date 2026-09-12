@@ -6,7 +6,7 @@
 function get_most_recent_ping() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_susp_aa", "initLate", &get_moves_till_stop);
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_susp_aa", "create", &get_most_recent_danger_ping);
-  scripts\engine\utility::create_func_ref("cargo_truck_susp_aa", &ref_134f8);
+  scripts\engine\utility::create_func_ref("cargo_truck_susp_aa", &ref_134F8);
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_susp_aa", "spawnCallback", &get_nearest_point_near_objective);
   scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_registeroutoftimecallback("cargo_truck_susp_aa", &_calloutmarkerping_iskiosk::get_num_dogtag_in_kill_zone_or_under_bridge_zone);
 }
@@ -46,7 +46,7 @@ function get_most_recent_danger_ping(var_0) {
   var_0.health = var_0.maxhealth;
 }
 
-function ref_134f8(var_0) {
+function ref_134F8(var_0) {
   var_1 = spawnStruct();
   var_1.origin = var_0.origin + (0, 0, 100);
   var_1.angles = var_0.angles * (0, 1, 0);

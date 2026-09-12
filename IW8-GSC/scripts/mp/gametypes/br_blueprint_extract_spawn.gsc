@@ -21,8 +21,8 @@ function init() {
   level.convoy4_module_snipers = 0;
   level.convoy4_failed_extract = level.contract_death_cash_flag;
   level.control_station = undefined;
-  scripts\mp\gametypes\br_pickups::ref_12b33("brloot_blueprintextract_tablet", &controls_unlink_safe);
-  scripts\mp\gametypes\br_pickups::ref_12b33("brloot_blueprintextract_tablet_easterevent", &controls_linkto_safe);
+  scripts\mp\gametypes\br_pickups::ref_12B33("brloot_blueprintextract_tablet", &controls_unlink_safe);
+  scripts\mp\gametypes\br_pickups::ref_12B33("brloot_blueprintextract_tablet_easterevent", &controls_linkto_safe);
 }
 
 function convoy4_actively_hacking(var_0, var_1) {
@@ -101,7 +101,7 @@ function controls_linkto_safe() {
 
 function controlslinked(var_0) {
   var_1 = scripts\mp\gametypes\br_quest_util::riotshield_init_cp(var_0);
-  scripts\mp\gametypes\br_pickups::ref_119f5(self, var_1);
+  scripts\mp\gametypes\br_pickups::ref_119F5(self, var_1);
   self.overwatch_soldiers_05_bombers = var_0;
 }
 
@@ -115,7 +115,7 @@ function controlledcallbacksqueue() {
     return;
   }
 
-  if(isDefined(var_1) && istrue(var_1.ref_11ff8)) {
+  if(isDefined(var_1) && istrue(var_1.ref_11FF8)) {
     return;
   }
 

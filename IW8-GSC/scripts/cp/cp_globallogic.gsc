@@ -5,7 +5,7 @@
 
 function init() {
   level.struct_filter = &cp_struct_filter;
-  level.ref_12d73 = "vfx/iw8/core/blima/vfx_blima_explosion.vfx";
+  level.ref_12D73 = "vfx/iw8/core/blima/vfx_blima_explosion.vfx";
   scripts\engine\utility::init_struct_class();
   clean_up_structs();
   delete_on_load();
@@ -116,7 +116,7 @@ function init() {
   level thread scripts\mp\sentientpoolmanager::init();
   level thread scripts\cp\cp_relics::init();
   level thread scripts\cp\cp_player_battlechatter::init();
-  _calloutmarkerping_handleluinotify_cleared::ref_13a9e();
+  _calloutmarkerping_handleluinotify_cleared::ref_13A9E();
   level thread scripts\cp_mp\vehicles\vehicle::vehicle_init();
   scripts\cp_mp\utility\player_utility::temp_debug_wait_and_stop_music_loop();
   scripts\cp_mp\entityheadicons::init();
@@ -230,7 +230,7 @@ function clean_up_structs() {
   }
 }
 
-function ref_145ed(var_0, var_1, var_2) {
+function ref_145ED(var_0, var_1, var_2) {
   getentitylessscriptablearray("dlog_event_cp_runtime_struct_data", ["key", var_0, "pair", var_1, "count", var_2]);
 }
 
@@ -261,14 +261,14 @@ function init_global_cp_flags() {
   scripts\engine\utility::flag_init("level_ready_for_script");
   scripts\engine\utility::flag_init("player_spawned_with_loadout");
   scripts\engine\utility::flag_init("ready_for_devgui");
-  thread ref_130f0();
+  thread ref_130F0();
 }
 
 function super_displayed() {
   scripts\engine\utility::create_func_ref("create_script_init", &init_laser);
 }
 
-function ref_130f0() {
+function ref_130F0() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait_all("strike_init_done", "infil_complete", "introscreen_over", "interactions_initialized");
   scripts\engine\utility::flag_set("level_ready_for_script");
@@ -411,7 +411,7 @@ function impale(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 function impale_cleanup(var_0, var_1, var_2, var_3) {
-  var_0 scripts\engine\utility::ref_143ba(var_2, "death", "disconnect");
+  var_0 scripts\engine\utility::ref_143BA(var_2, "death", "disconnect");
   var_3 delete();
   var_1 delete();
 }
@@ -524,7 +524,7 @@ function coopstartgametype() {
   resetlevelflags();
   resetlevelarrays();
   scripts\cp\cp_create_script_utility::thirtypercent_music();
-  scripts\cp\cp_analytics::ref_119b9();
+  scripts\cp\cp_analytics::ref_119B9();
   scripts\cp\perks\cp_perks::initperks();
   scripts\cp\cp_weaponrank::init();
   thread scripts\cp\cp_powers::init();
@@ -716,7 +716,7 @@ function defaultplayerconnect() {
   thread demo_allowed_debug_outline();
   thread scripts\cp\cp_vo::initandstartvosystem();
   thread scripts\cp\cp_merits::updatemerits();
-  thread scripts\cp\utility\auto_ascender_ai::ref_145bd();
+  thread scripts\cp\utility\auto_ascender_ai::ref_145BD();
   thread track_forward_velocity();
   self.pers["matchdataWeaponStats"] = [];
   self setclientomnvar("ui_scoreboard_freeze", 0);
@@ -921,31 +921,31 @@ function demo_debug_outline_button_watcher() {
   self notifyonplayercommand("third", "+usereload");
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143bf(2, "first");
+    var_0 = scripts\engine\utility::ref_143BF(2, "first");
 
     if(var_0 == "timeout") {
       continue;
     }
 
-    var_0 = scripts\engine\utility::ref_143bf(2, "second");
+    var_0 = scripts\engine\utility::ref_143BF(2, "second");
 
     if(var_0 == "timeout") {
       continue;
     }
 
-    var_0 = scripts\engine\utility::ref_143bf(2, "first");
+    var_0 = scripts\engine\utility::ref_143BF(2, "first");
 
     if(var_0 == "timeout") {
       continue;
     }
 
-    var_0 = scripts\engine\utility::ref_143bf(2, "second");
+    var_0 = scripts\engine\utility::ref_143BF(2, "second");
 
     if(var_0 == "timeout") {
       continue;
     }
 
-    var_0 = scripts\engine\utility::ref_143bf(2, "third");
+    var_0 = scripts\engine\utility::ref_143BF(2, "third");
 
     if(var_0 == "timeout") {
       continue;
@@ -975,8 +975,8 @@ function ref_13203() {
     scripts\engine\utility::flag_wait("level_stealth_initialized");
     scripts\stealth\player::main();
     scripts\engine\utility::ent_flag_clear("stealth_use_real_lighting");
-    thread scripts\cp\coop_stealth::ref_139bf();
-    thread scripts\cp\coop_stealth::ref_13b3a();
+    thread scripts\cp\coop_stealth::ref_139BF();
+    thread scripts\cp\coop_stealth::ref_13B3A();
     return;
   }
 }
@@ -1334,11 +1334,11 @@ function updatematchhasmorethan1playeromnvaronplayersfirstspawn() {
     }
   }
 
-  self.ref_11b20 = 1;
+  self.ref_11B20 = 1;
 }
 
 function updatematchhasmorethan1playeromnvaronplayerdisconnect() {
-  if(istrue(self.ref_11b20)) {
+  if(istrue(self.ref_11B20)) {
     var_0 = game["matchHasMoreThan1Player"];
     game["numPlayersConsideredPlaying"]--;
 
@@ -1356,7 +1356,7 @@ function updatematchhasmorethan1playeromnvaronplayerdisconnect() {
       }
     }
 
-    self.ref_11b20 = 0;
+    self.ref_11B20 = 0;
     return;
   }
 }
@@ -1448,7 +1448,7 @@ function spawnplayer_actual(var_0) {
   }
 
   if(scripts\cp\utility::turn_off_sniper_laser()) {
-    if(!istrue(self.ref_11b20)) {
+    if(!istrue(self.ref_11B20)) {
       updatematchhasmorethan1playeromnvaronplayersfirstspawn();
     }
   }
@@ -1486,14 +1486,14 @@ function spawnplayer_actual(var_0) {
   if(!scripts\cp\cp_endgame::gamealreadyended() && !istrue(var_0)) {
     if(!scripts\cp\utility::turn_off_sniper_laser() && !istrue(self.unset_relic_oneclip)) {
       thread open_loadout_menu();
-      scripts\engine\utility::ref_143a5("loadout_given", "start_hotjoining_via_c130");
+      scripts\engine\utility::ref_143A5("loadout_given", "start_hotjoining_via_c130");
 
-      if(!istrue(self.ref_11b20)) {
+      if(!istrue(self.ref_11B20)) {
         updatematchhasmorethan1playeromnvaronplayersfirstspawn();
       }
 
-      if(isDefined(level.ref_127f6)) {
-        self thread[[level.ref_127f6]]();
+      if(isDefined(level.ref_127F6)) {
+        self thread[[level.ref_127F6]]();
       }
 
       if(level.gametype == "cp_survival") {
@@ -1721,7 +1721,7 @@ function defaultplayerdisconnect(var_0) {
   removeplayerfromlevelarrays(self);
 
   if(disconnectshouldforceend()) {
-    ref_12c58();
+    ref_12C58();
 
     if(level.players.size == 0) {
       level thread scripts\cp\cp_endgame::endgame("axis", scripts\cp\cp_endgame::get_end_game_string_index("host_end"));
@@ -2253,7 +2253,7 @@ function delete_on_load() {
   scripts\engine\utility::delaythread(0.05, &scripts\engine\utility::array_delete, getEntArray("delete_on_firstframeend", "targetname"));
 }
 
-function ref_12c58() {
+function ref_12C58() {
   setDvar("restart_checkpoint", "");
   setDvar("cp_landlord_start_obj", "");
   setDvar("cp_arms_dealer_start_obj", "");

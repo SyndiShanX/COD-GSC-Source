@@ -6,7 +6,7 @@
 function main() {
   _start_rooftop_raid_exfil::keypad_check_levelinput();
   _questtimerwait::keypad_check_levelinput();
-  level.ref_13d50 = 1;
+  level.ref_13D50 = 1;
   scripts\mp\maps\mp_m_cornfield\mp_m_cornfield_precache::main();
   scripts\mp\maps\mp_m_cornfield\gen\mp_m_cornfield_art::main();
   scripts\mp\maps\mp_m_cornfield\mp_m_cornfield_fx::main();
@@ -14,7 +14,7 @@ function main() {
   scripts\mp\load::main();
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_m_cornfield", "codcaster_compass_map_mp_m_cornfield");
-  scripts\cp_mp\utility\game_utility::ref_12b3b();
+  scripts\cp_mp\utility\game_utility::ref_12B3B();
   level.requiresminstartspawns = 0;
   setDvar("r_umbraMinObjectContribution", 8);
   game["attackers"] = "allies";
@@ -25,7 +25,7 @@ function main() {
   thread monitor();
 }
 
-function ref_12d7c(var_0) {
+function ref_12D7C(var_0) {
   var_0 setCanDamage(1);
 
   for(;;) {
@@ -58,16 +58,16 @@ function monitor() {
   var_0 = getEntArray("weatherVane", "targetname");
 
   foreach(var_2 in var_0) {
-    thread ref_12d7c(var_2);
+    thread ref_12D7C(var_2);
   }
 
-  level.ref_12d40 = scripts\engine\utility::spawn_tag_origin();
-  level.ref_12d40.origin = (-472, -584, -1);
-  level.ref_12d40.angles = (0, 180, 0);
-  level.ref_12d40 show();
-  level.ref_12d47 = getEntArray("candleRing", "targetname");
+  level.ref_12D40 = scripts\engine\utility::spawn_tag_origin();
+  level.ref_12D40.origin = (-472, -584, -1);
+  level.ref_12D40.angles = (0, 180, 0);
+  level.ref_12D40 show();
+  level.ref_12D47 = getEntArray("candleRing", "targetname");
 
-  foreach(var_5 in level.ref_12d47) {
+  foreach(var_5 in level.ref_12D47) {
     var_5.fx = scripts\engine\utility::spawn_tag_origin();
     var_5.fx.origin = var_5.origin;
     var_5.fx.angles = var_5.angles;
@@ -148,7 +148,7 @@ function clear_players_from_door_way(var_0) {
 
 function getquestweaponxprewardinstance() {
   if(level.isgroundwarcoremode == 2) {
-    ref_13dc1();
+    ref_13DC1();
     return;
   }
 }
@@ -208,8 +208,8 @@ function molotov_watch_cleanup_pool() {
   }
 }
 
-function ref_13dc1() {
-  playFXOnTag(scripts\engine\utility::getfx("vfx_goat_circle"), level.ref_12d40, "tag_origin");
+function ref_13DC1() {
+  playFXOnTag(scripts\engine\utility::getfx("vfx_goat_circle"), level.ref_12D40, "tag_origin");
   thread scripts\engine\utility::play_sound_in_space("mp_cornfield_goats_lr", (-666, -666, 60));
   thread scripts\engine\utility::play_sound_in_space("mp_cornfield_goats_lsrs", (-300, -666, 60));
 
@@ -218,7 +218,7 @@ function ref_13dc1() {
     var_1 playlocalsound("mp_cornfield_goat_stinger");
   }
 
-  foreach(var_4 in level.ref_12d47) {
+  foreach(var_4 in level.ref_12D47) {
     var_4 show();
     waittillframeend();
     playFXOnTag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var_4.fx, "tag_origin");
@@ -257,27 +257,27 @@ function ref_13dc1() {
     if(isDefined(var_17)) {
       var_11.origin = var_17.origin;
       var_11.angles = var_17.angles;
-      var_11.ref_11e73 = var_17.target;
+      var_11.ref_11E73 = var_17.target;
     }
   }
 
   wait 2;
 
   foreach(var_11 in level.mon_clip) {
-    var_17 = scripts\engine\utility::getStruct(var_11.ref_11e73, "targetname");
+    var_17 = scripts\engine\utility::getStruct(var_11.ref_11E73, "targetname");
 
     if(isDefined(var_17)) {
       waittillframeend();
       var_11.origin = var_17.origin;
       var_11.angles = var_17.angles;
-      var_11.ref_11e73 = var_17.target;
+      var_11.ref_11E73 = var_17.target;
     }
   }
 
   wait 2;
 
   foreach(var_11 in level.mon_clip) {
-    var_17 = scripts\engine\utility::getStruct(var_11.ref_11e73, "targetname");
+    var_17 = scripts\engine\utility::getStruct(var_11.ref_11E73, "targetname");
 
     if(isDefined(var_17)) {
       waittillframeend();
@@ -310,7 +310,7 @@ function ref_13dc1() {
     thread viewmodel_demeanor();
   }
 
-  foreach(var_4 in level.ref_12d47) {
+  foreach(var_4 in level.ref_12D47) {
     killfxontag(scripts\engine\utility::getfx("vfx_garden_candle_poof"), var_4.fx, "tag_origin");
   }
 

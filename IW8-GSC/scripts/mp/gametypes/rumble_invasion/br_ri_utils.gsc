@@ -20,7 +20,7 @@ function assignclientmatchdataid() {
     var_4 = "actionhero_mp";
     var_5 = "zombiedefault";
     var_6 = 1;
-    thread accesscardsspawned_red::ref_1380c(var_0, var_2, var_3, var_4, var_5, var_6);
+    thread accesscardsspawned_red::ref_1380C(var_0, var_2, var_3, var_4, var_5, var_6);
     return;
   }
 }
@@ -29,7 +29,7 @@ function isdragonsbreath() {
   var_0 = accesscardsspawned_red::preinfilstreamfunc();
 
   if(isDefined(var_0) && var_0 == "incursion_boost") {
-    accesscardsspawned_red::ref_138c8();
+    accesscardsspawned_red::ref_138C8();
     return;
   }
 }

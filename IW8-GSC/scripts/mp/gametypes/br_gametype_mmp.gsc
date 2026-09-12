@@ -14,12 +14,12 @@ function init() {
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("firstCircleVo");
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("randomizeCircleCenter");
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("planeSnapToOOB");
-  scripts\mp\gametypes\br_gametypes::ref_12b11("createC130PathStruct", &brmmp_createc130pathstruct);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("addToC130Infil", &brmmp_addtoc130infil);
-  thread ref_127f5();
+  scripts\mp\gametypes\br_gametypes::ref_12B11("createC130PathStruct", &brmmp_createc130pathstruct);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("addToC130Infil", &brmmp_addtoc130infil);
+  thread ref_127F5();
 }
 
-function ref_127f5() {
+function ref_127F5() {
   level waittill("prematch_over");
 }
 

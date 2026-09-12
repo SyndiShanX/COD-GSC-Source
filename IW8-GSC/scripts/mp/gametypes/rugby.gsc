@@ -90,17 +90,17 @@ function onstartgametype() {
   }
 
   setupwaypointicons();
-  ref_12c4b();
+  ref_12C4B();
   thread initrugbyents();
   thread setupinitialstate();
   initspawns();
   initjugg();
-  thread ref_136f4();
+  thread ref_136F4();
   setomnvar("ui_rugby_jugg_timer", 0);
   setomnvar("ui_rugby_jugg_radial", 0);
 }
 
-function ref_136f4() {
+function ref_136F4() {
   scripts\mp\flags::gameflagwait("prematch_done");
   wait 5;
   level thread scripts\mp\hud_message::notifyteam("jugg_capture", "jugg_capture", "allies");
@@ -306,8 +306,8 @@ function getspawnpoint() {
 }
 
 function modeonteamchangedeath(var_0) {
-  if(isDefined(level.ref_12dd4)) {
-    var_0 setclientomnvar("ui_rugby_jugg_friendly", scripts\engine\utility::ter_op(var_0.team == level.ref_12dd4.team, 0, 1));
+  if(isDefined(level.ref_12DD4)) {
+    var_0 setclientomnvar("ui_rugby_jugg_friendly", scripts\engine\utility::ter_op(var_0.team == level.ref_12DD4.team, 0, 1));
     return;
   }
 }
@@ -331,8 +331,8 @@ function onplayerconnect(var_0) {
 function onplayerspawned(var_0) {
   var_0 waittill("spawned");
 
-  if(isDefined(level.ref_12dd4) && isDefined(level.ref_12dd4.team) && isDefined(var_0.team)) {
-    var_0 setclientomnvar("ui_rugby_jugg_friendly", scripts\engine\utility::ter_op(var_0.team == level.ref_12dd4.team, 0, 1));
+  if(isDefined(level.ref_12DD4) && isDefined(level.ref_12DD4.team) && isDefined(var_0.team)) {
+    var_0 setclientomnvar("ui_rugby_jugg_friendly", scripts\engine\utility::ter_op(var_0.team == level.ref_12DD4.team, 0, 1));
     return;
   }
 }
@@ -376,20 +376,20 @@ function awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     var_15 = var_0 == var_1;
   }
 
-  if(isDefined(level.ref_12dd4)) {
+  if(isDefined(level.ref_12DD4)) {
     if(isDefined(var_1) && isPlayer(var_1) && var_1.team != var_12.team) {
-      if(var_1 == level.ref_12dd4) {
+      if(var_1 == level.ref_12DD4) {
         var_1 thread scripts\mp\utility\points::giveunifiedpoints("kill_as_juggernaut");
         return;
       }
 
-      if(var_12 == level.ref_12dd4) {
+      if(var_12 == level.ref_12DD4) {
         var_1 thread scripts\mp\utility\points::giveunifiedpoints("kill_juggernaut");
         return;
       }
 
-      if(var_1.team == level.ref_12dd4.team && var_1 != level.ref_12dd4) {
-        var_16 = distancesquared(level.ref_12dd4.origin, var_14);
+      if(var_1.team == level.ref_12DD4.team && var_1 != level.ref_12DD4) {
+        var_16 = distancesquared(level.ref_12DD4.origin, var_14);
 
         if(var_16 < 105625) {
           var_1 thread scripts\mp\rank::scoreeventpopup("defend");
@@ -397,20 +397,20 @@ function awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
           var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
           var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
           var_1 scripts\mp\utility\stats::setextrascore1(var_1.pers["defends"]);
-          thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "defending");
+          thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "defending");
           return;
         }
 
         return;
       }
 
-      if(var_1.team != level.ref_12dd4.team && var_12.team == level.ref_12dd4.team) {
-        var_16 = distancesquared(level.ref_12dd4.origin, var_13);
+      if(var_1.team != level.ref_12DD4.team && var_12.team == level.ref_12DD4.team) {
+        var_16 = distancesquared(level.ref_12DD4.origin, var_13);
 
         if(var_16 < 105625) {
           var_1 thread scripts\mp\rank::scoreeventpopup("assault");
           var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
-          thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_9, "assaulting");
+          thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_9, "assaulting");
           return;
         }
 
@@ -481,8 +481,8 @@ function ref_13166() {
 function getjuggorcratepos() {
   var_0 = level.rugby;
 
-  if(isDefined(level.ref_12dd4)) {
-    return level.ref_12dd4.origin;
+  if(isDefined(level.ref_12DD4)) {
+    return level.ref_12DD4.origin;
   } else if(var_0.activejuggernauts.size > 0) {
     foreach(var_2 in var_0.activejuggernauts) {
       return var_2.origin;
@@ -649,7 +649,7 @@ function updatechevrons(var_0) {
   }
 }
 
-function ref_12c1d(var_0, var_1) {
+function ref_12C1D(var_0, var_1) {
   var_2 = [];
   var_3 = [];
 
@@ -816,7 +816,7 @@ function activatenewjuggernaut(var_0) {
   var_4 = var_0 getentitynumber();
   var_3.id = var_4;
   var_1.activejuggernauts[var_4] = var_0;
-  level.ref_12dd4 = var_0;
+  level.ref_12DD4 = var_0;
   var_0.rugbyjugginfo = var_3;
   createobjectiveiconsforactivejugg(var_0, var_3);
   startjugghud(var_0);
@@ -868,7 +868,7 @@ function deactivatejuggernaut(var_0) {
   }
 
   var_1.activejuggernauts[var_2.id] = undefined;
-  level.ref_12dd4 = undefined;
+  level.ref_12DD4 = undefined;
   cleanupobjectiveiconsforjugg(var_0, var_2);
   clearjugghud();
 
@@ -877,7 +877,7 @@ function deactivatejuggernaut(var_0) {
   }
 
   level.rugby.maxperkbonustier = undefined;
-  level.rugby.ref_128bf = undefined;
+  level.rugby.ref_128BF = undefined;
   level.rugby.vehicle_occupancy_isfriendlytoplayer = undefined;
   level.rugby.vehicle_occupancy_isenemytoteam = undefined;
 
@@ -973,14 +973,14 @@ function watchjuggprogress() {
       thread getquestunlockableindexfromlootid(level, var_9, var_0);
     }
 
-    if(isDefined(level.ref_12dd4)) {
+    if(isDefined(level.ref_12DD4)) {
       if(!isDefined(var_7)) {
         var_7 = var_9;
       }
 
       if(var_9 > var_7 + 0.1) {
         var_7 = var_9;
-        level.ref_12dd4 thread scripts\mp\utility\points::giveunifiedpoints("rugby_obj_push");
+        level.ref_12DD4 thread scripts\mp\utility\points::giveunifiedpoints("rugby_obj_push");
       }
     }
 
@@ -992,12 +992,12 @@ function watchjuggprogress() {
 function getquestunlockableindexfromlootid(var_0, var_1, var_2) {
   if(!isDefined(level.rugby.maxperkbonustier)) {
     level.rugby.maxperkbonustier = 1;
-    level.rugby.ref_128bf = gettime();
+    level.rugby.ref_128BF = gettime();
     level.rugby.vehicle_occupancy_isfriendlytoplayer = var_0;
     level.rugby.vehicle_occupancy_isenemytoteam = var_0;
-  } else if(isDefined(level.rugby.ref_128bf) && level.rugby.ref_128bf + 30000 < gettime()) {
+  } else if(isDefined(level.rugby.ref_128BF) && level.rugby.ref_128BF + 30000 < gettime()) {
     level.rugby.maxperkbonustier = 1;
-    level.rugby.ref_128bf = gettime();
+    level.rugby.ref_128BF = gettime();
     level.rugby.vehicle_occupancy_isfriendlytoplayer = var_0;
     level.rugby.vehicle_occupancy_isenemytoteam = var_0;
   }
@@ -1057,14 +1057,14 @@ function watchjuggtimeout() {
   level endon("stop_rugby_timeout");
   self endon("rugby_jugg_end");
   ref_13167();
-  thread ref_12e18(level);
+  thread ref_12E18(level);
   wait getjuggtimeout();
   setomnvar("ui_rugby_jugg_timer", 0);
   setomnvar("ui_rugby_jugg_radial", 0);
   self suicide();
 }
 
-function ref_12e18(var_0) {
+function ref_12E18(var_0) {
   level endon("stop_rugby_timeout");
   var_0 endon("rugby_jugg_end");
   var_1 = getdvarfloat("scr_rugby_juggTimeout");
@@ -1096,7 +1096,7 @@ function handlejuggjumpspam() {
     scripts\mp\weapons::updatemovespeedscale();
 
     for(;;) {
-      var_2 = scripts\engine\utility::ref_143b9(1, "jugg_jumped");
+      var_2 = scripts\engine\utility::ref_143B9(1, "jugg_jumped");
 
       if(var_2 == "jugg_jumped") {
         while(!self isonground()) {
@@ -1116,7 +1116,7 @@ function handlejuggjumpspam() {
   }
 }
 
-function ref_12c4b() {
+function ref_12C4B() {
   var_0 = 0;
   level.vehicle_occupancy_isfriendlytoteam = spawnStruct();
   level.vehicle_occupancy_isfriendlytoteam.objidnum = scripts\mp\objidpoolmanager::requestreservedid(var_0);
@@ -1245,7 +1245,7 @@ function juggcratemanageuse(var_0) {
     self.ref_14074.teamprogress = undefined;
   }
 
-  self.ref_14074.trigger.ref_1408a = 16900;
+  self.ref_14074.trigger.ref_1408A = 16900;
   self.ref_14074.trigger setuserange(130);
   self.ref_14074.trigger setHintString(&"MP_MODE_RUGBY/CRATE_USE");
   self.ref_14074.trigger makeusable();
@@ -1257,16 +1257,16 @@ function juggcratemanageuse(var_0) {
   self.ref_14074 scripts\mp\gameobjects::setusetime(remove_spawn_disable_struct());
   self.ref_14074.interactteam = "any";
   self.ref_14074.curprogress = 0;
-  self.ref_14074.defaultusetime = self.ref_14074.ref_1409e;
+  self.ref_14074.defaultusetime = self.ref_14074.ref_1409E;
   self.ref_14074.userate = 1;
   self.ref_14074.id = "rugby_jugg";
   self.ref_14074.exclusiveuse = 0;
   self.ref_14074.exclusiveclaim = 0;
   self.ref_14074.skiptouching = 1;
-  self.ref_14074.onbeginuse = &ref_12dd1;
-  self.ref_14074.onuse = &ref_12dd0;
-  self.ref_14074.onenduse = &ref_12dd2;
-  self.ref_14074.oncantuse = &ref_12dd3;
+  self.ref_14074.onbeginuse = &ref_12DD1;
+  self.ref_14074.onuse = &ref_12DD0;
+  self.ref_14074.onenduse = &ref_12DD2;
+  self.ref_14074.oncantuse = &ref_12DD3;
   self.ref_14074.inuse = 0;
 
   foreach(var_6 in level.teamnamelist) {
@@ -1283,7 +1283,7 @@ function juggcratemanageuse(var_0) {
   self.ref_14074.resetprogress = 1;
 
   if(!scripts\mp\flags::gameflag("prematch_done")) {
-    level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+    level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   }
 
   self.ref_14074.type = "useObject";
@@ -1295,13 +1295,13 @@ function juggcratemanageuse(var_0) {
   scripts\mp\objidpoolmanager::objective_set_play_outro(self.ref_14074.objidnum, 0);
 }
 
-function ref_12dd1(var_0) {
+function ref_12DD1(var_0) {
   scripts\mp\gameobjects::setobjectivestatusicons("icon_waypoint_taking", "icon_waypoint_losing");
   scripts\mp\utility\dialog::statusdialog("rugby_securing_jugg", var_0.team, "obj");
   self.visuals[0] playLoopSound("mp_care_package_non_owner_cap");
 }
 
-function ref_12dd0(var_0) {
+function ref_12DD0(var_0) {
   var_1 = activatenewjuggernaut(var_0);
 
   if(!var_1) {
@@ -1328,7 +1328,7 @@ function ref_12dd0(var_0) {
   }
 }
 
-function ref_12dd2(var_0, var_1, var_2) {
+function ref_12DD2(var_0, var_1, var_2) {
   self.visuals[0] stoploopsound("mp_care_package_non_owner_cap");
 
   if(!var_2) {
@@ -1346,7 +1346,7 @@ function ref_12dd2(var_0, var_1, var_2) {
   scripts\mp\objidpoolmanager::objective_show_progress(self.objidnum, 0);
 }
 
-function ref_12dd3(var_0) {}
+function ref_12DD3(var_0) {}
 
 function juggcratecleanup() {
   scripts\mp\objidpoolmanager::returnobjectiveid(self.objidnum);

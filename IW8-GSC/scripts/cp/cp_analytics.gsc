@@ -298,10 +298,10 @@ function on_player_connect() {
   set_split_screen();
   set_join_in_progress();
   level.player_count += 1;
-  ref_119cd();
+  ref_119CD();
 }
 
-function ref_119cd() {
+function ref_119CD() {
   var_0 = isbot(self) || initmaxspeedforpathlengthtable(self) || isai(self);
 
   if(scripts\cp\utility::rankingenabled()) {
@@ -334,7 +334,7 @@ function ref_119cd() {
   GscBinSkip1(0x45, 0, "");
 }
 
-function ref_119cc(var_0) {
+function ref_119CC(var_0) {
   var_1 = "";
 
   if(isDefined(var_0) && isstring(var_0)) {
@@ -476,7 +476,7 @@ function updateplayersegmentdata() {
 function on_player_disconnect(var_0) {
   set_custom_stats();
   level.player_count_left += 1;
-  ref_119cc(var_0);
+  ref_119CC(var_0);
 }
 
 function player_init() {
@@ -969,7 +969,7 @@ function watchforusermessageevents() {
 
   for(;;) {
     self waittill("log_user_event_start");
-    var_0 = scripts\engine\utility::ref_143ad("log_user_event_end", "log_user_event_generic_event");
+    var_0 = scripts\engine\utility::ref_143AD("log_user_event_end", "log_user_event_generic_event");
 
     if(isDefined(var_0) && var_0 == "log_user_event_generic_event") {
       self iprintlnbold("Event Logged");
@@ -1398,7 +1398,7 @@ function logevent_giveplayerxp(var_0, var_1, var_2, var_3) {
   getentitylessscriptablearray("analytics_mp_player_xp", ["current_prestige", var_0, "current_level", var_1, "xp_gained", var_2, "xp_source", var_3, "player_id", var_4]);
 }
 
-function ref_119b3(var_0, var_1, var_2, var_3, var_4) {
+function ref_119B3(var_0, var_1, var_2, var_3, var_4) {
   if(!analyticslogenabled()) {
     return;
   }
@@ -1445,7 +1445,7 @@ function analyticsspawnlogenabled() {
   return getdvarint("enable_analytics_spawn_log") != 0;
 }
 
-function ref_119b9() {
+function ref_119B9() {
   var_0 = "";
 
   if(scripts\cp\utility::tryingtoleave()) {
@@ -1553,7 +1553,7 @@ function ref_119b9() {
   getentitylessscriptablearray("dlog_event_coop_server_match_start", ["levelname", level.script, "gametype", scripts\cp\utility::getgametype(), "time_stamp", getsystemtime(), "active_objective", var_0, "playlist_name", var_1]);
 }
 
-function ref_119b8(var_0) {
+function ref_119B8(var_0) {
   var_1 = "";
 
   if(isint(var_0)) {
@@ -1593,7 +1593,7 @@ function ref_119b8(var_0) {
   getentitylessscriptablearray("dlog_event_coop_server_match_end", ["levelname", level.script, "gametype", scripts\cp\utility::getgametype(), "time_stamp", getsystemtime(), "active_objective", level.active_objectives_string, "last_completed_objective", var_2, "result", var_0]);
 }
 
-function ref_119bf(var_0, var_1, var_2, var_3, var_4) {
+function ref_119BF(var_0, var_1, var_2, var_3, var_4) {
   if(!isPlayer(var_0)) {
     return;
   }
@@ -1601,7 +1601,7 @@ function ref_119bf(var_0, var_1, var_2, var_3, var_4) {
   var_0 dlog_recordplayerevent("dlog_event_cpdata_plr_xp_earned", ["player_xp_earned", var_1, "weapon", var_2, "weapon_xp_earned", var_3, "xp_source", var_4, "levelname", level.script, "active_objective", level.active_objectives_string]);
 }
 
-function ref_119b6(var_0, var_1) {
+function ref_119B6(var_0, var_1) {
   if(!isPlayer(var_0)) {
     return;
   }
@@ -1609,7 +1609,7 @@ function ref_119b6(var_0, var_1) {
   var_0 dlog_recordplayerevent("dlog_event_cpdata_plr_munition_used", ["levelname", level.script, "playername", var_0.name, "x1", var_0.origin[0], "y1", var_0.origin[1], "z1", var_0.origin[2], "munition", var_1, "active_objective", level.active_objectives_string]);
 }
 
-function ref_119be(var_0, var_1) {
+function ref_119BE(var_0, var_1) {
   if(!isPlayer(var_0)) {
     return;
   }
@@ -1617,7 +1617,7 @@ function ref_119be(var_0, var_1) {
   var_0 dlog_recordplayerevent("dlog_event_cpdata_plr_super_used", ["levelname", level.script, "playername", var_0.name, "x1", var_0.origin[0], "y1", var_0.origin[1], "z1", var_0.origin[2], "super", var_1, "active_objective", level.active_objectives_string]);
 }
 
-function ref_119b4(var_0, var_1) {
+function ref_119B4(var_0, var_1) {
   if(!isPlayer(var_0)) {
     return;
   }
@@ -1625,7 +1625,7 @@ function ref_119b4(var_0, var_1) {
   var_0 dlog_recordplayerevent("dlog_event_cpdata_plr_kidnapper", ["levelname", level.script, "version", var_1, "times_kidnapped", var_0.times_kidnapped, "active_objective", level.active_objectives_string]);
 }
 
-function ref_119bd(var_0) {
+function ref_119BD(var_0) {
   if(!isPlayer(var_0)) {
     return;
   }
@@ -1633,7 +1633,7 @@ function ref_119bd(var_0) {
   var_0 dlog_recordplayerevent("dlog_event_cpdata_plr_spawn_via_teamrevive", ["levelname", level.script, "last_stand_id", punishwavechaseplayers(var_0), "active_objective", level.active_objectives_string]);
 }
 
-function ref_119bb(var_0) {
+function ref_119BB(var_0) {
   if(!isPlayer(var_0)) {
     return;
   }
@@ -1641,7 +1641,7 @@ function ref_119bb(var_0) {
   var_0 dlog_recordplayerevent("dlog_event_cpdata_plr_spawn_via_autorevive", ["levelname", level.script, "last_stand_id", punishwavechaseplayers(var_0), "active_objective", level.active_objectives_string]);
 }
 
-function ref_119bc(var_0, var_1) {
+function ref_119BC(var_0, var_1) {
   if(!isPlayer(var_0)) {
     return;
   }
@@ -1649,7 +1649,7 @@ function ref_119bc(var_0, var_1) {
   var_0 dlog_recordplayerevent("dlog_event_cpdata_plr_spawn_via_player", ["reviver", var_1, "levelname", level.script, "last_stand_id", punishwavechaseplayers(var_0), "x1", var_0.origin[0], "y1", var_0.origin[1], "z1", var_0.origin[2], "active_objective", level.active_objectives_string]);
 }
 
-function ref_119b5(var_0, var_1, var_2) {
+function ref_119B5(var_0, var_1, var_2) {
   if(!isPlayer(var_0)) {
     return;
   }
@@ -1658,17 +1658,17 @@ function ref_119b5(var_0, var_1, var_2) {
   var_0 dlog_recordplayerevent("dlog_event_cpdata_plr_combat", ["levelname", level.script, "x1", var_0.origin[0], "y1", var_0.origin[1], "z1", var_0.origin[2], "stat_type", "Killed", "enemy", var_3, "x2", var_1.origin[0], "y2", var_1.origin[1], "z2", var_1.origin[2], "active_objective", level.active_objectives_string, "weapon", var_2.basename]);
 }
 
-function ref_119b2(var_0, var_1) {
+function ref_119B2(var_0, var_1) {
   if(!isPlayer(var_0)) {
     return;
   }
 
-  ref_13f9c(var_0);
+  ref_13F9C(var_0);
   var_2 = scripts\engine\utility::ter_op(isagent(var_1), var_1.agent_type, var_0.name);
   var_0 dlog_recordplayerevent("dlog_event_cpdata_plr_downed", ["levelname", level.script, "enemy", var_2, "last_stand_id", punishwavechaseplayers(var_0), "x1", var_0.origin[0], "y1", var_0.origin[1], "z1", var_0.origin[2], "active_objective", level.active_objectives_string]);
 }
 
-function ref_13f9c(var_0) {
+function ref_13F9C(var_0) {
   if(!isDefined(var_0.watch_for_helis_killed)) {
     var_0.watch_for_helis_killed = 0;
   } else {

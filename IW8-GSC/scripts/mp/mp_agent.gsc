@@ -38,7 +38,7 @@ function setupweapon(var_0) {
   self.grenadeammo = 0;
 }
 
-function ref_131fd() {
+function ref_131FD() {
   if(!isDefined(level.gameskill)) {
     level.gameskill = 0;
     level.difficultytype[0] = "mp";
@@ -98,7 +98,7 @@ function spawnnewagent(var_0, var_1, var_2, var_3, var_4, var_5) {
     set_agent_spawn_health(var_6, var_6, var_0);
     set_agent_traversal_unit_type(var_6, var_6, var_0);
     add_to_characters_array(var_6);
-    ref_131fd(var_6);
+    ref_131FD(var_6);
 
     if(is_using_behaviortree(var_0)) {
       setup_bt_and_asm(var_6);
@@ -517,7 +517,7 @@ function default_on_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, va
 
   if(self.health > 0 && self.health < var_15) {
     self notify("pain");
-    scripts\asm\asm_mp::ref_12e1d();
+    scripts\asm\asm_mp::ref_12E1D();
   }
 
   if(isalive(self)) {
@@ -746,7 +746,7 @@ function on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_
       return;
     }
 
-    thread ref_129e6(self.body);
+    thread ref_129E6(self.body);
     return;
   }
 
@@ -756,7 +756,7 @@ function on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_
 
       if(isDefined(var_12) && var_12 == "active") {
         self.body setscriptablepartstate("burn_to_death_by_molotov", "active");
-        thread ref_13fc8(self.body);
+        thread ref_13FC8(self.body);
         thread delaystartragdoll(self.body, var_6, var_5, var_4, var_0, var_3);
         return;
       }
@@ -785,7 +785,7 @@ function on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_
   thread delaystartragdoll(self.body, var_7, var_6, var_5, var_1, var_4);
 }
 
-function ref_129e6(var_0) {
+function ref_129E6(var_0) {
   self endon("entitydeleted");
 
   if(self isragdoll()) {
@@ -936,7 +936,7 @@ function delaystartragdoll(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-function ref_13fc8(var_0) {
+function ref_13FC8(var_0) {
   var_1 = self.asm.archetype == "soldier_lw_br";
 
   if(!var_1) {

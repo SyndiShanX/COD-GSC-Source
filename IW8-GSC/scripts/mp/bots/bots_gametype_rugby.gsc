@@ -5,7 +5,7 @@
 
 function main() {
   setup_callbacks();
-  ref_131e0();
+  ref_131E0();
 }
 
 function setup_callbacks() {
@@ -15,7 +15,7 @@ function setup_callbacks() {
   level.bot_funcs["jugg_picked_up_cancel"] = &currentintelindex;
 }
 
-function ref_131e0() {
+function ref_131E0() {
   deathcashcollected();
   scripts\mp\bots\bots_util::bot_waittill_bots_enabled();
   var_0 = debug_display_track_tilts(["_allies", "_axis"]);
@@ -60,9 +60,9 @@ function death_explode() {
       continue;
     }
 
-    if(!isDefined(level.ref_12dd4)) {
+    if(!isDefined(level.ref_12DD4)) {
       if(scripts\mp\bots\bots_strategy::bot_has_tactical_goal("seek_rugby_jugg", undefined) == 0) {
-        var_0 = &ref_12dcf;
+        var_0 = &ref_12DCF;
         var_1 = spawnStruct();
         var_1.object = level.rugby.activejuggcrates[0];
         var_1.script_goal_radius = 16;
@@ -75,7 +75,7 @@ function death_explode() {
       continue;
     }
 
-    if(self == level.ref_12dd4) {
+    if(self == level.ref_12DD4) {
       if(istrue(game["switchedsides"])) {
         var_3 = level.rugby.endzones[self.team][0];
       } else {
@@ -88,16 +88,16 @@ function death_explode() {
       continue;
     }
 
-    if(level.ref_12dd4.team == self.team) {
+    if(level.ref_12DD4.team == self.team) {
       if(!scripts\mp\bots\bots_util::bot_is_defending()) {
-        scripts\mp\bots\bots_strategy::bot_guard_player(level.ref_12dd4, 400);
+        scripts\mp\bots\bots_strategy::bot_guard_player(level.ref_12DD4, 400);
       }
 
       continue;
     }
 
-    if(gettime() > self.next_time_hunt_carrier || sighttracepassed(self.origin + (0, 0, 77), level.ref_12dd4.origin + (0, 0, 77), 0, self)) {
-      self botsetscriptgoal(level.ref_12dd4.origin, 16, "hunt");
+    if(gettime() > self.next_time_hunt_carrier || sighttracepassed(self.origin + (0, 0, 77), level.ref_12DD4.origin + (0, 0, 77), 0, self)) {
+      self botsetscriptgoal(level.ref_12DD4.origin, 16, "hunt");
       self.next_time_hunt_carrier = gettime() + randomintrange(4500, 5500);
     }
   }
@@ -113,14 +113,14 @@ function propminigamesetting(var_0) {
 }
 
 function currentintelindex(var_0) {
-  if(isDefined(level.ref_12dd4)) {
+  if(isDefined(level.ref_12DD4)) {
     return true;
   }
 
   return false;
 }
 
-function ref_12dcf(var_0) {
+function ref_12DCF(var_0) {
   var_1 = vehicle_isfriendlytoteam(scripts\mp\gametypes\rugby::remove_spawn_disable_struct() + 2, "jugg_captured", randomint(100) > 50);
   self botclearscriptgoal();
 
@@ -153,7 +153,7 @@ function vehicle_isfriendlytoteam(var_0, var_1, var_2, var_3) {
   return var_6;
 }
 
-function ref_143eb(var_0) {
+function ref_143EB(var_0) {
   var_1 = gettime();
   var_2 = var_1 + var_0 * 1000;
   wait 0.05;
@@ -189,10 +189,10 @@ function death_killstreak_watcher(var_0) {
   }
 }
 
-function ref_13f86() {
+function ref_13F86() {
   if(!level.bombplanted) {
-    if(isDefined(level.ref_13a9a)) {
-      level.ref_13a9a = undefined;
+    if(isDefined(level.ref_13A9A)) {
+      level.ref_13A9A = undefined;
       level.cover_guys_debug = undefined;
     }
 
@@ -230,8 +230,8 @@ function ref_13f86() {
     return;
   }
 
-  if(isDefined(level.bombowner) && !isDefined(level.ref_13a9a)) {
-    level.ref_13a9a = level.bombowner.team;
+  if(isDefined(level.bombowner) && !isDefined(level.ref_13A9A)) {
+    level.ref_13A9A = level.bombowner.team;
     level.waittill_player_behind_cover = gettime();
   }
 
@@ -239,13 +239,13 @@ function ref_13f86() {
     var_7 = [];
 
     foreach(var_2 in level.participants) {
-      if(isalive(var_2) && scripts\mp\utility\entity::isaiteamparticipant(var_2) && var_2.team != level.ref_13a9a) {
+      if(isalive(var_2) && scripts\mp\utility\entity::isaiteamparticipant(var_2) && var_2.team != level.ref_13A9A) {
         var_7 = var_2;
       }
     }
 
     if(var_7.size > 0) {
-      var_10 = level.objectives[scripts\engine\utility::get_enemy_team(level.ref_13a9a)];
+      var_10 = level.objectives[scripts\engine\utility::get_enemy_team(level.ref_13A9A)];
       var_11 = scripts\engine\utility::get_array_of_closest(var_10.curorigin, var_7);
 
       if(!isDefined(level.bomb_defuser) || level.bomb_defuser != var_11[0]) {

@@ -20,7 +20,7 @@ function start_crate_drops() {
 
   for(;;) {
     if(getdvarint("scr_crate_drops_with_timer", 0) != 0) {
-      level scripts\engine\utility::ref_143ba(level.crate_drop_time, "start_periodic_drops", "drop_requested");
+      level scripts\engine\utility::ref_143BA(level.crate_drop_time, "start_periodic_drops", "drop_requested");
     } else {
       level waittill("drop_requested", var_0, var_1);
     }
@@ -47,7 +47,7 @@ function start_crate_drops() {
   }
 }
 
-function ref_12c40(var_0, var_1) {
+function ref_12C40(var_0, var_1) {
   level notify("drop_requested", var_0, var_1);
 }
 
@@ -80,7 +80,7 @@ function dropcarepackage(var_0, var_1, var_2) {
   var_4 = mlgiconemptyflag(var_3, var_2);
 
   if(isDefined(var_1)) {
-    var_4.ref_129f9 = var_1;
+    var_4.ref_129F9 = var_1;
   }
 
   thread oncratedrop(var_4, var_3);

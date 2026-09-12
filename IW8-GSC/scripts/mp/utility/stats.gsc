@@ -58,7 +58,7 @@ function setextrascore0(var_0) {
   self.pers["extrascore0"] = var_0;
 }
 
-function ref_1314c(var_0) {
+function ref_1314C(var_0) {
   if(loadout_updateclassdefault_weaponsheadless()) {
     return;
   }

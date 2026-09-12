@@ -18,7 +18,7 @@ function init() {
 }
 
 function teammarkedfor() {
-  scripts\engine\scriptable::ref_12f5b("part_door", &petrograd_interaction_think);
+  scripts\engine\scriptable::ref_12F5B("part_door", &petrograd_interaction_think);
   throwing_knife_cp_trytopickup();
   level.petobjectivefilter = [];
 }
@@ -77,11 +77,11 @@ function ref_13245(var_0) {
 
 function throwingknife_fire_begin_fx(var_0, var_1, var_2, var_3) {
   var_0.usable = 1;
-  var_0.ref_13aeb = randomint(4);
+  var_0.ref_13AEB = randomint(4);
   var_0.statuslightlist = var_1;
   var_0.destination = var_2;
   var_0.ph = var_3;
-  var_0.ph.ref_121d7 = var_0;
+  var_0.ph.ref_121D7 = var_0;
   scripts\mp\utility\trigger::makeenterexittrigger(var_0.ph, &petrograd_interaction_delayed, undefined);
   level.petobjectivefilter[level.petobjectivefilter.size] = var_0;
 }
@@ -114,7 +114,7 @@ function attackerinitammo(var_0) {
   closedoorscriptable(var_0);
   ref_13145(var_0, "inactive");
   var_0.cankeepusingbomb = 0;
-  thread ref_11d04();
+  thread ref_11D04();
 }
 
 function ref_12125(var_0) {
@@ -131,21 +131,21 @@ function ref_12125(var_0) {
 
   level endon("game_ended");
   var_1 endon("ftd_close");
-  var_1.ref_1269a = [];
+  var_1.ref_1269A = [];
   var_1 setscriptablepartstate("part_door", "open");
   var_1 notify("ftd_open");
-  thread ref_13c4e();
+  thread ref_13C4E();
   thread petrograd_lead_model();
 }
 
 function petrograd_interaction_delayed(var_0, var_1) {
-  var_2 = var_1.ref_121d7;
+  var_2 = var_1.ref_121D7;
 
   if(var_0 isinexecutionvictim() || var_0 isinexecutionattack()) {
     return;
   }
 
-  thread ref_1386a(var_0, registerdonetsksubmap(var_0, var_2, 0), var_2);
+  thread ref_1386A(var_0, registerdonetsksubmap(var_0, var_2, 0), var_2);
 }
 
 function getspectators() {
@@ -162,21 +162,21 @@ function getspectators() {
   return var_0;
 }
 
-function ref_1386a(var_0, var_1, var_2) {
+function ref_1386A(var_0, var_1, var_2) {
   var_3 = self;
   level endon("game_ended");
   var_3 endon("death");
   var_3 endon("disconnect");
-  thread ref_126d0(var_3);
+  thread ref_126D0(var_3);
   var_4 = getspectators();
 
   foreach(var_6 in var_4) {
     ref_12853(var_6, var_2);
-    ref_1277c(var_6, var_2);
+    ref_1277C(var_6, var_2);
   }
 
   ref_12853(var_3, var_2);
-  ref_1277c(var_3, var_2);
+  ref_1277C(var_3, var_2);
   var_3 setsoundsubmix("fade_to_black_all_except_music_and_scripted5", 0.5);
   wait 0.1;
   battle_tracks_updateexternallisteningzone(var_1, var_3);
@@ -185,23 +185,23 @@ function ref_1386a(var_0, var_1, var_2) {
   var_9 = (0, (var_8[1] + 180) % 360, 0);
   var_3 setplayerangles(var_9);
   wait 4;
-  var_3.ref_12a49 = 1;
+  var_3.ref_12A49 = 1;
 }
 
-function ref_13c4e() {
+function ref_13C4E() {
   var_0 = self;
   level endon("game_ended");
   var_0 endon("ftd_close");
-  var_0.ref_13b81 = gettime();
-  var_0.ref_13b7c = undefined;
+  var_0.ref_13B81 = gettime();
+  var_0.ref_13B7C = undefined;
 
   for(;;) {
-    if(isDefined(var_0.ref_13b7c) && (gettime() - var_0.ref_13b7c) / 1000 >= getdvarint("scr_br_ftd_InactiveTime", 10)) {
+    if(isDefined(var_0.ref_13B7C) && (gettime() - var_0.ref_13B7C) / 1000 >= getdvarint("scr_br_ftd_InactiveTime", 10)) {
       thread heli_land_logic(var_0);
       return;
     }
 
-    if((gettime() - var_0.ref_13b81) / 1000 >= getdvarint("scr_br_ftd_MaxOpenTime", 20)) {
+    if((gettime() - var_0.ref_13B81) / 1000 >= getdvarint("scr_br_ftd_MaxOpenTime", 20)) {
       thread heli_land_logic(var_0);
       return;
     }
@@ -229,15 +229,15 @@ function petrograd_lead_model() {
     var_1 = var_0.petrograd_interactions_init[0];
 
     if(!isDefined(var_1) || !isalive(var_1)) {
-      var_0.petrograd_interactions_init = ref_12c1a(var_0, var_1);
+      var_0.petrograd_interactions_init = ref_12C1A(var_0, var_1);
       var_0.tv_station_fastrope_one_infil_rider_start_targetname = 0;
       var_1 notify("ftdqueue_travel_completed");
       continue;
     }
 
     thread play_vo_or_timeout(var_1, var_0);
-    var_1 scripts\engine\utility::ref_143a5("player_done_warping", "death");
-    var_0.petrograd_interactions_init = ref_12c1a(var_0, var_1);
+    var_1 scripts\engine\utility::ref_143A5("player_done_warping", "death");
+    var_0.petrograd_interactions_init = ref_12C1A(var_0, var_1);
     var_0.tv_station_fastrope_one_infil_rider_start_targetname = 0;
     var_1 notify("ftdqueue_travel_completed");
   }
@@ -258,11 +258,11 @@ function battle_tracks_updateexternallisteningzone(var_0) {
     return;
   }
 
-  var_1.ref_13b7c = gettime();
+  var_1.ref_13B7C = gettime();
   var_1.petrograd_interactions_init[var_1.petrograd_interactions_init.size] = var_0;
 }
 
-function ref_12c1a(var_0) {
+function ref_12C1A(var_0) {
   var_1 = self;
   var_2 = scripts\engine\utility::array_remove(var_1.petrograd_interactions_init, var_0);
   return var_2;
@@ -274,12 +274,12 @@ function ref_12853(var_0) {
   var_1 setclientomnvar("ui_br_bink_overlay_state", 10);
 }
 
-function ref_1277c(var_0) {
+function ref_1277C(var_0) {
   var_1 = self;
   var_1 preloadcinematicforplayer(var_0);
 }
 
-function ref_138f8() {
+function ref_138F8() {
   var_0 = self;
   var_0 setclientomnvar("ui_br_bink_overlay_state", 5);
   wait 0.5;
@@ -287,7 +287,7 @@ function ref_138f8() {
   var_0 skydive_cutparachuteoff();
 }
 
-function ref_126d0(var_0) {
+function ref_126D0(var_0) {
   var_1 = self;
   level endon("game_ended");
   var_1 playerhide();
@@ -296,18 +296,18 @@ function ref_126d0(var_0) {
   var_1.validateboltent = 1;
 
   if(isDefined(var_0)) {
-    var_0.ref_1269a[var_1.guid] = var_1;
+    var_0.ref_1269A[var_1.guid] = var_1;
   }
 
   var_2 = 8.5;
-  var_3 = scripts\engine\utility::ref_143bd(var_2, "player_done_warping", "prematch_end", "ftdqueue_travel_completed", "death", "disconnect");
+  var_3 = scripts\engine\utility::ref_143BD(var_2, "player_done_warping", "prematch_end", "ftdqueue_travel_completed", "death", "disconnect");
 
   if(isDefined(var_0)) {
     if(var_3 == "disconnect") {
-      var_0.ref_1269a = scripts\engine\utility::array_removeundefined(var_0.ref_1269a);
+      var_0.ref_1269A = scripts\engine\utility::array_removeundefined(var_0.ref_1269A);
       return;
     } else {
-      var_0.ref_1269a = scripts\engine\utility::array_remove(var_0.ref_1269a, var_1);
+      var_0.ref_1269A = scripts\engine\utility::array_remove(var_0.ref_1269A, var_1);
     }
   }
 
@@ -324,10 +324,10 @@ function atv_outline() {
   self endon("death");
   self endon("disconnect");
   var_0 = spawn("script_model", self.origin);
-  var_0.ref_129c7 = gettime();
+  var_0.ref_129C7 = gettime();
   var_0.team = self.team;
   var_0 makeportableradar(self);
-  level.disable_super_in_turret.ref_129c6[var_0 getentitynumber()] = var_0;
+  level.disable_super_in_turret.ref_129C6[var_0 getentitynumber()] = var_0;
   wait 3;
   var_0 delete();
 }
@@ -338,13 +338,13 @@ function play_vo_or_timeout(var_0, var_1) {
   var_2 endon("death");
   var_2 endon("disconnect");
 
-  while(!istrue(var_2.ref_12a49)) {
+  while(!istrue(var_2.ref_12A49)) {
     waitframe();
   }
 
-  var_2.ref_12a49 = 0;
+  var_2.ref_12A49 = 0;
   var_3 = 7.5;
-  var_2 scripts\mp\gametypes\br_public::ref_126b9(var_1, var_3);
+  var_2 scripts\mp\gametypes\br_public::ref_126B9(var_1, var_3);
   var_2 waittill("playerPrestreamComplete");
   wait 0.45;
   var_1 += (0, 0, 20);
@@ -356,11 +356,11 @@ function play_vo_or_timeout(var_0, var_1) {
   var_2 setplayerangles(var_5);
   waitframe();
   var_2 clearsoundsubmix("fade_to_black_all_except_music_and_scripted5", 2);
-  ref_138f8(var_2);
+  ref_138F8(var_2);
   var_6 = getspectators();
 
   foreach(var_8 in var_6) {
-    ref_138f8(var_8);
+    ref_138F8(var_8);
   }
 
   var_2 notify("player_done_warping");
@@ -371,8 +371,8 @@ function registerdonetsksubmap(var_0, var_1) {
   var_3 = var_0.destination.origin;
 
   if(var_1) {
-    var_4 = var_0.ref_13aeb;
-    var_0.ref_13aeb = (var_0.ref_13aeb + 1) % 4;
+    var_4 = var_0.ref_13AEB;
+    var_0.ref_13AEB = (var_0.ref_13AEB + 1) % 4;
     var_5 = getdvarint("scr_br_ftd_ArrivalRadius", 50);
 
     for(var_6 = 0; var_6 < level.petplundertimer.size; var_6++) {
@@ -413,10 +413,10 @@ function heli_land_logic(var_0) {
     }
   }
 
-  if(isDefined(var_1.ref_1269a)) {
+  if(isDefined(var_1.ref_1269A)) {
     var_1.usable = 0;
 
-    while(var_1.ref_1269a.size != 0) {
+    while(var_1.ref_1269A.size != 0) {
       wait 0.1;
     }
 
@@ -489,7 +489,7 @@ function throwing_knife_cp_trytopickup() {
   }
 }
 
-function ref_11d04() {
+function ref_11D04() {
   level endon("game_ended");
   var_0 = self;
   var_1 = var_0.destination;
@@ -598,7 +598,7 @@ function move_platform(var_0) {
 
   foreach(var_3 in var_1) {
     if(var_0) {
-      thread ref_11cff(var_3);
+      thread ref_11CFF(var_3);
       continue;
     }
 
@@ -606,7 +606,7 @@ function move_platform(var_0) {
   }
 }
 
-function ref_11cff(var_0) {
+function ref_11CFF(var_0) {
   level endon("game_ended");
   var_0 endon("remove_kill_trigger");
 

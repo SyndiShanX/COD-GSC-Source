@@ -13,7 +13,7 @@ function asm_register() {
   }
 
   anim.asmfuncs["soldier_lw_br_shoot"] = [];
-  anim.asmfuncs["soldier_lw_br_shoot"][0] = &scripts\mp\trials\mp_trials_patches_petrograd::ref_134b3;
+  anim.asmfuncs["soldier_lw_br_shoot"][0] = &scripts\mp\trials\mp_trials_patches_petrograd::ref_134B3;
   anim.asmfuncs["soldier_lw_br_shoot"][1] = &scripts\asm\shoot\script_funcs::chooseshootidle;
   anim.asmfuncs["soldier_lw_br_shoot"][2] = &scripts\asm\soldier\script_funcs::shoot_generic;
   anim.asmfuncs["soldier_lw_br_shoot"][3] = &scripts\asm\shoot\script_funcs::initshoot;

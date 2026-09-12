@@ -90,7 +90,7 @@ function leaderdialogonplayer_internal(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  if(isDefined(level.ref_11c7d) && self[[level.ref_11c7d]](var_0)) {
+  if(isDefined(level.ref_11C7D) && self[[level.ref_11C7D]](var_0)) {
     return;
   }
 
@@ -127,7 +127,7 @@ function leaderdialogonplayer_internal(var_0, var_1, var_2, var_3, var_4) {
       var_8 = tablelookupbyrow("mp/announcervoicedata.csv", var_6, 3);
       var_9 = var_7 + var_8 + "_" + game["dialog"][var_0];
     } else {
-      jumpiffalse(scripts\cp_mp\utility\game_utility::ref_140a8()) LOC_0000013b;
+      jumpiffalse(scripts\cp_mp\utility\game_utility::ref_140A8()) LOC_0000013b;
       var_9 = var_9 + "bchr_" + game["dialog"][var_1];
       goto LOC_0000015d;
     }

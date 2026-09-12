@@ -768,7 +768,7 @@ function lockaction(var_0, var_1, var_2) {
   var_3.numspeakers++;
   anim.isteamspeaking[var_4] = 1;
   anim.isteamsaying[var_4][var_1] = 1;
-  var_5 = var_0 scripts\engine\utility::ref_143ae("death", "done speaking", "cancel speaking");
+  var_5 = var_0 scripts\engine\utility::ref_143AE("death", "done speaking", "cancel speaking");
   var_3.ismembersaying[var_1] = 0;
   var_3.numspeakers--;
   anim.isteamspeaking[var_4] = 0;

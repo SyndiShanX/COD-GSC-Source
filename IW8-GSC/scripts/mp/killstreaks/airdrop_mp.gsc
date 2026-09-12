@@ -104,7 +104,7 @@ function br_armor_plate_broken_remove(var_0) {
   var_2.streaklifeid = self.lifeid;
   var_2.ref_13913 = self.matchdatalifeindex;
   var_2.owner = self;
-  var_2.ref_121b0 = self getxuid();
+  var_2.ref_121B0 = self getxuid();
   var_2.attackerisinflictor = scripts\mp\matchdata::gettimefrommatchstart(gettime());
   scripts\mp\analyticslog::logevent_killstreakactivated(self, var_2.streaklifeid, var_2.streakname, var_2.isgimme, var_2.attackerisinflictor, self.origin);
   scripts\mp\killstreaks\killstreaks::combatrecordkillstreakuse(var_1);

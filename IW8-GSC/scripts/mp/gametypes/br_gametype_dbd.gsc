@@ -5,10 +5,10 @@
 
 function init() {
   setDvar("scr_br_altprematchloadout", "classtable_brdbd_prematch");
-  scripts\mp\gametypes\br_gametypes::ref_12b11("modifyPlayerDamage", &modifyplayerdamage);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("regenHealthAdd", &ref_1264b);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("postMainInit", &ref_12803);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerNakedDropLoadout", &ref_12604);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("modifyPlayerDamage", &modifyplayerdamage);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("regenHealthAdd", &ref_1264B);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("postMainInit", &ref_12803);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerNakedDropLoadout", &ref_12604);
 
   if(getdvarint("scr_br_dbd_vehicle_littlebird", 0) == 0) {
     scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("littleBirdSpawns");
@@ -34,7 +34,7 @@ function init() {
     scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("motorcycleSpawns");
   }
 
-  level.ref_11c95 = &ref_11c95;
+  level.ref_11C95 = &ref_11C95;
   level.disable_super_in_turret.iscodecorrect = getdvarint("scr_br_dbd_hsdowndistance", 3550);
   level.disable_super_in_turret.iscontender = getdvarint("scr_br_dbd_healthregenrate", 1);
   level.disable_super_in_turret.iscloseto = getdvarfloat("scr_br_dbd_gasdamagesclar", 2.5);
@@ -86,7 +86,7 @@ function usefailvehiclemsg(var_0) {
   return var_0 == "iw8_sn_delta" || var_0 == "iw8_sn_golf28" || var_0 == "iw8_sn_mike14" || var_0 == "iw8_sn_sbeta" || var_0 == "iw8_sn_sksierra" || var_0 == "s4_mr_gecho43" || var_0 == "s4_mr_m1golf" || var_0 == "s4_mr_svictor40" || var_0 == "s4_mr_malpha1916";
 }
 
-function ref_1264b(var_0) {
+function ref_1264B(var_0) {
   if(istrue(self.adrenalinepoweractive)) {
     return int(level.disable_super_in_turret.iscontender * level.disable_super_in_turret.iscrossbowbolt);
   }
@@ -94,7 +94,7 @@ function ref_1264b(var_0) {
   return int(level.disable_super_in_turret.iscontender);
 }
 
-function ref_11c95(var_0) {
+function ref_11C95(var_0) {
   return int(var_0 * level.disable_super_in_turret.iscloseto);
 }
 

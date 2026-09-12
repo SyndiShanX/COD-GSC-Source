@@ -159,10 +159,10 @@ function vehicle_mines_isfriendlytomine(var_0) {
     }
 
     if(isDefined(var_1)) {
-      return scripts\cp_mp\vehicles\vehicle::ref_141ba(self, var_1);
+      return scripts\cp_mp\vehicles\vehicle::ref_141BA(self, var_1);
     }
   } else if(isDefined(var_0.owner)) {
-    return scripts\cp_mp\vehicles\vehicle::ref_141b9(self, var_0.owner);
+    return scripts\cp_mp\vehicles\vehicle::ref_141B9(self, var_0.owner);
   }
 
   return 0;

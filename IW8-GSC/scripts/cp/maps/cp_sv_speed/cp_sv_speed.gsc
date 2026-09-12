@@ -76,7 +76,7 @@ function main() {
   level.eogscoreboard = ["currency", "kills", "headShots", "downs", "revives"];
   scripts\cp\cp_compass::setupminimap("compass_map_mp_m_speed");
   scripts\engine\utility::flag_set("infil_complete");
-  thread ref_139c6();
+  thread ref_139C6();
 }
 
 function rundebugstartobjective(var_0) {
@@ -223,7 +223,7 @@ function register_create_script_arrays(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_139c6() {
+function ref_139C6() {
   var_0 = getEnt("crane", "targetname");
   var_1 = getEntArray("crane_bits", "targetname");
 
@@ -232,10 +232,10 @@ function ref_139c6() {
   }
 
   var_0.ref_12149 = var_0.angles;
-  thread ref_139c8(var_0);
+  thread ref_139C8(var_0);
 }
 
-function ref_139c8(var_0) {
+function ref_139C8(var_0) {
   level endon("game_ended");
   var_1 = 0.75;
 

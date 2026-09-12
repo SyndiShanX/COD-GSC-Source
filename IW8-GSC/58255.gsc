@@ -23,18 +23,18 @@ function playertimestart() {
 }
 
 function playertospectate() {
-  var_0 = scripts\mp\gametypes\br_plunder::ref_1278c("equip_mp_fulton", 1);
+  var_0 = scripts\mp\gametypes\br_plunder::ref_1278C("equip_mp_fulton", 1);
   var_0.type = 0;
   var_0.usetime = getdvarfloat("scr_fultonUseTime", 0.75);
   var_0.ref_14077 = 2;
   var_0.ref_14075 = getdvarint("scr_fultonUseAmount", 250);
-  var_0.ref_13acc = 1;
-  var_0.ref_13aa5 = 1;
+  var_0.ref_13ACC = 1;
+  var_0.ref_13AA5 = 1;
   var_0.ref_14078 = "MP/CANNOT_DEPOSIT_CASH_BALLOON_FULL";
   var_0.ref_14079 = "MP/CANNOT_DEPOSIT_CASH_BALLOON_LEAVING";
-  var_0.ref_12f7d = "fulton_use_cache";
-  var_0.ref_12f7e = "usable";
-  var_0.ref_12f77 = "unusable";
+  var_0.ref_12F7D = "fulton_use_cache";
+  var_0.ref_12F7E = "usable";
+  var_0.ref_12F77 = "unusable";
   var_0.origin_delta = getdvarint("scr_fultonCountdown", 20);
   var_0.original_disablelongdeath = "MP/CASH_BALLOON_LEAVING_IN_N";
   var_0.get_closest_enemy_near_turret = getdvarint("scr_fultonCapacity", 1500);
@@ -65,8 +65,8 @@ function playersusing(var_0) {
 }
 
 function playerswithoutdismemberment(var_0) {
-  var_1 = scripts\mp\gametypes\br_plunder::ref_1278c("equip_mp_fulton");
-  thread scripts\mp\gametypes\br::ref_13ac7("br_fulton_balloon_shot_down", self.owner, self.team);
+  var_1 = scripts\mp\gametypes\br_plunder::ref_1278C("equip_mp_fulton");
+  thread scripts\mp\gametypes\br::ref_13AC7("br_fulton_balloon_shot_down", self.owner, self.team);
   scripts\mp\gametypes\br_plunder::num_rocket_per_attack(var_1.dropplunder);
   playFX(scripts\engine\utility::getfx("vfx_fulton_explode"), self.origin, anglesToForward(self.angles));
   playsoundatpos(self.origin, "br_fulton_extract_exp");
@@ -130,11 +130,11 @@ function playerumpedfromplane() {
   self endon("death");
   self endon("start_extract");
   playsoundatpos(self.origin, "fulton_bag_drop");
-  thread scripts\mp\gametypes\br::ref_13ac7("br_fulton_device_placed", self.owner, self.team);
+  thread scripts\mp\gametypes\br::ref_13AC7("br_fulton_device_placed", self.owner, self.team);
   var_0 = scripts\mp\utility\teams::getfriendlyplayers(self.team);
   scripts\mp\gametypes\br_plunder::ref_12796(self, "equip_mp_fulton");
-  thread scripts\mp\gametypes\br_plunder::ref_127a4(self, var_0);
-  scripts\mp\gametypes\br_plunder::ref_127aa(self, var_0);
+  thread scripts\mp\gametypes\br_plunder::ref_127A4(self, var_0);
+  scripts\mp\gametypes\br_plunder::ref_127AA(self, var_0);
   var_1 = spawn("script_model", self.origin);
   var_1 setModel("tag_origin");
   var_1.angles = self.angles * (0, 1, 0);
@@ -147,7 +147,7 @@ function playerumpedfromplane() {
   }
 
   playertracking();
-  var_2 = scripts\mp\gametypes\br_plunder::ref_1278c("equip_mp_fulton", 1);
+  var_2 = scripts\mp\gametypes\br_plunder::ref_1278C("equip_mp_fulton", 1);
 
   if(var_2.get_chopper_boss_combat_action) {
     thread scripts\mp\damage::monitordamage(500, "", &playerteleporttoloc, &playerteleportprop);
@@ -193,8 +193,8 @@ function playerteleporttoloc(var_0) {
 }
 
 function playerusehealslot(var_0, var_1, var_2) {
-  var_3 = scripts\mp\gametypes\br_plunder::ref_1278c("equip_mp_fulton");
-  var_1 thread scripts\mp\gametypes\br_plunder::ref_1261f(var_2, var_3.ref_14077, var_0);
+  var_3 = scripts\mp\gametypes\br_plunder::ref_1278C("equip_mp_fulton");
+  var_1 thread scripts\mp\gametypes\br_plunder::ref_1261F(var_2, var_3.ref_14077, var_0);
 }
 
 function playerupdatebesttimehud(var_0, var_1) {
@@ -202,16 +202,16 @@ function playerupdatebesttimehud(var_0, var_1) {
     var_0.owner.playerstartpowers = undefined;
   }
 
-  scripts\mp\gametypes\br_plunder::ref_1279d(var_0);
+  scripts\mp\gametypes\br_plunder::ref_1279D(var_0);
 }
 
 function playerupdatehudstate(var_0) {
   var_0 endon("death");
-  var_1 = scripts\mp\gametypes\br_plunder::ref_1278c("equip_mp_fulton");
+  var_1 = scripts\mp\gametypes\br_plunder::ref_1278C("equip_mp_fulton");
   var_2 = undefined;
   var_0 scripts\mp\damage::monitordamageend();
   var_2 = scripts\mp\gametypes\br_plunder::num_players_in_safehouse();
-  thread scripts\mp\gametypes\br::ref_13ac7("br_fulton_balloon_successfully_away", self.owner, self.team);
+  thread scripts\mp\gametypes\br::ref_13AC7("br_fulton_balloon_successfully_away", self.owner, self.team);
   self notify("fulton_takeoff");
   self playsoundonmovingent("br_fulton_balloon_away");
   self.scenenode scripts\common\anim::anim_single_solo(self, "fulton_takeoff");
@@ -219,7 +219,7 @@ function playerupdatehudstate(var_0) {
 }
 
 function playerupdatealivecounthuman(var_0) {
-  thread scripts\mp\gametypes\br::ref_13ac7("br_fulton_balloon_full", var_0.owner, var_0.team);
+  thread scripts\mp\gametypes\br::ref_13AC7("br_fulton_balloon_full", var_0.owner, var_0.team);
 }
 
 function playerstreamhintdroptoground(var_0) {
@@ -242,8 +242,8 @@ function playerunpackdatafromomnvar() {
   self notify("super_use_finished");
   scripts\cp\vehicles\vehicle_compass_cp::ref_12097(self.super, 1);
   var_0 = scripts\mp\supers::getcurrentsuper();
-  scripts\mp\supers::ref_131c7(0);
-  scripts\mp\supers::ref_131c6(0);
+  scripts\mp\supers::ref_131C7(0);
+  scripts\mp\supers::ref_131C6(0);
   var_0.wasrefunded = 1;
   scripts\mp\supers::setsuperbasepoints(scripts\mp\supers::getsuperpointsneeded());
 }

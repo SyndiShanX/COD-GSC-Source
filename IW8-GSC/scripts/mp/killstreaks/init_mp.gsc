@@ -21,7 +21,7 @@ function init() {
   thread scripts\mp\killstreaks\death_switch::init();
   thread _getequipmentammotomax::init();
   thread _handlekillstreakpurchase::init();
-  thread _handlespecialpurchase::ref_12a27();
+  thread _handlespecialpurchase::ref_12A27();
   thread _getplunderextractlocations::init();
   thread _getlocationscircleinfluencedwithnoise::init();
   thread _getrandomlocations::init();

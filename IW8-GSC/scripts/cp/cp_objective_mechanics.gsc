@@ -211,14 +211,14 @@ function starthackingdefense(var_0, var_1, var_2, var_3, var_4) {
           var_21.inhackring = undefined;
 
           if(scripts\cp\cp_relics::try_start_fake_infil_chopper("relic_landlocked")) {
-            var_21 thread scripts\cp\cp_relics::ref_12b7e(var_21);
+            var_21 thread scripts\cp\cp_relics::ref_12B7E(var_21);
           }
         }
 
         continue;
       }
 
-      if(istrue(var_0.ref_1405d)) {
+      if(istrue(var_0.ref_1405D)) {
         var_22 = scripts\engine\trace::create_contents(0, 1, 1, 0, 0, 0);
 
         if(!scripts\engine\trace::ray_trace_passed(var_21 getEye(), var_13, [var_21], var_22)) {

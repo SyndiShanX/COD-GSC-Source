@@ -181,7 +181,7 @@ function any_player_within_distance3d(var_0) {
   }
 
   thread scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var_0.streakname, 1, var_3);
-  scripts\common\utility::ref_13e0a(level.ref_11b2a, "hover_jet", self.origin);
+  scripts\common\utility::ref_13E0A(level.ref_11B2A, "hover_jet", self.origin);
   thread scripts\mp\hud_util::teamplayercardsplash("used_hover_jet", self);
   return true;
 }
@@ -530,8 +530,8 @@ function hoverjet_watchlifetime(var_0) {
 function spawn_script_model_driver_and_passengers() {
   self endon("death");
   level waittill("game_ended");
-  self.ref_12aa4 = 1;
-  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+  self.ref_12AA4 = 1;
+  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
 }
 
 function hoverjet_watchowner() {
@@ -702,7 +702,7 @@ function hoverjet_getbestgroundtarget() {
       }
     }
 
-    if(istrue(var_5.ref_13a93)) {
+    if(istrue(var_5.ref_13A93)) {
       var_7 = 1;
       var_8 += 40;
     }
@@ -1158,8 +1158,8 @@ function hoverjet_cleanup(var_0) {
   self setscriptablepartstate("thrusters", "off", 0);
   self.streakinfo.onspray = istrue(var_0);
 
-  if(!istrue(self.ref_12aa4)) {
-    self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+  if(!istrue(self.ref_12AA4)) {
+    self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
   }
 
   level.hoverjets = scripts\engine\utility::array_remove(level.hoverjets, self);

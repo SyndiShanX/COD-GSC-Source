@@ -20,10 +20,10 @@ function callback_defaultplayerlaststand(var_0, var_1, var_2, var_3, var_4, var_
 
   var_10 = scripts\cp\cp_endgame::get_current_zone(self);
   var_11 = 1;
-  scripts\cp\cp_analytics::ref_119b2(self, var_1);
+  scripts\cp\cp_analytics::ref_119B2(self, var_1);
 
-  if(isDefined(level.ref_121d1)) {
-    self[[level.ref_121d1]]();
+  if(isDefined(level.ref_121D1)) {
+    self[[level.ref_121D1]]();
   }
 
   default_playerlaststand(var_9, var_1);
@@ -126,7 +126,7 @@ function dropintolaststand(var_0, var_1, var_2) {
   self.trackriotshield_trydetach = 0;
   exit_laststand();
   exit_globaldefaultaction();
-  thread scripts\cp\cp_weapon::ref_13c58(1);
+  thread scripts\cp\cp_weapon::ref_13C58(1);
   exit_gamemodespecificaction();
 }
 
@@ -136,7 +136,7 @@ function setteamplunderhud() {
     return;
   }
 
-  if(scripts\cp\cp_weapon::ref_124ad(self)) {
+  if(scripts\cp\cp_weapon::ref_124AD(self)) {
     if(!istrue(self.isjuggernaut)) {
       scripts\cp\cp_loadout::drop_special_item();
       return;
@@ -151,7 +151,7 @@ function setupcellspawn() {
   GscBinSkip4(0x35);
 }
 
-function ref_11daa() {
+function ref_11DAA() {
   self endon("disconnect");
   self.watch_for_maze_ai_events = self.origin;
   var_0 = 2500;
@@ -170,7 +170,7 @@ function ref_11daa() {
 function enter_laststand() {
   self.last_stand_state = "last_stand";
   self.inlaststand = 1;
-  self.ref_140ae = undefined;
+  self.ref_140AE = undefined;
   self.health = 1;
   scripts\common\utility::allow_usability(0);
   scripts\cp\utility::allow_player_ignore_me(1);
@@ -229,7 +229,7 @@ function wasinlaststand() {
 }
 
 function set_cam(var_0) {
-  if(istrue(self.ref_12bab)) {
+  if(istrue(self.ref_12BAB)) {
     self setcamerathirdperson(1);
     return;
   }
@@ -325,7 +325,7 @@ function enter_globaldefaultaction() {
     self.pre_laststand_weapon_ammo_clip = self getweaponammoclip(self.pre_laststand_weapon);
   }
 
-  scripts\cp_mp\parachute::ref_121ca();
+  scripts\cp_mp\parachute::ref_121CA();
   self.being_revived = 0;
   check_for_invalid_attachments();
   thread only_use_weapon();
@@ -762,11 +762,11 @@ function wait_to_be_revived(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
   }
 
   if(var_14 == "timeout" && is_being_revived(var_1)) {
-    var_14 = var_13 scripts\engine\utility::ref_143ad("revive_success", "revive_fail");
+    var_14 = var_13 scripts\engine\utility::ref_143AD("revive_success", "revive_fail");
   }
 
-  if(var_14 == "timeout" && ref_124c4(var_1)) {
-    var_14 = var_13 scripts\engine\utility::ref_143ad("revive_success", "revive_fail");
+  if(var_14 == "timeout" && ref_124C4(var_1)) {
+    var_14 = var_13 scripts\engine\utility::ref_143AD("revive_success", "revive_fail");
   }
 
   if(isDefined(var_1.reviveent)) {
@@ -813,7 +813,7 @@ function teleport_to_location() {
   }
 
   level endon("game_ended");
-  scripts\engine\utility::ref_143b9(3, "revive");
+  scripts\engine\utility::ref_143B9(3, "revive");
   self setOrigin(level.manual_revive_location);
 }
 
@@ -887,13 +887,13 @@ function laststandwaittillrevivebyteammate(var_0, var_1) {
       continue;
     }
 
-    if(!isDefined(var_2.ref_12d16)) {
-      var_2.ref_12d16 = 0;
+    if(!isDefined(var_2.ref_12D16)) {
+      var_2.ref_12D16 = 0;
     }
 
-    if(gettime() > var_2.ref_12d16) {
+    if(gettime() > var_2.ref_12D16) {
       level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var_2, "reviving");
-      var_2.ref_12d16 = gettime() + 10000;
+      var_2.ref_12D16 = gettime() + 10000;
     }
 
     var_2 notify("started_revive");
@@ -912,8 +912,8 @@ function laststandwaittillrevivebyteammate(var_0, var_1) {
       thread play_laststand_scripted_anim(var_2, var_0);
     }
 
-    thread ref_12d1b(level, self);
-    thread ref_12d17(level, var_0);
+    thread ref_12D1B(level, self);
+    thread ref_12D17(level, var_0);
     var_3 = get_revive_result(var_0, var_2, self.origin, int(var_1));
     enable_bleedout_ent_usability(var_0);
 
@@ -921,21 +921,21 @@ function laststandwaittillrevivebyteammate(var_0, var_1) {
       if(scripts\cp\utility::tryingtoleave()) {
         var_2 scripts\common\utility::allow_weapon(1);
       } else {
-        if(isDefined(var_2.ref_12d13)) {
-          var_2 setOrigin(var_2.ref_12d13);
-          var_2.ref_12d13 = undefined;
+        if(isDefined(var_2.ref_12D13)) {
+          var_2 setOrigin(var_2.ref_12D13);
+          var_2.ref_12D13 = undefined;
         }
 
         var_0.run_kill_watcher = 1;
         clear_last_stand_timer(var_0);
 
-        if(isDefined(level.ref_127f4)) {
-          var_0 thread[[level.ref_127f4]]();
+        if(isDefined(level.ref_127F4)) {
+          var_0 thread[[level.ref_127F4]]();
         }
 
         wait 2;
         var_2.ability_invulnerable = 1;
-        thread ref_12c4d();
+        thread ref_12C4D();
         set_cam(var_2);
         var_2 unlink();
         var_2 scripts\engine\utility::delaythread(1, &scripts\cp\utility::force_usability_enabled);
@@ -951,7 +951,7 @@ function laststandwaittillrevivebyteammate(var_0, var_1) {
 
       record_revive_success(var_2, var_0);
       var_2 notify("revive_teammate", var_0);
-      scripts\cp\cp_analytics::ref_119bc(var_0, var_2);
+      scripts\cp\cp_analytics::ref_119BC(var_0, var_2);
       var_4 = scripts\cp\cp_endgame::get_current_zone(var_2);
       var_5 = 1;
       var_0.last_stand_state = undefined;
@@ -966,7 +966,7 @@ function laststandwaittillrevivebyteammate(var_0, var_1) {
 
     var_2 notify("revive_done");
     var_0 notify("revive_done");
-    set_revive_icon_color(var_0.reviveent, var_0.reviveent.ref_12d11, 1);
+    set_revive_icon_color(var_0.reviveent, var_0.reviveent.ref_12D11, 1);
 
     if(!var_2 scripts\cp_mp\utility\player_utility::_isalive() || var_2.inlaststand) {
       var_0.reviveent disableplayeruse(var_2);
@@ -979,14 +979,14 @@ function laststandwaittillrevivebyteammate(var_0, var_1) {
       var_2 scripts\engine\utility::delaythread(1.5, &scripts\cp\utility::force_usability_enabled);
     }
 
-    if(isDefined(var_2.ref_12d14)) {
-      var_2.ref_12d14 delete();
-      var_2.ref_12d14 = undefined;
+    if(isDefined(var_2.ref_12D14)) {
+      var_2.ref_12D14 delete();
+      var_2.ref_12D14 = undefined;
     }
 
-    if(isDefined(var_2.ref_12d13)) {
-      var_2 setOrigin(var_2.ref_12d13);
-      var_2.ref_12d13 = undefined;
+    if(isDefined(var_2.ref_12D13)) {
+      var_2 setOrigin(var_2.ref_12D13);
+      var_2.ref_12D13 = undefined;
     }
 
     self notify("revive_fail");
@@ -1007,7 +1007,7 @@ function milestonephasepercent_vips(var_0, var_1) {
   }
 }
 
-function ref_12d1b(var_0, var_1) {
+function ref_12D1B(var_0, var_1) {
   var_0 endon("revive_fail");
   var_0 endon("revive_success");
   var_1 endon("death_or_disconnect");
@@ -1015,7 +1015,7 @@ function ref_12d1b(var_0, var_1) {
   var_1 scripts\engine\utility::delaythread(1.5, &scripts\cp\utility::force_usability_enabled);
 }
 
-function ref_12d17(var_0, var_1) {
+function ref_12D17(var_0, var_1) {
   var_0 endon("revive_done");
   var_1 endon("revive_done");
   var_1 endon("disconnect");
@@ -1030,7 +1030,7 @@ function playeriscinematicblacklayeron() {
   scripts\cp\utility::force_usability_enabled();
 }
 
-function ref_12c4d() {
+function ref_12C4D() {
   self endon("disconnect");
   wait 2;
   self.ability_invulnerable = undefined;
@@ -1365,7 +1365,7 @@ function can_use_pistol_during_last_stand(var_0) {
 
 function cleanuplaststandent(var_0) {
   self endon("death");
-  var_0 scripts\engine\utility::ref_143a6("death", "disconnect", "revive");
+  var_0 scripts\engine\utility::ref_143A6("death", "disconnect", "revive");
   wait 2;
   self delete();
 }
@@ -1438,11 +1438,11 @@ function everyone_else_all_in_laststand(var_0) {
       continue;
     }
 
-    if(ref_124c0(var_2)) {
+    if(ref_124C0(var_2)) {
       continue;
     }
 
-    if(ref_124c4(var_2)) {
+    if(ref_124C4(var_2)) {
       return false;
     }
 
@@ -1629,14 +1629,14 @@ function revive_use_hold_think(var_0, var_1, var_2, var_3) {
 function playericontriggerenter() {
   self endon("last_stand");
 
-  if(isDefined(self.ref_12d14)) {
-    self.ref_12d14 delete();
+  if(isDefined(self.ref_12D14)) {
+    self.ref_12D14 delete();
     self notify("remove_stim");
   }
 
   self cameradefault();
 
-  if(istrue(self.ref_12bab)) {
+  if(istrue(self.ref_12BAB)) {
     self setcamerathirdperson(1);
   } else {
     self setcamerathirdperson(0);
@@ -1698,7 +1698,7 @@ function enter_revive_use_hold_think(var_0, var_1, var_2, var_3) {
     var_0 scripts\common\utility::allow_movement(0);
   }
 
-  ref_1199b(var_1);
+  ref_1199B(var_1);
   var_0.being_revived = 1;
 
   if(isPlayer(var_1)) {
@@ -1708,7 +1708,7 @@ function enter_revive_use_hold_think(var_0, var_1, var_2, var_3) {
   var_1.isreviving = 1;
 }
 
-function ref_1199b(var_0) {
+function ref_1199B(var_0) {
   var_1 = var_0 getstance();
 
   switch (var_1) {
@@ -1792,7 +1792,7 @@ function wait_for_exit_revive_use_hold_think(var_0, var_1, var_2, var_3) {
   var_2 notify("exit_use_hold_think_complete");
 }
 
-function ref_12c51() {
+function ref_12C51() {
   self endon("disconnect");
   wait 1.6;
   self.being_revived = 0;
@@ -1922,7 +1922,7 @@ function get_currency_penalty_amount(var_0) {
 function makereviveicon(var_0, var_1, var_2, var_3) {
   setup_revive_icon_ent(var_0);
   var_0.current_revive_icon_color = var_2;
-  var_0.ref_12d11 = var_2;
+  var_0.ref_12D11 = var_2;
   thread reviveiconentcleanup(var_0);
   var_4 = undefined;
 
@@ -1975,10 +1975,10 @@ function revive_icon_color_management(var_0, var_1) {
   level endon("game_ended");
   wait var_0 / 3;
   set_revive_icon_color(self, (1, 0.941, 0));
-  self.ref_12d11 = (1, 0.941, 0);
+  self.ref_12D11 = (1, 0.941, 0);
   wait var_0 / 3;
   set_revive_icon_color(self, (0.929, 0.231, 0.141));
-  self.ref_12d11 = (0.929, 0.231, 0.141);
+  self.ref_12D11 = (0.929, 0.231, 0.141);
 }
 
 function set_revive_icon_color(var_0, var_1, var_2) {
@@ -2092,7 +2092,7 @@ function self_revive_activated() {
     return true;
   }
 
-  if(istrue(self.ref_140ac)) {
+  if(istrue(self.ref_140AC)) {
     return true;
   }
 
@@ -2160,15 +2160,15 @@ function is_being_revived(var_0) {
   return istrue(var_0.being_revived);
 }
 
-function ref_124c4(var_0) {
-  return istrue(var_0.ref_140ac);
+function ref_124C4(var_0) {
+  return istrue(var_0.ref_140AC);
 }
 
 function player_in_laststand(var_0) {
   return var_0.inlaststand;
 }
 
-function ref_124c0(var_0) {
+function ref_124C0(var_0) {
   return istrue(var_0.fauxdead);
 }
 
@@ -2207,7 +2207,7 @@ function self_revive(var_0) {
     var_1 = var_0.self_revive_wait_override;
   }
 
-  var_0 scripts\engine\utility::ref_143b9(var_1, "revive_success");
+  var_0 scripts\engine\utility::ref_143B9(var_1, "revive_success");
   return true;
 }
 
@@ -2336,7 +2336,7 @@ function give_up_monitor() {
   self notifyonplayercommand("release_requested", "+smoke");
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143ba(0.3, "give_up_requested", "release_requested");
+    var_0 = scripts\engine\utility::ref_143BA(0.3, "give_up_requested", "release_requested");
 
     if(isDefined(var_0) && var_0 == "timeout") {
       self.give_up_counter--;
@@ -2493,7 +2493,7 @@ function give_up_easy_setup(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
       break;
     }
 
-    if(is_being_revived(var_0) || ref_124c4(var_0)) {
+    if(is_being_revived(var_0) || ref_124C4(var_0)) {
       var_12 = 0;
       continue;
     }
@@ -2986,49 +2986,49 @@ function init_laststand_anims() {
   level.scr_anim["ls_revive_helper"]["out_prone_9"] = % sdr_mp_laststand_prone_revive_out_helper_9;
   level.scr_animname["ls_revive_helper"]["out_prone_9"] = "sdr_mp_laststand_prone_revive_out_helper_9";
   level.scr_eventanim["ls_revive_helper"]["out_prone_9"] = "ls_prone_h_out_9";
-  scripts\common\anim::addnotetrack_customfunction("ls_revive_wounded", "cp_foley_revive_wounded_down", &ref_12d18);
-  scripts\common\anim::addnotetrack_customfunction("ls_revive_wounded", "cp_last_stand_revive_out_wounded", &ref_12d19);
-  scripts\common\anim::addnotetrack_customfunction("ls_revive_wounded", "cp_foley_revive_wounded_recover_standing", &ref_12d1a);
-  scripts\common\anim::addnotetrack_customfunction("ls_revive_helper", "stim_attach", &ref_139de);
-  scripts\common\anim::addnotetrack_customfunction("ls_revive_helper", "syringe_inject", &ref_139dd);
-  scripts\common\anim::addnotetrack_customfunction("ls_revive_helper", "syringe_finish", &ref_139da);
-  scripts\common\anim::addnotetrack_customfunction("ls_revive_helper", "syringe_finish_crouching", &ref_139db);
-  scripts\common\anim::addnotetrack_customfunction("ls_revive_helper", "syringe_finish_standing", &ref_139dc);
+  scripts\common\anim::addnotetrack_customfunction("ls_revive_wounded", "cp_foley_revive_wounded_down", &ref_12D18);
+  scripts\common\anim::addnotetrack_customfunction("ls_revive_wounded", "cp_last_stand_revive_out_wounded", &ref_12D19);
+  scripts\common\anim::addnotetrack_customfunction("ls_revive_wounded", "cp_foley_revive_wounded_recover_standing", &ref_12D1A);
+  scripts\common\anim::addnotetrack_customfunction("ls_revive_helper", "stim_attach", &ref_139DE);
+  scripts\common\anim::addnotetrack_customfunction("ls_revive_helper", "syringe_inject", &ref_139DD);
+  scripts\common\anim::addnotetrack_customfunction("ls_revive_helper", "syringe_finish", &ref_139DA);
+  scripts\common\anim::addnotetrack_customfunction("ls_revive_helper", "syringe_finish_crouching", &ref_139DB);
+  scripts\common\anim::addnotetrack_customfunction("ls_revive_helper", "syringe_finish_standing", &ref_139DC);
 }
 
-function ref_139de(var_0) {
+function ref_139DE(var_0) {
   var_0.entity notify("spawn_stim");
   var_0 playsoundonmovingent("cp_foley_revive_helper_syringe_out");
 }
 
-function ref_139dd(var_0) {
+function ref_139DD(var_0) {
   var_0 playsoundonmovingent("cp_foley_revive_helper_syringe_inject");
 }
 
-function ref_139da(var_0) {
+function ref_139DA(var_0) {
   var_0 playsoundonmovingent("cp_foley_revive_helper_syringe_finish");
   var_0.entity notify("remove_stim");
 }
 
-function ref_139db(var_0) {
+function ref_139DB(var_0) {
   var_0 playsoundonmovingent("cp_foley_revive_helper_recover_crouching");
   var_0.entity notify("remove_stim");
 }
 
-function ref_139dc(var_0) {
+function ref_139DC(var_0) {
   var_0 playsoundonmovingent("cp_last_stand_revive_out_helper");
   var_0.entity notify("remove_stim");
 }
 
-function ref_12d18(var_0) {
+function ref_12D18(var_0) {
   var_0 playsoundonmovingent("cp_foley_revive_wounded_down");
 }
 
-function ref_12d19(var_0) {
+function ref_12D19(var_0) {
   var_0 playsoundonmovingent("cp_last_stand_revive_out_wounded");
 }
 
-function ref_12d1a(var_0) {
+function ref_12D1A(var_0) {
   var_0 playsoundonmovingent("cp_foley_revive_wounded_recover_standing");
 }
 
@@ -3044,7 +3044,7 @@ function play_laststand_scripted_anim(var_0, var_1) {
   var_5.origin = var_1.origin;
   var_5.angles = var_1.angles;
   var_1.scenenode = var_5;
-  var_0.ref_12d13 = var_0.origin;
+  var_0.ref_12D13 = var_0.origin;
   thread killstreaktoscorestreak_killtoscore();
   thread killstreaktoscorestreak_killtoscore();
   var_6 = "in_" + var_2.xanim_name;
@@ -3097,7 +3097,7 @@ function handle_stim(var_0) {
   self endon("handle_stim");
   self waittill("spawn_stim");
 
-  if(isDefined(self.ref_12d14)) {
+  if(isDefined(self.ref_12D14)) {
     return;
   }
 
@@ -3105,14 +3105,14 @@ function handle_stim(var_0) {
   var_1.angles = self gettagangles("tag_accessory_right");
   var_1 setModel("offhand_wm_stim");
   var_1 linkTo(self, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
-  self.ref_12d14 = var_1;
+  self.ref_12D14 = var_1;
   scripts\engine\utility::waittill_any_ents(self, "remove_stim", self, "revive_done", self, "revive_teammate", self, "disconnect", self, "last_stand", var_0, "disconnect", var_0, "entered_spectate");
 
   if(isDefined(var_1)) {
     var_1 delete();
   }
 
-  self.ref_12d14 = undefined;
+  self.ref_12D14 = undefined;
 }
 
 function get_closest_ls_entrance(var_0, var_1) {

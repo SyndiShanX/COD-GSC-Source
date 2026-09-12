@@ -8,15 +8,15 @@ function spectate_init() {
 }
 
 function initplayer() {
-  ref_1252a();
+  ref_1252A();
 }
 
 function regive_killstreak_after_use(var_0, var_1) {
   var_2 = undefined;
 
-  if(isDefined(var_0.ref_11e80)) {
-    var_2 = reset_use_puzzle_effects(var_0.ref_11e80);
-    var_0.ref_11e80 = undefined;
+  if(isDefined(var_0.ref_11E80)) {
+    var_2 = reset_use_puzzle_effects(var_0.ref_11E80);
+    var_0.ref_11E80 = undefined;
   }
 
   if(!isDefined(var_2)) {
@@ -35,7 +35,7 @@ function regive_killstreak_after_use(var_0, var_1) {
 
   if(!isDefined(var_2)) {
     if(isDefined(var_1) && isPlayer(var_1) && var_1.team != var_0.team) {
-      if(isalive(var_1) && !istrue(var_1.gulag) && !istrue(var_1.inlaststand) && !var_1 scripts\mp\gametypes\br_public::ref_125f3()) {
+      if(isalive(var_1) && !istrue(var_1.gulag) && !istrue(var_1.inlaststand) && !var_1 scripts\mp\gametypes\br_public::ref_125F3()) {
         var_2 = var_1;
       } else {
         var_4 = scripts\mp\utility\teams::getfriendlyplayers(var_1.team);
@@ -47,7 +47,7 @@ function regive_killstreak_after_use(var_0, var_1) {
   if(!isDefined(var_2) && isPlayer(var_1) && var_1 != var_0) {
     var_2 = reset_use_puzzle_effects(var_1);
 
-    if(isDefined(var_2) && var_2 scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(isDefined(var_2) && var_2 scripts\mp\gametypes\br_public::ref_125F3()) {
       var_2 = undefined;
     }
   }
@@ -131,7 +131,7 @@ function registeruniquelootcallback(var_0, var_1, var_2) {
       continue;
     }
 
-    if(var_9 scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(var_9 scripts\mp\gametypes\br_public::ref_125F3()) {
       var_7 = var_9;
       continue;
     }
@@ -168,7 +168,7 @@ function vandalize_target_think(var_0) {
   }
 
   if(istrue(scripts\mp\gametypes\br_gametypes::tutorial_showtext("isValidSpectateTarget"))) {
-    return scripts\mp\gametypes\br_gametypes::ref_12e05("isValidSpectateTarget", var_0);
+    return scripts\mp\gametypes\br_gametypes::ref_12E05("isValidSpectateTarget", var_0);
   }
 
   if(!isalive(var_0) && !istrue(var_0.respawningfromtoken) && (istrue(var_0.gulagarena) || !istrue(var_0.gulag))) {
@@ -184,12 +184,12 @@ function ref_13668(var_0) {
   if(istrue(level.ref_14603) && level.ref_14603 == 6 && getdvarint("scr_br_x1_intermission_location_enabled", 1)) {
     var_1.origin = getdvarvector("scr_br_x1_intermission_origin", (29247, 1991, 6334));
     var_1.angles = getdvarvector("scr_br_x1_intermission_angles", (85, 135, 0));
-  } else if(isDefined(level.ref_12d05) && level.ref_12d05 == 2 && getdvarint("scr_br_dov1_intermission_location_enabled", 1)) {
+  } else if(isDefined(level.ref_12D05) && level.ref_12D05 == 2 && getdvarint("scr_br_dov1_intermission_location_enabled", 1)) {
     var_1.origin = getdvarvector("scr_br_dov1_intermission_origin", (29247, 1991, 6334));
     var_1.angles = getdvarvector("scr_br_dov1_intermission_angles", (85, 135, 0));
-  } else if(isDefined(var_0.ref_136dc)) {
-    var_1 = var_0.ref_136dc;
-    var_0.ref_136dc = undefined;
+  } else if(isDefined(var_0.ref_136DC)) {
+    var_1 = var_0.ref_136DC;
+    var_0.ref_136DC = undefined;
   } else {
     var_1.origin = var_0.origin + (0, 0, 100);
     var_1.angles = var_0.angles;
@@ -210,10 +210,10 @@ function spawnspectator(var_0, var_1, var_2) {
     return;
   }
 
-  thread scripts\mp\gametypes\br_gulag::ref_126aa();
+  thread scripts\mp\gametypes\br_gulag::ref_126AA();
 
   if(!istrue(var_2)) {
-    thread ref_13dc2();
+    thread ref_13DC2();
   }
 
   var_4 = undefined;
@@ -235,7 +235,7 @@ function spawnspectator(var_0, var_1, var_2) {
   }
 }
 
-function ref_13dc2() {
+function ref_13DC2() {
   self endon("disconnect");
   self endon("br_team_fully_eliminated");
   var_0 = scripts\mp\utility\teams::getfriendlyplayers(self.team, 1);
@@ -252,7 +252,7 @@ function ref_13dc2() {
         var_1 = 0;
         break;
       case "truckwar":
-        var_1 = !isDefined(level.ref_13ace) || !isDefined(level.ref_13ace[self.team]);
+        var_1 = !isDefined(level.ref_13ACE) || !isDefined(level.ref_13ACE[self.team]);
         break;
     }
 
@@ -269,12 +269,12 @@ function ref_13dc2() {
   }
 }
 
-function ref_125c9() {
+function ref_125C9() {
   var_0 = 0;
   var_1 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.team, self.squadindex);
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3) && self != var_3 && isalive(var_3) && !var_3 scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(isDefined(var_3) && self != var_3 && isalive(var_3) && !var_3 scripts\mp\gametypes\br_public::ref_125F3()) {
       var_0 = 1;
       break;
     }
@@ -293,10 +293,10 @@ function ref_13132() {
     return;
   }
 
-  var_0 = istrue(getdvarint("scr_br_resurgence_respawn_enable", 0)) && level.disable_super_in_turret.ref_12ca4;
+  var_0 = istrue(getdvarint("scr_br_resurgence_respawn_enable", 0)) && level.disable_super_in_turret.ref_12CA4;
 
   if(scripts\mp\utility\game::getgametype() != "dmz" && scripts\mp\utility\game::getgametype() != "rat_race" && scripts\mp\utility\game::getgametype() != "gold_war" && !var_0) {
-    ref_143fa(self);
+    ref_143FA(self);
 
     if(scripts\mp\gametypes\br_public::use_csm(self)) {
       return;
@@ -307,7 +307,7 @@ function ref_13132() {
     for(;;) {
       waittillframeend();
 
-      if(isDefined(self.ref_126cc) && istrue(self.ref_126cc.gulag)) {
+      if(isDefined(self.ref_126CC) && istrue(self.ref_126CC.gulag)) {
         scripts\mp\utility\lower_message::setlowermessageomnvar(0);
         waitframe();
         continue;
@@ -315,12 +315,12 @@ function ref_13132() {
 
       scripts\mp\utility\lower_message::setlowermessageomnvar(75);
 
-      if(!ref_125c9()) {
+      if(!ref_125C9()) {
         scripts\mp\utility\lower_message::setlowermessageomnvar(0);
         waitframe();
       }
 
-      var_1 = scripts\engine\utility::ref_143af("buybackRequested", "br_spectator_end_forced_spectator", "playertospectate_set", "spectating_cycle");
+      var_1 = scripts\engine\utility::ref_143AF("buybackRequested", "br_spectator_end_forced_spectator", "playertospectate_set", "spectating_cycle");
 
       if(isDefined(self) && isDefined(var_1) && var_1 == "buybackRequested") {
         scripts\mp\utility\lower_message::setlowermessageomnvar(0);
@@ -345,23 +345,23 @@ function istacticalbc(var_0, var_1) {
   scripts\mp\utility\script::laststand_dogtags(var_2);
 }
 
-function ref_1252a() {
+function ref_1252A() {
   self.ref_12876 = undefined;
-  self.ref_11e80 = undefined;
-  self.ref_126cc = undefined;
+  self.ref_11E80 = undefined;
+  self.ref_126CC = undefined;
   self setclientomnvar("ui_show_spectateHud", -1);
   self notify("forcePlayerSpectateTarget");
   self notify("playerMonitorSpectatorCycle");
 }
 
-function ref_126ab() {
+function ref_126AB() {
   var_0 = self;
 
   if(var_0.sessionstate != "intermission") {
     var_1 = ref_12580(var_0);
 
     if(istrue(var_1.ref_14439)) {
-      var_0 scripts\mp\gametypes\br_gulag::ref_1268e(1);
+      var_0 scripts\mp\gametypes\br_gulag::ref_1268E(1);
       level notify("update_circle_hide");
     }
 
@@ -381,9 +381,9 @@ function forceplayerspectatetarget(var_0) {
   var_1 notify("forcePlayerSpectateTarget");
   var_1 endon("forcePlayerSpectateTarget");
   var_1.ref_12876 = 1;
-  ref_126ab(var_1);
+  ref_126AB(var_1);
 
-  if(!isDefined(var_0) || !isPlayer(var_0) || !isalive(var_0) && !ref_125ed(var_0)) {
+  if(!isDefined(var_0) || !isPlayer(var_0) || !isalive(var_0) && !ref_125ED(var_0)) {
     if(level.gameended || level.players.size == 1) {
       var_1 setclientomnvar("ui_show_spectateHud", var_1 getentitynumber());
       var_1.ref_12876 = undefined;
@@ -402,7 +402,7 @@ function forceplayerspectatetarget(var_0) {
 
   var_0 endon("disconnect");
   var_2 = var_0 getentitynumber();
-  var_1.ref_126cc = var_0;
+  var_1.ref_126CC = var_0;
   var_1 setclientomnvar("ui_show_spectateHud", var_2);
 
   if(!var_1 isadditionalstreamposready()) {
@@ -413,20 +413,20 @@ function forceplayerspectatetarget(var_0) {
   var_3 = var_0.origin;
 
   if(istrue(var_0.respawningfromtoken) && isDefined(var_0.forcespawnorigin)) {
-    if(!var_0 scripts\mp\gametypes\br_gulag::ref_125ea()) {
+    if(!var_0 scripts\mp\gametypes\br_gulag::ref_125EA()) {
       if(getdvarint("scr_br_bink_overlay_log", 0) == 1) {
         logstring("bnk_forcePlayerSpectateTarget()");
       }
 
       var_1 thread scripts\mp\gametypes\br_gulag::ref_12523();
-    } else if(!var_1 scripts\mp\gametypes\br_gulag::ref_125ea()) {
+    } else if(!var_1 scripts\mp\gametypes\br_gulag::ref_125EA()) {
       var_1 scripts\mp\gametypes\br_gulag::ref_12522();
     }
 
     var_3 = var_0.forcespawnorigin;
     var_1 setadditionalstreampos(var_3, 1);
-  } else if(isDefined(var_0.ref_1391a)) {
-    var_3 = var_0.ref_1391a.origin;
+  } else if(isDefined(var_0.ref_1391A)) {
+    var_3 = var_0.ref_1391A.origin;
     var_1 setadditionalstreampos(var_3, 1);
   } else {
     var_1 setadditionalstreampos(var_3, 1, 0, var_0);
@@ -443,7 +443,7 @@ function forceplayerspectatetarget(var_0) {
   var_9 = gettime() + var_7;
 
   while((!var_1 isadditionalstreamposready() || isDefined(var_0) && !var_1 hasloadedcustomizationplayerview(var_0) || !var_1 hasloadedviewweapons(var_4)) && gettime() < var_9) {
-    if(isDefined(var_0) && !isDefined(var_0.ref_1391a) && gettime() > var_8) {
+    if(isDefined(var_0) && !isDefined(var_0.ref_1391A) && gettime() > var_8) {
       var_10 = distance2dsquared(var_0.origin, var_3);
 
       if(var_10 > var_5) {
@@ -460,7 +460,7 @@ function forceplayerspectatetarget(var_0) {
   var_9 = gettime() + var_7;
   var_13 = 0;
 
-  while((isDefined(var_0.ref_1391a) || !isalive(var_0)) && gettime() < var_9) {
+  while((isDefined(var_0.ref_1391A) || !isalive(var_0)) && gettime() < var_9) {
     if(gettime() > var_13) {
       var_1 setadditionalstreampos(var_3, 1);
       var_13 = gettime() + var_12;
@@ -477,7 +477,7 @@ function forceplayerspectatetarget(var_0) {
   var_1 clearadditionalstreampos();
 
   if(istrue(var_1.ref_14439)) {
-    var_1 scripts\mp\gametypes\br_gulag::ref_1268e(0);
+    var_1 scripts\mp\gametypes\br_gulag::ref_1268E(0);
     level notify("update_circle_hide");
     return;
   }
@@ -487,13 +487,13 @@ function ref_12563(var_0) {
   var_1 = self;
 
   if(!istrue(var_1.multieventdisabled)) {
-    if(!var_0 scripts\mp\gametypes\br_gulag::ref_125ea()) {
+    if(!var_0 scripts\mp\gametypes\br_gulag::ref_125EA()) {
       if(getdvarint("scr_br_bink_overlay_log", 0) == 1) {
         logstring("bnk_playerForceSpectatorClientWait()");
       }
 
       var_1 thread scripts\mp\gametypes\br_gulag::ref_12523();
-    } else if(!var_1 scripts\mp\gametypes\br_gulag::ref_125ea()) {
+    } else if(!var_1 scripts\mp\gametypes\br_gulag::ref_125EA()) {
       var_1 scripts\mp\gametypes\br_gulag::ref_12522();
       wait 0.5;
     }
@@ -527,7 +527,7 @@ function ref_12563(var_0) {
 }
 
 function assignspectatortospectateplayer(var_0, var_1) {
-  var_2 = scripts\mp\gametypes\br_gametypes::ref_12e05("assignSpectatorToSpectatePlayer", var_0, var_1);
+  var_2 = scripts\mp\gametypes\br_gametypes::ref_12E05("assignSpectatorToSpectatePlayer", var_0, var_1);
 
   if(istrue(var_2)) {
     return;
@@ -560,22 +560,22 @@ function ref_12603() {
       continue;
     }
 
-    if(var_0 scripts\mp\gametypes\br_gulag::ref_125ea()) {
+    if(var_0 scripts\mp\gametypes\br_gulag::ref_125EA()) {
       scripts\mp\gametypes\br_gulag::ref_12522();
     }
 
-    var_1 = ref_126ec(var_0);
+    var_1 = ref_126EC(var_0);
     var_2 = self getspectatingplayer();
 
     if(!istrue(var_1) || !isDefined(var_2)) {
       stopspectateplayer(self getentitynumber(), 1);
 
-      if(vandalize_target_think(self.ref_126cc)) {
-        ref_12563(self.ref_126cc);
+      if(vandalize_target_think(self.ref_126CC)) {
+        ref_12563(self.ref_126CC);
       } else {
         var_0 = regive_killstreak_after_use(self);
 
-        if(isDefined(var_0) && !var_0 scripts\mp\gametypes\br_gulag::ref_125ea()) {
+        if(isDefined(var_0) && !var_0 scripts\mp\gametypes\br_gulag::ref_125EA()) {
           if(getdvarint("scr_br_bink_overlay_log", 0) == 1) {
             logstring("bnk_playerMonitorSpectatorCycle()");
           }
@@ -589,14 +589,14 @@ function ref_12603() {
       continue;
     }
 
-    self.ref_126cc = var_0;
+    self.ref_126CC = var_0;
 
     if(var_2 != var_0) {
-      self.ref_126cc = var_2;
+      self.ref_126CC = var_2;
     }
 
-    if(self.ref_126cc scripts\mp\gametypes\br_gulag::ref_125ea()) {
-      if(!scripts\mp\gametypes\br_gulag::ref_125ea()) {
+    if(self.ref_126CC scripts\mp\gametypes\br_gulag::ref_125EA()) {
+      if(!scripts\mp\gametypes\br_gulag::ref_125EA()) {
         scripts\mp\gametypes\br_gulag::ref_12522();
       }
 
@@ -611,7 +611,7 @@ function ref_12603() {
   }
 }
 
-function ref_126ec(var_0) {
+function ref_126EC(var_0) {
   var_0 endon("death_or_disconnect");
   self waittill("spectating_cycle");
   return true;
@@ -624,12 +624,12 @@ function ref_12580() {
     var_0 = self getspectatingplayer();
   }
 
-  if(!isDefined(var_0) && isDefined(self.ref_11e80)) {
-    var_0 = self.ref_11e80;
+  if(!isDefined(var_0) && isDefined(self.ref_11E80)) {
+    var_0 = self.ref_11E80;
   }
 
-  if(!isDefined(var_0) && isDefined(self.ref_126cc)) {
-    var_0 = self.ref_126cc;
+  if(!isDefined(var_0) && isDefined(self.ref_126CC)) {
+    var_0 = self.ref_126CC;
   }
 
   return var_0;
@@ -665,7 +665,7 @@ function rotatetocurrentangles(var_0) {
   return var_1;
 }
 
-function ref_11be2(var_0, var_1, var_2) {
+function ref_11BE2(var_0, var_1, var_2) {
   if(!scripts\mp\flags::gameflag("prematch_done")) {
     return;
   }
@@ -673,7 +673,7 @@ function ref_11be2(var_0, var_1, var_2) {
   var_3 = regive_killstreak_after_use(var_0, var_1);
 
   if(var_2 && !istrue(var_0.gulag)) {
-    var_0.ref_11e80 = var_3;
+    var_0.ref_11E80 = var_3;
   }
 
   if(isDefined(var_3) || !istrue(level.supportnovalidspectateplayer)) {
@@ -682,21 +682,21 @@ function ref_11be2(var_0, var_1, var_2) {
   }
 }
 
-function ref_125ed() {
-  return isDefined(self.ref_1391a) || scripts\mp\gametypes\br_public::ref_125f3() || istrue(self.tut_popup_listener) || istrue(self.respawningfromtoken);
+function ref_125ED() {
+  return isDefined(self.ref_1391A) || scripts\mp\gametypes\br_public::ref_125F3() || istrue(self.tut_popup_listener) || istrue(self.respawningfromtoken);
 }
 
 function updateexistingspectatorsofvictim(var_0, var_1) {
   var_2 = rotatetocurrentangles(var_0);
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_1) && var_0.team == var_4.team && var_1.team != var_0.team && ref_125ed(var_0)) {
+    if(isDefined(var_1) && var_0.team == var_4.team && var_1.team != var_0.team && ref_125ED(var_0)) {
       assignspectatortospectateplayer(var_4, var_0);
       continue;
     }
 
-    if(isDefined(var_4.ref_11e80)) {
-      var_4.ref_11e80 = var_1;
+    if(isDefined(var_4.ref_11E80)) {
+      var_4.ref_11E80 = var_1;
       continue;
     }
 
@@ -746,7 +746,7 @@ function updateactivespectatorcounts() {
   }
 }
 
-function ref_143fa(var_0) {
+function ref_143FA(var_0) {
   while(var_0.sessionstate != "intermission") {
     waitframe();
   }

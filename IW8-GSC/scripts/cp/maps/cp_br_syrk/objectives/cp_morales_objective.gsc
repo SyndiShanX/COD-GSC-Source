@@ -281,7 +281,7 @@ function swapcoverselector(var_0) {
 
 function _watchforstopwaves(var_0) {
   level endon("game_ended");
-  level scripts\engine\utility::ref_143a7("morales_laptop_activated", "morales_holdout_finished", "morales_exfiled", "morales_heli_exfil_defense_done");
+  level scripts\engine\utility::ref_143A7("morales_laptop_activated", "morales_holdout_finished", "morales_exfiled", "morales_heli_exfil_defense_done");
   level notify("spawn_module_" + var_0.moduleid + "_completed");
 }
 

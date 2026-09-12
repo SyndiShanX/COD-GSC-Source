@@ -19,20 +19,20 @@ function table_getrole() {
 }
 
 function tarmac_techo_start() {
-  level.ref_13d17 = spawnStruct();
-  level.ref_13d17.ref_13900 = getDvar("scr_brTreasureHunt_loadout_starting_weapon_1", "iw8_fists_mp");
-  level.ref_13d17.ref_13901 = getDvar("scr_brTreasureHunt_loadout_starting_weapon_2", "iw8_sm_t9handling");
-  level.ref_13d17.ref_138ff = getDvar("scr_brTreasureHunt_loadout_starting_lethal", "frag_grenade_mp");
-  level.ref_13d17.parachute_set_spawn_values = getdvarfloat("scr_brTreasureHunt_defaultRespawnDelay", 30);
-  level.ref_13d17.spotlight_target_found_dist_sq = getdvarint("scr_brTreasureHunt_useRespawnDelayPerCircle", 1);
-  level.ref_13d17.spotlight_target_found_speed = getdvarint("scr_brTreasureHunt_useRespawnWaves", 0);
-  level.ref_13d17.spotlight_tag = getdvarint("scr_brTreasureHunt_usePointsToReduceRespawnTime", 1);
-  level.ref_13d17.paired_lasers = getdvarfloat("scr_brTreasureHunt_aircraftRespawn", 0.08);
-  level.ref_13d17.padding_damage = getdvarfloat("scr_brTreasureHunt_aircraftMaxAllowed", 30);
-  level.ref_13d17.para_groups = getdvarfloat("scr_brTreasureHunt_aircraftTypeChance", 1);
-  level.ref_13d17.splashtime_drops = getdvarint("scr_brTreasureHunt_respawnWaitForPrestream", 0);
-  level.ref_13d17.spinpropkey = getdvarint("scr_brTreasureHunt_respawnNotifyStart", 1);
-  level.ref_12ca7 = getdvarint("scr_brTreasureHunt_", 7500);
+  level.ref_13D17 = spawnStruct();
+  level.ref_13D17.ref_13900 = getDvar("scr_brTreasureHunt_loadout_starting_weapon_1", "iw8_fists_mp");
+  level.ref_13D17.ref_13901 = getDvar("scr_brTreasureHunt_loadout_starting_weapon_2", "iw8_sm_t9handling");
+  level.ref_13D17.ref_138FF = getDvar("scr_brTreasureHunt_loadout_starting_lethal", "frag_grenade_mp");
+  level.ref_13D17.parachute_set_spawn_values = getdvarfloat("scr_brTreasureHunt_defaultRespawnDelay", 30);
+  level.ref_13D17.spotlight_target_found_dist_sq = getdvarint("scr_brTreasureHunt_useRespawnDelayPerCircle", 1);
+  level.ref_13D17.spotlight_target_found_speed = getdvarint("scr_brTreasureHunt_useRespawnWaves", 0);
+  level.ref_13D17.spotlight_tag = getdvarint("scr_brTreasureHunt_usePointsToReduceRespawnTime", 1);
+  level.ref_13D17.paired_lasers = getdvarfloat("scr_brTreasureHunt_aircraftRespawn", 0.08);
+  level.ref_13D17.padding_damage = getdvarfloat("scr_brTreasureHunt_aircraftMaxAllowed", 30);
+  level.ref_13D17.para_groups = getdvarfloat("scr_brTreasureHunt_aircraftTypeChance", 1);
+  level.ref_13D17.splashtime_drops = getdvarint("scr_brTreasureHunt_respawnWaitForPrestream", 0);
+  level.ref_13D17.spinpropkey = getdvarint("scr_brTreasureHunt_respawnNotifyStart", 1);
+  level.ref_12CA7 = getdvarint("scr_brTreasureHunt_", 7500);
 }
 
 function successfulteams() {
@@ -45,13 +45,13 @@ function successfulteams() {
 
 function init_callbacks() {
   level.decoyassists = &groundz;
-  scripts\mp\gametypes\br_gametypes::ref_12b11("circleTimer", &circletimer);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("dropOnPlayerDeath", &droponplayerdeath);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerNakedDropLoadout", &ref_12604);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("mayConsiderPlayerDead", &dyn_door);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("triggerRespawnOverlay", &ref_13dcb);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("kioskRevivePlayer", &wait_for_chopper_boss_finish_turning);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerKilled", &onplayerkilled);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("circleTimer", &circletimer);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("dropOnPlayerDeath", &droponplayerdeath);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerNakedDropLoadout", &ref_12604);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("mayConsiderPlayerDead", &dyn_door);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("triggerRespawnOverlay", &ref_13DCB);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("kioskRevivePlayer", &wait_for_chopper_boss_finish_turning);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerKilled", &onplayerkilled);
 }
 
 function table_getaddblueprintattachments() {
@@ -65,12 +65,12 @@ function table_getaddblueprintattachments() {
 function ref_13206() {
   level endon("game_ended");
   scripts\mp\flags::gameflagwait("prematch_done");
-  level.ref_13d17.ref_12ca4 = 1;
-  thread ref_131e8();
+  level.ref_13D17.ref_12CA4 = 1;
+  thread ref_131E8();
   thread ref_13207();
 }
 
-function ref_131e8() {
+function ref_131E8() {
   level endon("game_ended");
   level waittill("infils_ready");
   var_0 = raid_player_start_pos_array();
@@ -103,19 +103,19 @@ function ref_131e8() {
 
 function ref_13207() {
   level endon("game_ended");
-  level.ref_13d17.ref_12ca1 = [];
+  level.ref_13D17.ref_12CA1 = [];
 
-  if(istrue(level.ref_13d17.spotlight_target_found_dist_sq)) {
+  if(istrue(level.ref_13D17.spotlight_target_found_dist_sq)) {
     var_0 = raid_player_start_pos_array();
 
     for(var_1 = 0; var_1 < var_0; var_1++) {
-      level.ref_13d17.ref_12ca1[var_1] = getdvarint("scr_br_rebirth_respawn_delay_circle_" + var_1 + 1, level.ref_13d17.parachute_set_spawn_values);
+      level.ref_13D17.ref_12CA1[var_1] = getdvarint("scr_br_rebirth_respawn_delay_circle_" + var_1 + 1, level.ref_13D17.parachute_set_spawn_values);
     }
 
     return;
   }
 
-  level.ref_13d17.ref_12ca1[0] = getdvarint("scr_br_rebirth_respawn_delay", level.ref_13d17.parachute_set_spawn_values);
+  level.ref_13D17.ref_12CA1[0] = getdvarint("scr_br_rebirth_respawn_delay", level.ref_13D17.parachute_set_spawn_values);
 }
 
 function syringe_out() {
@@ -157,7 +157,7 @@ function groundz() {
 }
 
 function circletimer(var_0) {
-  if(istrue(level.ref_13d17.ref_12ca4)) {
+  if(istrue(level.ref_13D17.ref_12CA4)) {
     var_1 = raid_player_start_pos_array();
 
     if(var_0 >= 3) {
@@ -174,14 +174,14 @@ function activate_control_station_interaction() {}
 function dyn_door(var_0) {
   if(scripts\mp\flags::gameflag("prematch_done")) {
     thread ref_14343();
-    scripts\mp\gametypes\br::ref_11b15(var_0);
+    scripts\mp\gametypes\br::ref_11B15(var_0);
   }
 
   return true;
 }
 
 function droponplayerdeath(var_0) {
-  _unlinkcorpsefromvehicle::ref_125fc();
+  _unlinkcorpsefromvehicle::ref_125FC();
   var_1 = scripts\mp\gametypes\br_pickups::test_ai_anim();
   scripts\mp\gametypes\br_pickups::minplunderextractions(var_1);
   scripts\mp\gametypes\br_pickups::missiontime(var_1);
@@ -196,7 +196,7 @@ function onplayerkilled(var_0) {
     return;
   }
 
-  thread ref_11ec8(var_0.victim);
+  thread ref_11EC8(var_0.victim);
 
   if(!isDefined(var_0.attacker) || !isPlayer(var_0.attacker) || var_0.attacker == var_0.victim) {
     return;
@@ -212,7 +212,7 @@ function onplayerkilled(var_0) {
 function activatedtime() {}
 
 function ref_14343() {
-  if(!istrue(level.ref_13d17.ref_12ca4)) {
+  if(!istrue(level.ref_13D17.ref_12CA4)) {
     return;
   }
 
@@ -221,39 +221,39 @@ function ref_14343() {
   self endon("squad_wiped");
   self endon("force_stop_respawn");
   thread getdroplocationnearcurrentcircle();
-  var_0 = int(min(level.br_circle.circleindex, level.ref_13d17.ref_12ca1.size - 1));
-  self.ref_12ca1 = int(level.ref_13d17.ref_12ca1[var_0]);
+  var_0 = int(min(level.br_circle.circleindex, level.ref_13D17.ref_12CA1.size - 1));
+  self.ref_12CA1 = int(level.ref_13D17.ref_12CA1[var_0]);
 
-  if(istrue(level.ref_13d17.spotlight_target_found_speed)) {
-    self.ref_12ca1 = level.ref_13d17.ref_1452f;
+  if(istrue(level.ref_13D17.spotlight_target_found_speed)) {
+    self.ref_12CA1 = level.ref_13D17.ref_1452F;
   }
 
-  if(!isDefined(self.ref_12ca1)) {
-    var_1 = "Respawn delay was not properly set. scr_br_rebirth_respawn_delay or scr_br_rebirth_respawn_delay_circle_ should have been set. Defaulting to " + level.ref_13d17.parachute_set_spawn_values;
+  if(!isDefined(self.ref_12CA1)) {
+    var_1 = "Respawn delay was not properly set. scr_br_rebirth_respawn_delay or scr_br_rebirth_respawn_delay_circle_ should have been set. Defaulting to " + level.ref_13D17.parachute_set_spawn_values;
     scripts\mp\utility\script::laststand_dogtags(var_1);
-    self.ref_12ca1 = int(level.ref_13d17.parachute_set_spawn_values);
+    self.ref_12CA1 = int(level.ref_13D17.parachute_set_spawn_values);
   }
 
-  ref_1333f();
-  ref_130dd(self.ref_12ca1);
-  self.ref_12ca3 = 0;
+  ref_1333F();
+  ref_130DD(self.ref_12CA1);
+  self.ref_12CA3 = 0;
 
-  while(self.ref_12ca1 > 0) {
+  while(self.ref_12CA1 > 0) {
     if(isalive(self)) {
-      self.ref_12ca1 = 0;
+      self.ref_12CA1 = 0;
     } else {
-      ref_130dd(self.ref_12ca1);
+      ref_130DD(self.ref_12CA1);
     }
 
-    ref_130dc(self.ref_12ca3);
-    scripts\mp\gametypes\br_public::updatebrscoreboardstat("respawnInSeconds", self.ref_12ca1);
-    self.ref_12ca3 = 0;
+    ref_130DC(self.ref_12CA3);
+    scripts\mp\gametypes\br_public::updatebrscoreboardstat("respawnInSeconds", self.ref_12CA1);
+    self.ref_12CA3 = 0;
     wait 1;
-    self.ref_12ca1--;
+    self.ref_12CA1--;
   }
 
   spawn_boss_wave_3();
-  ref_130dc(0);
+  ref_130DC(0);
   scripts\mp\gametypes\br_public::updatebrscoreboardstat("respawnInSeconds", 0);
 
   if(!isalive(self)) {
@@ -277,29 +277,29 @@ function manage_health_stage_allows(var_0, var_1) {
 
   self.respawningfromtoken = 1;
 
-  if(istrue(level.ref_13d17.spinpropkey)) {
+  if(istrue(level.ref_13D17.spinpropkey)) {
     self notify("started_spawnPlayer");
   }
 
   if(istrue(var_0)) {
-    ref_130de();
+    ref_130DE();
     thread scripts\mp\events::killeventtextpopup("br_rebirth_vengeance", 0, 0);
     wait 1.5;
   }
 
-  ref_13fad(var_1);
+  ref_13FAD(var_1);
   scripts\mp\playerlogic::addtoalivecount("rebirth2");
-  scripts\mp\gametypes\br::ref_13f21(self, "rebirth2");
+  scripts\mp\gametypes\br::ref_13F21(self, "rebirth2");
   scripts\mp\gametypes\br_pickups::addrespawntoken(1);
   var_2 = 0;
 
-  if(istrue(level.ref_13d17.splashtime_drops)) {
-    var_2 = scripts\mp\gametypes\br_gulag::ref_126e8();
+  if(istrue(level.ref_13D17.splashtime_drops)) {
+    var_2 = scripts\mp\gametypes\br_gulag::ref_126E8();
   }
 
   var_3 = scripts\mp\gametypes\br_public::relic_nuketimer_gettimeformission() / 1000;
-  var_4 = scripts\mp\gametypes\br_gulag::ref_125be(0, var_3);
-  var_5 = scripts\mp\gametypes\br_gulag::ref_1263e(var_4);
+  var_4 = scripts\mp\gametypes\br_gulag::ref_125BE(0, var_3);
+  var_5 = scripts\mp\gametypes\br_gulag::ref_1263E(var_4);
   self.forcespawnorigin = var_5;
 
   if(var_2) {
@@ -314,10 +314,10 @@ function manage_health_stage_allows(var_0, var_1) {
   scripts\mp\playerlogic::spawnplayer(undefined, 0);
   scripts\cp_mp\execution::_clearexecution();
   scripts\mp\gametypes\br_pickups::initplayer();
-  scripts\mp\gametypes\br_spectate::ref_1252a();
+  scripts\mp\gametypes\br_spectate::ref_1252A();
   self.respawningfromtoken = undefined;
-  ref_12c5e();
-  thread scripts\mp\gametypes\br_gulag::ref_13dcb(20);
+  ref_12C5E();
+  thread scripts\mp\gametypes\br_gulag::ref_13DCB(20);
   respawn(var_4, var_5);
 }
 
@@ -331,7 +331,7 @@ function respawn(var_0, var_1) {
   scripts\mp\gametypes\br::scriptednode(self);
 
   if(!isDefined(var_0)) {
-    var_0 = scripts\mp\gametypes\br_gulag::ref_125be();
+    var_0 = scripts\mp\gametypes\br_gulag::ref_125BE();
   }
 
   var_2 = var_0.origin;
@@ -354,13 +354,13 @@ function respawn(var_0, var_1) {
   self playerhide();
   thread scripts\mp\gametypes\br_gulag::ref_12524(var_5);
   waitframe();
-  ref_124e6();
+  ref_124E6();
 
   if(getdvarint("scr_skip_respawn_gate", 1) == 0) {
-    scripts\mp\gametypes\br_public::ref_126ed();
+    scripts\mp\gametypes\br_public::ref_126ED();
   }
 
-  scripts\mp\gametypes\br_public::ref_1252b();
+  scripts\mp\gametypes\br_public::ref_1252B();
 
   if(isDefined(var_1)) {
     var_5.origin = var_2;
@@ -379,11 +379,11 @@ function respawn(var_0, var_1) {
 
   self clearclienttriggeraudiozone(1);
   self playershow();
-  ref_124ed(1);
+  ref_124ED(1);
   var_6 = 0;
 
-  if(isDefined(level.ref_121cc)) {
-    var_6 = level.ref_121cc;
+  if(isDefined(level.ref_121CC)) {
+    var_6 = level.ref_121CC;
   }
 
   if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
@@ -394,22 +394,22 @@ function respawn(var_0, var_1) {
     self setclientomnvar("ui_show_spectateHud", -1);
   }
 
-  scripts\mp\gametypes\br_gulag::ref_12c7a();
+  scripts\mp\gametypes\br_gulag::ref_12C7A();
   scripts\mp\gametypes\br_armor::searchcirclesize();
   scripts\mp\gametypes\br_quest_util::ref_12072();
   scripts\mp\gametypes\br_rewards::ref_12072();
   scripts\mp\gametypes\br_pickups::removerespawntoken();
   var_7 = level.ph_setfinalkillcamwinner > 0 && randomfloat(1) < level.ph_setfinalkillcamwinner;
 
-  if(istrue(var_7) && isDefined(level.ref_13d17) && isDefined(level.ref_13d17.para_groups)) {
+  if(istrue(var_7) && isDefined(level.ref_13D17) && isDefined(level.ref_13D17.para_groups)) {
     var_8 = 0;
 
     if(isDefined(level.vehicle.instances["veh_a10fd"])) {
       var_8 = level.vehicle.instances["veh_a10fd"].size;
     }
 
-    if(var_8 < level.ref_13d17.padding_damage) {
-      thread ref_124f2(var_2);
+    if(var_8 < level.ref_13D17.padding_damage) {
+      thread ref_124F2(var_2);
       wait 1.5;
     }
   }
@@ -423,7 +423,7 @@ function respawn(var_0, var_1) {
   waitframe();
   var_5 delete();
 
-  if(istrue(level.ref_133ef)) {
+  if(istrue(level.ref_133EF)) {
     scripts\mp\gametypes\br_skydive_protection::toma_strike_munitionused(1);
   }
 
@@ -441,12 +441,12 @@ function respawn(var_0, var_1) {
 
 function wait_for_chopper_boss_finish_turning(var_0, var_1) {
   thread scripts\mp\gametypes\br_gulag::playergulagautowin("rebirth", var_0, var_1);
-  ref_13fad(level.teamdata[self.team]["alivePlayers"], var_0);
+  ref_13FAD(level.teamdata[self.team]["alivePlayers"], var_0);
 }
 
 function activategastrap() {}
 
-function ref_124f2(var_0) {
+function ref_124F2(var_0) {
   if(scripts\mp\gametypes\br_gametypes::unset_relic_aggressive_melee("circle")) {
     return;
   }
@@ -465,7 +465,7 @@ function ref_124f2(var_0) {
   var_4 = spawnStruct();
   var_5 = "veh_a10fd";
 
-  if(randomfloat(1) > level.ref_13d17.para_groups) {
+  if(randomfloat(1) > level.ref_13D17.para_groups) {
     var_5 = "veh_bt";
   }
 
@@ -489,7 +489,7 @@ function ref_124f2(var_0) {
   thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var_6, "pilot", self);
 }
 
-function ref_124ed(var_0) {
+function ref_124ED(var_0) {
   if(var_0) {
     self enableoffhandweapons();
     self enableusability();
@@ -519,32 +519,32 @@ function spawn_boss_wave_3() {
   self setclientomnvar("ui_rebirthRespawnTimer", var_1);
 }
 
-function ref_1333f() {
+function ref_1333F() {
   var_0 = self calloutmarkerping_entityzoffset("ui_rebirthRespawnTimer");
   var_1 = var_0 | 16384;
   self setclientomnvar("ui_rebirthRespawnTimer", var_1);
 }
 
-function ref_130de() {
+function ref_130DE() {
   var_0 = self calloutmarkerping_entityzoffset("ui_rebirthRespawnTimer");
   var_1 = var_0 | 32768;
   self setclientomnvar("ui_rebirthRespawnTimer", var_1);
 }
 
-function ref_12c5e() {
+function ref_12C5E() {
   var_0 = self calloutmarkerping_entityzoffset("ui_rebirthRespawnTimer");
   var_1 = var_0 &~32768;
   self setclientomnvar("ui_rebirthRespawnTimer", var_1);
 }
 
-function ref_130dd(var_0) {
+function ref_130DD(var_0) {
   var_1 = self calloutmarkerping_entityzoffset("ui_rebirthRespawnTimer");
   var_2 = var_1 &~16383;
   var_3 = var_2 | var_0;
   self setclientomnvar("ui_rebirthRespawnTimer", var_3);
 }
 
-function ref_130dc(var_0) {
+function ref_130DC(var_0) {
   var_1 = self calloutmarkerping_entityzoffset("ui_rebirthRespawnTimer");
   var_2 = var_1 &~2147418112;
   var_3 = var_1 & 1073741824;
@@ -559,7 +559,7 @@ function ref_130dc(var_0) {
   self setclientomnvar("ui_rebirthRespawnTimer", var_4);
 }
 
-function ref_124e6() {
+function ref_124E6() {
   self notify("treasure_hunt_respawn");
   self.health = self.maxhealth;
   scripts\mp\healthoverlay::onexitdeathsdoor(1);
@@ -567,7 +567,7 @@ function ref_124e6() {
   scripts\mp\gametypes\br_public::updatebrscoreboardstat("isRespawning", 0);
 }
 
-function ref_13dcb() {
+function ref_13DCB() {
   wait 0.5;
   return true;
 }
@@ -577,7 +577,7 @@ function raid_player_start_pos_array() {
 }
 
 function little_bird_mg_exitendinternal() {
-  level.ref_13d17.ref_12ca4 = 0;
+  level.ref_13D17.ref_12CA4 = 0;
 
   foreach(var_1 in level.players) {
     if(!isDefined(var_1)) {
@@ -589,7 +589,7 @@ function little_bird_mg_exitendinternal() {
   }
 }
 
-function ref_13fad(var_0, var_1) {
+function ref_13FAD(var_0, var_1) {
   var_2 = !istrue(level.teamdata[self.team]["teamHadFirstRevive"]);
 
   if(var_2) {
@@ -603,7 +603,7 @@ function ref_13fad(var_0, var_1) {
 
     var_4.endturretonplayerstatus++;
     var_4 scripts\mp\gametypes\br_public::updatebrscoreboardstat("reviveCount", var_4.endturretonplayerstatus);
-    ref_121b2(var_4);
+    ref_121B2(var_4);
     var_5 = !isDefined(var_1) || var_4 != var_1;
     var_6 = var_2 && var_5;
 
@@ -613,7 +613,7 @@ function ref_13fad(var_0, var_1) {
   }
 }
 
-function ref_11ec8(var_0) {
+function ref_11EC8(var_0) {
   foreach(var_2 in scripts\mp\utility\teams::getteamdata(var_0.team, "players")) {
     if(!istrue(var_2.shouldgamelobbyremainintact) && isalive(var_2) && var_0 != var_2) {
       var_2.shouldgamelobbyremainintact = 1;
@@ -622,7 +622,7 @@ function ref_11ec8(var_0) {
   }
 }
 
-function ref_121b2() {
+function ref_121B2() {
   if(!isDefined(self.endgame_finitewaves_music)) {
     self.endgame_finitewaves_music = 0;
   }
@@ -641,10 +641,10 @@ function ref_121b2() {
 function activate_server_for_interact() {}
 
 function ref_12604() {
-  if(!isDefined(self.ref_12eb0)) {
-    var_0 = getcompleteweaponname(level.ref_13d17.ref_13900);
-    var_1 = scripts\mp\class::fixcollision(level.ref_13d17.ref_13901, "camo_01b", undefined, -1);
-    var_2 = getcompleteweaponname(level.ref_13d17.ref_138ff);
+  if(!isDefined(self.ref_12EB0)) {
+    var_0 = getcompleteweaponname(level.ref_13D17.ref_13900);
+    var_1 = scripts\mp\class::fixcollision(level.ref_13D17.ref_13901, "camo_01b", undefined, -1);
+    var_2 = getcompleteweaponname(level.ref_13D17.ref_138FF);
     var_3 = scripts\mp\equipment::getequipmentreffromweapon(var_2);
     self giveweapon(var_0);
     self giveweapon(var_1);
@@ -657,7 +657,7 @@ function ref_12604() {
     scripts\mp\equipment::giveequipment(var_3, "primary");
     scripts\mp\weapons::fixupplayerweapons(self, var_1);
   } else {
-    _unlinkcorpsefromvehicle::ref_125fb();
+    _unlinkcorpsefromvehicle::ref_125FB();
   }
 
   scripts\mp\gametypes\br_armor::scriptablescurid(150);

@@ -50,9 +50,9 @@ function startfontscale() {
   var_1.ref = var_0.ref;
   var_1.rallypointhealth = var_0.rallypointhealth;
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("veh_indigo", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("veh_indigo", var_1, var_2);
 }
 
 function startdeliveries(var_0, var_1, var_2, var_3, var_4) {
-  var_0 scripts\mp\gametypes\arm::ref_141ff(var_3.team);
+  var_0 scripts\mp\gametypes\arm::ref_141FF(var_3.team);
 }

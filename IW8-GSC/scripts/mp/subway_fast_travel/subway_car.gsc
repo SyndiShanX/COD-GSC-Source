@@ -13,11 +13,11 @@ function supply_crate_vo_when_used() {
   var_0 = getentitylessscriptablearrayinradius("scriptable_morse_code_sfx", "classname");
 
   foreach(var_2 in var_0) {
-    thread ref_11d28();
+    thread ref_11D28();
   }
 }
 
-function ref_11d28() {
+function ref_11D28() {
   if(isDefined(self.script_noteworthy)) {
     for(;;) {
       self setscriptablepartstate("morse_code_sfx", self.script_noteworthy);

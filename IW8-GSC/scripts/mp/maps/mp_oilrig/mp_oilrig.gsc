@@ -23,21 +23,21 @@ function main() {
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "woodland";
-  thread ref_139c6();
-  thread ref_139c5("hanging_cord01");
-  thread ref_139c5("hanging_cord02");
+  thread ref_139C6();
+  thread ref_139C5("hanging_cord01");
+  thread ref_139C5("hanging_cord02");
   thread total_puddle_count("ship01");
   thread carriable_respawn();
-  thread ref_121f5();
+  thread ref_121F5();
   thread onplayerconnect();
   thread scripts\mp\animation_suite::animationsuite();
-  level.ref_12c49 = 1;
+  level.ref_12C49 = 1;
   level.requiredplayercount["allies"] = 4;
   level.requiredplayercount["axis"] = 4;
   thread check_trigger_spawnflags();
 }
 
-function ref_121f5() {
+function ref_121F5() {
   if(!isDefined(level.outofboundstriggers)) {
     level.outofboundstriggers = [];
   }
@@ -101,7 +101,7 @@ function ref_13893() {
   }
 }
 
-function ref_139c6() {
+function ref_139C6() {
   var_0 = getEnt("swayCrate", "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
 
@@ -110,15 +110,15 @@ function ref_139c6() {
     var_3 linkTo(var_0);
   }
 
-  thread ref_139c8(var_0, 4);
+  thread ref_139C8(var_0, 4);
 }
 
-function ref_139c5(var_0) {
+function ref_139C5(var_0) {
   var_1 = getEnt(var_0, "targetname");
-  thread ref_139c8(var_1, 1.25);
+  thread ref_139C8(var_1, 1.25);
 }
 
-function ref_139c8(var_0, var_1) {
+function ref_139C8(var_0, var_1) {
   level endon("game_ended");
   var_2 = var_1;
 
@@ -154,14 +154,14 @@ function total_puddle_count(var_0) {
   }
 
   wait 6;
-  var_1.ref_132a9 = scripts\engine\utility::spawn_tag_origin();
-  var_1.ref_132a9.origin = var_1.origin;
-  var_1.ref_132a9.angles = var_1.angles;
-  var_1.ref_132a9.targetname = "shipFX";
-  var_1.ref_132a9 show();
-  var_1.ref_132a9 linkTo(var_1);
+  var_1.ref_132A9 = scripts\engine\utility::spawn_tag_origin();
+  var_1.ref_132A9.origin = var_1.origin;
+  var_1.ref_132A9.angles = var_1.angles;
+  var_1.ref_132A9.targetname = "shipFX";
+  var_1.ref_132A9 show();
+  var_1.ref_132A9 linkTo(var_1);
   wait 0.1;
-  playFXOnTag(scripts\engine\utility::getfx("vfx_oil_cargo_ship"), var_1.ref_132a9, "tag_origin");
+  playFXOnTag(scripts\engine\utility::getfx("vfx_oil_cargo_ship"), var_1.ref_132A9, "tag_origin");
   var_1 playLoopSound("emt_cargo_ship_wake");
 }
 

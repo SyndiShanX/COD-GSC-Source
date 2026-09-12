@@ -24,7 +24,7 @@ function initcircle() {
     level.br_circle.damagetick = [9, 9, 9, 9, 9, 9, 9, 9];
   }
 
-  ref_1312a();
+  ref_1312A();
   var_0 = getdvarvector("br_final_circle_override", (0, 0, 0));
 
   if(length(var_0) > 0) {
@@ -32,7 +32,7 @@ function initcircle() {
   }
 
   if(scripts\mp\gametypes\br_gametypes::tutorial_showtext("getFinalCircleCenter")) {
-    level.br_circle.br_finalcircleoverride = scripts\mp\gametypes\br_gametypes::ref_12e05("getFinalCircleCenter");
+    level.br_circle.br_finalcircleoverride = scripts\mp\gametypes\br_gametypes::ref_12E05("getFinalCircleCenter");
   }
 
   setomnvar("ui_br_minimap_radius", level.br_level.br_circleminimapradii[0]);
@@ -48,7 +48,7 @@ function initcircle() {
   teleport_entities_inside_subway_car(12);
 }
 
-function ref_1312a() {
+function ref_1312A() {
   if(!isDefined(level.debug_vault_assault_retrieve_saw_obj_start)) {
     level.debug_vault_assault_retrieve_saw_obj_start = [];
   }
@@ -136,7 +136,7 @@ function teleport_players_inside_subway_car(var_0, var_1, var_2, var_3, var_4) {
     scripts\mp\gametypes\br_quest_util::ref_13234();
   }
 
-  thread ref_12e09(0);
+  thread ref_12E09(0);
 }
 
 function ignorefallback(var_0, var_1) {
@@ -232,10 +232,10 @@ function ref_12519() {
 }
 
 function cancircledamageplayer(var_0) {
-  return isalive(var_0) && ref_12519(var_0) && !istrue(var_0.gulag) && !istrue(var_0.inrespawnc130) && !var_0 scripts\mp\gametypes\br_public::ref_125f3() && !var_0 scripts\mp\gametypes\br_public::ref_125ec();
+  return isalive(var_0) && ref_12519(var_0) && !istrue(var_0.gulag) && !istrue(var_0.inrespawnc130) && !var_0 scripts\mp\gametypes\br_public::ref_125F3() && !var_0 scripts\mp\gametypes\br_public::ref_125EC();
 }
 
-function ref_13e18() {
+function ref_13E18() {
   var_0 = self;
 
   if(!var_0 scripts\cp_mp\utility\player_utility::_isalive() || istrue(level.vehicle_collision_getleveldata)) {
@@ -281,15 +281,15 @@ function ref_13e18() {
   var_0 playsoundonmovingent(var_5);
 }
 
-function ref_131a0() {
-  if(!isDefined(self.ref_125e4)) {
-    self.ref_125e4 = gettime();
+function ref_131A0() {
+  if(!isDefined(self.ref_125E4)) {
+    self.ref_125E4 = gettime();
     return;
   }
 }
 
-function ref_12c79() {
-  self.ref_125e4 = undefined;
+function ref_12C79() {
+  self.ref_125E4 = undefined;
 }
 
 function firstteam() {
@@ -297,13 +297,13 @@ function firstteam() {
   var_1 = [2, 3, 10];
   var_2 = spawnStruct();
   var_2.enabled = getdvarint("scr_player_gas_timer_mult_enabled", 1);
-  var_2.ref_11f3f = getdvarint("scr_player_gas_timer_mult_count", 3);
-  var_2.ref_13b7b = [];
-  var_2.ref_11e09 = [];
+  var_2.ref_11F3F = getdvarint("scr_player_gas_timer_mult_count", 3);
+  var_2.ref_13B7B = [];
+  var_2.ref_11E09 = [];
   var_3 = 0;
   var_4 = 1;
 
-  for(var_5 = 0; var_5 < var_2.ref_11f3f; var_5++) {
+  for(var_5 = 0; var_5 < var_2.ref_11F3F; var_5++) {
     var_6 = undefined;
     var_7 = undefined;
 
@@ -319,8 +319,8 @@ function firstteam() {
       var_7 = var_4;
     }
 
-    var_2.ref_13b7b[var_5] = getdvarfloat("scr_player_gas_timer_mult_time_" + scripts\engine\utility::string(var_5 + 1), var_6);
-    var_2.ref_11e09[var_5] = getdvarfloat("scr_player_gas_timer_mult_mult_" + scripts\engine\utility::string(var_5 + 1), var_7);
+    var_2.ref_13B7B[var_5] = getdvarfloat("scr_player_gas_timer_mult_time_" + scripts\engine\utility::string(var_5 + 1), var_6);
+    var_2.ref_11E09[var_5] = getdvarfloat("scr_player_gas_timer_mult_mult_" + scripts\engine\utility::string(var_5 + 1), var_7);
   }
 
   return var_2;
@@ -331,7 +331,7 @@ function relic_nuketimer(var_0, var_1) {
     return var_1;
   }
 
-  if(!isDefined(self.ref_125e4)) {
+  if(!isDefined(self.ref_125E4)) {
     return var_1;
   }
 
@@ -345,14 +345,14 @@ function relic_nuketimer(var_0, var_1) {
     }
   }
 
-  var_2 = (gettime() - self.ref_125e4) * 0.001;
-  var_3 = var_0.ref_11f3f - 1;
+  var_2 = (gettime() - self.ref_125E4) * 0.001;
+  var_3 = var_0.ref_11F3F - 1;
 
   while(var_3 >= 0) {
-    var_4 = var_0.ref_13b7b[var_3];
+    var_4 = var_0.ref_13B7B[var_3];
 
     if(var_2 >= var_4) {
-      var_5 = var_0.ref_11e09[var_3];
+      var_5 = var_0.ref_11E09[var_3];
       return int(var_1 * var_5);
     }
 
@@ -406,7 +406,7 @@ function circledamagetick() {
           }
 
           if(scripts\mp\gametypes\br_gametypes::unset_relic_aggressive_melee_params("circleEarlyStart") && istrue(var_8.plotarmor)) {
-            ref_12c79(var_8);
+            ref_12C79(var_8);
             continue;
           }
 
@@ -415,13 +415,13 @@ function circledamagetick() {
           if(distance2dsquared(var_5, var_8.origin) > var_6 * var_6) {
             if(cancircledamageplayer(var_8, var_8)) {
               var_9 = 1;
-              ref_131a0(var_8);
+              ref_131A0(var_8);
               var_10 = relic_nuketimer(var_8, var_2, var_4);
 
               if(scripts\cp_mp\gasmask::hasgasmask(var_8)) {
                 if(scripts\mp\gametypes\br_pickups::ks_circlecount(var_8)) {
                   if(!istrue(var_8.gasmaskequipped)) {
-                    ref_1384c(var_8, var_10);
+                    ref_1384C(var_8, var_10);
 
                     if(!isalive(var_8)) {
                       continue;
@@ -431,7 +431,7 @@ function circledamagetick() {
                   var_8 scripts\cp_mp\gasmask::processdamage(var_10);
                 } else {
                   if(!istrue(level.gasmasktoggledisable) && !istrue(var_8.gasmaskequipped) && !istrue(var_8.gasmaskswapinprogress) && var_8 method_87eb()) {
-                    ref_1384c(var_8, var_10);
+                    ref_1384C(var_8, var_10);
 
                     if(!isalive(var_8)) {
                       continue;
@@ -447,13 +447,13 @@ function circledamagetick() {
                   }
                 }
               } else {
-                ref_1384c(var_8, var_10);
+                ref_1384C(var_8, var_10);
               }
             } else {
-              ref_12c79(var_8);
+              ref_12C79(var_8);
             }
           } else {
-            ref_12c79(var_8);
+            ref_12C79(var_8);
 
             if(scripts\cp_mp\gasmask::hasgasmask(var_8)) {
               if(scripts\mp\gametypes\br_pickups::ks_circlecount(var_8)) {
@@ -468,7 +468,7 @@ function circledamagetick() {
           }
 
           if(scripts\mp\utility\game::getgametype() == "br") {
-            ref_13fe3(var_8, var_9);
+            ref_13FE3(var_8, var_9);
           }
         }
 
@@ -485,8 +485,8 @@ function circledamagetick() {
         scripts\mp\gametypes\br_satellite_hunt::dangercircletick(var_5, var_6);
         scripts\mp\gametypes\br_numbers_tower::dangercircletick(var_5, var_6);
         scripts\mp\equipment\binoculars::isbossheli(var_5, var_6);
-        scripts\mp\gametypes\br_gametypes::ref_12e05("dangerCircleTick", var_5, var_12);
-        scripts\mp\gametypes\br_gametypes::ref_12e05("dangerCircleTickActual", var_5, var_6);
+        scripts\mp\gametypes\br_gametypes::ref_12E05("dangerCircleTick", var_5, var_12);
+        scripts\mp\gametypes\br_gametypes::ref_12E05("dangerCircleTickActual", var_5, var_6);
         _findgivearmoramountanddropleftovers::dangercircletick(var_5, var_12);
 
         if(getdvarint("scr_br_alt_mode_escape", 0)) {
@@ -511,15 +511,15 @@ function circledamagetick() {
   }
 }
 
-function ref_1384c(var_0) {
+function ref_1384C(var_0) {
   var_1 = self;
 
-  if(isDefined(level.ref_11c95)) {
-    var_0 = var_1[[level.ref_11c95]](var_0);
+  if(isDefined(level.ref_11C95)) {
+    var_0 = var_1[[level.ref_11C95]](var_0);
   }
 
   if(var_1 scripts\mp\utility\killstreak::isjuggernaut()) {
-    var_0 = scripts\mp\gametypes\br_jugg_common::ref_11c95(var_0);
+    var_0 = scripts\mp\gametypes\br_jugg_common::ref_11C95(var_0);
   }
 
   var_1 dodamage(var_0, var_1.origin, var_1, undefined, "MOD_TRIGGER_HURT", "danger_circle_br");
@@ -529,12 +529,12 @@ function ref_1384c(var_0) {
   }
 
   if(isalive(var_1)) {
-    ref_13e18(var_1);
+    ref_13E18(var_1);
     return;
   }
 }
 
-function ref_13fe3(var_0) {
+function ref_13FE3(var_0) {
   if(!isDefined(self.unset_relic_shieldsonly)) {
     self.unset_relic_shieldsonly = var_0;
     self.waittill_see_infl_lbravo_long_enough = gettime();
@@ -545,10 +545,10 @@ function ref_13fe3(var_0) {
     var_1 = gettime();
 
     if(var_0) {
-      scripts\cp\vehicles\vehicle_compass_cp::ref_1383b("alive_in_gas");
+      scripts\cp\vehicles\vehicle_compass_cp::ref_1383B("alive_in_gas");
       scripts\mp\gametypes\br_analytics::descendpos(self, var_1 - self.waittill_see_infl_lbravo_long_enough);
     } else {
-      scripts\cp\vehicles\vehicle_compass_cp::ref_138d5("alive_in_gas");
+      scripts\cp\vehicles\vehicle_compass_cp::ref_138D5("alive_in_gas");
       scripts\mp\gametypes\br_analytics::descendsolostarts(self, var_1 - self.waittill_see_infl_lbravo_long_enough);
     }
 
@@ -560,7 +560,7 @@ function ref_13fe3(var_0) {
 function startuiclosetimer(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
 
-  if(istrue(scripts\mp\gametypes\br_gametypes::ref_12e07("startUICloseTimer", var_0, var_1, var_2, var_3))) {
+  if(istrue(scripts\mp\gametypes\br_gametypes::ref_12E07("startUICloseTimer", var_0, var_1, var_2, var_3))) {
     return;
   }
 
@@ -643,7 +643,7 @@ function all_players_are_in_trap_room_entrance() {
   setomnvar("ui_br_circle0_start_time", 0);
 }
 
-function ref_131ad(var_0) {
+function ref_131AD(var_0) {
   if(scripts\mp\utility\game::round_vehicle_logic() != "reveal" && scripts\mp\utility\game::round_vehicle_logic() != "x2" && scripts\mp\utility\game::round_vehicle_logic() != "respect") {
     setomnvar("ui_br_circle0_start_entity", var_0);
   }
@@ -1115,7 +1115,7 @@ function allassassin_teamcompare(var_0) {
   foreach(var_2 in level.debug_vault_assault_retrieve_saw_obj_start) {
     var_3 = distance2dsquared(var_0, var_2.origin);
 
-    if(var_3 < var_2.ref_129e5) {
+    if(var_3 < var_2.ref_129E5) {
       return true;
     }
   }
@@ -1128,7 +1128,7 @@ function allplayers_setphysicaldof(var_0, var_1) {
   var_2 = (level.br_circle.mapbounds[0] + level.br_circle.mapbounds[1]) * 0.5;
 
   if(scripts\mp\gametypes\br_gametypes::tutorial_showtext("mapCenterFinalCircle")) {
-    var_2 = scripts\mp\gametypes\br_gametypes::ref_12e05("mapCenterFinalCircle");
+    var_2 = scripts\mp\gametypes\br_gametypes::ref_12E05("mapCenterFinalCircle");
   }
 
   level.br_level.default_class_chosen[0] = (var_2[0], var_2[1], 0);
@@ -1209,7 +1209,7 @@ function relic_amped_play_beep() {
   return var_7.pos;
 }
 
-function ref_12e09(var_0) {
+function ref_12E09(var_0) {
   level endon("game_ended");
   level endon("br_ending_start");
   level.br_circle.safecircleent = spawn("script_model", (level.br_level.default_class_chosen[1][0], level.br_level.default_class_chosen[1][1], level.br_level.br_circleradii[1]));
@@ -1221,7 +1221,7 @@ function ref_12e09(var_0) {
   thread isblocked();
   level.br_circle.dangercircleui = spawn("script_model", level.br_circle.dangercircleent.origin);
   level.br_circle.dangercircleui.hidden = 0;
-  ref_131ad(level.br_circle.safecircleent);
+  ref_131AD(level.br_circle.safecircleent);
   spawn_carriable_at_struct();
 
   if(istrue(var_0) && !scripts\mp\gametypes\br_gametypes::unset_relic_aggressive_melee_params("circleEarlyStart")) {
@@ -1234,7 +1234,7 @@ function ref_12e09(var_0) {
 
   ref_13348();
   thread circledamagetick();
-  thread ref_138d7();
+  thread ref_138D7();
 
   if(isDefined(level.br_level.br_circledelaytimes)) {
     for(var_1 = 0; var_1 < level.br_level.br_circledelaytimes.size; var_1++) {
@@ -1246,7 +1246,7 @@ function ref_12e09(var_0) {
   scripts\mp\gametypes\br_armory_trader::little_bird_mg_initspawning();
 }
 
-function ref_138d7() {
+function ref_138D7() {
   level notify("stopCirclesAtGameEnd");
   level endon("stopCirclesAtGameEnd");
   level scripts\engine\utility::waittill_any_two("game_ended", "br_ending_start");
@@ -1428,7 +1428,7 @@ function ref_13348() {
   }
 }
 
-function ref_1336f() {
+function ref_1336F() {
   var_0 = level.br_circle.safecircleui.hidden || level.br_circle.safecircleent.hidden;
   level.br_circle.safecircleui.hidden--;
   level.br_circle.safecircleent.hidden--;
@@ -1448,7 +1448,7 @@ function circletimer(var_0) {
   level endon("game_ended");
   level endon("br_ending_start");
 
-  if(istrue(scripts\mp\gametypes\br_gametypes::ref_12e05("circleTimer", var_0))) {
+  if(istrue(scripts\mp\gametypes\br_gametypes::ref_12E05("circleTimer", var_0))) {
     return;
   }
 
@@ -1467,7 +1467,7 @@ function circletimer(var_0) {
   }
 
   thread scripts\mp\gametypes\br_gulag::circletimer(var_0);
-  scripts\mp\gametypes\br_gametypes::ref_12e05("circleTimerNext", var_0);
+  scripts\mp\gametypes\br_gametypes::ref_12E05("circleTimerNext", var_0);
   thread delay_play_depart_vo(level);
   var_6 = level.br_level.default_class_chosen[var_0 + 1];
   level.br_circle.centertarget = var_6;
@@ -1486,7 +1486,7 @@ function circletimer(var_0) {
 
   if(var_8 > 0) {
     spawn_dummy_crate();
-    scripts\engine\utility::delaythread(var_8, &ref_1336f);
+    scripts\engine\utility::delaythread(var_8, &ref_1336F);
   }
 
   thread startuiclosetimer(level, var_3, var_1, var_2);
@@ -1529,7 +1529,7 @@ function circletimer(var_0) {
   thread scripts\mp\music_and_dialog::defcon_alarms_stop();
   wait var_4;
 
-  if(ref_12c72(var_0)) {
+  if(ref_12C72(var_0)) {
     if(getdvarint("scr_br_correct_cicle_post_move", 1)) {
       level.br_circle.dangercircleent.origin = (level.br_circle.centertarget[0], level.br_circle.centertarget[1], var_5);
     }
@@ -2121,7 +2121,7 @@ function init_safehouse_gunshop(var_0, var_1) {
   var_2 = spawnStruct();
   var_2.origin = var_0;
   var_2.radius = var_1;
-  var_2.ref_129e5 = var_1 * var_1;
+  var_2.ref_129E5 = var_1 * var_1;
   return var_2;
 }
 
@@ -2156,7 +2156,7 @@ function get_allowed_vehicle_types_from_wave(var_0) {
   return var_1;
 }
 
-function ref_12c72(var_0) {
+function ref_12C72(var_0) {
   var_1 = 0;
   var_2 = scripts\mp\utility\game::round_vehicle_logic();
 

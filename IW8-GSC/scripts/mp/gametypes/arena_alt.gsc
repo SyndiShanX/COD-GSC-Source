@@ -910,7 +910,7 @@ function onjoinedteam() {
   level endon("game_ended");
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
+    scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
     var_0 = getdvarint("scr_player_maxhealth", 100);
 
     if(isbot(self)) {
@@ -1048,7 +1048,7 @@ function onspawnfinished() {
       }
     }
 
-    level scripts\engine\utility::ref_143a5("prematch_done", "removeArenaOutlines");
+    level scripts\engine\utility::ref_143A5("prematch_done", "removeArenaOutlines");
   }
 
   self setclientomnvar("ui_player_notify_loadout", gettime());
@@ -1088,7 +1088,7 @@ function damagewatcher() {
   self.totaldamagetaken = 0;
 
   for(;;) {
-    scripts\engine\utility::ref_143aa("damage", "force_regeneration", "removeAdrenaline", "healed", "healhRegenThink", "vampirism", "spawned_player");
+    scripts\engine\utility::ref_143AA("damage", "force_regeneration", "removeAdrenaline", "healed", "healhRegenThink", "vampirism", "spawned_player");
 
     if(self.team == "allies") {
       var_0 = 0;
@@ -2461,7 +2461,7 @@ function removeflagoutlineongameend() {
 }
 
 function deleteotpreview() {
-  level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+  level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   disableotflag();
 }
 
@@ -2613,7 +2613,7 @@ function giveflagcapturexp(var_0, var_1) {
 
   if(isPlayer(var_2)) {
     level thread scripts\mp\hud_util::teamplayercardsplash("callout_securedposition", var_2);
-    var_2 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_2.origin);
+    var_2 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_2.origin);
   }
 
   var_3 = getarraykeys(var_0);
@@ -2760,7 +2760,7 @@ function outlineenemyplayerslaunchchunk() {
 
 function removeenemyoutlines() {
   thread notifyremoveoutlines();
-  level scripts\engine\utility::ref_143a5("prematch_done", "removeArenaOutlines");
+  level scripts\engine\utility::ref_143A5("prematch_done", "removeArenaOutlines");
 
   foreach(var_1 in level.players) {
     var_2 = var_1 getentitynumber();

@@ -10,7 +10,7 @@ function main() {
   scripts\mp\maps\mp_petrograd\gen\mp_petrograd_art::main();
   scripts\mp\maps\mp_petrograd\mp_petrograd_fx::main();
   scripts\mp\maps\mp_petrograd\mp_petrograd_lighting::main();
-  scripts\cp_mp\utility\game_utility::ref_12b2c();
+  scripts\cp_mp\utility\game_utility::ref_12B2C();
   scripts\mp\load::main();
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_petrograd", "codcaster_compass_map_mp_petrograd");
@@ -26,11 +26,11 @@ function main() {
   thread scripts\mp\destructible::rockable_cars_init();
   thread managegate();
   thread player_exfil_struct();
-  thread ref_121f5();
+  thread ref_121F5();
   scripts\mp\flags::levelflagwait("scriptables_ready");
   wait 7.5;
-  scripts\engine\utility::array_thread(getscriptablearray("scriptable_veh8_civ_lnd_palfa_ambulance_russia", "classname"), &ref_141bd);
-  scripts\engine\utility::array_thread(getscriptablearray("scriptable_veh8_civ_lnd_skilo_rus_police", "classname"), &ref_141bd);
+  scripts\engine\utility::array_thread(getscriptablearray("scriptable_veh8_civ_lnd_palfa_ambulance_russia", "classname"), &ref_141BD);
+  scripts\engine\utility::array_thread(getscriptablearray("scriptable_veh8_civ_lnd_skilo_rus_police", "classname"), &ref_141BD);
 }
 
 function hide_multiple_brush() {
@@ -51,7 +51,7 @@ function set_lighting_dvars() {
   setDvar("r_compressedSunShadowFiltering", 2);
 }
 
-function ref_141bd() {
+function ref_141BD() {
   level endon("game_ended");
   wait randomfloat(2);
 
@@ -145,7 +145,7 @@ function battle_tracks_vehicleoccupancyenter() {
   }
 }
 
-function ref_121f5() {
+function ref_121F5() {
   level.outofboundstriggerpatches = [];
   var_0 = spawn("trigger_radius", (-1369, -543, 150), 0, 16, 48);
   level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_0;

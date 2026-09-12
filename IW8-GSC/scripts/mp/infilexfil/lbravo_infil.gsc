@@ -21,7 +21,7 @@ function lbravo_spawn(var_0, var_1, var_2, var_3) {
   var_5.angles = var_4.angles;
   var_5.scene_node = var_4;
   var_5.subtype = var_2;
-  var_5.ref_1214c = var_3;
+  var_5.ref_1214C = var_3;
   thread infilthink(var_5, var_0);
 
   if(scripts\mp\utility\game::getgametype() == "arm" && isDefined(var_4.target)) {
@@ -268,11 +268,11 @@ function playerthinkanim(var_0, var_1) {
   var_2 = var_0.subtype;
 
   if(getDvar("mapname") == "mp_downtown_gw") {
-    if(self.team == "allies" && (var_0.ref_1214c == "alpha1" || var_0.ref_1214c == "alpha2")) {
+    if(self.team == "allies" && (var_0.ref_1214C == "alpha1" || var_0.ref_1214C == "alpha2")) {
       var_2 = "bravo";
     }
 
-    if(self.team == "axis" && var_0.ref_1214c == "bravo") {
+    if(self.team == "axis" && var_0.ref_1214C == "bravo") {
       var_2 = "alpha";
     }
   }
@@ -414,12 +414,12 @@ function vehiclethink(var_0, var_1, var_2, var_3) {
 }
 
 function vehiclethinkanim(var_0, var_1, var_2, var_3) {
-  if(self.ref_1214c != self.subtype && getDvar("mapname") == "mp_downtown_gw") {
-    var_2 = self.ref_1214c;
+  if(self.ref_1214C != self.subtype && getDvar("mapname") == "mp_downtown_gw") {
+    var_2 = self.ref_1214C;
   }
 
-  if(var_0 == "allies" && (self.ref_1214c == "alpha" || self.ref_1214c == "alpha2") && getDvar("mapname") == "mp_boneyard_gw") {
-    var_2 = self.ref_1214c;
+  if(var_0 == "allies" && (self.ref_1214C == "alpha" || self.ref_1214C == "alpha2") && getDvar("mapname") == "mp_boneyard_gw") {
+    var_2 = self.ref_1214C;
   }
 
   scripts\common\anim::anim_first_frame_solo(self.linktoent, "lbravo_infil_" + var_2 + "_" + var_0);

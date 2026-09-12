@@ -3,7 +3,7 @@
  * Script: scripts\mp\trials\mp_t_reflex_create_script_quadrace.gsc
 ********************************************************************/
 
-function ref_134b8(var_0, var_1, var_2, var_3) {
+function ref_134B8(var_0, var_1, var_2, var_3) {
   if(!soldier_br_isalert()) {
     return false;
   }
@@ -52,7 +52,7 @@ function ref_134b8(var_0, var_1, var_2, var_3) {
     var_15 = "";
 
     if(scripts\asm\shared\utility::demeanorhasblendspace() && scripts\asm\shared\utility::isentnotabomber()) {
-      var_15 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349e();
+      var_15 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349E();
       var_16 = scripts\asm\shared\utility::getbasearchetype();
       self.turnspeedtarget = getnearestspeedthresholdname(var_16, var_15);
     } else {
@@ -115,7 +115,7 @@ function ref_13490(var_0, var_1, var_2) {
   return self.a.sharpturnindex;
 }
 
-function ref_1348b(var_0, var_1, var_2) {
+function ref_1348B(var_0, var_1, var_2) {
   var_3 = "left";
 
   if(scripts\asm\asm::asm_eventfiredrecently(var_0, "pass_left")) {
@@ -126,7 +126,7 @@ function ref_1348b(var_0, var_1, var_2) {
     var_3 = "right";
   }
 
-  var_4 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349e();
+  var_4 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349E();
   var_5 = 0;
   var_6 = scripts\asm\shared\utility::getarrivalnode();
   var_7 = scripts\asm\shared\utility::nodeshouldfaceangles(var_6);
@@ -157,7 +157,7 @@ function ref_1348b(var_0, var_1, var_2) {
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_12);
 }
 
-function ref_134bc(var_0, var_1, var_2, var_3) {
+function ref_134BC(var_0, var_1, var_2, var_3) {
   if(!isDefined(self.asm.strafe_foot)) {
     return false;
   }
@@ -252,11 +252,11 @@ function ref_134bc(var_0, var_1, var_2, var_3) {
     return false;
   }
 
-  var_19 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349e();
+  var_19 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349E();
 
   if(scripts\asm\shared\utility::isentasoldier() && scripts\asm\shared\utility::demeanorhasblendspace()) {
     var_20 = scripts\asm\shared\utility::getbasearchetype();
-    var_19 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349e();
+    var_19 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349E();
     self.strafepoispeedtarget = getnearestspeedthresholdname(var_20, var_19);
   } else {
     self.strafepoispeedtarget = undefined;
@@ -280,15 +280,15 @@ function ref_134bc(var_0, var_1, var_2, var_3) {
   return true;
 }
 
-function ref_134bb(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm::asm_eventfired(var_0, "code_move") && ref_134bc(var_0, var_1, var_2, var_3)) {
+function ref_134BB(var_0, var_1, var_2, var_3) {
+  if(scripts\asm\asm::asm_eventfired(var_0, "code_move") && ref_134BC(var_0, var_1, var_2, var_3)) {
     return true;
   }
 
   return false;
 }
 
-function ref_134bd(var_0, var_1, var_2, var_3) {
+function ref_134BD(var_0, var_1, var_2, var_3) {
   if(!scripts\asm\soldier\arrival::shoulddoarrival()) {
     return false;
   }
@@ -334,7 +334,7 @@ function ref_134bd(var_0, var_1, var_2, var_3) {
   var_10 = ["2", "3", "6", "9", "8", "7", "4", "1", "2"];
   var_11 = scripts\asm\shared\utility::getbasearchetype();
   var_12 = length(self.velocity);
-  var_13 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349e();
+  var_13 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349E();
   var_14 = getanimspeedthreshold(var_11, "walk");
   var_15 = getanimspeedthreshold(var_11, "shuffle");
   var_16 = getanimspeedthreshold(var_11, "fast");
@@ -395,7 +395,7 @@ function ref_13488(var_0, var_1, var_2) {
   if(scripts\asm\shared\utility::isentasoldier() && scripts\asm\shared\utility::demeanorhasblendspace()) {
     var_4 = scripts\asm\soldier\move::determinedesiredexitspeed();
     var_5 = scripts\asm\shared\utility::getbasearchetype();
-    var_3 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349e();
+    var_3 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349E();
     self.exitspeedtarget = getnearestspeedthresholdname(var_5, var_3);
   } else {
     self.exitspeedtarget = undefined;
@@ -416,7 +416,7 @@ function ref_13488(var_0, var_1, var_2) {
   return var_6;
 }
 
-function ref_134a8(var_0, var_1, var_2, var_3) {
+function ref_134A8(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
   if(scripts\asm\asm_bb::bb_shootparamsvalid()) {
@@ -434,7 +434,7 @@ function ref_134a8(var_0, var_1, var_2, var_3) {
   }
 
   if(!isDefined(var_4)) {
-    var_5 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349a();
+    var_5 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349A();
 
     if(isDefined(var_5) && isalive(var_5)) {
       var_4 = var_5.origin;

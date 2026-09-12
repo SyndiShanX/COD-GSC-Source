@@ -54,7 +54,7 @@ function drop_intel_piece(var_0) {
   }
 
   waitframe();
-  ref_11a88(var_1);
+  ref_11A88(var_1);
   tag_intel_with_head_icon(var_1);
 
   if(isDefined(var_1.traincar_wait_until_shown)) {
@@ -71,7 +71,7 @@ function init_first_button() {
   return var_0;
 }
 
-function ref_11a88(var_0) {
+function ref_11A88(var_0) {
   var_1 = &"CP_BR/INTEL_DROP";
   var_0 setHintString(var_1);
   var_0 setCursorHint("HINT_BUTTON");
@@ -123,7 +123,7 @@ function tag_intel_with_head_icon(var_0) {
 }
 
 function collect_intel(var_0, var_1) {
-  thread ref_123f5();
+  thread ref_123F5();
   give_intel_weapon(var_0);
   level.intel_level++;
 
@@ -135,7 +135,7 @@ function collect_intel(var_0, var_1) {
   level notify("ml_p1_intel_found");
 }
 
-function ref_123f5() {
+function ref_123F5() {
   if(isDefined(level.train_delay_handler)) {
     [[level.train_delay_handler]](self);
     return;

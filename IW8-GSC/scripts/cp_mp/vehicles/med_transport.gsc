@@ -8,8 +8,8 @@ function med_transport_init() {
   var_0.destroycallback = &med_transport_explode;
   med_transport_initoccupancy();
   med_transport_initinteract();
-  ref_11baa();
-  ref_11ba9();
+  ref_11BAA();
+  ref_11BA9();
   med_transport_initfx();
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("medium_transport", "init")) {
@@ -62,8 +62,8 @@ function med_transport_initinteract() {
   var_0.seatenterarrays["back_right_rear"] = ["back_right_rear"];
 }
 
-function ref_11baa() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("medium_transport", 1);
+function ref_11BAA() {
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("medium_transport", 1);
   var_0.id = 11;
   var_0.seatids["driver"] = 0;
   var_0.seatids["front_left"] = 1;
@@ -73,14 +73,14 @@ function ref_11baa() {
   var_0.seatids["back_right_rear"] = 5;
 }
 
-function ref_11ba9() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("medium_transport", 2000);
+function ref_11BA9() {
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("medium_transport", 2000);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("medium_transport");
   var_0.class = "medium_heavy";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("medium_transport");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("medium_transport");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("medium_transport", 13);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("medium_transport", &med_transport_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("med_transport_mp", 3);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("med_transport_mp", 3);
 }
 
 function med_transport_initfx() {
@@ -103,7 +103,7 @@ function med_transport_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "medium_transport", var_0);
   var_2.objweapon = getcompleteweaponname("med_transport_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 

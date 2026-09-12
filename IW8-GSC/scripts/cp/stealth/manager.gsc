@@ -491,7 +491,7 @@ function go_to_node_set_goal_node(var_0) {
 function go_to_node_end() {
   self endon("death");
   self.using_goto_node = 1;
-  scripts\engine\utility::ref_143a5("reached_path_end", "stop_going_to_node");
+  scripts\engine\utility::ref_143A5("reached_path_end", "stop_going_to_node");
   self.using_goto_node = undefined;
   self.patharray = undefined;
   self.patharrayindex = undefined;

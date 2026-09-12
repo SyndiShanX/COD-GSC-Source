@@ -93,17 +93,17 @@ function main() {
   thread heli_crash_path_loc_setup();
   thread spawn_technicals_for_players();
   level thread scripts\cp\cp_kidnapper::init_kidnapper_combat_loop();
-  scripts\cp\maps\cp_dwn_twn_2\cp_dwn_twn_2_checkpoints::ref_131ed();
+  scripts\cp\maps\cp_dwn_twn_2\cp_dwn_twn_2_checkpoints::ref_131ED();
   scripts\mp\brclientmatchdata::getquestrewardgroupindex();
-  scripts\mp\brclientmatchdata::getpresettruckspawns("ml_p1", &scripts\cp\maps\cp_dwn_twn_2\cp_dwn_twn_2_checkpoints::ref_11c58);
-  scripts\mp\brclientmatchdata::getpresettruckspawns("ml_p2", &scripts\cp\maps\cp_dwn_twn_2\cp_dwn_twn_2_checkpoints::ref_11c5b);
-  scripts\mp\brclientmatchdata::getpresettruckspawns("ml_p3", &scripts\cp\maps\cp_dwn_twn_2\cp_dwn_twn_2_checkpoints::ref_11c5c);
+  scripts\mp\brclientmatchdata::getpresettruckspawns("ml_p1", &scripts\cp\maps\cp_dwn_twn_2\cp_dwn_twn_2_checkpoints::ref_11C58);
+  scripts\mp\brclientmatchdata::getpresettruckspawns("ml_p2", &scripts\cp\maps\cp_dwn_twn_2\cp_dwn_twn_2_checkpoints::ref_11C5B);
+  scripts\mp\brclientmatchdata::getpresettruckspawns("ml_p3", &scripts\cp\maps\cp_dwn_twn_2\cp_dwn_twn_2_checkpoints::ref_11C5C);
   var_0 = getDvar("restart_checkpoint", "");
 
   if(isDefined(var_0) && var_0 != "") {
     scripts\mp\brclientmatchdata::getnextprop(var_0);
     scripts\mp\brclientmatchdata::getnextrpgspawnmodule(var_0);
-    level thread[[level.ref_12b19[var_0]]]();
+    level thread[[level.ref_12B19[var_0]]]();
   } else {
     var_1 = getDvar("cp_dwn_twn_2_start_obj", "safehouse");
 

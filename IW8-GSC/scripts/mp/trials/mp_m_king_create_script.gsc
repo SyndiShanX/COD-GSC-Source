@@ -21,7 +21,7 @@ function bot_ctf_player_always_attacker(var_0, var_1, var_2, var_3) {
   return var_7;
 }
 
-function ref_1244a(var_0, var_1, var_2) {
+function ref_1244A(var_0, var_1, var_2) {
   var_3 = self._blackboard.bot_ctf_recover_flag;
   scripts\common\ai::bot_ctf_flag_picked_up_of_team();
   scripts\asm\asm::asm_playanimstate(var_0, var_1, var_2);
@@ -63,7 +63,7 @@ function ref_12446(var_0, var_1, var_2) {
   scripts\asm\asm::asm_playanimstate(var_0, var_1, var_2);
 }
 
-function ref_1245d(var_0, var_1, var_2) {
+function ref_1245D(var_0, var_1, var_2) {
   var_3 = self._blackboard.bot_ctf_recover_flag;
 
   if(isDefined(var_3)) {

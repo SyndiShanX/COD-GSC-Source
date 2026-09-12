@@ -582,14 +582,14 @@ function setgunsfinal() {
 
       if(level.ladderindex == 4 || level.ladderindex == 5) {
         var_6 = remappedhpzoneorder(var_3);
-        var_7 = scripts\mp\class::ref_139e7(var_3, var_6);
+        var_7 = scripts\mp\class::ref_139E7(var_3, var_6);
         var_4 = scripts\mp\class::fixcollision(var_3, undefined, undefined, var_7, undefined, undefined, scripts\cp_mp\utility\game_utility::isnightmap());
       } else {
         var_7 = 0;
 
         if(level.ladderindex == 6) {
           var_6 = remappedhpzoneorder(var_4);
-          var_7 = scripts\mp\class::ref_139e7(var_4, var_6);
+          var_7 = scripts\mp\class::ref_139E7(var_4, var_6);
         }
 
         var_7 = randomintrange(2, 5);
@@ -689,9 +689,9 @@ function getrandomweaponfromcategory(var_0) {
 
     if(level.ladderindex == 4 || level.ladderindex == 6) {
       var_9 = remappedhpzoneorder(var_3["weapon"]);
-      var_3 = scripts\mp\class::ref_139e7(var_3["weapon"], var_9);
+      var_3 = scripts\mp\class::ref_139E7(var_3["weapon"], var_9);
     } else if(level.ladderindex == 5) {
-      var_3 = scripts\mp\class::ref_139e7(var_3["weapon"], "-1");
+      var_3 = scripts\mp\class::ref_139E7(var_3["weapon"], "-1");
     }
 
     return var_3;

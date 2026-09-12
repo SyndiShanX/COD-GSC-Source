@@ -39,7 +39,7 @@ function spawn_enemy_lbravo(var_0) {
   thread setup_pilot(level.heli, "tag_pilot1");
   level.heli thread scripts\cp\helicopter\cp_helicopter::heli_damagemonitor(var_0);
   level.heli sethoverparams(25, 15, 10);
-  level.heli.ref_11e98 = 1;
+  level.heli.ref_11E98 = 1;
   level.heli.circle_radius = 800;
   level.heli.should_move_to_target_dist = 2400;
   level.heli.heli_can_target_dist = 1800;
@@ -90,7 +90,7 @@ function follow_path_until(var_0) {
       self setvehgoalpos(var_3, 0);
     }
 
-    scripts\engine\utility::ref_143bb(15, "goal", "goal_reached", "near_goal");
+    scripts\engine\utility::ref_143BB(15, "goal", "goal_reached", "near_goal");
 
     if(isDefined(var_2.target) && var_2.target != var_0) {
       var_1 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
@@ -113,7 +113,7 @@ function initbunker11keypad() {
   for(;;) {
     foreach(var_1 in level.players) {
       if(var_1 istouching(self)) {
-        thread ref_11d92(var_1);
+        thread ref_11D92(var_1);
       }
     }
 
@@ -121,7 +121,7 @@ function initbunker11keypad() {
   }
 }
 
-function ref_11d92(var_0) {
+function ref_11D92(var_0) {
   var_1 = var_0.origin - self.origin;
   var_1 = vectorNormalize(var_1);
   var_1 *= 200;
@@ -154,7 +154,7 @@ function heli_sfx_shutdown() {
   self playSound("cp_dwn_twn_heli_shutdown");
   wait 2;
   self vehicle_turnengineoff();
-  level scripts\engine\utility::ref_143a5("hvt_leaving", "heli_engage");
+  level scripts\engine\utility::ref_143A5("hvt_leaving", "heli_engage");
   self playSound("cp_dwn_twn_heli_spoolup");
   wait 2;
   self vehicle_turnengineon();

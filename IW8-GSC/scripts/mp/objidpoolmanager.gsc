@@ -144,7 +144,7 @@ function update_objective_ownerteam(var_0, var_1) {
   objective_setownerteam(var_0, var_1);
 }
 
-function ref_13fa2(var_0, var_1) {
+function ref_13FA2(var_0, var_1) {
   if(var_0 == -1) {
     return;
   }
@@ -216,7 +216,7 @@ function update_objective_icon(var_0, var_1) {
   objective_icon(var_0, var_1);
 }
 
-function ref_13fa0(var_0, var_1) {
+function ref_13FA0(var_0, var_1) {
   if(var_0 == -1) {
     return;
   }
@@ -224,7 +224,7 @@ function ref_13fa0(var_0, var_1) {
   objective_reset_mlgicon(var_0, var_1);
 }
 
-function ref_13fa1(var_0) {
+function ref_13FA1(var_0) {
   if(var_0 == -1) {
     return;
   }
@@ -240,7 +240,7 @@ function update_objective_setbackground(var_0, var_1) {
   objective_setbackground(var_0, var_1);
 }
 
-function ref_13fa3(var_0, var_1) {
+function ref_13FA3(var_0, var_1) {
   if(var_0 == -1) {
     return;
   }
@@ -293,7 +293,7 @@ function objective_teammask_single(var_0, var_1) {
   objective_showtoplayersinmask(var_0);
 }
 
-function ref_11f82(var_0, var_1) {
+function ref_11F82(var_0, var_1) {
   if(var_0 == -1) {
     return;
   }
@@ -525,7 +525,7 @@ function objective_set_pulsate(var_0, var_1) {
   objective_setpulsate(var_0, var_1);
 }
 
-function ref_11f7d(var_0, var_1) {
+function ref_11F7D(var_0, var_1) {
   if(var_0 == -1) {
     return;
   }
@@ -533,7 +533,7 @@ function ref_11f7d(var_0, var_1) {
   objective_setshowformlgspectator(var_0, var_1);
 }
 
-function ref_11f84(var_0, var_1) {
+function ref_11F84(var_0, var_1) {
   if(var_0 == -1) {
     return;
   }
@@ -577,7 +577,7 @@ function createobjective(var_0, var_1, var_2, var_3, var_4) {
       objective_playermask_showtoall(var_5);
     }
   } else if(isDefined(self.owner)) {
-    ref_13fa2(var_5, self.owner);
+    ref_13FA2(var_5, self.owner);
   }
 
   if(isDefined(level.objvisall)) {

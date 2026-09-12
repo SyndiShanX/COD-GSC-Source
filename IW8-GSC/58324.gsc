@@ -12,7 +12,7 @@ function bot_item_matches_purpose() {
   level.restoreweaponstates = &scripts\mp\utility\player::getplayersinradius;
   level.little_bird_mg_mp_initspawning = &scripts\mp\gametypes\br_armory_kiosk::little_bird_mg_mp_initmines;
   level.ref_13352 = &scripts\mp\hud_message::showerrormessage;
-  level.ref_11a22 = &scripts\mp\gametypes\br_pickups::ref_11a21;
+  level.ref_11A22 = &scripts\mp\gametypes\br_pickups::ref_11A21;
   level.br_pickups_init = &scripts\mp\hud_message::showsplash;
   level.br_movingcirclemovedistmin = &scripts\mp\utility\perk::_hasperk;
   level.br_pickupdenyalreadyhaveplatepouch = &scripts\mp\gametypes\br_public::isplayeringulag;
@@ -28,7 +28,7 @@ function bot_known_flag_carrier_loc() {
   var_1 = getdvarfloat("scr_fd_respawn_delay", 45);
 
   if(var_1 >= 0) {
-    var_0.ref_12ca1 = var_1;
+    var_0.ref_12CA1 = var_1;
     return;
   }
 }
@@ -47,7 +47,7 @@ function bot_killstreak_setup_func() {
 function bot_landing_spots(var_0, var_1) {
   var_2 = _calloutmarkerping_isvehicleoccupiedbyenemy::bot_gametype_set_role(var_0, var_1);
   var_3 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("veh_a10fd");
-  var_4 = isDefined(var_3) && isDefined(var_3.ref_12ca1);
+  var_4 = isDefined(var_3) && isDefined(var_3.ref_12CA1);
 
   if(isDefined(var_2) && (istrue(level.phase_one_combat) || var_4)) {
     var_2.ondeathrespawn = &bot_koth_think;
@@ -67,9 +67,9 @@ function bot_last_loadout_num() {
   var_1.ref = var_0.ref;
   var_1.rallypointhealth = var_0.rallypointhealth;
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("veh_a10fd", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("veh_a10fd", var_1, var_2);
 }
 
 function bot_is_protecting_hq_zone(var_0, var_1, var_2, var_3, var_4) {
-  var_0 scripts\mp\gametypes\arm::ref_141ff(var_3.team);
+  var_0 scripts\mp\gametypes\arm::ref_141FF(var_3.team);
 }

@@ -234,8 +234,8 @@ function onenteroob(var_0) {
   var_3 = gettriggertype(var_0, var_2);
 
   if(isPlayer(var_0)) {
-    if(isDefined(level.ref_11c7b)) {
-      var_1 = level.ref_11c7b;
+    if(isDefined(level.ref_11C7B)) {
+      var_1 = level.ref_11C7B;
     } else {
       var_1 = &playerentercallback;
     }
@@ -270,8 +270,8 @@ function onexitoob(var_0, var_1, var_2) {
   var_3 = undefined;
 
   if(isPlayer(var_0)) {
-    if(isDefined(level.ref_11c7c)) {
-      var_3 = level.ref_11c7c;
+    if(isDefined(level.ref_11C7C)) {
+      var_3 = level.ref_11C7C;
     } else {
       var_3 = &playerexitcallback;
     }
@@ -808,7 +808,7 @@ function getcooldowntime(var_0) {
 }
 
 function getoutofboundstime(var_0, var_1) {
-  var_2 = var_1.ref_12cce;
+  var_2 = var_1.ref_12CCE;
 
   if(istrue(var_2)) {
     return scripts\mp\utility\game::repair_grill_stop_exit_foley_sfx();

@@ -126,7 +126,7 @@ function onplayerspawned() {
   updatekillstreakuislots();
   updatestreakmeterui();
   updatestreakcosts();
-  ref_13db8();
+  ref_13DB8();
 }
 
 function createplayerstreakdatastruct() {
@@ -339,7 +339,7 @@ function updatekillstreakuislot(var_0) {
     return;
   }
 
-  if(isDefined(level.ref_11c8c) && ![[level.ref_11c8c]](var_0)) {
+  if(isDefined(level.ref_11C8C) && ![[level.ref_11C8C]](var_0)) {
     return;
   }
 
@@ -506,7 +506,7 @@ function triggerkillstreak(var_0, var_1) {
     }
   }
 
-  if(isDefined(level.ref_11c6c) && !self[[level.ref_11c6c]](var_0, var_1)) {
+  if(isDefined(level.ref_11C6C) && !self[[level.ref_11C6C]](var_0, var_1)) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS/CANNOT_BE_USED");
     return false;
   }
@@ -573,7 +573,7 @@ function forceactivategimmekillstreak() {
 function onsuccessfulstreakactivation(var_0, var_1) {
   var_2 = var_0.streakname;
 
-  if(istrue(level.ref_145ec) && self.streaktype != "specialist") {
+  if(istrue(level.ref_145EC) && self.streaktype != "specialist") {
     var_0.available = -1;
   } else {
     var_0.available = -1;
@@ -639,7 +639,7 @@ function createstreakitemstruct(var_0) {
   var_1.madeavailabletime = -1;
   var_1.currentcost = calcstreakcost(var_0);
   var_1.isspecialist = scripts\mp\perks\perks::usescriptablemeleeblood(var_0);
-  var_1.ref_136d2 = scripts\mp\perks\perks::getspecialistperkforstreak(var_0);
+  var_1.ref_136D2 = scripts\mp\perks\perks::getspecialistperkforstreak(var_0);
   return var_1;
 }
 
@@ -830,8 +830,8 @@ function makekillstreakavailable(var_0, var_1, var_2, var_3, var_4) {
 
   var_6 = var_5.streakname;
 
-  if(isDefined(var_5.ref_136d2)) {
-    var_6 = var_5.ref_136d2;
+  if(isDefined(var_5.ref_136D2)) {
+    var_6 = var_5.ref_136D2;
   }
 
   loadassociatedkillstreakweapons(var_6);
@@ -858,7 +858,7 @@ function makekillstreakavailable(var_0, var_1, var_2, var_3, var_4) {
   var_5.streaklifeid = self.lifeid;
   var_5.ref_13913 = self.matchdatalifeindex;
   var_5.owner = self;
-  var_5.ref_121b0 = self getxuid();
+  var_5.ref_121B0 = self getxuid();
 
   if(isDefined(var_2)) {
     var_5.streaklifeid = var_2;
@@ -870,7 +870,7 @@ function makekillstreakavailable(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_5.owner = var_4;
-    var_5.ref_121b0 = var_4 getxuid();
+    var_5.ref_121B0 = var_4 getxuid();
   }
 
   scripts\cp\vehicles\vehicle_compass_cp::ref_12047(var_5.streakname, var_1);
@@ -960,7 +960,7 @@ function killstreakselectionwatcher() {
   level endon("game_ended");
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143ad("ks_select_up", "ks_select_down");
+    var_0 = scripts\engine\utility::ref_143AD("ks_select_up", "ks_select_down");
 
     if(!scripts\engine\utility::is_player_gamepad_enabled()) {
       continue;
@@ -1286,7 +1286,7 @@ function checkstreakreward(var_0, var_1) {
       continue;
     }
 
-    if(isDefined(var_3.lifeid) && var_3.lifeid == self.lifeid && (!istrue(level.ref_145ec) || istrue(level.ref_145ec) && self.streaktype == "specialist") || istrue(level.ref_145ec) && istrue(level.casualscorestreaks) && self.streaktype != "specialist" && var_3.available == -1) {
+    if(isDefined(var_3.lifeid) && var_3.lifeid == self.lifeid && (!istrue(level.ref_145EC) || istrue(level.ref_145EC) && self.streaktype == "specialist") || istrue(level.ref_145EC) && istrue(level.casualscorestreaks) && self.streaktype != "specialist" && var_3.available == -1) {
       continue;
     }
 
@@ -1313,7 +1313,7 @@ function arekillstreaksequipped(var_0) {
           if(var_6.isspecialist) {
             var_7 = scripts\mp\perks\perks::getspecialistperkforstreak(var_3);
 
-            if(var_6.ref_136d2 == var_7) {
+            if(var_6.ref_136D2 == var_7) {
               var_4 = 1;
               break;
             }
@@ -1478,7 +1478,7 @@ function givestreakpoints(var_0, var_1, var_2) {
       self.nukepoints = var_7;
 
       if(isDefined(self.petwatch)) {
-        scripts\cp_mp\pet_watch::ref_13ffd(self.nukepoints / var_8);
+        scripts\cp_mp\pet_watch::ref_13FFD(self.nukepoints / var_8);
       }
     }
   }
@@ -1487,7 +1487,7 @@ function givestreakpoints(var_0, var_1, var_2) {
   checkstreakreward(var_4);
   updatestreakmeterui();
 
-  if(istrue(level.ref_145ec && self.streaktype != "specialist")) {
+  if(istrue(level.ref_145EC && self.streaktype != "specialist")) {
     if(var_4 >= var_5) {
       var_4 -= var_5;
       setstreakpoints(var_4);
@@ -1538,7 +1538,7 @@ function resetstreakavailability(var_0) {
   }
 }
 
-function ref_13db8() {
+function ref_13DB8() {
   for(var_0 = 1; var_0 <= 4; var_0++) {
     var_1 = self.streakdata.streaks[var_0];
 
@@ -1716,31 +1716,31 @@ function ref_14018(var_0, var_1) {
     return;
   }
 
-  if(!isDefined(self.ref_12f3c)) {
-    self.ref_12f3c = [];
+  if(!isDefined(self.ref_12F3C)) {
+    self.ref_12F3C = [];
   }
 
   var_2 = var_0 getxuid();
   var_0.shoulddeleteimmediately = 1;
 
-  if(!isDefined(self.ref_12f3c[var_2])) {
+  if(!isDefined(self.ref_12F3C[var_2])) {
     var_3 = spawnStruct();
     var_3.damage = 0;
     var_3.player = var_0;
-    self.ref_12f3c[var_2] = var_3;
+    self.ref_12F3C[var_2] = var_3;
   }
 
-  self.ref_12f3c[var_2].damage += var_1;
+  self.ref_12F3C[var_2].damage += var_1;
 }
 
 function rocket_internal(var_0) {
-  if(!isDefined(self.ref_12f3c)) {
+  if(!isDefined(self.ref_12F3C)) {
     return [];
   }
 
   var_1 = [];
 
-  foreach(var_3 in self.ref_12f3c) {
+  foreach(var_3 in self.ref_12F3C) {
     var_4 = var_3.damage;
     var_5 = var_3.player;
 
@@ -1851,7 +1851,7 @@ function initridekillstreak_internal(var_0) {
   if(isDefined(var_0) && islaptoptimeoutkillstreak(var_0)) {
     var_1 = "timeout";
   } else {
-    var_1 = scripts\engine\utility::ref_143bb(1, "death", "disconnect", "weapon_switch_started");
+    var_1 = scripts\engine\utility::ref_143BB(1, "death", "disconnect", "weapon_switch_started");
   }
 
   scripts\mp\hostmigration::waittillhostmigrationdone();
@@ -1884,14 +1884,14 @@ function initridekillstreak_internal(var_0) {
     if(var_1 == "drone_hive") {
       self visionsetfadetoblackforplayer("black_bw", 0);
       thread scripts\mp\utility\player::set_visionset_for_watching_players("black_bw", 0, 1, undefined, 1);
-      var_2 = scripts\engine\utility::ref_143b9(0, "death_or_disconnect");
+      var_2 = scripts\engine\utility::ref_143B9(0, "death_or_disconnect");
     } else {
       self visionsetfadetoblackforplayer("black_bw", 0.75);
       thread scripts\mp\utility\player::set_visionset_for_watching_players("black_bw", 0.75, 1, undefined, 1);
-      var_2 = scripts\engine\utility::ref_143b9(0.8, "death_or_disconnect");
+      var_2 = scripts\engine\utility::ref_143B9(0.8, "death_or_disconnect");
     }
   } else {
-    var_2 = scripts\engine\utility::ref_143b9(1, "death_or_disconnect");
+    var_2 = scripts\engine\utility::ref_143B9(1, "death_or_disconnect");
   }
 
   self notify("black_out_done");
@@ -2030,7 +2030,7 @@ function checkcasualstreaksreset() {
     return;
   }
 
-  if(isDefined(self.streaktype) && self.streaktype == "specialist" || isDefined(self.loadoutstreaktype) && self.loadoutstreaktype == "specialist" || !istrue(level.ref_145ec)) {
+  if(isDefined(self.streaktype) && self.streaktype == "specialist" || isDefined(self.loadoutstreaktype) && self.loadoutstreaktype == "specialist" || !istrue(level.ref_145EC)) {
     var_0 = self.streakdata.streaks[self.streakdata.streaks.size];
 
     if(var_0.available == 1 || var_0.available == -1) {

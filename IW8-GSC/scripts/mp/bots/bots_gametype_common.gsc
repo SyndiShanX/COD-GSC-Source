@@ -422,16 +422,16 @@ function custom_damageshield(var_0) {
 
 function forcejumpnearobjective(var_0) {
   var_1 = spawnStruct();
-  var_1.ref_11bed = (999999, 999999, 999999);
-  var_1.ref_11b4b = (-999999, -999999, -999999);
+  var_1.ref_11BED = (999999, 999999, 999999);
+  var_1.ref_11B4B = (-999999, -999999, -999999);
 
   foreach(var_3 in var_0.nodes) {
-    var_1.ref_11bed = (min(var_3.origin[0], var_1.ref_11bed[0]), min(var_3.origin[1], var_1.ref_11bed[1]), min(var_3.origin[2], var_1.ref_11bed[2]));
-    var_1.ref_11b4b = (max(var_3.origin[0], var_1.ref_11b4b[0]), max(var_3.origin[1], var_1.ref_11b4b[1]), max(var_3.origin[2], var_1.ref_11b4b[2]));
+    var_1.ref_11BED = (min(var_3.origin[0], var_1.ref_11BED[0]), min(var_3.origin[1], var_1.ref_11BED[1]), min(var_3.origin[2], var_1.ref_11BED[2]));
+    var_1.ref_11B4B = (max(var_3.origin[0], var_1.ref_11B4B[0]), max(var_3.origin[1], var_1.ref_11B4B[1]), max(var_3.origin[2], var_1.ref_11B4B[2]));
   }
 
-  var_1.center = ((var_1.ref_11bed[0] + var_1.ref_11b4b[0]) / 2, (var_1.ref_11bed[1] + var_1.ref_11b4b[1]) / 2, (var_1.ref_11bed[2] + var_1.ref_11b4b[2]) / 2);
-  var_1.setplacementxpshare = (var_1.ref_11b4b[0] - var_1.center[0], var_1.ref_11b4b[1] - var_1.center[1], var_1.ref_11b4b[2] - var_1.center[2]);
+  var_1.center = ((var_1.ref_11BED[0] + var_1.ref_11B4B[0]) / 2, (var_1.ref_11BED[1] + var_1.ref_11B4B[1]) / 2, (var_1.ref_11BED[2] + var_1.ref_11B4B[2]) / 2);
+  var_1.setplacementxpshare = (var_1.ref_11B4B[0] - var_1.center[0], var_1.ref_11B4B[1] - var_1.center[1], var_1.ref_11B4B[2] - var_1.center[2]);
   var_1.radius = max(var_1.setplacementxpshare[0], var_1.setplacementxpshare[1]);
   return var_1;
 }
@@ -621,7 +621,7 @@ function current_respawn_point_override(var_0, var_1, var_2, var_3) {
   return var_6;
 }
 
-function ref_11ec7() {
+function ref_11EC7() {
   self endon("stop_usebutton_watcher");
   var_0 = find_closest_bombzone_to_player(self);
   self waittill("bulletwhizby", var_1);
@@ -638,7 +638,7 @@ function ref_11ec7() {
   }
 }
 
-function ref_11ec6() {
+function ref_11EC6() {
   self endon("stop_usebutton_watcher");
   self waittill("damage", var_0, var_1);
 

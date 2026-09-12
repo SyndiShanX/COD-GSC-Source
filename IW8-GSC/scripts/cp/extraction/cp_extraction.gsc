@@ -678,7 +678,7 @@ function extraction_infil_player_rig(var_0, var_1, var_2) {
   }
 
   self notify("rig_created");
-  scripts\engine\utility::ref_143a5("remove_rig", "player_free_spot");
+  scripts\engine\utility::ref_143A5("remove_rig", "player_free_spot");
 
   if(isDefined(var_2) && var_2) {
     self playersetgroundreferenceent(undefined);
@@ -911,7 +911,7 @@ function getpathend() {
 
 function littlebirddescendtoextraction(var_0, var_1, var_2) {
   descend(var_0, var_1);
-  scripts\engine\utility::ref_143b9(60, "infinite");
+  scripts\engine\utility::ref_143B9(60, "infinite");
   thread littlebirdleave();
 }
 

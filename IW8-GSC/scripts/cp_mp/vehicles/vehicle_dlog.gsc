@@ -47,7 +47,7 @@ function vehicle_dlog_exitevent(var_0, var_1, var_2, var_3) {
   var_1 dlog_recordplayerevent("dlog_event_player_vehicle_exit", ["vehicle_spawn_id", var_4.id, "exit_pos_x", var_0.origin[0], "exit_pos_y", var_0.origin[1], "exit_pos_z", var_0.origin[2], "exit_seat_id", var_2, "exit_matchtime_ms", scripts\cp_mp\utility\game_utility::gettimesincegamestart(), "exit_type", var_3]);
 }
 
-function ref_1418a(var_0, var_1, var_2, var_3) {
+function ref_1418A(var_0, var_1, var_2, var_3) {
   if(!isPlayer(var_1)) {
     return;
   }

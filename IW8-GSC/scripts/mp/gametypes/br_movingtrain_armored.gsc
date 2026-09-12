@@ -5,19 +5,19 @@
 
 function init() {
   level.validateattacker = &ref_14642;
-  level.ref_13bd1 = &helidrivabledeathall;
+  level.ref_13BD1 = &helidrivabledeathall;
   scripts\cp_mp\utility\script_utility::registersharedfunc("killstreak", "dangerNotifyPlayersInRange", &helidrivabledeath);
   totalweaponxpearned();
   teleport_trigger_to_airplane();
   teleport_to_debug_start_pos();
   tr_kiosksearchparams();
-  thread ref_11b37();
+  thread ref_11B37();
   thread exfil_smoke_vfx();
   thread enemy_targets_headshot();
 }
 
 function totalweaponxpearned() {
-  foreach(var_1 in level.ref_145f1.ref_13c8d) {
+  foreach(var_1 in level.ref_145F1.ref_13C8D) {
     var_1.team = run_openexfil_spawn();
     var_1.wz_tease.team = run_openexfil_spawn();
   }
@@ -77,18 +77,18 @@ function get_alt_weapon() {
 
 function teleport_trigger_to_airplane() {
   var_0 = [["", 1, "", level._effect["vfx_br_x2_locomotive_hit"]], ["x2_veh8_mil_lnd_br_train_locomotive_damaged", 1, "d1", level._effect["vfx_br_x2_locomotive_damage_hit"]], ["", 0.5, "d2", undefined], ["", 0, "d3", undefined], ["x2_veh8_mil_lnd_br_train_locomotive_dead", 0, "dead", undefined]];
-  level.ref_14637 = ref_127e8(var_0);
+  level.ref_14637 = ref_127E8(var_0);
   var_0 = [["", 1, "", level._effect["vfx_br_x2_assault_car_hit"], 0], ["x2_veh8_mil_lnd_br_armored_train_cart_d2", 1, "d1", level._effect["vfx_br_x2_assault_car_damage_01_hit"], 0], ["x2_veh8_mil_lnd_br_armored_train_cart_d3", 0.66, "d2", level._effect["vfx_br_x2_assault_car_damage_02_hit"], 1], ["x2_veh8_mil_lnd_br_armored_train_cart_d4", 0.33, "d3", undefined, 1], ["", 0, "explosion", undefined, 1], ["x2_veh8_mil_lnd_br_armored_train_cart_dead", 0, "dead", undefined, 1]];
-  level.ref_14636 = ref_127e8(var_0);
+  level.ref_14636 = ref_127E8(var_0);
   level.ref_14635 = 0;
   var_0 = [["", 1, ""], ["", 0.5, ""], ["", 0, ""]];
-  level.ref_14638 = ref_127e8(var_0);
+  level.ref_14638 = ref_127E8(var_0);
 }
 
 function tr_kiosksearchparams() {
-  var_0 = level.ref_145f1.cargo_truck_mg_create.ref_119a4;
+  var_0 = level.ref_145F1.cargo_truck_mg_create.ref_119A4;
 
-  foreach(var_2 in level.ref_145f1.ref_13c8d) {
+  foreach(var_2 in level.ref_145F1.ref_13C8D) {
     if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == var_0) {
       continue;
     }
@@ -99,7 +99,7 @@ function tr_kiosksearchparams() {
   }
 }
 
-function ref_127e8(var_0) {
+function ref_127E8(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -108,14 +108,14 @@ function ref_127e8(var_0) {
     var_4.get_request_backup_alias = var_3[1];
     var_4.statename = var_3[2];
     var_4.completex1stashquest = var_3[3];
-    var_4.ref_12c2b = var_3[4];
+    var_4.ref_12C2B = var_3[4];
     var_1 = var_4;
   }
 
   return var_1;
 }
 
-function ref_11b37() {
+function ref_11B37() {
   level endon("game_ended");
   var_0 = getdvarint("scr_wztrain_carHealthPerPlayer", 1700);
   var_1 = getdvarint("scr_wztrain_locmotiveCarHealthPerPlayer", 3150);
@@ -124,37 +124,37 @@ function ref_11b37() {
   scripts\mp\flags::gameflagwait("prematch_done");
   totaldata();
   tr_ontimerexpired(level.players.size, var_2, var_1);
-  level.ref_145f1.brmodifyvehicledamage = getdvarint("scr_wztrain_ambDamagePerPlayer", 0);
-  level.ref_145f1.usedcountinveh = 0;
+  level.ref_145F1.brmodifyvehicledamage = getdvarint("scr_wztrain_ambDamagePerPlayer", 0);
+  level.ref_145F1.usedcountinveh = 0;
   level.ref_14640 = [];
   fail_mission_if_killed();
 }
 
 function tr_ontimerexpired(var_0, var_1, var_2) {
-  level.ref_145f1.ref_11b56 = var_0 * var_1;
-  level.ref_145f1.ref_11b61 = var_0 * var_2;
-  var_3 = level.ref_145f1.cargo_truck_mg_create.ref_119a4;
+  level.ref_145F1.ref_11B56 = var_0 * var_1;
+  level.ref_145F1.ref_11B61 = var_0 * var_2;
+  var_3 = level.ref_145F1.cargo_truck_mg_create.ref_119A4;
 
-  foreach(var_5 in level.ref_145f1.ref_13c8d) {
+  foreach(var_5 in level.ref_145F1.ref_13C8D) {
     if(isDefined(var_5.script_noteworthy) && var_5.script_noteworthy == var_3) {
-      var_5.wz_tease.get_remaining_bots = level.ref_145f1.ref_11b61;
+      var_5.wz_tease.get_remaining_bots = level.ref_145F1.ref_11B61;
       var_5.wz_tease.lightsfx = 0;
     } else {
-      var_5.wz_tease.get_remaining_bots = level.ref_145f1.ref_11b56;
+      var_5.wz_tease.get_remaining_bots = level.ref_145F1.ref_11B56;
       var_5.wz_tease.lightsfx = 0;
     }
 
     var_5.wz_tease.stadium_one_death_func = 1;
   }
 
-  var_7 = level.ref_145f1.ref_13c8d.size - 1;
-  level.ref_145f1.ref_11b7a = var_7 * level.ref_145f1.ref_11b56;
+  var_7 = level.ref_145F1.ref_13C8D.size - 1;
+  level.ref_145F1.ref_11B7A = var_7 * level.ref_145F1.ref_11B56;
 }
 
 function teleport_to_debug_start_pos() {
-  var_0 = level.ref_145f1.cargo_truck_mg_create.ref_119a4;
+  var_0 = level.ref_145F1.cargo_truck_mg_create.ref_119A4;
 
-  foreach(var_2 in level.ref_145f1.ref_13c8d) {
+  foreach(var_2 in level.ref_145F1.ref_13C8D) {
     var_2.wz_tease.lb_wood_surf_dmg_scalar = -1;
 
     if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == var_0) {
@@ -165,9 +165,9 @@ function teleport_to_debug_start_pos() {
       thread handledamage();
     }
 
-    var_2.wz_tease.ref_13cc5 = var_3;
-    var_2.wz_tease.ref_11e95 = 1;
-    var_2.wz_tease.ref_1217a = 0;
+    var_2.wz_tease.ref_13CC5 = var_3;
+    var_2.wz_tease.ref_11E95 = 1;
+    var_2.wz_tease.ref_1217A = 0;
   }
 }
 
@@ -192,8 +192,8 @@ function totaldata() {
       }
 
       level.ref_13737[var_7][var_5.index] = spawnStruct();
-      level.ref_13737[var_7][var_5.index].ref_13bee = 0;
-      level.ref_13737[var_7][var_5.index].ref_11e72 = 0;
+      level.ref_13737[var_7][var_5.index].ref_13BEE = 0;
+      level.ref_13737[var_7][var_5.index].ref_11E72 = 0;
     }
   }
 }
@@ -201,15 +201,15 @@ function totaldata() {
 function initmarker() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait("wztrain_anim_playing");
-  var_0 = level.ref_145f1.ref_13c8d[0];
+  var_0 = level.ref_145F1.ref_13C8D[0];
   var_0 scripts\mp\gametypes\br_quest_util::init_tape_machine_animations("ui_mp_br_ping_icon_x2_t", "current", var_0.origin + (0, 0, 300));
   objective_removeallfrommask(var_0.objectiveiconid);
-  thread ref_13ff4();
-  thread ref_13ff3();
-  thread ref_13ff5();
+  thread ref_13FF4();
+  thread ref_13FF3();
+  thread ref_13FF5();
 }
 
-function ref_13ff5() {
+function ref_13FF5() {
   level endon("game_ended");
 
   for(;;) {
@@ -219,17 +219,17 @@ function ref_13ff5() {
       var_3 = distance2d(removespecialistbonus(), var_2.origin);
 
       if(var_3 > var_0 && isalive(var_2)) {
-        if(!isDefined(var_2.ref_1337b) || var_2.ref_1337b == 0) {
-          ref_1335f(var_2);
-          var_2.ref_1337b = 1;
+        if(!isDefined(var_2.ref_1337B) || var_2.ref_1337B == 0) {
+          ref_1335F(var_2);
+          var_2.ref_1337B = 1;
         }
 
         continue;
       }
 
-      if(istrue(var_2.ref_1337b)) {
+      if(istrue(var_2.ref_1337B)) {
         spawn_crew(var_2);
-        var_2.ref_1337b = 0;
+        var_2.ref_1337B = 0;
       }
     }
 
@@ -238,39 +238,39 @@ function ref_13ff5() {
 }
 
 function removespecialistbonus() {
-  return (level.ref_145f1.ref_13c8d[3].origin + level.ref_145f1.ref_13c8d[4].origin) / 2;
+  return (level.ref_145F1.ref_13C8D[3].origin + level.ref_145F1.ref_13C8D[4].origin) / 2;
 }
 
-function ref_13ff4() {
+function ref_13FF4() {
   level endon("game_ended");
 
   while(!scripts\mp\flags::gameflag("x2_train_destroyed")) {
     var_0 = removespecialistbonus();
-    scripts\mp\gametypes\br_quest_util::ref_11db0(var_0 + (0, 0, 300));
+    scripts\mp\gametypes\br_quest_util::ref_11DB0(var_0 + (0, 0, 300));
     waitframe();
   }
 }
 
-function ref_1335f() {
-  var_0 = level.ref_145f1.ref_13c8d[0];
+function ref_1335F() {
+  var_0 = level.ref_145F1.ref_13C8D[0];
   objective_addclienttomask(var_0.objectiveiconid, self);
   objective_showtoplayersinmask(var_0.objectiveiconid);
 }
 
 function spawn_crew() {
-  var_0 = level.ref_145f1.ref_13c8d[0];
+  var_0 = level.ref_145F1.ref_13C8D[0];
   objective_removeclientfrommask(var_0.objectiveiconid, self);
   objective_showtoplayersinmask(var_0.objectiveiconid);
 }
 
-function ref_13ff3() {
+function ref_13FF3() {
   level endon("game_ended");
-  level scripts\engine\utility::ref_143a5("game_ended", "x2_train_destroyed");
-  ref_12c0d();
+  level scripts\engine\utility::ref_143A5("game_ended", "x2_train_destroyed");
+  ref_12C0D();
 }
 
-function ref_12c0d() {
-  var_0 = level.ref_145f1.ref_13c8d[0];
+function ref_12C0D() {
+  var_0 = level.ref_145F1.ref_13C8D[0];
   var_0 scripts\mp\gametypes\br_quest_util::lastdropedtime();
 }
 
@@ -288,7 +288,7 @@ function handledamage() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_10, var_10, var_11);
 
-    if(isDefined(var_1) && isDefined(var_1.team) && var_1.team == run_openexfil_spawn() && !istrue(var_1.ref_1217a)) {
+    if(isDefined(var_1) && isDefined(var_1.team) && var_1.team == run_openexfil_spawn() && !istrue(var_1.ref_1217A)) {
       continue;
     }
 
@@ -296,7 +296,7 @@ function handledamage() {
       continue;
     }
 
-    if(getdvarint("x2_enable_blink_fx", 1) && !istrue(var_1.ref_11e95)) {
+    if(getdvarint("x2_enable_blink_fx", 1) && !istrue(var_1.ref_11E95)) {
       thread enemy_think(0);
     }
 
@@ -322,7 +322,7 @@ function handledamage() {
         }
 
         var_14 = int(min(var_0, var_13));
-        ref_13fcf(var_12, var_14);
+        ref_13FCF(var_12, var_14);
       }
 
       scripts\mp\gametypes\br_gametype_x2::equipprimarypickup(var_1, var_0);
@@ -342,11 +342,11 @@ function setup_weapon_spawns() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_10, var_10, var_11);
 
-    if(isDefined(var_1) && isDefined(var_1.team) && var_1.team == run_openexfil_spawn() && !istrue(var_1.ref_1217a)) {
+    if(isDefined(var_1) && isDefined(var_1.team) && var_1.team == run_openexfil_spawn() && !istrue(var_1.ref_1217A)) {
       continue;
     }
 
-    if(getdvarint("x2_enable_blink_fx", 1) && !istrue(var_1.ref_11e95)) {
+    if(getdvarint("x2_enable_blink_fx", 1) && !istrue(var_1.ref_11E95)) {
       thread enemy_think(0);
     }
 
@@ -367,7 +367,7 @@ function setup_weapon_spawns() {
       if(isPlayer(var_12)) {
         var_12 scripts\mp\damagefeedback::updatedamagefeedback("hitequip", self.get_remaining_bots == 0, 0, "standard", 0, 1);
         var_14 = int(min(var_0, var_13));
-        ref_13fcf(var_12, var_14);
+        ref_13FCF(var_12, var_14);
       }
 
       scripts\mp\gametypes\br_gametype_x2::equipprimarypickup(var_1, var_0);
@@ -392,28 +392,28 @@ function setupmissionwidget(var_0) {
   return var_2;
 }
 
-function ref_13ccd() {
+function ref_13CCD() {
   level endon("game_ended");
   level endon("x2_train_destroyed");
-  level.ref_145f1.usedcountinveh = 1;
+  level.ref_145F1.usedcountinveh = 1;
   var_0 = getdvarint("scr_wztrain_timeBeforeSelfDestruct", 30);
   wait var_0;
   var_1 = level.ref_14636.size - 2;
   var_2 = level.ref_14638.size - 1;
   var_3 = level.ref_14637.size - 2;
-  var_4 = level.ref_145f1.ref_11b56 * 0.02;
-  var_5 = level.ref_145f1.ref_11b7c * 0.02;
-  var_6 = level.ref_145f1.ref_11b61 * 0.02;
+  var_4 = level.ref_145F1.ref_11B56 * 0.02;
+  var_5 = level.ref_145F1.ref_11B7C * 0.02;
+  var_6 = level.ref_145F1.ref_11B61 * 0.02;
 
-  foreach(var_9, var_8 in level.ref_145f1.ref_13c8d) {
-    var_8.wz_tease.ref_1217a = 1;
+  foreach(var_9, var_8 in level.ref_145F1.ref_13C8D) {
+    var_8.wz_tease.ref_1217A = 1;
   }
 
   for(;;) {
-    foreach(var_8 in level.ref_145f1.ref_13c8d) {
+    foreach(var_8 in level.ref_145F1.ref_13C8D) {
       var_11 = var_8.wz_tease;
 
-      if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == level.ref_145f1.cargo_truck_mg_create.ref_119a4) {
+      if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == level.ref_145F1.cargo_truck_mg_create.ref_119A4) {
         if(var_11.lb_wood_surf_dmg_scalar < var_3) {
           var_11 dodamage(var_6, var_11.origin, var_11, var_11, "MOD_EXPLOSIVE");
         } else {
@@ -444,34 +444,34 @@ function ref_13ccd() {
   }
 }
 
-function ref_13fcf(var_0, var_1) {
-  var_2 = level.ref_13737[var_0.team][var_0.squadindex].ref_13bee;
+function ref_13FCF(var_0, var_1) {
+  var_2 = level.ref_13737[var_0.team][var_0.squadindex].ref_13BEE;
   var_3 = level.ref_13735[level.ref_13735.size - 1];
 
   if(var_2 < var_3) {
-    level.ref_13737[var_0.team][var_0.squadindex].ref_13bee = min(var_2 + var_1, var_3);
+    level.ref_13737[var_0.team][var_0.squadindex].ref_13BEE = min(var_2 + var_1, var_3);
     scripts\mp\gametypes\br_gametype_x2::fadeoutoverlay(var_0);
 
-    while(isDefined(level.ref_13735[level.ref_13737[var_0.team][var_0.squadindex].ref_11e72]) && level.ref_13737[var_0.team][var_0.squadindex].ref_13bee >= level.ref_13735[level.ref_13737[var_0.team][var_0.squadindex].ref_11e72]) {
-      ref_13f1a(level.ref_13737[var_0.team][var_0.squadindex].ref_11e72, level.squaddata[var_0.team][var_0.squadindex].players, var_0);
+    while(isDefined(level.ref_13735[level.ref_13737[var_0.team][var_0.squadindex].ref_11E72]) && level.ref_13737[var_0.team][var_0.squadindex].ref_13BEE >= level.ref_13735[level.ref_13737[var_0.team][var_0.squadindex].ref_11E72]) {
+      ref_13F1A(level.ref_13737[var_0.team][var_0.squadindex].ref_11E72, level.squaddata[var_0.team][var_0.squadindex].players, var_0);
     }
 
     return;
   }
 }
 
-function ref_13f1a(var_0, var_1, var_2) {
+function ref_13F1A(var_0, var_1, var_2) {
   foreach(var_4 in var_1) {
     if(!isDefined(var_4)) {
       continue;
     }
 
     if(var_4.squadindex == var_2.squadindex) {
-      var_4 scripts\cp\vehicles\vehicle_compass_cp::ref_120a4(level.ref_13736[var_0]);
+      var_4 scripts\cp\vehicles\vehicle_compass_cp::ref_120A4(level.ref_13736[var_0]);
     }
   }
 
-  level.ref_13737[var_2.team][var_2.squadindex].ref_11e72++;
+  level.ref_13737[var_2.team][var_2.squadindex].ref_11E72++;
 }
 
 function getgametypekillsperhouravg() {
@@ -481,7 +481,7 @@ function getgametypekillsperhouravg() {
     return false;
   }
 
-  var_1 = self.get_remaining_bots / level.ref_145f1.ref_11b56;
+  var_1 = self.get_remaining_bots / level.ref_145F1.ref_11B56;
 
   if(var_1 > level.ref_14636[var_0].get_request_backup_alias) {
     return false;
@@ -491,7 +491,7 @@ function getgametypekillsperhouravg() {
 }
 
 function getblueprintforpickupweapon() {
-  var_0 = self.get_remaining_bots / level.ref_145f1.ref_11b56;
+  var_0 = self.get_remaining_bots / level.ref_145F1.ref_11B56;
   var_1 = level.ref_14636.size - 2;
 
   while(self.lb_wood_surf_dmg_scalar < var_1 && var_0 <= level.ref_14636[self.lb_wood_surf_dmg_scalar + 1].get_request_backup_alias) {
@@ -530,7 +530,7 @@ function caclulate_track_distance(var_0) {
 
   lbravo_actor_keep_anim_loop();
 
-  if(istrue(var_1.ref_12c2b)) {
+  if(istrue(var_1.ref_12C2B)) {
     if(isDefined(self.frontturret)) {
       has_started_cache_defenses(self.frontturret);
     }
@@ -544,7 +544,7 @@ function caclulate_track_distance(var_0) {
     level notify("car_vulnerable");
   }
 
-  ref_1402a(self.ref_13cc5, self.lb_wood_surf_dmg_scalar);
+  ref_1402A(self.ref_13CC5, self.lb_wood_surf_dmg_scalar);
 }
 
 function calculateandvalidatefuelstability(var_0) {
@@ -563,26 +563,26 @@ function calculateandvalidatefuelstability(var_0) {
     self.completex1stashquest = var_1.completex1stashquest;
   }
 
-  ref_13fed(self.lb_wood_surf_dmg_scalar);
+  ref_13FED(self.lb_wood_surf_dmg_scalar);
 }
 
-function ref_119a6() {
+function ref_119A6() {
   level endon("game_ended");
   thread exterior_goal_func("scn_x2_train_death_explo_final_rampup", self, 4);
   f11scriptlightinit();
   wait 5;
   calculateandvalidatefuelstability(level.ref_14637.size - 1);
   lastdeathheadiconforenemy();
-  ref_13c9d();
+  ref_13C9D();
 }
 
 function explosion() {
   level endon("game_ended");
   var_0 = play_ac130_approach_scene();
-  self.ref_1293b = 1;
-  thread ref_13fd6();
+  self.ref_1293B = 1;
+  thread ref_13FD6();
   wait 5;
-  self.ref_1293b = 0;
+  self.ref_1293B = 0;
   caclulate_track_distance(level.ref_14636.size - 1);
 
   foreach(var_2 in level.players) {
@@ -594,7 +594,7 @@ function explosion() {
   level.ref_14635 += 1;
   level notify("car_destroyed");
   getrandompointinboundscircle();
-  thread ref_13e62();
+  thread ref_13E62();
   wait 0.1;
   var_4 = scripts\mp\utility\player::getplayersinradius(self.origin, 1500);
 
@@ -604,9 +604,9 @@ function explosion() {
     }
   }
 
-  ref_13cca();
-  level.ref_145f1.instance++;
-  self.mediumstatehealthratio = ref_1327c();
+  ref_13CCA();
+  level.ref_145F1.instance++;
+  self.mediumstatehealthratio = ref_1327C();
 }
 
 function onteamproximitybecameinvalidplayer(var_0) {
@@ -669,7 +669,7 @@ function lbravo_actor_keep_anim_loop() {
   }
 }
 
-function ref_1327c() {
+function ref_1327C() {
   var_0 = 700;
   var_1 = 85;
   var_2 = anglesToForward(self.angles) * 350;
@@ -832,11 +832,11 @@ function hangar_juggs() {
   self delete();
 }
 
-function ref_13fd6() {
+function ref_13FD6() {
   level endon("game_ended");
   var_0 = undefined;
 
-  while(self.ref_1293b) {
+  while(self.ref_1293B) {
     if(isDefined(var_0)) {
       var_0 delete();
     }
@@ -851,7 +851,7 @@ function ref_13fd6() {
 }
 
 function lastdeathheadiconforenemy() {
-  foreach(var_1 in level.ref_145f1.ref_13c8d) {
+  foreach(var_1 in level.ref_145F1.ref_13C8D) {
     if(var_1.wz_tease == self) {
       if(isDefined(var_1.num_hackers)) {
         var_1.num_hackers delete();
@@ -864,8 +864,8 @@ function lastdeathheadiconforenemy() {
 function run_module_unpause_funcs() {
   var_0 = 0;
 
-  foreach(var_2 in level.ref_145f1.ref_13c8d) {
-    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == level.ref_145f1.cargo_truck_mg_create.ref_119a4) {
+  foreach(var_2 in level.ref_145F1.ref_13C8D) {
+    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == level.ref_145F1.cargo_truck_mg_create.ref_119A4) {
       continue;
     }
 
@@ -882,7 +882,7 @@ function getkothlocations() {
     return false;
   }
 
-  var_1 = self.get_remaining_bots / level.ref_145f1.ref_11b61;
+  var_1 = self.get_remaining_bots / level.ref_145F1.ref_11B61;
 
   if(var_1 > level.ref_14637[var_0].get_request_backup_alias) {
     return false;
@@ -892,7 +892,7 @@ function getkothlocations() {
 }
 
 function getbombteam() {
-  var_0 = self.get_remaining_bots / level.ref_145f1.ref_11b61;
+  var_0 = self.get_remaining_bots / level.ref_145F1.ref_11B61;
   var_1 = level.ref_14637.size - 2;
 
   while(self.lb_wood_surf_dmg_scalar < var_1 && var_0 <= level.ref_14637[self.lb_wood_surf_dmg_scalar + 1].get_request_backup_alias) {
@@ -902,10 +902,10 @@ function getbombteam() {
   calculateandvalidatefuelstability(self.lb_wood_surf_dmg_scalar);
 
   if(self.lb_wood_surf_dmg_scalar == var_1) {
-    thread ref_13e62();
+    thread ref_13E62();
     level notify("x2SuperInterupt");
     extract_removemissionweapon();
-    thread ref_119a6();
+    thread ref_119A6();
     return;
   }
 }
@@ -914,8 +914,8 @@ function register_vehicle_as_ambient() {
   var_0 = [];
   var_1 = level.ref_14636.size - 1;
 
-  foreach(var_3 in level.ref_145f1.ref_13c8d) {
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == level.ref_145f1.cargo_truck_mg_create.ref_119a4) {
+  foreach(var_3 in level.ref_145F1.ref_13C8D) {
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == level.ref_145F1.cargo_truck_mg_create.ref_119A4) {
       continue;
     }
 
@@ -931,8 +931,8 @@ function getrandompointinboundscircle() {
   var_0 = 0;
   var_1 = level.ref_14636.size - 1;
 
-  foreach(var_3 in level.ref_145f1.ref_13c8d) {
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == level.ref_145f1.cargo_truck_mg_create.ref_119a4) {
+  foreach(var_3 in level.ref_145F1.ref_13C8D) {
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == level.ref_145F1.cargo_truck_mg_create.ref_119A4) {
       continue;
     }
 
@@ -942,29 +942,29 @@ function getrandompointinboundscircle() {
   }
 
   if(var_0 == 0) {
-    ref_119a5();
+    ref_119A5();
     return;
   }
 }
 
-function ref_119a5() {
+function ref_119A5() {
   scripts\mp\flags::gameflagset("x2_locomotive_vulnerable");
-  var_0 = level.ref_145f1.ref_13c8d[0].wz_tease;
+  var_0 = level.ref_145F1.ref_13C8D[0].wz_tease;
   extractioncomplete(var_0);
   calculateandvalidatefuelstability(var_0, 1);
 }
 
-function ref_13c9d() {
+function ref_13C9D() {
   scripts\mp\flags::gameflagset("x2_train_destroyed");
 
   foreach(var_1 in level.players) {
     var_1 thread scripts\mp\utility\points::giveunifiedpoints("br_x2_train_destroyed");
   }
 
-  ref_13e63(level.ref_145f1.ref_13c8d[0].wz_tease.frontturret);
+  ref_13E63(level.ref_145F1.ref_13C8D[0].wz_tease.frontturret);
 }
 
-function ref_1402a(var_0, var_1) {
+function ref_1402A(var_0, var_1) {
   if(var_1 == 0) {
     return;
   }
@@ -974,13 +974,13 @@ function ref_1402a(var_0, var_1) {
   _calloutmarkerping_handleluinotify_added::ref_13191("ui_br_x2_event_data", var_3, var_2, var_1);
 }
 
-function ref_13fed(var_0) {
+function ref_13FED(var_0) {
   var_1 = 3;
   var_2 = 0;
   _calloutmarkerping_handleluinotify_added::ref_13191("ui_br_x2_event_data", var_2, var_1, var_0);
 }
 
-function ref_1402d(var_0, var_1, var_2) {
+function ref_1402D(var_0, var_1, var_2) {
   var_3 = 2;
   var_4 = var_3 * 2;
   var_5 = (var_0 - 1) * var_4 + var_1 * var_3;
@@ -988,16 +988,16 @@ function ref_1402d(var_0, var_1, var_2) {
 }
 
 function enemy_rushdown_player() {
-  ent_cleanup(level.ref_145f1.brmodifyvehicledamage * level.ref_14639);
+  ent_cleanup(level.ref_145F1.brmodifyvehicledamage * level.ref_14639);
 }
 
 function ent_cleanup(var_0) {
   var_1 = 7;
   var_2 = var_0;
   var_3 = [];
-  var_4 = level.ref_145f1.cargo_truck_mg_create.ref_119a4;
+  var_4 = level.ref_145F1.cargo_truck_mg_create.ref_119A4;
 
-  foreach(var_7, var_6 in level.ref_145f1.ref_13c8d) {
+  foreach(var_7, var_6 in level.ref_145F1.ref_13C8D) {
     if(isDefined(var_6.script_noteworthy) && var_6.script_noteworthy == var_4) {
       continue;
     }
@@ -1026,7 +1026,7 @@ function ent_cleanup(var_0) {
     var_2 = var_9;
   }
 
-  var_4 = level.ref_145f1.cargo_truck_mg_create.ref_119a4;
+  var_4 = level.ref_145F1.cargo_truck_mg_create.ref_119A4;
 
   foreach(var_11 in var_3) {
     var_11.lightsfx = 0;
@@ -1042,8 +1042,8 @@ function entityhit() {
   var_0.hits = 0;
   var_0.damage = 0;
   var_0.kills = 0;
-  var_0.ref_121a9 = "ks_toma_strike_missile_mp_x2";
-  var_0.ref_121a8 = "ks_toma_strike_cluster_mp_x2";
+  var_0.ref_121A9 = "ks_toma_strike_missile_mp_x2";
+  var_0.ref_121A8 = "ks_toma_strike_cluster_mp_x2";
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "createCustomStreakData")) {
     var_0 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "createCustomStreakData")]](var_0, "toma_strike");
@@ -1074,22 +1074,22 @@ function entry_open(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.momentum = 0;
   var_7.attackingtarget = undefined;
   var_7.ref_14258 = var_0.name;
-  var_7.ref_12cb3 = 15;
-  var_7.ref_11c78 = "auto_nonai";
-  var_7.ref_11c77 = "sentry_offline";
+  var_7.ref_12CB3 = 15;
+  var_7.ref_11C78 = "auto_nonai";
+  var_7.ref_11C77 = "sentry_offline";
   var_7.weaponname = var_5;
   var_7.health = level.turretsettings[var_5].health;
   var_7.maxhealth = level.turretsettings[var_5].maxhealth;
-  var_7.ref_1407d = 1;
+  var_7.ref_1407D = 1;
   var_7.ref_12161 = 0;
   var_7.completex1stashquest = ents_to_clean_up(var_5);
   var_7 linkTo(var_0.wz_tease, var_4, (0, 0, 0), (0, 0, 0));
   var_7 setturretteam(run_openexfil_spawn());
   var_7 setturretmodechangewait(0);
-  var_7 setmode(var_7.ref_11c78);
+  var_7 setmode(var_7.ref_11C78);
   var_7 makeunusable();
   var_7 maketurretinoperable();
-  var_7 setconvergenceheightpercent(level.turretsettings[var_5].ref_132be);
+  var_7 setconvergenceheightpercent(level.turretsettings[var_5].ref_132BE);
   var_7 setdefaultdroppitch(0);
   var_7 setCanDamage(1);
   var_7 setnodeploy(1);
@@ -1097,7 +1097,7 @@ function entry_open(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 setconvergencetime(level.turretsettings[var_5].ref_14681, "yaw");
   var_7 setconvergencetime(level.turretsettings[var_5].ref_12381, "pitch");
   var_7.damagecenter = var_7.origin + (0, 0, 10);
-  var_7.ref_13e91 = var_4;
+  var_7.ref_13E91 = var_4;
   var_7.lb_wood_surf_dmg_scalar = 0;
   var_7.brking_getcenterofcircle = 1;
   var_7.helperdrone_isbeingpingedbydrone = spawn("script_model", var_7.origin);
@@ -1106,11 +1106,11 @@ function entry_open(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.helperdrone_isbeingpingedbydrone.juggernaut_update_hint_logic = var_2;
   var_7.helperdrone_isbeingpingedbydrone setModel(var_6);
   var_7.helperdrone_isbeingpingedbydrone hide();
-  thread ref_13e80();
-  thread ref_13e7e();
+  thread ref_13E80();
+  thread ref_13E7E();
 
   if(var_5 != "armored_train_locomotive_turret_mp") {
-    thread ref_13e6e();
+    thread ref_13E6E();
   }
 
   level.ref_14640[level.ref_14640.size] = var_7;
@@ -1120,7 +1120,7 @@ function entry_open(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 function extractcountdown(var_0, var_1, var_2, var_3) {
   var_4 = spawnturret("misc_turret", var_1.origin, var_2);
   var_4 setModel(var_3);
-  var_4 linkTo(var_0.wz_tease, var_1.ref_13e91, (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_0.wz_tease, var_1.ref_13E91, (0, 0, 0), (0, 0, 0));
   var_4.team = var_1.team;
   var_4.angles = var_1.angles;
   var_4.turreton = var_1.turreton;
@@ -1128,21 +1128,21 @@ function extractcountdown(var_0, var_1, var_2, var_3) {
   var_4.momentum = var_1.momentum;
   var_4.attackingtarget = var_1.attackingtarget;
   var_4.ref_14258 = var_1.ref_14258;
-  var_4.ref_12cb3 = var_1.ref_12cb3;
-  var_4.ref_11c78 = var_1.ref_11c78;
-  var_4.ref_11c77 = var_1.ref_11c77;
+  var_4.ref_12CB3 = var_1.ref_12CB3;
+  var_4.ref_11C78 = var_1.ref_11C78;
+  var_4.ref_11C77 = var_1.ref_11C77;
   var_4.weaponname = var_2;
   var_4.health = var_1.health;
   var_4.maxhealth = var_1.maxhealth;
-  var_4.ref_1407d = var_1.ref_1407d;
+  var_4.ref_1407D = var_1.ref_1407D;
   var_4.ref_12161 = var_1.ref_12161;
   var_4.completex1stashquest = ents_to_clean_up(var_2);
   var_4 setturretteam(var_1.team);
   var_4 setturretmodechangewait(0);
-  var_4 setmode(var_4.ref_11c78);
+  var_4 setmode(var_4.ref_11C78);
   var_4 makeunusable();
   var_4 maketurretinoperable();
-  var_4 setconvergenceheightpercent(level.turretsettings[var_1.weaponname].ref_132be);
+  var_4 setconvergenceheightpercent(level.turretsettings[var_1.weaponname].ref_132BE);
   var_4 setdefaultdroppitch(0);
   var_4 setCanDamage(1);
   var_4 setnodeploy(1);
@@ -1150,7 +1150,7 @@ function extractcountdown(var_0, var_1, var_2, var_3) {
   var_4 setconvergencetime(level.turretsettings[var_1.weaponname].ref_14681, "yaw");
   var_4 setconvergencetime(level.turretsettings[var_1.weaponname].ref_12381, "pitch");
   var_4.damagecenter = var_1.damagecenter;
-  var_4.ref_13e91 = var_1.ref_13e91;
+  var_4.ref_13E91 = var_1.ref_13E91;
   var_4.lb_wood_surf_dmg_scalar = var_1.lb_wood_surf_dmg_scalar;
   var_4.helperdrone_isbeingpingedbydrone = spawn("script_model", var_4.origin);
   var_4.helperdrone_isbeingpingedbydrone.team = var_4.team;
@@ -1158,11 +1158,11 @@ function extractcountdown(var_0, var_1, var_2, var_3) {
   var_4.helperdrone_isbeingpingedbydrone.juggernaut_update_hint_logic = var_1.angles;
   var_4.helperdrone_isbeingpingedbydrone setModel(var_3);
   var_4.helperdrone_isbeingpingedbydrone hide();
-  thread ref_13e80(var_4);
-  thread ref_13e7e();
+  thread ref_13E80(var_4);
+  thread ref_13E7E();
 
   if(var_2 != "armored_train_locomotive_turret_mp" && var_2 != "armored_train_locomotive_turret_buffed_mp") {
-    thread ref_13e6e();
+    thread ref_13E6E();
   }
 
   level.ref_14640[level.ref_14640.size] = var_4;
@@ -1170,8 +1170,8 @@ function extractcountdown(var_0, var_1, var_2, var_3) {
 }
 
 function extraction_balloon_total_plunder() {
-  foreach(var_1 in level.ref_145f1.ref_13c8d) {
-    if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == level.ref_145f1.cargo_truck_mg_create.ref_119a4) {
+  foreach(var_1 in level.ref_145F1.ref_13C8D) {
+    if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == level.ref_145F1.cargo_truck_mg_create.ref_119A4) {
       continue;
     }
 
@@ -1192,29 +1192,29 @@ function extract_removemissionweapon() {
 
 function entmantlingendtime() {
   var_0 = spawnStruct();
-  var_0.ref_13e89 = "armored_train_mg_turret_mp";
+  var_0.ref_13E89 = "armored_train_mg_turret_mp";
   var_0.turretmodel = "x2_veh8_mil_lnd_br_train_turrets_gatling";
   var_1 = spawnStruct();
-  var_1.ref_13e89 = "armored_train_tank_turret_mp";
+  var_1.ref_13E89 = "armored_train_tank_turret_mp";
   var_1.turretmodel = "x2_veh8_mil_lnd_br_train_turrets_88mm";
   var_2 = spawnStruct();
-  var_2.ref_13e89 = "armored_train_mortar_turret_mp";
+  var_2.ref_13E89 = "armored_train_mortar_turret_mp";
   var_2.turretmodel = "x2_veh8_mil_lnd_br_train_turrets_mortar";
   var_3 = spawnStruct();
-  var_3.ref_13e89 = "armored_train_locomotive_turret_mp";
+  var_3.ref_13E89 = "armored_train_locomotive_turret_mp";
   var_3.turretmodel = "x2_veh8_mil_lnd_br_train_turrets_locomotive";
   return [[var_3], [var_0, var_0], [var_1, var_1], [var_0, var_0], [var_1, var_1], [var_0, var_0], [var_1, var_1], [var_0, var_0]];
 }
 
 function enter_numbers_start() {
   var_0 = spawnStruct();
-  var_0.ref_13e89 = "armored_train_mg_turret_buffed_mp";
+  var_0.ref_13E89 = "armored_train_mg_turret_buffed_mp";
   var_0.turretmodel = "x2_veh8_mil_lnd_br_train_turrets_gatling";
   var_1 = spawnStruct();
-  var_1.ref_13e89 = "armored_train_tank_turret_buffed_mp";
+  var_1.ref_13E89 = "armored_train_tank_turret_buffed_mp";
   var_1.turretmodel = "x2_veh8_mil_lnd_br_train_turrets_88mm";
   var_2 = spawnStruct();
-  var_2.ref_13e89 = "armored_train_locomotive_turret_buffed_mp";
+  var_2.ref_13E89 = "armored_train_locomotive_turret_buffed_mp";
   var_2.turretmodel = "x2_veh8_mil_lnd_br_train_turrets_locomotive";
   return [[var_2], [var_0, var_0], [var_1, var_1], [var_0, var_0], [var_1, var_1], [var_0, var_0], [var_1, var_1], [var_0, var_0]];
 }
@@ -1222,7 +1222,7 @@ function enter_numbers_start() {
 function fail_mission_if_killed() {
   var_0 = getdvarint("scr_wztrain_turretHealthPerPlayer", 1050);
   var_1 = level.players.size * var_0;
-  level.ref_145f1.ref_11b7c = var_1;
+  level.ref_145F1.ref_11B7C = var_1;
   level.turretsettings["armored_train_mg_turret_mp"] = spawnStruct();
   level.turretsettings["armored_train_mg_turret_mp"].health = var_1;
   level.turretsettings["armored_train_mg_turret_mp"].maxhealth = var_1;
@@ -1231,8 +1231,8 @@ function fail_mission_if_killed() {
   level.turretsettings["armored_train_mg_turret_mp"].lockstrength = 3;
   level.turretsettings["armored_train_mg_turret_mp"].spinuptime = 0.1;
   level.turretsettings["armored_train_mg_turret_mp"].cooldowntime = 0.3;
-  level.turretsettings["armored_train_mg_turret_mp"].ref_13a84 = 3500;
-  level.turretsettings["armored_train_mg_turret_mp"].ref_132be = 0.65;
+  level.turretsettings["armored_train_mg_turret_mp"].ref_13A84 = 3500;
+  level.turretsettings["armored_train_mg_turret_mp"].ref_132BE = 0.65;
   level.turretsettings["armored_train_mg_turret_mp"].ref_14681 = 0.35;
   level.turretsettings["armored_train_mg_turret_mp"].ref_12381 = 0.35;
   level.turretsettings["armored_train_mg_turret_mp"].weaponinfo = "armored_train_mg_turret_mp";
@@ -1244,8 +1244,8 @@ function fail_mission_if_killed() {
   level.turretsettings["armored_train_mg_turret_buffed_mp"].lockstrength = 3;
   level.turretsettings["armored_train_mg_turret_buffed_mp"].spinuptime = 0.1;
   level.turretsettings["armored_train_mg_turret_buffed_mp"].cooldowntime = 0.3;
-  level.turretsettings["armored_train_mg_turret_buffed_mp"].ref_13a84 = 3500;
-  level.turretsettings["armored_train_mg_turret_buffed_mp"].ref_132be = 0.65;
+  level.turretsettings["armored_train_mg_turret_buffed_mp"].ref_13A84 = 3500;
+  level.turretsettings["armored_train_mg_turret_buffed_mp"].ref_132BE = 0.65;
   level.turretsettings["armored_train_mg_turret_buffed_mp"].ref_14681 = 0.35;
   level.turretsettings["armored_train_mg_turret_buffed_mp"].ref_12381 = 0.35;
   level.turretsettings["armored_train_mg_turret_buffed_mp"].weaponinfo = "armored_train_mg_turret_buffed_mp";
@@ -1257,8 +1257,8 @@ function fail_mission_if_killed() {
   level.turretsettings["armored_train_tank_turret_mp"].lockstrength = 3;
   level.turretsettings["armored_train_tank_turret_mp"].spinuptime = 0.4;
   level.turretsettings["armored_train_tank_turret_mp"].cooldowntime = 0.1;
-  level.turretsettings["armored_train_tank_turret_mp"].ref_13a84 = 4500;
-  level.turretsettings["armored_train_tank_turret_mp"].ref_132be = 0.1;
+  level.turretsettings["armored_train_tank_turret_mp"].ref_13A84 = 4500;
+  level.turretsettings["armored_train_tank_turret_mp"].ref_132BE = 0.1;
   level.turretsettings["armored_train_tank_turret_mp"].ref_14681 = 1;
   level.turretsettings["armored_train_tank_turret_mp"].ref_12381 = 1;
   level.turretsettings["armored_train_tank_turret_mp"].weaponinfo = "armored_train_tank_turret_mp";
@@ -1270,8 +1270,8 @@ function fail_mission_if_killed() {
   level.turretsettings["armored_train_tank_turret_buffed_mp"].lockstrength = 3;
   level.turretsettings["armored_train_tank_turret_buffed_mp"].spinuptime = 0.4;
   level.turretsettings["armored_train_tank_turret_buffed_mp"].cooldowntime = 0.1;
-  level.turretsettings["armored_train_tank_turret_buffed_mp"].ref_13a84 = 4500;
-  level.turretsettings["armored_train_tank_turret_buffed_mp"].ref_132be = 0.1;
+  level.turretsettings["armored_train_tank_turret_buffed_mp"].ref_13A84 = 4500;
+  level.turretsettings["armored_train_tank_turret_buffed_mp"].ref_132BE = 0.1;
   level.turretsettings["armored_train_tank_turret_buffed_mp"].ref_14681 = 1;
   level.turretsettings["armored_train_tank_turret_buffed_mp"].ref_12381 = 1;
   level.turretsettings["armored_train_tank_turret_buffed_mp"].weaponinfo = "armored_train_tank_turret_buffed_mp";
@@ -1283,8 +1283,8 @@ function fail_mission_if_killed() {
   level.turretsettings["armored_train_mortar_turret_mp"].lockstrength = 6;
   level.turretsettings["armored_train_mortar_turret_mp"].spinuptime = 1;
   level.turretsettings["armored_train_mortar_turret_mp"].cooldowntime = 1;
-  level.turretsettings["armored_train_mortar_turret_mp"].ref_13a84 = 5000;
-  level.turretsettings["armored_train_mortar_turret_mp"].ref_132be = 0.2;
+  level.turretsettings["armored_train_mortar_turret_mp"].ref_13A84 = 5000;
+  level.turretsettings["armored_train_mortar_turret_mp"].ref_132BE = 0.2;
   level.turretsettings["armored_train_mortar_turret_mp"].ref_14681 = 1;
   level.turretsettings["armored_train_mortar_turret_mp"].ref_12381 = 1;
   level.turretsettings["armored_train_mortar_turret_mp"].weaponinfo = "armored_train_mortar_turret_mp";
@@ -1297,8 +1297,8 @@ function fail_mission_if_killed() {
   level.turretsettings["armored_train_locomotive_turret_mp"].lockstrength = 3;
   level.turretsettings["armored_train_locomotive_turret_mp"].spinuptime = 1;
   level.turretsettings["armored_train_locomotive_turret_mp"].cooldowntime = 0.1;
-  level.turretsettings["armored_train_locomotive_turret_mp"].ref_13a84 = 4500;
-  level.turretsettings["armored_train_locomotive_turret_mp"].ref_132be = 0.1;
+  level.turretsettings["armored_train_locomotive_turret_mp"].ref_13A84 = 4500;
+  level.turretsettings["armored_train_locomotive_turret_mp"].ref_132BE = 0.1;
   level.turretsettings["armored_train_locomotive_turret_mp"].ref_14681 = 1;
   level.turretsettings["armored_train_locomotive_turret_mp"].ref_12381 = 1;
   level.turretsettings["armored_train_locomotive_turret_mp"].weaponinfo = "armored_train_locomotive_turret_mp";
@@ -1310,18 +1310,18 @@ function fail_mission_if_killed() {
   level.turretsettings["armored_train_locomotive_turret_buffed_mp"].lockstrength = 3;
   level.turretsettings["armored_train_locomotive_turret_buffed_mp"].spinuptime = 1;
   level.turretsettings["armored_train_locomotive_turret_buffed_mp"].cooldowntime = 0.1;
-  level.turretsettings["armored_train_locomotive_turret_buffed_mp"].ref_13a84 = 4500;
-  level.turretsettings["armored_train_locomotive_turret_buffed_mp"].ref_132be = 0.1;
+  level.turretsettings["armored_train_locomotive_turret_buffed_mp"].ref_13A84 = 4500;
+  level.turretsettings["armored_train_locomotive_turret_buffed_mp"].ref_132BE = 0.1;
   level.turretsettings["armored_train_locomotive_turret_buffed_mp"].ref_14681 = 1;
   level.turretsettings["armored_train_locomotive_turret_buffed_mp"].ref_12381 = 1;
   level.turretsettings["armored_train_locomotive_turret_buffed_mp"].weaponinfo = "armored_train_locomotive_turret_mp";
   var_2 = entmantlingendtime();
 
-  foreach(var_4 in level.ref_145f1.ref_13c8d) {
+  foreach(var_4 in level.ref_145F1.ref_13C8D) {
     var_5 = var_2[var_8];
 
-    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == level.ref_145f1.cargo_truck_mg_create.ref_119a4) {
-      var_4.wz_tease.frontturret = entry_open(var_4, var_4.wz_tease gettagorigin("tag_turret_front"), var_4.angles, "front_turret", "tag_turret_front", var_5[0].ref_13e89, var_5[0].turretmodel);
+    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == level.ref_145F1.cargo_truck_mg_create.ref_119A4) {
+      var_4.wz_tease.frontturret = entry_open(var_4, var_4.wz_tease gettagorigin("tag_turret_front"), var_4.angles, "front_turret", "tag_turret_front", var_5[0].ref_13E89, var_5[0].turretmodel);
       var_4.wz_tease.frontturret.traincar = var_4.wz_tease;
       var_4.wz_tease.brdisabledamagestattracking = 1;
       continue;
@@ -1329,15 +1329,15 @@ function fail_mission_if_killed() {
 
     var_6 = (0, 0, 0);
     var_7 = (0, 180, 0);
-    var_4.wz_tease.frontturret = entry_open(var_4, var_4.wz_tease gettagorigin("tag_turret_front"), var_4.angles + var_6, "front_turret", "tag_turret_front", var_5[0].ref_13e89, var_5[0].turretmodel);
-    var_4.wz_tease.rearturret = entry_open(var_4, var_4.wz_tease gettagorigin("tag_turret_rear"), var_4.angles + var_7, "rear_turret", "tag_turret_rear", var_5[1].ref_13e89, var_5[1].turretmodel);
+    var_4.wz_tease.frontturret = entry_open(var_4, var_4.wz_tease gettagorigin("tag_turret_front"), var_4.angles + var_6, "front_turret", "tag_turret_front", var_5[0].ref_13E89, var_5[0].turretmodel);
+    var_4.wz_tease.rearturret = entry_open(var_4, var_4.wz_tease gettagorigin("tag_turret_rear"), var_4.angles + var_7, "rear_turret", "tag_turret_rear", var_5[1].ref_13E89, var_5[1].turretmodel);
     var_4.wz_tease.frontturret.traincar = var_4.wz_tease;
     var_4.wz_tease.rearturret.traincar = var_4.wz_tease;
     var_4.wz_tease.brdisabledamagestattracking = 2;
   }
 }
 
-function ref_13e80(var_0) {
+function ref_13E80(var_0) {
   self endon("death");
   self endon("disabled");
   level endon("game_ended");
@@ -1355,11 +1355,11 @@ function ref_13e80(var_0) {
       continue;
     }
 
-    var_3 = ref_13e6b();
+    var_3 = ref_13E6B();
 
     if(isDefined(var_3)) {
       self.currenttarget = var_3;
-      ref_13e68(var_3);
+      ref_13E68(var_3);
       scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_2);
     }
 
@@ -1367,9 +1367,9 @@ function ref_13e80(var_0) {
   }
 }
 
-function ref_13e6b() {
+function ref_13E6B() {
   var_0 = level.turretsettings[self.weaponname];
-  var_1 = var_0.ref_13a84;
+  var_1 = var_0.ref_13A84;
   var_2 = var_1 * var_1;
   var_3 = self.origin + anglesToForward(self.angles) * var_1;
   var_4 = scripts\common\utility::playersinsphere(var_3, var_1);
@@ -1377,7 +1377,7 @@ function ref_13e6b() {
   var_6 = undefined;
 
   foreach(var_8 in var_4) {
-    var_9 = ref_13e72(var_8);
+    var_9 = ref_13E72(var_8);
 
     if(!istrue(var_9)) {
       continue;
@@ -1396,7 +1396,7 @@ function ref_13e6b() {
   return var_5;
 }
 
-function ref_13e72(var_0) {
+function ref_13E72(var_0) {
   var_1 = 1;
 
   if(!isDefined(var_0)) {
@@ -1407,19 +1407,19 @@ function ref_13e72(var_0) {
     var_1 = 0;
   } else if(isDefined(var_0.play_disguise_vo)) {
     var_1 = 0;
-  } else if(!ref_13e5e(var_0)) {
+  } else if(!ref_13E5E(var_0)) {
     var_1 = 0;
   }
 
   return var_1;
 }
 
-function ref_13e7c(var_0) {
+function ref_13E7C(var_0) {
   var_1 = level.turretsettings[self.weaponname];
-  var_2 = var_1.ref_13a84;
+  var_2 = var_1.ref_13A84;
   var_3 = var_2 * var_2;
 
-  if(!ref_13e72(var_0)) {
+  if(!ref_13E72(var_0)) {
     return false;
   }
 
@@ -1430,7 +1430,7 @@ function ref_13e7c(var_0) {
   return true;
 }
 
-function ref_13e5e(var_0) {
+function ref_13E5E(var_0) {
   var_1 = [var_0 gettagorigin("j_head"), var_0 gettagorigin("j_mainroot"), var_0 gettagorigin("tag_origin")];
   var_2 = self gettagorigin("tag_flash");
   var_3 = var_0.origin + (0, 0, var_0 getplayerviewheight());
@@ -1460,7 +1460,7 @@ function ref_13e5e(var_0) {
   return false;
 }
 
-function ref_13e71(var_0) {
+function ref_13E71(var_0) {
   var_1 = self gettagorigin("tag_flash");
   var_2 = var_0.origin;
   var_3 = vectorNormalize(var_2 - var_1);
@@ -1473,17 +1473,17 @@ function ref_13e71(var_0) {
   return false;
 }
 
-function ref_13e68(var_0) {
+function ref_13E68(var_0) {
   self settargetentity(var_0);
   self.attackingtarget = var_0;
-  ref_13e79();
-  ref_13e5c(var_0);
-  ref_13e5d();
+  ref_13E79();
+  ref_13E5C(var_0);
+  ref_13E5D();
   self cleartargetentity();
   self.currenttarget = undefined;
 }
 
-function ref_13e79() {
+function ref_13E79() {
   self laseron();
   var_0 = level.turretsettings[self.weaponname];
 
@@ -1493,24 +1493,24 @@ function ref_13e79() {
   }
 }
 
-function ref_13e78() {
+function ref_13E78() {
   self laseroff();
   self.momentum = 0;
 }
 
-function ref_13e5c(var_0) {
+function ref_13E5C(var_0) {
   self endon("disabled");
   var_1 = level.turretsettings[self.weaponname];
   var_2 = var_1.burst;
   var_3 = var_1.ref_12212;
   var_4 = var_1.lockstrength;
 
-  while(istrue(self.turreton) && ref_13e7c(var_0)) {
+  while(istrue(self.turreton) && ref_13E7C(var_0)) {
     for(var_5 = 0; var_5 < var_2; var_5++) {
-      if(istrue(self.turreton) && ref_13e7c(var_0) && ref_13e71(var_0)) {
+      if(istrue(self.turreton) && ref_13E7C(var_0) && ref_13E71(var_0)) {
         if(self.weaponname == "armored_train_mortar_turret_mp") {
           var_6 = var_1.streakinfo;
-          ref_11d2c(self.origin, var_0.origin, var_6);
+          ref_11D2C(self.origin, var_0.origin, var_6);
           self shootturret("tag_flash", var_4);
         } else {
           var_7 = weaponfiretime(var_1.weaponinfo);
@@ -1528,11 +1528,11 @@ function ref_13e5c(var_0) {
   }
 }
 
-function ref_13e5d() {
-  ref_13e78();
+function ref_13E5D() {
+  ref_13E78();
 }
 
-function ref_13e7e() {
+function ref_13E7E() {
   self endon("death");
   level waittill("game_ended");
 
@@ -1563,7 +1563,7 @@ function enemy_think(var_0) {
   }
 }
 
-function ref_13e6e() {
+function ref_13E6E() {
   self endon("stopDamageMonitor");
   level endon("game_ended");
   var_0 = undefined;
@@ -1576,11 +1576,11 @@ function ref_13e6e() {
       return;
     }
 
-    if(isDefined(var_0) && isDefined(var_0.team) && var_0.team == run_openexfil_spawn() && !istrue(var_0.ref_1217a)) {
+    if(isDefined(var_0) && isDefined(var_0.team) && var_0.team == run_openexfil_spawn() && !istrue(var_0.ref_1217A)) {
       continue;
     }
 
-    if(getdvarint("x2_enable_blink_fx", 1) && !istrue(var_0.ref_11e95)) {
+    if(getdvarint("x2_enable_blink_fx", 1) && !istrue(var_0.ref_11E95)) {
       thread enemy_think(1);
     }
 
@@ -1606,7 +1606,7 @@ function ref_13e6e() {
       }
 
       var_9 = int(min(var_2, var_8));
-      ref_13fcf(var_7, var_9);
+      ref_13FCF(var_7, var_9);
     }
 
     scripts\mp\gametypes\br_gametype_x2::equipsecondarypickup(var_0, var_8);
@@ -1620,11 +1620,11 @@ function ref_13e6e() {
     }
   }
 
-  ref_13e63();
-  thread ref_13e85();
+  ref_13E63();
+  thread ref_13E85();
 }
 
-function ref_13e63() {
+function ref_13E63() {
   if(self.turreton) {
     if(self.health > 0) {
       self notify("stopDamageMonitor");
@@ -1632,7 +1632,7 @@ function ref_13e63() {
     }
 
     self.turreton = 0;
-    self setmode(self.ref_11c77);
+    self setmode(self.ref_11C77);
     self cleartargetentity();
     self.attackingtarget = undefined;
     self notify("disabled");
@@ -1643,23 +1643,23 @@ function ref_13e63() {
     }
 
     if(self.weaponname == "armored_train_locomotive_turret_mp" || self.weaponname == "armored_train_locomotive_turret_buffed_mp") {
-      self.ref_127e6 = spawn("script_model", self.origin);
-      self.ref_127e6 setModel("x2_vfx_turret_loco_pop");
-      self.ref_127e6.angles = self.traincar.angles;
-      self.ref_127e6 linkTo(self.traincar, self.ref_13e91);
-      self.ref_127e6 setscriptablepartstate("base", "loco_pop");
+      self.ref_127E6 = spawn("script_model", self.origin);
+      self.ref_127E6 setModel("x2_vfx_turret_loco_pop");
+      self.ref_127E6.angles = self.traincar.angles;
+      self.ref_127E6 linkTo(self.traincar, self.ref_13E91);
+      self.ref_127E6 setscriptablepartstate("base", "loco_pop");
       return;
     }
 
-    self.ref_127e6 = spawn("script_model", self.origin);
-    self.ref_127e6 setModel("x2_vfx_turret_pop");
-    self.ref_127e6.angles = self.traincar.angles;
-    self.ref_127e6 linkTo(self.traincar, self.ref_13e91);
-    self.ref_127e6 setscriptablepartstate("base", "pop");
+    self.ref_127E6 = spawn("script_model", self.origin);
+    self.ref_127E6 setModel("x2_vfx_turret_pop");
+    self.ref_127E6.angles = self.traincar.angles;
+    self.ref_127E6 linkTo(self.traincar, self.ref_13E91);
+    self.ref_127E6 setscriptablepartstate("base", "pop");
     self.isvalidpos = spawn("script_model", self.origin);
     self.isvalidpos setModel("x2_reveal_assault_car_turrets_destroyed_decal");
     self.isvalidpos.angles = self.traincar.angles;
-    self.isvalidpos linkTo(self.traincar, self.ref_13e91);
+    self.isvalidpos linkTo(self.traincar, self.ref_13E91);
     return;
   }
 }
@@ -1670,9 +1670,9 @@ function has_started_cache_defenses() {
     self.isvalidpos = undefined;
   }
 
-  if(isDefined(self.ref_127e6)) {
-    self.ref_127e6 delete();
-    self.ref_127e6 = undefined;
+  if(isDefined(self.ref_127E6)) {
+    self.ref_127E6 delete();
+    self.ref_127E6 = undefined;
     return;
   }
 }
@@ -1692,15 +1692,15 @@ function has_no_focus_fire_attackers(var_0) {
   }
 }
 
-function ref_13e62() {
+function ref_13E62() {
   level endon("game_ended");
 
   if(self.frontturret.turreton) {
-    ref_13e63(self.frontturret);
+    ref_13E63(self.frontturret);
   }
 
   if(isDefined(self.rearturret) && self.rearturret.turreton) {
-    ref_13e63(self.rearturret);
+    ref_13E63(self.rearturret);
   }
 
   self.frontturret kill();
@@ -1772,37 +1772,37 @@ function calculatenumteamswithplayers(var_0) {
   }
 
   var_2 = scripts\engine\utility::ter_op(self == self.traincar.frontturret, 0, 1);
-  ref_1402d(self.traincar.ref_13cc5, var_2, self.lb_wood_surf_dmg_scalar);
+  ref_1402D(self.traincar.ref_13CC5, var_2, self.lb_wood_surf_dmg_scalar);
 }
 
-function ref_13e64() {
-  var_0 = level.ref_145f1.cargo_truck_mg_create.ref_119a4;
+function ref_13E64() {
+  var_0 = level.ref_145F1.cargo_truck_mg_create.ref_119A4;
 
-  foreach(var_2 in level.ref_145f1.ref_13c8d) {
+  foreach(var_2 in level.ref_145F1.ref_13C8D) {
     if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == var_0) {
-      ref_13e63(var_2.wz_tease.frontturret);
+      ref_13E63(var_2.wz_tease.frontturret);
       continue;
     }
 
     if(var_2.wz_tease.lb_wood_surf_dmg_scalar != level.ref_14636.size - 1) {
-      ref_13e63(var_2.wz_tease.frontturret);
-      ref_13e63(var_2.wz_tease.rearturret);
+      ref_13E63(var_2.wz_tease.frontturret);
+      ref_13E63(var_2.wz_tease.rearturret);
     }
   }
 }
 
-function ref_13e65() {
+function ref_13E65() {
   if(!self.turreton) {
     self show();
     self.helperdrone_isbeingpingedbydrone hide();
     self.helperdrone_isbeingpingedbydrone setscriptablepartstate("base", "enabled");
     self.health = self.maxhealth;
-    self setmode(self.ref_11c78);
+    self setmode(self.ref_11C78);
     self.turreton = 1;
-    thread ref_13e80();
+    thread ref_13E80();
 
     if(self.weaponname != "armored_train_locomotive_turret_mp") {
-      thread ref_13e6e();
+      thread ref_13E6E();
       return;
     }
 
@@ -1810,18 +1810,18 @@ function ref_13e65() {
   }
 }
 
-function ref_13e66() {
-  var_0 = level.ref_145f1.cargo_truck_mg_create.ref_119a4;
+function ref_13E66() {
+  var_0 = level.ref_145F1.cargo_truck_mg_create.ref_119A4;
 
-  foreach(var_2 in level.ref_145f1.ref_13c8d) {
+  foreach(var_2 in level.ref_145F1.ref_13C8D) {
     if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == var_0) {
-      ref_13e65(var_2.wz_tease.frontturret);
+      ref_13E65(var_2.wz_tease.frontturret);
       continue;
     }
 
     if(var_2.wz_tease.lb_wood_surf_dmg_scalar != level.ref_14636.size - 1) {
-      ref_13e65(var_2.wz_tease.frontturret);
-      ref_13e65(var_2.wz_tease.rearturret);
+      ref_13E65(var_2.wz_tease.frontturret);
+      ref_13E65(var_2.wz_tease.rearturret);
     }
   }
 }
@@ -1830,11 +1830,11 @@ function fire_rate() {
   scripts\mp\gametypes\br_gametype_x2::f11scriptlighttoggle(0);
   var_0 = enter_numbers_start();
 
-  foreach(var_2 in level.ref_145f1.ref_13c8d) {
+  foreach(var_2 in level.ref_145F1.ref_13C8D) {
     var_3 = var_0[var_7];
 
-    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == level.ref_145f1.cargo_truck_mg_create.ref_119a4) {
-      var_4 = extractcountdown(var_2, var_2.wz_tease.frontturret, var_3[0].ref_13e89, var_3[0].turretmodel);
+    if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == level.ref_145F1.cargo_truck_mg_create.ref_119A4) {
+      var_4 = extractcountdown(var_2, var_2.wz_tease.frontturret, var_3[0].ref_13E89, var_3[0].turretmodel);
       var_2.wz_tease.frontturret.helperdrone_isbeingpingedbydrone delete();
       var_2.wz_tease.frontturret delete();
       var_2.wz_tease.frontturret = var_4;
@@ -1843,7 +1843,7 @@ function fire_rate() {
     }
 
     if(isDefined(var_2.wz_tease.frontturret) && var_2.wz_tease.frontturret.turreton && var_2.wz_tease.frontturret.health > 0) {
-      var_5 = extractcountdown(var_2, var_2.wz_tease.frontturret, var_3[0].ref_13e89, var_3[0].turretmodel);
+      var_5 = extractcountdown(var_2, var_2.wz_tease.frontturret, var_3[0].ref_13E89, var_3[0].turretmodel);
       var_2.wz_tease.frontturret.helperdrone_isbeingpingedbydrone delete();
       var_2.wz_tease.frontturret delete();
       var_2.wz_tease.frontturret = var_5;
@@ -1853,7 +1853,7 @@ function fire_rate() {
     }
 
     if(isDefined(var_2.wz_tease.rearturret) && var_2.wz_tease.rearturret.turreton && var_2.wz_tease.rearturret.health > 0) {
-      var_6 = extractcountdown(var_2, var_2.wz_tease.rearturret, var_3[1].ref_13e89, var_3[1].turretmodel);
+      var_6 = extractcountdown(var_2, var_2.wz_tease.rearturret, var_3[1].ref_13E89, var_3[1].turretmodel);
       var_2.wz_tease.rearturret.helperdrone_isbeingpingedbydrone delete();
       var_2.wz_tease.rearturret delete();
       var_2.wz_tease.rearturret = var_6;
@@ -1867,14 +1867,14 @@ function fire_rate() {
   level notify("buffTurrets");
 }
 
-function ref_11d2c(var_0, var_1, var_2) {
+function ref_11D2C(var_0, var_1, var_2) {
   var_3 = play_ac130_approach_scene();
-  ref_132b3(var_3, var_0, var_1, var_2);
+  ref_132B3(var_3, var_0, var_1, var_2);
 }
 
-function ref_13e85() {
+function ref_13E85() {
   level endon("game_ended");
-  ref_13cca();
+  ref_13CCA();
   self.brdisabledamagestattracking = max(self.brdisabledamagestattracking - 1, 0);
 
   if(self.brdisabledamagestattracking == 0) {
@@ -1899,7 +1899,7 @@ function enemy_targets_headshot() {
   level waittill("buffTurrets");
   scripts\mp\gametypes\br_gametype_x2::showsplash("br_x2_buffed_turrets_enabled");
 
-  while(level.ref_145f1.ref_13cca < 15) {
+  while(level.ref_145F1.ref_13CCA < 15) {
     wait 0.2;
   }
 
@@ -1907,20 +1907,20 @@ function enemy_targets_headshot() {
   scripts\mp\gametypes\br_gametype_x2::showsplash("br_x2_superattack_enabled");
 }
 
-function ref_13cca() {
-  level.ref_145f1.ref_13cca++;
+function ref_13CCA() {
+  level.ref_145F1.ref_13CCA++;
   level notify("train_part_destroyed");
 
-  if(level.ref_145f1.ref_13cca == 6) {
+  if(level.ref_145F1.ref_13CCA == 6) {
     thread fire_rate();
     return;
   }
 }
 
 function round_vehicle_path_logic() {
-  if(level.ref_145f1.ref_13cca >= 21) {
+  if(level.ref_145F1.ref_13CCA >= 21) {
     var_0 = 0.5;
-  } else if(level.ref_145f1.ref_13cca >= 15) {
+  } else if(level.ref_145F1.ref_13CCA >= 15) {
     var_0 = 1;
   } else {
     var_0 = 0;
@@ -1931,9 +1931,9 @@ function round_vehicle_path_logic() {
 }
 
 function round_waittill_at_end_enemy_count() {
-  if(level.ref_145f1.ref_13cca >= 21) {
+  if(level.ref_145F1.ref_13CCA >= 21) {
     var_0 = 0.5;
-  } else if(level.ref_145f1.ref_13cca >= 15) {
+  } else if(level.ref_145F1.ref_13CCA >= 15) {
     var_0 = 0.3;
   } else {
     var_0 = 0;
@@ -1949,16 +1949,16 @@ function exfil_smoke_vfx() {
   level endon("x2SuperInterupt");
 
   for(;;) {
-    if(level.ref_145f1.ref_13cca < 15) {
+    if(level.ref_145F1.ref_13CCA < 15) {
       wait 0.5;
       continue;
     }
 
-    level.ref_145f1.ref_1397c = [];
+    level.ref_145F1.ref_1397C = [];
     var_0 = register_vehicle_as_ambient();
 
     if(var_0.size == 0) {
-      var_1 = level.ref_145f1.ref_13c8d[0];
+      var_1 = level.ref_145F1.ref_13C8D[0];
       thread enter_combat_after_call();
       wait round_waittill_at_end_enemy_count();
     } else {
@@ -1978,10 +1978,10 @@ function enter_combat_after_call() {
   level endon("train_destroyed");
   level endon("x2SuperInterupt");
   scripts\mp\gametypes\br_gametype_x2::extractionlocation();
-  thread ref_1397a();
+  thread ref_1397A();
 }
 
-function ref_1397a() {
+function ref_1397A() {
   level endon("game_ended");
   level endon("train_destroyed");
   level endon("x2SuperInterupt");
@@ -2008,11 +2008,11 @@ function ref_1397a() {
       continue;
     }
 
-    if(!ref_13e1c(var_5.origin)) {
+    if(!ref_13E1C(var_5.origin)) {
       continue;
     }
 
-    ref_132b3(var_0, self.origin, var_5.origin);
+    ref_132B3(var_0, self.origin, var_5.origin);
     var_1++;
   }
 
@@ -2023,11 +2023,11 @@ function ref_1397a() {
       continue;
     }
 
-    if(!ref_13e1c(var_8)) {
+    if(!ref_13E1C(var_8)) {
       continue;
     }
 
-    ref_132b3(var_0, self.origin, var_8);
+    ref_132B3(var_0, self.origin, var_8);
   }
 
   level notify("x2SuperAttackCompleted");
@@ -2040,7 +2040,7 @@ function get_bomb_case_omnvar_value_based_on_color(var_0) {
   foreach(var_4 in var_2) {
     var_5 = play_train_sequence(var_4);
 
-    if(isDefined(var_5) && level.ref_145f1.ref_1397d[var_5].watch_for_player_in_los >= var_1) {
+    if(isDefined(var_5) && level.ref_145F1.ref_1397D[var_5].watch_for_player_in_los >= var_1) {
       return false;
     }
   }
@@ -2048,7 +2048,7 @@ function get_bomb_case_omnvar_value_based_on_color(var_0) {
   return true;
 }
 
-function ref_13e1c(var_0) {
+function ref_13E1C(var_0) {
   var_1 = gettime();
   var_2 = var_1 - 500000;
   var_3 = scripts\mp\utility\player::getplayersinradius(var_0, 1200);
@@ -2056,7 +2056,7 @@ function ref_13e1c(var_0) {
   foreach(var_5 in var_3) {
     var_6 = play_train_sequence(var_5);
 
-    if(isDefined(var_6) && level.ref_145f1.ref_1397d[var_6].watch_for_player_in_los >= var_2) {
+    if(isDefined(var_6) && level.ref_145F1.ref_1397D[var_6].watch_for_player_in_los >= var_2) {
       return false;
     }
   }
@@ -2067,20 +2067,20 @@ function ref_13e1c(var_0) {
     if(!isDefined(var_6)) {
       var_9 = spawnStruct();
       var_9.player = var_5;
-      var_6 = level.ref_145f1.ref_1397d.size;
+      var_6 = level.ref_145F1.ref_1397D.size;
     } else {
-      var_9 = level.ref_145f1.ref_1397d[var_6];
+      var_9 = level.ref_145F1.ref_1397D[var_6];
     }
 
     var_9.watch_for_player_in_los = var_1 + randomint(1000);
-    level.ref_145f1.ref_1397d[var_6] = var_9;
+    level.ref_145F1.ref_1397D[var_6] = var_9;
   }
 
   return true;
 }
 
 function play_train_sequence(var_0) {
-  foreach(var_2 in level.ref_145f1.ref_1397d) {
+  foreach(var_2 in level.ref_145F1.ref_1397D) {
     if(var_2.player == var_0) {
       return var_3;
     }
@@ -2090,7 +2090,7 @@ function play_train_sequence(var_0) {
 }
 
 function unset_slow_healthregen(var_0) {
-  foreach(var_2 in level.ref_145f1.ref_1397c) {
+  foreach(var_2 in level.ref_145F1.ref_1397C) {
     var_3 = distance2d(var_0, var_2);
 
     if(var_3 <= 1200) {
@@ -2122,8 +2122,8 @@ function ref_14642(var_0) {
 function play_ac130_approach_scene() {
   var_0 = undefined;
 
-  if(isDefined(level.ref_13cc2)) {
-    var_0 = level.ref_13cc2;
+  if(isDefined(level.ref_13CC2)) {
+    var_0 = level.ref_13CC2;
   } else {
     var_1 = scripts\engine\utility::array_reverse(level.agentarray);
 
@@ -2141,7 +2141,7 @@ function play_ac130_approach_scene() {
       }
 
       var_0 = var_3;
-      var_0.ref_1407d = 1;
+      var_0.ref_1407D = 1;
 
       if(!isDefined(var_0.pers["nextKillstreakID"])) {
         var_0.pers["nextKillstreakID"] = 0;
@@ -2150,26 +2150,26 @@ function play_ac130_approach_scene() {
       break;
     }
 
-    level.ref_13cc2 = var_0;
+    level.ref_13CC2 = var_0;
   }
 
   return var_0;
 }
 
-function ref_132b3(var_0, var_1, var_2, var_3) {
+function ref_132B3(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_3 = var_0 scripts\cp_mp\utility\killstreak_utility::createstreakinfo("toma_strike", var_0);
   }
 
-  var_3.ref_11eae = 1;
-  var_3.ref_11f47 = 1;
+  var_3.ref_11EAE = 1;
+  var_3.ref_11F47 = 1;
   var_3.vehicle_process_node_when_at_goal = 1;
-  var_3.ref_121a9 = "ks_toma_strike_missile_mp_x2";
-  var_3.ref_121a8 = "ks_toma_strike_cluster_mp_x2";
+  var_3.ref_121A9 = "ks_toma_strike_missile_mp_x2";
+  var_3.ref_121A8 = "ks_toma_strike_cluster_mp_x2";
   var_0.origin = var_2;
   var_0.angles = vectortoangles(var_2 - var_1);
-  level.ref_145f1.ref_1397c = scripts\engine\utility::array_add(level.ref_145f1.ref_1397c, var_2);
-  var_3.ref_13a81 = var_2;
+  level.ref_145F1.ref_1397C = scripts\engine\utility::array_add(level.ref_145F1.ref_1397C, var_2);
+  var_3.ref_13A81 = var_2;
   var_0 thread scripts\cp_mp\killstreaks\toma_strike::starttomastrike(5, undefined, undefined, var_3);
 }
 

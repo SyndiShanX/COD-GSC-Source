@@ -78,7 +78,7 @@ function brrebirth_brmayconsiderplayerdead(var_0, var_1) {
 function brspawnplayersending(var_0) {
   foreach(var_2 in level.brevent3) {
     if(isDefined(var_2)) {
-      var_2 scripts\mp\equipment\support_box::ref_139af(var_0);
+      var_2 scripts\mp\equipment\support_box::ref_139AF(var_0);
     }
   }
 }
@@ -246,7 +246,7 @@ function ammobox_updateplayersused() {
 
       if(!scripts\mp\utility\player::isreallyalive(var_1) && isDefined(self.playersused[var_2])) {
         self.playersused[var_2] = undefined;
-        scripts\mp\equipment\support_box::ref_139af(var_1);
+        scripts\mp\equipment\support_box::ref_139AF(var_1);
       }
     }
   }
@@ -307,8 +307,8 @@ function brregendelayspeed(var_0) {
   var_0 playlocalsound("iw8_support_box_use");
   scripts\mp\weapons::fixupplayerweapons(var_0, var_2);
 
-  if(isDefined(level.ref_120af)) {
-    var_0[[level.ref_120af]](var_2);
+  if(isDefined(level.ref_120AF)) {
+    var_0[[level.ref_120AF]](var_2);
   }
 
   return true;
@@ -615,7 +615,7 @@ function brregenhealthadd(var_0) {
   }
 
   self setclientomnvar("ui_weapon_pickup", var_1);
-  scripts\engine\utility::ref_143b9(1, "death");
+  scripts\engine\utility::ref_143B9(1, "death");
   self setclientomnvar("ui_weapon_pickup", 0);
 }
 
@@ -694,7 +694,7 @@ function ammobox_removeowneroutline() {
 function ammobox_addheadicon() {
   self.showdroplocations = scripts\cp_mp\entityheadicons::setheadicon_singleimage([], "hud_icon_fieldupgrade_weapon_drop", 20, 1, 1000, 100, undefined, 1);
   self.showemergencyhint = scripts\cp_mp\entityheadicons::setheadicon_factionimage(0, 20, undefined, undefined, undefined, undefined, 1);
-  scripts\mp\equipment\support_box::ref_139b0();
+  scripts\mp\equipment\support_box::ref_139B0();
 }
 
 function ammobox_removeheadicon() {
@@ -826,7 +826,7 @@ function brskipplayerkillcams(var_0, var_1) {
 
     var_0.usedcount++;
     var_0.playersused[var_1 getentitynumber()] = var_1;
-    var_0 scripts\mp\equipment\support_box::ref_139af(var_1);
+    var_0 scripts\mp\equipment\support_box::ref_139AF(var_1);
     ammobox_givexpforuse(var_0, var_1);
     return;
   }

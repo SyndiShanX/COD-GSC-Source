@@ -442,7 +442,7 @@ function giveflagcapturexp(var_0, var_1) {
 
   if(isPlayer(var_2)) {
     level thread scripts\mp\hud_util::teamplayercardsplash("callout_securedposition", var_2);
-    var_2 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_2.origin);
+    var_2 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_2.origin);
   }
 
   var_3 = getarraykeys(var_0);

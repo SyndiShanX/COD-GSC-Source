@@ -365,7 +365,7 @@ function autoassign() {
   jumpiffalse(istrue(level.teammaxfill)) LOC_000000f5;
 
   foreach(var_1 in level.teamnamelist) {
-    if(scripts\mp\teams::ref_132e6() && var_1 == "team_two_hundred") {
+    if(scripts\mp\teams::ref_132E6() && var_1 == "team_two_hundred") {
       continue;
     }
 
@@ -438,7 +438,7 @@ function setteam(var_0) {
   waitforclassselect();
   endrespawnnotify();
 
-  if((self.sessionstate == "spectator" || ref_125f1()) && !istrue(self.suicideswitched)) {
+  if((self.sessionstate == "spectator" || ref_125F1()) && !istrue(self.suicideswitched)) {
     if(game["state"] == "postgame") {
       return;
     }
@@ -458,8 +458,8 @@ function setteam(var_0) {
   self notify("okToSpawn");
 }
 
-function ref_125f1() {
-  return isDefined(level.ref_125f1) && self[[level.ref_125f1]]();
+function ref_125F1() {
+  return isDefined(level.ref_125F1) && self[[level.ref_125F1]]();
 }
 
 function shouldmodesetsquads() {
@@ -694,7 +694,7 @@ function leavesquad(var_0, var_1) {
   }
 
   if(isDefined(var_0) && isDefined(var_1)) {
-    thread scripts\mp\spawnselection::ref_12acb(var_0, var_1);
+    thread scripts\mp\spawnselection::ref_12ACB(var_0, var_1);
   }
 
   var_2 = 0;
@@ -902,7 +902,7 @@ function waitforclassselect() {
   self setclientomnvar("ui_in_spawn_camera", 1);
 
   for(;;) {
-    var_0 = scripts\mp\utility\game::getgametype() == "br" && scripts\mp\utility\game::allowclasschoice() && (!scripts\mp\flags::gameflag("prematch_done") || istrue(level.ref_133e0) || istrue(level.dmztut_endgametransition));
+    var_0 = scripts\mp\utility\game::getgametype() == "br" && scripts\mp\utility\game::allowclasschoice() && (!scripts\mp\flags::gameflag("prematch_done") || istrue(level.ref_133E0) || istrue(level.dmztut_endgametransition));
     var_1 = scripts\mp\utility\game::teamhasinfil(self.team) && !scripts\mp\flags::gameflag("infil_started") && !isDefined(level.bypassclasschoicefunc);
 
     if(var_0 || var_1) {

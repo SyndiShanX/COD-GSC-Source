@@ -31,19 +31,19 @@ function tarmac_techo_start() {
   var_0.markplayeraseliminated = getdvarfloat("scr_asc_dcap_t", 5);
   var_0.canplaycircleclosedialog = [];
   level.canparachutebecut = var_0;
-  scripts\engine\scriptable::ref_12f5b("ascbody", &ref_11fd3);
+  scripts\engine\scriptable::ref_12F5B("ascbody", &ref_11FD3);
 }
 
 function active_neurotoxin_clouds() {}
 
-function ref_11fd3(var_0, var_1, var_2, var_3, var_4) {
+function ref_11FD3(var_0, var_1, var_2, var_3, var_4) {
   if(var_2 != "closed") {
-    ref_12d27(var_3, 0);
+    ref_12D27(var_3, 0);
     return;
   }
 }
 
-function ref_120b5(var_0) {
+function ref_120B5(var_0) {
   var_1 = self;
   var_1 setscriptablepartstate("ascbody", "opening");
 }
@@ -59,11 +59,11 @@ function get_current_armor_ammo(var_0) {
   scripts\mp\gameobjects::setownerteam(var_1);
   self notify("capture", var_0);
   self notify("assault", var_0);
-  ref_120b5(self.scriptable, var_0);
-  ref_12d27(var_0, 1);
+  ref_120B5(self.scriptable, var_0);
+  ref_12D27(var_0, 1);
 }
 
-function ref_1307f() {
+function ref_1307F() {
   self notify("flag_neutral");
   scripts\mp\gameobjects::setownerteam("neutral");
 
@@ -103,7 +103,7 @@ function play_dom_capture_sfx(var_0, var_1) {
 
 function activate_front_trigger_hurt() {}
 
-function ref_11fe1(var_0) {
+function ref_11FE1(var_0) {
   var_1 = var_0.team;
   scripts\mp\objidpoolmanager::objective_set_progress(self.objidnum, 0);
   scripts\mp\objidpoolmanager::objective_show_progress(self.objidnum, 0);
@@ -120,7 +120,7 @@ function ref_11fe1(var_0) {
       return;
     }
 
-    thread ref_1307f(1);
+    thread ref_1307F(1);
     scripts\mp\utility\sound::playsoundonplayers("mp_dom_flag_lost", var_2);
     level.lastcaptime = gettime();
     self.neutralized = 1;
@@ -135,7 +135,7 @@ function ref_11fe1(var_0) {
   }
 }
 
-function ref_11fde(var_0) {
+function ref_11FDE(var_0) {
   var_1 = scripts\mp\gameobjects::getownerteam();
   self.neutralizing = istrue(level.flagneutralization) && var_1 != "neutral";
 
@@ -163,7 +163,7 @@ function ref_11fde(var_0) {
   }
 }
 
-function ref_11fe0(var_0, var_1, var_2, var_3) {
+function ref_11FE0(var_0, var_1, var_2, var_3) {
   var_4 = scripts\mp\gameobjects::getownerteam();
 
   if(var_1 < 1 && !level.gameended) {
@@ -185,7 +185,7 @@ function ref_11fe0(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_11fdf(var_0, var_1, var_2) {
+function ref_11FDF(var_0, var_1, var_2) {
   if(isPlayer(var_1)) {
     var_1 setclientomnvar("ui_objective_state", 0);
     var_1.ui_dom_securing = undefined;
@@ -205,13 +205,13 @@ function ref_11fdf(var_0, var_1, var_2) {
   }
 }
 
-function ref_11fd9() {
+function ref_11FD9() {
   self.hostvictimoverride = gettime();
   scripts\mp\gameobjects::setobjectivestatusicons(level.iconcontested);
   scripts\mp\objidpoolmanager::objective_set_progress_team(self.objidnum, undefined);
 }
 
-function ref_11fdb(var_0) {
+function ref_11FDB(var_0) {
   if(istrue(level.flagneutralization) && !self.firstcapture) {
     scripts\mp\gameobjects::setusetime(level.canparachutebecut.markplayeraseliminated * 0.5);
   }
@@ -239,15 +239,15 @@ function ref_11fdb(var_0) {
   self.hostvictimoverride = undefined;
 }
 
-function ref_11fdc() {}
+function ref_11FDC() {}
 
-function ref_11fda(var_0) {}
+function ref_11FDA(var_0) {}
 
-function ref_11fdd(var_0) {}
+function ref_11FDD(var_0) {}
 
 function activate_trap_object() {}
 
-function ref_12d27(var_0, var_1) {
+function ref_12D27(var_0, var_1) {
   var_2 = [];
 
   if(var_1) {

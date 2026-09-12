@@ -115,7 +115,7 @@ function rallypointvehicle_activate(var_0) {
   var_2 = var_0.team;
   var_3 = var_1.ref;
   var_0.israllypointvehicle = 1;
-  thread scripts\mp\spawnselection::ref_1424c(var_0);
+  thread scripts\mp\spawnselection::ref_1424C(var_0);
 
   if(var_2 == "axis") {
     scripts\mp\spawnselection::adddynamicspawnarea(var_2, var_0, var_3, (0, 0, 128));
@@ -145,7 +145,7 @@ function rallypointvehicle_activate(var_0) {
 
 function rallypointvehicle_deactivate(var_0) {}
 
-function ref_129f2(var_0) {
+function ref_129F2(var_0) {
   var_0 endon("death");
   scripts\mp\flags::gameflagwait("prematch_done");
 
@@ -187,7 +187,7 @@ function rallypoint_activatevehiclemarker(var_0) {
     }
   } else {
     scripts\mp\objidpoolmanager::objective_playermask_hidefromall(var_3.objidnum);
-    thread ref_129f2(var_0);
+    thread ref_129F2(var_0);
   }
 
   scripts\mp\objidpoolmanager::objective_set_play_intro(var_3.objidnum, 0);

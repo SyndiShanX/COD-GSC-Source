@@ -8,7 +8,7 @@ function init() {
   setDvar("scr_dmz_lc_active", 1);
   level.ref_14086 = 1;
   scripts\engine\scriptable::scriptable_addusedcallback(&scriptable_used);
-  scripts\engine\scriptable::ref_12f58(&ref_12f5d);
+  scripts\engine\scriptable::ref_12F58(&ref_12F5D);
   level scripts\mp\gametypes\br_lootchopper::init();
   level._effect["vfx_c4_red_light"] = loadfx("vfx/iw8_br/gameplay/vfx_br_soa_c4_volumetric_glow");
   tr_vis_radius_override_lod2();
@@ -19,12 +19,12 @@ function tr_vis_radius_override_lod2() {
   level.ref_13460 = spawnStruct();
   level.ref_13460.time = getdvarint("scr_br_soa_tower_helipad_event_time", 120);
   level.ref_13460.chosencodephones = getdvarint("scr_br_soa_tower_base_jump_threshold", 800);
-  level.ref_13460.ref_1345a = getdvarint("scr_br_soa_tower_helipad_event_chopper_health", 5000);
-  level.ref_13460.ref_1345e = getdvarint("scr_br_soa_tower_helipad_event_chopper_speed", 100);
+  level.ref_13460.ref_1345A = getdvarint("scr_br_soa_tower_helipad_event_chopper_health", 5000);
+  level.ref_13460.ref_1345E = getdvarint("scr_br_soa_tower_helipad_event_chopper_speed", 100);
   level.ref_13460.ref_13458 = getdvarint("scr_br_soa_tower_helipad_event_chopper_acceleration", 50);
   level.ref_13460.ref_13459 = getdvarint("scr_br_soa_tower_helipad_event_chopper_accuracy", 35);
-  level.ref_13460.ref_1345c = getdvarint("scr_br_soa_tower_helipad_event_chopper_min_wait_time", 6);
-  level.ref_13460.ref_1345b = getdvarint("scr_br_soa_tower_helipad_event_chopper_max_wait_time", 11);
+  level.ref_13460.ref_1345C = getdvarint("scr_br_soa_tower_helipad_event_chopper_min_wait_time", 6);
+  level.ref_13460.ref_1345B = getdvarint("scr_br_soa_tower_helipad_event_chopper_max_wait_time", 11);
   level.ref_13460.ref_13466 = getdvarfloat("scr_br_soa_tower_skydive_challenge_complete_threshold", 3);
 }
 
@@ -41,20 +41,20 @@ function object_is_valid() {
     level.ref_13460.choppers = [];
   }
 
-  level.ref_1345d = [];
+  level.ref_1345D = [];
   level.ref_13460.occupied_rpg_trig = getEnt("br_soa_tower_c4_event_vol", "targetname");
-  level.ref_13460.ref_12d83 = (20213, -14849, 5000);
-  level.ref_13460 scripts\mp\utility\trigger::makeenterexittrigger(level.ref_13460.occupied_rpg_trig, &ref_13dab, &ref_13dac, undefined, undefined, &ref_13da5);
+  level.ref_13460.ref_12D83 = (20213, -14849, 5000);
+  level.ref_13460 scripts\mp\utility\trigger::makeenterexittrigger(level.ref_13460.occupied_rpg_trig, &ref_13DAB, &ref_13DAC, undefined, undefined, &ref_13DA5);
   level.ref_13460.ref_12659 = [];
   level.ref_13460.ref_12662 = [];
   level.ref_13460.ref_12663 = [];
   level.ref_13460.ref_12660 = [];
-  level.ref_13460.ref_13b97 = -1;
+  level.ref_13460.ref_13B97 = -1;
   level scripts\mp\gametypes\br_lootchopper::init();
-  ref_131db(level.ref_13460);
+  ref_131DB(level.ref_13460);
 }
 
-function ref_131db() {
+function ref_131DB() {
   var_0 = scripts\engine\utility::getStructArray("soa_tower_helipad_bomb", "targetname");
   var_1 = [];
   GscBinSkip0(0x2e, var_1.size, spawnStruct());
@@ -63,36 +63,36 @@ function ref_131db() {
 function getallextractspawninstances() {
   self endon("death_or_disconnect");
   level endon("game_ended");
-  self.ref_133eb = spawnStruct();
-  self.ref_133ec = 1;
-  self.ref_133eb notify("stop_skydive_tracking");
-  self.ref_133eb endon("stop_skydive_tracking");
-  self.ref_133eb.states = ["soa_tower_top", "skydiving", "completed", "failed"];
-  self.ref_133eb.current_state = "soa_tower_top";
-  self.ref_133eb.loot_getitemcount = 0;
-  self.ref_133eb.ref_1381c = 0;
-  self.ref_133eb.initlocs_radio = 0;
-  self.ref_133eb.ref_133f6 = 0;
+  self.ref_133EB = spawnStruct();
+  self.ref_133EC = 1;
+  self.ref_133EB notify("stop_skydive_tracking");
+  self.ref_133EB endon("stop_skydive_tracking");
+  self.ref_133EB.states = ["soa_tower_top", "skydiving", "completed", "failed"];
+  self.ref_133EB.current_state = "soa_tower_top";
+  self.ref_133EB.loot_getitemcount = 0;
+  self.ref_133EB.ref_1381C = 0;
+  self.ref_133EB.initlocs_radio = 0;
+  self.ref_133EB.ref_133F6 = 0;
   var_0 = level.ref_13460.ref_13466;
 
   for(;;) {
     if(self isonground() && objectiveids() && !self isparachuting()) {
-      self.ref_133eb.current_state = "soa_tower_top";
-      self.ref_133eb.ref_121cb = 0;
-      self.ref_133eb.ref_1381c = 0;
-      self.ref_133eb.initlocs_radio = 0;
-      self.ref_133eb.ref_133f6 = 0;
+      self.ref_133EB.current_state = "soa_tower_top";
+      self.ref_133EB.ref_121CB = 0;
+      self.ref_133EB.ref_1381C = 0;
+      self.ref_133EB.initlocs_radio = 0;
+      self.ref_133EB.ref_133F6 = 0;
     }
 
     if(!self isonground() && !objectiveids()) {
-      if(self.ref_133eb.current_state != "failed") {
-        if(self.ref_133eb.current_state == "soa_tower_top") {
-          self.ref_133eb.ref_1381c = gettime() / 1000;
+      if(self.ref_133EB.current_state != "failed") {
+        if(self.ref_133EB.current_state == "soa_tower_top") {
+          self.ref_133EB.ref_1381C = gettime() / 1000;
         }
 
-        self.ref_133eb.current_state = "skydiving";
-        self.ref_133eb.initlocs_radio = gettime() / 1000;
-        self.ref_133eb.ref_133f6 = self.ref_133eb.initlocs_radio - self.ref_133eb.ref_1381c;
+        self.ref_133EB.current_state = "skydiving";
+        self.ref_133EB.initlocs_radio = gettime() / 1000;
+        self.ref_133EB.ref_133F6 = self.ref_133EB.initlocs_radio - self.ref_133EB.ref_1381C;
       }
     } else if(self isonground() && !objectiveids()) {
       var_1 = 4300;
@@ -104,27 +104,27 @@ function getallextractspawninstances() {
         var_3 = "failed";
       }
 
-      self.ref_133eb.current_state = var_3;
+      self.ref_133EB.current_state = var_3;
 
-      switch (self.ref_133eb.current_state) {
+      switch (self.ref_133EB.current_state) {
         case "completed":
-          self.ref_133ec = 0;
+          self.ref_133EC = 0;
 
           if(getdvarint("MLNNMOPQOP", 0) == 6) {
-            scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_ntower_jump_for_s3_5_event_wz", 1);
+            scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_ntower_jump_for_s3_5_event_wz", 1);
           }
 
-          self.ref_133eb notify("stop_skydive_tracking");
+          self.ref_133EB notify("stop_skydive_tracking");
           break;
         case "failed":
-          self.ref_133ec = 0;
-          self.ref_133eb.current_state = "failed";
-          self.ref_133eb notify("stop_skydive_tracking");
+          self.ref_133EC = 0;
+          self.ref_133EB.current_state = "failed";
+          self.ref_133EB notify("stop_skydive_tracking");
           break;
       }
 
-      self.ref_133ec = 0;
-      self.ref_133eb notify("stop_skydive_tracking");
+      self.ref_133EC = 0;
+      self.ref_133EB notify("stop_skydive_tracking");
     }
 
     waitframe();
@@ -243,7 +243,7 @@ function objective_timers_reset_both() {
 
   if(!objective_set_hot()) {
     level.ref_13460.ref_12662 = scripts\engine\utility::array_add(level.ref_13460.ref_12662, self);
-    ref_13ef3();
+    ref_13EF3();
 
     if(level.ref_13460.current_state == "active") {
       objective_locations_logic(self, "br_soa_tower_event_helipad_explosives");
@@ -266,7 +266,7 @@ function objectivedescription() {
   }
 
   if(objective_set_hot()) {
-    ref_13ef4();
+    ref_13EF4();
     level.ref_13460.ref_12662 = scripts\engine\utility::array_remove(level.ref_13460.ref_12662, self);
     level.ref_13460.ref_12663 = scripts\engine\utility::array_remove(level.ref_13460.ref_12663, self);
     return;
@@ -348,7 +348,7 @@ function objective_locations_logic(var_0, var_1, var_2) {
   scripts\mp\gametypes\br_quest_util::displayplayersplash(var_0, var_1, var_3);
 }
 
-function ref_13dab(var_0, var_1) {
+function ref_13DAB(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -361,13 +361,13 @@ function ref_13dab(var_0, var_1) {
     level.ref_13460.ref_12659 = scripts\engine\utility::array_add(level.ref_13460.ref_12659, var_0);
   }
 
-  if(isPlayer(var_0) && (!isDefined(var_0.ref_133ec) || !var_0.ref_133ec)) {
+  if(isPlayer(var_0) && (!isDefined(var_0.ref_133EC) || !var_0.ref_133EC)) {
     thread getallextractspawninstances();
     return;
   }
 }
 
-function ref_13dac(var_0, var_1) {
+function ref_13DAC(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -378,7 +378,7 @@ function ref_13dac(var_0, var_1) {
   }
 }
 
-function ref_13da5(var_0, var_1) {
+function ref_13DA5(var_0, var_1) {
   if(!isDefined(var_0)) {
     return true;
   }
@@ -401,7 +401,7 @@ function chosen_airlock_door() {
   self skydive_setbasejumpingstatus(0);
 
   for(;;) {
-    if(level.ref_13460.ref_12d83[2] - self.origin[2] > level.ref_13460.chosencodephones) {
+    if(level.ref_13460.ref_12D83[2] - self.origin[2] > level.ref_13460.chosencodephones) {
       break;
     }
 
@@ -425,7 +425,7 @@ function scriptable_used(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-function ref_12f5d(var_0, var_1, var_2, var_3, var_4) {
+function ref_12F5D(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_0) && var_0.type == "soa_tower_bomb") {
     if(!level.ref_13460.active) {
       thread start_event();
@@ -442,17 +442,17 @@ function start_event() {
   waitframe();
   level.ref_13460.current_state = "active";
   level.ref_13460.cp_dntsk_raid_sound_load = 4;
-  level.ref_13460.ref_13b97 = gettime();
-  ref_13ee8();
+  level.ref_13460.ref_13B97 = gettime();
+  ref_13EE8();
   objective_minimapupdate("br_soa_tower_event_helipad_explosives");
   thread ref_13291(level.ref_13460);
-  thread ref_137aa();
+  thread ref_137AA();
   ref_13467(level.ref_13460);
-  ref_13eea("active");
+  ref_13EEA("active");
 }
 
 function soldier_agent_lwfn3() {
-  thread scripts\mp\gametypes\br_publicevent_tower::ref_1344e();
+  thread scripts\mp\gametypes\br_publicevent_tower::ref_1344E();
 }
 
 function ref_13467() {
@@ -461,18 +461,18 @@ function ref_13467() {
   }
 
   var_0 = scripts\engine\utility::getStruct("patrol_zone", "targetname");
-  var_1 = ref_1345f();
-  var_2 = scripts\mp\gametypes\br_lootchopper::ref_11a18(var_0, undefined, 1, var_1);
+  var_1 = ref_1345F();
+  var_2 = scripts\mp\gametypes\br_lootchopper::ref_11A18(var_0, undefined, 1, var_1);
   var_2 thread scripts\mp\gametypes\br_publicevent_tower::connectedplayercount();
   var_2.intro_driver_logic = &ref_13450;
   var_2.intro_enemy_respawner = &ref_13450;
   var_2.lootfunc = &soldier_agent_lwfn3;
-  var_2.interaction_is_floor_is_lava_client = &ref_1344d;
-  var_2.intermissionspawntime = &ref_1344f;
+  var_2.interaction_is_floor_is_lava_client = &ref_1344D;
+  var_2.intermissionspawntime = &ref_1344F;
   var_2.updateteamscoreplacements = 1;
   var_2.usefuncoverride = 1;
-  var_2.health = level.ref_13460.ref_1345a;
-  var_2.speed = level.ref_13460.ref_1345e;
+  var_2.health = level.ref_13460.ref_1345A;
+  var_2.speed = level.ref_13460.ref_1345E;
   var_2.accel = level.ref_13460.ref_13458;
   var_2.ref_13768 = level.ref_13460.ref_13459;
   thread ref_13450(var_2);
@@ -489,7 +489,7 @@ function ref_13467() {
   }
 }
 
-function ref_1345f() {
+function ref_1345F() {
   var_0 = undefined;
   var_1 = undefined;
   var_2 = undefined;
@@ -520,10 +520,10 @@ function hidetimedrunhudfromplayer(var_0) {
   objective_minimapupdate("br_soa_tower_event_helipad_complete_full_splash");
 
   foreach(var_2 in level.ref_13460.ref_12660) {
-    var_2 scripts\mp\gametypes\br_publicevent_tower::ref_12d23("c4_event_participant");
+    var_2 scripts\mp\gametypes\br_publicevent_tower::ref_12D23("c4_event_participant");
 
     if(getdvarint("MLNNMOPQOP", 0) == 6) {
-      var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_side_mission_for_s3_5_event_wz", 1);
+      var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_complete_side_mission_for_s3_5_event_wz", 1);
     }
   }
 
@@ -552,10 +552,10 @@ function handlematchscoreboardinfo() {
 
   level.ref_13460 notify("stop_soa_tower_helipad_event");
   level.ref_13460.active = 0;
-  ref_13ee9();
+  ref_13EE9();
 }
 
-function ref_137aa() {
+function ref_137AA() {
   level endon("stop_soa_tower_helipad_timer");
   level endon("game_ended");
   wait 120;
@@ -578,7 +578,7 @@ function location_tracker(var_0) {
   var_1 = self.entity;
   var_1 notify("disable_bomb_idle_fx");
   level.ref_13460.cp_dntsk_raid_sound_load--;
-  ref_13eeb();
+  ref_13EEB();
 
   if(level.ref_13460.cp_dntsk_raid_sound_load < 1) {
     hidetimedrunhudfromplayer(var_1);
@@ -587,12 +587,12 @@ function location_tracker(var_0) {
   playsoundatpos(var_1.origin, "scn_soa_c4_remove");
   var_0 thread scripts\mp\gametypes\br_public::ref_12616("iw8_ges_plyr_loot_pickup", 1.17);
   objective_show_for_mlg_spectator(var_0);
-  var_0 scripts\mp\gametypes\br_publicevent_tower::ref_12d23("disarm_c4");
+  var_0 scripts\mp\gametypes\br_publicevent_tower::ref_12D23("disarm_c4");
   var_2 = scripts\mp\gametypes\br_pickups::test_ai_anim();
-  var_3 = vectorNormalize(var_1.origin - (var_1.ref_140b8.origin[0], var_1.ref_140b8.origin[1], var_1.origin[2])) * 5;
+  var_3 = vectorNormalize(var_1.origin - (var_1.ref_140B8.origin[0], var_1.ref_140B8.origin[1], var_1.origin[2])) * 5;
   var_4 = var_1.origin - var_3;
   var_5 = vectortoangles(var_1.origin - var_4) + (0, 45, 0);
-  scripts\mp\gametypes\br_lootcache::ref_11a41("brloot_offhand_c4", var_2, var_4, var_5, 1, 0, 0);
+  scripts\mp\gametypes\br_lootcache::ref_11A41("brloot_offhand_c4", var_2, var_4, var_5, 1, 0, 0);
   level.ref_13460.cpcpammoarmorcratecapturecallback = scripts\engine\utility::array_remove(level.ref_13460.cpcpammoarmorcratecapturecallback, var_1);
   var_1 scripts\mp\gameobjects::releaseid();
   var_1 notify("deleted");
@@ -618,9 +618,9 @@ function ref_13546() {
   GscBinSkip0(0x2e, 0, "brloot_plunder_cash_epic_1");
 }
 
-function ref_11a17() {
+function ref_11A17() {
   if(istrue(self.updateteamscoreplacements)) {
-    if(self.ref_12200 + 1 >= self.ref_1220e.size) {
+    if(self.ref_12200 + 1 >= self.ref_1220E.size) {
       self.updateteamscoreplacements = 0;
       return;
     }
@@ -642,8 +642,8 @@ function ref_13450(var_0) {
 
   for(;;) {
     if(!isDefined(var_0)) {
-      self setvehgoalpos(self.ref_1220e[0], 1);
-      self.pathgoal = self.ref_1220e[0];
+      self setvehgoalpos(self.ref_1220E[0], 1);
+      self.pathgoal = self.ref_1220E[0];
     } else {
       self setvehgoalpos(var_0, 1);
       self.pathgoal = var_0;
@@ -655,8 +655,8 @@ function ref_13450(var_0) {
       self clearlookatent();
     }
 
-    scripts\engine\utility::ref_143a5("near_goal", "begin_evasive_maneuvers");
-    var_1 = randomintrange(level.ref_13460.ref_1345c, level.ref_13460.ref_1345b);
+    scripts\engine\utility::ref_143A5("near_goal", "begin_evasive_maneuvers");
+    var_1 = randomintrange(level.ref_13460.ref_1345C, level.ref_13460.ref_1345B);
     var_2 = randomint(10);
     wait var_1;
 
@@ -664,12 +664,12 @@ function ref_13450(var_0) {
       self.updateteamscoreplacements = !self.updateteamscoreplacements;
     }
 
-    ref_11a17();
-    var_0 = self.ref_1220e[self.ref_12200];
+    ref_11A17();
+    var_0 = self.ref_1220E[self.ref_12200];
   }
 }
 
-function ref_1344d() {
+function ref_1344D() {
   var_0 = undefined;
 
   if(level.mapname == "mp_don4") {
@@ -681,14 +681,14 @@ function ref_1344d() {
   return var_0;
 }
 
-function ref_1344f() {
+function ref_1344F() {
   playsoundatpos(self.origin, "veh_lbravo_explode");
   earthquake(1, 3, self.origin, 1000);
   playrumbleonposition("grenade_rumble", self.origin);
   physicsexplosionsphere(self.origin, 1000, 100, 2);
 }
 
-function ref_11a16(var_0) {
+function ref_11A16(var_0) {
   if(self.currentaction != "patrol") {
     self.currentaction = "patrol";
   } else if(self.currentaction == "patrol" && !istrue(var_0)) {
@@ -701,7 +701,7 @@ function ref_11a16(var_0) {
   var_2 = 0;
 
   for(;;) {
-    foreach(var_4 in self.ref_1220e) {}
+    foreach(var_4 in self.ref_1220E) {}
 
     if(self.currentaction == "attacking") {
       if(!istrue(var_1)) {
@@ -716,21 +716,21 @@ function ref_11a16(var_0) {
       var_1 = 0;
     }
 
-    scripts\cp_mp\killstreaks\chopper_support::debugtimedelta(self.ref_1220e[0], 1);
-    ref_11a17();
+    scripts\cp_mp\killstreaks\chopper_support::debugtimedelta(self.ref_1220E[0], 1);
+    ref_11A17();
     wait 0.5;
   }
 }
 
-function ref_13ef3() {
-  self.soldier_agent_lwfn4 = ref_13ee0(&"BR_SOA_EVENT/DISARM_COUNT", -1, 1, (1, 1, 1), 0, 50);
-  self.soldier_agent_lwfn5 = ref_13ee1();
-  self.soldier_agent_lwfn6 = ref_13ee0(&"SPLASHES/HELIPAD_EXPLOSIVES_UNSUBSCRIBING", -1, 1.2, (1, 1, 1), -300, 85);
-  ref_13ef5();
-  ref_13ef6(level.ref_13460.current_state);
+function ref_13EF3() {
+  self.soldier_agent_lwfn4 = ref_13EE0(&"BR_SOA_EVENT/DISARM_COUNT", -1, 1, (1, 1, 1), 0, 50);
+  self.soldier_agent_lwfn5 = ref_13EE1();
+  self.soldier_agent_lwfn6 = ref_13EE0(&"SPLASHES/HELIPAD_EXPLOSIVES_UNSUBSCRIBING", -1, 1.2, (1, 1, 1), -300, 85);
+  ref_13EF5();
+  ref_13EF6(level.ref_13460.current_state);
 }
 
-function ref_13ef4() {
+function ref_13EF4() {
   if(!isDefined(self.ref_13461)) {
     return;
   }
@@ -744,7 +744,7 @@ function ref_13ef4() {
   self.ref_13461 = undefined;
 }
 
-function ref_13ef5() {
+function ref_13EF5() {
   if(!isDefined(self.ref_13461)) {
     return;
   }
@@ -754,26 +754,26 @@ function ref_13ef5() {
   }
 }
 
-function ref_13eea(var_0) {
+function ref_13EEA(var_0) {
   foreach(var_2 in level.ref_13460.ref_12662) {
-    ref_13ef6(var_2, var_0);
+    ref_13EF6(var_2, var_0);
   }
 }
 
-function ref_13ee8() {
+function ref_13EE8() {
   foreach(var_1 in level.ref_13460.ref_12662) {
-    ref_13ef3(var_1);
+    ref_13EF3(var_1);
   }
 }
 
-function ref_13ee9() {
+function ref_13EE9() {
   foreach(var_1 in level.ref_13460.ref_12662) {
-    ref_13ef4(var_1);
+    ref_13EF4(var_1);
   }
 }
 
-function ref_13ef6(var_0) {
-  ref_13ef5();
+function ref_13EF6(var_0) {
+  ref_13EF5();
 
   switch (var_0) {
     case "inactive":
@@ -783,10 +783,10 @@ function ref_13ef6(var_0) {
       self.soldier_agent_lwfn4 scripts\mp\hud_util::showelem();
       var_1 = undefined;
 
-      if(level.ref_13460.ref_13b97 <= 0) {
+      if(level.ref_13460.ref_13B97 <= 0) {
         var_1 = 120;
       } else {
-        var_2 = level.ref_13460.ref_13b97 / 1000;
+        var_2 = level.ref_13460.ref_13B97 / 1000;
         var_3 = gettime() / 1000;
         var_4 = var_3 - var_2;
         var_1 = 120 - var_4;
@@ -798,13 +798,13 @@ function ref_13ef6(var_0) {
   }
 }
 
-function ref_13eeb() {
+function ref_13EEB() {
   foreach(var_1 in level.ref_13460.ref_12662) {
     var_1.soldier_agent_lwfn4 setvalue(4 - level.ref_13460.cp_dntsk_raid_sound_load);
   }
 }
 
-function ref_13edf(var_0) {
+function ref_13EDF(var_0) {
   if(!isDefined(self.ref_13461)) {
     self.ref_13461 = [];
   }
@@ -812,7 +812,7 @@ function ref_13edf(var_0) {
   self.ref_13461 = scripts\engine\utility::array_add(self.ref_13461, var_0);
 }
 
-function ref_13ee0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_13EE0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(var_6)) {
     var_6 = "TOPLEFT";
   }
@@ -825,11 +825,11 @@ function ref_13ee0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.color = var_3;
   var_7.label = var_0;
   var_7 setvalue(var_1);
-  ref_13edf(var_7);
+  ref_13EDF(var_7);
   return var_7;
 }
 
-function ref_13ee1() {
+function ref_13EE1() {
   var_0 = newclienthudelem(self);
   var_0.elemtype = "timer";
   var_0.font = "default";
@@ -846,7 +846,7 @@ function ref_13ee1() {
   var_0.yoffset = 0;
   var_0.children = [];
   var_0.hidden = 0;
-  ref_13edf(var_0);
+  ref_13EDF(var_0);
   return var_0;
 }
 

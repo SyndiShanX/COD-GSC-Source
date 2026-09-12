@@ -32,7 +32,7 @@ function zombiescriptedstealth(var_0, var_1) {
     var_0.scripted_mode = 1;
     var_0.scriptedstealth = 1;
     fake_stealth_funcs(var_0, var_1);
-    var_2 = var_0 scripts\engine\utility::ref_143af("alerted", "damage", "reset_stealth", "alerted_by_ai");
+    var_2 = var_0 scripts\engine\utility::ref_143AF("alerted", "damage", "reset_stealth", "alerted_by_ai");
 
     if(!isDefined(var_2) || var_2 == "reset_stealth") {
       continue;
@@ -507,7 +507,7 @@ function removeifalerted(var_0, var_1) {
   var_0 endon("goal_reached");
   var_0 endon("goal");
   var_0 endon("stalled");
-  var_0 scripts\engine\utility::ref_143a6("death", "alerted", "alerted_by_ai");
+  var_0 scripts\engine\utility::ref_143A6("death", "alerted", "alerted_by_ai");
   scripts\cp\cp_agent_patrol::unsetcooldown(var_1);
 }
 
@@ -1107,7 +1107,7 @@ function _setgoalpos(var_0, var_1, var_2) {
 
   thread manageposarray(var_0, var_1);
   var_0 setgoalpos(var_1);
-  var_15 = var_0 scripts\engine\utility::ref_143ad("goal", "goal_reached");
+  var_15 = var_0 scripts\engine\utility::ref_143AD("goal", "goal_reached");
 }
 
 function manageposarray(var_0, var_1) {
@@ -1122,5 +1122,5 @@ function manageposarray(var_0, var_1) {
 
 function resetgoalpos(var_0) {
   var_0 setgoalpos(self.origin);
-  var_0 scripts\engine\utility::ref_143a5("goal", "goal_reached");
+  var_0 scripts\engine\utility::ref_143A5("goal", "goal_reached");
 }

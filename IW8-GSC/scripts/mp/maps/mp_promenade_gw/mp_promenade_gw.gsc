@@ -31,10 +31,10 @@ function main() {
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "woodland";
-  thread ref_12f8e();
+  thread ref_12F8E();
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {

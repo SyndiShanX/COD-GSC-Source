@@ -360,7 +360,7 @@ function quest_assdistmax(var_0, var_1, var_2) {
   var_15.endpt = var_14;
   var_15.modevalidatekillstreakslot = var_9;
   var_15.angle = vectortoangles(var_11);
-  var_15.ref_11f8c = var_9;
+  var_15.ref_11F8C = var_9;
   return var_15;
 }
 
@@ -384,7 +384,7 @@ function trial_ui_decrease_tries_remaining() {
   return false;
 }
 
-function ref_131d9() {
+function ref_131D9() {
   switch (level.script) {
     case "cp_scaletest":
       level.ref_12880 = ["plant_jammers", "infil_plane"];
@@ -482,7 +482,7 @@ function start_black_screen(var_0, var_1) {
     if(level.gametype == "cp_survival") {
       var_0 setclientomnvar("ui_session_state", "playing");
 
-      if(!istrue(self.ref_11b20)) {
+      if(!istrue(self.ref_11B20)) {
         var_0 scripts\cp\cp_globallogic::updatematchhasmorethan1playeromnvaronplayersfirstspawn();
       }
     }
@@ -531,7 +531,7 @@ function spam_errors_as_prints(var_0, var_1) {
 }
 
 function enable_damage_on_landing() {
-  scripts\engine\utility::ref_143a6("parachute_complete", "parachute_landed", "skydive_land");
+  scripts\engine\utility::ref_143A6("parachute_complete", "parachute_landed", "skydive_land");
   self setCanDamage(1);
   self.respawn_in_progress = undefined;
   self setclientomnvar("player_respawning", 0);

@@ -448,7 +448,7 @@ function ac130_watchowner(var_0) {
   self endon("crashing");
   level endon("game_ended");
   level endon("ac130player_removed");
-  var_1 = var_0 scripts\engine\utility::ref_143a6("disconnect", "joined_team", "joined_spectators");
+  var_1 = var_0 scripts\engine\utility::ref_143A6("disconnect", "joined_team", "joined_spectators");
   var_2 = 0;
 
   if(istrue(var_1) && var_1 == "disconnect") {

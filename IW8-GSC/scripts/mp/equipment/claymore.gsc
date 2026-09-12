@@ -46,7 +46,7 @@ function claymore_use(var_0) {
   var_1.plantnormalcos = 0.342;
   var_1.plantoffsetz = 3;
 
-  if(_calloutmarkerping_handleluinotify_enemyrepinged::ref_124f5()) {
+  if(_calloutmarkerping_handleluinotify_enemyrepinged::ref_124F5()) {
     var_1.plantoffsetz += 2;
     var_1.contents = init_mine_caves();
   }
@@ -155,7 +155,7 @@ function claymore_watchfortrigger() {
               continue;
             }
 
-            if(var_3 scripts\mp\gametypes\br_public::ref_125ec()) {
+            if(var_3 scripts\mp\gametypes\br_public::ref_125EC()) {
               continue;
             }
 

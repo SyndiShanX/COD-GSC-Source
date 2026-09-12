@@ -130,8 +130,8 @@ function initmoraleshvtmodel(var_0) {
   objective_setbackground(level.moraleswid, 2);
   objective_setlabel(level.moraleswid, "CP_BR_SYRK_OBJECTIVES/HVT");
   thread monitormoraleswaypoint();
-  thread ref_144c0(level.moraleshostage);
-  scripts\cp\cp_objectives::ref_11f80(level.moraleswid);
+  thread ref_144C0(level.moraleshostage);
+  scripts\cp\cp_objectives::ref_11F80(level.moraleswid);
 }
 
 function monitormoraleswaypoint() {
@@ -151,11 +151,11 @@ function monitormoraleswaypoint() {
 }
 
 function initmoraleslaptop() {
-  if(istrue(level.ref_11d26)) {
+  if(istrue(level.ref_11D26)) {
     return;
   }
 
-  level.ref_11d26 = 1;
+  level.ref_11D26 = 1;
   var_0 = scripts\engine\utility::getStruct("morales_laptop_interaction", "script_noteworthy");
   scripts\cp\cp_interaction::spawninteractionmodel(var_0, scripts\engine\utility::getStruct(var_0.target, "targetname"));
   var_1 = spawn("script_model", var_0.origin);
@@ -168,10 +168,10 @@ function initmoraleslaptop() {
   var_1 setusefov(90);
   var_1 sethintonobstruction("hide");
   var_1 setuseholdduration("duration_short");
-  thread ref_11d27();
+  thread ref_11D27();
 }
 
-function ref_11d27() {
+function ref_11D27() {
   level endon("game_ended");
   level waittill("enable_morales_laptop_interaction");
   self makeusable();
@@ -195,7 +195,7 @@ function activationmoraleslaptop(var_0, var_1) {
   var_0 notify("morales_hack_used");
   var_2 notify("start_hacking_morales_laptop", var_0);
   level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var_1, "obj_device_set");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_filescopied_1");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_filescopied_1");
   scripts\cp\cp_objective_mechanics::starthackingdefense(var_2, scripts\engine\utility::getStruct("obj1_HVT_hack_location", "script_noteworthy").origin + (0, 150, 50), 120, "morales_laptop_activated", 200);
 }
 
@@ -391,7 +391,7 @@ function _watchforstopwaves(var_0) {
   level endon("game_ended");
   level notify(var_0.moduleid + "_watch_for_stopwaves");
   level endon(var_0.moduleid + "_watch_for_stopwaves");
-  level scripts\engine\utility::ref_143a7("morales_laptop_activated", "morales_holdout_finished", "morales_exfiled", "morales_heli_exfil_defense_done");
+  level scripts\engine\utility::ref_143A7("morales_laptop_activated", "morales_holdout_finished", "morales_exfiled", "morales_heli_exfil_defense_done");
   level notify("spawn_module_" + var_0.moduleid + "_completed");
 }
 
@@ -519,9 +519,9 @@ function initmorales_1(var_0, var_1) {
 
   thread initmoraleslaptop();
   thread scripts\cp\cp_modular_spawning::run_spawn_module("morales_1_patrols");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_start");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_start");
   level.little_bird_mg_handleflarerecharge = 1;
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
 }
 
 function startmorales_1(var_0, var_1) {
@@ -557,7 +557,7 @@ function initmorales_2(var_0, var_1) {
     level.moraleswid = scripts\cp\cp_objectives::requestworldid("morales_HVT_WID");
   }
 
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
 }
 
 function startmorales_2(var_0, var_1) {
@@ -568,7 +568,7 @@ function startmorales_2(var_0, var_1) {
   level waittill("cpu_hacking_done");
   wait 2;
   level notify("morales_laptop_activated");
-  level thread scripts\cp\utility::ref_123fe("");
+  level thread scripts\cp\utility::ref_123FE("");
   wait 2;
 }
 
@@ -629,7 +629,7 @@ function initmorales_3(var_0, var_1) {
   }
 
   initmoraleshvtmodel(var_5.origin);
-  var_0 scripts\cp\cp_objectives::ref_1317e(var_0, level.moraleshostage.origin);
+  var_0 scripts\cp\cp_objectives::ref_1317E(var_0, level.moraleshostage.origin);
 }
 
 function startmorales_3(var_0, var_1) {
@@ -641,7 +641,7 @@ function startmorales_3(var_0, var_1) {
   level.moraleshostage thread scripts\cp\utility::playsoundatpos_safe(level.moraleshostage.origin, "dx_cps_drjm_rescue_hvi_found_callout_10");
   level waittill("player_picked_up_hostage", var_2);
   level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var_2, "obj_package");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_morales_pickup");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_morales_pickup");
   wait 4;
   level.moraleshostage thread scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_drjm_rescue_hvi_pickup_20", "allies");
 }
@@ -680,8 +680,8 @@ function initmorales_4(var_0, var_1) {
   objective_setlabel(var_0.customwaypointid, &"CP_BR_SYRK_OBJECTIVES/MOVE_LZ");
   objective_icon(var_0.customwaypointid, "icon_waypoint_objective_general");
   objective_setbackground(var_0.customwaypointid, 0);
-  scripts\cp\cp_objectives::ref_11f80(var_0.customwaypointid);
-  var_0 scripts\cp\cp_objectives::ref_1317e(var_0, var_3.origin);
+  scripts\cp\cp_objectives::ref_11F80(var_0.customwaypointid);
+  var_0 scripts\cp\cp_objectives::ref_1317E(var_0, var_3.origin);
 }
 
 function startmorales_4(var_0, var_1) {
@@ -734,13 +734,13 @@ function initmorales_5(var_0, var_1) {
 
 function startmorales_5(var_0, var_1) {
   level endon("stop_morales_hvt_objectives");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_doctor_exfil");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_doctor_exfil");
   level.inmoralesholdout = 1;
   thread mark_as_bomb_vest_controller_holder(0);
   waitframe();
   thread scripts\cp\cp_modular_spawning::run_spawn_module("morales_holdout_5");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("morales_heli_1");
-  scripts\cp\crate_drops\cp_crate_drops::ref_12c40("morales_1");
+  scripts\cp\crate_drops\cp_crate_drops::ref_12C40("morales_1");
 
   if(true) {
     wait 60;
@@ -756,7 +756,7 @@ function startmorales_5(var_0, var_1) {
   togglewavespawning(0);
   level.inmoralesholdout = undefined;
   level notify("morales_holdout_finished");
-  level thread scripts\cp\utility::ref_123fe("");
+  level thread scripts\cp\utility::ref_123FE("");
 }
 
 function completemorales_5(var_0) {
@@ -786,7 +786,7 @@ function initmorales_6(var_0, var_1) {
     initmoraleshvtmodel(var_3.origin);
   }
 
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
 }
 
 function startmorales_6(var_0, var_1) {
@@ -803,10 +803,10 @@ function startmorales_6(var_0, var_1) {
   thread mark_as_bomb_vest_controller_holder(5);
   objective_state(level.moraleswid, "invisible");
   objective_delete(level.moraleswid);
-  thread ref_1432d();
+  thread ref_1432D();
   level waittill("heli_trip_took_off");
   thread maxlootleadermarkcount();
-  thread ref_143ff();
+  thread ref_143FF();
   wait 3;
 }
 
@@ -820,11 +820,11 @@ function completemorales_6(var_0) {
   thread scripts\cp\cp_objectives::screenent_c("major_objective");
 }
 
-function ref_1432d() {
+function ref_1432D() {
   level endon("game_ended");
   level waittill("cp_heli_trip_obj_secured_vo_done");
   level.moraleshostage thread scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_drjm_rescue_hvi_exfil_10", "allies");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_doctor_exfil_complete");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_doctor_exfil_complete");
 }
 
 function ref_13019() {
@@ -844,11 +844,11 @@ function mark_as_bomb_vest_controller_holder(var_0) {
   var_2 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 
   foreach(var_4 in var_2) {
-    thread ref_12cd0(var_4);
+    thread ref_12CD0(var_4);
   }
 }
 
-function ref_12cd0(var_0) {
+function ref_12CD0(var_0) {
   level endon("game_ended");
   self endon("death");
   self notify("received_retreat_order");
@@ -859,7 +859,7 @@ function ref_12cd0(var_0) {
   self dodamage(self.health + 100, self.origin);
 }
 
-function ref_143ff() {
+function ref_143FF() {
   level endon("death");
   scripts\engine\utility::flag_set("cp_payloadobjective_cs");
   scripts\engine\utility::flag_wait("cp_payloadobjective_cs_completed");
@@ -870,7 +870,7 @@ function ref_143ff() {
 
 function maxlootleadermarkcount() {
   level endon("game_ended");
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
   level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_lass_rescue_hvi_exfil_20", "allies");
   level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_drjm_rescue_hvi_exfil_30", "allies");
   level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_kama_apc_brief_10", "allies");
@@ -881,7 +881,7 @@ function maxlootleadermarkcount() {
   wait 2;
   level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_lass_apc_brief_60", "allies");
   wait 2;
-  level.ref_139b5 = 0;
+  level.ref_139B5 = 0;
   level notify("morales_outro_vo_done");
 }
 
@@ -933,7 +933,7 @@ function watchforguardclosetoplayers(var_0, var_1) {
 function watchfordamage(var_0) {
   level endon("game_ended");
   level endon("morales_guards_went_hot");
-  var_0 scripts\engine\utility::ref_143a8("death", "alerted", "damage", "explode", "large_explosion");
+  var_0 scripts\engine\utility::ref_143A8("death", "alerted", "damage", "explode", "large_explosion");
   level notify("morales_guards_went_hot");
 }
 
@@ -965,7 +965,7 @@ function markedentitieslifeindices() {
   }
 }
 
-function ref_144c0(var_0) {
+function ref_144C0(var_0) {
   level endon("game_ended");
   level endon("morales_exfiled");
   var_0 endon("exfil");
@@ -973,11 +973,11 @@ function ref_144c0(var_0) {
 
   for(;;) {
     level waittill("player_picked_up_hostage", var_1);
-    thread ref_144c1(var_1, var_1);
+    thread ref_144C1(var_1, var_1);
   }
 }
 
-function ref_144c1(var_0, var_1) {
+function ref_144C1(var_0, var_1) {
   level endon("morales_exfiled");
   level endon("game_ended");
   var_1 endon("exfil");

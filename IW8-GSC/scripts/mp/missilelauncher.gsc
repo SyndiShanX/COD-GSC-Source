@@ -4,10 +4,10 @@
 ***********************************************/
 
 function initmissilelauncherusage() {
-  ref_12c74();
+  ref_12C74();
 }
 
-function ref_12c74() {
+function ref_12C74() {
   self.missilelauncherstage = undefined;
   self.missilelaunchertarget = undefined;
   self.missilelauncherlockstarttime = undefined;
@@ -31,7 +31,7 @@ function resetmissilelauncherlocking() {
     scripts\cp_mp\utility\weapon_utility::removelockedon(self.missilelaunchertarget, self);
   }
 
-  ref_12c74();
+  ref_12C74();
 }
 
 function resetmissilelauncherlockingondeath() {
@@ -180,7 +180,7 @@ function missilelauncherusage() {
       return;
     }
 
-    if(!var_1 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.missilelaunchertarget, self)) {
+    if(!var_1 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141B9(self.missilelaunchertarget, self)) {
       resetmissilelauncherlocking();
       return;
     }
@@ -231,7 +231,7 @@ function missilelauncherusage() {
       return;
     }
 
-    if(!var_1 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.missilelaunchertarget, self)) {
+    if(!var_1 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141B9(self.missilelaunchertarget, self)) {
       resetmissilelauncherlocking();
       return;
     }

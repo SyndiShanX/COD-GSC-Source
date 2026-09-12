@@ -78,7 +78,7 @@ function onstartgametype() {
   thread waittooverridegraceperiod();
   var_5 = 1;
 
-  if(istrue(level.ref_1343f)) {
+  if(istrue(level.ref_1343F)) {
     if(!level.brmissionscompleted && game["roundsPlayed"] == 0 && istrue(game["practiceRound"])) {
       level.extratime = 30;
       game["didSnowFight"] = 1;
@@ -93,7 +93,7 @@ function onstartgametype() {
     level.ref_13443["screen"] = loadfx("vfx/iw8/weap/_impact/snowball/vfx_imp_snowball_scrn.vfx");
 
     if(!var_5) {
-      ref_1343f();
+      ref_1343F();
     }
   }
 
@@ -183,11 +183,11 @@ function onstartgametype() {
       level.lethaldelay = 0;
       defineplayerloadout();
 
-      if(!istrue(level.ref_1343f)) {
+      if(!istrue(level.ref_1343F)) {
         initweaponmap();
         thread setupweapons();
       } else {
-        ref_1343f();
+        ref_1343F();
       }
     } else if(isgungameloadouts()) {
       level.blockweapondrops = 1;
@@ -689,9 +689,9 @@ function onplayerconnect(var_0) {
     foreach(var_2 in level.teamnamelist) {
       if(isDefined(var_0.pers["team"]) && game["roundWinStreak"][var_2] > 0 && var_0.pers["team"] == var_2) {
         var_0.pers["gamemodeLoadout"]["roundWinStreakPrimaryCamoTeam"] = var_2;
-        var_0.pers["gamemodeLoadout"]["roundWinStreakPrimaryCamo"] = ref_131bd();
+        var_0.pers["gamemodeLoadout"]["roundWinStreakPrimaryCamo"] = ref_131BD();
         var_0.pers["gamemodeLoadout"]["roundWinStreakecondaryCamoTeam"] = var_2;
-        var_0.pers["gamemodeLoadout"]["roundWinStreakSecondaryCamo"] = ref_131bd();
+        var_0.pers["gamemodeLoadout"]["roundWinStreakSecondaryCamo"] = ref_131BD();
       }
     }
   }
@@ -715,7 +715,7 @@ function onplayerconnect(var_0) {
 }
 
 function onplayerdisconnect(var_0) {
-  ref_131cb(1);
+  ref_131CB(1);
 
   if(istrue(game["pingEnabled"])) {
     var_1 = 1;
@@ -736,8 +736,8 @@ function onjoinedteam() {
   level endon("game_ended");
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
-    ref_131cb();
+    scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
+    ref_131CB();
   }
 }
 
@@ -779,13 +779,13 @@ function onspawnfinished() {
       }
     }
 
-    level scripts\engine\utility::ref_143a5("prematch_done", "removeArenaOutlines");
+    level scripts\engine\utility::ref_143A5("prematch_done", "removeArenaOutlines");
   }
 
   self setclientomnvar("ui_player_notify_loadout", gettime());
 }
 
-function ref_131cb(var_0) {
+function ref_131CB(var_0) {
   var_1 = getdvarint("scr_player_maxhealth", 100);
   var_2 = scripts\mp\utility\teams::getteamdata("allies", "teamCount");
 
@@ -854,7 +854,7 @@ function modifyblastshieldperk() {
 
 function onplayerdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13) {
   if(isDefined(var_1) && var_1 != var_2 && isPlayer(var_1)) {
-    if(istrue(level.ref_1343f) && (var_6.basename == "snowball_mp" || var_6.basename == "pball_mp")) {
+    if(istrue(level.ref_1343F) && (var_6.basename == "snowball_mp" || var_6.basename == "pball_mp")) {
       playfxontagforclients(level.ref_13443["screen"], var_2, "tag_eye", var_2);
     }
 
@@ -877,7 +877,7 @@ function damagewatcher() {
   self.totaldamagetaken = 0;
 
   for(;;) {
-    scripts\engine\utility::ref_143aa("damage", "force_regeneration", "removeAdrenaline", "healed", "healhRegenThink", "vampirism", "spawned_player");
+    scripts\engine\utility::ref_143AA("damage", "force_regeneration", "removeAdrenaline", "healed", "healhRegenThink", "vampirism", "spawned_player");
 
     if(self.team == "allies") {
       var_0 = 0;
@@ -1246,7 +1246,7 @@ function arena_endgame(var_0, var_1, var_2, var_3, var_4) {
     game["previousWinningTeam"] = "";
   }
 
-  scripts\cp_mp\pet_watch::ref_13fbd();
+  scripts\cp_mp\pet_watch::ref_13FBD();
   thread scripts\mp\gamelogic::endgame(var_0, var_1, var_2, var_3, var_4);
 }
 
@@ -1390,16 +1390,16 @@ function buildprimaries(var_0, var_1, var_2) {
   var_12 = undefined;
   var_13 = undefined;
 
-  if(istrue(level.ref_136cb) && istrue(var_2)) {
+  if(istrue(level.ref_136CB) && istrue(var_2)) {
     var_8 = rotate_silo_gyro_lights();
     game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutPrimaryCamo"] = var_8;
 
-    if(ref_140dc(var_0)) {
+    if(ref_140DC(var_0)) {
       var_12 = rotateeffect();
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutPrimaryCosmeticAttachment"] = var_12;
     }
 
-    if(ref_140dd(var_0)) {
+    if(ref_140DD(var_0)) {
       var_13 = rotateplayer();
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutPrimarySticker"] = var_13[0];
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutPrimarySticker1"] = var_13[1];
@@ -1410,12 +1410,12 @@ function buildprimaries(var_0, var_1, var_2) {
     var_8 = rotate_silo_gyro_lights();
     game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutPrimaryCamo"] = var_8;
 
-    if(ref_140dc(var_0)) {
+    if(ref_140DC(var_0)) {
       var_12 = rotateeffect();
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutPrimaryCosmeticAttachment"] = var_12;
     }
 
-    if(ref_140dd(var_0)) {
+    if(ref_140DD(var_0)) {
       var_13 = rotateplayer();
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutPrimarySticker"] = var_13[0];
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutPrimarySticker1"] = var_13[1];
@@ -1453,16 +1453,16 @@ function buildsecondaries(var_0, var_1, var_2) {
   var_11 = undefined;
   var_12 = undefined;
 
-  if(istrue(level.ref_136cb) && istrue(var_2)) {
+  if(istrue(level.ref_136CB) && istrue(var_2)) {
     var_7 = rotate_silo_gyro_lights();
     game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutSecondaryCamo"] = var_7;
 
-    if(ref_140dc(var_0)) {
+    if(ref_140DC(var_0)) {
       var_11 = rotateeffect();
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutSecondaryCosmeticAttachment"] = var_11;
     }
 
-    if(ref_140dd(var_0)) {
+    if(ref_140DD(var_0)) {
       var_12 = rotateplayer();
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutSecondarySticker"] = var_12[0];
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutSecondarySticker1"] = var_12[1];
@@ -1473,12 +1473,12 @@ function buildsecondaries(var_0, var_1, var_2) {
     var_7 = rotate_silo_gyro_lights();
     game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutSecondaryCamo"] = var_7;
 
-    if(ref_140dc(var_0)) {
+    if(ref_140DC(var_0)) {
       var_11 = rotateeffect();
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutSecondaryCosmeticAttachment"] = var_11;
     }
 
-    if(ref_140dd(var_0)) {
+    if(ref_140DD(var_0)) {
       var_12 = rotateplayer();
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutSecondarySticker"] = var_12[0];
       game["arenaRandomLoadout"][game["arenaRandomLoadoutIndex"]]["loadoutSecondarySticker1"] = var_12[1];
@@ -1510,12 +1510,12 @@ function rotate_silo_gyro_lights() {
   return var_0;
 }
 
-function ref_140dc(var_0) {
+function ref_140DC(var_0) {
   var_1 = scripts\mp\utility\weapon::getweaponrootname(var_0);
   return var_1 != "iw8_me_riotshield" && var_1 != "iw8_knife" && var_1 != "iw8_fists" && var_1 != "iw8_fists_mp" && var_1 != "iw8_me_akimboblades" && var_1 != "iw8_me_akimboblunt" && var_1 != "iw8_gunless" && var_1 != "iw8_la_gromeo" && var_1 != "iw8_la_t9standard_mp" && var_1 != "iw8_la_mike32" && var_1 != "iw8_la_t9launcher_mp" && var_1 != "iw8_la_juliet" && var_1 != "iw8_la_kgolf";
 }
 
-function ref_140dd(var_0) {
+function ref_140DD(var_0) {
   return var_0 != "iw8_knife_mp" && var_0 != "iw8_me_akimboblades_mp" && var_0 != "iw8_me_akimboblunt_mp";
 }
 
@@ -1657,7 +1657,7 @@ function defineplayerloadout(var_0) {
   GscBinSkip0(0x2e, 0, "none");
 }
 
-function ref_131bd() {
+function ref_131BD() {
   var_0 = ["camo_01a", "camo_01b", "camo_01c", "camo_01d", "camo_01d", "camo_01e", "camo_01f", "camo_01g", "camo_01h", "camo_01i", "camo_01j", "camo_02a", "camo_02b", "camo_02c", "camo_02d", "camo_02d", "camo_02e", "camo_02f", "camo_02g", "camo_02h", "camo_02i", "camo_02j", "camo_03a", "camo_03b", "camo_03c", "camo_03d", "camo_03d", "camo_03e", "camo_03f", "camo_03g", "camo_03h", "camo_03i", "camo_03j", "camo_04a", "camo_04b", "camo_04c", "camo_04d", "camo_04d", "camo_04e", "camo_04f", "camo_04g", "camo_04h", "camo_04i", "camo_04j", "camo_05a", "camo_05b", "camo_05c", "camo_05d", "camo_05d", "camo_05e", "camo_05f", "camo_05g", "camo_05h", "camo_05i", "camo_05j", "camo_06a", "camo_06b", "camo_06c", "camo_06d", "camo_06d", "camo_06e", "camo_06f", "camo_06g", "camo_06h", "camo_06i", "camo_06j", "camo_07a", "camo_07b", "camo_07c", "camo_07d", "camo_07d", "camo_07e", "camo_07f", "camo_07g", "camo_07h", "camo_07i", "camo_07j", "camo_08a", "camo_08b", "camo_08c", "camo_08d", "camo_08d", "camo_08e", "camo_08f", "camo_08g", "camo_08h", "camo_08i", "camo_08j", "camo_09a", "camo_09b", "camo_09c", "camo_09d", "camo_09d", "camo_09e", "camo_09f", "camo_09g", "camo_09h", "camo_09i", "camo_09j", "camo_10a", "camo_10b", "camo_10c", "camo_10d", "camo_10d", "camo_10e", "camo_10f", "camo_10g", "camo_10h", "camo_10i", "camo_10j"];
   var_1 = "none";
 
@@ -1826,7 +1826,7 @@ function cacherandomloadouts() {
       if(var_10.size == 2) {
         var_11 = var_10[0];
         var_12 = int(var_10[1]);
-        var_13 = scripts\mp\utility\weapon::ref_1458c(var_11, var_12);
+        var_13 = scripts\mp\utility\weapon::ref_1458C(var_11, var_12);
 
         if(var_13) {
           if(!isDefined(var_3)) {
@@ -1835,7 +1835,7 @@ function cacherandomloadouts() {
           }
 
           var_14 = spawnStruct();
-          var_14.ref_12d96 = var_11;
+          var_14.ref_12D96 = var_11;
           var_14.variantid = var_12;
           var_3 = var_14;
         }
@@ -1849,7 +1849,7 @@ function cacherandomloadouts() {
 
 function updateloadoutarray(var_0, var_1) {
   var_2 = [];
-  GscBinSkip0(0x2e, "loadoutPrimaryAddBlueprintAttachments", scripts\mp\class::ref_139e4(var_0, var_1, 0));
+  GscBinSkip0(0x2e, "loadoutPrimaryAddBlueprintAttachments", scripts\mp\class::ref_139E4(var_0, var_1, 0));
 }
 
 function arenaloadouts_select(var_0, var_1, var_2, var_3) {
@@ -1870,7 +1870,7 @@ function arenaloadouts_select(var_0, var_1, var_2, var_3) {
           var_12 = var_10[var_11];
           var_2 = scripts\engine\utility::array_remove_index(var_2, var_11);
           var_7 = 1;
-          var_7 = var_12.ref_12d96;
+          var_7 = var_12.ref_12D96;
           var_7 = var_12.variantid;
           var_7 = "none";
           var_7 = "none";
@@ -1894,7 +1894,7 @@ function calloutmarkerpingvo_getaffirmaliasstringloot(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(arenaloadouts_getweapongroup(var_4.ref_12d96) == var_1) {
+    if(arenaloadouts_getweapongroup(var_4.ref_12D96) == var_1) {
       var_2 = var_4;
     }
   }
@@ -2039,7 +2039,7 @@ function regroup_at_truck(var_0) {
     }
 
     if(var_4 != "") {
-      var_5 = scripts\mp\class::ref_139e6("mp/classtable_arena_blueprints.csv", var_2, 0, var_4);
+      var_5 = scripts\mp\class::ref_139E6("mp/classtable_arena_blueprints.csv", var_2, 0, var_4);
       return var_5;
     }
 
@@ -2052,7 +2052,7 @@ function regroup_at_truck(var_0) {
 function setupweapons() {
   var_0 = scripts\engine\utility::getStructArray("weapon_pickup", "targetname");
 
-  if(istrue(level.ref_136cb) || istrue(level.setplayerselfrevivingextrainfo)) {
+  if(istrue(level.ref_136CB) || istrue(level.setplayerselfrevivingextrainfo)) {
     ref_13272();
   } else if(updatec4vehiclemultkill()) {
     ref_13227();
@@ -2203,7 +2203,7 @@ function spawnweapon(var_0, var_1, var_2) {
   var_9 = getequipmentmodel(var_3);
 
   if(var_9 != "") {
-    if(istrue(level.ref_1343f) && var_3 == "equip_snowball") {
+    if(istrue(level.ref_1343F) && var_3 == "equip_snowball") {
       if(isPlayer(var_1)) {
         var_8 = "single";
       } else if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "wall") {
@@ -2257,13 +2257,13 @@ function spawnweapon(var_0, var_1, var_2) {
 
     if(isDefined(var_2.angles)) {
       if(var_4 == "equip_claymore" || var_4 == "equip_at_mine" || var_4 == "equip_trophy") {
-        if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "wall" || isDefined(var_2.ref_12f52) && var_2.ref_12f52 == "wall") {
+        if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "wall" || isDefined(var_2.ref_12F52) && var_2.ref_12F52 == "wall") {
           var_10.angles = (270, var_2.angles[1], 90);
         } else {
           var_10.angles = (0, var_2.angles[1], 0);
         }
       } else if(var_4 == "equip_c4" || var_4 == "equip_thermite" || var_4 == "equip_throwing_knife") {
-        if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "wall" || isDefined(var_2.ref_12f52) && var_2.ref_12f52 == "wall") {
+        if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "wall" || isDefined(var_2.ref_12F52) && var_2.ref_12F52 == "wall") {
           var_10.angles = (180, var_2.angles[1], 180);
         } else {
           var_10.angles = (0, var_2.angles[1], 90);
@@ -2295,11 +2295,11 @@ function spawnweapon(var_0, var_1, var_2) {
     var_10 setusefov(210);
     var_10 sethintonobstruction("hide");
     thread outlineequipmentwatchplayerprox(var_10, var_10);
-    var_10.ref_1292d = spawn("trigger_radius", var_10.origin, 0, 32, 32);
+    var_10.ref_1292D = spawn("trigger_radius", var_10.origin, 0, 32, 32);
     thread vehicle_collision_registereventinternal();
 
-    if(istrue(level.ref_1343f)) {
-      thread ref_144f3(var_10, var_2);
+    if(istrue(level.ref_1343F)) {
+      thread ref_144F3(var_10, var_2);
       var_10.targetname = "dropped_weapon";
       return;
     }
@@ -2313,7 +2313,7 @@ function spawnweapon(var_0, var_1, var_2) {
   var_15 = scripts\mp\utility\weapon::getweaponrootname(var_4);
   var_16 = [];
 
-  if(istrue(level.ref_136cb) || istrue(level.setplayerselfrevivingextrainfo) || updatec4vehiclemultkill()) {
+  if(istrue(level.ref_136CB) || istrue(level.setplayerselfrevivingextrainfo) || updatec4vehiclemultkill()) {
     var_17 = var_3.weaponobj;
   } else {
     var_17 = registerdonetskmap(var_16 + "_mp");
@@ -2348,7 +2348,7 @@ function spawnweapon(var_0, var_1, var_2) {
 
   if(isDefined(var_3.angles)) {
     if(var_16 == "iw8_me_riotshield") {
-      if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "wall" || isDefined(var_3.ref_12f52) && var_3.ref_12f52 == "wall") {
+      if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "wall" || isDefined(var_3.ref_12F52) && var_3.ref_12F52 == "wall") {
         var_19.angles = (var_3.angles[0], var_3.angles[1] - 90, var_3.angles[2]);
       } else {
         var_19.angles = (var_3.angles[0] - 90, var_3.angles[1], var_3.angles[2]);
@@ -2379,11 +2379,11 @@ function player_give_infinite_rocks(var_0) {
     }
   } else if(level.mapname == "mp_m_stadium") {
     if(var_0.script_label == "5" && distance(var_0.origin, (400.748, 762, -291.005)) < 10) {
-      var_0.ref_12f52 = "wall";
+      var_0.ref_12F52 = "wall";
     } else if(var_0.script_label == "2" && distance(var_0.origin, (38.354, -115, -298.312)) < 10) {
-      var_0.ref_12f52 = "wall";
+      var_0.ref_12F52 = "wall";
     } else if(var_0.script_label == "2" && distance(var_0.origin, (-36.354, 83, -298.312)) < 10) {
-      var_0.ref_12f52 = "wall";
+      var_0.ref_12F52 = "wall";
     }
   }
 
@@ -2624,7 +2624,7 @@ function vehicle_collision_registereventinternal() {
 
   for(;;) {
     wait 0.05;
-    self.ref_1292d waittill("trigger", var_1);
+    self.ref_1292D waittill("trigger", var_1);
 
     if(!scripts\mp\utility\player::isreallyalive(var_1)) {
       continue;
@@ -2850,7 +2850,7 @@ function arenaflag_onusebegin(var_0) {
   }
 
   self.neutralizing = istrue(level.flagneutralization) && var_1 != "neutral";
-  self.ref_126cd = 1;
+  self.ref_126CD = 1;
 
   if(!istrue(self.neutralized)) {
     self.didstatusnotify = 0;
@@ -3023,7 +3023,7 @@ function removeflagoutlineongameend() {
 }
 
 function deleteotpreview() {
-  level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+  level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   disableotflag();
 }
 
@@ -3186,7 +3186,7 @@ function giveflagcapturexp(var_0, var_1) {
 
   if(isPlayer(var_2)) {
     level thread scripts\mp\hud_util::teamplayercardsplash("callout_securedposition", var_2);
-    var_2 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_2.origin);
+    var_2 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_2.origin);
   }
 
   var_3 = getarraykeys(var_0);
@@ -3239,7 +3239,7 @@ function startotmechanics() {
   scripts\mp\utility\game::setmlgannouncement(10, "free");
   thread showflagoutline();
 
-  if(istrue(level.ref_1343f)) {
+  if(istrue(level.ref_1343F)) {
     foreach(var_4 in level.players) {
       if(isalive(var_4)) {
         var_5 = var_4 scripts\mp\equipment::getcurrentequipment("primary");
@@ -3260,7 +3260,7 @@ function startotmechanics() {
 function ref_13311() {
   wait 0.15;
 
-  if(istrue(level.arenaflag.ref_126cd)) {
+  if(istrue(level.arenaflag.ref_126CD)) {
     return;
   }
 
@@ -3334,7 +3334,7 @@ function outlineenemyplayers() {
 
 function removeenemyoutlines() {
   thread notifyremoveoutlines();
-  level scripts\engine\utility::ref_143a5("prematch_done", "removeArenaOutlines");
+  level scripts\engine\utility::ref_143A5("prematch_done", "removeArenaOutlines");
 
   foreach(var_1 in level.players) {
     var_2 = var_1 getentitynumber();
@@ -3471,7 +3471,7 @@ function getoutlineasset(var_0, var_1) {
       break;
   }
 
-  if(istrue(level.ref_1343f) && isDefined(var_1) && var_1 == "equip_pball") {
+  if(istrue(level.ref_1343F) && isDefined(var_1) && var_1 == "equip_pball") {
     var_2 = "outline_depth_yellow";
   }
 
@@ -3666,7 +3666,7 @@ function usbs_pulled_out() {
   return level.arenaloadouts == 16;
 }
 
-function ref_1343f() {
+function ref_1343F() {
   if(istrue(game["practiceRound"]) || istrue(level.brmissionscompleted)) {
     level.startweapon.weapon = "equip_snowball";
     level.lethaldelay = 0;
@@ -3674,10 +3674,10 @@ function ref_1343f() {
   }
 
   initweaponmap();
-  thread ref_1326d();
+  thread ref_1326D();
 }
 
-function ref_1326d() {
+function ref_1326D() {
   level.arenaweapont1.weapon = "equip_snowball";
 
   if(!istrue(level.brmissionscompleted) && !istrue(game["practiceRound"])) {
@@ -3741,7 +3741,7 @@ function ref_1326d() {
   }
 }
 
-function ref_144f3(var_0, var_1) {
+function ref_144F3(var_0, var_1) {
   self endon("death");
   self waittill("trigger", var_2, var_3);
   var_4 = 0;

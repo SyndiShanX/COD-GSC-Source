@@ -79,7 +79,7 @@ function bunker_spawning(var_0, var_1) {
   self.animated_prop scriptmodelplayanimdeltamotion(var_2);
 }
 
-function ref_12e1d() {
+function ref_12E1D() {
   if(isDefined(self.fnshouldplaypainanim)) {
     if(![[self.fnshouldplaypainanim]]()) {
       return;

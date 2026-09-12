@@ -4,11 +4,11 @@
 ***********************************************/
 
 function getquestrewardgroupindex() {
-  if(isDefined(level.ref_12b1a)) {
+  if(isDefined(level.ref_12B1A)) {
     return;
   }
 
-  level.ref_12b1a = [];
+  level.ref_12B1A = [];
   var_0 = [[level.getplunderextractionsites]]();
   var_1 = [[level.getnextpayloadspawnmodule]]();
 
@@ -19,20 +19,20 @@ function getquestrewardgroupindex() {
   var_2 = scripts\engine\utility::array_combine(var_0, var_1);
 
   foreach(var_4 in var_2) {
-    if(!isDefined(level.ref_12b1a[var_4.checkpoint])) {
-      level.ref_12b1a[var_4.checkpoint] = [];
+    if(!isDefined(level.ref_12B1A[var_4.checkpoint])) {
+      level.ref_12B1A[var_4.checkpoint] = [];
     }
 
-    level.ref_12b1a[var_4.checkpoint][var_5] = var_4;
+    level.ref_12B1A[var_4.checkpoint][var_5] = var_4;
   }
 }
 
 function getpresettruckspawns(var_0, var_1) {
-  if(!isDefined(level.ref_12b19)) {
-    level.ref_12b19 = [];
+  if(!isDefined(level.ref_12B19)) {
+    level.ref_12B19 = [];
   }
 
-  level.ref_12b19[var_0] = var_1;
+  level.ref_12B19[var_0] = var_1;
 }
 
 function getprophealth(var_0) {
@@ -42,7 +42,7 @@ function getprophealth(var_0) {
 }
 
 function getoperatorspecificaccessoryweapon(var_0, var_1) {
-  var_2 = level.ref_12b1a[var_0];
+  var_2 = level.ref_12B1A[var_0];
 
   foreach(var_4 in var_2) {
     if(var_4.type != var_1) {
@@ -69,7 +69,7 @@ function getoperatorspecificaccessoryweapon(var_0, var_1) {
 }
 
 function getpreviousplacement(var_0) {
-  var_0 scripts\engine\utility::ref_143a5("spawned_player", "disconnect");
+  var_0 scripts\engine\utility::ref_143A5("spawned_player", "disconnect");
 
   while(scripts\cp\utility::any_player_nearby(self.origin, 64)) {
     wait 1;
@@ -81,7 +81,7 @@ function getpreviousplacement(var_0) {
 function getnextprop(var_0) {
   level endon("game_ended");
 
-  if(!isDefined(level.ref_12b19[var_0])) {
+  if(!isDefined(level.ref_12B19[var_0])) {
     return;
   }
 
@@ -132,7 +132,7 @@ function getnextsafecircleradius(var_0) {
   level thread scripts\mp\vehicles\vehicle_damage_mp::ref_11952(self, var_0);
   self setclientomnvar("cp_open_cac", -1);
   self setclientomnvar("ui_options_menu", 2);
-  scripts\engine\utility::ref_143a5("loadout_given", "loadout_menu_closed");
+  scripts\engine\utility::ref_143A5("loadout_given", "loadout_menu_closed");
   wait 1;
   self setclientomnvar("cp_open_cac", -2);
   var_0 enableplayeruse(self);
@@ -203,8 +203,8 @@ function getnextrpgspawnmodule(var_0, var_1, var_2, var_3) {
   var_13 scripts\cp\utility::sethintobject(undefined, "HINT_BUTTON", undefined, &"CP_STRIKE/EDIT_MUNITIONS", 1, "duration_short", var_8, 256, 75, 128, 75);
   var_6.interaction = var_13;
   var_13.get_distance_to_closest_teammate = var_6;
-  var_13.ref_11e0e = var_1;
-  var_13.ref_11e0d = var_2;
+  var_13.ref_11E0E = var_1;
+  var_13.ref_11E0D = var_2;
   var_13.ref_14057 = var_3;
   thread getnextcircleindex(var_13);
   return var_6;
@@ -222,10 +222,10 @@ function getnearestbombsiteteam(var_0, var_1, var_2, var_3, var_4, var_5, var_6)
     }
 
     var_7 scripts\cp\utility::sethintobject(undefined, "HINT_BUTTON", undefined, &"CP_STRIKE/EDIT_ROLE", 1, "duration_short", var_6, 256, 75, 128, 75);
-    var_2.ref_12d7e = var_7;
+    var_2.ref_12D7E = var_7;
     var_7.get_distance_to_closest_teammate = var_2;
-    var_7.ref_11e0e = var_3;
-    var_7.ref_11e0d = var_4;
+    var_7.ref_11E0E = var_3;
+    var_7.ref_11E0D = var_4;
     var_7.ref_14057 = var_5;
     thread getnemesis(var_7);
     return;
@@ -323,14 +323,14 @@ function getnumbersspawnpoint() {
   var_3 = 60;
   var_4 = 0.1;
 
-  if(isDefined(self.ref_11e0d)) {
-    var_3 = self.ref_11e0d;
+  if(isDefined(self.ref_11E0D)) {
+    var_3 = self.ref_11E0D;
   }
 
   var_5 = var_4 / var_3;
 
-  if(isDefined(self.ref_11e0e)) {
-    level waittill(self.ref_11e0e);
+  if(isDefined(self.ref_11E0E)) {
+    level waittill(self.ref_11E0E);
   }
 
   objective_showprogressforteam(self.objicon, "allies");
@@ -370,11 +370,11 @@ function getnumdrops(var_0, var_1) {
   var_0 endon("death_or_disconnect");
   level endon("close_munitions_store");
 
-  if(istrue(var_0.ref_13c50)) {
+  if(istrue(var_0.ref_13C50)) {
     return;
   }
 
-  var_0.ref_13c50 = 1;
+  var_0.ref_13C50 = 1;
   wait 3;
 
   for(;;) {
@@ -413,7 +413,7 @@ function getobjectiveflag(var_0) {
   level endon("game_ended");
   level endon("close_munitions_store");
   var_0 disableplayeruse(self);
-  self.ref_12d7d = 1;
+  self.ref_12D7D = 1;
   self setclientomnvar("cp_open_cac", 5);
   wait 1;
   var_0 enableplayeruse(self);

@@ -257,7 +257,7 @@ function monitorjointeam() {
   self endon("disconnect");
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
+    scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
     playersettagcount(0);
   }
 }

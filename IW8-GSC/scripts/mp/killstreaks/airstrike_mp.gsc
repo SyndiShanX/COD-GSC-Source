@@ -18,7 +18,7 @@ function init_airstrike_params() {
   var_0 = "veh8_mil_air_alfa10";
   var_1 = "veh8_mil_air_alfa10_east";
 
-  if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140AA()) {
     var_0 = "plane_juniform87";
     var_1 = "plane_juniform87";
   }
@@ -29,7 +29,7 @@ function init_airstrike_params() {
   level.airstrikesettings["precision_airstrike"].modelbasealt = var_1;
   var_2 = "iw8_spotter_scope_mp";
 
-  if(scripts\cp_mp\utility\game_utility::ref_140a9()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140A9()) {
     var_2 = "iw8_spotter_scope_mp_ch3";
   }
 

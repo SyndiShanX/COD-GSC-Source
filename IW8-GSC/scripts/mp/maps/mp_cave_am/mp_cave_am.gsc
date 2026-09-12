@@ -10,7 +10,7 @@ function main() {
   scripts\mp\maps\mp_cave_am\gen\mp_cave_am_art::main();
   scripts\mp\maps\mp_cave_am\mp_cave_am_fx::main();
   scripts\mp\maps\mp_cave_am\mp_cave_am_lighting::main();
-  level.ref_13d50 = 1;
+  level.ref_13D50 = 1;
   scripts\mp\load::main();
   level thread scripts\engine\scriptable_door::system_init();
   var_0 = spawn("trigger_radius", (376, -1568, -112), 0, 128, 300);
@@ -40,8 +40,8 @@ function main() {
   thread destructibletrucksetup("destructibleTruck01", "destructibleTruck01_edges", "destructibleTruck01_edges_dst");
   thread destructibletrucksetup("destructibleTruck02", "destructibleTruck02_edges", "destructibleTruck02_edges_dst");
   thread matchfxexploder();
-  thread ref_11f11();
-  thread ref_12f8e();
+  thread ref_11F11();
+  thread ref_12F8E();
   thread player_fired_gun_monitor();
 }
 
@@ -143,7 +143,7 @@ function destructibletrucksetup(var_0, var_1, var_2) {
   }
 }
 
-function ref_11f11() {
+function ref_11F11() {
   level endon("game_ended");
   level waittill("used_nuke");
   var_0 = spawn("script_origin", (-106, 364, 216));
@@ -168,11 +168,11 @@ function players_in_laststand() {
   var_0 allowprone(0);
   var_0 scripts\common\utility::allow_killstreaks(0);
   var_0 scripts\common\utility::allow_supers(0);
-  var_0.ref_12e54 = 1;
+  var_0.ref_12E54 = 1;
   var_0 scripts\mp\hud_message::showerrormessage("MP_INGAME_ONLY/SAFE");
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   var_0 = [];
   GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_secondary", (-548, 2268, 100), (0, 330, 0)));
 }

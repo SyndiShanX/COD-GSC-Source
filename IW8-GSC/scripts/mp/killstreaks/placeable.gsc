@@ -82,7 +82,7 @@ function onbegincarrying(var_0, var_1, var_2, var_3) {
     if(isDefined(var_3) && var_3 == 1 && !self isonladder() && self isonground() && !self ismantling()) {
       var_4 = "placePlaceable";
     } else {
-      var_4 = scripts\engine\utility::ref_143ae("placePlaceable", "cancelPlaceable", "force_cancel_placement");
+      var_4 = scripts\engine\utility::ref_143AE("placePlaceable", "cancelPlaceable", "force_cancel_placement");
     }
 
     if(!isDefined(var_1)) {

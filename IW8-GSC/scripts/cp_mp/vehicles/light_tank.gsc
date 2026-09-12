@@ -13,7 +13,7 @@ function light_tank_init() {
   level.vehicle.lighttank.showheadicon = 1;
   level.vehicle.lighttank.showheadicontoenemy = 0;
   var_0 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle("light_tank", 1);
-  var_0.ref_13fca = &wheelson_tank_death;
+  var_0.ref_13FCA = &wheelson_tank_death;
   var_0.destroycallback = &light_tank_explode;
   light_tank_initoccupancy();
   light_tank_initinteract();
@@ -87,7 +87,7 @@ function light_tank_initoccupancy() {
   var_4.viewclamps["right"] = 180;
   var_4.animtag = "tag_seat_0";
   var_4.spawnpriority = 10;
-  var_4.ref_13e8a = getcompleteweaponname("tur_bradley_mp");
+  var_4.ref_13E8A = getcompleteweaponname("tur_bradley_mp");
   var_4.ref_12023 = "ping_vehicle_driver";
   var_3 = "gunner";
   var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat("light_tank", var_3, 1);
@@ -96,12 +96,12 @@ function light_tank_initoccupancy() {
   var_0.exitoffsets[var_3] = (-90, -12, 60);
   var_0.exitdirections[var_3] = "back";
   var_4.restrictions = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getturretpassengerrestrictions();
-  var_4.ref_13e8a = getcompleteweaponname("tur_gun_lighttank_mp");
+  var_4.ref_13E8A = getcompleteweaponname("tur_gun_lighttank_mp");
   var_4.ref_12023 = "ping_vehicle_gunner";
 }
 
 function wheelson_build_path() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("light_tank", 1);
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("light_tank", 1);
   var_0.challengeevaluator = 2.5;
   var_0.keycardlocs_chosen = 0.625;
   var_0.is_using_stealth_debug = 350;
@@ -117,42 +117,42 @@ function wheelson_build_path() {
 
 function light_tank_initinteract() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("light_tank", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("light_tank", "single", ["driver", "gunner"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("light_tank", "single", ["driver", "gunner"]);
 }
 
 function wheelson_delay_allow_attack() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("light_tank", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("light_tank", 1);
   var_0.id = 1;
   var_0.seatids["driver"] = 0;
   var_0.seatids["gunner"] = 1;
   var_0.brtruck_initdialog["turret"] = 0;
   var_0.brtruck_initdialog["missile"] = 1;
   var_0.brtruck_initdialog["smoke"] = 2;
-  var_0.ref_12da2[0] = 0;
-  var_0.ref_12da2[1] = 1;
-  var_0.ref_12da3["driver"]["lighttank_mp"] = 0;
-  var_0.ref_12da3["driver"]["tur_gun_lighttank_mp"] = 1;
-  var_0.ref_12da3["driver"]["tur_gun_lighttank_ks_mp"] = 1;
-  var_0.ref_12da3["gunner"]["tur_bradley_mp"] = 0;
-  var_0.ref_12da3["gunner"]["tur_bradley_ks_mp"] = 0;
-  var_0.ref_12da3["gunner"]["tur_gun_lighttank_mp"] = 1;
-  var_0.ref_12da3["driver"]["tur_gun_lighttank_ks_mp"] = 1;
+  var_0.ref_12DA2[0] = 0;
+  var_0.ref_12DA2[1] = 1;
+  var_0.ref_12DA3["driver"]["lighttank_mp"] = 0;
+  var_0.ref_12DA3["driver"]["tur_gun_lighttank_mp"] = 1;
+  var_0.ref_12DA3["driver"]["tur_gun_lighttank_ks_mp"] = 1;
+  var_0.ref_12DA3["gunner"]["tur_bradley_mp"] = 0;
+  var_0.ref_12DA3["gunner"]["tur_bradley_ks_mp"] = 0;
+  var_0.ref_12DA3["gunner"]["tur_gun_lighttank_mp"] = 1;
+  var_0.ref_12DA3["driver"]["tur_gun_lighttank_ks_mp"] = 1;
 }
 
 function wheelson_damage_monitor() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("light_tank", 3000);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("light_tank", 3000);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("light_tank");
   var_0.class = "super_heavy";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("light_tank");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("light_tank");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("light_tank", 15);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14176("light_tank", &light_tank_premoddamagecallback);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14175("light_tank", &light_tank_postmoddamagecallback);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("light_tank", &light_tank_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("lighttank_tur_mp", 2);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("lighttank_tur_ks_mp", 2);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("bradley_tow_proj_mp", 7);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("bradley_tow_proj_ks_mp", 7);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("lighttank_mp", 5);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("lighttank_tur_mp", 2);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("lighttank_tur_ks_mp", 2);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("bradley_tow_proj_mp", 7);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("bradley_tow_proj_ks_mp", 7);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("lighttank_mp", 5);
 }
 
 #using_animtree("");
@@ -228,7 +228,7 @@ function light_tank_create(var_0, var_1) {
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "light_tank", var_0);
   var_2.objweapon = getcompleteweaponname("lighttank_mp");
   light_tank_updateheadicon(var_2);
-  var_4 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414c(var_2, 1);
+  var_4 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414C(var_2, 1);
   var_4.lb_mg_impulse_dmg_threshold_low = "none";
 
   if(scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_instanceisregistered(var_2)) {
@@ -373,8 +373,8 @@ function light_tank_explode(var_0, var_1, var_2) {
   if(isDefined(self.owner) && isDefined(self.streakinfo)) {
     self.streakinfo.onspray = 1;
 
-    if(!istrue(self.ref_12aa4)) {
-      self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+    if(!istrue(self.ref_12AA4)) {
+      self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
     }
   }
 
@@ -933,7 +933,7 @@ function light_tank_setteamotherent(var_0, var_1) {
 function light_tank_monitorotherentjoined(var_0, var_1) {
   var_0 endon("death");
   var_2 = var_1.team;
-  var_1 scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
+  var_1 scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
   thread light_tank_setteamotherent(var_0, var_2);
 }
 
@@ -1009,7 +1009,7 @@ function light_tank_monitordriverturretfire() {
   light_tank_updatemissileammoui();
 
   for(;;) {
-    var_1 = var_0 scripts\engine\utility::ref_143ad("turret_fire", "turret_reload");
+    var_1 = var_0 scripts\engine\utility::ref_143AD("turret_fire", "turret_reload");
 
     if(var_1 == "turret_reload") {
       var_0.shotsleft = 0;
@@ -1142,7 +1142,7 @@ function whistlestarttimer() {
   for(;;) {
     var_0 = weight_spawners_closest_to_forward();
     self notifyonplayercommand("light_tank_missile", var_0);
-    var_1 = scripts\engine\utility::ref_143b4("input_type_changed", "missile_handling_ended");
+    var_1 = scripts\engine\utility::ref_143B4("input_type_changed", "missile_handling_ended");
     self notifyonplayercommandremove("light_tank_missile", var_0);
 
     if(!isDefined(var_1) || var_1 == "missile_handling_ended") {
@@ -1170,7 +1170,7 @@ function light_tank_monitordrivermissilefire(var_0) {
     if(gettime() - var_1.lastmissilefired >= 1330) {
       if(var_1.missilesleft > 0) {
         var_1.lastmissilefired = gettime();
-        scripts\cp_mp\vehicles\vehicle_occupancy::ref_141d2(var_0);
+        scripts\cp_mp\vehicles\vehicle_occupancy::ref_141D2(var_0);
         light_tank_firemissile(var_0, var_0.stingertarget);
         light_tank_adjustmissileammo(-1);
       }
@@ -1522,8 +1522,8 @@ function whistlestarttime(var_0) {
   self endon("death");
   self.owner endon("disconnect");
   level waittill("game_ended");
-  self.ref_12aa4 = 1;
-  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
+  self.ref_12AA4 = 1;
+  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_0);
 }
 
 function light_tank_premoddamagecallback(var_0) {
@@ -1597,10 +1597,10 @@ function light_tank_autodestruct(var_0) {
     self.autodestructactivated = 1;
 
     if(!scripts\common\utility::iscp()) {
-      var_1 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414b(self);
+      var_1 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414B(self);
       self.health = int(min(self.health, var_1));
       scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_updateomnvarsondamage(self);
-      scripts\cp_mp\vehicles\vehicle_damage::ref_1417f();
+      scripts\cp_mp\vehicles\vehicle_damage::ref_1417F();
       return;
     }
 
@@ -1698,7 +1698,7 @@ function light_tank_updateheadiconforplayer(var_0) {
   var_1 = var_0 scripts\cp_mp\utility\player_utility::getvehicle();
 
   if(isDefined(var_1) && var_1 == self) {
-    scripts\cp_mp\entityheadicons::ref_1315e(self.headicon, var_0);
+    scripts\cp_mp\entityheadicons::ref_1315E(self.headicon, var_0);
     return;
   }
 
@@ -1724,11 +1724,11 @@ function light_tank_updateheadiconforplayer(var_0) {
     if(var_3 == "neutral") {
       if(!isDefined(var_2)) {
         if(true) {
-          scripts\cp_mp\entityheadicons::ref_1315d(self.headicon, var_0);
+          scripts\cp_mp\entityheadicons::ref_1315D(self.headicon, var_0);
           return;
         }
 
-        scripts\cp_mp\entityheadicons::ref_1315e(self.headicon, var_0);
+        scripts\cp_mp\entityheadicons::ref_1315E(self.headicon, var_0);
         return;
       } else {
         var_3 = var_2.team;
@@ -1737,39 +1737,39 @@ function light_tank_updateheadiconforplayer(var_0) {
 
     if(isenemyteam(var_3, var_0.team)) {
       if(istrue(var_4.showheadicontoenemy)) {
-        scripts\cp_mp\entityheadicons::ref_1315d(self.headicon, var_0);
+        scripts\cp_mp\entityheadicons::ref_1315D(self.headicon, var_0);
         return;
       }
 
-      scripts\cp_mp\entityheadicons::ref_1315e(self.headicon, var_0);
+      scripts\cp_mp\entityheadicons::ref_1315E(self.headicon, var_0);
       return;
     }
 
-    scripts\cp_mp\entityheadicons::ref_1315d(self.headicon, var_0);
+    scripts\cp_mp\entityheadicons::ref_1315D(self.headicon, var_0);
     return;
   }
 
   if(!isDefined(var_2)) {
     if(true) {
-      scripts\cp_mp\entityheadicons::ref_1315d(self.headicon, var_0);
+      scripts\cp_mp\entityheadicons::ref_1315D(self.headicon, var_0);
       return;
     }
 
-    scripts\cp_mp\entityheadicons::ref_1315e(self.headicon, var_0);
+    scripts\cp_mp\entityheadicons::ref_1315E(self.headicon, var_0);
     return;
   }
 
   if(var_0 != var_2) {
     if(var_4.showheadicontoenemy) {
-      scripts\cp_mp\entityheadicons::ref_1315d(self.headicon, var_0);
+      scripts\cp_mp\entityheadicons::ref_1315D(self.headicon, var_0);
       return;
     }
 
-    scripts\cp_mp\entityheadicons::ref_1315e(self.headicon, var_0);
+    scripts\cp_mp\entityheadicons::ref_1315E(self.headicon, var_0);
     return;
   }
 
-  scripts\cp_mp\entityheadicons::ref_1315d(self.headicon, var_0);
+  scripts\cp_mp\entityheadicons::ref_1315D(self.headicon, var_0);
 }
 
 function light_tank_updateheadiconforplayeronjointeam(var_0) {

@@ -23,11 +23,11 @@ function init() {
 
   level.br_plunder_lobby = getdvarint("scr_br_plunder_lobby", 0) != 0 && istrue(level.allowprematchdamage);
   level.br_plunder = spawnStruct();
-  level.br_plunder.ref_127bf = 65535;
+  level.br_plunder.ref_127BF = 65535;
   level.br_plunder.ref_12790 = 0;
-  level.br_plunder.ref_127ad = 0;
-  level.br_plunder.ref_1278f = 0;
-  level.br_plunder.ref_127ac = 0;
+  level.br_plunder.ref_127AD = 0;
+  level.br_plunder.ref_1278F = 0;
+  level.br_plunder.ref_127AC = 0;
   level.br_plunder.wait_for_all_players_in_airlock = 0;
   level.br_plunder.wait_fire_mainhouse_flashbangs_and_smokes = 0;
   level.br_plunder.oscope_freq_think = 0;
@@ -43,7 +43,7 @@ function init() {
   toggle_wind();
   level.br_depots = [];
   thread ref_12788();
-  thread ref_1278d();
+  thread ref_1278D();
 
   if(inplunderlivelobby()) {
     level.br_plunder_ents = [];
@@ -51,14 +51,14 @@ function init() {
   }
 
   toggle_trap();
-  ref_1278e();
+  ref_1278E();
   _debug_rooftopobjstart::playertimestamp();
-  scripts\mp\gametypes\br_rat_race_base::ref_140f9();
+  scripts\mp\gametypes\br_rat_race_base::ref_140F9();
   touchdown_origin();
   thermite_watchstucktoterrain();
 
   if(getdvarint("scr_enablePlunderPileOverrides", 0) == 1) {
-    ref_128a7();
+    ref_128A7();
     return;
   }
 }
@@ -74,7 +74,7 @@ function ref_12788(var_0, var_1, var_2) {
   }
 }
 
-function ref_1278d() {
+function ref_1278D() {
   var_0 = getdvarint("scr_br_plunder_start_amount", 0);
 
   if(!var_0) {
@@ -88,7 +88,7 @@ function ref_1278d() {
   }
 }
 
-function ref_11c91(var_0, var_1) {
+function ref_11C91(var_0, var_1) {
   if(level.br_plunder_enabled) {
     level.br_plunder.vehicle_collision_updateinstance[var_0] += var_1;
     return;
@@ -162,7 +162,7 @@ function tracegroundheightexfil() {
 }
 
 function toggle_wind() {
-  level.ref_127c5 = getEntArray("extract_pad", "targetname");
+  level.ref_127C5 = getEntArray("extract_pad", "targetname");
 }
 
 function playerplaybankanim() {
@@ -276,7 +276,7 @@ function playerdropplunderondeath(var_0, var_1) {
     return;
   }
 
-  if(istrue(scripts\mp\gametypes\br_gametypes::ref_12e05("playerDropPlunderOnDeath", var_0, var_1))) {
+  if(istrue(scripts\mp\gametypes\br_gametypes::ref_12E05("playerDropPlunderOnDeath", var_0, var_1))) {
     return;
   }
 
@@ -321,15 +321,15 @@ function takeplunderpickup(var_0) {
   if(scripts\engine\utility::array_contains(level.br_plunder.names, var_0.scriptablename)) {
     ref_12627(var_1);
     level.br_plunder.ref_12790 += 1;
-    level.br_plunder.ref_127ad += var_1;
-    ref_11c91(var_0.scriptablename, -1);
+    level.br_plunder.ref_127AD += var_1;
+    ref_11C91(var_0.scriptablename, -1);
     var_2 = "loot";
 
-    if(isDefined(var_0.tracknonoobplayerlocation.ref_11a40)) {
-      var_2 = var_0.tracknonoobplayerlocation.ref_11a40;
+    if(isDefined(var_0.tracknonoobplayerlocation.ref_11A40)) {
+      var_2 = var_0.tracknonoobplayerlocation.ref_11A40;
     }
 
-    scripts\mp\gametypes\br_analytics::ref_13c44(self, var_2, var_1);
+    scripts\mp\gametypes\br_analytics::ref_13C44(self, var_2, var_1);
     return;
   }
 
@@ -352,52 +352,52 @@ function toggle_trap() {
   level.ref_12621 = var_0;
   var_1 = [];
   var_1[1] = ::ref_12628;
-  var_1[2] = ::ref_1261d;
+  var_1[2] = ::ref_1261D;
   var_1[8] = ::playerplunderstealcallback;
   var_1[3] = ::ref_12619;
   var_1[4] = ::ref_12624;
-  var_1[5] = ::ref_1261b;
+  var_1[5] = ::ref_1261B;
   var_1[6] = ::ref_12626;
   level.ref_12620 = var_1;
 }
 
 function ref_12627(var_0, var_1) {
-  return ref_1261f(var_0, 1, undefined, var_1);
+  return ref_1261F(var_0, 1, undefined, var_1);
 }
 
 function playerplundersteal(var_0, var_1, var_2) {
-  return ref_1261f(var_0, 8, var_1, var_2);
+  return ref_1261F(var_0, 8, var_1, var_2);
 }
 
-function ref_1261c(var_0, var_1, var_2) {
-  return ref_1261f(var_0, 2, var_1, var_2);
+function ref_1261C(var_0, var_1, var_2) {
+  return ref_1261F(var_0, 2, var_1, var_2);
 }
 
 function ref_12618(var_0, var_1, var_2) {
-  return ref_1261f(var_0, 3, var_1, var_2);
+  return ref_1261F(var_0, 3, var_1, var_2);
 }
 
 function ref_12623(var_0, var_1) {
-  return ref_1261f(var_0, 4, undefined, var_1);
+  return ref_1261F(var_0, 4, undefined, var_1);
 }
 
-function ref_1261a(var_0, var_1, var_2) {
-  return ref_1261f(var_0, 5, var_1, var_2);
+function ref_1261A(var_0, var_1, var_2) {
+  return ref_1261F(var_0, 5, var_1, var_2);
 }
 
 function ref_12625(var_0, var_1, var_2) {
-  return ref_1261f(var_0, 6, var_1, var_2);
+  return ref_1261F(var_0, 6, var_1, var_2);
 }
 
 function ref_12622(var_0, var_1) {
-  return ref_1261f(var_0, 4, undefined, var_1);
+  return ref_1261F(var_0, 4, undefined, var_1);
 }
 
-function ref_1261e(var_0, var_1) {
-  return ref_1261f(var_0, 4, undefined, var_1);
+function ref_1261E(var_0, var_1) {
+  return ref_1261F(var_0, 4, undefined, var_1);
 }
 
-function ref_1261f(var_0, var_1, var_2, var_3) {
+function ref_1261F(var_0, var_1, var_2, var_3) {
   if(!istrue(level.br_plunder_enabled) || !isDefined(self.plundercount)) {
     return;
   }
@@ -417,15 +417,15 @@ function ref_1261f(var_0, var_1, var_2, var_3) {
   if(var_1 == 2 || var_1 == 3 || var_1 == 4) {
     var_0 = int(min(self.plundercount, var_0));
   } else if(var_1 == 8) {
-    var_0 = int(min(var_2.ref_127d0, var_0));
+    var_0 = int(min(var_2.ref_127D0, var_0));
   }
 
-  if(!isDefined(self.ref_127b8)) {
-    self.ref_127b8 = [];
+  if(!isDefined(self.ref_127B8)) {
+    self.ref_127B8 = [];
   }
 
-  if(!isDefined(self.ref_127b9)) {
-    self.ref_127b9 = [];
+  if(!isDefined(self.ref_127B9)) {
+    self.ref_127B9 = [];
   }
 
   if(!isDefined(self.warningclearcallbacks)) {
@@ -434,8 +434,8 @@ function ref_1261f(var_0, var_1, var_2, var_3) {
 
   var_5 = scripts\engine\utility::ter_op(var_1 == 5, 3, var_1);
   var_6 = level.ref_12621[var_5];
-  var_7 = self.ref_127b9[var_1];
-  var_8 = self.ref_127b8[var_1];
+  var_7 = self.ref_127B9[var_1];
+  var_8 = self.ref_127B8[var_1];
 
   if(!isDefined(var_8) || gettime() - var_8 > 2000) {
     var_7 = 0;
@@ -449,8 +449,8 @@ function ref_1261f(var_0, var_1, var_2, var_3) {
   }
 
   self.warningclearcallbacks = var_1;
-  self.ref_127b8[var_1] = gettime();
-  self.ref_127b9[var_1] = var_7;
+  self.ref_127B8[var_1] = gettime();
+  self.ref_127B9[var_1] = var_7;
   var_10 = level.ref_12620[var_1];
 
   if(isDefined(var_10)) {
@@ -459,20 +459,20 @@ function ref_1261f(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     if(isDefined(var_3.player) && !var_3.player scripts\mp\gametypes\br_public::isplayeringulag()) {
-      if(isDefined(var_3.ref_126af) && var_3.ref_126af != "none") {
-        if(var_3.ref_126af != "br_plunder_first_pickup" || !istrue(var_3.player.haspickedupplunderyet)) {
-          if(isDefined(level.ref_127cd)) {
-            if(var_0 + self.plundercount > level.ref_127cd) {
-              var_3.player thread scripts\mp\hud_message::showsplash(var_3.ref_126af);
+      if(isDefined(var_3.ref_126AF) && var_3.ref_126AF != "none") {
+        if(var_3.ref_126AF != "br_plunder_first_pickup" || !istrue(var_3.player.haspickedupplunderyet)) {
+          if(isDefined(level.ref_127CD)) {
+            if(var_0 + self.plundercount > level.ref_127CD) {
+              var_3.player thread scripts\mp\hud_message::showsplash(var_3.ref_126AF);
 
-              if(var_3.ref_126af == "br_plunder_first_pickup") {
+              if(var_3.ref_126AF == "br_plunder_first_pickup") {
                 var_3.player.haspickedupplunderyet = 1;
               }
             }
           } else {
-            var_3.player thread scripts\mp\hud_message::showsplash(var_3.ref_126af);
+            var_3.player thread scripts\mp\hud_message::showsplash(var_3.ref_126AF);
 
-            if(var_3.ref_126af == "br_plunder_first_pickup") {
+            if(var_3.ref_126AF == "br_plunder_first_pickup") {
               var_3.player.haspickedupplunderyet = 1;
             }
           }
@@ -484,7 +484,7 @@ function ref_1261f(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(istrue(var_3.ref_1244d)) {
+    if(istrue(var_3.ref_1244D)) {
       if(var_1 == 3) {
         thread playerplaybankanim();
       } else if(var_1 == 2 || var_1 == 8) {
@@ -496,9 +496,9 @@ function ref_1261f(var_0, var_1, var_2, var_3) {
       var_0 = var_3.amount;
     }
 
-    if(istrue(var_3.ref_1275c)) {
-      var_11 = scripts\engine\utility::ter_op(isDefined(var_3.ref_127cc), var_3.ref_127cc, var_0);
-      ref_1275d(self, var_11);
+    if(istrue(var_3.ref_1275C)) {
+      var_11 = scripts\engine\utility::ter_op(isDefined(var_3.ref_127CC), var_3.ref_127CC, var_0);
+      ref_1275D(self, var_11);
     }
   }
 
@@ -518,15 +518,15 @@ function ref_1261f(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(var_0)) {
-    var_3.ref_127b4 = var_0;
+    var_3.ref_127B4 = var_0;
     thread playersetplundercount(self.plundercount + var_0, var_3);
   }
 
-  scripts\mp\gametypes\br_gametype_dmz::ref_121b6();
+  scripts\mp\gametypes\br_gametype_dmz::ref_121B6();
   return var_3;
 }
 
-function ref_140d2(var_0) {
+function ref_140D2(var_0) {
   if(!isDefined(var_0)) {
     return 0;
   }
@@ -552,8 +552,8 @@ function ref_12628(var_0, var_1, var_2) {
   }
 
   if(!istrue(self.haspickedupplunderyet)) {
-    var_2.ref_126af = "br_plunder_first_pickup";
-    thread scripts\mp\gametypes\br_armory_kiosk::ref_1334a();
+    var_2.ref_126AF = "br_plunder_first_pickup";
+    thread scripts\mp\gametypes\br_armory_kiosk::ref_1334A();
   }
 
   scripts\cp\vehicles\vehicle_compass_cp::ref_12060(var_0);
@@ -565,49 +565,49 @@ function playerplunderstealcallback(var_0, var_1, var_2) {
     var_2 = init_subway_cars(self);
   }
 
-  if(!isDefined(var_2.ref_1275c)) {
-    var_2.ref_1275c = 1;
-    var_2.ref_127cc = undefined;
+  if(!isDefined(var_2.ref_1275C)) {
+    var_2.ref_1275C = 1;
+    var_2.ref_127CC = undefined;
   }
 
-  if(!isDefined(var_2.ref_1244d)) {
-    var_2.ref_1244d = 1;
+  if(!isDefined(var_2.ref_1244D)) {
+    var_2.ref_1244D = 1;
   }
 
   if(isDefined(var_1)) {
-    var_3 = ref_1278c(var_1.ref_127c8);
-    thread scripts\mp\gametypes\br::ref_13ac7("br_gametype_rat_race_your_team_stole_from_enemy_base", undefined, self.team);
-    thread scripts\mp\gametypes\br::ref_13ac7("br_gametype_rat_race_enemy_stole_from_your_base", undefined, var_1.team);
+    var_3 = ref_1278C(var_1.ref_127C8);
+    thread scripts\mp\gametypes\br::ref_13AC7("br_gametype_rat_race_your_team_stole_from_enemy_base", undefined, self.team);
+    thread scripts\mp\gametypes\br::ref_13AC7("br_gametype_rat_race_enemy_stole_from_your_base", undefined, var_1.team);
     entityplunderlosedeposited(var_1, var_0, 1, var_3.maxnumplunderobjectstodropforsteal, var_2);
   }
 
   return var_2;
 }
 
-function ref_1261d(var_0, var_1, var_2) {
+function ref_1261D(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = init_subway_cars(self);
   }
 
-  if(!isDefined(var_2.ref_1275c)) {
-    var_2.ref_1275c = 1;
-    var_2.ref_127cc = undefined;
+  if(!isDefined(var_2.ref_1275C)) {
+    var_2.ref_1275C = 1;
+    var_2.ref_127CC = undefined;
   }
 
-  if(!isDefined(var_2.ref_1244d)) {
-    var_2.ref_1244d = 1;
+  if(!isDefined(var_2.ref_1244D)) {
+    var_2.ref_1244D = 1;
   }
 
   if(isDefined(var_1)) {
-    var_3 = ref_1278c(var_1.ref_127c8);
+    var_3 = ref_1278C(var_1.ref_127C8);
 
     if(isDefined(var_3.get_closest_enemy_near_turret) && var_3.get_closest_enemy_near_turret > 0) {
-      var_4 = var_1.ref_127d0 + var_0 - var_3.get_closest_enemy_near_turret;
+      var_4 = var_1.ref_127D0 + var_0 - var_3.get_closest_enemy_near_turret;
 
       if(var_4 >= 0) {
         var_0 -= var_4;
 
-        if(!istrue(var_1.ref_127ae)) {
+        if(!istrue(var_1.ref_127AE)) {
           ref_12799(var_1);
         }
       }
@@ -644,7 +644,7 @@ function ref_1261d(var_0, var_1, var_2) {
   }
 
   var_2.amount = var_0;
-  var_1.ref_127d0 += var_0;
+  var_1.ref_127D0 += var_0;
 
   if(!isDefined(level.teamdata[self.team]["plunderInDeposit"])) {
     level.teamdata[self.team]["plunderInDeposit"] = int(var_0);
@@ -660,8 +660,8 @@ function ref_12619(var_0, var_1, var_2) {
     var_2 = init_subway_cars(self);
   }
 
-  if(!isDefined(var_2.ref_126af)) {
-    var_2.ref_126af = "br_plunder_banked";
+  if(!isDefined(var_2.ref_126AF)) {
+    var_2.ref_126AF = "br_plunder_banked";
   }
 
   if(!isDefined(var_2.ref_12667)) {
@@ -672,19 +672,19 @@ function ref_12619(var_0, var_1, var_2) {
     var_2.ref_12668 = int(scripts\mp\rank::getscoreinfovalue(var_2.ref_12667) * var_0 / 10);
   }
 
-  if(!isDefined(var_2.ref_1275c)) {
-    var_2.ref_1275c = 1;
-    var_2.ref_127cc = undefined;
+  if(!isDefined(var_2.ref_1275C)) {
+    var_2.ref_1275C = 1;
+    var_2.ref_127CC = undefined;
   }
 
-  if(!isDefined(var_2.ref_1244d)) {
-    var_2.ref_1244d = 1;
+  if(!isDefined(var_2.ref_1244D)) {
+    var_2.ref_1244D = 1;
   }
 
   self.plunderbanked += var_0;
 
-  if(self.plunderbanked > level.br_plunder.ref_127bf) {
-    self.plunderbanked = level.br_plunder.ref_127bf;
+  if(self.plunderbanked > level.br_plunder.ref_127BF) {
+    self.plunderbanked = level.br_plunder.ref_127BF;
   }
 
   if(!isDefined(level.teamdata[self.team]["plunderBanked"])) {
@@ -708,16 +708,16 @@ function ref_12624(var_0, var_1, var_2) {
   return var_2;
 }
 
-function ref_1261b(var_0, var_1, var_2) {
+function ref_1261B(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = init_subway_cars(self);
   }
 
-  if(!isDefined(var_2.ref_127cc)) {
-    var_2.ref_127cc = 0;
+  if(!isDefined(var_2.ref_127CC)) {
+    var_2.ref_127CC = 0;
   }
 
-  var_2.ref_131ab = 1;
+  var_2.ref_131AB = 1;
   var_3 = self.team;
 
   if(isDefined(var_1) && isDefined(var_1.plunder)) {
@@ -739,8 +739,8 @@ function ref_1261b(var_0, var_1, var_2) {
 
         self.plunderbanked += var_0;
 
-        if(self.plunderbanked > level.br_plunder.ref_127bf) {
-          self.plunderbanked = level.br_plunder.ref_127bf;
+        if(self.plunderbanked > level.br_plunder.ref_127BF) {
+          self.plunderbanked = level.br_plunder.ref_127BF;
         }
 
         break;
@@ -772,7 +772,7 @@ function ref_12626(var_0, var_1, var_2) {
     var_2 = init_subway_cars(self);
   }
 
-  var_2.ref_131ab = 1;
+  var_2.ref_131AB = 1;
   var_3 = self.team;
 
   if(isDefined(var_1) && isDefined(var_1.plunder)) {
@@ -815,7 +815,7 @@ function num_players_in_safehouse(var_0) {
 
   var_0.brwatchforminplayersmatchstart = 0;
   var_0.teams = [];
-  var_0.ref_11f3a = 0;
+  var_0.ref_11F3A = 0;
 
   foreach(var_3 in self.plunder) {
     if(isDefined(var_3.player) || var_3.plundercount <= 0) {
@@ -850,7 +850,7 @@ function num_players_in_safehouse(var_0) {
     }
 
     if(!var_1) {
-      var_9 = ref_1261a(var_8, var_5, self, var_9);
+      var_9 = ref_1261A(var_8, var_5, self, var_9);
     }
 
     if(isDefined(var_9) && isDefined(var_9.amount)) {
@@ -859,7 +859,7 @@ function num_players_in_safehouse(var_0) {
 
     var_0.brwatchforminplayersmatchstart += var_5;
     var_0.teams[var_0.teams.size] = var_4;
-    var_0.ref_11f3a++;
+    var_0.ref_11F3A++;
   }
 
   var_0.teams = scripts\engine\utility::array_remove_duplicates(var_0.teams);
@@ -871,10 +871,10 @@ function num_players_in_safehouse(var_0) {
     var_11 = 1;
   }
 
-  var_12 = ref_1278c(self.ref_127c8, undefined, 1);
+  var_12 = ref_1278C(self.ref_127C8, undefined, 1);
 
   if(isDefined(var_12) && isDefined(var_12.outline_enemy_ai_for_duration)) {
-    scripts\mp\gametypes\br_analytics::detonatefx(var_0.ref_11f3a, var_0.brwatchforminplayersmatchstart, var_12.outline_enemy_ai_for_duration, var_11, self.origin);
+    scripts\mp\gametypes\br_analytics::detonatefx(var_0.ref_11F3A, var_0.brwatchforminplayersmatchstart, var_12.outline_enemy_ai_for_duration, var_11, self.origin);
   }
 
   self.plunder = [];
@@ -908,7 +908,7 @@ function entityplunderlosedeposited(var_0, var_1, var_2, var_3) {
     var_6.plundercount -= var_8;
     level.teamdata[var_7]["plunderInDeposit"] = level.teamdata[var_7]["plunderInDeposit"] - var_8;
     var_4 -= var_8;
-    self.ref_127d0 -= var_8;
+    self.ref_127D0 -= var_8;
     var_3.brwatchforminplayersmatchstart += var_8;
     var_3.teams[var_3.teams.size] = var_7;
 
@@ -942,7 +942,7 @@ function entityplunderlosedeposited(var_0, var_1, var_2, var_3) {
     }
 
     var_4 -= var_8;
-    self.ref_127d0 -= var_8;
+    self.ref_127D0 -= var_8;
     var_3.brwatchforminplayersmatchstart += var_8;
     var_3.teams[var_3.teams.size] = var_7;
   }
@@ -952,8 +952,8 @@ function entityplunderlosedeposited(var_0, var_1, var_2, var_3) {
     dropplunderbyrarity(var_0, var_14, var_2);
   }
 
-  if(self.ref_127d0 <= 0) {
-    self.ref_127d0 = 0;
+  if(self.ref_127D0 <= 0) {
+    self.ref_127D0 = 0;
     var_3.amount = 0;
   }
 
@@ -1033,13 +1033,13 @@ function init_subway_cars(var_0, var_1) {
     var_2.player = var_0;
   }
 
-  var_2.ref_126af = undefined;
+  var_2.ref_126AF = undefined;
   var_2.ref_12667 = undefined;
   var_2.ref_12668 = undefined;
-  var_2.ref_131ab = undefined;
-  var_2.ref_1275c = undefined;
-  var_2.ref_127cc = undefined;
-  var_2.ref_1244d = undefined;
+  var_2.ref_131AB = undefined;
+  var_2.ref_1275C = undefined;
+  var_2.ref_127CC = undefined;
+  var_2.ref_1244D = undefined;
   return var_2;
 }
 
@@ -1053,8 +1053,8 @@ function ignoregulagredeploysplash(var_0, var_1, var_2) {
     var_3.player = var_1;
   }
 
-  if(isDefined(var_0.ref_126af)) {
-    var_3.ref_126af = var_0.ref_126af;
+  if(isDefined(var_0.ref_126AF)) {
+    var_3.ref_126AF = var_0.ref_126AF;
   }
 
   if(isDefined(var_0.ref_12667)) {
@@ -1065,20 +1065,20 @@ function ignoregulagredeploysplash(var_0, var_1, var_2) {
     var_3.ref_12668 = var_0.ref_12668;
   }
 
-  if(isDefined(var_0.ref_131ab)) {
-    var_3.ref_131ab = var_0.ref_131ab;
+  if(isDefined(var_0.ref_131AB)) {
+    var_3.ref_131AB = var_0.ref_131AB;
   }
 
-  if(isDefined(var_0.ref_1275c)) {
-    var_3.ref_1275c = var_0.ref_1275c;
+  if(isDefined(var_0.ref_1275C)) {
+    var_3.ref_1275C = var_0.ref_1275C;
   }
 
-  if(isDefined(var_0.ref_127cc)) {
-    var_3.ref_127cc = var_0.ref_127cc;
+  if(isDefined(var_0.ref_127CC)) {
+    var_3.ref_127CC = var_0.ref_127CC;
   }
 
-  if(isDefined(var_0.ref_1244d)) {
-    var_3.ref_1244d = var_0.ref_1244d;
+  if(isDefined(var_0.ref_1244D)) {
+    var_3.ref_1244D = var_0.ref_1244D;
   }
 
   return var_3;
@@ -1092,26 +1092,26 @@ function playersetplundercount(var_0, var_1) {
   var_2 = self.plundercount;
   var_3 = var_0 - self.plundercount;
 
-  if((!isDefined(var_1) || !istrue(var_1.ref_131ab)) && var_3 == 0) {
+  if((!isDefined(var_1) || !istrue(var_1.ref_131AB)) && var_3 == 0) {
     return;
   }
 
   self.plundercount = var_0;
 
-  if(self.plundercount > level.br_plunder.ref_127bf) {
+  if(self.plundercount > level.br_plunder.ref_127BF) {
     scripts\mp\hud_message::showerrormessage("MP_BR_INGAME/PLUNDER_HELD_LIMIT_REACHED");
-    self.plundercount = level.br_plunder.ref_127bf;
+    self.plundercount = level.br_plunder.ref_127BF;
   }
 
   if(isDefined(self.petwatch)) {
-    scripts\cp_mp\pet_watch::ref_1206d();
+    scripts\cp_mp\pet_watch::ref_1206D();
   }
 
   var_4 = self.plundercount;
-  ref_1268a(var_4);
+  ref_1268A(var_4);
 
   if(var_0 > 0) {
-    if(istrue(level.ref_127d4) && var_3 != 0) {
+    if(istrue(level.ref_127D4) && var_3 != 0) {
       ref_12781(self, 1, 1);
     }
 
@@ -1121,22 +1121,22 @@ function playersetplundercount(var_0, var_1) {
       thread playerdelayautobankplunder();
     }
   } else {
-    if(istrue(level.ref_127d4) && var_3 != 0) {
+    if(istrue(level.ref_127D4) && var_3 != 0) {
       ref_12781(self, 0, 1);
     }
 
     disablealldepotsforplayer(self);
   }
 
-  if(isDefined(level.teamdata[self.team]["plunderTeamTotal"]) && isDefined(var_1) && isDefined(var_1.ref_127b4)) {
+  if(isDefined(level.teamdata[self.team]["plunderTeamTotal"]) && isDefined(var_1) && isDefined(var_1.ref_127B4)) {
     if(getDvar("scr_br_gametype", "") == "rat_race") {
       level.teamdata[self.team]["plunderTeamTotal"] = level.teamdata[self.team]["plunderTeamTotal"] + self.plundercount - var_2;
     } else {
-      level.teamdata[self.team]["plunderTeamTotal"] = level.teamdata[self.team]["plunderTeamTotal"] + var_1.ref_127b4;
+      level.teamdata[self.team]["plunderTeamTotal"] = level.teamdata[self.team]["plunderTeamTotal"] + var_1.ref_127B4;
     }
   }
 
-  thread scripts\mp\gametypes\br_gametypes::ref_12e05("postPlunder", var_1);
+  thread scripts\mp\gametypes\br_gametypes::ref_12E05("postPlunder", var_1);
 
   if(isDefined(level.postplundercallbacks)) {
     foreach(var_6 in level.postplundercallbacks) {
@@ -1147,7 +1147,7 @@ function playersetplundercount(var_0, var_1) {
   }
 }
 
-function ref_1268a(var_0) {
+function ref_1268A(var_0) {
   var_1 = ref_12577();
   var_2 = var_1[0];
   var_3 = var_1[1];
@@ -1160,7 +1160,7 @@ function ref_1268a(var_0) {
   }
 
   var_6 = respawn_used_once(var_0, var_5, var_2, var_3);
-  scripts\mp\gametypes\br_public::ref_131c3(self.team, self.squadindex, var_4, var_6);
+  scripts\mp\gametypes\br_public::ref_131C3(self.team, self.squadindex, var_4, var_6);
   var_7 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.team, self.squadindex);
 
   foreach(var_9 in var_7) {
@@ -1344,7 +1344,7 @@ function dropplunderbyrarity(var_0, var_1, var_2, var_3) {
     for(var_10 = 0; var_10 < var_5[var_9]; var_10++) {
       var_11 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_1, self.origin, self.angles, self, var_3);
       var_12 = scripts\mp\gametypes\br_pickups::spawnpickup(level.br_plunder.names[var_9], var_11, level.br_plunder.ref_12954[var_9], 1);
-      ref_11c91(level.br_plunder.names[var_9], 1);
+      ref_11C91(level.br_plunder.names[var_9], 1);
 
       if(isDefined(var_12)) {
         var_4 = var_12;
@@ -1356,8 +1356,8 @@ function dropplunderbyrarity(var_0, var_1, var_2, var_3) {
     }
   }
 
-  level.br_plunder.ref_1278f += var_6;
-  level.br_plunder.ref_127ac += var_0;
+  level.br_plunder.ref_1278F += var_6;
+  level.br_plunder.ref_127AC += var_0;
   thread dropplundersounds(level, self.origin);
   return var_4;
 }
@@ -1380,7 +1380,7 @@ function ml_p3_func(var_0, var_1) {
 
   var_6 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_1, self.origin, self.angles, self);
   var_7 = scripts\mp\gametypes\br_pickups::spawnpickup(level.br_plunder.names[var_4], var_6, var_0, 1);
-  ref_11c91(level.br_plunder.names[var_4], 1);
+  ref_11C91(level.br_plunder.names[var_4], 1);
 
   if(isDefined(var_7)) {
     var_2 = var_7;
@@ -1390,8 +1390,8 @@ function ml_p3_func(var_0, var_1) {
     }
   }
 
-  level.br_plunder.ref_1278f++;
-  level.br_plunder.ref_127ac += var_0;
+  level.br_plunder.ref_1278F++;
+  level.br_plunder.ref_127AC += var_0;
   thread dropplundersounds(level, self.origin);
   return var_2;
 }
@@ -1430,17 +1430,17 @@ function thermite_watchglstuck() {
 
 function thermite_watchstucktoterrain() {
   var_0 = [];
-  var_1 = ref_1278c("plunderHelipad1", 1);
-  var_1.ref_12f7d = "brloot_plunder_extraction_site_01";
+  var_1 = ref_1278C("plunderHelipad1", 1);
+  var_1.ref_12F7D = "brloot_plunder_extraction_site_01";
   var_0 = var_1;
-  var_1 = ref_1278c("plunderHelipad2", 1);
-  var_1.ref_12f7d = "brloot_plunder_extraction_site_02";
+  var_1 = ref_1278C("plunderHelipad2", 1);
+  var_1.ref_12F7D = "brloot_plunder_extraction_site_02";
   var_0 = var_1;
-  var_1 = ref_1278c("extractHelipadPlunder", 1);
-  var_1.ref_12f7d = "brloot_quest_extract_site_plunder";
+  var_1 = ref_1278C("extractHelipadPlunder", 1);
+  var_1.ref_12F7D = "brloot_quest_extract_site_plunder";
   var_0 = var_1;
-  var_1 = ref_1278c("extractHelipadBR", 1);
-  var_1.ref_12f7d = "brloot_quest_extract_site_br";
+  var_1 = ref_1278C("extractHelipadBR", 1);
+  var_1.ref_12F7D = "brloot_quest_extract_site_br";
   var_0 = var_1;
 
   foreach(var_1 in var_0) {
@@ -1448,11 +1448,11 @@ function thermite_watchstucktoterrain() {
     var_1.usetime = 0;
     var_1.ref_14077 = 3;
     var_1.ref_14075 = getdvarint("scr_plunderHeliUseAmount", 20000);
-    var_1.ref_13acc = 0;
+    var_1.ref_13ACC = 0;
     var_1.ref_14078 = "MP/CANNOT_DEPOSIT_CASH_HELI_FULL";
     var_1.ref_14079 = "MP/CANNOT_DEPOSIT_CASH_HELI_LEAVING";
-    var_1.ref_12f7e = "activedepositcurrent";
-    var_1.ref_12f77 = "visiblecurrent";
+    var_1.ref_12F7E = "activedepositcurrent";
+    var_1.ref_12F77 = "visiblecurrent";
     var_1.origin_delta = 0;
     var_1.overrideviewkickscaledmr = getdvarint("scr_plunderHeliCountdown", 30);
     var_1.original_disablelongdeath = "MP/CASH_HELI_LEAVING_IN_N";
@@ -1535,8 +1535,8 @@ function setupplunderextractionsites() {
   scripts\mp\flags::gameflagwait("prematch_done");
   scripts\engine\scriptable::scriptable_addusedcallback(&plundersiteused);
 
-  if(isDefined(level.ref_11b3f) && level.ref_11b3f > 0 && !istrue(level.ref_14086)) {
-    wait level.ref_11b3f;
+  if(isDefined(level.ref_11B3F) && level.ref_11B3F > 0 && !istrue(level.ref_14086)) {
+    wait level.ref_11B3F;
   } else if(istrue(level.ref_14086)) {
     scripts\mp\flags::gameflagwait("activate_cash_lzs");
   }
@@ -1564,7 +1564,7 @@ function register_vfx() {
   return var_0;
 }
 
-function ref_1314b(var_0) {
+function ref_1314B(var_0) {
   foreach(var_2 in level.br_plunder_sites) {
     if(!scripts\engine\utility::array_contains(var_0, var_2)) {
       var_2 setscriptablepartstate(var_2.type, "hidden");
@@ -1652,13 +1652,13 @@ function plundersiteusedinternal(var_0, var_1, var_2, var_3) {
     var_0.heli = var_6;
     var_0.team = var_3.team;
     thread init_trap_room_spawning_module(var_5);
-    ref_126c7(var_3);
+    ref_126C7(var_3);
 
     if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
       level thread scripts\mp\gametypes\br_public::dmztut_luicallback("plunder_extract_requested", var_3.team, 1);
     }
 
-    level thread scripts\mp\gametypes\br::ref_13ac7("br_extract_heli_incoming", var_3, var_3.team);
+    level thread scripts\mp\gametypes\br::ref_13AC7("br_extract_heli_incoming", var_3, var_3.team);
     thread so_endgame(var_6);
   } else {
     playerdenyextraction(undefined, &"KILLSTREAKS/AIR_SPACE_TOO_CROWDED");
@@ -1667,7 +1667,7 @@ function plundersiteusedinternal(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  if(istrue(level.ref_127ba)) {
+  if(istrue(level.ref_127BA)) {
     var_7 = scripts\common\utility::playersincylinder(var_0.origin, 15000);
     var_8 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_3.team, var_3.squadindex);
 
@@ -1678,7 +1678,7 @@ function plundersiteusedinternal(var_0, var_1, var_2, var_3) {
     }
   }
 
-  if(istrue(level.ref_11dad)) {
+  if(istrue(level.ref_11DAD)) {
     var_0.disabled = 1;
     var_4 = scripts\engine\utility::ter_op(istrue(level.ref_13368) && !istrue(level.ref_13363), var_0.little_bird_onexitheavydamagestate, var_0.load_relics_from_playlistdvars);
     var_0 setscriptablepartstate(var_0.type, var_4);
@@ -1686,7 +1686,7 @@ function plundersiteusedinternal(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_126c7() {
+function ref_126C7() {
   self endon("death_or_disconnect");
   scripts\mp\gametypes\br_public::ref_12616("iw8_ges_plyr_plunder_smoke", 1.867);
 }
@@ -1762,7 +1762,7 @@ function playerspawnextractchopper(var_0, var_1) {
 function relic_squadlink_turn_team_headobjectives(var_0) {
   var_1 = undefined;
 
-  foreach(var_3 in level.ref_127c5) {
+  foreach(var_3 in level.ref_127C5) {
     if(isDefined(var_3) && distance2dsquared(var_3.origin, var_0) <= 10000) {
       var_1 = var_3;
       break;
@@ -1861,9 +1861,9 @@ function so_endgame(var_0) {
   var_2 = self.lastweaponfiretimeend[2] - var_1;
   self.player_weapon_fired_monitor = frag_crate_player_at_max_ammo(var_2);
   thread heliwatchgameendleave();
-  self.ref_1287c = 1;
+  self.ref_1287C = 1;
   helidescend();
-  self.ref_1287c = undefined;
+  self.ref_1287C = undefined;
   self setscriptablepartstate("vector_field", "on");
 
   if(!istrue(level.gameended)) {
@@ -1898,8 +1898,8 @@ function sound_distraction_mechanic_init(var_0) {
     var_2 = scripts\mp\utility\teams::getfriendlyplayers(self.team);
   }
 
-  thread ref_127a4(var_0, var_2);
-  ref_127aa(var_0, var_2);
+  thread ref_127A4(var_0, var_2);
+  ref_127AA(var_0, var_2);
 }
 
 function smoke_door(var_0) {
@@ -1955,7 +1955,7 @@ function spawnheli(var_0, var_1, var_2, var_3, var_4) {
   var_7.lastweaponfiretimeend = var_2;
   var_7.spawn_sentries_from_targetname = var_3;
   var_7.originalangle = var_4;
-  var_7.ref_12ee8 = var_6;
+  var_7.ref_12EE8 = var_6;
   var_7.vehiclename = "magma_plunder_chopper";
   var_7.animname = "plunder_extract_heli";
   var_7 setCanDamage(1);
@@ -1970,7 +1970,7 @@ function spawnheli(var_0, var_1, var_2, var_3, var_4) {
   var_7 setscriptablepartstate("cockpit_light", "on");
   var_7 setscriptablepartstate("infil_lights", "on");
   var_7.scenenode = spawn("script_model", var_7.originalangle);
-  var_7.scenenode.angles = var_7.ref_12ee8;
+  var_7.scenenode.angles = var_7.ref_12EE8;
   var_7.scenenode setModel("tag_origin");
   var_7.scenenode scripts\common\anim::anim_first_frame_solo(var_7, "heli_in");
   ref_13694(var_7);
@@ -2043,7 +2043,7 @@ function snowballfighthint(var_0) {
   physicsexplosionsphere(var_1, 500, 200, 1);
   self notify("explode");
   wait 0.35;
-  level thread scripts\mp\gametypes\br::ref_13ac7("br_extract_heli_shot_down", self.owner, self.team);
+  level thread scripts\mp\gametypes\br::ref_13AC7("br_extract_heli_shot_down", self.owner, self.team);
   smuggler_killed_early();
 }
 
@@ -2091,13 +2091,13 @@ function callback_vehicledamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
 }
 
 function sol_3_4_pool(var_0) {
-  if(istrue(self.ref_13e15) || istrue(self.leaving)) {
+  if(istrue(self.ref_13E15) || istrue(self.leaving)) {
     return;
   }
 
   self endon("death");
   self notify("try_to_leave");
-  self.ref_13e15 = 1;
+  self.ref_13E15 = 1;
 
   if(!istrue(level.gameended) && !scripts\mp\gametypes\br_public::uniquelootitemid()) {
     level thread scripts\mp\gametypes\br_public::dmztut_luicallback("plunder_extract_chopper_leave", self.team, 1);
@@ -2106,7 +2106,7 @@ function sol_3_4_pool(var_0) {
   var_1 = self.site;
 
   if(isDefined(var_1)) {
-    ref_1279a(var_1);
+    ref_1279A(var_1);
     smoke_door(var_1);
 
     if(isDefined(var_1.heli) && var_1.heli == self) {
@@ -2119,11 +2119,11 @@ function sol_3_4_pool(var_0) {
     self.site = undefined;
   }
 
-  self.ref_12a47 = 1;
+  self.ref_12A47 = 1;
   self waittill("ready_to_leave");
   self notify("leaving");
   self.leaving = 1;
-  self.ref_13e15 = undefined;
+  self.ref_13E15 = undefined;
   var_2 = getanimlength(level.scr_anim[self.animname]["heli_out"]);
   self.scenenode thread scripts\common\anim::anim_single_solo(self, "heli_out");
   thread scripts\common\anim::anim_single_solo(self.rope, "rope_out", "origin_animate_jnt");
@@ -2167,7 +2167,7 @@ function soldier_agent_lwfn9() {
     self.scenenode thread scripts\common\anim::anim_single_solo(self, "heli_loop");
     wait var_0;
 
-    if(istrue(self.ref_12a47) && !istrue(self.ref_1287c)) {
+    if(istrue(self.ref_12A47) && !istrue(self.ref_1287C)) {
       self notify("ready_to_leave");
       break;
     }
@@ -2182,7 +2182,7 @@ function sololink() {
     thread scripts\common\anim::anim_single_solo(self.rope, "rope_loop", "origin_animate_jnt");
     wait var_0;
 
-    if(istrue(self.ref_12a47)) {
+    if(istrue(self.ref_12A47)) {
       break;
     }
   }
@@ -2196,7 +2196,7 @@ function soldier_encounter_test() {
     thread scripts\common\anim::anim_single_solo(self.crate, "bag_loop", "origin_animate_jnt");
     wait var_0;
 
-    if(istrue(self.ref_12a47)) {
+    if(istrue(self.ref_12A47)) {
       break;
     }
   }
@@ -2299,7 +2299,7 @@ function heliwatchgameendleave() {
 }
 
 function smokekill(var_0, var_1) {
-  ref_1279d(var_0);
+  ref_1279D(var_0);
 }
 
 function snowfx(var_0) {
@@ -2422,7 +2422,7 @@ function retry_no_votes(var_0) {
   return var_1;
 }
 
-function ref_1275d(var_0, var_1) {
+function ref_1275D(var_0, var_1) {
   if(var_1 == 0) {
     return;
   }
@@ -2432,7 +2432,7 @@ function ref_1275d(var_0, var_1) {
   var_0 playsoundtoplayer(var_3, self);
 }
 
-function ref_128a7() {
+function ref_128A7() {
   var_0 = getdvarint("scr_plunderPileOverride_scalar", 1);
 
   if(var_0 <= 1) {
@@ -2461,7 +2461,7 @@ function ref_128a7() {
   }
 }
 
-function ref_128a6(var_0) {
+function ref_128A6(var_0) {
   foreach(var_7, var_2 in level.br_plunder.names) {
     level.br_plunder.ref_12954[var_7] = int(float(level.br_plunder.ref_12954[var_7]) * var_0);
     level.br_pickups.counts[var_2] = level.br_plunder.ref_12954[var_7];
@@ -2484,31 +2484,31 @@ function ismountconfigenabled() {
   }
 
   var_0 *= 100;
-  level.ref_13bec = var_0;
+  level.ref_13BEC = var_0;
 }
 
-function ref_1278e() {
-  level.ref_127c7 = spawnStruct();
-  level.ref_127c7.data = [];
-  level.ref_127c7.instances = [];
-  level.ref_127c7.uniqueinstanceid = 0;
-  level.ref_127c7.ref_13aa6 = [];
-  level.ref_127c7.ref_13aa3 = [];
-  level.ref_127c7.ref_13aa4 = [];
+function ref_1278E() {
+  level.ref_127C7 = spawnStruct();
+  level.ref_127C7.data = [];
+  level.ref_127C7.instances = [];
+  level.ref_127C7.uniqueinstanceid = 0;
+  level.ref_127C7.ref_13AA6 = [];
+  level.ref_127C7.ref_13AA3 = [];
+  level.ref_127C7.ref_13AA4 = [];
 
   for(var_0 = 1; var_0 <= 4; var_0++) {
-    level.ref_127c7.ref_13aa3[var_0] = "ui_br_plunder_repo_ent_" + var_0;
-    level.ref_127c7.ref_13aa4[var_0] = "ui_br_plunder_repo_info_" + var_0;
+    level.ref_127C7.ref_13AA3[var_0] = "ui_br_plunder_repo_ent_" + var_0;
+    level.ref_127C7.ref_13AA4[var_0] = "ui_br_plunder_repo_info_" + var_0;
   }
 
-  scripts\common\interactive::interactive_addusedcallback(&ref_127a1, "plunderRepository");
-  scripts\engine\scriptable::scriptable_addusedcallback(&ref_127a3);
+  scripts\common\interactive::interactive_addusedcallback(&ref_127A1, "plunderRepository");
+  scripts\engine\scriptable::scriptable_addusedcallback(&ref_127A3);
   scripts\mp\utility\spawn_event_aggregator::registeronplayerspawncallback(&ref_12795);
-  level.ref_127d4 = getdvarint("scr_br_plunderUseDisabledWhenEmpty", 0) > 0;
+  level.ref_127D4 = getdvarint("scr_br_plunderUseDisabledWhenEmpty", 0) > 0;
 }
 
-function ref_1278c(var_0, var_1, var_2) {
-  var_3 = level.ref_127c7;
+function ref_1278C(var_0, var_1, var_2) {
+  var_3 = level.ref_127C7;
   var_4 = var_3.data[var_0];
 
   if(!isDefined(var_4)) {
@@ -2518,22 +2518,22 @@ function ref_1278c(var_0, var_1, var_2) {
       var_4.usetime = 0.75;
       var_4.ref_14077 = 2;
       var_4.ref_14075 = 250;
-      var_4.ref_13acc = 1;
-      var_4.ref_13aa5 = 0;
-      var_4.ref_1407a = "MP/CANNOT_DEPOSIT_LS";
-      var_4.ref_1407c = "MP/CANNOT_DEPOSIT_VEHICLE";
+      var_4.ref_13ACC = 1;
+      var_4.ref_13AA5 = 0;
+      var_4.ref_1407A = "MP/CANNOT_DEPOSIT_LS";
+      var_4.ref_1407C = "MP/CANNOT_DEPOSIT_VEHICLE";
       var_4.ref_14078 = "MP/PLACEHOLDER_CANNOT_DEPOSIT_FULL";
-      var_4.ref_1407b = "MP/CANNOT_DEPOSIT_NO_CASH";
+      var_4.ref_1407B = "MP/CANNOT_DEPOSIT_NO_CASH";
       var_4.ref_14079 = "MP/PLACEHOLDER_CANNOT_DEPOSIT_LEAVING";
-      var_4.ref_12f7d = undefined;
-      var_4.ref_12f7e = undefined;
-      var_4.ref_12f77 = undefined;
+      var_4.ref_12F7D = undefined;
+      var_4.ref_12F7E = undefined;
+      var_4.ref_12F77 = undefined;
       var_4.origin_delta = 60;
       var_4.overrideviewkickscaledmr = 0;
       var_4.original_disablelongdeath = "MP/PLACEHOLDER_LEAVING_IN_N";
       var_4.get_closest_enemy_near_turret = 2000;
       var_4.ref_14098 = undefined;
-      var_4.ref_14068 = &ref_1279f;
+      var_4.ref_14068 = &ref_1279F;
       var_4.impactwatcher = undefined;
       var_4.org_in_bad_place = undefined;
       var_4.outline_enemy_ai_for_duration = undefined;
@@ -2544,19 +2544,19 @@ function ref_1278c(var_0, var_1, var_2) {
 }
 
 function ref_12796(var_0, var_1) {
-  var_2 = level.ref_127c7;
-  var_3 = ref_1278c(var_1);
-  var_0.ref_127c8 = var_1;
+  var_2 = level.ref_127C7;
+  var_3 = ref_1278C(var_1);
+  var_0.ref_127C8 = var_1;
   var_0.startorigin = var_0.origin;
   var_0.plunder = [];
-  var_0.ref_127d0 = 0;
-  var_0.ref_127bd = level.ref_127c7.uniqueinstanceid;
-  level.ref_127c7.uniqueinstanceid++;
-  var_0.ref_126be = [];
-  var_2.instances[var_0.ref_127bd] = var_0;
+  var_0.ref_127D0 = 0;
+  var_0.ref_127BD = level.ref_127C7.uniqueinstanceid;
+  level.ref_127C7.uniqueinstanceid++;
+  var_0.ref_126BE = [];
+  var_2.instances[var_0.ref_127BD] = var_0;
   ref_12780(var_0);
 
-  if(!isDefined(var_3.ref_12f7d)) {
+  if(!isDefined(var_3.ref_12F7D)) {
     var_0 scripts\common\interactive::interactive_addusedcallbacktoentity("plunderRepository");
   }
 
@@ -2564,28 +2564,28 @@ function ref_12796(var_0, var_1) {
 }
 
 function ref_12786(var_0) {
-  var_1 = level.ref_127c7;
+  var_1 = level.ref_127C7;
   var_0 notify("plunder_instance_deregistered");
   ref_12782(var_0, 0, 1);
-  var_0.ref_127c8 = undefined;
-  var_0.ref_127d3 = undefined;
-  var_0.ref_127ae = undefined;
+  var_0.ref_127C8 = undefined;
+  var_0.ref_127D3 = undefined;
+  var_0.ref_127AE = undefined;
   var_0.startorigin = undefined;
   var_0.plunder = undefined;
-  var_0.ref_127d0 = undefined;
-  ref_1279a(var_0);
-  var_0.ref_126be = undefined;
+  var_0.ref_127D0 = undefined;
+  ref_1279A(var_0);
+  var_0.ref_126BE = undefined;
 
-  if(isDefined(var_0.ref_127bd)) {
-    var_1.instances[var_0.ref_127bd] = undefined;
+  if(isDefined(var_0.ref_127BD)) {
+    var_1.instances[var_0.ref_127BD] = undefined;
   }
 
   ref_12797(var_0);
   var_0 scripts\common\interactive::interactive_removeusedcallbackfromentity();
 }
 
-function ref_1279e(var_0) {
-  var_1 = level.ref_127c7;
+function ref_1279E(var_0) {
+  var_1 = level.ref_127C7;
 
   if(!isDefined(var_1)) {
     return false;
@@ -2593,8 +2593,8 @@ function ref_1279e(var_0) {
 
   var_2 = undefined;
 
-  if(isDefined(var_0.ref_127bd)) {
-    var_2 = var_1.instances[var_0.ref_127bd];
+  if(isDefined(var_0.ref_127BD)) {
+    var_2 = var_1.instances[var_0.ref_127BD];
   }
 
   return isDefined(var_2) && var_2 == var_0;
@@ -2604,16 +2604,16 @@ function ref_12782(var_0, var_1, var_2) {
   var_0 notify("plunder_allowRepositoryUse");
   var_3 = undefined;
 
-  if(isDefined(var_0.ref_127c8)) {
-    var_3 = ref_1278c(var_0.ref_127c8, undefined, var_2);
+  if(isDefined(var_0.ref_127C8)) {
+    var_3 = ref_1278C(var_0.ref_127C8, undefined, var_2);
   }
 
   if(isDefined(var_3)) {
-    if(isDefined(var_3.ref_12f7d)) {
+    if(isDefined(var_3.ref_12F7D)) {
       if(var_1) {
-        var_0 setscriptablepartstate(var_3.ref_12f7d, var_3.ref_12f7e, 0);
+        var_0 setscriptablepartstate(var_3.ref_12F7D, var_3.ref_12F7E, 0);
       } else {
-        var_0 setscriptablepartstate(var_3.ref_12f7d, var_3.ref_12f77, 0);
+        var_0 setscriptablepartstate(var_3.ref_12F7D, var_3.ref_12F77, 0);
       }
     } else if(var_1) {
       var_0 makeusable();
@@ -2621,8 +2621,8 @@ function ref_12782(var_0, var_1, var_2) {
       var_0 makeunusable();
     }
 
-    var_4 = istrue(var_0.ref_127d3);
-    var_0.ref_127d3 = scripts\engine\utility::ter_op(var_1, var_1, undefined);
+    var_4 = istrue(var_0.ref_127D3);
+    var_0.ref_127D3 = scripts\engine\utility::ter_op(var_1, var_1, undefined);
 
     if(!var_4) {
       if(var_1) {
@@ -2648,16 +2648,16 @@ function ref_12782(var_0, var_1, var_2) {
 function ref_12783(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
-  if(isDefined(var_0.ref_127c8)) {
-    var_4 = ref_1278c(var_0.ref_127c8, undefined, var_3);
+  if(isDefined(var_0.ref_127C8)) {
+    var_4 = ref_1278C(var_0.ref_127C8, undefined, var_3);
   }
 
   if(isDefined(var_4)) {
-    if(isDefined(var_4.ref_12f7d)) {
+    if(isDefined(var_4.ref_12F7D)) {
       if(var_2) {
-        var_0 enablescriptablepartplayeruse(var_4.ref_12f7d, var_1);
+        var_0 enablescriptablepartplayeruse(var_4.ref_12F7D, var_1);
       } else {
-        var_0 disablescriptablepartplayeruse(var_4.ref_12f7d, var_1);
+        var_0 disablescriptablepartplayeruse(var_4.ref_12F7D, var_1);
       }
     } else if(var_2) {
       var_0 enableplayeruse(var_1);
@@ -2673,7 +2673,7 @@ function ref_12783(var_0, var_1, var_2, var_3) {
 }
 
 function ref_12781(var_0, var_1, var_2) {
-  var_3 = level.ref_127c7;
+  var_3 = level.ref_127C7;
 
   foreach(var_5 in var_3.instances) {
     if(isDefined(var_5)) {
@@ -2691,8 +2691,8 @@ function ref_12793(var_0, var_1) {
     return false;
   }
 
-  var_2 = ref_1278c(var_0.ref_127c8);
-  var_3 = istrue(var_2.ref_13acc) || istrue(var_0.playerplunderbankdepositcallback);
+  var_2 = ref_1278C(var_0.ref_127C8);
+  var_3 = istrue(var_2.ref_13ACC) || istrue(var_0.playerplunderbankdepositcallback);
 
   if(var_3 && isDefined(var_0.team) && var_1.team != var_0.team) {
     return false;
@@ -2702,9 +2702,9 @@ function ref_12793(var_0, var_1) {
 }
 
 function ref_12794(var_0, var_1, var_2) {
-  var_3 = ref_1278c(var_0.ref_127c8);
+  var_3 = ref_1278C(var_0.ref_127C8);
 
-  if(!istrue(var_0.ref_127d3)) {
+  if(!istrue(var_0.ref_127D3)) {
     return 0;
   }
 
@@ -2720,15 +2720,15 @@ function ref_12794(var_0, var_1, var_2) {
         return 0;
       }
 
-      if(var_0.ref_127d0 <= 0) {
+      if(var_0.ref_127D0 <= 0) {
         var_1 playlocalsound("br_plunder_atm_cancel");
         var_1 scripts\mp\hud_message::showerrormessage(var_3.stealfailmsg7);
         return 0;
       }
     } else if(var_0.team == var_1.team && (!isDefined(var_1.plundercount) || var_1.plundercount <= 0)) {
-      if(istrue(var_2) && isDefined(var_3.ref_1407b) && var_3.ref_1407b != "") {
+      if(istrue(var_2) && isDefined(var_3.ref_1407B) && var_3.ref_1407B != "") {
         var_1 playlocalsound("br_plunder_atm_cancel");
-        var_1 scripts\mp\hud_message::showerrormessage(var_3.ref_1407b);
+        var_1 scripts\mp\hud_message::showerrormessage(var_3.ref_1407B);
       }
 
       return 0;
@@ -2737,13 +2737,13 @@ function ref_12794(var_0, var_1, var_2) {
 
   if(var_3.ref_14077 == 2 || var_3.ref_14077 == 3) {
     if(!isDefined(var_1.plundercount) || var_1.plundercount <= 0 && (!isDefined(var_1.overheatreductiontime) || isDefined(var_1.override_minimap_hide) && isDefined(var_0.index) && var_1.override_minimap_hide != var_0.index)) {
-      if(istrue(var_2) && isDefined(var_3.ref_1407b) && var_3.ref_1407b != "") {
+      if(istrue(var_2) && isDefined(var_3.ref_1407B) && var_3.ref_1407B != "") {
         var_1 playlocalsound("br_plunder_atm_cancel");
-        var_1 scripts\mp\hud_message::showerrormessage(var_3.ref_1407b);
+        var_1 scripts\mp\hud_message::showerrormessage(var_3.ref_1407B);
       }
 
       return 0;
-    } else if(istrue(var_0.ref_127ae)) {
+    } else if(istrue(var_0.ref_127AE)) {
       if(istrue(var_2) && isDefined(var_3.ref_14078) && var_3.ref_14078 != "") {
         var_1 playlocalsound("br_plunder_atm_cancel");
         var_1 scripts\mp\hud_message::showerrormessage(var_3.ref_14078);
@@ -2754,18 +2754,18 @@ function ref_12794(var_0, var_1, var_2) {
   }
 
   if(var_1 scripts\cp_mp\utility\player_utility::isinvehicle()) {
-    if(istrue(var_2) && isDefined(var_3.ref_1407c) && var_3.ref_1407c != "") {
+    if(istrue(var_2) && isDefined(var_3.ref_1407C) && var_3.ref_1407C != "") {
       var_1 playlocalsound("br_plunder_atm_cancel");
-      var_1 scripts\mp\hud_message::showerrormessage(var_3.ref_1407c);
+      var_1 scripts\mp\hud_message::showerrormessage(var_3.ref_1407C);
     }
 
     return 0;
   }
 
   if(scripts\mp\utility\player::unset_relic_trex(var_1)) {
-    if(istrue(var_2) && isDefined(var_3.ref_1407a) && var_3.ref_1407a != "") {
+    if(istrue(var_2) && isDefined(var_3.ref_1407A) && var_3.ref_1407A != "") {
       var_1 playlocalsound("br_plunder_atm_cancel");
-      var_1 scripts\mp\hud_message::showerrormessage(var_3.ref_1407a);
+      var_1 scripts\mp\hud_message::showerrormessage(var_3.ref_1407A);
     }
 
     return 0;
@@ -2786,7 +2786,7 @@ function ref_12794(var_0, var_1, var_2) {
   return 1;
 }
 
-function ref_127a3(var_0, var_1, var_2, var_3, var_4) {
+function ref_127A3(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -2797,21 +2797,21 @@ function ref_127a3(var_0, var_1, var_2, var_3, var_4) {
     var_5 = var_0;
   }
 
-  if(!ref_1279e(var_5)) {
+  if(!ref_1279E(var_5)) {
     return;
   }
 
-  var_6 = ref_1278c(var_5.ref_127c8);
+  var_6 = ref_1278C(var_5.ref_127C8);
 
-  if(!isDefined(var_6.ref_12f7d)) {
+  if(!isDefined(var_6.ref_12F7D)) {
     return;
   }
 
-  if(var_1 != var_6.ref_12f7d) {
+  if(var_1 != var_6.ref_12F7D) {
     return;
   }
 
-  if(var_2 != var_6.ref_12f7e) {
+  if(var_2 != var_6.ref_12F7E) {
     return;
   }
 
@@ -2819,11 +2819,11 @@ function ref_127a3(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  thread ref_127a2(var_5, var_3);
+  thread ref_127A2(var_5, var_3);
 }
 
-function ref_127a1(var_0, var_1) {
-  if(!ref_1279e(var_0)) {
+function ref_127A1(var_0, var_1) {
+  if(!ref_1279E(var_0)) {
     return;
   }
 
@@ -2831,15 +2831,15 @@ function ref_127a1(var_0, var_1) {
     return;
   }
 
-  thread ref_127a2(var_0, var_1);
+  thread ref_127A2(var_0, var_1);
 }
 
-function ref_127a2(var_0, var_1) {
+function ref_127A2(var_0, var_1) {
   var_2 = var_1 getentitynumber();
   var_3 = gettime();
-  ref_1279b(var_1, 1);
+  ref_1279B(var_1, 1);
   ref_12783(var_0, var_1, 0);
-  ref_127a5(var_0, var_1);
+  ref_127A5(var_0, var_1);
 
   if(isDefined(var_1)) {
     if(isDefined(var_0)) {
@@ -2847,10 +2847,10 @@ function ref_127a2(var_0, var_1) {
     }
 
     if(var_1 scripts\cp_mp\utility\player_utility::_isalive()) {
-      ref_1279b(var_1, 0);
+      ref_1279B(var_1, 0);
     }
 
-    var_1.ref_127c9 = undefined;
+    var_1.ref_127C9 = undefined;
 
     if(isPlayer(var_1)) {
       var_4 = 0;
@@ -2859,7 +2859,7 @@ function ref_127a2(var_0, var_1) {
       if(!var_4 && var_1 scripts\cp_mp\utility\player_utility::_isalive() && !var_1 scripts\cp_mp\utility\player_utility::isinvehicle() && !scripts\mp\utility\player::unset_relic_trex(var_1)) {
         if(istrue(var_0.oscope_ampl)) {
           var_5 = 2;
-        } else if(isDefined(var_1.ref_127ca) && isDefined(var_1.ref_127ca.ref_14076) && var_1.ref_127ca.ref_14076 - gettime() <= 1.5) {
+        } else if(isDefined(var_1.ref_127CA) && isDefined(var_1.ref_127CA.ref_14076) && var_1.ref_127CA.ref_14076 - gettime() <= 1.5) {
           var_5 = 1.5;
         }
       }
@@ -2868,28 +2868,28 @@ function ref_127a2(var_0, var_1) {
     }
   }
 
-  if(isDefined(var_0) && isDefined(var_0.ref_126be)) {
-    var_0.ref_126be[var_2] = undefined;
+  if(isDefined(var_0) && isDefined(var_0.ref_126BE)) {
+    var_0.ref_126BE[var_2] = undefined;
   }
 
   if(isDefined(var_1) && isPlayer(var_1)) {
-    ref_127aa(var_0, var_1);
+    ref_127AA(var_0, var_1);
     return;
   }
 }
 
-function ref_127a5(var_0, var_1) {
+function ref_127A5(var_0, var_1) {
   var_1 endon("death_or_disconnect");
   var_1 endon("last_stand_start");
   var_0 endon("death");
   var_0 endon("repository_use_disabled");
   var_0 endon("repository_use_disabled_for_" + var_1 getentitynumber());
   level endon("game_ended");
-  var_2 = ref_1278c(var_0.ref_127c8);
-  var_0.ref_126be[var_1 getentitynumber()] = var_1;
-  ref_127ab(var_1, var_0.ref_127bd, var_2.type, 1, var_0.ref_127af, var_0.ref_127d0);
-  ref_127a6(var_1);
-  ref_127aa(var_0, var_1);
+  var_2 = ref_1278C(var_0.ref_127C8);
+  var_0.ref_126BE[var_1 getentitynumber()] = var_1;
+  ref_127AB(var_1, var_0.ref_127BD, var_2.type, 1, var_0.ref_127AF, var_0.ref_127D0);
+  ref_127A6(var_1);
+  ref_127AA(var_0, var_1);
   var_3 = 0;
   var_4 = 0;
   var_5 = var_2.usetime;
@@ -2925,8 +2925,8 @@ function ref_127a5(var_0, var_1) {
 
       var_6 = var_4;
 
-      if(isDefined(var_1.ref_127ca)) {
-        var_1.ref_127ca.ref_14076 = gettime();
+      if(isDefined(var_1.ref_127CA)) {
+        var_1.ref_127CA.ref_14076 = gettime();
       }
 
       var_3 = 1;
@@ -2937,57 +2937,57 @@ function ref_127a5(var_0, var_1) {
   }
 }
 
-function ref_1279f(var_0, var_1, var_2) {
-  var_3 = ref_1278c(var_0.ref_127c8);
-  var_4 = ref_1261f(var_1, var_2, var_3.ref_14077, var_0);
+function ref_1279F(var_0, var_1, var_2) {
+  var_3 = ref_1278C(var_0.ref_127C8);
+  var_4 = ref_1261F(var_1, var_2, var_3.ref_14077, var_0);
 
   if(isDefined(var_4) && isDefined(var_4.amount)) {
     var_2 = var_4.amount;
   }
 
   if(var_2 > 0) {
-    ref_127ab(var_1, undefined, undefined, undefined, undefined, var_0.ref_127d0, var_2);
-    ref_127a6(var_1);
+    ref_127AB(var_1, undefined, undefined, undefined, undefined, var_0.ref_127D0, var_2);
+    ref_127A6(var_1);
     return;
   }
 }
 
-function ref_1279b(var_0, var_1) {
+function ref_1279B(var_0, var_1) {
   var_2 = ["movement", "usability", "weapon_switch", "equipment", "supers", "killstreaks", "fire", "melee", "reload", "ads", "mantle", "mount_top", "mount_side", "execution_attack", "vehicle_use", "cough_gesture"];
 
-  if(istrue(var_0.ref_127c9) && var_1) {
+  if(istrue(var_0.ref_127C9) && var_1) {
     return;
   }
 
-  if(!istrue(var_0.ref_127c9) && !var_1) {
+  if(!istrue(var_0.ref_127C9) && !var_1) {
     return;
   }
 
   var_0 scripts\common\utility::allow_array(var_2, !var_1);
 
   if(var_1) {
-    var_0.ref_127c9 = 1;
+    var_0.ref_127C9 = 1;
     return;
   }
 
-  var_0.ref_127c9 = undefined;
+  var_0.ref_127C9 = undefined;
 }
 
-function ref_127a4(var_0, var_1) {
+function ref_127A4(var_0, var_1) {
   var_0 endon("death");
   var_0 endon("plunder_instance_deregistered");
   var_0 notify("plunder_repositoryWatchCountdown");
   var_0 endon("plunder_repositoryWatchCountdown");
   level endon("game_ended");
-  var_2 = ref_1278c(var_0.ref_127c8);
+  var_2 = ref_1278C(var_0.ref_127C8);
 
-  if(!isDefined(var_0.ref_127b1)) {
-    var_0.ref_127b1 = [];
-    var_0.ref_127b2 = 0;
+  if(!isDefined(var_0.ref_127B1)) {
+    var_0.ref_127B1 = [];
+    var_0.ref_127B2 = 0;
     var_3 = scripts\engine\utility::ter_op(isDefined(var_2.overrideviewkickscaledmr), var_2.overrideviewkickscaledmr, 0);
     var_4 = scripts\engine\utility::ter_op(isDefined(var_2.origin_delta), var_2.origin_delta, 0);
-    var_0.ref_127cb = gettime() + var_3 * 1000;
-    var_0.ref_127af = gettime() + (var_3 + var_4) * 1000;
+    var_0.ref_127CB = gettime() + var_3 * 1000;
+    var_0.ref_127AF = gettime() + (var_3 + var_4) * 1000;
   }
 
   if(isDefined(var_1)) {
@@ -2997,35 +2997,35 @@ function ref_127a4(var_0, var_1) {
 
     foreach(var_6 in var_1) {
       if(isDefined(var_6) && isPlayer(var_6)) {
-        var_0.ref_127b1[var_6 getentitynumber()] = var_6;
+        var_0.ref_127B1[var_6 getentitynumber()] = var_6;
       }
     }
   }
 
-  while(gettime() <= var_0.ref_127af) {
-    if(gettime() - var_0.ref_127b2 >= 1000) {
-      if(gettime() > var_0.ref_127cb) {
-        var_8 = int(max(0, (var_0.ref_127af - gettime()) / 1000));
+  while(gettime() <= var_0.ref_127AF) {
+    if(gettime() - var_0.ref_127B2 >= 1000) {
+      if(gettime() > var_0.ref_127CB) {
+        var_8 = int(max(0, (var_0.ref_127AF - gettime()) / 1000));
 
-        foreach(var_6 in var_0.ref_127b1) {
+        foreach(var_6 in var_0.ref_127B1) {
           if(isDefined(var_6)) {
-            thread ref_127a0(var_6, var_0, var_8);
+            thread ref_127A0(var_6, var_0, var_8);
           }
         }
       }
 
-      var_0.ref_127b2 = gettime();
+      var_0.ref_127B2 = gettime();
     }
 
     wait 0.05;
   }
 
-  thread ref_1279c(var_0, 1);
+  thread ref_1279C(var_0, 1);
 }
 
-function ref_1279c(var_0, var_1) {
-  ref_1279a(var_0);
-  var_2 = ref_1278c(var_0.ref_127c8);
+function ref_1279C(var_0, var_1) {
+  ref_1279A(var_0);
+  var_2 = ref_1278C(var_0.ref_127C8);
 
   if(isDefined(var_2.impactwatcher)) {
     [[var_2.impactwatcher]](var_0, var_1);
@@ -3033,31 +3033,31 @@ function ref_1279c(var_0, var_1) {
   }
 }
 
-function ref_1279a(var_0) {
+function ref_1279A(var_0) {
   var_0 notify("plunder_repositoryWatchCountdown");
-  var_0.ref_127b1 = undefined;
-  var_0.ref_127af = undefined;
-  var_0.ref_127b2 = undefined;
+  var_0.ref_127B1 = undefined;
+  var_0.ref_127AF = undefined;
+  var_0.ref_127B2 = undefined;
 }
 
-function ref_127a0(var_0, var_1, var_2) {
+function ref_127A0(var_0, var_1, var_2) {
   var_0 endon("disconnect");
   var_0 notify("plunder_repositorySendCountdownMessage");
   var_0 endon("plunder_repositorySendCountdownMessage");
   level endon("game_ended");
 
-  if(!isDefined(var_0.ref_127b0)) {
-    var_0.ref_127b0 = [];
+  if(!isDefined(var_0.ref_127B0)) {
+    var_0.ref_127B0 = [];
   }
 
-  var_3 = ref_1278c(var_1.ref_127c8);
+  var_3 = ref_1278C(var_1.ref_127C8);
 
   if(isDefined(var_3.original_disablelongdeath)) {
     var_4 = spawnStruct();
     var_4.origin = var_1.origin;
     var_4.msg = var_3.original_disablelongdeath;
     var_4.value = var_2;
-    var_0.ref_127b0[var_0.ref_127b0.size] = var_4;
+    var_0.ref_127B0[var_0.ref_127B0.size] = var_4;
   }
 
   waittillframeend();
@@ -3066,7 +3066,7 @@ function ref_127a0(var_0, var_1, var_2) {
     var_5 = undefined;
     var_6 = 2147483647;
 
-    foreach(var_4 in var_0.ref_127b0) {
+    foreach(var_4 in var_0.ref_127B0) {
       var_8 = distance2dsquared(var_0.origin, var_4.origin);
 
       if(var_8 < var_6) {
@@ -3076,15 +3076,15 @@ function ref_127a0(var_0, var_1, var_2) {
     }
   }
 
-  var_0.ref_127b0 = undefined;
+  var_0.ref_127B0 = undefined;
 }
 
-function ref_1279d(var_0) {
+function ref_1279D(var_0) {
   var_0.oscope_ampl = 1;
-  ref_1279a(var_0);
+  ref_1279A(var_0);
   ref_12782(var_0, 0);
   ref_12797(var_0);
-  var_1 = ref_1278c(var_0.ref_127c8);
+  var_1 = ref_1278C(var_0.ref_127C8);
 
   if(isDefined(var_1.org_in_bad_place)) {
     [[var_1.org_in_bad_place]](var_0);
@@ -3093,9 +3093,9 @@ function ref_1279d(var_0) {
 }
 
 function ref_12799(var_0) {
-  var_0.ref_127ae = 1;
+  var_0.ref_127AE = 1;
   ref_12782(var_0, 0);
-  var_1 = ref_1278c(var_0.ref_127c8);
+  var_1 = ref_1278C(var_0.ref_127C8);
 
   if(isDefined(var_1.carriable_error_messsage_watch)) {
     [[var_1.carriable_error_messsage_watch]](var_0);
@@ -3107,25 +3107,25 @@ function ref_12795() {
   ref_12781(self, 1, 1);
 }
 
-function ref_127ab(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_127AB(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(var_3) && !var_3) {
     ref_12785(var_0);
     return;
   }
 
-  var_7 = var_0.ref_127ca;
+  var_7 = var_0.ref_127CA;
 
   if(!isDefined(var_7)) {
     var_7 = spawnStruct();
-    var_0.ref_127ca = var_7;
-    var_7.ref_127bd = var_1;
+    var_0.ref_127CA = var_7;
+    var_7.ref_127BD = var_1;
     var_7.type = var_2;
     var_7.visible = 0;
     var_7.endtime = undefined;
-    var_7.ref_127d0 = undefined;
-    var_7.ref_127b7 = undefined;
+    var_7.ref_127D0 = undefined;
+    var_7.ref_127B7 = undefined;
     var_7.timestamp = undefined;
-  } else if(isDefined(var_1) && isDefined(var_7.ref_127bd) && var_1 != var_7.ref_127bd) {
+  } else if(isDefined(var_1) && isDefined(var_7.ref_127BD) && var_1 != var_7.ref_127BD) {
     return;
   }
 
@@ -3141,25 +3141,25 @@ function ref_127ab(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   if(isDefined(var_5)) {
-    var_7.ref_127d0 = var_5;
+    var_7.ref_127D0 = var_5;
   }
 
   if(isDefined(var_6)) {
-    var_7.ref_127b7 = var_6;
-    var_9 = level.ref_127c7.instances[var_7.ref_127bd];
+    var_7.ref_127B7 = var_6;
+    var_9 = level.ref_127C7.instances[var_7.ref_127BD];
 
-    foreach(var_11 in var_9.ref_126be) {
+    foreach(var_11 in var_9.ref_126BE) {
       if(var_11 != var_0) {
-        ref_127ab(var_0, undefined, undefined, undefined, undefined, var_5, undefined);
-        ref_127a6(var_0);
+        ref_127AB(var_0, undefined, undefined, undefined, undefined, var_5, undefined);
+        ref_127A6(var_0);
       }
     }
 
     if(isDefined(var_9.team)) {
-      ref_127aa(var_9, scripts\mp\utility\teams::getfriendlyplayers(var_9.team));
+      ref_127AA(var_9, scripts\mp\utility\teams::getfriendlyplayers(var_9.team));
     }
   } else if(isDefined(var_7.timestamp) && var_7.timestamp < gettime()) {
-    var_7.ref_127b7 = undefined;
+    var_7.ref_127B7 = undefined;
   }
 
   var_7.timestamp = gettime();
@@ -3168,7 +3168,7 @@ function ref_127ab(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 function ref_12785(var_0, var_1) {
   var_0 endon("disconnect");
   var_0 endon("plunder_sendRepositoryWidgetOmnvar");
-  var_0.ref_127ca = undefined;
+  var_0.ref_127CA = undefined;
 
   if(isDefined(var_1) && var_1 > 0) {
     wait var_1;
@@ -3177,9 +3177,9 @@ function ref_12785(var_0, var_1) {
   var_0 setclientomnvar("ui_br_plunder_repository", 0);
 }
 
-function ref_127a6(var_0) {
+function ref_127A6(var_0) {
   var_0 notify("plunder_sendRepositoryWidgetOmnvar");
-  var_1 = var_0.ref_127ca;
+  var_1 = var_0.ref_127CA;
 
   if(!isDefined(var_1)) {
     var_0 setclientomnvar("ui_br_plunder_repository", 0);
@@ -3217,7 +3217,7 @@ function ref_127a6(var_0) {
   var_6 = getDvar("scr_br_gametype", "") == "gold_war";
 
   if(var_1.type == 0) {
-    var_4 = var_1.ref_127d0;
+    var_4 = var_1.ref_127D0;
     var_5 = 9;
 
     if(isDefined(var_4)) {
@@ -3233,7 +3233,7 @@ function ref_127a6(var_0) {
     }
 
     var_3 += var_5;
-    var_4 = var_1.ref_127b7;
+    var_4 = var_1.ref_127B7;
     var_5 = 6;
 
     if(isDefined(var_4)) {
@@ -3248,7 +3248,7 @@ function ref_127a6(var_0) {
       var_2 |= int(var_4) << var_3;
     }
   } else {
-    var_4 = var_1.ref_127b7;
+    var_4 = var_1.ref_127B7;
     var_5 = 15;
 
     if(isDefined(var_4)) {
@@ -3262,15 +3262,15 @@ function ref_127a6(var_0) {
 }
 
 function ref_12780(var_0) {
-  var_1 = level.ref_127c7;
-  var_2 = ref_1278c(var_0.ref_127c8);
+  var_1 = level.ref_127C7;
+  var_2 = ref_1278C(var_0.ref_127C8);
 
-  if(!istrue(var_2.ref_13aa5)) {
+  if(!istrue(var_2.ref_13AA5)) {
     return;
   }
 
-  if(!isDefined(var_1.ref_13aa6[var_0.team])) {
-    var_1.ref_13aa6[var_0.team] = [];
+  if(!isDefined(var_1.ref_13AA6[var_0.team])) {
+    var_1.ref_13AA6[var_0.team] = [];
   }
 
   var_3 = [];
@@ -3279,7 +3279,7 @@ function ref_12780(var_0) {
     var_3 = var_4;
   }
 
-  foreach(var_6 in var_1.ref_13aa6[var_0.team]) {
+  foreach(var_6 in var_1.ref_13AA6[var_0.team]) {
     var_3[var_6.building_magic_grenade_damage] = undefined;
   }
 
@@ -3289,8 +3289,8 @@ function ref_12780(var_0) {
   }
 
   if(isDefined(var_0.building_magic_grenade_damage)) {
-    var_1.ref_13aa6[var_0.team] = scripts\engine\utility::array_add(var_1.ref_13aa6[var_0.team], var_0);
-    var_11 = var_1.ref_13aa3[var_0.building_magic_grenade_damage];
+    var_1.ref_13AA6[var_0.team] = scripts\engine\utility::array_add(var_1.ref_13AA6[var_0.team], var_0);
+    var_11 = var_1.ref_13AA3[var_0.building_magic_grenade_damage];
 
     foreach(var_13 in scripts\mp\utility\teams::getfriendlyplayers(var_0.team)) {
       var_13 setclientomnvar(var_11, var_0 getentitynumber());
@@ -3301,7 +3301,7 @@ function ref_12780(var_0) {
 }
 
 function ref_12797(var_0) {
-  var_1 = level.ref_127c7;
+  var_1 = level.ref_127C7;
   var_2 = var_0.building_magic_grenade_damage;
 
   if(!isDefined(var_2)) {
@@ -3309,14 +3309,14 @@ function ref_12797(var_0) {
   }
 
   var_0.building_magic_grenade_damage = undefined;
-  var_1.ref_13aa6[var_0.team] = scripts\engine\utility::array_remove(var_1.ref_13aa6[var_0.team], var_0);
+  var_1.ref_13AA6[var_0.team] = scripts\engine\utility::array_remove(var_1.ref_13AA6[var_0.team], var_0);
 
-  if(var_1.ref_13aa6[var_0.team].size == 0) {
-    var_1.ref_13aa6[var_0.team] = undefined;
+  if(var_1.ref_13AA6[var_0.team].size == 0) {
+    var_1.ref_13AA6[var_0.team] = undefined;
   }
 
-  var_3 = var_1.ref_13aa3[var_2];
-  var_4 = var_1.ref_13aa4[var_2];
+  var_3 = var_1.ref_13AA3[var_2];
+  var_4 = var_1.ref_13AA4[var_2];
 
   foreach(var_6 in scripts\mp\utility\teams::getfriendlyplayers(var_0.team)) {
     var_6 setclientomnvar(var_3, -1);
@@ -3324,8 +3324,8 @@ function ref_12797(var_0) {
   }
 }
 
-function ref_127aa(var_0, var_1) {
-  var_2 = level.ref_127c7;
+function ref_127AA(var_0, var_1) {
+  var_2 = level.ref_127C7;
 
   if(!isDefined(var_0.building_magic_grenade_damage)) {
     return;
@@ -3345,7 +3345,7 @@ function ref_127aa(var_0, var_1) {
   var_6 = 1;
   var_3 += var_5;
   var_4 += var_6;
-  var_5 = var_0.ref_127af;
+  var_5 = var_0.ref_127AF;
   var_6 = 14;
 
   if(isDefined(var_5)) {
@@ -3355,7 +3355,7 @@ function ref_127aa(var_0, var_1) {
   }
 
   var_4 += var_6;
-  var_5 = var_0.ref_127d0;
+  var_5 = var_0.ref_127D0;
   var_6 = 9;
 
   if(isDefined(var_5)) {
@@ -3364,10 +3364,10 @@ function ref_127aa(var_0, var_1) {
     var_3 += var_5 << var_4;
   }
 
-  var_7 = var_2.ref_13aa4[var_0.building_magic_grenade_damage];
+  var_7 = var_2.ref_13AA4[var_0.building_magic_grenade_damage];
 
   foreach(var_9 in var_1) {
-    if(scripts\engine\utility::array_contains(var_0.ref_126be, var_9)) {
+    if(scripts\engine\utility::array_contains(var_0.ref_126BE, var_9)) {
       var_9 setclientomnvar(var_7, var_3 &~1);
       continue;
     }

@@ -9,10 +9,10 @@ function init() {
     return;
   }
 
-  level.ref_11ae4 = [];
-  level.ref_11ae4["keypads"] = [];
-  level.ref_11ae4["phones"] = [];
-  level.ref_11ae4["computers"] = [];
+  level.ref_11AE4 = [];
+  level.ref_11AE4["keypads"] = [];
+  level.ref_11AE4["phones"] = [];
+  level.ref_11AE4["computers"] = [];
   thread onplayerconnect();
   thread tank_death();
 
@@ -22,10 +22,10 @@ function init() {
     timer_sequence();
   }
 
-  scripts\engine\scriptable::ref_12f5b("maphint_computer", &ref_11adf);
+  scripts\engine\scriptable::ref_12F5B("maphint_computer", &ref_11ADF);
 
   if(false) {
-    thread ref_11ae0();
+    thread ref_11AE0();
     return;
   }
 }
@@ -48,78 +48,78 @@ function linker() {
 }
 
 function timeremaining() {
-  level.ref_11ae4["keypads"] = [];
-  level.ref_11ae4["keypads"][0] = spawnStruct();
-  level.ref_11ae4["keypads"][0].origin = (-17261, -44265, 40);
-  level.ref_11ae4["keypads"][1] = spawnStruct();
-  level.ref_11ae4["keypads"][1].origin = (-37520, -19013, 237);
-  level.ref_11ae4["keypads"][2] = spawnStruct();
-  level.ref_11ae4["keypads"][2].origin = (-39523, -2395, 30);
-  level.ref_11ae4["keypads"][3] = spawnStruct();
-  level.ref_11ae4["keypads"][3].origin = (-38640, -1902, -103);
-  level.ref_11ae4["keypads"][4] = spawnStruct();
-  level.ref_11ae4["keypads"][4].origin = (-15513, 43307, 105);
-  level.ref_11ae4["keypads"][5] = spawnStruct();
-  level.ref_11ae4["keypads"][5].origin = (2495, 41096, 1670);
-  level.ref_11ae4["keypads"][6] = spawnStruct();
-  level.ref_11ae4["keypads"][6].origin = (47600, 34582, 500);
-  level.ref_11ae4["keypads"][7] = spawnStruct();
-  level.ref_11ae4["keypads"][7].origin = (18622, -34634, -478);
-  level.ref_11ae4["keypads"][8] = spawnStruct();
-  level.ref_11ae4["keypads"][8].origin = (54279, -33994, 173);
-  level.ref_11ae4["keypads"][9] = spawnStruct();
-  level.ref_11ae4["keypads"][9].origin = (36350, 13586, 26);
-  level.ref_11ae4["keypads"][10] = spawnStruct();
-  level.ref_11ae4["keypads"][10].origin = (37390, 13383, -117);
+  level.ref_11AE4["keypads"] = [];
+  level.ref_11AE4["keypads"][0] = spawnStruct();
+  level.ref_11AE4["keypads"][0].origin = (-17261, -44265, 40);
+  level.ref_11AE4["keypads"][1] = spawnStruct();
+  level.ref_11AE4["keypads"][1].origin = (-37520, -19013, 237);
+  level.ref_11AE4["keypads"][2] = spawnStruct();
+  level.ref_11AE4["keypads"][2].origin = (-39523, -2395, 30);
+  level.ref_11AE4["keypads"][3] = spawnStruct();
+  level.ref_11AE4["keypads"][3].origin = (-38640, -1902, -103);
+  level.ref_11AE4["keypads"][4] = spawnStruct();
+  level.ref_11AE4["keypads"][4].origin = (-15513, 43307, 105);
+  level.ref_11AE4["keypads"][5] = spawnStruct();
+  level.ref_11AE4["keypads"][5].origin = (2495, 41096, 1670);
+  level.ref_11AE4["keypads"][6] = spawnStruct();
+  level.ref_11AE4["keypads"][6].origin = (47600, 34582, 500);
+  level.ref_11AE4["keypads"][7] = spawnStruct();
+  level.ref_11AE4["keypads"][7].origin = (18622, -34634, -478);
+  level.ref_11AE4["keypads"][8] = spawnStruct();
+  level.ref_11AE4["keypads"][8].origin = (54279, -33994, 173);
+  level.ref_11AE4["keypads"][9] = spawnStruct();
+  level.ref_11AE4["keypads"][9].origin = (36350, 13586, 26);
+  level.ref_11AE4["keypads"][10] = spawnStruct();
+  level.ref_11AE4["keypads"][10].origin = (37390, 13383, -117);
 
-  foreach(var_1 in level.ref_11ae4["keypads"]) {
-    level.ref_11ae4["keypads"][var_2].scriptable = easepower("maphint_keypad", var_1.origin);
+  foreach(var_1 in level.ref_11AE4["keypads"]) {
+    level.ref_11AE4["keypads"][var_2].scriptable = easepower("maphint_keypad", var_1.origin);
   }
 }
 
 function times_in_b() {
-  level.ref_11ae4["phones"] = [];
+  level.ref_11AE4["phones"] = [];
 
-  foreach(var_1 in level.ref_11ae4["phones"]) {
-    level.ref_11ae4["phones"][var_2].scriptable = easepower("maphint_phone", var_1.origin);
+  foreach(var_1 in level.ref_11AE4["phones"]) {
+    level.ref_11AE4["phones"][var_2].scriptable = easepower("maphint_phone", var_1.origin);
   }
 }
 
 function timer_sequence() {
-  level.ref_11ae4["computers"] = [];
-  level.ref_11ae4["computers"][0] = spawnStruct();
-  level.ref_11ae4["computers"][0].origin = (8490, -11874, -239);
-  level.ref_11ae4["computers"][1] = spawnStruct();
-  level.ref_11ae4["computers"][1].origin = (-14585, 7982, -175);
-  level.ref_11ae4["computers"][2] = spawnStruct();
-  level.ref_11ae4["computers"][2].origin = (-34140, 3815, -55);
-  level.ref_11ae4["computers"][3] = spawnStruct();
-  level.ref_11ae4["computers"][3].origin = (5358, 51419, 1080);
-  level.ref_11ae4["computers"][4] = spawnStruct();
-  level.ref_11ae4["computers"][4].origin = (51078, -39445, 1125);
-  level.ref_11ae4["computers"][5] = spawnStruct();
-  level.ref_11ae4["computers"][5].origin = (17796, -8300, 1349);
-  level.ref_11ae4["computers"][6] = spawnStruct();
-  level.ref_11ae4["computers"][6].origin = (37275, -26745, -472);
+  level.ref_11AE4["computers"] = [];
+  level.ref_11AE4["computers"][0] = spawnStruct();
+  level.ref_11AE4["computers"][0].origin = (8490, -11874, -239);
+  level.ref_11AE4["computers"][1] = spawnStruct();
+  level.ref_11AE4["computers"][1].origin = (-14585, 7982, -175);
+  level.ref_11AE4["computers"][2] = spawnStruct();
+  level.ref_11AE4["computers"][2].origin = (-34140, 3815, -55);
+  level.ref_11AE4["computers"][3] = spawnStruct();
+  level.ref_11AE4["computers"][3].origin = (5358, 51419, 1080);
+  level.ref_11AE4["computers"][4] = spawnStruct();
+  level.ref_11AE4["computers"][4].origin = (51078, -39445, 1125);
+  level.ref_11AE4["computers"][5] = spawnStruct();
+  level.ref_11AE4["computers"][5].origin = (17796, -8300, 1349);
+  level.ref_11AE4["computers"][6] = spawnStruct();
+  level.ref_11AE4["computers"][6].origin = (37275, -26745, -472);
 
-  foreach(var_1 in level.ref_11ae4["computers"]) {
-    level.ref_11ae4["computers"][var_2].scriptable = easepower("maphint_computer", var_1.origin);
+  foreach(var_1 in level.ref_11AE4["computers"]) {
+    level.ref_11AE4["computers"][var_2].scriptable = easepower("maphint_computer", var_1.origin);
   }
 }
 
 function times_in_c() {
-  level.ref_11ae4["radios"] = [];
-  level.ref_11ae4["radios"][0] = spawnStruct();
-  level.ref_11ae4["radios"][0].origin = (-21440, 19434, -252);
-  level.ref_11ae4["radios"][1] = spawnStruct();
-  level.ref_11ae4["radios"][1].origin = (2896, 45445, 1630);
+  level.ref_11AE4["radios"] = [];
+  level.ref_11AE4["radios"][0] = spawnStruct();
+  level.ref_11AE4["radios"][0].origin = (-21440, 19434, -252);
+  level.ref_11AE4["radios"][1] = spawnStruct();
+  level.ref_11AE4["radios"][1].origin = (2896, 45445, 1630);
 
-  foreach(var_1 in level.ref_11ae4["radios"]) {
-    level.ref_11ae4["radios"][var_2].scriptable = easepower("maphint_radio", var_1.origin);
+  foreach(var_1 in level.ref_11AE4["radios"]) {
+    level.ref_11AE4["radios"][var_2].scriptable = easepower("maphint_radio", var_1.origin);
   }
 }
 
-function ref_11ae1(var_0, var_1, var_2, var_3, var_4) {
+function ref_11AE1(var_0, var_1, var_2, var_3, var_4) {
   thread allow_player_skip_deathshield(level, var_0, var_1, var_2, var_3);
 }
 
@@ -133,7 +133,7 @@ function allow_player_skip_deathshield(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-function ref_11ae3(var_0, var_1, var_2, var_3, var_4) {
+function ref_11AE3(var_0, var_1, var_2, var_3, var_4) {
   thread allowassassinationdamage(level, var_0, var_1, var_2, var_3);
 }
 
@@ -147,7 +147,7 @@ function allowassassinationdamage(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-function ref_11adf(var_0, var_1, var_2, var_3, var_4) {
+function ref_11ADF(var_0, var_1, var_2, var_3, var_4) {
   thread allow_player_minimapforcedisable(level, var_0, var_1, var_2, var_3);
 }
 
@@ -163,57 +163,57 @@ function allow_player_minimapforcedisable(var_0, var_1, var_2, var_3, var_4) {
 
 function times_shot() {
   wait 5;
-  level.ref_11ae4["keypads"] = [];
-  level.ref_11ae4["keypads"][0] = spawnStruct();
-  level.ref_11ae4["keypads"][0].origin = (-237, -2721, 60);
-  level.ref_11ae4["keypads"][1] = spawnStruct();
-  level.ref_11ae4["keypads"][1].origin = (-237, -2721, 260);
+  level.ref_11AE4["keypads"] = [];
+  level.ref_11AE4["keypads"][0] = spawnStruct();
+  level.ref_11AE4["keypads"][0].origin = (-237, -2721, 60);
+  level.ref_11AE4["keypads"][1] = spawnStruct();
+  level.ref_11AE4["keypads"][1].origin = (-237, -2721, 260);
 
-  foreach(var_1 in level.ref_11ae4["keypads"]) {
+  foreach(var_1 in level.ref_11AE4["keypads"]) {
     var_2 = easepower("maphint_keypad", var_1.origin);
   }
 
-  level.ref_11ae4["phones"] = [];
-  level.ref_11ae4["phones"][0] = spawnStruct();
-  level.ref_11ae4["phones"][0].origin = (-21, -2721, 60);
-  level.ref_11ae4["phones"][1] = spawnStruct();
-  level.ref_11ae4["phones"][1].origin = (-21, -2721, 260);
+  level.ref_11AE4["phones"] = [];
+  level.ref_11AE4["phones"][0] = spawnStruct();
+  level.ref_11AE4["phones"][0].origin = (-21, -2721, 60);
+  level.ref_11AE4["phones"][1] = spawnStruct();
+  level.ref_11AE4["phones"][1].origin = (-21, -2721, 260);
 
-  foreach(var_1 in level.ref_11ae4["phones"]) {
+  foreach(var_1 in level.ref_11AE4["phones"]) {
     var_2 = easepower("maphint_phone", var_1.origin);
   }
 
-  level.ref_11ae4["computers"] = [];
-  level.ref_11ae4["computers"][0] = spawnStruct();
-  level.ref_11ae4["computers"][0].origin = (100, -2721, 60);
-  level.ref_11ae4["computers"][1] = spawnStruct();
-  level.ref_11ae4["computers"][1].origin = (100, -2721, 260);
+  level.ref_11AE4["computers"] = [];
+  level.ref_11AE4["computers"][0] = spawnStruct();
+  level.ref_11AE4["computers"][0].origin = (100, -2721, 60);
+  level.ref_11AE4["computers"][1] = spawnStruct();
+  level.ref_11AE4["computers"][1].origin = (100, -2721, 260);
 
-  foreach(var_1 in level.ref_11ae4["computers"]) {
+  foreach(var_1 in level.ref_11AE4["computers"]) {
     var_2 = easepower("maphint_computer", var_1.origin);
   }
 }
 
-function ref_11ae0() {
+function ref_11AE0() {
   var_0 = 1;
 
   for(;;) {
     if(var_0) {
-      foreach(var_2 in level.ref_11ae4["phones"]) {
+      foreach(var_2 in level.ref_11AE4["phones"]) {
         thread scripts\mp\utility\debug::drawsphere(var_2.scriptable.origin, 64, 1, (0, 1, 0));
       }
     }
 
     if(getdvarint("scr_mapHint_debugReset", 0) == 1) {
-      foreach(var_2 in level.ref_11ae4["keypads"]) {
+      foreach(var_2 in level.ref_11AE4["keypads"]) {
         var_2.scriptable freescriptable();
       }
 
-      foreach(var_2 in level.ref_11ae4["phones"]) {
+      foreach(var_2 in level.ref_11AE4["phones"]) {
         var_2.scriptable freescriptable();
       }
 
-      foreach(var_2 in level.ref_11ae4["computers"]) {
+      foreach(var_2 in level.ref_11AE4["computers"]) {
         var_2.scriptable freescriptable();
       }
 
@@ -230,7 +230,7 @@ function tank_death() {
   level.trial_enemies_killed = [];
   scripts\mp\flags::gameflaginit("intel_challenges_setup_complete", 0);
   var_0 = getdvarint("online_challenge_season_and_week", 0);
-  level.ref_129cc = getentitylessscriptablearrayinradius("intel_challenge", "targetname");
+  level.ref_129CC = getentitylessscriptablearrayinradius("intel_challenge", "targetname");
 
   for(var_1 = 0;; var_1++) {
     var_2 = tablelookupbyrow("mp/intel_challenges.csv", var_1, 0);
@@ -264,7 +264,7 @@ function tank_death() {
       var_17 = spawnStruct();
       var_17.ref = var_3;
       var_17.stopdragonsbreath = var_4;
-      var_17.ref_145a6 = var_5;
+      var_17.ref_145A6 = var_5;
       var_17.chopper_boss_player_monitor = var_6;
       var_17.origin = var_11;
       var_17.helis_assault3_fob = var_16;
@@ -280,7 +280,7 @@ function tank_death() {
         var_19 = easepower("intel", var_11, var_15);
       }
 
-      var_19.ref_11c74 = var_7;
+      var_19.ref_11C74 = var_7;
       var_19.iscash = var_3;
       level.trial_enemies_killed[var_3].scriptables[var_2] = var_19;
     }
@@ -301,12 +301,12 @@ function cargo_truck_mg_initspawning() {
     }
 
     foreach(var_3 in level.trial_enemies_killed[var_5].scriptables) {
-      var_3 setscriptablepartstate("model", var_3.ref_11c74);
+      var_3 setscriptablepartstate("model", var_3.ref_11C74);
     }
   }
 }
 
-function ref_1335c(var_0, var_1) {
+function ref_1335C(var_0, var_1) {
   foreach(var_3 in level.trial_enemies_killed[var_1].scriptables) {
     var_3 enablescriptableplayeruse(var_0);
   }
@@ -349,7 +349,7 @@ function cargo_truck_mg_initlate() {
   self endon("disconnect");
   scripts\mp\flags::gameflagwait("intel_challenges_setup_complete");
 
-  foreach(var_1 in level.ref_129cc) {
+  foreach(var_1 in level.ref_129CC) {
     var_1 disablescriptableplayeruse(self);
   }
 
@@ -380,22 +380,22 @@ function cargo_truck_mg_initlate() {
     var_9 = undefined;
 
     foreach(var_5, var_4 in level.trial_enemies_killed) {
-      if(var_4.ref_145a6 < var_8) {
+      if(var_4.ref_145A6 < var_8) {
         continue;
       }
 
-      if(var_8 < var_4.ref_145a6) {
-        var_8 = var_4.ref_145a6;
+      if(var_8 < var_4.ref_145A6) {
+        var_8 = var_4.ref_145A6;
       }
 
-      if(isDefined(var_9) && var_9 < var_4.ref_145a6) {
+      if(isDefined(var_9) && var_9 < var_4.ref_145A6) {
         var_9 = undefined;
       }
 
       var_11 = self getplayerdata("mp", "missionComplete", var_5);
 
       if(!isDefined(var_9) && !var_11) {
-        var_9 = var_4.ref_145a6;
+        var_9 = var_4.ref_145A6;
         var_8++;
         self.audio_panodes[self.audio_panodes.size] = var_5;
       }
@@ -410,7 +410,7 @@ function cargo_truck_mg_initlate() {
     }
 
     if(scripts\engine\utility::array_contains(self.audio_panodes, var_5)) {
-      ref_1335c(self, var_5);
+      ref_1335C(self, var_5);
     }
   }
 }
@@ -461,7 +461,7 @@ function updatematchstatushintonnoflag(var_0, var_1) {
   return isDefined(var_0.audio_panodes) && scripts\engine\utility::array_contains(var_0.audio_panodes, var_1);
 }
 
-function ref_11b12(var_0, var_1) {
+function ref_11B12(var_0, var_1) {
   var_2 = scripts\mp\utility\teams::getfriendlyplayers(var_0.team, 0);
 
   foreach(var_4 in var_2) {

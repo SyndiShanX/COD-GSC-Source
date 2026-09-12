@@ -95,7 +95,7 @@ function callback_vehicledamage_internal(var_0) {
     return;
   }
 
-  if(isDefined(self.ref_13a32) && gettime() < self.ref_13a32) {
+  if(isDefined(self.ref_13A32) && gettime() < self.ref_13A32) {
     return;
   }
 
@@ -120,7 +120,7 @@ function callback_vehicledamage_internal(var_0) {
   var_4 = var_1.damage;
   var_5 = self.vehiclename;
 
-  if(isDefined(var_1.attacker) && isPlayer(var_1.attacker) && isDefined(level.ref_1425a) && isDefined(self.ref_12970)) {
+  if(isDefined(var_1.attacker) && isPlayer(var_1.attacker) && isDefined(level.ref_1425A) && isDefined(self.ref_12970)) {
     if(self.center_node.size > 0) {
       if(self.center_node[self.center_node.size - 1] != var_1.attacker) {
         self.center_node[self.center_node.size] = var_1.attacker;
@@ -148,7 +148,7 @@ function callback_vehicledamage_internal(var_0) {
 
   if(var_1.meansofdeath == "MOD_MELEE") {
     if(isDefined(var_5) && var_5 == "radar_drone_recon") {} else if(isDefined(var_1.attacker) && isPlayer(var_1.attacker)) {
-      var_1.attacker scripts\cp_mp\pet_watch::ref_13c43(self);
+      var_1.attacker scripts\cp_mp\pet_watch::ref_13C43(self);
     }
   }
 
@@ -182,8 +182,8 @@ function callback_vehicledamage_internal(var_0) {
 
   longgulagstream(var_1);
 
-  if(isDefined(level.ref_11ca1)) {
-    var_1.damage = self[[level.ref_11ca1]](var_1);
+  if(isDefined(level.ref_11CA1)) {
+    var_1.damage = self[[level.ref_11CA1]](var_1);
   }
 
   if(var_1.damage <= 0) {
@@ -194,8 +194,8 @@ function callback_vehicledamage_internal(var_0) {
     if(isDefined(var_5) && var_5 == "radar_drone_recon") {} else {
       var_11 = 0;
 
-      if(isDefined(level.ref_11c66)) {
-        var_11 = self[[level.ref_11c66]](var_1);
+      if(isDefined(level.ref_11C66)) {
+        var_11 = self[[level.ref_11C66]](var_1);
       }
 
       if(!var_11) {
@@ -207,10 +207,10 @@ function callback_vehicledamage_internal(var_0) {
       var_1.damage = 0;
     }
   } else if(isexplosivedamagemod(var_1.meansofdeath) || var_1.meansofdeath == "MOD_FIRE") {
-    if(isDefined(level.ref_11c6b) && self[[level.ref_11c6b]](var_1)) {
+    if(isDefined(level.ref_11C6B) && self[[level.ref_11C6B]](var_1)) {
       var_1.damage = 0;
     } else if(scripts\mp\utility\weapon::unset_relic_damage_from_above(var_1.objweapon)) {
-      var_1.damage = scripts\cp\utility\cp_controlled_callbacks::ref_12ec3(var_1);
+      var_1.damage = scripts\cp\utility\cp_controlled_callbacks::ref_12EC3(var_1);
     } else if(scripts\mp\damage::usefaillaststandmsg(var_1.objweapon)) {
       var_1.damage = 0;
     } else if(isDefined(var_5)) {
@@ -220,13 +220,13 @@ function callback_vehicledamage_internal(var_0) {
     if(scripts\mp\damage::usetimeoverride(var_1.objweapon)) {
       var_1.damage = scripts\mp\damage::ref_13714(self, var_1.attacker, var_1.objweapon, var_1.damage, var_1.idflags);
     } else if(scripts\mp\damage::uavworstid(var_1.objweapon)) {
-      if(scripts\mp\damage::ref_132f0(var_1.objweapon)) {
+      if(scripts\mp\damage::ref_132F0(var_1.objweapon)) {
         var_1.damage = 1;
       } else {
         var_1.damage = 0;
       }
     } else if(scripts\mp\damage::vehicle_collision_getleveldataforvehicle(var_1.objweapon)) {
-      if(!scripts\mp\damage::ref_1332d(var_1.objweapon)) {
+      if(!scripts\mp\damage::ref_1332D(var_1.objweapon)) {
         var_1.damage = 0;
       }
     } else if(scripts\mp\damage::turn_on_laser_trap(var_1.objweapon, var_1.meansofdeath)) {
@@ -250,9 +250,9 @@ function callback_vehicledamage_internal(var_0) {
     }
   }
 
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417e(var_1);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417E(var_1);
   scripts\cp_mp\vehicles\vehicle_damage::br_iseliminated(var_1);
-  var_13 = scripts\cp_mp\vehicles\vehicle_damage::ref_1417d(var_1);
+  var_13 = scripts\cp_mp\vehicles\vehicle_damage::ref_1417D(var_1);
 
   if(!var_13) {
     var_14 = scripts\cp_mp\vehicles\vehicle_damage::ref_14152();
@@ -266,7 +266,7 @@ function callback_vehicledamage_internal(var_0) {
   if(scripts\mp\utility\game::getgametype() == "br") {
     scripts\cp_mp\vehicles\vehicle_damage::ref_14180(var_1, 1);
   } else {
-    scripts\cp_mp\vehicles\vehicle_damage::ref_1417f(var_1, var_13, 1);
+    scripts\cp_mp\vehicles\vehicle_damage::ref_1417F(var_1, var_13, 1);
   }
 
   scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_updateomnvarsondamage(self, var_1);
@@ -309,8 +309,8 @@ function callback_vehicledamage_internal(var_0) {
 
   scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_updatedamagefeedback(var_1);
 
-  if(isDefined(level.ref_120ab)) {
-    self thread[[level.ref_120ab]](var_1);
+  if(isDefined(level.ref_120AB)) {
+    self thread[[level.ref_120AB]](var_1);
   }
 
   if(var_19) {
@@ -391,9 +391,9 @@ function filter_out_friendly_damage(var_0, var_1, var_2) {
   if(level.teambased) {
     if(!var_3) {
       if(isDefined(var_2) && !isDefined(var_1)) {
-        return scripts\cp_mp\vehicles\vehicle::ref_141ba(var_0, var_2);
+        return scripts\cp_mp\vehicles\vehicle::ref_141BA(var_0, var_2);
       } else {
-        return scripts\cp_mp\vehicles\vehicle::ref_141b9(var_0, var_1);
+        return scripts\cp_mp\vehicles\vehicle::ref_141B9(var_0, var_1);
       }
     }
 
@@ -402,7 +402,7 @@ function filter_out_friendly_damage(var_0, var_1, var_2) {
 
   if(!var_3) {
     if(isDefined(var_1)) {
-      return scripts\cp_mp\vehicles\vehicle::ref_141b9(var_0, var_1);
+      return scripts\cp_mp\vehicles\vehicle::ref_141B9(var_0, var_1);
     }
 
     return 0;

@@ -9,7 +9,7 @@ function main() {
   level.playersleftloop = 1;
   game["attackers"] = "allies";
   game["defenders"] = "axis";
-  scripts\cp_mp\frontendutils::ref_131e2();
+  scripts\cp_mp\frontendutils::ref_131E2();
   scripts\cp_mp\frontendutils::create_camera_position_list();
   scripts\cp_mp\frontendutils::setup_initial_entities();
   level.transition_interrupted = 0;
@@ -17,10 +17,10 @@ function main() {
   scripts\engine\utility::delaythread(var_0, &scripts\cp_mp\frontendutils::playersetiszombie);
   thread init_fx();
   level.callbackplayerconnect = &callback_frontendplayerconnect;
-  thread ref_11db7();
+  thread ref_11DB7();
 }
 
-function ref_11db7() {
+function ref_11DB7() {
   var_0 = getEnt("mp_lobby_floor_01", "targetname");
   var_1 = getEnt("mp_lobby_floor_02", "targetname");
   var_2 = getEnt("frontend_rfl_probe_01", "targetname");
@@ -79,7 +79,7 @@ function target_check_grenade() {
   var_0 = getEntArray("sun_frontend_seasonal_target", "targetname");
 
   if(isDefined(var_0) && var_0.size > 0) {
-    level.ref_1396f = var_0[0];
+    level.ref_1396F = var_0[0];
     return;
   }
 }
@@ -88,7 +88,7 @@ function gas_trap_cloud_structs(var_0) {
   target_check_grenade();
   scripts\cp_mp\frontendutils::camera_section_change(var_0);
   var_1 = istrue(level.ref_13370);
-  var_2 = var_1 && getdvarint("frontend_seasonal_sun", 0) != 0 && isDefined(level.ref_1396f);
+  var_2 = var_1 && getdvarint("frontend_seasonal_sun", 0) != 0 && isDefined(level.ref_1396F);
 
   if(var_2) {
     var_3 = "seasonal_nonwalking";
@@ -102,7 +102,7 @@ function gas_trap_cloud_structs(var_0) {
       }
     }
 
-    level.ref_1396f setscriptablepartstate("sun", var_3);
+    level.ref_1396F setscriptablepartstate("sun", var_3);
     return;
   }
 }

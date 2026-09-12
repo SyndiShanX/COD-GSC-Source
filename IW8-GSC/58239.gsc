@@ -3,38 +3,38 @@
  * Script: 58239.gsc
 ***********************************************/
 
-function ref_120d2() {
+function ref_120D2() {
   var_0 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle("open_jeep_carpoc", 1);
-  var_0.destroycallback = &ref_120cb;
-  ref_120d8();
-  ref_120d6();
-  ref_120d9();
-  ref_120d4();
-  ref_120d3();
-  ref_120d5();
+  var_0.destroycallback = &ref_120CB;
+  ref_120D8();
+  ref_120D6();
+  ref_120D9();
+  ref_120D4();
+  ref_120D3();
+  ref_120D5();
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("open_jeep_carpoc", "init")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("open_jeep_carpoc", "init")]]();
   }
 
-  ref_120da();
-  ref_120d7();
+  ref_120DA();
+  ref_120D7();
 }
 
-function ref_120d7() {
+function ref_120D7() {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("open_jeep_carpoc", "initLate")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("open_jeep_carpoc", "initLate")]]();
     return;
   }
 }
 
-function ref_120d8() {
+function ref_120D8() {
   var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforvehicle("open_jeep_carpoc", 1);
-  var_0.enterstartcallback = &ref_120c8;
-  var_0.enterendcallback = &ref_120c6;
+  var_0.enterstartcallback = &ref_120C8;
+  var_0.enterendcallback = &ref_120C6;
   var_0.exitstartcallback = &scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_exitstartcallback;
-  var_0.exitendcallback = &ref_120c9;
-  var_0.reentercallback = &ref_120e7;
+  var_0.exitendcallback = &ref_120C9;
+  var_0.reentercallback = &ref_120E7;
   var_0.restrictions = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getcombatcabpassengerrestrictions();
   var_0.exitextents["front"] = 105;
   var_0.exitextents["back"] = 105;
@@ -66,8 +66,8 @@ function ref_120d8() {
   var_0.exitoffsets[var_3] = (17, -19, 65);
   var_0.exitdirections[var_3] = "right";
   var_4.restrictions = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getturretpassengerrestrictions();
-  var_4.ref_13e8a = getcompleteweaponname("tur_gun_carpoc_mp_pass");
-  var_4.ref_13e92 = "tur_gun_carpoc_mp_pass";
+  var_4.ref_13E8A = getcompleteweaponname("tur_gun_carpoc_mp_pass");
+  var_4.ref_13E92 = "tur_gun_carpoc_mp_pass";
   var_4.ref_12023 = "ping_vehicle_rider";
   var_4.spawnpriority = 3;
   var_3 = "back_left";
@@ -102,44 +102,44 @@ function ref_120d8() {
   var_4.spawnpriority = 1;
 }
 
-function ref_120d6() {
+function ref_120D6() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("open_jeep_carpoc", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("open_jeep_carpoc", "single", ["driver", "front_right", "back_left", "back_right"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("open_jeep_carpoc", "single", ["driver", "front_right", "back_left", "back_right"]);
 }
 
-function ref_120d9() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("open_jeep_carpoc", 1);
+function ref_120D9() {
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("open_jeep_carpoc", 1);
   var_0.id = 25;
   var_0.seatids["driver"] = 0;
   var_0.seatids["front_right"] = 1;
   var_0.seatids["back_left"] = 2;
   var_0.seatids["back_right"] = 3;
-  var_0.ref_12da2[0] = 0;
-  var_0.ref_12da2[1] = 1;
-  var_0.ref_12da3["driver"]["open_jeep_carpoc_mp"] = 0;
-  var_0.ref_12da3["driver"]["tur_gun_carpoc_mp_pass"] = 1;
-  var_0.ref_12da3["front_right"]["open_jeep_carpoc_mp"] = 0;
-  var_0.ref_12da3["front_right"]["tur_gun_carpoc_mp_pass"] = 1;
-  var_0.ref_12da3["back_left"]["open_jeep_carpoc_mp"] = 0;
-  var_0.ref_12da3["back_left"]["tur_gun_carpoc_mp_pass"] = 1;
-  var_0.ref_12da3["back_right"]["open_jeep_carpoc_mp"] = 0;
-  var_0.ref_12da3["back_right"]["tur_gun_carpoc_mp_pass"] = 1;
+  var_0.ref_12DA2[0] = 0;
+  var_0.ref_12DA2[1] = 1;
+  var_0.ref_12DA3["driver"]["open_jeep_carpoc_mp"] = 0;
+  var_0.ref_12DA3["driver"]["tur_gun_carpoc_mp_pass"] = 1;
+  var_0.ref_12DA3["front_right"]["open_jeep_carpoc_mp"] = 0;
+  var_0.ref_12DA3["front_right"]["tur_gun_carpoc_mp_pass"] = 1;
+  var_0.ref_12DA3["back_left"]["open_jeep_carpoc_mp"] = 0;
+  var_0.ref_12DA3["back_left"]["tur_gun_carpoc_mp_pass"] = 1;
+  var_0.ref_12DA3["back_right"]["open_jeep_carpoc_mp"] = 0;
+  var_0.ref_12DA3["back_right"]["tur_gun_carpoc_mp_pass"] = 1;
 }
 
-function ref_120d4() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("open_jeep_carpoc", 2750);
+function ref_120D4() {
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("open_jeep_carpoc", 2750);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("open_jeep_carpoc");
   var_0.class = "medium_heavy";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("open_jeep_carpoc");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("open_jeep_carpoc");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("open_jeep_carpoc", 9);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_14176("open_jeep_carpoc", &ref_120e4);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_14175("open_jeep_carpoc", &ref_120e3);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_14171("open_jeep_carpoc", &ref_120c4);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("open_jeep_carpoc_mp", 5);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_14176("open_jeep_carpoc", &ref_120E4);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_14175("open_jeep_carpoc", &ref_120E3);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_14171("open_jeep_carpoc", &ref_120C4);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("open_jeep_carpoc_mp", 5);
 }
 
-function ref_120d3() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("open_jeep_carpoc", 1);
+function ref_120D3() {
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("open_jeep_carpoc", 1);
   var_0.challengeevaluator = 1.33333;
   var_0.keycardlocs_chosen = 0.91666;
   var_0.is_using_stealth_debug = 350;
@@ -153,12 +153,12 @@ function ref_120d3() {
   var_0.isassaulting = 0;
 
   if(getdvarint("PNPLTTTNN", 0)) {
-    var_0.setup_techo_lmgs = &ref_120f1;
+    var_0.setup_techo_lmgs = &ref_120F1;
     return;
   }
 }
 
-function ref_120d5() {
+function ref_120D5() {
   level._effect["open_jeep_carpoc_explode"] = loadfx("vfx/iw8_mp/vehicle/vfx_jeep_mp_death_exp.vfx");
 
   if(getdvarint("PNPLTTTNN", 0)) {
@@ -167,7 +167,7 @@ function ref_120d5() {
   }
 }
 
-function ref_120c2(var_0) {
+function ref_120C2(var_0) {
   var_1 = "tag_gunner_turret2_rot";
   var_2 = (0, 0, 0);
   var_3 = spawnturret("misc_turret", var_0 gettagorigin(var_1), "tur_gun_carpoc_mp_pass", 0);
@@ -183,7 +183,7 @@ function ref_120c2(var_0) {
   scripts\cp_mp\vehicles\vehicle::ref_14207(var_0, var_3, getcompleteweaponname("tur_gun_carpoc_mp_pass"));
 }
 
-function ref_120c1(var_0, var_1) {
+function ref_120C1(var_0, var_1) {
   if(!isDefined(var_0.angles)) {
     var_0.angles = (0, 0, 0);
   }
@@ -202,12 +202,12 @@ function ref_120c1(var_0, var_1) {
   }
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_3, "open_jeep_carpoc", var_0);
-  ref_120c2(var_3);
+  ref_120C2(var_3);
   var_3.objweapon = getcompleteweaponname("open_jeep_carpoc_mp");
-  var_4 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414c(var_3, 1);
+  var_4 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414C(var_3, 1);
   var_4.wind_trigger_toggle = "br_light_vehicle_damage";
-  var_4.ref_11bae = "br_medium_vehicle_damage";
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_3);
+  var_4.ref_11BAE = "br_medium_vehicle_damage";
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_3);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_3, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_3, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 
@@ -218,7 +218,7 @@ function ref_120c1(var_0, var_1) {
   return var_3;
 }
 
-function ref_120cb(var_0, var_1) {
+function ref_120CB(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = spawnStruct();
     var_0.inflictor = self;
@@ -229,7 +229,7 @@ function ref_120cb(var_0, var_1) {
   scripts\cp_mp\vehicles\vehicle_damage::ref_14162(var_0);
   scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_killoccupants(self, var_0);
   scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_clearvisuals(undefined, undefined, 1);
-  thread ref_120c5();
+  thread ref_120C5();
 
   if(!istrue(level.suppressvehicleexplosion)) {
     var_2 = self gettagorigin("tag_origin");
@@ -244,7 +244,7 @@ function ref_120cb(var_0, var_1) {
   }
 }
 
-function ref_120c5() {
+function ref_120C5() {
   scripts\cp_mp\vehicles\vehicle::ref_14185(self);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("open_jeep_carpoc", "delete")) {
@@ -255,7 +255,7 @@ function ref_120c5() {
   scripts\cp_mp\vehicles\vehicle::ref_14186(self);
 }
 
-function ref_120e4(var_0) {
+function ref_120E4(var_0) {
   if(scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_isselfdamage(self, var_0)) {
     return false;
   }
@@ -263,7 +263,7 @@ function ref_120e4(var_0) {
   return true;
 }
 
-function ref_120e3(var_0) {
+function ref_120E3(var_0) {
   if(isDefined(var_0.damage) && var_0.damage > 0) {
     self notify("damage_taken", var_0);
   }
@@ -271,21 +271,21 @@ function ref_120e3(var_0) {
   return true;
 }
 
-function ref_120c4(var_0) {
-  thread ref_120cb(var_0);
+function ref_120C4(var_0) {
+  thread ref_120CB(var_0);
   return true;
 }
 
-function ref_120c8(var_0, var_1, var_2, var_3, var_4) {
+function ref_120C8(var_0, var_1, var_2, var_3, var_4) {
   if(var_1 == "front_right") {
     scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_giveturret(var_3, "tur_gun_carpoc_mp_pass", var_4, 1);
     return;
   }
 }
 
-function ref_120c6(var_0, var_1, var_2, var_3, var_4) {
+function ref_120C6(var_0, var_1, var_2, var_3, var_4) {
   if(istrue(var_4.success)) {
-    thread ref_120c7(var_0, var_1, var_2, var_3, var_4);
+    thread ref_120C7(var_0, var_1, var_2, var_3, var_4);
     return;
   }
 
@@ -299,7 +299,7 @@ function ref_120c6(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-function ref_120c7(var_0, var_1, var_2, var_3, var_4) {
+function ref_120C7(var_0, var_1, var_2, var_3, var_4) {
   if(var_1 == "driver") {
     var_0 setotherent(var_3);
     var_0 setentityowner(var_3);
@@ -327,14 +327,14 @@ function ref_120c7(var_0, var_1, var_2, var_3, var_4) {
   scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_updateomnvarsonseatenter(var_0, var_2, var_1, var_3);
 }
 
-function ref_120c9(var_0, var_1, var_2, var_3, var_4) {
+function ref_120C9(var_0, var_1, var_2, var_3, var_4) {
   if(istrue(var_4.success)) {
-    ref_120ca(var_0, var_1, var_2, var_3, var_4);
+    ref_120CA(var_0, var_1, var_2, var_3, var_4);
     return;
   }
 }
 
-function ref_120ca(var_0, var_1, var_2, var_3, var_4) {
+function ref_120CA(var_0, var_1, var_2, var_3, var_4) {
   if(var_1 == "driver") {
     var_0 notify("open_jeep_carpoc_driver_exit");
     var_0 setotherent(undefined);
@@ -379,18 +379,18 @@ function ref_120ca(var_0, var_1, var_2, var_3, var_4) {
   scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_updateomnvarsonseatexit(var_0, var_1, var_2, var_3);
 }
 
-function ref_120e7(var_0, var_1, var_2, var_3, var_4) {
+function ref_120E7(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_2) && var_2 == "front_right") {
     thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_taketurret(var_3, var_0, "tur_gun_carpoc_mp_pass", var_4, 1);
     return;
   }
 }
 
-function ref_120da() {
+function ref_120DA() {
   var_0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("open_jeep_carpoc", 1);
   var_0.maxinstancecount = 2;
   var_0.priority = 75;
-  var_0.getspawnstructscallback = &ref_120cf;
+  var_0.getspawnstructscallback = &ref_120CF;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("open_jeep_carpoc", "spawnCallback")) {
     var_0.spawncallback = scripts\cp_mp\utility\script_utility::getsharedfunc("open_jeep_carpoc", "spawnCallback");
@@ -401,9 +401,9 @@ function ref_120da() {
   var_0.clearancecheckminradius = 105;
 }
 
-function ref_120cf() {
-  if(isDefined(level.ref_1218b)) {
-    var_0 = level.ref_1218b;
+function ref_120CF() {
+  if(isDefined(level.ref_1218B)) {
+    var_0 = level.ref_1218B;
   } else {
     var_0 = scripts\engine\utility::getStructArray("open_jeep_carpoc_spawn", "targetname");
   }
@@ -421,32 +421,32 @@ function ref_120cf() {
 
 function activate_timed_laser_traps() {}
 
-function ref_120ee(var_0, var_1) {
+function ref_120EE(var_0, var_1) {
   if(!getdvarint("scr_open_jeep_carpoc_update_upgrade_team", 1)) {
     return;
   }
 
-  var_2 = ref_120e2(var_0);
-  var_3 = ref_120cd(var_0, var_2, var_1);
+  var_2 = ref_120E2(var_0);
+  var_3 = ref_120CD(var_0, var_2, var_1);
 
   if(var_3 == "neutral") {
     return;
   }
 
-  if(!isDefined(var_0.ref_13df6)) {
-    var_0.ref_13df6 = var_3;
+  if(!isDefined(var_0.ref_13DF6)) {
+    var_0.ref_13DF6 = var_3;
   }
 
-  if(var_0.ref_13df6 == var_3) {
+  if(var_0.ref_13DF6 == var_3) {
     return;
   }
 
-  var_0.ref_13df6 = var_3;
-  var_4 = ref_120e5(var_0, var_1);
-  ref_120e6(var_0, var_0, var_4);
+  var_0.ref_13DF6 = var_3;
+  var_4 = ref_120E5(var_0, var_1);
+  ref_120E6(var_0, var_0, var_4);
 }
 
-function ref_120e2(var_0) {
+function ref_120E2(var_0) {
   var_1 = var_0.occupants["driver"];
 
   if(isDefined(var_1)) {
@@ -462,7 +462,7 @@ function ref_120e2(var_0) {
   return "neutral";
 }
 
-function ref_120cd(var_0, var_1, var_2) {
+function ref_120CD(var_0, var_1, var_2) {
   if(var_1 != "neutral") {
     return var_1;
   }
@@ -474,7 +474,7 @@ function ref_120cd(var_0, var_1, var_2) {
   return var_0.team;
 }
 
-function ref_120e5(var_0, var_1) {
+function ref_120E5(var_0, var_1) {
   if(isDefined(var_1)) {
     return var_1;
   }
@@ -494,20 +494,20 @@ function ref_120e5(var_0, var_1) {
   return undefined;
 }
 
-function ref_120e6(var_0, var_1) {
+function ref_120E6(var_0, var_1) {
   if(isDefined(var_0.radar)) {
     var_0.radar delete();
-  } else if(istrue(var_0.ref_129c5)) {
+  } else if(istrue(var_0.ref_129C5)) {
     var_0 method_87ac();
   }
 
-  if(istrue(var_0.ref_129c5)) {
-    ref_120e9(var_0, var_1);
+  if(istrue(var_0.ref_129C5)) {
+    ref_120E9(var_0, var_1);
     return;
   }
 }
 
-function ref_120e8(var_0, var_1) {
+function ref_120E8(var_0, var_1) {
   var_0 endon("death");
   var_0.radar endon("death");
   var_2 = var_1.team;
@@ -519,10 +519,10 @@ function ref_120e8(var_0, var_1) {
     var_4 = var_3[0];
   }
 
-  thread ref_120e6(level, var_0);
+  thread ref_120E6(level, var_0);
 }
 
-function ref_120e9(var_0, var_1) {
+function ref_120E9(var_0, var_1) {
   var_2 = getdvarint("scr_truck_mg_uav_type", 0);
 
   if(var_2 == 0) {
@@ -536,12 +536,12 @@ function ref_120e9(var_0, var_1) {
     var_3 linkTo(var_0);
     var_3 makeportableradar(var_1);
     var_0.radar = var_3;
-    thread ref_120e8(level, var_0);
+    thread ref_120E8(level, var_0);
     return;
   }
 }
 
-function ref_120f1(var_0, var_1) {
+function ref_120F1(var_0, var_1) {
   var_2 = var_0.position[0];
   var_3 = var_0.ent[0];
   var_4 = var_0.velocity[0];

@@ -4,11 +4,11 @@
 **************************************************/
 
 function keypad_check_levelinput() {
-  if(!isDefined(level.ref_13d51)) {
-    level.ref_13d51 = [];
+  if(!isDefined(level.ref_13D51)) {
+    level.ref_13D51 = [];
   }
 
-  level.ref_13d51["clear"] = &init;
+  level.ref_13D51["clear"] = &init;
 }
 
 function init() {
@@ -35,8 +35,8 @@ function init() {
   level.enemieskilled = 0;
   level.totaltimeelapsed = 0;
   level.attempttier = 0;
-  level.ref_11b77 = 59999900;
-  level.modeonspawnplayer = &ref_124d6;
+  level.ref_11B77 = 59999900;
+  level.modeonspawnplayer = &ref_124D6;
   level scripts\engine\utility::flag_init("trial_start_zone_entered");
   level scripts\engine\utility::flag_init("trial_countdown");
   level scripts\engine\utility::flag_init("trial_starting");
@@ -81,7 +81,7 @@ function init() {
     wait 0.05;
   }
 
-  thread ref_1385c();
+  thread ref_1385C();
   level.brjugg_dropondeath = getallnodes();
 }
 
@@ -92,7 +92,7 @@ function trial_start_init() {
     waitframe();
   }
 
-  if(istrue(level.ref_13d41)) {
+  if(istrue(level.ref_13D41)) {
     level.onweapondroppickedup = getEntArray("explosive_barrel", "targetname");
     level.onweapontaken = getEntArray("explosive_car", "targetname");
     level.brprewaitandspawnclient = getEntArray("ammo_crate", "targetname");
@@ -146,8 +146,8 @@ function trial_start_init() {
     wait 0.05;
   }
 
-  if(isDefined(level.ref_13d59)) {
-    foreach(var_13 in level.ref_13d59) {
+  if(isDefined(level.ref_13D59)) {
+    foreach(var_13 in level.ref_13D59) {
       level.player setperk(var_13, 1);
     }
   }
@@ -165,8 +165,8 @@ function trial_start_init() {
   level scripts\engine\utility::flag_wait("trial_start_zone_entered");
   level.started = 1;
   thread scripts\mp\trials\mp_trials_patches::trial_chevron_vfx_action(var_11, "turn_off");
-  _tablethide::ref_13d88();
-  _tablethide::ref_13d89(0);
+  _tablethide::ref_13D88();
+  _tablethide::ref_13D89(0);
   thread radar_think();
   wait 2;
   level scripts\engine\utility::flag_set("trial_countdown");
@@ -278,15 +278,15 @@ function player_init() {
   }
 
   thread set_corpse_detect_ranges();
-  thread ref_1248d();
-  thread ref_1246d();
+  thread ref_1248D();
+  thread ref_1246D();
 }
 
-function ref_124d6() {
+function ref_124D6() {
   level.player.maxhealth = 250;
   level.player.health = 250;
-  scripts\engine\utility::delaythread(1, &ref_1248d);
-  scripts\engine\utility::delaythread(1, &ref_1246d);
+  scripts\engine\utility::delaythread(1, &ref_1248D);
+  scripts\engine\utility::delaythread(1, &ref_1246D);
 }
 
 function player_monitor_death() {
@@ -310,24 +310,24 @@ function player_monitor_death() {
   level scripts\engine\utility::flag_set("trial_completed");
 }
 
-function ref_1248d() {
+function ref_1248D() {
   if(isDefined(level.ref_12489)) {
     level.player scripts\mp\equipment::giveequipment(level.ref_12489, "primary");
   }
 
-  if(isDefined(level.ref_1248b)) {
-    level.player scripts\mp\equipment::giveequipment(level.ref_1248b, "secondary");
+  if(isDefined(level.ref_1248B)) {
+    level.player scripts\mp\equipment::giveequipment(level.ref_1248B, "secondary");
   }
 
-  if(istrue(level.ref_1248a)) {
-    thread ref_12a8e();
+  if(istrue(level.ref_1248A)) {
+    thread ref_12A8E();
     return;
   }
 }
 
-function ref_1246d() {
+function ref_1246D() {
   var_0 = level.player getweaponslistprimaries();
-  jumpiffalse(istrue(level.ref_124c9)) LOC_000000ca;
+  jumpiffalse(istrue(level.ref_124C9)) LOC_000000ca;
 
   foreach(var_2 in var_0) {
     var_3 = level.player getweaponammoclip(var_2) + level.player getweaponammostock(var_2);
@@ -791,7 +791,7 @@ function enemy_move_and_cover(var_0) {
   while(isalive(var_0)) {
     if(isDefined(var_6)) {
       var_0 setgoalnode(var_6);
-      var_0 scripts\engine\utility::ref_143a7("goal", "badpath", "grenade danger", "bullet_whizby");
+      var_0 scripts\engine\utility::ref_143A7("goal", "badpath", "grenade danger", "bullet_whizby");
       var_8 = trialendgame(var_6);
     }
 
@@ -897,7 +897,7 @@ function enemy_soldier_think() {
       var_12 = 0;
     }
 
-    level.player thread _tablethide::ref_13d4b(self, var_12, 0, 1);
+    level.player thread _tablethide::ref_13D4B(self, var_12, 0, 1);
 
     if(gettime() - var_0 > 800) {
       self playSound("trial_sfx_enemy_pain");
@@ -970,7 +970,7 @@ function enemy_monitor_death(var_0) {
 
   if(var_12 && var_11) {
     self playSound("trial_sfx_enemy_death");
-    level.player thread _tablethide::ref_13d4b(self, 1, 0, 1);
+    level.player thread _tablethide::ref_13D4B(self, 1, 0, 1);
   }
 
   level notify("enemy_killed");
@@ -978,7 +978,7 @@ function enemy_monitor_death(var_0) {
   level.enemiesactivenb--;
   level.enemies = scripts\engine\utility::array_removedead(level.enemies);
 
-  if(istrue(level.ref_13d3f)) {
+  if(istrue(level.ref_13D3F)) {
     var_11 delete();
     return;
   }
@@ -1106,7 +1106,7 @@ function init_trap_room_debug() {
 
       if(isDefined(var_3)) {
         var_3 setModel("tag_origin");
-        thread ref_134e7(var_3);
+        thread ref_134E7(var_3);
       }
     }
   }
@@ -1115,7 +1115,7 @@ function init_trap_room_debug() {
   var_3 = undefined;
 }
 
-function ref_134e7(var_0) {
+function ref_134E7(var_0) {
   level endon("trial_completed");
   var_1 = spawncovernode(self.origin, self.angles, var_0, 16, self.targetname);
 
@@ -1272,10 +1272,10 @@ function hud_attempt_over() {
   setomnvar("allow_server_pause", 1);
   setomnvarforallclients("post_game_state", 0);
   level scripts\engine\utility::flag_wait("trial_ready_for_endscreen");
-  _tablethide::ref_13d89(1);
+  _tablethide::ref_13D89(1);
   _tablethide::trial_ui_set_stat_and_bonus_time(1, "enemies_killed", level.enemieskilled, 0);
   _tablethide::trial_ui_open_results_screen();
-  level.ref_13d60 = 1;
+  level.ref_13D60 = 1;
   _tablethide::trial_ui_waittill_retry();
   level.player freezecontrols(1);
   level.player freezelookcontrols(1);
@@ -1285,7 +1285,7 @@ function hud_attempt_over() {
     level notify("game_cleanup");
     level notify("restarting");
     game["state"] = "playing";
-    _tablethide::ref_13d5e();
+    _tablethide::ref_13D5E();
     return;
   }
 }
@@ -1297,7 +1297,7 @@ function hud_besttime_update() {
   _tablethide::trial_ui_set_reward_tier(var_1);
 }
 
-function ref_1385c() {
+function ref_1385C() {
   var_0 = getEnt("starting_trigger", "targetname");
   var_0 waittill("trigger");
   level scripts\engine\utility::flag_set("trial_start_zone_entered");
@@ -1386,10 +1386,10 @@ function dialog_killstreak_acknowledgement() {
   }
 }
 
-function ref_12a8e() {
+function ref_12A8E() {
   for(;;) {
     while(isalive(level.player)) {
-      ref_12a91(level.player);
+      ref_12A91(level.player);
       wait 0.2;
     }
 
@@ -1397,7 +1397,7 @@ function ref_12a8e() {
   }
 }
 
-function ref_12a90(var_0, var_1) {
+function ref_12A90(var_0, var_1) {
   var_2 = var_0.rechargeequipmentstate;
 
   if(!isDefined(var_2.progress[var_1])) {
@@ -1429,19 +1429,19 @@ function ref_12a90(var_0, var_1) {
   }
 }
 
-function ref_12a91(var_0) {
+function ref_12A91(var_0) {
   if(!isDefined(var_0.rechargeequipmentstate)) {
     var_0.rechargeequipmentstate = spawnStruct();
     var_0.rechargeequipmentstate.progress = [];
     var_0.rechargeequipmentstate.recharged = [];
   }
 
-  ref_12a90(var_0, "primary");
-  ref_12a90(var_0, "secondary");
-  ref_12a92(var_0);
+  ref_12A90(var_0, "primary");
+  ref_12A90(var_0, "secondary");
+  ref_12A92(var_0);
 }
 
-function ref_12a92(var_0) {
+function ref_12A92(var_0) {
   var_1 = 0;
   var_2 = 0;
   var_3 = -1;
@@ -1479,7 +1479,7 @@ function ref_12a92(var_0) {
 }
 
 function build_vehicle_drop_off_list() {
-  level.ref_13d32 = &ref_13d31;
+  level.ref_13D32 = &ref_13D31;
 
   if(!isDefined(game["trial"]["analytics"])) {
     game["trial"]["analytics"] = [];
@@ -1489,7 +1489,7 @@ function build_vehicle_drop_off_list() {
   }
 }
 
-function ref_13d31() {
+function ref_13D31() {
   var_0 = level.trial["missionID"];
   var_1 = getomnvar("ui_trial_reward_tier");
   var_2 = getomnvar("ui_trial_best_time");
@@ -1537,12 +1537,12 @@ function chopperoccupied() {
       wait 3.5;
       playFX(scripts\engine\utility::getfx("nuke_rolling_death"), level.player.origin - (0, 0, 64), anglesToForward(self.angles) * -1, undefined, level.player);
       wait 1;
-      _calloutmarkerping_handleluinotify_acknowledged::ref_11ef4();
+      _calloutmarkerping_handleluinotify_acknowledged::ref_11EF4();
       wait 2;
       map_restart(1);
     }
   } else {
-    playFX(scripts\engine\utility::getfx(ref_129f5()), self.origin);
+    playFX(scripts\engine\utility::getfx(ref_129F5()), self.origin);
   }
 
   foreach(var_13 in var_0) {
@@ -1575,7 +1575,7 @@ function nuke_launchmissile(var_0, var_1, var_2, var_3, var_4, var_5) {
   level.nuke_missile setscriptablepartstate("launch", "on", 0);
 }
 
-function ref_129f5() {
+function ref_129F5() {
   var_0 = randomint(2);
 
   switch (var_0) {

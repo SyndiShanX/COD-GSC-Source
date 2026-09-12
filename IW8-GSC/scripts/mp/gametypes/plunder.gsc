@@ -272,7 +272,7 @@ function monitorjointeam() {
   self endon("disconnect");
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
+    scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
     playersettagcount(0);
   }
 }
@@ -325,7 +325,7 @@ function monitortaguse(var_0) {
     }
 
     if(scripts\mp\utility\game::getgametype() == "hvt") {
-      var_1 scripts\mp\gametypes\hvt::ref_13a27();
+      var_1 scripts\mp\gametypes\hvt::ref_13A27();
     }
 
     break;

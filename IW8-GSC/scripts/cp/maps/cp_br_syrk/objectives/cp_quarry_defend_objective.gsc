@@ -89,7 +89,7 @@ function getnextquarrydefensespawnmodule(var_0) {
 
 function wait_for_all_group_dead(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1)) {
-    var_0 scripts\engine\utility::ref_143b9(var_1, "group_spawning_completed");
+    var_0 scripts\engine\utility::ref_143B9(var_1, "group_spawning_completed");
     return;
   }
 

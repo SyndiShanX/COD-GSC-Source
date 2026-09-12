@@ -193,14 +193,14 @@ function giveplayeraccessory(var_0, var_1, var_2) {
     return;
   }
 
-  if(scripts\mp\gametypes\br_public::ref_125ec()) {
+  if(scripts\mp\gametypes\br_public::ref_125EC()) {
     return;
   }
 
   self.accessorydata = var_0;
   self.accessorylogic = var_2;
   self.accessoryfullweapon = var_3;
-  var_4 = ref_1330d();
+  var_4 = ref_1330D();
   scripts\cp_mp\utility\inventory_utility::_giveweapon(self.accessoryfullweapon);
   self giveaccessory(self.accessorydata, self.accessoryfullweapon, var_4);
 
@@ -236,7 +236,7 @@ function giveplayeraccessory(var_0, var_1, var_2) {
   }
 }
 
-function ref_1330d() {
+function ref_1330D() {
   var_0 = scripts\mp\teams::getcustomization();
   var_1 = var_0["body"];
   var_2 = tablelookup("mp/cac/bodies.csv", 1, var_1, 22);
@@ -283,7 +283,7 @@ function resettimeronkill(var_0) {
   return var_0;
 }
 
-function ref_13b0a(var_0) {
+function ref_13B0A(var_0) {
   if(var_0 == 1) {
     scripts\cp_mp\gestures::ref_13838();
     return;
@@ -313,8 +313,8 @@ function clearplayeraccessory() {
 }
 
 function tower_ground_mortar_2() {
-  if(!isDefined(self.ref_13b2d)) {
-    self.ref_13b2d = 1;
+  if(!isDefined(self.ref_13B2D)) {
+    self.ref_13B2D = 1;
     var_0 = removeriotshield();
     self setclientomnvar("ui_pet_watch_state", var_0);
     return;

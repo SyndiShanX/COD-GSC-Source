@@ -337,7 +337,7 @@ function guy_runtovehicle_loaded(var_0, var_1) {
   var_1 endon("stop_loading");
 
   if(!getdvarint("enable_vehicle_ai_using_BT")) {
-    var_2 = var_0 scripts\engine\utility::ref_143ae("long_death", "death", "enteredvehicle");
+    var_2 = var_0 scripts\engine\utility::ref_143AE("long_death", "death", "enteredvehicle");
 
     if(var_2 != "enteredvehicle" && isDefined(var_0.forced_startingposition)) {
       var_1.usedpositions[var_0.forced_startingposition] = 0;
@@ -384,7 +384,7 @@ function vehicle_reload() {
 }
 
 function remove_magic_bullet_shield_from_guy_on_unload_or_death(var_0) {
-  scripts\engine\utility::ref_143a5("unload", "death");
+  scripts\engine\utility::ref_143A5("unload", "death");
   var_0 scripts\common\ai::stop_magic_bullet_shield();
 }
 
@@ -795,7 +795,7 @@ function randomoccurrance(var_0, var_1) {
 function guy_unload_que(var_0) {
   self endon("death");
   self.unloadque = scripts\engine\utility::array_add(self.unloadque, var_0);
-  var_0 scripts\engine\utility::ref_143a5("death", "jumpedout");
+  var_0 scripts\engine\utility::ref_143A5("death", "jumpedout");
   self.unloadque = scripts\engine\utility::array_remove(self.unloadque, var_0);
 
   if(!self.unloadque.size) {
@@ -1216,7 +1216,7 @@ function vehicle_end_loop_sounds(var_0, var_1) {
   }
 }
 
-function ref_1286b() {
+function ref_1286B() {
   if(isDefined(self.maxdogtags)) {
     return;
   }
@@ -1230,7 +1230,7 @@ function ref_1286b() {
       var_2 = getanimname(var_1.vehicle_getoutanim);
       self.maxdogtags[var_2] = spawnStruct();
       self.maxdogtags[var_2].open = 0;
-      self.maxdogtags[var_2].ref_1212c = 0;
+      self.maxdogtags[var_2].ref_1212C = 0;
     }
   }
 }
@@ -1238,7 +1238,7 @@ function ref_1286b() {
 function wait_for_open_door(var_0, var_1) {
   var_0 endon("jumpedout");
   var_0 endon("death");
-  ref_1286b();
+  ref_1286B();
 
   while(!istrue(var_0.requestopendoor)) {
     waitframe();

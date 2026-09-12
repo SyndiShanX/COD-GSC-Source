@@ -292,7 +292,7 @@ function trigger_vehicle_spline_spawn(var_0) {
   }
 }
 
-function ref_13da6(var_0) {
+function ref_13DA6(var_0) {
   var_0 endon("death");
 
   for(;;) {

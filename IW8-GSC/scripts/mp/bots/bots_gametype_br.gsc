@@ -68,7 +68,7 @@ function bot_br_think() {
         var_14 = var_8 / var_13;
 
         if(istrue(level.debug_interaction_status) && isDefined(level.infilstruct) && isDefined(level.infilstruct.c130pathstruct) && isDefined(level.infilstruct.c130pathstruct.neurotoxin_damage_monitor)) {
-          var_15 = distance(level.infilstruct.c130pathstruct.ref_1386e, level.infilstruct.c130pathstruct.neurotoxin_damage_monitor);
+          var_15 = distance(level.infilstruct.c130pathstruct.ref_1386E, level.infilstruct.c130pathstruct.neurotoxin_damage_monitor);
           var_14 = var_15 / var_13;
           var_16 = randomfloatrange(0.3, 0.6) * var_14;
         } else {
@@ -102,7 +102,7 @@ function bot_br_think() {
 
     if(scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal()) {
       thread dangerzoneskipequipment();
-      scripts\engine\utility::ref_143a5("death_or_disconnect", "gulag_end");
+      scripts\engine\utility::ref_143A5("death_or_disconnect", "gulag_end");
       wait 3;
     } else {
       self botclearscriptenemy();
@@ -308,7 +308,7 @@ function dangerzoneids() {
   var_0.claimed = 1;
   var_1 = level.bot_personality_type[self.personality] == "stationary";
   self botsetscriptgoal(self getclosestreachablepointonnavmesh(var_0.origin), 256, "guard", undefined, undefined, !var_1);
-  scripts\engine\utility::ref_143a5("goal", "last_stand_start");
+  scripts\engine\utility::ref_143A5("goal", "last_stand_start");
   var_0.claimed = undefined;
 
   if(!istrue(self.inlaststand)) {
@@ -375,7 +375,7 @@ function currenttime() {
       var_3 = damagethisround();
 
       if(istrue(level.debug_jugg_health) && isDefined(var_3) && !var_1) {
-        thread ref_13fa7();
+        thread ref_13FA7();
         self getenemyinfo(var_3);
 
         if(self botgetpersonality() != "run_and_gun") {
@@ -410,7 +410,7 @@ function currenttime() {
           var_1 = 0;
         }
 
-        thread ref_121fa();
+        thread ref_121FA();
         var_4 = scripts\engine\utility::waittill_any_ents_return(self, "goal", self, "bad path", level, "br_circle_started", self, "last_stand_start", self, "path_timeout");
 
         if(isDefined(var_4) && var_4 != "bad path" && var_4 != "br_circle_started" && var_4 != "path_timeout" && var_4 != "last_stand_start") {
@@ -433,7 +433,7 @@ function currenttime() {
   }
 }
 
-function ref_121fa() {
+function ref_121FA() {
   self endon("last_stand_start");
   level endon("game_ended");
   self endon("goal");
@@ -586,10 +586,10 @@ function get_player() {
   }
 }
 
-function ref_13fa7() {
+function ref_13FA7() {
   self notify("update_on_death");
   self endon("update_on_death");
-  scripts\engine\utility::ref_143a6("death", "death_or_disconnect", "last_stand_start");
+  scripts\engine\utility::ref_143A6("death", "death_or_disconnect", "last_stand_start");
   self.ref_12487 = undefined;
   level.ref_12488 = gettime() + 7;
 }

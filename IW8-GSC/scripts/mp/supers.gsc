@@ -31,12 +31,12 @@ function init() {
   scripts\mp\equipment\tactical_cover::tac_cover_init();
   scripts\mp\equipment\support_box::supportbox_init();
   scripts\mp\equipment\ammo_box::ammobox_init();
-  scripts\mp\supers\super_stoppingpower::ref_138e7();
-  _luidecision::ref_11ed7();
+  scripts\mp\supers\super_stoppingpower::ref_138E7();
+  _luidecision::ref_11ED7();
   scripts\mp\utility\spawn_event_aggregator::registeronplayerspawncallback(&ref_13978);
   _debug_rooftop_heli_start::subscribetoquestlocale();
   level.setsuperweapondisabled = &setsuperweapondisabled;
-  scripts\cp_mp\utility\script_utility::registersharedfunc("super", "watchSuperLastStandEnd", &ref_144fa);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("super", "watchSuperLastStandEnd", &ref_144FA);
 }
 
 function loadsupertable() {
@@ -84,7 +84,7 @@ function loadsupertable() {
 
     var_4.usetime = var_6;
     var_4.maxactivations = readsupertablecell(var_1, 5, 1);
-    var_4.ref_12acd = readsupertablecell(var_1, 6, 1);
+    var_4.ref_12ACD = readsupertablecell(var_1, 6, 1);
     var_4.useweapon = readsupertablecell(var_1, 11);
     var_4.useweaponclipammo = readsupertablecell(var_1, 12, 1);
     var_4.useweaponstockammo = readsupertablecell(var_1, 13, 1);
@@ -258,24 +258,24 @@ function registersupers() {
   registersuper("super_armor_drop", undefined, undefined, undefined, undefined);
   registersuper("super_weapon_drop", undefined, undefined, &superweapondropbeginuse, undefined);
   registersuper("super_select", &ref_13988, &ref_13989, &superselectbeginuse, undefined);
-  registersuper("super_fulton", undefined, undefined, &ref_1397f, undefined);
-  registersuper("super_supply_drop", undefined, undefined, &ref_1398b, undefined);
-  registersuper("super_vehicle_drop", undefined, undefined, &ref_1398d, undefined);
-  registersuper("super_loot_drop", undefined, undefined, &ref_1398b, undefined);
+  registersuper("super_fulton", undefined, undefined, &ref_1397F, undefined);
+  registersuper("super_supply_drop", undefined, undefined, &ref_1398B, undefined);
+  registersuper("super_vehicle_drop", undefined, undefined, &ref_1398D, undefined);
+  registersuper("super_loot_drop", undefined, undefined, &ref_1398B, undefined);
 
   if(scripts\mp\utility\game::getgametype() == "br") {
     registersuper("super_decon_station", &jugg_removefromactivejugglist, &jugg_setherodropscriptable, undefined, undefined);
-    registersuper("super_nova_box", undefined, undefined, &ref_11ed6, undefined);
+    registersuper("super_nova_box", undefined, undefined, &ref_11ED6, undefined);
     registersuper("super_kiosk_drop", undefined, undefined, &ref_13983, undefined);
     registersuper("super_jammer_br", undefined, &ref_13981, &ref_13980, &vehicle_createspawnselectionlittlebirdmarker);
     registersuper("super_serum_gadget", undefined, undefined, &serumgadgetbeginuse, &serumgadgetenduse);
     registersuper("super_slinger_br", undefined, undefined, &superslingerbeginuse, undefined);
   }
 
-  ref_12b3c("super_emp_drone", "emp_drone_player_mp");
-  ref_12b3c("super_emp_drone", "emp_drone_non_player_mp");
-  ref_12b3c("super_emp_drone", "emp_drone_non_player_direct_mp");
-  ref_12b3c("super_weapon_drop", "deploy_weapondrop_mp");
+  ref_12B3C("super_emp_drone", "emp_drone_player_mp");
+  ref_12B3C("super_emp_drone", "emp_drone_non_player_mp");
+  ref_12B3C("super_emp_drone", "emp_drone_non_player_direct_mp");
+  ref_12B3C("super_weapon_drop", "deploy_weapondrop_mp");
 }
 
 function registersuper(var_0, var_1, var_2, var_3, var_4) {
@@ -292,7 +292,7 @@ function registersuper(var_0, var_1, var_2, var_3, var_4) {
   var_5.isregistered = 1;
 }
 
-function ref_12b3c(var_0, var_1) {
+function ref_12B3C(var_0, var_1) {
   if(!isstring(var_1)) {
     var_1 = var_1.basename;
   }
@@ -336,7 +336,7 @@ function givesuper(var_0, var_1, var_2) {
   var_4.usestarttime = undefined;
   var_4.usepercent = 0;
   var_4.ref_12187 = undefined;
-  ref_131c7(0);
+  ref_131C7(0);
   ref_13985(var_0);
   self setclientomnvar("ui_super_ref", var_0);
   var_5 = self.pers["superBasePoints"];
@@ -357,7 +357,7 @@ function givesuper(var_0, var_1, var_2) {
   setsuperextrapoints(var_6);
 
   if(!isDefined(self.pers["superExpended"])) {
-    ref_131c6(0);
+    ref_131C6(0);
   }
 
   if(istrue(var_2)) {
@@ -459,7 +459,7 @@ function clearsuper(var_0) {
 
   self notify("remove_super");
   self.super = undefined;
-  thread _calloutmarkerping_handleluinotify_added::ref_1313d("ui_super_state", 0);
+  thread _calloutmarkerping_handleluinotify_added::ref_1313D("ui_super_state", 0);
   self setclientomnvar("ui_super_ref", "none");
 }
 
@@ -598,7 +598,7 @@ function ref_14021() {
   }
 
   if(scripts\mp\utility\player::isinkillcam() || !isalive(self)) {
-    var_0.ref_11fcd = undefined;
+    var_0.ref_11FCD = undefined;
     return;
   }
 
@@ -611,12 +611,12 @@ function ref_14021() {
     var_1 = clamp(getcurrentsuperbasepoints() / var_2, 0, 1);
   }
 
-  if(!isDefined(var_0.ref_11fcd) || var_1 != var_0.ref_11fcd) {
+  if(!isDefined(var_0.ref_11FCD) || var_1 != var_0.ref_11FCD) {
     self setclientomnvar("ui_super_progress", var_1);
   }
 
   self setplayersupermeterprogress(var_1);
-  var_0.ref_11fcd = var_1;
+  var_0.ref_11FCD = var_1;
 }
 
 function updatesuperuistate() {
@@ -643,7 +643,7 @@ function updatesuperuistate() {
   }
 
   if(!isDefined(var_1) || var_2 != var_1) {
-    thread _calloutmarkerping_handleluinotify_added::ref_1313d("ui_super_state", var_2);
+    thread _calloutmarkerping_handleluinotify_added::ref_1313D("ui_super_state", var_2);
   }
 
   var_0.state = var_2;
@@ -802,7 +802,7 @@ function beginsuperuse() {
     }
 
     if(istrue(self.inlaststand)) {
-      thread ref_144fa(var_1.staticdata.weapon);
+      thread ref_144FA(var_1.staticdata.weapon);
     } else {
       self setweaponammoclip(var_1.staticdata.weapon, 1);
     }
@@ -896,7 +896,7 @@ function superusefinished(var_0, var_1, var_2, var_3) {
     var_5 = shouldrefundsuper();
   }
 
-  ref_131c7(0);
+  ref_131C7(0);
   var_4.canstow = 0;
   var_6 = undefined;
 
@@ -909,16 +909,16 @@ function superusefinished(var_0, var_1, var_2, var_3) {
   }
 
   if(var_5 || istrue(var_0) || istrue(var_6)) {
-    ref_131c6(0);
+    ref_131C6(0);
     var_4.wasrefunded = 1;
     setsuperbasepoints(getsuperpointsneeded());
   } else if(istrue(var_2)) {
-    ref_131c6(0);
+    ref_131C6(0);
     var_7 = getsuperpointsneeded() * var_4.usepercent;
     var_4.wasrefunded = 1;
     setsuperbasepoints(var_7);
   } else {
-    ref_131c6(1);
+    ref_131C6(1);
     var_4.lastfinishtime = gettime();
     var_4.wasrefunded = 0;
   }
@@ -943,7 +943,7 @@ function superusefinished(var_0, var_1, var_2, var_3) {
       clearsuper();
       self setclientomnvar("ui_perk_package_state", 0);
       self setclientomnvar("ui_super_progress", 0);
-      thread _calloutmarkerping_handleluinotify_added::ref_1313d("ui_super_state", 0);
+      thread _calloutmarkerping_handleluinotify_added::ref_1313D("ui_super_state", 0);
     }
   }
 
@@ -973,7 +973,7 @@ function handledeath() {
   }
 
   var_0 = getcurrentsuper();
-  var_1 = var_0.staticdata.ref_12acd;
+  var_1 = var_0.staticdata.ref_12ACD;
   superusefinished(var_1, 1);
 }
 
@@ -1121,7 +1121,7 @@ function issuperinuse() {
   return isDefined(getcurrentsuper()) && getcurrentsuper().isinuse;
 }
 
-function ref_131c7(var_0) {
+function ref_131C7(var_0) {
   var_1 = getcurrentsuper();
   var_1.isinuse = var_0;
   updatesuperuistate();
@@ -1139,7 +1139,7 @@ function issuperexpended() {
   return istrue(self.pers["superExpended"]);
 }
 
-function ref_131c6(var_0) {
+function ref_131C6(var_0) {
   self.pers["superExpended"] = var_0;
   updatesuperuistate();
 }
@@ -1435,7 +1435,7 @@ function updateactivesupers(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     }
 
     if(var_8 && var_0 scripts\mp\utility\perk::_hasperk("specialty_bulletdamage")) {
-      var_1 thread scripts\mp\supers\super_stoppingpower::ref_138ec(var_5);
+      var_1 thread scripts\mp\supers\super_stoppingpower::ref_138EC(var_5);
       return;
     }
 
@@ -1807,8 +1807,8 @@ function stoppingpowerbeginuse() {
   return scripts\mp\supers\super_stoppingpower::stoppingpower_beginuse();
 }
 
-function ref_11ed6() {
-  return _luidecision::ref_11ed6();
+function ref_11ED6() {
+  return _luidecision::ref_11ED6();
 }
 
 function superweapondropbeginuse() {
@@ -1856,15 +1856,15 @@ function testsuperbeginuse() {
   return true;
 }
 
-function ref_1397f() {
+function ref_1397F() {
   return true;
 }
 
-function ref_1398b() {
+function ref_1398B() {
   return true;
 }
 
-function ref_1398d() {
+function ref_1398D() {
   return true;
 }
 
@@ -2047,7 +2047,7 @@ function watchsuperlottery() {
   }
 }
 
-function ref_144fa(var_0) {
+function ref_144FA(var_0) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self waittill("last_stand_finished");

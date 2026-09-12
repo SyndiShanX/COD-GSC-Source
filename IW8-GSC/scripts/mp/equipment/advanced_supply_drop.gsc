@@ -28,7 +28,7 @@ function advanced_supply_drop_marker_used(var_0) {
   }
 
   var_3 = scripts\mp\gametypes\br_rewards::relic_punchbullets_fire_fists(0, 1, 0, 0, 0);
-  var_1 scripts\mp\gametypes\br_rewards::ref_1363a(var_2, var_3);
+  var_1 scripts\mp\gametypes\br_rewards::ref_1363A(var_2, var_3);
 
   if(isDefined(var_1.super)) {
     var_1 scripts\mp\supers::superusefinished(undefined, undefined, undefined, 1);
@@ -58,8 +58,8 @@ function binoculars_onstatelospendingupdate(var_0) {
   var_0 thread scripts\mp\utility\script::notifyafterframeend("death", "explode_end");
   thread vfx_htown_hadirj_blink(var_1);
   thread binoculars_onstatelospendingexit(var_1);
-  jumpiffalse(isDefined(level.ref_13acd)) LOC_0000004e;
-  thread ref_13aa0(level, var_1);
+  jumpiffalse(isDefined(level.ref_13ACD)) LOC_0000004e;
+  thread ref_13AA0(level, var_1);
   var_0 waittill("explode", var_2);
   var_1 notify("advanced_supply_drop_finished");
   thread binoculars_onstatelospendingenter(var_2);
@@ -93,7 +93,7 @@ function binoculars_onstatelospendingupdate(var_0) {
     return;
   }
 
-  if(isDefined(level.ref_13ace) && isDefined(level.ref_13ace[var_1.team])) {
+  if(isDefined(level.ref_13ACE) && isDefined(level.ref_13ACE[var_1.team])) {
     if(isDefined(var_0)) {
       var_0 delete();
     }
@@ -114,7 +114,7 @@ function binoculars_onstatelospendingupdate(var_0) {
       scripts\mp\gametypes\br_gametype_truckwar::thrownoffhand(var_8, var_1.team, 1);
     }
 
-    level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13de4(var_8, var_7, var_8.angles, 1);
+    level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13DE4(var_8, var_7, var_8.angles, 1);
   }
 
   if(isDefined(var_1.super)) {
@@ -123,11 +123,11 @@ function binoculars_onstatelospendingupdate(var_0) {
   }
 }
 
-function ref_13aa0(var_0, var_1) {
+function ref_13AA0(var_0, var_1) {
   var_2 = var_0.team;
-  level.ref_13acd[var_2] = 1;
+  level.ref_13ACD[var_2] = 1;
   scripts\engine\utility::waittill_any_ents(var_0, "disconnect", var_1, "explode_end", var_1, "explode", var_1, "death");
-  level.ref_13acd[var_2] = undefined;
+  level.ref_13ACD[var_2] = undefined;
 }
 
 function binoculars_onstatelospendingexit(var_0) {

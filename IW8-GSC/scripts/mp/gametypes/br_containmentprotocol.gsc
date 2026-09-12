@@ -159,11 +159,11 @@ function actorrope() {
 
   foreach(var_6 in var_4) {}
 
-  while(istrue(level.hostskipburndownhigh.monitorexitbutton) || istrue(level.hostskipburndownhigh.ref_123ad)) {
+  while(istrue(level.hostskipburndownhigh.monitorexitbutton) || istrue(level.hostskipburndownhigh.ref_123AD)) {
     waitframe();
   }
 
-  level.hostskipburndownhigh.ref_123ad = 1;
+  level.hostskipburndownhigh.ref_123AD = 1;
   add_practice_bots(1, var_4);
   add_rider_to_decho();
   var_11 = undefined;
@@ -186,7 +186,7 @@ function actorrope() {
     wait 12;
     add_to_emp_drone_target_list(var_4);
 
-    if(istrue(level.hostskipburndownhigh.ref_12abe)) {
+    if(istrue(level.hostskipburndownhigh.ref_12ABE)) {
       add_rider_to_decho(1, level.hostskipburndownhigh.instant_revive_buffer);
       wait 3;
       var_11 scripts\cp_mp\killstreaks\airstrike::game_end_watcher(var_0, 1, 1);
@@ -202,8 +202,8 @@ function actorrope() {
   }
 
   level.hostskipburndownhigh.instant_revive_buffer = undefined;
-  level.hostskipburndownhigh.ref_12abe = undefined;
-  level.hostskipburndownhigh.ref_123ad = undefined;
+  level.hostskipburndownhigh.ref_12ABE = undefined;
+  level.hostskipburndownhigh.ref_123AD = undefined;
 }
 
 function add_player_to_focus_fire_attacker_list() {
@@ -321,7 +321,7 @@ function add_stealth_logic_to_group() {
   level endon("game_ended");
   level endon("end_containment_fx");
 
-  while(istrue(level.hostskipburndownhigh.ref_123ad)) {
+  while(istrue(level.hostskipburndownhigh.ref_123AD)) {
     waitframe();
   }
 
@@ -385,7 +385,7 @@ function add_to_bomb_detonator_waiting_for_pick_up_array(var_0, var_1, var_2, va
       continue;
     }
 
-    if(!istrue(var_8 scripts\mp\gametypes\br_public::ref_125f3()) || istrue(var_3)) {
+    if(!istrue(var_8 scripts\mp\gametypes\br_public::ref_125F3()) || istrue(var_3)) {
       var_8 queuedialogforplayer(var_4, var_1, var_5);
     }
   }
@@ -428,10 +428,10 @@ function elevatordoors(var_0) {
     return;
   }
 
-  if(!isDefined(level.hostskipburndownhigh.ref_146f9)) {
-    level.hostskipburndownhigh.ref_146f9 = scripts\engine\utility::play_loopsound_in_space("zmb_takeover_radio_background", (0, 0, 0));
-    level.hostskipburndownhigh.ref_146f9 unmarkkeyframedmover(1);
-    level.hostskipburndownhigh.ref_146f9 hide();
+  if(!isDefined(level.hostskipburndownhigh.ref_146F9)) {
+    level.hostskipburndownhigh.ref_146F9 = scripts\engine\utility::play_loopsound_in_space("zmb_takeover_radio_background", (0, 0, 0));
+    level.hostskipburndownhigh.ref_146F9 unmarkkeyframedmover(1);
+    level.hostskipburndownhigh.ref_146F9 hide();
   }
 
   foreach(var_2 in level.players) {
@@ -439,7 +439,7 @@ function elevatordoors(var_0) {
       continue;
     }
 
-    level.hostskipburndownhigh.ref_146f9 showtoplayer(var_2);
+    level.hostskipburndownhigh.ref_146F9 showtoplayer(var_2);
     thread add_to_mine_list(var_2);
   }
 }
@@ -448,11 +448,11 @@ function add_to_mine_list(var_0) {
   self endon("disconnect");
   scripts\engine\utility::waittill_notify_or_timeout_return("spawnZombie", var_0);
 
-  if(!isDefined(level.hostskipburndownhigh.ref_146f9)) {
+  if(!isDefined(level.hostskipburndownhigh.ref_146F9)) {
     return;
   }
 
-  level.hostskipburndownhigh.ref_146f9 hidefromplayer(self);
+  level.hostskipburndownhigh.ref_146F9 hidefromplayer(self);
 
   if(istrue(level.hostskipburndownhigh.monitorexitbutton) && !add_spawn_disable_struct(self)) {
     self setclientomnvar("ui_br_events", 0);
@@ -461,17 +461,17 @@ function add_to_mine_list(var_0) {
 }
 
 function elevator_trigger_wait_for_spawn() {
-  if(!isDefined(level.hostskipburndownhigh.ref_146f9)) {
+  if(!isDefined(level.hostskipburndownhigh.ref_146F9)) {
     return;
   }
 
-  level.hostskipburndownhigh.ref_146f9 delete();
-  level.hostskipburndownhigh.ref_146f9 = undefined;
+  level.hostskipburndownhigh.ref_146F9 delete();
+  level.hostskipburndownhigh.ref_146F9 = undefined;
 }
 
 function add_spawn_disable_struct(var_0) {
   var_1 = istrue(var_0.delay_enter_combat_after_investigating_grenade);
-  var_2 = var_0 scripts\mp\gametypes\br_public::ref_125f3();
+  var_2 = var_0 scripts\mp\gametypes\br_public::ref_125F3();
   var_3 = var_0 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal();
   return !var_1 && !var_2 && !var_3;
 }
@@ -734,7 +734,7 @@ function add_rider_to_decho(var_0, var_1) {
           break;
         case 1:
           game["dialog"]["strafing_post"] = "strafing_reengage_12";
-          level.hostskipburndownhigh.ref_12abe = 1;
+          level.hostskipburndownhigh.ref_12ABE = 1;
           break;
         default:
           game["dialog"]["strafing_pre"] = "";
@@ -751,7 +751,7 @@ function add_rider_to_decho(var_0, var_1) {
           break;
         case 1:
           game["dialog"]["strafing_post"] = "strafing_reengage_10";
-          level.hostskipburndownhigh.ref_12abe = 1;
+          level.hostskipburndownhigh.ref_12ABE = 1;
           break;
         default:
           game["dialog"]["strafing_post"] = "";

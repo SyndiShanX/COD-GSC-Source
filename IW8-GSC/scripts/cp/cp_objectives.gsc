@@ -161,7 +161,7 @@ function parseobjectivestable(var_0) {
     var_4.iconposref = tablelookup(var_1, 0, var_3, 7);
     var_4.disablefade = int(tablelookup(var_1, 0, var_3, 27)) >= 1;
     var_4.eventflag = tablelookup(var_1, 0, var_3, 31);
-    var_4.ref_11f8d = [];
+    var_4.ref_11F8D = [];
 
     if(isDefined(var_4.excludedfromrandompool) && var_4.excludedfromrandompool >= 1) {
       var_4.excludedfromrandompool = 1;
@@ -228,7 +228,7 @@ function processiconposref(var_0) {
   if(isDefined(var_3)) {
     if(isvector(var_3)) {
       var_0.iconpos = var_3;
-      var_0.ref_11f8d[var_0.ref_11f8d.size] = var_3;
+      var_0.ref_11F8D[var_0.ref_11F8D.size] = var_3;
       return;
     }
 
@@ -239,7 +239,7 @@ function processiconposref(var_0) {
 
       foreach(var_5 in var_3) {
         var_0.iconpos[var_0.iconpos.size] = var_5.origin;
-        var_0.ref_11f8d[var_0.ref_11f8d.size] = var_5.origin;
+        var_0.ref_11F8D[var_0.ref_11F8D.size] = var_5.origin;
         var_0.interactionstruct = var_5;
         var_5.objectivestruct = var_0;
       }
@@ -254,14 +254,14 @@ function processiconposref(var_0) {
   var_0.iconpos = var_3;
 }
 
-function ref_1317e(var_0, var_1) {
+function ref_1317E(var_0, var_1) {
   if(isarray(var_1)) {
-    var_0.ref_11f8d = var_1;
+    var_0.ref_11F8D = var_1;
     return;
   }
 
-  var_0.ref_11f8d = [];
-  var_0.ref_11f8d[0] = var_1;
+  var_0.ref_11F8D = [];
+  var_0.ref_11F8D[0] = var_1;
 }
 
 function getobjectivestructfromref(var_0) {
@@ -1116,7 +1116,7 @@ function destroy_objective_waypoint(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_1) && isDefined(var_2)) {
-    var_0 scripts\engine\utility::ref_143b9(var_2, "destroy_objective_icon");
+    var_0 scripts\engine\utility::ref_143B9(var_2, "destroy_objective_icon");
   } else if(isDefined(var_1)) {
     var_0 waittill("destroy_objective_icon");
   } else if(isDefined(var_2)) {
@@ -1496,7 +1496,7 @@ function show_to_players_that_are_near(var_0, var_1, var_2, var_3) {
       }
     }
 
-    var_3 scripts\engine\utility::ref_143b9(0.5, "update_nearby_thread");
+    var_3 scripts\engine\utility::ref_143B9(0.5, "update_nearby_thread");
   }
 }
 
@@ -1520,7 +1520,7 @@ function watchfornearbyplayers(var_0, var_1, var_2, var_3) {
         var_5 = 0;
       }
 
-      var_3 scripts\engine\utility::ref_143b9(0.5, "update_nearby_thread");
+      var_3 scripts\engine\utility::ref_143B9(0.5, "update_nearby_thread");
     }
 
     if(!var_5) {
@@ -1528,7 +1528,7 @@ function watchfornearbyplayers(var_0, var_1, var_2, var_3) {
       minimap_objective_playermask_showtoall(var_1);
     }
 
-    var_3 scripts\engine\utility::ref_143b9(0.5, "update_nearby_thread");
+    var_3 scripts\engine\utility::ref_143B9(0.5, "update_nearby_thread");
   }
 }
 
@@ -1969,7 +1969,7 @@ function minimap_objective_unpin_player(var_0, var_1) {
   objective_unpinforclient(var_0, var_1);
 }
 
-function ref_11f83(var_0, var_1) {
+function ref_11F83(var_0, var_1) {
   if(var_0 == -1) {
     return;
   }
@@ -2177,7 +2177,7 @@ function create_breadcrumb_for_player(var_0, var_1, var_2, var_3) {
 
   var_4 = spawnStruct();
   var_4.stepstructs = [];
-  var_4.ref_138a6 = [];
+  var_4.ref_138A6 = [];
   var_5 = scripts\engine\utility::getStructArray(var_1, "script_noteworthy");
 
   if(var_5.size <= 0) {
@@ -2191,7 +2191,7 @@ function create_breadcrumb_for_player(var_0, var_1, var_2, var_3) {
     var_4.stepstructs[var_8] = var_7.origin;
 
     if(isDefined(var_7.script_radius)) {
-      var_4.ref_138a6[var_8] = squared(var_7.script_radius);
+      var_4.ref_138A6[var_8] = squared(var_7.script_radius);
     }
   }
 
@@ -2260,8 +2260,8 @@ function watchforplayernearbcrumb(var_0) {
 }
 
 function printcodechosen(var_0, var_1) {
-  if(isDefined(var_0.ref_138a6[var_1])) {
-    return var_0.ref_138a6[var_1];
+  if(isDefined(var_0.ref_138A6[var_1])) {
+    return var_0.ref_138A6[var_1];
   }
 
   return 90000;
@@ -2312,7 +2312,7 @@ function delete_breadcrumb_array(var_0) {
   }
 }
 
-function ref_11f80(var_0) {
+function ref_11F80(var_0) {
   objective_state(var_0, "current");
   objective_setshowoncompass(var_0, 1);
   objective_setminimapiconsize(var_0, "icon_regular");
@@ -2368,7 +2368,7 @@ function ref_12868(var_0) {
   return;
 }
 
-function ref_12ddb() {
+function ref_12DDB() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait("level_ready_for_script");
   scripts\engine\utility::flag_wait("objective_table_parsed");

@@ -50,7 +50,7 @@ function loadweaponranktable(var_0) {
 }
 
 function track_consecutive_kills() {
-  level.ref_1459a = loadweaponranktable("mp/t9_weaponranktable.csv");
+  level.ref_1459A = loadweaponranktable("mp/t9_weaponranktable.csv");
   level.weaponranktable = loadweaponranktable("mp/weaponRankTable.csv");
   level.weaponranktable.maxweaponranks = [];
   var_0 = tablelookupgetnumrows("mp/statstable.csv");
@@ -160,7 +160,7 @@ function getmaxweaponrank() {
 }
 
 function replace_turret() {
-  return level.ref_1459a.maxrank;
+  return level.ref_1459A.maxrank;
 }
 
 function getweaponrankinfominxp(var_0) {
@@ -168,7 +168,7 @@ function getweaponrankinfominxp(var_0) {
 }
 
 function rpg_building_guys(var_0) {
-  return level.ref_1459a.rankinfo[var_0].minxp;
+  return level.ref_1459A.rankinfo[var_0].minxp;
 }
 
 function getweaponrankinfoxptonextrank(var_0) {

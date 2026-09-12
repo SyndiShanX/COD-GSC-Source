@@ -28,16 +28,16 @@ function fulton_hostageent(var_0) {
   var_3 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getFriendlyPlayers")]](var_1.team, 1);
 
   foreach(var_5 in var_3) {
-    if(isDefined(var_5.ref_1373e)) {
-      var_5.ref_1373e delete();
+    if(isDefined(var_5.ref_1373E)) {
+      var_5.ref_1373E delete();
     }
 
-    var_5.ref_1373e = spawnfxforclient(var_2, var_0, var_5);
-    triggerfx(var_5.ref_1373e);
-    var_5.ref_1373e setfxkilldefondelete();
-    var_5.ref_1373c = var_0;
-    var_5.ref_1373d = 892.5;
-    var_5.ref_1373f = 1;
+    var_5.ref_1373E = spawnfxforclient(var_2, var_0, var_5);
+    triggerfx(var_5.ref_1373E);
+    var_5.ref_1373E setfxkilldefondelete();
+    var_5.ref_1373C = var_0;
+    var_5.ref_1373D = 892.5;
+    var_5.ref_1373F = 1;
   }
 }
 
@@ -48,20 +48,20 @@ function fulton_initanims() {
     return;
   }
 
-  if(!istrue(var_0.ref_1373f)) {
+  if(!istrue(var_0.ref_1373F)) {
     return;
   }
 
-  if(scripts\engine\utility::updatescrapassistdata(var_0.origin, var_0.ref_1373c, var_0.ref_1373d)) {
+  if(scripts\engine\utility::updatescrapassistdata(var_0.origin, var_0.ref_1373C, var_0.ref_1373D)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("rank", "scoreEventPopup")) {
       var_0 thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("rank", "scoreEventPopup")]]("br_beacon_bonus");
     }
   }
 
-  var_0.ref_1373e delete();
-  var_0.ref_1373c = undefined;
-  var_0.ref_1373d = undefined;
-  var_0.ref_1373f = undefined;
+  var_0.ref_1373E delete();
+  var_0.ref_1373C = undefined;
+  var_0.ref_1373D = undefined;
+  var_0.ref_1373F = undefined;
 }
 
 function fulton_init(var_0) {
@@ -69,10 +69,10 @@ function fulton_init(var_0) {
     return;
   }
 
-  if(isDefined(var_0.ref_1373e)) {
-    var_0.ref_1373e delete();
-    var_0.ref_1373c = undefined;
-    var_0.ref_1373d = undefined;
-    var_0.ref_1373f = undefined;
+  if(isDefined(var_0.ref_1373E)) {
+    var_0.ref_1373E delete();
+    var_0.ref_1373C = undefined;
+    var_0.ref_1373D = undefined;
+    var_0.ref_1373F = undefined;
   }
 }

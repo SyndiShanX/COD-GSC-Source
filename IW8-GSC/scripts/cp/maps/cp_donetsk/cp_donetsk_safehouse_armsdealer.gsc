@@ -9,10 +9,10 @@ function registersafehouse() {
   scripts\engine\utility::flag_wait("interactions_initialized");
   scripts\cp\cp_objectives::registerobjective("safehouse_armsdealer_mnu", &init_safehouse, &start_safehouse, undefined, &debugbeatobjective, &debug_safehouse_start);
   scripts\cp\cp_objectives::registerobjective("safehouse_armsdealer", &init_safehouse, &start_safehouse, undefined, &debugbeatobjective, &debug_safehouse_start);
-  scripts\cp\cp_objectives::registerobjective("safehouse_armsdealer_return", undefined, &ref_137fb, undefined, &debugbeatobjective, &debug_safehouse_return_start);
-  scripts\cp\cp_objectives::registerobjective("safehouse_armsdealer_restart", undefined, &ref_137fa, undefined, &debugbeatobjective, &debug_safehouse_return_start);
+  scripts\cp\cp_objectives::registerobjective("safehouse_armsdealer_return", undefined, &ref_137FB, undefined, &debugbeatobjective, &debug_safehouse_return_start);
+  scripts\cp\cp_objectives::registerobjective("safehouse_armsdealer_restart", undefined, &ref_137FA, undefined, &debugbeatobjective, &debug_safehouse_return_start);
   level.initlocs_bunkertest = scripts\engine\utility::getStructArray("armsdealer_safehouse_start", "targetname");
-  level thread scripts\mp\vehicles\vehicle_damage_mp::ref_12e57();
+  level thread scripts\mp\vehicles\vehicle_damage_mp::ref_12E57();
 }
 
 function debugbeatobjective(var_0) {}
@@ -53,34 +53,34 @@ function init_safehouse(var_0) {}
 
 function start_safehouse(var_0) {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_armsdealer_cs_completed");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(1);
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13BC2(1);
   scripts\engine\utility::flag_wait("player_spawned_with_loadout");
   var_1 = scripts\engine\utility::getStruct("armsdealer_safehouse_loadout", "targetname").origin;
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var_1, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var_1, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var_1, 4096, "scriptable_door_wood_ornate_01_orange_double_l", "classname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var_1, 4096, "scriptable_door_wood_ornate_01_orange_double_r", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(1, var_1, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(1, var_1, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(1, var_1, 4096, "scriptable_door_wood_ornate_01_orange_double_l", "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(1, var_1, 4096, "scriptable_door_wood_ornate_01_orange_double_r", "classname");
   thread managejumpmasterinfodisplay();
   thread spawn_atvs();
   thread safehouse_loadout_interaction("armsdealer_safehouse_loadout");
   thread scripts\mp\brclientmatchdata::getnextrpgspawnmodule("paladin", "safehouse_door_opened", 10, 1);
   wait 10;
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var_1, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var_1, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var_1, 4096, "scriptable_door_wood_ornate_01_orange_double_l", "classname");
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var_1, 4096, "scriptable_door_wood_ornate_01_orange_double_r", "classname");
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(0, var_1, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(0, var_1, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(0, var_1, 4096, "scriptable_door_wood_ornate_01_orange_double_l", "classname");
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(0, var_1, 4096, "scriptable_door_wood_ornate_01_orange_double_r", "classname");
   scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var_1, 2048, "scriptable_door_wooden_panel_mp_01", "classname");
   scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var_1, 2048, "scriptable_door_wooden_hollow_mp_01", "classname");
   scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var_1, 4096, "scriptable_door_wood_ornate_01_orange_double_l", "classname");
   scripts\mp\vehicles\vehicle_damage_mp::ref_14325(var_1, 4096, "scriptable_door_wood_ornate_01_orange_double_r", "classname");
-  level scripts\engine\utility::ref_143ba(40, "safehouse_door_opened", "armsdealer_safehouse_VO_ended");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(0);
+  level scripts\engine\utility::ref_143BA(40, "safehouse_door_opened", "armsdealer_safehouse_VO_ended");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13BC2(0);
   makesafehouseclipsolid(0);
   scripts\cp\cp_objectives::overridenextstep(var_0, "morales_1");
-  level.ref_121b1 = getEnt("Phase4OutOfBounds", "targetname");
+  level.ref_121B1 = getEnt("Phase4OutOfBounds", "targetname");
 
-  if(isDefined(level.ref_121b1)) {
-    thread scripts\cp\cp_outofbounds::watchoobtrigger(level.ref_121b1);
+  if(isDefined(level.ref_121B1)) {
+    thread scripts\cp\cp_outofbounds::watchoobtrigger(level.ref_121B1);
     return;
   }
 }
@@ -105,7 +105,7 @@ function managejumpmasterinfodisplay() {
   level notify("armsdealer_safehouse_VO_ended");
 }
 
-function ref_137fa(var_0) {
+function ref_137FA(var_0) {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_armsdealer_cs_completed");
   thread safehouse_loadout_interaction(level);
   thread scripts\mp\brclientmatchdata::getnextrpgspawnmodule("crosswind", "toggle_safehouse_settings", 10, 1);
@@ -113,25 +113,25 @@ function ref_137fa(var_0) {
   thread init_laser_traps(level);
   var_1 = level.camera_loadout_showcase_preview_sticker.origin;
 
-  if(isDefined(level.ref_121b1)) {
-    level.ref_121b1 delete();
+  if(isDefined(level.ref_121B1)) {
+    level.ref_121B1 delete();
   }
 
   scripts\mp\vehicles\vehicle_damage_mp::vehomn_updateomnvarsperframe();
   var_2 = scripts\engine\utility::getStructArray("armsdealer_safehouse_return_start", "targetname");
   level.initlocs_bunkertest = var_2;
-  scripts\mp\vehicles\vehicle_damage_mp::ref_12e5a(var_2);
+  scripts\mp\vehicles\vehicle_damage_mp::ref_12E5A(var_2);
   scripts\engine\utility::flag_set("armsdealer_safehouse_return");
   setDvar("restart_checkpoint", "");
   setDvar("cp_arms_dealer_start_obj", "safehouse_armsdealer_restart");
   setDvar("cp_armsdealer_2_start_obj", "safehouse_armsdealer_restart");
   scripts\cp\cp_objectives::overridenextstep(var_0, "plant_jammers");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var_1, 2048, "scriptable_dyn_door_metal_single_b_01_grey", "classname");
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(1);
-  thread ref_1437d("safehouse_demeanor_off", var_1);
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(1, var_1, 2048, "scriptable_dyn_door_metal_single_b_01_grey", "classname");
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC2(1);
+  thread ref_1437D("safehouse_demeanor_off", var_1);
 }
 
-function ref_137fb(var_0) {
+function ref_137FB(var_0) {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_armsdealer_cs_completed");
   thread safehouse_loadout_interaction(level);
   thread scripts\mp\brclientmatchdata::getnextrpgspawnmodule("crosswind", "toggle_safehouse_settings", 10, 1);
@@ -142,14 +142,14 @@ function ref_137fb(var_0) {
     thread maxplunderextractions();
     var_1 = level.camera_loadout_showcase_preview_sticker.origin;
 
-    if(isDefined(level.ref_121b1)) {
-      level.ref_121b1 delete();
+    if(isDefined(level.ref_121B1)) {
+      level.ref_121B1 delete();
     }
 
     scripts\mp\vehicles\vehicle_damage_mp::vehomn_updateomnvarsperframe();
     var_2 = scripts\engine\utility::getStructArray("armsdealer_safehouse_return_start", "targetname");
     level.initlocs_bunkertest = var_2;
-    scripts\mp\vehicles\vehicle_damage_mp::ref_12e5a(var_2);
+    scripts\mp\vehicles\vehicle_damage_mp::ref_12E5A(var_2);
     scripts\engine\utility::flag_set("armsdealer_safehouse_return");
     setDvar("restart_checkpoint", "");
     setDvar("cp_arms_dealer_start_obj", "safehouse_armsdealer_restart");
@@ -159,10 +159,10 @@ function ref_137fb(var_0) {
     scripts\cp\cp_objectives::overridenextstep(var_0, "plant_jammers");
   }
 
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var_1, 2048, "scriptable_dyn_door_metal_single_b_01_grey", "classname");
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(1);
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(1, var_1, 2048, "scriptable_dyn_door_metal_single_b_01_grey", "classname");
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC2(1);
   level waittill("dialogue_brief_done");
-  thread ref_1437d("safehouse_demeanor_off", var_1);
+  thread ref_1437D("safehouse_demeanor_off", var_1);
 }
 
 function maxplunderextractions() {
@@ -178,11 +178,11 @@ function maxplunderdropondeath() {
   level notify("dialogue_brief_done");
 }
 
-function ref_1437d(var_0, var_1) {
+function ref_1437D(var_0, var_1) {
   level endon("game_ended");
   level waittill(var_0);
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var_1, 2048, "scriptable_dyn_door_metal_single_b_01_grey", "classname");
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(0);
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(0, var_1, 2048, "scriptable_dyn_door_metal_single_b_01_grey", "classname");
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC2(0);
 }
 
 function maxweaponxpcap(var_0) {

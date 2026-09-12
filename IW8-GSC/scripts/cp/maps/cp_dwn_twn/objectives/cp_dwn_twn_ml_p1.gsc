@@ -25,7 +25,7 @@ function register_ml_p1_objectives() {
   scripts\cp\cp_objectives::registerobjective("ml_p1_intel", &init_ml_p1_intel, &start_ml_p1_intel, &end_ml_p1_intel, &debugbeatobjective, &debug_m1_p1_obj_start);
   thread register_spawn_functions();
   thread spawn_player_vehicles();
-  thread ref_12bc3();
+  thread ref_12BC3();
   thread fire_rpg_to_target();
   level.stack_patch_waittill_leaf = ["p1_intel_truck_group"];
   level.waittill_any_timeout_no_endon_death_5 = 0;
@@ -165,12 +165,12 @@ function ref_13590() {
   }
 
   foreach(var_2 in var_0) {
-    thread ref_1353b(var_2);
+    thread ref_1353B(var_2);
   }
 }
 
-function ref_1353b(var_0) {
-  var_1 = scripts\mp\carriable::ref_131ea(var_0);
+function ref_1353B(var_0) {
+  var_1 = scripts\mp\carriable::ref_131EA(var_0);
   var_1.matchdata_logaward = 1;
 }
 
@@ -233,7 +233,7 @@ function proplist(var_0) {
   return [level.modemayconsiderplayerdead];
 }
 
-function ref_12bc3() {
+function ref_12BC3() {
   if(!scripts\engine\utility::flag_exist("cp_dwn_twn_ml_p1_create_script_completed")) {
     scripts\engine\utility::flag_init("cp_dwn_twn_ml_p1_create_script_completed");
   }
@@ -242,7 +242,7 @@ function ref_12bc3() {
   var_0 = scripts\engine\utility::getStructArray("bank_roof_munition_remove", "targetname");
 
   foreach(var_2 in var_0) {
-    level thread scripts\cp\cp_munitions::ref_12be1(var_2.origin, 200);
+    level thread scripts\cp\cp_munitions::ref_12BE1(var_2.origin, 200);
   }
 }
 
@@ -325,22 +325,22 @@ function return_when_cansee_player() {
 
 function init_spawn_radius_check_for_modules() {}
 
-function ref_11f7f(var_0, var_1) {
+function ref_11F7F(var_0, var_1) {
   scripts\cp\utility::objective_update("ml_p1_intel", undefined, undefined, undefined, undefined, level.intel_level);
   thread ref_13590();
   scripts\cp\cp_modular_spawning::run_spawn_module("p1_intel_group");
   scripts\cp\cp_modular_spawning::run_spawn_module("p1_intel_perch");
   scripts\cp\cp_modular_spawning::run_spawn_module("p1_intel_ambient");
   scripts\cp\cp_modular_spawning::run_spawn_module("p1_intel_bomber");
-  thread ref_1243c(level);
-  thread ref_1243c(level);
-  thread ref_1243c(level);
-  thread ref_1243c(level);
+  thread ref_1243C(level);
+  thread ref_1243C(level);
+  thread ref_1243C(level);
+  thread ref_1243C(level);
   thread start_mortars();
-  thread ref_1311e();
-  thread ref_135ea(level, "museum_spawner", 2000);
-  thread ref_135ea(level, "tower_spawner", 3000);
-  scripts\cp\cp_modular_spawning::set_wave_ref_override("va_init_veh");
+  thread ref_1311E();
+  thread ref_135EA(level, "museum_spawner", 2000);
+  thread ref_135EA(level, "tower_spawner", 3000);
+  scripts\cp\cp_modular_spawning::set_wave_ref_OVERRIDE("va_init_veh");
   thread ref_13095();
 
   while(level.intel_level < var_1) {
@@ -350,7 +350,7 @@ function ref_11f7f(var_0, var_1) {
   var_2 = scripts\cp\cp_modular_spawning::get_module_structs_by_groupname("wave_spawning");
 
   foreach(var_4 in var_2) {
-    var_4 scripts\cp\cp_modular_spawning::clear_wave_ref_override();
+    var_4 scripts\cp\cp_modular_spawning::clear_wave_ref_OVERRIDE();
   }
 
   mark_group_as_killable("p1_intel_group");
@@ -361,21 +361,21 @@ function ref_11f7f(var_0, var_1) {
   remove_force_drop_on_group("p1_intel_ambient");
 }
 
-function ref_1311e() {
+function ref_1311E() {
   level waittill("weapons_free");
-  scripts\cp\cp_modular_spawning::set_wave_ref_override("va_init_veh");
+  scripts\cp\cp_modular_spawning::set_wave_ref_OVERRIDE("va_init_veh");
 }
 
 function ref_13095() {
-  level.vehicle.spawn_callback_thread = &ref_130a4;
+  level.vehicle.spawn_callback_thread = &ref_130A4;
 }
 
-function ref_130a4(var_0) {
-  var_0.ref_11e98 = 1;
+function ref_130A4(var_0) {
+  var_0.ref_11E98 = 1;
   var_0.vehicle_skipdeathcrash = 1;
 }
 
-function ref_135ea(var_0, var_1, var_2) {
+function ref_135EA(var_0, var_1, var_2) {
   level endon("end_p1_spawn_loops");
   level endon("game_ended");
   var_3 = scripts\engine\utility::getStructArray("ambient_intel_radius", "targetname");
@@ -409,7 +409,7 @@ function ref_135ea(var_0, var_1, var_2) {
   var_13 = scripts\cp\cp_modular_spawning::run_spawn_module(var_2);
 }
 
-function ref_1243c(var_0, var_1) {
+function ref_1243C(var_0, var_1) {
   var_2 = scripts\cp\cp_objectives::requestworldid("ml_p1_marker_" + var_0);
   var_3 = scripts\engine\utility::getStructArray("ambient_intel_radius", "targetname");
   var_4 = undefined;
@@ -434,7 +434,7 @@ function ref_1243c(var_0, var_1) {
     objective_setlabel(var_2, var_8);
   }
 
-  thread ref_1294a(var_4);
+  thread ref_1294A(var_4);
 
   for(;;) {
     level waittill("ml_p1_intel_dropped", var_9);
@@ -442,7 +442,7 @@ function ref_1243c(var_0, var_1) {
     if(var_0 == var_9.traincar_wait_until_shown) {
       var_10 = var_9.origin;
       var_4 notify("intel_dropped");
-      thread ref_11d8f(level, var_2, var_10);
+      thread ref_11D8F(level, var_2, var_10);
       goto LOC_000000f5;
     }
   }
@@ -477,7 +477,7 @@ function questtimerset(var_0) {
   }
 }
 
-function ref_1294a(var_0) {
+function ref_1294A(var_0) {
   self endon("intel_dropped");
   var_1 = 1500;
   var_2 = var_1 * var_1;
@@ -503,7 +503,7 @@ function ref_1294a(var_0) {
   }
 }
 
-function ref_11d8f(var_0, var_1, var_2) {
+function ref_11D8F(var_0, var_1, var_2) {
   level endon(var_2 + "_intel_found");
   objective_icon(var_0, "icon_waypoint_objective_general");
   objective_position(var_0, var_1);
@@ -537,7 +537,7 @@ function move_objective_spot_around(var_0, var_1) {
       objective_icon(var_3, "icon_waypoint_objective_general");
       objective_position(var_3, var_2.origin);
       objective_setshowdistance(var_3, 1);
-      scripts\cp\cp_objectives::ref_1317e(var_0, var_2.origin);
+      scripts\cp\cp_objectives::ref_1317E(var_0, var_2.origin);
 
       if(isDefined(level.ml_p1_obj_spawners)) {
         for(var_4 = 0; var_4 < level.ml_p1_obj_spawners.size; var_4++) {
@@ -577,7 +577,7 @@ function move_objective_spot_around(var_0, var_1) {
   level notify("stop_monitor_dropped_phones");
 }
 
-function ref_11cda() {
+function ref_11CDA() {
   level endon("stop_monitor_dropped_phones");
 
   for(;;) {
@@ -681,31 +681,31 @@ function get_intel_loc() {
   return var_6;
 }
 
-function ref_11cf6(var_0) {
+function ref_11CF6(var_0) {
   for(;;) {
     wait 1;
   }
 }
 
-function ref_11c59(var_0) {
+function ref_11C59(var_0) {
   switch (level.intel_level) {
     case 0:
-      ref_123cb("obj_collect_first", var_0);
+      ref_123CB("obj_collect_first", var_0);
       break;
     case 1:
-      ref_123cb("obj_collect_another", var_0);
+      ref_123CB("obj_collect_another", var_0);
       break;
     case 2:
-      ref_123cb("obj_collect_generic", var_0);
+      ref_123CB("obj_collect_generic", var_0);
       break;
     case 3:
-      ref_123cb("obj_collect_another", var_0);
+      ref_123CB("obj_collect_another", var_0);
       break;
     case 4:
-      ref_123cb("inform_collect_complete", var_0);
+      ref_123CB("inform_collect_complete", var_0);
       break;
     default:
-      ref_123cb("obj_collect_generic", var_0);
+      ref_123CB("obj_collect_generic", var_0);
       break;
   }
 }
@@ -724,7 +724,7 @@ function play_intel_pickup_vo() {
       scripts\cp\cp_dialogue::play_vo_to_all(publiceventsenabled(2));
       break;
     case 3:
-      scripts\cp\utility::ref_123fe("mus_cp_money_final_intel");
+      scripts\cp\utility::ref_123FE("mus_cp_money_final_intel");
       scripts\cp\cp_dialogue::play_vo_to_all(publiceventsenabled(4));
       break;
     case 4:
@@ -861,9 +861,9 @@ function start_ml_p1_intel(var_0, var_1) {
     var_3 = scripts\cp\cp_modular_spawning::run_spawn_module("wave_spawning");
   }
 
-  thread ref_123fd();
+  thread ref_123FD();
   thread play_vo_on_intel_drop();
-  scripts\cp\utility::ref_123fe("mus_cp_money_start");
+  scripts\cp\utility::ref_123FE("mus_cp_money_start");
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_mobile_heist_brief_10");
 
   if(getDvar("cp_dwn_twn_2_start_obj", "") != "ml_p1_intel") {
@@ -871,12 +871,12 @@ function start_ml_p1_intel(var_0, var_1) {
     level waittill("safehouse_door_open");
   }
 
-  ref_11f7f(var_0, var_2);
+  ref_11F7F(var_0, var_2);
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("p1_intel_bomber");
   wait 5;
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_mobile_heist_squad_spotted_10");
   wait 3;
-  level.ref_139b5 = 0;
+  level.ref_139B5 = 0;
   scripts\engine\utility::flag_set("reinforce_1_ready");
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_mobile_heist_jackpot_10");
   wait 0.5;
@@ -897,7 +897,7 @@ function end_ml_p1_intel(var_0, var_1) {
   scripts\cp\cp_objectives::overridenextstep(var_0, "ml_p2_get_heli");
 }
 
-function ref_123cb(var_0, var_1) {
+function ref_123CB(var_0, var_1) {
   var_2 = var_1;
 
   if(!isDefined(var_1)) {
@@ -914,7 +914,7 @@ function ref_123cb(var_0, var_1) {
 
 function play_vo_on_intel_drop() {
   level endon("end_p1_spawn_loops");
-  level.train_delay_handler = &ref_11c59;
+  level.train_delay_handler = &ref_11C59;
   level waittill("ml_p1_intel_dropped");
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_kama_mobile_heist_first_phone_dropped_10");
 }
@@ -997,7 +997,7 @@ function test_spawn_locations() {
 function get_p1_intel_group_spawner(var_0) {
   if(!isDefined(level.trial_combo_died)) {
     level.trial_combo_died = 1;
-    thread ref_11b02(level);
+    thread ref_11B02(level);
   }
 
   return create_spawn_structs_in_radius(var_0);
@@ -1005,7 +1005,7 @@ function get_p1_intel_group_spawner(var_0) {
 
 function p1_intel_after_spawn_func(var_0) {
   self.never_kill_off = 1;
-  self.ref_11e50 = 1;
+  self.ref_11E50 = 1;
   self.a.disablelongdeath = 1;
   thread little_bird_mg_cp_onentervehicle();
   var_1 = scripts\engine\utility::getStructArray("ambient_intel_radius", "targetname");
@@ -1051,7 +1051,7 @@ function little_bird_mg_cp_onentervehicle() {
   self.a.disablelongdeath = 1;
 }
 
-function ref_11b02(var_0) {
+function ref_11B02(var_0) {
   thread ref_12326(level);
   level waittill("spawn_module_" + var_0.moduleid + "_completed");
   level.ref_12325 = 1;
@@ -1175,10 +1175,10 @@ function get_mortar_impact_spot(var_0) {
 }
 
 function mortar_launch_think() {
-  level.ref_13c0b = getEnt("tower_ground_mortar", "targetname");
-  level.ref_13c0b hidepart("j_mortar_shell", "misc_wm_mortar");
-  level.ref_13c0c = getEnt("tower_ground_mortar_2", "targetname");
-  level.ref_13c0c hidepart("j_mortar_shell", "misc_wm_mortar");
+  level.ref_13C0B = getEnt("tower_ground_mortar", "targetname");
+  level.ref_13C0B hidepart("j_mortar_shell", "misc_wm_mortar");
+  level.ref_13C0C = getEnt("tower_ground_mortar_2", "targetname");
+  level.ref_13C0C hidepart("j_mortar_shell", "misc_wm_mortar");
   level waittill("weapons_free");
   thread mortar_think();
   thread mortar_think();
@@ -1206,8 +1206,8 @@ function mortar_think() {
 function race_countdown_update() {
   var_0 = [];
   var_1 = scripts\engine\utility::getStruct(self.target, "targetname");
-  self.ref_12a0a = var_1;
-  var_2 = self.ref_12a0a.radius;
+  self.ref_12A0A = var_1;
+  var_2 = self.ref_12A0A.radius;
   var_3 = var_2 * var_2;
 
   foreach(var_5 in level.players) {
@@ -1219,7 +1219,7 @@ function race_countdown_update() {
       continue;
     }
 
-    if(distancesquared(var_5.origin, self.ref_12a0a.origin) < var_3) {
+    if(distancesquared(var_5.origin, self.ref_12A0A.origin) < var_3) {
       var_0 = var_5;
     }
   }
@@ -1227,7 +1227,7 @@ function race_countdown_update() {
   return var_0;
 }
 
-function ref_123fd() {
+function ref_123FD() {
   level endon("game_ended");
   level endon("stop_rein_music");
 
@@ -1235,17 +1235,17 @@ function ref_123fd() {
     if(istrue(level.wave_cooldown_active)) {
       if(scripts\engine\utility::flag("reinforce_1_ready")) {
         scripts\engine\utility::flag_clear("reinforce_1_ready");
-        scripts\cp\utility::ref_123fe("mus_cp_money_reinforce_1");
+        scripts\cp\utility::ref_123FE("mus_cp_money_reinforce_1");
       }
 
       if(scripts\engine\utility::flag("reinforce_2_ready")) {
         scripts\engine\utility::flag_clear("reinforce_2_ready");
-        scripts\cp\utility::ref_123fe("mus_cp_money_reinforce_2");
+        scripts\cp\utility::ref_123FE("mus_cp_money_reinforce_2");
       }
 
       if(scripts\engine\utility::flag("reinforce_3_ready")) {
         scripts\engine\utility::flag_clear("reinforce_3_ready");
-        scripts\cp\utility::ref_123fe("mus_cp_money_reinforce_3");
+        scripts\cp\utility::ref_123FE("mus_cp_money_reinforce_3");
       }
     }
 

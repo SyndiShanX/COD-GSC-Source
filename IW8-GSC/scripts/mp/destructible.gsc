@@ -49,7 +49,7 @@ function remove_player_rig(var_0) {
 }
 
 function watch_remove_rig(var_0) {
-  scripts\engine\utility::ref_143a5("remove_rig", "death_or_disconnect");
+  scripts\engine\utility::ref_143A5("remove_rig", "death_or_disconnect");
 }
 
 function add_destructible_array(var_0, var_1) {

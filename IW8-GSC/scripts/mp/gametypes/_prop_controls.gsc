@@ -58,7 +58,7 @@ function bettermissiontierbonuses(var_0, var_1, var_2, var_3) {
   var_4.alpha = 1;
   var_4.glowalpha = 0;
   var_4.hidewheninmenu = 0;
-  var_4.ref_1384b = var_4.fontscale;
+  var_4.ref_1384B = var_4.fontscale;
 
   if(isDefined(var_3) && !scripts\engine\utility::is_player_gamepad_enabled()) {
     var_4.label = var_3;
@@ -74,16 +74,16 @@ function bettermissiontierbonuses(var_0, var_1, var_2, var_3) {
   return var_4;
 }
 
-function ref_128e4() {
+function ref_128E4() {
   self.initturretinteraction = 152;
   self.getbrgametypedata = bettermissiontierbonuses(&"MP_PH/CHANGE", 0);
-  self.ref_136f2 = bettermissiontierbonuses(&"MP_PH/SPIN", undefined, undefined, &"MP_PH/SPIN_PC");
-  self.ref_119a2 = bettermissiontierbonuses(&"MP_PH/LOCK");
-  self.ref_11b3d = bettermissiontierbonuses(&"MP_PH/SLOPE", undefined, undefined, &"MP_PH/SLOPE_PC");
+  self.ref_136F2 = bettermissiontierbonuses(&"MP_PH/SPIN", undefined, undefined, &"MP_PH/SPIN_PC");
+  self.ref_119A2 = bettermissiontierbonuses(&"MP_PH/LOCK");
+  self.ref_11B3D = bettermissiontierbonuses(&"MP_PH/SLOPE", undefined, undefined, &"MP_PH/SLOPE_PC");
   self.armor_piercing = bettermissiontierbonuses();
   self.heli_boss = bettermissiontierbonuses(&"MP_PH/CLONE");
   ref_13178();
-  self.ref_1472b = bettermissiontierbonuses(&"MP_PH/ZOOM");
+  self.ref_1472B = bettermissiontierbonuses(&"MP_PH/ZOOM");
   thread ref_14027();
 }
 
@@ -95,7 +95,7 @@ function has_keycard() {
   thread has_intel();
 }
 
-function ref_12e52(var_0) {
+function ref_12E52(var_0) {
   if(isDefined(var_0)) {
     var_0 destroy();
     return;
@@ -104,14 +104,14 @@ function ref_12e52(var_0) {
 
 function has_intel() {
   self notify("cleanupPropControlsHUD");
-  ref_12e52(self.getbrgametypedata);
-  ref_12e52(self.ref_136f2);
-  ref_12e52(self.ref_119a2);
-  ref_12e52(self.ref_11b3d);
-  ref_12e52(self.armor_piercing);
-  ref_12e52(self.ref_1472b);
-  ref_12e52(self.ref_136da);
-  ref_12e52(self.heli_boss);
+  ref_12E52(self.getbrgametypedata);
+  ref_12E52(self.ref_136F2);
+  ref_12E52(self.ref_119A2);
+  ref_12E52(self.ref_11B3D);
+  ref_12E52(self.armor_piercing);
+  ref_12E52(self.ref_1472B);
+  ref_12E52(self.ref_136DA);
+  ref_12E52(self.heli_boss);
 }
 
 function ref_14027() {
@@ -133,14 +133,14 @@ function ref_14027() {
 
       if(var_1) {
         if(!istrue(self.ref_13414)) {
-          self.ref_11b3d.label = &"MP_PH/SLOPE";
+          self.ref_11B3D.label = &"MP_PH/SLOPE";
         } else {
-          self.ref_11b3d.label = &"MP_PH/SLOPED";
+          self.ref_11B3D.label = &"MP_PH/SLOPED";
         }
       } else if(!istrue(self.ref_13414)) {
-        self.ref_11b3d.label = &"MP_PH/SLOPE_PC";
+        self.ref_11B3D.label = &"MP_PH/SLOPE_PC";
       } else {
-        self.ref_11b3d.label = &"MP_PH/SLOPED_PC";
+        self.ref_11B3D.label = &"MP_PH/SLOPED_PC";
       }
     }
 
@@ -148,7 +148,7 @@ function ref_14027() {
   }
 }
 
-function ref_128f5() {
+function ref_128F5() {
   self endon("death_or_disconnect");
   level endon("game_ended");
   self.lock = 0;
@@ -158,20 +158,20 @@ function ref_128f5() {
     return;
   }
 
-  if(!scripts\mp\gametypes\br_gametype_prop::ref_1408e()) {
+  if(!scripts\mp\gametypes\br_gametype_prop::ref_1408E()) {
     self setclientomnvar("ui_ph_is_locked", 0);
     self setclientomnvar("ui_ph_matching_slope", 0);
   }
 
   thread ref_12902();
-  thread ref_128d9();
+  thread ref_128D9();
   thread ref_12908();
   self.ref_12913 = 0;
   self.needdefaultendgameflowonly = 0;
   self.isteamextracted = 1;
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143b0("lock", "changeProp", "setToSlope", "propAbility", "cloneProp");
+    var_0 = scripts\engine\utility::ref_143B0("lock", "changeProp", "setToSlope", "propAbility", "cloneProp");
 
     if(!isDefined(var_0)) {
       continue;
@@ -188,62 +188,62 @@ function ref_128f5() {
     waittillframeend();
 
     if(var_0 == "lock") {
-      ref_128f9();
+      ref_128F9();
       continue;
     }
 
     if(var_0 == "changeProp") {
-      ref_128da();
+      ref_128DA();
       continue;
     }
 
     if(var_0 == "setToSlope") {
-      ref_128fa();
+      ref_128FA();
       continue;
     }
 
     if(var_0 == "propAbility") {
-      ref_128d3();
+      ref_128D3();
       continue;
     }
 
     if(var_0 == "cloneProp") {
-      ref_128e2();
+      ref_128E2();
     }
   }
 }
 
-function ref_128f9() {
+function ref_128F9() {
   if(self ismantling()) {
     return;
   }
 
   if(self.lock) {
-    ref_13f1d();
+    ref_13F1D();
     return;
   }
 
-  ref_119a1();
+  ref_119A1();
 }
 
-function ref_12b34(var_0) {
+function ref_12B34(var_0) {
   var_1 = 3;
 
-  if(!isDefined(var_0.ref_1406e)) {
-    var_0.ref_1406e = 0;
+  if(!isDefined(var_0.ref_1406E)) {
+    var_0.ref_1406E = 0;
   }
 
-  var_0.ref_1406d[var_0.ref_1406e] = var_0.prop.info;
-  var_0.ref_1406e++;
+  var_0.ref_1406D[var_0.ref_1406E] = var_0.prop.info;
+  var_0.ref_1406E++;
 
-  if(var_0.ref_1406e >= var_1) {
-    var_0.ref_1406e = 0;
+  if(var_0.ref_1406E >= var_1) {
+    var_0.ref_1406E = 0;
     return;
   }
 }
 
-function ref_128da(var_0) {
-  if(!ref_128ee() && !istrue(var_0)) {
+function ref_128DA(var_0) {
+  if(!ref_128EE() && !istrue(var_0)) {
     return;
   }
 
@@ -258,37 +258,37 @@ function ref_128da(var_0) {
   }
 
   self notify("changed_prop");
-  ref_12b34(self);
+  ref_12B34(self);
   self.prop.info = scripts\mp\gametypes\br_gametype_prop::reset_search_spot_light_nodes(self);
-  ref_128dc(self.prop.info);
+  ref_128DC(self.prop.info);
   self.maxhealth = int(scripts\mp\gametypes\br_gametype_prop::revive_stim(self.prop.info));
   self setnormalhealth(1);
   ref_13177(self.initplayerplunderevents);
   ref_13177("CLONE");
 
-  if(scripts\mp\gametypes\br_gametype_prop::ref_1408e()) {
+  if(scripts\mp\gametypes\br_gametype_prop::ref_1408E()) {
     self.armor_piercing.alpha = 1;
     self.heli_boss.alpha = 1;
   }
 
   if(!istrue(var_0)) {
-    ref_128e6();
+    ref_128E6();
     return;
   }
 }
 
-function ref_128ee() {
+function ref_128EE() {
   return self.getbrplayersnoteliminated > 0;
 }
 
-function ref_128e6() {
-  ref_1290a(self.getbrplayersnoteliminated - 1);
+function ref_128E6() {
+  ref_1290A(self.getbrplayersnoteliminated - 1);
 }
 
-function ref_1290a(var_0) {
+function ref_1290A(var_0) {
   self.getbrplayersnoteliminated = var_0;
 
-  if(scripts\mp\gametypes\br_gametype_prop::ref_1408e()) {
+  if(scripts\mp\gametypes\br_gametype_prop::ref_1408E()) {
     self.getbrgametypedata setvalue(self.getbrplayersnoteliminated);
 
     if(self.getbrplayersnoteliminated <= 0) {
@@ -307,18 +307,18 @@ function ref_1290a(var_0) {
   self setclientomnvar("ui_ph_num_changes_left", self.getbrplayersnoteliminated);
 }
 
-function ref_128dc(var_0) {
+function ref_128DC(var_0) {
   self.prop.info = var_0;
-  self.ref_128f4 = var_0;
+  self.ref_128F4 = var_0;
   self.prop setModel(var_0.modelname);
-  self.prop.ref_1467e = var_0.ref_1467e;
+  self.prop.ref_1467E = var_0.ref_1467E;
   self.prop.building_roof_chopper_reenforce = var_0.building_roof_chopper_reenforce;
   self.prop unlink();
-  self.ref_128ea unlink();
-  self.ref_128ea.origin = self.ref_128d7.origin;
-  self.prop.origin = self.ref_128ea.origin;
-  self.ref_128ea.angles = (self.angles[0], self.ref_128ea.angles[1], self.angles[2]);
-  self.prop.angles = self.ref_128ea.angles;
+  self.ref_128EA unlink();
+  self.ref_128EA.origin = self.ref_128D7.origin;
+  self.prop.origin = self.ref_128EA.origin;
+  self.ref_128EA.angles = (self.angles[0], self.ref_128EA.angles[1], self.angles[2]);
+  self.prop.angles = self.ref_128EA.angles;
 
   if(istrue(self.turret_guncourse_think)) {
     self.prop.angles = self.angles;
@@ -327,35 +327,35 @@ function ref_128dc(var_0) {
 
   scripts\mp\gametypes\br_gametype_prop::calculateobjectivesheld();
   scripts\mp\gametypes\br_gametype_prop::cache1_defender_after_spawn();
-  self.prop linkTo(self.ref_128ea, "J_prop_1");
+  self.prop linkTo(self.ref_128EA, "J_prop_1");
 
   if(self.ref_13414 && istrue(self.lock)) {
-    ref_130a7(self.ref_128ea, self.prop);
+    ref_130A7(self.ref_128EA, self.prop);
   }
 
-  self.ref_128ea linkTo(self.ref_128d7);
-  self.ref_13b30 = var_0.ref_12905;
-  self.ref_13b2f = var_0.ref_128f1;
-  self setcamerathirdperson(1, self.ref_13b30, self.ref_13b2f);
+  self.ref_128EA linkTo(self.ref_128D7);
+  self.ref_13B30 = var_0.ref_12905;
+  self.ref_13B2F = var_0.ref_128F1;
+  self setcamerathirdperson(1, self.ref_13B30, self.ref_13B2F);
 }
 
-function ref_128fa() {
+function ref_128FA() {
   if(!istrue(self.ref_13414)) {
     self.ref_13414 = 1;
 
     if(istrue(self.lock)) {
-      self.ref_128ea unlink();
-      ref_130a7(self.ref_128ea, self.prop);
-      self.ref_128ea linkTo(self.ref_128d7);
+      self.ref_128EA unlink();
+      ref_130A7(self.ref_128EA, self.prop);
+      self.ref_128EA linkTo(self.ref_128D7);
     }
 
-    if(scripts\mp\gametypes\br_gametype_prop::ref_1408e()) {
+    if(scripts\mp\gametypes\br_gametype_prop::ref_1408E()) {
       if(scripts\engine\utility::is_player_gamepad_enabled()) {
-        self.ref_11b3d.label = &"MP_PH/SLOPED";
+        self.ref_11B3D.label = &"MP_PH/SLOPED";
         return;
       }
 
-      self.ref_11b3d.label = &"MP_PH/SLOPED_PC";
+      self.ref_11B3D.label = &"MP_PH/SLOPED_PC";
       return;
     }
 
@@ -366,53 +366,53 @@ function ref_128fa() {
   self.ref_13414 = 0;
 
   if(istrue(self.lock)) {
-    self.ref_128ea unlink();
-    self.ref_128ea.angles = (self.angles[0], self.ref_128ea.angles[1], self.angles[2]);
-    self.ref_128ea.origin = self.ref_128d7.origin;
-    self.ref_128ea linkTo(self.ref_128d7);
+    self.ref_128EA unlink();
+    self.ref_128EA.angles = (self.angles[0], self.ref_128EA.angles[1], self.angles[2]);
+    self.ref_128EA.origin = self.ref_128D7.origin;
+    self.ref_128EA linkTo(self.ref_128D7);
   }
 
-  if(scripts\mp\gametypes\br_gametype_prop::ref_1408e()) {
+  if(scripts\mp\gametypes\br_gametype_prop::ref_1408E()) {
     if(scripts\engine\utility::is_player_gamepad_enabled()) {
-      self.ref_11b3d.label = &"MP_PH/SLOPE";
+      self.ref_11B3D.label = &"MP_PH/SLOPE";
       return;
     }
 
-    self.ref_11b3d.label = &"MP_PH/SLOPE_PC";
+    self.ref_11B3D.label = &"MP_PH/SLOPE_PC";
     return;
   }
 
   self setclientomnvar("ui_ph_matching_slope", 0);
 }
 
-function ref_128d3() {
-  if(ref_128f0()) {
+function ref_128D3() {
+  if(ref_128F0()) {
     thread player_name_who_broke_stealth();
-    ref_128e8();
+    ref_128E8();
     return;
   }
 }
 
-function ref_128e2() {
-  if(ref_128ef()) {
+function ref_128E2() {
+  if(ref_128EF()) {
     thread heli_boss_logic();
-    thread ref_128e7();
+    thread ref_128E7();
     return;
   }
 }
 
-function ref_128ef() {
+function ref_128EF() {
   return self.heli_boss_shoot > 0;
 }
 
-function ref_128e7() {
-  ref_1290b(self.heli_boss_shoot - 1);
+function ref_128E7() {
+  ref_1290B(self.heli_boss_shoot - 1);
 }
 
-function ref_1290b(var_0) {
+function ref_1290B(var_0) {
   self.heli_boss_shoot = var_0;
 
-  if(scripts\mp\gametypes\br_gametype_prop::ref_1408e()) {
+  if(scripts\mp\gametypes\br_gametype_prop::ref_1408E()) {
     self.heli_boss setvalue(self.heli_boss_shoot);
 
     if(self.heli_boss_shoot <= 0) {
@@ -431,18 +431,18 @@ function ref_1290b(var_0) {
   self setclientomnvar("ui_ph_num_clones_left", self.heli_boss_shoot);
 }
 
-function ref_128f0() {
+function ref_128F0() {
   return self.armor_target_vo > 0;
 }
 
-function ref_128e8() {
-  ref_1290c(self.armor_target_vo - 1);
+function ref_128E8() {
+  ref_1290C(self.armor_target_vo - 1);
 }
 
-function ref_1290c(var_0) {
+function ref_1290C(var_0) {
   self.armor_target_vo = var_0;
 
-  if(scripts\mp\gametypes\br_gametype_prop::ref_1408e()) {
+  if(scripts\mp\gametypes\br_gametype_prop::ref_1408E()) {
     self.armor_piercing setvalue(self.armor_target_vo);
 
     if(self.armor_target_vo <= 0) {
@@ -461,7 +461,7 @@ function ref_1290c(var_0) {
   self setclientomnvar("ui_ph_num_flashes_left", self.armor_target_vo);
 }
 
-function ref_130a7(var_0) {
+function ref_130A7(var_0) {
   var_1 = propwaitminigameinit(var_0, 0);
 
   if(!isDefined(var_1)) {
@@ -584,7 +584,7 @@ function ref_12902() {
     } else if(self.lock && !var_0 && var_5) {
       var_2 = 1;
     } else if(self.lock && var_5 && !var_2) {
-      ref_13f1d();
+      ref_13F1D();
     }
 
     var_0 = self.lock;
@@ -592,21 +592,21 @@ function ref_12902() {
   }
 }
 
-function ref_13f1d() {
+function ref_13F1D() {
   self unlink();
 
   if(self.ref_13414) {
-    self.ref_128ea unlink();
-    self.ref_128ea.angles = (self.angles[0], self.ref_128ea.angles[1], self.angles[2]);
-    self.ref_128ea.origin = self.ref_128d7.origin;
-    self.ref_128ea linkTo(self.ref_128d7);
+    self.ref_128EA unlink();
+    self.ref_128EA.angles = (self.angles[0], self.ref_128EA.angles[1], self.angles[2]);
+    self.ref_128EA.origin = self.ref_128D7.origin;
+    self.ref_128EA linkTo(self.ref_128D7);
   }
 
-  self.ref_128d7 linkTo(self);
+  self.ref_128D7 linkTo(self);
   self.lock = 0;
 
-  if(scripts\mp\gametypes\br_gametype_prop::ref_1408e()) {
-    self.ref_119a2.label = &"MP_PH/LOCK";
+  if(scripts\mp\gametypes\br_gametype_prop::ref_1408E()) {
+    self.ref_119A2.label = &"MP_PH/LOCK";
     thread player_origin_inside_subway_car();
     return;
   }
@@ -614,33 +614,33 @@ function ref_13f1d() {
   self setclientomnvar("ui_ph_is_locked", 0);
 }
 
-function ref_119a1() {
+function ref_119A1() {
   if(!get_alive_bots()) {
     return;
   }
 
-  self.ref_128d7 unlink();
-  self.ref_128d7.origin = self.origin;
+  self.ref_128D7 unlink();
+  self.ref_128D7.origin = self.origin;
   var_0 = self getgroundentity();
 
   if(isDefined(var_0) && nuke_vault_suicidebomber_internal(var_0)) {
-    self.ref_128d7 linkTo(var_0);
+    self.ref_128D7 linkTo(var_0);
   }
 
-  self playerlinkTo(self.ref_128d7);
+  self playerlinkTo(self.ref_128D7);
 
   if(self.ref_13414) {
-    self.ref_128ea unlink();
-    ref_130a7(self.ref_128ea, self.prop);
-    self.ref_128ea.origin = self.origin;
-    self.ref_128ea linkTo(self.ref_128d7);
+    self.ref_128EA unlink();
+    ref_130A7(self.ref_128EA, self.prop);
+    self.ref_128EA.origin = self.origin;
+    self.ref_128EA linkTo(self.ref_128D7);
   }
 
   self.lock = 1;
   self notify("locked");
 
-  if(scripts\mp\gametypes\br_gametype_prop::ref_1408e()) {
-    self.ref_119a2.label = &"MP_PH/LOCKED";
+  if(scripts\mp\gametypes\br_gametype_prop::ref_1408E()) {
+    self.ref_119A2.label = &"MP_PH/LOCKED";
     thread player_origin_inside_subway_car();
     return;
   }
@@ -658,14 +658,14 @@ function player_origin_inside_subway_car() {
   level endon("game_ended");
   self notify("flashLockPropKey");
   self endon("flashLockPropKey");
-  var_0 = self.ref_119a2.ref_1384b + 0.75;
-  self.ref_119a2 changefontscaleovertime(0.1);
-  self.ref_119a2.fontscale = var_0;
+  var_0 = self.ref_119A2.ref_1384B + 0.75;
+  self.ref_119A2 changefontscaleovertime(0.1);
+  self.ref_119A2.fontscale = var_0;
   wait 0.1;
 
-  if(isDefined(self.ref_119a2)) {
-    self.ref_119a2 changefontscaleovertime(0.1);
-    self.ref_119a2.fontscale = self.ref_119a2.ref_1384b;
+  if(isDefined(self.ref_119A2)) {
+    self.ref_119A2 changefontscaleovertime(0.1);
+    self.ref_119A2.fontscale = self.ref_119A2.ref_1384B;
     return;
   }
 }
@@ -689,11 +689,11 @@ function ref_12910() {
   level endon("noPropsToSpectate");
   self.ref_12913 = 0;
   self.needdefaultendgameflowonly = 0;
-  jumpiftrue(isDefined(self.ref_136db)) LOC_00000023;
-  self.ref_136db = 0;
+  jumpiftrue(isDefined(self.ref_136DB)) LOC_00000023;
+  self.ref_136DB = 0;
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143ac("spectate");
+    var_0 = scripts\engine\utility::ref_143AC("spectate");
 
     if(self.needdefaultendgameflowonly) {
       continue;
@@ -707,12 +707,12 @@ function ref_12910() {
 
       scripts\mp\gametypes\br_gametype_prop::init_swivelroom_variables();
 
-      if(self.ref_136d7.size <= 1) {
+      if(self.ref_136D7.size <= 1) {
         continue;
       }
 
       self.ref_12913 = 1;
-      ref_128d4(0);
+      ref_128D4(0);
       thread ref_12911();
       GscBinSkip4(0x35);
     }
@@ -723,15 +723,15 @@ function ref_12912() {
   self endon("endPropSpectate");
 
   if(getkeypadomnvarbitpackinginfo()) {
-    ref_136dd();
+    ref_136DD();
     goto LOC_00000026;
   }
 
   play_travel_vo(1);
-  ref_136dd();
+  ref_136DD();
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143ad("zoomin", "zoomout");
+    var_0 = scripts\engine\utility::ref_143AD("zoomin", "zoomout");
 
     if(self.needdefaultendgameflowonly) {
       continue;
@@ -740,19 +740,19 @@ function ref_12912() {
     if(var_0 == "zoomin") {
       play_travel_vo(1);
       getkeypadomnvarbitpackinginfo();
-      ref_11dba();
+      ref_11DBA();
     }
 
     if(var_0 == "zoomout") {
       play_travel_vo(0);
       getkeypadomnvarbitpackinginfo();
-      ref_11dba();
+      ref_11DBA();
     }
   }
 }
 
 function getkeypadomnvarbitpackinginfo() {
-  var_0 = self.ref_136d7[self.ref_136db];
+  var_0 = self.ref_136D7[self.ref_136DB];
 
   if(!isDefined(var_0)) {
     return false;
@@ -770,22 +770,22 @@ function getkeypadomnvarbitpackinginfo() {
 }
 
 function play_travel_vo(var_0) {
-  var_1 = self.ref_136db;
+  var_1 = self.ref_136DB;
 
   for(;;) {
     if(istrue(var_0)) {
-      self.ref_136db++;
+      self.ref_136DB++;
     } else {
-      self.ref_136db--;
+      self.ref_136DB--;
     }
 
-    if(var_0 && self.ref_136d7.size <= self.ref_136db) {
-      self.ref_136db = 0;
-    } else if(self.ref_136db < 0) {
-      self.ref_136db = self.ref_136d7.size - 1;
+    if(var_0 && self.ref_136D7.size <= self.ref_136DB) {
+      self.ref_136DB = 0;
+    } else if(self.ref_136DB < 0) {
+      self.ref_136DB = self.ref_136D7.size - 1;
     }
 
-    if(self.ref_136db == var_1) {
+    if(self.ref_136DB == var_1) {
       break;
     }
 
@@ -806,81 +806,81 @@ function ref_12911() {
 
   self.needdefaultendgameflowonly = 1;
   lb_mg_impulse_dmg_factor_low();
-  ref_12ce7();
+  ref_12CE7();
   waittillframeend();
-  ref_128d4(1);
+  ref_128D4(1);
   self.ref_12913 = 0;
   self.needdefaultendgameflowonly = 0;
 }
 
 function init_swivelroom_obj() {
-  self.ref_136d9 = scripts\mp\hud_util::createfontstring("default", 1);
-  self.ref_136d9.label = &"MP_PH/SPECCOMMANDS";
-  self.ref_136d9.x = 20;
-  self.ref_136d9.y = -80;
-  self.ref_136d9.alignx = "center";
-  self.ref_136d9.aligny = "middle";
-  self.ref_136d9.horzalign = "center_adjustable";
-  self.ref_136d9.vertalign = "bottom_adjustable";
-  self.ref_136d9.archived = 1;
-  self.ref_136d9.fontscale = 1;
-  self.ref_136d9.alpha = 1;
-  self.ref_136d9.glowalpha = 0.5;
-  self.ref_136d9.hidewheninmenu = 0;
+  self.ref_136D9 = scripts\mp\hud_util::createfontstring("default", 1);
+  self.ref_136D9.label = &"MP_PH/SPECCOMMANDS";
+  self.ref_136D9.x = 20;
+  self.ref_136D9.y = -80;
+  self.ref_136D9.alignx = "center";
+  self.ref_136D9.aligny = "middle";
+  self.ref_136D9.horzalign = "center_adjustable";
+  self.ref_136D9.vertalign = "bottom_adjustable";
+  self.ref_136D9.archived = 1;
+  self.ref_136D9.fontscale = 1;
+  self.ref_136D9.alpha = 1;
+  self.ref_136D9.glowalpha = 0.5;
+  self.ref_136D9.hidewheninmenu = 0;
 }
 
 function lb_mg_impulse_dmg_factor_low() {
-  if(isDefined(self.ref_136d9)) {
-    self.ref_136d9 destroy();
+  if(isDefined(self.ref_136D9)) {
+    self.ref_136D9 destroy();
     return;
   }
 }
 
-function ref_136dd() {
-  var_0 = self.ref_136d7[self.ref_136db];
-  self.ref_136df = var_0;
-  self.ref_128d7 unlink();
-  self.ref_128d7.origin = self.origin;
+function ref_136DD() {
+  var_0 = self.ref_136D7[self.ref_136DB];
+  self.ref_136DF = var_0;
+  self.ref_128D7 unlink();
+  self.ref_128D7.origin = self.origin;
   self setOrigin(var_0.origin);
   self.angles = var_0.angles;
-  self playerlinkTo(var_0.ref_128d7);
+  self playerlinkTo(var_0.ref_128D7);
 }
 
-function ref_11dba() {
-  var_0 = self.ref_136d7[self.ref_136db];
+function ref_11DBA() {
+  var_0 = self.ref_136D7[self.ref_136DB];
   self unlink();
   self.origin = var_0.origin;
   self.angles = var_0.angles;
-  self playerlinkTo(var_0.ref_128d7);
+  self playerlinkTo(var_0.ref_128D7);
 }
 
-function ref_12ce7() {
+function ref_12CE7() {
   self unlink();
-  self setOrigin(self.ref_128d7.origin);
+  self setOrigin(self.ref_128D7.origin);
 
   if(self.lock) {
-    self playerlinkTo(self.ref_128d7);
+    self playerlinkTo(self.ref_128D7);
     return;
   }
 
-  self.ref_128d7 linkTo(self);
-  self.ref_128d7.origin = self.origin;
+  self.ref_128D7 linkTo(self);
+  self.ref_128D7.origin = self.origin;
 }
 
-function ref_11ebc() {
+function ref_11EBC() {
   level endon("game_ended");
   level waittill("noPropsToSpectate");
-  ref_12e52(self.ref_136da);
+  ref_12E52(self.ref_136DA);
 }
 
-function ref_128d9() {
+function ref_128D9() {
   self endon("death_or_disconnect");
   level endon("game_ended");
   var_0 = 10;
-  self.ref_13b30 = self.prop.info.ref_12905;
+  self.ref_13B30 = self.prop.info.ref_12905;
 
   for(;;) {
-    var_1 = scripts\engine\utility::ref_143ad("zoomin", "zoomout");
+    var_1 = scripts\engine\utility::ref_143AD("zoomin", "zoomout");
 
     if(istrue(self.needdefaultendgameflowonly)) {
       continue;
@@ -895,24 +895,24 @@ function ref_128d9() {
     }
 
     if(var_1 == "zoomin") {
-      if(self.ref_13b30 - var_0 < 50) {
+      if(self.ref_13B30 - var_0 < 50) {
         continue;
       }
 
-      self.ref_13b30 -= var_0;
-      self setcamerathirdperson(1, self.ref_13b30, self.ref_13b2f);
+      self.ref_13B30 -= var_0;
+      self setcamerathirdperson(1, self.ref_13B30, self.ref_13B2F);
       continue;
     }
 
     if(var_1 == "zoomout") {
       var_2 = clamp(self.prop.info.ref_12905 + 50, 50, 360);
 
-      if(self.ref_13b30 + var_0 > var_2) {
+      if(self.ref_13B30 + var_0 > var_2) {
         continue;
       }
 
-      self.ref_13b30 += var_0;
-      self setcamerathirdperson(1, self.ref_13b30, self.ref_13b2f);
+      self.ref_13B30 += var_0;
+      self setcamerathirdperson(1, self.ref_13B30, self.ref_13B2F);
     }
   }
 }
@@ -922,12 +922,12 @@ function ref_12908() {
   level endon("game_ended");
 
   for(;;) {
-    if(self adsButtonPressed(1) && !istrue(self.ref_128ea.ref_136f1)) {
-      self.ref_128ea scriptmodelpauseanim(0);
-      self.ref_128ea.ref_136f1 = 1;
-    } else if(!self adsButtonPressed(1) && istrue(self.ref_128ea.ref_136f1)) {
-      self.ref_128ea scriptmodelpauseanim(1);
-      self.ref_128ea.ref_136f1 = 0;
+    if(self adsButtonPressed(1) && !istrue(self.ref_128EA.ref_136F1)) {
+      self.ref_128EA scriptmodelpauseanim(0);
+      self.ref_128EA.ref_136F1 = 1;
+    } else if(!self adsButtonPressed(1) && istrue(self.ref_128EA.ref_136F1)) {
+      self.ref_128EA scriptmodelpauseanim(1);
+      self.ref_128EA.ref_136F1 = 0;
     }
 
     wait 0.05;
@@ -951,14 +951,14 @@ function ref_13177(var_0, var_1) {
         var_1 = level.ref_12315.settings.ref_12904;
       }
 
-      ref_1290c(var_1);
+      ref_1290C(var_1);
       break;
     case "CLONE":
       if(!isDefined(var_1)) {
         var_1 = level.ref_12315.settings.ref_12903;
       }
 
-      ref_1290b(var_1);
+      ref_1290B(var_1);
       break;
     default:
       break;
@@ -1000,7 +1000,7 @@ function player_name_who_broke_stealth(var_0, var_1) {
       continue;
     }
 
-    if(!isDefined(var_3) || !isalive(var_3) || !isDefined(var_3.team) || var_3 scripts\mp\gametypes\br_gametype_prop::ref_125f0()) {
+    if(!isDefined(var_3) || !isalive(var_3) || !isDefined(var_3.team) || var_3 scripts\mp\gametypes\br_gametype_prop::ref_125F0()) {
       continue;
     }
 
@@ -1054,13 +1054,13 @@ function applyflash(var_0, var_1, var_2, var_3, var_4, var_5) {
 function lastdirty() {
   var_0 = 9;
 
-  if(self.ref_128e3.size + 1 <= var_0) {
+  if(self.ref_128E3.size + 1 <= var_0) {
     return;
   }
 
   var_1 = 0;
 
-  foreach(var_3 in self.ref_128e3) {
+  foreach(var_3 in self.ref_128E3) {
     if(isDefined(var_3)) {
       var_1++;
     }
@@ -1073,8 +1073,8 @@ function lastdirty() {
   var_5 = [];
   var_6 = undefined;
 
-  for(var_7 = 0; var_7 < self.ref_128e3.size; var_7++) {
-    var_3 = self.ref_128e3[var_7];
+  for(var_7 = 0; var_7 < self.ref_128E3.size; var_7++) {
+    var_3 = self.ref_128E3[var_7];
 
     if(!isDefined(var_3)) {
       continue;
@@ -1090,12 +1090,12 @@ function lastdirty() {
 
   var_6 notify("maxDelete");
   var_6 delete();
-  self.ref_128e3 = var_5;
+  self.ref_128E3 = var_5;
 }
 
 function heli_boss_logic() {
-  if(!isDefined(self.ref_128e3)) {
-    self.ref_128e3 = [];
+  if(!isDefined(self.ref_128E3)) {
+    self.ref_128E3 = [];
   } else {
     lastdirty();
   }
@@ -1110,7 +1110,7 @@ function heli_boss_logic() {
   var_0 thread scripts\mp\damage::monitordamage(var_0.health, "hitequip", &heli_audio, &is_station_active);
   var_0 thread scripts\mp\gametypes\br_gametype_prop::spawn_exfil_techo(game["defenders"], "outline_nodepth_orange");
   var_0 scripts\mp\sentientpoolmanager::registersentient("Tactical_Static", self.team);
-  self.ref_128e3[self.ref_128e3.size] = var_0;
+  self.ref_128E3[self.ref_128E3.size] = var_0;
 }
 
 function is_station_active(var_0) {
@@ -1196,58 +1196,58 @@ function patched_collision(var_0, var_1, var_2) {
   var_3.alpha = 0;
   wait var_2;
   waitframe();
-  ref_12e52(var_3);
+  ref_12E52(var_3);
 }
 
-function ref_144f6() {
+function ref_144F6() {
   self endon("death_or_disconnect");
   self notifyonplayercommand("specialGrenade", "+smoke");
 
   for(;;) {
     self waittill("specialGrenade");
-    self.ref_13b5e += 1;
+    self.ref_13B5E += 1;
   }
 }
 
 function spawn_carried_punchcard_if_player_down() {
   level waittill("game_ended");
 
-  if(scripts\mp\gametypes\br_gametype_prop::ref_1408e()) {
+  if(scripts\mp\gametypes\br_gametype_prop::ref_1408E()) {
     level.monitor_player_plundercount.alpha = 0;
-    level.ref_12315.ref_145bb.alpha = 0;
-    level.ref_145bc.alpha = 0;
+    level.ref_12315.ref_145BB.alpha = 0;
+    level.ref_145BC.alpha = 0;
   }
 
   foreach(var_1 in level.players) {
-    ref_128d4(var_1, 0);
+    ref_128D4(var_1, 0);
   }
 }
 
-function ref_12e64(var_0, var_1) {
+function ref_12E64(var_0, var_1) {
   if(isDefined(var_0)) {
     var_0.alpha = var_1;
     return;
   }
 }
 
-function ref_128d4(var_0, var_1) {
+function ref_128D4(var_0, var_1) {
   if(istrue(var_0)) {
     var_2 = 1;
   } else {
     var_2 = 0;
   }
 
-  if(scripts\mp\gametypes\br_gametype_prop::ref_1408e() || istrue(var_2)) {
-    ref_12e64(self.getbrgametypedata, var_2);
-    ref_12e64(self.ref_136f2, var_2);
-    ref_12e64(self.ref_119a2, var_2);
-    ref_12e64(self.ref_11b3d, var_2);
-    ref_12e64(self.armor_piercing, var_2);
-    ref_12e64(self.heli_boss, var_2);
-    ref_12e64(self.ref_1472b, var_2);
+  if(scripts\mp\gametypes\br_gametype_prop::ref_1408E() || istrue(var_2)) {
+    ref_12E64(self.getbrgametypedata, var_2);
+    ref_12E64(self.ref_136F2, var_2);
+    ref_12E64(self.ref_119A2, var_2);
+    ref_12E64(self.ref_11B3D, var_2);
+    ref_12E64(self.armor_piercing, var_2);
+    ref_12E64(self.heli_boss, var_2);
+    ref_12E64(self.ref_1472B, var_2);
 
-    if(!istrue(level.ref_11eb9)) {
-      ref_12e64(self.ref_136da, var_2);
+    if(!istrue(level.ref_11EB9)) {
+      ref_12E64(self.ref_136DA, var_2);
       return;
     }
 

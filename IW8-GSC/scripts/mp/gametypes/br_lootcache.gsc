@@ -4,7 +4,7 @@
 *************************************************/
 
 function brlootcache_init() {
-  scripts\engine\scriptable::ref_12f5b("body", &lootcacheused);
+  scripts\engine\scriptable::ref_12F5B("body", &lootcacheused);
   var_0 = getDvar("scr_br_debug_loot_name", "");
   var_1 = getDvar("scr_br_debug_loot_probability", 0);
   var_2 = strtok(var_0, " ");
@@ -20,7 +20,7 @@ function brlootcache_init() {
     var_5 = spawnStruct();
     var_5.name = var_2[var_4];
     var_6 = int(min(var_4, var_3.size - 1));
-    var_5.ref_1289a = float(var_3[var_6]);
+    var_5.ref_1289A = float(var_3[var_6]);
     level.dummy_backpack[level.dummy_backpack.size] = var_5;
   }
 
@@ -30,7 +30,7 @@ function brlootcache_init() {
   }
 
   level.dummy_hint = [];
-  thread ref_119ff();
+  thread ref_119FF();
 }
 
 function get_bonus_targets(var_0) {
@@ -44,7 +44,7 @@ function get_bonus_targets(var_0) {
     }
   }
 
-  if(var_0 == "brloot_respawn_token" && scripts\mp\gametypes\br_pickups::ref_12cb6()) {
+  if(var_0 == "brloot_respawn_token" && scripts\mp\gametypes\br_pickups::ref_12CB6()) {
     return false;
   }
 
@@ -55,7 +55,7 @@ function get_bonus_targets(var_0) {
   return true;
 }
 
-function ref_11a41(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+function ref_11A41(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(istrue(var_4)) {
     var_9 = 35;
 
@@ -88,7 +88,7 @@ function ref_11a41(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   var_16 = undefined;
 
   if(scripts\mp\gametypes\br_gametypes::tutorial_showtext("pickupModifyCount")) {
-    var_15 = scripts\mp\gametypes\br_gametypes::ref_12e07("pickupModifyCount", var_5, var_14, var_15, var_6);
+    var_15 = scripts\mp\gametypes\br_gametypes::ref_12E07("pickupModifyCount", var_5, var_14, var_15, var_6);
   }
 
   if(isDefined(self.intro_moveplayercliphack)) {
@@ -115,7 +115,7 @@ function ref_11a41(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   goto LOC_00000211;
 }
 
-function ref_11a42(var_0, var_1, var_2, var_3, var_4) {
+function ref_11A42(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [];
   var_6 = 0;
   var_7 = scripts\mp\gametypes\br_pickups::test_ai_anim();
@@ -143,12 +143,12 @@ function ref_11a42(var_0, var_1, var_2, var_3, var_4) {
 
   foreach(var_10 in var_8) {
     if(scripts\mp\gametypes\br_weapons::vandalize_attack_max_cooldown(var_10)) {
-      var_5 = ref_11a41(var_10, var_7, self.origin, self.angles, var_1, 1, var_2, var_3, 1);
+      var_5 = ref_11A41(var_10, var_7, self.origin, self.angles, var_1, 1, var_2, var_3, 1);
       self.itemsdropped++;
       var_14 = scripts\mp\gametypes\br_weapons::br_ammo_type_for_weapon(var_10);
 
       if(isDefined(var_14)) {
-        var_5 = ref_11a41(var_14, var_7, self.origin, self.angles, var_1, 1, var_2, var_3);
+        var_5 = ref_11A41(var_14, var_7, self.origin, self.angles, var_1, 1, var_2, var_3);
         self.itemsdropped++;
       }
 
@@ -158,11 +158,11 @@ function ref_11a42(var_0, var_1, var_2, var_3, var_4) {
     var_15 = level.br_pickups.delay_hide_player_clip[var_10];
 
     if(isDefined(var_15) && var_15 == 4 && var_6 == 0) {
-      var_5 = ref_11a41(var_10, var_7, self.origin, self.angles, var_1, 1, var_2, var_3);
+      var_5 = ref_11A41(var_10, var_7, self.origin, self.angles, var_1, 1, var_2, var_3);
       self.itemsdropped++;
       var_6 = 1;
     } else {
-      var_5 = ref_11a41(var_10, var_7, self.origin, self.angles, var_1, 0, var_2, var_3);
+      var_5 = ref_11A41(var_10, var_7, self.origin, self.angles, var_1, 0, var_2, var_3);
       self.itemsdropped++;
     }
   }
@@ -170,8 +170,8 @@ function ref_11a42(var_0, var_1, var_2, var_3, var_4) {
   return var_5;
 }
 
-function ref_11a02(var_0, var_1) {
-  return ref_11a42(var_0, 1, var_1);
+function ref_11A02(var_0, var_1) {
+  return ref_11A42(var_0, 1, var_1);
 }
 
 function heli_flyloop(var_0) {
@@ -195,7 +195,7 @@ function heli_flyloop(var_0) {
   self setscriptablepartstate(var_0, "closing");
 
   if(scripts\mp\gametypes\br_publicevent_restock::use_dropkit_marker()) {
-    scripts\mp\gametypes\br_publicevent_restock::ref_12c00();
+    scripts\mp\gametypes\br_publicevent_restock::ref_12C00();
     return;
   }
 }
@@ -205,7 +205,7 @@ function lootcacheused(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  if(istrue(var_3 scripts\mp\gametypes\br_gametypes::ref_12e05("playerSkipLootPickup", var_0))) {
+  if(istrue(var_3 scripts\mp\gametypes\br_gametypes::ref_12E05("playerSkipLootPickup", var_0))) {
     return;
   }
 
@@ -220,7 +220,7 @@ function lootcacheused(var_0, var_1, var_2, var_3, var_4) {
       var_0 setscriptablepartstate(var_1, "opening_nocol");
     }
 
-    if(isDefined(var_0) && isDefined(var_0.ref_1406c)) {
+    if(isDefined(var_0) && isDefined(var_0.ref_1406C)) {
       thread[[var_0._id_1406C]](var_0, var_1, var_2, var_3, var_4);
     }
 
@@ -228,10 +228,10 @@ function lootcacheused(var_0, var_1, var_2, var_3, var_4) {
     thread allow_forward_factor(var_0, var_1, var_2, var_3, var_4);
 
     if(scripts\mp\gametypes\br_gametypes::tutorial_showtext("addSpawnLootContents")) {
-      var_0 thread scripts\mp\gametypes\br_gametypes::ref_12e05("addSpawnLootContents");
+      var_0 thread scripts\mp\gametypes\br_gametypes::ref_12E05("addSpawnLootContents");
     }
 
-    scripts\mp\gametypes\br_plunder::ref_11c91("br_loot_cache", -1);
+    scripts\mp\gametypes\br_plunder::ref_11C91("br_loot_cache", -1);
 
     if(isDefined(var_0.type) && var_0.type == "br_loot_cache_rogue") {
       var_3 thread scripts\mp\utility\points::giveunifiedpoints("br_rogueCacheOpen");
@@ -248,20 +248,20 @@ function lootcacheused(var_0, var_1, var_2, var_3, var_4) {
 
     var_3 scripts\cp\vehicles\vehicle_compass_cp::ref_12002();
 
-    if(!isDefined(var_3.ref_11a01)) {
-      var_3.ref_11a01 = 1;
+    if(!isDefined(var_3.ref_11A01)) {
+      var_3.ref_11A01 = 1;
     } else {
-      var_3.ref_11a01++;
+      var_3.ref_11A01++;
     }
 
-    var_3 scripts\mp\utility\stats::setextrascore1(var_3.ref_11a01);
+    var_3 scripts\mp\utility\stats::setextrascore1(var_3.ref_11A01);
 
     if(istrue(level.setplayerselfrevivingextrainfo)) {
       var_3 thread _getactualcost::ref_12120(var_0.type, var_0, var_3.calloutarea);
     }
 
     if(scripts\mp\gametypes\br_gametypes::tutorial_showtext("lootCacheOpened")) {
-      var_3 thread scripts\mp\gametypes\br_gametypes::ref_12e05("lootCacheOpened", var_0);
+      var_3 thread scripts\mp\gametypes\br_gametypes::ref_12E05("lootCacheOpened", var_0);
     }
 
     var_8 = scripts\mp\gametypes\br_vip_quest::getplayervipquest(var_3);
@@ -298,11 +298,11 @@ function allow_forward_factor(var_0, var_1, var_2, var_3, var_4) {
     var_7 = var_0.intel_collected;
   }
 
-  if(isDefined(var_0.ref_12f7f)) {
-    if(isDefined(var_0.ref_12f80)) {
-      var_8 = verifybunkercode(var_0.ref_12f7f, var_0.ref_12f80);
+  if(isDefined(var_0.ref_12F7F)) {
+    if(isDefined(var_0.ref_12F80)) {
+      var_8 = verifybunkercode(var_0.ref_12F7F, var_0.ref_12F80);
     } else {
-      var_8 = verifybunkercode(var_1.ref_12f7f);
+      var_8 = verifybunkercode(var_1.ref_12F7F);
     }
 
     var_8 = scripts\engine\utility::array_randomize(var_8);
@@ -323,14 +323,14 @@ function allow_forward_factor(var_0, var_1, var_2, var_3, var_4) {
   logstring("_lootCacheUsedSpawnPickups " + var_3.type + " " + var_8 + " setIndex = " + var_8 + " items.count = " + var_9);
 
   if(isDefined(var_8)) {
-    var_8 = ref_11a1a(var_8, var_6);
+    var_8 = ref_11A1A(var_8, var_6);
   }
 
   if(isDefined(var_8) && var_6 scripts\mp\utility\perk::_hasperk("specialty_br_extra_killstreak_chance")) {
-    var_8 = ref_11a1d(var_8, var_6);
+    var_8 = ref_11A1D(var_8, var_6);
   }
 
-  var_8 = ref_11a1e(var_8, var_6);
+  var_8 = ref_11A1E(var_8, var_6);
 
   if(isDefined(var_8)) {
     if(getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "rat_race" || getDvar("scr_br_gametype", "") == "risk" || getDvar("scr_br_gametype", "") == "gold_war") {
@@ -344,15 +344,15 @@ function allow_forward_factor(var_0, var_1, var_2, var_3, var_4) {
         var_11 = 100 - 100 * var_10 / level.lootchopper_initspawninfo;
 
         if(isDefined(level.debug_kill_tromeo) && var_11 < level.debug_kill_tromeo) {
-          var_8 = ref_11a1b(var_3, var_8);
-        } else if(isDefined(level.ref_13bdf) && var_11 > level.ref_13bdf) {
-          var_8 = ref_11a1c(var_3, var_8);
+          var_8 = ref_11A1B(var_3, var_8);
+        } else if(isDefined(level.ref_13BDF) && var_11 > level.ref_13BDF) {
+          var_8 = ref_11A1C(var_3, var_8);
         }
       }
     }
 
-    if(isDefined(level.ref_11b50)) {
-      var_8 = ref_11a19(var_8);
+    if(isDefined(level.ref_11B50)) {
+      var_8 = ref_11A19(var_8);
     }
 
     if(var_3.type != "br_reusable_loot_cache") {
@@ -360,8 +360,8 @@ function allow_forward_factor(var_0, var_1, var_2, var_3, var_4) {
     }
 
     if(var_3.type == "br_loot_cache_zom") {
-      if(isDefined(var_3.ref_12f80)) {
-        var_8 = var_3.ref_12f80 % 3;
+      if(isDefined(var_3.ref_12F80)) {
+        var_8 = var_3.ref_12F80 % 3;
       }
 
       wait 0.7;
@@ -384,7 +384,7 @@ function allow_forward_factor(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    var_8 = ref_11a02(var_3, var_8, var_8);
+    var_8 = ref_11A02(var_3, var_8, var_8);
   } else {
     var_19 = (0, 0, 0);
     var_20 = "mp/loot_set_cache_contents_base.csv";
@@ -451,17 +451,17 @@ function allow_forward_factor(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(scripts\mp\gametypes\br_publicevent_restock::use_dropkit_marker()) {
-    var_3 scripts\mp\gametypes\br_publicevent_restock::ref_12cc0();
+    var_3 scripts\mp\gametypes\br_publicevent_restock::ref_12CC0();
   }
 
   foreach(var_26 in var_8) {
     if(isDefined(var_26)) {
-      var_26.ref_11a40 = var_24;
+      var_26.ref_11A40 = var_24;
     }
   }
 }
 
-function ref_11a1b(var_0, var_1) {
+function ref_11A1B(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_1) {
@@ -481,7 +481,7 @@ function ref_11a1b(var_0, var_1) {
   return var_2;
 }
 
-function ref_11a1c(var_0, var_1) {
+function ref_11A1C(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_1) {
@@ -501,7 +501,7 @@ function ref_11a1c(var_0, var_1) {
   return var_2;
 }
 
-function ref_11a19(var_0) {
+function ref_11A19(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -510,7 +510,7 @@ function ref_11a19(var_0) {
       continue;
     }
 
-    if(level.ref_11b50 > level.armoryswitches) {
+    if(level.ref_11B50 > level.armoryswitches) {
       var_1 = var_3;
       level.armoryswitches++;
     }
@@ -560,11 +560,11 @@ function chooseandspawnitems(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_13 = level.br_pickups.delay_hide_player_clip[var_11];
 
       if(isDefined(var_13) && var_13 == 4 && var_7 == 0) {
-        var_6 = ref_11a41(var_11, var_9, self.origin, var_12, undefined, 1);
+        var_6 = ref_11A41(var_11, var_9, self.origin, var_12, undefined, 1);
         self.itemsdropped++;
         var_7 = 1;
       } else {
-        var_6 = ref_11a41(var_11, var_9, self.origin, var_12, undefined, 0);
+        var_6 = ref_11A41(var_11, var_9, self.origin, var_12, undefined, 0);
         self.itemsdropped++;
       }
     }
@@ -573,7 +573,7 @@ function chooseandspawnitems(var_0, var_1, var_2, var_3, var_4, var_5) {
   return var_6;
 }
 
-function ref_11a1d(var_0, var_1) {
+function ref_11A1D(var_0, var_1) {
   if(!isDefined(var_1.display_hint_forced)) {
     var_1.display_hint_forced = 10;
   }
@@ -610,9 +610,9 @@ function ref_11a1d(var_0, var_1) {
   return var_0;
 }
 
-function ref_11a1a(var_0, var_1) {
+function ref_11A1A(var_0, var_1) {
   foreach(var_3 in level.dummy_backpack) {
-    if(var_3.ref_1289a > randomfloat(1)) {
+    if(var_3.ref_1289A > randomfloat(1)) {
       var_0 = var_3.name;
     }
   }
@@ -620,7 +620,7 @@ function ref_11a1a(var_0, var_1) {
   return var_0;
 }
 
-function ref_11a1e(var_0, var_1) {
+function ref_11A1E(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -628,7 +628,7 @@ function ref_11a1e(var_0, var_1) {
   var_2 = getdvarfloat("scr_br_plunder_adjust_prob", 0.8);
 
   if(randomfloat(1) < var_2 && !vehicle_collision_takedamage(var_0)) {
-    if(!ref_1373a(var_1)) {
+    if(!ref_1373A(var_1)) {
       var_0 = "brloot_plunder_cash_uncommon_1";
     }
   }
@@ -650,7 +650,7 @@ function vehicle_collision_takedamage(var_0) {
   return false;
 }
 
-function ref_1373a() {
+function ref_1373A() {
   var_0 = self;
 
   if(!isalive(var_0)) {
@@ -672,15 +672,15 @@ function ref_1373a() {
     }
   }
 
-  var_7 = level.br_armory_kiosk.ref_13ac3;
+  var_7 = level.br_armory_kiosk.ref_13AC3;
   var_8 = var_0 scripts\mp\utility\perk::_hasperk("specialty_br_cheaper_kiosk");
-  var_9 = level.br_armory_kiosk.ref_13ac4;
+  var_9 = level.br_armory_kiosk.ref_13AC4;
 
   if(!isDefined(var_9)) {
     var_9 = 0;
   }
 
-  var_10 = scripts\mp\gametypes\br_armory_kiosk::ai_push_to_position(undefined, level.br_armory_kiosk.ref_13ac2, 0, var_7, var_8, var_9);
+  var_10 = scripts\mp\gametypes\br_armory_kiosk::ai_push_to_position(undefined, level.br_armory_kiosk.ref_13AC2, 0, var_7, var_8, var_9);
 
   if(var_2 && isDefined(var_10) && var_1 < var_10) {
     return false;
@@ -689,7 +689,7 @@ function ref_1373a() {
   return true;
 }
 
-function ref_119ff() {
+function ref_119FF() {
   level endon("game_ended");
   level waittill("prematch_fade_done");
   var_0 = getlootscriptablearrayinradius("br_loot_cache_lege");

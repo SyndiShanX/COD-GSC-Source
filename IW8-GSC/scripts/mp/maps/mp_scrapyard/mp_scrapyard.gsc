@@ -9,7 +9,7 @@ function main() {
   scripts\mp\maps\mp_scrapyard\mp_scrapyard_fx::main();
   scripts\mp\maps\mp_scrapyard\mp_scrapyard_lighting::main();
   scripts\mp\load::main();
-  scripts\cp_mp\utility\game_utility::ref_12b18();
+  scripts\cp_mp\utility\game_utility::ref_12B18();
   setDvar("mantle_force_legacy_system", 1);
   level.music_style = "eastern_europe";
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");

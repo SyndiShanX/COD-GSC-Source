@@ -323,7 +323,7 @@ function objective_icon_init(var_0) {
 
   setdomflagiconinfo(var_1, "neutral", "MP_BR_INGAME/" + var_0, var_2, 0);
   scripts\mp\gametypes\br_dom_quest::ref_13239();
-  thread ref_13bb1();
+  thread ref_13BB1();
 }
 
 function mark_objective_active(var_0) {
@@ -378,7 +378,7 @@ function ref_12424(var_0, var_1) {
     }
 
     var_4.intvar = var_1;
-    var_4.ref_136f3 = var_0;
+    var_4.ref_136F3 = var_0;
     thread ref_12981(var_3);
   }
 }
@@ -400,7 +400,7 @@ function ref_12981(var_0) {
       wait 0.5;
 
       foreach(var_2 in self.isflagcarrymode) {
-        scripts\mp\gametypes\br_quest_util::displayplayersplash(self, var_2.ref_136f3, var_2);
+        scripts\mp\gametypes\br_quest_util::displayplayersplash(self, var_2.ref_136F3, var_2);
       }
 
       self.isflagcarrymode = [];
@@ -464,17 +464,17 @@ function start_objective_domination(var_0, var_1) {
   var_4.iconname = var_2[level.raid_struct.i_objective_index];
   level.raid_struct.i_objective_index++;
   var_5 = scripts\mp\gametypes\obj_dom::setupobjective(var_4, "neutral");
-  var_5.onuse = &ref_122b2;
-  var_5.onbeginuse = &ref_122a8;
-  var_5.onuseupdate = &ref_122b3;
-  var_5.onenduse = &ref_122aa;
-  var_5.oncontested = &ref_122a9;
-  var_5.onuncontested = &ref_122af;
-  var_5.onunoccupied = &ref_122b0;
-  var_5.onpinnedstate = &ref_122ad;
-  var_5.onunpinnedstate = &ref_122b1;
-  var_5.ref_138b2 = &ref_122ae;
-  var_5.stompprogressreward = &ref_122b8;
+  var_5.onuse = &ref_122B2;
+  var_5.onbeginuse = &ref_122A8;
+  var_5.onuseupdate = &ref_122B3;
+  var_5.onenduse = &ref_122AA;
+  var_5.oncontested = &ref_122A9;
+  var_5.onuncontested = &ref_122AF;
+  var_5.onunoccupied = &ref_122B0;
+  var_5.onpinnedstate = &ref_122AD;
+  var_5.onunpinnedstate = &ref_122B1;
+  var_5.ref_138B2 = &ref_122AE;
+  var_5.stompprogressreward = &ref_122B8;
   var_5.id = "domFlag";
   var_5.pinobj = 1;
   var_5.lockupdatingicons = 1;
@@ -487,63 +487,63 @@ function start_objective_domination(var_0, var_1) {
   playencryptedcinematicforall(var_5.objidnum, 1);
   var_5.map_circle = spawnStruct();
   var_5.map_circle scripts\mp\gametypes\br_quest_util::init_tactical_boxes(8, 0, 0, var_0.origin);
-  var_5.map_circle scripts\mp\gametypes\br_quest_util::ref_1316f(var_0.radius);
+  var_5.map_circle scripts\mp\gametypes\br_quest_util::ref_1316F(var_0.radius);
   var_5.map_circle scripts\mp\gametypes\br_quest_util::ref_13369();
   var_5 scripts\mp\objidpoolmanager::objective_teammask_addtomask(var_5.objidnum, level.players[0].team);
-  thread ref_122b9();
-  thread ref_122ba();
+  thread ref_122B9();
+  thread ref_122BA();
   var_5.objective = var_0;
   var_0.ai_encounter = scripts\mp\agents\agent_encounter_manager::start_encounter(var_0.origin, var_1);
 }
 
-function ref_122b9() {
+function ref_122B9() {
   level endon("game_ended");
-  self.ref_1265b = [];
+  self.ref_1265B = [];
 
   while(!self.get_current_bush_zone) {
     self.trigger waittill("trigger", var_0);
 
-    if((isPlayer(var_0) || isbot(var_0)) && !scripts\engine\utility::array_contains(self.ref_1265b, var_0)) {
-      ref_122ab(var_0);
+    if((isPlayer(var_0) || isbot(var_0)) && !scripts\engine\utility::array_contains(self.ref_1265B, var_0)) {
+      ref_122AB(var_0);
     }
 
     waitframe();
   }
 }
 
-function ref_122ab(var_0) {
-  self.ref_1265b = scripts\engine\utility::array_add(self.ref_1265b, var_0);
+function ref_122AB(var_0) {
+  self.ref_1265B = scripts\engine\utility::array_add(self.ref_1265B, var_0);
   var_0.truck_03_node = 1;
 }
 
-function ref_122ba() {
+function ref_122BA() {
   level endon("game_ended");
 
   while(!self.get_current_bush_zone) {
-    foreach(var_1 in self.ref_1265b) {
+    foreach(var_1 in self.ref_1265B) {
       if(!var_1 istouching(self.trigger) || !isalive(var_1)) {
-        ref_122ac(var_1);
+        ref_122AC(var_1);
       }
     }
 
     wait 0.1;
   }
 
-  foreach(var_1 in self.ref_1265b) {
-    ref_122ac(var_1);
+  foreach(var_1 in self.ref_1265B) {
+    ref_122AC(var_1);
   }
 }
 
-function ref_122ac(var_0) {
-  self.ref_1265b = scripts\engine\utility::array_remove(self.ref_1265b, var_0);
+function ref_122AC(var_0) {
+  self.ref_1265B = scripts\engine\utility::array_remove(self.ref_1265B, var_0);
   var_0.truck_03_node = 0;
 }
 
-function ref_122bb(var_0) {
+function ref_122BB(var_0) {
   if(var_0 != self.waittill_pickup_or_timeout) {
     self.waittill_pickup_or_timeout = var_0;
 
-    foreach(var_2 in self.ref_11ad0) {
+    foreach(var_2 in self.ref_11AD0) {
       var_2 scripts\mp\gametypes\br_quest_util::spawn_double_cargo();
     }
 
@@ -554,13 +554,13 @@ function ref_122bb(var_0) {
       var_8 = var_7.team == self.waittill_pickup_or_timeout;
 
       if(var_4) {
-        var_5 = self.ref_11ad0["neutral"];
+        var_5 = self.ref_11AD0["neutral"];
       } else {
-        var_5 = scripts\engine\utility::ter_op(var_8, self.ref_11ad0["ally"], self.ref_11ad0["enemy"]);
+        var_5 = scripts\engine\utility::ter_op(var_8, self.ref_11AD0["ally"], self.ref_11AD0["enemy"]);
       }
 
       if(isDefined(var_5)) {
-        var_5 scripts\mp\gametypes\br_quest_util::ref_1336a(var_7);
+        var_5 scripts\mp\gametypes\br_quest_util::ref_1336A(var_7);
       }
     }
 
@@ -573,7 +573,7 @@ function ref_122bb(var_0) {
   }
 }
 
-function ref_122b2(var_0) {
+function ref_122B2(var_0) {
   var_1 = var_0.team;
   self.get_current_station_signage_structs = var_1;
   self.capturetime = gettime();
@@ -584,14 +584,14 @@ function ref_122b2(var_0) {
   }
 
   self notify("pe_dom_flag_end");
-  thread ref_122a2(var_1);
+  thread ref_122A2(var_1);
 }
 
-function ref_122a8(var_0) {
+function ref_122A8(var_0) {
   self.userate = 1;
 
-  if(!isDefined(self.ref_11f63) || !self.ref_11f63) {
-    self.ref_11f63 = 1;
+  if(!isDefined(self.ref_11F63) || !self.ref_11F63) {
+    self.ref_11F63 = 1;
     var_1 = scripts\mp\utility\teams::getfriendlyplayers(var_0.team, 0);
 
     foreach(var_3 in var_1) {
@@ -602,7 +602,7 @@ function ref_122a8(var_0) {
   }
 }
 
-function ref_122b3(var_0, var_1, var_2, var_3) {
+function ref_122B3(var_0, var_1, var_2, var_3) {
   self.userate = 1;
 
   if(var_1 < 1 && !level.gameended && !istrue(self.get_current_bush_zone)) {
@@ -615,21 +615,21 @@ function ref_122b3(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_122aa(var_0, var_1, var_2) {
+function ref_122AA(var_0, var_1, var_2) {
   scripts\mp\gametypes\obj_dom::dompoint_onuseend(var_0, var_1, var_2);
 }
 
-function ref_122a9() {
+function ref_122A9() {
   scripts\mp\gameobjects::setobjectivestatusicons("waypoint_contested");
   scripts\mp\objidpoolmanager::objective_set_progress_team(self.objidnum, undefined);
   level thread scripts\mp\gametypes\br_public::brleaderdialog("exfil_contested");
   var_0 = scripts\mp\gameobjects::getownerteam();
 }
 
-function ref_122af(var_0) {
+function ref_122AF(var_0) {
   var_1 = scripts\mp\gameobjects::getownerteam();
   var_2 = undefined;
-  var_3 = ref_122a6();
+  var_3 = ref_122A6();
 
   if(var_3 <= 1) {
     foreach(var_5 in level.teamnamelist) {
@@ -660,7 +660,7 @@ function ref_122af(var_0) {
   }
 }
 
-function ref_122a6() {
+function ref_122A6() {
   var_0 = 0;
 
   foreach(var_2 in self.numtouching) {
@@ -672,7 +672,7 @@ function ref_122a6() {
   return var_0;
 }
 
-function ref_122b0() {
+function ref_122B0() {
   var_0 = scripts\mp\gameobjects::getownerteam();
 
   if(var_0 == "neutral") {
@@ -684,21 +684,21 @@ function ref_122b0() {
   self.didstatusnotify = 0;
 }
 
-function ref_122ad(var_0) {
+function ref_122AD(var_0) {
   if(self.ownerteam != "neutral" && self.numtouching[self.ownerteam] && !self.stalemate) {
     scripts\mp\gameobjects::setobjectivestatusicons("waypoint_defending", "waypoint_capture");
     return;
   }
 }
 
-function ref_122b1(var_0) {
+function ref_122B1(var_0) {
   if(self.ownerteam != "neutral" && !self.numtouching[self.ownerteam] && !self.stalemate) {
     scripts\mp\gameobjects::setobjectivestatusicons("waypoint_defend", "waypoint_capture");
     return;
   }
 }
 
-function ref_122ae(var_0) {
+function ref_122AE(var_0) {
   self.userate = level.endgametutorial_func.manualturret_watchturretusetimeout;
   var_1 = scripts\mp\utility\teams::getenemyteams(var_0);
   var_2 = undefined;
@@ -712,7 +712,7 @@ function ref_122ae(var_0) {
   }
 }
 
-function ref_122b8(var_0) {
+function ref_122B8(var_0) {
   var_0 thread scripts\mp\utility\points::giveunifiedpoints("obj_prog_defend");
   scripts\mp\gameobjects::setobjectivestatusicons("waypoint_defending", "waypoint_capture");
 
@@ -737,7 +737,7 @@ function ref_12427(var_0, var_1) {
   }
 }
 
-function ref_122a2(var_0) {
+function ref_122A2(var_0) {
   mark_objective_complete(self.objective);
 
   foreach(var_2 in level.players) {
@@ -754,10 +754,10 @@ function ref_122a2(var_0) {
     var_2 thread scripts\mp\rank::scoreeventpopup("rumble_dom_flag_capture");
   }
 
-  thread ref_122a3(self);
+  thread ref_122A3(self);
 }
 
-function ref_122b4() {
+function ref_122B4() {
   switch (level.raid_struct.a_objectives_completed["domination"].size) {
     case 1:
       level thread scripts\mp\gametypes\br_public::dmztut_endgamewithreward("dom_point_friendly_capture_1", self);
@@ -771,7 +771,7 @@ function ref_122b4() {
   }
 }
 
-function ref_122a3(var_0) {
+function ref_122A3(var_0) {
   var_0.map_circle scripts\mp\gametypes\br_quest_util::lastdirtyscore();
   scripts\mp\gametypes\obj_dom::removeobjective(var_0);
 }
@@ -783,7 +783,7 @@ function subwave_progression(var_0) {
   setdomflagiconinfo("waypoint_captureneutral_br_d", "neutral", "MP_BR_INGAME/DOM_CAPTURE", "icon_waypoint_dom_d", 0);
   setdomflagiconinfo("waypoint_captureneutral_br_e", "neutral", "MP_BR_INGAME/DOM_CAPTURE", "icon_waypoint_dom_e", 0);
   scripts\mp\gametypes\br_dom_quest::ref_13239();
-  thread ref_13bb1();
+  thread ref_13BB1();
 }
 
 function setdomflagiconinfo(var_0, var_1, var_2, var_3, var_4) {
@@ -794,7 +794,7 @@ function setdomflagiconinfo(var_0, var_1, var_2, var_3, var_4) {
   level.waypointpulses[var_0] = var_4;
 }
 
-function ref_13bb1() {
+function ref_13BB1() {
   level waittill("br_dialog_initialized");
   level.disableinitplayergameobjects = 0;
 }
@@ -810,17 +810,17 @@ function start_objective_overwatch(var_0, var_1) {
   var_4.iconname = var_2[level.raid_struct.i_objective_index];
   level.raid_struct.i_objective_index++;
   var_5 = scripts\mp\gametypes\obj_dom::setupobjective(var_4, "neutral");
-  var_5.onuse = &ref_122b2;
-  var_5.onbeginuse = &ref_122a8;
-  var_5.onuseupdate = &ref_122b3;
-  var_5.onenduse = &ref_122aa;
-  var_5.oncontested = &ref_122a9;
-  var_5.onuncontested = &ref_122af;
-  var_5.onunoccupied = &ref_122b0;
-  var_5.onpinnedstate = &ref_122ad;
-  var_5.onunpinnedstate = &ref_122b1;
-  var_5.ref_138b2 = &ref_122ae;
-  var_5.stompprogressreward = &ref_122b8;
+  var_5.onuse = &ref_122B2;
+  var_5.onbeginuse = &ref_122A8;
+  var_5.onuseupdate = &ref_122B3;
+  var_5.onenduse = &ref_122AA;
+  var_5.oncontested = &ref_122A9;
+  var_5.onuncontested = &ref_122AF;
+  var_5.onunoccupied = &ref_122B0;
+  var_5.onpinnedstate = &ref_122AD;
+  var_5.onunpinnedstate = &ref_122B1;
+  var_5.ref_138B2 = &ref_122AE;
+  var_5.stompprogressreward = &ref_122B8;
   var_5.id = "domFlag";
   var_5.pinobj = 0;
   var_5.lockupdatingicons = 1;
@@ -833,11 +833,11 @@ function start_objective_overwatch(var_0, var_1) {
   playencryptedcinematicforall(var_5.objidnum, 1);
   var_5.map_circle = spawnStruct();
   var_5.map_circle scripts\mp\gametypes\br_quest_util::init_tactical_boxes(8, 0, 0, var_0.origin);
-  var_5.map_circle scripts\mp\gametypes\br_quest_util::ref_1316f(var_0.radius);
+  var_5.map_circle scripts\mp\gametypes\br_quest_util::ref_1316F(var_0.radius);
   var_5.map_circle scripts\mp\gametypes\br_quest_util::ref_13369();
   var_5 scripts\mp\objidpoolmanager::objective_teammask_addtomask(var_5.objidnum, level.players[0].team);
-  thread ref_122b9();
-  thread ref_122ba();
+  thread ref_122B9();
+  thread ref_122BA();
   var_5.objective = var_0;
   var_0.ai_encounter = scripts\mp\agents\agent_encounter_manager::start_encounter(var_0.origin, var_1);
 }
@@ -863,7 +863,7 @@ function start_objective_sweep_and_clear(var_0, var_1) {
   playencryptedcinematicforall(var_5.objidnum, 1);
   var_5.map_circle = spawnStruct();
   var_5.map_circle scripts\mp\gametypes\br_quest_util::init_tactical_boxes(8, 0, 0, var_0.origin);
-  var_5.map_circle scripts\mp\gametypes\br_quest_util::ref_1316f(var_0.radius);
+  var_5.map_circle scripts\mp\gametypes\br_quest_util::ref_1316F(var_0.radius);
   var_5.map_circle scripts\mp\gametypes\br_quest_util::ref_13369();
   var_5.objective = var_0;
   thread sweep_and_clear_think();
@@ -883,7 +883,7 @@ function sweep_and_clear_think() {
     }
   }
 
-  thread ref_122a2("allies");
+  thread ref_122A2("allies");
 }
 
 function ___assassination() {}
@@ -904,7 +904,7 @@ function assassination_think() {
   thread assassination_target_distance_watcher();
   var_0 waittill("death");
   self notify("target_found");
-  scripts\mp\objidpoolmanager::returnreservedobjectiveid(self.ref_11f64);
+  scripts\mp\objidpoolmanager::returnreservedobjectiveid(self.ref_11F64);
   self notify("stop_circle_anim");
 
   if(isDefined(self.mapcircle)) {
@@ -981,7 +981,7 @@ function assassination_quest_circle_setup(var_0, var_1, var_2, var_3) {
     objective_setenemylabel(var_12, "MB_BR_INGAME/ASSASSINATE");
     objective_setzoffset(var_12, 100);
     function_0442(var_12, 1);
-    self.ref_11f64 = var_12;
+    self.ref_11F64 = var_12;
     return;
   }
 }
@@ -1023,25 +1023,25 @@ function assassination_quest_circle_animate(var_0, var_1, var_2, var_3) {
       var_8 = (var_7[0], var_7[1], scripts\engine\math::lerp(var_0[2], 0, var_6));
     }
 
-    scripts\mp\gametypes\br_quest_util::ref_11dae(var_8);
+    scripts\mp\gametypes\br_quest_util::ref_11DAE(var_8);
     waitframe();
   }
 }
 
 function assassination_show_target() {
   thread assassination_quest_circle_animate(self.i_circle_step - 1], self.target.origin, 2, 1);
-objective_state(self.ref_11f64, "current");
-objective_setshowoncompass(self.ref_11f64, 0);
-playencryptedcinematicforall(self.ref_11f64, 0);
-function_0442(self.ref_11f64, 0);
-objective_setshowdistance(self.ref_11f64, 1);
-objective_icon(self.ref_11f64, self.str_objective_index);
-objective_setbackground(self.ref_11f64, 0);
-objective_setlabel(self.ref_11f64, "MB_BR_INGAME/ASSASSINATE");
-objective_setneutrallabel(self.ref_11f64, "MB_BR_INGAME/ASSASSINATE");
-objective_setfriendlylabel(self.ref_11f64, "MB_BR_INGAME/ASSASSINATE");
-objective_setenemylabel(self.ref_11f64, "MB_BR_INGAME/ASSASSINATE");
-objective_onentity(self.ref_11f64, self.target);
+objective_state(self.ref_11F64, "current");
+objective_setshowoncompass(self.ref_11F64, 0);
+playencryptedcinematicforall(self.ref_11F64, 0);
+function_0442(self.ref_11F64, 0);
+objective_setshowdistance(self.ref_11F64, 1);
+objective_icon(self.ref_11F64, self.str_objective_index);
+objective_setbackground(self.ref_11F64, 0);
+objective_setlabel(self.ref_11F64, "MB_BR_INGAME/ASSASSINATE");
+objective_setneutrallabel(self.ref_11F64, "MB_BR_INGAME/ASSASSINATE");
+objective_setfriendlylabel(self.ref_11F64, "MB_BR_INGAME/ASSASSINATE");
+objective_setenemylabel(self.ref_11F64, "MB_BR_INGAME/ASSASSINATE");
+objective_onentity(self.ref_11F64, self.target);
 }
 
 function assassination_target_distance_watcher() {

@@ -259,7 +259,7 @@ function dpad_consumable_selection_watch() {
   self.deck_select_ready = 1;
 
   for(;;) {
-    var_1 = scripts\engine\utility::ref_143ae("D_pad_up", "D_pad_down", "fired_super");
+    var_1 = scripts\engine\utility::ref_143AE("D_pad_up", "D_pad_down", "fired_super");
 
     if(self.slot_array.size <= 0 || istrue(self.disable_consumables) || istrue(self.spectating) || istrue(self.inlaststand)) {
       self playlocalsound("ui_consumable_deny");
@@ -1051,7 +1051,7 @@ function downgradeweaponaftertimeout(var_0, var_1, var_2, var_3) {
   var_4 = downgradeweapon(var_1, var_4, var_7, var_8, var_9, var_3);
   var_1.base_weapon = undefined;
   var_1.ephemeral_downgrade = undefined;
-  var_10 = var_1 scripts\engine\utility::ref_143ad("ephemeral_enhancement_timeup", "last_stand");
+  var_10 = var_1 scripts\engine\utility::ref_143AD("ephemeral_enhancement_timeup", "last_stand");
 
   if(var_10 != "ephemeral_enhancement_timeup") {
     var_1 notify(var_0 + "_exited_early");
@@ -1442,7 +1442,7 @@ function removeweaponaftertimeout(var_0, var_1, var_2) {
   self.isusingsupercard = 1;
   self.mpsuperpreviousweapon = var_2;
   scripts\common\utility::allow_reload(0);
-  scripts\engine\utility::ref_143b9(getcharactercardgesturelength() + 1, "super_weapon_given");
+  scripts\engine\utility::ref_143B9(getcharactercardgesturelength() + 1, "super_weapon_given");
   self allowmelee(0);
 
   while(self isswitchingweapon()) {
@@ -1452,7 +1452,7 @@ function removeweaponaftertimeout(var_0, var_1, var_2) {
   self allowmelee(1);
 
   if(self getcurrentweapon() == var_1 && scripts\cp\utility::is_consumable_active(var_0)) {
-    var_3 = scripts\engine\utility::ref_143b1(var_0 + "_timeup", "last_stand", "weapon_switch_started", "weapon_purchased", "coaster_ride_beginning", "cards_replenished");
+    var_3 = scripts\engine\utility::ref_143B1(var_0 + "_timeup", "last_stand", "weapon_switch_started", "weapon_purchased", "coaster_ride_beginning", "cards_replenished");
   } else {
     var_3 = undefined;
   }
@@ -1603,7 +1603,7 @@ function setandremoveinvulnerability() {
   self endon("disconnect");
   level endon("game_ended");
   scripts\cp\utility::adddamagemodifier("near_death_consumable", 0, 0);
-  scripts\engine\utility::ref_143c0(1, "death", "last_stand");
+  scripts\engine\utility::ref_143C0(1, "death", "last_stand");
   scripts\cp\utility::removedamagemodifier("near_death_consumable", 0);
 }
 
@@ -1882,7 +1882,7 @@ function watchmelee() {
   var_0 = (0, 0, 32);
 
   for(;;) {
-    scripts\engine\utility::ref_143a6("melee_fired", "ads_in", "ads_out");
+    scripts\engine\utility::ref_143A6("melee_fired", "ads_in", "ads_out");
     var_1 = self.origin + var_0;
     var_2 = anglesToForward(self.angles);
     var_3 = anglestoright(self.angles);
@@ -1992,7 +1992,7 @@ function watch_for_zombie_touch(var_0) {
 function remove_explosive_touch(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  scripts\engine\utility::ref_143a5(var_0 + "_timeup", var_0 + "_exited_early");
+  scripts\engine\utility::ref_143A5(var_0 + "_timeup", var_0 + "_exited_early");
   self.has_explosive_touch = 0;
   scripts\cp\utility::removedamagemodifier("health_boost", 0);
 
@@ -2070,7 +2070,7 @@ function play_vfx_between_points_marked(var_0, var_1, var_2) {
 }
 
 function deletevfx(var_0) {
-  scripts\engine\utility::ref_143a5(var_0 + "_exited_early", var_0 + "_timeup");
+  scripts\engine\utility::ref_143A5(var_0 + "_exited_early", var_0 + "_timeup");
 }
 
 function outline_enemeies(var_0) {
@@ -2433,7 +2433,7 @@ function use_temporal_increase(var_0) {
 function remove_temporal_increase(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  scripts\engine\utility::ref_143a7(var_0 + "_timeup", "disconnect", "death", var_0 + "_exited_early");
+  scripts\engine\utility::ref_143A7(var_0 + "_timeup", "disconnect", "death", var_0 + "_exited_early");
   self.temporal_increase = undefined;
   return true;
 }
@@ -2457,7 +2457,7 @@ function use_twister(var_0) {
 function remove_twister(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
-  var_1 scripts\engine\utility::ref_143a7(var_0 + "_timeup", var_0 + "_exited_early", "last_stand", "death");
+  var_1 scripts\engine\utility::ref_143A7(var_0 + "_timeup", var_0 + "_exited_early", "last_stand", "death");
   level notify("stop_twister_sfx");
 
   if(isDefined(var_1.fx_ent)) {
@@ -2708,7 +2708,7 @@ function use_increased_team_efficiency(var_0) {
   setomnvar("zom_escape_combo_multiplier", 1);
 
   for(;;) {
-    var_1 = scripts\engine\utility::ref_143ad("shot_missed", "weapon_hit_enemy");
+    var_1 = scripts\engine\utility::ref_143AD("shot_missed", "weapon_hit_enemy");
 
     if(var_1 == "shot_missed") {
       level.consumable_cash_scalar -= 0.02;
@@ -2735,7 +2735,7 @@ function update_team_multiplier(var_0) {
 }
 
 function cleanupaftertimeoutordeath(var_0) {
-  var_1 = scripts\engine\utility::ref_143af(var_0 + "_timeup", "disconnect", "last_stand", "death");
+  var_1 = scripts\engine\utility::ref_143AF(var_0 + "_timeup", "disconnect", "last_stand", "death");
   level.consumable_cash_scalar = undefined;
 }
 
@@ -2785,7 +2785,7 @@ function adjustmovespeed(var_0, var_1, var_2, var_3) {
       break;
   }
 
-  var_3 scripts\engine\utility::ref_143a6(var_2 + "_timeup", "last_stand", "disconnect");
+  var_3 scripts\engine\utility::ref_143A6(var_2 + "_timeup", "last_stand", "disconnect");
   var_1 scripts\asm\asm_bb::bb_requestmovetype(var_4);
 }
 
@@ -2973,7 +2973,7 @@ function use_killing_time(var_0) {
 
   waitframe();
   scripts\cp\utility::notify_used_consumable("killing_time");
-  scripts\engine\utility::ref_143bb(20, "death", "last_stand", "disconnect");
+  scripts\engine\utility::ref_143BB(20, "death", "last_stand", "disconnect");
 
   foreach(var_2 in level.players) {
     if(isDefined(var_2.killing_time)) {
@@ -3015,7 +3015,7 @@ function use_now_you_see_me(var_0) {
 
 function removenowyouseemeonlaststand(var_0) {
   self endon(var_0 + "_timeup");
-  var_1 = scripts\engine\utility::ref_143ad("last_stand", "disconnect");
+  var_1 = scripts\engine\utility::ref_143AD("last_stand", "disconnect");
 
   foreach(var_3 in level.players) {
     if(var_3 scripts\cp\utility::isignoremeenabled()) {

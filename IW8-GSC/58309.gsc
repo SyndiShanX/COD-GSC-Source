@@ -4,14 +4,14 @@
 ***********************************************/
 
 function keypad_check_levelinput() {
-  if(!isDefined(level.ref_13d51)) {
-    level.ref_13d51 = [];
+  if(!isDefined(level.ref_13D51)) {
+    level.ref_13D51 = [];
   }
 
-  level.ref_13d51["sniper"] = &ref_1343a;
+  level.ref_13D51["sniper"] = &ref_1343A;
 }
 
-function ref_1343a() {
+function ref_1343A() {
   build_vehicle_drop_off_list();
 
   if(!isDefined(level.showdebugresult)) {
@@ -45,16 +45,16 @@ function progression() {
     thread target_think();
   }
 
-  level.ref_13d45 = getEntArray("trial_flare", "targetname");
+  level.ref_13D45 = getEntArray("trial_flare", "targetname");
 
-  if(isDefined(level.ref_13d45)) {
-    scripts\engine\utility::array_thread(level.ref_13d45, &ref_13d7e);
+  if(isDefined(level.ref_13D45)) {
+    scripts\engine\utility::array_thread(level.ref_13D45, &ref_13D7E);
   }
 
-  level.ref_13d7c[1] = getEntArray("wave1", "targetname");
-  level.ref_13d7c[2] = getEntArray("wave2", "targetname");
-  level.ref_13d7c[3] = getEntArray("wave3", "targetname");
-  level.ref_13d7c[4] = getEntArray("wave4", "targetname");
+  level.ref_13D7C[1] = getEntArray("wave1", "targetname");
+  level.ref_13D7C[2] = getEntArray("wave2", "targetname");
+  level.ref_13D7C[3] = getEntArray("wave3", "targetname");
+  level.ref_13D7C[4] = getEntArray("wave4", "targetname");
   thread infinite_reserve_ammo_not_revolver();
   level.player scripts\mp\utility\perk::giveperk("specialty_quickswap");
   level.player scripts\mp\utility\perk::giveperk("specialty_fastreload");
@@ -66,14 +66,14 @@ function progression() {
     level.target_wave = 0;
     _tablethide::trial_ui_set_wave(1, 4);
     course_start_wait();
-    _tablethide::ref_13d88();
-    _tablethide::ref_13d89(0);
-    wave_single_progression(level.ref_13d7c[1], 1);
-    wave_single_progression(level.ref_13d7c[2], 2);
-    wave_single_progression(level.ref_13d7c[3], 3);
-    wave_single_progression(level.ref_13d7c[4], 4);
+    _tablethide::ref_13D88();
+    _tablethide::ref_13D89(0);
+    wave_single_progression(level.ref_13D7C[1], 1);
+    wave_single_progression(level.ref_13D7C[2], 2);
+    wave_single_progression(level.ref_13D7C[3], 3);
+    wave_single_progression(level.ref_13D7C[4], 4);
     score_calculate(1);
-    _tablethide::ref_13d89(1);
+    _tablethide::ref_13D89(1);
 
     foreach(var_7 in level.player.primaryinventory) {
       level.player setweaponammoclip(var_7, weaponclipsize(var_7));
@@ -129,7 +129,7 @@ function wave_single_progression(var_0, var_1) {
       }
     }
 
-    if(gettime() > var_2 + 25000 - level.showdebugresult && istrue(level.ref_13d8f) && !var_7) {
+    if(gettime() > var_2 + 25000 - level.showdebugresult && istrue(level.ref_13D8F) && !var_7) {
       var_7 = 1;
       thread spawn_fulton_rope_mdl(var_0, 1);
     }
@@ -147,7 +147,7 @@ function wave_single_progression(var_0, var_1) {
   }
 
   LOC_0000012b:
-    if(istrue(level.ref_13d8f)) {
+    if(istrue(level.ref_13D8F)) {
       thread spawn_fulton_rope_mdl(var_0, 0);
     }
 
@@ -333,7 +333,7 @@ function target_damage() {
     level.targethitsinaframecount++;
     level.lasttargethitinaframe = self;
     level.shotsmissedcount = 0;
-    level.player thread _tablethide::ref_13d4b(self.plate, 1, 0, 0);
+    level.player thread _tablethide::ref_13D4B(self.plate, 1, 0, 0);
     level.last_hit_target = self;
     thread target_flip("down");
     self.activated = 1;
@@ -356,7 +356,7 @@ function target_damage() {
       level.player playSound("trial_sfx_buzzer_bad_1");
       waitframe();
       score_calculate();
-    } else if(istrue(self.ref_129f7)) {
+    } else if(istrue(self.ref_129F7)) {
       thread score_event_target_hit(200);
     } else {
       thread score_event_target_hit(100);
@@ -445,7 +445,7 @@ function moving_target_think() {
   self.mover_ends = scripts\engine\utility::getStructArray(self.mover.targetname, "target");
 
   if(self.mover_ends.size > 2) {
-    self.ref_129f7 = 1;
+    self.ref_129F7 = 1;
   }
 
   self.mover_ends = sortbydistance(self.mover_ends, self.mover.origin);
@@ -614,7 +614,7 @@ function score_calculate(var_0) {
     hud_set_reward_tier(1);
     level notify("course_ended");
 
-    if(_tablethide::ref_13d4c()) {
+    if(_tablethide::ref_13D4C()) {
       wait 4;
     }
 
@@ -696,9 +696,9 @@ function hud_inter_round_flow(var_0) {
   setomnvar("ui_match_start_text", "wave_" + var_0 + "_start");
   level.player playSound("trial_sfx_success");
 
-  if(istrue(level.ref_13d94) && isDefined(level.ref_13d95) && level.ref_13d95 == var_0) {
+  if(istrue(level.ref_13D94) && isDefined(level.ref_13D95) && level.ref_13D95 == var_0) {
     var_1 = scripts\engine\utility::getStruct("trial_wp", "targetname");
-    thread ref_13d6b(var_1);
+    thread ref_13D6B(var_1);
     scripts\mp\gamelogic::teamstarttimer(level.player.team, 10);
   } else {
     scripts\mp\gamelogic::teamstarttimer(level.player.team, 5);
@@ -762,7 +762,7 @@ function dialog_missed_shots_watcher() {
           var_8 = undefined;
           var_9 = 360;
 
-          foreach(var_11 in level.ref_13d7c[level.target_wave]) {
+          foreach(var_11 in level.ref_13D7C[level.target_wave]) {
             var_12 = var_11.origin + (0, 0, 42);
             var_13 = distance(var_3, var_12);
             var_14 = var_5 * var_13;
@@ -788,7 +788,7 @@ function dialog_missed_shots_watcher() {
           }
         }
 
-        if( < error > && level.ref_13d52) {
+        if( < error > && level.ref_13D52) {
           level.player scripts\mp\utility\dialog::leaderdialogonplayer("sniper_nag_mount"); <
           error > = 0;
         } else {
@@ -802,14 +802,14 @@ function dialog_missed_shots_watcher() {
 }
 
 function lgwperifvfx_plumes() {
-  level.ref_13d52 = 1;
+  level.ref_13D52 = 1;
   level waittill("new_wave");
 
   while(level.player playermount() <= 0.5) {
     waitframe();
   }
 
-  level.ref_13d52 = 0;
+  level.ref_13D52 = 0;
 }
 
 function infinite_reserve_ammo_not_revolver() {
@@ -836,13 +836,13 @@ function infinite_reserve_ammo_not_revolver() {
   }
 }
 
-function ref_13d6b(var_0) {
+function ref_13D6B(var_0) {
   level.player thread scripts\mp\utility\dialog::leaderdialogonplayer(level.player.team + "_enemy_white_phosphorus_inbound");
   var_1 = [];
   GscBinSkip0(0x2e, 0, spawnStruct());
 }
 
-function ref_13d7e() {
+function ref_13D7E() {
   for(;;) {
     level waittill("trial_start");
     wait 3;
@@ -874,7 +874,7 @@ function ref_13d7e() {
 }
 
 function build_vehicle_drop_off_list() {
-  level.ref_13d32 = &ref_13d39;
+  level.ref_13D32 = &ref_13D39;
 
   if(!isDefined(game["trial"]["analytics"])) {
     game["trial"]["analytics"] = [];
@@ -886,7 +886,7 @@ function build_vehicle_drop_off_list() {
   }
 }
 
-function ref_13d39() {
+function ref_13D39() {
   var_0 = level.trial["missionID"];
   var_1 = getomnvar("ui_trial_reward_tier");
   var_2 = getomnvar("ui_trial_best_score");

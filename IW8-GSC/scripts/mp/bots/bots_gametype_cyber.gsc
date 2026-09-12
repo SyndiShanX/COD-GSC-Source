@@ -57,7 +57,7 @@ function bot_cyber_think() {
     wait 0.05;
 
     if(gettime() >= level.next_game_update_time) {
-      ref_13f85();
+      ref_13F85();
       level.next_game_update_time = gettime() + 100;
     }
 
@@ -65,7 +65,7 @@ function bot_cyber_think() {
       continue;
     }
 
-    if(!isDefined(level.ref_13a9a)) {
+    if(!isDefined(level.ref_13A9A)) {
       if(!isDefined(level.cover_guys_debug)) {
         if(scripts\mp\bots\bots_strategy::bot_has_tactical_goal("seek_cyber_emp", undefined) == 0) {
           var_0 = &introarmor;
@@ -85,7 +85,7 @@ function bot_cyber_think() {
 
         if(var_5 == "goal") {
           self botpressbutton("use", level.planttime + 2);
-          level scripts\engine\utility::ref_143b9(level.planttime + 2, "bomb_planted");
+          level scripts\engine\utility::ref_143B9(level.planttime + 2, "bomb_planted");
         }
       } else if(level.cover_guys_debug.team == self.team) {
         if(!scripts\mp\bots\bots_util::bot_is_defending()) {
@@ -99,9 +99,9 @@ function bot_cyber_think() {
       continue;
     }
 
-    var_3 = level.objectives[scripts\engine\utility::get_enemy_team(level.ref_13a9a)];
+    var_3 = level.objectives[scripts\engine\utility::get_enemy_team(level.ref_13A9A)];
 
-    if(self.team == level.ref_13a9a) {
+    if(self.team == level.ref_13A9A) {
       if(!trigger_spawn_kill_watcher()) {
         scripts\mp\bots\bots_strategy::bot_protect_point(var_3.curorigin, 600);
       }
@@ -112,7 +112,7 @@ function bot_cyber_think() {
 
       if(var_7 == "goal") {
         self botpressbutton("use", level.defusetime + 2);
-        ref_143eb(level.defusetime + 2);
+        ref_143EB(level.defusetime + 2);
       }
     } else if(!scripts\mp\bots\bots_util::bot_is_defending()) {
       GscBinSkip1(0x45, "entrance_points_index", "zone" + var_3.label);
@@ -138,7 +138,7 @@ function introarmor(var_0) {
   }
 }
 
-function ref_143eb(var_0) {
+function ref_143EB(var_0) {
   var_1 = gettime();
   var_2 = var_1 + var_0 * 1000;
   wait 0.05;
@@ -160,10 +160,10 @@ function strafe() {
   level.bots_gametype_initialized = 1;
 }
 
-function ref_13f85() {
+function ref_13F85() {
   if(!level.bombplanted) {
-    if(isDefined(level.ref_13a9a)) {
-      level.ref_13a9a = undefined;
+    if(isDefined(level.ref_13A9A)) {
+      level.ref_13A9A = undefined;
       level.cover_guys_debug = undefined;
     }
 
@@ -201,8 +201,8 @@ function ref_13f85() {
     return;
   }
 
-  if(isDefined(level.bombowner) && !isDefined(level.ref_13a9a)) {
-    level.ref_13a9a = level.bombowner.team;
+  if(isDefined(level.bombowner) && !isDefined(level.ref_13A9A)) {
+    level.ref_13A9A = level.bombowner.team;
     level.waittill_player_behind_cover = gettime();
   }
 
@@ -210,13 +210,13 @@ function ref_13f85() {
     var_7 = [];
 
     foreach(var_2 in level.participants) {
-      if(isalive(var_2) && scripts\mp\utility\entity::isaiteamparticipant(var_2) && var_2.team != level.ref_13a9a) {
+      if(isalive(var_2) && scripts\mp\utility\entity::isaiteamparticipant(var_2) && var_2.team != level.ref_13A9A) {
         var_7 = var_2;
       }
     }
 
     if(var_7.size > 0) {
-      var_10 = level.objectives[scripts\engine\utility::get_enemy_team(level.ref_13a9a)];
+      var_10 = level.objectives[scripts\engine\utility::get_enemy_team(level.ref_13A9A)];
       var_11 = scripts\engine\utility::get_array_of_closest(var_10.curorigin, var_7);
 
       if(!isDefined(level.bomb_defuser) || level.bomb_defuser != var_11[0]) {

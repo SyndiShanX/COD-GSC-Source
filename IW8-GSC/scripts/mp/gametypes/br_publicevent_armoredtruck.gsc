@@ -6,14 +6,14 @@
 function init() {
   var_0 = spawnStruct();
   var_0.weight = getdvarfloat("scr_br_pe_armoredtruck_weight", 0);
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.attackerswaittime = &attackerswaittime;
   var_0.ref_14382 = &ref_14382;
   var_0.postinitfunc = &postinitfunc;
-  var_0.ref_11b78 = getdvarint("scr_br_pe_armoredtruck_max_times", 1);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_armoredtruck_max_times", 1);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("armoredtruck", "20 20151510101010");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("armoredtruck");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(11, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(11, var_0);
 }
 
 function postinitfunc() {
@@ -22,7 +22,7 @@ function postinitfunc() {
   game["dialog"]["pe_armoredtruck_done"] = "public_events_armtrk_active";
 }
 
-function ref_140cf() {
+function ref_140CF() {
   return true;
 }
 
@@ -61,7 +61,7 @@ function attackerswaittime() {
 
   scripts\mp\gametypes\br_gametype_truckwar::stoppingpower_givehcrdata();
   scripts\mp\gametypes\br_gametype_truckwar::stoppingpower_loadoutchangeremovehcr();
-  level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13df8();
+  level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13DF8();
 
   foreach(var_8 in level.players) {
     var_8 playsoundtoplayer("ui_armored_truck_active_lr", var_8);
@@ -72,7 +72,7 @@ function attackerswaittime() {
   scripts\mp\gametypes\br_public::brleaderdialog("pe_armoredtruck_done");
   wait 1.5;
   var_4 = scripts\engine\utility::array_randomize(var_4);
-  thread ref_1360c(var_4);
+  thread ref_1360C(var_4);
 }
 
 function run_post_module_actions() {
@@ -106,7 +106,7 @@ function run_spawnfuncs(var_0) {
     var_4 setModel("ks_airdrop_crate_br");
     var_4 setscriptablepartstate("smoke_signal", "on", 0);
     var_4 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(11, 17, 2, var_3.origin);
-    var_4 scripts\mp\gametypes\br_quest_util::ref_1316f(1150);
+    var_4 scripts\mp\gametypes\br_quest_util::ref_1316F(1150);
     var_4 scripts\mp\gametypes\br_quest_util::ref_13369();
     var_4.location = var_3;
     var_1 = var_4;
@@ -115,22 +115,22 @@ function run_spawnfuncs(var_0) {
   return var_1;
 }
 
-function ref_1360c(var_0) {
+function ref_1360C(var_0) {
   foreach(var_2 in var_0) {
-    ref_1360b(var_2);
+    ref_1360B(var_2);
     wait 2;
   }
 
   level notify("public_event_armoredtruck_spawned");
 }
 
-function ref_1360b(var_0) {
+function ref_1360B(var_0) {
   var_1 = spawnStruct();
   var_1.origin = var_0.location.origin + (0, 0, 5000);
   var_2 = scripts\mp\gametypes\br_gametype_truckwar::ref_14263(var_1);
 
   if(isDefined(var_2)) {
-    level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13de4(var_2, var_0.location.origin, var_0.location.angles, 1);
+    level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13DE4(var_2, var_0.location.origin, var_0.location.angles, 1);
     level.callouts[level.callouts.size] = var_2;
   }
 

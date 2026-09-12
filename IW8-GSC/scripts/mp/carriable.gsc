@@ -3,7 +3,7 @@
  * Script: scripts\mp\carriable.gsc
 ***********************************************/
 
-function ref_131ea(var_0, var_1) {
+function ref_131EA(var_0, var_1) {
   var_2 = "sentry_turret";
   var_3 = level.sentrysettings[var_2];
   var_4 = spawnturret("misc_turret", var_0.origin, level.sentrysettings[var_2].weaponinfo);
@@ -229,7 +229,7 @@ function sentry_burstfirestop() {
 }
 
 function sentry_heatmonitor() {
-  if(istrue(self.ref_133bc)) {
+  if(istrue(self.ref_133BC)) {
     return;
   }
 

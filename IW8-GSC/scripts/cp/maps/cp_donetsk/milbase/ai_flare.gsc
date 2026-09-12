@@ -10,8 +10,8 @@ function load_fx() {
   level._effect["alarm_light_flash"] = loadfx("vfx/iw8_cp/level/cp_millbase/vfx_alarm_light.vfx");
   level._effect["vfx_mortar_explosion"] = loadfx("vfx/iw8/weap/_explo/mortar/vfx_mortar_explosion_bm.vfx");
   script_model_anims();
-  level.ref_11e67 = gettime();
-  level.ref_11d34 = [];
+  level.ref_11E67 = gettime();
+  level.ref_11D34 = [];
 }
 
 function run_to_and_launch_flare(var_0, var_1) {
@@ -22,7 +22,7 @@ function run_to_and_launch_flare(var_0, var_1) {
   self.going_to_object = var_0;
   var_2 = self.goalradius;
   scripts\common\utility::demeanor_override("sprint");
-  self.ref_11e51 = self.never_kill_off;
+  self.ref_11E51 = self.never_kill_off;
   self.never_kill_off = 1;
   self.matchdata_logattackerkillevent = self.dont_kill_off;
   self.dont_kill_off = 1;
@@ -36,14 +36,14 @@ function run_to_and_launch_flare(var_0, var_1) {
   if(isDefined(var_1)) {
     self.goalradius = 128;
     var_0.operator = self;
-    thread ref_11d2b(var_0);
+    thread ref_11D2B(var_0);
   }
 
   clear_custom_anim();
   scripts\common\utility::clear_demeanor_override();
 
-  if(isDefined(self.ref_11e51)) {
-    self.never_kill_off = self.ref_11e51;
+  if(isDefined(self.ref_11E51)) {
+    self.never_kill_off = self.ref_11E51;
   }
 
   if(isDefined(self.matchdata_logattackerkillevent)) {
@@ -52,10 +52,10 @@ function run_to_and_launch_flare(var_0, var_1) {
   }
 }
 
-function ref_11d2b(var_0) {
-  scripts\engine\utility::ref_143a5("death", "teleport_to_nearby_spawner");
+function ref_11D2B(var_0) {
+  scripts\engine\utility::ref_143A5("death", "teleport_to_nearby_spawner");
   var_0.operator = undefined;
-  var_0.ref_1200b = gettime() + 45000;
+  var_0.ref_1200B = gettime() + 45000;
 }
 
 function enter_launcher(var_0) {
@@ -109,7 +109,7 @@ function get_flare_launch_entrance(var_0, var_1) {
 }
 
 function ai_anim(var_0, var_1) {
-  ref_13a2b();
+  ref_13A2B();
 
   if(isDefined(var_1)) {
     scripts\asm\shared\mp\utility::burningdown(var_0, var_1);
@@ -117,13 +117,13 @@ function ai_anim(var_0, var_1) {
     scripts\asm\shared\mp\utility::burndowntime(var_0);
   }
 
-  ref_12cc2();
+  ref_12CC2();
 }
 
 function bleedout_logic(var_0, var_1) {
-  ref_13a2b();
+  ref_13A2B();
   scripts\asm\shared\mp\utility::burningpartlogic(var_0, var_1);
-  ref_12cc2();
+  ref_12CC2();
 }
 
 function goto_anim_pos(var_0, var_1) {
@@ -132,7 +132,7 @@ function goto_anim_pos(var_0, var_1) {
   self.goalradius = 8;
   self.script_radius = 8;
   self setgoalpos(self getclosestreachablepointonnavmesh(var_0.origin));
-  ref_143cb(var_0.origin, squared(384));
+  ref_143CB(var_0.origin, squared(384));
   self.goalradius = 8;
   self.script_radius = 8;
   self.ignoreall = 1;
@@ -199,12 +199,12 @@ function launch_mortar(var_0, var_1, var_2, var_3) {
     var_1 = getgroundposition(self.origin + anglesToForward(self.angles) * 2000, 8, 1000);
   }
 
-  thread ref_142e2(var_1);
+  thread ref_142E2(var_1);
   var_4 = scripts\engine\utility::spawn_tag_origin(self gettagorigin("j_shaft_top"), (0, 0, 0));
   playFX(scripts\engine\utility::getfx("vfx_flare_launch"), self.origin + (0, 0, 3) + anglesToForward(self.angles) * 8, anglesToForward(self.angles));
   playsoundatpos(self gettagorigin("j_shaft_top"), "weap_mortar_fire_dist");
   var_4 show();
-  level.ref_11d34 = scripts\engine\utility::array_add(level.ref_11d34, var_4);
+  level.ref_11D34 = scripts\engine\utility::array_add(level.ref_11D34, var_4);
   var_5 = 5;
   var_6 = 1200;
 
@@ -231,12 +231,12 @@ function launch_mortar(var_0, var_1, var_2, var_3) {
     earthquake(0.25, 3, var_1, 2048);
     playrumbleonposition("cp_chopper_rumble", var_1);
     magicgrenademanual("mortar_mp", var_1 + (0, 0, 5), (0, 0, 0), 0.05);
-    level.ref_11d34 = scripts\engine\utility::array_remove(level.ref_11d34, var_4);
+    level.ref_11D34 = scripts\engine\utility::array_remove(level.ref_11D34, var_4);
     var_4 delete();
     return;
   }
 
-  level.ref_11d34 = scripts\engine\utility::array_removeundefined(level.ref_11d34);
+  level.ref_11D34 = scripts\engine\utility::array_removeundefined(level.ref_11D34);
 }
 
 function ref_14358(var_0, var_1) {
@@ -456,7 +456,7 @@ function attract_agent_to_mortar(var_0, var_1, var_2) {
     if(isDefined(var_0.operator) && isalive(var_0.operator)) {
       var_3 = var_0.operator;
     } else {
-      if(isDefined(var_0.ref_1200b) && gettime() < var_0.ref_1200b) {
+      if(isDefined(var_0.ref_1200B) && gettime() < var_0.ref_1200B) {
         wait 1;
         continue;
       }
@@ -638,7 +638,7 @@ function plant_bomb(var_0) {
   var_1 setModel("offhand_wm_c4");
   var_1 scriptmodelplayanimdeltamotion("wm_equip_c4_attach_c4");
   var_0.charge = var_1;
-  thread ref_123b1(var_0, var_1);
+  thread ref_123B1(var_0, var_1);
   thread ref_13331();
   bleedout_logic("sdr_plant_bomb", var_0);
   self notify("bomb_planted");
@@ -651,7 +651,7 @@ function ref_13331() {
   self show();
 }
 
-function ref_123b1(var_0, var_1) {
+function ref_123B1(var_0, var_1) {
   self endon("bomb_planted");
   self waittill("death");
 
@@ -740,24 +740,24 @@ function script_model_anims() {
   level.scr_animname["fusebox_prop"]["interact_on"] = "wm_eq_fusebox_turn_on_prop";
 }
 
-function ref_142e2(var_0) {
+function ref_142E2(var_0) {
   var_1 = ["dx_cps_kama_callout_mortar_attacking_10", "dx_cps_kama_callout_mortar_attacking_20", "dx_cps_lass_callout_mortar_attacking_10", "dx_cps_lass_callout_mortar_attacking_20"];
   var_2 = scripts\cp\utility::give_all_players_nearby(var_0, squared(512));
   var_3 = scripts\engine\utility::random(var_1);
 
   foreach(var_5 in var_2) {
-    if(!isDefined(var_5.ref_11e67)) {
-      var_5.ref_11e67 = gettime() + 30000;
-    } else if(gettime() < var_5.ref_11e67) {
+    if(!isDefined(var_5.ref_11E67)) {
+      var_5.ref_11E67 = gettime() + 30000;
+    } else if(gettime() < var_5.ref_11E67) {
       continue;
     }
 
-    var_5.ref_11e67 = gettime() + 30000;
+    var_5.ref_11E67 = gettime() + 30000;
     thread scripts\cp\cp_vo::try_to_play_vo_for_one_player(var_3, var_5);
   }
 }
 
-function ref_13a2b() {
+function ref_13A2B() {
   self.old_weapon = self.weapon;
   self.bunker_loot_vaults = scripts\cp\cp_weapon::buildweapon("iw8_fists_mp", [], "none", "none", -1);
   self giveweapon(self.bunker_loot_vaults);
@@ -765,13 +765,13 @@ function ref_13a2b() {
   self setspawnweapon(self.bunker_loot_vaults);
 }
 
-function ref_12cc2() {
+function ref_12CC2() {
   self giveweapon(self.old_weapon);
   self takeweapon(self.bunker_loot_vaults);
   self setspawnweapon(self.old_weapon);
 }
 
-function ref_143cb(var_0, var_1) {
+function ref_143CB(var_0, var_1) {
   while(distancesquared(self.origin, var_0) > var_1) {
     wait 0.1;
   }
@@ -782,8 +782,8 @@ function haspackage(var_0) {
   clear_custom_anim();
   scripts\common\utility::clear_demeanor_override();
 
-  if(isDefined(self.ref_11e51)) {
-    self.never_kill_off = self.ref_11e51;
+  if(isDefined(self.ref_11E51)) {
+    self.never_kill_off = self.ref_11E51;
   }
 
   if(isDefined(self.matchdata_logattackerkillevent)) {

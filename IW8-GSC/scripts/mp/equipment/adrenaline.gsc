@@ -5,17 +5,17 @@
 
 function init() {}
 
-function ref_11d0f() {
-  self.ref_138ac = 1;
+function ref_11D0F() {
+  self.ref_138AC = 1;
   wait 3;
-  self.ref_138ac = undefined;
+  self.ref_138AC = undefined;
 }
 
 function useadrenaline() {
   self endon("disconnect");
   self endon("removeAdrenaline");
   self notify("force_regeneration");
-  thread ref_11d0f();
+  thread ref_11D0F();
   scripts\mp\gamelogic::sethasdonecombat(self, 1);
 
   if(getdvarint("scr_adrenaline_BR_allow_overdrive", 1) == 1) {
@@ -74,7 +74,7 @@ function gethealthperframe() {
 }
 
 function adrenaline_removeonplayernotifies() {
-  scripts\engine\utility::ref_143a5("death", "healed");
+  scripts\engine\utility::ref_143A5("death", "healed");
   thread removeadrenaline();
 }
 

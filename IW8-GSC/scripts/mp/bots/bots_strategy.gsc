@@ -127,7 +127,7 @@ function bot_set_ambush_trap(var_0, var_1, var_2, var_3, var_4) {
           thread bot_set_ambush_trap_wait_fire("grenade_fire");
           thread bot_set_ambush_trap_wait_fire("missile_fire");
           var_21 = scripts\engine\utility::ter_op(isDefined(var_0["purpose"]) && var_0["purpose"] == "tacticalinsertion", 6, 3);
-          scripts\engine\utility::ref_143ba(var_21, "missile_fire", "grenade_fire");
+          scripts\engine\utility::ref_143BA(var_21, "missile_fire", "grenade_fire");
           wait 0.05;
           self notify("ambush_trap_ent");
 
@@ -521,7 +521,7 @@ function bot_defend_think(var_0, var_1, var_2, var_3) {
     }
 
     var_29 = randomfloatrange(var_19, var_20);
-    var_22 = scripts\engine\utility::ref_143bd(var_29, "node_relinquished", "goal_changed", "script_goal_changed", "defend_force_node_recalculation", "bad_path");
+    var_22 = scripts\engine\utility::ref_143BD(var_29, "node_relinquished", "goal_changed", "script_goal_changed", "defend_force_node_recalculation", "bad_path");
 
     if((var_22 == "node_relinquished" || var_22 == "bad_path" || var_22 == "goal_changed" || var_22 == "script_goal_changed") && (self.cur_defend_stance == "crouch" || self.cur_defend_stance == "prone")) {
       self botsetstance("none");
@@ -1467,7 +1467,7 @@ function bot_think_tactical_goals() {
   self endon("death_or_disconnect");
   level endon("game_ended");
   self.tactical_goals = [];
-  self.ref_13a16 = 0;
+  self.ref_13A16 = 0;
 
   for(;;) {
     if(self.tactical_goals.size > 0 && !scripts\mp\bots\bots_util::bot_is_remote_or_linked()) {
@@ -1534,7 +1534,7 @@ function bot_new_tactical_goal(var_0, var_1, var_2, var_3) {
   var_4.should_abort = var_3.should_abort;
   var_4.action_thread = var_3.action_thread;
   var_4.objective_radius = var_3.objective_radius;
-  var_4.ref_132b7 = var_3.ref_132b7;
+  var_4.ref_132B7 = var_3.ref_132B7;
   var_4.ref_12139 = var_3.ref_12139;
   var_4.hastargetmarker = var_3.hastargetmarker;
 

@@ -171,7 +171,7 @@ function allowedwhileplanting(var_0) {
   scripts\mp\utility\player::allow_gesture(var_0);
 
   if(var_0) {
-    scripts\engine\utility::ref_143b9(0.8, "bomb_allow_offhands");
+    scripts\engine\utility::ref_143B9(0.8, "bomb_allow_offhands");
     scripts\common\utility::allow_melee(var_0);
     scripts\common\utility::allow_mantle(var_0);
   } else {
@@ -374,7 +374,7 @@ function bombzone_onuseplantobject(var_0) {
 
     if(isPlayer(var_0)) {
       var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_12062();
-      var_0 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "plant", var_0.origin);
+      var_0 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "plant", var_0.origin);
       return;
     }
 
@@ -402,7 +402,7 @@ function bombzone_onusedefuseobject(var_0) {
   scripts\mp\utility\dialog::statusdialog("enemy_bomb_defused", scripts\mp\utility\game::getotherteam(var_0.team)[0], 1);
   scripts\mp\utility\dialog::statusdialog("bomb_defused", var_0.team, 1);
   level thread scripts\mp\hud_util::teamplayercardsplash("callout_bombdefused", var_0);
-  var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_1201f();
+  var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_1201F();
   scripts\mp\events::bombdefused(var_0);
 }
 
@@ -801,7 +801,7 @@ function onpickup(var_0, var_1, var_2) {
   var_0.isbombcarrier = 1;
 
   if(isPlayer(var_0)) {
-    var_0 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "pickup", var_0.origin);
+    var_0 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "pickup", var_0.origin);
     scripts\mp\utility\game::setmlgannouncement(1, var_0.team, var_0 getentitynumber());
   }
 
@@ -840,7 +840,7 @@ function onpickup(var_0, var_1, var_2) {
     var_3 setgametypevip(1);
   }
 
-  scripts\mp\utility\game::ref_119ac(var_3, undefined, "Bomb Picked Up", var_3.origin);
+  scripts\mp\utility\game::ref_119AC(var_3, undefined, "Bomb Picked Up", var_3.origin);
   level notify("bomb_pickup");
   level thread scripts\mp\hud_message::updatematchstatushintforallplayers(var_3.team, 25, undefined, var_3, 21);
 }

@@ -4,7 +4,7 @@
 ***********************************************/
 
 function switcharray() {
-  level.ref_13d57 = 0;
+  level.ref_13D57 = 0;
   var_0 = level.trial["missionID"];
   precachemodel("tag_origin");
   precachemodel("highway_flag0");
@@ -28,7 +28,7 @@ function switcharray() {
   GscBinSkip0(0x2e, 0, (1480, 3033, 152));
 }
 
-function ref_135a4(var_0) {
+function ref_135A4(var_0) {
   var_1 = (0, 0, 0);
   var_2 = (0, 0, 0);
   var_3 = spawn("script_origin", var_1);
@@ -56,9 +56,9 @@ function ref_135a4(var_0) {
 
   var_5 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (1592, 2922, 196), (0, 187, 0));
   scripts\mp\spawnlogic::bdiedonce([var_5]);
-  level.ref_126a5 = spawnStruct();
-  level.ref_126a5.origin = (1592, 2922, 196);
-  level.ref_126a5.angles = (0, 187, 0);
+  level.ref_126A5 = spawnStruct();
+  level.ref_126A5.origin = (1592, 2922, 196);
+  level.ref_126A5.angles = (0, 187, 0);
   var_6 = getEnt("care_package_col", "targetname");
   var_7 = getEnt("clip64x64x8", "targetname");
   var_8 = getEnt("clip64x64x64", "targetname");

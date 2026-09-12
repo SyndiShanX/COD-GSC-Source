@@ -4,8 +4,8 @@
 ***********************************************/
 
 function init() {
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("greenbay_strike", &ref_13e2a, &ongreenbaystrikekillstreakavailable);
-  scripts\common\ui::lui_registercallback("ui_mv_on_new_killstreak_selected", &ref_1266a);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("greenbay_strike", &ref_13E2A, &ongreenbaystrikekillstreakavailable);
+  scripts\common\ui::lui_registercallback("ui_mv_on_new_killstreak_selected", &ref_1266A);
   super_enemy_spawning();
   super_has_targets();
   scripts\common\utility::allow_register_set("greenbay_strike_restrictions", ["usability", "weapon_switch", "weapon_pickup", "sprint", "mantle", "fire", "ads", "melee", "execution_attack", "execution_victim", "vehicle_use", "crate_use", "ascender_use"]);
@@ -16,7 +16,7 @@ function super_enemy_spawning() {
   level.sentry_shouldshoot.inuse = 0;
   level.sentry_shouldshoot.stab_blink_black_fade = 0;
   level.sentry_shouldshoot.triggers = [];
-  level.sentry_shouldshoot.ref_13dc5 = 0;
+  level.sentry_shouldshoot.ref_13DC5 = 0;
   level.sentry_shouldshoot.playersintrigger = [];
   level.sentry_shouldshoot.strikeradius = getdvarint("scr_br_mxp_g_width", 2000);
   level.sentry_shouldshoot.limitzdelta = getdvarint("scr_br_mxp_g_limit_z_delta", 1);
@@ -45,7 +45,7 @@ function super_has_targets() {
   level._effect["greenbay_impact_player"] = loadfx("vfx/iw8_br/island/gameplay/mendota/vfx_br3_gbay_heatray_impact_player");
 }
 
-function ref_13e2a(var_0) {
+function ref_13E2A(var_0) {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -64,7 +64,7 @@ function ref_13e2a(var_0) {
 
   var_3 = undefined;
 
-  if(!isDefined(var_0.ref_13a81)) {
+  if(!isDefined(var_0.ref_13A81)) {
     if(getdvarint("scr_br_mxp_greenbaystrike_movement_disable", 1)) {
       scripts\common\utility::allow_movement(0);
     }
@@ -91,7 +91,7 @@ function ref_13e2a(var_0) {
     self[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "logKillstreakEvent")]](var_0.streakname, self.origin);
   }
 
-  thread ref_1384d(var_3, var_0);
+  thread ref_1384D(var_3, var_0);
 
   if(isDefined(level.killstreakfinishusefunc)) {
     level thread[[level.killstreakfinishusefunc]](var_0);
@@ -169,7 +169,7 @@ function strikeatlocation(var_0, var_1, var_2, var_3) {
   var_6.location = var_0;
   var_6.angles = var_1;
   var_6.string = "confirm_location";
-  thread ref_1384d(var_4, var_6);
+  thread ref_1384D(var_4, var_6);
 }
 
 function ref_14587(var_0) {
@@ -216,8 +216,8 @@ function ref_14582(var_0, var_1, var_2) {
 
   if(isDefined(var_0.ref_13923)) {
     var_6 = var_0.ref_13923;
-  } else if(isDefined(self.ref_1300b) && self.ref_1300b != 0) {
-    var_6 = self.ref_1300b;
+  } else if(isDefined(self.ref_1300B) && self.ref_1300B != 0) {
+    var_6 = self.ref_1300B;
   }
 
   var_0.ref_13923 = var_6;
@@ -275,7 +275,7 @@ function ref_14582(var_0, var_1, var_2) {
 function seq3_warning_room_c(var_0, var_1, var_2) {
   scripts\common\utility::allow_weapon_switch(0);
   self setsoundsubmix("mp_killstreak_overlay");
-  var_3 = ref_125c2();
+  var_3 = ref_125C2();
 
   if(!isDefined(var_3) || !istrue(var_3.success)) {
     scripts\common\utility::allow_weapon_switch(1);
@@ -294,7 +294,7 @@ function playerwaittillmapselectcomplete() {
   return var_0;
 }
 
-function ref_125c2() {
+function ref_125C2() {
   self setclientomnvar("ui_br_show_tac_map", 1);
   self beginlocationselection(0, 0, 0, 0, 4);
   thread playerlocselectendgamecleanup();
@@ -311,7 +311,7 @@ function ref_125c2() {
 
   if(isDefined(var_0) && var_0.string == "confirm_location") {
     if(scripts\mp\gametypes\br_circle::vandalize_minigun_speed(var_0.location, 1)) {
-      var_1 = scripts\mp\gametypes\br::ref_13c34(var_0.location);
+      var_1 = scripts\mp\gametypes\br::ref_13C34(var_0.location);
       var_2 = var_1["position"];
 
       if(scripts\mp\gametypes\br_circle::vandalize_minigun_speed(var_2, 1)) {
@@ -342,7 +342,7 @@ function server_triggered(var_0) {
   scripts\mp\killstreaks\mapselect::startmapselectsequence(0, 0, 0);
 }
 
-function ref_1384d(var_0, var_1) {
+function ref_1384D(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
   var_2 = 1;
@@ -381,13 +381,13 @@ function seq3_tvnums_str(var_0, var_1) {
     sequence_progression(1);
   }
 
-  var_1.ref_134e3 = scripts\mp\gametypes\br_alt_mode_mxp::sandbox_combat_area();
+  var_1.ref_134E3 = scripts\mp\gametypes\br_alt_mode_mxp::sandbox_combat_area();
   greenbaystrike_setuptarget(var_0, var_1);
   var_2 = var_0.location;
   greenbaystrike_createmarker(var_2);
   greenbaystrike_preparestreakinfo(var_1, var_0);
   greenbaystrike_debugprint(var_1);
-  var_3 = var_2 - var_1.ref_134e3;
+  var_3 = var_2 - var_1.ref_134E3;
   var_3 = vectorNormalize((var_3[0], var_3[1], 0));
   var_4 = -1 * var_3;
   var_5 = getdvarint("scr_br_mxp_g_length", 8000);
@@ -412,7 +412,7 @@ function greenbaystrike_attackray(var_0, var_1) {
   level endon("game_ended");
   self notify("drone_target_placed");
   greenbaystrike_cleanupinterruptedstreak();
-  var_1.ref_134e3 = scripts\mp\gametypes\br_alt_mode_mxp::sandbox_combat_area();
+  var_1.ref_134E3 = scripts\mp\gametypes\br_alt_mode_mxp::sandbox_combat_area();
   greenbaystrike_attackray_getend(var_0, var_1);
   var_2 = greenbaystrike_setuptarget(var_0, var_1);
 
@@ -429,10 +429,10 @@ function greenbaystrike_attackray(var_0, var_1) {
 }
 
 function greenbaystrike_attackray_getend(var_0, var_1) {
-  var_2 = vectorNormalize(var_0.location - var_1.ref_134e3);
+  var_2 = vectorNormalize(var_0.location - var_1.ref_134E3);
   var_3 = getdvarint("scr_br_mxp_g_length_ray", 200000);
-  var_4 = var_1.ref_134e3;
-  var_5 = var_1.ref_134e3 + var_2 * var_3;
+  var_4 = var_1.ref_134E3;
+  var_5 = var_1.ref_134E3 + var_2 * var_3;
   var_6 = scripts\engine\trace::ray_trace(var_4, var_5, undefined, scripts\engine\trace::create_world_contents());
   greenbaystrike_updateinforay(var_0, var_1, var_6, var_2);
 }
@@ -455,18 +455,18 @@ function greenbaystrike_updateinforay(var_0, var_1, var_2, var_3) {
 }
 
 function greenbaystrike_cleanupinterruptedstreak() {
-  if(!isDefined(level.ref_11e18.setincomingremovedcallback.vo_one_remain)) {
+  if(!isDefined(level.ref_11E18.setincomingremovedcallback.vo_one_remain)) {
     return;
   }
 
-  var_0 = level.ref_11e18.setincomingremovedcallback.vo_one_remain;
-  level.ref_11e18.setincomingremovedcallback.vo_one_remain = undefined;
+  var_0 = level.ref_11E18.setincomingremovedcallback.vo_one_remain;
+  level.ref_11E18.setincomingremovedcallback.vo_one_remain = undefined;
   greenbaystrike_cleanuppreviewentities(var_0);
 }
 
 function greenbaystrike_setuptarget(var_0, var_1) {
   var_2 = var_0.location;
-  var_3 = level.ref_11e18.setincomingremovedcallback.origin;
+  var_3 = level.ref_11E18.setincomingremovedcallback.origin;
 
   if(scripts\mp\gametypes\br_alt_mode_mxp::ginwalkingstate()) {
     var_4 = scripts\mp\gametypes\br_alt_mode_mxp::ggetnextindexorigin();
@@ -487,7 +487,7 @@ function greenbaystrike_setuptarget(var_0, var_1) {
     var_9 = var_2 - var_8;
     var_9 = vectorNormalize((var_9[0], var_9[1], 0));
     var_10 = var_8 + var_9 * var_7;
-    var_1.ref_134e3 = var_8;
+    var_1.ref_134E3 = var_8;
     var_0.location = (var_10[0], var_10[1], var_2[2]);
 
     if(var_1.ref_13923 == 3 && isDefined(var_1.startgroundnormal)) {
@@ -533,7 +533,7 @@ function greenbaystrike_preparestreakinfo(var_0, var_1) {
 }
 
 function greenbaystrike_debugprint(var_0) {
-  var_1 = "greenbay attack: " + var_0.ref_134e3[0] + " " + var_0.ref_134e3[1] + " " + var_0.ref_134e3[2] + " " + var_0.origin[0] + " " + var_0.origin[1] + " " + var_0.origin[2];
+  var_1 = "greenbay attack: " + var_0.ref_134E3[0] + " " + var_0.ref_134E3[1] + " " + var_0.ref_134E3[2] + " " + var_0.origin[0] + " " + var_0.origin[1] + " " + var_0.origin[2];
   logprint(var_1);
 }
 
@@ -548,7 +548,7 @@ function server_structs(var_0) {
   level endon("game_ended");
   sequence_progression(0);
   scripts\mp\gametypes\br_alt_mode_mxp::gendkillstreak();
-  var_0.circleent = ref_11a9f(var_0.startorigin, var_0.change_keypad_display_digit, 0, 2);
+  var_0.circleent = ref_11A9F(var_0.startorigin, var_0.change_keypad_display_digit, 0, 2);
   var_1 = greenbaystrike_getattacktime(var_0);
   var_0.start_area_fx_end setscriptablepartstate("root", "enabled");
   var_0.start_area_fx_end setscriptablepartstate("rumble", "on");
@@ -556,7 +556,7 @@ function server_structs(var_0) {
   var_2 = var_0.owner;
 
   if(!isPlayer(var_2)) {
-    var_2 = level.ref_11e18.setincomingremovedcallback;
+    var_2 = level.ref_11E18.setincomingremovedcallback;
   } else {
     level thread scripts\mp\gametypes\br_public::dmztut_endgamewithreward("g_attack_used", var_2);
   }
@@ -569,7 +569,7 @@ function server_structs(var_0) {
 
   if(isDefined(var_2) && isPlayer(var_2)) {
     var_2 notify("greenbay_strike_finished");
-    var_2 scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
+    var_2 scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_0);
   }
 
   return var_3;
@@ -584,7 +584,7 @@ function greenbaystrike_getdamagestate(var_0) {
 }
 
 function greenbaystrike_continueattack(var_0, var_1, var_2) {
-  level.ref_11e18.setincomingremovedcallback endon("gk_driven_off");
+  level.ref_11E18.setincomingremovedcallback endon("gk_driven_off");
   var_3 = greenbaystrike_getdamagestate(var_0);
   var_4 = 256;
   var_5 = 128;
@@ -639,7 +639,7 @@ function greenbaystrike_trylaserdamage(var_0, var_1) {
 function greenbaystrike_laserdamage(var_0, var_1) {
   var_2 = self.change_keypad_display_digit;
   var_3 = 1000;
-  isaltbunkerscriptable(var_0, var_2, var_3, var_1, "MOD_EXPLOSIVE", getcompleteweaponname("greenbay_strike"), level.ref_11e18.setincomingremovedcallback.clear_look_at_ent.origin, 1);
+  isaltbunkerscriptable(var_0, var_2, var_3, var_1, "MOD_EXPLOSIVE", getcompleteweaponname("greenbay_strike"), level.ref_11E18.setincomingremovedcallback.clear_look_at_ent.origin, 1);
 }
 
 function greenbaystrike_getattacktime(var_0) {
@@ -735,8 +735,8 @@ function limitzdelta(var_0, var_1, var_2) {
   var_3 = var_0[2] - var_1[2];
 
   if(abs(var_3) > var_2) {
-    if(!isDefined(level.ref_11e18.largestzdelta) || level.ref_11e18.largestzdelta < abs(var_3)) {
-      level.ref_11e18.largestzdelta = var_3;
+    if(!isDefined(level.ref_11E18.largestzdelta) || level.ref_11E18.largestzdelta < abs(var_3)) {
+      level.ref_11E18.largestzdelta = var_3;
     }
 
     var_4 = scripts\engine\utility::sign(var_3);
@@ -867,7 +867,7 @@ function seq3_keypad_init(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(!isDefined(var_5)) {
-    var_5 = level.ref_11e18.setincomingremovedcallback;
+    var_5 = level.ref_11E18.setincomingremovedcallback;
   }
 
   var_6 = var_1 - anglestoup(var_2) * var_4;
@@ -1225,8 +1225,8 @@ function seq3_wheelson_starts() {
 }
 
 function seq3_warning_tier() {
-  var_0 = level.sentry_shouldshoot.ref_13dc5;
-  level.sentry_shouldshoot.ref_13dc5++;
+  var_0 = level.sentry_shouldshoot.ref_13DC5;
+  level.sentry_shouldshoot.ref_13DC5++;
   return var_0;
 }
 
@@ -1297,12 +1297,12 @@ function makepreviewimpactcircle(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   thread gplaykillstreakincomingdialog(var_2, var_8);
-  var_14 = ref_11a9f(var_1, var_4, 1, 6);
+  var_14 = ref_11A9F(var_1, var_4, 1, 6);
   var_14.angles = (var_11, var_10[1], 0);
   return var_14;
 }
 
-function ref_11a9f(var_0, var_1, var_2, var_3) {
+function ref_11A9F(var_0, var_1, var_2, var_3) {
   var_4 = getmaxobjectivecount(var_0[0], var_0[1], var_1);
   var_4 setmapcirclecolorindex(var_2);
   var_4 setmapcircleiconindex(0);
@@ -1337,8 +1337,8 @@ function vehicle_showteamtanks(var_0, var_1) {
     }
   }
 
-  var_1.ref_134e3 = scripts\mp\gametypes\br_alt_mode_mxp::vehiclespawn_littlebirdmg();
-  var_4 = var_2 - var_1.ref_134e3;
+  var_1.ref_134E3 = scripts\mp\gametypes\br_alt_mode_mxp::vehiclespawn_littlebirdmg();
+  var_4 = var_2 - var_1.ref_134E3;
   var_4 = vectorNormalize((var_4[0], var_4[1], 0));
   var_5 = -1 * var_4;
   var_6 = getdvarint("scr_br_mxp_g_extend", 500);
@@ -1348,9 +1348,9 @@ function vehicle_showteamtanks(var_0, var_1) {
   }
 
   thread kplaykillstreaksentdialog(var_1.origin, var_1.change_fronttruck_label + var_6);
-  var_1.startorigin = var_1.ref_134e3;
+  var_1.startorigin = var_1.ref_134E3;
   var_1.endorigin = var_1.origin;
-  var_1.start_area_fx_end = ref_11a9f(var_1.endorigin, var_1.change_fronttruck_label, 1, 5);
+  var_1.start_area_fx_end = ref_11A9F(var_1.endorigin, var_1.change_fronttruck_label, 1, 5);
 
   if(isPlayer(self)) {
     thread scripts\mp\hud_message::showsplash("br_gametype_mendota_kenosha_streak");
@@ -1369,7 +1369,7 @@ function kenoshastrike_setuptarget(var_0, var_1) {
     var_1.change_fronttruck_label = var_1.radius;
   }
 
-  var_3 = level.ref_11e18.wait_for_next_hack_complete.origin;
+  var_3 = level.ref_11E18.wait_for_next_hack_complete.origin;
 
   if(scripts\mp\gametypes\br_alt_mode_mxp::kinjumpstate()) {
     var_4 = scripts\mp\gametypes\br_alt_mode_mxp::kgetnextindexorigin();
@@ -1405,12 +1405,12 @@ function kenoshastrike_setuptarget(var_0, var_1) {
 }
 
 function kenoshastrike_cleanupinterruptedstreak() {
-  if(!isDefined(level.ref_11e18.wait_for_next_hack_complete.vo_one_remain)) {
+  if(!isDefined(level.ref_11E18.wait_for_next_hack_complete.vo_one_remain)) {
     return;
   }
 
-  var_0 = level.ref_11e18.wait_for_next_hack_complete.vo_one_remain;
-  level.ref_11e18.wait_for_next_hack_complete.vo_one_remain = undefined;
+  var_0 = level.ref_11E18.wait_for_next_hack_complete.vo_one_remain;
+  level.ref_11E18.wait_for_next_hack_complete.vo_one_remain = undefined;
   kenoshastrike_cleanuppreviewentities(var_0);
 }
 
@@ -1418,7 +1418,7 @@ function vehicle_spawn_cancelpendingrespawns(var_0) {
   level endon("game_ended");
   vehicle_spawn_abandonedtimeoutcallback(0);
   scripts\mp\gametypes\br_alt_mode_mxp::kendkillstreak();
-  var_1 = level.ref_11e18.wait_for_next_hack_complete;
+  var_1 = level.ref_11E18.wait_for_next_hack_complete;
 
   if(var_0.change_goal_radius_weapons_free_internal == 0 || var_0.change_goal_radius_weapons_free_internal == 1) {
     var_1 setscriptablepartstate("rumble", "light", 0);
@@ -1429,8 +1429,8 @@ function vehicle_spawn_cancelpendingrespawns(var_0) {
     var_3 linkTo(var_1, "tag_sync", (0, 0, 0), (0, 0, 0));
     var_3 dontinterpolate();
     var_3 unmarkkeyframedmover(1);
-    level.ref_11e18.wait_for_next_hack_complete scripts\engine\utility::waittill_notify_or_timeout("kenosha_throw_rock", 2.25);
-    var_0.circleent = ref_11a9f(var_0.startorigin, var_0.change_fronttruck_label, 0, 2);
+    level.ref_11E18.wait_for_next_hack_complete scripts\engine\utility::waittill_notify_or_timeout("kenosha_throw_rock", 2.25);
+    var_0.circleent = ref_11A9F(var_0.startorigin, var_0.change_fronttruck_label, 0, 2);
     var_4 = distance2d(var_0.startorigin, var_0.endorigin);
     var_5 = kcalculaterockthrowvalues(var_4);
     var_6 = var_5[0];
@@ -1454,13 +1454,13 @@ function vehicle_spawn_cancelpendingrespawns(var_0) {
     var_11 = var_1;
   }
 
-  isaltbunkerscriptable(var_0.origin + (0, 0, 100), var_0.change_fronttruck_label, 1000, var_11, "MOD_EXPLOSIVE", getcompleteweaponname("kenosha_strike"), var_0.ref_134e3);
-  isaltbunkerscriptable(var_0.origin + (0, 0, 500), var_0.change_fronttruck_label, 1000, var_11, "MOD_EXPLOSIVE", getcompleteweaponname("kenosha_strike"), var_0.ref_134e3);
-  isaltbunkerscriptable(var_0.origin + (0, 0, 1000), var_0.change_fronttruck_label, 1000, var_11, "MOD_EXPLOSIVE", getcompleteweaponname("kenosha_strike"), var_0.ref_134e3);
+  isaltbunkerscriptable(var_0.origin + (0, 0, 100), var_0.change_fronttruck_label, 1000, var_11, "MOD_EXPLOSIVE", getcompleteweaponname("kenosha_strike"), var_0.ref_134E3);
+  isaltbunkerscriptable(var_0.origin + (0, 0, 500), var_0.change_fronttruck_label, 1000, var_11, "MOD_EXPLOSIVE", getcompleteweaponname("kenosha_strike"), var_0.ref_134E3);
+  isaltbunkerscriptable(var_0.origin + (0, 0, 1000), var_0.change_fronttruck_label, 1000, var_11, "MOD_EXPLOSIVE", getcompleteweaponname("kenosha_strike"), var_0.ref_134E3);
 
   if(isDefined(var_11) && isPlayer(var_11)) {
     var_11 notify("greenbay_strike_finished");
-    var_11 scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
+    var_11 scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_0);
   }
 
   kenoshastrike_cleanuppreviewentities(var_0);
@@ -1556,11 +1556,11 @@ function server_unlocked(var_0) {
   self endon("greenbay_strike_finished");
   self endon("disconnect");
   level waittill("game_ended");
-  scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
+  scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_0);
 }
 
-function ref_1266a(var_0) {
-  self.ref_1300b = var_0;
+function ref_1266A(var_0) {
+  self.ref_1300B = var_0;
 }
 
 function gplaykillstreakincomingdialog(var_0, var_1) {

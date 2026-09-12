@@ -522,7 +522,7 @@ function resetjuggloadoutonchangeteam() {
   level endon("game_ended");
   self endon("disconnect");
   var_0 = self.team;
-  scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
+  scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
   self.isjuggmodejuggernaut = undefined;
   var_1 = getbestteammate(var_0, 0);
 
@@ -614,7 +614,7 @@ function updatejuggpingorigin() {
       }
     }
 
-    scripts\engine\utility::ref_143bf(self.objpingdelay);
+    scripts\engine\utility::ref_143BF(self.objpingdelay);
   }
 }
 

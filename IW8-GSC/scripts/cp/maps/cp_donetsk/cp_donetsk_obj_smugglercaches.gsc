@@ -5,8 +5,8 @@
 
 function smugglercache_init() {
   init_building_num();
-  level.ref_11f66 = 0;
-  level.ref_11f65 = 0;
+  level.ref_11F66 = 0;
+  level.ref_11F65 = 0;
   scripts\engine\utility::flag_init("spawned_all_leads");
 }
 
@@ -36,7 +36,7 @@ function register_smugglercache_objective() {
 }
 
 function obj_maj_cache_init(var_0) {
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
   level.global_stealth_broken = 0;
   thread spawn_intro_soldiers();
   thread play_intro_vo();
@@ -48,7 +48,7 @@ function obj_maj_cache_start(var_0) {
   level thread scripts\cp\cp_modular_spawning::set_ambient_max_count(0);
   thread init_tripwires();
   thread setup_comms_obj_a_goals_and_cover();
-  thread ref_131f0();
+  thread ref_131F0();
   level.initlocationcircle = "caches_obj_3";
   level.initlethalmaxoffsetmap = "caches_obj_3";
   level waittill("intro_vo_done");
@@ -62,7 +62,7 @@ function obj_maj_advance_init(var_0) {
   level thread scripts\cp\cp_objectives::reset_objective_timers();
   level.obj_found_lead_here_vo = 0;
   level.obj_enemy_incoming_vo = undefined;
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
 }
 
 function obj_maj_advance_start(var_0) {
@@ -87,11 +87,11 @@ function obj_maj_advance_start(var_0) {
   objective_setplayintro(var_0.objectiveindex, 1);
   objective_setplayoutro(var_0.objectiveindex, 1);
   objective_state(var_0.objectiveindex, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
   objective_setlabel(var_0.objectiveindex, &"CP_SMUGGLER/OBJ_ADVANCE_WRLD");
   objective_setlocation(var_0.objectiveindex, 0, var_2.origin);
-  level thread scripts\cp\cp_objectives::ref_1317e(var_0, var_2.origin);
+  level thread scripts\cp\cp_objectives::ref_1317E(var_0, var_2.origin);
   objective_sethot(var_0.objectiveindex, 0);
   level thread scripts\cp\cp_modular_spawning::pause_group_by_group_name("wave_spawning");
   level thread scripts\cp\cp_modular_spawning::set_ambient_max_count(0);
@@ -154,12 +154,12 @@ function obj_maj_leads_start(var_0) {
   }
 
   objective_setlabel(var_0.objectiveindex, &"CP_SMUGGLER/OBJ_FIND_CLUE");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   thread handle_hints_vo();
   var_1 = get_cache_num(1);
 
   if(var_1 == "2" || var_1 == "3") {
-    thread ref_123c7();
+    thread ref_123C7();
   }
 
   if(var_1 == "2" || var_1 == "3" || var_1 == "4") {
@@ -179,7 +179,7 @@ function obj_maj_leads_end(var_0) {
 
 function obj_maj_defense_init(var_0) {
   level notify("cache_def_start");
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
 }
 
 function obj_maj_defense_start(var_0) {
@@ -222,11 +222,11 @@ function obj_maj_defense_start(var_0) {
   objective_setbackground(var_0.objectiveindex, 2);
   objective_sethot(var_0.objectiveindex, 0);
   objective_setlabel(var_0.objectiveindex, &"CP_SMUGGLER/OBJ_DEFEND");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   level.obj_cache_def = 1;
   level.obj_def_cur_time = level.obj_def_time;
-  scripts\cp\utility::ref_123fe("mus_cp_smuggler_survive");
-  thread ref_11e0f();
+  scripts\cp\utility::ref_123FE("mus_cp_smuggler_survive");
+  thread ref_11E0F();
 
   while(level.obj_def_cur_time > 0) {
     wait 1;
@@ -241,14 +241,14 @@ function obj_maj_defense_end(var_0) {
   level.obj_def_time = undefined;
   level notify("stop_leads");
   level notify("end_wave_cache_spawners");
-  scripts\cp\utility::ref_123fe("");
+  scripts\cp\utility::ref_123FE("");
   play_investigation_done(level);
   scripts\cp\cp_objectives::screenent_c("minor_objective");
 
   if(level.obj_cache_num < 4) {
     if(level.obj_cache_num == 1) {
       iterate_building_num(3);
-      scripts\cp\crate_drops\cp_crate_drops::ref_12c40("cache_1", ["precision_airstrike", "cruise_missile"]);
+      scripts\cp\crate_drops\cp_crate_drops::ref_12C40("cache_1", ["precision_airstrike", "cruise_missile"]);
     } else if(level.obj_cache_num == 2) {
       iterate_building_num(2);
     } else {
@@ -258,32 +258,32 @@ function obj_maj_defense_end(var_0) {
     level thread scripts\cp\cp_kidnapper::togglekidnappers(1);
     reset_totals_texts();
     level thread scripts\cp\cp_objectives::run_objective("obj_caches_adv", "primary", "allies");
-    scripts\cp\utility::ref_123fe("mus_cp_smuggler_travel_2");
+    scripts\cp\utility::ref_123FE("mus_cp_smuggler_travel_2");
     return;
   }
 
   scripts\cp\cp_objectives::overridenextstep(var_0, "obj_tug_of_war");
   scripts\mp\brclientmatchdata::getprophealth("tow_p1");
-  level.ref_139b5 = 0;
-  scripts\cp\crate_drops\cp_crate_drops::ref_12c40("cache_2a", ["deployable_cover", "ammo_crate"]);
+  level.ref_139B5 = 0;
+  scripts\cp\crate_drops\cp_crate_drops::ref_12C40("cache_2a", ["deployable_cover", "ammo_crate"]);
   reset_totals_texts();
   level notify("obj_smug_1_complete");
   thread getcircleindexforpoint();
-  scripts\cp\utility::ref_123fe("mus_cp_smuggler_travel_3");
+  scripts\cp\utility::ref_123FE("mus_cp_smuggler_travel_3");
 }
 
 function getcircleindexforpoint() {
-  var_0 = level.ref_11f66;
-  var_1 = int(level.ref_11f66 * 0.7);
+  var_0 = level.ref_11F66;
+  var_1 = int(level.ref_11F66 * 0.7);
   waitframe();
 
-  if(level.ref_11f65 == var_0) {
+  if(level.ref_11F65 == var_0) {
     scripts\cp\cp_objectives::screenent_c("minor_objective");
   }
 
   waitframe();
 
-  if(level.ref_11f65 >= var_1) {
+  if(level.ref_11F65 >= var_1) {
     scripts\cp\cp_objectives::screenent_c("minor_objective");
     return;
   }
@@ -614,7 +614,7 @@ function wait_for_first_lead_pickup(var_0) {
   objective_setplayintro(var_0.objectiveindex, 1);
   objective_setplayoutro(var_0.objectiveindex, 1);
   objective_state(var_0.objectiveindex, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
   objective_setlabel(var_0.objectiveindex, &"CP_SMUGGLER/INVESTIGATE");
   objective_setlocation(var_0.objectiveindex, 0, var_7.origin + (0, 0, 12));
@@ -628,7 +628,7 @@ function wait_for_first_lead_pickup(var_0) {
   objective_setlabel(var_0.objectiveindex, &"CP_SMUGGLER/CAPTURE");
   objective_sethot(var_0.objectiveindex, 0);
   level waittill("lead_collected");
-  level.ref_13e9f = 1;
+  level.ref_13E9F = 1;
 
   for(var_1 = 0; var_1 < level.obj_leads_models.size; var_1++) {
     level.obj_leads_models[var_1] makeusable();
@@ -704,7 +704,7 @@ function spawn_lead_model(var_0, var_1, var_2) {
   }
 
   level.obj_leads_models[level.obj_leads_models.size] = var_3;
-  level.ref_11f66++;
+  level.ref_11F66++;
   level notify("spawned_lead");
   return var_3;
 }
@@ -784,7 +784,7 @@ function collect_lead(var_0, var_1, var_2, var_3) {
   }
 
   level.obj_leads_found++;
-  level.ref_11f65++;
+  level.ref_11F65++;
 
   if(var_1 == "regular" || var_1 == "obvious") {
     level.obj_leads_found_reg++;
@@ -809,18 +809,18 @@ function collect_lead(var_0, var_1, var_2, var_3) {
   }
 
   var_2 thread scripts\cp\drone\emp_drone::giverankxp("assist_marked", 50);
-  thread ref_124df();
+  thread ref_124DF();
 
   if(isent(var_0)) {
     remove_lead(var_0);
   }
 
   level notify("lead_collected", var_1, var_3);
-  thread ref_123e6();
+  thread ref_123E6();
   level.smuggler_last_collector = var_2;
 }
 
-function ref_124df() {
+function ref_124DF() {
   self endon("disconnect");
   wait 1;
 
@@ -980,7 +980,7 @@ function print_total_leads_text(var_0) {
     case 5:
     case 4:
     case 3:
-      thread ref_12c63();
+      thread ref_12C63();
       break;
   }
 }
@@ -1056,7 +1056,7 @@ function reset_totals_texts() {
   scripts\cp\cp_objectives::reset_subobjective_slot("obj_caches_collect_total_3");
 }
 
-function ref_12c63() {
+function ref_12C63() {
   scripts\cp\cp_objectives::reset_subobjective_slot("obj_caches_collect_total_1");
   scripts\cp\cp_objectives::reset_subobjective_slot("obj_caches_collect_total_2");
   scripts\cp\cp_objectives::reset_subobjective_slot("obj_caches_collect_total_3");
@@ -1254,7 +1254,7 @@ function remove_from_struct_array(var_0, var_1, var_2) {
 function spawn_trickle_soldiers(var_0) {
   level endon("stop_leads");
   wait 5;
-  level.ref_135a2 = scripts\cp\cp_modular_spawning::run_spawn_module("soldier_cache_" + var_0 + "_trickle");
+  level.ref_135A2 = scripts\cp\cp_modular_spawning::run_spawn_module("soldier_cache_" + var_0 + "_trickle");
 }
 
 function keycardlocs(var_0, var_1) {
@@ -1290,7 +1290,7 @@ function register_spawn_functions() {
   var_0 = &scripts\cp\cp_modular_spawning::registerambientgroup;
   scripts\cp\coop_stealth::coop_stealth_init();
   [[var_0]]("first_house_guards", 10, 10, 10, 0.1, 0, "first_house_guards", &watchforstopwaves, undefined, undefined);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("first_house_guards", &ref_1320c);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("first_house_guards", &ref_1320C);
   scripts\cp\cp_modular_spawning::register_module_ai_death_func("first_house_guards", &scripts\cp\coop_stealth::regular_enemy_death_func);
   [[var_0]]("soldier_cache_1", 10, 10, 30, [ &scripts\cp\cp_modular_spawning::module_wave_spawn, 30, 2], 0, "soldier_cache_1", &watchforstopwaves, undefined, undefined);
   [[var_0]]("soldier_cache_2", 10, 10, 30, [ &scripts\cp\cp_modular_spawning::module_wave_spawn, 30, 2], 0, "soldier_cache_2", &watchforstopwaves, undefined, undefined);
@@ -1298,7 +1298,7 @@ function register_spawn_functions() {
   [[var_0]]("soldier_cache_3", 10, 10, 30, [ &scripts\cp\cp_modular_spawning::module_wave_spawn, 30, 2], 0, "soldier_cache_3", &watchforstopwaves, undefined, undefined);
   [[var_0]]("soldier_cache_3_trickle", 2, 5, 100, [ &scripts\cp\cp_modular_spawning::module_wave_spawn, 30, 2], 0, "soldier_cache_3", &watchforstopwaves, undefined, undefined);
   [[var_0]]("school_guards", 8, 10, 40, 0.1, 0, "school_guards", &watchforstopwaves, undefined, undefined);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("school_guards", &ref_12ee9);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("school_guards", &ref_12EE9);
   [[var_0]]("soldier_cache_4", 10, 10, 30, [ &scripts\cp\cp_modular_spawning::module_wave_spawn, 30, 2], 0, "soldier_cache_4", &watchforstopwaves, undefined, undefined);
   [[var_0]]("soldier_cache_4_trickle", 3, 6, 100, [ &scripts\cp\cp_modular_spawning::module_wave_spawn, 30, 2], 0, "soldier_cache_4", &watchforstopwaves, undefined, undefined);
   [[var_0]]("school_guards_chopper", 6, 6, 6, 0.1, 0, "school_guards_chopper", &watchforstopwaves, undefined, undefined);
@@ -1313,14 +1313,14 @@ function register_spawn_functions() {
   setup_enemy_sentry(var_0, "techo_phys_cache6");
 }
 
-function ref_12ee9(var_0) {
+function ref_12EE9(var_0) {
   var_1 = "school_guards_pursue";
-  thread ref_12eea(var_1);
-  thread ref_12eec(var_1);
-  thread ref_12eed(var_1);
+  thread ref_12EEA(var_1);
+  thread ref_12EEC(var_1);
+  thread ref_12EED(var_1);
 }
 
-function ref_12eec(var_0) {
+function ref_12EEC(var_0) {
   self endon(var_0);
   level endon("game_ended");
   self endon("death");
@@ -1329,20 +1329,20 @@ function ref_12eec(var_0) {
     return;
   }
 
-  if(!isDefined(level.ref_12eeb)) {
-    level.ref_12eeb = [];
+  if(!isDefined(level.ref_12EEB)) {
+    level.ref_12EEB = [];
   }
 
-  level.ref_12eeb[level.ref_12eeb.size] = self;
-  jumpiftrue(isDefined(level.ref_12dca)) LOC_000000a9;
-  level.ref_12dca = getEntArray("rpg_shoot_at_trig", "targetname");
+  level.ref_12EEB[level.ref_12EEB.size] = self;
+  jumpiftrue(isDefined(level.ref_12DCA)) LOC_000000a9;
+  level.ref_12DCA = getEntArray("rpg_shoot_at_trig", "targetname");
 
-  if(!isDefined(level.ref_12dca) || level.ref_12dca.size == 0) {
+  if(!isDefined(level.ref_12DCA) || level.ref_12DCA.size == 0) {
     return;
   }
 
-  foreach(var_2 in level.ref_12dca) {
-    thread ref_12dc9();
+  foreach(var_2 in level.ref_12DCA) {
+    thread ref_12DC9();
   }
 
   for(;;) {
@@ -1350,33 +1350,33 @@ function ref_12eec(var_0) {
     var_5 = spawn("script_model", var_4.origin);
     var_5 setModel("tag_origin");
     self setentitytarget(var_5, 1);
-    var_6 = scripts\engine\utility::ref_143b9(5, "shooting");
+    var_6 = scripts\engine\utility::ref_143B9(5, "shooting");
     self clearentitytarget();
     var_5 delete();
   }
 }
 
-function ref_12dc9() {
+function ref_12DC9() {
   level endon("game_ended");
   self endon("death");
   self notify("rpg_shoot_at_trig_watch");
   self endon("rpg_shoot_at_trig_watch");
-  level.ref_11fa7 = undefined;
+  level.ref_11FA7 = undefined;
 
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(!isDefined(level.ref_12eeb) || level.ref_12eeb.size == 0) {
+    if(!isDefined(level.ref_12EEB) || level.ref_12EEB.size == 0) {
       continue;
     }
 
     if(isDefined(var_0) && isPlayer(var_0)) {
       var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
       var_1 = sortbydistance(var_1, var_0.origin);
-      level.ref_12eeb = scripts\engine\utility::array_randomize(level.ref_12eeb);
+      level.ref_12EEB = scripts\engine\utility::array_randomize(level.ref_12EEB);
       var_2 = 0;
 
-      foreach(var_4 in level.ref_12eeb) {
+      foreach(var_4 in level.ref_12EEB) {
         if(isDefined(var_4) && isalive(var_4)) {
           for(var_5 = 0; var_5 < var_1.size; var_5++) {
             var_6 = var_1[var_5];
@@ -1384,7 +1384,7 @@ function ref_12dc9() {
             if(sighttracepassed(var_4.origin + (0, 0, 62), var_6.origin, 0, var_4, 0)) {
               var_4 notify("fire_rpg_at", var_6);
               var_7 = var_4 getEye();
-              var_8 = var_4 scripts\engine\utility::ref_143b9(5, "shooting");
+              var_8 = var_4 scripts\engine\utility::ref_143B9(5, "shooting");
 
               if(isDefined(var_8) && var_8 == "shooting") {
                 var_2 = 1;
@@ -1407,7 +1407,7 @@ function ref_12dc9() {
   }
 }
 
-function ref_12eea(var_0) {
+function ref_12EEA(var_0) {
   self endon(var_0);
   level endon("game_ended");
   self endon("death");
@@ -1449,7 +1449,7 @@ function ref_12eea(var_0) {
   }
 }
 
-function ref_12eed(var_0) {
+function ref_12EED(var_0) {
   level endon("game_ended");
   self endon("death");
   wait 1;
@@ -1489,7 +1489,7 @@ function stopwaveandstartthisone(var_0) {
   [[var_0]]();
 }
 
-function ref_1320c(var_0, var_1) {
+function ref_1320C(var_0, var_1) {
   self.sightmaxdistance = 2200;
   thread scripts\cp\coop_stealth::run_common_functions(self, 1, 1, 60, 160000);
 }
@@ -1503,7 +1503,7 @@ function spawn_support_wave_handler() {
   var_3 = get_num_ambient();
 
   for(;;) {
-    var_4 = level scripts\engine\utility::ref_143ba(var_1, "lead_collected", "cache_def_start");
+    var_4 = level scripts\engine\utility::ref_143BA(var_1, "lead_collected", "cache_def_start");
 
     if(var_4 == "timeout" || var_4 == "cache_def_start") {
       if(var_4 == "cache_def_start") {
@@ -1515,38 +1515,38 @@ function spawn_support_wave_handler() {
   }
 }
 
-function ref_12df9() {
+function ref_12DF9() {
   level endon("game_ended");
   level endon("stop_leads");
   var_0 = get_cache_num(1);
 
   if(var_0 == "1") {
     thread play_vo_delay(level);
-    thread ref_12dd5(level);
-    thread ref_12dd5(level);
+    thread ref_12DD5(level);
+    thread ref_12DD5(level);
     wait 60;
-    thread ref_12dd5(level);
-    thread ref_12dd5(level);
+    thread ref_12DD5(level);
+    thread ref_12DD5(level);
     thread watchbrc130airdropchuteanimend();
     return;
   }
 
   if(var_0 == "2" || var_0 == "3") {
-    thread ref_12dd5(level);
-    thread ref_12dd5(level);
+    thread ref_12DD5(level);
+    thread ref_12DD5(level);
     thread watchbrc130airdropchuteanimend();
     return;
   }
 
   if(var_0 == "4") {
-    thread ref_12e01(level, "techo_phys_cache1", 45);
-    thread ref_12e01(level, "techo_phys_cache5", 45);
-    thread ref_12e01(level, "techo_phys_cache6", 100);
+    thread ref_12E01(level, "techo_phys_cache1", 45);
+    thread ref_12E01(level, "techo_phys_cache5", 45);
+    thread ref_12E01(level, "techo_phys_cache6", 100);
     return;
   }
 }
 
-function ref_12deb() {
+function ref_12DEB() {
   level endon("game_ended");
   level endon("stop_leads");
   var_0 = get_cache_num(1);
@@ -1555,14 +1555,14 @@ function ref_12deb() {
     for(;;) {
       var_1 = scripts\cp\cp_modular_spawning::run_spawn_module("school_guards_chopper");
       wait 45;
-      ref_143a0(18);
+      ref_143A0(18);
     }
 
     return;
   }
 }
 
-function ref_143a0(var_0) {
+function ref_143A0(var_0) {
   level endon("game_ended");
 
   for(;;) {
@@ -1591,7 +1591,7 @@ function ref_143a0(var_0) {
   }
 }
 
-function ref_12de5() {
+function ref_12DE5() {
   var_0 = get_cache_num(1);
 
   if(var_0 == "4") {
@@ -1602,10 +1602,10 @@ function ref_12de5() {
 
 function watchbrc130airdropchuteanimend() {
   wait 10;
-  thread ref_12dd5(level);
+  thread ref_12DD5(level);
 }
 
-function ref_12e01(var_0, var_1, var_2) {
+function ref_12E01(var_0, var_1, var_2) {
   level endon("game_ended");
   level endon("stop_leads");
   var_3 = 30;
@@ -1633,17 +1633,17 @@ function ref_12e01(var_0, var_1, var_2) {
   thread ref_14350();
 
   if(isDefined(var_2) && var_2 > 0) {
-    thread ref_12cae(var_5, var_4, var_0);
+    thread ref_12CAE(var_5, var_4, var_0);
   }
 
-  var_5 scripts\engine\utility::ref_143a5("unloading", "death");
+  var_5 scripts\engine\utility::ref_143A5("unloading", "death");
   scripts\cp\cp_modular_spawning::stop_module_by_groupname(var_0);
 }
 
-function ref_12cae(var_0, var_1, var_2) {
+function ref_12CAE(var_0, var_1, var_2) {
   level endon("game_ended");
   level endon("stop_leads");
-  var_3 = scripts\engine\utility::ref_143ad("death", "unloaded");
+  var_3 = scripts\engine\utility::ref_143AD("death", "unloaded");
   var_4 = self.origin;
 
   if(isDefined(var_3) && var_3 == "death") {
@@ -1660,7 +1660,7 @@ function ref_12cae(var_0, var_1, var_2) {
 
       if(var_5 <= 1) {
         var_2--;
-        thread ref_12e01(level, var_1, 1);
+        thread ref_12E01(level, var_1, 1);
         return;
       }
 
@@ -1671,7 +1671,7 @@ function ref_12cae(var_0, var_1, var_2) {
   }
 }
 
-function ref_12dd5(var_0) {
+function ref_12DD5(var_0) {
   level endon("game_ended");
   level endon("stop_leads");
   var_1 = scripts\cp\cp_modular_spawning::run_spawn_module(var_0);
@@ -1752,22 +1752,22 @@ function previouscarepackagekillstreaks() {
 
 function max_steps_before_stability_loss() {
   level waittill("safehouse_door_opened");
-  scripts\cp\utility::ref_123fe("mus_cp_smuggler_start");
+  scripts\cp\utility::ref_123FE("mus_cp_smuggler_start");
 }
 
-function ref_123e5(var_0) {
-  if(isDefined(level.ref_11f58)) {
+function ref_123E5(var_0) {
+  if(isDefined(level.ref_11F58)) {
     return;
   }
 
-  level.ref_11f58 = 1;
+  level.ref_11F58 = 1;
   wait 0.1;
   play_vo_delay(level, "dx_cps_lass_cache_collection_hints_cash_10", undefined, undefined);
   scripts\mp\vehicles\vehicle_damage_mp::ref_12408(var_0, "ping_response_copy");
-  thread ref_119da();
+  thread ref_119DA();
 }
 
-function ref_119da() {
+function ref_119DA() {
   level endon("game_ended");
   level endon("lead_collected");
   wait 3;
@@ -1823,9 +1823,9 @@ function play_enemy_incoming(var_0) {
   }
 
   wait var_0;
-  thread ref_12deb();
-  thread ref_12df9();
-  thread ref_12de5();
+  thread ref_12DEB();
+  thread ref_12DF9();
+  thread ref_12DE5();
   wait 12;
   thread play_vo_delay(level, var_1, undefined);
   var_3 = scripts\engine\utility::getStruct(var_2, "targetname");
@@ -1869,7 +1869,7 @@ function play_find_lead(var_0, var_1) {
   }
 
   if(level.obj_found_lead_here_vo <= 1 && level.obj_cache_num == 1) {
-    thread ref_123e5(level);
+    thread ref_123E5(level);
     return;
   }
 }
@@ -1881,27 +1881,27 @@ function play_find_lead_good(var_0, var_1) {
   }
 }
 
-function ref_123e6() {
+function ref_123E6() {
   var_0 = level.obj_cache_num;
 
   switch (var_0) {
     case 1:
-      ref_123e7();
+      ref_123E7();
       break;
     case 3:
     case 2:
-      ref_123e9();
+      ref_123E9();
       break;
     case 4:
-      ref_123e8();
+      ref_123E8();
       break;
   }
 }
 
-function ref_123e7() {
+function ref_123E7() {
   var_0 = level.obj_leads_found;
 
-  if(!istrue(level.ref_13e9f)) {
+  if(!istrue(level.ref_13E9F)) {
     return;
   }
 
@@ -1918,7 +1918,7 @@ function ref_123e7() {
   }
 }
 
-function ref_123e9() {
+function ref_123E9() {
   var_0 = level.obj_leads_found;
 
   switch (var_0) {
@@ -1937,7 +1937,7 @@ function ref_123e9() {
   }
 }
 
-function ref_123e8() {
+function ref_123E8() {
   var_0 = level.obj_leads_found;
 
   switch (var_0) {
@@ -1992,7 +1992,7 @@ function play_investigation_done() {
     case 4:
       var_0 = "dx_cps_kama_cache_collection_complete_schoolhouse_10";
       var_1 = "ping_response_affirm";
-      thread ref_11e1f();
+      thread ref_11E1F();
       scripts\cp\cp_modular_spawning::stop_module_by_groupname("wave_spawning");
       break;
   }
@@ -2008,7 +2008,7 @@ function play_investigation_done() {
   level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var_2, "obj_moveout_nag", undefined, 5);
 }
 
-function ref_123c7() {
+function ref_123C7() {
   play_vo_delay(level, "dx_cps_kama_cache_collection_intro_documents_10");
   wait 1;
   play_vo_delay(level, "dx_cps_kama_cache_collection_ied_documents_10");
@@ -2055,7 +2055,7 @@ function handle_hints_vo() {
   for(;;) {
     var_1 = undefined;
     var_0 = get_hint_timer();
-    var_2 = level scripts\engine\utility::ref_143b9(var_0, "lead_collected");
+    var_2 = level scripts\engine\utility::ref_143B9(var_0, "lead_collected");
 
     if(var_2 == "timeout") {
       for(var_3 = 0; var_3 < level.obj_leads_models.size; var_3++) {
@@ -2133,7 +2133,7 @@ function hints_vo_visual_send_to() {
   objective_setbackground(var_1, 0);
   objective_position(var_1, self.origin);
   objective_state(var_1, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_1);
+  scripts\cp\cp_objectives::ref_11F80(var_1);
   objective_icon(var_1, "icon_waypoint_objective_general");
   objective_setlabel(var_1, &"CP_SMUGGLER/INVESTIGATE");
   objective_setownerteam(var_1, "allies");
@@ -2142,20 +2142,20 @@ function hints_vo_visual_send_to() {
   var_2 = get_hint_timer();
 
   if(var_2 > 44) {
-    thread ref_1431f(self, 0.4);
+    thread ref_1431F(self, 0.4);
     objective_setbackground(var_1, 0);
     wait 6;
   } else if(var_2 > 38) {
-    thread ref_1431f(self, 0.25);
+    thread ref_1431F(self, 0.25);
     objective_setbackground(var_1, 0);
     wait 10;
   } else if(var_2 > 35) {
-    thread ref_1431f(self, 0.25);
+    thread ref_1431F(self, 0.25);
     objective_setbackground(var_1, 0);
     objective_sethot(var_1, 0);
     wait 18;
   } else {
-    thread ref_1431f(self, 0.25);
+    thread ref_1431F(self, 0.25);
     objective_setbackground(var_1, 0);
     objective_sethot(var_1, 0);
     wait 30;
@@ -2164,7 +2164,7 @@ function hints_vo_visual_send_to() {
   thread hasdonestartmusic();
 }
 
-function ref_1431f(var_0, var_1) {
+function ref_1431F(var_0, var_1) {
   self endon("lead_collected");
   self endon("hide_lead_hint");
   self endon("death");
@@ -2199,7 +2199,7 @@ function hasdonestartmusic() {
   }
 }
 
-function ref_131f0() {
+function ref_131F0() {
   scripts\cp\utility::skydivestreamhintdvars("caches");
 }
 
@@ -2210,7 +2210,7 @@ function play_mission_complete() {
   scripts\mp\vehicles\vehicle_damage_mp::ref_12408(undefined, "ping_response_affirm");
 }
 
-function ref_11e1f() {
+function ref_11E1F() {
   level endon("game_ended");
   level endon("tugofwar_players_approaching");
   level endon("players_looking_for_informant");
@@ -2221,7 +2221,7 @@ function ref_11e1f() {
   }
 }
 
-function ref_1446c() {
+function ref_1446C() {
   level endon("game_ended");
   level endon("tugofwar_players_approaching");
   var_0 = scripts\engine\utility::getStruct("tugofwar_cancel_vo", "targetname");
@@ -2264,7 +2264,7 @@ function vo_length(var_0) {
   return var_1;
 }
 
-function ref_11e0f() {
+function ref_11E0F() {
   level endon("game_ended");
   level endon("stop_leads");
 
@@ -2272,7 +2272,7 @@ function ref_11e0f() {
     wait 1;
   }
 
-  scripts\cp\utility::ref_123fe("mus_cp_smuggler_travel_1");
+  scripts\cp\utility::ref_123FE("mus_cp_smuggler_travel_1");
 }
 
 function debug_start_caches(var_0) {
@@ -2293,7 +2293,7 @@ function killprojectileafterdelay() {
     var_0 = getdvarint("scr_caches_tankdroptime", 0);
   }
 
-  level.ref_11f57 = [];
+  level.ref_11F57 = [];
   wait var_0;
   var_1 = spawnStruct();
   var_1.origin = (-6888, 32484, -136);
@@ -2305,20 +2305,20 @@ function killprojectileafterdelay() {
   var_2.angles = (0, 0, 0);
   thread ref_13516(level);
   wait var_0;
-  ref_1433d(level);
+  ref_1433D(level);
   var_3 = spawnStruct();
   var_3.origin = (-4372, 32680, 121.278);
   var_3.angles = (0, 0, 0);
   thread ref_13516(level);
   wait var_0;
-  ref_1433d(level);
+  ref_1433D(level);
   var_4 = spawnStruct();
   var_4.origin = (-4824, 31836, -162.932);
   var_4.angles = (0, 0, 0);
   thread ref_13516(level);
 }
 
-function ref_1433d() {
+function ref_1433D() {
   var_0 = level.obj_leads_found;
 
   while(getcirclerangemax(var_0)) {
@@ -2328,12 +2328,12 @@ function ref_1433d() {
 
 function getcirclerangemax(var_0) {
   if(level.obj_leads_found > var_0 + 5) {
-    if(level.ref_11f57.size <= 3) {
+    if(level.ref_11F57.size <= 3) {
       return false;
     }
   }
 
-  if(level.ref_11f57.size > 1) {
+  if(level.ref_11F57.size > 1) {
     return true;
   }
 
@@ -2374,7 +2374,7 @@ function ref_13516(var_0, var_1) {
 
   var_5 = ["dx_cps_kama_callout_tank_spawning_10", "dx_cps_kama_callout_tank_spawning_20", "dx_cps_lass_callout_tank_spawning_10", "dx_cps_lass_callout_tank_spawning_20"];
   thread play_vo_delay(level, scripts\engine\utility::random(var_5), undefined, undefined, undefined);
-  level.ref_11f57[level.ref_11f57.size] = var_4;
+  level.ref_11F57[level.ref_11F57.size] = var_4;
   wait 6.5;
   thread tank_waittill_death();
   var_4 endon("death");
@@ -2413,7 +2413,7 @@ function ref_13516(var_0, var_1) {
         var_7 settargetentity(var_10.vehicle);
       }
     } else {
-      ref_130f2(var_6, var_10, 9, var_1, var_8);
+      ref_130F2(var_6, var_10, 9, var_1, var_8);
       var_7 settargetentity(var_10);
     }
 
@@ -2430,8 +2430,8 @@ function tank_waittill_death() {
     setheadiconimage(self.headicon);
   }
 
-  if(isDefined(level.ref_11f57)) {
-    level.ref_11f57 = scripts\engine\utility::array_remove(level.ref_11f57, self);
+  if(isDefined(level.ref_11F57)) {
+    level.ref_11F57 = scripts\engine\utility::array_remove(level.ref_11F57, self);
     return;
   }
 }
@@ -2470,7 +2470,7 @@ function tank_hitmarkers() {
   }
 }
 
-function ref_130f2(var_0, var_1, var_2, var_3) {
+function ref_130F2(var_0, var_1, var_2, var_3) {
   if(distancesquared(self.origin, var_0.origin) < var_3) {
     self settargetentity(var_0);
     return;

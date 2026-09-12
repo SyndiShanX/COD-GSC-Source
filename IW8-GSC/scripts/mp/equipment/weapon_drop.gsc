@@ -70,7 +70,7 @@ function weapondrop_deploydrone(var_0, var_1) {
     }
 
     var_2.deliverybox = var_3;
-    thread ref_1457f(var_2);
+    thread ref_1457F(var_2);
     return;
   }
 }
@@ -79,7 +79,7 @@ function weapondrop_dronedelivery() {
   weapondrop_createdrop(self.deliverybox);
 }
 
-function ref_1457f(var_0) {
+function ref_1457F(var_0) {
   level endon("game_ended");
   level endon("prematch_cleanup");
   var_0 endon("deliveryBox_dropped");
@@ -196,12 +196,12 @@ function watchcrateimpact(var_0) {
         var_11 = "user_terrain_5";
       }
 
-      ref_1245c(var_6, var_7, var_8, var_11);
+      ref_1245C(var_6, var_7, var_8, var_11);
     }
   }
 }
 
-function ref_1245c(var_0, var_1, var_2, var_3) {
+function ref_1245C(var_0, var_1, var_2, var_3) {
   playFX(scripts\engine\utility::getfx("weapon_drop_impact"), var_0, var_1);
 
   if(var_2 < 150) {

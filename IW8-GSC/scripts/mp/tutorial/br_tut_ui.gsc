@@ -33,7 +33,7 @@ function process_vo_queue(var_0, var_1) {
       var_2 = [];
 
       foreach(var_4 in level.ref_14304) {
-        ref_1243a(var_4);
+        ref_1243A(var_4);
         var_2 = var_4;
       }
 
@@ -44,7 +44,7 @@ function process_vo_queue(var_0, var_1) {
   }
 }
 
-function ref_1243a(var_0) {
+function ref_1243A(var_0) {
   if(isDefined(self.watch_for_players_touching_ground)) {
     while(player_is_shooting()) {
       waitframe();
@@ -60,7 +60,7 @@ function player_is_shooting() {
   return gettime() - self.watch_for_players_touching_ground < 400;
 }
 
-function ref_143a2() {
+function ref_143A2() {
   while(level.ref_14304.size) {
     wait 0.1;
   }
@@ -184,7 +184,7 @@ function add_explicit_array_to_vo_queue(var_0, var_1) {
   }
 }
 
-function ref_143ec(var_0) {
+function ref_143EC(var_0) {
   while(scripts\engine\utility::array_contains(level.ref_14304, level.ref_14303 + var_0)) {
     waitframe();
   }

@@ -606,7 +606,7 @@ function player_update_unresolved_collision(var_0, var_1) {
       } else {
         var_4 = isDefined(self.waittill_player_opens_scavenger_cache) && gettime() - self.waittill_player_opens_scavenger_cache <= 250;
 
-        if(var_4 || var_0 scripts\cp_mp\vehicles\vehicle::isvehicle() && !scripts\cp_mp\vehicles\vehicle::ref_1418b(var_0, self)) {
+        if(var_4 || var_0 scripts\cp_mp\vehicles\vehicle::isvehicle() && !scripts\cp_mp\vehicles\vehicle::ref_1418B(var_0, self)) {
           var_3 += " nearest_node false";
           unresolved_collision_nearest_node(var_0, self, 0, var_0);
         } else {
@@ -647,7 +647,7 @@ function player_unresolved_collision_watch() {
   for(;;) {
     self waittill("unresolved_collision", var_0, var_1);
 
-    if(ref_124b5(var_0)) {
+    if(ref_124B5(var_0)) {
       continue;
     }
 
@@ -655,7 +655,7 @@ function player_unresolved_collision_watch() {
   }
 }
 
-function ref_124b5(var_0) {
+function ref_124B5(var_0) {
   var_1 = 0;
 
   if(isDefined(var_0.streakinfo) && var_0.streakinfo.streakname == "cruise_predator") {
@@ -750,7 +750,7 @@ function unresolved_collision_nearest_node(var_0, var_1, var_2) {
       } else if(isDefined(var_2.cover)) {
         var_2.cover scripts\mp\equipment\tactical_cover::tac_cover_destroy(undefined, 0);
         return;
-      } else if(isDefined(level.ref_11c87) && [[level.ref_11c87]](var_0, var_2)) {
+      } else if(isDefined(level.ref_11C87) && [[level.ref_11C87]](var_0, var_2)) {
         return;
       }
     } else {
@@ -981,25 +981,25 @@ function handle_moving_platform_touch(var_0) {
       }
     }
 
-    if(isDefined(var_0.ref_123b4) && var_0.ref_123b4) {
+    if(isDefined(var_0.ref_123B4) && var_0.ref_123B4) {
       if(_calloutmarkerping_handleluinotify_enemyrepinged::tugofwar_tank(var_1)) {
         waitframe();
         continue;
       }
     }
 
-    if(!istrue(var_0.ref_133ca)) {
+    if(!istrue(var_0.ref_133CA)) {
       thread process_moving_platform_death(var_0, var_1);
     }
 
-    self.ref_13bff = 1;
+    self.ref_13BFF = 1;
     self.wam_number_of_failures = var_1;
-    thread ref_123b9();
+    thread ref_123B9();
     break;
   }
 }
 
-function ref_123b9() {
+function ref_123B9() {
   self endon("death");
   self.wam_number_of_failures waittill("death");
   self.wam_number_of_failures = undefined;

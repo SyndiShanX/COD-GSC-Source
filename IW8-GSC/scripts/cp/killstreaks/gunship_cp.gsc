@@ -156,7 +156,7 @@ function notcanon(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_15.timeout = 6669;
   var_15.currentdamagestate = 0;
   var_15.team = "axis";
-  var_15.ref_11fb4 = 2;
+  var_15.ref_11FB4 = 2;
   var_15.flaresreservecount = 2;
   var_15 scriptmoveroutline();
   var_15 scriptmoverthermal();
@@ -198,7 +198,7 @@ function notcanon(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_15 playLoopSound("iw8_ks_ac130_lp");
 }
 
-function ref_123e4() {
+function ref_123E4() {
   var_0 = "ping_killstreaks_gunship";
   var_1 = self;
   var_2 = var_1;
@@ -277,7 +277,7 @@ function notify_planter_on_damage(var_0) {
       }
     }
 
-    thread ref_12df8(7);
+    thread ref_12DF8(7);
     self.wasdamaged = 1;
     var_11 = undefined;
 
@@ -322,18 +322,18 @@ function notify_planter_on_damage(var_0) {
 
       self.owner delete();
       level.little_bird_mg_mp_init = 1;
-      thread scripts\cp\cp_relics::ref_137a2(1);
+      thread scripts\cp\cp_relics::ref_137A2(1);
       thread scripts\cp_mp\killstreaks\gunship::gunship_crash(8, var_0);
     }
   }
 }
 
-function ref_12df8(var_0) {
+function ref_12DF8(var_0) {
   self notify("run_suppression_logic");
   self endon("run_suppression_logic");
   self endon("death");
   level endon("game_ended");
-  self.ref_139b7 = 1;
+  self.ref_139B7 = 1;
   GscBinSkip4(0x35, var_0);
 }
 
@@ -343,7 +343,7 @@ function removesuppressioneffectsaftertimeout(var_0) {
   self endon("death");
   level endon("game_ended");
   wait var_0;
-  self.ref_139b7 = undefined;
+  self.ref_139B7 = undefined;
 }
 
 function nostand(var_0, var_1, var_2, var_3) {
@@ -442,11 +442,11 @@ function notifyteamonvehicledeath(var_0) {
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("perk", "hasPerk")) {
         if(var_3[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_blindeye") || var_3[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_ghost")) {
-          if(var_3.ref_1389a <= 3) {
-            var_3.ref_1389a += 0.05;
+          if(var_3.ref_1389A <= 3) {
+            var_3.ref_1389A += 0.05;
             continue;
           } else {
-            var_3.ref_1389a = 0;
+            var_3.ref_1389A = 0;
           }
         }
       }
@@ -458,7 +458,7 @@ function notifyteamonvehicledeath(var_0) {
     if(var_1.size > 0 && var_1.size < 2) {
       foreach(var_6 in var_1) {
         if(isPlayer(var_6)) {
-          thread ref_123e4();
+          thread ref_123E4();
           thread nopropsspectate(var_6);
           var_6 thread scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("gunship_single_spotted");
           self notify("gunship_shoot_debug_location");
@@ -531,13 +531,13 @@ function nopropsspectate(var_0) {
   self notify(var_0.name + "enemyGunship_fireRounds");
   self endon(var_0.name + "enemyGunship_fireRounds");
   jumpiftrue(isDefined(self.initthermometerwatch)) LOC_00000074;
-  self.ref_1459f = ["ac130_105mm_mp", "ac130_40mm_mp", "ac130_25mm_mp"];
+  self.ref_1459F = ["ac130_105mm_mp", "ac130_40mm_mp", "ac130_25mm_mp"];
   self.initspawnsoverridefunc = 0;
-  self.initsolospawnstruct = self.ref_1459f[0];
+  self.initsolospawnstruct = self.ref_1459F[0];
   self.initthermometerwatch = self.initsolospawnstruct;
 
   for(;;) {
-    var_1 = scripts\engine\utility::ref_143ad("gunship_switch_debug_weapon", "gunship_shoot_debug_location");
+    var_1 = scripts\engine\utility::ref_143AD("gunship_switch_debug_weapon", "gunship_shoot_debug_location");
 
     if(!isDefined(var_1)) {
       waitframe();
@@ -551,12 +551,12 @@ function nopropsspectate(var_0) {
         self.initspawnsoverridefunc = 0;
       }
 
-      self.initsolospawnstruct = self.ref_1459f[self.initspawnsoverridefunc];
+      self.initsolospawnstruct = self.ref_1459F[self.initspawnsoverridefunc];
       self.initthermometerwatch = self.initsolospawnstruct;
       continue;
     }
 
-    if(istrue(self.ref_139b7)) {
+    if(istrue(self.ref_139B7)) {
       waitframe();
       continue;
     }
@@ -592,13 +592,13 @@ function noprone(var_0, var_1) {
     var_2 = weaponmaxammo(var_1);
 
     while(var_2 > 0) {
-      if(istrue(self.ref_139b7)) {
+      if(istrue(self.ref_139B7)) {
         waitframe();
         continue;
       }
 
       var_3 = undefined;
-      var_4 = scripts\cp_mp\killstreaks\toma_strike::ref_13bd6(var_0, 333);
+      var_4 = scripts\cp_mp\killstreaks\toma_strike::ref_13BD6(var_0, 333);
       var_3 = var_4.point;
       var_5 = undefined;
       var_6 = scripts\cp_mp\utility\weapon_utility::_magicbullet(getcompleteweaponname(var_1), self.origin, var_3, var_5);

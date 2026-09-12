@@ -130,7 +130,7 @@ function createhelipilot(var_0) {
   thread helipilot_watchobjectivecam();
   thread helipilot_watchdeath();
   thread watchhostmigrationfinishedinit(var_7);
-  var_7.owner scripts\common\utility::ref_13e0a(level.ref_11b2a, level.helipilotsettings[var_7.helipilottype].streakname, var_7.targetpos);
+  var_7.owner scripts\common\utility::ref_13E0A(level.ref_11B2A, level.helipilotsettings[var_7.helipilottype].streakname, var_7.targetpos);
   return var_7;
 }
 
@@ -327,7 +327,7 @@ function helipilot_watchownerloss() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
-  self.owner scripts\engine\utility::ref_143a6("disconnect", "joined_team", "joined_spectators");
+  self.owner scripts\engine\utility::ref_143A6("disconnect", "joined_team", "joined_spectators");
   thread helipilot_leave();
 }
 
@@ -337,7 +337,7 @@ function helipilot_watchroundend() {
   self.owner endon("disconnect");
   self.owner endon("joined_team");
   self.owner endon("joined_spectators");
-  level scripts\engine\utility::ref_143a5("round_end_finished", "game_ended");
+  level scripts\engine\utility::ref_143A5("round_end_finished", "game_ended");
   thread helipilot_leave();
 }
 

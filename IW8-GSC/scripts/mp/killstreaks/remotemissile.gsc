@@ -149,7 +149,7 @@ function missileeyes(var_0, var_1) {
     var_0 thermalvisionoff();
 
     if(isDefined(var_1)) {
-      var_0 scripts\common\utility::ref_13e0a(level.ref_11b2a, "predator_missile", var_1.origin);
+      var_0 scripts\common\utility::ref_13E0A(level.ref_11B2A, "predator_missile", var_1.origin);
     }
 
     var_0 controlsunlink();
@@ -180,7 +180,7 @@ function delayedfofoverlay() {
 function player_cleanuponteamchange(var_0) {
   var_0 endon("death");
   self endon("disconnect");
-  scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
+  scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
 
   if(self.team != "spectator") {
     self controlsunlink();

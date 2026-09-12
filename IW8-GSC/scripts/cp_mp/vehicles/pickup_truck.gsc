@@ -63,7 +63,7 @@ function pickup_truck_initinteract() {
 }
 
 function ref_12354() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("pickup_truck", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("pickup_truck", 1);
   var_0.id = 7;
   var_0.seatids["driver"] = 0;
   var_0.seatids["fr"] = 1;
@@ -74,13 +74,13 @@ function ref_12354() {
 }
 
 function ref_12353() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("pickup_truck", 1000);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("pickup_truck", 1000);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("pickup_truck");
   var_0.class = "medium";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("pickup_truck");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("pickup_truck");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("pickup_truck", 6);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("pickup_truck", &pickup_truck_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("pickup_truck_mp", 3);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("pickup_truck_mp", 3);
 }
 
 function pickup_truck_initfx() {
@@ -103,7 +103,7 @@ function pickup_truck_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "pickup_truck", var_0);
   var_2.objweapon = getcompleteweaponname("pickup_truck_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
 

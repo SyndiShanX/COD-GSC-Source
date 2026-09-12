@@ -8,7 +8,7 @@ function register_interactions() {
     [[level.escape_interaction_registration_func]]();
   }
 
-  thread ref_1230d();
+  thread ref_1230D();
 
   if(scripts\engine\utility::flag_exist("interactions_initialized")) {
     scripts\engine\utility::flag_set("interactions_initialized");
@@ -290,7 +290,7 @@ function level_specific_player_interaction_monitor() {
   }
 }
 
-function ref_1230d() {
+function ref_1230D() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait("strike_init_done");
   scripts\engine\utility::flag_wait("introscreen_over");
@@ -305,21 +305,21 @@ function ref_1230d() {
     }
   }
 
-  level.ref_1230e = spawn("script_model", (-77.25, 2759, 303.75));
-  level.ref_1230e setModel("tag_origin");
-  level.ref_1230e.angles = (0, 0, 0);
+  level.ref_1230E = spawn("script_model", (-77.25, 2759, 303.75));
+  level.ref_1230E setModel("tag_origin");
+  level.ref_1230E.angles = (0, 0, 0);
   waitframe();
-  level.ref_1230e setCursorHint("HINT_BUTTON");
-  level.ref_1230e sethintdisplayrange(60);
-  level.ref_1230e sethintdisplayfov(40);
-  level.ref_1230e setuserange(60);
-  level.ref_1230e setusefov(35);
-  level.ref_1230e setuseholdduration("duration_short");
-  level.ref_1230e makeusable();
-  thread ref_1230c();
+  level.ref_1230E setCursorHint("HINT_BUTTON");
+  level.ref_1230E sethintdisplayrange(60);
+  level.ref_1230E sethintdisplayfov(40);
+  level.ref_1230E setuserange(60);
+  level.ref_1230E setusefov(35);
+  level.ref_1230E setuseholdduration("duration_short");
+  level.ref_1230E makeusable();
+  thread ref_1230C();
 }
 
-function ref_1230c() {
+function ref_1230C() {
   level endon("game_ended");
   self endon("death");
 
@@ -339,13 +339,13 @@ function ref_1230c() {
       self makeunusable();
 
       if(var_0 getclantag() == "iw" || var_0 getclantag() == "IW") {
-        thread ref_1230b();
+        thread ref_1230B();
       }
     }
   }
 }
 
-function ref_1230b() {
+function ref_1230B() {
   level endon("game_ended");
   self endon("death_or_disconnect");
   wait 15;

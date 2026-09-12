@@ -5,25 +5,25 @@
 
 function init() {
   var_0 = spawnStruct();
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.weight = getdvarfloat("scr_br_pe_choppers_weight", 1);
   var_0.ref_14382 = &ref_14382;
   var_0.attackerswaittime = &attackerswaittime;
   var_0.postinitfunc = &postinitfunc;
-  var_0.ref_11b78 = getdvarint("scr_br_pe_choppers_max_times", 1);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_choppers_max_times", 1);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("choppers", "55 5 1015155 5");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("choppers");
-  var_1 = scripts\engine\utility::ter_op(scripts\mp\gametypes\br_publicevents::ref_11e05(), 120, 0);
+  var_1 = scripts\engine\utility::ter_op(scripts\mp\gametypes\br_publicevents::ref_11E05(), 120, 0);
   var_2 = getdvarint("scr_br_pe_choppers_lifetime", var_1);
   var_0.sol_5_6_pool = var_2;
-  scripts\mp\gametypes\br_publicevents::ref_12b35(1, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(1, var_0);
 }
 
 function postinitfunc() {
   game["dialog"]["public_events_choppers_start"] = "public_events_supply_choppers_start";
 }
 
-function ref_140cf() {
+function ref_140CF() {
   var_0 = scripts\mp\utility\game::round_vehicle_logic() == "dmz" || scripts\mp\utility\game::round_vehicle_logic() == "rat_race" || scripts\mp\utility\game::round_vehicle_logic() == "risk" || scripts\mp\utility\game::round_vehicle_logic() == "gold_war";
   return !var_0;
 }
@@ -65,7 +65,7 @@ function ref_14404(var_0) {
   wait var_0;
 
   for(;;) {
-    var_1 = level.ref_119e7;
+    var_1 = level.ref_119E7;
 
     if(!isDefined(var_1)) {
       break;
@@ -93,15 +93,15 @@ function ref_13622(var_0) {
     level.binoculars_checkexpirationtimer = 35;
     level.ref_12946 = 1;
     level.fly_over_path = 0;
-    level thread scripts\mp\gametypes\br_functional_poi::ref_1325b();
+    level thread scripts\mp\gametypes\br_functional_poi::ref_1325B();
   }
 
   scripts\mp\gametypes\br_lootchopper::init();
-  scripts\cp_mp\utility\script_utility::registersharedfunc("br_lootchopper", "lootChopper_onCrateUse", &ref_1200f);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("br_lootchopper", "lootChopper_onCrateUse", &ref_1200F);
 
-  if(!isDefined(level.ref_1229f)) {
-    var_3 = scripts\mp\gametypes\br_lootchopper::ref_11a0c(var_1, var_2);
-    scripts\mp\gametypes\br_lootchopper::ref_11a0d(var_3);
+  if(!isDefined(level.ref_1229F)) {
+    var_3 = scripts\mp\gametypes\br_lootchopper::ref_11A0C(var_1, var_2);
+    scripts\mp\gametypes\br_lootchopper::ref_11A0D(var_3);
   }
 
   var_4 = getdvarint("scr_br_pe_choppers_mindist", 6000);
@@ -115,26 +115,26 @@ function ref_13622(var_0) {
   while(var_5 < var_0) {
     var_6 = undefined;
 
-    if(isDefined(level.ref_1229f)) {
-      var_6 = level.ref_1229f[var_5];
+    if(isDefined(level.ref_1229F)) {
+      var_6 = level.ref_1229F[var_5];
     } else {
       var_7 = var_5 % 4 + 1;
-      var_6 = scripts\mp\gametypes\br_lootchopper::ref_11a07(level.ref_119e6["quad_" + var_7], var_4);
+      var_6 = scripts\mp\gametypes\br_lootchopper::ref_11A07(level.ref_119E6["quad_" + var_7], var_4);
     }
 
-    var_8 = scripts\mp\gametypes\br_lootchopper::ref_11a18(var_6, "veh_chopper_support_pe_mp");
+    var_8 = scripts\mp\gametypes\br_lootchopper::ref_11A18(var_6, "veh_chopper_support_pe_mp");
 
     if(isDefined(var_8)) {
-      if(isDefined(level.ref_1229d)) {
-        var_8.lootfunc = level.ref_1229d;
+      if(isDefined(level.ref_1229D)) {
+        var_8.lootfunc = level.ref_1229D;
       } else {
         var_8.lootfunc = &dropcrate;
       }
 
       if(!getdvarint("scr_br_pe_choppers_attack", 0)) {
-        var_8.frontturret.ref_13e86 = 1;
+        var_8.frontturret.ref_13E86 = 1;
         var_8.frontturret makeunusable();
-        var_8.rearturret.ref_13e86 = 1;
+        var_8.rearturret.ref_13E86 = 1;
         var_8.rearturret makeunusable();
       }
 
@@ -167,12 +167,12 @@ function ref_13622(var_0) {
 
 function dropcrate() {
   scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_deregisterinstance(self);
-  var_0 = scripts\mp\gametypes\br_lootchopper::ref_11a06(self.origin + (0, 0, 500));
+  var_0 = scripts\mp\gametypes\br_lootchopper::ref_11A06(self.origin + (0, 0, 500));
 
   if(isDefined(var_0)) {
     var_1 = scripts\cp_mp\killstreaks\airdrop::missionid(self.origin, var_0);
     var_2 = scripts\cp_mp\killstreaks\airdrop::gettriggerobject(var_1);
-    var_2.ref_140a0 = 10;
+    var_2.ref_140A0 = 10;
 
     if(!isDefined(level.delay_turn_off_tum_display)) {
       level.delay_turn_off_tum_display = [];
@@ -183,7 +183,7 @@ function dropcrate() {
   }
 }
 
-function ref_1200f(var_0) {
+function ref_1200F(var_0) {
   self.itemsdropped = 0;
 
   if(!isDefined(level.delay_turn_off_red_lights_along_track)) {
@@ -195,24 +195,24 @@ function ref_1200f(var_0) {
   var_1 = verifybunkercode("pe_chopper_crate", level.delay_turn_off_red_lights_along_track);
 
   if(isDefined(var_1)) {
-    var_1 = scripts\mp\gametypes\br_lootcache::ref_11a1a(var_1, var_0);
+    var_1 = scripts\mp\gametypes\br_lootcache::ref_11A1A(var_1, var_0);
   }
 
   if(isDefined(var_1) && var_0 scripts\mp\utility\perk::_hasperk("specialty_br_extra_killstreak_chance")) {
-    var_1 = scripts\mp\gametypes\br_lootcache::ref_11a1d(var_1, var_0);
+    var_1 = scripts\mp\gametypes\br_lootcache::ref_11A1D(var_1, var_0);
   }
 
   if(isDefined(var_1)) {
-    var_2 = scripts\mp\gametypes\br_lootcache::ref_11a02(var_1);
+    var_2 = scripts\mp\gametypes\br_lootcache::ref_11A02(var_1);
   }
 
-  if(!isDefined(var_0.ref_11a01)) {
-    var_0.ref_11a01 = 1;
+  if(!isDefined(var_0.ref_11A01)) {
+    var_0.ref_11A01 = 1;
   } else {
-    var_0.ref_11a01++;
+    var_0.ref_11A01++;
   }
 
-  var_0 scripts\mp\utility\stats::setextrascore1(var_0.ref_11a01);
+  var_0 scripts\mp\utility\stats::setextrascore1(var_0.ref_11A01);
   var_0 thread scripts\mp\utility\points::giveunifiedpoints("br_loot_chopper_box_open");
 }
 
@@ -223,7 +223,7 @@ function dangercircletick(var_0, var_1) {
 
   var_2 = getdvarfloat("scr_br_pe_choppers_circle_damage_tick", 500);
   var_3 = 240;
-  var_4 = level.ref_119e7;
+  var_4 = level.ref_119E7;
 
   if(isDefined(var_4)) {
     var_4 = scripts\engine\utility::array_removeundefined(var_4);
@@ -300,7 +300,7 @@ function forest_fire_setup(var_0) {
   }
 
   var_11 = (var_9 - var_8) / max(1, var_0 - 1);
-  level.ref_1229f = [];
+  level.ref_1229F = [];
 
   for(var_12 = 0; var_12 < var_0; var_12++) {
     var_13 = var_8 + var_11 * var_12;
@@ -320,7 +320,7 @@ function forest_fire_setup(var_0) {
 
     var_17 = spawnStruct();
     var_17.origin = var_16;
-    level.ref_1229f[var_12] = var_17;
+    level.ref_1229F[var_12] = var_17;
   }
 }
 

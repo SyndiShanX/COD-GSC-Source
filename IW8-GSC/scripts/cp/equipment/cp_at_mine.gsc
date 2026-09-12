@@ -331,7 +331,7 @@ function at_mine_vehicle_trigger(var_0) {
 
 function at_mine_watch_flight_mover(var_0) {
   self endon("death");
-  self.grenade scripts\engine\utility::ref_143ba(var_0, "death", "mine_destroyed");
+  self.grenade scripts\engine\utility::ref_143BA(var_0, "death", "mine_destroyed");
 
   if(isDefined(self.grenade)) {
     self moveTo(self.origin, 0.05, 0, 0);
@@ -438,7 +438,7 @@ function at_mine_watch_detonate() {
 function at_mine_watch_game_end() {
   self endon("mine_destroyed");
   self endon("death");
-  level scripts\engine\utility::ref_143a5("game_ended", "bro_shot_start");
+  level scripts\engine\utility::ref_143A5("game_ended", "bro_shot_start");
   thread at_mine_destroy();
 }
 

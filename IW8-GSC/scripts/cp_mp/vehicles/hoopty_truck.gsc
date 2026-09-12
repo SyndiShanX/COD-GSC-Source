@@ -65,7 +65,7 @@ function hoopty_truck_initinteract() {
 }
 
 function spawn_ml_p2_player_heli() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("hoopty_truck", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("hoopty_truck", 1);
   var_0.id = 12;
   var_0.seatids["driver"] = 0;
   var_0.seatids["front_right"] = 1;
@@ -76,13 +76,13 @@ function spawn_ml_p2_player_heli() {
 }
 
 function spawn_ml_p1_sentries() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("hoopty_truck", 1000);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("hoopty_truck", 1000);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("hoopty_truck");
   var_0.class = "medium_light";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("hoopty_truck");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("hoopty_truck");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("hoopty_truck", 6);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("hoopty_truck", &hoopty_truck_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("hoopty_truck_mp", 3);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("hoopty_truck_mp", 3);
 }
 
 function hoopty_truck_initfx() {
@@ -105,7 +105,7 @@ function hoopty_truck_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "hoopty_truck", var_0);
   var_2.objweapon = getcompleteweaponname("hoopty_truck_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 

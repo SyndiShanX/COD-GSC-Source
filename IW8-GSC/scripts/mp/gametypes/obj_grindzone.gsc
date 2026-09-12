@@ -27,7 +27,7 @@ function ref_14395(var_0) {
   playFX(level.spawnoffsettacinsertmax["blood_floor_hw"], getgroundposition(var_0.trigger.origin, 4) + (0, 0, 2));
 }
 
-function ref_1317d() {
+function ref_1317D() {
   self.onbeginuse = &zone_onusebegin;
   self.onuseupdate = &zone_onuseupdate;
   self.onenduse = &zone_onuseend;

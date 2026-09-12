@@ -8,10 +8,10 @@ function init() {
     return;
   }
 
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("plague_box", &ref_13e2d, undefined, &ref_13e10);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("plague_box", &ref_13E2D, undefined, &ref_13E10);
 }
 
-function ref_13e2d(var_0, var_1) {
+function ref_13E2D(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
 
@@ -36,19 +36,19 @@ function ref_13e2d(var_0, var_1) {
     }
   }
 
-  var_4 = ref_1239e(var_0);
+  var_4 = ref_1239E(var_0);
 
   if(!istrue(var_4)) {
     return var_4;
   }
 
-  ref_1239f();
+  ref_1239F();
   return 1;
 }
 
-function ref_13e10() {}
+function ref_13E10() {}
 
-function ref_1239e(var_0) {
+function ref_1239E(var_0) {
   var_1 = self;
   var_2 = spawnStruct();
   var_2.origin = var_1.origin + (100, 0, 0);
@@ -77,7 +77,7 @@ function ref_1239e(var_0) {
   return true;
 }
 
-function ref_1239f() {
+function ref_1239F() {
   var_0 = self;
   wait 5;
   iprintlnbold("PLAGUE BOX USED");

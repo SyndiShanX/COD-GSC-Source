@@ -16,36 +16,36 @@ function init() {
     scripts\mp\gametypes\br_gametypes::move_molotov_mortar("allowLateJoiners");
   }
 
-  scripts\mp\gametypes\br_gametypes::ref_12b11("spawnHandled", &ref_1365d);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerKilledSpawn", &playerrespawn);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerWelcomeSplashes", &ref_126f1);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("infilSequence", &manage_fakebody_hides);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("skipInfilSequence", &ref_133d6);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("modifyPlayerDamage", &modifyplayerdamage);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerHandleRedeploy", &ref_125c4);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerDropPlunderOnDeath", &playerdropplunderondeath);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("spawnInitialVehicles", &spawninitialvehicles);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerConnect", &onplayerconnect);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("skipPrimaryWeaponDrop", &ref_133e1);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("skipLootPickupAnim", &ref_133db);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerKilled", &onplayerkilled);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("activateKillstreakOnPurchase", &attempted_to_use_gunship);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("createC130PathStruct", &scripts\engine\utility::void);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("postPlunder", &ref_12804);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onConnectSpawnPoint", &ref_12006);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("spawnHandled", &ref_1365D);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerKilledSpawn", &playerrespawn);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerWelcomeSplashes", &ref_126F1);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("infilSequence", &manage_fakebody_hides);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("skipInfilSequence", &ref_133D6);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("modifyPlayerDamage", &modifyplayerdamage);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerHandleRedeploy", &ref_125C4);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerDropPlunderOnDeath", &playerdropplunderondeath);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("spawnInitialVehicles", &spawninitialvehicles);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerConnect", &onplayerconnect);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("skipPrimaryWeaponDrop", &ref_133E1);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("skipLootPickupAnim", &ref_133DB);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerKilled", &onplayerkilled);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("activateKillstreakOnPurchase", &attempted_to_use_gunship);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("createC130PathStruct", &scripts\engine\utility::void);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("postPlunder", &ref_12804);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onConnectSpawnPoint", &ref_12006);
 
   if(istrue(game["switchedsides"])) {
-    level.ref_133e0 = 1;
+    level.ref_133E0 = 1;
   }
 
-  scripts\mp\gametypes\br_gametypes::ref_12b10("allowedEntities", ["br", "br_payload"]);
+  scripts\mp\gametypes\br_gametypes::ref_12B10("allowedEntities", ["br", "br_payload"]);
   var_0 = "downtown2";
 
   if(scripts\cp_mp\utility\game_utility::turretdisabled()) {
     var_0 = "livingquarters";
   }
 
-  level.disable_super_in_turret.ref_1226a = getDvar("scr_br_payload_path", var_0);
+  level.disable_super_in_turret.ref_1226A = getDvar("scr_br_payload_path", var_0);
   level.disable_super_in_turret.getquestscalervalue = getdvarint("scr_br_payload_checkpoint_time", 240);
   level.disable_super_in_turret.maxtime = getdvarint("scr_br_payload_max_time", 300);
   level.disable_super_in_turret.getpropspawnlocation = getdvarint("scr_br_payload_checkpoint_remain", 60);
@@ -53,66 +53,66 @@ function init() {
   level.disable_super_in_turret.ref_14243 = getdvarfloat("scr_br_payload_vehicle_mph_slow", 1);
   level.disable_super_in_turret.ref_14240 = getdvarfloat("scr_br_payload_vehicle_auto_mph", 12);
   level.disable_super_in_turret.ref_14241 = getdvarfloat("scr_br_payload_vehicle_mph_fast", 8);
-  level.disable_super_in_turret.ref_1422d = getdvarfloat("scr_br_payload_vehicle_back_mph", 2);
-  level.disable_super_in_turret.ref_1422e = getdvarfloat("scr_br_payload_vehicle_back_mph_slow", 1);
+  level.disable_super_in_turret.ref_1422D = getdvarfloat("scr_br_payload_vehicle_back_mph", 2);
+  level.disable_super_in_turret.ref_1422E = getdvarfloat("scr_br_payload_vehicle_back_mph_slow", 1);
   level.disable_super_in_turret.ref_13633 = getdvarfloat("scr_br_payload_spawn_dist_defend", 7500);
   level.disable_super_in_turret.ref_13632 = getdvarfloat("scr_br_payload_spawn_dist_attack", 5500);
   level.disable_super_in_turret.ref_13660 = getdvarfloat("scr_br_payload_spawn_height_defend", 1500);
-  level.disable_super_in_turret.ref_1365f = getdvarfloat("scr_br_payload_spawn_height_attack", 1000);
-  level.disable_super_in_turret.ref_1368f = getdvarfloat("scr_br_payload_spawn_radius_defend", 500);
-  level.disable_super_in_turret.ref_1368e = getdvarfloat("scr_br_payload_spawn_radius_attack", 500);
-  level.disable_super_in_turret.ref_11b58 = getdvarint("scr_br_payload_max_damage_collision", 25);
-  level.disable_super_in_turret.ref_1225f = getdvarint("scr_br_payload_econ", 1);
-  level.disable_super_in_turret.ref_129cb = getdvarint("scr_br_payload_radial_spawn", 1);
+  level.disable_super_in_turret.ref_1365F = getdvarfloat("scr_br_payload_spawn_height_attack", 1000);
+  level.disable_super_in_turret.ref_1368F = getdvarfloat("scr_br_payload_spawn_radius_defend", 500);
+  level.disable_super_in_turret.ref_1368E = getdvarfloat("scr_br_payload_spawn_radius_attack", 500);
+  level.disable_super_in_turret.ref_11B58 = getdvarint("scr_br_payload_max_damage_collision", 25);
+  level.disable_super_in_turret.ref_1225F = getdvarint("scr_br_payload_econ", 1);
+  level.disable_super_in_turret.ref_129CB = getdvarint("scr_br_payload_radial_spawn", 1);
   level.disable_super_in_turret.set_force_aitype_sniper = getdvarint("scr_br_payload_ground_spawn", 1);
   level.disable_super_in_turret.set_force_aitype_shotgun = getdvarint("scr_br_payload_ground_spawn_max", 20);
   level.disable_super_in_turret.ref_13746 = getdvarint("scr_br_payload_squad_spawn", 0);
   level.disable_super_in_turret.ref_13601 = getdvarint("scr_br_payload_attacker_air", 0);
   level.disable_super_in_turret.ref_13602 = getdvarint("scr_br_payload_attacker_air_max", 0);
   level.disable_super_in_turret.ref_13604 = getdvarint("scr_br_payload_spawn_protect_air_time", 5);
-  level.disable_super_in_turret.ref_1365c = getdvarint("scr_br_payload_spawn_protect_ground_time", 10);
+  level.disable_super_in_turret.ref_1365C = getdvarint("scr_br_payload_spawn_protect_ground_time", 10);
   level.juggheli_spawner_jammer5_3 = getdvarint("scr_br_payload_tacmap_zoom", 12000);
   level.disable_super_in_turret.checkpoint_objective = getdvarint("scr_br_payload_auto_kiosks", 1);
   level.disable_super_in_turret.getquestscaledvalue = getdvarint("scr_br_payload_checkpoint_models", 1);
   level.disable_super_in_turret.getpropsize = getdvarint("scr_br_payload_bunker_price", 5000);
   level.disable_super_in_turret.getquesttimefrac = getdvarint("scr_br_payload_tower_price", 2500);
   level.disable_super_in_turret.mine_caves_turret_1_support = getdvarint("scr_br_payload_vehicles", 0);
-  level.disable_super_in_turret.ref_136ab = getdvarfloat("scr_br_payload_spawn_vehicle_time", 10);
-  level.disable_super_in_turret.ref_142f8 = getdvarfloat("scr_br_payload_vo_help", 20000);
+  level.disable_super_in_turret.ref_136AB = getdvarfloat("scr_br_payload_spawn_vehicle_time", 10);
+  level.disable_super_in_turret.ref_142F8 = getdvarfloat("scr_br_payload_vo_help", 20000);
   level.disable_super_in_turret.ref_14305 = getdvarfloat("scr_br_payload_vo_same", 20000);
-  level.disable_super_in_turret.ref_142f6 = getdvarfloat("scr_br_payload_vo_help", 5000);
-  level.disable_super_in_turret.ref_142ff = getdvarfloat("scr_br_payload_vo_next", 10000);
+  level.disable_super_in_turret.ref_142F6 = getdvarfloat("scr_br_payload_vo_help", 5000);
+  level.disable_super_in_turret.ref_142FF = getdvarfloat("scr_br_payload_vo_next", 10000);
   level.disable_super_in_turret.brking_oncrateuse = getdvarint("scr_br_payload_all_paths", 1);
   level.disable_super_in_turret.convoy = getdvarint("scr_br_payload_convoy", 1);
   level.disable_super_in_turret.idflags_hyper_burst_round = getdvarint("scr_br_payload_convoy_dist", 750);
   level.disable_super_in_turret.idflags_no_dismemberment = level.disable_super_in_turret.idflags_hyper_burst_round * level.disable_super_in_turret.idflags_hyper_burst_round;
   level.disable_super_in_turret.little_bird_mg_mp_spawncallback = getdvarint("scr_br_payload_disable_ascenders", 1);
   var_1 = getdvarfloat("scr_br_payload_vo_near_check", 1500);
-  level.disable_super_in_turret.ref_142fe = var_1 * var_1;
+  level.disable_super_in_turret.ref_142FE = var_1 * var_1;
   var_2 = getdvarfloat("scr_br_payload_vo_obs", 700);
   level.disable_super_in_turret.ref_14300 = var_2 * var_2;
   level.disable_super_in_turret.brmini_kickplayersatcircleedge = getdvarint("scr_br_payload_time_per_checkpoint", 120);
-  level.disable_super_in_turret.ref_136c4 = getdvarint("scr_br_spawn_zones", 1);
-  level.disable_super_in_turret.ref_136c2 = getdvarint("scr_br_spawn_zone_radius", 1700);
-  level.disable_super_in_turret.ref_136be = getdvarint("scr_br_spawn_zones_hide", 1);
-  level.disable_super_in_turret.ref_136c1 = getdvarfloat("scr_br_spawn_zones_outline_dur", 3);
-  level.disable_super_in_turret.ref_136c5 = getdvarint("scr_br_spawn_zone_warning", 1);
-  level.disable_super_in_turret.ref_136c9 = getdvarint("scr_br_spawn_zone_warning_rad", 300);
-  level.disable_super_in_turret.ref_136c0 = getdvarint("scr_br_spawn_zone_oob_forgive_time", 1000);
-  level.disable_super_in_turret.ref_136bf = getdvarint("scr_br_spawn_zone_oob_forgive_scale", 2);
+  level.disable_super_in_turret.ref_136C4 = getdvarint("scr_br_spawn_zones", 1);
+  level.disable_super_in_turret.ref_136C2 = getdvarint("scr_br_spawn_zone_radius", 1700);
+  level.disable_super_in_turret.ref_136BE = getdvarint("scr_br_spawn_zones_hide", 1);
+  level.disable_super_in_turret.ref_136C1 = getdvarfloat("scr_br_spawn_zones_outline_dur", 3);
+  level.disable_super_in_turret.ref_136C5 = getdvarint("scr_br_spawn_zone_warning", 1);
+  level.disable_super_in_turret.ref_136C9 = getdvarint("scr_br_spawn_zone_warning_rad", 300);
+  level.disable_super_in_turret.ref_136C0 = getdvarint("scr_br_spawn_zone_oob_forgive_time", 1000);
+  level.disable_super_in_turret.ref_136BF = getdvarint("scr_br_spawn_zone_oob_forgive_scale", 2);
   level.disable_super_in_turret.start_drones_event = getdvarint("scr_br_in_bounds_trigger", 1);
-  level.disable_super_in_turret.ref_13ded = getdvarint("scr_br_truck_armor_box", 1);
+  level.disable_super_in_turret.ref_13DED = getdvarint("scr_br_truck_armor_box", 1);
   level.disable_super_in_turret.playerplunderdeposit = getdvarint("scr_br_payload_force_tiebreaker", 0);
-  level.disable_super_in_turret.ref_12caa = getdvarint("scr_br_payload_respawn_overview", 1);
-  level.disable_super_in_turret.ref_11f9d = getdvarint("scr_br_payload_obstacle_pay_scale", 40);
-  level.disable_super_in_turret.ref_121fc = getdvarint("scr_br_payload_path_redeploy", 5);
+  level.disable_super_in_turret.ref_12CAA = getdvarint("scr_br_payload_respawn_overview", 1);
+  level.disable_super_in_turret.ref_11F9D = getdvarint("scr_br_payload_obstacle_pay_scale", 40);
+  level.disable_super_in_turret.ref_121FC = getdvarint("scr_br_payload_path_redeploy", 5);
   level.disable_super_in_turret.ref_12199 = getdvarint("scr_br_payload_overtime_max", 120);
-  level.disable_super_in_turret.ref_1219e = getdvarint("scr_br_payload_overtime_s1", 60);
-  level.disable_super_in_turret.ref_1219f = getdvarint("scr_br_payload_overtime_s2", 70);
-  level.disable_super_in_turret.ref_121a0 = getdvarint("scr_br_payload_overtime_s3", 80);
-  level.disable_super_in_turret.ref_121a1 = getdvarint("scr_br_payload_overtime_s4", 90);
-  level.ref_127cd = 11;
-  level.ref_13c56 = 1;
+  level.disable_super_in_turret.ref_1219E = getdvarint("scr_br_payload_overtime_s1", 60);
+  level.disable_super_in_turret.ref_1219F = getdvarint("scr_br_payload_overtime_s2", 70);
+  level.disable_super_in_turret.ref_121A0 = getdvarint("scr_br_payload_overtime_s3", 80);
+  level.disable_super_in_turret.ref_121A1 = getdvarint("scr_br_payload_overtime_s4", 90);
+  level.ref_127CD = 11;
+  level.ref_13C56 = 1;
   level.playerlocationtriggerexit = 1;
   level.debug_silo_thrust = spawnStruct();
   level.debug_silo_thrust.disabled = 0;
@@ -123,8 +123,8 @@ function init() {
     scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("placedKiosks");
   }
 
-  if(level.mapname == "mp_br_mechanics" && level.disable_super_in_turret.ref_1226a != "all") {
-    level.disable_super_in_turret.ref_1226a = "standard";
+  if(level.mapname == "mp_br_mechanics" && level.disable_super_in_turret.ref_1226A != "all") {
+    level.disable_super_in_turret.ref_1226A = "standard";
   }
 
   level.dialog_wait_ready_civ = 4;
@@ -158,21 +158,21 @@ function toggleusbstickinhand() {
   scripts\mp\utility\dvars::setoverridewatchdvar("roundswitch", 1);
   level.roundswitch = scripts\mp\utility\dvars::getwatcheddvar("roundswitch");
   level.ref_12888 = &emp_drone_proximity_explode;
-  level.ref_11c76 = &dyn_door;
+  level.ref_11C76 = &dyn_door;
   level.defenderflagreset = &eliminatedhudmonitor;
-  level.ref_12db7 = &endgame_stars;
+  level.ref_12DB7 = &endgame_stars;
   level.ontimelimit = &ontimelimit;
-  level.ref_11c7b = &ref_12607;
-  level.ref_11c7c = &ref_12608;
-  level.ref_13b7e = &timelimitclock;
-  level.ref_11c68 = &ref_11c68;
+  level.ref_11C7B = &ref_12607;
+  level.ref_11C7C = &ref_12608;
+  level.ref_13B7E = &timelimitclock;
+  level.ref_11C68 = &ref_11C68;
   level.ref_12059 = &munition_source_getridof;
   level.modeonspawnplayer = &embassy_level_init;
-  level.ref_11c73 = &ref_12054;
+  level.ref_11C73 = &ref_12054;
   level.forcegivesuper = &eliminateplayer;
 
-  if(level.disable_super_in_turret.ref_1225f) {
-    level.ref_11c7a = &ref_1226b;
+  if(level.disable_super_in_turret.ref_1225F) {
+    level.ref_11C7A = &ref_1226B;
   }
 
   scripts\mp\flags::gameflaginit("infil_complete", 0);
@@ -180,32 +180,32 @@ function toggleusbstickinhand() {
   level.disable_back_light = 1;
   level.roundenddelay = 5;
   level.checkforlaststandfinish = 1;
-  level.ref_133e6 = 1;
-  level.ref_133cd = 1;
-  level.ref_133d7 = 1;
+  level.ref_133E6 = 1;
+  level.ref_133CD = 1;
+  level.ref_133D7 = 1;
   level.set_tier_lights = getdvarfloat("scr_br_payload_gunner_dmg_reduction", 0.4);
   level.set_total_successful_vehicle_spawns_from_module = getdvarfloat("scr_br_payload_gunner_dmg_pen", 0.4);
   level.ref_12281 = "cargo_truck_mg";
   level.ref_12283 = "mkilo_physics_mg_payload";
-  level.disable_super_in_turret.ref_1426e = 250;
-  level.disable_super_in_turret.ref_1426d = 200;
+  level.disable_super_in_turret.ref_1426E = 250;
+  level.disable_super_in_turret.ref_1426D = 200;
   level.disable_super_in_turret.ref_14249 = (0, 0, 200);
-  level.disable_super_in_turret.ref_1226e = getdvarint("scr_br_payload_quests", 1);
+  level.disable_super_in_turret.ref_1226E = getdvarint("scr_br_payload_quests", 1);
   level.disable_super_in_turret.ref_12275 = getdvarint("scr_br_payload_reset_quest_tracking", 0);
   level.disable_super_in_turret.ref_12271 = getdvarint("scr_br_payload_quests_num_squads", 1);
   level.disable_super_in_turret.ref_12272 = getdvarint("scr_br_payload_quests_tablets", 1);
   level.disable_super_in_turret.ref_12273 = getdvarint("scr_br_payload_versus_tablets", 1);
-  level.disable_super_in_turret.ref_1226f = getdvarint("scr_br_payload_quests_give_att", 1);
+  level.disable_super_in_turret.ref_1226F = getdvarint("scr_br_payload_quests_give_att", 1);
   level.disable_super_in_turret.ref_12270 = getdvarint("scr_br_payload_quests_give_def", 0);
-  level.disable_super_in_turret.ref_1227c = getdvarint("scr_br_payload_speed_reward_time", 45);
+  level.disable_super_in_turret.ref_1227C = getdvarint("scr_br_payload_speed_reward_time", 45);
   level.disable_super_in_turret.ref_12288 = getdvarint("scr_br_payload_xp_checkpoint", 2000);
   scripts\mp\rank::ref_12189("kill", 100);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_spawn", "gameModeSupportsRespawn", &vehicle_spawn_mp_gamemodesupportsrespawn);
-  level.vehicle.spawn.ref_12ca2 = getdvarint("scr_br_payload_vehicle_respawn", 30);
+  level.vehicle.spawn.ref_12CA2 = getdvarint("scr_br_payload_vehicle_respawn", 30);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14176(level.ref_12281, &ref_14259);
   var_2 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle("cargo_truck_mg");
-  var_2.ref_13e92 = "tur_gun_payload_truck_mp";
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d(level.ref_12281, "single", ["gunner"]);
+  var_2.ref_13E92 = "tur_gun_payload_truck_mp";
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D(level.ref_12281, "single", ["gunner"]);
   var_3 = "driver";
   var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat(level.ref_12281, var_3);
   var_4.seatswitcharray = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_generateseatswitcharray(var_3, [var_3]);
@@ -213,12 +213,12 @@ function toggleusbstickinhand() {
   var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat(level.ref_12281, var_3);
   var_4.exitids = ["back", "back_left", "back_right", "front", "side_right"];
   var_4.seatswitcharray = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_generateseatswitcharray(var_3, [var_3]);
-  var_4.ref_13e8a = getcompleteweaponname("tur_gun_payload_truck_mp");
-  var_4.ref_13e92 = "tur_gun_payload_truck_mp";
-  scripts\cp_mp\vehicles\vehicle_interact::ref_141a7("upgrade", &ref_1418d, &ref_141ae, &ref_1418d, &ref_1418d);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_141a7("copyofupgrade", &ref_1418d, &ref_141ae, &ref_1418d, &ref_1418d);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d(level.ref_12281, "upgrade", ["tag_screen_left", 0, &ref_1418c]);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d(level.ref_12281, "copyofupgrade", ["tag_screen_right", 0, &ref_1418c]);
+  var_4.ref_13E8A = getcompleteweaponname("tur_gun_payload_truck_mp");
+  var_4.ref_13E92 = "tur_gun_payload_truck_mp";
+  scripts\cp_mp\vehicles\vehicle_interact::ref_141A7("upgrade", &ref_1418D, &ref_141AE, &ref_1418D, &ref_1418D);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_141A7("copyofupgrade", &ref_1418D, &ref_141AE, &ref_1418D, &ref_1418D);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D(level.ref_12281, "upgrade", ["tag_screen_left", 0, &ref_1418C]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D(level.ref_12281, "copyofupgrade", ["tag_screen_right", 0, &ref_1418C]);
   scripts\cp_mp\utility\script_utility::registersharedfunc("airdrop", "specialCase_canUseCrate", &eliminate_drone_spotlight_speed);
   scripts\cp_mp\utility\script_utility::registersharedfunc("killstreak", "createCustomStreakData", &init_relic_fastbleedout);
   level.headiconbox = undefined;
@@ -240,18 +240,18 @@ function toggleusbstickinhand() {
   hideinvisiblecollisions();
   level.teamdata[game["attackers"]]["respawnDelay"] = getdvarint("scr_br_payload_spawn_delay_attack", 0);
   level.teamdata[game["defenders"]]["respawnDelay"] = getdvarint("scr_br_payload_spawn_delay_defend", 15);
-  thread ref_1452d(game["attackers"]);
-  thread ref_1452d(game["defenders"]);
+  thread ref_1452D(game["attackers"]);
+  thread ref_1452D(game["defenders"]);
 
-  if(istrue(level.disable_super_in_turret.ref_1226e)) {
+  if(istrue(level.disable_super_in_turret.ref_1226E)) {
     scripts\mp\gametypes\br_capshoot_quest::init();
-    thread ref_1226d();
+    thread ref_1226D();
   }
 
-  thread ref_1225e();
-  thread ref_1226c();
+  thread ref_1225E();
+  thread ref_1226C();
   thread ref_12258();
-  thread ref_131d6();
+  thread ref_131D6();
   level.isoutside = 0;
   level.isopenable = 0;
 }
@@ -264,7 +264,7 @@ function hideinvisiblecollisions() {
   var_1.origin = var_2;
 }
 
-function ref_141ae(var_0, var_1, var_2, var_3) {
+function ref_141AE(var_0, var_1, var_2, var_3) {
   var_1.disabled = 1;
 }
 
@@ -288,7 +288,7 @@ function eliminateplayer(var_0, var_1, var_2, var_3) {
   scripts\mp\gametypes\br_pickups::forcegivesuper(var_0, var_1, var_2, var_3);
 }
 
-function ref_1226c() {
+function ref_1226C() {
   level endon("game_ended");
   scripts\mp\flags::gameflagwait("prematch_fade_done");
   setomnvar("ui_hardpoint_timer", gettime());
@@ -312,7 +312,7 @@ function ref_13277(var_0) {
   }
 }
 
-function ref_11c68() {
+function ref_11C68() {
   setomnvar("ui_current_round", 1);
   setomnvarforallclients("post_game_state", 2);
   scripts\mp\gametypes\br_public::brleaderdialog("halftime", 0, undefined, 1, 2);
@@ -337,8 +337,8 @@ function onplayerconnect(var_0) {
   thread ref_13277(game["defenders"]);
 
   if(scripts\mp\flags::gameflag("infil_complete")) {
-    thread ref_1268d();
-    thread ref_126e0();
+    thread ref_1268D();
+    thread ref_126E0();
 
     if(isDefined(var_0 scripts\mp\supers::getcurrentsuper())) {
       var_0 scripts\mp\supers::setsuperbasepoints(0);
@@ -490,24 +490,24 @@ function totalmuncurrencyearned() {
       foreach(var_6 in var_4.obj_payload_stage.touchlist) {
         foreach(var_8 in var_6) {
           foreach(var_1 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_8.player.team, var_8.player.squadindex)) {
-            if(!isDefined(var_1.ref_1227e)) {
-              var_1.ref_1227e = 0;
+            if(!isDefined(var_1.ref_1227E)) {
+              var_1.ref_1227E = 0;
             }
 
-            var_1.ref_1227e += 5;
+            var_1.ref_1227E += 5;
 
-            if(var_1.ref_1227e >= 20) {
+            if(var_1.ref_1227E >= 20) {
               if(!var_1.shouldfinishshootinglongdeath) {
                 var_1 thread scripts\mp\rank::scoreeventpopup("br_payload_squad_on_payload");
               }
 
               var_1.shouldfinishshootinglongdeath = 1;
               var_10 = getdvarint("scr_br_timeOnPayload_xpOverride", 18);
-              var_11 = int(var_10) * var_1.ref_1227e;
+              var_11 = int(var_10) * var_1.ref_1227E;
               var_1 thread scripts\mp\rank::giverankxp("br_payload_squad_on_payload", var_11, undefined);
-              var_1 thread scripts\mp\gametypes\br::searchradiusidealmax(min(40, var_1.ref_1227e) * 1000);
+              var_1 thread scripts\mp\gametypes\br::searchradiusidealmax(min(40, var_1.ref_1227E) * 1000);
               var_1 thread scripts\mp\gametypes\br_analytics::deregisterscriptableinstance(var_11, "br_payload_squad_on_payload");
-              var_1.ref_1227e = 0;
+              var_1.ref_1227E = 0;
             }
           }
         }
@@ -522,15 +522,15 @@ function totalmuncurrencyearned() {
   }
 }
 
-function ref_1418c(var_0, var_1) {}
+function ref_1418C(var_0, var_1) {}
 
-function ref_1418d(var_0, var_1, var_2, var_3) {}
+function ref_1418D(var_0, var_1, var_2, var_3) {}
 
 function vehicle_spawn_mp_gamemodesupportsrespawn() {
   return true;
 }
 
-function ref_126f1(var_0) {
+function ref_126F1(var_0) {
   self endon("disconnect");
   self waittill("spawned_player");
   wait 1;
@@ -541,13 +541,13 @@ function ref_126f1(var_0) {
   }
 }
 
-function ref_1365d(var_0) {
+function ref_1365D(var_0) {
   if(istrue(level.dmztut_endgametransition) && isDefined(self.thrust_fx_model) && !istrue(var_0.br_infilstarted)) {
     var_1 = spawnStruct();
     var_0.br_infilstarted = 1;
-    var_0.ref_1286f = var_0.thrust_fx_model;
-    var_0.ref_1286f.index = -1;
-    thread ref_126a4(var_0);
+    var_0.ref_1286F = var_0.thrust_fx_model;
+    var_0.ref_1286F.index = -1;
+    thread ref_126A4(var_0);
   }
 
   if(istrue(game["switchedsides"]) && isDefined(self.thrust_fx_model)) {
@@ -566,18 +566,18 @@ function manage_fakebody_hides() {
   level.disable_super_in_turret.ref_13916 = 0;
 
   if(!istrue(game["switchedsides"])) {
-    scripts\mp\deathicons::ref_12bfd();
+    scripts\mp\deathicons::ref_12BFD();
   } else {
-    ref_143f7();
+    ref_143F7();
   }
 
-  ref_1361b();
+  ref_1361B();
   level.dmztut_endgametransition = 1;
   scripts\mp\gametypes\br_vehicles::emptyallvehicles();
 
   foreach(var_1 in level.players) {
     if(isDefined(var_1)) {
-      thread ref_1255f();
+      thread ref_1255F();
     }
   }
 
@@ -588,11 +588,11 @@ function manage_fakebody_hides() {
   }
 
   scripts\mp\flags::gameflagset("prematch_fade_done");
-  ref_143f8(getdvarfloat("scr_br_payload_infil_wait", 9));
+  ref_143F8(getdvarfloat("scr_br_payload_infil_wait", 9));
 
   foreach(var_1 in level.players) {
     if(isDefined(var_1)) {
-      thread ref_1255d();
+      thread ref_1255D();
     }
   }
 
@@ -611,15 +611,15 @@ function maxnumsites() {
     level waittill("connected", var_0);
 
     if(!scripts\mp\flags::gameflag("infil_anim_started")) {
-      thread ref_1255f(var_0);
+      thread ref_1255F(var_0);
       continue;
     }
 
-    thread ref_1255d();
+    thread ref_1255D();
   }
 }
 
-function ref_143f7() {
+function ref_143F7() {
   var_0 = gettime() + 10000;
 
   while(gettime() < var_0 && getactiveclientcount() != level.players.size) {
@@ -627,11 +627,11 @@ function ref_143f7() {
   }
 }
 
-function ref_133d6() {
+function ref_133D6() {
   scripts\mp\flags::gameflagset("infil_complete");
 }
 
-function ref_1361b() {
+function ref_1361B() {
   var_0 = 8;
   level.disable_super_in_turret.gas_trigger_player_think = [];
   var_1 = int(max(getactiveclientcount(), level.players.size));
@@ -657,7 +657,7 @@ function last_unresolved_collision_time() {
   level.disable_super_in_turret.gas_trigger_player_think = undefined;
 }
 
-function ref_1255f(var_0) {
+function ref_1255F(var_0) {
   self endon("disconnect");
 
   if(isDefined(self.cameraent)) {
@@ -688,25 +688,25 @@ function ref_1255f(var_0) {
 
   if(!isDefined(self.ref_13689)) {
     ref_12689(var_3);
-    self.ref_13689 = ref_1257c(var_3);
+    self.ref_13689 = ref_1257C(var_3);
   }
 
   self.cameraent.origin = self.ref_13689.origin;
-  self.cameraent.angles = ref_1257a(var_3, self.cameraent.origin);
-  var_4 = ref_1257b();
+  self.cameraent.angles = ref_1257A(var_3, self.cameraent.origin);
+  var_4 = ref_1257B();
   self.cameraent scriptmodelplayanim(var_4, "spawn_camera_anim");
   self.cameraent scriptmodelpauseanim(1);
   waittillframeend();
   var_5 = self.cameraent gettagorigin("j_prop_1");
   var_6 = getdvarint("scr_br_initial_stream_timeout_pl_ms", 12000);
-  scripts\mp\gametypes\br_public::ref_126b9(var_5, var_6, 1);
+  scripts\mp\gametypes\br_public::ref_126B9(var_5, var_6, 1);
 
   if(!istrue(var_0) && !istrue(game["switchedsides"])) {
     wait 2;
   }
 
   if(istrue(self.delay_enter_combat_after_investigating_grenade)) {
-    scripts\mp\gametypes\br::ref_13f21(self);
+    scripts\mp\gametypes\br::ref_13F21(self);
   }
 
   self setclientomnvar("ui_br_infil_started", 1);
@@ -717,11 +717,11 @@ function ref_1255f(var_0) {
     self setclientomnvar("ui_br_bink_overlay_state", 5);
   }
 
-  scripts\mp\gametypes\br_public::ref_126ed();
+  scripts\mp\gametypes\br_public::ref_126ED();
   level.disable_super_in_turret.ref_13916++;
 }
 
-function ref_1257a(var_0, var_1) {
+function ref_1257A(var_0, var_1) {
   if(getdvarint("scr_br_alt_mode_mini", 0) > 0) {
     var_2 = var_0.nodes[0].origin - var_1;
   } else if(self.team == game["attackers"]) {
@@ -734,8 +734,8 @@ function ref_1257a(var_0, var_1) {
   return (0, var_3[1], 0);
 }
 
-function ref_1257b() {
-  switch (level.disable_super_in_turret.ref_1226a) {
+function ref_1257B() {
+  switch (level.disable_super_in_turret.ref_1226A) {
     case "livingquarters":
       if(self.team == game["attackers"]) {
         return "iw8_br_payload_escape4_intro_camera_swoop_LQ_Atck";
@@ -796,16 +796,16 @@ function round_enemies_push_logic(var_0, var_1) {
   return level.squaddata[var_0][var_1].time_after_shoot;
 }
 
-function ref_1255d() {
+function ref_1255D() {
   self endon("disconnect");
 
   if(self.sessionstate != "intermission") {
-    ref_1255f(1);
+    ref_1255F(1);
   } else {
-    scripts\mp\gametypes\br_public::ref_126ed();
+    scripts\mp\gametypes\br_public::ref_126ED();
   }
 
-  ref_1255c();
+  ref_1255C();
 
   if(!istrue(game["switchedsides"])) {
     self setclientomnvar("ui_br_bink_overlay_state", 5);
@@ -829,7 +829,7 @@ function ref_1255d() {
   var_2 = angleclamp180(angleclamp180(self.angles[1]) - angleclamp180(self.cameraent.angles[1]));
   self.cameraent rotateYaw(var_2, var_0, 0.1, 0.1);
   wait var_0;
-  thread ref_1255e();
+  thread ref_1255E();
   wait 1;
   self.cameraent delete();
 }
@@ -869,14 +869,14 @@ function ref_12560() {
   self clearsoundsubmix("iw8_br_payload_infil_camera", 6);
 }
 
-function ref_1255c(var_0) {
+function ref_1255C(var_0) {
   self endon("disconnect");
   self notify("playerPayloadFirstSpawn");
   self endon("playerPayloadFirstSpawn");
-  scripts\mp\gametypes\br_public::ref_1264c();
+  scripts\mp\gametypes\br_public::ref_1264C();
   self.forcespawnorigin = self.ref_13689.origin;
   self.forcespawnangles = self.ref_13689.angles;
-  self.ref_12ca8 = !game["switchedsides"];
+  self.ref_12CA8 = !game["switchedsides"];
 
   if(!isalive(self)) {
     self.prematchendeddeadfixup = 1;
@@ -886,19 +886,19 @@ function ref_1255c(var_0) {
   scripts\mp\playerlogic::spawnplayer(0);
 
   if(istrue(self.delay_enter_combat_after_investigating_grenade)) {
-    scripts\mp\gametypes\br::ref_13f21(self);
+    scripts\mp\gametypes\br::ref_13F21(self);
   }
 
   waitframe();
   self.ref_13689 = undefined;
   self.plotarmor = undefined;
-  self.ref_12ca8 = undefined;
+  self.ref_12CA8 = undefined;
   self.thrust_fx_model = undefined;
   self freezecontrols(1);
   self playerhide();
 }
 
-function ref_1255e() {
+function ref_1255E() {
   self cameraunlink();
   self freezecontrols(0);
   self playershow();
@@ -911,7 +911,7 @@ function ref_1255e() {
   self setclientomnvar("ui_br_extended_load_screen", 0);
 
   if(level.disable_super_in_turret.ref_13602 > -1) {
-    thread ref_1253a();
+    thread ref_1253A();
   }
 
   ref_13185(0);
@@ -921,10 +921,10 @@ function ref_1255e() {
     scripts\mp\supers::setsuperextrapoints(0);
   }
 
-  ref_1255b();
+  ref_1255B();
 }
 
-function ref_143f8(var_0) {
+function ref_143F8(var_0) {
   var_1 = gettime() + var_0 * 1000;
 
   while(gettime() < var_1 && level.disable_super_in_turret.ref_13916 < level.players.size) {
@@ -932,23 +932,23 @@ function ref_143f8(var_0) {
   }
 }
 
-function ref_136aa(var_0) {
+function ref_136AA(var_0) {
   ref_13230();
 
   foreach(var_2 in level.disable_super_in_turret.paths) {
-    ref_1367a(var_2, game["attackers"], var_0);
+    ref_1367A(var_2, game["attackers"], var_0);
 
     if(level.disable_super_in_turret.convoy) {
-      ref_1367b(var_2, game["attackers"], var_0);
+      ref_1367B(var_2, game["attackers"], var_0);
     }
   }
 
   init_relic_doubletap(game["attackers"]);
   init_relic_doubletap(game["defenders"]);
-  thread ref_13c54();
+  thread ref_13C54();
 }
 
-function ref_1367a(var_0, var_1, var_2) {
+function ref_1367A(var_0, var_1, var_2) {
   var_3 = (0, 0, 0);
   var_4 = var_0;
   var_5 = undefined;
@@ -981,7 +981,7 @@ function ref_1367a(var_0, var_1, var_2) {
   var_7.spawntype = "GAME_MODE";
   var_7.spawnmethod = "place_at_position_unsafe";
   var_7.team = var_1;
-  var_7.player_rig_create = &ref_1423f;
+  var_7.player_rig_create = &ref_1423F;
   var_7.vehicletype = level.ref_12283;
   var_7.modelname = "veh8_mil_lnd_mkilo23_payload";
   var_7.turretmodel = "veh8_mil_lnd_mkilo23_turret_payload";
@@ -993,11 +993,11 @@ function ref_1367a(var_0, var_1, var_2) {
 
   foreach(var_11 in var_9.turrets) {
     var_11 setscriptablepartstate("barrel", "show");
-    ref_136a4(var_11);
+    ref_136A4(var_11);
   }
 
-  if(istrue(var_2) && level.disable_super_in_turret.ref_13ded) {
-    ref_1360a(var_9);
+  if(istrue(var_2) && level.disable_super_in_turret.ref_13DED) {
+    ref_1360A(var_9);
   }
 
   if(isDefined(var_5)) {
@@ -1008,13 +1008,13 @@ function ref_1367a(var_0, var_1, var_2) {
   ref_14260(var_9, var_0);
 
   if(isDefined(var_5)) {
-    thread ref_1422f(var_9);
+    thread ref_1422F(var_9);
   }
 
   return var_9;
 }
 
-function ref_136a4(var_0) {
+function ref_136A4(var_0) {
   if(getdvarint("scr_br_payload_tcol", 1) == 0) {
     return;
   }
@@ -1022,10 +1022,10 @@ function ref_136a4(var_0) {
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 setModel("veh8_mil_lnd_mkilo23_turret_payload_nomesh");
   var_1 linkTo(var_0, "tag_aim_pivot", (0, 0, 0), (0, 0, 0));
-  var_0.ref_13e84 = var_1;
+  var_0.ref_13E84 = var_1;
 }
 
-function ref_1360a(var_0) {
+function ref_1360A(var_0) {
   var_1 = (-158, -43, 67);
   var_2 = (0, 0, 0);
   var_3 = 80;
@@ -1037,7 +1037,7 @@ function ref_1360a(var_0) {
   var_7 linkTo(var_0, "tag_origin", var_1, var_2);
   var_7 setscriptablepartstate("beacon", "active", 0);
   var_7 setscriptablepartstate("anims", "openIdle", 0);
-  var_7.ref_13f0f = 1;
+  var_7.ref_13F0F = 1;
   var_7.team = game["attackers"];
   var_7 scripts\mp\equipment\support_box::supportbox_addheadicon(var_4);
   var_7 thread scripts\mp\equipment\support_box::supportbox_makeusable(var_6, var_5);
@@ -1057,7 +1057,7 @@ function ref_14234() {
   self endon("death");
 
   for(;;) {
-    var_0 = canceljoins(undefined, undefined, self.origin, level.disable_super_in_turret.ref_1426e);
+    var_0 = canceljoins(undefined, undefined, self.origin, level.disable_super_in_turret.ref_1426E);
 
     foreach(var_2 in var_0) {
       if(issubstr(var_2.type, "_weapon_")) {
@@ -1069,16 +1069,16 @@ function ref_14234() {
   }
 }
 
-function ref_133e1(var_0) {
+function ref_133E1(var_0) {
   var_1 = self;
 
   foreach(var_3 in level.disable_super_in_turret.paths) {
-    if(isDefined(var_3.vehicle) && ref_11a3e(var_3.vehicle, var_1.origin)) {
+    if(isDefined(var_3.vehicle) && ref_11A3E(var_3.vehicle, var_1.origin)) {
       return true;
     }
 
-    foreach(var_5 in var_3.ref_11f9e) {
-      if(isDefined(var_5) && ref_11a3d(var_5, var_1.origin)) {
+    foreach(var_5 in var_3.ref_11F9E) {
+      if(isDefined(var_5) && ref_11A3D(var_5, var_1.origin)) {
         return true;
       }
     }
@@ -1087,26 +1087,26 @@ function ref_133e1(var_0) {
   return false;
 }
 
-function ref_11a3e(var_0, var_1) {
-  var_2 = level.disable_super_in_turret.ref_1426e * level.disable_super_in_turret.ref_1426e;
+function ref_11A3E(var_0, var_1) {
+  var_2 = level.disable_super_in_turret.ref_1426E * level.disable_super_in_turret.ref_1426E;
   var_3 = distance2dsquared(var_1, var_0.origin);
   return var_3 < var_2;
 }
 
-function ref_11a3d(var_0, var_1) {
+function ref_11A3D(var_0, var_1) {
   var_2 = 10000;
   var_3 = distance2dsquared(self.origin, var_0.origin);
   return var_3 < var_2;
 }
 
-function ref_133db(var_0) {
+function ref_133DB(var_0) {
   foreach(var_2 in level.disable_super_in_turret.paths) {
-    if(isDefined(var_2.vehicle) && ref_11a3e(var_2.vehicle, var_0.origin)) {
+    if(isDefined(var_2.vehicle) && ref_11A3E(var_2.vehicle, var_0.origin)) {
       return true;
     }
 
-    foreach(var_4 in var_2.ref_11f9e) {
-      if(ref_11a3d(var_4, var_0.origin)) {
+    foreach(var_4 in var_2.ref_11F9E) {
+      if(ref_11A3D(var_4, var_0.origin)) {
         return true;
       }
     }
@@ -1115,7 +1115,7 @@ function ref_133db(var_0) {
   return false;
 }
 
-function ref_1367b(var_0, var_1, var_2) {
+function ref_1367B(var_0, var_1, var_2) {
   var_3 = (0, 0, 0);
   var_4 = undefined;
 
@@ -1130,7 +1130,7 @@ function ref_1367b(var_0, var_1, var_2) {
   var_5.spawntype = "GAME_MODE";
   var_5.spawnmethod = "place_at_position_unsafe";
   var_5.team = var_1;
-  var_5.player_rig_create = &ref_1423f;
+  var_5.player_rig_create = &ref_1423F;
   var_5.vehicletype = level.ref_12283;
   var_5.modelname = "veh8_mil_lnd_mkilo23_payload_convoy";
   var_5.turretmodel = "veh8_mil_lnd_mkilo23_turret_payload";
@@ -1141,14 +1141,14 @@ function ref_1367b(var_0, var_1, var_2) {
 
   foreach(var_9 in var_7.turrets) {
     var_9 setscriptablepartstate("barrel", "show");
-    ref_136a4(var_9);
+    ref_136A4(var_9);
   }
 
   if(istrue(var_2)) {
-    ref_13dec(var_7, var_0.ref_12358, 0);
+    ref_13DEC(var_7, var_0.ref_12358, 0);
 
-    if(level.disable_super_in_turret.ref_13ded) {
-      ref_1360a(var_7);
+    if(level.disable_super_in_turret.ref_13DED) {
+      ref_1360A(var_7);
     }
   }
 
@@ -1171,7 +1171,7 @@ function ref_1367b(var_0, var_1, var_2) {
   return var_7;
 }
 
-function ref_1423f(var_0, var_1) {}
+function ref_1423F(var_0, var_1) {}
 
 function ref_14259(var_0) {
   return !isDefined(self.path);
@@ -1179,7 +1179,7 @@ function ref_14259(var_0) {
 
 function ref_14260(var_0) {
   if(!isDefined(var_0.trigger)) {
-    var_0.trigger = spawn("trigger_radius", self.origin, 0, level.disable_super_in_turret.ref_1426e, level.disable_super_in_turret.ref_1426d);
+    var_0.trigger = spawn("trigger_radius", self.origin, 0, level.disable_super_in_turret.ref_1426E, level.disable_super_in_turret.ref_1426D);
   }
 
   if(!istrue(var_0.trigger.x1loadout)) {
@@ -1254,27 +1254,27 @@ function ref_14251() {
     }
 
     if(gettime() >= var_6) {
-      ref_1422c();
+      ref_1422C();
       var_6 = gettime() + 1000;
     }
 
     var_9 = undefined;
 
-    if(istrue(level.disable_super_in_turret.ref_1227b)) {
+    if(istrue(level.disable_super_in_turret.ref_1227B)) {
       var_10 = level.disable_super_in_turret.ref_14241;
     } else {
       var_10 = level.disable_super_in_turret.ref_14242;
     }
 
     var_11 = var_10;
-    var_12 = level.disable_super_in_turret.ref_1422d;
+    var_12 = level.disable_super_in_turret.ref_1422D;
 
     if(isDefined(var_5)) {
       var_13 = distance2dsquared(self.origin, var_5.origin);
 
       if(var_13 < level.disable_super_in_turret.idflags_no_dismemberment) {
         var_11 = level.disable_super_in_turret.ref_14243;
-        var_12 = level.disable_super_in_turret.ref_1422e;
+        var_12 = level.disable_super_in_turret.ref_1422E;
       }
     }
 
@@ -1284,7 +1284,7 @@ function ref_14251() {
 
       if(isDefined(var_5)) {
         if(!istrue(var_5.carriable_fuse_light_watch)) {
-          var_5 vehicle_setspeed(level.disable_super_in_turret.ref_1422d);
+          var_5 vehicle_setspeed(level.disable_super_in_turret.ref_1422D);
           var_5.veh_transmission = "reverse";
         } else {
           var_5 vehicle_setspeed(0);
@@ -1322,7 +1322,7 @@ function ref_14251() {
       ref_14273();
 
       if(isDefined(self.carriable_physics_launch)) {
-        ref_11f9b(self.carriable_physics_launch);
+        ref_11F9B(self.carriable_physics_launch);
         self.carriable_physics_launch = undefined;
       }
 
@@ -1346,7 +1346,7 @@ function ref_14251() {
     }
 
     if(!var_7) {
-      ref_1425b();
+      ref_1425B();
     }
 
     var_18 = ref_14252(var_9);
@@ -1354,7 +1354,7 @@ function ref_14251() {
     var_19 = var_18[1];
     var_18 = undefined;
     var_20 = var_7 > 0;
-    ref_11f92(self.path, var_20, var_9, var_19);
+    ref_11F92(self.path, var_20, var_9, var_19);
     waitframe();
   }
 }
@@ -1377,18 +1377,18 @@ function ref_14252(var_0) {
   }
 
   var_2 = self.path;
-  var_3 = var_2.getquestreward_checkforvalueoverride[var_1].ref_11ea5;
+  var_3 = var_2.getquestreward_checkforvalueoverride[var_1].ref_11EA5;
   var_4 = var_2.nodes[var_3].origin;
   var_5 = distance2dsquared(self.origin, var_4);
 
-  if(var_5 < level.disable_super_in_turret.ref_142fe) {
+  if(var_5 < level.disable_super_in_turret.ref_142FE) {
     return ["near", var_1 + 1];
   }
 
   return [var_0, undefined];
 }
 
-function ref_1423a() {
+function ref_1423A() {
   level endon("game_ended");
   self notify("vehicleDamageVehicles");
   self endon("vehicleDamageVehicles");
@@ -1403,7 +1403,7 @@ function ref_1423a() {
     }
 
     if(var_7 scripts\mp\gametypes\br_public::nuke_vault_suicidebombers()) {
-      ref_1423e(var_7, self);
+      ref_1423E(var_7, self);
       continue;
     }
 
@@ -1413,7 +1413,7 @@ function ref_1423a() {
   }
 }
 
-function ref_1423e(var_0) {
+function ref_1423E(var_0) {
   self.ref_12282 = 1;
   self dodamage(self.health, var_0.origin, var_0, var_0);
 
@@ -1479,7 +1479,7 @@ function ref_14274(var_0, var_1) {
 function ref_14272() {
   var_0 = self.path;
   var_1 = ref_14244();
-  var_2 = var_1 / var_0.ref_13bf1;
+  var_2 = var_1 / var_0.ref_13BF1;
 
   if(var_0.getquestplunderrewardinstance >= 0) {
     var_3 = 0;
@@ -1495,7 +1495,7 @@ function ref_14272() {
     var_5 = 0;
   }
 
-  ref_1318f(var_1.script_index, var_5);
+  ref_1318F(var_1.script_index, var_5);
 
   if(isDefined(level.teamdata[game["attackers"]]["checkpoint"].choppersupport_modifydamage_trial[var_1.script_index])) {
     level.teamdata[game["attackers"]]["checkpoint"].choppersupport_modifydamage_trial[var_1.script_index].choppergunner_refillmissiles scripts\mp\hud_util::updatebar(var_5, 0);
@@ -1514,14 +1514,14 @@ function ref_14244() {
   var_1 = var_0.path;
 
   if(istrue(var_1.hidesmokinggunhudfromplayer)) {
-    return var_1.ref_13bf1;
+    return var_1.ref_13BF1;
   }
 
-  var_2 = var_1.ref_136fc[var_1.ref_136fb].points[var_1.initial_enemy_spawner];
-  var_3 = var_1.ref_136fc[var_1.ref_136fb].points[var_1.initial_enemy_spawner + 1];
+  var_2 = var_1.ref_136FC[var_1.ref_136FB].points[var_1.initial_enemy_spawner];
+  var_3 = var_1.ref_136FC[var_1.ref_136FB].points[var_1.initial_enemy_spawner + 1];
   var_4 = pointonsegmentnearesttopoint(var_2, var_3, var_0.origin);
   var_5 = distance(var_4, var_2);
-  var_6 = var_1.ref_136fc[var_1.ref_136fb].armsrace_c4_planter_internal[var_1.initial_enemy_spawner];
+  var_6 = var_1.ref_136FC[var_1.ref_136FB].armsrace_c4_planter_internal[var_1.initial_enemy_spawner];
   var_6 += var_5;
   return var_6;
 }
@@ -1538,7 +1538,7 @@ function ref_14273() {
   var_0.ref_12945.ref_13842 = ref_14244(var_0);
 }
 
-function ref_1425b() {
+function ref_1425B() {
   var_0 = self;
 
   if(!isDefined(var_0.ref_12945) || !scripts\mp\flags::gameflag("prematch_done")) {
@@ -1549,16 +1549,16 @@ function ref_1425b() {
   var_2 = var_1 - var_0.ref_12945.ref_13842;
   var_3 = var_0.path;
 
-  if(var_3.ref_119d6 < var_2) {
-    var_3.ref_119d6 = var_2;
+  if(var_3.ref_119D6 < var_2) {
+    var_3.ref_119D6 = var_2;
   }
 
   var_4 = gettime() - var_0.ref_12945.starttime;
-  var_3.ref_13bf5 += var_4;
+  var_3.ref_13BF5 += var_4;
   var_0.ref_12945 = undefined;
 }
 
-function ref_1422c() {
+function ref_1422C() {
   foreach(var_1 in self.obj_payload_stage.touchlist[game["attackers"]]) {
     var_2 = var_1.player;
     var_2 scripts\mp\utility\stats::incpersstat("objTime", 1);
@@ -1584,11 +1584,11 @@ function freight_lift_build(var_0, var_1) {
 }
 
 function freeze_timer_at_max_time_bomb_vest(var_0, var_1) {
-  var_0.ref_136fc = [];
+  var_0.ref_136FC = [];
   var_0.getquestreward_checkforvalueoverride = [];
-  var_0.ref_11f9e = [];
+  var_0.ref_11F9E = [];
   var_0.initial_enemy_spawner = 0;
-  var_0.ref_136fb = 0;
+  var_0.ref_136FB = 0;
 
   if(level.disable_super_in_turret.checkpoint_objective) {
     var_0.wait_for_at_least_one_player_spawns_in = [];
@@ -1644,12 +1644,12 @@ function freeze_timer_at_max_time_bomb_vest(var_0, var_1) {
   var_20 = 0;
 
   for(var_21 = 0; var_21 < var_9; var_21++) {
-    var_0.ref_136fc[var_21] = spawnStruct();
-    var_0.ref_136fc[var_21].points = [];
-    var_0.ref_136fc[var_21].times = [];
-    var_0.ref_136fc[var_21].tv_station_interior_enemy_should_break_stealth_immediately = [];
-    var_0.ref_136fc[var_21].update_player_enemy_on_death = [];
-    var_0.ref_136fc[var_21].armsrace_c4_planter_internal = [];
+    var_0.ref_136FC[var_21] = spawnStruct();
+    var_0.ref_136FC[var_21].points = [];
+    var_0.ref_136FC[var_21].times = [];
+    var_0.ref_136FC[var_21].tv_station_interior_enemy_should_break_stealth_immediately = [];
+    var_0.ref_136FC[var_21].update_player_enemy_on_death = [];
+    var_0.ref_136FC[var_21].armsrace_c4_planter_internal = [];
     var_22 = 31;
 
     if(var_21 == var_12 && var_11) {
@@ -1665,14 +1665,14 @@ function freeze_timer_at_max_time_bomb_vest(var_0, var_1) {
     var_23 = 0;
 
     if(var_21 > 0) {
-      var_0.ref_136fc[var_21].points[var_23] = var_2[var_16].origin;
-      var_0.ref_136fc[var_21].times[var_23] = freight_lift_build(var_2[var_16].origin, var_2[var_16].origin);
-      var_0.ref_136fc[var_21].armsrace_c4_planter_internal[var_23] = var_19;
+      var_0.ref_136FC[var_21].points[var_23] = var_2[var_16].origin;
+      var_0.ref_136FC[var_21].times[var_23] = freight_lift_build(var_2[var_16].origin, var_2[var_16].origin);
+      var_0.ref_136FC[var_21].armsrace_c4_planter_internal[var_23] = var_19;
       var_23++;
       var_22++;
-      var_2[var_16].ref_136fb = var_21;
+      var_2[var_16].ref_136FB = var_21;
     } else {
-      var_2[var_21].ref_136fb = var_21;
+      var_2[var_21].ref_136FB = var_21;
     }
 
     for(var_24 = var_23; var_24 < var_22; var_24++) {
@@ -1689,17 +1689,17 @@ function freeze_timer_at_max_time_bomb_vest(var_0, var_1) {
       }
 
       if(!level.disable_super_in_turret.convoy || var_21 > 0 || var_25 >= 0) {
-        var_0.ref_136fc[var_21].points[var_25] = var_2[var_15].origin;
-        var_0.ref_136fc[var_21].times[var_25] = freight_lift_build(var_2[var_16].origin, var_2[var_15].origin);
+        var_0.ref_136FC[var_21].points[var_25] = var_2[var_15].origin;
+        var_0.ref_136FC[var_21].times[var_25] = freight_lift_build(var_2[var_16].origin, var_2[var_15].origin);
         var_26 = distance(var_2[var_16].origin, var_2[var_15].origin);
         var_19 += var_26;
-        var_0.ref_136fc[var_21].armsrace_c4_planter_internal[var_25] = var_19;
+        var_0.ref_136FC[var_21].armsrace_c4_planter_internal[var_25] = var_19;
 
         if(isDefined(var_2[var_15].checkpoint)) {
-          var_0.ref_136fc[var_21].tv_station_interior_enemy_should_break_stealth_immediately[var_25] = var_17;
+          var_0.ref_136FC[var_21].tv_station_interior_enemy_should_break_stealth_immediately[var_25] = var_17;
           var_0.getquestreward_checkforvalueoverride[var_17] = spawnStruct();
           var_0.getquestreward_checkforvalueoverride[var_17].loot_choppers = var_19;
-          var_0.getquestreward_checkforvalueoverride[var_17].ref_11ea5 = var_15;
+          var_0.getquestreward_checkforvalueoverride[var_17].ref_11EA5 = var_15;
           var_2[var_15].checkpoint = var_0.getquestreward_checkforvalueoverride[var_17];
 
           if(level.disable_super_in_turret.checkpoint_objective) {
@@ -1716,17 +1716,17 @@ function freeze_timer_at_max_time_bomb_vest(var_0, var_1) {
         }
 
         if(isDefined(var_2[var_15].obstacle)) {
-          var_0.ref_136fc[var_21].update_player_enemy_on_death[var_25] = var_18;
+          var_0.ref_136FC[var_21].update_player_enemy_on_death[var_25] = var_18;
 
           if(!isent(var_2[var_15].obstacle)) {
             var_2[var_15].obstacle = init_structs(var_2[var_15].obstacle.origin, var_2[var_15].obstacle.angles);
           }
 
-          var_0.ref_11f9e[var_18] = var_2[var_15].obstacle;
-          var_0.ref_11f9e[var_18].path = var_0;
-          var_0.ref_11f9e[var_18].dist = var_19;
-          var_0.ref_11f9e[var_18].index = var_18;
-          var_0.ref_11f9e[var_18].getquestplunderrewardinstance = var_17;
+          var_0.ref_11F9E[var_18] = var_2[var_15].obstacle;
+          var_0.ref_11F9E[var_18].path = var_0;
+          var_0.ref_11F9E[var_18].dist = var_19;
+          var_0.ref_11F9E[var_18].index = var_18;
+          var_0.ref_11F9E[var_18].getquestplunderrewardinstance = var_17;
           var_18++;
         }
 
@@ -1750,11 +1750,11 @@ function freeze_timer_at_max_time_bomb_vest(var_0, var_1) {
 
   var_0.getquestreward_checkforvalueoverride[var_17] = spawnStruct();
   var_0.getquestreward_checkforvalueoverride[var_17].loot_choppers = var_19;
-  var_0.getquestreward_checkforvalueoverride[var_17].ref_11ea5 = var_30;
-  var_0.ref_13bf1 = var_19;
+  var_0.getquestreward_checkforvalueoverride[var_17].ref_11EA5 = var_30;
+  var_0.ref_13BF1 = var_19;
 }
 
-function ref_1422f(var_0, var_1) {
+function ref_1422F(var_0, var_1) {
   self notify("vehicleBeginPath");
   self endon("vehicleBeginPath");
   self endon("death");
@@ -1767,19 +1767,19 @@ function ref_1422f(var_0, var_1) {
   }
 
   var_0.initial_enemy_spawner = 0;
-  var_0.ref_136fb = var_1;
+  var_0.ref_136FB = var_1;
 
-  foreach(var_4 in var_0.ref_11f9e) {
-    ref_11f9c(var_4, 0);
+  foreach(var_4 in var_0.ref_11F9E) {
+    ref_11F9C(var_4, 0);
   }
 
   thread ref_14251();
-  thread ref_1423a();
+  thread ref_1423A();
   thread ref_14234();
   var_6 = 1;
 
-  while(var_0.ref_136fb < var_0.ref_136fc.size) {
-    self startpathnodes(var_0.ref_136fc[var_0.ref_136fb].points, var_0.ref_136fc[var_0.ref_136fb].times, 0, 0.5, 0.5, 0, 0, var_2, 1, !var_6, 1, 1);
+  while(var_0.ref_136FB < var_0.ref_136FC.size) {
+    self startpathnodes(var_0.ref_136FC[var_0.ref_136FB].points, var_0.ref_136FC[var_0.ref_136FB].times, 0, 0.5, 0.5, 0, 0, var_2, 1, !var_6, 1, 1);
     var_2 = 0;
     var_6 = ref_14275(var_0, var_6);
 
@@ -1802,11 +1802,11 @@ function ref_1422f(var_0, var_1) {
     var_0.ref_13620.hidesmokinggunhudfromplayer = 1;
   }
 
-  ref_1425b();
+  ref_1425B();
   loadoutexecutionquip(var_0);
 
-  if(!unset_relic_gas_martyr() && ref_132fd(var_0)) {
-    ref_12aa3(var_0);
+  if(!unset_relic_gas_martyr() && ref_132FD(var_0)) {
+    ref_12AA3(var_0);
     var_0.getquestplunderrewardinstance++;
     start_pipe_room_menu();
 
@@ -1831,18 +1831,18 @@ function ref_1422f(var_0, var_1) {
 }
 
 function player_death(var_0) {
-  scripts\mp\gametypes\br::ref_13ac7("br_payload_all_to_end", undefined, game["attackers"]);
-  scripts\mp\gametypes\br::ref_13ac7("br_payload_all_to_end_enemy", undefined, game["defenders"]);
+  scripts\mp\gametypes\br::ref_13AC7("br_payload_all_to_end", undefined, game["attackers"]);
+  scripts\mp\gametypes\br::ref_13AC7("br_payload_all_to_end_enemy", undefined, game["defenders"]);
   scripts\mp\objidpoolmanager::objective_playermask_hidefromall(var_0.vehicle.obj_payload_stage.objidnum);
   ref_12206(var_0, game["attackers"], "white");
   ref_12206(var_0, game["defenders"], "white");
   var_1 = relic_amped_last_kill_time(var_0);
-  thread ref_11f92(var_0, 1, "checkpoint", var_1 + 1);
-  ref_12aa3(var_0);
+  thread ref_11F92(var_0, 1, "checkpoint", var_1 + 1);
+  ref_12AA3(var_0);
   var_0.getquestplunderrewardinstance++;
   start_pipe_room_menu();
-  ref_1322f(var_0);
-  ref_1326a(var_0, var_0.getquestplunderrewardinstance);
+  ref_1322F(var_0);
+  ref_1326A(var_0, var_0.getquestplunderrewardinstance);
   var_0 notify("checkPointUpdate");
 
   if(isDefined(level.disable_super_in_turret.getquestrewardscalerstablescaleinfo)) {
@@ -1853,10 +1853,10 @@ function player_death(var_0) {
     }
   }
 
-  thread ref_12cb8(var_0);
+  thread ref_12CB8(var_0);
 
-  if(level.disable_super_in_turret.ref_121fc) {
-    thread ref_121fc(var_0);
+  if(level.disable_super_in_turret.ref_121FC) {
+    thread ref_121FC(var_0);
     return;
   }
 }
@@ -1873,17 +1873,17 @@ function ref_14236(var_0, var_1) {
   }
 
   self.initial_enemy_spawner = 0;
-  self.ref_136fb = var_1;
-  thread ref_1423a();
+  self.ref_136FB = var_1;
+  thread ref_1423A();
   var_3 = 1;
 
-  while(self.ref_136fb < var_0.ref_136fc.size) {
-    if(self.ref_136fb == 0) {
+  while(self.ref_136FB < var_0.ref_136FC.size) {
+    if(self.ref_136FB == 0) {
       var_4 = var_0.idflags_penetration_player_only.points;
       var_5 = var_0.idflags_penetration_player_only.times;
     } else {
-      var_4 = var_0.ref_136fc[self.ref_136fb].points;
-      var_5 = var_0.ref_136fc[self.ref_136fb].times;
+      var_4 = var_0.ref_136FC[self.ref_136FB].points;
+      var_5 = var_0.ref_136FC[self.ref_136FB].times;
     }
 
     self startpathnodes(var_4, var_5, 0, 0.5, 0.5, 0, 0, var_2, 1, !var_3, 1, 1);
@@ -1906,7 +1906,7 @@ function ref_14237(var_0, var_1) {
 
   for(;;) {
     self waittill("trigger", var_3);
-    var_4 = self.ref_136fb == 0 && var_3 == 0;
+    var_4 = self.ref_136FB == 0 && var_3 == 0;
     self.initial_enemy_spawner = var_3;
 
     if(var_4) {
@@ -1915,20 +1915,20 @@ function ref_14237(var_0, var_1) {
     }
 
     if(var_3 <= 0) {
-      self.ref_136fb--;
+      self.ref_136FB--;
       self.initial_enemy_spawner = var_1.size - 2;
       return 0;
     }
 
     if(var_3 >= var_2) {
-      self.ref_136fb++;
+      self.ref_136FB++;
       self.initial_enemy_spawner = 0;
       return 1;
     }
   }
 }
 
-function ref_132fd(var_0) {
+function ref_132FD(var_0) {
   if(level.disable_super_in_turret.brking_oncrateuse) {
     foreach(var_0 in level.disable_super_in_turret.paths) {
       if(!istrue(var_0.hidesmokinggunhudfromplayer)) {
@@ -1944,7 +1944,7 @@ function ref_14275(var_0, var_1) {
   level endon("payloadComplete");
   level endon("game_ended");
   self endon("death");
-  var_2 = var_0.ref_136fc[var_0.ref_136fb];
+  var_2 = var_0.ref_136FC[var_0.ref_136FB];
   var_3 = var_2.points.size - 1;
 
   if(var_1) {
@@ -1957,7 +1957,7 @@ function ref_14275(var_0, var_1) {
 
   for(;;) {
     self waittill("trigger", var_6);
-    var_7 = var_1.ref_136fb == 0 && var_6 == 0;
+    var_7 = var_1.ref_136FB == 0 && var_6 == 0;
 
     if(!var_7 && var_6 == var_1.initial_enemy_spawner) {
       var_5 = !var_5;
@@ -1969,15 +1969,15 @@ function ref_14275(var_0, var_1) {
 
     if(isDefined(var_3.update_player_enemy_on_death[var_6])) {
       var_8 = var_3.update_player_enemy_on_death[var_6];
-      var_9 = var_1.ref_11f9e[var_8];
+      var_9 = var_1.ref_11F9E[var_8];
 
       if(istrue(var_9.hostdefensefactormod) && var_5) {
         self.tutonplayerkilled = var_9;
         self.cone = var_3.points[var_6];
       } else if(!istrue(var_9.hostdefensefactormod) && var_5) {
-        ref_11f9b(var_9);
+        ref_11F9B(var_9);
       } else if(!istrue(var_9.hostdefensefactormod) && !var_5) {
-        ref_11f9c(var_9, 1);
+        ref_11F9C(var_9, 1);
       }
     }
 
@@ -1985,15 +1985,15 @@ function ref_14275(var_0, var_1) {
       self.carriable_explode = 1;
 
       if(var_6 > var_4 && isDefined(var_3.tv_station_interior_enemy_should_break_stealth_immediately[var_6])) {
-        level thread scripts\mp\gametypes\br_quest_util::ref_140b1(self.origin, "dom");
-        ref_11e6f(var_3.tv_station_interior_enemy_should_break_stealth_immediately[var_6], var_1);
+        level thread scripts\mp\gametypes\br_quest_util::ref_140B1(self.origin, "dom");
+        ref_11E6F(var_3.tv_station_interior_enemy_should_break_stealth_immediately[var_6], var_1);
       }
     } else if(var_6 <= 0) {
-      var_1.ref_136fb--;
-      var_1.initial_enemy_spawner = var_1.ref_136fc[var_1.ref_136fb].points.size - 2;
+      var_1.ref_136FB--;
+      var_1.initial_enemy_spawner = var_1.ref_136FC[var_1.ref_136FB].points.size - 2;
       return 0;
     } else if(var_6 >= var_4) {
-      var_1.ref_136fb++;
+      var_1.ref_136FB++;
       var_1.initial_enemy_spawner = 0;
       return 1;
     }
@@ -2010,7 +2010,7 @@ function ref_14245(var_0) {
   return self.obj_payload_stage.numtouching[var_0];
 }
 
-function ref_125f2(var_0) {
+function ref_125F2(var_0) {
   if(!isDefined(var_0)) {
     return false;
   }
@@ -2024,7 +2024,7 @@ function ref_125f2(var_0) {
   return false;
 }
 
-function ref_13c54() {
+function ref_13C54() {
   level endon("game_ended");
   level notify("trackPlayersPerPath");
   level endon("trackPlayersPerPath");
@@ -2053,7 +2053,7 @@ function ref_13c54() {
         continue;
       }
 
-      var_10 = ref_1255a(var_7);
+      var_10 = ref_1255A(var_7);
 
       if(isDefined(var_10)) {
         var_10.numplayers[var_3]++;
@@ -2067,7 +2067,7 @@ function ref_13c54() {
   }
 }
 
-function ref_1255a() {
+function ref_1255A() {
   var_0 = undefined;
   var_1 = undefined;
 
@@ -2221,8 +2221,8 @@ function thankyou_photo() {
   }
 
   if(level.disable_super_in_turret.set_force_aitype_sniper) {
-    ref_1326f(game["attackers"]);
-    ref_1326f(game["defenders"]);
+    ref_1326F(game["attackers"]);
+    ref_1326F(game["defenders"]);
     return;
   }
 }
@@ -2237,7 +2237,7 @@ function play_spotrep_capture_sfx(var_0) {
   var_0.playergetplunderomnvarbitpackinginfo = var_0.origin + var_2 * var_1;
 }
 
-function ref_1326f(var_0) {
+function ref_1326F(var_0) {
   var_1 = level.disable_super_in_turret.ref_13695[var_0];
 
   if(isDefined(level.disable_super_in_turret.ref_13876)) {
@@ -2281,7 +2281,7 @@ function play_smoke_fx(var_0) {
   }
 }
 
-function ref_1452d(var_0) {
+function ref_1452D(var_0) {
   level endon("game_ended");
   scripts\mp\flags::gameflagwait("infil_complete");
   level.teamdata[var_0]["nextRespawn"] = 0;
@@ -2311,8 +2311,8 @@ function runkilltriger(var_0, var_1) {
 }
 
 function dyn_door(var_0) {
-  if(scripts\mp\flags::gameflag("prematch_done") && istrue(level.disable_super_in_turret.ref_12caa)) {
-    ref_126bb();
+  if(scripts\mp\flags::gameflag("prematch_done") && istrue(level.disable_super_in_turret.ref_12CAA)) {
+    ref_126BB();
   }
 
   return true;
@@ -2323,17 +2323,17 @@ function playerrespawn(var_0, var_1) {
     return false;
   }
 
-  thread ref_126a4(var_0);
+  thread ref_126A4(var_0);
   return true;
 }
 
-function ref_126a4(var_0) {
+function ref_126A4(var_0) {
   level endon("payloadComplete");
   level endon("game_ended");
   self endon("disconnect");
 
   if(!istrue(level.debug_safehouse_regroup_start)) {
-    self.class = scripts\mp\gametypes\br::ref_1234a();
+    self.class = scripts\mp\gametypes\br::ref_1234A();
   }
 
   var_1 = level.teamdata[self.team]["nextRespawn"];
@@ -2354,14 +2354,14 @@ function ref_126a4(var_0) {
   self.waitingtospawn = 0;
   thread scripts\mp\playerlogic::spawnplayer(undefined, 0);
   self freezecontrols(1);
-  thread ref_1253a();
+  thread ref_1253A();
 
   while(!isalive(self)) {
     waitframe();
   }
 
   waitframe();
-  ref_1255b();
+  ref_1255B();
   scripts\mp\utility\outline::outlineenableforteam(self, self.team, "outline_depth_payload", "level_script");
   var_3 = !self calloutmarkerping_getEnt();
   var_4 = gettime();
@@ -2379,24 +2379,24 @@ function ref_126a4(var_0) {
   self notify("brWaitAndSpawnClientComplete");
   self.waitingtospawn = 0;
   self freezecontrols(0);
-  scripts\mp\gametypes\br::ref_13f21(self);
+  scripts\mp\gametypes\br::ref_13F21(self);
   scripts\mp\damage::resetplayervariables();
 }
 
-function ref_1255b() {
+function ref_1255B() {
   if(getdvarint("scr_br_payload_last_stand", 0) != 0) {
     scripts\mp\gametypes\br::scriptednode(self);
   }
 
   scripts\mp\gametypes\br_armor::searchcirclesize(1);
   ref_12508();
-  scripts\mp\gametypes\br_public::ref_1252b();
-  thread ref_126ac();
-  thread ref_126ad();
+  scripts\mp\gametypes\br_public::ref_1252B();
+  thread ref_126AC();
+  thread ref_126AD();
   self.warroomtvs = undefined;
 }
 
-function ref_1369e(var_0) {
+function ref_1369E(var_0) {
   self endon("disconnect");
   self notify("reset_timer");
   waitframe();
@@ -2404,11 +2404,11 @@ function ref_1369e(var_0) {
   var_1 = var_0;
   var_2 = gettime() + var_1 * 1000;
   self setclientomnvar("ui_privateevent_timer", var_2);
-  scripts\engine\utility::ref_143ba(var_0, "reset_timer", "death");
+  scripts\engine\utility::ref_143BA(var_0, "reset_timer", "death");
   self setclientomnvar("ui_privateevent_timer_type", 0);
 }
 
-function ref_126ac() {
+function ref_126AC() {
   self endon("disconnect");
 
   if(!isDefined(self.warroomtvs)) {
@@ -2460,7 +2460,7 @@ function ref_126ac() {
   }
 
   var_7 = getdvarfloat("scr_br_payload_speed_mult", 0.4);
-  thread ref_1369e(var_3);
+  thread ref_1369E(var_3);
   var_8 = self.fastcrouchspeedmod;
   self.fastcrouchspeedmod = var_7;
   scripts\mp\weapons::updatemovespeedscale();
@@ -2482,9 +2482,9 @@ function ref_126ac() {
   }
 
   if(!scripts\mp\gametypes\br_public::shouldlink()) {
-    ref_12e60("specialty_sprintmelee");
-    ref_12e60("specialty_sprintads");
-    ref_12e60("specialty_marathon");
+    ref_12E60("specialty_sprintmelee");
+    ref_12E60("specialty_sprintads");
+    ref_12E60("specialty_marathon");
   }
 
   self.fastcrouchspeedmod = var_8;
@@ -2492,7 +2492,7 @@ function ref_126ac() {
   self lerpfovbypreset("default_2seconds");
 }
 
-function ref_12e60(var_0) {
+function ref_12E60(var_0) {
   if(scripts\mp\utility\perk::_hasperk(var_0)) {
     scripts\mp\utility\perk::removeperk(var_0);
     return;
@@ -2593,8 +2593,8 @@ function ref_12695() {
         var_13.archived = 0;
         var_13 setplayernamestring(var_12);
         var_13.player = var_12;
-        var_13.ref_1284f = scripts\mp\hud_util::createfontstring("default", 1.5);
-        var_13.ref_1284f.archived = 0;
+        var_13.ref_1284F = scripts\mp\hud_util::createfontstring("default", 1.5);
+        var_13.ref_1284F.archived = 0;
         var_9 = var_13;
         LOC_0000030c:
       }
@@ -2613,7 +2613,7 @@ function ref_12695() {
     var_20 = undefined;
 
     while(!isDefined(var_15)) {
-      var_21 = ref_134d7(var_2, var_9);
+      var_21 = ref_134D7(var_2, var_9);
       var_22 = self getnormalizedmovement();
       var_23 = var_22[0] > 0;
       var_24 = var_22[0] < 0;
@@ -2662,8 +2662,8 @@ function ref_12695() {
         }
       }
 
-      ref_13fe1(var_2, var_9, var_1);
-      ref_139d8(var_1.getteamtokenshud.path);
+      ref_13FE1(var_2, var_9, var_1);
+      ref_139D8(var_1.getteamtokenshud.path);
       var_20 = undefined;
 
       if(self useButtonPressed()) {
@@ -2693,7 +2693,7 @@ function ref_12695() {
     }
 
     foreach(var_36, var_33 in var_9) {
-      var_33.ref_1284f destroy();
+      var_33.ref_1284F destroy();
       var_33 destroy();
     }
 
@@ -2706,7 +2706,7 @@ function ref_12695() {
     return respawnfade("A");
   }
 
-  if(istrue(level.disable_super_in_turret.ref_12caa)) {
+  if(istrue(level.disable_super_in_turret.ref_12CAA)) {
     thread startspectatorview();
   }
 
@@ -2764,10 +2764,10 @@ function playergulaggetrespawnpoint(var_0) {
   }
 
   self.playergulagvictorysetcontrols = gettime() + 250;
-  ref_139d8(var_0);
+  ref_139D8(var_0);
 }
 
-function ref_134d7(var_0, var_1) {
+function ref_134D7(var_0, var_1) {
   var_2 = -60;
   var_3 = 30;
   var_4 = var_2;
@@ -2787,7 +2787,7 @@ function ref_134d7(var_0, var_1) {
 
       if(var_10 == var_7.path) {
         var_9 scripts\mp\hud_util::setpoint("LEFT", "CENTER", 0, var_4);
-        var_9.ref_1284f scripts\mp\hud_util::setpoint("RIGHT", "CENTER", 0, var_4);
+        var_9.ref_1284F scripts\mp\hud_util::setpoint("RIGHT", "CENTER", 0, var_4);
         var_5 = var_9;
         var_4 += var_3;
       }
@@ -2797,7 +2797,7 @@ function ref_134d7(var_0, var_1) {
   return var_5;
 }
 
-function ref_13fe1(var_0, var_1, var_2) {
+function ref_13FE1(var_0, var_1, var_2) {
   var_3 = -60;
   var_4 = 30;
   var_5 = 0;
@@ -2805,34 +2805,34 @@ function ref_13fe1(var_0, var_1, var_2) {
   foreach(var_7 in var_1) {
     if(!isDefined(var_7.player)) {
       var_7.alpha = 0;
-      var_7.ref_1284f.alpha = 0;
+      var_7.ref_1284F.alpha = 0;
       continue;
     }
 
     if(!isalive(var_7.player)) {
       var_7.color = (1, 0, 0);
-      var_7.ref_1284f.color = (1, 0, 0);
-      var_7.ref_1284f.label = &"BR_PAYLOAD/SPAWN_DEAD";
+      var_7.ref_1284F.color = (1, 0, 0);
+      var_7.ref_1284F.label = &"BR_PAYLOAD/SPAWN_DEAD";
       continue;
     }
 
     if(issquadmateindanger(var_7.player)) {
       var_7.color = (1, 0, 0);
-      var_7.ref_1284f.color = (1, 0, 0);
-      var_7.ref_1284f.label = &"BR_PAYLOAD/SPAWN_COMBAT";
+      var_7.ref_1284F.color = (1, 0, 0);
+      var_7.ref_1284F.label = &"BR_PAYLOAD/SPAWN_COMBAT";
       continue;
     }
 
     var_7.color = (0, 1, 1);
-    var_7.ref_1284f.color = (1, 1, 1);
+    var_7.ref_1284F.color = (1, 1, 1);
 
     if(var_2.getteamtokenshud == var_7) {
-      var_7.ref_1284f.label = &"BR_PAYLOAD/SPAWN_VALID_HOLD";
+      var_7.ref_1284F.label = &"BR_PAYLOAD/SPAWN_VALID_HOLD";
       var_5 = 1;
       continue;
     }
 
-    var_7.ref_1284f.label = &"BR_PAYLOAD/SPAWN_VALID";
+    var_7.ref_1284F.label = &"BR_PAYLOAD/SPAWN_VALID";
   }
 
   foreach(var_10 in var_0) {
@@ -2967,7 +2967,7 @@ function respawn_enemies(var_0) {
   return undefined;
 }
 
-function ref_121fc(var_0) {
+function ref_121FC(var_0) {
   var_1 = respawn_enemies(var_0);
 
   if(var_1.getquestplunderrewardinstance + 1 < var_0.getquestplunderrewardinstance) {
@@ -2979,7 +2979,7 @@ function ref_121fc(var_0) {
       var_4 = ref_12575(var_3);
 
       if(var_4 == var_0 && !isDefined(var_3.ref_12276)) {
-        thread ref_125c5(var_3);
+        thread ref_125C5(var_3);
       }
     }
 
@@ -2987,15 +2987,15 @@ function ref_121fc(var_0) {
   }
 }
 
-function ref_125c5(var_0) {
-  var_1 = level.disable_super_in_turret.ref_121fc;
+function ref_125C5(var_0) {
+  var_1 = level.disable_super_in_turret.ref_121FC;
   var_2 = gettime() + var_1 * 1000;
-  scripts\mp\utility\lower_message::ref_1316e("br_payload_redeploy", var_2, var_1);
+  scripts\mp\utility\lower_message::ref_1316E("br_payload_redeploy", var_2, var_1);
   wait var_1;
-  ref_125c4(var_0);
+  ref_125C4(var_0);
 }
 
-function ref_125c4(var_0) {
+function ref_125C4(var_0) {
   var_1 = "ui_br_open_purchase_killstreak";
   var_2 = 0;
   var_3 = "ui_br_purchase_killstreak_response";
@@ -3021,7 +3021,7 @@ function ref_125c4(var_0) {
   ref_12689(var_6);
 
   if(isDefined(self)) {
-    var_7 = ref_1257c(var_6);
+    var_7 = ref_1257C(var_6);
     self notify("_watchToAutoCloseMenu_end");
     ref_12648(var_7);
     scripts\cp_mp\utility\player_utility::_freezecontrols(0, 1, "kiosk");
@@ -3036,28 +3036,28 @@ function ref_12648(var_0) {
   level endon("payloadComplete");
   level endon("game_ended");
   var_1 endon("disconnect");
-  var_2 = var_1 scripts\mp\gametypes\br_gulag::ref_1263e(var_0);
+  var_2 = var_1 scripts\mp\gametypes\br_gulag::ref_1263E(var_0);
   var_3 = 1;
   scripts\mp\gametypes\br::ending_fade_in(var_0.origin[0], var_0.origin[1], level.juggheli_spawner_jammer5_3);
   self setclientomnvar("ui_br_transition_type", 2);
   var_1 playerhide();
   wait var_3;
-  scripts\mp\gametypes\br_public::ref_1264c();
-  var_1 scripts\mp\gametypes\br_gulag::ref_126c3(var_0.origin, var_0.angles);
+  scripts\mp\gametypes\br_public::ref_1264C();
+  var_1 scripts\mp\gametypes\br_gulag::ref_126C3(var_0.origin, var_0.angles);
   scripts\cp_mp\utility\player_utility::_freezecontrols(1, undefined, "redeploy");
   waitframe();
-  var_1 scripts\mp\gametypes\br_public::ref_126ed();
-  var_1 scripts\mp\gametypes\br_public::ref_1252b();
+  var_1 scripts\mp\gametypes\br_public::ref_126ED();
+  var_1 scripts\mp\gametypes\br_public::ref_1252B();
   scripts\cp_mp\utility\player_utility::_freezecontrols(0, 1, "redeploy");
   var_1 playershow();
   var_1 setclientomnvar("ui_br_transition_type", 0);
   var_1 setclientomnvar("ui_show_spectateHud", -1);
 
   if(level.disable_super_in_turret.ref_13602 > -1) {
-    thread ref_1253a();
+    thread ref_1253A();
   }
 
-  ref_1255b();
+  ref_1255B();
 }
 
 function spawndogtagtoken(var_0, var_1) {
@@ -3075,7 +3075,7 @@ function spawndogtagtoken(var_0, var_1) {
     if(var_2 != var_1.numplayers[var_0.team]) {
       self setvalue(var_1.numplayers[var_0.team]);
       var_2 = var_1.numplayers[var_0.team];
-      ref_1318b(var_1.script_index, var_1.numplayers[var_0.team]);
+      ref_1318B(var_1.script_index, var_1.numplayers[var_0.team]);
     }
 
     waitframe();
@@ -3096,14 +3096,14 @@ function ref_13621(var_0, var_1) {
   for(;;) {
     if(var_2 != var_1.numplayers[var_0.team]) {
       var_2 = var_1.numplayers[var_0.team];
-      ref_1318b(var_1.script_index, var_1.numplayers[var_0.team]);
+      ref_1318B(var_1.script_index, var_1.numplayers[var_0.team]);
     }
 
     waitframe();
   }
 }
 
-function ref_1253a() {
+function ref_1253A() {
   self endon("disconnect");
   self endon("payload_remove_spawn_protection_flying");
 
@@ -3120,7 +3120,7 @@ function ref_1253a() {
 
   if(scripts\mp\flags::gameflag("prematch_done") && level.disable_super_in_turret.ref_13604) {
     self.ref_12278 = 1;
-    thread ref_126a9();
+    thread ref_126A9();
     var_0 = gettime() + level.disable_super_in_turret.ref_13604 * 1000;
 
     while(!self isonground() && self playerads() < 0.5 && gettime() < var_0) {
@@ -3133,7 +3133,7 @@ function ref_1253a() {
   }
 }
 
-function ref_126a9() {
+function ref_126A9() {
   self endon("death_or_disconnect");
   self endon("payload_remove_spawn_protection_flying");
   self waittill("weapon_fired");
@@ -3201,7 +3201,7 @@ function emp_drone_proximity_explode(var_0, var_1) {
 
       if(var_9 == 1) {
         self setclientomnvar("ui_show_spectateHud", self getentitynumber());
-        scripts\mp\gametypes\br_spectate::ref_1252a();
+        scripts\mp\gametypes\br_spectate::ref_1252A();
         scripts\mp\gametypes\br::spawnintermission(self.origin + (0, 0, 100), self.angles);
         scripts\mp\spectating::setdisabled();
         scripts\mp\utility\lower_message::setlowermessageomnvar(9, int(gettime() + var_7));
@@ -3236,38 +3236,38 @@ function emp_drone_proximity_explode(var_0, var_1) {
     self.warroomtvs = var_12;
     ref_12689(var_12);
     var_13 = (gettime() - var_12) / 1000;
-    ref_126bc(var_12, var_11, var_13, var_7, var_8, var_10);
+    ref_126BC(var_12, var_11, var_13, var_7, var_8, var_10);
   } else {
     self.thrust_fx_model = undefined;
-    scripts\mp\gametypes\br_public::ref_126ed();
+    scripts\mp\gametypes\br_public::ref_126ED();
   }
 
   scripts\mp\utility\lower_message::setlowermessageomnvar(0);
   self freezecontrols(0);
 }
 
-function ref_126bc(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_126BC(var_0, var_1, var_2, var_3, var_4, var_5) {
   level endon("payloadComplete");
   level endon("game_ended");
   self notify("playerStreamRespawn");
   self endon("playerStreamRespawn");
   self.ref_12276 = 1;
-  self.ref_1286f = ref_1257c(var_0);
+  self.ref_1286F = ref_1257C(var_0);
 
-  if(isDefined(self.ref_1286f)) {
-    self.ref_1286f.index = -1;
+  if(isDefined(self.ref_1286F)) {
+    self.ref_1286F.index = -1;
   }
 
   var_6 = getdvarint("scr_br_drop_prespawn_timeout_ms", 9000);
-  var_7 = self.ref_1286f.origin;
-  scripts\mp\gametypes\br_public::ref_126b9(var_7, var_6, 1, 0, var_5);
+  var_7 = self.ref_1286F.origin;
+  scripts\mp\gametypes\br_public::ref_126B9(var_7, var_6, 1, 0, var_5);
   var_8 = 1;
   var_9 = 0.25;
   var_10 = var_8 - var_9;
   thread scripts\mp\gametypes\br_gulag::fadeoutin(var_8);
   wait var_10;
-  scripts\mp\gametypes\br_spectate::ref_1252a();
-  scripts\mp\gametypes\br::spawnintermission(var_7, self.ref_1286f.angles);
+  scripts\mp\gametypes\br_spectate::ref_1252A();
+  scripts\mp\gametypes\br::spawnintermission(var_7, self.ref_1286F.angles);
   scripts\mp\spectating::setdisabled();
 
   if(getdvarint("scr_br_alt_mode_mini", 0) == 0) {
@@ -3282,12 +3282,12 @@ function ref_126bc(var_0, var_1, var_2, var_3, var_4, var_5) {
     wait var_11;
 
     if(self.ref_12276 > 1) {
-      scripts\mp\gametypes\br_public::ref_126ed();
+      scripts\mp\gametypes\br_public::ref_126ED();
     } else {
-      scripts\mp\gametypes\br_public::ref_1252b();
+      scripts\mp\gametypes\br_public::ref_1252B();
     }
   } else {
-    scripts\mp\gametypes\br_public::ref_126ed();
+    scripts\mp\gametypes\br_public::ref_126ED();
   }
 
   self setclientomnvar("ui_show_spectateHud", -1);
@@ -3299,7 +3299,7 @@ function ref_12006() {
     var_0 = round_enemies_push_logic(self.team, self.squadindex);
     var_1 = level.disable_super_in_turret.paths[var_0];
     ref_12689(var_1);
-    self.ref_13689 = ref_1257c(var_1);
+    self.ref_13689 = ref_1257C(var_1);
     return self.ref_13689;
   }
 }
@@ -3316,7 +3316,7 @@ function get_bomb_vest_id_vfx(var_0) {
   return var_0.getquestplunderrewardinstance <= level.disable_super_in_turret.ref_13602;
 }
 
-function ref_1257c(var_0) {
+function ref_1257C(var_0) {
   var_1 = var_0;
 
   if(isPlayer(var_0)) {
@@ -3329,13 +3329,13 @@ function ref_1257c(var_0) {
 
   if(level.disable_super_in_turret.set_force_aitype_sniper && !var_2) {
     if(isPlayer(var_0)) {
-      ref_1252e(var_0);
-      var_3 = ref_1256c(var_0, var_0.origin, var_0.angles);
+      ref_1252E(var_0);
+      var_3 = ref_1256C(var_0, var_0.origin, var_0.angles);
       var_4 = var_3[0];
       var_5 = var_3[1];
       var_3 = undefined;
     } else {
-      var_4 = ref_1256a(var_2);
+      var_4 = ref_1256A(var_2);
     }
 
     if(isDefined(var_4)) {
@@ -3343,15 +3343,15 @@ function ref_1257c(var_0) {
     }
   }
 
-  var_6 = var_2.ref_136fc[var_2.ref_136fb].points[var_2.initial_enemy_spawner];
+  var_6 = var_2.ref_136FC[var_2.ref_136FB].points[var_2.initial_enemy_spawner];
 
   if(var_4) {
-    var_7 = ref_1257f(var_2);
+    var_7 = ref_1257F(var_2);
     var_8 = var_7[0];
     var_9 = var_7[1];
     var_7 = undefined;
   } else {
-    jumpiffalse(level.disable_super_in_turret.ref_129cb) LOC_0000011d;
+    jumpiffalse(level.disable_super_in_turret.ref_129CB) LOC_0000011d;
     var_10 = ref_12578(var_6);
     var_8 = var_10[0];
     var_9 = var_10[1];
@@ -3361,7 +3361,7 @@ function ref_1257c(var_0) {
 
   LOC_000001e3:
     if(!scripts\mp\gametypes\br_circle::vandalize_minigun_speed(var_11, 0)) {
-      var_11 = scripts\mp\gametypes\br_c130::ref_1342e(var_9, var_11);
+      var_11 = scripts\mp\gametypes\br_c130::ref_1342E(var_9, var_11);
       var_20 = vectorNormalize(var_9 - var_11);
       var_11 += var_20 * 100;
     }
@@ -3384,7 +3384,7 @@ function ref_1257c(var_0) {
   return var_4;
 }
 
-function ref_1257f(var_0) {
+function ref_1257F(var_0) {
   var_1 = 21;
   var_2 = 11;
   var_3 = 50;
@@ -3395,7 +3395,7 @@ function ref_1257f(var_0) {
     var_5 = var_1;
   }
 
-  var_6 = ref_1256a(var_0, 1, var_5);
+  var_6 = ref_1256A(var_0, 1, var_5);
   var_7 = var_0.spawncount[self.team];
   var_8 = var_7 % 2 == 0;
   var_9 = int(var_7 / 2);
@@ -3410,7 +3410,7 @@ function ref_1257f(var_0) {
     var_11 = var_6.origin + var_13 * var_10;
   }
 
-  return [(var_11[0], var_11[1], 0), level.disable_super_in_turret.ref_1365f];
+  return [(var_11[0], var_11[1], 0), level.disable_super_in_turret.ref_1365F];
 }
 
 function ref_12578(var_0) {
@@ -3418,37 +3418,37 @@ function ref_12578(var_0) {
   var_2 = 1;
   var_3 = getdvarfloat("scr_br_payload_spawn_degrees", var_1);
   var_4 = getdvarfloat("scr_br_payload_spawn_degrees", var_2);
-  var_5 = var_0.ref_136fc[var_0.ref_136fb].points[var_0.initial_enemy_spawner];
+  var_5 = var_0.ref_136FC[var_0.ref_136FB].points[var_0.initial_enemy_spawner];
 
   if(!isDefined(var_0.ref_13603) || var_0.ref_13603 != var_0.initial_enemy_spawner) {
-    var_6 = var_0.ref_136fc[var_0.ref_136fb].points[var_0.initial_enemy_spawner + 1];
+    var_6 = var_0.ref_136FC[var_0.ref_136FB].points[var_0.initial_enemy_spawner + 1];
     var_7 = vectorNormalize(var_6 - var_5);
     var_0.ref_13603 = var_0.initial_enemy_spawner;
-    var_0.ref_136b6 = vectortoyaw(var_7);
-    var_0.ref_136b5 = vectortoyaw(-1 * var_7);
-    var_0.ref_136b8 = -1 * var_3;
-    var_0.ref_136b7 = -1 * var_3;
+    var_0.ref_136B6 = vectortoyaw(var_7);
+    var_0.ref_136B5 = vectortoyaw(-1 * var_7);
+    var_0.ref_136B8 = -1 * var_3;
+    var_0.ref_136B7 = -1 * var_3;
   }
 
   if(self.team == game["defenders"]) {
     var_8 = level.disable_super_in_turret.ref_13633;
     var_9 = level.disable_super_in_turret.ref_13660;
-    var_10 = level.disable_super_in_turret.ref_1368f;
-    var_11 = var_0.ref_136b6 + var_0.ref_136b8;
-    var_0.ref_136b8 += var_4;
+    var_10 = level.disable_super_in_turret.ref_1368F;
+    var_11 = var_0.ref_136B6 + var_0.ref_136B8;
+    var_0.ref_136B8 += var_4;
 
-    if(var_0.ref_136b8 > var_3) {
-      var_0.ref_136b8 = -1 * var_3;
+    if(var_0.ref_136B8 > var_3) {
+      var_0.ref_136B8 = -1 * var_3;
     }
   } else {
     var_8 = level.disable_super_in_turret.ref_13632;
-    var_9 = level.disable_super_in_turret.ref_1365f;
-    var_10 = level.disable_super_in_turret.ref_1368e;
-    var_11 = var_4.ref_136b5 + var_4.ref_136b7;
-    var_4.ref_136b7 += var_10;
+    var_9 = level.disable_super_in_turret.ref_1365F;
+    var_10 = level.disable_super_in_turret.ref_1368E;
+    var_11 = var_4.ref_136B5 + var_4.ref_136B7;
+    var_4.ref_136B7 += var_10;
 
-    if(var_4.ref_136b7 > var_9) {
-      var_4.ref_136b7 = -1 * var_9;
+    if(var_4.ref_136B7 > var_9) {
+      var_4.ref_136B7 = -1 * var_9;
     }
   }
 
@@ -3457,7 +3457,7 @@ function ref_12578(var_0) {
   return [(var_12, var_13, 0), var_9];
 }
 
-function ref_1256a(var_0, var_1, var_2) {
+function ref_1256A(var_0, var_1, var_2) {
   var_3 = self.team;
   var_4 = isDefined(level.disable_super_in_turret.ref_13876) && isDefined(self.cameraent);
 
@@ -3469,7 +3469,7 @@ function ref_1256a(var_0, var_1, var_2) {
 
   var_6 = var_1.initchallengeandeventglobals;
 
-  if(!isDefined(var_1.ref_13695[var_4]) || var_5 != var_1.ref_1361e[var_4] || !var_5 && istrue(var_1.ref_13874)) {
+  if(!isDefined(var_1.ref_13695[var_4]) || var_5 != var_1.ref_1361E[var_4] || !var_5 && istrue(var_1.ref_13874)) {
     if(var_5) {
       var_1.ref_13695[var_4] = scripts\engine\utility::array_randomize(remove_dko_spawnflags(var_4, var_6));
       var_1.ref_13874 = 1;
@@ -3486,7 +3486,7 @@ function ref_1256a(var_0, var_1, var_2) {
     var_1.ref_13663[var_4] = randomint(var_1.ref_13695[var_4].size);
     var_1.spawncount[var_4] = 0;
     var_1.spawntime[var_4] = gettime();
-    var_1.ref_1361e[var_4] = var_5;
+    var_1.ref_1361E[var_4] = var_5;
   }
 
   if(var_1.ref_13695[var_4].size == 0) {
@@ -3521,7 +3521,7 @@ function ref_1256a(var_0, var_1, var_2) {
     var_8.angles = (0, 0, 0);
   }
 
-  ref_1252e(var_8);
+  ref_1252E(var_8);
 
   if(istrue(var_2)) {
     var_1.spawntime[var_4] = gettime();
@@ -3529,7 +3529,7 @@ function ref_1256a(var_0, var_1, var_2) {
     return var_8;
   }
 
-  var_9 = ref_1256c(var_8.origin, var_8.angles, var_1.spawncount[var_4]);
+  var_9 = ref_1256C(var_8.origin, var_8.angles, var_1.spawncount[var_4]);
   var_10 = var_9[0];
   var_11 = var_9[1];
   var_9 = undefined;
@@ -3540,7 +3540,7 @@ function ref_1256a(var_0, var_1, var_2) {
   return var_10;
 }
 
-function ref_1256c(var_0, var_1, var_2, var_3) {
+function ref_1256C(var_0, var_1, var_2, var_3) {
   var_4 = 32;
   var_5 = 8;
   var_6 = 50;
@@ -3650,7 +3650,7 @@ function ref_1256c(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_1252e(var_0) {
+function ref_1252E(var_0) {
   foreach(var_2 in level.disable_super_in_turret.paths) {
     self.heli_landing_volumes[var_2.label] = var_0.heli_landing_volumes[var_2.label];
   }
@@ -3760,7 +3760,7 @@ function modifyplayerdamage(var_0) {
     var_2 = isDefined(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::nuke_vault_suicidebombers() && istrue(var_0.attacker.ref_12282);
 
     if(var_2) {
-      var_1 = int(min(var_1, level.disable_super_in_turret.ref_11b58));
+      var_1 = int(min(var_1, level.disable_super_in_turret.ref_11B58));
     }
   }
 
@@ -3785,7 +3785,7 @@ function modifyplayerdamage(var_0) {
   return var_1;
 }
 
-function ref_1226b(var_0, var_1) {
+function ref_1226B(var_0, var_1) {
   if(scripts\mp\flags::gameflag("prematch_done")) {
     var_2 = var_0.attacker;
 
@@ -3810,7 +3810,7 @@ function ref_1226b(var_0, var_1) {
         var_3 = getdvarint("scr_br_payload_defender_kill_pay_scale", 3);
       }
 
-      if(ref_125f2(var_2)) {
+      if(ref_125F2(var_2)) {
         var_3 += 4;
       }
 
@@ -3857,7 +3857,7 @@ function playerdropplunderondeath(var_0, var_1) {
   var_13 = int(max(0, int(var_9 * var_12)));
   self.plundercountondeath = var_8;
   var_14 = spawnStruct();
-  var_14.ref_133e4 = 1;
+  var_14.ref_133E4 = 1;
   scripts\mp\gametypes\br_plunder::playersetplundercount(var_8, var_14);
 
   if(var_13 <= 0) {
@@ -3869,7 +3869,7 @@ function playerdropplunderondeath(var_0, var_1) {
 }
 
 function ref_12284(var_0, var_1, var_2, var_3) {
-  if(!level.disable_super_in_turret.ref_1225f) {
+  if(!level.disable_super_in_turret.ref_1225F) {
     return;
   }
 
@@ -3906,7 +3906,7 @@ function ref_12262(var_0, var_1, var_2) {
 
     var_6.player scripts\mp\gametypes\br_plunder::ref_12627(var_7);
     level.br_plunder.ref_12784 += var_7;
-    var_6.player scripts\mp\gametypes\br_analytics::ref_13c44(var_6.player, var_2, var_7);
+    var_6.player scripts\mp\gametypes\br_analytics::ref_13C44(var_6.player, var_2, var_7);
   }
 }
 
@@ -3930,36 +3930,36 @@ function ref_12261(var_0, var_1, var_2) {
 
   var_0 scripts\mp\gametypes\br_plunder::ref_12627(var_5);
   level.br_plunder.ref_12784 += var_5;
-  var_0 scripts\mp\gametypes\br_analytics::ref_13c44(var_0, var_2, var_5);
+  var_0 scripts\mp\gametypes\br_analytics::ref_13C44(var_0, var_2, var_5);
 }
 
 function totalcollecteditems() {
-  if(!level.disable_super_in_turret.ref_136c4) {
+  if(!level.disable_super_in_turret.ref_136C4) {
     return;
   }
 
   foreach(var_1 in level.disable_super_in_turret.paths) {
-    var_2 = ref_11f46(var_1);
+    var_2 = ref_11F46(var_1);
     var_3 = var_2[0];
     var_4 = var_2[1];
     var_2 = undefined;
-    var_1.ref_136c3 = [];
-    var_1.ref_136c3[game["attackers"]] = [];
-    var_1.ref_136c3[game["defenders"]] = [];
+    var_1.ref_136C3 = [];
+    var_1.ref_136C3[game["attackers"]] = [];
+    var_1.ref_136C3[game["defenders"]] = [];
 
     for(var_5 = 0; var_5 < var_3; var_5++) {
       var_6 = init_trap_room_wave(var_1);
-      var_1.ref_136c3[game["attackers"]][var_5] = var_6;
+      var_1.ref_136C3[game["attackers"]][var_5] = var_6;
     }
 
     for(var_5 = 0; var_5 < var_4; var_5++) {
       var_6 = init_trap_room_wave(var_1);
-      var_1.ref_136c3[game["defenders"]][var_5] = var_6;
+      var_1.ref_136C3[game["defenders"]][var_5] = var_6;
     }
   }
 
-  if(istrue(level.disable_super_in_turret.ref_136c5)) {
-    level.disable_super_in_turret.ref_136ae = [1500, 2000, 2500, 2800, 3000, 3200, 3500];
+  if(istrue(level.disable_super_in_turret.ref_136C5)) {
+    level.disable_super_in_turret.ref_136AE = [1500, 2000, 2500, 2800, 3000, 3200, 3500];
     level._effect["payload_oob_1500"] = loadfx("vfx/iw8_br/gameplay/payload/vfx_br_payload_oob_circle_1500");
     level._effect["payload_oob_2000"] = loadfx("vfx/iw8_br/gameplay/payload/vfx_br_payload_oob_circle_2000");
     level._effect["payload_oob_2500"] = loadfx("vfx/iw8_br/gameplay/payload/vfx_br_payload_oob_circle_2500");
@@ -3971,12 +3971,12 @@ function totalcollecteditems() {
   }
 }
 
-function ref_140d5() {
-  foreach(var_1 in level.disable_super_in_turret.ref_136c3) {}
+function ref_140D5() {
+  foreach(var_1 in level.disable_super_in_turret.ref_136C3) {}
 }
 
 function init_trap_room_wave(var_0) {
-  var_1 = getmaxobjectivecount(0, 0, level.disable_super_in_turret.ref_136c2);
+  var_1 = getmaxobjectivecount(0, 0, level.disable_super_in_turret.ref_136C2);
   var_1 setmapcirclecolorindex(0);
   var_1 hide();
   var_1.enabled = 0;
@@ -3984,7 +3984,7 @@ function init_trap_room_wave(var_0) {
   return var_1;
 }
 
-function ref_11f46(var_0) {
+function ref_11F46(var_0) {
   var_1 = [];
   GscBinSkip0(0x2e, game["attackers"], []);
 }
@@ -3994,7 +3994,7 @@ function init_trigger_spawn(var_0, var_1, var_2, var_3, var_4) {
   var_5.targetname = "OutOfBounds";
   var_5.radius = var_1;
   var_5.script_team = var_2;
-  var_5.ref_136bc = var_3;
+  var_5.ref_136BC = var_3;
   var_5.spawntime = gettime();
 
   if(!istrue(var_4)) {
@@ -4005,7 +4005,7 @@ function init_trigger_spawn(var_0, var_1, var_2, var_3, var_4) {
 }
 
 function ref_13270(var_0, var_1) {
-  if(!level.disable_super_in_turret.ref_136c4) {
+  if(!level.disable_super_in_turret.ref_136C4) {
     return;
   }
 
@@ -4024,8 +4024,8 @@ function ref_13271(var_0, var_1, var_2) {
   var_8 = var_6[1];
   var_6 = undefined;
 
-  for(var_9 = 0; var_9 < var_0.ref_136c3[var_2].size; var_9++) {
-    var_10 = var_0.ref_136c3[var_2][var_9];
+  for(var_9 = 0; var_9 < var_0.ref_136C3[var_2].size; var_9++) {
+    var_10 = var_0.ref_136C3[var_2][var_9];
 
     if(isDefined(var_10.trigger)) {
       lastdialogfinishedtime(var_10.trigger);
@@ -4039,16 +4039,16 @@ function ref_13271(var_0, var_1, var_2) {
       var_12 = (var_11.origin[0], var_11.origin[1], var_7 + -1000);
       var_10.trigger = init_trigger_spawn(var_12, var_11.radius, var_3, var_10);
 
-      if(istrue(level.disable_super_in_turret.ref_136c5)) {
-        var_13 = init_trigger_spawn(var_12, int(var_11.radius + level.disable_super_in_turret.ref_136c9), var_3, var_10, 1);
+      if(istrue(level.disable_super_in_turret.ref_136C5)) {
+        var_13 = init_trigger_spawn(var_12, int(var_11.radius + level.disable_super_in_turret.ref_136C9), var_3, var_10, 1);
         var_13.targetname = "OobWarning";
-        scripts\mp\utility\trigger::makeenterexittrigger(var_13, &ref_136c6, &ref_136c7);
+        scripts\mp\utility\trigger::makeenterexittrigger(var_13, &ref_136C6, &ref_136C7);
         var_10.ref_14427 = var_13;
         var_10.radius = var_11.radius;
       }
 
       if(!var_10.enabled) {
-        if(!level.disable_super_in_turret.ref_136be) {
+        if(!level.disable_super_in_turret.ref_136BE) {
           showtoteam(var_10, var_3);
         }
 
@@ -4082,11 +4082,11 @@ function lastdialogfinishedtime(var_0) {
 }
 
 function loadoutexecutionquip(var_0) {
-  if(!level.disable_super_in_turret.ref_136c4) {
+  if(!level.disable_super_in_turret.ref_136C4) {
     return;
   }
 
-  foreach(var_2 in var_0.ref_136c3[game["attackers"]]) {
+  foreach(var_2 in var_0.ref_136C3[game["attackers"]]) {
     if(isDefined(var_2.trigger)) {
       lastdialogfinishedtime(var_2.trigger);
     }
@@ -4096,7 +4096,7 @@ function loadoutexecutionquip(var_0) {
     var_2 hide();
   }
 
-  foreach(var_2 in var_0.ref_136c3[game["defenders"]]) {
+  foreach(var_2 in var_0.ref_136C3[game["defenders"]]) {
     if(isDefined(var_2.trigger)) {
       lastdialogfinishedtime(var_2.trigger);
     }
@@ -4114,8 +4114,8 @@ function ropeguy(var_0, var_1, var_2) {
 
   var_3 = [];
 
-  if(isDefined(level.disable_super_in_turret.ref_136c3) && level.disable_super_in_turret.ref_136c3.size > 0) {
-    foreach(var_5 in level.disable_super_in_turret.ref_136c3) {
+  if(isDefined(level.disable_super_in_turret.ref_136C3) && level.disable_super_in_turret.ref_136C3.size > 0) {
+    foreach(var_5 in level.disable_super_in_turret.ref_136C3) {
       if(var_5.script_group != var_0.initchallengeandeventglobals) {
         continue;
       }
@@ -4148,7 +4148,7 @@ function rootweapon(var_0, var_1, var_2, var_3) {
     var_8 = (var_7[0], var_7[1], var_6);
     var_4 = spawnStruct();
     var_4[0].origin = var_8;
-    var_4[0].radius = level.disable_super_in_turret.ref_136c2;
+    var_4[0].radius = level.disable_super_in_turret.ref_136C2;
   }
 
   return var_4;
@@ -4184,7 +4184,7 @@ function showtoteam(var_0) {
   }
 }
 
-function ref_126ad() {
+function ref_126AD() {
   self endon("death_or_disconnect");
   self endon("payload_remove_spawn_protection");
 
@@ -4203,9 +4203,9 @@ function ref_126ad() {
   }
 
   self.ref_12279 = 1;
-  thread ref_126ae();
-  var_1 = gettime() + level.disable_super_in_turret.ref_1365c * 1000;
-  var_2 = ref_1257e(var_0);
+  thread ref_126AE();
+  var_1 = gettime() + level.disable_super_in_turret.ref_1365C * 1000;
+  var_2 = ref_1257E(var_0);
 
   while(isDefined(var_2) && isDefined(var_2.trigger) && self istouching(var_2.trigger) && self playerads() < 0.5 && gettime() < var_1) {
     waitframe();
@@ -4215,12 +4215,12 @@ function ref_126ad() {
   self notify("payload_remove_spawn_protection");
 }
 
-function ref_1257e(var_0) {
+function ref_1257E(var_0) {
   if(!isDefined(var_0)) {
     var_0 = ref_12575();
   }
 
-  var_1 = var_0.ref_136c3[self.team];
+  var_1 = var_0.ref_136C3[self.team];
 
   if(isDefined(var_1) && var_1.size > 0) {
     foreach(var_3 in var_1) {
@@ -4237,7 +4237,7 @@ function ref_1257e(var_0) {
   }
 }
 
-function ref_126ae() {
+function ref_126AE() {
   self endon("death_or_disconnect");
   self endon("payload_remove_spawn_protection");
   self waittill("weapon_fired");
@@ -4250,12 +4250,12 @@ function room_doors(var_0) {
   return var_1;
 }
 
-function ref_136c6(var_0, var_1) {
+function ref_136C6(var_0, var_1) {
   if(!isPlayer(var_0) || var_0.team != var_1.script_team) {
     return;
   }
 
-  var_2 = var_1.ref_136bc;
+  var_2 = var_1.ref_136BC;
 
   if(!isDefined(var_2)) {
     return;
@@ -4272,10 +4272,10 @@ function ref_136c6(var_0, var_1) {
   var_2.ref_14425[var_3] setModel("tag_origin");
   var_2.ref_14425[var_3] hide();
   var_2.ref_14425[var_3] showtoplayer(var_0);
-  thread ref_136c8(var_0, var_2.ref_14425[var_3], var_4);
+  thread ref_136C8(var_0, var_2.ref_14425[var_3], var_4);
 }
 
-function ref_136c8(var_0, var_1, var_2) {
+function ref_136C8(var_0, var_1, var_2) {
   var_1 endon("death");
   var_0 endon("disconnect");
   waitframe();
@@ -4290,13 +4290,13 @@ function ref_136c8(var_0, var_1, var_2) {
   }
 }
 
-function ref_136c7(var_0, var_1) {
+function ref_136C7(var_0, var_1) {
   if(!isPlayer(var_0) || var_0.team != var_1.script_team) {
     return;
   }
 
   var_2 = var_0 getentitynumber();
-  var_3 = var_1.ref_136bc;
+  var_3 = var_1.ref_136BC;
 
   if(!isDefined(var_3) || !isDefined(var_3.ref_14425) || !isDefined(var_3.ref_14425[var_2])) {
     return;
@@ -4330,7 +4330,7 @@ function has_relic_amped_victim_filled_bar() {
   }
 }
 
-function ref_131d4(var_0) {
+function ref_131D4(var_0) {
   if(var_0 <= 0) {
     setomnvar("ui_hardpoint_timer", gettime());
     return;
@@ -4345,7 +4345,7 @@ function ref_131d4(var_0) {
 }
 
 function unset_relic_gas_martyr() {
-  return istrue(level.ref_1225c) || istrue(level.gameended);
+  return istrue(level.ref_1225C) || istrue(level.gameended);
 }
 
 function ontimelimit() {
@@ -4357,25 +4357,25 @@ function ontimelimit() {
     return;
   }
 
-  if(istrue(level.ref_1227f) || unset_relic_gas_martyr()) {
+  if(istrue(level.ref_1227F) || unset_relic_gas_martyr()) {
     return;
   }
 
-  level.ref_1227f = 1;
-  ref_12aa3();
-  ref_12aa5();
+  level.ref_1227F = 1;
+  ref_12AA3();
+  ref_12AA5();
   var_0 = game["attackers"];
   var_1 = game["defenders"];
   var_2 = "time_limit_reached";
   thread ref_14301("stopped", undefined, undefined, 2);
-  thread scripts\mp\gametypes\br::ref_1209b(var_0, 2, undefined, 1, 1, 1);
+  thread scripts\mp\gametypes\br::ref_1209B(var_0, 2, undefined, 1, 1, 1);
   munition_slot_gunship_emptied_message();
-  ref_1225d(1, var_1);
-  ref_11ecc(var_1);
+  ref_1225D(1, var_1);
+  ref_11ECC(var_1);
   thread scripts\mp\gametypes\br::brendgame(var_1, game["end_reason"][var_2], 0);
 }
 
-function ref_11ecc(var_0) {
+function ref_11ECC(var_0) {
   foreach(var_2 in level.players) {
     if(isDefined(var_2) && var_2.team == var_0) {
       var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_12003();
@@ -4442,11 +4442,11 @@ function munition_source_getridof() {
 function ref_13230() {
   level.disable_super_in_turret.initsharedomnvars = 0;
   level.disable_super_in_turret.waittill_scout_drone_defined = 0;
-  ref_1313a(0);
+  ref_1313A(0);
 
   foreach(var_1 in level.disable_super_in_turret.paths) {
     var_1.getquestplunderrewardinstance = -1;
-    ref_11e6f(var_1.getquestplunderrewardinstance, var_1);
+    ref_11E6F(var_1.getquestplunderrewardinstance, var_1);
   }
 }
 
@@ -4454,7 +4454,7 @@ function relic_amped_last_kill_time(var_0) {
   return var_0.getquestplunderrewardinstance;
 }
 
-function ref_11e6f(var_0, var_1) {
+function ref_11E6F(var_0, var_1) {
   if(!getquesttablerewardgroup()) {
     return;
   }
@@ -4464,7 +4464,7 @@ function ref_11e6f(var_0, var_1) {
   }
 
   if(var_1.getquestplunderrewardinstance >= 0) {
-    ref_12aa3(var_1);
+    ref_12AA3(var_1);
     start_pipe_room_menu();
   }
 
@@ -4481,11 +4481,11 @@ function ref_11e6f(var_0, var_1) {
   }
 
   if(var_1.getquestplunderrewardinstance > 0) {
-    ref_1318a(var_1.script_index, var_1.getquestplunderrewardinstance);
+    ref_1318A(var_1.script_index, var_1.getquestplunderrewardinstance);
     var_7 = "br_payload_checkpoint";
     var_8 = "br_payload_checkpoint_enemy";
-    scripts\mp\gametypes\br::ref_13ac7(var_7, undefined, game["attackers"]);
-    scripts\mp\gametypes\br::ref_13ac7(var_8, undefined, game["defenders"]);
+    scripts\mp\gametypes\br::ref_13AC7(var_7, undefined, game["attackers"]);
+    scripts\mp\gametypes\br::ref_13AC7(var_8, undefined, game["defenders"]);
 
     foreach(var_10 in level.teamdata[game["attackers"]]["players"]) {
       var_10 thread scripts\mp\rank::giverankxp("br_payload_reached_checkpoint", level.disable_super_in_turret.ref_12288, undefined);
@@ -4493,7 +4493,7 @@ function ref_11e6f(var_0, var_1) {
       var_10 thread scripts\mp\rank::scoreeventpopup("br_payload_reached_checkpoint");
     }
 
-    ref_11f92(var_1, 1, "checkpoint", var_1.getquestplunderrewardinstance);
+    ref_11F92(var_1, 1, "checkpoint", var_1.getquestplunderrewardinstance);
     thread ref_13639(game["attackers"]);
     thread ref_13639(game["defenders"]);
   }
@@ -4506,16 +4506,16 @@ function ref_11e6f(var_0, var_1) {
 
   var_1 notify("checkPointUpdate");
   thread getquestperkbonus(level);
-  thread ref_1322f(var_1);
+  thread ref_1322F(var_1);
   thread ref_13270(var_1, var_1.getquestplunderrewardinstance);
   thread ref_13260(var_1, var_1.getquestplunderrewardinstance);
-  thread ref_1286a(var_1.getquestplunderrewardinstance, var_1);
-  thread ref_1326a(var_1, var_1.getquestplunderrewardinstance);
+  thread ref_1286A(var_1.getquestplunderrewardinstance, var_1);
+  thread ref_1326A(var_1, var_1.getquestplunderrewardinstance);
   thread ref_13257(var_1, var_1.getquestplunderrewardinstance);
-  thread ref_12cb8(var_1);
+  thread ref_12CB8(var_1);
 }
 
-function ref_12cb8(var_0) {
+function ref_12CB8(var_0) {
   var_1 = var_0;
 
   if(istrue(var_0.hidesmokinggunhudfromplayer)) {
@@ -4528,17 +4528,17 @@ function ref_12cb8(var_0) {
 
       if(var_4 == var_0) {
         var_3.ref_12276++;
-        var_3.ref_1286f = ref_1257c(var_3, var_1);
+        var_3.ref_1286F = ref_1257C(var_3, var_1);
 
-        if(isDefined(var_3.ref_1286f)) {
-          var_3.ref_1286f.index = -1;
+        if(isDefined(var_3.ref_1286F)) {
+          var_3.ref_1286F.index = -1;
         }
 
-        var_5 = var_3.ref_1286f.origin;
+        var_5 = var_3.ref_1286F.origin;
         var_6 = getdvarint("scr_br_drop_prespawn_timeout_ms", 9000);
-        var_3 scripts\mp\gametypes\br_public::ref_126b9(var_5, var_6, 1, 0);
-        var_3 scripts\mp\gametypes\br_spectate::ref_1252a();
-        var_3 scripts\mp\gametypes\br::spawnintermission(var_5, var_3.ref_1286f.angles);
+        var_3 scripts\mp\gametypes\br_public::ref_126B9(var_5, var_6, 1, 0);
+        var_3 scripts\mp\gametypes\br_spectate::ref_1252A();
+        var_3 scripts\mp\gametypes\br::spawnintermission(var_5, var_3.ref_1286F.angles);
         var_3 scripts\mp\spectating::setdisabled();
         var_3 scripts\mp\gametypes\br::ending_fade_in(var_5[0], var_5[1], level.juggheli_spawner_jammer5_3);
         var_3 setclientomnvar("ui_br_transition_type", 2);
@@ -4573,7 +4573,7 @@ function isfinalpush() {
   return true;
 }
 
-function ref_1322f(var_0) {
+function ref_1322F(var_0) {
   level notify("setupCheckpoint");
   level endon("setupCheckpoint");
 
@@ -4592,18 +4592,18 @@ function ref_1322f(var_0) {
   }
 
   scripts\mp\flags::gameflagwait("infil_complete");
-  ref_131d4(var_1);
-  ref_1313b(var_1);
+  ref_131D4(var_1);
+  ref_1313B(var_1);
 }
 
-function ref_131d6() {
+function ref_131D6() {
   level endon("game_ended");
   scripts\mp\flags::gameflagwait("infil_complete");
   wait 1;
-  ref_1318e(1);
+  ref_1318E(1);
 }
 
-function ref_12aa3(var_0) {
+function ref_12AA3(var_0) {
   if(!getquesttablerewardgroup()) {
     return;
   }
@@ -4623,7 +4623,7 @@ function ref_12aa3(var_0) {
   level.disable_super_in_turret.waittill_scout_drone_defined = var_2 - var_1;
 }
 
-function ref_1313c(var_0, var_1, var_2) {
+function ref_1313C(var_0, var_1, var_2) {
   var_3 = "time_split_" + var_1;
   game[var_0 + "_payload"][var_3] = var_2;
 }
@@ -4634,7 +4634,7 @@ function relic_amped_pause(var_0, var_1) {
   return var_3;
 }
 
-function ref_1313b(var_0, var_1) {
+function ref_1313B(var_0, var_1) {
   var_2 = "time_limit_objective";
   game[var_2] = int(var_0 * 1000);
 }
@@ -4644,7 +4644,7 @@ function relic_amped_on_ai_kill(var_0) {
   return game[var_1];
 }
 
-function ref_1313a(var_0) {
+function ref_1313A(var_0) {
   if(!game["switchedsides"]) {
     game["num_checkpoints_objective"] = var_0;
     return;
@@ -4673,17 +4673,17 @@ function getquestrewardgroupstablerewards() {
   }
 
   level.ontimelimit = &scripts\engine\utility::void;
-  ref_12aa5();
+  ref_12AA5();
   setomnvar("ui_hardpoint_timer", 0);
-  ref_1318e(0);
+  ref_1318E(0);
   var_0 = game["defenders"];
   var_1 = game["attackers"];
   var_2 = "objective_completed";
   thread ref_14301("finished", undefined, undefined, 2);
-  thread scripts\mp\gametypes\br::ref_1209b(var_0, 2, undefined, 1, 1, 1);
+  thread scripts\mp\gametypes\br::ref_1209B(var_0, 2, undefined, 1, 1, 1);
   munition_slot_gunship_emptied_message();
-  ref_1225d(0, var_1);
-  ref_11ecc(var_1);
+  ref_1225D(0, var_1);
+  ref_11ECC(var_1);
   thread scripts\mp\gametypes\br::brendgame(var_1, game["end_reason"][var_2], 0);
 }
 
@@ -4752,7 +4752,7 @@ function relic_squadlink_onsteppedfar(var_0, var_1) {
   return var_2;
 }
 
-function ref_1426b() {
+function ref_1426B() {
   var_0 = self.path;
   var_1 = var_0.idle_sfx;
 
@@ -4760,7 +4760,7 @@ function ref_1426b() {
     var_2 = 1;
     var_3 = 0;
   } else {
-    var_2 = var_2.getquestreward_checkforvalueoverride[var_2.getquestplunderrewardinstance - 1].ref_11ea5;
+    var_2 = var_2.getquestreward_checkforvalueoverride[var_2.getquestplunderrewardinstance - 1].ref_11EA5;
     var_3 = var_2 - 2;
   }
 
@@ -4787,7 +4787,7 @@ function relic_squadlink_onbecameinvalidplayer(var_0, var_1) {
     if(var_1.getquestplunderrewardinstance == 0) {
       var_4 = 1;
     } else {
-      var_4 = var_2.getquestreward_checkforvalueoverride[var_2.getquestplunderrewardinstance - 1].ref_11ea5;
+      var_4 = var_2.getquestreward_checkforvalueoverride[var_2.getquestplunderrewardinstance - 1].ref_11EA5;
     }
 
     var_5 = var_2.nodes[var_4];
@@ -4801,24 +4801,24 @@ function registerbrsquadleaderjumpcommands(var_0, var_1) {
   var_3 = (0, 0, 0);
   var_4 = (0, 0, 0);
 
-  if(var_1 == game["defenders"] && level.disable_super_in_turret.ref_1226a == "port" && var_0.label == "A" && var_0.getquestplunderrewardinstance == 1) {
+  if(var_1 == game["defenders"] && level.disable_super_in_turret.ref_1226A == "port" && var_0.label == "A" && var_0.getquestplunderrewardinstance == 1) {
     var_3 = (0, -10, 0);
     var_4 = var_3;
-  } else if(var_1 == game["attackers"] && level.disable_super_in_turret.ref_1226a == "trainstation2" && var_0.label == "A") {
+  } else if(var_1 == game["attackers"] && level.disable_super_in_turret.ref_1226A == "trainstation2" && var_0.label == "A") {
     var_3 = (0, -10, 0);
     var_4 = var_3;
-  } else if(var_1 == game["attackers"] && level.disable_super_in_turret.ref_1226a == "downtown2" && var_0.label == "B") {
+  } else if(var_1 == game["attackers"] && level.disable_super_in_turret.ref_1226A == "downtown2" && var_0.label == "B") {
     var_3 = (0, -10, 0);
     var_4 = var_3;
-  } else if(var_1 == game["attackers"] && level.disable_super_in_turret.ref_1226a == "downtown2" && var_0.label == "A") {
+  } else if(var_1 == game["attackers"] && level.disable_super_in_turret.ref_1226A == "downtown2" && var_0.label == "A") {
     var_4 = (0, 25, 0);
   }
 
   return [var_3, var_4];
 }
 
-function ref_1225d(var_0, var_1, var_2, var_3) {
-  level.ref_1225c = 1;
+function ref_1225D(var_0, var_1, var_2, var_3) {
+  level.ref_1225C = 1;
   level notify("payloadComplete");
   level notify("ending_sequence");
   var_4 = relic_squadlink_onsteppedfar(var_0, var_1);
@@ -4847,7 +4847,7 @@ function ref_1225d(var_0, var_1, var_2, var_3) {
       var_8.ref_12136 = undefined;
     }
 
-    var_8 scripts\mp\gametypes\br_public::ref_126b9(var_6);
+    var_8 scripts\mp\gametypes\br_public::ref_126B9(var_6);
   }
 
   setomnvarforallclients("post_game_state", 9);
@@ -4864,7 +4864,7 @@ function ref_1225d(var_0, var_1, var_2, var_3) {
       }
     }
 
-    foreach(var_11 in level.disable_super_in_turret.ref_13c1a) {
+    foreach(var_11 in level.disable_super_in_turret.ref_13C1A) {
       var_11.getquestrewardstablevaluecolumnindex hide();
     }
   }
@@ -5029,33 +5029,33 @@ function toggle_fx_trap() {
     var_2.ref_13695 = [];
     var_2.ref_13663 = [];
     var_2.spawncount = [];
-    var_2.ref_1361e = [];
+    var_2.ref_1361E = [];
     var_2.spawntime = [];
     var_2.numplayers = [];
     var_2.numplayers[game["attackers"]] = 0;
     var_2.numplayers[game["defenders"]] = 0;
     var_2.ref_14307 = "none";
     var_2.ref_14306 = 0;
-    var_2.ref_142f7 = 0;
-    var_2.ref_142f9 = 0;
+    var_2.ref_142F7 = 0;
+    var_2.ref_142F9 = 0;
     var_2.objidnum = [];
-    var_2.ref_12cd5 = [];
-    var_2.ref_11f48 = [];
+    var_2.ref_12CD5 = [];
+    var_2.ref_11F48 = [];
     var_2.pieces = [];
     var_2.wait_for_computer_power = [];
-    var_2.ref_11f9f = 0;
-    var_2.ref_119d6 = 0;
-    var_2.ref_13bf5 = 0;
+    var_2.ref_11F9F = 0;
+    var_2.ref_119D6 = 0;
+    var_2.ref_13BF5 = 0;
 
     if(level.disable_super_in_turret.ref_13601) {
-      var_2.ref_136bd = 0;
+      var_2.ref_136BD = 0;
       var_2.ref_13620 = spawnStruct();
       var_2.ref_13620.bot_gametype_attacker_limit_for_team = 1;
       var_2.ref_13620.path = var_2;
     }
 
     if(level.disable_super_in_turret.ref_13602 > -1) {
-      var_2.ref_136bd = 0;
+      var_2.ref_136BD = 0;
     }
 
     if(level.disable_super_in_turret.getquestscaledvalue) {
@@ -5152,15 +5152,15 @@ function ref_12287(var_0) {
 function ref_12265(var_0, var_1) {
   var_2 = var_1 getentitynumber();
 
-  if(isDefined(var_1.ref_12cce)) {
-    var_1.ref_12cce = undefined;
+  if(isDefined(var_1.ref_12CCE)) {
+    var_1.ref_12CCE = undefined;
   }
 
-  if(isDefined(var_0.ref_13ab7) && isDefined(var_1.owner) && var_0.ref_13ab7 != var_1.owner.team) {
+  if(isDefined(var_0.ref_13AB7) && isDefined(var_1.owner) && var_0.ref_13AB7 != var_1.owner.team) {
     return;
   }
 
-  if(isDefined(var_0.ref_13ab7) && !isDefined(var_1.owner) && var_0.ref_13ab7 != var_1.team) {
+  if(isDefined(var_0.ref_13AB7) && !isDefined(var_1.owner) && var_0.ref_13AB7 != var_1.team) {
     return;
   }
 
@@ -5202,11 +5202,11 @@ function ref_12265(var_0, var_1) {
 function ref_12266(var_0, var_1) {
   var_2 = var_1 getentitynumber();
 
-  if(isDefined(var_0.ref_13ab7) && isDefined(var_1.owner) && var_0.ref_13ab7 != var_1.owner.team) {
+  if(isDefined(var_0.ref_13AB7) && isDefined(var_1.owner) && var_0.ref_13AB7 != var_1.owner.team) {
     return;
   }
 
-  if(isDefined(var_0.ref_13ab7) && !isDefined(var_1.owner) && var_0.ref_13ab7 != var_1.team) {
+  if(isDefined(var_0.ref_13AB7) && !isDefined(var_1.owner) && var_0.ref_13AB7 != var_1.team) {
     return;
   }
 
@@ -5239,9 +5239,9 @@ function ref_12607(var_0, var_1, var_2) {
   var_3 = scripts\mp\outofbounds::getlastoobtrigger(self);
 
   if(isDefined(var_3) && isDefined(var_3.spawntime)) {
-    if(gettime() - var_3.spawntime < level.disable_super_in_turret.ref_136c0) {
+    if(gettime() - var_3.spawntime < level.disable_super_in_turret.ref_136C0) {
       var_4 = scripts\mp\outofbounds::getoutofboundstime(var_2, self);
-      var_4 *= level.disable_super_in_turret.ref_136bf;
+      var_4 *= level.disable_super_in_turret.ref_136BF;
       self.oobendtime = int(gettime() + var_4 * 1000);
       thread scripts\mp\outofbounds::watchooboutoftime(self, var_4);
     }
@@ -5255,28 +5255,28 @@ function ref_12607(var_0, var_1, var_2) {
     self.ref_12269 = scripts\mp\utility\outline::outlineenableforteam(self, var_5, "outline_nodepth_red", "level_script");
   }
 
-  if(level.disable_super_in_turret.ref_136be) {
+  if(level.disable_super_in_turret.ref_136BE) {
     if(isDefined(self.ref_12267)) {
       self.ref_12267 hidefromplayer(self);
       self.ref_12267 = undefined;
     }
 
     foreach(var_3 in self.oobtriggers) {
-      if(isDefined(var_3.ref_136bc)) {
-        var_3.ref_136bc showtoplayer(self);
-        self.ref_12267 = var_3.ref_136bc;
+      if(isDefined(var_3.ref_136BC)) {
+        var_3.ref_136BC showtoplayer(self);
+        self.ref_12267 = var_3.ref_136BC;
       }
     }
   }
 
-  thread ref_1260a();
+  thread ref_1260A();
 }
 
 function ref_12608(var_0, var_1, var_2) {
   scripts\mp\outofbounds::playerexitcallback(var_0, var_1, var_2);
 
-  if(isDefined(self.ref_12cd3)) {
-    self.ref_12cd3.alpha = 0;
+  if(isDefined(self.ref_12CD3)) {
+    self.ref_12CD3.alpha = 0;
   }
 
   if(isDefined(self.ref_12269)) {
@@ -5289,7 +5289,7 @@ function ref_12537() {
   self endon("disconnect");
   self notify("playerDelayDisableOOBOutline");
   self endon("playerDelayDisableOOBOutline");
-  wait level.disable_super_in_turret.ref_136c1;
+  wait level.disable_super_in_turret.ref_136C1;
   scripts\mp\utility\outline::outlinedisable(self.ref_12269, self);
   self.ref_12269 = undefined;
 
@@ -5312,12 +5312,12 @@ function toggle_player_settings() {
 
   foreach(var_1 in level.disable_super_in_turret.paths) {
     var_1.trigger.playersintrigger = [];
-    thread ref_144ec();
-    thread ref_144ed();
+    thread ref_144EC();
+    thread ref_144ED();
   }
 }
 
-function ref_144ec() {
+function ref_144EC() {
   level endon("game_ended");
 
   for(;;) {
@@ -5342,14 +5342,14 @@ function ref_144ec() {
   }
 }
 
-function ref_144ed() {
+function ref_144ED() {
   for(;;) {
     foreach(var_1 in self.playersintrigger) {
       if(isDefined(var_1) && var_1 scripts\cp_mp\utility\player_utility::_isalive() && var_1 istouching(self)) {
         continue;
       }
 
-      ref_1202f(var_1);
+      ref_1202F(var_1);
       self.playersintrigger[var_2] = undefined;
     }
 
@@ -5361,7 +5361,7 @@ function ref_12026(var_0) {
   thread ref_12609();
 }
 
-function ref_1202f(var_0) {
+function ref_1202F(var_0) {
   var_0 notify("left_payload_trigger");
 }
 
@@ -5372,20 +5372,20 @@ function ref_12609() {
   for(;;) {
     wait 1;
 
-    if(!isDefined(self.ref_13bf4)) {
-      self.ref_13bf4 = 0;
+    if(!isDefined(self.ref_13BF4)) {
+      self.ref_13BF4 = 0;
     }
 
-    self.ref_13bf4 += 1;
+    self.ref_13BF4 += 1;
 
-    if(self.ref_13bf4 % 5 == 0) {
+    if(self.ref_13BF4 % 5 == 0) {
       scripts\cp\vehicles\vehicle_compass_cp::ref_12004("pay_5");
     }
   }
 }
 
 function tmtyl_vip_interactions() {
-  level.disable_super_in_turret.ref_11e97 = [];
+  level.disable_super_in_turret.ref_11E97 = [];
   battle_tracks_toggleoffstate("mp_don4", "downtown2", (18755, -21000, -160), 275, 90);
   battle_tracks_toggleoffstate("mp_don4", "downtown2", (21415, -17040, -170), 275, 90);
   battle_tracks_toggleoffstate("mp_don4", "downtown2", (21900, -16675, -195), 180, 90);
@@ -5475,11 +5475,11 @@ function tmtyl_vip_interactions() {
 }
 
 function battle_tracks_toggleoffstate(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(level.disable_super_in_turret.ref_11e97)) {
+  if(!isDefined(level.disable_super_in_turret.ref_11E97)) {
     return;
   }
 
-  if(var_0 != level.mapname || var_1 != level.disable_super_in_turret.ref_1226a) {
+  if(var_0 != level.mapname || var_1 != level.disable_super_in_turret.ref_1226A) {
     return;
   }
 
@@ -5487,15 +5487,15 @@ function battle_tracks_toggleoffstate(var_0, var_1, var_2, var_3, var_4) {
   var_5.targetname = "payload_no_contest_trigger";
   var_5.radius = var_3;
   var_5.height = var_4;
-  level.disable_super_in_turret.ref_11e97[level.disable_super_in_turret.ref_11e97.size] = var_5;
+  level.disable_super_in_turret.ref_11E97[level.disable_super_in_turret.ref_11E97.size] = var_5;
 }
 
 function getlocationnameforpoint(var_0) {
-  if(!isDefined(var_0) || !isPlayer(var_0) || level.disable_super_in_turret.ref_11e97.size == 0) {
+  if(!isDefined(var_0) || !isPlayer(var_0) || level.disable_super_in_turret.ref_11E97.size == 0) {
     return true;
   }
 
-  foreach(var_2 in level.disable_super_in_turret.ref_11e97) {
+  foreach(var_2 in level.disable_super_in_turret.ref_11E97) {
     if(var_0 istouching(var_2)) {
       return false;
     }
@@ -5536,12 +5536,12 @@ function timetonextcheckpoint() {
   scripts\mp\gametypes\br_payload_path_mp_escape4_5::toggle_farah_lights(0, "shore", 2);
 
   if(getdvarint("scr_br_alt_mode_mini", 0) > 0) {
-    ref_1318d(1, -1);
+    ref_1318D(1, -1);
     return;
   }
 }
 
-function ref_1318d(var_0, var_1) {
+function ref_1318D(var_0, var_1) {
   if(var_1 > 31 || var_0 >= 2) {
     return;
   }
@@ -5755,7 +5755,7 @@ function init_relic_damage_from_above(var_0, var_1, var_2) {
   var_9.horzalign = "left_adjustable";
   var_9.vertalign = "top_adjustable";
   var_9.alpha = 0.5;
-  ref_132a8(var_9);
+  ref_132A8(var_9);
   var_9.archived = 1;
   var_9.hidewheninmenu = 1;
   var_9.bar.archived = 1;
@@ -5769,7 +5769,7 @@ function init_relic_damage_from_above(var_0, var_1, var_2) {
     var_8.ticks[var_10] = init_relic_doomslayer(var_0, var_7, var_1, var_5, var_6, var_2, var_10);
   }
 
-  for(var_10 = 0; var_10 < var_2.ref_11f9e.size; var_10++) {
+  for(var_10 = 0; var_10 < var_2.ref_11F9E.size; var_10++) {
     var_8.med_transport_initomnvars[var_10] = init_structs_mp_br_mechanics(var_0, var_7, var_1, var_5, var_6, var_2, var_10);
   }
 
@@ -5795,7 +5795,7 @@ function last_vampire_sound(var_0) {
   var_0 destroy();
 }
 
-function ref_132a8(var_0, var_1, var_2, var_3) {
+function ref_132A8(var_0, var_1, var_2, var_3) {
   self.bar.horzalign = self.horzalign;
   self.bar.vertalign = self.vertalign;
   self.bar.alignx = "left";
@@ -5839,7 +5839,7 @@ function init_tut_doors(var_0, var_1, var_2, var_3, var_4) {
 
 function init_relic_doomslayer(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = 1;
-  var_8 = var_5.getquestreward_checkforvalueoverride[var_6].loot_choppers / var_5.ref_13bf1;
+  var_8 = var_5.getquestreward_checkforvalueoverride[var_6].loot_choppers / var_5.ref_13BF1;
   var_9 = var_1 + var_8 * var_4;
   var_10 = newteamhudelem(var_0);
   var_10.shader = "progress_bar_fill";
@@ -5861,7 +5861,7 @@ function init_relic_doomslayer(var_0, var_1, var_2, var_3, var_4, var_5, var_6) 
 function init_structs_mp_br_mechanics(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = 3;
   var_8 = 4;
-  var_9 = var_5.ref_11f9e[var_6].dist / var_5.ref_13bf1;
+  var_9 = var_5.ref_11F9E[var_6].dist / var_5.ref_13BF1;
   var_10 = var_1 + var_9 * var_4 - var_7 / 2;
   var_11 = var_2 + var_3 / 2 - var_8 / 2;
   var_12 = newteamhudelem(var_0);
@@ -5958,10 +5958,10 @@ function init_structs(var_0, var_1) {
   var_10 setModel("uk_tool_box_small_01");
   var_10 notsolid();
   var_10 hide();
-  var_10.ref_11fa2 = var_4;
-  var_10.ref_11fa1 = var_7;
-  var_10.ref_11f97 = var_8;
-  var_10.ref_11f96 = var_9;
+  var_10.ref_11FA2 = var_4;
+  var_10.ref_11FA1 = var_7;
+  var_10.ref_11F97 = var_8;
+  var_10.ref_11F96 = var_9;
   var_11 = var_1[1] - 90;
   var_10.scriptable = spawn("script_model", var_0);
   var_10.scriptable.angles = (0, var_11, -1 * var_6);
@@ -5980,12 +5980,12 @@ function init_structs(var_0, var_1) {
   }
 
   var_10.hostdefensefactormod = 0;
-  ref_11f9b(var_10);
+  ref_11F9B(var_10);
   return var_10;
 }
 
 function ref_13260(var_0, var_1) {
-  foreach(var_3 in var_0.ref_11f9e) {
+  foreach(var_3 in var_0.ref_11F9E) {
     if(var_1 == 0) {
       var_3 show();
       var_3.scriptable setscriptablepartstate("obstacle", "destroyed");
@@ -6001,9 +6001,9 @@ function ref_13260(var_0, var_1) {
   }
 }
 
-function ref_1268d() {
+function ref_1268D() {
   foreach(var_1 in level.disable_super_in_turret.paths) {
-    foreach(var_3 in var_1.ref_11f9e) {
+    foreach(var_3 in var_1.ref_11F9E) {
       if(var_3.getquestplunderrewardinstance == var_1.getquestplunderrewardinstance) {
         if(istrue(self.hostdefensefactormod) && self.team == game["attackers"] || !istrue(self.hostdefensefactormod) && self.team == game["defenders"]) {
           self enableplayeruse(self);
@@ -6018,7 +6018,7 @@ function ref_1268d() {
   }
 }
 
-function ref_144e8() {
+function ref_144E8() {
   var_0 = 5;
   level endon("payloadComplete");
   level endon("game_ended");
@@ -6043,7 +6043,7 @@ function ref_144e8() {
   var_1.usetime = var_0;
   var_1.inuse = 0;
   var_1.playerusing = undefined;
-  ref_11fa0(var_1);
+  ref_11FA0(var_1);
 
   for(;;) {
     var_1 waittill("trigger", var_2);
@@ -6060,7 +6060,7 @@ function ref_144e8() {
       ref_13880(var_2);
       var_1.playerusing = var_2;
       var_1 makeunusable();
-      var_3 = ref_144e9(var_2);
+      var_3 = ref_144E9(var_2);
 
       if(istrue(var_1.isusable)) {
         var_1 makeusable();
@@ -6069,13 +6069,13 @@ function ref_144e8() {
       var_1.playerusing = undefined;
 
       if(istrue(var_3)) {
-        ref_11f98(var_2);
+        ref_11F98(var_2);
       }
     }
   }
 }
 
-function ref_144e9(var_0) {
+function ref_144E9(var_0) {
   var_0 endon("disconnect");
   var_0 endon("joined_team");
   var_0 endon("joined_spectators");
@@ -6095,7 +6095,7 @@ function ref_144e9(var_0) {
 
     if(var_1.curprogress >= var_1.usetime) {
       if(isDefined(var_0)) {
-        ref_138f6(var_0);
+        ref_138F6(var_0);
       }
 
       var_1.playerusing = undefined;
@@ -6114,28 +6114,28 @@ function ref_144e9(var_0) {
   var_1.playerusing = undefined;
 
   if(isDefined(var_0)) {
-    ref_138f6(var_0);
+    ref_138F6(var_0);
   }
 
   jumpiftrue(istrue(self.hostdefensefactormod)) LOC_00000143;
   var_3 = (gettime() - var_2) / 1000;
-  ref_11f99(0, var_3);
+  ref_11F99(0, var_3);
   goto LOC_00000177;
 }
 
-function ref_11f9c(var_0) {
+function ref_11F9C(var_0) {
   self.isusable = 1;
   self makeusable();
-  ref_11fa0();
+  ref_11FA0();
 
   if(var_0) {
     scripts\mp\objidpoolmanager::objective_playermask_showtoall(self.objidnum);
   }
 
-  thread ref_144e8();
+  thread ref_144E8();
 }
 
-function ref_11f9b() {
+function ref_11F9B() {
   self notify("makeObstacleUnusable");
   self.isusable = 0;
   self.playerusing = undefined;
@@ -6160,16 +6160,16 @@ function ref_13880(var_0) {
 
     if(self.hostdefensefactormod) {
       self hide();
-      thread ref_125c3(var_0, "briefcase_bomb_mp");
+      thread ref_125C3(var_0, "briefcase_bomb_mp");
     } else {
-      thread ref_125c0(var_0, "buildable_tool_mp");
+      thread ref_125C0(var_0, "buildable_tool_mp");
     }
   }
 
   var_0 scripts\mp\gameobjects::updateuiprogress(var_1, 0);
 }
 
-function ref_138f6(var_0) {
+function ref_138F6(var_0) {
   var_1 = self;
 
   if(istrue(var_0.isjuggernaut)) {
@@ -6292,15 +6292,15 @@ function get_alive_able_players(var_0) {
   return true;
 }
 
-function ref_11f98(var_0) {
+function ref_11F98(var_0) {
   if(istrue(self.hostdefensefactormod)) {
     self.hostdefensefactormod = 0;
-    self.path.ref_11f9f++;
+    self.path.ref_11F9F++;
     self setHintString(&"BR_PAYLOAD/OBSTACLE_BUILD");
-    ref_11f99(1);
+    ref_11F99(1);
     self setModel("uk_tool_box_small_01");
-    self.origin = self.ref_11fa2;
-    self.angles = self.ref_11fa1;
+    self.origin = self.ref_11FA2;
+    self.angles = self.ref_11FA1;
     self dontinterpolate();
     self show();
     var_1 = 0;
@@ -6319,7 +6319,7 @@ function ref_11f98(var_0) {
     }
 
     if(var_1) {
-      ref_11f92(self.path, 0, "obstacleRemoved");
+      ref_11F92(self.path, 0, "obstacleRemoved");
     }
 
     foreach(var_4 in level.players) {
@@ -6343,8 +6343,8 @@ function ref_11f98(var_0) {
     scripts\mp\objidpoolmanager::update_objective_ownerteam(self.objidnum, game["attackers"]);
   } else {
     self.hostdefensefactormod = 1;
-    self.origin = self.ref_11f97;
-    self.angles = self.ref_11f96;
+    self.origin = self.ref_11F97;
+    self.angles = self.ref_11F96;
     self dontinterpolate();
     self setHintString(&"BR_PAYLOAD/OBSTACLE_REMOVE");
     self setModel("offhand_wm_briefcase_bomb");
@@ -6368,11 +6368,11 @@ function ref_11f98(var_0) {
     var_11 = self.scriptable physics_getentityaabb();
     var_12 = physics_createcontents(["physicscontents_player"]);
     var_13 = physics_aabbbroadphasequery(var_11["min"], var_11["max"], var_12, []);
-    var_14 = self.ref_11fa2 - self.ref_11f97;
+    var_14 = self.ref_11FA2 - self.ref_11F97;
     var_15 = vectorNormalize(var_14);
-    var_16 = distance(self.ref_11fa2, self.ref_11f97);
+    var_16 = distance(self.ref_11FA2, self.ref_11F97);
     var_17 = var_16 / 2;
-    var_18 = self.ref_11f97 + var_15 * var_17;
+    var_18 = self.ref_11F97 + var_15 * var_17;
 
     foreach(var_4 in var_13) {
       if(!isDefined(var_4) || !isalive(var_4)) {
@@ -6381,8 +6381,8 @@ function ref_11f98(var_0) {
 
       var_20 = var_4.origin - var_18;
       var_21 = vectorNormalize(var_20);
-      var_22 = var_4.origin - self.ref_11f97;
-      var_23 = var_4.origin - self.ref_11fa2;
+      var_22 = var_4.origin - self.ref_11F97;
+      var_23 = var_4.origin - self.ref_11FA2;
       var_24 = vectordot(var_15, var_22);
       var_25 = vectordot(var_15, var_23);
 
@@ -6403,18 +6403,18 @@ function ref_11f98(var_0) {
     scripts\mp\objidpoolmanager::update_objective_ownerteam(self.objidnum, game["defenders"]);
   }
 
-  ref_1318c(self.path.script_index, self.index, self.hostdefensefactormod);
+  ref_1318C(self.path.script_index, self.index, self.hostdefensefactormod);
 
   if(isDefined(var_4)) {
-    ref_12261(var_4, level.disable_super_in_turret.ref_11f9d, "obstacle");
+    ref_12261(var_4, level.disable_super_in_turret.ref_11F9D, "obstacle");
   }
 
-  ref_11fa0();
-  ref_11fa3(game["attackers"]);
-  ref_11fa3(game["defenders"]);
+  ref_11FA0();
+  ref_11FA3(game["attackers"]);
+  ref_11FA3(game["defenders"]);
 }
 
-function ref_11f99(var_0, var_1) {
+function ref_11F99(var_0, var_1) {
   var_2 = 2;
   self makeunusable();
 
@@ -6451,7 +6451,7 @@ function ref_11f99(var_0, var_1) {
 
   if(istrue(self.isusable)) {
     self makeusable();
-    ref_11fa0();
+    ref_11FA0();
     return;
   }
 }
@@ -6472,7 +6472,7 @@ function relic_oneclip_monitor(var_0, var_1) {
   return relic_doubletap_helper("red");
 }
 
-function ref_11fa3(var_0) {
+function ref_11FA3(var_0) {
   var_1 = level.teamdata[var_0]["checkpoint"].choppersupport_modifydamage_trial[self.path.script_index];
 
   if(isDefined(var_1)) {
@@ -6482,7 +6482,7 @@ function ref_11fa3(var_0) {
   }
 }
 
-function ref_11fa0() {
+function ref_11FA0() {
   var_0 = scripts\mp\utility\teams::getteamdata(game["attackers"], "players");
   var_1 = scripts\mp\utility\teams::getteamdata(game["defenders"], "players");
   jumpiffalse(istrue(self.hostdefensefactormod)) LOC_000000a1;
@@ -6507,7 +6507,7 @@ function ref_11fa0() {
   return;
 }
 
-function ref_11f92(var_0, var_1, var_2, var_3) {
+function ref_11F92(var_0, var_1, var_2, var_3) {
   thread ref_14301(var_2, var_3, var_0);
 
   if(istrue(var_1)) {
@@ -6518,16 +6518,16 @@ function ref_11f92(var_0, var_1, var_2, var_3) {
 
 function timed_laser_trap_trigger() {
   level.disable_super_in_turret.overtime = [];
-  ref_121a3();
+  ref_121A3();
   ref_13189(0);
-  thread ref_11e10();
+  thread ref_11E10();
 }
 
 function ref_12194(var_0) {
-  ref_121a3();
+  ref_121A3();
 
   if(ref_12198()) {
-    level.disable_super_in_turret.overtime[var_0] = level.disable_super_in_turret.ref_121a2 + ref_1219d();
+    level.disable_super_in_turret.overtime[var_0] = level.disable_super_in_turret.ref_121A2 + ref_1219D();
   } else {
     level.disable_super_in_turret.overtime[var_0] = gettime();
   }
@@ -6536,49 +6536,49 @@ function ref_12194(var_0) {
 }
 
 function ref_12198() {
-  var_0 = ref_1219b();
-  return var_0 >= ref_1219d();
+  var_0 = ref_1219B();
+  return var_0 >= ref_1219D();
 }
 
-function ref_1219b() {
-  if(isDefined(level.disable_super_in_turret.ref_121a2)) {
-    return (gettime() - level.disable_super_in_turret.ref_121a2);
+function ref_1219B() {
+  if(isDefined(level.disable_super_in_turret.ref_121A2)) {
+    return (gettime() - level.disable_super_in_turret.ref_121A2);
   }
 
   return 0;
 }
 
-function ref_1219c() {
+function ref_1219C() {
   return level.disable_super_in_turret.ref_12199;
 }
 
-function ref_1219d() {
-  return int(ref_1219c() * 1000);
+function ref_1219D() {
+  return int(ref_1219C() * 1000);
 }
 
-function ref_121a3() {
-  var_0 = ref_1219b();
+function ref_121A3() {
+  var_0 = ref_1219B();
   var_1 = var_0 / 1000;
   var_2 = [5, 4, 3, 2, 1];
 
-  if(var_1 < level.disable_super_in_turret.ref_1219e || ref_12198()) {
+  if(var_1 < level.disable_super_in_turret.ref_1219E || ref_12198()) {
     var_3 = var_2[0];
-  } else if(var_2 < level.disable_super_in_turret.ref_1219f) {
+  } else if(var_2 < level.disable_super_in_turret.ref_1219F) {
     var_3 = var_3[1];
-  } else if(var_3 < level.disable_super_in_turret.ref_121a0) {
+  } else if(var_3 < level.disable_super_in_turret.ref_121A0) {
     var_3 = var_3[2];
-  } else if(var_3 < level.disable_super_in_turret.ref_121a1) {
+  } else if(var_3 < level.disable_super_in_turret.ref_121A1) {
     var_3 = var_3[3];
   } else {
     var_3 = var_3[4];
   }
 
-  level.disable_super_in_turret.ref_1219a = var_3;
+  level.disable_super_in_turret.ref_1219A = var_3;
   ref_13188(int(var_3));
 }
 
 function respawn_solo() {
-  return level.disable_super_in_turret.ref_1219a;
+  return level.disable_super_in_turret.ref_1219A;
 }
 
 function respawn_state_greyout(var_0) {
@@ -6636,7 +6636,7 @@ function waittill_player_uses_munition() {
 
   ref_12194("minOvertime");
   level.timelimitoverride = 1;
-  level.disable_super_in_turret.ref_121a2 = gettime();
+  level.disable_super_in_turret.ref_121A2 = gettime();
   level notify("start_overtime");
   thread ref_14301("overtime");
   thread waittill_player_uses_scavenger_contract();
@@ -6648,8 +6648,8 @@ function waittill_player_uses_munition() {
   level notify("stop_overtime");
   ref_13189(0);
   level.timelimitoverride = 0;
-  level.disable_super_in_turret.ref_121a2 = undefined;
-  ref_121a3();
+  level.disable_super_in_turret.ref_121A2 = undefined;
+  ref_121A3();
   return scripts\mp\gamelogic::gettimeremaining() > 0;
 }
 
@@ -6702,8 +6702,8 @@ function ref_12193() {
       waittillframeend();
       var_1 setvalue(respawn_state_ready());
       var_2 setvalue(respawn_solo());
-      var_3 setvalue(ref_1219b() / 1000);
-      var_4 setvalue(ref_1219c());
+      var_3 setvalue(ref_1219B() / 1000);
+      var_4 setvalue(ref_1219C());
     }
 
     level notify("stop_overtime");
@@ -6777,12 +6777,12 @@ function timed_death() {
     }
   }
 
-  thread ref_1316a(var_0);
+  thread ref_1316A(var_0);
 }
 
-function ref_1316a(var_0) {
+function ref_1316A(var_0) {
   scripts\mp\flags::gameflagwait("infil_complete");
-  scripts\mp\gametypes\br_armory_kiosk::ref_131c0(var_0);
+  scripts\mp\gametypes\br_armory_kiosk::ref_131C0(var_0);
 }
 
 function init_seq_button(var_0, var_1, var_2) {
@@ -6882,16 +6882,16 @@ function dialog_wait_think_civ(var_0) {
   }
 
   var_0 thread scripts\mp\utility\points::giveunifiedpoints("br_c130_box_open");
-  var_0.ref_12cd2 = 1;
+  var_0.ref_12CD2 = 1;
 }
 
 function eliminate_drone_spotlight_speed() {
-  return !istrue(self.ref_12cd2);
+  return !istrue(self.ref_12CD2);
 }
 
 function init_relic_fastbleedout(var_0, var_1) {
   if(var_1 == "juggernaut") {
-    var_0.ref_133ce = 1;
+    var_0.ref_133CE = 1;
   }
 
   return var_0;
@@ -6987,7 +6987,7 @@ function ref_14301(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_0)) {
     var_2.ref_14307 = "none";
     var_2.ref_14306 = gettime() + level.disable_super_in_turret.ref_14305;
-    var_2.ref_142f9 = gettime() + level.disable_super_in_turret.ref_142f8;
+    var_2.ref_142F9 = gettime() + level.disable_super_in_turret.ref_142F8;
     return;
   }
 
@@ -6995,21 +6995,21 @@ function ref_14301(var_0, var_1, var_2, var_3) {
     wait var_3;
   }
 
-  var_4 = ref_1332c(var_0);
+  var_4 = ref_1332C(var_0);
   var_5 = isDefined(var_2) && var_2.ref_14307 == var_0;
 
-  if(!var_4 && var_5 && isDefined(var_2) && var_2.ref_14306 > gettime() && var_2.ref_142f9 > gettime()) {
-    var_2.ref_142f7 = gettime() + level.disable_super_in_turret.ref_142f6;
+  if(!var_4 && var_5 && isDefined(var_2) && var_2.ref_14306 > gettime() && var_2.ref_142F9 > gettime()) {
+    var_2.ref_142F7 = gettime() + level.disable_super_in_turret.ref_142F6;
     return;
   }
 
-  if(!var_4 && !var_5 && isDefined(var_2) && var_2.ref_142f7 > gettime()) {
-    var_2.ref_142f9 = gettime() + level.disable_super_in_turret.ref_142f8;
-    var_2.ref_14306 = gettime() + level.disable_super_in_turret.ref_142ff;
+  if(!var_4 && !var_5 && isDefined(var_2) && var_2.ref_142F7 > gettime()) {
+    var_2.ref_142F9 = gettime() + level.disable_super_in_turret.ref_142F8;
+    var_2.ref_14306 = gettime() + level.disable_super_in_turret.ref_142FF;
     return;
   }
 
-  var_6 = var_5 && isDefined(var_2) && var_2.ref_142f9 <= gettime();
+  var_6 = var_5 && isDefined(var_2) && var_2.ref_142F9 <= gettime();
   var_7 = undefined;
   var_8 = undefined;
   var_9 = var_4;
@@ -7095,11 +7095,11 @@ function ref_14301(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     var_2.ref_14307 = var_0;
-    var_2.ref_142f7 = gettime() + level.disable_super_in_turret.ref_142f6;
+    var_2.ref_142F7 = gettime() + level.disable_super_in_turret.ref_142F6;
     var_2.ref_14306 = gettime() + level.disable_super_in_turret.ref_14305;
 
     if(!var_5 || var_6) {
-      var_2.ref_142f9 = gettime() + level.disable_super_in_turret.ref_142f8;
+      var_2.ref_142F9 = gettime() + level.disable_super_in_turret.ref_142F8;
       return;
     }
 
@@ -7132,7 +7132,7 @@ function watchweapondrop(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   scripts\mp\gametypes\br_public::dmztut_luicallback(var_0, var_1, var_2, var_3, var_4, var_5);
 }
 
-function ref_1332c(var_0) {
+function ref_1332C(var_0) {
   switch (var_0) {
     case "obstacleRemoved":
     case "finished":
@@ -7166,17 +7166,17 @@ function watchweapondeathordisconnect(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_1260a() {
+function ref_1260A() {
   self endon("disconnect");
 
-  if(istrue(self.ref_142f5)) {
+  if(istrue(self.ref_142F5)) {
     return;
   }
 
-  self.ref_142f5 = 1;
+  self.ref_142F5 = 1;
   scripts\mp\gametypes\br_public::dmztut_endgamewithreward("payload_oob", self);
   wait 5;
-  self.ref_142f5 = undefined;
+  self.ref_142F5 = undefined;
 }
 
 function timelimitclock() {
@@ -7266,7 +7266,7 @@ function technical_initdamage() {
 
   setomnvar("requires_scriptmover_ladder_checks", 1);
   ref_13231(level.disable_super_in_turret.getquestrewardstabletype, "buildable_checkpoint", "buildable_checkpoint_clipbrush", "checkpoint_01_anim", "iw8_br_payload_raise_bunker", &"BR_PAYLOAD/PURCHASE_BUNKER", &"BR_PAYLOAD/PURCHASE_BUNKER_DISABLED", level.disable_super_in_turret.getpropsize, "ui_mp_br_mapmenu_icon_bunker");
-  ref_13231(level.disable_super_in_turret.ref_13c1a, "buildable_guardtower", "buildable_guardtower_clipbrush", "guardtower_01_anim", "iw8_br_payload_raise_tower", &"BR_PAYLOAD/PURCHASE_TOWER", &"BR_PAYLOAD/PURCHASE_TOWER_DISABLED", level.disable_super_in_turret.getquesttimefrac, "ui_mp_br_mapmenu_icon_tower");
+  ref_13231(level.disable_super_in_turret.ref_13C1A, "buildable_guardtower", "buildable_guardtower_clipbrush", "guardtower_01_anim", "iw8_br_payload_raise_tower", &"BR_PAYLOAD/PURCHASE_TOWER", &"BR_PAYLOAD/PURCHASE_TOWER_DISABLED", level.disable_super_in_turret.getquesttimefrac, "ui_mp_br_mapmenu_icon_tower");
   toggle_in_use();
 }
 
@@ -7280,11 +7280,11 @@ function ref_13231(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
       var_10.angles = (0, 0, 0);
     }
 
-    var_10.ref_11c75 = var_3;
+    var_10.ref_11C75 = var_3;
     var_10.helistoreplunder = var_2;
     var_10.ref_13931 = var_1;
-    var_10.ref_129f0 = var_4;
-    var_10.ref_1293f = 0;
+    var_10.ref_129F0 = var_4;
+    var_10.ref_1293F = 0;
     var_11 = spawn("script_model", var_10.origin);
     var_11.angles = var_10.angles;
     var_11 setModel("tag_origin");
@@ -7345,7 +7345,7 @@ function ref_13231(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   }
 }
 
-function ref_1286a(var_0, var_1) {
+function ref_1286A(var_0, var_1) {
   if(!level.disable_super_in_turret.getquestscaledvalue) {
     return;
   }
@@ -7356,15 +7356,15 @@ function ref_1286a(var_0, var_1) {
   if(isDefined(var_1)) {
     if(var_0 > 0 && isDefined(var_1.getquestscaledvalue[var_2])) {
       foreach(var_4 in var_1.getquestscaledvalue[var_2]) {
-        if(!istrue(var_4.ref_1293f)) {
-          ref_1392d(var_4);
+        if(!istrue(var_4.ref_1293F)) {
+          ref_1392D(var_4);
         }
       }
     }
 
     if(isDefined(var_1.getquestscaledvalue[var_0])) {
       foreach(var_7, var_4 in var_1.getquestscaledvalue[var_0]) {
-        ref_1392e(var_4);
+        ref_1392E(var_4);
       }
 
       return;
@@ -7376,15 +7376,15 @@ function ref_1286a(var_0, var_1) {
   foreach(var_4 in level.disable_super_in_turret.paths) {
     if(var_6 > 0 && isDefined(var_4.getquestscaledvalue[var_7])) {
       foreach(var_4 in var_4.getquestscaledvalue[var_7]) {
-        if(!istrue(var_4.ref_1293f)) {
-          ref_1392d(var_4);
+        if(!istrue(var_4.ref_1293F)) {
+          ref_1392D(var_4);
         }
       }
     }
 
     if(isDefined(var_4.getquestscaledvalue[var_6])) {
       foreach(var_4 in var_4.getquestscaledvalue[var_6]) {
-        ref_1392e(var_4);
+        ref_1392E(var_4);
       }
     }
   }
@@ -7422,16 +7422,16 @@ function ref_13932() {
       continue;
     }
 
-    if(ref_1392a(var_1, var_2)) {
+    if(ref_1392A(var_1, var_2)) {
       var_3 = int(var_1.price / 100);
       var_2 scripts\mp\gametypes\br_plunder::playersetplundercount(var_2.plundercount - var_3);
-      ref_1361f(var_1.loc, var_2);
+      ref_1361F(var_1.loc, var_2);
       return;
     }
   }
 }
 
-function ref_1392a(var_0) {
+function ref_1392A(var_0) {
   if(!var_0 scripts\common\utility::is_crate_use_allowed()) {
     return false;
   }
@@ -7509,7 +7509,7 @@ function ref_1392a(var_0) {
   return true;
 }
 
-function ref_1392e() {
+function ref_1392E() {
   self.getquestrewardstablevaluecolumnindex show();
   self.getquestrewardstablevaluecolumnindex.isusable = 1;
   self.getquestrewardtier.isusable = 1;
@@ -7529,7 +7529,7 @@ function ref_1392e() {
 
   foreach(var_3 in var_5) {
     var_7 = isDefined(var_3.plundercount) && var_3.plundercount >= var_0;
-    var_8 = !istrue(self.ref_1293f);
+    var_8 = !istrue(self.ref_1293F);
 
     if(var_8 && var_7 == 0) {
       self.getquestrewardstablevaluecolumnindex disableplayeruse(var_3);
@@ -7556,7 +7556,7 @@ function ref_1392e() {
   thread ref_13932();
 }
 
-function ref_1392d() {
+function ref_1392D() {
   self.getquestrewardstablevaluecolumnindex notify("makeStructureUnusable");
   self.getquestrewardtier notify("makeStructureUnusable");
   self.getquestrewardstablevaluecolumnindex.isusable = 0;
@@ -7566,7 +7566,7 @@ function ref_1392d() {
   self.getquestrewardtier makeunusable();
   ref_13930(self.getquestrewardstablevaluecolumnindex);
   ref_13930(self.getquestrewardtier);
-  ref_1392b(self.getquestrewardstablevaluecolumnindex.scriptable);
+  ref_1392B(self.getquestrewardstablevaluecolumnindex.scriptable);
   scripts\mp\objidpoolmanager::objective_playermask_hidefromall(self.getquestrewardstablevaluecolumnindex.loc.objidnum);
   self.getquestrewardstablevaluecolumnindex hide();
 }
@@ -7584,7 +7584,7 @@ function ref_13930() {
   }
 }
 
-function ref_1392b() {
+function ref_1392B() {
   var_0 = scripts\mp\utility\teams::getteamdata(game["attackers"], "players");
   var_1 = scripts\mp\utility\teams::getteamdata(game["defenders"], "players");
 
@@ -7598,26 +7598,26 @@ function ref_1392b() {
   }
 }
 
-function ref_126e0() {
+function ref_126E0() {
   if(!level.disable_super_in_turret.getquestscaledvalue) {
     return;
   }
 
   if(self.team == game["defenders"]) {
     foreach(var_1 in level.disable_super_in_turret.getquestrewardstabletype) {
-      ref_126df(var_1);
+      ref_126DF(var_1);
     }
 
-    foreach(var_1 in level.disable_super_in_turret.ref_13c1a) {
-      ref_126df(var_1);
+    foreach(var_1 in level.disable_super_in_turret.ref_13C1A) {
+      ref_126DF(var_1);
     }
 
     return;
   }
 }
 
-function ref_126df(var_0) {
-  if(var_0.ref_1293f == 0) {
+function ref_126DF(var_0) {
+  if(var_0.ref_1293F == 0) {
     var_1 = int(var_0.getquestrewardstablevaluecolumnindex.price / 100);
 
     if(self.plundercount >= var_1) {
@@ -7643,12 +7643,12 @@ function ref_126df(var_0) {
   }
 }
 
-function ref_1361f(var_0, var_1) {
-  var_0.ref_1293f = 1;
+function ref_1361F(var_0, var_1) {
+  var_0.ref_1293F = 1;
   var_2 = var_0.getquestrewardstablevaluecolumnindex;
   var_2 makeunusable();
   var_0.getquestrewardstablevaluecolumnindex = var_2;
-  ref_1392f(var_2, var_1, var_0.ref_11c75, var_0.ref_129f0);
+  ref_1392F(var_2, var_1, var_0.ref_11C75, var_0.ref_129F0);
   var_3 = getEnt(var_0.helistoreplunder, "targetname");
 
   if(isDefined(var_3)) {
@@ -7672,13 +7672,13 @@ function ref_1361f(var_0, var_1) {
   if(var_0.ref_13931 == "buildable_checkpoint") {
     thread flagwatchradarownerlost();
   } else if(var_0.ref_13931 == "buildable_guardtower") {
-    ref_13c18(var_2, var_1);
+    ref_13C18(var_2, var_1);
   }
 
   return var_2;
 }
 
-function ref_1392f(var_0, var_1, var_2) {
+function ref_1392F(var_0, var_1, var_2) {
   var_3 = 1.53;
   var_4 = anglesToForward(self.angles);
   var_5 = self.origin + var_4 * 50;
@@ -7713,7 +7713,7 @@ function run_techo_spawner(var_0, var_1, var_2) {
   }
 
   foreach(var_4 in var_0.getquestscaledvalue[var_1]) {
-    if(var_4.ref_13931 == var_2 && !istrue(var_4.ref_1293f)) {
+    if(var_4.ref_13931 == var_2 && !istrue(var_4.ref_1293F)) {
       return var_4;
     }
   }
@@ -7746,7 +7746,7 @@ function fix_door_clip(var_0, var_1, var_2) {
     var_7 = run_techo_spawner(var_5, var_6, var_2);
 
     if(isDefined(var_7)) {
-      ref_1361f(var_7, var_0);
+      ref_1361F(var_7, var_0);
       return true;
     }
   }
@@ -7783,7 +7783,7 @@ function flagwatchradarownerlost() {
   for(;;) {
     var_4.useownerobj waittill("trigger", var_7);
     var_8 = var_7.origin;
-    var_7 scripts\cp_mp\killstreaks\manual_turret::ref_11acd(0);
+    var_7 scripts\cp_mp\killstreaks\manual_turret::ref_11ACD(0);
     var_7 disableturretdismount();
     var_4.owner = var_7;
     var_7 giveweapon("manual_turret_payload_mp", -1, 0, -1, 1);
@@ -7792,7 +7792,7 @@ function flagwatchradarownerlost() {
     if(!istrue(var_9)) {
       if(isalive(var_7)) {
         var_7 enableturretdismount();
-        var_7 scripts\cp_mp\killstreaks\manual_turret::ref_11acd(1);
+        var_7 scripts\cp_mp\killstreaks\manual_turret::ref_11ACD(1);
 
         if(var_7 hasweapon("manual_turret_payload_mp")) {
           var_7 takeweapon("manual_turret_payload_mp");
@@ -7824,14 +7824,14 @@ function flagwatchradarownerlost() {
       var_7 enableturretdismount();
       var_7 controlturretoff(var_4);
       var_7 setclientomnvar("ui_mobile_turret_controls", 0);
-      var_7 scripts\cp_mp\killstreaks\manual_turret::ref_11acd(1);
+      var_7 scripts\cp_mp\killstreaks\manual_turret::ref_11ACD(1);
 
       if(var_7 hasweapon("manual_turret_payload_mp")) {
         var_7 takeweapon("manual_turret_payload_mp");
       }
 
       var_7 scripts\mp\utility\inventory::switchtolastweapon();
-      var_7 thread scripts\cp_mp\killstreaks\manual_turret::ref_11ac7();
+      var_7 thread scripts\cp_mp\killstreaks\manual_turret::ref_11AC7();
       var_7 setOrigin(var_8);
     }
 
@@ -7842,34 +7842,34 @@ function flagwatchradarownerlost() {
   }
 }
 
-function ref_13c18(var_0) {
+function ref_13C18(var_0) {
   var_1 = 4;
 
-  if(!isDefined(level.disable_super_in_turret.ref_129c6)) {
-    level.disable_super_in_turret.ref_129c6 = [];
+  if(!isDefined(level.disable_super_in_turret.ref_129C6)) {
+    level.disable_super_in_turret.ref_129C6 = [];
   }
 
-  if(level.disable_super_in_turret.ref_129c6.size >= var_1) {
+  if(level.disable_super_in_turret.ref_129C6.size >= var_1) {
     var_2 = undefined;
     var_3 = undefined;
 
-    foreach(var_5 in level.disable_super_in_turret.ref_129c6) {
-      if(!isDefined(var_3) || var_5.ref_129c7 < var_3) {
+    foreach(var_5 in level.disable_super_in_turret.ref_129C6) {
+      if(!isDefined(var_3) || var_5.ref_129C7 < var_3) {
         var_2 = var_6;
-        var_3 = var_5.ref_129c7;
+        var_3 = var_5.ref_129C7;
       }
     }
 
-    level.disable_super_in_turret.ref_129c6[var_2] clearportableradar();
-    level.disable_super_in_turret.ref_129c6[var_2] = undefined;
+    level.disable_super_in_turret.ref_129C6[var_2] clearportableradar();
+    level.disable_super_in_turret.ref_129C6[var_2] = undefined;
   }
 
-  self.ref_129c7 = gettime();
+  self.ref_129C7 = gettime();
   self makeportableradar(var_0);
-  level.disable_super_in_turret.ref_129c6[self getentitynumber()] = self;
+  level.disable_super_in_turret.ref_129C6[self getentitynumber()] = self;
 }
 
-function ref_1225e() {
+function ref_1225E() {
   level endon("game_ended");
   wait 1;
 
@@ -7930,10 +7930,10 @@ function terminal_pusher_approach_array_counter() {
   }
 
   foreach(var_3 in level.disable_super_in_turret.vehiclespawns) {
-    var_3.ref_1425c = var_3.script_parameters;
+    var_3.ref_1425C = var_3.script_parameters;
 
-    if(!isDefined(var_3.ref_1425c)) {
-      var_3.ref_1425c = var_0[var_1];
+    if(!isDefined(var_3.ref_1425C)) {
+      var_3.ref_1425C = var_0[var_1];
       var_1++;
 
       if(var_1 >= var_0.size) {
@@ -7978,7 +7978,7 @@ function spawninitialvehicles() {
     return;
   }
 
-  ref_136aa(1);
+  ref_136AA(1);
   thread ref_13639(game["attackers"]);
   thread ref_13639(game["defenders"]);
 }
@@ -7991,7 +7991,7 @@ function ref_13639(var_0) {
   var_2 = 1;
 
   foreach(var_4 in level.disable_super_in_turret.paths) {
-    var_4.ref_11f48[var_0] = 0;
+    var_4.ref_11F48[var_0] = 0;
   }
 
   for(;;) {
@@ -8008,7 +8008,7 @@ function ref_13639(var_0) {
         var_9 = var_8.vehiclespawns[var_0];
 
         foreach(var_11 in var_9) {
-          if(var_4.ref_11f48[var_0] >= var_1) {
+          if(var_4.ref_11F48[var_0] >= var_1) {
             break;
           }
 
@@ -8016,7 +8016,7 @@ function ref_13639(var_0) {
             goto LOC_0000012a;
           }
 
-          var_12 = scripts\mp\gametypes\br_vehicles::tryspawnavehicle(var_11.ref_1425c, var_11, "alwaysSpawn");
+          var_12 = scripts\mp\gametypes\br_vehicles::tryspawnavehicle(var_11.ref_1425C, var_11, "alwaysSpawn");
           jumpiffalse(isDefined(var_12)) LOC_0000012a;
           scripts\cp_mp\vehicles\vehicle_spawn::ref_14219(var_12);
           thread ref_14250(var_12, var_4, var_11);
@@ -8025,16 +8025,16 @@ function ref_13639(var_0) {
     }
 
     var_2 = 0;
-    wait level.disable_super_in_turret.ref_136ab;
+    wait level.disable_super_in_turret.ref_136AB;
   }
 }
 
 function ref_14250(var_0, var_1, var_2) {
   level endon("game_ended");
-  var_0.ref_11f48[var_2]++;
+  var_0.ref_11F48[var_2]++;
   var_1.inuse = 1;
   self waittill("death");
-  var_0.ref_11f48[var_2]--;
+  var_0.ref_11F48[var_2]--;
   var_1.inuse = undefined;
 }
 
@@ -8046,8 +8046,8 @@ function respawningbr(var_0, var_1) {
   goto LOC_00000064;
 }
 
-function ref_132f6(var_0) {
-  if(level.disable_super_in_turret.ref_1226a == "port" && var_0.label == "B" && var_0.getquestplunderrewardinstance == 0 || level.disable_super_in_turret.ref_1226a == "trainstation2" && var_0.label == "A" && var_0.getquestplunderrewardinstance == 1) {
+function ref_132F6(var_0) {
+  if(level.disable_super_in_turret.ref_1226A == "port" && var_0.label == "B" && var_0.getquestplunderrewardinstance == 0 || level.disable_super_in_turret.ref_1226A == "trainstation2" && var_0.label == "A" && var_0.getquestplunderrewardinstance == 1) {
     return true;
   }
 
@@ -8073,7 +8073,7 @@ function play_rooftop_success_vo(var_0, var_1) {
   var_6 = 184;
   var_7 = var_2 - var_4;
   var_8 = 50;
-  var_9 = var_0.getquestreward_checkforvalueoverride[var_1].ref_11ea5;
+  var_9 = var_0.getquestreward_checkforvalueoverride[var_1].ref_11EA5;
   var_10 = var_0.nodes[var_9].origin;
   var_11 = var_0.nodes[var_9].angles;
   var_12 = vectorNormalize(respawningbr(var_0, var_9));
@@ -8162,22 +8162,22 @@ function init_relic_dogtags(var_0, var_1, var_2) {
   var_3 unmarkkeyframedmover(1);
   var_4 = "checkpoint";
 
-  if(ref_132f6(var_0)) {
+  if(ref_132F6(var_0)) {
     var_4 = "checkpoint_ohcheck";
   }
 
   var_3 setscriptablepartstate("checkpoint", var_4);
-  ref_1438d(var_0);
+  ref_1438D(var_0);
   var_3 setscriptablepartstate("checkpoint", "checkpoint_clear");
   wait 5;
   var_3 delete();
 }
 
-function ref_1438d(var_0) {
+function ref_1438D(var_0) {
   var_0 waittill("checkPointUpdate");
 }
 
-function ref_125c3(var_0, var_1) {
+function ref_125C3(var_0, var_1) {
   level endon("payloadComplete");
   level endon("game_ended");
   self endon("death_or_disconnect");
@@ -8212,7 +8212,7 @@ function ref_125c3(var_0, var_1) {
   var_1 notify("build_complete");
 }
 
-function ref_125c0(var_0, var_1) {
+function ref_125C0(var_0, var_1) {
   var_2 = self;
   level endon("payloadComplete");
   level endon("game_ended");
@@ -8241,7 +8241,7 @@ function ref_125c0(var_0, var_1) {
   var_1 notify("build_complete");
 }
 
-function ref_1226d() {
+function ref_1226D() {
   if(!istrue(level.disable_super_in_turret.ref_12272)) {
     return;
   }
@@ -8249,12 +8249,12 @@ function ref_1226d() {
   level endon("payloadComplete");
   level endon("game_ended");
   scripts\mp\flags::gameflagwait("prematch_done");
-  level.ref_13ac8 = [];
-  level.ref_13ac8[game["attackers"]] = [];
-  level.ref_13ac8[game["defenders"]] = [];
-  level.ref_13abe = [];
-  level.ref_13abe[game["attackers"]] = undefined;
-  level.ref_13abe[game["defenders"]] = undefined;
+  level.ref_13AC8 = [];
+  level.ref_13AC8[game["attackers"]] = [];
+  level.ref_13AC8[game["defenders"]] = [];
+  level.ref_13ABE = [];
+  level.ref_13ABE[game["attackers"]] = undefined;
+  level.ref_13ABE[game["defenders"]] = undefined;
 
   for(var_0 = 1;; var_0 = 0) {
     level waittill("checkPointUpdate", var_1);
@@ -8263,7 +8263,7 @@ function ref_1226d() {
     var_3 = undefined;
     var_4 = undefined;
 
-    if(istrue(level.disable_super_in_turret.ref_1226f) || istrue(level.disable_super_in_turret.ref_12273)) {
+    if(istrue(level.disable_super_in_turret.ref_1226F) || istrue(level.disable_super_in_turret.ref_12273)) {
       var_5 = scripts\mp\gametypes\br_capshoot_quest::registermovequestlocale();
       var_3 = var_5[var_2 % var_5.size];
     }
@@ -8275,7 +8275,7 @@ function ref_1226d() {
 
     var_7 = level.disable_super_in_turret.ref_12271;
 
-    if(istrue(level.disable_super_in_turret.ref_1226f)) {
+    if(istrue(level.disable_super_in_turret.ref_1226F)) {
       thread init_relic_bang_and_boom(var_1, var_7, game["attackers"], var_3, game["defenders"], var_4);
 
       if(var_0) {
@@ -8332,17 +8332,17 @@ function init_relic_amped(var_0, var_1, var_2, var_3, var_4) {
     var_12 = anglesToForward(var_11);
     var_13 = randomfloatrange(var_5, var_6);
     var_14 = var_9.origin + var_12 * var_13;
-    var_15 = ref_1361c(var_14, var_1, var_2, var_3, var_4);
+    var_15 = ref_1361C(var_14, var_1, var_2, var_3, var_4);
     var_15.path = var_8;
     return;
   }
 }
 
-function ref_1361c(var_0, var_1, var_2, var_3, var_4) {
+function ref_1361C(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 20;
   var_6 = scripts\mp\gametypes\br_public::modifyplayer_damage(var_0);
   var_6 += (0, 0, var_5);
-  var_7 = scripts\mp\gametypes\br_quest_util::ref_135df(var_2, var_6);
+  var_7 = scripts\mp\gametypes\br_quest_util::ref_135DF(var_2, var_6);
 
   if(isDefined(var_7)) {
     var_7.team = var_1;
@@ -8357,7 +8357,7 @@ function ref_1361c(var_0, var_1, var_2, var_3, var_4) {
       var_7.ref_12158 = var_4;
     }
 
-    scripts\mp\gametypes\br_pickups::ref_12b3a(var_7);
+    scripts\mp\gametypes\br_pickups::ref_12B3A(var_7);
   }
 
   return var_7;
@@ -8370,16 +8370,16 @@ function play_reset_sequences(var_0, var_1) {
     return undefined;
   }
 
-  level.disable_super_in_turret.ref_1297a = var_2;
+  level.disable_super_in_turret.ref_1297A = var_2;
   var_3 = scripts\engine\utility::array_sort_with_func(level.disable_super_in_turret.ref_12979, &ammorestock_used);
-  level.disable_super_in_turret.ref_1297a = undefined;
+  level.disable_super_in_turret.ref_1297A = undefined;
   var_4 = var_3[0];
 
   for(var_5 = 0; var_5 < var_3.size; var_5++) {
     var_6 = var_3[var_5];
     var_7 = 0;
 
-    foreach(var_9 in var_2.ref_136c3[var_0.team]) {
+    foreach(var_9 in var_2.ref_136C3[var_0.team]) {
       if(isDefined(var_9.trigger) && ispointinvolume(var_6.origin, var_9.trigger)) {
         continue;
       }
@@ -8458,7 +8458,7 @@ function van_infil_sfx_chief() {
 }
 
 function ammorestock_used(var_0, var_1) {
-  var_2 = level.disable_super_in_turret.ref_1297a;
+  var_2 = level.disable_super_in_turret.ref_1297A;
   var_3 = var_2.vehicle.origin;
   return distancesquared(var_0.origin, var_3) < distancesquared(var_1.origin, var_3);
 }
@@ -8483,7 +8483,7 @@ function ref_13185(var_0) {
   ref_13156("in_cinematic_controls_locked", var_0);
 }
 
-function ref_1318b(var_0, var_1) {
+function ref_1318B(var_0, var_1) {
   var_2 = scripts\engine\utility::ter_op(var_0 == 1, "number_of_teammates_on_path_b", "number_of_teammates_on_path_a");
   ref_13157(var_2, var_1);
 }
@@ -8493,7 +8493,7 @@ function ref_13190(var_0, var_1) {
   ref_13157(var_2, var_1);
 }
 
-function ref_1318a(var_0, var_1) {
+function ref_1318A(var_0, var_1) {
   var_2 = scripts\engine\utility::ter_op(var_0 == 1, "path_b_checkpoints_complete", "path_a_checkpoints_complete");
   ref_13157(var_2, var_1);
 }
@@ -8512,11 +8512,11 @@ function ref_13188(var_0) {
   ref_13157("last_chance_max_time", var_0);
 }
 
-function ref_1318e(var_0) {
+function ref_1318E(var_0) {
   ref_13157("payload_timer_initialized", var_0);
 }
 
-function ref_11aa2(var_0) {
+function ref_11AA2(var_0) {
   var_1 = 0;
 
   if(var_0 >= 0.999) {
@@ -8528,13 +8528,13 @@ function ref_11aa2(var_0) {
   return var_1;
 }
 
-function ref_1318f(var_0, var_1) {
+function ref_1318F(var_0, var_1) {
   var_2 = scripts\engine\utility::ter_op(var_0 == 1, "path_b_percent_complete", "path_a_percent_complete");
-  var_3 = ref_11aa2(var_1);
+  var_3 = ref_11AA2(var_1);
   ref_13157(var_2, var_3);
 }
 
-function ref_1318c(var_0, var_1, var_2) {
+function ref_1318C(var_0, var_1, var_2) {
   var_3 = scripts\engine\utility::ter_op(var_0 == 1, "path_b_obstacle_state", "path_a_obstacle_state");
   var_4 = scripts\engine\utility::ter_op(var_2 == 1, 1, 0);
   ref_13157(var_3, var_4, var_1);
@@ -8556,7 +8556,7 @@ function ref_13157(var_0, var_1, var_2) {
     return;
   }
 
-  ref_1260e(var_6, var_1, var_4, var_5);
+  ref_1260E(var_6, var_1, var_4, var_5);
 }
 
 function ref_13156(var_0, var_1) {
@@ -8571,7 +8571,7 @@ function ref_13156(var_0, var_1) {
     return;
   }
 
-  ref_1260d(var_5, var_1, var_3, var_4);
+  ref_1260D(var_5, var_1, var_3, var_4);
 }
 
 function reload_use_trigger(var_0, var_1) {
@@ -8713,7 +8713,7 @@ function reload_use_trigger(var_0, var_1) {
   return [var_2, var_3, var_4, var_1];
 }
 
-function ref_1260d(var_0, var_1, var_2, var_3) {
+function ref_1260D(var_0, var_1, var_2, var_3) {
   var_4 = int(pow(2, var_3)) - 1;
   var_5 = (var_1 &var_4) << var_2;
   var_6 = ~(var_4 << var_2);
@@ -8727,7 +8727,7 @@ function ref_1260d(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_1260e(var_0, var_1, var_2, var_3) {
+function ref_1260E(var_0, var_1, var_2, var_3) {
   var_4 = int(pow(2, var_3)) - 1;
   var_5 = (var_1 &var_4) << var_2;
   var_6 = ~(var_4 << var_2);
@@ -8764,7 +8764,7 @@ function ref_12257() {
   level endon("game_ended");
   var_0 = [];
   var_1 = undefined;
-  var_2 = level.disable_super_in_turret.ref_1226a;
+  var_2 = level.disable_super_in_turret.ref_1226A;
   var_3 = [];
   var_4 = 1.2;
 
@@ -8930,7 +8930,7 @@ function startspectatorview() {
   level endon("game_ended");
   self endon("disconnect");
   self endon("spawned_player");
-  scripts\mp\gametypes\br_spectate::ref_1252a();
+  scripts\mp\gametypes\br_spectate::ref_1252A();
 
   if(isbot(self)) {
     return;
@@ -8963,7 +8963,7 @@ function startspectatorview() {
   self clearclienttriggeraudiozone(0.5);
 }
 
-function ref_13fd8(var_0, var_1, var_2, var_3) {
+function ref_13FD8(var_0, var_1, var_2, var_3) {
   self unlink();
   var_4 = self.origin;
   var_5 = self.angles;
@@ -8995,14 +8995,14 @@ function x1fin_think(var_0) {
   }
 }
 
-function ref_139d8(var_0) {
+function ref_139D8(var_0) {
   if(isDefined(self.play_nuclear_core_vo) && isDefined(self.ref_12204) && !isbot(self)) {
     var_1 = ref_12574(var_0);
     var_2 = var_1[0];
     var_3 = var_1[1];
     var_4 = var_1[2];
     var_1 = undefined;
-    ref_13fd8(self.play_nuclear_core_vo, self, var_2, var_3, var_4);
+    ref_13FD8(self.play_nuclear_core_vo, self, var_2, var_3, var_4);
     return;
   }
 }
@@ -9061,17 +9061,17 @@ function respawntokenclosewithgulag() {
   return self.play_nuclear_core_vo;
 }
 
-function ref_126bb() {
+function ref_126BB() {
   var_0 = ref_12575();
   var_1 = ref_12574(var_0);
   var_2 = var_1[0];
   var_3 = var_1[1];
   var_4 = var_1[2];
   var_1 = undefined;
-  scripts\mp\gametypes\br_public::ref_126b9(var_2);
+  scripts\mp\gametypes\br_public::ref_126B9(var_2);
 }
 
-function ref_125e7() {
+function ref_125E7() {
   level endon("payloadComplete");
   level endon("game_ended");
   self endon("disconnect");
@@ -9113,7 +9113,7 @@ function ref_12535() {
 }
 
 function tomastrike_isflyingvehicle() {
-  if(!isDefined(level.disable_super_in_turret.ref_12eac)) {
+  if(!isDefined(level.disable_super_in_turret.ref_12EAC)) {
     var_0 = [];
 
     foreach(var_2 in level.disable_super_in_turret.paths) {
@@ -9122,7 +9122,7 @@ function tomastrike_isflyingvehicle() {
       var_0 = ref_13697("ee_machinery_satellite_panel_01_payload_ch3", var_2.initchallengeandeventglobals, 2, "satellite_panel_col");
     }
 
-    level.disable_super_in_turret.ref_12eac = var_0;
+    level.disable_super_in_turret.ref_12EAC = var_0;
   }
 
   var_4 = getEnt("payload_satellite_clipbrush", "script_noteworthy");
@@ -9132,7 +9132,7 @@ function tomastrike_isflyingvehicle() {
   }
 
   foreach(var_2 in level.disable_super_in_turret.paths) {
-    foreach(var_7 in level.disable_super_in_turret.ref_12eac) {
+    foreach(var_7 in level.disable_super_in_turret.ref_12EAC) {
       if(var_7.script_group == var_2.initchallengeandeventglobals) {
         var_8 = var_7;
 
@@ -9177,15 +9177,15 @@ function rocket_fuel_x1(var_0, var_1) {
   }
 }
 
-function ref_1326a(var_0, var_1) {
+function ref_1326A(var_0, var_1) {
   if(var_1 > 0) {
     var_2 = rocket_fuel_x1(var_0, var_1);
-    ref_13dec(var_0.idle_sfx, var_2, var_1);
+    ref_13DEC(var_0.idle_sfx, var_2, var_1);
     return;
   }
 }
 
-function ref_13dec(var_0, var_1) {
+function ref_13DEC(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -9223,7 +9223,7 @@ function delay_start_escort_enter_vehicle_objective() {
   setglobalsoundcontext("gamemode", "payload");
 }
 
-function ref_11e11() {
+function ref_11E11() {
   level endon("stop_overtime");
   var_0 = 0;
   var_1 = respawn_trigger_think();
@@ -9248,7 +9248,7 @@ function ref_11e11() {
   }
 }
 
-function ref_11e12() {
+function ref_11E12() {
   while(isDefined(level.allowmeleevehicledamage) == 1) {
     foreach(var_1 in level.players) {
       var_2 = isDefined(var_1.allowmodestructs);
@@ -9279,12 +9279,12 @@ function ref_11e12() {
   }
 }
 
-function ref_11e10() {
+function ref_11E10() {
   for(;;) {
     level waittill("start_overtime");
     level.allowmeleevehicledamage = 1;
-    thread ref_11e12();
-    thread ref_11e11();
+    thread ref_11E12();
+    thread ref_11E11();
     level waittill("stop_overtime");
     waittillframeend();
     level.allowmeleevehicledamage = undefined;
@@ -9292,17 +9292,17 @@ function ref_11e10() {
 }
 
 function ref_12804(var_0) {
-  thread ref_126e0();
+  thread ref_126E0();
 }
 
-function ref_12aa5() {
+function ref_12AA5() {
   foreach(var_1 in level.disable_super_in_turret.paths) {
     if(!isDefined(var_1) || !isDefined(var_1.vehicle)) {
       continue;
     }
 
     var_2 = var_1.vehicle;
-    ref_1425b(var_2);
-    getentitylessscriptablearray("dlog_event_br_payload_game_end", ["path_name", level.disable_super_in_turret.ref_1226a, "path_index", var_1.script_index, "total_push_distance", ref_14244(var_2), "longest_push_distance", var_1.ref_119d6, "total_push_time", var_1.ref_13bf5, "checkpoints_completed", var_1.getquestplunderrewardinstance, "obstacles_destroyed", var_1.ref_11f9f]);
+    ref_1425B(var_2);
+    getentitylessscriptablearray("dlog_event_br_payload_game_end", ["path_name", level.disable_super_in_turret.ref_1226A, "path_index", var_1.script_index, "total_push_distance", ref_14244(var_2), "longest_push_distance", var_1.ref_119D6, "total_push_time", var_1.ref_13BF5, "checkpoints_completed", var_1.getquestplunderrewardinstance, "obstacles_destroyed", var_1.ref_11F9F]);
   }
 }

@@ -127,7 +127,7 @@ function chill_blind() {
 
   self notify("chillBlind");
   self endon("chillBlind");
-  scripts\engine\utility::ref_143b9(var_6, "chillEnd");
+  scripts\engine\utility::ref_143B9(var_6, "chillEnd");
   self setscriptablepartstate(var_4, "neutral", 0);
   var_0.blindid = undefined;
 }

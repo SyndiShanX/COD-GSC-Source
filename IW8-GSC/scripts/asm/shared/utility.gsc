@@ -805,7 +805,7 @@ function playmoveloopcasual(var_0, var_1, var_2) {
   playmoveloop(var_0, var_1, var_2);
 }
 
-function ref_1244e(var_0, var_1, var_2) {
+function ref_1244E(var_0, var_1, var_2) {
   thread waitfordooropen(var_0, var_1, 1);
   playanim(var_0, var_1, var_2);
 }

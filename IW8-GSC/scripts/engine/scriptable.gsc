@@ -47,56 +47,56 @@ function scriptable_addusedcallback(var_0) {
   level.scriptable_used_funcs = scripts\engine\utility::array_add(level.scriptable_used_funcs, var_0);
 }
 
-function ref_12f5b(var_0, var_1) {
-  if(!isDefined(level.ref_12f6d)) {
-    level.ref_12f6d = [];
+function ref_12F5B(var_0, var_1) {
+  if(!isDefined(level.ref_12F6D)) {
+    level.ref_12F6D = [];
   }
 
-  if(!isDefined(level.ref_12f6d[var_0])) {
-    level.ref_12f6d[var_0] = [];
+  if(!isDefined(level.ref_12F6D[var_0])) {
+    level.ref_12F6D[var_0] = [];
   }
 
-  level.ref_12f6d[var_0][level.ref_12f6d[var_0].size] = var_1;
+  level.ref_12F6D[var_0][level.ref_12F6D[var_0].size] = var_1;
 }
 
-function ref_12f57(var_0) {
-  if(!isDefined(level.ref_12f5c)) {
-    level.ref_12f5c = [];
+function ref_12F57(var_0) {
+  if(!isDefined(level.ref_12F5C)) {
+    level.ref_12F5C = [];
   }
 
-  level.ref_12f5c = scripts\engine\utility::array_add(level.ref_12f5c, var_0);
+  level.ref_12F5C = scripts\engine\utility::array_add(level.ref_12F5C, var_0);
 }
 
-function ref_12f58(var_0) {
-  if(!isDefined(level.ref_12f5f)) {
-    level.ref_12f5f = [];
+function ref_12F58(var_0) {
+  if(!isDefined(level.ref_12F5F)) {
+    level.ref_12F5F = [];
   }
 
-  level.ref_12f5f = scripts\engine\utility::array_add(level.ref_12f5f, var_0);
+  level.ref_12F5F = scripts\engine\utility::array_add(level.ref_12F5F, var_0);
 }
 
-function ref_12f59(var_0, var_1) {
-  if(!isDefined(level.ref_12f5e)) {
-    level.ref_12f5e = [];
+function ref_12F59(var_0, var_1) {
+  if(!isDefined(level.ref_12F5E)) {
+    level.ref_12F5E = [];
   }
 
-  if(!isDefined(level.ref_12f5e[var_0])) {
-    level.ref_12f5e[var_0] = [];
+  if(!isDefined(level.ref_12F5E[var_0])) {
+    level.ref_12F5E[var_0] = [];
   }
 
-  level.ref_12f5e[var_0][level.ref_12f5e[var_0].size] = var_1;
+  level.ref_12F5E[var_0][level.ref_12F5E[var_0].size] = var_1;
 }
 
 function scriptable_engineused(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(istrue(var_5)) {
-    if(isDefined(level.ref_12f5f)) {
-      foreach(var_7 in level.ref_12f5f) {
+    if(isDefined(level.ref_12F5F)) {
+      foreach(var_7 in level.ref_12F5F) {
         [[var_7]](var_0, var_1, var_2, var_3, 0);
       }
     }
 
-    if(isDefined(level.ref_12f5e) && isDefined(level.ref_12f5e[var_1])) {
-      foreach(var_7 in level.ref_12f5e[var_1]) {
+    if(isDefined(level.ref_12F5E) && isDefined(level.ref_12F5E[var_1])) {
+      foreach(var_7 in level.ref_12F5E[var_1]) {
         [[var_7]](var_0, var_1, var_2, var_3, 1);
       }
     }
@@ -105,8 +105,8 @@ function scriptable_engineused(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(istrue(var_4)) {
-    if(isDefined(level.ref_12f5c)) {
-      foreach(var_7 in level.ref_12f5c) {
+    if(isDefined(level.ref_12F5C)) {
+      foreach(var_7 in level.ref_12F5C) {
         [[var_7]](var_0, var_1, var_2, var_3, 1);
       }
     }
@@ -120,8 +120,8 @@ function scriptable_engineused(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
   }
 
-  if(isDefined(level.ref_12f6d) && isDefined(level.ref_12f6d[var_1])) {
-    foreach(var_7 in level.ref_12f6d[var_1]) {
+  if(isDefined(level.ref_12F6D) && isDefined(level.ref_12F6D[var_1])) {
+    foreach(var_7 in level.ref_12F6D[var_1]) {
       [[var_7]](var_0, var_1, var_2, var_3, 1);
     }
   }
@@ -145,17 +145,17 @@ function scriptable_enginetouched(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_12f5a(var_0) {
-  if(!isDefined(level.ref_12f65)) {
-    level.ref_12f65 = [];
+function ref_12F5A(var_0) {
+  if(!isDefined(level.ref_12F65)) {
+    level.ref_12F65 = [];
   }
 
-  level.ref_12f65 = scripts\engine\utility::array_add(level.ref_12f65, var_0);
+  level.ref_12F65 = scripts\engine\utility::array_add(level.ref_12F65, var_0);
 }
 
-function ref_12f69(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(isDefined(level.ref_12f65)) {
-    foreach(var_12 in level.ref_12f65) {
+function ref_12F69(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+  if(isDefined(level.ref_12F65)) {
+    foreach(var_12 in level.ref_12F65) {
       [[var_12]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     }
 

@@ -286,7 +286,7 @@ function remove_headicon_on_death() {
   }
 
   var_0 = self.headicon;
-  var_1 = scripts\engine\utility::ref_143a5("death", "remove_headicon");
+  var_1 = scripts\engine\utility::ref_143A5("death", "remove_headicon");
   setheadiconimage(var_0);
 }
 

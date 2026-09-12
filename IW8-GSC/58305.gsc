@@ -4,18 +4,18 @@
 ***********************************************/
 
 function keypad_check_levelinput() {
-  if(!isDefined(level.ref_13d51)) {
-    level.ref_13d51 = [];
+  if(!isDefined(level.ref_13D51)) {
+    level.ref_13D51 = [];
   }
 
-  level.ref_13d51["gun"] = &init;
+  level.ref_13D51["gun"] = &init;
 }
 
 function init() {
-  level.ref_13d7b = &spawn_first_leads_early;
-  level.ref_13d71 = &civvies_killed_calculate;
-  level.ref_13d73 = &targets_missed_calculate;
-  level.ref_13d81 = &ref_13daf;
+  level.ref_13D7B = &spawn_first_leads_early;
+  level.ref_13D71 = &civvies_killed_calculate;
+  level.ref_13D73 = &targets_missed_calculate;
+  level.ref_13D81 = &ref_13DAF;
   build_vehicle_drop_off_list();
   dialog_init();
 
@@ -31,48 +31,48 @@ function init() {
   level.start_area_fx = loadfx("vfx/iw8_mp/trials/speedball/vfx_trials_imp_clay.vfx");
 
   foreach(var_1 in level.course_triggers) {
-    var_1 thread _stop_spawn_modules::ref_13d82();
+    var_1 thread _stop_spawn_modules::ref_13D82();
   }
 
   foreach(var_1 in level.course_targets) {
-    var_1 thread _stop_spawn_modules::ref_13d79();
+    var_1 thread _stop_spawn_modules::ref_13D79();
   }
 
   thread game_start();
   thread game_end();
   var_8 = getEntArray("trial_ammocrate", "targetname");
   scripts\engine\utility::array_thread(var_8, &brplayerkilledspawn);
-  level.ref_13d85 = &ref_13e6d;
+  level.ref_13D85 = &ref_13E6D;
 
   while(!istrue(level.ref_13022)) {
     waitframe();
   }
 
-  foreach(var_10 in level.ref_13d65) {
+  foreach(var_10 in level.ref_13D65) {
     var_10 setCanDamage(0);
   }
 }
 
 function game_start() {
-  thread ref_1382b();
+  thread ref_1382B();
   var_0 = getEntArray("start", "script_noteworthy");
 
   for(;;) {
-    level.ref_13d6a = 0;
+    level.ref_13D6A = 0;
     _tablethide::trial_ui_set_subtime(0);
-    level.ref_13d6f = 1;
-    _tablethide::trial_ui_set_stat_and_bonus_time(level.ref_13d6f, "accuracy", 0, 0);
-    level.ref_13d6f++;
+    level.ref_13D6F = 1;
+    _tablethide::trial_ui_set_stat_and_bonus_time(level.ref_13D6F, "accuracy", 0, 0);
+    level.ref_13D6F++;
 
     if(level.trial["missionScript"] != "gun_nonlinear") {
-      level.ref_13a88 = level.ref_13d6f;
-      level.ref_13d6f++;
-      _tablethide::trial_ui_set_stat_and_bonus_time(level.ref_13a88, "enemy_targets_hit_ratio", 0, 0);
+      level.ref_13A88 = level.ref_13D6F;
+      level.ref_13D6F++;
+      _tablethide::trial_ui_set_stat_and_bonus_time(level.ref_13A88, "enemy_targets_hit_ratio", 0, 0);
     }
 
     if(level.civilian_targets.size) {
-      level.hacking_vo = level.ref_13d6f;
-      level.ref_13d6f++;
+      level.hacking_vo = level.ref_13D6F;
+      level.ref_13D6F++;
       _tablethide::trial_ui_set_stat_and_bonus_time(level.hacking_vo, "civilian_targets_hit", 0, 0);
     }
 
@@ -98,15 +98,15 @@ function game_start() {
 
     level notify("course_started");
 
-    foreach(var_6 in level.ref_13d65) {
+    foreach(var_6 in level.ref_13D65) {
       var_6 setCanDamage(1);
     }
 
     level.player playSound("trial_sfx_start");
     thread tierfailure_countdown_think();
-    _tablethide::ref_13d88();
-    _tablethide::ref_13d89(0);
-    level.ref_13d6a = 1;
+    _tablethide::ref_13D88();
+    _tablethide::ref_13D89(0);
+    level.ref_13D6A = 1;
     thread accuracy_think();
     thread time_think();
     _tablethide::trial_ui_waittill_retry();
@@ -130,15 +130,15 @@ function game_end() {
         waittill_trigger_activated_or_player_death(var_0);
         break;
       case "gun_nonlinear":
-        ref_143a3();
-        thread ref_12cbc();
+        ref_143A3();
+        thread ref_12CBC();
         break;
       default:
         break;
     }
 
     level notify("course_ended");
-    _tablethide::ref_13d89(1);
+    _tablethide::ref_13D89(1);
 
     if(!level.player_died_during_course && (!level.player_best_time || level.player_best_time > level.trial_main_time)) {
       level.player_best_time = level.trial_main_time;
@@ -181,7 +181,7 @@ function game_end() {
 
     foreach(var_7 in level.course_targets) {
       var_7.activated = 0;
-      var_7 thread _stop_spawn_modules::ref_13d74("down");
+      var_7 thread _stop_spawn_modules::ref_13D74("down");
     }
 
     setomnvar("ui_trial_failed", 0);
@@ -193,10 +193,10 @@ function game_end() {
       level.player setplayermusicstate(game["music"]["trials_loss"][var_2]);
       level.player stoplocalsound("deaths_door_in");
       level.player clearsoundsubmix("deaths_door_mp");
-      thread ref_12cbc();
+      thread ref_12CBC();
     }
 
-    if(istrue(level.ref_13d6c)) {
+    if(istrue(level.ref_13D6C)) {
       wait 3;
     }
 
@@ -215,7 +215,7 @@ function waittill_trigger_activated_or_player_death() {
   level.player_died_during_course = 0;
 }
 
-function ref_143a3() {
+function ref_143A3() {
   level.player_died_during_course = 1;
   level.player endon("death");
 
@@ -238,13 +238,13 @@ function ref_143a3() {
   }
 }
 
-function ref_12cbc() {
-  level.ref_13d60 = 1;
+function ref_12CBC() {
+  level.ref_13D60 = 1;
   _tablethide::trial_ui_waittill_retry();
-  _tablethide::ref_13d5e();
+  _tablethide::ref_13D5E();
 }
 
-function ref_1382b() {
+function ref_1382B() {
   var_0 = scripts\engine\utility::getStruct("gun_course_start_icon", "targetname");
 
   if(!isDefined(var_0)) {
@@ -288,7 +288,7 @@ function spawn_first_leads_early() {
   scripts\mp\utility\outline::outlineenableforplayer(self.plate, level.player, "outlinefill_trial_target_nodepth", "level_script");
 }
 
-function ref_13daf() {
+function ref_13DAF() {
   if(!isDefined(self.target)) {
     return;
   }
@@ -358,7 +358,7 @@ function targets_missed_calculate() {
   _tablethide::trial_ui_set_objective_progress(level.enemies_killed, level.enemy_targets.size);
 
   if(level.trial["missionScript"] != "gun_nonlinear") {
-    _tablethide::trial_ui_set_stat_and_bonus_time(level.ref_13a88, "enemy_targets_hit_ratio", level.enemy_targets.size - level.enemies_missed, level.missed_time_penalty);
+    _tablethide::trial_ui_set_stat_and_bonus_time(level.ref_13A88, "enemy_targets_hit_ratio", level.enemy_targets.size - level.enemies_missed, level.missed_time_penalty);
     return;
   }
 }
@@ -409,7 +409,7 @@ function accuracy_think() {
   level.course_accuracy = 0;
 
   for(;;) {
-    level.player scripts\engine\utility::ref_143a5("weapon_fired", "fake_weapon_fired");
+    level.player scripts\engine\utility::ref_143A5("weapon_fired", "fake_weapon_fired");
     level.shots_fired++;
     var_0 = level.player getcurrentweapon();
     var_1 = weaponfiretime(var_0);
@@ -536,11 +536,11 @@ function brplayerkilledspawn() {
   }
 }
 
-function ref_13e6d() {
+function ref_13E6D() {
   self endon("death");
   level waittill("course_started");
   var_0 = scripts\mp\utility\outline::outlineenableforplayer(self, level.player, "spotter_target_killstreak", "level_script");
-  thread ref_13e6c();
+  thread ref_13E6C();
 
   while(isalive(self)) {
     waitframe();
@@ -549,7 +549,7 @@ function ref_13e6d() {
   scripts\mp\utility\outline::outlinedisable(var_0, self);
 }
 
-function ref_13e6c() {
+function ref_13E6C() {
   self endon("death");
   level waittill("course_ended");
 
@@ -560,7 +560,7 @@ function ref_13e6c() {
 }
 
 function build_vehicle_drop_off_list() {
-  level.ref_13d32 = &ref_13d33;
+  level.ref_13D32 = &ref_13D33;
 
   if(!isDefined(game["trial"]["analytics"])) {
     game["trial"]["analytics"] = [];
@@ -573,7 +573,7 @@ function build_vehicle_drop_off_list() {
   }
 }
 
-function ref_13d33() {
+function ref_13D33() {
   var_0 = level.trial["missionID"];
   var_1 = getomnvar("ui_trial_reward_tier");
   var_2 = getomnvar("ui_trial_best_time");

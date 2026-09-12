@@ -1313,7 +1313,7 @@ function dointro() {
       level.playedstartingmusic = 1;
     }
 
-    thread ref_139be(20);
+    thread ref_139BE(20);
   }
 
   if(istrue(level.infilvotiming)) {
@@ -1615,7 +1615,7 @@ function ongameended() {
     goto LOC_00000599;
 }
 
-function ref_11bdd(var_0) {
+function ref_11BDD(var_0) {
   thread stopsuspensemusic();
   var_1 = game["music"]["midpoint_winning"].size - 1;
   var_2 = game["music"]["midpoint_losing"].size - 1;
@@ -2055,7 +2055,7 @@ function stealthtimeelapsed() {
   self setplayermusicstate(game["music"]["infected"][var_1]);
 }
 
-function ref_1469b() {
+function ref_1469B() {
   if(scripts\mp\utility\game::round_vehicle_logic() != "reveal") {
     var_0 = game["music"]["br_zmb_spawn"].size;
     var_1 = randomint(var_0);
@@ -2138,7 +2138,7 @@ function suspensemusic(var_0) {
   }
 }
 
-function ref_139be(var_0) {
+function ref_139BE(var_0) {
   wait var_0;
   self.nosuspensemusic = undefined;
 }
@@ -2378,7 +2378,7 @@ function debugtype() {
   level endon("game_ended");
   level endon("final_circle_music");
 
-  if(istrue(level.ref_11e96)) {
+  if(istrue(level.ref_11E96)) {
     return;
   }
 
@@ -2487,7 +2487,7 @@ function defcon_alarms_stop() {
   level endon("game_ended");
   level endon("final_circle_music");
 
-  if(istrue(level.ref_11e96)) {
+  if(istrue(level.ref_11E96)) {
     return;
   }
 
@@ -2607,14 +2607,14 @@ function decrement_num_of_frame_frozen(var_0) {
   }
 }
 
-function ref_127a8() {
+function ref_127A8() {
   level notify("stop_suspense_music");
 }
 
-function ref_127a9() {
+function ref_127A9() {
   level endon("fiftypercent_music");
 
-  if(isDefined(level.ref_13b31) && level.ref_13b31 == 1) {
+  if(isDefined(level.ref_13B31) && level.ref_13B31 == 1) {
     return;
   }
 
@@ -2625,10 +2625,10 @@ function ref_127a9() {
   level notify("stop_suspense_music");
   var_0 = risk_flagspawnshiftingcenter("plunder_tenpercent");
   setmusicstate(var_0);
-  level.ref_13b31 = 1;
+  level.ref_13B31 = 1;
 }
 
-function ref_1278b(var_0) {
+function ref_1278B(var_0) {
   level endon("seventyfivepercent_music");
 
   if(isDefined(level.play_hack_reminder_goto1) && level.play_hack_reminder_goto1 == 1) {
@@ -2645,10 +2645,10 @@ function ref_1278b(var_0) {
   level notify("fiftypercent_music");
 }
 
-function ref_127a7(var_0) {
+function ref_127A7(var_0) {
   level endon("ninetypercent_music");
 
-  if(isDefined(level.ref_1328e) && level.ref_1328e == 1) {
+  if(isDefined(level.ref_1328E) && level.ref_1328E == 1) {
     return;
   }
 
@@ -2658,12 +2658,12 @@ function ref_127a7(var_0) {
 
   var_1 = risk_flagspawnshiftingcenter("plunder_fiftypercent");
   setmusicstate(var_1);
-  level.ref_1328e = 1;
+  level.ref_1328E = 1;
   level notify("seventyfivepercent_music");
 }
 
 function ref_12791(var_0) {
-  if(isDefined(level.ref_11e8b) && level.ref_11e8b == 1) {
+  if(isDefined(level.ref_11E8B) && level.ref_11E8B == 1) {
     return;
   }
 
@@ -2673,7 +2673,7 @@ function ref_12791(var_0) {
 
   var_1 = risk_flagspawnshiftingcenter("plunder_seventyfivepercent");
   setmusicstate(var_1);
-  level.ref_11e8b = 1;
+  level.ref_11E8B = 1;
   level notify("ninetypercent_music");
 }
 

@@ -85,8 +85,8 @@ function gettargetmarker(var_0, var_1) {
       var_11 = vectordot(var_10, anglesToForward(var_9.angles));
       var_12 = -1 * vectordot(var_10, anglestoright(var_9.angles));
       var_13 = vectordot(var_10, anglestoup(var_9.angles));
-      var_3.ref_11dbe = (var_11, var_12, var_13);
-      var_3.ref_11dbd = combineangles(invertangles(var_9.angles), var_3.angles);
+      var_3.ref_11DBE = (var_11, var_12, var_13);
+      var_3.ref_11DBD = combineangles(invertangles(var_9.angles), var_3.angles);
     }
 
     var_3.visual = spawn("script_model", var_3.location + var_3.fxoffset);

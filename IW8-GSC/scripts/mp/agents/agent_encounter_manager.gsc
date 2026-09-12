@@ -97,7 +97,7 @@ function register_agent_class(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_0)) {
     var_5 = spawnStruct();
     var_5.type = scripts\engine\utility::ter_op(isDefined(var_1), var_1, "actor_enemy_lw_br");
-    var_5.ref_1404d = scripts\engine\utility::ter_op(isDefined(var_2), var_2, 0);
+    var_5.ref_1404D = scripts\engine\utility::ter_op(isDefined(var_2), var_2, 0);
     var_5.loot_table_key = scripts\engine\utility::ter_op(isDefined(var_3), var_3, "agent_encounter_manager_default");
     var_5.loot_drop_count = scripts\engine\utility::ter_op(isDefined(var_4), var_4, 1);
     level.ai_encounter_manager.agent_classes[var_0] = var_5;
@@ -268,9 +268,9 @@ function spawn_agent(var_0, var_1, var_2, var_3, var_4) {
   var_5 = undefined;
 
   if(var_3 && isDefined(level.fnbrsoldierparachutespawn)) {
-    var_5 = _testing_ending::spawnnewparachuteagent(var_0, var_1, var_2.ref_1404d, var_2.type, var_4);
+    var_5 = _testing_ending::spawnnewparachuteagent(var_0, var_1, var_2.ref_1404D, var_2.type, var_4);
   } else {
-    var_5 = _testing_ending::spawnnewagent(var_0, var_1, var_2.ref_1404d, var_2.type, var_4);
+    var_5 = _testing_ending::spawnnewagent(var_0, var_1, var_2.ref_1404D, var_2.type, var_4);
   }
 
   if(isDefined(var_5)) {}

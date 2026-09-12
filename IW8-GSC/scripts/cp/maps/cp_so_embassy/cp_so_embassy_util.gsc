@@ -3,7 +3,7 @@
  * Script: scripts\cp\maps\cp_so_embassy\cp_so_embassy_util.gsc
 ****************************************************************/
 
-function ref_11a9a(var_0, var_1) {
+function ref_11A9A(var_0, var_1) {
   if(!isDefined(self.origin)) {
     return;
   }
@@ -63,7 +63,7 @@ function weapon_xp_iw8_sm_papa90(var_0) {
 
 function weapon_xp_iw8_sm_augolf(var_0) {
   level endon("stop_care_packages");
-  level.ref_12db9 = var_0;
+  level.ref_12DB9 = var_0;
   var_1 = int(tablelookupbyrow("scripts/cp/maps/cp_so_embassy/cp_so_embassy_killstreaks.csv", var_0, level.players.size));
   wait 2;
 
@@ -92,7 +92,7 @@ function weapon_xp_iw8_sm_augolf(var_0) {
     var_9 = var_5.origin;
     var_9 = getclosestmatchingmasterlootnode(var_2, var_9, var_3);
     var_5.should_take_damage_from_trigger_hurt = 1;
-    var_10 = tablelookupbyrow("scripts/cp/maps/cp_so_embassy/cp_so_embassy_killstreaks.csv", level.ref_12db9, 5);
+    var_10 = tablelookupbyrow("scripts/cp/maps/cp_so_embassy/cp_so_embassy_killstreaks.csv", level.ref_12DB9, 5);
     var_10 = strtok(var_10, " ");
     var_11 = scripts\engine\utility::random(var_10);
 
@@ -244,7 +244,7 @@ function start_end_breach_fx(var_0, var_1) {
   var_1 thread scripts\mp\trials\trial_pitcher::firemanager();
 }
 
-function ref_134ed(var_0, var_1, var_2) {
+function ref_134ED(var_0, var_1, var_2) {
   while(scripts\engine\utility::flag("spawning_in_progress")) {
     wait 0.1;
   }
@@ -263,7 +263,7 @@ function ref_134ed(var_0, var_1, var_2) {
   }
 
   if(!isDefined(var_1)) {
-    var_1 = ref_130a1();
+    var_1 = ref_130A1();
   }
 
   var_5 = 0;
@@ -274,7 +274,7 @@ function ref_134ed(var_0, var_1, var_2) {
       var_3 = scripts\engine\utility::array_reverse(var_3);
     }
 
-    while(scripts\engine\utility::flag("pause_mission_spawning") || getaiarray("axis").size >= ref_130a1() || getaiarray().size > 37) {
+    while(scripts\engine\utility::flag("pause_mission_spawning") || getaiarray("axis").size >= ref_130A1() || getaiarray().size > 37) {
       wait 0.2;
     }
 
@@ -326,7 +326,7 @@ function ref_134ed(var_0, var_1, var_2) {
   return var_4;
 }
 
-function ref_134f0(var_0) {
+function ref_134F0(var_0) {
   var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
 
   if(!isDefined(var_1) || getaiarray().size > 40) {
@@ -349,23 +349,23 @@ function ref_134f0(var_0) {
   return var_2;
 }
 
-function ref_1352b(var_0, var_1, var_2, var_3, var_4) {
+function ref_1352B(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_2)) {
     var_2 = (0, 0, 0);
   }
 
-  var_5 = scripts\cp\laser_traps\cp_laser_traps::ref_134f1(var_0, var_1, var_2, var_4, var_3);
+  var_5 = scripts\cp\laser_traps\cp_laser_traps::ref_134F1(var_0, var_1, var_2, var_4, var_3);
   var_5 scripts\engine\utility::set_movement_speed(300);
   var_5.goalheight = 30;
   waitframe();
   return var_5;
 }
 
-function ref_1352c(var_0, var_1, var_2, var_3) {
+function ref_1352C(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
   foreach(var_6 in var_1) {
-    var_7 = scripts\cp\laser_traps\cp_laser_traps::ref_134f1(var_0, var_6[0], var_6[1], var_3, var_2);
+    var_7 = scripts\cp\laser_traps\cp_laser_traps::ref_134F1(var_0, var_6[0], var_6[1], var_3, var_2);
     var_7 scripts\engine\utility::set_movement_speed(300);
     var_7.goalheight = 30;
     var_4 = var_7;
@@ -381,7 +381,7 @@ function set_start_pos(var_0) {
   }
 }
 
-function ref_124a6() {
+function ref_124A6() {
   scripts\cp\gametypes\cp_specops::givedefaultloadout();
   var_0 = "iw8_sm_mpapa7";
   var_1 = ["laserirsmg", "thermal_west01", "gripangpro", "linearbrakesmg", "compsmg", "muzzlemelee01", "muzzlemelee02", "brakesmg", "pistolgrip01_mpapa7"];
@@ -534,7 +534,7 @@ function movespeed_set_func(var_0, var_1) {
   self setmovespeedscale(self.movespeedscale);
 }
 
-function ref_1247b(var_0) {}
+function ref_1247B(var_0) {}
 
 function rundebugstartobjective(var_0) {
   wait 2;
@@ -635,8 +635,8 @@ function laser_control_station_use_monitor() {
   scripts\engine\utility::deletestructarray_ref(var_0);
 }
 
-function ref_134eb(var_0, var_1, var_2) {
-  var_3 = scripts\cp\laser_traps\cp_laser_traps::ref_134f1(var_0, var_1.origin, var_1.angles);
+function ref_134EB(var_0, var_1, var_2) {
+  var_3 = scripts\cp\laser_traps\cp_laser_traps::ref_134F1(var_0, var_1.origin, var_1.angles);
 
   if(!isDefined(var_2)) {
     var_2 = 0;
@@ -651,7 +651,7 @@ function propchange(var_0) {
   GscBinSkip1(0x45, 1, 0);
 }
 
-function ref_130a1() {
+function ref_130A1() {
   GscBinSkip1(0x45, 1, 0);
 }
 
@@ -696,13 +696,13 @@ function brevent1playervalid(var_0, var_1, var_2) {
 }
 
 function ref_12758(var_0) {
-  if(!isDefined(level.ref_121a7)) {
-    level.ref_121a7 = spawn("script_origin", (0, 0, 0));
+  if(!isDefined(level.ref_121A7)) {
+    level.ref_121A7 = spawn("script_origin", (0, 0, 0));
   }
 
-  level.ref_121a7 stopsounds();
+  level.ref_121A7 stopsounds();
   var_1 = lookupsoundlength(var_0) * 0.001;
-  level.ref_121a7 playSound(var_0);
+  level.ref_121A7 playSound(var_0);
   wait var_1;
 }
 
@@ -734,7 +734,7 @@ function getdefaultstreamhinttimeoutms() {
   return self.inlaststand;
 }
 
-function ref_1238d(var_0, var_1, var_2, var_3, var_4) {
+function ref_1238D(var_0, var_1, var_2, var_3, var_4) {
   for(;;) {
     wait 0.5;
 

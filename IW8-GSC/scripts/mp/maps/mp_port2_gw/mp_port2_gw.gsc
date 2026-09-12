@@ -18,7 +18,7 @@ function main() {
       setDvar("scr_localeID", 3);
     }
 
-    thread ref_12e15();
+    thread ref_12E15();
     scripts\mp\gametypes\arm::arm_initoutofbounds();
   } else {
     level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
@@ -36,12 +36,12 @@ function main() {
   game["axis_outfit"] = "woodland";
   level.music_style = "eastern_europe";
   thread runmisteffects();
-  thread ref_145f0();
+  thread ref_145F0();
   thread player_fired_gun_monitor();
   thread setlowermessageomnvarref((38149, -15989, -710), 256, 32);
   thread setlowermessageomnvarref((33872, -30160, -1200), 7700, 480);
   thread setlowermessageomnvarref((36736, -17544, -1200), 7480, 480);
-  thread ref_12f8e();
+  thread ref_12F8E();
 }
 
 function runmisteffects() {
@@ -53,14 +53,14 @@ function runmisteffects() {
   GscBinSkip0(0x2e, 0, (33447, 18127, 340));
 }
 
-function ref_12e15() {
+function ref_12E15() {
   wait 15;
-  thread ref_12e14();
-  thread ref_12e13();
-  thread ref_12e12();
+  thread ref_12E14();
+  thread ref_12E13();
+  thread ref_12E12();
 }
 
-function ref_12e11() {
+function ref_12E11() {
   level.weapons_that_can_stun = [];
   level.weapons_that_can_stun[0] = (50804, 6322, 317);
   level.weapons_that_can_stun[1] = (50861, -32721, 1312);
@@ -84,16 +84,16 @@ function ref_12e11() {
   }
 }
 
-function ref_12e14() {
+function ref_12E14() {
   var_0 = [];
   GscBinSkip0(0x2e, 0, (15522, -28390, 19));
 }
 
-function ref_12e12() {
+function ref_12E12() {
   playFX(scripts\engine\utility::getfx("vfx_gw_ambient_planes"), (26974, 8140, 40), (9, 286, 0));
 }
 
-function ref_12e13() {
+function ref_12E13() {
   level.weaponstocycle = [];
   level.setallclientomnvarot[0] = (53880, -13100, -300);
   level.setallclientomnvarot[1] = (23702, -1605, -300);
@@ -112,7 +112,7 @@ function player_fired_gun_monitor() {
   var_0.angles = (270, 358, -132);
 }
 
-function ref_145f0() {
+function ref_145F0() {
   var_0 = getdvarint("gw_gas_circle_size", 0);
   wait 3;
 
@@ -146,7 +146,7 @@ function setlowermessageomnvarref(var_0, var_1, var_2) {
   }
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {

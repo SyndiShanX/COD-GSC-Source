@@ -4,7 +4,7 @@
 ********************************************************/
 
 function init() {
-  level.ref_12cb9 = spawnStruct();
+  level.ref_12CB9 = spawnStruct();
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("plunderSites");
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("firstCircleVo");
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("giveStartFieldUpgrade");
@@ -22,10 +22,10 @@ function ref_12800() {
   wait var_1;
 
   foreach(var_3 in level.players) {
-    if(istrue(level.br_pickups.ref_12cb5) && var_3 scripts\mp\gametypes\br_public::hasrespawntoken() && var_0 > 0) {
+    if(istrue(level.br_pickups.ref_12CB5) && var_3 scripts\mp\gametypes\br_public::hasrespawntoken() && var_0 > 0) {
       var_3 scripts\mp\gametypes\br_pickups::removerespawntoken();
       var_3 scripts\mp\gametypes\br_plunder::ref_12627(var_0);
-      var_3 scripts\mp\utility\lower_message::ref_1316e("br_redeploy_conversion", undefined, 5);
+      var_3 scripts\mp\utility\lower_message::ref_1316E("br_redeploy_conversion", undefined, 5);
     }
   }
 }
@@ -39,16 +39,16 @@ function groundz() {
 
   switch (getdvarint("scr_respect_circle_speed", 0)) {
     case 0:
-      level.ref_12cb9.groundentity = [30, 30];
-      level.ref_12cb9.ground_spawners = [var_0, var_1];
+      level.ref_12CB9.groundentity = [30, 30];
+      level.ref_12CB9.ground_spawners = [var_0, var_1];
       level.br_level.default_player_connect_black_screen = [0, 0];
       level.br_level.default_suicidebomber_combat = [0, 0];
       level.br_level.br_circleradii = [75000, var_2, 0];
       level.br_level.br_circleminimapradii = [9000, 5500];
       break;
     case 1:
-      level.ref_12cb9.groundentity = [60];
-      level.ref_12cb9.ground_spawners = [var_0];
+      level.ref_12CB9.groundentity = [60];
+      level.ref_12CB9.ground_spawners = [var_0];
       level.br_level.default_player_connect_black_screen = [0];
       level.br_level.default_suicidebomber_combat = [0];
       level.br_level.br_circleradii = [75000, 0];
@@ -56,11 +56,11 @@ function groundz() {
       break;
   }
 
-  level.br_level.br_circledelaytimes = level.ref_12cb9.groundentity;
-  level.br_level.br_circleclosetimes = level.ref_12cb9.ground_spawners;
+  level.br_level.br_circledelaytimes = level.ref_12CB9.groundentity;
+  level.br_level.br_circleclosetimes = level.ref_12CB9.ground_spawners;
 }
 
-function ref_12cba(var_0) {
+function ref_12CBA(var_0) {
   if(getdvarint("scr_respect_kill_logic_enabled", 0) == 0) {
     return;
   }

@@ -9,9 +9,9 @@ function start_coop_push(var_0) {
   level.bomb_defusal_success_func = &blockade_bomb_defusal_success_func;
   level.process_entities_inside_subway_car = &computermakingnose;
   level.open_trap_room_door = &cp_arms_dealer_sound_load;
-  level.unloading_func["mindia8"] = &scripts\cp\raid_utility::ref_129e7;
-  level.unloading_func["vindia_a2"] = &ref_129ed;
-  level.unloading_func["umike_covered_physics"] = &ref_129ec;
+  level.unloading_func["mindia8"] = &scripts\cp\raid_utility::ref_129E7;
+  level.unloading_func["vindia_a2"] = &ref_129ED;
+  level.unloading_func["umike_covered_physics"] = &ref_129EC;
   scripts\cp\cp_modular_spawning::register_aitype_setup("sniper", "actor_enemy_cp_rus_desert_sniper", undefined, undefined);
   scripts\cp\cp_modular_spawning::register_aitype_setup("rpg_helmet", "actor_enemy_cp_alq_desert_rpg_helmet", undefined, undefined);
   setDvar("bg_pathFollowerMinLookaheadDist", 0);
@@ -34,7 +34,7 @@ function start_coop_push(var_0) {
   thread player_progress_market_think();
 
   if(true) {
-    level thread scripts\asm\soldier\ground_turret::survival_ai_manager(&ref_11aba);
+    level thread scripts\asm\soldier\ground_turret::survival_ai_manager(&ref_11ABA);
     level.sentrysettings["manned_turret"].overheattime = 6;
     level.sentrysettings["manned_turret"].cooldowntime = 0.75;
     level.sentrysettings["manned_turret"].burstmin = 60;
@@ -51,7 +51,7 @@ function start_coop_push(var_0) {
   scripts\cp\cp_create_script_utility::cleanup_cs_file_objects("coop_push_cs");
 }
 
-function ref_11aba() {
+function ref_11ABA() {
   thread scripts\asm\soldier\ground_turret::lockscriptabledoors(1);
 }
 
@@ -105,7 +105,7 @@ function start_vehicle_push_sequence() {
 
 function blockade_bomb_defusal_success_func() {
   level thread scripts\cp\bomb_defusal\coop_bomb_defusal::playerpowerscleanuphud();
-  ref_138c3();
+  ref_138C3();
   wait 1.5;
   asm_animhasfacialoverridemp();
 }
@@ -153,11 +153,11 @@ function set_up_bomb_model_marker(var_0) {
 }
 
 function activate_bomb_interactions(var_0, var_1) {
-  var_2 = ref_11a90(var_0);
+  var_2 = ref_11A90(var_0);
   thread ref_12398(var_2, var_2);
 }
 
-function ref_11a90(var_0) {
+function ref_11A90(var_0) {
   var_1 = var_0.bomb_model.origin;
   var_2 = spawn("script_model", var_1);
   var_2 setModel("tag_origin");
@@ -206,7 +206,7 @@ function asm_animhasfacialoverridemp() {
 }
 
 function forbiddencachespawns(var_0) {
-  var_1 = ref_11a78(var_0.c4);
+  var_1 = ref_11A78(var_0.c4);
 
   for(;;) {
     var_1 waittill("trigger", var_2);
@@ -226,7 +226,7 @@ function forbiddencachespawns(var_0) {
   var_1 delete();
 }
 
-function ref_11a78(var_0) {
+function ref_11A78(var_0) {
   var_1 = var_0.origin + anglestoup(var_0.angles) * 1;
   var_2 = spawn("script_model", var_1);
   var_2 setModel("tag_origin");
@@ -362,7 +362,7 @@ function continue_to_push_monitor(var_0) {
 
 function player_mover_clean_up_monitor(var_0, var_1) {
   var_1 endon("death");
-  var_0 scripts\engine\utility::ref_143ad("disconnect", "last_stand");
+  var_0 scripts\engine\utility::ref_143AD("disconnect", "last_stand");
   var_1 delete();
 }
 
@@ -959,11 +959,11 @@ function set_up_modular_spawning() {
 }
 
 function cp_donetsk_spawning() {
-  scripts\cp\cp_modular_spawning::registerambientgroup("left_enemy_turret", 1, 1, 999999, [ &ref_143ce, 1, 10, 20], undefined, &select_left_turret_spawners, undefined, undefined, undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("right_enemy_turret", 1, 1, 999999, [ &ref_143ce, 1, 10, 20], undefined, &select_right_turret_spawners, undefined, undefined, undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("middle_enemy_turret", 1, 1, 999999, [ &ref_143ce, 1, 7, 15], undefined, &select_middle_turret_spawners, undefined, undefined, undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("enemy_mortar", 1, 1, 999999, [ &ref_143ce, 1, 25, 35], undefined, &select_mortar_spawners, undefined, undefined, undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("enemy_sniper", 1, &get_enemy_sniper_max_spawn, 999999, [ &ref_143ce, &get_enemy_sniper_max_spawn, 15, 25], undefined, &select_enemy_sniper_spawners, undefined, undefined, undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("left_enemy_turret", 1, 1, 999999, [ &ref_143CE, 1, 10, 20], undefined, &select_left_turret_spawners, undefined, undefined, undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("right_enemy_turret", 1, 1, 999999, [ &ref_143CE, 1, 10, 20], undefined, &select_right_turret_spawners, undefined, undefined, undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("middle_enemy_turret", 1, 1, 999999, [ &ref_143CE, 1, 7, 15], undefined, &select_middle_turret_spawners, undefined, undefined, undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("enemy_mortar", 1, 1, 999999, [ &ref_143CE, 1, 25, 35], undefined, &select_mortar_spawners, undefined, undefined, undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("enemy_sniper", 1, &get_enemy_sniper_max_spawn, 999999, [ &ref_143CE, &get_enemy_sniper_max_spawn, 15, 25], undefined, &select_enemy_sniper_spawners, undefined, undefined, undefined);
   scripts\cp\cp_modular_spawning::registerambientgroup("bomb_guardian", 1, 1, 1, 0.05, 0, "bomb_guardian_spawner", undefined, undefined, undefined);
   scripts\cp\cp_modular_spawning::registerambientgroup("player_right_side", 2, 6, 6, 1, [ &wait_all_spawns_dead_and_time, 20, 35, "all_group_spawns_dead"], "player_right_side_spawner", &increase_script_maxdist, "player_right_side", undefined);
   scripts\cp\cp_modular_spawning::registerambientgroup("player_left_side", 2, 6, 6, 1, [ &wait_all_spawns_dead_and_time, 20, 35, "all_group_spawns_dead"], "player_left_side_spawner", &increase_script_maxdist, "player_left_side", undefined);
@@ -993,7 +993,7 @@ function cp_donetsk_spawning() {
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("end_bridge_stair", &bridge_stair_up_enemy);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("enemy_mortar", &enemy_mortar_think);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("under_bridge", &underbridge_enemy_monitor);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("under_bridge_reinforce", &ref_13f04);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("under_bridge_reinforce", &ref_13F04);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("enemy_right", &nocrouch);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("enemy_left", &nextswitch);
   scripts\cp\cp_spawning_util::register_module_for_spawn_owner_disables("enemy_right");
@@ -1065,19 +1065,19 @@ function shrink_poi() {
   for(;;) {
     level waittill("laststand_dogtag_spawned", var_0);
     var_1 = var_0.owner;
-    thread ref_12d12(var_1);
+    thread ref_12D12(var_1);
 
     if(triggerremoveobjectivetext(var_0)) {
       if(!buy_points()) {
         scripts\engine\utility::flag_set("heavy_enemy_spawning_paused");
-        thread ref_124de();
+        thread ref_124DE();
         scripts\engine\utility::flag_waitopen("heavy_enemy_spawning_paused");
       }
     }
   }
 }
 
-function ref_124de() {
+function ref_124DE() {
   level endon("game_ended");
   level endon("blockade_sequence_successful");
   level endon("heavy_enemy_spawning_paused");
@@ -1085,9 +1085,9 @@ function ref_124de() {
   scripts\engine\utility::flag_clear("heavy_enemy_spawning_paused");
 }
 
-function ref_12d12(var_0) {
+function ref_12D12(var_0) {
   var_1 = 20;
-  var_2 = var_0 scripts\engine\utility::ref_143ad("revive", "disconnect");
+  var_2 = var_0 scripts\engine\utility::ref_143AD("revive", "disconnect");
 
   if(var_2 == "revive") {
     wait var_1;
@@ -1189,7 +1189,7 @@ function underbridge_enemy_monitor(var_0) {
   thread underbridge_enemy_death_monitor(var_1);
 }
 
-function ref_13f04(var_0) {
+function ref_13F04(var_0) {
   var_1 = self;
   c4vehiclecooperator(var_1);
 }
@@ -1386,7 +1386,7 @@ function wait_all_spawns_dead(var_0, var_1, var_2, var_3) {
   var_0 waittill("all_group_spawns_dead");
 }
 
-function ref_143ce(var_0, var_1, var_2, var_3) {
+function ref_143CE(var_0, var_1, var_2, var_3) {
   var_0 endon("death");
 
   if(isbuiltinfunction(var_1)) {
@@ -1563,7 +1563,7 @@ function activate_mortar_enemy(var_0) {
 
 function delay_activate_laser(var_0) {
   var_0 endon("death");
-  var_0 scripts\engine\utility::ref_143a5("goal", "goal_reached");
+  var_0 scripts\engine\utility::ref_143A5("goal", "goal_reached");
   var_0.gunposeoverride = "ads";
   thread sniper_player_monitor(var_0);
   thread sniper_target_think(var_0);
@@ -1661,7 +1661,7 @@ function sniper_target_think(var_0) {
 
       mark_player_as_sniper_target(var_0, var_3);
       thread sniper_death_monitor(var_3, var_3);
-      var_8 = var_3 scripts\engine\utility::ref_143b9(randomfloatrange(1.5, 2), "last_stand");
+      var_8 = var_3 scripts\engine\utility::ref_143B9(randomfloatrange(1.5, 2), "last_stand");
 
       if(var_8 == "last_stand") {
         unmark_player_as_sniper_target(var_3);
@@ -1774,33 +1774,33 @@ function sniper_laser_think(var_0) {
 
 function waittill_any_return_no_endon_death_2(var_0) {
   var_0 endon("death");
-  ref_13e50(var_0);
+  ref_13E50(var_0);
 
   for(;;) {
-    if(!ref_1343b(var_0) && ref_1343c(var_0)) {
-      ref_13e50(var_0);
-    } else if(ref_1343b(var_0) && !ref_1343c(var_0)) {
-      ref_13e43(var_0);
+    if(!ref_1343B(var_0) && ref_1343C(var_0)) {
+      ref_13E50(var_0);
+    } else if(ref_1343B(var_0) && !ref_1343C(var_0)) {
+      ref_13E43(var_0);
     }
 
     waitframe();
   }
 }
 
-function ref_13e50(var_0) {
+function ref_13E50(var_0) {
   var_1 = playfxontagsbetweenclients(level._effect["sniper_red_laser"], var_0.laser_start_ent, "tag_origin", var_0.laser_end_ent, "tag_origin");
-  var_0.ref_1343d = var_1;
+  var_0.ref_1343D = var_1;
 }
 
-function ref_13e43(var_0) {
-  var_0.ref_1343d delete();
+function ref_13E43(var_0) {
+  var_0.ref_1343D delete();
 }
 
-function ref_1343b(var_0) {
-  return isDefined(var_0.ref_1343d);
+function ref_1343B(var_0) {
+  return isDefined(var_0.ref_1343D);
 }
 
-function ref_1343c(var_0) {
+function ref_1343C(var_0) {
   var_1 = 0.5;
   var_2 = anglesToForward(var_0 getplayerangles());
   var_3 = vectorNormalize(var_0.laser_end_ent.origin - var_0.laser_start_ent.origin);
@@ -1995,10 +1995,10 @@ function bomb_guardian_death_watcher_internal(var_0) {
 }
 
 function turret_enemy_watcher(var_0) {
-  thread ref_13e67(var_0);
+  thread ref_13E67(var_0);
 }
 
-function ref_13e67(var_0) {
+function ref_13E67(var_0) {
   var_1 = self;
   wait 0.05;
   var_1 notify("basic_combat");
@@ -2055,7 +2055,7 @@ function mortar_enemy_death_watcher(var_0, var_1) {
 function activate_enemy_turret_when_reach_it(var_0) {
   var_0 endon("death");
   level endon("post_blockade_combat");
-  var_0 scripts\engine\utility::ref_143a5("goal", "goal_reached");
+  var_0 scripts\engine\utility::ref_143A5("goal", "goal_reached");
   var_1 = scripts\engine\utility::getclosest(var_0.origin, level.enemy_turrets);
   activate_enemy_turret(var_1);
   var_0 allowedstances("stand");
@@ -2170,12 +2170,12 @@ function infil_enemy_combat_logic(var_0, var_1) {
     var_0 forceteleport(var_2, var_0.angles, 256);
   }
 
-  thread ref_11e5e(level, var_0.origin, var_0.angles);
+  thread ref_11E5E(level, var_0.origin, var_0.angles);
   var_0.nocorpse = 1;
   var_0 dodamage(var_0.health + 1000, var_0.origin, var_0, var_0, "MOD_SUICIDE");
 }
 
-function ref_11e5e(var_0, var_1, var_2) {
+function ref_11E5E(var_0, var_1, var_2) {
   var_3 = spawnStruct();
   var_3.origin = var_0;
   var_3.angles = var_1;
@@ -2185,7 +2185,7 @@ function ref_11e5e(var_0, var_1, var_2) {
   var_4 endon("death");
 
   if(scripts\engine\utility::flag("post_blockade_combat")) {
-    thread ref_127f2(var_4);
+    thread ref_127F2(var_4);
     return;
   }
 
@@ -2836,11 +2836,11 @@ function brdisablefinalkillcam() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    thread ref_127f2(var_2);
+    thread ref_127F2(var_2);
   }
 }
 
-function ref_127f2(var_0) {
+function ref_127F2(var_0) {
   var_0 notify("post_blockade_combat_logic");
   var_0 endon("death");
   var_0 endon("post_blockade_combat_logic");
@@ -2882,13 +2882,13 @@ function set_up_blockade_gates() {
     scripts\engine\utility::flag_init("blockade_gates_have_been_set_up");
   }
 
-  ref_130ff();
+  ref_130FF();
   scripts\engine\utility::flag_set("blockade_gates_have_been_set_up");
 }
 
 #using_animtree("");
 
-function ref_130ff() {
+function ref_130FF() {
   laser_switch_manager("gate_door_left");
   laser_switch_manager("gate_door_right");
   laser_switch_manager("gate_post");
@@ -3109,14 +3109,14 @@ function hide_enemy_mortar_shell() {
 
 function vehicle_bridge_stage_five_music() {}
 
-function ref_129ed() {
+function ref_129ED() {
   self endon("death");
   var_0 = self;
   var_1 = scripts\engine\utility::getStructArray(get_smoke_grenade_struct_targetname(var_0), "targetname");
   deploy_smoke_grenades_for_infil_via_structs(var_0, var_1, ["turret_hatch_jnt"], [(0, 0, 15)]);
 }
 
-function ref_129ec() {
+function ref_129EC() {
   self endon("death");
   var_0 = self;
   var_1 = scripts\engine\utility::getStructArray(get_smoke_grenade_struct_targetname(var_0), "targetname");
@@ -3174,7 +3174,7 @@ function watchgastrapdamage(var_0, var_1) {
   var_0.spawn_riders_and_play_intro_idle_anim = ["clockwise", "counterclockwise"];
 
   for(;;) {
-    var_2 = var_0 scripts\engine\utility::ref_143b5("hover_attack", "increase_accuracy", "hover_retreat");
+    var_2 = var_0 scripts\engine\utility::ref_143B5("hover_attack", "increase_accuracy", "hover_retreat");
 
     switch (var_2) {
       case "hover_retreat":
@@ -3203,7 +3203,7 @@ function watchgastrapdamage(var_0, var_1) {
   }
 }
 
-function ref_12ff5(var_0) {
+function ref_12FF5(var_0) {
   var_1 = scripts\engine\utility::getclosest(var_0.origin, level.players);
   var_2 = scripts\cp\raid_utility::get_players_not_in_laststand();
 
@@ -3218,7 +3218,7 @@ function ref_12ff5(var_0) {
   return var_1.origin + (0, 0, 756);
 }
 
-function ref_12ff6(var_0) {
+function ref_12FF6(var_0) {
   var_1 = level.vehicle_to_push;
   var_2 = scripts\cp\raid_utility::get_players_not_in_laststand();
 
@@ -3233,7 +3233,7 @@ function ref_12ff6(var_0) {
   return var_1.origin + (0, 0, 756);
 }
 
-function ref_12ff7(var_0) {
+function ref_12FF7(var_0) {
   var_1 = scripts\engine\utility::getStruct("lbravo_carrier_back_center", "targetname");
   var_2 = var_1;
   var_3 = scripts\cp\raid_utility::get_players_not_in_laststand();
@@ -3257,13 +3257,13 @@ function race_ui_add_critical_message() {
 function player_vo_confirm_pickup(var_0) {
   var_1 = rebirthloadout(var_0);
   var_2 = (var_0.origin + var_1.origin) / 2;
-  var_3 = ref_11a81(var_2, var_0.angles, 256, 1, 55);
+  var_3 = ref_11A81(var_2, var_0.angles, 256, 1, 55);
   var_0 thread scripts\common\vehicle_paths::vehicle_paths_helicopter(var_3);
-  var_0 scripts\engine\utility::ref_143a5("near_goal", "goal");
+  var_0 scripts\engine\utility::ref_143A5("near_goal", "goal");
   return var_1;
 }
 
-function ref_11a81(var_0, var_1, var_2, var_3, var_4) {
+function ref_11A81(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnStruct();
   var_5.origin = var_0;
   var_5.angles = var_1;
@@ -3305,17 +3305,17 @@ function watchheatreduction(var_0, var_1) {
 
 function getdismembermentlist(var_0) {
   if(!c130_lights(var_0, [2, 3, 4])) {
-    ref_12bd4(var_0, "counterclockwise");
+    ref_12BD4(var_0, "counterclockwise");
     return;
   }
 
   if(!c130_lights(var_0, [5, 6, 7])) {
-    ref_12bd4(var_0, "clockwise");
+    ref_12BD4(var_0, "clockwise");
     return;
   }
 }
 
-function ref_12bd4(var_0, var_1) {
+function ref_12BD4(var_0, var_1) {
   var_0.spawn_riders_and_play_intro_idle_anim = scripts\engine\utility::array_remove(var_0.spawn_riders_and_play_intro_idle_anim, var_1);
 
   if(isDefined(var_0.spawn_removefromarrays) && var_0.spawn_removefromarrays == var_1) {
@@ -3324,7 +3324,7 @@ function ref_12bd4(var_0, var_1) {
   }
 }
 
-function ref_13b6f(var_0) {
+function ref_13B6F(var_0) {
   wait 10 + var_0.vehicle_position * 2;
   var_0 dodamage(var_0.health + 100, var_0.origin);
 }
@@ -3364,7 +3364,7 @@ function init_civs(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   for(var_12 = 1; var_12 <= var_7; var_12++) {
     var_13 = var_10 + (0, var_9 * var_12, 0);
-    var_14 = ref_11a8e(var_0, var_13, var_2, var_3, var_4, var_5, var_6);
+    var_14 = ref_11A8E(var_0, var_13, var_2, var_3, var_4, var_5, var_6);
 
     if(var_12 == var_7) {
       var_14.script_noteworthy = "hover_attack";
@@ -3386,7 +3386,7 @@ function hostage_vo(var_0) {
   }
 }
 
-function ref_11a8e(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_11A8E(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = spawnStruct();
   var_7.origin = var_0 + anglesToForward(var_1) * var_2;
   var_7.radius = var_3;
@@ -3502,7 +3502,7 @@ function associate_digit_display_model() {
   level thread scripts\cp\bomb_defusal\coop_bomb_defusal::bombs_explode();
 }
 
-function ref_138c3() {
+function ref_138C3() {
   level notify("stop_pressure_sensor_monitor");
   var_0 = getEnt("blockade_bridge_pressure_sensor_trigger", "targetname");
   var_0 delete();
@@ -3559,7 +3559,7 @@ function computer_interface_think_internal() {
   }
 
   foreach(var_2 in var_0) {
-    thread scripts\cp\raid_utility::ref_130a9(var_2);
+    thread scripts\cp\raid_utility::ref_130A9(var_2);
   }
 }
 
@@ -3671,7 +3671,7 @@ function landmine_run_on_player(var_0) {
     var_0 notify("force_bleed_out");
   }
 
-  var_0 scripts\engine\utility::ref_143b9(1, "death");
+  var_0 scripts\engine\utility::ref_143B9(1, "death");
   var_0.shouldskipdeathsshield = undefined;
   var_0.landmine_active = 0;
   var_0.shouldskiplaststand = 0;

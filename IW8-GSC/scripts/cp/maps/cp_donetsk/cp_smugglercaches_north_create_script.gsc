@@ -1821,7 +1821,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_maxdist = "30000";
   var_4.script_team = "axis";
   var_4.script_unload = "1";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (2509.04, 28829, 697.23), (0, 261, 0), "school_guards_chopper", "auto287", "default", "lbravo_jammer2b_2 lbravo_jammer2b_3", "lbravo_jammer2b", undefined, undefined, 512, 25, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_0[[var_3]](var_4, var_1, var_2, (4878.4, 32462.9, 2210.68), (1, 270, 0), undefined, undefined, undefined, undefined, "lbravo_jammer2b_3", undefined, undefined, 512, 25);

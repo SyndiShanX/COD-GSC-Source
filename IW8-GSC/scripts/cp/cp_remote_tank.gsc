@@ -139,8 +139,8 @@ function tank_finishdropoffsequence(var_0, var_1) {
   var_5 = var_3;
   var_6 = "on";
 
-  if(isDefined(self.config.ref_13e88)) {
-    var_6 = self.config.ref_13e88;
+  if(isDefined(self.config.ref_13E88)) {
+    var_6 = self.config.ref_13E88;
   }
 
   var_1.mgturret setscriptablepartstate("lights", var_6);
@@ -341,7 +341,7 @@ function tank_handleairburst() {
 
 function tank_watchprojectiledeath(var_0, var_1) {
   var_1 endon("death");
-  var_2 = var_0 scripts\engine\utility::ref_143ad("death", "perform_airburst");
+  var_2 = var_0 scripts\engine\utility::ref_143AD("death", "perform_airburst");
 
   if(isDefined(var_2) && var_2 == "perform_airburst") {
     var_1 setscriptablepartstate("airburst", "airExpl");
@@ -498,7 +498,7 @@ function stopremotesequence(var_0) {
   }
 
   scripts\cp\utility::clearusingremote();
-  scripts\engine\utility::ref_143b9(1.3, "death");
+  scripts\engine\utility::ref_143B9(1.3, "death");
   self setclientomnvar("ui_remote_control_sequence", 0);
   self setclientomnvar("ui_hide_hud", 0);
 }
@@ -539,7 +539,7 @@ function playremotesequence(var_0, var_1) {
   scripts\cp\utility::_freezecontrols(1);
   thread scripts\cp\cp_weapons::unfreezeonroundend();
   thread scripts\cp\cp_weapons::startfadetransition(1.8);
-  var_4 = scripts\engine\utility::ref_143b9(1.8, "death");
+  var_4 = scripts\engine\utility::ref_143B9(1.8, "death");
   self notify("ks_freeze_end");
 
   if(!isDefined(var_4) || var_4 != "timeout") {
@@ -568,14 +568,14 @@ function fire_on_nearby_players(var_0) {
   var_1 = 0;
   var_2 = 0.75;
 
-  if(isDefined(self.ref_13b64)) {
-    var_2 = self.ref_13b64;
+  if(isDefined(self.ref_13B64)) {
+    var_2 = self.ref_13B64;
   }
 
   var_3 = 0.5;
 
-  if(isDefined(self.ref_13b63)) {
-    var_3 = self.ref_13b63;
+  if(isDefined(self.ref_13B63)) {
+    var_3 = self.ref_13B63;
   }
 
   if(!isDefined(self.max_detection_sq)) {
@@ -636,7 +636,7 @@ function fire_on_nearby_players(var_0) {
 
         var_4 = questtimerupdate(var_5);
         self.mgturret settargetentity(var_5, var_4);
-        self.mgturret scripts\engine\utility::ref_143b9(5, "turret_on_target");
+        self.mgturret scripts\engine\utility::ref_143B9(5, "turret_on_target");
 
         if(!var_5 scripts\cp\utility::is_valid_player() || !tank_canseetarget(var_5, var_4)) {
           wait 0.5;
@@ -669,8 +669,8 @@ function fire_on_nearby_players(var_0) {
           continue;
         }
 
-        if(isDefined(self.config.ref_13e8c)) {
-          [[self.config.ref_13e8c]](var_5);
+        if(isDefined(self.config.ref_13E8C)) {
+          [[self.config.ref_13E8C]](var_5);
         } else {
           self.mgturret shootturret();
         }
@@ -746,8 +746,8 @@ function flicker_tank_lights() {
   self endon("death");
   var_0 = "on";
 
-  if(isDefined(self.config.ref_13e88)) {
-    var_0 = self.config.ref_13e88;
+  if(isDefined(self.config.ref_13E88)) {
+    var_0 = self.config.ref_13E88;
   }
 
   self.mgturret setscriptablepartstate("lights", "off");

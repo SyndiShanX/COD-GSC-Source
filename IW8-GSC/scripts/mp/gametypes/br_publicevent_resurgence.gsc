@@ -9,10 +9,10 @@ function init() {
   var_0.isfeaturedisabled = &deactivate;
   var_0.postinitfunc = &postinitfunc;
   var_0.weight = getdvarfloat("scr_br_pe_resurgence_weight", 0);
-  var_0.ref_11b78 = getdvarint("scr_br_pe_resurgence_max_times", 1);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_resurgence_max_times", 1);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("resurgence", "55 1010105 5 1");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("resurgence");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(14, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(14, var_0);
 }
 
 function postinitfunc() {
@@ -32,12 +32,12 @@ function move_spawnpoints_to_ac130() {
   level.playjailbreakvo["triggerRespawnOverlay"] = &scripts\mp\gametypes\br_gametype_rebirth::end_silo_thrust;
   level.playjailbreakvo["playerNakedDropLoadout"] = &scripts\mp\gametypes\br_gametype_rebirth::end_intro_obj;
   level.playingthrowingknifewickfx["mayConsiderPlayerDead"] = &scripts\mp\gametypes\br::dynamic_door;
-  level.playingthrowingknifewickfx["triggerRespawnOverlay"] = &scripts\mp\gametypes\br_gulag::ref_13dcc;
-  level.playingthrowingknifewickfx["playerNakedDropLoadout"] = &scripts\mp\gametypes\br::ref_11e23;
-  scripts\mp\gametypes\br_gametypes::ref_12b11("mayConsiderPlayerDead", &add_to_score_message);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("triggerRespawnOverlay", &add_to_spawnflags);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerNakedDropLoadout", &add_to_spawn_count_from_group);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("isTeamEliminated", &validate_and_activate_stations);
+  level.playingthrowingknifewickfx["triggerRespawnOverlay"] = &scripts\mp\gametypes\br_gulag::ref_13DCC;
+  level.playingthrowingknifewickfx["playerNakedDropLoadout"] = &scripts\mp\gametypes\br::ref_11E23;
+  scripts\mp\gametypes\br_gametypes::ref_12B11("mayConsiderPlayerDead", &add_to_score_message);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("triggerRespawnOverlay", &add_to_spawnflags);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerNakedDropLoadout", &add_to_spawn_count_from_group);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("isTeamEliminated", &validate_and_activate_stations);
 }
 
 function validate_and_activate_stations(var_0) {
@@ -62,18 +62,18 @@ function loadout_editglobalclassstruct() {
   level.disable_super_in_turret.funcs["mayConsiderPlayerDead"] = undefined;
   level.disable_super_in_turret.funcs["triggerRespawnOverlay"] = undefined;
   level.disable_super_in_turret.funcs["playerNakedDropLoadout"] = undefined;
-  scripts\mp\gametypes\br_gametypes::ref_12b11("mayConsiderPlayerDead", level.disable_super_in_turret.ref_12883["mayConsiderPlayerDead"]);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("triggerRespawnOverlay", level.disable_super_in_turret.ref_12883["triggerRespawnOverlay"]);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerNakedDropLoadout", level.disable_super_in_turret.ref_12883["playerNakedDropLoadout"]);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("mayConsiderPlayerDead", level.disable_super_in_turret.ref_12883["mayConsiderPlayerDead"]);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("triggerRespawnOverlay", level.disable_super_in_turret.ref_12883["triggerRespawnOverlay"]);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerNakedDropLoadout", level.disable_super_in_turret.ref_12883["playerNakedDropLoadout"]);
   level.disable_super_in_turret.ref_12883["mayConsiderPlayerDead"] = undefined;
   level.disable_super_in_turret.ref_12883["triggerRespawnOverlay"] = undefined;
   level.disable_super_in_turret.ref_12883["playerNakedDropLoadout"] = undefined;
   level.disable_super_in_turret.ref_12883 = undefined;
-  scripts\mp\gametypes\br_gametypes::ref_13f25("isTeamEliminated");
+  scripts\mp\gametypes\br_gametypes::ref_13F25("isTeamEliminated");
 }
 
 function allassassin_givewait(var_0) {
-  if(istrue(level.disable_super_in_turret.ref_12ca4)) {
+  if(istrue(level.disable_super_in_turret.ref_12CA4)) {
     return [[level.playjailbreakvo[var_0]]]();
   }
 
@@ -85,7 +85,7 @@ function allassassin_givewait(var_0) {
 }
 
 function allassassin_init(var_0, var_1) {
-  if(istrue(level.disable_super_in_turret.ref_12ca4)) {
+  if(istrue(level.disable_super_in_turret.ref_12CA4)) {
     return [[level.playjailbreakvo[var_0]]](var_1);
   }
 
@@ -114,12 +114,12 @@ function ascendermodelview() {
   scripts\mp\gametypes\br_publicevents::ref_13371("br_pe_resurgence_start");
   var_0 = "vov_redeploy_standby";
   scripts\mp\gametypes\br_public::brleaderdialog(var_0, 0);
-  level.disable_super_in_turret.ref_12ca4 = 1;
+  level.disable_super_in_turret.ref_12CA4 = 1;
   level.disable_super_in_turret.fly_to_laser_trap_start_pos = 1;
   level.disable_super_in_turret.ref_14081 = 1;
   scripts\mp\gametypes\br_gametype_rebirth::end_reach_icbm_launch();
   var_1 = 30;
-  level.disable_super_in_turret.ref_12a7b = var_1;
+  level.disable_super_in_turret.ref_12A7B = var_1;
 
   foreach(var_3 in level.teamnamelist) {
     var_4 = level.teamdata[var_3]["players"];
@@ -151,7 +151,7 @@ function ascendermodelview() {
       var_9 = var_8 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal();
 
       if(var_12 || var_9) {
-        scripts\mp\gametypes\br_vip_quest::ref_142c5(var_8, var_6, "exfil_respawn");
+        scripts\mp\gametypes\br_vip_quest::ref_142C5(var_8, var_6, "exfil_respawn");
         continue;
       }
 
@@ -187,7 +187,7 @@ function ascendermodelview() {
 function deactivate() {
   loadout_editglobalclassstruct();
   setDvar("scr_br_resurgence_respawn_enable", 0);
-  level.disable_super_in_turret.ref_12ca4 = 0;
+  level.disable_super_in_turret.ref_12CA4 = 0;
   level.disable_super_in_turret.fly_to_laser_trap_start_pos = undefined;
 
   foreach(var_1 in level.players) {

@@ -241,7 +241,7 @@ function table_getloadoutname(var_0, var_1) {
   return tablelookup(var_0, 0, "loadoutName", var_1 + 1);
 }
 
-function ref_139e4(var_0, var_1, var_2) {
+function ref_139E4(var_0, var_1, var_2) {
   var_3 = scripts\engine\utility::ter_op(var_2 == 0, "loadoutPrimaryAddBlueprintAttachments", "loadoutSecondaryAddBlueprintAttachments");
   var_4 = tablelookup(var_0, 0, var_3, var_1 + 1);
 
@@ -292,7 +292,7 @@ function table_getweaponreticle(var_0, var_1, var_2) {
   return tablelookup(var_0, 0, "loadoutSecondaryReticle", var_1 + 1);
 }
 
-function ref_139e6(var_0, var_1, var_2, var_3) {
+function ref_139E6(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
   if(var_2 == 0) {
@@ -301,10 +301,10 @@ function ref_139e6(var_0, var_1, var_2, var_3) {
     var_4 = tablelookup(var_0, 0, "loadoutSecondaryVariantID", var_1 + 1);
   }
 
-  return ref_139e7(var_3, var_4);
+  return ref_139E7(var_3, var_4);
 }
 
-function ref_139e7(var_0, var_1) {
+function ref_139E7(var_0, var_1) {
   if(var_0 == "none") {
     return 0;
   }
@@ -378,7 +378,7 @@ function ref_139e7(var_0, var_1) {
     var_11 = scripts\mp\utility\weapon::runspawnmodule_isolated(var_0, var_10);
   }
 
-  var_19 = scripts\mp\utility\weapon::ref_1458c(var_0, var_11);
+  var_19 = scripts\mp\utility\weapon::ref_1458C(var_0, var_11);
 
   if(!var_19) {
     var_11 = 0;
@@ -984,7 +984,7 @@ function loadout_updateclassgamemode(var_0, var_1) {
     var_0.loadoutperks = var_3["loadoutPerks"];
   }
 
-  var_0.ref_1195e = isDefined(var_3["loadoutExtraPerks"]);
+  var_0.ref_1195E = isDefined(var_3["loadoutExtraPerks"]);
 
   if(isDefined(var_3["loadoutExtraPerks"])) {
     var_0.loadoutextraperks = var_3["loadoutExtraPerks"];
@@ -1611,7 +1611,7 @@ function loadout_updateabilities(var_0, var_1) {
   if(var_0.loadoutperksfromgamemode) {
     var_0.loadoutstandardperks = var_0.loadoutperks;
 
-    if(var_0.ref_1195e) {
+    if(var_0.ref_1195E) {
       var_0.loadoutextraperks = var_0.loadoutextraperks;
       return;
     }
@@ -1731,7 +1731,7 @@ function loadout_getclasstype(var_0) {
   return "default";
 }
 
-function ref_1194e(var_0, var_1) {
+function ref_1194E(var_0, var_1) {
   var_2 = loadout_getclasstype(var_1);
 
   switch (var_2) {
@@ -1742,7 +1742,7 @@ function ref_1194e(var_0, var_1) {
     case "custgamemode":
       break;
     case "gamemode":
-      ref_1194f(var_0, var_1);
+      ref_1194F(var_0, var_1);
       break;
     case "callback":
       break;
@@ -1803,8 +1803,8 @@ function loadout_updateclass(var_0, var_1) {
     loadout_updateclassfinalweapons(var_0);
   }
 
-  if(isDefined(level.ref_11c88)) {
-    self[[level.ref_11c88]](var_0);
+  if(isDefined(level.ref_11C88)) {
+    self[[level.ref_11C88]](var_0);
   }
 
   return var_0;
@@ -2018,12 +2018,12 @@ function loadout_updateplayerweapons(var_0, var_1, var_2, var_3) {
 function zombierespawning() {
   if(isDefined(self.primaryweaponobj) && !self hasweapon(self.primaryweaponobj)) {
     loadout_giveprimaryweapon(self.classstruct);
-    thread ref_13c58();
+    thread ref_13C58();
   }
 
   if(isDefined(self.secondaryweaponobj) && !self hasweapon(self.secondaryweaponobj)) {
     loadout_givesecondaryweapon(self.classstruct);
-    thread ref_13c58();
+    thread ref_13C58();
     return;
   }
 }
@@ -2094,8 +2094,8 @@ function zombievehiclelaststand(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_8.should_spawn_boss_one = var_8 hasattachment("maxammo", 1);
   }
 
-  if(isDefined(level.ref_11c73)) {
-    self[[level.ref_11c73]](var_6);
+  if(isDefined(level.ref_11C73)) {
+    self[[level.ref_11C73]](var_6);
   } else if(istrue(var_4)) {
     respawnitems_giveweaponammo(var_3, "primary");
     respawnitems_giveweaponammo(var_3, "secondary");
@@ -2231,7 +2231,7 @@ function loadout_updateplayernvgs() {
   }
 
   if(istrue(self.inspawncamera)) {
-    scripts\engine\utility::ref_143a5("spawned_player", "fadeUp_start");
+    scripts\engine\utility::ref_143A5("spawned_player", "fadeUp_start");
   }
 
   while(!isDefined(self.operatorcustomization)) {
@@ -2797,7 +2797,7 @@ function giveloadout(var_0, var_1, var_2, var_3, var_4) {
 
   loadout_clearplayer(var_3);
   var_5 = zombiesignorevehicleexplosions();
-  var_5 = ref_1194e(var_5, var_1);
+  var_5 = ref_1194E(var_5, var_1);
   self.select_bridge_two_spawners = var_5;
   var_6 = undefined;
 
@@ -3044,24 +3044,24 @@ function valuehud(var_0) {
   return false;
 }
 
-function ref_13c57() {
+function ref_13C57() {
   for(;;) {
     self waittill("grenade_pullback", var_0);
 
     if(!nullweapon(var_0) && var_0.basename == "c4_mp_p" && scripts\mp\riotshield::isriotshield(self getcurrentweapon())) {
-      self.ref_1207e = 1;
+      self.ref_1207E = 1;
     }
 
     waitframe();
   }
 }
 
-function ref_13c5d() {
-  if(!istrue(self.ref_1207e)) {
+function ref_13C5D() {
+  if(!istrue(self.ref_1207E)) {
     var_0 = self getheldoffhand();
 
     if(!nullweapon(var_0) && var_0.basename != "c4_mp_p" && scripts\mp\riotshield::isriotshield(self getcurrentweapon()) && valuehud(var_0)) {
-      self.ref_1207e = 1;
+      self.ref_1207E = 1;
       return;
     }
 
@@ -3069,36 +3069,36 @@ function ref_13c5d() {
   }
 }
 
-function ref_13c5f() {
-  self.ref_12d52 = undefined;
-  self.ref_12d51 = undefined;
+function ref_13C5F() {
+  self.ref_12D52 = undefined;
+  self.ref_12D51 = undefined;
 
   for(;;) {
     self waittill("weapon_switch_started", var_0);
 
     if(!scripts\mp\riotshield::isriotshield(var_0)) {
-      self.ref_12d52 = gettime() + 200;
+      self.ref_12D52 = gettime() + 200;
       continue;
     }
 
-    self.ref_12d52 = undefined;
-    self.ref_12d51 = undefined;
+    self.ref_12D52 = undefined;
+    self.ref_12D51 = undefined;
   }
 }
 
-function ref_13c5e() {
+function ref_13C5E() {
   for(;;) {
     self waittill("weapon_switch_canceled", var_0);
     waittillframeend();
 
     if(scripts\mp\riotshield::isriotshield(var_0)) {
-      self.ref_12d52 = undefined;
-      self.ref_12d51 = undefined;
+      self.ref_12D52 = undefined;
+      self.ref_12D51 = undefined;
     }
   }
 }
 
-function ref_13c58(var_0) {
+function ref_13C58(var_0) {
   self notify("trackRiotShield_monitorShieldAttach");
   self endon("trackRiotShield_monitorShieldAttach");
   self endon("death_or_disconnect");
@@ -3112,7 +3112,7 @@ function ref_13c58(var_0) {
   GscBinSkip4(0x35);
 }
 
-function ref_13c5a() {
+function ref_13C5A() {
   var_0 = isDefined(self.riotshieldmodel);
   var_1 = isDefined(self.riotshieldmodelstowed);
 
@@ -3127,7 +3127,7 @@ function ref_13c5a() {
   }
 }
 
-function ref_13c59() {
+function ref_13C59() {
   var_0 = isDefined(self.riotshieldmodel);
   var_1 = isDefined(self.riotshieldmodelstowed);
 
@@ -3142,7 +3142,7 @@ function ref_13c59() {
   }
 }
 
-function ref_13c5b() {
+function ref_13C5B() {
   var_0 = isDefined(self.riotshieldmodel);
   var_1 = isDefined(self.riotshieldmodelstowed);
 
@@ -3156,16 +3156,16 @@ function ref_13c5b() {
   }
 }
 
-function ref_13c5c() {
+function ref_13C5C() {
   if(scripts\mp\riotshield::riotshield_hasweapon()) {
     var_0 = scripts\mp\riotshield::isriotshield(self getcurrentweapon());
 
     if(var_0) {
-      ref_13c59();
+      ref_13C59();
       return;
     }
 
-    ref_13c5a();
+    ref_13C5A();
     return;
   }
 
@@ -3184,19 +3184,19 @@ function ref_13c5c() {
 
 function riotshieldonweaponchange(var_0) {
   if(scripts\mp\riotshield::riotshield_hasweapon()) {
-    thread ref_13c58();
+    thread ref_13C58();
     return;
   }
 
-  ref_13c5c();
-  ref_12d4e();
+  ref_13C5C();
+  ref_12D4E();
   self notify("riotshield_detach");
 }
 
-function ref_12d4e(var_0) {
+function ref_12D4E(var_0) {
   self.watch_for_heli_bosses_dead = undefined;
   self.watch_for_heli_death = undefined;
-  self.ref_1443a = undefined;
+  self.ref_1443A = undefined;
 
   if(istrue(var_0)) {
     self.hasriotshield = undefined;
@@ -3830,7 +3830,7 @@ function resetfunctionality() {
   }
 
   scripts\common\input_allow::clear_all_allow_info();
-  scripts\cp_mp\vehicles\vehicle_occupancy::ref_141ca(self, 1);
+  scripts\cp_mp\vehicles\vehicle_occupancy::ref_141CA(self, 1);
   scripts\common\utility::allow_script_weapon_switch(0);
   self.doublejumpenergy = undefined;
   self.doublejumpenergyrestorerate = undefined;
@@ -3844,11 +3844,11 @@ function resetfunctionality() {
   self.ladderexecutionblocked = undefined;
   scripts\mp\damage::resetattackerlist();
   scripts\mp\damage::clearcorpsetablefuncs();
-  ref_12d4e();
+  ref_12D4E();
   scripts\cp_mp\utility\player_utility::cleardemeanorsafe();
   scripts\mp\weapons::clearburnfx();
-  scripts\mp\equipment\molotov::ref_11cb6();
-  scripts\mp\equipment\throwing_knife_mp::ref_13b52();
+  scripts\mp\equipment\molotov::ref_11CB6();
+  scripts\mp\equipment\throwing_knife_mp::ref_13B52();
   scripts\mp\equipment\flash_grenade::clearflash(1);
   scripts\mp\equipment\gas_grenade::gas_clear(1);
 
@@ -3859,7 +3859,7 @@ function resetfunctionality() {
 
   scripts\cp_mp\killstreaks\white_phosphorus::clearloopingcoughaudio();
   scripts\mp\utility\player::_resetenableignoreme();
-  scripts\cp_mp\utility\player_utility::ref_125d0();
+  scripts\cp_mp\utility\player_utility::ref_125D0();
 }
 
 function clearscriptable() {
@@ -4031,17 +4031,17 @@ function updateinstantclassswapallowed() {
 
     if(var_0) {
       scripts\mp\flags::gameflagwait("prematch_fade_done");
-      ref_13fe4();
+      ref_13FE4();
     }
   } else {
     scripts\mp\flags::gameflagwait("prematch_done");
-    ref_13fe4();
+    ref_13FE4();
   }
 
   disableclassswapallowed();
 }
 
-function ref_13fe4() {
+function ref_13FE4() {
   self endon("death");
   var_0 = scripts\engine\utility::ter_op(scripts\mp\utility\game::ismlgmatch(), 5, 15);
 
@@ -4177,7 +4177,7 @@ function zombieregenratescaleoutgas() {
   return false;
 }
 
-function ref_1194f(var_0, var_1) {
+function ref_1194F(var_0, var_1) {
   var_2 = self.pers["gamemodeLoadout"];
 
   if(isDefined(var_2["loadoutFieldUpgrade1"])) {
@@ -4306,7 +4306,7 @@ function shouldskipfirstraise(var_0, var_1) {
     var_1 = 1;
   }
 
-  if(istrue(self.ref_1443d)) {
+  if(istrue(self.ref_1443D)) {
     var_1 = 1;
   }
 
@@ -4807,7 +4807,7 @@ function computerrebootsequence_init() {
   scripts\engine\utility::ent_flag_set("swapLoadout_blocked");
 }
 
-function ref_13f02() {
+function ref_13F02() {
   if(scripts\engine\utility::ent_flag_exist("swapLoadout_blocked") && scripts\engine\utility::ent_flag("swapLoadout_blocked")) {
     scripts\engine\utility::ent_flag_clear("swapLoadout_blocked");
     return;

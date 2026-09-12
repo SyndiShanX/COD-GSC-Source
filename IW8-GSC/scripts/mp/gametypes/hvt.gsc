@@ -71,7 +71,7 @@ function laststand_hack() {
   scripts\mp\rank::scoreeventpopup("hvt_demoted");
 }
 
-function ref_134d4(var_0, var_1) {
+function ref_134D4(var_0, var_1) {
   if(var_0.tagscarried == var_1.tagscarried) {
     var_2 = scripts\engine\utility::array_contains(level.activehvts, var_0);
     return var_2;
@@ -80,7 +80,7 @@ function ref_134d4(var_0, var_1) {
   return var_1.tagscarried > var_2.tagscarried;
 }
 
-function ref_13a27() {
+function ref_13A27() {
   self setclientomnvar("ui_hvt_value", self.tagscarried);
   var_0 = 0;
   var_1 = 0;
@@ -258,7 +258,7 @@ function watchhvts() {
   level.outlinedplayers = [];
 
   for(;;) {
-    var_0 = scripts\engine\utility::array_sort_with_func(level.players, &ref_134d4);
+    var_0 = scripts\engine\utility::array_sort_with_func(level.players, &ref_134D4);
     var_1 = int(min(var_0.size, level.hvtmaxtargets));
     var_2 = 0;
 

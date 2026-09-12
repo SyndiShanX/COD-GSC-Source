@@ -302,7 +302,7 @@ function monitorjointeam() {
   self endon("disconnect");
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
+    scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
     playersettagcount(0);
   }
 }
@@ -336,14 +336,14 @@ function createzones() {
   }
 
   if(!scripts\mp\flags::gameflag("prematch_done")) {
-    level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+    level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   }
 
   foreach(var_3 in level.objectives) {
     var_7 = scripts\mp\gametypes\obj_grindzone::getreservedobjid(var_3.objectivekey);
     var_3 scripts\mp\gameobjects::requestid(1, 1, var_7);
     var_3 scripts\mp\gameobjects::setvisibleteam("any");
-    var_3 scripts\mp\gametypes\obj_grindzone::ref_1317d();
+    var_3 scripts\mp\gametypes\obj_grindzone::ref_1317D();
     var_3 scripts\mp\gametypes\obj_grindzone::setneutral();
   }
 }
@@ -456,7 +456,7 @@ function scoreamount(var_0, var_1, var_2) {
 
     if(var_2.tagsdeposited >= level.bankdisabletags) {
       var_2 scripts\mp\gameobjects::allowuse("none");
-      thread ref_1439d();
+      thread ref_1439D();
       var_2.disabled = 1;
       var_2.scriptable setscriptablepartstate("flag", "off");
       var_2.scriptable setscriptablepartstate("pulse", "off");
@@ -479,7 +479,7 @@ function scoreamount(var_0, var_1, var_2) {
   }
 }
 
-function ref_1439d() {
+function ref_1439D() {
   foreach(var_1 in level.players) {
     scripts\mp\objidpoolmanager::objective_unpin_player(self.objidnum, var_1);
   }

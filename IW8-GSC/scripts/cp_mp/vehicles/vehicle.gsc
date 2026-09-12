@@ -37,13 +37,13 @@ function vehicle_init() {
   scripts\cp_mp\vehicles\jeep::jeep_init();
   scripts\cp_mp\vehicles\med_transport::med_transport_init();
   scripts\cp_mp\vehicles\van::van_init();
-  _calloutmarkerping_poolidisentity::ref_11d60();
+  _calloutmarkerping_poolidisentity::ref_11D60();
   _calloutmarkerping_isvehicleoccupiedbyenemy::bot_gulag_think();
   _calloutmarkerping_handleluinotify_mappingdeletemarker::bomber_init();
   _calloutmarkerping_isenemy::get_priority_player();
   _calloutmarkerping_iskiosk::get_num_of_wire_to_cut();
   _calloutmarkerping_poolidisloot::ref_12102();
-  _calloutmarkerping_predicted_isanypingactive::ref_120d2();
+  _calloutmarkerping_predicted_isanypingactive::ref_120D2();
   _calloutmarkerping_isplunderextract::hvi_vehicle_rider_special_setup();
   _calloutmarkerping_onpingchallenge::startarmsracedef2obj();
 }
@@ -73,7 +73,7 @@ function vehicle_getleveldataforvehicle(var_0, var_1) {
     if(istrue(var_1)) {
       var_2 = spawnStruct();
       level.vehicle.vehicledata[var_0] = var_2;
-      var_2.ref_13fca = undefined;
+      var_2.ref_13FCA = undefined;
       var_2.destroycallback = undefined;
       var_2.canfly = undefined;
     }
@@ -103,8 +103,8 @@ function ref_14138(var_0, var_1, var_2) {
   var_0 scripts\cp_mp\emp_debuff::set_clear_emp_callback(&vehicle_empclearcallback);
   scripts\cp_mp\utility\weapon_utility::setlockedoncallback(var_0, &vehicle_lockedoncallback);
   scripts\cp_mp\utility\weapon_utility::setlockedonremovedcallback(var_0, &vehicle_lockedonremovedcallback);
-  scripts\cp_mp\utility\weapon_utility::ref_13162(var_0, &ref_1419a);
-  scripts\cp_mp\utility\weapon_utility::ref_13163(var_0, &ref_1419b);
+  scripts\cp_mp\utility\weapon_utility::ref_13162(var_0, &ref_1419A);
+  scripts\cp_mp\utility\weapon_utility::ref_13163(var_0, &ref_1419B);
   scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_registerinstance(var_0);
 
   if(!scripts\common\utility::iscp() || !istrue(var_2.disableusabilityatspawn)) {
@@ -138,8 +138,8 @@ function ref_14185(var_0) {
     return;
   }
 
-  if(isDefined(level.ref_1425a) && isDefined(var_0.ref_12970)) {
-    GscBinSkip1(0x74, level.ref_1425a, var_0, var_0.ref_12970);
+  if(isDefined(level.ref_1425A) && isDefined(var_0.ref_12970)) {
+    GscBinSkip1(0x74, level.ref_1425A, var_0, var_0.ref_12970);
   }
 
   var_0 notify("death");
@@ -210,39 +210,39 @@ function ref_14197(var_0) {
 function ref_14226(var_0) {
   level endon("game_ended");
   var_1 = vehicle_getleveldataforvehicle(var_0.vehiclename);
-  thread _calloutmarkerping_predicted_log::ref_1411b(var_0);
+  thread _calloutmarkerping_predicted_log::ref_1411B(var_0);
 
   while(isDefined(var_0)) {
     var_2 = spawnStruct();
     scripts\cp_mp\utility\vehicle_omnvar_utility::ref_14282(var_0);
     ref_14103(var_0);
 
-    if(isDefined(var_1.ref_13fca)) {
-      var_0[[var_1.ref_13fca]](var_2);
+    if(isDefined(var_1.ref_13FCA)) {
+      var_0[[var_1.ref_13FCA]](var_2);
     }
 
-    var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_1424b();
+    var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_1424B();
     waitframe();
   }
 }
 
 function ref_14105(var_0) {
-  if(isDefined(var_0.ref_1426c)) {
-    if(var_0.ref_1426c != "") {
+  if(isDefined(var_0.ref_1426C)) {
+    if(var_0.ref_1426C != "") {
       var_1 = var_0 vehicle_getvelocity();
       var_2 = anglesToForward(var_0.angles);
 
       if(vectordot(var_1, var_2) >= 0) {
-        if(var_0 getscriptableparthasstate("trail", var_0.ref_1426c)) {
-          var_0 setscriptablepartstate("trail", var_0.ref_1426c);
+        if(var_0 getscriptableparthasstate("trail", var_0.ref_1426C)) {
+          var_0 setscriptablepartstate("trail", var_0.ref_1426C);
           return;
         }
 
         return;
       }
 
-      if(var_0 getscriptableparthasstate("trail", var_0.ref_1426c + "_idle")) {
-        var_0 setscriptablepartstate("trail", var_0.ref_1426c + "_idle");
+      if(var_0 getscriptableparthasstate("trail", var_0.ref_1426C + "_idle")) {
+        var_0 setscriptablepartstate("trail", var_0.ref_1426C + "_idle");
         return;
       }
 
@@ -403,9 +403,9 @@ function ref_14221(var_0, var_1) {
   }
 }
 
-function ref_141b9(var_0, var_1) {
-  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141de(var_0)) {
-    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141e2(var_0, var_1);
+function ref_141B9(var_0, var_1) {
+  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DE(var_0)) {
+    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141E2(var_0, var_1);
   }
 
   if(level.teambased) {
@@ -427,9 +427,9 @@ function ref_141b9(var_0, var_1) {
   return isDefined(var_1.owner) && var_1.owner == var_2;
 }
 
-function ref_141b7(var_0, var_1) {
-  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141de(var_0)) {
-    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141e0(var_0, var_1);
+function ref_141B7(var_0, var_1) {
+  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DE(var_0)) {
+    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141E0(var_0, var_1);
   }
 
   if(level.teambased) {
@@ -451,9 +451,9 @@ function ref_141b7(var_0, var_1) {
   return isDefined(var_1.owner) && var_1.owner != var_2;
 }
 
-function ref_141bb(var_0, var_1) {
-  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141de(var_0)) {
-    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141e4(var_0, var_1);
+function ref_141BB(var_0, var_1) {
+  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DE(var_0)) {
+    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141E4(var_0, var_1);
   }
 
   if(level.teambased) {
@@ -463,9 +463,9 @@ function ref_141bb(var_0, var_1) {
   return !isDefined(var_0.owner);
 }
 
-function ref_141ba(var_0, var_1) {
-  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141de(var_0)) {
-    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141e3(var_0, var_1);
+function ref_141BA(var_0, var_1) {
+  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DE(var_0)) {
+    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141E3(var_0, var_1);
   }
 
   if(level.teambased) {
@@ -475,9 +475,9 @@ function ref_141ba(var_0, var_1) {
   return undefined;
 }
 
-function ref_141b8(var_0, var_1) {
-  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141de(var_0)) {
-    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141e1(var_0, var_1);
+function ref_141B8(var_0, var_1) {
+  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DE(var_0)) {
+    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141E1(var_0, var_1);
   }
 
   if(level.teambased) {
@@ -487,9 +487,9 @@ function ref_141b8(var_0, var_1) {
   return undefined;
 }
 
-function ref_141bc(var_0, var_1) {
-  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141de(var_0)) {
-    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141e5(var_0, var_1);
+function ref_141BC(var_0, var_1) {
+  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DE(var_0)) {
+    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141E5(var_0, var_1);
   }
 
   if(level.teambased) {
@@ -500,8 +500,8 @@ function ref_141bc(var_0, var_1) {
 }
 
 function ref_14190(var_0) {
-  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141de(var_0)) {
-    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141d7(var_0);
+  if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DE(var_0)) {
+    return scripts\cp_mp\vehicles\vehicle_occupancy::ref_141D7(var_0);
   }
 
   if(isDefined(var_0.team) && var_0.team != "neutral") {
@@ -511,8 +511,8 @@ function ref_14190(var_0) {
   return undefined;
 }
 
-function ref_1418b(var_0, var_1) {
-  if(ref_1420d(var_0, var_1)) {
+function ref_1418B(var_0, var_1) {
+  if(ref_1420D(var_0, var_1)) {
     var_2 = istrue(var_1.inlaststand);
     var_3 = var_1.health;
 
@@ -539,7 +539,7 @@ function ref_1418b(var_0, var_1) {
   return false;
 }
 
-function ref_1420d(var_0, var_1) {
+function ref_1420D(var_0, var_1) {
   if(level.teambased) {
     if(level.friendlyfire == 0) {
       if(isDefined(var_0.owner)) {
@@ -688,7 +688,7 @@ function vehicle_watchflipped(var_0, var_1, var_2, var_3) {
       }
     } else {
       if(var_4) {
-        scripts\cp_mp\vehicles\vehicle_occupancy::ref_141c6(var_0, 1);
+        scripts\cp_mp\vehicles\vehicle_occupancy::ref_141C6(var_0, 1);
         scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_allowvehicleuse(var_0, 1);
         var_4 = 0;
       }
@@ -703,7 +703,7 @@ function vehicle_watchflipped(var_0, var_1, var_2, var_3) {
       }
 
       if(!var_4) {
-        scripts\cp_mp\vehicles\vehicle_occupancy::ref_141c6(var_0, 0);
+        scripts\cp_mp\vehicles\vehicle_occupancy::ref_141C6(var_0, 0);
         scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_allowvehicleuse(var_0, 0);
         var_4 = 1;
       }
@@ -774,12 +774,12 @@ function vehicle_lockedonremovedcallback() {
   scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_hidewarning("missileLocking", var_0, self.vehiclename);
 }
 
-function ref_1419a() {
+function ref_1419A() {
   var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(self, 0);
   scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_showwarning("missileIncoming", var_0, self.vehiclename);
 }
 
-function ref_1419b() {
+function ref_1419B() {
   var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(self, 0);
   scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_hidewarning("missileIncoming", var_0, self.vehiclename);
 }
@@ -796,7 +796,7 @@ function vehicle_empclearcallback(var_0) {
   scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_allowmovement(self, 1);
 }
 
-function ref_1418f(var_0) {
+function ref_1418F(var_0) {
   var_1 = undefined;
 
   switch (var_0) {
@@ -852,7 +852,7 @@ function ref_1418f(var_0) {
       var_1 = &scripts\cp_mp\vehicles\van::van_explode;
       break;
     case "motorcycle":
-      var_1 = &_calloutmarkerping_poolidisentity::ref_11d5d;
+      var_1 = &_calloutmarkerping_poolidisentity::ref_11D5D;
       break;
     case "veh_a10fd":
       var_1 = &_calloutmarkerping_isvehicleoccupiedbyenemy::bot_get_stored_custom_classes;
@@ -867,10 +867,10 @@ function ref_1418f(var_0) {
       var_1 = &_calloutmarkerping_poolidisloot::ref_12100;
       break;
     case "open_jeep_carpoc":
-      var_1 = &_calloutmarkerping_predicted_isanypingactive::ref_120cb;
+      var_1 = &_calloutmarkerping_predicted_isanypingactive::ref_120CB;
       break;
     case "cargo_truck_susp":
-      var_1 = &_calloutmarkerping_isenemy::get_power_ref_from_weapon;
+      var_1 = &_calloutmarkerping_isenemy::get_power_ref_FROM_weapon;
       break;
     case "convoy_truck":
       var_1 = &_calloutmarkerping_isplunderextract::hvi_patrol_exit;

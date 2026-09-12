@@ -11,49 +11,49 @@ function init() {
   scripts\mp\gametypes\br_gxp_hallucination::init();
   scripts\mp\gametypes\br_gxp_safe_zones::init();
   scripts\mp\gametypes\br_gxp_phones::init();
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerConnect", &onplayerconnect);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerDamaged", &onplayerdamaged);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerArmorDamaged", &ref_12063);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onVehicleDamaged", &ref_120ab);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onLastStandEnter", &ref_1204c);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onLastStandRevive", &ref_12050);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerKilled", &onplayerkilled);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onArmorPlate", &ref_11fff);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onContractEnd", &ref_12009);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onKillstreakDanger", &ref_12049);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("lootCacheOpened", &ref_1205d);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerSkipLootPickup", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_1269c);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerSkipKioskUse", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_1269b);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("markPlayerAsEliminatedOnKilled", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_11b16);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("addToTeamLives", &scripts\mp\gametypes\br_gametype_gxp_ghost::addtoteamlives);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("removeFromTeamLives", &scripts\mp\gametypes\br_gametype_gxp_ghost::removefromteamlives);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("allowMeleeVehicleDamage", &brking_cleanupents);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerNakedDropLoadout", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_12604);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("dropOnPlayerDeath", &scripts\mp\gametypes\br_gametype_gxp_ghost::droponplayerdeath);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("shouldLastStandDamageScale", &ref_13308);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("dangerCircleTickActual", &dangercircletick);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("exfilStart", &onnewequipmentpickup);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onLeaveAC130", &ref_12051);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("remainingPlayersAliveOnTeam", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_12bba);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("spawnHandled", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_1365d);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("mayConsiderPlayerDead", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_11b80);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("modifyPlayerDamage", &scripts\mp\gametypes\br_gametype_gxp_ghost::modifyplayerdamage);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("modifyVehicleDamage", &ref_11ca1);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("postUpdateGameEvents", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_12810);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("lastStandAllowed", &scripts\mp\gametypes\br_gametype_gxp_ghost::watch_flight_collision);
-  level.disable_super_in_turret.ref_133d0 = 1;
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerConnect", &onplayerconnect);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerDamaged", &onplayerdamaged);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerArmorDamaged", &ref_12063);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onVehicleDamaged", &ref_120AB);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onLastStandEnter", &ref_1204C);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onLastStandRevive", &ref_12050);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerKilled", &onplayerkilled);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onArmorPlate", &ref_11FFF);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onContractEnd", &ref_12009);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onKillstreakDanger", &ref_12049);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("lootCacheOpened", &ref_1205D);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerSkipLootPickup", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_1269C);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerSkipKioskUse", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_1269B);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("markPlayerAsEliminatedOnKilled", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_11B16);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("addToTeamLives", &scripts\mp\gametypes\br_gametype_gxp_ghost::addtoteamlives);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("removeFromTeamLives", &scripts\mp\gametypes\br_gametype_gxp_ghost::removefromteamlives);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("allowMeleeVehicleDamage", &brking_cleanupents);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerNakedDropLoadout", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_12604);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("dropOnPlayerDeath", &scripts\mp\gametypes\br_gametype_gxp_ghost::droponplayerdeath);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("shouldLastStandDamageScale", &ref_13308);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("dangerCircleTickActual", &dangercircletick);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("exfilStart", &onnewequipmentpickup);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onLeaveAC130", &ref_12051);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("remainingPlayersAliveOnTeam", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_12BBA);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("spawnHandled", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_1365D);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("mayConsiderPlayerDead", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_11B80);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("modifyPlayerDamage", &scripts\mp\gametypes\br_gametype_gxp_ghost::modifyplayerdamage);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("modifyVehicleDamage", &ref_11CA1);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("postUpdateGameEvents", &scripts\mp\gametypes\br_gametype_gxp_ghost::ref_12810);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("lastStandAllowed", &scripts\mp\gametypes\br_gametype_gxp_ghost::watch_flight_collision);
+  level.disable_super_in_turret.ref_133D0 = 1;
   level.disable_super_in_turret.sat_wait_for_piece_added = 0;
-  level.disable_super_in_turret.ref_11b76 = getdvarint("scr_br_gxp_maxTagsVisible", 12);
-  level.disable_super_in_turret.ref_11b74 = getdvarfloat("scr_br_gxp_maxRadius", 0);
-  level.disable_super_in_turret.ref_11b75 = level.disable_super_in_turret.ref_11b74 * level.disable_super_in_turret.ref_11b74;
-  level.disable_super_in_turret.ref_13a25 = getdvarint("scr_br_gxp_autoPickup", 1);
+  level.disable_super_in_turret.ref_11B76 = getdvarint("scr_br_gxp_maxTagsVisible", 12);
+  level.disable_super_in_turret.ref_11B74 = getdvarfloat("scr_br_gxp_maxRadius", 0);
+  level.disable_super_in_turret.ref_11B75 = level.disable_super_in_turret.ref_11B74 * level.disable_super_in_turret.ref_11B74;
+  level.disable_super_in_turret.ref_13A25 = getdvarint("scr_br_gxp_autoPickup", 1);
   level.disable_super_in_turret.spawndomplates = getdvarint("scr_br_gxp_human_powers", 0);
   level.disable_super_in_turret.sat_signal_lost_nag = getdvarint("scr_br_gxp_ghost_drop_tags", 0);
   level.disable_super_in_turret.sat_signal_shift = getdvarint("scr_br_gxp_ghost_drop_tags_chance", 100);
-  level.disable_super_in_turret.ref_11b5b = getdvarint("scr_br_gxp_max_tags", 100);
+  level.disable_super_in_turret.ref_11B5B = getdvarint("scr_br_gxp_max_tags", 100);
   level.disable_super_in_turret.spawndomplateflagtestmap = getdvarint("scr_br_gxp_human_loadout_restore", 1);
-  level.disable_super_in_turret.ref_12cb0 = [];
-  level.disable_super_in_turret.ref_12cb1 = [];
+  level.disable_super_in_turret.ref_12CB0 = [];
+  level.disable_super_in_turret.ref_12CB1 = [];
   level.disable_super_in_turret.brlootchoppercratecapturecallback = 1;
   level.disable_super_in_turret.scale_off_bravo_audio = 1;
   level.disable_super_in_turret.sat_wait_for_transmission_start = scripts\mp\gametypes\br_gametype_gxp_ghost::init_relic_nuketimer();
@@ -102,18 +102,18 @@ function init() {
   level.disable_super_in_turret.scn_infil_tango_npc_4_sfx = getdvarint("scr_br_gxp_ghost_vehicle_impact_teleport", 1);
   level.disable_super_in_turret.scn_infil_tango_npc_3_sfx = getdvarfloat("scr_br_gxp_ghost_vehicle_damage_scalar", 8);
   level.disable_super_in_turret.scavengerlootcacheused = getdvarint("scr_br_gxp_ghost_safe_zone_teleport", 1);
-  level.disable_super_in_turret.ref_12e6b = getdvarint("scr_br_safe_zones_enabled", 1);
-  level.disable_super_in_turret.ref_12e6c = getdvarint("scr_br_gxp_safezone_fear_decrement", 2);
-  level.disable_super_in_turret.ref_12e72 = getdvarint("scr_br_gxp_safezone_hallucinations", 1);
-  level.disable_super_in_turret.ref_12e73 = getdvarint("scr_br_gxp_safezone_health", 2500);
-  level.disable_super_in_turret.ref_12e74 = getdvarfloat("scr_br_gxp_safezone_health_orange_percentage", 0.3);
-  level.disable_super_in_turret.ref_12e75 = getdvarfloat("scr_br_gxp_safezone_health_yellow_percentage", 0.6);
-  level.disable_super_in_turret.ref_12e70 = getdvarint("scr_br_gxp_safezone_ghost_teleport_damage", 100);
-  level.disable_super_in_turret.ref_12e6f = getdvarfloat("scr_br_gxp_safezone_ghost_damage_cooldown", 0.5);
-  level.disable_super_in_turret.ref_12e6e = getdvarfloat("scr_br_gxp_safezone_ghost_damage", 20);
-  level.disable_super_in_turret.ref_12e69 = getdvarint("scr_br_gxp_safezone_circle_destory", 1);
-  level.disable_super_in_turret.ref_12e6a = getdvarint("scr_br_gxp_safezone_ghost_teleport_damage", 0);
-  level.disable_super_in_turret.ref_12e68 = getdvarint("scr_br_gxp_safezone_backup_teleport_attempts", 6);
+  level.disable_super_in_turret.ref_12E6B = getdvarint("scr_br_safe_zones_enabled", 1);
+  level.disable_super_in_turret.ref_12E6C = getdvarint("scr_br_gxp_safezone_fear_decrement", 2);
+  level.disable_super_in_turret.ref_12E72 = getdvarint("scr_br_gxp_safezone_hallucinations", 1);
+  level.disable_super_in_turret.ref_12E73 = getdvarint("scr_br_gxp_safezone_health", 2500);
+  level.disable_super_in_turret.ref_12E74 = getdvarfloat("scr_br_gxp_safezone_health_orange_percentage", 0.3);
+  level.disable_super_in_turret.ref_12E75 = getdvarfloat("scr_br_gxp_safezone_health_yellow_percentage", 0.6);
+  level.disable_super_in_turret.ref_12E70 = getdvarint("scr_br_gxp_safezone_ghost_teleport_damage", 100);
+  level.disable_super_in_turret.ref_12E6F = getdvarfloat("scr_br_gxp_safezone_ghost_damage_cooldown", 0.5);
+  level.disable_super_in_turret.ref_12E6E = getdvarfloat("scr_br_gxp_safezone_ghost_damage", 20);
+  level.disable_super_in_turret.ref_12E69 = getdvarint("scr_br_gxp_safezone_circle_destory", 1);
+  level.disable_super_in_turret.ref_12E6A = getdvarint("scr_br_gxp_safezone_ghost_teleport_damage", 0);
+  level.disable_super_in_turret.ref_12E68 = getdvarint("scr_br_gxp_safezone_backup_teleport_attempts", 6);
   level.disable_super_in_turret.scn_infil_hackney_heli_npc1 = getdvarint("scr_br_gxp_ghost_soul_circle_destory", 0);
   level.disable_super_in_turret.scn_infil_hackney_heli_npc2 = getdvarint("scr_br_gxp_ghost_soul_ghost_teleport_damage", 1000);
   level.disable_super_in_turret.sat_wait_for_signal_transfer = getDvar("scr_br_ghost_killed_loot_items", "brloot_ammo_12g,brloot_ammo_50cal,brloot_ammo_762,brloot_ammo_919");
@@ -131,12 +131,12 @@ function init() {
   level._effect["ghost_soul_pickup"] = loadfx("vfx/iw8_br/gameplay/hween2/vfx_ghost_soul_pickup.vfx");
   level._effect["ghost_trans"] = loadfx("vfx/iw8_br/gameplay/hween2/vfx_ghost_transition_to_human_3p.vfx");
   level._effect["zombie_splat"] = loadfx("vfx/iw8_br/gameplay/zombie/vfx_zmb_freefall_splat.vfx");
-  level.disable_super_in_turret.ref_136e3 = loadfx("vfx/iw8_br/gameplay/hween2/vfx_ghost_blast_ability_3p.vfx");
-  level.disable_super_in_turret.ref_136e2 = loadfx("vfx/iw8_br/gameplay/hween2/vfx_ghost_blast_ability_1p.vfx");
-  level.disable_super_in_turret.ref_136e4 = loadfx("vfx/iw8_br/gameplay/hween2/vfx_ghost_blast_ability_victim.vfx");
+  level.disable_super_in_turret.ref_136E3 = loadfx("vfx/iw8_br/gameplay/hween2/vfx_ghost_blast_ability_3p.vfx");
+  level.disable_super_in_turret.ref_136E2 = loadfx("vfx/iw8_br/gameplay/hween2/vfx_ghost_blast_ability_1p.vfx");
+  level.disable_super_in_turret.ref_136E4 = loadfx("vfx/iw8_br/gameplay/hween2/vfx_ghost_blast_ability_victim.vfx");
   level.disable_super_in_turret.start_coop_defuse_infiltrate = loadfx("vfx/iw8_br/gameplay/zombie/vfx_zmb_human_push_blast");
-  level.disable_super_in_turret.ref_13aea = loadfx("vfx/iw8_br/gameplay/hween2/vfx_gxp_teleport_3p.vfx");
-  level.disable_super_in_turret.ref_13ae9 = loadfx("vfx/iw8_br/gameplay/hween2/vfx_gxp_teleport_1p.vfx");
+  level.disable_super_in_turret.ref_13AEA = loadfx("vfx/iw8_br/gameplay/hween2/vfx_gxp_teleport_3p.vfx");
+  level.disable_super_in_turret.ref_13AE9 = loadfx("vfx/iw8_br/gameplay/hween2/vfx_gxp_teleport_1p.vfx");
   level.disable_super_in_turret.sat_setup_access_card_pickup = loadfx("vfx/iw8_br/gameplay/hween2/vfx_ghost_death_3p");
   level.disable_super_in_turret.scn_infil_tango_npc_1_sfx = loadfx("vfx/iw8_br/gameplay/hween2/vfx_ghost_transition_to_human_1p");
   level.disable_super_in_turret.scn_infil_hackney_heli_npc6 = loadfx("vfx/iw8_br/gameplay/hween2/vfx_gxp_ghost_landing.vfx");
@@ -195,7 +195,7 @@ function onplayerspawned(var_0) {
   scripts\mp\gametypes\br_gxp_hallucination::onplayerspawned();
 
   if(level.disable_super_in_turret.sat_setup_access_cards) {
-    self.ref_133c8 = 1;
+    self.ref_133C8 = 1;
     return;
   }
 }
@@ -214,7 +214,7 @@ function ref_12063(var_0) {
 }
 
 function onplayerkilled(var_0) {
-  scripts\mp\gametypes\br_gametype_gxp_challenges::ref_11ff1(var_0);
+  scripts\mp\gametypes\br_gametype_gxp_challenges::ref_11FF1(var_0);
   scripts\mp\gametypes\br_gametype_gxp_ghost::onplayerkilled(var_0);
   var_1 = var_0.victim;
   var_2 = var_0.attacker;
@@ -251,11 +251,11 @@ function onplayerkilled(var_0) {
   }
 }
 
-function ref_120ab(var_0) {
+function ref_120AB(var_0) {
   scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onVehicleDamaged", var_0);
 }
 
-function ref_1204c() {
+function ref_1204C() {
   var_0 = scripts\mp\gametypes\br_public::rotationrefsbyseatandweapon(self.team, self.squadindex);
 
   foreach(var_2 in var_0) {
@@ -270,7 +270,7 @@ function ref_12050(var_0) {
   }
 }
 
-function ref_11fff(var_0) {
+function ref_11FFF(var_0) {
   scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onArmorPlate", var_0);
 }
 
@@ -286,12 +286,12 @@ function ref_12051() {
   scripts\mp\gametypes\br_gxp_fear::lethal_crate_spawn();
 }
 
-function ref_1205d(var_0) {
+function ref_1205D(var_0) {
   scripts\mp\gametypes\br_gxp_fear::placementupdatewait("onOpenLootBox");
 }
 
 function ref_13308(var_0) {
-  if(isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125ec() && var_0.meansofdeath == "MOD_MELEE") {
+  if(isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125EC() && var_0.meansofdeath == "MOD_MELEE") {
     return false;
   }
 
@@ -304,13 +304,13 @@ function delay_activate_damage_trigger() {
 }
 
 function brking_cleanupents(var_0) {
-  var_1 = isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125ec();
+  var_1 = isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125EC();
   return var_1;
 }
 
-function ref_11ca1(var_0) {
+function ref_11CA1(var_0) {
   var_1 = var_0.damage;
-  var_2 = isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125ec();
+  var_2 = isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125EC();
 
   if(var_2) {
     return (var_1 * level.disable_super_in_turret.scn_infil_tango_npc_3_sfx);

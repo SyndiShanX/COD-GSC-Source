@@ -6,7 +6,7 @@
 function init() {
   level.persistentdatainfo = [];
   thread updatebufferedstats();
-  thread ref_13fc7();
+  thread ref_13FC7();
   thread uploadglobalstatcounters();
   thread writekdhistorystats();
 }
@@ -166,7 +166,7 @@ function updatebufferedstats() {
   }
 }
 
-function ref_13fc7() {
+function ref_13FC7() {
   level endon("game_cleanup");
   level waittill("game_ended");
 
@@ -437,23 +437,23 @@ function persincrement_weaponstats(var_0, var_1) {
 
 function perslog_weaponstats(var_0, var_1, var_2) {
   if(self.trackingweaponshots > 0) {
-    scripts\common\utility::ref_13e0a(level.ref_11b31, var_0, "shots", self.trackingweaponshots, var_1, var_2);
+    scripts\common\utility::ref_13E0A(level.ref_11B31, var_0, "shots", self.trackingweaponshots, var_1, var_2);
   }
 
   if(self.trackingweaponkills > 0) {
-    scripts\common\utility::ref_13e0a(level.ref_11b31, var_0, "kills", self.trackingweaponkills, var_1, var_2);
+    scripts\common\utility::ref_13E0A(level.ref_11B31, var_0, "kills", self.trackingweaponkills, var_1, var_2);
   }
 
   if(self.trackingweaponhits > 0) {
-    scripts\common\utility::ref_13e0a(level.ref_11b31, var_0, "hits", self.trackingweaponhits, var_1, var_2);
+    scripts\common\utility::ref_13E0A(level.ref_11B31, var_0, "hits", self.trackingweaponhits, var_1, var_2);
   }
 
   if(self.trackingweaponheadshots > 0) {
-    scripts\common\utility::ref_13e0a(level.ref_11b31, var_0, "headshots", self.trackingweaponheadshots, var_1, var_2);
+    scripts\common\utility::ref_13E0A(level.ref_11B31, var_0, "headshots", self.trackingweaponheadshots, var_1, var_2);
   }
 
   if(self.trackingweapondeaths > 0) {
-    scripts\common\utility::ref_13e0a(level.ref_11b31, var_0, "deaths", self.trackingweapondeaths, var_1, var_2);
+    scripts\common\utility::ref_13E0A(level.ref_11B31, var_0, "deaths", self.trackingweapondeaths, var_1, var_2);
     return;
   }
 }
@@ -465,27 +465,27 @@ function perslog_attachmentstats(var_0, var_1) {
 
   if(self.trackingweaponshots > 0 && var_0 != "tactical") {
     incrementattachmentstat(var_0, "shots", self.trackingweaponshots, var_1);
-    scripts\common\utility::ref_13e0a(level.ref_11b25, var_0, "shots", self.trackingweaponshots, var_1);
+    scripts\common\utility::ref_13E0A(level.ref_11B25, var_0, "shots", self.trackingweaponshots, var_1);
   }
 
   if(self.trackingweaponkills > 0 && var_0 != "tactical") {
     incrementattachmentstat(var_0, "kills", self.trackingweaponkills, var_1);
-    scripts\common\utility::ref_13e0a(level.ref_11b25, var_0, "kills", self.trackingweaponkills, var_1);
+    scripts\common\utility::ref_13E0A(level.ref_11B25, var_0, "kills", self.trackingweaponkills, var_1);
   }
 
   if(self.trackingweaponhits > 0 && var_0 != "tactical") {
     incrementattachmentstat(var_0, "hits", self.trackingweaponhits, var_1);
-    scripts\common\utility::ref_13e0a(level.ref_11b25, var_0, "hits", self.trackingweaponhits, var_1);
+    scripts\common\utility::ref_13E0A(level.ref_11B25, var_0, "hits", self.trackingweaponhits, var_1);
   }
 
   if(self.trackingweaponheadshots > 0 && var_0 != "tactical") {
     incrementattachmentstat(var_0, "headShots", self.trackingweaponheadshots, var_1);
-    scripts\common\utility::ref_13e0a(level.ref_11b25, var_0, "headShots", self.trackingweaponheadshots, var_1);
+    scripts\common\utility::ref_13E0A(level.ref_11B25, var_0, "headShots", self.trackingweaponheadshots, var_1);
   }
 
   if(self.trackingweapondeaths > 0) {
     incrementattachmentstat(var_0, "deaths", self.trackingweapondeaths, var_1);
-    scripts\common\utility::ref_13e0a(level.ref_11b25, var_0, "deaths", self.trackingweapondeaths, var_1);
+    scripts\common\utility::ref_13E0A(level.ref_11B25, var_0, "deaths", self.trackingweapondeaths, var_1);
     return;
   }
 }

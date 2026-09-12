@@ -10,11 +10,11 @@ function init() {
   var_0.ref_14382 = &ref_14382;
   var_0.postinitfunc = &postinitfunc;
   var_0.weight = getdvarfloat("scr_br_pe_interception_weight", 0);
-  var_0.ref_11b78 = getdvarint("scr_br_pe_interception_max_times", 0);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_interception_max_times", 0);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("interception", "02020200 0 0 0");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("interception");
   thread tracegroundheightexfil();
-  scripts\mp\gametypes\br_publicevents::ref_12b35(17, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(17, var_0);
 }
 
 function postinitfunc() {
@@ -22,54 +22,54 @@ function postinitfunc() {
   initloottables();
   thermite_linktostuck();
   thermite_watchglstuck();
-  scripts\engine\scriptable::ref_12f5b("scriptable_interception_bag", &chopper_bag_used);
+  scripts\engine\scriptable::ref_12F5B("scriptable_interception_bag", &chopper_bag_used);
 }
 
 function tr_vis_radius_override_lod2() {
-  level.ref_12e2b = spawnStruct();
-  level.ref_12e2b.a_s_event_locations = get_possible_event_locations();
-  level.ref_12e2b.a_v_used_event_locations = [];
-  level.ref_12e2b.sg_ontimerexpired = getdvarint("scr_interception_hasLootPinata", 1);
-  level.ref_12e2b.ref_11f1f = getdvarint("scr_interception_numEnemyAgents", 5);
-  level.ref_12e2b.spawnregions = getdvarint("scr_interception_chopperWaitTime", 120);
-  level.ref_12e2b.pre_pinata_uses = getdvarint("scr_interception_prePinataUses", 4);
-  level.ref_12e2b.cash_looted_xp_small = getdvarint("scr_interception_cashLootedXpSmall", 50);
-  level.ref_12e2b.cash_looted_xp_large = getdvarint("scr_interception_cashLootedXpLarge", 100);
-  level.ref_12e2b.agent_killed_xp = getdvarint("scr_interception_agentKilledXp", 10);
-  level.ref_12e2b.cash_aliases = ["cashlootsm", "cashlootmd", "cashlootlrg", "cashlootepic", "cashlootlegend"];
+  level.ref_12E2B = spawnStruct();
+  level.ref_12E2B.a_s_event_locations = get_possible_event_locations();
+  level.ref_12E2B.a_v_used_event_locations = [];
+  level.ref_12E2B.sg_ontimerexpired = getdvarint("scr_interception_hasLootPinata", 1);
+  level.ref_12E2B.ref_11F1F = getdvarint("scr_interception_numEnemyAgents", 5);
+  level.ref_12E2B.spawnregions = getdvarint("scr_interception_chopperWaitTime", 120);
+  level.ref_12E2B.pre_pinata_uses = getdvarint("scr_interception_prePinataUses", 4);
+  level.ref_12E2B.cash_looted_xp_small = getdvarint("scr_interception_cashLootedXpSmall", 50);
+  level.ref_12E2B.cash_looted_xp_large = getdvarint("scr_interception_cashLootedXpLarge", 100);
+  level.ref_12E2B.agent_killed_xp = getdvarint("scr_interception_agentKilledXp", 10);
+  level.ref_12E2B.cash_aliases = ["cashlootsm", "cashlootmd", "cashlootlrg", "cashlootepic", "cashlootlegend"];
   var_0 = getDvar("scr_interception_minCashRewards", "");
-  level.ref_12e2b.min_cash_rewards = [];
+  level.ref_12E2B.min_cash_rewards = [];
 
   if(var_0 != "") {
     var_1 = strtok(var_0, " ");
 
     foreach(var_3 in var_1) {
-      level.ref_12e2b.min_cash_rewards[level.ref_12e2b.min_cash_rewards.size] = int(var_3);
+      level.ref_12E2B.min_cash_rewards[level.ref_12E2B.min_cash_rewards.size] = int(var_3);
     }
   } else {
-    level.ref_12e2b.min_cash_rewards = [15, 0, 0, 0, 0];
+    level.ref_12E2B.min_cash_rewards = [15, 0, 0, 0, 0];
   }
 
   var_5 = getDvar("scr_interception_maxCashRewards", "");
-  level.ref_12e2b.max_cash_rewards = [];
+  level.ref_12E2B.max_cash_rewards = [];
 
   if(var_5 != "") {
     var_6 = strtok(var_5, " ");
 
     foreach(var_3 in var_6) {
-      level.ref_12e2b.max_cash_rewards[level.ref_12e2b.max_cash_rewards.size] = float(var_3);
+      level.ref_12E2B.max_cash_rewards[level.ref_12E2B.max_cash_rewards.size] = float(var_3);
     }
   } else {
-    level.ref_12e2b.max_cash_rewards = [25, 0, 0, 0, 0];
+    level.ref_12E2B.max_cash_rewards = [25, 0, 0, 0, 0];
   }
 
-  if(level.ref_12e2b.max_cash_rewards.size != level.ref_12e2b.cash_aliases.size || level.ref_12e2b.min_cash_rewards.size != level.ref_12e2b.cash_aliases.size) {}
+  if(level.ref_12E2B.max_cash_rewards.size != level.ref_12E2B.cash_aliases.size || level.ref_12E2B.min_cash_rewards.size != level.ref_12E2B.cash_aliases.size) {}
 
-  level.ref_12e2b.ref_11bab = ["brloot_plunder_cash_uncommon_1", "brloot_plunder_cash_uncommon_2", "brloot_plunder_cash_uncommon_3"];
-  level.ref_12e2b.waitteardowninfilmapomnvars = ["brloot_plunder_cash_rare_1", "brloot_plunder_cash_rare_2"];
-  level.ref_12e2b.ref_14292 = ["brloot_plunder_cash_epic_1", "brloot_plunder_cash_epic_2"];
-  level.ref_12e2b.ammo_objects = ["brloot_ammo_12g", "brloot_ammo_50cal", "brloot_ammo_rocket", "brloot_ammo_919", "brloot_ammo_762"];
-  level.ref_12e2b.hascircle = !level.br_circle_disabled;
+  level.ref_12E2B.ref_11BAB = ["brloot_plunder_cash_uncommon_1", "brloot_plunder_cash_uncommon_2", "brloot_plunder_cash_uncommon_3"];
+  level.ref_12E2B.waitteardowninfilmapomnvars = ["brloot_plunder_cash_rare_1", "brloot_plunder_cash_rare_2"];
+  level.ref_12E2B.ref_14292 = ["brloot_plunder_cash_epic_1", "brloot_plunder_cash_epic_2"];
+  level.ref_12E2B.ammo_objects = ["brloot_ammo_12g", "brloot_ammo_50cal", "brloot_ammo_rocket", "brloot_ammo_919", "brloot_ammo_762"];
+  level.ref_12E2B.hascircle = !level.br_circle_disabled;
   level._effect["vfx_smk_signal_green"] = loadfx("vfx/iw8_cp/prop/vfx_smk_signal_green");
 }
 
@@ -91,7 +91,7 @@ function initloottables() {
       break;
   }
 
-  _handlevehiclerepair::ref_11a45("interception_final_pinata", var_0);
+  _handlevehiclerepair::ref_11A45("interception_final_pinata", var_0);
 }
 
 function tracegroundheightexfil() {
@@ -127,32 +127,32 @@ function get_possible_event_locations() {
 
   switch (getDvar("mapname")) {
     case "mp_sm_island_1":
-      var_0[var_0.size] = ref_12ade((-224, -302, 1290), [], 100, 700);
-      var_0[var_0.size] = ref_12ade((-4432, 1726, 1406), [], 100, 800);
-      var_0[var_0.size] = ref_12ade((9991, 5704, 130), [], 100, 800);
-      var_0[var_0.size] = ref_12ade((10952, 2090, 633), [], 100, 700);
-      var_0[var_0.size] = ref_12ade((7518, -5720, 605), [], 100, 700);
-      var_0[var_0.size] = ref_12ade((11280, -4330, 605), [], 100, 700);
-      var_0[var_0.size] = ref_12ade((-8000, 4046, 250), [], 100, 700);
-      var_0[var_0.size] = ref_12ade((-4300, -4520, 1118), [], 100, 700);
+      var_0[var_0.size] = ref_12ADE((-224, -302, 1290), [], 100, 700);
+      var_0[var_0.size] = ref_12ADE((-4432, 1726, 1406), [], 100, 800);
+      var_0[var_0.size] = ref_12ADE((9991, 5704, 130), [], 100, 800);
+      var_0[var_0.size] = ref_12ADE((10952, 2090, 633), [], 100, 700);
+      var_0[var_0.size] = ref_12ADE((7518, -5720, 605), [], 100, 700);
+      var_0[var_0.size] = ref_12ADE((11280, -4330, 605), [], 100, 700);
+      var_0[var_0.size] = ref_12ADE((-8000, 4046, 250), [], 100, 700);
+      var_0[var_0.size] = ref_12ADE((-4300, -4520, 1118), [], 100, 700);
       break;
     default:
-      var_0[var_0.size] = ref_12ade((-146, -246, 20), [[(-146, -246, 0), (146, -246, 0)], [(-246, -146, 0), (246, -146, 0)]], 100, 500);
-      var_0[var_0.size] = ref_12ade((0, -246, 20), [[(-146, -246, 0), (146, -246, 0)], [(-246, -146, 0), (246, -146, 0)]], 100, 500);
-      var_0[var_0.size] = ref_12ade((146, -246, 20), [[(-146, -246, 0), (146, -246, 0)], [(-246, -146, 0), (246, -146, 0)]], 100, 500);
+      var_0[var_0.size] = ref_12ADE((-146, -246, 20), [[(-146, -246, 0), (146, -246, 0)], [(-246, -146, 0), (246, -146, 0)]], 100, 500);
+      var_0[var_0.size] = ref_12ADE((0, -246, 20), [[(-146, -246, 0), (146, -246, 0)], [(-246, -146, 0), (246, -146, 0)]], 100, 500);
+      var_0[var_0.size] = ref_12ADE((146, -246, 20), [[(-146, -246, 0), (146, -246, 0)], [(-246, -146, 0), (246, -146, 0)]], 100, 500);
       break;
   }
 
   return var_0;
 }
 
-function ref_12ade(var_0, var_1, var_2, var_3) {
+function ref_12ADE(var_0, var_1, var_2, var_3) {
   var_4 = spawnStruct();
   var_4.minecart_run = var_0;
   var_4.patrol_paths = var_1;
   var_4.minigun_internal = var_2;
   var_4.nav_radius = var_3;
-  var_4.ref_13b91 = 0;
+  var_4.ref_13B91 = 0;
   var_4.new_rider_combat_logic = [];
   return var_4;
 }
@@ -183,19 +183,19 @@ function register_interception_dialogue(var_0, var_1) {
 }
 
 function ascendermodelview() {
-  level.ref_12e2b.a_s_event_locations = scripts\engine\utility::array_randomize(level.ref_12e2b.a_s_event_locations);
+  level.ref_12E2B.a_s_event_locations = scripts\engine\utility::array_randomize(level.ref_12E2B.a_s_event_locations);
   var_0 = undefined;
   var_1 = 0;
   var_2 = 0;
 
-  if(level.ref_12e2b.hascircle) {
-    var_1 = scripts\mp\gametypes\br_circle::inithelirepository() < 30 + level.ref_12e2b.spawnregions && !scripts\mp\gametypes\br_circle::islastcircle();
+  if(level.ref_12E2B.hascircle) {
+    var_1 = scripts\mp\gametypes\br_circle::inithelirepository() < 30 + level.ref_12E2B.spawnregions && !scripts\mp\gametypes\br_circle::islastcircle();
     var_2 = scripts\mp\gametypes\br_circle::inithelirepository() < 30 && !scripts\mp\gametypes\br_circle::islastcircle();
   }
 
-  foreach(var_4 in level.ref_12e2b.a_s_event_locations) {
-    if(!level.ref_12e2b.hascircle) {
-      if(!scripts\engine\utility::array_contains(level.ref_12e2b.a_v_used_event_locations, var_4.minecart_run)) {
+  foreach(var_4 in level.ref_12E2B.a_s_event_locations) {
+    if(!level.ref_12E2B.hascircle) {
+      if(!scripts\engine\utility::array_contains(level.ref_12E2B.a_v_used_event_locations, var_4.minecart_run)) {
         var_0 = var_4;
       }
 
@@ -203,7 +203,7 @@ function ascendermodelview() {
     }
 
     if(var_2) {
-      if(scripts\mp\gametypes\br_circle::updatescavengerhud(var_4.minecart_run) && !scripts\engine\utility::array_contains(level.ref_12e2b.a_v_used_event_locations, var_4.minecart_run)) {
+      if(scripts\mp\gametypes\br_circle::updatescavengerhud(var_4.minecart_run) && !scripts\engine\utility::array_contains(level.ref_12E2B.a_v_used_event_locations, var_4.minecart_run)) {
         var_0 = var_4;
       }
 
@@ -211,14 +211,14 @@ function ascendermodelview() {
     }
 
     if(var_1) {
-      if(scripts\mp\gametypes\br_circle::updatescavengerhud(var_4.minecart_run) && scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var_4.minecart_run) && !scripts\engine\utility::array_contains(level.ref_12e2b.a_v_used_event_locations, var_4.minecart_run)) {
+      if(scripts\mp\gametypes\br_circle::updatescavengerhud(var_4.minecart_run) && scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var_4.minecart_run) && !scripts\engine\utility::array_contains(level.ref_12E2B.a_v_used_event_locations, var_4.minecart_run)) {
         var_0 = var_4;
       }
 
       continue;
     }
 
-    if(scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var_4.minecart_run) && !scripts\engine\utility::array_contains(level.ref_12e2b.a_v_used_event_locations, var_4.minecart_run)) {
+    if(scripts\mp\gametypes\br_circle::ispointincurrentsafecircle(var_4.minecart_run) && !scripts\engine\utility::array_contains(level.ref_12E2B.a_v_used_event_locations, var_4.minecart_run)) {
       var_0 = var_4;
     }
   }
@@ -232,7 +232,7 @@ function ascendermodelview() {
       }
     }
 
-    level.ref_12e2b.a_v_used_event_locations[level.ref_12e2b.a_v_used_event_locations.size] = var_0.minecart_run;
+    level.ref_12E2B.a_v_used_event_locations[level.ref_12E2B.a_v_used_event_locations.size] = var_0.minecart_run;
     thread ref_13794(var_0);
     scripts\common\vehicle_code::vehicle_start_ai_avoidance();
     return;
@@ -275,7 +275,7 @@ function ref_13794(var_0) {
   var_5.lifeid = 0;
   var_5.flaresreservecount = var_4;
   var_5.pathgoal = var_6;
-  var_5.ref_121ff = var_0.minecart_run + anglesToForward(var_3) * 26000 + (0, 0, 3300);
+  var_5.ref_121FF = var_0.minecart_run + anglesToForward(var_3) * 26000 + (0, 0, 3300);
   var_5.endpoint = var_6;
   var_5.select_mountain_two_spawners = var_3[1];
   var_5.animname = "plunder_extract_heli";
@@ -313,10 +313,10 @@ function givebrweaponxp() {
   thread scripts\common\anim::anim_single_solo(self.crate, "bag_in", "origin_animate_jnt");
   var_0 = givequestsplash(self.pathgoal, self.ref_11980);
   thread heli_spawn_smoke_marker();
-  scripts\mp\gametypes\br_quest_util::ref_140b1(self.ref_11980.ground_drop_point, "dom");
+  scripts\mp\gametypes\br_quest_util::ref_140B1(self.ref_11980.ground_drop_point, "dom");
   var_1 = spawnStruct();
   var_1 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(11, 4, 2, self.ref_11980.ground_drop_point);
-  var_1 scripts\mp\gametypes\br_quest_util::ref_1316f(1000);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_1316F(1000);
   var_1 scripts\mp\gametypes\br_quest_util::ref_13369();
   thread quest_circle_cleanup_on_chopper_death(level);
   self waittill("goal");
@@ -397,7 +397,7 @@ function agent_watch_danger_circle(var_0) {
 
 function chopper_start_agent_spawn(var_0, var_1) {
   waitframe();
-  var_2 = level.ref_12e2b.ref_11f1f - self.ref_11980.new_rider_combat_logic.size;
+  var_2 = level.ref_12E2B.ref_11F1F - self.ref_11980.new_rider_combat_logic.size;
 
   if(var_2 == 0) {
     return;
@@ -463,7 +463,7 @@ function agent_watch_death(var_0) {
   var_0.new_rider_combat_logic = scripts\engine\utility::array_remove(var_0.new_rider_combat_logic, self);
 
   if(isPlayer(var_1)) {
-    var_1 thread scripts\mp\rank::giverankxp("kill", level.ref_12e2b.agent_killed_xp, var_1 getcurrentweapon());
+    var_1 thread scripts\mp\rank::giverankxp("kill", level.ref_12E2B.agent_killed_xp, var_1 getcurrentweapon());
     var_1 thread scripts\mp\rank::scoreeventpopup("kill");
   }
 
@@ -478,8 +478,8 @@ function agent_watch_death(var_0) {
       var_2[var_2.size] = "brloot_armor_plate";
       break;
     case 1:
-      var_3 = randomintrange(0, level.ref_12e2b.ammo_objects.size);
-      var_2[var_2.size] = level.ref_12e2b.ammo_objects[var_3];
+      var_3 = randomintrange(0, level.ref_12E2B.ammo_objects.size);
+      var_2[var_2.size] = level.ref_12E2B.ammo_objects[var_3];
       break;
   }
 
@@ -494,7 +494,7 @@ function agent_watch_death(var_0) {
 function giverandomloadoutindex() {
   self endon("death");
   self endon("leaving");
-  wait level.ref_12e2b.spawnregions;
+  wait level.ref_12E2B.spawnregions;
   play_vo_near_location("interception_chopper_return", self.origin, 1000);
   thread givequestreward();
 }
@@ -503,22 +503,22 @@ function chopper_bag_used(var_0, var_1, var_2, var_3, var_4) {
   var_0 endon("death");
   var_0 endon("leaving");
   var_0.entity.ref_11980.heli endon("leaving");
-  var_5 = level.ref_12e2b.pre_pinata_uses + level.ref_12e2b.sg_ontimerexpired;
+  var_5 = level.ref_12E2B.pre_pinata_uses + level.ref_12E2B.sg_ontimerexpired;
   var_6 = scripts\mp\gametypes\br_pickups::test_ai_anim();
-  var_7 = ref_13c2d(var_0.entity, var_0.origin, 100, [var_0.entity]);
+  var_7 = ref_13C2D(var_0.entity, var_0.origin, 100, [var_0.entity]);
   var_8 = var_7[2] + 2;
-  var_0.entity.ref_11980.ref_13b91++;
+  var_0.entity.ref_11980.ref_13B91++;
 
-  if(var_0.entity.ref_11980.ref_13b91 >= var_5) {
+  if(var_0.entity.ref_11980.ref_13B91 >= var_5) {
     var_0 setscriptablepartstate("scriptable_interception_bag", "unusable");
 
-    if(level.ref_12e2b.sg_ontimerexpired) {
+    if(level.ref_12E2B.sg_ontimerexpired) {
       level thread _handlevehiclerepair::ref_13673("interception_final_pinata", (var_0.origin[0], var_0.origin[1], var_8), randomint(3) + 2, 0);
-      var_3 thread scripts\mp\rank::giverankxp("br_cacheOpen", level.ref_12e2b.cash_looted_xp_large);
+      var_3 thread scripts\mp\rank::giverankxp("br_cacheOpen", level.ref_12E2B.cash_looted_xp_large);
       var_3 thread scripts\mp\rank::scoreeventpopup("br_cacheOpen");
     } else {
       chopper_gunner_assigntargetmarkers(var_0.entity, var_6, var_8, 1, 1);
-      var_3 thread scripts\mp\rank::giverankxp("br_cacheOpen", level.ref_12e2b.cash_looted_xp_small);
+      var_3 thread scripts\mp\rank::giverankxp("br_cacheOpen", level.ref_12E2B.cash_looted_xp_small);
       var_3 thread scripts\mp\rank::scoreeventpopup("br_cacheOpen");
     }
 
@@ -528,10 +528,10 @@ function chopper_bag_used(var_0, var_1, var_2, var_3, var_4) {
   }
 
   chopper_gunner_assigntargetmarkers(var_0.entity, var_6, var_8, 1, 1);
-  var_3 thread scripts\mp\rank::giverankxp("br_cacheOpen", level.ref_12e2b.cash_looted_xp_small);
+  var_3 thread scripts\mp\rank::giverankxp("br_cacheOpen", level.ref_12E2B.cash_looted_xp_small);
   var_3 thread scripts\mp\rank::scoreeventpopup("br_cacheOpen");
 
-  if(var_0.entity.ref_11980.ref_13b91 == 2) {
+  if(var_0.entity.ref_11980.ref_13B91 == 2) {
     chopper_start_agent_spawn(var_0.entity.ref_11980.heli, 0.75, 1);
     play_vo_near_location("interception_agent_respawn", var_0.origin, 800);
     return;
@@ -566,7 +566,7 @@ function givequestreward() {
   thread scripts\common\anim::anim_single_solo(self.crate, "bag_out", "origin_animate_jnt");
   self waittill("goal");
   self vehicle_setspeed(self.speed, self.accel);
-  self setvehgoalpos(self.ref_121ff, 1);
+  self setvehgoalpos(self.ref_121FF, 1);
   self settargetyaw(self.select_mountain_two_spawners);
   self waittill("goal");
   self stoploopsound();
@@ -643,16 +643,16 @@ function chopper_gunner_assigntargetmarkers(var_0, var_1, var_2, var_3, var_4) {
     var_8 = randomintrange(1, 3);
 
     for(var_7 = 0; var_7 < var_8; var_7++) {
-      var_9 = randomintrange(0, level.ref_12e2b.ammo_objects.size);
-      var_5 = level.ref_12e2b.ammo_objects[var_9];
+      var_9 = randomintrange(0, level.ref_12E2B.ammo_objects.size);
+      var_5 = level.ref_12E2B.ammo_objects[var_9];
     }
   }
 
-  for(var_7 = 0; var_7 < level.ref_12e2b.cash_aliases.size; var_7++) {
-    var_10 = randomintrange(level.ref_12e2b.min_cash_rewards[var_7], level.ref_12e2b.max_cash_rewards[var_7] + 1);
+  for(var_7 = 0; var_7 < level.ref_12E2B.cash_aliases.size; var_7++) {
+    var_10 = randomintrange(level.ref_12E2B.min_cash_rewards[var_7], level.ref_12E2B.max_cash_rewards[var_7] + 1);
 
     for(var_11 = 0; var_11 < var_10; var_11++) {
-      var_5 = level.ref_12e2b.cash_aliases[var_7];
+      var_5 = level.ref_12E2B.cash_aliases[var_7];
     }
   }
 
@@ -667,13 +667,13 @@ function chopper_gunner_assigntargetmarkers(var_0, var_1, var_2, var_3, var_4) {
         var_15 = "brloot_plunder_cash_common_1";
         break;
       case "cashlootmd":
-        var_15 = scripts\engine\utility::random(level.ref_12e2b.ref_11bab);
+        var_15 = scripts\engine\utility::random(level.ref_12E2B.ref_11BAB);
         break;
       case "cashlootlrg":
-        var_15 = scripts\engine\utility::random(level.ref_12e2b.waitteardowninfilmapomnvars);
+        var_15 = scripts\engine\utility::random(level.ref_12E2B.waitteardowninfilmapomnvars);
         break;
       case "cashlootepic":
-        var_15 = scripts\engine\utility::random(level.ref_12e2b.ref_14292);
+        var_15 = scripts\engine\utility::random(level.ref_12E2B.ref_14292);
         break;
       case "cashlootlegend":
         var_15 = "brloot_plunder_cash_legendary_1";
@@ -816,14 +816,14 @@ function giveachievementwildfire() {
 
 function givequestsplash(var_0, var_1) {
   var_2 = 715;
-  var_3 = ref_13c2d(var_0, 100, [self]);
+  var_3 = ref_13C2D(var_0, 100, [self]);
   var_4 = var_3[2];
   var_5 = var_4 + var_2;
   var_1.ground_drop_point = var_3;
   return var_5;
 }
 
-function ref_13c2d(var_0, var_1, var_2) {
+function ref_13C2D(var_0, var_1, var_2) {
   var_3 = -99999;
   var_4 = (var_0[0], var_0[1], var_3);
   var_5 = scripts\engine\trace::create_world_contents();
@@ -882,7 +882,7 @@ function spawn_guard_agent(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_7.maxsightdistsqrd = 9000000;
-  level.deposit_from_compromised_convoy_delayed.ref_1363d = scripts\engine\utility::array_add(level.deposit_from_compromised_convoy_delayed.ref_1363d, var_7);
+  level.deposit_from_compromised_convoy_delayed.ref_1363D = scripts\engine\utility::array_add(level.deposit_from_compromised_convoy_delayed.ref_1363D, var_7);
   return var_7;
 }
 

@@ -22,7 +22,7 @@ function init() {
   level.starttimeutcseconds = getsystemtime();
   scripts\mp\utility\stats::setplayerdatagroups();
   level.framedurationseconds = level.frameduration / 1000;
-  level.ref_11ad3 = getdvarint("scr_map_use10v10_objectives", 0);
+  level.ref_11AD3 = getdvarint("scr_map_use10v10_objectives", 0);
   level.teambased = 0;
   level.objectivebased = 0;
   level.endgameontimelimit = 1;
@@ -38,7 +38,7 @@ function init() {
   level.grenadeinitialize = &scripts\mp\weapons::grenadeinitialize;
 
   if(scripts\mp\utility\game::unset_relic_grounded()) {
-    ref_131cf();
+    ref_131CF();
   }
 
   if(scripts\mp\utility\game::matchmakinggame()) {
@@ -57,7 +57,7 @@ function init() {
   }
 }
 
-function ref_131cf() {
+function ref_131CF() {
   level.isaxeweapon = &scripts\mp\utility\weapon::isaxeweapon;
   level.long_death_manager = &scripts\mp\damagefeedback::hudicontype;
   level.fixupplayerweapons = &scripts\mp\weapons::fixupplayerweapons;
@@ -91,11 +91,11 @@ function registerdvars() {
   setDvar("ui_override_halftime", 0);
   setDvar("camera_thirdPerson", getdvarint("scr_thirdPerson"));
   setDvar("compassMaxRange", 1750);
-  ref_12b1f();
-  ref_12b3e();
+  ref_12B1F();
+  ref_12B3E();
 }
 
-function ref_12b1f() {
+function ref_12B1F() {
   if((scripts\mp\utility\game::getgametype() == "arm" || scripts\mp\utility\game::unset_relic_landlocked() || scripts\mp\utility\game::vcloseangles()) && getdvarint("scr_game_forceDefaultFallHeight", 0) != 1) {
     setDvar("bg_fallDamageMinHeight", getdvarint("scr_subMap_fallDamageMinHeight", 560));
     setDvar("bg_fallDamageMaxHeight", getdvarint("scr_subMap_fallDamageMaxHeight", 561));
@@ -110,7 +110,7 @@ function ref_12b1f() {
   setDvar("bg_softLandingMaxHeight", 375);
 }
 
-function ref_12b3e() {
+function ref_12B3E() {
   setDvar("TPKMQLMPP", 1);
 
   if(scripts\mp\utility\game::unset_relic_grounded()) {

@@ -3,7 +3,7 @@
  * Script: scripts\mp\gametypes\br_summerofaction.gsc
 ******************************************************/
 
-function ref_1396c() {
+function ref_1396C() {
   scripts\mp\flags::gameflaginit("activate_cash_lzs", 0);
   tarmac_techo_start();
   thread streakmatchlifeid();
@@ -11,43 +11,43 @@ function ref_1396c() {
   waittillframeend();
   level thread scripts\mp\gametypes\br_soa_tower_ai_event::init();
   thread grenade_trail_modifier();
-  thread ref_13c0f();
+  thread ref_13C0F();
   level thread scripts\mp\gametypes\br_heavy_weapon_drop::init();
   scripts\mp\flags::gameflagwait("prematch_done");
   thread t();
   thread tank_turret_get_target_and_fire();
   thread success_zone_center();
   thread tank_watchforgameend();
-  scripts\mp\gametypes\br_gametypes::ref_12b11("modifyVehicleDamage", &ref_11ca1);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("modifyVehicleDamage", &ref_11CA1);
 }
 
 function tarmac_techo_start() {
-  level.ref_12e2e = spawnStruct();
-  level.ref_12e2e.parachuteoverheadwarningtimeoutms = getdvarfloat("scr_soa_event_vault_door_rotate_duration", 15);
-  level.ref_12e2e.spotlight_turret_info = getdvarint("scr_soa_event_vault_specialist_drops_max", 2);
+  level.ref_12E2E = spawnStruct();
+  level.ref_12E2E.parachuteoverheadwarningtimeoutms = getdvarfloat("scr_soa_event_vault_door_rotate_duration", 15);
+  level.ref_12E2E.spotlight_turret_info = getdvarint("scr_soa_event_vault_specialist_drops_max", 2);
   level.spotlight_movement_think = getdvarint("scr_i_soa_explosive_bows_to_spawn", 5);
 }
 
 function streakmatchlifeid() {
-  scripts\mp\gametypes\br_gametypes::ref_12b11("dangerCircleTick", &dangercircletick);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("dangerCircleTick", &dangercircletick);
   scripts\engine\scriptable::scriptable_addusedcallback(&ref_13456);
 }
 
 function tank_watchforgameend() {
   level.ref_13457 = spawnStruct();
-  level.ref_13457.ref_1346a = &scripts\mp\gametypes\br_analytics::dialog_kill_watcher_civ;
+  level.ref_13457.ref_1346A = &scripts\mp\gametypes\br_analytics::dialog_kill_watcher_civ;
   level.ref_13457.open_any_random_airlock_door = &scripts\mp\gametypes\br_analytics::dialog_low_health;
   level.ref_13457.ref_12540 = &scripts\mp\gametypes\br_analytics::detonatingplayer;
   level.ref_13457.ref_12650 = &scripts\mp\gametypes\br_analytics::detonation_time;
-  level.ref_13457.ref_125d1 = &scripts\mp\gametypes\br_analytics::detonation_color_omnvar_value;
+  level.ref_13457.ref_125D1 = &scripts\mp\gametypes\br_analytics::detonation_color_omnvar_value;
   level.ref_13457.ref_12556 = &scripts\mp\gametypes\br_analytics::detonation_code_omnvar_value;
   level.ref_13457.ref_13738 = &scripts\mp\gametypes\br_analytics::devspectateenemyteam1;
-  level.ref_13457.ref_1373b = &scripts\mp\gametypes\br_analytics::devscriptedtests;
-  level.ref_13457.ref_145c2 = &scripts\mp\gametypes\br_analytics::devspectateenemyteam2;
+  level.ref_13457.ref_1373B = &scripts\mp\gametypes\br_analytics::devscriptedtests;
+  level.ref_13457.ref_145C2 = &scripts\mp\gametypes\br_analytics::devspectateenemyteam2;
 }
 
 function t() {
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerKilled", &onplayerkilled);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerKilled", &onplayerkilled);
 }
 
 function tank_turret_get_target_and_fire() {
@@ -81,7 +81,7 @@ function onplayerkilled(var_0) {
 
   if(isPlayer(var_2) && (isDefined(var_3.equipmentref) && scripts\mp\equipment::isequipmentlethal(var_3.equipmentref) || isDefined(var_4) && isexplosivedamagemod(var_4))) {
     if(getdvarint("MLNNMOPQOP", 0) == 6) {
-      var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_explosive_weapons_lethal_kills_for_s3_5_event_wz", 1);
+      var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_explosive_weapons_lethal_kills_for_s3_5_event_wz", 1);
     }
   }
 
@@ -91,7 +91,7 @@ function onplayerkilled(var_0) {
     }
 
     if(getdvarint("MLNNMOPQOP", 0) == 6) {
-      var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_kills_with_combat_bow_for_s3_5_event_wz", 1);
+      var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_kills_with_combat_bow_for_s3_5_event_wz", 1);
     }
   }
 
@@ -111,7 +111,7 @@ function onplayerkilled(var_0) {
 
     if(var_6) {
       if(getdvarint("MLNNMOPQOP", 0) == 6) {
-        var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_first_blood_for_s3_5_event_wz", 1);
+        var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_first_blood_for_s3_5_event_wz", 1);
         return;
       }
 
@@ -126,7 +126,7 @@ function ref_13456(var_0, var_1, var_2, var_3, var_4) {
   if(var_0.type == "brloot_soa_pow_dogtag") {
     if(getdvarint("MLNNMOPQOP", 0) == 6) {
       foreach(var_6 in scripts\mp\utility\teams::getteamdata(var_3.team, "players")) {
-        var_6 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_collect_pow_tags_for_s3_5_event_wz", 1);
+        var_6 scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_collect_pow_tags_for_s3_5_event_wz", 1);
       }
 
       return;
@@ -178,13 +178,13 @@ function dangercircletick(var_0, var_1) {
 
 function activatemusictrigger() {}
 
-function ref_13c0f() {
+function ref_13C0F() {
   scripts\mp\flags::gameflagwait("prematch_done");
-  thread ref_13c10();
-  thread ref_13c11();
+  thread ref_13C10();
+  thread ref_13C11();
 }
 
-function ref_13c10() {
+function ref_13C10() {
   var_0 = (-196, 836, 3890);
 
   if(level.mapname == "mp_don4") {
@@ -192,10 +192,10 @@ function ref_13c10() {
   }
 
   var_1 = scripts\mp\gameobjects::createhintobject(var_0, "HINT_BUTTON", undefined, &"BR_SOA_EVENT/VAULT_KEYREADER_DOOR", undefined, undefined, undefined, 350, 360, 200, 120);
-  thread ref_13c0d();
+  thread ref_13C0D();
 }
 
-function ref_13c0d() {
+function ref_13C0D() {
   level endon("game_ended");
   self endon("death");
   var_0 = getEnt("e_vault_door", "targetname");
@@ -208,7 +208,7 @@ function ref_13c0d() {
         playsoundatpos(self.origin, "br_keypad_confirm");
       }
 
-      thread ref_13c0e(var_0);
+      thread ref_13C0E(var_0);
       self delete();
     } else if(soundexists("br_keypad_deny")) {
       playsoundatpos(self.origin, "br_keypad_deny");
@@ -218,7 +218,7 @@ function ref_13c0d() {
   }
 }
 
-function ref_13c0e(var_0) {
+function ref_13C0E(var_0) {
   level endon("game_ended");
   self endon("death");
   var_1 = incrementpersistentstat(level.players, self.origin, 10000);
@@ -240,16 +240,16 @@ function ref_13c0e(var_0) {
   playsoundatpos(var_5, "mx_soa_ode_to_joy");
   playsoundatpos(var_6, "evt_soa_ode_to_joy_alarm_01");
   playsoundatpos(var_7, "evt_soa_ode_to_joy_alarm_02");
-  self rotateYaw(-90, level.ref_12e2e.parachuteoverheadwarningtimeoutms, 0.25, 0.25);
+  self rotateYaw(-90, level.ref_12E2E.parachuteoverheadwarningtimeoutms, 0.25, 0.25);
   playsoundatpos(self.origin, "evt_door_vault_open_start");
   wait 0.5;
   self playLoopSound("evt_soa_door_vault_lp");
-  wait level.ref_12e2e.parachuteoverheadwarningtimeoutms - 0.5;
+  wait level.ref_12E2E.parachuteoverheadwarningtimeoutms - 0.5;
   playsoundatpos(self.origin, "evt_door_vault_open_stop");
   self stoploopsound();
 }
 
-function ref_13c11() {
+function ref_13C11() {
   var_0 = (-73, 449, 3895);
   var_1 = (-73, 337, 3895);
   var_2 = (-73, 233, 3895);
@@ -268,24 +268,24 @@ function ref_13c11() {
   var_4.itemsdropped = 0;
   var_4.ref_13904 = "soa_tower_vault_lockbox_right";
   var_5 = scripts\mp\gameobjects::createhintobject(var_4.origin, "HINT_BUTTON", undefined, &"BR_SOA_EVENT/VAULT_KEYREADER_1");
-  thread ref_13c12(var_5, "helipad");
+  thread ref_13C12(var_5, "helipad");
   var_6 = spawnStruct();
   var_6.origin = var_1;
   var_6.angles = var_3;
   var_6.itemsdropped = 0;
   var_6.ref_13904 = "soa_tower_vault_lockbox_middle";
   var_7 = scripts\mp\gameobjects::createhintobject(var_6.origin, "HINT_BUTTON", undefined, &"BR_SOA_EVENT/VAULT_KEYREADER_2");
-  thread ref_13c12(var_7, "security");
+  thread ref_13C12(var_7, "security");
   var_8 = spawnStruct();
   var_8.origin = var_2;
   var_8.angles = var_3;
   var_8.itemsdropped = 0;
   var_8.ref_13904 = "soa_tower_vault_lockbox_left";
   var_9 = scripts\mp\gameobjects::createhintobject(var_8.origin, "HINT_BUTTON", undefined, &"BR_SOA_EVENT/VAULT_KEYREADER_3");
-  thread ref_13c12(var_9, "arms_deal");
+  thread ref_13C12(var_9, "arms_deal");
 }
 
-function ref_13c12(var_0, var_1) {
+function ref_13C12(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
 
@@ -314,8 +314,8 @@ function ref_13c12(var_0, var_1) {
       playsoundatpos(var_4.origin, "evt_door_lockbox_open");
       var_4 rotateYaw(80, 1.5, 0.5, 0.5);
       wait 1.32;
-      thread ref_13c14(var_1, var_0);
-      var_2 scripts\mp\gametypes\br_pickups::ref_12bfc();
+      thread ref_13C14(var_1, var_0);
+      var_2 scripts\mp\gametypes\br_pickups::ref_12BFC();
       self delete();
     } else if(soundexists("br_pickup_deny")) {
       var_2 playlocalsound("br_pickup_deny");
@@ -325,10 +325,10 @@ function ref_13c12(var_0, var_1) {
   }
 }
 
-function ref_13c14(var_0, var_1) {
+function ref_13C14(var_0, var_1) {
   var_2 = scripts\mp\utility\teams::getteamdata(var_1.team, "teamCount");
-  var_3 = ref_13c13(var_0, var_2);
-  scripts\mp\gametypes\br_lootcache::ref_11a42(var_3, 0);
+  var_3 = ref_13C13(var_0, var_2);
+  scripts\mp\gametypes\br_lootcache::ref_11A42(var_3, 0);
 
   if(var_0 == "arms_deal") {
     var_4 = (15, 0, 0);
@@ -337,15 +337,15 @@ function ref_13c14(var_0, var_1) {
       var_4 = (0, 15, 0);
     }
 
-    var_5 = scripts\mp\gametypes\br_quest_util::ref_135df("blueprintextract", scripts\engine\utility::drop_to_ground(self.origin + var_4, 0, -200, (0, 0, 1)) + (0, 0, 25), 0);
+    var_5 = scripts\mp\gametypes\br_quest_util::ref_135DF("blueprintextract", scripts\engine\utility::drop_to_ground(self.origin + var_4, 0, -200, (0, 0, 1)) + (0, 0, 25), 0);
     var_6 = scripts\mp\gametypes\br_quest_util::risk_flagspawndebugobjicons();
     var_5 scripts\mp\gametypes\br_blueprint_extract_spawn::controlslinked(var_6);
-    scripts\mp\gametypes\br_pickups::ref_12b3a(var_5);
+    scripts\mp\gametypes\br_pickups::ref_12B3A(var_5);
     return;
   }
 }
 
-function ref_13c13(var_0, var_1) {
+function ref_13C13(var_0, var_1) {
   var_2 = [];
 
   switch (var_0) {
@@ -362,21 +362,21 @@ function ref_13c13(var_0, var_1) {
   return var_2;
 }
 
-function ref_13c15(var_0, var_1, var_2) {
+function ref_13C15(var_0, var_1, var_2) {
   var_3 = scripts\engine\utility::drop_to_ground(var_1, 0) + var_2;
 
   switch (var_0) {
     case "helipad":
       var_4 = easepower("brloot_access_card_gold_vault_lockbox_1", var_3);
-      scripts\mp\gametypes\br_pickups::ref_12b3a(var_4);
+      scripts\mp\gametypes\br_pickups::ref_12B3A(var_4);
       break;
     case "security":
       var_4 = easepower("brloot_access_card_gold_vault_lockbox_2", var_3);
-      scripts\mp\gametypes\br_pickups::ref_12b3a(var_4);
+      scripts\mp\gametypes\br_pickups::ref_12B3A(var_4);
       break;
     case "arms_deal":
       var_4 = easepower("brloot_access_card_gold_vault_lockbox_3", var_3);
-      scripts\mp\gametypes\br_pickups::ref_12b3a(var_4);
+      scripts\mp\gametypes\br_pickups::ref_12B3A(var_4);
       break;
   }
 }
@@ -404,7 +404,7 @@ function ref_13453() {
   var_0.origin = (9262, 49682, 1050);
   var_0.angles = (0, 90, 0);
   var_1 = scripts\mp\gametypes\br_pickups::test_ai_anim();
-  scripts\mp\gametypes\br_lootcache::ref_11a41("brloot_killstreak_explosive_bow", var_1, var_0.origin, var_0.angles, 0, 0);
+  scripts\mp\gametypes\br_lootcache::ref_11A41("brloot_killstreak_explosive_bow", var_1, var_0.origin, var_0.angles, 0, 0);
 }
 
 function ref_13455() {
@@ -418,21 +418,21 @@ function ref_13455() {
 function ref_12817(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  self.ref_1281b = 1;
+  self.ref_1281B = 1;
   var_1 = [];
 
   foreach(var_3 in var_0) {
     var_4 = spawnStruct();
     var_4.origin = var_3;
     var_4 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(2, 0, 0, var_3);
-    var_4 scripts\mp\gametypes\br_quest_util::ref_1316f(2000);
-    var_4 scripts\mp\gametypes\br_quest_util::ref_1336a(self);
+    var_4 scripts\mp\gametypes\br_quest_util::ref_1316F(2000);
+    var_4 scripts\mp\gametypes\br_quest_util::ref_1336A(self);
     level.ref_12819 = scripts\engine\utility::array_add(level.ref_12819, var_4);
     wait 0.5;
   }
 }
 
-function ref_1281a(var_0) {
+function ref_1281A(var_0) {
   level endon("game_ended");
   self endon("disconnect");
   var_0 *= 0.5;
@@ -469,7 +469,7 @@ function ref_13452() {
   var_1 waittill("trigger", var_2);
   level notify("soa_bombardment_complete");
 
-  if(!isDefined(level.ref_119e7)) {
+  if(!isDefined(level.ref_119E7)) {
     scripts\mp\gametypes\br_lootchopper::init();
   }
 
@@ -480,12 +480,12 @@ function ref_13452() {
   var_7 = var_4.origin + (20500, 20500, 8000);
   var_8 = [var_4.origin, var_5.origin, var_6.origin];
   var_1 delete();
-  var_9 = scripts\mp\gametypes\br_lootchopper::ref_11a18(var_3, undefined, 1, var_8, var_7);
+  var_9 = scripts\mp\gametypes\br_lootchopper::ref_11A18(var_3, undefined, 1, var_8, var_7);
   var_9 thread scripts\mp\gametypes\br_publicevent_tower::connectedplayercount();
   var_9.intro_driver_logic = &scripts\mp\gametypes\br_event_soa_tower_helipad::ref_13450;
   var_9.intro_enemy_respawner = &scripts\mp\gametypes\br_event_soa_tower_helipad::ref_13450;
-  var_9.lootfunc = &scripts\mp\gametypes\br_publicevent_tower::ref_1344e;
-  var_9.ref_135b6 = 1;
+  var_9.lootfunc = &scripts\mp\gametypes\br_publicevent_tower::ref_1344E;
+  var_9.ref_135B6 = 1;
   var_9.updateteamscoreplacements = 1;
   var_9.usefuncoverride = 1;
   var_9 thread scripts\mp\gametypes\br_event_soa_tower_helipad::ref_13450(var_4.origin);
@@ -499,7 +499,7 @@ function ref_13452() {
   var_2 endon("death");
   var_2 thread scripts\mp\utility\dialog::leaderdialogonplayer(var_2.team + "_enemy_toma_strike_inbound");
   thread crates_delete_early();
-  thread ref_11eca(level, var_2.origin, 4000);
+  thread ref_11ECA(level, var_2.origin, 4000);
   var_10 = var_2 scripts\cp_mp\utility\killstreak_utility::createstreakinfo("toma_strike", var_2);
   var_11 = anglesToForward(var_2 getplayerangles());
   var_12 = anglesToForward(var_2.angles);
@@ -521,7 +521,7 @@ function ref_13452() {
   level notify("soa_bombardment_complete");
 }
 
-function ref_11ca1(var_0) {
+function ref_11CA1(var_0) {
   if(istrue(self.usefuncoverride) && scripts\mp\utility\weapon::unset_jugg_ignoreall_after_notify(var_0.objweapon)) {
     return getdvarint("scr_br_soa_explosive_bow_vehicle_damage", 4500);
   }
@@ -529,7 +529,7 @@ function ref_11ca1(var_0) {
   return var_0.damage;
 }
 
-function ref_11eca(var_0, var_1, var_2) {
+function ref_11ECA(var_0, var_1, var_2) {
   var_3 = [];
 
   foreach(var_5 in level.players) {
@@ -597,7 +597,7 @@ function cratephysicsoncallback(var_0, var_1) {
   var_2 = spawnStruct();
   var_3 = var_0 + (0, 0, 5000);
   var_4 = vectorNormalize(var_0 - (var_3[0], var_3[1], 0));
-  var_5 = scripts\cp_mp\killstreaks\toma_strike::ref_13bd6(var_0, var_1, var_4);
+  var_5 = scripts\cp_mp\killstreaks\toma_strike::ref_13BD6(var_0, var_1, var_4);
   var_6 = (0, 0, -1 * getdvarint("bg_gravity", 800));
   var_7 = (var_5.point - 0.5 * var_6 * squared(4) - var_3) / 4;
   var_8 = 3.925 * randomfloatrange(0.95, 1);

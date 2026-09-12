@@ -39,7 +39,7 @@ function initdefaulthvtmodel(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
   var_10.body linkTo(var_10);
   var_10.idleanim = scripts\engine\utility::ter_op(istrue(var_7), "sdr_cp_hostage_dropoff_ground_idle_female", "sdr_cp_hostage_dropoff_ground_idle_pilot");
   var_10.shownonspectatingwinnersplash = scripts\engine\utility::ter_op(istrue(var_7), (-6, 1, 0), (-9, 1, 0));
-  var_10.ref_135ab = var_10.origin;
+  var_10.ref_135AB = var_10.origin;
 
   if(isDefined(var_2)) {
     var_10.head = spawn("script_model", var_10.origin);
@@ -66,7 +66,7 @@ function initdefaulthvtmodel(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
 
   level.spawnjuggernautcrateatposition[level.spawnjuggernautcrateatposition.size] = var_10;
   thread hostage_enable_rescue(var_10, 0);
-  thread ref_11d0a();
+  thread ref_11D0A();
   return var_10;
 }
 
@@ -264,7 +264,7 @@ function hostagedrop(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   thread hostage_enable_rescue(var_1);
   thread watchfordelete();
-  thread ref_144c4();
+  thread ref_144C4();
 
   if(isDefined(var_1.hostage_drop_override_data)) {
     if(isDefined(var_1.hostage_drop_override_data.call_back_func)) {
@@ -497,7 +497,7 @@ function togglehvtusable(var_0, var_1) {
   self notify("hvt_interaction_updated");
 }
 
-function ref_11d0a() {
+function ref_11D0A() {
   level endon("game_ended");
   self endon("delete");
   self notify("monitor_good_droppos");
@@ -537,7 +537,7 @@ function watchfordelete() {
     var_0 = self.waypoint;
   }
 
-  scripts\engine\utility::ref_143a5("deleted", "death");
+  scripts\engine\utility::ref_143A5("deleted", "death");
   scripts\cp\cp_objectives::freeworldid("pickup_hostage");
   objective_delete(var_0);
   self.waypoint = undefined;
@@ -548,7 +548,7 @@ function watchfordelete() {
   }
 }
 
-function ref_144c4() {
+function ref_144C4() {
   level endon("game_ended");
   self endon("deleted");
   self endon("death");
@@ -583,7 +583,7 @@ function do_hvt_pickup_anim(var_0) {
   var_0 scripts\common\utility::allow_weapon_pickup(0, "hvt");
   var_0 setstance("stand");
   var_0 scripts\common\utility::allow_usability(0);
-  var_0 scripts\engine\utility::ref_143b9(1, "weapon_change");
+  var_0 scripts\engine\utility::ref_143B9(1, "weapon_change");
   thread create_player_rig(var_0, var_0);
   self.body scripts\common\anim::anim_first_frame_solo(var_0.player_rig, "pickup_hvt_ground");
   link_player_to_rig(var_0, 0.25);
@@ -655,7 +655,7 @@ function do_fast_hvt_pickup(var_0) {
   var_0 scripts\common\utility::allow_weapon_switch(0);
   var_0 scripts\common\utility::allow_weapon_pickup(0, "hvt");
   var_0 setstance("stand");
-  var_0 scripts\engine\utility::ref_143b9(1, "weapon_change");
+  var_0 scripts\engine\utility::ref_143B9(1, "weapon_change");
   self.body hide();
 
   if(isDefined(self.head)) {
@@ -684,7 +684,7 @@ function create_player_rig(var_0, var_1, var_2) {
   var_0.player_rig.animname = var_1;
   var_0.player_rig useanimtree(#animtree);
   var_0.player_rig.angles = scripts\engine\utility::ter_op(isDefined(var_0.angles), var_0.angles, (0, 0, 0));
-  scripts\engine\utility::ref_143a6("remove_rig", "death", "disconnect");
+  scripts\engine\utility::ref_143A6("remove_rig", "death", "disconnect");
   remove_player_rig(var_0);
 }
 
@@ -724,7 +724,7 @@ function do_hvt_drop_anim(var_0, var_1) {
   var_2 = getcompleteweaponname("iw8_gunless");
   var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon(var_2, undefined, undefined, 1);
   var_3 = var_0 scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_2, 0);
-  var_0 scripts\engine\utility::ref_143b9(1, "weapon_change");
+  var_0 scripts\engine\utility::ref_143B9(1, "weapon_change");
   var_0 resetcarryobject();
   var_0 setstance("stand");
   var_0 scripts\common\utility::allow_usability(0);
@@ -794,7 +794,7 @@ function do_hvt_pickup_from_truck_anim(var_0) {
   var_0 scripts\common\utility::allow_weapon_pickup(0, "hvt");
   var_0 freezecontrols(1);
   var_0 setstance("stand");
-  var_0 scripts\engine\utility::ref_143b9(1, "weapon_change");
+  var_0 scripts\engine\utility::ref_143B9(1, "weapon_change");
   thread create_player_rig(var_0, var_0);
   var_1 scripts\common\anim::anim_first_frame_solo(var_0.player_rig, "truck_hvt_pickup");
   link_player_to_rig(var_0, 0.5);
@@ -872,7 +872,7 @@ function do_hvt_load_on_truck_anim(var_0) {
   var_3 = getcompleteweaponname("iw8_gunless");
   var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon(var_3, undefined, undefined, 1);
   var_4 = var_0 scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_3, 0);
-  var_0 scripts\engine\utility::ref_143b9(1, "weapon_change");
+  var_0 scripts\engine\utility::ref_143B9(1, "weapon_change");
   var_0 setstance("stand");
   var_0 allowcrouch(0);
   var_0 unlink();
@@ -967,7 +967,7 @@ function load_hvt(var_0, var_1, var_2) {
   var_7 = getcompleteweaponname("iw8_gunless");
   var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon(var_7, undefined, undefined, 1);
   var_8 = var_0 scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_7, 0);
-  var_0 scripts\engine\utility::ref_143b9(1, "weapon_change");
+  var_0 scripts\engine\utility::ref_143B9(1, "weapon_change");
   var_0 setstance("stand");
   var_0 allowcrouch(0);
   var_9 = var_0.hostagecarried;
@@ -1171,7 +1171,7 @@ function watchfordrophintstring(var_0, var_1) {
 function hostage_laststandlistener(var_0) {
   level endon("game_ended");
   self endon("dropped");
-  var_0 scripts\engine\utility::ref_143a6("last_stand", "disconnect", "being_subdued");
+  var_0 scripts\engine\utility::ref_143A6("last_stand", "disconnect", "being_subdued");
   var_0 disableusability();
   var_0 resetcarryobject();
   toggledrophintstring(0, var_0, self);
@@ -1480,7 +1480,7 @@ function player_carrydebuff() {
   self.disable_map_tablet = 1;
 }
 
-function ref_144d1() {
+function ref_144D1() {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
@@ -1607,7 +1607,7 @@ function modeplayerskipdialog(var_0) {
   var_0 playsoundonmovingent("sdr_cp_hostage_dropoff_ground_plr_npc");
 }
 
-function ref_1234f(var_0) {
+function ref_1234F(var_0) {
   var_0 playsoundonmovingent("sdr_cop_hostage_pickup_ground_pilot");
 }
 

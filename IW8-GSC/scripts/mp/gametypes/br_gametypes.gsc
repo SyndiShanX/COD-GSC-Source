@@ -10,7 +10,7 @@ function init() {
   level.disable_super_in_turret.move_ent = [];
   level.disable_super_in_turret.data = [];
   level.disable_super_in_turret.name = getDvar("scr_br_gametype", "");
-  level.disable_super_in_turret.ref_12e05 = &ref_12e05;
+  level.disable_super_in_turret.ref_12E05 = &ref_12E05;
   level.disable_super_in_turret.unset_relic_aggressive_melee_params = &unset_relic_aggressive_melee_params;
   level.disable_super_in_turret.tutorial_showtext = &tutorial_showtext;
 
@@ -19,7 +19,7 @@ function init() {
   }
 
   if(scripts\mp\utility\game::privatematch()) {
-    ref_140d3();
+    ref_140D3();
   }
 
   switch (level.disable_super_in_turret.name) {
@@ -135,7 +135,7 @@ function setup_vehicle_wave_by_player_count() {
   exitlevel(0);
 }
 
-function ref_140d3() {
+function ref_140D3() {
   if(!getdvarint("scr_br_pr_validate_gametypes", 1)) {
     return;
   }
@@ -175,7 +175,7 @@ function ref_140d3() {
   setup_vehicle_wave_by_player_count();
 }
 
-function ref_12b11(var_0, var_1) {
+function ref_12B11(var_0, var_1) {
   if(isDefined(level.disable_super_in_turret.funcs[var_0])) {
     scripts\mp\utility\script::laststand_dogtags("registerBrGametypeFunc already has " + var_0 + " defined.");
   }
@@ -183,11 +183,11 @@ function ref_12b11(var_0, var_1) {
   level.disable_super_in_turret.funcs[var_0] = var_1;
 }
 
-function ref_12e08(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_12E08(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   return [[level.disable_super_in_turret.funcs[var_0]]](var_1, var_2, var_3, var_4, var_5, var_6);
 }
 
-function ref_12e05(var_0, var_1, var_2) {
+function ref_12E05(var_0, var_1, var_2) {
   if(isDefined(level.disable_super_in_turret.funcs[var_0])) {
     if(isDefined(var_2)) {
       return [[level.disable_super_in_turret.funcs[var_0]]](var_1, var_2);
@@ -201,19 +201,19 @@ function ref_12e05(var_0, var_1, var_2) {
   }
 }
 
-function ref_12e06(var_0, var_1, var_2, var_3) {
+function ref_12E06(var_0, var_1, var_2, var_3) {
   if(isDefined(level.disable_super_in_turret.funcs[var_0])) {
     return [[level.disable_super_in_turret.funcs[var_0]]](var_1, var_2, var_3);
   }
 }
 
-function ref_12e07(var_0, var_1, var_2, var_3, var_4) {
+function ref_12E07(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(level.disable_super_in_turret.funcs[var_0])) {
     return [[level.disable_super_in_turret.funcs[var_0]]](var_1, var_2, var_3, var_4);
   }
 }
 
-function ref_13f25(var_0) {
+function ref_13F25(var_0) {
   level.disable_super_in_turret.funcs[var_0] = undefined;
 }
 
@@ -237,7 +237,7 @@ function unset_relic_aggressive_melee_params(var_0) {
   return isDefined(level.disable_super_in_turret) && istrue(level.disable_super_in_turret.move_ent[var_0]);
 }
 
-function ref_12b10(var_0, var_1) {
+function ref_12B10(var_0, var_1) {
   level.disable_super_in_turret.data[var_0] = var_1;
 }
 

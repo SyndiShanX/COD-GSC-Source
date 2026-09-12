@@ -5,7 +5,7 @@
 
 #using_animtree("");
 
-function ref_145ee() {
+function ref_145EE() {
   level.defend_wave_4 = getdvarint("scr_br_enableBombers", 0);
   level.defenderflag_bflagstart = getdvarint("scr_br_enableRandomBombardment", 0);
   level.defenderflag = getdvarint("scr_br_enableFlak", 0);
@@ -15,7 +15,7 @@ function ref_145ee() {
   level.delete_starting_boxes = getdvarint("scr_br_randomBombardment_canStun", 1);
   level.delete_trapfunc = getdvarint("scr_br_randomBombardment_stunTimer", 4);
   level.delete_track = getdvarint("scr_br_randomBombardment_stunRange", 500);
-  level.ref_13b46 = getdvarfloat("scr_threat_max_radius_strikes_around_player", 500);
+  level.ref_13B46 = getdvarfloat("scr_threat_max_radius_strikes_around_player", 500);
 
   if(level.defend_wave_4) {
     level.scr_animtree["planeWaves"] = #animtree;
@@ -41,14 +41,14 @@ function ref_12800() {
 
   if(level.defenderflag_bflagstart && level.defend_wave_4) {
     level thread scripts\mp\utility\sound::besttime("br_ww2_bombardment");
-    thread ref_145ef();
+    thread ref_145EF();
     return;
   }
 }
 
 function update_ai_array() {
   level endon("game_ended");
-  level.ref_123a7 = 1;
+  level.ref_123A7 = 1;
 
   for(;;) {
     jumpiftrue(isDefined(level.infilstruct)) LOC_0000001c;
@@ -65,10 +65,10 @@ function update_ai_array() {
   level waittill("br_circle_set", var_0);
   waitframe();
   level waittill("br_circle_set", var_0);
-  level.ref_123a7 = 0;
+  level.ref_123A7 = 0;
 }
 
-function ref_145ef() {
+function ref_145EF() {
   level endon("game_ended");
   var_0 = spawn("script_model", (0, 0, 500));
   var_0 setModel("lep_sfx");

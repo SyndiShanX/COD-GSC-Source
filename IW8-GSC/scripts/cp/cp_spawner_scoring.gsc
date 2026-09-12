@@ -14,7 +14,7 @@ function spawner_scoring_init() {
   level.spawner_scoring_funcs["vehicle_spawner"] = &vehicle_spawnpoint_scoring;
   level.spawner_scoring_funcs["cluster_spawner"] = &cluster_spawnpoint_scoring;
   level.spawner_scoring_funcs["standard_spawner"] = &standard_spawnpoint_scoring;
-  level.ref_1364a["cluster_spawner"] = 0;
+  level.ref_1364A["cluster_spawner"] = 0;
   level.spawner_scoring_critical_factors = [];
   level.spawner_scoring_critical_factors["vehicle_spawner"] = &vehicle_spawnpoint_valid;
   level.spawner_scoring_critical_factors["cluster_spawner"] = &cluster_spawnpoint_valid;
@@ -69,7 +69,7 @@ function helidestroyvehiclestouchnotify(var_0, var_1, var_2) {
 
   if(var_4) {
     var_5 = score_ai_spawns(var_3, undefined, 1, var_3, 1);
-    self.ref_127ed = undefined;
+    self.ref_127ED = undefined;
   }
 
   var_1 scripts\cp\cp_modular_spawning::set_default_spawner_values();
@@ -197,9 +197,9 @@ function standard_spawnpoint_valid(var_0, var_1) {
     }
   }
 
-  if(isDefined(self.ref_127ed)) {
+  if(isDefined(self.ref_127ED)) {
     var_14 = recentunresolvedcollision(var_0);
-    var_15 = distancesquared(self.ref_127ed, var_0.origin);
+    var_15 = distancesquared(self.ref_127ED, var_0.origin);
     var_11 = undefined;
 
     if(var_15 >= var_14) {
@@ -290,8 +290,8 @@ function is_valid_respawn_spawnpoint(var_0) {
 }
 
 function gate_flares_think(var_0) {
-  if(isDefined(self.group) && isDefined(self.group.ref_127ed)) {
-    if(!self maymovefrompointtopoint(var_0.origin, self.group.ref_127ed)) {
+  if(isDefined(self.group) && isDefined(self.group.ref_127ED)) {
+    if(!self maymovefrompointtopoint(var_0.origin, self.group.ref_127ED)) {
       level thread scripts\engine\utility::draw_capsule(var_0.origin, 16, 32, undefined, (1, 0, 0), undefined, 1000);
       var_0 scripts\cp\cp_modular_spawning::add_to_spawner_flags(512);
       return 0;
@@ -347,10 +347,10 @@ function trial_target_follow_dummy(var_0) {
     return true;
   }
 
-  var_1 = self.ref_127ed;
+  var_1 = self.ref_127ED;
 
   if(!isvector(var_1)) {
-    var_1 = self.ref_127ed.origin;
+    var_1 = self.ref_127ED.origin;
   }
 
   if(!navtrace(var_0.origin, var_1)) {
@@ -431,7 +431,7 @@ function get_score_target_override(var_0) {
 
 function get_score_target_pos(var_0) {
   if(isPlayer(var_0)) {
-    jumpiffalse(isDefined(var_0.velo_forward) && ref_132e4(var_0)) LOC_0000002d;
+    jumpiffalse(isDefined(var_0.velo_forward) && ref_132E4(var_0)) LOC_0000002d;
     var_1 = var_0.velo_forward;
     goto LOC_0000004c;
   } else {
@@ -458,8 +458,8 @@ function get_array_of_valid_spawnpoints(var_0, var_1, var_2, var_3) {
   var_5 = 10;
 
   if(isarray(var_0)) {
-    self.ref_127ed = self.spawn_ref_point;
-    var_0 = project_to_line(self.ref_127ed, var_0);
+    self.ref_127ED = self.spawn_ref_POINT;
+    var_0 = project_to_line(self.ref_127ED, var_0);
 
     for(var_6 = 0; var_6 < var_0.size; var_6++) {
       var_7 = var_0[var_6];
@@ -492,7 +492,7 @@ function get_current_spawn_score_player_index(var_0, var_1) {
   }
 
   var_3 = undefined;
-  var_4 = scripts\engine\utility::array_sort_with_func(var_0, &ref_134d0);
+  var_4 = scripts\engine\utility::array_sort_with_func(var_0, &ref_134D0);
   var_5 = 0;
 
   while(var_5 < var_4.size) {
@@ -570,21 +570,21 @@ function get_next_player_index(var_0, var_1) {
 function score_ai_spawns(var_0, var_1, var_2, var_3, var_4) {
   var_5 = undefined;
   var_6 = get_best_scoring_target(var_4);
-  self.ref_133b8 = undefined;
+  self.ref_133B8 = undefined;
 
   if(!isDefined(var_6)) {
     return undefined;
   }
 
-  if(istrue(self.ref_1405a)) {
+  if(istrue(self.ref_1405A)) {
     var_1 = 1;
   }
 
   self.current_time = gettime();
   var_7 = get_score_target_pos(var_6);
   var_8 = get_score_target_override(var_7);
-  self.spawn_ref_point = var_7;
-  self.spawn_ref_point_override = var_8;
+  self.spawn_ref_POINT = var_7;
+  self.spawn_ref_POINT_override = var_8;
   var_9 = get_array_of_valid_spawnpoints(var_0, var_1, undefined, var_3);
 
   if(var_9.size < 1) {
@@ -611,7 +611,7 @@ function score_ai_spawns(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isDefined(var_6)) {
-    if(passes_forward_check(var_6, self) && ref_121e8(var_6) && checkyellowmassacre(var_6)) {
+    if(passes_forward_check(var_6, self) && ref_121E8(var_6) && checkyellowmassacre(var_6)) {
       for(var_13 = 0; var_13 < var_10.size; var_13++) {
         if(var_6 != var_10[var_13]) {
           thread set_spawner_chosen_nearby();
@@ -623,8 +623,8 @@ function score_ai_spawns(var_0, var_1, var_2, var_3, var_4) {
 
     var_14 = 10000;
 
-    if(isDefined(level.ref_12fc3)) {
-      var_14 = level.ref_12fc3;
+    if(isDefined(level.ref_12FC3)) {
+      var_14 = level.ref_12FC3;
     }
 
     var_7.lastspawntime = self.current_time + var_14;
@@ -636,12 +636,12 @@ function score_ai_spawns(var_0, var_1, var_2, var_3, var_4) {
   return undefined;
 }
 
-function ref_121e8() {
+function ref_121E8() {
   return capsuletracepassed(self.origin + (0, 0, 6), 16, 32, undefined, 1, 1);
 }
 
 function checkyellowmassacre(var_0) {
-  if(istrue(level.ref_133bd)) {
+  if(istrue(level.ref_133BD)) {
     return true;
   }
 
@@ -682,7 +682,7 @@ function score_valid_spawnpoints(var_0, var_1, var_2, var_3) {
   for(var_10 = 0; var_10 < var_0.size; var_10++) {
     var_11 = get_spawn_scoring_type(var_0[var_10]);
 
-    if(isDefined(level.ref_1364a[var_11]) && !level.ref_1364a[var_11]) {
+    if(isDefined(level.ref_1364A[var_11]) && !level.ref_1364A[var_11]) {
       var_9 = 0;
       break;
     }
@@ -956,7 +956,7 @@ function calculate_ai_spawner_score(var_0, var_1, var_2, var_3) {
 
   var_8 += var_10;
   var_9 = 5;
-  var_10 = score_factor_ai(var_9 / var_7, &ref_145a9, var_0);
+  var_10 = score_factor_ai(var_9 / var_7, &ref_145A9, var_0);
 
   if(!isDefined(var_10)) {
     return false;
@@ -994,8 +994,8 @@ function calculate_ai_spawner_score(var_0, var_1, var_2, var_3) {
 function is_close_to_player_z(var_0, var_1) {
   var_2 = level.players[var_1];
 
-  if(isDefined(self.spawn_ref_point)) {
-    var_3 = self.spawn_ref_point[2];
+  if(isDefined(self.spawn_ref_POINT)) {
+    var_3 = self.spawn_ref_POINT[2];
   } else {
     var_3 = var_3.origin[2];
   }
@@ -1013,7 +1013,7 @@ function is_close_to_player_z(var_0, var_1) {
   return 1000 / int(var_4 / 32);
 }
 
-function ref_12f0a(var_0, var_1, var_2, var_3) {
+function ref_12F0A(var_0, var_1, var_2, var_3) {
   var_4 = 1000;
   var_5 = 0.707;
   var_6 = -0.5;
@@ -1062,7 +1062,7 @@ function ref_12f0a(var_0, var_1, var_2, var_3) {
 
 function is_spawner_towards_objective(var_0, var_1) {
   if(!isDefined(level.activequests) || level.activequests.size < 1) {
-    self.ref_133b8 = undefined;
+    self.ref_133B8 = undefined;
     return 1000;
   } else {
     var_2 = level.players[var_1];
@@ -1081,16 +1081,16 @@ function is_spawner_towards_objective(var_0, var_1) {
     for(var_8 = 0; var_8 < level.activequests.size; var_8++) {
       var_9 = level.activequests[var_8];
 
-      if(isDefined(var_9.ref_11f8d) && var_9.ref_11f8d.size > 0) {
-        for(var_10 = 0; var_10 < var_9.ref_11f8d.size; var_10++) {
-          var_11 = var_9.ref_11f8d[var_10];
-          var_12 = ref_12f0a(var_3, var_11, var_5, var_6);
+      if(isDefined(var_9.ref_11F8D) && var_9.ref_11F8D.size > 0) {
+        for(var_10 = 0; var_10 < var_9.ref_11F8D.size; var_10++) {
+          var_11 = var_9.ref_11F8D[var_10];
+          var_12 = ref_12F0A(var_3, var_11, var_5, var_6);
 
           if(!isDefined(var_7) || var_12 > var_7) {
             if(istrue(self.brjugg_managedeliveries)) {
-              self.ref_133b8 = 1;
+              self.ref_133B8 = 1;
             } else {
-              self.ref_133b8 = undefined;
+              self.ref_133B8 = undefined;
             }
 
             var_7 = var_12;
@@ -1106,7 +1106,7 @@ function is_spawner_towards_objective(var_0, var_1) {
     }
   }
 
-  self.ref_133b8 = undefined;
+  self.ref_133B8 = undefined;
   return 1000;
 }
 
@@ -1127,7 +1127,7 @@ function avoid_players_vision(var_0) {
   var_2 = undefined;
   var_3 = quickdropcleanupcache();
 
-  if(ref_12ddf(&ref_13682, 1, var_0)) {
+  if(ref_12DDF(&ref_13682, 1, var_0)) {
     var_0.lastspawntime = self.current_time;
     return undefined;
   }
@@ -1135,7 +1135,7 @@ function avoid_players_vision(var_0) {
   return var_1;
 }
 
-function ref_132e4() {
+function ref_132E4() {
   var_0 = self.velo_forward - self.origin;
   var_0 = (var_0[0], var_0[1], 0);
   var_1 = length(var_0);
@@ -1147,10 +1147,10 @@ function ref_132e4() {
   return 0;
 }
 
-function ref_145a9(var_0, var_1) {
+function ref_145A9(var_0, var_1) {
   var_2 = 1000;
 
-  if(isDefined(var_0.script_parent) || istrue(var_0.script_forcespawn) || istrue(var_0 scripts\cp\cp_vehicles::is_vehicle_spawnpoint()) || !isDefined(level.players) || istrue(self.ref_133b8) || level.players.size < 1) {
+  if(isDefined(var_0.script_parent) || istrue(var_0.script_forcespawn) || istrue(var_0 scripts\cp\cp_vehicles::is_vehicle_spawnpoint()) || !isDefined(level.players) || istrue(self.ref_133B8) || level.players.size < 1) {
     return var_2;
   }
 
@@ -1163,7 +1163,7 @@ function ref_145a9(var_0, var_1) {
     if(isPlayer(var_6[var_7])) {
       var_8 = var_6[var_7] getplayerangles();
 
-      if(isDefined(var_6[var_7].velo_forward) && ref_132e4(var_6[var_7])) {
+      if(isDefined(var_6[var_7].velo_forward) && ref_132E4(var_6[var_7])) {
         var_8 = vectortoangles(var_6[var_7].velo_forward - var_6[var_7].origin);
       }
 
@@ -1184,7 +1184,7 @@ function ref_145a9(var_0, var_1) {
   return var_2 * var_4;
 }
 
-function ref_12ddf(var_0, var_1, var_2, var_3) {
+function ref_12DDF(var_0, var_1, var_2, var_3) {
   for(var_4 = 0; var_4 < level.players.size; var_4++) {
     var_5 = level.players[var_4][[var_0]](var_2, var_3);
 
@@ -1208,7 +1208,7 @@ function ref_13682(var_0, var_1) {
   return var_5;
 }
 
-function ref_12c5b(var_0, var_1, var_2) {
+function ref_12C5B(var_0, var_1, var_2) {
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_1[var_3].lastspawntime = var_2;
   }
@@ -1263,8 +1263,8 @@ function is_vehicle_spawner_ideal_distance(var_0, var_1) {
 function is_cluster_spawner_ideal_distance(var_0, var_1) {
   var_2 = level.players;
 
-  if(isDefined(self.spawn_ref_point)) {
-    var_3 = self.spawn_ref_point;
+  if(isDefined(self.spawn_ref_POINT)) {
+    var_3 = self.spawn_ref_POINT;
   } else {
     var_3 = scripts\cp\utility::get_center_point_of_array(var_3);
   }
@@ -1287,7 +1287,7 @@ function is_cluster_spawner_ideal_distance(var_0, var_1) {
     var_9 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.far_score, var_9);
     var_10 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.far_dist_sq, var_10);
     var_11 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.far_dist, var_11);
-    var_12 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.ref_13bdb, var_12);
+    var_12 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.ref_13BDB, var_12);
     var_13 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.too_far_dist_sq, var_13);
   }
 
@@ -1298,7 +1298,7 @@ function is_cluster_spawner_ideal_distance(var_0, var_1) {
     var_9 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.far_score, var_9);
     var_10 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.far_dist_sq, var_10);
     var_11 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.far_dist, var_11);
-    var_12 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.ref_13bdb, var_12);
+    var_12 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.ref_13BDB, var_12);
     var_13 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_14.too_far_dist_sq, var_13);
   }
 
@@ -1334,8 +1334,8 @@ function is_spawner_ideal_distance(var_0, var_1) {
 
   var_2 = level.players;
 
-  if(isDefined(self.spawn_ref_point)) {
-    var_3 = self.spawn_ref_point;
+  if(isDefined(self.spawn_ref_POINT)) {
+    var_3 = self.spawn_ref_POINT;
   } else {
     var_3 = scripts\cp\utility::get_center_point_of_array(var_3);
   }
@@ -1359,7 +1359,7 @@ function is_spawner_ideal_distance(var_0, var_1) {
     var_10 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.far_score, var_10);
     var_11 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.far_dist_sq, var_11);
     var_12 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.far_dist, var_12);
-    var_13 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.ref_13bdb, var_13);
+    var_13 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.ref_13BDB, var_13);
     var_14 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.too_far_dist_sq, var_14);
   }
 
@@ -1370,7 +1370,7 @@ function is_spawner_ideal_distance(var_0, var_1) {
     var_10 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.far_score, var_10);
     var_11 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.far_dist_sq, var_11);
     var_12 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.far_dist, var_12);
-    var_13 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.ref_13bdb, var_13);
+    var_13 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.ref_13BDB, var_13);
     var_14 = scripts\cp\cp_modular_spawning::define_var_if_undefined(var_15.too_far_dist_sq, var_14);
   }
 
@@ -1460,14 +1460,14 @@ function ref_13646(var_0, var_1) {
 }
 
 function radialmonitor() {
-  if(isDefined(self.ref_12a81)) {
-    return self.ref_12a81;
+  if(isDefined(self.ref_12A81)) {
+    return self.ref_12A81;
   }
 
   return 20000;
 }
 
-function ref_134d0(var_0, var_1) {
+function ref_134D0(var_0, var_1) {
   if(isDefined(var_0.cargo_truck_mg_gunnerdamagemodignorefunc) && isDefined(var_1.cargo_truck_mg_gunnerdamagemodignorefunc)) {
     return (var_0.cargo_truck_mg_gunnerdamagemodignorefunc < var_1.cargo_truck_mg_gunnerdamagemodignorefunc);
   }
@@ -1524,7 +1524,7 @@ function quickdropcleanupcache() {
 }
 
 function ref_12891(var_0) {
-  self.ref_12f08 = undefined;
+  self.ref_12F08 = undefined;
 }
 
 function init_createfx(var_0, var_1) {
@@ -1564,20 +1564,20 @@ function init_createfx(var_0, var_1) {
 function barelem(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(getdvarint("scr_print_spawner_score_info", 0)) {
     if(isDefined(var_5)) {
-      if(!isDefined(var_5.ref_13efb)) {
+      if(!isDefined(var_5.ref_13EFB)) {
         previousplacements(var_5);
       }
 
-      var_6 = var_5.ref_13efb;
+      var_6 = var_5.ref_13EFB;
     } else {
       var_6 = previousplacements();
     }
 
-    if(!isDefined(self.ref_12f08)) {
+    if(!isDefined(self.ref_12F08)) {
       init_killstreak_data_for_challenges();
     }
 
-    self.ref_12f09[var_6] = var_6;
+    self.ref_12F09[var_6] = var_6;
 
     if(istrue(var_4) || !isDefined(var_1)) {
       var_1 = "";
@@ -1598,7 +1598,7 @@ function barelem(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_2 = var_1 + "^0" + var_2 + "^5" + var_3;
 
     if(istrue(var_5)) {
-      self.ref_12f08[var_6] = var_2;
+      self.ref_12F08[var_6] = var_2;
     }
 
     return var_2;
@@ -1607,8 +1607,8 @@ function barelem(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 function init_killstreak_data_for_challenges() {
   if(getdvarint("scr_print_spawner_score_info", 0)) {
-    self.ref_12f08 = [];
-    self.ref_12f09 = [];
+    self.ref_12F08 = [];
+    self.ref_12F09 = [];
     var_0 = self.group_name;
 
     if(!isDefined(var_0)) {
@@ -1627,7 +1627,7 @@ function previousplacements(var_0) {
   }
 
   if(isDefined(var_0)) {
-    var_0.ref_13efb = self.current_uid;
+    var_0.ref_13EFB = self.current_uid;
   }
 
   var_1 = self.current_uid;
@@ -1636,8 +1636,8 @@ function previousplacements(var_0) {
 }
 
 function redeployspawn() {
-  if(isDefined(self.ref_13efb)) {
-    return self.ref_13efb;
+  if(isDefined(self.ref_13EFB)) {
+    return self.ref_13EFB;
   }
 
   return undefined;
@@ -1649,11 +1649,11 @@ function ref_13075(var_0) {
     var_0.grenade_exploded_during_stealth_listener = 1;
 
     if(isDefined(var_1)) {
-      var_2 = self.ref_12f08[var_1];
+      var_2 = self.ref_12F08[var_1];
 
       if(isDefined(var_2)) {
         var_2 = "^5CHOSEN: " + var_2;
-        self.ref_12f08[var_1] = var_2;
+        self.ref_12F08[var_1] = var_2;
         return;
       }
 

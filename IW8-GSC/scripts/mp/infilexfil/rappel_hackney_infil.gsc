@@ -505,17 +505,17 @@ function script_model_alpha_anims(var_0) {
       level.scr_anim["slot_0"]["rappel_hackney_infil_alpha"] = % mp_infil_blima_guy01;
       level.scr_animname["slot_0"]["rappel_hackney_infil_alpha"] = "mp_infil_blima_guy01";
       level.scr_eventanim["slot_0"]["rappel_hackney_infil_alpha"] = "infil_rappel_hackney_alpha_ally_1";
-      scripts\common\anim::addnotetrack_customfunction("slot_0", "scn_infil_hackney_heli_npc1", &ref_12eee);
+      scripts\common\anim::addnotetrack_customfunction("slot_0", "scn_infil_hackney_heli_npc1", &ref_12EEE);
       level.scr_animtree["slot_1"] = #animtree;
       level.scr_anim["slot_1"]["rappel_hackney_infil_alpha"] = % mp_infil_blima_guy02;
       level.scr_animname["slot_1"]["rappel_hackney_infil_alpha"] = "mp_infil_blima_guy02";
       level.scr_eventanim["slot_1"]["rappel_hackney_infil_alpha"] = "infil_rappel_hackney_alpha_ally_2";
-      scripts\common\anim::addnotetrack_customfunction("slot_1", "scn_infil_hackney_heli_npc2", &ref_12eef);
+      scripts\common\anim::addnotetrack_customfunction("slot_1", "scn_infil_hackney_heli_npc2", &ref_12EEF);
       level.scr_animtree["slot_2"] = #animtree;
       level.scr_anim["slot_2"]["rappel_hackney_infil_alpha"] = % mp_infil_blima_guy03;
       level.scr_animname["slot_2"]["rappel_hackney_infil_alpha"] = "mp_infil_blima_guy03";
       level.scr_eventanim["slot_2"]["rappel_hackney_infil_alpha"] = "infil_rappel_hackney_alpha_ally_3";
-      scripts\common\anim::addnotetrack_customfunction("slot_2", "scn_infil_hackney_heli_npc3", &ref_12ef0);
+      scripts\common\anim::addnotetrack_customfunction("slot_2", "scn_infil_hackney_heli_npc3", &ref_12EF0);
       break;
     case "bravo":
       level.scr_animtree["pilot"] = #animtree;
@@ -542,17 +542,17 @@ function script_model_alpha_anims(var_0) {
       level.scr_anim["slot_0"]["rappel_hackney_infil_bravo"] = % mp_infil_blima_r_guy01;
       level.scr_animname["slot_0"]["rappel_hackney_infil_bravo"] = "mp_infil_blima_r_guy01";
       level.scr_eventanim["slot_0"]["rappel_hackney_infil_bravo"] = "infil_rappel_hackney_bravo_ally_1";
-      scripts\common\anim::addnotetrack_customfunction("slot_0", "scn_infil_hackney_heli_npc4", &ref_12ef1);
+      scripts\common\anim::addnotetrack_customfunction("slot_0", "scn_infil_hackney_heli_npc4", &ref_12EF1);
       level.scr_animtree["slot_1"] = #animtree;
       level.scr_anim["slot_1"]["rappel_hackney_infil_bravo"] = % mp_infil_blima_r_guy02;
       level.scr_animname["slot_1"]["rappel_hackney_infil_bravo"] = "mp_infil_blima_r_guy02";
       level.scr_eventanim["slot_1"]["rappel_hackney_infil_bravo"] = "infil_rappel_hackney_bravo_ally_2";
-      scripts\common\anim::addnotetrack_customfunction("slot_1", "scn_infil_hackney_heli_npc5", &ref_12ef2);
+      scripts\common\anim::addnotetrack_customfunction("slot_1", "scn_infil_hackney_heli_npc5", &ref_12EF2);
       level.scr_animtree["slot_2"] = #animtree;
       level.scr_anim["slot_2"]["rappel_hackney_infil_bravo"] = % mp_infil_blima_r_guy03;
       level.scr_animname["slot_2"]["rappel_hackney_infil_bravo"] = "mp_infil_blima_r_guy03";
       level.scr_eventanim["slot_2"]["rappel_hackney_infil_bravo"] = "infil_rappel_hackney_bravo_ally_3";
-      scripts\common\anim::addnotetrack_customfunction("slot_2", "scn_infil_hackney_heli_npc6", &ref_12ef3);
+      scripts\common\anim::addnotetrack_customfunction("slot_2", "scn_infil_hackney_heli_npc6", &ref_12EF3);
       break;
   }
 }
@@ -899,27 +899,27 @@ function heli_commander_sfx(var_0) {
   var_0 playsoundonmovingent("scn_infil_hackney_heli2_commander");
 }
 
-function ref_12eee(var_0) {
+function ref_12EEE(var_0) {
   var_0 playsoundonmovingent("scn_infil_hackney_heli_npc1");
 }
 
-function ref_12eef(var_0) {
+function ref_12EEF(var_0) {
   var_0 playsoundonmovingent("scn_infil_hackney_heli_npc2");
 }
 
-function ref_12ef0(var_0) {
+function ref_12EF0(var_0) {
   var_0 playsoundonmovingent("scn_infil_hackney_heli_npc3");
 }
 
-function ref_12ef1(var_0) {
+function ref_12EF1(var_0) {
   var_0 playsoundonmovingent("scn_infil_hackney_heli_npc4");
 }
 
-function ref_12ef2(var_0) {
+function ref_12EF2(var_0) {
   var_0 playsoundonmovingent("scn_infil_hackney_heli_npc5");
 }
 
-function ref_12ef3(var_0) {
+function ref_12EF3(var_0) {
   var_0 playsoundonmovingent("scn_infil_hackney_heli_npc6");
 }
 

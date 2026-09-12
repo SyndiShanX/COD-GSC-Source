@@ -39,31 +39,31 @@ function ref_13133(var_0, var_1) {
   }
 }
 
-function ref_1313d(var_0, var_1) {
+function ref_1313D(var_0, var_1) {
   self endon("disconnect");
   self notify("setOmvnar" + var_0);
   self endon("setOmvnar" + var_0);
 
-  if(!isDefined(self.ref_12e61)) {
-    self.ref_12e61 = spawnStruct();
-    self.ref_12e61.ref_11fd0 = [];
-    self.ref_12e61.watch_for_player_in_los = -1;
+  if(!isDefined(self.ref_12E61)) {
+    self.ref_12E61 = spawnStruct();
+    self.ref_12E61.ref_11FD0 = [];
+    self.ref_12E61.watch_for_player_in_los = -1;
   }
 
   var_2 = gettime();
 
-  if(var_2 > self.ref_12e61.watch_for_player_in_los) {
-    self.ref_12e61.ref_11fd0 = [];
-    self.ref_12e61.watch_for_player_in_los = var_2;
+  if(var_2 > self.ref_12E61.watch_for_player_in_los) {
+    self.ref_12E61.ref_11FD0 = [];
+    self.ref_12E61.watch_for_player_in_los = var_2;
   }
 
-  if(isDefined(self.ref_12e61.ref_11fd0[var_0])) {
+  if(isDefined(self.ref_12E61.ref_11FD0[var_0])) {
     waitframe();
-    thread ref_1313d(var_0, var_1);
+    thread ref_1313D(var_0, var_1);
     return;
   }
 
-  self.ref_12e61.ref_11fd0[var_0] = 1;
+  self.ref_12E61.ref_11FD0[var_0] = 1;
   self setclientomnvar(var_0, var_1);
 }
 
@@ -98,7 +98,7 @@ function ref_13191(var_0, var_1, var_2, var_3) {
   setomnvar(var_0, var_5);
 }
 
-function ref_1313e(var_0, var_1, var_2, var_3) {
+function ref_1313E(var_0, var_1, var_2, var_3) {
   var_4 = self calloutmarkerping_entityzoffset(var_0);
   var_5 = repackomnvar(var_1, var_2, var_4, var_3);
 

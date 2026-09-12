@@ -22,7 +22,7 @@ function main() {
   game["axis_outfit"] = "woodland";
   level.music_style = "eastern_europe";
   thread player_fired_gun_monitor();
-  thread ref_1362c();
+  thread ref_1362C();
 }
 
 function player_fired_gun_monitor() {
@@ -32,12 +32,12 @@ function player_fired_gun_monitor() {
   var_1 clonebrushmodeltoscriptmodel(var_0, 1);
 }
 
-function ref_1362c() {
+function ref_1362C() {
   var_0 = spawn("trigger_radius", (1720, 1737, 100), 0, 64, 100);
-  thread ref_144ff(var_0);
+  thread ref_144FF(var_0);
 }
 
-function ref_144ff(var_0) {
+function ref_144FF(var_0) {
   for(;;) {
     self waittill("trigger", var_1);
 
@@ -45,15 +45,15 @@ function ref_144ff(var_0) {
       continue;
     }
 
-    if(!isDefined(self.ref_126ce)) {
-      self.ref_126ce = [];
+    if(!isDefined(self.ref_126CE)) {
+      self.ref_126CE = [];
     }
 
-    if(scripts\engine\utility::array_contains(self.ref_126ce, var_1.guid)) {
+    if(scripts\engine\utility::array_contains(self.ref_126CE, var_1.guid)) {
       continue;
     }
 
-    self.ref_126ce = scripts\engine\utility::array_add(self.ref_126ce, var_1.guid);
+    self.ref_126CE = scripts\engine\utility::array_add(self.ref_126CE, var_1.guid);
 
     switch (var_0) {
       case "box":
@@ -86,5 +86,5 @@ function ref_14491(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }

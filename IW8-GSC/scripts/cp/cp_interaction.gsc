@@ -224,7 +224,7 @@ function player_interaction_weapon_switch_monitor() {
   self endon("death");
 
   for(;;) {
-    scripts\engine\utility::ref_143a6("weapon_switch_started", "weapon_change", "weaponchange");
+    scripts\engine\utility::ref_143A6("weapon_switch_started", "weapon_change", "weaponchange");
     self.last_interaction_point = undefined;
     self.resetguidedinteraction = 1;
     self notify("stop_interaction_logic");
@@ -245,7 +245,7 @@ function get_player_interaction_trigger() {
 
 function release_player_interaction_trigger() {
   var_0 = self.interaction_trigger;
-  scripts\engine\utility::ref_143a5("death", "disconnect");
+  scripts\engine\utility::ref_143A5("death", "disconnect");
   var_0.in_use = 0;
 }
 
@@ -336,7 +336,7 @@ function wherethehellami(var_0, var_1) {
   }
 }
 
-function ref_11e94() {
+function ref_11E94() {
   return isDefined(self.last_interaction_point);
 }
 
@@ -1287,7 +1287,7 @@ function interaction_cooldown(var_0, var_1) {
   if(istrue(level.cooldown_override)) {
     wait 1;
   } else {
-    level scripts\engine\utility::ref_143b9(var_1, "override_cooldowns");
+    level scripts\engine\utility::ref_143B9(var_1, "override_cooldowns");
   }
 
   foreach(var_4 in var_2) {

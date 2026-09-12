@@ -270,7 +270,7 @@ function attackerishittingteam(var_0, var_1) {
     return 0;
   }
 
-  if(isagent(var_0) && istrue(var_0.ref_133d2)) {
+  if(isagent(var_0) && istrue(var_0.ref_133D2)) {
     return 0;
   }
 

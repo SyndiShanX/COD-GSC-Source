@@ -387,7 +387,7 @@ function _setgoalpos(var_0, var_1, var_2) {
 
   thread manageposarray(var_0, var_1);
   var_0 setbtgoalpos(0, var_1);
-  var_15 = var_0 scripts\engine\utility::ref_143ad("goal", "goal_reached");
+  var_15 = var_0 scripts\engine\utility::ref_143AD("goal", "goal_reached");
 }
 
 function manageposarray(var_0, var_1) {
@@ -469,7 +469,7 @@ function removeifalerted(var_0, var_1) {
   var_0 endon("goal");
   var_0 endon("stalled");
   var_0 endon("death");
-  var_0 scripts\engine\utility::ref_143a5("death", "alerted");
+  var_0 scripts\engine\utility::ref_143A5("death", "alerted");
   addtopatrolexclusion(0, var_1);
 }
 
@@ -725,7 +725,7 @@ function alertnearbyloop(var_0) {
   var_0 endon("patrol_values_set");
 
   for(;;) {
-    var_1 = var_0 scripts\engine\utility::ref_143ac("shooting");
+    var_1 = var_0 scripts\engine\utility::ref_143AC("shooting");
     thread alertnearbyenemiesafterdelay();
 
     if(var_1 == "shooting") {
@@ -984,7 +984,7 @@ function setweaponsfree(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    var_1 = var_0 scripts\engine\utility::ref_143ba(5, "shooting", "spotted_player");
+    var_1 = var_0 scripts\engine\utility::ref_143BA(5, "shooting", "spotted_player");
 
     if(isDefined(var_1)) {
       if(var_1 != "timeout") {

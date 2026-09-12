@@ -23,7 +23,7 @@ function init() {
   level.weaponranktable = [];
   var_2 = function_0428();
   level.maxrank = int(tablelookup(var_2, 0, "maxrank", 1));
-  level.ref_11b5c = int(tablelookup(var_2, 0, "maxelder", 1));
+  level.ref_11B5C = int(tablelookup(var_2, 0, "maxelder", 1));
 
   for(var_3 = 0; var_3 <= level.maxrank; var_3++) {
     level.ranktable[var_3]["minXP"] = tablelookup(var_2, 0, var_3, 2);
@@ -203,14 +203,14 @@ function onplayerconnect() {
       }
 
       var_5 = getdvarint("scr_xp_limit", 40000);
-      var_0.ref_11b7f = var_5;
+      var_0.ref_11B7F = var_5;
       var_0.totalxpearned = 0;
     }
 
     var_0.scoreeventcount = 0;
     var_0.scoreeventlistindex = 0;
-    var_0.ref_13bf3 = 0;
-    var_0.ref_11b67 = 3000;
+    var_0.ref_13BF3 = 0;
+    var_0.ref_11B67 = 3000;
 
     if(!scripts\cp\utility::tryingtoleave() && !scripts\cp\utility::turn_off_sniper_laser()) {
       thread molotov_delete_trigger();
@@ -224,7 +224,7 @@ function onplayerspawned() {
   } else if(scripts\cp\utility::tryingtoleave()) {}
 
   playerupdaterank();
-  ref_125e5();
+  ref_125E5();
 }
 
 function playerupdaterank() {
@@ -248,7 +248,7 @@ function playerupdaterank() {
   }
 }
 
-function ref_125e5() {
+function ref_125E5() {
   scripts\cp\agents\agents::initpersstat("lastBulletKillTime");
   scripts\cp\agents\agents::initpersstat("bulletStreak");
   scripts\cp\agents\agents::initpersstat("assists");
@@ -389,7 +389,7 @@ function updaterank(var_0) {
   self.pers["rank"] = var_1;
   self.pers["prestige"] = var_2;
 
-  if(var_4 == var_3 || var_4 >= level.maxrank + level.ref_11b5c) {
+  if(var_4 == var_3 || var_4 >= level.maxrank + level.ref_11B5C) {
     return false;
   }
 
@@ -648,16 +648,16 @@ function incrankxp(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  if(!isDefined(level.ref_11b53)) {
-    level.ref_11b53 = getdvarint("scr_beta_max_level", 0);
+  if(!isDefined(level.ref_11B53)) {
+    level.ref_11B53 = getdvarint("scr_beta_max_level", 0);
   }
 
-  if(level.ref_11b53 > 0 && getrank() + 1 >= level.ref_11b53) {
+  if(level.ref_11B53 > 0 && getrank() + 1 >= level.ref_11B53) {
     var_0 = 0;
   }
 
-  if(isDefined(self.totalxpearned) && isDefined(self.ref_11b7f)) {
-    if(self.totalxpearned > self.ref_11b7f) {
+  if(isDefined(self.totalxpearned) && isDefined(self.ref_11B7F)) {
+    if(self.totalxpearned > self.ref_11B7F) {
       var_0 = 0;
     } else {
       self.totalxpearned += var_0;
@@ -680,11 +680,11 @@ function incrankxp(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(var_6) && var_6 != "") {
-    if(isDefined(self.ref_13bfc) && isDefined(self.ref_11b7e)) {
-      if(self.ref_13bfc > self.ref_11b7e) {
+    if(isDefined(self.ref_13BFC) && isDefined(self.ref_11B7E)) {
+      if(self.ref_13BFC > self.ref_11B7E) {
         var_2 = 0;
       } else {
-        self.ref_13bfc += var_2;
+        self.ref_13BFC += var_2;
       }
     }
   }
@@ -695,7 +695,7 @@ function incrankxp(var_0, var_1, var_2, var_3) {
   var_10 = scripts\cp\cp_weaponrank::getweaponrankxpmultipliertotal();
   var_11 = int(scripts\cp_mp\utility\game_utility::gettimesincegamestart() / 1000);
   self reportchallengeuserevent("mp_addxp", var_0, scripts\cp\survival\survival_loadout::lookupcurrentoperator(self.team), var_6, var_2, var_8, int(var_9 * 100), int(var_10 * 100), int(var_7 * 100), var_11);
-  scripts\cp\cp_analytics::ref_119bf(self, var_0, var_6, var_2, var_3);
+  scripts\cp\cp_analytics::ref_119BF(self, var_0, var_6, var_2, var_3);
 }
 
 function registerpublicevent() {

@@ -491,7 +491,7 @@ function cruisepredator_watchownerdisown(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    var_1 = scripts\engine\utility::ref_143ae("disconnect", "joined_team", "joined_spectators");
+    var_1 = scripts\engine\utility::ref_143AE("disconnect", "joined_team", "joined_spectators");
 
     if(!isDefined(var_1)) {
       continue;
@@ -633,7 +633,7 @@ function playremotesequence(var_0, var_1) {
   scripts\cp\utility::_freezecontrols(1);
   thread scripts\cp\cp_weapons::unfreezeonroundend();
   thread scripts\cp\cp_weapons::startfadetransition(1.3);
-  var_5 = scripts\engine\utility::ref_143b9(1.8, "death");
+  var_5 = scripts\engine\utility::ref_143B9(1.8, "death");
   self notify("ks_freeze_end");
   self setclientomnvar("ui_remote_control_sequence", 0);
   scripts\cp\utility::_freezecontrols(0);
@@ -676,6 +676,6 @@ function stopremotesequence(var_0) {
   }
 
   scripts\cp\utility::clearusingremote();
-  scripts\engine\utility::ref_143b9(1.3, "death");
+  scripts\engine\utility::ref_143B9(1.3, "death");
   self setclientomnvar("ui_remote_control_sequence", 0);
 }

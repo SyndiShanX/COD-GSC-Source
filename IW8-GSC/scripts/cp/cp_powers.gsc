@@ -583,7 +583,7 @@ function managepowerbuttonuse(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
 
   for(;;) {
     if(scripts\cp\cp_laststand::player_in_laststand(self)) {
-      scripts\engine\utility::ref_143a6("revive", "revive_success", "challenge_complete_revive");
+      scripts\engine\utility::ref_143A6("revive", "revive_success", "challenge_complete_revive");
     }
 
     power_updateammo(var_1);
@@ -819,7 +819,7 @@ function power_docooldown(var_0, var_1, var_2) {
     if(power_shouldcooldown(var_0)) {
       wait 0.1;
     } else {
-      level scripts\engine\utility::ref_143a6("grenade_cooldown activated", "infinite_grenade_active", "start_power_cooldown");
+      level scripts\engine\utility::ref_143A6("grenade_cooldown activated", "infinite_grenade_active", "start_power_cooldown");
       var_1 = getpowercooldowntime(var_3);
     }
 
@@ -994,7 +994,7 @@ function power_adjustcharges(var_0, var_1, var_2) {
   }
 }
 
-function ref_1281c(var_0) {
+function ref_1281C(var_0) {
   var_1 = power_getpowerkeys(var_0);
 
   foreach(var_3 in var_1) {
@@ -1183,12 +1183,12 @@ function power_updateammo(var_0) {
   self setweaponammoclip(var_1.weaponuse, 0);
 
   if(scripts\cp\utility::turn_off_sniper_laser()) {
-    thread ref_1281d(var_1.slot);
+    thread ref_1281D(var_1.slot);
     return;
   }
 }
 
-function ref_1281d(var_0) {
+function ref_1281D(var_0) {
   if(var_0 == "primary") {
     self setclientomnvar("reset_wave_loadout", 3);
     return;

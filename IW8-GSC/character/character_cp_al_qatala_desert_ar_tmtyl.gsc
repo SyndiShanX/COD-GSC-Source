@@ -42,7 +42,7 @@ function asm_register() {
   anim.asmfuncs["suicidebomber_cp"][26] = &scripts\asm\traverse::shouldconsidertraversearrival;
   anim.asmfuncs["suicidebomber_cp"][27] = &scripts\asm\traverse::shouldstarttraverse;
   anim.asmfuncs["suicidebomber_cp"][28] = &scripts\asm\traverse::shoulddotraversalarrival;
-  anim.asmfuncs["suicidebomber_cp"][29] = &scripts\asm\traverse::ref_13d12;
+  anim.asmfuncs["suicidebomber_cp"][29] = &scripts\asm\traverse::ref_13D12;
   anim.asmfuncs["suicidebomber_cp"][30] = &scripts\asm\suicidebomber\suicidebomber::shouldexplode;
   anim.asmfuncs["suicidebomber_cp"][31] = &scripts\asm\shared\utility::transition_isflashed;
   anim.asmfuncs["suicidebomber_cp"][32] = &scripts\asm\soldier\pain::isdamagelocation_head;

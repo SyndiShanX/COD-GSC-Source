@@ -45,7 +45,7 @@ function init() {
   pers_init();
   dlog_init();
   getanglesfromsurfacenormal();
-  ref_13a9e();
+  ref_13A9E();
   scripts\cp_mp\utility\script_utility::registersharedfunc("game", "runLeanThreadMode", &scripts\mp\utility\game::runleanthreadmode);
   scripts\cp_mp\utility\script_utility::registersharedfunc("game", "lpcFeatureGated", &scripts\mp\utility\game::lpcfeaturegated);
 }
@@ -83,7 +83,7 @@ function killstreak_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("killstreak", "setKillstreakControlPriority", &scripts\mp\utility\killstreak::setkillstreakcontrolpriority);
   scripts\cp_mp\utility\script_utility::registersharedfunc("killstreak", "updateScrapAssistDataForceCredit", &scripts\mp\killstreaks\killstreaks::ref_14019);
   scripts\cp_mp\utility\script_utility::registersharedfunc("killstreak", "updateScrapAssistData", &scripts\mp\killstreaks\killstreaks::ref_14018);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("killstreak", "processScrapAssist", &scripts\mp\events::ref_128b3);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("killstreak", "processScrapAssist", &scripts\mp\events::ref_128B3);
   scripts\cp_mp\utility\script_utility::registersharedfunc("killstreak", "dangerNotifyPlayersInRange", &scripts\mp\gametypes\br_killstreaks::isbulletpenetration);
   scripts\cp_mp\utility\script_utility::registersharedfunc("killstreak", "dangerNotifyPlayer", &scripts\mp\gametypes\br_killstreaks::isbrsquadleader);
   scripts\cp_mp\utility\script_utility::registersharedfunc("killstreak", "teamJuggMaxReached", &scripts\mp\juggernaut::changecirclestateatlowtime);
@@ -209,7 +209,7 @@ function weapons_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "isCACPrimaryOrSecondary", &scripts\mp\utility\weapon::iscacprimaryorsecondary);
   scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "attachmentMap_toBase", &scripts\mp\utility\weapon::attachmentmap_tobase);
   scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "attachmentIsSelectable", &scripts\mp\utility\weapon::carriedpunchcard);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "remapAttachmentParentName", &scripts\mp\utility\weapon::ref_12bbb);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "remapAttachmentParentName", &scripts\mp\utility\weapon::ref_12BBB);
   scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "saveToggleScopeStates", &scripts\mp\weapons::savetogglescopestates);
   scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "saveAltStates", &scripts\mp\weapons::savealtstates);
   scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "updateSavedAltState", &scripts\mp\weapons::updatesavedaltstate);
@@ -234,7 +234,7 @@ function damage_init() {
 function sound_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("sound", "trySayLocalSound", &scripts\mp\battlechatter_mp::trysaylocalsound);
   scripts\cp_mp\utility\script_utility::registersharedfunc("sound", "playKillstreakDialogOnPlayer", &scripts\mp\utility\dialog::playkillstreakdialogonplayer);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("sound", "playKillstreakDeployDialog", &scripts\mp\battlechatter_mp::ref_1274c);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("sound", "playKillstreakDeployDialog", &scripts\mp\battlechatter_mp::ref_1274C);
   scripts\cp_mp\utility\script_utility::registersharedfunc("sound", "playKillstreakUseDialog", &scripts\mp\utility\dialog::playkillstreakusedialog);
 }
 
@@ -303,13 +303,13 @@ function dlog_init() {
 function getanglesfromsurfacenormal() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "onVehicleKilled", &scripts\cp\vehicles\vehicle_compass_cp::vehiclekilled);
   scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "onFieldUpgradeEnd", &scripts\cp\vehicles\vehicle_compass_cp::ref_12032);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "onKillStreakEnd", &scripts\cp\vehicles\vehicle_compass_cp::ref_1204a);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "resetChallengeTimer", &scripts\cp\vehicles\vehicle_compass_cp::ref_12c6e);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "startChallengeTimer", &scripts\cp\vehicles\vehicle_compass_cp::ref_1383b);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "stopChallengeTimer", &scripts\cp\vehicles\vehicle_compass_cp::ref_138d5);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "onKillStreakEnd", &scripts\cp\vehicles\vehicle_compass_cp::ref_1204A);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "resetChallengeTimer", &scripts\cp\vehicles\vehicle_compass_cp::ref_12C6E);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "startChallengeTimer", &scripts\cp\vehicles\vehicle_compass_cp::ref_1383B);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "stopChallengeTimer", &scripts\cp\vehicles\vehicle_compass_cp::ref_138D5);
   scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "onPing", &scripts\cp\vehicles\vehicle_compass_cp::ref_12061);
 }
 
-function ref_13a9e() {
-  scripts\cp_mp\utility\script_utility::registersharedfunc("team_utility", "init", &scripts\mp\utility\teams::ref_13a9f);
+function ref_13A9E() {
+  scripts\cp_mp\utility\script_utility::registersharedfunc("team_utility", "init", &scripts\mp\utility\teams::ref_13A9F);
 }

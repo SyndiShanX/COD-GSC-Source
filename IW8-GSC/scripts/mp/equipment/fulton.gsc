@@ -6,7 +6,7 @@
 function init() {
   level.play_intro_getin_anim = getdvarint("online_challenge_filter_shared_advanced", 1) != 0;
   scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "canSendT9UserEvent", &get_best_heli_struct);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "onAgentKilled", &ref_11ffc);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "onAgentKilled", &ref_11FFC);
 }
 
 function v_end_pos(var_0) {
@@ -29,7 +29,7 @@ function updateassassinationdataomnvar(var_0) {
 }
 
 function routers_needed(var_0) {
-  if(!isDefined(level.ref_139e0)) {
+  if(!isDefined(level.ref_139E0)) {
     var_1 = "loot/battlepass_season" + level.getallactivequestsforteam + ".csv";
     var_2 = tablelookupgetnumrows(var_1);
     var_3 = [];
@@ -38,17 +38,17 @@ function routers_needed(var_0) {
       var_3 = int(tablelookupbyrow(var_1, var_4, 1));
     }
 
-    level.ref_139e0 = var_3;
+    level.ref_139E0 = var_3;
   }
 
-  for(var_5 = 1; var_5 < level.ref_139e0.size; var_5++) {
-    if(level.ref_139e0[var_5] >= var_0) {
+  for(var_5 = 1; var_5 < level.ref_139E0.size; var_5++) {
+    if(level.ref_139E0[var_5] >= var_0) {
       break;
     }
   }
 
-  if(var_5 > level.ref_139e0.size) {
-    var_5 = level.ref_139e0.size;
+  if(var_5 > level.ref_139E0.size) {
+    var_5 = level.ref_139E0.size;
   }
 
   return var_5;
@@ -130,7 +130,7 @@ function get_best_heli_struct(var_0) {
   return true;
 }
 
-function ref_11ffc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+function ref_11FFC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   var_12 = scripts\mp\damage::playerkilled_initdeathdata(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
   if(scripts\mp\utility\damage::isheadshot(var_12.hitloc, var_12.meansofdeath, var_12.attacker)) {
@@ -148,7 +148,7 @@ function ref_11ffc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
       var_14 = var_1.modifiers["mask2"];
     }
 
-    var_2 thread scripts\cp\vehicles\vehicle_compass_cp::ref_11ffc(var_0, var_1, var_3, var_4, var_5, var_6, var_8, var_13, var_14);
+    var_2 thread scripts\cp\vehicles\vehicle_compass_cp::ref_11FFC(var_0, var_1, var_3, var_4, var_5, var_6, var_8, var_13, var_14);
     return;
   }
 }

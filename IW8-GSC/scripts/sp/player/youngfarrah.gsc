@@ -281,8 +281,8 @@ function breath_fade_delay(var_0, var_1, var_2) {
 }
 
 function breathviewoffsets_accellcycle(var_0, var_1) {
-  self notify("new_groundref_breath_cycle");
-  self endon("new_groundref_breath_cycle");
+  self notify("new_groundref_BREATH_cycle");
+  self endon("new_groundref_BREATH_cycle");
   var_2 = 2;
   var_3 = 1;
   var_4 = 1;

@@ -52,7 +52,7 @@ function setupminimap(var_0, var_1) {
       var_6 = [var_4[0], var_4[1]];
       var_6[0].origin = (-2620, 8092, 0);
       var_6[1].origin = (3156, 3486, 0);
-      ref_1325d("compass_map_cp_jugg_maze", var_6, var_2);
+      ref_1325D("compass_map_cp_jugg_maze", var_6, var_2);
       var_3[0].origin = (-5508, 10395, 0);
       var_3[1].origin = (6044, 1183, 0);
       break;
@@ -111,7 +111,7 @@ function setupminimap(var_0, var_1) {
   setminimap(var_9, var_15[0], var_15[1], var_16[0], var_16[1], var_10);
 }
 
-function ref_1325d(var_0, var_1, var_2) {
+function ref_1325D(var_0, var_1, var_2) {
   var_3 = (var_1[0].origin[0], var_1[0].origin[1], 0);
   var_4 = (var_1[1].origin[0], var_1[1].origin[1], 0);
   var_5 = var_4 - var_3;

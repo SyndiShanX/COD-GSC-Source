@@ -69,7 +69,7 @@ function updategametypedvars() {
   level.zoneactivationdelay = scripts\mp\utility\dvars::dvarfloatvalue("zoneActivationDelay", 30, 0, 120);
   level.zonerandomlocationorder = scripts\mp\utility\dvars::dvarintvalue("randomLocationOrder", 0, 0, 1);
   level.zoneadditivescoring = scripts\mp\utility\dvars::dvarintvalue("additiveScoring", 0, 0, 1);
-  level.ref_1221a = scripts\mp\utility\dvars::dvarintvalue("pauseTime", 1, 0, 1);
+  level.ref_1221A = scripts\mp\utility\dvars::dvarintvalue("pauseTime", 1, 0, 1);
   level.delayplayer = scripts\mp\utility\dvars::dvarintvalue("delayPlayer", 0, 0, 1);
   level.enablevariantdrops = scripts\mp\utility\dvars::dvarintvalue("enableVariantDZ", 0, 0, 1);
   level.usehqrules = 0;
@@ -472,7 +472,7 @@ function dzmainloop() {
   level.kothhillrotation = 0;
 
   if(!scripts\mp\flags::gameflag("prematch_done")) {
-    level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+    level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   }
 
   level.zone scripts\mp\gametypes\obj_zonecapture::activatezone();
@@ -480,7 +480,7 @@ function dzmainloop() {
   level.zone.active = 1;
   level.zone scripts\mp\gameobjects::setvisibleteam("any");
   level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.icontarget);
-  level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_moved", level.zone.trigger.origin);
+  level.zone thread scripts\common\utility::ref_13E0A(level.ref_11B29, "hill_moved", level.zone.trigger.origin);
   scripts\mp\flags::gameflagwait("prematch_done");
   setomnvar("ui_objective_timer_stopped", 0);
   var_1 = 0;
@@ -492,7 +492,7 @@ function dzmainloop() {
     setomnvar("ui_hq_status", 6);
     level.ref_14726 = 1;
     level thread scripts\mp\hud_message::updatematchstatushintforallplayers(undefined, 42, 42);
-    level.zone thread scripts\mp\gametypes\obj_zonecapture::ref_1199e(level.firstzoneactivationdelay, level.zone.curorigin + level.zone.offset3d);
+    level.zone thread scripts\mp\gametypes\obj_zonecapture::ref_1199E(level.firstzoneactivationdelay, level.zone.curorigin + level.zone.offset3d);
     wait level.firstzoneactivationdelay;
     level.ref_14726 = 0;
     level thread scripts\mp\hud_message::updatematchstatushintforallplayers(undefined, 41, 41);
@@ -501,7 +501,7 @@ function dzmainloop() {
   scripts\mp\utility\sound::playsoundonplayers("mp_dropzone_obj_new");
 
   for(;;) {
-    if(!isDefined(level.ref_11ad5)) {
+    if(!isDefined(level.ref_11AD5)) {
       thread setupzonecallouts();
     }
 
@@ -524,7 +524,7 @@ function dzmainloop() {
     hpcaptureloop();
     var_2 = level.zone scripts\mp\gameobjects::getownerteam();
 
-    if(level.ref_1221a) {
+    if(level.ref_1221A) {
       level scripts\mp\gamelogic::resumetimer();
     }
 
@@ -662,7 +662,7 @@ function spawn_next_zone() {
     level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.iconneutral);
   }
 
-  level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_moved", level.zone.trigger.origin);
+  level.zone thread scripts\common\utility::ref_13E0A(level.ref_11B29, "hill_moved", level.zone.trigger.origin);
 }
 
 function hqactivatenextzone(var_0, var_1) {
@@ -701,7 +701,7 @@ function hpcaptureloop() {
       thread randomdrops();
     }
 
-    var_0 = level scripts\engine\utility::ref_143ad("zone_captured", "zone_destroyed");
+    var_0 = level scripts\engine\utility::ref_143AD("zone_captured", "zone_destroyed");
     var_1 = level.zone scripts\mp\gameobjects::getownerteam();
     scripts\mp\utility\sound::playsoundonplayers("mp_dropzone_captured_positive", var_1);
     scripts\mp\utility\sound::playsoundonplayers("mp_dropzone_captured_negative", scripts\mp\utility\game::getotherteam(var_1)[0]);
@@ -792,7 +792,7 @@ function give_capture_credit(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isPlayer(var_6)) {
     if(!isscoreboosting(var_6)) {
-      var_6 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_6.origin);
+      var_6 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_6.origin);
       var_6 thread scripts\mp\utility\points::giveunifiedpoints("dz_capture");
 
       if(isDefined(level.zone.lastactivatetime) && gettime() - level.zone.lastactivatetime <= 2100) {
@@ -865,7 +865,7 @@ function randomdrops() {
   }
 }
 
-function ref_132f5(var_0) {
+function ref_132F5(var_0) {
   if(var_0 == "mega") {
     return false;
   }

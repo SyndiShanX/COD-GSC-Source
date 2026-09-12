@@ -3,47 +3,47 @@
  * Script: 58270.gsc
 ***********************************************/
 
-function ref_12a27() {
-  level.ref_12a34 = [];
-  level.ref_12a34["rcxd_rad"] = spawnStruct();
-  level.ref_12a34["rcxd_rad"].timeout = getdvarfloat("scr_br_rcxd_rad_timeout", 45);
-  level.ref_12a34["rcxd_rad"].maxhealth = 75;
-  level.ref_12a34["rcxd_rad"].hitstokill = 3;
-  level.ref_12a34["rcxd_rad"].speed = 140;
-  level.ref_12a34["rcxd_rad"].accel = 20;
-  level.ref_12a34["rcxd_rad"].halfsize = 27;
-  level.ref_12a34["rcxd_rad"].spawndist = 30;
-  level.ref_12a34["rcxd_rad"].streakname = "rcxd_rad";
-  level.ref_12a34["rcxd_rad"].vehicleinfo = "veh_rcxd_rad_mp";
-  level.ref_12a34["rcxd_rad"].modelbase = "lm_veh_t9_drone_rcxd";
-  level.ref_12a34["rcxd_rad"].teamsplash = "used_rcxd_rad";
-  level.ref_12a34["rcxd_rad"].destroyedsplash = "callout_destroyed_rcxd_rad";
-  level.ref_12a34["rcxd_rad"].initbunker = 0.5;
-  level.ref_12a34["rcxd_rad"].sound_explode = "recon_drone_explode";
-  level.ref_12a34["rcxd_rad"].vodestroyed = "ball_drone_backup_destroy";
-  level.ref_12a34["rcxd_rad"].votimedout = "ball_drone_backup_timeout";
-  level.ref_12a34["rcxd_rad"].scorepopup = "destroyed_rcxd_rad";
-  level.ref_12a34["rcxd_rad"].playfxcallback = &scripts\cp_mp\killstreaks\helper_drone::helperdronefx;
-  level.ref_12a34["rcxd_rad"].primarymode = "MANUAL";
-  level.ref_12a34["rcxd_rad"].primarymodestring = &"KILLSTREAKS_HINTS/RCD_MANUAL";
-  level.ref_12a34["rcxd_rad"].primarymodefunc = &scripts\cp_mp\killstreaks\helper_drone::setreconmodesettings;
-  level.ref_12a34["rcxd_rad"].premoddamagefunc = undefined;
-  level.ref_12a34["rcxd_rad"].postmoddamagefunc = &scripts\cp_mp\killstreaks\helper_drone::helperdrone_modifydamageresponse;
-  level.ref_12a34["rcxd_rad"].deployweaponname = "ks_remote_rcxd_mp";
-  level.ref_12a34["rcxd_rad"].ref_11b06 = 1;
-  level.ref_12a34["rcxd_rad"].ref_11b07 = 1;
-  level.ref_12a34["rcxd_rad"].ref_11b17 = 73984;
-  level.ref_12a34["rcxd_rad"].ref_11b18 = 73984;
-  level.ref_12a34["rcxd_rad"].deathfunc = &ref_12a22;
-  level.ref_12a34["rcxd_rad"].leaderinteractionthink = 1;
-  level.ref_12a34["rcxd_rad"].diewithowner = 1;
-  level.ref_12a34["rcxd_rad"].stringcannotplace = &"KILLSTREAKS_HINT_CANNOT_CALL_IN";
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("rcxd_rad", &ref_13e2e, undefined, &ref_13e11);
+function ref_12A27() {
+  level.ref_12A34 = [];
+  level.ref_12A34["rcxd_rad"] = spawnStruct();
+  level.ref_12A34["rcxd_rad"].timeout = getdvarfloat("scr_br_rcxd_rad_timeout", 45);
+  level.ref_12A34["rcxd_rad"].maxhealth = 75;
+  level.ref_12A34["rcxd_rad"].hitstokill = 3;
+  level.ref_12A34["rcxd_rad"].speed = 140;
+  level.ref_12A34["rcxd_rad"].accel = 20;
+  level.ref_12A34["rcxd_rad"].halfsize = 27;
+  level.ref_12A34["rcxd_rad"].spawndist = 30;
+  level.ref_12A34["rcxd_rad"].streakname = "rcxd_rad";
+  level.ref_12A34["rcxd_rad"].vehicleinfo = "veh_rcxd_rad_mp";
+  level.ref_12A34["rcxd_rad"].modelbase = "lm_veh_t9_drone_rcxd";
+  level.ref_12A34["rcxd_rad"].teamsplash = "used_rcxd_rad";
+  level.ref_12A34["rcxd_rad"].destroyedsplash = "callout_destroyed_rcxd_rad";
+  level.ref_12A34["rcxd_rad"].initbunker = 0.5;
+  level.ref_12A34["rcxd_rad"].sound_explode = "recon_drone_explode";
+  level.ref_12A34["rcxd_rad"].vodestroyed = "ball_drone_backup_destroy";
+  level.ref_12A34["rcxd_rad"].votimedout = "ball_drone_backup_timeout";
+  level.ref_12A34["rcxd_rad"].scorepopup = "destroyed_rcxd_rad";
+  level.ref_12A34["rcxd_rad"].playfxcallback = &scripts\cp_mp\killstreaks\helper_drone::helperdronefx;
+  level.ref_12A34["rcxd_rad"].primarymode = "MANUAL";
+  level.ref_12A34["rcxd_rad"].primarymodestring = &"KILLSTREAKS_HINTS/RCD_MANUAL";
+  level.ref_12A34["rcxd_rad"].primarymodefunc = &scripts\cp_mp\killstreaks\helper_drone::setreconmodesettings;
+  level.ref_12A34["rcxd_rad"].premoddamagefunc = undefined;
+  level.ref_12A34["rcxd_rad"].postmoddamagefunc = &scripts\cp_mp\killstreaks\helper_drone::helperdrone_modifydamageresponse;
+  level.ref_12A34["rcxd_rad"].deployweaponname = "ks_remote_rcxd_mp";
+  level.ref_12A34["rcxd_rad"].ref_11B06 = 1;
+  level.ref_12A34["rcxd_rad"].ref_11B07 = 1;
+  level.ref_12A34["rcxd_rad"].ref_11B17 = 73984;
+  level.ref_12A34["rcxd_rad"].ref_11B18 = 73984;
+  level.ref_12A34["rcxd_rad"].deathfunc = &ref_12A22;
+  level.ref_12A34["rcxd_rad"].leaderinteractionthink = 1;
+  level.ref_12A34["rcxd_rad"].diewithowner = 1;
+  level.ref_12A34["rcxd_rad"].stringcannotplace = &"KILLSTREAKS_HINT_CANNOT_CALL_IN";
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("rcxd_rad", &ref_13E2E, undefined, &ref_13E11);
   initmines();
-  var_0 = getarraykeys(level.ref_12a34);
+  var_0 = getarraykeys(level.ref_12A34);
 
   foreach(var_2 in var_0) {
-    var_3 = level.ref_12a34[var_2].hitstokill;
+    var_3 = level.ref_12A34[var_2].hitstokill;
 
     if(isDefined(var_3)) {
       scripts\mp\vehicles\damage::set_vehicle_hit_damage_data(var_2, var_3);
@@ -51,7 +51,7 @@ function ref_12a27() {
     }
   }
 
-  scripts\cp_mp\vehicles\vehicle_damage::ref_14171("rcxd_rad", &ref_12a22);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_14171("rcxd_rad", &ref_12A22);
   game["dialog"]["rcxd_enemy"] = "rcxd_enemy";
   game["dialog"]["rcxd_friendly_use"] = "rcxd_friendly_use";
   level._effect["rcxdExplosion"] = loadfx("vfx/iw8_br/equipment/vfx_rcxd_exp_main");
@@ -67,9 +67,9 @@ function initmines() {
   var_0.distancetobottom = 3;
 }
 
-function ref_13e2e(var_0) {
+function ref_13E2E(var_0) {
   var_1 = self;
-  var_2 = ref_13e2f(var_1, var_0);
+  var_2 = ref_13E2F(var_1, var_0);
 
   if(!var_2) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
@@ -80,11 +80,11 @@ function ref_13e2e(var_0) {
   return var_2;
 }
 
-function ref_13e11() {
+function ref_13E11() {
   var_0 = self;
   var_1 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("rcxd_rad", var_0);
-  var_1.ref_133ce = 1;
-  var_2 = ref_13e2f(var_0, var_1);
+  var_1.ref_133CE = 1;
+  var_2 = ref_13E2F(var_0, var_1);
 
   if(!var_2) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
@@ -95,7 +95,7 @@ function ref_13e11() {
   return var_2;
 }
 
-function ref_13e2f(var_0) {
+function ref_13E2F(var_0) {
   var_1 = self;
 
   if(isDefined(level.killstreaktriggeredfunc)) {
@@ -123,13 +123,13 @@ function ref_13e2f(var_0) {
   }
 
   var_2 = var_0.streakname;
-  var_3 = level.ref_12a34[var_2].deployweaponname;
+  var_3 = level.ref_12A34[var_2].deployweaponname;
   var_4 = var_1 scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweapontabletdeploy(var_0, &ref_14588, undefined, undefined, &deployweapontaken, var_3, 0, &ref_14405);
   var_1 scripts\common\utility::allow_usability(0);
   var_1 thread scripts\cp_mp\utility\killstreak_utility::tabletdofset(0, 1, 1);
 
   if(!istrue(var_4)) {
-    ref_12a2a(var_1, var_0);
+    ref_12A2A(var_1, var_0);
     scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
     var_0 notify("killstreak_finished_with_deploy_weapon");
     return false;
@@ -137,7 +137,7 @@ function ref_13e2f(var_0) {
 
   if(isDefined(level.killstreakbeginusefunc)) {
     if(!level[[level.killstreakbeginusefunc]](var_0)) {
-      ref_12a2a(var_1, var_0);
+      ref_12A2A(var_1, var_0);
       scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
       var_0 notify("killstreak_finished_with_deploy_weapon");
       return false;
@@ -146,10 +146,10 @@ function ref_13e2f(var_0) {
 
   var_1 scripts\cp_mp\utility\player_utility::_freezecontrols(1);
   var_5 = 0.4;
-  var_6 = var_1 scripts\engine\utility::ref_143ba(var_5, "death", "weapon_switch_started");
+  var_6 = var_1 scripts\engine\utility::ref_143BA(var_5, "death", "weapon_switch_started");
 
   if(!isDefined(var_6) || var_6 != "timeout") {
-    ref_12a20(var_1, var_0);
+    ref_12A20(var_1, var_0);
     var_1 scripts\cp_mp\utility\player_utility::_freezecontrols(0);
     return false;
   }
@@ -163,11 +163,11 @@ function ref_13e2f(var_0) {
   }
 
   var_1 thread scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var_0.streakname, 1, var_7);
-  var_8 = level.ref_12a34[var_2].teamsplash;
+  var_8 = level.ref_12A34[var_2].teamsplash;
   var_6 = ref_13870(var_0);
 
   if(!istrue(var_6)) {
-    ref_12a20(var_1, var_0);
+    ref_12A20(var_1, var_0);
     return false;
   }
 
@@ -191,7 +191,7 @@ function deployweapontaken(var_0) {
   self notify("finished_deploy_weapon");
 }
 
-function ref_12e28() {
+function ref_12E28() {
   var_0 = self;
   var_0 endon("death_or_disconnect");
   scripts\mp\flags::gameflagwait("prematch_fade_done");
@@ -214,10 +214,10 @@ function ref_13870(var_0) {
   var_2.targetname = "veh_rcxd";
   var_2.cannotbesuspended = 1;
   var_3 = spawnStruct();
-  var_4 = ref_12a25(var_1, 100);
+  var_4 = ref_12A25(var_1, 100);
 
   if(!isDefined(var_4)) {
-    ref_12a20(var_1, var_0);
+    ref_12A20(var_1, var_0);
     return false;
   }
 
@@ -225,7 +225,7 @@ function ref_13870(var_0) {
   var_5 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_2, var_3);
 
   if(!isDefined(var_5)) {
-    ref_12a20(var_1, var_0);
+    ref_12A20(var_1, var_0);
     return false;
   }
 
@@ -234,11 +234,11 @@ function ref_13870(var_0) {
   var_5 setentityowner(var_1);
   var_1 controlslinkTo(var_5);
   var_1 setclientomnvar("ui_rcd_controls", 9);
-  var_5 scripts\cp_mp\utility\killstreak_utility::ref_11dc0(var_1);
+  var_5 scripts\cp_mp\utility\killstreak_utility::ref_11DC0(var_1);
   var_5.owner = var_1;
   var_5.team = var_1.team;
   var_5.vehiclename = var_0.streakname;
-  var_6 = level.ref_12a34[var_0.streakname];
+  var_6 = level.ref_12A34[var_0.streakname];
   var_5.streakinfo = var_0;
   var_5.owner.streakinfo = var_0;
   var_5.maxhealth = var_6.maxhealth;
@@ -248,29 +248,29 @@ function ref_13870(var_0) {
     var_5 thread[[var_6.damagemonitorfunc]]();
   }
 
-  thread ref_12a33();
-  thread ref_12a30();
-  thread ref_12a2f();
-  thread ref_12a32();
-  thread ref_12a23();
-  thread ref_12a2c(var_5);
-  thread ref_12a2e();
-  thread ref_12a2b();
-  thread ref_12a28(var_5);
+  thread ref_12A33();
+  thread ref_12A30();
+  thread ref_12A2F();
+  thread ref_12A32();
+  thread ref_12A23();
+  thread ref_12A2C(var_5);
+  thread ref_12A2E();
+  thread ref_12A2B();
+  thread ref_12A28(var_5);
 
   if(scripts\mp\utility\game::getgametype() == "br" && !scripts\mp\flags::gameflag("prematch_fade_done")) {
-    thread ref_12e28();
+    thread ref_12E28();
   }
 
   var_5 scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_setCanDamage(1);
   scripts\mp\outofbounds::registerentforoob(var_5, "killstreak");
-  ref_12a29(var_5, "rcxd_enemy", 0, 1);
-  ref_12a29(var_5, "rcxd_friendly_use", 1, 0);
+  ref_12A29(var_5, "rcxd_enemy", 0, 1);
+  ref_12A29(var_5, "rcxd_friendly_use", 1, 0);
   var_5 setscriptablepartstate("flash_light", "enabled", 0);
   return true;
 }
 
-function ref_12a25(var_0) {
+function ref_12A25(var_0) {
   var_1 = undefined;
   var_2 = self.origin;
   var_3 = self.angles;
@@ -279,7 +279,7 @@ function ref_12a25(var_0) {
   var_6 = [var_2 + var_0 * var_4, var_2 - var_0 * var_4, var_2 + var_0 * var_5, var_2 - var_0 * var_5, var_2 + 0.707 * var_0 * (var_4 + var_5), var_2 + 0.707 * var_0 * (var_4 - var_5), var_2 + 0.707 * var_0 * (var_5 - var_4), var_2 + 0.707 * var_0 * (-1 * var_4 - var_5)];
 
   foreach(var_8 in var_6) {
-    var_1 = ref_12a1d(var_2, var_8);
+    var_1 = ref_12A1D(var_2, var_8);
 
     if(isDefined(var_1)) {
       break;
@@ -289,7 +289,7 @@ function ref_12a25(var_0) {
   return var_1;
 }
 
-function ref_12a1d(var_0, var_1) {
+function ref_12A1D(var_0, var_1) {
   var_2 = undefined;
   var_3 = (0, 0, 45);
   var_4 = scripts\engine\trace::create_contents(1, 1, 1, 1, 1, 1, 1, 0, 1);
@@ -344,9 +344,9 @@ function ref_12a1d(var_0, var_1) {
   return var_13;
 }
 
-function ref_12a20(var_0) {
+function ref_12A20(var_0) {
   var_1 = self;
-  ref_12a2a(var_1, var_0);
+  ref_12A2A(var_1, var_0);
   scripts\cp_mp\vehicles\vehicle_tracking::clearvehiclereservation();
   var_0 notify("killstreak_finished_with_deploy_weapon");
 
@@ -356,7 +356,7 @@ function ref_12a20(var_0) {
   }
 }
 
-function ref_12a28(var_0) {
+function ref_12A28(var_0) {
   var_1 = self;
   var_1.owner endon("disconnect");
   var_1 endon("death");
@@ -391,7 +391,7 @@ function ref_12a28(var_0) {
 
     if(istrue(var_0.leaderplunderstring)) {
       if(var_13 || !isDefined(var_12.owner)) {
-        thread ref_12a24(var_1);
+        thread ref_12A24(var_1);
       } else {
         var_1 dodamage(var_1.maxhealth, var_12.origin, undefined, undefined, "MOD_CRUSH");
       }
@@ -416,14 +416,14 @@ function ref_12a28(var_0) {
   }
 }
 
-function ref_12a33() {
+function ref_12A33() {
   var_0 = self;
   level endon("game_ended");
   var_0 endon("death");
   var_0 endon("explode");
   var_0.owner endon("disconnect");
   var_0 endon("owner_gone");
-  var_1 = level.ref_12a34[var_0.vehiclename];
+  var_1 = level.ref_12A34[var_0.vehiclename];
   var_0.timeout = var_1.timeout;
 
   if(!isDefined(var_0.timeout)) {
@@ -438,10 +438,10 @@ function ref_12a33() {
   }
 
   var_0 scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog(var_1.votimedout, 1);
-  thread ref_12a21(var_0);
+  thread ref_12A21(var_0);
 }
 
-function ref_12a21(var_0) {
+function ref_12A21(var_0) {
   var_1 = 1;
   var_2 = self;
 
@@ -450,7 +450,7 @@ function ref_12a21(var_0) {
   }
 
   if(!istrue(var_2.lbravo_spawner_safehouse1)) {
-    thread ref_12a1e();
+    thread ref_12A1E();
     var_2.lbravo_spawner_safehouse1 = 1;
   }
 
@@ -490,9 +490,9 @@ function ref_12a21(var_0) {
   var_2.owner cameraunlink(var_2);
   var_2 unlink();
   var_2.owner controlsunlink();
-  scripts\cp_mp\utility\killstreak_utility::ref_11dc1(var_2.owner);
+  scripts\cp_mp\utility\killstreak_utility::ref_11DC1(var_2.owner);
   var_2 setscriptablepartstate("flash_light", "default", 0);
-  var_2.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
+  var_2.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_0);
   var_2.owner unlink();
   var_2.owner setplayerangles((var_2.owner.restoreangles[0], var_2.owner.restoreangles[1], 0));
   var_2.owner.restoreangles = undefined;
@@ -500,29 +500,29 @@ function ref_12a21(var_0) {
   var_2 notify("explode");
   scripts\mp\outofbounds::clearoob(self, 1);
   var_2 setscriptablepartstate("flash_light", "default", 0);
-  var_3 = level.ref_12a34[var_0.streakname].deployweaponname;
+  var_3 = level.ref_12A34[var_0.streakname].deployweaponname;
   var_4 = getcompleteweaponname(var_3);
 
   if(var_2.owner hasweapon(var_4)) {
     var_2.owner scripts\cp_mp\utility\inventory_utility::getridofweapon(var_4);
   }
 
-  thread ref_12a1f();
+  thread ref_12A1F();
   var_2.owner setclientomnvar("ui_remote_control_sequence", -1);
 }
 
-function ref_12a1f() {
+function ref_12A1F() {
   waitframe();
   scripts\cp_mp\vehicles\vehicle_tracking::_deletevehicle(self);
 }
 
-function ref_12a2a(var_0) {
+function ref_12A2A(var_0) {
   var_1 = self;
   var_1 endon("death_or_disconnect");
   var_1 notify("rcxdWeaponTaken");
   var_1 endon("rcxdWeaponTaken");
   wait 1.5;
-  var_2 = level.ref_12a34[var_0.streakname].deployweaponname;
+  var_2 = level.ref_12A34[var_0.streakname].deployweaponname;
   var_3 = getcompleteweaponname(var_2);
   var_1 scripts\cp_mp\utility\inventory_utility::_takeweapon(var_3);
   var_4 = var_1 scripts\cp_mp\utility\inventory_utility::getcurrentprimaryweaponsminusalt();
@@ -545,13 +545,13 @@ function ref_12a2a(var_0) {
   }
 }
 
-function ref_12a22(var_0) {
+function ref_12A22(var_0) {
   var_1 = self;
-  thread ref_12a21();
+  thread ref_12A21();
   return false;
 }
 
-function ref_12a30() {
+function ref_12A30() {
   var_0 = self;
   level endon("game_ended");
   var_0 endon("death");
@@ -559,15 +559,15 @@ function ref_12a30() {
   GscBinSkip4(0x6e, var_0, "disconnect");
 }
 
-function ref_12a31(var_0) {
+function ref_12A31(var_0) {
   var_1 = self;
   var_2 = var_1.streakinfo;
   var_1.owner waittill(var_0);
   var_1 notify("owner_gone");
-  thread ref_12a21(var_1);
+  thread ref_12A21(var_1);
 }
 
-function ref_12a2f() {
+function ref_12A2F() {
   var_0 = self;
   level endon("game_ended");
   var_0 endon("death");
@@ -577,37 +577,37 @@ function ref_12a2f() {
 
   for(;;) {
     var_0.owner waittill("death");
-    var_2 = level.ref_12a34[var_0.vehiclename];
+    var_2 = level.ref_12A34[var_0.vehiclename];
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGametypeNumLives")) {
       if(istrue(var_2.diewithowner) || [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGametypeNumLives")]]() && var_0.owner.pers["deaths"] == [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGametypeNumLives")]]()) {
-        thread ref_12a21(var_0);
+        thread ref_12A21(var_0);
       }
     }
   }
 }
 
-function ref_12a32() {
+function ref_12A32() {
   var_0 = self;
   var_0 endon("death");
   var_0 endon("explode");
   var_0.owner endon("disconnect");
   var_0 endon("owner_gone");
   var_1 = var_0.streakinfo;
-  level scripts\engine\utility::ref_143a7("round_end_finished", "game_ended", "prematch_cleanup", "ending_sequence");
-  thread ref_12a21(var_0);
+  level scripts\engine\utility::ref_143A7("round_end_finished", "game_ended", "prematch_cleanup", "ending_sequence");
+  thread ref_12A21(var_0);
 }
 
-function ref_12a23() {
+function ref_12A23() {
   var_0 = self;
   var_0 endon("death");
   var_0 endon("explode");
   var_1 = var_0.streakinfo;
-  level scripts\engine\utility::ref_143a5("bro_shot_start", "game_ended");
-  thread ref_12a21(var_0);
+  level scripts\engine\utility::ref_143A5("bro_shot_start", "game_ended");
+  thread ref_12A21(var_0);
 }
 
-function ref_12a2c(var_0) {
+function ref_12A2C(var_0) {
   var_1 = self;
 
   if(!istrue(var_0.leaderinteractionthink)) {
@@ -616,7 +616,7 @@ function ref_12a2c(var_0) {
 
   var_1.owner notifyonplayercommand("detonate_rcxd", "+usereload");
   var_1.owner notifyonplayercommand("detonate_rcxd", "+activate");
-  ref_12a2d(var_1);
+  ref_12A2D(var_1);
 
   if(isDefined(var_1.owner)) {
     var_1.owner notifyonplayercommandremove("detonate_rcxd", "+usereload");
@@ -625,7 +625,7 @@ function ref_12a2c(var_0) {
   }
 }
 
-function ref_12a2d() {
+function ref_12A2D() {
   var_0 = self;
   var_0.owner endon("disconnect");
   var_0 endon("death");
@@ -633,10 +633,10 @@ function ref_12a2d() {
   var_0 endon("switch_modes");
   var_1 = var_0.streakinfo;
   var_0.owner waittill("detonate_rcxd");
-  thread ref_12a24(var_0);
+  thread ref_12A24(var_0);
 }
 
-function ref_12a2e() {
+function ref_12A2E() {
   var_0 = self;
   var_0.owner endon("disconnect");
   var_0 endon("death");
@@ -660,7 +660,7 @@ function ref_12a2e() {
   }
 }
 
-function ref_12a2b() {
+function ref_12A2B() {
   var_0 = self;
   var_0.owner endon("disconnect");
   var_0 endon("death");
@@ -685,14 +685,14 @@ function ref_12a2b() {
   }
 }
 
-function ref_12a24(var_0) {
+function ref_12A24(var_0) {
   var_1 = self;
-  thread ref_12a1e();
+  thread ref_12A1E();
   var_1.lbravo_spawner_safehouse1 = 1;
-  thread ref_12a21(var_1);
+  thread ref_12A21(var_1);
 }
 
-function ref_12a1e() {
+function ref_12A1E() {
   var_0 = self;
   var_1 = var_0.origin;
   var_2 = var_0.owner;
@@ -750,7 +750,7 @@ function applygasdamageovertime(var_0, var_1) {
 
   while(var_1 istouching(self)) {
     var_1 dodamage(9, self.origin, var_0, self, "MOD_EXPLOSIVE");
-    var_2 = scripts\engine\utility::ref_143b9(1, "death");
+    var_2 = scripts\engine\utility::ref_143B9(1, "death");
 
     if(var_2 == "death") {
       break;
@@ -763,18 +763,18 @@ function applygasdamageovertime(var_0, var_1) {
   }
 }
 
-function ref_12a29(var_0, var_1, var_2) {
+function ref_12A29(var_0, var_1, var_2) {
   var_3 = self;
 
   if(!isDefined(var_0)) {
     return;
   }
 
-  var_4 = ref_12a26(var_3, var_1, var_2, 7500);
+  var_4 = ref_12A26(var_3, var_1, var_2, 7500);
   scripts\mp\gametypes\br_public::brleaderdialog(var_0, 1, var_4);
 }
 
-function ref_12a26(var_0, var_1, var_2) {
+function ref_12A26(var_0, var_1, var_2) {
   var_3 = self;
   var_4 = [];
   var_5 = var_3.owner.team;

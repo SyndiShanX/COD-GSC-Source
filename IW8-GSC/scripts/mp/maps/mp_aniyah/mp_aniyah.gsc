@@ -38,9 +38,9 @@ function main() {
   thread incorrectswitch();
   thread deleteinfilclip();
   thread player_exfil_struct();
-  thread ref_12f8e();
-  thread ref_136ad();
-  thread ref_121f5();
+  thread ref_12F8E();
+  thread ref_136AD();
+  thread ref_121F5();
 }
 
 function incorrectswitch() {
@@ -164,7 +164,7 @@ function player_exfil_struct() {
   var_31 clonebrushmodeltoscriptmodel(var_30);
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
@@ -192,24 +192,24 @@ function ref_12f8e() {
   }
 }
 
-function ref_136ad() {
+function ref_136AD() {
   var_0 = spawn("trigger_radius", (-2010, 1930, 430), 0, 192, 100);
-  thread ref_144ff();
+  thread ref_144FF();
 }
 
-function ref_144ff() {
+function ref_144FF() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(!isDefined(self.ref_126ce)) {
-      self.ref_126ce = [];
+    if(!isDefined(self.ref_126CE)) {
+      self.ref_126CE = [];
     }
 
-    if(scripts\engine\utility::array_contains(self.ref_126ce, var_0.guid)) {
+    if(scripts\engine\utility::array_contains(self.ref_126CE, var_0.guid)) {
       continue;
     }
 
-    self.ref_126ce = scripts\engine\utility::array_add(self.ref_126ce, var_0.guid);
+    self.ref_126CE = scripts\engine\utility::array_add(self.ref_126CE, var_0.guid);
     thread ref_14491(var_0);
   }
 }
@@ -237,10 +237,10 @@ function ref_14491(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }
 
-function ref_121f5() {
+function ref_121F5() {
   if(!isDefined(level.outofboundstriggers)) {
     level.outofboundstriggers = [];
   }

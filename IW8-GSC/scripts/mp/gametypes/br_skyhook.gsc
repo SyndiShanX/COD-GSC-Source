@@ -11,10 +11,10 @@ function init() {
   isplatepouch();
   initanimtree();
   tr_vis_radius_override_lod2();
-  scripts\cp_mp\utility\script_utility::registersharedfunc("skyhook", "precision_airstrike_damage", &ref_1284a);
-  scripts\engine\scriptable::ref_12f5b("skyhook", &ref_13409);
-  scripts\engine\scriptable::ref_12f5b("skyhook_interact", &skyhookplacedscriptableused);
-  scripts\engine\scriptable::ref_12f5a(&scriptable_skyhook_placed_damaged);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("skyhook", "precision_airstrike_damage", &ref_1284A);
+  scripts\engine\scriptable::ref_12F5B("skyhook", &ref_13409);
+  scripts\engine\scriptable::ref_12F5B("skyhook_interact", &skyhookplacedscriptableused);
+  scripts\engine\scriptable::ref_12F5A(&scriptable_skyhook_placed_damaged);
   scripts\mp\utility\sound::besttime("equip_skyhook");
   thread ref_13406();
 }
@@ -32,20 +32,20 @@ function tr_vis_radius_override_lod2() {
   level.ref_13400.playerhumanprestream = getdvarint("scr_skyhook_force_parachute", 1);
   level.ref_13400.bullets_can_damage = getdvarint("scr_skyhook_bullets_damage_balloon", 1);
   level.ref_13400.chopperexfil_sh060_start = getdvarint("scr_skyhook_balloon_health", 2000);
-  level.ref_13400.ref_12c2d = getdvarint("scr_skyhook_repair_cost", 5);
+  level.ref_13400.ref_12C2D = getdvarint("scr_skyhook_repair_cost", 5);
   level.ref_13400.open_door_to_next_objective = getdvarfloat("scr_skyhook_balloon_explosives_multiplier", 4);
   level.ref_13400.arenaflag_previewflag = getdvarfloat("scr_skyhook_balloon_aa_turret_multiplier", 6);
   level.ref_13400.ref_12928 = getdvarfloat("scr_skyhook_balloon_spawn_protection_duration", 0);
   level.ref_13400.ref_12929 = getdvarfloat("scr_skyhook_balloon_spawn_protection_scalar", 0.5);
   level.ref_13400.iskillstreakvehicleinflictor = loadfx("vfx/iw8_br/island/equip/barrage_balloon/vfx_barrage_balloon_explosion");
-  level.ref_13400.ref_12c32 = loadfx("vfx/iw8_br/island/equip/barrage_balloon/vfx_barrage_balloon_repair");
+  level.ref_13400.ref_12C32 = loadfx("vfx/iw8_br/island/equip/barrage_balloon/vfx_barrage_balloon_repair");
   level.ref_13400.cantakedamage = loadfx("vfx/iw8_br/island/equip/barrage_balloon/vfx_barrage_balloon_scrnfx");
-  level.ref_13400.ref_12c33 = loadfx("vfx/iw8_br/gameplay/payload/vfx_br_payload_barrier_construct_base");
-  level.ref_13400.ref_12c34 = loadfx("vfx/iw8_br/gameplay/vfx_br_cash_fulton_fillup");
+  level.ref_13400.ref_12C33 = loadfx("vfx/iw8_br/gameplay/payload/vfx_br_payload_barrier_construct_base");
+  level.ref_13400.ref_12C34 = loadfx("vfx/iw8_br/gameplay/vfx_br_cash_fulton_fillup");
   level.ref_13400.warning_radius = getdvarint("scr_parachute_overhead_warning_radius", 2000);
   level.ref_13400.warning_height = getdvarint("scr_parachute_overhead_warning_height", 3000);
   level.ref_13400.warning_timeout_ms = getdvarint("scr_parachute_overhead_warning_timeout_ms", 45000);
-  level.ref_13400.ref_1284a = getdvarint("scr_skyhook_precision_airstrike_damage", 200);
+  level.ref_13400.ref_1284A = getdvarint("scr_skyhook_precision_airstrike_damage", 200);
   level.ref_13400.thermite_dps = getdvarint("scr_skyhook_thermite_dps", 100);
   level.ref_13400.aq_ontimerexpired = reader();
   level.ref_13400.areas_remaining = [];
@@ -96,7 +96,7 @@ function reader() {
 
 function ref_13406() {
   waitframe();
-  ref_135d3();
+  ref_135D3();
 
   if(!getdvarint("scr_skyhooks_enabled_placed_disabled", 0)) {
     spawn_skyhooks_placed();
@@ -112,12 +112,12 @@ function ref_13406() {
   level notify("respawn_skyhooks");
 
   if(getdvarint("scr_skyhook_balloon_start_destroyed", 0) == 1) {
-    ref_12c94();
+    ref_12C94();
     respawn_skyhooks_destroyed_placed();
     return;
   }
 
-  ref_12c93();
+  ref_12C93();
 
   if(!getdvarint("scr_skyhooks_enabled_placed_disabled", 0)) {
     respawn_skyhooks_placed();
@@ -125,7 +125,7 @@ function ref_13406() {
   }
 }
 
-function ref_135d3() {
+function ref_135D3() {
   if(!level.ref_13400.aq_ontimerexpired.size) {
     return;
   }
@@ -160,7 +160,7 @@ function ref_135d3() {
     var_5.angles = var_3[1];
     var_4.chopperexfil_sfx_before_sh070 = var_5;
     var_4.chopperexfil_skip_ascend0 = var_5.angles;
-    var_5.ref_133fa = var_4;
+    var_5.ref_133FA = var_4;
     ref_13401(var_5);
     var_5.animname = "script_model";
     var_5 scripts\common\anim::setanimtree();
@@ -171,11 +171,11 @@ function ref_135d3() {
     level.ref_13400.areas_remaining[level.ref_13400.areas_remaining.size] = var_4;
   }
 
-  if(!isDefined(level.ref_13beb)) {
-    level.ref_13beb = 0;
+  if(!isDefined(level.ref_13BEB)) {
+    level.ref_13BEB = 0;
   }
 
-  level.ref_13beb += level.ref_13400.areas_remaining.size;
+  level.ref_13BEB += level.ref_13400.areas_remaining.size;
 }
 
 function spawn_skyhooks_placed() {
@@ -216,7 +216,7 @@ function set_skyhook_placed_broken() {
   self setscriptablepartstate("skyhook", "broken");
 }
 
-function ref_12c93() {
+function ref_12C93() {
   foreach(var_1 in level.ref_13400.areas_remaining) {
     if(isDefined(var_1.chopperexfil_sfx_before_sh070)) {
       var_1.chopperexfil_sfx_before_sh070 delete();
@@ -229,7 +229,7 @@ function ref_12c93() {
     var_4 = spawn("script_model", var_1.origin);
     var_4 setModel("lm_military_skyhook_extraction_01_ch3");
     var_4.angles = var_1.chopperexfil_skip_ascend0;
-    var_4.ref_133fa = var_1;
+    var_4.ref_133FA = var_1;
     var_1.chopperexfil_sfx_before_sh070 = var_4;
     ref_13401(var_1.chopperexfil_sfx_before_sh070);
     var_4.animname = "script_model";
@@ -250,7 +250,7 @@ function respawn_skyhooks_placed() {
   }
 }
 
-function ref_12c94() {
+function ref_12C94() {
   foreach(var_1 in level.ref_13400.areas_remaining) {
     if(isDefined(var_1.chopperexfil_sfx_before_sh070)) {
       var_1.chopperexfil_sfx_before_sh070 delete();
@@ -263,7 +263,7 @@ function ref_12c94() {
     var_4 setModel("br_skyhook_extraction_base_01_ch3");
     var_4 setscriptablepartstate("objective", "broken");
     var_4.angles = var_1.chopperexfil_skip_ascend0;
-    var_4.ref_133fa = var_1;
+    var_4.ref_133FA = var_1;
     var_1.chopperexfil_sfx_before_sh070 = var_4;
     thread skyhookrepairwatcher();
   }
@@ -286,7 +286,7 @@ function chopperexfil_sitting_wind() {
   self method_87de(1);
 
   if(level.ref_13400.ref_12928) {
-    thread ref_135b8();
+    thread ref_135B8();
     return;
   }
 }
@@ -296,12 +296,12 @@ function health_init() {
   self.maxhealth = level.ref_13400.chopperexfil_sh060_start;
 
   if(level.ref_13400.ref_12928) {
-    thread ref_135b8();
+    thread ref_135B8();
     return;
   }
 }
 
-function ref_135b8() {
+function ref_135B8() {
   self notify("start_spawn_protection");
   self endon("start_spawn_protection");
   self.chopper_boss_drone_target_array = 1;
@@ -316,7 +316,7 @@ function modevalidatekillcam() {
 
   foreach(var_1 in self.capacity) {
     var_2 = var_1 getentitynumber();
-    ref_133fc(self.a_e_skyhook_ascenders[var_2], var_1);
+    ref_133FC(self.a_e_skyhook_ascenders[var_2], var_1);
     self.a_e_skyhook_ascenders[var_2] stoploopsound("br_auto_ascender_device_lp_npc");
     playerstartarenasetcontrols(var_1, var_1 getentitynumber(), self);
   }
@@ -324,14 +324,14 @@ function modevalidatekillcam() {
 
 function ref_13409(var_0, var_1, var_2, var_3, var_4) {
   if(var_2 != "off") {
-    if(var_2 == "broken" && var_3.plundercount >= level.ref_13400.ref_12c2d) {
+    if(var_2 == "broken" && var_3.plundercount >= level.ref_13400.ref_12C2D) {
       var_3 thread scripts\mp\hud_message::showsplash("redeploy_balloon_repaired");
       ref_13401(var_0.chopperexfil_sfx_before_sh070);
       var_0 notify("player_repaired", var_3);
       return;
     }
 
-    if(var_2 != "on" || istrue(var_3.ref_140af) || !get_any_player_spectating(var_0, var_3)) {
+    if(var_2 != "on" || istrue(var_3.ref_140AF) || !get_any_player_spectating(var_0, var_3)) {
       playsoundatpos(var_0.origin, "skyhook_repair_denied");
       return;
     }
@@ -343,13 +343,13 @@ function ref_13409(var_0, var_1, var_2, var_3, var_4) {
 
 function skyhookplacedscriptableused(var_0, var_1, var_2, var_3, var_4) {
   if(var_2 != "off") {
-    if(var_2 == "broken" && var_3.plundercount >= level.ref_13400.ref_12c2d) {
+    if(var_2 == "broken" && var_3.plundercount >= level.ref_13400.ref_12C2D) {
       var_3 thread scripts\mp\hud_message::showsplash("redeploy_balloon_repaired");
       var_0 notify("player_repaired", var_3);
       return;
     }
 
-    if(var_2 != "on" || istrue(var_3.ref_140af) || !get_any_player_spectating(var_0, var_3)) {
+    if(var_2 != "on" || istrue(var_3.ref_140AF) || !get_any_player_spectating(var_0, var_3)) {
       playsoundatpos(var_0.origin, "skyhook_repair_denied");
       return;
     }
@@ -363,12 +363,12 @@ function skyhookrepairwatcher() {
   level endon("game_ended");
   level endon("respawn_skyhooks");
   self waittill("player_repaired", var_0);
-  var_0 scripts\mp\gametypes\br_plunder::ref_1261e(level.ref_13400.ref_12c2d);
+  var_0 scripts\mp\gametypes\br_plunder::ref_1261E(level.ref_13400.ref_12C2D);
   playsoundatpos(self.origin, "skyhook_repair");
-  playFX(level.ref_13400.ref_12c32, self.origin + (0, 0, 4000));
-  playFX(level.ref_13400.ref_12c34, self.origin + (0, 0, 16));
+  playFX(level.ref_13400.ref_12C32, self.origin + (0, 0, 4000));
+  playFX(level.ref_13400.ref_12C34, self.origin + (0, 0, 16));
   wait 0.25;
-  playFX(level.ref_13400.ref_12c33, self.origin);
+  playFX(level.ref_13400.ref_12C33, self.origin);
   self setscriptablepartstate("skyhook", "on");
   self setscriptablepartstate("sfx", "idle");
   chopperexfil_sitting_wind(self.chopperexfil_sfx_before_sh070);
@@ -383,12 +383,12 @@ function skyhook_repair_watcher_placed() {
   level endon("game_ended");
   level endon("respawn_skyhooks");
   self waittill("player_repaired", var_0);
-  var_0 scripts\mp\gametypes\br_plunder::ref_1261e(level.ref_13400.ref_12c2d);
+  var_0 scripts\mp\gametypes\br_plunder::ref_1261E(level.ref_13400.ref_12C2D);
   playsoundatpos(self.origin, "skyhook_repair");
-  playFX(level.ref_13400.ref_12c32, self.origin + (0, 0, 4000));
-  playFX(level.ref_13400.ref_12c34, self.origin + (0, 0, 16));
+  playFX(level.ref_13400.ref_12C32, self.origin + (0, 0, 4000));
+  playFX(level.ref_13400.ref_12C34, self.origin + (0, 0, 16));
   wait 0.25;
-  playFX(level.ref_13400.ref_12c33, self.origin);
+  playFX(level.ref_13400.ref_12C33, self.origin);
   set_skyhook_placed_available();
   health_init();
   thread skyhook_repair_watcher_placed();
@@ -415,7 +415,7 @@ function atv_vehicle(var_0, var_1) {
   var_1 endon("death_or_disconnect");
   var_1 endon("last_stand_start");
   var_0.capacity[var_0.capacity.size] = var_1;
-  var_1.ref_140af = 1;
+  var_1.ref_140AF = 1;
   var_1.shouldskiplaststand = 1;
 
   if(isDefined(var_1.get_search_turret_target_player)) {
@@ -432,7 +432,7 @@ function atv_vehicle(var_0, var_1) {
   }
 
   var_0.a_e_skyhook_ascenders[var_2] = var_3;
-  ref_1246f(var_1);
+  ref_1246F(var_1);
   thread ref_13405();
   var_1.usingascender = 1;
   level.initpostmain++;
@@ -464,7 +464,7 @@ function atv_vehicle(var_0, var_1) {
   var_0.a_e_ascendermodelworld[var_2] = var_7;
   thread ascenddeathlistener(var_1, var_0);
   var_1.chopper_boss_damage_monitor = 0;
-  var_8 = ref_133fb(var_3, var_1, var_6, var_7);
+  var_8 = ref_133FB(var_3, var_1, var_6, var_7);
 
   if(!var_8) {
     playerstartarenasetcontrols(var_1, var_2, var_0);
@@ -504,7 +504,7 @@ function atv_vehicle(var_0, var_1) {
   var_0.capacity = scripts\engine\utility::array_remove(var_0.capacity, var_1);
 }
 
-function ref_133fe() {
+function ref_133FE() {
   self endon("kill_skyhook_ascend_earthquake");
 
   for(;;) {
@@ -564,17 +564,17 @@ function playerstartarenasetcontrols(var_0, var_1, var_2) {
 
     var_0.player_rig stopanimScripted();
     var_0.usingascender = 0;
-    var_0.ref_140af = 0;
+    var_0.ref_140AF = 0;
   }
 
   level.initpostmain--;
 
   if(isDefined(var_0)) {
-    if(isDefined(var_0.ref_140bc)) {
-      var_0 setvelocity(var_0.ref_140bc);
+    if(isDefined(var_0.ref_140BC)) {
+      var_0 setvelocity(var_0.ref_140BC);
     }
 
-    var_0.ref_140bc = undefined;
+    var_0.ref_140BC = undefined;
 
     if(istrue(var_0.chopper_boss_damage_monitor) && !istrue(level.client_activate) && !scripts\mp\utility\player::unset_relic_trex(var_0)) {
       var_0 skydive_beginfreefall();
@@ -585,7 +585,7 @@ function playerstartarenasetcontrols(var_0, var_1, var_2) {
   }
 }
 
-function ref_1246f(var_0) {
+function ref_1246F(var_0) {
   if(var_0 getstance() != "stand") {
     var_0 setstance("stand");
   }
@@ -664,7 +664,7 @@ function get_any_player_spectating(var_0, var_1) {
     return false;
   }
 
-  var_2 = max(level.ref_13beb, 30);
+  var_2 = max(level.ref_13BEB, 30);
   var_3 = getdvarint("scr_ascender_override_max_active", var_2);
 
   if(var_3 != -1) {
@@ -722,7 +722,7 @@ function watch_for_ashes_achievement() {
   level endon("game_ended");
   self.skyhooklaststand = 1;
   self allowmelee(0);
-  scripts\engine\utility::ref_143a5("death_or_disconnect", "last_stand_finished");
+  scripts\engine\utility::ref_143A5("death_or_disconnect", "last_stand_finished");
   self allowmelee(1);
   self enableoffhandweapons();
   self enableweaponswitch();
@@ -817,7 +817,7 @@ function chopperexfil_sh010_start() {
       continue;
     }
 
-    if(istrue(self.ref_133fa.chopper_boss_drone_target_array)) {
+    if(istrue(self.ref_133FA.chopper_boss_drone_target_array)) {
       var_0 = int(var_0 * level.ref_13400.ref_12929);
     }
 
@@ -902,7 +902,7 @@ function scriptable_skyhook_placed_damaged(var_0, var_1, var_2, var_3, var_4, va
   }
 
   if(isDefined(var_0) && isDefined(var_0.model) && var_0.model == "ks_airstrike_target_br_ch3") {
-    var_3 = level.ref_13400.ref_1284a;
+    var_3 = level.ref_13400.ref_1284A;
   }
 
   var_2.health -= var_3;
@@ -948,16 +948,16 @@ function fake_thermite_damage_duration(var_0, var_1, var_2, var_3, var_4, var_5,
   self dodamage(level.ref_13400.thermite_dps * var_0, var_4, var_2, undefined, undefined, undefined, var_4);
 }
 
-function ref_1284a(var_0, var_1, var_2) {
+function ref_1284A(var_0, var_1, var_2) {
   if(getdvarint("scr_skyhooks_enabled", 0)) {
     if(isDefined(var_0["hittype"]) && var_0["hittype"] == "hittype_entity" && isDefined(var_0["entity"]) && isDefined(var_0["entity"].model) && var_0["entity"].model == "lm_military_skyhook_extraction_01_ch3") {
       wait 0.3;
 
       if(var_0["position"][2] > var_0["entity"].origin[2] + 2500) {
         if(isDefined(var_2)) {
-          var_0["entity"] dodamage(level.ref_13400.ref_1284a, var_0["position"], undefined, var_2);
+          var_0["entity"] dodamage(level.ref_13400.ref_1284A, var_0["position"], undefined, var_2);
         } else {
-          var_0["entity"] dodamage(level.ref_13400.ref_1284a, var_0["position"]);
+          var_0["entity"] dodamage(level.ref_13400.ref_1284A, var_0["position"]);
         }
 
         if(var_0["entity"].health <= 0) {
@@ -976,11 +976,11 @@ function ref_1284a(var_0, var_1, var_2) {
 }
 
 function chopperexfil_sh050_start() {
-  self.ref_133fa setscriptablepartstate("skyhook", "broken");
-  ref_13402(self.ref_133fa);
-  playFX(level.ref_13400.iskillstreakvehicleinflictor, self.ref_133fa.origin + (0, 0, 4500));
-  self.ref_133fa setscriptablepartstate("sfx", "expl_sfx");
-  self.ref_133fa notify("balloon_destroyed");
+  self.ref_133FA setscriptablepartstate("skyhook", "broken");
+  ref_13402(self.ref_133FA);
+  playFX(level.ref_13400.iskillstreakvehicleinflictor, self.ref_133FA.origin + (0, 0, 4500));
+  self.ref_133FA setscriptablepartstate("sfx", "expl_sfx");
+  self.ref_133FA notify("balloon_destroyed");
   radiusdamage(self.origin + (0, 0, 4500), 512, 100, 100, undefined, "MOD_EXPLOSIVE", "claymore_radial_mp");
 }
 
@@ -1035,7 +1035,7 @@ function initanimtree() {
   level.scr_eventanim["device"]["redeploy_exit"] = "redeploy_exit";
 }
 
-function ref_133fb(var_0, var_1, var_2) {
+function ref_133FB(var_0, var_1, var_2) {
   var_0 endon("death_or_disconnect");
   var_0 endon("ascender_cancel");
   thread ref_13404(var_0, "player", var_0.origin);
@@ -1051,12 +1051,12 @@ function ref_133fb(var_0, var_1, var_2) {
   var_7 = rotatevector((-16.12, 9.073, 0), (0, var_0.angles[1] - -35.985, 0));
   var_8 = self.origin + var_7;
   var_0 scripts\common\utility::allow_execution_victim(0);
-  self.ref_140bb = self.origin;
+  self.ref_140BB = self.origin;
   self.origin = var_0.origin;
-  self moveTo(self.ref_140bb, 0.4, 0.1, 0.1);
-  self.ref_140b3 = self.angles;
+  self moveTo(self.ref_140BB, 0.4, 0.1, 0.1);
+  self.ref_140B3 = self.angles;
   self.angles = var_0 getplayerangles();
-  self rotateTo(self.ref_140b3, 0.4, 0.1, 0.1);
+  self rotateTo(self.ref_140B3, 0.4, 0.1, 0.1);
   var_0.player_rig moveTo(var_8, 0.4, 0.1, 0.1);
   var_9 = vectortoangles(-1 * (var_6[0], var_6[1], 0));
   var_0.player_rig rotateTo(var_9, 0.4, 0.1, 0.1);
@@ -1116,7 +1116,7 @@ function ref_13404(var_0, var_1, var_2) {
   self.player_rig.dof_func = &scripts\mp\utility\infilexfil::handledofnotetrack;
   self playerlinktodelta(self.player_rig, "tag_player", 1, 70, 70, 30, 30, 1);
   self notify("rig_created");
-  scripts\engine\utility::ref_143a5("remove_rig", "player_free_spot");
+  scripts\engine\utility::ref_143A5("remove_rig", "player_free_spot");
 
   if(istrue(level.gameended)) {
     return;
@@ -1149,14 +1149,14 @@ function ref_13402() {
   self.chopperexfil_sfx_before_sh070 setscriptablepartstate("objective", "broken");
 }
 
-function ref_133fd(var_0, var_1, var_2) {
+function ref_133FD(var_0, var_1, var_2) {
   var_3 = "redeploy_loop";
   scripts\common\anim::anim_first_frame_solo(var_0.player_rig, var_3);
   thread scripts\mp\anim::anim_player_solo(var_0, var_0.player_rig, var_3);
   thread scripts\common\anim::anim_single_solo(var_2, var_3);
 }
 
-function ref_133fc(var_0, var_1, var_2) {
+function ref_133FC(var_0, var_1, var_2) {
   var_3 = "redeploy_exit";
   scripts\common\anim::anim_first_frame_solo(var_0.player_rig, var_3);
   thread scripts\mp\anim::anim_player_solo(var_0, var_0.player_rig, var_3);
@@ -1207,7 +1207,7 @@ function ref_13403() {
 
       var_3.showteamlittlebirds = var_7;
 
-      if(var_3 scripts\cp_mp\utility\game_utility::ref_140a8()) {
+      if(var_3 scripts\cp_mp\utility\game_utility::ref_140A8()) {
         var_9 = "bchr";
       } else {
         var_10 = scripts\mp\gametypes\br_public::disableannouncer(var_3);
@@ -1222,7 +1222,7 @@ function ref_13403() {
 }
 
 function isplatepouch() {
-  scripts\mp\gametypes\br_dev::ref_12b21(&isplacementplayerobstructed);
+  scripts\mp\gametypes\br_dev::ref_12B21(&isplacementplayerobstructed);
   thread isplayerbrsquadleader();
 }
 
@@ -1238,7 +1238,7 @@ function isplacementplayerobstructed(var_0, var_1) {
   switch (var_0) {
     case "skyhook_spawn":
       level.ref_13400.aq_ontimerexpired = [[level.players[0].origin, level.players[0].angles]];
-      ref_135d3();
+      ref_135D3();
       break;
   }
 }

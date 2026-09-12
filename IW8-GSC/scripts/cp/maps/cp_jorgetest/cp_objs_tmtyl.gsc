@@ -10,7 +10,7 @@ function registertmtylobjective() {
   init_anims();
   thread registersquadspawners();
   scripts\cp\cp_objectives::registerobjective("obj_tmtyl", &inittmtylobj, &starttmtylobj, &completetmtylobj, undefined, &debugtmtylobjectivesstart);
-  scripts\cp\cp_objectives::registerobjective("obj_tmtyl_0", &tr_circletick, &ref_1387a, undefined, undefined, &debugtmtylobjectivesstart);
+  scripts\cp\cp_objectives::registerobjective("obj_tmtyl_0", &tr_circletick, &ref_1387A, undefined, undefined, &debugtmtylobjectivesstart);
   scripts\cp\cp_modular_spawning::register_aitype_setup("tmtyl_leader", "actor_enemy_cp_alq_desert_tmtyl_leader", undefined, undefined, undefined, undefined);
 }
 
@@ -71,7 +71,7 @@ function registersquadspawners() {
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("tmtyl_squad_4", &any_enemy_nearby);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("tmtyl_squad_5", &any_enemy_nearby);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("tmtyl_squad_6", &any_enemy_nearby);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("tmtyl_squad_3_bombers", &ref_13ba2);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("tmtyl_squad_3_bombers", &ref_13BA2);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("tmtyl_bldg_snipers", &playergetspectatingplayer);
   scripts\cp\cp_modular_spawning::set_spawn_scoring_params_for_group("tmtyl_bldg_snipers", undefined, 20000, 30000);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("tmtyl_bldg_rpg", &playergetspectatingplayer);
@@ -180,7 +180,7 @@ function inittmtylinterrogate(var_0) {
   var_1 setusefov(90);
   var_1 sethintonobstruction("show");
   var_1 setuseholdduration("duration_none");
-  level.ref_13ba3[var_0.leader_index] = var_1;
+  level.ref_13BA3[var_0.leader_index] = var_1;
   var_0.isplayerindanger_think = "spawned";
   thread watchwindowplayerexit();
 }
@@ -190,13 +190,13 @@ function watchwindowplayerexit() {
   self endon("death");
 
   for(;;) {
-    level.ref_13ba3[self.leader_index] waittill("trigger", var_0);
+    level.ref_13BA3[self.leader_index] waittill("trigger", var_0);
 
     if(!var_0 scripts\cp\utility::is_valid_player() || istrue(var_0.isjuggernaut)) {
       continue;
     }
 
-    level.ref_13ba3[self.leader_index] makeunusable();
+    level.ref_13BA3[self.leader_index] makeunusable();
 
     if(istrue(var_0.has_gl)) {
       var_0 thread scripts\cp\coop_super::remove_launcher_after_timeout(0);
@@ -210,7 +210,7 @@ function watchwindowplayerexit() {
     lastplundereventtype(self.leader_index);
     var_1 = scripts\cp\cp_objectives::getobjectivestructfromref("obj_tmtyl");
     thread doleaderfinalsurrender(level, var_0);
-    level thread scripts\cp\utility::ref_123fe("mus_cp_landlord_subdue_" + var_1.numleadersinterrogated);
+    level thread scripts\cp\utility::ref_123FE("mus_cp_landlord_subdue_" + var_1.numleadersinterrogated);
     var_1 = scripts\cp\cp_objectives::getobjectivestructfromref("obj_tmtyl");
     var_1.leadersinterrogated[self.leader_index] = 1;
 
@@ -229,7 +229,7 @@ function managedropbags(var_0) {
 
 function tr_circletick(var_0) {
   var_0.customwaypointid = scripts\cp\cp_objectives::requestworldid("tmtylapproach_worldid", 15);
-  level thread scripts\cp\utility::ref_123fe("mus_cp_landlord_mission_start");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_landlord_mission_start");
   objective_setplayintro(var_0.customwaypointid, 0);
   objective_setplayoutro(var_0.customwaypointid, 0);
   objective_state(var_0.customwaypointid, "current");
@@ -239,13 +239,13 @@ function tr_circletick(var_0) {
   objective_setshowoncompass(var_0.customwaypointid, 1);
   var_1 = scripts\engine\utility::getStruct("tmtyl_squad_marker_1", "script_noteworthy");
   objective_setlocation(var_0.customwaypointid, 0, var_1.origin);
-  var_0 scripts\cp\cp_objectives::ref_1317e(var_0, var_1.origin);
-  scripts\cp\cp_objectives::ref_11f80(var_0.customwaypointid);
+  var_0 scripts\cp\cp_objectives::ref_1317E(var_0, var_1.origin);
+  scripts\cp\cp_objectives::ref_11F80(var_0.customwaypointid);
   scripts\cp\utility::skydivestreamhintdvars("tmtyl");
   level.little_bird_mg_handleflarerecharge = 1;
 }
 
-function ref_1387a(var_0) {
+function ref_1387A(var_0) {
   if(!istrue(scripts\engine\utility::flag("cp_tmtyl_script"))) {
     scripts\engine\utility::flag_set("cp_tmtyl_script");
   }
@@ -277,11 +277,11 @@ function inittmtylobj(var_0, var_1) {
   level.initlocationcircle = "obj_tmtyl";
   level.initlethalmaxoffsetmap = "obj_tmtyl";
   level.tmtyl_vips = [];
-  level.ref_13ba4 = [];
-  level.ref_13ba3 = [];
+  level.ref_13BA4 = [];
+  level.ref_13BA3 = [];
 
   for(var_2 = 1; var_2 <= 6; var_2++) {
-    level.ref_13ba4[var_2] = scripts\cp\cp_objectives::requestworldid("tmtyl_vip_objective_" + var_2);
+    level.ref_13BA4[var_2] = scripts\cp\cp_objectives::requestworldid("tmtyl_vip_objective_" + var_2);
   }
 
   var_0.customwaypointid = scripts\cp\cp_objectives::requestworldid("tmtyl_worldid", 15);
@@ -301,15 +301,15 @@ function inittmtylobj(var_0, var_1) {
   objective_icon(var_0.customwaypointid, "icon_waypoint_objective_general");
   objective_setbackground(var_0.customwaypointid, 1);
   objective_setshowoncompass(var_0.customwaypointid, 1);
-  scripts\cp\cp_objectives::ref_11f80(var_0.customwaypointid);
+  scripts\cp\cp_objectives::ref_11F80(var_0.customwaypointid);
   setobjectivemarkerpos(var_0);
 }
 
 function starttmtylobj(var_0, var_1) {
-  thread ref_1434b();
+  thread ref_1434B();
   scripts\cp\cp_modular_spawning::run_spawn_module("tmtyl_bldg_snipers");
   scripts\cp\cp_modular_spawning::run_spawn_module("tmtyl_bldg_rpg");
-  ref_13f67(var_0);
+  ref_13F67(var_0);
   thread maxxpcap(var_0, 1);
   waitframe();
   thread maxxpcap(var_0, 4);
@@ -346,8 +346,8 @@ function completetmtylobj(var_0) {
   }
 
   level.tmtyl_vips = undefined;
-  level.ref_13ba4 = undefined;
-  level.ref_13ba3 = undefined;
+  level.ref_13BA4 = undefined;
+  level.ref_13BA3 = undefined;
   wait 3;
   scripts\mp\brclientmatchdata::getprophealth("tmtyl_p1");
   scripts\cp\cp_objectives::overridenextstep(var_0, "obj_overwatch");
@@ -355,7 +355,7 @@ function completetmtylobj(var_0) {
   level.little_bird_mg_handleflarerecharge = 0;
 }
 
-function ref_1434b() {
+function ref_1434B() {
   level endon("game_ended");
   var_0 = scripts\engine\utility::getStruct("tmtyl_squad_marker_1", "script_noteworthy").origin;
   waitforanyplayersnearpoint(var_0, 3000);
@@ -380,20 +380,20 @@ function setobjectivemarkerpos(var_0) {
 
   if(isDefined(var_1)) {
     objective_setlocation(var_0.customwaypointid, 0, var_1.origin);
-    var_0 scripts\cp\cp_objectives::ref_1317e(var_0, var_1.origin);
+    var_0 scripts\cp\cp_objectives::ref_1317E(var_0, var_1.origin);
     return;
   }
 }
 
-function ref_13f67(var_0) {
+function ref_13F67(var_0) {
   objective_delete(var_0.customwaypointid);
 }
 
 function any_enemy_nearby(var_0) {
-  thread ref_13ba5(var_0);
+  thread ref_13BA5(var_0);
 }
 
-function ref_13ba5(var_0) {
+function ref_13BA5(var_0) {
   self endon("death");
   level endon("game_ended");
   var_1 = self;
@@ -423,17 +423,17 @@ function leaderafterspawnfunc(var_0) {
   level.tmtyl_vips[var_1.leader_index] = var_1;
   self.sightmaxdistance = 2200;
   thread scripts\cp\coop_stealth::run_common_functions(self, 1, 1, 60, 160000);
-  objective_setplayintro(level.ref_13ba4[var_1.leader_index], 0);
-  objective_setplayoutro(level.ref_13ba4[var_1.leader_index], 0);
-  objective_state(level.ref_13ba4[var_1.leader_index], "current");
-  objective_setlabel(level.ref_13ba4[var_1.leader_index], &"CP_BR_SYRK_OBJECTIVES/STORE_FRONT");
-  objective_icon(level.ref_13ba4[var_1.leader_index], "icon_waypoint_objective_general");
-  objective_setbackground(level.ref_13ba4[var_1.leader_index], 1);
-  objective_setshowoncompass(level.ref_13ba4[var_1.leader_index], 1);
+  objective_setplayintro(level.ref_13BA4[var_1.leader_index], 0);
+  objective_setplayoutro(level.ref_13BA4[var_1.leader_index], 0);
+  objective_state(level.ref_13BA4[var_1.leader_index], "current");
+  objective_setlabel(level.ref_13BA4[var_1.leader_index], &"CP_BR_SYRK_OBJECTIVES/STORE_FRONT");
+  objective_icon(level.ref_13BA4[var_1.leader_index], "icon_waypoint_objective_general");
+  objective_setbackground(level.ref_13BA4[var_1.leader_index], 1);
+  objective_setshowoncompass(level.ref_13BA4[var_1.leader_index], 1);
   var_2 = scripts\engine\utility::getStruct("tmtyl_squad_marker_1", "script_noteworthy");
-  objective_onentity(level.ref_13ba4[var_1.leader_index], var_1);
-  objective_setzoffset(level.ref_13ba4[var_1.leader_index], 70);
-  scripts\cp\cp_objectives::ref_11f80(level.ref_13ba4[var_1.leader_index]);
+  objective_onentity(level.ref_13BA4[var_1.leader_index], var_1);
+  objective_setzoffset(level.ref_13BA4[var_1.leader_index], 70);
+  scripts\cp\cp_objectives::ref_11F80(level.ref_13BA4[var_1.leader_index]);
   var_1.a.disablelongdeath = 1;
   var_1.never_kill_off = 1;
 
@@ -460,7 +460,7 @@ function leaderafterspawnfunc(var_0) {
   }
 }
 
-function ref_13e07(var_0) {
+function ref_13E07(var_0) {
   var_1 = scripts\engine\utility::getStruct("tmtylsquad_" + var_0 + "_leader", "targetname");
 
   if(isDefined(var_1)) {
@@ -506,7 +506,7 @@ function createkillchallengeevent() {
   self.scripted_mode = 0;
 }
 
-function ref_13ba2(var_0) {
+function ref_13BA2(var_0) {
   thread any_alive_player_in_kill_zone_or_under_bridge_zone(var_0);
 }
 
@@ -528,20 +528,20 @@ function any_alive_player_in_kill_zone_or_under_bridge_zone(var_0) {
 function changeheadicontext(var_0, var_1) {
   switch (var_1) {
     case "melee":
-      objective_setlabel(level.ref_13ba4[var_0], "CP_OBJ_TMTYL_DIALOGUE/MELEE");
+      objective_setlabel(level.ref_13BA4[var_0], "CP_OBJ_TMTYL_DIALOGUE/MELEE");
       break;
     case "incapacitate":
-      objective_setlabel(level.ref_13ba4[var_0], "CP_OBJ_TMTYL_DIALOGUE/TIE_DOWN");
+      objective_setlabel(level.ref_13BA4[var_0], "CP_OBJ_TMTYL_DIALOGUE/TIE_DOWN");
       break;
     case "nokill":
     default:
-      objective_setlabel(level.ref_13ba4[var_0], "CP_OBJ_TMTYL_DIALOGUE/DONT_KILL");
+      objective_setlabel(level.ref_13BA4[var_0], "CP_OBJ_TMTYL_DIALOGUE/DONT_KILL");
       break;
   }
 }
 
 function lastplundereventtype(var_0) {
-  objective_delete(level.ref_13ba4[var_0]);
+  objective_delete(level.ref_13BA4[var_0]);
 }
 
 function doleadersurrender(var_0, var_1, var_2) {
@@ -554,7 +554,7 @@ function doleadersurrender(var_0, var_1, var_2) {
     var_2 scripts\asm\shared\mp\utility::burndowntime("vip_cp_surrender");
     thread manageparachute(var_2, var_2);
     thread changeheadicontext(var_0, "incapacitate");
-    level.ref_13ba3[var_0] makeusable();
+    level.ref_13BA3[var_0] makeusable();
     var_2.isplayerindanger_think = "enabled";
     thread loopidlesurrenderanimation(var_2);
     waitframe();
@@ -588,7 +588,7 @@ function doleaderstun(var_0) {
   thread doleaderreturntocombat();
 }
 
-function ref_136b9(var_0) {
+function ref_136B9(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("zip_tie_handcuffs_wm");
   var_1.angles = var_0.angles;
@@ -622,8 +622,8 @@ function doleaderfinalsurrender(var_0, var_1) {
   var_5 = var_0.angles;
   var_6 = var_0.origin;
   var_0 cameraset("camera_custom_orbit_2_cp");
-  var_0 scripts\engine\utility::ref_143b9(1, "weapon_change");
-  ref_12da0(var_2, var_0);
+  var_0 scripts\engine\utility::ref_143B9(1, "weapon_change");
+  ref_12DA0(var_2, var_0);
   waitframe();
   var_2 scripts\asm\asm_mp::carepackage_get_dropped_entities();
   var_7 = var_2 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "vip_cp_surrender_end");
@@ -635,7 +635,7 @@ function doleaderfinalsurrender(var_0, var_1) {
   var_9 = getanimlength(%cp_scripted_interrogation_grab_player);
   var_2.scripted_mode = 1;
   var_2.ignoreall = 1;
-  var_10 = ref_136b9(var_2);
+  var_10 = ref_136B9(var_2);
   var_10 useanimtree($);
   var_10.animname = "ziptie";
   var_11 = spawn("script_origin", var_2.origin);
@@ -650,7 +650,7 @@ function doleaderfinalsurrender(var_0, var_1) {
   var_10.origin = var_12;
   var_10.angles = var_13;
   waitframe();
-  thread ref_13bcb(var_0, var_0);
+  thread ref_13BCB(var_0, var_0);
   var_11 thread scripts\cp\cp_anim::anim_player_solo(var_0, var_0.player_rig, "interrogate");
   var_11 thread scripts\common\anim::anim_single_solo(var_10, "interrogate");
   var_2 aisetanim("animscripted", var_7);
@@ -659,7 +659,7 @@ function doleaderfinalsurrender(var_0, var_1) {
   var_0 cameradefault();
   var_0 setplayerangles(var_5);
   var_0 setOrigin(var_6);
-  thread ref_13bcb(var_0, var_0);
+  thread ref_13BCB(var_0, var_0);
   var_0 scripts\cp\cp_weapons::_takeweapon(var_3);
   var_0 switchtoweapon(var_0.restoreweapon);
   var_0 scripts\common\utility::allow_weapon_switch(1);
@@ -673,7 +673,7 @@ function doleaderfinalsurrender(var_0, var_1) {
   var_11 delete();
 }
 
-function ref_13bcb(var_0, var_1) {
+function ref_13BCB(var_0, var_1) {
   if(istrue(var_1)) {
     var_2 = spawn("script_model", var_0 gettagorigin("tag_accessory_right"));
     var_2 setModel("electronics_usb_thumb_drive");
@@ -688,7 +688,7 @@ function ref_13bcb(var_0, var_1) {
   }
 }
 
-function ref_12da0(var_0, var_1) {
+function ref_12DA0(var_0, var_1) {
   var_2 = spawn("script_origin", var_0.origin);
   var_2.angles = scripts\engine\utility::ter_op(isDefined(var_0.angles), var_0.angles, (0, 0, 0));
   var_0 linkTo(var_2);
@@ -729,7 +729,7 @@ function doleaderreturntocombat() {
   var_0 = scripts\cp\cp_objectives::getobjectivestructfromref("obj_tmtyl");
   thread changeheadicontext(self.leader_index, "nokill");
   thread leaderwaitformelee(self.leader_index);
-  thread ref_144e4(self.leader_index);
+  thread ref_144E4(self.leader_index);
   self notify("leader_returned_to_combat");
   self.isremotekillstreaktabletweapon = "leader_returned_to_combat";
 }
@@ -806,7 +806,7 @@ function loopidlesurrenderanimation(var_0, var_1) {
   var_2 linkTo(self.anchor);
   var_2.scripted_mode = 0;
   var_2.ignoreall = 1;
-  thread ref_144b5();
+  thread ref_144B5();
 
   for(;;) {
     if(istrue(var_1) && isDefined(var_2.ziptie)) {
@@ -820,9 +820,9 @@ function loopidlesurrenderanimation(var_0, var_1) {
   }
 }
 
-function ref_144b5() {
+function ref_144B5() {
   level endon("game_ended");
-  scripts\engine\utility::ref_143a6("leader_final_surrender", "death", "leader_returned_to_combat");
+  scripts\engine\utility::ref_143A6("leader_final_surrender", "death", "leader_returned_to_combat");
 
   if(isDefined(self.anchor)) {
     self.anchor delete();
@@ -838,7 +838,7 @@ function watchfornearfriendliesandrevive() {
 
   for(;;) {
     if(arefriendliesnear()) {
-      level.ref_13ba3[self.leader_index] makeunusable();
+      level.ref_13BA3[self.leader_index] makeunusable();
       self.isplayerindanger_think = "disabled by nearby friendlies";
       doleaderreturntocombat();
     }
@@ -884,9 +884,9 @@ function watchforvipdeath(var_0) {
   level notify("leader_" + var_0 + "_killed");
   var_2 = scripts\cp\cp_objectives::getobjectivestructfromref("obj_tmtyl");
 
-  if(isDefined(level.ref_13ba3[var_0])) {
-    level.ref_13ba3[var_0] makeunusable();
-    level.ref_13ba3[var_0] delete();
+  if(isDefined(level.ref_13BA3[var_0])) {
+    level.ref_13BA3[var_0] makeunusable();
+    level.ref_13BA3[var_0] delete();
   }
 
   lastplundereventtype(var_0);
@@ -898,7 +898,7 @@ function waittoshameplayer(var_0) {
   wait 3;
 }
 
-function ref_135f1(var_0) {
+function ref_135F1(var_0) {
   level endon("game_ended");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("tmtyl_veh_0" + var_0);
 }
@@ -910,7 +910,7 @@ function spawnsquads(var_0) {
     scripts\cp\cp_modular_spawning::run_spawn_module("tmtyl_squad_3_bombers");
   }
 
-  thread ref_13e07(var_0);
+  thread ref_13E07(var_0);
 
   if(var_0 < 6) {
     scripts\cp\cp_modular_spawning::run_spawn_module("tmtyl_veh_0" + var_0);
@@ -922,7 +922,7 @@ function spawnsquads(var_0) {
   var_2 = scripts\cp\cp_modular_spawning::run_spawn_module("tmtyl_squad_" + var_0 + "_leader");
 }
 
-function ref_144e4(var_0) {
+function ref_144E4(var_0) {
   level endon("game_ended");
   self endon("death");
   self endon("surrendered");
@@ -1008,7 +1008,7 @@ function create_player_rig(var_0, var_1, var_2) {
 }
 
 function watch_remove_rig(var_0) {
-  scripts\engine\utility::ref_143a6("remove_rig", "death", "disconnect");
+  scripts\engine\utility::ref_143A6("remove_rig", "death", "disconnect");
 }
 
 function remove_player_rig(var_0) {
@@ -1079,11 +1079,11 @@ function minigun_tag(var_0) {
   var_1.index = var_0;
   waitframe();
   var_2 = scripts\cp\cp_objectives::getobjectivestructfromref("obj_tmtyl");
-  ref_11a99(var_1);
-  ref_13a24(var_1);
+  ref_11A99(var_1);
+  ref_13A24(var_1);
 }
 
-function ref_11a99(var_0) {
+function ref_11A99(var_0) {
   var_1 = &"CP_OBJ_TMTYL_DIALOGUE/INTERROGATE";
   var_0 setHintString(var_1);
   var_0 setCursorHint("HINT_BUTTON");
@@ -1095,7 +1095,7 @@ function ref_11a99(var_0) {
   var_0 setuseholdduration("duration_none");
   var_0 makeusable();
   thread use_think();
-  thread ref_11ce8();
+  thread ref_11CE8();
   return var_0;
 }
 
@@ -1112,7 +1112,7 @@ function use_think() {
         continue;
       }
 
-      if(scripts\cp\cp_weapon::ref_124ad(var_0)) {
+      if(scripts\cp\cp_weapon::ref_124AD(var_0)) {
         scripts\cp\cp_weapon::minigamefinishcount(var_0);
         continue;
       }
@@ -1125,7 +1125,7 @@ function use_think() {
   }
 }
 
-function ref_11ce8() {
+function ref_11CE8() {
   level endon("game_ended");
   self endon("death");
   self endon("trigger");
@@ -1161,7 +1161,7 @@ function ref_11ce8() {
   }
 }
 
-function ref_13a24(var_0) {
+function ref_13A24(var_0) {
   var_0.head_icon = deleteheadicon(var_0);
   setheadiconfriendlyimage(var_0.head_icon, "hud_icon_hardpoint_diamond");
   setheadiconsnaptoedges(var_0.head_icon, 0);

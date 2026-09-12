@@ -8,20 +8,20 @@ function init() {
 
   if(var_0) {
     level.modifyplayerdamage = &endmatchcamerastriggered;
-    level.ref_133ef = getdvarint("scr_skydiveSpawnProtection", 1) == 1;
-    level.ref_133f1 = getdvarfloat("scr_skydiveSpawnProtectionModifier", 0.1);
-    level.ref_133ee = getdvarfloat("scr_skydiveSpawnLauncherDamage", 0.1);
-    level.ref_133f5 = getdvarint("scr_skydiveSpawnProtectionScaleHeightTop", 2500);
-    level.ref_133f4 = getdvarint("scr_skydiveSpawnProtectionScaleHeightBottom", 750);
-    level.ref_133f3 = getdvarfloat("scr_skydiveSpawnProtectionModifierTop", 0.25);
-    level.ref_133f2 = getdvarfloat("scr_skydiveSpawnProtectionModifierBottom", 0.25);
+    level.ref_133EF = getdvarint("scr_skydiveSpawnProtection", 1) == 1;
+    level.ref_133F1 = getdvarfloat("scr_skydiveSpawnProtectionModifier", 0.1);
+    level.ref_133EE = getdvarfloat("scr_skydiveSpawnLauncherDamage", 0.1);
+    level.ref_133F5 = getdvarint("scr_skydiveSpawnProtectionScaleHeightTop", 2500);
+    level.ref_133F4 = getdvarint("scr_skydiveSpawnProtectionScaleHeightBottom", 750);
+    level.ref_133F3 = getdvarfloat("scr_skydiveSpawnProtectionModifierTop", 0.25);
+    level.ref_133F2 = getdvarfloat("scr_skydiveSpawnProtectionModifierBottom", 0.25);
     level.skydive_spawnprotectionsafetydistance = getdvarfloat("scr_skydiveSpawnProtectionSafetyDistance", 750);
     return;
   }
 }
 
 function toma_strike_munitionused(var_0) {
-  if(!istrue(level.ref_133ef)) {
+  if(!istrue(level.ref_133EF)) {
     return;
   }
 
@@ -34,19 +34,19 @@ function toma_strike_munitionused(var_0) {
     return;
   }
 
-  self.ref_133f1 = level.ref_133f1;
+  self.ref_133F1 = level.ref_133F1;
 }
 
 function ending_zplanes() {
   self endon("death_or_disconnect");
   self endon("skydive_remove_spawn_protection");
-  self.ref_133ef = 1;
+  self.ref_133EF = 1;
 
-  for(var_0 = brskydive_getdistancetoclosestgroundedplayer(); !self isonground() && brskydive_getdistanceoffground() >= level.ref_133f4 && (!isDefined(var_0) || var_0 >= level.skydive_spawnprotectionsafetydistance); var_0 = brskydive_getdistancetoclosestgroundedplayer()) {
+  for(var_0 = brskydive_getdistancetoclosestgroundedplayer(); !self isonground() && brskydive_getdistanceoffground() >= level.ref_133F4 && (!isDefined(var_0) || var_0 >= level.skydive_spawnprotectionsafetydistance); var_0 = brskydive_getdistancetoclosestgroundedplayer()) {
     waitframe();
   }
 
-  self.ref_133ef = undefined;
+  self.ref_133EF = undefined;
   self notify("skydive_remove_spawn_protection");
 }
 
@@ -84,41 +84,41 @@ function brskydive_getdistancetoclosestgroundedplayer() {
 function ending_winning_players_setup() {
   self endon("death_or_disconnect");
   self endon("skydive_remove_launcher_protection");
-  self.ref_133ed = 1;
+  self.ref_133ED = 1;
 
   while(!self isonground()) {
     waitframe();
   }
 
-  self.ref_133ed = undefined;
+  self.ref_133ED = undefined;
   self notify("skydive_remove_launcher_protection");
 }
 
 function endingpropspecate() {
   self endon("death_or_disconnect");
   self endon("skydive_remove_spawn_protection");
-  self.ref_133ef = 1;
+  self.ref_133EF = 1;
   self waittill("weapon_fired");
-  self.ref_133ef = undefined;
+  self.ref_133EF = undefined;
   self notify("skydive_remove_spawn_protection");
 }
 
 function endingph() {
   self endon("death_or_disconnect");
   self endon("skydive_remove_spawn_protection");
-  self.ref_133f0 = 1;
-  self.ref_133f1 = 1;
+  self.ref_133F0 = 1;
+  self.ref_133F1 = 1;
 
-  while(istrue(self.ref_133ef)) {
+  while(istrue(self.ref_133EF)) {
     var_0 = brskydive_getdistanceoffground();
-    var_1 = level.ref_133f5 - level.ref_133f4;
-    self.ref_133f0 = clamp(var_0 / var_1, 0, 1);
-    var_2 = level.ref_133f3 - level.ref_133f2;
-    self.ref_133f1 = self.ref_133f0 * var_2 + level.ref_133f2;
+    var_1 = level.ref_133F5 - level.ref_133F4;
+    self.ref_133F0 = clamp(var_0 / var_1, 0, 1);
+    var_2 = level.ref_133F3 - level.ref_133F2;
+    self.ref_133F1 = self.ref_133F0 * var_2 + level.ref_133F2;
     waitframe();
   }
 
-  self.ref_133f1 = undefined;
+  self.ref_133F1 = undefined;
 }
 
 function brskydive_isbrgasdamage(var_0) {
@@ -126,18 +126,18 @@ function brskydive_isbrgasdamage(var_0) {
 }
 
 function endmatchcamerastriggered(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(istrue(level.ref_133ef)) {
-    if(istrue(var_1.ref_133ef) && isDefined(self.ref_133f1) && !brskydive_isbrgasdamage(var_5)) {
-      var_3 *= self.ref_133f1;
+  if(istrue(level.ref_133EF)) {
+    if(istrue(var_1.ref_133EF) && isDefined(self.ref_133F1) && !brskydive_isbrgasdamage(var_5)) {
+      var_3 *= self.ref_133F1;
     }
 
-    if(isDefined(var_2) && istrue(var_2.ref_133ed)) {
+    if(isDefined(var_2) && istrue(var_2.ref_133ED)) {
       switch (var_4) {
         case "MOD_EXPLOSIVE":
         case "MOD_GRENADE_SPLASH":
         case "MOD_GRENADE":
         case "MOD_PROJECTILE_SPLASH":
-          var_3 *= level.ref_133ee;
+          var_3 *= level.ref_133EE;
           break;
       }
     }

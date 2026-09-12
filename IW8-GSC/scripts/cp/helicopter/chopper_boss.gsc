@@ -201,7 +201,7 @@ function clean_up_structs() {
   }
 }
 
-function ref_145ed(var_0, var_1, var_2) {
+function ref_145ED(var_0, var_1, var_2) {
   getentitylessscriptablearray("dlog_event_cp_runtime_struct_data", ["key", var_0, "pair", var_1, "count", var_2]);
 }
 
@@ -230,10 +230,10 @@ function init_global_cp_flags() {
   scripts\engine\utility::flag_init("interactions_initialized");
   scripts\engine\utility::flag_init("level_ready_for_script");
   scripts\engine\utility::flag_init("player_spawned_with_loadout");
-  thread ref_130f0();
+  thread ref_130F0();
 }
 
-function ref_130f0() {
+function ref_130F0() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait_all("strike_init_done", "infil_complete", "introscreen_over", "interactions_initialized");
   scripts\engine\utility::flag_set("level_ready_for_script");
@@ -369,7 +369,7 @@ function impale(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 function impale_cleanup(var_0, var_1, var_2, var_3) {
-  var_0 scripts\engine\utility::ref_143ba(var_2, "death", "disconnect");
+  var_0 scripts\engine\utility::ref_143BA(var_2, "death", "disconnect");
   var_3 delete();
   var_1 delete();
 }
@@ -474,7 +474,7 @@ function coopstartgametype() {
     }
   }
 
-  scripts\cp\cp_analytics::ref_119b9();
+  scripts\cp\cp_analytics::ref_119B9();
   scripts\cp\perks\cp_perks::initperks();
   scripts\cp\cp_weaponrank::init();
   thread scripts\cp\cp_powers::init();
@@ -756,31 +756,31 @@ function demo_debug_outline_button_watcher() {
   self notifyonplayercommand("third", "+usereload");
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143bf(2, "first");
+    var_0 = scripts\engine\utility::ref_143BF(2, "first");
 
     if(var_0 == "timeout") {
       continue;
     }
 
-    var_0 = scripts\engine\utility::ref_143bf(2, "second");
+    var_0 = scripts\engine\utility::ref_143BF(2, "second");
 
     if(var_0 == "timeout") {
       continue;
     }
 
-    var_0 = scripts\engine\utility::ref_143bf(2, "first");
+    var_0 = scripts\engine\utility::ref_143BF(2, "first");
 
     if(var_0 == "timeout") {
       continue;
     }
 
-    var_0 = scripts\engine\utility::ref_143bf(2, "second");
+    var_0 = scripts\engine\utility::ref_143BF(2, "second");
 
     if(var_0 == "timeout") {
       continue;
     }
 
-    var_0 = scripts\engine\utility::ref_143bf(2, "third");
+    var_0 = scripts\engine\utility::ref_143BF(2, "third");
 
     if(var_0 == "timeout") {
       continue;
@@ -1067,11 +1067,11 @@ function updatematchhasmorethan1playeromnvaronplayersfirstspawn() {
     }
   }
 
-  self.ref_11b20 = 1;
+  self.ref_11B20 = 1;
 }
 
 function updatematchhasmorethan1playeromnvaronplayerdisconnect() {
-  if(istrue(self.ref_11b20)) {
+  if(istrue(self.ref_11B20)) {
     var_0 = game["matchHasMoreThan1Player"];
     game["numPlayersConsideredPlaying"]--;
 
@@ -1089,7 +1089,7 @@ function updatematchhasmorethan1playeromnvaronplayerdisconnect() {
       }
     }
 
-    self.ref_11b20 = 0;
+    self.ref_11B20 = 0;
     return;
   }
 }
@@ -1152,7 +1152,7 @@ function spawnplayer_actual(var_0) {
     scripts\cp\utility::allow_player_ignore_me(1);
   }
 
-  if(!istrue(self.ref_11b20)) {
+  if(!istrue(self.ref_11B20)) {
     updatematchhasmorethan1playeromnvaronplayersfirstspawn();
   }
 

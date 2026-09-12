@@ -45,17 +45,17 @@ function init() {
   level.advanceduavrig hide();
   level.advanceduavrig.targetname = "advanceduavrig_script_model";
   thread rotateuavrig(level.advanceduavrig);
-  level.ref_13ede = getuavstrengthmin();
-  level.ref_13ed9 = getuavstrengthmax();
-  level.ref_13eda = getuavstrengthlevelshowenemydirectional();
-  level.ref_13edc = getuavstrengthlevelneutral();
-  level.ref_13edb = getuavstrengthlevelshowenemyfastsweep();
+  level.ref_13EDE = getuavstrengthmin();
+  level.ref_13ED9 = getuavstrengthmax();
+  level.ref_13EDA = getuavstrengthlevelshowenemydirectional();
+  level.ref_13EDC = getuavstrengthlevelneutral();
+  level.ref_13EDB = getuavstrengthlevelshowenemyfastsweep();
 
-  if(!isDefined(level.ref_13edd) && scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "squadAsTeamEnabled")) {
-    level.ref_13edd = level[[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "squadAsTeamEnabled")]]() && getdvarint("scr_uav_for_squad_only", 1);
+  if(!isDefined(level.ref_13EDD) && scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "squadAsTeamEnabled")) {
+    level.ref_13EDD = level[[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "squadAsTeamEnabled")]]() && getdvarint("scr_uav_for_squad_only", 1);
   }
 
-  if(level.teambased && !istrue(level.ref_13edd)) {
+  if(level.teambased && !istrue(level.ref_13EDD)) {
     for(var_4 = 0; var_4 < level.teamnamelist.size; var_4++) {
       level.radarmode[level.teamnamelist[var_4]] = "normal_radar";
       level.activeuavs[level.teamnamelist[var_4]] = 0;
@@ -81,7 +81,7 @@ function init() {
 
 function onplayerconnect() {
   var_0 = getuavstrengthlevelneutral();
-  var_1 = level.teambased && istrue(level.ref_13edd);
+  var_1 = level.teambased && istrue(level.ref_13EDD);
 
   for(;;) {
     level waittill("connected", var_2);
@@ -195,10 +195,10 @@ function tryuseuavfromstruct(var_0) {
     return false;
   }
 
-  if(!istrue(var_2.ref_133cc)) {
+  if(!istrue(var_2.ref_133CC)) {
     var_4 = "ks_gesture_generic_mp";
 
-    if(scripts\cp_mp\utility\game_utility::ref_140a9()) {
+    if(scripts\cp_mp\utility\game_utility::ref_140A9()) {
       var_4 = "ks_gesture_generic_mp_ch3";
     }
 
@@ -233,11 +233,11 @@ function useuav(var_0, var_1) {
     var_5 = 1;
   }
 
-  scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_call_in_uav_for_operator_mission", 1);
-  scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_call_in_uav_for_operator_mission_op2", 1);
+  scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_call_in_uav_for_operator_mission", 1);
+  scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_call_in_uav_for_operator_mission_op2", 1);
 
   if(getdvarint("current_season", 1) >= 8) {
-    scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_call_in_uav_for_operator_mission_op3", 1);
+    scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_call_in_uav_for_operator_mission_op3", 1);
   }
 
   thread launchuav(level, self, var_0, var_1);
@@ -284,7 +284,7 @@ function ref_13320(var_0) {
   if(level.teambased) {
     var_1 = self.team;
 
-    if(istrue(level.ref_13edd)) {
+    if(istrue(level.ref_13EDD)) {
       var_1 = self.team + self.squadindex;
     }
   } else {
@@ -350,7 +350,7 @@ function launchuav(var_0, var_1, var_2, var_3) {
   }
 
   if(level.gametype == "br") {
-    ref_13ed5(var_0, var_4, 15000, var_13);
+    ref_13ED5(var_0, var_4, 15000, var_13);
   }
 
   if(var_1 == "harp") {
@@ -541,8 +541,8 @@ function launchuav(var_0, var_1, var_2, var_3) {
 
     var_8.streakinfo.onspray = !istrue(var_8.leftplayspace);
 
-    if(!istrue(self.ref_12aa4)) {
-      var_8.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_8.streakinfo);
+    if(!istrue(self.ref_12AA4)) {
+      var_8.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_8.streakinfo);
     }
 
     if(isent(var_8)) {
@@ -577,7 +577,7 @@ function launchuav(var_0, var_1, var_2, var_3) {
 
 function monitorowner() {
   self endon("death");
-  self.owner scripts\engine\utility::ref_143a5("disconnect", "joined_team");
+  self.owner scripts\engine\utility::ref_143A5("disconnect", "joined_team");
 
   if(isent(self)) {
     self hide();
@@ -598,7 +598,7 @@ function restorestrengthafterhostmigration() {
 
     if(level.teambased) {
       foreach(var_1 in level.teamnamelist) {
-        if(istrue(level.ref_13edd)) {
+        if(istrue(level.ref_13EDD)) {
           foreach(var_3 in level.squaddata[var_1]) {
             var_4 = var_1 + var_6;
             var_5 = aigroundturret_cancel(var_4);
@@ -758,7 +758,7 @@ function uavtracker() {
 
     if(level.teambased) {
       foreach(var_1 in level.teamnamelist) {
-        if(istrue(level.ref_13edd)) {
+        if(istrue(level.ref_13EDD)) {
           if(isDefined(level.squaddata)) {
             foreach(var_3 in level.squaddata[var_1]) {
               ref_14020(var_1, var_4);
@@ -858,7 +858,7 @@ function updateteamuavstatus(var_0, var_1) {
     var_2 = aigroundturret_mountcompleted(var_1);
   }
 
-  ref_13fdf(var_2, var_1);
+  ref_13FDF(var_2, var_1);
 }
 
 function ref_14020(var_0, var_1, var_2) {
@@ -867,19 +867,19 @@ function ref_14020(var_0, var_1, var_2) {
   goto LOC_00000023;
 }
 
-function ref_13fdf(var_0, var_1, var_2) {
-  var_0 = int(max(min(var_0, level.ref_13ed9), level.ref_13ede));
-  var_3 = var_0 == level.ref_13ede;
+function ref_13FDF(var_0, var_1, var_2) {
+  var_0 = int(max(min(var_0, level.ref_13ED9), level.ref_13EDE));
+  var_3 = var_0 == level.ref_13EDE;
   var_4 = !var_3;
-  var_5 = var_0 >= level.ref_13eda;
+  var_5 = var_0 >= level.ref_13EDA;
   var_6 = !var_3;
 
-  if(var_0 == level.ref_13edc) {
+  if(var_0 == level.ref_13EDC) {
     var_7 = "normal_radar";
     var_4 = 0;
-  } else if(var_1 == level.ref_13ed9 || var_6) {
+  } else if(var_1 == level.ref_13ED9 || var_6) {
     var_7 = "constant_radar";
-  } else if(var_2 == level.ref_13edb) {
+  } else if(var_2 == level.ref_13EDB) {
     var_7 = "fast_radar";
   } else {
     var_7 = "normal_radar";
@@ -902,7 +902,7 @@ function ref_13fdf(var_0, var_1, var_2) {
       continue;
     }
 
-    if(istrue(var_10.ref_133e9)) {
+    if(istrue(var_10.ref_133E9)) {
       continue;
     }
 
@@ -930,14 +930,14 @@ function updateplayersuavstatus() {
     var_3 = level.totalactivecounteruavs - level.activecounteruavs[var_1.guid];
 
     if(var_3 > 0) {
-      var_2 = level.ref_13ede;
+      var_2 = level.ref_13EDE;
     }
 
-    var_2 = int(max(min(var_2, level.ref_13ed9), level.ref_13ede));
+    var_2 = int(max(min(var_2, level.ref_13ED9), level.ref_13EDE));
     var_1.radarstrength = var_2;
     var_4 = var_1.team == "spectator" || var_1.team == "follower" || var_1.team == "free";
 
-    if(var_2 <= level.ref_13edc || var_4) {
+    if(var_2 <= level.ref_13EDC || var_4) {
       var_1.hasradar = 0;
       var_1.radarshowenemydirection = 0;
 
@@ -948,13 +948,13 @@ function updateplayersuavstatus() {
       continue;
     }
 
-    if(var_2 >= level.ref_13edb) {
+    if(var_2 >= level.ref_13EDB) {
       var_1.radarmode = "fast_radar";
     } else {
       var_1.radarmode = "normal_radar";
     }
 
-    var_1.radarshowenemydirection = var_2 >= level.ref_13eda;
+    var_1.radarshowenemydirection = var_2 >= level.ref_13EDA;
 
     if(istrue(var_1.radarshowenemydirection)) {
       var_1.radarmode = "constant_radar";
@@ -995,8 +995,8 @@ function watchgameend() {
   self endon("death");
   self.owner endon("uav_finished");
   level waittill("game_ended");
-  self.ref_12aa4 = 1;
-  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+  self.ref_12AA4 = 1;
+  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
 }
 
 function stingerproximitydetonate(var_0, var_1) {
@@ -1037,7 +1037,7 @@ function stingerproximitydetonate(var_0, var_1) {
 
 function adduavmodel() {
   if(level.teambased) {
-    if(istrue(level.ref_13edd)) {
+    if(istrue(level.ref_13EDD)) {
       self.squadindex = self.owner.squadindex;
       self.teamsquadindex = self.team + self.owner.squadindex;
       level.uavmodels[self.teamsquadindex][level.uavmodels[self.teamsquadindex].size] = self;
@@ -1057,7 +1057,7 @@ function removeuavmodel() {
   var_1 = self.team;
   var_2 = self.owner.squadindex;
 
-  if(istrue(level.ref_13edd)) {
+  if(istrue(level.ref_13EDD)) {
     foreach(var_4 in level.uavmodels[self.teamsquadindex]) {
       if(!isDefined(var_4)) {
         continue;
@@ -1088,7 +1088,7 @@ function addactiveuav() {
   if(level.teambased) {
     var_0 = self.team;
 
-    if(istrue(level.ref_13edd)) {
+    if(istrue(level.ref_13EDD)) {
       self.squadindex = self.owner.squadindex;
       self.teamsquadindex = self.team + self.owner.squadindex;
       var_0 = self.teamsquadindex;
@@ -1123,7 +1123,7 @@ function addactiveuav() {
 
 function addactivecounteruav() {
   if(level.teambased) {
-    if(istrue(level.ref_13edd)) {
+    if(istrue(level.ref_13EDD)) {
       self.squadindex = self.owner.squadindex;
       self.teamsquadindex = self.team + self.owner.squadindex;
       level.activecounteruavs[self.teamsquadindex]++;
@@ -1141,7 +1141,7 @@ function removeactiveuav() {
   if(level.teambased) {
     var_0 = self.team;
 
-    if(istrue(level.ref_13edd)) {
+    if(istrue(level.ref_13EDD)) {
       var_0 = self.teamsquadindex;
     }
 
@@ -1175,7 +1175,7 @@ function removeactiveuav() {
 
 function removeactivecounteruav() {
   if(level.teambased) {
-    if(istrue(level.ref_13edd)) {
+    if(istrue(level.ref_13EDD)) {
       level.activecounteruavs[self.teamsquadindex]--;
     } else {
       level.activecounteruavs[self.team]--;
@@ -1194,7 +1194,7 @@ function watchhighlightfadetime(var_0, var_1, var_2, var_3) {
 
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::ref_143bf(var_2, "leave");
+  scripts\engine\utility::ref_143BF(var_2, "leave");
 
   if(isDefined(var_1)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("outline", "outlineDisable")) {
@@ -1370,7 +1370,7 @@ function applyshutdownonspawn() {
     }
 
     if(level.teambased) {
-      if(istrue(level.ref_13edd)) {
+      if(istrue(level.ref_13EDD)) {
         if(var_2.team == var_1 && var_2.squadindex == var_0.squadindex) {
           continue;
         }
@@ -1462,7 +1462,7 @@ function revealminimapforteam(var_0) {
     }
 
     if(level.teambased) {
-      if(istrue(level.ref_13edd)) {
+      if(istrue(level.ref_13EDD)) {
         if(self.squadindex != var_2.squadindex || self.team != var_2.team) {
           continue;
         }
@@ -1500,7 +1500,7 @@ function applymapenableonspawn() {
   var_0 = self.owner.guid;
 
   if(level.teambased) {
-    if(istrue(level.ref_13edd)) {
+    if(istrue(level.ref_13EDD)) {
       var_0 = self.team + self.owner.squadindex;
     } else {
       var_0 = self.team;
@@ -1540,7 +1540,7 @@ function setforceradars(var_0, var_1) {
   }
 
   if(level.teambased) {
-    if(istrue(level.ref_13edd)) {
+    if(istrue(level.ref_13EDD)) {
       var_6 = 0;
 
       foreach(var_8 in level.teamnamelist) {
@@ -1569,7 +1569,7 @@ function setforceradars(var_0, var_1) {
     return;
   }
 
-  var_15 = scripts\engine\utility::ter_op(var_16 > 0, level.ref_13ed9, level.ref_13edc + var_15);
+  var_15 = scripts\engine\utility::ter_op(var_16 > 0, level.ref_13ED9, level.ref_13EDC + var_15);
   level.radarmode[var_3.guid] = var_14;
   var_3.radarstrength = var_15;
   level.activeuavs[var_3.guid + "_radarStrength"] = var_15;
@@ -1578,12 +1578,12 @@ function setforceradars(var_0, var_1) {
   updateplayersuavstatus();
 }
 
-function ref_13ed5(var_0, var_1, var_2) {
+function ref_13ED5(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     return;
   }
 
-  var_3 = ref_13ed6(var_0, var_1);
+  var_3 = ref_13ED6(var_0, var_1);
 
   foreach(var_5 in var_3) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "dangerNotifyPlayer")) {
@@ -1592,7 +1592,7 @@ function ref_13ed5(var_0, var_1, var_2) {
   }
 }
 
-function ref_13ed6(var_0, var_1) {
+function ref_13ED6(var_0, var_1) {
   var_2 = [];
   var_3 = level.teamdata[var_0]["players"];
 
@@ -1605,7 +1605,7 @@ function ref_13ed6(var_0, var_1) {
 
     foreach(var_8 in var_6) {
       if(var_2.size > 0) {
-        var_9 = ref_13ed7(var_8, var_2);
+        var_9 = ref_13ED7(var_8, var_2);
 
         if(istrue(var_9)) {
           continue;
@@ -1619,7 +1619,7 @@ function ref_13ed6(var_0, var_1) {
   return var_2;
 }
 
-function ref_13ed7(var_0, var_1) {
+function ref_13ED7(var_0, var_1) {
   var_2 = 0;
 
   foreach(var_4 in var_1) {

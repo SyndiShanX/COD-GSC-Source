@@ -5,12 +5,12 @@
 
 function vehomn_init() {
   var_0 = spawnStruct();
-  level.vehicle.ref_11fd0 = var_0;
+  level.vehicle.ref_11FD0 = var_0;
   var_0.vehicledata = [];
 }
 
 function vehomn_setvehicle(var_0, var_1) {
-  var_2 = ref_1427e(var_0);
+  var_2 = ref_1427E(var_0);
   var_3 = var_2.id;
 
   if(isDefined(var_1)) {
@@ -37,7 +37,7 @@ function vehomn_setcurrentseat(var_0, var_1, var_2) {
   var_3 = -1;
 
   if(isDefined(var_0)) {
-    var_4 = ref_1427e(var_0);
+    var_4 = ref_1427E(var_0);
 
     if(isDefined(var_1)) {
       var_3 = var_4.seatids[var_1];
@@ -51,7 +51,7 @@ function vehomn_setnextseat(var_0, var_1, var_2) {
   var_3 = -1;
 
   if(isDefined(var_1)) {
-    var_4 = ref_1427e(var_0);
+    var_4 = ref_1427E(var_0);
     var_3 = var_4.seatids[var_1];
   }
 
@@ -62,7 +62,7 @@ function vehomn_setseatentity(var_0, var_1, var_2, var_3) {
   var_4 = -1;
 
   if(isDefined(var_0)) {
-    var_5 = ref_1427e(var_0);
+    var_5 = ref_1427E(var_0);
 
     if(isDefined(var_1)) {
       var_4 = var_5.seatids[var_1];
@@ -296,7 +296,7 @@ function vehomn_hidefuel(var_0) {}
 function vehomn_clearshowfuel(var_0) {}
 
 function vehomn_setammo(var_0, var_1, var_2, var_3) {
-  var_4 = ref_1427e(var_0);
+  var_4 = ref_1427E(var_0);
   var_5 = var_4.brtruck_initdialog[var_1];
   var_6 = undefined;
 
@@ -351,7 +351,7 @@ function vehomn_hideammo(var_0, var_1, var_2) {
 }
 
 function vehomn_showwarning(var_0, var_1, var_2) {
-  var_3 = ref_1427e(var_2);
+  var_3 = ref_1427E(var_2);
   var_4 = var_3.ref_14422[var_0];
 
   if(isDefined(var_1)) {
@@ -386,7 +386,7 @@ function vehomn_showwarning(var_0, var_1, var_2) {
 }
 
 function vehomn_hidewarning(var_0, var_1, var_2) {
-  var_3 = ref_1427e(var_2);
+  var_3 = ref_1427E(var_2);
   var_4 = var_3.ref_14422[var_0];
 
   if(isDefined(var_1)) {
@@ -425,7 +425,7 @@ function vehomn_clearwarnings(var_0, var_1) {
     var_2 = undefined;
 
     if(isDefined(var_1)) {
-      var_2 = ref_1427e(var_1, undefined, 1);
+      var_2 = ref_1427E(var_1, undefined, 1);
     }
 
     if(isarray(var_0)) {
@@ -468,8 +468,8 @@ function vehomn_clearwarnings(var_0, var_1) {
 }
 
 function vehomn_setrotation(var_0, var_1, var_2, var_3) {
-  var_4 = ref_1427e(var_0);
-  var_5 = var_4.ref_12da2[var_1];
+  var_4 = ref_1427E(var_0);
+  var_5 = var_4.ref_12DA2[var_1];
   var_6 = undefined;
 
   switch (var_5) {
@@ -567,12 +567,12 @@ function ref_14280(var_0) {
   }
 }
 
-function ref_1427b(var_0) {
+function ref_1427B(var_0) {
   if(isDefined(var_0)) {
     if(isarray(var_0)) {
       foreach(var_2 in var_0) {
         if(isDefined(var_2) && isPlayer(var_2)) {
-          thread ref_1427c(var_2);
+          thread ref_1427C(var_2);
         }
       }
 
@@ -580,7 +580,7 @@ function ref_1427b(var_0) {
     }
 
     if(isPlayer(var_0)) {
-      thread ref_1427c(var_0);
+      thread ref_1427C(var_0);
       return;
     }
 
@@ -588,7 +588,7 @@ function ref_1427b(var_0) {
   }
 }
 
-function ref_1427c(var_0) {
+function ref_1427C(var_0) {
   var_0 endon("death_or_disconnect");
   var_0 endon("vehOmn_modified_controls");
 
@@ -624,16 +624,16 @@ function ref_14278(var_0) {
   }
 }
 
-function ref_1427a(var_0) {
+function ref_1427A(var_0) {
   return !isDefined(var_0.ref_14284) || var_0.ref_14284 == "fadeOut" || var_0.ref_14284 == "hide";
 }
 
-function ref_1427d() {
-  return level.vehicle.ref_11fd0;
+function ref_1427D() {
+  return level.vehicle.ref_11FD0;
 }
 
-function ref_1427e(var_0, var_1, var_2) {
-  var_3 = ref_1427d();
+function ref_1427E(var_0, var_1, var_2) {
+  var_3 = ref_1427D();
   var_4 = var_3.vehicledata[var_0];
 
   if(!isDefined(var_4)) {
@@ -642,12 +642,12 @@ function ref_1427e(var_0, var_1, var_2) {
       var_3.vehicledata[var_0] = var_4;
       var_4.seatids = [];
       var_4.brtruck_initdialog = [];
-      var_4.ref_12da2 = [];
+      var_4.ref_12DA2 = [];
       var_4.ref_14422 = [];
       var_4.ref_14426 = [];
       var_4.ref_14424 = [];
       var_4.ref_14423 = [];
-      var_4.ref_12da3 = [];
+      var_4.ref_12DA3 = [];
       var_4.id = undefined;
       var_4.ref_14422["burningDown"] = 1;
       var_4.ref_14422["missileLocking"] = 2;
@@ -660,12 +660,12 @@ function ref_1427e(var_0, var_1, var_2) {
 }
 
 function ref_14279(var_0, var_1, var_2) {
-  var_3 = ref_1427e(var_0, var_1, var_2);
+  var_3 = ref_1427E(var_0, var_1, var_2);
 
   if(isDefined(var_3)) {
     var_3.seatids = [];
     var_3.brtruck_initdialog = [];
-    var_3.ref_12da2 = [];
+    var_3.ref_12DA2 = [];
     var_3.ref_14422 = [];
     var_3.ref_14426 = [];
     var_3.ref_14424 = [];
@@ -733,8 +733,8 @@ function vehomn_updateomnvarsonseatenter(var_0, var_1, var_2, var_3) {
   vehomn_updatenextseatomnvars(var_0);
   vehomn_updateomnvarsondamage(var_0);
   ref_14281(var_3);
-  ref_140ff(var_0, var_3, var_2);
-  var_8 = ref_1427e(var_0.vehiclename);
+  ref_140FF(var_0, var_3, var_2);
+  var_8 = ref_1427E(var_0.vehiclename);
 
   if(scripts\cp_mp\utility\weapon_utility::islockedonto(var_0)) {
     if(isDefined(var_8.ref_14422["missileLocking"])) {
@@ -754,7 +754,7 @@ function vehomn_updateomnvarsonseatenter(var_0, var_1, var_2, var_3) {
     }
   }
 
-  if(var_0 scripts\cp_mp\vehicles\vehicle_damage::ref_1415b()) {
+  if(var_0 scripts\cp_mp\vehicles\vehicle_damage::ref_1415B()) {
     if(isDefined(var_8.ref_14422["burningDown"])) {
       vehomn_showwarning("burningDown", var_3, var_0.vehiclename);
       return;
@@ -801,14 +801,14 @@ function ref_14282(var_0, var_1) {
     var_1 = spawnStruct();
   }
 
-  var_2 = ref_1427e(var_0.vehiclename, undefined, 1);
+  var_2 = ref_1427E(var_0.vehiclename, undefined, 1);
   var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(var_0);
 
   if(isDefined(var_3) && isDefined(var_2)) {
     if(isDefined(var_3) && var_3.size > 0) {
       foreach(var_5 in var_3) {
         if(isDefined(var_5) && isPlayer(var_5) && var_5 scripts\cp_mp\utility\player_utility::_isalive()) {
-          ref_140ff(var_0, var_5, var_6, var_1);
+          ref_140FF(var_0, var_5, var_6, var_1);
         }
       }
 
@@ -819,7 +819,7 @@ function ref_14282(var_0, var_1) {
   }
 }
 
-function ref_140ff(var_0, var_1, var_2, var_3) {
+function ref_140FF(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_2)) {
     var_2 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getoccupantseat(var_0, var_1);
   }
@@ -837,12 +837,12 @@ function vehomn_updatenextseatomnvars(var_0) {
 }
 
 function ref_14283(var_0, var_1, var_2, var_3) {
-  var_4 = ref_1427e(var_0.vehiclename);
+  var_4 = ref_1427E(var_0.vehiclename);
 
-  if(var_4.ref_12da3.size > 0 && isDefined(var_4.ref_12da3[var_2])) {
+  if(var_4.ref_12DA3.size > 0 && isDefined(var_4.ref_12DA3[var_2])) {
     var_5 = 0;
 
-    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var_0, var_2)) {
+    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DF(var_0, var_2)) {
       var_5 = 1;
     } else {
       var_6 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_getcameraforseat(var_0, var_2);
@@ -856,7 +856,7 @@ function ref_14283(var_0, var_1, var_2, var_3) {
 
     if(var_5) {
       if(isDefined(var_0.objweapon)) {
-        var_8 = var_4.ref_12da3[var_2][var_0.objweapon.basename];
+        var_8 = var_4.ref_12DA3[var_2][var_0.objweapon.basename];
 
         if(isDefined(var_8)) {
           var_9 = invertangles(var_1 getplayerangles());
@@ -868,10 +868,10 @@ function ref_14283(var_0, var_1, var_2, var_3) {
       }
     }
 
-    var_13 = ref_1427f(var_0, var_3);
+    var_13 = ref_1427F(var_0, var_3);
 
     if(isDefined(var_13)) {
-      foreach(var_8 in var_4.ref_12da3[var_2]) {
+      foreach(var_8 in var_4.ref_12DA3[var_2]) {
         var_11 = var_13[var_15];
 
         if(isDefined(var_11)) {
@@ -887,9 +887,9 @@ function ref_14283(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_1427f(var_0, var_1) {
-  if(isDefined(var_1) && isDefined(var_1.ref_1196a)) {
-    return var_1.ref_12da1;
+function ref_1427F(var_0, var_1) {
+  if(isDefined(var_1) && isDefined(var_1.ref_1196A)) {
+    return var_1.ref_12DA1;
   }
 
   var_2 = scripts\cp_mp\vehicles\vehicle::ref_14193(var_0);
@@ -905,7 +905,7 @@ function ref_1427f(var_0, var_1) {
     }
 
     if(isDefined(var_1)) {
-      var_1.ref_12da1 = var_3;
+      var_1.ref_12DA1 = var_3;
     }
 
     return var_3;

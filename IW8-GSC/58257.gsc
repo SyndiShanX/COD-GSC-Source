@@ -50,7 +50,7 @@ function vehicle_cp_deletenextframelate() {
 
 function vehicle_cp_deletenextframe() {
   self endon("death");
-  self.scrambleent.owner scripts\engine\utility::ref_143a7("joined_team", "joined_spectators", "disconnect", "game_ended");
+  self.scrambleent.owner scripts\engine\utility::ref_143A7("joined_team", "joined_spectators", "disconnect", "game_ended");
   vehicle_compass_mp_shouldbevisibletoplayer();
 }
 
@@ -165,7 +165,7 @@ function vehicle_createlate(var_0) {
               continue;
             }
 
-            if(ref_124c3(var_11, self)) {
+            if(ref_124C3(var_11, self)) {
               continue;
             }
 
@@ -174,7 +174,7 @@ function vehicle_createlate(var_0) {
             continue;
           }
 
-          if(ref_124c3(var_11, self)) {
+          if(ref_124C3(var_11, self)) {
             vehicle_compass_updatevisibilityforplayer(var_11, 0, self, var_1);
           }
         }
@@ -183,7 +183,7 @@ function vehicle_createlate(var_0) {
 
     foreach(var_17 in self.enemiesaffectedbyscambler) {
       if(!scripts\engine\utility::array_contains(var_8, var_17)) {
-        if(ref_124c3(var_17, self)) {
+        if(ref_124C3(var_17, self)) {
           vehicle_compass_updatevisibilityforplayer(var_17, 0, self, var_1);
         }
       }
@@ -284,9 +284,9 @@ function vehicle_compass_updatevisibilityforplayer(var_0, var_1, var_2) {
 
 function vehicle_compass_shouldbevisibletoplayer(var_0, var_1) {
   level endon("game_ended");
-  scripts\engine\utility::ref_143a5("death", "scramble_off");
+  scripts\engine\utility::ref_143A5("death", "scramble_off");
 
-  if(ref_124c3(var_0)) {
+  if(ref_124C3(var_0)) {
     if(isDefined(self)) {
       if(isDefined(var_0) && isDefined(var_0.enemiesaffectedbyscambler)) {
         var_0.enemiesaffectedbyscambler = scripts\engine\utility::array_remove(var_0.enemiesaffectedbyscambler, self);
@@ -298,7 +298,7 @@ function vehicle_compass_shouldbevisibletoplayer(var_0, var_1) {
   }
 }
 
-function ref_124c3(var_0) {
+function ref_124C3(var_0) {
   return isDefined(self.scrambledby) && scripts\engine\utility::array_contains(self.scrambledby, var_0);
 }
 
@@ -374,7 +374,7 @@ function vehicle_compass_playerjoinedteamcallback() {
           var_2 = var_2.owner;
         }
 
-        if(ref_124c3(var_2, self)) {
+        if(ref_124C3(var_2, self)) {
           vehicle_compass_updatevisibilityforplayer(var_2, 0, self);
         }
       }
@@ -477,8 +477,8 @@ function jammer_refundsuper() {
   self notify("super_use_finished");
   scripts\cp\vehicles\vehicle_compass_cp::ref_12097(self.super, 1);
   var_0 = scripts\mp\supers::getcurrentsuper();
-  scripts\mp\supers::ref_131c7(0);
-  scripts\mp\supers::ref_131c6(0);
+  scripts\mp\supers::ref_131C7(0);
+  scripts\mp\supers::ref_131C6(0);
   var_0.wasrefunded = 1;
   scripts\mp\supers::setsuperbasepoints(scripts\mp\supers::getsuperpointsneeded());
 }

@@ -64,10 +64,10 @@ function playcallingesture(var_0) {
   level endon("game_ended");
   self endon("disconnect");
 
-  if(!istrue(var_0.ref_133cc)) {
+  if(!istrue(var_0.ref_133CC)) {
     var_1 = "ks_gesture_generic_mp";
 
-    if(scripts\cp_mp\utility\game_utility::ref_140a9()) {
+    if(scripts\cp_mp\utility\game_utility::ref_140A9()) {
       var_1 = "ks_gesture_generic_mp_ch3";
     }
 
@@ -99,7 +99,7 @@ function launchsupplysweep(var_0, var_1) {
   var_6 = scripts\mp\utility\teams::getteamdata(var_2, "players");
 
   foreach(var_8 in var_6) {
-    if(isDefined(var_8) && !var_8 scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(isDefined(var_8) && !var_8 scripts\mp\gametypes\br_public::ref_125F3()) {
       var_8 method_87ec(1);
       var_8 playsoundtoplayer("activate_supply_sweep", var_8);
     }
@@ -108,7 +108,7 @@ function launchsupplysweep(var_0, var_1) {
   var_10 = level.teamdata[var_2]["activeSupplySweeps"].size >= 3;
   advancedsupplysweepsetenabled(var_10, var_2);
   var_11 = max((var_5 - gettime()) / 1000, 0.1);
-  scripts\engine\utility::ref_143b9(var_11, "game_ended");
+  scripts\engine\utility::ref_143B9(var_11, "game_ended");
   level.teamdata[var_2]["activeSupplySweeps"] = scripts\engine\utility::array_remove(level.teamdata[var_2]["activeSupplySweeps"], var_1);
   var_10 = level.teamdata[var_2]["activeSupplySweeps"].size >= 3;
   advancedsupplysweepsetenabled(var_10, var_2);
@@ -126,7 +126,7 @@ function launchsupplysweep(var_0, var_1) {
     while(!var_12 && !level.gameended) {
       var_5 = level.teamdata[var_2]["supplySweepEndTime"];
       var_11 = max((var_5 - gettime()) / 1000, 0.1);
-      scripts\engine\utility::ref_143b9(var_11, "game_ended");
+      scripts\engine\utility::ref_143B9(var_11, "game_ended");
       var_12 = level.teamdata[var_2]["activeSupplySweeps"].size == 0;
     }
   }
@@ -161,8 +161,8 @@ function onendsupplysweep(var_0, var_1, var_2) {
     level thread[[level.killstreakfinishusefunc]](var_2);
   }
 
-  if(isDefined(var_0) && !istrue(level.ref_12aa4)) {
-    var_0 scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_2);
+  if(isDefined(var_0) && !istrue(level.ref_12AA4)) {
+    var_0 scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_2);
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "printGameAction")) {
@@ -175,7 +175,7 @@ function advancedsupplysweepsetenabled(var_0, var_1) {
   var_2 = scripts\mp\utility\teams::getteamdata(var_1, "players");
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4) && !var_4 scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(isDefined(var_4) && !var_4 scripts\mp\gametypes\br_public::ref_125F3()) {
       var_4 method_87ed(var_0);
     }
   }
@@ -211,7 +211,7 @@ function supplysweepdialogplayer(var_0, var_1, var_2, var_3, var_4, var_5) {
     return;
   }
 
-  if(var_2 scripts\mp\gametypes\br_public::ref_11c7d(var_1, var_3)) {
+  if(var_2 scripts\mp\gametypes\br_public::ref_11C7D(var_1, var_3)) {
     return;
   }
 

@@ -40,7 +40,7 @@ function light_tank_mp_initspawning() {
 
   if(scripts\mp\utility\game::getgametype() == "arm") {
     var_0.areplayersnear = 105;
-    var_0.ref_12ca1 = level.ref_13a58;
+    var_0.ref_12CA1 = level.ref_13A58;
     return;
   }
 
@@ -414,7 +414,7 @@ function light_tank_mp_waitandspawn() {
   scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
   scripts\cp_mp\vehicles\light_tank::light_tank_copyspawndata(var_0, var_1);
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("light_tank", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("light_tank", var_1, var_2);
 
   if(isDefined(var_3)) {
     if(scripts\mp\utility\game::getgametype() == "arm") {
@@ -423,7 +423,7 @@ function light_tank_mp_waitandspawn() {
       }
 
       if(istrue(level.ref_13377)) {
-        scripts\mp\gametypes\arm::ref_1413b(var_3, var_3.team);
+        scripts\mp\gametypes\arm::ref_1413B(var_3, var_3.team);
       }
 
       foreach(var_5 in level.players) {

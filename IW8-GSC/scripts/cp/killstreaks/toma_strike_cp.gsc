@@ -4,9 +4,9 @@
 *****************************************************/
 
 function init() {
-  scripts\cp_mp\utility\script_utility::registersharedfunc("toma_strike", "munitionUsed", &ref_13bd2);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("toma_strike", "munitionUsed", &ref_13BD2);
 }
 
-function ref_13bd2(var_0, var_1) {
+function ref_13BD2(var_0, var_1) {
   self notify("munitions_used", "cluster_strike");
 }

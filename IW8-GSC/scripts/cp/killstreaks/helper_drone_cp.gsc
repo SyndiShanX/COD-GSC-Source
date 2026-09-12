@@ -64,7 +64,7 @@ function helperdrone_markplayers_cp(var_0) {
         continue;
       }
 
-      scripts\cp_mp\killstreaks\helper_drone::ref_131c9(self.targetmarkergroup, var_4, 0);
+      scripts\cp_mp\killstreaks\helper_drone::ref_131C9(self.targetmarkergroup, var_4, 0);
 
       if(!scripts\cp_mp\killstreaks\helper_drone::isinmarkingrange(var_4)) {
         continue;
@@ -74,7 +74,7 @@ function helperdrone_markplayers_cp(var_0) {
         continue;
       }
 
-      scripts\cp_mp\killstreaks\helper_drone::ref_131c9(self.targetmarkergroup, var_4, 1);
+      scripts\cp_mp\killstreaks\helper_drone::ref_131C9(self.targetmarkergroup, var_4, 1);
 
       if(istrue(self.markingtarget)) {
         continue;
@@ -144,7 +144,7 @@ function startmarkingtarget_cp(var_0, var_1, var_2, var_3) {
   self.markingtarget = undefined;
   scripts\cp_mp\killstreaks\helper_drone::markent(var_5, 30);
   self.owner setclientomnvar("ui_rcd_controls", 4);
-  scripts\cp_mp\killstreaks\helper_drone::ref_131c9(var_6, var_0, 2);
+  scripts\cp_mp\killstreaks\helper_drone::ref_131C9(var_6, var_0, 2);
   scripts\cp_mp\killstreaks\helper_drone::addmarkpoints(var_0, var_1);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("pers", "incPersStat")) {
@@ -153,12 +153,12 @@ function startmarkingtarget_cp(var_0, var_1, var_2, var_3) {
 
   self.usedcount++;
 
-  if(!isDefined(self.ref_1406b)) {
-    self.ref_1406b = 0;
+  if(!isDefined(self.ref_1406B)) {
+    self.ref_1406B = 0;
   }
 
   if(isalive(var_0) && isDefined(var_0.ridingvehicle)) {
-    self.ref_1406b++;
+    self.ref_1406B++;
   }
 
   var_8 = 35;
@@ -169,11 +169,11 @@ function startmarkingtarget_cp(var_0, var_1, var_2, var_3) {
     }
   }
 
-  thread ref_13f20(var_5);
+  thread ref_13F20(var_5);
   scripts\cp_mp\killstreaks\helper_drone::waituntilunmarked(var_5, var_8);
 }
 
-function ref_13f20(var_0) {
+function ref_13F20(var_0) {
   var_1 = var_0.target;
   var_1 waittill("death");
   scripts\cp_mp\killstreaks\helper_drone::unmark(var_0);

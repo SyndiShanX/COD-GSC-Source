@@ -18,8 +18,8 @@ function main() {
   game["axis_outfit"] = "woodland";
   thread lighting_setup_dvars();
   thread scripts\mp\animation_suite::animationsuite();
-  thread ref_11d80();
-  thread ref_121f4();
+  thread ref_11D80();
+  thread ref_121F4();
 }
 
 function lighting_setup_dvars() {
@@ -41,14 +41,14 @@ function ref_14051() {
   setDvar("sm_compressedSunShadowFilteringMaxRadius", 4);
 }
 
-function ref_11e8d() {
+function ref_11E8D() {
   setDvar("sm_sunSampleSizeNear", 0.25);
   setDvar("sm_sunCascadeSizeMultiplier1", 2);
   setDvar("sm_sunCascadeSizeMultiplier2", 2);
   setDvar("sm_sunDistantShadows", 1);
 }
 
-function ref_11d80() {
+function ref_11D80() {
   if(level.gametype == "arena") {
     wait 1;
     var_0 = scripts\mp\spawnlogic::getspawnpointarray("mp_arena_spawn_axis_start");
@@ -81,7 +81,7 @@ function ref_11d80() {
   }
 }
 
-function ref_121f4() {
+function ref_121F4() {
   var_0 = spawn("script_model", (-3, 36, 12));
   var_0 setModel("mp_m_cage_shotblocker");
   var_0.angles = (0, 0, 0);

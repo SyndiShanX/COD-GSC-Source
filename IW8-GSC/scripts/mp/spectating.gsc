@@ -102,7 +102,7 @@ function onjoinedspectators(var_0) {
     var_0 setmlgfollowdroneactive(0);
     thread updatemlgspectator();
     thread autoattachtoplayer();
-    thread ref_12eb1();
+    thread ref_12EB1();
     return;
   }
 }
@@ -185,7 +185,7 @@ function autoattachtoplayer() {
   self endon("disconnect");
   self endon("game_ended");
   self endon("spectating_mlg_camera");
-  level scripts\engine\utility::ref_143a6("prematch_done", "start_mode_setup", "infil_started");
+  level scripts\engine\utility::ref_143A6("prematch_done", "start_mode_setup", "infil_started");
   level.wasflagspawned = game["lastSpectatedPlayer"];
 
   for(;;) {
@@ -315,7 +315,7 @@ function updatemlgspectator() {
   }
 }
 
-function ref_12eb1() {
+function ref_12EB1() {
   level waittill("game_ended");
   game["lastSpectatedPlayer"] = level.wasflagspawned;
 }

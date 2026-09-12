@@ -13,13 +13,13 @@ function init() {
   level.black_market_quest = spawnStruct();
   init_dvars();
   scripts\mp\gametypes\br_quest_util::registerremovequestinstance("black_market", &on_remove_quest_instance);
-  scripts\mp\gametypes\br_quest_util::registeronplayerkilled("black_market", &ref_11ff1);
-  scripts\mp\gametypes\br_quest_util::ref_12b2e("black_market", &on_player_disconnect);
-  scripts\mp\gametypes\br_quest_util::ref_12b2d("black_market", &on_enter_gulag);
-  scripts\mp\gametypes\br_quest_util::ref_12b30("black_market", &on_respawn);
+  scripts\mp\gametypes\br_quest_util::registeronplayerkilled("black_market", &ref_11FF1);
+  scripts\mp\gametypes\br_quest_util::ref_12B2E("black_market", &on_player_disconnect);
+  scripts\mp\gametypes\br_quest_util::ref_12B2D("black_market", &on_enter_gulag);
+  scripts\mp\gametypes\br_quest_util::ref_12B30("black_market", &on_respawn);
   scripts\mp\gametypes\br_quest_util::registerquestcircletick("black_market", &on_circle_tick);
-  scripts\mp\gametypes\br_quest_util::ref_1297c("black_market", 1);
-  scripts\mp\gametypes\br_quest_util::ref_12b31("black_market", &on_timer_expired);
+  scripts\mp\gametypes\br_quest_util::ref_1297C("black_market", 1);
+  scripts\mp\gametypes\br_quest_util::ref_12B31("black_market", &on_timer_expired);
   thread contract_cleanup_watcher();
   game["dialog"]["mission_blm_accept"] = "mission_mission_gen_accept";
   game["dialog"]["mission_blm_dropnotify"] = "blkmrkt_contract_contract_start";
@@ -27,7 +27,7 @@ function init() {
   game["dialog"]["mission_blm_fail"] = "blkmrkt_contract_contract_fail";
   game["dialog"]["mission_blm_timer_warn"] = "blkmrkt_contract_timer_remaining";
   game["dialog"]["mission_blm_kiosk_nearby"] = "blkmrkt_contract_buy_station_proximity";
-  scripts\engine\scriptable::ref_12f5b("br_black_market_kiosk", &kiosk_on_use);
+  scripts\engine\scriptable::ref_12F5B("br_black_market_kiosk", &kiosk_on_use);
   scripts\mp\utility\sound::besttime("br_event_black_market");
 }
 
@@ -67,7 +67,7 @@ function takequestitem(var_0) {
   var_1.team = self.team;
   var_1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "players");
   hud_setup_visibility(var_1);
-  var_1 scripts\mp\gametypes\br_quest_util::ref_1297d(level.black_market_quest.i_quest_time, 4);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_1297D(level.black_market_quest.i_quest_time, 4);
   thread play_time_warning_dialog(var_1);
   scripts\mp\gametypes\br_quest_util::addquestinstance("black_market", var_1);
   scripts\mp\gametypes\br_quest_util::ref_13879("black_market", self, self.team);
@@ -76,7 +76,7 @@ function takequestitem(var_0) {
   var_2.excludedplayers[0] = var_1.semtex_stuckplayer;
   var_2.ogangles = [];
   var_2.ogangles[0] = var_1.team;
-  var_2.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("black_market", scripts\mp\gametypes\br_quest_util::ringing(self.team));
+  var_2.ref_127D5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("black_market", scripts\mp\gametypes\br_quest_util::ringing(self.team));
   scripts\mp\gametypes\br_quest_util::displayteamsplash(var_1.team, "br_black_market_start_team", var_2);
   scripts\mp\gametypes\br_quest_util::displayplayersplash(var_1.semtex_stuckplayer, "br_black_market_start_tablet_finder", var_2);
   level thread scripts\mp\gametypes\br_public::dmztutdropcash("mission_blm_accept", var_1.team, var_1.semtex_stuckplayer, 1, 0.5);
@@ -111,7 +111,7 @@ function complete_quest() {
   var_2 = scripts\mp\gametypes\br_quest_util::getquestindex("black_market");
   var_3 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("black_market"));
   var_4 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining(self.semtex_stuckplayer);
-  var_0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_2, var_1, var_3, undefined, var_4);
+  var_0.ref_121B5 = scripts\mp\gametypes\br_quest_util::ref_121B9(var_2, var_1, var_3, undefined, var_4);
   scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_black_market_complete", var_0);
   level thread scripts\mp\gametypes\br_public::dmztutdropcash("mission_blm_success", self.team, self.semtex_stuckplayer, 1, 0, 0.5);
   level thread scripts\mp\gametypes\br_public::dmztut_endgamewithreward("mission_blm_success", self.semtex_stuckplayer, 1, 0, 0.5);
@@ -123,9 +123,9 @@ function complete_quest() {
     self.kiosk enablescriptableplayeruse(var_6);
   }
 
-  self.ref_12d2d = undefined;
-  self.ref_12d2e = self.semtex_stuckplayer.origin;
-  self.ref_12d2b = self.semtex_stuckplayer.angles;
+  self.ref_12D2D = undefined;
+  self.ref_12D2E = self.semtex_stuckplayer.origin;
+  self.ref_12D2B = self.semtex_stuckplayer.angles;
   self.result = "success";
   thread scripts\mp\gametypes\br_quest_util::removequestinstance();
 }
@@ -191,11 +191,11 @@ function show_kiosk() {
     var_2 playlocalsound("br_black_market_chest_discovered");
   }
 
-  objective_state(self.ref_11f64, "current");
-  objective_setshowoncompass(self.ref_11f64, 0);
-  playencryptedcinematicforall(self.ref_11f64, 0);
-  function_0442(self.ref_11f64, 0);
-  objective_setshowdistance(self.ref_11f64, 1);
+  objective_state(self.ref_11F64, "current");
+  objective_setshowoncompass(self.ref_11F64, 0);
+  playencryptedcinematicforall(self.ref_11F64, 0);
+  function_0442(self.ref_11F64, 0);
+  objective_setshowdistance(self.ref_11F64, 1);
 }
 
 function play_time_warning_dialog(var_0) {
@@ -217,7 +217,7 @@ function contract_cleanup_watcher() {
 
       foreach(var_3 in var_1) {
         var_3.invalidforreplace = 1;
-        scripts\mp\gametypes\br_pickups::ref_11a21(var_3);
+        scripts\mp\gametypes\br_pickups::ref_11A21(var_3);
       }
     }
   }
@@ -255,7 +255,7 @@ function __event_handlers() {}
 
 function on_remove_quest_instance() {
   hud_delete();
-  scripts\mp\objidpoolmanager::returnreservedobjectiveid(self.ref_11f64);
+  scripts\mp\objidpoolmanager::returnreservedobjectiveid(self.ref_11F64);
 
   if(isDefined(self.mapcircle)) {
     scripts\mp\gametypes\br_quest_util::lastdirtyscore();
@@ -268,7 +268,7 @@ function on_remove_quest_instance() {
   scripts\mp\gametypes\br_quest_util::releaseteamonquest(self.team);
 }
 
-function ref_11ff1(var_0, var_1) {
+function ref_11FF1(var_0, var_1) {
   on_player_removed(var_1, var_0);
 }
 
@@ -298,7 +298,7 @@ function on_enter_gulag(var_0) {
 function on_respawn(var_0) {
   if(var_0.team == self.team) {
     hud_show_to_player(var_0);
-    scripts\mp\gametypes\br_quest_util::ref_1336a(var_0);
+    scripts\mp\gametypes\br_quest_util::ref_1336A(var_0);
     start_player_threads(var_0);
     return;
   }
@@ -423,7 +423,7 @@ function kiosk_spawn() {
   var_6 = scripts\mp\utility\teams::getteamdata(self.team, "players");
 
   foreach(var_3 in var_6) {
-    scripts\mp\gametypes\br_quest_util::ref_1336a(var_3);
+    scripts\mp\gametypes\br_quest_util::ref_1336A(var_3);
     start_player_threads(var_3);
   }
 
@@ -474,7 +474,7 @@ function run_black_market_purchase_menu(var_0) {
 
 function __kiosk_location() {}
 
-function ref_12ae8(var_0, var_1) {
+function ref_12AE8(var_0, var_1) {
   if(!isDefined(level.black_market_quest.wait_display_pavelow_boss_health_bar)) {
     level.black_market_quest.wait_display_pavelow_boss_health_bar = [];
   }
@@ -560,7 +560,7 @@ function quest_circle_setup(var_0) {
     objective_addteamtomask(var_8, self.team);
     objective_setzoffset(var_8, 32);
     function_0442(var_8, 1);
-    self.ref_11f64 = var_8;
+    self.ref_11F64 = var_8;
   }
 
   thread quest_circle_animate(self.semtex_stuckplayer.origin, self.a_circles[0], 2);
@@ -604,7 +604,7 @@ function quest_circle_animate(var_0, var_1, var_2, var_3) {
       var_8 = (var_7[0], var_7[1], scripts\engine\math::lerp(var_0[2], 0, var_6));
     }
 
-    scripts\mp\gametypes\br_quest_util::ref_11dae(var_8);
+    scripts\mp\gametypes\br_quest_util::ref_11DAE(var_8);
     waitframe();
   }
 }

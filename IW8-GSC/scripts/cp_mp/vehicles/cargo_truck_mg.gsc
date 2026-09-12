@@ -45,7 +45,7 @@ function init_battlechatter() {
   anim.eventtypeminwait["threat"]["infantry"] = 7000;
   anim.eventtypeminwait["order"]["action"] = 9000;
   anim.eventtypeminwait["order"]["move"] = 3000;
-  anim.ref_13b42 = 120000;
+  anim.ref_13B42 = 120000;
   bcs_setup_countryids();
   level.dialog_system = 1;
 }
@@ -111,18 +111,18 @@ function autoassignquest(var_0) {
   var_0.battlechatter = spawnStruct();
   var_0.battlechatter.countryid = anim.countryids[var_0.voice];
   setnpcid(var_0);
-  thread ref_12be5(var_0);
-  thread ref_11e60();
+  thread ref_12BE5(var_0);
+  thread ref_11E60();
 }
 
-function ref_12bc1(var_0) {
+function ref_12BC1(var_0) {
   level._battlechatter.ai = scripts\engine\utility::array_remove(level._battlechatter.ai, var_0);
   var_0 notify("removed from battleChatter");
 }
 
-function ref_12be5(var_0) {
+function ref_12BE5(var_0) {
   var_0 waittill("death");
-  ref_12bc1(var_0);
+  ref_12BC1(var_0);
 }
 
 function setnpcid() {
@@ -153,7 +153,7 @@ function npcidtracker(var_0) {
   anim.usedids[var_1][var_0].count--;
 }
 
-function ref_11e60() {
+function ref_11E60() {
   self endon("death");
   self endon("removed from battleChatter");
 
@@ -273,7 +273,7 @@ function callouttypewillrepeat(var_0) {
 
   var_1 = level._battlechatter.watch_for_player_going_belowmap_or_oob;
   var_2 = level._battlechatter.watch_for_player_in_gulag;
-  var_3 = anim.ref_13b42;
+  var_3 = anim.ref_13B42;
 
   if(var_0 == var_1 && gettime() - var_2 < var_3) {
     return true;
@@ -814,13 +814,13 @@ function playorderevent(var_0, var_1, var_2) {
         self._blackboard.battlechatter_target = anim.player;
       }
 
-      ref_1213b(var_1, var_2);
+      ref_1213B(var_1, var_2);
       break;
     case "move":
-      ref_1213b(var_1, var_2);
+      ref_1213B(var_1, var_2);
       break;
     case "displace":
-      ref_1213b(var_1);
+      ref_1213B(var_1);
       break;
   }
 
@@ -832,7 +832,7 @@ function playorderevent(var_0, var_1, var_2) {
   self notify("done speaking");
 }
 
-function ref_1213b(var_0, var_1) {
+function ref_1213B(var_0, var_1) {
   var_2 = self;
   var_2 endon("death");
   var_2 endon("removed from battleChatter");
@@ -1022,7 +1022,7 @@ function playphrase(var_0, var_1, var_2) {
 
 function ref_13164(var_0, var_1) {
   self.battlechatter.isspeaking = 1;
-  scripts\engine\utility::ref_143a5("playPhrase_done", "death");
+  scripts\engine\utility::ref_143A5("playPhrase_done", "death");
 
   if(isDefined(self.battlechatter)) {
     self.battlechatter.isspeaking = 0;

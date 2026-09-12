@@ -588,7 +588,7 @@ function infil_player_rig_updated(var_0, var_1, var_2) {
   self.player_rig.dof_func = &handledofnotetrack;
   self playerlinktodelta(self.player_rig, "tag_player", 1, 0, 0, 0, 0, 1);
   self notify("rig_created");
-  scripts\engine\utility::ref_143a5("remove_rig", "player_free_spot");
+  scripts\engine\utility::ref_143A5("remove_rig", "player_free_spot");
 
   if(istrue(level.gameended)) {
     return;

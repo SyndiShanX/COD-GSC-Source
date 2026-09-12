@@ -7,7 +7,7 @@ function get_random_primary_weapon_obj() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_susp", "spawnCallback", &get_randomize_bomb_label_list);
   get_random_search_node();
   get_random_starting_station_name_on_track();
-  scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_registeroutoftimecallback("cargo_truck_susp", &_calloutmarkerping_isenemy::get_power_ref_from_weapon);
+  scripts\mp\vehicles\vehicle_oob_mp::vehicle_oob_mp_registeroutoftimecallback("cargo_truck_susp", &_calloutmarkerping_isenemy::get_power_ref_FROM_weapon);
 }
 
 function get_random_starting_station_name_on_track() {
@@ -45,5 +45,5 @@ function get_recent_spawn_time_threshold() {
   var_1 = spawnStruct();
   scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("cargo_truck_susp", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("cargo_truck_susp", var_1, var_2);
 }

@@ -654,7 +654,7 @@ function hudoutline_disable_on_death(var_0, var_1) {
   }
 
   self endon(var_0 + "hudoutline_disable");
-  scripts\engine\utility::ref_143a5("death", "entitydeleted");
+  scripts\engine\utility::ref_143A5("death", "entitydeleted");
   thread hudoutline_disable_internal(var_0);
 }
 

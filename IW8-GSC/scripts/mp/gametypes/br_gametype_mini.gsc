@@ -35,17 +35,17 @@ function eggdebug() {
 }
 
 function eggrolls() {
-  scripts\mp\gametypes\br_gametypes::ref_12b11("createC130PathStruct", &edit_loadout_think);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("addToC130Infil", &earnednuke);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerWelcomeSplashes", &eggtrigger);
-  scripts\mp\gametypes\br_gametypes::ref_12b10("dropBagDelay", 100);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("createC130PathStruct", &edit_loadout_think);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("addToC130Infil", &earnednuke);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerWelcomeSplashes", &eggtrigger);
+  scripts\mp\gametypes\br_gametypes::ref_12B10("dropBagDelay", 100);
   waittillframeend();
   level.ontimelimit = &eggsetup;
   earnperiodicxp();
-  level.ref_140d9 = [];
-  level.ref_140d9[0] = "assassination";
-  level.ref_140d9[1] = "domination";
-  level.ref_140d9[2] = "scavenger";
+  level.ref_140D9 = [];
+  level.ref_140D9[0] = "assassination";
+  level.ref_140D9[1] = "domination";
+  level.ref_140D9[2] = "scavenger";
 }
 
 function eggbear() {
@@ -54,10 +54,10 @@ function eggbear() {
 }
 
 function earnperiodicxp() {
-  scripts\cp_mp\utility\game_utility::ref_12c10("delete_on_load", "targetname");
-  scripts\cp_mp\utility\game_utility::ref_12c11("door_prison_cell_metal_mp", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c11("door_wooden_panel_mp_01", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c11("me_electrical_box_street_01", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C10("delete_on_load", "targetname");
+  scripts\cp_mp\utility\game_utility::ref_12C11("door_prison_cell_metal_mp", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C11("door_wooden_panel_mp_01", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C11("me_electrical_box_street_01", 1);
 }
 
 function eggbox() {}

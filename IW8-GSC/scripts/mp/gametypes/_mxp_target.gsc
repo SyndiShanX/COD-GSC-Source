@@ -46,7 +46,7 @@ function reaper_missile_reload_end_time(var_0, var_1) {
     var_2 = [var_10, var_6];
   }
 
-  return scripts\engine\utility::array_sort_with_func(var_2, &ref_12f07);
+  return scripts\engine\utility::array_sort_with_func(var_2, &ref_12F07);
 }
 
 function quarry2_ambient_sound_load(var_0) {
@@ -73,7 +73,7 @@ function quarry2_ambient_sound_load(var_0) {
     var_6 = [];
 
     foreach(var_8 in var_1) {
-      if(isalive(var_8) && distance2d(var_8.origin, self.origin) < level.ref_11e18.playerredeploy) {
+      if(isalive(var_8) && distance2d(var_8.origin, self.origin) < level.ref_11E18.playerredeploy) {
         var_6 = var_8;
       }
     }
@@ -110,7 +110,7 @@ function printspawnmessage(var_0, var_1, var_2) {
     return undefined;
   }
 
-  var_11 = scripts\engine\utility::array_sort_with_func(var_3, &ref_12f07);
+  var_11 = scripts\engine\utility::array_sort_with_func(var_3, &ref_12F07);
   return var_11[0][0];
 }
 
@@ -139,15 +139,15 @@ function pristinestatehealthadd(var_0, var_1) {
     return undefined;
   }
 
-  var_8 = scripts\engine\utility::array_sort_with_func(var_2, &ref_12f07);
+  var_8 = scripts\engine\utility::array_sort_with_func(var_2, &ref_12F07);
   return var_8[0][0];
 }
 
 function shiftbar(var_0) {
   var_1 = undefined;
 
-  if(isDefined(level.ref_11e18) && isDefined(level.ref_11e18.ref_12f3f) && isDefined(level.ref_11e18.ref_12f3f.owner) && distance2d(level.ref_11e18.ref_12f3f.owner.origin, self.origin) < level.ref_11e18.playerredeploy) {
-    var_1 = level.ref_11e18.ref_12f3f.owner;
+  if(isDefined(level.ref_11E18) && isDefined(level.ref_11E18.ref_12F3F) && isDefined(level.ref_11E18.ref_12F3F.owner) && distance2d(level.ref_11E18.ref_12F3F.owner.origin, self.origin) < level.ref_11E18.playerredeploy) {
+    var_1 = level.ref_11E18.ref_12F3F.owner;
   }
 
   return var_1;
@@ -188,7 +188,7 @@ function play_players_arrive_at_extraction(var_0) {
   return self.origin + var_11 * randomintrange(1000, 4000);
 }
 
-function ref_12f07(var_0, var_1) {
+function ref_12F07(var_0, var_1) {
   return var_0[1] > var_1[1];
 }
 
@@ -217,8 +217,8 @@ function randomize_stealth_broken_music_array(var_0, var_1, var_2, var_3) {
   var_7 = (var_2 - var_4) / var_2;
   var_8 = var_5 * squared(var_7);
 
-  if(isDefined(level.ref_11e18.ref_12f14)) {
-    var_8 = self[[level.ref_11e18.ref_12f14]](var_8, var_0, var_1, var_2, var_3);
+  if(isDefined(level.ref_11E18.ref_12F14)) {
+    var_8 = self[[level.ref_11E18.ref_12F14]](var_8, var_0, var_1, var_2, var_3);
   }
 
   return var_8;
@@ -228,8 +228,8 @@ function recharge_equipment_init(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.teamnamelist) {
-    if(isDefined(level.ref_13aaa[var_3])) {
-      var_1 = [var_3, level.ref_13aaa[var_3]];
+    if(isDefined(level.ref_13AAA[var_3])) {
+      var_1 = [var_3, level.ref_13AAA[var_3]];
     }
   }
 
@@ -237,7 +237,7 @@ function recharge_equipment_init(var_0) {
     return undefined;
   }
 
-  var_5 = scripts\engine\utility::array_sort_with_func(var_1, &ref_12f07);
+  var_5 = scripts\engine\utility::array_sort_with_func(var_1, &ref_12F07);
 
   if(var_5.size == 1) {
     return var_5[0][0];

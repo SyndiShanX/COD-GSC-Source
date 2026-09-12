@@ -15,7 +15,7 @@ function init() {
   level.delayedshowtablets = relic_squadlink_flash_squadlink_icon("0 0 0 0 0 0 0 0");
   level.br_pe_active_pe_count = 0;
   all_players_within_distance2d();
-  scripts\mp\gametypes\br_dev::ref_12b21(&setup_nuke_vault_door_open);
+  scripts\mp\gametypes\br_dev::ref_12B21(&setup_nuke_vault_door_open);
 
   if(scripts\mp\gametypes\br_publicevents_meter::ispubliceventmeterenabled()) {
     level thread scripts\mp\gametypes\br_publicevents_meter::init();
@@ -54,7 +54,7 @@ function all_players_within_distance2d() {
   if(unset_relic_healthpacks()) {
     var_0 = spawnStruct();
     var_0.weight = 0;
-    ref_12b35(0, var_0);
+    ref_12B35(0, var_0);
   }
 
   _postinitevents();
@@ -66,7 +66,7 @@ function _postinitevents() {
       continue;
     }
 
-    if(isDefined(var_1.ref_140cf) && ![[var_1.ref_140cf]]()) {
+    if(isDefined(var_1.ref_140CF) && ![[var_1.ref_140CF]]()) {
       continue;
     }
 
@@ -106,7 +106,7 @@ function relic_squadlink_flash_squadlink_icon(var_0) {
   return var_2;
 }
 
-function ref_12b35(var_0, var_1) {
+function ref_12B35(var_0, var_1) {
   if(!isDefined(var_1.weight)) {
     var_1.active = 0;
   }
@@ -116,8 +116,8 @@ function ref_12b35(var_0, var_1) {
   }
 
   if(unset_relic_healthpacks()) {
-    if(!isDefined(var_1.ref_11b78)) {
-      var_1.ref_11b78 = 1;
+    if(!isDefined(var_1.ref_11B78)) {
+      var_1.ref_11B78 = 1;
     }
 
     if(!isDefined(var_1.compass)) {
@@ -160,7 +160,7 @@ function ref_12932() {
   return true;
 }
 
-function ref_132f7(var_0) {
+function ref_132F7(var_0) {
   var_1 = revive_wounded_out_handler();
 
   if(unset_relic_healthpacks() && isDefined(var_0)) {
@@ -191,7 +191,7 @@ function revive_wounded_out_handler() {
   return getdvarfloat("scr_br_pe_chance", 0);
 }
 
-function ref_11e05() {
+function ref_11E05() {
   var_0 = revive_wounded_out_handlerr();
   return var_0 != 1;
 }
@@ -200,7 +200,7 @@ function ref_12933() {
   level endon("cancel_public_event");
   scripts\mp\flags::gameflagwait("prematch_done");
 
-  if(ref_11e05()) {
+  if(ref_11E05()) {
     var_0 = getdvarfloat("scr_br_pe_multi_wait_min", 240);
     var_1 = getdvarfloat("scr_br_pe_multi_wait_max", 360);
 
@@ -208,7 +208,7 @@ function ref_12933() {
       var_3 = randomfloatrange(var_0, var_1);
       wait var_3;
 
-      if(ref_132f7()) {
+      if(ref_132F7()) {
         give_intel_data(1);
       }
     }
@@ -216,13 +216,13 @@ function ref_12933() {
     return;
   }
 
-  if(ref_132f7()) {
+  if(ref_132F7()) {
     give_intel_data(0);
     return;
   }
 }
 
-function ref_140cc() {
+function ref_140CC() {
   var_0 = [];
 
   foreach(var_3, var_2 in level.delayedeventtypes) {
@@ -231,7 +231,7 @@ function ref_140cc() {
       continue;
     }
 
-    if(isDefined(var_2.ref_140cf) && ![[var_2.ref_140cf]]()) {
+    if(isDefined(var_2.ref_140CF) && ![[var_2.ref_140CF]]()) {
       allsupportboxes(ai_ignore_all_until_goal(var_3) + " was invalidated due to failing validate function");
       continue;
     }
@@ -296,9 +296,9 @@ function give_intel_data(var_0, var_1, var_2) {
 
   if(unset_relic_healthpacks()) {
     allsupportboxes("Selecting event for circle#: " + var_1);
-    var_3 = ref_140cd(var_1, var_2);
+    var_3 = ref_140CD(var_1, var_2);
   } else {
-    var_3 = ref_140cc();
+    var_3 = ref_140CC();
   }
 
   if(unset_relic_healthpacks()) {}
@@ -314,7 +314,7 @@ function give_intel_data(var_0, var_1, var_2) {
     var_6 = var_7;
   }
 
-  ref_12e1f(level, var_6, var_0, var_1, var_2);
+  ref_12E1F(level, var_6, var_0, var_1, var_2);
 }
 
 function activateevent(var_0) {
@@ -329,7 +329,7 @@ function activateevent(var_0) {
   level notify("br_pe_end");
 }
 
-function ref_12e1f(var_0, var_1, var_2, var_3) {
+function ref_12E1F(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   level endon("cancel_public_event");
 
@@ -346,7 +346,7 @@ function ref_12e1f(var_0, var_1, var_2, var_3) {
 
   if(getdvarint("scr_br_pe_enable_queueing", 1) > 0) {
     while(isanypubliceventcurrentlyactive()) {
-      level scripts\engine\utility::ref_143a5("br_pe_end", "cancel_public_event");
+      level scripts\engine\utility::ref_143A5("br_pe_end", "cancel_public_event");
       waitframe();
     }
   }
@@ -471,7 +471,7 @@ function ref_12934() {
 
     var_8 = level.br_circle.circleindex;
 
-    if(ref_132f7(var_8)) {
+    if(ref_132F7(var_8)) {
       thread give_intel_data(level, var_7, var_8);
     } else {
       level.delete_after_objective_a = 0;
@@ -481,7 +481,7 @@ function ref_12934() {
   }
 }
 
-function ref_140cd(var_0, var_1) {
+function ref_140CD(var_0, var_1) {
   var_2 = [];
 
   foreach(var_11, var_4 in level.delayedeventtypes) {
@@ -490,7 +490,7 @@ function ref_140cd(var_0, var_1) {
       continue;
     }
 
-    if(isDefined(var_4.ref_140cf) && ![[var_4.ref_140cf]]()) {
+    if(isDefined(var_4.ref_140CF) && ![[var_4.ref_140CF]]()) {
       allsupportboxes(ai_ignore_all_until_goal(var_11) + " was invalidated due to failing validate function");
       continue;
     }
@@ -532,7 +532,7 @@ function ref_140cd(var_0, var_1) {
 
     if(!istrue(var_1)) {
       if(isDefined(level.delete_bad_trucks) && isDefined(level.delete_bad_trucks[var_11])) {
-        if(isDefined(var_4.ref_11b78) && level.delete_bad_trucks[var_11] >= var_4.ref_11b78) {
+        if(isDefined(var_4.ref_11B78) && level.delete_bad_trucks[var_11] >= var_4.ref_11B78) {
           allsupportboxes(ai_ignore_all_until_goal(var_11) + " was invalidated due to already activating max times");
           continue;
         }

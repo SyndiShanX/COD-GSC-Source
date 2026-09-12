@@ -505,7 +505,7 @@ function killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
   thread endkillcamifnothingtoshow();
 
   if(!isbot(self)) {
-    thread ref_12c7f();
+    thread ref_12C7F();
   }
 
   self.killcamwatchtime = gettime();
@@ -516,13 +516,13 @@ function killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
   scripts\mp\utility\player::ref_12898("killcam::killcam() COMPLETE");
 }
 
-function ref_12c7f() {
+function ref_12C7F() {
   self endon("disconnect");
-  scripts\engine\utility::ref_143ba(0.15, "killcam_canceled", "spawned");
+  scripts\engine\utility::ref_143BA(0.15, "killcam_canceled", "spawned");
   self clearpredictedstreampos();
 
   if(istrue(level.showingfinalkillcam)) {
-    scripts\mp\gamelogic::ref_1284e();
+    scripts\mp\gamelogic::ref_1284E();
     return;
   }
 }
@@ -779,8 +779,8 @@ function setkillcamkilledbyitemomnvars(var_0, var_1) {
 }
 
 function setkillcamweapontypeomnvars(var_0, var_1) {
-  if(isDefined(var_0.ref_121d9)) {
-    var_0 = var_0.ref_121d9;
+  if(isDefined(var_0.ref_121D9)) {
+    var_0 = var_0.ref_121D9;
   }
 
   var_0 = scripts\mp\utility\weapon::mapweapon(var_0, var_1);

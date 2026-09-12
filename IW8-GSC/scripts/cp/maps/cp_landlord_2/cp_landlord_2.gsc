@@ -28,7 +28,7 @@ function main() {
   init_objectives();
   init_level_systems();
   level.incorrectcodeentered = 1.5;
-  scripts\cp\maps\cp_landlord\cp_landlord_checkpoints::ref_131ed();
+  scripts\cp\maps\cp_landlord\cp_landlord_checkpoints::ref_131ED();
   scripts\mp\brclientmatchdata::getquestrewardgroupindex();
   scripts\mp\brclientmatchdata::getpresettruckspawns("tmtyl_p1", &scripts\cp\maps\cp_landlord\cp_landlord_checkpoints::getplatformrankxpmultiplier);
   var_0 = getDvar("restart_checkpoint", "");
@@ -36,7 +36,7 @@ function main() {
   if(isDefined(var_0) && var_0 != "") {
     scripts\mp\brclientmatchdata::getnextprop(var_0);
     scripts\mp\brclientmatchdata::getnextrpgspawnmodule(var_0);
-    level thread[[level.ref_12b19[var_0]]]();
+    level thread[[level.ref_12B19[var_0]]]();
   } else {
     var_1 = getDvar("cp_landlord_start_obj", "ba_mnu");
 

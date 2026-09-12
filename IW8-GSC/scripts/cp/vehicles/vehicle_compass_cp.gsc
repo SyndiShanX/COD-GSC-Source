@@ -18,7 +18,7 @@ function init() {
     if(isDefined(var_0) && (var_0 == "br" || var_0 == "brtdm")) {
       level.getattractionomnvarbitpackinginfo = 1;
       setupchallengelocales(level);
-      thread ref_13c45();
+      thread ref_13C45();
       ref_13223();
       return;
     }
@@ -90,7 +90,7 @@ function getchallengemapid() {
   return 0;
 }
 
-function ref_11adb() {
+function ref_11ADB() {
   level.localetriggers = [];
   var_0 = getEntArray("location_volume", "targetname");
 
@@ -210,7 +210,7 @@ function ref_11adb() {
           var_2.localeid = 35;
           break;
         default:
-          ref_11ad6(var_2.script_noteworthy);
+          ref_11AD6(var_2.script_noteworthy);
           break;
       }
     }
@@ -220,7 +220,7 @@ function ref_11adb() {
   }
 }
 
-function ref_11ad9() {
+function ref_11AD9() {
   level.localetriggers = [];
   var_0 = getEntArray("location_volume", "targetname");
 
@@ -283,7 +283,7 @@ function ref_11ad9() {
           var_2.localeid = 63;
           break;
         default:
-          ref_11ad6(var_2.script_noteworthy);
+          ref_11AD6(var_2.script_noteworthy);
           break;
       }
     }
@@ -293,7 +293,7 @@ function ref_11ad9() {
   }
 }
 
-function ref_11ad7() {
+function ref_11AD7() {
   level.localetriggers = [];
   var_0 = getEntArray("location_volume", "targetname");
 
@@ -338,7 +338,7 @@ function ref_11ad7() {
           var_2.localeid = 61;
           break;
         default:
-          ref_11ad6(var_2.script_noteworthy);
+          ref_11AD6(var_2.script_noteworthy);
           break;
       }
     }
@@ -426,7 +426,7 @@ function mapchallengelocalesfortuneskeep() {
           var_2.localeid = 85;
           break;
         default:
-          ref_11ad6(var_2.script_noteworthy);
+          ref_11AD6(var_2.script_noteworthy);
           break;
       }
     }
@@ -436,13 +436,13 @@ function mapchallengelocalesfortuneskeep() {
   }
 }
 
-function ref_11ad8(var_0) {
+function ref_11AD8(var_0) {
   if(var_0 == "mp_br_mechanics" || var_0 == "mp_vg_mechanics" || var_0 == "mp_firingrange" || var_0 == "mp_hmsisle_test") {
     return;
   }
 }
 
-function ref_11ad6(var_0) {}
+function ref_11AD6(var_0) {}
 
 function challengesenabled() {
   return level.challengesallowed;
@@ -540,7 +540,7 @@ function getatvspawns() {
   return true;
 }
 
-function ref_140db(var_0) {
+function ref_140DB(var_0) {
   if(!isDefined(self.getattachmentoverride)) {
     return false;
   }
@@ -552,19 +552,19 @@ function ref_140db(var_0) {
   return true;
 }
 
-function ref_12c6e(var_0) {
+function ref_12C6E(var_0) {
   if(!getatvspawns()) {
     return;
   }
 
-  if(!ref_140db(var_0)) {
+  if(!ref_140DB(var_0)) {
     return;
   }
 
   self.getattachmentoverride[var_0] = 0;
 }
 
-function ref_1383b(var_0) {
+function ref_1383B(var_0) {
   if(!getatvspawns()) {
     return;
   }
@@ -635,12 +635,12 @@ function reportchallengestatamount(var_0, var_1) {
   }
 }
 
-function ref_138d5(var_0) {
+function ref_138D5(var_0) {
   if(!getatvspawns()) {
     return;
   }
 
-  if(!ref_140db(var_0)) {
+  if(!ref_140DB(var_0)) {
     return;
   }
 
@@ -661,7 +661,7 @@ function getextractionpadent(var_0, var_1) {
     return;
   }
 
-  if(!ref_140db(var_0)) {
+  if(!ref_140DB(var_0)) {
     return;
   }
 
@@ -678,7 +678,7 @@ function getextractionpadent(var_0, var_1) {
   }
 }
 
-function ref_13c45() {
+function ref_13C45() {
   level endon("game_ended");
 
   for(;;) {
@@ -767,8 +767,8 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "isFriendly")) {
     if(![[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "isFriendly")]](var_1.team, var_10)) {
-      if(isDefined(var_5.ref_121d9)) {
-        var_5 = var_5.ref_121d9;
+      if(isDefined(var_5.ref_121D9)) {
+        var_5 = var_5.ref_121D9;
       }
 
       var_11 = ref_14583(var_5, var_1);
@@ -780,7 +780,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   }
 }
 
-function ref_11ffc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+function ref_11FFC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(!challengesenabledforplayer(var_1)) {
     return;
   }
@@ -799,13 +799,13 @@ function ref_11ffc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
 function ref_12097(var_0, var_1) {
   if(level.getallactivequestsforteam >= 10) {
     if(var_0.staticdata.ref == "super_supply_drop" && !var_1) {
-      ref_12c3f("t9_ch_global_call_in_care_package_or_loadout_drops_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_call_in_care_package_or_loadout_drops_for_operator_mission_s4", 1);
     }
   }
 
   if(level.getallactivequestsforteam >= 10) {
     if(var_0.staticdata.ref == "super_supply_drop" && !var_1) {
-      ref_12c3f("t9_ch_global_call_in_care_package_or_loadout_drops_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_call_in_care_package_or_loadout_drops_for_operator_mission_s5", 1);
       return;
     }
 
@@ -832,44 +832,44 @@ function chooseanim_arrival_forcode(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 = var_5 == "MOD_CRUSH" && isDefined(var_4) && isDefined(var_4.vehiclename);
 
   if(var_2 & 1048576) {
-    ref_12c3f("t9_ch_global_t9_wz_zm_critical_kills_for_event", 1);
+    ref_12C3F("t9_ch_global_t9_wz_zm_critical_kills_for_event", 1);
   }
 
-  ref_12c3f("t9_ch_global_t9_wz_zm_eliminations_for_event", 1);
+  ref_12C3F("t9_ch_global_t9_wz_zm_eliminations_for_event", 1);
 
-  if(!isDefined(self.ref_146c8)) {
-    self.ref_146c8 = 1;
+  if(!isDefined(self.ref_146C8)) {
+    self.ref_146C8 = 1;
   } else {
-    self.ref_146c8++;
+    self.ref_146C8++;
   }
 
   if(istrue(var_7)) {
-    ref_12c3f("t9_ch_global_t9_wz_zm_lethal_equipment_kills_for_event", 1);
+    ref_12C3F("t9_ch_global_t9_wz_zm_lethal_equipment_kills_for_event", 1);
   }
 
   if(istrue(var_9)) {
-    ref_12c3f("t9_ch_global_t9_wz_zm_vehicle_eliminations_for_event", 1);
+    ref_12C3F("t9_ch_global_t9_wz_zm_vehicle_eliminations_for_event", 1);
   }
 
-  if(self.ref_146c8 >= 5 && !istrue(self.show_balloon_purchase_hint)) {
-    ref_12c3f("t9_ch_global_t9_wz_zm_eliminations_per_game_for_event", 1);
+  if(self.ref_146C8 >= 5 && !istrue(self.show_balloon_purchase_hint)) {
+    ref_12C3F("t9_ch_global_t9_wz_zm_eliminations_per_game_for_event", 1);
     self.show_balloon_purchase_hint = 1;
   }
 
   if(var_6 == "spread") {
-    ref_12c3f("t9_ch_global_t9_wz_zm_shotgun_eliminations_for_event", 1);
+    ref_12C3F("t9_ch_global_t9_wz_zm_shotgun_eliminations_for_event", 1);
   }
 
-  if(isDefined(self.ref_12a8d) && self.ref_12a8d == 2) {
-    ref_12c3f("t9_ch_global_t9_wz_zm_multikills_for_event", 1);
+  if(isDefined(self.ref_12A8D) && self.ref_12A8D == 2) {
+    ref_12C3F("t9_ch_global_t9_wz_zm_multikills_for_event", 1);
   }
 
   if(var_6 == "pistol") {
-    ref_12c3f("t9_ch_global_t9_wz_zm_pistol_eliminations_for_event", 1);
+    ref_12C3F("t9_ch_global_t9_wz_zm_pistol_eliminations_for_event", 1);
   }
 
   if(isDefined(level.br_circle) && isDefined(level.br_circle.circleindex) && level.br_circle.circleindex == 0) {
-    ref_12c3f("t9_ch_global_t9_wz_zm_eliminations_before_circle_for_event", 1);
+    ref_12C3F("t9_ch_global_t9_wz_zm_eliminations_before_circle_for_event", 1);
     return;
   }
 }
@@ -880,14 +880,14 @@ function ref_14010() {
   self notify("updateRecentZombieKills");
   self endon("updateRecentZombieKills");
 
-  if(!isDefined(self.ref_12a8d)) {
-    self.ref_12a8d = 1;
+  if(!isDefined(self.ref_12A8D)) {
+    self.ref_12A8D = 1;
   } else {
-    self.ref_12a8d++;
+    self.ref_12A8D++;
   }
 
   wait 4;
-  self.ref_12a8d = 0;
+  self.ref_12A8D = 0;
 }
 
 function vehiclekilled(var_0, var_1, var_2, var_3, var_4) {
@@ -897,8 +897,8 @@ function vehiclekilled(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = var_0;
 
-  if(isDefined(var_4.ref_121d9)) {
-    var_4 = var_4.ref_121d9;
+  if(isDefined(var_4.ref_121D9)) {
+    var_4 = var_4.ref_121D9;
   }
 
   var_6 = ref_14583(var_4, var_2);
@@ -937,8 +937,8 @@ function equipmentdestroyed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "isFriendly")) {
     if(![[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "isFriendly")]](var_1.team, var_8.owner)) {
-      if(isDefined(var_5.ref_121d9)) {
-        var_5 = var_5.ref_121d9;
+      if(isDefined(var_5.ref_121D9)) {
+        var_5 = var_5.ref_121D9;
       }
 
       var_9 = ref_14583(var_5, var_1);
@@ -977,8 +977,8 @@ function killstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "isFriendly")) {
     if(![[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "isFriendly")]](var_3.team, var_8.owner)) {
-      if(isDefined(var_6.ref_121d9)) {
-        var_6 = var_6.ref_121d9;
+      if(isDefined(var_6.ref_121D9)) {
+        var_6 = var_6.ref_121D9;
       }
 
       var_9 = ref_14583(var_6, var_3);
@@ -1076,12 +1076,12 @@ function onplayerkillassist(var_0) {
               }
             }
 
-            if(isDefined(var_20.ref_11c8d)) {
-              var_7 = var_20.ref_11c8d;
+            if(isDefined(var_20.ref_11C8D)) {
+              var_7 = var_20.ref_11C8D;
             }
 
-            if(isDefined(var_20.ref_11c8e)) {
-              var_8 = var_20.ref_11c8e;
+            if(isDefined(var_20.ref_11C8E)) {
+              var_8 = var_20.ref_11C8E;
               var_8 |= 2097152;
             }
           }
@@ -1126,7 +1126,7 @@ function ref_12047(var_0, var_1) {
   self reportchallengeuserevent("killstreak_available", var_2, var_3, var_4, var_5, var_6, var_7);
 }
 
-function ref_1204a(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_1204A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1163,24 +1163,24 @@ function ref_12032(var_0, var_1, var_2, var_3) {
   }
 
   if(level.getallactivequestsforteam >= 8 && istrue(var_3) && isDefined(var_2) && self.team != var_2.team && istrue(var_6)) {
-    ref_12c3f(var_2, "t9_ch_global_destroy_field_upgrade_with_engineer_or_spotter_perk_for_operator_mission", 1);
+    ref_12C3F(var_2, "t9_ch_global_destroy_field_upgrade_with_engineer_or_spotter_perk_for_operator_mission", 1);
   }
 
   if(level.getallactivequestsforteam >= 10 && istrue(var_3) && isDefined(var_2) && self.team != var_2.team) {
-    ref_12c3f(var_2, "t9_ch_global_destroy_field_upgrade_for_operator_mission_s4", 1);
+    ref_12C3F(var_2, "t9_ch_global_destroy_field_upgrade_for_operator_mission_s4", 1);
   }
 
   if(level.getallactivequestsforteam >= 9 && istrue(var_3) && isDefined(var_2) && self.team != var_2.team) {
-    ref_12c3f(var_2, "t9_ch_global_field_upgrade_destructions_s3", 1);
-    ref_12c3f(var_2, "t9_ch_global_destroy_field_upgrade_for_operator_mission_s3", 1);
+    ref_12C3F(var_2, "t9_ch_global_field_upgrade_destructions_s3", 1);
+    ref_12C3F(var_2, "t9_ch_global_destroy_field_upgrade_for_operator_mission_s3", 1);
   }
 
   if(level.getallactivequestsforteam >= 11 && istrue(var_3) && isDefined(var_2) && self.team != var_2.team && istrue(var_6)) {
-    ref_12c3f(var_2, "t9_ch_global_destroy_field_upgrade_with_engineer_or_spotter_perk_for_operator_mission_s5", 1);
+    ref_12C3F(var_2, "t9_ch_global_destroy_field_upgrade_with_engineer_or_spotter_perk_for_operator_mission_s5", 1);
   }
 
   if(level.getallactivequestsforteam >= 11 && istrue(var_3) && isDefined(var_2) && self.team != var_2.team) {
-    ref_12c3f(var_2, "t9_ch_global_destroy_field_upgrade_for_operator_mission_s5", 1);
+    ref_12C3F(var_2, "t9_ch_global_destroy_field_upgrade_for_operator_mission_s5", 1);
   }
 
   var_8 = resetstuckthermite();
@@ -1199,7 +1199,7 @@ function ref_12021(var_0) {
 
   if(level.getallactivequestsforteam >= 12) {
     if(isDefined(var_0) && istrue(var_0.isequipment)) {
-      ref_12c3f("t9_ch_global_jam_or_wz_emp_field_upgrades_and_scorestreaks_s6", 1);
+      ref_12C3F("t9_ch_global_jam_or_wz_emp_field_upgrades_and_scorestreaks_s6", 1);
       return;
     }
 
@@ -1225,7 +1225,7 @@ function ref_12003(var_0) {
   self reportchallengeuserevent("capture", var_3, var_1, var_2, var_4);
 }
 
-function ref_1201f(var_0) {
+function ref_1201F(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1283,20 +1283,20 @@ function ref_12092(var_0) {
   self reportchallengeuserevent("stim", var_0, var_1, var_2);
 
   if(level.getallactivequestsforteam >= 7) {
-    ref_12c3f("t9_ch_global_stim_shot_health_recovery_for_operator_mission", var_0);
+    ref_12C3F("t9_ch_global_stim_shot_health_recovery_for_operator_mission", var_0);
   }
 
   if(level.getallactivequestsforteam >= 9) {
-    ref_12c3f("t9_ch_global_stim_shot_health_recovery_for_operator_mission_s3", var_0);
+    ref_12C3F("t9_ch_global_stim_shot_health_recovery_for_operator_mission_s3", var_0);
   }
 
   if(level.getallactivequestsforteam >= 11) {
-    ref_12c3f("t9_ch_global_stim_shot_health_recovery_for_operator_mission_s5", var_0);
+    ref_12C3F("t9_ch_global_stim_shot_health_recovery_for_operator_mission_s5", var_0);
     return;
   }
 }
 
-function ref_1203d(var_0) {
+function ref_1203D(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1314,13 +1314,13 @@ function ref_1203d(var_0) {
 
   if(level.getallactivequestsforteam >= 10) {
     if(istrue(var_4)) {
-      ref_12c3f("t9_ch_global_hack_enemy_field_upgrades_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_hack_enemy_field_upgrades_for_operator_mission_s4", 1);
     }
   }
 
   if(level.getallactivequestsforteam >= 11) {
     if(istrue(var_4)) {
-      ref_12c3f("t9_ch_global_hacked_field_upgrade_events_for_operator_missions_s5", 1);
+      ref_12C3F("t9_ch_global_hacked_field_upgrade_events_for_operator_missions_s5", 1);
       return;
     }
 
@@ -1334,7 +1334,7 @@ function ondestroyedbytrophy() {
   }
 
   if(level.getallactivequestsforteam >= 8) {
-    ref_12c3f(self.owner, "t9_ch_global_destroy_explosive_with_trophy_for_operator_mission", 1);
+    ref_12C3F(self.owner, "t9_ch_global_destroy_explosive_with_trophy_for_operator_mission", 1);
   }
 
   var_0 = 0;
@@ -1345,18 +1345,18 @@ function ondestroyedbytrophy() {
   }
 
   if(level.getallactivequestsforteam >= 9 && var_0 && istrue(self.ishacked)) {
-    ref_12c3f(self.owner, "t9_ch_global_interceptions_with_hacked_trophy_s3", 1);
+    ref_12C3F(self.owner, "t9_ch_global_interceptions_with_hacked_trophy_s3", 1);
   }
 
   var_2 = self getlinkedparent();
 
   if(level.getallactivequestsforteam >= 9 && isDefined(var_2) && var_2 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
-    ref_12c3f(self.owner, "t9_ch_global_vehicle_mounted_trophy_intercepts_for_operator_mission_s3", 1);
+    ref_12C3F(self.owner, "t9_ch_global_vehicle_mounted_trophy_intercepts_for_operator_mission_s3", 1);
   }
 
   if(level.getallactivequestsforteam >= 11) {
-    ref_12c3f(self.owner, "t9_ch_global_destroy_projectiles_with_trophy_for_operator_mission_s5", 1);
-    ref_12c3f(self.owner, "t9_ch_global_hacked_field_upgrade_events_s5", 1);
+    ref_12C3F(self.owner, "t9_ch_global_destroy_projectiles_with_trophy_for_operator_mission_s5", 1);
+    ref_12C3F(self.owner, "t9_ch_global_hacked_field_upgrade_events_s5", 1);
     return;
   }
 }
@@ -1410,7 +1410,7 @@ function run_laser_vfx_loop(var_0) {
   return -1;
 }
 
-function ref_1200a(var_0, var_1) {
+function ref_1200A(var_0, var_1) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1432,25 +1432,25 @@ function ref_12009(var_0, var_1, var_2) {
     }
 
     if(self.hotfootreset == 3) {
-      ref_12c3f("t9_ch_global_complete_three_contracts_one_match_s1_wz", 1);
+      ref_12C3F("t9_ch_global_complete_three_contracts_one_match_s1_wz", 1);
     }
 
     if(var_0 == "domination") {
       if(level.getallactivequestsforteam >= 10) {
-        ref_12c3f("t9_ch_global_objective_capture_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_objective_capture_for_operator_mission_s4", 1);
       }
 
       if(level.getallactivequestsforteam >= 11) {
-        ref_12c3f("t9_ch_global_objective_capture_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_objective_capture_for_operator_mission_s5", 1);
       }
     }
 
     if(level.getallactivequestsforteam >= 11) {
-      ref_12c3f("t9_ch_global_clear_2_attackers_or_wz_contract_s5", 1);
+      ref_12C3F("t9_ch_global_clear_2_attackers_or_wz_contract_s5", 1);
     }
 
     if(level.getallactivequestsforteam >= 12) {
-      ref_12c3f("t9_ch_global_finish_match_with_five_objective_kills_or_wz_bounty_s6", 1);
+      ref_12C3F("t9_ch_global_finish_match_with_five_objective_kills_or_wz_bounty_s6", 1);
     }
   }
 
@@ -1458,24 +1458,24 @@ function ref_12009(var_0, var_1, var_2) {
   self reportchallengeuserevent("contract_end", var_0, var_1, isalive(self), var_2, resetstuckthermite(), var_3);
 }
 
-function ref_1204b(var_0, var_1) {
+function ref_1204B(var_0, var_1) {
   if(!challengesenabledforplayer()) {
     return;
   }
 
   if(var_1 == "supply_drop") {
-    ref_12c3f("t9_ch_global_complete_loadout_drop_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_complete_loadout_drop_for_operator_mission", 1);
   } else if(var_1 == "teamrevive") {
-    ref_12c3f("t9_ch_global_teammate_buyback_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_teammate_buyback_for_operator_mission", 1);
   } else if(level.getallactivequestsforteam >= 8 && var_1 == "killstreak") {
-    ref_12c3f("t9_ch_global_killstreaks_purchased_or_acquired_s2", 1);
+    ref_12C3F("t9_ch_global_killstreaks_purchased_or_acquired_s2", 1);
   }
 
   var_2 = relic_amped_is_there_valid_new_victim();
   self reportchallengeuserevent("buy_item", var_0, var_1, resetstuckthermite(), var_2);
 }
 
-function ref_1205f(var_0, var_1) {
+function ref_1205F(var_0, var_1) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1501,10 +1501,10 @@ function ref_1205f(var_0, var_1) {
       var_8 = var_1;
     }
   } else if(var_2 >= 8 && var_0 == "killstreak") {
-    ref_12c3f("t9_ch_global_killstreaks_purchased_or_acquired_s2", 1);
+    ref_12C3F("t9_ch_global_killstreaks_purchased_or_acquired_s2", 1);
   } else if(var_2 >= 8 && var_0 == "scavengerAmmo") {
-    ref_12c3f("t9_ch_global_ammo_pickup_scavenger_s2", 1);
-    ref_12c3f("t9_ch_global_ammo_pickup_scavenger_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ammo_pickup_scavenger_s2", 1);
+    ref_12C3F("t9_ch_global_ammo_pickup_scavenger_for_operator_mission", 1);
   } else if(var_0 == "equipment") {
     var_5 = 1;
 
@@ -1514,23 +1514,23 @@ function ref_1205f(var_0, var_1) {
   }
 
   if(var_2 >= 9 && var_0 == "scavengerAmmo") {
-    ref_12c3f("t9_ch_global_ammo_pickup_scavenger_for_operator_mission_s3", 1);
+    ref_12C3F("t9_ch_global_ammo_pickup_scavenger_for_operator_mission_s3", 1);
   }
 
   if(var_2 >= 10 && var_0 == "scavengerAmmo") {
-    ref_12c3f("t9_ch_global_ammo_pickup_scavenger_for_operator_mission_s4", 1);
+    ref_12C3F("t9_ch_global_ammo_pickup_scavenger_for_operator_mission_s4", 1);
   }
 
   if(var_2 >= 11 && var_0 == "scavengerAmmo") {
-    ref_12c3f("t9_ch_global_ammo_pickup_scavenger_for_operator_mission_s5", 1);
+    ref_12C3F("t9_ch_global_ammo_pickup_scavenger_for_operator_mission_s5", 1);
   }
 
   if(var_2 >= 12 && var_0 == "scavengerAmmo") {
-    ref_12c3f("t9_ch_global_ammo_pickup_scavenger_for_operator_mission_s6", 1);
+    ref_12C3F("t9_ch_global_ammo_pickup_scavenger_for_operator_mission_s6", 1);
   }
 
   if(var_2 >= 12 && var_0 == "killstreak") {
-    ref_12c3f("t9_ch_global_killstreaks_purchased_or_acquired_for_operator_mission_s6", 1);
+    ref_12C3F("t9_ch_global_killstreaks_purchased_or_acquired_for_operator_mission_s6", 1);
   }
 
   var_9 = relic_amped_is_there_valid_new_victim();
@@ -1551,18 +1551,18 @@ function ref_12060(var_0) {
   var_1 = var_0 * 100;
 
   if(level.getallactivequestsforteam >= 9) {
-    ref_12c3f("t9_ch_global_earn_score_for_operator_mission_s3", var_1);
+    ref_12C3F("t9_ch_global_earn_score_for_operator_mission_s3", var_1);
   }
 
   if(level.getallactivequestsforteam >= 11) {
-    ref_12c3f("t9_ch_global_earn_score_or_wz_cash_for_operator_mission_s5", var_1);
-    ref_12c3f("t9_ch_global_earn_score_or_wz_cash_s5", var_1);
-    ref_12c3f("t9_ch_common_opbundle_01_objective_3", var_1);
+    ref_12C3F("t9_ch_global_earn_score_or_wz_cash_for_operator_mission_s5", var_1);
+    ref_12C3F("t9_ch_global_earn_score_or_wz_cash_s5", var_1);
+    ref_12C3F("t9_ch_common_opbundle_01_objective_3", var_1);
   }
 
   if(level.getallactivequestsforteam >= 12) {
-    ref_12c3f("t9_ch_global_earn_score_or_wz_cash_for_operator_mission_s6", var_1);
-    ref_12c3f("t9_ch_common_opbundle_05_objective_3", var_1);
+    ref_12C3F("t9_ch_global_earn_score_or_wz_cash_for_operator_mission_s6", var_1);
+    ref_12C3F("t9_ch_common_opbundle_05_objective_3", var_1);
 
     if(!isDefined(self.get_tv_station_infil_rider_start_targetname)) {
       self.get_tv_station_infil_rider_start_targetname = 0;
@@ -1571,7 +1571,7 @@ function ref_12060(var_0) {
     self.get_tv_station_infil_rider_start_targetname += var_1;
 
     while(self.get_tv_station_infil_rider_start_targetname >= 15000) {
-      ref_12c3f("t9_ch_common_opbundle_04_objective_4", 1);
+      ref_12C3F("t9_ch_common_opbundle_04_objective_4", 1);
       self.get_tv_station_infil_rider_start_targetname -= 15000;
     }
 
@@ -1583,7 +1583,7 @@ function ref_12060(var_0) {
       self.get_turret_target_pos += var_1;
 
       if(self.get_turret_target_pos >= 25000) {
-        ref_12c3f("t9_ch_common_opbundle_06_objective_4", 1);
+        ref_12C3F("t9_ch_common_opbundle_06_objective_4", 1);
         self.get_trap_room_spawnpoints = 1;
         return;
       }
@@ -1606,7 +1606,7 @@ function ref_12002() {
   self reportchallengeuserevent("pickup", 0, 0, 1, resetstuckthermite(), var_1, var_0, 0, 0, 0, var_2);
 }
 
-function ref_120a8(var_0) {
+function ref_120A8(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1621,11 +1621,11 @@ function ref_12098(var_0) {
   }
 
   if(level.getallactivequestsforteam >= 7) {
-    ref_12c3f("t9_ch_global_resupply_teammates_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_resupply_teammates_for_operator_mission", 1);
   }
 
   if(level.getallactivequestsforteam >= 10) {
-    ref_12c3f("t9_ch_global_support_assist_score_event_s4", 1);
+    ref_12C3F("t9_ch_global_support_assist_score_event_s4", 1);
     return;
   }
 }
@@ -1643,7 +1643,7 @@ function ref_12004(var_0, var_1) {
   self reportchallengeuserevent("collect_item", var_0, resetstuckthermite(), var_2, var_1);
 }
 
-function ref_120a4(var_0, var_1) {
+function ref_120A4(var_0, var_1) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1696,7 +1696,7 @@ function ref_12050(var_0, var_1) {
   }
 }
 
-function ref_1203c(var_0) {
+function ref_1203C(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1708,7 +1708,7 @@ function ref_1203c(var_0) {
     var_2 = 1;
 
     if(var_0 == var_2) {
-      ref_12c3f("t9_ch_global_gunfight_or_wz_gulag_wins_s5", 1);
+      ref_12C3F("t9_ch_global_gunfight_or_wz_gulag_wins_s5", 1);
       return;
     }
 
@@ -1716,7 +1716,7 @@ function ref_1203c(var_0) {
   }
 }
 
-function ref_1205a(var_0) {
+function ref_1205A(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1726,11 +1726,11 @@ function ref_1205a(var_0) {
   }
 
   if(var_0 <= 15) {
-    ref_12c3f("t9_ch_global_earn_team_top_15_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_earn_team_top_15_for_operator_mission", 1);
   }
 
   if(var_0 <= 3) {
-    ref_12c3f("t9_ch_global_place_top3_ft_s1", 1);
+    ref_12C3F("t9_ch_global_place_top3_ft_s1", 1);
   }
 
   var_1 = undefined;
@@ -1746,7 +1746,7 @@ function ref_1205a(var_0) {
   }
 
   if(var_2 <= 0.25) {
-    ref_12c3f("t9_ch_global_top_25_percent_finish_s3", 1);
+    ref_12C3F("t9_ch_global_top_25_percent_finish_s3", 1);
   }
 
   if(level.getallactivequestsforteam >= 10) {
@@ -1763,58 +1763,58 @@ function ref_1205a(var_0) {
       }
 
       if(var_4 >= 2) {
-        ref_12c3f("t9_ch_global_finish_match_with_2x_more_ekia_than_deaths_s4", 1);
+        ref_12C3F("t9_ch_global_finish_match_with_2x_more_ekia_than_deaths_s4", 1);
       }
 
       if(var_3 > self.deaths) {
-        ref_12c3f("t9_ch_global_finish_match_with_more_ekia_than_deaths_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_finish_match_with_more_ekia_than_deaths_for_operator_mission_s4", 1);
 
         if(level.getallactivequestsforteam >= 11) {
-          ref_12c3f("t9_ch_global_finish_match_with_more_ekia_than_deaths_for_operator_mission_s5", 1);
+          ref_12C3F("t9_ch_global_finish_match_with_more_ekia_than_deaths_for_operator_mission_s5", 1);
         }
 
         if(level.getallactivequestsforteam >= 12) {
-          ref_12c3f("t9_ch_global_finish_match_with_more_ekia_than_deaths_for_operator_mission_s6", 1);
-          ref_12c3f("t9_ch_common_opbundle_05_objective_4", 1);
+          ref_12C3F("t9_ch_global_finish_match_with_more_ekia_than_deaths_for_operator_mission_s6", 1);
+          ref_12C3F("t9_ch_common_opbundle_05_objective_4", 1);
         }
       }
     }
 
     if(var_2 <= 0.1) {
-      ref_12c3f("t9_ch_global_top_10_percent_finish_s4", 1);
+      ref_12C3F("t9_ch_global_top_10_percent_finish_s4", 1);
     }
 
     if(var_2 <= 0.25) {
-      ref_12c3f("t9_ch_global_finish_match_in_top_25_percent_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_finish_match_in_top_25_percent_for_operator_mission_s4", 1);
 
       if(level.getallactivequestsforteam >= 12) {
-        ref_12c3f("t9_ch_global_finish_match_in_top_25_percent_for_operator_mission_s6", 1);
-        ref_12c3f("t9_ch_common_opbundle_04_objective_2", 1);
-        ref_12c3f("t9_ch_common_opbundle_07_objective_4", 1);
+        ref_12C3F("t9_ch_global_finish_match_in_top_25_percent_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_common_opbundle_04_objective_2", 1);
+        ref_12C3F("t9_ch_common_opbundle_07_objective_4", 1);
       }
     }
   }
 
   if(level.getallactivequestsforteam >= 11) {
     if(var_2 <= 0.5) {
-      ref_12c3f("t9_ch_common_opbundle_01_objective_4", 1);
+      ref_12C3F("t9_ch_common_opbundle_01_objective_4", 1);
     }
 
     if(isDefined(self.kills) && isDefined(self.assists) && isDefined(self.deaths)) {
       var_3 = self.kills + self.assists;
 
       if(var_3 > self.deaths) {
-        ref_12c3f("t9_ch_common_opbundle_02_objective_4", 1);
+        ref_12C3F("t9_ch_common_opbundle_02_objective_4", 1);
       }
     }
   }
 
   if(level.getallactivequestsforteam >= 12) {
     if(isDefined(level.disable_super_in_turret.name) && level.disable_super_in_turret.name == "gxp") {
-      ref_12c3f("t9_ch_common_season_6_wz_event_challenge_1", 1);
+      ref_12C3F("t9_ch_common_season_6_wz_event_challenge_1", 1);
 
       if(var_0 <= 10) {
-        ref_12c3f("t9_ch_common_season_6_wz_event_challenge_2", 1);
+        ref_12C3F("t9_ch_common_season_6_wz_event_challenge_2", 1);
       }
     }
   }
@@ -1822,26 +1822,26 @@ function ref_1205a(var_0) {
   var_5 = getDvar("scr_br_gametype");
 
   if(var_0 == 1 && var_5 == "dbd" && scripts\cp_mp\utility\game_utility::turretdisabled()) {
-    ref_120a4("dbd_atlantis_victory_reward");
+    ref_120A4("dbd_atlantis_victory_reward");
   }
 
   if(var_5 == "vov") {
     if(var_0 == 1) {
-      ref_120a4("vov_victory_reward");
+      ref_120A4("vov_victory_reward");
     }
 
-    ref_120a4("vov_participation_reward");
+    ref_120A4("vov_participation_reward");
   }
 
   if(scripts\cp_mp\utility\game_utility::tutorialzoneenter() && var_0 == 1) {
-    ref_120a4("vr_victory_reward");
+    ref_120A4("vr_victory_reward");
   }
 
   if(var_0 == 1 && (var_5 == "rebirth" || var_5 == "rebirth_reverse" || var_5 == "rebirth_dbd" || var_5 == "rebirth_dbd_reverse")) {
     ref_12004("resu_victory");
   }
 
-  if(var_0 == 1 && var_5 == "zxp" && !ref_125f3()) {
+  if(var_0 == 1 && var_5 == "zxp" && !ref_125F3()) {
     ref_12004("zxp_win");
   }
 
@@ -1851,7 +1851,7 @@ function ref_1205a(var_0) {
   }
 }
 
-function ref_1208f() {
+function ref_1208F() {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1875,7 +1875,7 @@ function ongesture() {
   reportchallengestatamount("gesture", 1);
 }
 
-function ref_1301e(var_0, var_1) {
+function ref_1301E(var_0, var_1) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -1912,7 +1912,7 @@ function ref_12000(var_0) {
     return;
   }
 
-  ref_12c3f("t9_ch_global_block_damage_inserted_armor_for_operator_mission_s3", var_0);
+  ref_12C3F("t9_ch_global_block_damage_inserted_armor_for_operator_mission_s3", var_0);
 }
 
 function ref_12007(var_0, var_1) {
@@ -1923,11 +1923,11 @@ function ref_12007(var_0, var_1) {
   switch (weaponclass(var_0)) {
     case "sniper":
       if(level.getallactivequestsforteam >= 10 && var_1 > 0 && var_1 % 3 == 0) {
-        ref_12c3f("t9_ch_global_fire_x_consecutive_damaging_shots_with_sniper_rifle_s4", 1);
+        ref_12C3F("t9_ch_global_fire_x_consecutive_damaging_shots_with_sniper_rifle_s4", 1);
       }
 
       if(level.getallactivequestsforteam >= 12 && var_1 > 0 && var_1 % 3 == 0) {
-        ref_12c3f("t9_ch_global_fire_x_consecutive_damaging_shots_with_sniper_rifle_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_fire_x_consecutive_damaging_shots_with_sniper_rifle_for_operator_mission_s6", 1);
       }
 
       break;
@@ -1942,24 +1942,24 @@ function ref_12094() {
   }
 
   if(level.getallactivequestsforteam >= 9) {
-    ref_12c3f("t9_ch_global_kills_scorestreak_or_loadout_drop_weapons_s3", 1);
+    ref_12C3F("t9_ch_global_kills_scorestreak_or_loadout_drop_weapons_s3", 1);
   }
 
   if(level.getallactivequestsforteam >= 10) {
-    ref_12c3f("t9_ch_global_scorestreak_weapon_or_stopping_power_kill_for_operator_mission_s4", 1);
+    ref_12C3F("t9_ch_global_scorestreak_weapon_or_stopping_power_kill_for_operator_mission_s4", 1);
   }
 
   if(level.getallactivequestsforteam >= 12) {
-    ref_12c3f("t9_ch_global_scorestreak_weapon_or_stopping_power_kill_for_operator_mission_s6", 1);
+    ref_12C3F("t9_ch_global_scorestreak_weapon_or_stopping_power_kill_for_operator_mission_s6", 1);
 
-    if(!isDefined(self.ref_12a8a)) {
-      self.ref_12a8a = 0;
+    if(!isDefined(self.ref_12A8A)) {
+      self.ref_12A8A = 0;
     }
 
-    self.ref_12a8a++;
+    self.ref_12A8A++;
 
-    if(self.ref_12a8a >= 2) {
-      ref_12c3f("t9_ch_global_rapid_kills_with_scorestreak_weapon_or_wz_stopping_power_s6", 1);
+    if(self.ref_12A8A >= 2) {
+      ref_12C3F("t9_ch_global_rapid_kills_with_scorestreak_weapon_or_wz_stopping_power_s6", 1);
       return;
     }
 
@@ -1967,17 +1967,17 @@ function ref_12094() {
   }
 }
 
-function ref_1207c() {
+function ref_1207C() {
   if(!challengesenabledforplayer()) {
     return;
   }
 
   if(level.getallactivequestsforteam >= 9) {
-    ref_12c3f("t9_ch_global_detected_kill_field_mic_or_recon_drone_for_operator_mission_s3", 1);
+    ref_12C3F("t9_ch_global_detected_kill_field_mic_or_recon_drone_for_operator_mission_s3", 1);
   }
 
   if(level.getallactivequestsforteam >= 11) {
-    ref_12c3f("t9_ch_global_detected_kill_field_mic_or_recon_drone_for_operator_mission_s5", 1);
+    ref_12C3F("t9_ch_global_detected_kill_field_mic_or_recon_drone_for_operator_mission_s5", 1);
     return;
   }
 }
@@ -2046,7 +2046,7 @@ function ref_14583(var_0, var_1) {
   return var_4;
 }
 
-function ref_12c3f(var_0, var_1) {
+function ref_12C3F(var_0, var_1) {
   if(!isPlayer(self) || isai(self)) {
     return;
   }
@@ -2065,7 +2065,7 @@ function ref_12c3f(var_0, var_1) {
 }
 
 function ref_13276() {
-  if(isDefined(level.ref_139e2)) {
+  if(isDefined(level.ref_139E2)) {
     return;
   }
 
@@ -2075,7 +2075,7 @@ function ref_13276() {
 
 function routers_picked_up(var_0) {
   ref_13276();
-  var_1 = level.ref_139e2[var_0];
+  var_1 = level.ref_139E2[var_0];
 
   if(isDefined(var_1)) {
     var_2 = var_0;
@@ -2106,8 +2106,8 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       var_9 = self.killcountthislife + 1;
     }
 
-    if(self.recentkillcount > 1 && !istrue(self.ref_11e04)) {
-      self.ref_11e04 = 1;
+    if(self.recentkillcount > 1 && !istrue(self.ref_11E04)) {
+      self.ref_11E04 = 1;
       var_10 = 1;
     }
   }
@@ -2222,63 +2222,63 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     if(var_7) {
       if(var_39) {
         if(var_0 & 8) {
-          ref_12c3f(var_38 + "destroy_vehicle_ground", 1);
+          ref_12C3F(var_38 + "destroy_vehicle_ground", 1);
         }
 
         if(var_0 & 4) {
-          ref_12c3f(var_38 + "destroy_vehicle_air", 1);
+          ref_12C3F(var_38 + "destroy_vehicle_air", 1);
         }
 
         if(var_0 & 98 && var_1 != "iw8_sn_t9crossbow_mp") {
-          ref_12c3f(var_38 + "destroy_any", 1);
+          ref_12C3F(var_38 + "destroy_any", 1);
         }
 
         if(var_0 & 32 && var_11 == "rocketlauncher" && var_1 != "iw8_sn_t9crossbow_mp") {
-          if(!isDefined(self.ref_12d7b)) {
-            self.ref_12d7b = 0;
+          if(!isDefined(self.ref_12D7B)) {
+            self.ref_12D7B = 0;
           }
 
-          self.ref_12d7b += 1;
+          self.ref_12D7B += 1;
 
-          if(self.ref_12d7b == 3) {
-            ref_12c3f(var_38 + "destroy_3_vehicles_in_one_game", 1);
+          if(self.ref_12D7B == 3) {
+            ref_12C3F(var_38 + "destroy_3_vehicles_in_one_game", 1);
           }
         }
 
         if((var_0 & 4 || var_0 & 2) && var_11 == "rocketlauncher") {
           if(var_8 >= 8) {
-            ref_12c3f("t9_ch_global_destroy_aircraft_with_launchers_for_operator_mission", 1);
+            ref_12C3F("t9_ch_global_destroy_aircraft_with_launchers_for_operator_mission", 1);
           }
 
           if(var_8 >= 11) {
-            ref_12c3f("t9_ch_global_destroy_aircraft_with_launchers_for_operator_mission_s5", 1);
+            ref_12C3F("t9_ch_global_destroy_aircraft_with_launchers_for_operator_mission_s5", 1);
           }
         }
       }
 
       if(var_0 & 32) {
-        ref_12c3f("t9_ch_global_destroy_vehicle_for_operator_unlock", 1);
-        ref_12c3f("t9_ch_global_destroy_vehicle_for_operator_mission", 1);
-        ref_12c3f("t9_ch_global_destroy_vehicle_for_operator_mission_op2", 1);
+        ref_12C3F("t9_ch_global_destroy_vehicle_for_operator_unlock", 1);
+        ref_12C3F("t9_ch_global_destroy_vehicle_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_destroy_vehicle_for_operator_mission_op2", 1);
       }
 
       if(var_8 >= 7) {
         if(var_0 & 8 && istrue(var_16)) {
-          ref_12c3f("t9_ch_global_satchel_charge_ground_vehicle_destructions_s1", 1);
+          ref_12C3F("t9_ch_global_satchel_charge_ground_vehicle_destructions_s1", 1);
         }
 
         if(var_0 & 6) {
-          ref_12c3f("t9_ch_global_destroy_aircraft_s1", 1);
+          ref_12C3F("t9_ch_global_destroy_aircraft_s1", 1);
         }
       }
 
       if(var_8 >= 8) {
         if(var_0 & 8) {
-          ref_12c3f("t9_ch_global_ground_vehicle_destructions_s2", 1);
-          ref_12c3f("t9_ch_global_ground_vehicle_destructions_for_operator_mission", 1);
+          ref_12C3F("t9_ch_global_ground_vehicle_destructions_s2", 1);
+          ref_12C3F("t9_ch_global_ground_vehicle_destructions_for_operator_mission", 1);
 
           if(istrue(var_18)) {
-            ref_12c3f("t9_ch_global_land_mine_ground_vehicle_destructions_s2", 1);
+            ref_12C3F("t9_ch_global_land_mine_ground_vehicle_destructions_s2", 1);
           }
         }
       }
@@ -2288,24 +2288,24 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_41 = var_15 == "cruise_predator" || var_15 == "pac_sentry" || var_15 == "bradley" || var_15 == "chopper_gunner" || var_15 == "juggernaut";
 
         if((var_40 || var_41) && var_0 & 32) {
-          ref_12c3f("t9_ch_global_vehicle_destruction_in_vehicle_s3", 1);
+          ref_12C3F("t9_ch_global_vehicle_destruction_in_vehicle_s3", 1);
         }
 
         if(var_0 & 32) {
-          ref_12c3f("t9_ch_global_destroy_vehicle_for_operator_mission_s3", 1);
+          ref_12C3F("t9_ch_global_destroy_vehicle_for_operator_mission_s3", 1);
         }
       }
 
       if(var_8 >= 10) {
         if(var_0 & 34) {
-          ref_12c3f("t9_ch_global_destroy_vehicle_or_scorestreak_for_operator_mission_s4", 1);
-          ref_12c3f("t9_ch_global_destroy_vehicle_or_scorestreak_s4", 1);
+          ref_12C3F("t9_ch_global_destroy_vehicle_or_scorestreak_for_operator_mission_s4", 1);
+          ref_12C3F("t9_ch_global_destroy_vehicle_or_scorestreak_s4", 1);
         }
       }
 
       if(var_8 >= 11) {
         if(var_0 & 34) {
-          ref_12c3f("t9_ch_global_destroy_vehicle_or_scorestreak_for_operator_mission_s5", 1);
+          ref_12C3F("t9_ch_global_destroy_vehicle_or_scorestreak_for_operator_mission_s5", 1);
         }
       }
     }
@@ -2332,8 +2332,8 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       if(isDefined(var_46) && var_46 == "optic") {
         var_47 = tablelookup("mp/attachmenttable.csv", 4, var_44, 11);
 
-        if(isDefined(level.ref_139e1[var_47])) {
-          ref_12c3f(level.ref_139e1[var_47], 1);
+        if(isDefined(level.ref_139E1[var_47])) {
+          ref_12C3F(level.ref_139E1[var_47], 1);
         }
 
         break;
@@ -2342,83 +2342,83 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   if(var_39) {
-    ref_12c3f(var_38 + "ekia", 1);
+    ref_12C3F(var_38 + "ekia", 1);
 
     if(var_7) {
-      ref_12c3f(var_38 + "kills", 1);
+      ref_12C3F(var_38 + "kills", 1);
 
       if(var_9 % 2 == 0) {
-        ref_12c3f(var_38 + "killstreak_3", 1);
+        ref_12C3F(var_38 + "killstreak_3", 1);
       }
 
       if(var_9 % 5 == 0) {
-        ref_12c3f(var_38 + "killstreak_5", 1);
+        ref_12C3F(var_38 + "killstreak_5", 1);
       }
 
-      if(isDefined(self.ref_12a86) && isDefined(self.ref_12a86[var_2.basename]) && self.ref_12a86[var_2.basename] == 2) {
-        ref_12c3f(var_38 + "multikill_2", 1);
+      if(isDefined(self.ref_12A86) && isDefined(self.ref_12A86[var_2.basename]) && self.ref_12A86[var_2.basename] == 2) {
+        ref_12C3F(var_38 + "multikill_2", 1);
       }
 
       if(var_4 & 268435456) {
-        ref_12c3f(var_38 + "kill_enemy_while_holding_breath", 1);
+        ref_12C3F(var_38 + "kill_enemy_while_holding_breath", 1);
       }
 
       if(var_4 & 4096) {
-        ref_12c3f(var_38 + "kill_enemy_when_injured", 1);
+        ref_12C3F(var_38 + "kill_enemy_when_injured", 1);
       }
 
       if(var_4 & 256) {
-        ref_12c3f(var_38 + "kill_enemy_while_sliding", 1);
+        ref_12C3F(var_38 + "kill_enemy_while_sliding", 1);
       }
 
       if(var_5 & 1048576) {
         if(var_1 == "iw8_sn_t9crossbow_mp" && !(var_5 & 1073741824)) {
-          ref_12c3f(var_38 + "kill_enemy_taking_cover_from_you", 1);
+          ref_12C3F(var_38 + "kill_enemy_taking_cover_from_you", 1);
         } else {
-          ref_12c3f(var_38 + "kill_smoked_blinded_stunned", 1);
+          ref_12C3F(var_38 + "kill_smoked_blinded_stunned", 1);
         }
       }
 
       if(var_5 & 524288) {
         if(var_1 == "iw8_sn_t9crossbow_mp" && !(var_5 & 1073741824)) {
-          ref_12c3f(var_38 + "kill_enemy_taking_cover_from_you", 1);
+          ref_12C3F(var_38 + "kill_enemy_taking_cover_from_you", 1);
         } else {
-          ref_12c3f(var_38 + "kill_detected_stunned_blinded", 1);
+          ref_12C3F(var_38 + "kill_detected_stunned_blinded", 1);
         }
       }
 
       if(var_4 & 262144) {
         if(var_1 != "iw8_sn_t9crossbow_mp") {
-          ref_12c3f(var_38 + "kill_enemy_taking_cover_from_you", 1);
+          ref_12C3F(var_38 + "kill_enemy_taking_cover_from_you", 1);
         }
       }
 
       if(var_4 & 4) {
-        ref_12c3f(var_38 + "backstabber_kill", 1);
+        ref_12C3F(var_38 + "backstabber_kill", 1);
       }
 
       if(var_4 & 262144) {
-        ref_12c3f(var_38 + "longshot_kill", 1);
+        ref_12C3F(var_38 + "longshot_kill", 1);
       }
 
       if(var_4 & 1048576) {
         if(var_1 == "iw8_sn_t9crossbow_mp") {
-          ref_12c3f(var_38 + "destroy_any", 1);
+          ref_12C3F(var_38 + "destroy_any", 1);
         } else {
-          ref_12c3f(var_38 + "headshots", 1);
+          ref_12C3F(var_38 + "headshots", 1);
         }
       }
 
       if(var_4 & 1) {
         if(var_1 == "iw8_sn_t9crossbow_mp") {
-          ref_12c3f(var_38 + "destroy_3_vehicles_in_one_game", 1);
+          ref_12C3F(var_38 + "destroy_3_vehicles_in_one_game", 1);
         } else {
-          ref_12c3f(var_38 + "kill_enemy_one_bullet_sniper", 1);
+          ref_12C3F(var_38 + "kill_enemy_one_bullet_sniper", 1);
         }
       }
 
       if(var_4 & 524288) {
-        ref_12c3f(var_38 + "point_blank_kill", 1);
+        ref_12C3F(var_38 + "point_blank_kill", 1);
       }
     }
   }
@@ -2434,14 +2434,14 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       var_52 = routers_picked_up(var_51);
 
       if(isDefined(var_52) && turn_on_have_target_hud(var_51)) {
-        ref_12c3f(var_52 + "finishing_move_kill", 1);
+        ref_12C3F(var_52 + "finishing_move_kill", 1);
       }
     }
   }
 
   if(var_7) {
     if(var_11 == "rocketlauncher") {
-      ref_12c3f("t9_ch_global_kill_with_launcher_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_kill_with_launcher_for_operator_mission", 1);
     }
 
     if(var_11 == "spread") {
@@ -2452,229 +2452,229 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       }
 
       if(turn_on_have_target_hud("iw8_sh_t9fullauto_mp") && self.intel_guys == 3 && !istrue(self.shouldzombiespawntags)) {
-        ref_12c3f("t9_ch_global_shotgun_killstreak_3_for_weapon_unlock", 1);
+        ref_12C3F("t9_ch_global_shotgun_killstreak_3_for_weapon_unlock", 1);
         self.shouldzombiespawntags = 1;
       }
     }
 
     if(turn_on_have_target_hud("iw8_ar_t9fasthandling_mp") && var_11 == "rifle" && var_9 == 3 && !istrue(self.shouldreflect)) {
-      ref_12c3f("t9_ch_global_assault_killstreak_3_for_weapon_unlock", 1);
+      ref_12C3F("t9_ch_global_assault_killstreak_3_for_weapon_unlock", 1);
       self.shouldreflect = 1;
     }
 
-    if(turn_on_have_target_hud("iw8_sm_t9fastfire_mp") && var_11 == "smg" && isDefined(self.ref_12a89) && self.ref_12a89 == 2 && !istrue(self.shouldrespawn)) {
-      ref_12c3f("t9_ch_global_smg_multikill_2_for_weapon_unlock", 1);
+    if(turn_on_have_target_hud("iw8_sm_t9fastfire_mp") && var_11 == "smg" && isDefined(self.ref_12A89) && self.ref_12A89 == 2 && !istrue(self.shouldrespawn)) {
+      ref_12C3F("t9_ch_global_smg_multikill_2_for_weapon_unlock", 1);
       self.shouldrespawn = 1;
     }
 
     if(var_11 == "sniper" && var_4 & 1) {
-      ref_12c3f("t9_ch_global_kill_enemy_one_bullet_sniper_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_kill_enemy_one_bullet_sniper_for_operator_mission", 1);
     }
 
     if(var_11 == "throwingknife" || istrue(var_21)) {
-      ref_12c3f("t9_ch_global_hatchet_kill_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_hatchet_kill_for_operator_mission", 1);
     }
 
     if(var_1 == "iw8_me_t9loadout_mp") {
-      ref_12c3f("t9_ch_global_knife_loadout_kill_for_operator_mission", 1);
-      ref_12c3f("t9_ch_global_knife_loadout_kill_for_operator_mission_op2", 1);
+      ref_12C3F("t9_ch_global_knife_loadout_kill_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_knife_loadout_kill_for_operator_mission_op2", 1);
     }
 
     if(var_5 & 1073741824) {
-      if(isDefined(self.ref_12a86) && isDefined(self.ref_12a86[var_2.basename]) && self.ref_12a86[var_2.basename] == 2 && !istrue(self.should_enter_combat_after_checking_smoke_grenade)) {
+      if(isDefined(self.ref_12A86) && isDefined(self.ref_12A86[var_2.basename]) && self.ref_12A86[var_2.basename] == 2 && !istrue(self.should_enter_combat_after_checking_smoke_grenade)) {
         if(turn_on_have_target_hud("iw8_me_t9sledgehammer_mp")) {
-          ref_12c3f("t9_ch_global_knife_loadout_multikill_2_for_weapon_unlock", 1);
+          ref_12C3F("t9_ch_global_knife_loadout_multikill_2_for_weapon_unlock", 1);
           self.should_enter_combat_after_checking_smoke_grenade = 1;
         }
       }
     }
 
     if(var_9 % 5 == 0) {
-      ref_12c3f("t9_ch_global_killstreak_5_for_operator_unlock", 1);
-      ref_12c3f("t9_ch_global_killstreak_5_for_operator_mission", 1);
-      ref_12c3f("t9_ch_global_killstreak_5_for_operator_mission_op2", 1);
+      ref_12C3F("t9_ch_global_killstreak_5_for_operator_unlock", 1);
+      ref_12C3F("t9_ch_global_killstreak_5_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_killstreak_5_for_operator_mission_op2", 1);
     }
 
     if(var_10) {
-      ref_12c3f("t9_ch_global_multikill_2_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_multikill_2_for_operator_mission", 1);
     }
 
     if(istrue(var_14)) {
-      ref_12c3f("t9_ch_global_kill_with_scorestreak_for_operator_unlock", 1);
-      ref_12c3f("t9_ch_global_kill_with_scorestreak_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_kill_with_scorestreak_for_operator_unlock", 1);
+      ref_12C3F("t9_ch_global_kill_with_scorestreak_for_operator_mission", 1);
     }
 
     if(istrue(var_12) && (istrue(var_25) || istrue(var_26))) {
-      ref_12c3f("t9_ch_global_lethal_kill_with_quartermaster_or_restock_perk_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_lethal_kill_with_quartermaster_or_restock_perk_for_operator_mission", 1);
     }
 
     if(var_5 & 524288) {
-      ref_12c3f("t9_ch_global_kill_detected_enemies_for_operator_unlock", 1);
+      ref_12C3F("t9_ch_global_kill_detected_enemies_for_operator_unlock", 1);
     }
 
     if(var_5 & 256) {
-      ref_12c3f("t9_ch_global_finishing_move_kill_for_operator_unlock", 1);
-      ref_12c3f("t9_ch_global_finishing_move_kill_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_finishing_move_kill_for_operator_unlock", 1);
+      ref_12C3F("t9_ch_global_finishing_move_kill_for_operator_mission", 1);
 
       if(!istrue(self.show_balloon_deploy_hint) && var_5 & 1073741824) {
-        if(!isDefined(self.ref_1440a)) {
-          self.ref_1440a = 1;
+        if(!isDefined(self.ref_1440A)) {
+          self.ref_1440A = 1;
         } else {
-          self.ref_1440a++;
+          self.ref_1440A++;
         }
 
-        if(self.ref_1440a == 2) {
+        if(self.ref_1440A == 2) {
           if(turn_on_have_target_hud("iw8_me_t9wakizashi_mp")) {
-            ref_12c3f("t9_ch_global_knife_loadout_finishing_move_kill_2_for_weapon_unlock", 1);
+            ref_12C3F("t9_ch_global_knife_loadout_finishing_move_kill_2_for_weapon_unlock", 1);
             self.show_balloon_deploy_hint = 1;
-            self.ref_1440a = undefined;
+            self.ref_1440A = undefined;
           }
         }
       }
     }
 
     if(istrue(self.gulag)) {
-      ref_12c3f("t9_ch_global_win_one_v_one_as_prisoner_for_operator_mission", 1);
-      ref_12c3f("t9_ch_global_win_one_v_one_as_prisoner_for_operator_mission_op2", 1);
+      ref_12C3F("t9_ch_global_win_one_v_one_as_prisoner_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_win_one_v_one_as_prisoner_for_operator_mission_op2", 1);
     }
 
     if(var_4 & 512 || var_4 & 1024) {
-      ref_12c3f("t9_ch_global_kill_enemy_while_crouched_or_prone_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_kill_enemy_while_crouched_or_prone_for_operator_mission", 1);
     }
 
     if(var_4 & 1048576) {
-      ref_12c3f("t9_ch_global_headshots_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_headshots_for_operator_mission", 1);
     }
 
     if(var_4 & 524288) {
-      ref_12c3f("t9_ch_global_point_blank_kill_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_point_blank_kill_for_operator_mission", 1);
     }
 
     if(var_4 & 262144) {
-      ref_12c3f("t9_ch_global_longshot_kill_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_longshot_kill_for_operator_mission", 1);
     }
 
     if(var_4 & 4096) {
-      ref_12c3f("t9_ch_global_kill_enemy_when_injured_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_kill_enemy_when_injured_for_operator_mission", 1);
     }
 
     if(var_4 & 2097152) {
-      ref_12c3f("t9_ch_global_kill_enemy_who_killed_teammate_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_kill_enemy_who_killed_teammate_for_operator_mission", 1);
     }
 
     if(istrue(var_16)) {
-      ref_12c3f("t9_ch_global_satchel_charge_kill_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_satchel_charge_kill_for_operator_mission", 1);
     }
 
     if(istrue(var_17)) {
-      ref_12c3f("t9_ch_global_molotov_kill_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_molotov_kill_for_operator_mission", 1);
     }
   }
 
   if(var_8 >= 8) {
     if(var_7) {
       if(istrue(var_17)) {
-        ref_12c3f("t9_ch_global_molotov_kill_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_molotov_kill_for_operator_mission", 1);
       }
 
       if(var_1 == "iw8_me_t9loadout_mp") {
-        ref_12c3f("t9_ch_global_knife_loadout_kill_for_operator_mission_op3", 1);
+        ref_12C3F("t9_ch_global_knife_loadout_kill_for_operator_mission_op3", 1);
       }
 
       if(istrue(var_14)) {
-        ref_12c3f("t9_ch_global_kill_with_scorestreak_for_operator_mission_op2", 1);
+        ref_12C3F("t9_ch_global_kill_with_scorestreak_for_operator_mission_op2", 1);
 
         if(isDefined(var_15) && (var_15 == "precision_airstrike" || var_15 == "toma_strike")) {
-          ref_12c3f("t9_ch_global_kill_with_scorestreak_strike_for_operator_mission", 1);
+          ref_12C3F("t9_ch_global_kill_with_scorestreak_strike_for_operator_mission", 1);
         }
       }
 
       if(var_5 & 8388608) {
-        ref_12c3f("t9_ch_global_kill_blinded_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_kill_blinded_for_operator_mission", 1);
       }
 
       if(isDefined(self.waitillcanspawnclient) && gettime() < self.waitillcanspawnclient + 20000) {
-        ref_12c3f("t9_ch_global_kill_enemy_after_skydiving_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_kill_enemy_after_skydiving_for_operator_mission", 1);
       }
 
       if(var_4 & 524288) {
-        ref_12c3f("t9_ch_global_point_blank_kill_for_operator_mission_op2", 1);
+        ref_12C3F("t9_ch_global_point_blank_kill_for_operator_mission_op2", 1);
       }
 
       if(istrue(var_16)) {
-        ref_12c3f("t9_ch_global_satchel_charge_kill_for_operator_mission_op2", 1);
+        ref_12C3F("t9_ch_global_satchel_charge_kill_for_operator_mission_op2", 1);
       }
 
       if(istrue(var_19) || var_1 == "equip_semtex") {
-        ref_12c3f("t9_ch_global_semtex_kill_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_semtex_kill_for_operator_mission", 1);
       }
 
       if(var_11 == "rifle" && var_4 & 1048576) {
-        ref_12c3f("t9_ch_global_headshots_assault_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_headshots_assault_for_operator_mission", 1);
       }
 
       if(isDefined(self.plantedsuperequip)) {
         foreach(var_55 in self.plantedsuperequip) {
           if(isDefined(var_55.origin) && distancesquared(var_55.origin, self.origin) < 640000) {
-            ref_12c3f("t9_ch_global_kill_near_non_lethal_field_upgrade_for_operator_mission", 1);
+            ref_12C3F("t9_ch_global_kill_near_non_lethal_field_upgrade_for_operator_mission", 1);
             break;
           }
         }
       }
 
       if(var_5 & 536870912) {
-        ref_12c3f("t9_ch_global_nightingale_kills_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_nightingale_kills_for_operator_mission", 1);
       }
 
       if(var_5 & 4194304) {
-        ref_12c3f("t9_ch_global_uav_kill_for_operator_mission", 1);
-        ref_12c3f("t9_ch_global_uav_kill_for_operator_mission_op2", 1);
+        ref_12C3F("t9_ch_global_uav_kill_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_uav_kill_for_operator_mission_op2", 1);
       }
 
       if(var_11 == "throwingknife" || istrue(var_21)) {
-        ref_12c3f("t9_ch_global_hatchet_kill_for_operator_mission_op2", 1);
+        ref_12C3F("t9_ch_global_hatchet_kill_for_operator_mission_op2", 1);
       }
 
       if(var_4 & 262144) {
-        ref_12c3f("t9_ch_global_longshot_kill_for_operator_mission_op2", 1);
+        ref_12C3F("t9_ch_global_longshot_kill_for_operator_mission_op2", 1);
       }
 
       if(var_5 & 512) {
-        ref_12c3f("t9_ch_global_smoke_grenade_kill_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_smoke_grenade_kill_for_operator_mission", 1);
       }
 
       if(var_9 == 3) {
-        ref_12c3f("t9_ch_global_killstreak_3_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_killstreak_3_for_operator_mission", 1);
       }
 
       if(istrue(var_20)) {
-        ref_12c3f("t9_ch_global_frag_grenade_kill_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_frag_grenade_kill_for_operator_mission", 1);
       }
 
       if(self.recentkillcount == 2) {
-        ref_12c3f("t9_ch_global_multikill_2_for_operator_mission_op2", 1);
+        ref_12C3F("t9_ch_global_multikill_2_for_operator_mission_op2", 1);
       }
 
       if(var_5 & 256) {
-        ref_12c3f("t9_ch_global_finishing_move_kill_for_operator_mission_op2", 1);
+        ref_12C3F("t9_ch_global_finishing_move_kill_for_operator_mission_op2", 1);
       }
     }
 
     if(var_4 & 16384) {
-      ref_12c3f("t9_ch_global_ekia_with_picked_up_weapon_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_with_picked_up_weapon_for_operator_mission", 1);
     }
 
     if(var_11 == "pistol") {
-      ref_12c3f("t9_ch_global_ekia_pistol_for_operator_mission", 1);
-      ref_12c3f("t9_ch_global_ekia_pistol_for_operator_mission_op2", 1);
+      ref_12C3F("t9_ch_global_ekia_pistol_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_pistol_for_operator_mission_op2", 1);
     }
 
     if(var_4 & 131072) {
-      ref_12c3f("t9_ch_global_ekia_secondary_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_secondary_for_operator_mission", 1);
     }
 
     if(isDefined(self) && isDefined(self.modifiers) && istrue(self.modifiers["victimstunnedkill"])) {
-      ref_12c3f("t9_ch_global_concussion_grenade_kill_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_concussion_grenade_kill_for_operator_mission", 1);
     }
 
     var_57 = undefined;
@@ -2684,50 +2684,50 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
 
     if(isDefined(var_57) && [[var_57]](var_2.basename) == "weapon_tactical") {
-      ref_12c3f("t9_ch_global_ekia_tactical_rifle_for_operator_mission", 1);
-      ref_12c3f("t9_ch_global_ekia_tactical_rifle_for_operator_mission_op2", 1);
+      ref_12C3F("t9_ch_global_ekia_tactical_rifle_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_tactical_rifle_for_operator_mission_op2", 1);
     }
 
     if(istrue(var_34)) {
-      ref_12c3f("t9_ch_global_ekia_with_flak_jacket_perk_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_with_flak_jacket_perk_for_operator_mission", 1);
     }
 
     if(var_11 == "smg") {
-      ref_12c3f("t9_ch_global_ekia_smg_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_smg_for_operator_mission", 1);
     }
 
     if(var_24 & 2) {
-      ref_12c3f("t9_ch_global_ekia_while_in_ground_vehicle_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_while_in_ground_vehicle_for_operator_mission", 1);
     }
 
     if(istrue(var_30)) {
-      ref_12c3f("t9_ch_global_ekia_paranoia_or_high_alert_for_operator_mission_op2", 1);
+      ref_12C3F("t9_ch_global_ekia_paranoia_or_high_alert_for_operator_mission_op2", 1);
     }
 
     if(var_5 & 2048) {
-      ref_12c3f("t9_ch_global_ekia_downed_for_operator_mission_op2", 1);
+      ref_12C3F("t9_ch_global_ekia_downed_for_operator_mission_op2", 1);
     }
 
     if(var_11 == "spread") {
-      ref_12c3f("t9_ch_global_ekia_shotgun_for_operator_mission_op2", 1);
+      ref_12C3F("t9_ch_global_ekia_shotgun_for_operator_mission_op2", 1);
     }
 
     if(istrue(var_31)) {
-      ref_12c3f("t9_ch_global_ekia_tracker_for_operator_mission_op2", 1);
+      ref_12C3F("t9_ch_global_ekia_tracker_for_operator_mission_op2", 1);
     }
 
     if(var_11 == "sniper") {
-      ref_12c3f("t9_ch_global_ekia_sniper_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_sniper_for_operator_mission", 1);
     }
 
     var_58 = self stopplayermusicstate();
 
     if(var_58 <= 35 && !issubstr(var_3, "default_sniper_scope")) {
-      ref_12c3f("t9_ch_global_ekia_2x_or_greater_magnified_scope_attachment_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_2x_or_greater_magnified_scope_attachment_for_operator_mission", 1);
     }
 
     if(istrue(var_32) && var_5 & 1) {
-      ref_12c3f("t9_ch_global_ekia_under_enemy_detection_with_ghost_perk_for_operator_mission_op2", 1);
+      ref_12C3F("t9_ch_global_ekia_under_enemy_detection_with_ghost_perk_for_operator_mission_op2", 1);
     }
 
     var_42 = undefined;
@@ -2744,125 +2744,125 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       }
 
       if(isstartstr(var_45, "thermal")) {
-        ref_12c3f("t9_ch_global_ekia_thermal_scope_for_operator_mission", 1);
+        ref_12C3F("t9_ch_global_ekia_thermal_scope_for_operator_mission", 1);
         break;
       }
     }
 
     if(var_11 == "mg") {
-      ref_12c3f("t9_ch_global_ekia_lmg_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_lmg_for_operator_mission", 1);
     }
 
     var_61 = strtok(var_3, "|").size;
 
     if(var_61 >= 5) {
-      ref_12c3f("t9_ch_global_ekia_5_or_more_attachments_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_5_or_more_attachments_for_operator_mission", 1);
     }
 
     if(var_24 & 4) {
-      ref_12c3f("t9_ch_global_ekia_while_in_aerial_vehicle_for_operator_mission", 1);
+      ref_12C3F("t9_ch_global_ekia_while_in_aerial_vehicle_for_operator_mission", 1);
     }
   }
 
   if(var_11 == "sniper") {
-    ref_12c3f("t9_ch_global_ekia_sniper_for_operator_unlock", 1);
+    ref_12C3F("t9_ch_global_ekia_sniper_for_operator_unlock", 1);
   }
 
   if(var_11 == "spread") {
-    ref_12c3f("t9_ch_global_ekia_shotgun_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_shotgun_for_operator_mission", 1);
   }
 
   if(var_11 == "rifle") {
-    ref_12c3f("t9_ch_global_ekia_assault_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_assault_for_operator_mission", 1);
   }
 
   if(var_5 & 131072) {
-    ref_12c3f("t9_ch_global_ekia_with_silenced_weapons_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_with_silenced_weapons_for_operator_mission", 1);
   }
 
   if(var_5 & 16777216) {
-    ref_12c3f("t9_ch_global_ekia_enemies_gas_mine_or_gas_grenade_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_enemies_gas_mine_or_gas_grenade_for_operator_mission", 1);
   }
 
   if(var_5 & 8388608) {
-    ref_12c3f("t9_ch_global_ekia_blinded_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_blinded_for_operator_mission", 1);
   }
 
   if(var_5 & 4096) {
-    ref_12c3f("t9_ch_global_ekia_while_in_vehicle_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_while_in_vehicle_for_operator_mission", 1);
   }
 
   if(var_5 & 2048) {
-    ref_12c3f("t9_ch_global_ekia_downed_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_downed_for_operator_mission", 1);
   }
 
   if(istrue(var_27) || istrue(var_28)) {
-    ref_12c3f("t9_ch_global_ekia_with_tac_mask_or_battle_hardened_perk_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_with_tac_mask_or_battle_hardened_perk_for_operator_mission", 1);
   }
 
   if(istrue(var_29)) {
-    ref_12c3f("t9_ch_global_ekia_cold_blooded_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_cold_blooded_for_operator_mission", 1);
   }
 
   if(istrue(var_30)) {
-    ref_12c3f("t9_ch_global_ekia_paranoia_or_high_alert_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_paranoia_or_high_alert_for_operator_mission", 1);
   }
 
   if(istrue(var_31)) {
-    ref_12c3f("t9_ch_global_ekia_tracker_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_tracker_for_operator_mission", 1);
   }
 
   if(istrue(var_32) && var_5 & 1) {
-    ref_12c3f("t9_ch_global_ekia_under_enemy_detection_with_ghost_perk_for_operator_mission", 1);
+    ref_12C3F("t9_ch_global_ekia_under_enemy_detection_with_ghost_perk_for_operator_mission", 1);
   }
 
   if(var_8 >= 8) {
     if(var_7) {
       if(istrue(var_17)) {
-        ref_12c3f("t9_ch_global_molotov_kill_for_operator_mission_op2", 1);
+        ref_12C3F("t9_ch_global_molotov_kill_for_operator_mission_op2", 1);
       }
     }
 
     if(var_5 & 1073741824) {
-      if(!isDefined(self.ref_11bc2)) {
-        self.ref_11bc2 = 1;
+      if(!isDefined(self.ref_11BC2)) {
+        self.ref_11BC2 = 1;
       } else {
-        self.ref_11bc2++;
+        self.ref_11BC2++;
       }
 
-      if(turn_on_have_target_hud("iw8_me_t9etool_mp") && self.ref_11bc2 == 3 && !istrue(self.shouldrecorddamagestats)) {
-        ref_12c3f("t9_ch_global_knife_loadout_killstreak_3_for_weapon_unlock", 1);
+      if(turn_on_have_target_hud("iw8_me_t9etool_mp") && self.ref_11BC2 == 3 && !istrue(self.shouldrecorddamagestats)) {
+        ref_12C3F("t9_ch_global_knife_loadout_killstreak_3_for_weapon_unlock", 1);
         self.shouldrecorddamagestats = 1;
       }
     }
 
     if(turn_on_have_target_hud("iw8_me_t9machete_mp") && var_4 & 4 && !istrue(self.shouldspawndropscommon)) {
-      ref_12c3f("t9_ch_global_backstabber_kill_for_weapon_unlock", 1);
+      ref_12C3F("t9_ch_global_backstabber_kill_for_weapon_unlock", 1);
       self.shouldspawndropscommon = 1;
     }
 
     if(turn_on_have_target_hud("iw8_sn_t9crossbow_mp") && var_4 & 1 && isDefined(var_3) && (var_3 == "" || var_3 == "default_sniper_scope") && !istrue(self.shouldplayerovertimedialog)) {
-      if(!isDefined(self.ref_1202c)) {
-        self.ref_1202c = 1;
+      if(!isDefined(self.ref_1202C)) {
+        self.ref_1202C = 1;
       } else {
-        self.ref_1202c++;
+        self.ref_1202C++;
       }
 
-      if(self.ref_1202c >= 3) {
-        ref_12c3f("t9_ch_global_kill_enemy_one_bullet_no_attachments_3_for_weapon_unlock", 1);
+      if(self.ref_1202C >= 3) {
+        ref_12C3F("t9_ch_global_kill_enemy_one_bullet_no_attachments_3_for_weapon_unlock", 1);
         self.shouldplayerovertimedialog = 1;
       }
     }
 
     if(turn_on_have_target_hud("iw8_sn_t9cannon_mp") && var_11 == "sniper" && var_4 & 262144 && !istrue(self.shouldspawnloot)) {
-      if(!isDefined(self.ref_13dbf)) {
-        self.ref_13dbf = 0;
+      if(!isDefined(self.ref_13DBF)) {
+        self.ref_13DBF = 0;
       }
 
-      self.ref_13dbf++;
+      self.ref_13DBF++;
 
-      if(self.ref_13dbf >= 2) {
-        ref_12c3f("t9_ch_global_longshot_kill_sniper_2_for_weapon_unlock", 1);
+      if(self.ref_13DBF >= 2) {
+        ref_12C3F("t9_ch_global_longshot_kill_sniper_2_for_weapon_unlock", 1);
         self.shouldspawnloot = 1;
       }
     }
@@ -2872,25 +2872,25 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     if(var_7) {
       if(turn_on_have_target_hud("iw8_me_t9ballisticknife_mp") && !isDefined(self.chopper_watch_death)) {
         if(var_4 & 1) {
-          self.ref_1202b = 1;
+          self.ref_1202B = 1;
         }
 
-        if(istrue(self.ref_1202b) && isDefined(self.ref_11bc2) && self.ref_11bc2 > 0) {
+        if(istrue(self.ref_1202B) && isDefined(self.ref_11BC2) && self.ref_11BC2 > 0) {
           self.chopper_watch_death = 1;
-          ref_12c3f("t9_ch_global_kill_enemy_one_bullet_and_melee_weapon_kill_1life_for_weapon_unlock_s3", 1);
+          ref_12C3F("t9_ch_global_kill_enemy_one_bullet_and_melee_weapon_kill_1life_for_weapon_unlock_s3", 1);
         }
       }
 
       if(var_11 == "smg" && turn_on_have_target_hud("iw8_sm_t9accurate_mp") && !isDefined(self.watchspawninput)) {
-        if(!isDefined(self.ref_1341b)) {
-          self.ref_1341b = 1;
+        if(!isDefined(self.ref_1341B)) {
+          self.ref_1341B = 1;
         } else {
-          self.ref_1341b++;
+          self.ref_1341B++;
         }
 
-        if(self.ref_1341b == 3) {
+        if(self.ref_1341B == 3) {
           self.watchspawninput = 1;
-          ref_12c3f("t9_ch_global_smg_killstreak_3_for_weapon_unlock_s3", 1);
+          ref_12C3F("t9_ch_global_smg_killstreak_3_for_weapon_unlock_s3", 1);
         }
       }
 
@@ -2904,7 +2904,7 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
           if(self.cargo_truck_initomnvars == 2) {
             self.pendingtimer = 1;
-            ref_12c3f("t9_ch_global_ar_headsots_2_for_weapon_unlock_s3", 1);
+            ref_12C3F("t9_ch_global_ar_headsots_2_for_weapon_unlock_s3", 1);
           }
         }
       }
@@ -2917,116 +2917,116 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         }
 
         if(!isDefined(self.playerzombiesetradar) && isDefined(var_57) && [[var_57]](var_2.basename) == "weapon_tactical") {
-          if(isDefined(self.ref_12a86) && isDefined(self.ref_12a86[var_2.basename]) && self.ref_12a86[var_2.basename] == 2) {
+          if(isDefined(self.ref_12A86) && isDefined(self.ref_12A86[var_2.basename]) && self.ref_12A86[var_2.basename] == 2) {
             self.playerzombiesetradar = 1;
-            ref_12c3f("t9_ch_global_tr_multikill_2_for_weapon_unlock_s3", 1);
+            ref_12C3F("t9_ch_global_tr_multikill_2_for_weapon_unlock_s3", 1);
           }
         }
       }
 
       if(turn_on_have_target_hud("iw8_me_t9bat_mp") && var_5 & 1073741824 && var_5 & 4194304 && !isDefined(self.cinderblock_damage_monitor)) {
         self.cinderblock_damage_monitor = 1;
-        ref_12c3f("t9_ch_global_melee_weapon_kill_detected_for_weapon_unlock_s3", 1);
+        ref_12C3F("t9_ch_global_melee_weapon_kill_detected_for_weapon_unlock_s3", 1);
       }
     }
 
-    if(turn_on_have_target_hud("iw8_pi_t9fullauto_mp") && var_11 == "pistol" && !isDefined(self.ref_127d6)) {
-      if(!isDefined(self.ref_1237a)) {
-        self.ref_1237a = 1;
+    if(turn_on_have_target_hud("iw8_pi_t9fullauto_mp") && var_11 == "pistol" && !isDefined(self.ref_127D6)) {
+      if(!isDefined(self.ref_1237A)) {
+        self.ref_1237A = 1;
       } else {
-        self.ref_1237a++;
+        self.ref_1237A++;
       }
 
-      if(self.ref_1237a == 5) {
-        self.ref_127d6 = 1;
-        ref_12c3f("t9_ch_global_pistol_ekia_5_for_weapon_unlock_s3", 1);
+      if(self.ref_1237A == 5) {
+        self.ref_127D6 = 1;
+        ref_12C3F("t9_ch_global_pistol_ekia_5_for_weapon_unlock_s3", 1);
       }
     }
 
     if(var_7) {
       if(var_5 & 1073741824) {
-        ref_12c3f("t9_ch_global_melee_weapon_kill_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_melee_weapon_kill_for_operator_mission_s3", 1);
       }
 
       if(isDefined(self.waitillcanspawnclient) && gettime() < self.waitillcanspawnclient + 20000) {
-        ref_12c3f("t9_ch_global_kill_enemy_after_skydiving_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_kill_enemy_after_skydiving_for_operator_mission_s3", 1);
       }
 
       if(var_11 == "throwingknife" || istrue(var_21)) {
-        ref_12c3f("t9_ch_global_hatchet_kill_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_hatchet_kill_for_operator_mission_s3", 1);
       }
 
       if(isDefined(self) && isDefined(self.modifiers) && istrue(self.modifiers["victimstunnedkill"])) {
-        ref_12c3f("t9_ch_global_concussion_grenade_kill_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_concussion_grenade_kill_for_operator_mission_s3", 1);
       }
 
       if(self.intel_guys % 3 == 0) {
-        ref_12c3f("t9_ch_global_killstreak_shotgun_without_dying_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_killstreak_shotgun_without_dying_for_operator_mission_s3", 1);
       }
 
       if(istrue(var_12) && (istrue(var_25) || istrue(var_26))) {
-        ref_12c3f("t9_ch_global_lethal_kill_with_quartermaster_or_restock_perk_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_lethal_kill_with_quartermaster_or_restock_perk_for_operator_mission_s3", 1);
       }
 
       if(var_11 == "rocketlauncher") {
-        ref_12c3f("t9_ch_global_launcher_kill_or_destruction_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_launcher_kill_or_destruction_for_operator_mission_s3", 1);
       }
 
-      if(var_11 == "rifle" && isDefined(self.ref_12a86) && isDefined(self.ref_12a86[var_2.basename]) && self.ref_12a86[var_2.basename] >= 2) {
-        ref_12c3f("t9_ch_global_assault_multikill_for_operator_mission_s3", 1);
+      if(var_11 == "rifle" && isDefined(self.ref_12A86) && isDefined(self.ref_12A86[var_2.basename]) && self.ref_12A86[var_2.basename] >= 2) {
+        ref_12C3F("t9_ch_global_assault_multikill_for_operator_mission_s3", 1);
       }
 
       if(istrue(var_19) || var_1 == "equip_semtex") {
-        ref_12c3f("t9_ch_global_semtex_kill_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_semtex_kill_for_operator_mission_s3", 1);
       }
 
       if(var_5 & 4194304) {
-        ref_12c3f("t9_ch_global_kill_while_friendly_uav_active_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_kill_while_friendly_uav_active_for_operator_mission_s3", 1);
       }
 
       if(istrue(var_12)) {
-        ref_12c3f("t9_ch_global_lethal_kill_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_lethal_kill_for_operator_mission_s3", 1);
       }
 
       if(var_4 & 4) {
-        ref_12c3f("t9_ch_global_finishing_move_kill_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_finishing_move_kill_for_operator_mission_s3", 1);
       }
 
       if(istrue(var_14)) {
-        ref_12c3f("t9_ch_global_kill_with_scorestreak_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_kill_with_scorestreak_for_operator_mission_s3", 1);
       }
 
       if(var_5 & 8388608) {
-        ref_12c3f("t9_ch_global_kill_blinded_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_kill_blinded_for_operator_mission_s3", 1);
       }
 
       if(var_5 & 512) {
-        ref_12c3f("t9_ch_global_smoke_grenade_kill_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_smoke_grenade_kill_for_operator_mission_s3", 1);
       }
 
       if(istrue(var_20)) {
-        ref_12c3f("t9_ch_global_frag_grenade_kill_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_frag_grenade_kill_for_operator_mission_s3", 1);
       }
 
       if(var_5 & 4096) {
-        ref_12c3f("t9_ch_global_kill_while_in_vehicle_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_kill_while_in_vehicle_for_operator_mission_s3", 1);
 
         if(scripts\cp_mp\utility\player_utility::isinvehicle()) {
           var_62 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getdriver(self.vehicle, 1);
 
           if(isDefined(var_62) && var_62 != self) {
-            ref_12c3f(var_62, "t9_ch_global_passenger_kill_while_driving_for_operator_mission_s3", 1);
+            ref_12C3F(var_62, "t9_ch_global_passenger_kill_while_driving_for_operator_mission_s3", 1);
           }
         }
       }
 
       if(var_5 & 268435456) {
-        ref_12c3f("t9_ch_global_kill_without_taking_damage_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_kill_without_taking_damage_for_operator_mission_s3", 1);
       }
     }
 
     if(istrue(var_35) || istrue(var_36)) {
-      ref_12c3f("t9_ch_global_ekia_gung_ho_double_time_for_operator_mission_s3", 1);
+      ref_12C3F("t9_ch_global_ekia_gung_ho_double_time_for_operator_mission_s3", 1);
     }
 
     if(isDefined(var_2) && isDefined(var_2.attachments)) {
@@ -3044,29 +3044,29 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         }
 
         if(var_11 == "smg" && var_45 == "stockno") {
-          ref_12c3f("t9_ch_global_smg_ekia_no_stock_for_operator_mission_s3", 1);
+          ref_12C3F("t9_ch_global_smg_ekia_no_stock_for_operator_mission_s3", 1);
         }
 
         if(var_11 == "pistol" && issubstr(var_45, "reflex")) {
-          ref_12c3f("t9_ch_global_pistol_ekia_led_optic_for_operator_mission_s3", 1);
+          ref_12C3F("t9_ch_global_pistol_ekia_led_optic_for_operator_mission_s3", 1);
         }
 
         if(isstartstr(var_45, "grip")) {
-          ref_12c3f("t9_ch_global_grip_kill_for_operator_mission_s3", 1);
+          ref_12C3F("t9_ch_global_grip_kill_for_operator_mission_s3", 1);
         }
       }
     }
 
     if(istrue(var_34)) {
-      ref_12c3f("t9_ch_global_ekia_with_flak_jacket_perk_for_operator_mission_s3", 1);
+      ref_12C3F("t9_ch_global_ekia_with_flak_jacket_perk_for_operator_mission_s3", 1);
     }
 
     if(var_1 == "iw8_sn_t9crossbow_mp" || var_1 == "iw8_la_t9launcher_mp" || var_1 == "special_ballisticknife") {
-      ref_12c3f("t9_ch_global_special_weapon_ekia_for_operator_mission_s3", 1);
+      ref_12C3F("t9_ch_global_special_weapon_ekia_for_operator_mission_s3", 1);
     }
 
     if(var_11 == "rifle") {
-      ref_12c3f("t9_ch_global_ekia_assault_for_operator_mission_s3", 1);
+      ref_12C3F("t9_ch_global_ekia_assault_for_operator_mission_s3", 1);
 
       if(isDefined(var_2) && isDefined(var_2.attachments)) {
         var_42 = undefined;
@@ -3083,14 +3083,14 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
           }
 
           if(isstartstr(var_45, "xmag") || isstartstr(var_45, "smag") || isstartstr(var_45, "drum")) {
-            ref_12c3f("t9_ch_global_ar_kill_extended_mag_for_operator_mission_s3", 1);
+            ref_12C3F("t9_ch_global_ar_kill_extended_mag_for_operator_mission_s3", 1);
           }
         }
       }
     }
 
     if(var_11 == "sniper") {
-      ref_12c3f("t9_ch_global_ekia_sniper_for_operator_mission_s3", 1);
+      ref_12C3F("t9_ch_global_ekia_sniper_for_operator_mission_s3", 1);
     }
 
     var_57 = undefined;
@@ -3102,17 +3102,17 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_58 = self stopplayermusicstate();
 
         if(var_58 <= 35 && !issubstr(var_3, "default_sniper_scope")) {
-          ref_12c3f("t9_ch_global_tr_ekia_2x_scope_for_operator_mission_s3", 1);
+          ref_12C3F("t9_ch_global_tr_ekia_2x_scope_for_operator_mission_s3", 1);
         }
       }
     }
 
     if(istrue(var_31)) {
-      ref_12c3f("t9_ch_global_ekia_tracker_for_operator_mission_s3", 1);
+      ref_12C3F("t9_ch_global_ekia_tracker_for_operator_mission_s3", 1);
     }
 
     if(var_11 == "mg") {
-      ref_12c3f("t9_ch_global_ekia_lmg_for_operator_mission_s3", 1);
+      ref_12C3F("t9_ch_global_ekia_lmg_for_operator_mission_s3", 1);
 
       if(isDefined(var_2) && isDefined(var_2.attachments)) {
         var_42 = undefined;
@@ -3131,7 +3131,7 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
           var_68 = tablelookup("mp/attachmenttable.csv", 5, var_45, 3);
 
           if(issubstr(var_68, "DRUM")) {
-            ref_12c3f("t9_ch_global_smg_ekia_drum_magazine_for_operator_mission_s3", 1);
+            ref_12C3F("t9_ch_global_smg_ekia_drum_magazine_for_operator_mission_s3", 1);
             break;
           }
         }
@@ -3139,10 +3139,10 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
 
     if(var_11 == "spread") {
-      if(isDefined(var_2) && isDefined(var_2.attachments) && isDefined(level.ref_132bd)) {
+      if(isDefined(var_2) && isDefined(var_2.attachments) && isDefined(level.ref_132BD)) {
         foreach(var_44 in var_2.attachments) {
-          if(isDefined(level.ref_132bd[var_44])) {
-            ref_12c3f("t9_ch_global_shotgun_ekia_wire_stock_for_operator_mission_s3", 1);
+          if(isDefined(level.ref_132BD[var_44])) {
+            ref_12C3F("t9_ch_global_shotgun_ekia_wire_stock_for_operator_mission_s3", 1);
             break;
           }
         }
@@ -3151,17 +3151,17 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     if(var_11 == "pistol") {
       if(var_5 & 2048) {
-        ref_12c3f("t9_ch_global_pistol_ekia_downed_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_pistol_ekia_downed_for_operator_mission_s3", 1);
       }
 
       if(var_2 hasattachment("akimbo", 1)) {
-        ref_12c3f("t9_ch_global_pistol_dw_ekia_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_pistol_dw_ekia_for_operator_mission_s3", 1);
       }
 
-      if(isDefined(var_2) && isDefined(var_2.attachments) && isDefined(level.ref_1237c)) {
+      if(isDefined(var_2) && isDefined(var_2.attachments) && isDefined(level.ref_1237C)) {
         foreach(var_44 in var_2.attachments) {
-          if(isDefined(level.ref_1237c[var_44])) {
-            ref_12c3f("t9_ch_global_pistol_ekia_led_optic_for_operator_mission_s3", 1);
+          if(isDefined(level.ref_1237C[var_44])) {
+            ref_12C3F("t9_ch_global_pistol_ekia_led_optic_for_operator_mission_s3", 1);
             break;
           }
         }
@@ -3169,18 +3169,18 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
 
     if(istrue(var_29)) {
-      ref_12c3f("t9_ch_global_ekia_cold_blooded_for_operator_missions_s3", 1);
+      ref_12C3F("t9_ch_global_ekia_cold_blooded_for_operator_missions_s3", 1);
     }
 
     if(var_4 & 16777216) {
-      ref_12c3f("t9_ch_global_revenge_kill_for_operator_mission_s3", 1);
+      ref_12C3F("t9_ch_global_revenge_kill_for_operator_mission_s3", 1);
     }
   }
 
   if(var_8 >= 10) {
     if(getdvarint("scr_enable_br_satellite_hunt", 0) == 1) {
       if(var_7 && update_objective_ownerclient(self.origin)) {
-        ref_12c3f("t9_ch_global_eliminate_enemy_near_active_satlink_or_crashed_satellite_for_s4_event_wz", 1);
+        ref_12C3F("t9_ch_global_eliminate_enemy_near_active_satlink_or_crashed_satellite_for_s4_event_wz", 1);
       }
     }
 
@@ -3190,59 +3190,59 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_75 = self method_87c5();
         var_76 = var_75 < var_74;
 
-        if(!isDefined(self.ref_1283c) && var_76) {
-          if(!isDefined(self.ref_1341a)) {
-            self.ref_1341a = 1;
+        if(!isDefined(self.ref_1283C) && var_76) {
+          if(!isDefined(self.ref_1341A)) {
+            self.ref_1341A = 1;
           } else {
-            self.ref_1341a++;
+            self.ref_1341A++;
           }
 
-          if(self.ref_1341a == 3) {
-            ref_12c3f("t9_ch_global_smg_kills_after_sprinting_for_weapon_unlock_s4", 1);
-            self.ref_1283c = 1;
-            self.ref_1341a = undefined;
+          if(self.ref_1341A == 3) {
+            ref_12C3F("t9_ch_global_smg_kills_after_sprinting_for_weapon_unlock_s4", 1);
+            self.ref_1283C = 1;
+            self.ref_1341A = undefined;
           }
         }
       }
 
-      if(!isDefined(self.ref_139ca) && turn_on_have_target_hud("iw8_sn_t9accurate_mp") && var_11 == "sniper" && var_4 & 1048576) {
-        if(!isDefined(self.ref_1343e)) {
-          self.ref_1343e = 1;
+      if(!isDefined(self.ref_139CA) && turn_on_have_target_hud("iw8_sn_t9accurate_mp") && var_11 == "sniper" && var_4 & 1048576) {
+        if(!isDefined(self.ref_1343E)) {
+          self.ref_1343E = 1;
         } else {
-          self.ref_1343e++;
+          self.ref_1343E++;
         }
 
-        if(self.ref_1343e == 2) {
-          ref_12c3f("t9_ch_global_sniper_headshots_for_weapon_unlock_s4", 1);
-          self.ref_139ca = 1;
-          self.ref_1343e = undefined;
+        if(self.ref_1343E == 2) {
+          ref_12C3F("t9_ch_global_sniper_headshots_for_weapon_unlock_s4", 1);
+          self.ref_139CA = 1;
+          self.ref_1343E = undefined;
         }
       }
 
-      if(turn_on_have_target_hud("iw8_me_t9mace_mp") && !isDefined(self.ref_11a6b) && var_5 & 1073741824 && var_4 & 256) {
-        ref_12c3f("t9_ch_global_melee_weapon_kill_while_sliding_for_weapon_unlock_s4", 1);
-        self.ref_11a6b = 1;
+      if(turn_on_have_target_hud("iw8_me_t9mace_mp") && !isDefined(self.ref_11A6B) && var_5 & 1073741824 && var_4 & 256) {
+        ref_12C3F("t9_ch_global_melee_weapon_kill_while_sliding_for_weapon_unlock_s4", 1);
+        self.ref_11A6B = 1;
       }
 
       if(turn_on_have_target_hud("iw8_sm_t9cqb_mp") && !isDefined(self.ref_12159) && var_11 == "smg") {
-        if(isDefined(self.ref_12a86) && isDefined(self.ref_12a86[var_2.basename]) && self.ref_12a86[var_2.basename] == 2) {
-          ref_12c3f("t9_ch_global_smg_multikill_for_weapon_unlock_s4", 1);
+        if(isDefined(self.ref_12A86) && isDefined(self.ref_12A86[var_2.basename]) && self.ref_12A86[var_2.basename] == 2) {
+          ref_12C3F("t9_ch_global_smg_multikill_for_weapon_unlock_s4", 1);
           self.ref_12159 = 1;
         }
       }
     }
 
-    if(turn_on_have_target_hud("iw8_sm_t9nailgun_mp") && !isDefined(self.ref_11e22) && useserverhud(var_1)) {
-      if(!isDefined(self.ref_136d4)) {
-        self.ref_136d4 = 1;
+    if(turn_on_have_target_hud("iw8_sm_t9nailgun_mp") && !isDefined(self.ref_11E22) && useserverhud(var_1)) {
+      if(!isDefined(self.ref_136D4)) {
+        self.ref_136D4 = 1;
       } else {
-        self.ref_136d4++;
+        self.ref_136D4++;
       }
 
-      if(self.ref_136d4 == 5) {
-        ref_12c3f("t9_ch_global_special_ekia_for_weapon_unlock_s4", 1);
-        self.ref_136d4 = undefined;
-        self.ref_11e22 = 1;
+      if(self.ref_136D4 == 5) {
+        ref_12C3F("t9_ch_global_special_ekia_for_weapon_unlock_s4", 1);
+        self.ref_136D4 = undefined;
+        self.ref_11E22 = 1;
       }
     }
 
@@ -3251,19 +3251,19 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       var_78 = var_11 == "spread";
 
       if(var_77 && var_78) {
-        ref_12c3f("t9_ch_global_shotgun_point_blank_kill_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_shotgun_point_blank_kill_for_operator_mission_s4", 1);
       }
 
       if(isDefined(self.watch_for_player_enter_trigger)) {
         var_79 = gettime() - self.watch_for_player_enter_trigger < 10000;
 
         if(istrue(var_79)) {
-          ref_12c3f("t9_ch_global_kill_after_stim_shot_for_operator_mission_s4", 1);
+          ref_12C3F("t9_ch_global_kill_after_stim_shot_for_operator_mission_s4", 1);
         }
       }
 
       if(var_4 & 8) {
-        ref_12c3f("t9_ch_global_kills_while_ads_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_kills_while_ads_for_operator_mission_s4", 1);
       }
 
       if(var_4 & 1048576) {
@@ -3274,7 +3274,7 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         self.getanglesfacingorigin++;
 
         if(self.getanglesfacingorigin == 3) {
-          ref_12c3f("t9_ch_global_headshots_in_one_game_for_operator_mission_s4", 1);
+          ref_12C3F("t9_ch_global_headshots_in_one_game_for_operator_mission_s4", 1);
         }
       }
 
@@ -3282,11 +3282,11 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       var_81 = var_4 & 1048576 && var_4 & 262144;
 
       if(var_80 && var_81) {
-        ref_12c3f("t9_ch_global_sniper_or_tactical_longshot_headshots_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_sniper_or_tactical_longshot_headshots_for_operator_mission_s4", 1);
       }
 
       if(var_5 & 1048576) {
-        ref_12c3f("t9_ch_global_concussion_grenade_kill_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_concussion_grenade_kill_for_operator_mission_s4", 1);
       }
 
       if(istrue(var_12)) {
@@ -3297,16 +3297,16 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         self.getarenaomnvarbitpackinginfo++;
 
         if(self.getarenaomnvarbitpackinginfo == 3) {
-          ref_12c3f("t9_ch_global_lethal_kills_in_one_game_for_operator_mission_s4", 1);
+          ref_12C3F("t9_ch_global_lethal_kills_in_one_game_for_operator_mission_s4", 1);
         }
       }
 
       if(istrue(var_19) || var_1 == "equip_semtex") {
-        ref_12c3f("t9_ch_global_semtex_kill_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_semtex_kill_for_operator_mission_s4", 1);
       }
 
       if(istrue(var_12)) {
-        ref_12c3f("t9_ch_global_lethal_kill_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_lethal_kill_for_operator_mission_s4", 1);
 
         if(var_25) {
           if(!isDefined(self.weapon_xp_iw8_sh_dpapa12)) {
@@ -3316,65 +3316,65 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
           }
 
           if(self.weapon_xp_iw8_sh_dpapa12 == 2) {
-            ref_12c3f("t9_ch_global_two_lethal_kills_same_life_with_quartermaster_or_restock_perk_for_operator_mission_s4", 1);
+            ref_12C3F("t9_ch_global_two_lethal_kills_same_life_with_quartermaster_or_restock_perk_for_operator_mission_s4", 1);
           }
         }
       }
 
       if(var_4 & 8) {
-        ref_12c3f("t9_ch_global_kills_while_ads_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_kills_while_ads_for_operator_mission_s4", 1);
       }
 
       if(!isDefined(self.getanimsforplanefacing)) {
         self.getanimsforplanefacing = var_1;
       } else if(self.getanimsforplanefacing != var_1) {
-        ref_12c3f("t9_ch_global_kills_from_different_weapons_without_dying_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_kills_from_different_weapons_without_dying_for_operator_mission_s4", 1);
       }
 
       var_80 = var_11 == "sniper" || va_cluster_spawnpoint_valid(var_2);
       var_81 = var_4 & 1048576 && var_4 & 262144;
 
       if(var_80 && var_81) {
-        ref_12c3f("t9_ch_global_sniper_or_tactical_longshot_headshots_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_sniper_or_tactical_longshot_headshots_for_operator_mission_s4", 1);
       }
 
       if(var_14 && getkillstreaknamefromweapon(var_2) == "precision_airstrike") {
-        ref_12c3f("t9_ch_global_kill_with_scorestreak_strike_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_kill_with_scorestreak_strike_for_operator_mission_s4", 1);
       }
 
       if(var_4 & 256) {
-        ref_12c3f("t9_ch_global_sliding_kill_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_sliding_kill_for_operator_mission_s4", 1);
       }
 
       if(var_5 & 1073741824 || var_1 == "iw8_me_t9ballisticknife_mp") {
-        ref_12c3f("t9_ch_global_melee_weapon_or_ballistic_knife_kill_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_melee_weapon_or_ballistic_knife_kill_for_operator_mission_s4", 1);
       }
 
-      if(!isDefined(self.ref_145a3)) {
-        self.ref_145a3 = [];
+      if(!isDefined(self.ref_145A3)) {
+        self.ref_145A3 = [];
       }
 
-      self.ref_145a3[var_1] = 1;
+      self.ref_145A3[var_1] = 1;
 
-      if(self.ref_145a3.size == 6 && !isDefined(self.lightsreset)) {
+      if(self.ref_145A3.size == 6 && !isDefined(self.lightsreset)) {
         self.lightsreset = 1;
-        ref_12c3f("t9_ch_global_kill_with_different_weapons_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_kill_with_different_weapons_for_operator_mission_s4", 1);
       }
 
       if(isDefined(self.player_equip_primary) && self.recentkillcount >= 2 && weaponclass(self.player_equip_primary) == "smg" && var_2 == self.player_equip_primary) {
-        ref_12c3f("t9_ch_global_smg_multikill_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_smg_multikill_for_operator_mission_s4", 1);
       }
 
       if(istrue(var_12) && isDefined(self.recentkillcount) && self.recentkillcount >= 2) {
-        ref_12c3f("t9_ch_global_lethal_kills_from_same_thrown_in_one_game_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_lethal_kills_from_same_thrown_in_one_game_for_operator_mission_s4", 1);
       }
 
       if(var_5 & 262144) {
-        ref_12c3f("t9_ch_global_kill_with_penetrated_bullet_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_kill_with_penetrated_bullet_for_operator_mission_s4", 1);
       }
 
       if(var_4 & 524288) {
-        ref_12c3f("t9_ch_global_point_blank_kill_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_point_blank_kill_for_operator_mission_s4", 1);
       }
 
       if(var_4 & 8 && isDefined(var_2) && isDefined(var_2.attachments)) {
@@ -3392,7 +3392,7 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
           }
 
           if(issubstr(var_45, "reflex")) {
-            ref_12c3f("t9_ch_global_ads_kill_with_led_optic_for_operator_mission_s4", 1);
+            ref_12C3F("t9_ch_global_ads_kill_with_led_optic_for_operator_mission_s4", 1);
             break;
           }
         }
@@ -3400,24 +3400,24 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
       if(var_14) {
         if(var_15 == "toma_strike") {
-          ref_12c3f("t9_ch_global_napalm_strike_or_cluster_strike_kill_for_operator_mission_s4", 1);
+          ref_12C3F("t9_ch_global_napalm_strike_or_cluster_strike_kill_for_operator_mission_s4", 1);
         }
 
         if(var_15 == "toma_strike" || var_15 == "precision_airstrike" || var_15 == "cruise_predator" || var_15 == "chopper_gunner" || var_15 == "fuel_airstrike" || var_15 == "gunship") {
-          ref_12c3f("t9_ch_global_aerial_scorestreak_kill_for_operator_mission_s4", 1);
+          ref_12C3F("t9_ch_global_aerial_scorestreak_kill_for_operator_mission_s4", 1);
         }
       }
 
       if(var_4 & 1048576 && va_cluster_spawnpoint_valid(var_2)) {
-        ref_12c3f("t9_ch_global_tactical_headshots_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_tactical_headshots_for_operator_mission_s4", 1);
       }
 
       if(var_5 & 16777216) {
-        ref_12c3f("t9_ch_global_gas_kill_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_gas_kill_for_operator_mission_s4", 1);
       }
 
       if(var_11 == "rocketlauncher") {
-        ref_12c3f("t9_ch_global_launcher_kill_or_destruction_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_launcher_kill_or_destruction_for_operator_mission_s4", 1);
       }
 
       if(var_4 & 524288 && var_11 == "pistol" && isDefined(self.lastkilledplayer)) {
@@ -3426,36 +3426,36 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_86 = vectordot(var_84, var_85);
 
         if(var_86 < 0) {
-          ref_12c3f("t9_ch_global_pistol_point_blank_kill_from_behind_for_operator_mission_s4", 1);
+          ref_12C3F("t9_ch_global_pistol_point_blank_kill_from_behind_for_operator_mission_s4", 1);
         }
       }
 
       if(self.killcountthislife == 5) {
-        ref_12c3f("t9_ch_global_killstreak_5_for_operator_mission_s4", 1);
+        ref_12C3F("t9_ch_global_killstreak_5_for_operator_mission_s4", 1);
       }
     }
 
     if(isDefined(var_2) && var_2.inventorytype == "primary" && !(var_4 & 131072)) {
-      ref_12c3f("t9_ch_global_primary_weapon_ekia_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_primary_weapon_ekia_operator_mission_s4", 1);
     }
 
     if(istrue(var_34)) {
-      ref_12c3f("t9_ch_global_ekia_with_flak_jacket_perk_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_ekia_with_flak_jacket_perk_for_operator_mission_s4", 1);
     }
 
     if(isDefined(var_2) && weaponissemiauto(var_2)) {
-      ref_12c3f("t9_ch_global_semi_auto_ekia_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_semi_auto_ekia_for_operator_mission_s4", 1);
     }
 
     var_87 = "pistolgrip03";
     var_88 = isDefined(var_3) && issubstr(var_3, var_87);
 
     if(var_88) {
-      ref_12c3f("t9_ch_global_ekia_with_speed_tape_attachment_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_ekia_with_speed_tape_attachment_for_operator_mission_s4", 1);
     }
 
     if(var_11 == "mg") {
-      ref_12c3f("t9_ch_global_lmg_ekia_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_lmg_ekia_for_operator_mission_s4", 1);
     }
 
     if(isDefined(var_2) && isDefined(var_2.attachments)) {
@@ -3473,36 +3473,36 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         }
 
         if(isstartstr(var_45, "laser")) {
-          ref_12c3f("t9_ch_global_ekia_with_laser_body_attachment_for_operator_mission_s4", 1);
+          ref_12C3F("t9_ch_global_ekia_with_laser_body_attachment_for_operator_mission_s4", 1);
           break;
         }
       }
     }
 
     if(var_4 & 131072) {
-      ref_12c3f("t9_ch_global_ekia_secondary_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_ekia_secondary_for_operator_mission_s4", 1);
     }
 
     if(var_11 == "spread") {
-      ref_12c3f("t9_ch_global_shotgun_ekia_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_shotgun_ekia_for_operator_mission_s4", 1);
     }
 
     if(var_11 == "smg" && var_5 & 131072) {
-      ref_12c3f("t9_ch_global_smg_ekia_with_silenced_weapons_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_smg_ekia_with_silenced_weapons_for_operator_mission_s4", 1);
     }
 
     if(turret_struct(var_2)) {
-      ref_12c3f("t9_ch_global_assault_ekia_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_assault_ekia_for_operator_mission_s4", 1);
     }
 
     if(isDefined(var_2) && weaponinventorytype(var_2) == "primary" && var_1 != "iav_weapon_mp" && var_1 != "equip_pop_rocket" && (weaponburstcount(var_1) > 0 || var_1 == "iw8_ar_anovember94_mp")) {
-      ref_12c3f("t9_ch_global_burst_fire_ekia_for_operator_mission_s4", 1);
+      ref_12C3F("t9_ch_global_burst_fire_ekia_for_operator_mission_s4", 1);
     }
   }
 
   if(var_8 >= 11) {
     if(var_7) {
-      if(turn_on_have_target_hud("iw8_lm_t9fastfire_mp") && !isDefined(self.ref_11bd7) && var_11 == "mg") {
+      if(turn_on_have_target_hud("iw8_lm_t9fastfire_mp") && !isDefined(self.ref_11BD7) && var_11 == "mg") {
         if(!isDefined(self.zombieloadout)) {
           self.zombieloadout = 1;
           thread watchreloading("MG82_challenge_progressed");
@@ -3511,20 +3511,20 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         }
 
         if(self.zombieloadout == 3) {
-          ref_12c3f("t9_ch_global_lmg_kill_x_without_reloading_for_weapon_unlock_s5", 1);
+          ref_12C3F("t9_ch_global_lmg_kill_x_without_reloading_for_weapon_unlock_s5", 1);
           self notify("MG82_challenge_progressed");
-          self.ref_11bd7 = 1;
+          self.ref_11BD7 = 1;
         }
       }
 
       if(turn_on_have_target_hud("iw8_ar_t9slowfire_mp") && !isDefined(self.force_group_thermites) && turret_struct(var_2) && var_4 & 262144) {
-        ref_12c3f("t9_ch_global_ar_longshot_kill_for_weapon_unlock_s5", 1);
+        ref_12C3F("t9_ch_global_ar_longshot_kill_for_weapon_unlock_s5", 1);
         self.force_group_thermites = 1;
       }
 
-      if(turn_on_have_target_hud("iw8_pi_t9pistolshot_mp") && !isDefined(self.ref_11b1a) && var_11 == "pistol" && var_4 & 1048576) {
-        ref_12c3f("t9_ch_global_pistol_headshot_kill_for_weapon_unlock_s5", 1);
-        self.ref_11b1a = 1;
+      if(turn_on_have_target_hud("iw8_pi_t9pistolshot_mp") && !isDefined(self.ref_11B1A) && var_11 == "pistol" && var_4 & 1048576) {
+        ref_12C3F("t9_ch_global_pistol_headshot_kill_for_weapon_unlock_s5", 1);
+        self.ref_11B1A = 1;
       }
 
       if(turn_on_have_target_hud("iw8_me_t9cane_mp") && !isDefined(self.get_actual_grenade_name) && var_5 & 1073741824) {
@@ -3532,52 +3532,52 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_92 = var_5 & 8388608;
 
         if(var_91 || var_92) {
-          ref_12c3f("t9_ch_global_melee_weapon_kill_blinded_stunned_for_weapon_unlock_s5", 1);
+          ref_12C3F("t9_ch_global_melee_weapon_kill_blinded_stunned_for_weapon_unlock_s5", 1);
           self.get_actual_grenade_name = 1;
         }
       }
 
-      if(turn_on_have_target_hud("iw8_me_t9sai_mp") && !isDefined(self.ref_12e7a) && var_5 & 1073741824 && var_5 & 268435456) {
-        ref_12c3f("t9_ch_global_melee_weapon_kill_no_return_fire_for_weapon_unlock_s5", 1);
-        self.ref_12e7a = 1;
+      if(turn_on_have_target_hud("iw8_me_t9sai_mp") && !isDefined(self.ref_12E7A) && var_5 & 1073741824 && var_5 & 268435456) {
+        ref_12C3F("t9_ch_global_melee_weapon_kill_no_return_fire_for_weapon_unlock_s5", 1);
+        self.ref_12E7A = 1;
       }
     }
 
     if(var_7) {
       if(var_5 & 536870912) {
-        ref_12c3f("t9_ch_global_nightingale_kills_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_nightingale_kills_for_operator_mission_s5", 1);
       }
 
       if(istrue(var_17)) {
-        ref_12c3f("t9_ch_global_molotov_kill_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_molotov_kill_for_operator_mission_s5", 1);
       }
 
       if(var_11 == "pistol") {
-        if(!isDefined(self.ref_1237b)) {
-          self.ref_1237b = 1;
+        if(!isDefined(self.ref_1237B)) {
+          self.ref_1237B = 1;
         } else {
-          self.ref_1237b++;
+          self.ref_1237B++;
         }
 
-        if(self.ref_1237b > 0 && self.ref_1237b % 3 == 0) {
-          ref_12c3f("t9_ch_global_pistol_killstreak_5_for_operator_mission_s5", 1);
+        if(self.ref_1237B > 0 && self.ref_1237B % 3 == 0) {
+          ref_12C3F("t9_ch_global_pistol_killstreak_5_for_operator_mission_s5", 1);
         }
       }
 
       if(var_5 & 1073741824) {
-        ref_12c3f("t9_ch_global_melee_weapon_kill_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_melee_weapon_kill_for_operator_mission_s5", 1);
       }
 
       if(istrue(var_12)) {
-        ref_12c3f("t9_ch_global_lethal_kill_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_lethal_kill_for_operator_mission_s5", 1);
       }
 
       if(var_4 & 1048576 && va_cluster_spawnpoint_valid(var_2)) {
-        ref_12c3f("t9_ch_global_tactical_headshots_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_tactical_headshots_for_operator_mission_s5", 1);
       }
 
       if(var_11 == "throwingknife" || istrue(var_21)) {
-        ref_12c3f("t9_ch_global_hatchet_or_throwing_knife_kill_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_hatchet_or_throwing_knife_kill_for_operator_mission_s5", 1);
       }
 
       if(var_2.inventorytype == "primary" && !(var_4 & 131072)) {
@@ -3619,99 +3619,99 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       if(isDefined(self.vip_questthink_iconposition) && isDefined(self.vip_respawnplayer) && self.vip_questthink_iconposition > 0 && self.vip_respawnplayer > 0) {
         self.vip_questthink_iconposition--;
         self.vip_respawnplayer--;
-        ref_12c3f("t9_ch_global_kill_primary_secondary_without_dying_for_operator_mission_s3", 1);
-        ref_12c3f("t9_ch_global_kill_primary_secondary_without_dying_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_kill_primary_secondary_without_dying_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_kill_primary_secondary_without_dying_for_operator_mission_s5", 1);
       }
 
       if(isDefined(self.vip_removequestinstance) && isDefined(self.vip_respawnplayer) && isDefined(self.vip_playerremoved) && self.vip_removequestinstance > 0 && self.vipbot_movesup > 0 && self.vip_playerremoved > 0) {
         self.vip_removequestinstance--;
         self.vipbot_movesup--;
         self.vip_playerremoved--;
-        ref_12c3f("t9_ch_global_kill_primary_secondary_lethal_without_dying_for_operator_mission_s3", 1);
+        ref_12C3F("t9_ch_global_kill_primary_secondary_lethal_without_dying_for_operator_mission_s3", 1);
 
         if(var_8 >= 12) {
-          ref_12c3f("t9_ch_global_kill_primary_secondary_lethal_without_dying_for_operator_mission_s6", 1);
-          ref_12c3f("t9_ch_global_primary_secondary_equipment_scorestreak_kill_in_single_game_s6", 1);
+          ref_12C3F("t9_ch_global_kill_primary_secondary_lethal_without_dying_for_operator_mission_s6", 1);
+          ref_12C3F("t9_ch_global_primary_secondary_equipment_scorestreak_kill_in_single_game_s6", 1);
         }
       }
 
       if(var_4 & 524288) {
-        ref_12c3f("t9_ch_global_point_blank_kill_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_point_blank_kill_for_operator_mission_s5", 1);
       }
 
       if(var_4 & 512 || var_4 & 1024) {
-        ref_12c3f("t9_ch_global_kill_enemy_while_crouched_or_prone_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_kill_enemy_while_crouched_or_prone_for_operator_mission_s5", 1);
       }
 
       if(var_4 & 262144) {
-        ref_12c3f("t9_ch_global_longshot_kill_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_longshot_kill_for_operator_mission_s5", 1);
       }
 
       if(var_14 && getkillstreaknamefromweapon(var_2) == "precision_airstrike") {
-        ref_12c3f("t9_ch_global_kill_with_scorestreak_strike_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_kill_with_scorestreak_strike_for_operator_mission_s5", 1);
       }
 
       if(istrue(var_19) || var_1 == "equip_semtex") {
-        ref_12c3f("t9_ch_global_semtex_kill_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_semtex_kill_for_operator_mission_s5", 1);
       }
 
       if(var_11 == "rocketlauncher") {
-        ref_12c3f("t9_ch_global_launcher_kill_or_destruction_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_launcher_kill_or_destruction_for_operator_mission_s5", 1);
       }
 
       if(turret_struct(var_2)) {
-        if(isDefined(self.ref_12a86) && isDefined(self.ref_12a86[var_2.basename]) && self.ref_12a86[var_2.basename] == 2) {
-          ref_12c3f("t9_ch_global_ar_multikill_for_operator_mission_s5", 1);
+        if(isDefined(self.ref_12A86) && isDefined(self.ref_12A86[var_2.basename]) && self.ref_12A86[var_2.basename] == 2) {
+          ref_12C3F("t9_ch_global_ar_multikill_for_operator_mission_s5", 1);
         }
       }
 
       if(var_15 == "toma_strike" || var_15 == "precision_airstrike" || var_15 == "cruise_predator" || var_15 == "chopper_gunner" || var_15 == "fuel_airstrike" || var_15 == "gunship") {
-        ref_12c3f("t9_ch_global_kill_with_aerial_scorestreak_or_killstreak_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_kill_with_aerial_scorestreak_or_killstreak_for_operator_mission_s5", 1);
       }
 
       if(var_5 & 1073741824 || var_1 == "iw8_me_t9ballisticknife_mp") {
-        ref_12c3f("t9_ch_global_melee_weapon_or_ballistic_knife_kill_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_melee_weapon_or_ballistic_knife_kill_for_operator_mission_s5", 1);
       }
 
       if(self.killcountthislife == 3) {
-        ref_12c3f("t9_ch_common_opbundle_01_objective_2", 1);
+        ref_12C3F("t9_ch_common_opbundle_01_objective_2", 1);
       }
 
       if(var_4 & 1048576) {
-        ref_12c3f("t9_ch_common_opbundle_02_objective_2", 1);
+        ref_12C3F("t9_ch_common_opbundle_02_objective_2", 1);
       }
 
       if(isDefined(self.recentkillcount) && self.recentkillcount == 2) {
-        ref_12c3f("t9_ch_common_opbundle_02_objective_3", 1);
+        ref_12C3F("t9_ch_common_opbundle_02_objective_3", 1);
       }
 
       if(var_12) {
-        ref_12c3f("t9_ch_common_opbundle_03_objective_3", 1);
+        ref_12C3F("t9_ch_common_opbundle_03_objective_3", 1);
       }
 
       if(self.killcountthislife == 5) {
-        ref_12c3f("t9_ch_common_opbundle_03_objective_4", 1);
+        ref_12C3F("t9_ch_common_opbundle_03_objective_4", 1);
       }
     }
 
     if(var_11 == "smg") {
-      ref_12c3f("t9_ch_global_smg_ekia_no_stock_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_smg_ekia_no_stock_for_operator_mission_s5", 1);
     }
 
     if(istrue(var_31)) {
-      ref_12c3f("t9_ch_global_ekia_tracker_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_ekia_tracker_for_operator_mission_s5", 1);
     }
 
     if(turret_struct(var_2)) {
-      ref_12c3f("t9_ch_global_assault_ekia_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_assault_ekia_for_operator_mission_s5", 1);
     }
 
     if(var_5 & 2048) {
-      ref_12c3f("t9_ch_global_ekia_downed_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_ekia_downed_for_operator_mission_s5", 1);
     }
 
     if(istrue(var_30)) {
-      ref_12c3f("t9_ch_global_ekia_paranoia_or_high_alert_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_ekia_paranoia_or_high_alert_for_operator_mission_s5", 1);
     }
 
     var_42 = undefined;
@@ -3728,50 +3728,50 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       }
 
       if(isstartstr(var_45, "thermal")) {
-        ref_12c3f("t9_ch_global_ekia_thermal_scope_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_ekia_thermal_scope_for_operator_mission_s5", 1);
       }
 
       if(var_11 == "spread" && isstartstr(var_45, "stockno")) {
-        ref_12c3f("t9_ch_global_shotgun_ekia_no_stock_for_operator_mission_s5", 1);
+        ref_12C3F("t9_ch_global_shotgun_ekia_no_stock_for_operator_mission_s5", 1);
       }
     }
 
     if(istrue(var_29)) {
-      ref_12c3f("t9_ch_global_ekia_cold_blooded_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_ekia_cold_blooded_for_operator_mission_s5", 1);
     }
 
     if(istrue(var_34)) {
-      ref_12c3f("t9_ch_global_ekia_with_flak_jacket_perk_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_ekia_with_flak_jacket_perk_for_operator_mission_s5", 1);
     }
 
     if(istrue(var_32) && var_5 & 1) {
-      ref_12c3f("t9_ch_global_ekia_under_enemy_detection_with_ghost_perk_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_ekia_under_enemy_detection_with_ghost_perk_for_operator_mission_s5", 1);
     }
 
     if(var_5 & 16777216) {
-      ref_12c3f("t9_ch_global_ekia_enemies_gas_mine_or_gas_grenade_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_ekia_enemies_gas_mine_or_gas_grenade_for_operator_mission_s5", 1);
     }
 
     if(useserverhud(var_1)) {
-      ref_12c3f("t9_ch_global_special_weapon_ekia_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_special_weapon_ekia_for_operator_mission_s5", 1);
     }
 
     if(istrue(var_35) || istrue(var_36)) {
-      ref_12c3f("t9_ch_global_ekia_gung_ho_double_time_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_ekia_gung_ho_double_time_for_operator_mission_s5", 1);
     }
 
     if(var_11 == "sniper") {
-      ref_12c3f("t9_ch_global_sniper_ekia_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_sniper_ekia_for_operator_mission_s5", 1);
     }
 
     if(var_11 == "mg") {
-      ref_12c3f("t9_ch_global_lmg_ekia_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_lmg_ekia_for_operator_mission_s5", 1);
     }
 
     var_61 = strtok(var_3, "|").size;
 
     if(var_61 >= 5) {
-      ref_12c3f("t9_ch_global_ekia_5_or_more_attachments_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_ekia_5_or_more_attachments_for_operator_mission_s5", 1);
     }
 
     var_95 = 0;
@@ -3788,34 +3788,34 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_98 = var_95 && var_96 && var_97;
 
     if(var_98) {
-      ref_12c3f("t9_ch_global_ekia_while_using_ninja_or_dead_silence_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_ekia_while_using_ninja_or_dead_silence_for_operator_mission_s5", 1);
     }
 
     if(var_11 == "pistol" && var_5 & 131072) {
-      ref_12c3f("t9_ch_global_pistol_ekia_with_silenced_weapons_for_operator_mission_s5", 1);
+      ref_12C3F("t9_ch_global_pistol_ekia_with_silenced_weapons_for_operator_mission_s5", 1);
     }
 
     switch (var_1) {
       case "iw8_sm_t9handling_mp":
       case "iw8_ar_t9mobility_mp":
-        ref_12c3f("t9_ch_common_opbundle_01_objective_1", 1);
+        ref_12C3F("t9_ch_common_opbundle_01_objective_1", 1);
         break;
       case "iw8_ar_akilo47_mp":
       case "iw8_sh_t9pump_mp":
       case "iw8_sm_t9burst_mp":
       case "iw8_ar_t9damage_mp":
-        ref_12c3f("t9_ch_common_opbundle_02_objective_1", 1);
+        ref_12C3F("t9_ch_common_opbundle_02_objective_1", 1);
         break;
       case "iw8_sm_t9heavy_mp":
       case "iw8_ar_t9standard_mp":
-        ref_12c3f("t9_ch_common_opbundle_03_objective_1", 1);
+        ref_12C3F("t9_ch_common_opbundle_03_objective_1", 1);
         break;
     }
   }
 
   if(var_8 >= 12) {
     if(var_7) {
-      if(turn_on_have_target_hud("iw8_sm_t9semiauto_mp") && !isDefined(self.ref_13ad4) && var_11 == "smg" && var_4 & 1048576) {
+      if(turn_on_have_target_hud("iw8_sm_t9semiauto_mp") && !isDefined(self.ref_13AD4) && var_11 == "smg" && var_4 & 1048576) {
         if(!isDefined(self.ref_13419)) {
           self.ref_13419 = 0;
         }
@@ -3823,14 +3823,14 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         self.ref_13419++;
 
         if(self.ref_13419 == 2) {
-          ref_12c3f("t9_ch_global_smg_headshot_kills_for_weapon_unlock_s6", 1);
-          self.ref_13ad4 = 1;
+          ref_12C3F("t9_ch_global_smg_headshot_kills_for_weapon_unlock_s6", 1);
+          self.ref_13AD4 = 1;
         }
       }
 
       if(turn_on_have_target_hud("iw8_ar_t9british_mp") && !isDefined(self.monitoraveragevelocities) && isDefined(var_2) && turret_struct(var_2)) {
-        if(isDefined(self.ref_12a86) && isDefined(self.ref_12a86[var_2.basename]) && self.ref_12a86[var_2.basename] == 2) {
-          ref_12c3f("t9_ch_global_ar_multikill_for_weapon_unlock_s6", 1);
+        if(isDefined(self.ref_12A86) && isDefined(self.ref_12A86[var_2.basename]) && self.ref_12A86[var_2.basename] == 2) {
+          ref_12C3F("t9_ch_global_ar_multikill_for_weapon_unlock_s6", 1);
           self.monitoraveragevelocities = 1;
         }
       }
@@ -3840,11 +3840,11 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       var_101 = !(var_5 & 1073741824);
 
       if((var_99 || var_100) && var_101) {
-        if(!isDefined(self.ref_12a0c)) {
-          self.ref_12a0c = 0;
+        if(!isDefined(self.ref_12A0C)) {
+          self.ref_12A0C = 0;
         }
 
-        self.ref_12a0c++;
+        self.ref_12A0C++;
       }
 
       if(var_12) {
@@ -3856,19 +3856,19 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       }
 
       if(turn_on_have_target_hud("iw8_me_t9battleaxe_mp") && !isDefined(self.chooseanim_vehicleturret)) {
-        if(isDefined(self.ref_11bc2) && self.ref_11bc2 > 0 && isDefined(self.numnonrallyvehicles) && self.numnonrallyvehicles > 0 && isDefined(self.ref_12a0c) && self.ref_12a0c > 0) {
-          ref_12c3f("t9_ch_global_kills_by_gun_and_melee_weapon_and_lethal_same_life_for_weapon_unlock_s6", 1);
+        if(isDefined(self.ref_11BC2) && self.ref_11BC2 > 0 && isDefined(self.numnonrallyvehicles) && self.numnonrallyvehicles > 0 && isDefined(self.ref_12A0C) && self.ref_12A0C > 0) {
+          ref_12C3F("t9_ch_global_kills_by_gun_and_melee_weapon_and_lethal_same_life_for_weapon_unlock_s6", 1);
           self.chooseanim_vehicleturret = 1;
         }
       }
 
       if(turn_on_have_target_hud("iw8_me_t9coldwar_mp") && !isDefined(self.setteamlastzombietime)) {
         if(var_11 == "throwingknife" || istrue(var_21) || var_1 == "equip_throwing_knife") {
-          self.ref_13b5b = 1;
+          self.ref_13B5B = 1;
         }
 
-        if(isDefined(self.ref_11bc2) && self.ref_11bc2 >= 0 && istrue(self.ref_13b5b)) {
-          ref_12c3f("t9_ch_global_melee_kill_plus_hatchet_or_throwing_kill_single_life_for_weapon_unlock_s6", 1);
+        if(isDefined(self.ref_11BC2) && self.ref_11BC2 >= 0 && istrue(self.ref_13B5B)) {
+          ref_12C3F("t9_ch_global_melee_kill_plus_hatchet_or_throwing_kill_single_life_for_weapon_unlock_s6", 1);
           self.setteamlastzombietime = 1;
         }
       }
@@ -3882,7 +3882,7 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
           self.ref_13418++;
 
           if(self.ref_13418 == 3) {
-            ref_12c3f("t9_ch_global_smg_ads_x_kills_for_weapon_unlock_s6", 1);
+            ref_12C3F("t9_ch_global_smg_ads_x_kills_for_weapon_unlock_s6", 1);
             self.waitingforteammaterevive = 1;
           }
         }
@@ -3890,14 +3890,14 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
       if(turn_on_have_target_hud("iw8_sh_t9leveraction_mp") && !isDefined(self.trial_targs_combo)) {
         if(var_11 == "spread" && var_4 & 524288) {
-          if(!isDefined(self.ref_132bc)) {
-            self.ref_132bc = 0;
+          if(!isDefined(self.ref_132BC)) {
+            self.ref_132BC = 0;
           }
 
-          self.ref_132bc++;
+          self.ref_132BC++;
 
-          if(self.ref_132bc == 2) {
-            ref_12c3f("t9_ch_global_shotgun_point_blank_kills_for_weapon_unlock_s6", 1);
+          if(self.ref_132BC == 2) {
+            ref_12C3F("t9_ch_global_shotgun_point_blank_kills_for_weapon_unlock_s6", 1);
             self.trial_targs_combo = 1;
           }
         }
@@ -3912,7 +3912,7 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
           self.cargo_truck_initcollision++;
 
           if(self.cargo_truck_initcollision == 3) {
-            ref_12c3f("t9_ch_global_ar_kill_enemy_at_lower_elevation_for_weapon_unlock_s6", 1);
+            ref_12C3F("t9_ch_global_ar_kill_enemy_at_lower_elevation_for_weapon_unlock_s6", 1);
             self.send_notify_to_module_struct = 1;
           }
         }
@@ -3921,42 +3921,42 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     if(var_7) {
       if(var_12) {
-        ref_12c3f("t9_ch_global_lethal_kill_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_lethal_kill_for_operator_mission_s6", 1);
       }
 
       if(isDefined(self.getanglesfacingorigin) && self.getanglesfacingorigin == 2) {
-        ref_12c3f("t9_ch_global_two_headshots_same_game_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_two_headshots_same_game_for_operator_mission_s6", 1);
       }
 
       if(var_9 == 5) {
-        ref_12c3f("t9_ch_global_killstreak_5_for_operator_mission_s6", 1);
-        ref_12c3f("t9_ch_common_opbundle_05_objective_2", 1);
+        ref_12C3F("t9_ch_global_killstreak_5_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_common_opbundle_05_objective_2", 1);
       }
 
       if(var_9 == 3) {
-        ref_12c3f("t9_ch_common_opbundle_06_objective_3", 1);
+        ref_12C3F("t9_ch_common_opbundle_06_objective_3", 1);
       }
 
       if(isDefined(var_2) && isDefined(var_2.classname) && var_2.classname == "grenade") {
-        ref_12c3f("t9_ch_global_explosive_kills_for_operator_mission_s6", 1);
-        ref_12c3f("t9_ch_common_opbundle_06_objective_2", 1);
+        ref_12C3F("t9_ch_global_explosive_kills_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_common_opbundle_06_objective_2", 1);
       }
 
       if(isDefined(self.cargo_truck_mg_addgunnerdamagemod) && self.cargo_truck_mg_addgunnerdamagemod == 3) {
-        ref_12c3f("t9_ch_global_ar_killstreak_3_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_ar_killstreak_3_for_operator_mission_s6", 1);
       }
 
       if(self.recentkillcount >= 2) {
-        ref_12c3f("t9_ch_global_kills_while_on_streak_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_kills_while_on_streak_for_operator_mission_s6", 1);
       }
 
-      if(istrue(var_2.ref_12cc1)) {
-        ref_12c3f("t9_ch_global_supplypod_kill_for_operator_mission_s6", 1);
+      if(istrue(var_2.ref_12CC1)) {
+        ref_12C3F("t9_ch_global_supplypod_kill_for_operator_mission_s6", 1);
       }
 
       if(var_5 & 268435456) {
-        ref_12c3f("t9_ch_global_kill_without_taking_damage_for_operator_mission_s6", 1);
-        ref_12c3f("t9_ch_common_opbundle_07_objective_2", 1);
+        ref_12C3F("t9_ch_global_kill_without_taking_damage_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_common_opbundle_07_objective_2", 1);
         var_95 = 0;
         var_96 = 0;
         var_97 = 0;
@@ -3971,17 +3971,17 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_98 = var_95 && var_96 && var_97;
 
         if(var_98) {
-          ref_12c3f("t9_ch_global_ninja_kill_without_taking_damage_for_operator_mission_s6", 1);
+          ref_12C3F("t9_ch_global_ninja_kill_without_taking_damage_for_operator_mission_s6", 1);
         }
       }
 
       if(var_4 & 1048576) {
-        ref_12c3f("t9_ch_global_headshots_for_operator_mission_s6", 1);
-        ref_12c3f("t9_ch_common_opbundle_04_objective_3", 1);
+        ref_12C3F("t9_ch_global_headshots_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_common_opbundle_04_objective_3", 1);
       }
 
       if(isDefined(self.player_equip_primary) && self.recentkillcount >= 2 && weaponclass(self.player_equip_primary) == "smg" && var_2 == self.player_equip_primary) {
-        ref_12c3f("t9_ch_global_smg_multikill_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_smg_multikill_for_operator_mission_s6", 1);
       }
 
       if(var_11 == "smg" && var_4 & 16) {
@@ -4000,7 +4000,7 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
             }
 
             if(isstartstr(var_45, "laser")) {
-              ref_12c3f("t9_ch_global_smg_hipfire_laser_attachment_ekia_for_operator_mission_s6", 1);
+              ref_12C3F("t9_ch_global_smg_hipfire_laser_attachment_ekia_for_operator_mission_s6", 1);
               break;
             }
           }
@@ -4008,50 +4008,50 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       }
 
       if(var_5 & 262144) {
-        ref_12c3f("t9_ch_global_kill_through_wall_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_kill_through_wall_for_operator_mission_s6", 1);
       }
 
       if(var_14 && getkillstreaknamefromweapon(var_2) == "toma_strike") {
-        ref_12c3f("t9_ch_global_napalm_strike_or_cluster_strike_kill_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_napalm_strike_or_cluster_strike_kill_for_operator_mission_s6", 1);
       }
 
       if(var_4 & 512 || var_4 & 1024) {
-        ref_12c3f("t9_ch_global_kill_enemy_while_crouched_or_prone_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_kill_enemy_while_crouched_or_prone_for_operator_mission_s6", 1);
       }
 
       if(var_5 & 16777216) {
-        ref_12c3f("t9_ch_global_ekia_enemies_gas_mine_or_gas_grenade_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_ekia_enemies_gas_mine_or_gas_grenade_for_operator_mission_s6", 1);
       }
 
-      if(isDefined(self.ref_142ad) && var_12) {
+      if(isDefined(self.ref_142AD) && var_12) {
         var_104 = self.origin + (0, 0, 35);
 
         if(var_4 & 1024) {
           var_104 = self.origin + (0, 0, 17);
         }
 
-        var_105 = scripts\engine\trace::ray_trace(self.ref_142ad.origin + (0, 0, 35), var_104, undefined, undefined, undefined, 1);
+        var_105 = scripts\engine\trace::ray_trace(self.ref_142AD.origin + (0, 0, 35), var_104, undefined, undefined, undefined, 1);
 
         if(isDefined(var_105["entity"]) && var_105["entity"] != self) {
-          ref_12c3f("t9_ch_global_lethal_equipment_kills_on_unseen_targets_for_operator_mission_s6", 1);
+          ref_12C3F("t9_ch_global_lethal_equipment_kills_on_unseen_targets_for_operator_mission_s6", 1);
         }
       }
 
       if(self.recentkillcount >= 3) {
-        ref_12c3f("t9_ch_global_triple_kills_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_triple_kills_for_operator_mission_s6", 1);
       }
 
-      if(isDefined(self.ref_142ad) && !(var_4 & 512)) {
+      if(isDefined(self.ref_142AD) && !(var_4 & 512)) {
         var_104 = self.origin + (0, 0, 35);
 
         if(var_4 & 1024) {
           var_104 = self.origin + (0, 0, 17);
         }
 
-        var_105 = scripts\engine\trace::ray_trace(var_104, self.ref_142ad.origin + (0, 0, 35), undefined, undefined, undefined, 1);
+        var_105 = scripts\engine\trace::ray_trace(var_104, self.ref_142AD.origin + (0, 0, 35), undefined, undefined, undefined, 1);
 
         if(var_105["fraction"] < 1) {
-          ref_12c3f("t9_ch_global_kill_enemies_while_partially_covered_for_operator_mission_s6", 1);
+          ref_12C3F("t9_ch_global_kill_enemies_while_partially_covered_for_operator_mission_s6", 1);
         }
       }
 
@@ -4059,33 +4059,33 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_79 = gettime() - self.watch_for_player_enter_trigger < 10000;
 
         if(istrue(var_79)) {
-          ref_12c3f("t9_ch_global_three_or_more_kills_with_stim_shot_for_operator_mission_s6", 1);
+          ref_12C3F("t9_ch_global_three_or_more_kills_with_stim_shot_for_operator_mission_s6", 1);
         }
       }
 
       if(isDefined(self.plantedsuperequip)) {
         foreach(var_55 in self.plantedsuperequip) {
           if(isDefined(var_55.origin) && distancesquared(var_55.origin, self.origin) < 640000) {
-            ref_12c3f("t9_ch_global_kill_near_non_lethal_field_upgrade_for_operator_mission_s6", 1);
+            ref_12C3F("t9_ch_global_kill_near_non_lethal_field_upgrade_for_operator_mission_s6", 1);
             break;
           }
         }
       }
 
-      if(isDefined(self.ref_11bc1) && self.ref_11bc1 == 3) {
-        ref_12c3f("t9_ch_global_three_melee_kills_in_single_game_for_operator_mission_s6", 1);
+      if(isDefined(self.ref_11BC1) && self.ref_11BC1 == 3) {
+        ref_12C3F("t9_ch_global_three_melee_kills_in_single_game_for_operator_mission_s6", 1);
       }
 
       if(isDefined(self.attackerdata) && isDefined(self.lastkilledplayer) && isDefined(self.attackerdata[self.lastkilledplayer.guid]) && isDefined(self.attackerdata[self.lastkilledplayer.guid].lasttimedamaged)) {
-        ref_12c3f("t9_ch_global_kill_enemy_damage_you_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_kill_enemy_damage_you_for_operator_mission_s6", 1);
       }
 
       if(istrue(var_20)) {
-        ref_12c3f("t9_ch_global_frag_grenade_kill_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_frag_grenade_kill_for_operator_mission_s6", 1);
       }
 
       if(var_11 == "rocketlauncher") {
-        ref_12c3f("t9_ch_global_launcher_kill_or_destruction_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_launcher_kill_or_destruction_for_operator_mission_s6", 1);
       }
 
       if(isDefined(self.lastkilledplayer)) {
@@ -4093,44 +4093,44 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_109 = distance2d(self.origin, self.lastkilledplayer.origin);
 
         if(var_109 >= var_108) {
-          ref_12c3f("t9_ch_global_kill_enemy_over_100m_away_for_operator_mission_s6", 1);
+          ref_12C3F("t9_ch_global_kill_enemy_over_100m_away_for_operator_mission_s6", 1);
         }
       }
     }
 
-    ref_12c3f("t9_ch_global_ekia_for_operator_mission_s6", 1);
+    ref_12C3F("t9_ch_global_ekia_for_operator_mission_s6", 1);
 
     if(istrue(var_27) || istrue(var_28)) {
-      ref_12c3f("t9_ch_global_ekia_with_tac_mask_or_battle_hardened_perk_for_operator_mission_s6", 1);
+      ref_12C3F("t9_ch_global_ekia_with_tac_mask_or_battle_hardened_perk_for_operator_mission_s6", 1);
     }
 
     if(isDefined(var_2) && va_cluster_spawnpoint_valid(var_2)) {
-      ref_12c3f("t9_ch_global_ekia_tactical_rifle_for_operator_mission_s6", 1);
+      ref_12C3F("t9_ch_global_ekia_tactical_rifle_for_operator_mission_s6", 1);
     }
 
     if(isDefined(var_2) && turret_struct(var_2)) {
-      ref_12c3f("t9_ch_global_assault_ekia_for_operator_mission_s6", 1);
+      ref_12C3F("t9_ch_global_assault_ekia_for_operator_mission_s6", 1);
     }
 
     switch (level.disable_super_in_turret.name) {
       case "mini":
       case "":
-        ref_12c3f("t9_ch_global_ekia_single_life_elim_mode_for_operator_mission_s6", 1);
+        ref_12C3F("t9_ch_global_ekia_single_life_elim_mode_for_operator_mission_s6", 1);
         break;
       default:
         break;
     }
 
     if(var_11 == "smg") {
-      ref_12c3f("t9_ch_global_smg_ekia_for_operator_mission_s6", 1);
+      ref_12C3F("t9_ch_global_smg_ekia_for_operator_mission_s6", 1);
     }
 
     if(var_11 == "pistol") {
-      ref_12c3f("t9_ch_global_pistol_ekia_for_operator_mission_for_operator_mission_s6", 1);
+      ref_12C3F("t9_ch_global_pistol_ekia_for_operator_mission_for_operator_mission_s6", 1);
     }
 
     if(var_4 & 131072) {
-      ref_12c3f("t9_ch_global_ekia_secondary_for_operator_mission_s6", 1);
+      ref_12C3F("t9_ch_global_ekia_secondary_for_operator_mission_s6", 1);
     }
 
     if(isDefined(var_2) && isDefined(var_2.attachments)) {
@@ -4148,47 +4148,47 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         }
 
         if(isstartstr(var_45, "xmag") || isstartstr(var_45, "smag") || isstartstr(var_45, "drum")) {
-          ref_12c3f("t9_ch_global_ekia_extra_ammo_magazine_for_operator_mission_s6", 1);
+          ref_12C3F("t9_ch_global_ekia_extra_ammo_magazine_for_operator_mission_s6", 1);
         }
       }
     }
 
     if(var_11 == "spread") {
-      ref_12c3f("t9_ch_global_shotgun_ekia_for_operator_mission_s6", 1);
+      ref_12C3F("t9_ch_global_shotgun_ekia_for_operator_mission_s6", 1);
     }
 
     if(isDefined(var_2) && unset_relic_focus_fire(var_2)) {
-      ref_12c3f("t9_ch_global_ekia_full_auto_for_operator_mission_s6", 1);
+      ref_12C3F("t9_ch_global_ekia_full_auto_for_operator_mission_s6", 1);
     }
 
     if(var_11 == "mg") {
-      ref_12c3f("t9_ch_global_lmg_ekia_for_operator_mission_s6", 1);
+      ref_12C3F("t9_ch_global_lmg_ekia_for_operator_mission_s6", 1);
     }
 
     if(istrue(var_30)) {
-      ref_12c3f("t9_ch_global_ekia_paranoia_or_high_alert_for_operator_mission_s6", 1);
+      ref_12C3F("t9_ch_global_ekia_paranoia_or_high_alert_for_operator_mission_s6", 1);
     }
 
     switch (var_1) {
       case "iw8_sm_t9burst_mp":
-        ref_12c3f("t9_ch_common_opbundle_04_objective_1", 1);
+        ref_12C3F("t9_ch_common_opbundle_04_objective_1", 1);
         break;
       case "iw8_lm_t9light_mp":
       case "iw8_sm_t9heavy_mp":
       case "iw8_ar_t9slowhandling_mp":
-        ref_12c3f("t9_ch_common_opbundle_05_objective_1", 1);
+        ref_12C3F("t9_ch_common_opbundle_05_objective_1", 1);
         break;
       case "iw8_la_t9launcher_mp":
       case "iw8_sm_t9standard_mp":
-        ref_12c3f("t9_ch_common_opbundle_06_objective_1", 1);
+        ref_12C3F("t9_ch_common_opbundle_06_objective_1", 1);
         break;
       case "iw8_sm_t9handling_mp":
       case "iw8_pi_t9fullauto_mp":
-        ref_12c3f("t9_ch_common_opbundle_07_objective_1", 1);
+        ref_12C3F("t9_ch_common_opbundle_07_objective_1", 1);
         break;
       case "iw8_ar_t9british_mp":
-        ref_12c3f("t9_ch_common_opbundle_04_objective_1", 1);
-        ref_12c3f("t9_ch_common_opbundle_07_objective_1", 1);
+        ref_12C3F("t9_ch_common_opbundle_04_objective_1", 1);
+        ref_12C3F("t9_ch_common_opbundle_07_objective_1", 1);
         break;
     }
   }
@@ -4216,7 +4216,7 @@ function init_turrets(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         }
 
         if(self.isgroundwardom == 2) {
-          ref_12c3f("t9_ch_global_melee_weapon_kill_while_using_ninja_or_dead_silence_for_weapon_unlock_s7", 1);
+          ref_12C3F("t9_ch_global_melee_weapon_kill_while_using_ninja_or_dead_silence_for_weapon_unlock_s7", 1);
         }
       }
     }
@@ -4451,7 +4451,7 @@ function init_sentry_traps(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
       }
     }
 
-    var_2.ref_142ad = var_4;
+    var_2.ref_142AD = var_4;
     init_turrets(var_2, var_16, var_28, var_7, var_13, var_5, var_6, var_1, 1);
     return;
   }
@@ -4713,13 +4713,13 @@ function play_sound_from_closest_player(var_0) {
   }
 
   if(isagent(var_0)) {
-    var_1 = ref_12ce0(var_1, var_0);
+    var_1 = ref_12CE0(var_1, var_0);
   }
 
   return var_1;
 }
 
-function ref_12ce0(var_0, var_1) {
+function ref_12CE0(var_0, var_1) {
   if(isDefined(var_1.unittype) && var_1.unittype == "zombie") {
     var_0 |= 2048;
   }
@@ -4836,7 +4836,7 @@ function make_c4_pick_up_interact(var_0, var_1) {
   return false;
 }
 
-function ref_1424b() {
+function ref_1424B() {
   var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getdriver(self, 1);
 
   if(!isDefined(var_0)) {
@@ -4857,7 +4857,7 @@ function ref_1424b() {
       var_1 = gettime() - var_0.investigate_someone_using_bomb;
 
       if(var_1 >= 1000) {
-        ref_12c3f(var_0, "t9_ch_global_dirt_bike_airtime_for_operator_mission_s4", var_1 / 1000);
+        ref_12C3F(var_0, "t9_ch_global_dirt_bike_airtime_for_operator_mission_s4", var_1 / 1000);
         var_0.investigate_someone_using_bomb = undefined;
         return;
       }
@@ -4869,7 +4869,7 @@ function ref_1424b() {
       var_1 = gettime() - var_1.investigate_someone_using_bomb;
 
       if(var_1 >= 1000) {
-        ref_12c3f(var_1, "t9_ch_global_dirt_bike_airtime_for_operator_mission_s4", var_1 / 1000);
+        ref_12C3F(var_1, "t9_ch_global_dirt_bike_airtime_for_operator_mission_s4", var_1 / 1000);
       }
 
       var_1.investigate_someone_using_bomb = undefined;
@@ -4910,7 +4910,7 @@ function ref_12083() {
   }
 
   if(level.getallactivequestsforteam >= 10 && getdvarint("scr_enable_br_satellite_hunt", 0) == 1) {
-    ref_12c3f("t9_ch_global_secure_satlink_for_s4_event_wz", 1);
+    ref_12C3F("t9_ch_global_secure_satlink_for_s4_event_wz", 1);
     return;
   }
 }
@@ -4921,12 +4921,12 @@ function ref_12005() {
   }
 
   if(level.getallactivequestsforteam >= 10 && getdvarint("scr_enable_br_satellite_hunt", 0) == 1) {
-    ref_12c3f("t9_ch_global_collect_satellite_reward_for_s4_event_wz", 1);
+    ref_12C3F("t9_ch_global_collect_satellite_reward_for_s4_event_wz", 1);
     return;
   }
 }
 
-function ref_120a9(var_0) {
+function ref_120A9(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -4936,12 +4936,12 @@ function ref_120a9(var_0) {
   }
 
   if(level.getallactivequestsforteam >= 11 && getdvarint("scr_br_numbers_tower_enabled", 0) == 1 && getdvarint("scr_br_numbers_tower_usable", 0) == 1) {
-    ref_12c3f(var_0, 1);
+    ref_12C3F(var_0, 1);
     return;
   }
 }
 
-function ref_125f3() {
+function ref_125F3() {
   return istrue(self.iszombie);
 }
 
@@ -4972,22 +4972,22 @@ function playerdamaged(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(level.getallactivequestsforteam >= 12) {
     if(isDefined(var_1)) {
-      ref_12c3f(var_1, "t9_ch_global_damage_done_for_operator_mission_s6", var_2);
-      ref_12c3f(var_1, "t9_ch_global_damage_done_s6", var_2);
+      ref_12C3F(var_1, "t9_ch_global_damage_done_for_operator_mission_s6", var_2);
+      ref_12C3F(var_1, "t9_ch_global_damage_done_s6", var_2);
     }
   }
 
-  if(turn_on_have_target_hud("iw8_ar_t9soviet_mp") && isDefined(var_1) && !isDefined(var_1.ref_139e3)) {
+  if(turn_on_have_target_hud("iw8_ar_t9soviet_mp") && isDefined(var_1) && !isDefined(var_1.ref_139E3)) {
     if(isDefined(var_4) && turret_struct(var_4)) {
-      if(!isDefined(var_1.ref_11b21)) {
-        var_1.ref_11b21 = var_2;
+      if(!isDefined(var_1.ref_11B21)) {
+        var_1.ref_11B21 = var_2;
       } else {
-        var_1.ref_11b21 += var_2;
+        var_1.ref_11B21 += var_2;
       }
 
-      if(var_1.ref_11b21 >= 1000) {
-        ref_12c3f(var_1, "t9_ch_global_ar_deal_1000_damage_for_weapon_unlock_s7", 1);
-        var_1.ref_139e3 = 1;
+      if(var_1.ref_11B21 >= 1000) {
+        ref_12C3F(var_1, "t9_ch_global_ar_deal_1000_damage_for_weapon_unlock_s7", 1);
+        var_1.ref_139E3 = 1;
         return;
       }
 
@@ -5035,17 +5035,17 @@ function usedkillstreak(var_0) {
     }
 
     if(self.fuelsequencestability >= 5) {
-      ref_12c3f("t9_ch_global_x_scorestreak_activations_single_match_s3", 1);
+      ref_12C3F("t9_ch_global_x_scorestreak_activations_single_match_s3", 1);
       self.vote_player_init = 1;
     }
   }
 
   if(level.getallactivequestsforteam >= 9 && (var_0 == "nuke" || var_0 == "precision_airstrike" || var_0 == "cruise_predator" || var_0 == "manual_turret" || var_0 == "pac_sentry" || var_0 == "toma_strike" || var_0 == "chopper_gunner" || var_0 == "bradley" || var_0 == "gunship" || var_0 == "fuel_airstrike" || var_0 == "chopper_support" || var_0 == "sentry_gun" || var_0 == "white_phosphorus" || var_0 == "hover_jet" || var_0 == "juggernaut" || var_0 == "assault_drone")) {
-    ref_12c3f("t9_ch_global_call_in_lethal_scorestreak_for_operator_mission_s3", 1);
+    ref_12C3F("t9_ch_global_call_in_lethal_scorestreak_for_operator_mission_s3", 1);
   }
 
   if(level.getallactivequestsforteam >= 12) {
-    ref_12c3f("t9_ch_common_opbundle_07_objective_3", 1);
+    ref_12C3F("t9_ch_common_opbundle_07_objective_3", 1);
     return;
   }
 }

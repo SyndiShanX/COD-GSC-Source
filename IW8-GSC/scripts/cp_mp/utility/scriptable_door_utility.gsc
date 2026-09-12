@@ -19,17 +19,17 @@ function arenaballs() {
 
   level.arenaflag_showflagoutlineplayer = [];
   level.arenaflag_setvisible = [];
-  level.arenaflag_setenabled = &ref_134e5;
+  level.arenaflag_setenabled = &ref_134E5;
   var_4 = scripts\engine\utility::getStructArray("aa_turret_spawn", "targetname");
 
   foreach(var_6 in var_4) {
-    thread ref_134e5();
+    thread ref_134E5();
   }
 
-  thread ref_11b1f();
+  thread ref_11B1F();
 }
 
-function ref_134e5() {
+function ref_134E5() {
   var_0 = self;
   var_1 = "manual_turret_flak_mp";
 
@@ -43,13 +43,13 @@ function ref_134e5() {
   if(getdvarint("aa_turret_map_debug", 0) == 1) {
     var_3 = spawnStruct();
     var_3 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(5, 0, 0, var_0.origin);
-    var_3 scripts\mp\gametypes\br_quest_util::ref_1316f(3000);
+    var_3 scripts\mp\gametypes\br_quest_util::ref_1316F(3000);
 
     while(!isDefined(level.players[0])) {
       waitframe();
     }
 
-    var_3 scripts\mp\gametypes\br_quest_util::ref_1336a(level.players[0]);
+    var_3 scripts\mp\gametypes\br_quest_util::ref_1336A(level.players[0]);
   }
 
   if(!isDefined(var_0.angles)) {
@@ -75,7 +75,7 @@ function ref_134e5() {
   return var_2;
 }
 
-function ref_11b1f() {
+function ref_11B1F() {
   level waittill("prematch_fade_done");
   level notify("match_start_reset_aa_turrets");
 
@@ -110,7 +110,7 @@ function ref_11b1f() {
   var_6 = scripts\engine\utility::getStructArray("aa_turret_spawn", "targetname");
 
   foreach(var_8 in var_6) {
-    thread ref_134e5();
+    thread ref_134E5();
   }
 }
 
@@ -135,14 +135,14 @@ function arenaflag_setcaptured() {
     var_1.nocorpse = undefined;
     var_1.laststancechangetime = gettime();
     var_1.pers["distTrackingPassed"] = undefined;
-    var_1 scripts\cp_mp\killstreaks\manual_turret::ref_11acd(1);
+    var_1 scripts\cp_mp\killstreaks\manual_turret::ref_11ACD(1);
 
     if(var_1 hasweapon("manual_turret_flak_mp")) {
       var_1 takeweapon("manual_turret_flak_mp");
     }
 
     var_1 scripts\mp\utility\inventory::switchtolastweapon();
-    var_1 thread scripts\cp_mp\killstreaks\manual_turret::ref_11ac7();
+    var_1 thread scripts\cp_mp\killstreaks\manual_turret::ref_11AC7();
     return;
   }
 }
@@ -178,7 +178,7 @@ function arenaflag_showflagoutline(var_0, var_1) {
     }
 
     var_7 = var_3.origin;
-    var_3 scripts\cp_mp\killstreaks\manual_turret::ref_11acd(0);
+    var_3 scripts\cp_mp\killstreaks\manual_turret::ref_11ACD(0);
     var_3 disableturretdismount();
     var_0.owner = var_3;
     var_0.team = var_3.team;
@@ -188,7 +188,7 @@ function arenaflag_showflagoutline(var_0, var_1) {
     if(!istrue(var_8)) {
       if(isalive(var_3)) {
         var_3 enableturretdismount();
-        var_3 scripts\cp_mp\killstreaks\manual_turret::ref_11acd(1);
+        var_3 scripts\cp_mp\killstreaks\manual_turret::ref_11ACD(1);
 
         if(var_3 hasweapon("manual_turret_flak_mp")) {
           var_3 takeweapon("manual_turret_flak_mp");
@@ -247,14 +247,14 @@ function arenaflag_showflagoutline(var_0, var_1) {
       var_3.nocorpse = undefined;
       var_3.txt_nag = undefined;
       var_3.laststancechangetime = gettime();
-      var_3 scripts\cp_mp\killstreaks\manual_turret::ref_11acd(1);
+      var_3 scripts\cp_mp\killstreaks\manual_turret::ref_11ACD(1);
 
       if(var_3 hasweapon("manual_turret_flak_mp")) {
         var_3 takeweapon("manual_turret_flak_mp");
       }
 
       var_3 scripts\mp\utility\inventory::switchtolastweapon();
-      var_3 thread scripts\cp_mp\killstreaks\manual_turret::ref_11ac7();
+      var_3 thread scripts\cp_mp\killstreaks\manual_turret::ref_11AC7();
       var_3 setOrigin(var_7);
       var_3 setplayerangles((var_3.angles[0], var_3.angles[1], 0));
     }
@@ -292,10 +292,10 @@ function arena_turret_op_debug() {
 
     var_1 thread scripts\mp\damagefeedback::updatedamagefeedback("hitequip");
 
-    if(isDefined(var_1) && isDefined(var_1.vehicle) && isDefined(var_1.vehicle.ref_13e92)) {
-      if(var_1.vehicle.ref_13e92 == "tur_gun_fd_mp_seeking") {
+    if(isDefined(var_1) && isDefined(var_1.vehicle) && isDefined(var_1.vehicle.ref_13E92)) {
+      if(var_1.vehicle.ref_13E92 == "tur_gun_fd_mp_seeking") {
         self.health -= int(var_0 * level.pindia_vehicle_registration);
-      } else if(var_1.vehicle.ref_13e92 == "tur_gun_bt_mp") {
+      } else if(var_1.vehicle.ref_13E92 == "tur_gun_bt_mp") {
         self.health -= int(var_0 * level.findeventforchosenweight);
       }
     }

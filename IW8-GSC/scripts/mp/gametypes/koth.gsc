@@ -55,7 +55,7 @@ function onstartgametype() {
   seticonnames();
 
   if(!level.zonerandomlocationorder) {
-    ref_12bbc();
+    ref_12BBC();
   }
 
   thread hardpointmainloop();
@@ -69,7 +69,7 @@ function updategametypedvars() {
   level.zoneactivationdelay = scripts\mp\utility\dvars::dvarfloatvalue("zoneActivationDelay", 0, 0, 60);
   level.zonerandomlocationorder = scripts\mp\utility\dvars::dvarintvalue("randomLocationOrder", 0, 0, 1);
   level.zoneadditivescoring = scripts\mp\utility\dvars::dvarintvalue("additiveScoring", 0, 0, 1);
-  level.ref_1221a = scripts\mp\utility\dvars::dvarintvalue("pauseTime", 1, 0, 1);
+  level.ref_1221A = scripts\mp\utility\dvars::dvarintvalue("pauseTime", 1, 0, 1);
   level.delayplayer = scripts\mp\utility\dvars::dvarintvalue("delayPlayer", 0, 0, 1);
   level.spawndelay = scripts\mp\utility\dvars::dvarfloatvalue("spawnDelay", 0.5, 0, 10);
   level.usehqrules = scripts\mp\utility\dvars::dvarintvalue("useHQRules", 0, 0, 1);
@@ -115,7 +115,7 @@ function hardpointmainloop() {
   level.kothhillrotation = 0;
 
   if(!scripts\mp\flags::gameflag("prematch_done")) {
-    level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+    level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   }
 
   level.zone scripts\mp\gametypes\obj_zonecapture::activatezone();
@@ -123,11 +123,11 @@ function hardpointmainloop() {
   level.zone.active = 1;
   level.zone scripts\mp\gameobjects::setvisibleteam("any");
   level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.icontarget);
-  scripts\mp\utility\game::ref_119ac(undefined, undefined, "New Hardpoint", level.zone.trigger.origin);
-  level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_moved", level.zone.trigger.origin);
+  scripts\mp\utility\game::ref_119AC(undefined, undefined, "New Hardpoint", level.zone.trigger.origin);
+  level.zone thread scripts\common\utility::ref_13E0A(level.ref_11B29, "hill_moved", level.zone.trigger.origin);
   scripts\mp\flags::gameflagwait("prematch_done");
 
-  if(level.ref_1221a) {
+  if(level.ref_1221A) {
     level scripts\mp\gamelogic::pausetimer();
   }
 
@@ -142,7 +142,7 @@ function hardpointmainloop() {
     level.ref_14726 = 1;
     level thread scripts\mp\hud_message::updatematchstatushintforallplayers(undefined, 36, 36);
     thread waitthenplaynewobj();
-    level.zone thread scripts\mp\gametypes\obj_zonecapture::ref_1199e(level.firstzoneactivationdelay, level.zone.curorigin + level.zone.offset3d);
+    level.zone thread scripts\mp\gametypes\obj_zonecapture::ref_1199E(level.firstzoneactivationdelay, level.zone.curorigin + level.zone.offset3d);
     wait level.firstzoneactivationdelay;
     level.ref_14726 = 0;
     level thread scripts\mp\hud_message::updatematchstatushintforallplayers(undefined, 35, 35);
@@ -152,13 +152,13 @@ function hardpointmainloop() {
   scripts\mp\utility\sound::playsoundonplayers("mp_hq_activate_sfx");
 
   for(;;) {
-    if(!isDefined(level.ref_11ad5)) {
+    if(!isDefined(level.ref_11AD5)) {
       thread setupzonecallouts();
     }
 
     level.objectivesetorder = 1;
 
-    if(level.ref_1221a) {
+    if(level.ref_1221A) {
       level scripts\mp\gamelogic::resumetimer();
     }
 
@@ -179,7 +179,7 @@ function hardpointmainloop() {
     hpcaptureloop();
     var_2 = level.zone scripts\mp\gameobjects::getownerteam();
 
-    if(level.ref_1221a) {
+    if(level.ref_1221A) {
       level scripts\mp\gamelogic::resumetimer();
     }
 
@@ -245,41 +245,41 @@ function killhardpointvfx() {
   self.neutralhardpointfx = [];
 }
 
-function ref_12bbc() {
+function ref_12BBC() {
   switch (level.mapname) {
     case "mp_hackney_yard":
     case "mp_hackney_am":
-      level.ref_12bbe = ["1", "4", "3", "9", "8"];
+      level.ref_12BBE = ["1", "4", "3", "9", "8"];
       break;
     case "mp_spear":
     case "mp_spear_pm":
-      level.ref_12bbe = ["5", "4", "3", "2", "6"];
+      level.ref_12BBE = ["5", "4", "3", "2", "6"];
       break;
     case "mp_cave":
     case "mp_cave_am":
-      level.ref_12bbe = ["1", "5", "2", "3", "4"];
+      level.ref_12BBE = ["1", "5", "2", "3", "4"];
       break;
     case "mp_petrograd":
-      level.ref_12bbe = ["1", "9", "4", "5", "2"];
+      level.ref_12BBE = ["1", "9", "4", "5", "2"];
       break;
     case "mp_deadzone":
-      level.ref_12bbe = ["12", "11", "3", "1", "2"];
+      level.ref_12BBE = ["12", "11", "3", "1", "2"];
       break;
     case "mp_raid":
-      level.ref_12bbe = ["20", "2", "8", "9", "5"];
+      level.ref_12BBE = ["20", "2", "8", "9", "5"];
       break;
     case "mp_piccadilly":
-      level.ref_12bbe = ["1", "5", "7", "3", "8"];
+      level.ref_12BBE = ["1", "5", "7", "3", "8"];
       break;
     case "mp_crash2_pm":
     case "mp_crash2":
-      level.ref_12bbe = ["1", "20", "5", "4", "19"];
+      level.ref_12BBE = ["1", "20", "5", "4", "19"];
       break;
     case "mp_emporium":
-      level.ref_12bbe = ["1", "2", "3", "4", "5"];
+      level.ref_12BBE = ["1", "2", "3", "4", "5"];
       break;
     case "mp_broadcast2":
-      level.ref_12bbe = ["1", "2", "3", "4", "5"];
+      level.ref_12BBE = ["1", "2", "3", "4", "5"];
       break;
     default:
       break;
@@ -287,18 +287,18 @@ function ref_12bbc() {
 }
 
 function getfirstzone() {
-  if(isDefined(level.ref_12bbe)) {
-    var_0 = level.objectives[level.ref_12bbe[0]];
+  if(isDefined(level.ref_12BBE)) {
+    var_0 = level.objectives[level.ref_12BBE[0]];
     level.prevzoneindex = 0;
-    level.playerzombiedroploot = level.objectives[level.ref_12bbe[1]];
+    level.playerzombiedroploot = level.objectives[level.ref_12BBE[1]];
   } else {
     var_0 = level.objectives["1"];
     level.prevzoneindex = 1;
     level.playerzombiedroploot = level.objectives["2"];
   }
 
-  var_0 thread scripts\mp\gametypes\obj_zonecapture::ref_144da();
-  level.playerzombiedroploot thread scripts\mp\gametypes\obj_zonecapture::ref_144da();
+  var_0 thread scripts\mp\gametypes\obj_zonecapture::ref_144DA();
+  level.playerzombiedroploot thread scripts\mp\gametypes\obj_zonecapture::ref_144DA();
   return var_0;
 }
 
@@ -373,21 +373,21 @@ function getnextzone() {
     var_23 = level.objectives[var_15];
     level.prevzoneindex = var_15;
   } else {
-    if(isDefined(level.ref_12bbe)) {
+    if(isDefined(level.ref_12BBE)) {
       level.prevzoneindex++;
 
-      if(level.prevzoneindex > level.ref_12bbe.size - 1) {
+      if(level.prevzoneindex > level.ref_12BBE.size - 1) {
         level.prevzoneindex = 0;
       }
 
-      var_23 = level.objectives[level.ref_12bbe[level.prevzoneindex]];
+      var_23 = level.objectives[level.ref_12BBE[level.prevzoneindex]];
       var_30 = level.prevzoneindex + 1;
 
-      if(var_30 > level.ref_12bbe.size - 1) {
+      if(var_30 > level.ref_12BBE.size - 1) {
         var_30 = 1;
       }
 
-      level.playerzombiedroploot = level.objectives[level.ref_12bbe[var_30]];
+      level.playerzombiedroploot = level.objectives[level.ref_12BBE[var_30]];
     } else {
       level.prevzoneindex++;
 
@@ -405,7 +405,7 @@ function getnextzone() {
       level.playerzombiedroploot = level.objectives[scripts\engine\utility::string(var_30)];
     }
 
-    level.playerzombiedroploot thread scripts\mp\gametypes\obj_zonecapture::ref_144da();
+    level.playerzombiedroploot thread scripts\mp\gametypes\obj_zonecapture::ref_144DA();
   }
 
   return var_23;
@@ -427,8 +427,8 @@ function spawn_next_zone() {
     level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.iconneutral);
   }
 
-  scripts\mp\utility\game::ref_119ac(undefined, undefined, "New Hardpoint", level.zone.trigger.origin);
-  level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_moved", level.zone.trigger.origin);
+  scripts\mp\utility\game::ref_119AC(undefined, undefined, "New Hardpoint", level.zone.trigger.origin);
+  level.zone thread scripts\common\utility::ref_13E0A(level.ref_11B29, "hill_moved", level.zone.trigger.origin);
 }
 
 function hqactivatenextzone(var_0, var_1) {
@@ -470,7 +470,7 @@ function hpcaptureloop() {
       level thread scripts\mp\gametypes\grnd::randomdrops();
     }
 
-    var_0 = level scripts\engine\utility::ref_143ad("zone_captured", "zone_destroyed");
+    var_0 = level scripts\engine\utility::ref_143AD("zone_captured", "zone_destroyed");
 
     if(var_0 == "zone_destroyed") {
       continue;
@@ -929,7 +929,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     if(var_11 istouching(level.zone.trigger)) {
       var_1 thread scripts\mp\rank::scoreeventpopup("assault");
       var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
-      thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "defending");
+      thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "defending");
       return;
     }
 
@@ -949,7 +949,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 function give_capture_credit(var_0, var_1, var_2, var_3, var_4, var_5) {
   level endon("game_ended");
   level.lastcaptime = gettime();
-  scripts\mp\utility\game::ref_119ac(var_4, undefined, "Hardpoint Captured", var_4.origin);
+  scripts\mp\utility\game::ref_119AC(var_4, undefined, "Hardpoint Captured", var_4.origin);
   var_6 = var_4;
 
   if(isDefined(var_6.owner)) {
@@ -957,7 +957,7 @@ function give_capture_credit(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(isPlayer(var_6)) {
-    var_6 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_6.origin);
+    var_6 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_6.origin);
 
     if(unset_forced_aitype_armored(var_6) && !scripts\mp\utility\game::isanymlgmatch()) {} else if(!isscoreboosting(var_6)) {
       var_6 thread scripts\mp\rank::scoreeventpopup("hp_secure");

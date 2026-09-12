@@ -30,7 +30,7 @@ function mi8_spawn(var_0, var_1, var_2, var_3) {
   var_6.angles = var_4.angles;
   var_6.scene_node = var_4;
   var_6.subtype = var_2;
-  var_6.ref_1214c = var_3;
+  var_6.ref_1214C = var_3;
   thread infilthink(var_6, var_0);
   return var_6;
 }
@@ -315,8 +315,8 @@ function infilthink(var_0, var_1) {
 function vehiclethink(var_0, var_1, var_2, var_3) {
   self.linktoent = spawninfilvehicle(var_1, var_0, var_2);
 
-  if(self.ref_1214c != self.subtype && (getDvar("mapname") == "mp_downtown_gw" || getDvar("mapname") == "mp_port2_gw")) {
-    var_2 = self.ref_1214c;
+  if(self.ref_1214C != self.subtype && (getDvar("mapname") == "mp_downtown_gw" || getDvar("mapname") == "mp_port2_gw")) {
+    var_2 = self.ref_1214C;
   }
 
   scripts\common\anim::anim_first_frame_solo(self.linktoent, "mi8_infil_" + var_2 + "_" + var_0);
@@ -324,7 +324,7 @@ function vehiclethink(var_0, var_1, var_2, var_3) {
   self.linktoent setscriptablepartstate("engine", "on", 0);
   self.linktoent setscriptablepartstate("blinking_light", "red", 0);
   self.linktoent setscriptablepartstate("infil_lights", "on", 0);
-  thread ref_11bf2();
+  thread ref_11BF2();
   thread scripts\common\anim::anim_single_solo(self.linktoent, "mi8_infil_" + var_2 + "_" + var_0);
   var_4 = getanimlength(level.scr_anim["mi8"]["mi8_infil_" + var_2 + "_" + var_0]);
   wait var_4;
@@ -332,7 +332,7 @@ function vehiclethink(var_0, var_1, var_2, var_3) {
   self.linktoent = undefined;
 }
 
-function ref_11bf2() {
+function ref_11BF2() {
   self playsoundonmovingent("scn_infil_mindia_heli_ext");
 }
 
@@ -750,7 +750,7 @@ function customground(var_0) {
   var_1 = var_1;
 }
 
-function ref_11c9e(var_0, var_1, var_2) {
+function ref_11C9E(var_0, var_1, var_2) {
   switch (level.mapname) {
     case "mp_quarry2":
       switch (var_1) {

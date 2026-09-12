@@ -10,16 +10,16 @@ function init() {
     return;
   }
 
-  scripts\mp\gametypes\br_quest_util::ref_12b38("masterassassination_all");
-  scripts\mp\gametypes\br_quest_util::ref_12b38("masterassassination_all_timed");
-  scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").ref_1296b = getdvarint("scr_br_MAQ_questTimeBase", 180);
-  scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").ref_1296c = getdvarint("scr_br_MAQ_questTimeBonus", 60);
-  scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").ref_12c82 = getdvarint("scr_br_MAQ_resetTimerOnKill", 1);
-  scripts\mp\gametypes\br_quest_util::registerquestthink("masterassassination", &ref_11af5, 10);
-  scripts\mp\gametypes\br_quest_util::registerquestthink("masterassassination", &ref_11af6, 0.2);
-  scripts\mp\gametypes\br_quest_util::registerremovequestinstance("masterassassination", &ref_11af7);
-  scripts\mp\gametypes\br_quest_util::registeronplayerkilled("masterassassination", &ref_11af2);
-  scripts\mp\gametypes\br_quest_util::ref_12b2e("masterassassination", &ref_11af3);
+  scripts\mp\gametypes\br_quest_util::ref_12B38("masterassassination_all");
+  scripts\mp\gametypes\br_quest_util::ref_12B38("masterassassination_all_timed");
+  scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").ref_1296B = getdvarint("scr_br_MAQ_questTimeBase", 180);
+  scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").ref_1296C = getdvarint("scr_br_MAQ_questTimeBonus", 60);
+  scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").ref_12C82 = getdvarint("scr_br_MAQ_resetTimerOnKill", 1);
+  scripts\mp\gametypes\br_quest_util::registerquestthink("masterassassination", &ref_11AF5, 10);
+  scripts\mp\gametypes\br_quest_util::registerquestthink("masterassassination", &ref_11AF6, 0.2);
+  scripts\mp\gametypes\br_quest_util::registerremovequestinstance("masterassassination", &ref_11AF7);
+  scripts\mp\gametypes\br_quest_util::registeronplayerkilled("masterassassination", &ref_11AF2);
+  scripts\mp\gametypes\br_quest_util::ref_12B2E("masterassassination", &ref_11AF3);
   var_1 = level.questinfo.defaultfilter;
   var_1 = scripts\engine\utility::array_add(var_1, &scripts\mp\gametypes\br_assassination_quest::filtercondition_hasbeentracked);
   var_1 = scripts\engine\utility::array_add(var_1, &scripts\mp\gametypes\br_quest_util::filtercondition_isdowned);
@@ -29,9 +29,9 @@ function init() {
   }
 
   scripts\mp\gametypes\br_quest_util::registerplayerfilter("masterassassination", var_1, 0);
-  scripts\mp\gametypes\br_quest_util::ref_1297c("masterassassination", 1);
-  scripts\mp\gametypes\br_quest_util::ref_12b32("masterassassination", &ref_11af1);
-  scripts\mp\gametypes\br_quest_util::ref_12b31("masterassassination", &ref_11af0);
+  scripts\mp\gametypes\br_quest_util::ref_1297C("masterassassination", 1);
+  scripts\mp\gametypes\br_quest_util::ref_12B32("masterassassination", &ref_11AF1);
+  scripts\mp\gametypes\br_quest_util::ref_12B31("masterassassination", &ref_11AF0);
   scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").alltrackedplayers = [];
   scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").inner = [];
   scripts\mp\gametypes\br_assassination_quest::brexfilanimname();
@@ -43,7 +43,7 @@ function init() {
   game["dialog"]["mission_ass_fail"] = "mission_mission_ass_fail";
 }
 
-function ref_11af5() {
+function ref_11AF5() {
   if(self.modifier == "_all_timed") {
     return;
   }
@@ -54,15 +54,15 @@ function ref_11af5() {
 
   scripts\mp\gametypes\br_assassination_quest::determinetrackingcircleposition(self.targetplayer);
   scripts\mp\gametypes\br_assassination_quest::lbravo_spawner_jammer3b();
-  ref_13ff8(self.targetteam);
+  ref_13FF8(self.targetteam);
 }
 
-function ref_11af6() {
-  ref_11aed();
+function ref_11AF6() {
+  ref_11AED();
 }
 
-function ref_11af7() {
-  foreach(var_1 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13a8c)) {
+function ref_11AF7() {
+  foreach(var_1 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13A8C)) {
     scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").inner = scripts\engine\utility::array_remove(scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").inner, var_1);
   }
 
@@ -77,7 +77,7 @@ function takequestitem(var_0) {
   var_3 = search(var_1, var_2, var_0.index, self, "", var_0);
 
   if(!isDefined(var_3)) {
-    scripts\mp\utility\lower_message::ref_1316e("br_assassination_notargets", undefined, 5);
+    scripts\mp\utility\lower_message::ref_1316E("br_assassination_notargets", undefined, 5);
     return;
   }
 
@@ -94,12 +94,12 @@ function search_target_think(var_0) {
   }
 
   var_1.stringvar = self.targetplayer.name;
-  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.targetteam, "br_masterassassination_quest_start_target_team", var_1, self.ref_13a8c);
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.targetteam, "br_masterassassination_quest_start_target_team", var_1, self.ref_13A8C);
   scripts\mp\gametypes\br_quest_util::displayplayersplash(self.targetplayer, "br_masterassassination_quest_start_target_player");
 
   if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
-    if(istrue(level.questinfo.ref_132e8)) {
-      var_2 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13a8c);
+    if(istrue(level.questinfo.ref_132E8)) {
+      var_2 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13A8C);
 
       foreach(var_4 in var_2) {
         level thread scripts\mp\gametypes\br_public::dmztut_endgamewithreward("mission_ass_hunted", var_4, 1);
@@ -109,11 +109,11 @@ function search_target_think(var_0) {
     }
   }
 
-  var_1.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardorigin(scripts\mp\gametypes\br_quest_util::ringing(self.hunterteam));
+  var_1.ref_127D5 = scripts\mp\gametypes\br_quest_util::rewardorigin(scripts\mp\gametypes\br_quest_util::ringing(self.hunterteam));
   scripts\mp\gametypes\br_quest_util::displayteamsplash(self.hunterteam, "br_masterassassination_quest_start_hunter_team", var_1);
 
   if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
-    if(istrue(level.questinfo.ref_132e8)) {
+    if(istrue(level.questinfo.ref_132E8)) {
       var_2 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.hunterteam, self.squadindex);
       level thread scripts\mp\gametypes\br_public::brleaderdialog("mission_ass_accept", 1, var_2, 0);
     } else {
@@ -131,7 +131,7 @@ function search_target_think(var_0) {
 function search(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = var_0;
 
-  if(istrue(level.questinfo.ref_132e8)) {
+  if(istrue(level.questinfo.ref_132E8)) {
     var_7 = var_3.team + var_3.squadindex;
   }
 
@@ -146,12 +146,12 @@ function search(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_8.team = var_0;
   var_8.hunterteam = var_0;
   var_8.targetteam = var_1;
-  var_8.ref_13a87 = 0;
+  var_8.ref_13A87 = 0;
   var_8.spawned_warp_traversethink = 0;
-  var_8.ref_13a8e = 0;
+  var_8.ref_13A8E = 0;
 
   if(isDefined(var_1)) {
-    var_8.ref_13a8e = var_8 scripts\mp\gametypes\br_quest_util::getvalidplayersinteam(var_1).size;
+    var_8.ref_13A8E = var_8 scripts\mp\gametypes\br_quest_util::getvalidplayersinteam(var_1).size;
   }
 
   if(!isDefined(var_8.targetteam)) {
@@ -173,14 +173,14 @@ function search(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   if(var_8.modifier != "_all") {
-    var_8 scripts\mp\gametypes\br_quest_util::ref_1297d(scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").ref_1296b, 4);
+    var_8 scripts\mp\gametypes\br_quest_util::ref_1297D(scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").ref_1296B, 4);
   }
 
-  scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").alltrackedplayers = scripts\engine\utility::array_combine(scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").alltrackedplayers, scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_1, var_8.ref_13a8c));
-  scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").inner = scripts\engine\utility::array_combine(scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").inner, scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_1, var_8.ref_13a8c));
+  scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").alltrackedplayers = scripts\engine\utility::array_combine(scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").alltrackedplayers, scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_1, var_8.ref_13A8C));
+  scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").inner = scripts\engine\utility::array_combine(scripts\mp\gametypes\br_quest_util::getquestdata("masterassassination").inner, scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_1, var_8.ref_13A8C));
 
   if(var_8.modifier == "_all_timed") {
-    if(istrue(level.questinfo.ref_132e8)) {
+    if(istrue(level.questinfo.ref_132E8)) {
       level.squaddata[var_0][var_8.squadindex].should_save_debug_info = 0;
     } else {
       level.teamdata[var_0]["hasFailed"] = 0;
@@ -189,8 +189,8 @@ function search(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_8 scripts\mp\gametypes\br_assassination_quest::determinetrackingcircleposition(var_8.targetplayer);
   var_8 scripts\mp\gametypes\br_assassination_quest::lbravo_spawner_jammer3b();
-  ref_13ff8(var_8, var_8.targetteam);
-  ref_11aed(var_8);
+  ref_13FF8(var_8, var_8.targetteam);
+  ref_11AED(var_8);
   scripts\mp\gametypes\br_quest_util::addquestinstance("masterassassination", var_8);
   scripts\mp\gametypes\br_quest_util::ref_13879("masterassassination", var_3, var_0);
   return var_8;
@@ -213,7 +213,7 @@ function determinetargetteam(var_0) {
   var_5 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_1, self.squadindex);
   var_6 = scripts\engine\utility::array_combine_unique(var_4, var_5);
 
-  if(istrue(level.questinfo.ref_132e8)) {
+  if(istrue(level.questinfo.ref_132E8)) {
     var_6 = scripts\engine\utility::array_combine_unique(var_6, scripts\mp\utility\teams::getteamdata(var_1, "players"));
   }
 
@@ -223,7 +223,7 @@ function determinetargetteam(var_0) {
     var_5 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_1, self.squadindex);
     var_6 = scripts\engine\utility::array_combine_unique(var_4, var_5);
 
-    if(istrue(level.questinfo.ref_132e8)) {
+    if(istrue(level.questinfo.ref_132E8)) {
       var_6 = scripts\engine\utility::array_combine_unique(var_6, scripts\mp\utility\teams::getteamdata(var_1, "players"));
     }
   }
@@ -355,7 +355,7 @@ function getnewtargetplayer(var_0) {
   determinetargetplayer(self.targetteam, var_0);
   scripts\mp\gametypes\br_assassination_quest::determinetrackingcircleposition(self.targetplayer);
   scripts\mp\gametypes\br_assassination_quest::lbravo_spawner_jammer3b();
-  ref_13ff7();
+  ref_13FF7();
 }
 
 function determinetargetplayer(var_0, var_1) {
@@ -416,13 +416,13 @@ function determinetargetplayer(var_0, var_1) {
 
   var_6.hasbeentracked = 0;
   self.targetplayer = var_6;
-  self.ref_13a8c = var_6.squadindex;
+  self.ref_13A8C = var_6.squadindex;
 }
 
-function ref_11aed() {
+function ref_11AED() {
   foreach(var_1 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.hunterteam, self.squadindex)) {
     var_2 = var_1 scripts\mp\gametypes\br_public::isplayeringulag();
-    var_3 = isDefined(var_1.ref_11aef) && var_1.ref_11aef;
+    var_3 = isDefined(var_1.ref_11AEF) && var_1.ref_11AEF;
 
     if(var_2 && var_3) {
       spawn_custom_type(var_1, self);
@@ -441,33 +441,33 @@ function ref_11aed() {
 
   foreach(var_1 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, var_5)) {
     var_2 = var_1 scripts\mp\gametypes\br_public::isplayeringulag();
-    var_3 = isDefined(var_1.ref_11af8) && var_1.ref_11af8;
+    var_3 = isDefined(var_1.ref_11AF8) && var_1.ref_11AF8;
 
     if(var_2 && var_3) {
       spawn_custom_type_array(var_1);
     }
 
     if(!var_2 && !var_3) {
-      ref_13361(var_1, self.targetplayer, self.ref_13b39);
+      ref_13361(var_1, self.targetplayer, self.ref_13B39);
     }
   }
 }
 
-function ref_11af1() {
-  foreach(var_1 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13a8c)) {
-    var_1 setclientomnvar("ui_br_assassination_target_timer", self.ref_11c51);
+function ref_11AF1() {
+  foreach(var_1 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13A8C)) {
+    var_1 setclientomnvar("ui_br_assassination_target_timer", self.ref_11C51);
   }
 
   if(self.modifier == "_all_timed") {
-    thread ref_11b1c();
+    thread ref_11B1C();
     return;
   }
 }
 
-function ref_11af0() {
+function ref_11AF0() {
   if(self.modifier == "_all_timed") {
-    if(istrue(level.questinfo.ref_132e8)) {
-      level.squaddata[self.targetteam][self.ref_13a8c].should_save_debug_info = 1;
+    if(istrue(level.questinfo.ref_132E8)) {
+      level.squaddata[self.targetteam][self.ref_13A8C].should_save_debug_info = 1;
     } else {
       scripts\mp\utility\teams::setteamdata(self.targetteam, "hasFailed", 1);
     }
@@ -480,17 +480,17 @@ function ref_11af0() {
   scripts\mp\gametypes\br_quest_util::displayteamsplash(self.hunterteam, "br_masterassassination_timer_expire_hunters_lose");
   var_0 = scripts\mp\gametypes\br_quest_util::ringing(self.targetteam);
   var_1 = scripts\mp\gametypes\br_quest_util::rewardmodifier("masterassassination", var_0);
-  self.ref_12d2d = "_averted";
+  self.ref_12D2D = "_averted";
   var_2 = spawnStruct();
   var_3 = scripts\mp\gametypes\br_quest_util::getquestindex("masterassassination");
-  var_4 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("masterassassination", self.ref_12d2d, self.modifier));
-  var_2.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_3, var_0, var_4);
-  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.targetteam, "br_masterassassination_timer_expire_targets_win", var_2, self.ref_13a8c);
+  var_4 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("masterassassination", self.ref_12D2D, self.modifier));
+  var_2.ref_121B5 = scripts\mp\gametypes\br_quest_util::ref_121B9(var_3, var_0, var_4);
+  scripts\mp\gametypes\br_quest_util::displayteamsplash(self.targetteam, "br_masterassassination_timer_expire_targets_win", var_2, self.ref_13A8C);
 
-  if(istrue(level.questinfo.ref_132e8)) {
+  if(istrue(level.questinfo.ref_132E8)) {
     var_5 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.hunterteam, self.squadindex);
     level thread scripts\mp\gametypes\br_public::brleaderdialog("mission_ass_fail", 1, var_5, 0);
-    var_5 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13a8c);
+    var_5 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13A8C);
     level thread scripts\mp\gametypes\br_public::brleaderdialog("mission_ass_hunted_timed_out", 1, var_5, 0);
   } else {
     level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_ass_fail", self.hunterteam, 1);
@@ -498,26 +498,26 @@ function ref_11af0() {
   }
 
   if(getDvar("scr_br_gametype", "") != "dmz" && getDvar("scr_br_gametype", "") != "rat_race" && getDvar("scr_br_gametype", "") != "risk" && getDvar("scr_br_gametype", "") != "gold_war") {
-    var_6 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13a8c);
-    scripts\mp\gametypes\br_quest_util::search_speed(self.targetteam, self.targetplayer.origin, self.targetplayer.angles, self.ref_12d30, var_6, self.ref_13a8c);
+    var_6 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13A8C);
+    scripts\mp\gametypes\br_quest_util::search_speed(self.targetteam, self.targetplayer.origin, self.targetplayer.angles, self.ref_12D30, var_6, self.ref_13A8C);
     return;
   }
 }
 
-function ref_11af2(var_0, var_1) {
+function ref_11AF2(var_0, var_1) {
   if(var_1 scripts\mp\gametypes\br_public::isplayeringulag()) {
     return;
   }
 
-  thread ref_11af4(var_1, var_0);
+  thread ref_11AF4(var_1, var_0);
 }
 
-function ref_11af3(var_0) {
-  thread ref_11af4(var_0);
+function ref_11AF3(var_0) {
+  thread ref_11AF4(var_0);
 }
 
-function ref_11af4(var_0, var_1) {
-  if(self.modifier == "_all_timed" && (istrue(level.questinfo.ref_132e8) && istrue(level.squaddata[self.hunterteam][self.squadindex].should_save_debug_info) || scripts\mp\utility\teams::getteamdata(self.hunterteam, "hasFailed"))) {
+function ref_11AF4(var_0, var_1) {
+  if(self.modifier == "_all_timed" && (istrue(level.questinfo.ref_132E8) && istrue(level.squaddata[self.hunterteam][self.squadindex].should_save_debug_info) || scripts\mp\utility\teams::getteamdata(self.hunterteam, "hasFailed"))) {
     return;
   }
 
@@ -537,25 +537,25 @@ function ref_11af4(var_0, var_1) {
 
       if(isDefined(var_1) && isDefined(var_1.team) && var_1.team == self.hunterteam) {
         var_6 = "br_masterassassination_complete_hunters_win";
-        self.ref_12d2d = "_target_killed";
+        self.ref_12D2D = "_target_killed";
         scripts\mp\gametypes\br_quest_util::lookforvehicles(self.hunterteam, var_1, 8, scripts\mp\gametypes\br_quest_util::getquestindex("masterassassination"));
 
         foreach(var_8 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.hunterteam, self.squadindex)) {
-          var_8 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_wz_bounty_contracts_for_operator_mission", 1);
+          var_8 scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_complete_wz_bounty_contracts_for_operator_mission", 1);
         }
       } else {
         var_6 = "br_masterassassination_complete_target_vanished";
-        self.ref_12d2d = "_target_vanished";
+        self.ref_12D2D = "_target_vanished";
       }
 
-      var_10 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("masterassassination", self.ref_12d2d, self.modifier));
+      var_10 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("masterassassination", self.ref_12D2D, self.modifier));
       var_11 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining(var_2);
-      var_4.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_6, var_5, var_10, undefined, var_11);
+      var_4.ref_121B5 = scripts\mp\gametypes\br_quest_util::ref_121B9(var_6, var_5, var_10, undefined, var_11);
       scripts\mp\gametypes\br_quest_util::displayteamsplash(self.hunterteam, var_6, var_4);
       level notify("assassination_quest_completed", self.hunterteam, self.squadindex);
 
       if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
-        if(istrue(level.questinfo.ref_132e8)) {
+        if(istrue(level.questinfo.ref_132E8)) {
           var_12 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.hunterteam, self.squadindex);
           level thread scripts\mp\gametypes\br_public::brleaderdialog("mission_ass_success", 1, var_12, 0);
         } else {
@@ -563,13 +563,13 @@ function ref_11af4(var_0, var_1) {
         }
       }
 
-      self.ref_12d2e = var_1.origin;
-      self.ref_12d2b = var_1.angles;
+      self.ref_12D2E = var_1.origin;
+      self.ref_12D2B = var_1.angles;
 
       if(isDefined(var_3)) {
         foreach(var_14 in var_3) {
           if(isDefined(var_14.team) && var_14.team == self.hunterteam) {
-            scripts\mp\gametypes\br_quest_util::ref_12b15(var_14);
+            scripts\mp\gametypes\br_quest_util::ref_12B15(var_14);
           }
         }
       }
@@ -608,12 +608,12 @@ function ref_11af4(var_0, var_1) {
         return;
       }
 
-      self.ref_12d2d = "_averted";
-      var_18 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13a8c);
-      var_19 = scripts\mp\gametypes\br_quest_util::search_speed(self.targetteam, var_8.origin, var_8.angles, self.ref_12d30, var_18, self.ref_13a8c);
+      self.ref_12D2D = "_averted";
+      var_18 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13A8C);
+      var_19 = scripts\mp\gametypes\br_quest_util::search_speed(self.targetteam, var_8.origin, var_8.angles, self.ref_12D30, var_18, self.ref_13A8C);
       var_3 = spawnStruct();
-      var_3.ref_127d5 = scripts\mp\gametypes\br::get_int_or_0(var_19["plunder"]);
-      scripts\mp\gametypes\br_quest_util::displayteamsplash(self.targetteam, "br_masterassassination_complete_targets_win", var_3, self.ref_13a8c);
+      var_3.ref_127D5 = scripts\mp\gametypes\br::get_int_or_0(var_19["plunder"]);
+      scripts\mp\gametypes\br_quest_util::displayteamsplash(self.targetteam, "br_masterassassination_complete_targets_win", var_3, self.ref_13A8C);
       self.result = "fail";
       scripts\mp\gametypes\br_quest_util::removequestinstance();
       return;
@@ -663,7 +663,7 @@ function rpg_max_range(var_0) {
   return var_1;
 }
 
-function ref_11aee(var_0) {
+function ref_11AEE(var_0) {
   switch (var_0) {
     case "_all_timed":
     case "_all":
@@ -674,19 +674,19 @@ function ref_11aee(var_0) {
 }
 
 function ref_13360(var_0) {
-  self.ref_11aef = 1;
+  self.ref_11AEF = 1;
   scripts\mp\gametypes\br_quest_util::uiobjectiveshow("masterassassination" + var_0.modifier);
-  var_0 scripts\mp\gametypes\br_quest_util::ref_1336a(self);
+  var_0 scripts\mp\gametypes\br_quest_util::ref_1336A(self);
 }
 
 function spawn_custom_type(var_0) {
-  self.ref_11aef = 0;
+  self.ref_11AEF = 0;
   scripts\mp\gametypes\br_quest_util::uiobjectivehide();
   var_0 scripts\mp\gametypes\br_quest_util::spawn_dogtags(self);
 }
 
-function ref_13ff6(var_0, var_1) {
-  if(isDefined(self.ref_11af8) && self.ref_11af8) {
+function ref_13FF6(var_0, var_1) {
+  if(isDefined(self.ref_11AF8) && self.ref_11AF8) {
     var_2 = var_0 getentitynumber();
   } else {
     var_2 = -1;
@@ -698,41 +698,41 @@ function ref_13ff6(var_0, var_1) {
   self setclientomnvar("ui_br_assassination_target", var_3);
 }
 
-function ref_13ff8(var_0) {
-  foreach(var_2 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13a8c)) {
-    ref_13ff6(var_2, self.targetplayer, self.ref_13b39);
+function ref_13FF8(var_0) {
+  foreach(var_2 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13A8C)) {
+    ref_13FF6(var_2, self.targetplayer, self.ref_13B39);
   }
 }
 
 function ref_13361(var_0, var_1) {
-  self.ref_11af8 = 1;
-  ref_13ff6(var_0, var_1);
+  self.ref_11AF8 = 1;
+  ref_13FF6(var_0, var_1);
 }
 
 function spawn_custom_type_array() {
-  self.ref_11af8 = 0;
+  self.ref_11AF8 = 0;
   self setclientomnvar("ui_br_assassination_target", 0);
 }
 
-function ref_13ff7() {
+function ref_13FF7() {
   foreach(var_1 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.hunterteam, self.squadindex)) {
     ref_13360(var_1, self);
     var_1 scripts\mp\gametypes\br_quest_util::uiobjectivesetparameter(self.targetplayer getentitynumber());
   }
 
-  foreach(var_1 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13a8c)) {
-    ref_13361(var_1, self.targetplayer, self.ref_13b39);
+  foreach(var_1 in scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.targetteam, self.ref_13A8C)) {
+    ref_13361(var_1, self.targetplayer, self.ref_13B39);
   }
 }
 
-function ref_11b1c() {
+function ref_11B1C() {
   self notify("masterAssassinationTimeWarning");
   self endon("masterAssassinationTimeWarning");
   self endon("removed");
   var_0 = [300, 240, 180, 120, 90, 60, 30, 10];
 
   foreach(var_2 in var_0) {
-    var_3 = (self.ref_11c51 - gettime()) / 1000;
+    var_3 = (self.ref_11C51 - gettime()) / 1000;
     var_4 = var_3 - var_2;
 
     if(var_4 < 0) {
@@ -741,7 +741,7 @@ function ref_11b1c() {
 
     wait var_4;
     var_5 = int(var_2 / 60);
-    var_6 = scripts\mp\gametypes\br_quest_util::getvalidplayersinarray(scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.hunterteam, self.squadindex), ref_11aee(self.modifier));
+    var_6 = scripts\mp\gametypes\br_quest_util::getvalidplayersinarray(scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.hunterteam, self.squadindex), ref_11AEE(self.modifier));
 
     foreach(var_8 in var_6) {
       var_9 = gettime() + var_2 * 1000;
@@ -751,7 +751,7 @@ function ref_11b1c() {
         var_10 = var_2;
       }
 
-      var_8 scripts\mp\utility\lower_message::ref_1316e("br_assassin_mission_time_warning", var_9, var_10);
+      var_8 scripts\mp\utility\lower_message::ref_1316E("br_assassin_mission_time_warning", var_9, var_10);
 
       if(var_5 >= 2) {
         var_8 iprintlnbold(&"MP_BR_INGAME/MISSION_ASSASSIN_2_TIME_WARNING_MIN", var_5);

@@ -6,14 +6,14 @@
 function init() {
   var_0 = spawnStruct();
   var_0.weight = getdvarfloat("scr_br_pe_outbreak_weight", 1);
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.attackerswaittime = &attackerswaittime;
   var_0.ref_14382 = &ref_14382;
   var_0.postinitfunc = &postinitfunc;
-  var_0.ref_11b78 = getdvarint("scr_br_pe_outbreak_max_times", 0);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_outbreak_max_times", 0);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("outbreak", "02020200 0 0 0");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("outbreak");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(19, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(19, var_0);
 }
 
 function postinitfunc() {
@@ -31,7 +31,7 @@ function postinitfunc() {
   level.disable_super_in_turret.outbreakmeternextstateindex = 3;
 }
 
-function ref_140cf() {
+function ref_140CF() {
   var_0 = level scripts\mp\utility\game::round_vehicle_logic();
   var_1 = var_0 == "zxp" || var_0 == "brz" || var_0 == "gxp";
   var_2 = 0;
@@ -94,7 +94,7 @@ function attackerswaittime() {
     var_5 = scripts\engine\utility::array_remove_array(var_5, var_4);
   }
 
-  thread ref_12cad(var_10);
+  thread ref_12CAD(var_10);
 
   foreach(var_12 in var_5) {
     if(!isDefined(var_12)) {
@@ -110,7 +110,7 @@ function attackerswaittime() {
 function preemtiverespawnplayers(var_0) {
   level endon("game_ended");
   wait 3;
-  ref_12cad(var_0);
+  ref_12CAD(var_0);
 }
 
 function forest_combat() {
@@ -153,7 +153,7 @@ function fix_badcover_atend(var_0) {
   return [var_1, var_2];
 }
 
-function ref_12cad(var_0) {
+function ref_12CAD(var_0) {
   level endon("game_ended");
   var_1 = getdvarint("scr_br_pe_outbreak_include_eliminated_teams", 1);
 
@@ -163,7 +163,7 @@ function ref_12cad(var_0) {
     }
 
     if(var_1) {
-      var_3 scripts\mp\gametypes\br_publicevent_jailbreak::ref_12c78();
+      var_3 scripts\mp\gametypes\br_publicevent_jailbreak::ref_12C78();
     }
 
     var_3.respawnedfromoutbreak = 1;
@@ -213,8 +213,8 @@ function init_lbravo_spawn_after_level_restart(var_0) {
   var_1 setModel("rebirth_fx");
   waitframe();
   var_1 setscriptablepartstate("sfx", "cine_escape2_infil_siren");
-  level.ref_12a76 = 1;
+  level.ref_12A76 = 1;
   level scripts\engine\utility::waittill_notify_or_timeout("create_siren", var_0);
   var_1 delete();
-  level.ref_12a76 = 0;
+  level.ref_12A76 = 0;
 }

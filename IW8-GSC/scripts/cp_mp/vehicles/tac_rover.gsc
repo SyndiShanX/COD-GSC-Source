@@ -8,9 +8,9 @@ function tac_rover_init() {
   var_0.destroycallback = &tac_rover_explode;
   tac_rover_initoccupancy();
   tac_rover_initinteract();
-  ref_139fb();
-  ref_139fa();
-  ref_139f9();
+  ref_139FB();
+  ref_139FA();
+  ref_139F9();
   tac_rover_initfx();
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("tac_rover", "init")) {
@@ -50,11 +50,11 @@ function tac_rover_initoccupancy() {
 
 function tac_rover_initinteract() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("tac_rover", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("tac_rover", "single", ["driver", "fr_passenger", "bl_passenger", "br_passenger"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("tac_rover", "single", ["driver", "fr_passenger", "bl_passenger", "br_passenger"]);
 }
 
-function ref_139fb() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("tac_rover", 1);
+function ref_139FB() {
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("tac_rover", 1);
   var_0.id = 3;
   var_0.seatids["driver"] = 0;
   var_0.seatids["fr_passenger"] = 1;
@@ -62,11 +62,11 @@ function ref_139fb() {
   var_0.seatids["br_passenger"] = 3;
 }
 
-function ref_139fa() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("tac_rover", 750);
+function ref_139FA() {
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("tac_rover", 750);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("tac_rover");
   var_0.class = "light";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("tac_rover");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("tac_rover");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("tac_rover", 5);
 
   if(level.gametype == "br") {
@@ -76,8 +76,8 @@ function ref_139fa() {
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("tac_rover", &tac_rover_deathcallback);
 }
 
-function ref_139f9() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("tac_rover", 1);
+function ref_139F9() {
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("tac_rover", 1);
   var_0.challengeevaluator = 1.83333;
   var_0.keycardlocs_chosen = 0.79166;
   var_0.is_using_stealth_debug = 350;
@@ -100,7 +100,7 @@ function tac_rover_create(var_0, var_1) {
     var_0.angles = (0, 0, 0);
   }
 
-  var_2 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
+  var_2 = scripts\cp_mp\utility\script_utility::ref_140DE("game", "isGameTypeBR", 0);
 
   if(var_2) {
     var_0.modelname = "veh8_mil_lnd_tromeo_opt_mp";
@@ -118,7 +118,7 @@ function tac_rover_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_3, "tac_rover", var_0);
   var_3.objweapon = getcompleteweaponname("tac_rover_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_3);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_3);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_3, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_3, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 

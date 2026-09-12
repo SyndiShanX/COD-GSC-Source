@@ -23,8 +23,8 @@ function vehicle_damage_loadtable() {
 
 function vehicle_damage_getpristinestateminhealth(var_0) {
   if(!getdvarint("scr_br_ending_placement")) {
-    self.ref_13ce3 = puddle_triggers();
-    unloadinfiltransient(self.ref_13ce3);
+    self.ref_13CE3 = puddle_triggers();
+    unloadinfiltransient(self.ref_13CE3);
     setomnvarforallclients("ui_br_end_game_splash_type", 18);
     var_1 = getdvarfloat("scr_br_end_transient_wait", 7);
     var_2 = 1.71429;
@@ -33,20 +33,20 @@ function vehicle_damage_getpristinestateminhealth(var_0) {
   }
 
   vehicle_damage_getinstancedataforvehicle();
-  var_3 = scripts\mp\gametypes\br_ending::ref_135ca("lm_egy_aec_matador_01_exfil");
+  var_3 = scripts\mp\gametypes\br_ending::ref_135CA("lm_egy_aec_matador_01_exfil");
   self.onpickupitem = var_3;
   vehicle_damage_getstate();
   var_4 = ["head_mp_helicopter_crew", "j_spine4"];
   var_5 = [var_4];
   var_6 = "body_pilot_helicopter_british";
-  var_7 = scripts\mp\gametypes\br_ending::ref_135ca(var_6, undefined, var_5);
+  var_7 = scripts\mp\gametypes\br_ending::ref_135CA(var_6, undefined, var_5);
   self.max_ammo_check = var_7;
   var_8 = ["head_mp_aus_s4_lucas_02_1a_exfil", "j_spine4"];
   var_9 = [var_8];
   var_10 = "body_mp_aus_s4_lucas_01_inctv";
-  var_11 = scripts\mp\gametypes\br_ending::ref_135ca(var_10, undefined, var_9);
+  var_11 = scripts\mp\gametypes\br_ending::ref_135CA(var_10, undefined, var_9);
   self.driver = var_11;
-  var_12 = scripts\mp\gametypes\br_ending::ref_135ca("tag_origin");
+  var_12 = scripts\mp\gametypes\br_ending::ref_135CA("tag_origin");
   self.playerzombieisingas = var_12;
   self.winners = scripts\engine\utility::array_removeundefined(self.winners);
 
@@ -55,10 +55,10 @@ function vehicle_damage_getpristinestateminhealth(var_0) {
   }
 
   self.gameending = scripts\mp\gametypes\br_ending::init_carepackages();
-  self.ref_142d0 = "mp_wz_island_exfil";
+  self.ref_142D0 = "mp_wz_island_exfil";
 
   if(scripts\mp\utility\game::round_vehicle_logic() == "mendota") {
-    self.ref_142d0 = "mp_wz_island_exfil_mendota";
+    self.ref_142D0 = "mp_wz_island_exfil_mendota";
   }
 
   level._effect["vfx_exfil2_light_orangefixture_01"] = loadfx("vfx/iw8_br/gameplay/exfil2/vfx_exfil2_light_orangefixture_01");
@@ -72,109 +72,109 @@ function vehicle_damage_getpristinestateminhealth(var_0) {
   }
 
   scripts\mp\utility\lui_game_event_aggregator::registeronluieventcallback(&allassassin_teams);
-  thread scripts\mp\gametypes\br_gametypes::ref_12e05("exfilStart", self.winners);
-  self.ref_121b8 = [];
+  thread scripts\mp\gametypes\br_gametypes::ref_12E05("exfilStart", self.winners);
+  self.ref_121B8 = [];
   var_14 = 0;
 
   if(getdvarint("scr_br_ending_6_binks", 1) == 1) {
-    self.ref_121b8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene1");
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_dummycamera_sh010);
+    self.ref_121B8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene1");
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_dummycamera_sh010);
     var_14++;
   }
 
-  self.ref_121b8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene2");
-  self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_givescore);
-  self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_3, $wz_ch3_exfil_truck_sh010);
-  self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_7, %wz_ch3_exfil_doorchief_sh010);
-  self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_11, %wz_ch3_exfil_driver_sh010);
-  self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %wz_ch3_exfil_guy_01_sh010, %wz_ch3_exfil_guy_01_sh010);
+  self.ref_121B8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene2");
+  self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_givescore);
+  self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_3, $wz_ch3_exfil_truck_sh010);
+  self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_7, %wz_ch3_exfil_doorchief_sh010);
+  self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_11, %wz_ch3_exfil_driver_sh010);
+  self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %wz_ch3_exfil_guy_01_sh010, %wz_ch3_exfil_guy_01_sh010);
 
   if(self.winners.size >= 4) {
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %wz_ch3_exfil_guy_02_sh010, %wz_ch3_exfil_guy_02_sh010);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %wz_ch3_exfil_guy_03_sh010, %wz_ch3_exfil_guy_03_sh010);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %wz_ch3_exfil_guy_04_sh010, %wz_ch3_exfil_guy_04_sh010);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %wz_ch3_exfil_guy_02_sh010, %wz_ch3_exfil_guy_02_sh010);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %wz_ch3_exfil_guy_03_sh010, %wz_ch3_exfil_guy_03_sh010);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %wz_ch3_exfil_guy_04_sh010, %wz_ch3_exfil_guy_04_sh010);
   } else if(self.winners.size >= 3) {
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %wz_ch3_exfil_guy_02_sh010, %wz_ch3_exfil_guy_02_sh010);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %wz_ch3_exfil_guy_04_sh010, %wz_ch3_exfil_guy_04_sh010);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %wz_ch3_exfil_guy_02_sh010, %wz_ch3_exfil_guy_02_sh010);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %wz_ch3_exfil_guy_04_sh010, %wz_ch3_exfil_guy_04_sh010);
   } else if(self.winners.size >= 2) {
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %wz_ch3_exfil_guy_04_sh010, %wz_ch3_exfil_guy_04_sh010);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %wz_ch3_exfil_guy_04_sh010, %wz_ch3_exfil_guy_04_sh010);
   }
 
-  self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_sh010_ext);
-  self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_field_clip("jeepExfil_gas_wall", self.origin, self.angles);
-  self.ref_121b8[var_14].fxtag = "tag_origin";
-  self.ref_121b8[var_14].playerzombiejumpcleanup = self.playerzombieisingas;
+  self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_sh010_ext);
+  self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_field_clip("jeepExfil_gas_wall", self.origin, self.angles);
+  self.ref_121B8[var_14].fxtag = "tag_origin";
+  self.ref_121B8[var_14].playerzombiejumpcleanup = self.playerzombieisingas;
   var_14++;
-  self.ref_121b8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene3");
+  self.ref_121B8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene3");
 
   if(self.winners.size >= 2) {
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_givescoreandxp);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_sh011_ext);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_givescoreandxp);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_sh011_ext);
   } else {
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_givescoreandxpatframeend);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_sh013_solo_ext);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_givescoreandxpatframeend);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_sh013_solo_ext);
   }
 
   var_14++;
-  self.ref_121b8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene4");
-  self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_heavyvisualcallback);
-  self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_sh012_ext);
+  self.ref_121B8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene4");
+  self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_heavyvisualcallback);
+  self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_sh012_ext);
   var_14++;
   var_15 = 1;
 
   if(self.winners.size >= 2) {
-    self.ref_121b8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene5");
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_inithitdamage);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_3, %wz_ch3_exfil_truck_sh020);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_7, %wz_ch3_exfil_doorchief_sh020);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_11, %wz_ch3_exfil_driver_sh020);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %wz_ch3_exfil_guy_01_sh020, %wz_ch3_exfil_guy_01_sh020);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %wz_ch3_exfil_guy_02_sh020, %wz_ch3_exfil_guy_02_sh020);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_p2_sh020_int);
+    self.ref_121B8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene5");
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_inithitdamage);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_3, %wz_ch3_exfil_truck_sh020);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_7, %wz_ch3_exfil_doorchief_sh020);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_11, %wz_ch3_exfil_driver_sh020);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %wz_ch3_exfil_guy_01_sh020, %wz_ch3_exfil_guy_01_sh020);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %wz_ch3_exfil_guy_02_sh020, %wz_ch3_exfil_guy_02_sh020);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_p2_sh020_int);
     var_15 = 2;
   }
 
   if(self.winners.size >= 3) {
-    self.ref_121b8[var_14 + 1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene6");
-    self.ref_121b8[var_14 + 1] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_inithitdamage_br);
-    self.ref_121b8[var_14 + 1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_p3_sh021_int);
+    self.ref_121B8[var_14 + 1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene6");
+    self.ref_121B8[var_14 + 1] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_inithitdamage_br);
+    self.ref_121B8[var_14 + 1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_p3_sh021_int);
     var_15 = 3;
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %wz_ch3_exfil_guy_03_sh020, %wz_ch3_exfil_guy_03_sh020);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %wz_ch3_exfil_guy_03_sh020, %wz_ch3_exfil_guy_03_sh020);
   }
 
   if(self.winners.size >= 4) {
-    self.ref_121b8[var_14 + 2] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene7");
-    self.ref_121b8[var_14 + 2] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_initmoddamage);
-    self.ref_121b8[var_14 + 2] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_p4_sh022_int);
+    self.ref_121B8[var_14 + 2] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene7");
+    self.ref_121B8[var_14 + 2] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_initmoddamage);
+    self.ref_121B8[var_14 + 2] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_p4_sh022_int);
     var_15 = 4;
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %wz_ch3_exfil_guy_04_sh020, %wz_ch3_exfil_guy_04_sh020);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %wz_ch3_exfil_guy_04_sh020, %wz_ch3_exfil_guy_04_sh020);
   }
 
   if(var_15 > 1) {
-    self.ref_121b8[var_14 + var_15 - 1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene8");
-    self.ref_121b8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_isburningdown);
-    self.ref_121b8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %wz_ch3_exfil_guy_01_sh021, %wz_ch3_exfil_guy_01_sh021);
-    self.ref_121b8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %wz_ch3_exfil_guy_02_sh021, %wz_ch3_exfil_guy_02_sh021);
-    self.ref_121b8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %wz_ch3_exfil_guy_03_sh021, %wz_ch3_exfil_guy_03_sh021);
-    self.ref_121b8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %wz_ch3_exfil_guy_04_sh021, %wz_ch3_exfil_guy_04_sh021);
-    self.ref_121b8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_p1_sh023_mvp_int);
+    self.ref_121B8[var_14 + var_15 - 1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene8");
+    self.ref_121B8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_isburningdown);
+    self.ref_121B8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %wz_ch3_exfil_guy_01_sh021, %wz_ch3_exfil_guy_01_sh021);
+    self.ref_121B8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %wz_ch3_exfil_guy_02_sh021, %wz_ch3_exfil_guy_02_sh021);
+    self.ref_121B8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %wz_ch3_exfil_guy_03_sh021, %wz_ch3_exfil_guy_03_sh021);
+    self.ref_121B8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %wz_ch3_exfil_guy_04_sh021, %wz_ch3_exfil_guy_04_sh021);
+    self.ref_121B8[var_14 + var_15 - 1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_p1_sh023_mvp_int);
   } else {
-    self.ref_121b8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene9");
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_lightvisualcallback);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_3, %wz_ch3_exfil_truck_sh020);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_7, %wz_ch3_exfil_doorchief_sh020);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_11, %wz_ch3_exfil_driver_sh020);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %wz_ch3_exfil_guy_01_sh020, %wz_ch3_exfil_guy_01_sh020);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_p1_sh024_solo_int);
+    self.ref_121B8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene9");
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::backendevent(self, &vehicle_damage_lightvisualcallback);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_3, %wz_ch3_exfil_truck_sh020);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_7, %wz_ch3_exfil_doorchief_sh020);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_struct(var_11, %wz_ch3_exfil_driver_sh020);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %wz_ch3_exfil_guy_01_sh020, %wz_ch3_exfil_guy_01_sh020);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_mastercamera_p1_sh024_solo_int);
   }
 
   var_14 += var_15;
 
   if(getdvarint("scr_br_ending_6_binks", 1) == 1) {
-    self.ref_121b8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene10");
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::backendevent([], &vehicle_damage_getmaxhealth);
-    self.ref_121b8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_dummycamera_sh020);
-    self.ref_121b8[var_14].clip_mover = 1;
+    self.ref_121B8[var_14] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene10");
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::backendevent([], &vehicle_damage_getmaxhealth);
+    self.ref_121B8[var_14] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%wz_ch3_exfil_dummycamera_sh020);
+    self.ref_121B8[var_14].clip_mover = 1;
     return;
   }
 }
@@ -309,7 +309,7 @@ function allassassin_update(var_0, var_1, var_2, var_3, var_4) {
 function allassassin_timeout_end(var_0, var_1) {
   if(istrue(var_1)) {
     foreach(var_3 in level.players) {
-      var_3 scripts\mp\gametypes\br_public::ref_1252b();
+      var_3 scripts\mp\gametypes\br_public::ref_1252B();
     }
   }
 

@@ -4,7 +4,7 @@
 *************************************************/
 
 function destroycrateinbadtrigger() {
-  level.ref_11b22 = &ref_1205b;
+  level.ref_11B22 = &ref_1205B;
   level.br_branalytics_revivefunc = &branalytics_revive;
 
   if(getdvarint("NNNQSOPLKR", 0)) {
@@ -496,8 +496,8 @@ function destroy_jammer_relocate(var_0) {
     }
   }
 
-  var_10 = int(ref_12e53(var_2, var_0.size));
-  var_11 = int(ref_12e53(var_2, var_1.size));
+  var_10 = int(ref_12E53(var_2, var_0.size));
+  var_11 = int(ref_12E53(var_2, var_1.size));
   var_12 = [];
   GscBinSkip0(0x2e, var_12.size, "num_players_alive");
 }
@@ -752,10 +752,10 @@ function dialog_hurry(var_0) {
     return;
   }
 
-  getentitylessscriptablearray("dlog_event_br_mission_spawn", ["id", scripts\engine\utility::ter_op(isDefined(var_0.index), "" + var_0.index, "invalid"), "type", var_0.ref_139eb, "origin_x", var_0.origin[0], "origin_y", var_0.origin[1], "origin_z", var_0.origin[2]]);
+  getentitylessscriptablearray("dlog_event_br_mission_spawn", ["id", scripts\engine\utility::ter_op(isDefined(var_0.index), "" + var_0.index, "invalid"), "type", var_0.ref_139EB, "origin_x", var_0.origin[0], "origin_y", var_0.origin[1], "origin_z", var_0.origin[2]]);
 
   if(add_outline() && isDefined(var_0.index)) {
-    add_pack_camanim("mission", var_0.origin, "" + var_0.index, var_0.ref_139eb);
+    add_pack_camanim("mission", var_0.origin, "" + var_0.index, var_0.ref_139EB);
     return;
   }
 }
@@ -765,7 +765,7 @@ function destroyscoreevent(var_0) {
     return;
   }
 
-  getentitylessscriptablearray("dlog_event_br_mission_invalid", ["id", scripts\engine\utility::ter_op(isDefined(var_0.index), "" + var_0.index, "invalid"), "type", var_0.ref_139eb, "origin_x", var_0.origin[0], "origin_y", var_0.origin[1], "origin_z", var_0.origin[2]]);
+  getentitylessscriptablearray("dlog_event_br_mission_invalid", ["id", scripts\engine\utility::ter_op(isDefined(var_0.index), "" + var_0.index, "invalid"), "type", var_0.ref_139EB, "origin_x", var_0.origin[0], "origin_y", var_0.origin[1], "origin_z", var_0.origin[2]]);
 }
 
 function reset_ability_invulnerable(var_0) {
@@ -789,7 +789,7 @@ function determinetrackingcirclesize(var_0, var_1) {
   var_3 = scripts\mp\utility\teams::getfriendlyplayers(var_1.team, 1);
   var_2 = add_pack_modelanim(var_2, var_3);
   var_2 = "id";
-  var_2 = scripts\engine\utility::ter_op(isDefined(var_0.ref_11c4e), var_0.ref_11c4e, "invalid");
+  var_2 = scripts\engine\utility::ter_op(isDefined(var_0.ref_11C4E), var_0.ref_11C4E, "invalid");
 
   if(isDefined(level.br_circle)) {
     var_4 = scripts\engine\utility::remove_player_rig_laser_panel(level.br_circle.circleindex);
@@ -805,8 +805,8 @@ function determinetrackingcirclesize(var_0, var_1) {
   var_3 = reset_ability_invulnerable(var_1);
   var_2 dlog_recordplayerevent("dlog_event_br_mission_start", var_3);
 
-  if(add_outline() && isDefined(var_1.ref_11c4e)) {
-    dialog_grenade_update("mission", var_1.ref_11c4e, -1);
+  if(add_outline() && isDefined(var_1.ref_11C4E)) {
+    dialog_grenade_update("mission", var_1.ref_11C4E, -1);
     return;
   }
 }
@@ -816,15 +816,15 @@ function determinetrackingcircleoffset(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  getentitylessscriptablearray("dlog_event_br_mission_end", ["id", scripts\engine\utility::ter_op(isDefined(var_0.ref_11c4e), var_0.ref_11c4e, "invalid"), "result", scripts\engine\utility::ter_op(isDefined(var_0.result), var_0.result, "unknown"), "reward_tier", var_1, "xp", scripts\engine\utility::ter_op(isDefined(var_2["xp"]), var_2["xp"], 0), "weapon_xp", scripts\engine\utility::ter_op(isDefined(var_2["weapon_xp"]), var_2["weapon_xp"], 0), "plunder", scripts\engine\utility::ter_op(isDefined(var_2["plunder"]), var_2["plunder"], 0), "num_teammates_awarded", scripts\engine\utility::ter_op(isDefined(var_3), var_3, 0), "type", var_0.questcategory, "blueprint_loot_id", reset_ability_invulnerable(var_0)]);
+  getentitylessscriptablearray("dlog_event_br_mission_end", ["id", scripts\engine\utility::ter_op(isDefined(var_0.ref_11C4E), var_0.ref_11C4E, "invalid"), "result", scripts\engine\utility::ter_op(isDefined(var_0.result), var_0.result, "unknown"), "reward_tier", var_1, "xp", scripts\engine\utility::ter_op(isDefined(var_2["xp"]), var_2["xp"], 0), "weapon_xp", scripts\engine\utility::ter_op(isDefined(var_2["weapon_xp"]), var_2["weapon_xp"], 0), "plunder", scripts\engine\utility::ter_op(isDefined(var_2["plunder"]), var_2["plunder"], 0), "num_teammates_awarded", scripts\engine\utility::ter_op(isDefined(var_3), var_3, 0), "type", var_0.questcategory, "blueprint_loot_id", reset_ability_invulnerable(var_0)]);
 
-  if(add_outline() && isDefined(var_0.ref_11c4e)) {
+  if(add_outline() && isDefined(var_0.ref_11C4E)) {
     if(isDefined(var_0.result) && var_0.result == "success") {
-      dialog_grenade_update("mission", var_0.ref_11c4e, var_1);
+      dialog_grenade_update("mission", var_0.ref_11C4E, var_1);
       return;
     }
 
-    dialog_grenade_update("mission", var_0.ref_11c4e, -1);
+    dialog_grenade_update("mission", var_0.ref_11C4E, -1);
     return;
   }
 }
@@ -912,7 +912,7 @@ function add_pack_modelanim(var_0, var_1) {
   return var_0;
 }
 
-function ref_12e4f(var_0) {
+function ref_12E4F(var_0) {
   if(isDefined(var_0)) {
     return var_0;
   }
@@ -920,7 +920,7 @@ function ref_12e4f(var_0) {
   return "empty";
 }
 
-function ref_12e50(var_0) {
+function ref_12E50(var_0) {
   if(isDefined(var_0)) {
     return var_0;
   }
@@ -928,7 +928,7 @@ function ref_12e50(var_0) {
   return "";
 }
 
-function ref_12e51(var_0) {
+function ref_12E51(var_0) {
   if(isDefined(var_0)) {
     return var_0.basename;
   }
@@ -936,7 +936,7 @@ function ref_12e51(var_0) {
   return "empty";
 }
 
-function ref_12e4e(var_0) {
+function ref_12E4E(var_0) {
   if(isDefined(var_0)) {
     return var_0;
   }
@@ -944,7 +944,7 @@ function ref_12e4e(var_0) {
   return 0;
 }
 
-function ref_12e53(var_0, var_1) {
+function ref_12E53(var_0, var_1) {
   if(!isDefined(var_1) || var_1 <= 0) {
     return (var_0 / 1);
   }
@@ -1017,21 +1017,21 @@ function teamvehicles() {
   foreach(var_1 in level.teamnamelist) {
     var_2 = spawnStruct();
     var_2.sources = [];
-    var_2.ref_13bf0 = [];
+    var_2.ref_13BF0 = [];
 
     foreach(var_4 in level.get_vehicle_driver_hint_string_func) {
       var_2.sources[var_4] = 0;
-      var_2.ref_13bf0[var_4] = 0;
+      var_2.ref_13BF0[var_4] = 0;
     }
 
     level.get_veh_spawn_test_spawners[var_1] = var_2;
   }
 
   level waittill("prematch_done");
-  thread ref_12aa6();
+  thread ref_12AA6();
 }
 
-function ref_12aa6() {
+function ref_12AA6() {
   for(var_0 = 60; !istrue(level.gameended); var_0 = max(60 - var_12, 0)) {
     level scripts\engine\utility::waittill_notify_or_timeout("game_ended", var_0);
     var_1 = gettime();
@@ -1061,7 +1061,7 @@ function ref_12aa6() {
         var_9 = level.get_veh_spawn_test_spawners[var_4].sources[var_8];
         var_6 = "cash_source_" + var_8;
         var_6 = var_9;
-        level.get_veh_spawn_test_spawners[var_4].ref_13bf0[var_8] += var_9;
+        level.get_veh_spawn_test_spawners[var_4].ref_13BF0[var_8] += var_9;
         level.get_veh_spawn_test_spawners[var_4].sources[var_8] = 0;
       }
 
@@ -1091,7 +1091,7 @@ function ref_12aa6() {
     var_6 = var_2[var_4];
 
     foreach(var_8 in level.get_vehicle_driver_hint_string_func) {
-      var_9 = level.get_veh_spawn_test_spawners[var_4].ref_13bf0[var_8];
+      var_9 = level.get_veh_spawn_test_spawners[var_4].ref_13BF0[var_8];
       var_6 = "cash_source_" + var_8;
       var_6 = var_9;
     }
@@ -1100,7 +1100,7 @@ function ref_12aa6() {
   }
 }
 
-function ref_13c44(var_0, var_1, var_2) {
+function ref_13C44(var_0, var_1, var_2) {
   if(!isDefined(var_0) || !isDefined(var_0.team)) {
     return;
   }
@@ -1117,7 +1117,7 @@ function ref_13c44(var_0, var_1, var_2) {
   level.get_veh_spawn_test_spawners[var_3].sources[var_1] += var_2;
 }
 
-function ref_1205b() {
+function ref_1205B() {
   thread allowed_objectives();
 }
 
@@ -1138,7 +1138,7 @@ function allowed_objectives() {
   }
 
   if(isDefined(level.br_armory_kiosk)) {
-    var_8 = scripts\engine\utility::remove_player_rig_laser_panel(level.br_armory_kiosk.ref_13ac2);
+    var_8 = scripts\engine\utility::remove_player_rig_laser_panel(level.br_armory_kiosk.ref_13AC2);
   } else {
     var_8 = 0;
   }
@@ -1147,7 +1147,7 @@ function allowed_objectives() {
 
   if(isDefined(level.gulag)) {
     var_10 = scripts\engine\utility::remove_player_rig_laser_panel(level.gulag.maxuses);
-    var_11 = scripts\engine\utility::remove_player_rig_laser_panel(level.gulag.ref_11f2d);
+    var_11 = scripts\engine\utility::remove_player_rig_laser_panel(level.gulag.ref_11F2D);
     var_12 = scripts\engine\utility::remove_player_rig_laser_panel(level.gulag.ref_13672);
   } else {
     var_10 = 0;

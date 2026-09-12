@@ -660,7 +660,7 @@ function carrier_cleanup(var_0, var_1) {
 }
 
 function vehicle_checktrailvfx(var_0) {
-  return isDefined(level.weaponmapdata[var_0]) && istrue(level.weaponmapdata[var_0].ref_13efc);
+  return isDefined(level.weaponmapdata[var_0]) && istrue(level.weaponmapdata[var_0].ref_13EFC);
 }
 
 function vehicle_collision(var_0, var_1) {
@@ -1056,7 +1056,7 @@ function change_loadout_watcher(var_0) {
       scripts\cp\cp_munitions::reset_munitions(self, var_4);
 
       if(scripts\cp\utility::turn_off_sniper_laser()) {
-        ref_139d7();
+        ref_139D7();
         thread flip_target();
       }
 
@@ -1064,7 +1064,7 @@ function change_loadout_watcher(var_0) {
     }
 
     if(var_2 == "weapon_purchased" && scripts\cp\utility::turn_off_sniper_laser()) {
-      ref_139d7();
+      ref_139D7();
 
       if(scripts\cp\cp_laststand::player_in_laststand(var_1)) {
         var_1 waittill("revive_success");
@@ -1076,9 +1076,9 @@ function change_loadout_watcher(var_0) {
         self takeweapon(var_5);
       }
 
-      if(self.ref_120b7 == 0) {
+      if(self.ref_120B7 == 0) {
         scoreeventnoweaponxp(self);
-      } else if(self.ref_120b7 == 1) {
+      } else if(self.ref_120B7 == 1) {
         scoreleadchanged(self);
       }
 
@@ -1087,7 +1087,7 @@ function change_loadout_watcher(var_0) {
     }
 
     if(var_2 == "attachment_purchased" && scripts\cp\utility::turn_off_sniper_laser()) {
-      ref_139d7();
+      ref_139D7();
 
       if(scripts\cp\cp_laststand::player_in_laststand(var_1)) {
         var_1 waittill("revive_success");
@@ -1099,9 +1099,9 @@ function change_loadout_watcher(var_0) {
       var_7 = self getweaponammostock(var_5);
       self takeweapon(var_5);
 
-      if(self.ref_120b7 == 0) {
+      if(self.ref_120B7 == 0) {
         script_struct_autotarget(self, var_6, var_7);
-      } else if(self.ref_120b7 == 1) {
+      } else if(self.ref_120B7 == 1) {
         scriptable_damaged_funcs(self, var_6, var_7);
       }
 
@@ -1110,7 +1110,7 @@ function change_loadout_watcher(var_0) {
     }
 
     if(var_2 == "tactical_purchased" && scripts\cp\utility::turn_off_sniper_laser()) {
-      ref_139d7();
+      ref_139D7();
 
       if(scripts\cp\cp_laststand::player_in_laststand(var_1)) {
         var_1 waittill("revive_success");
@@ -1123,7 +1123,7 @@ function change_loadout_watcher(var_0) {
     }
 
     if(var_2 == "lethal_purchased" && scripts\cp\utility::turn_off_sniper_laser()) {
-      ref_139d7();
+      ref_139D7();
 
       if(scripts\cp\cp_laststand::player_in_laststand(var_1)) {
         var_1 waittill("revive_success");
@@ -1136,7 +1136,7 @@ function change_loadout_watcher(var_0) {
     }
 
     if(var_2 == "shrapnel_perk_purchased" && scripts\cp\utility::turn_off_sniper_laser()) {
-      ref_139d7();
+      ref_139D7();
 
       if(scripts\cp\cp_laststand::player_in_laststand(var_1)) {
         var_1 waittill("revive_success");
@@ -1150,7 +1150,7 @@ function change_loadout_watcher(var_0) {
 
     if(var_2 == "ammo_purchased" && scripts\cp\utility::turn_off_sniper_laser()) {
       var_5 = scripts\cp\utility::getvalidtakeweapon();
-      ref_139d7();
+      ref_139D7();
 
       if(scripts\cp\cp_laststand::player_in_laststand(var_1)) {
         var_1 waittill("revive_success");
@@ -1179,7 +1179,7 @@ function flip_target() {
   self clearsoundsubmix("cp_store_duck", 1);
 }
 
-function ref_139d7() {
+function ref_139D7() {
   var_0 = self getplayerdata(level.loadoutsgroup, "squadMembers", "currencyWaveMode");
   scripts\cp\cp_persistence::set_player_currency(var_0);
 }
@@ -1497,7 +1497,7 @@ function table_getkillstreak(var_0, var_1, var_2) {
   return tablelookup(var_0, 0, "loadoutStreak" + var_2, var_1 + 1);
 }
 
-function ref_139e5(var_0, var_1) {
+function ref_139E5(var_0, var_1) {
   return tablelookup(var_0, 0, "loadoutRole", var_1 + 1);
 }
 
@@ -1520,7 +1520,7 @@ function is_player_carrying_special_item() {
     return 1;
   }
 
-  if(scripts\cp\cp_weapon::ref_124ad(self)) {
+  if(scripts\cp\cp_weapon::ref_124AD(self)) {
     return 1;
   }
 
@@ -1539,8 +1539,8 @@ function drop_special_item() {
       if(isDefined(level.outofboundstriggers) && level.outofboundstriggers.size > 0) {
         if(istrue(self.oob)) {
           self notify("location_tracker");
-          level.ref_11edf.origin = getEnt("nuclear_core_crashed", "targetname").origin;
-          level.ref_11edf.angles = getEnt("nuclear_core_crashed", "targetname").angles;
+          level.ref_11EDF.origin = getEnt("nuclear_core_crashed", "targetname").origin;
+          level.ref_11EDF.angles = getEnt("nuclear_core_crashed", "targetname").angles;
         }
       }
 
@@ -1551,10 +1551,10 @@ function drop_special_item() {
       var_0 = self.origin;
 
       if(scripts\cp\cp_outofbounds::isoob(self, 0)) {
-        var_0 = level.ref_11edf.origin;
+        var_0 = level.ref_11EDF.origin;
       }
 
-      level.nuclear_core = scripts\cp\respawn\cp_respawn::ref_11aa1(var_0 + (0, 0, 64));
+      level.nuclear_core = scripts\cp\respawn\cp_respawn::ref_11AA1(var_0 + (0, 0, 64));
 
       if(isDefined(self.primaryweaponobj)) {
         scripts\cp_mp\utility\inventory_utility::_giveweapon(self.primaryweaponobj, undefined, undefined, 0);
@@ -1590,7 +1590,7 @@ function drop_special_item() {
     return;
   }
 
-  if(scripts\cp\cp_weapon::ref_124ad(self)) {
+  if(scripts\cp\cp_weapon::ref_124AD(self)) {
     scripts\cp\cp_weapon::minigamefinishcount(self);
     return;
   }

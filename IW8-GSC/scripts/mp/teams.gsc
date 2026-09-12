@@ -37,7 +37,7 @@ function init() {
     }
   }
 
-  var_7 = ref_132e6();
+  var_7 = ref_132E6();
 
   if(var_7 && !scripts\engine\utility::array_contains(var_1, "team_two_hundred")) {
     level.teamnamelist = scripts\engine\utility::array_add(var_1, "team_two_hundred");
@@ -677,7 +677,7 @@ function createoperatorcustomization() {
     thread setuppingspecificvars(var_9);
 
     if(resetsuper(var_8) == "s4") {
-      self.ref_12e3a = 1;
+      self.ref_12E3A = 1;
     }
   }
 
@@ -688,12 +688,12 @@ function createoperatorcustomization() {
   var_12.get_extra_focus_fire_multipler = runbrgametypefunc6("cargo_truck");
   var_12.vehicle_damage_endburndown = runbrgametypefunc6("jeep");
   var_12.x1opsenableelimination = runbrgametypefunc6("little_bird");
-  var_12.ref_139f7 = runbrgametypefunc6("tac_rover");
-  var_12.ref_13a47 = runbrgametypefunc6("tank_east");
-  var_12.ref_13a48 = rundomplateskybeam("tank_east");
-  var_12.ref_13a52 = runbrgametypefunc6("tank_west");
-  var_12.ref_13a53 = rundomplateskybeam("tank_west");
-  var_12.ref_11d4d = runbrgametypefunc6("motorcycle");
+  var_12.ref_139F7 = runbrgametypefunc6("tac_rover");
+  var_12.ref_13A47 = runbrgametypefunc6("tank_east");
+  var_12.ref_13A48 = rundomplateskybeam("tank_east");
+  var_12.ref_13A52 = runbrgametypefunc6("tank_west");
+  var_12.ref_13A53 = rundomplateskybeam("tank_west");
+  var_12.ref_11D4D = runbrgametypefunc6("motorcycle");
   var_12.br_is_allowed_armor_insert = runbrgametypefunc6("airplane");
   var_12.create_head_icon_for_crate = runbrgametypefunc6("bomber");
   var_12.open_jeep_carpoc = runbrgametypefunc6("open_jeep_carpoc");
@@ -703,13 +703,13 @@ function createoperatorcustomization() {
   var_12.get_fake_digit_from_pool = runcircles("cargo_truck", 8);
   var_12.vehicle_damage_enginevisualclearcallback = runcircles("jeep", 10);
   var_12.x1opsendgame = runcircles("little_bird", 12);
-  var_12.ref_139f8 = runcircles("tac_rover", 14);
-  var_12.ref_11d5f = runcircles("motorcycle", 16);
+  var_12.ref_139F8 = runcircles("tac_rover", 14);
+  var_12.ref_11D5F = runcircles("motorcycle", 16);
   var_12.open_jeep_carpoc_horn = runcircles("open_jeep_carpoc", 18);
   var_12.check_for_damage_scalar_change = runcontrolledcallback("atv");
-  var_12.ref_139fc = runcontrolledcallback("tac_rover");
+  var_12.ref_139FC = runcontrolledcallback("tac_rover");
   var_12.zombieingas = runcontrolledcallback("little_bird");
-  var_12.ref_11d70 = runcontrolledcallback("motorcycle");
+  var_12.ref_11D70 = runcontrolledcallback("motorcycle");
   var_12.br_isplayerbeforeinitialinfildeploy = runcontrolledcallback("airplane");
   var_12.createjuggdroplocation = runcontrolledcallback("bomber");
 
@@ -1134,8 +1134,8 @@ function getoperatorcustomization() {
   var_0 = lookupcurrentoperator(self.team);
   var_1 = lookupcurrentoperatorskin(self.team);
 
-  if(isDefined(level.ref_11c6a)) {
-    var_2 = [[level.ref_11c6a]](self, var_0, var_1);
+  if(isDefined(level.ref_11C6A)) {
+    var_2 = [[level.ref_11C6A]](self, var_0, var_1);
     var_0 = var_2[0];
     var_1 = var_2[1];
     var_2 = undefined;
@@ -1830,7 +1830,7 @@ function outlinefriendly_apply() {
 
 function outlinefriendly_remove(var_0) {
   level endon("game_ended");
-  scripts\engine\utility::ref_143a5("death_or_disconnect", "joined_team");
+  scripts\engine\utility::ref_143A5("death_or_disconnect", "joined_team");
   scripts\mp\utility\outline::outlinedisable(var_0, self);
 }
 
@@ -1865,7 +1865,7 @@ function outlinesquad_apply() {
 
 function outlinesquad_remove(var_0) {
   level endon("game_ended");
-  scripts\engine\utility::ref_143a6("death_or_disconnect", "joined_team", "joined_squad");
+  scripts\engine\utility::ref_143A6("death_or_disconnect", "joined_team", "joined_squad");
   scripts\mp\utility\outline::outlinedisable(var_0, self);
 }
 
@@ -1929,17 +1929,17 @@ function resetposition(var_0) {
 
   if(var_1 == 0) {
     var_2 = tablelookup("operators.csv", 1, var_0, 23);
-    self.ref_1195c = tablelookup("operatorquips.csv", 1, var_2, 6);
+    self.ref_1195C = tablelookup("operatorquips.csv", 1, var_2, 6);
   } else {
-    self.ref_1195c = tablelookup("operatorquips.csv", 0, var_1, 6);
+    self.ref_1195C = tablelookup("operatorquips.csv", 0, var_1, 6);
   }
 
-  return self.ref_1195c;
+  return self.ref_1195C;
 }
 
 function resetscorefeedcontrolomnvar(var_0) {
-  self.ref_1195d = tablelookup("mp_cp/executiontable.csv", 1, self.loadoutexecution, 19);
-  return self.ref_1195d;
+  self.ref_1195D = tablelookup("mp_cp/executiontable.csv", 1, self.loadoutexecution, 19);
+  return self.ref_1195D;
 }
 
 function getoperatorsuperfaction(var_0) {
@@ -2332,7 +2332,7 @@ function ref_12304() {
       foreach(var_4 in var_2) {
         if(isDefined(var_4) && scripts\mp\utility\teams::isgameplayteam(var_4.team)) {
           var_0 = var_4.team;
-          self.ref_13ac9 = var_4.ref_13ac9;
+          self.ref_13AC9 = var_4.ref_13AC9;
           break;
         }
       }
@@ -2343,8 +2343,8 @@ function ref_12304() {
     var_0 = play_reset_priming_anim(var_1);
   }
 
-  if(!isDefined(self.ref_13ac9)) {
-    self.ref_13ac9 = gettime();
+  if(!isDefined(self.ref_13AC9)) {
+    self.ref_13AC9 = gettime();
   }
 
   thread scripts\mp\menus::setteam(var_0);
@@ -2368,7 +2368,7 @@ function play_reset_priming_anim(var_0) {
     if(var_4 > 0) {
       var_6 = scripts\mp\utility\teams::getteamdata(var_3, "players");
 
-      if(isDefined(var_6[0].ref_13ac9) && gettime() > var_6[0].ref_13ac9 + 300000) {
+      if(isDefined(var_6[0].ref_13AC9) && gettime() > var_6[0].ref_13AC9 + 300000) {
         continue;
       }
     }
@@ -2419,6 +2419,6 @@ function istempsfxent() {
   }
 }
 
-function ref_132e6() {
+function ref_132E6() {
   return getdvarint("scr_br_zombie_encounters", 0) > 0 || getdvarint("scr_br_alt_mode_fiend", 0) > 0 || scripts\mp\utility\game::deposit_from_compromised_convoy_delayed_failsafe();
 }

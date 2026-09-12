@@ -382,8 +382,8 @@ function matchrecording_loggameendstats() {
   var_4 = 0;
 
   foreach(var_6 in level.players) {
-    if(isDefined(var_6.ref_1338f)) {
-      var_0 = var_6.ref_1338f;
+    if(isDefined(var_6.ref_1338F)) {
+      var_0 = var_6.ref_1338F;
     }
 
     if(isDefined(var_6.nuke_explposstruct)) {
@@ -426,7 +426,7 @@ function matchrecording_usereventthink() {
 
   for(;;) {
     self waittill("log_user_event_start");
-    var_0 = scripts\engine\utility::ref_143b4("log_user_event_end", "log_user_event_generic_event");
+    var_0 = scripts\engine\utility::ref_143B4("log_user_event_end", "log_user_event_generic_event");
 
     if(var_0 == "log_user_event_generic_event") {
       self iprintlnbold("Event Logged");

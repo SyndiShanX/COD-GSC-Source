@@ -118,7 +118,7 @@ function exfil_players(var_0, var_1, var_2) {
   }
 
   objective_setlabel(var_1, &"COOP_GAME_PLAY/EXFIL");
-  level.heli_trip_vehicle scripts\engine\utility::ref_143a5("all_players_on_board", "heli_trip_timed_out");
+  level.heli_trip_vehicle scripts\engine\utility::ref_143A5("all_players_on_board", "heli_trip_timed_out");
   level notify("ready_to_exfil");
   objective_delete(var_1);
   thread leave_and_end_game();
@@ -333,8 +333,8 @@ function listen_for_exfil(var_0, var_1, var_2) {
   level waittill("call_exfil", var_3, var_4);
   var_5 = scripts\engine\utility::getStruct("player_exfil", "targetname");
 
-  if(isDefined(level.ref_1248f)) {
-    var_5 = level.ref_1248f;
+  if(isDefined(level.ref_1248F)) {
+    var_5 = level.ref_1248F;
   }
 
   var_5.vehicletype = "blima_cp";
@@ -546,7 +546,7 @@ function keep_from_crushing_players() {
     if(isDefined(level.spawnjuggernautcrateatposition)) {
       foreach(var_4 in level.spawnjuggernautcrateatposition) {
         if(isDefined(var_4) && !istrue(var_4.carried) && distance2d(self.origin, var_4.origin) <= 200) {
-          thread ref_11d86(var_4);
+          thread ref_11D86(var_4);
         }
       }
     }
@@ -605,7 +605,7 @@ function move_player_from_under_heli(var_0) {
   var_0 setOrigin(var_0.origin + var_1, 1);
 }
 
-function ref_11d86(var_0) {
+function ref_11D86(var_0) {
   var_1 = var_0.origin - self.origin;
   var_1 = vectorNormalize(var_1);
   var_1 *= 200;

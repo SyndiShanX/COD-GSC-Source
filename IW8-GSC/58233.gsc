@@ -21,9 +21,9 @@ function hvi_vehicle_rider_special_setup() {
 }
 
 function hvt_drop_from_truck_to_ground() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("convoy_truck", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("convoy_truck", 1);
   var_0.id = 26;
-  var_0.ref_12da2[0] = 0;
+  var_0.ref_12DA2[0] = 0;
 }
 
 function hvt_delayed_cig() {
@@ -35,20 +35,20 @@ function hvt_delayed_cig() {
 
 function hvt_can_lose_health() {
   var_0 = getdvarfloat("scr_armored_truck_health_override", 8750);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("convoy_truck", var_0, undefined, undefined, undefined, 30);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("convoy_truck", var_0, undefined, undefined, undefined, 30);
   var_1 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("convoy_truck");
   var_1.class = "heavy";
-  var_2 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414d("convoy_truck", "heavy");
+  var_2 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414D("convoy_truck", "heavy");
   var_2.ref_12024 = &hvt_visual_leaving_callout;
-  var_2.ref_1202d = &hvt_waittill_pickup_players_gobackup;
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("convoy_truck");
+  var_2.ref_1202D = &hvt_waittill_pickup_players_gobackup;
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("convoy_truck");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("convoy_truck", 40);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14175("convoy_truck", &hvtboardingside);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("convoy_truck", &hvi_escort_exit);
 }
 
 function hvt_anim_and_close_doors() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("convoy_truck", 1);
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("convoy_truck", 1);
   var_0.challengeevaluator = 2.16666;
   var_0.keycardlocs_chosen = 0.70833;
   var_0.is_using_stealth_debug = 350;
@@ -88,7 +88,7 @@ function hurtplayersinbunker(var_0, var_1) {
   }
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "convoy_truck", var_0);
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   var_3 = &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback;
 
@@ -224,5 +224,5 @@ function i_am_seeing_this_player() {
   var_1 = spawnStruct();
   scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("convoy_truck", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("convoy_truck", var_1, var_2);
 }

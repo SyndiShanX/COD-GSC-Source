@@ -21,8 +21,8 @@ function main() {
   game["axis_outfit"] = "woodland";
   thread damage_multiplier();
   thread ref_12733();
-  thread ref_121f4();
-  thread ref_1362a();
+  thread ref_121F4();
+  thread ref_1362A();
 }
 
 function ref_12733() {
@@ -37,7 +37,7 @@ function ref_12733() {
     scripts\engine\utility::exploder("goal_2");
     var_0 = [];
 
-    if(!isDefined(level.ref_1346e)) {
+    if(!isDefined(level.ref_1346E)) {
       var_1 = getEntArray("allies_goal", "targetname");
       var_2 = getEntArray("axis_goal", "targetname");
 
@@ -51,11 +51,11 @@ function ref_12733() {
         var_0 = [var_4, var_3];
       }
     } else {
-      foreach(var_6 in level.ref_1346e) {
+      foreach(var_6 in level.ref_1346E) {
         var_6.select_low_roof_spawners = 10;
       }
 
-      var_0 = level.ref_1346e;
+      var_0 = level.ref_1346E;
     }
 
     for(var_8 = 0; var_8 < var_0.size; var_8++) {
@@ -123,23 +123,23 @@ function damage_multiplier() {
   thread vehicle_compass_br_shouldbevisibletoplayer(var_0);
 }
 
-function ref_121f4() {
+function ref_121F4() {
   var_0 = getEnt("clip64x64x64", "targetname");
   var_1 = spawn("script_model", (-495, -1237, -348));
   var_1.angles = (0, 330, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
 }
 
-function ref_1362a() {
+function ref_1362A() {
   var_0 = spawn("trigger_radius", (-150, -470, -230), 0, 64, 100);
-  thread ref_144ff(var_0);
+  thread ref_144FF(var_0);
   var_1 = spawn("trigger_radius", (177, -46, -200), 0, 64, 100);
-  thread ref_144ff(var_1);
+  thread ref_144FF(var_1);
   var_2 = spawn("trigger_radius", (-95, 125, -230), 0, 64, 100);
-  thread ref_144ff(var_2);
+  thread ref_144FF(var_2);
 }
 
-function ref_144ff(var_0) {
+function ref_144FF(var_0) {
   for(;;) {
     self waittill("trigger", var_1);
 
@@ -147,15 +147,15 @@ function ref_144ff(var_0) {
       continue;
     }
 
-    if(!isDefined(self.ref_126ce)) {
-      self.ref_126ce = [];
+    if(!isDefined(self.ref_126CE)) {
+      self.ref_126CE = [];
     }
 
-    if(scripts\engine\utility::array_contains(self.ref_126ce, var_1.guid)) {
+    if(scripts\engine\utility::array_contains(self.ref_126CE, var_1.guid)) {
       continue;
     }
 
-    self.ref_126ce = scripts\engine\utility::array_add(self.ref_126ce, var_1.guid);
+    self.ref_126CE = scripts\engine\utility::array_add(self.ref_126CE, var_1.guid);
 
     switch (var_0) {
       case "truck_southwest":
@@ -194,7 +194,7 @@ function ref_14504(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }
 
 function ref_14502(var_0) {
@@ -224,7 +224,7 @@ function ref_14502(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }
 
 function ref_14503(var_0) {
@@ -266,5 +266,5 @@ function ref_14503(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }

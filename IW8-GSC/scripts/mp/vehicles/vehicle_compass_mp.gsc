@@ -3,7 +3,7 @@
  * Script: scripts\mp\vehicles\vehicle_compass_mp.gsc
 ******************************************************/
 
-function ref_12b16(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+function ref_12B16(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(!isDefined(level.hover_radius)) {
     level.hover_radius = [];
   }
@@ -30,7 +30,7 @@ function ref_12b16(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   level.hover_radius[var_0].obj_room_fire_04 = var_3;
 }
 
-function ref_12e0b(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+function ref_12E0B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(!isDefined(level.hover_radius[var_0])) {
     return;
   }
@@ -60,7 +60,7 @@ function ref_12e0b(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   }
 
   if(var_11) {
-    thread ref_11aa9(var_0);
+    thread ref_11AA9(var_0);
 
     if(istrue(level.hover_radius[var_0].comms_crates)) {
       if(istrue(level.hover_radius[var_0].convoy_pos)) {
@@ -421,7 +421,7 @@ function obj_room_fire_02(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   return 1;
 }
 
-function ref_11aa9(var_0) {
+function ref_11AA9(var_0) {
   level endon("game_ended");
   var_1 = 0.05;
   level.hover_speed = scripts\engine\utility::array_add_safe(level.hover_speed, var_0);

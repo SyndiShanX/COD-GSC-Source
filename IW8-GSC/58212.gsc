@@ -6,9 +6,9 @@
 function get_player_velo_array() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_susp", "initLate", &get_player_who_most_likely_broke_stealth);
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_susp", "create", &get_player_planting_zone);
-  scripts\engine\utility::create_func_ref("cargo_truck_susp", &ref_134f7);
+  scripts\engine\utility::create_func_ref("cargo_truck_susp", &ref_134F7);
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_susp", "spawnCallback", &get_player_who_most_recently_threw_grenade);
-  scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_registeroutoftimecallback("cargo_truck_susp", &_calloutmarkerping_isenemy::get_power_ref_from_weapon);
+  scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_registeroutoftimecallback("cargo_truck_susp", &_calloutmarkerping_isenemy::get_power_ref_FROM_weapon);
 }
 
 function get_player_who_most_likely_broke_stealth() {
@@ -46,7 +46,7 @@ function get_player_planting_zone(var_0) {
   var_0.health = var_0.maxhealth;
 }
 
-function ref_134f7(var_0) {
+function ref_134F7(var_0) {
   var_1 = spawnStruct();
   var_1.origin = var_0.origin + (0, 0, 100);
   var_1.angles = var_0.angles * (0, 1, 0);

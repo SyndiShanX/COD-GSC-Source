@@ -40,7 +40,7 @@ function gethealthperframe() {
 }
 
 function adrenaline_removeonplayernotifies() {
-  scripts\engine\utility::ref_143a5("death", "healed");
+  scripts\engine\utility::ref_143A5("death", "healed");
   thread removeadrenaline();
 }
 

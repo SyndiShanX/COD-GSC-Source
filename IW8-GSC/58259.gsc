@@ -33,14 +33,14 @@ function start_serum_gadget(var_0, var_1) {
   var_7 = "adrenalinesuit_mp";
   var_8 = "zombiedefault";
   var_9 = 1;
-  accesscardsspawned_red::ref_1380c(var_4, var_0, var_6, var_7, var_8, var_9);
+  accesscardsspawned_red::ref_1380C(var_4, var_0, var_6, var_7, var_8, var_9);
 }
 
 function stop_serum_gadget() {
   var_0 = accesscardsspawned_red::preinfilstreamfunc();
 
   if(isDefined(var_0) && var_0 == "serum_gadget") {
-    accesscardsspawned_red::ref_138c8();
+    accesscardsspawned_red::ref_138C8();
     return;
   }
 }

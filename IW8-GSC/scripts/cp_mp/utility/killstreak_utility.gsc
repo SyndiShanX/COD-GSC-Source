@@ -397,7 +397,7 @@ function teamhasuav(var_0) {
   return false;
 }
 
-function ref_13aaf(var_0) {
+function ref_13AAF(var_0) {
   var_1 = undefined;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "squadAsTeamEnabled")) {
@@ -483,7 +483,7 @@ function getkillstreakdeployweapon(var_0) {
     case "chopper_support":
       var_1 = "ks_gesture_generic_mp";
 
-      if(scripts\cp_mp\utility\game_utility::ref_140a9()) {
+      if(scripts\cp_mp\utility\game_utility::ref_140A9()) {
         var_1 = "ks_gesture_generic_mp_ch3";
       }
 
@@ -491,7 +491,7 @@ function getkillstreakdeployweapon(var_0) {
     case "toma_strike":
       var_1 = "iw8_green_beam_mp";
 
-      if(scripts\cp_mp\utility\game_utility::ref_140a9()) {
+      if(scripts\cp_mp\utility\game_utility::ref_140A9()) {
         var_1 = "iw8_spotter_scope_mp_ch3";
       }
 
@@ -499,7 +499,7 @@ function getkillstreakdeployweapon(var_0) {
     case "precision_airstrike":
       var_1 = "iw8_spotter_scope_mp";
 
-      if(scripts\cp_mp\utility\game_utility::ref_140a9()) {
+      if(scripts\cp_mp\utility\game_utility::ref_140A9()) {
         var_1 = "iw8_spotter_scope_mp_ch3";
       }
 
@@ -600,7 +600,7 @@ function removeextracthelipad() {
   return var_0[0];
 }
 
-function ref_12cc6(var_0) {
+function ref_12CC6(var_0) {
   var_0 endon("death_or_disconnect");
   level endon("game_ended");
 
@@ -623,7 +623,7 @@ function ref_12cc6(var_0) {
   var_0.restoreangles = undefined;
 }
 
-function ref_12aa7(var_0) {
+function ref_12AA7(var_0) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("challenges", "onKillStreakEnd")) {
     var_1 = var_0.mpstreaksysteminfo;
 
@@ -661,7 +661,7 @@ function ref_12aa7(var_0) {
   }
 }
 
-function ref_125f8() {
+function ref_125F8() {
   var_0 = undefined;
 
   if(isDefined(self.vehicle)) {
@@ -677,20 +677,20 @@ function ref_125f8() {
   return var_0;
 }
 
-function ref_11dc0(var_0) {
+function ref_11DC0(var_0) {
   var_1 = var_0 getmovingplatformparent();
 
   if(isDefined(var_1) && _calloutmarkerping_handleluinotify_enemyrepinged::trophy_tryreflectsnapshot(var_1) || scripts\cp_mp\utility\script_utility::issharedfuncdefined("entity", "isGondolaBrush") && [[scripts\cp_mp\utility\script_utility::getsharedfunc("entity", "isGondolaBrush")]](var_1)) {
     var_0 playerlinkTo(var_1);
     var_0 playerlinkedoffsetenable();
-    var_0.ref_11dc2 = var_1;
+    var_0.ref_11DC2 = var_1;
     return;
   }
 }
 
-function ref_11dc1(var_0) {
-  if(isDefined(var_0.ref_11dc2)) {
-    var_0.ref_11dc2 = undefined;
+function ref_11DC1(var_0) {
+  if(isDefined(var_0.ref_11DC2)) {
+    var_0.ref_11DC2 = undefined;
     var_0 unlink();
     return;
   }

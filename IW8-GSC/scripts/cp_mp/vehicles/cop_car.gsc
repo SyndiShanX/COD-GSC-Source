@@ -99,7 +99,7 @@ function cop_car_initinteract() {
 }
 
 function ignoreattractions() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("cop_car", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("cop_car", 1);
   var_0.id = 6;
   var_0.seatids["driver"] = 0;
   var_0.seatids["fr"] = 1;
@@ -108,13 +108,13 @@ function ignoreattractions() {
 }
 
 function ignoreafkcheck() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("cop_car", 1000);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("cop_car", 1000);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("cop_car");
   var_0.class = "medium_light";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("cop_car");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("cop_car");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("cop_car", 6);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("cop_car", &cop_car_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("cop_car_mp", 3);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("cop_car_mp", 3);
 }
 
 function cop_car_initfx() {
@@ -137,7 +137,7 @@ function cop_car_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "cop_car", var_0);
   var_2.objweapon = getcompleteweaponname("cop_car_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 

@@ -72,7 +72,7 @@ function oncranked(var_0, var_1, var_2) {
   }
 }
 
-function ref_1200c(var_0) {
+function ref_1200C(var_0) {
   if(self == var_0) {
     return;
   }

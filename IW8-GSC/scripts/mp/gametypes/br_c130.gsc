@@ -67,7 +67,7 @@ function snappointtomapbounds2d(var_0) {
   return var_0;
 }
 
-function ref_1342e(var_0, var_1, var_2) {
+function ref_1342E(var_0, var_1, var_2) {
   if(!isDefined(level.outofboundstriggers) || level.outofboundstriggers.size == 0) {
     return snappointtomapbounds2d(var_1);
   }
@@ -86,7 +86,7 @@ function ref_1342e(var_0, var_1, var_2) {
   }
 
   if(isDefined(level.ref_12166) && level.ref_12166.size > 0 && getdvarint("scr_br_spawnOOBKillswitch", 0) == 0) {
-    var_6 = scripts\mp\gametypes\br_public::ref_12a18(var_0, var_1, level.ref_12166);
+    var_6 = scripts\mp\gametypes\br_public::ref_12A18(var_0, var_1, level.ref_12166);
 
     if(isDefined(var_6)) {
       var_7 = distance2dsquared(var_0, var_1);
@@ -206,7 +206,7 @@ function spawnc130pathstructnew(var_0, var_1) {
     var_12 = var_11;
   }
 
-  var_13 = ref_1361a(var_2, var_6, var_12);
+  var_13 = ref_1361A(var_2, var_6, var_12);
   var_14 = scripts\cp_mp\parachute::getc130height();
   var_13.startpt = (var_13.startpt[0], var_13.startpt[1], var_14);
   var_13.endpt = (var_13.endpt[0], var_13.endpt[1], var_14);
@@ -227,7 +227,7 @@ function hostdamagepercentmedium(var_0) {
   return var_0;
 }
 
-function ref_1361a(var_0, var_1, var_2) {
+function ref_1361A(var_0, var_1, var_2) {
   var_3 = anglesToForward(var_1);
 
   if(!isDefined(var_2)) {
@@ -242,8 +242,8 @@ function ref_1361a(var_0, var_1, var_2) {
   var_5 = var_0 + var_3 * var_2;
 
   if(!scripts\mp\gametypes\br_gametypes::unset_relic_aggressive_melee("planeSnapToOOB")) {
-    var_4 = ref_1342e(var_0, var_4);
-    var_5 = ref_1342e(var_0, var_5);
+    var_4 = ref_1342E(var_0, var_4);
+    var_5 = ref_1342E(var_0, var_5);
   }
 
   var_6 = var_4;
@@ -251,11 +251,11 @@ function ref_1361a(var_0, var_1, var_2) {
 
   if(scripts\mp\gametypes\br_gametypes::unset_relic_aggressive_melee("planeSnapToOOB")) {
     if(!add_to_spotlight_array(var_4)) {
-      var_6 = ref_1342e(var_0, var_4);
+      var_6 = ref_1342E(var_0, var_4);
     }
 
     if(!add_to_spotlight_array(var_5)) {
-      var_7 = ref_1342e(var_0, var_5);
+      var_7 = ref_1342E(var_0, var_5);
     }
   }
 
@@ -289,7 +289,7 @@ function ref_1361a(var_0, var_1, var_2) {
   var_10 = spawnStruct();
   var_10.startpt = var_4;
   var_10.endpt = var_5;
-  var_10.ref_1386e = var_6;
+  var_10.ref_1386E = var_6;
   var_10.neurotoxin_damage_monitor = var_7;
   var_10.angle = var_1;
   var_10.pathdir = var_3;
@@ -335,8 +335,8 @@ function updatec130pathomnvars(var_0) {
     return;
   }
 
-  setomnvar("ui_br_c130_path_start_x", int(var_0.ref_1386e[0]));
-  setomnvar("ui_br_c130_path_start_y", int(var_0.ref_1386e[1]));
+  setomnvar("ui_br_c130_path_start_x", int(var_0.ref_1386E[0]));
+  setomnvar("ui_br_c130_path_start_y", int(var_0.ref_1386E[1]));
   setomnvar("ui_br_c130_path_end_x", int(var_0.neurotoxin_damage_monitor[0]));
   setomnvar("ui_br_c130_path_end_y", int(var_0.neurotoxin_damage_monitor[1]));
 }
@@ -346,7 +346,7 @@ function createtestc130path(var_0, var_1) {
 
   if(isDefined(level.br_level.br_mapcenter) && isDefined(level.br_level.br_mapsize)) {
     var_2 = spawnc130pathstructnew(var_0, var_1);
-    level thread scripts\mp\gametypes\br_analytics::determinewinnertype(var_2.centerpt, var_2.angle[1], var_2.ref_1386e, var_2.neurotoxin_damage_monitor);
+    level thread scripts\mp\gametypes\br_analytics::determinewinnertype(var_2.centerpt, var_2.angle[1], var_2.ref_1386E, var_2.neurotoxin_damage_monitor);
   } else {
     var_2 = spawnc130pathstruct(var_1, var_2);
   }
@@ -518,11 +518,11 @@ function ispointincustomoutofbounds(var_0) {
   return false;
 }
 
-function ref_123af() {
+function ref_123AF() {
   var_0 = anglesToForward(self.angles);
 
   for(;;) {
-    var_1 = vectorNormalize(self.ref_12205.ref_1386e - self.origin);
+    var_1 = vectorNormalize(self.ref_12205.ref_1386E - self.origin);
     var_2 = vectordot(var_0, var_1) < 0;
 
     if(var_2) {
@@ -542,7 +542,7 @@ function kickwhenoutofbounds(var_0) {
   }
 
   waitframe();
-  ref_123af();
+  ref_123AF();
   var_1 = relic_ammo_drain_take_ammo();
 
   while(!add_to_spotlight_array((self.origin[0], self.origin[1], var_1))) {
@@ -680,7 +680,7 @@ function listenjump(var_0, var_1) {
   var_2 = undefined;
   self.redeployenabled = 0;
   var_3 = getdvarint("scr_br_squadLeaderForceJump", 0);
-  ref_123af(var_0);
+  ref_123AF(var_0);
 
   for(;;) {
     var_4 = scripts\engine\utility::waittill_either("halo_jump_c130", "halo_jump_solo_c130");
@@ -778,7 +778,7 @@ function leaveplane(var_0, var_1, var_2, var_3) {
   self allowcrouch(1);
   self allowprone(1);
   self.plotarmor = undefined;
-  scripts\mp\utility\game::ref_131a3(self, 0);
+  scripts\mp\utility\game::ref_131A3(self, 0);
   scripts\mp\gametypes\br_public::updatebrscoreboardstat("isInInfilPlane", 0);
 
   if(isDefined(level.infilstruct) && isDefined(level.infilstruct.playersinc130) && level.infilstruct.playersinc130 > 0) {
@@ -799,12 +799,12 @@ function leaveplane(var_0, var_1, var_2, var_3) {
   self cameradefault();
   self.br_infil_type = undefined;
   thread parachute(var_0, var_1, var_2, var_3);
-  thread scripts\mp\gametypes\br_gametypes::ref_12e05("onLeaveAC130");
+  thread scripts\mp\gametypes\br_gametypes::ref_12E05("onLeaveAC130");
 
   if(scripts\mp\utility\game::round_vehicle_logic() == "truckwar") {
     scripts\mp\gametypes\br_gametype_truckwar::getspawnpoint(1);
-    self setOrigin(self.ref_12ab3.origin, 1);
-    self setplayerangles(self.ref_12ab3.angles);
+    self setOrigin(self.ref_12AB3.origin, 1);
+    self setplayerangles(self.ref_12AB3.angles);
     return;
   }
 }
@@ -812,7 +812,7 @@ function leaveplane(var_0, var_1, var_2, var_3) {
 function holdteammatestosquadleader(var_0) {
   level endon("game_ended");
   self endon("death_or_disconnect");
-  thread ref_144d3(var_0);
+  thread ref_144D3(var_0);
   var_1 = self;
   wait 0.2;
   var_2 = [(-250, 0, 0), (-150, -150, 0), (-150, 150, 0)];
@@ -857,10 +857,10 @@ function holdteammatestosquadleader(var_0) {
   self notify("hold_teammates_complete");
 }
 
-function ref_144d3(var_0) {
+function ref_144D3(var_0) {
   level endon("game_ended");
   self endon("hold_teammates_complete");
-  scripts\engine\utility::ref_143a5("death", "disconnect");
+  scripts\engine\utility::ref_143A5("death", "disconnect");
 
   foreach(var_2 in var_0) {
     if(!isDefined(var_2)) {
@@ -993,7 +993,7 @@ function setplayervarinrespawnc130(var_0) {
 function waittoplayinfildialog() {
   level endon("game_ended");
   level.br_ac130 endon("death");
-  ref_123af(level.br_ac130);
+  ref_123AF(level.br_ac130);
 
   for(;;) {
     var_0 = level.br_ac130 scripts\mp\gametypes\br_public::calctrailpoint();

@@ -57,15 +57,15 @@ function givemunitionfromluinotify() {
 
         if(isDefined(var_5) && var_5.ref != "none" && var_5.ref != "empty1" && var_5.ref != "empty2" && var_5.ref != "empty3") {
           if(istrue(can_use_munition(var_3))) {
-            if(scripts\cp\cp_weapon::ref_124ad(self)) {
-              var_6 = ref_132c9(var_5.ref);
+            if(scripts\cp\cp_weapon::ref_124AD(self)) {
+              var_6 = ref_132C9(var_5.ref);
 
               if(var_6) {
                 self.modeusesgroundwarteamoobtriggers = 1;
                 scripts\cp\cp_weapon::minigamefinishcount(self);
                 self waittill("weapon_change");
 
-                while(scripts\cp\cp_weapon::ref_124ad(self)) {
+                while(scripts\cp\cp_weapon::ref_124AD(self)) {
                   waitframe();
                 }
 
@@ -77,7 +77,7 @@ function givemunitionfromluinotify() {
               }
             }
 
-            thread ref_12bdf(var_5.ref, var_3);
+            thread ref_12BDF(var_5.ref, var_3);
             var_7 = scripts\cp\crafting_system::giveitembasedoncraftingstruct(var_5.ref);
 
             if(var_7) {
@@ -85,7 +85,7 @@ function givemunitionfromluinotify() {
                 self notify("munitions_used", var_5.ref);
               }
 
-              scripts\cp\cp_analytics::ref_119b6(self, var_5.ref);
+              scripts\cp\cp_analytics::ref_119B6(self, var_5.ref);
             } else {
               self notify("remove_munition_on_use");
             }
@@ -312,7 +312,7 @@ function ref_12474(var_0) {
     return false;
   }
 
-  if(istrue(self.ref_140ae)) {
+  if(istrue(self.ref_140AE)) {
     if(var_0) {
       iprintlnbold("self.usingObject");
     }
@@ -328,7 +328,7 @@ function ref_12474(var_0) {
     return false;
   }
 
-  if(istrue(level.ref_12b46)) {
+  if(istrue(level.ref_12B46)) {
     if(var_0) {
       iprintlnbold(" Regroup to plane started so disabled Munitions till process is complete");
     }
@@ -362,7 +362,7 @@ function ref_12474(var_0) {
     return false;
   }
 
-  if(istrue(self.ref_140ab)) {
+  if(istrue(self.ref_140AB)) {
     if(var_0) {
       iprintlnbold("still using munition");
     }
@@ -382,11 +382,11 @@ function ref_12474(var_0) {
   return true;
 }
 
-function ref_132c9(var_0) {
+function ref_132C9(var_0) {
   return true;
 }
 
-function ref_12bdf(var_0, var_1) {
+function ref_12BDF(var_0, var_1) {
   self notify("remove_munition_on_use");
   self endon("remove_munition_on_use");
 
@@ -394,12 +394,12 @@ function ref_12bdf(var_0, var_1) {
     return;
   }
 
-  thread ref_1301a(var_0, var_1);
+  thread ref_1301A(var_0, var_1);
   self waittill("munitions_used", var_0);
   remove_munition(var_1, var_0);
 }
 
-function ref_1301a(var_0, var_1) {
+function ref_1301A(var_0, var_1) {
   switch (var_0) {
     case "apache":
     case "chopper_gunner":
@@ -728,7 +728,7 @@ function cooldown_munition(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_2 waittill(var_0);
     var_2.munition_slots[var_5].cooldown_progress = undefined;
     var_2.munition_slots[var_5].can_use = 0;
-    var_2.munition_slots[var_5].ref_134e2 = undefined;
+    var_2.munition_slots[var_5].ref_134E2 = undefined;
   }
 }
 
@@ -740,13 +740,13 @@ function remove_munition_from_array(var_0, var_1) {
       }
 
       self.munitions_in_playerdata[var_2] = undefined;
-      self.munition_slots[var_0].ref_134e2 = undefined;
+      self.munition_slots[var_0].ref_134E2 = undefined;
       break;
     }
   }
 }
 
-function ref_11e0c(var_0) {
+function ref_11E0C(var_0) {
   var_1 = 0;
 
   switch (var_0) {
@@ -903,9 +903,9 @@ function give_munition_to_slot(var_0, var_1, var_2) {
   self.munition_slots[var_1].cooldown_progress = 1;
 
   if(isDefined(var_2)) {
-    self.munition_slots[var_1].ref_134e2 = var_2;
+    self.munition_slots[var_1].ref_134E2 = var_2;
 
-    if(isDefined(self.munition_slots[var_1].ref_134e2) && ref_11e0c(self.munition_slots[var_1].ref_134e2)) {
+    if(isDefined(self.munition_slots[var_1].ref_134E2) && ref_11E0C(self.munition_slots[var_1].ref_134E2)) {
       if(var_1 == 0) {
         self setplayerdata("cp", "alienSession", "escapedRank0", 1);
       } else if(var_1 == 1) {
@@ -917,8 +917,8 @@ function give_munition_to_slot(var_0, var_1, var_2) {
   }
 
   if(var_0 == "none") {
-    if(isDefined(self.munition_slots[var_1].ref_134e2)) {
-      self.munition_slots[var_1].ref_134e2 = undefined;
+    if(isDefined(self.munition_slots[var_1].ref_134E2)) {
+      self.munition_slots[var_1].ref_134E2 = undefined;
     }
   }
 
@@ -1073,7 +1073,7 @@ function loadout_change_activate(var_0, var_1) {
   }
 }
 
-function ref_12be1(var_0, var_1, var_2) {
+function ref_12BE1(var_0, var_1, var_2) {
   var_3 = var_1 * var_1;
   var_4 = 20;
 
@@ -1100,7 +1100,7 @@ function ref_12be1(var_0, var_1, var_2) {
   }
 }
 
-function ref_12be0(var_0) {
+function ref_12BE0(var_0) {
   var_1 = ["brloot_munition", "brloot_munition_airdrop", "brloot_munition_ammo", "brloot_munition_armor", "brloot_munition_c4_launcher", "brloot_munition_cluster_strike", "brloot_munition_cruise_missile", "brloot_munition_cruise_predator", "brloot_munition_deployable_cover", "brloot_munition_grenade_crate", "brloot_munition_grenade_launcher", "brloot_munition_juggernaut", "brloot_munition_precision_airstrike", "brloot_munition_thermite_launcher", "brloot_munition_trophysystem", "brloot_munition_turret", "brloot_munition_uav", "brloot_munition_white_phos"];
 
   if(isDefined(var_0)) {

@@ -3,15 +3,15 @@
  * Script: scripts\mp\gametypes\br_gondola.gsc
 ***********************************************/
 
-function ref_1396d() {
+function ref_1396D() {
   level endon("game_ended");
   wait 1;
   level.can_combat_action_be_interrupted = getEntArray("gondola_start", "script_noteworthy");
 
   foreach(var_1 in level.can_combat_action_be_interrupted) {
-    ref_1396e(var_1);
+    ref_1396E(var_1);
     thread select_patrol_three_spawners();
-    thread ref_140fe();
+    thread ref_140FE();
   }
 }
 
@@ -24,11 +24,11 @@ function unuseweapon() {
     var_1 clearwristwatchtime(1);
     friendly_convoy_intro_decho_idle_animation(var_1);
     thread select_patrol_six_spawners();
-    thread ref_140fe();
+    thread ref_140FE();
   }
 }
 
-function ref_1396e() {
+function ref_1396E() {
   var_0 = self;
   var_1 = var_0 scripts\engine\utility::get_linked_ents();
 
@@ -42,7 +42,7 @@ function ref_1396e() {
     }
 
     if(isDefined(var_3.targetname) && var_3.targetname == "wheeler") {
-      var_0.ref_145aa = var_3;
+      var_0.ref_145AA = var_3;
     }
   }
 
@@ -51,11 +51,11 @@ function ref_1396e() {
   var_7 = getEnt(var_6.target, "targetname");
   var_8 = scripts\engine\utility::getStruct(var_7.target, "targetname");
   var_9 = getEnt(var_8.target, "targetname");
-  var_0.ref_1376e = var_0.origin;
+  var_0.ref_1376E = var_0.origin;
   var_0.movelatejoinerstospectators = var_5.origin;
   var_0.ref_13770 = var_7.origin;
   var_0.moveleadmarkers = var_8.origin;
-  var_0.ref_1376f = var_0.angles[1];
+  var_0.ref_1376F = var_0.angles[1];
   var_0.ref_12384 = var_6;
   var_0.ref_12385 = var_9;
 
@@ -85,12 +85,12 @@ function friendly_convoy_intro_decho_idle_animation() {
     }
 
     if(isDefined(var_3.targetname) && var_3.targetname == "wheeler") {
-      var_0.ref_145aa = var_3;
+      var_0.ref_145AA = var_3;
     }
   }
 
   var_5 = scripts\engine\utility::getStruct(var_0.target, "targetname");
-  var_0.ref_1376f = var_0.angles[1];
+  var_0.ref_1376F = var_0.angles[1];
 
   if(isDefined(var_0.script_parameters) && var_0.script_parameters == "up") {
     var_0.juggheli_spawner_jammer5_1 = 25;
@@ -112,13 +112,13 @@ function select_patrol_six_spawners() {
   waitframe();
 
   for(;;) {
-    if(self.angles[1] != self.ref_1376f) {
-      self.angles = (self.angles[0], self.ref_1376f, self.angles[2]);
+    if(self.angles[1] != self.ref_1376F) {
+      self.angles = (self.angles[0], self.ref_1376F, self.angles[2]);
     }
 
     var_0 = self;
     var_1 = undefined;
-    self.ref_1385b = scripts\engine\utility::getStruct(self.target, "targetname");
+    self.ref_1385B = scripts\engine\utility::getStruct(self.target, "targetname");
 
     for(;;) {
       var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
@@ -129,7 +129,7 @@ function select_patrol_six_spawners() {
 
       if(isstruct(var_2)) {
         var_1 = var_2;
-        ref_145ab(var_1, var_0);
+        ref_145AB(var_1, var_0);
         self moveTo(var_1.origin, self.script_speed, 0, 0);
         wait self.script_speed;
         waitframe();
@@ -161,7 +161,7 @@ function select_patrol_six_spawners() {
 
       if(isstruct(var_2)) {
         var_1 = var_2;
-        ref_145ab(var_1, var_0);
+        ref_145AB(var_1, var_0);
         self moveTo(var_1.origin, self.script_speed, 0, 0);
         wait self.script_speed;
         waitframe();
@@ -184,7 +184,7 @@ function select_patrol_six_spawners() {
 
     select_patrol_two_spawners();
 
-    while(scripts\engine\utility::getStruct(var_0.target, "targetname") != self.ref_1385b) {
+    while(scripts\engine\utility::getStruct(var_0.target, "targetname") != self.ref_1385B) {
       var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
       if(!isDefined(var_2)) {
@@ -193,7 +193,7 @@ function select_patrol_six_spawners() {
 
       if(isstruct(var_2)) {
         var_1 = var_2;
-        ref_145ab(var_1, var_0);
+        ref_145AB(var_1, var_0);
         self moveTo(var_1.origin, self.script_speed, 0, 0);
         wait self.script_speed;
         waitframe();
@@ -210,12 +210,12 @@ function select_patrol_three_spawners() {
   waitframe();
 
   for(;;) {
-    if(self.angles[1] != self.ref_1376f) {
-      self.angles = (self.angles[0], self.ref_1376f, self.angles[2]);
+    if(self.angles[1] != self.ref_1376F) {
+      self.angles = (self.angles[0], self.ref_1376F, self.angles[2]);
     }
 
     if(isDefined(self.script_parameters)) {
-      self.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_" + self.script_parameters);
+      self.ref_145AA setscriptablepartstate("sfx", "sfx_don4_gondola_" + self.script_parameters);
       self setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_" + self.script_parameters);
     }
 
@@ -223,7 +223,7 @@ function select_patrol_three_spawners() {
     self moveTo(self.movelatejoinerstospectators, self.script_speed, 0.5, 0.5);
     wait self.script_speed;
     waitframe();
-    self.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_TURN");
+    self.ref_145AA setscriptablepartstate("sfx", "sfx_don4_gondola_TURN");
     self setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_TURN");
     self linkTo(self.ref_12384);
     self.ref_12384 rotateYaw(180, 4);
@@ -234,7 +234,7 @@ function select_patrol_three_spawners() {
     select_patrol_two_spawners();
 
     if(isDefined(self.script_parameters)) {
-      self.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_" + self.script_parameters);
+      self.ref_145AA setscriptablepartstate("sfx", "sfx_don4_gondola_" + self.script_parameters);
       self setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_" + self.script_parameters);
     }
 
@@ -242,7 +242,7 @@ function select_patrol_three_spawners() {
     self moveTo(self.moveleadmarkers, self.script_speed, 0.5, 0.5);
     wait self.script_speed;
     waitframe();
-    self.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_TURN");
+    self.ref_145AA setscriptablepartstate("sfx", "sfx_don4_gondola_TURN");
     self setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_TURN");
     self linkTo(self.ref_12385);
     self.ref_12385 rotateYaw(180, 4);
@@ -277,20 +277,20 @@ function select_players_in_killzone_first() {
     return;
   }
 
-  if(!isDefined(var_0.ref_145aa)) {
+  if(!isDefined(var_0.ref_145AA)) {
     return;
   }
 
-  var_0.ref_145aa.angles = (0, var_0.ref_145aa.angles[1], var_0.ref_145aa.angles[2]);
-  var_0.ref_145aa unlink();
+  var_0.ref_145AA.angles = (0, var_0.ref_145AA.angles[1], var_0.ref_145AA.angles[2]);
+  var_0.ref_145AA unlink();
 
   if(isDefined(var_0.script_parameters) && var_0.script_parameters == "up") {
-    var_0.ref_145aa addpitch(var_0.juggheli_spawner_jammer5_1);
+    var_0.ref_145AA addpitch(var_0.juggheli_spawner_jammer5_1);
   } else if(isDefined(var_0.script_parameters) && var_0.script_parameters == "down") {
-    var_0.ref_145aa addpitch(-1 * var_0.juggheli_spawner_jammer5_1);
+    var_0.ref_145AA addpitch(-1 * var_0.juggheli_spawner_jammer5_1);
   }
 
-  var_0.ref_145aa linkTo(var_0);
+  var_0.ref_145AA linkTo(var_0);
 }
 
 function select_players_not_in_killzone_only(var_0, var_1) {
@@ -298,7 +298,7 @@ function select_players_not_in_killzone_only(var_0, var_1) {
   var_2.manageprematchfade = 1;
   var_2.stage1accradius = level.can_combat_action_be_interrupted;
 
-  if(isDefined(level.ref_11c87) && [[level.ref_11c87]](var_0, var_2)) {
+  if(isDefined(level.ref_11C87) && [[level.ref_11C87]](var_0, var_2)) {
     return;
   }
 
@@ -334,7 +334,7 @@ function triggereliminatedoverlay(var_0) {
   return false;
 }
 
-function ref_140fe() {
+function ref_140FE() {
   level endon("game_ended");
   self endon("death");
 
@@ -354,39 +354,39 @@ function nuke_vault_suicidebomber_internal() {
 function ref_13437(var_0) {
   var_1 = self;
 
-  if(!isDefined(var_1) || !isDefined(var_0) || !isDefined(var_1.ref_145aa)) {
+  if(!isDefined(var_1) || !isDefined(var_0) || !isDefined(var_1.ref_145AA)) {
     return;
   }
 
   if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "snd_turn") {
-    var_1.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_TURN");
+    var_1.ref_145AA setscriptablepartstate("sfx", "sfx_don4_gondola_TURN");
     var_1 setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_TURN");
     return;
   }
 
   if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "snd_up") {
-    var_1.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_up");
+    var_1.ref_145AA setscriptablepartstate("sfx", "sfx_don4_gondola_up");
     var_1 setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_up");
     return;
   }
 
   if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "snd_down") {
-    var_1.ref_145aa setscriptablepartstate("sfx", "sfx_don4_gondola_down");
+    var_1.ref_145AA setscriptablepartstate("sfx", "sfx_don4_gondola_down");
     var_1 setscriptablepartstate("sfx", "sfx_don4_gondola_arrived_down");
     return;
   }
 }
 
-function ref_145ab(var_0, var_1) {
+function ref_145AB(var_0, var_1) {
   var_2 = self;
 
-  if(!isDefined(var_2) || !isDefined(var_0) || !isDefined(var_1) || !isDefined(var_2.ref_145aa)) {
+  if(!isDefined(var_2) || !isDefined(var_0) || !isDefined(var_1) || !isDefined(var_2.ref_145AA)) {
     return;
   }
 
-  var_2.ref_145aa unlink();
-  var_2.ref_145aa.angles = (0, var_2.ref_145aa.angles[1], var_2.ref_145aa.angles[2]);
+  var_2.ref_145AA unlink();
+  var_2.ref_145AA.angles = (0, var_2.ref_145AA.angles[1], var_2.ref_145AA.angles[2]);
   var_3 = vectortopitch(var_1.origin - var_0.origin);
-  var_2.ref_145aa addpitch(var_3);
-  var_2.ref_145aa linkTo(var_2);
+  var_2.ref_145AA addpitch(var_3);
+  var_2.ref_145AA linkTo(var_2);
 }

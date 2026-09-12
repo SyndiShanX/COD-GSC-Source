@@ -3,7 +3,7 @@
  * Script: scripts\mp\trials\mp_oilrig_create_script.gsc
 *********************************************************/
 
-function ref_1348c(var_0, var_1, var_2) {
+function ref_1348C(var_0, var_1, var_2) {
   var_3 = scripts\asm\soldier\pain::getpainweaponsize();
   var_4 = scripts\asm\soldier\death::getpainbodypartdeath();
   var_3 = "_md";
@@ -27,10 +27,10 @@ function ref_1348c(var_0, var_1, var_2) {
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_10);
 }
 
-function ref_1348e(var_0, var_1, var_2) {
+function ref_1348E(var_0, var_1, var_2) {
   var_3 = length(self.velocity);
   var_4 = scripts\asm\shared\utility::getbasearchetype();
-  var_5 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349e();
+  var_5 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349E();
   var_6 = [];
   return scripts\asm\asm::asm_lookupanimfromalias(var_1, var_5);
 }

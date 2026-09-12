@@ -189,10 +189,10 @@ function onstartgametype() {
   scripts\engine\utility::flag_wait("strike_init_done");
   scripts\engine\utility::flag_wait("introscreen_over");
   scripts\engine\utility::flag_wait("player_spawned_with_loadout");
-  thread ref_137d5();
+  thread ref_137D5();
 }
 
-function ref_137d5() {
+function ref_137D5() {
   thread clear_remaining_objective();
   begin_wave_spawning();
 
@@ -402,9 +402,9 @@ function flood_spawn_till_flag() {
       continue;
     }
 
-    if(!istrue(var_0.ref_12c68)) {
+    if(!istrue(var_0.ref_12C68)) {
       var_0 setclientomnvar("reset_wave_loadout", 2);
-      var_0.ref_12c68 = 1;
+      var_0.ref_12C68 = 1;
     }
 
     if(self.targetname == "weapon_crate") {
@@ -427,7 +427,7 @@ function flood_spawn_till_flag() {
       wait 0.1;
 
       if(var_1 == 0 || var_1 == 1) {
-        var_0.ref_120b7 = var_1;
+        var_0.ref_120B7 = var_1;
 
         if(istrue(level.ref_14522)) {
           var_0 setclientomnvar("cp_open_cac", var_1);
@@ -489,9 +489,9 @@ function bronloadoutcratedestroyed() {
       continue;
     }
 
-    if(!istrue(var_0.ref_12c68)) {
+    if(!istrue(var_0.ref_12C68)) {
       var_0 setclientomnvar("reset_wave_loadout", 2);
-      var_0.ref_12c68 = 1;
+      var_0.ref_12C68 = 1;
     }
 
     if(self.targetname == "weapon_crate") {
@@ -519,7 +519,7 @@ function bronloadoutcratedestroyed() {
       }
 
       if(var_6 && (var_1 == 0 || var_1 == 1)) {
-        var_0.ref_120b7 = var_1;
+        var_0.ref_120B7 = var_1;
 
         if(istrue(level.ref_14522)) {
           var_0 setclientomnvar("cp_open_cac", var_1);
@@ -649,10 +649,10 @@ function begin_wave_spawning() {
   }
 
   if(true) {
-    thread ref_139ba();
+    thread ref_139BA();
   }
 
-  level.ref_139bb = scripts\cp\cp_modular_spawning::run_spawn_module("wave_spawning");
+  level.ref_139BB = scripts\cp\cp_modular_spawning::run_spawn_module("wave_spawning");
 }
 
 function getclosestplayerforreward() {
@@ -689,7 +689,7 @@ function getclosestplayerforreward() {
   }
 }
 
-function ref_139ba() {
+function ref_139BA() {
   foreach(var_1 in level.players) {
     var_2 = max(0.05, var_3 * 0.25);
     thread ref_14516(var_1);
@@ -727,7 +727,7 @@ function ref_14516(var_0) {
       continue;
     }
 
-    var_1 = ref_143d8();
+    var_1 = ref_143D8();
 
     if(!istrue(var_1)) {
       wait 0.05;
@@ -773,7 +773,7 @@ function ref_14516(var_0) {
   }
 }
 
-function ref_143d8(var_0, var_1) {
+function ref_143D8(var_0, var_1) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
@@ -818,7 +818,7 @@ function ref_143d8(var_0, var_1) {
       return 1;
     }
 
-    if(isDefined(level.ref_1451e) && isDefined(level.ref_1451e) > 0 && level.ref_1451e <= 3) {
+    if(isDefined(level.ref_1451E) && isDefined(level.ref_1451E) > 0 && level.ref_1451E <= 3) {
       return 1;
     }
   }
@@ -849,7 +849,7 @@ function bleedout_heartbeat_sfx_logic(var_0) {
     scripts\cp\cp_modular_spawning::set_goal_pos(var_5);
     var_6 = max(64, self.goalradius * var_3);
     scripts\cp\cp_modular_spawning::set_goal_radius(var_6);
-    var_7 = scripts\engine\utility::ref_143b9(var_1, "goal");
+    var_7 = scripts\engine\utility::ref_143B9(var_1, "goal");
 
     if(isDefined(var_7) && var_7 == "goal") {
       wait var_2;
@@ -1006,7 +1006,7 @@ function onplayerconnect() {
       var_0.gameskill = scripts\cp\cp_gameskill::get_gameskill();
       var_0 scripts\cp\cp_gameskill::set_difficulty_from_locked_settings();
       thread strike_player_connect_black_screen();
-      var_0 thread scripts\cp\utility::ref_13c3e(1);
+      var_0 thread scripts\cp\utility::ref_13C3E(1);
       var_0.timeplayed = [];
 
       foreach(var_5 in level.teamnamelist) {
@@ -1731,8 +1731,8 @@ function hostmigrationend() {
     landing_damage_watcher();
   }
 
-  if(isDefined(level.ref_1451e)) {
-    setomnvar("cp_enemies_remaining", level.ref_1451e);
+  if(isDefined(level.ref_1451E)) {
+    setomnvar("cp_enemies_remaining", level.ref_1451E);
     return;
   }
 }
@@ -1773,7 +1773,7 @@ function kick_for_inactivity(var_0) {
   var_5 = 0.1;
 
   for(;;) {
-    var_6 = scripts\engine\utility::ref_143c0(var_5, "inputReceived", "currency_earned");
+    var_6 = scripts\engine\utility::ref_143C0(var_5, "inputReceived", "currency_earned");
 
     if(var_6 != "timeout") {
       var_4 = 120;
@@ -2047,7 +2047,7 @@ function revivetriggerthink(var_0) {
 function endreviveonownerdeathordisconnect() {
   self endon("disconnect");
   self endon("death");
-  self.owner scripts\engine\utility::ref_143a5("disconnect", "last_stand_finished");
+  self.owner scripts\engine\utility::ref_143A5("disconnect", "last_stand_finished");
   self.owner = undefined;
   self delete();
 }
@@ -2097,10 +2097,10 @@ function givedefaultloadout(var_0, var_1, var_2) {
 
   var_3 = self;
 
-  if(!istrue(var_3.ref_12c69)) {
+  if(!istrue(var_3.ref_12C69)) {
     var_3 setclientomnvar("reset_wave_loadout", 1);
-    thread ref_1434c();
-    var_3.ref_12c69 = 1;
+    thread ref_1434C();
+    var_3.ref_12C69 = 1;
   }
 
   var_3.changingweapon = undefined;
@@ -2115,7 +2115,7 @@ function givedefaultloadout(var_0, var_1, var_2) {
   var_3.spawnperk = 0;
 
   if(initmaxspeedforpathlengthtable(var_3)) {
-    thread ref_13b0e();
+    thread ref_13B0E();
   }
 
   if(isDefined(var_3.headmodel)) {
@@ -2236,12 +2236,12 @@ function givedefaultloadout(var_0, var_1, var_2) {
   scripts\engine\utility::flag_set("player_spawned_with_loadout");
 }
 
-function ref_1434c() {
+function ref_1434C() {
   wait 15;
   self setclientomnvar("reset_wave_loadout", 1);
 }
 
-function ref_13b0e() {
+function ref_13B0E() {
   if(getdvarint("scr_testclient_ignorespawn", 0) == 0) {
     return;
   }
@@ -2328,7 +2328,7 @@ function mp_t_reflex_containers_collisions() {
   wait 3;
 
   foreach(var_1 in level.players) {
-    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(1.5, 1, 1);
+    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340D(1.5, 1, 1);
   }
 
   wait 2;

@@ -1510,7 +1510,7 @@ function gunship_removeplane(var_0) {
 
   if(!scripts\common\utility::iscp()) {
     if(isDefined(self.owner)) {
-      self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+      self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
     }
   }
 

@@ -3,10 +3,10 @@
  * Script: 58242.gsc
 ***********************************************/
 
-function ref_1412b(var_0) {
+function ref_1412B(var_0) {
   var_1 = ref_14122();
   var_1.instances[var_0 getentitynumber()] = var_0;
-  ref_1412f(var_0);
+  ref_1412F(var_0);
 }
 
 function ref_14120(var_0) {
@@ -22,7 +22,7 @@ function ref_14126(var_0) {
 function ref_14132(var_0, var_1, var_2) {
   var_3 = ref_14122();
 
-  if(!var_3.ref_142ce) {
+  if(!var_3.ref_142CE) {
     return;
   }
 
@@ -32,7 +32,7 @@ function ref_14132(var_0, var_1, var_2) {
     return;
   }
 
-  if(!ref_1412e(var_0, var_1)) {
+  if(!ref_1412E(var_0, var_1)) {
     var_0 vehicleshowonminimapforclient(var_1, 0);
     return;
   }
@@ -43,7 +43,7 @@ function ref_14132(var_0, var_1, var_2) {
 function ref_14131(var_0, var_1) {
   var_2 = ref_14122();
 
-  if(!var_2.ref_142ce) {
+  if(!var_2.ref_142CE) {
     return;
   }
 
@@ -61,7 +61,7 @@ function ref_14131(var_0, var_1) {
 function ref_14130(var_0) {
   var_1 = ref_14122();
 
-  if(!var_1.ref_142ce) {
+  if(!var_1.ref_142CE) {
     return;
   }
 
@@ -70,7 +70,7 @@ function ref_14130(var_0) {
   }
 }
 
-function ref_1412e(var_0, var_1) {
+function ref_1412E(var_0, var_1) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle_compass", "shouldBeVisibleToPlayer")) {
     var_2 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_compass", "shouldBeVisibleToPlayer")]](var_0, var_1);
 
@@ -79,25 +79,25 @@ function ref_1412e(var_0, var_1) {
     }
   }
 
-  if(!scripts\cp_mp\vehicles\vehicle::ref_141b9(var_0, var_1)) {
+  if(!scripts\cp_mp\vehicles\vehicle::ref_141B9(var_0, var_1)) {
     return 0;
   }
 
   return 1;
 }
 
-function ref_1412f(var_0) {
+function ref_1412F(var_0) {
   var_1 = ref_14122();
 
-  if(var_1.ref_142ce) {
+  if(var_1.ref_142CE) {
     var_0 vehicleshowonminimap(1);
   }
 
   if(isDefined(var_1.instances[var_0 getentitynumber()])) {
     if(level.teambased) {
-      ref_1412d(var_0, scripts\cp_mp\vehicles\vehicle_occupancy::ref_141d7(var_0));
+      ref_1412D(var_0, scripts\cp_mp\vehicles\vehicle_occupancy::ref_141D7(var_0));
     } else {
-      ref_1412c(var_0, scripts\cp_mp\vehicles\vehicle_occupancy::ref_141d5(var_0));
+      ref_1412C(var_0, scripts\cp_mp\vehicles\vehicle_occupancy::ref_141D5(var_0));
     }
 
     ref_14131(var_0, 1);
@@ -109,13 +109,13 @@ function ref_14123(var_0) {
   var_1 = ref_14122();
   var_1.instances[var_0 getentitynumber()] = undefined;
 
-  if(var_1.ref_142ce) {
+  if(var_1.ref_142CE) {
     var_0 vehicleshowonminimap(0);
     return;
   }
 }
 
-function ref_1412d(var_0, var_1) {
+function ref_1412D(var_0, var_1) {
   if(!isDefined(var_1) || var_1 == "neutral") {
     var_1 = "none";
   }
@@ -123,7 +123,7 @@ function ref_1412d(var_0, var_1) {
   var_0 setvehicleteam(var_1);
 }
 
-function ref_1412c(var_0, var_1) {
+function ref_1412C(var_0, var_1) {
   var_0 setentityowner(undefined);
 }
 
@@ -137,7 +137,7 @@ function ref_14125() {
     var_1 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "runLeanThreadMode")]]();
   }
 
-  var_0.ref_142ce = !var_1 || getdvarint("scr_vehicleCompassVisibilityIsScriptControlled", 0) > 0;
+  var_0.ref_142CE = !var_1 || getdvarint("scr_vehicleCompassVisibilityIsScriptControlled", 0) > 0;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle_compass", "init")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_compass", "init")]]();
@@ -158,9 +158,9 @@ function ref_14121(var_0, var_1, var_2) {
   }
 
   if(level.teambased) {
-    ref_1412d(var_0, var_2);
+    ref_1412D(var_0, var_2);
   } else {
-    ref_1412c(var_0, var_2);
+    ref_1412C(var_0, var_2);
   }
 
   ref_14131(var_0);
@@ -174,6 +174,6 @@ function ref_14129(var_0) {
   ref_14130(var_0);
 }
 
-function ref_1412a() {
+function ref_1412A() {
   ref_14130(self);
 }

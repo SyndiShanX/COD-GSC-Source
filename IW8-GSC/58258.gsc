@@ -35,7 +35,7 @@ function wait_between_combat_action(var_0) {
     return;
   }
 
-  ref_1366a(var_1, var_2);
+  ref_1366A(var_1, var_2);
 
   if(isDefined(var_1.super)) {
     var_1 scripts\mp\supers::superusefinished(undefined, undefined, undefined, 1);
@@ -43,7 +43,7 @@ function wait_between_combat_action(var_0) {
   }
 }
 
-function ref_1366a(var_0) {
+function ref_1366A(var_0) {
   cleanupallbutxkiosksforteam(self.team);
   manageglobalkioskcount();
   var_1 = 4096;
@@ -56,15 +56,15 @@ function ref_1366a(var_0) {
   var_2 setModel("lm_buy_station_crate_wood_01_ww2");
   var_2 physicslaunchserver();
   var_2 setscriptablepartstate("br_plunder_box", "visible", 0);
-  scripts\mp\gametypes\br_pickups::ref_12b3a(var_2);
+  scripts\mp\gametypes\br_pickups::ref_12B3A(var_2);
   var_2.visible = 1;
   var_2.isportablekiosk = 1;
   var_2.managerespawnfade = 1;
   var_2.team = self.team;
   level.delete_pipe_ents.scriptables[level.delete_pipe_ents.scriptables.size] = var_2;
-  thread ref_11cfe();
-  thread ref_11d0b();
-  thread ref_11d17();
+  thread ref_11CFE();
+  thread ref_11D0B();
+  thread ref_11D17();
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "teamPlayerCardSplash")) {
     level thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "teamPlayerCardSplash")]]("used_airdrop", self);
@@ -132,8 +132,8 @@ function destroyportablekiosk(var_0) {
   var_0 delete();
 }
 
-function ref_11d17() {
-  ref_11d18();
+function ref_11D17() {
+  ref_11D18();
   self endon("death");
   self endon("monitorPlayerImpactEnd");
   var_0 = self;
@@ -171,11 +171,11 @@ function ref_11d17() {
   }
 }
 
-function ref_11d18() {
+function ref_11D18() {
   self notify("monitorPlayerImpactEnd");
 }
 
-function ref_1273b(var_0, var_1, var_2, var_3) {
+function ref_1273B(var_0, var_1, var_2, var_3) {
   playFX(scripts\engine\utility::getfx("airdrop_crate_impact"), var_0, var_1);
 
   if(var_2 < 150) {
@@ -189,12 +189,12 @@ function ref_1273b(var_0, var_1, var_2, var_3) {
   self stoploopsound("mp_care_package_drop_lp");
 }
 
-function ref_11cfe() {
+function ref_11CFE() {
   self endon("death");
   self notify("monitorAverageVelocityAndUpdate");
   self endon("monitorAverageVelocityAndUpdate");
   var_0 = 0.1;
-  thread scripts\cp_mp\killstreaks\airdrop::ref_11cfd(var_0, 8);
+  thread scripts\cp_mp\killstreaks\airdrop::ref_11CFD(var_0, 8);
   var_1 = 0;
   var_2 = 0;
   var_3 = undefined;
@@ -216,7 +216,7 @@ function ref_11cfe() {
           var_3 = self.origin;
 
           if(isDefined(var_4) && [[var_4]]()) {
-            ref_11d0c();
+            ref_11D0C();
 
             if(isDefined(self.killcament)) {
               self.killcament delete();
@@ -224,7 +224,7 @@ function ref_11cfe() {
           }
 
           var_0 = 0.1;
-          thread scripts\cp_mp\killstreaks\airdrop::ref_11cfd(var_0, 3, 3);
+          thread scripts\cp_mp\killstreaks\airdrop::ref_11CFD(var_0, 3, 3);
         }
       } else {
         if(isDefined(var_3)) {
@@ -240,7 +240,7 @@ function ref_11cfe() {
         if(var_2 == 1) {
           self.ref_12332 = undefined;
           var_0 = 0.1;
-          thread scripts\cp_mp\killstreaks\airdrop::ref_11cfd(var_0, 8);
+          thread scripts\cp_mp\killstreaks\airdrop::ref_11CFD(var_0, 8);
         }
       }
 
@@ -252,21 +252,21 @@ function ref_11cfe() {
   }
 }
 
-function ref_11d0b(var_0) {
-  ref_11d0c();
+function ref_11D0B(var_0) {
+  ref_11D0C();
   self endon("monitorImpactEnd");
-  self.ref_11d0e = 1;
+  self.ref_11D0E = 1;
   self playLoopSound("mp_care_package_drop_lp");
   self physics_registerforcollisioncallback();
-  ref_11d0d(var_0);
+  ref_11D0D(var_0);
 
   if(isDefined(self)) {
-    thread ref_11d0c();
+    thread ref_11D0C();
     return;
   }
 }
 
-function ref_11d0d(var_0) {
+function ref_11D0D(var_0) {
   self endon("death");
 
   if(isDefined(var_0)) {
@@ -297,18 +297,18 @@ function ref_11d0d(var_0) {
         var_11 = "user_terrain_5";
       }
 
-      ref_1273b(var_6, var_7, var_8, var_11);
+      ref_1273B(var_6, var_7, var_8, var_11);
     }
   }
 }
 
-function ref_11d0c() {
-  if(!istrue(self.ref_11d0e)) {
+function ref_11D0C() {
+  if(!istrue(self.ref_11D0E)) {
     return;
   }
 
   self notify("monitorImpactEnd");
-  self.ref_11d0e = undefined;
+  self.ref_11D0E = undefined;
   self stoploopsound("mp_care_package_drop_lp");
   self physics_unregisterforcollisioncallback();
 }

@@ -114,7 +114,7 @@ function elevator_fsm(var_0) {
       var_8 = get_curfloor();
       thread close_inner_doors();
       thread close_outer_doors(var_8);
-      scripts\engine\utility::ref_143a5("closed_inner_doors", "interrupted");
+      scripts\engine\utility::ref_143A5("closed_inner_doors", "interrupted");
 
       if(self.elevator_interrupted) {
         self.estate = "[C]";

@@ -7,9 +7,9 @@ function init() {
   level.battle_tracks_stopbattletracksforplayer = &ref_13140;
   level.battle_tracks_standingonvehicletimeout = &battle_tracks_standingonvehicletimeout;
   level.headiconbox = &minigun_wait_between_shot_rounds;
-  scripts\cp_mp\utility\script_utility::registersharedfunc("br_juggernaut", "onCrateActivate", &ref_1200d);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("br_juggernaut", "onCrateUse", &ref_1200f);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("br_juggernaut", "onCrateDestroy", &ref_1200e);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("br_juggernaut", "onCrateActivate", &ref_1200D);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("br_juggernaut", "onCrateUse", &ref_1200F);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("br_juggernaut", "onCrateDestroy", &ref_1200E);
   level thread scripts\mp\gametypes\br_c130airdrop::init();
   level.activejuggernauts = [];
   level.display_hint_for_player = [];
@@ -19,7 +19,7 @@ function init() {
 function toggleusbstickinhand() {
   waittillframeend();
   terminal_pusher_approaches_init();
-  level.ref_11f2c = 0;
+  level.ref_11F2C = 0;
 }
 
 function ref_13140() {
@@ -31,9 +31,9 @@ function ref_13140() {
   self.infiniteammo = 0;
   self.maxhealth = getdvarint("scr_br_jugg_health", 2000);
   self.startinghealth = getdvarint("scr_br_jugg_health", 2000);
-  self.ref_14232 = int(self.maxhealth / self.ref_11b7d);
+  self.ref_14232 = int(self.maxhealth / self.ref_11B7D);
   var_0 = getdvarint("scr_br_jugg_weapon_pickup", 0);
-  self.ref_140a7 = var_0;
+  self.ref_140A7 = var_0;
   var_1 = getdvarint("scr_br_jugg_reload", 1);
 
   if(var_1) {
@@ -44,7 +44,7 @@ function ref_13140() {
   self.allows["reload"] = undefined;
 }
 
-function ref_11c95(var_0) {
+function ref_11C95(var_0) {
   var_1 = getdvarfloat("scr_br_jugg_vs_gas_scale", 7);
   var_2 = var_0 * var_1;
   return int(var_2);
@@ -75,11 +75,11 @@ function battle_tracks_standingonvehicletimeout() {
   var_1 = getdvarint("scr_br_jugg_overheat", 0);
 
   if(var_1) {
-    thread ref_144ea(var_0);
-    thread ref_144de(var_0);
+    thread ref_144EA(var_0);
+    thread ref_144DE(var_0);
   }
 
-  thread ref_11ab6(var_0);
+  thread ref_11AB6(var_0);
 }
 
 function minigun_wait_between_shot_rounds() {
@@ -118,7 +118,7 @@ function relic_punchbullets_track_previous_bullet_weapon(var_0) {
 
   if(isDefined(level.vehicle_isneutraltoplayer) && level.vehicle_isneutraltoplayer.size > 0) {
     foreach(var_3 in level.vehicle_isneutraltoplayer) {
-      if(!isDefined(level.ref_12d05)) {
+      if(!isDefined(level.ref_12D05)) {
         if(!updatesmokinggunhud(var_3, var_0)) {
           continue;
         }
@@ -256,7 +256,7 @@ function init_season3_intel_challenges(var_0) {
   return var_1;
 }
 
-function ref_1334b(var_0, var_1) {
+function ref_1334B(var_0, var_1) {
   level endon("game_ended");
   var_2 = getdvarint("scr_br_jugg_circle_size", 5000);
   var_3 = 50000;
@@ -277,7 +277,7 @@ function ref_1334b(var_0, var_1) {
     var_6.clear_legacy_pickup_munitions setModel("ks_airdrop_crate_br");
     var_6.clear_legacy_pickup_munitions setscriptablepartstate("jugg_drop_beacon", "on", 0);
     var_6 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(11, 6, 2, var_6.origin);
-    var_6 scripts\mp\gametypes\br_quest_util::ref_1316f(var_2);
+    var_6 scripts\mp\gametypes\br_quest_util::ref_1316F(var_2);
     var_6 scripts\mp\gametypes\br_quest_util::ref_13369();
     var_4 = var_6;
   }
@@ -285,9 +285,9 @@ function ref_1334b(var_0, var_1) {
   return var_4;
 }
 
-function ref_1383f(var_0, var_1) {
+function ref_1383F(var_0, var_1) {
   level endon("game_ended");
-  var_2 = scripts\engine\utility::ter_op(istrue(level.ref_1408b), "br_pe_juggernaut_start", "br_juggdrop_incoming");
+  var_2 = scripts\engine\utility::ter_op(istrue(level.ref_1408B), "br_pe_juggernaut_start", "br_juggdrop_incoming");
   scripts\mp\gametypes\br_gametype_dmz::ref_13371(var_2);
 
   foreach(var_4 in var_0) {
@@ -311,7 +311,7 @@ function mlgiconfullflag(var_0, var_1) {
   var_7 = var_5 / var_6;
   var_8 = scripts\mp\gametypes\br_c130airdrop::fntrapdeactivation(var_4, var_5, var_6, var_7);
   var_8.mode_can_play_ending = &mode_can_play_ending;
-  var_8.ref_134e2 = var_1;
+  var_8.ref_134E2 = var_1;
   var_8 scripts\mp\gametypes\br_c130airdrop::fob(1, "battle_royale_juggernaut", "jugg_world", var_0);
 }
 
@@ -322,7 +322,7 @@ function mode_can_play_ending(var_0, var_1, var_2, var_3) {
   var_7 = distance2d(var_4, var_5) / var_6;
   var_8 = 0;
   var_9 = 0;
-  level.ref_11f2c += var_0;
+  level.ref_11F2C += var_0;
 
   while(var_8 < var_0) {
     wait var_7;
@@ -332,17 +332,17 @@ function mode_can_play_ending(var_0, var_1, var_2, var_3) {
       var_10 = getclosestpointonnavmesh(var_10);
     }
 
-    var_11 = scripts\cp_mp\killstreaks\airdrop::minshotstostage3acc(var_10 + (0, 0, level.fnhidefoundintel - 100), var_10, self.angles, var_1, var_2, var_3.ref_11eab);
+    var_11 = scripts\cp_mp\killstreaks\airdrop::minshotstostage3acc(var_10 + (0, 0, level.fnhidefoundintel - 100), var_10, self.angles, var_1, var_2, var_3.ref_11EAB);
     var_8++;
     var_11.ml_p2_func = var_3;
-    var_11.ref_134e2 = self.ref_134e2;
+    var_11.ref_134E2 = self.ref_134E2;
     level.focus_fire_attacker_timeout[level.focus_fire_attacker_timeout.size] = var_11;
     var_12 = scripts\cp_mp\killstreaks\airdrop::gettriggerobject(var_11);
-    var_12.ref_140a0 = relic_laststand_modifyplayerdamage();
+    var_12.ref_140A0 = relic_laststand_modifyplayerdamage();
   }
 }
 
-function ref_144ea(var_0) {
+function ref_144EA(var_0) {
   self endon("death_or_disconnect");
   self endon("juggernaut_end");
   level endon("game_ended");
@@ -365,7 +365,7 @@ function ref_144ea(var_0) {
   }
 }
 
-function ref_144de(var_0) {
+function ref_144DE(var_0) {
   self endon("death_or_disconnect");
   self endon("juggernaut_end");
   level endon("game_ended");
@@ -388,14 +388,14 @@ function ref_144de(var_0) {
   }
 }
 
-function ref_11ab6(var_0) {
+function ref_11AB6(var_0) {
   self endon("death_or_disconnect");
   self endon("juggernaut_end");
   level endon("game_ended");
   var_1 = 5;
 
   for(;;) {
-    var_2 = scripts\engine\utility::ref_143ad("deaths_door_enter", "jugg_health_regen");
+    var_2 = scripts\engine\utility::ref_143AD("deaths_door_enter", "jugg_health_regen");
     var_3 = 1;
 
     if(var_2 == "deaths_door_enter") {
@@ -417,8 +417,8 @@ function ref_11ab6(var_0) {
 }
 
 function droponplayerdeath(var_0) {
-  scripts\mp\gametypes\br_gametypes::ref_12e05("onJuggDropOnDeath", var_0);
-  level.ref_11f2c--;
+  scripts\mp\gametypes\br_gametypes::ref_12E05("onJuggDropOnDeath", var_0);
+  level.ref_11F2C--;
 }
 
 function modeaddtoteamlives() {
@@ -434,13 +434,13 @@ function modeaddtoteamlives() {
 
   if(isDefined(var_3)) {
     var_4 = scripts\cp_mp\killstreaks\airdrop::gettriggerobject(var_3);
-    var_4.ref_140a0 = relic_laststand_modifyplayerdamage();
+    var_4.ref_140A0 = relic_laststand_modifyplayerdamage();
     return;
   }
 }
 
-function ref_1200d(var_0) {
-  scripts\mp\gametypes\br_gametypes::ref_12e05("onJuggCrateActivate", var_0);
+function ref_1200D(var_0) {
+  scripts\mp\gametypes\br_gametypes::ref_12E05("onJuggCrateActivate", var_0);
 
   if(istrue(var_0)) {
     thread ref_14498();
@@ -490,14 +490,14 @@ function ref_14497() {
   scripts\cp_mp\killstreaks\airdrop::destroycrate();
 }
 
-function ref_1200f(var_0) {
-  var_0.vehicle_handleflarefire = self.ref_134e2;
-  scripts\mp\gametypes\br_gametypes::ref_12e05("onJuggCrateUse", var_0);
-  ref_11ecb(var_0);
+function ref_1200F(var_0) {
+  var_0.vehicle_handleflarefire = self.ref_134E2;
+  scripts\mp\gametypes\br_gametypes::ref_12E05("onJuggCrateUse", var_0);
+  ref_11ECB(var_0);
   infilvideoplay();
 }
 
-function ref_11ecb(var_0) {
+function ref_11ECB(var_0) {
   var_1 = self.origin;
   var_2 = getdvarint("scr_br_jugg_circle_size", 5000);
   var_3 = scripts\common\utility::playersincylinder(var_1, var_2);
@@ -515,9 +515,9 @@ function ref_11ecb(var_0) {
   }
 }
 
-function ref_1200e(var_0) {
-  scripts\mp\gametypes\br_gametypes::ref_12e05("onJuggCrateDestroy", var_0);
-  level.ref_11f2c--;
+function ref_1200E(var_0) {
+  scripts\mp\gametypes\br_gametypes::ref_12E05("onJuggCrateDestroy", var_0);
+  level.ref_11F2C--;
   infilvideoplay();
 }
 

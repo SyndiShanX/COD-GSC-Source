@@ -29,17 +29,17 @@ function strafe_minigun_manager(var_0) {
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("waitLoadoutDone");
   scripts\mp\gametypes\br_gametypes::move_molotov_mortar("allowLateJoiners");
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("plunderSites");
-  scripts\mp\gametypes\br_gametypes::ref_12b11("getInfilPlayers", &remove_on_death);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerConnect", &onplayerconnect);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("prematchSpawnMaxLocations", &ref_12862);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("prematchSpawnNumTeamsPerLocation", &ref_12863);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("maySpawn", &mayspawn);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerWelcomeSplashes", &ref_126f1);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("initialPrespawnZOffset", &tier);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("disableLastManStandingDialog", &loadout_copyclassstruct);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("getInfilPlayers", &remove_on_death);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerConnect", &onplayerconnect);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("prematchSpawnMaxLocations", &ref_12862);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("prematchSpawnNumTeamsPerLocation", &ref_12863);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("maySpawn", &mayspawn);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerWelcomeSplashes", &ref_126F1);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("initialPrespawnZOffset", &tier);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("disableLastManStandingDialog", &loadout_copyclassstruct);
   level.prematchperiodend = 0;
   level.br_infils_disabled = 1;
-  level.ref_133e0 = 1;
+  level.ref_133E0 = 1;
   level.debug_safehouse_gunshop_start = 1;
   level.disablespawning = 1;
 
@@ -101,10 +101,10 @@ function mayspawn() {
   return true;
 }
 
-function ref_126f1() {
+function ref_126F1() {
   self endon("disconnect");
   self waittill("spawned_player");
-  thread ref_126f2();
+  thread ref_126F2();
 
   while(!self isonground()) {
     waitframe();
@@ -113,7 +113,7 @@ function ref_126f1() {
   scripts\mp\gametypes\br_analytics::detachriotshield(self);
 }
 
-function ref_126f2() {
+function ref_126F2() {
   self endon("disconnect");
   wait getdvarfloat("scr_brdov_welcome_splash_delay", 5);
   scripts\mp\hud_message::showsplash("br_prematch_welcome_brdov");
@@ -149,9 +149,9 @@ function togglecpplayerbc() {
 
 function strafe_pass_target_dist() {
   strafe_minigun_manager(1);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("preCalcSafeCircleCenters", &ref_12848);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("preCalcSafeCircleCenters", &ref_12848);
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("randomizePrematchSpawnOriginNextIdx");
-  level.disable_heli_lights.ref_133c7 = getdvarint("scr_brdov2_skip_circles", 1);
+  level.disable_heli_lights.ref_133C7 = getdvarint("scr_brdov2_skip_circles", 1);
   level.decoyassists = &decoy_ignoredbyenemy;
   thread togglelightbutton();
 }
@@ -231,7 +231,7 @@ function ammo_box_spawn(var_0) {
 }
 
 function ref_12848() {
-  for(var_0 = 0; var_0 < level.disable_heli_lights.ref_133c7; var_0++) {
+  for(var_0 = 0; var_0 < level.disable_heli_lights.ref_133C7; var_0++) {
     scripts\mp\gametypes\br_circle::last_vo_time(0);
     level.br_level.default_class_chosen = scripts\engine\utility::can_path_to_target(level.br_level.default_class_chosen, 0);
   }
@@ -240,7 +240,7 @@ function ref_12848() {
     level.br_level.delay_start_infiltrate_objective = 0;
   }
 
-  level.br_level.delay_start_infiltrate_objective -= level.disable_heli_lights.ref_133c7;
+  level.br_level.delay_start_infiltrate_objective -= level.disable_heli_lights.ref_133C7;
 }
 
 function decoy_ignoredbyenemy() {
@@ -254,7 +254,7 @@ function decoy_ignoredbyenemy() {
 
 function strafe_speed() {
   thread scripts\mp\gametypes\br_gametype_mini::init();
-  scripts\mp\gametypes\br_gametypes::ref_12b11("overrideQuestSearchParams", &ref_12188);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("overrideQuestSearchParams", &ref_12188);
 }
 
 function ref_12188(var_0) {

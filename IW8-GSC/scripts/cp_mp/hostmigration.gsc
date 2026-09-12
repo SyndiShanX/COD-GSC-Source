@@ -18,5 +18,5 @@ function hostmigration_waittillnotifyortimeoutpause(var_0, var_1) {
     return;
   }
 
-  scripts\engine\utility::ref_143b9(var_1, var_0);
+  scripts\engine\utility::ref_143B9(var_1, var_0);
 }

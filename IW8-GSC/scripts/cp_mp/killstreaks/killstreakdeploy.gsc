@@ -76,7 +76,7 @@ function streakdeploy_dogesturedeploy(var_0, var_1) {
   ondeployfinished(var_0, var_2);
 
   if(istrue(self.inlaststand)) {
-    thread ref_144e2(var_1);
+    thread ref_144E2(var_1);
   }
 
   return var_2;
@@ -91,7 +91,7 @@ function watchforcancelduringgesture(var_0, var_1) {
   self takeweapon(var_1);
 }
 
-function ref_144e2(var_0) {
+function ref_144E2(var_0) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self waittill("last_stand_finished");
@@ -432,7 +432,7 @@ function watchdeployweaponanimtransition(var_0, var_1, var_2) {
 
   thread watchweapontabletstop(var_0);
   thread watchweapontabletcallinpos();
-  var_4 = scripts\engine\utility::ref_143bb(var_1, "death", "weapon_change", "cancel_all_killstreak_deployments");
+  var_4 = scripts\engine\utility::ref_143BB(var_1, "death", "weapon_change", "cancel_all_killstreak_deployments");
   self notify("ks_freeze_end");
   scripts\cp_mp\utility\player_utility::_freezecontrols(0, undefined, "killstreakDeploy");
 
@@ -456,7 +456,7 @@ function unfreezecontrolsonroundend() {
 
 function startweapontabletfadetransition(var_0) {
   self endon("disconnect");
-  var_1 = scripts\engine\utility::ref_143b9(var_0, "cancel_remote_sequence");
+  var_1 = scripts\engine\utility::ref_143B9(var_0, "cancel_remote_sequence");
 
   if(!isDefined(var_1) || var_1 == "cancel_remote_sequence") {
     return;
@@ -465,7 +465,7 @@ function startweapontabletfadetransition(var_0) {
   if(scripts\cp_mp\utility\player_utility::_isalive()) {
     self playlocalsound("mp_killstreak_transition_whoosh");
     level thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(self, 1, 0.3);
-    var_1 = scripts\engine\utility::ref_143b9(0.7, "death");
+    var_1 = scripts\engine\utility::ref_143B9(0.7, "death");
 
     if(!isDefined(var_1) || var_1 == "death") {
       self stoplocalsound("mp_killstreak_transition_whoosh");

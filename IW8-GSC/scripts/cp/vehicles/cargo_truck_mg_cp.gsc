@@ -10,7 +10,7 @@ function tr_vis_facing_dist_add_override(var_0) {
   }
 }
 
-function ref_1403e(var_0) {
+function ref_1403E(var_0) {
   self endon("death_or_disconnect");
   self endon("faux_spawn");
   self endon("end_launcher");
@@ -33,9 +33,9 @@ function chopperexfil_introsound(var_0, var_1, var_2) {
 }
 
 function setup_tut_zones(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(ref_1331f(var_5, var_0, var_1, var_2)) {
-    ref_12ac6(var_0, var_4, var_7, var_8);
-  } else if(ref_132f1(var_1)) {
+  if(ref_1331F(var_5, var_0, var_1, var_2)) {
+    ref_12AC6(var_0, var_4, var_7, var_8);
+  } else if(ref_132F1(var_1)) {
     var_0 delete();
     return;
   } else if(ref_13309(var_1)) {
@@ -48,7 +48,7 @@ function setup_tut_zones(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   }
 }
 
-function ref_1360f(var_0, var_1, var_2, var_3) {
+function ref_1360F(var_0, var_1, var_2, var_3) {
   var_4 = regroup_points(var_3);
   var_5 = spawn("script_model", var_0);
   var_5 setModel(var_4);
@@ -59,16 +59,16 @@ function ref_1360f(var_0, var_1, var_2, var_3) {
   var_5.weapon = var_3;
   var_5.tut_bots_forcelaststand_onspawn = 1;
 
-  if(ref_1330e(var_2)) {
-    var_5 = ref_11aa3(var_5);
+  if(ref_1330E(var_2)) {
+    var_5 = ref_11AA3(var_5);
   }
 
   thread countdownendcallback();
-  ref_11ab4(var_5);
+  ref_11AB4(var_5);
   return var_5;
 }
 
-function ref_1330e(var_0) {
+function ref_1330E(var_0) {
   if(var_0 == "bolt_default") {
     return true;
   }
@@ -76,7 +76,7 @@ function ref_1330e(var_0) {
   return false;
 }
 
-function ref_11aa3(var_0) {
+function ref_11AA3(var_0) {
   var_1 = var_0.origin + anglesToForward(var_0.angles) * 15;
   var_2 = axistoangles(anglestoup(var_0.angles), anglestoright(var_0.angles), anglesToForward(var_0.angles));
   var_3 = spawn("trigger_rotatable_radius", var_1, 0, 64, 79);
@@ -89,7 +89,7 @@ function ref_11aa3(var_0) {
   return var_0;
 }
 
-function ref_12c15(var_0) {
+function ref_12C15(var_0) {
   var_0 notify("removePickup");
 
   if(isDefined(var_0.ref_12357)) {
@@ -174,10 +174,10 @@ function ref_13143(var_0) {
   self endon("entitydeleted");
   wait var_0;
   self.last_saydefuse_time = 1;
-  ref_11ab4();
+  ref_11AB4();
 }
 
-function ref_11ab4(var_0) {
+function ref_11AB4(var_0) {
   if(isDefined(var_0)) {
     var_1 = [var_0];
   } else {
@@ -224,7 +224,7 @@ function regroup_points(var_0) {
   return "weapon_wm_special_t9ballisticknife_projectile";
 }
 
-function ref_1331f(var_0, var_1, var_2, var_3) {
+function ref_1331F(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_2) && isDefined(var_3)) {
     return 1;
   }
@@ -261,7 +261,7 @@ function ref_1331f(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_12ac6(var_0, var_1, var_2, var_3) {
+function ref_12AC6(var_0, var_1, var_2, var_3) {
   var_4 = scripts\engine\math::vector_reflect(var_2, var_1);
   var_5 = abs(vectordot(var_2, var_1));
   var_6 = scripts\engine\math::factor_value(2300, 1000, var_5);
@@ -269,7 +269,7 @@ function ref_12ac6(var_0, var_1, var_2, var_3) {
   var_0 physicslaunchserver(var_3, var_4);
 }
 
-function ref_132f1(var_0) {
+function ref_132F1(var_0) {
   if(!isDefined(var_0)) {
     return false;
   }
@@ -322,7 +322,7 @@ function linktoent(var_0, var_1, var_2) {
 
   if(get_center_loc_among_target_players(var_1)) {
     var_0.stuckenemyentity = var_1;
-    thread ref_12c28(var_0);
+    thread ref_12C28(var_0);
   }
 
   var_0 notsolid();
@@ -332,17 +332,17 @@ function linktoent(var_0, var_1, var_2) {
   thread cosmeticattachment(var_0, var_1);
 }
 
-function ref_140ca() {
+function ref_140CA() {
   if(isDefined(self) && istrue(self.tut_bots_forcelaststand_onspawn)) {
     return 1;
   }
 }
 
-function ref_12c28(var_0) {
+function ref_12C28(var_0) {
   self endon("entitydeleted");
-  var_0 scripts\engine\utility::ref_143a6("entitydeleted", "death", "disconnect");
+  var_0 scripts\engine\utility::ref_143A6("entitydeleted", "death", "disconnect");
 
-  if(!ref_140ca()) {
+  if(!ref_140CA()) {
     return;
   }
 
@@ -356,9 +356,9 @@ function ref_12c28(var_0) {
 
 function courtyard_intel_sequence(var_0) {
   self endon("entitydeleted");
-  var_0 scripts\engine\utility::ref_143a5("entitydeleted", "disconnect");
+  var_0 scripts\engine\utility::ref_143A5("entitydeleted", "disconnect");
 
-  if(!ref_140ca()) {
+  if(!ref_140CA()) {
     return;
   }
 
@@ -386,7 +386,7 @@ function cosmeticattachment(var_0, var_1) {
   self endon("entitydeleted");
   var_0 waittill(var_1);
 
-  if(!ref_140ca()) {
+  if(!ref_140CA()) {
     return;
   }
 

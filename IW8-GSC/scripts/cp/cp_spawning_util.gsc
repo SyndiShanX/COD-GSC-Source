@@ -65,7 +65,7 @@ function register_module_for_spawn_owner_disables(var_0) {
   }
 }
 
-function ref_12ae3(var_0, var_1, var_2) {
+function ref_12AE3(var_0, var_1, var_2) {
   if(var_1.size != var_2.size) {
     return;
   }
@@ -112,7 +112,7 @@ function combine_module_counters(var_0, var_1) {
   var_0.hide_rocket_fuel_readings_to_player = var_1;
 }
 
-function ref_12bd3(var_0) {
+function ref_12BD3(var_0) {
   var_1 = propwatchdeath(var_0);
   var_0.hide_rocket_fuel_readings_to_player = undefined;
 
@@ -168,7 +168,7 @@ function register_module_init_func(var_0, var_1) {
   level.ambientgroups[var_0].module_init_funcs[level.ambientgroups[var_0].module_init_funcs.size] = var_1;
 }
 
-function ref_12aeb(var_0, var_1) {
+function ref_12AEB(var_0, var_1) {
   if(isarray(level.ambientgroups[var_0])) {
     for(var_2 = 0; var_2 < level.ambientgroups[var_0].size; var_2++) {
       if(!isDefined(level.ambientgroups[var_0][var_2].lightsfloor02)) {
@@ -204,45 +204,45 @@ function run_module_init_funcs_on_module_struct() {
   }
 }
 
-function ref_12aec(var_0, var_1, var_2) {
+function ref_12AEC(var_0, var_1, var_2) {
   if(isarray(level.ambientgroups[var_0])) {
     for(var_3 = 0; var_3 < level.ambientgroups[var_0].size; var_3++) {
-      if(!isDefined(level.ambientgroups[var_0][var_3].ref_11caa)) {
-        level.ambientgroups[var_0][var_3].ref_11caa = [];
+      if(!isDefined(level.ambientgroups[var_0][var_3].ref_11CAA)) {
+        level.ambientgroups[var_0][var_3].ref_11CAA = [];
       }
 
-      level.ambientgroups[var_0][var_3].ref_11caa[level.ambientgroups[var_0][var_3].ref_11caa.size] = var_1;
+      level.ambientgroups[var_0][var_3].ref_11CAA[level.ambientgroups[var_0][var_3].ref_11CAA.size] = var_1;
 
-      if(!isDefined(level.ambientgroups[var_0][var_3].ref_11caf)) {
-        level.ambientgroups[var_0][var_3].ref_11caf = [];
+      if(!isDefined(level.ambientgroups[var_0][var_3].ref_11CAF)) {
+        level.ambientgroups[var_0][var_3].ref_11CAF = [];
       }
 
-      level.ambientgroups[var_0][var_3].ref_11caf[level.ambientgroups[var_0][var_3].ref_11caf.size] = var_2;
+      level.ambientgroups[var_0][var_3].ref_11CAF[level.ambientgroups[var_0][var_3].ref_11CAF.size] = var_2;
     }
 
     return;
   }
 
-  if(!isDefined(level.ambientgroups[var_0].ref_11caa)) {
-    level.ambientgroups[var_0].ref_11caa = [];
+  if(!isDefined(level.ambientgroups[var_0].ref_11CAA)) {
+    level.ambientgroups[var_0].ref_11CAA = [];
   }
 
-  level.ambientgroups[var_0].ref_11caa[level.ambientgroups[var_0].ref_11caa.size] = var_1;
+  level.ambientgroups[var_0].ref_11CAA[level.ambientgroups[var_0].ref_11CAA.size] = var_1;
 
-  if(!isDefined(level.ambientgroups[var_0].ref_11caf)) {
-    level.ambientgroups[var_0].ref_11caf = [];
+  if(!isDefined(level.ambientgroups[var_0].ref_11CAF)) {
+    level.ambientgroups[var_0].ref_11CAF = [];
   }
 
-  level.ambientgroups[var_0].ref_11caf[level.ambientgroups[var_0].ref_11caf.size] = var_2;
+  level.ambientgroups[var_0].ref_11CAF[level.ambientgroups[var_0].ref_11CAF.size] = var_2;
 }
 
-function ref_12dee() {
+function ref_12DEE() {
   if(isDefined(self.level_module_struct)) {
     var_0 = self.level_module_struct;
 
-    if(isDefined(var_0.ref_11caa)) {
-      for(var_1 = 0; var_1 < var_0.ref_11caa.size; var_1++) {
-        scripts\cp\cp_modular_spawning::process_module_var(self, var_0.ref_11caa[var_1]);
+    if(isDefined(var_0.ref_11CAA)) {
+      for(var_1 = 0; var_1 < var_0.ref_11CAA.size; var_1++) {
+        scripts\cp\cp_modular_spawning::process_module_var(self, var_0.ref_11CAA[var_1]);
       }
 
       return;
@@ -252,13 +252,13 @@ function ref_12dee() {
   }
 }
 
-function ref_12def() {
+function ref_12DEF() {
   if(isDefined(self.level_module_struct)) {
     var_0 = self.level_module_struct;
 
-    if(isDefined(var_0.ref_11caf)) {
-      for(var_1 = 0; var_1 < var_0.ref_11caf.size; var_1++) {
-        scripts\cp\cp_modular_spawning::process_module_var(self, var_0.ref_11caf[var_1]);
+    if(isDefined(var_0.ref_11CAF)) {
+      for(var_1 = 0; var_1 < var_0.ref_11CAF.size; var_1++) {
+        scripts\cp\cp_modular_spawning::process_module_var(self, var_0.ref_11CAF[var_1]);
       }
 
       return;
@@ -309,7 +309,7 @@ function init_airlock(var_0) {
   level.agent_definition[var_0]["height"] = 70;
   level.agent_definition[var_0]["radius"] = 15;
   level.agent_definition[var_0]["reward"] = 100;
-  level.agent_definition[var_0]["setup_func"] = &ref_11e56;
+  level.agent_definition[var_0]["setup_func"] = &ref_11E56;
   level.agent_definition[var_0]["setup_model_func"] = &pauseallgulagfights;
   level.agent_definition[var_0]["species"] = "human";
   level.agent_definition[var_0]["team"] = "axis";
@@ -317,7 +317,7 @@ function init_airlock(var_0) {
   level.agent_definition[var_0]["xp"] = 50;
 }
 
-function ref_11e56() {
+function ref_11E56() {
   self.additionalassets = "";
   self.subclass = "regular";
   self.defaultcoverselector = "cover_default";
@@ -364,15 +364,15 @@ function balloon_deposit(var_0, var_1) {
   return var_2.unique_id;
 }
 
-function ref_12bf2(var_0) {
+function ref_12BF2(var_0) {
   if(isDefined(level.ref_13648[var_0])) {
     level.ref_13648[var_0] = undefined;
     return;
   }
 }
 
-function ref_13bbd(var_0) {
-  level.ref_133bd = var_0;
+function ref_13BBD(var_0) {
+  level.ref_133BD = var_0;
 }
 
 function binoculars_addmarkpoints(var_0) {
@@ -390,6 +390,6 @@ function get_module_spawn_points() {
   return var_1;
 }
 
-function ref_130ad(var_0, var_1) {
-  var_0.ref_12a81 = var_1;
+function ref_130AD(var_0, var_1) {
+  var_0.ref_12A81 = var_1;
 }

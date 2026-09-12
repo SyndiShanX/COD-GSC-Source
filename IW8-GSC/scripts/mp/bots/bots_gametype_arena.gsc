@@ -6,7 +6,7 @@
 function main() {
   level.bot_ignore_precalc_paths = 0;
   setup_callbacks();
-  ref_131dc();
+  ref_131DC();
 }
 
 function setup_callbacks() {
@@ -18,7 +18,7 @@ function setup_callbacks() {
   level.bot_funcs["gametype_think"] = &currentsolsign;
 }
 
-function ref_131dc() {
+function ref_131DC() {
   if(!scripts\mp\gametypes\arena::isnormalloadouts()) {
     level.bots_gametype_handles_class_choice = 1;
   }
@@ -145,7 +145,7 @@ function calloutmarkerping_playteamsoundfx() {
 
 function calloutmarkerping_navigationcancelproximity(var_0) {
   if(scripts\mp\bots\bots_strategy::bot_has_tactical_goal("seek_dropped_weapon", var_0) == 0) {
-    if(istrue(level.ref_1343f)) {
+    if(istrue(level.ref_1343F)) {
       var_1 = self botfirstavailablegrenade("lethal");
       var_2 = self botfirstavailablegrenade("tactical");
 
@@ -204,10 +204,10 @@ function calloutmarkerping_navigationcancelproximity(var_0) {
 
 function calloutmarkerping_ismunitionsbox(var_0) {
   self botpressbutton("use", 0.5);
-  thread ref_13fc6();
+  thread ref_13FC6();
 }
 
-function ref_13fc6() {
+function ref_13FC6() {
   self notify("updateBotWeaponBehavior");
   self endon("updateBotWeaponBehavior");
   wait 2;

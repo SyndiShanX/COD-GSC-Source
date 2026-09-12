@@ -12,8 +12,8 @@ function vehicle_cp_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_interact", "init", &scripts\cp\vehicles\vehicle_interact_cp::vehicle_interact_cp_init);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_occupancy", "init", &scripts\cp\vehicles\vehicle_occupancy_cp::vehicle_occupancy_cp_init);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_spawn", "init", &scripts\cp\vehicles\vehicle_spawn_cp::vehicle_spawn_cp_init);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_compass", "init", &_branalytics_geteventtimestamp::ref_1411e);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_damage", "init", &_branalytics_headerplayer::ref_1413f);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_compass", "init", &_branalytics_geteventtimestamp::ref_1411E);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_damage", "init", &_branalytics_headerplayer::ref_1413F);
   scripts\cp_mp\utility\script_utility::registersharedfunc("technical", "init", &scripts\cp\vehicles\technical_cp::technical_cp_init);
   scripts\cp_mp\utility\script_utility::registersharedfunc("light_tank", "init", &scripts\cp\vehicles\light_tank_cp::light_tank_cp_init);
   scripts\cp_mp\utility\script_utility::registersharedfunc("little_bird", "init", &scripts\cp\vehicles\little_bird_cp::little_bird_cp_init);
@@ -31,13 +31,13 @@ function vehicle_cp_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("hoopty_truck", "init", &scripts\cp\vehicles\hoopty_truck_cp::hoopty_truck_cp_init);
   scripts\cp_mp\utility\script_utility::registersharedfunc("van", "init", &scripts\cp\vehicles\van_cp::van_cp_init);
   scripts\cp_mp\utility\script_utility::registersharedfunc("apc_russian", "init", &scripts\cp\vehicles\apc_rus_cp::apc_rus_cp_init);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("motorcycle", "init", &_branalytics_addevent::ref_11d51);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("motorcycle", "init", &_branalytics_addevent::ref_11D51);
   scripts\cp_mp\utility\script_utility::registersharedfunc("veh_a10fd", "init", &_applysalesdiscount::bot_gametype_human_player_always_considered_attacker);
   scripts\cp_mp\utility\script_utility::registersharedfunc("veh_bt", "init", &scripts\cp_mp\vehicles\customization\battle_tracks::create_juggernaut_spawner);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_tracking", "vehicle_spawned", &ref_14220);
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_susp", "init", &_applydvarstosettings::get_player_velo_array);
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_susp_aa", "init", &_accessreaderscriptableused::get_most_recent_ping);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("open_jeep", "init", &_branalytics_addeventallowed::ref_120f4);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("open_jeep", "init", &_branalytics_addeventallowed::ref_120F4);
   scripts\cp_mp\utility\script_utility::registersharedfunc("veh_indigo", "init", &_attachmentblocks::start_safehouse_restart);
   scripts\cp\vehicles\damage_cp::init();
   scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_init();

@@ -7,20 +7,20 @@ function throwing_knife_mp_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("throwing_knife", "onGive", &throwing_knife_mp_ongive);
   scripts\cp_mp\utility\script_utility::registersharedfunc("throwing_knife", "onTake", &throwing_knife_mp_ontake);
   scripts\cp_mp\utility\script_utility::registersharedfunc("throwing_knife", "tryToPickup", &throwing_knife_mp_trytopickup);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("throwing_knife", "shallowWater", &ref_13b51);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("throwing_knife", "shallowWater", &ref_13B51);
 }
 
 function throwing_knife_mp_ongive(var_0, var_1) {
   if(var_0 == "equip_throwing_knife_fire") {
-    self.ref_13b5c = "iw8_throwingknife_fire_melee_mp";
-    thread ref_13b5a();
+    self.ref_13B5C = "iw8_throwingknife_fire_melee_mp";
+    thread ref_13B5A();
   } else if(var_0 == "equip_throwing_knife_electric") {
-    self.ref_13b5c = "iw8_throwingknife_electric_melee_mp";
-    thread ref_13b56();
+    self.ref_13B5C = "iw8_throwingknife_electric_melee_mp";
+    thread ref_13B56();
   } else if(var_0 == "equip_throwing_knife_drill") {
-    self.ref_13b5c = "iw8_throwingknife_drill_melee_mp";
+    self.ref_13B5C = "iw8_throwingknife_drill_melee_mp";
   } else {
-    self.ref_13b5c = "iw8_knifestab_mp";
+    self.ref_13B5C = "iw8_knifestab_mp";
   }
 
   scripts\mp\utility\perk::giveperk("specialty_equip_throwingKnife");
@@ -31,7 +31,7 @@ function throwing_knife_mp_ontake(var_0, var_1) {
     scripts\mp\utility\perk::removeperk("specialty_equip_throwingKnife");
   }
 
-  self.ref_13b5c = undefined;
+  self.ref_13B5C = undefined;
 }
 
 function throwing_knife_mp_trytopickup(var_0) {
@@ -50,12 +50,12 @@ function throwing_knife_mp_trytopickup(var_0) {
   return true;
 }
 
-function ref_13b51(var_0) {
-  thread ref_13b59();
+function ref_13B51(var_0) {
+  thread ref_13B59();
   var_0 setscriptablepartstate("igniteWick", "neutral", 0);
 }
 
-function ref_13b5a() {
+function ref_13B5A() {
   self notify("throwingKnife_clear_fx");
   self endon("throwingKnife_clear_fx");
   self endon("death_or_disconnect");
@@ -70,9 +70,9 @@ function ref_13b5a() {
     }
 
     if(var_1 && !var_0) {
-      thread ref_13b57();
+      thread ref_13B57();
     } else if(var_0 && !var_1) {
-      thread ref_13b59();
+      thread ref_13B59();
     }
 
     var_0 = var_1;
@@ -80,7 +80,7 @@ function ref_13b5a() {
   }
 }
 
-function ref_13b57() {
+function ref_13B57() {
   self endon("death_or_disconnect");
   self endon("throwingKnife_end_fx");
   self.ref_12748 = 1;
@@ -91,10 +91,10 @@ function ref_13b57() {
   self setscriptablepartstate("equipMtovFXWorld", "active", 0);
   self waittill("offhand_fired");
   waitframe();
-  thread ref_13b59();
+  thread ref_13B59();
 }
 
-function ref_13b59() {
+function ref_13B59() {
   self notify("throwingKnife_end_fx");
 
   if(istrue(self.ref_12748)) {
@@ -105,13 +105,13 @@ function ref_13b59() {
   self.ref_12748 = undefined;
 }
 
-function ref_13b52() {
+function ref_13B52() {
   self notify("throwingKnife_clear_fx");
-  thread ref_13b59();
-  thread ref_13b55();
+  thread ref_13B59();
+  thread ref_13B55();
 }
 
-function ref_13b56() {
+function ref_13B56() {
   self notify("throwingKnife_electric_clear_fx");
   self endon("throwingKnife_electric_clear_fx");
   self endon("death_or_disconnect");
@@ -126,9 +126,9 @@ function ref_13b56() {
     }
 
     if(var_1 && !var_0) {
-      thread ref_13b53();
+      thread ref_13B53();
     } else if(var_0 && !var_1) {
-      thread ref_13b55();
+      thread ref_13B55();
     }
 
     var_0 = var_1;
@@ -136,7 +136,7 @@ function ref_13b56() {
   }
 }
 
-function ref_13b53() {
+function ref_13B53() {
   self endon("death_or_disconnect");
   self endon("throwingKnife_electric_end_fx");
   self.ref_12747 = 1;
@@ -147,10 +147,10 @@ function ref_13b53() {
   self setscriptablepartstate("equipMtovFXWorld", "electricKnife", 0);
   self waittill("offhand_fired");
   waitframe();
-  thread ref_13b55();
+  thread ref_13B55();
 }
 
-function ref_13b55() {
+function ref_13B55() {
   self notify("throwingKnife_electric_end_fx");
 
   if(istrue(self.ref_12747)) {
@@ -161,7 +161,7 @@ function ref_13b55() {
   self.ref_12747 = undefined;
 }
 
-function ref_13b54() {
+function ref_13B54() {
   self notify("throwingKnife_electric_clear_fx");
-  thread ref_13b55();
+  thread ref_13B55();
 }

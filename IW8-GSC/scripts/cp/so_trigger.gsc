@@ -81,7 +81,7 @@ function thermometerwatch(var_0) {
   }
 }
 
-function ref_12b00(var_0) {
+function ref_12B00(var_0) {
   if(!isDefined(level.brjuggernautcrateactivatecallback)) {
     level.brjuggernautcrateactivatecallback = [];
   }
@@ -89,7 +89,7 @@ function ref_12b00(var_0) {
   level.brjuggernautcrateactivatecallback = scripts\engine\utility::array_add(level.brjuggernautcrateactivatecallback, var_0);
 }
 
-function ref_12b01(var_0) {
+function ref_12B01(var_0) {
   if(!isDefined(level.brjuggernautcratecapturecallback)) {
     level.brjuggernautcratecapturecallback = [];
   }
@@ -234,7 +234,7 @@ function initbunkerdoor(var_0, var_1) {
 function strike_additem(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15) {
   level endon("game_ended");
 
-  if(!ref_11f7c(var_0)) {
+  if(!ref_11F7C(var_0)) {
     return;
   }
 
@@ -363,7 +363,7 @@ function strike_additem(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   strike_addstructtolevel(var_0, 0, var_1);
 }
 
-function ref_11f7c() {
+function ref_11F7C() {
   var_0 = 0;
   var_1 = 0;
 
@@ -421,7 +421,7 @@ function trophy_watchtimeoutorgameendedinternal(var_0, var_1) {
 }
 
 function translate_position_with_offset_data(var_0, var_1, var_2, var_3) {
-  ref_13cf2(var_0, var_1);
+  ref_13CF2(var_0, var_1);
 
   if(isDefined(var_2)) {
     if(!isDefined(var_3)) {
@@ -447,7 +447,7 @@ function translate_position_with_offset_data(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_13cf2(var_0, var_1) {
+function ref_13CF2(var_0, var_1) {
   if(isDefined(var_0) && isDefined(level.cs_origin_offset) && isDefined(level.cs_angle_offset[var_0])) {
     var_2 = level.cs_angle_offset[var_0];
     var_3 = level.cs_origin_offset[var_0];
@@ -1048,7 +1048,7 @@ function ref_13529(var_0) {
 
     var_4 = "Cover Stand";
 
-    switch (var_3.ref_11eaa) {
+    switch (var_3.ref_11EAA) {
       case "cover_left":
         var_4 = "Cover Left";
         break;
@@ -1076,21 +1076,21 @@ function ref_13529(var_0) {
 
     var_5 = undefined;
 
-    if(isDefined(var_3.ref_11ea3)) {
-      var_5 = var_3.ref_11ea3;
+    if(isDefined(var_3.ref_11EA3)) {
+      var_5 = var_3.ref_11EA3;
     }
 
     var_6 = 0;
 
-    if(isDefined(var_3.ref_11ebf) && int(var_3.ref_11ebf) != 0 && var_3.ref_11ebf != "false") {
+    if(isDefined(var_3.ref_11EBF) && int(var_3.ref_11EBF) != 0 && var_3.ref_11EBF != "false") {
       var_6 = 4;
     }
 
-    if(isDefined(var_3.ref_11e99) && int(var_3.ref_11e99) != 0 && var_3.ref_11e99 != "false") {
+    if(isDefined(var_3.ref_11E99) && int(var_3.ref_11E99) != 0 && var_3.ref_11E99 != "false") {
       var_6 += 8;
     }
 
-    if(isDefined(var_3.ref_11eb6) && int(var_3.ref_11eb6) != 0 && var_3.ref_11eb6 != "false") {
+    if(isDefined(var_3.ref_11EB6) && int(var_3.ref_11EB6) != 0 && var_3.ref_11EB6 != "false") {
       var_6 += 16;
     }
 

@@ -35,7 +35,7 @@ function clearomnvarsaftertime(var_0) {
   }
 }
 
-function ref_1316e(var_0, var_1, var_2) {
+function ref_1316E(var_0, var_1, var_2) {
   setlowermessageomnvar(removeplayerasexpiredlootleader(var_0), var_1, var_2);
 }
 

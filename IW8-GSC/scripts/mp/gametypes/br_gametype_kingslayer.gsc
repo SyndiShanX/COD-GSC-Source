@@ -33,39 +33,39 @@ function displaycodes() {
   level.spawn_convoy_and_move = getdvarint("scr_bmo_hideLeaderHashUntilPercent", 0);
   level.lootchopper_modifyweapondamage = getdvarint("scr_dmz_loot_leader_update_on_pickup", 0) == 1;
   level.ref_13366 = getdvarint("scr_bmo_progressSplashesAndMusic", 1);
-  level.ref_12fb3 = getdvarint("scr_bmo_secondsBeforePlacementUpdates", 60);
+  level.ref_12FB3 = getdvarint("scr_bmo_secondsBeforePlacementUpdates", 60);
   level.loadout_updateclassdefault_headlessgetweaponn = getdvarint("scr_bmo_disable_perc_announcements", 0);
-  level.ref_11a27 = getdvarint("scr_dmz_loot_leader_mark_count", 3);
-  level.ref_11b62 = getdvarint("scr_dmz_loot_leader_mark_count", 3);
-  level.ref_11a2a = getdvarint("scr_bmo_loot_leader_mark_size", 1000);
-  level.ref_11a31 = getdvarint("scr_dmz_loot_leader_one_per_team", 1) == 1;
-  level.ref_11a2b = getdvarint("scr_bmo_loot_leader_mark_size_dynamic", 0);
-  level.ref_11a2d = getdvarint("scr_bmo_loot_leader_mark_info_strong_size", 2000);
-  level.ref_11a2e = getdvarint("scr_bmo_loot_leader_mark_info_strong_value", 5000);
-  level.ref_11a2f = getdvarint("scr_bmo_loot_leader_mark_info_weak_size", 5000);
-  level.ref_11a30 = getdvarint("scr_bmo_loot_leader_mark_info_weak_value", 1000);
-  level.ref_11a2c = getdvarint("scr_bmo_loot_leader_mark_top_teams", 3);
-  level.ref_11a28 = getdvarint("scr_kingslayer_lootLeaderUpdateMarkerTime", 0);
-  level.ref_127c0 = getdvarfloat("scr_bmo_music_first", 0.3);
-  level.ref_127c2 = getdvarfloat("scr_bmo_music_second", 0.5);
-  level.ref_127c3 = getdvarfloat("scr_bmo_music_third", 0.75);
-  level.ref_127c1 = getdvarfloat("scr_bmo_music_fourth", 0.9);
+  level.ref_11A27 = getdvarint("scr_dmz_loot_leader_mark_count", 3);
+  level.ref_11B62 = getdvarint("scr_dmz_loot_leader_mark_count", 3);
+  level.ref_11A2A = getdvarint("scr_bmo_loot_leader_mark_size", 1000);
+  level.ref_11A31 = getdvarint("scr_dmz_loot_leader_one_per_team", 1) == 1;
+  level.ref_11A2B = getdvarint("scr_bmo_loot_leader_mark_size_dynamic", 0);
+  level.ref_11A2D = getdvarint("scr_bmo_loot_leader_mark_info_strong_size", 2000);
+  level.ref_11A2E = getdvarint("scr_bmo_loot_leader_mark_info_strong_value", 5000);
+  level.ref_11A2F = getdvarint("scr_bmo_loot_leader_mark_info_weak_size", 5000);
+  level.ref_11A30 = getdvarint("scr_bmo_loot_leader_mark_info_weak_value", 1000);
+  level.ref_11A2C = getdvarint("scr_bmo_loot_leader_mark_top_teams", 3);
+  level.ref_11A28 = getdvarint("scr_kingslayer_lootLeaderUpdateMarkerTime", 0);
+  level.ref_127C0 = getdvarfloat("scr_bmo_music_first", 0.3);
+  level.ref_127C2 = getdvarfloat("scr_bmo_music_second", 0.5);
+  level.ref_127C3 = getdvarfloat("scr_bmo_music_third", 0.75);
+  level.ref_127C1 = getdvarfloat("scr_bmo_music_fourth", 0.9);
   level.isbotpracticematch = getdvarfloat("scr_kingslayer_dangerNotifyCooldown", 20);
   level.isbrgametypefuncdefined = [];
   level.ref_14062 = getdvarint("scr_dmz_useAutoRespawn", 1);
   level.checkpoint_objective_id = getdvarint("scr_dmz_autoRespawnWaitTime", 1);
-  level.ref_13bcd = getdvarint("scr_dmz_tokenRespawnWaitTime", level.checkpoint_objective_id);
+  level.ref_13BCD = getdvarint("scr_dmz_tokenRespawnWaitTime", level.checkpoint_objective_id);
   level.start_persistent_turbulence = getdvarint("scr_dmz_respawn_penalty", 0);
   level.start_pipe_room = getdvarfloat("scr_dmz_respawn_penalty_max", 15);
-  level.ref_12ca7 = getdvarint("scr_bmo_respawnHeightOverride", 5000);
-  level.ref_12cb4 = getdvarint("scr_dmz_respawn_time_disable", 0);
-  level.ref_121cc = getdvarfloat("scr_bmo_parachuteDeployDelay", 0.5);
+  level.ref_12CA7 = getdvarint("scr_bmo_respawnHeightOverride", 5000);
+  level.ref_12CB4 = getdvarint("scr_dmz_respawn_time_disable", 0);
+  level.ref_121CC = getdvarfloat("scr_bmo_parachuteDeployDelay", 0.5);
   level.wait_unload_jeep = getdvarint("scr_kingslayer_hideKingsOnSpawn", 1) == 1;
   level.waitandpause = getdvarint("scr_kingslayer_spawnProtection", 1) == 1;
   level.waitandspawnprops = getdvarfloat("scr_kingslayer_spawnProtectionModifier", 0.5);
   level.waitandgetnewspawnpoint = getdvarfloat("scr_kingslayer_spawnLauncherDamage", 0.5);
-  level.ref_133ea = getdvarint("scr_bmo_skipWeaponDropOnDeath", 1);
-  level.ref_133cd = getdvarint("scr_bmo_skipEquipmentDropOnDeath", 1);
+  level.ref_133EA = getdvarint("scr_bmo_skipWeaponDropOnDeath", 1);
+  level.ref_133CD = getdvarint("scr_bmo_skipEquipmentDropOnDeath", 1);
   level.playerismatchedplayerready = getdvarint("scr_bmo_forceArmorDropOnDeath", 2);
   level.wait_to_spawn_r0 = getdvarint("scr_kingslayer_circleMoveDistance", 18000);
   level.wait_till_time = getdvarint("scr_kingslayer_airdropPerCircle", 1);
@@ -80,10 +80,10 @@ function displaycodes() {
   level.wait_to_start_exfil_obj = getdvarint("scr_kingslayer_circleMovesAwayFromLeader", 1);
   level.wait_to_stop_pre_tmtyl_spawners = getdvarint("scr_kingslayer_circleOutOfBoundsPadding", 1);
   level.wait_to_play_intro_vo = getdvarint("scr_kingslayer_circleDebug", 0);
-  level.ref_11c85 = &ref_126a6;
+  level.ref_11C85 = &ref_126A6;
   level.needs_controller = getdvarint("scr_bmo_endMatchCameraTransitions", 1);
-  level.ref_13be1 = [];
-  level.ref_11a32 = [];
+  level.ref_13BE1 = [];
+  level.ref_11A32 = [];
   level.fuckwithgravity = 0;
   level.fuel_stability_event_init = 0;
   level.fuel_stability_event_start = 0;
@@ -112,11 +112,11 @@ function displaycodes() {
   }
 
   level.onstartgametype = &onstartgametype;
-  level.ref_11c84 = &ref_11c83;
+  level.ref_11C84 = &ref_11C83;
   level.ononeleftevent = &ononeleftevent;
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerShouldRespawn", &ref_12691);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("spawnHandled", &ref_1365d);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerConnect", &dlog_analytics_init);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerShouldRespawn", &ref_12691);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("spawnHandled", &ref_1365D);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerConnect", &dlog_analytics_init);
   scripts\mp\utility\game::registerroundswitchdvar(scripts\mp\utility\game::getgametype(), 0, 0, 9);
   scripts\mp\utility\game::registertimelimitdvar(scripts\mp\utility\game::getgametype(), 600);
   scripts\mp\utility\game::registerscorelimitdvar(scripts\mp\utility\game::getgametype(), 75);
@@ -129,7 +129,7 @@ function displaycodes() {
   level.ref_13364 = 1;
 }
 
-function ref_1365d(var_0) {
+function ref_1365D(var_0) {
   return istrue(var_0.br_infilstarted) && scripts\mp\flags::gameflag("prematch_done");
 }
 
@@ -147,24 +147,24 @@ function displaydelayedmissioncompletesplash() {
 }
 
 function displayplunderloss() {
-  scripts\mp\gametypes\br_gametypes::ref_12b11("createC130PathStruct", &display_ping_hint_with_radial_check);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("addToC130Infil", &display_message_to_teammates);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerWelcomeSplashes", &dmz_numteamswithplayers);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("createC130PathStruct", &display_ping_hint_with_radial_check);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("addToC130Infil", &display_message_to_teammates);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerWelcomeSplashes", &dmz_numteamswithplayers);
   waittillframeend();
   scripts\mp\flags::gameflaginit("placement_updates_allowed", 0);
   level.ontimelimit = &dmz_bot_callback_func;
   level.onplayerkilled = &dmg_trig;
-  level.ref_11c7a = &ref_125f7;
+  level.ref_11C7A = &ref_125F7;
   level.modifyplayerdamage = &distort_fx;
   level.assists_disabled = undefined;
   scripts\cp_mp\utility\script_utility::registersharedfunc("br_c130Airdrop", "c130Airdrop_onCrateUse", &divide_living_ai);
   display_mission_failed_text();
   touchdown_origin();
-  level.ref_11a29 = [];
-  level.ref_140d9 = [];
-  level.ref_140d9[0] = "assassination";
-  level.ref_140d9[1] = "domination";
-  level.ref_140d9[2] = "scavenger";
+  level.ref_11A29 = [];
+  level.ref_140D9 = [];
+  level.ref_140D9[0] = "assassination";
+  level.ref_140D9[1] = "domination";
+  level.ref_140D9[2] = "scavenger";
   thread numextractions();
   thread dmzextractcostdecrease();
   thread dist_sq_to_ref();
@@ -173,7 +173,7 @@ function displayplunderloss() {
   thread ref_12397();
 
   if(getdvarfloat("scr_dmz_loot_leader_update_interval", 15) > 0) {
-    thread ref_13ff1();
+    thread ref_13FF1();
   }
 
   if(istrue(level.needs_controller)) {
@@ -191,10 +191,10 @@ function display_who_broke_stealth_message() {
 }
 
 function display_mission_failed_text() {
-  scripts\cp_mp\utility\game_utility::ref_12c10("delete_on_load", "targetname");
-  scripts\cp_mp\utility\game_utility::ref_12c11("door_prison_cell_metal_mp", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c11("door_wooden_panel_mp_01", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c11("me_electrical_box_street_01", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C10("delete_on_load", "targetname");
+  scripts\cp_mp\utility\game_utility::ref_12C11("door_prison_cell_metal_mp", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C11("door_wooden_panel_mp_01", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C11("me_electrical_box_street_01", 1);
 }
 
 function displaycodeindex() {}
@@ -276,12 +276,12 @@ function onstartgametype() {
   }
 }
 
-function ref_11c83(var_0) {
+function ref_11C83(var_0) {
   thread playerrespawn();
   return true;
 }
 
-function ref_125f7(var_0, var_1) {
+function ref_125F7(var_0, var_1) {
   if(!scripts\mp\flags::gameflag("prematch_done")) {
     return false;
   }
@@ -380,7 +380,7 @@ function playerrespawn() {
     var_2 = var_3;
   }
 
-  if(level.ref_12cb4 != 0) {
+  if(level.ref_12CB4 != 0) {
     var_2 = 0;
   }
 
@@ -391,7 +391,7 @@ function playerrespawn() {
 
   if(istrue(self.ref_13749) || var_0 == 1) {
     var_5 = display_wave_num();
-    var_6 = scripts\mp\gametypes\br_gulag::ref_1263e(var_5);
+    var_6 = scripts\mp\gametypes\br_gulag::ref_1263E(var_5);
     thread patchfix(0, var_0 > 1);
     wait var_4;
   } else if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
@@ -404,16 +404,16 @@ function playerrespawn() {
 
     if(var_10 == "squad_wipe_death") {
       var_5 = display_wave_num();
-      var_6 = scripts\mp\gametypes\br_gulag::ref_1263e(var_5);
+      var_6 = scripts\mp\gametypes\br_gulag::ref_1263E(var_5);
       thread patchfix(0, 1);
       wait var_4;
     } else {
-      thread ref_1400c();
+      thread ref_1400C();
       var_10 = scripts\engine\utility::waittill_notify_or_timeout_return("squad_wipe_death", var_8);
 
       if(var_10 == "squad_wipe_death") {
         var_5 = display_wave_num();
-        var_6 = scripts\mp\gametypes\br_gulag::ref_1263e(var_5);
+        var_6 = scripts\mp\gametypes\br_gulag::ref_1263E(var_5);
         thread patchfix(0, 1);
         wait var_4;
       }
@@ -422,7 +422,7 @@ function playerrespawn() {
 
   self notify("stop_updatePrestreamRespawn");
   var_5 = display_wave_num();
-  var_6 = scripts\mp\gametypes\br_gulag::ref_1263e(var_5);
+  var_6 = scripts\mp\gametypes\br_gulag::ref_1263E(var_5);
 
   if(istrue(self.ref_13749)) {
     self.ref_13749 = 0;
@@ -445,12 +445,12 @@ function playerrespawn() {
   scripts\cp_mp\execution::_clearexecution();
   scripts\mp\gametypes\br_pickups::initplayer();
 
-  if(scripts\mp\gametypes\br_public::uniquelootitemid() && isDefined(level.ref_124e7)) {
-    var_5 = scripts\engine\utility::getStruct(level.ref_124e7, "targetname");
+  if(scripts\mp\gametypes\br_public::uniquelootitemid() && isDefined(level.ref_124E7)) {
+    var_5 = scripts\engine\utility::getStruct(level.ref_124E7, "targetname");
   }
 
   scripts\mp\gametypes\br_gulag::gulagwinnerrespawn(1, undefined, var_5, 1, var_6, 1);
-  scripts\mp\gametypes\br::ref_13f21(self);
+  scripts\mp\gametypes\br::ref_13F21(self);
   level thread scripts\mp\battlechatter_mp::trysaylocalsound(self, "player_respawn");
   _calloutmarkerping_handleluinotify_added::ref_13133("ui_br_transition_type", 0);
 
@@ -462,7 +462,7 @@ function playerrespawn() {
 
   self setclientomnvar("ui_ctf_flag_carrier", 0);
 
-  foreach(var_13 in level.ref_11a32) {
+  foreach(var_13 in level.ref_11A32) {
     if(var_13 == self) {
       carriabletype();
       break;
@@ -565,8 +565,8 @@ function display_wave_num() {
       }
     }
 
-    if(isDefined(level.ref_12ca7)) {
-      var_2 = level.ref_12ca7;
+    if(isDefined(level.ref_12CA7)) {
+      var_2 = level.ref_12CA7;
     }
 
     var_24 = (0, 0, var_2);
@@ -608,9 +608,9 @@ function patchfix(var_0, var_1) {
   wait 0.25;
 
   if(getdvarint("scr_bmo_use_spawn_intermission_fix", 1) == 1) {
-    scripts\mp\gametypes\br_public::ref_1252b();
+    scripts\mp\gametypes\br_public::ref_1252B();
     var_3 = display_wave_num();
-    scripts\mp\gametypes\br_spectate::ref_1252a();
+    scripts\mp\gametypes\br_spectate::ref_1252A();
     scripts\mp\gametypes\br::spawnintermission(var_3.origin, var_3.angles);
     scripts\mp\spectating::setdisabled();
     self.trial_moving_target_think = var_3.origin;
@@ -628,7 +628,7 @@ function fadeoutin() {
   scripts\mp\gametypes\br_gulag::gulagfadefromblack();
 }
 
-function ref_1400c() {
+function ref_1400C() {
   self endon("disconnect");
   self endon("spawned_player");
   self endon("stop_updatePrestreamRespawn");
@@ -640,11 +640,11 @@ function ref_1400c() {
 
       if(var_1 - self.trial_other_team >= getdvarfloat("scr_bmo_spawn_fallback_hint_delay", 2) * 1000) {
         var_0 = display_wave_num();
-        var_2 = scripts\mp\gametypes\br_gulag::ref_1263e(var_0);
+        var_2 = scripts\mp\gametypes\br_gulag::ref_1263E(var_0);
       }
     } else {
       var_0 = display_wave_num();
-      var_2 = scripts\mp\gametypes\br_gulag::ref_1263e(var_0);
+      var_2 = scripts\mp\gametypes\br_gulag::ref_1263E(var_0);
     }
 
     wait 1;
@@ -695,10 +695,10 @@ function dist_sq_to_ref() {
 
   level waittill("br_prematchEnded");
   wait 20;
-  thread ref_1383f();
+  thread ref_1383F();
 }
 
-function ref_1383f() {
+function ref_1383F() {
   level endon("game_ended");
 
   for(;;) {
@@ -728,7 +728,7 @@ function mlgiconfullflag(var_0, var_1) {
     var_2 = scripts\mp\gametypes\br_circle::risk_flagspawnshiftingpercent(var_1.origin, var_1.modify_blast_shield_damage);
   }
 
-  if(istrue(level.ref_1406f)) {
+  if(istrue(level.ref_1406F)) {
     var_2 = scripts\mp\gametypes\br_rewards::return_enemy_type_mask(var_2);
   }
 
@@ -738,7 +738,7 @@ function mlgiconfullflag(var_0, var_1) {
   var_6 = var_4 / var_5;
   var_7 = scripts\mp\gametypes\br_c130airdrop::fntrapdeactivation(var_3, var_4, var_5, var_6);
   var_7.mode_can_play_ending = &mode_can_play_ending;
-  var_7.ref_134e2 = var_2;
+  var_7.ref_134E2 = var_2;
   var_7 scripts\mp\gametypes\br_c130airdrop::fob(1, "battle_royale_c130_loot", "kingslayer_world", var_1);
 }
 
@@ -749,18 +749,18 @@ function mode_can_play_ending(var_0, var_1, var_2, var_3) {
   var_7 = distance2d(var_4, var_5) / var_6;
   var_8 = 0;
   var_9 = 0;
-  level.ref_11f2c += var_0;
+  level.ref_11F2C += var_0;
 
   while(var_8 < var_0) {
     wait var_7;
     var_10 = scripts\mp\gametypes\br_c130airdrop::fnchildscorefunc(self.origin, 1);
-    var_11 = scripts\cp_mp\killstreaks\airdrop::minshotstostage3acc(var_10 + (0, 0, level.fnhidefoundintel - 100), var_10, self.angles, var_1, var_2, var_3.ref_11eab);
+    var_11 = scripts\cp_mp\killstreaks\airdrop::minshotstostage3acc(var_10 + (0, 0, level.fnhidefoundintel - 100), var_10, self.angles, var_1, var_2, var_3.ref_11EAB);
     var_8++;
     var_11.ml_p2_func = var_3;
-    var_11.ref_134e2 = self.ref_134e2;
+    var_11.ref_134E2 = self.ref_134E2;
     level.focus_fire_attacker_timeout[level.focus_fire_attacker_timeout.size] = var_11;
     var_12 = scripts\cp_mp\killstreaks\airdrop::gettriggerobject(var_11);
-    var_12.ref_140a0 = relic_laststand_modifyplayerdamage();
+    var_12.ref_140A0 = relic_laststand_modifyplayerdamage();
   }
 }
 
@@ -773,13 +773,13 @@ function divide_living_ai(var_0) {
   var_2 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_1, self.origin, self.angles, self);
   scripts\mp\gametypes\br_pickups::spawnpickup("brloot_killstreak_precision_airstrike", var_2);
 
-  if(!isDefined(var_0.ref_11a01)) {
-    var_0.ref_11a01 = 1;
+  if(!isDefined(var_0.ref_11A01)) {
+    var_0.ref_11A01 = 1;
   } else {
-    var_0.ref_11a01++;
+    var_0.ref_11A01++;
   }
 
-  var_0 scripts\mp\utility\stats::setextrascore1(var_0.ref_11a01);
+  var_0 scripts\mp\utility\stats::setextrascore1(var_0.ref_11A01);
   var_0 thread scripts\mp\utility\points::giveunifiedpoints("br_c130_box_open");
 }
 
@@ -857,7 +857,7 @@ function display_welcome(var_0, var_1) {
     var_4 = 1;
 
     if(level.wait_until_truck_arrives_at_station) {
-      foreach(var_6 in level.ref_11a32) {
+      foreach(var_6 in level.ref_11A32) {
         if(!isDefined(var_6)) {
           continue;
         }
@@ -874,7 +874,7 @@ function display_welcome(var_0, var_1) {
     }
 
     if(var_4 == 1) {
-      foreach(var_6 in level.ref_11a32) {
+      foreach(var_6 in level.ref_11A32) {
         if(!isDefined(var_6)) {
           continue;
         }
@@ -884,9 +884,9 @@ function display_welcome(var_0, var_1) {
         if(var_9) {
           var_3 = level.wait_use_respawn;
           var_0.wagingplayer++;
-          ref_121b6(var_0);
+          ref_121B6(var_0);
           var_1.vstartposition++;
-          ref_121b6(var_1);
+          ref_121B6(var_1);
           var_10 = isDefined(var_0.streakdata.streaks[1]);
           var_11 = display_relics_splash(var_0);
           var_0 scripts\mp\gametypes\br_pickups::playerpackdataintogulagomnvar(var_11, var_10, 1);
@@ -919,7 +919,7 @@ function display_welcome(var_0, var_1) {
   }
 }
 
-function ref_121b6(var_0) {
+function ref_121B6(var_0) {
   var_1 = self.wagingplayer;
 
   if(var_1 > 255) {
@@ -936,7 +936,7 @@ function ref_121b6(var_0) {
   scripts\mp\utility\stats::setextrascore0(var_1);
 }
 
-function ref_121b4() {
+function ref_121B4() {
   var_0 = self.wagingplayer;
 
   if(var_0 > 255) {
@@ -979,7 +979,7 @@ function numextractions() {
     var_11 = scripts\mp\utility\teams::getteamdata(var_6, "players");
 
     foreach(var_13 in var_11) {
-      var_13 scripts\mp\gametypes\br::ref_138d6();
+      var_13 scripts\mp\gametypes\br::ref_138D6();
       var_13 scripts\cp_mp\utility\game_utility::ref_13168(var_9);
 
       if(!var_13 scripts\mp\utility\game::rankingenabled() || !var_13 hasplayerdata()) {
@@ -1079,12 +1079,12 @@ function dmzextractcost() {
     if(istrue(level.ref_14086)) {
       var_6 = scripts\mp\flags::gameflag("placement_updates_allowed");
     } else {
-      var_6 = var_0 > level.ref_12fb3;
+      var_6 = var_0 > level.ref_12FB3;
     }
 
     var_7 = level.ref_13366 && var_6;
     var_8 = scripts\mp\gamescore::run_common_functions_stealth();
-    var_9 = level.ref_13abd;
+    var_9 = level.ref_13ABD;
     var_10 = undefined;
     var_11 = undefined;
     var_12 = undefined;
@@ -1129,14 +1129,14 @@ function dmzextractcost() {
         var_12 = var_21;
       }
 
-      if(var_27 >= var_5 * level.ref_127c1) {
+      if(var_27 >= var_5 * level.ref_127C1) {
         thread scripts\mp\music_and_dialog::ref_12791();
-      } else if(var_27 >= var_5 * level.ref_127c3) {
-        thread scripts\mp\music_and_dialog::ref_127a7();
-      } else if(var_27 >= var_5 * level.ref_127c2) {
-        thread scripts\mp\music_and_dialog::ref_1278b();
-      } else if(var_27 >= var_5 * level.ref_127c0) {
-        thread scripts\mp\music_and_dialog::ref_127a9();
+      } else if(var_27 >= var_5 * level.ref_127C3) {
+        thread scripts\mp\music_and_dialog::ref_127A7();
+      } else if(var_27 >= var_5 * level.ref_127C2) {
+        thread scripts\mp\music_and_dialog::ref_1278B();
+      } else if(var_27 >= var_5 * level.ref_127C0) {
+        thread scripts\mp\music_and_dialog::ref_127A9();
       }
 
       var_29 = scripts\mp\utility\teams::getfriendlyplayers(var_21, 0);
@@ -1175,9 +1175,9 @@ function dmzextractcost() {
     var_37 = [];
     var_38 = [];
 
-    if(level.ref_11a2c == 1) {
+    if(level.ref_11A2C == 1) {
       var_37 = setteamplacement(game["teamPlacements"], "up");
-    } else if(level.ref_11a2c == 2) {
+    } else if(level.ref_11A2C == 2) {
       var_37 = var_16;
       var_38 = setteamplacement(var_14, "down");
     } else {
@@ -1202,19 +1202,19 @@ function dmzextractcost() {
       continue;
     }
 
-    if(level.ref_11a2c > 0) {
-      if(level.lootchopper_modifyweapondamage || istrue(level.ref_127d2)) {
-        ref_13ff0(var_14, var_38, var_15, var_37);
-        level.ref_127d2 = 0;
+    if(level.ref_11A2C > 0) {
+      if(level.lootchopper_modifyweapondamage || istrue(level.ref_127D2)) {
+        ref_13FF0(var_14, var_38, var_15, var_37);
+        level.ref_127D2 = 0;
       }
-    } else if(level.lootchopper_modifyweapondamage || istrue(level.ref_127d2)) {
-      ref_13ff0(var_14, var_38, var_15);
-      level.ref_127d2 = 0;
+    } else if(level.lootchopper_modifyweapondamage || istrue(level.ref_127D2)) {
+      ref_13FF0(var_14, var_38, var_15);
+      level.ref_127D2 = 0;
     }
 
     foreach(var_21 in var_13) {
       if(!scripts\engine\utility::array_contains(var_1, var_21)) {
-        if(istrue(level.ref_13be1[var_21])) {
+        if(istrue(level.ref_13BE1[var_21])) {
           if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
             showsplashtoteam(var_21, "bm_top_team_regained");
           }
@@ -1226,7 +1226,7 @@ function dmzextractcost() {
           showsplashtoteam(var_21, "bm_top_team");
         }
 
-        level.ref_13be1[var_21] = 1;
+        level.ref_13BE1[var_21] = 1;
       }
     }
 
@@ -1239,7 +1239,7 @@ function dmzextractcost() {
     }
 
     var_1 = var_13;
-    level.ref_13be0 = var_16;
+    level.ref_13BE0 = var_16;
     level.ref_12884 = var_8;
 
     if(!var_4) {
@@ -1328,24 +1328,24 @@ function setoutputfunc(var_0, var_1) {
   setomnvar(var_0, var_2);
 }
 
-function ref_13ff0(var_0, var_1, var_2, var_3) {
-  level.ref_11a36 = level.ref_11a32;
-  level.ref_11a32 = [];
+function ref_13FF0(var_0, var_1, var_2, var_3) {
+  level.ref_11A36 = level.ref_11A32;
+  level.ref_11A32 = [];
 
-  if(level.ref_11a2c == 1) {
-    for(var_4 = 0; var_4 < level.ref_11a27; var_4++) {
+  if(level.ref_11A2C == 1) {
+    for(var_4 = 0; var_4 < level.ref_11A27; var_4++) {
       var_5 = removeplatepouch(var_4, var_0, var_3);
 
       if(isDefined(var_5)) {
-        level.ref_11a32[level.ref_11a32.size] = var_2[var_5];
+        level.ref_11A32[level.ref_11A32.size] = var_2[var_5];
       }
     }
   } else {
-    jumpiffalse(level.ref_11a2c == 2) LOC_00000106;
+    jumpiffalse(level.ref_11A2C == 2) LOC_00000106;
     var_5 = removeplatepouch(0, var_0, var_3);
 
     if(isDefined(var_5)) {
-      level.ref_11a32[0] = var_2[var_5];
+      level.ref_11A32[0] = var_2[var_5];
     }
 
     foreach(var_7 in var_1) {
@@ -1356,17 +1356,17 @@ function ref_13ff0(var_0, var_1, var_2, var_3) {
         break;
       }
 
-      if(var_9 == level.ref_12d6f) {
+      if(var_9 == level.ref_12D6F) {
         continue;
       }
 
-      if(scripts\engine\utility::array_contains(level.ref_11a32, var_8)) {
+      if(scripts\engine\utility::array_contains(level.ref_11A32, var_8)) {
         continue;
       }
 
-      level.ref_11a32[level.ref_11a32.size] = var_8;
+      level.ref_11A32[level.ref_11A32.size] = var_8;
 
-      if(level.ref_11a32.size == level.ref_11a27) {
+      if(level.ref_11A32.size == level.ref_11A27) {
         break;
       }
     }
@@ -1374,31 +1374,31 @@ function ref_13ff0(var_0, var_1, var_2, var_3) {
     goto LOC_0000015f;
   }
 
-  foreach(var_8 in level.ref_11a36) {
-    if(isDefined(var_8) && !scripts\engine\utility::array_contains(level.ref_11a32, var_8)) {
-      ref_12c18(var_8);
+  foreach(var_8 in level.ref_11A36) {
+    if(isDefined(var_8) && !scripts\engine\utility::array_contains(level.ref_11A32, var_8)) {
+      ref_12C18(var_8);
     }
   }
 
   level notify("update_loot_leaders");
 
-  if(level.ref_11a29.size < level.ref_11a27) {
-    for(var_4 = 0; var_4 < level.ref_11a27; var_4++) {
+  if(level.ref_11A29.size < level.ref_11A27) {
+    for(var_4 = 0; var_4 < level.ref_11A27; var_4++) {
       var_15 = spawnStruct();
       var_15.hidden = 0;
       var_15 scripts\mp\gametypes\br_quest_util::init_tape_machine_animations("ui_mp_br_mapmenu_icon_assassin_objective_enemy", "active");
-      level.ref_11a29[var_4] = var_15;
+      level.ref_11A29[var_4] = var_15;
     }
   }
 
-  for(var_4 = 0; var_4 < level.ref_11a27; var_4++) {
-    var_15 = level.ref_11a29[var_4];
+  for(var_4 = 0; var_4 < level.ref_11A27; var_4++) {
+    var_15 = level.ref_11A29[var_4];
 
-    if(isDefined(level.ref_11a32[var_4])) {
-      var_15.targetplayer = level.ref_11a32[var_4];
-      var_15.targetplayer.ref_11a26 = var_15;
+    if(isDefined(level.ref_11A32[var_4])) {
+      var_15.targetplayer = level.ref_11A32[var_4];
+      var_15.targetplayer.ref_11A26 = var_15;
       var_16 = var_15.targetplayer.origin;
-      var_17 = scripts\engine\utility::array_contains(level.ref_11a32, var_15.targetplayer) && !scripts\engine\utility::array_contains(level.ref_11a36, var_15.targetplayer);
+      var_17 = scripts\engine\utility::array_contains(level.ref_11A32, var_15.targetplayer) && !scripts\engine\utility::array_contains(level.ref_11A36, var_15.targetplayer);
 
       if(var_15.hidden == 0) {
         var_18 = scripts\mp\utility\teams::getenemyplayers(var_15.targetplayer.team, 0);
@@ -1431,8 +1431,8 @@ function dmzextractcostdecrease() {
   level waittill("update_loot_leaders");
 
   for(;;) {
-    for(var_0 = 0; var_0 < level.ref_11a27; var_0++) {
-      var_1 = level.ref_11a29[var_0];
+    for(var_0 = 0; var_0 < level.ref_11A27; var_0++) {
+      var_1 = level.ref_11A29[var_0];
 
       if(isDefined(var_1.targetplayer)) {
         if(!scripts\mp\utility\player::isreallyalive(var_1.targetplayer) && var_1.hidden == 0) {
@@ -1460,8 +1460,8 @@ function dmzextractcostdecrease() {
       }
     }
 
-    if(level.ref_11a28 > 0) {
-      wait level.ref_11a28;
+    if(level.ref_11A28 > 0) {
+      wait level.ref_11A28;
       continue;
     }
 
@@ -1470,7 +1470,7 @@ function dmzextractcostdecrease() {
 }
 
 function displaywelcome(var_0) {
-  scripts\mp\gametypes\br_quest_util::ref_1336c(var_0);
+  scripts\mp\gametypes\br_quest_util::ref_1336C(var_0);
 }
 
 function displaysquadmessagetoteam(var_0) {
@@ -1515,7 +1515,7 @@ function battle_tracks_updatebattletracks(var_0) {
   }
 }
 
-function ref_13ff1() {
+function ref_13FF1() {
   level notify("restartLootLeaders");
   level endon("restartLootLeaders");
   level endon("game_ended");
@@ -1527,7 +1527,7 @@ function ref_13ff1() {
   scripts\mp\flags::gameflagwait("placement_updates_allowed");
 
   for(;;) {
-    level.ref_127d2 = 1;
+    level.ref_127D2 = 1;
     scripts\engine\utility::waittill_notify_or_timeout("bmo_overtime_start", var_4);
   }
 }
@@ -1535,8 +1535,8 @@ function ref_13ff1() {
 function ref_12397() {
   scripts\mp\flags::gameflagwait("prematch_done");
 
-  if(isDefined(level.ref_12fb3)) {
-    wait level.ref_12fb3;
+  if(isDefined(level.ref_12FB3)) {
+    wait level.ref_12FB3;
   }
 
   if(level.wait_until_emp_drone_done > 0) {
@@ -1546,31 +1546,31 @@ function ref_12397() {
   scripts\mp\flags::gameflagset("placement_updates_allowed");
 }
 
-function ref_12c18(var_0) {
+function ref_12C18(var_0) {
   lbravo_hover_rider_death_monitor(var_0);
 
-  if(isDefined(var_0.ref_11a26)) {
+  if(isDefined(var_0.ref_11A26)) {
     foreach(var_2 in level.players) {
-      displaysquadmessagetoteam(var_0.ref_11a26, var_2);
+      displaysquadmessagetoteam(var_0.ref_11A26, var_2);
     }
 
-    var_4 = var_0.ref_11a26.guard_spawners;
-    var_0.ref_11a26.targetplayer = undefined;
-    var_0.ref_11a26 = undefined;
+    var_4 = var_0.ref_11A26.guard_spawners;
+    var_0.ref_11A26.targetplayer = undefined;
+    var_0.ref_11A26 = undefined;
   }
 
-  level.ref_11a32 = scripts\engine\utility::array_remove(level.ref_11a32, var_0);
+  level.ref_11A32 = scripts\engine\utility::array_remove(level.ref_11A32, var_0);
 }
 
 function searchradiusidealmin(var_0) {
   waitframe();
   ref_14004(scripts\mp\gamescore::run_common_functions_stealth(), level.players);
 
-  if(istrue(level.ref_13dc0)) {
+  if(istrue(level.ref_13DC0)) {
     return;
   }
 
-  level.ref_13dc0 = 1;
+  level.ref_13DC0 = 1;
   level thread scripts\mp\gamelogic::endgame(var_0, game["end_reason"]["objective_completed"]);
   var_1 = [];
 
@@ -1583,7 +1583,7 @@ function searchradiusidealmin(var_0) {
 
 function ononeleftevent(var_0) {}
 
-function ref_126a6() {
+function ref_126A6() {
   if(!istrue(self.controlsfrozen)) {
     scripts\mp\utility\player::_freezecontrols(1, undefined, "spawnEndOfGame");
   }
@@ -1607,7 +1607,7 @@ function ref_126a6() {
 
   if(!isDefined(level.needs_antenna)) {
     level.needs_antenna = 1;
-    thread ref_13db9();
+    thread ref_13DB9();
   }
 
   return true;
@@ -1676,7 +1676,7 @@ function test_pipe_fire() {
   level.mp_m_speedball_patch[22] = (357, 10, 0);
 }
 
-function ref_13db9() {
+function ref_13DB9() {
   var_0 = 0;
 
   foreach(var_2 in level.players) {
@@ -1744,9 +1744,9 @@ function distsqtodefenderflagstart(var_0) {
 
   var_1 = level.br_level.default_class_chosen[var_0];
   var_2 = level.wait_to_spawn_r0;
-  var_3 = level.ref_11a32.size > 0;
+  var_3 = level.ref_11A32.size > 0;
   jumpiffalse(var_3) LOC_00000081;
-  var_4 = level.ref_11a32[0].origin;
+  var_4 = level.ref_11A32[0].origin;
   var_5 = scripts\engine\utility::ter_op(level.wait_to_start_exfil_obj, var_1 - var_4, var_4 - var_1);
   goto LOC_000000a2;
 }

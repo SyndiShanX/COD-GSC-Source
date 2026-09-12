@@ -3,7 +3,7 @@
  * Script: scripts\mp\trials\mp_trial_helicopter_port_create_a_script.gsc
 **************************************************************************/
 
-function ref_1348d(var_0, var_1, var_2) {
+function ref_1348D(var_0, var_1, var_2) {
   var_3 = scripts\asm\soldier\pain::getpaindirectiontoactor();
   var_4 = "torso";
   var_5 = "midbody";
@@ -44,7 +44,7 @@ function ref_1348d(var_0, var_1, var_2) {
   GscBinSkip0(0x2e, var_6.size, scripts\asm\asm::asm_lookupanimfromalias(var_1, "torso" + var_3));
 }
 
-function ref_1348f(var_0, var_1, var_2) {
+function ref_1348F(var_0, var_1, var_2) {
   var_3 = 30;
   var_4 = 150;
   var_5 = 300;
@@ -69,7 +69,7 @@ function ref_1348f(var_0, var_1, var_2) {
 
   var_11 = length(self.velocity);
   var_12 = scripts\asm\shared\utility::getbasearchetype();
-  var_13 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349e();
+  var_13 = scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349E();
 
   if(var_8) {
     var_14 = "long" + var_13;

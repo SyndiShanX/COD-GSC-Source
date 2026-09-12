@@ -97,7 +97,7 @@ function warehouse_enter_main() {
   scripts\engine\utility::stop_exploder("factory_ext_camcentr");
   scripts\engine\utility::stop_exploder("begin_amb_fx");
   level.warehousegate = scripts\sp\maps\proxywar\proxywar_util::setup_scripted_door("warehouse_sliding_door");
-  level.warehousegateopenref = scripts\engine\utility::getStruct("ref_open_warehouse_gate", "targetname");
+  level.warehousegateopenref = scripts\engine\utility::getStruct("ref_OPEN_warehouse_gate", "targetname");
   level.doorarrivalcount = 0;
   level.doorgatecount = 0;
   scripts\sp\maps\proxywar\proxywar_util::disable_allies_firing();

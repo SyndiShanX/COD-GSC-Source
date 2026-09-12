@@ -20,9 +20,9 @@ function vehicle_spawn_getleveldataforvehicle(var_0, var_1) {
     var_3.clearancecheckheight = undefined;
     var_3.clearancecheckoffsetz = undefined;
     var_3.clearancecheckminradius = undefined;
-    var_3.ref_13b83 = undefined;
-    var_3.ref_12ca1 = undefined;
-    var_3.ref_13b84 = undefined;
+    var_3.ref_13B83 = undefined;
+    var_3.ref_12CA1 = undefined;
+    var_3.ref_13B84 = undefined;
   }
 
   return var_3;
@@ -213,9 +213,9 @@ function vehicle_spawn_init() {
   var_0.databyref = [];
   var_0.instancesbyref = [];
   var_0.spawnfromstructsdelayornotify = 5;
-  var_0.ref_12ca2 = getdvarint("scr_respawnVehicleDelayOverride", 0);
+  var_0.ref_12CA2 = getdvarint("scr_respawnVehicleDelayOverride", 0);
   var_0.argshave = getdvarint("scr_abandonedVehicleTimeoutOverride", 0);
-  var_0.ref_12ca1 = getdvarint("scr_respawnVehicleDelay", 60);
+  var_0.ref_12CA1 = getdvarint("scr_respawnVehicleDelay", 60);
   var_0.areplayersnear = getdvarint("scr_abandonedVehicleTimeout", 30);
   vehicle_spawn_initspawnclearance();
   [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_spawn", "init")]]();
@@ -454,7 +454,7 @@ function vehicle_spawn_setclearancecheckminradius(var_0, var_1) {
   var_2.clearancecheckminradii[var_0] = var_1;
 }
 
-function ref_1421c(var_0, var_1, var_2) {
+function ref_1421C(var_0, var_1, var_2) {
   level endon("game_ended");
   level endon("cancel_pending_vehicle_respawns");
   var_3 = vehicle_spawn_getleveldataforvehicle(var_0);
@@ -470,12 +470,12 @@ function ref_1421c(var_0, var_1, var_2) {
   var_4 = vehicle_spawn_getleveldata();
   var_5 = undefined;
 
-  if(var_4.ref_12ca2 != 0) {
-    var_5 = var_4.ref_12ca2;
-  } else if(isDefined(var_3.ref_12ca1)) {
-    var_5 = var_3.ref_12ca1;
+  if(var_4.ref_12CA2 != 0) {
+    var_5 = var_4.ref_12CA2;
+  } else if(isDefined(var_3.ref_12CA1)) {
+    var_5 = var_3.ref_12CA1;
   } else {
-    var_5 = var_4.ref_12ca1;
+    var_5 = var_4.ref_12CA1;
   }
 
   if(var_5 >= 1) {
@@ -517,7 +517,7 @@ function ref_14214() {
   return [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_spawn", "gameModeSupportsAbandonedTimeout")]]();
 }
 
-function ref_1421d() {
+function ref_1421D() {
   if(istrue(self.isdestroyed)) {
     return;
   }
@@ -561,12 +561,12 @@ function ref_1421d() {
   thread ref_14210();
 }
 
-function ref_1421a() {
+function ref_1421A() {
   self notify("stop_watching_abandoned");
 }
 
 function ref_14210() {
-  ref_1421a();
+  ref_1421A();
   self.matchdata_level = 1;
   var_0 = vehicle_spawn_getleveldataforvehicle(self.vehiclename);
   self thread[[var_0.arenavday]]();
@@ -576,7 +576,7 @@ function ref_14211() {
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::ref_14152();
 
   if(var_0 != "heavy") {
-    var_1 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414b(self);
+    var_1 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414B(self);
 
     if(isDefined(var_1)) {
       self.health = int(min(var_1, self.health));

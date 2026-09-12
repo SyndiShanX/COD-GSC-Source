@@ -10,14 +10,14 @@ function coop_stealth_init() {
 
   scripts\engine\utility::flag_init("stealth_settings_activated");
   register_stealth_state_funcs();
-  ref_129fd();
-  ref_129fe();
-  thread ref_134e4();
+  ref_129FD();
+  ref_129FE();
+  thread ref_134E4();
   level.bonusdeathplunderot = [];
   level.stealth_soundaliases = ["ui_stealth_threat_low_lp", "ui_stealth_threat_med_lp", "ui_stealth_threat_high_lp"];
 }
 
-function ref_12c57() {
+function ref_12C57() {
   level.bonusdeathplunderot = [];
   level.global_stealth_broken = 0;
 }
@@ -121,7 +121,7 @@ function weapon_xp_iw8_sn_kilo98() {
   return getdvarint("cp_sp_stealth", 0);
 }
 
-function ref_132d7() {
+function ref_132D7() {
   if(level.script == "cp_raid_complex") {
     return (weapon_xp_iw8_sn_kilo98() && (self.unittype == "soldier" || self.unittype == "juggernaut"));
   }
@@ -140,7 +140,7 @@ function run_common_functions(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     return;
   }
 
-  if(ref_132d7(var_0)) {
+  if(ref_132D7(var_0)) {
     if(isDefined(var_0.group) && isDefined(var_0.group.group_name)) {
       var_0.script_stealthgroup = var_0.group.group_name;
     } else {
@@ -152,7 +152,7 @@ function run_common_functions(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     var_0 thread scripts\stealth\enemy::main();
-    var_0 thread scripts\mp\vehicles\cargo_truck_mg_mp::ref_11cd7(level.stealth.damage_auto_range, level.stealth.damage_sight_range);
+    var_0 thread scripts\mp\vehicles\cargo_truck_mg_mp::ref_11CD7(level.stealth.damage_auto_range, level.stealth.damage_sight_range);
     thread seeing_player_time_tracker(var_0);
     thread ref_14458();
     thread stealth_meter_display_think(var_0);
@@ -193,7 +193,7 @@ function run_common_functions(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   thread spotlight_goal_node(var_0, var_3);
   thread spotlight_max_dist_sq_from_node(var_0, var_3);
   thread spotlight_angles_offset(var_0, var_3);
-  thread ref_119d0(var_0);
+  thread ref_119D0(var_0);
   thread blueprint_chancebase(var_0);
   thread bomb_count_down_end_time_stamp_ms(var_0);
 }
@@ -222,7 +222,7 @@ function bomb_count_down_end_time_stamp_ms(var_0) {
   getbestintersectionpt(var_0, var_0, var_1.name, "enemies_are_alerted");
 }
 
-function ref_119d0(var_0) {
+function ref_119D0(var_0) {
   level endon("game_ended");
   var_0 endon("death");
   var_0.a.disablelongdeath = 1;
@@ -248,7 +248,7 @@ function select_bunker_server_two_spawners(var_0, var_1, var_2) {
   scripts\cp\cp_modular_spawning::return_to_last_goalRadius();
 }
 
-function ref_139bf() {
+function ref_139BF() {
   self notify("suspicious_door_monitor_end");
   self endon("death");
   self endon("disconnect");
@@ -257,7 +257,7 @@ function ref_139bf() {
   var_1 = 80;
 }
 
-function ref_13b3a() {
+function ref_13B3A() {
   self endon("death");
   self endon("disconnect");
 
@@ -395,8 +395,8 @@ function spotlight_goal_node(var_0, var_1) {
 }
 
 function quickdropnewitem(var_0) {
-  if(isDefined(var_0.ref_12f15)) {
-    return var_0.ref_12f15;
+  if(isDefined(var_0.ref_12F15)) {
+    return var_0.ref_12F15;
   }
 
   if(isDefined(var_0.monitorhotfoot)) {
@@ -554,12 +554,12 @@ function delay_enter_combat_after_stealth(var_0) {
   var_0 endon("death");
   var_0 endon("long_death");
 
-  if(!istrue(var_0.ref_11e50)) {
+  if(!istrue(var_0.ref_11E50)) {
     var_0.never_kill_off = 0;
     var_0.dontkilloff = 0;
   }
 
-  var_0 scripts\cp\cp_modular_spawning::ref_12bc9();
+  var_0 scripts\cp\cp_modular_spawning::ref_12BC9();
   var_0 thread scripts\cp\cp_modular_spawning::enter_combat_after_stealth();
 }
 
@@ -648,7 +648,7 @@ function ping_enemy_and_player_for_duration(var_0, var_1, var_2) {
     var_2 = 3;
   }
 
-  thread ref_123c4(var_1);
+  thread ref_123C4(var_1);
   var_1 setscriptablepartstate("sixthsense", "loop");
   wait var_2;
   var_1 setscriptablepartstate("sixthsense", "neutral");
@@ -725,7 +725,7 @@ function stealth_meter_degree_think(var_0) {
       check_stealth_state_change(var_0);
     }
 
-    var_2 = var_0 scripts\engine\utility::ref_143b9(0.1, "stop_stealth_meter");
+    var_2 = var_0 scripts\engine\utility::ref_143B9(0.1, "stop_stealth_meter");
 
     if(var_2 == "stop_stealth_meter") {
       var_0.target_stealth_meter_progress = var_0.current_stealth_meter_progress;
@@ -753,11 +753,11 @@ function enter_combat(var_0) {
   if(!istrue(level.global_stealth_broken)) {
     stop_patrol(0);
 
-    if(!ref_132c1(var_0)) {
+    if(!ref_132C1(var_0)) {
       friendly_exit(var_0);
     }
 
-    if(ref_132c5(var_0)) {
+    if(ref_132C5(var_0)) {
       thread logevent_spawnviaplayer(var_0);
     }
 
@@ -766,24 +766,24 @@ function enter_combat(var_0) {
   }
 }
 
-function ref_1215d(var_0) {
+function ref_1215D(var_0) {
   var_1 = 5;
   scripts\cp\cp_outline::enable_outline_for_players(var_0, level.players, "snapshotgrenade", "high");
   var_0 scripts\engine\utility::waittill_any_in_array_or_timeout(["death"], var_1);
   scripts\cp\cp_outline::disable_outline_for_players(var_0, level.players);
 }
 
-function ref_132c1(var_0) {
+function ref_132C1(var_0) {
   if(bomber_damage_thread(var_0)) {
     return 1;
   }
 
-  if(istrue(var_0.ref_133b9)) {
+  if(istrue(var_0.ref_133B9)) {
     return 1;
   }
 
-  if(isDefined(var_0.ref_132c2)) {
-    return [[var_0.ref_132c2]](var_0);
+  if(isDefined(var_0.ref_132C2)) {
+    return [[var_0.ref_132C2]](var_0);
   }
 
   if(!isDefined(level.bonusdeathplunderot)) {
@@ -802,8 +802,8 @@ function logevent_spawnviaplayer(var_0) {
   var_1 = 3;
   waittillframeend();
 
-  if(isDefined(var_0.ref_11bd5)) {
-    logevent_challengeitemunlocked(var_0, var_0.ref_11bd5, &keypadscriptableused_altbunker);
+  if(isDefined(var_0.ref_11BD5)) {
+    logevent_challengeitemunlocked(var_0, var_0.ref_11BD5, &keypadscriptableused_altbunker);
   } else {
     logevent_challengeitemunlocked(var_0, "cellphone", &keypadscriptableused_altbunker);
   }
@@ -812,7 +812,7 @@ function logevent_spawnviaplayer(var_0) {
   var_0 notify("delete_reinforcement_icon");
 }
 
-function ref_132c5(var_0) {
+function ref_132C5(var_0) {
   return true;
 }
 
@@ -875,7 +875,7 @@ function goto_alarm_or_nearest_cover() {
   if(!isDefined(level.ai_going_to_alarm)) {
     if(isDefined(var_0) && isarray(var_0) && var_0.size > 0) {
       logevent_challengeitemunlocked(self, "alert", &keypadscriptableused);
-      self.ref_11bd6 = "alarm";
+      self.ref_11BD6 = "alarm";
       scripts\cp\cp_modular_spawning::set_demeanor_from_unittype("combat");
       self.scripted_mode = 1;
       thread scripts\cp\maps\cp_donetsk\milbase\ai_flare::run_to_and_set_alarm(var_0[0]);
@@ -961,7 +961,7 @@ function global_stealth_broken(var_0) {
   level notify("weapons_free");
   level.global_stealth_broken = 1;
   level.battlechatterenabled = 1;
-  level.ref_139b5 = 0;
+  level.ref_139B5 = 0;
   isenemyteamplayer();
 
   if(isDefined(level.select_boss_two_spawners)) {
@@ -1035,7 +1035,7 @@ function go_check_out_corpse(var_0, var_1, var_2) {
     var_3 = vectorNormalize(var_0.origin - var_1.loc);
     var_4 = getclosestpointonnavmesh(var_1.loc + var_3 * 15);
     var_0 scripts\cp\cp_modular_spawning::set_goal_pos(var_4);
-    var_0 scripts\engine\utility::ref_143b9(15, "forever");
+    var_0 scripts\engine\utility::ref_143B9(15, "forever");
     level.enemy_ai_corpse_locations = scripts\engine\utility::array_remove(level.enemy_ai_corpse_locations, var_1);
     check_around_the_area(var_0);
     return;
@@ -1479,7 +1479,7 @@ function display_combat_icon_to_player(var_0) {
 }
 
 function logevent_challengeitemunlocked(var_0, var_1, var_2) {
-  var_0.ref_12b4c = var_1;
+  var_0.ref_12B4C = var_1;
 
   foreach(var_4 in level.players) {
     ref_13336(var_4, var_0, var_2);
@@ -1737,7 +1737,7 @@ function player_in_concealment_area(var_0) {
   return istrue(var_0.tracking_munitions_purchase);
 }
 
-function ref_11a86(var_0, var_1) {
+function ref_11A86(var_0, var_1) {
   if(getdvarint("scr_phj_disable_icons", 0) != 0) {
     return;
   }
@@ -1768,11 +1768,11 @@ function ref_11a86(var_0, var_1) {
   objective_setshowoncompass(var_4, 1);
   objective_onentity(var_4, var_0);
   var_0 thread[[var_1]](var_4, var_3, var_0);
-  var_0.ref_12b4a = var_4;
+  var_0.ref_12B4A = var_4;
 }
 
 function ragdoll_on_vehicle_death(var_0) {
-  switch (var_0.ref_12b4c) {
+  switch (var_0.ref_12B4C) {
     case "alert":
       return "hud_alert";
     case "alarm":
@@ -1784,7 +1784,7 @@ function ragdoll_on_vehicle_death(var_0) {
   }
 }
 
-function ref_11a7b(var_0) {
+function ref_11A7B(var_0) {
   if(getdvarint("scr_phj_disable_icons", 0) != 0) {
     return;
   }
@@ -1866,7 +1866,7 @@ function show_combat_icon_to(var_0, var_1) {
   }
 
   if(!has_combat_icon(var_1)) {
-    ref_11a7b(var_1);
+    ref_11A7B(var_1);
   }
 
   objective_addclienttomask(var_1.combat_icon_objective_id, var_0);
@@ -1882,10 +1882,10 @@ function ref_13336(var_0, var_1, var_2) {
   }
 
   if(!sg_respawn(var_1)) {
-    ref_11a86(var_1, var_2);
+    ref_11A86(var_1, var_2);
   }
 
-  objective_addclienttomask(var_1.ref_12b4a, var_0);
+  objective_addclienttomask(var_1.ref_12B4A, var_0);
 }
 
 function set_stealth_meter_progress(var_0, var_1) {
@@ -1926,7 +1926,7 @@ function has_combat_icon(var_0) {
 }
 
 function sg_respawn(var_0) {
-  return isDefined(var_0.ref_12b4a);
+  return isDefined(var_0.ref_12B4A);
 }
 
 function delete_stealth_meter(var_0) {
@@ -1952,7 +1952,7 @@ function delete_combat_icon(var_0) {
 function laser_func(var_0, var_1, var_2, var_3) {
   scripts\cp\cp_objectives::freeworldid("enemy_AI_reinforcement_ID_" + var_3);
   objective_delete(var_0);
-  var_2.ref_12b4a = undefined;
+  var_2.ref_12B4A = undefined;
   setheadiconimage(var_1);
   var_2 notify("exit_stealth_think");
 }
@@ -2068,14 +2068,14 @@ function flash_crate_update_hint_logic_alt() {
 
   scripts\engine\utility::deletestructarray("bush_zone", "targetname");
   scripts\engine\utility::deletestructarray("bush_struct", "targetname");
-  thread ref_124b6();
+  thread ref_124B6();
 }
 
-function ref_124b6() {
+function ref_124B6() {
   level endon("game_ended");
 
   foreach(var_1 in level.players) {
-    thread ref_11cd6(var_1);
+    thread ref_11CD6(var_1);
   }
 
   thread flash_crate_use();
@@ -2086,11 +2086,11 @@ function flash_crate_use() {
 
   for(;;) {
     level waittill("connected", var_0);
-    thread ref_11cd6(var_0);
+    thread ref_11CD6(var_0);
   }
 }
 
-function ref_11cd6(var_0) {
+function ref_11CD6(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   var_1 = 100;
@@ -2159,7 +2159,7 @@ function ref_12655() {
   level endon("players_grenade_fire_monitor");
 
   foreach(var_1 in level.players) {
-    thread ref_124a7(var_1);
+    thread ref_124A7(var_1);
   }
 
   for(;;) {
@@ -2171,11 +2171,11 @@ function ref_12655() {
 function killstreak_createobjective_engineer(var_0) {
   level endon("game_ended");
   level endon("weapons_free");
-  var_0 scripts\engine\utility::ref_143a5("loadout_given", "start_hotjoining_via_c130");
-  thread ref_124a7(var_0);
+  var_0 scripts\engine\utility::ref_143A5("loadout_given", "start_hotjoining_via_c130");
+  thread ref_124A7(var_0);
 }
 
-function ref_124a7(var_0) {
+function ref_124A7(var_0) {
   level endon("game_ended");
   level endon("weapons_free");
   var_0 notify("player_grenade_fire_monitor");
@@ -2224,7 +2224,7 @@ function ref_12665() {
 function killstreak_loadout_state(var_0) {
   level endon("game_ended");
   level endon("weapons_free");
-  var_0 scripts\engine\utility::ref_143a5("loadout_given", "start_hotjoining_via_c130");
+  var_0 scripts\engine\utility::ref_143A5("loadout_given", "start_hotjoining_via_c130");
   thread ref_12506(var_0);
 }
 
@@ -2301,49 +2301,49 @@ function serverroomtvs() {
 
     switch (var_1) {
       case "claymore_mp":
-        thread ref_11e31(level, 4194304, 2, var_0, 1);
+        thread ref_11E31(level, 4194304, 2, var_0, 1);
         break;
       case "suicide_vest":
-        thread ref_11e31(level, 4194304, 2, var_0, 1);
+        thread ref_11E31(level, 4194304, 2, var_0, 1);
         break;
       case "frag_grenade_mp":
-        thread ref_11e31(level, 4194304, 2, var_0, 1);
+        thread ref_11E31(level, 4194304, 2, var_0, 1);
         break;
       case "molotov_mp":
-        thread ref_11e31(level, 4194304, 2, var_0, 1);
+        thread ref_11E31(level, 4194304, 2, var_0, 1);
         break;
       case "c4_mp_p":
-        thread ref_11e31(level, 4194304, 2, var_0, 1);
+        thread ref_11E31(level, 4194304, 2, var_0, 1);
         break;
       case "semtex_mp":
-        thread ref_11e31(level, 4194304, 2, var_0, 1.8);
+        thread ref_11E31(level, 4194304, 2, var_0, 1.8);
         break;
       case "throwingknife_mp":
-        ref_11e32(1048576, 1, var_0, var_1, &ref_132d1, var_2);
+        ref_11E32(1048576, 1, var_0, var_1, &ref_132D1, var_2);
         break;
       case "at_mine_mp":
-        thread ref_11e31(level, 4194304, 2, var_0, 0.6);
+        thread ref_11E31(level, 4194304, 2, var_0, 0.6);
         break;
       case "thermite_mp":
-        thread ref_11e31(level, 4194304, 2, var_0, 0.6);
+        thread ref_11E31(level, 4194304, 2, var_0, 0.6);
         break;
       case "flash_grenade_mp":
-        thread ref_11e31(level, 4194304, 2, var_0, 0.6);
+        thread ref_11E31(level, 4194304, 2, var_0, 0.6);
         break;
       case "concussion_grenade_mp":
-        thread ref_11e31(level, 4194304, 2, var_0, 0.75);
+        thread ref_11E31(level, 4194304, 2, var_0, 0.75);
         break;
       case "smoke_grenade_mp":
-        ref_11e32(4194304, 2, var_0, var_1, &ref_132cf, var_2);
+        ref_11E32(4194304, 2, var_0, var_1, &ref_132CF, var_2);
         break;
       case "snapshot_grenade_mp":
-        ref_11e32(4194304, 2, var_0, var_1, &ref_132d0, var_2);
+        ref_11E32(4194304, 2, var_0, var_1, &ref_132D0, var_2);
         break;
       case "gas_mp":
-        ref_11e32(4194304, 2, var_0, var_1, &ref_132ce, var_2);
+        ref_11E32(4194304, 2, var_0, var_1, &ref_132CE, var_2);
         break;
       case "decoy_grenade_mp":
-        ref_11e32(9437184, 2, var_0, var_1, &ref_132cd, var_2);
+        ref_11E32(9437184, 2, var_0, var_1, &ref_132CD, var_2);
         break;
       default:
         return;
@@ -2351,7 +2351,7 @@ function serverroomtvs() {
   }
 }
 
-function ref_11e31(var_0, var_1, var_2, var_3, var_4) {
+function ref_11E31(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_4)) {
     if(isvector(var_2)) {
       var_5 = quickdropremoveselfrevivetokenfrominventory(var_2, &quit_game_in);
@@ -2377,7 +2377,7 @@ function ref_11e31(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-function ref_11e32(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_11E32(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = prematchloadoutindex(var_2.origin, var_0, var_1);
 
   foreach(var_8 in var_6) {
@@ -2416,27 +2416,27 @@ function prematchloadoutindex(var_0, var_1, var_2) {
   return var_3;
 }
 
-function ref_132d1(var_0) {
+function ref_132D1(var_0) {
   return false;
 }
 
-function ref_132d0(var_0) {
+function ref_132D0(var_0) {
   return false;
 }
 
-function ref_132cf(var_0) {
+function ref_132CF(var_0) {
   return isDefined(var_0);
 }
 
-function ref_132ce(var_0) {
+function ref_132CE(var_0) {
   return isDefined(var_0);
 }
 
-function ref_132cd(var_0) {
+function ref_132CD(var_0) {
   return isDefined(var_0);
 }
 
-function ref_129fd() {
+function ref_129FD() {
   var_0 = ["mus_cp_stealth_1", "mus_cp_stealth_2", "mus_cp_stealth_3", "mus_cp_stealth_4", "mus_cp_stealth_5", "mus_cp_stealth_6"];
 
   for(var_1 = 0; var_1 < 5; var_1++) {
@@ -2452,13 +2452,13 @@ function rear_spawn_type_adjuster() {
   level.ref_13895++;
 
   if(level.ref_13895 == level.ref_13894.size - 1) {
-    ref_129fd();
+    ref_129FD();
   }
 
   return var_0;
 }
 
-function ref_129fe() {
+function ref_129FE() {
   var_0 = ["mus_cp_stealth_broken_1", "mus_cp_stealth_broken_2", "mus_cp_stealth_broken_3", "mus_cp_stealth_broken_4", "mus_cp_stealth_broken_5", "mus_cp_stealth_broken_6"];
 
   for(var_1 = 0; var_1 < 5; var_1++) {
@@ -2474,48 +2474,48 @@ function rear_spotlight_angles_offset() {
   level.ref_13897++;
 
   if(level.ref_13897 == level.ref_13896.size - 1) {
-    ref_129fe();
+    ref_129FE();
   }
 
   return var_0;
 }
 
-function ref_123c4(var_0) {
+function ref_123C4(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   var_0 notify("play_alert_music_to_player");
   var_0 endon("play_alert_music_to_player");
   var_1 = 3;
 
-  if(!isDefined(var_0.ref_1273e)) {
+  if(!isDefined(var_0.ref_1273E)) {
     var_2 = rear_spawn_type_adjuster();
-    var_0.ref_1273e = var_2;
-    scripts\cp\utility::ref_123fe(var_2, var_0);
+    var_0.ref_1273E = var_2;
+    scripts\cp\utility::ref_123FE(var_2, var_0);
   }
 
-  var_3 = level scripts\engine\utility::ref_143b9(var_1, "weapons_free");
-  var_0.ref_1273e = undefined;
+  var_3 = level scripts\engine\utility::ref_143B9(var_1, "weapons_free");
+  var_0.ref_1273E = undefined;
   var_0 setplayermusicstate("");
 }
 
 function play_combat_music_to_players() {
-  scripts\cp\utility::ref_123fe(rear_spotlight_angles_offset(), level.players);
+  scripts\cp\utility::ref_123FE(rear_spotlight_angles_offset(), level.players);
 }
 
 function getbestintersectionpt(var_0, var_1, var_2) {
-  var_0.ref_124d1 = var_1;
-  var_0.ref_12a6e = var_2;
+  var_0.ref_124D1 = var_1;
+  var_0.ref_12A6E = var_2;
   thread change_stealth_state_to(var_0, var_0);
 }
 
 function logloadoutcopy(var_0) {
   foreach(var_2 in level.players) {
-    if(var_2.name == var_0.ref_124d1) {
-      logevent_playerregen(var_2, var_0.ref_12a6e);
+    if(var_2.name == var_0.ref_124D1) {
+      logevent_playerregen(var_2, var_0.ref_12A6E);
       continue;
     }
 
-    logevent_servermatchend(var_2, var_0.ref_124d1, var_0.ref_12a6e);
+    logevent_servermatchend(var_2, var_0.ref_124D1, var_0.ref_12A6E);
   }
 }
 
@@ -2541,7 +2541,7 @@ function logevent_servermatchend(var_0, var_1, var_2) {
   }
 }
 
-function ref_134e4() {
+function ref_134E4() {
   level notify("sp_stealth_broken_listener");
   level endon("sp_stealth_broken_listener");
 

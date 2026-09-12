@@ -12,8 +12,8 @@ function teamplunderexfiltimer() {
   level.deposit_from_compromised_convoy_delayed = spawnStruct();
   level.deposit_from_compromised_convoy_delayed.ref_12010 = undefined;
   level.deposit_from_compromised_convoy_delayed.ref_12011 = undefined;
-  level.deposit_from_compromised_convoy_delayed.ref_1201e = undefined;
-  level.deposit_from_compromised_convoy_delayed.ref_1363d = [];
+  level.deposit_from_compromised_convoy_delayed.ref_1201E = undefined;
+  level.deposit_from_compromised_convoy_delayed.ref_1363D = [];
   level.deposit_from_compromised_convoy_delayed.bisdeaf = ["actor_enemy_lw_br", "actor_enemy_lw_br_german_african", "zombie"];
   ambush_lmg_guy(level.deposit_from_compromised_convoy_delayed);
   allammoboxes();
@@ -24,9 +24,9 @@ function teamplunderexfiltimer() {
 
 function ambush_lmg_guy() {
   foreach(var_1 in level.deposit_from_compromised_convoy_delayed.bisdeaf) {
-    ref_12b0b(var_1, &binoculars_watchracelaststand);
-    ref_12b0c(var_1, &binoculars_watchracetake);
-    ref_12b0d(var_1, &binocularsinited);
+    ref_12B0B(var_1, &binoculars_watchracelaststand);
+    ref_12B0C(var_1, &binoculars_watchracetake);
+    ref_12B0D(var_1, &binocularsinited);
   }
 }
 
@@ -89,7 +89,7 @@ function spawnnewagent(var_0, var_1, var_2, var_3, var_4) {
     scriptable_token_scriptable_touched_callback(var_5, 250);
   }
 
-  level.deposit_from_compromised_convoy_delayed.ref_1363d = scripts\engine\utility::array_add(level.deposit_from_compromised_convoy_delayed.ref_1363d, var_5);
+  level.deposit_from_compromised_convoy_delayed.ref_1363D = scripts\engine\utility::array_add(level.deposit_from_compromised_convoy_delayed.ref_1363D, var_5);
   return var_5;
 }
 
@@ -110,7 +110,7 @@ function spawnnewzombieagent(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_5 = "team_two_hundred";
   }
 
-  var_6 = access_card::ref_146fa(var_3, var_0, var_1, undefined, var_4);
+  var_6 = access_card::ref_146FA(var_3, var_0, var_1, undefined, var_4);
 
   if(!isDefined(var_6)) {
     return;
@@ -124,7 +124,7 @@ function spawnnewzombieagent(var_0, var_1, var_2, var_3, var_4, var_5) {
     scriptable_token_scriptable_touched_callback(var_6, 250);
   }
 
-  level.deposit_from_compromised_convoy_delayed.ref_1363d = scripts\engine\utility::array_add(level.deposit_from_compromised_convoy_delayed.ref_1363d, var_6);
+  level.deposit_from_compromised_convoy_delayed.ref_1363D = scripts\engine\utility::array_add(level.deposit_from_compromised_convoy_delayed.ref_1363D, var_6);
   return var_6;
 }
 
@@ -161,7 +161,7 @@ function ammobox_getbufferedattachmentsourceweapon() {
   self.pers["cur_kill_streak_for_nuke"] = 0;
   self.tookweaponfrom = [];
   self.killedplayers = [];
-  self.ref_1407d = 0;
+  self.ref_1407D = 0;
   self.name = "agent_" + self.entity_number;
   self.scripted_long_deaths = 0;
   self.agentdamagefeedback = 1;
@@ -288,10 +288,10 @@ function relic_mythic_next_pain_time() {
 function activeparachutersfactionvo() {
   level endon("game_ended");
   self waittill("death");
-  level.deposit_from_compromised_convoy_delayed.ref_1363d = scripts\engine\utility::array_remove(level.deposit_from_compromised_convoy_delayed.ref_1363d, self);
+  level.deposit_from_compromised_convoy_delayed.ref_1363D = scripts\engine\utility::array_remove(level.deposit_from_compromised_convoy_delayed.ref_1363D, self);
 }
 
-function ref_12b0b(var_0, var_1) {
+function ref_12B0B(var_0, var_1) {
   if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
@@ -304,7 +304,7 @@ function ref_12b0b(var_0, var_1) {
   level.agent_funcs[var_0]["on_damaged"] = var_1;
 }
 
-function ref_12b0c(var_0, var_1) {
+function ref_12B0C(var_0, var_1) {
   if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
@@ -317,12 +317,12 @@ function ref_12b0c(var_0, var_1) {
   level.agent_funcs[var_0]["gametype_on_damage_finished"] = var_1;
 }
 
-function ref_12b0d(var_0, var_1) {
+function ref_12B0D(var_0, var_1) {
   if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
 
-  level.deposit_from_compromised_convoy_delayed.ref_1201e = var_1;
+  level.deposit_from_compromised_convoy_delayed.ref_1201E = var_1;
   level.agent_funcs[var_0]["gametype_on_killed"] = var_1;
 }
 
@@ -336,10 +336,10 @@ function binoculars_watchracelaststand(var_0, var_1, var_2, var_3, var_4, var_5,
 }
 
 function binoculars_watchracetake(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
-  if(isDefined(level.ref_1203f)) {
+  if(isDefined(level.ref_1203F)) {
     if(scripts\engine\utility::isbulletdamage(var_4)) {
       if(isPlayer(var_1) || isbot(var_1) || isagent(var_1)) {
-        self[[level.ref_1203f]](var_1, var_6, self);
+        self[[level.ref_1203F]](var_1, var_6, self);
       }
     }
   }

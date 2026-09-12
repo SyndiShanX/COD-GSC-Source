@@ -117,7 +117,7 @@ function supportbox_watchplayerweapon(var_0) {
   self notifyonplayercommand("cancel_deploy", "+actionslot 4");
   self notifyonplayercommand("cancel_deploy", "+actionslot 5");
   self notifyonplayercommand("cancel_deploy", "+actionslot 6");
-  var_1 = scripts\engine\utility::ref_143ae("grenade_fire", "cancel_deploy", "weapon_switch_started");
+  var_1 = scripts\engine\utility::ref_143AE("grenade_fire", "cancel_deploy", "weapon_switch_started");
 
   if(!isDefined(var_1)) {
     return;

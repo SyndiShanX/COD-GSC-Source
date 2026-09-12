@@ -1587,8 +1587,8 @@ function killeventtextpopup(var_0, var_1, var_2) {
     return;
   }
 
-  if(!scripts\cp\utility::turn_off_sniper_laser() && isDefined(self.totalxpearned) && isDefined(self.ref_11b7f)) {
-    if(self.totalxpearned >= self.ref_11b7f) {
+  if(!scripts\cp\utility::turn_off_sniper_laser() && isDefined(self.totalxpearned) && isDefined(self.ref_11B7F)) {
+    if(self.totalxpearned >= self.ref_11B7F) {
       return;
     }
   }
@@ -1608,8 +1608,8 @@ function killeventtextpopup(var_0, var_1, var_2) {
   var_6.showassplash = istrue(var_1);
   var_6.priority = scripts\cp\drone\emp_drone::getscoreeventpriority(var_0);
   var_6.alwaysshowsplash = scripts\cp\drone\emp_drone::scoreeventalwaysshowassplash(var_0);
-  var_6.ref_128ac = 0;
-  var_6.ref_128ab = 0;
+  var_6.ref_128AC = 0;
+  var_6.ref_128AB = 0;
   var_6.matchdata_logplayerlife = istrue(var_2);
   self.killeventqueue[self.killeventqueue.size] = var_6;
   self notify("killEventTextPopup");
@@ -1628,7 +1628,7 @@ function killeventtextpopup(var_0, var_1, var_2) {
   var_9 = 0;
 
   foreach(var_4 in self.splashpriorityqueue) {
-    if(var_4.ref_128ac) {
+    if(var_4.ref_128AC) {
       continue;
     }
 
@@ -1637,16 +1637,16 @@ function killeventtextpopup(var_0, var_1, var_2) {
       thread scripts\cp\cp_hud_message::showsplash(var_4.scoreeventref);
     }
 
-    var_4.ref_128ac = 1;
+    var_4.ref_128AC = 1;
   }
 
   foreach(var_4 in self.splashpriorityqueue) {
-    if(var_4.ref_128ab || var_4.matchdata_logplayerlife) {
+    if(var_4.ref_128AB || var_4.matchdata_logplayerlife) {
       continue;
     }
 
     thread scripts\cp\drone\emp_drone::scoreeventpopup(var_4.scoreeventref);
-    var_4.ref_128ab = 1;
+    var_4.ref_128AB = 1;
     wait getdvarfloat("scr_splash_kill_buffer", 0.25);
   }
 
@@ -1784,10 +1784,10 @@ function stoppingpower_clearhcrdata() {
   self.pers["cur_kill_streak_for_nuke"] = 0;
   self.tookweaponfrom = [];
   self.guid = scripts\cp\utility\player::getuniqueid();
-  thread ref_1445a();
+  thread ref_1445A();
 }
 
-function ref_1445a() {
+function ref_1445A() {
   self endon("death");
   self waittill("long_death");
 
@@ -1795,14 +1795,14 @@ function ref_1445a() {
     foreach(var_2, var_1 in self.attackers) {
       if(isPlayer(var_1)) {
         if(isDefined(self.attackerdata) && self.attackerdata.size > 0) {
-          if(!isDefined(var_1.ref_119d4)) {
-            var_1.ref_119d4 = [];
+          if(!isDefined(var_1.ref_119D4)) {
+            var_1.ref_119D4 = [];
           }
 
           thread vip_playerdied(var_1, undefined, self, self.attackerdata[var_2].objweapon, self.attackerdata[var_2].smeansofdeath, var_1);
           thread scripts\mp\ammorestock::onplayerkilled(var_1, var_1, self.maxhealth, undefined, self.attackerdata[var_2].smeansofdeath, self.attackerdata[var_2].objweapon, self.attackerdata[var_2].ref_13417, var_1.modifiers);
           var_1 thread scripts\cp\agents\gametype_cp_wave_sv::giveunifiedpoints("kill", self.attackerdata[var_2].objweapon);
-          var_1.ref_119d4[self getentitynumber()] = 1;
+          var_1.ref_119D4[self getentitynumber()] = 1;
         }
       }
     }

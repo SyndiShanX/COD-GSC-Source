@@ -31,7 +31,7 @@ function tango72_get_length(var_0) {
 
 function player_tango72_infil_think(var_0, var_1) {
   self endon("player_free_spot");
-  thread ref_13a3c(var_0);
+  thread ref_13A3C(var_0);
   thread player_infil_end();
   var_2 = var_0.linktoent gettagorigin("body_animate_jnt");
   var_3 = var_0.linktoent gettagangles("body_animate_jnt");
@@ -159,7 +159,7 @@ function player_infil_end() {
   setDvar("depthSortViewmodel", 0);
 }
 
-function ref_13a3c(var_0) {
+function ref_13A3C(var_0) {
   self endon("death_or_disconnect");
 
   if(isPlayer(self)) {
@@ -464,12 +464,12 @@ function initanims(var_0) {
       scripts\common\anim::addnotetrack_customfunction("slot_3", "player_lock_look_1_second", &scripts\mp\utility\infilexfil::player_lock_look_1_second, "tango72_infil_alpha_intro");
       scripts\common\anim::addnotetrack_customfunction("slot_4", "player_lock_look_1_second", &scripts\mp\utility\infilexfil::player_lock_look_1_second, "tango72_infil_alpha_intro");
       scripts\common\anim::addnotetrack_customfunction("slot_5", "player_lock_look_1_second", &scripts\mp\utility\infilexfil::player_lock_look_1_second, "tango72_infil_alpha_intro");
-      scripts\common\anim::addnotetrack_customfunction("slot_0", "scn_infil_tango_npc_0", &ref_12ef4, "tango72_infil_alpha_exit");
-      scripts\common\anim::addnotetrack_customfunction("slot_1", "scn_infil_tango_npc_3", &ref_12ef7, "tango72_infil_alpha_exit");
-      scripts\common\anim::addnotetrack_customfunction("slot_2", "scn_infil_tango_npc_1", &ref_12ef5, "tango72_infil_alpha_exit");
-      scripts\common\anim::addnotetrack_customfunction("slot_3", "scn_infil_tango_npc_4", &ref_12ef8, "tango72_infil_alpha_exit");
-      scripts\common\anim::addnotetrack_customfunction("slot_4", "scn_infil_tango_npc_2", &ref_12ef6, "tango72_infil_alpha_exit");
-      scripts\common\anim::addnotetrack_customfunction("slot_5", "scn_infil_tango_npc_5", &ref_12ef9, "tango72_infil_alpha_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_0", "scn_infil_tango_npc_0", &ref_12EF4, "tango72_infil_alpha_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_1", "scn_infil_tango_npc_3", &ref_12EF7, "tango72_infil_alpha_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_2", "scn_infil_tango_npc_1", &ref_12EF5, "tango72_infil_alpha_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_3", "scn_infil_tango_npc_4", &ref_12EF8, "tango72_infil_alpha_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_4", "scn_infil_tango_npc_2", &ref_12EF6, "tango72_infil_alpha_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_5", "scn_infil_tango_npc_5", &ref_12EF9, "tango72_infil_alpha_exit");
       break;
     case "bravo":
       scripts\common\anim::addnotetrack_customfunction("commander", "treads_heavy", &treadsheavy, "tango72_infil_bravo");
@@ -512,12 +512,12 @@ function initanims(var_0) {
       scripts\common\anim::addnotetrack_customfunction("slot_3", "player_lock_look_1_second", &scripts\mp\utility\infilexfil::player_lock_look_1_second, "tango72_infil_bravo_intro");
       scripts\common\anim::addnotetrack_customfunction("slot_4", "player_lock_look_1_second", &scripts\mp\utility\infilexfil::player_lock_look_1_second, "tango72_infil_bravo_intro");
       scripts\common\anim::addnotetrack_customfunction("slot_5", "player_lock_look_1_second", &scripts\mp\utility\infilexfil::player_lock_look_1_second, "tango72_infil_bravo_intro");
-      scripts\common\anim::addnotetrack_customfunction("slot_0", "scn_infil_tango_npc_3", &ref_12ef7, "tango72_infil_bravo_exit");
-      scripts\common\anim::addnotetrack_customfunction("slot_1", "scn_infil_tango_npc_0", &ref_12ef4, "tango72_infil_bravo_exit");
-      scripts\common\anim::addnotetrack_customfunction("slot_2", "scn_infil_tango_npc_1", &ref_12ef5, "tango72_infil_bravo_exit");
-      scripts\common\anim::addnotetrack_customfunction("slot_3", "scn_infil_tango_npc_4", &ref_12ef8, "tango72_infil_bravo_exit");
-      scripts\common\anim::addnotetrack_customfunction("slot_4", "scn_infil_tango_npc_2", &ref_12ef6, "tango72_infil_bravo_exit");
-      scripts\common\anim::addnotetrack_customfunction("slot_5", "scn_infil_tango_npc_5", &ref_12ef9, "tango72_infil_bravo_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_0", "scn_infil_tango_npc_3", &ref_12EF7, "tango72_infil_bravo_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_1", "scn_infil_tango_npc_0", &ref_12EF4, "tango72_infil_bravo_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_2", "scn_infil_tango_npc_1", &ref_12EF5, "tango72_infil_bravo_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_3", "scn_infil_tango_npc_4", &ref_12EF8, "tango72_infil_bravo_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_4", "scn_infil_tango_npc_2", &ref_12EF6, "tango72_infil_bravo_exit");
+      scripts\common\anim::addnotetrack_customfunction("slot_5", "scn_infil_tango_npc_5", &ref_12EF9, "tango72_infil_bravo_exit");
       break;
   }
 }
@@ -718,26 +718,26 @@ function crushcar(var_0) {
   var_0 setscriptablepartstate("car", "crush", 0);
 }
 
-function ref_12ef4(var_0) {
+function ref_12EF4(var_0) {
   var_0 playsoundonmovingent("scn_infil_tango_npc_0");
 }
 
-function ref_12ef5(var_0) {
+function ref_12EF5(var_0) {
   var_0 playsoundonmovingent("scn_infil_tango_npc_1");
 }
 
-function ref_12ef6(var_0) {
+function ref_12EF6(var_0) {
   var_0 playsoundonmovingent("scn_infil_tango_npc_2");
 }
 
-function ref_12ef7(var_0) {
+function ref_12EF7(var_0) {
   var_0 playsoundonmovingent("scn_infil_tango_npc_3");
 }
 
-function ref_12ef8(var_0) {
+function ref_12EF8(var_0) {
   var_0 playsoundonmovingent("scn_infil_tango_npc_4");
 }
 
-function ref_12ef9(var_0) {
+function ref_12EF9(var_0) {
   var_0 playsoundonmovingent("scn_infil_tango_npc_5");
 }

@@ -21,14 +21,14 @@ function initialize_wave_spawn_modules() {
   var_2 = [ &scripts\cp\cp_modular_spawning::set_count_based_on_grouped_modules, "grouped_wave_spawning", [ &scripts\cp\cp_modular_spawning::get_ambient_max_count, 30], 30];
   scripts\cp\cp_modular_spawning::registerambientgroup("wave_spawning", var_0, var_1, undefined, [ &wave_spawn_proc, undefined, undefined, 0.1, [ &scripts\cp\cp_modular_spawning::regenhealthaddfunc, 0], &scripts\cp\cp_modular_spawning::get_wave_high_threshold, 1], undefined, &return_wave_veh_spawners, &init_wave_spawning_module_proc);
   scripts\cp\cp_modular_spawning::registerambientgroup("wave_spawning", var_0, var_2, undefined, [ &wave_spawn, undefined, undefined, [ &scripts\cp\cp_modular_spawning::get_spawn_time_from_wave, 1], [ &scripts\cp\cp_modular_spawning::regenhealthaddfunc, 0], &scripts\cp\cp_modular_spawning::get_wave_high_threshold, 1], undefined, &scripts\cp\cp_modular_spawning::return_cover_spawners, &init_wave_spawning_module);
-  scripts\cp\cp_spawning_util::ref_12aec("wave_spawning", &ref_12216, &ref_13f23);
+  scripts\cp\cp_spawning_util::ref_12AEC("wave_spawning", &ref_12216, &ref_13F23);
   scripts\cp\cp_spawning_util::register_module_init_func("wave_spawning", [ &scripts\cp\cp_spawning_util::combine_module_counters, "wave_spawning"]);
   scripts\cp\cp_modular_spawning::register_module_as_passive("wave_spawning");
-  scripts\cp\cp_vehicles::ref_12ae5("wave_spawning", "attack_heli", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+  scripts\cp\cp_vehicles::ref_12AE5("wave_spawning", "attack_heli", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
 
   if(scripts\cp\utility::turn_off_sniper_laser()) {
-    scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11cac, 750]);
-    scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11cab, 64]);
+    scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11CAC, 750]);
+    scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11CAB, 64]);
     scripts\cp\cp_modular_spawning::set_spawn_scoring_params_for_group("wave_spawning", 750, 1024, 2500, 1);
   } else {
     scripts\cp\cp_modular_spawning::set_spawn_scoring_params_for_group("wave_spawning", 1024, 1536, 2500, 1);
@@ -59,10 +59,10 @@ function start_lap_time(var_0) {
     var_0 = self.group;
   }
 
-  if(isDefined(var_0) && !istrue(var_0.kamikaze) && istrue(self.ref_11e52)) {
-    scripts\cp\cp_modular_spawning::ref_1393e(var_0);
+  if(isDefined(var_0) && !istrue(var_0.kamikaze) && istrue(self.ref_11E52)) {
+    scripts\cp\cp_modular_spawning::ref_1393E(var_0);
     scripts\cp\cp_modular_spawning::toggle_force_stop_wave_from_groupname("wave_spawning", undefined, "wave_retry");
-    scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname("wave_spawning", [ &ref_1301c, "wave_delay_over"]);
+    scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname("wave_spawning", [ &ref_1301C, "wave_delay_over"]);
     level.ref_14519--;
     return;
   }
@@ -70,7 +70,7 @@ function start_lap_time(var_0) {
   level.ref_14518++;
 }
 
-function ref_1301c(var_0, var_1) {
+function ref_1301C(var_0, var_1) {
   var_0 notify(var_1);
 }
 
@@ -90,7 +90,7 @@ function init_wave_spawning_module(var_0) {
       level.spawn_module_structs_memory[var_0.group_name][var_2].cover_node_spawners_override = [];
       level.spawn_module_structs_memory[var_0.group_name][var_2].wave_spawner_overrides = [];
       level.spawn_module_structs_memory[var_0.group_name][var_2].requested_spawners = [];
-      level.spawn_module_structs_memory[var_0.group_name][var_2].ref_12c43 = [];
+      level.spawn_module_structs_memory[var_0.group_name][var_2].ref_12C43 = [];
       level.spawn_module_structs_memory[var_0.group_name][var_2].last_wave_num = level.spawn_module_structs_memory[var_0.group_name][var_2].wave_reference;
       level.spawn_module_structs_memory[var_0.group_name][var_2].last_wave_ref = level.spawn_module_structs_memory[var_0.group_name][var_2].wave_reference;
     }
@@ -153,7 +153,7 @@ function return_paratroopers_spawners(var_0) {
 
 function init_paratroopers_spawners(var_0) {
   var_0 scripts\cp\cp_modular_spawning::ignoredeathsdoor(var_0, "wave_spawning");
-  var_1 = ref_11d96(var_0);
+  var_1 = ref_11D96(var_0);
   var_2 = var_1.parachute_land_origin + (0, 0, 12000);
   var_3 = var_2 + anglesToForward((0, randomint(360), 0)) * -20000;
 
@@ -163,19 +163,19 @@ function init_paratroopers_spawners(var_0) {
     thread scripts\cp\utility::drawsphere(var_3, 128, 60, (0, 1, 0));
   }
 
-  var_4 = var_1 scripts\cp\cp_aiparachute::ref_135b0(var_0.group_name, var_3, var_2);
+  var_4 = var_1 scripts\cp\cp_aiparachute::ref_135B0(var_0.group_name, var_3, var_2);
   var_0.ac130 = var_4;
   var_4 scripts\cp\cp_aiparachute::armored_basic_combat(var_2);
   var_4 thread scripts\engine\utility::thread_on_notify_no_endon_death("death", &mp_deadzone_patch);
-  ref_11d95(var_0);
-  var_1 = ref_11d96(var_0, 1);
+  ref_11D95(var_0);
+  var_1 = ref_11D96(var_0, 1);
 }
 
 function mp_deadzone_patch() {
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("wave_paratroopers", 1);
 }
 
-function ref_11d95() {
+function ref_11D95() {
   var_0 = scripts\engine\utility::getStructArray("wave_paratroopers", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
@@ -185,7 +185,7 @@ function ref_11d95() {
   waitframe();
 }
 
-function ref_11d96(var_0) {
+function ref_11D96(var_0) {
   var_1 = scripts\engine\utility::getStructArray("wave_paratroopers", "targetname");
   var_2 = race_flow(scripts\cp\utility::get_center_point_of_array(level.players));
 
@@ -243,11 +243,11 @@ function return_wave_veh_spawners(var_0) {
     return scripts\cp\cp_modular_spawning::return_cover_spawners(var_0);
   }
 
-  if(isDefined(var_0.ref_12c43) && var_0.ref_12c43.size > 0) {
+  if(isDefined(var_0.ref_12C43) && var_0.ref_12C43.size > 0) {
     var_1 = [];
 
-    for(var_2 = 0; var_2 < var_0.ref_12c43.size; var_2++) {
-      var_3 = scripts\engine\utility::getStructArray(var_0.ref_12c43[var_2], "targetname");
+    for(var_2 = 0; var_2 < var_0.ref_12C43.size; var_2++) {
+      var_3 = scripts\engine\utility::getStructArray(var_0.ref_12C43[var_2], "targetname");
       var_1 = scripts\engine\utility::array_combine(var_1, var_3);
     }
 
@@ -278,8 +278,8 @@ function wave_spawn(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     scripts\cp\cp_modular_spawning::run_spawn_module("wave_paratroopers");
   }
 
-  if(isDefined(var_0.ref_1451a) && var_0.ref_1451a > 0) {
-    var_0.ref_1451a--;
+  if(isDefined(var_0.ref_1451A) && var_0.ref_1451A > 0) {
+    var_0.ref_1451A--;
     var_7 = spawnStruct();
     var_7.streakname = "precision_airstrike";
 
@@ -364,7 +364,7 @@ function wave_spawn_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_9 = var_0 scripts\cp\cp_modular_spawning::pressure_stability_event_start();
 
     if(istrue(var_0.use_only_veh_spawners) && (!isDefined(var_9) || var_9.size < 1)) {
-      scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname(var_0.group_name, &ref_13f62);
+      scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname(var_0.group_name, &ref_13F62);
     }
 
     if(istrue(var_0.stop_wave_spawning)) {
@@ -396,13 +396,13 @@ function wave_spawn_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   return var_4;
 }
 
-function ref_13f62(var_0, var_1) {
+function ref_13F62(var_0, var_1) {
   var_0.wave_use_vehicles = undefined;
   var_0.use_only_veh_spawners = undefined;
 }
 
-function ref_12a87() {
-  return istrue(self.ref_12a87);
+function ref_12A87() {
+  return istrue(self.ref_12A87);
 }
 
 function increase_wave_num(var_0) {
@@ -442,7 +442,7 @@ function ref_12216(var_0) {
   setomnvar("cp_wave_timer", 0);
 }
 
-function ref_13f23(var_0) {
+function ref_13F23(var_0) {
   var_0 scripts\cp\cp_modular_spawning::change_module_status(undefined, "Module Unpaused");
 }
 
@@ -451,7 +451,7 @@ function killstreaks(var_0, var_1) {
     wait var_0;
   }
 
-  scripts\cp\cp_modular_spawning::set_wave_ref_override(var_1);
+  scripts\cp\cp_modular_spawning::set_wave_ref_OVERRIDE(var_1);
 }
 
 function update_current_count_death(var_0) {
@@ -464,37 +464,37 @@ function update_current_count_death(var_0) {
   }
 
   var_2 = var_1 scripts\cp\cp_modular_spawning::get_activecount_from_group();
-  level thread scripts\cp\cp_modular_spawning::ref_1451f(var_1);
+  level thread scripts\cp\cp_modular_spawning::ref_1451F(var_1);
 
   if(var_1 scripts\cp\cp_modular_spawning::turn_off_steam() && !istrue(var_1.kamikaze)) {
-    ref_13f81(undefined, var_1);
+    ref_13F81(undefined, var_1);
   }
 
-  if(!istrue(var_1.kamikaze) && istrue(var_1.stop_wave_spawning) && var_2 < var_1.ref_11e6b) {
+  if(!istrue(var_1.kamikaze) && istrue(var_1.stop_wave_spawning) && var_2 < var_1.ref_11E6B) {
     scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname(var_1.group_name, [ &scripts\cp\cp_modular_spawning::toggle_kamikaze_for_group, 1]);
     level thread scripts\cp\cp_modular_spawning::wave_go_kamikaze(var_1);
     return;
   }
 }
 
-function ref_13f81(var_0, var_1) {
+function ref_13F81(var_0, var_1) {
   if(isDefined(var_0)) {
     if(var_0 >= 0) {
       setomnvar("cp_enemies_remaining", var_0);
     }
 
-    level.ref_1451e = var_0;
+    level.ref_1451E = var_0;
     return;
   }
 
   var_2 = scripts\cp\cp_modular_spawning::get_module_structs_by_groupname("wave_spawning");
   var_2 = scripts\engine\utility::array_combine(var_2, scripts\cp\cp_modular_spawning::get_module_structs_by_groupname("wave_paratroopers"));
-  var_1.ref_13be5 += 1;
+  var_1.ref_13BE5 += 1;
   var_3 = 0;
 
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
-    if(isDefined(var_2[var_4].ref_13be5)) {
-      var_3 += var_2[var_4].ref_13be5;
+    if(isDefined(var_2[var_4].ref_13BE5)) {
+      var_3 += var_2[var_4].ref_13BE5;
     }
   }
 
@@ -505,7 +505,7 @@ function ref_13f81(var_0, var_1) {
     setomnvar("cp_enemies_remaining", var_0);
   }
 
-  level.ref_1451e = var_0;
+  level.ref_1451E = var_0;
 }
 
 function update_current_count(var_0) {
@@ -517,8 +517,8 @@ function update_current_count(var_0) {
     }
   }
 
-  if(var_0 scripts\cp\cp_modular_spawning::turn_off_steam() && var_0.ref_13be5 == 0) {
-    ref_13f81(var_0.spawn_wave_total, var_0);
+  if(var_0 scripts\cp\cp_modular_spawning::turn_off_steam() && var_0.ref_13BE5 == 0) {
+    ref_13F81(var_0.spawn_wave_total, var_0);
     return;
   }
 }

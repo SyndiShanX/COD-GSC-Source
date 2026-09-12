@@ -119,7 +119,7 @@ function update_achievement_all_players(var_0, var_1) {
 }
 
 function callback_create() {
-  if(!isDefined(self.ref_136a1)) {
+  if(!isDefined(self.ref_136A1)) {
     return true;
   }
 
@@ -127,7 +127,7 @@ function callback_create() {
     return true;
   }
 
-  if(level.computer_interaction_start > self.ref_136a1) {
+  if(level.computer_interaction_start > self.ref_136A1) {
     return false;
   }
 
@@ -145,7 +145,7 @@ function ascender_disableplayeruse(var_0, var_1, var_2) {
 
   if(var_0 isonladder()) {
     if(var_1 == "MOD_PISTOL_BULLET" || var_1 == "MOD_RIFLE_BULLET" || var_1 == "MOD_EXPLOSIVE_BULLET") {
-      thread ref_13fbe();
+      thread ref_13FBE();
       return;
     }
 
@@ -169,7 +169,7 @@ function trapachievementboom(var_0) {
   }
 }
 
-function ref_13fbe() {
+function ref_13FBE() {
   var_0 = self getplayerdata("cp", "cpCommonAchievements", "hangtime");
 
   if(var_0 > 3) {

@@ -36,14 +36,14 @@ function main() {
   level scripts\cp\cp_hud_message::init_cp_hud_message();
   level.ref_12177 = 1;
   level.hostdamagefactorlow = 0;
-  level.ref_133ba = 1;
+  level.ref_133BA = 1;
   level.map_interaction_func = &scripts\cp\maps\cp_so_estate\cp_so_estate_interactions::register_interactions;
-  level.custom_onspawnplayer_func = &ref_124f3;
+  level.custom_onspawnplayer_func = &ref_124F3;
   level.weapon_rank_event_table = "scripts/cp/maps/cp_so_estate/cp_so_estate_weaponrank_event.csv";
   level.player_interaction_monitor = &scripts\cp\maps\cp_so_estate\cp_so_estate_interactions::level_specific_player_interaction_monitor;
   level.wait_for_interaction_func = &scripts\cp\maps\cp_so_estate\cp_so_estate_interactions::level_specific_wait_for_interaction_triggered;
   level.interaction_trigger_properties_func = &interaction_trigger_properties;
-  level.strike_player_connect_black_screen_fn = &ref_1247b;
+  level.strike_player_connect_black_screen_fn = &ref_1247B;
 
   if(!scripts\engine\utility::flag_exist("introscreen_over")) {
     scripts\engine\utility::flag_init("introscreen_over");
@@ -63,7 +63,7 @@ function main() {
   thread setup_map_specific_devgui();
   setup_create_script();
   level.devgui_setup_func = &onplayerspawneddevguisetup;
-  scripts\cp\laser_traps\cp_laser_traps::ref_131f6();
+  scripts\cp\laser_traps\cp_laser_traps::ref_131F6();
 
   if(level.scripted_spawner_func.size < 1) {
     scripts\engine\utility::flag_set("strike_init_done");
@@ -82,14 +82,14 @@ function main() {
   level.eogscoreboard = ["currency", "kills", "headShots", "downs", "revives"];
   scripts\cp\cp_compass::setupminimap("compass_map_cp_so_estate");
   scripts\engine\utility::flag_set("infil_complete");
-  thread ref_1369f();
-  thread ref_12daa();
+  thread ref_1369F();
+  thread ref_12DAA();
   thread light_tank_gunnerdamagemodignorefunc();
   level.waittill_wave_spawned_or_timeout = gettime();
-  level.shouldgodirectlytospectatefunc = &ref_11e55;
+  level.shouldgodirectlytospectatefunc = &ref_11E55;
 }
 
-function ref_11e55(var_0) {
+function ref_11E55(var_0) {
   return false;
 }
 
@@ -120,7 +120,7 @@ function levelobjectives_init() {
 
 function levelregisterobjectives() {}
 
-function ref_124f3() {
+function ref_124F3() {
   scripts\cp\gametypes\cp_specops::givedefaultloadout();
   self clearaccessory();
   self takeallweapons();
@@ -168,7 +168,7 @@ function ref_124f3() {
   thread scripts\cp\laser_traps\cp_laser_traps::mountain_three_death_func();
 }
 
-function ref_1247b(var_0) {}
+function ref_1247B(var_0) {}
 
 function rundebugstartobjective(var_0) {
   wait 2;
@@ -315,7 +315,7 @@ function register_create_script_arrays(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_12daa() {
+function ref_12DAA() {
   while(level.hostdamagefactorlow < 1) {
     waitframe();
   }
@@ -330,9 +330,9 @@ function ref_12daa() {
   setheadiconsnaptoedges(var_3.headiconid, 400);
   var_4 = [["box_spawn_1", "ammo", 1], ["box_spawn_2", "frag", 1], ["box_spawn_3", "ammo", 1], ["box_spawn_4", "frag", 1], ["box_spawn_5", "snapshot", 1], ["box_spawn_6", "molotov", 1], ["box_spawn_7", "ammo", 1], ["box_spawn_8", "frag", 1], ["box_spawn_9", "snapshot", 1], ["box_spawn_10", "ammo", 1], ["box_spawn_11", "ammo", 1], ["box_spawn_12", "gas", 1], ["box_spawn_13", "ammo", 1], ["box_spawn_14", "frag", 1], ["box_spawn_15", "stim", 1], ["box_spawn_16", "snapshot", 1], ["box_spawn_17", "stim", 1], ["box_spawn_18", "gas", 1], ["box_spawn_19", "c4", 1], ["box_spawn_20", "c4", 1], ["box_spawn_21", "stim", 1], ["box_spawn_22", "molotov", 1], ["box_spawn_23", "stim", 1]];
   ref_13513(var_4);
-  thread ref_135b4();
+  thread ref_135B4();
   scripts\engine\utility::flag_wait("vehicle_spawned");
-  scripts\cp\laser_traps\cp_laser_traps::ref_1437a();
+  scripts\cp\laser_traps\cp_laser_traps::ref_1437A();
   scripts\engine\utility::flag_set("game_started");
 
   foreach(var_6 in level.players) {
@@ -345,19 +345,19 @@ function ref_12daa() {
   level.audio_jugg_death = [];
   intro();
   incendiary_pickup_watcher();
-  ref_13df5();
-  ref_1338e();
-  ref_11a71();
+  ref_13DF5();
+  ref_1338E();
+  ref_11A71();
   oil_puddles();
 }
 
 function intro() {
   var_0 = [[[4, "ar"]], [[6, "ar"]], [[8, "ar"]], [[10, "ar"]]];
-  ref_1321a("courtyard_chopper_target", var_0, 0);
+  ref_1321A("courtyard_chopper_target", var_0, 0);
   scripts\cp\cp_hud_message::teamhudtutorialmessage(&"CP_SO_ESTATE/MISSION_INSTRUCTIONS", "allies", 10);
   thread ref_12758("dx_cps_kama_mobile_heist_nag_find_phones_20");
   scripts\engine\utility::flag_wait("spawning_ready");
-  ref_122f7();
+  ref_122F7();
   var_1 = scripts\common\utility::getvehiclespawner("courtyard_chopper_1", "targetname");
   var_2 = var_1 scripts\common\utility::spawn_vehicle();
   var_2.script_vehicle_selfremove = 1;
@@ -378,13 +378,13 @@ function intro() {
   wait 6;
 }
 
-function ref_122f7() {}
+function ref_122F7() {}
 
 function incendiary_pickup_watcher() {
   thread ref_12758("dx_mpa_ustl_order_attack");
-  ref_131f3(0);
+  ref_131F3(0);
   var_0 = [["es_courtyard_front_1", "ar", 1], ["es_courtyard_front_2", "ar", 1], ["es_courtyard_front_3", "ar", 1, undefined, ["close", 1000]], ["es_courtyard_front_4", "ar", 2], ["es_courtyard_front_5", "ar", 2], ["es_courtyard_front_6", "ar", 3], ["es_courtyard_front_7", "ar", 4, undefined, ["close", 1000]], ["es_courtyard_side_1", "ar", 1, undefined, ["close", 1000]], ["es_courtyard_side_2", "ar", 2, undefined, ["close", 1000]], ["es_courtyard_side_3", "ar", 3, undefined, ["close", 1000]], ["es_courtyard_upper_mid", "smg", 1, undefined, ["close", 800]], ["es_courtyard_upper_left_1", "ar", 3], ["es_courtyard_upper_left_2", "ar", 2], ["es_courtyard_upper_left_3", "shotgun", 1, undefined, ["close", 600]], ["es_courtyard_upper_left_4", "shotgun", 4], ["es_courtyard_upper_right_1", "ar", 3], ["es_courtyard_upper_right_2", "ar", 2], ["es_courtyard_upper_right_3", "shotgun", 1, undefined, ["close", 600]], ["es_courtyard_upper_right_4", "shotgun", 4], ["es_courtyard_lower_mid", "ar", 1], ["es_courtyard_lower_left_1", "ar", 3], ["es_courtyard_lower_left_2", "ar", 3], ["es_courtyard_lower_left_3", "ar", 4], ["es_courtyard_lower_left_4", "shotgun", 4, undefined, ["close", 600]], ["es_courtyard_lower_right_1", "ar", 3], ["es_courtyard_lower_right_2", "ar", 3], ["es_courtyard_lower_right_3", "ar", 4], ["es_courtyard_lower_right_4", "shotgun", 4, undefined, ["close", 600]]];
-  thread ref_134ed(var_0, 0);
+  thread ref_134ED(var_0, 0);
   var_1 = [[[[1, "smg"], [1, "ar"]], [[2, "smg"], [1, "ar"]], [[3, "smg"], [1, "ar"]], [[4, "smg"], [2, "ar"]]]];
   var_2 = ["courtyard_right", "courtyard_rear"];
   var_3 = ["pool", "greenhouse", "sidehouse"];
@@ -397,14 +397,14 @@ function incendiary_pickup_watcher() {
   scripts\engine\utility::flag_wait_either("intel_captured_courtyard", "left_objective_radius");
 }
 
-function ref_13df5() {
+function ref_13DF5() {
   thread ref_14344();
   var_0 = [["es_trucks_defend_1", "ar", 1], ["es_trucks_defend_2", "ar", 1, undefined, ["close", 600]], ["es_trucks_defend_3", "lmg", 2], ["es_trucks_defend_4", "ar", 1], ["es_trucks_defend_5", "ar", 2], ["es_trucks_defend_6", "ar", 2], ["es_trucks_defend_7", "ar", 3], ["es_trucks_defend_8", "lmg", 3], ["es_trucks_defend_9", "ar", 4], ["es_trucks_defend_10", "ar", 4]];
-  thread ref_134ed(var_0, 1);
+  thread ref_134ED(var_0, 1);
   thread ref_14347();
   scripts\engine\utility::flag_wait("intel_captured_courtyard");
-  ref_131f3(1);
-  thread scripts\cp\laser_traps\cp_laser_traps::get_driver_interaction_hint_string(10000, 10000, (0, 90, 0), scripts\engine\utility::getStruct("carepackage_center", "targetname").origin, "precision_airstrike", &ref_1249a);
+  ref_131F3(1);
+  thread scripts\cp\laser_traps\cp_laser_traps::get_driver_interaction_hint_string(10000, 10000, (0, 90, 0), scripts\engine\utility::getStruct("carepackage_center", "targetname").origin, "precision_airstrike", &ref_1249A);
   scripts\engine\utility::delaythread(1, &ref_12758, "dx_mpo_usop_airdrop_use");
   var_1 = [[[[1, "smg"], [1, "ar"]], [[2, "smg"], [1, "ar"]], [[3, "smg"], [1, "ar"]], [[4, "smg"], [2, "ar"]]]];
   var_2 = ["shed_wall"];
@@ -422,9 +422,9 @@ function ref_13df5() {
   var_2 = ["pool", "main_lower"];
   var_3 = ["monument", "church", "sidehouse"];
   var_5 = [["es_trucks_window_front", "sniper", 2], ["es_sniper_balcony_1", "sniper", 1], ["es_sniper_balcony_2", "sniper", 3], ["es_sniper_balcony_3", "sniper", 3], ["es_trucks_window_side_1", "sniper", 1], ["es_trucks_window_side_2", "sniper", 4]];
-  thread ref_134ed(var_5, 1);
+  thread ref_134ED(var_5, 1);
   var_6 = [[[4, "ar"]], [[6, "ar"]], [[8, "ar"]], [[10, "ar"]]];
-  ref_1321a("garden_chopper_target", var_6, 1);
+  ref_1321A("garden_chopper_target", var_6, 1);
   var_7 = scripts\common\utility::getvehiclespawner("garden_chopper_1", "targetname");
   var_8 = var_7 scripts\common\utility::spawn_vehicle();
   var_8.script_vehicle_selfremove = 1;
@@ -440,14 +440,14 @@ function ref_13df5() {
   scripts\engine\utility::flag_wait_either("intel_captured_trucks", "left_objective_radius");
 }
 
-function ref_1338e() {
+function ref_1338E() {
   var_0 = [["es_sidehouse_defend_front_1", "ar", 1, undefined, ["close", 600]], ["es_sidehouse_defend_front_2", "ar", 1, undefined, ["close", 600]], ["es_sidehouse_defend_front_3", "ar", 2]];
-  thread ref_134ed(var_0, 2);
+  thread ref_134ED(var_0, 2);
   var_1 = getEnt("map_left_side", "targetname");
   thread ref_14346(var_1);
   scripts\engine\utility::flag_wait("intel_captured_trucks");
-  ref_131f3(2);
-  thread scripts\cp\laser_traps\cp_laser_traps::get_driver_interaction_hint_string(10000, 10000, (0, 90, 0), scripts\engine\utility::getStruct("carepackage_greenhouse", "targetname").origin, "sentry", &ref_1249b);
+  ref_131F3(2);
+  thread scripts\cp\laser_traps\cp_laser_traps::get_driver_interaction_hint_string(10000, 10000, (0, 90, 0), scripts\engine\utility::getStruct("carepackage_greenhouse", "targetname").origin, "sentry", &ref_1249B);
   scripts\engine\utility::delaythread(1, &ref_12758, "dx_mpo_usop_airdrop_use");
 
   while(callback_subscribe(var_1)) {
@@ -460,7 +460,7 @@ function ref_1338e() {
   var_4 = ["greenhouse_back", "garden", "main_lower"];
   thread player_sees_hvt_leaving_vo("intel_collected", "sidehouse_all", var_3, var_4, var_2);
   var_5 = [["es_sidehouse_defend_interior_1", "ar", 1, "molotov", ["close", 800]], ["es_sidehouse_defend_interior_2", "ar", 2, "flash"], ["es_sidehouse_defend_interior_3", "ar", 2, "molotov"], ["es_sidehouse_defend_interior_4", "shotgun", 1, "molotov", ["close", 600]], ["es_sidehouse_defend_interior_5", "ar", 3, "flash"], ["es_sidehouse_defend_interior_6", "ar", 1, "flash"], ["es_sidehouse_defend_interior_7", "smg", 4, "flash"], ["es_sidehouse_defend_courtyard_1", "shotgun", 1, "flash", ["advance", 800]], ["es_sidehouse_defend_courtyard_2", "ar", 2, "molotov"], ["es_sidehouse_defend_courtyard_3", "ar", 3, "molotov"], ["es_sidehouse_defend_pool_1", "smg", 1, "molotov"], ["es_sidehouse_defend_pool_2", "ar", 1, "flash"], ["es_sidehouse_defend_pool_3", "ar", 2, "flash"], ["es_sidehouse_defend_pool_4", "juggernaut", 3, "flash", ["close", 800]], ["es_sidehouse_defend_pool_5", "ar", 1, "molotov"], ["es_sidehouse_defend_pool_6", "ar", 3, "molotov"], ["es_sidehouse_defend_pool_7", "smg", 4, "molotov", ["close", 800]], ["es_sidehouse_defend_pool_roof_1", "rpg", 1, "flash"], ["es_sidehouse_defend_pool_roof_2", "sniper", 2, "molotov"], ["es_sidehouse_defend_pool_roof_3", "rpg", 3, "flash"], ["es_sidehouse_defend_pool_roof_4", "sniper", 4, "flash"]];
-  thread ref_134ed(var_5, 2);
+  thread ref_134ED(var_5, 2);
   scripts\engine\utility::flag_wait("intel_collected");
   var_2 = [[[[1, "shotgun"], [2, "ar"]], [[1, "shotgun"], [4, "ar"]], [[1, "shotgun"], [6, "ar"]], [[2, "shotgun"], [6, "ar"]]], [[[2, "smg"], [1, "ar"]], [[2, "smg"], [2, "ar"]], [[4, "smg"], [3, "ar"]], [[4, "smg"], [4, "ar"]]], [[[2, "smg"], [1, "lmg"], [1, "shotgun"]], [[2, "smg"], [2, "lmg"], [2, "shotgun"]], [[4, "smg"], [2, "lmg"], [3, "shotgun"]], [[4, "smg"], [3, "lmg"], [4, "shotgun"]]]];
   var_3 = ["greenhouse", "courtyard_lower"];
@@ -468,7 +468,7 @@ function ref_1338e() {
   scripts\engine\utility::delaythread(1, &ref_12758, "dx_cps_lass_callout_enemy_squad_spawning_30");
   thread player_sees_hvt_leaving_vo("intel_captured_sidehouse", undefined, var_3, var_4, var_2);
   var_6 = [[[4, "ar"]], [[6, "ar"]], [[8, "ar"]], [[10, "ar"]]];
-  ref_1321a("center_chopper_target", var_6, 3);
+  ref_1321A("center_chopper_target", var_6, 3);
   var_7 = scripts\common\utility::getvehiclespawner("center_chopper_1", "targetname");
   var_8 = var_7 scripts\common\utility::spawn_vehicle();
   var_8.script_vehicle_selfremove = 1;
@@ -479,22 +479,22 @@ function ref_1338e() {
   scripts\engine\utility::flag_wait_either("intel_captured_sidehouse", "left_objective_radius");
 }
 
-function ref_11a71() {
+function ref_11A71() {
   scripts\engine\utility::flag_wait("intel_captured_sidehouse");
-  thread scripts\cp\laser_traps\cp_laser_traps::get_driver_interaction_hint_string(10000, 10000, (0, 90, 0), scripts\engine\utility::getStruct("carepackage_church", "targetname").origin, "sentry", &ref_1249b);
+  thread scripts\cp\laser_traps\cp_laser_traps::get_driver_interaction_hint_string(10000, 10000, (0, 90, 0), scripts\engine\utility::getStruct("carepackage_church", "targetname").origin, "sentry", &ref_1249B);
   scripts\engine\utility::delaythread(1, &ref_12758, "dx_mpo_usop_airdrop_use");
   var_0 = [["es_mainhouse_churchroof_1", "rpg", 1], ["es_mainhouse_churchroof_2", "rpg", 3], ["es_main_defend_lower_1", "ar", 1], ["es_main_defend_lower_2", "smg", 2, undefined, ["close", 800]], ["es_main_defend_lower_3", "ar", 2], ["es_main_defend_lower_4", "ar", 3], ["es_main_defend_lower_5", "shotgun", 1, undefined, ["close", 600]], ["es_main_defend_lower_6", "shotgun", 3], ["es_main_defend_lower_7", "lmg", 1], ["es_main_defend_lower_8", "smg", 4], ["es_main_defend_lower_9", "juggernaut", 3], ["es_main_defend_mid_2", "ar", 1], ["es_main_defend_mid_3", "shotgun", 2, undefined, ["close", 800]], ["es_main_defend_mid_4", "smg", 1], ["es_main_defend_mid_5", "smg", 2], ["es_main_defend_mid_6", "ar", 3, undefined, ["close", 800]], ["es_main_defend_mid_7", "ar", 3], ["es_main_defend_mid_8", "lmg", 4]];
-  thread ref_134ed(var_0, 3);
+  thread ref_134ED(var_0, 3);
   var_1 = [[[[1, "smg"], [1, "ar"]], [[2, "smg"], [1, "ar"]], [[3, "smg"], [1, "ar"]], [[4, "smg"], [2, "ar"]]]];
   var_2 = ["garden", "shed"];
   var_3 = ["monument", "courtyard_lower", "sidehouse"];
   thread player_sees_hvt_leaving_vo("intel_collected", "mainhouse_all", var_2, var_3, var_1);
-  ref_131f3(3);
-  thread ref_1431b();
+  ref_131F3(3);
+  thread ref_1431B();
   thread ref_14345();
   scripts\engine\utility::flag_wait("intel_collected");
   var_4 = [[[2, "ar"], [2, "lmg"]], [[4, "ar"], [2, "lmg"]], [[5, "ar"], [3, "lmg"]], [[6, "ar"], [4, "lmg"]]];
-  ref_1321a("center_chopper_2_target", var_4, 4);
+  ref_1321A("center_chopper_2_target", var_4, 4);
   thread ref_12758("dx_cps_lass_bank_enemy_reinforcements_10");
   var_5 = scripts\common\utility::getvehiclespawner("center_chopper_2", "targetname");
   var_6 = var_5 scripts\common\utility::spawn_vehicle();
@@ -503,7 +503,7 @@ function ref_11a71() {
   thread heli_crash_on_pilot_death();
   thread ref_14353();
   thread heli_death_thread();
-  ref_1321a("garden_chopper_2_target", var_4, 4);
+  ref_1321A("garden_chopper_2_target", var_4, 4);
   var_7 = scripts\common\utility::getvehiclespawner("garden_chopper_2", "targetname");
   var_8 = var_7 scripts\common\utility::spawn_vehicle();
   thread scripts\common\vehicle_paths::gopath(var_8);
@@ -519,8 +519,8 @@ function ref_11a71() {
 
 function oil_puddles() {
   var_0 = [["es_exfil_1", "lmg", 1], ["es_exfil_2", "ar", 1], ["es_exfil_3", "shotgun", 1, undefined, ["close", 800]], ["es_exfil_4", "ar", 2], ["es_exfil_5", "ar", 3], ["es_exfil_6", "shotgun", 3, undefined, ["close", 800]], ["es_exfil_7", "ar", 4]];
-  thread ref_134ed(var_0, 4);
-  thread ref_140e4();
+  thread ref_134ED(var_0, 4);
+  thread ref_140E4();
   thread pointinsquare();
   wait 2;
   var_1 = scripts\cp\cp_objectives::requestworldid("exfil", 10);
@@ -555,7 +555,7 @@ function oil_puddles() {
   }
 }
 
-function ref_140e4() {
+function ref_140E4() {
   var_0 = getEnt("van_collision", "targetname");
   var_0 notsolid();
   var_1 = getEnt("van_blocker", "targetname");
@@ -628,7 +628,7 @@ function poke_the_player_after_faux_death() {
   var_8 rotateTo(var_9.angles, var_3, var_4, var_5);
 }
 
-function ref_131f3(var_0) {
+function ref_131F3(var_0) {
   wait 2;
   scripts\engine\utility::flag_clear("intel_collected");
   scripts\engine\utility::flag_clear("left_objective_radius");
@@ -637,48 +637,48 @@ function ref_131f3(var_0) {
   level.initusage = "";
   var_1 = "";
   var_2 = [];
-  level.ref_11f90 = undefined;
-  level.ref_11f88 = "";
-  level.ref_12bbf = "";
+  level.ref_11F90 = undefined;
+  level.ref_11F88 = "";
+  level.ref_12BBF = "";
   level.useeventamount = 0;
   var_3 = 0;
 
   switch (var_0) {
     case 0:
-      level.ref_11f90 = scripts\engine\utility::getStruct("objective_courtyard", "targetname");
+      level.ref_11F90 = scripts\engine\utility::getStruct("objective_courtyard", "targetname");
       level.initvehicles = "intel_captured_courtyard";
       var_1 = "icon_waypoint_dom_a";
       var_2 = scripts\engine\utility::getStructArray("intel_courtyard", "targetname");
-      level.ref_11f88 = &"CP_SO_ESTATE/SEARCH_CLOCKTOWER_BUILDING";
+      level.ref_11F88 = &"CP_SO_ESTATE/SEARCH_CLOCKTOWER_BUILDING";
       level.initusage = "dx_cps_kama_safehouse_intel_gathered_10";
       var_3 = 2;
       break;
     case 1:
-      level.ref_11f90 = scripts\engine\utility::getStruct("objective_trucks", "targetname");
+      level.ref_11F90 = scripts\engine\utility::getStruct("objective_trucks", "targetname");
       level.initvehicles = "intel_captured_trucks";
       var_1 = "icon_waypoint_dom_b";
       var_2 = scripts\engine\utility::getStructArray("intel_trucks", "targetname");
-      level.ref_11f88 = &"CP_SO_ESTATE/SEARCH_TRUCKS";
+      level.ref_11F88 = &"CP_SO_ESTATE/SEARCH_TRUCKS";
       level.initusage = "dx_cps_kama_safehouse_intel_gathered_20";
       var_3 = 3;
       break;
     case 2:
-      level.ref_11f90 = scripts\engine\utility::getStruct("objective_sidehouse", "targetname");
+      level.ref_11F90 = scripts\engine\utility::getStruct("objective_sidehouse", "targetname");
       level.initvehicles = "intel_captured_sidehouse";
       var_1 = "icon_waypoint_dom_c";
       var_2 = scripts\engine\utility::getStructArray("intel_sidehouse", "targetname");
-      level.ref_11f88 = &"CP_SO_ESTATE/SEARCH_POOL_AND_SERVICE";
+      level.ref_11F88 = &"CP_SO_ESTATE/SEARCH_POOL_AND_SERVICE";
       level.initusage = "dx_cps_kama_safehouse_intel_gathered_10";
-      level.ref_12bbf = &"CP_SO_ESTATE/SEARCH_POOL_AND_SERVICE";
+      level.ref_12BBF = &"CP_SO_ESTATE/SEARCH_POOL_AND_SERVICE";
       level.useeventamount = 1;
       var_3 = 4;
       break;
     case 3:
-      level.ref_11f90 = scripts\engine\utility::getStruct("objective_mainhouse", "targetname");
+      level.ref_11F90 = scripts\engine\utility::getStruct("objective_mainhouse", "targetname");
       level.initvehicles = "intel_captured_mainhouse";
       var_1 = "icon_waypoint_dom_d";
       var_2 = scripts\engine\utility::getStructArray("intel_mainhouse", "targetname");
-      level.ref_11f88 = &"CP_SO_ESTATE/SEARCH_MAIN_HOUSE";
+      level.ref_11F88 = &"CP_SO_ESTATE/SEARCH_MAIN_HOUSE";
       level.initusage = "dx_mpa_rutl_exfillosing_start_losingteam";
       var_3 = 5;
       break;
@@ -687,7 +687,7 @@ function ref_131f3(var_0) {
   var_4 = scripts\engine\utility::random(var_2);
   var_5 = scripts\cp\laser_traps\cp_laser_traps::trial_active_fob(var_4.origin, var_4.angles, &train_elements_disable);
   scripts\cp\cp_outline_utility::outlineenableforall(var_5, "outline_depth_white", "equipment");
-  objective_setdescription(level.initvo, level.ref_11f88);
+  objective_setdescription(level.initvo, level.ref_11F88);
   objective_setlabel(level.initvo, &"CP_SO_ESTATE/OBJ_FIND_INTEL");
   objective_setplayintro(level.initvo, 1);
   objective_setplayoutro(level.initvo, 0);
@@ -696,7 +696,7 @@ function ref_131f3(var_0) {
     objective_setlocation(level.initvo, 0, scripts\engine\utility::getStruct("objective_pool", "targetname").origin);
     objective_setlocation(level.initvo, 1, scripts\engine\utility::getStruct("objective_service", "targetname").origin);
   } else {
-    objective_position(level.initvo, level.ref_11f90.origin);
+    objective_position(level.initvo, level.ref_11F90.origin);
   }
 
   objective_icon(level.initvo, var_1);
@@ -771,7 +771,7 @@ function getcirclerangemin(var_0, var_1) {
       scripts\engine\utility::flag_set(level.initvehicles);
     }
 
-    if(distance2d(var_0.origin, level.ref_11f90.origin) > level.ref_11f90.radius) {
+    if(distance2d(var_0.origin, level.ref_11F90.origin) > level.ref_11F90.radius) {
       scripts\engine\utility::flag_set("left_objective_radius");
     }
 
@@ -824,7 +824,7 @@ function ref_13517(var_0, var_1) {
   thread scripts\cp\laser_traps\cp_laser_traps::get_end_ang(var_3, var_4, var_5, var_1);
 }
 
-function ref_135b4() {
+function ref_135B4() {
   var_0 = scripts\engine\utility::getStruct("player_vehicle_spawner", "targetname");
 
   while(!isDefined(var_0)) {
@@ -925,7 +925,7 @@ function ref_13513(var_0) {
           var_4 = scripts\cp\laser_traps\cp_laser_traps::player_limitedammo(scripts\engine\utility::getStruct(var_2[0], "targetname").origin, scripts\engine\utility::getStruct(var_2[0], "targetname").angles);
           break;
         case "molotov":
-          var_4 = scripts\cp\laser_traps\cp_laser_traps::ref_11cb8(scripts\engine\utility::getStruct(var_2[0], "targetname").origin, scripts\engine\utility::getStruct(var_2[0], "targetname").angles);
+          var_4 = scripts\cp\laser_traps\cp_laser_traps::ref_11CB8(scripts\engine\utility::getStruct(var_2[0], "targetname").origin, scripts\engine\utility::getStruct(var_2[0], "targetname").angles);
           break;
         case "claymore":
           var_4 = scripts\cp\laser_traps\cp_laser_traps::handle_leads_collected_hideiconbuilding(scripts\engine\utility::getStruct(var_2[0], "targetname").origin, scripts\engine\utility::getStruct(var_2[0], "targetname").angles);
@@ -954,17 +954,17 @@ function ref_13513(var_0) {
   }
 }
 
-function ref_135f7(var_0, var_1, var_2) {
+function ref_135F7(var_0, var_1, var_2) {
   var_3 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
   foreach(var_5 in var_3) {
     if(int(var_5.script_parameters) <= level.players.size) {
-      ref_135f5(var_5, var_1, var_2);
+      ref_135F5(var_5, var_1, var_2);
     }
   }
 }
 
-function ref_135f5(var_0, var_1, var_2) {
+function ref_135F5(var_0, var_1, var_2) {
   var_3 = scripts\cp\cp_weapon::buildweapon(var_1, var_2);
   var_4 = "weapon_" + var_1;
 
@@ -977,7 +977,7 @@ function ref_135f5(var_0, var_1, var_2) {
   var_8 scripts\anim\shared::setscriptammo(var_1, var_0);
 }
 
-function ref_1369f() {
+function ref_1369F() {
   wait 4;
   level.ref_13690 = [];
   var_0 = getEntArray("spawn_region", "script_noteworthy");
@@ -996,7 +996,7 @@ function ref_1369f() {
   scripts\engine\utility::flag_set("spawning_ready");
 }
 
-function ref_1321a(var_0, var_1, var_2) {
+function ref_1321A(var_0, var_1, var_2) {
   var_3 = scripts\engine\utility::getStructArray(var_0, "targetname");
   level.initteamdatafields = var_2;
   var_4 = [];
@@ -1022,7 +1022,7 @@ function ref_1321a(var_0, var_1, var_2) {
 
       if(var_12) {
         var_6 = var_4[0];
-        ref_131eb(var_6, var_10[1]);
+        ref_131EB(var_6, var_10[1]);
         var_4 = scripts\engine\utility::array_remove(var_4, var_6);
       }
     }
@@ -1126,7 +1126,7 @@ function player_sees_hvt_leaving_vo(var_0, var_1, var_2, var_3, var_4, var_5) {
         }
       }
     } else if(scripts\engine\utility::time_has_passed(var_8, var_6) && getaiarray("axis").size < var_12 && level.brclosealldoors <= 0) {
-      ref_13560(ref_12a02(var_2, var_3), var_4[var_13]);
+      ref_13560(ref_12A02(var_2, var_3), var_4[var_13]);
       var_8 = gettime();
       var_13++;
 
@@ -1211,8 +1211,8 @@ function ref_13560(var_0, var_1, var_2) {
               var_19 = scripts\engine\utility::random(var_8);
               var_8 = scripts\engine\utility::array_remove(var_8, var_19);
               var_19.count = 1;
-              ref_131eb(var_19, var_10[1]);
-              var_20 = var_19 scripts\cp\laser_traps\cp_laser_traps::ref_134f1(var_19.script_type, var_19.origin, var_19.angles, 1, 1);
+              ref_131EB(var_19, var_10[1]);
+              var_20 = var_19 scripts\cp\laser_traps\cp_laser_traps::ref_134F1(var_19.script_type, var_19.origin, var_19.angles, 1, 1);
 
               if(isDefined(var_2)) {
                 var_20 setgoalvolumeauto(getEnt(var_2, "targetname"));
@@ -1237,7 +1237,7 @@ function ref_13560(var_0, var_1, var_2) {
   }
 }
 
-function ref_134ed(var_0, var_1) {
+function ref_134ED(var_0, var_1) {
   level.ref_14071 = [];
   level.initteamdatafields = var_1;
 
@@ -1256,7 +1256,7 @@ function ref_134ed(var_0, var_1) {
         }
 
         if(var_6) {
-          ref_134ee(var_4, var_3, var_1);
+          ref_134EE(var_4, var_3, var_1);
           var_5 = 1;
         }
 
@@ -1266,7 +1266,7 @@ function ref_134ed(var_0, var_1) {
   }
 }
 
-function ref_134ee(var_0, var_1, var_2, var_3) {
+function ref_134EE(var_0, var_1, var_2, var_3) {
   var_4 = var_0.script_parameters;
   var_5 = getEnt(var_0.script_parameters, "targetname");
 
@@ -1292,8 +1292,8 @@ function ref_134ee(var_0, var_1, var_2, var_3) {
     }
   }
 
-  ref_131eb(var_0, var_1[1]);
-  var_16 = var_0 scripts\cp\laser_traps\cp_laser_traps::ref_134f1(var_0.script_type, var_0.origin, var_0.angles, 1, 1);
+  ref_131EB(var_0, var_1[1]);
+  var_16 = var_0 scripts\cp\laser_traps\cp_laser_traps::ref_134F1(var_0.script_type, var_0.origin, var_0.angles, 1, 1);
 
   if(var_0.script_type != "actor_enemy_cp_rus_juggernaut") {
     var_16 setgoalvolumeauto(var_5);
@@ -1327,7 +1327,7 @@ function ref_134ee(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1[4])) {
     switch (var_1[4][0]) {
       case "close":
-        thread ref_1434a(var_16);
+        thread ref_1434A(var_16);
         break;
       case "advance":
         thread ref_14349(var_16);
@@ -1365,7 +1365,7 @@ function ref_14345() {
     }
 
     if(var_4) {
-      ref_134ee(var_2, ["es_main_defend_mid_2", "juggernaut", 1], 3, 1);
+      ref_134EE(var_2, ["es_main_defend_mid_2", "juggernaut", 1], 3, 1);
       var_3 = 1;
     }
 
@@ -1373,7 +1373,7 @@ function ref_14345() {
   }
 }
 
-function ref_1434a(var_0) {
+function ref_1434A(var_0) {
   var_1 = getEnt(self.script_parameters, "targetname");
   var_2 = 1;
   var_3 = undefined;
@@ -1436,7 +1436,7 @@ function ref_14349(var_0) {
   self setgoalentity(var_2);
 }
 
-function ref_131eb(var_0, var_1) {
+function ref_131EB(var_0, var_1) {
   var_2 = 600;
 
   switch (var_1) {
@@ -1486,13 +1486,13 @@ function ref_14344() {
 
   if(!trial_turret_thread_func(var_1)) {
     var_2 = [[[2, "ar"]], [[3, "ar"]], [[4, "ar"]], [[4, "ar"]]];
-    ref_1321a("jeep_maingate_target", var_2, 1);
+    ref_1321A("jeep_maingate_target", var_2, 1);
     var_3 = scripts\common\utility::getvehiclespawner("jeep_maingate", "targetname");
     var_4 = var_3 scripts\common\utility::spawn_vehicle();
     thread scripts\common\vehicle_paths::gopath(var_4);
     thread ref_14354(var_4);
     var_5 = [[[2, "ar"]], [[2, "ar"]], [[3, "ar"]], [[4, "ar"]]];
-    ref_1321a("jeep_maingate2_target", var_5, 1);
+    ref_1321A("jeep_maingate2_target", var_5, 1);
     var_6 = scripts\common\utility::getvehiclespawner("jeep_maingate2", "targetname");
     var_7 = var_6 scripts\common\utility::spawn_vehicle();
     thread scripts\common\vehicle_paths::gopath(var_7);
@@ -1510,7 +1510,7 @@ function ref_14346(var_0) {
 
   if(!trial_turret_thread_func(var_1)) {
     var_2 = [[[2, "ar"]], [[3, "ar"]], [[4, "ar"]], [[4, "ar"]]];
-    ref_1321a("jeep_church_target", var_2, 1);
+    ref_1321A("jeep_church_target", var_2, 1);
     var_3 = scripts\common\utility::getvehiclespawner("jeep_church", "targetname");
     var_4 = var_3 scripts\common\utility::spawn_vehicle();
     thread scripts\common\vehicle_paths::gopath(var_4);
@@ -1521,7 +1521,7 @@ function ref_14346(var_0) {
 
   if(!trial_turret_thread_func(var_5)) {
     var_6 = [[[2, "ar"]], [[3, "ar"]], [[4, "ar"]], [[4, "ar"]]];
-    ref_1321a("jeep_sidegate_target", var_6, 1);
+    ref_1321A("jeep_sidegate_target", var_6, 1);
     var_7 = scripts\common\utility::getvehiclespawner("jeep_sidegate", "targetname");
     var_8 = var_7 scripts\common\utility::spawn_vehicle();
     thread scripts\common\vehicle_paths::gopath(var_8);
@@ -1530,7 +1530,7 @@ function ref_14346(var_0) {
   }
 }
 
-function ref_12a02(var_0, var_1) {
+function ref_12A02(var_0, var_1) {
   var_2 = [];
   var_3 = var_0;
   var_4 = var_1;
@@ -1724,7 +1724,7 @@ function ref_14347() {
   }
 }
 
-function ref_1431b() {
+function ref_1431B() {
   var_0 = getEnt("main_mid", "targetname");
   var_1 = getEnt("main_house_mid_center", "targetname");
   var_2 = getEnt("main_upper", "targetname");
@@ -1814,13 +1814,13 @@ function light_tank_gunnerdamagemodignorefunc() {
     var_0 = level.light_tank_removegunnerdamagemod[0];
     level.light_tank_removegunnerdamagemod = scripts\engine\utility::array_remove_index(level.light_tank_removegunnerdamagemod, 0);
 
-    if(!isDefined(level.ref_121a7)) {
-      level.ref_121a7 = spawn("script_origin", (0, 0, 0));
+    if(!isDefined(level.ref_121A7)) {
+      level.ref_121A7 = spawn("script_origin", (0, 0, 0));
     }
 
-    level.ref_121a7 stopsounds();
+    level.ref_121A7 stopsounds();
     var_1 = lookupsoundlength(var_0) * 0.001;
-    level.ref_121a7 playSound(var_0);
+    level.ref_121A7 playSound(var_0);
     wait var_1;
     level.waittill_wave_spawned_or_timeout = gettime();
     wait 1;
@@ -1833,7 +1833,7 @@ function bomber_death_watcher() {
   GscBinSkip4(0x35);
 }
 
-function ref_1333a() {
+function ref_1333A() {
   self.objindex = scripts\cp\cp_objectives::requestworldid("obj_" + self getentitynumber(), 5);
   objective_setplayintro(self.objindex, 0);
   objective_setplayoutro(self.objindex, 0);
@@ -1874,15 +1874,15 @@ function vehicle_mp_createlate() {
 
 function vehicle_mp_deletenextframelate() {
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143ad("damage", "flashbang");
+    var_0 = scripts\engine\utility::ref_143AD("damage", "flashbang");
 
     if(var_0 == "damage") {
-      if(!self.stuncooldown && ref_1459d()) {
+      if(!self.stuncooldown && ref_1459D()) {
         self.stuncooldown = 1;
         GscBinSkip4(0x35);
       }
 
-      if(!ref_11ca4()) {
+      if(!ref_11CA4()) {
         continue;
       }
     }
@@ -1897,7 +1897,7 @@ function vehicle_mp_deletenextframelate() {
   }
 }
 
-function ref_1459d() {
+function ref_1459D() {
   if(!isDefined(self.damageweapon)) {
     return false;
   }
@@ -1911,7 +1911,7 @@ function ref_1459d() {
   return false;
 }
 
-function ref_11ca4() {
+function ref_11CA4() {
   if(!isDefined(self.damagemod)) {
     return false;
   }
@@ -1938,11 +1938,11 @@ function ref_13523(var_0) {
   }
 }
 
-function ref_1249b(var_0, var_1, var_2) {
+function ref_1249B(var_0, var_1, var_2) {
   thread ref_12758("dx_mpa_rutl_sentry_gun_achieve");
 }
 
-function ref_1249a(var_0, var_1, var_2) {
+function ref_1249A(var_0, var_1, var_2) {
   thread ref_12758("dx_mpa_rutl_precision_airstrike_achieve");
 }
 

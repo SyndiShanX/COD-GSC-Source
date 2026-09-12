@@ -8,8 +8,8 @@ function van_init() {
   var_0.destroycallback = &van_explode;
   van_initoccupancy();
   van_initinteract();
-  ref_140e7();
-  ref_140e6();
+  ref_140E7();
+  ref_140E6();
   van_initfx();
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("van", "init")) {
@@ -62,8 +62,8 @@ function van_initinteract() {
   var_0.seatenterarrays["back_right_rear"] = ["back_right_rear"];
 }
 
-function ref_140e7() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("van", 1);
+function ref_140E7() {
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("van", 1);
   var_0.id = 13;
   var_0.seatids["driver"] = 0;
   var_0.seatids["front_right"] = 1;
@@ -73,11 +73,11 @@ function ref_140e7() {
   var_0.seatids["back_right_rear"] = 5;
 }
 
-function ref_140e6() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("van", 1350);
+function ref_140E6() {
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("van", 1350);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("van");
   var_0.class = "medium";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("van");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("van");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("van", 8);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("van", &van_deathcallback);
 }
@@ -102,7 +102,7 @@ function van_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "van", var_0);
   var_2.objweapon = getcompleteweaponname("van_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 

@@ -19,11 +19,11 @@ function main() {
   game["axis_outfit"] = "woodland";
   level.music_style = "middle_east";
   thread scripts\mp\animation_suite::animationsuite();
-  thread ref_12d9b();
-  scripts\cp_mp\utility\game_utility::ref_12b3b();
+  thread ref_12D9B();
+  scripts\cp_mp\utility\game_utility::ref_12B3B();
 }
 
-function ref_12d9b() {
+function ref_12D9B() {
   var_0 = getEnt("fanAnimatedPivot", "targetname");
   var_1 = getEnt("drillPivot", "script_noteworthy");
 

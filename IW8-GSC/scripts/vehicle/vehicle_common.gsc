@@ -12,7 +12,7 @@ function requestentervehicle(var_0, var_1, var_2, var_3) {
 }
 
 function waitforentervehicle() {
-  var_0 = scripts\engine\utility::ref_143af("entervehicle", "death", "long_death", "failedentervehicle");
+  var_0 = scripts\engine\utility::ref_143AF("entervehicle", "death", "long_death", "failedentervehicle");
 
   if(var_0 != "entervehicle") {
     return false;

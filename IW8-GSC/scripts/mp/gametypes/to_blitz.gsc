@@ -393,7 +393,7 @@ function rpgcrateenduse(var_0) {
   var_0 giveweapon("iw8_la_rpapa7_mp");
   var_0 givestartammo("iw8_la_rpapa7_mp");
   var_0 scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch("iw8_la_rpapa7_mp", 1);
-  var_0 scripts\mp\weapons::ref_1316b(getcompleteweaponname("iw8_la_rpapa7_mp"));
+  var_0 scripts\mp\weapons::ref_1316B(getcompleteweaponname("iw8_la_rpapa7_mp"));
 }
 
 function rpgcrateuseteamupdater(var_0) {
@@ -434,7 +434,7 @@ function watchiconupdater() {
   level endon("game_ended");
 
   for(;;) {
-    scripts\engine\utility::ref_143a6("bradley_driverUpdate", "death", "bradley_vehicleExit");
+    scripts\engine\utility::ref_143A6("bradley_driverUpdate", "death", "bradley_vehicleExit");
     var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getseatoccupant(self, "driver");
 
     if(isDefined(var_0) && isDefined(self.trackedobject.visibleteam)) {

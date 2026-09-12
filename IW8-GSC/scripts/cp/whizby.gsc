@@ -25,7 +25,7 @@ function fulton() {
 
 function fullweaponobj(var_0) {
   var_1 = spawnStruct();
-  var_1.ref_142f4 = "";
+  var_1.ref_142F4 = "";
   var_1.fail_on_transmission_timeout = 0;
 
   if(isDefined(var_0.infected_music)) {
@@ -36,7 +36,7 @@ function fullweaponobj(var_0) {
       case "decho":
       case "technical_ai_plr":
       case "pindia":
-        var_1.ref_142f4 = "ping_enemy_vehicle_light";
+        var_1.ref_142F4 = "ping_enemy_vehicle_light";
         var_1.fail_on_transmission_timeout = 1;
         return var_1;
       case "armoredtruck":
@@ -46,11 +46,11 @@ function fullweaponobj(var_0) {
       case "mkilo23_physics":
       case "veh8_mil_lnd_mkilo23_rus":
       case "veh8_mil_lnd_mkilo23":
-        var_1.ref_142f4 = "ping_enemy_vehicle_heavy";
+        var_1.ref_142F4 = "ping_enemy_vehicle_heavy";
         var_1.fail_on_transmission_timeout = 1;
         return var_1;
       case "attack_heli":
-        var_1.ref_142f4 = "ping_killstreaks_helo";
+        var_1.ref_142F4 = "ping_killstreaks_helo";
         var_1.fail_on_transmission_timeout = 1;
         return var_1;
       default:
@@ -75,7 +75,7 @@ function fullweaponobj(var_0) {
       case "pindia":
       case "techo_phys":
       case "hindia_physics_mp":
-        var_1.ref_142f4 = "ping_enemy_vehicle_light";
+        var_1.ref_142F4 = "ping_enemy_vehicle_light";
         var_1.fail_on_transmission_timeout = 1;
         return var_1;
       case "umike_physics_sp":
@@ -90,7 +90,7 @@ function fullweaponobj(var_0) {
       case "veh8_mil_lnd_mkilo23_rus":
       case "veh8_mil_lnd_mkilo23":
       case "truck":
-        var_1.ref_142f4 = "ping_enemy_vehicle_heavy";
+        var_1.ref_142F4 = "ping_enemy_vehicle_heavy";
         var_1.fail_on_transmission_timeout = 1;
         return var_1;
       case "mindia8_jugg":
@@ -108,7 +108,7 @@ function fullweaponobj(var_0) {
       case "lbravo":
       case "lbravo_ai_infil":
       case "attack_heli":
-        var_1.ref_142f4 = "ping_killstreaks_helo";
+        var_1.ref_142F4 = "ping_killstreaks_helo";
         var_1.fail_on_transmission_timeout = 1;
         return var_1;
       default:
@@ -119,7 +119,7 @@ function fullweaponobj(var_0) {
   }
 }
 
-function ref_131a7(var_0) {
+function ref_131A7(var_0) {
   var_1 = self;
   var_1.br_squadindex = var_0;
   var_2 = var_1.game_extrainfo & 65528;
@@ -152,7 +152,7 @@ function ref_13263(var_0) {
     }
 
     var_7 = var_1[0];
-    ref_131a7(var_0, var_7);
+    ref_131A7(var_0, var_7);
     return;
   }
 }

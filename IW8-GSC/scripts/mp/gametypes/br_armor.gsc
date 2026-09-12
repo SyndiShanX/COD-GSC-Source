@@ -4,7 +4,7 @@
 ***********************************************/
 
 function main() {
-  level.ref_1203e = &ref_1203e;
+  level.ref_1203E = &ref_1203E;
 }
 
 function getdefaultmaxarmorhealth() {
@@ -170,7 +170,7 @@ function popoffhelmet(var_0, var_1, var_2) {
   var_6 delete();
 }
 
-function ref_1203e(var_0, var_1) {
+function ref_1203E(var_0, var_1) {
   if(isDefined(var_0)) {
     thread popoffhelmet(var_0, var_1, var_0.angles);
     return;

@@ -39,9 +39,9 @@ function giveunifiedpoints(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_13 = var_9 && scripts\cp\utility::_hasperk("specialty_chain_killstreaks") && istrue(var_6);
 
   if(isDefined(var_5)) {
-    if(isDefined(self.ref_119d4) && self.ref_119d4.size > 0) {
-      if(istrue(self.ref_119d4[var_5 getentitynumber()])) {
-        self.ref_119d4[var_5 getentitynumber()] = undefined;
+    if(isDefined(self.ref_119D4) && self.ref_119D4.size > 0) {
+      if(istrue(self.ref_119D4[var_5 getentitynumber()])) {
+        self.ref_119D4[var_5 getentitynumber()] = undefined;
         return;
       }
     }
@@ -64,18 +64,18 @@ function screenent_a(var_0) {
   var_1 = scripts\cp\cp_persistence::quickdropremovearmorfrominventory();
   var_0 = scripts\cp\cp_gamescore::round_up_to_nearest(var_0, 5);
 
-  if(isDefined(self.ref_13bf3) && isDefined(self.ref_11b67)) {
-    if(self.ref_13bf3 > self.ref_11b67) {
+  if(isDefined(self.ref_13BF3) && isDefined(self.ref_11B67)) {
+    if(self.ref_13BF3 > self.ref_11B67) {
       var_0 = 0;
     } else {
-      self.ref_13bf3 += var_0;
+      self.ref_13BF3 += var_0;
     }
   }
 
   var_2 = scripts\cp\cp_persistence::get_player_max_currency();
   var_3 = var_1 + var_0;
   var_3 = min(var_3, var_2);
-  scripts\cp\cp_persistence::ref_130aa(var_3);
+  scripts\cp\cp_persistence::ref_130AA(var_3);
 }
 
 function modifyunifiedpoints(var_0, var_1, var_2) {
@@ -108,8 +108,8 @@ function displayscoreeventpoints(var_0, var_1) {
 
   if(scripts\cp\utility::turn_off_sniper_laser()) {
     return;
-  } else if(isDefined(self.totalxpearned) && isDefined(self.ref_11b7f)) {
-    if(self.totalxpearned >= self.ref_11b7f) {
+  } else if(isDefined(self.totalxpearned) && isDefined(self.ref_11B7F)) {
+    if(self.totalxpearned >= self.ref_11B7F) {
       return;
     }
   }

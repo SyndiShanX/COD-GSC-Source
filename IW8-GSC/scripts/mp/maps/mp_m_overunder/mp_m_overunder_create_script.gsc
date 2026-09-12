@@ -1431,7 +1431,7 @@ function createtriggers(var_0, var_1, var_2) {
   var_3.height = 50;
   var_3.origin = (244.75, 918.25, 16);
   var_3.radius = 250;
-  var_3.ref_12f4c = "trial_variant_fast";
+  var_3.ref_12F4C = "trial_variant_fast";
   var_3.script_noteworthy = "start";
   var_3.target = "alpha";
   var_3.targetname = "progression";

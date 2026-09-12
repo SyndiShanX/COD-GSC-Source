@@ -6,14 +6,14 @@
 function init() {
   var_0 = spawnStruct();
   var_0.weight = getdvarfloat("scr_br_pe_fafir_weight", 0);
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.attackerswaittime = &attackerswaittime;
   var_0.ref_14382 = &ref_14382;
   var_0.postinitfunc = &postinitfunc;
-  var_0.ref_11b78 = getdvarint("scr_br_pe_fafir_max_times", 0);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_fafir_max_times", 0);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("fafir", "02020200 0 0 0");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("fafir");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(18, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(18, var_0);
 }
 
 function test_bag_pickup() {
@@ -86,7 +86,7 @@ function postinitfunc() {
   thread circlewatcher();
 }
 
-function ref_140cf() {
+function ref_140CF() {
   return scripts\mp\utility\game::round_vehicle_logic() == "olaride";
 }
 
@@ -145,7 +145,7 @@ function volcanoexplode(var_0, var_1) {
     }
 
     if(checkpositionavailability(level.br_pe_fafir_data.locations[var_2])) {
-      thread ref_1368b(level, level.br_pe_fafir_data.locations[var_2]);
+      thread ref_1368B(level, level.br_pe_fafir_data.locations[var_2]);
       var_3 = level.br_pe_fafir_data.locations[var_2];
       continue;
     }
@@ -158,7 +158,7 @@ function volcanoexplode(var_0, var_1) {
 
   for(var_2 = 0; var_2 < var_1; var_2++) {
     waitframe();
-    thread ref_1368b(level, level.br_pe_fafir_data.oob_locations[var_2]);
+    thread ref_1368B(level, level.br_pe_fafir_data.oob_locations[var_2]);
   }
 
   LOC_0000011f:
@@ -168,12 +168,12 @@ function volcanoexplode(var_0, var_1) {
   scripts\engine\utility::exploder("lava_bomb_volcano_explosion");
 }
 
-function ref_1368b(var_0, var_1) {
+function ref_1368B(var_0, var_1) {
   var_2 = (8387, 15066, 8191);
   var_3 = spawn("script_model", var_2);
 
   if(var_1) {
-    var_4 = ref_11a9f(var_0, 1000, 12, 2);
+    var_4 = ref_11A9F(var_0, 1000, 12, 2);
     var_3.circleent = var_4;
     var_5 = scripts\common\utility::playersincylinder(var_0, 2000);
 
@@ -229,7 +229,7 @@ function projectileimpact(var_0, var_1, var_2) {
   self delete();
 }
 
-function ref_11a9f(var_0, var_1, var_2, var_3) {
+function ref_11A9F(var_0, var_1, var_2, var_3) {
   var_4 = getmaxobjectivecount(var_0[0], var_0[1], var_1);
   var_4 setmapcirclecolorindex(var_2);
   var_4 setmapcircleiconindex(21);
@@ -270,9 +270,9 @@ function rocksetupfumes(var_0) {
   var_1.origin = var_0;
   var_1.height = scripts\cp_mp\parachute::getc130height() * 2;
   var_1.initialwinningteam = 0;
-  var_1.ref_129e0 = int(level.br_pe_fafir_data.toxic_radiusmax);
-  var_1.ref_129e1 = int(level.br_pe_fafir_data.toxic_radiusmin);
-  var_1.ref_129df = var_1.ref_129e1;
+  var_1.ref_129E0 = int(level.br_pe_fafir_data.toxic_radiusmax);
+  var_1.ref_129E1 = int(level.br_pe_fafir_data.toxic_radiusmin);
+  var_1.ref_129DF = var_1.ref_129E1;
   var_1.circleent = self.circleent;
   var_1.rock = self;
   var_1.sfx_infil_hackney_heli2_rope = 0;
@@ -283,9 +283,9 @@ function rocksetupfumes(var_0) {
     var_3 = getdvarfloat("scr_fafir_outer_visionset_inner_radius_factor", 3);
     var_4 = getdvarfloat("scr_fafir_inner_visionset_outer_radius_factor", 0.5);
     var_5 = getdvarfloat("scr_fafir_inner_visionset_inner_radius_factor", 0.5);
-    function_0448(var_0, "lava_bomb_near_gas", var_1.ref_129e0 * var_2, var_1.ref_129e1 * var_3, level.br_pe_fafir_data.toxic_lifetime);
+    function_0448(var_0, "lava_bomb_near_gas", var_1.ref_129E0 * var_2, var_1.ref_129E1 * var_3, level.br_pe_fafir_data.toxic_lifetime);
     waitframe();
-    function_0448(var_0, "lava_bomb_in_gas", var_1.ref_129e0 * var_4, var_1.ref_129e0 * var_4 - 1, level.br_pe_fafir_data.toxic_lifetime);
+    function_0448(var_0, "lava_bomb_in_gas", var_1.ref_129E0 * var_4, var_1.ref_129E0 * var_4 - 1, level.br_pe_fafir_data.toxic_lifetime);
   }
 
   return var_1;
@@ -297,11 +297,11 @@ function begincountdown() {
   self.rock.circleent setmapcirclestyleindex(0);
   scripts\mp\gametypes\br_quest_util::init_tactical_boxes(12, 0, 1, self.origin);
   scripts\mp\gametypes\br_quest_util::ref_13369();
-  scripts\mp\gametypes\br_quest_util::ref_1316f(self.ref_129e0);
+  scripts\mp\gametypes\br_quest_util::ref_1316F(self.ref_129E0);
   var_0 = (0, 0, self.height / 2);
   var_1 = self.origin - var_0;
-  self.trigger = spawn("trigger_radius", var_1, 0, self.ref_129e0, self.height);
-  scripts\mp\utility\trigger::makeenterexittrigger(self.trigger, &ref_12027, &ref_12030, undefined, undefined, &ref_13da5);
+  self.trigger = spawn("trigger_radius", var_1, 0, self.ref_129E0, self.height);
+  scripts\mp\utility\trigger::makeenterexittrigger(self.trigger, &ref_12027, &ref_12030, undefined, undefined, &ref_13DA5);
   self.trigger.lavabomb = self;
   wait 5;
   thread spreadfumes();
@@ -322,14 +322,14 @@ function spreadfumes() {
     var_3 = (var_2 - self.onscavengerbagpickup) / 1000;
     var_1 = var_3 / level.br_pe_fafir_data.toxic_radiusspreadtime;
     var_1 = clamp(var_1, 0, 1);
-    self.ref_129df = self.ref_129e1 * (1 - var_1) + self.ref_129e0 * var_1;
+    self.ref_129DF = self.ref_129E1 * (1 - var_1) + self.ref_129E0 * var_1;
     self.angles = (0, var_1 * 179, 0);
     var_4 = 1;
     var_5 = self.height;
     var_6 = 0.4;
     var_7 = var_1 * self.height * var_6;
     self.initialwinningteam = clamp(var_7, var_4, var_5);
-    self.circleent.origin = (self.circleent.origin[0], self.circleent.origin[1], self.ref_129df);
+    self.circleent.origin = (self.circleent.origin[0], self.circleent.origin[1], self.ref_129DF);
     waitframe();
   }
 }
@@ -416,15 +416,15 @@ function deregisterallclientvfx(var_0) {
   var_2 = 4;
   var_3 = 0;
 
-  if(!isDefined(self.ref_124ff)) {
+  if(!isDefined(self.ref_124FF)) {
     return;
   }
 
-  if(!isDefined(self.ref_124ff[var_1])) {
+  if(!isDefined(self.ref_124FF[var_1])) {
     return;
   }
 
-  foreach(var_5 in self.ref_124ff[var_1]) {
+  foreach(var_5 in self.ref_124FF[var_1]) {
     var_6 = var_5[0];
     var_7 = var_5[1];
     var_8 = var_5[2];
@@ -447,8 +447,8 @@ function deregisterallclientvfx(var_0) {
 function track_target_group_complete() {
   level endon("game_ended");
   self endon("fumes_dissipate");
-  self.ref_142a3 = [];
-  self.ref_142a4 = [];
+  self.ref_142A3 = [];
+  self.ref_142A4 = [];
   waitframe();
   self.track_get_teleport_velocity = gettime();
   self.track_get_teleport_target = self.track_get_teleport_velocity + level.br_pe_fafir_data.toxic_lifetime * 1000;
@@ -459,22 +459,22 @@ function track_target_group_complete() {
     var_1 = (var_0 - self.track_get_teleport_velocity) / 1000;
     var_2 = var_1 / level.br_pe_fafir_data.toxic_radiusspreadtime;
     var_2 = clamp(var_2, 0, 1);
-    self.ref_129df = self.ref_129e1 * (1 - var_2) + self.ref_129e0 * var_2;
+    self.ref_129DF = self.ref_129E1 * (1 - var_2) + self.ref_129E0 * var_2;
     waitframe();
   }
 }
 
 function track_timer_think() {
   var_0 = spawnStruct();
-  var_1 = self.ref_129e0;
-  var_0.ref_11a58 = self.origin + (var_1 * -1, var_1 * -1, 0);
-  var_0.ref_11a59 = self.origin + (var_1, var_1 * -1, 0);
+  var_1 = self.ref_129E0;
+  var_0.ref_11A58 = self.origin + (var_1 * -1, var_1 * -1, 0);
+  var_0.ref_11A59 = self.origin + (var_1, var_1 * -1, 0);
   var_0.ref_14039 = self.origin + (var_1 * -1, var_1, 0);
-  var_0.ref_1403a = self.origin + (var_1, var_1, 0);
+  var_0.ref_1403A = self.origin + (var_1, var_1, 0);
   var_2 = level.br_pe_fafir_data.toxic_vfx_grid_division_count;
-  var_3 = self.ref_129e0 * 2;
+  var_3 = self.ref_129E0 * 2;
   var_4 = var_3 / var_2;
-  var_5 = (self.origin[0] - self.ref_129e0, self.origin[1] - self.ref_129e0, 0);
+  var_5 = (self.origin[0] - self.ref_129E0, self.origin[1] - self.ref_129E0, 0);
   trackcarpunches(self.origin);
 
   for(var_6 = 0; var_6 < var_2; var_6++) {
@@ -485,7 +485,7 @@ function track_timer_think() {
       var_11 = (0, var_10, 0);
       var_12 = var_5 + var_9 + var_11;
 
-      if(distance2d(var_12, self.origin) < self.ref_129e0) {
+      if(distance2d(var_12, self.origin) < self.ref_129E0) {
         trackcarpunches(var_12);
       }
     }
@@ -496,21 +496,21 @@ function track_timer_think() {
 
 function trackcarpunches(var_0) {
   var_1 = spawnStruct();
-  var_1.index = self.ref_142a3.size;
+  var_1.index = self.ref_142A3.size;
   var_1.origin = var_0;
   var_1.angles = (0, 0, 0);
   var_1.state = "valid";
   var_1.parent = undefined;
   var_1.ref_14293 = undefined;
   var_2 = distance(var_1.origin, self.origin);
-  var_1.loot_getitemcountlefthand = self.ref_129e0 - var_2;
-  self.ref_142a3[self.ref_142a3.size] = var_1;
+  var_1.loot_getitemcountlefthand = self.ref_129E0 - var_2;
+  self.ref_142A3[self.ref_142A3.size] = var_1;
 }
 
 function track_last_good_position() {
-  trackcashevent(self.ref_142a3[0]);
+  trackcashevent(self.ref_142A3[0]);
 
-  foreach(var_1 in self.ref_142a3) {
+  foreach(var_1 in self.ref_142A3) {
     if(var_1.state != "valid") {
       continue;
     }
@@ -550,10 +550,10 @@ function trackcashevent(var_0) {
     var_0.ref_14293 unmarkkeyframedmover(1);
   }
 
-  self.ref_142a4[self.ref_142a4.size] = var_0;
+  self.ref_142A4[self.ref_142A4.size] = var_0;
   var_9 = risk_flagspawncount();
 
-  foreach(var_11 in self.ref_142a3) {
+  foreach(var_11 in self.ref_142A3) {
     if(var_11.state != "valid") {
       continue;
     }
@@ -575,7 +575,7 @@ function track_is_operational(var_0) {
   var_0 endon("fumes_dissipate");
 
   for(;;) {
-    if(scripts\engine\utility::updatescrapassistdata(self.origin, var_0.origin, var_0.ref_129df + 1500)) {
+    if(scripts\engine\utility::updatescrapassistdata(self.origin, var_0.origin, var_0.ref_129DF + 1500)) {
       if(isDefined(self.ref_14293)) {
         triggerfx(self.ref_14293);
       }
@@ -588,14 +588,14 @@ function track_is_operational(var_0) {
 }
 
 function track_settings() {
-  foreach(var_1 in self.ref_142a4) {
+  foreach(var_1 in self.ref_142A4) {
     if(isDefined(var_1.ref_14293)) {
       var_1.ref_14293 delete();
     }
   }
 
-  self.ref_142a3 = [];
-  self.ref_142a4 = [];
+  self.ref_142A3 = [];
+  self.ref_142A4 = [];
   self notify("fumes_dissipate");
 }
 
@@ -653,7 +653,7 @@ function damagetickwatcher(var_0) {
         scripts\cp_mp\gasmask::processdamage(var_2);
       } else {
         if(scripts\mp\utility\killstreak::isjuggernaut()) {
-          var_2 = scripts\mp\gametypes\br_jugg_common::ref_11c95(var_2);
+          var_2 = scripts\mp\gametypes\br_jugg_common::ref_11C95(var_2);
         }
 
         var_3 = self;
@@ -665,7 +665,7 @@ function damagetickwatcher(var_0) {
         }
 
         if(isPlayer(self)) {
-          scripts\mp\gametypes\br_circle::ref_13e18();
+          scripts\mp\gametypes\br_circle::ref_13E18();
         }
       }
     } else {
@@ -709,7 +709,7 @@ function candamageplayer() {
     return false;
   }
 
-  if(scripts\mp\gametypes\br_public::ref_125f3() && scripts\mp\gametypes\br_public::ref_125ec()) {
+  if(scripts\mp\gametypes\br_public::ref_125F3() && scripts\mp\gametypes\br_public::ref_125EC()) {
     return false;
   }
 
@@ -754,11 +754,11 @@ function playerisingasvfxzheightcheck() {
 function updatelocationbesttimehud(var_0) {
   var_1 = playerisingasvfxzheightcheck();
 
-  if(distance(self.origin, var_0.origin) < var_0.ref_129df && var_1) {
+  if(distance(self.origin, var_0.origin) < var_0.ref_129DF && var_1) {
     return true;
   }
 
-  var_2 = distance2d(self.origin, var_0.origin) <= var_0.ref_129df;
+  var_2 = distance2d(self.origin, var_0.origin) <= var_0.ref_129DF;
   var_3 = var_0.initialwinningteam / 2;
   var_4 = abs(var_0.origin[2] - self.origin[2]) <= var_0.initialwinningteam / 2;
 
@@ -789,7 +789,7 @@ function isplayeroutsidealldamagezones() {
   return level.br_pe_fafir_data.instances.size == var_0 || level.br_pe_fafir_data.instances.size == 0;
 }
 
-function ref_13da5(var_0, var_1) {
+function ref_13DA5(var_0, var_1) {
   if(isPlayer(var_0) || isbot(var_0) || isagent(var_0)) {
     return false;
   }

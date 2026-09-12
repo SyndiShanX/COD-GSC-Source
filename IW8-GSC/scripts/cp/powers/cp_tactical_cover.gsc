@@ -50,7 +50,7 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
   var_4 = physics_createcontents(["physicscontents_player", "physicscontents_solid", "physicscontents_playerclip", "physicscontents_water", "physicscontents_sky", "physicscontents_vehicle"]);
   var_5 = anglesToForward(self.angles);
   var_6 = self.origin + var_5 * 32;
-  var_7 = _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12f67(var_6, 140, 20);
+  var_7 = _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12F67(var_6, 140, 20);
   var_8 = undefined;
   var_9 = 0;
 
@@ -71,7 +71,7 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
     var_16 = undefined;
 
     foreach(var_18 in var_7) {
-      if(var_8 _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12f68(var_18)) {
+      if(var_8 _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12F68(var_18)) {
         var_16 = var_18;
         break;
       }
@@ -87,7 +87,7 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
     if(var_9 < 1600 && var_15 && var_20) {
       var_8.tutonplayerkilled = 1;
       self.taccoverrefund = undefined;
-      thread ref_139f6(var_8, var_16, var_3, var_4);
+      thread ref_139F6(var_8, var_16, var_3, var_4);
 
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("challenges", "onFieldUpgradeEnd")) {
         self[[scripts\cp_mp\utility\script_utility::getsharedfunc("challenges", "onFieldUpgradeEnd")]]("super_tac_cover", 1);
@@ -166,7 +166,7 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
 
   var_35 = var_28[0]["entity"];
 
-  if(isDefined(var_35) && !ref_139f0(var_35)) {
+  if(isDefined(var_35) && !ref_139F0(var_35)) {
     tac_cover_fire_failed();
     return false;
   }
@@ -211,7 +211,7 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
 
     var_35 = var_28[0]["entity"];
 
-    if(isDefined(var_35) && !ref_139f0(var_35)) {
+    if(isDefined(var_35) && !ref_139F0(var_35)) {
       tac_cover_fire_failed();
       return false;
     }
@@ -304,7 +304,7 @@ function tac_cover_fire_failed(var_0) {
   }
 }
 
-function ref_139f3() {
+function ref_139F3() {
   if(self hasweapon("tac_cover_mp")) {
     self takeweapon("tac_cover_mp");
   }
@@ -321,7 +321,7 @@ function tac_cover_entmanagerdelete() {
   thread tac_cover_delete(0);
 }
 
-function ref_139f6(var_0, var_1, var_2, var_3) {
+function ref_139F6(var_0, var_1, var_2, var_3) {
   self endon("death_or_disconnect");
   self endon("tac_cover_taken");
   level endon("game_ended");
@@ -469,7 +469,7 @@ function tac_cover_destroy(var_0, var_1) {
     var_3 = self.damagetaken;
   }
 
-  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
   thread tac_cover_destroy_internal(var_2);
   thread tac_cover_delete(var_2);
 }
@@ -581,7 +581,7 @@ function tac_cover_handle_damage(var_0) {
 
   if(var_3 == "MOD_CRUSH" && isDefined(var_0.inflictor) && var_0.inflictor.classname == "script_vehicle") {
     if(isDefined(var_1) && !scripts\cp\cp_damage::friendlyfirecheck(self.owner, var_1)) {
-      if(isDefined(var_0.inflictor.vehiclename) && ref_139ef(var_0.inflictor.vehiclename)) {
+      if(isDefined(var_0.inflictor.vehiclename) && ref_139EF(var_0.inflictor.vehiclename)) {
         return var_4;
       } else {
         return 0;
@@ -619,7 +619,7 @@ function tac_cover_handle_fatal_damage(var_0) {
   thread tac_cover_destroy(undefined, 1);
 }
 
-function ref_139ef(var_0) {
+function ref_139EF(var_0) {
   switch (var_0) {
     case "light_tank":
     case "apc_russian":
@@ -675,7 +675,7 @@ function tac_cover_ignore_list(var_0) {
   return var_1;
 }
 
-function ref_139f0(var_0) {
+function ref_139F0(var_0) {
   if(isPlayer(var_0)) {
     return false;
   }
@@ -720,7 +720,7 @@ function tac_cover_on_take_super() {
 function tac_cover_destroy_on_disowned(var_0) {
   self endon("death");
   var_0 endon("tac_cover_taken");
-  var_0 scripts\engine\utility::ref_143a5("joined_team", "disconnect");
+  var_0 scripts\engine\utility::ref_143A5("joined_team", "disconnect");
   thread tac_cover_destroy(undefined, 0);
 }
 

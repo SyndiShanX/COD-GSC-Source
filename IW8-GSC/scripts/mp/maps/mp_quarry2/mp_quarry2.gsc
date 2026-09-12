@@ -26,7 +26,7 @@ function main() {
     }
 
     scripts\mp\gametypes\arm::arm_initoutofbounds();
-    thread ref_12e15();
+    thread ref_12E15();
     thread ref_12960();
   }
 
@@ -48,7 +48,7 @@ function main() {
   level.mapboundrycorners[1] = (-8500, -500, 0);
   thread player_fired_gun_monitor();
   thread runmisteffects();
-  thread ref_12f8e();
+  thread ref_12F8E();
 }
 
 function player_fired_gun_monitor() {
@@ -109,7 +109,7 @@ function runmisteffects() {
   GscBinSkip0(0x2e, 0, (48357, 15493, 5));
 }
 
-function ref_12e15() {
+function ref_12E15() {
   level.weaponstocycle = [];
   level.setallclientomnvarot[0] = (9932, 40850, 2000);
   level.setallclientomnvarot[1] = (11813, 24170, 1400);
@@ -119,12 +119,12 @@ function ref_12e15() {
   level.setallclientomnvarot[5] = (17533, 29553, 1600);
   level.setallclientomnvarot[6] = (5654, -1600, 456);
   wait 8;
-  thread ref_12e14();
-  thread ref_12e13();
-  thread ref_12e12();
+  thread ref_12E14();
+  thread ref_12E13();
+  thread ref_12E12();
 }
 
-function ref_12e11() {
+function ref_12E11() {
   level.weapons_that_can_stun = [];
   level.weapons_that_can_stun[0] = (19730, 30320, 1541);
   level.weapons_that_can_stun[1] = (17414, 38445, 1100);
@@ -150,21 +150,21 @@ function ref_12e11() {
   }
 }
 
-function ref_12e14() {
+function ref_12E14() {
   var_0 = [];
   GscBinSkip0(0x2e, 0, (5430, 25860, 100));
 }
 
-function ref_12e10() {
+function ref_12E10() {
   playFX(scripts\engine\utility::getfx("vfx_gw_flak_explosions"), (16019, 27466, 1000));
 }
 
-function ref_12e12() {
+function ref_12E12() {
   playFX(scripts\engine\utility::getfx("vfx_gw_ambient_planes"), (-6683, 31192, 2772), (2, 10, 0));
   playFX(scripts\engine\utility::getfx("vfx_gw_ambient_planes"), (37881, 63083, 3712), (7, 251, 0));
 }
 
-function ref_12e13() {
+function ref_12E13() {
   foreach(var_1 in level.setallclientomnvarot) {
     playFX(scripts\engine\utility::getfx("vfx_gw_smoke_plume_bg_01"), var_1, (0, 100, 0));
   }
@@ -176,7 +176,7 @@ function ref_12960() {
   var_0 settransientsoundbank("donetsk_quarry2.all", 1);
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   level.modifiedspawnpoints["23354 30711"]["mp_tdm_spawn"]["remove"] = 1;
   var_0 = [];
 

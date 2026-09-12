@@ -295,11 +295,11 @@ function onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = var_0.team;
 
   if(var_0.isplanting) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "planting");
+    thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_2, "planting");
     var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
     var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
   } else if(var_0.isdefusing) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "defusing");
+    thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_2, "defusing");
     var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
     var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
   }
@@ -394,7 +394,7 @@ function bombs() {
   initspawns();
 
   if(!scripts\mp\flags::gameflag("prematch_done")) {
-    level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+    level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   }
 
   foreach(var_3 in level.objectives) {

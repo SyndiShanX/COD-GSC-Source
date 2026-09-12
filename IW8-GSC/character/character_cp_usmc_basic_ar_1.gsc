@@ -10,7 +10,7 @@ function bindactionscripts() {
 
   var_0 = spawnStruct();
   var_0.actionfn = [];
-  var_0.actionfn[0] = &scripts\mp\trials\mp_euphrates_create_script::ref_12d49;
+  var_0.actionfn[0] = &scripts\mp\trials\mp_euphrates_create_script::ref_12D49;
   var_0.actionfn[1] = &scripts\aitypes\combat::updateeveryframe_global;
   var_0.actionfn[2] = &scripts\aitypes\juggernaut\behaviors::juggernaut_lookforplayers;
   var_0.actionfn[3] = &scripts\aitypes\combat::badplaceavoid;
@@ -39,7 +39,7 @@ function bindactionscripts() {
   var_0.actionfn[26] = &scripts\aitypes\melee_sp::initmeleefunctions;
   var_0.actionfn[27] = &scripts\aitypes\combat_mp::initcombatfunctions_mp;
   var_0.actionfn[28] = &scripts\aitypes\juggernaut\behaviors::juggernaut_init;
-  var_0.actionfn[29] = &scripts\mp\trials\mp_euphrates_create_script::ref_12d4b;
+  var_0.actionfn[29] = &scripts\mp\trials\mp_euphrates_create_script::ref_12D4B;
   level._btactions["riotshield_cp"] = var_0;
 }
 

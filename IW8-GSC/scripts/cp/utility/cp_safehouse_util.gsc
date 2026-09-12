@@ -5,7 +5,7 @@
 
 function tr_vis_facing_dist_add_override(var_0) {}
 
-function ref_1403e(var_0) {
+function ref_1403E(var_0) {
   self endon("death_or_disconnect");
   self endon("faux_spawn");
   self endon("end_launcher");
@@ -33,15 +33,15 @@ function start_chopper_boss(var_0, var_1, var_2) {
 }
 
 function setup_tut_zones(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  var_10 = ref_1331f(var_4, var_9, var_0, var_1, var_3, var_6);
+  var_10 = ref_1331F(var_4, var_9, var_0, var_1, var_3, var_6);
 
   if(var_10) {
-    var_7 = ref_12ac9(var_3, var_6, var_7, 0);
+    var_7 = ref_12AC9(var_3, var_6, var_7, 0);
   }
 
-  var_11 = ref_1368b(var_7, var_6, var_9, var_5, var_10, var_3);
+  var_11 = ref_1368B(var_7, var_6, var_9, var_5, var_10, var_3);
 
-  if(ref_132f1(var_0)) {
+  if(ref_132F1(var_0)) {
     var_11 delete();
     return;
   } else if(ref_13309(var_0, var_10)) {
@@ -55,21 +55,21 @@ function setup_tut_zones(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
 }
 
 function start_bomb_vest_defusal(var_0, var_1, var_2, var_3) {
-  thread ref_128cc(var_0, var_1, var_2, var_3);
+  thread ref_128CC(var_0, var_1, var_2, var_3);
 }
 
 function start_bomb_vest_global_timer(var_0, var_1, var_2, var_3) {}
 
-function ref_128cc(var_0, var_1, var_2, var_3) {
+function ref_128CC(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   var_0 endon("entitydeleted");
-  var_0 scripts\engine\utility::ref_143bf(0, "explode");
+  var_0 scripts\engine\utility::ref_143BF(0, "explode");
   playFX(level._effect["aalpha12_explo"], var_2, var_3);
   var_4 = getcompleteweaponname("semtex_aalpha12_mp");
   var_5 = getcompleteweaponname("semtex_aalpha12_splash_mp");
-  var_4.ref_121d9 = var_0.weapon;
-  var_5.ref_121d9 = var_0.weapon;
-  var_4.ref_136fa = var_5;
+  var_4.ref_121D9 = var_0.weapon;
+  var_5.ref_121D9 = var_0.weapon;
+  var_4.ref_136FA = var_5;
   glassradiusdamage(var_0.origin, 130, 50, 1);
 
   if(isDefined(var_0.stuckenemyentity) && isalive(var_0.stuckenemyentity)) {
@@ -81,14 +81,14 @@ function ref_128cc(var_0, var_1, var_2, var_3) {
   getplaylistname(var_0.origin, 11, 25, 12, 25, 35, 14, self, "MOD_EXPLOSIVE", var_5);
   wait 0.4;
 
-  if(!ref_140d4(var_0)) {
+  if(!ref_140D4(var_0)) {
     return;
   }
 
   var_0 delete();
 }
 
-function ref_1368b(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_1368B(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = magicgrenademanual("semtex_aalpha12_mp", var_0, (0, 0, 0), 0);
   var_6.angles = vectortoangles(var_5);
   var_6.unset_relic_hideobjicons = 1;
@@ -118,7 +118,7 @@ function register_player_character(var_0) {
   }
 }
 
-function ref_1331f(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_1331F(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_0)) {
     var_0 = "";
   }
@@ -130,11 +130,11 @@ function ref_1331f(var_0, var_1, var_2, var_3, var_4, var_5) {
   return false;
 }
 
-function ref_12ac9(var_0, var_1, var_2, var_3) {
+function ref_12AC9(var_0, var_1, var_2, var_3) {
   return var_2 + var_0 * 25;
 }
 
-function ref_132f1(var_0) {
+function ref_132F1(var_0) {
   if(!isDefined(var_0)) {
     return false;
   }
@@ -183,30 +183,30 @@ function linktoent(var_0, var_1, var_2) {
 
   if(get_center_loc_among_target_players(var_1)) {
     var_0.stuckenemyentity = var_1;
-    thread ref_12c28(var_0);
+    thread ref_12C28(var_0);
   }
 
   if(!istrue(var_0.unset_relic_hideobjicons)) {
     var_0 notsolid();
   }
 
-  thread ref_128d0(var_0);
-  thread ref_128ca(var_0, var_1);
-  thread ref_128ca(var_0, var_1);
-  thread ref_128ca(var_0, var_1);
+  thread ref_128D0(var_0);
+  thread ref_128CA(var_0, var_1);
+  thread ref_128CA(var_0, var_1);
+  thread ref_128CA(var_0, var_1);
 }
 
-function ref_140d4() {
+function ref_140D4() {
   if(isDefined(self) && istrue(self.turn_on_light_when_elevator_close_by)) {
     return 1;
   }
 }
 
-function ref_12c28(var_0) {
+function ref_12C28(var_0) {
   self endon("entitydeleted");
-  var_0 scripts\engine\utility::ref_143a6("entitydeleted", "death", "disconnect");
+  var_0 scripts\engine\utility::ref_143A6("entitydeleted", "death", "disconnect");
 
-  if(!ref_140d4()) {
+  if(!ref_140D4()) {
     return;
   }
 
@@ -218,23 +218,23 @@ function ref_12c28(var_0) {
   }
 }
 
-function ref_128d0(var_0) {
+function ref_128D0(var_0) {
   self endon("entitydeleted");
 
   if(isagent(var_0)) {
     var_0 waittill("entitydeleted");
   } else {
-    var_0 scripts\engine\utility::ref_143a5("entitydeleted", "disconnect");
+    var_0 scripts\engine\utility::ref_143A5("entitydeleted", "disconnect");
   }
 
-  if(!ref_140d4()) {
+  if(!ref_140D4()) {
     return;
   }
 
-  ref_128cf();
+  ref_128CF();
 }
 
-function ref_128cf(var_0) {
+function ref_128CF(var_0) {
   if(!isDefined(var_0)) {
     var_0 = (0, 0, 100);
   }
@@ -250,18 +250,18 @@ function ref_128cf(var_0) {
   }
 }
 
-function ref_128ca(var_0, var_1) {
+function ref_128CA(var_0, var_1) {
   self endon("entitydeleted");
   var_0 waittill(var_1);
 
-  if(!ref_140d4()) {
+  if(!ref_140D4()) {
     return;
   }
 
   self delete();
 }
 
-function ref_128cb() {
+function ref_128CB() {
   self waittill("entitydeleted");
 
   if(isDefined(self.grenade)) {

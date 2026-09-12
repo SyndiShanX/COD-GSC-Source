@@ -43,7 +43,7 @@ function init_spawn_vars_and_pointers() {
   level.module_group_id = 0;
   level.spawnloopupdatefunc = &update_spawn_data_on_death;
   level.enemy_monitor_func = &enemy_monitor;
-  level.ref_11ca7 = [];
+  level.ref_11CA7 = [];
   level.nearbyposarray = [];
   level.ambientgroups = [];
   level.current_uid = 0;
@@ -97,7 +97,7 @@ function init_spawn_vars_and_pointers() {
   level.show_active_modules = 0;
   level.stack_patch_waittill_leaf = [];
   level.ref_13648 = [];
-  level.ref_133bd = 0;
+  level.ref_133BD = 0;
   level.wasexecuted = [];
   scripts\cp\cp_skits::setup_spawn_skits();
   scripts\cp\cp_vehicles::vehicle_ai_spawn_funcs();
@@ -210,7 +210,7 @@ function jugg_music() {
   var_0 linkTo(self);
   wait 0.1;
   var_0 setModel("juggernaut_scriptable");
-  scripts\engine\utility::ref_143a6("juggernaut_end", "disconnect", "death");
+  scripts\engine\utility::ref_143A6("juggernaut_end", "disconnect", "death");
   var_0 delete();
 }
 
@@ -267,7 +267,7 @@ function register_aitype_setup(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6.combat_func = var_2;
   var_6.spawn_func = var_3;
   var_6.info_func = var_4;
-  var_6.ref_135f3 = var_5;
+  var_6.ref_135F3 = var_5;
   level.wasexecuted[var_0] = -99999;
   level.aitypes[var_0] = var_6;
 }
@@ -443,7 +443,7 @@ function register_triggered_timeout_module(var_0) {
 }
 
 function watch_for_players(var_0, var_1, var_2, var_3, var_4) {
-  if(scripts\cp\coop_stealth::ref_132d7()) {
+  if(scripts\cp\coop_stealth::ref_132D7()) {
     return;
   }
 
@@ -658,7 +658,7 @@ function debug_kill_soldier(var_0) {
     set_goal_pos(var_0, var_1.origin);
   }
 
-  var_0 scripts\engine\utility::ref_143a5("goal_reached", "goal");
+  var_0 scripts\engine\utility::ref_143A5("goal_reached", "goal");
   wait 2;
   var_0 dodamage(var_0.health + 1000, var_0.origin, var_0, var_0, "MOD_SUICIDE");
 }
@@ -677,16 +677,16 @@ function spawn_soldier_scripted(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(istrue(var_1.ref_133be)) {
+  if(istrue(var_1.ref_133BE)) {
     return 1;
   }
 
   return spawn_soldier_scripted_internal(var_1, var_4, 0, undefined, var_3, var_4);
 }
 
-function ref_13bac(var_0, var_1) {
+function ref_13BAC(var_0, var_1) {
   var_1 = define_var_if_undefined(var_1, 1);
-  var_0.ref_133be = var_1;
+  var_0.ref_133BE = var_1;
 }
 
 function spawn_soldier_scripted_internal(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -750,7 +750,7 @@ function run_ai_post_spawn_init(var_0, var_1, var_2, var_3, var_4, var_5, var_6)
   }
 
   copy_to_soldier_from_spawn_point(var_2, var_1);
-  ref_12ddc(var_1, undefined, var_2, var_3, var_0);
+  ref_12DDC(var_1, undefined, var_2, var_3, var_0);
   set_default_spawner_values(var_2);
   var_1 scripts\cp\cp_squadmanager::addtosquad();
   run_spawner_post_spawn_actions(var_2, var_0);
@@ -833,14 +833,14 @@ function run_aitype_spawn_func() {
     self thread[[level.aitypes[self.aitype].spawn_func]]();
   }
 
-  if(ref_132c7()) {
+  if(ref_132C7()) {
     thread loschecktime(self.aitype);
     return;
   }
 }
 
-function ref_132c7() {
-  var_0 = istrue(self.pacifist) || istrue(self.ignoreme) || istrue(self.ignoreall) || isDefined(level.global_stealth_broken) && !istrue(level.global_stealth_broken) || istrue(level.announcer_vo_playing) || istrue(level.ref_135f4) || istrue(level.validatealivecount) || istrue(level.ref_139b5);
+function ref_132C7() {
+  var_0 = istrue(self.pacifist) || istrue(self.ignoreme) || istrue(self.ignoreall) || isDefined(level.global_stealth_broken) && !istrue(level.global_stealth_broken) || istrue(level.announcer_vo_playing) || istrue(level.ref_135F4) || istrue(level.validatealivecount) || istrue(level.ref_139B5);
   return !var_0;
 }
 
@@ -853,9 +853,9 @@ function loschecktime(var_0) {
     return;
   }
 
-  if(isDefined(level.aitypes[var_0]) && isDefined(level.aitypes[var_0].ref_135f3)) {
-    var_1 = level.aitypes[var_0].ref_135f3;
-    level.ref_135f4 = 1;
+  if(isDefined(level.aitypes[var_0]) && isDefined(level.aitypes[var_0].ref_135F3)) {
+    var_1 = level.aitypes[var_0].ref_135F3;
+    level.ref_135F4 = 1;
 
     if(isarray(var_1)) {
       var_2 = scripts\engine\utility::random(var_1);
@@ -865,13 +865,13 @@ function loschecktime(var_0) {
     }
 
     level.wasexecuted[var_0] = gettime();
-    level.ref_135f4 = 0;
+    level.ref_135F4 = 0;
     return;
   }
 }
 
 function set_demeanor_from_unittype(var_0) {
-  var_0 = ref_140c4(var_0);
+  var_0 = ref_140C4(var_0);
 
   if(is_specified_unittype("civilian")) {
     scripts\asm\asm_bb::bb_setcivilianstate(var_0);
@@ -884,7 +884,7 @@ function set_demeanor_from_unittype(var_0) {
   }
 }
 
-function ref_140c4(var_0) {
+function ref_140C4(var_0) {
   switch (var_0) {
     case "casual_gun":
     case "casual":
@@ -900,7 +900,7 @@ function give_soldier_armor() {
   self.wearing_armor = 1;
 }
 
-function ref_12bf1() {
+function ref_12BF1() {
   self.wearing_armor = undefined;
 }
 
@@ -988,7 +988,7 @@ function watch_for_ai_events() {
         case "explode":
           var_3 = 1;
 
-          if(scripts\cp\coop_stealth::ref_132d7()) {
+          if(scripts\cp\coop_stealth::ref_132D7()) {
             var_3 = !isDefined(self.stealth);
           }
 
@@ -1167,7 +1167,7 @@ function choose_spawnpoint(var_0, var_1, var_2) {
 
   var_3 = process_module_var(var_0, var_0, var_0.spawn_points);
   var_4 = var_0 scripts\cp\cp_spawner_scoring::score_ai_spawns(var_3, var_1, undefined, var_2);
-  var_0.ref_127ed = undefined;
+  var_0.ref_127ED = undefined;
   var_0 scripts\cp\cp_spawner_scoring::ref_12891(var_4);
 
   if(!isDefined(var_4)) {
@@ -1259,7 +1259,7 @@ function spawn_vehicle_at_vehicle_spawner(var_0) {
 }
 
 function ref_14206(var_0) {
-  level.ref_11ca7[var_0 getentitynumber()] = var_0;
+  level.ref_11CA7[var_0 getentitynumber()] = var_0;
 }
 
 function ref_14187(var_0) {
@@ -1271,7 +1271,7 @@ function ref_14187(var_0) {
     scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_deregisterinstance(var_0);
   }
 
-  level.ref_11ca7[var_1] = undefined;
+  level.ref_11CA7[var_1] = undefined;
 }
 
 function set_last_spawn_time() {}
@@ -1362,7 +1362,7 @@ function barkov_execution_path(var_0) {
   self.spawnflags = var_0;
 }
 
-function ref_12bd2(var_0) {
+function ref_12BD2(var_0) {
   if(isDefined(self.spawnflags) && self.spawnflags &var_0) {
     self.spawnflags -= var_0;
     return;
@@ -1408,7 +1408,7 @@ function remove_from_spawner_flags(var_0) {
   }
 }
 
-function ref_12bc9() {
+function ref_12BC9() {
   if(isDefined(self.spawnpoint) && isstruct(self.spawnpoint)) {
     if(isDefined(self.spawnpoint.spawnflags) && self.spawnpoint.spawnflags & 1024) {
       self.spawnpoint.spawnflags -= 1024;
@@ -1483,8 +1483,8 @@ function registerambientgroup(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
   var_10.spawn_count = 0;
   var_10.ai_spawned = [];
   var_10.module_vehicles = [];
-  var_10.ref_11cb0 = 0;
-  var_10.ref_13be5 = 0;
+  var_10.ref_11CB0 = 0;
+  var_10.ref_13BE5 = 0;
   var_10.cqb_module = 0;
   var_10.debug_struct = create_module_debug_struct(var_10);
 
@@ -2171,7 +2171,7 @@ function override_spawn_scoring_for_module_struct(var_0, var_1, var_2, var_3, va
   create_spawn_scoring_struct(var_0, var_1, var_2, var_3, var_4);
 }
 
-function ref_130e7(var_0, var_1, var_2, var_3, var_4) {
+function ref_130E7(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4)) {
     var_5 = level.gametype;
     var_6 = strtok(var_4, " ");
@@ -2236,10 +2236,10 @@ function create_spawn_scoring_struct(var_0, var_1, var_2, var_3) {
   var_4.far_dist_sq = var_4.far_dist * var_4.far_dist;
 
   if(isDefined(var_2)) {
-    var_4.ref_13bdb = int(var_2);
-    var_4.too_far_dist_sq = var_4.ref_13bdb * var_4.ref_13bdb;
+    var_4.ref_13BDB = int(var_2);
+    var_4.too_far_dist_sq = var_4.ref_13BDB * var_4.ref_13BDB;
   } else {
-    var_4.ref_13bdb = 4096;
+    var_4.ref_13BDB = 4096;
     var_4.too_far_dist_sq = 16777216;
   }
 
@@ -2368,7 +2368,7 @@ function remove_headicon_on_death() {
   }
 
   var_0 = self.headicon;
-  var_1 = scripts\engine\utility::ref_143a5("death", "remove_headicon");
+  var_1 = scripts\engine\utility::ref_143A5("death", "remove_headicon");
   setheadiconimage(var_0);
 }
 
@@ -2501,7 +2501,7 @@ function propent(var_0, var_1) {
   return var_2 > var_3;
 }
 
-function ref_134d3() {
+function ref_134D3() {
   if(isDefined(self.group)) {
     if(self.group.group_name != "wave_spawning") {
       return 1;
@@ -2531,15 +2531,15 @@ function project() {
 
 function vehicle_preventplayercollisiondamagefortimeafterexit() {
   self endon("death");
-  self.ref_133b6 = 1;
+  self.ref_133B6 = 1;
   self.playeriszombie = 1;
-  self.ref_12fc1 = 1;
+  self.ref_12FC1 = 1;
 
   for(;;) {
     var_0 = passive_kill_off_ai(1);
 
     if(isDefined(var_0) && !var_0) {
-      self.ref_133b6 = undefined;
+      self.ref_133B6 = undefined;
       self.playeriszombie = undefined;
       break;
     }
@@ -2559,7 +2559,7 @@ function kill_off_enemies(var_0, var_1, var_2, var_3) {
   if(istrue(var_2) && var_1 > var_4) {
     var_6 = getaiarray("axis");
     var_7 = scripts\engine\utility::array_sort_with_func(var_6, &propent);
-    var_7 = scripts\cp\utility::array_sort_by_handler(var_7, &ref_134d3);
+    var_7 = scripts\cp\utility::array_sort_by_handler(var_7, &ref_134D3);
 
     for(var_8 = 0; var_8 < var_7.size; var_8++) {
       if(passive_kill_off_ai(var_7[var_8], 1)) {
@@ -2618,8 +2618,8 @@ function passed_kill_off_time_checks(var_0) {
 }
 
 function get_see_recently_time_overrides() {
-  if(isDefined(self.ref_12fc1)) {
-    return self.ref_12fc1;
+  if(isDefined(self.ref_12FC1)) {
+    return self.ref_12FC1;
   }
 
   if(isDefined(self.group)) {
@@ -2806,11 +2806,11 @@ function run_spawn_module(var_0, var_1, var_2, var_3, var_4) {
       }
 
       foreach(var_2 in var_5) {
-        thread ref_12dda(level, var_2);
+        thread ref_12DDA(level, var_2);
       }
     } else {
       thread add_and_watch_group(level, var_5);
-      thread ref_12dda(level, var_5);
+      thread ref_12DDA(level, var_5);
     }
 
     return var_5;
@@ -2824,7 +2824,7 @@ function add_and_watch_group(var_0, var_1) {
   var_0 waittill("death");
 
   if(get_activecount_from_group(var_0, 1) < 1) {
-    scripts\cp\cp_spawning_util::ref_12bd3(var_0);
+    scripts\cp\cp_spawning_util::ref_12BD3(var_0);
 
     if(isDefined(level.spawn_module_structs_memory[var_0.group_name]) && scripts\engine\utility::array_contains(level.spawn_module_structs_memory[var_0.group_name], var_0)) {
       level.spawn_module_structs_memory[var_0.group_name] = scripts\engine\utility::array_remove(level.spawn_module_structs_memory[var_0.group_name], var_0);
@@ -2895,12 +2895,12 @@ function copy_from_level_struct(var_0) {
   var_1.aievent_funcs = var_0.aievent_funcs;
   var_1.is_passive = var_0.is_passive;
   var_1.module_vehicles = var_0.module_vehicles;
-  var_1.ref_11cb0 = var_0.ref_11cb0;
+  var_1.ref_11CB0 = var_0.ref_11CB0;
   var_1.disable_spawners_until_owner_death = var_0.disable_spawners_until_owner_death;
   var_1.combined_counters = var_0.combined_counters;
-  var_1.ref_141b3 = var_0.ref_141b3;
+  var_1.ref_141B3 = var_0.ref_141B3;
   var_1.debug_data = var_0.debug_data;
-  var_1.ref_13be5 = var_0.ref_13be5;
+  var_1.ref_13BE5 = var_0.ref_13BE5;
   var_1.set_chosen_spawner_from_uid = var_0.set_chosen_spawner_from_uid;
   var_1.serverroomrewardroll = var_0.serverroomrewardroll;
   var_1.lightsfloor02 = var_0.lightsfloor02;
@@ -2924,7 +2924,7 @@ function add_to_module_vehicles_list(var_0, var_1) {
     }
   }
 
-  var_0.ref_11cb0++;
+  var_0.ref_11CB0++;
   var_0.module_vehicles[var_0.module_vehicles.size] = self;
   thread scripts\engine\utility::thread_on_notify_no_endon_death("death", &remove_from_module_vehicles_list, var_0, var_1);
 }
@@ -2985,12 +2985,12 @@ function timeout_group_after_duration() {
   level notify("spawnModuleTimedOut_" + self.moduleid);
 }
 
-function ref_12dda(var_0, var_1) {
+function ref_12DDA(var_0, var_1) {
   level notify("run_current_spawn_group" + var_0.moduleid);
   level endon("game_ended");
   var_0 endon("death");
   thread watch_for_module_endons();
-  thread ref_12df3();
+  thread ref_12DF3();
   thread module_run_func_after_notify();
 
   if(isDefined(var_0.timeout_action)) {
@@ -3008,7 +3008,7 @@ function ref_12dda(var_0, var_1) {
   thread run_weapons_free_funcs();
 
   if(getDvar("scr_module_iso", "") != "" && getDvar("scr_module_iso", "") == var_0.group_name) {
-    thread ref_12e20(level, var_0);
+    thread ref_12E20(level, var_0);
   } else {
     thread runspawnmodule(level, var_0);
   }
@@ -3028,7 +3028,7 @@ function run_weapons_free_funcs() {
   }
 }
 
-function ref_12ddd() {
+function ref_12DDD() {
   if(isDefined(self.group.lightsfloor02)) {
     for(var_0 = 0; var_0 < self.group.lightsfloor02.size; var_0++) {
       thread process_module_var(self.group, self.group.lightsfloor02[var_0]);
@@ -3038,16 +3038,16 @@ function ref_12ddd() {
   }
 }
 
-function ref_12df3() {
+function ref_12DF3() {
   level endon("game_ended");
   self endon("death");
-  var_0 = level scripts\engine\utility::ref_143ad("spawn_module_" + self.moduleid + "_completed", "spawnModuleTimedOut_" + self.moduleid);
+  var_0 = level scripts\engine\utility::ref_143AD("spawn_module_" + self.moduleid + "_completed", "spawnModuleTimedOut_" + self.moduleid);
 
   if(isDefined(self.post_module_delay)) {
     var_1 = process_module_var(self, self.post_module_delay);
 
     if(isDefined(var_1) && isnumberandgreaterthanzero(var_1)) {
-      level scripts\engine\utility::ref_143b9(var_1, "new_module_requested");
+      level scripts\engine\utility::ref_143B9(var_1, "new_module_requested");
     }
 
     level notify("group_" + self.group_name + "_post_module_complete");
@@ -3155,7 +3155,7 @@ function runspawnmodule(var_0, var_1) {
   }
 }
 
-function ref_12e20(var_0, var_1) {
+function ref_12E20(var_0, var_1) {
   level endon("game_ended");
   level notify("runSpawnModule_" + var_0.moduleid);
   level endon("runSpawnModule_" + var_0.moduleid);
@@ -3461,7 +3461,7 @@ function pause_group_by_group_name(var_0) {
             announcement(var_4.group_name + " ^1Paused");
           }
 
-          var_4 scripts\cp\cp_spawning_util::ref_12dee();
+          var_4 scripts\cp\cp_spawning_util::ref_12DEE();
           var_4 scripts\engine\utility::ent_flag_set("pause_group");
         }
       }
@@ -3474,7 +3474,7 @@ function pause_group_by_group_name(var_0) {
         announcement(var_2.group_name + " ^1Paused");
       }
 
-      var_2 scripts\cp\cp_spawning_util::ref_12dee();
+      var_2 scripts\cp\cp_spawning_util::ref_12DEE();
       var_2 scripts\engine\utility::ent_flag_set("pause_group");
     }
   }
@@ -3489,7 +3489,7 @@ function unpause_group_by_group_name(var_0) {
             announcement(var_2.group_name + " ^3Unpaused");
           }
 
-          var_4 scripts\cp\cp_spawning_util::ref_12def();
+          var_4 scripts\cp\cp_spawning_util::ref_12DEF();
           var_4 scripts\engine\utility::ent_flag_clear("pause_group");
         }
       }
@@ -3502,7 +3502,7 @@ function unpause_group_by_group_name(var_0) {
         announcement(var_2.group_name + " ^3Unpaused");
       }
 
-      var_2 scripts\cp\cp_spawning_util::ref_12def();
+      var_2 scripts\cp\cp_spawning_util::ref_12DEF();
       var_2 scripts\engine\utility::ent_flag_clear("pause_group");
     }
   }
@@ -3994,7 +3994,7 @@ function patrol_using_cover_nodes() {
 }
 
 function enter_combat_after_stealth(var_0) {
-  if(scripts\cp\coop_stealth::ref_132d7()) {
+  if(scripts\cp\coop_stealth::ref_132D7()) {
     return;
   }
 
@@ -4075,7 +4075,7 @@ function set_default_values(var_0, var_1, var_2, var_3) {
   stoppingpower_getweaponhcrdata();
 }
 
-function ref_12ddc(var_0, var_1, var_2, var_3) {
+function ref_12DDC(var_0, var_1, var_2, var_3) {
   self endon("death");
   thread watch_for_bad_path();
 
@@ -4509,7 +4509,7 @@ function spawner_init() {
 
   set_spawner_init_flag();
   remove_default_kvps();
-  ref_130e8();
+  ref_130E8();
 
   if(!trying_to_spawn_boss()) {
     remove_from_spawner_flags(4);
@@ -4607,7 +4607,7 @@ function trying_to_spawn_boss() {
       var_14 = getgroundposition(self.origin, 1, 100, 16);
 
       if(var_13) {
-        if(!isDefined(self.ref_133bb) && !ispointonnavmesh(var_14)) {
+        if(!isDefined(self.ref_133BB) && !ispointonnavmesh(var_14)) {
           little_bird_mg_givetakegunnerturrettimeout();
           return false;
         } else {
@@ -4645,7 +4645,7 @@ function mounted() {
   remove_from_spawner_flags(1024);
 }
 
-function ref_130e8() {
+function ref_130E8() {
   if(isDefined(self.spawnflags) && !isnode(self)) {
     var_0 = int(self.spawnflags);
     var_1 = 16;
@@ -4944,7 +4944,7 @@ function has_dont_kill_off_flag() {
     return 1;
   }
 
-  if(istrue(self.ref_133b6)) {
+  if(istrue(self.ref_133B6)) {
     return 0;
   }
 
@@ -5256,7 +5256,7 @@ function update_spawn_data_on_death(var_0, var_1) {
         level notify("group_spawning_completed");
 
         if(get_activecount_from_group(self.group, 1) < 1) {
-          scripts\cp\cp_spawning_util::ref_12bd3(self.group);
+          scripts\cp\cp_spawning_util::ref_12BD3(self.group);
           self.group notify("all_group_spawns_dead");
 
           if(scripts\engine\utility::array_contains(level.spawn_module_structs_memory[self.group.group_name], self.group)) {
@@ -5268,7 +5268,7 @@ function update_spawn_data_on_death(var_0, var_1) {
           }
         }
       } else if(!var_3 && get_activecount_from_group(self.group, 1) < 1) {
-        scripts\cp\cp_spawning_util::ref_12bd3(self.group);
+        scripts\cp\cp_spawning_util::ref_12BD3(self.group);
         self.group notify("all_group_spawns_dead");
 
         if(scripts\engine\utility::array_contains(level.spawn_module_structs_memory[self.group.group_name], self.group)) {
@@ -5282,7 +5282,7 @@ function update_spawn_data_on_death(var_0, var_1) {
         self.group notify("active_all_group_spawns_dead");
       }
     } else if(!var_3 && get_activecount_from_group(self.group, 1) < 1) {
-      scripts\cp\cp_spawning_util::ref_12bd3(self.group);
+      scripts\cp\cp_spawning_util::ref_12BD3(self.group);
       self.group notify("all_group_spawns_dead");
 
       if(scripts\engine\utility::array_contains(level.spawn_module_structs_memory[self.group.group_name], self.group)) {
@@ -5299,7 +5299,7 @@ function update_spawn_data_on_death(var_0, var_1) {
     if(!istrue(self.died_poorly)) {
       thread run_group_death_funcs();
     } else {
-      thread ref_12ddd();
+      thread ref_12DDD();
     }
 
     if(scripts\cp\cp_spawning_util::group_has_combined_counters(self.group.group_name)) {
@@ -5375,7 +5375,7 @@ function barkov_crawl_scene_nostab(var_0) {
   var_0.spawn_count++;
 }
 
-function ref_1393e(var_0) {
+function ref_1393E(var_0) {
   var_0.spawn_count--;
 }
 
@@ -5403,8 +5403,8 @@ function send_notify_to_groups_from_groupname(var_0, var_1, var_2, var_3) {
 }
 
 function get_activecount_from_group(var_0) {
-  if(istrue(self.ref_133be)) {
-    return self.ref_11cb0;
+  if(istrue(self.ref_133BE)) {
+    return self.ref_11CB0;
   }
 
   var_1 = 0;
@@ -5535,7 +5535,7 @@ function propwaitminigamehudinit(var_0) {
 }
 
 function select_patrol_nine_spawners(var_0) {
-  ref_12bf1();
+  ref_12BF1();
   thread circleorigin(var_0);
 }
 
@@ -5549,7 +5549,7 @@ function circleorigin(var_0) {
     return;
   }
 
-  if(istrue(self.ref_133b2)) {
+  if(istrue(self.ref_133B2)) {
     return;
   }
 
@@ -5619,7 +5619,7 @@ function wave_go_kamikaze(var_0) {
     var_0 endon("death");
 
     if(isDefined(var_0.timeout_after_min_count) && var_0.timeout_after_min_count > 0) {
-      scripts\cp\cp_wave_spawning::ref_13f81(0, var_0);
+      scripts\cp\cp_wave_spawning::ref_13F81(0, var_0);
       thread timeout_wave(var_0);
     }
   }
@@ -5628,7 +5628,7 @@ function wave_go_kamikaze(var_0) {
   level notify("wave_ending");
 }
 
-function ref_1451f(var_0) {
+function ref_1451F(var_0) {
   level endon("game_ended");
   level endon("timeout_wave");
   level notify("wave_failsafe_end");
@@ -5656,7 +5656,7 @@ function ref_1451f(var_0) {
     wait 1;
   }
 
-  scripts\cp\cp_wave_spawning::ref_13f81(0, var_0);
+  scripts\cp\cp_wave_spawning::ref_13F81(0, var_0);
   thread timeout_wave(var_0);
 }
 
@@ -5679,7 +5679,7 @@ function timeout_wave(var_0) {
   toggle_force_stop_wave_from_groupname(self.group_name, 1, "wave_delay");
   toggle_force_stop_wave_from_groupname("wave_paratroopers", 1, "wave_delay");
   wave_cooldown_time(var_0);
-  scripts\cp\cp_wave_spawning::ref_13f81(0, self);
+  scripts\cp\cp_wave_spawning::ref_13F81(0, self);
 
   if(!istrue(self.disable_wave_hud)) {
     wait 0.1;
@@ -5987,7 +5987,7 @@ function get_enemy_info_loop(var_0) {
   var_5 = &progression_main;
 
   for(;;) {
-    if(ref_132db()) {
+    if(ref_132DB()) {
       var_1 = 0;
       self.target_enemy = undefined;
     } else {
@@ -6093,14 +6093,14 @@ function get_enemy_info_loop(var_0) {
 function projectilewaittilstucktimeout() {
   if(isDefined(self.group)) {
     if(isDefined(self.group.spawn_scoring_overrides)) {
-      var_0 = self.group.spawn_scoring_overrides.ref_13bdb;
+      var_0 = self.group.spawn_scoring_overrides.ref_13BDB;
     } else if(istrue(self.group.cqb_module)) {
       var_0 = 2333;
     } else {
       var_0 = 4096;
     }
   } else if(istrue(level.spawn_scoring_overrides)) {
-    var_0 = level.spawn_scoring_overrides.ref_13bdb;
+    var_0 = level.spawn_scoring_overrides.ref_13BDB;
   } else {
     var_0 = 4096;
   }
@@ -6109,7 +6109,7 @@ function projectilewaittilstucktimeout() {
   return var_0;
 }
 
-function ref_132db() {
+function ref_132DB() {
   if(istrue(self.ignoreall) || istrue(self.scripted_mode)) {
     return 1;
   }
@@ -6636,7 +6636,7 @@ function set_dontkilloff_flag() {
 
 function wait_for_all_multi_group_dead(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1)) {
-    level scripts\engine\utility::ref_143b9(var_1, "module_group " + var_0.group_name + " completed");
+    level scripts\engine\utility::ref_143B9(var_1, "module_group " + var_0.group_name + " completed");
     return;
   }
 
@@ -6645,7 +6645,7 @@ function wait_for_all_multi_group_dead(var_0, var_1, var_2, var_3) {
 
 function wait_for_all_group_dead(var_0, var_1, var_2, var_3) {
   if(isDefined(var_1)) {
-    var_0 scripts\engine\utility::ref_143b9(var_1, "group_spawning_completed");
+    var_0 scripts\engine\utility::ref_143B9(var_1, "group_spawning_completed");
     return;
   }
 
@@ -6682,7 +6682,7 @@ function waittill_spawn_notify_after_count(var_0, var_1) {
   return 0.1;
 }
 
-function ref_145d3(var_0, var_1, var_2, var_3) {
+function ref_145D3(var_0, var_1, var_2, var_3) {
   var_0 endon("death");
 
   if(!isarray(var_1)) {
@@ -6767,10 +6767,10 @@ function set_heavy_hitter(var_0, var_1) {
 }
 
 function set_initial_goalheight(var_0, var_1) {
-  thread ref_13f33(var_1);
+  thread ref_13F33(var_1);
 }
 
-function ref_13f33(var_0) {
+function ref_13F33(var_0) {
   level endon("game_ended");
   self endon("death");
   level waittill(var_0);
@@ -6785,7 +6785,7 @@ function set_initial_goalRadius(var_0, var_1) {
   }
 }
 
-function ref_1309b(var_0) {
+function ref_1309B(var_0) {
   level notify("weapons_free");
 
   if(scripts\engine\utility::flag_exist("weapons_free")) {
@@ -6896,7 +6896,7 @@ function module_wave_spawn(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 function wave_cooldown_time(var_0) {
   if(!istrue(level.wave_cooldown_active)) {
     thread monitor_wave_cooldown(level);
-    thread ref_1451b(level);
+    thread ref_1451B(level);
 
     if(!istrue(self.disable_wave_hud)) {
       var_1 = gettime() + var_0 * 1000;
@@ -6915,7 +6915,7 @@ function monitor_wave_cooldown(var_0) {
   level.wave_cooldown_active = undefined;
 }
 
-function ref_1451b(var_0) {
+function ref_1451B(var_0) {
   level endon("game_ended");
   level endon("wave_starting");
   level endon("stop_wave_sounds");
@@ -7015,15 +7015,15 @@ function rear_spotlight_speed(var_0) {
 }
 
 function recharge_equipment_update_slot(var_0) {
-  if(isDefined(var_0.ref_13be9)) {
-    return var_0.ref_13be9;
+  if(isDefined(var_0.ref_13BE9)) {
+    return var_0.ref_13BE9;
   }
 
   return undefined;
 }
 
-function ref_130f7(var_0, var_1) {
-  var_0.ref_13be9 = var_1;
+function ref_130F7(var_0, var_1) {
+  var_0.ref_13BE9 = var_1;
 }
 
 function get_active_from_grouped_modules(var_0) {
@@ -7209,7 +7209,7 @@ function go_to_node_internal(var_0, var_1, var_2) {
 
     var_0 notify("trigger", self);
     node_fields_after_goal(var_0, var_1);
-    ref_11e9e(var_0);
+    ref_11E9E(var_0);
     var_0 scripts\engine\utility::script_delay();
 
     if(isDefined(var_0.script_flag_wait)) {
@@ -7331,7 +7331,7 @@ function go_through_patharray(var_0, var_1, var_2) {
 
     var_5 notify("trigger", self);
     node_fields_after_goal(var_5, var_1);
-    ref_11e9e(var_5);
+    ref_11E9E(var_5);
     node_fields_after_goal_and_wait(var_5, var_2);
   }
 }
@@ -7395,7 +7395,7 @@ function node_fields_after_goal(var_0, var_1) {
   }
 }
 
-function ref_11e9e(var_0) {
+function ref_11E9E(var_0) {
   level endon("game_ended");
   self endon("death");
 
@@ -7406,13 +7406,13 @@ function ref_11e9e(var_0) {
 
     if(isDefined(var_1)) {
       if(!istrue(var_0.script_looping)) {
-        self.ref_133a4 = 1;
+        self.ref_133A4 = 1;
       } else {
-        self.ref_133a4 = undefined;
+        self.ref_133A4 = undefined;
       }
 
       self.playing_skit = 1;
-      ref_1241b(var_0, var_1);
+      ref_1241B(var_0, var_1);
       self.playing_skit = undefined;
 
       while(istrue(self.playing_skit)) {
@@ -7426,10 +7426,10 @@ function ref_11e9e(var_0) {
   }
 }
 
-function ref_1241b(var_0, var_1) {
+function ref_1241B(var_0, var_1) {
   self endon("death");
 
-  if(istrue(self.ref_133a4)) {
+  if(istrue(self.ref_133A4)) {
     self endon("patrol_" + var_1 + "_loop");
   }
 
@@ -7688,7 +7688,7 @@ function go_to_node_end() {
   self endon("death");
   level endon("game_ended");
   self.using_goto_node = 1;
-  var_0 = scripts\engine\utility::ref_143ad("reached_path_end", "stop_going_to_node");
+  var_0 = scripts\engine\utility::ref_143AD("reached_path_end", "stop_going_to_node");
   self.using_goto_node = undefined;
   self.patharray = undefined;
   self.patharrayindex = undefined;
@@ -7753,34 +7753,34 @@ function set_script_origin_other_for_group(var_0) {
   }
 }
 
-function ref_11cae(var_0) {
-  self.ref_133b2 = 1;
+function ref_11CAE(var_0) {
+  self.ref_133B2 = 1;
 }
 
-function ref_11cac(var_0, var_1) {
+function ref_11CAC(var_0, var_1) {
   set_goal_radius(var_1);
 }
 
-function ref_11cab(var_0, var_1) {
+function ref_11CAB(var_0, var_1) {
   self.goalheight = var_1;
 }
 
-function ref_11cb2(var_0, var_1) {
+function ref_11CB2(var_0, var_1) {
   level endon("game_ended");
   scripts\engine\utility::flag_wait(var_1);
   scripts\engine\utility::flag_waitopen(var_1);
 }
 
-function ref_12ce2(var_0) {
+function ref_12CE2(var_0) {
   return var_0.group_name;
 }
 
-function ref_11cb1(var_0, var_1) {
+function ref_11CB1(var_0, var_1) {
   level endon("game_ended");
   scripts\engine\utility::flag_wait(var_1);
 }
 
-function ref_11cad(var_0, var_1) {
+function ref_11CAD(var_0, var_1) {
   self.script_origin_other = var_1;
 }
 
@@ -8134,7 +8134,7 @@ function decrement_door_count_on_death(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_2 scripts\engine\utility::ref_143a5("death", "door_infil_anim_completed");
+  var_2 scripts\engine\utility::ref_143A5("death", "door_infil_anim_completed");
   decrement_spawners_using_count(var_1, var_4);
 }
 
@@ -8799,11 +8799,11 @@ function remove_spawners_from_passive_wave_spawning(var_0) {
 }
 
 function battle_stations(var_0) {
-  if(!scripts\engine\utility::array_contains(self.ref_12c43, var_0)) {
+  if(!scripts\engine\utility::array_contains(self.ref_12C43, var_0)) {
     var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
     if(var_1.size > 0) {
-      self.ref_12c43[self.ref_12c43.size] = var_0;
+      self.ref_12C43[self.ref_12C43.size] = var_0;
       scripts\engine\utility::array_thread(var_1, &spawner_init);
       return;
     }
@@ -8812,9 +8812,9 @@ function battle_stations(var_0) {
   }
 }
 
-function ref_12bfb(var_0) {
-  if(scripts\engine\utility::array_contains(self.ref_12c43, var_0)) {
-    self.ref_12c43 = scripts\engine\utility::array_remove(self.ref_12c43, var_0);
+function ref_12BFB(var_0) {
+  if(scripts\engine\utility::array_contains(self.ref_12C43, var_0)) {
+    self.ref_12C43 = scripts\engine\utility::array_remove(self.ref_12C43, var_0);
     return;
   }
 }
@@ -9042,7 +9042,7 @@ function get_current_wave_ref() {
   return undefined;
 }
 
-function set_wave_ref_override(var_0) {
+function set_wave_ref_OVERRIDE(var_0) {
   if(trophy_protection_success("wave_spawning")) {
     run_func_on_group_by_groupname("wave_spawning", [ &battle_tracks_clearbattletracks, var_0]);
     var_1 = get_module_structs_by_groupname("wave_spawning");
@@ -9074,7 +9074,7 @@ function trophy_protection_success(var_0) {
   return isDefined(level.active_spawn_module_structs[var_0]);
 }
 
-function clear_wave_ref_override() {
+function clear_wave_ref_OVERRIDE() {
   self.wave_reference_override = undefined;
 }
 
@@ -9228,12 +9228,12 @@ function set_wave_settings() {
         var_4.wave_difficulty = int(tablelookup(var_1, 0, var_5, 22));
         var_4.high_threshold = int(tablelookup(var_1, 0, var_5, 23));
         var_4.min_count = int(tablelookup(var_1, 0, var_5, 24));
-        var_4.ref_11e6b = int(tablelookup(var_1, 0, var_5, 25));
+        var_4.ref_11E6B = int(tablelookup(var_1, 0, var_5, 25));
         var_4.timeout_after_min_count = int(tablelookup(var_1, 0, var_5, 26));
         var_4.next_wave = tablelookup(var_1, 0, var_5, 29);
         var_4.use_only_veh_spawners = int(tablelookup(var_1, 0, var_5, 32));
         var_4.paratroopers_allowed = int(tablelookup(var_1, 0, var_5, 20));
-        var_4.ref_1451a = int(tablelookup(var_1, 0, var_5, 21));
+        var_4.ref_1451A = int(tablelookup(var_1, 0, var_5, 21));
         var_6 = float(tablelookup(var_1, 0, var_5, 30));
         var_4.wave_time_between_spawns = scripts\engine\utility::ter_op(var_6 > 0, var_6, 1);
 
@@ -9244,7 +9244,7 @@ function set_wave_settings() {
         }
 
         var_4.spawn_wave_total = scripts\engine\utility::array_sum(var_4.spawn_aitype_counts) + var_4.paratroopers_allowed * 8;
-        var_4.ref_13be5 = 0;
+        var_4.ref_13BE5 = 0;
         var_4.requested_spawners = [];
         var_7 = strtok(tablelookup(var_1, 0, var_5, 27), ",");
 
@@ -9254,7 +9254,7 @@ function set_wave_settings() {
           }
         }
 
-        var_4.ref_12c43 = [];
+        var_4.ref_12C43 = [];
         var_7 = strtok(tablelookup(var_1, 0, var_5, 28), ",");
 
         if(isDefined(var_7) && var_7.size > 0) {
@@ -9275,7 +9275,7 @@ function ignoredeathsdoor(var_0, var_1) {
   if(isDefined(level.spawn_module_structs_memory[var_1])) {
     var_2 = level.spawn_module_structs_memory[var_1][0];
     var_0.high_threshold = var_2.high_threshold;
-    var_0.ref_11e6b = var_2.ref_11e6b;
+    var_0.ref_11E6B = var_2.ref_11E6B;
     var_0.min_count = var_2.min_count;
     var_0.disable_wave_hud = var_2.disable_wave_hud;
     return;

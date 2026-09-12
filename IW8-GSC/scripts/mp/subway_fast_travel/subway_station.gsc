@@ -114,7 +114,7 @@ function callbacksoldieragentdamaged(var_0, var_1, var_2, var_3, var_4, var_5, v
   }
 
   if(istrue(self.clearsoundsubmixmpbrinfilanim)) {
-    if(ref_132eb(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12)) {
+    if(ref_132EB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12)) {
       return;
     }
 
@@ -222,8 +222,8 @@ function callbacksoldieragentdamaged(var_0, var_1, var_2, var_3, var_4, var_5, v
         var_1 playsoundtoplayer("hit_marker_3d_armor_break", var_1);
       }
 
-      if(isDefined(level.ref_11ffb)) {
-        var_3 |= [[level.ref_11ffb]](var_14);
+      if(isDefined(level.ref_11FFB)) {
+        var_3 |= [[level.ref_11FFB]](var_14);
       }
     }
   }
@@ -733,7 +733,7 @@ function _hasperk(var_0) {
   return false;
 }
 
-function ref_132eb(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+function ref_132EB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   var_13 = var_12.basename;
   var_14 = 0;
 
@@ -765,11 +765,11 @@ function ref_132eb(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
 
       if(isDefined(var_22) && var_22 == self) {
         self.clearspaceforscriptableinstance = 1;
-        self.ref_13b2a = 0;
+        self.ref_13B2A = 0;
       }
     } else if(var_8 != "none") {
       self.clearspaceforscriptableinstance = undefined;
-      self.ref_13b2a = undefined;
+      self.ref_13B2A = undefined;
     }
   }
 
@@ -781,13 +781,13 @@ function ref_132eb(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
     var_23 = var_0 getlinkedparent();
 
     if(istrue(self.clearspaceforscriptableinstance) && var_14 && isDefined(var_23) && var_23 == self) {
-      if(!isDefined(self.ref_13b2c)) {
-        self.ref_13b2c = [var_0];
-      } else if(!scripts\engine\utility::array_contains(self.ref_13b2c, var_0)) {
-        self.ref_13b2c[self.ref_13b2c.size] = var_0;
+      if(!isDefined(self.ref_13B2C)) {
+        self.ref_13B2C = [var_0];
+      } else if(!scripts\engine\utility::array_contains(self.ref_13B2C, var_0)) {
+        self.ref_13B2C[self.ref_13B2C.size] = var_0;
       }
 
-      self.ref_13b2a++;
+      self.ref_13B2A++;
       return true;
     } else if(issubstr(var_13, "molotov")) {
       var_24 = var_0.origin - self.origin;

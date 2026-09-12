@@ -10,24 +10,24 @@ function init() {
     return;
   }
 
-  scripts\mp\gametypes\br_quest_util::ref_12b3d("blueprintextract_easterevent", &overtimebuiltintomatchtimer);
+  scripts\mp\gametypes\br_quest_util::ref_12B3D("blueprintextract_easterevent", &overtimebuiltintomatchtimer);
   scripts\mp\gametypes\br_quest_util::registerremovequestinstance("blueprintextract_easterevent", &overridefieldupgrade1);
   scripts\mp\gametypes\br_quest_util::registerquestlocale("blueprintextract_easterevent_locale");
   scripts\mp\gametypes\br_quest_util::registercreatequestlocale("blueprintextract_easterevent_locale", &outofboundstimebr);
   scripts\mp\gametypes\br_quest_util::registercheckiflocaleisavailable("blueprintextract_easterevent_locale", &outline_ents);
   scripts\mp\gametypes\br_quest_util::registerremovequestinstance("blueprintextract_easterevent_locale", &outputfunc);
   scripts\mp\gametypes\br_quest_util::registerquestcircletick("blueprintextract_easterevent_locale", &outline_grenade_box);
-  scripts\mp\gametypes\br_quest_util::ref_12b2d("blueprintextract_easterevent_locale", &outofboundstriggersspawned);
-  scripts\mp\gametypes\br_quest_util::ref_12b30("blueprintextract_easterevent_locale", &outofboundswatcher);
+  scripts\mp\gametypes\br_quest_util::ref_12B2D("blueprintextract_easterevent_locale", &outofboundstriggersspawned);
+  scripts\mp\gametypes\br_quest_util::ref_12B30("blueprintextract_easterevent_locale", &outofboundswatcher);
   scripts\mp\gametypes\br_quest_util::getquestdata("blueprintextract_easterevent_locale").nextid = 0;
-  scripts\mp\gametypes\br_quest_util::ref_1297c("blueprintextract_easterevent", 1);
-  scripts\mp\gametypes\br_quest_util::ref_12b31("blueprintextract_easterevent", &optional_params);
+  scripts\mp\gametypes\br_quest_util::ref_1297C("blueprintextract_easterevent", 1);
+  scripts\mp\gametypes\br_quest_util::ref_12B31("blueprintextract_easterevent", &optional_params);
 
   if(!istrue(level.br_plunder_enabled)) {
     scripts\mp\gametypes\br_plunder::thermite_linktostuck();
     scripts\mp\gametypes\br_plunder::thermite_watchglstuck();
     level._effect["vfx_extract_smoke"] = loadfx("vfx/iw8_br/gameplay/vfx_br_adv_supply_drop_marker");
-    scripts\mp\gametypes\br_plunder::ref_1278e();
+    scripts\mp\gametypes\br_plunder::ref_1278E();
     scripts\mp\gametypes\br_plunder::thermite_watchstucktoterrain();
   }
 
@@ -39,14 +39,14 @@ function init() {
   level.outro_enemy_spawning = scripts\engine\utility::ter_op(var_1, "brloot_quest_extract_site_plunder", "brloot_quest_extract_site_br");
   level.outro_dialogue_logic = scripts\engine\utility::ter_op(var_1, "brloot_quest_extract_site_model_plunder", "brloot_quest_extract_site_model_br");
 
-  if(!isDefined(level.ref_127c7.data["extractHelipadPlunder"].ref_1287b)) {
-    level.ref_127c7.data["extractHelipadPlunder"].ref_1287b = level.ref_127c7.data["extractHelipadPlunder"].ref_14068;
-    level.ref_127c7.data["extractHelipadPlunder"].ref_14068 = &originalloc;
+  if(!isDefined(level.ref_127C7.data["extractHelipadPlunder"].ref_1287B)) {
+    level.ref_127C7.data["extractHelipadPlunder"].ref_1287B = level.ref_127C7.data["extractHelipadPlunder"].ref_14068;
+    level.ref_127C7.data["extractHelipadPlunder"].ref_14068 = &originalloc;
   }
 
-  if(!isDefined(level.ref_127c7.data["extractHelipadBR"].ref_1287b)) {
-    level.ref_127c7.data["extractHelipadBR"].ref_1287b = level.ref_127c7.data["extractHelipadBR"].ref_14068;
-    level.ref_127c7.data["extractHelipadBR"].ref_14068 = &originalloc;
+  if(!isDefined(level.ref_127C7.data["extractHelipadBR"].ref_1287B)) {
+    level.ref_127C7.data["extractHelipadBR"].ref_1287B = level.ref_127C7.data["extractHelipadBR"].ref_14068;
+    level.ref_127C7.data["extractHelipadBR"].ref_14068 = &originalloc;
   }
 
   game["dialog"]["mission_extract_accept"] = "bm_exfil_arrived";
@@ -58,7 +58,7 @@ function originalloc(var_0, var_1, var_2) {
   var_1 notify("heliDeposit");
 
   if(var_2 > 0 && istrue(level.br_plunder_enabled) && (getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "rat_race" || getDvar("scr_br_gametype", "") == "risk")) {
-    [[level.ref_127c7.data["extractHelipadPlunder"].ref_1287b]](var_0, var_1, var_2);
+    [[level.ref_127C7.data["extractHelipadPlunder"].ref_1287B]](var_0, var_1, var_2);
     return;
   }
 }
@@ -69,7 +69,7 @@ function overridefieldupgrade1() {
   overwatch_tank_backup(0, undefined);
 
   if(isDefined(self.get_track_controller_struct)) {
-    ref_13f71(self.get_track_controller_struct);
+    ref_13F71(self.get_track_controller_struct);
   }
 
   thread ow_current_scrambler_count();
@@ -81,7 +81,7 @@ function outputfunc() {
   }
 
   scripts\mp\gametypes\br_quest_util::lastdropedtime();
-  thread ref_12c02();
+  thread ref_12C02();
 }
 
 function overtimebuiltintomatchtimer() {
@@ -92,7 +92,7 @@ function overtimebuiltintomatchtimer() {
     return false;
   }
 
-  self.ref_12c4a = var_1;
+  self.ref_12C4A = var_1;
   return true;
 }
 
@@ -124,7 +124,7 @@ function outofboundstimebr(var_0) {
   var_1.soldier_agent_lwfn8.audio_jugg_spawn = "activeCurrent";
   var_1.soldier_agent_lwfn8.load_relics_from_playlistdvars = "hidden";
   var_1.soldier_agent_lwfn8.little_bird_onexitheavydamagestate = "hidden";
-  var_1.soldier_agent_lwfn8.ref_1296d = 0;
+  var_1.soldier_agent_lwfn8.ref_1296D = 0;
   var_1.soldier_agent_lwfn8.playerplunderbankdepositcallback = 1;
   var_1.ref_11985 = var_0;
   var_1 scripts\mp\gametypes\br_quest_util::init_tape_machine_animations("ui_mp_br_mapmenu_icon_extraction_objective", "current", var_0.origin);
@@ -142,7 +142,7 @@ function outofboundstriggersplanetrace(var_0) {
   return isDefined(var_3);
 }
 
-function ref_12c02() {
+function ref_12C02() {
   if(getDvar("scr_br_gametype", "") != "dmz" && getDvar("scr_br_gametype", "") != "rat_race" && getDvar("scr_br_gametype", "") != "risk") {
     self setscriptablepartstate(level.outro_enemy_spawning, "hidden");
   }
@@ -231,7 +231,7 @@ function overwatch_tank_backup(var_0, var_1) {
 
   foreach(var_5 in scripts\mp\utility\teams::getteamdata(self.team, "players")) {
     var_5 scripts\mp\gametypes\br_quest_util::uiobjectivesetparameter(var_2);
-    var_5 scripts\mp\gametypes\br_quest_util::ref_13efd(var_3);
+    var_5 scripts\mp\gametypes\br_quest_util::ref_13EFD(var_3);
     var_6 = isDefined(var_1) && var_5 == var_1;
     var_7 = var_0 && var_6;
     var_5 setclientomnvar("ui_br_has_extract_bag", var_7);
@@ -253,7 +253,7 @@ function takequestitem(var_0) {
   var_5.tablet = var_0;
   var_5.overwatch_soldiers_05_bombers = var_0.overwatch_soldiers_05_bombers;
   var_6 = getdvarint("scr_br_blueprintextract_easterevent_questTime", 240);
-  var_5 scripts\mp\gametypes\br_quest_util::ref_1297d(var_6, 4);
+  var_5 scripts\mp\gametypes\br_quest_util::ref_1297D(var_6, 4);
   var_7 = rocket_missile(var_0);
   var_8 = var_5 scripts\mp\gametypes\br_quest_util::requestquestlocale("blueprintextract_easterevent_locale", var_7, 1);
 
@@ -277,12 +277,12 @@ function takequestitem(var_0) {
   var_12 = spawnStruct();
   var_12.excludedplayers = [];
   var_12.excludedplayers[0] = self;
-  var_12.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("blueprintextract_easterevent", scripts\mp\gametypes\br_quest_util::ringing(self.team));
+  var_12.ref_127D5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("blueprintextract_easterevent", scripts\mp\gametypes\br_quest_util::ringing(self.team));
   scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_blueprint_extract_quest_start_team_easterevent", var_12);
   scripts\mp\gametypes\br_quest_util::displayplayersplash(self, "br_blueprint_extract_quest_start_tablet_finder_easterevent", var_12);
   scripts\mp\gametypes\br_quest_util::lookforvehicles(var_5.team, self, 6, scripts\mp\gametypes\br_quest_util::getquestindex("blueprintextract_easterevent"));
   level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_extract_accept", var_5.team, 1);
-  ref_1328b(var_8, var_0.overwatch_soldiers_05_bombers);
+  ref_1328B(var_8, var_0.overwatch_soldiers_05_bombers);
   var_5.get_track_controller_struct = self;
 
   foreach(var_10 in level.players) {
@@ -293,17 +293,17 @@ function takequestitem(var_0) {
 
   overwatch_tank_backup(var_5, 1, self);
   thread ref_14507(var_5);
-  thread ref_144b6(var_5);
+  thread ref_144B6(var_5);
 }
 
-function ref_1328b(var_0, var_1) {
+function ref_1328B(var_0, var_1) {
   self.overheatreductiontime = 1;
   self.override_minimap_hide = var_0.soldier_agent_lwfn8.index;
   self.override_supply_drop_vfx = "brloot_blueprintextract_tablet";
   self.overridefieldupgrade2 = var_1;
 }
 
-function ref_13f71() {
+function ref_13F71() {
   self.overheatreductiontime = undefined;
   self.override_minimap_hide = undefined;
   self.override_supply_drop_vfx = undefined;
@@ -344,10 +344,10 @@ function ref_14508(var_0) {
       var_1 = scripts\mp\gametypes\br_pickups::test_ai_anim();
       var_2 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_1, var_0.origin, var_0.angles, var_0);
       var_3 = scripts\mp\gametypes\br_pickups::spawnpickup("brloot_blueprintextract_tablet", var_2);
-      var_3.ref_12c4a = self.ref_1393b.ref_11985;
+      var_3.ref_12C4A = self.ref_1393B.ref_11985;
       level thread scripts\mp\gametypes\br_public::dmztut_luicallback("br_blueprint_extract_quest_failure", var_0.team, 1, 1);
       scripts\mp\gametypes\br_quest_util::displayteamsplash(var_0.team, "br_blueprint_extract_quest_failure_easterevent");
-      ref_13f71(var_0);
+      ref_13F71(var_0);
       self.result = "fail";
       thread scripts\mp\gametypes\br_quest_util::removequestinstance();
       return;
@@ -363,38 +363,38 @@ function ref_14507(var_0) {
   scripts\mp\gametypes\br_quest_util::displayteamsplash(var_1, "br_blueprint_extract_quest_failure_easterevent");
 
   if(isDefined(var_0)) {
-    ref_13f71(var_0);
+    ref_13F71(var_0);
   }
 
   self.result = "fail";
   thread scripts\mp\gametypes\br_quest_util::removequestinstance();
 }
 
-function ref_144b6(var_0) {
+function ref_144B6(var_0) {
   self endon("removed");
 
   for(;;) {
     var_0 waittill("heliDeposit");
 
-    if(var_0.warningbits == self.ref_1393b.soldier_agent_lwfn8.index) {
+    if(var_0.warningbits == self.ref_1393B.soldier_agent_lwfn8.index) {
       var_1 = "blueprint_unlock_" + self.overwatch_soldiers_05_bombers;
       var_2 = scripts\mp\gametypes\br_quest_util::riotshield_init_cp(self.overwatch_soldiers_05_bombers);
 
       foreach(var_4 in scripts\mp\utility\teams::getteamdata(self.team, "players")) {
-        var_4 scripts\cp\vehicles\vehicle_compass_cp::ref_120a4(var_1);
+        var_4 scripts\cp\vehicles\vehicle_compass_cp::ref_120A4(var_1);
 
         if(var_2 > 0) {
           var_4 thread scripts\mp\hud_message::showsplash("br_unlockable_weapon_splash", var_2);
         }
       }
 
-      self.ref_1393b.soldier_agent_lwfn8.ref_1296d = 1;
+      self.ref_1393B.soldier_agent_lwfn8.ref_1296D = 1;
       logtrophysuccesful(var_0);
       var_6 = scripts\mp\gametypes\br_quest_util::getquestindex("blueprintextract_easterevent");
       scripts\mp\gametypes\br_quest_util::lookforvehicles(self.team, var_0, 8, var_6);
       level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_extract_success", self.team, 1, 1);
-      self.ref_12d2e = self.ref_1393b.soldier_agent_lwfn1.origin;
-      self.ref_12d2b = self.ref_1393b.soldier_agent_lwfn1.angles;
+      self.ref_12D2E = self.ref_1393B.soldier_agent_lwfn1.origin;
+      self.ref_12D2B = self.ref_1393B.soldier_agent_lwfn1.angles;
       self.result = "success";
       thread scripts\mp\gametypes\br_quest_util::removequestinstance();
       return;
@@ -410,21 +410,21 @@ function logtrophysuccesful(var_0) {
   var_4 = scripts\mp\gametypes\br_quest_util::getquestindex("blueprintextract_easterevent");
   var_5 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("blueprintextract_easterevent"));
   var_6 = scripts\mp\gametypes\br_quest_util::riotshield_init_cp(self.overwatch_soldiers_05_bombers);
-  var_2.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_4, var_3, var_5, var_6);
+  var_2.ref_121B5 = scripts\mp\gametypes\br_quest_util::ref_121B9(var_4, var_3, var_5, var_6);
   waitframe();
   scripts\mp\gametypes\br_quest_util::displayteamsplash(var_1, "br_blueprint_extract_quest_complete_easterevent", var_2);
 }
 
 function rocket_missile(var_0) {
   var_1 = spawnStruct();
-  var_1.ref_12fa3 = "getInactiveHelipads";
-  var_1.ref_12f9f = (var_0.origin[0], var_0.origin[1], 0);
-  var_1.ref_12fa6 = 30000;
-  var_1.ref_12fa7 = 0;
-  var_1.ref_12fa4 = getdvarint("scr_br_blueprintextract_idealMaxRange", 20000);
-  var_1.ref_12fa5 = getdvarint("scr_br_blueprintextract_idealMinRange", 15000);
-  var_1.ref_12fa1 = 1;
-  var_1.ref_12c4a = var_0.ref_12c4a;
+  var_1.ref_12FA3 = "getInactiveHelipads";
+  var_1.ref_12F9F = (var_0.origin[0], var_0.origin[1], 0);
+  var_1.ref_12FA6 = 30000;
+  var_1.ref_12FA7 = 0;
+  var_1.ref_12FA4 = getdvarint("scr_br_blueprintextract_idealMaxRange", 20000);
+  var_1.ref_12FA5 = getdvarint("scr_br_blueprintextract_idealMinRange", 15000);
+  var_1.ref_12FA1 = 1;
+  var_1.ref_12C4A = var_0.ref_12C4A;
   return var_1;
 }
 

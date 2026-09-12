@@ -272,7 +272,7 @@ function cyberattack() {
 
 function ref_13862() {
   if(!scripts\mp\flags::gameflag("prematch_done")) {
-    level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+    level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   }
 
   level.objectives["allies"] scripts\mp\gameobjects::requestid(1, 1);
@@ -300,7 +300,7 @@ function ref_13862() {
   scripts\mp\objidpoolmanager::objective_add_objective(var_0, "done", level.cyberemp.origin);
   level.cyberemp scripts\mp\gameobjects::setvisibleteam("none", var_0);
   objective_setownerteam(var_0, undefined);
-  level.cyberemp scripts\mp\gameobjects::ref_1317f("icon_waypoint_escort_emp", "waypoint_capture_kill", "mlg_icon_waypoint_emp_planted", var_0);
+  level.cyberemp scripts\mp\gameobjects::ref_1317F("icon_waypoint_escort_emp", "waypoint_capture_kill", "mlg_icon_waypoint_emp_planted", var_0);
   setcarriervisibility();
 }
 
@@ -311,10 +311,10 @@ function hidebombsitesaftermatchstart() {
 
   scripts\mp\objidpoolmanager::objective_set_play_intro(level.objectives["allies"].objidnum, 0);
   scripts\mp\objidpoolmanager::objective_set_play_outro(level.objectives["allies"].objidnum, 0);
-  scripts\mp\objidpoolmanager::ref_11f84(level.objectives["allies"].objidnum, 1);
+  scripts\mp\objidpoolmanager::ref_11F84(level.objectives["allies"].objidnum, 1);
   scripts\mp\objidpoolmanager::objective_set_play_intro(level.objectives["axis"].objidnum, 0);
   scripts\mp\objidpoolmanager::objective_set_play_outro(level.objectives["axis"].objidnum, 0);
-  scripts\mp\objidpoolmanager::ref_11f84(level.objectives["axis"].objidnum, 1);
+  scripts\mp\objidpoolmanager::ref_11F84(level.objectives["axis"].objidnum, 1);
   level.objectives["allies"] scripts\mp\gameobjects::setvisibleteam("none");
   level.objectives["axis"] scripts\mp\gameobjects::setvisibleteam("none");
 }
@@ -436,7 +436,7 @@ function allowedwhileplanting(var_0) {
   scripts\mp\utility\player::allow_gesture(var_0);
 
   if(var_0) {
-    scripts\engine\utility::ref_143b9(0.8, "bomb_allow_offhands");
+    scripts\engine\utility::ref_143B9(0.8, "bomb_allow_offhands");
     scripts\common\utility::allow_melee(var_0);
     scripts\common\utility::allow_mantle(var_0);
   } else {
@@ -454,9 +454,9 @@ function onenduse(var_0, var_1, var_2) {
 
   if(!var_2) {
     if(var_1.isdefusing) {
-      scripts\mp\gameobjects::ref_1317f("icon_waypoint_defuse_empsite_nt", "icon_waypoint_defend_empsite_nt", "mlg_icon_waypoint_emp_planted");
+      scripts\mp\gameobjects::ref_1317F("icon_waypoint_defuse_empsite_nt", "icon_waypoint_defend_empsite_nt", "mlg_icon_waypoint_emp_planted");
     } else {
-      scripts\mp\gameobjects::ref_1317f("icon_waypoint_defend_empsite", "icon_waypoint_target_empsite", "mlg_icon_waypoint_emp_planted");
+      scripts\mp\gameobjects::ref_1317F("icon_waypoint_defend_empsite", "icon_waypoint_target_empsite", "mlg_icon_waypoint_emp_planted");
     }
 
     if(isDefined(self.radialtimeobjid)) {
@@ -575,9 +575,9 @@ function onpickup(var_0, var_1, var_2) {
   scripts\mp\gameobjects::setobjectivestatusicons("icon_waypoint_escort_emp", "waypoint_capture_kill");
   level.objectives[var_5] scripts\mp\gameobjects::setvisibleteam("none");
   level.objectives[var_6] scripts\mp\gameobjects::setvisibleteam("any");
-  scripts\mp\objidpoolmanager::ref_11f84(level.objectives["allies"].objidnum, 0);
-  scripts\mp\objidpoolmanager::ref_11f84(level.objectives["axis"].objidnum, 0);
-  var_2 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "pickup", var_2.origin);
+  scripts\mp\objidpoolmanager::ref_11F84(level.objectives["allies"].objidnum, 0);
+  scripts\mp\objidpoolmanager::ref_11F84(level.objectives["axis"].objidnum, 0);
+  var_2 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "pickup", var_2.origin);
 }
 
 function ondrop(var_0) {
@@ -681,8 +681,8 @@ function onuse(var_0) {
   var_3 thread scripts\mp\awards::givemidmatchaward("mode_sd_defuse");
   var_3 scripts\mp\utility\stats::incpersstat("defuses", 1);
   var_3 scripts\mp\persistence::statsetchild("round", "defuses", var_3.pers["defuses"]);
-  var_3 scripts\cp\vehicles\vehicle_compass_cp::ref_1201f();
-  var_3 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "defuse", var_3.origin);
+  var_3 scripts\cp\vehicles\vehicle_compass_cp::ref_1201F();
+  var_3 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "defuse", var_3.origin);
   level.bombplanted = 0;
   thread bombdefused(level);
   resetbombsite(1, var_3);
@@ -733,8 +733,8 @@ function resetbombsite(var_0, var_1, var_2) {
   self.id = "bomb_zone";
   scripts\mp\gameobjects::allowuse("none");
   scripts\mp\gameobjects::setvisibleteam("none");
-  scripts\mp\objidpoolmanager::ref_11f84(level.objectives["allies"].objidnum, 1);
-  scripts\mp\objidpoolmanager::ref_11f84(level.objectives["axis"].objidnum, 1);
+  scripts\mp\objidpoolmanager::ref_11F84(level.objectives["allies"].objidnum, 1);
+  scripts\mp\objidpoolmanager::ref_11F84(level.objectives["axis"].objidnum, 1);
 }
 
 function setupforplanting() {
@@ -856,8 +856,8 @@ function bombplanted(var_0, var_1) {
   level.cyberemp scripts\mp\gameobjects::setvisibleteam("none");
   level.objectives["allies"] scripts\mp\gameobjects::setvisibleteam("none");
   level.objectives["axis"] scripts\mp\gameobjects::setvisibleteam("none");
-  scripts\mp\objidpoolmanager::ref_11f84(level.objectives["allies"].objidnum, 0);
-  scripts\mp\objidpoolmanager::ref_11f84(level.objectives["axis"].objidnum, 0);
+  scripts\mp\objidpoolmanager::ref_11F84(level.objectives["allies"].objidnum, 0);
+  scripts\mp\objidpoolmanager::ref_11F84(level.objectives["axis"].objidnum, 0);
   setgameendtime(0);
   level.scorelimitoverride = 1;
 
@@ -1109,19 +1109,19 @@ function onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
   scripts\mp\gametypes\common::oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5);
 
   if(var_0.isplanting) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "planting");
+    thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_2, "planting");
     var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
     var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
     return;
   }
 
   if(var_0.isbombcarrier) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "carrying");
+    thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_2, "carrying");
     return;
   }
 
   if(var_0.isdefusing) {
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "defusing");
+    thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_2, "defusing");
     return;
   }
 }
@@ -1154,13 +1154,13 @@ function awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
       } else if(istrue(var_13.isbombcarrier)) {
         var_13.isbombcarrier = 0;
 
-        if(istrue(var_13.ref_1334e)) {
+        if(istrue(var_13.ref_1334E)) {
           var_13 scripts\mp\utility\player::hideminimap();
         }
 
         var_1 thread scripts\mp\rank::scoreeventpopup("killed_emp_carrier");
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_cyber_kill_carrier");
-        thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "carrying");
+        thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "carrying");
       }
 
       if(var_1.pers["team"] == level.cyberemp.ownerteam && var_1 != level.cyberemp.carrier) {
@@ -1171,7 +1171,7 @@ function awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
           var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
           var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
           var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
-          thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "defending");
+          thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "defending");
         }
       }
     }
@@ -1192,7 +1192,7 @@ function awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
         var_1 thread scripts\mp\rank::scoreeventpopup("assault");
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
         var_19 notify("assault", var_1);
-        thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_9, "assaulting");
+        thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_9, "assaulting");
         continue;
       }
 
@@ -1208,7 +1208,7 @@ function awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
       var_19 notify("defend", var_1);
       var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
       var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
-      thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_9, "defending");
+      thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_9, "defending");
     }
   }
 }
@@ -1260,17 +1260,17 @@ function weaponswapwatcher() {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self endon("bomb_planted");
-  self.ref_1334e = 0;
+  self.ref_1334E = 0;
 
   for(;;) {
     if(self.currentprimaryweapon.basename == "iw8_cyberemp_mp") {
-      if(!istrue(self.ref_1334e)) {
+      if(!istrue(self.ref_1334E)) {
         scripts\mp\utility\player::showminimap();
-        self.ref_1334e = 1;
+        self.ref_1334E = 1;
       }
-    } else if(istrue(self.ref_1334e)) {
+    } else if(istrue(self.ref_1334E)) {
       scripts\mp\utility\player::hideminimap();
-      self.ref_1334e = 0;
+      self.ref_1334E = 0;
     }
 
     waitframe();

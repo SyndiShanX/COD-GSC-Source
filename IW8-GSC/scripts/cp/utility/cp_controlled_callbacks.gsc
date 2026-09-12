@@ -3,7 +3,7 @@
  * Script: scripts\cp\utility\cp_controlled_callbacks.gsc
 **********************************************************/
 
-function ref_12ec3(var_0) {
+function ref_12EC3(var_0) {
   var_1 = getdvarint("scr_br_aa_turret_flak_explosion_inner_radius", 500);
   var_2 = getdvarint("scr_br_aa_turret_flak_explosion_outer_radius", 1000);
   var_3 = getdvarint("scr_br_aa_turret_flak_vehicle_damage_bonus_min", 100);

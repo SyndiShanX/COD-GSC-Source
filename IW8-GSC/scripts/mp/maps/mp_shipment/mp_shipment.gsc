@@ -13,9 +13,9 @@ function main() {
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_shipment", "codcaster_compass_map_mp_shipment");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
-  var_0 = ref_132aa(level);
+  var_0 = ref_132AA(level);
   level.kill_border_triggers = scripts\engine\utility::array_combine(level.kill_border_triggers, var_0);
-  scripts\cp_mp\utility\game_utility::ref_12b3b();
+  scripts\cp_mp\utility\game_utility::ref_12B3B();
   setDvar("r_lightGridEnableTweaks", 1);
   setDvar("r_lightGridIntensity", 1.33);
   setDvar("r_umbraMinObjectContribution", 8);
@@ -39,7 +39,7 @@ function main() {
 
   battle_tracks_vehicleoccupancyenter(level);
   level.loadoutdefaultfiresalediscount = 1;
-  level.ref_133d1 = 1;
+  level.ref_133D1 = 1;
 }
 
 function binoculars_addtolosqueue() {
@@ -167,7 +167,7 @@ function battle_tracks_vehicleoccupancyenter() {
   }
 }
 
-function ref_132aa() {
+function ref_132AA() {
   var_0 = [];
   var_1 = spawn("trigger_radius", (5704, 1456, -176), 0, 24000, 25);
   var_0 = var_1;

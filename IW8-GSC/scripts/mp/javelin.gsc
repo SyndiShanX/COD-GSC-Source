@@ -19,7 +19,7 @@ function javelinusageloop() {
       self.javelin.stopthinking = 1;
     }
 
-    scripts\engine\utility::ref_143a5("weapon_change", "emp_cleared");
+    scripts\engine\utility::ref_143A5("weapon_change", "emp_cleared");
   }
 }
 
@@ -241,7 +241,7 @@ function javelin_holdstateupdate() {
 
   var_1 = 0;
 
-  if(!var_0 && self.javelin.target scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.javelin.target, self)) {
+  if(!var_0 && self.javelin.target scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141B9(self.javelin.target, self)) {
     javelin_queuestate("scanning");
     var_1 = 1;
   }
@@ -310,7 +310,7 @@ function javelin_firestateupdate() {
     return;
   }
 
-  if(!var_0 && self.javelin.target scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.javelin.target, self)) {
+  if(!var_0 && self.javelin.target scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141B9(self.javelin.target, self)) {
     javelin_queuestate("scanning");
   }
 

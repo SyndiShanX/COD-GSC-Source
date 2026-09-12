@@ -194,7 +194,7 @@ function break_out_of_disguise_loop() {
   add_command_to_action_tracker("tactical");
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143af("ads", "fire", "lethal", "tactical");
+    var_0 = scripts\engine\utility::ref_143AF("ads", "fire", "lethal", "tactical");
 
     if(scripts\engine\utility::array_contains(level.technicals[0].occupants, self)) {
       continue;

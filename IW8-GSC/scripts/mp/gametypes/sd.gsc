@@ -242,18 +242,18 @@ function onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(var_0.isplanting) {
-    scripts\mp\utility\game::ref_119ac(var_0, var_1, "Bomb Carrier Killed", var_0.origin, "was_planting_bomb");
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "planting");
+    scripts\mp\utility\game::ref_119AC(var_0, var_1, "Bomb Carrier Killed", var_0.origin, "was_planting_bomb");
+    thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_2, "planting");
     var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
     var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
     var_1 thread scripts\mp\awards::givemidmatchaward("mode_sd_plant_save");
     var_8 = 1;
   } else if(var_0.isbombcarrier) {
-    scripts\mp\utility\game::ref_119ac(var_0, var_1, "Bomb Carrier Killed", var_0.origin);
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "carrying");
+    scripts\mp\utility\game::ref_119AC(var_0, var_1, "Bomb Carrier Killed", var_0.origin);
+    thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_2, "carrying");
   } else if(var_0.isdefusing) {
-    scripts\mp\utility\game::ref_119ac(var_0, var_1, "Defuser Killed", var_0.origin);
-    thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "defusing");
+    scripts\mp\utility\game::ref_119AC(var_0, var_1, "Defuser Killed", var_0.origin);
+    thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_2, "defusing");
     var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
     var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
     var_1 thread scripts\mp\awards::givemidmatchaward("mode_sd_defuse_save");
@@ -270,7 +270,7 @@ function onnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
           var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
           var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
           var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
-          thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_2, "defending");
+          thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_2, "defending");
           var_8 = 1;
         }
       }
@@ -305,7 +305,7 @@ function ontimelimit() {
     }
   }
 
-  scripts\mp\utility\game::ref_119ac(undefined, undefined, "Time Limit Reached");
+  scripts\mp\utility\game::ref_119AC(undefined, undefined, "Time Limit Reached");
 }
 
 function updategametypedvars() {
@@ -363,7 +363,7 @@ function bombs() {
   }
 
   if(!scripts\mp\flags::gameflag("prematch_done")) {
-    level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+    level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   }
 
   level.sdbomb scripts\mp\gameobjects::requestid(1, 1, 2);
@@ -440,7 +440,7 @@ function onuseplantobject(var_0) {
   }
 
   scripts\mp\gametypes\obj_bombzone::bombzone_onuseplantobject(var_0);
-  scripts\mp\utility\game::ref_119ac(var_0, undefined, "Bomb Planted", var_0.origin);
+  scripts\mp\utility\game::ref_119AC(var_0, undefined, "Bomb Planted", var_0.origin);
   thread scripts\mp\music_and_dialog::bombplanted_music();
 }
 
@@ -459,7 +459,7 @@ function onbombexploded(var_0, var_1, var_2, var_3, var_4) {
   if(var_3 == game["attackers"]) {
     setgameendtime(0);
     wait 3;
-    scripts\mp\utility\game::ref_119ac(undefined, undefined, "Target Destroyed");
+    scripts\mp\utility\game::ref_119AC(undefined, undefined, "Target Destroyed");
     sd_endgame(game["attackers"], game["end_reason"]["target_destroyed"]);
     return;
   }

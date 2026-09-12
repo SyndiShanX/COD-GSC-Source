@@ -46,7 +46,7 @@ function technical_mp_waitandspawn() {
   var_1.ref = var_0.ref;
   var_1.rallypointhealth = var_0.rallypointhealth;
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("technical", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("technical", var_1, var_2);
 
   if(isDefined(var_3)) {
     if(isDefined(var_1.ref) && istrue(level.userallypointvehicles) && level.userallypointvehicles != 2) {

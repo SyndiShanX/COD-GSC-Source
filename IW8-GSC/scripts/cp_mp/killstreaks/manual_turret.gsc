@@ -33,7 +33,7 @@ function tryusemanualturretfromstruct(var_0) {
     }
   }
 
-  scripts\cp_mp\utility\weapon_utility::ref_12eb2();
+  scripts\cp_mp\utility\weapon_utility::ref_12EB2();
   var_1 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweaponswitchdeploy(var_0, getcompleteweaponname("deploy_manual_turret_mp"), 1, undefined, undefined, &weaponcleanupmanualturret);
 
   if(!istrue(var_1)) {
@@ -46,23 +46,23 @@ function tryusemanualturretfromstruct(var_0) {
     }
   }
 
-  ref_11acc(0);
+  ref_11ACC(0);
   var_2 = manualturret_create("manual_turret", var_0);
 
   if(!isDefined(var_2)) {
-    ref_11acc(1);
+    ref_11ACC(1);
     return false;
   }
 
   var_3 = manualturret_watchplacement(var_2, var_0, 0, 1.25);
 
   if(!isDefined(var_3)) {
-    ref_11acc(1);
+    ref_11ACC(1);
     var_2 delete();
     return false;
   }
 
-  ref_11acc(1);
+  ref_11ACC(1);
   manualturret_setplaced(var_2, var_3);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("manual_turret", "munitionUsed")) {
@@ -113,11 +113,11 @@ function manualturret_delayplacementinstructions(var_0) {
   level endon("game_ended");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
   self setclientomnvar("ui_turret_placement", 1);
-  thread ref_11ac6("death");
-  thread ref_11ac6("turret_placement_finished");
+  thread ref_11AC6("death");
+  thread ref_11AC6("turret_placement_finished");
 }
 
-function ref_11ac6(var_0) {
+function ref_11AC6(var_0) {
   self endon("cleared_placement");
   self endon("disconnect");
   level endon("game_ended");
@@ -160,7 +160,7 @@ function manualturret_create(var_0, var_1) {
   var_3.helperdrone_isbeingpingedbydrone dontinterpolate();
   var_3.helperdrone_isbeingpingedbydrone hide();
   var_3.helperdrone_isbeingpingedbydrone.moverdoesnotkill = 1;
-  var_3.helperdrone_isbeingpingedbydrone.ref_13e8d = var_3;
+  var_3.helperdrone_isbeingpingedbydrone.ref_13E8D = var_3;
   return var_3;
 }
 
@@ -197,8 +197,8 @@ function manualturret_setplaced(var_0, var_1) {
 
   if(isDefined(var_1.moving_platform)) {
     var_0.moving_platform = var_1.moving_platform;
-    var_0.ref_11dbe = var_1.ref_11dbe;
-    var_0.ref_11dbd = var_1.ref_11dbd;
+    var_0.ref_11DBE = var_1.ref_11DBE;
+    var_0.ref_11DBD = var_1.ref_11DBD;
   }
 
   if(isDefined(self.hideammoindex)) {
@@ -292,7 +292,7 @@ function manualturret_setplaced(var_0, var_1) {
   thread manualturret_watchpickup(var_1);
   thread manualturret_watchdamage(var_1);
   thread manualturret_watchdeath(var_1);
-  thread ref_11ace();
+  thread ref_11ACE();
   thread manualturret_watchtimeout(var_1);
   thread manualturret_watchdisown(var_1);
 }
@@ -305,13 +305,13 @@ function manualturret_setcarried(var_0) {
 
   if(istrue(self.inuse)) {
     self.inuse = undefined;
-    ref_11acd(var_0, 1);
+    ref_11ACD(var_0, 1);
   }
 
   if(isDefined(self.moving_platform)) {
     self.moving_platform = undefined;
-    self.ref_11dbe = undefined;
-    self.ref_11dbd = undefined;
+    self.ref_11DBE = undefined;
+    self.ref_11DBD = undefined;
     self unlink();
   }
 
@@ -339,18 +339,18 @@ function manualturret_setcarried(var_0) {
   self.carriedby = var_0;
   self notify("carried_turret");
   self playSound("sentry_pickup");
-  var_0 scripts\cp_mp\utility\weapon_utility::ref_12eb2();
+  var_0 scripts\cp_mp\utility\weapon_utility::ref_12EB2();
   var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon("deploy_manual_turret_mp");
   var_0 scripts\cp_mp\utility\inventory_utility::_switchtoweapon("deploy_manual_turret_mp");
-  ref_11acc(var_0, 0);
+  ref_11ACC(var_0, 0);
   var_5 = manualturret_watchplacement(var_0, self, self.streakinfo, 1, 2);
 
   if(!isDefined(var_5)) {
-    ref_11acc(var_0, 1);
+    ref_11ACC(var_0, 1);
     return 0;
   }
 
-  ref_11acc(var_0, 1);
+  ref_11ACC(var_0, 1);
   manualturret_setplaced(var_0, self, var_5);
 }
 
@@ -361,7 +361,7 @@ function manualturret_switchbacklastweapon(var_0, var_1, var_2) {
     scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_2);
   }
 
-  var_3 = scripts\cp_mp\utility\weapon_utility::ref_12cc7(self.lastdroppableweaponobj);
+  var_3 = scripts\cp_mp\utility\weapon_utility::ref_12CC7(self.lastdroppableweaponobj);
 
   if(istrue(var_1)) {
     scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var_3);
@@ -420,7 +420,7 @@ function manualturret_watchuse(var_0, var_1) {
       continue;
     }
 
-    if(istrue(self.ref_138e0)) {
+    if(istrue(self.ref_138E0)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
         var_3[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/TURRET_DYING");
       }
@@ -451,7 +451,7 @@ function manualturret_watchuse(var_0, var_1) {
     }
 
     self.inuse = 1;
-    ref_11acd(var_3, 0);
+    ref_11ACD(var_3, 0);
     var_3 disableturretdismount();
 
     if(var_3 == var_0) {
@@ -469,7 +469,7 @@ function manualturret_watchuse(var_0, var_1) {
           var_3 enableturretdismount();
 
           if(var_3 scripts\cp_mp\utility\player_utility::_isalive()) {
-            ref_11acd(var_3, 1);
+            ref_11ACD(var_3, 1);
           }
         }
 
@@ -478,16 +478,16 @@ function manualturret_watchuse(var_0, var_1) {
     }
 
     var_3 notify("start_turret_use");
-    self.ref_126e2 = var_3;
+    self.ref_126E2 = var_3;
     manualturret_makealltriggersusable(0);
-    var_3 scripts\cp_mp\utility\weapon_utility::ref_12eb2();
+    var_3 scripts\cp_mp\utility\weapon_utility::ref_12EB2();
     var_3.useweapon = level.sentrysettings[self.turrettype].playerweaponinfo;
     var_3 scripts\cp_mp\utility\inventory_utility::_giveweapon(var_3.useweapon, undefined, undefined, 1);
     var_6 = gettime();
     var_7 = undefined;
 
     while(gettime() - var_6 < 1000) {
-      var_7 = ref_11ac8(var_3, var_3.useweapon);
+      var_7 = ref_11AC8(var_3, var_3.useweapon);
 
       if(!isDefined(var_7) || istrue(var_7)) {
         break;
@@ -498,13 +498,13 @@ function manualturret_watchuse(var_0, var_1) {
 
     if(!istrue(var_7)) {
       self.inuse = undefined;
-      self.ref_126e2 = undefined;
+      self.ref_126E2 = undefined;
       manualturret_makealltriggersusable(1);
 
       if(isDefined(var_3)) {
         if(var_3 scripts\cp_mp\utility\player_utility::_isalive()) {
-          ref_11acd(var_3, 1);
-          var_8 = var_3 scripts\cp_mp\utility\weapon_utility::ref_12cc7(var_3.lastdroppableweaponobj);
+          ref_11ACD(var_3, 1);
+          var_8 = var_3 scripts\cp_mp\utility\weapon_utility::ref_12CC7(var_3.lastdroppableweaponobj);
           var_3 switchtoweaponimmediate(var_8);
         }
 
@@ -525,26 +525,26 @@ function manualturret_watchuse(var_0, var_1) {
     manualturret_applyoverlay(var_3);
     thread manualturret_disablefire(var_3, 0.5, 1);
     thread manualturret_watchammotracker(var_3);
-    thread ref_11ac9(var_3);
-    thread ref_11aca(var_3);
+    thread ref_11AC9(var_3);
+    thread ref_11ACA(var_3);
     thread manualturret_endturretusewatch(var_3);
     thread manualturret_endturretonplayer(var_3);
     thread manualturret_watchplayerangles(var_3);
   }
 }
 
-function ref_11ac8(var_0, var_1) {
+function ref_11AC8(var_0, var_1) {
   self endon("kill_turret");
   self endon("turret_switch_weapon_timeout");
   var_0 endon("death_or_disconnect");
   level endon("game_ended");
-  thread ref_11acf(1);
+  thread ref_11ACF(1);
   var_2 = var_0 scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_1, 1);
   self notify("turret_switch_weapon_ended");
   return var_2;
 }
 
-function ref_11acf(var_0) {
+function ref_11ACF(var_0) {
   self endon("kill_turret");
   self endon("turret_switch_weapon_ended");
   level endon("game_ended");
@@ -759,7 +759,7 @@ function manualturret_disableenemyoutlines(var_0) {
 function manualturret_endplayeruse(var_0) {
   if(isDefined(var_0)) {
     var_0.inuse = undefined;
-    var_0.ref_126e2 = undefined;
+    var_0.ref_126E2 = undefined;
     manualturret_makealltriggersusable(var_0, 1);
   }
 
@@ -782,19 +782,19 @@ function manualturret_endplayeruse(var_0) {
     }
 
     self.currentturret = undefined;
-    ref_11acd(1);
+    ref_11ACD(1);
 
     if(scripts\cp_mp\utility\game_utility::isnightmap()) {
       scripts\common\utility::brjugg_oncrateuse(1);
     }
 
     if(level.gametype != "br" || level.gametype == "br" && !istrue(self.inlaststand)) {
-      var_1 = scripts\cp_mp\utility\weapon_utility::ref_12cc7(self.lastdroppableweaponobj);
+      var_1 = scripts\cp_mp\utility\weapon_utility::ref_12CC7(self.lastdroppableweaponobj);
       self switchtoweaponimmediate(var_1);
     }
 
     scripts\cp_mp\utility\inventory_utility::_takeweapon(self.useweapon);
-    thread ref_11ac7();
+    thread ref_11AC7();
 
     if(scripts\cp_mp\utility\player_utility::_isalive()) {
       self setOrigin(var_0.lastuserpos, 1);
@@ -806,7 +806,7 @@ function manualturret_endplayeruse(var_0) {
   }
 }
 
-function ref_11ac7() {
+function ref_11AC7() {
   self endon("death_or_disconnect");
   scripts\common\utility::allow_crouch(0, "manual_turret");
   scripts\common\utility::allow_prone(0, "manual_turret");
@@ -832,7 +832,7 @@ function manualturret_disableplayeruseonconnect(var_0, var_1) {
   }
 }
 
-function ref_11ac9(var_0) {
+function ref_11AC9(var_0) {
   self endon("kill_turret");
   self endon("carried_turret");
   var_0 endon("end_turret_use");
@@ -849,7 +849,7 @@ function ref_11ac9(var_0) {
   }
 }
 
-function ref_11aca(var_0) {
+function ref_11ACA(var_0) {
   self endon("kill_turret");
   self endon("carried_turret");
   var_0 endon("end_turret_use");
@@ -895,7 +895,7 @@ function manualturret_endturretusewatch(var_0) {
 function manualturret_endturretonplayer(var_0) {
   var_0 endon("end_turret_use");
   level endon("game_ended");
-  var_0 scripts\engine\utility::ref_143a5("death_or_disconnect", "last_stand_start");
+  var_0 scripts\engine\utility::ref_143A5("death_or_disconnect", "last_stand_start");
   manualturret_endplayeruse(var_0, self);
 }
 
@@ -940,7 +940,7 @@ function manualturret_watchpickup(var_0) {
       continue;
     }
 
-    if(istrue(self.ref_138e0)) {
+    if(istrue(self.ref_138E0)) {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
         var_1[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/TURRET_DYING");
       }
@@ -1072,11 +1072,11 @@ function manualturret_watchdeath(var_0) {
     }
 
     self.streakinfo.onspray = istrue(var_2);
-    var_0 scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+    var_0 scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
   }
 
-  if(isDefined(self.ref_126e2)) {
-    manualturret_endplayeruse(self.ref_126e2, self);
+  if(isDefined(self.ref_126E2)) {
+    manualturret_endplayeruse(self.ref_126E2, self);
   }
 
   if(isDefined(self.useownerobj)) {
@@ -1122,7 +1122,7 @@ function manualturret_watchdeath(var_0) {
   self delete();
 }
 
-function ref_11ace() {
+function ref_11ACE() {
   self endon("kill_turret");
   self endon("carried_turret");
   level waittill("game_ended");
@@ -1148,14 +1148,14 @@ function manualturret_watchtimeout(var_0) {
     var_2 = (var_1 - self.timeelapsed) / var_1;
     var_2 = int(ceil(clamp(var_2, 0, 1) * 100));
 
-    if(isDefined(self.ref_126e2)) {
-      self.ref_126e2 setclientomnvar("ui_killstreak_countdown", int(var_2));
+    if(isDefined(self.ref_126E2)) {
+      self.ref_126E2 setclientomnvar("ui_killstreak_countdown", int(var_2));
     }
 
     self.timeelapsed += level.framedurationseconds;
 
-    if(self.timeelapsed >= var_1 - 1.5 && !istrue(self.ref_138e0)) {
-      self.ref_138e0 = 1;
+    if(self.timeelapsed >= var_1 - 1.5 && !istrue(self.ref_138E0)) {
+      self.ref_138E0 = 1;
     }
 
     waitframe();
@@ -1245,7 +1245,7 @@ function manualturret_makealltriggersusable(var_0) {
   self.useotherobj makeusable();
 }
 
-function ref_11acc(var_0) {
+function ref_11ACC(var_0) {
   if(scripts\cp_mp\utility\player_utility::_isalive()) {
     scripts\common\utility::allow_sprint(var_0);
     scripts\common\utility::allow_weapon_switch(var_0);
@@ -1257,7 +1257,7 @@ function ref_11acc(var_0) {
   }
 }
 
-function ref_11acd(var_0) {
+function ref_11ACD(var_0) {
   if(scripts\cp_mp\utility\player_utility::_isalive()) {
     scripts\common\utility::allow_offhand_weapons(var_0);
     scripts\common\utility::allow_melee(var_0);

@@ -88,7 +88,7 @@ function watchforusermessageevents() {
 
   for(;;) {
     self waittill("log_user_event_start");
-    var_0 = scripts\engine\utility::ref_143ad("log_user_event_end", "log_user_event_generic_event");
+    var_0 = scripts\engine\utility::ref_143AD("log_user_event_end", "log_user_event_generic_event");
 
     if(isDefined(var_0) && var_0 == "log_user_event_generic_event") {
       self iprintlnbold("Event Logged");
@@ -940,7 +940,7 @@ function logevent_playerhealed(var_0, var_1, var_2) {
   var_0 dlog_recordplayerevent("dlog_event_player_heal", ["reviver", var_2, "player_life_index", var_0.matchdatalifeindex, "pos_x", var_0.origin[0], "pos_y", var_0.origin[1], "pos_z", var_0.origin[2], "heal_ammount", var_1, "was_revived", var_3]);
 }
 
-function ref_119b7(var_0, var_1) {
+function ref_119B7(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -985,7 +985,7 @@ function logevent_killstreakexpired(var_0, var_1, var_2, var_3, var_4, var_5, va
   var_0 dlog_recordplayerevent("dlog_event_kill_streak_expired", ["lifeindex", var_1, "killstreak_name", var_2, "killstreak_pickedup", var_3, "expiration_thru_death", var_6, "shots", var_7, "hits", var_8, "kills", var_9, "score", var_10, "time_msfrommatchstart", var_11, "playerposx", var_5[0], "playerposy", var_5[1], "playerposz", var_5[2]]);
 }
 
-function ref_119bf(var_0, var_1, var_2, var_3, var_4) {
+function ref_119BF(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_4)) {
     var_4 = "";
   }
@@ -993,10 +993,10 @@ function ref_119bf(var_0, var_1, var_2, var_3, var_4) {
   var_0 dlog_recordplayerevent("dlog_event_player_xp_earned", ["player_life_index", var_0.matchdatalifeindex, "player_xp_earned", var_1, "weapon_s", var_2, "weapon_xp_earned", var_3, "xp_event", var_4]);
 }
 
-function ref_119ba(var_0, var_1) {
+function ref_119BA(var_0, var_1) {
   var_0 dlog_recordplayerevent("dlog_event_player_spawnselection_choice", ["player_life_index", var_0.matchdatalifeindex, "selection", var_1]);
 }
 
-function ref_119b1(var_0, var_1, var_2, var_3) {
+function ref_119B1(var_0, var_1, var_2, var_3) {
   var_0 dlog_recordplayerevent("dlog_event_player_challenge_item_unlocked", ["item_unlock_ref", var_1, "item_type", var_2, "item_id", var_3]);
 }

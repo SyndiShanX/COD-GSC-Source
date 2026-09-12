@@ -23,7 +23,7 @@ function init_dvars() {
 
   level.iswztrain.lifetime = getdvarfloat("scr_decon_station_lifetime", 20);
   level.iswztrain.weaponswitchhintlogic = getdvarfloat("scr_decon_station_lifetime_last_circle", -1);
-  level.iswztrain.ref_142cd = getdvarfloat("scr_decon_station_visibility_delay", 0.1);
+  level.iswztrain.ref_142CD = getdvarfloat("scr_decon_station_visibility_delay", 0.1);
   level.iswztrain.infinite_ammo = getdvarint("scr_decon_station_infinite_ammo", 0);
 }
 
@@ -145,8 +145,8 @@ function javelin_forceclear() {
   wait 0.4;
   self.headiconid = scripts\cp_mp\entityheadicons::setheadicon_factionimage(0, 20, undefined, undefined, undefined, undefined, 1);
   thread scripts\mp\weapons::outlineequipmentforowner(self);
-  self.ref_13b97 = gettime();
-  self.ref_13b96 = gettime() + level.iswztrain.lifetime * 1000;
+  self.ref_13B97 = gettime();
+  self.ref_13B96 = gettime() + level.iswztrain.lifetime * 1000;
   level.iswztrain.instances = scripts\engine\utility::array_add(level.iswztrain.instances, self);
   var_0 = self.origin - (0, 0, 125);
   var_1 = 20;
@@ -159,7 +159,7 @@ function javelin_forceclear() {
   self.trigger = var_3;
   scripts\mp\gametypes\br_quest_util::init_tactical_boxes(3, 0, 1, self.origin);
   scripts\mp\gametypes\br_quest_util::ref_13369();
-  scripts\mp\gametypes\br_quest_util::ref_1316f(250);
+  scripts\mp\gametypes\br_quest_util::ref_1316F(250);
   var_4 = level.iswztrain.lifetime;
 
   if(isDefined(level.br_circle) && scripts\mp\gametypes\br_circle::islastcircle() && level.iswztrain.weaponswitchhintlogic > 0) {
@@ -176,7 +176,7 @@ function javelin_forceclear() {
 function jugg_idle_until_shot_or_near(var_0) {
   self.start_death_from_above_sequence = 1;
   thread jugg_modifyvehicletoplayerdamage();
-  var_1 = int((var_0.ref_13b96 - gettime()) / 1000);
+  var_1 = int((var_0.ref_13B96 - gettime()) / 1000);
 }
 
 function jugg_managestockammo() {
@@ -227,9 +227,9 @@ function jugg_get_closest_attackable_player() {
 }
 
 function jugg_combo(var_0, var_1) {
-  var_2 = gettime() + 500 >= var_1.tracknonoobplayerlocation.ref_13b96;
+  var_2 = gettime() + 500 >= var_1.tracknonoobplayerlocation.ref_13B96;
 
-  if(!var_2 && jugg_addtoactivejugglist(var_0) && !istrue(var_1.tracknonoobplayerlocation.ref_122f2)) {
+  if(!var_2 && jugg_addtoactivejugglist(var_0) && !istrue(var_1.tracknonoobplayerlocation.ref_122F2)) {
     var_3 = var_0;
     var_3.start_death_from_above_sequence = 1;
     jugg_idle_until_shot_or_near(var_3, var_1.tracknonoobplayerlocation);
@@ -417,7 +417,7 @@ function jug_encounter_test(var_0, var_1, var_2) {
   level endon("game_ended");
   thread jeep_initdamage(var_0, var_1);
   self setscriptablepartstate("effects", "activeDestroyStart", 0);
-  self.ref_122f2 = 1;
+  self.ref_122F2 = 1;
 
   if(!isDefined(var_2)) {
     var_2 = 0.15;
@@ -507,7 +507,7 @@ function jeep(var_0) {
   self endon("death");
   self endon("missile_stuck");
   var_0 endon("disconnect");
-  var_1 = scripts\engine\utility::ref_143b9(2, "touching_platform");
+  var_1 = scripts\engine\utility::ref_143B9(2, "touching_platform");
 
   if(var_1 == "timeout") {
     return;
@@ -519,8 +519,8 @@ function jeep(var_0) {
 }
 
 function tugofwar_tank(var_0) {
-  if(isDefined(level.ref_145f1)) {
-    foreach(var_2 in level.ref_145f1.ref_13c8d) {
+  if(isDefined(level.ref_145F1)) {
+    foreach(var_2 in level.ref_145F1.ref_13C8D) {
       if(var_2 == var_0) {
         return true;
       }

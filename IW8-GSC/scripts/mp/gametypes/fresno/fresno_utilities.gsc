@@ -3,7 +3,7 @@
  * Script: scripts\mp\gametypes\fresno\fresno_utilities.gsc
 ************************************************************/
 
-function ref_142d3(var_0, var_1, var_2) {
+function ref_142D3(var_0, var_1, var_2) {
   level endon("game_ended");
 
   if(isDefined(var_2)) {

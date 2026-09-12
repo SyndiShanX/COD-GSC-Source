@@ -58,7 +58,7 @@ function ref_12120(var_0, var_1, var_2, var_3) {
     }
   }
 
-  if(_calloutmarkerping_handleluinotify_enemyrepinged::ref_124f5()) {
+  if(_calloutmarkerping_handleluinotify_enemyrepinged::ref_124F5()) {
     var_7 = self getplayerdata("common", "halloweenTrickOrTreatLocations", 16);
 
     if(!var_7) {
@@ -67,7 +67,7 @@ function ref_12120(var_0, var_1, var_2, var_3) {
       self reportchallengeuserevent("collect_item", "halloween_treat_15");
       self dlog_recordplayerevent("dlog_event_halloween_treat", ["reward_id", 15]);
       self setplayerdata("common", "halloweenTrickOrTreatLocations", 16, 1);
-      ref_13e12();
+      ref_13E12();
     }
 
     return;
@@ -144,11 +144,11 @@ function ref_12120(var_0, var_1, var_2, var_3) {
   var_10 = self getplayerdata("common", "halloweenTrickOrTreatLocations", var_9);
 
   if(var_10) {
-    ref_13e19();
+    ref_13E19();
 
     if(!istrue(self.setplayersquadindex)) {
       self.setplayersquadindex = 1;
-      ref_13e12();
+      ref_13E12();
     }
 
     return;
@@ -157,10 +157,10 @@ function ref_12120(var_0, var_1, var_2, var_3) {
   var_11 = self getplayerdata("common", "halloweenTrickOrTreatCandy");
   var_8 = forceexplosivedeath();
   var_12 = regulateturretrateoffire(var_8, var_11, var_5);
-  ref_128b2(var_9, var_12, var_2, var_7);
+  ref_128B2(var_9, var_12, var_2, var_7);
 }
 
-function ref_13e19() {
+function ref_13E19() {
   var_0 = randomfloat(1);
 
   if(var_0 < getdvarfloat("scr_halloween_finished_trick_chance", 0)) {
@@ -172,14 +172,14 @@ function ref_13e19() {
   return false;
 }
 
-function ref_128b2(var_0, var_1, var_2, var_3) {
+function ref_128B2(var_0, var_1, var_2, var_3) {
   if(var_1 == 0) {
     thread ref_12458(level, var_2);
   }
 
   if(var_1 < 0) {
     if(getdvarint("scr_halloween_trick_killswitch", 0) == 0) {
-      ref_12d34(var_1);
+      ref_12D34(var_1);
       return;
     }
 
@@ -189,7 +189,7 @@ function ref_128b2(var_0, var_1, var_2, var_3) {
   if(var_1 > 0) {
     self setclientomnvar("ui_halloween_event", 99);
     thread ref_12776(level);
-    thread ref_12d33(var_1, var_0);
+    thread ref_12D33(var_1, var_0);
     return;
   }
 }
@@ -210,7 +210,7 @@ function isskydivestatedisabled() {
   var_4 = getdvarint("scr_halloween_candy_value", 10);
   var_5 = forceexplosivedeath();
   var_6 = regulateturretrateoffire(var_5, var_3, var_4);
-  ref_128b2(var_0, var_6);
+  ref_128B2(var_0, var_6);
 }
 
 function isstandardsandbox(var_0) {
@@ -328,7 +328,7 @@ function issmokinggun() {
 function isstunnedby(var_0) {
   self iprintln("Finishing location " + var_0);
   self setclientomnvar("ui_halloween_event", 99);
-  thread ref_12d33(10, var_0);
+  thread ref_12D33(10, var_0);
 
   if(var_0 == 14) {
     self iprintln("Final Loot award!");
@@ -362,7 +362,7 @@ function regulateturretrateoffire(var_0, var_1, var_2) {
   return (var_6 + 1) * -1;
 }
 
-function ref_12d33(var_0, var_1) {
+function ref_12D33(var_0, var_1) {
   self setclientomnvar("ui_halloween_event", 99);
   var_2 = 0;
   var_3 = "";
@@ -419,12 +419,12 @@ function ref_12d33(var_0, var_1) {
     self reportchallengeuserevent("collect_item", var_3);
     self dlog_recordplayerevent("dlog_event_halloween_treat", ["reward_id", var_0]);
     self setplayerdata("common", "halloweenTrickOrTreatLocations", var_1, 1);
-    ref_13e12();
+    ref_13E12();
     return;
   }
 }
 
-function ref_13e12() {
+function ref_13E12() {
   var_0 = 0;
 
   for(var_1 = 0; var_1 < 15; var_1++) {
@@ -443,7 +443,7 @@ function ref_13e12() {
   }
 }
 
-function ref_12d34(var_0) {
+function ref_12D34(var_0) {
   self setclientomnvar("ui_halloween_event", var_0 * -1);
 }
 
@@ -504,7 +504,7 @@ function isusingtacmap(var_0) {
 
 function isvalidanimsuiteentity(var_0) {
   if(int(var_0) < 0) {
-    ref_13e19();
+    ref_13E19();
     return;
   }
 

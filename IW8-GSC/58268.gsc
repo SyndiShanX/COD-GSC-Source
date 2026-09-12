@@ -6,30 +6,30 @@
 function init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("nuke", &_calloutmarkerping_handleluinotify_acknowledged::tryusenukefromstruct);
   scripts\mp\killstreaks\killstreaks::registerkillstreak("nuke_select_location", &_calloutmarkerping_handleluinotify_acknowledged::tryusenukefromstruct);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "hostmigration_waitLongDurationWithPause", &ref_11eea);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "hostmigration_waitTillHostMigrationDone", &ref_11eeb);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "hostmigration_waitLongDurationWithPause", &ref_11EEA);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "hostmigration_waitTillHostMigrationDone", &ref_11EEB);
   scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "delayEndGame", &nuke_delayendgame);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "addTeamRankXPMultiplier", &ref_11edd);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "addTeamRankXPMultiplier", &ref_11EDD);
   scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "cankill", &nuke_cankill);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "killPlayer", &ref_11eec);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "killPlayerWithAttacker", &ref_11eed);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "killPlayer", &ref_11EEC);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "killPlayerWithAttacker", &ref_11EED);
   scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "destroyActiveObjects", &nuke_destroyactiveobjects);
   scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "isPlayerInRadZone", &nuke_isplayerinradzone);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "stopTheClock", &ref_11ef7);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("nuke", "stopTheClock", &ref_11EF7);
 }
 
-function ref_11eea(var_0) {
+function ref_11EEA(var_0) {
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0);
 }
 
-function ref_11eeb() {
+function ref_11EEB() {
   return scripts\mp\hostmigration::waittillhostmigrationdone();
 }
 
 function nuke_delayendgame(var_0, var_1) {
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
 
-  if(istrue(level.ref_11bd4)) {
+  if(istrue(level.ref_11BD4)) {
     level thread scripts\mp\gamelogic::endgame(var_1, game["end_reason"]["mercy_win"], game["end_reason"]["mercy_loss"], 1, 1);
     return;
   }
@@ -37,7 +37,7 @@ function nuke_delayendgame(var_0, var_1) {
   level thread scripts\mp\gamelogic::endgame(var_1, game["end_reason"]["nuke_end"], undefined, 1);
 }
 
-function ref_11edd(var_0, var_1, var_2) {
+function ref_11EDD(var_0, var_1, var_2) {
   scripts\mp\rank::addteamrankxpmultiplier(var_0, var_1, var_2);
 }
 
@@ -102,7 +102,7 @@ function nuke_isplayerinradzone(var_0, var_1, var_2) {
   return var_3 < var_2;
 }
 
-function ref_11eec(var_0) {
+function ref_11EEC(var_0) {
   if(isPlayer(var_0)) {
     var_1 = getcompleteweaponname("nuke_mp");
     scripts\mp\damage::addattacker(var_0, level.nukeinfo.player, undefined, var_1, 0, undefined, undefined, undefined, undefined, undefined);
@@ -112,7 +112,7 @@ function ref_11eec(var_0) {
   }
 }
 
-function ref_11eed(var_0) {
+function ref_11EED(var_0) {
   var_1 = level.nukeinfo.player;
 
   if(level.teambased && var_0.team == var_1.team) {
@@ -123,7 +123,7 @@ function ref_11eed(var_0) {
   var_0 dodamage(999999, level.nuke_inflictor.origin, var_1, level.nuke_inflictor, "MOD_EXPLOSIVE", var_2, "none");
 }
 
-function ref_11ef7(var_0) {
+function ref_11EF7(var_0) {
   var_1 = "scr_" + var_0 + "_timelimit";
   level.watchdvars[var_1].value = 0;
   level.overridewatchdvars[var_1] = 0;

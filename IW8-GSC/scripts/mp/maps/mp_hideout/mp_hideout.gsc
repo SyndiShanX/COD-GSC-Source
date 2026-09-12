@@ -80,14 +80,14 @@ function managegate() {
 
   var_4.heli_isleaving = var_4.origin;
   var_13 = scripts\engine\utility::getStruct("gate2LeftOpen", "targetname");
-  var_4.ref_1212b = var_13.origin;
+  var_4.ref_1212B = var_13.origin;
   var_5.heli_isleaving = var_5.origin;
   var_14 = scripts\engine\utility::getStruct("gate2RightOpen", "targetname");
-  var_5.ref_1212b = var_14.origin;
+  var_5.ref_1212B = var_14.origin;
   var_15 = 4;
   var_16 = 8;
-  var_5 moveTo(var_5.ref_1212b, var_15, var_15 * 0.1, var_15 * 0.1);
-  var_4 moveTo(var_4.ref_1212b, var_15, var_15 * 0.1, var_15 * 0.1);
+  var_5 moveTo(var_5.ref_1212B, var_15, var_15 * 0.1, var_15 * 0.1);
+  var_4 moveTo(var_4.ref_1212B, var_15, var_15 * 0.1, var_15 * 0.1);
   level waittill("prematch_countdown");
   var_0 solid();
   waittillframeend();

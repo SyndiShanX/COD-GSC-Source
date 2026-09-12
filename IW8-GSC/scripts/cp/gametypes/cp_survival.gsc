@@ -304,7 +304,7 @@ function onplayerconnect() {
       var_0 scripts\cp\utility::allow_player_teleport(0);
       var_0.achievement_registration_func = &scripts\cp\cp_achievement::register_default_achievements;
       var_0 scripts\cp\cp_achievement::switchminimapid(var_0);
-      var_0.ref_136a1 = var_0.connect_time;
+      var_0.ref_136A1 = var_0.connect_time;
       var_0 scripts\cp\cp_mapselect::set_uav_radarstrength(var_0);
       var_0 scripts\cp\cp_persistence::lb_player_update_stat("waveNum", level.wave_num, 1);
       var_0 scripts\cp\cp_wall_buys::setup_player_weapon_models(var_0);
@@ -475,13 +475,13 @@ function onspawnplayer(var_0) {
     self[[level.custom_onspawnplayer_func]]();
   }
 
-  if(istrue(level.ref_121c8)) {
+  if(istrue(level.ref_121C8)) {
     self getclientomnvar();
   } else {
     self weaponswitchbuttonPressed();
   }
 
-  if(istrue(level.ref_121c9)) {
+  if(istrue(level.ref_121C9)) {
     self skydive_cutautodeployon();
   } else {
     self skydive_cutautodeployoff();
@@ -881,8 +881,8 @@ function default_strike_player_connect_black_screen(var_0) {
     var_0 setclientomnvar("ui_hide_hud", 0);
     scripts\cp\cp_globallogic::refreshuimatchinprogressomnvarvalue();
   } else {
-    if(isDefined(level.ref_1247c)) {
-      var_0 thread[[level.ref_1247c]]();
+    if(isDefined(level.ref_1247C)) {
+      var_0 thread[[level.ref_1247C]]();
     }
 
     show_introscreen_text(var_0);
@@ -1096,7 +1096,7 @@ function kick_for_inactivity(var_0) {
   var_5 = 0.1;
 
   for(;;) {
-    var_6 = scripts\engine\utility::ref_143c0(var_5, "inputReceived", "currency_earned");
+    var_6 = scripts\engine\utility::ref_143C0(var_5, "inputReceived", "currency_earned");
 
     if(var_6 != "timeout") {
       var_4 = 120;
@@ -1384,7 +1384,7 @@ function revivetriggerthink(var_0) {
 function endreviveonownerdeathordisconnect() {
   self endon("disconnect");
   self endon("death");
-  self.owner scripts\engine\utility::ref_143a5("disconnect", "last_stand_finished");
+  self.owner scripts\engine\utility::ref_143A5("disconnect", "last_stand_finished");
   self.owner = undefined;
   self delete();
 }
@@ -1473,7 +1473,7 @@ function mortars_get_enemies() {
     return;
   }
 
-  if(ref_124b9()) {
+  if(ref_124B9()) {
     return;
   }
 
@@ -1481,7 +1481,7 @@ function mortars_get_enemies() {
   thread delay_init_infil();
 }
 
-function ref_124b9() {
+function ref_124B9() {
   return istrue(game["player_infil_already_played"]);
 }
 

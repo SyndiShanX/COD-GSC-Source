@@ -717,7 +717,7 @@ function ref_13850() {
     self setclientomnvar("ui_pet_watch_state", 0);
   }
 
-  thread ref_125d2();
+  thread ref_125D2();
 }
 
 function ref_13851() {
@@ -729,7 +729,7 @@ function ref_13851() {
     self setclientomnvar("ui_pet_watch_state", 0);
   }
 
-  thread ref_125d2();
+  thread ref_125D2();
 }
 
 function ref_13852() {
@@ -741,16 +741,16 @@ function ref_13852() {
     self setclientomnvar("ui_pet_watch_state", 0);
   }
 
-  thread ref_125d2();
+  thread ref_125D2();
 }
 
-function ref_125d2() {
+function ref_125D2() {
   self notify("playerHoloWatchSkydive");
   self endon("playerHoloWatchSkydive");
 
   for(;;) {
-    scripts\engine\utility::ref_143a6("skydive_deployparachute", "skydive_end", "skydive_beginfreefall");
-    thread ref_13e1a();
+    scripts\engine\utility::ref_143A6("skydive_deployparachute", "skydive_end", "skydive_beginfreefall");
+    thread ref_13E1A();
   }
 }
 
@@ -779,7 +779,7 @@ function convoy4_roof_jugg() {
   }
 }
 
-function ref_13e1a() {
+function ref_13E1A() {
   self notify("tryReenableScriptableVFX");
   self endon("tryReenableScriptableVFX");
   self endon("death_or_disconnect");
@@ -874,7 +874,7 @@ function watchradialgestureactivation(var_0, var_1) {
               self setscriptablepartstate("watchVFXPlayer", "off");
             }
           } else if(self.accessorylogic == "pet_go") {
-            scripts\cp_mp\utility\callback_group::ref_144e1();
+            scripts\cp_mp\utility\callback_group::ref_144E1();
           }
         }
       } else if(var_2 == "iw8_ges_plyr_gesture023") {
@@ -922,7 +922,7 @@ function watchradialgestureactivation(var_0, var_1) {
     var_3 = getcompleteweaponname("iw8_ges_plyr_spray");
 
     if(isDefined(var_3) && !nullweapon(var_3)) {
-      thread ref_144f7(var_3);
+      thread ref_144F7(var_3);
       watchradialgesture(var_3);
       return;
     }
@@ -931,7 +931,7 @@ function watchradialgestureactivation(var_0, var_1) {
   }
 }
 
-function ref_144f7(var_0) {
+function ref_144F7(var_0) {
   self endon("death");
   self endon("disconnect");
   self notify("watchSprayGestureDoSprayEvent");
@@ -943,7 +943,7 @@ function ref_144f7(var_0) {
 
     if(self isgestureplaying("iw8_ges_plyr_spray")) {
       self sprayevent(var_0);
-      scripts\cp\vehicles\vehicle_compass_cp::ref_1208f();
+      scripts\cp\vehicles\vehicle_compass_cp::ref_1208F();
       return;
     }
   }

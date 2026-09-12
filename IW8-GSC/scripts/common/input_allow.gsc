@@ -4,7 +4,7 @@
 ***********************************************/
 
 function allow_input_internal(var_0, var_1, var_2, var_3) {
-  var_4 = ref_132d8();
+  var_4 = ref_132D8();
 
   if(!isDefined(self.allows)) {
     self.allows = [];
@@ -77,6 +77,6 @@ function clear_all_allow_info() {
   self notify("clearedAllows");
 }
 
-function ref_132d8() {
+function ref_132D8() {
   return false;
 }

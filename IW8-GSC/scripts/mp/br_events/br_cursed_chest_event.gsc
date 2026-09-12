@@ -77,12 +77,12 @@ function initloottables() {
   var_0["brloot_plunder_cash_uncommon_1"] = 3;
   var_0["brloot_plunder_cash_uncommon_2"] = 0.8;
   var_0["brloot_plunder_cash_uncommon_3"] = 0.6;
-  _handlevehiclerepair::ref_11a45("cursed_chest_event_cash", var_0);
+  _handlevehiclerepair::ref_11A45("cursed_chest_event_cash", var_0);
   var_0 = [];
   var_0["brloot_killstreak_clusterstrike"] = 1;
   var_0["brloot_killstreak_precision_airstrike"] = 1;
   var_0["brloot_killstreak_uav"] = 1;
-  _handlevehiclerepair::ref_11a45("cursed_chest_event_killstreaks", var_0);
+  _handlevehiclerepair::ref_11A45("cursed_chest_event_killstreaks", var_0);
   var_0 = [];
   var_0["brloot_specialist_bonus"] = 0.5;
   var_0["brloot_perk_point_shrapnel"] = 0.1;
@@ -105,30 +105,30 @@ function initloottables() {
   var_0["brloot_perk_point_pointman"] = 0.1;
   var_0["brloot_perk_point_restock"] = 0.1;
   var_0["brloot_perk_point_scavenger"] = 0.1;
-  _handlevehiclerepair::ref_11a45("cursed_chest_event_perk_tokens", var_0);
+  _handlevehiclerepair::ref_11A45("cursed_chest_event_perk_tokens", var_0);
   var_0 = [];
   var_0["nothing"] = 1;
   var_0["brloot_offhand_numbers_grenade"] = 1;
   var_0["brloot_self_revive"] = 0.5;
-  _handlevehiclerepair::ref_11a45("cursed_chest_event_equipment", var_0);
+  _handlevehiclerepair::ref_11A45("cursed_chest_event_equipment", var_0);
   var_0 = [];
   var_0["nothing"] = 1;
   var_0["brloot_rumble_powerup_double_points"] = 0.06;
   var_0["brloot_rumble_powerup_speed_boost"] = 0.06;
   var_0["brloot_rumble_powerup_killmonger"] = 0.06;
-  _handlevehiclerepair::ref_11a45("cursed_chest_event_zombie_death_powerups", var_0);
+  _handlevehiclerepair::ref_11A45("cursed_chest_event_zombie_death_powerups", var_0);
   var_0 = [];
   var_0["nothing"] = 1;
   var_0["brloot_ammo_killer_based"] = 0.8;
-  _handlevehiclerepair::ref_11a45("cce_on_zombie_death_ammo_killer_based", var_0);
+  _handlevehiclerepair::ref_11A45("cce_on_zombie_death_ammo_killer_based", var_0);
   var_0 = [];
   var_0["nothing"] = 2.5;
   var_0["brloot_plunder_cash_common_1"] = 1;
-  _handlevehiclerepair::ref_11a45("cce_on_zombie_death_cash", var_0);
+  _handlevehiclerepair::ref_11A45("cce_on_zombie_death_cash", var_0);
   var_0 = [];
   var_0["nothing"] = 3;
   var_0["brloot_armor_plate"] = 0.8;
-  _handlevehiclerepair::ref_11a45("cce_on_zombie_death_gear", var_0);
+  _handlevehiclerepair::ref_11A45("cce_on_zombie_death_gear", var_0);
   var_0 = [];
   var_0["nothing"] = 35;
   var_0["brloot_perk_point_shrapnel"] = 0.1;
@@ -151,7 +151,7 @@ function initloottables() {
   var_0["brloot_perk_point_pointman"] = 0.1;
   var_0["brloot_perk_point_restock"] = 0.1;
   var_0["brloot_perk_point_scavenger"] = 0.1;
-  _handlevehiclerepair::ref_11a45("cce_on_zombie_death_perk_tokens", var_0);
+  _handlevehiclerepair::ref_11A45("cce_on_zombie_death_perk_tokens", var_0);
 }
 
 function test_bag_pickup() {
@@ -167,7 +167,7 @@ function test_bag_pickup() {
 
   level.cursed_chest_event.participation_radius = getdvarint("scr_cursed_chest_participation_radius", 1700);
   level.cursed_chest_event.timeout_duration = getdvarint("scr_cursed_chest_event_timeout_duration", 240);
-  level.cursed_chest_event.ref_129e0 = getdvarint("scr_cursed_chest_harvest_radius", 2000);
+  level.cursed_chest_event.ref_129E0 = getdvarint("scr_cursed_chest_harvest_radius", 2000);
   level.cursed_chest_event.radius_height = getdvarint("scr_cursed_chest_harvest_radius_height", 400);
   level.cursed_chest_event.score_to_complete = getdvarint("scr_cursed_chest_event_points_to_complete", 25);
   level.cursed_chest_event.max_instances_to_spawn = getdvarint("scr_cursed_chest_max_instances_to_spawn", 2);
@@ -560,7 +560,7 @@ function event_timeoutwatcher() {
   self endon("end_event");
 
   for(;;) {
-    if(self.event_active && gettime() > self.ref_13b96) {
+    if(self.event_active && gettime() > self.ref_13B96) {
       thread event_completeevent("failed");
       playvoineventarea("cursedchest_event_failed");
       break;
@@ -614,11 +614,11 @@ function event_spawnrewards() {
 }
 
 function createeventtrigger() {
-  self.trigger = spawn("trigger_radius", self.origin, 0, self.ref_129e0, self.radius_height);
+  self.trigger = spawn("trigger_radius", self.origin, 0, self.ref_129E0, self.radius_height);
   scripts\mp\utility\trigger::makeenterexittrigger(self.trigger, &eventtrigger_onenter, &eventtrigger_onexit, undefined, undefined, &eventtrigger_filterfunc);
   self.trigger.event_instance = self;
   self.trigger scripts\mp\gametypes\br_quest_util::init_tactical_boxes(6, 0, 0, self.origin);
-  self.trigger scripts\mp\gametypes\br_quest_util::ref_1316f(level.cursed_chest_event.ref_129e0);
+  self.trigger scripts\mp\gametypes\br_quest_util::ref_1316F(level.cursed_chest_event.ref_129E0);
 }
 
 function eventtrigger_onenter(var_0, var_1) {
@@ -691,7 +691,7 @@ function event_participantwatcher(var_0) {
   var_0 endon("cursed_chest_end_participant_watcher");
   var_1 = gettime();
   var_2 = undefined;
-  self.trigger scripts\mp\gametypes\br_quest_util::ref_1336a(var_0);
+  self.trigger scripts\mp\gametypes\br_quest_util::ref_1336A(var_0);
   var_0.cursed_chest_event = self;
   ui_showeventhud(var_0);
 
@@ -867,7 +867,7 @@ function zombie_spawnagent(var_0, var_1, var_2) {
   var_5 accesscard::ref_13173(var_4.movement_type);
 
   if(var_5.zombie_event_type == "gas_thrower") {
-    var_5 thread _luidecision::ref_1447f(var_5, -1);
+    var_5 thread _luidecision::ref_1447F(var_5, -1);
   }
 
   if(istrue(var_4.is_super_zombie)) {
@@ -958,7 +958,7 @@ function zombie_getzombietypeparameters(var_0) {
 function zombie_cursedchestondeathcallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = distance2dsquared(self.cursed_chest_event.origin, self.origin);
 
-  if(self.cursed_chest_event.event_pending_to_end || var_9 <= squared(self.cursed_chest_event.ref_129e0)) {
+  if(self.cursed_chest_event.event_pending_to_end || var_9 <= squared(self.cursed_chest_event.ref_129E0)) {
     if(istrue(self.is_super_zombie)) {
       for(var_10 = 0; var_10 < level.cursed_chest_event.super_zombie_score_yield - 1; var_10++) {
         thread zombie_sendhellfiretochest();
@@ -979,8 +979,8 @@ function zombie_cursedchestondeathcallback(var_0, var_1, var_2, var_3, var_4, va
   var_12 = spawnStruct();
   var_12.attacker = var_1;
   var_12.victim = self;
-  _initignoredtabspergamemode::ref_11ff1(var_12);
-  _ispointinbadarea::ref_11ff1(var_12);
+  _initignoredtabspergamemode::ref_11FF1(var_12);
+  _ispointinbadarea::ref_11FF1(var_12);
 
   if(istrue(self.death_by_cursed_chest)) {
     return;
@@ -1029,7 +1029,7 @@ function zombie_sendhellfiretochest() {
   var_3 = var_0.origin + (0, 0, 10);
   var_1.angles = vectortoangles(var_3 - var_2);
   var_4 = distance(var_2, var_3);
-  var_5 = var_4 / var_0.ref_129e0;
+  var_5 = var_4 / var_0.ref_129E0;
   var_6 = 200 * var_5 + 50;
   var_6 += randomfloatrange(-1 * var_6 * 0.2 / 2, var_6 * 0.2 / 2);
 
@@ -1084,7 +1084,7 @@ function onhitbypoisonzombie(var_0, var_1, var_2, var_3) {
     if(isDefined(var_1)) {
       if(isDefined(var_2) && isalive(var_2)) {
         var_4 = easepower("vfx_chem_rounds_enemy_hit", var_1);
-        thread ref_12aab(var_4);
+        thread ref_12AAB(var_4);
 
         if(!istrue(var_2.updateteamplunderscore)) {
           if(isPlayer(var_2)) {
@@ -1099,7 +1099,7 @@ function onhitbypoisonzombie(var_0, var_1, var_2, var_3) {
           }
         }
 
-        var_2 thread _luidecision::ref_1447f(var_0, 3);
+        var_2 thread _luidecision::ref_1447F(var_0, 3);
         return;
       }
 
@@ -1110,7 +1110,7 @@ function onhitbypoisonzombie(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_12aab(var_0) {
+function ref_12AAB(var_0) {
   level endon("game_ended");
   wait var_0;
   self freescriptable();
@@ -1140,10 +1140,10 @@ function spawnnode_spawn(var_0) {
 function spawnnode_spawnallnodes() {
   var_0 = spawnStruct();
   var_1 = self.zombie_spawn_radius_max;
-  var_0.ref_11a58 = self.origin + (var_1 * -1, var_1 * -1, 0);
-  var_0.ref_11a59 = self.origin + (var_1, var_1 * -1, 0);
+  var_0.ref_11A58 = self.origin + (var_1 * -1, var_1 * -1, 0);
+  var_0.ref_11A59 = self.origin + (var_1, var_1 * -1, 0);
   var_0.ref_14039 = self.origin + (var_1 * -1, var_1, 0);
-  var_0.ref_1403a = self.origin + (var_1, var_1, 0);
+  var_0.ref_1403A = self.origin + (var_1, var_1, 0);
   var_2 = 10;
   var_3 = self.zombie_spawn_radius_max * 2;
   var_4 = var_3 / var_2;

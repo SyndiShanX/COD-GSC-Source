@@ -337,7 +337,7 @@ function bb_getmeleetarget() {
 function bb_clearmeleerequest() {
   self._blackboard.meleerequested = 0;
   self._blackboard.meleerequestedtarget = undefined;
-  self._blackboard.ref_11bc0 = undefined;
+  self._blackboard.ref_11BC0 = undefined;
 }
 
 function bb_clearmeleerequestcomplete() {

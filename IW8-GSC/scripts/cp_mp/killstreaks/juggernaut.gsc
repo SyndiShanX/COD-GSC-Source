@@ -251,9 +251,9 @@ function activatejugg(var_0) {
   }
 
   self setsoundsubmix("mp_juggernaut", 0.5);
-  thread ref_144bd(var_0);
+  thread ref_144BD(var_0);
   thread watchforjuggernautend(var_0);
-  thread ref_144bc(var_0);
+  thread ref_144BC(var_0);
 
   if(level.gametype != "br" && !scripts\common\utility::iscp()) {
     thread modelaststandallowed();
@@ -285,13 +285,13 @@ function modelaststandallowed() {
   self takeallweapons();
 }
 
-function ref_144bd(var_0) {
+function ref_144BD(var_0) {
   self endon("disconnect");
   self endon("juggernaut_end");
   level waittill("game_ended");
 
   if(isDefined(self) && isDefined(var_0)) {
-    scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
+    scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_0);
     return;
   }
 }
@@ -321,13 +321,13 @@ function onjuggernautend(var_0, var_1) {
     }
 
     var_0.onspray = 1;
-    scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
+    scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_0);
   }
 
   cleanupjuggobjective(var_1);
 }
 
-function ref_144bc(var_0) {
+function ref_144BC(var_0) {
   self endon("juggernaut_end");
   level endon("game_ended");
   var_1 = self.juggcontext;
@@ -388,7 +388,7 @@ function createjuggobjective() {
       return;
     }
 
-    scripts\mp\objidpoolmanager::ref_13fa2(var_3, self);
+    scripts\mp\objidpoolmanager::ref_13FA2(var_3, self);
     return;
   }
 }
@@ -426,7 +426,7 @@ function watchjuggernautweaponswitch(var_0) {
   level endon("game_ended");
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("manual_switch_from_minigun", "weapon_pickup");
+    scripts\engine\utility::ref_143A5("manual_switch_from_minigun", "weapon_pickup");
 
     if(self getcurrentweapon() != var_0) {
       continue;

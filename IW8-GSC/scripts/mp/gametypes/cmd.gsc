@@ -2125,7 +2125,7 @@ function removejuggonteamchangeordeath() {
   level endon("game_ended");
   self endon("disconnect");
   self endon("jugg_removed");
-  scripts\engine\utility::ref_143a7("death", "joined_team", "joined_spectators", "lost_juggernaut");
+  scripts\engine\utility::ref_143A7("death", "joined_team", "joined_spectators", "lost_juggernaut");
   self notify("should_remove_jugg");
 }
 

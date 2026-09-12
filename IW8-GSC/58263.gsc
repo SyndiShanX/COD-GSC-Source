@@ -12,23 +12,23 @@ function init() {
   level._effect["vfx_br3_city_killer_gas_vent_open"] = loadfx("vfx/iw8_br/gameplay/vfx_br3_city_killer_gas_vent_open");
   level._effect["vfx_br3_city_killer_gas_vent_closed"] = loadfx("vfx/iw8_br/gameplay/vfx_br3_city_killer_gas_vent_closed");
   level._effect["vfx_br3_city_killer_gas_cloud_distant"] = loadfx("vfx/iw8_br/gameplay/vfx_br3_city_killer_gas_cloud_distant");
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("city_killer", &ref_13e26, undefined, &ref_13e0e);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("city_killer", &ref_13E26, undefined, &ref_13E0E);
   scripts\mp\utility\sound::besttime("ks_citykiller");
   scripts\engine\scriptable::scriptable_addusedcallback(&scriptable_used);
-  scripts\engine\scriptable::ref_12f57(&scriptable_used);
+  scripts\engine\scriptable::ref_12F57(&scriptable_used);
   test_bag_pickup();
   _handlevehiclerepair::init();
   timesincelastdeath();
   thread testsplashes();
 
   if(level.gulagloadoutindex.gulagmatchclocksounds == "nth_circle") {
-    thread ref_144a3();
+    thread ref_144A3();
   }
 
   waitframe();
 
   if(isDefined(level.disable_super_in_turret)) {
-    scripts\mp\gametypes\br_pickups::ref_12b33("brloot_killstreak_city_killer", &settings_group);
+    scripts\mp\gametypes\br_pickups::ref_12B33("brloot_killstreak_city_killer", &settings_group);
     return;
   }
 }
@@ -42,8 +42,8 @@ function scriptable_used(var_0, var_1, var_2, var_3, var_4) {
     if(var_0.type == "brloot_killstreak_city_killer") {
       var_0 notify("city_killer_picked_up");
       gwperifvfx_plumes(var_3);
-      thread ref_144a1();
-      thread ref_144a2();
+      thread ref_144A1();
+      thread ref_144A2();
       return;
     }
 
@@ -131,14 +131,14 @@ function test_bag_pickup() {
     level.gulagtableloadout = 0;
   }
 
-  level.gulagloadoutindex.ref_11b43 = getdvarfloat("scr_city_killer_max_active_at_once", 1);
-  level.gulagloadoutindex.ref_1288c = getdvarfloat("scr_city_killer_prime_time", 3.5);
+  level.gulagloadoutindex.ref_11B43 = getdvarfloat("scr_city_killer_max_active_at_once", 1);
+  level.gulagloadoutindex.ref_1288C = getdvarfloat("scr_city_killer_prime_time", 3.5);
   level.gulagloadoutindex.leave_pool_behind_after_deactivation = getdvarfloat("scr_city_killer_detonation_time", 30);
   level.gulagloadoutindex.lifetime = getdvarint("scr_city_killer_lifetime", 120);
-  level.gulagloadoutindex.ref_12ec1 = getdvarfloat("scr_city_killer_scalar", 1);
-  level.gulagloadoutindex.ref_129e2 = getdvarfloat("scr_city_killer_radius_spread_time", 95) * level.gulagloadoutindex.ref_12ec1;
-  level.gulagloadoutindex.ref_129e0 = getdvarint("scr_city_killer_radius_max", 15000) * level.gulagloadoutindex.ref_12ec1;
-  level.gulagloadoutindex.ref_129e1 = getdvarint("scr_city_killer_radius_min", 2000) * level.gulagloadoutindex.ref_12ec1;
+  level.gulagloadoutindex.ref_12EC1 = getdvarfloat("scr_city_killer_scalar", 1);
+  level.gulagloadoutindex.ref_129E2 = getdvarfloat("scr_city_killer_radius_spread_time", 95) * level.gulagloadoutindex.ref_12EC1;
+  level.gulagloadoutindex.ref_129E0 = getdvarint("scr_city_killer_radius_max", 15000) * level.gulagloadoutindex.ref_12EC1;
+  level.gulagloadoutindex.ref_129E1 = getdvarint("scr_city_killer_radius_min", 2000) * level.gulagloadoutindex.ref_12EC1;
   level.gulagloadoutindex.thermiteburnout = getdvarint("scr_city_killer_initial_detonation_damage", 90);
   level.gulagloadoutindex.is_cs_script_origin = getdvarint("scr_city_killer_initial_damage_per_tick", 6);
   level.gulagloadoutindex.is_cs_scriptable = getdvarint("scr_city_killer_initial_damage_per_tick_multiplier", 3);
@@ -150,26 +150,26 @@ function test_bag_pickup() {
   level.gulagloadoutindex.ref_14295 = getdvarint("scr_city_killer_vfx_distant_cloud_spawn_delay", 0.1);
   level.gulagloadoutindex.ref_14296 = getdvarint("scr_city_killer_vfx_expanding_cloud_spawn_delay", 3.5);
   level.gulagloadoutindex.ref_14294 = getdvarint("scr_city_killer_vfx_allow_high_net_lod", 0);
-  level.gulagloadoutindex.ref_142a2 = getdvarint("scr_city_killer_vfx_inner_clouds_spacing", 3000);
-  level.gulagloadoutindex.ref_142a1 = getdvarint("scr_city_killer_vfx_inner_clouds_grid_division_count", 15);
-  level.gulagloadoutindex.ref_1215b = getdvarint("scr_city_killer_outer_vision_set_enabled", 0);
-  level.gulagloadoutindex.ref_1215c = getdvarint("scr_city_killer_outer_vision_set_trigger_distance", 4000);
+  level.gulagloadoutindex.ref_142A2 = getdvarint("scr_city_killer_vfx_inner_clouds_spacing", 3000);
+  level.gulagloadoutindex.ref_142A1 = getdvarint("scr_city_killer_vfx_inner_clouds_grid_division_count", 15);
+  level.gulagloadoutindex.ref_1215B = getdvarint("scr_city_killer_outer_vision_set_enabled", 0);
+  level.gulagloadoutindex.ref_1215C = getdvarint("scr_city_killer_outer_vision_set_trigger_distance", 4000);
   level.gulagloadoutindex.gulagwinnertableloadout = getdvarint("scr_city_killer_planted_splash_radius_buffer", 100);
-  level.gulagloadoutindex.gulagwinnerrestoregunandammo = getdvarint("scr_city_killer_near_or_far_threshold", level.gulagloadoutindex.ref_129e0 + level.gulagloadoutindex.gulagwinnertableloadout);
+  level.gulagloadoutindex.gulagwinnerrestoregunandammo = getdvarint("scr_city_killer_near_or_far_threshold", level.gulagloadoutindex.ref_129E0 + level.gulagloadoutindex.gulagwinnertableloadout);
   level.gulagloadoutindex.gulagmatchclocksounds = getDvar("scr_city_killer_disable_on_event", "nth_circle");
   level.gulagloadoutindex.gulagplayerlost = getdvarint("scr_city_killer_disable_on_nth_circle", 3);
   level.gulagloadoutindex.gulagplayerwatchfordeath = getdvarint("scr_city_killer_disable_x_secs_before_gulag_shutdown", 120);
 }
 
-function ref_13e26(var_0) {
-  var_1 = ref_13e27(var_0);
+function ref_13E26(var_0) {
+  var_1 = ref_13E27(var_0);
 
   if(!var_1) {
     var_2 = undefined;
 
-    if(level.gulagloadoutindex.instances.size >= level.gulagloadoutindex.ref_11b43) {
+    if(level.gulagloadoutindex.instances.size >= level.gulagloadoutindex.ref_11B43) {
       var_2 = "BR_CHEM_WEAPONS/CITY_KILLER_MAX_ACTIVE";
-    } else if(!ref_124c5()) {
+    } else if(!ref_124C5()) {
       var_2 = "BR_CHEM_WEAPONS/CITY_KILLER_STABLE_GROUND";
     } else {
       var_2 = "KILLSTREAKS/CANNOT_BE_USED";
@@ -183,17 +183,17 @@ function ref_13e26(var_0) {
   return var_1;
 }
 
-function ref_13e0e() {
+function ref_13E0E() {
   var_0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("city_killer", self);
-  var_0.ref_133ce = 1;
-  return ref_13e27(var_0, 1);
+  var_0.ref_133CE = 1;
+  return ref_13E27(var_0, 1);
 }
 
-function ref_13e27(var_0, var_1) {
+function ref_13E27(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(level.gulagloadoutindex.instances.size >= level.gulagloadoutindex.ref_11b43) {
+  if(level.gulagloadoutindex.instances.size >= level.gulagloadoutindex.ref_11B43) {
     return false;
   }
 
@@ -205,7 +205,7 @@ function ref_13e27(var_0, var_1) {
     return false;
   }
 
-  if(!ref_124c5()) {
+  if(!ref_124C5()) {
     return false;
   }
 
@@ -223,7 +223,7 @@ function ref_13e27(var_0, var_1) {
     }
   }
 
-  thread ref_1248c(var_0);
+  thread ref_1248C(var_0);
 
   if(isDefined(level.killstreakbeginusefunc)) {
     if(!level[[level.killstreakbeginusefunc]](var_0)) {
@@ -288,7 +288,7 @@ function gwperifvfx_plumes() {
 
 function allowreuseofalldropbags() {}
 
-function ref_1248c(var_0) {
+function ref_1248C(var_0) {
   if(!isDefined(level.gulagloadoutindex.laststandweapon)) {
     level.gulagloadoutindex.laststandweapon = self;
   }
@@ -298,7 +298,7 @@ function ref_1248c(var_0) {
   var_0.weaponobj = var_2;
   var_0.laststandplayers = 0;
   self.gulagwinnerloadout = var_0;
-  ref_1246a(0);
+  ref_1246A(0);
   ref_12469(0);
   self giveweapon(var_2);
   self setweaponammostock(var_2, 0);
@@ -320,14 +320,14 @@ function ref_1248c(var_0) {
   }
 
   scripts\mp\weapons::fixupplayerweapons(self, var_2);
-  thread ref_144a4(var_2);
-  thread ref_144a5(var_2);
-  thread ref_144a8(var_0);
-  thread ref_144a0();
+  thread ref_144A4(var_2);
+  thread ref_144A5(var_2);
+  thread ref_144A8(var_0);
+  thread ref_144A0();
   return var_4;
 }
 
-function ref_1246a(var_0) {
+function ref_1246A(var_0) {
   self allowstand(var_0);
   self allowprone(var_0);
   self allowsprint(var_0);
@@ -359,7 +359,7 @@ function ref_12477(var_0, var_1) {
     level.gulagloadoutindex.laststandweapon = undefined;
   }
 
-  ref_1246a(1);
+  ref_1246A(1);
   ref_12469(1);
 
   if(!isDefined(var_1) || !var_1) {
@@ -368,17 +368,17 @@ function ref_12477(var_0, var_1) {
     }
   }
 
-  thread ref_144a7();
+  thread ref_144A7();
 }
 
 function allowskydivecutparachute() {}
 
-function ref_144a8(var_0) {
+function ref_144A8(var_0) {
   self endon("death_or_disconnect");
   self endon("abort_city_killer");
   self waittill("weapon_change", var_1);
   var_2 = gettime();
-  var_3 = var_2 + level.gulagloadoutindex.ref_1288c * 1000;
+  var_3 = var_2 + level.gulagloadoutindex.ref_1288C * 1000;
 
   while(gettime() < var_3) {
     if(self getcurrentweapon() != var_1 || isDefined(level.gulagloadoutindex.laststandweapon) && level.gulagloadoutindex.laststandweapon != self) {
@@ -389,7 +389,7 @@ function ref_144a8(var_0) {
     waitframe();
   }
 
-  if(level.gulagloadoutindex.instances.size >= level.gulagloadoutindex.ref_11b43) {
+  if(level.gulagloadoutindex.instances.size >= level.gulagloadoutindex.ref_11B43) {
     ref_12477(0, 0);
     return;
   }
@@ -399,7 +399,7 @@ function ref_144a8(var_0) {
 
   for(;;) {
     if(self getcurrentweapon().basename != "city_killer_mp") {
-      var_4 = thread ref_124dc();
+      var_4 = thread ref_124DC();
       break;
     }
 
@@ -407,7 +407,7 @@ function ref_144a8(var_0) {
   }
 }
 
-function ref_144a7() {
+function ref_144A7() {
   self endon("death_or_disconnect");
 
   while(self hasweapon("city_killer_mp")) {
@@ -424,7 +424,7 @@ function ref_144a7() {
   self notify("abort_city_killer");
 }
 
-function ref_144a4(var_0) {
+function ref_144A4(var_0) {
   self endon("death_or_disconnect");
   self endon("abort_city_killer");
 
@@ -440,7 +440,7 @@ function ref_144a4(var_0) {
   }
 }
 
-function ref_144a0() {
+function ref_144A0() {
   self endon("disconnect");
   self endon("abort_city_killer");
   self endon("city_killer_deployed");
@@ -456,7 +456,7 @@ function ref_144a0() {
   ref_12485();
 }
 
-function ref_144a5(var_0) {
+function ref_144A5(var_0) {
   self endon("death_or_disconnect");
   self endon("abort_city_killer");
 
@@ -477,7 +477,7 @@ function ref_144a5(var_0) {
   }
 }
 
-function ref_144a1() {
+function ref_144A1() {
   if(level.gulagloadoutindex.gulagmatchclocksounds != "gulag_shutdown") {
     return;
   }
@@ -510,7 +510,7 @@ function ref_144a1() {
   }
 }
 
-function ref_144a2() {
+function ref_144A2() {
   if(level.gulagloadoutindex.gulagmatchclocksounds != "nth_circle") {
     return;
   }
@@ -531,7 +531,7 @@ function ref_144a2() {
   }
 }
 
-function ref_144a3() {
+function ref_144A3() {
   if(level.gulagloadoutindex.gulagmatchclocksounds != "nth_circle") {
     return;
   }
@@ -545,7 +545,7 @@ function ref_144a3() {
       level.gulagtableloadout = 1;
 
       if(getdvarint("scr_convoy_should_drop_nebula_bomb") == 1) {
-        _handlevehiclerepair::ref_11a46("ai_convoy_killstreaks", "brloot_killstreak_city_killer");
+        _handlevehiclerepair::ref_11A46("ai_convoy_killstreaks", "brloot_killstreak_city_killer");
       }
 
       break;
@@ -554,10 +554,10 @@ function ref_144a3() {
 }
 
 function settings_group() {
-  thread ref_1444a();
+  thread ref_1444A();
 }
 
-function ref_1444a() {
+function ref_1444A() {
   level endon("game_ended");
   self endon("city_killer_picked_up");
 
@@ -577,7 +577,7 @@ function ref_1444a() {
 
 function addtoc130infil() {}
 
-function ref_124c5() {
+function ref_124C5() {
   var_0 = self getgroundentity();
 
   if(isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "worldspawn" && self isonground()) {
@@ -587,7 +587,7 @@ function ref_124c5() {
   return false;
 }
 
-function ref_124dc() {
+function ref_124DC() {
   self notify("city_killer_deployed");
   var_0 = physics_raycast(self.origin + (0, 0, 30), self.origin + (0, 0, -1500), scripts\engine\trace::create_solid_ai_contents(1), self, 0, "physicsquery_closest", 1, undefined);
   jumpiffalse(!isDefined(var_0) || var_0.size == 0) LOC_00000066;
@@ -602,15 +602,15 @@ function gun_buildoverrideattachmentlist() {
   var_0 = int(level.gulagloadoutindex.leave_pool_behind_after_deactivation);
   scripts\mp\gametypes\br_quest_util::init_tactical_boxes(1, 0, 3, self.origin);
   scripts\mp\gametypes\br_quest_util::ref_13369();
-  scripts\mp\gametypes\br_quest_util::ref_1316f(self.ref_129e0);
+  scripts\mp\gametypes\br_quest_util::ref_1316F(self.ref_129E0);
   self.trackriotshield_tryarm = spawnStruct();
   self.trackriotshield_tryarm scripts\mp\gametypes\br_quest_util::init_tactical_boxes(1, 0, 2, self.origin);
   self.trackriotshield_tryarm scripts\mp\gametypes\br_quest_util::ref_13369();
-  self.trackriotshield_tryarm scripts\mp\gametypes\br_quest_util::ref_1316f(self.ref_129e1);
+  self.trackriotshield_tryarm scripts\mp\gametypes\br_quest_util::ref_1316F(self.ref_129E1);
   var_1 = (0, 0, self.height / 2);
   var_2 = self.origin - var_1;
-  self.trigger = spawn("trigger_radius", var_2, 0, self.ref_129e0, self.height);
-  scripts\mp\utility\trigger::makeenterexittrigger(self.trigger, &guy_pushes_building, &guy_pushes_terminal, undefined, undefined, &ref_13da5);
+  self.trigger = spawn("trigger_radius", var_2, 0, self.ref_129E0, self.height);
+  scripts\mp\utility\trigger::makeenterexittrigger(self.trigger, &guy_pushes_building, &guy_pushes_terminal, undefined, undefined, &ref_13DA5);
   self.trigger.gulagloadoutindex = self;
   gunship_assignedtargetmarkers_onnewai();
   thread hack_laser_trap_control();
@@ -684,14 +684,14 @@ function gunship_assignedtargetmarkers_onnewai() {
   objective_setplayintro(var_1, 1);
   objective_setshowoncompass(var_1, 1);
   objective_setshowdistance(var_1, 1);
-  getbnetigrbattlepassxpmultiplier(var_1, self.ref_129e1, self.ref_129e1 * 2);
+  getbnetigrbattlepassxpmultiplier(var_1, self.ref_129E1, self.ref_129E1 * 2);
   getscriptcachecontents(var_1, 0.5, 0.7);
   scripts\mp\objidpoolmanager::update_objective_icon(var_1, var_0);
   scripts\mp\objidpoolmanager::update_objective_setzoffset(var_1, 50);
   scripts\mp\objidpoolmanager::update_objective_onentity(var_1, self);
   scripts\mp\objidpoolmanager::update_objective_ownerteam(var_1, self.team);
   scripts\mp\objidpoolmanager::update_objective_setbackground(var_1, 1);
-  self.ref_11f64 = var_1;
+  self.ref_11F64 = var_1;
 }
 
 function gun_remove_fake() {
@@ -703,7 +703,7 @@ function gun_remove_fake() {
   var_0 = playFX(scripts\engine\utility::getfx("vfx_city_killer_gas_explosion"), self.origin);
   self.ref_13290 freescriptable();
   self.ref_13290 = undefined;
-  scripts\mp\objidpoolmanager::returnreservedobjectiveid(self.ref_11f64);
+  scripts\mp\objidpoolmanager::returnreservedobjectiveid(self.ref_11F64);
 
   if(level.gulagloadoutindex.ref_14294) {
     var_0 unmarkkeyframedmover(1);
@@ -715,7 +715,7 @@ function gun_remove_fake() {
   self setscriptablepartstate("alive", "explode");
   thread track_target_group_complete();
 
-  if(level.gulagloadoutindex.ref_1215b) {
+  if(level.gulagloadoutindex.ref_1215B) {
     thread gw_fobs_init();
   }
 
@@ -736,16 +736,16 @@ function gun_remove_fake() {
   for(;;) {
     var_6 = gettime();
     var_7 = (var_6 - self.onscavengerbagpickup) / 1000;
-    var_5 = var_7 / level.gulagloadoutindex.ref_129e2;
+    var_5 = var_7 / level.gulagloadoutindex.ref_129E2;
     var_5 = clamp(var_5, 0, 1);
-    self.ref_129df = self.ref_129e1 * (1 - var_5) + self.ref_129e0 * var_5;
+    self.ref_129DF = self.ref_129E1 * (1 - var_5) + self.ref_129E0 * var_5;
     self.angles = (0, var_5 * 179, 0);
     var_8 = 1;
     var_9 = self.height;
     var_10 = 0.4;
     var_11 = var_5 * self.height * var_10;
     self.initialwinningteam = clamp(var_11, var_8, var_9);
-    self.trigger scripts\mp\gametypes\br_quest_util::ref_1316f(self.ref_129df);
+    self.trigger scripts\mp\gametypes\br_quest_util::ref_1316F(self.ref_129DF);
     waitframe();
   }
 }
@@ -753,8 +753,8 @@ function gun_remove_fake() {
 function gunship_getbombingpoint() {
   wait 0.15;
 
-  if(isDefined(level.deposit_from_compromised_convoy_delayed) && isDefined(level.deposit_from_compromised_convoy_delayed.ref_1363d)) {
-    var_0 = scripts\engine\utility::array_combine_unique(level.players, level.deposit_from_compromised_convoy_delayed.ref_1363d);
+  if(isDefined(level.deposit_from_compromised_convoy_delayed) && isDefined(level.deposit_from_compromised_convoy_delayed.ref_1363D)) {
+    var_0 = scripts\engine\utility::array_combine_unique(level.players, level.deposit_from_compromised_convoy_delayed.ref_1363D);
   } else {
     var_0 = level.players;
   }
@@ -764,7 +764,7 @@ function gunship_getbombingpoint() {
       continue;
     }
 
-    var_3 = distance(var_2.origin, self.origin) < self.ref_129e1;
+    var_3 = distance(var_2.origin, self.origin) < self.ref_129E1;
 
     if(var_3) {
       var_2 dodamage(level.gulagloadoutindex.thermiteburnout, var_2.origin, self.owner, undefined, "MOD_TRIGGER_HURT", "city_killer_mp");
@@ -785,7 +785,7 @@ function gwinputtypesused() {
       continue;
     }
 
-    var_2 = self.ref_129e0 + level.gulagloadoutindex.gulagwinnertableloadout;
+    var_2 = self.ref_129E0 + level.gulagloadoutindex.gulagwinnertableloadout;
     var_3 = distance2d(self.origin, var_1.origin) <= var_2;
 
     if(var_3) {
@@ -839,14 +839,14 @@ function h(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  if(!isDefined(self.ref_124ff)) {
-    self.ref_124ff = [];
+  if(!isDefined(self.ref_124FF)) {
+    self.ref_124FF = [];
   }
 
   var_4 = var_3 getentitynumber();
 
-  if(!isDefined(self.ref_124ff[var_4])) {
-    self.ref_124ff[var_4] = [];
+  if(!isDefined(self.ref_124FF[var_4])) {
+    self.ref_124FF[var_4] = [];
   }
 
   GscBinSkip1(0x45, 0, var_0);
@@ -879,15 +879,15 @@ function gun_game_primary_weapon(var_0) {
   var_2 = 4;
   var_3 = 0;
 
-  if(!isDefined(self.ref_124ff)) {
+  if(!isDefined(self.ref_124FF)) {
     return;
   }
 
-  if(!isDefined(self.ref_124ff[var_1])) {
+  if(!isDefined(self.ref_124FF[var_1])) {
     return;
   }
 
-  foreach(var_5 in self.ref_124ff[var_1]) {
+  foreach(var_5 in self.ref_124FF[var_1]) {
     var_6 = var_5[0];
     var_7 = var_5[1];
     var_8 = var_5[2];
@@ -910,8 +910,8 @@ function gun_game_primary_weapon(var_0) {
 function track_target_group_complete() {
   level endon("game_ended");
   self endon("city_killer_dissipate");
-  self.ref_142a3 = [];
-  self.ref_142a4 = [];
+  self.ref_142A3 = [];
+  self.ref_142A4 = [];
   wait level.gulagloadoutindex.ref_14295;
   self.track_get_teleport_velocity = gettime();
   self.track_get_teleport_target = self.track_get_teleport_velocity + level.gulagloadoutindex.lifetime * 1000;
@@ -920,24 +920,24 @@ function track_target_group_complete() {
   for(;;) {
     var_0 = gettime();
     var_1 = (var_0 - self.track_get_teleport_velocity) / 1000;
-    var_2 = var_1 / level.gulagloadoutindex.ref_129e2;
+    var_2 = var_1 / level.gulagloadoutindex.ref_129E2;
     var_2 = clamp(var_2, 0, 1);
-    self.ref_129df = self.ref_129e1 * (1 - var_2) + self.ref_129e0 * var_2;
+    self.ref_129DF = self.ref_129E1 * (1 - var_2) + self.ref_129E0 * var_2;
     waitframe();
   }
 }
 
 function track_timer_think() {
   var_0 = spawnStruct();
-  var_1 = self.ref_129e0;
-  var_0.ref_11a58 = self.origin + (var_1 * -1, var_1 * -1, 0);
-  var_0.ref_11a59 = self.origin + (var_1, var_1 * -1, 0);
+  var_1 = self.ref_129E0;
+  var_0.ref_11A58 = self.origin + (var_1 * -1, var_1 * -1, 0);
+  var_0.ref_11A59 = self.origin + (var_1, var_1 * -1, 0);
   var_0.ref_14039 = self.origin + (var_1 * -1, var_1, 0);
-  var_0.ref_1403a = self.origin + (var_1, var_1, 0);
-  var_2 = level.gulagloadoutindex.ref_142a1;
-  var_3 = self.ref_129e0 * 2;
+  var_0.ref_1403A = self.origin + (var_1, var_1, 0);
+  var_2 = level.gulagloadoutindex.ref_142A1;
+  var_3 = self.ref_129E0 * 2;
   var_4 = var_3 / var_2;
-  var_5 = (self.origin[0] - self.ref_129e0, self.origin[1] - self.ref_129e0, 0);
+  var_5 = (self.origin[0] - self.ref_129E0, self.origin[1] - self.ref_129E0, 0);
   trackcarpunches(self.origin);
 
   for(var_6 = 0; var_6 < var_2; var_6++) {
@@ -948,7 +948,7 @@ function track_timer_think() {
       var_11 = (0, var_10, 0);
       var_12 = var_5 + var_9 + var_11;
 
-      if(distance2d(var_12, self.origin) < self.ref_129e0) {
+      if(distance2d(var_12, self.origin) < self.ref_129E0) {
         trackcarpunches(var_12);
       }
     }
@@ -959,21 +959,21 @@ function track_timer_think() {
 
 function trackcarpunches(var_0) {
   var_1 = spawnStruct();
-  var_1.index = self.ref_142a3.size;
+  var_1.index = self.ref_142A3.size;
   var_1.origin = var_0;
   var_1.angles = (0, 0, 0);
   var_1.state = "valid";
   var_1.parent = undefined;
   var_1.ref_14293 = undefined;
   var_2 = distance(var_1.origin, self.origin);
-  var_1.loot_getitemcountlefthand = self.ref_129e0 - var_2;
-  self.ref_142a3[self.ref_142a3.size] = var_1;
+  var_1.loot_getitemcountlefthand = self.ref_129E0 - var_2;
+  self.ref_142A3[self.ref_142A3.size] = var_1;
 }
 
 function track_last_good_position() {
-  trackcashevent(self.ref_142a3[0]);
+  trackcashevent(self.ref_142A3[0]);
 
-  foreach(var_1 in self.ref_142a3) {
+  foreach(var_1 in self.ref_142A3) {
     if(var_1.state != "valid") {
       continue;
     }
@@ -1013,17 +1013,17 @@ function trackcashevent(var_0) {
     var_0.ref_14293 unmarkkeyframedmover(1);
   }
 
-  self.ref_142a4[self.ref_142a4.size] = var_0;
+  self.ref_142A4[self.ref_142A4.size] = var_0;
   var_9 = risk_flagspawncount();
 
-  foreach(var_11 in self.ref_142a3) {
+  foreach(var_11 in self.ref_142A3) {
     if(var_11.state != "valid") {
       continue;
     }
 
     var_12 = distance2d(var_0.origin, var_11.origin);
 
-    if(var_12 <= level.gulagloadoutindex.ref_142a2) {
+    if(var_12 <= level.gulagloadoutindex.ref_142A2) {
       var_11.parent = var_0;
       var_11.state = "occupied";
       var_11.color = var_9;
@@ -1038,7 +1038,7 @@ function track_is_operational(var_0) {
   var_0 endon("city_killer_dissipate");
 
   for(;;) {
-    if(scripts\engine\utility::updatescrapassistdata(self.origin, var_0.origin, var_0.ref_129df + 1500)) {
+    if(scripts\engine\utility::updatescrapassistdata(self.origin, var_0.origin, var_0.ref_129DF + 1500)) {
       if(isDefined(self.ref_14293)) {
         triggerfx(self.ref_14293);
       }
@@ -1051,14 +1051,14 @@ function track_is_operational(var_0) {
 }
 
 function track_settings() {
-  foreach(var_1 in self.ref_142a4) {
+  foreach(var_1 in self.ref_142A4) {
     if(isDefined(var_1.ref_14293)) {
       var_1.ref_14293 delete();
     }
   }
 
-  self.ref_142a3 = [];
-  self.ref_142a4 = [];
+  self.ref_142A3 = [];
+  self.ref_142A4 = [];
   self notify("city_killer_dissipate");
 }
 
@@ -1100,7 +1100,7 @@ function gun_createrandomweapon() {
 
       var_2 = distance2d(self.origin, var_1.origin);
 
-      if(var_2 >= level.gulagloadoutindex.ref_129e0) {
+      if(var_2 >= level.gulagloadoutindex.ref_129E0) {
         gunship_watchgameend(var_1, self);
         self.ref_12658 = scripts\engine\utility::array_remove(self.ref_12658, var_1);
       }
@@ -1142,7 +1142,7 @@ function gunship_watchgameend(var_0, var_1) {
   _calloutmarkerping_handleluinotify_added::ref_13191("ui_nuke_data", 11, 1, 0);
 }
 
-function ref_13dbb() {
+function ref_13DBB() {
   while(!isDefined(level.player)) {
     waitframe();
   }
@@ -1203,7 +1203,7 @@ function gun_create_fake(var_0) {
         scripts\cp_mp\gasmask::processdamage(var_1);
       } else {
         if(scripts\mp\utility\killstreak::isjuggernaut()) {
-          var_1 = scripts\mp\gametypes\br_jugg_common::ref_11c95(var_1);
+          var_1 = scripts\mp\gametypes\br_jugg_common::ref_11C95(var_1);
         }
 
         if(self.team == var_0.team) {
@@ -1219,7 +1219,7 @@ function gun_create_fake(var_0) {
         }
 
         if(isPlayer(self)) {
-          scripts\mp\gametypes\br_circle::ref_13e18();
+          scripts\mp\gametypes\br_circle::ref_13E18();
 
           if(self.team != var_1.team && self.br_armorhealth == 0 && self.health - level.gulagloadoutindex.is_cs_script_origin <= 0) {
             var_1.vehomncontrols++;
@@ -1267,7 +1267,7 @@ function gw_fobs_init() {
         continue;
       }
 
-      var_2 = self.ref_129df + level.gulagloadoutindex.ref_1215c;
+      var_2 = self.ref_129DF + level.gulagloadoutindex.ref_1215C;
       var_3 = distance2d(var_1.origin, self.origin) <= var_2;
 
       if(var_3 && !var_1.gulagwinnerrestoreloadout) {
@@ -1298,7 +1298,7 @@ function gun_course_forward() {
     return false;
   }
 
-  if(scripts\mp\gametypes\br_public::ref_125f3() && scripts\mp\gametypes\br_public::ref_125ec()) {
+  if(scripts\mp\gametypes\br_public::ref_125F3() && scripts\mp\gametypes\br_public::ref_125EC()) {
     return false;
   }
 
@@ -1348,11 +1348,11 @@ function gwsiege_config() {
 function gunship_watchintrodisown(var_0) {
   var_1 = gwsiege_config();
 
-  if(distance(self.origin, var_0.origin) < var_0.ref_129df && var_1) {
+  if(distance(self.origin, var_0.origin) < var_0.ref_129DF && var_1) {
     return true;
   }
 
-  var_2 = distance2d(self.origin, var_0.origin) <= var_0.ref_129df;
+  var_2 = distance2d(self.origin, var_0.origin) <= var_0.ref_129DF;
   var_3 = var_0.initialwinningteam / 2;
   var_4 = abs(var_0.origin[2] - self.origin[2]) <= var_0.initialwinningteam / 2;
 
@@ -1389,7 +1389,7 @@ function gunship_watchownerexitaction() {
   return level.gulagloadoutindex.instances.size == var_0 || level.gulagloadoutindex.instances.size == 0;
 }
 
-function ref_13da5(var_0, var_1) {
+function ref_13DA5(var_0, var_1) {
   if(isPlayer(var_0) || isbot(var_0) || isagent(var_0)) {
     return false;
   }

@@ -3,29 +3,29 @@
  * Script: scripts\mp\trials\mp_euphrates_create_script.gsc
 ************************************************************/
 
-function ref_12d4b(var_0) {
+function ref_12D4B(var_0) {
   if(istrue(self.disabledstate)) {
     return anim.success;
   }
 
   self.secondaryweapon = getcompleteweaponname("iw8_me_riotshield_cp_ai");
-  ref_12d4a();
+  ref_12D4A();
   self.disabledstate = 1;
   return anim.success;
 }
 
-function ref_12d4c(var_0) {
+function ref_12D4C(var_0) {
   if(istrue(self.disabledstate)) {
     return anim.success;
   }
 
   self.secondaryweapon = getcompleteweaponname("iw8_me_riotshield_sp_ai");
-  ref_12d4a();
+  ref_12D4A();
   self.disabledstate = 1;
   return anim.success;
 }
 
-function ref_12d4a() {
+function ref_12D4A() {
   self allowedstances("stand");
   self.minpaindamage = 200;
   self.aggressivemode = 1;
@@ -72,12 +72,12 @@ function ref_12d4a() {
   self enabletraversals(0);
   self clearvehiclecamo(self.secondaryweapon);
   self.riotshieldmodel = "weapon_wm_riotshield_left_cp";
-  self.ref_12d50 = "tag_weapon_left";
-  self attachshieldmodel(self.riotshieldmodel, self.ref_12d50);
+  self.ref_12D50 = "tag_weapon_left";
+  self attachshieldmodel(self.riotshieldmodel, self.ref_12D50);
   self.clearsoundsubmixmpbrinfilanim = 1;
 }
 
-function ref_13af8() {
+function ref_13AF8() {
   self allowedstances("stand", "crouch", "prone");
   self.minpaindamage = 0;
   self.aggressivemode = 0;
@@ -96,23 +96,23 @@ function ref_13af8() {
   self enabletraversals(1);
 }
 
-function ref_12c80() {
+function ref_12C80() {
   self.clearspaceforscriptableinstance = undefined;
-  self.ref_13b2c = undefined;
-  self.ref_13b2a = undefined;
+  self.ref_13B2C = undefined;
+  self.ref_13B2A = undefined;
 }
 
-function ref_12c1c() {
+function ref_12C1C() {
   if(istrue(self.clearsoundsubmixmpbrinfilanim)) {
-    self detachshieldmodel(self.riotshieldmodel, self.ref_12d50);
+    self detachshieldmodel(self.riotshieldmodel, self.ref_12D50);
     self.riotshieldmodel = undefined;
-    self.ref_12d50 = undefined;
+    self.ref_12D50 = undefined;
     self.clearsoundsubmixmpbrinfilanim = undefined;
     return;
   }
 }
 
-function ref_12d49(var_0) {
+function ref_12D49(var_0) {
   if(istrue(self.clear_kill_off_flags_after_unload_wait)) {
     self._blackboard.weaponrequest = "mg";
     self setbtgoalpos(2, self.origin);
@@ -120,7 +120,7 @@ function ref_12d49(var_0) {
   }
 
   if(istrue(self.clearspaceforscriptableinstance)) {
-    if(self.ref_13b2a > 3) {
+    if(self.ref_13B2A > 3) {
       thread modifybrvehicledamage();
       return anim.running;
     }
@@ -142,7 +142,7 @@ function modifybrvehicledamage() {
   var_2 = var_1 + var_0 <= gettime();
 
   if(var_2) {
-    ref_12c80();
+    ref_12C80();
     self._blackboard.weaponrequest = "none";
     self.clear_kill_off_flags_after_unload_wait = undefined;
     self clearbtgoal(2);
@@ -152,16 +152,16 @@ function modifybrvehicledamage() {
   scripts\asm\shared\utility::setbasearchetype("soldier_cp");
   scripts\asm\shared\utility::setoverridearchetype("default", "soldier_cp");
   scripts\asm\soldier\script_funcs::initanimspeedthresholds_soldier("soldier_cp");
-  var_3 = self gettagorigin(self.ref_12d50);
-  var_4 = self gettagangles(self.ref_12d50);
+  var_3 = self gettagorigin(self.ref_12D50);
+  var_4 = self gettagangles(self.ref_12D50);
   var_5 = spawn("script_model", var_3);
   var_5.angles = var_4;
   var_5 setModel(self.riotshieldmodel);
   var_5 physicslaunchserver(var_3, anglesToForward(self.angles) * 5);
   thread deleteaftertime(var_5);
 
-  if(isDefined(self.ref_13b2c)) {
-    foreach(var_7 in self.ref_13b2c) {
+  if(isDefined(self.ref_13B2C)) {
+    foreach(var_7 in self.ref_13B2C) {
       if(isDefined(var_7)) {
         var_7 delete();
       }
@@ -169,11 +169,11 @@ function modifybrvehicledamage() {
   }
 
   self.a.disablelongdeath = 0;
-  ref_12c1c();
-  ref_12c80();
+  ref_12C1C();
+  ref_12C80();
   self.clear_kill_off_flags_after_unload_wait = undefined;
   self clearbtgoal(2);
-  ref_13af8();
+  ref_13AF8();
   self._blackboard.weaponrequest = "none";
   scripts\aitypes\bt_util::bt_terminateandreplace("soldier_agent");
   var_9 = weaponclass(self.weapon);

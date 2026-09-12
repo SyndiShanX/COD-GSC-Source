@@ -189,7 +189,7 @@ function bot_infect_retrieve_knife() {
                     self setweaponammoclip("throwingknife_mp", 1);
                   }
 
-                  scripts\engine\utility::ref_143bf(30, "enemy");
+                  scripts\engine\utility::ref_143BF(30, "enemy");
                   self botclearscriptgoal();
                 }
               }

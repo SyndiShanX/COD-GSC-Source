@@ -253,7 +253,7 @@ function filterstructs(var_0) {
   var_3 = var_0.script_noteworthy;
 
   if(isDefined(var_3)) {
-    if(level.ref_11ad3 == 1) {
+    if(level.ref_11AD3 == 1) {
       if(var_3 == "10v10") {
         return true;
       } else if(var_3 == "6v6") {

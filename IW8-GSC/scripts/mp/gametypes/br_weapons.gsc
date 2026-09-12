@@ -149,7 +149,7 @@ function playerdropweaponfrominventory(var_0) {
 function weaponspawn(var_0, var_1, var_2, var_3, var_4) {
   var_5 = createheadicon(var_0);
   var_6 = scripts\mp\gametypes\br_pickups::spawnpickup(var_5, var_2, 0, var_4, var_0);
-  level.ref_120ad _calloutmarkerping_handleluinotify_acknowledgedcancel::from(var_6, var_1, var_0);
+  level.ref_120AD _calloutmarkerping_handleluinotify_acknowledgedcancel::from(var_6, var_1, var_0);
   return var_6;
 }
 
@@ -316,7 +316,7 @@ function takeweaponpickup(var_0) {
     }
   }
 
-  var_8.ref_12cc1 = undefined;
+  var_8.ref_12CC1 = undefined;
   br_ammo_update_weapons(self);
   self assignweaponprimaryslot(var_8);
   scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var_8);
@@ -345,7 +345,7 @@ function takeweaponpickup(var_0) {
   thread scripts\mp\gametypes\br_respawn::giveweaponpickup(var_9);
 
   if(isDefined(var_5.tracknonoobplayerlocation)) {
-    level.ref_120ae _calloutmarkerping_handleluinotify_acknowledgedcancel::from(var_5.tracknonoobplayerlocation, self, var_7);
+    level.ref_120AE _calloutmarkerping_handleluinotify_acknowledgedcancel::from(var_5.tracknonoobplayerlocation, self, var_7);
     return;
   }
 }
@@ -720,7 +720,7 @@ function br_ammo_player_hud_monitor() {
   self endon("disconnect");
 
   for(;;) {
-    scripts\engine\utility::ref_143a8("ammo_update", "pickedupweapon", "weapon_switch_done", "weapon_change", "weapon_change_complete");
+    scripts\engine\utility::ref_143A8("ammo_update", "pickedupweapon", "weapon_switch_done", "weapon_change", "weapon_change_complete");
     br_ammo_player_hud_update_ammotype("brloot_ammo_919");
     br_ammo_player_hud_update_ammotype("brloot_ammo_12g");
     br_ammo_player_hud_update_ammotype("brloot_ammo_762");

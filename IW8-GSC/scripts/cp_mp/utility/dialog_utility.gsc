@@ -33,7 +33,7 @@ function operatordialogonplayer(var_0, var_1, var_2, var_3, var_4) {
 function getteamoperatorvoicefaction(var_0) {
   var_1 = "us";
 
-  if(scripts\cp_mp\utility\game_utility::ref_140a8()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140A8()) {
     var_1 = "c3";
   } else if(var_0 == "axis") {
     var_1 = "ru";

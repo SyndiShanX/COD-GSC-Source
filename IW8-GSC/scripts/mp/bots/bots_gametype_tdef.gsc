@@ -5,15 +5,15 @@
 
 function main() {
   setup_callbacks();
-  ref_131de();
-  thread ref_11cdd();
+  ref_131DE();
+  thread ref_11CDD();
 }
 
 function setup_callbacks() {
   level.bot_funcs["gametype_think"] = &debug_bunkerpuzzledebugdraw;
 }
 
-function ref_131de() {
+function ref_131DE() {
   scripts\mp\bots\bots_util::bot_waittill_bots_enabled(1);
   level.protect_radius = 600;
   level.bodyguard_radius = 400;
@@ -301,7 +301,7 @@ function get_players_by_role(var_0, var_1) {
   return var_2;
 }
 
-function ref_11cdd() {
+function ref_11CDD() {
   level endon("game_ended");
   var_0 = undefined;
 

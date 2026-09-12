@@ -255,7 +255,7 @@ function defendlocation(var_0, var_1) {
     jackalmovetolocation(var_0, var_1.location);
     thread dropcrates(var_0, var_0.dropcrates);
     thread watchjackalcratepickup();
-    var_0 scripts\engine\utility::ref_143b9(10, "all_crates_gone");
+    var_0 scripts\engine\utility::ref_143B9(10, "all_crates_gone");
     var_0.combatmode = "follow_player";
   } else {
     thread jackaltimer();
@@ -356,7 +356,7 @@ function followplayer() {
     self setlookatent(self.owner);
     self setvehgoalpos(var_0, 1);
     self.lastaction = "following_player";
-    scripts\engine\utility::ref_143a5("goal", "begin_evasive_maneuvers");
+    scripts\engine\utility::ref_143A5("goal", "begin_evasive_maneuvers");
     self clearlookatent();
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);
   }
@@ -393,7 +393,7 @@ function guardposition(var_0) {
   self setlookatent(self.owner);
   self setvehgoalpos(var_4, 1);
   self.lastaction = "following_player";
-  scripts\engine\utility::ref_143a5("goal", "begin_evasive_maneuvers");
+  scripts\engine\utility::ref_143A5("goal", "begin_evasive_maneuvers");
   self clearlookatent();
 }
 
@@ -536,7 +536,7 @@ function jackalmovetoenemy(var_0) {
 
   self setvehgoalpos(var_6 + (0, 0, 500), 2);
   self.lastaction = "patrol";
-  scripts\engine\utility::ref_143a5("goal", "begin_evasive_maneuvers");
+  scripts\engine\utility::ref_143A5("goal", "begin_evasive_maneuvers");
   self clearlookatent();
 }
 
@@ -597,7 +597,7 @@ function watchpatroltarget() {
   self endon("leaving");
   self endon("jackal_crashing");
   self.owner endon("disconnect");
-  var_0 = self.patroltarget scripts\engine\utility::ref_143b9(5, "death_or_disconnect");
+  var_0 = self.patroltarget scripts\engine\utility::ref_143B9(5, "death_or_disconnect");
   self.patroltarget = undefined;
 }
 
@@ -626,7 +626,7 @@ function jackalmovetolocation(var_0) {
 
   self clearlookatent();
   self setvehgoalpos(var_2 + (0, 0, 500), 10);
-  scripts\engine\utility::ref_143a5("goal", "begin_evasive_maneuvers");
+  scripts\engine\utility::ref_143A5("goal", "begin_evasive_maneuvers");
 }
 
 function jackalleave(var_0, var_1) {
@@ -871,7 +871,7 @@ function watchforlosttarget(var_0, var_1, var_2, var_3) {
   self endon("leaving");
   var_0 endon("stop_firing");
   var_4 = self.targetoutline;
-  var_5 = var_1 scripts\engine\utility::ref_143b9(var_3, "death_or_disconnect");
+  var_5 = var_1 scripts\engine\utility::ref_143B9(var_3, "death_or_disconnect");
 
   if(var_5 == "timeout") {
     self notify(var_2);
@@ -1245,7 +1245,7 @@ function monitorowner() {
     return;
   }
 
-  self.owner scripts\engine\utility::ref_143a5("joined_team", "disconnect");
+  self.owner scripts\engine\utility::ref_143A5("joined_team", "disconnect");
   jackalexplode();
 }
 
@@ -1506,7 +1506,7 @@ function beginevasivemaneuvers() {
   self notify("begin_evasive_maneuvers");
   self endon("begin_evasive_maneuvers");
   self.evasivemaneuvers = 1;
-  var_0 = scripts\engine\utility::ref_143b9(3, "death");
+  var_0 = scripts\engine\utility::ref_143B9(3, "death");
 
   if(var_0 == "timeout") {
     self.evasivemaneuvers = 0;
@@ -1551,7 +1551,7 @@ function dropcrates(var_0, var_1) {
 }
 
 function watchforcapture(var_0, var_1) {
-  scripts\engine\utility::ref_143a5("captured", "death");
+  scripts\engine\utility::ref_143A5("captured", "death");
   var_0 notify("crate_captured_" + var_1);
 }
 
@@ -1561,7 +1561,7 @@ function watchjackalcratepickup() {
   var_0 = 0;
 
   for(;;) {
-    scripts\engine\utility::ref_143a6("crate_captured_0", "crate_captured_1", "crate_captured_2");
+    scripts\engine\utility::ref_143A6("crate_captured_0", "crate_captured_1", "crate_captured_2");
     var_0++;
 
     if(var_0 == self.dropcrates.size) {
@@ -1634,7 +1634,7 @@ function guardpositionescort(var_0, var_1, var_2) {
 
     self setvehgoalpos(var_4, 1);
     self.lastaction = "following_player";
-    scripts\engine\utility::ref_143a5("goal", "begin_evasive_maneuvers");
+    scripts\engine\utility::ref_143A5("goal", "begin_evasive_maneuvers");
     self clearlookatent();
     return;
   }

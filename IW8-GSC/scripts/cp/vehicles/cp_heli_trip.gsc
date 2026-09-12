@@ -9,7 +9,7 @@ function start_heli_trip_sequence(var_0, var_1, var_2, var_3) {
   level.heli_trip_vehicle = spawn_chopper(var_0, var_1);
   level.heli_trip_vehicle scripts\cp\infilexfil\blima_exfil::go_to_exfil_location(level.heli_trip_vehicle.exfil_struct, 1);
   thread wait_for_passengers(level.heli_trip_vehicle);
-  level.heli_trip_vehicle scripts\engine\utility::ref_143a5("all_players_on_board", "heli_trip_timed_out");
+  level.heli_trip_vehicle scripts\engine\utility::ref_143A5("all_players_on_board", "heli_trip_timed_out");
 
   if(isDefined(level.heli_trip_vehicle)) {
     destroynavobstacle(level.heli_trip_vehicle.navobstacle);
@@ -59,7 +59,7 @@ function playerpassengerthink(var_0) {
     self.clearsixthsense = 1;
   }
 
-  scripts\cp\cp_weapons::ref_13a3a(self);
+  scripts\cp\cp_weapons::ref_13A3A(self);
   thread scripts\cp\cp_outofbounds::enableoobimmunity(self);
   thread create_player_rig(self, "player");
   scripts\common\anim::anim_first_frame_solo(self.player_rig, "blima_getin");
@@ -72,7 +72,7 @@ function playerpassengerthink(var_0) {
   self.inchopper = 1;
   level notify("exfil_sequence_started");
   level.heli_trip_vehicle notify("player_boarded_heli");
-  thread ref_144c2();
+  thread ref_144C2();
   thread rideloop(var_1);
   level.heli_trip_vehicle waittill("unload");
   self lerpviewangleclamp(1, 0.25, 0.25, 0, 0, 0, 0);
@@ -98,7 +98,7 @@ function playerpassengerthink(var_0) {
 }
 
 function raid_seq4_objectives_func() {
-  if(scripts\cp\cp_weapon::ref_124ad(self)) {
+  if(scripts\cp\cp_weapon::ref_124AD(self)) {
     scripts\cp\cp_weapon::minigamefinishcount(self);
     var_0 = undefined;
     var_1 = self getweaponslistprimaries();
@@ -158,7 +158,7 @@ function create_player_rig(var_0, var_1, var_2) {
 }
 
 function watch_remove_rig(var_0) {
-  scripts\engine\utility::ref_143a6("remove_rig", "death", "disconnect");
+  scripts\engine\utility::ref_143A6("remove_rig", "death", "disconnect");
 }
 
 function remove_player_rig(var_0) {
@@ -201,7 +201,7 @@ function rideloop(var_0) {
   }
 }
 
-function ref_144c2() {
+function ref_144C2() {
   self endon("death");
   self endon("disconnect");
   level.heli_trip_vehicle endon("heli_taking_off");
@@ -376,30 +376,30 @@ function wait_for_passengers(var_0) {
   if(istrue(var_0)) {
     heli_rpg_enemy_think(self);
     waitforhvtonboard();
-    ref_1212d(level.heli_trip_vehicle, level.heli_trip_vehicle);
+    ref_1212D(level.heli_trip_vehicle, level.heli_trip_vehicle);
   }
 
   startplayerboarding();
 }
 
-function ref_13bc7(var_0) {
+function ref_13BC7(var_0) {
   var_1 = self;
 
-  if(!isDefined(var_1.ref_121fb)) {
-    var_1.ref_121fb = spawn("script_model", var_1.origin - (0, 0, 100));
-    var_1.ref_121fb.angles = scripts\engine\utility::ter_op(isDefined(var_1.angles), var_1.angles, (0, 0, 0));
-    var_1.ref_121fb hide();
-    var_1.ref_121fb setModel(var_1.model);
+  if(!isDefined(var_1.ref_121FB)) {
+    var_1.ref_121FB = spawn("script_model", var_1.origin - (0, 0, 100));
+    var_1.ref_121FB.angles = scripts\engine\utility::ter_op(isDefined(var_1.angles), var_1.angles, (0, 0, 0));
+    var_1.ref_121FB hide();
+    var_1.ref_121FB setModel(var_1.model);
   }
 
   if(var_0) {
-    var_1.ref_121fb connectpaths();
-    var_1.ref_121fb delete();
-    var_1.ref_121fb = undefined;
+    var_1.ref_121FB connectpaths();
+    var_1.ref_121FB delete();
+    var_1.ref_121FB = undefined;
     return;
   }
 
-  var_1.ref_121fb disconnectPaths();
+  var_1.ref_121FB disconnectPaths();
 }
 
 function init_interactions(var_0) {
@@ -462,7 +462,7 @@ function interaction_disable_on_exit(var_0) {
   self makeunusable();
 }
 
-function ref_144ba() {
+function ref_144BA() {
   level endon("game_ended");
   self endon("death");
   self endon("load_hvt_started");
@@ -508,7 +508,7 @@ function ref_144ba() {
     if(var_11 != var_12) {
       self.onjointeamnospectatorcallbacks = 1;
       var_11 = var_12;
-      ref_13e58(var_6, self, var_11);
+      ref_13E58(var_6, self, var_11);
       self.spawnintermissionatplayer = var_11;
       self.onjointeamnospectatorcallbacks = 0;
     }
@@ -517,7 +517,7 @@ function ref_144ba() {
   }
 }
 
-function ref_13e58(var_0, var_1) {
+function ref_13E58(var_0, var_1) {
   self notify("stop_idle_anim");
   var_2 = scripts\engine\utility::ter_op(var_1 == "left", "turn_left", "turn_right");
   var_3 = scripts\engine\utility::ter_op(var_1 == "left", "blima_drop_l_idle_in", "blima_drop_r_idle_in");
@@ -647,7 +647,7 @@ function exit_map() {
 
 #using_animtree("mp_vehicles_always_loaded");
 
-function ref_1212d(var_0) {
+function ref_1212D(var_0) {
   level endon("game_ended");
   var_0 endon("death");
   var_0 notify("opening_right_door");

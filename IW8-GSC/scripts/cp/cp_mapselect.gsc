@@ -99,7 +99,7 @@ function watchownertimeoutdeath() {
   self endon("map_select_exit");
   level endon("game_ended");
   self setclientomnvar("ui_location_selection_countdown", gettime() + 30000);
-  scripts\engine\utility::ref_143b9(30, "death");
+  scripts\engine\utility::ref_143B9(30, "death");
   self notify("cancel_location");
 }
 

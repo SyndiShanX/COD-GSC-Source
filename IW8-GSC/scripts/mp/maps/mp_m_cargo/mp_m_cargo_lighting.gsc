@@ -26,7 +26,7 @@ function ref_14051() {
   setDvar("sm_compressedSunShadowFilteringMaxRadius", 4);
 }
 
-function ref_11e8d() {
+function ref_11E8D() {
   setDvar("sm_sunSampleSizeNear", 0.18);
   setDvar("sm_sunCascadeSizeMultiplier1", 2);
   setDvar("sm_sunCascadeSizeMultiplier2", 3);

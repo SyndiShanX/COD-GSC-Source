@@ -33,11 +33,11 @@ function main() {
   game["axis_outfit"] = "woodland";
   level.music_style = "eastern_europe";
   level.g = getEntArray("callout_area", "targetname");
-  thread ref_145f0();
-  thread ref_12f8e();
+  thread ref_145F0();
+  thread ref_12F8E();
 }
 
-function ref_145f0() {
+function ref_145F0() {
   var_0 = getdvarint("gw_gas_circle_size", 0);
   wait 3;
 
@@ -59,7 +59,7 @@ function ref_145f0() {
   }
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {

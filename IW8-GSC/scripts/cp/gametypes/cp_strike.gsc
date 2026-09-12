@@ -948,7 +948,7 @@ function watchglproxy() {
   self notifyonplayercommand("fired", "+attack");
 
   for(;;) {
-    scripts\engine\utility::ref_143a6("weapon_switch_started", "weapon_change", "weaponchange");
+    scripts\engine\utility::ref_143A6("weapon_switch_started", "weapon_change", "weaponchange");
     self notify("stop_regen_on_weapons");
     wait 0.1;
     var_1 = self getweaponslistall();
@@ -1192,7 +1192,7 @@ function kick_for_inactivity(var_0) {
     var_4 = 0.1;
 
     for(;;) {
-      var_5 = scripts\engine\utility::ref_143c0(var_4, "inputReceived", "currency_earned");
+      var_5 = scripts\engine\utility::ref_143C0(var_4, "inputReceived", "currency_earned");
 
       if(var_5 != "timeout") {
         var_3 = 120;
@@ -1468,7 +1468,7 @@ function revivetriggerthink(var_0) {
 function endreviveonownerdeathordisconnect() {
   self endon("disconnect");
   self endon("death");
-  self.owner scripts\engine\utility::ref_143a5("disconnect", "last_stand_finished");
+  self.owner scripts\engine\utility::ref_143A5("disconnect", "last_stand_finished");
   self.owner = undefined;
   self delete();
 }

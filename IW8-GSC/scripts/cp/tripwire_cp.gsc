@@ -8,7 +8,7 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("tripwire", "canTripTrap", &tripwire_cantriptrap);
   scripts\cp_mp\utility\script_utility::registersharedfunc("tripwire", "damageFunc", &tripwire_damagefunc);
   scripts\cp_mp\utility\script_utility::registersharedfunc("tripwire", "disarmGiveWeapon", &tripwire_disarmgiveweapon);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("tripwire", "blowTripWire", &ref_13dd2);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("tripwire", "blowTripWire", &ref_13DD2);
 }
 
 function tripwire_createhintobject(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
@@ -271,7 +271,7 @@ function play_disarm_operator_vo(var_0) {
   }
 }
 
-function ref_13dd2(var_0, var_1) {
+function ref_13DD2(var_0, var_1) {
   if(isPlayer(var_0) && (var_1 == "MOD_GRENADE_SPLASH" || var_1 == "MOD_PROJECTILE_SPLASH")) {
     var_0 thread scripts\cp\cp_achievement::trapachievementboom(var_0);
     return;

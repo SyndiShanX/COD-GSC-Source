@@ -3,10 +3,10 @@
  * Script: scripts\mp\trials\mp_trl_create_a_script_race_euphrates.gsc
 ***********************************************************************/
 
-function ref_134ac(var_0, var_1, var_2) {
+function ref_134AC(var_0, var_1, var_2) {
   var_3 = self._blackboard.throwdata;
   self.ispreppinggrenade = 1;
-  var_4 = ref_134c2(var_0, var_1, var_3);
+  var_4 = ref_134C2(var_0, var_1, var_3);
 
   if(!var_4) {
     self endon(var_1 + "_finished");
@@ -16,7 +16,7 @@ function ref_134ac(var_0, var_1, var_2) {
   }
 }
 
-function ref_134c2(var_0, var_1, var_2, var_3) {
+function ref_134C2(var_0, var_1, var_2, var_3) {
   var_4 = var_2.destination;
   var_5 = var_2.target;
   var_6 = var_2.withbounce;

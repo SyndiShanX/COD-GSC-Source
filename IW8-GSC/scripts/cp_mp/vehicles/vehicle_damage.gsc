@@ -47,7 +47,7 @@ function vehicle_damage_getleveldataforvehicle(var_0, var_1, var_2) {
   return var_4;
 }
 
-function ref_1414c(var_0, var_1, var_2) {
+function ref_1414C(var_0, var_1, var_2) {
   var_3 = var_0.damagedata;
 
   if(!isDefined(var_3)) {
@@ -62,10 +62,10 @@ function ref_1414c(var_0, var_1, var_2) {
       var_3.siege_bot_team_had_advantage = undefined;
       var_3.shuttingdown = undefined;
       var_3.sidehouse_intel_sequence = undefined;
-      var_3.ref_11bae = undefined;
-      var_3.ref_11baf = undefined;
-      var_3.ref_11bac = undefined;
-      var_3.ref_11bad = undefined;
+      var_3.ref_11BAE = undefined;
+      var_3.ref_11BAF = undefined;
+      var_3.ref_11BAC = undefined;
+      var_3.ref_11BAD = undefined;
       var_3.wind_trigger_toggle = undefined;
       var_3.wind_triggers = undefined;
       var_3.winbycaptures = undefined;
@@ -76,15 +76,15 @@ function ref_1414c(var_0, var_1, var_2) {
   return var_3;
 }
 
-function ref_1416e(var_0) {
-  return ref_1414c(var_0, 1);
+function ref_1416E(var_0) {
+  return ref_1414C(var_0, 1);
 }
 
 function ref_14141(var_0) {
   var_0.damagedata = undefined;
 }
 
-function ref_1414d(var_0, var_1, var_2, var_3) {
+function ref_1414D(var_0, var_1, var_2, var_3) {
   var_4 = vehicle_damage_getleveldataforvehicle(var_0, var_2, var_3);
   var_5 = var_4.isattachmentvariantlocked[var_1];
 
@@ -94,14 +94,14 @@ function ref_1414d(var_0, var_1, var_2, var_3) {
       var_4.isattachmentvariantlocked[var_1] = var_5;
       var_5.maxhealth = undefined;
       var_5.ref_12024 = undefined;
-      var_5.ref_1202d = undefined;
+      var_5.ref_1202D = undefined;
     } else if(istrue(var_3)) {}
   }
 
   return var_5;
 }
 
-function ref_1416f(var_0, var_1, var_2, var_3, var_4) {
+function ref_1416F(var_0, var_1, var_2, var_3, var_4) {
   var_5 = vehicle_damage_getleveldataforvehicle(var_0, 1);
   var_5.visualpercents[var_4] = var_1;
   var_5.visualcallbacks[var_4] = var_2;
@@ -119,15 +119,15 @@ function ref_14142(var_0, var_1) {
   }
 }
 
-function ref_1416d(var_0) {
+function ref_1416D(var_0) {
   var_1 = vehicle_damage_getleveldataforvehicle(var_0, 1);
   var_1.visualhighesttolowest = 1;
-  ref_1416f(var_0, 0.85, &ref_1415c, &vehicle_damage_lightvisualclearcallback, "light");
-  ref_1416f(var_0, 0.5, &ref_1415f, &vehicle_damage_mediumvisualclearcallback, "medium");
-  ref_1416f(var_0, 0.15, &ref_14157, &vehicle_damage_heavyvisualclearcallback, "heavy");
+  ref_1416F(var_0, 0.85, &ref_1415C, &vehicle_damage_lightvisualclearcallback, "light");
+  ref_1416F(var_0, 0.5, &ref_1415F, &vehicle_damage_mediumvisualclearcallback, "medium");
+  ref_1416F(var_0, 0.15, &ref_14157, &vehicle_damage_heavyvisualclearcallback, "heavy");
 
   if(level.gametype != "br") {
-    ref_1416f(var_0, 0.15, &ref_14145, &ref_14146, "engine");
+    ref_1416F(var_0, 0.15, &ref_14145, &ref_14146, "engine");
     return;
   }
 }
@@ -158,10 +158,10 @@ function vehicle_damage_clearvisuals(var_0, var_1, var_2) {
 }
 
 function ref_14170() {
-  ref_1413c(self.maxhealth);
+  ref_1413C(self.maxhealth);
 }
 
-function ref_1413c(var_0) {
+function ref_1413C(var_0) {
   self.health = int(min(self.health + var_0, self.maxhealth));
   var_1 = vehicle_damage_getleveldataforvehicle(self.vehiclename, undefined, 1);
 
@@ -183,12 +183,12 @@ function ref_14160(var_0, var_1, var_2) {
   var_4 = vehicle_damage_getleveldataforvehicle(var_0.vehiclename);
 
   if(isDefined(var_3)) {
-    if(isDefined(var_4.ref_11fa5) && isDefined(var_4.ref_11fa5[var_3])) {
-      var_2 *= var_4.ref_11fa5[var_3];
+    if(isDefined(var_4.ref_11FA5) && isDefined(var_4.ref_11FA5[var_3])) {
+      var_2 *= var_4.ref_11FA5[var_3];
     }
 
-    if(isDefined(var_4.ref_11fa4) && isDefined(var_4.ref_11fa4[var_3])) {
-      var_2 = clamp(var_2, 0, var_4.ref_11fa4[var_3]);
+    if(isDefined(var_4.ref_11FA4) && isDefined(var_4.ref_11FA4[var_3])) {
+      var_2 = clamp(var_2, 0, var_4.ref_11FA4[var_3]);
     }
   }
 
@@ -201,9 +201,9 @@ function vehicle_damage_init() {
   var_0.vehicledata = [];
   var_0.ref_12899 = getdvarint("scr_vehicleDamageStatePristineHealthAdd", 125);
   var_0.siege_bot_team_triple_cap_check = getdvarint("scr_vehicleDamageStateHeavyHealthAdd", 350);
-  var_0.ref_11bb0 = getdvarfloat("scr_vehicleDamageStateMediumHealthRatio", 0.5);
+  var_0.ref_11BB0 = getdvarfloat("scr_vehicleDamageStateMediumHealthRatio", 0.5);
   var_0.flare_setup = getdvarfloat("scr_vehicleDamageBurnDownTime", 8);
-  ref_1415d();
+  ref_1415D();
   vehicle_damage_initdebug();
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle_damage", "init")) {
@@ -217,24 +217,24 @@ function vehicle_damage_init() {
   }
 
   level.brking_managecircles = getdvarint("scr_vehicle_allow_damage_audio_feedback", 1);
-  ref_1415a();
+  ref_1415A();
 }
 
-function ref_1415d() {
+function ref_1415D() {
   var_0 = vehicle_damage_getleveldata();
   var_1 = spawnStruct();
   var_0.table = var_1;
-  var_1.ref_11ca5 = [];
-  var_1.ref_11ca6 = [];
+  var_1.ref_11CA5 = [];
+  var_1.ref_11CA6 = [];
   var_1.spawn_lmg_soldiers_01 = [];
   var_1.spawn_lmg_soldiers_02 = [];
-  var_1.ref_133c2 = [];
-  var_1.ref_133c3 = [];
+  var_1.ref_133C2 = [];
+  var_1.ref_133C3 = [];
   var_2 = [];
   GscBinSkip0(0x2e, "class", []);
 }
 
-function ref_1415e(var_0, var_1, var_2, var_3, var_4) {
+function ref_1415E(var_0, var_1, var_2, var_3, var_4) {
   var_5 = vehicle_damage_getleveldata();
   var_6 = var_5.table;
 
@@ -242,17 +242,17 @@ function ref_1415e(var_0, var_1, var_2, var_3, var_4) {
     var_7 = float(var_0);
 
     if(var_4 == "class") {
-      if(!isDefined(var_6.ref_11ca5[var_3])) {
-        var_6.ref_11ca5[var_3] = [];
+      if(!isDefined(var_6.ref_11CA5[var_3])) {
+        var_6.ref_11CA5[var_3] = [];
       }
 
-      var_6.ref_11ca5[var_3][var_1] = var_7;
+      var_6.ref_11CA5[var_3][var_1] = var_7;
     } else if(var_4 == "vehicle") {
-      if(!isDefined(var_6.ref_11ca6[var_3])) {
-        var_6.ref_11ca6[var_3] = [];
+      if(!isDefined(var_6.ref_11CA6[var_3])) {
+        var_6.ref_11CA6[var_3] = [];
       }
 
-      var_6.ref_11ca6[var_3][var_1] = var_7;
+      var_6.ref_11CA6[var_3][var_1] = var_7;
     }
   }
 
@@ -278,20 +278,20 @@ function ref_1415e(var_0, var_1, var_2, var_3, var_4) {
     var_7 = int(var_0) != 0;
 
     if(var_4 == "class") {
-      if(!isDefined(var_6.ref_133c2[var_3])) {
-        var_6.ref_133c2[var_3] = [];
+      if(!isDefined(var_6.ref_133C2[var_3])) {
+        var_6.ref_133C2[var_3] = [];
       }
 
-      var_6.ref_133c2[var_3][var_1] = var_7;
+      var_6.ref_133C2[var_3][var_1] = var_7;
       return;
     }
 
     if(var_4 == "vehicle") {
-      if(!isDefined(var_6.ref_133c3[var_3])) {
-        var_6.ref_133c3[var_3] = [];
+      if(!isDefined(var_6.ref_133C3[var_3])) {
+        var_6.ref_133C3[var_3] = [];
       }
 
-      var_6.ref_133c3[var_3][var_1] = var_7;
+      var_6.ref_133C3[var_3][var_1] = var_7;
       return;
     }
 
@@ -299,7 +299,7 @@ function ref_1415e(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-function ref_1413d(var_0, var_1) {
+function ref_1413D(var_0, var_1) {
   var_2 = vehicle_damage_getleveldata();
   var_3 = var_2.table;
   var_4 = vehicle_damage_getleveldataforvehicle(var_0, undefined, var_1);
@@ -310,28 +310,28 @@ function ref_1413d(var_0, var_1) {
 
   var_5 = var_4.class;
 
-  if(isDefined(var_3.ref_11ca5[var_5])) {
-    foreach(var_8, var_7 in var_3.ref_11ca5[var_5]) {
-      ref_1417a(var_8, var_7, 0, var_0);
+  if(isDefined(var_3.ref_11CA5[var_5])) {
+    foreach(var_8, var_7 in var_3.ref_11CA5[var_5]) {
+      ref_1417A(var_8, var_7, 0, var_0);
     }
   }
 
-  if(isDefined(var_3.ref_11ca6[var_0])) {
-    foreach(var_7 in var_3.ref_11ca6[var_0]) {
-      ref_1417a(var_8, var_7, 0, var_0);
+  if(isDefined(var_3.ref_11CA6[var_0])) {
+    foreach(var_7 in var_3.ref_11CA6[var_0]) {
+      ref_1417A(var_8, var_7, 0, var_0);
     }
   }
 
   if(isDefined(var_3.spawn_lmg_soldiers_01[var_5])) {
     foreach(var_12, var_11 in var_3.spawn_lmg_soldiers_01[var_5]) {
-      ref_1417c(var_12, var_11, var_0);
+      ref_1417C(var_12, var_11, var_0);
       ref_14179(var_0, 100, var_12);
     }
   }
 
   if(isDefined(var_3.spawn_lmg_soldiers_02[var_0])) {
     foreach(var_11 in var_3.spawn_lmg_soldiers_02[var_0]) {
-      ref_1417c(var_12, var_11, var_0);
+      ref_1417C(var_12, var_11, var_0);
       ref_14179(var_0, 100, var_12);
     }
 
@@ -340,94 +340,94 @@ function ref_1413d(var_0, var_1) {
 }
 
 function ref_14158() {
-  ref_1417b("iw8_la_gromeo_mp", 5);
-  ref_1417b("iw8_la_kgolf_mp", 5);
-  ref_1417b("iw8_la_t9standard_mp", 5);
-  ref_1417b("iw8_la_rpapa7_mp", 5);
-  ref_1417b("iw8_la_t9freefire_mp", 5);
-  ref_1417b("iw8_la_juliet_mp", 6);
-  ref_1417b("iw8_la_gromeoks_mp", 4);
-  ref_1417b("iw8_la_mike32_mp", 3);
-  ref_1417b("iw8_la_t9launcher_mp", 3);
-  ref_1417b("iw8_ar_mike4_mp", 3);
-  ref_1417b("iw8_ar_akilo47_mp", 3);
-  ref_1417b("frag_grenade_mp", 3);
-  ref_1417b("semtex_mp", 3);
-  ref_1417b("c4_mp_p", 3);
-  ref_1417b("at_mine_ap_mp", 3);
-  ref_1417b("at_mine_mp", 3);
-  ref_1417b("claymore_mp", 3);
-  ref_1417b("molotov_mp", 2);
-  ref_1417b("thermite_mp", 2);
-  ref_1417b("thermite_av_mp", 1);
-  ref_1417b("thermite_bolt_mp", 1);
-  ref_1417b("semtex_bolt_mp", 4);
-  ref_1417b("thermite_xmike109_mp", 0.5);
-  ref_1417b("semtex_xmike109_mp", 2);
-  ref_1417b("semtex_aalpha12_mp", 1);
-  ref_1417b("apache_proj_mp", 3);
-  ref_1417b("toma_proj_mp", 3);
-  ref_1417b("cruise_proj_mp", 15);
-  ref_1417b("artillery_mp", 3);
-  ref_1417b("nuke_mp", 15);
-  ref_1417b("ac130_105mm_mp", 15);
-  ref_1417b("ac130_40mm_mp", 5);
-  ref_1417b("ac130_25mm_mp", 1);
-  ref_1417b("hover_jet_proj_mp", 3);
-  ref_1417b("assault_drone_mp", 5);
-  ref_1417b("emp_drone_non_player_mp", 3);
-  ref_1417b("emp_drone_non_player_direct_mp", 5);
+  ref_1417B("iw8_la_gromeo_mp", 5);
+  ref_1417B("iw8_la_kgolf_mp", 5);
+  ref_1417B("iw8_la_t9standard_mp", 5);
+  ref_1417B("iw8_la_rpapa7_mp", 5);
+  ref_1417B("iw8_la_t9freefire_mp", 5);
+  ref_1417B("iw8_la_juliet_mp", 6);
+  ref_1417B("iw8_la_gromeoks_mp", 4);
+  ref_1417B("iw8_la_mike32_mp", 3);
+  ref_1417B("iw8_la_t9launcher_mp", 3);
+  ref_1417B("iw8_ar_mike4_mp", 3);
+  ref_1417B("iw8_ar_akilo47_mp", 3);
+  ref_1417B("frag_grenade_mp", 3);
+  ref_1417B("semtex_mp", 3);
+  ref_1417B("c4_mp_p", 3);
+  ref_1417B("at_mine_ap_mp", 3);
+  ref_1417B("at_mine_mp", 3);
+  ref_1417B("claymore_mp", 3);
+  ref_1417B("molotov_mp", 2);
+  ref_1417B("thermite_mp", 2);
+  ref_1417B("thermite_av_mp", 1);
+  ref_1417B("thermite_bolt_mp", 1);
+  ref_1417B("semtex_bolt_mp", 4);
+  ref_1417B("thermite_xmike109_mp", 0.5);
+  ref_1417B("semtex_xmike109_mp", 2);
+  ref_1417B("semtex_aalpha12_mp", 1);
+  ref_1417B("apache_proj_mp", 3);
+  ref_1417B("toma_proj_mp", 3);
+  ref_1417B("cruise_proj_mp", 15);
+  ref_1417B("artillery_mp", 3);
+  ref_1417B("nuke_mp", 15);
+  ref_1417B("ac130_105mm_mp", 15);
+  ref_1417B("ac130_40mm_mp", 5);
+  ref_1417B("ac130_25mm_mp", 1);
+  ref_1417B("hover_jet_proj_mp", 3);
+  ref_1417B("assault_drone_mp", 5);
+  ref_1417B("emp_drone_non_player_mp", 3);
+  ref_1417B("emp_drone_non_player_direct_mp", 5);
 }
 
 function ref_14159() {
-  ref_1417b("iw8_la_gromeo_mp", 10);
-  ref_1417b("iw8_la_kgolf_mp", 10);
-  ref_1417b("iw8_la_rpapa7_mp", 10);
-  ref_1417b("iw8_la_t9freefire_mp", 10);
-  ref_1417b("iw8_la_t9standard_mp", 10);
-  ref_1417b("iw8_la_juliet_mp", 20);
-  ref_1417b("iw8_la_gromeoks_mp", 10);
-  ref_1417b("iw8_la_mike32_mp", 6);
-  ref_1417b("iw8_la_t9launcher_mp", 6);
-  ref_1417b("iw8_ar_mike4_mp", 6);
-  ref_1417b("iw8_ar_akilo47_mp", 6);
-  ref_1417b("c4_mp_p", 13);
-  ref_1417b("semtex_mp", 4);
-  ref_1417b("frag_grenade_mp", 4);
-  ref_1417b("pop_rocket_mp", 4);
-  ref_1417b("molotov_mp", 1);
-  ref_1417b("at_mine_ap_mp", 5);
-  ref_1417b("at_mine_mp", 13);
-  ref_1417b("thermite_mp", 1);
-  ref_1417b("thermite_av_mp", 1);
-  ref_1417b("emp_grenade_mp", 4);
-  ref_1417b("claymore_mp", 13);
-  ref_1417b("thermite_bolt_mp", 1);
-  ref_1417b("semtex_bolt_mp", 4);
-  ref_1417b("thermite_xmike109_mp", 0.5);
-  ref_1417b("semtex_xmike109_mp", 2);
-  ref_1417b("semtex_aalpha12_mp", 1);
-  ref_1417b("apache_proj_mp", 3);
-  ref_1417b("toma_proj_mp", 12);
-  ref_1417b("cruise_proj_mp", 15);
-  ref_1417b("artillery_mp", 10);
-  ref_1417b("nuke_mp", 20);
-  ref_1417b("ac130_105mm_mp", 15);
-  ref_1417b("ac130_40mm_mp", 6);
-  ref_1417b("ac130_25mm_mp", 1);
-  ref_1417b("hover_jet_proj_mp", 3);
-  ref_1417b("hover_jet_proj_mp", 3);
-  ref_1417b("assault_drone_mp", 10);
-  ref_1417b("emp_drone_non_player_mp", 3);
-  ref_1417b("emp_drone_non_player_direct_mp", 5);
-  ref_1417b("s4_la_m1bravo_mp", 10);
-  ref_1417b("s4_la_palpha42_mp", 10);
-  ref_1417b("s4_la_mkilo1_mp", 10);
-  ref_1417b("s4_la_palpha_mp", 10);
-  ref_1417b("s4_la_walpha2_mp", 10);
+  ref_1417B("iw8_la_gromeo_mp", 10);
+  ref_1417B("iw8_la_kgolf_mp", 10);
+  ref_1417B("iw8_la_rpapa7_mp", 10);
+  ref_1417B("iw8_la_t9freefire_mp", 10);
+  ref_1417B("iw8_la_t9standard_mp", 10);
+  ref_1417B("iw8_la_juliet_mp", 20);
+  ref_1417B("iw8_la_gromeoks_mp", 10);
+  ref_1417B("iw8_la_mike32_mp", 6);
+  ref_1417B("iw8_la_t9launcher_mp", 6);
+  ref_1417B("iw8_ar_mike4_mp", 6);
+  ref_1417B("iw8_ar_akilo47_mp", 6);
+  ref_1417B("c4_mp_p", 13);
+  ref_1417B("semtex_mp", 4);
+  ref_1417B("frag_grenade_mp", 4);
+  ref_1417B("pop_rocket_mp", 4);
+  ref_1417B("molotov_mp", 1);
+  ref_1417B("at_mine_ap_mp", 5);
+  ref_1417B("at_mine_mp", 13);
+  ref_1417B("thermite_mp", 1);
+  ref_1417B("thermite_av_mp", 1);
+  ref_1417B("emp_grenade_mp", 4);
+  ref_1417B("claymore_mp", 13);
+  ref_1417B("thermite_bolt_mp", 1);
+  ref_1417B("semtex_bolt_mp", 4);
+  ref_1417B("thermite_xmike109_mp", 0.5);
+  ref_1417B("semtex_xmike109_mp", 2);
+  ref_1417B("semtex_aalpha12_mp", 1);
+  ref_1417B("apache_proj_mp", 3);
+  ref_1417B("toma_proj_mp", 12);
+  ref_1417B("cruise_proj_mp", 15);
+  ref_1417B("artillery_mp", 10);
+  ref_1417B("nuke_mp", 20);
+  ref_1417B("ac130_105mm_mp", 15);
+  ref_1417B("ac130_40mm_mp", 6);
+  ref_1417B("ac130_25mm_mp", 1);
+  ref_1417B("hover_jet_proj_mp", 3);
+  ref_1417B("hover_jet_proj_mp", 3);
+  ref_1417B("assault_drone_mp", 10);
+  ref_1417B("emp_drone_non_player_mp", 3);
+  ref_1417B("emp_drone_non_player_direct_mp", 5);
+  ref_1417B("s4_la_m1bravo_mp", 10);
+  ref_1417B("s4_la_palpha42_mp", 10);
+  ref_1417B("s4_la_mkilo1_mp", 10);
+  ref_1417B("s4_la_palpha_mp", 10);
+  ref_1417B("s4_la_walpha2_mp", 10);
 }
 
-function ref_1415a() {
+function ref_1415A() {
   ref_14174("specialty_armorpiercing", 0.5, 0);
 }
 
@@ -614,7 +614,7 @@ function ref_14184(var_0, var_1) {
       }
 
       if(isDefined(var_2) && var_3 != var_2) {
-        var_6 = ref_1414d(self.vehiclename, var_0);
+        var_6 = ref_1414D(self.vehiclename, var_0);
         self thread[[var_6.ref_12024]](var_0, var_1);
         return;
       }
@@ -630,7 +630,7 @@ function vehicle_damage_visualstopwatchingspeedchange() {
   self notify("vehicle_damage_visualStopWatchingSpeedChange");
 }
 
-function ref_1415c(var_0, var_1) {
+function ref_1415C(var_0, var_1) {
   if(scripts\cp_mp\vehicles\vehicle_tracking::_issuspendedvehicle()) {
     self setscriptablepartstate("damageLight", "stopped", 1);
   } else {
@@ -656,7 +656,7 @@ function vehicle_damage_lightvisualclearcallback(var_0, var_1, var_2) {
   self setscriptablepartstate("damageLight", "off", 1);
 }
 
-function ref_1415f(var_0, var_1) {
+function ref_1415F(var_0, var_1) {
   if(scripts\cp_mp\vehicles\vehicle_tracking::_issuspendedvehicle()) {
     self setscriptablepartstate("damageMedium", "stopped", 1);
   } else {
@@ -728,15 +728,15 @@ function ref_14177(var_0, var_1, var_2) {
   self notify("damage_state_change");
 
   if(var_1 != "pristine") {
-    var_3 = ref_1414d(self.vehiclename, var_1);
+    var_3 = ref_1414D(self.vehiclename, var_1);
 
-    if(isDefined(var_3.ref_1202d)) {
-      self thread[[var_3.ref_1202d]](var_0, var_2);
+    if(isDefined(var_3.ref_1202D)) {
+      self thread[[var_3.ref_1202D]](var_0, var_2);
     }
   }
 
   if(var_0 != "pristine") {
-    var_3 = ref_1414d(self.vehiclename, var_0);
+    var_3 = ref_1414D(self.vehiclename, var_0);
 
     if(isDefined(var_3.ref_12024)) {
       self thread[[var_3.ref_12024]](var_1, var_2);
@@ -746,7 +746,7 @@ function ref_14177(var_0, var_1, var_2) {
   self.isautouse = var_0;
 }
 
-function ref_1417f(var_0, var_1, var_2) {
+function ref_1417F(var_0, var_1, var_2) {
   var_3 = vehicle_damage_getleveldataforvehicle(self.vehiclename, undefined, var_2);
 
   if(!isDefined(var_3)) {
@@ -785,7 +785,7 @@ function ref_14182(var_0, var_1, var_2) {
     if(!istrue(var_1)) {
       if(var_5 == "heavy" && (!isDefined(var_11) || var_11 != "heavy")) {
         if(!istrue(self.load_sequence_4_vfx)) {
-          var_12 = ref_1414b(undefined, self.vehiclename);
+          var_12 = ref_1414B(undefined, self.vehiclename);
 
           if(isDefined(var_12)) {
             if(isDefined(var_0) && isDefined(var_0.damage) && var_0.damage != 0) {
@@ -849,7 +849,7 @@ function ref_14143(var_0) {
 }
 
 function ref_14165(var_0, var_1) {
-  ref_1415c(var_1, 1);
+  ref_1415C(var_1, 1);
 
   if(!isDefined(var_0) || var_0 == "pristine") {
     ref_14166(var_0, var_1);
@@ -857,12 +857,12 @@ function ref_14165(var_0, var_1) {
   }
 }
 
-function ref_1416a(var_0, var_1) {
+function ref_1416A(var_0, var_1) {
   vehicle_damage_lightvisualclearcallback(var_1, 1);
 }
 
 function ref_14167(var_0, var_1) {
-  ref_1415f(var_1, 1);
+  ref_1415F(var_1, 1);
 
   if(!isDefined(var_0) || var_0 == "light" || var_0 == "pristine") {
     ref_14168(var_0, var_1);
@@ -870,7 +870,7 @@ function ref_14167(var_0, var_1) {
   }
 }
 
-function ref_1416b(var_0, var_1) {
+function ref_1416B(var_0, var_1) {
   vehicle_damage_mediumvisualclearcallback(var_1, 1);
 }
 
@@ -887,7 +887,7 @@ function ref_14163(var_0, var_1) {
     }
 
     ref_14164(var_0, var_1);
-    thread ref_1413e(var_1);
+    thread ref_1413E(var_1);
     return;
   }
 }
@@ -906,26 +906,26 @@ function ref_14169(var_0, var_1) {
   }
 }
 
-function ref_1416c(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_1416C(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = vehicle_damage_getleveldataforvehicle(var_0, 1);
   var_6.health = var_1;
   var_6.ref_12899 = var_2;
   var_6.siege_bot_team_triple_cap_check = var_3;
-  var_6.ref_11bb0 = var_4;
+  var_6.ref_11BB0 = var_4;
   var_6.flare_setup = var_5;
-  var_7 = ref_1414d(var_0, "light", 1);
+  var_7 = ref_1414D(var_0, "light", 1);
   var_7.ref_12024 = &ref_14165;
-  var_7.ref_1202d = &ref_1416a;
-  var_7 = ref_1414d(var_0, "medium", 1);
+  var_7.ref_1202D = &ref_1416A;
+  var_7 = ref_1414D(var_0, "medium", 1);
   var_7.ref_12024 = &ref_14167;
-  var_7.ref_1202d = &ref_1416b;
-  var_7 = ref_1414d(var_0, "heavy", 1);
+  var_7.ref_1202D = &ref_1416B;
+  var_7 = ref_1414D(var_0, "heavy", 1);
   var_7.ref_12024 = &ref_14163;
-  var_7.ref_1202d = &ref_14169;
+  var_7.ref_1202D = &ref_14169;
   ref_14183(var_0);
 }
 
-function ref_1414e(var_0, var_1) {
+function ref_1414E(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = var_0.vehiclename;
   }
@@ -956,7 +956,7 @@ function ref_1414e(var_0, var_1) {
     var_4 += var_5;
   }
 
-  var_6 = ref_1414a(var_1);
+  var_6 = ref_1414A(var_1);
 
   if(isDefined(var_6)) {
     var_4 += var_6;
@@ -982,7 +982,7 @@ function ref_14151(var_0, var_1) {
   }
 
   var_4 = var_3.health;
-  var_5 = ref_1414a(var_1);
+  var_5 = ref_1414A(var_1);
 
   if(isDefined(var_5)) {
     var_4 += var_5;
@@ -995,7 +995,7 @@ function ref_14151(var_0, var_1) {
   return int(var_4);
 }
 
-function ref_1414b(var_0, var_1) {
+function ref_1414B(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = var_0.vehiclename;
   }
@@ -1011,7 +1011,7 @@ function ref_1414b(var_0, var_1) {
     return undefined;
   }
 
-  var_4 = ref_1414a(var_1);
+  var_4 = ref_1414A(var_1);
 
   if(!isDefined(var_4) || var_4 <= 0) {
     return undefined;
@@ -1033,7 +1033,7 @@ function ref_14183(var_0) {
     }
 
     if(var_6 == "heavy") {
-      var_5.maxhealth = ref_1414b(undefined, var_0);
+      var_5.maxhealth = ref_1414B(undefined, var_0);
       var_2 = var_5.maxhealth;
     }
   }
@@ -1042,7 +1042,7 @@ function ref_14183(var_0) {
 
   if(isDefined(var_5)) {
     if(isDefined(var_2) && isDefined(var_3)) {
-      var_7 = ref_1414f(var_0);
+      var_7 = ref_1414F(var_0);
 
       if(isDefined(var_7)) {
         var_5.maxhealth = int(scripts\engine\math::lerp(var_2, var_3, var_7));
@@ -1072,7 +1072,7 @@ function ref_14150(var_0) {
   return int(var_3);
 }
 
-function ref_1414a(var_0) {
+function ref_1414A(var_0) {
   var_1 = vehicle_damage_getleveldata();
   var_2 = vehicle_damage_getleveldataforvehicle(var_0);
   var_3 = var_2.siege_bot_team_triple_cap_check;
@@ -1088,13 +1088,13 @@ function ref_1414a(var_0) {
   return int(var_3);
 }
 
-function ref_1414f(var_0) {
+function ref_1414F(var_0) {
   var_1 = vehicle_damage_getleveldata();
   var_2 = vehicle_damage_getleveldataforvehicle(var_0);
-  var_3 = var_2.ref_11bb0;
+  var_3 = var_2.ref_11BB0;
 
   if(!isDefined(var_3)) {
-    var_3 = var_1.ref_11bb0;
+    var_3 = var_1.ref_11BB0;
   }
 
   if(!isDefined(var_3) || var_3 <= 0 || var_3 > 1) {
@@ -1104,7 +1104,7 @@ function ref_1414f(var_0) {
   return var_3;
 }
 
-function ref_1413e(var_0) {
+function ref_1413E(var_0) {
   self endon("death");
   self endon("end_burn_down");
 
@@ -1153,7 +1153,7 @@ function ref_14144(var_0) {
   self.flarecooldown = undefined;
 }
 
-function ref_1415b() {
+function ref_1415B() {
   return istrue(self.flarecooldown);
 }
 
@@ -1173,7 +1173,7 @@ function ref_14149(var_0) {
   return var_3;
 }
 
-function ref_1417d(var_0) {
+function ref_1417D(var_0) {
   if(isDefined(var_0.meansofdeath)) {
     if(var_0.meansofdeath == "MOD_CRUSH") {
       return 1;
@@ -1191,8 +1191,8 @@ function ref_1417d(var_0) {
     var_4 = vehicle_damage_getleveldata();
     var_5 = var_4.table;
 
-    if(isDefined(var_4.table.ref_133c3[var_2])) {
-      var_1 = var_4.table.ref_133c3[var_2][var_3];
+    if(isDefined(var_4.table.ref_133C3[var_2])) {
+      var_1 = var_4.table.ref_133C3[var_2][var_3];
     }
 
     if(isDefined(var_1)) {
@@ -1208,8 +1208,8 @@ function ref_1417d(var_0) {
         return 1;
       }
 
-      if(isDefined(var_4.table.ref_133c2[var_7])) {
-        var_1 = var_4.table.ref_133c2[var_7][var_3];
+      if(isDefined(var_4.table.ref_133C2[var_7])) {
+        var_1 = var_4.table.ref_133C2[var_7][var_3];
       }
 
       if(isDefined(var_1)) {
@@ -1235,12 +1235,12 @@ function ref_14147(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(!istrue(var_0.scurrentobjective) && isPlayer(var_0.attacker)) {
-    var_0.scurrentobjective = scripts\cp_mp\vehicles\vehicle::ref_141b7(self, var_0.attacker);
+    var_0.scurrentobjective = scripts\cp_mp\vehicles\vehicle::ref_141B7(self, var_0.attacker);
   }
 
   if(isDefined(var_0.objweapon) && weaponclass(var_0.objweapon.basename) != "rocketlauncher") {
     if(istrue(var_2)) {
-      var_0.ref_12f0d = 1;
+      var_0.ref_12F0D = 1;
     }
 
     if(istrue(var_4)) {
@@ -1256,7 +1256,7 @@ function ref_14166(var_0, var_1) {
     var_2 = vehicle_damage_getleveldataforvehicle(self.vehiclename, undefined, 1);
 
     if(isDefined(var_2)) {
-      var_3 = ref_1414c(self, undefined, 1);
+      var_3 = ref_1414C(self, undefined, 1);
       var_4 = undefined;
       var_5 = undefined;
       var_6 = undefined;
@@ -1282,17 +1282,17 @@ function ref_14168(var_0, var_1) {
     var_2 = vehicle_damage_getleveldataforvehicle(self.vehiclename, undefined, 1);
 
     if(isDefined(var_2)) {
-      var_3 = ref_1414c(self, undefined, 1);
+      var_3 = ref_1414C(self, undefined, 1);
       var_4 = undefined;
       var_5 = undefined;
       var_6 = undefined;
       var_7 = undefined;
 
       if(isDefined(var_3)) {
-        var_4 = var_3.ref_11bae;
-        var_5 = var_3.ref_11baf;
-        var_6 = var_3.ref_11bac;
-        var_7 = var_3.ref_11bad;
+        var_4 = var_3.ref_11BAE;
+        var_5 = var_3.ref_11BAF;
+        var_6 = var_3.ref_11BAC;
+        var_7 = var_3.ref_11BAD;
       }
 
       ref_14147(var_1, var_4, var_5, var_6, var_7);
@@ -1308,7 +1308,7 @@ function ref_14164(var_0, var_1) {
     var_2 = vehicle_damage_getleveldataforvehicle(self.vehiclename, undefined, 1);
 
     if(isDefined(var_2)) {
-      var_3 = ref_1414c(self, undefined, 1);
+      var_3 = ref_1414C(self, undefined, 1);
       var_4 = undefined;
       var_5 = undefined;
       var_6 = undefined;
@@ -1356,7 +1356,7 @@ function ref_14162(var_0) {
     var_1 = vehicle_damage_getleveldataforvehicle(self.vehiclename, undefined, 1);
 
     if(isDefined(var_1)) {
-      var_2 = ref_1414c(self, undefined, 1);
+      var_2 = ref_1414C(self, undefined, 1);
       var_3 = undefined;
       var_4 = undefined;
       var_5 = undefined;
@@ -1404,10 +1404,10 @@ function ref_14162(var_0) {
 
       if(isPlayer(var_0.attacker)) {
         if(!isDefined(var_0.scurrentobjective)) {
-          var_0.scurrentobjective = scripts\cp_mp\vehicles\vehicle::ref_141b7(self, var_0.attacker);
-        } else if(var_0.scurrentobjective && scripts\cp_mp\vehicles\vehicle::ref_141b9(self, var_0.attacker)) {
+          var_0.scurrentobjective = scripts\cp_mp\vehicles\vehicle::ref_141B7(self, var_0.attacker);
+        } else if(var_0.scurrentobjective && scripts\cp_mp\vehicles\vehicle::ref_141B9(self, var_0.attacker)) {
           var_0.scurrentobjective = 0;
-        } else if(!var_0.scurrentobjective && scripts\cp_mp\vehicles\vehicle::ref_141b7(self, var_0.attacker)) {
+        } else if(!var_0.scurrentobjective && scripts\cp_mp\vehicles\vehicle::ref_141B7(self, var_0.attacker)) {
           var_0.scurrentobjective = 1;
         }
       } else {
@@ -1416,7 +1416,7 @@ function ref_14162(var_0) {
 
       if(isDefined(var_0.objweapon) && weaponclass(var_0.objweapon.basename) != "rocketlauncher") {
         if(istrue(var_4)) {
-          var_0.ref_12f0d = 1;
+          var_0.ref_12F0D = 1;
         }
 
         if(istrue(var_6)) {
@@ -1448,7 +1448,7 @@ function ref_14155(var_0, var_1, var_2, var_3) {
   self notify("vehicle_damage_giveScoreAndXP" + var_3);
 
   if(isDefined(var_0) && scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle_damage", "giveScore")) {
-    var_4 = scripts\engine\utility::ter_op(istrue(var_2.ref_12f0d), undefined, var_2.objweapon);
+    var_4 = scripts\engine\utility::ter_op(istrue(var_2.ref_12F0D), undefined, var_2.objweapon);
     self[[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_damage", "giveScore")]](var_0, var_4, !istrue(var_2.scurrentobjective));
   }
 
@@ -1536,7 +1536,7 @@ function br_isininfil(var_0) {
   return var_3;
 }
 
-function ref_1417e(var_0) {
+function ref_1417E(var_0) {
   var_1 = self;
 
   if(!istrue(level.brking_managecircles)) {
@@ -1566,7 +1566,7 @@ function ref_1417e(var_0) {
   }
 }
 
-function ref_1417a(var_0, var_1, var_2, var_3) {
+function ref_1417A(var_0, var_1, var_2, var_3) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle_damage", "setWeaponClassModDamageForVehicle")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_damage", "setWeaponClassModDamageForVehicle")]](var_0, var_1, var_2, var_3);
     return;
@@ -1580,7 +1580,7 @@ function ref_14174(var_0, var_1, var_2) {
   }
 }
 
-function ref_1417b(var_0, var_1) {
+function ref_1417B(var_0, var_1) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle_damage", "setWeaponHitDamageData")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_damage", "setWeaponHitDamageData")]](var_0, var_1);
     return;
@@ -1601,7 +1601,7 @@ function ref_14179(var_0, var_1, var_2) {
   }
 }
 
-function ref_1417c(var_0, var_1, var_2) {
+function ref_1417C(var_0, var_1, var_2) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle_damage", "setWeaponHitDamageDataForVehicle")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_damage", "setWeaponHitDamageDataForVehicle")]](var_0, var_1, var_2);
     return;
@@ -1632,21 +1632,21 @@ function ref_14171(var_0, var_1) {
 function ref_14173(var_0, var_1, var_2) {
   var_3 = vehicle_damage_getleveldataforvehicle(var_0, 1);
 
-  if(!isDefined(var_3.ref_11fa5)) {
-    var_3.ref_11fa5 = [];
+  if(!isDefined(var_3.ref_11FA5)) {
+    var_3.ref_11FA5 = [];
   }
 
-  var_3.ref_11fa5[var_1] = var_2;
+  var_3.ref_11FA5[var_1] = var_2;
 }
 
 function ref_14172(var_0, var_1, var_2) {
   var_3 = vehicle_damage_getleveldataforvehicle(var_0, 1);
 
-  if(!isDefined(var_3.ref_11fa4)) {
-    var_3.ref_11fa4 = [];
+  if(!isDefined(var_3.ref_11FA4)) {
+    var_3.ref_11FA4 = [];
   }
 
-  var_3.ref_11fa4[var_1] = var_2;
+  var_3.ref_11FA4[var_1] = var_2;
 }
 
 function vehicle_damage_initdebug() {

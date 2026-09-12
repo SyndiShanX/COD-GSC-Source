@@ -31,11 +31,11 @@ function play_alarms_onto() {}
 function play_airstrike_sequence() {}
 
 function play_armor_bink() {
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerNakedDropLoadout", &ai_juggernaut_think);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerNakedDropLoadout", &ai_juggernaut_think);
 }
 
 function ai_juggernaut_think() {
-  scripts\mp\gametypes\br::ref_11e23();
+  scripts\mp\gametypes\br::ref_11E23();
   var_0 = scripts\mp\gametypes\br_pickups::br_forcegivecustompickupitem(self, "brloot_equip_gasmask", 1, undefined, 0);
 }
 
@@ -111,7 +111,7 @@ function play_animation_old(var_0, var_1) {
 
   var_0 scripts\mp\gametypes\br_plunder::ref_12627(1);
   var_2 = "combat";
-  scripts\mp\gametypes\br_analytics::ref_13c44(var_0, var_2, 1);
+  scripts\mp\gametypes\br_analytics::ref_13C44(var_0, var_2, 1);
 }
 
 function play_bank_intro_vo() {}

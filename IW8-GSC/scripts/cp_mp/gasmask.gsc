@@ -130,7 +130,7 @@ function equipgasmask() {
   scripts\cp_mp\killstreaks\white_phosphorus::enableloopingcoughaudiosupression();
   var_2 = "hat_gasmask";
 
-  if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140AA()) {
     var_2 = "hat_gasmask_ch3";
   }
 
@@ -170,7 +170,7 @@ function removegasmask() {
   scripts\cp_mp\killstreaks\white_phosphorus::disableloopingcoughaudiosupression();
   var_2 = "hat_gasmask";
 
-  if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140AA()) {
     var_2 = "hat_gasmask_ch3";
   }
 
@@ -197,7 +197,7 @@ function breakgasmask() {
   self playsoundtoplayer("br_gas_mask_crack_plr", self);
   var_0 = "hat_gasmask";
 
-  if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140AA()) {
     var_0 = "hat_gasmask_ch3";
   }
 
@@ -253,7 +253,7 @@ function createoverlay(var_0, var_1) {
   }
 }
 
-function ref_1312f() {
+function ref_1312F() {
   if(isDefined(self.gasmaskoverlay)) {
     self.gasmaskoverlay setshader("gasmask_overlay_delta2_broken", 640, 480);
     return;

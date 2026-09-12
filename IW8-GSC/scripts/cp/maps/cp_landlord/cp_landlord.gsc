@@ -29,7 +29,7 @@ function main() {
   init_objectives();
   init_level_systems();
   level.incorrectcodeentered = 1.5;
-  scripts\cp\maps\cp_landlord\cp_landlord_checkpoints::ref_131ed();
+  scripts\cp\maps\cp_landlord\cp_landlord_checkpoints::ref_131ED();
   scripts\mp\brclientmatchdata::getquestrewardgroupindex();
   scripts\mp\brclientmatchdata::getpresettruckspawns("tmtyl_p1", &scripts\cp\maps\cp_landlord\cp_landlord_checkpoints::getplatformrankxpmultiplier);
   var_0 = getDvar("restart_checkpoint", "");
@@ -37,9 +37,9 @@ function main() {
   if(isDefined(var_0) && var_0 != "") {
     scripts\mp\brclientmatchdata::getnextprop(var_0);
     scripts\mp\brclientmatchdata::getnextrpgspawnmodule(var_0);
-    level thread[[level.ref_12b19[var_0]]]();
+    level thread[[level.ref_12B19[var_0]]]();
   } else {
-    if(ref_132d6()) {
+    if(ref_132D6()) {
       scripts\cp\gametypes\cp_survival::mortars_get_enemies();
       var_1 = getDvar("cp_landlord_start_obj", "player_infil_landlord");
     } else {
@@ -61,8 +61,8 @@ function main() {
   thread increment_factor();
 }
 
-function ref_132d6() {
-  if(scripts\cp\gametypes\cp_survival::ref_124b9()) {
+function ref_132D6() {
+  if(scripts\cp\gametypes\cp_survival::ref_124B9()) {
     return false;
   }
 
@@ -196,7 +196,7 @@ function levelregisterobjectives() {
   level thread scripts\cp\maps\cp_jorgetest\cp_objs_tmtyl::registertmtylobjective();
   level thread scripts\cp\maps\cp_donetsk\cp_donetsk_obj_overwatch::register_overwatch_objective();
   level thread scripts\cp\maps\cp_donetsk\cp_donetsk_safehouse_landlord::registersafehouse();
-  scripts\cp\cp_objectives::registerobjective("player_infil_landlord", undefined, &ref_124ba, undefined, undefined);
+  scripts\cp\cp_objectives::registerobjective("player_infil_landlord", undefined, &ref_124BA, undefined, undefined);
 
   if(isDefined(level.airfield_obj_func)) {
     [[level.airfield_obj_func]]();
@@ -208,18 +208,18 @@ function levelregisterobjectives() {
   }
 }
 
-function ref_124ba(var_0) {
-  if(scripts\cp\gametypes\cp_survival::ref_124b9()) {
+function ref_124BA(var_0) {
+  if(scripts\cp\gametypes\cp_survival::ref_124B9()) {
     scripts\cp\cp_objectives::overridenextstep(var_0, "safehouse_landlord");
     return;
   }
 
-  thread ref_123f8();
+  thread ref_123F8();
   scripts\cp\cp_objectives::overridenextstep(var_0, "obj_tmtyl_0");
   level waittill("players_unloaded_from_infil");
 }
 
-function ref_123f8() {
+function ref_123F8() {
   level endon("game_ended");
   level waittill("infil_started");
   level thread scripts\cp\maps\cp_donetsk\cp_donetsk_safehouse_landlord::managejumpmasterinfodisplay();

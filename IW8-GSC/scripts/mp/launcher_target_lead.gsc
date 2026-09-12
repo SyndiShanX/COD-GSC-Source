@@ -299,7 +299,7 @@ function targetlead_think() {
 
 function targetlead_earlyoutthink() {
   self endon("targetLead_stop");
-  scripts\engine\utility::ref_143a5("death_or_disconnect", "faux_spawn");
+  scripts\engine\utility::ref_143A5("death_or_disconnect", "faux_spawn");
   targetlead_onstopthink();
 }
 

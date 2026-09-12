@@ -125,8 +125,8 @@ function getspawnpoint(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_9 = getspawnpointfromcode();
-  var_9.ref_140ad = 0;
-  var_10 = var_9.ref_140ad;
+  var_9.ref_140AD = 0;
+  var_10 = var_9.ref_140AD;
   var_11 = var_9.threatsight;
   var_12 = var_9.damagemod;
 
@@ -136,8 +136,8 @@ function getspawnpoint(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(isDefined(var_13) && (var_13.bucket < var_9.bucket || var_13.totalscore > var_9.totalscore)) {
       var_9 = var_13;
-      var_9.ref_140ad = 1;
-      var_10 = var_9.ref_140ad;
+      var_9.ref_140AD = 1;
+      var_10 = var_9.ref_140AD;
       var_11 = var_9.threatsight;
       var_12 = var_9.damagemod;
     }
@@ -154,7 +154,7 @@ function getspawnpoint(var_0, var_1, var_2, var_3, var_4, var_5) {
       if(isDefined(var_7)) {
         scripts\mp\spawnscoring::logbadspawn("Using buddy spawn", var_0);
         var_7.bucket = 3;
-        var_7.ref_140ad = var_10;
+        var_7.ref_140AD = var_10;
         var_7.threatsight = var_11;
         var_7.damagemod = var_12;
         return var_7;
@@ -165,7 +165,7 @@ function getspawnpoint(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(!istrue(level.loadoutdefaultfiresalediscount) && !istrue(var_0.skipspawncamera) && var_9.bucket >= 2 && var_9.threatsight < 300) {
-    var_0.ref_132ff = 1;
+    var_0.ref_132FF = 1;
   }
 
   return var_9;
@@ -308,7 +308,7 @@ function addstartspawnpoints(var_0, var_1, var_2) {
 
   if(isDefined(level.modifiedspawnpoints)) {
     for(var_5 = 0; var_5 < var_3.size; var_5++) {
-      if(ref_12cc8(var_3[var_5])) {
+      if(ref_12CC8(var_3[var_5])) {
         continue;
       }
 
@@ -407,7 +407,7 @@ function registerspawnpoints(var_0, var_1, var_2) {
   }
 
   foreach(var_4 in var_1) {
-    if(ref_12cc8(var_4)) {
+    if(ref_12CC8(var_4)) {
       continue;
     }
 
@@ -487,7 +487,7 @@ function getspawnpointarray(var_0, var_1) {
       var_2 = getspawnarray(var_0);
 
       foreach(var_4 in var_2) {
-        if(ref_12cc8(var_4)) {
+        if(ref_12CC8(var_4)) {
           continue;
         }
 
@@ -507,7 +507,7 @@ function getspawnpointarray(var_0, var_1) {
       var_2 = getspawnarray(var_2);
 
       foreach(var_4 in var_2) {
-        if(ref_12cc8(var_4)) {
+        if(ref_12CC8(var_4)) {
           continue;
         }
 
@@ -527,12 +527,12 @@ function getspawnpointarray(var_0, var_1) {
   var_8 = level.spawnpointarray[var_2];
 
   if(istrue(var_4)) {
-    level.spawnpointarray[var_2] = level.ref_12f8c[var_2];
+    level.spawnpointarray[var_2] = level.ref_12F8C[var_2];
     return level.spawnpointarray[var_2];
   }
 
-  if(isDefined(level.ref_12f8c) && isDefined(level.ref_12f8c[var_2])) {
-    var_8 = scripts\engine\utility::array_combine(var_8, level.ref_12f8c[var_2]);
+  if(isDefined(level.ref_12F8C) && isDefined(level.ref_12F8C[var_2])) {
+    var_8 = scripts\engine\utility::array_combine(var_8, level.ref_12F8C[var_2]);
   }
 
   return var_8;
@@ -1163,8 +1163,8 @@ function finalizespawnpointchoice(var_0) {
   if(!isDefined(var_0.bucket)) {
     self finalizespawnpointchoiceforplayer(var_0.index);
   } else {
-    if(!isDefined(var_0.ref_140ad)) {
-      var_0.ref_140ad = 0;
+    if(!isDefined(var_0.ref_140AD)) {
+      var_0.ref_140AD = 0;
     }
 
     if(!isDefined(var_0.threatsight)) {
@@ -1175,7 +1175,7 @@ function finalizespawnpointchoice(var_0) {
       var_0.damagemod = -1;
     }
 
-    self finalizespawnpointchoiceforplayer(var_0.index, var_0.bucket, var_0.ref_140ad, var_0.threatsight, var_0.damagemod);
+    self finalizespawnpointchoiceforplayer(var_0.index, var_0.bucket, var_0.ref_140AD, var_0.threatsight, var_0.damagemod);
   }
 
   var_2 = level.spawnglobals.spawnpointscriptdata[var_0.index];
@@ -1626,12 +1626,12 @@ function checkmodifiedspawnpoint(var_0) {
   return false;
 }
 
-function ref_12cc8(var_0) {
+function ref_12CC8(var_0) {
   if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy != "") {
     var_1 = strtok(var_0.script_noteworthy, " ");
 
     foreach(var_3 in var_1) {
-      if(level.ref_11ad3 == 1) {
+      if(level.ref_11AD3 == 1) {
         if(var_3 == "6v6") {
           return true;
         }
@@ -1860,8 +1860,8 @@ function init_trap_room_doors(var_0, var_1, var_2, var_3, var_4) {
 }
 
 function bdiedonce(var_0) {
-  if(!isDefined(level.ref_12f8c)) {
-    level.ref_12f8c = [];
+  if(!isDefined(level.ref_12F8C)) {
+    level.ref_12F8C = [];
   }
 
   foreach(var_2 in var_0) {
@@ -1881,8 +1881,8 @@ function bdiedonce(var_0) {
       var_7 = "";
     }
 
-    if(!isDefined(level.ref_12f8c[var_3])) {
-      level.ref_12f8c[var_3] = [];
+    if(!isDefined(level.ref_12F8C[var_3])) {
+      level.ref_12F8C[var_3] = [];
     }
 
     var_8 = spawnStruct();
@@ -1905,20 +1905,20 @@ function bdiedonce(var_0) {
       var_8.script_noteworthy = var_7;
     }
 
-    level.ref_12f8c[var_3][level.ref_12f8c[var_3].size] = var_8;
+    level.ref_12F8C[var_3][level.ref_12F8C[var_3].size] = var_8;
   }
 
-  thread ref_12f8d();
+  thread ref_12F8D();
 }
 
-function ref_12f8d() {
+function ref_12F8D() {
   level notify("scriptedSpawnpointsOnMigration");
   level endon("scriptedSpawnpointsOnMigration");
 
   for(;;) {
     level waittill("host_migration_begin");
 
-    foreach(var_1 in level.ref_12f8c) {
+    foreach(var_1 in level.ref_12F8C) {
       foreach(var_3 in var_1) {
         if(isDefined(var_3.target)) {
           var_4 = var_3.target;

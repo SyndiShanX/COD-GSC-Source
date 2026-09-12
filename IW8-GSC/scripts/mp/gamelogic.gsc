@@ -385,7 +385,7 @@ function onscorelimit(var_0) {
     var_6 = var_2 scripts\mp\killstreaks\killstreaks::calcstreakcost("nuke");
 
     if(scripts\mp\utility\game::getscorelimit() == var_6 && var_2.pers["cur_kill_streak"] == var_6) {
-      level.ref_11c81 = var_2;
+      level.ref_11C81 = var_2;
       level.starttime = gettime();
       level.discardtime = 0;
       level.timerpausetime = 0;
@@ -512,7 +512,7 @@ function updategameevents() {
         return;
       }
 
-      if(ref_1330a() && game["roundsPlayed"] == 0) {
+      if(ref_1330A() && game["roundsPlayed"] == 0) {
         logstring("IWH-315293: GIBBERFISH: onDeadEvent - all");
       }
 
@@ -532,7 +532,7 @@ function updategameevents() {
 
           if(level.multiteambased) {
             if(!scripts\mp\utility\teams::getteamdata(var_7, "deathEvent") && scripts\mp\utility\teams::getteamdata(var_7, "hasSpawned")) {
-              if(ref_1330a() && game["roundsPlayed"] == 0) {
+              if(ref_1330A() && game["roundsPlayed"] == 0) {
                 logstring("IWH-315293: GIBBERFISH: onDeadEvent - entry MultiteamBased");
               }
 
@@ -543,7 +543,7 @@ function updategameevents() {
             continue;
           }
 
-          if(ref_1330a() && game["roundsPlayed"] == 0) {
+          if(ref_1330A() && game["roundsPlayed"] == 0) {
             logstring("IWH-315293: GIBBERFISH: onDeadEvent - entry Team based");
           }
 
@@ -746,13 +746,13 @@ function getquestxprewardinstance(var_0) {
 function prematchperiod() {
   level endon("game_ended");
 
-  if(isDefined(level.ref_1285f) && [[level.ref_1285f]]()) {
+  if(isDefined(level.ref_1285F) && [[level.ref_1285F]]()) {
     return;
   }
 
   level.connectingplayers = getdvarint("party_partyPlayerCountNum");
 
-  if(getdvarint("scr_live_lobby", 0) == 1 && !istrue(level.ref_133e0)) {
+  if(getdvarint("scr_live_lobby", 0) == 1 && !istrue(level.ref_133E0)) {
     if(scripts\mp\utility\game::getgametype() != "br") {
       logstring("IWH-315293: BELUGA: Gametype:" + scripts\mp\utility\game::getgametype() + " inLiveLobby, we shouldn't be");
     }
@@ -763,7 +763,7 @@ function prematchperiod() {
       thread watchdevoverridematchstart();
     }
 
-    thread ref_144bf(level);
+    thread ref_144BF(level);
     thread watchforminplayersmatchstart();
     level waittill("start_prematch");
 
@@ -835,12 +835,12 @@ function prematchperiod() {
     if(!istrue(level.brkillchainchance)) {
       game["blockJIP"] = 1;
     }
-  } else if(!istrue(level.ref_133e0)) {
+  } else if(!istrue(level.ref_133E0)) {
     if(scripts\mp\utility\game::getgametype() == "br") {
       var_8 = getdvarint("br_minplayers");
 
       if(var_8 != 0) {
-        thread ref_144bf();
+        thread ref_144BF();
         thread enemy_move_up_and_ignore();
         level waittill("start_prematch");
       }
@@ -869,7 +869,7 @@ function prematchperiod() {
     }
   }
 
-  if(istrue(level.ref_133e0)) {
+  if(istrue(level.ref_133E0)) {
     while(!level.players.size) {
       waitframe();
     }
@@ -891,7 +891,7 @@ function prematchperiod() {
     level.parachuterestoreweaponscb = &scripts\mp\gametypes\br::nakeddrop;
   }
 
-  if(ref_1330a() && game["roundsPlayed"] == 0) {
+  if(ref_1330A() && game["roundsPlayed"] == 0) {
     logstring("IWH-315293: CEPHALOPOD: prematch_started notified");
   }
 
@@ -948,7 +948,7 @@ function graceperiod() {
   level.ingraceperiod = 0;
 
   if(game["state"] != "playing") {
-    if(ref_1330a() && game["roundsPlayed"] == 0) {
+    if(ref_1330A() && game["roundsPlayed"] == 0) {
       logstring("IWH-315293: FROGFISH: game[ state ] != playing");
     }
 
@@ -1758,7 +1758,7 @@ function checkteamscorelimitsoon(var_0) {
 
   var_1 = 0;
 
-  if(ref_132ed()) {
+  if(ref_132ED()) {
     var_1 = closetoscorelimit(var_0);
   } else if(scripts\mp\utility\game::getgametype() == "arm") {
     var_2 = closetoscorelimit(var_0);
@@ -1780,7 +1780,7 @@ function checkteamscorelimitsoon(var_0) {
   if(!level.playedmatchendingsoon && scripts\mp\utility\game::canplayhalfwayvo()) {
     if(getteamscore(var_0) >= int(level.scorelimit * level.currentround - level.scorelimit / 2)) {
       scripts\mp\utility\dialog::leaderdialog("halfway_friendly_score", var_0, "status");
-      thread scripts\mp\music_and_dialog::ref_11bdd(var_0);
+      thread scripts\mp\music_and_dialog::ref_11BDD(var_0);
       var_4 = scripts\mp\utility\teams::getenemyteams(var_0);
 
       foreach(var_6 in var_4) {
@@ -1795,7 +1795,7 @@ function checkteamscorelimitsoon(var_0) {
   }
 }
 
-function ref_132ed() {
+function ref_132ED() {
   switch (scripts\mp\utility\game::getgametype()) {
     case "conf":
     case "tdef":
@@ -1848,7 +1848,7 @@ function checkscorelimit(var_0) {
 
   if(istrue(var_0)) {
     if(isPlayer(self) && !level.teambased && self.score >= level.roundscorelimit) {
-      level.ref_12f0f = 1;
+      level.ref_12F0F = 1;
     }
 
     level notify("checkScoreLimit");
@@ -1893,7 +1893,7 @@ function checkscorelimit(var_0) {
       return 0;
     }
 
-    if(self.score < level.roundscorelimit && !istrue(level.ref_12f0f)) {
+    if(self.score < level.roundscorelimit && !istrue(level.ref_12F0F)) {
       return 0;
     }
   }
@@ -1928,7 +1928,7 @@ function matchstarttimerwaitforplayers() {
     level notify("match_start_real_countdown", var_0);
 
     if(!scripts\mp\flags::gameflag("infil_will_run") && game["roundsPlayed"] == 0 && !scripts\cp_mp\utility\game_utility::isarenamap()) {
-      thread ref_1335d();
+      thread ref_1335D();
     }
 
     thread matchstarttimer("match_starting_in", var_0);
@@ -1938,7 +1938,7 @@ function matchstarttimerwaitforplayers() {
   }
 }
 
-function ref_1335d() {
+function ref_1335D() {
   setomnvar("ui_in_infil", 1);
   level scripts\engine\utility::waittill_notify_or_timeout("matchStartTimer_done", 8);
   setomnvar("ui_in_infil", -1);
@@ -2050,7 +2050,7 @@ function matchstarttimerperplayer_internal(var_0, var_1) {
   GscBinSkip4(0x35, var_2);
 }
 
-function ref_11b42(var_0) {
+function ref_11B42(var_0) {
   level endon("match_start_timer_beginning");
 
   if(!isDefined(level.heli_arrived)) {
@@ -2088,7 +2088,7 @@ function teamstarttimer(var_0, var_1, var_2) {
 
   if(!level.gameended) {
     jumpiffalse(scripts\mp\utility\game::getgametype() == "br") LOC_00000062;
-    thread scripts\mp\gametypes\br_public::ref_1285e(var_0);
+    thread scripts\mp\gametypes\br_public::ref_1285E(var_0);
     thread scripts\mp\gametypes\br_public::ref_12854(var_0);
     thread scripts\mp\gametypes\br_public::calculateeventstarttime();
 
@@ -2218,7 +2218,7 @@ function checkroundswitch(var_0) {
   }
 
   if(losqueuehighindex()) {
-    if(ref_12dbb()) {
+    if(ref_12DBB()) {
       return true;
     }
   } else if(game["roundsPlayed"] % level.roundswitch == 0 || var_0) {
@@ -2241,7 +2241,7 @@ function losqueuehighindex() {
   }
 }
 
-function ref_12dbb() {
+function ref_12DBB() {
   switch (level.gametype) {
     case "arena":
       if(game["roundsPlayed"] % level.roundswitch == 1) {
@@ -2341,13 +2341,13 @@ function hostidledout() {
 }
 
 function roundendwait(var_0, var_1) {
-  if(isDefined(level.ref_12db7)) {
-    level[[level.ref_12db7]](var_0, var_1);
+  if(isDefined(level.ref_12DB7)) {
+    level[[level.ref_12DB7]](var_0, var_1);
     return;
   }
 
   if(!level.doeomcombat) {
-    wait level.ref_127fe + 0.1;
+    wait level.ref_127FE + 0.1;
     setomnvarforallclients("post_game_state", 2);
   }
 
@@ -2839,7 +2839,7 @@ function callback_startgametype() {
 
   level.diehardmode = getdvarint("scr_diehard");
   level.casualscorestreaks = getdvarint("scr_game_casualScoreStreaks");
-  level.ref_145ec = getdvarint("scr_game_wrapKillstreaks");
+  level.ref_145EC = getdvarint("scr_game_wrapKillstreaks");
 
   if(!isDefined(level.crankedbombtimer)) {
     level.crankedbombtimer = getdvarint("scr_" + scripts\mp\utility\game::getgametype() + "_crankedBombTimer", 0);
@@ -2889,8 +2889,8 @@ function callback_startgametype() {
   level.exfilactivetimer = scripts\mp\utility\dvars::respawn_locations("scr_" + scripts\mp\utility\game::getgametype() + "_exfilActiveTimer", "scr_game_exfilActiveTimer");
   level.exfilextracttimer = scripts\mp\utility\dvars::respawn_locations("scr_" + scripts\mp\utility\game::getgametype() + "_exfilExtractTimer", "scr_game_exfilExtractTimer");
   level.useammorestocklocs = scripts\mp\utility\dvars::respawn_locations("scr_" + scripts\mp\utility\game::getgametype() + "_useAmmoRestockLocs", "scr_game_useAmmoRestockLocs");
-  level.ref_136d8 = scripts\mp\utility\dvars::respawn_players_into_plane("scr_" + scripts\mp\utility\game::getgametype() + "_allow3rdspectate", "scr_game_allow3rdspectate");
-  setDvar("camera_allow3rdspectate", level.ref_136d8);
+  level.ref_136D8 = scripts\mp\utility\dvars::respawn_players_into_plane("scr_" + scripts\mp\utility\game::getgametype() + "_allow3rdspectate", "scr_game_allow3rdspectate");
+  setDvar("camera_allow3rdspectate", level.ref_136D8);
   level.laststand = scripts\mp\tweakables::gettweakablevalue("player", "laststand");
   setomnvar("ui_last_stand_type", level.laststand);
 
@@ -2932,7 +2932,7 @@ function callback_startgametype() {
   setomnvar("ui_match_timer_hidden", 1);
 
   if(scripts\cp_mp\utility\game_utility::isarenamap()) {
-    if(scripts\mp\utility\game_utility_mp::ref_11c7f()) {
+    if(scripts\mp\utility\game_utility_mp::ref_11C7F()) {
       level.allowkillstreaks = 0;
       setomnvar("ui_disable_killstreaks", 1);
     } else {
@@ -2974,7 +2974,7 @@ function callback_startgametype() {
   level.maxallowedteamkills = scripts\mp\utility\dvars::respawn_players_into_plane("scr_" + scripts\mp\utility\game::getgametype() + "_ffPunishLimit", "scr_game_ffPunishLimit");
   thread scripts\mp\init_cp_mp::init();
   thread scripts\mp\teams::init();
-  _calloutmarkerping_handleluinotify_cleared::ref_13a9e();
+  _calloutmarkerping_handleluinotify_cleared::ref_13A9E();
   scripts\cp_mp\utility\player_utility::temp_debug_wait_and_stop_music_loop();
   thread scripts\common\utility::allow_init();
   thread scripts\cp_mp\utility\shellshock_utility::shellshock_utility_init();
@@ -3154,7 +3154,7 @@ function callback_startgametype() {
     level.waveplayerspawnindex[var_5] = 0;
     level.aliveplayers[var_5] = [];
 
-    if(!istrue(level.ref_12c49)) {
+    if(!istrue(level.ref_12C49)) {
       level.requiredplayercount[var_5] = 0;
     }
   }
@@ -3184,7 +3184,7 @@ function callback_startgametype() {
   level.playovertime = 0;
   level.finalroundenddelay = 3;
   level.halftimeroundenddelay = 3;
-  level.ref_127fe = 0.25;
+  level.ref_127FE = 0.25;
   level.scorelimit = scripts\mp\utility\dvars::getwatcheddvar("scorelimit");
   level.roundlimit = scripts\mp\utility\dvars::getwatcheddvar("roundlimit");
   level.winlimit = scripts\mp\utility\dvars::getwatcheddvar("winlimit");
@@ -3252,7 +3252,7 @@ function callback_startgametype() {
 
   thread updateleaderboardstatscontinuous();
   level thread scripts\mp\playerlogic::updateplayerwindmaterial();
-  thread ref_12c14();
+  thread ref_12C14();
 }
 
 function updatewavespawndelay(var_0, var_1) {
@@ -3419,8 +3419,8 @@ function timelimitclock() {
   level endon("cancel_announcer_dialog");
   waitframe();
 
-  if(isDefined(level.ref_13b7e)) {
-    GscBinSkip1(0x74, level.ref_13b7e);
+  if(isDefined(level.ref_13B7E)) {
+    GscBinSkip1(0x74, level.ref_13B7E);
   }
 
   if(scripts\mp\utility\game::gettimelimit() == 0) {
@@ -3490,7 +3490,7 @@ function timelimitclock() {
   }
 }
 
-function ref_1330a() {
+function ref_1330A() {
   switch (scripts\mp\utility\game::getgametype()) {
     case "cyber":
     case "sd":
@@ -3516,7 +3516,7 @@ function gametimer() {
   if(!isDefined(game["startTimeFromMatchStart"])) {
     game["startTimeFromMatchStart"] = gettime();
     level.starttimefrommatchstart = gettime();
-    scripts\common\utility::ref_13e0a(level.ref_11b33);
+    scripts\common\utility::ref_13E0A(level.ref_11B33);
   }
 
   if(isDefined(game["roundMillisecondsAlreadyPassed"])) {
@@ -3618,7 +3618,7 @@ function startgame() {
   level notify("prematch_over");
   setomnvar("ui_prematch_period", 0);
 
-  if(ref_1330a() && game["roundsPlayed"] == 0) {
+  if(ref_1330A() && game["roundsPlayed"] == 0) {
     logstring("IWH-315293: ELECTRICEEL: Prematch done");
   }
 
@@ -3643,7 +3643,7 @@ function startgame() {
   thread scripts\mp\analyticslog::recordbreadcrumbdata();
 
   if(scripts\mp\codcasterclientmatchdata::shouldlogcodcasterclientmatchdata()) {
-    thread ref_119ae();
+    thread ref_119AE();
     return;
   }
 }
@@ -3659,16 +3659,16 @@ function cleanpatchablecollision() {
   GscBinSkip0(0x2e, 0, getEnt("clip32x32x8", "targetname"));
 }
 
-function ref_12c4c(var_0) {
-  if(istrue(level.ref_121f1)) {
+function ref_12C4C(var_0) {
+  if(istrue(level.ref_121F1)) {
     return;
   }
 
-  if(!isDefined(level.ref_121f2)) {
-    level.ref_121f2 = [];
+  if(!isDefined(level.ref_121F2)) {
+    level.ref_121F2 = [];
   }
 
-  level.ref_121f2[var_0] = 1;
+  level.ref_121F2[var_0] = 1;
 }
 
 function wavespawntimer() {
@@ -3697,7 +3697,7 @@ function wavetimerwatcher() {
   level endon("waveSpawnTimer");
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("wave_respawn_allies", "wave_respawn_axis");
+    scripts\engine\utility::ref_143A5("wave_respawn_allies", "wave_respawn_axis");
     setomnvar("ui_hardpoint_timer", gettime() + 1000 * level.wavedelay["allies"]);
   }
 }
@@ -3795,7 +3795,7 @@ function displayroundend(var_0, var_1, var_2) {
     }
   }
 
-  if(scripts\mp\utility\game::waslastround() && scripts\mp\utility\game::iswinbytworulegametype() && scripts\mp\utility\game::ref_1332b()) {
+  if(scripts\mp\utility\game::waslastround() && scripts\mp\utility\game::iswinbytworulegametype() && scripts\mp\utility\game::ref_1332B()) {
     var_0 = "tie";
     var_1 = game["end_reason"]["win_by_two_tie"];
     var_2 = game["end_reason"]["win_by_two_tie"];
@@ -3814,7 +3814,7 @@ function displayroundend(var_0, var_1, var_2) {
 function displaygameend(var_0, var_1, var_2) {
   setomnvar("ui_match_over", 1);
 
-  if(scripts\mp\utility\game::waslastround() && scripts\mp\utility\game::iswinbytworulegametype() && scripts\mp\utility\game::ref_1332b()) {
+  if(scripts\mp\utility\game::waslastround() && scripts\mp\utility\game::iswinbytworulegametype() && scripts\mp\utility\game::ref_1332B()) {
     var_0 = "tie";
     var_1 = game["end_reason"]["win_by_two_tie"];
     var_2 = game["end_reason"]["win_by_two_tie"];
@@ -3833,8 +3833,8 @@ function displaygameend(var_0, var_1, var_2) {
 function displayroundswitch() {
   level notify("spawning_intermission");
 
-  if(isDefined(level.ref_11c68)) {
-    [[level.ref_11c68]]();
+  if(isDefined(level.ref_11C68)) {
+    [[level.ref_11C68]]();
   }
 
   var_0 = remove_player_from_focus_fire_attacker_list();
@@ -3947,17 +3947,17 @@ function setendofroundsoundtimescalefactor() {
   if(!isDefined(level.never_kill_off_after_stealth)) {
     createheadiconatorigin("end_of_round");
     level.never_kill_off_after_stealth = 1;
-    level.ref_12c62 = undefined;
+    level.ref_12C62 = undefined;
     return;
   }
 }
 
 function resetsoundtimescalefactor() {
-  if(!isDefined(level.ref_12c62)) {
+  if(!isDefined(level.ref_12C62)) {
     createheadiconatorigin("reset");
     level.never_kill_off_after_stealth = undefined;
-    level.ref_11ef8 = undefined;
-    level.ref_12c62 = 1;
+    level.ref_11EF8 = undefined;
+    level.ref_12C62 = 1;
     return;
   }
 }
@@ -3984,8 +3984,8 @@ function endgame(var_0, var_1, var_2, var_3, var_4, var_5) {
     logstring("[KEY_MOMENT] EndGame");
   }
 
-  if(isDefined(level.ref_11c81)) {
-    var_0 = level.ref_11c81;
+  if(isDefined(level.ref_11C81)) {
+    var_0 = level.ref_11C81;
   }
 
   if(isDefined(level.endgame)) {
@@ -4009,7 +4009,7 @@ function endgame_regularmp(var_0, var_1, var_2, var_3, var_4) {
     setmatchdata("utcRoundEndTimeSeconds", game["roundsPlayed"], getsystemtime());
   }
 
-  scripts\common\utility::ref_13e0a(level.ref_11b34);
+  scripts\common\utility::ref_13E0A(level.ref_11B34);
   var_5 = 0;
 
   if(level.hostforcedend || level.forcedend) {
@@ -4109,7 +4109,7 @@ function endgame_regularmp(var_0, var_1, var_2, var_3, var_4) {
 
   foreach(var_14 in level.players) {
     if(!isbot(var_14) && isDefined(var_14.team) && var_14.team != "spectator" && var_14.team != "follower") {
-      ref_119af(var_14);
+      ref_119AF(var_14);
     }
   }
 
@@ -4213,13 +4213,13 @@ function postroundfadenokillcam() {
       var_1 setclientomnvar("post_game_state", 2);
     }
 
-    thread ref_1284e();
+    thread ref_1284E();
   }
 
   wait 0.5;
 }
 
-function ref_1284e() {
+function ref_1284E() {
   self endon("disconnect");
   var_0 = scripts\mp\playerlogic::getspectatepoint();
   self predictstreampos(var_0.origin, 1);
@@ -4501,7 +4501,7 @@ function endgame_endround(var_0, var_1, var_2, var_3) {
           var_7.pers["stats"] = var_7.stats;
 
           if(isalive(var_7) && isDefined(var_7.matchdatalifeindex)) {
-            var_7 scripts\common\utility::ref_13e0a(level.ref_11b2d, var_7.matchdatalifeindex, undefined, undefined, "MOD_ROUND_ENDED", "none", undefined, undefined, undefined);
+            var_7 scripts\common\utility::ref_13E0A(level.ref_11B2D, var_7.matchdatalifeindex, undefined, undefined, "MOD_ROUND_ENDED", "none", undefined, undefined, undefined);
           }
         }
 
@@ -4560,7 +4560,7 @@ function endgame_endgame(var_0, var_1, var_2, var_3) {
     level scripts\common\ui::lui_registercallback("exit_squad_eliminated", &mp_vacant_patch_thread);
   }
 
-  if(scripts\mp\utility\game::matchmakinggame() && isDefined(level.ref_132fe) && [[level.ref_132fe]]()) {
+  if(scripts\mp\utility\game::matchmakinggame() && isDefined(level.ref_132FE) && [[level.ref_132FE]]()) {
     createnavobstaclebyshape();
   }
 
@@ -4585,7 +4585,7 @@ function endgame_endgame(var_0, var_1, var_2, var_3) {
     foreach(var_7 in level.players) {
       var_7 thread scripts\mp\utility\game::setuipostgamefade(0);
 
-      if(!isDefined(level.ref_11c85) || !var_7[[level.ref_11c85]]()) {
+      if(!isDefined(level.ref_11C85) || !var_7[[level.ref_11C85]]()) {
         var_7 thread scripts\mp\playerlogic::spawnintermission(var_5);
       }
     }
@@ -4623,7 +4623,7 @@ function endgame_endgame(var_0, var_1, var_2, var_3) {
       if(getdvarint("post_game_play_again_enabled", 1) == 1) {
         if(!scripts\mp\gametypes\br_public::tutorial_playSound()) {
           if(isDefined(level.multieventdebug)) {
-            wait level.multieventdebug.ref_142ae;
+            wait level.multieventdebug.ref_142AE;
           } else if(getdvarint("lui_ingame_play_again_enabled") == 1) {
             wait 20;
           } else if(scripts\mp\utility\game::privatematch()) {
@@ -4684,7 +4684,7 @@ function endgame_endgame(var_0, var_1, var_2, var_3) {
     var_7 scripts\cp_mp\utility\game_utility::stopkeyearning(var_2);
 
     if(isalive(var_7) && isDefined(var_7.matchdatalifeindex)) {
-      var_7 scripts\common\utility::ref_13e0a(level.ref_11b2d, var_7.matchdatalifeindex, undefined, undefined, "MOD_GAME_ENDED", "none", undefined, undefined, undefined);
+      var_7 scripts\common\utility::ref_13E0A(level.ref_11B2D, var_7.matchdatalifeindex, undefined, undefined, "MOD_GAME_ENDED", "none", undefined, undefined, undefined);
     }
 
     var_13 = int(min(3, var_11.size));
@@ -4724,10 +4724,10 @@ function endgame_endgame(var_0, var_1, var_2, var_3) {
       var_7 logplayerendmatchdatamatchresult(var_7.clientid, "loss");
     }
 
-    var_7 scripts\common\utility::ref_13e0a(level.ref_11b2c);
+    var_7 scripts\common\utility::ref_13E0A(level.ref_11B2C);
   }
 
-  scripts\common\utility::ref_13e0a(level.ref_11b35);
+  scripts\common\utility::ref_13E0A(level.ref_11B35);
 
   if(getdvarint("online_matchdata_enabled") != 0) {
     if(isgamebattlematch()) {
@@ -4749,7 +4749,7 @@ function endgame_endgame(var_0, var_1, var_2, var_3) {
     }
   }
 
-  ref_1301f();
+  ref_1301F();
   function_042a();
 
   foreach(var_7 in level.players) {
@@ -4818,7 +4818,7 @@ function endgame_endgame(var_0, var_1, var_2, var_3) {
   exitlevel(0);
 }
 
-function ref_1301f() {
+function ref_1301F() {
   if(!isDefined(level.needs_power)) {
     getentitylessscriptablearray("dlog_event_server_match_end", ["utc_start_time_s", scripts\mp\matchdata::getmatchstarttimeutc(), "utc_end_time_s", scripts\mp\matchdata::getmatchendtimeutc()]);
 
@@ -4866,13 +4866,13 @@ function settournamentwinner(var_0) {
 }
 
 function waitforhitmarkerspostgame() {
-  wait level.ref_127fe;
+  wait level.ref_127FE;
   level notify("post_game_ui_start");
   setomnvarforallclients("post_game_state", 1);
 }
 
 function eomcombatwaitforhitmarkersanddelaystartpostgameui(var_0, var_1, var_2) {
-  wait level.ref_127fe;
+  wait level.ref_127FE;
   level notify("post_game_ui_start");
 
   if(scripts\mp\utility\game::getgametype() != "br") {
@@ -4912,8 +4912,8 @@ function remove_player_from_focus_fire_attacker_list() {
 
   if(scripts\mp\utility\game::getgametype() == "brtdm") {
     var_0 = spawnStruct();
-    var_0.origin = level.endsuperdisableweaponbr.ref_136dc.origin;
-    var_0.angles = level.endsuperdisableweaponbr.ref_136dc.angles;
+    var_0.origin = level.endsuperdisableweaponbr.ref_136DC.origin;
+    var_0.angles = level.endsuperdisableweaponbr.ref_136DC.angles;
   }
 
   return var_0;
@@ -5108,7 +5108,7 @@ function processlobbydata() {
       continue;
     }
 
-    ref_128af(var_1);
+    ref_128AF(var_1);
   }
 
   if(getdvarint("online_mp_clientmatchdata_enabled") != 0) {
@@ -5139,12 +5139,12 @@ function cargo_truck_mg_explode(var_0) {
   }
 }
 
-function ref_128af(var_0) {
-  if(istrue(var_0.ref_128af)) {
+function ref_128AF(var_0) {
+  if(istrue(var_0.ref_128AF)) {
     return;
   }
 
-  var_0.ref_128af = 1;
+  var_0.ref_128AF = 1;
   cargo_truck_mg_explode(var_0);
   var_1 = var_0.name;
 
@@ -5185,16 +5185,16 @@ function trackattackerleaderboarddeathstats(var_0, var_1, var_2, var_3) {
   if(isDefined(var_0) && isPlayer(var_0)) {
     if(var_3 != "MOD_FALLING") {
       if(var_3 == "MOD_MELEE" && issubstr(var_2, "tactical")) {
-        var_0 scripts\common\utility::ref_13e0a(level.ref_11b25, "tactical", "kills", 1, var_2);
-        var_0 scripts\common\utility::ref_13e0a(level.ref_11b25, "tactical", "hits", 1, var_2);
+        var_0 scripts\common\utility::ref_13E0A(level.ref_11B25, "tactical", "kills", 1, var_2);
+        var_0 scripts\common\utility::ref_13E0A(level.ref_11B25, "tactical", "hits", 1, var_2);
         var_0 scripts\mp\persistence::incrementattachmentstat("tactical", "kills", 1, var_2);
         var_0 scripts\mp\persistence::incrementattachmentstat("tactical", "hits", 1, var_2);
         return;
       }
 
       if(var_3 == "MOD_MELEE" && !scripts\mp\riotshield::isriotshield(var_2) && !scripts\mp\utility\weapon::isknifeonly(var_2) && !scripts\mp\utility\weapon::turret_aimed_at_last_known(var_2) && !scripts\mp\utility\weapon::isaxeweapon(var_2)) {
-        var_0 scripts\common\utility::ref_13e0a(level.ref_11b25, "none", "kills", 1, var_2);
-        var_0 scripts\common\utility::ref_13e0a(level.ref_11b25, "none", "hits", 1, var_2);
+        var_0 scripts\common\utility::ref_13E0A(level.ref_11B25, "none", "kills", 1, var_2);
+        var_0 scripts\common\utility::ref_13E0A(level.ref_11B25, "none", "hits", 1, var_2);
         var_0 scripts\mp\persistence::incrementattachmentstat("none", "kills", 1, var_2);
         var_0 scripts\mp\persistence::incrementattachmentstat("none", "hits", 1, var_2);
         return;
@@ -5226,8 +5226,8 @@ function setweaponstat(var_0, var_1, var_2) {
     var_3 = asmdevgetallstates(var_0);
   }
 
-  if(isDefined(var_3.ref_121d9)) {
-    var_3 = var_3.ref_121d9;
+  if(isDefined(var_3.ref_121D9)) {
+    var_3 = var_3.ref_121D9;
   }
 
   if(!isDefined(level.get_audio_approved_length_extender_for_non_english_vo)) {
@@ -5261,7 +5261,7 @@ function setweaponstat(var_0, var_1, var_2) {
   if(var_5 == "weapon_grenade" || var_5 == "weapon_explosive" || var_4 == "trophy_mp" || var_4 == "forcepush_mp") {
     var_4 = scripts\mp\utility\script::strip_suffix(var_4, "_mp");
     scripts\mp\persistence::incrementweaponstat(var_4, var_2, var_1);
-    scripts\common\utility::ref_13e0a(level.ref_11b31, var_4, var_2, var_1, var_6, var_3);
+    scripts\common\utility::ref_13E0A(level.ref_11B31, var_4, var_2, var_1, var_6, var_3);
     return;
   }
 
@@ -5299,11 +5299,11 @@ function setweaponstat(var_0, var_1, var_2) {
 
     var_10 = scripts\mp\utility\weapon::getweaponattachmentsbasenames(var_3);
     scripts\mp\persistence::incrementweaponstat(var_9, var_2, var_1);
-    scripts\common\utility::ref_13e0a(level.ref_11b31, var_9, "deaths", var_1, var_6, var_3);
+    scripts\common\utility::ref_13E0A(level.ref_11B31, var_9, "deaths", var_1, var_6, var_3);
 
     foreach(var_12 in var_10) {
       scripts\mp\persistence::incrementattachmentstat(var_12, var_2, var_1, var_3);
-      scripts\common\utility::ref_13e0a(level.ref_11b25, var_12, var_2, var_1, var_3);
+      scripts\common\utility::ref_13E0A(level.ref_11B25, var_12, var_2, var_1, var_3);
     }
 
     return;
@@ -5746,7 +5746,7 @@ function isvalidbestweapon(var_0) {
 }
 
 function checkforbestweapon() {
-  var_0 = scripts\common\utility::ref_13e0a(level.ref_11b23);
+  var_0 = scripts\common\utility::ref_13E0A(level.ref_11B23);
   var_1 = "";
   var_2 = -1;
 
@@ -5818,8 +5818,8 @@ function ismp_init() {
   level.ismp = 1;
 }
 
-function ref_144bf(var_0) {
-  if(!istrue(level.ref_11a5d)) {
+function ref_144BF(var_0) {
+  if(!istrue(level.ref_11A5D)) {
     return;
   }
 
@@ -5854,7 +5854,7 @@ function ref_144bf(var_0) {
   var_6 = scripts\engine\utility::ter_op(var_0, getactiveclientcount(var_1), level.players.size);
 
   if(var_6 <= var_8) {
-    level.ref_11a5e = 1;
+    level.ref_11A5E = 1;
     var_9 = gettime() - var_3;
     var_10 = getdvarfloat("live_lobby_lowpop_time", 300);
     getentitylessscriptablearray("dlog_event_low_pop_start", ["start_players", var_6, "wait_time_ms", var_9, "active_client_count", var_0, "lowpop_min", var_4, "lowpop_max", var_8, "lowpop_time", var_10]);
@@ -6076,7 +6076,7 @@ function updatematchhasmorethan1playeromnvaronplayerdisconnect() {
   }
 }
 
-function ref_12c14() {
+function ref_12C14() {
   wait 10;
   var_0 = [];
   GscBinSkip0(0x2e, 1, "tactical_ladder_col");
@@ -6090,7 +6090,7 @@ function getintorzero() {
   level.allowsupers = getdvarint("scr_" + scripts\mp\utility\game::round_vehicle_logic() + "_allowSupers", level.allowsupers);
 }
 
-function ref_119ae() {
+function ref_119AE() {
   foreach(var_1 in level.players) {
     if(isPlayer(var_1)) {
       scripts\mp\codcasterclientmatchdata::setcodcasterplayervalue(var_1, "damageDone", var_1 scripts\mp\utility\stats::getpersstat("damage"));
@@ -6098,7 +6098,7 @@ function ref_119ae() {
   }
 }
 
-function ref_119af(var_0) {
+function ref_119AF(var_0) {
   if(!isDefined(var_0) || !isDefined(var_0.team)) {
     return;
   }
@@ -6132,7 +6132,7 @@ function ref_12465() {
   thread scripts\mp\gametypes\br_gulag::gulagfadetoblack(1);
   wait 1;
   self.multieventdisabled = 1;
-  ref_12767(level.multieventdebug.ref_142af, level.multieventdebug.ref_142ae, level.multieventdebug.unmarkplayeraseliminated);
+  ref_12767(level.multieventdebug.ref_142AF, level.multieventdebug.ref_142AE, level.multieventdebug.unmarkplayeraseliminated);
   self.multieventdisabled = undefined;
   self setclientomnvar("ui_br_transition_type", 0);
   self setclientomnvar("post_game_state", 14);
@@ -6151,7 +6151,7 @@ function ref_12767(var_0, var_1, var_2) {
   setDvar("voice_proximity_radius", -1);
   self preloadcinematicforplayer(var_0, 1, var_2);
   var_6 = gettime();
-  ref_133dd(var_6, var_1 * 1000);
+  ref_133DD(var_6, var_1 * 1000);
   self skydive_cutparachuteoff();
   scripts\mp\utility\player::restorebasevisionset(0);
   self setclientdvar("cg_everyoneHearsEveryone", scripts\mp\utility\game::updatetextongamepadchange());
@@ -6163,7 +6163,7 @@ function ref_12767(var_0, var_1, var_2) {
   self clearsoundsubmix("fade_to_black_all_except_music_and_scripted3", 0.5);
 }
 
-function ref_133dd(var_0, var_1) {
+function ref_133DD(var_0, var_1) {
   self endon("disconnect");
   wait 2;
   var_2 = gettime();

@@ -15,7 +15,7 @@ function superdeadsilence_beginsuper() {
   self playlocalsound("deadsilence_start");
   superdeadsilence_updateuistate(0);
   thread applyfovpresentation();
-  thread ref_1397e();
+  thread ref_1397E();
   return true;
 }
 
@@ -96,16 +96,16 @@ function applyfovpresentation() {
   self lerpfovbypreset("zombiedefault");
   var_0 = self.super.staticdata.usetime;
   var_1 = var_0 - 2;
-  scripts\engine\utility::ref_143bf(var_1, "super_use_finished");
+  scripts\engine\utility::ref_143BF(var_1, "super_use_finished");
   self lerpfovbypreset("default_2seconds");
   self playlocalsound("deadsilence_end");
 }
 
-function ref_1397e() {
+function ref_1397E() {
   self endon("death_or_disconnect");
   self endon("super_use_finished");
   self notify("superDeadsilence_watchForGameEnded");
   self endon("superDeadsilence_watchForGameEnded");
-  level scripts\engine\utility::ref_143a5("game_ended", "prematch_cleanup");
+  level scripts\engine\utility::ref_143A5("game_ended", "prematch_cleanup");
   thread scripts\mp\supers::superusefinished();
 }

@@ -5,12 +5,12 @@
 
 function terminal_pusher_approach_array(var_0) {
   var_0.unlockableindex = 1;
-  thread ref_138da(var_0);
+  thread ref_138DA(var_0);
 }
 
-function ref_138da(var_0) {
+function ref_138DA(var_0) {
   self endon("disconnect");
-  scripts\engine\utility::ref_143a5("end_dragBreath", "death");
+  scripts\engine\utility::ref_143A5("end_dragBreath", "death");
 
   if(isDefined(var_0)) {
     var_0.unlockableindex = undefined;
@@ -20,7 +20,7 @@ function ref_138da(var_0) {
 
 function ref_13638() {
   var_0 = spawnStruct();
-  var_0.ref_11e62 = [];
+  var_0.ref_11E62 = [];
   var_0.spawn_little_bird_mg_at_location = [];
   var_0.flares = "";
   return var_0;
@@ -49,7 +49,7 @@ function ref_13147() {
   }
 }
 
-function ref_138db() {
+function ref_138DB() {
   self notify("stop_dragonsbreathDamage");
   self.mine_caves_ambusher = undefined;
 }
@@ -76,7 +76,7 @@ function flareready(var_0, var_1, var_2) {
 
 function ref_13130(var_0, var_1) {
   var_2 = getcompleteweaponname("dragonsbreath_mp");
-  var_2.ref_121d9 = var_1;
+  var_2.ref_121D9 = var_1;
   var_3 = 1;
   jumpiffalse(level.gametype == "br" && var_1.classname == "spread") LOC_00000042;
   var_3 = 0.75;
@@ -89,7 +89,7 @@ function ref_13130(var_0, var_1) {
     var_6 = floor(var_6);
 
     if(var_1 hasattachment("ammo_incendiary", 1) && weaponclass(var_1) != "spread") {
-      var_6 = int(level.ref_12e38 * level.ref_12e39);
+      var_6 = int(level.ref_12E38 * level.ref_12E39);
 
       if(weaponisboltaction(var_1) && issubstr(var_1.basename, "s4_mr_")) {
         var_6 -= 1;
@@ -108,7 +108,7 @@ function ref_13131() {
   GscBinSkip0(0x2e, "torso", 0);
 }
 
-function ref_11ae5(var_0) {
+function ref_11AE5(var_0) {
   switch (var_0) {
     case "helmet":
       return "torso";

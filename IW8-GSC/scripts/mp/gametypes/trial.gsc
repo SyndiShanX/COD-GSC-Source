@@ -10,7 +10,7 @@ function main() {
 
   scripts\engine\utility::flag_init("strike_init_done");
   trial_mission_data_init();
-  ref_13d61();
+  ref_13D61();
   scripts\mp\trials\mp_trials_patches::init_trial_patches();
   scripts\mp\globallogic::init();
   scripts\mp\globallogic::setupcallbacks();
@@ -40,12 +40,12 @@ function main() {
   GscBinSkip0(0x2e, var_0.size, level.gametype);
 }
 
-function ref_13d98(var_0, var_1) {
+function ref_13D98(var_0, var_1) {
   level notify("exitLevel_called");
   processlobbydata();
 
-  if(isDefined(level.ref_13d32)) {
-    [[level.ref_13d32]]();
+  if(isDefined(level.ref_13D32)) {
+    [[level.ref_13D32]]();
   }
 
   if(getomnvar("ui_trial_reward_tier") >= 1) {
@@ -63,7 +63,7 @@ function ref_13d98(var_0, var_1) {
 }
 
 function trial_mission_data_init() {
-  var_0 = _tablethide::ref_13d42();
+  var_0 = _tablethide::ref_13D42();
   var_1 = getdvarint("bg_trial_mission_id", 0);
 
   if(var_1 == 0) {
@@ -100,7 +100,7 @@ function trial_mission_data_init() {
 }
 
 function getspawnpoint() {
-  while(istrue(level.ref_13d6a)) {
+  while(istrue(level.ref_13D6A)) {
     waitframe();
   }
 
@@ -108,12 +108,12 @@ function getspawnpoint() {
   var_1 = scripts\mp\spawnlogic::getspawnpointarray(var_0);
   var_2 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_1);
 
-  if(isDefined(level.ref_13d69)) {
-    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getavailablevehicleseats(level.ref_13d69, 1);
+  if(isDefined(level.ref_13D69)) {
+    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getavailablevehicleseats(level.ref_13D69, 1);
     var_4 = spawnStruct();
     var_4.useonspawn = 1;
     var_4.enterstartwaitmsg = "spawned_player";
-    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(level.ref_13d69, var_3[0], self, var_4);
+    thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(level.ref_13D69, var_3[0], self, var_4);
     self.spawningintovehicle = 1;
   }
 
@@ -152,7 +152,7 @@ function onplayerconnect(var_0) {
     exitlevel(0);
   }
 
-  level.player scripts\mp\gametypes\br::ref_1254d();
+  level.player scripts\mp\gametypes\br::ref_1254D();
   wait 1;
   thread scripts\cp_mp\utility\game_utility::fadetoblackforplayer(var_0, 0, 0.5);
 
@@ -165,7 +165,7 @@ function onplayerconnect(var_0) {
   }
 
   setDvar("old_mapname", getDvar("mapname"));
-  thread ref_13d5f();
+  thread ref_13D5F();
 }
 
 function setspecialloadout() {
@@ -318,7 +318,7 @@ function weapon_think() {
         var_16 = 0;
       }
 
-      if(istrue(level.ref_124c9)) {
+      if(istrue(level.ref_124C9)) {
         var_17 = level.enemiestotal - var_16;
       }
 
@@ -392,13 +392,13 @@ function trial_end_score_dialogue() {
   level.player scripts\mp\utility\dialog::leaderdialogonplayer(var_5);
   _tablethide::trial_ui_waittill_retry();
 
-  if(!istrue(level.ref_13d60)) {
+  if(!istrue(level.ref_13D60)) {
     level.player scripts\mp\utility\dialog::leaderdialogonplayer("trial_retry");
     return;
   }
 }
 
-function ref_13d61() {
+function ref_13D61() {
   if(!isDefined(game["trial"])) {
     game["trial"] = [];
   }
@@ -420,20 +420,20 @@ function ref_13d61() {
   setomnvar("ui_trial_tries_remaining", int(game["trial"]["tries_remaining"]));
 }
 
-function ref_13d5f() {
+function ref_13D5F() {
   for(;;) {
     level.player waittill("luinotifyserver", var_0);
 
     if(var_0 == "trial_restart") {
       if(!isDefined(level.unset_stay_at_spawn_flag_on_entering_combat) || !level.unset_stay_at_spawn_flag_on_entering_combat) {
-        _tablethide::ref_13d5e();
+        _tablethide::ref_13D5E();
       }
     }
   }
 }
 
 function processlobbydata() {
-  ref_128af(level.player);
+  ref_128AF(level.player);
 
   if(scripts\mp\utility\game::matchmakinggame() && !scripts\mp\utility\game::privatematch()) {
     setclientmatchdata("isPublicMatch", 1);
@@ -444,12 +444,12 @@ function processlobbydata() {
   sendclientmatchdata();
 }
 
-function ref_128af(var_0) {
-  if(istrue(var_0.ref_128af)) {
+function ref_128AF(var_0) {
+  if(istrue(var_0.ref_128AF)) {
     return;
   }
 
-  var_0.ref_128af = 1;
+  var_0.ref_128AF = 1;
 
   if(isDefined(var_0) && !isDefined(var_0.clientmatchdataid)) {
     var_0.clientmatchdataid = level.initship;

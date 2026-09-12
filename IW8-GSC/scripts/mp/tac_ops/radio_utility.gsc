@@ -75,7 +75,7 @@ function function_stack_timeout(var_0, var_1, var_2, var_3, var_4, var_5, var_6)
   var_7 = spawnStruct();
   thread function_stack_proc(var_7, self, var_1, var_2, var_3, var_4, var_5);
 
-  if(isDefined(var_7.function_stack_func_begun) || var_7 scripts\engine\utility::ref_143b9(var_0, "function_stack_func_begun") != "timeout") {
+  if(isDefined(var_7.function_stack_func_begun) || var_7 scripts\engine\utility::ref_143B9(var_0, "function_stack_func_begun") != "timeout") {
     return function_stack_wait_finish(var_7);
   }
 

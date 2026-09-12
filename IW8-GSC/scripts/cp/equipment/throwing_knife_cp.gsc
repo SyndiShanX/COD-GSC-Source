@@ -4,10 +4,10 @@
 ******************************************************/
 
 function throwing_knife_cp_init() {
-  scripts\cp_mp\utility\script_utility::registersharedfunc("throwing_knife", "tryToPickup", &ref_13b50);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("throwing_knife", "tryToPickup", &ref_13B50);
 }
 
-function ref_13b50(var_0) {
+function ref_13B50(var_0) {
   if(scripts\cp\cp_powers::haspower("power_throwingKnife")) {
     var_1 = "power_throwingKnife";
   } else if(scripts\cp\cp_powers::haspower("power_throwingKnife_fire")) {

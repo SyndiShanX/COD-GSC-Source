@@ -663,7 +663,7 @@ function hqmainloop() {
     setomnvar("ui_btm_status", 3);
     level thread scripts\mp\hud_message::updatematchstatushintforallplayers(undefined, 16, 16);
     thread destroyhqaftertime(60);
-    var_5 = level scripts\engine\utility::ref_143ad("hq_captured", "hq_destroyed");
+    var_5 = level scripts\engine\utility::ref_143AD("hq_captured", "hq_destroyed");
 
     if(var_5 == "hq_captured") {
       var_6 = var_1 scripts\mp\gameobjects::getownerteam();
@@ -811,7 +811,7 @@ function onradiocapture(var_0) {
     var_4 scripts\mp\persistence::statsetchild("round", "captures", var_0.pers["captures"]);
   }
 
-  var_0 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_0.origin);
+  var_0 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_0.origin);
   var_6 = scripts\mp\gameobjects::getownerteam();
   scripts\mp\gameobjects::setownerteam(var_1);
 
@@ -849,7 +849,7 @@ function onradiodestroy(var_0) {
     var_5 scripts\mp\persistence::statsetchild("round", "destructions", var_0.pers["destructions"]);
   }
 
-  var_0 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "destroy", var_0.origin);
+  var_0 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "destroy", var_0.origin);
 
   if(level.kothmode) {}
 
@@ -1926,7 +1926,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
         }
 
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
-        thread scripts\common\utility::ref_13e0a(level.ref_11b24.ref_11b30, var_9, "defending");
+        thread scripts\common\utility::ref_13E0A(level.ref_11B24.ref_11B30, var_9, "defending");
       }
     } else if(var_1 istouching(level.radioobject.trigger)) {
       if(var_12) {
@@ -2099,7 +2099,7 @@ function give_capture_credit(var_0, var_1, var_2, var_3, var_4) {
 
   if(isPlayer(var_5)) {
     if(!isscoreboosting(var_5)) {
-      var_5 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_5.origin);
+      var_5 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_5.origin);
       var_5 thread scripts\mp\awards::givemidmatchaward("mode_hp_secure");
 
       if(isDefined(level.radioobject.lastactivatetime) && gettime() - level.radioobject.lastactivatetime <= 2100) {

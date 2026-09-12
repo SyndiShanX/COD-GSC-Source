@@ -11,8 +11,8 @@ function init() {
     level.initpostmain = 0;
   }
 
-  if(!isDefined(level.ref_13beb)) {
-    level.ref_13beb = 0;
+  if(!isDefined(level.ref_13BEB)) {
+    level.ref_13BEB = 0;
   }
 
   foreach(var_1 in level.capsulepass) {
@@ -25,17 +25,17 @@ function init() {
 
   foreach(var_1 in level.capsulepass) {
     foreach(var_4 in level.lastweaponfiretimestart) {
-      if(!isDefined(var_4.ref_134cb) && distance2dsquared(var_1.origin, var_4.origin) < 10) {
-        var_1.ref_134cb = var_4;
-        var_4.ref_134cb = var_1;
-        level.ref_13beb--;
+      if(!isDefined(var_4.ref_134CB) && distance2dsquared(var_1.origin, var_4.origin) < 10) {
+        var_1.ref_134CB = var_4;
+        var_4.ref_134CB = var_1;
+        level.ref_13BEB--;
         break;
       }
     }
   }
 
   initanimtree();
-  scripts\engine\scriptable::ref_12f5b("ascender_solo", &canstartusingbomb);
+  scripts\engine\scriptable::ref_12F5B("ascender_solo", &canstartusingbomb);
 }
 
 function stunshoulddetonate(var_0, var_1) {
@@ -134,7 +134,7 @@ function ref_13096() {
 }
 
 function canstartusingbomb(var_0, var_1, var_2, var_3, var_4) {
-  level.ref_12f78 = var_0;
+  level.ref_12F78 = var_0;
   level notify("have_scriptable");
 
   if(var_2 != "off") {
@@ -168,7 +168,7 @@ function endascenderanim(var_0, var_1, var_2, var_3, var_4) {
   scripts\common\anim::anim_single_solo(var_4, var_5 + "_wm");
 }
 
-function ref_136f0(var_0) {
+function ref_136F0(var_0) {
   self endon("death_or_disconnect");
   self endon("ascender_solo_cancel");
   self endon("last_stand_start");
@@ -203,7 +203,7 @@ function startascenderanim(var_0, var_1, var_2, var_3, var_4) {
   var_2.player_rig rotateTo(var_9, 0.4, 0.1, 0.1);
 
   if(var_6 > 0) {
-    thread ref_136f0(self.angles + (0, var_6 * -1, 0));
+    thread ref_136F0(self.angles + (0, var_6 * -1, 0));
   }
 
   var_10 = gettime();
@@ -371,7 +371,7 @@ function ascenderuse(var_0, var_1) {
   }
 
   if(getdvarint("scr_ascender_allowDisconnect", 1) > 0) {
-    var_21 = ref_144cf(var_4, var_5, var_18, var_16, var_17);
+    var_21 = ref_144CF(var_4, var_5, var_18, var_16, var_17);
   } else {
     wait var_18;
   }
@@ -391,7 +391,7 @@ function ascenderuse(var_0, var_1) {
   var_4 notify("ascend_solo_complete");
 }
 
-function ref_144cf(var_0, var_1, var_2, var_3) {
+function ref_144CF(var_0, var_1, var_2, var_3) {
   var_4 = self;
   var_4 forceusehinton(&"MP/RELEASE_AUTO_ASCENDER");
   var_5 = gettime();
@@ -427,8 +427,8 @@ function ref_144cf(var_0, var_1, var_2, var_3) {
 function updatespecificfobindanger(var_0) {
   foreach(var_2 in level.capsulepass) {
     if(distance2dsquared(var_2.origin, var_0) < scripts\cp_mp\auto_ascender::registerhint()) {
-      if(isDefined(var_2.ref_134cb)) {
-        if(abs(var_0[2] - var_2.origin[2]) < scripts\cp_mp\auto_ascender::registerheadlessinfil() || abs(var_0[2] - var_2.ref_134cb.origin[2]) < scripts\cp_mp\auto_ascender::registerheadlessinfil()) {
+      if(isDefined(var_2.ref_134CB)) {
+        if(abs(var_0[2] - var_2.origin[2]) < scripts\cp_mp\auto_ascender::registerheadlessinfil() || abs(var_0[2] - var_2.ref_134CB.origin[2]) < scripts\cp_mp\auto_ascender::registerheadlessinfil()) {
           return true;
         }
       }

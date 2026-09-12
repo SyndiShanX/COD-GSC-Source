@@ -1479,7 +1479,7 @@ function assault_vehicle_spawner() {
   level.assault_vehicle.dontdisconnectpaths = 1;
   level.assault_vehicle.script_badplace = 1;
   level.assault_vehicle scripts\common\vehicle_code::vehicle_remove_badplace();
-  var_0 = getEnt("bradley_ref_ent", "targetname");
+  var_0 = getEnt("bradley_ref_ENT", "targetname");
   var_0 linkTo(level.assault_vehicle);
   thread apc_player_detector_monitor();
   thread apc_player_detector_volume_handler();
@@ -1503,7 +1503,7 @@ function assault_vehicle_spawner() {
   playFXOnTag(var_1, level.assault_vehicle, "tag_wheel_front_right");
 }
 
-function bradley_ref_sphere() {
+function bradley_ref_SPHERE() {
   while(!scripts\engine\utility::flag("play_IED_explosion")) {
     waitframe();
   }

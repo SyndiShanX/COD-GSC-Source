@@ -50,7 +50,7 @@ function onstartgametype() {
   level.teamkillstreakqueue["axis"] = ["cruise_predator", "precision_airstrike", "cruise_predator"];
   thread setupwaypointicons();
   debug_setupmatchdata();
-  ref_1324d();
+  ref_1324D();
   calculatehqmidpoint();
 
   if(istrue(level.useobjectives)) {
@@ -72,13 +72,13 @@ function onstartgametype() {
   thread updatedomscores();
   scripts\mp\utility\dialog::initstatusdialog();
 
-  if(istrue(level.ref_11bd2)) {
-    thread ref_11eee();
+  if(istrue(level.ref_11BD2)) {
+    thread ref_11EEE();
   }
 
   monitordriverexitbutton();
 
-  if(istrue(level.ref_1408c)) {
+  if(istrue(level.ref_1408C)) {
     scripts\cp_mp\vehicles\vehicle_compass::calloutmarkerping_init();
   }
 
@@ -126,30 +126,30 @@ function seticonnames() {
 }
 
 function monitordriverexitbutton() {
-  scripts\cp_mp\utility\game_utility::ref_12c10("delete_on_load", "targetname");
-  scripts\cp_mp\utility\game_utility::ref_12c10("vehicle_volume", "script_noteworthy");
-  scripts\cp_mp\utility\game_utility::ref_12c10("vehicle_volume_simplified", "script_noteworthy");
-  scripts\cp_mp\utility\game_utility::ref_12c10("super", "script_noteworthy");
-  scripts\cp_mp\utility\game_utility::ref_12c10("militarybase", "script_noteworthy");
-  scripts\cp_mp\utility\game_utility::ref_12c10("location_volume", "targetname");
-  scripts\cp_mp\utility\game_utility::ref_12c10("locale_area_trigger", "targetname");
-  scripts\cp_mp\utility\game_utility::ref_12c10("shadow_blocker", "targetname");
-  scripts\cp_mp\utility\game_utility::ref_12c11("door_prison_cell_metal_mp", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c11("veh8_mil_air_acharlie130", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c11("door_wooden_panel_mp_01", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c11("me_electrical_box_street_01", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c0f("light");
-  scripts\cp_mp\utility\game_utility::ref_12c0f("trigger_use_touch");
+  scripts\cp_mp\utility\game_utility::ref_12C10("delete_on_load", "targetname");
+  scripts\cp_mp\utility\game_utility::ref_12C10("vehicle_volume", "script_noteworthy");
+  scripts\cp_mp\utility\game_utility::ref_12C10("vehicle_volume_simplified", "script_noteworthy");
+  scripts\cp_mp\utility\game_utility::ref_12C10("super", "script_noteworthy");
+  scripts\cp_mp\utility\game_utility::ref_12C10("militarybase", "script_noteworthy");
+  scripts\cp_mp\utility\game_utility::ref_12C10("location_volume", "targetname");
+  scripts\cp_mp\utility\game_utility::ref_12C10("locale_area_trigger", "targetname");
+  scripts\cp_mp\utility\game_utility::ref_12C10("shadow_blocker", "targetname");
+  scripts\cp_mp\utility\game_utility::ref_12C11("door_prison_cell_metal_mp", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C11("veh8_mil_air_acharlie130", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C11("door_wooden_panel_mp_01", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C11("me_electrical_box_street_01", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C0F("light");
+  scripts\cp_mp\utility\game_utility::ref_12C0F("trigger_use_touch");
 
   if(isDefined(level.localeid) && level.localeid == "locale_6") {
-    scripts\cp_mp\utility\game_utility::ref_12c10("locale_8", "script_noteworthy");
+    scripts\cp_mp\utility\game_utility::ref_12C10("locale_8", "script_noteworthy");
   }
 
   var_0 = [];
   GscBinSkip0(0x2e, 0, (-22592, 27367, 1000));
 }
 
-function ref_12c14() {
+function ref_12C14() {
   wait 5;
   var_0 = [];
   GscBinSkip0(0x2e, 0, "tactical_cover_col");
@@ -185,7 +185,7 @@ function setupwaypointicons() {
   }
 }
 
-function ref_1324d() {
+function ref_1324D() {
   level.gw_objstruct = spawnStruct();
   level.gw_objstruct.axishqloc = spawnStruct();
   level.gw_objstruct.axishqloc.trigger = scripts\cp_mp\utility\game_utility::getlocaleent(level.axishqname);
@@ -240,7 +240,7 @@ function updatedomscores() {
   var_0 = undefined;
   var_1 = undefined;
   level waittill("prematch_done");
-  level thread scripts\mp\spawnselection::ref_13fd9();
+  level thread scripts\mp\spawnselection::ref_13FD9();
 
   while(!level.gameended) {
     wait 10;
@@ -366,7 +366,7 @@ function runobjectives(var_0) {
       var_2.trigger.gameobject.onunpinnedstate = &objective_onunpinnedstate;
 
       if(istrue(level.playinggulagbink)) {
-        var_2.ref_136cd = &scripts\mp\gametypes\obj_dom::ref_136ce;
+        var_2.ref_136CD = &scripts\mp\gametypes\obj_dom::ref_136CE;
       }
 
       level.objectives[var_2.trigger.gameobject.objectivekey] = var_2.trigger.gameobject;
@@ -699,7 +699,7 @@ function docratedropsmoke(var_0, var_1, var_2) {
   playFXOnTag(scripts\engine\utility::getfx("vfx_smk_signal_gr"), var_1.vfxent, "tag_origin");
 
   if(isDefined(var_0)) {
-    var_0 scripts\engine\utility::ref_143b9(var_2, "crate_dropped");
+    var_0 scripts\engine\utility::ref_143B9(var_2, "crate_dropped");
   } else {
     wait var_2;
   }
@@ -910,58 +910,58 @@ function br_getrewardicon(var_0) {
   return level.killstreakglobals.streaktable.tabledatabyref[var_0]["hudIcon"];
 }
 
-function ref_11eee() {
+function ref_11EEE() {
   scripts\mp\flags::gameflagwait("prematch_done");
 
   if(istrue(level.useobjectives)) {
-    thread ref_11eef();
+    thread ref_11EEF();
     return;
   }
 }
 
-function ref_11eef() {
+function ref_11EEF() {
   level endon("game_ended");
   level endon("mercy_ending_timer_started");
 
   for(;;) {
     if(freeze_bomb_case_timer("axis") == level.objectives.size) {
-      thread ref_11ef6(level);
+      thread ref_11EF6(level);
     } else if(freeze_bomb_case_timer("allies") == level.objectives.size) {
-      thread ref_11ef6(level);
+      thread ref_11EF6(level);
     }
 
     waitframe();
   }
 }
 
-function ref_11ef6(var_0) {
+function ref_11EF6(var_0) {
   level notify("mercy_ending_timer_started");
   level endon("mercy_ending_triggered");
   setomnvar("ui_arm_dominatingTeam", scripts\engine\utility::ter_op(var_0 == "axis", 1, 2));
   _calloutmarkerping_handleluinotify_added::ref_13191("ui_nuke_data", 9, 2, 1);
-  _calloutmarkerping_handleluinotify_added::ref_13191("ui_nuke_data", 0, 9, level.ref_11bd3);
+  _calloutmarkerping_handleluinotify_added::ref_13191("ui_nuke_data", 0, 9, level.ref_11BD3);
   _calloutmarkerping_handleluinotify_added::ref_13191("ui_nuke_data", 11, 1, 1);
   var_1 = 0;
   var_2 = gettime();
-  var_3 = level.ref_11bd3 * 1000 + var_2;
-  setomnvar("ui_nuke_end_milliseconds", level.ref_11bd3 * 1000 + var_2);
+  var_3 = level.ref_11BD3 * 1000 + var_2;
+  setomnvar("ui_nuke_end_milliseconds", level.ref_11BD3 * 1000 + var_2);
 
   while(freeze_bomb_case_timer(var_0) == level.objectives.size) {
     waitframe();
 
     if(gettime() > var_3) {
-      ref_11ef9(var_0);
+      ref_11EF9(var_0);
       level notify("mercy_ending_triggered");
     }
   }
 
   _calloutmarkerping_handleluinotify_added::ref_13191("ui_nuke_data", 11, 1, 0);
-  thread ref_11eef();
+  thread ref_11EEF();
 }
 
-function ref_11ef9(var_0) {
+function ref_11EF9(var_0) {
   level endon("game_ended");
-  level.ref_11bd4 = 1;
+  level.ref_11BD4 = 1;
   level.blocknukekills = 1;
 
   foreach(var_2 in level.objectives) {
@@ -1208,7 +1208,7 @@ function onplayerconnect(var_0) {
     thread scripts\mp\rally_point::rallypoint_showtoplayer(var_0);
   }
 
-  if(istrue(level.ref_1408c)) {
+  if(istrue(level.ref_1408C)) {
     var_0 scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_initplayer();
   }
 
@@ -1216,7 +1216,7 @@ function onplayerconnect(var_0) {
 }
 
 function onplayerdisconnect(var_0) {
-  thread scripts\mp\spawnselection::ref_12acb(var_0.team, var_0.squadindex);
+  thread scripts\mp\spawnselection::ref_12ACB(var_0.team, var_0.squadindex);
 }
 
 function updategamemodespawncamera() {
@@ -1297,7 +1297,7 @@ function ref_12065() {
   return false;
 }
 
-function ref_125f1() {
+function ref_125F1() {
   return self.sessionstate == "spectator" && isDefined(self.thrust_fx_model);
 }
 
@@ -1700,7 +1700,7 @@ function jumplistener(var_0, var_1) {
     self.parachute delete();
   }
 
-  scripts\mp\utility\game::ref_131a3(self, 1);
+  scripts\mp\utility\game::ref_131A3(self, 1);
   thread listenjump(var_0, var_1);
   thread listenkick(var_0, var_1);
 }
@@ -1788,7 +1788,7 @@ function parachute(var_0, var_1) {
   waitframe();
   self playershow();
   self.plotarmor = 0;
-  scripts\mp\utility\game::ref_131a3(self, 0);
+  scripts\mp\utility\game::ref_131A3(self, 0);
   self setplayerangles(vectortoangles(var_3));
   thread scripts\cp_mp\parachute::startfreefall(5, 0);
 }
@@ -2088,9 +2088,9 @@ function init_groundwarvehicles() {
   }
 
   level.vehiclespawnlocs = scripts\engine\utility::array_randomize(level.vehiclespawnlocs);
-  var_28 = level.ref_11f41;
+  var_28 = level.ref_11F41;
 
-  if(!isDefined(level.ref_11f41)) {
+  if(!isDefined(level.ref_11F41)) {
     var_28 = 25;
   }
 
@@ -2279,13 +2279,13 @@ function vehiclespawn_tank(var_0, var_1) {
   var_3 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("light_tank", var_2, var_1);
 
   if(istrue(level.ref_13377)) {
-    ref_1413b(var_3, var_3.team);
+    ref_1413B(var_3, var_3.team);
   }
 
   return var_3;
 }
 
-function ref_1413b(var_0, var_1) {
+function ref_1413B(var_0, var_1) {
   wait 1;
   var_2 = scripts\mp\gameobjects::createobjidobject(var_0.origin, var_1, (0, 0, 0), undefined, 0, 0);
   scripts\mp\objidpoolmanager::update_objective_ownerteam(var_2.objidnum, var_1);
@@ -2304,37 +2304,37 @@ function ref_1413b(var_0, var_1) {
     }
   }
 
-  var_0.ref_1369d = var_2;
+  var_0.ref_1369D = var_2;
   thread ref_14228(var_0);
-  level.ref_13c4a[var_1][level.ref_13c4a[var_1].size] = var_0;
+  level.ref_13C4A[var_1][level.ref_13C4A[var_1].size] = var_0;
 }
 
 function ref_14228(var_0) {
-  var_1 = var_0.ref_1369d.objidnum;
+  var_1 = var_0.ref_1369D.objidnum;
   var_2 = var_0.team;
   var_0 waittill("death");
   scripts\mp\objidpoolmanager::returnobjectiveid(var_1);
-  level.ref_13c4a[var_2] = scripts\engine\utility::array_remove(level.ref_13c4a[var_2], var_0);
+  level.ref_13C4A[var_2] = scripts\engine\utility::array_remove(level.ref_13C4A[var_2], var_0);
 }
 
-function ref_1420e() {
+function ref_1420E() {
   self endon("disconnect");
   scripts\mp\flags::gameflagwait("prematch_done");
 
-  foreach(var_1 in level.ref_13c4a[self.team]) {
-    scripts\mp\objidpoolmanager::objective_playermask_addshowplayer(var_1.ref_1369d.objidnum, self);
+  foreach(var_1 in level.ref_13C4A[self.team]) {
+    scripts\mp\objidpoolmanager::objective_playermask_addshowplayer(var_1.ref_1369D.objidnum, self);
   }
 
   while(self.inspawnselection) {
     waitframe();
   }
 
-  foreach(var_1 in level.ref_13c4a["axis"]) {
-    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(var_1.ref_1369d.objidnum, self);
+  foreach(var_1 in level.ref_13C4A["axis"]) {
+    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(var_1.ref_1369D.objidnum, self);
   }
 
-  foreach(var_1 in level.ref_13c4a["allies"]) {
-    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(var_1.ref_1369d.objidnum, self);
+  foreach(var_1 in level.ref_13C4A["allies"]) {
+    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(var_1.ref_1369D.objidnum, self);
   }
 }
 
@@ -2366,7 +2366,7 @@ function droptank_playincomingdialog(var_0) {
   scripts\mp\utility\dialog::leaderdialog(var_1 + "_friendly_" + var_2 + "_inbound", var_1, "killstreak_used");
 }
 
-function ref_1413a(var_0, var_1) {
+function ref_1413A(var_0, var_1) {
   wait 1;
   var_2 = scripts\mp\gameobjects::createobjidobject(var_0.origin, var_1, (0, 0, 0), undefined, 0, 0);
   scripts\mp\objidpoolmanager::update_objective_ownerteam(var_2.objidnum, var_1);
@@ -2385,13 +2385,13 @@ function ref_1413a(var_0, var_1) {
     }
   }
 
-  var_0.ref_1369d = var_2;
+  var_0.ref_1369D = var_2;
   thread ref_14227(var_0);
-  level.ref_13c49["untouched"][level.ref_13c49["untouched"].size] = var_0;
+  level.ref_13C49["untouched"][level.ref_13C49["untouched"].size] = var_0;
 }
 
 function ref_14227(var_0) {
-  var_1 = var_0.ref_1369d.objidnum;
+  var_1 = var_0.ref_1369D.objidnum;
   var_0 waittill("death");
   scripts\mp\objidpoolmanager::returnobjectiveid(var_1);
   var_2 = var_0.watch_for_player_entered_trap_room;
@@ -2400,58 +2400,58 @@ function ref_14227(var_0) {
     var_2 = "untouched";
   }
 
-  level.ref_13c49[var_2] = scripts\engine\utility::array_remove(level.ref_13c49[var_2], var_0);
+  level.ref_13C49[var_2] = scripts\engine\utility::array_remove(level.ref_13C49[var_2], var_0);
 }
 
-function ref_1420f() {
+function ref_1420F() {
   self endon("disconnect");
   scripts\mp\flags::gameflagwait("prematch_done");
 
-  foreach(var_1 in level.ref_13c49[self.team]) {
-    scripts\mp\objidpoolmanager::objective_playermask_addshowplayer(var_1.ref_1369d.objidnum, self);
+  foreach(var_1 in level.ref_13C49[self.team]) {
+    scripts\mp\objidpoolmanager::objective_playermask_addshowplayer(var_1.ref_1369D.objidnum, self);
   }
 
-  foreach(var_1 in level.ref_13c49["untouched"]) {
-    scripts\mp\objidpoolmanager::objective_playermask_addshowplayer(var_1.ref_1369d.objidnum, self);
+  foreach(var_1 in level.ref_13C49["untouched"]) {
+    scripts\mp\objidpoolmanager::objective_playermask_addshowplayer(var_1.ref_1369D.objidnum, self);
   }
 
   while(self.inspawnselection) {
     waitframe();
   }
 
-  foreach(var_1 in level.ref_13c49["axis"]) {
-    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(var_1.ref_1369d.objidnum, self);
+  foreach(var_1 in level.ref_13C49["axis"]) {
+    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(var_1.ref_1369D.objidnum, self);
   }
 
-  foreach(var_1 in level.ref_13c49["allies"]) {
-    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(var_1.ref_1369d.objidnum, self);
+  foreach(var_1 in level.ref_13C49["allies"]) {
+    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(var_1.ref_1369D.objidnum, self);
   }
 
-  foreach(var_1 in level.ref_13c49["untouched"]) {
-    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(var_1.ref_1369d.objidnum, self);
+  foreach(var_1 in level.ref_13C49["untouched"]) {
+    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(var_1.ref_1369D.objidnum, self);
   }
 }
 
-function ref_141ff(var_0) {
+function ref_141FF(var_0) {
   if(isDefined(self.watch_for_player_entered_trap_room)) {
-    level.ref_13c49[self.watch_for_player_entered_trap_room] = scripts\engine\utility::array_remove(level.ref_13c49[self.watch_for_player_entered_trap_room], self);
+    level.ref_13C49[self.watch_for_player_entered_trap_room] = scripts\engine\utility::array_remove(level.ref_13C49[self.watch_for_player_entered_trap_room], self);
   } else {
-    level.ref_13c49["untouched"] = scripts\engine\utility::array_remove(level.ref_13c49["untouched"], self);
+    level.ref_13C49["untouched"] = scripts\engine\utility::array_remove(level.ref_13C49["untouched"], self);
   }
 
   self.watch_for_player_entered_trap_room = var_0;
-  level.ref_13c49[var_0][level.ref_13c49[var_0].size] = self;
-  scripts\mp\objidpoolmanager::update_objective_icon(self.ref_1369d.objidnum, "icon_minimap_littlebird_spawn_selection");
+  level.ref_13C49[var_0][level.ref_13C49[var_0].size] = self;
+  scripts\mp\objidpoolmanager::update_objective_icon(self.ref_1369D.objidnum, "icon_minimap_littlebird_spawn_selection");
 
   foreach(var_2 in level.players) {
-    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(self.ref_1369d.objidnum, var_2);
+    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(self.ref_1369D.objidnum, var_2);
 
     if(isDefined(var_2) && isDefined(var_2.team) && var_2.team == var_0 && istrue(var_2.inspawnselection)) {
-      scripts\mp\objidpoolmanager::objective_playermask_addshowplayer(self.ref_1369d.objidnum, var_2);
+      scripts\mp\objidpoolmanager::objective_playermask_addshowplayer(self.ref_1369D.objidnum, var_2);
       continue;
     }
 
-    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(self.ref_1369d.objidnum, var_2);
+    scripts\mp\objidpoolmanager::objective_playermask_hidefrom(self.ref_1369D.objidnum, var_2);
   }
 }
 
@@ -2502,7 +2502,7 @@ function init_rallyvehicles() {
       }
     }
   } else if(!istrue(level.completelyremovelittlebird)) {
-    if(level.localeid == "locale_6" && level.mapname == "mp_downtown_gw" && istrue(level.ref_11ac5)) {
+    if(level.localeid == "locale_6" && level.mapname == "mp_downtown_gw" && istrue(level.ref_11AC5)) {
       var_10 = [];
       GscBinSkip0(0x2e, 0, (23718, -4470, -350));
     }
@@ -2524,7 +2524,7 @@ function init_rallyvehicles() {
         var_7 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("little_bird", var_5, undefined);
       }
 
-      thread ref_1413a(level, var_7);
+      thread ref_1413A(level, var_7);
     }
   }
 
@@ -2641,7 +2641,7 @@ function arm_initoutofbounds() {
   var_0 = getEntArray("OutOfBounds", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(scripts\cp_mp\utility\game_utility::getlocaleid()) && isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == level.localeid && scripts\mp\utility\game_utility_mp::ref_11c8a(var_2)) {
+    if(isDefined(scripts\cp_mp\utility\game_utility::getlocaleid()) && isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == level.localeid && scripts\mp\utility\game_utility_mp::ref_11C8A(var_2)) {
       level.outofboundstriggers[level.outofboundstriggers.size] = var_2;
       continue;
     }
@@ -3058,7 +3058,7 @@ function calculatecameraoffset(var_0, var_1) {
   return var_8;
 }
 
-function ref_1368d() {
+function ref_1368D() {
   if(isDefined(self.selectedspawnarea) && issubstr(self.selectedspawnarea, "HQ")) {
     return true;
   }

@@ -4,11 +4,11 @@
 ***********************************************/
 
 function keypad_check_levelinput() {
-  if(!isDefined(level.ref_13d51)) {
-    level.ref_13d51 = [];
+  if(!isDefined(level.ref_13D51)) {
+    level.ref_13D51 = [];
   }
 
-  level.ref_13d51["jugg"] = &jugg_init;
+  level.ref_13D51["jugg"] = &jugg_init;
 }
 
 function jugg_init() {
@@ -16,55 +16,55 @@ function jugg_init() {
   scripts\mp\mp_agent::init_agent("mp/iw8_default_agent_definition.csv");
   thread playing_stealth_alert_music();
   thread dialog_init();
-  thread ref_12f06();
+  thread ref_12F06();
   thread ai_init();
 
   switch (level.trial["zone"]) {
     case "mp_deadzone":
-      thread ref_128ba();
+      thread ref_128BA();
       break;
     case "mp_m_speed":
     default:
-      thread ref_128bc();
+      thread ref_128BC();
       break;
   }
 }
 
-function ref_128bc() {
+function ref_128BC() {
   level waittill("player_spawned");
   thread mine_light_vfx();
   level.player waittill("juggernaut_start");
   var_0 = gettime();
-  _tablethide::ref_13d88();
-  _tablethide::ref_13d89(0);
+  _tablethide::ref_13D88();
+  _tablethide::ref_13D89(0);
   thread playerzombiestreamwaittillcomplete();
-  thread ref_129c3();
-  level.ref_13d6a = 1;
+  thread ref_129C3();
+  level.ref_13D6A = 1;
   level.player.maxhealth = 10000;
   level.player.health = 10000;
   level.healthregendisabled = 1;
-  level.ref_13d25 = 1;
-  level.ref_1404a = "enemy_mp_trial_jugg_noob";
-  level.ref_13d40 = 5;
-  level.ref_13d67 = 2;
+  level.ref_13D25 = 1;
+  level.ref_1404A = "enemy_mp_trial_jugg_noob";
+  level.ref_13D40 = 5;
+  level.ref_13D67 = 2;
   ref_14348(var_0 + 15000);
-  level.ref_13d25 = 0;
-  level.ref_13d40 = 6;
-  level.ref_13d67 = 3;
+  level.ref_13D25 = 0;
+  level.ref_13D40 = 6;
+  level.ref_13D67 = 3;
   ref_14348(var_0 + 30000);
-  level.ref_13d40 = 7;
-  level.ref_13d67 = 4;
+  level.ref_13D40 = 7;
+  level.ref_13D67 = 4;
   ref_14348(var_0 + 45000);
-  thread ref_13bd0();
-  level.ref_1404a = "enemy_mp_trial_jugg_average";
+  thread ref_13BD0();
+  level.ref_1404A = "enemy_mp_trial_jugg_average";
   ref_14348(var_0 + 60000);
-  level.ref_13d40 = 8;
-  level.ref_13d4d = 1;
+  level.ref_13D40 = 8;
+  level.ref_13D4D = 1;
   ref_14348(var_0 + 85000);
   var_1 = gettime();
-  level.ref_13d40 = 0;
+  level.ref_13D40 = 0;
 
-  while(level.ref_13d23.size) {
+  while(level.ref_13D23.size) {
     if(gettime() > var_1 + 10000) {
       break;
     }
@@ -72,60 +72,60 @@ function ref_128bc() {
     waitframe();
   }
 
-  ref_135fb();
+  ref_135FB();
   wait 10;
   var_2 = gettime();
-  level.ref_13d40 = 8;
-  level.ref_13d67 = 5;
-  level.ref_1404a = "enemy_mp_trial_jugg_elite";
+  level.ref_13D40 = 8;
+  level.ref_13D67 = 5;
+  level.ref_1404A = "enemy_mp_trial_jugg_elite";
   ref_14348(var_2 + 15000);
   level notify("white_phosphorus_end");
-  level.ref_13d67 = 6;
-  level.ref_13d4d = 2;
+  level.ref_13D67 = 6;
+  level.ref_13D4D = 2;
   ref_14348(var_2 + 15000 + 15000);
-  level.ref_13d25 = 1;
+  level.ref_13D25 = 1;
   level.chopper = spawn_chopper();
   level.chopper waittill("death");
-  ref_12f03(1000);
-  level.ref_13d40 = 10;
-  level.ref_13d67 = 8;
-  level.ref_13d25 = 0;
+  ref_12F03(1000);
+  level.ref_13D40 = 10;
+  level.ref_13D67 = 8;
+  level.ref_13D25 = 0;
   wait 5;
   mp_boneyard_gw_patch();
-  level.ref_13d40 = 0;
+  level.ref_13D40 = 0;
 }
 
-function ref_128ba() {
+function ref_128BA() {
   level waittill("player_spawned");
   thread mine_light_vfx();
   level.player waittill("juggernaut_start");
   var_0 = gettime();
-  _tablethide::ref_13d88();
-  _tablethide::ref_13d89(0);
+  _tablethide::ref_13D88();
+  _tablethide::ref_13D89(0);
   thread playerzombiestreamwaittillcomplete();
-  thread ref_129c3();
-  level.ref_13d6a = 1;
+  thread ref_129C3();
+  level.ref_13D6A = 1;
   level.player.maxhealth = 10000;
   level.player.health = 10000;
   level.healthregendisabled = 1;
-  level.ref_1404a = "enemy_mp_trial_jugg_noob";
-  level.ref_13d40 = 7;
-  level.ref_13d67 = 2;
+  level.ref_1404A = "enemy_mp_trial_jugg_noob";
+  level.ref_13D40 = 7;
+  level.ref_13D67 = 2;
   ref_14348(var_0 + 20000);
-  level.ref_13d40 = 8;
-  level.ref_13d67 = 3;
+  level.ref_13D40 = 8;
+  level.ref_13D67 = 3;
   ref_14348(var_0 + 35000);
-  level.ref_13d40 = 9;
-  level.ref_13d67 = 4;
+  level.ref_13D40 = 9;
+  level.ref_13D67 = 4;
   ref_14348(var_0 + 50000);
-  thread ref_13bd0();
-  level.ref_1404a = "enemy_mp_trial_jugg_average";
+  thread ref_13BD0();
+  level.ref_1404A = "enemy_mp_trial_jugg_average";
   ref_14348(var_0 + 65000);
-  level.ref_13d40 = 10;
-  level.ref_13d4d = 2;
+  level.ref_13D40 = 10;
+  level.ref_13D4D = 2;
   ref_14348(var_0 + 75000);
   var_1 = gettime();
-  level.ref_13d40 = 0;
+  level.ref_13D40 = 0;
 
   while(level.agentarray.size) {
     if(gettime() > var_1 + 10000) {
@@ -135,26 +135,26 @@ function ref_128ba() {
     waitframe();
   }
 
-  ref_135fb();
+  ref_135FB();
   wait 10;
   var_2 = gettime();
-  level.ref_13d40 = 10;
-  level.ref_13d67 = 5;
-  level.ref_1404a = "enemy_mp_trial_jugg_elite";
+  level.ref_13D40 = 10;
+  level.ref_13D67 = 5;
+  level.ref_1404A = "enemy_mp_trial_jugg_elite";
   ref_14348(var_2 + 30000);
   level notify("white_phosphorus_end");
-  level.ref_13d67 = 6;
-  level.ref_13d4d = 3;
+  level.ref_13D67 = 6;
+  level.ref_13D4D = 3;
   ref_14348(var_2 + 30000 + 30000);
-  level.ref_13d40 = 0;
+  level.ref_13D40 = 0;
   level.chopper = spawn_chopper();
   level.chopper waittill("death");
-  ref_12f03(1000);
-  level.ref_13d40 = 10;
-  level.ref_13d67 = 8;
+  ref_12F03(1000);
+  level.ref_13D40 = 10;
+  level.ref_13D67 = 8;
   wait 5;
   mp_boneyard_gw_patch();
-  level.ref_13d40 = 0;
+  level.ref_13D40 = 0;
 }
 
 function ref_14348(var_0) {
@@ -168,7 +168,7 @@ function playerzombiestreamwaittillcomplete() {
   var_0 = scripts\mp\spawnlogic::getspawnpointarray("mp_dm_spawn_start");
   var_0 = sortbydistance(var_0, level.player.origin);
 
-  foreach(var_2 in level.ref_13d23) {
+  foreach(var_2 in level.ref_13D23) {
     var_2 setgoalpos(var_0[var_0.size - 1].origin);
   }
 
@@ -184,10 +184,10 @@ function playerzombiestreamwaittillcomplete() {
   scripts\mp\gamelogic::restart();
 }
 
-function ref_129c3() {
-  level.ref_13d5d = 1;
+function ref_129C3() {
+  level.ref_13D5D = 1;
 
-  while(level.ref_13d5d) {
+  while(level.ref_13D5D) {
     wait 1;
     triggeroneoffradarsweep(level.player);
   }
@@ -209,15 +209,15 @@ function mine_light_vfx() {
   level.cratedata.configs["juggernaut"].activatecallback = undefined;
 }
 
-function ref_135fb() {
+function ref_135FB() {
   level.player thread scripts\mp\utility\dialog::leaderdialogonplayer(level.player.team + "_enemy_white_phosphorus_inbound");
   var_0 = [];
   GscBinSkip0(0x2e, 0, spawnStruct());
 }
 
 function spawn_chopper() {
-  while(level.ref_13d24.size) {
-    foreach(var_1 in level.ref_13d24) {
+  while(level.ref_13D24.size) {
+    foreach(var_1 in level.ref_13D24) {
       if(!var_1 agentcanseesentient(level.player)) {
         var_1 kill();
       }
@@ -400,7 +400,7 @@ function goodwork(var_0) {
   return true;
 }
 
-function ref_13bd0() {
+function ref_13BD0() {
   level.player thread scripts\mp\utility\dialog::leaderdialogonplayer(level.player.team + "_enemy_toma_strike_inbound");
   level endon("nuke_detonated");
   level.player endon("death");
@@ -459,7 +459,7 @@ function mp_boneyard_gw_patch() {
   playsoundatpos(var_4, "iw8_nuke_dist_launch");
   level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_launchmissile(undefined, undefined, var_4, var_2, var_1);
   wait var_1;
-  ref_12f04();
+  ref_12F04();
   level thread _calloutmarkerping_handleluinotify_acknowledged::setnuketimescalefactor();
   level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_explosion(undefined, var_5);
   level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_earthquake(undefined, var_5);
@@ -468,12 +468,12 @@ function mp_boneyard_gw_patch() {
   wait 0.5;
   level thread _calloutmarkerping_handleluinotify_acknowledged::nuke_fadeflashvision(1, 2);
   wait 4.5;
-  _calloutmarkerping_handleluinotify_acknowledged::ref_11ef4();
+  _calloutmarkerping_handleluinotify_acknowledged::ref_11EF4();
   level.movetonewprop = level.player.health;
   level.player kill();
-  level thread _calloutmarkerping_handleluinotify_acknowledged::ref_11ef1(2);
+  level thread _calloutmarkerping_handleluinotify_acknowledged::ref_11EF1(2);
 
-  foreach(var_7 in level.ref_13d23) {
+  foreach(var_7 in level.ref_13D23) {
     var_7 dodamage(99999, var_2);
   }
 
@@ -484,45 +484,45 @@ function mortar_init(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 
 function ai_init() {
   level waittill("player_spawned");
-  level.ref_13d23 = [];
-  level.ref_13d24 = [];
-  level.ref_13d66 = [];
-  level.ref_13d40 = 0;
-  level.ref_13d67 = 1;
-  level.ref_1404a = "enemy_mp_trial_jugg_noob";
+  level.ref_13D23 = [];
+  level.ref_13D24 = [];
+  level.ref_13D66 = [];
+  level.ref_13D40 = 0;
+  level.ref_13D67 = 1;
+  level.ref_1404A = "enemy_mp_trial_jugg_noob";
 
   for(;;) {
-    while(level.ref_13d40 <= level.agentarray.size - scripts\mp\mp_agent::getfreeagentcount()) {
+    while(level.ref_13D40 <= level.agentarray.size - scripts\mp\mp_agent::getfreeagentcount()) {
       waitframe();
     }
 
-    if(istrue(level.ref_13d4d)) {
+    if(istrue(level.ref_13D4D)) {
       ref_13544();
-      level.ref_13d4d--;
+      level.ref_13D4D--;
     } else {
-      ref_134ef();
+      ref_134EF();
     }
 
     waitframe();
   }
 }
 
-function ref_134ef() {
+function ref_134EF() {
   if(!scripts\engine\utility::flag_exist("scriptables_ready")) {
     scripts\engine\utility::flag_init("scriptables_ready");
   }
 
-  if(!isDefined(level.agent_funcs["actor_" + level.ref_1404a])) {
-    level.agent_funcs["actor_" + level.ref_1404a] = [];
-    level.agent_funcs["actor_" + level.ref_1404a]["gametype_on_damaged"] = &ref_13d28;
-    level.agent_funcs["actor_" + level.ref_1404a]["gametype_on_killed"] = &ref_13d29;
+  if(!isDefined(level.agent_funcs["actor_" + level.ref_1404A])) {
+    level.agent_funcs["actor_" + level.ref_1404A] = [];
+    level.agent_funcs["actor_" + level.ref_1404A]["gametype_on_damaged"] = &ref_13D28;
+    level.agent_funcs["actor_" + level.ref_1404A]["gametype_on_killed"] = &ref_13D29;
   }
 
-  var_0 = scripts\mp\mp_agent::spawnnewagentaitype(level.ref_1404a, play_player_falling_anims(), (0, 0, 0));
+  var_0 = scripts\mp\mp_agent::spawnnewagentaitype(level.ref_1404A, play_player_falling_anims(), (0, 0, 0));
   var_0.a.disablelongdeath = 1;
   var_0 enabletraversals(0);
   var_0.goalradius = 750;
-  level.ref_13d23 = scripts\engine\utility::array_add(level.ref_13d23, var_0);
+  level.ref_13D23 = scripts\engine\utility::array_add(level.ref_13D23, var_0);
   thread bot_abort_tactical_goal_for_revive();
   thread bot_cache_entrances_to_other_zones();
   var_0 setgoalentity(level.player);
@@ -536,15 +536,15 @@ function ref_13544() {
 
   if(!isDefined(level.agent_funcs["actor_enemy_mp_trial_juggernaut"])) {
     level.agent_funcs["actor_enemy_mp_trial_juggernaut"] = [];
-    level.agent_funcs["actor_enemy_mp_trial_juggernaut"]["gametype_on_damaged"] = &ref_13d28;
-    level.agent_funcs["actor_enemy_mp_trial_juggernaut"]["gametype_on_killed"] = &ref_13d29;
+    level.agent_funcs["actor_enemy_mp_trial_juggernaut"]["gametype_on_damaged"] = &ref_13D28;
+    level.agent_funcs["actor_enemy_mp_trial_juggernaut"]["gametype_on_killed"] = &ref_13D29;
   }
 
   var_0 = scripts\mp\mp_agent::spawnnewagentaitype("enemy_mp_trial_juggernaut", play_player_falling_anims(), (0, 0, 0));
   var_0.a.disablelongdeath = 1;
   var_0 enabletraversals(0);
-  level.ref_13d23 = scripts\engine\utility::array_add(level.ref_13d23, var_0);
-  level.ref_13d24 = scripts\engine\utility::array_add(level.ref_13d24, var_0);
+  level.ref_13D23 = scripts\engine\utility::array_add(level.ref_13D23, var_0);
+  level.ref_13D24 = scripts\engine\utility::array_add(level.ref_13D24, var_0);
   var_0 setgoalentity(level.player);
   var_0 agentsetfavoriteenemy(level.player);
   var_0.favoriteenemy = level.player;
@@ -575,7 +575,7 @@ function play_player_falling_anims() {
   var_12 = int(clamp(var_6.size, 0, 4));
   var_13 = randomintrange(0, var_12);
 
-  if(istrue(level.ref_13d25)) {
+  if(istrue(level.ref_13D25)) {
     var_13 = var_6.size - 1 - var_13;
   }
 
@@ -595,14 +595,14 @@ function bot_abort_tactical_goal_for_revive() {
 function bot_abort_emp_pickup() {
   self notify("reset_shooter_timer");
   self endon("reset_shooter_timer");
-  level.ref_13d66[self.entity_number] = self;
+  level.ref_13D66[self.entity_number] = self;
   var_0 = gettime() + 750;
 
   while(var_0 > gettime() && self.health > 0) {
     waitframe();
   }
 
-  level.ref_13d66 = scripts\engine\utility::array_remove_key(level.ref_13d66, self.entity_number);
+  level.ref_13D66 = scripts\engine\utility::array_remove_key(level.ref_13D66, self.entity_number);
 }
 
 function bot_cache_entrances_to_other_zones() {
@@ -610,8 +610,8 @@ function bot_cache_entrances_to_other_zones() {
   self.dontevershoot = 0;
 
   for(;;) {
-    var_0 = level.ref_13d66.size >= level.ref_13d67;
-    var_1 = !isDefined(level.ref_13d66[self.entity_number]);
+    var_0 = level.ref_13D66.size >= level.ref_13D67;
+    var_1 = !isDefined(level.ref_13D66[self.entity_number]);
 
     if(var_0 && var_1) {
       self.dontevershoot = 1;
@@ -623,30 +623,30 @@ function bot_cache_entrances_to_other_zones() {
   }
 }
 
-function ref_13d28(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
+function ref_13D28(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(var_5.basename == level.player.primaryweaponobj.basename) {
     var_1 thread scripts\mp\damagefeedback::updatedamagefeedback("standard", var_2 >= self.health);
     return;
   }
 }
 
-function ref_13d29(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  level.ref_13d23 = scripts\engine\utility::array_remove(level.ref_13d23, self);
-  level.ref_13d24 = scripts\engine\utility::array_remove(level.ref_13d24, self);
+function ref_13D29(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  level.ref_13D23 = scripts\engine\utility::array_remove(level.ref_13D23, self);
+  level.ref_13D24 = scripts\engine\utility::array_remove(level.ref_13D24, self);
 
   if(var_4.basename == level.player.primaryweaponobj.basename) {
     if(self.agent_type == "actor_enemy_mp_trial_juggernaut") {
-      thread ref_12f03(500);
+      thread ref_12F03(500);
       return;
     }
 
-    thread ref_12f03(100);
+    thread ref_12F03(100);
     return;
   }
 }
 
-function ref_12f06() {
-  _tablethide::ref_13d8c(4000);
+function ref_12F06() {
+  _tablethide::ref_13D8C(4000);
   level.score = [];
 
   if(game["trial"]["best_score"] == -1) {
@@ -728,13 +728,13 @@ function hud_set_reward_tier(var_0) {
   _tablethide::trial_ui_set_reward_tier_preview(var_2);
 }
 
-function ref_12f03(var_0) {
+function ref_12F03(var_0) {
   if(!isDefined(level.vehicle_damage_setperkmoddamage)) {
     level.vehicle_damage_setperkmoddamage = 1;
   }
 
   var_1 = min(100000, var_0 * level.vehicle_damage_setperkmoddamage);
-  _tablethide::ref_13d8b(level.vehicle_damage_setperkmoddamage);
+  _tablethide::ref_13D8B(level.vehicle_damage_setperkmoddamage);
   level.vehicle_damage_setperkmoddamage++;
 
   if(level.score["highest_combo"] < level.vehicle_damage_setperkmoddamage) {
@@ -748,7 +748,7 @@ function ref_12f03(var_0) {
   score_calculate();
 }
 
-function ref_12f04() {
+function ref_12F04() {
   level.score["nuked"] = 50000;
   _tablethide::trial_ui_set_stat_and_bonus_score(3, "stat_nuked", 0, level.score["nuked"]);
   score_calculate();
@@ -765,7 +765,7 @@ function hidedangercircle() {
 
   wait 0.25;
   level.vehicle_damage_setperkmoddamage = 1;
-  _tablethide::ref_13d8b(0);
+  _tablethide::ref_13D8B(0);
 }
 
 function dialog_init() {
@@ -867,7 +867,7 @@ function playingcoughdamagesound(var_0) {
 }
 
 function build_vehicle_drop_off_list() {
-  level.ref_13d32 = &ref_13d35;
+  level.ref_13D32 = &ref_13D35;
 
   if(!isDefined(game["trial"]["analytics"])) {
     game["trial"]["analytics"] = [];
@@ -878,7 +878,7 @@ function build_vehicle_drop_off_list() {
   }
 }
 
-function ref_13d35() {
+function ref_13D35() {
   var_0 = level.trial["missionID"];
   var_1 = getomnvar("ui_trial_reward_tier");
   var_2 = getomnvar("ui_trial_best_score");

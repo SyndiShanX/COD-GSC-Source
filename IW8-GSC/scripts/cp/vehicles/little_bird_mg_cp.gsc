@@ -62,7 +62,7 @@ function addquestrewardtierframeend(var_0, var_1, var_2) {
       var_7 = getdvarint("scr_calloutmarkerping_track_player_switch_to_danger", 1);
 
       if(var_7 && additionalrecondronetargets(var_6, var_3)) {
-        if(isDefined(level.ref_11a32) && getDvar("scr_br_gametype", "") == "kingslayer" && scripts\engine\utility::array_contains(level.ref_11a32, var_6)) {
+        if(isDefined(level.ref_11A32) && getDvar("scr_br_gametype", "") == "kingslayer" && scripts\engine\utility::array_contains(level.ref_11A32, var_6)) {
           var_4 = getdvarfloat("scr_calloutmarkerping_track_king_time", 0);
         } else {
           var_4 = getdvarfloat("scr_calloutmarkerping_track_player_time", 3);
@@ -725,7 +725,7 @@ function fx_ent_index(var_0, var_1) {
     var_4 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("ping", "ping_cp_getCPVehicleCallout")]](var_3);
 
     if(isDefined(var_4) && istrue(var_4.fail_on_transmission_timeout)) {
-      return var_4.ref_142f4;
+      return var_4.ref_142F4;
     }
   }
 
@@ -1284,7 +1284,7 @@ function fulton_interactions_disabled(var_0, var_1) {
   if(!isDefined(var_1)) {} else if(isPlayer(var_1)) {
     var_1 waittill("disconnect");
   } else {
-    var_1 scripts\engine\utility::ref_143a6("death", "pickup", "explode");
+    var_1 scripts\engine\utility::ref_143A6("death", "pickup", "explode");
   }
 
   if(isDefined(var_1.update_bomb_vest_lua)) {
@@ -1300,7 +1300,7 @@ function fulton_open(var_0, var_1) {
   var_2 = remove_prohibited_weapons(var_1);
 
   if(var_2 != "unsupported") {
-    scripts\engine\utility::ref_143a5("death_or_disconnect", "self_pickedupitem_" + var_2);
+    scripts\engine\utility::ref_143A5("death_or_disconnect", "self_pickedupitem_" + var_2);
   }
 
   calloutmarkerping_removecallout(var_0);
@@ -1318,11 +1318,11 @@ function calloutmarkerping_watchscriptabledeath(var_0, var_1) {
       return;
     }
 
-    var_2 scripts\engine\utility::ref_143a5("death", "fulton_takeoff");
+    var_2 scripts\engine\utility::ref_143A5("death", "fulton_takeoff");
   } else if(var_1.type == "br_plunder_box") {
     var_1 waittill("kiosk_disabled");
   } else {
-    level scripts\engine\utility::ref_143a8("pickedupweapon_kill_callout_" + var_1.type + var_1.origin, "lootcache_opened_kill_callout" + var_1.origin, "dropbag_kill_callout_" + var_1.origin, "tablethide_kill_callout_" + var_1.origin, "carriable_kill_callout_" + var_1.origin);
+    level scripts\engine\utility::ref_143A8("pickedupweapon_kill_callout_" + var_1.type + var_1.origin, "lootcache_opened_kill_callout" + var_1.origin, "dropbag_kill_callout_" + var_1.origin, "tablethide_kill_callout_" + var_1.origin, "carriable_kill_callout_" + var_1.origin);
   }
 
   addquestrewardtier("Watch scriptable death Remove ID: " + var_0);
@@ -1431,7 +1431,7 @@ function fx_thermal_end(var_0, var_1, var_2, var_3) {
   var_6 = fulton_repositorycountdownendcallback(var_4, var_0, var_3);
   var_7 = var_6 + var_1;
   var_8 = spawnStruct();
-  var_8.ref_134e0 = var_7;
+  var_8.ref_134E0 = var_7;
   var_8.poolid = var_0;
   var_8.generatenumbercode_array = 0;
   var_4.fxrings[var_2] = var_8;
@@ -1454,7 +1454,7 @@ function fulton_repositoryextractcallback(var_0, var_1, var_2) {
   var_6 = fxangles(var_3, var_5);
 
   if(var_6) {
-    var_7 = var_3.fxrings[var_5].ref_134e0;
+    var_7 = var_3.fxrings[var_5].ref_134E0;
 
     if(var_4 >= var_7) {
       var_8 = fx_thermal_end(var_3, var_0, var_4, var_5, var_2);
@@ -1492,7 +1492,7 @@ function fulton_used() {
       }
 
       foreach(var_4 in var_2.fxrings) {
-        if(var_0 > var_4.ref_134e0) {
+        if(var_0 > var_4.ref_134E0) {
           var_2.fxrings[var_5] = undefined;
         }
       }
@@ -1838,7 +1838,7 @@ function fulton_check_for_moving_platform(var_0) {
   var_1 = self;
   var_2 = var_1 calloutmarkerping_getsavedzoffset(var_0);
 
-  if(isDefined(var_2) && isDefined(var_2.ref_139eb)) {
+  if(isDefined(var_2) && isDefined(var_2.ref_139EB)) {
     return true;
   }
 

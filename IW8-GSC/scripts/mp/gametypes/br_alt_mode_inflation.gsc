@@ -13,14 +13,14 @@ function init() {
   level.debug_silo_jump.cost = getdvarint("scr_br_alt_mode_inflation_cost", 45);
   level.debug_silo_jump.minigamewinnersettings = getdvarfloat("scr_br_alt_mode_inflation_drop_percent", 1);
   level.debug_silo_jump.minigameapplyplayernamesettings = getdvarint("scr_br_alt_mode_inflation_drop_max", -1);
-  level.debug_silo_jump.ref_12c89 = getdvarfloat("scr_br_alt_mode_inflation_respawn_delay", 10);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerDropPlunderOnDeath", &playerdropplunderondeath);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("circleTimer", &circletimer);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("postPlunder", &ref_12804);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("markPlayerAsEliminatedOnKilled", &ref_11b16);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerGulagAutoWinWait", &ref_125bd);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("triggerRespawnOverlay", &ref_13dcb);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("assignSpectatorToSpectatePlayer", &assignspectatortospectateplayer);
+  level.debug_silo_jump.ref_12C89 = getdvarfloat("scr_br_alt_mode_inflation_respawn_delay", 10);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerDropPlunderOnDeath", &playerdropplunderondeath);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("circleTimer", &circletimer);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("postPlunder", &ref_12804);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("markPlayerAsEliminatedOnKilled", &ref_11B16);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerGulagAutoWinWait", &ref_125BD);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("triggerRespawnOverlay", &ref_13DCB);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("assignSpectatorToSpectatePlayer", &assignspectatortospectateplayer);
 
   if(!getdvarint("scr_br_alt_mode_inflation_gulag", 0)) {
     scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("gulag");
@@ -97,7 +97,7 @@ function ref_12804(var_0) {
   var_1 = 0;
 
   if(isDefined(var_0)) {
-    var_1 = var_0.ref_133e4;
+    var_1 = var_0.ref_133E4;
   }
 
   ref_14012(var_1);
@@ -131,10 +131,10 @@ function ref_14012(var_0) {
   }
 }
 
-function ref_1336e(var_0) {
+function ref_1336E(var_0) {
   waittillframeend();
   scripts\mp\utility\lower_message::setlowermessageomnvar(9, int(gettime() + var_0 * 1000));
-  scripts\mp\gametypes\br_gulag::ref_131a2(1);
+  scripts\mp\gametypes\br_gulag::ref_131A2(1);
   thread spawn_drones(var_0);
 }
 
@@ -145,25 +145,25 @@ function spawn_drones(var_0) {
     wait var_0;
   }
 
-  scripts\mp\gametypes\br_gulag::ref_131a2(0);
+  scripts\mp\gametypes\br_gulag::ref_131A2(0);
   scripts\mp\utility\lower_message::setlowermessageomnvar(0);
 }
 
 function roof_combat_spawn_func() {
   var_0 = spawnStruct();
-  var_0.ref_133e4 = 1;
+  var_0.ref_133E4 = 1;
   return var_0;
 }
 
-function ref_11b16() {
+function ref_11B16() {
   return false;
 }
 
-function ref_125bd(var_0, var_1) {
+function ref_125BD(var_0, var_1) {
   if(!isDefined(var_0)) {
-    if(level.debug_silo_jump.ref_12c89) {
-      var_2 = level.debug_silo_jump.ref_12c89;
-      thread ref_1336e(var_2);
+    if(level.debug_silo_jump.ref_12C89) {
+      var_2 = level.debug_silo_jump.ref_12C89;
+      thread ref_1336E(var_2);
       wait var_2;
       return true;
     }
@@ -172,7 +172,7 @@ function ref_125bd(var_0, var_1) {
   return false;
 }
 
-function ref_13dcb(var_0) {
+function ref_13DCB(var_0) {
   return true;
 }
 
@@ -183,7 +183,7 @@ function assignspectatortospectateplayer(var_0, var_1) {
     return false;
   }
 
-  if(!isDefined(var_1) || !isPlayer(var_1) || !isalive(var_1) && !isDefined(var_1.ref_1391a)) {
+  if(!isDefined(var_1) || !isPlayer(var_1) || !isalive(var_1) && !isDefined(var_1.ref_1391A)) {
     return false;
   }
 
@@ -203,7 +203,7 @@ function cargo_truck_mg_mp_init(var_0) {
   level endon("brSpawnPlayersEnding");
   var_0 endon("assignSpectatorToSpectatePlayerWaitForTeam");
   var_0 endon("death_or_disconnect");
-  var_0 scripts\mp\gametypes\br_spectate::ref_126ab();
+  var_0 scripts\mp\gametypes\br_spectate::ref_126AB();
   var_0 setclientomnvar("ui_show_spectateHud", var_0 getentitynumber());
   wait 1;
   var_1 = scripts\mp\gametypes\br_spectate::regive_killstreak_after_use(var_0);

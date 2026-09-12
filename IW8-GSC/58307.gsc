@@ -4,11 +4,11 @@
 ***********************************************/
 
 function keypad_check_levelinput() {
-  if(!isDefined(level.ref_13d51)) {
-    level.ref_13d51 = [];
+  if(!isDefined(level.ref_13D51)) {
+    level.ref_13D51 = [];
   }
 
-  level.ref_13d51["pitcher"] = &init;
+  level.ref_13D51["pitcher"] = &init;
 }
 
 function init() {
@@ -25,14 +25,14 @@ function init() {
 
   level.course_targets = getEntArray("hole_target", "targetname");
   level.movers = getEntArray("mover", "targetname");
-  level.ref_11db8 = scripts\engine\utility::getStructArray("mover_start", "script_noteworthy");
+  level.ref_11DB8 = scripts\engine\utility::getStructArray("mover_start", "script_noteworthy");
   level.lights = getEntArray("target_light", "targetname");
   _tablethide::waittill_player_isDefined();
   thread player_init();
   thread ref_12160();
   thread script_gameobjetname();
-  thread ref_12a8f();
-  thread ref_1378e();
+  thread ref_12A8F();
+  thread ref_1378E();
   thread set_chopper_search_speed();
   thread player_monitor_death();
 
@@ -46,25 +46,25 @@ function init() {
   }
 
   foreach(var_7 in level.movers) {
-    thread ref_11db1();
+    thread ref_11DB1();
   }
 
   hud_init();
-  ref_128bd();
+  ref_128BD();
 }
 
-function ref_128bd() {
+function ref_128BD() {
   level waittill("start");
 
   for(;;) {
     trial_score_init();
     level.target_wave = 0;
     course_start_wait();
-    _tablethide::ref_13d88();
-    _tablethide::ref_13d89(0);
+    _tablethide::ref_13D88();
+    _tablethide::ref_13D89(0);
     wave_single_progression(level.targets, 1);
     score_calculate(1);
-    _tablethide::ref_13d89(1);
+    _tablethide::ref_13D89(1);
     _tablethide::trial_ui_waittill_retry();
     level notify("retry");
     level.player freezecontrols(0);
@@ -79,7 +79,7 @@ function ref_128bd() {
   }
 }
 
-function ref_1378e() {
+function ref_1378E() {
   var_0 = getEnt("grenade_box", "targetname");
   var_0 setHintString(&"MP_INGAME_ONLY/PRESS_TO_START_GAME");
   var_0 setCursorHint("hint_button");
@@ -191,7 +191,7 @@ function target_think() {
       if(level.trial["variant"] == "mover") {
         if(isDefined(self.script_parameters) && isDefined(self.light)) {
           wait 20 * (int(self.script_parameters) - 1);
-          thread ref_13b6d();
+          thread ref_13B6D();
         }
       }
     }
@@ -209,12 +209,12 @@ function target_think() {
         break;
       }
 
-      thread ref_13a5c(var_0);
+      thread ref_13A5C(var_0);
     }
   }
 }
 
-function ref_13b6d() {
+function ref_13B6D() {
   self endon("activated");
   wait 15;
 
@@ -335,7 +335,7 @@ function weaponusagecheck(var_0, var_1) {
   playFXOnTag(scripts\engine\utility::getfx("vfx_light_red"), self, "stationary_trainyard_signal_lights_01_red_spdball");
 }
 
-function ref_13a5c(var_0) {
+function ref_13A5C(var_0) {
   level endon("target_hit");
 
   while(isDefined(var_0)) {
@@ -377,8 +377,8 @@ function ref_13a5c(var_0) {
   }
 }
 
-function ref_11db1() {
-  self.mover = scripts\engine\utility::getclosest(self.origin, level.ref_11db8, 32);
+function ref_11DB1() {
+  self.mover = scripts\engine\utility::getclosest(self.origin, level.ref_11DB8, 32);
 
   if(!isDefined(self.mover)) {
     return;
@@ -396,11 +396,11 @@ function ref_11db1() {
 
   for(;;) {
     level waittill("new_wave");
-    ref_11db2();
+    ref_11DB2();
   }
 }
 
-function ref_11db2() {
+function ref_11DB2() {
   for(;;) {
     var_0 = self.mover_ends[self.moveforward];
     var_1 = distance(self.origin, var_0.origin);
@@ -607,11 +607,11 @@ function light_tank_monitordriverturretprojectilefire() {
 }
 
 function dialog_missed_shots_watcher() {
-  level.ref_11c48 = 0;
+  level.ref_11C48 = 0;
 
   for(;;) {
     level waittill("new_wave");
-    level.ref_132bb = 3;
+    level.ref_132BB = 3;
     level_use_carepackage();
   }
 }
@@ -635,19 +635,19 @@ function level_spawnplayer(var_0) {
   }
 
   if(!var_1) {
-    level.ref_11c48++;
+    level.ref_11C48++;
 
-    if(level.ref_11c48 >= level.ref_132bb) {
+    if(level.ref_11C48 >= level.ref_132BB) {
       level.player scripts\mp\utility\dialog::leaderdialogonplayer("sniper_hurry_up");
-      level.ref_11c48 = 0;
-      level.ref_132bb++;
+      level.ref_11C48 = 0;
+      level.ref_132BB++;
       return;
     }
 
     return;
   }
 
-  level.ref_11c48 = 0;
+  level.ref_11C48 = 0;
 }
 
 function ref_12160() {
@@ -669,7 +669,7 @@ function set_chopper_search_speed() {
   }
 }
 
-function ref_12a90(var_0, var_1) {
+function ref_12A90(var_0, var_1) {
   var_2 = var_0.rechargeequipmentstate;
 
   if(!isDefined(var_2.progress[var_1])) {
@@ -701,14 +701,14 @@ function ref_12a90(var_0, var_1) {
   }
 }
 
-function ref_12a8f() {
+function ref_12A8F() {
   while(!isalive(level.player)) {
     waitframe();
   }
 
   for(;;) {
     while(isalive(level.player)) {
-      ref_12a91(level.player);
+      ref_12A91(level.player);
       wait 0.1;
     }
 
@@ -716,19 +716,19 @@ function ref_12a8f() {
   }
 }
 
-function ref_12a91(var_0) {
+function ref_12A91(var_0) {
   if(!isDefined(var_0.rechargeequipmentstate)) {
     var_0.rechargeequipmentstate = spawnStruct();
     var_0.rechargeequipmentstate.progress = [];
     var_0.rechargeequipmentstate.recharged = [];
   }
 
-  ref_12a90(var_0, "primary");
-  ref_12a90(var_0, "secondary");
-  ref_12a92(var_0);
+  ref_12A90(var_0, "primary");
+  ref_12A90(var_0, "secondary");
+  ref_12A92(var_0);
 }
 
-function ref_12a92(var_0) {
+function ref_12A92(var_0) {
   var_1 = 0;
   var_2 = 0;
   var_3 = -1;
@@ -783,12 +783,12 @@ function script_gameobjetname() {
 }
 
 function weapon_xp_iw8_sn_awhiskey() {
-  level.ref_12d3a = getEntArray("rifle", "targetname");
+  level.ref_12D3A = getEntArray("rifle", "targetname");
   level.ref_12382 = getEntArray("pitcher", "targetname");
   wait 0.05;
   jumpiffalse(level.trial["missionID"] == 801 || true) LOC_0000009c;
 
-  foreach(var_1 in level.ref_12d3a) {
+  foreach(var_1 in level.ref_12D3A) {
     var_1 setlightintensity(0);
   }
 
@@ -811,7 +811,7 @@ function player_monitor_death() {
 }
 
 function build_vehicle_drop_off_list() {
-  level.ref_13d32 = &ref_13d37;
+  level.ref_13D32 = &ref_13D37;
 
   if(!isDefined(game["trial"]["analytics"])) {
     game["trial"]["analytics"] = [];
@@ -820,7 +820,7 @@ function build_vehicle_drop_off_list() {
   }
 }
 
-function ref_13d37() {
+function ref_13D37() {
   var_0 = level.trial["missionID"];
   var_1 = getomnvar("ui_trial_reward_tier");
   var_2 = getomnvar("ui_trial_best_score");

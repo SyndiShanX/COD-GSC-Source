@@ -11,7 +11,7 @@ function main() {
   scripts\mp\load::main();
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
 
-  if(istrue(level.ref_11ad3)) {
+  if(istrue(level.ref_11AD3)) {
     scripts\mp\compass::setupminimap("compass_map_mp_malyshev_10v10", "codcaster_compass_map_mp_malyshev_10v10");
   } else {
     scripts\mp\compass::setupminimap("compass_map_mp_malyshev", "codcaster_compass_map_mp_malyshev");
@@ -27,7 +27,7 @@ function main() {
   level.music_style = "eastern_europe";
 
   if(getdvarint("scr_map_use10v10_objectives", 0) == 0) {
-    scripts\cp_mp\utility\game_utility::ref_12b25();
+    scripts\cp_mp\utility\game_utility::ref_12B25();
     thread little_bird_mg_mp_waitandspawn();
   }
 

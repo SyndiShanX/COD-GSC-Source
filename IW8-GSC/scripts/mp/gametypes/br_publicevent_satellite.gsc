@@ -6,15 +6,15 @@
 function init() {
   var_0 = spawnStruct();
   var_0.weight = getdvarfloat("scr_br_pe_satellite_weight", 0);
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.ref_14382 = &ref_14382;
   var_0.attackerswaittime = &attackerswaittime;
   var_0.isfeaturedisabled = &isfeaturedisabled;
   var_0.postinitfunc = &postinitfunc;
-  var_0.ref_11b78 = getdvarint("scr_br_pe_satellite_max_times", 1);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_satellite_max_times", 1);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("satellite", "20 2020205 0 0 0");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("satellite");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(7, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(7, var_0);
 }
 
 function postinitfunc() {
@@ -22,7 +22,7 @@ function postinitfunc() {
   thread deletecircle();
 }
 
-function ref_140cf() {
+function ref_140CF() {
   return true;
 }
 

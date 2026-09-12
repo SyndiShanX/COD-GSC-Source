@@ -3,7 +3,7 @@
  * Script: scripts\cp\maps\cp_armsrace\armsrace_objective\cp_armsrace_objective.gsc
 ************************************************************************************/
 
-function ref_12b0e() {
+function ref_12B0E() {
   level._effect["vfx_armsrace_smoke"] = loadfx("vfx/iw8_cp/vfx_cp_smoke_gren_loop.vfx");
 }
 
@@ -89,31 +89,31 @@ function ref_13867(var_0) {
 
 function ref_13833(var_0) {
   scripts\engine\utility::flag_wait("armsrace_spawn_functions_registered");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   level waittill("armsrace_cache_secured");
 }
 
 function ref_13834(var_0) {
   scripts\engine\utility::flag_wait("armsrace_spawn_functions_registered");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   level waittill("armsrace_cache_secured");
 }
 
 function ref_13835(var_0) {
   scripts\engine\utility::flag_wait("armsrace_spawn_functions_registered");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   level waittill("armsrace_cache_secured");
 }
 
 function ref_13836(var_0) {
   scripts\engine\utility::flag_wait("armsrace_spawn_functions_registered");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   level waittill("armsrace_cache_secured");
 }
 
 function ref_13837(var_0) {
   scripts\engine\utility::flag_wait("armsrace_spawn_functions_registered");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   level waittill("armsrace_cache_opened");
 }
 
@@ -159,13 +159,13 @@ function docache1() {
   thread scripts\cp\cp_objectives::run_objective("obj_armsrace_defend1");
   waitforoneplayernearpoint(prevcallback(1), 500);
   level thread scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_lass_armsrace_objective_1st_obj_10", "allies");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_cache_1");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_cache_1");
   level waittill("armsrace_cache1_activated");
   thread loothide(level);
   thread mp_m_overunder_patch(level);
   thread start_convoy("convoy_01", "convoy_start_01");
   wait 1;
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_reinforcements_1");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_reinforcements_1");
   level thread scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_kama_armsrace_objective_1st_obj_defend_10", "allies");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("armsrace_phase1");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("armsrace_phase1_sniper");
@@ -184,7 +184,7 @@ function docache1() {
   level.camper_damage_thread++;
   level notify("stop_armsrace_smoke");
   level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_lass_armsrace_objective_1st_obj_complete_10", "allies");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_cache_2");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_cache_2");
 }
 
 function mp_m_overunder_patch(var_0) {
@@ -199,9 +199,9 @@ function loothide(var_0) {
   level endon("game_ended");
   var_1 = 10;
   var_2 = max(var_1, 120 - var_0);
-  level scripts\engine\utility::ref_143ba(var_2, "obj_armsrace_defend1_timer_complete", "armsrace_cache_secured");
+  level scripts\engine\utility::ref_143BA(var_2, "obj_armsrace_defend1_timer_complete", "armsrace_cache_secured");
   var_3 = getEnt("super_store_trig", "targetname");
-  thread ref_1447e();
+  thread ref_1447E();
   thread scripts\cp\cp_modular_spawning::run_spawn_module("armsrace_phase_hold");
   level waittill("armsrace_player_entering_super");
   thread set_guy_to_specific_pos(level);
@@ -209,7 +209,7 @@ function loothide(var_0) {
   thread scripts\cp\cp_modular_spawning::stop_module_by_groupname("armsrace_phase_hold");
 }
 
-function ref_1447e() {
+function ref_1447E() {
   for(;;) {
     self waittill("trigger", var_0);
 
@@ -241,7 +241,7 @@ function docache2() {
   wait 1;
   thread dosmokecurtains(level, "armsrace_smoke_bomb_2");
   level thread scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_kama_armsrace_objective_2nd_obj_defend_10", "allies");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_reinforcements_2");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_reinforcements_2");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("armsrace_phase2");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("armsrace_phase2_lasers");
   scripts\cp\cp_modular_spawning::set_spawn_scoring_params_for_group("wave_spawning", undefined, 20000, 30000);
@@ -256,7 +256,7 @@ function docache2() {
   level.camper_damage_thread++;
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("wave_spawning");
   level notify("stop_armsrace_smoke");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_cache_3");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_cache_3");
   level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_lass_armsrace_objective_2nd_obj_complete_10", "allies");
   level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_kama_armsrace_objective_2nd_obj_complete_20", "allies");
   level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_lass_armsrace_objective_2nd_obj_complete_30", "allies");
@@ -292,7 +292,7 @@ function docache3(var_0) {
   level waittill("armsrace_cache3_activated");
   thread scripts\cp\cp_objectives::run_objective("obj_armsrace_defend3");
   wait 1;
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_reinforcements_3");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_reinforcements_3");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("armsrace_heli_1");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("armsrace_heli_2");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("armsrace_phase3");
@@ -304,7 +304,7 @@ function docache3(var_0) {
   level notify("armsrace_cache_secured");
   var_0.interaction3.active = 0;
   level notify("stop_armsrace_smoke");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_cache_4");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_cache_4");
   level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_lass_armsrace_objective_3rd_obj_complete_10", var_0.currentteam);
   level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_lass_armsrace_objective_3rd_obj_complete_20", var_0.currentteam);
 }
@@ -330,7 +330,7 @@ function docache4(var_0) {
   start_convoy("convoy_02", "convoy_start_02");
   wait 1;
   level thread scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_kama_armsrace_objective_4th_obj_defend_10", "allies");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_reinforcements_4");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_reinforcements_4");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("armsrace_phase4");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("armsrace_jugg");
   level thread scripts\cp\cp_wave_spawning::killstreaks(2, "armsrace_cache4");
@@ -356,7 +356,7 @@ function docache4(var_0) {
   thread lossendgame();
   level waittill("armsrace_cache_opened");
   level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_lass_armsrace_objective_4th_obj_open_10", "allies");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_warhead_secured");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_warhead_secured");
 }
 
 function lower_airlock() {
@@ -476,10 +476,10 @@ function init_silo_thrust_obj(var_0) {
 function camera_loadout_showcase_preview_small_sticker() {
   level endon("game_ended");
   level waittill("armsrace_activate_interaction_4");
-  self.ref_11f94 = scripts\engine\utility::getStruct("armsrace_cache_4", "script_noteworthy").origin;
+  self.ref_11F94 = scripts\engine\utility::getStruct("armsrace_cache_4", "script_noteworthy").origin;
   self.objid = scripts\cp\cp_objectives::requestworldid("armsrace_cache4WID");
   objective_state(self.objid, "current");
-  objective_setlocation(self.objid, 0, self.ref_11f94);
+  objective_setlocation(self.objid, 0, self.ref_11F94);
   objective_icon(self.objid, "icon_waypoint_objective_general");
   objective_setlabel(self.objid, &"CP_BR_SYRK_OBJECTIVES/ARMSRACE_CACHE");
   self makeusable();
@@ -533,7 +533,7 @@ function activationnuke(var_0, var_1) {
     return;
   }
 
-  thread ref_1212a(var_0.trial_target_enemy_killed_func.cratemodel);
+  thread ref_1212A(var_0.trial_target_enemy_killed_func.cratemodel);
 }
 
 function initarms1() {
@@ -558,12 +558,12 @@ function initarms1() {
 function camera_loadout_showcase_preview_large_sticker_alt3() {
   level endon("game_ended");
   level waittill("armsrace_activate_interaction_1");
-  self.ref_11f94 = scripts\engine\utility::getStruct("armsrace_cache_1", "script_noteworthy").origin;
+  self.ref_11F94 = scripts\engine\utility::getStruct("armsrace_cache_1", "script_noteworthy").origin;
   self.objid = scripts\cp\cp_objectives::requestworldid("armsrace_cache1WID");
   objective_state(self.objid, "current");
   objective_setplayintro(self.objid, 1);
   objective_setplayoutro(self.objid, 1);
-  objective_setlocation(self.objid, 0, self.ref_11f94);
+  objective_setlocation(self.objid, 0, self.ref_11F94);
   objective_icon(self.objid, "icon_waypoint_objective_general");
   objective_setlabel(self.objid, &"CP_BR_SYRK_OBJECTIVES/ARMSRACE_CACHE");
   self makeusable();
@@ -613,10 +613,10 @@ function initarms2() {
 function camera_loadout_showcase_preview_large_stock_alt1() {
   level endon("game_ended");
   level waittill("armsrace_activate_interaction_2");
-  self.ref_11f94 = scripts\engine\utility::getStruct("armsrace_cache_2", "script_noteworthy").origin;
+  self.ref_11F94 = scripts\engine\utility::getStruct("armsrace_cache_2", "script_noteworthy").origin;
   self.objid = scripts\cp\cp_objectives::requestworldid("armsrace_cache2WID");
   objective_state(self.objid, "current");
-  objective_setlocation(self.objid, 0, self.ref_11f94);
+  objective_setlocation(self.objid, 0, self.ref_11F94);
   objective_icon(self.objid, "icon_waypoint_objective_general");
   objective_setlabel(self.objid, &"CP_BR_SYRK_OBJECTIVES/ARMSRACE_CACHE");
   self makeusable();
@@ -724,8 +724,8 @@ function initobjspawners() {
   [[var_0]]("armsrace_phase5_sniper", 2, 2, 2, 0.5, undefined, "armsrace_phase5_sniper", &watchforstopwaves, undefined, undefined);
   [[var_0]]("armsrace_phase1_lasers", 6, 6, 6, 0.5, undefined, "armsrace_phase1_lasers");
   [[var_0]]("armsrace_phase4_lasers", 3, 3, 3, 0.5, undefined, "armsrace_phase4_lasers");
-  [[var_0]]("armsrace_phase1_sniper", 1, 1, 1, 0.5, undefined, "armsrace_phase1_sniper", &watchforstopwaves, &ref_1445e);
-  [[var_0]]("armsrace_phase1_sniper_2", 1, 1, 1, 0.5, undefined, "armsrace_phase1_sniper_2", &watchforstopwaves, &ref_1445e);
+  [[var_0]]("armsrace_phase1_sniper", 1, 1, 1, 0.5, undefined, "armsrace_phase1_sniper", &watchforstopwaves, &ref_1445E);
+  [[var_0]]("armsrace_phase1_sniper_2", 1, 1, 1, 0.5, undefined, "armsrace_phase1_sniper_2", &watchforstopwaves, &ref_1445E);
   [[var_0]]("armsrace_trucks_4", 6, 6, 6, [ &waitbetweenspawnwaveswithtimeout, 0.1, 5], undefined, "techo_phys_armsrace1", &watchforstopwaves, undefined, undefined);
   [[var_0]]("armsrace_trucks_5", 6, 6, 6, [ &waitbetweenspawnwaveswithtimeout, 0.1, 5], undefined, "techo_phys_armsrace2", &watchforstopwaves, undefined, undefined);
   [[var_0]]("payload_lasttrek_sniper", 2, 2, 2, 0.5, undefined, "payload_lasttrek_sniper");
@@ -847,8 +847,8 @@ function bomb_vest_timer_frozen(var_0, var_1, var_2) {
 
     level thread scripts\engine\utility::draw_circle(var_4, var_5, (1, 1, 0), 0.5, 0, 20);
 
-    if(isDefined(var_0.ref_127ea) && var_0.ref_127ea.size) {
-      foreach(var_7 in var_0.ref_127ea) {
+    if(isDefined(var_0.ref_127EA) && var_0.ref_127EA.size) {
+      foreach(var_7 in var_0.ref_127EA) {
         if(isDefined(var_7) && isai(var_7) && isalive(var_7)) {
           var_8 = var_7 getentitynumber();
 
@@ -872,7 +872,7 @@ function bomb_vest_explodes(var_0, var_1, var_2) {
 
   for(;;) {
     var_3 = printdata(var_0, var_2);
-    ref_13f8a(self, var_3);
+    ref_13F8A(self, var_3);
     var_4 = var_3.origin;
 
     if(isDefined(var_3.radius)) {
@@ -946,7 +946,7 @@ function protect_obj_a(var_0) {
   return var_2;
 }
 
-function ref_134d1(var_0) {
+function ref_134D1(var_0) {
   for(var_1 = 0; var_1 < var_0.size - 1; var_1++) {
     for(var_2 = var_1 + 1; var_2 < var_0.size; var_2++) {
       var_3 = 0;
@@ -1005,8 +1005,8 @@ function prematchplayedwelcomevo() {
   return var_0;
 }
 
-function ref_13f8a(var_0, var_1) {
-  if(scripts\engine\utility::array_contains(var_1.ref_127ea, var_0)) {
+function ref_13F8A(var_0, var_1) {
+  if(scripts\engine\utility::array_contains(var_1.ref_127EA, var_0)) {
     return false;
   }
 
@@ -1014,25 +1014,25 @@ function ref_13f8a(var_0, var_1) {
     return false;
   }
 
-  if(isDefined(var_0.initheadlessoperatorcustomization) && scripts\engine\utility::array_contains(var_0.initheadlessoperatorcustomization.ref_127ea, var_0)) {
-    var_0.initheadlessoperatorcustomization.ref_127ea = scripts\engine\utility::array_remove(var_0.initheadlessoperatorcustomization.ref_127ea, var_0);
+  if(isDefined(var_0.initheadlessoperatorcustomization) && scripts\engine\utility::array_contains(var_0.initheadlessoperatorcustomization.ref_127EA, var_0)) {
+    var_0.initheadlessoperatorcustomization.ref_127EA = scripts\engine\utility::array_remove(var_0.initheadlessoperatorcustomization.ref_127EA, var_0);
   }
 
   var_0.initheadlessoperatorcustomization = var_1;
-  var_1.ref_127ea[var_1.ref_127ea.size] = var_0;
+  var_1.ref_127EA[var_1.ref_127EA.size] = var_0;
   return true;
 }
 
 function triggeregg(var_0, var_1) {
-  if(!isDefined(var_0.ref_127ea)) {
-    var_0.ref_127ea = [];
+  if(!isDefined(var_0.ref_127EA)) {
+    var_0.ref_127EA = [];
     return false;
   }
 
   var_2 = pressure_overload_threshold(var_0, var_1);
   var_3 = [];
 
-  foreach(var_5 in var_0.ref_127ea) {
+  foreach(var_5 in var_0.ref_127EA) {
     if(!isDefined(var_5) || !isalive(var_5)) {
       continue;
     }
@@ -1051,8 +1051,8 @@ function triggeregg(var_0, var_1) {
     }
   }
 
-  var_0.ref_127ea = var_3;
-  var_11 = var_0.ref_127ea.size;
+  var_0.ref_127EA = var_3;
+  var_11 = var_0.ref_127EA.size;
   return var_11 >= var_2;
 }
 
@@ -1163,7 +1163,7 @@ function waitbetweenspawnwaveswithtimeout(var_0, var_1, var_2, var_3) {
   return var_1;
 }
 
-function ref_1445e(var_0) {
+function ref_1445E(var_0) {
   level endon("game_ended");
   wait 4;
 
@@ -1204,7 +1204,7 @@ function grenade_structs(var_0) {
   self.ignoreall = 1;
   self.goalradius = 64;
   self setgoalpos(scripts\engine\utility::getStruct(self.target, "targetname").origin);
-  scripts\engine\utility::ref_143a5("goal", "near_goal");
+  scripts\engine\utility::ref_143A5("goal", "near_goal");
   var_1 = scripts\engine\utility::getStruct("payload_molotov_origin", "targetname");
   var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   thread throw_molotov(var_1, var_2);
@@ -1603,10 +1603,10 @@ function spawn_atvs() {
   objective_setbackground(var_1, 1);
   objective_setshowoncompass(var_1, 1);
   objective_position(var_1, var_2);
-  thread ref_144d8(level);
+  thread ref_144D8(level);
 }
 
-function ref_144d8(var_0) {
+function ref_144D8(var_0) {
   level endon("game_ended");
   var_1 = scripts\cp\utility::array_merge(level.players, [level]);
   level scripts\engine\utility::waittill_any_ents_array(var_1, "entered_vehicle", "player_entered_safehouse_vol");
@@ -1623,7 +1623,7 @@ function heli_leaving_monitor(var_0) {
 
 #using_animtree("");
 
-function ref_1212a(var_0) {
+function ref_1212A(var_0) {
   if(!isDefined(var_0)) {
     scripts\cp\utility::debugprintline("no crate defined");
     level notify("armsrace_cache_opened");
@@ -1643,7 +1643,7 @@ function teamhasfreshsquadleadercandidate() {
   level.scr_animname["nuke"]["nuke_open"] = "cp_prop_nuclear_warhead_open";
 }
 
-function ref_11ce4(var_0) {
+function ref_11CE4(var_0) {
   level endon("game_ended");
   level endon("armsrace_cache_secured");
   var_1 = scripts\engine\utility::getStructArray("molotov_origin", "targetname");

@@ -98,7 +98,7 @@ function givedefaultloadout(var_0, var_1, var_2, var_3) {
 
   if(initmaxspeedforpathlengthtable(var_4)) {
     var_2 = 1;
-    thread ref_13b0f();
+    thread ref_13B0F();
   }
 
   var_4.spawnperk = 0;
@@ -194,10 +194,10 @@ function givedefaultloadout(var_0, var_1, var_2, var_3) {
   var_4 setactionslot(3, "altmode");
   var_4 notify("loadout_given");
   var_4.getc130knownsafeheight = undefined;
-  thread ref_11ec9();
+  thread ref_11EC9();
 }
 
-function ref_11ec9() {
+function ref_11EC9() {
   self endon("disconnect");
   self waittill("loadout_given");
 
@@ -351,19 +351,19 @@ function setmodelfromcustomization(var_0) {
   var_14.get_extra_focus_fire_multipler = runbrgametypefunc6("cargo_truck");
   var_14.vehicle_damage_endburndown = runbrgametypefunc6("jeep");
   var_14.x1opsenableelimination = runbrgametypefunc6("little_bird");
-  var_14.ref_139f7 = runbrgametypefunc6("tac_rover");
-  var_14.ref_13a47 = runbrgametypefunc6("tank_east");
-  var_14.ref_13a48 = rundomplateskybeam("tank_east");
-  var_14.ref_13a52 = runbrgametypefunc6("tank_west");
-  var_14.ref_13a53 = rundomplateskybeam("tank_west");
+  var_14.ref_139F7 = runbrgametypefunc6("tac_rover");
+  var_14.ref_13A47 = runbrgametypefunc6("tank_east");
+  var_14.ref_13A48 = rundomplateskybeam("tank_east");
+  var_14.ref_13A52 = runbrgametypefunc6("tank_west");
+  var_14.ref_13A53 = rundomplateskybeam("tank_west");
   var_14.c130airdrop_heightoverride = runcircles("apc", 4);
   var_14.check_carrier_status = runcircles("atv", 6);
   var_14.get_fake_digit_from_pool = runcircles("cargo_truck", 8);
   var_14.vehicle_damage_enginevisualclearcallback = runcircles("jeep", 10);
   var_14.x1opsendgame = runcircles("little_bird", 12);
-  var_14.ref_139f8 = runcircles("tac_rover", 14);
+  var_14.ref_139F8 = runcircles("tac_rover", 14);
   var_14.check_for_damage_scalar_change = runcontrolledcallback("atv");
-  var_14.ref_139fc = runcontrolledcallback("tac_rover");
+  var_14.ref_139FC = runcontrolledcallback("tac_rover");
   var_14.zombieingas = runcontrolledcallback("little_bird");
   self.ref_14238 = var_14;
 
@@ -377,8 +377,8 @@ function setmodelfromcustomization(var_0) {
     self[[level.change_to_terrorist_model_func]](self);
   }
 
-  if(isDefined(level.ref_127f3)) {
-    self[[level.ref_127f3]]();
+  if(isDefined(level.ref_127F3)) {
+    self[[level.ref_127F3]]();
     return;
   }
 }
@@ -878,12 +878,12 @@ function resetposition(var_0) {
   var_1 = self getplayerdata(level.loadoutsgroup, "customizationSetup", "operatorCustomization", var_0, "taunt");
 
   if(var_1 == 0) {
-    self.ref_1195c = tablelookup("operators.csv", 1, var_0, 23);
+    self.ref_1195C = tablelookup("operators.csv", 1, var_0, 23);
   } else {
-    self.ref_1195c = tablelookup("operatorquips.csv", 0, var_1, 6);
+    self.ref_1195C = tablelookup("operatorquips.csv", 0, var_1, 6);
   }
 
-  return self.ref_1195c;
+  return self.ref_1195C;
 }
 
 function getoperatorsuperfaction(var_0) {
@@ -1427,7 +1427,7 @@ function respawnitems_assignrespawnitems(var_0) {
   self.respawnitems = var_0;
 }
 
-function ref_13b0f() {
+function ref_13B0F() {
   if(!initmaxspeedforpathlengthtable(self)) {
     return;
   }
@@ -1437,10 +1437,10 @@ function ref_13b0f() {
   }
 
   thread scripts\cp\utility::notify_delay("loadout_given", 7);
-  thread ref_13b0d();
+  thread ref_13B0D();
 }
 
-function ref_13b0d() {
+function ref_13B0D() {
   level endon("game_ended");
   self endon("disconnect");
   var_0 = 0;
@@ -1460,7 +1460,7 @@ function ref_13b0d() {
     }
 
     if(var_0 == 2) {
-      scripts\engine\utility::ref_143a6("landed_after_respawn", "revive_done", "revive");
+      scripts\engine\utility::ref_143A6("landed_after_respawn", "revive_done", "revive");
       wait 7.5;
     }
 

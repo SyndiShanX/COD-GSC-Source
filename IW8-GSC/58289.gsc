@@ -63,7 +63,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4 = scripts\cp\so_trigger::s();
   var_4.is_cs_trigger = 1;
   var_4.height = 50;
-  var_4.ref_12f4c = "trial_variant_fast";
+  var_4.ref_12F4C = "trial_variant_fast";
   var_0[[var_3]](var_4, var_1, var_2, (-938, -1, 61), (90, 0, 0), "progression", "alpha", "start", undefined, undefined, undefined, undefined, 175);
   var_4 = scripts\cp\so_trigger::s();
   var_4.is_cs_model = 1;

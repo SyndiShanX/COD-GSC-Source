@@ -8,7 +8,7 @@ function toggle_farah_lights(var_0, var_1, var_2) {
     return;
   }
 
-  if(level.disable_super_in_turret.ref_1226a != var_1 && !isDefined(level.disable_super_in_turret.ref_121fd)) {
+  if(level.disable_super_in_turret.ref_1226A != var_1 && !isDefined(level.disable_super_in_turret.ref_121FD)) {
     return;
   }
 
@@ -108,6 +108,6 @@ function toggle_farah_lights(var_0, var_1, var_2) {
   var_4 = var_3.nodes.size;
   var_3.nodes[var_4] = spawnStruct();
   var_3.nodes[var_4].origin = (336.61, -3554.4, -2.34044);
-  scripts\mp\gametypes\br_gametype_payload::ref_1318d(var_0, var_2);
+  scripts\mp\gametypes\br_gametype_payload::ref_1318D(var_0, var_2);
   level.disable_super_in_turret.paths[level.disable_super_in_turret.paths.size] = var_3;
 }

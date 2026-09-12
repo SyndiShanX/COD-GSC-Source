@@ -104,7 +104,7 @@ function ref_12044() {
   self.petwatch = undefined;
 }
 
-function ref_13e38() {
+function ref_13E38() {
   self endon("disconnect");
   self notify("turboPetChallengeWatcher()");
   self endon("turboPetChallengeWatcher()");
@@ -179,7 +179,7 @@ function initpet(var_0, var_1, var_2) {
       self.petwatch.ref_12533 = "petWatchDataBlack";
     } else if(var_1 == "pet_turbo") {
       self.petwatch.ref_12533 = "petWatchDataTurbo";
-      thread ref_13e38();
+      thread ref_13E38();
     } else {
       self.petwatch.ref_12533 = "petWatchData";
     }
@@ -231,8 +231,8 @@ function initpet(var_0, var_1, var_2) {
     self.petwatch.growthtime += var_4;
     self.petwatch.currentbestdist += var_4;
     self.petwatch.reproductionstreak = int(self.petwatch.reproductionstreak / 10);
-    self.petwatch.ref_13f07 = self getplayerdata("common", self.petwatch.ref_12533, "orcaPoints");
-    self.petwatch.ref_140e2 = self getplayerdata("common", self.petwatch.ref_12533, "apachePoints");
+    self.petwatch.ref_13F07 = self getplayerdata("common", self.petwatch.ref_12533, "orcaPoints");
+    self.petwatch.ref_140E2 = self getplayerdata("common", self.petwatch.ref_12533, "apachePoints");
     self.petwatch.dragonpoints = self getplayerdata("common", self.petwatch.ref_12533, "dragonPoints");
     self.petwatch.current_volume_num = self getplayerdata("common", self.petwatch.ref_12533, "killstreakCharge");
     self.petwatch.currentbestpos = self getplayerdata("common", self.petwatch.ref_12533, "winGamesCharge");
@@ -502,7 +502,7 @@ function bhasthermitestucktoshield() {
   }
 }
 
-function ref_13fbd() {
+function ref_13FBD() {
   if(!scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getTeamData")) {
     return;
   }
@@ -516,13 +516,13 @@ function ref_13fbd() {
 
     foreach(var_7 in var_5) {
       if(isDefined(var_7.petwatch) && var_7.petwatch.ref_12314 == "pet_turbo") {
-        ref_13e23(var_7, var_4, 2);
+        ref_13E23(var_7, var_4, 2);
       }
     }
   }
 }
 
-function ref_13e23(var_0, var_1) {
+function ref_13E23(var_0, var_1) {
   if(isDefined(self.petwatch) && self.petwatch.ref_12314 == "pet_turbo") {
     var_0 = min(1, var_0);
     self setclientomnvar("ui_pet_watch_bonus_earned_4", 50000 + int(var_0 * 10) + var_1 * 100);
@@ -530,7 +530,7 @@ function ref_13e23(var_0, var_1) {
   }
 }
 
-function ref_13c43(var_0) {
+function ref_13C43(var_0) {
   if(isDefined(self.petwatch) && self.petwatch.ref_12314 == "pet_turbo") {
     if(!isDefined(var_0.get_search_node_closest_to_spotlight_goal_node)) {
       var_0.get_search_node_closest_to_spotlight_goal_node = [];
@@ -554,7 +554,7 @@ function ref_13c43(var_0) {
       var_0.get_safe_set_spawn_weapons[var_1]++;
     }
 
-    ref_13e23(var_0.get_safe_set_spawn_weapons[var_1] / 10, 3);
+    ref_13E23(var_0.get_safe_set_spawn_weapons[var_1] / 10, 3);
     return;
   }
 }
@@ -695,43 +695,43 @@ function addwatchchargewintop3() {
   }
 }
 
-function ref_1230a() {
+function ref_1230A() {
   self endon("disconnect");
   self endon("cancel_pet_plunder_timer");
-  self.petwatch.ref_127cf = 1;
+  self.petwatch.ref_127CF = 1;
   var_0 = 180;
   var_1 = var_0 / 5;
 
   for(var_2 = 1; var_2 <= 5; var_2++) {
     wait var_1;
-    ref_13e23(var_2 / 5, 4);
+    ref_13E23(var_2 / 5, 4);
   }
 
   battle_tracks_vehicleallowlisteningoutsideoccupancy();
 }
 
-function ref_13ffd(var_0) {
+function ref_13FFD(var_0) {
   if(isDefined(self.petwatch) && self.petwatch.ref_12314 == "pet_turbo") {
-    ref_13e23(var_0, 1);
+    ref_13E23(var_0, 1);
     return;
   }
 }
 
-function ref_1206d() {
+function ref_1206D() {
   if(isDefined(self.petwatch) && self.petwatch.ref_12314 == "pet_turbo") {
     if(self.plundercount > 5000) {
-      if(!isDefined(self.petwatch.ref_127cf)) {
-        thread ref_1230a();
+      if(!isDefined(self.petwatch.ref_127CF)) {
+        thread ref_1230A();
         return;
       }
 
       return;
     }
 
-    if(isDefined(self.petwatch.ref_127cf)) {
+    if(isDefined(self.petwatch.ref_127CF)) {
       self notify("cancel_pet_plunder_timer");
-      self.petwatch.ref_127cf = undefined;
-      ref_13e23(0, 0);
+      self.petwatch.ref_127CF = undefined;
+      ref_13E23(0, 0);
       return;
     }
 
@@ -770,7 +770,7 @@ function updateuistate() {
   self setclientomnvar("ui_pet_watch_state", var_2);
 }
 
-function ref_12c76() {
+function ref_12C76() {
   self.petwatch.bored = level.petconsts[self.petwatch.phase].boredstart;
   self.petwatch.dirty = level.petconsts[self.petwatch.phase].dirtystart;
   self.petwatch.unruly = level.petconsts[self.petwatch.phase].unrulystart;
@@ -784,8 +784,8 @@ function ref_12c76() {
   self.petwatch.currentbestdist = 0;
   self.petwatch.bonustime = 0;
   self.petwatch.damage = 0;
-  self.petwatch.ref_13f07 = 0;
-  self.petwatch.ref_140e2 = 0;
+  self.petwatch.ref_13F07 = 0;
+  self.petwatch.ref_140E2 = 0;
   self.petwatch.dragonpoints = 0;
   self.petwatch.current_volume_num = 0;
   self.petwatch.killstreakcharge = 0;
@@ -810,7 +810,7 @@ function resetpet(var_0, var_1) {
   }
 
   self.petwatch.lastupdatetime = getsystemtime();
-  ref_12c76();
+  ref_12C76();
 }
 
 function debugsetlasttime(var_0) {

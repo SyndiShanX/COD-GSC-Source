@@ -22,11 +22,11 @@ function matchdata_logweaponstat(var_0, var_1) {
   }
 }
 
-function ref_1422b() {
-  scripts\engine\utility::create_func_ref("set_vehicle_anims_apc", &ref_1310b);
-  scripts\engine\utility::create_func_ref("set_vehicle_anims_asierra", &ref_1310c);
-  scripts\engine\utility::create_func_ref("set_vehicle_anims_blima", &ref_1310d);
-  scripts\engine\utility::create_func_ref("set_vehicle_anims_decho_civ", &ref_1310f);
+function ref_1422B() {
+  scripts\engine\utility::create_func_ref("set_vehicle_anims_apc", &ref_1310B);
+  scripts\engine\utility::create_func_ref("set_vehicle_anims_asierra", &ref_1310C);
+  scripts\engine\utility::create_func_ref("set_vehicle_anims_blima", &ref_1310D);
+  scripts\engine\utility::create_func_ref("set_vehicle_anims_decho_civ", &ref_1310F);
   scripts\engine\utility::create_func_ref("set_vehicle_anims_decho_police", &ref_13110);
   scripts\engine\utility::create_func_ref("set_vehicle_anims_decho_rebel", &ref_13111);
   scripts\engine\utility::create_func_ref("set_vehicle_anims_mkilo", &ref_13112);
@@ -35,14 +35,14 @@ function ref_1422b() {
   scripts\engine\utility::create_func_ref("set_vehicle_anims_techo", &ref_13117);
   scripts\engine\utility::create_func_ref("set_vehicle_anims_tromeo", &ref_13118);
   scripts\engine\utility::create_func_ref("set_vehicle_anims_umike", &ref_13119);
-  scripts\engine\utility::create_func_ref("set_vehicle_anims_vindia", &ref_1311a);
+  scripts\engine\utility::create_func_ref("set_vehicle_anims_vindia", &ref_1311A);
   scripts\engine\utility::create_func_ref("set_vehicle_anims_ralfa", &ref_13115);
-  scripts\engine\utility::create_func_ref("use_turret", &ref_1405e);
+  scripts\engine\utility::create_func_ref("use_turret", &ref_1405E);
 }
 
 #using_animtree("");
 
-function ref_1310b(var_0) {
+function ref_1310B(var_0) {
   var_0[0].vehicle_getoutanim = % vh_apc_org_unload_door_l;
   var_0[0].vehicle_getoutanim_clear = 0;
   var_0[2].vehicle_getoutanim = $vh_apc_org_unload_door_r;
@@ -52,7 +52,7 @@ function ref_1310b(var_0) {
   return var_0;
 }
 
-function ref_1310c(var_0) {
+function ref_1310C(var_0) {
   var_0[0].vehicle_getoutanim = % vh_asierra_driver_exit_patrol;
   var_0[0].vehicle_getoutanim_clear = 0;
   var_0[0].vehicle_getoutanim_combat = % vh_asierra_driver_exit_combat_idle;
@@ -74,7 +74,7 @@ function ref_1310c(var_0) {
   return var_0;
 }
 
-function ref_1310d(var_0) {
+function ref_1310D(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1].vehicle_getoutanim = % vh_blima_rappel_heli_drop;
   }
@@ -196,7 +196,7 @@ function ref_13117(var_0) {
   return var_0;
 }
 
-function ref_1310e(var_0) {
+function ref_1310E(var_0) {
   var_0[0].vehicle_getoutanim = % vh_decho_driver_exit_patrol;
   var_0[0].vehicle_getoutanim_clear = 0;
   var_0[0].vehicle_getoutanim_combat = % vh_decho_driver_exit_combat_idle;
@@ -212,8 +212,8 @@ function ref_1310e(var_0) {
   return var_0;
 }
 
-function ref_1310f(var_0) {
-  ref_1310e(var_0);
+function ref_1310F(var_0) {
+  ref_1310E(var_0);
   var_0[2].vehicle_getoutanim = % vh_decho_civ_pass3_exit_patrol;
   var_0[2].vehicle_getoutanim_clear = 0;
   var_0[2].vehicle_getoutanim_combat = % vh_decho_civ_pass3_exit_combat_idle;
@@ -230,7 +230,7 @@ function ref_1310f(var_0) {
 }
 
 function ref_13110(var_0) {
-  ref_1310e(var_0);
+  ref_1310E(var_0);
   var_0[2].vehicle_getoutanim = % vh_decho_police_trunk_exit_patrol;
   var_0[2].vehicle_getoutanim_clear = 0;
   var_0[2].vehicle_getoutanim_combat = % vh_decho_police_trunk_exit_combat_idle;
@@ -247,7 +247,7 @@ function ref_13110(var_0) {
 }
 
 function ref_13111(var_0) {
-  ref_1310e(var_0);
+  ref_1310E(var_0);
   var_0[2].vehicle_getoutanim = % vh_decho_cab1_exit_patrol;
   var_0[2].vehicle_getoutanim_clear = 0;
   var_0[2].vehicle_getoutanim_combat = % vh_decho_cab1_exit_combat_idle;
@@ -309,7 +309,7 @@ function ref_13119(var_0) {
   return var_0;
 }
 
-function ref_1311a(var_0) {
+function ref_1311A(var_0) {
   var_0[0].vehicle_getoutanim = % vh_vindia_back_door_exit_combat_idle;
   var_0[0].vehicle_getoutanim_clear = 0;
   var_0[4].vehicle_getoutanim = % vh_vindia_left_door_exit_combat_idle;
@@ -339,7 +339,7 @@ function ref_13115(var_0) {
   return var_0;
 }
 
-function ref_1405e(var_0, var_1) {
+function ref_1405E(var_0, var_1) {
   scripts\asm\asm_bb::bb_requestturret(var_0);
   scripts\asm\asm_bb::bb_requestturretpose(var_1);
   var_3 = var_0 gettagorigin("tag_gunner");

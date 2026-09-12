@@ -5,7 +5,7 @@
 
 function apc_rus_init() {
   var_0 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle("apc_russian", 1);
-  var_0.ref_13fca = &c4_crate_player_at_max_ammo;
+  var_0.ref_13FCA = &c4_crate_player_at_max_ammo;
   var_0.destroycallback = &apc_rus_explode;
   apc_rus_initoccupancy();
   apc_rus_initinteract();
@@ -77,7 +77,7 @@ function apc_rus_initoccupancy() {
   var_4.animtag = "tag_seat_0";
   var_4.exittag = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_animtagtoexittag(var_4.animtag);
   var_4.spawnpriority = 10;
-  var_4.ref_13e8a = getcompleteweaponname("tur_apc_rus_mp");
+  var_4.ref_13E8A = getcompleteweaponname("tur_apc_rus_mp");
   var_4.ref_12023 = "ping_vehicle_driver";
   var_3 = "front_left";
   var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat("apc_russian", var_3, 1);
@@ -118,11 +118,11 @@ function apc_rus_initoccupancy() {
 
 function apc_rus_initinteract() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("apc_russian", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("apc_russian", "single", ["driver", "front_right", "back_right", "back", "back_left", "front_left"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("apc_russian", "single", ["driver", "front_right", "back_right", "back", "back_left", "front_left"]);
 }
 
 function c130airdrop_spawn() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("apc_russian", 1);
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("apc_russian", 1);
   var_0.challengeevaluator = 2.33333;
   var_0.keycardlocs_chosen = 0.66666;
   var_0.is_using_stealth_debug = 350;
@@ -137,7 +137,7 @@ function c130airdrop_spawn() {
 }
 
 function c130deliveriesinprogress() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("apc_russian", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("apc_russian", 1);
   var_0.id = 15;
   var_0.seatids["driver"] = 0;
   var_0.seatids["front_left"] = 1;
@@ -146,35 +146,35 @@ function c130deliveriesinprogress() {
   var_0.seatids["back_left"] = 3;
   var_0.seatids["back"] = 5;
   var_0.brtruck_initdialog["driverTurret"] = 0;
-  var_0.ref_12da2["chassis"] = 0;
-  var_0.ref_12da2["turret"] = 1;
-  var_0.ref_12da3["driver"]["apc_rus_mp"] = "chassis";
-  var_0.ref_12da3["driver"]["tur_apc_rus_mp"] = "turret";
-  var_0.ref_12da3["front_left"]["apc_rus_mp"] = "chassis";
-  var_0.ref_12da3["front_left"]["tur_apc_rus_mp"] = "turret";
-  var_0.ref_12da3["front_right"]["apc_rus_mp"] = "chassis";
-  var_0.ref_12da3["front_right"]["tur_apc_rus_mp"] = "turret";
-  var_0.ref_12da3["back_right"]["apc_rus_mp"] = "chassis";
-  var_0.ref_12da3["back_right"]["tur_apc_rus_mp"] = "turret";
-  var_0.ref_12da3["back_left"]["apc_rus_mp"] = "chassis";
-  var_0.ref_12da3["back_left"]["tur_apc_rus_mp"] = "turret";
-  var_0.ref_12da3["back"]["apc_rus_mp"] = "chassis";
-  var_0.ref_12da3["back"]["tur_apc_rus_mp"] = "turret";
+  var_0.ref_12DA2["chassis"] = 0;
+  var_0.ref_12DA2["turret"] = 1;
+  var_0.ref_12DA3["driver"]["apc_rus_mp"] = "chassis";
+  var_0.ref_12DA3["driver"]["tur_apc_rus_mp"] = "turret";
+  var_0.ref_12DA3["front_left"]["apc_rus_mp"] = "chassis";
+  var_0.ref_12DA3["front_left"]["tur_apc_rus_mp"] = "turret";
+  var_0.ref_12DA3["front_right"]["apc_rus_mp"] = "chassis";
+  var_0.ref_12DA3["front_right"]["tur_apc_rus_mp"] = "turret";
+  var_0.ref_12DA3["back_right"]["apc_rus_mp"] = "chassis";
+  var_0.ref_12DA3["back_right"]["tur_apc_rus_mp"] = "turret";
+  var_0.ref_12DA3["back_left"]["apc_rus_mp"] = "chassis";
+  var_0.ref_12DA3["back_left"]["tur_apc_rus_mp"] = "turret";
+  var_0.ref_12DA3["back"]["apc_rus_mp"] = "chassis";
+  var_0.ref_12DA3["back"]["tur_apc_rus_mp"] = "turret";
 }
 
 function c130airdrop_startdelivery() {
   var_0 = getdvarint("scr_gw_apc_health_override", 4000);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("apc_russian", var_0);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("apc_russian", var_0);
   var_1 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("apc_russian");
   var_1.class = "super_heavy";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("apc_russian");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("apc_russian");
   var_2 = getdvarint("scr_gw_apc_hits_override", 18);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("apc_russian", var_2);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14176("apc_russian", &apc_rus_premoddamagecallback);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14175("apc_russian", &c4_charge_detonate_think);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("apc_russian", &apc_rus_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("tur_apc_rus_mp", 2);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("apc_rus_mp", 5);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("tur_apc_rus_mp", 2);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("apc_rus_mp", 5);
 }
 
 function apc_rus_initfx() {
@@ -205,7 +205,7 @@ function apc_rus_create(var_0, var_1) {
   scripts\cp_mp\vehicles\vehicle::ref_14207(var_2, var_3, getcompleteweaponname("tur_apc_rus_mp"), 1);
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "apc_russian", var_0);
   var_2.objweapon = getcompleteweaponname("apc_rus_mp");
-  var_4 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414c(var_2, 1);
+  var_4 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414C(var_2, 1);
   var_4.lb_mg_impulse_dmg_threshold_low = "none";
   var_4.lb_mg_dmg_factor_landing_gear = "kill_apc_rus";
   var_4.lb_mg_dmg_factor_main_rotor = 1;
@@ -484,7 +484,7 @@ function c130deliverydirection() {
   c4_crate_spawn();
 
   for(;;) {
-    var_1 = var_0 scripts\engine\utility::ref_143ad("turret_fire", "turret_reload");
+    var_1 = var_0 scripts\engine\utility::ref_143AD("turret_fire", "turret_reload");
 
     if(var_1 == "turret_reload") {
       var_0.shotsleft = 0;

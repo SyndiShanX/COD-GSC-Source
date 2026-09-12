@@ -3,7 +3,7 @@
  * Script: 58220.gsc
 ***********************************************/
 
-function ref_1413f() {
+function ref_1413F() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_damage", "setWeaponClassModDamageForVehicle", &scripts\cp\vehicles\damage_cp::set_weapon_class_mod_damage_data_for_vehicle);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_damage", "setPerkModDamage", &scripts\cp\vehicles\damage_cp::set_perk_mod_damage_data);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_damage", "setWeaponHitDamageData", &scripts\cp\vehicles\damage_cp::set_weapon_hit_damage_data);

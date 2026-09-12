@@ -33,7 +33,7 @@ function main() {
   game["axis"] = "RUSF";
   thread scripts\mp\secrethunt::secrethunt("bear_hidden");
   thread managegate();
-  thread ref_12f8e();
+  thread ref_12F8E();
   thread player_exfil_struct();
 }
 
@@ -81,7 +81,7 @@ function managegate() {
   GscBinSkip1(0x45, 0, "_left");
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {

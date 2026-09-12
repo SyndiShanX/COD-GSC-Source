@@ -446,7 +446,7 @@ function playerjoinwatcher() {
     }
 
     if(isDefined(self.crateiconid)) {
-      scripts\cp_mp\entityheadicons::ref_1315d(self.crateiconid, var_0);
+      scripts\cp_mp\entityheadicons::ref_1315D(self.crateiconid, var_0);
     }
   }
 }

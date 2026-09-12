@@ -17,7 +17,7 @@ function main() {
     }
 
     scripts\mp\gametypes\arm::arm_initoutofbounds();
-    thread ref_12e15();
+    thread ref_12E15();
     thread perkpackage_giveoverridefieldupgrades();
   } else {
     level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
@@ -36,10 +36,10 @@ function main() {
   game["axis_outfit"] = "woodland";
   level.music_style = "eastern_europe";
   thread runmisteffects();
-  thread ref_136a5();
+  thread ref_136A5();
   thread player_fired_gun_monitor();
-  thread ref_145f0();
-  thread ref_12f8e();
+  thread ref_145F0();
+  thread ref_12F8E();
 }
 
 function player_fired_gun_monitor() {
@@ -61,7 +61,7 @@ function player_fired_gun_monitor() {
   var_7 clonebrushmodeltoscriptmodel(var_6);
 }
 
-function ref_136a5() {
+function ref_136A5() {
   var_0 = spawn("script_model", (46894.9, -8506.3, 343.159));
   var_0 setModel("ee_electronics_television_wall_mounted_large");
   var_0.angles = (0, 5, 0);
@@ -76,7 +76,7 @@ function runmisteffects() {
   GscBinSkip0(0x2e, 0, (51013, 3186, 0));
 }
 
-function ref_12e15() {
+function ref_12E15() {
   level.weaponstocycle = [];
   level.setallclientomnvarot[0] = (27210, -19254, 274);
   level.setallclientomnvarot[1] = (21201, -12856, -151);
@@ -87,12 +87,12 @@ function ref_12e15() {
   level.setallclientomnvarot[6] = (6003, -1300, 1139);
   level.setallclientomnvarot[7] = (53845, -36604, 400);
   wait 15;
-  thread ref_12e14();
-  thread ref_12e13();
-  thread ref_12e12();
+  thread ref_12E14();
+  thread ref_12E13();
+  thread ref_12E12();
 }
 
-function ref_12e11() {
+function ref_12E11() {
   level.weapons_that_can_stun = [];
   level.weapons_that_can_stun[0] = (50804, 6322, 317);
   level.weapons_that_can_stun[1] = (50861, -32721, 1312);
@@ -116,17 +116,17 @@ function ref_12e11() {
   }
 }
 
-function ref_12e14() {
+function ref_12E14() {
   var_0 = [];
   GscBinSkip0(0x2e, 0, (53038, -38220, 15150));
 }
 
-function ref_12e12() {
+function ref_12E12() {
   playFX(scripts\engine\utility::getfx("vfx_gw_ambient_planes"), (9697, -10409, -170), (9, 0, 0));
   playFX(scripts\engine\utility::getfx("vfx_gw_ambient_planes"), (65867, -30562, 1622), (14, 142, 0));
 }
 
-function ref_12e13() {
+function ref_12E13() {
   foreach(var_1 in level.setallclientomnvarot) {
     playFX(scripts\engine\utility::getfx("vfx_gw_smoke_plume_bg_01"), var_1, (0, 100, 0));
   }
@@ -138,7 +138,7 @@ function perkpackage_giveoverridefieldupgrades() {
   var_0 settransientsoundbank("donetsk_farms2.all", 1);
 }
 
-function ref_145f0() {
+function ref_145F0() {
   var_0 = getdvarint("gw_gas_circle_size", 0);
   wait 3;
 
@@ -160,7 +160,7 @@ function ref_145f0() {
   }
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {

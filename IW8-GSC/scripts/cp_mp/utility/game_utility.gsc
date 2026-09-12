@@ -23,12 +23,12 @@ function update_ai_volumes() {
   return level.gametype == "br" && islargemap();
 }
 
-function ref_140a8() {
+function ref_140A8() {
   if(level.gametype == "br") {
     var_0 = getdvarint("scr_br_use_ww2_announcer", 1);
 
     if(var_0 == 2) {
-      return istrue(self.ref_12e3a);
+      return istrue(self.ref_12E3A);
     } else if(var_0 == 1) {
       return true;
     }
@@ -41,7 +41,7 @@ function tutorialzoneenter() {
   return level.gametype == "br" && getDvar("scr_br_verse") == "ww2";
 }
 
-function ref_140a9() {
+function ref_140A9() {
   if(level.gametype == "br") {
     return getdvarint("scr_br_use_ww2_killstreak_call_in_device", 1);
   }
@@ -49,7 +49,7 @@ function ref_140a9() {
   return 0;
 }
 
-function ref_140aa() {
+function ref_140AA() {
   if(level.gametype == "br") {
     return getdvarint("scr_br_use_ww2_model_swaps", 1);
   }
@@ -57,7 +57,7 @@ function ref_140aa() {
   return 0;
 }
 
-function ref_12b26() {
+function ref_12B26() {
   level.unsetchainkillstreaks = 1;
 }
 
@@ -65,7 +65,7 @@ function unsetchainkillstreaks() {
   return istrue(level.unsetchainkillstreaks);
 }
 
-function ref_12b17() {
+function ref_12B17() {
   level.unlink_on_ai_death = 1;
 }
 
@@ -73,7 +73,7 @@ function unlink_on_ai_death() {
   return istrue(level.unlink_on_ai_death);
 }
 
-function ref_12b18() {
+function ref_12B18() {
   level.matchdata_br_onmatchstart = 1;
 }
 
@@ -122,28 +122,28 @@ function isnightmap() {
   return istrue(level.nightmap);
 }
 
-function ref_12b2c() {
-  level.ref_11eb5 = 1;
+function ref_12B2C() {
+  level.ref_11EB5 = 1;
 }
 
 function update_operator_west_char_loc() {
-  return istrue(level.ref_11eb5);
+  return istrue(level.ref_11EB5);
 }
 
 function registerarenamap() {
   level.arenamap = 1;
   level.loadoutdefaultfiresalediscount = 1;
-  level.ref_133d1 = 1;
+  level.ref_133D1 = 1;
   level.requiresminstartspawns = 0;
 }
 
-function ref_12b3b() {
+function ref_12B3B() {
   level.loadoutdefaultfiresalediscount = 1;
-  level.ref_133d1 = 1;
+  level.ref_133D1 = 1;
 }
 
-function ref_12b25() {
-  level.ref_133d5 = 1;
+function ref_12B25() {
+  level.ref_133D5 = 1;
 }
 
 function isarenamap() {
@@ -151,7 +151,7 @@ function isarenamap() {
 }
 
 function shouldskipfirstraise() {
-  return istrue(level.ref_133d1);
+  return istrue(level.ref_133D1);
 }
 
 function getlocaleid() {
@@ -427,7 +427,7 @@ function stopkeyearning(var_0) {
   var_9 = int(gettimesincegamestart() / 1000);
 
   if(self.vehicle_tracking_cp_post_spawn != 255) {
-    scripts\cp\vehicles\vehicle_compass_cp::ref_1205a(self.vehicle_tracking_cp_post_spawn);
+    scripts\cp\vehicles\vehicle_compass_cp::ref_1205A(self.vehicle_tracking_cp_post_spawn);
   }
 
   var_10 = 1;
@@ -528,13 +528,13 @@ function _visionunsetnakedforplayer(var_0) {
   }
 }
 
-function ref_12c11(var_0, var_1) {
+function ref_12C11(var_0, var_1) {
   var_2 = getEntArray();
 
   foreach(var_4 in var_2) {
     if(isDefined(var_4.model) && var_4.model == var_0) {
       if(istrue(var_1) && isDefined(var_4.target)) {
-        ref_12c10(var_4.target, "targetname");
+        ref_12C10(var_4.target, "targetname");
       }
 
       var_4 delete();
@@ -542,7 +542,7 @@ function ref_12c11(var_0, var_1) {
   }
 }
 
-function ref_12c0f(var_0) {
+function ref_12C0F(var_0) {
   var_1 = getEntArray();
 
   foreach(var_3 in var_1) {
@@ -552,7 +552,7 @@ function ref_12c0f(var_0) {
   }
 }
 
-function ref_12c0e(var_0) {
+function ref_12C0E(var_0) {
   var_1 = getEntArray();
 
   foreach(var_3 in var_1) {
@@ -562,7 +562,7 @@ function ref_12c0e(var_0) {
   }
 }
 
-function ref_12c10(var_0, var_1) {
+function ref_12C10(var_0, var_1) {
   var_2 = getEntArray(var_0, var_1);
 
   foreach(var_4 in var_2) {

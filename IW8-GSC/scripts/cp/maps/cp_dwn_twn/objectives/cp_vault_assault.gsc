@@ -22,9 +22,9 @@ function main() {
   level thread scripts\cp\cp_remote_tank::init_remote_tank();
   level.bank_elevator = "third";
   level.key_card_acquired = 0;
-  level.ref_12fc3 = 0;
+  level.ref_12FC3 = 0;
   level.disable_hvt_pickup = &lbravo_spawner_jammer2;
-  level.ref_1247c = &ref_13f05;
+  level.ref_1247C = &ref_13F05;
   scripts\engine\utility::flag_init("hvt_gone");
   scripts\engine\utility::flag_init("heli_engage");
   scripts\engine\utility::flag_init("bank_roof_mortar_start");
@@ -61,7 +61,7 @@ function init_cs_ents() {
   var_1 = scripts\engine\utility::getStructArray("bank_roof_munition_remove", "targetname");
 
   foreach(var_3 in var_1) {
-    level thread scripts\cp\cp_munitions::ref_12be1(var_3.origin, 200);
+    level thread scripts\cp\cp_munitions::ref_12BE1(var_3.origin, 200);
   }
 
   level.rooftop_1_mortar = getEnt("bank_rooftop_1_mortar", "targetname");
@@ -289,8 +289,8 @@ function register_spawn_functions() {
 
   scripts\engine\utility::flag_wait("cp_dwn_twn_create_script_completed");
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_heli", 0, 6, undefined, [ &short_and_long_delay, 0.05, 5], undefined, "bank_combat_heli");
-  ref_12ae4();
-  ref_12ad5();
+  ref_12AE4();
+  ref_12AD5();
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_vehicle_reinforcement", 0, 16, undefined, &scripts\cp\cp_modular_spawning::module_wave_spawn, undefined, "bank_vehicle_reinforcement");
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_hvt", 1, 1, 1, 0.1, undefined, "bank_hvt");
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_hvt", &hvt_think_func);
@@ -298,7 +298,7 @@ function register_spawn_functions() {
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_vault_wave", 0, 20, 100, [ &spawn_wave, 0.1, 45], undefined, ["bank_combat_3", "bank_combat_3_side", "bank_combat_3_back"]);
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_atrium_init", 0, 6, 6, 0.1, undefined, "bank_combat_atrium_init");
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_roof", 6, 10, undefined, 0.1, undefined, "bank_combat_roof");
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_roof", &ref_12d84);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_roof", &ref_12D84);
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_roof_juggernaut_1", 1, 1, 1, 0.1, undefined, "bank_roof_juggernaut_1");
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_roof_juggernaut_1", &roof_jugg_spawn_func);
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_roof_juggernaut_2", 1, 1, 1, 0.1, undefined, "bank_roof_juggernaut_2");
@@ -324,18 +324,18 @@ function register_spawn_functions() {
   scripts\engine\utility::flag_set("va_spawn_modules_registered");
 }
 
-function ref_12ad5() {
+function ref_12AD5() {
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_cut", 0, 14, undefined, 0.1, undefined, "bank_combat_3");
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_cut_2", 0, 14, undefined, 0.1, undefined, "bank_combat_3_side");
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_cut_3", 0, 14, undefined, 0.1, undefined, "bank_combat_3_back");
   var_0 = ["frag_grenade_mp", "molotov_mp", "semtex_mp", "flash_grenade_mp"];
   var_1 = [0.5, 0.1, 0.1, 0.1];
-  scripts\cp\cp_spawning_util::ref_12ae3("bank_combat_cut", var_0, var_1);
-  scripts\cp\cp_spawning_util::ref_12ae3("bank_combat_cut_2", var_0, var_1);
-  scripts\cp\cp_spawning_util::ref_12ae3("bank_combat_cut_3", var_0, var_1);
+  scripts\cp\cp_spawning_util::ref_12AE3("bank_combat_cut", var_0, var_1);
+  scripts\cp\cp_spawning_util::ref_12AE3("bank_combat_cut_2", var_0, var_1);
+  scripts\cp\cp_spawning_util::ref_12AE3("bank_combat_cut_3", var_0, var_1);
 }
 
-function ref_12ae4() {
+function ref_12AE4() {
   scripts\cp\cp_modular_spawning::registerambientgroup("vault_assault_driver", 1, 1, 1, 0.1, undefined, "vault_assault_driver", &tarmac_techo_start_first);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("vault_assault_driver", &keypad_activate_func);
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_init", 0, 24, 24, 0.1, undefined, "bank_combat_init", undefined, undefined, 5);
@@ -346,8 +346,8 @@ function ref_12ae4() {
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_vault_jugg", 1, 1, 1, 0.1, &scripts\cp\cp_modular_spawning::ref_14340, "bank_combat_vault_jugg", undefined, "bank_combat_vault_bombers");
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_vault_bombers", 0, 8, undefined, 0.1, undefined, "bank_combat_bombers");
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_vault_fill", 0, 8, undefined, 0.1, undefined, "bank_combat_2");
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_vault_fill", [ &scripts\cp\cp_modular_spawning::ref_11cad, (22374, -19506, -197)]);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_vault_fill", [ &scripts\cp\cp_modular_spawning::ref_11cac, 512]);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_vault_fill", [ &scripts\cp\cp_modular_spawning::ref_11CAD, (22374, -19506, -197)]);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_vault_fill", [ &scripts\cp\cp_modular_spawning::ref_11CAC, 512]);
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_lbravo", 0, 8, 8, 0.1, undefined, "bank_combat_lbravo");
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_init_cover", 6, 6, 6, 0.1, undefined, "bank_combat_init_cover", [ &show_player_clip, (24538, -17807, -135), (0, 215, 0)]);
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_init_back", 4, 4, 4, 0.1, undefined, "bank_combat_init_back");
@@ -360,12 +360,12 @@ function ref_12ae4() {
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_bombers", 0, 8, 16, var_0, undefined, "bank_combat_bombers", [ &show_players_breadcrumbs_to_safe_house, (23893, -18455, -22), (0, 220, 0)]);
   var_0 = [ &scripts\cp\cp_modular_spawning::module_wave_spawn, 10, 5, 0.1, 8, 16];
   scripts\cp\cp_modular_spawning::registerambientgroup("bank_combat_post_vault", 0, 16, undefined, var_0, undefined, "bank_combat_2");
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_post_vault", [ &scripts\cp\cp_modular_spawning::ref_11cad, (22743, -20318, 187)]);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_post_vault", [ &scripts\cp\cp_modular_spawning::ref_11cac, 512]);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_post_vault", [ &scripts\cp\cp_modular_spawning::ref_11CAD, (22743, -20318, 187)]);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_post_vault", [ &scripts\cp\cp_modular_spawning::ref_11CAC, 512]);
   var_1 = scripts\engine\utility::getStruct("bank_obj_pos", "targetname");
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_vault_jugg", [ &scripts\cp\cp_modular_spawning::set_initial_goalheight, "vault_door_broken"]);
   scripts\cp\cp_modular_spawning::register_module_weapons_free_func("bank_combat_init", &scripts\cp\cp_modular_spawning::set_heavy_hitter);
-  scripts\cp\cp_spawning_util::register_module_init_func("bank_combat_init_truck", &ref_13f15);
+  scripts\cp\cp_spawning_util::register_module_init_func("bank_combat_init_truck", &ref_13F15);
   balloon_deposit_cash_nags("vault_assault_saw_patrollers");
   balloon_deposit_cash_nags("bank_combat_init_truck");
   balloon_deposit_cash_nags("bank_combat_init_truck");
@@ -399,20 +399,20 @@ function ref_12ae4() {
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("bank_combat_init_lmg", &mark_never_remove);
 }
 
-function ref_13f15(var_0) {
-  thread ref_13f16(var_0);
+function ref_13F15(var_0) {
+  thread ref_13F16(var_0);
 }
 
-function ref_13f16(var_0) {
+function ref_13F16(var_0) {
   level endon("game_ended");
   var_0 scripts\engine\utility::ent_flag_wait("weapons_free");
 
   for(var_1 = 0; var_1 < var_0.module_vehicles.size; var_1++) {
-    ref_13f13(var_0.module_vehicles[var_1]);
+    ref_13F13(var_0.module_vehicles[var_1]);
   }
 }
 
-function ref_13f13() {
+function ref_13F13() {
   self vehicle_setspeedimmediate(0, 30, 30);
   scripts\common\vehicle::vehicle_unload();
 }
@@ -437,7 +437,7 @@ function mp_aniyah_patch() {
 }
 
 function balloon_deposit_cash_nags(var_0) {
-  scripts\cp\cp_modular_spawning::register_module_weapons_free_func(var_0, &scripts\cp\cp_modular_spawning::ref_1309b);
+  scripts\cp\cp_modular_spawning::register_module_weapons_free_func(var_0, &scripts\cp\cp_modular_spawning::ref_1309B);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func(var_0, &scripts\cp\cp_modular_spawning::watch_for_players);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func(var_0, &give_guy_pacifist_override);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func(var_0, &scripts\cp\cp_modular_spawning::enter_combat_after_stealth);
@@ -451,7 +451,7 @@ function give_guy_pacifist_override(var_0) {
 }
 
 function alert_when_see_player(var_0) {
-  if(scripts\cp\coop_stealth::ref_132d7()) {
+  if(scripts\cp\coop_stealth::ref_132D7()) {
     return;
   }
 
@@ -572,7 +572,7 @@ function debug_vault_assault_vault(var_0) {
 }
 
 function debug_vault_assault_crypto(var_0) {
-  scripts\cp\cp_spawning_util::ref_13bbd(0);
+  scripts\cp\cp_spawning_util::ref_13BBD(0);
   debug_trigger_objective_events(var_0);
   scripts\cp\utility::teleportallplayersinteamtostructs("allies", "vault_assault_crypto_debug_start");
 }
@@ -664,7 +664,7 @@ function debug_trigger_objective_events(var_0) {
       break;
   }
 
-  thread ref_12bc4();
+  thread ref_12BC4();
 }
 
 function scriptable_carriable_damage_internal() {
@@ -691,7 +691,7 @@ function scriptable_carriable_damage_internal() {
   }
 }
 
-function ref_12bc4() {
+function ref_12BC4() {
   if(!isDefined(level.littlebirds)) {
     level waittill("little_birds_done_spawning");
   }
@@ -721,7 +721,7 @@ function start_pre_vault_assault(var_0, var_1) {
   scripts\engine\utility::flag_wait("cp_dwn_twn_bank_vehicle_create_script_completed");
   scripts\engine\utility::flag_set("ml_p3_done");
   scripts\engine\utility::flag_set("return_to_safehouse");
-  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_safehouse::ref_1234e(var_0);
+  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_safehouse::ref_1234E(var_0);
   level waittill("mission_selected", var_2);
 }
 
@@ -729,13 +729,13 @@ function team_planted_bomb(var_0, var_1) {
   level endon("game_ended");
   scripts\engine\utility::flag_set("cp_dwn_twn_create_script");
   scripts\engine\utility::flag_wait("cp_dwn_twn_create_script_completed");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_12e56(getEntArray("gunshop_safehouse_loot", "targetname"));
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_12E56(getEntArray("gunshop_safehouse_loot", "targetname"));
   init_out_of_bounds_triggers();
   level.default_player_spawns = "vault_assault_infil_start";
   level.initlocs_bunkertest = scripts\engine\utility::getStructArray("vault_assault_infil_start", "targetname");
   scripts\cp\utility::teleportallplayersinteamtostructs("allies", "vault_assault_infil_start");
-  ref_140f4();
-  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_safehouse::ref_1234e(var_0);
+  ref_140F4();
+  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_safehouse::ref_1234E(var_0);
   level.initlethalmaxoffsetmap = "vault_assault";
   scripts\engine\utility::flag_init("enemy_alert");
   scripts\cp\utility::skydivestreamhintdvars("ml_p1");
@@ -776,7 +776,7 @@ function keypad_activate_func(var_0) {
   scripts\engine\utility::flag_set("infil_driver_spawned");
 }
 
-function ref_140f4() {
+function ref_140F4() {
   scripts\cp\cp_modular_spawning::run_spawn_module("vault_assault_driver");
 }
 
@@ -790,8 +790,8 @@ function ref_13829(var_0, var_1) {
   scripts\cp\cp_modular_spawning::run_spawn_module("bank_combat_init_cover");
   scripts\cp\cp_modular_spawning::run_spawn_module("bank_combat");
   scripts\cp\cp_modular_spawning::run_spawn_module("bank_combat_bombers");
-  thread ref_135cc(level);
-  thread ref_135cc(level);
+  thread ref_135CC(level);
+  thread ref_135CC(level);
   level waittill("saw_pickedup");
   scripts\cp\cp_modular_spawning::run_spawn_module("bank_combat_init_truck");
 }
@@ -811,7 +811,7 @@ function init_vault_assault(var_0, var_1) {
   scripts\engine\utility::flag_wait("cp_dwn_twn_bank_vehicle_create_script_completed");
   level.initlethalmaxoffsetmap = "vault_assault";
   level.initlocationcircle = "vault_assault";
-  ref_12bc4();
+  ref_12BC4();
   level.max_agents_override = 24;
 
   if(isDefined(var_0)) {
@@ -862,10 +862,10 @@ function start_vault_assault(var_0, var_1) {
 
 function end_vault_assault(var_0, var_1) {}
 
-function ref_123ca() {
+function ref_123CA() {
   scripts\mp\vehicles\vehicle_damage_mp::ref_12409("kama");
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_bank_intro_20");
-  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("conv_generic_affirm");
+  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("conv_generic_affirm");
 }
 
 function gettimetogulagclosed(var_0) {
@@ -913,14 +913,14 @@ function notify_when_player_nearby(var_0, var_1, var_2) {
 
 function init_vault_assault_cut(var_0, var_1) {
   level thread scripts\cp\maps\cp_dwn_twn\cp_dwn_twn_door_cut::main(var_0);
-  scripts\cp\cp_spawning_util::ref_13bbd(0);
+  scripts\cp\cp_spawning_util::ref_13BBD(0);
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("bank_combat_init_sniper");
 }
 
 function start_vault_assault_cut(var_0, var_1) {
   level endon("game_ended");
   level endon("end_vault_assault");
-  scripts\cp\utility::ref_123fe("mus_cp_money_breach_vault");
+  scripts\cp\utility::ref_123FE("mus_cp_money_breach_vault");
 
   if(randomint(100) < 50) {
     scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_kama_bank_cut_down_gate_10");
@@ -944,7 +944,7 @@ function start_vault_assault_cut(var_0, var_1) {
     wait 0.1;
   }
 
-  scripts\cp\utility::ref_123fe("mus_cp_money_cut_vault");
+  scripts\cp\utility::ref_123FE("mus_cp_money_cut_vault");
   level notify("vault_door_broken");
   scripts\cp\cp_objectives::overridenextstep(var_0, "vault_assault_vault");
 }
@@ -1004,7 +1004,7 @@ function cycle_bank_combat_cut_spawn_modules() {
 }
 
 function init_vault_assault_vault(var_0, var_1) {
-  scripts\cp\cp_spawning_util::ref_13bbd(0);
+  scripts\cp\cp_spawning_util::ref_13BBD(0);
   thread open_vault_gate();
   level.deposit_box_interactions = [];
   var_2 = scripts\engine\utility::getStructArray("vault_deposit_box_interaction", "targetname");
@@ -1052,7 +1052,7 @@ function init_vault_assault_vault(var_0, var_1) {
   open_vault_door();
 
   if(isDefined(var_0) && isDefined(var_0.objectiveindex)) {
-    scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+    scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
     return;
   }
 }
@@ -1185,10 +1185,10 @@ function init_vault_assault_crypto(var_0, var_1) {
   scripts\cp\cp_modular_spawning::run_spawn_module("bank_hvt_juggernaut");
   thread open_stairwell_doors();
   thread roof_combat_start(level);
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
 }
 
-function ref_135cc(var_0) {
+function ref_135CC(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
   if(!isDefined(var_1)) {
@@ -1196,12 +1196,12 @@ function ref_135cc(var_0) {
   }
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    thread ref_1353b(var_1[var_2]);
+    thread ref_1353B(var_1[var_2]);
   }
 }
 
-function ref_1353b(var_0) {
-  var_1 = scripts\mp\carriable::ref_131ea(var_0);
+function ref_1353B(var_0) {
+  var_1 = scripts\mp\carriable::ref_131EA(var_0);
   var_1.matchdata_logaward = 1;
 }
 
@@ -1388,14 +1388,14 @@ function spawninfo() {
   foreach(var_4 in level.players) {
     if(distancesquared(var_4.origin, level.bank_hvt.origin) < var_1) {
       if(scripts\engine\utility::within_fov(var_4.origin, var_4.angles, level.bank_hvt.origin, var_2)) {
-        thread ref_124ec(level);
+        thread ref_124EC(level);
         return;
       }
     }
   }
 }
 
-function ref_124ec(var_0) {
+function ref_124EC(var_0) {
   wait 0.5;
   scripts\cp\cp_player_battlechatter::trysaylocalsound(var_0, "obj_target_visual");
 }
@@ -1435,10 +1435,10 @@ function spawninsafehouse() {
     }
   }
 
-  ref_124eb(var_3);
+  ref_124EB(var_3);
 }
 
-function ref_124eb(var_0) {
+function ref_124EB(var_0) {
   wait 0.25;
   scripts\cp\cp_player_battlechatter::trysaylocalsound(var_0, "flavor_negative");
   wait 8;
@@ -1498,7 +1498,7 @@ function hvt_think_func(var_0) {
   self.bank_hvt = 1;
   self.invulnerable = 1;
   self.never_kill_off = 1;
-  self.ref_11e50 = 1;
+  self.ref_11E50 = 1;
   self.allowpain = 0;
   self.ignoreall = 1;
   scripts\cp\cp_modular_spawning::set_goal_pos(self.origin);
@@ -1518,10 +1518,10 @@ function send_hvt_to_elevator(var_0) {
   }
 
   scripts\engine\utility::delaythread(8, &allow_breach_charge);
-  scripts\cp\utility::ref_123fe("mus_cp_money_juggernaut_appear");
+  scripts\cp\utility::ref_123FE("mus_cp_money_juggernaut_appear");
   spawn_bodyguard_and_go_to_desk();
   hvt_idle();
-  scripts\cp\utility::ref_123fe("mus_cp_money_juggernaut_appear");
+  scripts\cp\utility::ref_123FE("mus_cp_money_juggernaut_appear");
   hvt_exit();
   level notify("hvt_leaving");
   wait 1;
@@ -1545,8 +1545,8 @@ function send_hvt_to_elevator(var_0) {
   hvt_made_it_to_heli();
 }
 
-function ref_133b3(var_0) {
-  level.ref_13b13 = 1;
+function ref_133B3(var_0) {
+  level.ref_13B13 = 1;
   wait var_0;
   level notify("charge_planted");
   wait 1;
@@ -1691,7 +1691,7 @@ function go_into_elevator() {
     var_0 = scripts\engine\utility::getStruct("hvt_elevator_pos", "targetname");
     scripts\cp\cp_modular_spawning::set_goal_pos(var_0.origin);
     self.goalradius = 8;
-    scripts\engine\utility::ref_143a7("goal_reached", "goal", "near_goal", "death");
+    scripts\engine\utility::ref_143A7("goal_reached", "goal", "near_goal", "death");
 
     if(isDefined(level.bank_hvt)) {
       thread scripts\cp\utility::cp_add_dialogue_line(&"CP_DWN_TWN_OBJECTIVES/HVT_ROOF");
@@ -1822,7 +1822,7 @@ function hvt_run_to_heli() {
     self allowedstances("stand");
     thread hvt_if_heli_destroyed();
     thread set_hvt_gone_flag();
-    scripts\engine\utility::ref_143a7("goal_reached", "goal", "near_goal", "death");
+    scripts\engine\utility::ref_143A7("goal_reached", "goal", "near_goal", "death");
     return;
   }
 
@@ -1861,12 +1861,12 @@ function hvt_made_it_to_heli() {
       return;
     }
 
-    thread ref_13aed();
+    thread ref_13AED();
     return;
   }
 }
 
-function ref_13aed() {
+function ref_13AED() {
   wait 4;
   level thread scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_kama_bank_hvt_down_10");
 }
@@ -1938,7 +1938,7 @@ function waittill_players_on_roof() {
 
 function init_vault_assault_rooftop(var_0, var_1) {
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("bank_combat_post_vault");
-  scripts\cp\cp_spawning_util::ref_13bbd(0);
+  scripts\cp\cp_spawning_util::ref_13BBD(0);
 }
 
 function start_vault_assault_rooftop(var_0, var_1) {
@@ -1973,12 +1973,12 @@ function end_vault_assault_rooftop(var_0, var_1) {
   scripts\cp\cp_objectives::overridenextstep(var_0, "vault_assault_rooftop_heli");
 }
 
-function ref_12d84(var_0) {
+function ref_12D84(var_0) {
   self.never_kill_off = 1;
-  thread ref_1301d();
+  thread ref_1301D();
 }
 
-function ref_1301d() {
+function ref_1301D() {
   self endon("death");
   var_0 = ["rooftop_back_org_target", "rooftop_front_org_target"];
   var_1 = [];
@@ -1991,12 +1991,12 @@ function ref_1301d() {
   var_6 = scripts\engine\utility::getclosest(self.origin, var_1);
   scripts\cp\cp_modular_spawning::set_goal_radius(96);
   scripts\cp\cp_modular_spawning::set_goal_pos(var_6.origin);
-  scripts\engine\utility::ref_143ad("goal", "goal_reached");
+  scripts\engine\utility::ref_143AD("goal", "goal_reached");
   self.never_kill_off = undefined;
   scripts\cp\cp_modular_spawning::return_to_last_goalRadius();
 }
 
-function ref_140bf(var_0, var_1) {
+function ref_140BF(var_0, var_1) {
   var_0 scripts\cp\cp_modular_spawning::spawner_init();
 
   if(isDefined(level.ref_14682) && var_0.origin[2] > level.ref_14682) {
@@ -2006,7 +2006,7 @@ function ref_140bf(var_0, var_1) {
   return scripts\cp\cp_spawner_scoring::standard_spawnpoint_valid(var_0, var_1);
 }
 
-function ref_140be(var_0, var_1) {
+function ref_140BE(var_0, var_1) {
   if(isDefined(level.ref_14682) && var_0.origin[2] > level.ref_14682) {
     return 0;
   }
@@ -2015,7 +2015,7 @@ function ref_140be(var_0, var_1) {
 }
 
 function init_vault_assault_rooftop_heli(var_0, var_1) {
-  scripts\cp\cp_spawning_util::ref_13bbd(0);
+  scripts\cp\cp_spawning_util::ref_13BBD(0);
 }
 
 function start_vault_assault_rooftop_heli(var_0, var_1) {
@@ -2029,15 +2029,15 @@ function start_vault_assault_rooftop_heli(var_0, var_1) {
     thread play_kill_heli_nags();
   }
 
-  level.ref_121c0 = ["bank_roof_paratroopers_low"];
-  thread ref_135af();
+  level.ref_121C0 = ["bank_roof_paratroopers_low"];
+  thread ref_135AF();
 
   while(isDefined(level.heli)) {
     wait 0.1;
   }
 
-  level.ref_121c0 = ["bank_roof_paratroopers_low", "bank_roof_paratroopers_high"];
-  scripts\cp\utility::ref_123fe("mus_cp_money_helo_destroyed");
+  level.ref_121C0 = ["bank_roof_paratroopers_low", "bank_roof_paratroopers_high"];
+  scripts\cp\utility::ref_123FE("mus_cp_money_helo_destroyed");
   level notify("enemy_heli_eliminated");
   level thread scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_bank_defend_rooftop_10");
   level.mark_heli = 0;
@@ -2046,7 +2046,7 @@ function start_vault_assault_rooftop_heli(var_0, var_1) {
 
 function end_vault_assault_rooftop_heli(var_0, var_1) {}
 
-function ref_135af() {
+function ref_135AF() {
   level endon("stop_paratroopers");
 
   for(;;) {
@@ -2055,8 +2055,8 @@ function ref_135af() {
     }
 
     if(isDefined(level.heli)) {
-      scripts\cp\cp_aiparachute::request_paratroopers(scripts\engine\utility::random(level.ref_121c0), undefined, (-13512, 66432, 5904));
-      thread ref_142ec();
+      scripts\cp\cp_aiparachute::request_paratroopers(scripts\engine\utility::random(level.ref_121C0), undefined, (-13512, 66432, 5904));
+      thread ref_142EC();
     } else if(randomint(100) > 50) {
       scripts\cp\cp_modular_spawning::run_spawn_module("bank_combat_heli_roof_low");
     } else {
@@ -2133,7 +2133,7 @@ function watchforhelideath() {
 }
 
 function init_vault_assault_rooftop_defend(var_0, var_1) {
-  scripts\cp\cp_spawning_util::ref_13bbd(0);
+  scripts\cp\cp_spawning_util::ref_13BBD(0);
 }
 
 function start_vault_assault_rooftop_defend(var_0, var_1) {
@@ -2176,21 +2176,21 @@ function end_vault_assault_rooftop_defend(var_0, var_1) {
   scripts\cp\cp_objectives::overridenextstep(var_0, "vault_assault_rooftop_exfil");
 }
 
-function ref_13e3c(var_0) {
+function ref_13E3C(var_0) {
   wait var_0;
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("bank_combat_heli_roof_low");
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("bank_combat_heli_roof_high");
 }
 
 function init_vault_assault_rooftop_exfil(var_0, var_1) {
-  scripts\cp\cp_spawning_util::ref_13bbd(0);
+  scripts\cp\cp_spawning_util::ref_13BBD(0);
 }
 
 function start_vault_assault_rooftop_exfil(var_0, var_1) {
   thread delay_and_play_vo_to_team(level, 10);
   level waittill("ready_to_exfil");
   level.battlechatterenabled = 0;
-  scripts\cp\utility::ref_123fe("mus_cp_money_helo_exfil");
+  scripts\cp\utility::ref_123FE("mus_cp_money_helo_exfil");
 
   foreach(var_3 in level.players) {
     level notify("kill_queued_bc_sound_" + var_3.name);
@@ -2229,7 +2229,7 @@ function end_vault_assault_rooftop_exfil(var_0, var_1) {}
 
 function mp_shipment_patch() {
   foreach(var_1 in level.players) {
-    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(2, 1, 1);
+    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340D(2, 1, 1);
   }
 
   wait 2;
@@ -2568,22 +2568,22 @@ function delay_then_run_spawn_module(var_0, var_1, var_2) {
   var_3 = undefined;
 
   if(isDefined(var_2)) {
-    var_3 = scripts\cp\cp_modular_spawning::set_wave_ref_override(var_2);
+    var_3 = scripts\cp\cp_modular_spawning::set_wave_ref_OVERRIDE(var_2);
     return;
   }
 }
 
-function ref_1337e(var_0) {
+function ref_1337E(var_0) {
   wait var_0;
   var_1 = scripts\engine\utility::getStruct("vault_assault_start", "targetname");
   var_2 = scripts\cp\cp_modular_spawning::get_module_structs_by_groupname("wave_spawning");
 
   foreach(var_4 in var_2) {
-    thread ref_1337d(var_4);
+    thread ref_1337D(var_4);
   }
 }
 
-function ref_1337d(var_0) {
+function ref_1337D(var_0) {
   scripts\cp\cp_modular_spawning::add_spawn_scoring_poi(var_0.origin, 3000, 10000);
   wait_for_player_nearby(var_0.origin, 3500);
   scripts\cp\cp_modular_spawning::remove_spawn_scoring_poi(var_0.origin);
@@ -2673,7 +2673,7 @@ function spawn_static_trucks() {
   }
 
   thread spawn_enemy_tanks();
-  thread ref_135fa();
+  thread ref_135FA();
 }
 
 function spawn_enemy_tanks() {
@@ -2687,7 +2687,7 @@ function spawn_enemy_tanks() {
   }
 }
 
-function ref_135fa() {
+function ref_135FA() {
   var_0 = scripts\engine\utility::getStructArray("bank_wheelson", "targetname");
   var_1 = 0;
 
@@ -2793,16 +2793,16 @@ function activate_rpgs_on_use() {
     var_6.loadoutprimarycosmeticattachment = "none";
     var_6.loadoutprimaryobject = scripts\cp\cp_weapon::buildweapon(var_6.loadoutprimary);
     var_6.loadoutprimaryfullname = createheadicon(var_6.loadoutprimaryobject);
-    var_7 = ref_1247d(var_1);
+    var_7 = ref_1247D(var_1);
     var_8 = ref_12475(var_1);
     var_9 = var_6.loadoutprimaryobject;
 
     if(!var_1 hasweapon("iw8_la_rpapa7_mp")) {
-      if(scripts\cp\cp_weapon::ref_124ad(var_1)) {
+      if(scripts\cp\cp_weapon::ref_124AD(var_1)) {
         scripts\cp\cp_weapon::minigamefinishcount(var_1);
         var_1 waittill("weapon_change");
 
-        while(scripts\cp\cp_weapon::ref_124ad(var_1)) {
+        while(scripts\cp\cp_weapon::ref_124AD(var_1)) {
           waitframe();
         }
 
@@ -2824,7 +2824,7 @@ function activate_rpgs_on_use() {
     var_1 setweaponammoclip(var_9, var_10);
     var_1 setweaponammostock(var_9, var_11);
 
-    if(!var_7 && !scripts\cp\cp_weapon::ref_124ad(var_1)) {
+    if(!var_7 && !scripts\cp\cp_weapon::ref_124AD(var_1)) {
       var_1 switchtoweaponimmediate(var_9);
     }
 
@@ -2835,7 +2835,7 @@ function activate_rpgs_on_use() {
   self delete();
 }
 
-function ref_1247d() {
+function ref_1247D() {
   var_0 = self getcurrentprimaryweapon();
 
   if(var_0.basename == "iw8_la_rpapa7_mp") {
@@ -2915,12 +2915,12 @@ function spawn_remote_tank(var_0, var_1, var_2) {
     var_4.mgturret makeunusable();
     thread damage_monitor();
     thread init_global_cp_script_funcs();
-    thread ref_12bc0(var_4, var_0);
+    thread ref_12BC0(var_4, var_0);
     return;
   }
 }
 
-function ref_12bc0(var_0, var_1) {
+function ref_12BC0(var_0, var_1) {
   self endon("death");
 
   if(isDefined(var_1)) {
@@ -2930,7 +2930,7 @@ function ref_12bc0(var_0, var_1) {
   scripts\engine\utility::flag_wait("activate_wheelsons");
   wait 5;
   self vehicle_setspeed(1, 1, 1);
-  thread ref_145b3(var_0);
+  thread ref_145B3(var_0);
 }
 
 function init_global_cp_script_funcs() {
@@ -2943,9 +2943,9 @@ function init_global_cp_script_funcs() {
   }
 }
 
-function ref_145b3(var_0) {
+function ref_145B3(var_0) {
   self endon("death");
-  var_1 = ref_145ad(var_0);
+  var_1 = ref_145AD(var_0);
   var_2 = 1;
   var_3 = 3;
   var_4 = 40000;
@@ -2958,7 +2958,7 @@ function ref_145b3(var_0) {
   self startpathnodes(var_1, var_5, 1, 0.5, 0.5, 0, 1);
 }
 
-function ref_145ad(var_0) {
+function ref_145AD(var_0) {
   self endon("death");
   var_1 = [];
   var_2 = var_0;
@@ -2985,11 +2985,11 @@ function fire_sfx_org(var_0) {
 function damage_monitor() {
   self endon("stop_damage_monitor");
   self endon("death");
-  thread ref_13a41();
+  thread ref_13A41();
   self setCanDamage(1);
   self.health = 100000;
   self.currenthealth = 900;
-  self.ref_13c4f = 900;
+  self.ref_13C4F = 900;
   self.currentdamagestate = 0;
   var_0 = 0.25;
 
@@ -3017,7 +3017,7 @@ function damage_monitor() {
       }
 
       if(var_10.classname == "rocketlauncher") {
-        var_1 = max(var_1, self.ref_13c4f / 2 + 10);
+        var_1 = max(var_1, self.ref_13C4F / 2 + 10);
       }
     }
 
@@ -3029,10 +3029,10 @@ function damage_monitor() {
       if(isDefined(var_10)) {
         switch (var_10.basename) {
           case "molotov_mp":
-            thread ref_11cbb(6, var_2, var_4);
+            thread ref_11CBB(6, var_2, var_4);
             break;
           case "thermite_mp":
-            thread ref_13b1b(7, var_2, var_4);
+            thread ref_13B1B(7, var_2, var_4);
             break;
           default:
             break;
@@ -3075,20 +3075,20 @@ function damage_monitor() {
 
     self.currenthealth -= var_1;
 
-    if(self.currenthealth <= int(self.ref_13c4f / 1.2) && self.currentdamagestate == 0) {
+    if(self.currenthealth <= int(self.ref_13C4F / 1.2) && self.currentdamagestate == 0) {
       self.currentdamagestate = 1;
       self setscriptablepartstate("body_damage_light", "on");
       continue;
     }
 
-    if(self.currenthealth <= int(self.ref_13c4f / 2) && self.currentdamagestate == 1) {
+    if(self.currenthealth <= int(self.ref_13C4F / 2) && self.currentdamagestate == 1) {
       self.currentdamagestate = 2;
       self setscriptablepartstate("body_damage_medium", "on");
     }
   }
 }
 
-function ref_11cbb(var_0, var_1, var_2) {
+function ref_11CBB(var_0, var_1, var_2) {
   self endon("death");
   var_3 = 2025;
 
@@ -3106,7 +3106,7 @@ function ref_11cbb(var_0, var_1, var_2) {
   }
 }
 
-function ref_13b1b(var_0, var_1, var_2) {
+function ref_13B1B(var_0, var_1, var_2) {
   self endon("death");
   var_3 = 2025;
 
@@ -3124,7 +3124,7 @@ function ref_13b1b(var_0, var_1, var_2) {
   }
 }
 
-function ref_13a41() {
+function ref_13A41() {
   level endon("game_ended");
   self waittill("death");
 
@@ -3477,18 +3477,18 @@ function mortar_think(var_0) {
   }
 }
 
-function ref_142ec() {
-  if(!isDefined(level.ref_121d5)) {
-    level.ref_121d5 = gettime() - 1000;
+function ref_142EC() {
+  if(!isDefined(level.ref_121D5)) {
+    level.ref_121D5 = gettime() - 1000;
   }
 
-  if(level.ref_121d5 > gettime()) {
+  if(level.ref_121D5 > gettime()) {
     return;
   }
 
   var_0 = ["dx_cps_kama_callout_paratrooper_spawning_10", "dx_cps_kama_callout_paratrooper_spawning_20", "dx_cps_lass_callout_paratrooper_spawning_10", "dx_cps_lass_callout_paratrooper_spawning_20"];
   level scripts\cp\cp_vo::try_to_play_vo_on_team(scripts\engine\utility::random(var_0), "allies");
-  level.ref_121d5 = gettime() + 30000;
+  level.ref_121D5 = gettime() + 30000;
 }
 
 function get_players_on_rooftop(var_0) {
@@ -3510,7 +3510,7 @@ function get_players_on_rooftop(var_0) {
   return var_4;
 }
 
-function ref_13f05() {
+function ref_13F05() {
   self endon("disconnect");
   self waittill("loadout_given");
   wait 3;

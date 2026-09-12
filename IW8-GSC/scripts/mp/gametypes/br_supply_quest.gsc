@@ -10,18 +10,18 @@ function init() {
     return;
   }
 
-  scripts\mp\gametypes\br_quest_util::registerremovequestinstance("supply", &ref_139a2);
-  scripts\mp\gametypes\br_quest_util::registeronplayerkilled("supply", &ref_1399f);
-  scripts\mp\gametypes\br_quest_util::ref_12b2e("supply", &ref_139a0);
-  scripts\mp\gametypes\br_quest_util::ref_12b2d("supply", &ref_1399c);
-  scripts\mp\gametypes\br_quest_util::ref_12b30("supply", &ref_1399d);
-  scripts\mp\gametypes\br_quest_util::registerquestcircletick("supply", &ref_1398f);
+  scripts\mp\gametypes\br_quest_util::registerremovequestinstance("supply", &ref_139A2);
+  scripts\mp\gametypes\br_quest_util::registeronplayerkilled("supply", &ref_1399F);
+  scripts\mp\gametypes\br_quest_util::ref_12B2E("supply", &ref_139A0);
+  scripts\mp\gametypes\br_quest_util::ref_12B2D("supply", &ref_1399C);
+  scripts\mp\gametypes\br_quest_util::ref_12B30("supply", &ref_1399D);
+  scripts\mp\gametypes\br_quest_util::registerquestcircletick("supply", &ref_1398F);
   game["dialog"]["mission_sup_accept"] = "mission_mission_gen_accept";
   game["dialog"]["mission_sup_dropnotify"] = "mission_mission_scav_accept";
   game["dialog"]["mission_sup_success"] = "contract_misc_success";
   game["dialog"]["mission_sup_fail"] = "mission_mission_gen_fail";
-  scripts\mp\gametypes\br_quest_util::ref_1297c("supply", 1);
-  scripts\mp\gametypes\br_quest_util::ref_12b31("supply", &ref_1399e);
+  scripts\mp\gametypes\br_quest_util::ref_1297C("supply", 1);
+  scripts\mp\gametypes\br_quest_util::ref_12B31("supply", &ref_1399E);
   totaltrainlootcrates();
 }
 
@@ -33,7 +33,7 @@ function takequestitem(var_0) {
   var_1.team = self.team;
   var_1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "players");
   ref_13999(var_1);
-  var_1 scripts\mp\gametypes\br_quest_util::ref_1297d(getdvarint("scr_br_supply_questTimeBase", 180), 4);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_1297D(getdvarint("scr_br_supply_questTimeBase", 180), 4);
   scripts\mp\gametypes\br_quest_util::addquestinstance("supply", var_1);
   scripts\mp\gametypes\br_quest_util::ref_13879("supply", self, self.team);
   var_2 = spawnStruct();
@@ -41,7 +41,7 @@ function takequestitem(var_0) {
   var_2.excludedplayers[0] = var_1.semtex_stuckplayer;
   var_2.ogangles = [];
   var_2.ogangles[0] = var_1.team;
-  var_2.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("supply", scripts\mp\gametypes\br_quest_util::ringing(self.team));
+  var_2.ref_127D5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("supply", scripts\mp\gametypes\br_quest_util::ringing(self.team));
   scripts\mp\gametypes\br_quest_util::displayteamsplash(var_1.team, "br_supply_quest_start_team", var_2);
   scripts\mp\gametypes\br_quest_util::displayplayersplash(var_1.semtex_stuckplayer, "br_supply_quest_start_tablet_finder", var_2);
   level thread scripts\mp\gametypes\br_public::dmztutdropcash("mission_sup_accept", var_1.team, var_1.semtex_stuckplayer, 1, 0.5);
@@ -62,11 +62,11 @@ function ref_13999() {
   }
 }
 
-function ref_1399f(var_0, var_1) {
-  ref_139a1(var_1, var_0);
+function ref_1399F(var_0, var_1) {
+  ref_139A1(var_1, var_0);
 }
 
-function ref_139a0(var_0) {
+function ref_139A0(var_0) {
   if(var_0.team == self.team) {
     var_1 = scripts\mp\utility\teams::getteamdata(self.team, "players");
     scripts\mp\gametypes\br_quest_util::getquestinstancedata("supply", self.team).playerlist = var_1;
@@ -81,35 +81,35 @@ function ref_139a0(var_0) {
     }
   }
 
-  ref_139a1(var_0);
+  ref_139A1(var_0);
 }
 
-function ref_1399c(var_0) {
+function ref_1399C(var_0) {
   ref_13998(var_0);
 }
 
-function ref_1399d(var_0) {
+function ref_1399D(var_0) {
   if(var_0.team == self.team) {
-    ref_1399a(var_0);
+    ref_1399A(var_0);
     return;
   }
 }
 
-function ref_139a1(var_0, var_1) {}
+function ref_139A1(var_0, var_1) {}
 
-function ref_1399e() {
+function ref_1399E() {
   level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_sup_fail", self.team, 1, 1);
   scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_supply_quest_timer_expired");
   self.result = "fail";
   scripts\mp\gametypes\br_quest_util::removequestinstance();
 }
 
-function ref_139a2() {
+function ref_139A2() {
   ref_13997();
   scripts\mp\gametypes\br_quest_util::releaseteamonquest(self.team);
 }
 
-function ref_1399a(var_0) {
+function ref_1399A(var_0) {
   var_0 scripts\mp\gametypes\br_quest_util::uiobjectiveshow("supply");
 }
 
@@ -129,18 +129,18 @@ function ref_13990() {
   var_2 = scripts\mp\gametypes\br_quest_util::getquestindex("supply");
   var_3 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("supply"));
   var_4 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining(self.semtex_stuckplayer);
-  var_0.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_2, var_1, var_3, undefined, var_4);
+  var_0.ref_121B5 = scripts\mp\gametypes\br_quest_util::ref_121B9(var_2, var_1, var_3, undefined, var_4);
   scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_supply_quest_complete", var_0);
   level thread scripts\mp\gametypes\br_public::dmztutdropcash("mission_sup_success", self.team, self.semtex_stuckplayer, 1, 0, 0.5);
   level thread scripts\mp\gametypes\br_public::dmztut_endgamewithreward("mission_sup_success", self.semtex_stuckplayer, 1, 0, 0.5);
-  self.ref_12d2d = undefined;
-  self.ref_12d2e = self.semtex_stuckplayer.origin;
-  self.ref_12d2b = self.semtex_stuckplayer.angles;
+  self.ref_12D2D = undefined;
+  self.ref_12D2E = self.semtex_stuckplayer.origin;
+  self.ref_12D2B = self.semtex_stuckplayer.angles;
   self.result = "success";
   thread scripts\mp\gametypes\br_quest_util::removequestinstance();
 }
 
-function ref_1398e() {
+function ref_1398E() {
   level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_sup_fail", self.team, 1, 1);
   scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_supply_quest_circle_failure");
   self.result = "fail";
@@ -154,7 +154,7 @@ function ref_13994() {
   scripts\mp\gametypes\br_quest_util::removequestinstance();
 }
 
-function ref_1398f(var_0, var_1) {
+function ref_1398F(var_0, var_1) {
   if(scripts\mp\gametypes\br_circle::getsafecircleradius() > 0) {
     var_2 = scripts\mp\gametypes\br_circle::getdangercircleradius();
 
@@ -174,7 +174,7 @@ function ref_1398f(var_0, var_1) {
       var_4 = distance2d(self.crate.origin, var_0);
 
       if(var_4 > var_2) {
-        ref_1398e();
+        ref_1398E();
         self.crate setscriptablepartstate("objective_map", "inactive", 0);
         return;
       }
@@ -244,7 +244,7 @@ function ref_13992(var_0) {
     self.ref_13428 delete();
   }
 
-  ref_1399b(var_0);
+  ref_1399B(var_0);
 
   if(isDefined(scripts\mp\gametypes\br_quest_util::reviveteam("supply", self.trackriotshield_monitorshieldattach))) {
     var_1 = scripts\mp\gametypes\br_quest_util::reviveteam("supply", self.trackriotshield_monitorshieldattach);
@@ -259,7 +259,7 @@ function ref_13992(var_0) {
   }
 }
 
-function ref_1399b(var_0) {
+function ref_1399B(var_0) {
   self.itemsdropped = 0;
 
   if(!isDefined(level.deletesmokinggunhud)) {
@@ -271,24 +271,24 @@ function ref_1399b(var_0) {
   var_1 = verifybunkercode("contract_supply_crate", level.deletesmokinggunhud);
 
   if(isDefined(var_1)) {
-    var_1 = scripts\mp\gametypes\br_lootcache::ref_11a1a(var_1, var_0);
+    var_1 = scripts\mp\gametypes\br_lootcache::ref_11A1A(var_1, var_0);
   }
 
   if(isDefined(var_1) && var_0 scripts\mp\utility\perk::_hasperk("specialty_br_extra_killstreak_chance")) {
-    var_1 = scripts\mp\gametypes\br_lootcache::ref_11a1d(var_1, var_0);
+    var_1 = scripts\mp\gametypes\br_lootcache::ref_11A1D(var_1, var_0);
   }
 
   if(isDefined(var_1)) {
-    var_2 = scripts\mp\gametypes\br_lootcache::ref_11a42(var_1, 0);
+    var_2 = scripts\mp\gametypes\br_lootcache::ref_11A42(var_1, 0);
   }
 
-  if(!isDefined(var_0.ref_11a01)) {
-    var_0.ref_11a01 = 1;
+  if(!isDefined(var_0.ref_11A01)) {
+    var_0.ref_11A01 = 1;
   } else {
-    var_0.ref_11a01++;
+    var_0.ref_11A01++;
   }
 
-  var_0 scripts\mp\utility\stats::setextrascore1(var_0.ref_11a01);
+  var_0 scripts\mp\utility\stats::setextrascore1(var_0.ref_11A01);
   var_0 thread scripts\mp\utility\points::giveunifiedpoints("br_loot_chopper_box_open");
 }
 

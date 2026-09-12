@@ -78,10 +78,10 @@ function medical_crate_loot_distribution() {
       var_11 = level.br_pickups.delay_hide_player_clip[var_10];
 
       if(isDefined(var_11) && var_11 == 4) {
-        var_12 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_10, var_8, self.origin, self.angles, 0, 1);
+        var_12 = scripts\mp\gametypes\br_lootcache::ref_11A41(var_10, var_8, self.origin, self.angles, 0, 1);
         var_13 = 1;
       } else {
-        var_12 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_14, var_9, self.origin, self.angles, 0, 0);
+        var_12 = scripts\mp\gametypes\br_lootcache::ref_11A41(var_14, var_9, self.origin, self.angles, 0, 0);
       }
 
       var_12.count = var_3[1];

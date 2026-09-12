@@ -18,8 +18,8 @@ function init() {
     level.initpostmain = 0;
   }
 
-  if(!isDefined(level.ref_13beb)) {
-    level.ref_13beb = 0;
+  if(!isDefined(level.ref_13BEB)) {
+    level.ref_13BEB = 0;
   }
 
   foreach(var_1 in level.ascendstarts) {
@@ -31,7 +31,7 @@ function init() {
   }
 
   initanimtree();
-  scripts\engine\scriptable::ref_12f5b("ascender", &ascenderscriptableused);
+  scripts\engine\scriptable::ref_12F5B("ascender", &ascenderscriptableused);
 }
 
 function registered_checkpoints() {
@@ -140,7 +140,7 @@ function markupascenderstruct(var_0, var_1) {
   }
 
   level.ascendstructs[var_0.targetname] = var_0;
-  level.ref_13beb++;
+  level.ref_13BEB++;
   var_0.ascendstructend = var_2;
   var_0.ascendstructout = var_3;
   var_0.inuse = 0;
@@ -219,7 +219,7 @@ function ascenddeathlistener(var_0) {
   self endon("ascend_solo_complete");
   self endon("ascender_cancel");
   var_1 = spawnStruct();
-  var_1.ref_125bc = self.guid;
+  var_1.ref_125BC = self.guid;
   var_1.cansnapcamera = self.cansnapcamera;
   var_1.cansolospawn = self.cansolospawn;
   self waittill("death_or_disconnect");
@@ -386,7 +386,7 @@ function get_any_player_has_respawn(var_0, var_1) {
     return false;
   }
 
-  var_5 = max(level.ref_13beb, 30);
+  var_5 = max(level.ref_13BEB, 30);
   var_6 = getdvarint("scr_ascender_override_max_active", var_5);
 
   if(var_6 != -1) {
@@ -398,7 +398,7 @@ function get_any_player_has_respawn(var_0, var_1) {
     return false;
   }
 
-  if(isDefined(var_4.ref_134cb) && istrue(var_4.ref_134cb.inuse)) {
+  if(isDefined(var_4.ref_134CB) && istrue(var_4.ref_134CB.inuse)) {
     thread denyascendmessage();
     return false;
   }
@@ -465,7 +465,7 @@ function ascenderuse(var_0, var_1) {
   var_2.ascender[var_1.guid].angles = var_2.angles;
   var_6 = spawn("script_model", var_2.origin);
 
-  if(!scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(!scripts\cp_mp\utility\game_utility::ref_140AA()) {
     var_6 setModel("misc_wm_ascender");
   } else {
     var_6 setModel("misc_vm_ascender_ch3");
@@ -474,7 +474,7 @@ function ascenderuse(var_0, var_1) {
   var_6 showonlytoplayer(var_1);
   var_7 = spawn("script_model", var_2.origin);
 
-  if(!scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(!scripts\cp_mp\utility\game_utility::ref_140AA()) {
     var_7 setModel("misc_wm_ascender");
   } else {
     var_7 setModel("misc_wm_ascender_ch3");
@@ -583,7 +583,7 @@ function cleanupascenduse(var_0) {
   }
 
   if(isDefined(self.locationsnames)) {
-    var_2 = self.locationsnames.ref_125bc;
+    var_2 = self.locationsnames.ref_125BC;
     self.locationsnames = undefined;
   }
 
@@ -609,7 +609,7 @@ function cleanupascenduse(var_0) {
       var_3 = self.scriptable.script_noteworthy;
     }
 
-    if(isDefined(self.ref_134cb)) {
+    if(isDefined(self.ref_134CB)) {
       self.scriptable setscriptablepartstate("ascender_solo", var_3);
     } else {
       self.scriptable setscriptablepartstate("ascender", var_3);
@@ -630,7 +630,7 @@ function watch_for_ashes_achievement() {
   level endon("game_ended");
   var_0 = self;
   var_0 endon("disconnect");
-  var_0 scripts\engine\utility::ref_143a5("death", "last_stand_finished");
+  var_0 scripts\engine\utility::ref_143A5("death", "last_stand_finished");
   var_0 enableoffhandweapons();
   var_0 enableweaponswitch();
   var_0 method_87e5();

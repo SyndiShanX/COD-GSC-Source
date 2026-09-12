@@ -12,7 +12,7 @@ function claymore_use(var_0) {
   self endon("disconnect");
   var_0 endon("death");
   var_0.exploding = 1;
-  var_0.ref_121ac = self.name;
+  var_0.ref_121AC = self.name;
   thread scripts\cp\cp_weapon::monitordisownedequipment(self, var_0);
   var_1 = spawnStruct();
   var_1.throwspeedforward = 100;
@@ -224,7 +224,7 @@ function claymore_explode(var_0) {
   var_3 = -1 * anglestoright(self.angles);
   var_4 = anglesToForward(self.angles);
   playFX(scripts\engine\utility::getfx("claymore_explode"), self.origin, var_2, var_4);
-  level notify("grenade_exploded_during_stealth", self.origin, "claymore_mp", self.ref_121ac);
+  level notify("grenade_exploded_during_stealth", self.origin, "claymore_mp", self.ref_121AC);
   self detonate();
 }
 

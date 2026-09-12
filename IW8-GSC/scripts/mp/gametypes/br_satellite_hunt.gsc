@@ -35,7 +35,7 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("killstreak", "harpTimeout", &setupx1timelimit);
   level.dialog_wait_ready_civ = 0;
   scripts\mp\gametypes\br_gametype_truckwar::stoppingpower_givehcrdata();
-  level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13df8();
+  level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13DF8();
   thread deletecircle();
 }
 
@@ -59,7 +59,7 @@ function deletecircle() {
   scripts\mp\utility\sound::besttime("br_event_satellite_sfx");
 }
 
-function ref_12a17(var_0, var_1) {
+function ref_12A17(var_0, var_1) {
   var_2 = scripts\engine\trace::ray_trace(var_0, var_1);
   var_3 = [];
 
@@ -88,7 +88,7 @@ function tank_arrive_and_fire() {
     var_3 = var_5;
   }
 
-  level.ref_12eaa = var_3;
+  level.ref_12EAA = var_3;
 }
 
 function minigun_manager(var_0, var_1, var_2, var_3) {
@@ -97,11 +97,11 @@ function minigun_manager(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = (0, 0, 500);
-  var_5 = ref_12a17(var_1 + var_4, var_1 - var_4);
+  var_5 = ref_12A17(var_1 + var_4, var_1 - var_4);
   var_6 = var_5["position"] + (0, 0, 23);
   var_7 = var_2 + (0, -90, 110);
   lootstruct_offsets(var_0, var_3, var_6);
-  var_8 = ref_135c6(var_0, var_6, var_7);
+  var_8 = ref_135C6(var_0, var_6, var_7);
   var_8 radiusdamage(var_6, 500, 1000, 50);
   var_8 setscriptablepartstate("model", "crashed");
   var_8 playSound("br_sat_sat_impact");
@@ -111,7 +111,7 @@ function minigun_manager(var_0, var_1, var_2, var_3) {
     level thread scripts\mp\gametypes\br_public::dmztut_luicallback("satellite_located", var_0, 1);
   }
 
-  ref_11a93(var_0, var_8);
+  ref_11A93(var_0, var_8);
   thread ref_14482(level, var_8);
 
   if(isDefined(level.modeupdateloadoutclass)) {
@@ -132,37 +132,37 @@ function lootstruct_offsets(var_0, var_1, var_2) {
   var_9 = var_8 * 0.75;
   var_6 moveTo(var_2, var_8, var_9, 0.05);
   var_6 playLoopSound("br_sat_sat_lp");
-  thread ref_12ea5(level);
-  thread ref_12ea8(level);
+  thread ref_12EA5(level);
+  thread ref_12EA8(level);
   wait var_8;
   var_6 setscriptablepartstate("model", "impact");
-  ref_12ea9(var_2);
+  ref_12EA9(var_2);
   var_6 stoploopsound();
   var_6 notify("stop_satellite_flight_rumble");
   var_6 notify("stop_satellite_vehicle_crush");
   var_6 delete();
 }
 
-function ref_12ea9(var_0) {
+function ref_12EA9(var_0) {
   var_1 = scripts\engine\trace::sphere_trace_get_all_results(var_0, var_0, 60);
 
   foreach(var_3 in var_1) {
     var_4 = var_3["entity"];
-    ref_13dfd(var_4, var_0);
+    ref_13DFD(var_4, var_0);
   }
 }
 
-function ref_12ea8(var_0) {
+function ref_12EA8(var_0) {
   var_0 endon("death");
   var_0 endon("stop_satellite_vehicle_crush");
 
   for(;;) {
     var_0 waittill("touch", var_1);
-    ref_13dfd(var_1, var_0.origin);
+    ref_13DFD(var_1, var_0.origin);
   }
 }
 
-function ref_13dfd(var_0, var_1) {
+function ref_13DFD(var_0, var_1) {
   if(!isDefined(var_0) || !isalive(var_0)) {
     return;
   }
@@ -184,7 +184,7 @@ function ref_13553(var_0, var_1) {
   return var_2;
 }
 
-function ref_135c6(var_0, var_1, var_2) {
+function ref_135C6(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_1);
   var_3.angles = var_2;
   var_3 setModel("p9_ang_satellite_recovery_unit_full_02");
@@ -203,7 +203,7 @@ function ref_135c6(var_0, var_1, var_2) {
   return var_3;
 }
 
-function ref_12ea5(var_0) {
+function ref_12EA5(var_0) {
   var_0 endon("death");
   var_0 endon("stop_satellite_flight_rumble");
   var_1 = -10000;
@@ -217,7 +217,7 @@ function ref_12ea5(var_0) {
   }
 }
 
-function ref_11a93(var_0, var_1) {
+function ref_11A93(var_0, var_1) {
   var_1 makeusable();
 
   if(var_0 != "none") {
@@ -245,7 +245,7 @@ function ref_11a93(var_0, var_1) {
   var_1.usetime = 0;
 }
 
-function ref_11a92(var_0) {
+function ref_11A92(var_0) {
   var_0 notify("satellite_cache_unusable");
   var_0 makeunusable();
   var_0 setscriptablepartstate("objective", "inactive");
@@ -257,7 +257,7 @@ function ref_14482(var_0, var_1) {
 
   for(;;) {
     var_0 waittill("trigger", var_2);
-    var_3 = ref_13e08(var_0, var_2);
+    var_3 = ref_13E08(var_0, var_2);
 
     if(var_3) {
       if(isDefined(var_1)) {
@@ -267,7 +267,7 @@ function ref_14482(var_0, var_1) {
   }
 }
 
-function ref_13e08(var_0, var_1) {
+function ref_13E08(var_0, var_1) {
   var_0 endon("death");
   var_0.inuse = 0;
   var_0.playerusing = undefined;
@@ -294,9 +294,9 @@ function ref_13e08(var_0, var_1) {
   return var_2;
 }
 
-function ref_11ff4(var_0, var_1) {
-  var_2 = ref_135c7(var_0);
-  ref_11a92(var_0);
+function ref_11FF4(var_0, var_1) {
+  var_2 = ref_135C7(var_0);
+  ref_11A92(var_0);
   var_0 setscriptablepartstate("model", "open");
 
   if(isDefined(var_1)) {
@@ -321,7 +321,7 @@ function ref_11ff4(var_0, var_1) {
   }
 }
 
-function ref_135c7(var_0) {
+function ref_135C7(var_0) {
   var_1 = random_loot_override(var_0);
 
   if(!isDefined(var_1) || var_1.size <= 0) {
@@ -333,8 +333,8 @@ function ref_135c7(var_0) {
   var_2.origin = var_0.origin + var_3 * 45;
   var_2.angles = (0, var_0.angles[1], 0);
   var_2.itemsdropped = 0;
-  var_4 = var_2 scripts\mp\gametypes\br_lootcache::ref_11a42(var_1, 1, undefined);
-  ref_13c36(var_4);
+  var_4 = var_2 scripts\mp\gametypes\br_lootcache::ref_11A42(var_1, 1, undefined);
+  ref_13C36(var_4);
   return var_4;
 }
 
@@ -357,7 +357,7 @@ function random_loot_override(var_0) {
 function gettruegroundposition() {
   var_0 = 0;
 
-  foreach(var_2 in level.ref_12eaa) {
+  foreach(var_2 in level.ref_12EAA) {
     if(var_2.ml_p3_to_safehouse_transition >= var_2.modeiskillstreakallowed) {
       continue;
     }
@@ -372,7 +372,7 @@ function gettruegroundposition() {
   var_4 = randomint(var_0);
   var_5 = 0;
 
-  foreach(var_2 in level.ref_12eaa) {
+  foreach(var_2 in level.ref_12EAA) {
     if(var_2.ml_p3_to_safehouse_transition >= var_2.modeiskillstreakallowed) {
       continue;
     }
@@ -387,9 +387,9 @@ function gettruegroundposition() {
   return undefined;
 }
 
-function ref_13c36(var_0) {
+function ref_13C36(var_0) {
   foreach(var_2 in var_0) {
-    var_3 = level.ref_12eaa[var_2.type];
+    var_3 = level.ref_12EAA[var_2.type];
 
     if(!isDefined(var_3)) {
       continue;
@@ -656,7 +656,7 @@ function ref_13696(var_0, var_1, var_2) {
   var_6.onuseupdate = &domflag_onuseupdate;
   var_6.lockupdatingicons = 1;
   var_6.getrandompointincirclewithindistance = 1;
-  var_6.ref_12f83 = var_2;
+  var_6.ref_12F83 = var_2;
   getbnetigrbattlepassxpmultiplier(var_6.objidnum, 450, 500);
   objective_setshowoncompass(var_6.objidnum, 0);
   objective_state(var_6.objidnum, "invisible");
@@ -768,7 +768,7 @@ function domflag_onuse(var_0) {
 
   wait randomfloatrange(1, 2);
 
-  if(!self.ref_12f83) {
+  if(!self.ref_12F83) {
     thread modifyakimboburstrenettidamagehack(level, var_1);
     return;
   }

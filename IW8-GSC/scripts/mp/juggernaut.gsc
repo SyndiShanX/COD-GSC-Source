@@ -5,7 +5,7 @@
 
 function init() {
   level.activejuggernauts = [];
-  level.ref_11b5f = getdvarint("scr_ks_jugg_team_max", 0);
+  level.ref_11B5F = getdvarint("scr_ks_jugg_team_max", 0);
 }
 
 function jugg_makejuggernaut(var_0, var_1) {
@@ -169,10 +169,10 @@ function jugg_createconfig(var_0, var_1) {
   var_2.maxhealth = 3000;
   var_2.startinghealth = var_2.maxhealth;
   var_2.movespeedscalar = -0.2;
-  var_2.ref_11b7d = 5;
+  var_2.ref_11B7D = 5;
 
   if(level.gametype == "br") {
-    var_2.ref_11b7d = 3;
+    var_2.ref_11B7D = 3;
   }
 
   var_2.forcetostand = 1;
@@ -472,7 +472,7 @@ function jugg_watchoverlaydamagestates(var_0) {
   var_8 = "mask_on";
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("damage", "jugg_health_regen");
+    scripts\engine\utility::ref_143A5("damage", "jugg_health_regen");
 
     if(self.health <= var_5) {
       var_8 = "mask_damage_critical";
@@ -549,7 +549,7 @@ function vehicle_damage_registervisualpercentcallback() {
 }
 
 function vehicle_damage_setdeathcallback() {
-  return istrue(self.juggcontext.juggconfig.ref_140a7);
+  return istrue(self.juggcontext.juggconfig.ref_140A7);
 }
 
 function vehicle_damage_updatestatemaxhealthvalues(var_0) {
@@ -672,7 +672,7 @@ function vehicle_deregister_on_death(var_0, var_1) {
 
   if(isDefined(var_1) && isexplosivedamagemod(var_1)) {
     var_4 = 7;
-    var_5 = var_3.ref_11b7d;
+    var_5 = var_3.ref_11B7D;
   }
 
   var_6 = var_0 * var_4;
@@ -701,7 +701,7 @@ function vehicle_damage_updatestate_br(var_0) {
 }
 
 function changecirclestateatlowtime() {
-  if(istrue(level.ref_11b5f) && level.activejuggernauts.size > 0) {
+  if(istrue(level.ref_11B5F) && level.activejuggernauts.size > 0) {
     var_0 = 0;
     var_1 = level.activejuggernauts.size;
 
@@ -713,7 +713,7 @@ function changecirclestateatlowtime() {
       }
     }
 
-    if(var_0 >= level.ref_11b5f) {
+    if(var_0 >= level.ref_11B5F) {
       return true;
     }
   }

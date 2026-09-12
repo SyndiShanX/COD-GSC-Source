@@ -120,9 +120,9 @@ function manageminigunpickup(var_0, var_1) {
   var_1.lasttimekidnapped = gettime();
   var_0 scripts\engine\utility::set_movement_speed(0);
   var_0.health = 99999;
-  thread ref_12b51(var_0, var_0, var_1);
+  thread ref_12B51(var_0, var_0, var_1);
   thread release_player_on_death(var_0, var_0);
-  var_0.restoreweapon = var_0.ref_1237e;
+  var_0.restoreweapon = var_0.ref_1237E;
   var_0 takeweapon(var_0.weapon);
   thread ref_13650(var_0);
 
@@ -145,7 +145,7 @@ function manageminigunpickup(var_0, var_1) {
     var_1.times_kidnapped++;
   }
 
-  scripts\cp\cp_analytics::ref_119b4(var_1, 1.8);
+  scripts\cp\cp_analytics::ref_119B4(var_1, 1.8);
   var_0 waittill("kidnap_sequence_complete");
 
   if(isDefined(var_1.restoreweapon)) {
@@ -154,8 +154,8 @@ function manageminigunpickup(var_0, var_1) {
 
   killkidnappedplayer(var_1, var_0);
 
-  if(isDefined(var_0.ref_12f89)) {
-    var_0.ref_12f89 delete();
+  if(isDefined(var_0.ref_12F89)) {
+    var_0.ref_12F89 delete();
   }
 
   var_1 notify("remove_rig");
@@ -182,7 +182,7 @@ function turnkidnappertonormalai(var_0) {
   var_0 notify("kidnapper_turned_to_normal_ai");
 }
 
-function ref_12d9c(var_0, var_1) {
+function ref_12D9C(var_0, var_1) {
   var_2 = var_1.player_rig;
   var_2 rotateTo(var_0.angles, 0.2);
   wait 0.2;
@@ -190,7 +190,7 @@ function ref_12d9c(var_0, var_1) {
   var_1 setplayerangles(var_0.angles);
 }
 
-function ref_12b51(var_0, var_1, var_2) {
+function ref_12B51(var_0, var_1, var_2) {
   var_0 endon("kidnap_kill_started");
   var_0 endon("death");
   var_3 = 0;
@@ -293,7 +293,7 @@ function watch_for_kidnapper_death(var_0, var_1) {
 function ref_14464(var_0, var_1) {
   level endon("game_ended");
   var_0 endon("death");
-  var_1 scripts\engine\utility::ref_143a5("death", "disconnect");
+  var_1 scripts\engine\utility::ref_143A5("death", "disconnect");
   turnkidnappertonormalai(var_0);
 }
 
@@ -458,7 +458,7 @@ function togglekidnappers(var_0) {
   level.cp_kidnappers_active = var_0;
 }
 
-function ref_13a37(var_0) {
+function ref_13A37(var_0) {
   var_0.restoreweapon = var_0 getcurrentweapon();
   var_1 = getcompleteweaponname("iw8_gunless");
   var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon(var_1, undefined, undefined, 1);
@@ -475,8 +475,8 @@ function ref_13650(var_0) {
   var_2 setModel("attachment_wm_pi_golf21_slide");
   var_2 linkTo(var_1);
   var_0.pistol = var_1;
-  var_0.ref_1237d = var_2;
-  var_0 scripts\engine\utility::ref_143a5("death", "kidnap_kill_started");
+  var_0.ref_1237D = var_2;
+  var_0 scripts\engine\utility::ref_143A5("death", "kidnap_kill_started");
   var_1 delete();
   var_2 delete();
 }
@@ -495,14 +495,14 @@ function lootleaderoneperteam(var_0, var_1) {
   var_1 scripts\common\anim::anim_first_frame_solo(var_1.player_rig, "kidnapper_grab");
   var_1.player_rig hide();
   link_player_to_rig(var_1, 0.2);
-  ref_12d9c(var_0, var_1);
+  ref_12D9C(var_0, var_1);
   var_2 = var_0 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "cp_kidnapper_melee_attack");
   var_3 = var_0 scripts\asm\asm::asm_getxanim("animscripted", var_2);
   var_4 = getanimlength(%cp_hostagetaker_grab_attacker);
   var_5 = spawn("script_origin", var_1.origin);
   var_5.origin = var_1.origin;
   var_5.angles = var_1.angles;
-  var_0.ref_12f89 = var_5;
+  var_0.ref_12F89 = var_5;
   var_6 = getstartorigin(var_5.origin, var_5.angles, var_3);
   var_7 = getstartangles(var_5.origin, var_5.angles, var_3);
   var_1 dontinterpolate();
@@ -511,7 +511,7 @@ function lootleaderoneperteam(var_0, var_1) {
   var_5 thread scripts\cp\cp_anim::anim_player_solo(var_1, var_1.player_rig, "kidnapper_grab");
   var_0 scripts\asm\shared\mp\utility::burningpartlogic("cp_kidnapper_melee_attack", var_5, undefined, 1);
   wait var_4 / 2;
-  thread ref_13a37(var_1);
+  thread ref_13A37(var_1);
   wait var_4 / 2;
   var_2 = var_0 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "cp_kidnapper_subduing");
   var_3 = var_0 scripts\asm\asm::asm_getxanim("animscripted", var_2);
@@ -560,10 +560,10 @@ function lootspawnitemlist(var_0, var_1) {
   var_2 = var_1 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "cp_kidnapper_death");
   var_3 = var_1 scripts\asm\asm::asm_getxanim("animscripted", var_2);
   var_4 = getanimlength(%cp_hostagetaker_death_attacker);
-  var_5 = var_1.ref_12f89;
+  var_5 = var_1.ref_12F89;
   var_5.origin = var_0.origin;
   var_5.angles = var_0.angles;
-  var_1.ref_12f89 = var_5;
+  var_1.ref_12F89 = var_5;
   var_6 = getstartorigin(var_5.origin, var_5.angles, var_3);
   var_7 = getstartangles(var_5.origin, var_5.angles, var_3);
   var_0 dontinterpolate();
@@ -623,7 +623,7 @@ function create_player_rig(var_0, var_1, var_2) {
 }
 
 function watch_remove_rig(var_0) {
-  scripts\engine\utility::ref_143a6("remove_rig", "death", "disconnect");
+  scripts\engine\utility::ref_143A6("remove_rig", "death", "disconnect");
 }
 
 function remove_player_rig(var_0) {

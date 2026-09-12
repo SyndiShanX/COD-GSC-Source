@@ -19,10 +19,10 @@ function main() {
   game["defenders"] = "axis";
   game["allies_outfit"] = "woodland";
   game["axis_outfit"] = "woodland";
-  thread ref_121f4();
+  thread ref_121F4();
 }
 
-function ref_121f4() {
+function ref_121F4() {
   var_0 = spawn("script_model", (-89.5, 105.5, 98));
   var_0 setModel("lm_pipes_high_pressure_128");
   var_0.angles = (90, 290, 40);

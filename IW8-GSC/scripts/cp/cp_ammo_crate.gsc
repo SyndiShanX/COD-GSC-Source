@@ -22,7 +22,7 @@ function ammo_crate_init() {
   var_0.onusecallback = &supportbox_onusedeployable;
   var_0.canusecallback = &supportbox_canusedeployable;
   var_0.deployfunc = &give_ammo_to_player_through_crate;
-  var_0.ref_120aa = "ping_response_thanks";
+  var_0.ref_120AA = "ping_response_thanks";
   var_0.usetime = 1000;
   var_0.maxhealth = 100;
   var_0.maxuses = 4;
@@ -84,7 +84,7 @@ function supportbox_watchplayerweapon(var_0) {
   self notifyonplayercommand("cancel_deploy", "+actionslot 4");
   self notifyonplayercommand("cancel_deploy", "+actionslot 5");
   self notifyonplayercommand("cancel_deploy", "+actionslot 6");
-  var_1 = scripts\engine\utility::ref_143ae("grenade_fire", "cancel_deploy", "weapon_switch_started");
+  var_1 = scripts\engine\utility::ref_143AE("grenade_fire", "cancel_deploy", "weapon_switch_started");
 
   if(!isDefined(var_1)) {
     return;
@@ -158,11 +158,11 @@ function cangive_ammo() {
   var_2 = istrue(var_0.isalternate);
 
   if(var_1 || var_2) {
-    if(ref_11b44(var_0)) {
+    if(ref_11B44(var_0)) {
       var_3 = pressure_unstable(var_0);
 
       if(isDefined(var_3)) {
-        if(ref_11b44(var_3)) {
+        if(ref_11B44(var_3)) {
           return false;
         }
 
@@ -171,7 +171,7 @@ function cangive_ammo() {
 
       return false;
     }
-  } else if(ref_11b44(var_1)) {
+  } else if(ref_11B44(var_1)) {
     return false;
   }
 
@@ -195,7 +195,7 @@ function pressure_unstable(var_0) {
   }
 }
 
-function ref_11b44(var_0) {
+function ref_11B44(var_0) {
   if(weapontype(var_0) == "projectile") {
     return true;
   }

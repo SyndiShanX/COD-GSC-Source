@@ -21,7 +21,7 @@ function main() {
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "woodland";
   thread onplayerconnect();
-  thread ref_129f4();
+  thread ref_129F4();
   thread teamrefundplunder();
   level.max_respawn = 1;
   level.ref_12328 = 1;
@@ -36,7 +36,7 @@ function onplayerconnect() {
   }
 }
 
-function ref_1313f(var_0, var_1) {
+function ref_1313F(var_0, var_1) {
   switch (var_1) {
     case 1:
       var_2 = getEnt("Num1", "targetname");
@@ -88,7 +88,7 @@ function ref_1313f(var_0, var_1) {
   }
 }
 
-function ref_13d1d() {
+function ref_13D1D() {
   wait 5;
   var_0 = getEnt("BunkerPathBlocker", "targetname");
   var_0 hide();
@@ -97,20 +97,20 @@ function ref_13d1d() {
   level.monitor_player_pinging = getEntArray("elevatorDoor", "targetname");
 
   foreach(var_2 in level.monitor_player_pinging) {
-    thread ref_1323d(var_2);
+    thread ref_1323D(var_2);
   }
 
   var_4 = scripts\engine\utility::getStruct("phoneHint", "targetname");
   level.ref_12324 = easepower("maphint_phone_mp_m_trench", var_4.origin);
   waitframe();
-  scripts\engine\scriptable::ref_12f5b("maphint_phone", &ref_11ae3);
+  scripts\engine\scriptable::ref_12F5B("maphint_phone", &ref_11AE3);
 
   for(;;) {
     level.ref_12329 = 1;
-    thread ref_1232b(var_4);
+    thread ref_1232B(var_4);
     level waittill("PhoneAnswered");
-    level.ref_1232c stoploopsound("trench_phone_ring");
-    level.ref_1232c delete();
+    level.ref_1232C stoploopsound("trench_phone_ring");
+    level.ref_1232C delete();
     playsoundatpos(level.ref_12324.origin, "trench_phone_pickup");
     wait 0.5;
     playsoundatpos(level.ref_12324.origin, "dx_bra_rubc_bunker_trench_phone_interact_20");
@@ -134,7 +134,7 @@ function flagender() {
       if(self istouching(var_0)) {
         if(!istrue(self.tracking_obit)) {
           self.tracking_obit = 1;
-          self.radarstrength = level.ref_13ede;
+          self.radarstrength = level.ref_13EDE;
           self.isradarblocked = 1;
           self.hasradar = 0;
           self.radarshowenemydirection = 0;
@@ -152,7 +152,7 @@ function flagender() {
   }
 }
 
-function ref_11ae3(var_0, var_1, var_2, var_3, var_4) {
+function ref_11AE3(var_0, var_1, var_2, var_3, var_4) {
   thread allowassassinationdamage(level, var_0, var_1, var_2, var_3);
 }
 
@@ -175,7 +175,7 @@ function vehicles_spawned() {
 
   level.helihint_gotopad[0] = randomintrange(1, 10);
   level.helihint_deposit[0] = scripts\engine\utility::getStruct("Code1", "targetname");
-  ref_1313f(level.helihint_deposit[0], level.helihint_gotopad[0]);
+  ref_1313F(level.helihint_deposit[0], level.helihint_gotopad[0]);
   level.helihint_gotopad[1] = level.helihint_gotopad[0];
 
   while(level.helihint_gotopad[1] == level.helihint_gotopad[0]) {
@@ -183,7 +183,7 @@ function vehicles_spawned() {
   }
 
   level.helihint_deposit[1] = scripts\engine\utility::getStruct("Code2", "targetname");
-  ref_1313f(level.helihint_deposit[1], level.helihint_gotopad[1]);
+  ref_1313F(level.helihint_deposit[1], level.helihint_gotopad[1]);
   level.helihint_gotopad[2] = level.helihint_gotopad[0];
 
   while(level.helihint_gotopad[2] == level.helihint_gotopad[0] || level.helihint_gotopad[2] == level.helihint_gotopad[1]) {
@@ -191,7 +191,7 @@ function vehicles_spawned() {
   }
 
   level.helihint_deposit[2] = scripts\engine\utility::getStruct("Code3", "targetname");
-  ref_1313f(level.helihint_deposit[2], level.helihint_gotopad[2]);
+  ref_1313F(level.helihint_deposit[2], level.helihint_gotopad[2]);
   level.helihint_gotopad[3] = level.helihint_gotopad[0];
 
   while(level.helihint_gotopad[3] == level.helihint_gotopad[0] || level.helihint_gotopad[3] == level.helihint_gotopad[1] || level.helihint_gotopad[3] == level.helihint_gotopad[2]) {
@@ -199,7 +199,7 @@ function vehicles_spawned() {
   }
 
   level.helihint_deposit[3] = scripts\engine\utility::getStruct("Code4", "targetname");
-  ref_1313f(level.helihint_deposit[3], level.helihint_gotopad[3]);
+  ref_1313F(level.helihint_deposit[3], level.helihint_gotopad[3]);
   level.helihint_gotopad[4] = level.helihint_gotopad[0];
 
   while(level.helihint_gotopad[4] == level.helihint_gotopad[0] || level.helihint_gotopad[4] == level.helihint_gotopad[1] || level.helihint_gotopad[4] == level.helihint_gotopad[2] || level.helihint_gotopad[4] == level.helihint_gotopad[3]) {
@@ -207,7 +207,7 @@ function vehicles_spawned() {
   }
 
   level.helihint_deposit[4] = scripts\engine\utility::getStruct("Code5", "targetname");
-  ref_1313f(level.helihint_deposit[4], level.helihint_gotopad[4]);
+  ref_1313F(level.helihint_deposit[4], level.helihint_gotopad[4]);
   level.insertingarmorplate = 0;
   var_3 = getEnt("CodePad", "targetname");
   thread player_near_obit(var_3);
@@ -256,7 +256,7 @@ function vehicles_spawned() {
   level.monitor_player_pinging = getEntArray("elevatorDoor", "targetname");
 
   foreach(var_6 in level.monitor_player_pinging) {
-    thread ref_1323d(var_6);
+    thread ref_1323D(var_6);
   }
 
   while(level.ref_12328) {
@@ -287,11 +287,11 @@ function vehicles_spawned() {
     level.ref_12327 = scripts\engine\utility::getStruct("phoneHint", "targetname");
     level.ref_12324 = easepower("maphint_phone_mp_m_trench", level.ref_12327.origin);
     waitframe();
-    scripts\engine\scriptable::ref_12f5b("maphint_phone", &ref_11ae3);
-    thread ref_1232b(level.ref_12327);
+    scripts\engine\scriptable::ref_12F5B("maphint_phone", &ref_11AE3);
+    thread ref_1232B(level.ref_12327);
     level waittill("PhoneAnswered");
-    level.ref_1232c stoploopsound("trench_phone_ring");
-    level.ref_1232c delete();
+    level.ref_1232C stoploopsound("trench_phone_ring");
+    level.ref_1232C delete();
     playsoundatpos(level.ref_12327.origin, "trench_phone_pickup");
     wait 0.5;
     playsoundatpos(level.ref_12327.origin, "dx_bra_rubc_bunker_trench_phone_interact_20");
@@ -302,10 +302,10 @@ function vehicles_spawned() {
   }
 }
 
-function ref_1232b(var_0) {
-  level.ref_1232c = spawn("script_origin", var_0.origin);
+function ref_1232B(var_0) {
+  level.ref_1232C = spawn("script_origin", var_0.origin);
   wait 0.05;
-  level.ref_1232c playLoopSound("trench_phone_ring");
+  level.ref_1232C playLoopSound("trench_phone_ring");
 }
 
 function vehicle_isneutraltoteam() {
@@ -408,14 +408,14 @@ function vehiclespawn_armoredtruck(var_0) {
   }
 }
 
-function ref_1323d(var_0) {
+function ref_1323D(var_0) {
   var_0.originalpos = var_0.origin;
   var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
-  var_0.ref_1212b = var_1.origin;
+  var_0.ref_1212B = var_1.origin;
 }
 
 function ref_12124(var_0) {
-  var_0 moveTo(var_0.ref_1212b, 2, 1.5, 0);
+  var_0 moveTo(var_0.ref_1212B, 2, 1.5, 0);
 }
 
 function heli_killed(var_0) {
@@ -470,7 +470,7 @@ function ref_12121(var_0) {
   var_0.heli_approach_instruct connectpaths();
 }
 
-function ref_129f4() {
+function ref_129F4() {
   wait 3;
   level.onupdatefunc = scripts\engine\utility::getStructArray("exploPoint", "targetname");
   var_0 = 0;

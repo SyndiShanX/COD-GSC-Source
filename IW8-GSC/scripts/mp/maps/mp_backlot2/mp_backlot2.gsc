@@ -32,7 +32,7 @@ function main() {
   thread managegate();
   thread spawnstaticvan();
   level.music_style = "middle_east";
-  ref_12c23(level);
+  ref_12C23(level);
   battle_tracks_vehicleoccupancyenter(level);
   thread player_exfil_struct();
 }
@@ -104,7 +104,7 @@ function spawnstaticvan() {
   }
 }
 
-function ref_12c23() {
+function ref_12C23() {
   level.modifiedspawnpoints["1896 624"]["mp_dm_spawn"]["remove"] = 1;
 }
 

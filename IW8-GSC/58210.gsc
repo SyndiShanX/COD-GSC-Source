@@ -6,7 +6,7 @@
 function get_force_push_direction() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_mg", "initLate", &get_forest_combat_logic);
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_mg", "create", &get_footstep_alias);
-  scripts\engine\utility::create_func_ref("cargo_truck_mg", &ref_134f6);
+  scripts\engine\utility::create_func_ref("cargo_truck_mg", &ref_134F6);
   scripts\cp_mp\utility\script_utility::registersharedfunc("cargo_truck_mg", "spawnCallback", &get_freight_lift_spawnpoints);
   scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_registeroutoftimecallback("cargo_truck_mg", &_calloutmarkerping_isdropcrate::get_gunshot_alias);
 }
@@ -46,7 +46,7 @@ function get_footstep_alias(var_0) {
   var_0.health = var_0.maxhealth;
 }
 
-function ref_134f6(var_0) {
+function ref_134F6(var_0) {
   var_1 = spawnStruct();
   var_1.origin = var_0.origin + (0, 0, 100);
   var_1.angles = var_0.angles * (0, 1, 0);

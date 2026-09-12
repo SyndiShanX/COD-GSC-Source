@@ -84,12 +84,12 @@ function findteammatebuddyspawn(var_0) {
   }
 
   var_1 = spawnStruct();
-  var_1.ref_1368a = undefined;
+  var_1.ref_1368A = undefined;
   var_1.ref_13606 = (0, var_0.angles[1], 0);
   var_1 = get_cumulative_damage_expire_time(var_1, var_0);
 
-  if(!isDefined(var_1.ref_1368a)) {
-    var_1.ref_1368a = var_0.origin;
+  if(!isDefined(var_1.ref_1368A)) {
+    var_1.ref_1368A = var_0.origin;
     var_1.ref_13606 = var_0.angles;
   }
 
@@ -101,18 +101,18 @@ function findteammatebuddyspawn(var_0) {
       var_3.useonspawn = 1;
       var_3.enterstartwaitmsg = "spawned_player";
       thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var_0.vehicle, var_2[0], self, var_3);
-      var_1.ref_1368a = var_0.vehicle.origin;
+      var_1.ref_1368A = var_0.vehicle.origin;
       var_1.ref_13606 = var_0.vehicle.angles;
       self.spawningintovehicle = 1;
       scripts\mp\utility\stats::incpersstat("spawnSelectVehicle", 1);
-    } else if(!isDefined(var_1.ref_1368a)) {
-      var_1.ref_1368a = var_0.vehicle.origin + anglesToForward(var_0.vehicle.angles) * -200 + (0, 0, 64);
+    } else if(!isDefined(var_1.ref_1368A)) {
+      var_1.ref_1368A = var_0.vehicle.origin + anglesToForward(var_0.vehicle.angles) * -200 + (0, 0, 64);
       var_1.ref_13606 = (0, var_0.vehicle.angles[1], 0);
     }
   }
 
   var_4 = spawnStruct();
-  var_4.origin = var_1.ref_1368a;
+  var_4.origin = var_1.ref_1368A;
   var_4.angles = var_1.ref_13606;
   var_4.index = -1;
   var_4.buddyspawn = 1;
@@ -207,7 +207,7 @@ function get_cumulative_damage_expire_time(var_0, var_1) {
           continue;
         }
 
-        var_0.ref_1368a = var_25["shape_position"];
+        var_0.ref_1368A = var_25["shape_position"];
         var_0.ref_13606 = var_26;
         break;
       }
@@ -663,19 +663,19 @@ function ref_13747() {
   var_0 = spawnStruct();
 
   for(;;) {
-    var_0.ref_1368a = undefined;
+    var_0.ref_1368A = undefined;
     var_0.ref_13606 = undefined;
     var_0 = get_cumulative_damage_expire_time(var_0, self);
     var_1 = 0;
 
-    if(!isDefined(var_0.ref_1368a)) {
-      var_0.ref_1368a = self.origin;
+    if(!isDefined(var_0.ref_1368A)) {
+      var_0.ref_1368A = self.origin;
       var_0.ref_13606 = self.angles;
       var_1 = 1;
     }
 
-    thread scripts\cp_mp\utility\debug_utility::drawsphere(var_0.ref_1368a, 16, 0.1, scripts\engine\utility::ter_op(var_1, (1, 0, 0), (0, 1, 0)));
-    thread scripts\cp_mp\utility\debug_utility::drawangles(var_0.ref_1368a, var_0.ref_13606, 0.1, 1);
+    thread scripts\cp_mp\utility\debug_utility::drawsphere(var_0.ref_1368A, 16, 0.1, scripts\engine\utility::ter_op(var_1, (1, 0, 0), (0, 1, 0)));
+    thread scripts\cp_mp\utility\debug_utility::drawangles(var_0.ref_1368A, var_0.ref_13606, 0.1, 1);
     wait 0.1;
   }
 }

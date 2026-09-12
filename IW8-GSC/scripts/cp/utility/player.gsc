@@ -206,8 +206,8 @@ function restorebasevisionset(var_0) {
 }
 
 function init_visionsetnight() {
-  if(isDefined(level.ref_11f4a) && isstring(level.ref_11f4a)) {
-    visionsetnight(level.ref_11f4a);
+  if(isDefined(level.ref_11F4A) && isstring(level.ref_11F4A)) {
+    visionsetnight(level.ref_11F4A);
     return;
   }
 
@@ -216,11 +216,11 @@ function init_visionsetnight() {
 
 function overridevisionsetnightforlevel(var_0) {
   visionsetnight(var_0);
-  level.ref_11f4a = var_0;
+  level.ref_11F4A = var_0;
 }
 
-function ref_12c86() {
-  level.ref_11f4a = undefined;
+function ref_12C86() {
+  level.ref_11F4A = undefined;
   visionsetnight("nvg_base_mp");
 }
 

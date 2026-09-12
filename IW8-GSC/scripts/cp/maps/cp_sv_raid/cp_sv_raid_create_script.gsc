@@ -66,7 +66,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_team = "axis";
   var_4.script_type = "lbravo_carrier";
   var_4.script_unload = "default";
-  var_4.ref_12f92 = "1";
+  var_4.ref_12F92 = "1";
   var_0[[var_3]](var_4, var_1, var_2, (-2655.53, 1353.98, 377.63), (0, 95, 0), "wave_veh_spawners", undefined, "default", "6 7 9", "5", undefined, undefined, 450, undefined, 40);
   var_4 = scripts\cp\cp_create_script_utility::s();
   var_4.script_demeanor = "default";

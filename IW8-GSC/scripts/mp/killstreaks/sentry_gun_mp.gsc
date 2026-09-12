@@ -10,7 +10,7 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "getTargetMarker", &sentryturret_gettargetmarker);
   scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "initSentrySettings", &sentryturret_initsentrysettings);
   scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "allowPickupOfTurret", &ref_13027);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "handleMovingPlatform", &scripts\mp\killstreaks\manual_turret_mp::ref_11ac1);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("sentry_gun", "handleMovingPlatform", &scripts\mp\killstreaks\manual_turret_mp::ref_11AC1);
 }
 
 function sentryturret_gettargetmarker(var_0, var_1) {

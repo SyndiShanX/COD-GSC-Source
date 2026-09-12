@@ -342,7 +342,7 @@ function infectjugg_setconfig(var_0, var_1, var_2) {
 
 function activate_seq_button() {}
 
-function ref_125fc() {
+function ref_125FC() {
   var_0 = spawnStruct();
   var_0.ref_12889 = [];
   var_0.brtdm_config = [];
@@ -423,10 +423,10 @@ function ref_125fc() {
     var_0.plundersilentcountdownendtime = self.plundersilentcountdownendtime;
   }
 
-  self.ref_12eb0 = var_0;
+  self.ref_12EB0 = var_0;
 }
 
-function ref_125fb() {
+function ref_125FB() {
   self takeallweapons(0, 1);
   scripts\mp\gametypes\br_weapons::br_ammo_player_clear();
   self.equipment["primary"] = undefined;
@@ -435,7 +435,7 @@ function ref_125fb() {
   self.equipment["super"] = undefined;
   var_0 = 0;
 
-  foreach(var_2 in self.ref_12eb0.ref_12889) {
+  foreach(var_2 in self.ref_12EB0.ref_12889) {
     var_3 = createheadicon(var_2);
 
     if(var_3 == "iw8_lm_dblmg_mp") {
@@ -453,19 +453,19 @@ function ref_125fb() {
     scripts\mp\weapons::fixupplayerweapons(self, var_3);
   }
 
-  if(self.ref_12eb0.ref_12889.size < 2) {
+  if(self.ref_12EB0.ref_12889.size < 2) {
     var_5 = getcompleteweaponname("iw8_fists_mp");
     self giveweapon(var_5);
   }
 
-  foreach(var_7 in self.ref_12eb0.offhands) {
+  foreach(var_7 in self.ref_12EB0.offhands) {
     var_8 = scripts\mp\equipment::getequipmentreffromweapon(var_7);
 
     if(!isDefined(var_8)) {
       continue;
     }
 
-    var_9 = self.ref_12eb0.nvidiaansel_overridecollisionradius[var_8];
+    var_9 = self.ref_12EB0.nvidiaansel_overridecollisionradius[var_8];
 
     if(!isDefined(var_9)) {
       continue;
@@ -474,7 +474,7 @@ function ref_125fb() {
     scripts\mp\equipment::giveequipment(var_8, var_9);
   }
 
-  foreach(var_3, var_12 in self.ref_12eb0.brtruck_ontimelimit) {
+  foreach(var_3, var_12 in self.ref_12EB0.brtruck_ontimelimit) {
     self setweaponammostock(var_3, var_12);
     var_2 = getcompleteweaponname(getweaponbasename(var_3));
     var_13 = scripts\mp\gametypes\br_weapons::br_ammo_type_for_weapon(var_2);
@@ -485,39 +485,39 @@ function ref_125fb() {
     }
   }
 
-  foreach(var_3, var_12 in self.ref_12eb0.brtdm_config) {
+  foreach(var_3, var_12 in self.ref_12EB0.brtdm_config) {
     self setweaponammoclip(var_3, var_12);
   }
 
-  foreach(var_3, var_12 in self.ref_12eb0.brtruck_cleanupents) {
+  foreach(var_3, var_12 in self.ref_12EB0.brtruck_cleanupents) {
     self setweaponammoclip(var_3, var_12, "left");
   }
 
   waitframe();
 
-  if(isDefined(self.ref_12eb0.super) && getdvarint("scr_restore_loadout_super", 1)) {
-    var_16 = level.br_pickups.br_superreference[level.br_pickups.br_equipnametoscriptable[self.ref_12eb0.super]];
+  if(isDefined(self.ref_12EB0.super) && getdvarint("scr_restore_loadout_super", 1)) {
+    var_16 = level.br_pickups.br_superreference[level.br_pickups.br_equipnametoscriptable[self.ref_12EB0.super]];
     scripts\mp\gametypes\br_pickups::forcegivesuper(var_16, 0);
   }
 
-  if(isDefined(self.ref_12eb0.vo_one_remain) && getdvarint("scr_restore_loadout_killstreak", 1)) {
-    scripts\mp\gametypes\br_pickups::playerpackdataintogulagomnvar(self.ref_12eb0.vo_one_remain);
+  if(isDefined(self.ref_12EB0.vo_one_remain) && getdvarint("scr_restore_loadout_killstreak", 1)) {
+    scripts\mp\gametypes\br_pickups::playerpackdataintogulagomnvar(self.ref_12EB0.vo_one_remain);
   }
 
   if(getdvarint("scr_restore_loadout_plates", 1)) {
-    self.should_use_velo_forward = self.ref_12eb0.should_use_velo_forward;
+    self.should_use_velo_forward = self.ref_12EB0.should_use_velo_forward;
     self setclientomnvar("ui_br_has_plate_pouch", istrue(self.should_use_velo_forward));
 
-    if(isDefined(self.ref_12eb0.callprecisionairstrikeonlocation) && self.ref_12eb0.callprecisionairstrikeonlocation > 0) {
+    if(isDefined(self.ref_12EB0.callprecisionairstrikeonlocation) && self.ref_12EB0.callprecisionairstrikeonlocation > 0) {
       scripts\mp\equipment::giveequipment("equip_armorplate", "health");
-      scripts\mp\equipment::setequipmentslotammo("health", self.ref_12eb0.callprecisionairstrikeonlocation);
+      scripts\mp\equipment::setequipmentslotammo("health", self.ref_12EB0.callprecisionairstrikeonlocation);
     }
   }
 
-  if(isDefined(self.ref_12eb0.plundersilentcountdownendtime) && getdvarint("scr_restore_loadout_gas_mask", 1)) {
-    scripts\cp_mp\gasmask::init(self.ref_12eb0.gasmaskhealth, self.ref_12eb0.plundersilentcountdownendtime);
+  if(isDefined(self.ref_12EB0.plundersilentcountdownendtime) && getdvarint("scr_restore_loadout_gas_mask", 1)) {
+    scripts\cp_mp\gasmask::init(self.ref_12EB0.gasmaskhealth, self.ref_12EB0.plundersilentcountdownendtime);
   }
 
-  thread scripts\cp_mp\gestures::ref_13e1a();
-  self.ref_12eb0 = undefined;
+  thread scripts\cp_mp\gestures::ref_13E1A();
+  self.ref_12EB0 = undefined;
 }

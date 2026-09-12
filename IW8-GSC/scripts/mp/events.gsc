@@ -102,7 +102,7 @@ function onplayerconnect() {
     var_0.greatestuniqueplayerkills = 0;
     var_0.recentkillcount = 0;
     var_0.recentdefendcount = 0;
-    var_0.ref_12a82 = 0;
+    var_0.ref_12A82 = 0;
     var_0.lastkilltime = 0;
     var_0.prevlastkilltime = 0;
     var_0.lastkilldogtime = 0;
@@ -117,7 +117,7 @@ function onplayerconnect() {
       }
     }
 
-    var_0.ref_11f87 = 0;
+    var_0.ref_11F87 = 0;
     var_0.damagedplayers = [];
     initslidemonitor(var_0);
     initmonitoradstime(var_0);
@@ -473,7 +473,7 @@ function cargo_truck_mg_initoccupancy(var_0, var_1, var_2, var_3, var_4, var_5) 
         self.modifiers["mask"] = self.modifiers["mask"] | 32;
       }
 
-      if(istrue(self.ref_138ac)) {
+      if(istrue(self.ref_138AC)) {
         self.modifiers["mask3"] = self.modifiers["mask3"] | 4;
       }
 
@@ -717,7 +717,7 @@ function cargo_truck_mg_initoccupancy(var_0, var_1, var_2, var_3, var_4, var_5) 
           self.modifiers["mask2"] = self.modifiers["mask2"] | 32768;
 
           if(level.challengesallowed && isDefined(var_50.owner)) {
-            self.ref_12a9a = var_50.owner;
+            self.ref_12A9A = var_50.owner;
           }
         } else if(isDefined(var_50) && var_50 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
           self.modifiers["vehicle_explosive"] = 1;
@@ -867,8 +867,8 @@ function registerleveldataforvehicle(var_0, var_1, var_2, var_3, var_4) {
 function killedplayer(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = gettime();
 
-  if(isDefined(var_2.ref_121d9)) {
-    var_2 = var_2.ref_121d9;
+  if(isDefined(var_2.ref_121D9)) {
+    var_2 = var_2.ref_121D9;
   }
 
   level.numkills++;
@@ -886,7 +886,7 @@ function killedplayer(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 = createheadicon(var_2);
   thread killedplayernotifysys(var_0, var_1, var_2, var_3);
   thread updaterecentkills(var_0, var_1, var_2, var_9);
-  thread ref_13fe5(var_3, var_4, var_1);
+  thread ref_13FE5(var_3, var_4, var_1);
   thread updatequadfeedcounter(self, var_0);
   self.prevlastkilltime = self.lastkilltime;
   self.lastkilltime = var_6;
@@ -1151,7 +1151,7 @@ function killedplayer(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
 
       if(self ismantling()) {
-        ref_11abe(var_0);
+        ref_11ABE(var_0);
       }
 
       if(istrue(self.modifiers["backfire"])) {
@@ -1267,7 +1267,7 @@ function killedplayer(var_0, var_1, var_2, var_3, var_4, var_5) {
         thread scripts\mp\awards::givemidmatchaward("mode_x_eliminate", undefined, undefined, undefined, undefined, var_1);
       }
 
-      var_27 = scripts\mp\utility\game::ref_13e13();
+      var_27 = scripts\mp\utility\game::ref_13E13();
 
       if(isDefined(var_27) && var_27 == self) {
         thread scripts\mp\awards::givemidmatchaward("mode_x_last_alive", undefined, undefined, undefined, undefined, var_1);
@@ -1363,7 +1363,7 @@ function checkkillstreakkillevents(var_0, var_1, var_2) {
           var_5 = 0;
         }
 
-        if(var_2.streakinfo.mpstreaksysteminfo.ref_121b0 != self getxuid()) {
+        if(var_2.streakinfo.mpstreaksysteminfo.ref_121B0 != self getxuid()) {
           var_5 = 0;
         }
       }
@@ -1459,9 +1459,9 @@ function checkkillstreakkillevents(var_0, var_1, var_2) {
         if(isDefined(var_2.streakinfo.kills)) {
           var_2.streakinfo.kills++;
 
-          if(!istrue(var_2.streakinfo.ref_11e04) && var_2.streakinfo.kills > 1) {
-            scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_scorestreak_kill_two_or_more_s1", 1);
-            var_2.streakinfo.ref_11e04 = 1;
+          if(!istrue(var_2.streakinfo.ref_11E04) && var_2.streakinfo.kills > 1) {
+            scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_scorestreak_kill_two_or_more_s1", 1);
+            var_2.streakinfo.ref_11E04 = 1;
           }
         }
 
@@ -1609,7 +1609,7 @@ function killedkillstreak(var_0, var_1, var_2) {
   level thread scripts\mp\battlechatter_mp::saytoself(var_1, "plr_killstreak_destroy", undefined, 0.75);
 }
 
-function ref_128b3(var_0) {
+function ref_128B3(var_0) {
   var_1 = scripts\mp\killstreaks\killstreaks::rocket_internal(var_0);
 
   foreach(var_3 in var_1) {
@@ -1793,7 +1793,7 @@ function proximitykill(var_0) {
 }
 
 function longshot(var_0) {
-  thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_0, "longshot");
+  thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_0, "longshot");
   scripts\mp\utility\stats::incpersstat("longshotKills", 1);
   thread killeventtextpopup("longshot", 1);
   thread scripts\mp\awards::givemidmatchaward("longshot");
@@ -1809,20 +1809,20 @@ function very_longshot(var_0) {
 }
 
 function pointblank(var_0) {
-  thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_0, "pointblank");
+  thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_0, "pointblank");
   thread killeventtextpopup("pointblank", 1);
   thread scripts\mp\awards::givemidmatchaward("pointblank");
   scripts\mp\utility\stats::incpersstat("pointBlankKills", 1);
 }
 
 function headshot(var_0) {
-  thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_0, "headshot");
+  thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_0, "headshot");
   thread killeventtextpopup("headshot", 1);
   thread scripts\mp\awards::givemidmatchaward("headshot");
 }
 
 function avengedplayer(var_0, var_1) {
-  thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_0, "avenger");
+  thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_0, "avenger");
   scripts\mp\utility\stats::incpersstat("avengerKills", 1);
   thread killeventtextpopup("avenger", 1);
   thread scripts\mp\awards::givemidmatchaward("avenger");
@@ -1830,13 +1830,13 @@ function avengedplayer(var_0, var_1) {
 
 function assistedsuicide(var_0, var_1) {
   thread scripts\mp\utility\points::giveunifiedpoints("assistedsuicide", var_1);
-  thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_0, "assistedsuicide");
+  thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_0, "assistedsuicide");
   thread killeventtextpopup("assistedsuicide", 1);
   thread scripts\mp\awards::givemidmatchaward("assistedsuicide");
 }
 
 function defendedplayer(var_0, var_1) {
-  thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_0, "defender");
+  thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_0, "defender");
   scripts\mp\utility\stats::incpersstat("defenderKills", 1);
   thread killeventtextpopup("savior", 0);
   thread scripts\mp\awards::givemidmatchaward("save_teammate");
@@ -1844,13 +1844,13 @@ function defendedplayer(var_0, var_1) {
 }
 
 function postdeathkill(var_0) {
-  thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_0, "posthumous");
+  thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_0, "posthumous");
   thread killeventtextpopup("posthumous", 1);
   thread scripts\mp\awards::givemidmatchaward("posthumous");
 }
 
 function revenge(var_0, var_1) {
-  thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_0, "revenge");
+  thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_0, "revenge");
   scripts\mp\utility\stats::incpersstat("revengeKills", 1);
   thread killeventtextpopup("revenge", 1);
   thread scripts\mp\awards::givemidmatchaward("revenge");
@@ -1913,7 +1913,7 @@ function multikill(var_0, var_1, var_2, var_3) {
     self.pers["highestMultikill"] = var_1;
   }
 
-  thread scripts\common\utility::ref_13e0a(level.ref_11b2b, var_0, var_1);
+  thread scripts\common\utility::ref_13E0A(level.ref_11B2B, var_0, var_1);
 
   if(isDefined(var_4)) {
     thread killeventtextpopup(var_4, scripts\engine\utility::ter_op(isDefined(var_2), var_2, 1), istrue(var_3));
@@ -1931,14 +1931,14 @@ function multikill(var_0, var_1, var_2, var_3) {
 
 function firstblood(var_0) {
   scripts\mp\utility\game::setmlgannouncement(11, self.team, self getentitynumber());
-  thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_0, "firstblood");
+  thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_0, "firstblood");
   thread scripts\mp\hud_util::teamplayercardsplash("callout_firstblood", self);
   thread killeventtextpopup("firstblood", 1);
   thread scripts\mp\awards::givemidmatchaward("firstblood");
 }
 
 function buzzkill(var_0, var_1) {
-  thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_0, "buzzkill");
+  thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_0, "buzzkill");
   thread killeventtextpopup("buzzkill", 1);
   thread scripts\mp\awards::givemidmatchaward("buzzkill");
 }
@@ -1949,7 +1949,7 @@ function start_conceal_add(var_0) {
 }
 
 function comeback(var_0) {
-  thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_0, "comeback");
+  thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_0, "comeback");
   thread killeventtextpopup("comeback", 1);
   thread scripts\mp\awards::givemidmatchaward("comeback");
   scripts\mp\utility\stats::incpersstat("comebackKills", 1);
@@ -1995,7 +1995,7 @@ function shotguncollateral(var_0) {
   thread scripts\mp\potg_events::shotguncollateral(self, var_0);
 }
 
-function ref_11abe(var_0) {
+function ref_11ABE(var_0) {
   thread killeventtextpopup("mantle_kill", 1);
   thread scripts\mp\awards::givemidmatchaward("mantle_kill");
 }
@@ -2030,7 +2030,7 @@ function linkedsaw(var_0) {
   thread scripts\mp\awards::givemidmatchaward("launcher_direct_hit");
 }
 
-function ref_13dd1(var_0) {
+function ref_13DD1(var_0) {
   self.modifiers["tripledefenderkill"] = 1;
   self.modifiers["mask2"] = self.modifiers["mask2"] | 32;
 }
@@ -2067,25 +2067,25 @@ function monitorhealed() {
   }
 }
 
-function ref_1400f(var_0) {
+function ref_1400F(var_0) {
   if(!isDefined(self.modifiers)) {
     return;
   }
 
-  if(!isDefined(self.ref_12a85)) {
-    self.ref_12a85 = [];
+  if(!isDefined(self.ref_12A85)) {
+    self.ref_12A85 = [];
   }
 
   if(istrue(self.modifiers[var_0])) {
-    if(istrue(self.ref_12a85[var_0]) && self.recentkillcount > 1) {
-      self.ref_11e03[var_0] = 1;
+    if(istrue(self.ref_12A85[var_0]) && self.recentkillcount > 1) {
+      self.ref_11E03[var_0] = 1;
     }
 
-    self.ref_12a85[var_0] = 1;
+    self.ref_12A85[var_0] = 1;
     return;
   }
 
-  self.ref_12a85[var_0] = undefined;
+  self.ref_12A85[var_0] = undefined;
 }
 
 function updaterecentkills(var_0, var_1, var_2, var_3) {
@@ -2095,23 +2095,23 @@ function updaterecentkills(var_0, var_1, var_2, var_3) {
   self endon("updateRecentKills");
   var_4 = weaponclass(var_2.basename);
   self.recentkillcount++;
-  ref_1400f("mounted");
+  ref_1400F("mounted");
 
   if(var_4 == "smg") {
-    if(!isDefined(self.ref_12a89)) {
-      self.ref_12a89 = 1;
+    if(!isDefined(self.ref_12A89)) {
+      self.ref_12A89 = 1;
     } else {
-      self.ref_12a89++;
+      self.ref_12A89++;
     }
   }
 
   var_5 = scripts\mp\utility\weapon::getweapongroup(var_2.basename);
 
   if(isDefined(self.radarstrength) && self.radarstrength > 3 && !var_1 scripts\mp\utility\perk::_hasperk("specialty_br_ghost")) {
-    if(!isDefined(self.ref_12a8b)) {
-      self.ref_12a8b = 1;
+    if(!isDefined(self.ref_12A8B)) {
+      self.ref_12A8B = 1;
     } else {
-      self.ref_12a8b++;
+      self.ref_12A8B++;
     }
   }
 
@@ -2124,10 +2124,10 @@ function updaterecentkills(var_0, var_1, var_2, var_3) {
   }
 
   if(scripts\mp\utility\game::turret_outline_watcher(var_1)) {
-    self.ref_12a82++;
+    self.ref_12A82++;
 
-    if(scripts\mp\utility\script::isnumbermultipleof(self.ref_12a82, 3)) {
-      ref_13dd1(var_0);
+    if(scripts\mp\utility\script::isnumbermultipleof(self.ref_12A82, 3)) {
+      ref_13DD1(var_0);
     }
   }
 
@@ -2135,8 +2135,8 @@ function updaterecentkills(var_0, var_1, var_2, var_3) {
     self.recentkillsperweapon = [];
   }
 
-  if(!isDefined(self.ref_12a86)) {
-    self.ref_12a86 = [];
+  if(!isDefined(self.ref_12A86)) {
+    self.ref_12A86 = [];
   }
 
   if(!isDefined(self.recentkillsperweapon[var_3])) {
@@ -2145,10 +2145,10 @@ function updaterecentkills(var_0, var_1, var_2, var_3) {
     self.recentkillsperweapon[var_3]++;
   }
 
-  if(!isDefined(self.ref_12a86[var_2.basename])) {
-    self.ref_12a86[var_2.basename] = 1;
+  if(!isDefined(self.ref_12A86[var_2.basename])) {
+    self.ref_12A86[var_2.basename] = 1;
   } else {
-    self.ref_12a86[var_2.basename]++;
+    self.ref_12A86[var_2.basename]++;
   }
 
   var_6 = scripts\mp\utility\weapon::getequipmenttype(var_2.basename);
@@ -2171,7 +2171,7 @@ function updaterecentkills(var_0, var_1, var_2, var_3) {
 
   if(self.recentkillcount > 1) {
     thread multikill(var_0, self.recentkillcount, 0);
-    scripts\cp\vehicles\vehicle_compass_cp::init_silo_elevator(self, self.ref_11e03, var_2, self.recentkillcount);
+    scripts\cp\vehicles\vehicle_compass_cp::init_silo_elevator(self, self.ref_11E03, var_2, self.recentkillcount);
   }
 
   wait 4;
@@ -2187,16 +2187,16 @@ function updaterecentkills(var_0, var_1, var_2, var_3) {
   scripts\mp\utility\stats::incpersstat("mostMultikills", 1);
   self.recentkillcount = 0;
   self.recentdefendcount = 0;
-  self.ref_12a89 = 0;
-  self.ref_12a8a = undefined;
+  self.ref_12A89 = 0;
+  self.ref_12A8A = undefined;
   self.recentkillsperweapon = undefined;
-  self.ref_12a86 = undefined;
-  self.ref_11e04 = 0;
-  self.ref_12a85 = [];
-  self.ref_11e03 = [];
+  self.ref_12A86 = undefined;
+  self.ref_11E04 = 0;
+  self.ref_12A85 = [];
+  self.ref_11E03 = [];
 }
 
-function ref_13fe5(var_0, var_1, var_2) {
+function ref_13FE5(var_0, var_1, var_2) {
   if(scripts\mp\utility\game::getgametype() != "br" || !isDefined(level.br_challengeevaluatorfunc)) {
     return;
   }
@@ -2205,7 +2205,7 @@ function ref_13fe5(var_0, var_1, var_2) {
   var_3.meansofdeath = var_0;
   var_3.inflictor = var_1;
   var_3.victim = var_2;
-  var_3.ref_11a6c = 1;
+  var_3.ref_11A6C = 1;
   self[[level.br_challengeevaluatorfunc]]("br_mastery_travelogue", var_3);
   self[[level.br_challengeevaluatorfunc]]("br_mastery_c4VehicleMultKill", var_3);
   self[[level.br_challengeevaluatorfunc]]("br_mastery_ghostRideWhip", var_3);
@@ -2501,13 +2501,13 @@ function bombdefused(var_0) {
   }
 
   if(isPlayer(var_0)) {
-    var_0 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "defuse", var_0.origin);
+    var_0 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "defuse", var_0.origin);
   }
 
   if(var_1) {
-    scripts\mp\utility\game::ref_119ac(var_0, undefined, "Bomb Defused", var_0.origin, "last_alive");
+    scripts\mp\utility\game::ref_119AC(var_0, undefined, "Bomb Defused", var_0.origin, "last_alive");
   } else {
-    scripts\mp\utility\game::ref_119ac(var_0, undefined, "Bomb Defused", var_0.origin);
+    scripts\mp\utility\game::ref_119AC(var_0, undefined, "Bomb Defused", var_0.origin);
   }
 
   scripts\mp\potg_events::bombdefused(var_0, var_1, var_3);
@@ -2519,7 +2519,7 @@ function revivedplayer(var_0, var_1) {
   }
 
   scripts\mp\potg_events::revivedplayer(var_0, var_1);
-  var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_revived_teammate_for_operator_mission", 1);
+  var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_revived_teammate_for_operator_mission", 1);
 
   if(scripts\mp\utility\game::getgametype() == "br" && isDefined(level.º: ] û© ý] oe°„)¡˜ jÃ) û3 #Èû’¨—)) {
   self[[level.º: ] û© ý] oe°„)¡˜ jÃ) û3 #Èû’¨—]](var_0, var_1);
@@ -2577,8 +2577,8 @@ function killeventtextpopup(var_0, var_1, var_2) {
   var_6.showassplash = istrue(var_1);
   var_6.priority = scripts\mp\rank::getscoreeventpriority(var_0);
   var_6.alwaysshowsplash = scripts\mp\rank::scoreeventalwaysshowassplash(var_0);
-  var_6.ref_128ac = 0;
-  var_6.ref_128ab = 0;
+  var_6.ref_128AC = 0;
+  var_6.ref_128AB = 0;
   var_6.matchdata_logplayerlife = istrue(var_2);
   self.killeventqueue[self.killeventqueue.size] = var_6;
   self notify("killEventTextPopup");
@@ -2594,10 +2594,10 @@ function killeventtextpopup(var_0, var_1, var_2) {
   }
 
   self.killeventqueue = undefined;
-  thread ref_128b4();
+  thread ref_128B4();
 }
 
-function ref_128b4() {
+function ref_128B4() {
   self notify("processSplashPriorityQueue");
   self endon("processSplashPriorityQueue");
   self.ref_12464 = 1;
@@ -2607,7 +2607,7 @@ function ref_128b4() {
   }
 
   foreach(var_1 in self.splashpriorityqueue) {
-    if(var_1.ref_128ac) {
+    if(var_1.ref_128AC) {
       continue;
     }
 
@@ -2616,16 +2616,16 @@ function ref_128b4() {
       thread scripts\mp\hud_message::showsplash(var_1.scoreeventref);
     }
 
-    var_1.ref_128ac = 1;
+    var_1.ref_128AC = 1;
   }
 
   foreach(var_1 in self.splashpriorityqueue) {
-    if(var_1.ref_128ab || var_1.matchdata_logplayerlife) {
+    if(var_1.ref_128AB || var_1.matchdata_logplayerlife) {
       continue;
     }
 
     thread scripts\mp\rank::scoreeventpopup(var_1.scoreeventref);
-    var_1.ref_128ab = 1;
+    var_1.ref_128AB = 1;
     wait getdvarfloat("scr_splash_kill_buffer", 0.25);
   }
 
@@ -2769,11 +2769,11 @@ function start_puzzle() {
     return;
   }
 
-  if(self.ref_11f87 == -1) {
+  if(self.ref_11F87 == -1) {
     return;
   }
 
-  self.ref_11f87++;
+  self.ref_11F87++;
   var_0 = undefined;
 
   switch (level.mapname) {
@@ -2786,9 +2786,9 @@ function start_puzzle() {
       break;
   }
 
-  if(self.ref_11f87 >= var_0) {
+  if(self.ref_11F87 >= var_0) {
     self reportchallengeuserevent("collect_item", "objective_player_achievement");
-    self.ref_11f87 = -1;
+    self.ref_11F87 = -1;
     return;
   }
 }
@@ -2798,24 +2798,24 @@ function getgulagclosedcircleindex(var_0) {
   var_1 = 0;
 
   if(!level.challengesallowed || !isDefined(var_0)) {
-    self.ref_12a9a = undefined;
+    self.ref_12A9A = undefined;
     return;
   }
 
-  if(isPlayer(var_0) && isDefined(self.ref_12a9a)) {
+  if(isPlayer(var_0) && isDefined(self.ref_12A9A)) {
     if(self.modifiers["mask2"] & 32768) {
       var_1 = 1;
     }
   }
 
-  level scripts\engine\utility::ref_143b9(1, "game_ended");
+  level scripts\engine\utility::ref_143B9(1, "game_ended");
 
   if(level.gameended) {
     if(var_1) {
       self reportchallengeuserevent("collect_item", "recon_drone_achievement");
 
-      if(isDefined(self.ref_12a9a)) {
-        self.ref_12a9a reportchallengeuserevent("collect_item", "recon_drone_achievement");
+      if(isDefined(self.ref_12A9A)) {
+        self.ref_12A9A reportchallengeuserevent("collect_item", "recon_drone_achievement");
       }
     }
 
@@ -2826,5 +2826,5 @@ function getgulagclosedcircleindex(var_0) {
     }
   }
 
-  self.ref_12a9a = undefined;
+  self.ref_12A9A = undefined;
 }

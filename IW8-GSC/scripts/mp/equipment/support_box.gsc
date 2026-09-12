@@ -7,15 +7,15 @@ function supportbox_init() {
   level.brking_watchcircletimers = [];
   scripts\common\interactive::interactive_addusedcallback(&supportbox_usedcallback, "equip_supportBox");
   scripts\common\interactive::interactive_addusedcallback(&calloutmarkerpingvo_playpredictivepingcleared, "equip_armorBox");
-  scripts\mp\utility\join_team_aggregator::registeronplayerjointeamcallback(&ref_139b1);
+  scripts\mp\utility\join_team_aggregator::registeronplayerjointeamcallback(&ref_139B1);
   level._effect["vfx/iw8_mp/equipment/vfx_offhand_wm_supportbox_timeout.vfx"] = loadfx("vfx/iw8_mp/equipment/vfx_offhand_wm_supportbox_timeout.vfx");
   level._effect["vfx/iw8_mp/equipment/vfx_offhand_wm_armorbox_timeout.vfx"] = loadfx("vfx/iw8_mp/equipment/vfx_offhand_wm_armorbox_timeout.vfx");
 }
 
-function ref_139b1(var_0) {
+function ref_139B1(var_0) {
   foreach(var_2 in level.brking_watchcircletimers) {
     if(isDefined(var_2)) {
-      ref_139af(var_2, var_0);
+      ref_139AF(var_2, var_0);
     }
   }
 }
@@ -24,9 +24,9 @@ function debug_reach_exhaust_waste(var_0, var_1, var_2, var_3) {
   var_0 endon("death");
   thread supportbox_watchdisownedtimeout();
   thread supportbox_hideandshowaftertime();
-  thread ref_139b2(var_0);
+  thread ref_139B2(var_0);
   jumpiftrue(scripts\mp\flags::gameflag("prematch_fade_done")) LOC_00000037;
-  thread ref_139b3();
+  thread ref_139B3();
   var_0 waittill("missile_stuck", var_4);
   var_0 setnodeploy(1);
   supportbox_handlemovingplatforms(var_0, var_4);
@@ -61,11 +61,11 @@ function debug_reach_exhaust_waste(var_0, var_1, var_2, var_3) {
   var_0 setscriptablepartstate("anims", "openIdle", 0);
 }
 
-function ref_139b2(var_0) {
+function ref_139B2(var_0) {
   self endon("death");
   self endon("missile_stuck");
   var_0 endon("disconnect");
-  var_1 = scripts\engine\utility::ref_143b9(2, "touching_platform");
+  var_1 = scripts\engine\utility::ref_143B9(2, "touching_platform");
 
   if(var_1 == "timeout") {
     return;
@@ -76,7 +76,7 @@ function ref_139b2(var_0) {
   GscBinSkip0(0x2e, var_3.size, self);
 }
 
-function ref_139b3() {
+function ref_139B3() {
   self endon("death");
   self endon("missile_stuck");
   level waittill("prematch_cleanup");
@@ -88,8 +88,8 @@ function ref_139b3() {
 }
 
 function tugofwar_tank(var_0) {
-  if(isDefined(level.ref_145f1)) {
-    foreach(var_2 in level.ref_145f1.ref_13c8d) {
+  if(isDefined(level.ref_145F1)) {
+    foreach(var_2 in level.ref_145F1.ref_13C8D) {
       if(var_2 == var_0) {
         return true;
       }
@@ -105,14 +105,14 @@ function tugofwar_tank(var_0) {
 
 function supportbox_used(var_0) {
   var_0 endon("death");
-  var_0.ref_13b87 = "vfx/iw8_mp/equipment/vfx_offhand_wm_supportbox_timeout.vfx";
+  var_0.ref_13B87 = "vfx/iw8_mp/equipment/vfx_offhand_wm_supportbox_timeout.vfx";
   debug_reach_exhaust_waste(var_0, "equip_supportBox", "super_ammo_drop", "hud_icon_equipment_support_box");
   thread supportbox_makeusable(var_0, "equip_supportBox");
 }
 
 function calloutmarkerpingvo_playpredictivepingadded(var_0) {
   var_0 endon("death");
-  var_0.ref_13b87 = "vfx/iw8_mp/equipment/vfx_offhand_wm_armorbox_timeout.vfx";
+  var_0.ref_13B87 = "vfx/iw8_mp/equipment/vfx_offhand_wm_armorbox_timeout.vfx";
   debug_reach_exhaust_waste(var_0, "equip_armorBox", "super_armor_drop", "ui_mp_br_loot_icon_health_armor_box");
   thread supportbox_makeusable(var_0, "equip_armorBox");
 }
@@ -169,8 +169,8 @@ function supportbox_destroy(var_0) {
 
   var_1 = "vfx/iw8_mp/equipment/vfx_offhand_wm_supportbox_timeout.vfx";
 
-  if(isDefined(self.ref_13b87)) {
-    var_1 = self.ref_13b87;
+  if(isDefined(self.ref_13B87)) {
+    var_1 = self.ref_13B87;
   }
 
   var_2 = undefined;
@@ -307,7 +307,7 @@ function supportbox_updateplayersused() {
 
       if(!scripts\mp\utility\player::isreallyalive(var_1) && isDefined(self.playersused[var_2])) {
         self.playersused[var_2] = undefined;
-        ref_139af(var_1);
+        ref_139AF(var_1);
       }
     }
   }
@@ -387,12 +387,12 @@ function supportbox_onplayeruse(var_0) {
   }
 
   var_0 scripts\mp\damagefeedback::hudicontype("ammobox");
-  ref_139ae(var_0);
+  ref_139AE(var_0);
   thread supportbox_onplayeruseanim();
   return true;
 }
 
-function ref_139ae(var_0) {
+function ref_139AE(var_0) {
   if(isDefined(var_0)) {
     if(isDefined(self.equipmentref) && self.equipmentref == "equip_armorBox") {
       var_0 playsoundtoplayer("armor_crate_use", var_0);
@@ -498,7 +498,7 @@ function supportbox_removeowneroutline() {
 function supportbox_addheadicon(var_0) {
   self.showdroplocations = scripts\cp_mp\entityheadicons::setheadicon_singleimage([], var_0, 20, 1, 1000, 100, undefined, 1);
   self.showemergencyhint = scripts\cp_mp\entityheadicons::setheadicon_factionimage(0, 20, undefined, undefined, undefined, undefined, 1);
-  ref_139b0();
+  ref_139B0();
 }
 
 function supportbox_removeheadicon() {
@@ -549,7 +549,7 @@ function supportbox_handlemovingplatforms(var_0) {
   var_1.validateaccuratetouching = 1;
 
   if(isDefined(var_0) && _calloutmarkerping_handleluinotify_enemyrepinged::tugofwar_tank(var_0)) {
-    var_1.ref_123b4 = 1;
+    var_1.ref_123B4 = 1;
     self method_87bb(1);
   }
 
@@ -580,17 +580,17 @@ function supportbox_empapplied(var_0) {
   thread supportbox_destroy();
 }
 
-function ref_139b0() {
+function ref_139B0() {
   foreach(var_1 in level.players) {
     if(!isDefined(var_1)) {
       return;
     }
 
-    ref_139af(var_1);
+    ref_139AF(var_1);
   }
 }
 
-function ref_139af(var_0) {
+function ref_139AF(var_0) {
   if(!isDefined(self)) {
     return;
   }
@@ -626,19 +626,19 @@ function ref_139af(var_0) {
   var_5 = isDefined(self.playersused) && isDefined(self.playersused[var_3 getentitynumber()]);
 
   if(var_3 && !var_5) {
-    scripts\cp_mp\entityheadicons::ref_1315d(var_3, var_3);
-    scripts\cp_mp\entityheadicons::ref_1315e(var_4, var_3);
+    scripts\cp_mp\entityheadicons::ref_1315D(var_3, var_3);
+    scripts\cp_mp\entityheadicons::ref_1315E(var_4, var_3);
     return;
   }
 
   if(var_3) {
-    scripts\cp_mp\entityheadicons::ref_1315e(var_3, var_3);
-    scripts\cp_mp\entityheadicons::ref_1315d(var_4, var_3);
+    scripts\cp_mp\entityheadicons::ref_1315E(var_3, var_3);
+    scripts\cp_mp\entityheadicons::ref_1315D(var_4, var_3);
     return;
   }
 
-  scripts\cp_mp\entityheadicons::ref_1315e(var_3, var_3);
-  scripts\cp_mp\entityheadicons::ref_1315e(var_4, var_3);
+  scripts\cp_mp\entityheadicons::ref_1315E(var_3, var_3);
+  scripts\cp_mp\entityheadicons::ref_1315E(var_4, var_3);
 }
 
 #using_animtree("scriptables");
@@ -675,7 +675,7 @@ function supportbox_usedcallback(var_0, var_1) {
 
     if(var_2) {
       var_1.playersused[var_2 getentitynumber()] = var_2;
-      ref_139af(var_1, var_2);
+      ref_139AF(var_1, var_2);
       supportbox_givexpforuse(var_1, var_2);
       return;
     }
@@ -694,15 +694,15 @@ function calloutmarkerpingvo_playpredictivepingcleared(var_0, var_1) {
   }
 
   if(supportbox_playercanuse(var_0, var_1)) {
-    if(isDefined(level.ref_11ffe)) {
-      var_2 = var_0[[level.ref_11ffe]](var_1);
+    if(isDefined(level.ref_11FFE)) {
+      var_2 = var_0[[level.ref_11FFE]](var_1);
     } else {
       var_2 = 0;
     }
 
-    if(var_2 && !istrue(var_1.ref_13f0f)) {
+    if(var_2 && !istrue(var_1.ref_13F0F)) {
       var_1.playersused[var_2 getentitynumber()] = var_2;
-      ref_139af(var_1, var_2);
+      ref_139AF(var_1, var_2);
       supportbox_givexpforuse(var_1, var_2);
       return;
     }

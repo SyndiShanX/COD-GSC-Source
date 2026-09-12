@@ -175,8 +175,8 @@ function healhregenthink(var_0) {
       var_7 = var_3 * level.regenfasterhealthmod;
     }
 
-    if(isDefined(level.ref_12ad2)) {
-      var_7 = [[level.ref_12ad2]](var_7);
+    if(isDefined(level.ref_12AD2)) {
+      var_7 = [[level.ref_12AD2]](var_7);
     }
 
     if(self.health < self.maxhealth) {
@@ -206,7 +206,7 @@ function healhregenthink(var_0) {
     scripts\cp\vehicles\vehicle_compass_cp::ref_12092(var_10);
     scripts\mp\analyticslog::logevent_playerhealed(self, var_10, self);
   } else if(!isai(self)) {
-    scripts\mp\analyticslog::ref_119b7(self, var_10);
+    scripts\mp\analyticslog::ref_119B7(self, var_10);
   }
 
   if(var_1 && var_10 > 0) {
@@ -255,8 +255,8 @@ function waitforhealthregendelay() {
   while(self.currentregendelay - self.regendelayreduction > 0) {
     var_5 = self.regendelayspeed;
 
-    if(isDefined(level.ref_12ad1)) {
-      var_5 = [[level.ref_12ad1]](var_5);
+    if(isDefined(level.ref_12AD1)) {
+      var_5 = [[level.ref_12AD1]](var_5);
     }
 
     self.currentregendelay -= (gettime() * 0.001 - var_0) * var_5;
@@ -344,6 +344,6 @@ function applyshrapnelfxinternal() {
   self endon("joined_team");
   self endon("joined_spectators");
   level endon("game_ended");
-  var_0 = scripts\engine\utility::ref_143ae("shrapnel_ended_early", "shrapnel_ended", "force_regeneration");
+  var_0 = scripts\engine\utility::ref_143AE("shrapnel_ended_early", "shrapnel_ended", "force_regeneration");
   return var_0 == "shrapnel_ended";
 }

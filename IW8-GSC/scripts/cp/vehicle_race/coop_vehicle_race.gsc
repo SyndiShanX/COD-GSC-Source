@@ -1178,7 +1178,7 @@ function do_laser_target_on_player_humvee(var_0) {
     var_6 = var_5 - var_3;
     var_7 = vectortoangles(var_6);
     playfxbetweenpoints(level._effect["hvt_target_laser"], var_3, var_7, var_5);
-    var_8 = var_0 scripts\engine\utility::ref_143b9(0.05, "damage");
+    var_8 = var_0 scripts\engine\utility::ref_143B9(0.05, "damage");
 
     if(var_8 == "damage") {
       return "fail";

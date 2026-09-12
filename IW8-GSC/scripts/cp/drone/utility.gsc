@@ -16,7 +16,7 @@ function deploy_drone(var_0, var_1) {
     var_0 giveweapon("ks_remote_drone_mp");
     var_0 switchtoweapon("ks_remote_drone_mp");
     var_0 notifyonplayercommand("cancel_deploy_helper_drone", "+weapnext");
-    var_2 = var_0 scripts\engine\utility::ref_143ba(0.6, "last_stand", "cancel_deploy_helper_drone");
+    var_2 = var_0 scripts\engine\utility::ref_143BA(0.6, "last_stand", "cancel_deploy_helper_drone");
 
     if(!isDefined(var_2) || var_2 != "timeout") {
       var_0 takeweapon("ks_remote_drone_mp");
@@ -25,7 +25,7 @@ function deploy_drone(var_0, var_1) {
       return 0;
     }
 
-    var_2 = var_0 scripts\engine\utility::ref_143b9(1.4, "last_stand");
+    var_2 = var_0 scripts\engine\utility::ref_143B9(1.4, "last_stand");
 
     if(!isDefined(var_2) || var_2 != "timeout") {
       var_0 takeweapon("ks_remote_drone_mp");
@@ -220,7 +220,7 @@ function create_drone(var_0, var_1, var_2) {
 function player_exit_monitor(var_0, var_1) {
   var_1 endon("death");
   var_0 notifyonplayercommand("exit_drone", "+stance");
-  var_2 = var_0 scripts\engine\utility::ref_143a6("last_stand", "disconnect", "exit_drone");
+  var_2 = var_0 scripts\engine\utility::ref_143A6("last_stand", "disconnect", "exit_drone");
   exit_drone(var_0, var_1);
   drone_explode(var_1);
 }

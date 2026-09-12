@@ -37,7 +37,7 @@ function tryusedeathswitchfromstruct(var_0) {
   }
 
   scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var_0.streakname, 1);
-  scripts\common\utility::ref_13e0a(level.ref_11b2a, "death_switch", self.origin);
+  scripts\common\utility::ref_13E0A(level.ref_11B2A, "death_switch", self.origin);
   thread scripts\mp\hud_util::teamplayercardsplash("used_death_switch", self);
   thread startdeathswitch(var_0);
   return true;

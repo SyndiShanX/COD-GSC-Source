@@ -11,29 +11,29 @@ function init() {
   ammorestock_customlocale6cleanup();
   level.obit_activation = spawnStruct();
   level.obit_activation.ref_14385 = getdvarfloat("scr_br_escape_incoming_time", 240.9);
-  level.obit_activation.ref_1438f = getdvarfloat("scr_br_escape_respawn_time", -1);
-  level.obit_activation.ref_129db = getdvarfloat("scr_br_escape_radio_safe_time", 10) + level.obit_activation.ref_14385;
-  level.obit_activation.ref_13b6e = getdvarfloat("scr_br_escape_time_added_when_dropped", 20);
+  level.obit_activation.ref_1438F = getdvarfloat("scr_br_escape_respawn_time", -1);
+  level.obit_activation.ref_129DB = getdvarfloat("scr_br_escape_radio_safe_time", 10) + level.obit_activation.ref_14385;
+  level.obit_activation.ref_13B6E = getdvarfloat("scr_br_escape_time_added_when_dropped", 20);
   level.obit_activation.radiotimebonusgap = getdvarfloat("scr_br_escape_time_bonus_gap", 30);
-  level.obit_activation.ref_129d7 = getdvarfloat("scr_br_escape_radio_idle_time", 45);
+  level.obit_activation.ref_129D7 = getdvarfloat("scr_br_escape_radio_idle_time", 45);
   level.obit_activation.unset_forced_aitype = getdvarint("scr_br_alt_mode_escape_radio_reset_enable", 0);
-  level.obit_activation.ref_12c73 = getdvarint("scr_br_alt_mode_escape_radio_reset_on_oob", 1);
+  level.obit_activation.ref_12C73 = getdvarint("scr_br_alt_mode_escape_radio_reset_on_oob", 1);
   level.obit_activation.escaperadioooboffset = getdvarint("scr_br_alt_mode_escape_radio_oob_offset", -15);
   level.obit_activation.unset_just_keep_moving = getdvarint("scr_br_alt_mode_escape_extended_version", 1);
-  level.obit_activation.ref_129d6 = getdvarint("scr_br_alt_mode_escape_radio_delete_loot_radius", 128);
+  level.obit_activation.ref_129D6 = getdvarint("scr_br_alt_mode_escape_radio_delete_loot_radius", 128);
   level.obit_activation.onspawn_fastspeed = getdvarint("scr_br_alt_mode_escape_radio_xp_pickup", 900);
   level.obit_activation.onspawn_slowspeed = getdvarint("scr_br_alt_mode_escape_radio_xp_win", 15000);
-  level.obit_activation.ref_129d5 = getdvarint("scr_br_alt_mode_escape_radio_circle_peek", 1);
+  level.obit_activation.ref_129D5 = getdvarint("scr_br_alt_mode_escape_radio_circle_peek", 1);
   level.obit_activation.start_fly_over = getdvarint("scr_br_alt_mode_escape_radio_incoming_respawn_time", 30);
   level.obit_activation.personalscorecount = getdvarint("scr_br_alt_mode_escape_radio_fast_respawn_time", 10);
-  level.obit_activation.ref_129d8 = getdvarint("scr_br_alt_mode_escape_radio_max_time_in_gas", 15);
+  level.obit_activation.ref_129D8 = getdvarint("scr_br_alt_mode_escape_radio_max_time_in_gas", 15);
   level.obit_activation.personalnukecostoverride = getdvarint("scr_br_alt_mode_escape_radio_fast_respawn_index", 5);
   level.obit_activation.obj_destroy_tanks = [];
   level.obit_activation.obj_fob1 = [];
   level.obit_activation.obj_cleanup = [];
   level.obit_activation.obj_a_covers = [];
   level.obit_activation.ref_12345 = 0;
-  level.obit_activation.ref_129da = -1;
+  level.obit_activation.ref_129DA = -1;
   game["dialog"]["last_man_standing"] = "rsrg_squad_last_alive";
   game["dialog"]["rebirth_avenge_teammate"] = "rebirth_avenge_teammate";
   game["dialog"]["rebirth_redeploy"] = "rebirth_redeploy";
@@ -64,20 +64,20 @@ function init() {
   game["dialog"]["exit_strategy_radio_carrier"] = "exit_strategy_radio_carrier";
   game["dialog"]["exit_strategy_survive"] = "exit_strategy_survive";
   game["dialog"]["exit_strategy_update_heading"] = "exit_strategy_update_heading";
-  level.obit_activation.ref_13bfd = getdvarint("scr_br_alt_mode_escape_win_timer", 300.9);
-  level.obit_activation.ref_145cd = level.obit_activation.ref_13bfd;
+  level.obit_activation.ref_13BFD = getdvarint("scr_br_alt_mode_escape_win_timer", 300.9);
+  level.obit_activation.ref_145CD = level.obit_activation.ref_13BFD;
   scripts\mp\utility\disconnect_event_aggregator::registerondisconnecteventcallback(&ref_12069);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_spawn", "gameModeSupportsRespawn", &vehicle_spawn_mp_gamemodesupportsrespawn);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("preOnPlayerKilled", &onplayerkilled);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("preOnPlayerKilled", &onplayerkilled);
   scripts\mp\utility\spawn_event_aggregator::registeronplayerspawncallback(&onplayerspawned);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("endGame", &obit_trigger_for_player);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("endGame", &obit_trigger_for_player);
 
   if(getdvarint("scr_br_alt_mode_escape_skip_initial_circle", 0)) {
-    scripts\mp\gametypes\br_gametypes::ref_12b11("createC130PathStruct", &init_relic_aggressive_melee);
-    scripts\mp\gametypes\br_gametypes::ref_12b11("addToC130Infil", &being_hacked);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("createC130PathStruct", &init_relic_aggressive_melee);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("addToC130Infil", &being_hacked);
   }
 
-  scripts\mp\gametypes\br_gametypes::ref_12b10("dropBagDelay", 180);
+  scripts\mp\gametypes\br_gametypes::ref_12B10("dropBagDelay", 180);
 
   if(getdvarint("scr_br_escape_alt_respawn_system_enable", 0) == 0) {
     if(!scripts\mp\gametypes\br_gametypes::unset_relic_aggressive_melee("gulag")) {
@@ -85,35 +85,35 @@ function init() {
     }
 
     level.usegulag = 0;
-    level.obit_activation.ref_121ad = 3;
+    level.obit_activation.ref_121AD = 3;
     level thread scripts\mp\gametypes\br_gametype_rebirth::enabledskiplaststand();
   } else {
-    level.disable_super_in_turret.ref_12ca4 = 1;
+    level.disable_super_in_turret.ref_12CA4 = 1;
     level.disable_super_in_turret.fly_to_laser_trap_start_pos = 1;
     level.disable_super_in_turret.ref_14081 = 1;
     scripts\mp\gametypes\br_gametype_rebirth::end_reach_icbm_launch();
     var_0 = 30;
-    level.disable_super_in_turret.ref_12a7b = var_0;
+    level.disable_super_in_turret.ref_12A7B = var_0;
     level.playingtutorialdialogue["mayConsiderPlayerDead"] = &scripts\mp\gametypes\br_gametype_rebirth::empty_function;
     level.playingtutorialdialogue["triggerRespawnOverlay"] = &scripts\mp\gametypes\br_gametype_rebirth::end_silo_thrust;
     level.playingtutorialdialogue["playerNakedDropLoadout"] = &scripts\mp\gametypes\br_gametype_rebirth::end_intro_obj;
     level.playingthrowingknifewickfx["mayConsiderPlayerDead"] = &scripts\mp\gametypes\br::dynamic_door;
-    level.playingthrowingknifewickfx["triggerRespawnOverlay"] = &scripts\mp\gametypes\br_gulag::ref_13dcc;
-    level.playingthrowingknifewickfx["playerNakedDropLoadout"] = &scripts\mp\gametypes\br::ref_11e23;
-    scripts\mp\gametypes\br_gametypes::ref_12b11("mayConsiderPlayerDead", &add_pack_playeranim);
-    scripts\mp\gametypes\br_gametypes::ref_12b11("triggerRespawnOverlay", &add_pilot_setup);
-    scripts\mp\gametypes\br_gametypes::ref_12b11("playerNakedDropLoadout", &add_pack_startfunc);
+    level.playingthrowingknifewickfx["triggerRespawnOverlay"] = &scripts\mp\gametypes\br_gulag::ref_13DCC;
+    level.playingthrowingknifewickfx["playerNakedDropLoadout"] = &scripts\mp\gametypes\br::ref_11E23;
+    scripts\mp\gametypes\br_gametypes::ref_12B11("mayConsiderPlayerDead", &add_pack_playeranim);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("triggerRespawnOverlay", &add_pilot_setup);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("playerNakedDropLoadout", &add_pack_startfunc);
   }
 
   level.nosuspensemusic = 1;
-  level.ref_11e96 = 1;
-  level.ref_1205e = &ref_131a9;
+  level.ref_11E96 = 1;
+  level.ref_1205E = &ref_131A9;
   thread ai_hold_wake_watch();
   thread anyone_can_see_spawner();
   thread ammoids();
   level.ref_13364 = 1;
   level.disable_super_in_turret.loadoutrestore = getdvarint("scr_br_loadout_restore_on_respawn", 1);
-  level.ref_133ea = getdvarint("scr_bmo_skipWeaponDropOnDeath", 0);
+  level.ref_133EA = getdvarint("scr_bmo_skipWeaponDropOnDeath", 0);
 }
 
 function updatenukeprogress(var_0) {
@@ -173,7 +173,7 @@ function ref_12182(var_0) {
 }
 
 function ai_hold_wake_watch() {
-  if(level.obit_activation.ref_129da == -1) {
+  if(level.obit_activation.ref_129DA == -1) {
     level waittill("prematch_fade_done");
     waitframe();
 
@@ -267,7 +267,7 @@ function obj_fob1_juggs(var_0) {
     var_2 = [0, 45, 90, 135, 180];
   }
 
-  level.obit_activation.ref_129d4 = gettime() + level.obit_activation.ref_14385 * 1000;
+  level.obit_activation.ref_129D4 = gettime() + level.obit_activation.ref_14385 * 1000;
   var_3 = level.obit_activation.ref_14385;
   var_4 = undefined;
   var_5 = -1;
@@ -314,7 +314,7 @@ function obj_fob1_juggs(var_0) {
     var_4 delete();
   }
 
-  level.obit_activation.ref_129da = 1;
+  level.obit_activation.ref_129DA = 1;
   level notify("radio_landed");
 }
 
@@ -347,8 +347,8 @@ function obit_destroy_old_vehicles(var_0, var_1) {
   ai_goal_distribution_debug(var_0);
   var_1 = 2;
   var_5 = 255;
-  var_6 = level.obit_activation.ref_13bfd;
-  var_7 = level.obit_activation.ref_145cd;
+  var_6 = level.obit_activation.ref_13BFD;
+  var_7 = level.obit_activation.ref_145CD;
   level.obit_activation.radio.waittime = var_7;
   ai_extra_think(var_1, var_5, var_6);
   ai_fire_at_chopper(var_7, 1);
@@ -395,7 +395,7 @@ function relic_amped_victim(var_0) {
 function obj_a_post_behavior() {
   var_0 = scripts\mp\gametypes\br_circle::getsafecircleorigin();
   var_1 = scripts\mp\gametypes\br_circle::getsafecircleradius();
-  var_2 = ref_11a00(var_0, var_1);
+  var_2 = ref_11A00(var_0, var_1);
   var_3 = scripts\mp\gametypes\br_quest_util::play_train_speaker_vo("escape", var_2);
   var_4 = undefined;
   var_5 = "none";
@@ -409,7 +409,7 @@ function obj_a_post_behavior() {
     var_8 = 1;
     var_9 = 1;
     var_10 = 1;
-    var_11 = level.obit_activation.ref_129db;
+    var_11 = level.obit_activation.ref_129DB;
     var_4 = scripts\mp\gametypes\br_circle::risk_flagspawnshiftingpercent(var_0, var_1, var_6, var_7, var_8, var_9, var_10, var_11);
 
     if(var_4 == var_0) {
@@ -439,7 +439,7 @@ function obj_heli_assault3_fob(var_0) {
   foreach(var_4 in level.players) {
     if(var_4.team == var_0.team) {
       if(var_4 == var_0) {
-        level thread scripts\mp\gametypes\br_quest_util::ref_140b1(var_0.origin, "revive");
+        level thread scripts\mp\gametypes\br_quest_util::ref_140B1(var_0.origin, "revive");
         thread ai_dropgren_override_hint(var_4, "escape_chopper_comms_online");
         var_4 scripts\mp\hud_message::showsplash("br_escape_radio_picked_up_self");
         thread ai_dropgren_weapontype(var_4, "exit_strategy_survive", 0.75);
@@ -450,7 +450,7 @@ function obj_heli_assault3_fob(var_0) {
 
         var_4 scripts\mp\hud_message::showsplash("br_escape_radio_picked_up_ally");
         thread ai_dropgren_weapontype(var_4, "exit_strategy_teammate_pickup", 0.75);
-        var_5 = scripts\mp\gametypes\br_vip_quest::ref_142c5(var_4, var_0, "exfil_respawn");
+        var_5 = scripts\mp\gametypes\br_vip_quest::ref_142C5(var_4, var_0, "exfil_respawn");
 
         if(var_5 && !var_2) {
           var_2 = 1;
@@ -472,7 +472,7 @@ function obj_heli_assault3_fob(var_0) {
   ai_hold_wake_behavior(var_1, "picked_up", var_0);
   ai_dismount_turret(var_1);
   var_1.owner = var_0;
-  var_1.ref_121ae = var_1.ownerteam;
+  var_1.ref_121AE = var_1.ownerteam;
   var_1.ownerteam = var_1.owner.team;
   var_7 = scripts\mp\utility\teams::getteamdata(var_1.ownerteam, "players");
   managekingflag(var_7, 1);
@@ -486,13 +486,13 @@ function obj_heli_assault3_fob(var_0) {
   ai_dropgren_override_hide();
   var_8 = 3;
   var_9 = var_0 getentitynumber();
-  var_10 = level.obit_activation.ref_13bfd;
-  var_11 = level.obit_activation.ref_145cd;
+  var_10 = level.obit_activation.ref_13BFD;
+  var_11 = level.obit_activation.ref_145CD;
   ai_extra_think(var_8, var_9, var_10, 0);
   ai_fire_at_chopper(var_11);
   thread obj_heli_assault2();
   thread ai_goal_update_population(var_1.owner);
-  level.obit_activation.ref_129d1 = var_0.team;
+  level.obit_activation.ref_129D1 = var_0.team;
   var_1 notify("escape_radio_picked_up");
   ai_hold_free(var_0, var_1);
 }
@@ -553,7 +553,7 @@ function ai_hold_free(var_0) {
     return;
   }
 
-  ai_hold_positions(level.obit_activation.ref_145cd);
+  ai_hold_positions(level.obit_activation.ref_145CD);
 }
 
 function mlgmodifyheadshotdamage(var_0) {
@@ -574,9 +574,9 @@ function mlgmodifyheadshotdamage(var_0) {
   }
 
   var_3 = ceil(var_2 / level.obit_activation.radiotimebonusgap) * level.obit_activation.radiotimebonusgap;
-  var_4 = min(level.obit_activation.ref_13bfd, var_3);
-  level.obit_activation.radio.waittime = min(var_4, var_2 + level.obit_activation.ref_13b6e);
-  level.obit_activation.ref_145cd = level.obit_activation.radio.waittime;
+  var_4 = min(level.obit_activation.ref_13BFD, var_3);
+  level.obit_activation.radio.waittime = min(var_4, var_2 + level.obit_activation.ref_13B6E);
+  level.obit_activation.ref_145CD = level.obit_activation.radio.waittime;
   ai_hold_positions_freed(level.obit_activation.radio);
   ai_dropgren_model();
 
@@ -588,13 +588,13 @@ function mlgmodifyheadshotdamage(var_0) {
   managekingflag(var_5, 0);
   var_6 = 2;
   var_7 = 255;
-  var_8 = level.obit_activation.ref_13bfd;
+  var_8 = level.obit_activation.ref_13BFD;
   var_9 = level.obit_activation.radio.waittime;
   ai_extra_think(var_6, var_7, var_8, 0);
   ai_fire_at_chopper(var_9, 1);
   var_10 = var_9 - var_2;
   setomnvar("ui_br_exfil_radio_added_time", int(var_10));
-  level.obit_activation.ref_129d1 = undefined;
+  level.obit_activation.ref_129D1 = undefined;
   level.obit_activation.radio freescriptable();
   var_11 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_0, var_1.origin, var_1.angles, self, 0, 0, 10, 1);
   level.obit_activation.radio = scripts\mp\gametypes\br_pickups::spawnpickup("brloot_escape_radio", var_11, 0, 1);
@@ -614,7 +614,7 @@ function mlgmodifyheadshotdamage(var_0) {
 }
 
 function obj_caches_threaded_nags_vo() {
-  if(level.obit_activation.ref_12c73 != 1) {
+  if(level.obit_activation.ref_12C73 != 1) {
     return;
   }
 
@@ -664,9 +664,9 @@ function obj_a_goals() {
   level endon("radio_state_change");
   level endon("radio_oob");
   level endon("game_ended");
-  wait level.obit_activation.ref_129d7 * 0.75;
+  wait level.obit_activation.ref_129D7 * 0.75;
   obj_hvt_dead("exit_strategy_radio_strength", 0, 1);
-  wait level.obit_activation.ref_129d7 * 0.25;
+  wait level.obit_activation.ref_129D7 * 0.25;
   thread ai_ascender_use(level.obit_activation.radio);
 }
 
@@ -679,11 +679,11 @@ function ai_ground_set_goal_radii(var_0) {
 }
 
 function ai_damage_monitor(var_0) {
-  if(level.obit_activation.ref_129d6 <= 0) {
+  if(level.obit_activation.ref_129D6 <= 0) {
     return;
   }
 
-  var_1 = canceljoins(undefined, undefined, var_0, level.obit_activation.ref_129d6);
+  var_1 = canceljoins(undefined, undefined, var_0, level.obit_activation.ref_129D6);
 
   if(isDefined(var_1)) {
     foreach(var_3 in var_1) {
@@ -695,7 +695,7 @@ function ai_damage_monitor(var_0) {
         continue;
       }
 
-      scripts\mp\gametypes\br_pickups::ref_11a21(var_3);
+      scripts\mp\gametypes\br_pickups::ref_11A21(var_3);
     }
 
     return;
@@ -707,7 +707,7 @@ function ai_deaf_event_active(var_0) {
   level endon("game_ended");
   var_1 endon("escape_radio_picked_up");
 
-  if(level.obit_activation.ref_129d6 <= 0) {
+  if(level.obit_activation.ref_129D6 <= 0) {
     return;
   }
 
@@ -723,7 +723,7 @@ function ai_hold_positions(var_0) {
   var_1 endon("disconnect");
   thread ai_ascender_takeascender(var_1);
   thread ai_ground_think(var_1);
-  ai_flash_swap(level.obit_activation.ref_13bfd);
+  ai_flash_swap(level.obit_activation.ref_13BFD);
   ai_fire_at_chopper(var_0);
   wait var_0;
   ai_dropgren_override_hide();
@@ -732,7 +732,7 @@ function ai_hold_positions(var_0) {
 
 function _escaperadiogetremainingtime() {
   var_0 = gettime() - level.obit_activation.ref_12345;
-  var_1 = level.obit_activation.ref_145cd - var_0 / 1000;
+  var_1 = level.obit_activation.ref_145CD - var_0 / 1000;
 
   if(isDefined(level.obit_activation.radio.overalltimespentpaused) && level.obit_activation.radio.overalltimespentpaused > 0) {
     var_2 = level.obit_activation.radio.overalltimespentpaused / 1000;
@@ -887,10 +887,10 @@ function ai_ascender_giveascender(var_0) {
   var_1 = self;
   var_2 = scripts\mp\gametypes\br_circle::getrandompointincircle(var_1.origin, var_0, 0, 0.4, 0, 0);
   var_1 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(4, 8, 4, var_2);
-  var_1 scripts\mp\gametypes\br_quest_util::ref_1316f(var_0);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_1316F(var_0);
 
   foreach(var_4 in level.players) {
-    var_1 scripts\mp\gametypes\br_quest_util::ref_1336a(var_4);
+    var_1 scripts\mp\gametypes\br_quest_util::ref_1336A(var_4);
   }
 }
 
@@ -903,14 +903,14 @@ function ai_ascender_getstartpos() {
 }
 
 function ai_goal_update_population(var_0) {
-  if(level.obit_activation.ref_129d5 != 1) {
+  if(level.obit_activation.ref_129D5 != 1) {
     return;
   }
 
   level endon("game_ended");
   level.obit_activation notify("escape_circle_peek");
   level.obit_activation endon("escape_circle_peek");
-  jumpiffalse(!isDefined(level.ref_13aca) || !isDefined(level.ref_13aca[var_0.team]) || level.ref_13aca[var_0.team] == 0) LOC_0000006e;
+  jumpiffalse(!isDefined(level.ref_13ACA) || !isDefined(level.ref_13ACA[var_0.team]) || level.ref_13ACA[var_0.team] == 0) LOC_0000006e;
   scripts\mp\gametypes\br_quest_util::ref_12972(var_0.team);
 
   for(;;) {
@@ -918,8 +918,8 @@ function ai_goal_update_population(var_0) {
     var_2 = level.br_circle.circleindex + 1;
 
     if(var_1 >= var_2) {
-      if(level.ref_13aca[var_0.team] + var_2 <= var_1 + 1) {
-        level.ref_13aca[var_0.team] = undefined;
+      if(level.ref_13ACA[var_0.team] + var_2 <= var_1 + 1) {
+        level.ref_13ACA[var_0.team] = undefined;
         scripts\mp\gametypes\br_quest_util::ref_12972(var_0.team);
       }
     }
@@ -975,7 +975,7 @@ function ai_delete_after_level_notify(var_0, var_1) {
   for(var_8 = 0; var_8 < var_7.size; var_8++) {
     var_5 = var_7[var_8];
     var_9 = var_8 + 1;
-    thread scripts\mp\gametypes\br::ref_1209b(var_5, var_9, 0, 1, undefined, var_5 == var_0);
+    thread scripts\mp\gametypes\br::ref_1209B(var_5, var_9, 0, 1, undefined, var_5 == var_0);
   }
 
   foreach(var_5, var_11 in level.teamdata) {
@@ -1002,14 +1002,14 @@ function ammorestock_disableusefortime(var_0, var_1) {
   return var_2 >= var_3;
 }
 
-function ref_11a00(var_0, var_1) {
+function ref_11A00(var_0, var_1) {
   var_2 = spawnStruct();
-  var_2.ref_12fa3 = "getUnusedLootCacheArray";
-  var_2.ref_12f9f = var_0;
-  var_2.ref_12fa6 = var_1;
-  var_2.ref_12fa7 = 0;
-  var_2.ref_12fa1 = 1;
-  var_2.mintime = level.obit_activation.ref_129db;
+  var_2.ref_12FA3 = "getUnusedLootCacheArray";
+  var_2.ref_12F9F = var_0;
+  var_2.ref_12FA6 = var_1;
+  var_2.ref_12FA7 = 0;
+  var_2.ref_12FA1 = 1;
+  var_2.mintime = level.obit_activation.ref_129DB;
   return var_2;
 }
 
@@ -1116,7 +1116,7 @@ function dangercircletick(var_0, var_1, var_2) {
       obj_hvt_dead("exit_strategy_radio_strength", 0, 1);
     }
 
-    if(level.obit_activation.plundereventamount >= level.obit_activation.ref_129d8) {
+    if(level.obit_activation.plundereventamount >= level.obit_activation.ref_129D8) {
       thread ai_ascender_use(level.obit_activation.radio);
       level.obit_activation.plundereventamount = undefined;
       return;
@@ -1153,8 +1153,8 @@ function ai_ascender_use(var_0) {
   wait 5;
   var_5 = level.obit_activation.personalscorecount;
 
-  if(level.obit_activation.ref_1438f != -1) {
-    var_5 = level.obit_activation.ref_1438f;
+  if(level.obit_activation.ref_1438F != -1) {
+    var_5 = level.obit_activation.ref_1438F;
   } else if(level.br_circle.circleindex < level.obit_activation.personalnukecostoverride) {
     var_5 = level.obit_activation.start_fly_over;
   }
@@ -1309,32 +1309,32 @@ function ai_flash_swap(var_0) {
 function ai_extra_think(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.onmatchstartbr)) {
     level.onmatchstartbr = spawnStruct();
-    level.onmatchstartbr.ref_129de = 0;
-    level.onmatchstartbr.ref_129dd = 0;
-    level.onmatchstartbr.ref_129d9 = 255;
-    level.onmatchstartbr.ref_11b6f = 0;
+    level.onmatchstartbr.ref_129DE = 0;
+    level.onmatchstartbr.ref_129DD = 0;
+    level.onmatchstartbr.ref_129D9 = 255;
+    level.onmatchstartbr.ref_11B6F = 0;
   }
 
   if(isDefined(var_3)) {
-    level.onmatchstartbr.ref_129de = var_3;
+    level.onmatchstartbr.ref_129DE = var_3;
   }
 
   if(isDefined(var_0)) {
-    level.onmatchstartbr.ref_129dd = var_0;
+    level.onmatchstartbr.ref_129DD = var_0;
   }
 
   if(isDefined(var_1)) {
-    level.onmatchstartbr.ref_129d9 = var_1;
+    level.onmatchstartbr.ref_129D9 = var_1;
   }
 
   if(isDefined(var_2)) {
-    level.onmatchstartbr.ref_11b6f = var_2;
+    level.onmatchstartbr.ref_11B6F = var_2;
   }
 
-  var_4 = (int(level.onmatchstartbr.ref_129de) & 1) << 22;
-  var_4 += (int(level.onmatchstartbr.ref_129dd) & 7) << 19;
-  var_4 += (int(level.onmatchstartbr.ref_129d9) & 255) << 11;
-  var_4 += int(level.onmatchstartbr.ref_11b6f) & 2047;
+  var_4 = (int(level.onmatchstartbr.ref_129DE) & 1) << 22;
+  var_4 += (int(level.onmatchstartbr.ref_129DD) & 7) << 19;
+  var_4 += (int(level.onmatchstartbr.ref_129D9) & 255) << 11;
+  var_4 += int(level.onmatchstartbr.ref_11B6F) & 2047;
   setomnvar("ui_br_exfil_radio_state", var_4);
 }
 
@@ -1343,9 +1343,9 @@ function ai_dropgren_override_hide() {
 }
 
 function ai_goal_distribution(var_0) {
-  if(var_0 && !istrue(level.onmatchstartbr.ref_129de)) {
+  if(var_0 && !istrue(level.onmatchstartbr.ref_129DE)) {
     level.obit_activation.radio.enteredpausedstatetime = gettime();
-  } else if(!var_0 && istrue(level.onmatchstartbr.ref_129de) && isDefined(level.obit_activation.radio.enteredpausedstatetime)) {
+  } else if(!var_0 && istrue(level.onmatchstartbr.ref_129DE) && isDefined(level.obit_activation.radio.enteredpausedstatetime)) {
     level.obit_activation.radio.overalltimespentpaused += gettime() - level.obit_activation.radio.enteredpausedstatetime;
   }
 
@@ -1368,7 +1368,7 @@ function obj_heli_assault2() {
       var_3 = gettime();
 
       if(getdvarint("scr_br_alt_mode_escape_reset_timer_when_invalid_state", 0)) {
-        level.obit_activation.radio.waittime = level.obit_activation.ref_145cd;
+        level.obit_activation.radio.waittime = level.obit_activation.ref_145CD;
         ai_goal_distribution(1);
       } else {
         var_0 notify("escape_radio_win_timer_wait");
@@ -1393,14 +1393,14 @@ function vehicle_spawn_mp_gamemodesupportsrespawn() {
 }
 
 function adjustzoneactivationdelayforlargemaps() {
-  if(!isDefined(level.onmatchstartbr) || !isDefined(level.onmatchstartbr.ref_129dd)) {
+  if(!isDefined(level.onmatchstartbr) || !isDefined(level.onmatchstartbr.ref_129DD)) {
     return -1;
   }
 
-  var_0 = level.onmatchstartbr.ref_129dd;
+  var_0 = level.onmatchstartbr.ref_129DD;
 
-  if((var_0 == 1 || var_0 == 4) && isDefined(level.obit_activation.ref_129d4)) {
-    var_1 = max(0, level.obit_activation.ref_129d4 - gettime());
+  if((var_0 == 1 || var_0 == 4) && isDefined(level.obit_activation.ref_129D4)) {
+    var_1 = max(0, level.obit_activation.ref_129D4 - gettime());
     var_2 = var_1 / 1000;
     return var_2;
   }
@@ -1411,7 +1411,7 @@ function adjustzoneactivationdelayforlargemaps() {
   }
 
   if(var_2 == 2) {
-    return level.obit_activation.ref_145cd;
+    return level.obit_activation.ref_145CD;
   }
 
   return -1;
@@ -1423,20 +1423,20 @@ function anyone_can_see_spawner() {
   level.initial_allies = undefined;
   level.initial_angles = -1;
   var_0 = 0;
-  var_1 = level.obit_activation.ref_13bfd;
+  var_1 = level.obit_activation.ref_13BFD;
 
   for(;;) {
     var_2 = 1;
 
     if(!isDefined(level.obit_activation)) {
       var_2 = 0;
-    } else if(!isDefined(level.onmatchstartbr) || !isDefined(level.onmatchstartbr.ref_129dd)) {
+    } else if(!isDefined(level.onmatchstartbr) || !isDefined(level.onmatchstartbr.ref_129DD)) {
       var_2 = 0;
     }
 
     if(var_2) {
       var_3 = adjustzoneactivationdelayforlargemaps();
-      var_4 = level.onmatchstartbr.ref_129dd;
+      var_4 = level.onmatchstartbr.ref_129DD;
 
       if(var_3 == -1 || var_4 == 0) {} else if((var_4 == 1 || var_4 == 4) && !var_0) {
         if(getdvarint("scr_br_override_remaining_time", 0) != 0) {
@@ -1490,12 +1490,12 @@ function ammobox_getbufferedattachmentweapon(var_0) {
 
   foreach(var_4 in level.players) {
     if(!var_4 scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal()) {
-      ref_131a9(var_4);
+      ref_131A9(var_4);
     }
   }
 }
 
-function ref_131a9() {
+function ref_131A9() {
   var_0 = self;
 
   if(isDefined(level.initial_allies)) {

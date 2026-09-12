@@ -108,10 +108,10 @@ function computer_anim_loop_exit(var_0) {
   var_0 endon("last_stand");
   var_0 endon("disconnect");
   var_0 endon("exit_computer");
-  level.ref_1404b = 1;
+  level.ref_1404B = 1;
 
   if(var_0 usinggamepad()) {
-    if(istrue(level.ref_1404b)) {
+    if(istrue(level.ref_1404B)) {
       while(var_0 useButtonPressed()) {
         wait 0.05;
       }
@@ -128,7 +128,7 @@ function computer_anim_loop_exit(var_0) {
 
   for(;;) {
     if(var_0 usinggamepad()) {
-      if(istrue(level.ref_1404b)) {
+      if(istrue(level.ref_1404B)) {
         if(var_0 useButtonPressed()) {
           break;
         }
@@ -169,7 +169,7 @@ function computer_player_allow(var_0, var_1) {
   var_0 scripts\common\utility::allow_crouch(var_1);
   var_0 scripts\common\utility::allow_prone(var_1);
   var_0 scripts\common\utility::allow_weapon(var_1);
-  var_0.ref_140ae = !var_1;
+  var_0.ref_140AE = !var_1;
   var_0.disable_super = !var_1;
 }
 

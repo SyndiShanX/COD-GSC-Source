@@ -288,7 +288,7 @@ function node_flag_triggered(var_0, var_1) {
 
 function node_flag_triggered_cleanup(var_0, var_1) {
   var_0 endon("processed_node" + var_1);
-  scripts\engine\utility::ref_143a6("death", "newpath", "node_wait_terminated");
+  scripts\engine\utility::ref_143A6("death", "newpath", "node_wait_terminated");
   var_0 scripts\engine\utility::ent_flag_clear(var_1, 1);
 }
 
@@ -749,7 +749,7 @@ function heli_wait_node(var_0, var_1, var_2) {
 
   if(isDefined(var_8.radius)) {
     self setneargoalnotifydist(var_8.radius);
-    scripts\engine\utility::ref_143a5("near_goal", "goal");
+    scripts\engine\utility::ref_143A5("near_goal", "goal");
   } else {
     self waittill("goal");
   }

@@ -10,7 +10,7 @@ function disable_spawnpoints_in_hangar() {
     return;
   }
 
-  thread ref_12e04(var_0);
+  thread ref_12E04(var_0);
 }
 
 function disable_spawner(var_0) {
@@ -25,7 +25,7 @@ function disable_spawner(var_0) {
   return true;
 }
 
-function ref_12e04(var_0) {
+function ref_12E04(var_0) {
   if(scripts\mp\gametypes\br_public::turret_headicon()) {
     return;
   }

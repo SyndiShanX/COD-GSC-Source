@@ -43,7 +43,7 @@ function init_trial_patches() {
     case "pitcher":
       break;
     case "race":
-      level.ref_142a5 = loadfx("vfx/core/mp/core/vfx_flare_glow_en.vfx");
+      level.ref_142A5 = loadfx("vfx/core/mp/core/vfx_flare_glow_en.vfx");
       level.ref_14297 = loadfx("vfx/iw7/levels/europa/vfx_eu_icecave_flare_01.vfx");
       level._effect["circle"] = loadfx("vfx/iw8_mp/trials/vfx_trials_ring_heli.vfx");
       break;
@@ -61,115 +61,115 @@ function init_trial_patches() {
 
   switch (level.trial["zone"]) {
     case "mp_m_speed":
-      ref_11dde();
+      ref_11DDE();
       break;
     case "mp_deadzone":
-      ref_11dcc();
+      ref_11DCC();
       break;
     case "mp_petrograd":
       _precalcsafecirclecenters::switcharray();
       break;
     case "mp_spear":
     case "mp_spear_pm":
-      ref_121ef(var_0, var_1);
-      thread ref_11d7e(var_0, var_1);
+      ref_121EF(var_0, var_1);
+      thread ref_11D7E(var_0, var_1);
       break;
     case "mp_m_speedball":
-      ref_11ddf();
+      ref_11DDF();
       break;
     case "mp_runner":
     case "mp_runner_pm":
-      ref_11de7(var_2, var_1, var_3);
+      ref_11DE7(var_2, var_1, var_3);
       break;
     case "mp_raid":
-      ref_11de6();
+      ref_11DE6();
       break;
     case "mp_euphrates":
-      ref_11dd4();
+      ref_11DD4();
       break;
     case "mp_aniyah":
-      ref_11dc4();
+      ref_11DC4();
       break;
     case "mp_piccadilly":
-      ref_11de4(var_3);
+      ref_11DE4(var_3);
       break;
     case "mp_m_overunder":
-      ref_11ddd();
+      ref_11DDD();
       break;
     case "mp_shipment":
-      ref_11de9();
+      ref_11DE9();
       break;
     case "mp_vacant":
-      ref_11def();
+      ref_11DEF();
       break;
     case "mp_crash2":
-      ref_11dcb();
+      ref_11DCB();
       break;
     case "mp_farms2_gw":
-      ref_11dd5();
+      ref_11DD5();
     case "mp_hackney_am":
     case "mp_hackney_yard":
-      ref_11dd6();
+      ref_11DD6();
       break;
     case "mp_cave_am":
-      ref_11dca();
+      ref_11DCA();
       break;
     case "mp_m_stack":
-      ref_11de0();
+      ref_11DE0();
       break;
     case "mp_port2_gw":
-      ref_11de5();
+      ref_11DE5();
       break;
     case "mp_downtown_gw":
-      ref_11dcf();
+      ref_11DCF();
       break;
     case "mp_boneyard_gw":
-      ref_11dc6();
+      ref_11DC6();
       break;
     case "mp_backlot2":
-      ref_11dc5();
+      ref_11DC5();
       break;
     case "mp_t_reflex":
-      ref_11ded(var_3, var_2);
+      ref_11DED(var_3, var_2);
       break;
     case "mp_rust":
-      ref_11de8(var_3);
+      ref_11DE8(var_3);
       break;
     case "mp_hideout":
-      ref_11dd9();
+      ref_11DD9();
       break;
     case "mp_layover_gw":
-      ref_11dda();
+      ref_11DDA();
       break;
     case "mp_village2":
-      ref_11df1();
+      ref_11DF1();
       break;
     case "mp_m_trench":
-      ref_11de1();
+      ref_11DE1();
       break;
     case "mp_hardhat":
-      ref_11dd8();
+      ref_11DD8();
       break;
     case "mp_emporium":
-      ref_11dd1();
+      ref_11DD1();
       break;
     case "mp_harbor":
-      ref_11dd7();
+      ref_11DD7();
       break;
     case "mp_m_king":
-      ref_11ddc();
+      ref_11DDC();
       break;
     case "mp_m_cornfield":
-      ref_11ddb(var_2);
+      ref_11DDB(var_2);
       break;
     case "mp_oilrig":
-      ref_11de3();
+      ref_11DE3();
       break;
     case "mp_t_sn_reflex":
-      ref_11dee();
+      ref_11DEE();
       break;
     case "mp_escape2":
-      ref_11dd2();
+      ref_11DD2();
       break;
     default:
       break;
@@ -181,7 +181,7 @@ function init_trial_patches() {
   }
 }
 
-function ref_121ef(var_0, var_1) {
+function ref_121EF(var_0, var_1) {
   if(var_0 == "mp_spear" || var_0 == "mp_spear_pm") {
     if(isDefined(var_1)) {
       var_2 = scripts\engine\utility::string(var_1);
@@ -313,7 +313,7 @@ function ref_121ef(var_0, var_1) {
   }
 }
 
-function ref_11d7e(var_0, var_1) {
+function ref_11D7E(var_0, var_1) {
   while(!isDefined(level.player)) {
     wait 0.05;
   }
@@ -422,7 +422,7 @@ function trial_chevron_vfx_action(var_0, var_1) {
   }
 }
 
-function ref_11dde() {
+function ref_11DDE() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (60, 2140, 26), (0, 180, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   var_1 = spawn("script_origin", (-260, 2140, 32));
@@ -432,7 +432,7 @@ function ref_11dde() {
   register_create_script_arrays("mp_m_speed_create_script", "mp_m_speed_trial", &scripts\mp\maps\mp_m_speed\mp_m_speed_create_script::main);
 }
 
-function ref_11dcc() {
+function ref_11DCC() {
   if(level.trial["missionScript"] == "jugg") {
     var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-728, 588, 460), (0, 320, 0));
     scripts\mp\spawnlogic::bdiedonce([var_0]);
@@ -450,8 +450,8 @@ function ref_11dcc() {
     register_create_script_arrays("mp_deadzone_create_script", "mp_deadzone_trial", &scripts\mp\maps\mp_deadzone\mp_deadzone_create_script::main);
 
     if(level.trial["variant"] == "trialympic") {
-      level.ref_13d5b = 1;
-      level.ref_13d3a = "trialympic_dogtag";
+      level.ref_13D5B = 1;
+      level.ref_13D3A = "trialympic_dogtag";
       return;
     }
 
@@ -620,7 +620,7 @@ function ref_11dcc() {
   }
 }
 
-function ref_11de9() {
+function ref_11DE9() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-654.833, 1994.12, 15.9902), (0, 0, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_knife");
@@ -629,7 +629,7 @@ function ref_11de9() {
   var_1.targetname = "trial_juggernaut_crate";
 }
 
-function ref_11ddf() {
+function ref_11DDF() {
   var_0 = spawn("script_origin", (0, 0, 0));
   var_0.targetname = "progression";
   var_0.target = "alpha";
@@ -656,7 +656,7 @@ function ref_11ddf() {
   register_create_script_arrays("mp_m_speedball_create_script", "mp_m_speedball_trial", &scripts\mp\maps\mp_m_speedball\mp_m_speedball_create_script::main);
 }
 
-function ref_11de7(var_0, var_1, var_2) {
+function ref_11DE7(var_0, var_1, var_2) {
   if(var_0 == "clear") {
     var_3 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (2731, 727.75, 253), (0, 270, 0));
     scripts\mp\spawnlogic::bdiedonce([var_3]);
@@ -671,13 +671,13 @@ function ref_11de7(var_0, var_1, var_2) {
     init_nuke_vault((2588, 621, 305), (0, 270, 0), "trial_variant_heavy", undefined, "iw8_lm_kilo121+silencerlmg_west01+bipod_kilo121");
     init_nuke_vault((2586.6, 611.86, 312.064), (359, 270, -0.000128963), "trial_variant_night", undefined, "iw8_pi_papa320+silencer+fastreload+laserrange");
     level.ref_12489 = "equip_frag";
-    level.ref_1248b = "equip_flash";
-    level.ref_1248a = 1;
+    level.ref_1248B = "equip_flash";
+    level.ref_1248A = 1;
     thread scripts\mp\trials\mp_trl_cleararea::init_trap_room_debug();
     register_create_script_arrays("mp_runner_create_script", "mp_runner_create_script", &scripts\mp\maps\mp_runner\mp_runner_create_script::main);
 
     if(var_1 == 323) {
-      level.ref_124c9 = 1;
+      level.ref_124C9 = 1;
       return;
     }
 
@@ -693,7 +693,7 @@ function ref_11de7(var_0, var_1, var_2) {
   }
 }
 
-function ref_11dc4() {
+function ref_11DC4() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-2144, -1263, 312), (0, 7, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_knife");
@@ -703,7 +703,7 @@ function ref_11dc4() {
   GscBinSkip0(0x2e, 0, spawn("script_model", (-191, -1785, 116)));
 }
 
-function ref_11de6() {
+function ref_11DE6() {
   if(level.trial["missionScript"] == "race") {
     var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-2700, 748, 271), (0, 70, 0));
     scripts\mp\spawnlogic::bdiedonce([var_0]);
@@ -713,16 +713,16 @@ function ref_11de6() {
     scripts\mp\spawnlogic::bdiedonce([var_0]);
     init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_knife");
     init_nuke_vault((-176, 3172, 532), (315, 270, 0), undefined, "outline", "iw8_sn_crossbow+ammo_crossbow+armstac_crossbow+fastreload+grip_crossbow+rec_crossbow+stocks_crossbow+custscope_crossbow+wirel_crossbow");
-    level.ref_13d8f = 1;
+    level.ref_13D8F = 1;
     level.showdebugresult = 10000;
-    level.ref_13d94 = 1;
-    level.ref_13d95 = 3;
+    level.ref_13D94 = 1;
+    level.ref_13D95 = 3;
   }
 
   register_create_script_arrays("mp_raid_create_script", "race_trial", &scripts\mp\maps\mp_raid\mp_raid_create_script::main);
 }
 
-function ref_11dd4() {
+function ref_11DD4() {
   var_0 = [];
   var_1 = [];
 
@@ -736,8 +736,8 @@ function ref_11dd4() {
       init_nuke_vault((428, -176, 38), (278, 360, 90), "trial_variant_sniper", "outline", "iw8_sn_delta+barshort+vzscope+ammomod_impact");
       init_nuke_vault((0, 0, 0), (0, 0, 0), "trial_variant_pistol", "trial_starting_weapon", "iw8_knife");
       init_nuke_vault((480.5, -105.5, 58.5), (17, 90, 6), "trial_variant_pistol", "outline", "iw8_pi_decho+trigcust02+xmags+barlong+brake+acog3");
-      level.ref_13d8f = 1;
-      thread ref_13a69();
+      level.ref_13D8F = 1;
+      thread ref_13A69();
       break;
     case "gun_nonlinear":
       var_2 = spawnStruct();
@@ -792,8 +792,8 @@ function ref_11dd4() {
       var_2 = spawn("script_model", (-25, -518, 12));
       var_2 = spawn("script_model", (579, -1699, 12));
       var_2 = spawn("script_model", (-68, 691, 12));
-      thread ref_11dd3();
-      thread ref_13a69();
+      thread ref_11DD3();
+      thread ref_13A69();
       break;
     case "race":
       var_2 = spawnStruct();
@@ -829,7 +829,7 @@ function ref_11dd4() {
   scripts\mp\spawnlogic::bdiedonce([var_19]);
 }
 
-function ref_11dd3() {
+function ref_11DD3() {
   level waittill("course_started");
   var_0 = getentitylessscriptablearrayinradius("scriptable_scriptable_door_metal_panel_03_left_mp", "classname");
   var_1 = scripts\engine\utility::getclosest((1876, -1397, -56), var_0, 10);
@@ -838,7 +838,7 @@ function ref_11dd3() {
   foreach(var_3 in var_0) {}
 }
 
-function ref_11de4(var_0) {
+function ref_11DE4(var_0) {
   var_1 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-2666, 390, 198), (0, 45, 0));
   scripts\mp\spawnlogic::bdiedonce([var_1]);
 
@@ -865,7 +865,7 @@ function ref_11de4(var_0) {
   GscBinSkip0(0x2e, 0, spawn("script_model", (-1657, -514, 253)));
 }
 
-function ref_11ddd() {
+function ref_11DDD() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (551, 968, 16), (0, 223, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((596.712, 826.265, 52.7056), (38.4733, 358.746, -0.96607), "trial_variant_fast", undefined, "iw8_pi_golf21+reflexmini2+pistolgrip02+trigcust02+laserrange+barshort");
@@ -919,7 +919,7 @@ function ref_11ddd() {
   register_create_script_arrays("mp_m_overunder_create_script", "mp_overunder_guncourse", &scripts\mp\maps\mp_m_overunder\mp_m_overunder_create_script::main);
 }
 
-function ref_11dd6() {
+function ref_11DD6() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (1191, -1372, 62), (0, 154, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
 
@@ -942,13 +942,13 @@ function ref_11dd6() {
   }
 
   init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", var_1);
-  level.ref_13d93 = 1;
+  level.ref_13D93 = 1;
   var_2 = getEnt("care_package_col", "targetname");
   var_3 = [];
   GscBinSkip0(0x2e, 0, spawn("script_model", (210, -923, 18)));
 }
 
-function ref_11de0() {
+function ref_11DE0() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (960, 0, 152), (0, 180, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((803.97, 4.83, 205.7), (283.41, 238.67, 35.51), "trial_variant_shotgun", undefined, "iw8_sh_dpapa12+fmj+guardlight+barshort");
@@ -962,7 +962,7 @@ function ref_11de0() {
   GscBinSkip0(0x2e, 0, spawn("script_model", (812.5, -6.5, 209.25)));
 }
 
-function ref_11ddc() {
+function ref_11DDC() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-1096, 0, 16), (0, 0, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((-982, 85.5, 72.5), (33.6, 127, 0), "trial_variant_fast", undefined, "iw8_pi_mike9+fastreload+reflexmini+trigcust02+pistolgrip02+barshort");
@@ -971,14 +971,14 @@ function ref_11ddc() {
   init_nuke_vault((-993.7, 99.6, 65), (0, 127, 7), "trial_variant_fast", undefined, "iw8_sm_smgolf45+reflexmini3+barshort+stocks+pistolgrip02+smags");
   init_nuke_vault((-990, 91.5, 52), (0, 127, 7), "trial_variant_fast", undefined, "iw8_ar_akilo47+acog2+pistolgrip03+stockl+calsmg+barshortnoguard");
 
-  if(_tablethide::ref_13d4c()) {
-    thread ref_13d6d();
+  if(_tablethide::ref_13D4C()) {
+    thread ref_13D6D();
   }
 
   register_create_script_arrays("mp_m_king_create_script", "mp_m_king_trial_guncourse", &_maxoutequipmentammo::main);
 }
 
-function ref_11dd7() {
+function ref_11DD7() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (3915.5, -2334, 236.5), (0, 104, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   var_1 = getEnt("clip64x64x8", "targetname");
@@ -995,7 +995,7 @@ function ref_11dd7() {
   GscBinSkip0(0x2e, 0, spawn("script_model", (2841, -1100, 303)));
 }
 
-function ref_11dc5() {
+function ref_11DC5() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-125, 819.5, 104.5), (0, 351, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   var_1 = getEnt("clip64x64x8", "targetname");
@@ -1012,12 +1012,12 @@ function ref_11dc5() {
   GscBinSkip0(0x2e, 0, spawn("script_model", (-167.25, 805.7, 195.9)));
 }
 
-function ref_11def() {
+function ref_11DEF() {
   level.trial_infinite_reserve_ammo = 1;
   glassradiusdamage((3229, 2578, 131), 128, 99999, 9999);
   glassradiusdamage((3069, 2023, 131), 128, 99999, 9999);
   glassradiusdamage((2699, 1683, 131), 128, 99999, 9999);
-  thread ref_13a69();
+  thread ref_13A69();
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (3793, 1413, 68), (0, 240, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((3843.58, 1054.18, 124.7), (0, 205, 0), "trial_variant_default", "trial_starting_weapon", "iw8_pi_mike1911+barmid+pistolgrip01+trigcust+xmagslrg");
@@ -1037,10 +1037,10 @@ function ref_11def() {
   register_create_script_arrays("mp_vacant_create_script", "mp_vacant_trial", &scripts\mp\maps\mp_vacant\mp_vacant_create_script::main);
   thread target_random_models();
   thread player_isusingtacmap("course_started");
-  thread ref_11df0();
+  thread ref_11DF0();
 }
 
-function ref_11df0() {
+function ref_11DF0() {
   for(;;) {
     level waittill("course_started");
     var_0 = getentitylessscriptablearrayinradius("scriptable_scriptable_construction_doors_metal_b_02_mp", "classname");
@@ -1054,13 +1054,13 @@ function ref_11df0() {
   }
 }
 
-function ref_11dd9() {
+function ref_11DD9() {
   level.trial_infinite_reserve_ammo = 1;
   glassradiusdamage((112, -1366, 67), 128, 99999, 9999);
   glassradiusdamage((112, -1366, 185.5), 128, 99999, 9999);
   glassradiusdamage((191, -1560, 185.5), 128, 99999, 9999);
   glassradiusdamage((-1088, -951, 67), 128, 99999, 9999);
-  thread ref_13a69();
+  thread ref_13A69();
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-98.5, 1639.25, 13), (0, 10, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((101.75, 1765, 84.5), (338.5, 130.25, 5.2), "trial_variant_fast", "trial_starting_weapon", "iw8_pi_mike1911+barmid+pistolgrip01+trigcust+xmagslrg");
@@ -1078,17 +1078,17 @@ function ref_11dd9() {
   GscBinSkip0(0x2e, 0, spawn("script_model", (1145.25, 291, 0.75)));
 }
 
-function ref_11dd5() {
+function ref_11DD5() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (53844, -18822, 4690), (75, 355, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
 }
 
-function ref_11de5() {
+function ref_11DE5() {
   if(level.trial["missionScript"] == "race") {
     init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_knife");
     var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (36805, -14366, -152), (0, 300, 0));
     scripts\mp\spawnlogic::bdiedonce([var_0]);
-    level.ref_13d5b = 1;
+    level.ref_13D5B = 1;
     level.localeid = "locale_3";
     register_create_script_arrays("mp_trial_helicopter_port_create_a_script", "mp_trial_helicopter_race", &_playerwaittillcinematiccompleteinternal::main);
     return;
@@ -1098,12 +1098,12 @@ function ref_11de5() {
   scripts\mp\spawnlogic::bdiedonce([var_0]);
 }
 
-function ref_11dcf() {
+function ref_11DCF() {
   if(level.trial["missionScript"] == "race") {
     init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_knife");
     var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (22448, -17782, 560), (0, 315.999, 0));
     thread mindia_exterior_sfx();
-    level.ref_13d5b = 1;
+    level.ref_13D5B = 1;
     level.localeid = "locale_8";
   } else {
     init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_ar_mike4+reflex_west02+fmj+pistolgrip02+stockl+barlong");
@@ -1115,7 +1115,7 @@ function ref_11dcf() {
   register_create_script_arrays("mp_downtown_gw_create_script", "mp_downtown_gw_trial", &scripts\mp\maps\mp_downtown_gw\mp_downtown_gw_create_script::main);
 }
 
-function ref_11dca() {
+function ref_11DCA() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-2482.78, -1290.79, -28.0287), (0, 0, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_knife");
@@ -1124,20 +1124,20 @@ function ref_11dca() {
   init_nuke_vault((-2204, -1501, 36), (0, 0, 0), undefined, undefined, "iw8_la_mike32");
   init_nuke_vault((-2204.25, -1503, 51), (0, 0, 0), undefined, undefined, "iw8_ar_scharlie+reflex_east01+silencer_west01+gl+stocks_scharlie+laserrange");
   level.ref_12489 = "equip_c4";
-  level.ref_1248b = "equip_thermite";
-  level.ref_1248a = 1;
-  level.ref_124c9 = 1;
-  level.ref_13d59 = [];
-  level.ref_13d59 = scripts\engine\utility::array_add(level.ref_13d59, "specialty_fastreload");
-  level.ref_13d3f = 1;
-  level.ref_13d41 = 1;
+  level.ref_1248B = "equip_thermite";
+  level.ref_1248A = 1;
+  level.ref_124C9 = 1;
+  level.ref_13D59 = [];
+  level.ref_13D59 = scripts\engine\utility::array_add(level.ref_13D59, "specialty_fastreload");
+  level.ref_13D3F = 1;
+  level.ref_13D41 = 1;
   thread scripts\mp\trials\mp_trl_cleararea::init_trap_room_debug();
   register_create_script_arrays("mp_cave_am_create_script", "mp_cave_am_create_script", &_maphint_cheese2scriptableused::main);
 }
 
-function ref_11dd8() {
+function ref_11DD8() {
   level.trial_infinite_reserve_ammo = 1;
-  level.ref_13d87 = 1;
+  level.ref_13D87 = 1;
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (864, -752, 288), (0, 270, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_knife");
@@ -1161,7 +1161,7 @@ function pavelow_boss_health_bar(var_0) {
   }
 }
 
-function ref_11dea() {
+function ref_11DEA() {
   if(!isDefined(level.player)) {
     return true;
   }
@@ -1170,15 +1170,15 @@ function ref_11dea() {
   var_1 = level.player.origin[1] > -60;
   var_2 = level.player.origin[1] < 330;
 
-  if(!isDefined(level.ref_124b8)) {
+  if(!isDefined(level.ref_124B8)) {
     if(var_0 && var_1 && var_2) {
-      level.ref_124b8 = 1;
+      level.ref_124B8 = 1;
     }
   }
 
-  if(istrue(level.ref_124b8)) {
+  if(istrue(level.ref_124B8)) {
     if(!var_0 || !var_1 || !var_2) {
-      level.ref_124b8 = 0;
+      level.ref_124B8 = 0;
       return false;
     }
   }
@@ -1186,7 +1186,7 @@ function ref_11dea() {
   return true;
 }
 
-function ref_11dcb() {
+function ref_11DCB() {
   setdynamicdvar("scr_game_enableMinimap", 0);
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (45, -617, 330), (0, 81, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
@@ -1196,7 +1196,7 @@ function ref_11dcb() {
   GscBinSkip0(0x2e, 0, spawn("script_model", (-56, -587, 333)));
 }
 
-function ref_11ded(var_0, var_1) {
+function ref_11DED(var_0, var_1) {
   if(var_1 == "gunslinger" || var_1 == "pitcher") {
     var_2 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (1874, 1198.75, 8), (0, 182.4, 0));
     scripts\mp\spawnlogic::bdiedonce([var_2]);
@@ -1206,11 +1206,11 @@ function ref_11ded(var_0, var_1) {
       register_create_script_arrays("mp_trl_gunslinger_knife_create_script", "mp_trl_gunslinger_targets3_create_script", &_safecircledurationforplayer::main);
     }
 
-    if(var_0 == "reflex" && _tablethide::ref_13d4c()) {
+    if(var_0 == "reflex" && _tablethide::ref_13D4C()) {
       register_create_script_arrays("mp_t_reflex_game_of_summer_createscript", "mp_t_reflex_game_of_summer_createscript", &scripts\mp\maps\mp_t_reflex\mp_t_reflex_game_of_summer_createscript::main);
-      level.ref_142a6 = 275;
-      level.ref_142a7 = 2.25;
-      thread ref_13d6d();
+      level.ref_142A6 = 275;
+      level.ref_142A7 = 2.25;
+      thread ref_13D6D();
     }
   }
 
@@ -1226,7 +1226,7 @@ function ref_11ded(var_0, var_1) {
       var_5 delete();
     }
 
-    thread ref_11dec();
+    thread ref_11DEC();
     return;
   }
 }
@@ -1253,7 +1253,7 @@ function setupsoccerball() {
   }
 }
 
-function ref_11dec() {
+function ref_11DEC() {
   while(!isDefined(level.struct_class_names)) {
     waitframe();
   }
@@ -1268,15 +1268,15 @@ function ref_11dec() {
   }
 }
 
-function ref_11dda() {
+function ref_11DDA() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-21478, 25049, -338), (0, 0, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_knife");
-  level.ref_13d5b = 1;
+  level.ref_13D5B = 1;
   register_create_script_arrays("mp_trl_quarry_raceislava_trial_create_a_script", "mp_quarry_trials_race", &_setclientkillstreakindexes::main);
 }
 
-function ref_11de1() {
+function ref_11DE1() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-1108, -88, -84), (0, 28, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((-906.97, 138.623, -5.5239), (0, 271, 0), undefined, "trial_starting_weapon", "iw8_pi_cpapa+barlong_cpapa+stockcust_cpapa+trigcust03_cpapa");
@@ -1286,12 +1286,12 @@ function ref_11de1() {
   init_nuke_vault((-909.97, 148.123, -29.2739), (288.531, 318.307, -48.1768), undefined, undefined, "iw8_sn_sksierra+snprscope_sksierra+smags_sksierra+pistolgrip04_sksierra+barshort_sksierra");
   init_nuke_vault((-909.22, 166.623, -29.7739), (287.755, 321.101, -51.1163), undefined, undefined, "iw8_ar_akilo47+bayonet_akilo47+barsmg_akilo47+stocklmg_akilo47");
   init_nuke_vault((481.28, -380.877, -34.0239), (287.755, 321.101, -51.1163), undefined, undefined, "iw8_la_rpapa7");
-  thread ref_11de2();
+  thread ref_11DE2();
   register_create_script_arrays("mp_m_trench_create_script_gunnonlinear", "mp_m_trench_create_script_gunnonlinear", &_onmatchstartbr::main);
-  thread ref_13a69();
+  thread ref_13A69();
 }
 
-function ref_11de2() {
+function ref_11DE2() {
   level endon("course_ended");
   _tablethide::waittill_player_isDefined();
 
@@ -1300,24 +1300,24 @@ function ref_11de2() {
   }
 
   level.player scripts\mp\equipment::giveequipment("equip_c4", "primary");
-  scripts\mp\trials\mp_trl_cleararea::ref_12a8e();
+  scripts\mp\trials\mp_trl_cleararea::ref_12A8E();
 }
 
-function ref_11dd1() {
+function ref_11DD1() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-596, 1455, 654), (0, 194, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_knife");
-  level.ref_125cb = 1;
-  level.ref_13d83 = 120;
-  thread ref_124a1();
+  level.ref_125CB = 1;
+  level.ref_13D83 = 120;
+  thread ref_124A1();
   register_create_script_arrays("mp_emporium_create_script_floorislava", "mp_emporium_create_script_floorislava", &_maphint_cheesescriptableused::main);
-  thread ref_121ea();
+  thread ref_121EA();
   var_1 = getEnt("clip64x64x64", "targetname");
   var_2 = [];
   GscBinSkip0(0x2e, 10, spawn("script_model", (-528.607, 1465.99, 608)));
 }
 
-function ref_121ea() {
+function ref_121EA() {
   while(!isDefined(level.struct_class_names)) {
     waitframe();
   }
@@ -1332,7 +1332,7 @@ function ref_121ea() {
   }
 }
 
-function ref_11dd0() {
+function ref_11DD0() {
   _tablethide::waittill_player_isDefined();
 
   while(!isalive(level.player)) {
@@ -1388,7 +1388,7 @@ function setupstartweaponsattachments(var_0) {
   var_3 delete();
 }
 
-function ref_124a1() {
+function ref_124A1() {
   _tablethide::waittill_player_isDefined();
 
   while(!isalive(level.player)) {
@@ -1409,7 +1409,7 @@ function ref_124a1() {
   }
 }
 
-function ref_11ddb(var_0) {
+function ref_11DDB(var_0) {
   if(var_0 == "lava") {
     var_1 = getEntArray("alpha", "targetname");
 
@@ -1440,7 +1440,7 @@ function ref_11ddb(var_0) {
   scripts\mp\spawnlogic::bdiedonce([var_5]);
 }
 
-function ref_11de8(var_0) {
+function ref_11DE8(var_0) {
   if(level.trial["missionScript"] == "gunslinger") {
     var_1 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-79, 1355, -160), (0, 270, 0));
     scripts\mp\spawnlogic::bdiedonce([var_1]);
@@ -1462,7 +1462,7 @@ function ref_11de8(var_0) {
   }
 }
 
-function ref_11dc6() {
+function ref_11DC6() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-24702, -5429, -283), (1, 281, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_knife");
@@ -1473,7 +1473,7 @@ function ref_11dc6() {
   GscBinSkip0(0x2e, 0, spawn("script_model", (-27937, -4290, -249)));
 }
 
-function ref_13d27() {
+function ref_13D27() {
   while(!isDefined(level.struct_class_names)) {
     waitframe();
   }
@@ -1508,7 +1508,7 @@ function ref_13d27() {
   var_1 playsoundonmovingent("trial_sfx_door_truck_right");
 }
 
-function ref_11df1() {
+function ref_11DF1() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-1222, -2462, 386), (0, 53, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((-998, -2305, 412), (0, 0, -93), "trial_variant_explosion", "trial_starting_weapon", "iw8_knife");
@@ -1517,25 +1517,25 @@ function ref_11df1() {
   init_nuke_vault((-998, -2302, 431), (290, 1.6, -163), "trial_variant_explosion", undefined, "iw8_la_rpapa7");
   init_nuke_vault((-1011, -2289, 432), (288.4, 116, 23), "trial_variant_explosion", undefined, "iw8_sh_romeo870+melee+holo3+stocks+gripvertpro+barshort");
   level.ref_12489 = "equip_c4";
-  level.ref_1248a = 1;
-  level.ref_124c9 = 1;
-  level.ref_13d3f = 1;
-  level.ref_13d41 = 1;
+  level.ref_1248A = 1;
+  level.ref_124C9 = 1;
+  level.ref_13D3F = 1;
+  level.ref_13D41 = 1;
   thread scripts\mp\trials\mp_trl_cleararea::init_trap_room_debug();
   register_create_script_arrays("mp_village2_clearthearea_create_script", "mp_village2_trial_clearthearea", &scripts\mp\maps\mp_village2\mp_village2_clearthearea_create_script::main);
 }
 
-function ref_11de3() {
+function ref_11DE3() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (1188, -1459, 872), (0, 209, 0));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
   init_nuke_vault((0, 0, 0), (0, 0, 0), undefined, "trial_starting_weapon", "iw8_knife");
-  level.ref_13d2f = 1;
+  level.ref_13D2F = 1;
   register_create_script_arrays("mp_oilrig_create_script", "mp_oilrig_create_script", &_ontabletgiven::main);
 }
 
-function ref_11dee() {
-  if(_tablethide::ref_13d4c()) {
-    thread ref_13d6d();
+function ref_11DEE() {
+  if(_tablethide::ref_13D4C()) {
+    thread ref_13D6D();
   }
 
   if(level.trial["variant"] == "trialympic") {
@@ -1545,10 +1545,10 @@ function ref_11dee() {
   }
 }
 
-function ref_11dd2() {
+function ref_11DD2() {
   var_0 = scripts\mp\spawnlogic::init_trap_room_doors("mp_trial_spawn", (-2470.23, 4496.36, 707.14), (359.983, 231.857, 0.0086689));
   scripts\mp\spawnlogic::bdiedonce([var_0]);
-  level.ref_13d5b = 1;
+  level.ref_13D5B = 1;
   register_create_script_arrays("mp_escape2_create_script", "mp_escape2_create_script", &scripts\mp\maps\mp_escape2\mp_escape2_create_script::main);
 }
 
@@ -1591,7 +1591,7 @@ function init_nuke_vault(var_0, var_1, var_2, var_3, var_4) {
   return var_5;
 }
 
-function ref_13a69() {
+function ref_13A69() {
   while(!isDefined(level.struct_class_names)) {
     waitframe();
   }
@@ -1631,7 +1631,7 @@ function target_random_models() {
   var_1 = ["ee_military_shooting_range_plate_civilian_01", "ee_military_shooting_range_plate_civilian_02", "ee_military_shooting_range_plate_civilian_03"];
   var_2 = ["ee_military_shooting_range_plate_bullet", "ee_military_shooting_range_plate_bullet_01", "ee_military_shooting_range_plate_bullet_02", "ee_military_shooting_range_plate_bullet_03"];
 
-  if(istrue(level.ref_13d87)) {
+  if(istrue(level.ref_13D87)) {
     var_0 = [];
     var_1 = [];
     var_0 = ["ee_military_shooting_range_plate_enemy_01_ds", "ee_military_shooting_range_plate_enemy_02_ds", "ee_military_shooting_range_plate_enemy_03_ds", "ee_military_shooting_range_plate_enemy_04_ds", "ee_military_shooting_range_plate_enemy_05_ds", "ee_military_shooting_range_plate_enemy_06_ds"];
@@ -1722,10 +1722,10 @@ function player_isusingtacmap(var_0, var_1, var_2) {
     var_5.player_is_at_buy_station linkTo(var_6, "tag_fire_fx", (0, 0, -1.75), (0, 180, 0));
 
     if(istrue(var_1)) {
-      var_5.ref_1341f = spawn("script_model", var_5.origin);
-      var_5.ref_1341f.angles = var_5.angles;
-      var_5.ref_1341f setModel("tag_origin");
-      var_5.ref_1341f linkTo(var_6, "tag_fire_fx", (1, 0, 0), (90, 0, 0));
+      var_5.ref_1341F = spawn("script_model", var_5.origin);
+      var_5.ref_1341F.angles = var_5.angles;
+      var_5.ref_1341F setModel("tag_origin");
+      var_5.ref_1341F linkTo(var_6, "tag_fire_fx", (1, 0, 0), (90, 0, 0));
     }
   }
 
@@ -1744,7 +1744,7 @@ function player_isusingtacmap(var_0, var_1, var_2) {
       playFXOnTag(level._effect["trial_flare"], var_5.player_is_at_buy_station, "tag_origin");
 
       if(istrue(var_1)) {
-        playFXOnTag(level._effect["trial_smoke"], var_5.ref_1341f, "tag_origin");
+        playFXOnTag(level._effect["trial_smoke"], var_5.ref_1341F, "tag_origin");
       }
     }
 
@@ -1758,13 +1758,13 @@ function player_isusingtacmap(var_0, var_1, var_2) {
       stopFXOnTag(level._effect["trial_flare"], var_5.player_is_at_buy_station, "tag_origin");
 
       if(istrue(var_1)) {
-        stopFXOnTag(level._effect["trial_smoke"], var_5.ref_1341f, "tag_origin");
+        stopFXOnTag(level._effect["trial_smoke"], var_5.ref_1341F, "tag_origin");
       }
     }
   }
 }
 
-function ref_13d6d() {
+function ref_13D6D() {
   level._effect["trial_cup_flames"] = loadfx("vfx/iw8_mp/trials/summer/vfx_t_olympic_flame.vfx");
   level._effect["trial_small_cup_flames"] = loadfx("vfx/iw8/level/estate/vfx_estate_oil_fire.vfx");
   level._effect["trial_thermite_bronze"] = loadfx("vfx/iw8_mp/trials/summer/vfx_t_celeb_flame_bronze.vfx");
@@ -1772,7 +1772,7 @@ function ref_13d6d() {
   level._effect["trial_thermite_gold"] = loadfx("vfx/iw8_mp/trials/summer/vfx_t_celeb_flame_gold.vfx");
   level._effect["trial_celebration_flare"] = loadfx("vfx/iw8_mp/trials/summer/vfx_t_angelflares.vfx");
   level._effect["big_red_vfx"] = loadfx("vfx/iw8_br/gameplay/vfx_br_flare_smktrail.vfx");
-  level.ref_13d6c = 1;
+  level.ref_13D6C = 1;
 
   while(!isDefined(level.player)) {
     waitframe();
@@ -1783,13 +1783,13 @@ function ref_13d6d() {
   }
 
   thread get_wave_spawn_count();
-  level.ref_13d9b = getEntArray("trial_flames", "targetname");
+  level.ref_13D9B = getEntArray("trial_flames", "targetname");
 
-  if(isDefined(level.ref_13d9b)) {
+  if(isDefined(level.ref_13D9B)) {
     wait 5;
 
-    foreach(var_1 in level.ref_13d9b) {
-      if(istrue(level.ref_13d68)) {
+    foreach(var_1 in level.ref_13D9B) {
+      if(istrue(level.ref_13D68)) {
         playFXOnTag(scripts\engine\utility::getfx("trial_small_cup_flames"), var_1, "j_top");
       } else {
         playFXOnTag(scripts\engine\utility::getfx("trial_cup_flames"), var_1, "j_top");
@@ -1803,32 +1803,32 @@ function ref_13d6d() {
 }
 
 function get_wave_spawn_count() {
-  level.ref_13d2a = getEntArray("trial_celebration_flares", "targetname");
-  level.ref_13d3c = getEntArray("trial_end_flares", "targetname");
+  level.ref_13D2A = getEntArray("trial_celebration_flares", "targetname");
+  level.ref_13D3C = getEntArray("trial_end_flares", "targetname");
 
-  if(isDefined(level.ref_142a6)) {
-    level.ref_14298 = level.ref_142a6;
+  if(isDefined(level.ref_142A6)) {
+    level.ref_14298 = level.ref_142A6;
   } else {
     level.ref_14298 = 750;
   }
 
-  if(isDefined(level.ref_142a7)) {
-    level.ref_142ab = level.ref_142a7;
+  if(isDefined(level.ref_142A7)) {
+    level.ref_142AB = level.ref_142A7;
     goto LOC_00000067;
   }
 
-  level.ref_142ab = 1.75;
+  level.ref_142AB = 1.75;
 
   for(;;) {
-    level.ref_13d7f = undefined;
+    level.ref_13D7F = undefined;
     level waittill("course_ended");
 
-    if(istrue(level.ref_13d2e)) {
-      level.ref_13d7f = getomnvar("ui_trial_reward_tier");
+    if(istrue(level.ref_13D2E)) {
+      level.ref_13D7F = getomnvar("ui_trial_reward_tier");
 
-      if(level.ref_13d7f == 0) {
+      if(level.ref_13D7F == 0) {
         level.player playsoundtoplayer("gos_crowd_boo_loser", level.player);
-        level.ref_13d7f = 0;
+        level.ref_13D7F = 0;
         continue;
       }
     } else {
@@ -1838,47 +1838,47 @@ function get_wave_spawn_count() {
 
       if(level.trial["scoreType"] == "time") {
         if(level.score["total"] <= level.trial["tier3"]) {
-          level.ref_13d7f = 3;
+          level.ref_13D7F = 3;
         } else if(level.score["total"] <= level.trial["tier2"]) {
-          level.ref_13d7f = 2;
+          level.ref_13D7F = 2;
         } else if(level.score["total"] <= level.trial["tier1"]) {
-          level.ref_13d7f = 1;
+          level.ref_13D7F = 1;
         } else {
           level.player playsoundtoplayer("gos_crowd_boo_loser", level.player);
-          level.ref_13d7f = 0;
+          level.ref_13D7F = 0;
           continue;
         }
       } else if(level.score["total"] >= level.trial["tier3"]) {
-        level.ref_13d7f = 3;
+        level.ref_13D7F = 3;
       } else if(level.score["total"] >= level.trial["tier2"]) {
-        level.ref_13d7f = 2;
+        level.ref_13D7F = 2;
       } else if(level.score["total"] >= level.trial["tier1"]) {
-        level.ref_13d7f = 1;
+        level.ref_13D7F = 1;
       } else {
         level.player playsoundtoplayer("gos_crowd_boo_loser", level.player);
-        level.ref_13d7f = 0;
+        level.ref_13D7F = 0;
         continue;
       }
     }
 
-    foreach(var_1 in level.ref_13d2a) {
-      if(isDefined(var_1.script_noteworthy) && float(var_1.script_noteworthy) <= level.ref_13d7f) {
-        thread ref_13d58(var_1);
+    foreach(var_1 in level.ref_13D2A) {
+      if(isDefined(var_1.script_noteworthy) && float(var_1.script_noteworthy) <= level.ref_13D7F) {
+        thread ref_13D58(var_1);
       }
     }
 
-    if(level.ref_13d7f == 3) {
+    if(level.ref_13D7F == 3) {
       wait 3;
       level.player playsoundtoplayer("gos_cheer_front", level.player);
 
-      foreach(var_4 in level.ref_13d3c) {
+      foreach(var_4 in level.ref_13D3C) {
         thread movequestcircle();
       }
     }
 
     wait 4;
 
-    foreach(var_1 in level.ref_13d2a) {
+    foreach(var_1 in level.ref_13D2A) {
       if(istrue(var_1.player_is_exposed)) {
         var_1 stoploopsound();
       }
@@ -1898,7 +1898,7 @@ function movequestcircle() {
       var_0.angles = self.angles;
       waitframe();
       playFXOnTag(scripts\engine\utility::getfx("big_red_vfx"), var_0, "tag_origin");
-      var_0 moveTo(var_0.origin + (0, 0, level.ref_14298), level.ref_142ab);
+      var_0 moveTo(var_0.origin + (0, 0, level.ref_14298), level.ref_142AB);
       var_0 playsoundonmovingent("gos_firework_scream_sfx");
       self playSound("gos_firework_explo_sfx");
       wait 4;
@@ -1913,7 +1913,7 @@ function movequestcircle() {
   self playSound("ks_apache_flares");
 }
 
-function ref_13d58(var_0) {
+function ref_13D58(var_0) {
   if(isDefined(var_0)) {
     wait float(var_0);
   }
@@ -1926,7 +1926,7 @@ function ref_13d58(var_0) {
   self playSound("gos_firework_explo_sfx");
   self.player_is_exposed = 1;
 
-  if(isDefined(var_0) && var_0 == "0" && level.ref_13d7f >= 3) {
+  if(isDefined(var_0) && var_0 == "0" && level.ref_13D7F >= 3) {
     wait 2;
     playFXOnTag(scripts\engine\utility::getfx(proptiebreaker()), self, "j_top");
     return;
@@ -1934,7 +1934,7 @@ function ref_13d58(var_0) {
 }
 
 function proptiebreaker() {
-  switch (level.ref_13d7f) {
+  switch (level.ref_13D7F) {
     case 1:
       var_0 = "trial_thermite_bronze";
       break;

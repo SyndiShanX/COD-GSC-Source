@@ -42,7 +42,7 @@ function ref_12424(var_0, var_1) {
     }
 
     var_4.intvar = var_1;
-    var_4.ref_136f3 = var_0;
+    var_4.ref_136F3 = var_0;
     thread ref_12981(var_3);
   }
 }
@@ -64,7 +64,7 @@ function ref_12981(var_0) {
       wait 0.5;
 
       foreach(var_2 in self.isflagcarrymode) {
-        scripts\mp\gametypes\br_quest_util::displayplayersplash(self, var_2.ref_136f3, var_2);
+        scripts\mp\gametypes\br_quest_util::displayplayersplash(self, var_2.ref_136F3, var_2);
       }
 
       self.isflagcarrymode = [];

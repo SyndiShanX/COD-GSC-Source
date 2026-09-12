@@ -4,7 +4,7 @@
 *******************************************************/
 
 function onplayerjointeam(var_0) {
-  thread ref_1206f(var_0);
+  thread ref_1206F(var_0);
 
   if(isDefined(level.onjointeamcallbacks)) {
     foreach(var_2 in level.onjointeamcallbacks) {
@@ -23,7 +23,7 @@ function registeronplayerjointeamcallback(var_0) {
   level.onjointeamcallbacks[level.onjointeamcallbacks.size] = var_0;
 }
 
-function ref_1206f(var_0) {
+function ref_1206F(var_0) {
   var_0 notify("onPlayerJoinTeamNoSpectator");
 
   if(var_0.sessionstate == "spectator") {
@@ -44,7 +44,7 @@ function ref_1206f(var_0) {
   }
 }
 
-function ref_12b2f(var_0) {
+function ref_12B2F(var_0) {
   if(!isDefined(level.ref_12045)) {
     level.ref_12045 = [];
   }

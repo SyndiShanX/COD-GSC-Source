@@ -104,7 +104,7 @@ function game_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("game", "requestObjectiveID", &scripts\cp\utility::nonobjective_requestobjectiveid);
   scripts\cp_mp\utility\script_utility::registersharedfunc("game", "returnObjectiveID", &scripts\cp\utility::nonobjective_returnobjectiveid);
   scripts\cp_mp\utility\script_utility::registersharedfunc("game", "getFriendlyPlayers", &scripts\cp\cp_player_battlechatter::getfriendlyplayers);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "onKillStreakEnd", &scripts\mp\ammorestock::ref_1204a);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "onKillStreakEnd", &scripts\mp\ammorestock::ref_1204A);
   scripts\cp_mp\utility\script_utility::registersharedfunc("challenges", "onFieldUpgradeEnd", &scripts\mp\ammorestock::ref_12033);
   scripts\cp_mp\utility\script_utility::registersharedfunc("game", "trySayLocalSound", &scripts\cp\cp_player_battlechatter::trysaylocalsound);
   scripts\cp_mp\utility\script_utility::registersharedfunc("game", "tutorialPrint", &scripts\cp\cp_hud_message::tutorialprint);
@@ -130,7 +130,7 @@ function weapons_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "isCACPrimaryOrSecondary", &scripts\cp\cp_weapon::iscacprimaryorsecondary);
   scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "attachmentMap_toBase", &scripts\cp\utility::attachmentmap_tobase);
   scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "attachmentIsSelectable", &scripts\cp\cp_weapon::carriedpunchcard);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "remapAttachmentParentName", &scripts\cp\cp_weapon::ref_12bbb);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("weapons", "remapAttachmentParentName", &scripts\cp\cp_weapon::ref_12BBB);
 }
 
 function damage_init() {
@@ -141,7 +141,7 @@ function damage_init() {
 
 function sound_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("sound", "trySayLocalSound", &scripts\cp\cp_player_battlechatter::trysaylocalsound);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("sound", "playKillstreakDeployDialog", &scripts\cp\cp_player_battlechatter::ref_1274c);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("sound", "playKillstreakDeployDialog", &scripts\cp\cp_player_battlechatter::ref_1274C);
 }
 
 function flares_init() {

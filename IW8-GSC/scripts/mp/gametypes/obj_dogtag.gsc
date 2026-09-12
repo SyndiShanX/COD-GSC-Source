@@ -13,7 +13,7 @@ function init() {
   level.spawnoffsettacinsertmax["vanish_hw_en"] = loadfx("vfx/iw8_mp/gamemode/vfx_halloween_kc_capture_enemy.vfx");
 
   if(istrue(level.playinggulagbink)) {
-    level.ref_136cd = &ref_136cc;
+    level.ref_136CD = &ref_136CC;
   }
 
   level.numlifelimited = scripts\mp\utility\game::getgametypenumlives();
@@ -176,8 +176,8 @@ function removetags(var_0, var_1, var_2) {
     }
 
     if(istrue(level.playinggulagbink)) {
-      if(isDefined(level.ref_136cd)) {
-        level[[level.ref_136cd]](level.dogtags[var_0], var_2);
+      if(isDefined(level.ref_136CD)) {
+        level[[level.ref_136CD]](level.dogtags[var_0], var_2);
       }
     } else if(istrue(level.setplayerselfrevivingextrainfo)) {
       if(isDefined(var_2) && var_2.team == level.dogtags[var_0].ownerteam) {
@@ -213,7 +213,7 @@ function removetags(var_0, var_1, var_2) {
   }
 }
 
-function ref_136cc(var_0, var_1) {
+function ref_136CC(var_0, var_1) {
   var_2 = 20;
   var_3 = 600;
   var_4 = var_0.curorigin + (0, 0, var_2);

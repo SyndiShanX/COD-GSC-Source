@@ -9,7 +9,7 @@ function main() {
   scripts\mp\maps\mp_village2\gen\mp_village2_art::main();
   scripts\mp\maps\mp_village2\mp_village2_fx::main();
   scripts\mp\maps\mp_village2\mp_village2_lighting::main();
-  level.ref_13d50 = 1;
+  level.ref_13D50 = 1;
   level._effect["vehicle_explosion2"] = loadfx("vfx/iw8_mp/vehicle/vfx_jeep_mp_death_exp.vfx");
   level._effect["vehicle_explosion"] = loadfx("vfx/iw8/veh/scriptables/vfx_veh_explosion_atv.vfx");
   level._effect["vehicle_fire"] = loadfx("vfx/iw8/veh/scriptables/vfx_veh_fire_linger.vfx");

@@ -596,7 +596,7 @@ function weaponunlocksvialoot(var_0) {
 }
 
 function vehicle_checktrailvfx(var_0) {
-  return isDefined(level.weaponmapdata[var_0]) && istrue(level.weaponmapdata[var_0].ref_13efc);
+  return isDefined(level.weaponmapdata[var_0]) && istrue(level.weaponmapdata[var_0].ref_13EFC);
 }
 
 function vehicle_collision(var_0, var_1) {

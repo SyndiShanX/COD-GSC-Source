@@ -3,7 +3,7 @@
  * Script: 58227.gsc
 ***********************************************/
 
-function ref_13a9e() {
+function ref_13A9E() {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("team_utility", "init")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("team_utility", "init")]]();
     return;

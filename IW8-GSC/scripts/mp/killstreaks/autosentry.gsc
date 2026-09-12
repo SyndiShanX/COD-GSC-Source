@@ -73,7 +73,7 @@ function tryuseautosentry(var_0, var_1) {
   var_2 = givesentry("sentry_minigun");
 
   if(var_2) {
-    scripts\common\utility::ref_13e0a(level.ref_11b2a, level.sentrysettings["sentry_minigun"].streakname, self.origin);
+    scripts\common\utility::ref_13E0A(level.ref_11B2A, level.sentrysettings["sentry_minigun"].streakname, self.origin);
   }
 
   return var_2;
@@ -83,7 +83,7 @@ function tryusesam(var_0, var_1) {
   var_2 = givesentry("sam_turret");
 
   if(var_2) {
-    scripts\common\utility::ref_13e0a(level.ref_11b2a, level.sentrysettings["sam_turret"].streakname, self.origin);
+    scripts\common\utility::ref_13E0A(level.ref_11B2A, level.sentrysettings["sam_turret"].streakname, self.origin);
   }
 
   return var_2;
@@ -93,7 +93,7 @@ function tryuseshocksentry(var_0) {
   var_1 = givesentry("sentry_shock", undefined, var_0);
 
   if(var_1) {
-    scripts\common\utility::ref_13e0a(level.ref_11b2a, var_0.streakname, self.origin);
+    scripts\common\utility::ref_13E0A(level.ref_11B2A, var_0.streakname, self.origin);
   } else {
     waitframe();
   }
@@ -105,7 +105,7 @@ function tryusemanualturret(var_0) {
   var_1 = givesentry("manual_turret", undefined, var_0);
 
   if(var_1) {
-    scripts\common\utility::ref_13e0a(level.ref_11b2a, var_0.streakname, self.origin);
+    scripts\common\utility::ref_13E0A(level.ref_11B2A, var_0.streakname, self.origin);
   } else {
     waitframe();
   }
@@ -166,7 +166,7 @@ function setcarryingsentry(var_0, var_1, var_2, var_3) {
   self notifyonplayercommand("cancel_sentry", "+actionslot 7");
 
   for(;;) {
-    var_4 = scripts\engine\utility::ref_143af("place_sentry", "cancel_sentry", "force_cancel_placement", "emp_applied");
+    var_4 = scripts\engine\utility::ref_143AF("place_sentry", "cancel_sentry", "force_cancel_placement", "emp_applied");
 
     if(!isDefined(var_0)) {
       allowweaponsforsentry(1);
@@ -406,7 +406,7 @@ function sentry_clearteamheadicon() {
 
 function sentry_destroyongameend() {
   self endon("death");
-  level scripts\engine\utility::ref_143a5("bro_shot_start", "game_ended");
+  level scripts\engine\utility::ref_143A5("bro_shot_start", "game_ended");
   self notify("death");
 }
 
@@ -991,7 +991,7 @@ function sentry_oncarrierdeathoremp(var_0, var_1) {
   self endon("placed");
   self endon("death");
   var_0 endon("disconnect");
-  var_0 scripts\engine\utility::ref_143a5("death", "emp_applied");
+  var_0 scripts\engine\utility::ref_143A5("death", "emp_applied");
 
   if(self.canbeplaced && !istrue(var_1)) {
     sentry_setplaced(self.pickupenabled);
@@ -1011,7 +1011,7 @@ function sentry_oncarrierdisconnect(var_0) {
 function sentry_oncarrierchangedteam(var_0) {
   self endon("placed");
   self endon("death");
-  var_0 scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
+  var_0 scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
   self delete();
 }
 
@@ -1736,7 +1736,7 @@ function sentryshocktargets() {
   self.airlookatent linkTo(self, "tag_flash");
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143b9(1, "turret_on_target");
+    var_0 = scripts\engine\utility::ref_143B9(1, "turret_on_target");
 
     if(var_0 == "timeout") {
       continue;
@@ -2046,7 +2046,7 @@ function marktargetlaser(var_0) {
   self endon("death");
   self laseron();
   self.laser_on = 1;
-  scripts\engine\utility::ref_143a5("done_firing", "carried");
+  scripts\engine\utility::ref_143A5("done_firing", "carried");
   self laseroff();
   self.laser_on = 0;
 }

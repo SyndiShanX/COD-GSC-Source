@@ -287,9 +287,9 @@ function handlesplashqueue() {
 
   while(isDefined(self.splashqueuehead)) {
     if(scripts\mp\utility\game::getgametype() == "br" && (scripts\mp\utility\game::round_vehicle_logic() == "dmz" || scripts\mp\utility\game::round_vehicle_logic() == "risk" || scripts\mp\utility\game::round_vehicle_logic() == "rumble")) {
-      scripts\engine\utility::ref_143a5("splash_list_cleared", "can_show_splashes");
+      scripts\engine\utility::ref_143A5("splash_list_cleared", "can_show_splashes");
     } else {
-      scripts\engine\utility::ref_143a5("splash_list_cleared", "spawned_player");
+      scripts\engine\utility::ref_143A5("splash_list_cleared", "spawned_player");
     }
 
     for(var_0 = 0; var_0 < 6; var_0++) {

@@ -104,11 +104,11 @@ function jeep_initoccupancy() {
 
 function jeep_initinteract() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("jeep", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("jeep", "single", ["driver", "front_right", "back_left", "back_right"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("jeep", "single", ["driver", "front_right", "back_left", "back_right"]);
 }
 
 function vehicle_damage_getheavystatemaxhealth() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("jeep", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("jeep", 1);
   var_0.id = 10;
   var_0.seatids["driver"] = 0;
   var_0.seatids["front_right"] = 1;
@@ -117,17 +117,17 @@ function vehicle_damage_getheavystatemaxhealth() {
 }
 
 function vehicle_damage_getheavystatehealthadd() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("jeep", 1500);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("jeep", 1500);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("jeep");
   var_0.class = "medium";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("jeep");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("jeep");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("jeep", 9);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("jeep", &jeep_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("jeep_mp", 3);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("jeep_mp", 3);
 }
 
 function vehicle_damage_getburndowntime() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("jeep", 1);
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("jeep", 1);
   var_0.challengeevaluator = 1.33333;
   var_0.keycardlocs_chosen = 0.91666;
   var_0.is_using_stealth_debug = 350;
@@ -150,7 +150,7 @@ function jeep_create(var_0, var_1) {
     var_0.angles = (0, 0, 0);
   }
 
-  var_2 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
+  var_2 = scripts\cp_mp\utility\script_utility::ref_140DE("game", "isGameTypeBR", 0);
 
   if(var_2) {
     var_0.modelname = "veh8_civ_lnd_decho_vm_dirty_blue_physics_mp_wz";
@@ -168,7 +168,7 @@ function jeep_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_3, "jeep", var_0);
   var_3.objweapon = getcompleteweaponname("jeep_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_3);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_3);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_3, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_3, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 
@@ -195,7 +195,7 @@ function vehicle_damage_enginevisualcallback(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "jeep", var_0);
   var_2.objweapon = getcompleteweaponname("jeep_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 

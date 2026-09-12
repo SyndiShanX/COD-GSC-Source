@@ -77,9 +77,9 @@ function setupobjective(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_11 scripts\mp\gameobjects::pinobjiconontriggertouch();
 
   if(istrue(level.playinggulagbink)) {
-    var_11.ref_136cd = &ref_136ce;
+    var_11.ref_136CD = &ref_136CE;
   } else if(istrue(level.setplayerselfrevivingextrainfo) && scripts\mp\utility\game::getgametype() != "br") {
-    var_11.ref_136cd = &ref_136cf;
+    var_11.ref_136CD = &ref_136CF;
   }
 
   var_12 = var_9[0].origin + (0, 0, 32);
@@ -389,8 +389,8 @@ function dompoint_onuse(var_0) {
     if(var_3 == "neutral") {
       dompoint_setcaptured(var_1, var_0);
 
-      if(isDefined(self.ref_136cd)) {
-        [[self.ref_136cd]]();
+      if(isDefined(self.ref_136CD)) {
+        [[self.ref_136CD]]();
       }
     } else {
       thread domflag_setneutral(1);
@@ -402,8 +402,8 @@ function dompoint_onuse(var_0) {
   } else {
     dompoint_setcaptured(var_1, var_0);
 
-    if(isDefined(self.ref_136cd)) {
-      [[self.ref_136cd]]();
+    if(isDefined(self.ref_136CD)) {
+      [[self.ref_136CD]]();
     }
   }
 
@@ -427,9 +427,9 @@ function dompoint_onuse(var_0) {
       var_5 = "Flag " + resetchemicalvalvevalues() + " Captured";
 
       if(var_2 == "neutral" || var_2 == "none") {
-        scripts\mp\utility\game::ref_119ac(var_0, undefined, var_5, var_0.origin, "neutral_flag");
+        scripts\mp\utility\game::ref_119AC(var_0, undefined, var_5, var_0.origin, "neutral_flag");
       } else {
-        scripts\mp\utility\game::ref_119ac(var_0, undefined, var_5, var_0.origin);
+        scripts\mp\utility\game::ref_119AC(var_0, undefined, var_5, var_0.origin);
       }
     }
   }
@@ -565,7 +565,7 @@ function dompoint_onuncontested(var_0) {
 
   var_2 = (gettime() - self.hostvictimoverride) * 0.001;
   var_3 = "Flag " + resetchemicalvalvevalues() + " Contested";
-  scripts\mp\utility\game::ref_119ac(undefined, undefined, var_3, undefined, var_2 + " seconds");
+  scripts\mp\utility\game::ref_119AC(undefined, undefined, var_3, undefined, var_2 + " seconds");
   self.hostvictimoverride = undefined;
   var_4 = scripts\engine\utility::ter_op(var_1 == "neutral", "idle", var_1);
   thread updateflagstate(var_4, 0);
@@ -624,7 +624,7 @@ function setcrankedtimerdomflag(var_0) {
   }
 }
 
-function ref_136ce() {
+function ref_136CE() {
   var_0 = 20;
   var_1 = 600;
   var_2 = self.flagmodel.origin;
@@ -636,7 +636,7 @@ function ref_136ce() {
   GscBinSkip0(0x2e, var_6.size, self.flagmodel);
 }
 
-function ref_136cf() {
+function ref_136CF() {
   if(isDefined(self.spawnpoint_clearspawnpoint)) {
     return;
   }
@@ -684,7 +684,7 @@ function updateflagstate(var_0, var_1, var_2, var_3) {
     if(istrue(var_3)) {
       self.flagmodel.angles += (90, 0, 0);
     } else if(isDefined(var_2) && self.firstcapture && scripts\mp\utility\game::getgametype() != "arena") {
-      thread ref_12ed1();
+      thread ref_12ED1();
     } else if(isDefined(var_2)) {
       playFX(level.spawnoffsettacinsertmax["vanish_hw_fr"], self.flagmodel.origin + (0, 0, 60));
     }
@@ -828,7 +828,7 @@ function giveflagcapturexp(var_0, var_1, var_2) {
       level thread scripts\mp\hud_util::teamplayercardsplash("callout_securedposition" + self.objectivekey, var_3);
     }
 
-    var_3 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_3.origin);
+    var_3 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_3.origin);
   }
 
   if(self.firstcapture == 1) {
@@ -1133,7 +1133,7 @@ function awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
             var_1 thread scripts\mp\rank::scoreeventpopup("assault");
             var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
             var_18 notify("assault", var_1);
-            thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_9, "assaulting");
+            thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_9, "assaulting");
             continue;
           }
         } else if(var_18.claimteam == var_1.team) {
@@ -1145,7 +1145,7 @@ function awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
             var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
             var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
             var_1 scripts\mp\utility\stats::setextrascore1(var_1.pers["defends"]);
-            thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_9, "defending");
+            thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_9, "defending");
             continue;
           }
         }
@@ -1163,7 +1163,7 @@ function awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
           var_1 thread scripts\mp\rank::scoreeventpopup("assault");
           var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
           var_18 notify("assault", var_1);
-          thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_9, "assaulting");
+          thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_9, "assaulting");
           continue;
         }
       }
@@ -1182,7 +1182,7 @@ function awardgenericmedals(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
         var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
         var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
         var_1 scripts\mp\utility\stats::setextrascore1(var_1.pers["defends"]);
-        thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_9, "defending");
+        thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_9, "defending");
       }
     }
   }
@@ -1241,7 +1241,7 @@ function resetchemicalvalvevalues() {
   }
 }
 
-function ref_12ed1() {
+function ref_12ED1() {
   self rotateTo(self.angles - (135, 0, 0), 0.5, 0.25, 0.25);
   self playSound("mp_dom_scarecrow_hw");
   wait 0.55;
@@ -1263,15 +1263,15 @@ function markdistanceoverride() {
   self.flagmodel waittill("start_stalker");
   self.flagmodel.fwd = anglesToForward(self.flagmodel.angles);
   self.flagmodel.ismoving = 0;
-  thread ref_144f0();
+  thread ref_144F0();
 
   for(;;) {
     self.trigger waittill("trigger", var_0);
 
     if(isPlayer(var_0)) {
-      if(!isDefined(self.ref_1376a)) {
-        self.ref_1376a = var_0;
-        thread ref_144f8(self.flagmodel, var_0);
+      if(!isDefined(self.ref_1376A)) {
+        self.ref_1376A = var_0;
+        thread ref_144F8(self.flagmodel, var_0);
       }
     }
 
@@ -1279,23 +1279,23 @@ function markdistanceoverride() {
   }
 }
 
-function ref_144f8(var_0, var_1) {
+function ref_144F8(var_0, var_1) {
   level endon("game_ended");
   self notify("new_stalker_target");
   self endon("new_stalker_target");
 
-  while(isDefined(self.ref_1376a)) {
-    if(!ref_140d6(var_0, var_1)) {
-      self.ref_1376a = undefined;
+  while(isDefined(self.ref_1376A)) {
+    if(!ref_140D6(var_0, var_1)) {
+      self.ref_1376A = undefined;
       self.ref_13769 = 0;
       self.paddedquadgridcenterpoints = undefined;
       self.buildloadoutindices = undefined;
-      self.ref_12ac7 = undefined;
+      self.ref_12AC7 = undefined;
       self.flagmodel rotateTo((0, self.flagmodel.angles[1], self.flagmodel.angles[2]), 0.2, 0.1, 0.1);
-    } else if(isDefined(self.ref_1376a) && scripts\mp\utility\player::isreallyalive(self.ref_1376a)) {
+    } else if(isDefined(self.ref_1376A) && scripts\mp\utility\player::isreallyalive(self.ref_1376A)) {
       if(self.flagmodel.ismoving) {} else {
         self.flagmodel.fwd = anglesToForward(self.flagmodel.angles);
-        var_2 = self.ref_1376a.origin;
+        var_2 = self.ref_1376A.origin;
         var_3 = self.flagmodel.origin;
         var_4 = vectorNormalize(var_2 - var_3);
         var_5 = vectortoangles(var_4);
@@ -1309,14 +1309,14 @@ function ref_144f8(var_0, var_1) {
   }
 }
 
-function ref_144f0() {
+function ref_144F0() {
   self.flagmodel setCanDamage(1);
   self.ref_13769 = 0;
 
   for(;;) {
     self.flagmodel waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
 
-    if(isDefined(var_1) && isDefined(self.ref_1376a) && self.ref_1376a == var_1) {
+    if(isDefined(var_1) && isDefined(self.ref_1376A) && self.ref_1376A == var_1) {
       self.ref_13769 += var_0;
     }
 
@@ -1330,9 +1330,9 @@ function ref_144f0() {
         playFX(level.spawnoffsettacinsertmax["vanish_hw_en"], self.flagmodel.origin + (0, 0, 80));
       }
 
-      if(self.ref_13769 > 300 && !isDefined(self.ref_12ac7)) {
-        self.ref_12ac7 = 1;
-        thread ref_12ccd(var_1);
+      if(self.ref_13769 > 300 && !isDefined(self.ref_12AC7)) {
+        self.ref_12AC7 = 1;
+        thread ref_12CCD(var_1);
       }
     }
 
@@ -1340,7 +1340,7 @@ function ref_144f0() {
   }
 }
 
-function ref_12ccd(var_0) {
+function ref_12CCD(var_0) {
   self.flagmodel moveTo(self.flagmodel.origin + (0, 0, 50), 0.2, 0.1, 0.1);
   wait 0.25;
   self.flagmodel moveTo(self.flagmodel.startorigin, 0.1, 0.05, 0.05);
@@ -1356,7 +1356,7 @@ function ref_12ccd(var_0) {
   self.ref_13769 = 0;
   self.paddedquadgridcenterpoints = undefined;
   self.buildloadoutindices = undefined;
-  self.ref_12ac7 = undefined;
+  self.ref_12AC7 = undefined;
 }
 
 function round_robin_spawners() {
@@ -1365,7 +1365,7 @@ function round_robin_spawners() {
   return var_1;
 }
 
-function ref_140d6(var_0, var_1) {
+function ref_140D6(var_0, var_1) {
   var_2 = 0.05;
   var_3 = round_mortars_logic(var_1);
   var_4 = rocket_fuel_x2(var_0);

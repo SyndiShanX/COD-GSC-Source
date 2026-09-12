@@ -81,7 +81,7 @@ function snapshot_grenade_watch_flight(var_0) {
   var_2 hidefromplayer(self);
   thread snapshot_grenade_cleanup_danger_icon(var_1);
   var_3 = spawnStruct();
-  var_3.ref_133ca = 1;
+  var_3.ref_133CA = 1;
   var_1 thread scripts\mp\movers::handle_moving_platforms(var_3);
   var_4 = spawn("script_model", var_1.origin);
   var_4.angles = var_1.angles;
@@ -91,7 +91,7 @@ function snapshot_grenade_watch_flight(var_0) {
   waitframe();
   var_5 = undefined;
 
-  if(istrue(var_1.ref_13bff)) {
+  if(istrue(var_1.ref_13BFF)) {
     thread nukeplayer();
   }
 
@@ -129,7 +129,7 @@ function snapshot_grenade_watch_flight(var_0) {
     var_1 setscriptablepartstate("anims", "idle", 0);
     var_4 moveTo(var_7, var_11, var_12, var_13);
     var_1 childthread scripts\mp\utility\equipment::ref_14444();
-    var_1 scripts\engine\utility::ref_143b9(var_11, "collision_with_platform");
+    var_1 scripts\engine\utility::ref_143B9(var_11, "collision_with_platform");
   } else {
     var_4.angles = var_9;
     wait 0.3;

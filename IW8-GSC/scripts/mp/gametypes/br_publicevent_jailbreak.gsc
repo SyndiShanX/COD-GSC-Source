@@ -6,14 +6,14 @@
 function init() {
   var_0 = spawnStruct();
   var_0.weight = getdvarfloat("scr_br_pe_jailbreak_weight", 1);
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.attackerswaittime = &attackerswaittime;
   var_0.ref_14382 = &ref_14382;
   var_0.postinitfunc = &postinitfunc;
-  var_0.ref_11b78 = getdvarint("scr_br_pe_jailbreak_max_times", 1);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_jailbreak_max_times", 1);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("jailbreak", "00 5 10105 5 1");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("jailbreak");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(3, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(3, var_0);
 }
 
 function postinitfunc() {
@@ -27,7 +27,7 @@ function postinitfunc() {
   game["dialog"]["public_events_jailbreak_now_spectate"] = "public_events_jailbreak_begin_eliminated";
 }
 
-function ref_140cf() {
+function ref_140CF() {
   var_0 = !scripts\mp\gametypes\br_gametypes::unset_relic_aggressive_melee("oneLife");
   var_1 = istrue(level.usegulag);
   return var_0 || var_1;
@@ -45,7 +45,7 @@ function attackerswaittime() {
   ref_12217(1);
   ref_14370();
   scripts\mp\gametypes\br_publicevents::ref_13371("br_pe_jailbreak_incoming");
-  ref_1274a("incoming");
+  ref_1274A("incoming");
   var_0 = getdvarfloat("scr_br_pe_jailbreak_duration", 30);
   var_1 = gettime() + var_0 * 1000;
   setomnvar("ui_publicevent_timer_type", 2);
@@ -63,11 +63,11 @@ function attackerswaittime() {
   }
 
   scripts\mp\gametypes\br_publicevents::ref_13371("br_pe_jailbreak_active");
-  ref_1274a("now");
+  ref_1274A("now");
   setomnvar("ui_publicevent_timer_type", 0);
   var_2 delete();
   wait 1;
-  ref_12cad();
+  ref_12CAD();
   ref_12217(0);
 }
 
@@ -129,7 +129,7 @@ function fix_badcover_atend(var_0) {
   return var_1;
 }
 
-function ref_12cac() {
+function ref_12CAC() {
   var_0 = isalive(self) && isDefined(level.gulag) && !istrue(level.gulag.shutdown) && scripts\mp\gametypes\br_public::updateinstantclassswapallowedinternal();
 
   if(var_0) {
@@ -140,7 +140,7 @@ function ref_12cac() {
   thread scripts\mp\gametypes\br_gulag::playergulagautowin("jailbreak", undefined, undefined, 1, 1);
 }
 
-function ref_12cad() {
+function ref_12CAD() {
   level endon("game_ended");
   var_0 = getdvarint("scr_br_pe_jailbreak_includeeliminatedteams", 1);
   var_1 = fix_badcover_atend(var_0);
@@ -151,18 +151,18 @@ function ref_12cad() {
     }
 
     if(var_0) {
-      ref_12c78(var_3);
+      ref_12C78(var_3);
     }
 
-    thread ref_12cac();
+    thread ref_12CAC();
     waitframe();
   }
 }
 
-function ref_12c78() {
+function ref_12C78() {
   self.ref_12396 = undefined;
   self.emergency_cleanupents = undefined;
-  self.ref_128af = undefined;
+  self.ref_128AF = undefined;
   self.dialog_wait_ready = undefined;
   self.br_spectatorinitialized = undefined;
   self setclientomnvar("ui_br_player_position", 155);
@@ -171,7 +171,7 @@ function ref_12c78() {
   self setclientomnvar("ui_round_end_reason", 0);
 }
 
-function ref_1274a(var_0) {
+function ref_1274A(var_0) {
   var_1 = [];
   var_2 = [];
   var_3 = [];

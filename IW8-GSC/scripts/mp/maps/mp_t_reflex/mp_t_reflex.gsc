@@ -7,7 +7,7 @@ function main() {
   _start_rooftop_raid_sats::keypad_check_levelinput();
   _redbuttonused_internal::keypad_check_levelinput();
   _start_spawn_modules::keypad_check_levelinput();
-  level.ref_13d50 = 1;
+  level.ref_13D50 = 1;
   scripts\mp\maps\mp_t_reflex\mp_t_reflex_precache::main();
   scripts\mp\maps\mp_t_reflex\gen\mp_t_reflex_art::main();
   scripts\mp\maps\mp_t_reflex\mp_t_reflex_fx::main();

@@ -47,5 +47,5 @@ function cop_car_mp_waitandspawn() {
   var_1 = spawnStruct();
   scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("cop_car", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("cop_car", var_1, var_2);
 }

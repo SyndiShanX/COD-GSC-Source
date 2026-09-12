@@ -154,7 +154,7 @@ function monitorweaponfire() {
 
   for(;;) {
     self waittill("begin_firing");
-    thread ref_11d21();
+    thread ref_11D21();
     var_0 = self.lastdroppableweaponobj;
     var_0 = scripts\cp\cp_weapon::mapweapon(var_0);
     var_1 = createheadicon(var_0);
@@ -241,7 +241,7 @@ function setweaponstat(var_0, var_1, var_2) {
   }
 }
 
-function ref_11d21() {
+function ref_11D21() {
   self endon("disconnect");
   self.watch_for_players_touching_ground = gettime();
   self notify("monitorWeaponFireTime");
@@ -250,7 +250,7 @@ function ref_11d21() {
   self.watch_for_players_regrouping_to_plane = gettime();
 }
 
-function ref_11d78() {
+function ref_11D78() {
   var_0 = self playermounttype();
 
   if(isDefined(var_0)) {
@@ -298,7 +298,7 @@ function logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_17 = 0.4226;
   var_18 = scripts\engine\utility::within_fov(self.origin, self.angles, var_3.origin, var_17);
   var_19 = scripts\engine\utility::within_fov(var_3.origin, var_3.angles, self.origin, var_17);
-  var_20 = ref_11d78(var_3);
+  var_20 = ref_11D78(var_3);
   var_21 = var_3.origin;
   var_22 = var_3.angles;
 
@@ -438,7 +438,7 @@ function logplayerdata(var_0) {
     return;
   }
 
-  scripts\cp\cp_analytics::ref_119cc(var_0);
+  scripts\cp\cp_analytics::ref_119CC(var_0);
   self sendclientnetworktelemetry();
   var_1 = 0;
   var_2 = 0;

@@ -121,7 +121,7 @@ function heli_think_default(var_0, var_1, var_2) {
       thread engage_target_circle_strafe(var_0, var_5);
     }
 
-    var_0 scripts\engine\utility::ref_143ba(60, "target_engaged", "needs_to_evade");
+    var_0 scripts\engine\utility::ref_143BA(60, "target_engaged", "needs_to_evade");
     var_0.nocircle = 0;
   }
 }
@@ -192,7 +192,7 @@ function heli_rocket_think_default(var_0) {
       thread engage_target_circle_strafe(var_0, var_4);
     }
 
-    var_0 scripts\engine\utility::ref_143a5("target_engaged", "needs_to_evade");
+    var_0 scripts\engine\utility::ref_143A5("target_engaged", "needs_to_evade");
   }
 }
 
@@ -212,7 +212,7 @@ function heli_move_to_target(var_0) {
     self setvehgoalpos(var_1, 0);
   }
 
-  scripts\engine\utility::ref_143bb(15, "goal", "goal_reached", "near_goal");
+  scripts\engine\utility::ref_143BB(15, "goal", "goal_reached", "near_goal");
 }
 
 function engage_target_circle_strafe(var_0, var_1) {
@@ -547,13 +547,13 @@ function heli_go_search(var_0, var_1, var_2) {
   var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
   self setvehgoalpos(var_3.origin, 0);
   thread heli_check_players();
-  scripts\engine\utility::ref_143ba(15, "goal", "goal_reached");
+  scripts\engine\utility::ref_143BA(15, "goal", "goal_reached");
   self vehicle_setspeed(30, 15);
   self setneargoalnotifydist(500);
 
   for(;;) {
     self setvehgoalpos(var_4.origin, 0);
-    scripts\engine\utility::ref_143ba(15, "goal", "goal_reached");
+    scripts\engine\utility::ref_143BA(15, "goal", "goal_reached");
     var_4 = scripts\engine\utility::getStruct(var_4.target, "targetname");
   }
 }
@@ -1002,8 +1002,8 @@ function heli_damagemonitor(var_0, var_1) {
       var_4 scripts\cp\cp_damagefeedback::updatedamagefeedback("hitcritical", 1);
       playFX(level._effect["vfx_blima_explosion"], self.origin);
 
-      if(istrue(self.ref_11e98)) {
-        thread ref_11bd8(var_4);
+      if(istrue(self.ref_11E98)) {
+        thread ref_11BD8(var_4);
         return;
       }
 
@@ -1029,7 +1029,7 @@ function silo_door_clip(var_0) {
   waitframe();
 
   if(isDefined(var_1) && istrue(var_1.in_use)) {
-    var_1 scripts\cp\cp_vehicles::ref_13bb7(0);
+    var_1 scripts\cp\cp_vehicles::ref_13BB7(0);
     return;
   }
 }
@@ -1045,7 +1045,7 @@ function do_heli_crash(var_0) {
   self notify("death", var_0, "MOD_EXPLOSIVE", undefined, self.origin);
 }
 
-function ref_11bd8(var_0) {
+function ref_11BD8(var_0) {
   playFX(level._effect["helidown_rpghit"], self.origin);
 
   if(isDefined(self.pilot)) {

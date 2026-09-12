@@ -149,7 +149,7 @@ function create_vip_fulton_trigger(var_0, var_1) {
   thread vip_use_fulton_think(var_0);
 }
 
-function ref_142bb(var_0) {
+function ref_142BB(var_0) {
   var_0.linktoent = spawn("script_model", var_0.origin);
   var_0.linktoent.angles = var_0.angles;
   var_0 linkTo(var_0.linktoent);
@@ -484,7 +484,7 @@ function anim_hostage_idle(var_0, var_1) {
 
 function anim_hostage_wait_release(var_0) {
   self endon("death");
-  var_1 = scripts\engine\utility::ref_143ad("released", "following_player");
+  var_1 = scripts\engine\utility::ref_143AD("released", "following_player");
   scripts\asm\shared\mp\utility::burndowntime(var_0);
   reset_guy(self, var_1);
 }
@@ -947,7 +947,7 @@ function hostage_play_sound_idle(var_0, var_1) {
 
 function hostage_cry_release() {
   self endon("death");
-  scripts\engine\utility::ref_143a5("released", "following_player");
+  scripts\engine\utility::ref_143A5("released", "following_player");
 
   if(!isDefined(self.hostage_id)) {
     self.hostage_id = request_hostage_id(self.hostage_building_id);

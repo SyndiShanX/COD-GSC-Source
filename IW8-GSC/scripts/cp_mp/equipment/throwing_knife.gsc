@@ -52,7 +52,7 @@ function throwing_knife_used(var_0) {
   if(var_11 || var_12 || var_13) {
     var_0 setscriptablepartstate("igniteWick", "active", 0);
 
-    if(isDefined(level.ref_132a4) && [[level.ref_132a4.make_control_station_interaction]](var_0)) {
+    if(isDefined(level.ref_132A4) && [[level.ref_132A4.make_control_station_interaction]](var_0)) {
       self[[scripts\cp_mp\utility\script_utility::getsharedfunc("throwing_knife", "shallowWater")]](var_0);
     }
 

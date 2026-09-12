@@ -296,7 +296,7 @@ function addtoturretlist(var_0) {
 }
 
 function removefromturretlistondeathorcarry(var_0) {
-  scripts\engine\utility::ref_143a5("death", "carried");
+  scripts\engine\utility::ref_143A5("death", "carried");
   level.turrets[var_0] = undefined;
   removefromactivekillstreaklist(var_0);
 }
@@ -310,7 +310,7 @@ function addtocarrylist(var_0) {
 }
 
 function removefromcarrylistondeathorcarry(var_0) {
-  scripts\engine\utility::ref_143a5("death", "carried");
+  scripts\engine\utility::ref_143A5("death", "carried");
   level.deployables[var_0] = undefined;
   removefromactivekillstreaklist(var_0);
 }

@@ -4,16 +4,16 @@
 ***********************************************/
 
 function init() {
-  thread ref_1252d();
+  thread ref_1252D();
   register_end_game_string_index();
 }
 
-function ref_1252d() {
+function ref_1252D() {
   for(;;) {
     level waittill("connected", var_0);
 
-    if(isDefined(level.ref_127ff)) {
-      var_0 setclientomnvar("post_game_state", level.ref_127ff);
+    if(isDefined(level.ref_127FF)) {
+      var_0 setclientomnvar("post_game_state", level.ref_127FF);
 
       if(isDefined(var_0.pers["team"]) && level.winner == var_0.pers["team"]) {
         var_1 = get_end_game_string_index("win");
@@ -26,9 +26,9 @@ function ref_1252d() {
   }
 }
 
-function ref_131ac(var_0) {
+function ref_131AC(var_0) {
   setomnvarforallclients("post_game_state", var_0);
-  level.ref_127ff = var_0;
+  level.ref_127FF = var_0;
 }
 
 function cargo_truck_mg_explode(var_0) {
@@ -117,7 +117,7 @@ function endgame(var_0, var_1) {
       [[level.pre_map_restart_func]](var_16);
     }
 
-    scripts\cp\cp_analytics::ref_119b8(var_16);
+    scripts\cp\cp_analytics::ref_119B8(var_16);
   }
 
   setclientmatchdata("isPublicMatch", scripts\cp\utility::matchmakinggame());
@@ -179,7 +179,7 @@ function endgame(var_0, var_1) {
   if(isDefined(level.eogscoringtable)) {}
 
   setomnvar("zm_time_survived", level.time_survived);
-  ref_131ac(1);
+  ref_131AC(1);
   setDvar("g_deadChat", 1);
   setDvar("ui_allow_teamchange", 0);
   setDvar("bg_compassShowEnemies", 0);
@@ -200,7 +200,7 @@ function endgame(var_0, var_1) {
     }
   }
 
-  ref_131ac(0);
+  ref_131AC(0);
   level.winner = var_0;
   displaygameend(var_0, var_1);
   var_30 = should_load_new_map(var_1);
@@ -230,7 +230,7 @@ function endgame(var_0, var_1) {
     }
   }
 
-  scripts\cp\cp_globallogic::ref_12c58();
+  scripts\cp\cp_globallogic::ref_12C58();
   setDvar("scr_cp_map_part2", "");
 
   if(isDefined(level.pre_end_game_display_func)) {
@@ -282,7 +282,7 @@ function ref_13445(var_0, var_1) {
       var_3 setplayermusicstate(game["music"]["cp_roundloss"][var_5]);
       var_3 clearclienttriggeraudiozone(0);
       var_3 setsoundsubmix("cp_matchend", 3);
-      thread ref_1344a(var_3);
+      thread ref_1344A(var_3);
 
       if(istrue(var_3.musicplaying)) {
         var_3 playlocalsound("mp_jugg_mus_toggle_button");
@@ -309,7 +309,7 @@ function ref_13445(var_0, var_1) {
   setnojiptime(1);
   markgameended();
   level notify("game_ended", var_0);
-  scripts\cp\cp_analytics::ref_119b8(var_1);
+  scripts\cp\cp_analytics::ref_119B8(var_1);
   freezeallplayers(1, "cg_fovScale", 1);
   var_9 = tolower(getDvar("mapname"));
 
@@ -380,11 +380,11 @@ function ref_13445(var_0, var_1) {
   setomnvar("zm_time_survived", level.time_survived);
   var_20 = ref_13448(var_0);
 
-  if(var_20.ref_1376c > 0) {
-    setomnvar("ui_so_stars_given", var_20.ref_1376c);
+  if(var_20.ref_1376C > 0) {
+    setomnvar("ui_so_stars_given", var_20.ref_1376C);
   }
 
-  setomnvar("ui_so_next_score", var_20.ref_11e84);
+  setomnvar("ui_so_next_score", var_20.ref_11E84);
   setomnvar("ui_so_iwbest", var_20.vehicle_compass_cp_init);
   setDvar("g_deadChat", 1);
   setDvar("ui_allow_teamchange", 0);
@@ -393,11 +393,11 @@ function ref_13445(var_0, var_1) {
 
   if(getdvarint("onlinegame")) {
     foreach(var_3 in level.players) {
-      if(var_20.ref_1376c > 0) {
-        ref_1344b(var_3, var_20.ref_1376c, level.time_survived);
+      if(var_20.ref_1376C > 0) {
+        ref_1344B(var_3, var_20.ref_1376C, level.time_survived);
         var_22 = tablelookuprownum("cp/cp_so_mission_table.csv", 1, level.script);
         var_23 = tablelookupbyrow("cp/cp_so_mission_table.csv", var_22, 0);
-        var_3 reportchallengeuserevent("spec_ops_end", var_23, var_20.ref_1376c);
+        var_3 reportchallengeuserevent("spec_ops_end", var_23, var_20.ref_1376C);
       }
     }
   }
@@ -418,7 +418,7 @@ function ref_13445(var_0, var_1) {
   scripts\cp\cp_analytics::endgame(var_30, var_31);
   reset_players_subparty_data();
 
-  if(ref_1344c()) {
+  if(ref_1344C()) {
     wait 0.1;
 
     foreach(var_3 in level.players) {
@@ -445,14 +445,14 @@ function trygetlastpotentiallivingplayer() {
 
 function ref_13448(var_0) {
   var_1 = spawnStruct();
-  var_1.ref_1376c = 0;
-  var_1.ref_11e86 = 1;
-  var_1.ref_11e84 = 0;
+  var_1.ref_1376C = 0;
+  var_1.ref_11E86 = 1;
+  var_1.ref_11E84 = 0;
   var_2 = tablelookuprownum("cp/cp_so_mission_table.csv", 1, level.script);
   GscBinSkip1(0x45, 0, int(tablelookupbyrow("cp/cp_so_mission_table.csv", var_2, 6)));
 }
 
-function ref_1344b(var_0, var_1) {
+function ref_1344B(var_0, var_1) {
   var_2 = self getplayerdata("cp", "ClassicSOStarCount", level.script);
   var_3 = self getplayerdata("cp", "ClassicSOBestScore", level.script);
 
@@ -470,7 +470,7 @@ function ref_1344b(var_0, var_1) {
   }
 }
 
-function ref_1344a(var_0) {
+function ref_1344A(var_0) {
   var_1 = var_0 == self.pers["team"];
 
   if(var_1 && !scripts\cp_mp\utility\player_utility::ref_12510()) {
@@ -516,10 +516,10 @@ function ref_13449(var_0, var_1) {
     self setclientomnvar("ui_round_end_reason", var_2);
   }
 
-  ref_131ac(11);
+  ref_131AC(11);
 }
 
-function ref_1344c() {
+function ref_1344C() {
   level.retry_total_votes = 0;
   level.retry_yes_votes = 0;
   var_0 = 35;
@@ -534,7 +534,7 @@ function ref_1344c() {
   var_5 = 1;
 
   foreach(var_7 in level.players) {
-    thread ref_124e8();
+    thread ref_124E8();
   }
 
   while(level.retry_total_votes < level.players.size) {
@@ -568,7 +568,7 @@ function ref_1344c() {
   return false;
 }
 
-function ref_124e8() {
+function ref_124E8() {
   level endon("stop_player_retry_thread");
   self endon("disconnect");
 
@@ -758,7 +758,7 @@ function should_load_new_map(var_0) {
 
 function load_new_map(var_0) {
   kill_em_all();
-  level scripts\engine\utility::ref_143b9(15, "intermission_over");
+  level scripts\engine\utility::ref_143B9(15, "intermission_over");
   setDvar("ui_mapname", var_0);
   setDvar("g_gametype", "aliens");
   var_1 = "map " + var_0;
@@ -773,7 +773,7 @@ function restart_map(var_0) {
 
   kill_em_all();
   setomnvar("allow_server_pause", 1);
-  ref_131ac(0);
+  ref_131AC(0);
   setomnvarforallclients("reset_wave_loadout", 1);
 
   if(!isDefined(var_0)) {
@@ -817,7 +817,7 @@ function players_want_to_restart(var_0, var_1) {
     level.retry_total_votes = 0;
     level.retry_yes_votes = 0;
     level.retry_timer = 0;
-    level.ref_12cdf = 0;
+    level.ref_12CDF = 0;
 
     foreach(var_3 in level.players) {
       thread display_retry_dialog(var_3, var_0);
@@ -826,7 +826,7 @@ function players_want_to_restart(var_0, var_1) {
     var_5 = level.players.size - level.retry_total_votes;
 
     while(level.retry_total_votes < level.players.size) {
-      if(level.ref_12cdf != 0) {
+      if(level.ref_12CDF != 0) {
         wait 1;
         return false;
       }
@@ -848,7 +848,7 @@ function players_want_to_restart(var_0, var_1) {
       level.retry_timer += 0.5;
     }
 
-    if(level.retry_yes_votes == level.players.size && level.ref_12cdf == 0) {
+    if(level.retry_yes_votes == level.players.size && level.ref_12CDF == 0) {
       wait 1;
       return true;
     }
@@ -889,7 +889,7 @@ function display_retry_dialog(var_0, var_1) {
     }
   }
 
-  ref_131ac(10);
+  ref_131AC(10);
   var_4 = -1;
   self waittill("luinotifyserver", var_5);
 
@@ -914,7 +914,7 @@ function display_retry_dialog(var_0, var_1) {
 
   if(var_5 == "quit_level") {
     setomnvar("ui_votesys_player" + self getentitynumber(), 2);
-    level.ref_12cdf = 1;
+    level.ref_12CDF = 1;
     return;
   }
 }
@@ -1114,7 +1114,7 @@ function outcomenotify(var_0, var_1) {
     self setclientomnvar("ui_round_end_reason", var_2);
   }
 
-  ref_131ac(2);
+  ref_131AC(2);
 }
 
 function register_end_game_string_index() {

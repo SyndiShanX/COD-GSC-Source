@@ -62,7 +62,7 @@ function nvg_monitor() {
   self endon("death");
 
   for(var_0 = gettime();; var_0 = var_3) {
-    var_1 = scripts\engine\utility::ref_143ad("night_vision_on", "night_vision_off");
+    var_1 = scripts\engine\utility::ref_143AD("night_vision_on", "night_vision_off");
 
     if(!isDefined(var_1)) {
       continue;

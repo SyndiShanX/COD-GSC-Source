@@ -8,7 +8,7 @@ function init() {
   level.ref_12312.ref_12308 = [(-289, -1790, 58), (-2055, -2255, 73), (152, 3486, 110)];
   level.ref_12312.petconsts = [];
   level.ref_12312.ref_12311 = [];
-  level.ref_12312.ref_126a3 = [];
+  level.ref_12312.ref_126A3 = [];
   level.ref_12312.players = [];
   level.ref_12312.modular_spawning_vehicles = [(1902, -2401, 58)];
   level.ref_12312.modsforvehicle = [3, 2, 1];
@@ -25,7 +25,7 @@ function init() {
     var_2 = int(var_2);
     var_3 = spawnStruct();
     var_3.rarity = int(tablelookupbyrow("mp/petWatchGoTable.csv", var_1, 2));
-    var_3.ref_11e79 = int(tablelookupbyrow("mp/petWatchGoTable.csv", var_1, 3));
+    var_3.ref_11E79 = int(tablelookupbyrow("mp/petWatchGoTable.csv", var_1, 3));
     var_3.ref_14679 = int(tablelookupbyrow("mp/petWatchGoTable.csv", var_1, 4));
     var_3.getcargotruckspawns = int(tablelookupbyrow("mp/petWatchGoTable.csv", var_1, 5));
     var_3.showsplashtoall = int(tablelookupbyrow("mp/petWatchGoTable.csv", var_1, 8));
@@ -44,7 +44,7 @@ function init() {
     var_7 = randomintrange(0, var_0.size);
     var_8 = var_0[var_7];
     level.ref_12312.ref_12311[var_1] = var_8;
-    level.ref_12312.ref_126a3[var_1] = [];
+    level.ref_12312.ref_126A3[var_1] = [];
   }
 
   thread select_patrol_eight_spawners();
@@ -54,9 +54,9 @@ function initpet(var_0) {
   if(!isDefined(self.ref_12313)) {
     self.ref_12313 = spawnStruct();
     self.ref_12313.nuke_core_tug_of_war = [];
-    self.ref_12313.ref_1230f = [1, 2, 3];
+    self.ref_12313.ref_1230F = [1, 2, 3];
     self.ref_12313.insidecuavbunker = 0;
-    self.ref_12313.ref_12310 = self.ref_12313.ref_1230f[self.ref_12313.insidecuavbunker];
+    self.ref_12313.ref_12310 = self.ref_12313.ref_1230F[self.ref_12313.insidecuavbunker];
     level.ref_12312.players[level.ref_12312.players.size] = self;
   }
 
@@ -81,8 +81,8 @@ function select_patrol_eight_spawners() {
         var_6 = var_4[var_5];
 
         if(isDefined(var_6) && isalive(var_6) && isDefined(var_6.ref_12313)) {
-          var_1 = level.ref_12312.ref_126a3[var_0].size;
-          level.ref_12312.ref_126a3[var_0][var_1] = var_6;
+          var_1 = level.ref_12312.ref_126A3[var_0].size;
+          level.ref_12312.ref_126A3[var_0][var_1] = var_6;
           ref_12605(var_6, var_3, var_0, var_2);
         }
       }
@@ -140,13 +140,13 @@ function select_patrol_eight_spawners() {
 function onplayerkilled(var_0) {
   for(var_1 = 0; var_1 < self.ref_12313.nuke_core_tug_of_war.size; var_1++) {
     var_2 = self.ref_12313.nuke_core_tug_of_war[var_1];
-    ref_12f13(var_2, self);
+    ref_12F13(var_2, self);
   }
 
   self.ref_12313.nuke_core_tug_of_war = [];
 }
 
-function ref_12f13(var_0) {
+function ref_12F13(var_0) {
   self.ref_12313.nuke_core_tug_of_war = scripts\engine\utility::array_remove(self.ref_12313.nuke_core_tug_of_war, var_0);
   self iprintlnbold(" OPPONENT DIED ");
   self setclientomnvar("ui_pet_watch_action", 16);
@@ -187,15 +187,15 @@ function nuke_hostmigration_waittillhostmigrationdone(var_0) {
   self setclientomnvar("ui_pet_watch_bonus_earned_1", 2);
 }
 
-function ref_144e1() {
+function ref_144E1() {
   if(self.ref_12313.nuke_core_tug_of_war.size > 0) {
     self.ref_12313.insidecuavbunker++;
 
-    if(self.ref_12313.insidecuavbunker >= self.ref_12313.ref_1230f.size) {
+    if(self.ref_12313.insidecuavbunker >= self.ref_12313.ref_1230F.size) {
       self.ref_12313.insidecuavbunker = 0;
     }
 
-    self.ref_12313.ref_12310 = self.ref_12313.ref_1230f[self.ref_12313.insidecuavbunker];
+    self.ref_12313.ref_12310 = self.ref_12313.ref_1230F[self.ref_12313.insidecuavbunker];
     level.ref_12312.players[level.ref_12312.players.size] = self;
     self setclientomnvar("ui_pet_watch_bonus_earned_0", self.ref_12313.ref_12310);
     return;

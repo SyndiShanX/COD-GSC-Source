@@ -89,14 +89,14 @@ function onstartgametype() {
   if(istrue(level.unset_relic_laststandmelee)) {
     scripts\mp\gametypes\arm::monitordriverexitbutton();
     thread superselectonunset();
-    thread ref_119d8();
+    thread ref_119D8();
   }
 
   if(scripts\mp\utility\game::matchmakinggame()) {
     level.droptime = getdvarint("scr_infect_dropTime", 30);
 
     if(level.droptime > 0) {
-      thread ref_129fb();
+      thread ref_129FB();
       return;
     }
 
@@ -112,7 +112,7 @@ function updategametypedvars() {
   level.survivorlethal = getDvar("scr_infect_lethalSurvivor", "equip_claymore");
   level.survivortactical = getDvar("scr_infect_tacticalSurvivor", "equip_concussion");
   level.survivorsuper = getDvar("scr_infect_superSurvivor", "super_tac_cover");
-  level.ref_139bd = getDvar("scr_infect_superSurvivorTwo", "none");
+  level.ref_139BD = getDvar("scr_infect_superSurvivorTwo", "none");
   level.infectedprimaryweapon = getDvar("scr_infect_weaponInfectPrimary", "iw8_knife_mp");
   level.infectedsecondaryweapon = getDvar("scr_infect_weaponInfectSecondary", "iw8_fists_mp");
   level.initialprimaryweapon = getDvar("scr_infect_weaponInitialPrimary", "iw8_sh_romeo870_mp");
@@ -134,27 +134,27 @@ function updategametypedvars() {
   level.stealth_enabled = getdvarint("scr_infect_infectBonusSuperOnTacInsert", 0);
   level.play_player_approach = getdvarint("scr_infect_finalSuvivorCount", 1);
   level.steam_point_think = getdvarint("scr_infect_setRadarOnNumSurvivors", 8);
-  level.ref_139bc = [];
+  level.ref_139BC = [];
   var_0 = getDvar("scr_infect_survivorStreakOverride", "");
 
   if(var_0 != "") {
-    level.ref_139bc = strtok(var_0, ",");
+    level.ref_139BC = strtok(var_0, ",");
   }
 
   var_1 = scripts\cp_mp\utility\game_utility::getmapname();
 
   if(issubstr(var_1, "mp_m_") && var_1 != "mp_m_speed") {
     level.survivorsuper = player_give_intel_3_ks(0, 0);
-    level.ref_139bd = player_give_intel_3_ks(0, 1);
+    level.ref_139BD = player_give_intel_3_ks(0, 1);
     level.infectedsuper = player_give_intel_3_ks(1, 0);
     level.steam_dmg_trigger_think = player_give_intel_3_ks(1, 1);
   }
 
-  if(level.survivorsuper == level.ref_139bd) {
-    level.ref_139bd = "none";
-  } else if(level.survivorsuper == "none" && level.ref_139bd != "none") {
-    level.survivorsuper = level.ref_139bd;
-    level.ref_139bd = "none";
+  if(level.survivorsuper == level.ref_139BD) {
+    level.ref_139BD = "none";
+  } else if(level.survivorsuper == "none" && level.ref_139BD != "none") {
+    level.survivorsuper = level.ref_139BD;
+    level.ref_139BD = "none";
   }
 
   if(level.infectedsuper == level.steam_dmg_trigger_think) {
@@ -337,7 +337,7 @@ function stripweapsuffix(var_0) {
 
 function player_give_intel_3_ks(var_0, var_1) {
   if(istrue(var_1)) {
-    var_2 = scripts\engine\utility::ter_op(var_0, level.steam_dmg_trigger_think, level.ref_139bd);
+    var_2 = scripts\engine\utility::ter_op(var_0, level.steam_dmg_trigger_think, level.ref_139BD);
   } else {
     var_2 = scripts\engine\utility::ter_op(var_1, level.infectedsuper, level.survivorsuper);
   }
@@ -408,7 +408,7 @@ function onplayerconnect(var_0) {
   thread monitorsurvivaltime();
 
   if(level.unset_relic_laststandmelee) {
-    thread ref_133f7();
+    thread ref_133F7();
     return;
   }
 }
@@ -626,7 +626,7 @@ function onspawnfinished() {
     spawnwithplayersecondary();
 
     if(level.steam_damaged && !level.steam_damage_players && !isbot(self)) {
-      thread ref_11f4b();
+      thread ref_11F4B();
     }
   } else if(self.pers["team"] == "axis") {
     if(istrue(level.setplayerselfrevivingextrainfo)) {
@@ -635,7 +635,7 @@ function onspawnfinished() {
       self setviewmodel("vm_arms_zombie_a");
 
       if(getdvarint("scr_infect_hw_zmb_vision", 1) == 1) {
-        thread ref_126ff();
+        thread ref_126FF();
       }
 
       self playlocalsound("zmb_breath_land_dropin");
@@ -678,9 +678,9 @@ function onspawnfinished() {
 
   giveextrainfectedperks();
 
-  if(istrue(self.ref_11d9e)) {
+  if(istrue(self.ref_11D9E)) {
     if(!level.unset_relic_laststandmelee || level.unset_relic_laststandmelee && level.mapname == "mp_aniyah") {
-      self.ref_11d9e = undefined;
+      self.ref_11D9E = undefined;
     }
 
     thread scripts\mp\supers::givesuperpoints(350, undefined, 1);
@@ -712,7 +712,7 @@ function onspawnfinished() {
   thread ref_14399();
 }
 
-function ref_126ff() {
+function ref_126FF() {
   self endon("death_or_disconnect");
   self endon("zombie_unset");
   self setscriptablepartstate("headVFX", "zombieVision");
@@ -889,7 +889,7 @@ function setfirstinfected(var_0) {
     self.infect_isbeingchosen = 1;
   }
 
-  while(!scripts\mp\utility\player::isreallyalive(self) || scripts\mp\utility\player::isusingremote() || isDefined(self.ref_1425d)) {
+  while(!scripts\mp\utility\player::isreallyalive(self) || scripts\mp\utility\player::isusingremote() || isDefined(self.ref_1425D)) {
     waitframe();
   }
 
@@ -951,7 +951,7 @@ function setfirstinfected(var_0) {
   thread scripts\mp\playerlogic::spawnplayer(1);
 
   if(isDefined(scripts\mp\supers::getcurrentsuper()) && scripts\mp\supers::getcurrentsuperref() == "super_deadsilence") {
-    thread ref_1383e();
+    thread ref_1383E();
   } else if(level.unset_relic_laststandmelee) {
     thread scripts\mp\supers::givesuperpoints(350, undefined, 1);
   }
@@ -971,17 +971,17 @@ function setfirstinfected(var_0) {
     level.infect_skipsounds = 1;
   }
 
-  thread ref_1439e();
+  thread ref_1439E();
   initsurvivaltime(1);
 }
 
-function ref_1439e() {
+function ref_1439E() {
   self endon("death_or_disconnect");
   wait 4;
   self iprintlnbold(&"SPLASHES/INFECT_ALL");
 }
 
-function ref_1383e() {
+function ref_1383E() {
   thread scripts\mp\supers::givesuperpoints(4000, undefined, 1);
   thread scripts\mp\perks\perkpackage::perkpackage_forceusesuper();
 }
@@ -1031,7 +1031,7 @@ function setinitialtonormalinfected(var_0, var_1) {
   thread scripts\mp\playerlogic::spawnplayer(1);
 
   if(isDefined(scripts\mp\supers::getcurrentsuper()) && scripts\mp\supers::getcurrentsuperref() == "super_deadsilence") {
-    thread ref_1383e();
+    thread ref_1383E();
     return;
   }
 }
@@ -1059,7 +1059,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   }
 
   if(self.team == "allies" && istrue(level.nukeincoming)) {
-    if(isDefined(level.ref_11f14) && self == level.ref_11f14) {
+    if(isDefined(level.ref_11F14) && self == level.ref_11F14) {
       var_10 = 0;
       var_11 = 0;
     }
@@ -1140,10 +1140,10 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 }
 
 function delayedprocesskill(var_0, var_1) {
-  self.ref_11d9e = 1;
+  self.ref_11D9E = 1;
 
   if(level.unset_relic_laststandmelee && level.mapname != "mp_aniyah") {
-    ref_1314d();
+    ref_1314D();
   }
 
   wait 0.15;
@@ -1339,7 +1339,7 @@ function finalsurvivoruav(var_0) {
   }
 }
 
-function ref_119d8() {
+function ref_119D8() {
   scripts\mp\flags::gameflagwait("prematch_done");
 
   while(level.infect_teamscores["allies"] > level.steam_point_think) {
@@ -1536,10 +1536,10 @@ function setspecialloadouts() {
   level.infect_allyrigs[level.infect_allyrigs.size] = "archetype_assault";
   var_0 = 0;
   var_1 = scripts\mp\gametypes\gun::remappedhpzoneorder(level.survivorprimaryweapon);
-  var_0 = scripts\mp\class::ref_139e7(level.survivorprimaryweapon, var_1);
+  var_0 = scripts\mp\class::ref_139E7(level.survivorprimaryweapon, var_1);
   var_2 = 0;
   var_3 = scripts\mp\gametypes\gun::remappedhpzoneorder(level.survivorsecondaryweapon);
-  var_2 = scripts\mp\class::ref_139e7(level.survivorsecondaryweapon, var_3);
+  var_2 = scripts\mp\class::ref_139E7(level.survivorsecondaryweapon, var_3);
 
   if(scripts\mp\utility\game::isusingdefaultclass("allies", 0)) {
     level.infect_loadouts["allies"] = scripts\mp\utility\game::getmatchrulesspecialclass("allies", 0);
@@ -1564,10 +1564,10 @@ function setspecialloadouts() {
     level.infect_loadouts["allies"]["loadoutSuper"] = "none";
     level.infect_loadouts["allies"]["loadoutStreakType"] = "assault";
 
-    if(level.ref_139bc.size > 0) {
-      level.infect_loadouts["allies"]["loadoutKillstreak1"] = level.ref_139bc[0];
-      level.infect_loadouts["allies"]["loadoutKillstreak2"] = level.ref_139bc[1];
-      level.infect_loadouts["allies"]["loadoutKillstreak3"] = level.ref_139bc[2];
+    if(level.ref_139BC.size > 0) {
+      level.infect_loadouts["allies"]["loadoutKillstreak1"] = level.ref_139BC[0];
+      level.infect_loadouts["allies"]["loadoutKillstreak2"] = level.ref_139BC[1];
+      level.infect_loadouts["allies"]["loadoutKillstreak3"] = level.ref_139BC[2];
       level.infect_loadouts["allies"]["loadoutPerks"] = ["specialty_warhead", "specialty_scavenger_plus", "specialty_restock"];
     } else {
       level.infect_loadouts["allies"]["loadoutKillstreak1"] = "none";
@@ -1580,7 +1580,7 @@ function setspecialloadouts() {
 
     level.infect_loadouts["allies"]["loadoutGesture"] = "playerData";
     level.infect_loadouts["allies"]["loadoutFieldUpgrade1"] = level.survivorsuper;
-    level.infect_loadouts["allies"]["loadoutFieldUpgrade2"] = level.ref_139bd;
+    level.infect_loadouts["allies"]["loadoutFieldUpgrade2"] = level.ref_139BD;
   } else {
     level.infect_loadouts["allies"]["loadoutPrimary"] = level.survivorprimaryweapon;
     level.infect_loadouts["allies"]["loadoutPrimaryAttachment"] = level.attachmentsurvivorprimary;
@@ -1599,10 +1599,10 @@ function setspecialloadouts() {
     level.infect_loadouts["allies"]["loadoutSuper"] = "none";
     level.infect_loadouts["allies"]["loadoutStreakType"] = "assault";
 
-    if(level.ref_139bc.size > 0) {
-      level.infect_loadouts["allies"]["loadoutKillstreak1"] = level.ref_139bc[0];
-      level.infect_loadouts["allies"]["loadoutKillstreak2"] = level.ref_139bc[1];
-      level.infect_loadouts["allies"]["loadoutKillstreak3"] = level.ref_139bc[2];
+    if(level.ref_139BC.size > 0) {
+      level.infect_loadouts["allies"]["loadoutKillstreak1"] = level.ref_139BC[0];
+      level.infect_loadouts["allies"]["loadoutKillstreak2"] = level.ref_139BC[1];
+      level.infect_loadouts["allies"]["loadoutKillstreak3"] = level.ref_139BC[2];
       level.infect_loadouts["allies"]["loadoutPerks"] = ["specialty_warhead", "specialty_scavenger_plus", "specialty_restock"];
     } else {
       level.infect_loadouts["allies"]["loadoutKillstreak1"] = "none";
@@ -1615,7 +1615,7 @@ function setspecialloadouts() {
 
     level.infect_loadouts["allies"]["loadoutGesture"] = "playerData";
     level.infect_loadouts["allies"]["loadoutFieldUpgrade1"] = level.survivorsuper;
-    level.infect_loadouts["allies"]["loadoutFieldUpgrade2"] = level.ref_139bd;
+    level.infect_loadouts["allies"]["loadoutFieldUpgrade2"] = level.ref_139BD;
 
     if(level.enableping) {}
   }
@@ -1627,14 +1627,14 @@ function setspecialloadouts() {
     var_4 = var_0;
   } else {
     var_6 = scripts\mp\gametypes\gun::remappedhpzoneorder(level.initialprimaryweapon);
-    var_4 = scripts\mp\class::ref_139e7(level.initialprimaryweapon, var_6);
+    var_4 = scripts\mp\class::ref_139E7(level.initialprimaryweapon, var_6);
   }
 
   if(level.survivorsecondaryweapon == level.initialsecondaryweapon) {
     var_5 = var_2;
   } else {
     var_7 = scripts\mp\gametypes\gun::remappedhpzoneorder(level.initialsecondaryweapon);
-    var_5 = scripts\mp\class::ref_139e7(level.initialsecondaryweapon, var_7);
+    var_5 = scripts\mp\class::ref_139E7(level.initialsecondaryweapon, var_7);
   }
 
   var_8 = [];
@@ -1709,7 +1709,7 @@ function setspecialloadouts() {
   } else {
     var_9 = 0;
     var_10 = scripts\mp\gametypes\gun::remappedhpzoneorder(level.infectedprimaryweapon);
-    var_9 = scripts\mp\class::ref_139e7(level.infectedprimaryweapon, var_10);
+    var_9 = scripts\mp\class::ref_139E7(level.infectedprimaryweapon, var_10);
   }
 
   var_11 = [];
@@ -1898,7 +1898,7 @@ function updatematchstatushintonspawn() {
   self setclientomnvar("ui_match_status_hint_text", 40);
 }
 
-function ref_11f4b() {
+function ref_11F4B() {
   self endon("death");
   self endon("spawned");
   scripts\mp\flags::gameflagwait("prematch_done");
@@ -1918,7 +1918,7 @@ function ref_11f4b() {
         self nightvisionviewoff();
         self setclientomnvar("ui_ctf_flag_carrier", 1);
         scripts\common\utility::brjugg_oncrateuse(0);
-        ref_12a93();
+        ref_12A93();
         scripts\common\utility::brjugg_oncrateuse(1);
         var_1 = 0;
         self setclientomnvar("ui_ctf_flag_carrier", 0);
@@ -1930,7 +1930,7 @@ function ref_11f4b() {
   }
 }
 
-function ref_12a93() {
+function ref_12A93() {
   var_0 = 0;
 
   while(var_0 < 5) {
@@ -1944,7 +1944,7 @@ function ref_12a93() {
   }
 }
 
-function ref_122ff() {
+function ref_122FF() {
   if(self.team == "axis") {
     if(scripts\mp\utility\perk::_hasperk("specialty_tacticalinsertion")) {
       scripts\mp\utility\perk::removeperk("specialty_tacticalinsertion");
@@ -1959,7 +1959,7 @@ function ref_122ff() {
   }
 }
 
-function ref_13a06() {
+function ref_13A06() {
   thread headicon_time_left();
 }
 
@@ -1979,7 +1979,7 @@ function headicon_time_left() {
     self.perkpackagedata.super = "super_select";
     var_0 = "gamemode";
     var_1 = scripts\mp\class::zombiesignorevehicleexplosions();
-    var_1 = scripts\mp\class::ref_1194e(var_1, var_0);
+    var_1 = scripts\mp\class::ref_1194E(var_1, var_0);
     scripts\mp\class::loadout_updatefieldupgrades(var_1, var_0);
 
     if(scripts\mp\utility\perk::_hasperk("specialty_tacticalinsertion")) {
@@ -1994,7 +1994,7 @@ function headicon_time_left() {
     thread scripts\mp\supers::givesuperpoints(level.stealth_enabled, undefined, 1);
   }
 
-  if(istrue(level.ref_133f8)) {
+  if(istrue(level.ref_133F8)) {
     thread ref_13967();
     return;
   }
@@ -2004,7 +2004,7 @@ function headicon_time_left() {
 
 function ref_13967() {
   if(scripts\mp\utility\player::isreallyalive(self)) {
-    self.ref_133cb = 1;
+    self.ref_133CB = 1;
     self suicide();
     waitframe();
 
@@ -2017,7 +2017,7 @@ function ref_13967() {
   wait 1;
 
   if(isDefined(self)) {
-    self.ref_133cb = undefined;
+    self.ref_133CB = undefined;
     thread scripts\mp\hud_message::showsplash("tac_insert_infect_placed");
     return;
   }
@@ -2077,9 +2077,9 @@ function superselectonunset() {
   }
 
   level.vehiclespawnlocs = scripts\engine\utility::array_randomize(level.vehiclespawnlocs);
-  var_18 = level.ref_11f41;
+  var_18 = level.ref_11F41;
 
-  if(!isDefined(level.ref_11f41)) {
+  if(!isDefined(level.ref_11F41)) {
     var_18 = 25;
   }
 
@@ -2118,7 +2118,7 @@ function vehiclespawn_getspawndata(var_0) {
   return var_1;
 }
 
-function ref_129fb() {
+function ref_129FB() {
   level endon("game_ended");
   level.steam_damage_player = [];
   thread ref_13254();
@@ -2256,14 +2256,14 @@ function playgotinfectedsoundcount(var_0, var_1, var_2, var_3, var_4) {
   return var_5;
 }
 
-function ref_1314d() {
+function ref_1314D() {
   var_0 = getspawnpoint();
   var_1 = spawn("script_model", var_0.origin);
   var_1.playerspawnpos = var_0.origin;
   var_1.playerspawnangles = var_0.angles;
   var_1.notti = 0;
   var_1.issuper = 1;
-  var_1.ref_133e3 = 1;
+  var_1.ref_133E3 = 1;
   self.setspawnpoint = var_1;
 }
 
@@ -2271,7 +2271,7 @@ function ref_14124(var_0, var_1) {
   return true;
 }
 
-function ref_133f7() {
+function ref_133F7() {
   self endon("disconnect");
   self notify("skydive_spawn_tutorial");
   self endon("skydive_spawn_tutorial");

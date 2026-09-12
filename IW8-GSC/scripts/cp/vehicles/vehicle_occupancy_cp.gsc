@@ -6,10 +6,10 @@
 function vehicle_occupancy_cp_init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_occupancy", "onEnterVehicle", &vehicle_occupancy_cp_onentervehicle);
   scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_occupancy", "onExitVehicle", &vehicle_occupancy_cp_onexitvehicle);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_occupancy", "handleSuicideFromVehicles", &ref_141ce);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_occupancy", "takeRiotShield", &ref_141cf);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_occupancy", "giveRiotShield", &ref_141cd);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_occupancy", "updateRiotShield", &ref_141d0);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_occupancy", "handleSuicideFromVehicles", &ref_141CE);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_occupancy", "takeRiotShield", &ref_141CF);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_occupancy", "giveRiotShield", &ref_141CD);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("vehicle_occupancy", "updateRiotShield", &ref_141D0);
   scripts\mp\playeractions::registeractionset("vehicle", ["gesture", "killstreaks", "supers", "cp_munitions"]);
 }
 
@@ -75,13 +75,13 @@ function vehicle_occupancy_cp_onexitvehicle(var_0, var_1, var_2, var_3) {
   var_2 notify("exited_vehicle");
 }
 
-function ref_141ce(var_0) {
+function ref_141CE(var_0) {
   var_0.shouldskipdeathsshield = 1;
   var_0.shouldskiplaststand = 1;
   var_0 dodamage(var_0.health + 50, var_0.origin);
 }
 
-function ref_141cf(var_0, var_1, var_2) {
+function ref_141CF(var_0, var_1, var_2) {
   var_3 = undefined;
   var_4 = undefined;
   var_5 = undefined;
@@ -115,11 +115,11 @@ function ref_141cf(var_0, var_1, var_2) {
 
   if(isDefined(var_3)) {
     var_0 scripts\cp_mp\utility\inventory_utility::_takeweapon(var_3);
-    var_0.ref_12d53 = var_3;
-    var_0.ref_12d4f = var_4;
+    var_0.ref_12D53 = var_3;
+    var_0.ref_12D4F = var_4;
 
     if(istrue(var_4)) {
-      ref_141d0(var_0, var_1, var_2);
+      ref_141D0(var_0, var_1, var_2);
     }
 
     var_0 scripts\cp\cp_weapon::riotshieldonweaponchange(var_5);
@@ -130,35 +130,35 @@ function ref_141cf(var_0, var_1, var_2) {
   }
 }
 
-function ref_141cd(var_0, var_1, var_2) {
-  if(isDefined(var_0.ref_12d53)) {
+function ref_141CD(var_0, var_1, var_2) {
+  if(isDefined(var_0.ref_12D53)) {
     if(!istrue(var_1) && !istrue(var_2)) {
-      var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0.ref_12d53);
-      var_0 scripts\cp\cp_weapon::ref_13c5c();
+      var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0.ref_12D53);
+      var_0 scripts\cp\cp_weapon::ref_13C5C();
 
-      if(istrue(var_0.ref_12d4f)) {
+      if(istrue(var_0.ref_12D4F)) {
         var_0 notify("modified_riot_shield");
         var_0 endon("modified_riot_shield");
-        var_0 childthread scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var_0.ref_12d53);
+        var_0 childthread scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate(var_0.ref_12D53);
       }
     } else if(!istrue(var_1) && istrue(var_2)) {
-      var_0.ref_12d4d = var_0.ref_12d53;
+      var_0.ref_12D4D = var_0.ref_12D53;
     }
 
-    var_0.ref_12d53 = undefined;
-    var_0.ref_12d4f = undefined;
+    var_0.ref_12D53 = undefined;
+    var_0.ref_12D4F = undefined;
     var_0 notify("modified_riot_shield");
     return;
   }
 }
 
-function ref_141d0(var_0, var_1, var_2) {
-  if(isDefined(var_0.ref_12d53) && istrue(var_0.ref_12d4f)) {
+function ref_141D0(var_0, var_1, var_2) {
+  if(isDefined(var_0.ref_12D53) && istrue(var_0.ref_12D4F)) {
     if(!isDefined(var_2)) {
       return;
     }
 
-    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var_1, var_2)) {
+    if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DF(var_1, var_2)) {
       return;
     }
 
@@ -168,11 +168,11 @@ function ref_141d0(var_0, var_1, var_2) {
 
     var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat(var_1.vehiclename, var_2);
 
-    if(isDefined(var_3.ref_13e8a)) {
+    if(isDefined(var_3.ref_13E8A)) {
       return;
     }
 
-    var_0.ref_12d4f = undefined;
+    var_0.ref_12D4F = undefined;
     return;
   }
 }

@@ -141,7 +141,7 @@ function docratedropsmoke(var_0, var_1, var_2) {
   playFXOnTag(scripts\engine\utility::getfx("vfx_smk_signal_gr"), var_1.vfxent, "tag_origin");
 
   if(isDefined(var_0)) {
-    var_0 scripts\engine\utility::ref_143b9(var_2, "crate_dropped");
+    var_0 scripts\engine\utility::ref_143B9(var_2, "crate_dropped");
   } else {
     wait var_2;
   }
@@ -306,7 +306,7 @@ function terminal_pusher_approach_entrance_array() {
   game["dialog"]["dropbag_available"] = "gamestate_dropbag_available";
 }
 
-function ref_1284d(var_0) {
+function ref_1284D(var_0) {
   var_1 = [];
   var_2 = [];
   var_3 = scripts\mp\gametypes\br_circle::getsafecircleorigin();
@@ -394,21 +394,21 @@ function ref_1284d(var_0) {
         var_24 = var_22[var_23].node;
         var_25 = level.dropbagstruct.clusters[var_24];
         var_26 = var_22[var_23].index;
-        var_12.ref_1284b = var_25.droplocations[var_26].origin;
+        var_12.ref_1284B = var_25.droplocations[var_26].origin;
         continue;
       }
 
-      var_12.ref_1284b = var_22[var_23].origin;
+      var_12.ref_1284B = var_22[var_23].origin;
     }
 
-    level.ref_1284c = 1;
-    thread ref_1363b(level);
+    level.ref_1284C = 1;
+    thread ref_1363B(level);
   }
 
-  thread ref_11aaa();
+  thread ref_11AAA();
 }
 
-function ref_11aaa() {
+function ref_11AAA() {
   level notify("manageDropBags");
   level endon("manageDropBags");
   var_0 = -1;
@@ -485,7 +485,7 @@ function handlerelicshieldsonlyonkill(var_0, var_1) {
   }
 }
 
-function ref_1363a(var_0, var_1, var_2) {
+function ref_1363A(var_0, var_1, var_2) {
   handlerelicshieldsonlyonkill(self.team, 1);
   var_3 = 4096;
   var_4 = scripts\engine\utility::getStruct("soa_tower_elevator_floor_3", "targetname");
@@ -498,7 +498,7 @@ function ref_1363a(var_0, var_1, var_2) {
 
   var_7 = scripts\cp_mp\killstreaks\airdrop::dropbrloadoutcrate(self.team, var_0 + (0, 0, var_3), var_0 + (0, 0, 512));
   var_7 endon("death");
-  ref_13c47(var_7);
+  ref_13C47(var_7);
   enabledropbagobjective(var_7);
   getzeroarray(var_7);
 
@@ -580,7 +580,7 @@ function handlecratehitbymissile(var_0) {
   }
 }
 
-function ref_1363b(var_0) {
+function ref_1363B(var_0) {
   var_1 = undefined;
 
   if(isDefined(level.ref_12931)) {
@@ -593,7 +593,7 @@ function ref_1363b(var_0) {
       continue;
     }
 
-    var_4 = var_3.ref_1284b;
+    var_4 = var_3.ref_1284B;
 
     if(isDefined(level.br_circle) && isDefined(level.br_circle.safecircleent)) {
       var_5 = scripts\mp\gametypes\br_circle::getsafecircleorigin();
@@ -612,13 +612,13 @@ function ref_1363b(var_0) {
         var_4 = getclosestpointonnavmesh(var_4);
       }
 
-      if(istrue(level.ref_1406f)) {
+      if(istrue(level.ref_1406F)) {
         var_4 = return_enemy_type_mask(var_4);
       }
 
       if(scripts\mp\outofbounds::ispointinoutofbounds(var_4)) {
         var_5 = scripts\mp\gametypes\br_circle::getsafecircleorigin();
-        var_8 = scripts\mp\gametypes\br_c130::ref_1342e(var_5, var_4);
+        var_8 = scripts\mp\gametypes\br_c130::ref_1342E(var_5, var_4);
 
         if(isscriptabledefined()) {
           var_4 = getclosestpointonnavmesh(var_8);
@@ -629,7 +629,7 @@ function ref_1363b(var_0) {
     }
 
     var_9 = relic_punchbullets_fire_fists(1, 0, 0, 0, 0);
-    ref_1363a(var_3, var_4, var_9, var_1);
+    ref_1363A(var_3, var_4, var_9, var_1);
     waitframe();
   }
 }
@@ -696,8 +696,8 @@ function spawndropbagonlanding() {
 
   if(isDefined(var_0)) {
     var_3 = relic_punchbullets_fire_fists(0, 0, 0, 1, 0);
-    ref_1363a(var_0.origin, var_3);
-    thread ref_11aaa();
+    ref_1363A(var_0.origin, var_3);
+    thread ref_11AAA();
     return;
   }
 }
@@ -738,11 +738,11 @@ function findunuseddropbaglocation(var_0) {
   return undefined;
 }
 
-function ref_13c47(var_0) {
-  thread ref_13c48(level, var_0);
+function ref_13C47(var_0) {
+  thread ref_13C48(level, var_0);
 }
 
-function ref_13c48(var_0, var_1) {
+function ref_13C48(var_0, var_1) {
   level endon("game_ended");
   var_0 endon("death");
   var_2 = var_1;
@@ -791,7 +791,7 @@ function kioskreviveplayer(var_0) {
     }
 
     var_1 = var_3;
-    ref_1284d(0);
+    ref_1284D(0);
 
     if(level.delay_put_vehicles_on_compass) {
       scripts\mp\gametypes\br_armory_kiosk::ref_13169("supply_drop", 0);

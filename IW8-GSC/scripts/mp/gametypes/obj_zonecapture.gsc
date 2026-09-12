@@ -93,7 +93,7 @@ function postshipmodifiedkothzones(var_0) {
 function assignchevrons(var_0, var_1) {
   wait 1;
   var_2 = getentitylessscriptablearrayinradius(var_0, "targetname");
-  var_2 = ref_12bff(var_2, var_1);
+  var_2 = ref_12BFF(var_2, var_1);
   var_2 = ref_12806(var_2, var_1);
   var_3 = [];
 
@@ -193,7 +193,7 @@ function deactivatezone() {
   }
 
   self.trigger scripts\engine\utility::trigger_off();
-  thread ref_1439d();
+  thread ref_1439D();
   scripts\mp\gameobjects::releaseid(1, 0);
 
   if(scripts\mp\utility\game::getgametype() == "hq") {
@@ -203,7 +203,7 @@ function deactivatezone() {
     level.zone.visuals[0] stoploopsound();
   }
 
-  level.ref_12f0e = 0;
+  level.ref_12F0E = 0;
 }
 
 function zonetimerwait() {
@@ -256,7 +256,7 @@ function handlehostmigration(var_0) {
   setomnvar("ui_hardpoint_timer", level.zoneendtime);
 }
 
-function ref_1199e(var_0, var_1) {
+function ref_1199E(var_0, var_1) {
   level endon("game_ended");
   var_2 = level.framedurationseconds;
   var_3 = var_2 * 1000;
@@ -315,7 +315,7 @@ function trackgametypevips() {
 }
 
 function cleanupgametypevips() {
-  level scripts\engine\utility::ref_143a5("game_ended", "zone_moved");
+  level scripts\engine\utility::ref_143A5("game_ended", "zone_moved");
 
   foreach(var_1 in level.players) {
     var_1 setgametypevip(0);
@@ -342,7 +342,7 @@ function zone_onuse(var_0) {
       scripts\mp\objidpoolmanager::objective_unpin_player(self.objidnum, var_7);
     }
 
-    thread ref_1439d();
+    thread ref_1439D();
     level scripts\mp\gametypes\koth::updateservericons("zone_shift", 0);
 
     if(isDefined(var_3)) {
@@ -394,11 +394,11 @@ function zone_onuse(var_0) {
       var_19 = scripts\mp\gamescore::_getteamscore(var_17);
 
       if(var_18 > var_19) {
-        level.ref_12f0e = 1;
+        level.ref_12F0E = 1;
       }
 
       binoculars_clearexpirationtimer(var_1);
-    } else if(level.ref_1221a) {
+    } else if(level.ref_1221A) {
       level scripts\mp\gamelogic::pausetimer();
     }
 
@@ -467,7 +467,7 @@ function zone_onuse(var_0) {
   }
 }
 
-function ref_1439d() {
+function ref_1439D() {
   waitframe();
   scripts\mp\gameobjects::setvisibleteam("none");
 }
@@ -516,7 +516,7 @@ function zone_onuseupdate(var_0, var_1, var_2, var_3) {
     binoculars_clearexpirationtimer(self.claimteam);
   } else if(var_4 != "neutral" && self.claimteam != var_4) {
     binoculars_clearexpirationtimer(var_4, 1);
-  } else if(level.ref_1221a) {
+  } else if(level.ref_1221A) {
     level scripts\mp\gamelogic::pausetimer();
   }
 
@@ -571,13 +571,13 @@ function zone_onuseend(var_0, var_1, var_2) {
   if(!var_2) {
     if(scripts\mp\utility\game::getgametype() == "hq") {
       if(level.usehprules) {
-        if(level.ref_1221a) {
+        if(level.ref_1221A) {
           level scripts\mp\gamelogic::resumetimer();
         }
       } else if(var_3 != "neutral") {
         binoculars_clearexpirationtimer(var_3);
       }
-    } else if(level.ref_1221a) {
+    } else if(level.ref_1221A) {
       level scripts\mp\gamelogic::resumetimer();
     }
   }
@@ -618,7 +618,7 @@ function zone_onunoccupied() {
   level notify("zone_destroyed");
   level.hpcapteam = "neutral";
 
-  if(level.ref_1221a) {
+  if(level.ref_1221A) {
     level scripts\mp\gamelogic::resumetimer();
   }
 
@@ -642,7 +642,7 @@ function zone_onunoccupied() {
 }
 
 function zone_oncontested() {
-  if(level.ref_1221a) {
+  if(level.ref_1221A) {
     level scripts\mp\gamelogic::resumetimer();
   }
 
@@ -678,12 +678,12 @@ function zone_oncontested() {
     scripts\mp\utility\dialog::statusdialog("hp_contested", var_12);
   }
 
-  level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_contested", level.zone.trigger.origin);
+  level.zone thread scripts\common\utility::ref_13E0A(level.ref_11B29, "hill_contested", level.zone.trigger.origin);
   self.didstatusnotify = 1;
 }
 
 function zone_onuncontested(var_0) {
-  if(level.ref_1221a) {
+  if(level.ref_1221A) {
     level scripts\mp\gamelogic::pausetimer();
   }
 
@@ -698,7 +698,7 @@ function zone_onuncontested(var_0) {
       }
     }
 
-    level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_empty", level.zone.trigger.origin);
+    level.zone thread scripts\common\utility::ref_13E0A(level.ref_11B29, "hill_empty", level.zone.trigger.origin);
   } else {
     if(scripts\mp\utility\game::getgametype() == "koth") {
       scripts\mp\utility\sound::playsoundonplayers("mp_hardpoint_captured_positive", var_1);
@@ -714,11 +714,11 @@ function zone_onuncontested(var_0) {
       showcapturedhardpointeffecttoplayer(level.zone, var_1, var_3);
     }
 
-    level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_uncontested", level.zone.trigger.origin);
+    level.zone thread scripts\common\utility::ref_13E0A(level.ref_11B29, "hill_uncontested", level.zone.trigger.origin);
   }
 
   var_7 = (gettime() - self.hostvictimoverride) * 0.001;
-  scripts\mp\utility\game::ref_119ac(undefined, undefined, "Zone Contested", level.zone.trigger.origin, var_7 + " seconds");
+  scripts\mp\utility\game::ref_119AC(undefined, undefined, "Zone Contested", level.zone.trigger.origin, var_7 + " seconds");
   self.hostvictimoverride = undefined;
   var_8 = scripts\engine\utility::ter_op(var_1 == "neutral", "idle", var_1);
   thread updatechevrons(level.zone);
@@ -726,7 +726,7 @@ function zone_onuncontested(var_0) {
   self.didstatusnotify = 0;
 }
 
-function ref_1471e(var_0) {
+function ref_1471E(var_0) {
   binoculars_clearexpirationtimer(var_0);
 }
 
@@ -751,7 +751,7 @@ function zone_onunpinnedstate(var_0) {
 }
 
 function binoculars_clearexpirationtimer(var_0, var_1) {
-  if(!level.ref_1221a) {
+  if(!level.ref_1221A) {
     return;
   }
 
@@ -863,7 +863,7 @@ function onplayerjoinedteam(var_0) {
   }
 }
 
-function ref_12bff(var_0, var_1) {
+function ref_12BFF(var_0, var_1) {
   var_2 = [];
   var_3 = [];
 
@@ -996,7 +996,7 @@ function init_vo_arrays(var_0, var_1, var_2) {
   return var_0;
 }
 
-function ref_144da() {
+function ref_144DA() {
   level endon("game_ended");
   level endon("stop_watching_trigger");
   var_0 = self.entnum;

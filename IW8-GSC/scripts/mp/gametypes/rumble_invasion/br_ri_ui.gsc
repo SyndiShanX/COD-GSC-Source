@@ -3,9 +3,9 @@
  * Script: scripts\mp\gametypes\rumble_invasion\br_ri_ui.gsc
 *************************************************************/
 
-function ref_13eee() {
+function ref_13EEE() {
   var_0 = "any";
-  var_1 = level.start_reach_exhaust_waste.ref_12e2c.ground_detection_think + vectorNormalize(level.start_reach_exhaust_waste.ref_12e2c.ref_136a8["axis"]) * level.start_reach_exhaust_waste.ref_12e2c.circle_radius * level.start_reach_exhaust_waste.ref_12e2c.ref_13631;
+  var_1 = level.start_reach_exhaust_waste.ref_12E2C.ground_detection_think + vectorNormalize(level.start_reach_exhaust_waste.ref_12E2C.ref_136A8["axis"]) * level.start_reach_exhaust_waste.ref_12E2C.circle_radius * level.start_reach_exhaust_waste.ref_12E2C.ref_13631;
   var_2 = scripts\mp\gameobjects::createobjidobject(var_1, "neutral", (0, 0, 0), undefined, var_0, 0);
   var_2.origin = var_1;
   scripts\mp\objidpoolmanager::update_objective_ownerteam(var_2.objidnum, "axis");
@@ -19,7 +19,7 @@ function ref_13eee() {
   var_2.lockupdatingicons = 1;
   var_2.team = "axis";
   level.spawn_set_jugg_value.choosecrouchorstandtac = var_2;
-  thread ref_13ef2();
+  thread ref_13EF2();
   var_2 = scripts\mp\gameobjects::createobjidobject(var_1, "neutral", (0, 0, 0), undefined, var_0, 0);
   var_2.origin = var_1;
   scripts\mp\objidpoolmanager::update_objective_ownerteam(var_2.objidnum, "axis");
@@ -33,9 +33,9 @@ function ref_13eee() {
   var_2.lockupdatingicons = 1;
   var_2.team = "axis";
   level.spawn_set_jugg_value.choosebestpropforkillcam = var_2;
-  thread ref_13ef2();
-  level.spawn_set_jugg_value.choosebestpropforkillcam thread scripts\mp\gametypes\br_gametype_rumble_invasion::ref_11aff("axis");
-  var_1 = level.start_reach_exhaust_waste.ref_12e2c.ground_detection_think + vectorNormalize(level.start_reach_exhaust_waste.ref_12e2c.ref_136a8["allies"]) * level.start_reach_exhaust_waste.ref_12e2c.circle_radius * level.start_reach_exhaust_waste.ref_12e2c.ref_13631;
+  thread ref_13EF2();
+  level.spawn_set_jugg_value.choosebestpropforkillcam thread scripts\mp\gametypes\br_gametype_rumble_invasion::ref_11AFF("axis");
+  var_1 = level.start_reach_exhaust_waste.ref_12E2C.ground_detection_think + vectorNormalize(level.start_reach_exhaust_waste.ref_12E2C.ref_136A8["allies"]) * level.start_reach_exhaust_waste.ref_12E2C.circle_radius * level.start_reach_exhaust_waste.ref_12E2C.ref_13631;
   var_2 = scripts\mp\gameobjects::createobjidobject(var_1, "neutral", (0, 0, 0), undefined, var_0, 0);
   var_2.origin = var_1;
   scripts\mp\objidpoolmanager::update_objective_ownerteam(var_2.objidnum, "allies");
@@ -49,7 +49,7 @@ function ref_13eee() {
   var_2.lockupdatingicons = 1;
   var_2.team = "allies";
   level.spawn_set_jugg_value.brjugg_cleanupents = var_2;
-  thread ref_13ef2();
+  thread ref_13EF2();
   var_2 = scripts\mp\gameobjects::createobjidobject(var_1, "neutral", (0, 0, 0), undefined, var_0, 0);
   var_2.origin = var_1;
   scripts\mp\objidpoolmanager::update_objective_ownerteam(var_2.objidnum, "allies");
@@ -63,11 +63,11 @@ function ref_13eee() {
   var_2.lockupdatingicons = 1;
   var_2.team = "allies";
   level.spawn_set_jugg_value.briskillstreakallowed = var_2;
-  thread ref_13ef2();
-  level.spawn_set_jugg_value.briskillstreakallowed thread scripts\mp\gametypes\br_gametype_rumble_invasion::ref_11aff("allies");
+  thread ref_13EF2();
+  level.spawn_set_jugg_value.briskillstreakallowed thread scripts\mp\gametypes\br_gametype_rumble_invasion::ref_11AFF("allies");
 }
 
-function ref_13ef2() {
+function ref_13EF2() {
   level endon("game_ended");
   scripts\mp\flags::gameflagwait("rumble_location_selected");
   var_0 = scripts\engine\utility::ter_op(self.team == "axis", level.spawn_set_jugg_value.chosen, level.spawn_set_jugg_value.choppersupport_watchtargetrange);
@@ -80,7 +80,7 @@ function ref_13ef2() {
   scripts\mp\objidpoolmanager::update_objective_position(self.objidnum, var_0);
 }
 
-function ref_13ee7() {
+function ref_13EE7() {
   self endon("disconnect");
 
   if(self.team == "allies") {
@@ -132,7 +132,7 @@ function ref_12424(var_0, var_1) {
     }
 
     var_4.intvar = var_1;
-    var_4.ref_136f3 = var_0;
+    var_4.ref_136F3 = var_0;
     thread ref_12981(var_3);
   }
 }
@@ -154,7 +154,7 @@ function ref_12981(var_0) {
       wait 0.5;
 
       foreach(var_2 in self.isflagcarrymode) {
-        scripts\mp\gametypes\br_quest_util::displayplayersplash(self, var_2.ref_136f3, var_2);
+        scripts\mp\gametypes\br_quest_util::displayplayersplash(self, var_2.ref_136F3, var_2);
       }
 
       self.isflagcarrymode = [];

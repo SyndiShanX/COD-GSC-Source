@@ -4,7 +4,7 @@
 ***************************************************/
 
 function init() {
-  scripts\engine\scriptable::ref_12f5b("military_ammo_restock", &brtruck_initpostmain);
+  scripts\engine\scriptable::ref_12F5B("military_ammo_restock", &brtruck_initpostmain);
   level.ammorestocklocs = [];
   var_0 = "ammo_restock_location";
 

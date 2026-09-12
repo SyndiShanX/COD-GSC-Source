@@ -236,7 +236,7 @@ function watchendconditions() {
   thread endconditionwatcher_selectionmade();
   thread endconditionwatcher_mapcleared();
   thread endconditionwatcher_mapchanged();
-  var_0 = scripts\engine\utility::ref_143b7("tac_ops_map_selection_made", "tac_ops_map_changed", "tac_ops_map_cleared", "spawned_player", "tac_ops_map_game_ended");
+  var_0 = scripts\engine\utility::ref_143B7("tac_ops_map_selection_made", "tac_ops_map_changed", "tac_ops_map_cleared", "spawned_player", "tac_ops_map_game_ended");
   self notify("tac_ops_end_condition_met");
   return var_0;
 }

@@ -5,11 +5,11 @@
 
 function init() {
   var_0 = spawnStruct();
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.attackerswaittime = &attackerswaittime;
   var_0.postinitfunc = &postinitfunc;
   var_0.weight = getdvarfloat("scr_br_pe_bombardment_weight", 1);
-  scripts\mp\gametypes\br_publicevents::ref_12b35(5, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(5, var_0);
 }
 
 function postinitfunc() {
@@ -24,7 +24,7 @@ function postinitfunc() {
   _hidesafecircleui::stopusingbomb();
 }
 
-function ref_140cf() {
+function ref_140CF() {
   return false;
 }
 
@@ -43,7 +43,7 @@ function attackerswaittime() {
 
   if(getdvarint("scr_br_pe_bombardment_cluster", 1)) {
     level thread scripts\mp\gametypes\br_public::brleaderdialog("lep_bomb_shelter", undefined, undefined, 1);
-    thread ref_1383a(level, var_1, var_1);
+    thread ref_1383A(level, var_1, var_1);
     return;
   }
 
@@ -52,7 +52,7 @@ function attackerswaittime() {
   _hidesafecircleui::changetimertoovertimetimer(var_1, undefined, var_2, var_1);
 }
 
-function ref_1383a(var_0, var_1, var_2) {
+function ref_1383A(var_0, var_1, var_2) {
   self notify("br_pe_bombardment");
   self endon("br_pe_bombardment");
   self endon("game_ended");

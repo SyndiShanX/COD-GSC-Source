@@ -268,7 +268,7 @@ function domflags() {
       }
     }
 
-    ref_11ca0(var_9);
+    ref_11CA0(var_9);
     var_12 = scripts\mp\gametypes\obj_dom::setupobjective(var_9, undefined, 1, 1);
     level.objectives[var_12.objectivekey] = var_12;
   }
@@ -284,7 +284,7 @@ function domflags() {
   thread modifieddefendradiussetup();
 
   if(!scripts\mp\flags::gameflag("prematch_done")) {
-    level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+    level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   }
 
   foreach(var_3 in level.objectives) {
@@ -310,12 +310,12 @@ function domflags() {
   }
 
   if(level.codcasterenabled) {
-    thread ref_1402b();
+    thread ref_1402B();
     return;
   }
 }
 
-function ref_11ca0(var_0) {
+function ref_11CA0(var_0) {
   switch (level.mapname) {
     case "mp_piccadilly":
       switch (var_0.script_label) {
@@ -332,7 +332,7 @@ function ref_11ca0(var_0) {
 
       break;
     case "mp_malyshev":
-      if(level.ref_11ad3) {
+      if(level.ref_11AD3) {
         switch (var_0.script_label) {
           case "_a":
             var_0.origin = (-520, 632.25, 16);
@@ -945,7 +945,7 @@ function updatematchstatushintonspawn() {
   self setclientomnvar("ui_match_status_hint_text", 27);
 }
 
-function ref_1402b() {
+function ref_1402B() {
   level endon("game_ended");
   level waittill("prematch_done");
 
@@ -960,9 +960,9 @@ function ref_1402b() {
         }
       }
 
-      if(!isDefined(var_1.ref_11c62) || var_1.ref_11c62 != var_2) {
+      if(!isDefined(var_1.ref_11C62) || var_1.ref_11C62 != var_2) {
         var_1 setmlgthirdpersonenabled(var_2);
-        var_1.ref_11c62 = var_2;
+        var_1.ref_11C62 = var_2;
         var_1 setgametypevip(1);
       }
 

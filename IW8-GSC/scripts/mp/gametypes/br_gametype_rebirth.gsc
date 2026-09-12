@@ -30,34 +30,34 @@ function enabledskiplaststand(var_0) {
     timeoutonabandoneddelay("mp/classtable_br_rebirth_circle3.csv");
   }
 
-  level.disable_super_in_turret.ref_140a3 = getdvarint("scr_br_use_tracked_teams", 1);
-  level.disable_super_in_turret.ref_140a5 = getdvarint("scr_br_use_vengeance", 1);
-  level.disable_super_in_turret.ref_1428b = getdvarint("scr_br_vengeance_use_any_kill", 0);
-  level.disable_super_in_turret.ref_140a6 = getdvarint("scr_br_use_vengeance_decrease_respawn_timer", 1);
+  level.disable_super_in_turret.ref_140A3 = getdvarint("scr_br_use_tracked_teams", 1);
+  level.disable_super_in_turret.ref_140A5 = getdvarint("scr_br_use_vengeance", 1);
+  level.disable_super_in_turret.ref_1428B = getdvarint("scr_br_vengeance_use_any_kill", 0);
+  level.disable_super_in_turret.ref_140A6 = getdvarint("scr_br_use_vengeance_decrease_respawn_timer", 1);
   level.disable_super_in_turret.ref_14094 = getdvarint("scr_br_use_respawn_waves", 0);
-  level.disable_super_in_turret.ref_1408d = getdvarint("scr_br_use_points_to_reduce_respawn_time", 1);
+  level.disable_super_in_turret.ref_1408D = getdvarint("scr_br_use_points_to_reduce_respawn_time", 1);
   level.disable_super_in_turret.botpickskinid = getdvarfloat("scr_br_rebirth_aircraft_max_allowed", 30);
   level.disable_super_in_turret.br_ammo_player_is_maxed_out = getdvarfloat("scr_br_rebirth_aircraft_type", 1);
   level.disable_super_in_turret.startingloadoutindex = getdvarint("scr_br_rebirth_starting_loadout_index", 0);
-  level.ref_12ca7 = getdvarint("scr_bmo_respawnHeightOverride", 7500);
-  level.disable_super_in_turret.ref_12c92 = getdvarint("scr_br_rebirth_respawn_should_wait_prestreaming_end", 0);
-  level.disable_super_in_turret.ref_12c91 = getdvarint("scr_br_rebirth_respawn_should_notify_started_spawn", 1);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("circleTimer", &circletimer);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("mayConsiderPlayerDead", &empty_function);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("triggerRespawnOverlay", &end_silo_thrust);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerNakedDropLoadout", &end_intro_obj);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerDropLoadout", &brrebirth_playerdroploadout);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("getDefaultLoadout", &enable_spawner);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("kioskRevivePlayer", &enablejuggernautcrateobjective);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("dropOnPlayerDeath", &droponplayerdeath);
+  level.ref_12CA7 = getdvarint("scr_bmo_respawnHeightOverride", 7500);
+  level.disable_super_in_turret.ref_12C92 = getdvarint("scr_br_rebirth_respawn_should_wait_prestreaming_end", 0);
+  level.disable_super_in_turret.ref_12C91 = getdvarint("scr_br_rebirth_respawn_should_notify_started_spawn", 1);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("circleTimer", &circletimer);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("mayConsiderPlayerDead", &empty_function);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("triggerRespawnOverlay", &end_silo_thrust);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerNakedDropLoadout", &end_intro_obj);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerDropLoadout", &brrebirth_playerdroploadout);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("getDefaultLoadout", &enable_spawner);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("kioskRevivePlayer", &enablejuggernautcrateobjective);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("dropOnPlayerDeath", &droponplayerdeath);
 
   if(getdvarint("scr_br_custom_final_circle_override", 0) == 1) {
-    scripts\mp\gametypes\br_gametypes::ref_12b11("mapCenterFinalCircle", &ref_12181);
-    scripts\mp\gametypes\br_gametypes::ref_12b11("getFinalCircleCenter", &ref_12181);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("mapCenterFinalCircle", &ref_12181);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("getFinalCircleCenter", &ref_12181);
   }
 
   if(!istrue(level.tryupdategenericprogress)) {
-    scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerKilled", &end_game_tutorial_func);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerKilled", &end_game_tutorial_func);
   }
 
   if(istrue(var_0)) {
@@ -66,7 +66,7 @@ function enabledskiplaststand(var_0) {
 
   waittillframeend();
 
-  if(level.disable_super_in_turret.ref_1408d) {
+  if(level.disable_super_in_turret.ref_1408D) {
     level.ref_12073 = &end_game_win;
   }
 
@@ -97,8 +97,8 @@ function enabledfeatures() {
 
 function enabledskipdeathshield() {
   if(getdvarint("scr_br_alt_mode_rebirth_skip_initial_circle", 0) != 0) {
-    scripts\mp\gametypes\br_gametypes::ref_12b11("createC130PathStruct", &enable_leaderboard);
-    scripts\mp\gametypes\br_gametypes::ref_12b11("addToC130Infil", &emp_target_monitor);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("createC130PathStruct", &enable_leaderboard);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("addToC130Infil", &emp_target_monitor);
 
     if(getdvarint("scr_rebirth_shouldSetInitalDropDelay", 1) == 1) {
       thread end_nuke_vault();
@@ -108,10 +108,10 @@ function enabledskipdeathshield() {
   waittillframeend();
   level.ontimelimit = &end_gates;
   enable_keypad_interaction();
-  level.ref_140d9 = [];
-  level.ref_140d9[0] = "assassination";
-  level.ref_140d9[1] = "domination";
-  level.ref_140d9[2] = "scavenger";
+  level.ref_140D9 = [];
+  level.ref_140D9[0] = "assassination";
+  level.ref_140D9[1] = "domination";
+  level.ref_140D9[2] = "scavenger";
   scripts\mp\rank::ref_12189("kill", 100);
   scripts\mp\rank::ref_12189("br_cacheOpen", 200);
 }
@@ -216,10 +216,10 @@ function brrebirth_initdialogrespawndisabled() {
 }
 
 function enable_keypad_interaction() {
-  scripts\cp_mp\utility\game_utility::ref_12c10("delete_on_load", "targetname");
-  scripts\cp_mp\utility\game_utility::ref_12c11("door_prison_cell_metal_mp", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c11("door_wooden_panel_mp_01", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c11("me_electrical_box_street_01", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C10("delete_on_load", "targetname");
+  scripts\cp_mp\utility\game_utility::ref_12C11("door_prison_cell_metal_mp", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C11("door_wooden_panel_mp_01", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C11("me_electrical_box_street_01", 1);
 }
 
 function enabledbasejumping() {}
@@ -228,7 +228,7 @@ function end_paratroopers_group() {
   level endon("game_ended");
   scripts\mp\flags::gameflagwait("prematch_done");
   scripts\mp\flags::gameflagwait("prematch_fade_done");
-  level.disable_super_in_turret.ref_12ca4 = 1;
+  level.disable_super_in_turret.ref_12CA4 = 1;
 }
 
 function end_reach_exhaust_waste() {
@@ -253,7 +253,7 @@ function end_reach_exhaust_waste() {
   scripts\mp\flags::gameflagwait("prematch_fade_done");
 
   foreach(var_8 in level.players) {
-    var_8.ref_13c4b = [];
+    var_8.ref_13C4B = [];
   }
 }
 
@@ -276,7 +276,7 @@ function empty_function(var_0) {
     thread end_unlock_silo();
 
     if(!istrue(level.disable_super_in_turret.useneverendingresurgence)) {
-      scripts\mp\gametypes\br::ref_11b15(var_0);
+      scripts\mp\gametypes\br::ref_11B15(var_0);
     }
   }
 
@@ -344,8 +344,8 @@ function enablejuggernautcrateobjective(var_0, var_1) {
 }
 
 function droponplayerdeath(var_0) {
-  if(istrue(level.disable_super_in_turret.loadoutrestore) && !isDefined(self.ref_12eb0)) {
-    scripts\mp\gametypes\br::ref_125fc();
+  if(istrue(level.disable_super_in_turret.loadoutrestore) && !isDefined(self.ref_12EB0)) {
+    scripts\mp\gametypes\br::ref_125FC();
   }
 
   return false;
@@ -364,7 +364,7 @@ function end_game_tutorial_func(var_0) {
     return;
   }
 
-  thread scripts\mp\gametypes\br_gametypes::ref_12e05("preOnPlayerKilled", var_0);
+  thread scripts\mp\gametypes\br_gametypes::ref_12E05("preOnPlayerKilled", var_0);
   thread end_freight_lift(var_0.victim);
 
   if(!isDefined(var_0.attacker) || !isPlayer(var_0.attacker) || var_0.attacker == var_0.victim) {
@@ -382,7 +382,7 @@ function end_game_tutorial_func(var_0) {
 }
 
 function end_this_module(var_0, var_1) {
-  if(!level.disable_super_in_turret.ref_140a3) {
+  if(!level.disable_super_in_turret.ref_140A3) {
     return;
   }
 
@@ -392,11 +392,11 @@ function end_this_module(var_0, var_1) {
 function end_slow_mode_safe(var_0, var_1) {
   level endon("game_ended");
 
-  if(!level.disable_super_in_turret.ref_140a5) {
+  if(!level.disable_super_in_turret.ref_140A5) {
     return;
   }
 
-  if(!istrue(level.disable_super_in_turret.ref_12ca4)) {
+  if(!istrue(level.disable_super_in_turret.ref_12CA4)) {
     return;
   }
 
@@ -418,7 +418,7 @@ function end_slow_mode_safe(var_0, var_1) {
 
 function enable_super(var_0, var_1) {
   var_2 = [];
-  jumpiffalse(istrue(level.disable_super_in_turret.ref_1428b)) LOC_00000056;
+  jumpiffalse(istrue(level.disable_super_in_turret.ref_1428B)) LOC_00000056;
 
   foreach(var_4 in var_0) {
     if(!isDefined(var_4)) {
@@ -445,7 +445,7 @@ function empty_collision_handler(var_0, var_1) {
     empendearly(var_3);
   }
 
-  if(!istrue(level.disable_super_in_turret.ref_140a6)) {
+  if(!istrue(level.disable_super_in_turret.ref_140A6)) {
     end_game_cheer(self, var_1, var_0);
   }
 
@@ -454,8 +454,8 @@ function empty_collision_handler(var_0, var_1) {
 }
 
 function empendearly(var_0) {
-  if(istrue(level.disable_super_in_turret.ref_140a6)) {
-    var_0.ref_12ca1 -= getdvarint("scr_br_vengeance_decrease_respawn_delay", 5);
+  if(istrue(level.disable_super_in_turret.ref_140A6)) {
+    var_0.ref_12CA1 -= getdvarint("scr_br_vengeance_decrease_respawn_delay", 5);
     return;
   }
 
@@ -527,11 +527,11 @@ function run_lbravo_spawner() {
   if(istrue(var_0)) {
     var_1 = scripts\mp\utility\teams::getteamdata(self.team, "trackedTeams");
   } else {
-    if(!isDefined(self.ref_13c4b)) {
-      self.ref_13c4b = [];
+    if(!isDefined(self.ref_13C4B)) {
+      self.ref_13C4B = [];
     }
 
-    var_1 = self.ref_13c4b;
+    var_1 = self.ref_13C4B;
   }
 
   return var_1;
@@ -576,7 +576,7 @@ function end_silo_elevator(var_0, var_1, var_2) {
   } else {
     self notify(var_3);
     self endon(var_3);
-    self.ref_13c4b[var_2] = var_5;
+    self.ref_13C4B[var_2] = var_5;
     var_4 = [self];
   }
 
@@ -642,20 +642,20 @@ function end_pipe_room() {
   level endon("game_ended");
   scripts\mp\flags::gameflagwait("prematch_done");
   scripts\mp\flags::gameflagwait("prematch_fade_done");
-  level.disable_super_in_turret.ref_12ca1 = [];
+  level.disable_super_in_turret.ref_12CA1 = [];
   level.disable_super_in_turret.ref_14093 = getdvarint("scr_br_use_respawn_delay_per_circle", 1);
 
   if(level.disable_super_in_turret.ref_14093) {
     var_0 = rocket_attack_min_cooldown();
 
     for(var_1 = 0; var_1 < var_0; var_1++) {
-      level.disable_super_in_turret.ref_12ca1[var_1] = getdvarint("scr_br_rebirth_respawn_delay_circle" + var_1 + 1, 30);
+      level.disable_super_in_turret.ref_12CA1[var_1] = getdvarint("scr_br_rebirth_respawn_delay_circle" + var_1 + 1, 30);
     }
 
     return;
   }
 
-  level.disable_super_in_turret.ref_12ca1[0] = getdvarint("scr_br_rebirth_respawn_delay", 30);
+  level.disable_super_in_turret.ref_12CA1[0] = getdvarint("scr_br_rebirth_respawn_delay", 30);
 }
 
 function brrebirth_hiderebirthrespawntimer() {
@@ -726,7 +726,7 @@ function end_ml_p3_exfil() {
     end_trans_1_obj(var_0, level.teamdata[var_0.team]["alivePlayers"]);
     end_jugg_maze();
     var_0 scripts\mp\playerlogic::addtoalivecount("rebirth1");
-    scripts\mp\gametypes\br::ref_13f21(var_0, "rebirth1");
+    scripts\mp\gametypes\br::ref_13F21(var_0, "rebirth1");
     var_1 = scripts\mp\gametypes\br::dynamic_door(var_0);
 
     if(!var_1) {
@@ -816,8 +816,8 @@ function end_game_win(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  if(isDefined(level.obit_activation) && isDefined(level.obit_activation.ref_121ad) && isDefined(level.obit_activation.ref_129d1) && var_0.team == level.obit_activation.ref_129d1) {
-    var_9 *= level.obit_activation.ref_121ad;
+  if(isDefined(level.obit_activation) && isDefined(level.obit_activation.ref_121AD) && isDefined(level.obit_activation.ref_129D1) && var_0.team == level.obit_activation.ref_129D1) {
+    var_9 *= level.obit_activation.ref_121AD;
   }
 
   var_12 = var_11["deadPlayers"];
@@ -830,14 +830,14 @@ function end_game_win(var_0, var_1, var_2, var_3) {
 
   foreach(var_15 in var_12) {
     if(isDefined(var_15) && isDefined(var_15.player) && var_15.player != var_0) {
-      if(var_15.player.ref_12ca1 > 0) {
-        var_15.player.ref_12ca1 = int(max(0, var_15.player.ref_12ca1 - var_9));
+      if(var_15.player.ref_12CA1 > 0) {
+        var_15.player.ref_12CA1 = int(max(0, var_15.player.ref_12CA1 - var_9));
 
-        if(!isDefined(var_15.player.ref_12ca3)) {
-          var_15.player.ref_12ca3 = 0;
+        if(!isDefined(var_15.player.ref_12CA3)) {
+          var_15.player.ref_12CA3 = 0;
         }
 
-        var_15.player.ref_12ca3 += var_9;
+        var_15.player.ref_12CA3 += var_9;
         var_13 = 1;
       }
     }
@@ -871,7 +871,7 @@ function end_reach_wind_room() {
 }
 
 function end_unlock_silo() {
-  if(!istrue(level.disable_super_in_turret.ref_12ca4)) {
+  if(!istrue(level.disable_super_in_turret.ref_12CA4)) {
     return;
   }
 
@@ -887,20 +887,20 @@ function end_unlock_silo() {
 
   thread enable_motionblur();
 
-  if(isDefined(level.disable_super_in_turret.ref_12a7b)) {
-    var_0.ref_12ca1 = level.disable_super_in_turret.ref_12a7b;
+  if(isDefined(level.disable_super_in_turret.ref_12A7B)) {
+    var_0.ref_12CA1 = level.disable_super_in_turret.ref_12A7B;
   } else {
-    var_1 = int(min(level.br_circle.circleindex, level.disable_super_in_turret.ref_12ca1.size - 1));
+    var_1 = int(min(level.br_circle.circleindex, level.disable_super_in_turret.ref_12CA1.size - 1));
     var_1 = int(max(var_1, 0));
-    var_0.ref_12ca1 = level.disable_super_in_turret.ref_12ca1[var_1];
+    var_0.ref_12CA1 = level.disable_super_in_turret.ref_12CA1[var_1];
 
     if(istrue(level.disable_super_in_turret.ref_14094)) {
-      var_0.ref_12ca1 = level.disable_super_in_turret.ref_1452f;
+      var_0.ref_12CA1 = level.disable_super_in_turret.ref_1452F;
     }
   }
 
-  if(!isDefined(var_0.ref_12ca1)) {
-    var_2 = "Respawn delay was not properly set. scr_br_rebirth_respawn_delay or scr_br_rebirth_respawn_delay_circle should have been set. Defaulting to 30 'level.br_circle.circleIndex' is set to " + scripts\engine\utility::ter_op(isDefined(level.br_circle.circleindex), level.br_circle.circleindex, "undefined") + " " + "'level.brGametype.rebirthDelayOverride' is set to " + scripts\engine\utility::ter_op(isDefined(level.disable_super_in_turret.ref_12a7b), level.disable_super_in_turret.ref_12a7b, "undefined");
+  if(!isDefined(var_0.ref_12CA1)) {
+    var_2 = "Respawn delay was not properly set. scr_br_rebirth_respawn_delay or scr_br_rebirth_respawn_delay_circle should have been set. Defaulting to 30 'level.br_circle.circleIndex' is set to " + scripts\engine\utility::ter_op(isDefined(level.br_circle.circleindex), level.br_circle.circleindex, "undefined") + " " + "'level.brGametype.rebirthDelayOverride' is set to " + scripts\engine\utility::ter_op(isDefined(level.disable_super_in_turret.ref_12A7B), level.disable_super_in_turret.ref_12A7B, "undefined");
     var_3 = "\n";
     var_4 = getarraykeys(game["flags"]);
 
@@ -910,7 +910,7 @@ function end_unlock_silo() {
 
     var_2 += var_3;
     scripts\mp\utility\script::laststand_dogtags(var_2);
-    var_0.ref_12ca1 = 30;
+    var_0.ref_12CA1 = 30;
   }
 
   if(getdvarint("rebirth_no_respawn_bug_check", 1) == 1 && isalive(var_0)) {
@@ -921,21 +921,21 @@ function end_unlock_silo() {
 
   brrebirth_resetrebirthrespawntimervengeanceflag(var_0);
   brrebirth_showrebirthrespawntimer(var_0);
-  brrebirth_setrebirthrespawntimervalue(var_0, var_0.ref_12ca1);
-  var_0.ref_12ca3 = 0;
+  brrebirth_setrebirthrespawntimervalue(var_0, var_0.ref_12CA1);
+  var_0.ref_12CA3 = 0;
 
-  while(var_0.ref_12ca1 > 0) {
+  while(var_0.ref_12CA1 > 0) {
     if(isalive(var_0)) {
-      var_0.ref_12ca1 = 0;
+      var_0.ref_12CA1 = 0;
     } else {
-      brrebirth_setrebirthrespawntimervalue(var_0, var_0.ref_12ca1);
+      brrebirth_setrebirthrespawntimervalue(var_0, var_0.ref_12CA1);
     }
 
-    brrebirth_setrebirthrespawntimerdeltavalue(var_0, var_0.ref_12ca3);
-    var_0 scripts\mp\gametypes\br_public::updatebrscoreboardstat("respawnInSeconds", var_0.ref_12ca1);
-    var_0.ref_12ca3 = 0;
+    brrebirth_setrebirthrespawntimerdeltavalue(var_0, var_0.ref_12CA3);
+    var_0 scripts\mp\gametypes\br_public::updatebrscoreboardstat("respawnInSeconds", var_0.ref_12CA1);
+    var_0.ref_12CA3 = 0;
     wait 1;
-    var_0.ref_12ca1--;
+    var_0.ref_12CA1--;
   }
 
   brrebirth_hiderebirthrespawntimer(var_0);
@@ -980,7 +980,7 @@ function empdrone_gameendedthink() {
 
   var_0 = self;
 
-  if(!istrue(level.disable_super_in_turret.ref_1428b)) {
+  if(!istrue(level.disable_super_in_turret.ref_1428B)) {
     var_0 = spawnStruct();
     var_0.player = self;
     var_0.viphud_hidefromplayer = self.lastkilledby;
@@ -1005,7 +1005,7 @@ function end_jugg_maze() {
 
   var_0 = level.teamdata[self.team]["deadPlayers"];
 
-  if(istrue(level.disable_super_in_turret.ref_1428b)) {
+  if(istrue(level.disable_super_in_turret.ref_1428B)) {
     var_0 = scripts\engine\utility::array_remove(var_0, self);
   } else {
     var_1 = [];
@@ -1034,7 +1034,7 @@ function enable_oob_immunity_on_riders(var_0, var_1) {
 
   var_2.respawningfromtoken = 1;
 
-  if(istrue(level.disable_super_in_turret.ref_12c91)) {
+  if(istrue(level.disable_super_in_turret.ref_12C91)) {
     var_2 notify("started_spawnPlayer");
   }
 
@@ -1047,17 +1047,17 @@ function enable_oob_immunity_on_riders(var_0, var_1) {
   end_trans_1_obj(var_2, var_1);
   end_jugg_maze();
   var_2 scripts\mp\playerlogic::addtoalivecount("rebirth2");
-  scripts\mp\gametypes\br::ref_13f21(var_2, "rebirth2");
+  scripts\mp\gametypes\br::ref_13F21(var_2, "rebirth2");
   var_2 scripts\mp\gametypes\br_pickups::addrespawntoken(1);
   var_3 = 0;
 
-  if(istrue(level.disable_super_in_turret.ref_12c92)) {
-    var_3 = var_2 scripts\mp\gametypes\br_gulag::ref_126e8();
+  if(istrue(level.disable_super_in_turret.ref_12C92)) {
+    var_3 = var_2 scripts\mp\gametypes\br_gulag::ref_126E8();
   }
 
   var_4 = scripts\mp\gametypes\br_public::relic_nuketimer_gettimeformission() / 1000;
-  var_5 = scripts\mp\gametypes\br_gulag::ref_125be(0, var_4);
-  var_6 = scripts\mp\gametypes\br_gulag::ref_1263e(var_5);
+  var_5 = scripts\mp\gametypes\br_gulag::ref_125BE(0, var_4);
+  var_6 = scripts\mp\gametypes\br_gulag::ref_1263E(var_5);
   self.forcespawnorigin = var_6;
 
   if(var_3) {
@@ -1072,10 +1072,10 @@ function enable_oob_immunity_on_riders(var_0, var_1) {
   var_2 scripts\mp\playerlogic::spawnplayer(undefined, 0);
   var_2 scripts\cp_mp\execution::_clearexecution();
   var_2 scripts\mp\gametypes\br_pickups::initplayer();
-  var_2 scripts\mp\gametypes\br_spectate::ref_1252a();
+  var_2 scripts\mp\gametypes\br_spectate::ref_1252A();
   var_2.respawningfromtoken = undefined;
   brrebirth_resetrebirthrespawntimervengeanceflag(var_2);
-  var_2 thread scripts\mp\gametypes\br_gulag::ref_13dcb(20);
+  var_2 thread scripts\mp\gametypes\br_gulag::ref_13DCB(20);
   end_loop_emp_spark_vfx(var_2, var_5, var_6);
 }
 
@@ -1092,10 +1092,10 @@ function end_loop_emp_spark_vfx(var_0, var_1) {
   }
 
   scripts\mp\gametypes\br::scriptednode(self);
-  ref_12a7d();
+  ref_12A7D();
 
   if(!isDefined(var_0)) {
-    var_0 = scripts\mp\gametypes\br_gulag::ref_125be();
+    var_0 = scripts\mp\gametypes\br_gulag::ref_125BE();
   }
 
   var_2 = var_0.origin;
@@ -1118,13 +1118,13 @@ function end_loop_emp_spark_vfx(var_0, var_1) {
   self playerhide();
   thread scripts\mp\gametypes\br_gulag::ref_12524(var_5);
   waitframe();
-  ref_1264e();
+  ref_1264E();
 
   if(getdvarint("scr_skip_respawn_gate", 1) == 0) {
-    scripts\mp\gametypes\br_public::ref_126ed();
+    scripts\mp\gametypes\br_public::ref_126ED();
   }
 
-  scripts\mp\gametypes\br_public::ref_1252b();
+  scripts\mp\gametypes\br_public::ref_1252B();
 
   if(isDefined(var_1)) {
     var_5.origin = var_2;
@@ -1146,8 +1146,8 @@ function end_loop_emp_spark_vfx(var_0, var_1) {
   ref_12677(1);
   var_6 = 0;
 
-  if(isDefined(level.ref_121cc)) {
-    var_6 = level.ref_121cc;
+  if(isDefined(level.ref_121CC)) {
+    var_6 = level.ref_121CC;
   }
 
   if(!scripts\mp\gametypes\br_public::uniquelootitemid()) {
@@ -1158,12 +1158,12 @@ function end_loop_emp_spark_vfx(var_0, var_1) {
     self setclientomnvar("ui_show_spectateHud", -1);
   }
 
-  scripts\mp\gametypes\br_gulag::ref_12c7a();
+  scripts\mp\gametypes\br_gulag::ref_12C7A();
   scripts\mp\gametypes\br_armor::searchcirclesize();
   scripts\mp\gametypes\br_quest_util::ref_12072();
   scripts\mp\gametypes\br_rewards::ref_12072();
   scripts\mp\gametypes\br_pickups::removerespawntoken();
-  scripts\mp\gametypes\br_gametypes::ref_12e05("giveStartingPlunder");
+  scripts\mp\gametypes\br_gametypes::ref_12E05("giveStartingPlunder");
   var_7 = level.ph_setfinalkillcamwinner > 0 && randomfloat(1) < level.ph_setfinalkillcamwinner;
 
   if(istrue(var_7) && isDefined(level.disable_super_in_turret) && isDefined(level.disable_super_in_turret.br_ammo_player_is_maxed_out)) {
@@ -1174,7 +1174,7 @@ function end_loop_emp_spark_vfx(var_0, var_1) {
     }
 
     if(var_8 < level.disable_super_in_turret.botpickskinid) {
-      thread ref_1268c(var_2);
+      thread ref_1268C(var_2);
       wait 1.5;
     }
   }
@@ -1188,7 +1188,7 @@ function end_loop_emp_spark_vfx(var_0, var_1) {
   waitframe();
   var_5 delete();
 
-  if(istrue(level.ref_133ef)) {
+  if(istrue(level.ref_133EF)) {
     scripts\mp\gametypes\br_skydive_protection::toma_strike_munitionused(1);
   }
 
@@ -1209,7 +1209,7 @@ function end_loop_emp_spark_vfx(var_0, var_1) {
   scripts\mp\gametypes\br_public::dmztut_endgamewithreward("rebirth_redeploy", self);
 }
 
-function ref_1264e() {
+function ref_1264E() {
   self notify("rebirthRespawn");
   self.health = self.maxhealth;
   scripts\mp\healthoverlay::onexitdeathsdoor(1);
@@ -1217,7 +1217,7 @@ function ref_1264e() {
   scripts\mp\gametypes\br_public::updatebrscoreboardstat("isRespawning", 0);
 }
 
-function ref_12a7d() {
+function ref_12A7D() {
   if(isDefined(level.deletescriptableinstanceaftertime) || getdvarint("scr_br_fc_loadouts", 1) != 0) {
     self.set_shouldrespawn = 1;
     return;
@@ -1238,7 +1238,7 @@ function ref_12677(var_0) {
 function enable_spawner() {
   var_0 = level.deletescriptableinstanceaftertime;
 
-  if(isDefined(level.ref_12a7d)) {
+  if(isDefined(level.ref_12A7D)) {
     var_1 = 0;
 
     if(isDefined(level.br_circle) && isDefined(level.br_circle.circleindex)) {
@@ -1248,12 +1248,12 @@ function enable_spawner() {
         var_2 = level.disable_super_in_turret.startingloadoutindex;
       }
 
-      var_1 = min(level.br_circle.circleindex + var_2, level.ref_12a7d.size);
+      var_1 = min(level.br_circle.circleindex + var_2, level.ref_12A7D.size);
       var_1 = int(var_1);
     }
 
     if(isDefined(level.rebirthloadoutlist[var_1])) {
-      var_0 = level.ref_12a7d[var_1][level.rebirthloadoutlist[var_1]];
+      var_0 = level.ref_12A7D[var_1][level.rebirthloadoutlist[var_1]];
     }
   }
 
@@ -1263,9 +1263,9 @@ function enable_spawner() {
 function enable_spawner_after_vehicle_death() {
   var_0 = 0;
 
-  if(isDefined(level.ref_12a7d)) {
+  if(isDefined(level.ref_12A7D)) {
     if(isDefined(level.br_circle) && isDefined(level.br_circle.circleindex)) {
-      if(level.br_circle.circleindex == level.ref_12a7d.size - 1) {
+      if(level.br_circle.circleindex == level.ref_12A7D.size - 1) {
         var_0 = 1;
       }
     }
@@ -1275,15 +1275,15 @@ function enable_spawner_after_vehicle_death() {
 }
 
 function end_intro_obj() {
-  if(istrue(level.disable_super_in_turret.loadoutrestore) && isDefined(self.ref_12eb0)) {
-    scripts\mp\gametypes\br::ref_125fb();
+  if(istrue(level.disable_super_in_turret.loadoutrestore) && isDefined(self.ref_12EB0)) {
+    scripts\mp\gametypes\br::ref_125FB();
   } else {
     level.deletescriptableinstanceaftertime = enable_spawner();
     var_0 = enable_spawner_after_vehicle_death();
     scripts\mp\gametypes\br::searchcircleorigin(0, 1, var_0);
   }
 
-  if(isDefined(level.obit_activation) && level.obit_activation.ref_129da == 1) {
+  if(isDefined(level.obit_activation) && level.obit_activation.ref_129DA == 1) {
     scripts\mp\gametypes\br::disablearmorykiosk();
   }
 
@@ -1333,7 +1333,7 @@ function rocket_attack_min_cooldown() {
 }
 
 function circletimer(var_0) {
-  if(istrue(level.disable_super_in_turret.ref_12ca4)) {
+  if(istrue(level.disable_super_in_turret.ref_12CA4)) {
     var_1 = rocket_attack_min_cooldown();
 
     if(var_0 >= var_1) {
@@ -1346,10 +1346,10 @@ function circletimer(var_0) {
 }
 
 function loadoutcustomperkdiscount() {
-  level.disable_super_in_turret.ref_12ca4 = 0;
+  level.disable_super_in_turret.ref_12CA4 = 0;
   level.disable_super_in_turret.useneverendingresurgence = undefined;
   brrebirth_initdialogrespawndisabled();
-  scripts\mp\gametypes\br_gametypes::ref_12e05("rebirthDisable");
+  scripts\mp\gametypes\br_gametypes::ref_12E05("rebirthDisable");
 
   foreach(var_1 in level.players) {
     if(!isDefined(var_1)) {
@@ -1358,30 +1358,30 @@ function loadoutcustomperkdiscount() {
 
     scripts\mp\gametypes\br_killstreaks::isbrsquadleader(var_1, "respawn_disabled", undefined, 2);
     var_1 setclientomnvar("ui_br_plunder_extract_end_time", 0);
-    var_1 scripts\mp\gametypes\br_gametypes::ref_12e05("playerRebirthDisable");
+    var_1 scripts\mp\gametypes\br_gametypes::ref_12E05("playerRebirthDisable");
   }
 
   scripts\mp\gametypes\br_public::brleaderdialog("rebirth_disabled");
 }
 
 function timeoutonabandoneddelay(var_0) {
-  if(!isDefined(level.ref_12a7d)) {
-    level.ref_12a7d = [];
+  if(!isDefined(level.ref_12A7D)) {
+    level.ref_12A7D = [];
   }
 
-  var_1 = level.ref_12a7d.size;
+  var_1 = level.ref_12A7D.size;
   var_2 = tablelookupgetnumcols(var_0) - 1;
-  level.ref_12a7d[var_1] = [];
+  level.ref_12A7D[var_1] = [];
 
   for(var_3 = 0; var_3 < var_2; var_3++) {
-    level.ref_12a7d[var_1][level.ref_12a7d[var_1].size] = init_structs_mp_don3(var_3, var_0);
+    level.ref_12A7D[var_1][level.ref_12A7D[var_1].size] = init_structs_mp_don3(var_3, var_0);
   }
 
   level.rebirthloadoutlist = [];
 
-  foreach(var_6, var_5 in level.ref_12a7d) {
-    if(isDefined(level.ref_12a7d[var_6]) && level.ref_12a7d[var_6].size > 0) {
-      level.rebirthloadoutlist[var_6] = randomintrange(0, level.ref_12a7d[var_6].size);
+  foreach(var_6, var_5 in level.ref_12A7D) {
+    if(isDefined(level.ref_12A7D[var_6]) && level.ref_12A7D[var_6].size > 0) {
+      level.rebirthloadoutlist[var_6] = randomintrange(0, level.ref_12A7D[var_6].size);
     }
   }
 }
@@ -1423,8 +1423,8 @@ function tomastrike_findoptimallaunchpos() {
     return;
   }
 
-  if(!isDefined(level.disable_super_in_turret.ref_1452e)) {
-    level.disable_super_in_turret.ref_1452e = [60, 30];
+  if(!isDefined(level.disable_super_in_turret.ref_1452E)) {
+    level.disable_super_in_turret.ref_1452E = [60, 30];
   }
 
   thread ref_14013();
@@ -1433,71 +1433,71 @@ function tomastrike_findoptimallaunchpos() {
 function ref_14013() {
   level endon("game_ended");
   var_0 = 0;
-  level.disable_super_in_turret.ref_1452f = level.disable_super_in_turret.ref_1452e[var_0];
+  level.disable_super_in_turret.ref_1452F = level.disable_super_in_turret.ref_1452E[var_0];
   scripts\mp\flags::gameflagwait("prematch_done");
   scripts\mp\flags::gameflagwait("prematch_fade_done");
   level waittill("infils_ready");
 
-  while(level.disable_super_in_turret.ref_12ca4) {
-    while(level.disable_super_in_turret.ref_1452f > 0) {
+  while(level.disable_super_in_turret.ref_12CA4) {
+    while(level.disable_super_in_turret.ref_1452F > 0) {
       wait 1;
-      level.disable_super_in_turret.ref_1452f--;
+      level.disable_super_in_turret.ref_1452F--;
     }
 
     wait 1;
-    var_0 = int(min(var_0 + 1, level.disable_super_in_turret.ref_1452e.size - 1));
-    level.disable_super_in_turret.ref_1452f = level.disable_super_in_turret.ref_1452e[var_0];
+    var_0 = int(min(var_0 + 1, level.disable_super_in_turret.ref_1452E.size - 1));
+    level.disable_super_in_turret.ref_1452F = level.disable_super_in_turret.ref_1452E[var_0];
   }
 }
 
 function end_breach_fx_structs() {
   self endon("death_or_disconnect");
   self endon("rebirth_remove_spawn_protection");
-  self.ref_12a78 = 1;
+  self.ref_12A78 = 1;
 
   while(!self isonground()) {
     waitframe();
   }
 
-  self.ref_12a78 = 0;
+  self.ref_12A78 = 0;
   self notify("rebirth_remove_spawn_protection");
 }
 
 function enablesplitscreen() {
   self endon("death_or_disconnect");
   self endon("rebirth_remove_launcher_protection");
-  self.ref_12a75 = 1;
+  self.ref_12A75 = 1;
 
   while(!self isonground()) {
     waitframe();
   }
 
-  self.ref_12a75 = 0;
+  self.ref_12A75 = 0;
   self notify("rebirth_remove_launcher_protection");
 }
 
 function end_chopper_boss() {
   self endon("death_or_disconnect");
   self endon("rebirth_remove_spawn_protection");
-  self.ref_12a78 = 1;
+  self.ref_12A78 = 1;
   self waittill("weapon_fired");
-  self.ref_12a78 = 0;
+  self.ref_12A78 = 0;
   self notify("rebirth_remove_spawn_protection");
 }
 
 function end_flares(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(level.ref_12a78) {
-    if(isDefined(var_1.ref_12a78) && var_1.ref_12a78 == 1) {
-      var_3 *= level.ref_12a79;
+  if(level.ref_12A78) {
+    if(isDefined(var_1.ref_12A78) && var_1.ref_12A78 == 1) {
+      var_3 *= level.ref_12A79;
     }
 
-    if(isDefined(var_2) && isDefined(var_2.ref_12a75) && var_2.ref_12a75 == 1) {
+    if(isDefined(var_2) && isDefined(var_2.ref_12A75) && var_2.ref_12A75 == 1) {
       switch (var_4) {
         case "MOD_EXPLOSIVE":
         case "MOD_GRENADE_SPLASH":
         case "MOD_GRENADE":
         case "MOD_PROJECTILE_SPLASH":
-          var_3 *= level.ref_12a77;
+          var_3 *= level.ref_12A77;
           break;
       }
     }
@@ -1538,7 +1538,7 @@ function end_nuke_vault() {
   var_1 = scripts\mp\gametypes\br_circle::relic_amped_pick_random_valid_player(1);
   var_2 = max(0, var_1 + var_0);
   var_3 = getdvarfloat("scr_br_dropbag_delay", var_2);
-  scripts\mp\gametypes\br_gametypes::ref_12b10("dropBagDelay", var_3);
+  scripts\mp\gametypes\br_gametypes::ref_12B10("dropBagDelay", var_3);
 }
 
 function ref_12181() {
@@ -1546,7 +1546,7 @@ function ref_12181() {
   return var_0;
 }
 
-function ref_1268c(var_0) {
+function ref_1268C(var_0) {
   if(scripts\mp\gametypes\br_gametypes::unset_relic_aggressive_melee("circle")) {
     return;
   }
@@ -1590,7 +1590,7 @@ function ref_1268c(var_0) {
 }
 
 function brrebirth_initneverendingresurgence() {
-  scripts\mp\gametypes\br_gametypes::ref_12b11("isTeamEliminated", &brrebirth_isteameliminated);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("isTeamEliminated", &brrebirth_isteameliminated);
   level.disable_super_in_turret.useneverendingresurgence = 1;
   level.supportnovalidspectateplayer = 1;
 }

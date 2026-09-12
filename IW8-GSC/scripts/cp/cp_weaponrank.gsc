@@ -24,8 +24,8 @@ function onplayerconnect() {
         }
 
         var_3 = getdvarint("scr_weaponxp_limit", 40000);
-        var_0.ref_11b7e = var_3;
-        var_0.ref_13bfc = 0;
+        var_0.ref_11B7E = var_3;
+        var_0.ref_13BFC = 0;
         var_0.ref_14677 = [];
 
         foreach(var_3 in level.weaponranktable.maxweaponranks) {
@@ -209,7 +209,7 @@ function giveplayerweaponxp(var_0, var_1, var_2) {
   var_14 = getmaxweaponrankforrootweapon(var_3);
   var_15 = self getplayerdata("common", "sharedProgression", "weaponLevel", var_3, "prestige");
   var_16 = int(min(getweaponrankforxp(var_13), var_14));
-  scripts\cp\cp_analytics::ref_119b3(var_0, var_15, var_16, var_2, var_1);
+  scripts\cp\cp_analytics::ref_119B3(var_0, var_15, var_16, var_2, var_1);
 
   if(var_9 < var_16) {
     var_17 = "weapon_rank_up_0_4";

@@ -99,7 +99,7 @@ function clear_and_give_killstreak_loadout_demo(var_0) {
   var_1 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_0.team, var_0.squadindex);
 
   foreach(var_3 in var_1) {
-    var_3 scripts\mp\utility\lower_message::ref_1316e("br_assassination_notargets", undefined, 5);
+    var_3 scripts\mp\utility\lower_message::ref_1316E("br_assassination_notargets", undefined, 5);
   }
 
   var_5 = "mp/loot/br/default/lootset_cache_lege.csv";

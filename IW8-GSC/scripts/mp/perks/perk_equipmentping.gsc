@@ -118,6 +118,6 @@ function markasrelaysource(var_0) {
   }
 
   self.relaysource[var_1] = 1;
-  var_0 scripts\engine\utility::ref_143b9(10, "death_or_disconnect");
+  var_0 scripts\engine\utility::ref_143B9(10, "death_or_disconnect");
   self.relaysource[var_1] = 0;
 }

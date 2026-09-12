@@ -105,7 +105,7 @@ function set_roaming(var_0) {
   }
 }
 
-function ref_130ed(var_0) {
+function ref_130ED(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
     self.settings.ref_13898 = var_0;
     return;
@@ -135,15 +135,15 @@ function set_suspend_at_end_path(var_0) {
   }
 }
 
-function ref_130fe(var_0) {
+function ref_130FE(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
-    self.settings.ref_13f14 = var_0;
+    self.settings.ref_13F14 = var_0;
     return;
   }
 
   if(isDefined(level.all_convoys) && level.all_convoys.size > 0) {
     foreach(var_2 in level.all_convoys) {
-      var_2.settings.ref_13f14 = var_0;
+      var_2.settings.ref_13F14 = var_0;
     }
 
     return;
@@ -206,7 +206,7 @@ function set_convoy_durations_modifier(var_0) {
   }
 }
 
-function ref_1307d(var_0) {
+function ref_1307D(var_0) {
   if(scripts\cp\cp_convoy_manager_code::is_convoy()) {
     scripts\cp\cp_convoy_manager_code::toggle_trucks_disable_leave(var_0);
     return;

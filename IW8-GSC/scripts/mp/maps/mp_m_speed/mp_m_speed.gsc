@@ -15,17 +15,17 @@ function main() {
   scripts\mp\compass::setupminimap("compass_map_mp_m_speed", "codcaster_compass_map_mp_m_speed");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
   setDvar("r_umbraMinObjectContribution", 8);
-  scripts\cp_mp\utility\game_utility::ref_12b3b();
+  scripts\cp_mp\utility\game_utility::ref_12B3B();
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "woodland";
-  thread ref_139c6();
+  thread ref_139C6();
   thread player_exfil_struct();
-  thread ref_136ad();
+  thread ref_136AD();
 }
 
-function ref_139c6() {
+function ref_139C6() {
   var_0 = getEnt("crane", "targetname");
   var_1 = getEntArray("crane_bits", "targetname");
 
@@ -34,10 +34,10 @@ function ref_139c6() {
   }
 
   var_0.ref_12149 = var_0.angles;
-  thread ref_139c8(var_0);
+  thread ref_139C8(var_0);
 }
 
-function ref_139c8(var_0) {
+function ref_139C8(var_0) {
   level endon("game_ended");
   var_1 = 0.75;
 
@@ -50,18 +50,18 @@ function ref_139c8(var_0) {
   }
 }
 
-function ref_136ad() {
+function ref_136AD() {
   var_0 = spawn("trigger_radius", (-20, 2235, 190), 0, 32, 100);
-  thread ref_144ff(var_0);
+  thread ref_144FF(var_0);
   var_1 = spawn("trigger_radius", (-216, 2236, 190), 0, 32, 100);
-  thread ref_144ff(var_1);
+  thread ref_144FF(var_1);
   var_2 = spawn("trigger_radius", (-700, 3040, 65), 0, 128, 100);
-  thread ref_144ff(var_2);
+  thread ref_144FF(var_2);
   var_3 = spawn("trigger_radius", (-450, 1375, 125), 0, 128, 100);
-  thread ref_144ff(var_3);
+  thread ref_144FF(var_3);
 }
 
-function ref_144ff(var_0) {
+function ref_144FF(var_0) {
   for(;;) {
     self waittill("trigger", var_1);
 
@@ -69,25 +69,25 @@ function ref_144ff(var_0) {
       continue;
     }
 
-    if(!isDefined(self.ref_126ce)) {
-      self.ref_126ce = [];
+    if(!isDefined(self.ref_126CE)) {
+      self.ref_126CE = [];
     }
 
-    if(scripts\engine\utility::array_contains(self.ref_126ce, var_1.guid)) {
+    if(scripts\engine\utility::array_contains(self.ref_126CE, var_1.guid)) {
       continue;
     }
 
-    self.ref_126ce = scripts\engine\utility::array_add(self.ref_126ce, var_1.guid);
+    self.ref_126CE = scripts\engine\utility::array_add(self.ref_126CE, var_1.guid);
 
     switch (var_0) {
       case "window":
         thread ref_14509(var_1);
         break;
       case "spawn_wall":
-        thread ref_144f5(var_1);
+        thread ref_144F5(var_1);
         break;
       case "mid_side":
-        thread ref_144e6(var_1);
+        thread ref_144E6(var_1);
         break;
     }
   }
@@ -120,10 +120,10 @@ function ref_14509(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }
 
-function ref_144f5(var_0) {
+function ref_144F5(var_0) {
   self endon("death_or_disconnect");
   var_1 = self.team;
   var_2 = self.guid;
@@ -158,10 +158,10 @@ function ref_144f5(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }
 
-function ref_144e6(var_0) {
+function ref_144E6(var_0) {
   self endon("death_or_disconnect");
   var_1 = self.team;
   var_2 = self.guid;
@@ -184,7 +184,7 @@ function ref_144e6(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }
 
 function player_exfil_struct() {

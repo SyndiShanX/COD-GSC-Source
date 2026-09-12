@@ -132,7 +132,7 @@ function large_transport_initinteract() {
 }
 
 function waitthenrespawnsnowballs() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("large_transport", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("large_transport", 1);
   var_0.id = 5;
   var_0.seatids["driver"] = 0;
   var_0.seatids["fl_rear"] = 6;
@@ -144,13 +144,13 @@ function waitthenrespawnsnowballs() {
 }
 
 function waitthencheckendgame() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("large_transport", 2000);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("large_transport", 2000);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("large_transport");
   var_0.class = "medium_heavy";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("large_transport");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("large_transport");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("large_transport", 10);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("large_transport", &large_transport_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("large_transport_mp", 3);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("large_transport_mp", 3);
 }
 
 function large_transport_initfx() {
@@ -173,7 +173,7 @@ function large_transport_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "large_transport", var_0);
   var_2.objweapon = getcompleteweaponname("large_transport_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 

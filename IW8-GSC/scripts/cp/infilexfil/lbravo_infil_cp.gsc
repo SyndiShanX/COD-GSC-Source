@@ -244,8 +244,8 @@ function spawninfilvehicle(var_0, var_1, var_2) {
   var_5 setscriptablepartstate("engine", "on", 0);
   var_5.infil = self;
 
-  if(isDefined(level.ref_1356f)) {
-    level thread[[level.ref_1356f]](var_5);
+  if(isDefined(level.ref_1356F)) {
+    level thread[[level.ref_1356F]](var_5);
   }
 
   return var_5;
@@ -828,7 +828,7 @@ function heli_wait_node(var_0, var_1, var_2) {
 
   if(isDefined(var_8.radius)) {
     self setneargoalnotifydist(var_8.radius);
-    scripts\engine\utility::ref_143a5("near_goal", "goal");
+    scripts\engine\utility::ref_143A5("near_goal", "goal");
   } else {
     self waittill("goal");
   }

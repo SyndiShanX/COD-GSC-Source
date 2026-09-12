@@ -3,7 +3,7 @@
  * Script: scripts\cp\maps\cp_landlord\cp_landlord_checkpoints.gsc
 *******************************************************************/
 
-function ref_131ed() {
+function ref_131ED() {
   level.getplunderextractionsites = &getplatformweaponrankxpmultiplier;
   level.getnextpayloadspawnmodule = &getnexthelimodule;
 }
@@ -29,6 +29,6 @@ function getplatformrankxpmultiplier() {
   thread scripts\cp\cp_objectives::run_objective("obj_overwatch", "primary");
 }
 
-function ref_11c5b() {}
+function ref_11C5B() {}
 
-function ref_11c5c() {}
+function ref_11C5C() {}

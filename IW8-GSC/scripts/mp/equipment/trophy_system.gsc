@@ -31,7 +31,7 @@ function trophy_used(var_0) {
   var_0 scripts\cp_mp\ent_manager::registerspawn(2, &sweeptrophy);
   thread scripts\mp\weapons::monitordisownedgrenade(self, var_0);
   thread trophy_hideandshowaftertime();
-  thread ref_13ddc(var_0);
+  thread ref_13DDC(var_0);
   var_0 waittill("missile_stuck", var_1);
   var_0 setotherent(self);
   var_0 setnodeploy(1);
@@ -69,11 +69,11 @@ function trophy_used(var_0) {
   thread trophy_deploy();
 }
 
-function ref_13ddc(var_0) {
+function ref_13DDC(var_0) {
   self endon("death");
   self endon("missile_stuck");
   var_0 endon("disconnect");
-  var_1 = scripts\engine\utility::ref_143b9(2, "touching_platform");
+  var_1 = scripts\engine\utility::ref_143B9(2, "touching_platform");
 
   if(var_1 == "timeout") {
     return;
@@ -85,8 +85,8 @@ function ref_13ddc(var_0) {
 }
 
 function tugofwar_tank(var_0) {
-  if(isDefined(level.ref_145f1)) {
-    foreach(var_2 in level.ref_145f1.ref_13c8d) {
+  if(isDefined(level.ref_145F1)) {
+    foreach(var_2 in level.ref_145F1.ref_13C8D) {
       if(var_2 == var_0) {
         return true;
       }
@@ -109,17 +109,17 @@ function trophy_deploy() {
   }
 
   wait 0.1;
-  thread ref_13dd5();
+  thread ref_13DD5();
   wait 0.2;
   self.headiconid = scripts\cp_mp\entityheadicons::setheadicon_factionimage(0, 20, undefined, undefined, undefined, undefined, 1);
   thread scripts\mp\weapons::outlineequipmentforowner(self);
-  thread trophy_watchprotection(45, 105625, &ref_13dda, &trophy_protectionsuccessful);
-  thread ref_13ddd();
+  thread trophy_watchprotection(45, 105625, &ref_13DDA, &trophy_protectionsuccessful);
+  thread ref_13DDD();
   thread scripts\mp\equipment_interact::remoteinteractsetup(&trophy_remote_destroy, 1, 1);
   thread scripts\mp\perks\perk_equipmentping::runequipmentping();
 }
 
-function ref_13dd5() {
+function ref_13DD5() {
   self endon("death");
   self setscriptablepartstate("effects", "activeDeployStart");
   wait trophy_getdeployanimtime();
@@ -205,8 +205,8 @@ function trophy_watchprotection(var_0, var_1, var_2, var_3) {
     level.mines = [];
   }
 
-  if(!isDefined(level.ref_123a9)) {
-    level.ref_123a9 = [];
+  if(!isDefined(level.ref_123A9)) {
+    level.ref_123A9 = [];
   }
 
   var_4 = trophy_castcontents();
@@ -218,7 +218,7 @@ function trophy_watchprotection(var_0, var_1, var_2, var_3) {
     var_6 = level.missiles;
     var_6 = level.mines;
     var_6 = level.projectilekillstreaks;
-    var_6 = level.ref_123a9;
+    var_6 = level.ref_123A9;
     var_7 = scripts\engine\utility::array_combine_multiple(var_6);
 
     foreach(var_9 in var_7) {
@@ -253,7 +253,7 @@ function trophy_watchprotection(var_0, var_1, var_2, var_3) {
           continue;
         }
 
-        if(var_12 scripts\cp_mp\vehicles\vehicle::isvehicle() && isDefined(var_12.ref_13df6) && isDefined(var_10.team) && var_12.ref_13df6 == var_10.team) {
+        if(var_12 scripts\cp_mp\vehicles\vehicle::isvehicle() && isDefined(var_12.ref_13DF6) && isDefined(var_10.team) && var_12.ref_13DF6 == var_10.team) {
           continue;
         }
       } else if(var_9 == self) {
@@ -277,7 +277,7 @@ function trophy_watchprotection(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_13dda() {
+function ref_13DDA() {
   return isDefined(self.owner);
 }
 
@@ -288,8 +288,8 @@ function trophy_protectionsuccessful(var_0) {
   self.owner scripts\mp\supers::hide_plunderboxes("super_trophy");
   self.usedcount++;
   var_1 = var_0.origin;
-  ref_119ce(var_0);
-  ref_13dd6(var_0);
+  ref_119CE(var_0);
+  ref_13DD6(var_0);
   var_2 = trophy_getbesttag(var_1);
   var_3 = trophy_getpartbytag(var_2);
   self setscriptablepartstate(var_3, "active", 0);
@@ -304,13 +304,13 @@ function trophy_protectionsuccessful(var_0) {
   }
 }
 
-function ref_13dd6(var_0) {
+function ref_13DD6(var_0) {
   var_0 setCanDamage(0);
   var_0.exploding = 1;
   var_0 stopsounds();
   scripts\cp\vehicles\vehicle_compass_cp::ondestroyedbytrophy();
   trophy_notifytrophytargetowner(var_0, "trophy_mp", self.owner);
-  ref_13ddb(var_0, var_0.owner, self.owner);
+  ref_13DDB(var_0, var_0.owner, self.owner);
 
   if(!var_0 scripts\mp\equipment::ondestroyedbytrophy()) {
     if(isDefined(var_0.streakname) && var_0.streakname == "cruise_predator") {
@@ -323,7 +323,7 @@ function ref_13dd6(var_0) {
   }
 }
 
-function ref_13ddb(var_0, var_1, var_2) {
+function ref_13DDB(var_0, var_1, var_2) {
   if(!isDefined(var_0.equipmentref) || var_0.equipmentref != "equip_snapshot_grenade") {
     return;
   }
@@ -342,13 +342,13 @@ function ref_13ddb(var_0, var_1, var_2) {
   scripts\mp\equipment\snapshot_grenade::ref_13435(var_1, var_2, var_5);
 }
 
-function ref_13ddd() {
+function ref_13DDD() {
   self endon("death");
-  ref_13dde();
+  ref_13DDE();
   thread trophy_shutdownanddestroy(undefined, 0);
 }
 
-function ref_13dde() {
+function ref_13DDE() {
   level endon("game_ended");
   var_0 = level.trophy.timeout;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0);
@@ -678,7 +678,7 @@ function trophy_cleanuponparentdeath(var_0, var_1) {
   self delete();
 }
 
-function ref_119ce(var_0) {
+function ref_119CE(var_0) {
   if(!isDefined(var_0) || !isPlayer(var_0.owner)) {
     return;
   }

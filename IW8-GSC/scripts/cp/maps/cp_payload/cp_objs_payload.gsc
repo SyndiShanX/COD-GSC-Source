@@ -57,7 +57,7 @@ function initpayloadobj(var_0, var_1) {
   var_0.apc_destroyed = 0;
   thread spawnapc(level);
   var_0 waittill("apc_spawned");
-  scripts\cp\cp_objectives::ref_11f80(var_0.apcwid);
+  scripts\cp\cp_objectives::ref_11F80(var_0.apcwid);
   var_0.timesapchitbymine = 0;
   var_0.rpgambusherskilled = 0;
   var_0.usepingsystem = 0;
@@ -80,14 +80,14 @@ function aigroundturret_shouldbegindismountturret() {
   self.goalheight = 48;
 }
 
-function ref_12dc2(var_0) {
+function ref_12DC2(var_0) {
   if(isDefined(self.spawnpoint.script_noteworthy) && self.spawnpoint.script_noteworthy == "rpg") {
-    thread ref_132af();
+    thread ref_132AF();
     return;
   }
 }
 
-function ref_132af(var_0) {
+function ref_132AF(var_0) {
   self endon("death");
 
   while(!isDefined(level.apc)) {
@@ -121,8 +121,8 @@ function startpayloadobj(var_0, var_1) {
   scripts\engine\utility::flag_wait("cp_armsrace_cs_completed");
   scripts\engine\utility::flag_wait("player_spawned_with_loadout");
   scripts\engine\utility::flag_wait("armsrace_interactions_initted");
-  thread ref_138c7();
-  thread ref_1380b();
+  thread ref_138C7();
+  thread ref_1380B();
   thread ref_13976();
   scripts\cp\cp_create_script_utility::ref_13529("payload_section_1_nodes");
   wait 2;
@@ -130,13 +130,13 @@ function startpayloadobj(var_0, var_1) {
   thread ref_14462(level);
   scripts\cp\cp_modular_spawning::run_spawn_module("payload_1_left");
   level.computer_debugtestloop = undefined;
-  thread ref_144ab();
+  thread ref_144AB();
   thread watchatminehitonpayload(var_0.apc);
   thread watchforminewarning(var_0.apc);
-  thread ref_144bb();
+  thread ref_144BB();
   thread watchforpayloadongoal(var_0.apc);
-  thread ref_144b3(var_0.apc, "payload_first_crate");
-  thread ref_144b3(var_0.apc, "payload_second_crate");
+  thread ref_144B3(var_0.apc, "payload_first_crate");
+  thread ref_144B3(var_0.apc, "payload_second_crate");
   level waittill("payload_reached_first_cache");
 }
 
@@ -151,7 +151,7 @@ function completepayloadobj(var_0) {
     level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_taco_apc_pilot_outro_tank_alive_10", "allies");
   }
 
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_apc_done");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_apc_done");
 }
 
 function ref_13865(var_0) {
@@ -161,7 +161,7 @@ function ref_13865(var_0) {
 
   scripts\engine\utility::flag_set("cp_armsrace_cs");
   scripts\engine\utility::flag_wait("cp_armsrace_cs_completed");
-  thread ref_1364e();
+  thread ref_1364E();
   level waittill("heli_trip_took_off");
 }
 
@@ -191,7 +191,7 @@ function hint_obj_name(var_0) {
 
 function mp_shipment_patch() {
   foreach(var_1 in level.players) {
-    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(2, 1, 1);
+    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340D(2, 1, 1);
   }
 
   wait 2;
@@ -288,11 +288,11 @@ function mark_as_bomb_vest_controller_holder(var_0) {
   var_2 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 
   foreach(var_4 in var_2) {
-    thread ref_12cd0(var_4);
+    thread ref_12CD0(var_4);
   }
 }
 
-function ref_12cd0(var_0) {
+function ref_12CD0(var_0) {
   level endon("game_ended");
   self endon("death");
   self.goalradius = 64;
@@ -317,7 +317,7 @@ function watchforminewarning(var_0) {
   level thread scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_taco_apc_mine_seen_10", "allies");
 }
 
-function ref_144ab() {
+function ref_144AB() {
   thread watchforpayloadspawngroup("payload_1", ["rpg_group1", "rooftop_snipers_1", "payload_section_1"]);
   thread watchforpayloadspawngroup("payload_2", "payload_rooftop_group1", "payload_apc_heli_1");
   thread watchforpayloadspawngroup("payload_3", "payload_rooftop_group1_b");
@@ -375,15 +375,15 @@ function registersquadspawners() {
   scripts\cp\cp_modular_spawning::registerambientgroup("payload_super", 10, 12, 18, 0.1, undefined, "payload_super", undefined, undefined, 10);
   scripts\cp\cp_modular_spawning::registerambientgroup("rpg_alley_1", 0, 3, 3, 0.1, undefined, "rpg_alley_1", undefined, undefined, 10);
   scripts\cp\cp_modular_spawning::registerambientgroup("rpg_alley_2", 0, 3, 3, 0.1, undefined, "rpg_alley_2", undefined, undefined, 10);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("rpg_alley_1", &ref_12dc2);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("rpg_alley_2", &ref_12dc2);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("rpg_group1", &ref_12dc2);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("aptBldg_rpg", &ref_12dc2);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("escort_intro_rpg", &ref_12dc2);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("rpg_alley_1", &ref_12DC2);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("rpg_alley_2", &ref_12DC2);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("rpg_group1", &ref_12DC2);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("aptBldg_rpg", &ref_12DC2);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("escort_intro_rpg", &ref_12DC2);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("rooftop_snipers_1", &select_top_roof_spawners);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("payload_rooftop_group1", &ref_12dc2);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("payload_rooftop_group1_b", &ref_12dc2);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("payload_super_rpg", &ref_12dc2);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("payload_rooftop_group1", &ref_12DC2);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("payload_rooftop_group1_b", &ref_12DC2);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("payload_super_rpg", &ref_12DC2);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("payload_super_sniper", &select_top_roof_spawners);
   scripts\engine\utility::flag_set("payload_spawn_functions_registered");
 }
@@ -499,25 +499,25 @@ function reset_target_group(var_0) {
 
   var_3 = undefined;
 
-  if(!isDefined(level.ref_11f6a)) {
-    level.ref_11f6a = 0;
+  if(!isDefined(level.ref_11F6A)) {
+    level.ref_11F6A = 0;
   }
 
   switch (var_0.group_name) {
     case "payload_rpg_1":
-      if(level.ref_11f6a == 1) {
+      if(level.ref_11F6A == 1) {
         var_3 = "payload_rpg_1";
       }
 
       break;
     case "payload_rpg_2":
-      if(level.ref_11f6a == 2) {
+      if(level.ref_11F6A == 2) {
         var_3 = "payload_rpg_2";
       }
 
       break;
     case "payload_rpg_3":
-      if(level.ref_11f6a >= 3) {
+      if(level.ref_11F6A >= 3) {
         var_3 = "payload_rpg_3";
       }
 
@@ -559,24 +559,24 @@ function getnextholdoutspawnmodule(var_0) {
   return var_3;
 }
 
-function ref_1293d(var_0) {
+function ref_1293D(var_0) {
   level endon("game_ended");
   self endon("death");
   wait 4;
   thread scripts\cp\cp_modular_spawning::set_script_origin_other_to_center_of_players();
 }
 
-function ref_12dcc(var_0) {
+function ref_12DCC(var_0) {
   var_1 = scripts\cp\cp_objectives::getobjectivestructfromref("obj_payload");
   var_2 = var_1.apc;
 
   if(isDefined(var_2)) {
-    thread ref_12dcd(var_2);
+    thread ref_12DCD(var_2);
     return;
   }
 }
 
-function ref_12dcd(var_0) {
+function ref_12DCD(var_0) {
   self endon("death");
   var_0 endon("death");
   var_1 = self;
@@ -739,7 +739,7 @@ function spawnapc(var_0) {
   var_6 = var_1;
   var_5.pathing_array = [];
   var_5.pathing_array[0] = var_6.origin;
-  ref_12c39(var_5);
+  ref_12C39(var_5);
   thread c4_crate_use();
 
   while(isDefined(var_6.target)) {
@@ -748,8 +748,8 @@ function spawnapc(var_0) {
   }
 
   var_5.health = 30000;
-  var_5.ref_13bf2 = 30000;
-  var_5.ref_11e7d = 80;
+  var_5.ref_13BF2 = 30000;
+  var_5.ref_11E7D = 80;
   var_5.little_bird_mg_enterend = 1;
   var_7 = [];
   var_8 = var_5.pathing_array.size;
@@ -771,10 +771,10 @@ function spawnapc(var_0) {
   var_5 startpathnodes(var_5.pathing_array, var_7);
   var_5.veh_pathtype = "constrained";
   var_0 notify("apc_spawned");
-  thread ref_144ac();
+  thread ref_144AC();
   thread watchforapcdeath();
-  thread ref_144be();
-  thread ref_1446e(var_5);
+  thread ref_144BE();
+  thread ref_1446E(var_5);
   objective_setplayintro(var_0.apcwid, 0);
   objective_state(var_0.apcwid, "current");
   objective_icon(var_0.apcwid, "icon_waypoint_objective_general");
@@ -783,7 +783,7 @@ function spawnapc(var_0) {
   apcstop(var_5);
 }
 
-function ref_144be() {
+function ref_144BE() {
   level endon("game_ended");
   self endon("death");
   self endon("apc_reached_goal");
@@ -797,7 +797,7 @@ function ref_144be() {
   }
 }
 
-function ref_144ac() {
+function ref_144AC() {
   level endon("game_ended");
   self endon("death");
   var_0 = self;
@@ -812,7 +812,7 @@ function ref_144ac() {
 
     var_1 = setup_soldier_stealth(var_10, var_5, var_1);
     thread losqueuelow(var_0);
-    var_16 = var_0.health / var_0.ref_13bf2 * 100;
+    var_16 = var_0.health / var_0.ref_13BF2 * 100;
 
     if(var_16 <= 75) {
       var_17 = 1;
@@ -859,22 +859,22 @@ function losqueuelow(var_0) {
     return;
   }
 
-  var_2 = var_1.health / var_1.ref_13bf2 * 100;
+  var_2 = var_1.health / var_1.ref_13BF2 * 100;
 
-  if(var_2 <= var_1.ref_11e7d) {
-    if(var_1.ref_11e7d >= 60) {
-      level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_taco_apc_tank_health_" + var_1.ref_11e7d + "_10", "allies");
-    } else if(var_1.ref_11e7d <= 0) {
+  if(var_2 <= var_1.ref_11E7D) {
+    if(var_1.ref_11E7D >= 60) {
+      level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_taco_apc_tank_health_" + var_1.ref_11E7D + "_10", "allies");
+    } else if(var_1.ref_11E7D <= 0) {
       level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_taco_apc_tank_status_00_10", "allies");
     } else {
-      level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_taco_apc_tank_status_" + var_1.ref_11e7d + "_10", "allies");
+      level scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_taco_apc_tank_status_" + var_1.ref_11E7D + "_10", "allies");
     }
 
     if(!isDefined(var_1)) {
       return;
     }
 
-    var_1.ref_11e7d = max(var_1.ref_11e7d - 20, 0);
+    var_1.ref_11E7D = max(var_1.ref_11E7D - 20, 0);
     self.watch_for_players_activating_juggmaze_map = gettime();
     return;
   }
@@ -949,7 +949,7 @@ function ref_14462(var_0) {
   var_1.shot_by_player = 1;
   var_1.updatebotpersonalitybasedonweapon = 1;
   apcstop(var_0);
-  thread ref_13bad(0);
+  thread ref_13BAD(0);
   var_3 = getdvarint("scr_skip_to_cache", 0);
   level notify("payload_reached_first_cache");
 
@@ -960,33 +960,33 @@ function ref_14462(var_0) {
   wait 1;
 
   if(!istrue(var_1.apc_destroyed)) {
-    thread ref_11d90(var_0);
+    thread ref_11D90(var_0);
   }
 
   if(var_3 <= 2) {
     level scripts\cp\maps\cp_armsrace\armsrace_objective\cp_armsrace_objective::docache2();
   }
 
-  scripts\cp\crate_drops\cp_crate_drops::ref_12c40("apc_escort_3");
+  scripts\cp\crate_drops\cp_crate_drops::ref_12C40("apc_escort_3");
 
   if(var_3 <= 3) {
     level thread scripts\cp\maps\cp_armsrace\armsrace_objective\cp_armsrace_objective::docache4();
   }
 
-  thread ref_1434f();
+  thread ref_1434F();
   level waittill("armsrace_cache4_almost_finished");
   thread ref_13609();
   level waittill("armsrace_cache_opened");
   scripts\engine\utility::flag_set("armsrace_cache_opened");
 }
 
-function ref_1434f() {
+function ref_1434F() {
   scripts\engine\utility::flag_wait("payload_tanks_killed");
   scripts\engine\utility::flag_wait("armsrace_cache_opened");
   scripts\cp\cp_objectives::run_objective("payload_exfil");
 }
 
-function ref_11d90(var_0) {
+function ref_11D90(var_0) {
   level endon("game_ended");
   self endon("death");
   var_1 = scripts\engine\utility::getStruct("payload_goal_while_cache2", "script_noteworthy").origin;
@@ -1042,7 +1042,7 @@ function watchforpayloadspawngroup(var_0, var_1, var_2) {
   }
 }
 
-function ref_144c8(var_0, var_1) {
+function ref_144C8(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
   var_2 = scripts\engine\utility::getStruct(var_0, "script_noteworthy").origin;
@@ -1066,38 +1066,38 @@ function watchforpayloadconvoygroup(var_0, var_1, var_2, var_3) {
   start_convoy(var_1, var_2, var_3);
 }
 
-function ref_144c7(var_0, var_1, var_2, var_3) {
+function ref_144C7(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   self endon("death");
   var_4 = scripts\engine\utility::getStruct(var_0, "script_noteworthy").origin;
   var_5 = scripts\engine\utility::getStruct(var_1, "script_noteworthy").origin;
   var_6 = scripts\engine\utility::getStruct(var_2, "script_noteworthy").origin;
   var_7 = scripts\engine\utility::getStruct(var_3, "script_noteworthy").origin;
-  level.ref_11f6a = 0;
+  level.ref_11F6A = 0;
 
   while(distance(self.origin, var_4) > 100) {
     wait 0.5;
   }
 
-  level.ref_11f6a = 1;
+  level.ref_11F6A = 1;
 
   while(distance(self.origin, var_5) > 100) {
     wait 0.5;
   }
 
-  level.ref_11f6a = 2;
+  level.ref_11F6A = 2;
 
   while(distance(self.origin, var_6) > 100) {
     wait 0.5;
   }
 
-  level.ref_11f6a = 3;
+  level.ref_11F6A = 3;
 
   while(distance(self.origin, var_7) > 100) {
     wait 0.5;
   }
 
-  level.ref_11f6a = 4;
+  level.ref_11F6A = 4;
 }
 
 function watchforrpgambush(var_0, var_1, var_2) {
@@ -1146,7 +1146,7 @@ function set_convoy_settings(var_0, var_1, var_2) {
   var_4 = level[[var_3]](var_0, var_1, var_2);
   wait 1;
   var_4 notify("able_to_deposit_driver");
-  var_4 scripts\cp\cp_convoy_manager::ref_1307d(0);
+  var_4 scripts\cp\cp_convoy_manager::ref_1307D(0);
   level waittill("despawn_" + var_0);
   var_4 thread scripts\cp\cp_convoy_manager::set_despawn_at_distance(1);
   var_4 thread scripts\cp\cp_convoy_manager::set_despawn_distance(5000);
@@ -1161,7 +1161,7 @@ function set_convoy_settings(var_0, var_1, var_2) {
 function vehomn_fadeoutcontrols() {
   level endon("game_ended");
   self waittill("death");
-  level thread scripts\cp\utility::ref_123fe("");
+  level thread scripts\cp\utility::ref_123FE("");
 }
 
 function watchforpayloadongoal(var_0) {
@@ -1188,7 +1188,7 @@ function watchforpayloadongoal(var_0) {
   }
 }
 
-function ref_144b3(var_0, var_1) {
+function ref_144B3(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
   var_2 = scripts\engine\utility::getStruct(var_0, "script_noteworthy").origin;
@@ -1197,10 +1197,10 @@ function ref_144b3(var_0, var_1) {
     wait 0.5;
   }
 
-  scripts\cp\crate_drops\cp_crate_drops::ref_12c40(var_1);
+  scripts\cp\crate_drops\cp_crate_drops::ref_12C40(var_1);
 }
 
-function ref_144bb() {
+function ref_144BB() {
   level endon("game_ended");
   self endon("death");
   var_0 = scripts\engine\utility::getStruct("payload_heli_VO1", "script_noteworthy");
@@ -1271,7 +1271,7 @@ function apcstart(var_0) {
 
   if(!istrue(var_0.should_enter_combat_after_checking_throwingknife)) {
     var_0.should_enter_combat_after_checking_throwingknife = 1;
-    level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_apc_escort");
+    level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_apc_escort");
     return;
   }
 }
@@ -1290,12 +1290,12 @@ function spawnatmines(var_0) {
     thread scripts\cp\equipment\cp_at_mine::at_mine_plant(var_4);
     thread watchatminedetonation(var_4);
     thread watchforapctrigger(var_4);
-    thread ref_144ad();
+    thread ref_144AD();
     waitframe();
   }
 }
 
-function ref_144ad() {
+function ref_144AD() {
   self endon("mine_triggered");
   self endon("mine_destroyed");
   self endon("death");
@@ -1372,7 +1372,7 @@ function watchatminedetonation(var_0) {
   level endon("obj_payload_completed");
   var_1 = var_0.apc;
   var_1 endon("death");
-  var_2 = scripts\engine\utility::ref_143ad("detonateExplosive", "mine_triggered");
+  var_2 = scripts\engine\utility::ref_143AD("detonateExplosive", "mine_triggered");
   var_0.atmines = scripts\engine\utility::array_remove(var_0.atmines, self);
 
   if(!isDefined(var_2)) {
@@ -1429,28 +1429,28 @@ function setdamagestate(var_0) {
 
   self.isattachmentvariantinvalid = var_0;
 
-  if(!isDefined(self.ref_119e4)) {
-    self.ref_119e4 = spawn("script_model", self.origin);
-    self.ref_119e4 linkTo(self, "tag_origin");
+  if(!isDefined(self.ref_119E4)) {
+    self.ref_119E4 = spawn("script_model", self.origin);
+    self.ref_119E4 linkTo(self, "tag_origin");
   }
 
   switch (var_0) {
     case 1:
     default:
       playFXOnTag(level._effect["vfx_payload_dmg_1"], self, "tag_origin");
-      self.ref_119e4 playLoopSound("scn_cp_apc_damage_01_lp");
+      self.ref_119E4 playLoopSound("scn_cp_apc_damage_01_lp");
       break;
     case 2:
       stopFXOnTag(level._effect["vfx_payload_dmg_1"], self, "tag_origin");
-      self.ref_119e4 stoploopsound();
+      self.ref_119E4 stoploopsound();
       playFXOnTag(level._effect["vfx_payload_dmg_2"], self, "tag_origin");
-      self.ref_119e4 playLoopSound("scn_cp_apc_damage_02_lp");
+      self.ref_119E4 playLoopSound("scn_cp_apc_damage_02_lp");
       break;
     case 3:
       stopFXOnTag(level._effect["vfx_payload_dmg_2"], self, "tag_origin");
-      self.ref_119e4 stoploopsound();
+      self.ref_119E4 stoploopsound();
       playFXOnTag(level._effect["vfx_payload_dmg_3"], self, "tag_origin");
-      self.ref_119e4 playLoopSound("scn_cp_apc_damage_03_lp");
+      self.ref_119E4 playLoopSound("scn_cp_apc_damage_03_lp");
       break;
   }
 }
@@ -1550,7 +1550,7 @@ function watchforhelideletion(var_0) {
   level notify("payload_delete_heli");
 }
 
-function ref_1364e() {
+function ref_1364E() {
   level endon("game_ended");
   var_0 = scripts\engine\utility::getStruct("payload_heli_spawn", "targetname");
   var_1 = scripts\engine\utility::getStruct("payload_heli_landing", "targetname");
@@ -1575,7 +1575,7 @@ function ref_1364e() {
   objective_setlabel(var_4, &"CP_ARMSDEALER/EXFIL_HEADER");
   objective_setshowoncompass(var_4, 1);
   objective_setminimapiconsize(var_4, "icon_regular");
-  scripts\cp\cp_objectives::ref_11f80(var_4);
+  scripts\cp\cp_objectives::ref_11F80(var_4);
   var_3 waittill("heli_taking_off");
   objective_delete(var_4);
   scripts\cp\cp_objectives::freeworldid("payload_exfil");
@@ -1798,7 +1798,7 @@ function trial_map(var_0, var_1) {
     var_2 thread scripts\cp\cp_kidnapper::setimmunetokidnapper(1);
     var_0.playerowner = var_2;
     var_2.currentturret = var_0;
-    thread ref_12b49(var_0);
+    thread ref_12B49(var_0);
     thread endturretusewatch(var_2, var_0);
     thread new_angles(var_2, var_0);
     self waittill("payload_end_turret_use");
@@ -1806,7 +1806,7 @@ function trial_map(var_0, var_1) {
   }
 }
 
-function ref_12b49(var_0) {
+function ref_12B49(var_0) {
   level endon("game_ended");
   self endon("death");
   self endon("payload_end_turret_use");
@@ -1840,7 +1840,7 @@ function endturretusewatch(var_0, var_1) {
 }
 
 function new_angles(var_0, var_1) {
-  var_0 scripts\engine\utility::ref_143a6("death", "disconnect", "last_stand");
+  var_0 scripts\engine\utility::ref_143A6("death", "disconnect", "last_stand");
   self notify("payload_end_turret_use");
 }
 
@@ -1866,7 +1866,7 @@ function monitor_fronttruck_death(var_0, var_1) {
 
 function interaction_disable_on_exit(var_0) {
   level endon("game_ended");
-  var_0 scripts\engine\utility::ref_143a5("death", "payload_reached_goal");
+  var_0 scripts\engine\utility::ref_143A5("death", "payload_reached_goal");
   self makeunusable();
 }
 
@@ -1887,7 +1887,7 @@ function ref_13535(var_0) {
   thread spawn_convoy(level, var_3, var_2);
 }
 
-function ref_135d1(var_0) {
+function ref_135D1(var_0) {
   var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_2 = "single-techo-cargo";
   var_3 = var_0;
@@ -1909,7 +1909,7 @@ function spawn_convoy(var_0, var_1, var_2) {
 function allow_driver_exit(var_0) {
   wait 1;
   var_0 notify("able_to_deposit_driver");
-  var_0 scripts\cp\cp_convoy_manager::ref_1307d(0);
+  var_0 scripts\cp\cp_convoy_manager::ref_1307D(0);
 }
 
 function select_bunker_server_one_spawners() {
@@ -1922,7 +1922,7 @@ function select_bunker_server_one_spawners() {
   }
 }
 
-function ref_138c7() {
+function ref_138C7() {
   var_0 = getEntArray("trigger_stop_module", "targetname");
 
   foreach(var_2 in var_0) {
@@ -1930,7 +1930,7 @@ function ref_138c7() {
   }
 }
 
-function ref_1380b() {
+function ref_1380B() {
   var_0 = getEntArray("trigger_start_module", "targetname");
 
   foreach(var_2 in var_0) {
@@ -1976,7 +1976,7 @@ function angvels() {
   var_1 = strtok(self.script_noteworthy, ",");
 
   if(var_1[0] == "convoy") {
-    ref_135d1(var_1[1]);
+    ref_135D1(var_1[1]);
   } else if(var_1[0] == "wave") {
     level thread scripts\cp\cp_wave_spawning::killstreaks(0, var_1[1]);
   } else {
@@ -1988,7 +1988,7 @@ function angvels() {
   self delete();
 }
 
-function ref_1446e(var_0) {
+function ref_1446E(var_0) {
   level endon("game_ended");
   self endon("death");
   var_1 = scripts\cp\cp_objectives::getobjectivestructfromref("obj_payload");
@@ -2019,7 +2019,7 @@ function trial_time_remaining(var_0, var_1) {
   return false;
 }
 
-function ref_1445c(var_0) {
+function ref_1445C(var_0) {
   level endon("game_ended");
   self endon("death");
   var_1 = scripts\engine\utility::getStruct(var_0, "script_noteworthy");
@@ -2051,7 +2051,7 @@ function getbankedplunder(var_0, var_1) {
   objective_setlabel(var_0, &"CP_OBJ_PAYLOAD/ESCORT");
 }
 
-function ref_13bad(var_0) {
+function ref_13BAD(var_0) {
   var_1 = scripts\cp\cp_objectives::getobjectivestructfromref("obj_payload");
 
   if(istrue(var_1.apc_destroyed)) {
@@ -2064,7 +2064,7 @@ function ref_13bad(var_0) {
     objective_icon(var_1.apcwid, "icon_waypoint_objective_general");
     objective_setzoffset(var_1.apcwid, 64);
     objective_onentity(var_1.apcwid, var_1.apc);
-    scripts\cp\cp_objectives::ref_11f80(var_1.apcwid);
+    scripts\cp\cp_objectives::ref_11F80(var_1.apcwid);
     return;
   }
 
@@ -2119,7 +2119,7 @@ function c4_crate_update_hint_logic_alt(var_0) {
   }
 }
 
-function ref_12c39(var_0) {
+function ref_12C39(var_0) {
   wait 1;
   var_0.turrets["tur_apc_rus_mp"] delete();
   var_1 = spawnturret("misc_turret", var_0 gettagorigin("tag_turret"), "tur_apc_rus_ai_cp", 0);
@@ -2143,7 +2143,7 @@ function spawn_enemy_tanks() {
   level.enemy_tanks = [];
 
   foreach(var_2 in var_0) {
-    thread ref_142db();
+    thread ref_142DB();
     thread spawn_enemy_tank(level);
     wait 60;
   }
@@ -2281,7 +2281,7 @@ function tank_waittill_death() {
   level.enemy_tanks = scripts\engine\utility::array_remove(level.enemy_tanks, self);
 }
 
-function ref_142db() {
+function ref_142DB() {
   var_0 = ["dx_cps_kama_callout_tank_spawning_10", "dx_cps_kama_callout_tank_spawning_20", "dx_cps_lass_callout_tank_spawning_10", "dx_cps_lass_callout_tank_spawning_20"];
   level scripts\cp\cp_vo::try_to_play_vo_on_team(scripts\engine\utility::random(var_0), "allies");
 }
@@ -2307,14 +2307,14 @@ function ref_13979() {
     var_1 = scripts\cp\cp_aiparachute::request_paratroopers(scripts\engine\utility::random(var_0), undefined, (-11539.5, -14462, -221.5));
 
     if(isDefined(var_1) && var_1.size > 0) {
-      thread ref_142ec();
+      thread ref_142EC();
     }
 
     wait randomintrange(15, 30);
   }
 }
 
-function ref_11d33() {
+function ref_11D33() {
   var_0 = spawn("script_model", (-14046.5, 18827.5, -300));
   var_0 setModel("misc_wm_mortar");
   var_1 = scripts\engine\utility::getStructArray("super_mortar_impact_spots", "targetname");
@@ -2338,32 +2338,32 @@ function ref_11d33() {
   }
 }
 
-function ref_142ec() {
-  if(!isDefined(level.ref_121d5)) {
-    level.ref_121d5 = gettime() - 1000;
+function ref_142EC() {
+  if(!isDefined(level.ref_121D5)) {
+    level.ref_121D5 = gettime() - 1000;
   }
 
-  if(level.ref_121d5 > gettime()) {
+  if(level.ref_121D5 > gettime()) {
     return;
   }
 
   var_0 = ["dx_cps_kama_callout_paratrooper_spawning_10", "dx_cps_kama_callout_paratrooper_spawning_20", "dx_cps_lass_callout_paratrooper_spawning_10", "dx_cps_lass_callout_paratrooper_spawning_20"];
   level scripts\cp\cp_vo::try_to_play_vo_on_team(scripts\engine\utility::random(var_0), "allies");
-  level.ref_121d5 = gettime() + 30000;
+  level.ref_121D5 = gettime() + 30000;
 }
 
 function ref_13976() {
   level waittill("start_super_end_defend");
-  thread ref_11f5a();
+  thread ref_11F5A();
   thread scripts\cp\cp_objectives::run_objective("payload_destroy_tanks");
   wait 5;
   thread spawn_enemy_tanks();
   wait 30;
-  thread ref_11d33();
+  thread ref_11D33();
   thread ref_13979();
 }
 
-function ref_11f5a() {
+function ref_11F5A() {
   level endon("game_ended");
   var_0 = undefined;
 
@@ -2381,23 +2381,23 @@ function ref_11f5a() {
     objective_state(var_0, "current");
     objective_setshowoncompass(var_0, 1);
     objective_setminimapiconsize(var_0, "icon_regular");
-    scripts\cp\cp_objectives::ref_11f80(var_0);
-    thread ref_1433c(var_2, var_0);
+    scripts\cp\cp_objectives::ref_11F80(var_0);
+    thread ref_1433C(var_2, var_0);
   }
 }
 
-function ref_1433c(var_0, var_1) {
+function ref_1433C(var_0, var_1) {
   level endon("game_ended");
   self waittill("death");
   objective_unsetlocation(var_0, var_1);
 
-  if(!isDefined(level.ref_13a5a)) {
-    level.ref_13a5a = 0;
+  if(!isDefined(level.ref_13A5A)) {
+    level.ref_13A5A = 0;
   }
 
-  level.ref_13a5a++;
+  level.ref_13A5A++;
 
-  if(level.ref_13a5a >= 2) {
+  if(level.ref_13A5A >= 2) {
     scripts\engine\utility::flag_set("payload_tanks_killed");
     objective_delete(var_0);
     scripts\cp\cp_objectives::freeworldid("enemy_tanks");

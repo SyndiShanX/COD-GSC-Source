@@ -19,7 +19,7 @@ function claymore_crate_use(var_0, var_1) {
 }
 
 function cleanuparenamolotovs(var_0, var_1, var_2, var_3) {
-  var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var_0, var_2);
+  var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DF(var_0, var_2);
   var_5 = claymore_crate_player_at_max_ammo(var_0, var_1);
   cleanup_target_stats_thermal(var_0, var_1, var_3);
   claymore_blockdamageuntilframeend(var_1);
@@ -317,7 +317,7 @@ function cleanup_lights(var_0, var_1) {
 }
 
 function cleanup_target_stats_thermal(var_0, var_1, var_2) {
-  var_3 = isDefined(var_2) && scripts\cp_mp\vehicles\vehicle_occupancy::ref_141df(var_0, var_2);
+  var_3 = isDefined(var_2) && scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DF(var_0, var_2);
 
   if(var_3) {
     cleanup_corpses(var_1, var_1);
@@ -471,7 +471,7 @@ function clean_up_laser_trap_ents(var_0, var_1) {
     return false;
   }
 
-  if(!scripts\cp_mp\vehicles\vehicle::ref_141b9(var_0, var_1)) {
+  if(!scripts\cp_mp\vehicles\vehicle::ref_141B9(var_0, var_1)) {
     return false;
   }
 

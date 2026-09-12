@@ -7,7 +7,7 @@ function init() {
   level.activetargetmarkergroups = [];
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "registerOnPlayerSpawnCallback")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "registerOnPlayerSpawnCallback")]](&ref_13a7c);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "registerOnPlayerSpawnCallback")]](&ref_13A7C);
     return;
   }
 }
@@ -86,7 +86,7 @@ function addtargetmarkergroup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   if(istrue(var_5)) {
-    thread ref_13a7d(level, var_0);
+    thread ref_13A7D(level, var_0);
   }
 
   if(istrue(var_6)) {
@@ -143,7 +143,7 @@ function gettargetmarkergroup(var_0) {
   return var_1;
 }
 
-function ref_13a7d(var_0, var_1) {
+function ref_13A7D(var_0, var_1) {
   level endon("game_ended ");
   level endon("removed_targetMarkerGroup_" + var_0);
 
@@ -333,7 +333,7 @@ function targetmarkergroup_getownedgroups(var_0) {
   return var_1;
 }
 
-function ref_13a7c() {
+function ref_13A7C() {
   self setclientomnvar("ui_clear_target_markers", gettime());
 }
 

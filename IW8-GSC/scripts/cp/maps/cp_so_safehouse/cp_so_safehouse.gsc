@@ -36,15 +36,15 @@ function main() {
   level thread scripts\cp\cp_objectives::objectives_init();
   level.ref_12177 = 1;
   level.hostdamagefactorlow = 0;
-  level.ref_133ba = 1;
+  level.ref_133BA = 1;
   level.map_interaction_func = &scripts\cp\maps\cp_so_safehouse\cp_so_safehouse_interactions::register_interactions;
-  level.custom_onspawnplayer_func = &ref_124a6;
+  level.custom_onspawnplayer_func = &ref_124A6;
   level.custom_onplayerconnect_func = &onplayerconnect;
   level.weapon_rank_event_table = "scripts/cp/maps/cp_so_safehouse/cp_so_safehouse_weaponrank_event.csv";
   level.player_interaction_monitor = &scripts\cp\maps\cp_so_safehouse\cp_so_safehouse_interactions::level_specific_player_interaction_monitor;
   level.wait_for_interaction_func = &scripts\cp\maps\cp_so_safehouse\cp_so_safehouse_interactions::level_specific_wait_for_interaction_triggered;
   level.interaction_trigger_properties_func = &interaction_trigger_properties;
-  level.strike_player_connect_black_screen_fn = &ref_1247b;
+  level.strike_player_connect_black_screen_fn = &ref_1247B;
   level.mud_sfx = &mud_sfx;
 
   if(!scripts\engine\utility::flag_exist("introscreen_over")) {
@@ -146,7 +146,7 @@ function enter_laststand(var_0, var_1) {
   }
 
   if(var_2.size == 1) {
-    ref_1243d(var_2[0], "dx_mpa_rutl_lastalive_revive", 5, 10);
+    ref_1243D(var_2[0], "dx_mpa_rutl_lastalive_revive", 5, 10);
   }
 
   if(scripts\engine\utility::is_equal(var_1, level.silo_thrust_dogtag_revive)) {
@@ -169,7 +169,7 @@ function exit_laststand(var_0) {
     var_0.min_dist_sq_from_node = undefined;
   }
 
-  ref_1243d(var_0, "dx_mpa_rutl_gamestate_losing", 1, 5);
+  ref_1243D(var_0, "dx_mpa_rutl_gamestate_losing", 1, 5);
 }
 
 function init_loot_structs() {
@@ -190,7 +190,7 @@ function init_loot_structs() {
   var_0.target = "lbravoAlphaAdvancedPath";
   level.struct_class_names["targetname"]["infil_scene"] = [var_0];
   var_0 = spawnStruct();
-  var_0.ref_12f91 = int(1);
+  var_0.ref_12F91 = int(1);
   var_0.classname = "script_struct_heli";
   var_0.target = "custom3194";
   var_0.script_decel = int(50);
@@ -210,7 +210,7 @@ function init_loot_structs() {
   var_0.angles = (0, 325, 0);
   var_0.lookahead = int(1);
   var_0.origin = (-300, -500, 1000);
-  var_0.ref_12f91 = int(1);
+  var_0.ref_12F91 = int(1);
   var_0.classname = "script_struct_heli";
   var_0.script_accel = int(20);
   var_0.speed = int(120);
@@ -223,7 +223,7 @@ function init_loot_structs() {
   var_0.angles = (0, 165, 0);
   var_0.lookahead = int(1);
   var_0.origin = (0, 0, 500);
-  var_0.ref_12f91 = int(1);
+  var_0.ref_12F91 = int(1);
   var_0.classname = "script_struct_heli";
   var_0.script_accel = int(20);
   var_0.speed = int(100);
@@ -290,7 +290,7 @@ function weapon_xp_iw8_sn_hdromeo(var_0, var_1, var_2, var_3, var_4, var_5, var_
   }
 
   for(;;) {
-    var_23 = var_0 scripts\engine\utility::ref_143ad("respawn_player", "auto_respawn");
+    var_23 = var_0 scripts\engine\utility::ref_143AD("respawn_player", "auto_respawn");
 
     if(isDefined(var_23)) {
       if(istrue(var_0.binc130)) {
@@ -309,7 +309,7 @@ function weapon_xp_iw8_sn_hdromeo(var_0, var_1, var_2, var_3, var_4, var_5, var_
   }
 }
 
-function ref_124a6() {
+function ref_124A6() {
   scripts\cp\gametypes\cp_specops::givedefaultloadout();
   self setsuit("iw8_suit_cp");
   var_0 = "iw8_ar_scharlie_mp";
@@ -344,7 +344,7 @@ function ref_124a6() {
   level notify("connectedPlayerCount");
 }
 
-function ref_1247b(var_0) {}
+function ref_1247B(var_0) {}
 
 function rundebugstartobjective(var_0) {
   wait 2;
@@ -487,9 +487,9 @@ function register_create_script_arrays(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_12df6() {
-  if(isDefined(level.ref_13ac6[self.team])) {
-    self thread[[level.ref_13ac6[self.team]]]();
+function ref_12DF6() {
+  if(isDefined(level.ref_13AC6[self.team])) {
+    self thread[[level.ref_13AC6[self.team]]]();
     return;
   }
 }
@@ -500,7 +500,7 @@ function ref_14379() {
   }
 
   wait 3;
-  scripts\cp\laser_traps\cp_laser_traps::ref_1437a();
+  scripts\cp\laser_traps\cp_laser_traps::ref_1437A();
   scripts\engine\utility::flag_wait("introscreen_over");
   scripts\engine\utility::flag_set("players_connected");
 }
@@ -580,12 +580,12 @@ function stopstreamtomovingplane() {
     var_2.keypad_damagedeathdisconnectwatch = scripts\engine\utility::getStructArray("defuse_spawner_" + var_1, "targetname");
     var_2.name = var_1;
     var_2.blend_movespeedscale_cpso = [];
-    thread ref_13f77();
+    thread ref_13F77();
     level.cpvehiclename[var_1] = var_2;
   }
 }
 
-function ref_13f77() {
+function ref_13F77() {
   for(;;) {
     waitframe();
 
@@ -598,9 +598,9 @@ function ref_13f77() {
 function store_platform_models() {
   level.current_checkpoint = 0;
   level.bombs = [];
-  level.bombs[level.bombs.size] = ref_1350b((-1222.5, 2396.75, 3.25), (0, -277.936, 0), "field");
-  level.bombs[level.bombs.size] = ref_1350b((1030.25, 1982, 318), (0, 86.6868, 0), "heli");
-  level.bombs[level.bombs.size] = ref_1350b((-655.25, -2000.5, 125.75), (0, 339.723, 0), "construction");
+  level.bombs[level.bombs.size] = ref_1350B((-1222.5, 2396.75, 3.25), (0, -277.936, 0), "field");
+  level.bombs[level.bombs.size] = ref_1350B((1030.25, 1982, 318), (0, 86.6868, 0), "heli");
+  level.bombs[level.bombs.size] = ref_1350B((-655.25, -2000.5, 125.75), (0, 339.723, 0), "construction");
 }
 
 function stoppingpower_clearhcronperkscleared() {
@@ -610,13 +610,13 @@ function stoppingpower_clearhcronperkscleared() {
     var_1.spawn_functions = [];
   }
 
-  thread ref_135ba();
+  thread ref_135BA();
 }
 
 function cqb_laser_guy() {
   foreach(var_1 in level.cpvehiclename) {
-    scripts\cp\laser_traps\cp_laser_traps::array_spawn_function(var_1.set_relic_landlocked, &ref_133a7, var_1);
-    scripts\cp\laser_traps\cp_laser_traps::array_spawn_function(var_1.keypad_damagedeathdisconnectwatch, &ref_133a7, var_1);
+    scripts\cp\laser_traps\cp_laser_traps::array_spawn_function(var_1.set_relic_landlocked, &ref_133A7, var_1);
+    scripts\cp\laser_traps\cp_laser_traps::array_spawn_function(var_1.keypad_damagedeathdisconnectwatch, &ref_133A7, var_1);
     var_2 = [];
 
     foreach(var_4 in var_1.set_relic_landlocked) {
@@ -654,11 +654,11 @@ function cqb_laser_guy() {
     }
 
     var_1.blend_movespeedscale_cpso = scripts\cp\laser_traps\cp_laser_traps::can_spawn_extras(var_6);
-    thread ref_133a9();
+    thread ref_133A9();
   }
 }
 
-function ref_133a7(var_0) {
+function ref_133A7(var_0) {
   if(!isDefined(self.target)) {
     self setgoalpos(var_0.origin);
     self.goalradius = var_0.radius;
@@ -714,14 +714,14 @@ function ref_133a7(var_0) {
   }
 }
 
-function ref_133a9() {
-  thread ref_133a8();
+function ref_133A9() {
+  thread ref_133A8();
   GscBinSkip1(0x45, "forward", []);
 }
 
-function ref_133a8() {
+function ref_133A8() {
   self.bomb waittill("trigger");
-  self.ref_13e14 = 1;
+  self.ref_13E14 = 1;
   var_0 = 0;
   var_1 = scripts\engine\utility::random(getEntArray("boss_spawner_" + self.name, "targetname"));
 
@@ -748,7 +748,7 @@ function siteusedinternal() {
   self.ref_12307 = spawn("script_model", self.origin);
   self.ref_12307 setModel("veh8_mil_air_lbravo_personnel_platform");
   self.ref_12307 linkTo(self, "tag_origin", (0, 0, -73), (0, 0, 0));
-  ref_13b33(&heli_crash_on_pilot_death);
+  ref_13B33(&heli_crash_on_pilot_death);
   var_0 = undefined;
 
   foreach(var_2 in scripts\engine\utility::getStructArray(self.target, "targetname")) {
@@ -772,7 +772,7 @@ function siteusedinternal() {
   self.ref_12307 delete();
 }
 
-function ref_13dd3() {
+function ref_13DD3() {
   self.godmode = 1;
 
   while(!scripts\common\vehicle_code::vehicle_is_stopped()) {
@@ -811,13 +811,13 @@ function isplayeronground() {
   self dodamage(99999999, self.origin);
 }
 
-function ref_13b33(var_0) {
+function ref_13B33(var_0) {
   self endon("death");
   self childthread[[var_0]]();
 }
 
 function vehicle_occupancy_clearallowmovementplayer(var_0) {
-  ref_1243d(level.players, "dx_mpa_rutl_juggernaut_enemy_use", 5, undefined, 1);
+  ref_1243D(level.players, "dx_mpa_rutl_juggernaut_enemy_use", 5, undefined, 1);
   setmusicstate("cp_juggernaut_intro");
   self endon("death");
   self waittill("goal");
@@ -926,10 +926,10 @@ function nonbunkerdoors() {
   self setCanDamage(1);
   self vehicleshowonminimap(1);
   self aiupdatecoverexposetype(1);
-  ref_1333a();
+  ref_1333A();
 }
 
-function ref_1333a() {
+function ref_1333A() {
   self.objindex = scripts\cp\cp_objectives::requestworldid("obj_" + self getentitynumber(), 5);
   objective_setplayintro(self.objindex, 0);
   objective_setplayoutro(self.objindex, 0);
@@ -986,15 +986,15 @@ function heli_movement() {
       var_1 = 60;
       self.player_closes_in = undefined;
     } else {
-      var_2 = scripts\engine\utility::ter_op(isDefined(self.ref_124ca), 20, 10);
+      var_2 = scripts\engine\utility::ter_op(isDefined(self.ref_124CA), 20, 10);
       var_1 = clamp(distance(self.origin, self.initlocs_nonmorsephones.origin) / 5, var_2, 40);
     }
 
     self.initlocs_nonmorsephones = printer(var_0, self.target_player);
     skip_soldier_spawn(self.initlocs_nonmorsephones.origin, var_1);
 
-    if(!isDefined(self.ref_124ca)) {
-      scripts\engine\utility::ref_143ba(randomfloatrange(3, 5), "new_target_player", "player_looking");
+    if(!isDefined(self.ref_124CA)) {
+      scripts\engine\utility::ref_143BA(randomfloatrange(3, 5), "new_target_player", "player_looking");
       continue;
     }
 
@@ -1102,7 +1102,7 @@ function skip_soldier_spawn(var_0, var_1) {
     }
 
     self setvehgoalpos(var_5, var_3);
-    scripts\engine\utility::ref_143a5("near_goal", "goal");
+    scripts\engine\utility::ref_143A5("near_goal", "goal");
   }
 
   self notify("nav_goal");
@@ -1236,12 +1236,12 @@ function skipfirstraise(var_0) {
     var_2 = undefined;
     var_7 = undefined;
 
-    if(!isDefined(self.ref_124ca) && isDefined(var_1) || isDefined(self.ref_124ca) && !isDefined(var_1)) {
+    if(!isDefined(self.ref_124CA) && isDefined(var_1) || isDefined(self.ref_124CA) && !isDefined(var_1)) {
       if(isDefined(var_1)) {
         self notify("player_looking", var_1);
       }
 
-      self.ref_124ca = var_1;
+      self.ref_124CA = var_1;
     }
 
     wait 0.2;
@@ -1272,10 +1272,10 @@ function race_set_checkpoint(var_0, var_1) {
   if(isDefined(self.attacker)) {
     var_2 = self.attacker;
     self.attacker = undefined;
-  } else if(isDefined(self.ref_124ca)) {
-    var_2 = self.ref_124ca;
+  } else if(isDefined(self.ref_124CA)) {
+    var_2 = self.ref_124CA;
   } else if(isDefined(var_0) && !istrue(var_0.bomb.defused)) {
-    if(isDefined(var_0.bomb.playerusing) && (!istrue(var_1) || ref_124bf(var_0.bomb.playerusing))) {
+    if(isDefined(var_0.bomb.playerusing) && (!istrue(var_1) || ref_124BF(var_0.bomb.playerusing))) {
       var_2 = var_0.bomb.playerusing;
     } else {
       var_2 = progression_deadzone(var_0.bomb.origin, var_1);
@@ -1295,7 +1295,7 @@ function progression_deadzone(var_0, var_1) {
       continue;
     }
 
-    if(istrue(var_1) && !ref_124bf(var_4)) {
+    if(istrue(var_1) && !ref_124BF(var_4)) {
       continue;
     }
 
@@ -1306,7 +1306,7 @@ function progression_deadzone(var_0, var_1) {
   return var_4;
 }
 
-function ref_124bf(var_0) {
+function ref_124BF(var_0) {
   var_1 = var_0 getEye();
   var_2 = level.players;
 
@@ -1434,8 +1434,8 @@ function ref_13548(var_0) {
     waitframe();
   }
 
-  thread ref_1354b();
-  level scripts\engine\utility::thread_on_notify("exfil_arriving", &ref_1354b);
+  thread ref_1354B();
+  level scripts\engine\utility::thread_on_notify("exfil_arriving", &ref_1354B);
   var_1 = scripts\engine\utility::getStructArray("exfil_spawner", "targetname");
   scripts\engine\utility::array_thread(var_1, &scripts\cp\laser_traps\cp_laser_traps::add_spawn_function, &onentercallback);
 
@@ -1499,7 +1499,7 @@ function ref_13548(var_0) {
   }
 }
 
-function ref_1354b() {
+function ref_1354B() {
   var_0 = scripts\engine\utility::getStructArray("exfil_juggernaut_spawner", "targetname");
   scripts\engine\utility::array_thread(var_0, &scripts\cp\laser_traps\cp_laser_traps::add_spawn_function, &onentercallback);
   scripts\engine\utility::array_thread(var_0, &scripts\cp\laser_traps\cp_laser_traps::add_spawn_function, &ref_12809);
@@ -1521,9 +1521,9 @@ function ref_1354b() {
   }
 
   if(var_1 - var_2 > 1) {
-    ref_1243d(level.players, "dx_cps_kama_callout_juggernaut_spawning_10", 2);
+    ref_1243D(level.players, "dx_cps_kama_callout_juggernaut_spawning_10", 2);
   } else {
-    ref_1243d(level.players, "dx_mpa_rutl_rugby_enemy_close_goal", 2);
+    ref_1243D(level.players, "dx_mpa_rutl_rugby_enemy_close_goal", 2);
   }
 
   setmusicstate("cp_juggernaut_intro");
@@ -1549,7 +1549,7 @@ function ref_1354b() {
   }
 }
 
-function ref_1354a() {
+function ref_1354A() {
   level waittill("exfil_called");
   var_0 = [];
 
@@ -1562,18 +1562,18 @@ function ref_1354a() {
   var_2 = var_1 scripts\common\vehicle::spawn_vehicle_and_gopath();
   var_0 = var_2;
   waitframe();
-  ref_1243d(level.players, "dx_cps_kama_callout_helicopter_attacking_20", 2, undefined, 1);
+  ref_1243D(level.players, "dx_cps_kama_callout_helicopter_attacking_20", 2, undefined, 1);
   thread silo_thrust_platforms();
   var_2 scripts\engine\utility::thread_on_notify_no_endon_death("death", &scripts\engine\utility::flag_set, "exfil_boss_killed");
-  ref_11e5c("objective_boss", &"CP_SO_SAFEHOUSE/OBJECTIVE_DEFEAT", "icon_waypoint_vehicle_little_bird", "axis", var_0, undefined, "exfil_boss_killed");
+  ref_11E5C("objective_boss", &"CP_SO_SAFEHOUSE/OBJECTIVE_DEFEAT", "icon_waypoint_vehicle_little_bird", "axis", var_0, undefined, "exfil_boss_killed");
 }
 
-function ref_11cf2() {
+function ref_11CF2() {
   if(isalive(self)) {
     self waittill("death");
   }
 
-  level.ref_13a86++;
+  level.ref_13A86++;
 }
 
 function onentercallback() {
@@ -1591,7 +1591,7 @@ function onentercallback() {
   }
 }
 
-function ref_135ba() {
+function ref_135BA() {
   level.spawn_queue = [];
 
   for(;;) {
@@ -1649,33 +1649,33 @@ function target_play_death_anim() {
   scripts\cp\laser_traps\cp_laser_traps::ref_13067();
   setomnvar("cp_countdown_color", 0);
   var_6 = [330, 330, 330, 330];
-  level.ref_13b8b = var_6[level.players.size - 1];
-  setomnvar("cp_wave_timer", gettime() + int(level.ref_13b8b * 1000));
+  level.ref_13B8B = var_6[level.players.size - 1];
+  setomnvar("cp_wave_timer", gettime() + int(level.ref_13B8B * 1000));
   setomnvar("cp_round_num", 1);
-  var_7 = level.ref_13b8b;
-  level.ref_13b88 = 1;
+  var_7 = level.ref_13B8B;
+  level.ref_13B88 = 1;
 
-  while(level.ref_13b8b > 0 && !scripts\engine\utility::flag("all_bombs_defused")) {
+  while(level.ref_13B8B > 0 && !scripts\engine\utility::flag("all_bombs_defused")) {
     level notify("timer_tick");
 
-    if(level.ref_13b8b <= 30) {
+    if(level.ref_13B8B <= 30) {
       foreach(var_4 in level.players) {
-        if(level.ref_13b8b > 20) {
+        if(level.ref_13B8B > 20) {
           var_4 playSound("ui_mp_timer_countdown");
           continue;
         }
 
-        if(level.ref_13b8b > 10) {
+        if(level.ref_13B8B > 10) {
           var_4 playSound("ui_mp_timer_countdown_10");
           continue;
         }
 
-        if(level.ref_13b8b > 5) {
+        if(level.ref_13B8B > 5) {
           var_4 playSound("ui_mp_timer_countdown_half_sec");
           continue;
         }
 
-        if(level.ref_13b8b > 1.5) {
+        if(level.ref_13B8B > 1.5) {
           var_4 playSound("ui_mp_timer_countdown_quarter_sec");
           continue;
         }
@@ -1684,12 +1684,12 @@ function target_play_death_anim() {
       }
     }
 
-    setomnvar("cp_countdown_color", level.ref_13b8b <= 30);
+    setomnvar("cp_countdown_color", level.ref_13B8B <= 30);
     wait 1;
     var_10 = 1;
 
     if(var_10) {
-      level.ref_13b8b--;
+      level.ref_13B8B--;
     }
   }
 
@@ -1705,11 +1705,11 @@ function target_play_death_anim() {
 
 function little_bird_mg_initcollision() {
   setomnvar("cp_round_num", 0);
-  level.ref_13b88 = 0;
+  level.ref_13B88 = 0;
 
   for(var_0 = 0; var_0 < 30; var_0++) {
     wait 0.05;
-    setomnvar("cp_wave_timer", gettime() + int(level.ref_13b8b * 1000));
+    setomnvar("cp_wave_timer", gettime() + int(level.ref_13B8B * 1000));
   }
 
   setomnvar("cp_countdown_color", 0);
@@ -1726,7 +1726,7 @@ function init_player() {
 
   thread spawn_backup_helispawner_jammer2();
   wait 2;
-  scripts\cp\laser_traps\cp_laser_traps::ref_124a5(var_0, ["ammo_crate", "grenade_crate"][level.infil_lbravo_is_alive]);
+  scripts\cp\laser_traps\cp_laser_traps::ref_124A5(var_0, ["ammo_crate", "grenade_crate"][level.infil_lbravo_is_alive]);
   level.infil_lbravo_is_alive = !level.infil_lbravo_is_alive;
 }
 
@@ -1804,7 +1804,7 @@ function logevent_xpearned() {
   level waittill("timer_tick");
   self.timer = scripts\cp\utility::createtimer("hudsmall", 1.5);
   self.timer scripts\cp\utility::setpoint("CENTER", "CENTER", 0, -180);
-  self.timer settimer(level.ref_13b8b);
+  self.timer settimer(level.ref_13B8B);
   self.timer.color = (1, 1, 1);
   self.timer.archived = 0;
   self.timer.foreground = 1;
@@ -1843,7 +1843,7 @@ function init_fan_blades(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   var_11.radius = scripts\engine\utility::ter_op(isDefined(var_7), var_7, int(400));
   var_11.script_goalyaw = scripts\engine\utility::ter_op(isDefined(var_8), var_8, 1);
   var_11.lookahead = scripts\engine\utility::ter_op(isDefined(var_9), var_9, 1);
-  var_11.ref_12f91 = scripts\engine\utility::ter_op(isDefined(var_8), var_8, 1);
+  var_11.ref_12F91 = scripts\engine\utility::ter_op(isDefined(var_8), var_8, 1);
   level.struct_class_names["targetname"][var_0] = [var_11];
   return var_11;
 }
@@ -1862,30 +1862,30 @@ function superslotcleanup() {
   GscBinSkip0(0x2e, 0, [0, 1]);
 }
 
-function ref_1357f(var_0) {
+function ref_1357F(var_0) {
   var_1 = spawnVehicle("veh8_mil_air_lbravo", "infil_lbravo_alpha", "lbravo_infil_cp", var_0.origin, var_0.angles);
   return var_1;
 }
 
 function switchespaused() {
-  ref_1238e("iw8_me_riotshield_mp", (-1055, 375, 102), (-14, 90, 0));
-  ref_1238e("iw8_me_riotshield_mp", (-1015, 377, 102), (-14, 90, 0));
-  ref_1238e("iw8_lm_kilo121_mp", (-951, 518.75, 91.5), (279.099, 89.9925, -100.98));
-  ref_1238e("iw8_lm_kilo121_mp", (-965.5, 519.75, 91), (279.099, 89.9925, -100.98));
-  ref_1238e("iw8_la_rpapa7_mp", (-1022, 625.5, 90.625), (-65, 90, 90));
-  ref_1238e("iw8_la_rpapa7_mp", (-1011, 625.5, 90.625), (-65, 90, 90));
+  ref_1238E("iw8_me_riotshield_mp", (-1055, 375, 102), (-14, 90, 0));
+  ref_1238E("iw8_me_riotshield_mp", (-1015, 377, 102), (-14, 90, 0));
+  ref_1238E("iw8_lm_kilo121_mp", (-951, 518.75, 91.5), (279.099, 89.9925, -100.98));
+  ref_1238E("iw8_lm_kilo121_mp", (-965.5, 519.75, 91), (279.099, 89.9925, -100.98));
+  ref_1238E("iw8_la_rpapa7_mp", (-1022, 625.5, 90.625), (-65, 90, 90));
+  ref_1238E("iw8_la_rpapa7_mp", (-1011, 625.5, 90.625), (-65, 90, 90));
   scripts\cp\laser_traps\cp_laser_traps::ref_13433((-951.75, 577.5, 107.125), (0, 98, 0));
   scripts\cp\laser_traps\cp_laser_traps::player_limitedammo((-975, 557.25, 73), (0, 86, 0));
   scripts\cp\laser_traps\cp_laser_traps::binoculars_getpendingtime((-957.5, 537.25, 105.125), (0, 250, 0));
   scripts\cp\laser_traps\cp_laser_traps::playerplunderlosedepositcallback((-951, 471.75, 107.125), (0, 86, 0));
   scripts\cp\laser_traps\cp_laser_traps::handle_leads_collected_hideiconbuilding((-965, 492.5, 73), (0, 75, 0));
   scripts\cp\laser_traps\cp_laser_traps::focus_fire_outline_enabled((-975, 457.5, 73), (0, 95, 0));
-  scripts\cp\laser_traps\cp_laser_traps::ref_11cb8((-952.5, 432.25, 107.125), (0, 110, 0));
+  scripts\cp\laser_traps\cp_laser_traps::ref_11CB8((-952.5, 432.25, 107.125), (0, 110, 0));
 }
 
 function teamanchoredinfoomnvars() {
-  ref_135f6((-975, 616, 72), (0, 25, 0), "ammo_crate");
-  ref_135f6((-975, 415, 72), (0, -25, 0), "grenade_crate");
+  ref_135F6((-975, 616, 72), (0, 25, 0), "ammo_crate");
+  ref_135F6((-975, 415, 72), (0, -25, 0), "grenade_crate");
 }
 
 function switch_weapon_from_minigun() {
@@ -1932,7 +1932,7 @@ function weapon_xp_iw8_sn_crossbow() {
   }
 
   thread cqb_laser_guy();
-  thread ref_11b3e();
+  thread ref_11B3E();
   thread get_drone_movement_vector();
 
   while(level.current_checkpoint < level.bombs.size) {
@@ -1943,7 +1943,7 @@ function weapon_xp_iw8_sn_crossbow() {
   setomnvar("cp_objective_sub_4_index", 6);
   var_6 = scripts\engine\utility::getStruct("lz", "targetname");
   thread ref_13548(var_6);
-  ref_11e5c("objective_lz", &"CP_SO_SAFEHOUSE/OBJECTIVE_EXFIL_LBL", undefined, "allies", undefined, var_6.origin + (0, 0, 15), "exfil_arrived");
+  ref_11E5C("objective_lz", &"CP_SO_SAFEHOUSE/OBJECTIVE_EXFIL_LBL", undefined, "allies", undefined, var_6.origin + (0, 0, 15), "exfil_arrived");
   thread friendly_dmg_text_cooldown(var_6);
   level waittill("exfil_called");
   wait 60;
@@ -1959,7 +1959,7 @@ function weapon_xp_iw8_sn_crossbow() {
 }
 
 function friendly_dmg_text_cooldown(var_0) {
-  ref_11a9a(var_0, &"CP_SO_SAFEHOUSE/CALL_EXFIL");
+  ref_11A9A(var_0, &"CP_SO_SAFEHOUSE/CALL_EXFIL");
   var_1 = getgroundposition(var_0.origin, 1);
   magicgrenademanual("deploy_airdrop_mp", var_1, (0, 0, 0), 0.01);
   level notify("exfil_called");
@@ -2013,14 +2013,14 @@ function ref_13549() {
   var_14 = anglestoright(var_6.angles) * -64;
   var_15 = anglesToForward(var_6.angles) * 64;
   var_16 = anglesToForward(var_6.angles) * -64;
-  ref_11a87(var_6, var_13 + var_15);
-  ref_11a87(var_6, var_14 + var_15);
-  ref_11a87(var_6, var_13 + var_16);
-  ref_11a87(var_6, var_14 + var_16);
+  ref_11A87(var_6, var_13 + var_15);
+  ref_11A87(var_6, var_14 + var_15);
+  ref_11A87(var_6, var_13 + var_16);
+  ref_11A87(var_6, var_14 + var_16);
   level notify("exfil_arriving");
-  ref_11e5c("objective_exfil", &"CP_SO_SAFEHOUSE/OBJECTIVE_HELI_LBL", "icon_waypoint_vehicle_little_bird", "allies", var_6, undefined, "mission_complete", 1, 0);
+  ref_11E5C("objective_exfil", &"CP_SO_SAFEHOUSE/OBJECTIVE_HELI_LBL", "icon_waypoint_vehicle_little_bird", "allies", var_6, undefined, "mission_complete", 1, 0);
   waitframe();
-  level.should_do_damage_check_func = &ref_132c0;
+  level.should_do_damage_check_func = &ref_132C0;
   scripts\engine\utility::flag_wait("exfil_arrived");
   thread logevent_munitionused(&"CP_SO_SAFEHOUSE/REGROUP_EXFIL", 15);
 
@@ -2050,7 +2050,7 @@ function ref_13549() {
   level notify("mission_complete");
 }
 
-function ref_11a87(var_0, var_1) {
+function ref_11A87(var_0, var_1) {
   var_2 = spawn("script_model", var_0.origin + var_1);
   var_2 dontinterpolate();
   var_2.angles = var_0.angles;
@@ -2059,7 +2059,7 @@ function ref_11a87(var_0, var_1) {
   var_2 clonebrushmodeltoscriptmodel(var_3);
 }
 
-function ref_132c0(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_132C0(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_5.team == "allies") {
     return false;
   }
@@ -2067,7 +2067,7 @@ function ref_132c0(var_0, var_1, var_2, var_3, var_4, var_5) {
   return true;
 }
 
-function ref_11a9a(var_0) {
+function ref_11A9A(var_0) {
   if(!isDefined(self.origin)) {
     return;
   }
@@ -2095,11 +2095,11 @@ function ref_11a9a(var_0) {
   var_1 delete();
 }
 
-function ref_11e5c(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  thread ref_11e5d(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+function ref_11E5C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+  thread ref_11E5D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 }
 
-function ref_11e5d(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
+function ref_11E5D(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = scripts\cp\cp_objectives::requestworldid(var_0, 3);
 
   if(isDefined(var_1)) {
@@ -2235,7 +2235,7 @@ function minigameinfo(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  ref_1243d(level.players, "dx_mpa_rutl_airdrop_friendly_use", 1, 30);
+  ref_1243D(level.players, "dx_mpa_rutl_airdrop_friendly_use", 1, 30);
 
   if(!istrue(var_3)) {
     var_7 = [ &"CP_SO_SAFEHOUSE/CAREPACKAGE_DROP_A", &"CP_SO_SAFEHOUSE/CAREPACKAGE_DROP_B", &"CP_SO_SAFEHOUSE/CAREPACKAGE_DROP_C", &"CP_SO_SAFEHOUSE/CAREPACKAGE_DROP_D"];
@@ -2268,7 +2268,7 @@ function logevent_kidnapevent(var_0, var_1, var_2) {
 }
 
 function weapon_xp_iw8_sn_sbeta(var_0, var_1, var_2) {
-  if(scripts\cp\laser_traps\cp_laser_traps::ref_124d0(var_0)) {
+  if(scripts\cp\laser_traps\cp_laser_traps::ref_124D0(var_0)) {
     thread logevent_kidnapevent(var_0, &"CP_BR/MUN_SLOTS_FULL", 3);
     return false;
   }
@@ -2281,9 +2281,9 @@ function weapon_xp_iw8_sn_sbeta(var_0, var_1, var_2) {
   var_4 = ["sentry", "sentry", "juggernaut"];
   var_5 = ["dx_mpa_rutl_sentry_gun_achieve", "dx_mpa_rutl_sentry_gun_achieve", "dx_mpa_rutl_juggernaut_achieve"];
   var_6 = var_5[level.get_dropoff_point_spawner];
-  ref_1243d(var_0, var_6, 1, 10);
+  ref_1243D(var_0, var_6, 1, 10);
   level.mini_map_origin_fix[var_3]["has_package"] = 0;
-  scripts\cp\laser_traps\cp_laser_traps::ref_124a5(var_0, var_4[level.get_dropoff_point_spawner]);
+  scripts\cp\laser_traps\cp_laser_traps::ref_124A5(var_0, var_4[level.get_dropoff_point_spawner]);
   level.get_dropoff_point_spawner++;
 
   if(level.get_dropoff_point_spawner >= var_4.size) {
@@ -2293,18 +2293,18 @@ function weapon_xp_iw8_sn_sbeta(var_0, var_1, var_2) {
   return true;
 }
 
-function ref_1435c() {
-  self.ref_12c9d = 1;
+function ref_1435C() {
+  self.ref_12C9D = 1;
 
-  while(self.ref_12c9d > 0) {
+  while(self.ref_12C9D > 0) {
     self waittillmatch("munitions_used", "respawn");
     var_0 = level.players_in_respawn_queue[0];
-    var_1 = projdistsq(self.origin, level.ref_12c8e);
-    var_0.forcespawnorigin = level.ref_12c8e[var_1][0];
-    var_0.forcespawnangles = level.ref_12c8e[var_1][1];
+    var_1 = projdistsq(self.origin, level.ref_12C8E);
+    var_0.forcespawnorigin = level.ref_12C8E[var_1][0];
+    var_0.forcespawnangles = level.ref_12C8E[var_1][1];
   }
 
-  self.ref_12c9d = undefined;
+  self.ref_12C9D = undefined;
 }
 
 function pretrograd_interaction_effects() {
@@ -2313,7 +2313,7 @@ function pretrograd_interaction_effects() {
       continue;
     }
 
-    if(ref_124b1(var_1)) {
+    if(ref_124B1(var_1)) {
       return true;
     }
   }
@@ -2321,7 +2321,7 @@ function pretrograd_interaction_effects() {
   return false;
 }
 
-function ref_124b1(var_0) {
+function ref_124B1(var_0) {
   for(var_1 = 0; var_1 < var_0.munition_slots.size; var_1++) {
     if(var_0 scripts\cp\loot_system::is_empty_or_none(var_1)) {
       continue;
@@ -2345,9 +2345,9 @@ function prev_weapon_taccover() {
   return false;
 }
 
-function ref_11b3e() {
-  ref_1243d(level.players, "dx_mpa_rutl_boost_genericround");
-  ref_1243d(level.players, "dx_mpa_rutl_boost_infected", 10);
+function ref_11B3E() {
+  ref_1243D(level.players, "dx_mpa_rutl_boost_genericround");
+  ref_1243D(level.players, "dx_mpa_rutl_boost_infected", 10);
 }
 
 function bombs_explode() {
@@ -2414,13 +2414,13 @@ function explode(var_0) {
   scripts\engine\utility::flag_set("bomb_exploded");
 }
 
-function ref_1350b(var_0, var_1, var_2) {
+function ref_1350B(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_0);
   var_3.objindex = level.bombs.size;
   var_3.angles = var_1;
   var_3.name = var_2;
   var_3 setModel("offhand_wm_briefcase_bomb");
-  thread ref_1448e();
+  thread ref_1448E();
 
   if(isDefined(var_2) && scripts\engine\utility::array_contains_key(level.cpvehiclename, var_2)) {
     level.cpvehiclename[var_2].bomb = var_3;
@@ -2429,24 +2429,24 @@ function ref_1350b(var_0, var_1, var_2) {
   return var_3;
 }
 
-function ref_135f6(var_0, var_1, var_2) {
+function ref_135F6(var_0, var_1, var_2) {
   var_3 = "military_crate_large_stackable_01";
 
   if(var_2 == "ammo_crate") {
     var_4 = &"CP_SO_SAFEHOUSE/TAKE_AMMO_CRATE";
     var_5 = "cp_crafted_icon_ammo_crate";
     var_6 = "cp_crafted_icon_ammo_crate";
-    var_7 = &ref_124aa;
+    var_7 = &ref_124AA;
     var_8 = &"CP_SO_SAFEHOUSE/HAVE_AMMO_CRATE_RED";
   } else {
     var_4 = &"CP_SO_SAFEHOUSE/TAKE_GRENADE_CRATE";
     var_5 = "cp_crafted_icon_explosive";
     var_6 = "cp_crafted_icon_explosive";
-    var_7 = &ref_124ac;
+    var_7 = &ref_124AC;
     var_8 = &"CP_SO_SAFEHOUSE/HAVE_GRENADE_CRATE_RED";
   }
 
-  var_9 = scripts\cp\laser_traps\cp_laser_traps::ref_139aa(var_5, var_6, &ref_14541, var_8, var_4, var_5, var_6, var_7, undefined, var_8);
+  var_9 = scripts\cp\laser_traps\cp_laser_traps::ref_139AA(var_5, var_6, &ref_14541, var_8, var_4, var_5, var_6, var_7, undefined, var_8);
   addclienttoheadiconmask(var_9.headiconid, 30);
   setheadiconmaxdistance(var_9.headiconid, 200);
   var_9.type = var_7;
@@ -2459,7 +2459,7 @@ function ref_135f6(var_0, var_1, var_2) {
 }
 
 function ref_14541(var_0, var_1) {
-  if(scripts\cp\laser_traps\cp_laser_traps::ref_124d0(var_1)) {
+  if(scripts\cp\laser_traps\cp_laser_traps::ref_124D0(var_1)) {
     thread logevent_kidnapevent(var_1, &"CP_BR/MUN_SLOTS_FULL", 3);
     return false;
   }
@@ -2474,11 +2474,11 @@ function ref_14541(var_0, var_1) {
     }
   }
 
-  var_1 scripts\cp\laser_traps\cp_laser_traps::ref_124a5(var_1, var_0.type);
+  var_1 scripts\cp\laser_traps\cp_laser_traps::ref_124A5(var_1, var_0.type);
   return true;
 }
 
-function ref_124ac(var_0) {
+function ref_124AC(var_0) {
   if(!isDefined(var_0.munition_slots)) {
     return false;
   }
@@ -2492,7 +2492,7 @@ function ref_124ac(var_0) {
   return false;
 }
 
-function ref_124aa(var_0) {
+function ref_124AA(var_0) {
   if(!isDefined(var_0.munition_slots)) {
     return false;
   }
@@ -2536,7 +2536,7 @@ function propdeathfx() {
   return var_0[level.players.size - 1];
 }
 
-function ref_1448e() {
+function ref_1448E() {
   self endon("death");
   self endon("bomb_defused");
   self.isusable = 1;
@@ -2560,7 +2560,7 @@ function ref_1448e() {
   var_0.usetime = propclonepower();
   var_0.inuse = 0;
   var_0.playerusing = undefined;
-  var_0.ref_1387d = getcompleteweaponname("briefcase_bomb_defuse_mp");
+  var_0.ref_1387D = getcompleteweaponname("briefcase_bomb_defuse_mp");
 
   for(;;) {
     if(!isDefined(var_0.laststanddowneddata) || !isDefined(var_0.laststandfinisherdone) || !isDefined(var_0.usetime)) {
@@ -2600,7 +2600,7 @@ function ref_14368(var_0) {
   }
 }
 
-function ref_1448f(var_0, var_1) {
+function ref_1448F(var_0, var_1) {
   var_0 endon("death_or_disconnect");
   var_0 endon("last_stand");
   var_1.userate = scripts\engine\utility::ter_op(isDefined(var_0.objectivescaler), var_0.objectivescaler, var_1.userate);
@@ -2621,7 +2621,7 @@ function ref_1448f(var_0, var_1) {
   return false;
 }
 
-function ref_1387f(var_0, var_1) {
+function ref_1387F(var_0, var_1) {
   var_0 endon("death_or_disconnect");
 
   if(isDefined(var_0 getcurrentweapon()) && var_0 getcurrentweapon().basename == "iw8_lm_dblmg_mp") {
@@ -2632,7 +2632,7 @@ function ref_1387f(var_0, var_1) {
     }
   }
 
-  var_1.ref_13f76 = var_0 getcurrentweapon();
+  var_1.ref_13F76 = var_0 getcurrentweapon();
   var_0 setclientomnvar("ui_securing_progress", var_1.curprogress / var_1.usetime);
   var_1.inuse = 1;
   self notify("in_use");
@@ -2641,11 +2641,11 @@ function ref_1387f(var_0, var_1) {
     level.waittill_end_condition_met = gettime();
 
     if(self.objindex == 0) {
-      ref_1243d(level.players, "dx_mpa_rutl_bomb_defusing_a", 1);
+      ref_1243D(level.players, "dx_mpa_rutl_bomb_defusing_a", 1);
     } else if(self.objindex == 1) {
-      ref_1243d(level.players, "dx_mpa_rutl_bomb_defusing_b", 1);
+      ref_1243D(level.players, "dx_mpa_rutl_bomb_defusing_b", 1);
     } else {
-      ref_1243d(level.players, "dx_mpa_rutl_bomb_defusing", 1);
+      ref_1243D(level.players, "dx_mpa_rutl_bomb_defusing", 1);
     }
   }
 
@@ -2654,8 +2654,8 @@ function ref_1387f(var_0, var_1) {
   objective_setshowprogress(self.objindex, 1);
   objective_sethot(self.objindex, 1);
   var_0 setmovespeedscale(0.2);
-  var_0 giveweapon(var_1.ref_1387d);
-  var_0 scripts\cp\cp_weapons::switchtoweaponreliable(var_1.ref_1387d);
+  var_0 giveweapon(var_1.ref_1387D);
+  var_0 scripts\cp\cp_weapons::switchtoweaponreliable(var_1.ref_1387D);
   var_0 setclientomnvar("ui_securing", 9);
   var_0 scripts\common\utility::allow_movement(0, "bomb_use");
   var_0 scripts\common\utility::allow_jump(0, "bomb_use");
@@ -2668,7 +2668,7 @@ function ref_1387f(var_0, var_1) {
   return true;
 }
 
-function ref_138f5(var_0, var_1, var_2) {
+function ref_138F5(var_0, var_1, var_2) {
   var_0 endon("death_or_disconnect");
   var_0 scripts\common\utility::allow_movement(1, "bomb_use");
   var_0 scripts\common\utility::allow_jump(1, "bomb_use");
@@ -2678,12 +2678,12 @@ function ref_138f5(var_0, var_1, var_2) {
   var_0 scripts\common\utility::allow_offhand_weapons(1, "bomb_use");
   var_0 scripts\common\utility::brjugg_onplayerkilled(1, "bomb_use");
   var_0 setmovespeedscale(0.2);
-  var_0 scripts\cp\cp_weapons::switchtoweaponreliable(var_1.ref_13f76);
-  var_0 takeweapon(var_1.ref_1387d);
+  var_0 scripts\cp\cp_weapons::switchtoweaponreliable(var_1.ref_13F76);
+  var_0 takeweapon(var_1.ref_1387D);
 
   if(istrue(var_0.inlaststand)) {
     thread logevent_kidnapevent(var_0, &"CP_SO_SAFEHOUSE/DROP_BOMB_HINT", 3);
-    var_0.min_dist_sq_from_node = var_1.ref_13f76;
+    var_0.min_dist_sq_from_node = var_1.ref_13F76;
   }
 
   objective_setlabel(self.objindex, &"MP_INGAME_ONLY/OBJ_DEFUSE_CAPS");
@@ -2705,11 +2705,11 @@ function keypad_disable_for_time(var_0) {
   level.current_checkpoint++;
 
   if(level.current_checkpoint < level.bombs.size - 1) {
-    ref_1243d(level.players, "dx_mpa_rutl_bomb_defused", 3);
+    ref_1243D(level.players, "dx_mpa_rutl_bomb_defused", 3);
   } else if(level.current_checkpoint < level.bombs.size) {
-    ref_1243d(level.players, "dx_mpa_rutl_boost_winning_matchpoint", 3);
+    ref_1243D(level.players, "dx_mpa_rutl_boost_winning_matchpoint", 3);
   } else {
-    ref_1243d(level.players, "dx_mpa_rutl_exfilwinning_start_winningteam", 3);
+    ref_1243D(level.players, "dx_mpa_rutl_exfilwinning_start_winningteam", 3);
   }
 
   self notify("bomb_defused");
@@ -2822,7 +2822,7 @@ function movespeed_set_func(var_0, var_1) {
   self setmovespeedscale(self.movespeedscale);
 }
 
-function ref_1243d(var_0, var_1, var_2, var_3) {
+function ref_1243D(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     wait var_3;
   }
@@ -2843,16 +2843,16 @@ function ref_1243d(var_0, var_1, var_2, var_3) {
 
   if(isarray(self)) {
     foreach(var_6 in self) {
-      thread ref_1243a(var_6, var_0);
+      thread ref_1243A(var_6, var_0);
     }
 
     return;
   }
 
-  thread ref_1243a(var_0, var_1);
+  thread ref_1243A(var_0, var_1);
 }
 
-function ref_1243a(var_0, var_1) {
+function ref_1243A(var_0, var_1) {
   var_2 = self;
   var_2 endon("disconnect");
 
@@ -2884,7 +2884,7 @@ function ref_1243a(var_0, var_1) {
   return true;
 }
 
-function ref_1238e(var_0, var_1, var_2, var_3, var_4) {
+function ref_1238E(var_0, var_1, var_2, var_3, var_4) {
   [var_6] = strtok(var_0, "+");
   var_7 = scripts\engine\utility::array_remove(var_5, var_6);
   var_8 = scripts\cp\cp_weapon::buildweapon(var_6, var_7);

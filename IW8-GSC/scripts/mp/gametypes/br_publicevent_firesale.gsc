@@ -5,15 +5,15 @@
 
 function init() {
   var_0 = spawnStruct();
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.weight = getdvarfloat("scr_br_pe_firesale_weight", 1);
   var_0.attackerswaittime = &attackerswaittime;
   var_0.ref_14382 = &ref_14382;
   var_0.postinitfunc = &postinitfunc;
-  var_0.ref_11b78 = getdvarint("scr_br_pe_firesale_max_times", 1);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_firesale_max_times", 1);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("firesale", "05 101010101010");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("firesale");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(2, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(2, var_0);
 }
 
 function postinitfunc() {
@@ -21,7 +21,7 @@ function postinitfunc() {
   game["dialog"]["public_events_firesale_end"] = "public_events_fire_sale_end";
 }
 
-function ref_140cf() {
+function ref_140CF() {
   if(!isDefined(level.br_circle)) {
     return false;
   }

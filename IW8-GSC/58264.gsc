@@ -4,7 +4,7 @@
 ***********************************************/
 
 function init() {
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("explosive_bow", &ref_13e28, undefined, &ref_13e0f);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("explosive_bow", &ref_13E28, undefined, &ref_13E0F);
   init_fx();
 }
 
@@ -12,9 +12,9 @@ function init_fx() {
   level._effect["vfx_explosive_bow_explosion"] = loadfx("vfx/iw8/weap/_explo/vfx_explo_explosive_bow.vfx");
 }
 
-function ref_13e28(var_0) {
+function ref_13E28(var_0) {
   var_1 = self;
-  var_2 = ref_13e29(var_1, var_0);
+  var_2 = ref_13E29(var_1, var_0);
 
   if(!var_2) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
@@ -25,10 +25,10 @@ function ref_13e28(var_0) {
   return var_2;
 }
 
-function ref_13e0f() {
+function ref_13E0F() {
   var_0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("explosive_bow", self);
-  var_0.ref_133ce = 1;
-  return ref_13e29(var_0, 1);
+  var_0.ref_133CE = 1;
+  return ref_13E29(var_0, 1);
 }
 
 function get_actor_stance() {
@@ -59,7 +59,7 @@ function get_actor_stance() {
   return true;
 }
 
-function ref_13e29(var_0, var_1) {
+function ref_13E29(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
 
@@ -122,11 +122,11 @@ function laststandrevivedecayscale() {
   scripts\mp\weapons::fixupplayerweapons(self, var_0);
   self.spawnx1stashlootcache = self getammocount(var_1);
   self notify("explosive_bow_equipped");
-  thread ref_144f9(var_1, "weapon_taken");
-  thread ref_144f9(var_1, "weapon_dropped");
+  thread ref_144F9(var_1, "weapon_taken");
+  thread ref_144F9(var_1, "weapon_dropped");
   thread ref_14495(var_1);
-  thread ref_144fb(var_1);
-  thread ref_144f2(var_1);
+  thread ref_144FB(var_1);
+  thread ref_144F2(var_1);
   thread ref_14490(var_1);
   return true;
 }
@@ -141,7 +141,7 @@ function move_arena_startspawns() {
   }
 }
 
-function ref_144f9(var_0, var_1) {
+function ref_144F9(var_0, var_1) {
   self endon("disconnect");
   self endon("exit_bow");
 
@@ -149,7 +149,7 @@ function ref_144f9(var_0, var_1) {
     self waittill(var_1, var_2);
 
     if(var_2 == var_0) {
-      ref_138fb(var_0);
+      ref_138FB(var_0);
     }
 
     waitframe();
@@ -166,7 +166,7 @@ function ref_14495(var_0) {
   thread mlgpoint();
 }
 
-function ref_144fb(var_0) {
+function ref_144FB(var_0) {
   self endon("disconnect");
   self endon("exit_bow");
 
@@ -176,22 +176,22 @@ function ref_144fb(var_0) {
     if(self hasweapon(var_0) && var_1 != var_0) {
       if(var_1.basename == "armor_plate_deploy_mp") {
         self.debug_printcode = self.lastdroppableweaponobj;
-        scripts\mp\weapons::ref_1316b(var_0);
+        scripts\mp\weapons::ref_1316B(var_0);
       } else if(!self isonladder() && !(var_1.ismelee && self ismeleeing())) {
-        ref_138fb(var_0);
+        ref_138FB(var_0);
       }
 
       continue;
     }
 
     if(var_1 == var_0 && isDefined(self.debug_printcode)) {
-      scripts\mp\weapons::ref_1316b(self.debug_printcode);
+      scripts\mp\weapons::ref_1316B(self.debug_printcode);
       self.debug_printcode = undefined;
     }
   }
 }
 
-function ref_144f2(var_0) {
+function ref_144F2(var_0) {
   self endon("disconnect");
   self endon("exit_bow");
 
@@ -209,7 +209,7 @@ function ref_144f2(var_0) {
     if(self.spawnx1stashlootcache == 0) {
       self.spawnx1stashlootcache = undefined;
       thread handletrex();
-      thread ref_144ee(var_0);
+      thread ref_144EE(var_0);
       self notify("stop_explosive_bow_cancel_watcher");
       self notify("exit_bow");
     }
@@ -218,7 +218,7 @@ function ref_144f2(var_0) {
   }
 }
 
-function ref_144ee(var_0) {
+function ref_144EE(var_0) {
   self endon("disconnect");
   self waittill("weapon_change", var_1);
   self takeweapon(var_0);
@@ -255,7 +255,7 @@ function handletrex() {
   self notify("cleanup_explosive_bow");
 }
 
-function ref_138fb(var_0) {
+function ref_138FB(var_0) {
   self takeweapon(var_0);
 
   if(isDefined(self.spawnx1stashlootcache) && self.spawnx1stashlootcache != 0) {

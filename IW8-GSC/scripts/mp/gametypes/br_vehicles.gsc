@@ -78,7 +78,7 @@ function setupvehiclespawnvolumes() {
       var_7 = [[level.filtervehiclespawnstructsmapfunc]](var_14, var_7);
     }
 
-    ref_13e0c(var_7);
+    ref_13E0C(var_7);
     hudcoststring(var_7, "atv_spawn", "atv", "motorcycle_spawn", "motorcycle", "motorcycle_spawn_percent");
     hudcoststring(var_7, "cargotruck_spawn", "cargo_truck", "cargotrucksusp_spawn", "cargo_truck_susp", "cargotrucksusp_spawn_percent");
     hudcoststring(var_7, "cargotrucksusp_spawn", "cargo_truck_susp", "cargotrucksuspaa_spawn", "cargo_truck_susp_aa", "cargotrucksuspaa_spawn_percent");
@@ -354,7 +354,7 @@ function emptyallvehicles() {
 
   foreach(var_1 in level.vehicle.instances) {
     foreach(var_3 in var_1) {
-      if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141de(var_3)) {
+      if(scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DE(var_3)) {
         scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_ejectalloccupants(var_3);
       }
     }
@@ -441,7 +441,7 @@ function spawnavehicle(var_0, var_1, var_2) {
 
   if(isDefined(var_6)) {
     if(scripts\mp\gametypes\br_gametypes::tutorial_showtext("postSpawnVehicle")) {
-      scripts\mp\gametypes\br_gametypes::ref_12e05("postSpawnVehicle", var_6, var_0);
+      scripts\mp\gametypes\br_gametypes::ref_12E05("postSpawnVehicle", var_6, var_0);
     }
 
     scripts\mp\gametypes\br_analytics::dialog_monitor_shieldstow(var_6, var_0);
@@ -723,7 +723,7 @@ function waitforvehiclestodeletethenspawninitial() {
   waittillframeend();
 
   if(scripts\mp\gametypes\br_gametypes::tutorial_showtext("spawnInitialVehicles")) {
-    scripts\mp\gametypes\br_gametypes::ref_12e05("spawnInitialVehicles");
+    scripts\mp\gametypes\br_gametypes::ref_12E05("spawnInitialVehicles");
     return;
   }
 
@@ -865,7 +865,7 @@ function vars_update(var_0, var_1, var_2) {
   return false;
 }
 
-function ref_13e0c(var_0) {
+function ref_13E0C(var_0) {
   var_1 = getdvarfloat("lb_mg_spawn_percent", 0);
 
   if(var_1 == 0) {

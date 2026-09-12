@@ -4,7 +4,7 @@
 **********************************************************************/
 
 function init() {
-  level.ref_1229d = &ref_1229e;
+  level.ref_1229D = &ref_1229E;
   level.ref_12073 = &infilsactive;
 }
 
@@ -28,7 +28,7 @@ function infilsactive(var_0, var_1, var_2, var_3) {
   level scripts\mp\gamescore::giveteamscoreforobjective(var_0.team, var_1, 0);
 }
 
-function ref_1229e() {
+function ref_1229E() {
   var_0 = getdvarint("scr_br_pe_choppers_score", 2);
 
   if(isDefined(self.viphud_hidefromplayer) && isPlayer(self.viphud_hidefromplayer) && var_0) {

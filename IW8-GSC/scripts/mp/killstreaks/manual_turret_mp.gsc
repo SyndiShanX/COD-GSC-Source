@@ -11,9 +11,9 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "createHintObject", &manual_turret_createhintobject);
   scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "getTargetMarker", &manual_turret_gettargetmarker);
   scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "getEnemyPlayers", &manual_turret_getenemyplayers);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "watchForPlayerEnteringLastStand", &ref_11ac2);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "handleMovingPlatform", &ref_11ac1);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "allowPickupOfTurret", &ref_11ac0);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "watchForPlayerEnteringLastStand", &ref_11AC2);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "handleMovingPlatform", &ref_11AC1);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "allowPickupOfTurret", &ref_11AC0);
 }
 
 function init_manual_turret_settings() {
@@ -94,34 +94,34 @@ function manual_turret_getenemyplayers(var_0) {
   return scripts\mp\utility\teams::getenemyplayers(var_0);
 }
 
-function ref_11ac1(var_0) {
+function ref_11AC1(var_0) {
   if(isDefined(var_0.moving_platform)) {
     var_1 = spawnStruct();
     var_1.linkparent = var_0.moving_platform;
-    var_1.x1givelaststandoverride = var_0.ref_11dbe;
-    var_1.angleoffset = var_0.ref_11dbd;
+    var_1.x1givelaststandoverride = var_0.ref_11DBE;
+    var_1.angleoffset = var_0.ref_11DBD;
     var_1.endonstring = "carried";
-    var_1.deathoverridecallback = &ref_11acb;
+    var_1.deathoverridecallback = &ref_11ACB;
     var_0 thread scripts\mp\movers::handle_moving_platforms(var_1);
     return;
   }
 }
 
-function ref_11acb(var_0) {
+function ref_11ACB(var_0) {
   self notify("death");
 }
 
-function ref_11ac2() {
+function ref_11AC2() {
   self endon("death_or_disconnect");
   self notify("stop_manual_turret_lastStandWatcher");
   self endon("stop_manual_turret_lastStandWatcher");
   self endon("turret_placement_finished");
-  thread scripts\cp_mp\killstreaks\manual_turret::ref_11ac6("last_stand_start");
+  thread scripts\cp_mp\killstreaks\manual_turret::ref_11AC6("last_stand_start");
   self waittill("last_stand_start");
   self notify("equip_deploy_cancel");
 }
 
-function ref_11ac0() {
+function ref_11AC0() {
   if(scripts\cp_mp\utility\inventory_utility::isanymonitoredweaponswitchinprogress()) {
     return false;
   }

@@ -107,7 +107,7 @@ function isbrsquadleader(var_0, var_1, var_2, var_3) {
 
   var_6 = spawnStruct();
   var_6.ref_12466 = istrue(var_2);
-  var_6.ref_11ed2 = var_1;
+  var_6.ref_11ED2 = var_1;
 
   switch (var_1) {
     case "toma_strike":
@@ -147,7 +147,7 @@ function isbrsquadleader(var_0, var_1, var_2, var_3) {
     isbunkeraltenabled(var_0, var_3);
   }
 
-  var_0 scripts\mp\gametypes\br_gametypes::ref_12e05("onKillstreakDanger", var_6);
+  var_0 scripts\mp\gametypes\br_gametypes::ref_12E05("onKillstreakDanger", var_6);
 }
 
 function isbunkeraltenabled(var_0, var_1) {

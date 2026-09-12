@@ -154,8 +154,8 @@ function try_start_driving(var_0, var_1) {
     return 0;
   }
 
-  if(isDefined(level.ref_13e02)) {
-    return [[level.ref_13e02]]();
+  if(isDefined(level.ref_13E02)) {
+    return [[level.ref_13E02]]();
   }
 
   return 1;
@@ -252,7 +252,7 @@ function exit_retrieve_hostage(var_0, var_1, var_2, var_3) {
 }
 
 function enter_hood_repair(var_0, var_1, var_2) {
-  thread ref_1421e(var_2);
+  thread ref_1421E(var_2);
   var_3 = do_hood_repair_animation(var_2, var_1, "tag_grill", var_0);
   var_2 notify("hood_repair_finished");
 
@@ -267,7 +267,7 @@ function enter_hood_repair(var_0, var_1, var_2) {
   remove_from_vehicle_repair_interaction_list(var_2, var_0);
 }
 
-function ref_1421e(var_0) {
+function ref_1421E(var_0) {
   var_0 endon("death");
   var_0 endon("hood_repair_finished");
   var_1 = var_0.origin;
@@ -423,7 +423,7 @@ function exit_grenadier_seat(var_0, var_1, var_2, var_3) {
   exit_seat_omnvar(var_1, var_1, "grenadier", var_2);
 }
 
-function ref_11d06(var_0, var_1, var_2) {
+function ref_11D06(var_0, var_1, var_2) {
   var_1 endon("death_or_disconnect");
   var_1 endon("last_stand_start");
   var_1 notify("monitor_exit_initiated");
@@ -457,7 +457,7 @@ function ref_11d06(var_0, var_1, var_2) {
   }
 }
 
-function ref_11d05(var_0, var_1, var_2) {
+function ref_11D05(var_0, var_1, var_2) {
   var_1 endon("death_or_disconnect");
   var_1 endon("last_stand_start");
   var_1 notify("monitor_exit_initiated");
@@ -1027,8 +1027,8 @@ function reaper_fire_missile_think(var_0, var_1) {
   var_0 endon("exit_overwatch");
   var_1 endon("death");
 
-  if(ref_12a4d()) {
-    ref_12a4c(var_0);
+  if(ref_12A4D()) {
+    ref_12A4C(var_0);
   }
 
   var_0 notifyonplayercommand("reaper_fire_missile", "+attack");
@@ -1064,8 +1064,8 @@ function fire_reaper_missile(var_0, var_1) {
 
 function reaper_waitforweaponreloadtime(var_0) {
   var_1 = 4;
-  level.ref_12a4b = gettime() + int(var_1 * 1000);
-  var_0 setclientomnvar("ui_ac130_40mm_reloadtime", level.ref_12a4b);
+  level.ref_12A4B = gettime() + int(var_1 * 1000);
+  var_0 setclientomnvar("ui_ac130_40mm_reloadtime", level.ref_12A4B);
 
   for(;;) {
     wait 0.05;
@@ -1077,15 +1077,15 @@ function reaper_waitforweaponreloadtime(var_0) {
   }
 }
 
-function ref_12a4d() {
-  return isDefined(level.ref_12a4b) && level.ref_12a4b > gettime();
+function ref_12A4D() {
+  return isDefined(level.ref_12A4B) && level.ref_12A4B > gettime();
 }
 
-function ref_12a4c(var_0) {
+function ref_12A4C(var_0) {
   var_1 = gettime();
-  var_2 = level.ref_12a4b - var_1;
+  var_2 = level.ref_12A4B - var_1;
   var_3 = var_2 / 1000;
-  var_0 setclientomnvar("ui_ac130_40mm_reloadtime", level.ref_12a4b);
+  var_0 setclientomnvar("ui_ac130_40mm_reloadtime", level.ref_12A4B);
   wait var_3;
 }
 
@@ -1099,13 +1099,13 @@ function make_reaper_missile_target_ent(var_0, var_1) {
   var_2 = get_reaper_player_look_at_ground_pos(var_0, var_1);
   var_3 = spawn("script_model", var_2);
   var_3 setModel("tag_origin");
-  thread ref_123fc(var_3, var_3);
+  thread ref_123FC(var_3, var_3);
   put_objective_icon_on_reaper_missile_target_ent(var_3, var_0);
   thread follow_player_look_at(var_3, var_3, var_0);
   return var_3;
 }
 
-function ref_123fc(var_0, var_1) {
+function ref_123FC(var_0, var_1) {
   var_0 endon("death");
   waitframe();
   playfxontagforclients(level._effect["reaper_missile_marker"], var_0, "tag_origin", var_1);
@@ -1325,7 +1325,7 @@ function reaper_camera_zoom_think(var_0, var_1) {
   set_current_reaper_camera_zoom_level(var_0, 2, var_1);
 
   for(;;) {
-    var_2 = var_0 scripts\engine\utility::ref_143ad("reaper_camera_zoom_in", "reaper_camera_zoom_out");
+    var_2 = var_0 scripts\engine\utility::ref_143AD("reaper_camera_zoom_in", "reaper_camera_zoom_out");
 
     if(var_2 == "reaper_camera_zoom_in") {
       adjust_reaper_camera_zoom_level(var_0, -1, var_1);
@@ -2461,7 +2461,7 @@ function enter_vehicle(var_0, var_1) {
   add_to_players_as_passenger_list(var_1, var_0);
   add_to_players_cannot_see_vehicle_icon_list(var_1, var_0);
   update_vehicle_objective_visibility(var_1);
-  ref_12bec(var_0, var_1);
+  ref_12BEC(var_0, var_1);
   update_driver_interaction_hint(var_1);
 }
 
@@ -2491,16 +2491,16 @@ function exit_vehicle(var_0, var_1, var_2) {
   }
 }
 
-function ref_12bec(var_0, var_1) {
-  if(isDefined(var_1.ref_128c0)) {
-    var_0.ref_128c1 = [];
+function ref_12BEC(var_0, var_1) {
+  if(isDefined(var_1.ref_128C0)) {
+    var_0.ref_128C1 = [];
     var_2 = var_0 getweaponslistprimaries();
     var_3 = var_0 getcurrentweapon();
-    var_4 = scripts\engine\utility::array_contains(var_1.ref_128c0, var_3.basename);
+    var_4 = scripts\engine\utility::array_contains(var_1.ref_128C0, var_3.basename);
 
     foreach(var_6 in var_2) {
-      if(isDefined(var_6.basename) && scripts\engine\utility::array_contains(var_1.ref_128c0, var_6.basename)) {
-        var_0.ref_128c1[var_0.ref_128c1.size] = var_6;
+      if(isDefined(var_6.basename) && scripts\engine\utility::array_contains(var_1.ref_128C0, var_6.basename)) {
+        var_0.ref_128C1[var_0.ref_128C1.size] = var_6;
         var_0 takeweapon(var_6);
       }
     }
@@ -2517,8 +2517,8 @@ function ref_12bec(var_0, var_1) {
 function race_set_next_checkpoint(var_0) {
   var_1 = 0;
 
-  if(isDefined(var_0.ref_128c1)) {
-    foreach(var_3 in var_0.ref_128c1) {
+  if(isDefined(var_0.ref_128C1)) {
+    foreach(var_3 in var_0.ref_128C1) {
       var_0 giveweapon(var_3);
 
       if(issubstr(var_3.basename, "riotshield")) {
@@ -2526,7 +2526,7 @@ function race_set_next_checkpoint(var_0) {
       }
     }
 
-    var_0.ref_128c1 = undefined;
+    var_0.ref_128C1 = undefined;
   }
 
   if(istrue(var_1)) {
@@ -2689,7 +2689,7 @@ function init_vehicle(var_0, var_1) {
   var_0.slow_tread_vfx_trigger_speed = var_1.slow_tread_vfx_trigger_speed;
   var_0.fast_tread_vfx_trigger_speed = var_1.fast_tread_vfx_trigger_speed;
   var_0.tread_vfx_tags = var_1.tread_vfx_tags;
-  var_0.ref_128c0 = var_1.ref_128c0;
+  var_0.ref_128C0 = var_1.ref_128C0;
 }
 
 function vehicle_damage_monitor(var_0, var_1) {
@@ -4034,60 +4034,60 @@ function init_vehicle_repair_anims() {
   level.scr_anim["veh_repair_plyr"]["tire_repair_start"] = % sdr_cp_tirefix_start;
   level.scr_animname["veh_repair_plyr"]["tire_repair_start"] = "sdr_cp_tirefix_start";
   level.scr_eventanim["veh_repair_plyr"]["tire_repair_start"] = "repair_in";
-  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_tire_enter_foley", &ref_13b9f);
-  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_tire_air_start", &ref_13b9d);
+  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_tire_enter_foley", &ref_13B9F);
+  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_tire_air_start", &ref_13B9D);
   level.scr_anim["veh_repair_plyr"]["tire_repair_loop"] = % sdr_cp_tirefix_loop;
   level.scr_animname["veh_repair_plyr"]["tire_repair_loop"] = "sdr_cp_tirefix_loop";
   level.scr_eventanim["veh_repair_plyr"]["tire_repair_loop"] = "repair_lp";
   level.scr_anim["veh_repair_plyr"]["tire_repair_stop"] = % sdr_cp_tirefix_end;
   level.scr_animname["veh_repair_plyr"]["tire_repair_stop"] = "sdr_cp_tirefix_end";
   level.scr_eventanim["veh_repair_plyr"]["tire_repair_stop"] = "repair_out";
-  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_tire_air_stop", &ref_13b9e);
-  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_tire_exit_foley", &ref_13ba0);
+  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_tire_air_stop", &ref_13B9E);
+  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_tire_exit_foley", &ref_13BA0);
   level.scr_anim["veh_repair_plyr"]["repair_grill_start"] = % cp_scripted_fixdecho_enter;
   level.scr_animname["veh_repair_plyr"]["repair_grill_start"] = "cp_scripted_fixdecho_enter";
   level.scr_eventanim["veh_repair_plyr"]["repair_grill_start"] = "decho_repair_hood_enter";
-  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_engine_enter_foley", &ref_12c30);
+  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_engine_enter_foley", &ref_12C30);
   level.scr_anim["veh_repair_plyr"]["repair_grill_stop"] = % cp_scripted_fixdecho_exit;
   level.scr_animname["veh_repair_plyr"]["repair_grill_stop"] = "cp_scripted_fixdecho_exit";
   level.scr_eventanim["veh_repair_plyr"]["repair_grill_stop"] = "decho_repair_hood_exit";
-  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_engine_exit_foley", &ref_12c31);
+  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_engine_exit_foley", &ref_12C31);
   level.scr_anim["veh_repair_plyr"]["repair_grill"] = % cp_scripted_fixdecho_idle;
   level.scr_animname["veh_repair_plyr"]["repair_grill"] = "cp_scripted_fixdecho_idle";
   level.scr_eventanim["veh_repair_plyr"]["repair_grill"] = "decho_repair_hood_idle";
-  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_engine_fixing_long", &ref_12c2e);
-  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_engine_fixing_short", &ref_12c2f);
+  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_engine_fixing_long", &ref_12C2E);
+  scripts\common\anim::addnotetrack_customfunction("veh_repair_plyr", "sfx_scn_cp_repair_engine_fixing_short", &ref_12C2F);
 }
 
-function ref_13b9f(var_0) {
+function ref_13B9F(var_0) {
   var_0 playsoundonmovingent("scn_cp_repair_tire_enter_foley");
 }
 
-function ref_13b9d(var_0) {
+function ref_13B9D(var_0) {
   var_0 playsoundonmovingent("scn_cp_repair_tire_air_start");
 }
 
-function ref_13b9e(var_0) {
+function ref_13B9E(var_0) {
   var_0 playsoundonmovingent("scn_cp_repair_tire_air_stop");
 }
 
-function ref_13ba0(var_0) {
+function ref_13BA0(var_0) {
   var_0 playsoundonmovingent("scn_cp_repair_tire_exit_foley");
 }
 
-function ref_12c30(var_0) {
+function ref_12C30(var_0) {
   var_0 playsoundonmovingent("scn_cp_repair_engine_enter_foley");
 }
 
-function ref_12c31(var_0) {
+function ref_12C31(var_0) {
   var_0 playsoundonmovingent("scn_cp_repair_engine_exit_foley");
 }
 
-function ref_12c2e(var_0) {
+function ref_12C2E(var_0) {
   var_0 playsoundonmovingent("scn_cp_repair_engine_fixing_long");
 }
 
-function ref_12c2f(var_0) {
+function ref_12C2F(var_0) {
   var_0 playsoundonmovingent("scn_cp_repair_engine_fixing_short");
 }
 
@@ -4563,7 +4563,7 @@ function keep_following_vehicle(var_0, var_1) {
     }
 
     var_0 moveTo(var_2, var_4);
-    var_0 scripts\engine\utility::ref_143b9(var_4, "movedone");
+    var_0 scripts\engine\utility::ref_143B9(var_4, "movedone");
   }
 }
 
@@ -4618,7 +4618,7 @@ function get_humvee_info(var_0) {
   var_1.slow_tread_vfx_trigger_speed = 1;
   var_1.fast_tread_vfx_trigger_speed = 20;
   var_1.tread_vfx_tags = ["tag_wheel_back_right", "tag_wheel_back_left", "tag_wheel_front_right", "tag_wheel_front_left"];
-  var_1.ref_128c0 = ["iw8_me_riotshield_mp"];
+  var_1.ref_128C0 = ["iw8_me_riotshield_mp"];
   var_2 = [];
   GscBinSkip0(0x2e, "tag_wheel_back_left", "tag_wheel_center_back_left");
 }
@@ -4655,7 +4655,7 @@ function get_friendly_hvi_vehicle_info(var_0) {
   var_1.slow_tread_vfx_trigger_speed = 1;
   var_1.fast_tread_vfx_trigger_speed = 20;
   var_1.tread_vfx_tags = ["tag_wheel_back_right", "tag_wheel_back_left", "tag_wheel_front_right", "tag_wheel_front_left"];
-  var_1.ref_128c0 = ["iw8_me_riotshield_mp"];
+  var_1.ref_128C0 = ["iw8_me_riotshield_mp"];
   var_2 = [];
   GscBinSkip0(0x2e, "tag_wheel_back_left", "tag_wheel_center_back_left");
 }

@@ -110,7 +110,7 @@ function asm_register() {
   anim.asmfuncs["soldier_cp"][91] = &scripts\asm\soldier\death::choosedirectionallargepaindeathanim;
   anim.asmfuncs["soldier_cp"][92] = &scripts\asm\soldier\death::playbalconydeathanim;
   anim.asmfuncs["soldier_cp"][93] = &scripts\asm\soldier\death::choosebalconydeathanim;
-  anim.asmfuncs["soldier_cp"][94] = &scripts\mp\trials\mp_m_king_create_script::ref_1245d;
+  anim.asmfuncs["soldier_cp"][94] = &scripts\mp\trials\mp_m_king_create_script::ref_1245D;
   anim.asmfuncs["soldier_cp"][95] = &scripts\asm\soldier\death::shouldplayexplosivedeath;
   anim.asmfuncs["soldier_cp"][96] = &scripts\asm\soldier\death::shouldplayshockdeath;
   anim.asmfuncs["soldier_cp"][97] = &scripts\asm\soldier\death::shouldplayshieldbashdeath;
@@ -192,7 +192,7 @@ function asm_register() {
   anim.asmfuncs["soldier_cp"][173] = &scripts\asm\soldier\patrol::patrol_playanim_pulloutflashlight;
   anim.asmfuncs["soldier_cp"][174] = &scripts\asm\soldier\patrol::flashlightnotehandler;
   anim.asmfuncs["soldier_cp"][175] = &scripts\asm\soldier\patrol::patrol_playanim_randomrate;
-  anim.asmfuncs["soldier_cp"][176] = &scripts\asm\shared\utility::ref_1244e;
+  anim.asmfuncs["soldier_cp"][176] = &scripts\asm\shared\utility::ref_1244E;
   anim.asmfuncs["soldier_cp"][177] = &scripts\asm\soldier\patrol_idle::patrol_idle_custom_init;
   anim.asmfuncs["soldier_cp"][178] = &scripts\asm\soldier\patrol_idle::patrol_idle_custom_cleanup;
   anim.asmfuncs["soldier_cp"][179] = &scripts\asm\soldier\patrol::patrol_idle_setupreaction;
@@ -282,7 +282,7 @@ function asm_register() {
   anim.asmfuncs["soldier_cp"][263] = &scripts\asm\soldier\long_death::shouldfinishlongdeath;
   anim.asmfuncs["soldier_cp"][264] = &scripts\asm\soldier\long_death::shoulddodyingbackcrawl;
   anim.asmfuncs["soldier_cp"][265] = &scripts\asm\soldier\long_death::shouldshootduringlongdeath;
-  anim.asmfuncs["soldier_cp"][266] = &scripts\asm\soldier\long_death::ref_132fc;
+  anim.asmfuncs["soldier_cp"][266] = &scripts\asm\soldier\long_death::ref_132FC;
   anim.asmfuncs["soldier_cp"][267] = &scripts\asm\soldier\long_death::shoulddoshootinglongdeath;
   anim.asmfuncs["soldier_cp"][268] = &scripts\asm\traverse::playtraverseanim_scaled;
   anim.asmfuncs["soldier_cp"][269] = &scripts\asm\soldier\traverse::playtraverseanim_deprecated;
@@ -300,7 +300,7 @@ function asm_register() {
   anim.asmfuncs["soldier_cp"][281] = &scripts\asm\traverse::shouldconsidertraversearrival;
   anim.asmfuncs["soldier_cp"][282] = &scripts\asm\traverse::shouldstarttraverse;
   anim.asmfuncs["soldier_cp"][283] = &scripts\asm\traverse::shoulddotraversalarrival;
-  anim.asmfuncs["soldier_cp"][284] = &scripts\asm\traverse::ref_13d12;
+  anim.asmfuncs["soldier_cp"][284] = &scripts\asm\traverse::ref_13D12;
   anim.asmfuncs["soldier_cp"][285] = &scripts\asm\shared\utility::playanimandusegoalweight;
   anim.asmfuncs["soldier_cp"][286] = &scripts\asm\soldier\cover::playshuffleloop;
   anim.asmfuncs["soldier_cp"][287] = &scripts\asm\soldier\cover::playshuffleanim_arrival;
@@ -427,9 +427,9 @@ function asm_register() {
   anim.asmfuncs["soldier_cp"][408] = &scripts\asm\soldier\vehicle::vehiclereload_terminate;
   anim.asmfuncs["soldier_cp"][409] = &scripts\asm\soldier\vehicle::playanim_arriveatvehicle;
   anim.asmfuncs["soldier_cp"][410] = &scripts\asm\soldier\vehicle::arriveatvehicle_terminate;
-  anim.asmfuncs["soldier_cp"][411] = &scripts\asm\soldier\vehicle::ref_1244b;
+  anim.asmfuncs["soldier_cp"][411] = &scripts\asm\soldier\vehicle::ref_1244B;
   anim.asmfuncs["soldier_cp"][412] = &scripts\asm\soldier\vehicle::getvehicleplayerturretcamo;
-  anim.asmfuncs["soldier_cp"][413] = &scripts\asm\soldier\vehicle::ref_1244c;
+  anim.asmfuncs["soldier_cp"][413] = &scripts\asm\soldier\vehicle::ref_1244C;
   anim.asmfuncs["soldier_cp"][414] = &scripts\asm\soldier\vehicle::getvehiclespawns;
   anim.asmfuncs["soldier_cp"][415] = &scripts\asm\soldier\vehicle::shouldentervehicle;
   anim.asmfuncs["soldier_cp"][416] = &scripts\asm\soldier\vehicle::shouldexitvehicle;
@@ -443,9 +443,9 @@ function asm_register() {
   anim.asmfuncs["soldier_cp"][424] = &scripts\asm\soldier\vehicle::vehiclecanshootlmg;
   anim.asmfuncs["soldier_cp"][425] = &scripts\asm\soldier\vehicle::shouldorienttoentervehicle;
   anim.asmfuncs["soldier_cp"][426] = &scripts\asm\soldier\vehicle::update_sentry_settings;
-  anim.asmfuncs["soldier_cp"][427] = &scripts\mp\trials\mp_m_cornfield_floor_is_lava_create_script::ref_13ce4;
-  anim.asmfuncs["soldier_cp"][428] = &abilitykey::ref_11fe3;
-  anim.asmfuncs["soldier_cp"][429] = &scripts\mp\trials\mp_m_king_create_script::ref_1244a;
+  anim.asmfuncs["soldier_cp"][427] = &scripts\mp\trials\mp_m_cornfield_floor_is_lava_create_script::ref_13CE4;
+  anim.asmfuncs["soldier_cp"][428] = &abilitykey::ref_11FE3;
+  anim.asmfuncs["soldier_cp"][429] = &scripts\mp\trials\mp_m_king_create_script::ref_1244A;
   anim.asmfuncs["soldier_cp"][430] = &scripts\mp\trials\mp_m_king_create_script::ref_12447;
   anim.asmfuncs["soldier_cp"][431] = &scripts\mp\trials\mp_m_king_create_script::ref_12446;
   anim.asmfuncs["soldier_cp"][432] = &scripts\mp\trials\mp_m_king_create_script::ref_12445;

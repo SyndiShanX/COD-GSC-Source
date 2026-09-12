@@ -52,7 +52,7 @@ function showonscreenbloodeffects() {
   self notify("turn_on_screen_blood_on");
   self endon("turn_on_screen_blood_on");
   self setscriptablepartstate("on_screen_blood", "on");
-  scripts\engine\utility::ref_143ba(2, "death", "last_stand");
+  scripts\engine\utility::ref_143BA(2, "death", "last_stand");
   self setscriptablepartstate("on_screen_blood", "neutral");
 }
 
@@ -627,7 +627,7 @@ function watchformanualweaponend(var_0) {
 
 function startfadetransition(var_0) {
   self endon("disconnect");
-  var_1 = scripts\engine\utility::ref_143b9(var_0, "cancel_remote_sequence");
+  var_1 = scripts\engine\utility::ref_143B9(var_0, "cancel_remote_sequence");
 
   if(!isDefined(var_1) || var_1 == "cancel_remote_sequence") {
     return;
@@ -635,7 +635,7 @@ function startfadetransition(var_0) {
 
   self playlocalsound("mp_killstreak_transition_whoosh");
   self visionsetfadetoblackforplayer("bw", 0.5);
-  var_1 = scripts\engine\utility::ref_143b9(0.5, "death");
+  var_1 = scripts\engine\utility::ref_143B9(0.5, "death");
 
   if(!isDefined(var_1) || var_1 == "death") {
     self stoplocalsound("mp_killstreak_transition_whoosh");
@@ -913,7 +913,7 @@ function lap() {
   self delete();
 }
 
-function ref_13a3a(var_0) {
+function ref_13A3A(var_0) {
   var_1 = undefined;
   var_2 = undefined;
   var_3 = undefined;
@@ -947,8 +947,8 @@ function ref_13a3a(var_0) {
 
   if(isDefined(var_1)) {
     _takeweapon(var_0, var_1);
-    var_0.ref_12d53 = var_1;
-    var_0.ref_12d4f = var_2;
+    var_0.ref_12D53 = var_1;
+    var_0.ref_12D4F = var_2;
     var_0 scripts\cp\cp_weapon::riotshieldonweaponchange(var_3);
     var_0 notify("modified_riot_shield_thread");
     var_0 endon("modified_riot_shield_thread");

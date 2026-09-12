@@ -324,8 +324,8 @@ function dof_process_ads() {
   var_10 = self getEye();
   var_11 = self getplayerangles();
 
-  if(isDefined(self.dof_ref_ent)) {
-    var_12 = combineangles(self.dof_ref_ent.angles, var_11);
+  if(isDefined(self.dof_ref_ENT)) {
+    var_12 = combineangles(self.dof_ref_ENT.angles, var_11);
   } else {
     var_12 = var_12;
   }
@@ -434,8 +434,8 @@ function dof_process_physical_ads(var_0) {
     }
   }
 
-  if(isDefined(self.dof_ref_ent)) {
-    var_7 = combineangles(self.dof_ref_ent.angles, var_6);
+  if(isDefined(self.dof_ref_ENT)) {
+    var_7 = combineangles(self.dof_ref_ENT.angles, var_6);
   } else {
     var_7 = var_7;
   }

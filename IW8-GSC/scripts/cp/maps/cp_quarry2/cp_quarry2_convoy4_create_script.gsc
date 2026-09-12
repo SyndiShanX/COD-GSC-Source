@@ -1694,7 +1694,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_maxdist = "30000";
   var_4.script_team = "axis";
   var_4.script_unload = "1";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (7021, -6301.04, 137.23), (0, 231, 0), "quarry_intro2_chopper", "auto372", "default", "lbravo_intro2_2 lbravo_intro2_3", "lbravo_intro2", undefined, undefined, 1300, 25, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_0[[var_3]](var_4, var_1, var_2, (4235.94, 2145.17, 80), (0, 345, 0), "auto178", undefined, undefined, undefined, undefined, undefined, undefined, 128);
@@ -3328,7 +3328,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_maxdist = "45000";
   var_4.script_team = "axis";
   var_4.script_unload = "0";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (1808.79, 12269, 846.5), (0, 106.15, 0), "lbravo_spawner_p3_form_a", undefined, "default", "p3_form_a_2 p3_form_a_3 p3_form_a_4 p3_form_a_5", "p3_form_a", undefined, undefined, 512, 65, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_4.script_goalyaw = "1";
@@ -3342,7 +3342,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_maxdist = "45000";
   var_4.script_team = "axis";
   var_4.script_unload = "0";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (308.79, 12057, 682.5), (0, 106.15, 0), "lbravo_spawner_p3_form_b", undefined, "default", "p3_form_b_2 p3_form_b_3 p3_form_b_4 p3_form_b_5", "p3_form_b", undefined, undefined, 512, 65, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_0[[var_3]](var_4, var_1, var_2, (571.68, 11351.2, 1420.25), (0, 50, 0), undefined, undefined, undefined, undefined, "p3_form_b_4", undefined, undefined, 512, 65);
@@ -3496,7 +3496,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_maxdist = "30000";
   var_4.script_team = "axis";
   var_4.script_unload = "1";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (4765.04, -5939, 713.23), (0, 321, 0), "quarry_intro1_chopper", "auto371", "default", "lbravo_intro1_2 lbravo_intro1_3", "lbravo_intro1", undefined, undefined, 1300, 25, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_0[[var_3]](var_4, var_1, var_2, (2702.4, -4241.1, 1074.68), (1, 270, 0), undefined, undefined, undefined, undefined, "lbravo_intro1_3", undefined, undefined, 1024, 25);

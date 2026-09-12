@@ -177,7 +177,7 @@ function giveplayerscore(var_0, var_1, var_2) {
   var_5 thread scripts\mp\gamelogic::checkscorelimit();
   var_5 scripts\mp\utility\script::bufferednotify("earned_score_buffered", var_1);
   scripts\mp\analyticslog::logevent_reportgamescore(var_1, gettime(), scripts\mp\rank::getscoreinfocategory(var_0, "eventID"));
-  var_5 scripts\common\utility::ref_13e0a(level.ref_11b2f, var_0);
+  var_5 scripts\common\utility::ref_13E0A(level.ref_11B2F, var_0);
   var_5 scripts\cp_mp\pet_watch::addobjectivescorecharge(var_0, int(var_7));
 }
 
@@ -291,7 +291,7 @@ function giveteamscoreforobjective(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(!level.onlinegame) {
-    ref_119c1();
+    ref_119C1();
     return;
   }
 }
@@ -997,7 +997,7 @@ function gamemodeusesdeathmatchscoring(var_0) {
   return var_0 == "dm" || var_0 == "sotf_ffa";
 }
 
-function ref_119c1() {
+function ref_119C1() {
   var_0 = level.teamnamelist[0];
   var_1 = level.teamnamelist[1];
   var_2 = getteamscore(var_0);

@@ -371,7 +371,7 @@ function van_infil_sfx_npc6(var_0) {
   var_0 playsoundonmovingent("scn_infil_hackney_van_npc4");
 }
 
-function ref_140e5(var_0) {
+function ref_140E5(var_0) {
   var_0 playsoundonmovingent("scn_infil_hackney_van_commander");
 }
 
@@ -517,7 +517,7 @@ function script_model_alpha_anims() {
   level.scr_animtree["commander"] = #animtree;
   level.scr_anim["commander"]["van_hackney_infil_alpha"] = % infil_opforce_van_chief;
   level.scr_animname["commander"]["van_hackney_infil_alpha"] = "infil_opforce_van_chief";
-  scripts\common\anim::addnotetrack_customfunction("commander", "sfx_infil_hackney_van_commander", &ref_140e5);
+  scripts\common\anim::addnotetrack_customfunction("commander", "sfx_infil_hackney_van_commander", &ref_140E5);
   level.scr_animtree["van"] = #animtree;
 
   switch (getDvar("mapname")) {
@@ -589,7 +589,7 @@ function spawnvan(var_0, var_1, var_2) {
   var_9 = undefined;
 
   foreach(var_11 in var_8) {
-    if(isDefined(var_11.ref_140e3)) {
+    if(isDefined(var_11.ref_140E3)) {
       continue;
     }
 
@@ -599,7 +599,7 @@ function spawnvan(var_0, var_1, var_2) {
 
   if(isDefined(var_9)) {
     var_3.probe = var_9;
-    var_9.ref_140e3 = var_3;
+    var_9.ref_140E3 = var_3;
     var_3.probe.origin = var_3.origin;
     var_3.probe linkTo(var_3, "tag_origin", (-42, 0, 56.5), (0, 0, 0));
 

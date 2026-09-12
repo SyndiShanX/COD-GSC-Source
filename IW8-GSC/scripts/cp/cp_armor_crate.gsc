@@ -22,7 +22,7 @@ function armor_crate_init() {
   var_0.onusecallback = &armorbox_onusedeployable;
   var_0.canusecallback = &armorbox_canusedeployable;
   var_0.deployfunc = &armorbox_onusedeployable;
-  var_0.ref_120aa = "ping_response_thanks";
+  var_0.ref_120AA = "ping_response_thanks";
   var_0.usetime = 1000;
   var_0.maxhealth = 100;
   var_0.maxuses = 4;
@@ -83,7 +83,7 @@ function supportbox_watchplayerweapon(var_0) {
   self notifyonplayercommand("cancel_deploy", "+actionslot 4");
   self notifyonplayercommand("cancel_deploy", "+actionslot 5");
   self notifyonplayercommand("cancel_deploy", "+actionslot 6");
-  var_1 = scripts\engine\utility::ref_143ae("grenade_fire", "cancel_deploy", "weapon_switch_started");
+  var_1 = scripts\engine\utility::ref_143AE("grenade_fire", "cancel_deploy", "weapon_switch_started");
 
   if(!isDefined(var_1)) {
     return;

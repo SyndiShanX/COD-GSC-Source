@@ -5,16 +5,16 @@
 
 function init() {
   var_0 = spawnStruct();
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.weight = getdvarfloat("scr_br_pe_fresno_weight", 100);
   var_0.ref_14382 = &ref_14382;
   var_0.attackerswaittime = &attackerswaittime;
   var_0.isfeaturedisabled = &players_approach_puzzle_monitor;
   var_0.postinitfunc = &postinitfunc;
-  var_0.ref_11b78 = getdvarint("scr_br_pe_fresno_max_times", 2);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_fresno_max_times", 2);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("fresno", "0951075100 0 0 0");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("fresno");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(16, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(16, var_0);
 }
 
 function postinitfunc() {
@@ -24,13 +24,13 @@ function postinitfunc() {
   game["dialog"]["public_events_g_staggered"] = "greenbay_titan_retreat";
   game["dialog"]["public_events_k_staggered"] = "kenosha_titan_retreat";
   var_0.secondsbeforeplacementupdates = getdvarint("scr_br_pe_fresno_health_per", 2000);
-  level.ref_11e18.playerredeploy = getdvarint("scr_br_pe_fresno_frenzy_radius", 11000);
+  level.ref_11E18.playerredeploy = getdvarint("scr_br_pe_fresno_frenzy_radius", 11000);
   level.br_pe_grabbag_skipwait = 0;
   setdvarifuninitialized("scr_br_pe_fresno_hwc_fadestart", 5000);
   setdvarifuninitialized("scr_br_pe_fresno_hwc_fadeend", 7000);
   thread begineventcountdown();
-  level.ref_11e18.frenzy_count = 0;
-  level.ref_11e18.frenzy_trigger_index = getdvarint("scr_br_pe_fresno_screamer_trigger", 0);
+  level.ref_11E18.frenzy_count = 0;
+  level.ref_11E18.frenzy_trigger_index = getdvarint("scr_br_pe_fresno_screamer_trigger", 0);
   thread strip_node_flag_wait();
   init_reward_crates();
   thread monitor_circles();
@@ -38,13 +38,13 @@ function postinitfunc() {
 }
 
 function set_real_time() {
-  level.ref_11e18.basetime = gettime();
+  level.ref_11E18.basetime = gettime();
   level waittill("prematch_done");
-  level.ref_11e18.basetime = gettime();
+  level.ref_11E18.basetime = gettime();
 }
 
 function get_real_time() {
-  return (gettime() - level.ref_11e18.basetime) / 1000;
+  return (gettime() - level.ref_11E18.basetime) / 1000;
 }
 
 function monitor_circles() {
@@ -55,15 +55,15 @@ function monitor_circles() {
     var_1 = level.br_level.br_circledelaytimes[var_0 - 1];
     var_2 = level.br_level.br_circleclosetimes[var_0 - 1];
     var_3 = level.br_level.br_circledelaytimes[var_0];
-    level.ref_11e18.safe_circle_end_time = gettime() + 1000 * (var_1 + var_2 + var_3);
+    level.ref_11E18.safe_circle_end_time = gettime() + 1000 * (var_1 + var_2 + var_3);
   }
 }
 
 function begineventcountdown() {
   level endon("game_ended");
   level waittill("prematch_done");
-  level.ref_11e18.eventstarttimes = tokenizefloatsfromstring(getDvar("scr_br_pe_fresno_activation_time", "140.0 290.0"));
-  level.ref_11e18.eventwarningtimes = tokenizefloatsfromstring(getDvar("scr_br_pe_fresno_incoming_time", "30.0 30.0"));
+  level.ref_11E18.eventstarttimes = tokenizefloatsfromstring(getDvar("scr_br_pe_fresno_activation_time", "140.0 290.0"));
+  level.ref_11E18.eventwarningtimes = tokenizefloatsfromstring(getDvar("scr_br_pe_fresno_incoming_time", "30.0 30.0"));
   calculateeventcircles();
   eventcountdown_internal();
 }
@@ -83,10 +83,10 @@ function tokenizefloatsfromstring(var_0) {
 }
 
 function calculateeventcircles() {
-  level.ref_11e18.event_circles = [];
+  level.ref_11E18.event_circles = [];
 
-  for(var_0 = 0; var_0 < level.ref_11e18.eventstarttimes.size; var_0++) {
-    var_1 = level.ref_11e18.eventstarttimes[var_0];
+  for(var_0 = 0; var_0 < level.ref_11E18.eventstarttimes.size; var_0++) {
+    var_1 = level.ref_11E18.eventstarttimes[var_0];
     var_2 = 0;
     var_3 = -1;
 
@@ -99,14 +99,14 @@ function calculateeventcircles() {
       }
     }
 
-    level.ref_11e18.event_circles[var_0] = var_3;
+    level.ref_11E18.event_circles[var_0] = var_3;
   }
 }
 
 function eventcountdown_internal() {
-  for(var_0 = 0; var_0 < level.ref_11e18.eventstarttimes.size; var_0++) {
-    var_1 = level.ref_11e18.eventstarttimes[var_0];
-    var_2 = level.ref_11e18.eventwarningtimes[var_0];
+  for(var_0 = 0; var_0 < level.ref_11E18.eventstarttimes.size; var_0++) {
+    var_1 = level.ref_11E18.eventstarttimes[var_0];
+    var_2 = level.ref_11E18.eventwarningtimes[var_0];
     var_1 -= var_2;
     wait var_1;
     launchevent(var_2);
@@ -114,16 +114,16 @@ function eventcountdown_internal() {
 }
 
 function launchevent(var_0) {
-  if(!isDefined(level.ref_11e18)) {
+  if(!isDefined(level.ref_11E18)) {
     return;
   }
 
-  if(isDefined(level.ref_11e18.fresno_ready))) {
+  if(isDefined(level.ref_11E18.fresno_ready))) {
   iprintln("Warning: Fresno is ignoring activation request, it is already running.");
   return;
 }
 
-if(isDefined(level.ref_11e18.setincomingremovedcallback) && isDefined(level.ref_11e18.setincomingremovedcallback.ref_12930) || isDefined(level.ref_11e18.wait_for_next_hack_complete) && isDefined(level.ref_11e18.wait_for_next_hack_complete.ref_12930)) {
+if(isDefined(level.ref_11E18.setincomingremovedcallback) && isDefined(level.ref_11E18.setincomingremovedcallback.ref_12930) || isDefined(level.ref_11E18.wait_for_next_hack_complete) && isDefined(level.ref_11E18.wait_for_next_hack_complete.ref_12930)) {
   iprintln("Warning: Fresno is ignoring activation request, it is already running.");
   return;
 }
@@ -145,8 +145,8 @@ function attackerswaittime() {
   launchevent(14);
 }
 
-function ref_140cf() {
-  return scripts\mp\utility\game::round_vehicle_logic() == "mendota" && isDefined(level.ref_11e18);
+function ref_140CF() {
+  return scripts\mp\utility\game::round_vehicle_logic() == "mendota" && isDefined(level.ref_11E18);
 }
 
 function ref_14382() {}
@@ -155,18 +155,18 @@ function activatetomahs(var_0) {
   level endon("game_ended");
   self.active = 1;
   var_1 = gettime() + (var_0 + getdvarfloat("scr_br_pe_fresno_lifetime", 120)) * 1000;
-  level.ref_11e18.pe_endtime = var_1;
-  level.ref_1406f = 1;
-  level.ref_11a1f = [];
-  level.ref_1395a = [];
+  level.ref_11E18.pe_endtime = var_1;
+  level.ref_1406F = 1;
+  level.ref_11A1F = [];
+  level.ref_1395A = [];
   scripts\mp\gametypes\br_gametype_truckwar::stoppingpower_givehcrdata();
 
-  if(isDefined(level.ref_11e18.setincomingremovedcallback) && isDefined(level.ref_11e18.wait_for_next_hack_complete)) {
+  if(isDefined(level.ref_11E18.setincomingremovedcallback) && isDefined(level.ref_11E18.wait_for_next_hack_complete)) {
     var_2 = getDvar("scr_br_pe_fresno_die_roll");
 
     if(var_2.size == 0) {
-      level.ref_11e18.setincomingremovedcallback.ref_12930 = &sentry_init_done;
-      level.ref_11e18.wait_for_next_hack_complete.ref_12930 = &vehicle_rider_think;
+      level.ref_11E18.setincomingremovedcallback.ref_12930 = &sentry_init_done;
+      level.ref_11E18.wait_for_next_hack_complete.ref_12930 = &vehicle_rider_think;
       return;
     }
 
@@ -178,11 +178,11 @@ function activatetomahs(var_0) {
     }
 
     if(var_3 < 3 || var_3 >= 6) {
-      level.ref_11e18.setincomingremovedcallback.ref_12930 = &sentry_init_done;
+      level.ref_11E18.setincomingremovedcallback.ref_12930 = &sentry_init_done;
     }
 
     if(var_3 >= 3) {
-      level.ref_11e18.wait_for_next_hack_complete.ref_12930 = &vehicle_rider_think;
+      level.ref_11E18.wait_for_next_hack_complete.ref_12930 = &vehicle_rider_think;
       return;
     }
 
@@ -191,31 +191,31 @@ function activatetomahs(var_0) {
 
   var_5 = "Both Fresno actors were unavailable!!";
 
-  if(isDefined(level.ref_11e18.setincomingremovedcallback)) {
-    level.ref_11e18.setincomingremovedcallback.ref_12930 = &sentry_init_done;
+  if(isDefined(level.ref_11E18.setincomingremovedcallback)) {
+    level.ref_11E18.setincomingremovedcallback.ref_12930 = &sentry_init_done;
     return;
   }
 
-  if(isDefined(level.ref_11e18.wait_for_next_hack_complete)) {
-    level.ref_11e18.wait_for_next_hack_complete.ref_12930 = &vehicle_rider_think;
+  if(isDefined(level.ref_11E18.wait_for_next_hack_complete)) {
+    level.ref_11E18.wait_for_next_hack_complete.ref_12930 = &vehicle_rider_think;
     return;
   }
 }
 
 function activateevent() {
   level endon("game_ended");
-  level.ref_11e18.ref_12f14 = &lootleadermarksizedynamic;
+  level.ref_11E18.ref_12F14 = &lootleadermarksizedynamic;
   scripts\mp\gametypes\br_publicevents::ref_13371("br_pe_fresno_start");
   level thread scripts\mp\gametypes\br_public::brleaderdialog("public_events_fresno_start");
   setomnvar("ui_publicevent_minimap_pulse", 1);
   setomnvar("ui_publicevent_timer_type", 8);
-  setomnvar("ui_publicevent_timer", level.ref_11e18.pe_endtime);
-  thread ref_11cdc(level.ref_11e18.pe_endtime);
+  setomnvar("ui_publicevent_timer", level.ref_11E18.pe_endtime);
+  thread ref_11CDC(level.ref_11E18.pe_endtime);
   var_0 = register_vehicle_spawn_override();
   var_1 = 0;
 
   foreach(var_3 in var_0) {
-    if(istrue(level.disable_super_in_turret.ref_12ca4)) {
+    if(istrue(level.disable_super_in_turret.ref_12CA4)) {
       var_4 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_3);
     } else {
       var_4 = scripts\mp\gametypes\br_public::rotationrefsbyseatandweapon(var_3);
@@ -227,15 +227,15 @@ function activateevent() {
   self.secondwindthink = var_1 * self.secondsbeforeplacementupdates;
   teamlist();
   totaldamage();
-  thread ref_13fd0();
-  level.ref_11e18.players_grenade_fire_monitor = 0;
+  thread ref_13FD0();
+  level.ref_11E18.players_grenade_fire_monitor = 0;
 
-  if(level.ref_11e18.frenzy_trigger_index != 0) {
+  if(level.ref_11E18.frenzy_trigger_index != 0) {
     scripts\mp\gametypes\fresno\fresno_screamer::choosescreamertitan();
   }
 
-  level.ref_11e18.frenzy_count++;
-  level.ref_11e18.fresno_ready) = 1;
+  level.ref_11E18.frenzy_count++;
+  level.ref_11E18.fresno_ready) = 1;
 level waittill("fresno_end");
 }
 
@@ -244,20 +244,20 @@ function attackerisinflictorforradiusexplosiveweapon(var_0, var_1) {
     return;
   }
 
-  var_2 = spawn("trigger_radius", var_0, 0, level.ref_11e18.playerredeploy, 50000);
-  var_2.radius = level.ref_11e18.playerredeploy;
+  var_2 = spawn("trigger_radius", var_0, 0, level.ref_11E18.playerredeploy, 50000);
+  var_2.radius = level.ref_11E18.playerredeploy;
   var_1.cashtorefund = var_2;
 
   if(scripts\mp\outofbounds::unset_relic_rocket_kill_ammo(var_2.origin)) {
-    ref_136b1(var_2);
-    ref_136a3(var_2);
+    ref_136B1(var_2);
+    ref_136A3(var_2);
     addweaponvehicledropcircle(var_2);
     return;
   }
 }
 
 function activatescreamerdrop(var_0, var_1) {
-  if(level.ref_11e18.frenzy_trigger_index < 0 || level.ref_11e18.frenzy_trigger_index > 0 && level.ref_11e18.frenzy_trigger_index == level.ref_11e18.frenzy_count) {
+  if(level.ref_11E18.frenzy_trigger_index < 0 || level.ref_11E18.frenzy_trigger_index > 0 && level.ref_11E18.frenzy_trigger_index == level.ref_11E18.frenzy_count) {
     if(var_1 < var_0.radius) {
       var_2 = var_1 / var_0.radius;
       var_3 = max(var_2, 0.95);
@@ -295,12 +295,12 @@ function activatescreamerdrop(var_0, var_1) {
   }
 }
 
-function ref_136b1(var_0) {
-  level.ref_11a1f[level.ref_11a1f.size] = var_0;
+function ref_136B1(var_0) {
+  level.ref_11A1F[level.ref_11A1F.size] = var_0;
   scripts\mp\gametypes\br_publicevent_lootcratedrop::aud_breached_exit_wind();
 }
 
-function ref_136a3(var_0) {
+function ref_136A3(var_0) {
   var_1 = getdvarint("scr_br_pe_fresno_aa", 5);
 
   for(var_2 = 0; var_2 < var_1; var_2++) {
@@ -311,19 +311,19 @@ function ref_136a3(var_0) {
     var_4 = scripts\mp\gametypes\br_vehicles::tryspawnavehicle("cargo_truck_susp_aa", var_3, "alwaysSpawn", undefined);
 
     if(isDefined(var_4)) {
-      level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13de4(var_4, var_3.origin, var_3.angles, 1);
+      level thread scripts\mp\gametypes\br_gametype_truckwar::ref_13DE4(var_4, var_3.origin, var_3.angles, 1);
     }
   }
 }
 
 function table_parseweaponvariantidvalue() {
-  if(istrue(level.ref_11e18.players_grenade_fire_monitor)) {
+  if(istrue(level.ref_11E18.players_grenade_fire_monitor)) {
     return;
   }
 
-  level.ref_11e18.players_grenade_fire_monitor = 1;
+  level.ref_11E18.players_grenade_fire_monitor = 1;
   var_0 = gettime() + getdvarfloat("scr_br_pe_fresno_lifetime", 120) * 1000;
-  level.ref_11e18.playerregenhealthadd = var_0;
+  level.ref_11E18.playerregenhealthadd = var_0;
   clearweaponvehicledropcircles();
 }
 
@@ -337,7 +337,7 @@ function strip_node_flag_wait() {
   level.br_pe_crate_usetimeoverride = var_0.ownerusetime;
   level.delaystreamtomovingplane = 1;
   level.shrink_poi_into_the_bank.besttimestate = 0;
-  level.shrink_poi_into_the_bank.ref_13eff = [["brloot_weapon_lm_dblmg_lege", "brloot_ammo_762"], ["brloot_weapon_rebirth_lm_iw8", "brloot_ammo_762"], ["brloot_weapon_rebirth_lm_t9", "brloot_ammo_762"]];
+  level.shrink_poi_into_the_bank.ref_13EFF = [["brloot_weapon_lm_dblmg_lege", "brloot_ammo_762"], ["brloot_weapon_rebirth_lm_iw8", "brloot_ammo_762"], ["brloot_weapon_rebirth_lm_t9", "brloot_ammo_762"]];
   level.shrink_poi_into_the_bank.chopper_gunner = [["brloot_weapon_s4_la_palpha42_epic", "brloot_ammo_rocket"], ["brloot_weapon_s4_la_palpha_epic", "brloot_ammo_rocket"], ["brloot_weapon_s4_la_m1bravo_rare", "brloot_ammo_rocket"]];
   level.shrink_poi_into_the_bank.waypoints = [["brloot_weapon_s4_mg_dpapa27_lege", "brloot_ammo_762"], ["brloot_weapon_s4_mg_mgolf42_lege", "brloot_ammo_762"], ["brloot_weapon_s4_mg_tyankee11_lege", "brloot_ammo_762"], ["brloot_weapon_s4_mg_bromeo37_lege", "brloot_ammo_762"], ["brloot_weapon_mendota_sn_xmike109", "brloot_ammo_50cal"], ["brloot_weapon_mendota_mr_ptango41", "brloot_ammo_50cal"]];
   level.shrink_poi_into_the_bank.waypoint_icon = level.shrink_poi_into_the_bank.waypoints;
@@ -355,7 +355,7 @@ function tac_cover_spawn_with_door() {
   game["dialog"]["rebirth_teammate_respawn"] = "rebirth_teammate_respawn";
 }
 
-function ref_11cdc(var_0) {
+function ref_11CDC(var_0) {
   level endon("game_ended");
   level endon("fresno_end");
 
@@ -376,15 +376,15 @@ function vehicle_rider_think(var_0) {
   scripts\mp\gametypes\fresno\fresno_state_machines::kheadtofrenzypoint(var_0);
   var_0 thread scripts\mp\gametypes\fresno\fresno_state_machines::trunidlewait("s4_mp_kenosha_idle_lookaround_01");
 
-  while(!istrue(level.ref_11e18.fresno_ready))) {
+  while(!istrue(level.ref_11E18.fresno_ready))) {
   waitframe();
 }
 
 table_parseweaponvariantidvalue();
 
 if(!isDefined(var_0.cashtorefund)) {
-  var_1 = spawn("trigger_radius", var_0.origin, 0, level.ref_11e18.playerredeploy, 50000);
-  var_1.radius = level.ref_11e18.playerredeploy;
+  var_1 = spawn("trigger_radius", var_0.origin, 0, level.ref_11E18.playerredeploy, 50000);
+  var_1.radius = level.ref_11E18.playerredeploy;
   var_0.cashtorefund = var_1;
 } else {
   var_1 = var_1.cashtorefund;
@@ -392,7 +392,7 @@ if(!isDefined(var_0.cashtorefund)) {
 
 var_1.subdued = undefined;
 
-if(isDefined(level.ref_11e18.screamerkk)) {
+if(isDefined(level.ref_11E18.screamerkk)) {
   thread activatescreamerdrop(level, var_1);
 }
 
@@ -410,16 +410,16 @@ while(scripts\mp\gametypes\fresno\fresno_state_machines::vehicle_occupancy_showc
 var_1 setscriptablepartstate("objective", "objective_enable", 0);
 scripts\mp\gametypes\fresno\fresno_state_machines::kreturntonormal(var_1);
 
-if(isDefined(level.ref_11e18.screamerkk)) {
-  level.ref_11e18.screamerkk = undefined;
+if(isDefined(level.ref_11E18.screamerkk)) {
+  level.ref_11E18.screamerkk = undefined;
   level thread scripts\mp\gametypes\fresno\fresno_screamer::destroyscreamer();
 }
 
-var_1.ref_11ea7 = 1;
+var_1.ref_11EA7 = 1;
 var_1.cashtorefund = undefined;
-level.ref_11e18.wait_for_next_hack_complete.ref_12930 = undefined;
+level.ref_11E18.wait_for_next_hack_complete.ref_12930 = undefined;
 
-if(!isDefined(level.ref_11e18.setincomingremovedcallback.ref_12930)) {
+if(!isDefined(level.ref_11E18.setincomingremovedcallback.ref_12930)) {
   thread playerrespawncleanup();
   return;
 }
@@ -428,13 +428,13 @@ if(!isDefined(level.ref_11e18.setincomingremovedcallback.ref_12930)) {
 function sentry_init_done(var_0) {
   var_1 = getdvarfloat("scr_br_pe_fresno_gz_offset", 1.16667);
   var_2 = vectorNormalize(scripts\mp\gametypes\br_circle::getsafecircleorigin() - var_0.origin);
-  var_3 = level.ref_11e18.playerredeploy * var_1;
+  var_3 = level.ref_11E18.playerredeploy * var_1;
   var_4 = var_0.origin + var_2 * var_3;
-  level.ref_11e18.score_event_headshot = undefined;
+  level.ref_11E18.score_event_headshot = undefined;
   scripts\mp\gametypes\fresno\fresno_state_machines::gheadtofrenzypoint(var_0);
   var_0 thread scripts\mp\gametypes\fresno\fresno_state_machines::trunidlewait("s4_mp_greenbay_idle_lookaround_01");
 
-  while(!istrue(level.ref_11e18.fresno_ready)) && scripts\mp\gametypes\br_publicevents::upload_station_interact_used_think(16)) {
+  while(!istrue(level.ref_11E18.fresno_ready)) && scripts\mp\gametypes\br_publicevents::upload_station_interact_used_think(16)) {
   waitframe();
 }
 
@@ -442,8 +442,8 @@ table_parseweaponvariantidvalue();
 var_0 setscriptablepartstate("objective", "objective_enable_danger", 0);
 
 if(!isDefined(var_0.cashtorefund)) {
-  var_5 = spawn("trigger_radius", var_4, 0, level.ref_11e18.playerredeploy, 50000);
-  var_5.radius = level.ref_11e18.playerredeploy;
+  var_5 = spawn("trigger_radius", var_4, 0, level.ref_11E18.playerredeploy, 50000);
+  var_5.radius = level.ref_11E18.playerredeploy;
   var_0.cashtorefund = var_5;
 } else {
   var_5 = var_1.cashtorefund;
@@ -451,7 +451,7 @@ if(!isDefined(var_0.cashtorefund)) {
 
 var_1.subdued = undefined;
 
-if(isDefined(level.ref_11e18.screamergg)) {
+if(isDefined(level.ref_11E18.screamergg)) {
   thread activatescreamerdrop(level, var_5);
 }
 
@@ -468,24 +468,24 @@ while(scripts\mp\gametypes\fresno\fresno_state_machines::post_blockade_breadcrum
 var_1 setscriptablepartstate("objective", "objective_enable", 0);
 scripts\mp\gametypes\fresno\fresno_state_machines::set_door_open(var_1);
 
-if(isDefined(level.ref_11e18.screamergg)) {
-  level.ref_11e18.screamergg = undefined;
+if(isDefined(level.ref_11E18.screamergg)) {
+  level.ref_11E18.screamergg = undefined;
   level thread scripts\mp\gametypes\fresno\fresno_screamer::destroyscreamer();
 }
 
-var_1.ref_11ea7 = 1;
+var_1.ref_11EA7 = 1;
 var_1.cashtorefund = undefined;
-level.ref_11e18.setincomingremovedcallback.ref_12930 = undefined;
+level.ref_11E18.setincomingremovedcallback.ref_12930 = undefined;
 
-if(!isDefined(level.ref_11e18.wait_for_next_hack_complete.ref_12930)) {
+if(!isDefined(level.ref_11E18.wait_for_next_hack_complete.ref_12930)) {
   thread playerrespawncleanup();
   return;
 }
 }
 
 function playerrespawncleanup() {
-  ref_11ec4();
-  level.ref_11e18.pe_endtime = undefined;
+  ref_11EC4();
+  level.ref_11E18.pe_endtime = undefined;
   scripts\mp\gametypes\br_publicevents::neurotoxin_mask_monitor(16);
 }
 
@@ -497,10 +497,10 @@ function players_approach_puzzle_monitor() {
   scripts\mp\gametypes\fresno\fresno_screamer::endevent_malfunctioningscreamerdevice();
   recordeventendanalytics();
   print_event_logs();
-  level.ref_11e18.fresno_ready) = undefined;
+  level.ref_11E18.fresno_ready) = undefined;
 }
 
-function ref_11ec4() {
+function ref_11EC4() {
   level notify("fresno_end");
 }
 
@@ -517,24 +517,24 @@ function teamlist() {
     var_1 = strtok("30 50 70", " ");
   }
 
-  level.ref_11e18.cave_barrels = [];
-  level.ref_11e18.cave_barrels["best_team"] = int(var_1[0]);
-  level.ref_11e18.cave_barrels["random_team"] = int(var_1[1]);
-  level.ref_11e18.cave_barrels["tomah_anger"] = int(var_1[2]);
+  level.ref_11E18.cave_barrels = [];
+  level.ref_11E18.cave_barrels["best_team"] = int(var_1[0]);
+  level.ref_11E18.cave_barrels["random_team"] = int(var_1[1]);
+  level.ref_11E18.cave_barrels["tomah_anger"] = int(var_1[2]);
 }
 
 function propspectating(var_0, var_1) {
-  if(!isDefined(level.ref_11e18.cave_barrels)) {
+  if(!isDefined(level.ref_11E18.cave_barrels)) {
     return undefined;
   }
 
-  level.ref_11e18.ref_12f14 = &lootleadermarksizedynamic;
+  level.ref_11E18.ref_12F14 = &lootleadermarksizedynamic;
   var_2 = undefined;
   var_3 = randomint(100);
   var_3 = getdvarint("scr_br_pe_fresno_attack_die_roll", var_3);
 
-  if(var_3 < level.ref_11e18.cave_barrels["random_team"]) {
-    var_4 = scripts\mp\gametypes\_mxp_target::recharge_equipment_init(var_3 < level.ref_11e18.cave_barrels["best_team"]);
+  if(var_3 < level.ref_11E18.cave_barrels["random_team"]) {
+    var_4 = scripts\mp\gametypes\_mxp_target::recharge_equipment_init(var_3 < level.ref_11E18.cave_barrels["best_team"]);
 
     if(isDefined(var_4)) {
       var_5 = self.cashtorefund scripts\mp\gametypes\_mxp_target::quarry2_ambient_sound_load(var_4);
@@ -559,51 +559,51 @@ function propspectating(var_0, var_1) {
     }
   }
 
-  if(!isDefined(var_2) && var_3 < level.ref_11e18.cave_barrels["tomah_anger"]) {
+  if(!isDefined(var_2) && var_3 < level.ref_11E18.cave_barrels["tomah_anger"]) {
     var_2 = scripts\mp\gametypes\br_alt_mode_mxp::tgetnextangertarget(self);
 
     if(isDefined(var_2)) {}
   }
 
   if(!isDefined(var_2)) {
-    var_2 = self.cashtorefund scripts\mp\gametypes\_mxp_target::printspawnmessage(var_0, level.ref_11e18.playerredeploy, var_1);
+    var_2 = self.cashtorefund scripts\mp\gametypes\_mxp_target::printspawnmessage(var_0, level.ref_11E18.playerredeploy, var_1);
 
     if(isDefined(var_2)) {}
   }
 
   if(!isDefined(var_2)) {
-    var_2 = self.cashtorefund scripts\mp\gametypes\_mxp_target::pristinestatehealthadd(var_0, level.ref_11e18.playerredeploy);
+    var_2 = self.cashtorefund scripts\mp\gametypes\_mxp_target::pristinestatehealthadd(var_0, level.ref_11E18.playerredeploy);
   }
 
   return var_2;
 }
 
 function totaldamage() {
-  level.ref_13aaa = [];
+  level.ref_13AAA = [];
 
   foreach(var_1 in level.teamnamelist) {
     if(isDefined(level.teamdata[var_1]) && isDefined(level.teamdata[var_1]["aliveCount"]) && level.teamdata[var_1]["aliveCount"] > 0) {
-      level.ref_13aaa[var_1] = 0;
+      level.ref_13AAA[var_1] = 0;
     }
   }
 
   foreach(var_4 in level.players) {
     if(isDefined(var_4)) {
       var_5 = spawnStruct();
-      var_5.ref_13bee = 0;
+      var_5.ref_13BEE = 0;
       var_5.ref_14239 = 0;
       var_5.open_cac_slot = 0;
-      var_5.ref_1457e = 0;
+      var_5.ref_1457E = 0;
       var_4.ref_12532 = var_5;
     }
   }
 
-  level.ref_11e18.ref_13bef = [];
-  level.ref_11e18.ref_13bef["actor_kenosha"] = 0;
-  level.ref_11e18.ref_13bef["actor_greenbay"] = 0;
+  level.ref_11E18.ref_13BEF = [];
+  level.ref_11E18.ref_13BEF["actor_kenosha"] = 0;
+  level.ref_11E18.ref_13BEF["actor_greenbay"] = 0;
 }
 
-function ref_13fd0() {
+function ref_13FD0() {
   level endon("game_ended");
   level endon("cancel_public_event");
   level endon("fresno_end");
@@ -617,7 +617,7 @@ function ref_13fd0() {
     var_5 = var_3[0][1];
     var_6 = var_3[1][0];
     var_7 = var_3[1][1];
-    var_8 = level.ref_11e18.ref_13bef["actor_greenbay"] + level.ref_11e18.ref_13bef["actor_kenosha"];
+    var_8 = level.ref_11E18.ref_13BEF["actor_greenbay"] + level.ref_11E18.ref_13BEF["actor_kenosha"];
     var_9 = var_8 / var_1;
     setomnvar("ui_pe_fresno_total_damage", var_9);
     var_2 = var_5 / var_1;
@@ -627,7 +627,7 @@ function ref_13fd0() {
       var_12 = updateplayerandteamcountui(var_11);
       var_11 setclientomnvar("ui_pe_fresno_is_in_range", 1);
       var_2 = 0;
-      var_13 = level.ref_13aaa[var_11.team];
+      var_13 = level.ref_13AAA[var_11.team];
 
       if(isDefined(var_13)) {
         var_2 = var_13 / var_1;
@@ -652,25 +652,25 @@ function sec_sys_struct_3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   if(isPlayer(var_14)) {
     var_14 scripts\mp\gametypes\br_alt_mode_mxp::playerupdatetomahdamage(self, var_2, var_4, var_5, 1);
 
-    if(!istrue(level.ref_11e18.fresno_ready)) || level.ref_11e18.ref_13bef[self.agent_type] >= level.delayedeventtypes[16].secondwindthink) {
+    if(!istrue(level.ref_11E18.fresno_ready)) || level.ref_11E18.ref_13BEF[self.agent_type] >= level.delayedeventtypes[16].secondwindthink) {
     return;
   }
 
-  if(!isDefined(level.ref_13aaa[var_14.team])) {
-    level.ref_13aaa[var_14.team] = 0;
+  if(!isDefined(level.ref_13AAA[var_14.team])) {
+    level.ref_13AAA[var_14.team] = 0;
   }
 
   if(!isDefined(var_14.ref_12532)) {
     var_15 = spawnStruct();
-    var_15.ref_13bee = 0;
+    var_15.ref_13BEE = 0;
     var_15.ref_14239 = 0;
     var_15.open_cac_slot = 0;
-    var_15.ref_1457e = 0;
+    var_15.ref_1457E = 0;
     var_14.ref_12532 = var_15;
   }
 
   if(vault_assault_infil(var_0, var_1)) {
-    var_2 = ref_11ca1(var_2, var_0, var_1);
+    var_2 = ref_11CA1(var_2, var_0, var_1);
     var_2 = clampdamageforhealth(var_2);
     var_14.ref_12532.ref_14239 += var_2;
   } else if(isexplosivedamage(var_4)) {
@@ -680,20 +680,20 @@ function sec_sys_struct_3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
   } else {
     var_2 *= getdvarfloat("scr_br_pe_fresno_weap_dmgmult", 1);
     var_2 = clampdamageforhealth(var_2);
-    var_14.ref_12532.ref_1457e += var_2;
+    var_14.ref_12532.ref_1457E += var_2;
   }
 
-  level.ref_13aaa[var_14.team] += var_2;
-  var_14.ref_12532.ref_13bee += var_2;
+  level.ref_13AAA[var_14.team] += var_2;
+  var_14.ref_12532.ref_13BEE += var_2;
   var_14 scripts\mp\damagefeedback::updatedamagefeedback("standard", 0, 0, "standard", 0, 1);
   var_14.players_in_aggro = self.agent_type;
-  level.ref_11e18.ref_13bef[self.agent_type] += var_2;
+  level.ref_11E18.ref_13BEF[self.agent_type] += var_2;
 
-  if(level.ref_11e18.ref_13bef[self.agent_type] > level.delayedeventtypes[16].secondwindthink) {
+  if(level.ref_11E18.ref_13BEF[self.agent_type] > level.delayedeventtypes[16].secondwindthink) {
     self notify("gk_driven_off");
   }
 
-  var_16 = level.ref_11e18.ref_13bef[self.agent_type] / level.delayedeventtypes[16].secondwindthink;
+  var_16 = level.ref_11E18.ref_13BEF[self.agent_type] / level.delayedeventtypes[16].secondwindthink;
 
   if(self.agent_type == "actor_kenosha") {
     setomnvar("ui_pe_fresno_progress_kenosha", var_16);
@@ -716,7 +716,7 @@ function relic_mythic_should_do_pain() {
     self.is_wave_exist = [["none", -1], ["none", -1], ["none", -1], ["none", -1]];
   }
 
-  foreach(var_5, var_1 in level.ref_13aaa) {
+  foreach(var_5, var_1 in level.ref_13AAA) {
     for(var_2 = 0; var_2 < self.is_wave_exist.size; var_2++) {
       var_3 = self.is_wave_exist[var_2][0];
       var_4 = self.is_wave_exist[var_2][1];
@@ -736,7 +736,7 @@ function relic_mythic_should_do_pain() {
   return self.is_wave_exist;
 }
 
-function ref_11ca1(var_0, var_1, var_2) {
+function ref_11CA1(var_0, var_1, var_2) {
   if(var_1.classname == "script_model" && var_1.model == "lm_ach_gp_bomb_600lb_01_gameplay") {
     var_0 = getdvarfloat("scr_br_pe_fresno_bt_dmg", 5000);
   } else if(var_1.classname == "misc_turret" && var_1.model == "veh_s4_mil_lnd_turret_quad_aa_wz") {
@@ -750,7 +750,7 @@ function ref_11ca1(var_0, var_1, var_2) {
 
 function clampdamageforhealth(var_0) {
   var_1 = level.delayedeventtypes[16].secondwindthink;
-  var_2 = level.ref_11e18.ref_13bef[self.agent_type];
+  var_2 = level.ref_11E18.ref_13BEF[self.agent_type];
 
   if(var_0 + var_2 > var_1) {
     return (var_1 - var_2);
@@ -816,7 +816,7 @@ function endevent_spawnrewardcache(var_0, var_1) {
   var_3 = scripts\mp\utility\teams::getfriendlyplayers(var_1, 1);
 
   foreach(var_5 in var_3) {
-    if(!isDefined(var_2) || var_5.ref_12532.ref_13bee > var_2.ref_12532.ref_13bee && scripts\mp\gametypes\br_circle::vandalize_minigun_speed(var_5.origin)) {
+    if(!isDefined(var_2) || var_5.ref_12532.ref_13BEE > var_2.ref_12532.ref_13BEE && scripts\mp\gametypes\br_circle::vandalize_minigun_speed(var_5.origin)) {
       var_2 = var_5;
     }
   }
@@ -872,7 +872,7 @@ function tdownchallenges(var_0) {
     var_1 = "mv_event_intel_11";
   }
 
-  foreach(var_3 in level.ref_13aaa) {
+  foreach(var_3 in level.ref_13AAA) {
     var_4 = scripts\mp\utility\teams::getfriendlyplayers(var_8, 0);
 
     if(isDefined(var_4) && var_4.size > 0) {
@@ -890,10 +890,10 @@ function spawnintelcrates() {
 
   if(isDefined(self.agent_type) && self.agent_type == "actor_kenosha") {
     var_2 = "k";
-    var_3 = level.ref_11e18.wait_for_open;
+    var_3 = level.ref_11E18.wait_for_open;
   } else if(isDefined(self.agent_type) && self.agent_type == "actor_greenbay") {
     var_3 = "g";
-    var_3 = level.ref_11e18.setlastdroppableweaponobj;
+    var_3 = level.ref_11E18.setlastdroppableweaponobj;
   } else {
     return;
   }
@@ -905,7 +905,7 @@ function spawnintelcrates() {
   }
 
   for(var_5 = 0; var_5 < var_3; var_5++) {
-    var_6 = scripts\mp\gametypes\br_circle::risk_flagspawnshiftingpercent(var_4, level.ref_11e18.playerredeploy, 0.1, 0.9, 1);
+    var_6 = scripts\mp\gametypes\br_circle::risk_flagspawnshiftingpercent(var_4, level.ref_11E18.playerredeploy, 0.1, 0.9, 1);
     var_7 = spawnStruct();
     var_7.origin = var_6;
     var_7.type = var_3;
@@ -916,7 +916,7 @@ function spawnintelcrates() {
   for(var_8 = 0; var_8 < var_2.size; var_8++) {
     var_9 = randomint(360);
 
-    for(var_10 = 0; var_10 < level.ref_11bce.ref_11f1e; var_10++) {
+    for(var_10 = 0; var_10 < level.ref_11BCE.ref_11F1E; var_10++) {
       var_11 = var_9 + 90;
       var_12 = 0;
       var_13 = undefined;
@@ -926,7 +926,7 @@ function spawnintelcrates() {
         var_15 = (0, var_11 + var_14, 0);
         var_16 = anglesToForward(var_15);
         var_7 = var_2[var_8];
-        var_13 = var_7.origin + var_16 * level.ref_11bce.train_get_num_of_anim_ents[var_7.type];
+        var_13 = var_7.origin + var_16 * level.ref_11BCE.train_get_num_of_anim_ents[var_7.type];
 
         if(!scripts\mp\gametypes\br_circle::vandalize_minigun_speed(var_13) || scripts\mp\gametypes\br_gametype_mendota::updatesquadleaderpassstateforteam(var_13)) {} else if(!isDefined(level.br_circle.dangercircleent) || scripts\mp\gametypes\br_circle::updateprestreamrespawn(var_13)) {
           var_12 = 1;
@@ -945,7 +945,7 @@ function spawnintelcrates() {
       var_17 += (0, 0, 2000);
       var_18 = scripts\cp_mp\killstreaks\airdrop::dropcrate(undefined, undefined, "intel_crate", var_17, (0, randomint(360), 0));
       var_18.trial_flares = var_2[var_8];
-      var_19 = randomfloatrange(level.ref_11bce.trial_fetch_mission_table, level.ref_11bce.trial_explosive_clear) * 1000;
+      var_19 = randomfloatrange(level.ref_11BCE.trial_fetch_mission_table, level.ref_11BCE.trial_explosive_clear) * 1000;
       var_18.trial_flares.expiretime = gettime() + var_19;
       level.train_hurt_damage_watcher[level.train_hurt_damage_watcher.size] = var_18;
       var_18 thread scripts\mp\gametypes\br_gametype_mendota::train_handle_collide_mines();
@@ -963,7 +963,7 @@ function players_camera_fly_to_start_pos(var_0, var_1, var_2) {
   var_8 = randomintrange(var_5, var_6);
 
   for(var_9 = 0; var_9 < var_8; var_9++) {
-    var_10 = scripts\mp\gametypes\br_lootcache::ref_11a41("brloot_mendota_intel", var_0, var_1, var_2, 0, 0);
+    var_10 = scripts\mp\gametypes\br_lootcache::ref_11A41("brloot_mendota_intel", var_0, var_1, var_2, 0, 0);
     var_10.count = var_7;
   }
 }
@@ -1008,7 +1008,7 @@ function rewardcratecapturecallback(var_0) {
   var_3.fromrewardcrate = 1;
 
   foreach(var_5 in var_2) {
-    var_6 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_5, var_3, self.origin, self.angles, 0, 1);
+    var_6 = scripts\mp\gametypes\br_lootcache::ref_11A41(var_5, var_3, self.origin, self.angles, 0, 1);
   }
 
   if(isDefined(self.objectiveiconid)) {
@@ -1052,12 +1052,12 @@ function redeployspawns(var_0) {
   var_1 = gettime();
   var_2 = 1;
 
-  if(!isDefined(level.ref_11e18.waittill_player_collects_death_cash) || var_1 - level.ref_11e18.waittill_player_collects_death_cash >= 1000) {
+  if(!isDefined(level.ref_11E18.waittill_player_collects_death_cash) || var_1 - level.ref_11E18.waittill_player_collects_death_cash >= 1000) {
     var_2 = 0;
   }
 
-  if(!isDefined(level.ref_11e18.ref_140c2)) {
-    level.ref_11e18.ref_140c2 = [];
+  if(!isDefined(level.ref_11E18.ref_140C2)) {
+    level.ref_11E18.ref_140C2 = [];
     var_2 = 0;
   }
 
@@ -1068,11 +1068,11 @@ function redeployspawns(var_0) {
       var_3 = self.cashtorefund.origin;
     }
 
-    level.ref_11e18.ref_140c2 = getentarrayinradius("player", "classname", var_3, level.ref_11e18.playerredeploy);
-    level.ref_11e18.waittill_player_collects_death_cash = var_1;
+    level.ref_11E18.ref_140C2 = getentarrayinradius("player", "classname", var_3, level.ref_11E18.playerredeploy);
+    level.ref_11E18.waittill_player_collects_death_cash = var_1;
   }
 
-  return level.ref_11e18.ref_140c2;
+  return level.ref_11E18.ref_140C2;
 }
 
 function sec_sys_struct_2(var_0) {
@@ -1086,10 +1086,10 @@ function sec_sys_struct_2(var_0) {
       var_3 = self.cashtorefund.origin;
     }
 
-    var_2 = distance2d(var_0.origin, var_3) <= level.ref_11e18.playerredeploy;
+    var_2 = distance2d(var_0.origin, var_3) <= level.ref_11E18.playerredeploy;
 
     if(var_2) {
-      level.ref_11e18.ref_140c2 = scripts\engine\utility::array_add(level.ref_11e18.ref_140c2, var_0);
+      level.ref_11E18.ref_140C2 = scripts\engine\utility::array_add(level.ref_11E18.ref_140C2, var_0);
     }
   }
 
@@ -1105,12 +1105,12 @@ function sec_sys_struct_2(var_0) {
 function updateplayerandteamcountui(var_0) {
   var_1 = 0;
 
-  if(isDefined(level.ref_11e18.setincomingremovedcallback)) {
-    var_1 = var_1 || sec_sys_struct_2(level.ref_11e18.setincomingremovedcallback, var_0);
+  if(isDefined(level.ref_11E18.setincomingremovedcallback)) {
+    var_1 = var_1 || sec_sys_struct_2(level.ref_11E18.setincomingremovedcallback, var_0);
   }
 
-  if(isDefined(level.ref_11e18.wait_for_next_hack_complete)) {
-    var_1 = var_1 || sec_sys_struct_2(level.ref_11e18.wait_for_next_hack_complete, var_0);
+  if(isDefined(level.ref_11E18.wait_for_next_hack_complete)) {
+    var_1 = var_1 || sec_sys_struct_2(level.ref_11E18.wait_for_next_hack_complete, var_0);
   }
 
   return var_1;
@@ -1143,7 +1143,7 @@ function unset_relic_nobulletdamage(var_0) {
   var_2 = level.br_pickups.br_weapontoscriptable[var_1];
 
   if(isDefined(var_2)) {
-    if(can_be_seen_by_any_player(level.shrink_poi_into_the_bank.ref_13eff, var_2)) {
+    if(can_be_seen_by_any_player(level.shrink_poi_into_the_bank.ref_13EFF, var_2)) {
       return true;
     }
 
@@ -1216,37 +1216,37 @@ function register_vehicle_spawn_override() {
 }
 
 function isfresnoactive() {
-  return isDefined(level.ref_11e18.setincomingremovedcallback.ref_12930) || isDefined(level.ref_11e18.wait_for_next_hack_complete.ref_12930);
+  return isDefined(level.ref_11E18.setincomingremovedcallback.ref_12930) || isDefined(level.ref_11E18.wait_for_next_hack_complete.ref_12930);
 }
 
 function getfresnotimeremaining() {
-  if(!isDefined(level.ref_11e18.pe_endtime)) {
+  if(!isDefined(level.ref_11E18.pe_endtime)) {
     return 0;
   }
 
   var_0 = gettime();
-  return (level.ref_11e18.pe_endtime - var_0) / 1000;
+  return (level.ref_11E18.pe_endtime - var_0) / 1000;
 }
 
 function clearweaponvehicledropcircles() {
-  if(isDefined(level.ref_11e18.weaponvehicledropcircles)) {
-    foreach(var_1 in level.ref_11e18.weaponvehicledropcircles) {
+  if(isDefined(level.ref_11E18.weaponvehicledropcircles)) {
+    foreach(var_1 in level.ref_11E18.weaponvehicledropcircles) {
       var_1 scripts\mp\gametypes\br_quest_util::lastdirtyscore();
     }
   }
 
-  level.ref_11e18.weaponvehicledropcircles = [];
+  level.ref_11E18.weaponvehicledropcircles = [];
 }
 
 function addweaponvehicledropcircle(var_0) {
-  if(!isDefined(level.ref_11e18.weaponvehicledropcircles)) {
-    level.ref_11e18.weaponvehicledropcircles = [];
+  if(!isDefined(level.ref_11E18.weaponvehicledropcircles)) {
+    level.ref_11E18.weaponvehicledropcircles = [];
   }
 
   var_0 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(3, 0, 0, var_0.origin);
-  var_0 scripts\mp\gametypes\br_quest_util::ref_1316f(var_0.radius);
+  var_0 scripts\mp\gametypes\br_quest_util::ref_1316F(var_0.radius);
   var_0 scripts\mp\gametypes\br_quest_util::ref_13369();
-  level.ref_11e18.weaponvehicledropcircles[level.ref_11e18.weaponvehicledropcircles.size] = var_0;
+  level.ref_11E18.weaponvehicledropcircles[level.ref_11E18.weaponvehicledropcircles.size] = var_0;
 }
 
 function recordeventendanalytics() {
@@ -1258,11 +1258,11 @@ function recordeventendanalytics() {
     if(isDefined(var_4) && isDefined(var_4.ref_12532)) {
       var_0 += var_4.ref_12532.ref_14239;
       var_1 += var_4.ref_12532.open_cac_slot;
-      var_2 += var_4.ref_12532.ref_1457e;
+      var_2 += var_4.ref_12532.ref_1457E;
     }
   }
 
-  getentitylessscriptablearray("dlog_event_br_pe_fresno_end", ["gk_maxhealth", level.delayedeventtypes[16].secondwindthink, "g_totaldamage", int(level.ref_11e18.ref_13bef["actor_greenbay"]), "k_totaldamage", int(level.ref_11e18.ref_13bef["actor_kenosha"]), "expl_damage", int(var_1), "veh_damage", int(var_0), "weap_damage", int(var_2)]);
+  getentitylessscriptablearray("dlog_event_br_pe_fresno_end", ["gk_maxhealth", level.delayedeventtypes[16].secondwindthink, "g_totaldamage", int(level.ref_11E18.ref_13BEF["actor_greenbay"]), "k_totaldamage", int(level.ref_11E18.ref_13BEF["actor_kenosha"]), "expl_damage", int(var_1), "veh_damage", int(var_0), "weap_damage", int(var_2)]);
 }
 
 function print_event_logs() {
@@ -1273,8 +1273,8 @@ function print_event_logs() {
   var_0 = "===================================\n";
   var_1 = level.delayedeventtypes[16].secondwindthink;
   var_0 += "gkMaxHealth: " + var_1 + "\n";
-  var_0 += "gDamage: " + level.ref_11e18.ref_13bef["actor_greenbay"] + "\n";
-  var_0 += "kDamage: " + level.ref_11e18.ref_13bef["actor_kenosha"] + "\n";
+  var_0 += "gDamage: " + level.ref_11E18.ref_13BEF["actor_greenbay"] + "\n";
+  var_0 += "kDamage: " + level.ref_11E18.ref_13BEF["actor_kenosha"] + "\n";
   var_2 = 0;
   var_3 = 0;
   var_4 = 0;
@@ -1283,7 +1283,7 @@ function print_event_logs() {
     if(isDefined(var_6) && isDefined(var_6.ref_12532)) {
       var_2 += var_6.ref_12532.ref_14239;
       var_3 += var_6.ref_12532.open_cac_slot;
-      var_4 += var_6.ref_12532.ref_1457e;
+      var_4 += var_6.ref_12532.ref_1457E;
     }
   }
 

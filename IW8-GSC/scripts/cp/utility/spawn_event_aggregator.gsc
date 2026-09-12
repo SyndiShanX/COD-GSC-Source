@@ -24,7 +24,7 @@ function onplayerspawned() {
   self endon("disconnect");
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("loadout_given", "spawned_player");
+    scripts\engine\utility::ref_143A5("loadout_given", "spawned_player");
 
     foreach(var_1 in level.onplayerspawncallbacks) {
       self[[var_1]]();

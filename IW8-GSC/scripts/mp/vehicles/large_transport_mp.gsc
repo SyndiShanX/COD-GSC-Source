@@ -45,5 +45,5 @@ function large_transport_mp_waitandspawn() {
   var_1 = spawnStruct();
   scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("large_transport", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("large_transport", var_1, var_2);
 }

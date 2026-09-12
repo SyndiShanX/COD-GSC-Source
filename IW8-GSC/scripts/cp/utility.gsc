@@ -814,7 +814,7 @@ function delayentdelete(var_0) {
 
 function deleteonplayerdeathdisconnect(var_0) {
   self endon("death");
-  var_0 scripts\engine\utility::ref_143a5("death", "disconnect");
+  var_0 scripts\engine\utility::ref_143A5("death", "disconnect");
   self delete();
 }
 
@@ -976,7 +976,7 @@ function _setactionslot(var_0, var_1, var_2) {
 }
 
 function getkillstreakweapon(var_0) {
-  return tablelookup(level.global_tables["killstreakTable"].path, level.global_tables["killstreakTable"].ref_col, var_0, level.global_tables["killstreakTable"].weapon_col);
+  return tablelookup(level.global_tables["killstreakTable"].path, level.global_tables["killstreakTable"].ref_COL, var_0, level.global_tables["killstreakTable"].weapon_col);
 }
 
 function _objective_delete(var_0) {
@@ -4022,12 +4022,12 @@ function restore_weapons_status(var_0) {
     }
   }
 
-  if(isDefined(self.ref_12d4d)) {
-    if(!scripts\engine\utility::array_contains(self.copy_fullweaponlist, self.ref_12d4d)) {
-      self.copy_fullweaponlist[self.copy_fullweaponlist.size] = self.ref_12d4d;
+  if(isDefined(self.ref_12D4D)) {
+    if(!scripts\engine\utility::array_contains(self.copy_fullweaponlist, self.ref_12D4D)) {
+      self.copy_fullweaponlist[self.copy_fullweaponlist.size] = self.ref_12D4D;
     }
 
-    self.ref_12d4d = undefined;
+    self.ref_12D4D = undefined;
   }
 
   foreach(var_3 in self.copy_fullweaponlist) {
@@ -5757,7 +5757,7 @@ function playerhealthregen() {
   level endon("game_ended");
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("damage", "health_perk_upgrade");
+    scripts\engine\utility::ref_143A5("damage", "health_perk_upgrade");
 
     if(!canregenhealth()) {
       continue;
@@ -5828,7 +5828,7 @@ function healthregen(var_0, var_1) {
       break;
     }
 
-    scripts\engine\utility::ref_143b9(var_2.waittimebetweenregen, "force_regeneration");
+    scripts\engine\utility::ref_143B9(var_2.waittimebetweenregen, "force_regeneration");
   }
 
   self notify("healed");
@@ -5951,7 +5951,7 @@ function canregenhealth() {
     return false;
   }
 
-  if(istrue(self.ref_12b72)) {
+  if(istrue(self.ref_12B72)) {
     return false;
   }
 
@@ -6013,7 +6013,7 @@ function playerarmor() {
   scripts\cp\cp_persistence::setcoopplayerdata_for_everyone("EoGPlayer", var_0, "playerArmor", 0);
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("player_damaged", "enable_armor");
+    scripts\engine\utility::ref_143A5("player_damaged", "enable_armor");
 
     if(!isDefined(self.bodyarmorhp)) {
       if(var_1 > 0) {
@@ -6256,7 +6256,7 @@ function item_oncarrierdeath(var_0) {
   self endon("placed");
   self endon("death");
   var_0 endon("disconnect");
-  var_1 = var_0 scripts\engine\utility::ref_143ad("death", "last_stand");
+  var_1 = var_0 scripts\engine\utility::ref_143AD("death", "last_stand");
   var_0 notify("force_cancel_placement");
 }
 
@@ -7288,7 +7288,7 @@ function ref_13070(var_0, var_1) {
   return var_4;
 }
 
-function ref_12bc6(var_0, var_1) {
+function ref_12BC6(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 1;
   }
@@ -7435,7 +7435,7 @@ function segmented_health_regen(var_0) {
   set_current_health_regen_segment(var_0, var_0.max_health_cap);
 
   for(;;) {
-    var_0 scripts\engine\utility::ref_143ad("damage", "revive");
+    var_0 scripts\engine\utility::ref_143AD("damage", "revive");
     update_current_health_regen_segment(var_0);
 
     if(!can_do_segmented_health_regen(var_0)) {
@@ -9709,7 +9709,7 @@ function getenemyplayers(var_0, var_1) {
   return var_2;
 }
 
-function ref_123fe(var_0, var_1) {
+function ref_123FE(var_0, var_1) {
   var_2 = level.players;
 
   if(isDefined(var_1)) {
@@ -9766,7 +9766,7 @@ function questtimeradd() {
   return var_0;
 }
 
-function ref_13c3e(var_0, var_1) {
+function ref_13C3E(var_0, var_1) {
   self endon("death");
   self notify("track_last_good_position");
   self endon("track_last_good_position");

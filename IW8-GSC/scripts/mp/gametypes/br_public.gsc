@@ -25,26 +25,26 @@ function updateinstantclassswapallowedinternal() {
   return isDefined(var_0) && (istrue(var_0.jailed) || istrue(var_0.gulagarena) || istrue(var_0.gulag));
 }
 
-function ref_1443c() {
+function ref_1443C() {
   var_0 = self;
   return isDefined(var_0) && istrue(var_0.ref_14439);
 }
 
 function isplayerwaitingrebirthrespawn() {
   var_0 = self;
-  return isDefined(var_0) && isDefined(var_0.ref_12ca1) && var_0.ref_12ca1 > 0;
+  return isDefined(var_0) && isDefined(var_0.ref_12CA1) && var_0.ref_12CA1 > 0;
 }
 
 function unlockscriptabledoors() {
   var_0 = self;
-  return (istrue(var_0.delay_enter_combat_after_investigating_grenade) && !isalive(var_0) || ref_125f3(var_0)) && !istrue(var_0.gulag);
+  return (istrue(var_0.delay_enter_combat_after_investigating_grenade) && !isalive(var_0) || ref_125F3(var_0)) && !istrue(var_0.gulag);
 }
 
-function ref_125f3() {
+function ref_125F3() {
   return istrue(self.iszombie);
 }
 
-function ref_125ec() {
+function ref_125EC() {
   return istrue(self.unset_relic_gun_game) || istrue(self.scn_infil_tango_npc_2_sfx);
 }
 
@@ -60,7 +60,7 @@ function heal_removeonplayernotifies() {
   self notifyonplayercommand("try_heal_cancel", "+weapnext");
   self notifyonplayercommand("try_heal_cancel", "+attack");
   self notifyonplayercommand("try_heal_cancel", "+breath_sprint");
-  scripts\engine\utility::ref_143a5("death", "try_heal_cancel");
+  scripts\engine\utility::ref_143A5("death", "try_heal_cancel");
   healend();
 }
 
@@ -352,8 +352,8 @@ function orbitcam(var_0) {
     self playerhide();
   }
 
-  if(isDefined(level.ref_142d1)) {
-    scripts\mp\utility\player::_visionsetnaked(level.ref_142d1, 0);
+  if(isDefined(level.ref_142D1)) {
+    scripts\mp\utility\player::_visionsetnaked(level.ref_142D1, 0);
   } else {
     scripts\mp\utility\player::_visionsetnaked("", 0);
   }
@@ -363,7 +363,7 @@ function orbitcam(var_0) {
   self cameraset(var_1);
 }
 
-function ref_1264d() {
+function ref_1264D() {
   var_0 = self;
   var_0 method_87a9();
 }
@@ -522,7 +522,7 @@ function packdataintoextrainfo(var_0, var_1, var_2) {
   self.game_extrainfo = var_8;
 }
 
-function ref_1319e(var_0) {
+function ref_1319E(var_0) {
   if(istrue(var_0)) {
     self.game_extrainfo |= 512;
     return;
@@ -531,7 +531,7 @@ function ref_1319e(var_0) {
   self.game_extrainfo &= ~512;
 }
 
-function ref_1319c(var_0) {
+function ref_1319C(var_0) {
   if(istrue(var_0)) {
     self.game_extrainfo |= 1024;
     return;
@@ -540,7 +540,7 @@ function ref_1319c(var_0) {
   self.game_extrainfo &= ~1024;
 }
 
-function ref_131a6(var_0) {
+function ref_131A6(var_0) {
   if(istrue(var_0)) {
     self.game_extrainfo |= 2048;
     return;
@@ -549,7 +549,7 @@ function ref_131a6(var_0) {
   self.game_extrainfo &= ~2048;
 }
 
-function ref_131a4(var_0) {
+function ref_131A4(var_0) {
   if(istrue(var_0)) {
     self.game_extrainfo |= 8192;
     return;
@@ -562,7 +562,7 @@ function updatelootleadersonfixedinterval(var_0) {
   return isDefined(var_0.game_extrainfo) && var_0.game_extrainfo & 8192;
 }
 
-function ref_1315c(var_0) {
+function ref_1315C(var_0) {
   if(istrue(var_0)) {
     self.game_extrainfo |= 16384;
     return;
@@ -571,7 +571,7 @@ function ref_1315c(var_0) {
   self.game_extrainfo &= ~16384;
 }
 
-function ref_1315b(var_0) {
+function ref_1315B(var_0) {
   if(istrue(var_0)) {
     self.game_extrainfo |= 32768;
     return;
@@ -665,7 +665,7 @@ function brleaderdialog(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 }
 
-function ref_11c7d(var_0, var_1) {
+function ref_11C7D(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 1;
   }
@@ -687,7 +687,7 @@ function ref_11c7d(var_0, var_1) {
       return true;
     }
 
-    if((var_0 == "circle_closing" || var_0 == "first_circle") && !istrue(level.ref_126d5)) {
+    if((var_0 == "circle_closing" || var_0 == "first_circle") && !istrue(level.ref_126D5)) {
       return true;
     }
   }
@@ -738,7 +738,7 @@ function dmztut_endgamewithreward(var_0, var_1, var_2, var_3, var_4, var_5, var_
     return;
   }
 
-  if(ref_11c7d(var_1, var_0, var_2)) {
+  if(ref_11C7D(var_1, var_0, var_2)) {
     return;
   }
 
@@ -751,7 +751,7 @@ function dmztut_endgamewithreward(var_0, var_1, var_2, var_3, var_4, var_5, var_
   if(isDefined(var_6)) {
     var_7 = var_6;
   } else {
-    jumpiffalse(var_2 scripts\cp_mp\utility\game_utility::ref_140a8()) LOC_00000091;
+    jumpiffalse(var_2 scripts\cp_mp\utility\game_utility::ref_140A8()) LOC_00000091;
     var_7 = "bchr";
     goto LOC_000000a8;
   }
@@ -833,7 +833,7 @@ function ref_12570() {
   }
 }
 
-function ref_126ed() {
+function ref_126ED() {
   if(istrue(self.ref_12875)) {
     self waittill("playerPrestreamComplete");
     return;
@@ -848,7 +848,7 @@ function getinfilspawnoffset() {
   return getdvarfloat("scr_br_dropSpawnOffsetMinZ", 12000);
 }
 
-function ref_126b8(var_0, var_1) {
+function ref_126B8(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = getinfilspawnoffset();
   }
@@ -864,11 +864,11 @@ function ref_126b8(var_0, var_1) {
   return var_0;
 }
 
-function ref_126b9(var_0, var_1, var_2, var_3, var_4) {
-  thread ref_126ba(var_0, var_1, var_2, var_3, var_4);
+function ref_126B9(var_0, var_1, var_2, var_3, var_4) {
+  thread ref_126BA(var_0, var_1, var_2, var_3, var_4);
 }
 
-function ref_126ba(var_0, var_1, var_2, var_3, var_4) {
+function ref_126BA(var_0, var_1, var_2, var_3, var_4) {
   self notify("playerPrestreamLocationWait");
   self endon("playerPrestreamLocationWait");
   self endon("disconnect");
@@ -938,12 +938,12 @@ function relic_nuketimer_gettimeformission() {
   return getdvarint("scr_br_stream_hint_timeout", 9000);
 }
 
-function ref_1252b() {
+function ref_1252B() {
   self notify("playerPrestreamLocationWait");
   self clearpredictedstreampos();
 }
 
-function ref_1264c() {
+function ref_1264C() {
   self cancelmantle();
 
   if(self isskydiving()) {
@@ -1085,19 +1085,19 @@ function damagehelmet(var_0, var_1, var_2) {
   if(var_1) {
     breakhelmet();
 
-    if(isDefined(level.ref_1203e)) {
-      [[level.ref_1203e]](self, var_2);
+    if(isDefined(level.ref_1203E)) {
+      [[level.ref_1203E]](self, var_2);
     }
   }
 
   return var_3;
 }
 
-function ref_1285e(var_0) {
+function ref_1285E(var_0) {
   setglobalsoundcontext("lobby_fade", "on", 3);
 
-  if(!isDefined(level.ref_133b4)) {
-    level.ref_133b4 = 1;
+  if(!isDefined(level.ref_133B4)) {
+    level.ref_133B4 = 1;
   }
 
   thread stop_priming_gesture();
@@ -1274,7 +1274,7 @@ function defend_wave_1() {
   }
 }
 
-function ref_12a1c(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_12A1C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = scripts\engine\trace::ray_trace(var_0 + (var_1, var_2, var_3), var_0 + (var_1, var_2, var_4), var_6, var_5);
   return var_7;
 }
@@ -1315,8 +1315,8 @@ function semtex_used() {
 function send_all_ai_to_players() {
   var_0 = -1200;
 
-  if(isDefined(level.br_level) && isDefined(level.br_level.ref_11a5b)) {
-    var_0 = level.br_level.ref_11a5b;
+  if(isDefined(level.br_level) && isDefined(level.br_level.ref_11A5B)) {
+    var_0 = level.br_level.ref_11A5B;
   }
 
   return var_0;
@@ -1385,33 +1385,33 @@ function modifyscenenode(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  var_16 = ref_12a1c(var_0, 0, 0, var_1, var_2, var_12, var_4);
+  var_16 = ref_12A1C(var_0, 0, 0, var_1, var_2, var_12, var_4);
 
-  if(ref_13c32(var_16, var_10)) {
+  if(ref_13C32(var_16, var_10)) {
     return var_16;
   }
 
-  var_16 = ref_12a1c(var_0, var_9, 0, var_1, var_2, var_12, var_4);
+  var_16 = ref_12A1C(var_0, var_9, 0, var_1, var_2, var_12, var_4);
 
-  if(ref_13c32(var_16, var_10)) {
+  if(ref_13C32(var_16, var_10)) {
     return var_16;
   }
 
-  var_16 = ref_12a1c(var_0, 0, var_9, var_1, var_2, var_12, var_4);
+  var_16 = ref_12A1C(var_0, 0, var_9, var_1, var_2, var_12, var_4);
 
-  if(ref_13c32(var_16, var_10)) {
+  if(ref_13C32(var_16, var_10)) {
     return var_16;
   }
 
-  var_16 = ref_12a1c(var_0, -1 * var_9, 0, var_1, var_2, var_12, var_4);
+  var_16 = ref_12A1C(var_0, -1 * var_9, 0, var_1, var_2, var_12, var_4);
 
-  if(ref_13c32(var_16, var_10)) {
+  if(ref_13C32(var_16, var_10)) {
     return var_16;
   }
 
-  var_16 = ref_12a1c(var_0, 0, -1 * var_9, var_1, var_2, var_12, var_4);
+  var_16 = ref_12A1C(var_0, 0, -1 * var_9, var_1, var_2, var_12, var_4);
 
-  if(ref_13c32(var_16, var_10)) {
+  if(ref_13C32(var_16, var_10)) {
     return var_16;
   }
 
@@ -1421,7 +1421,7 @@ function modifyscenenode(var_0, var_1, var_2, var_3, var_4) {
   return var_16;
 }
 
-function ref_13c32(var_0, var_1) {
+function ref_13C32(var_0, var_1) {
   return var_0["fraction"] != 1 && var_0["position"][2] > var_1;
 }
 
@@ -1459,7 +1459,7 @@ function timeoutonabandonedcallback() {
   }
 }
 
-function ref_1266c(var_0, var_1) {
+function ref_1266C(var_0, var_1) {
   var_2 = self calloutmarkerping_entityzoffset("br_archived_flags");
 
   if(istrue(var_1)) {
@@ -1471,8 +1471,8 @@ function ref_1266c(var_0, var_1) {
   self setclientomnvar("br_archived_flags", var_2);
 }
 
-function ref_125cf(var_0) {
-  ref_1266c(1, var_0);
+function ref_125CF(var_0) {
+  ref_1266C(1, var_0);
 }
 
 function round_enemy_stuck_logic(var_0, var_1) {
@@ -1535,7 +1535,7 @@ function replace_sat_piece_on_deathordisconnect() {
   return level.maxteamsize;
 }
 
-function ref_131c3(var_0, var_1, var_2, var_3) {
+function ref_131C3(var_0, var_1, var_2, var_3) {
   if(scripts\mp\menus::ref_13733()) {
     if(!isDefined(level.squaddata[var_0][var_1].difficultytabledata)) {
       level.squaddata[var_0][var_1].difficultytabledata = [];
@@ -1560,7 +1560,7 @@ function round_at_max(var_0, var_1, var_2) {
   return level.teamdata[var_0][var_2];
 }
 
-function ref_1276a(var_0, var_1, var_2, var_3, var_4) {
+function ref_1276A(var_0, var_1, var_2, var_3, var_4) {
   if(scripts\mp\menus::ref_13733()) {
     var_5 = round_enemy_stuck_logic(var_2.team, var_2.squadindex);
 
@@ -1761,7 +1761,7 @@ function registertabletinit(var_0, var_1, var_2) {
   return var_6[1];
 }
 
-function ref_12a18(var_0, var_1, var_2) {
+function ref_12A18(var_0, var_1, var_2) {
   var_3 = [];
 
   foreach(var_5 in var_2) {
@@ -1787,7 +1787,7 @@ function ref_12a18(var_0, var_1, var_2) {
   return var_8;
 }
 
-function ref_12a19(var_0, var_1, var_2) {
+function ref_12A19(var_0, var_1, var_2) {
   var_3 = [];
 
   foreach(var_5 in var_2) {
@@ -1822,8 +1822,8 @@ function shouldusegoldbarassets() {
 }
 
 function runbrgametypefuncwrapper(var_0, var_1, var_2) {
-  if(isDefined(level.disable_super_in_turret) && isDefined(level.disable_super_in_turret.ref_12e05)) {
-    return [[level.disable_super_in_turret.ref_12e05]](var_0, var_1, var_2);
+  if(isDefined(level.disable_super_in_turret) && isDefined(level.disable_super_in_turret.ref_12E05)) {
+    return [[level.disable_super_in_turret.ref_12E05]](var_0, var_1, var_2);
   }
 }
 

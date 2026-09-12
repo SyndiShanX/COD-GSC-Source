@@ -8,9 +8,9 @@ function technical_init() {
   var_0.destroycallback = &technical_explode;
   technical_initoccupancy();
   technical_initinteract();
-  ref_13ad7();
-  ref_13ad6();
-  ref_13ad5();
+  ref_13AD7();
+  ref_13AD6();
+  ref_13AD5();
   technical_initfx();
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("technical", "init")) {
@@ -100,11 +100,11 @@ function technical_initoccupancy() {
 
 function technical_initinteract() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("technical", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("technical", "single", ["driver", "fl_rear", "fr_rear", "bl_rear", "br_rear"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("technical", "single", ["driver", "fl_rear", "fr_rear", "bl_rear", "br_rear"]);
 }
 
-function ref_13ad7() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("technical", 1);
+function ref_13AD7() {
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("technical", 1);
   var_0.id = 0;
   var_0.seatids["driver"] = 0;
   var_0.seatids["fl_rear"] = 1;
@@ -113,8 +113,8 @@ function ref_13ad7() {
   var_0.seatids["br_rear"] = 4;
 }
 
-function ref_13ad5() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("technical", 1);
+function ref_13AD5() {
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("technical", 1);
   var_0.challengeevaluator = 1.16666;
   var_0.keycardlocs_chosen = 0.95833;
   var_0.is_using_stealth_debug = 350;
@@ -128,14 +128,14 @@ function ref_13ad5() {
   var_0.isassaulting = 0;
 }
 
-function ref_13ad6() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("technical", 1000);
+function ref_13AD6() {
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("technical", 1000);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("technical");
   var_0.class = "medium";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("technical");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("technical");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("technical", 6);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("technical", &technical_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("technical_mp", 3);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("technical_mp", 3);
 }
 
 function technical_initfx() {
@@ -158,7 +158,7 @@ function technical_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "technical", var_0);
   var_2.objweapon = getcompleteweaponname("technical_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 

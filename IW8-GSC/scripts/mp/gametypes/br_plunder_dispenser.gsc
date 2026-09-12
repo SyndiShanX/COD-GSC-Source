@@ -17,7 +17,7 @@ function init() {
   level.plunder_dispensers_data.max_restart_delay_sec = getdvarint("scr_plunder_dispenser_max_restart_delay_sec", 0);
   level.plunder_dispensers_data.spawn_percent = getdvarfloat("scr_plunder_dispenser_percent_spawn", 1);
   scripts\engine\scriptable::scriptable_addusedcallback(&scriptable_used);
-  scripts\engine\scriptable::ref_12f57(&scriptable_used);
+  scripts\engine\scriptable::ref_12F57(&scriptable_used);
   scripts\mp\gametypes\br_pickups::registerpickupremovedforspacecallback(&removed_for_space);
   level.plunder_dispensers_data.conf_fx["sparks"] = loadfx("vfx/iw8_br/gameplay/vfx_sparks_atm.vfx");
 }
@@ -164,7 +164,7 @@ function dispenser_spawn_plunder(var_0, var_1) {
 
 function scriptable_used(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_0.dispenserid)) {
-    if(isDefined(level.br_plunder) && isDefined(level.br_plunder.ref_127bf) && isDefined(var_3) && isDefined(var_3.plundercount) && var_3.plundercount >= level.br_plunder.ref_127bf) {
+    if(isDefined(level.br_plunder) && isDefined(level.br_plunder.ref_127BF) && isDefined(var_3) && isDefined(var_3.plundercount) && var_3.plundercount >= level.br_plunder.ref_127BF) {
       return;
     }
 

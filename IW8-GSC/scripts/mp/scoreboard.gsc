@@ -4,14 +4,14 @@
 ***********************************************/
 
 function processlobbyscoreboards() {
-  ref_128b0();
+  ref_128B0();
 
   foreach(var_1 in level.players) {
-    ref_128a8(var_1);
+    ref_128A8(var_1);
   }
 }
 
-function ref_128b0() {
+function ref_128B0() {
   if(level.multiteambased) {
     buildscoreboardtype("multiteam");
 
@@ -130,7 +130,7 @@ function ref_128b0() {
   }
 }
 
-function ref_128a8(var_0) {
+function ref_128A8(var_0) {
   if(isDefined(var_0.pers["summary"])) {
     var_0 setplayerdata("common", "round", "totalXp", var_0.pers["summary"]["xp"]);
     var_0 setplayerdata("common", "round", "scoreXp", var_0.pers["summary"]["score"]);
@@ -229,12 +229,12 @@ function setplayerscoreboardinfo() {
         var_16 = scripts\mp\gamescore::run_common_functions_stealth();
         var_17 = var_16[self.team];
         setclientmatchdata("players", self.clientmatchdataid, "placement", var_17);
-        var_18 = scripts\mp\gametypes\br_gametype_dmz::ref_121b4();
+        var_18 = scripts\mp\gametypes\br_gametype_dmz::ref_121B4();
         setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var_18);
         var_19 = 0;
 
-        if(isDefined(self.ref_11a01)) {
-          var_19 = self.ref_11a01;
+        if(isDefined(self.ref_11A01)) {
+          var_19 = self.ref_11A01;
         }
 
         setclientmatchdata("players", self.clientmatchdataid, "extrascore5", var_19);
@@ -242,31 +242,31 @@ function setplayerscoreboardinfo() {
         var_16 = scripts\mp\gamescore::run_common_functions_stealth();
         var_17 = var_16[self.team];
         setclientmatchdata("players", self.clientmatchdataid, "placement", var_17);
-        var_18 = scripts\mp\gametypes\br_gametype_kingslayer::ref_121b4();
+        var_18 = scripts\mp\gametypes\br_gametype_kingslayer::ref_121B4();
         setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var_18);
         var_19 = 0;
 
-        if(isDefined(self.ref_11a01)) {
-          var_19 = self.ref_11a01;
+        if(isDefined(self.ref_11A01)) {
+          var_19 = self.ref_11A01;
         }
 
         setclientmatchdata("players", self.clientmatchdataid, "extrascore5", var_19);
       } else if(var_15 == "treasure_hunt") {
-        if(isDefined(self.ref_13ab8)) {
-          setclientmatchdata("players", self.clientmatchdataid, "placement", self.ref_13ab8);
+        if(isDefined(self.ref_13AB8)) {
+          setclientmatchdata("players", self.clientmatchdataid, "placement", self.ref_13AB8);
         }
 
-        var_18 = scripts\mp\gametypes\br_gametype_treasure_hunt::ref_121b2();
+        var_18 = scripts\mp\gametypes\br_gametype_treasure_hunt::ref_121B2();
         setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var_18);
       } else if(var_15 == "rebirth" || var_15 == "rebirth_dbd") {
-        if(isDefined(self.ref_13ab8)) {
-          setclientmatchdata("players", self.clientmatchdataid, "placement", self.ref_13ab8);
+        if(isDefined(self.ref_13AB8)) {
+          setclientmatchdata("players", self.clientmatchdataid, "placement", self.ref_13AB8);
         }
 
         var_18 = scripts\mp\gametypes\br_gametype_rebirth::end_health();
         setclientmatchdata("players", self.clientmatchdataid, "extrascore4", var_18);
-      } else if(var_15 == "rebirth_reverse" || var_15 == "rebirth_dbd_reverse") {} else if(isDefined(self.ref_13ab8)) {
-        setclientmatchdata("players", self.clientmatchdataid, "placement", self.ref_13ab8);
+      } else if(var_15 == "rebirth_reverse" || var_15 == "rebirth_dbd_reverse") {} else if(isDefined(self.ref_13AB8)) {
+        setclientmatchdata("players", self.clientmatchdataid, "placement", self.ref_13AB8);
       }
     }
 

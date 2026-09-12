@@ -18,7 +18,7 @@ function main() {
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "woodland";
-  thread ref_1327b();
+  thread ref_1327B();
   thread spawn_carepackage();
   thread play_movie("mp_garden_tv");
   thread monitor();
@@ -26,7 +26,7 @@ function main() {
   thread lb_pitch_roll_dmg_factor("destructVan", "redvan", 1);
   scripts\mp\flags::levelflagwait("scriptables_ready");
   wait 10;
-  scripts\engine\utility::array_thread(getscriptablearray("scriptable_veh8_civ_lnd_victor40_police_mp_piccadilly", "classname"), &ref_141bd);
+  scripts\engine\utility::array_thread(getscriptablearray("scriptable_veh8_civ_lnd_victor40_police_mp_piccadilly", "classname"), &ref_141BD);
 }
 
 function spawn_carepackage() {
@@ -47,9 +47,9 @@ function spawn_carepackage() {
 }
 
 function molotov_watch_cleanup_pool() {
-  var_0 = easepower("maphint_offering", level.ref_11fab.origin);
+  var_0 = easepower("maphint_offering", level.ref_11FAB.origin);
   waitframe();
-  scripts\engine\scriptable::ref_12f5b("maphint_offering", &ref_11ae2);
+  scripts\engine\scriptable::ref_12F5B("maphint_offering", &ref_11AE2);
 
   for(;;) {
     level waittill("OfferingPlaced");
@@ -60,38 +60,38 @@ function molotov_watch_cleanup_pool() {
 }
 
 function monitor() {
-  level.ref_11fab = scripts\engine\utility::getStruct("offeringLoc", "targetname");
+  level.ref_11FAB = scripts\engine\utility::getStruct("offeringLoc", "targetname");
   level.getrandomprematchequipment = getEnt("cheese", "targetname");
   level.getrandomprematchequipment hide();
   level.getridofkillstreakdeployweapon = getEnt("cheeseWedge", "targetname");
-  level.getridofkillstreakdeployweapon.ref_1214a = level.getridofkillstreakdeployweapon.origin;
+  level.getridofkillstreakdeployweapon.ref_1214A = level.getridofkillstreakdeployweapon.origin;
   level.getridofkillstreakdeployweapon.originalangles = level.getridofkillstreakdeployweapon.angles;
   level.getridofkillstreakdeployweapon hide();
   level.getrandomweaponfromgroup = scripts\engine\utility::getStructArray("cheeseLoc", "targetname");
   level.getrandomweaponfromgroup = scripts\engine\utility::array_randomize(level.getrandomweaponfromgroup);
   level.getrandomprematchequipment.origin = level.getrandomweaponfromgroup[0].origin;
   level.getrandomprematchequipment.angles = level.getrandomweaponfromgroup[0].angles;
-  level.ref_11d7b = getEntArray("mouseTrap", "targetname");
-  level.ref_11d7a = scripts\engine\utility::getStructArray("mouseTrapLoc", "targetname");
+  level.ref_11D7B = getEntArray("mouseTrap", "targetname");
+  level.ref_11D7A = scripts\engine\utility::getStructArray("mouseTrapLoc", "targetname");
 
-  foreach(var_1 in level.ref_11d7a) {
+  foreach(var_1 in level.ref_11D7A) {
     if(var_1.origin == (362.93, -1485.9, 0)) {
       var_1.origin = (358.93, -1465.9, 0);
     }
   }
 
-  level.ref_11d7a = scripts\engine\utility::array_randomize(level.ref_11d7a);
-  level.ref_11d7c = 0;
+  level.ref_11D7A = scripts\engine\utility::array_randomize(level.ref_11D7A);
+  level.ref_11D7C = 0;
   var_3 = 0;
 
-  foreach(var_5 in level.ref_11d7b) {
-    var_5.origin = level.ref_11d7a[var_3].origin;
-    var_5.angles = level.ref_11d7a[var_3].angles;
+  foreach(var_5 in level.ref_11D7B) {
+    var_5.origin = level.ref_11D7A[var_3].origin;
+    var_5.angles = level.ref_11D7A[var_3].angles;
     var_5.fx = scripts\engine\utility::spawn_tag_origin();
     var_5.fx.origin = var_5.origin;
     var_5.fx.angles = var_5.angles;
     var_5.fx show();
-    thread ref_11d7d(var_5);
+    thread ref_11D7D(var_5);
     var_3++;
   }
 
@@ -106,35 +106,35 @@ function monitor() {
     var_8 hide();
   }
 
-  while(level.ref_11d7c < 5) {
+  while(level.ref_11D7C < 5) {
     level waittill("TrapFound");
   }
 
   level.getsafeoriginaroundpoint = easepower("maphint_cheese2", level.getridofkillstreakdeployweapon.origin + (0, 0, 6));
   waitframe();
-  scripts\engine\scriptable::ref_12f5b("maphint_cheese2", &ref_11add);
+  scripts\engine\scriptable::ref_12F5B("maphint_cheese2", &ref_11ADD);
   level waittill("CheeseWedgeTaken");
   level.getridofkillstreakdeployweapon hide();
   level.getrandomprematchequipment show();
   level.getrewardvaluetype = easepower("maphint_cheese", level.getrandomprematchequipment.origin + (0, 0, 6));
   waitframe();
-  scripts\engine\scriptable::ref_12f5b("maphint_cheese", &ref_11ade);
+  scripts\engine\scriptable::ref_12F5B("maphint_cheese", &ref_11ADE);
   level waittill("CheeseTaken");
   level.getrandomprematchequipment hide();
-  var_10 = easepower("maphint_offering", level.ref_11fab.origin);
+  var_10 = easepower("maphint_offering", level.ref_11FAB.origin);
   waitframe();
-  scripts\engine\scriptable::ref_12f5b("maphint_offering", &ref_11ae2);
+  scripts\engine\scriptable::ref_12F5B("maphint_offering", &ref_11AE2);
   level waittill("OfferingPlaced");
   monitor_enemy_death();
 }
 
-function ref_11d7d(var_0) {
+function ref_11D7D(var_0) {
   var_0 setCanDamage(1);
   var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
   var_0 hide();
-  level.ref_11d7c++;
+  level.ref_11D7C++;
 
-  if(level.ref_11d7c < 5) {
+  if(level.ref_11D7C < 5) {
     playFXOnTag(scripts\engine\utility::getfx("vfx_garden_trap"), var_0.fx, "tag_origin");
     var_0 playSound("mp_garden_pp_rat_trap");
   } else {
@@ -150,9 +150,9 @@ function ref_11d7d(var_0) {
 }
 
 function monitor_enemy_death() {
-  level.getrandomprematchequipment.origin = level.ref_11fab.origin;
-  level.getrandomprematchequipment.angles = level.ref_11fab.angles;
-  level.getridofkillstreakdeployweapon.origin = level.getridofkillstreakdeployweapon.ref_1214a;
+  level.getrandomprematchequipment.origin = level.ref_11FAB.origin;
+  level.getrandomprematchequipment.angles = level.ref_11FAB.angles;
+  level.getridofkillstreakdeployweapon.origin = level.getridofkillstreakdeployweapon.ref_1214A;
   level.getridofkillstreakdeployweapon.angles = level.getridofkillstreakdeployweapon.originalangles;
   waittillframeend();
   level.getrandomprematchequipment show();
@@ -179,7 +179,7 @@ function monitor_enemy_death() {
   }
 }
 
-function ref_11ae2(var_0, var_1, var_2, var_3, var_4) {
+function ref_11AE2(var_0, var_1, var_2, var_3, var_4) {
   thread allow_player_skip_laststand(level, var_0, var_1, var_2, var_3);
 }
 
@@ -193,7 +193,7 @@ function allow_player_skip_laststand(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-function ref_11ade(var_0, var_1, var_2, var_3, var_4) {
+function ref_11ADE(var_0, var_1, var_2, var_3, var_4) {
   thread allow_player_basejumping(level, var_0, var_1, var_2, var_3);
 }
 
@@ -206,7 +206,7 @@ function allow_player_basejumping(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-function ref_11add(var_0, var_1, var_2, var_3, var_4) {
+function ref_11ADD(var_0, var_1, var_2, var_3, var_4) {
   thread allow_pickup_atmine(level, var_0, var_1, var_2, var_3);
 }
 
@@ -229,11 +229,11 @@ function play_movie(var_0) {
   }
 }
 
-function ref_1327b() {
+function ref_1327B() {
   wait 1;
   var_0 = getEntArray("Train", "targetname");
-  level.ref_13cd2 = 15;
-  wait level.ref_13cd2;
+  level.ref_13CD2 = 15;
+  wait level.ref_13CD2;
 
   foreach(var_2 in var_0) {
     switch (var_2.script_noteworthy) {
@@ -251,12 +251,12 @@ function ref_1327b() {
         break;
     }
 
-    thread ref_13cc9(var_2);
-    thread ref_13c96();
+    thread ref_13CC9(var_2);
+    thread ref_13C96();
   }
 }
 
-function ref_13cc9(var_0) {
+function ref_13CC9(var_0) {
   var_1 = 0.00125;
   var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
@@ -283,7 +283,7 @@ function ref_13cc9(var_0) {
       }
 
       if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "front") {
-        level.ref_13cd2 = randomint(30);
+        level.ref_13CD2 = randomint(30);
       }
 
       switch (var_0.script_noteworthy) {
@@ -301,7 +301,7 @@ function ref_13cc9(var_0) {
           break;
       }
 
-      wait level.ref_13cd2;
+      wait level.ref_13CD2;
 
       switch (var_0.script_noteworthy) {
         case "front":
@@ -321,7 +321,7 @@ function ref_13cc9(var_0) {
   }
 }
 
-function ref_141bd() {
+function ref_141BD() {
   level endon("game_ended");
   wait randomfloat(2);
 
@@ -363,21 +363,21 @@ function lb_pitch_roll_dmg_factor(var_0, var_1, var_2) {
     var_3[0].showintelinstancetoplayer.angles = var_3[0] gettagangles("tag_light_front_Left");
     var_3[0].showintelinstancetoplayer show();
     var_3[0].showintelinstancetoplayer linkTo(var_3[0], "tag_light_front_Left");
-    var_3[0].ref_13a29 = scripts\engine\utility::spawn_tag_origin();
-    var_3[0].ref_13a29.origin = var_3[0] gettagorigin("tag_light_back_right");
-    var_3[0].ref_13a29.angles = var_3[0] gettagangles("tag_light_back_right");
-    var_3[0].ref_13a29 show();
-    var_3[0].ref_13a29 linkTo(var_3[0], "tag_light_back_right");
-    var_3[0].ref_13a28 = scripts\engine\utility::spawn_tag_origin();
-    var_3[0].ref_13a28.origin = var_3[0] gettagorigin("tag_light_back_Left");
-    var_3[0].ref_13a28.angles = var_3[0] gettagangles("tag_light_back_Left");
-    var_3[0].ref_13a28 show();
-    var_3[0].ref_13a28 linkTo(var_3[0], "tag_light_back_Left");
+    var_3[0].ref_13A29 = scripts\engine\utility::spawn_tag_origin();
+    var_3[0].ref_13A29.origin = var_3[0] gettagorigin("tag_light_back_right");
+    var_3[0].ref_13A29.angles = var_3[0] gettagangles("tag_light_back_right");
+    var_3[0].ref_13A29 show();
+    var_3[0].ref_13A29 linkTo(var_3[0], "tag_light_back_right");
+    var_3[0].ref_13A28 = scripts\engine\utility::spawn_tag_origin();
+    var_3[0].ref_13A28.origin = var_3[0] gettagorigin("tag_light_back_Left");
+    var_3[0].ref_13A28.angles = var_3[0] gettagangles("tag_light_back_Left");
+    var_3[0].ref_13A28 show();
+    var_3[0].ref_13A28 linkTo(var_3[0], "tag_light_back_Left");
     waitframe();
     playFXOnTag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_right"), var_3[0].showintelscriptablestoplayer, "tag_origin");
     playFXOnTag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_left"), var_3[0].showintelinstancetoplayer, "tag_origin");
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var_3[0].ref_13a29, "tag_origin");
-    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var_3[0].ref_13a28, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var_3[0].ref_13A29, "tag_origin");
+    playFXOnTag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var_3[0].ref_13A28, "tag_origin");
   }
 
   if(isDefined(var_3) && isDefined(var_3[0])) {
@@ -396,8 +396,8 @@ function lb_pitch_roll_dmg_factor(var_0, var_1, var_2) {
           if(var_2) {
             killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_right"), var_3[0].showintelscriptablestoplayer, "tag_origin");
             killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_left"), var_3[0].showintelinstancetoplayer, "tag_origin");
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var_3[0].ref_13a29, "tag_origin");
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var_3[0].ref_13a28, "tag_origin");
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var_3[0].ref_13A29, "tag_origin");
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var_3[0].ref_13A28, "tag_origin");
           }
 
           var_6 = 0;
@@ -408,8 +408,8 @@ function lb_pitch_roll_dmg_factor(var_0, var_1, var_2) {
           if(var_2) {
             killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_right"), var_3[0].showintelscriptablestoplayer, "tag_origin");
             killfxontag(scripts\engine\utility::getfx("vfx_garden_headlight_lensflare_left"), var_3[0].showintelinstancetoplayer, "tag_origin");
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var_3[0].ref_13a29, "tag_origin");
-            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var_3[0].ref_13a28, "tag_origin");
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_right"), var_3[0].ref_13A29, "tag_origin");
+            killfxontag(scripts\engine\utility::getfx("vfx_garden_taillight_lensflare_left"), var_3[0].ref_13A28, "tag_origin");
           }
 
           var_6 = 0;
@@ -427,7 +427,7 @@ function trucklightsoff(var_0) {
   }
 }
 
-function ref_13c96() {
+function ref_13C96() {
   var_0 = spawn("script_origin", self.origin);
   var_0 endon("death");
   thread scripts\engine\utility::delete_on_death(var_0);

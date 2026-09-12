@@ -147,7 +147,7 @@ function battle_tracks_shouldplaybattletrackswhenstandingonvehicle(var_0) {
   var_0.hasincoming++;
 }
 
-function ref_12c07(var_0) {
+function ref_12C07(var_0) {
   if(!isDefined(var_0.hasincoming)) {
     return;
   }
@@ -177,11 +177,11 @@ function watchtargetlockedontobyprojectile(var_0, var_1) {
   var_0 endon("clearLockedOn");
   addlockedon(var_0);
   battle_tracks_shouldplaybattletrackswhenstandingonvehicle(var_0);
-  var_1 scripts\engine\utility::ref_143a5("death", "clearTargetLockedOntoByProjectile");
+  var_1 scripts\engine\utility::ref_143A5("death", "clearTargetLockedOntoByProjectile");
 
   if(isDefined(var_0)) {
     removelockedon(var_0);
-    ref_12c07(var_0);
+    ref_12C07(var_0);
     return;
   }
 }
@@ -257,7 +257,7 @@ function dropweaponfordeathlaunch(var_0, var_1, var_2, var_3) {
   var_5 physicslaunchserveritem(var_13, var_11);
 }
 
-function ref_12eb2() {
+function ref_12EB2() {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("weapons", "saveToggleScopeStates")) {
     self[[scripts\cp_mp\utility\script_utility::getsharedfunc("weapons", "saveToggleScopeStates")]]();
   }
@@ -268,7 +268,7 @@ function ref_12eb2() {
   }
 }
 
-function ref_12cc7(var_0) {
+function ref_12CC7(var_0) {
   if(self isalternatemode(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("weapons", "updateSavedAltState")) {
       var_0 = self[[scripts\cp_mp\utility\script_utility::getsharedfunc("weapons", "updateSavedAltState")]](var_0);

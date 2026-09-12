@@ -15,7 +15,7 @@ function gunship_findboxcenter(var_0, var_1) {
 }
 
 function set_unloadtype_at_end_path(var_0, var_1) {
-  var_2 = scripts\cp_mp\killstreaks\toma_strike::ref_13bd6(var_0, var_1);
+  var_2 = scripts\cp_mp\killstreaks\toma_strike::ref_13BD6(var_0, var_1);
   return var_2.point;
 }
 

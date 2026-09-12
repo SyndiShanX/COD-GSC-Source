@@ -208,27 +208,27 @@ function reset_visionset_on_disconnect(var_0) {
   self visionsetnakedforplayer("", 0);
 }
 
-function ref_12cc4(var_0, var_1) {
+function ref_12CC4(var_0, var_1) {
   if(!istrue(var_1)) {
     if(istrue(level.wpinprogress)) {
       return;
     }
   }
 
-  if(isDefined(level.ref_142d1)) {
-    self visionsetnakedforplayer(level.ref_142d1, var_0);
+  if(isDefined(level.ref_142D1)) {
+    self visionsetnakedforplayer(level.ref_142D1, var_0);
     return;
   }
 
   self visionsetnakedforplayer("", var_0);
 }
 
-function ref_12cc5(var_0) {
-  ref_12cc4(var_0, 1);
+function ref_12CC5(var_0) {
+  ref_12CC4(var_0, 1);
 }
 
 function restorebasevisionset(var_0) {
-  ref_12cc4(var_0, undefined);
+  ref_12CC4(var_0, undefined);
 }
 
 function init_visionsetnight() {
@@ -1108,7 +1108,7 @@ function _setsuit(var_0) {
   self.suit = var_0;
 }
 
-function ref_1328c(var_0, var_1) {
+function ref_1328C(var_0, var_1) {
   if(!self isscriptable() || !self getscriptablehaspart("wind") || !isreallyalive(self)) {
     return;
   }
@@ -1127,7 +1127,7 @@ function ref_12898(var_0) {
   }
 }
 
-function ref_1312b(var_0) {
+function ref_1312B(var_0) {
   self.beingrevived = var_0;
   self setisusingspecialist(var_0);
 }

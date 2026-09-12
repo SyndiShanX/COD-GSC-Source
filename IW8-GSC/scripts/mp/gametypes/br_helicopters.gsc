@@ -45,8 +45,8 @@ function orbitcam(var_0) {
   self playerlinkTo(var_0, "tag_origin");
   self playerhide();
 
-  if(isDefined(level.ref_142d1)) {
-    scripts\mp\utility\player::_visionsetnaked(level.ref_142d1, 0);
+  if(isDefined(level.ref_142D1)) {
+    scripts\mp\utility\player::_visionsetnaked(level.ref_142D1, 0);
   } else {
     scripts\mp\utility\player::_visionsetnaked("", 0);
   }

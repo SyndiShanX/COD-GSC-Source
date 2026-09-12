@@ -882,7 +882,7 @@ function onownerdisconnect(var_0) {
 function hackequipment(var_0) {
   self.ishacked = 1;
   var_0 scripts\mp\gamelogic::sethasdonecombat(var_0, 1);
-  var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_1203d(self.equipmentref);
+  var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_1203D(self.equipmentref);
   changeowner(var_0);
 
   if(level.teambased) {
@@ -917,14 +917,14 @@ function scriptablescleanupbatchsize(var_0, var_1, var_2) {
       continue;
     }
 
-    var_4.ref_12fb1 = getcurrentequipment(var_4, var_1);
-    var_4.ref_12fb0 = getequipmentslotammo(var_1);
+    var_4.ref_12FB1 = getcurrentequipment(var_4, var_1);
+    var_4.ref_12FB0 = getequipmentslotammo(var_1);
     takeequipment(var_4, var_1);
     giveequipment(var_4, var_2, var_1);
   }
 }
 
-function ref_13a30(var_0, var_1, var_2, var_3) {
+function ref_13A30(var_0, var_1, var_2, var_3) {
   foreach(var_5 in var_0) {
     if(istrue(var_5.gulag)) {
       continue;
@@ -937,16 +937,16 @@ function ref_13a30(var_0, var_1, var_2, var_3) {
     }
 
     takeequipment(var_5, var_1);
-    var_7 = var_5.ref_12fb1;
-    var_8 = var_5.ref_12fb0;
+    var_7 = var_5.ref_12FB1;
+    var_8 = var_5.ref_12FB0;
 
     if(isDefined(var_7)) {
       giveequipment(var_5, var_7, var_1);
-      var_5.ref_12fb1 = undefined;
+      var_5.ref_12FB1 = undefined;
 
       if(isDefined(var_8)) {
         setequipmentammo(var_5, var_7, var_8);
-        var_5.ref_12fb0 = undefined;
+        var_5.ref_12FB0 = undefined;
       }
     }
   }

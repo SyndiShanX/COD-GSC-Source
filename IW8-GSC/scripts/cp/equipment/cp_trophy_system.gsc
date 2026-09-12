@@ -121,8 +121,8 @@ function trophy_watchprotection() {
     level.mines = [];
   }
 
-  if(!isDefined(level.ref_11d34)) {
-    level.ref_11d34 = [];
+  if(!isDefined(level.ref_11D34)) {
+    level.ref_11D34 = [];
   }
 
   var_0 = trophy_castcontents();
@@ -133,7 +133,7 @@ function trophy_watchprotection() {
     var_2 = level.grenades;
     var_2 = level.missiles;
     var_2 = level.mines;
-    var_2 = level.ref_11d34;
+    var_2 = level.ref_11D34;
     var_3 = scripts\engine\utility::array_combine_multiple(var_2);
 
     foreach(var_5 in var_3) {
@@ -232,7 +232,7 @@ function trophy_destroyonemp() {
 function trophy_destroyongameend() {
   self endon("death");
   self.owner endon("disconnect");
-  level scripts\engine\utility::ref_143a5("game_ended", "bro_shot_start");
+  level scripts\engine\utility::ref_143A5("game_ended", "bro_shot_start");
   thread trophy_destroy();
 }
 

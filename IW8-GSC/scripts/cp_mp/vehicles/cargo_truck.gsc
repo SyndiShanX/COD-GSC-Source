@@ -64,27 +64,27 @@ function cargo_truck_initoccupancy() {
 
 function cargo_truck_initinteract() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("cargo_truck", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("cargo_truck", "single", ["driver"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("cargo_truck", "single", ["driver"]);
 }
 
 function get_focus_fire_icon_image() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("cargo_truck", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("cargo_truck", 1);
   var_0.id = 8;
   var_0.seatids["driver"] = 0;
 }
 
 function get_focus_fire_damage_multiplier() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("cargo_truck", 3500);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("cargo_truck", 3500);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("cargo_truck");
   var_0.class = "heavy";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("cargo_truck");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("cargo_truck");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("cargo_truck", 20);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("cargo_truck", &cargo_truck_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("cargo_truck_mp", 5);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("cargo_truck_mp", 5);
 }
 
 function get_farthest_living_player_not_in_laststand() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("cargo_truck", 1);
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("cargo_truck", 1);
   var_0.challengeevaluator = 2;
   var_0.keycardlocs_chosen = 0.75;
   var_0.is_using_stealth_debug = 350;
@@ -107,7 +107,7 @@ function cargo_truck_create(var_0, var_1) {
     var_0.angles = (0, 0, 0);
   }
 
-  var_2 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
+  var_2 = scripts\cp_mp\utility\script_utility::ref_140DE("game", "isGameTypeBR", 0);
 
   if(var_2) {
     var_0.modelname = "veh8_mil_lnd_mkilo23_physics_opt_mp";
@@ -125,7 +125,7 @@ function cargo_truck_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_3, "cargo_truck", var_0);
   var_3.objweapon = getcompleteweaponname("cargo_truck_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_3);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_3);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_3, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_3, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 

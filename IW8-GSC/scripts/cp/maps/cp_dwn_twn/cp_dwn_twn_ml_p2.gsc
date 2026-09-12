@@ -31,7 +31,7 @@ function obj_default_init(var_0, var_1) {
 
       scripts\engine\utility::flag_wait("dwn_twn_mlp2_script_completed");
       scripts\engine\utility::flag_wait("dwn_twn_mlp2_register_spawn_modules_done");
-      level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123fd();
+      level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123FD();
       thread mlp2_sh1_trig();
       thread mlp2_sh2_trig();
       thread mlp2_sh3_trig();
@@ -51,7 +51,7 @@ function obj_default_end(var_0) {}
 function obj_default_beat(var_0) {}
 
 function obj_default_start(var_0) {
-  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123fd();
+  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123FD();
 }
 
 function register_objectives() {
@@ -68,8 +68,8 @@ function register_objectives() {
   scripts\cp\cp_objectives::registerobjective("ml_p2_follow_contact", &obj_default_init, &mlp2_2_start, &obj_default_end, &obj_default_beat, &obj_default_start);
   scripts\cp\cp_objectives::registerobjective("ml_p2_secure_loc", &obj_default_init, &mlp2_3_start, &obj_default_end, &obj_default_beat, &mlp2_3_mnu_start);
   scripts\cp\cp_objectives::registerobjective("ml_p2_interrogate", &obj_default_init, &ml_p2_interrogate, &obj_default_end, &obj_default_beat, &debug_ml_p2_interrogate_start);
-  scripts\cp\cp_objectives::registerobjective("ml_p2_fail_killed_convoy", undefined, &ref_11c5a, undefined, undefined);
-  scripts\cp\cp_objectives::registerobjective("ml_p2_fail_lost_convoy", undefined, &ref_11c5a, undefined, undefined);
+  scripts\cp\cp_objectives::registerobjective("ml_p2_fail_killed_convoy", undefined, &ref_11C5A, undefined, undefined);
+  scripts\cp\cp_objectives::registerobjective("ml_p2_fail_lost_convoy", undefined, &ref_11C5A, undefined, undefined);
   scripts\cp\cp_objectives::registerobjective("ml_p2_observe", &obj_default_init, &mlp2_observe_start, &obj_default_end, &obj_default_beat, &mlp2_debug_start);
   scripts\cp\cp_objectives::registerobjective("ml_p2_call_contact", &obj_default_init, &mlp2_1_start, &obj_default_end, &obj_default_beat, &obj_default_start);
 }
@@ -101,7 +101,7 @@ function register_spawn_modules() {
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("mlp2_vip_spawns_decoy", &mark_never_remove);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("mlp2_vip_spawns_decoy", &nuke_startexfilcountdown);
   scripts\cp\cp_modular_spawning::registerambientgroup("mlp2_passenger_group", 12, 12, 12, 0.1, undefined, "mlp2_passenger_group");
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("mlp2_passenger_group", &ref_1294b);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("mlp2_passenger_group", &ref_1294B);
   scripts\cp\cp_modular_spawning::registerambientgroup("mlp2_sh1", 4, 4, 4, 0.1, undefined, "mlp2_sh1");
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("mlp2_sh1", &mark_never_remove);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("mlp2_sh1", &spawn_in_cover);
@@ -248,7 +248,7 @@ function mlp2_mnu_start(var_0) {
   }
 
   scripts\engine\utility::flag_wait("dwn_twn_mlp2_script_completed");
-  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123fd();
+  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123FD();
   var_1 = scripts\cp\cp_modular_spawning::run_spawn_module("wave_spawning");
 
   while(!isDefined(level.players) || level.players.size < 1) {
@@ -268,7 +268,7 @@ function mlp2_3_mnu_start(var_0) {
 
   scripts\engine\utility::flag_wait("dwn_twn_mlp2_script_completed");
   scripts\engine\utility::flag_wait("dwn_twn_mlp2_register_spawn_modules_done");
-  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123fd();
+  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123FD();
   wait 5;
   var_1 = scripts\cp\cp_modular_spawning::run_spawn_module("wave_spawning");
   thread mlp2_sh1_trig();
@@ -353,7 +353,7 @@ function check_player_prox_on_ground() {
   level notify("ml_p2_observe_close_enough");
 }
 
-function ref_1294b(var_0) {
+function ref_1294B(var_0) {
   var_1 = self;
 
   foreach(var_3 in level.mlp2_vehicles) {
@@ -391,7 +391,7 @@ function ref_1294b(var_0) {
   var_7.attachedguys[var_7.attachedguys.size] = var_3;
   var_7.riders[var_7.riders.size] = var_3;
   var_3.vehicle_position = var_3.forced_startingposition;
-  var_3.ref_1376b = var_3.health;
+  var_3.ref_1376B = var_3.health;
   var_3.health = 500;
 
   if(var_3.forced_startingposition == 0) {
@@ -459,7 +459,7 @@ function ml_p2_get_heli_start(var_0) {
   scripts\engine\utility::flag_wait("dwn_twn_mlp2_register_spawn_modules_done");
   level.initlethalmaxoffsetmap = "ml_p2_get_heli";
   scripts\mp\brclientmatchdata::getprophealth("ml_p1");
-  scripts\cp\crate_drops\cp_crate_drops::ref_12c40("ml_p2");
+  scripts\cp\crate_drops\cp_crate_drops::ref_12C40("ml_p2");
 
   if(!isDefined(level.player_heli)) {
     ref_13591();
@@ -496,10 +496,10 @@ function ml_p2_get_heli_start(var_0) {
     wait 0.1;
   }
 
-  level.ref_124b7 = 1;
+  level.ref_124B7 = 1;
   thread stop_wave_spawning_once_heli_leaves();
   thread spawn_rpg_guys_when_in_heli();
-  level.player_heli scripts\engine\utility::ref_143a5("ml_p2_heli_takeoff", "death");
+  level.player_heli scripts\engine\utility::ref_143A5("ml_p2_heli_takeoff", "death");
 
   if(isDefined(level.player_heli)) {
     level.player_heli.invulnerable = undefined;
@@ -553,12 +553,12 @@ function ref_13592() {
   }
 
   foreach(var_2 in var_0) {
-    var_3 = scripts\mp\carriable::ref_131ea(var_2);
-    thread ref_13fb0();
+    var_3 = scripts\mp\carriable::ref_131EA(var_2);
+    thread ref_13FB0();
   }
 }
 
-function ref_13fb0() {
+function ref_13FB0() {
   wait 1;
   self.matchdata_logaward = 1;
   self setleftarc(170);
@@ -570,8 +570,8 @@ function propwhistletime() {
   wait 1;
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_stakeout_ambush_heli_nearby_10");
   wait 0.5;
-  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("ping_response_affirm");
-  thread ref_11e1e();
+  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("ping_response_affirm");
+  thread ref_11E1E();
   level.skipburndownmedium = 1;
 }
 
@@ -600,13 +600,13 @@ function lootleadermarkweakvalue() {
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_stakeout_ambush_rpg_warning_10");
 }
 
-function ref_11e1e() {
+function ref_11E1E() {
   level endon("game_ended");
 
-  while(!istrue(level.ref_124b7)) {
+  while(!istrue(level.ref_124B7)) {
     wait 60;
 
-    if(!istrue(level.ref_124b7)) {
+    if(!istrue(level.ref_124B7)) {
       scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_kama_stakeout_ambush_heli_nag_10");
     }
   }
@@ -637,7 +637,7 @@ function keep_heli_in_place(var_0, var_1) {
   var_2 = 50;
   var_3 = var_2 * var_2;
 
-  while(!istrue(level.ref_124b7)) {
+  while(!istrue(level.ref_124B7)) {
     if(distancesquared(level.player_heli.origin, var_0) > var_3) {
       level.player_heli.origin = var_0;
       level.player_heli.angles = var_1;
@@ -796,8 +796,8 @@ function wait_for_players_to_call() {
 }
 
 function mlp2_2_start(var_0) {
-  if(isDefined(level.ref_11c63)) {
-    thread ref_11cf9(level.ref_11c63);
+  if(isDefined(level.ref_11C63)) {
+    thread ref_11CF9(level.ref_11C63);
   }
 
   scripts\cp\utility::skydivestreamhintdvars("ml_p2");
@@ -805,7 +805,7 @@ function mlp2_2_start(var_0) {
   scripts\engine\utility::flag_set("reinforce_3_ready");
   mark_group_as_killable("mlp2_vip_spawns");
   mark_group_as_killable("mlp2_vip_spawns_decoy");
-  thread ref_1444b(20, 4500, 8);
+  thread ref_1444B(20, 4500, 8);
   var_1 = scripts\engine\utility::flag_wait_any_return("players_at_station", "convoy_destroyed", "fronttruck_stopped", "convoy_escaped");
 
   if(var_1 == "convoy_destroyed" || var_1 == "fronttruck_stopped") {
@@ -825,7 +825,7 @@ function mlp2_2_start(var_0) {
   scripts\cp\cp_objectives::freeworldid("convoy_back");
 }
 
-function ref_11c5a(var_0) {
+function ref_11C5A(var_0) {
   scripts\engine\utility::flag_wait("player_spawned_with_loadout");
   wait 5;
   logevent_servermatchstart(var_0);
@@ -852,10 +852,10 @@ function logevent_servermatchstart(var_0) {
   return;
 }
 
-function ref_1444b(var_0, var_1, var_2) {
+function ref_1444B(var_0, var_1, var_2) {
   level endon("game_ended");
   level endon("players_at_station");
-  var_3 = level.ref_11c63;
+  var_3 = level.ref_11C63;
 
   if(!isDefined(var_3)) {
     return;
@@ -923,12 +923,12 @@ function truck_airdrop(var_0, var_1) {
   return false;
 }
 
-function ref_13a21() {
+function ref_13A21() {
   var_0 = rear_minigun_attack_min_cooldown("front");
   var_1 = rear_minigun_attack_min_cooldown("mid");
   var_2 = rear_minigun_attack_min_cooldown("back");
   level.playerspawndata = var_0;
-  level.ref_11bdf = var_1;
+  level.ref_11BDF = var_1;
   level.chopper_carepackage_pilot_selected = var_2;
   var_3 = scripts\cp\cp_objectives::requestworldid("convoy_mid");
   var_4 = scripts\cp\cp_objectives::requestworldid("convoy_back");
@@ -979,8 +979,8 @@ function headicon_range() {
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("p1_intel_museum_truck");
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("p1_intel_tower_truck");
 
-  if(isDefined(level.ref_11ca7)) {
-    foreach(var_1 in level.ref_11ca7) {
+  if(isDefined(level.ref_11CA7)) {
+    foreach(var_1 in level.ref_11CA7) {
       var_1 dodamage(var_1.health * 10, var_1.origin, scripts\engine\utility::random(level.players));
     }
 
@@ -1009,7 +1009,7 @@ function ref_13526() {
     var_3.vehicle_skipdeathmodel = 1;
     var_5 = getdvarint("scr_convoy_health", 0);
     var_3.health = scripts\engine\utility::ter_op(var_5 > 0, var_5, 25000);
-    var_3.ref_13aad = "axis";
+    var_3.ref_13AAD = "axis";
     var_3.humanpowersenabled = var_2.script_noteworthy;
     var_6 = scripts\engine\utility::getStructArray("ml_p2_veh_start_break", "targetname");
     build_truck_path(var_3, var_6[var_4]);
@@ -1018,11 +1018,11 @@ function ref_13526() {
     var_3.start_node = var_6[var_4];
     thread ref_14450();
     thread watch_for_death();
-    thread ref_11cf7();
-    thread ref_11cea();
+    thread ref_11CF7();
+    thread ref_11CEA();
 
     if(var_3.humanpowersenabled == "front") {
-      level.ref_11c63 = var_3;
+      level.ref_11C63 = var_3;
     }
   }
 
@@ -1044,11 +1044,11 @@ function ref_13526() {
   var_10 = level.mlp2_vehicles[0].driver;
   var_11 = level.mlp2_vehicles[1].driver;
   var_12 = level.mlp2_vehicles[2].driver;
-  thread ref_11cdf();
+  thread ref_11CDF();
   thread mlp2_sh1_trig();
   thread mlp2_sh2_trig();
   thread mlp2_sh3_trig();
-  var_13 = level.ref_11c63.origin;
+  var_13 = level.ref_11C63.origin;
 
   while(!truck_airdrop(var_13, 7500)) {
     waitframe();
@@ -1064,7 +1064,7 @@ function ref_13526() {
       thread wait_until_vehicle_at_station(level);
 
       if(var_15.veh.humanpowersenabled != "front") {
-        thread ref_138d2();
+        thread ref_138D2();
       }
     }
 
@@ -1073,14 +1073,14 @@ function ref_13526() {
 
   level notify("delete_waypoint_on_front_truck");
   waitframe();
-  thread ref_13a21();
+  thread ref_13A21();
   thread ref_12435();
-  thread ref_1435b();
+  thread ref_1435B();
   scripts\engine\utility::flag_wait("players_at_station");
   mark_group_as_killable("mlp2_passenger_group");
 }
 
-function ref_11cf9(var_0) {
+function ref_11CF9(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -1098,11 +1098,11 @@ function ref_11cf9(var_0) {
   scripts\cp\cp_objectives::freeworldid("fronttruck_waypoint");
 }
 
-function ref_138d2() {
+function ref_138D2() {
   self endon("death");
   var_0 = rear_minigun_attack_min_cooldown("front");
   var_0 endon("death");
-  var_0 scripts\engine\utility::ref_143a6("stop_follow_path", "final_path_node_reached", "truck_stopped");
+  var_0 scripts\engine\utility::ref_143A6("stop_follow_path", "final_path_node_reached", "truck_stopped");
   self vehicle_setspeedimmediate(0, 300, 300);
   self stoppath(1);
 }
@@ -1111,7 +1111,7 @@ function lootleaderinstance() {
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_stakeout_ambush_call_contact_10");
   wait 0.5;
   var_0 = scripts\engine\utility::random(level.players);
-  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("obj_target_moving");
+  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("obj_target_moving");
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_stakeout_ambush_contact_spotted_10");
 }
 
@@ -1216,24 +1216,24 @@ function set_flag_on_death(var_0) {
   scripts\engine\utility::flag_set(var_0);
 }
 
-function ref_11cdf() {
+function ref_11CDF() {
   level endon("players_at_station");
 
-  if(isDefined(level.ref_11c63)) {
-    level.ref_11c63 endon("final_path_node_reached");
+  if(isDefined(level.ref_11C63)) {
+    level.ref_11C63 endon("final_path_node_reached");
   }
 
-  thread ref_11cde();
+  thread ref_11CDE();
 }
 
-function ref_11cf7() {
+function ref_11CF7() {
   self endon("death");
   self endon("final_path_node_reached");
   self waittill("starting_drive_path");
   wait 3;
   var_0 = 0;
 
-  while(var_0 < 3 && !istrue(self.ref_138df)) {
+  while(var_0 < 3 && !istrue(self.ref_138DF)) {
     var_1 = self vehicle_getspeed();
 
     if(var_1 < 5) {
@@ -1248,7 +1248,7 @@ function ref_11cf7() {
   self vehicle_setspeedimmediate(0, 20, 20);
   scripts\common\vehicle::vehicle_unload();
 
-  if(self == level.ref_11c63) {
+  if(self == level.ref_11C63) {
     scripts\engine\utility::flag_set("fronttruck_stopped");
 
     if(!scripts\engine\utility::flag("players_at_station")) {
@@ -1262,14 +1262,14 @@ function ref_11cf7() {
   }
 }
 
-function ref_11cde() {
+function ref_11CDE() {
   level endon("game_ended");
   self endon("final_path_node_reached");
   self waittill("death");
   scripts\engine\utility::flag_set("convoy_destroyed");
 }
 
-function ref_11cea() {
+function ref_11CEA() {
   level endon("game_ended");
   self endon("death");
   self endon("final_path_node_reached");
@@ -1280,20 +1280,20 @@ function ref_11cea() {
     wait 0.1;
     var_2 = isDefined(scripts\cp\utility::get_closest_living_player(var_0));
 
-    if(var_2 || istrue(self.ref_138df)) {
+    if(var_2 || istrue(self.ref_138DF)) {
       break;
     }
   }
 
   if(var_1 == "front") {
-    if(isDefined(level.ref_11bdf)) {
-      level.ref_11bdf.ref_138df = 1;
+    if(isDefined(level.ref_11BDF)) {
+      level.ref_11BDF.ref_138DF = 1;
     }
   }
 
   if(var_1 == "mid") {
     if(isDefined(level.chopper_carepackage_pilot_selected)) {
-      level.chopper_carepackage_pilot_selected.ref_138df = 1;
+      level.chopper_carepackage_pilot_selected.ref_138DF = 1;
     }
   }
 
@@ -1302,8 +1302,8 @@ function ref_11cea() {
   self stoppath(1);
 }
 
-function ref_1435b() {
-  level.ref_11c63 waittill("final_path_node_reached");
+function ref_1435B() {
+  level.ref_11C63 waittill("final_path_node_reached");
   scripts\engine\utility::flag_set("players_at_station");
 }
 
@@ -1319,7 +1319,7 @@ function mlp2_3_start(var_0) {
   objective_setplayintro(var_0.objectiveindex, 1);
   objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
   objective_position(var_0.objectiveindex, level.enemy_test_trig.origin + (0, 0, 350));
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
 
   while(!scripts\engine\utility::flag_exist("mlp2_sh2") || !scripts\engine\utility::flag_exist("mlp2_sh1") || !scripts\engine\utility::flag_exist("mlp2_sh3")) {
     wait 1;
@@ -1377,7 +1377,7 @@ function mlp2_debug_start(var_0) {
 
   scripts\engine\utility::flag_wait("dwn_twn_mlp2_script_completed");
   scripts\engine\utility::flag_wait("dwn_twn_mlp2_register_spawn_modules_done");
-  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123fd();
+  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123FD();
   var_1 = scripts\engine\utility::getStruct("ml_p2_heli_debug", "targetname");
 
   if(!isDefined(var_1.angles)) {
@@ -1515,8 +1515,8 @@ function wait_until_interrogation(var_0) {
   objective_setplayintro(var_0.objectiveindex, 1);
   objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
   objective_position(var_0.objectiveindex, level.int_vips[0].origin + (0, 0, 100));
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
-  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("ping_response_affirm");
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
+  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("ping_response_affirm");
   var_1 = 0;
   doleadersurrender(var_1);
   scripts\engine\utility::flag_wait("ml_p2_doors_init");
@@ -1524,7 +1524,7 @@ function wait_until_interrogation(var_0) {
   wait_for_player_nearby(var_2.origin, 150, -50, 100);
   open_door("ml_p2_door");
   var_3 = sortbydistance(level.players, level.ml_p2_doors["ml_p2_door"].origin);
-  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("check_fire", var_3[0]);
+  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("check_fire", var_3[0]);
   scripts\engine\utility::flag_wait("ml_p2_interrogate_complete");
 }
 
@@ -1609,7 +1609,7 @@ function doleaderfinalsurrender(var_0, var_1) {
     return;
   }
 
-  thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("obj_target_interrogate", var_0);
+  thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("obj_target_interrogate", var_0);
   var_2 endon("death");
   var_2 notify("leader_final_surrender");
 
@@ -1621,9 +1621,9 @@ function doleaderfinalsurrender(var_0, var_1) {
   var_2.invulnerable = 1;
   var_0.ability_invulnerable = 1;
 
-  if(scripts\cp\cp_weapon::ref_124ad(var_0)) {
-    var_0.ref_11c3d = var_0.restoreweapon;
-    var_0.ref_12fb2 = var_0.secondaryweaponobj;
+  if(scripts\cp\cp_weapon::ref_124AD(var_0)) {
+    var_0.ref_11C3D = var_0.restoreweapon;
+    var_0.ref_12FB2 = var_0.secondaryweaponobj;
     scripts\cp\cp_weapon::minigamefinishcount(var_0);
     var_0 waittill("weapon_change");
 
@@ -1656,8 +1656,8 @@ function doleaderfinalsurrender(var_0, var_1) {
   var_0 scripts\common\utility::allow_weapon_switch(0);
   var_0 setstance("stand");
   var_11 = var_0.angles;
-  var_0 scripts\engine\utility::ref_143b9(1, "weapon_change");
-  ref_12da0(var_2, var_0);
+  var_0 scripts\engine\utility::ref_143B9(1, "weapon_change");
+  ref_12DA0(var_2, var_0);
   waitframe();
   var_2 scripts\asm\asm_mp::carepackage_get_dropped_entities();
   var_12 = var_2 scripts\asm\asm::asm_lookupanimfromalias("animscripted", "vip_cp_surrender_end");
@@ -1670,7 +1670,7 @@ function doleaderfinalsurrender(var_0, var_1) {
   var_2 takeweapon(var_2.weapon);
   var_2.scripted_mode = 1;
   var_2.ignoreall = 1;
-  var_15 = ref_136b9(var_2);
+  var_15 = ref_136B9(var_2);
   var_15 useanimtree($);
   var_15.animname = "ziptie";
   var_16 = spawn("script_origin", var_2.origin);
@@ -1686,7 +1686,7 @@ function doleaderfinalsurrender(var_0, var_1) {
   var_15.angles = var_18;
   waitframe();
   var_0 cameraset("camera_custom_orbit_2_cp");
-  thread ref_13bcb(var_0, var_0);
+  thread ref_13BCB(var_0, var_0);
   var_16 thread scripts\cp\cp_anim::anim_player_solo(var_0, var_0.player_rig, "interrogate");
   var_16 thread scripts\common\anim::anim_single_solo(var_15, "interrogate");
   var_2 aisetanim("animscripted", var_12);
@@ -1694,7 +1694,7 @@ function doleaderfinalsurrender(var_0, var_1) {
   var_0 notify("remove_rig");
   var_0 cameradefault();
   var_0 setplayerangles(var_11);
-  thread ref_13bcb(var_0, var_0);
+  thread ref_13BCB(var_0, var_0);
   var_0 scripts\cp\cp_weapons::_takeweapon(var_9);
   var_0 scripts\common\utility::allow_weapon_switch(1);
   var_0.ability_invulnerable = undefined;
@@ -1716,10 +1716,10 @@ function doleaderfinalsurrender(var_0, var_1) {
   var_16 delete();
   var_0 enableusability();
   var_0.interrogating = 0;
-  scripts\cp\utility::ref_123fe("mus_cp_money_caught_lieutenant");
+  scripts\cp\utility::ref_123FE("mus_cp_money_caught_lieutenant");
 }
 
-function ref_136b9(var_0) {
+function ref_136B9(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("zip_tie_handcuffs_wm");
   var_1.angles = var_0.angles;
@@ -1727,7 +1727,7 @@ function ref_136b9(var_0) {
   return var_1;
 }
 
-function ref_13bcb(var_0, var_1) {
+function ref_13BCB(var_0, var_1) {
   if(istrue(var_1)) {
     var_2 = spawn("script_model", var_0 gettagorigin("tag_accessory_right"));
     var_2 setModel("electronics_usb_thumb_drive");
@@ -1742,7 +1742,7 @@ function ref_13bcb(var_0, var_1) {
   }
 }
 
-function ref_12da0(var_0, var_1) {
+function ref_12DA0(var_0, var_1) {
   var_2 = spawn("script_origin", var_0.origin);
   var_2.angles = scripts\engine\utility::ter_op(isDefined(var_0.angles), var_0.angles, (0, 0, 0));
   var_0 linkTo(var_2);
@@ -1762,7 +1762,7 @@ function give_surrendered_intel(var_0, var_1) {
   scripts\engine\utility::flag_set("ml_p2_interrogate_complete");
   var_0 scripts\cp\intel\cp_intel::give_intel_weapon("intel_put_usb_in_tablet");
   wait 0.5;
-  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("obj_secured", var_0);
+  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("obj_secured", var_0);
   scripts\engine\utility::flag_set("ml_p2_done");
 
   foreach(var_3 in level.players) {
@@ -1804,7 +1804,7 @@ function loopidlesurrenderanimation(var_0, var_1) {
   var_2 linkTo(self.anchor);
   var_2.scripted_mode = 0;
   var_2.ignoreall = 1;
-  thread ref_144b5();
+  thread ref_144B5();
 
   for(;;) {
     if(istrue(var_1) && isDefined(var_2.ziptie)) {
@@ -1818,9 +1818,9 @@ function loopidlesurrenderanimation(var_0, var_1) {
   }
 }
 
-function ref_144b5() {
+function ref_144B5() {
   level endon("game_ended");
-  scripts\engine\utility::ref_143a5("leader_final_surrender", "leader_returned_to_combat");
+  scripts\engine\utility::ref_143A5("leader_final_surrender", "leader_returned_to_combat");
 
   if(isDefined(self.anchor)) {
     self.anchor delete();
@@ -1852,7 +1852,7 @@ function create_player_rig(var_0, var_1, var_2) {
 }
 
 function watch_remove_rig(var_0) {
-  scripts\engine\utility::ref_143a6("remove_rig", "death", "disconnect");
+  scripts\engine\utility::ref_143A6("remove_rig", "death", "disconnect");
 }
 
 function remove_player_rig(var_0) {
@@ -1907,10 +1907,10 @@ function call_ai_cellphone(var_0) {
   }
 
   thread scripts\cp\intel\cp_intel::give_intel_weapon("intel_call_phone");
-  scripts\cp\utility::ref_123fe("mus_cp_money_call_contact");
+  scripts\cp\utility::ref_123FE("mus_cp_money_call_contact");
   wait 3;
   level notify("contact_called");
-  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("obj_target_visual", self);
+  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("obj_target_visual", self);
 }
 
 function mlp2_sh1_trig(var_0) {
@@ -1924,7 +1924,7 @@ function mlp2_sh1_trig(var_0) {
   scripts\cp\cp_modular_spawning::run_spawn_module("mlp2_sh1_2");
   scripts\cp\cp_modular_spawning::run_spawn_module("mlp2_sh1_3");
   scripts\engine\utility::flag_set("station_reached");
-  thread ref_138c6();
+  thread ref_138C6();
   thread throw_moltovs_out_windows();
 
   if(isDefined(var_0)) {
@@ -1938,7 +1938,7 @@ function mlp2_sh1_trig(var_0) {
   }
 }
 
-function ref_138c6() {
+function ref_138C6() {
   mark_group_as_killable("mlp2_roof_rpg");
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("mlp2_roof_rpg");
 }
@@ -2118,8 +2118,8 @@ function mark_group_as_killable(var_0) {
       foreach(var_5 in var_3.ai_spawned) {
         var_5.never_kill_off = undefined;
 
-        if(isDefined(var_5.ref_1376b)) {
-          var_5.health = var_5.ref_1376b;
+        if(isDefined(var_5.ref_1376B)) {
+          var_5.health = var_5.ref_1376B;
         }
       }
     }

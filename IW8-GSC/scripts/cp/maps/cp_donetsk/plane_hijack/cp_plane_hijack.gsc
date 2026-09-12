@@ -113,7 +113,7 @@ function global_weapons_free() {
     level.global_stealth_tracker["hack_rooftop"] = 1;
     var_0 = 15;
     thread spawn_waves_after_a_delay(level, var_0, undefined);
-    scripts\cp\crate_drops\cp_crate_drops::ref_12c40("hijack_1");
+    scripts\cp\crate_drops\cp_crate_drops::ref_12C40("hijack_1");
   }
 
   if(scripts\cp\cp_objectives::is_objective_active("plant_jammers") && isDefined(level.hack_region) && level.hack_region == "airport") {
@@ -124,8 +124,8 @@ function global_weapons_free() {
     scripts\cp\cp_modular_spawning::stop_module_by_groupname("hack_rooftop_skit");
     scripts\cp\cp_modular_spawning::stop_module_by_groupname("hack_rooftop_sniper");
     var_0 = 15;
-    scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11cac, 750]);
-    scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11cab, 64]);
+    scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11CAC, 750]);
+    scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11CAB, 64]);
     scripts\cp\cp_modular_spawning::stop_module_by_groupname("wave_spawning");
     scripts\cp\cp_modular_spawning::run_spawn_module("hack_airport_combat");
   }
@@ -137,7 +137,7 @@ function global_weapons_free() {
     scripts\cp\cp_modular_spawning::stop_module_by_groupname("hack_airport_combat");
     var_0 = 2;
     thread spawn_waves_after_a_delay(level, var_0, undefined);
-    scripts\cp\crate_drops\cp_crate_drops::ref_12c40("hijack_2");
+    scripts\cp\crate_drops\cp_crate_drops::ref_12C40("hijack_2");
   }
 
   foreach(var_2 in level.alarm_box_structs) {
@@ -174,7 +174,7 @@ function spawn_waves_after_a_delay(var_0, var_1, var_2) {
     wait var_0 / 2;
   }
 
-  var_3 = scripts\cp\cp_modular_spawning::set_wave_ref_override(var_2);
+  var_3 = scripts\cp\cp_modular_spawning::set_wave_ref_OVERRIDE(var_2);
   return var_3;
 }
 
@@ -280,8 +280,8 @@ function register_spawn_functions() {
   scripts\cp\cp_modular_spawning::registerambientgroup("plane_jugg_guard", 2, 2, 2, 0.05, &call_wave_on_group_killed, "plane_jugg_guard", &increase_max_dist_and_watch_for_point_crossed, undefined, undefined);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("plane_jugg_guard", &jugg_enemy_watcher);
   scripts\cp\cp_modular_spawning::registerambientgroup("hack_airport_combat", 0, 16, undefined, 0.05, &call_wave_on_group_killed, "hack_airport_combat", &setmapcirclesize, undefined, undefined);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("hack_airport_combat", [ &scripts\cp\cp_modular_spawning::ref_11cab, 64]);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("hack_airport_combat", [ &scripts\cp\cp_modular_spawning::ref_11cac, 750]);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("hack_airport_combat", [ &scripts\cp\cp_modular_spawning::ref_11CAB, 64]);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("hack_airport_combat", [ &scripts\cp\cp_modular_spawning::ref_11CAC, 750]);
   scripts\cp\cp_modular_spawning::registerambientgroup("smhc_spawners", 0, 12, undefined, 0.1, undefined, "smhc_spawners", &scripts\cp\coop_stealth::increase_script_maxdist, undefined, undefined);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("smhc_spawners", &standard_soldier_watcher);
   scripts\cp\cp_modular_spawning::registerambientgroup("paratroopers", 4, 4, undefined, 0.5, 0, "paratroopers", undefined, undefined, undefined);
@@ -337,24 +337,24 @@ function register_spawn_functions() {
   scripts\cp\cp_modular_spawning::registerambientgroup("phj_heli_3", 0, 6, 6, 0.1, undefined, "phj_heli_3", &watchforstopwaves, [ &remove_group_from_combined_module_counters, 12], undefined);
   scripts\cp\cp_modular_spawning::registerambientgroup("phj_heli_4", 0, 6, 6, 0.1, undefined, "phj_heli_4", &watchforstopwaves, [ &remove_group_from_combined_module_counters, 12], undefined);
   scripts\cp\cp_modular_spawning::registerambientgroup("phj_heli_5", 0, 6, 6, 0.1, undefined, "phj_heli_5", &watchforstopwaves, [ &remove_group_from_combined_module_counters, 12], undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac1", 0, [ &ref_12ce1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac1", [ &ref_13a96, (-18120, 22629, -390), (-16761, 22629, -390)], "techo_phys_tarmac2", undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac2", 0, [ &ref_12ce1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac2", [ &ref_13a95, (-16761, 22629, -390), (-15844, 22629, -390), "techo_phys_tarmac1"], "techo_phys_tarmac3", undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac3", 0, [ &ref_12ce1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac3", [ &ref_13a95, (-15844, 22629, -390), (-15307, 22629, -390), "techo_phys_tarmac2"], "techo_phys_tarmac4", undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac4", 0, [ &ref_12ce1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac4", [ &ref_13a95, (-15307, 22629, -390), (-14313, 22629, -390), "techo_phys_tarmac3"], "techo_phys_tarmac5", undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac5", 0, [ &ref_12ce1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac5", [ &ref_13a95, (-14313, 22629, -390), (-13808, 22629, -390), "techo_phys_tarmac4"], "techo_phys_tarmac6", undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac6", 0, [ &ref_12ce1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac6", [ &ref_13a95, (-13808, 22629, -390), (-13021, 22629, -390), "techo_phys_tarmac5"], "techo_phys_tarmac7", undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac7", 0, [ &ref_12ce1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac7", [ &ref_13a95, (-13021, 22629, -390), (-12442, 22629, -390), "techo_phys_tarmac6"], "techo_phys_tarmac8", undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac8", 0, [ &ref_12ce1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac8", [ &ref_13a95, (-12442, 22629, -390), undefined, "techo_phys_tarmac7"], "techo_phys_tarmac9", undefined);
-  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac9", 0, [ &ref_12ce1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac9", [ &ref_13a95, (-12442, 22629, -390), undefined, "techo_phys_tarmac8"], undefined, undefined);
-  scripts\cp\cp_vehicles::ref_12ae5("techo_phys_tarmac1", "techo_phys", [1, 2, 3]);
-  scripts\cp\cp_vehicles::ref_12ae5("techo_phys_tarmac2", "techo_phys", [1, 2, 3]);
-  scripts\cp\cp_vehicles::ref_12ae5("techo_phys_tarmac3", "techo_phys", [1, 2, 3]);
-  scripts\cp\cp_vehicles::ref_12ae5("techo_phys_tarmac4", "techo_phys", [1, 2, 3]);
-  scripts\cp\cp_vehicles::ref_12ae5("techo_phys_tarmac5", "techo_phys", [1, 2, 3]);
-  scripts\cp\cp_vehicles::ref_12ae5("techo_phys_tarmac6", "techo_phys", [1, 2, 3]);
-  scripts\cp\cp_vehicles::ref_12ae5("techo_phys_tarmac7", "techo_phys", [1, 2, 3]);
-  scripts\cp\cp_vehicles::ref_12ae5("techo_phys_tarmac8", "techo_phys", [1, 2, 3]);
-  scripts\cp\cp_vehicles::ref_12ae5("techo_phys_tarmac9", "techo_phys", [1, 2, 3]);
+  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac1", 0, [ &ref_12CE1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac1", [ &ref_13A96, (-18120, 22629, -390), (-16761, 22629, -390)], "techo_phys_tarmac2", undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac2", 0, [ &ref_12CE1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac2", [ &ref_13A95, (-16761, 22629, -390), (-15844, 22629, -390), "techo_phys_tarmac1"], "techo_phys_tarmac3", undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac3", 0, [ &ref_12CE1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac3", [ &ref_13A95, (-15844, 22629, -390), (-15307, 22629, -390), "techo_phys_tarmac2"], "techo_phys_tarmac4", undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac4", 0, [ &ref_12CE1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac4", [ &ref_13A95, (-15307, 22629, -390), (-14313, 22629, -390), "techo_phys_tarmac3"], "techo_phys_tarmac5", undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac5", 0, [ &ref_12CE1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac5", [ &ref_13A95, (-14313, 22629, -390), (-13808, 22629, -390), "techo_phys_tarmac4"], "techo_phys_tarmac6", undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac6", 0, [ &ref_12CE1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac6", [ &ref_13A95, (-13808, 22629, -390), (-13021, 22629, -390), "techo_phys_tarmac5"], "techo_phys_tarmac7", undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac7", 0, [ &ref_12CE1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac7", [ &ref_13A95, (-13021, 22629, -390), (-12442, 22629, -390), "techo_phys_tarmac6"], "techo_phys_tarmac8", undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac8", 0, [ &ref_12CE1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac8", [ &ref_13A95, (-12442, 22629, -390), undefined, "techo_phys_tarmac7"], "techo_phys_tarmac9", undefined);
+  scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_tarmac9", 0, [ &ref_12CE1, 10], &scripts\cp\cp_modular_spawning::shipfx, 0.05, undefined, "techo_phys_tarmac9", [ &ref_13A95, (-12442, 22629, -390), undefined, "techo_phys_tarmac8"], undefined, undefined);
+  scripts\cp\cp_vehicles::ref_12AE5("techo_phys_tarmac1", "techo_phys", [1, 2, 3]);
+  scripts\cp\cp_vehicles::ref_12AE5("techo_phys_tarmac2", "techo_phys", [1, 2, 3]);
+  scripts\cp\cp_vehicles::ref_12AE5("techo_phys_tarmac3", "techo_phys", [1, 2, 3]);
+  scripts\cp\cp_vehicles::ref_12AE5("techo_phys_tarmac4", "techo_phys", [1, 2, 3]);
+  scripts\cp\cp_vehicles::ref_12AE5("techo_phys_tarmac5", "techo_phys", [1, 2, 3]);
+  scripts\cp\cp_vehicles::ref_12AE5("techo_phys_tarmac6", "techo_phys", [1, 2, 3]);
+  scripts\cp\cp_vehicles::ref_12AE5("techo_phys_tarmac7", "techo_phys", [1, 2, 3]);
+  scripts\cp\cp_vehicles::ref_12AE5("techo_phys_tarmac8", "techo_phys", [1, 2, 3]);
+  scripts\cp\cp_vehicles::ref_12AE5("techo_phys_tarmac9", "techo_phys", [1, 2, 3]);
   scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_boneyard1", 0, 6, 6, 0.1, undefined, "techo_phys_boneyard1", &watchforstopwaves, undefined, undefined);
   scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_boneyard2", 0, 6, 6, 0.1, undefined, "techo_phys_boneyard2", &watchforstopwaves, undefined, undefined);
   scripts\cp\cp_modular_spawning::registerambientgroup("techo_phys_boneyard3", 0, 6, 6, 0.1, undefined, "techo_phys_boneyard3", &watchforstopwaves, undefined, undefined);
@@ -368,7 +368,7 @@ function setmapcirclesize(var_0) {
   scripts\cp\coop_stealth::increase_script_maxdist(var_0);
 }
 
-function ref_12bf6() {
+function ref_12BF6() {
   if(isDefined(self.spawnflags)) {
     if(self.spawnflags & 512) {
       self.spawnflags -= 512;
@@ -379,7 +379,7 @@ function ref_12bf6() {
   }
 }
 
-function ref_12ce1(var_0, var_1) {
+function ref_12CE1(var_0, var_1) {
   if(scripts\cp\cp_modular_spawning::shipfx(var_0)) {
     mp_hideout_patch(var_0);
     return undefined;
@@ -402,8 +402,8 @@ function remove_group_from_combined_module_counters(var_0, var_1) {
   return var_0.group_name;
 }
 
-function ref_13a96(var_0, var_1, var_2, var_3) {
-  ref_13a95(var_0, var_1, var_2, var_3);
+function ref_13A96(var_0, var_1, var_2, var_3) {
+  ref_13A95(var_0, var_1, var_2, var_3);
   thread playerhumanhitground();
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("plane_jugg_guard");
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("plane_patrol");
@@ -420,16 +420,16 @@ function playerhumanhitground(var_0) {
   }
 }
 
-function ref_13a95(var_0, var_1, var_2, var_3) {
+function ref_13A95(var_0, var_1, var_2, var_3) {
   var_0 endon("death");
 
   if(var_0.group_name == "techo_phys_tarmac8") {
-    while(!istrue(level.ref_123a3)) {
+    while(!istrue(level.ref_123A3)) {
       waitframe();
     }
   }
 
-  scripts\cp\cp_modular_spawning::ref_130f7(var_0, 1);
+  scripts\cp\cp_modular_spawning::ref_130F7(var_0, 1);
 
   if(isDefined(var_3)) {
     var_0 scripts\cp\cp_modular_spawning::stop_module_by_groupname(var_3);
@@ -458,7 +458,7 @@ function watchforstopwaves(var_0) {
 
 function _watchforstopwaves(var_0) {
   level endon("game_ended");
-  level scripts\engine\utility::ref_143a6("all_enemy_vehicles_leave", "cleared_for_takeoff", "all_players_teleported_to_plane");
+  level scripts\engine\utility::ref_143A6("all_enemy_vehicles_leave", "cleared_for_takeoff", "all_players_teleported_to_plane");
   level notify("spawn_module_" + var_0.moduleid + "_completed");
 }
 
@@ -618,17 +618,17 @@ function spawn_and_start_c130() {
     var_5 linkTo(level.c130);
   }
 
-  level.ref_12b45 = getEntArray("regroup_points", "targetname");
+  level.ref_12B45 = getEntArray("regroup_points", "targetname");
 
-  foreach(var_5 in level.ref_12b45) {
+  foreach(var_5 in level.ref_12B45) {
     var_5 linkTo(level.c130);
   }
 
-  level.ref_1341e = getEnt("smoke_door_fx", "targetname");
-  level.ref_1341e linkTo(level.c130);
-  level.ref_12b48 = getEnt("regroup_trigger", "targetname");
-  level.ref_12b48 enablelinkTo(level.c130);
-  level.ref_12b48 linkTo(level.c130);
+  level.ref_1341E = getEnt("smoke_door_fx", "targetname");
+  level.ref_1341E linkTo(level.c130);
+  level.ref_12B48 = getEnt("regroup_trigger", "targetname");
+  level.ref_12B48 enablelinkTo(level.c130);
+  level.ref_12B48 linkTo(level.c130);
   level.air_doors = getEntArray("air_door", "targetname");
 
   foreach(var_5 in level.air_doors) {
@@ -683,9 +683,9 @@ function spawn_and_start_c130() {
   var_28 = getEntArray("rear_door_collision", "targetname");
 
   if(isDefined(var_28) && isarray(var_28) && var_28.size > 0) {
-    level.c130.ref_12a4e = var_28;
+    level.c130.ref_12A4E = var_28;
 
-    foreach(var_30 in level.c130.ref_12a4e) {
+    foreach(var_30 in level.c130.ref_12A4E) {
       var_30 delete();
     }
   }
@@ -704,17 +704,17 @@ function spawn_and_start_c130() {
   var_35 = getEnt("plane_collmap", "targetname");
 
   if(isDefined(var_35)) {
-    level.c130.ref_123a2 = var_35;
-    level.c130.ref_123a2 linkTo(level.c130);
+    level.c130.ref_123A2 = var_35;
+    level.c130.ref_123A2 linkTo(level.c130);
     level.c130 notsolid();
   }
 
   var_36 = getEnt("plane_collision_brush", "targetname");
 
   if(isDefined(var_36)) {
-    level.c130.ref_12a4f = var_36;
-    level.c130.ref_12a4f linkTo(level.c130, "hatch_jnt");
-    level.c130.ref_12a4f solid();
+    level.c130.ref_12A4F = var_36;
+    level.c130.ref_12A4F linkTo(level.c130, "hatch_jnt");
+    level.c130.ref_12A4F solid();
   }
 
   var_37 = getEntArray("breach_door_escape", "targetname");
@@ -736,13 +736,13 @@ function spawn_and_start_c130() {
 
   if(isDefined(var_41)) {
     foreach(var_43 in var_41) {
-      if(!isDefined(level.c130.ref_11a57)) {
-        level.c130.ref_11a57 = [];
+      if(!isDefined(level.c130.ref_11A57)) {
+        level.c130.ref_11A57 = [];
       }
 
       var_43 linkTo(level.c130, "hatch_jnt");
       var_43 notsolid();
-      level.c130.ref_11a57 = scripts\engine\utility::array_add(level.c130.ref_11a57, var_43);
+      level.c130.ref_11A57 = scripts\engine\utility::array_add(level.c130.ref_11A57, var_43);
     }
   }
 
@@ -1044,7 +1044,7 @@ function get_up_from_seat_after_teleporting(var_0, var_1) {
 }
 
 function take_off_loop(var_0) {
-  var_1 = level scripts\engine\utility::ref_143ad(var_0.ref + "_timer_complete", "cleared_for_takeoff");
+  var_1 = level scripts\engine\utility::ref_143AD(var_0.ref + "_timer_complete", "cleared_for_takeoff");
   level notify("end_current_nags");
 
   foreach(var_3 in level.c130.plane_seats) {
@@ -1053,10 +1053,10 @@ function take_off_loop(var_0) {
     }
   }
 
-  level thread scripts\cp\utility::ref_123fe("");
+  level thread scripts\cp\utility::ref_123FE("");
   level notify("all_enemy_vehicles_leave");
   level.ref_12213 = 1;
-  level.ref_12b46 = 1;
+  level.ref_12B46 = 1;
 
   if(var_1 == "cleared_for_takeoff") {
     thread scripts\cp\cp_hud_message::teamhudtutorialmessage(&"CP_FUBAR/REGROUP_PLANE", "allies", 3.75);
@@ -1134,7 +1134,7 @@ function take_off_loop(var_0) {
 
   thread upper_level_plane_combat_start();
   level notify("end_current_nags");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_plane_attack");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_plane_attack");
 }
 
 function ref_14472() {
@@ -1157,7 +1157,7 @@ function ref_14472() {
   }
 }
 
-function ref_13bbb(var_0) {
+function ref_13BBB(var_0) {
   level.disable_hotjoin_via_ac130 = var_0;
 }
 
@@ -1181,7 +1181,7 @@ function ref_12407() {
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_plane_boarded_30", 2);
 }
 
-function ref_12b43(var_0) {
+function ref_12B43(var_0) {
   thread scripts\cp\cp_hud_message::teamhudtutorialmessage(&"CP_FUBAR/REGROUP_PLANE", "allies", 3.75);
   scripts\cp\utility::objective_update("infil_plane", 6, 3, 1, 1, undefined, 1);
 
@@ -1193,7 +1193,7 @@ function ref_12b43(var_0) {
       var_3 = 1;
     }
 
-    var_2 thread scripts\cp\maps\cp_donetsk\cp_donetsk_safehouse_armsdealer::player_regroup(level.ref_12b45, var_4, var_3, "all_players_teleported_to_plane", "collect_nuclear_core");
+    var_2 thread scripts\cp\maps\cp_donetsk\cp_donetsk_safehouse_armsdealer::player_regroup(level.ref_12B45, var_4, var_3, "all_players_teleported_to_plane", "collect_nuclear_core");
   }
 
   wait 3;
@@ -1209,19 +1209,19 @@ function start_nonstealth_teleport_sequence(var_0) {
 
   if(istrue(self.isreviving)) {
     self.can_revive = 0;
-    self.ref_12d13 = self.forcespawnorigin;
+    self.ref_12D13 = self.forcespawnorigin;
     self notify("revive_done");
   }
 
   if(istrue(self.inlaststand)) {
     if(istrue(self.run_kill_watcher)) {
-      self.ref_11b09 = 1;
+      self.ref_11B09 = 1;
     }
 
     if(istrue(self.being_revived)) {
       self notify("revive_done");
       self.being_revived = 0;
-      self.ref_11b09 = 1;
+      self.ref_11B09 = 1;
     } else {
       self notify("force_bleed_out");
       self.binc130 = 1;
@@ -1253,51 +1253,51 @@ function start_nonstealth_teleport_sequence(var_0) {
     waitframe();
   }
 
-  self.ref_132ea = 1;
+  self.ref_132EA = 1;
 
-  if(self istouching(level.ref_12b48) || self istouching(level.c130.ref_12a4f)) {
-    self.ref_132ea = undefined;
+  if(self istouching(level.ref_12B48) || self istouching(level.c130.ref_12A4F)) {
+    self.ref_132EA = undefined;
   }
 
-  if(istrue(self.ref_132ea)) {
+  if(istrue(self.ref_132EA)) {
     foreach(var_5 in level.c130.body) {
       if(isDefined(var_5)) {
         if(self istouching(var_5)) {
-          self.ref_132ea = undefined;
+          self.ref_132EA = undefined;
           break;
         }
 
-        self.ref_132ea = 1;
+        self.ref_132EA = 1;
       }
     }
   }
 
-  if(istrue(self.ref_132ea)) {
+  if(istrue(self.ref_132EA)) {
     foreach(var_8 in level.c130.plane_seats) {
       if(self istouching(var_8)) {
-        self.ref_132ea = undefined;
+        self.ref_132EA = undefined;
         break;
       }
 
-      self.ref_132ea = 1;
+      self.ref_132EA = 1;
     }
   }
 
-  if(istrue(self.ref_132ea)) {
+  if(istrue(self.ref_132EA)) {
     if(isDefined(level.c130.shell)) {
       if(self istouching(level.c130.shell)) {
-        self.ref_132ea = undefined;
+        self.ref_132EA = undefined;
       }
     }
   }
 
-  if(istrue(self.ref_132ea)) {
+  if(istrue(self.ref_132EA)) {
     if(self istouching(level.c130)) {
-      self.ref_132ea = undefined;
+      self.ref_132EA = undefined;
     }
   }
 
-  if(istrue(self.ref_132ea) && !istrue(self.ref_11b09)) {
+  if(istrue(self.ref_132EA) && !istrue(self.ref_11B09)) {
     if(istrue(self.isjuggernaut)) {
       self notify("juggernaut_end_damage");
       waitframe();
@@ -1332,8 +1332,8 @@ function start_nonstealth_teleport_sequence(var_0) {
     scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_exit(var_10, var_11, self, undefined, 1);
   }
 
-  if(istrue(self.ref_11b09)) {
-    self.ref_11b09 = undefined;
+  if(istrue(self.ref_11B09)) {
+    self.ref_11B09 = undefined;
 
     if(istrue(self.run_kill_watcher)) {
       thread ref_14338(var_0);
@@ -1344,7 +1344,7 @@ function start_nonstealth_teleport_sequence(var_0) {
       self skydive_setbasejumpingstatus(0);
       self skydive_setdeploymentstatus(0);
       thread teleport_black_overlay(self);
-      thread ref_13ae2();
+      thread ref_13AE2();
 
       if(self.class == "engineer" || self.class == "hunter") {
         self.disable_super = 1;
@@ -1367,7 +1367,7 @@ function start_nonstealth_teleport_sequence(var_0) {
     self skydive_setbasejumpingstatus(0);
     self skydive_setdeploymentstatus(0);
     thread teleport_black_overlay(self);
-    thread ref_13ae2();
+    thread ref_13AE2();
 
     if(self.class == "engineer" || self.class == "hunter") {
       self.disable_super = 1;
@@ -1417,7 +1417,7 @@ function ref_14338(var_0) {
   self skydive_setbasejumpingstatus(0);
   self skydive_setdeploymentstatus(0);
   thread teleport_black_overlay(self);
-  thread ref_13ae2();
+  thread ref_13AE2();
 
   if(self.class == "engineer" || self.class == "hunter") {
     self.disable_super = 1;
@@ -1436,8 +1436,8 @@ function ref_14338(var_0) {
   self.binc130 = 1;
 }
 
-function ref_13ae2() {
-  scripts\mp\vehicles\vehicle_damage_mp::ref_1333e("collect_nuclear_core");
+function ref_13AE2() {
+  scripts\mp\vehicles\vehicle_damage_mp::ref_1333E("collect_nuclear_core");
   wait 5;
   self setclientomnvar("ui_chyron_on", 0);
   self setclientomnvar("ui_chyron_mission_index", 0);
@@ -1518,7 +1518,7 @@ function hack_radar_activate(var_0, var_1) {
 
   if(level.hack_region == "parking_lot") {
     if(istrue(level.global_stealth_broken)) {
-      scripts\cp\crate_drops\cp_crate_drops::ref_12c40("hijack_1");
+      scripts\cp\crate_drops\cp_crate_drops::ref_12C40("hijack_1");
       scripts\cp\cp_modular_spawning::stop_module_by_groupname("hack_airport");
       scripts\cp\cp_modular_spawning::stop_module_by_groupname("hack_rooftop");
       scripts\cp\cp_modular_spawning::stop_module_by_groupname("hack_rooftop_guards");
@@ -1557,9 +1557,9 @@ function hack_radar_activate(var_0, var_1) {
   }
 
   if(level.hacks_done == 1) {
-    level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_files_copied_2");
+    level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_files_copied_2");
   } else if(level.hacks_done == 2) {
-    level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_files_copied_3");
+    level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_files_copied_3");
   }
 
   var_0.router setscriptablepartstate("transfer", "finish");
@@ -1570,7 +1570,7 @@ function hack_radar_activate(var_0, var_1) {
     thread ref_12418();
     thread ref_12403(level, ["dx_cps_lass_plane_airport_nag_10", "dx_cps_kama_plane_airport_nag_20"]);
   } else {
-    thread ref_123c1();
+    thread ref_123C1();
   }
 
   foreach(var_5 in level.radar_models) {
@@ -1587,8 +1587,8 @@ function hack_radar_activate(var_0, var_1) {
         if(istrue(level.wave_cooldown_active)) {}
 
         thread vehicle_occupancy_clearforceweaponswitchallowed();
-        scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11cac, 750]);
-        scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11cab, 64]);
+        scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11CAC, 750]);
+        scripts\cp\cp_modular_spawning::run_func_on_group_by_groupname("wave_spawning", [ &scripts\cp\cp_modular_spawning::ref_11CAB, 64]);
         scripts\cp\cp_modular_spawning::stop_module_by_groupname("wave_spawning");
         scripts\cp\cp_modular_spawning::run_spawn_module("tarmac_patrol");
         scripts\cp\cp_modular_spawning::run_spawn_module("tarmac_patrol_plane");
@@ -1603,7 +1603,7 @@ function hack_radar_activate(var_0, var_1) {
   var_0.model setscriptablepartstate("main", "on");
   var_0.binprogress = undefined;
   level.hacks_done++;
-  level thread scripts\cp\utility::ref_123fe("");
+  level thread scripts\cp\utility::ref_123FE("");
 
   if(level.hacks_done == scripts\cp\cp_objectives::getobjectivestructfromref("plant_jammers").radar_structs.size) {
     level notify("destroyed_all_jammers");
@@ -1638,7 +1638,7 @@ function ref_12418() {
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_plane_airport_intro_10", 1);
 }
 
-function ref_123c1() {
+function ref_123C1() {
   while(istrue(level.dialogue_playing)) {
     wait 1;
   }
@@ -1711,13 +1711,13 @@ function init_plant_jammers(var_0, var_1) {
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_kama_plane_rooftop_intro_10");
   level notify("safehouse_demeanor_off");
   level.battlechatterenabled = 0;
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
   thread watch_for_phj_spawners_triggered();
   thread scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_plane_rooftop_hack_10", 1);
   thread ref_12403(level, ["dx_cps_kama_plane_rooftop_nag_10", "dx_cps_kama_plane_rooftop_nag_20", "dx_cps_lass_plane_rooftop_nag_30"]);
   level.hack_region = "parking_lot";
   var_0.radar_structs = scripts\engine\utility::getStructArray("radar_struct", "script_noteworthy");
-  scripts\cp\cp_objectives::ref_1317e(var_0, [var_0.radar_structs[0].origin, (-22823.7, 18783.8, -148.12)]);
+  scripts\cp\cp_objectives::ref_1317E(var_0, [var_0.radar_structs[0].origin, (-22823.7, 18783.8, -148.12)]);
   objective_state(var_0.objectiveindex, "current");
 
   foreach(var_3 in level.radar_models) {
@@ -1817,7 +1817,7 @@ function watch_for_spawner_triggered() {
 
 function start_plant_jammers(var_0, var_1) {
   level endon("game_ended");
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_enemy_comms");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_enemy_comms");
   level notify("objective_initialized");
   thread scripts\cp\utility::cp_add_dialogue_line(&"CP_BR_SYRK_GL_DIALOGUE/HACK_LAPTOP");
   level.airport_spawners_trigger = getEnt("airport_spawn_trigger", "targetname");
@@ -1967,7 +1967,7 @@ function move_goal_ent(var_0) {
   var_4 = scripts\engine\utility::getStruct("civ_death_spot", "targetname").origin;
   var_0 moveTo(var_4, 2);
   self setgoalpos(var_4);
-  scripts\engine\utility::ref_143ba(5, "goal", "goal_reached");
+  scripts\engine\utility::ref_143BA(5, "goal", "goal_reached");
   thread spawnapc();
   scripts\cp\cp_modular_spawning::run_spawn_module("civ_killers");
   self.ignoreme = 0;
@@ -1996,7 +1996,7 @@ function init_equip_disguise(var_0, var_1) {
     thread start_tunnel_sequence();
   }
 
-  thread ref_123dc();
+  thread ref_123DC();
   level.disguised_players = [];
   objective_onentity(var_0.objectiveindex, level.garage_door.door_interaction);
   objective_state(var_0.objectiveindex, "current");
@@ -2005,7 +2005,7 @@ function init_equip_disguise(var_0, var_1) {
   level.disguise_ent = getEnt("disguise_ent", "targetname");
 }
 
-function ref_123dc() {
+function ref_123DC() {
   while(istrue(level.dialogue_playing)) {
     wait 1;
   }
@@ -2050,11 +2050,11 @@ function grab_disguise() {
     }
 
     thread give_disguise_via_clothes(var_0);
-    thread ref_1240c(var_0);
+    thread ref_1240C(var_0);
   }
 }
 
-function ref_1240c(var_0) {
+function ref_1240C(var_0) {
   while(istrue(var_0.dialogue_playing)) {
     wait 1;
   }
@@ -2293,7 +2293,7 @@ function watch_for_disguised_player_enter_vehicle() {
   self endon("delete_disguise_threads_on_player");
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143af("technical_enterEnd", "technical_exitEnd", "entered_vehicle", "exited_vehicle");
+    var_0 = scripts\engine\utility::ref_143AF("technical_enterEnd", "technical_exitEnd", "entered_vehicle", "exited_vehicle");
 
     if(var_0 == "entered_vehicle" || var_0 == "player_enter_vehicle") {
       if(!istrue(self.first_time_enter_vehicle) && var_0 == "entered_vehicle") {
@@ -2316,14 +2316,14 @@ function watch_for_disguised_player_enter_vehicle() {
 function init_infil_plane(var_0, var_1) {
   level thread scripts\cp\cp_kidnapper::togglekidnappers(0);
   level.players_in_c130 = 0;
-  scripts\cp\cp_objectives::ref_1317e(var_0, scripts\engine\utility::getStruct("plane_objective", "targetname").origin);
+  scripts\cp\cp_objectives::ref_1317E(var_0, scripts\engine\utility::getStruct("plane_objective", "targetname").origin);
   objective_state(var_0.objectiveindex, "current");
 
   if(istrue(level.global_stealth_broken)) {
-    scripts\cp\crate_drops\cp_crate_drops::ref_12c40("hijack_2");
+    scripts\cp\crate_drops\cp_crate_drops::ref_12C40("hijack_2");
   }
 
-  thread ref_1445d();
+  thread ref_1445D();
   level.players_in_plane = [];
 
   foreach(var_3 in level.players) {
@@ -2365,7 +2365,7 @@ function init_infil_plane(var_0, var_1) {
   level.bad_obstacle_id = createnavbadplacebyent(level.c130);
 }
 
-function ref_1445d() {
+function ref_1445D() {
   var_0 = 1;
   var_1 = scripts\engine\utility::getStruct("plane_objective", "targetname").origin;
 
@@ -2414,12 +2414,12 @@ function ref_14403(var_0, var_1) {
   waitframe();
   var_3 = spawnfx(level._effect["vfx_armsrace_smoke"], var_2.origin, anglesToForward(var_2.angles), anglestoup(var_2.angles));
   triggerfx(var_3);
-  level scripts\engine\utility::ref_143a6("all_enemy_vehicles_leave", "cleared_for_takeoff", "all_players_teleported_to_plane");
+  level scripts\engine\utility::ref_143A6("all_enemy_vehicles_leave", "cleared_for_takeoff", "all_players_teleported_to_plane");
   var_3 delete();
   var_2 delete();
 }
 
-function ref_1446f() {}
+function ref_1446F() {}
 
 function watch_for_players_in_plane() {
   self endon("disconnect");
@@ -2437,7 +2437,7 @@ function watch_for_players_in_plane() {
       continue;
     }
 
-    if(self istouching(level.ref_12b48)) {
+    if(self istouching(level.ref_12B48)) {
       if(!scripts\engine\utility::array_contains(level.players_in_plane, self)) {
         level.players_in_plane = scripts\engine\utility::array_add(level.players_in_plane, self);
       }
@@ -2456,7 +2456,7 @@ function watch_for_players_in_plane() {
 
 function callback_frontendplayeractive() {
   foreach(var_1 in brdoesloadoutoptiongivestandardloadoutimmediately()) {
-    if(!var_1 istouching(level.ref_12b48)) {
+    if(!var_1 istouching(level.ref_12B48)) {
       return false;
     }
   }
@@ -2466,7 +2466,7 @@ function callback_frontendplayeractive() {
 
 function start_infil_plane(var_0, var_1) {
   thread stop_clear_players_from_door_way_think();
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_c130_approach");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_c130_approach");
 
   if(getdvarint("scr_takeoff_test", 0) != 0) {
     close_plane_doors();
@@ -2491,7 +2491,7 @@ function start_infil_plane(var_0, var_1) {
   foreach(var_4 in getaiarray("axis")) {
     var_5 = scripts\engine\utility::random(brdoesloadoutoptiongivestandardloadoutimmediately());
     var_4 setgoalentity(var_5);
-    thread ref_11cdb(var_4);
+    thread ref_11CDB(var_4);
   }
 
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("plane_jugg_guard");
@@ -2499,9 +2499,9 @@ function start_infil_plane(var_0, var_1) {
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("tarmac_patrol");
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("tarmac_patrol_plane");
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("hack_airport_combat");
-  objective_setlocation(var_0.objectiveindex, 0, level.ref_12b48.origin);
+  objective_setlocation(var_0.objectiveindex, 0, level.ref_12B48.origin);
   objective_state(var_0.objectiveindex, "current");
-  scripts\cp\cp_objectives::ref_1317e(var_0, level.ref_12b48.origin);
+  scripts\cp\cp_objectives::ref_1317E(var_0, level.ref_12B48.origin);
   objective_setzoffset(var_0.objectiveindex, 90);
   objective_setplayintro(var_0.objectiveindex, 1);
   objective_setplayoutro(var_0.objectiveindex, 1);
@@ -2512,7 +2512,7 @@ function start_infil_plane(var_0, var_1) {
   take_off_loop(var_0);
 }
 
-function ref_11cdb(var_0) {
+function ref_11CDB(var_0) {
   self notify("monitor_enemy_death");
   self endon("monitor_enemy_death");
   self endon("death");
@@ -2528,19 +2528,19 @@ function ref_11cdb(var_0) {
 
 function little_bird_initdamage(var_0) {
   wait var_0;
-  ref_138bb();
+  ref_138BB();
 }
 
-function ref_138bb() {
+function ref_138BB() {
   setnojipscore(1, 1);
   setnojiptime(1, 1);
-  ref_13bbb(1);
+  ref_13BBB(1);
 }
 
 function brjugg_oncrateactivate() {
   setnojipscore(0, 1);
   setnojiptime(0, 1);
-  ref_13bbb(undefined);
+  ref_13BBB(undefined);
 }
 
 function stop_clear_players_from_door_way_think() {
@@ -2552,7 +2552,7 @@ function stop_clear_players_from_door_way_think() {
   thread ref_12403(level, ["dx_cps_lass_plane_board_nag_10", "dx_cps_kama_plane_board_nag_20"]);
 }
 
-function ref_11ee4(var_0) {
+function ref_11EE4(var_0) {
   level endon("breached_upper_door");
   var_1 = 0;
   var_2 = 0;
@@ -2640,11 +2640,11 @@ function intro_chopper() {
   self endon("death");
   self vehicle_setspeed(20, 15, 15);
   self setvehgoalpos(self.origin + (0, 0, 1200), 1);
-  scripts\engine\utility::ref_143bb(10, "goal", "goal_reached", "near_goal");
+  scripts\engine\utility::ref_143BB(10, "goal", "goal_reached", "near_goal");
   var_0 = scripts\engine\utility::getStruct("intro_chopper_delete", "targetname");
   self vehicle_setspeed(90, 30, 30);
   self setvehgoalpos(var_0.origin, 1);
-  scripts\engine\utility::ref_143a6("goal", "goal_reached", "near_goal");
+  scripts\engine\utility::ref_143A6("goal", "goal_reached", "near_goal");
   self.pilot delete();
   self delete();
 }
@@ -2703,7 +2703,7 @@ function open_plane_doors_anim() {
 function close_plane_doors_anim() {
   var_0 = getanimlength(level.scr_anim["plane"]["close"]);
   var_1 = scripts\cp_mp\anim_scene::anim_scene_create_actor(self, "plane");
-  level.c130.ref_12a4f playsoundonmovingent("scn_cp_plane_hijack_cargo_door_close");
+  level.c130.ref_12A4F playsoundonmovingent("scn_cp_plane_hijack_cargo_door_close");
   var_1 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(1, "close", 1);
   var_2 = scripts\cp_mp\anim_scene::anim_scene([var_1], "close");
   wait var_0;
@@ -2717,9 +2717,9 @@ function open_plane_doors() {
 }
 
 function close_plane_doors() {
-  level.ref_127f4 = &playerincrementscoreboardkills;
+  level.ref_127F4 = &playerincrementscoreboardkills;
   close_plane_doors_anim(level.c130);
-  level.ref_127f4 = undefined;
+  level.ref_127F4 = undefined;
   level.intro_fadeup = undefined;
 }
 
@@ -2738,7 +2738,7 @@ function playerincrementscoreboardkills() {
   self.combo_progression = 0;
   self.get_vehicle_node_to_wait_for_lbravo_based_on_group = self.name + "^5 - player isn't in the plane! ";
 
-  if(self istouching(level.ref_12b48) || self istouching(level.c130.ref_12a4f)) {
+  if(self istouching(level.ref_12B48) || self istouching(level.c130.ref_12A4F)) {
     self.combo_progression = 1;
     self.get_vehicle_node_to_wait_for_lbravo_based_on_group = "touched regroup trigger OR the rear door";
   }
@@ -2846,8 +2846,8 @@ function takeoff_turbulence() {
 function check_for_solo() {
   waitframe();
   playsoundatpos((-15423, 29040, -3958), "scn_cp_747_takeoff_int");
-  level.ref_134e1 = spawn("script_origin", (-15333, 29036, -3976));
-  level.ref_134e1 playLoopSound("amb_mp_747_flight_int_lr_script");
+  level.ref_134E1 = spawn("script_origin", (-15333, 29036, -3976));
+  level.ref_134E1 playLoopSound("amb_mp_747_flight_int_lr_script");
 }
 
 function end_infil_plane(var_0, var_1) {
@@ -2902,23 +2902,23 @@ function start_landing_sequence(var_0) {
   level.c130 playsoundonmovingent("scn_cp_747_landing_ext");
   level.c130 unlink();
   level.c130.scenenode = scripts\engine\utility::getStruct("plane_landing_scenenode", "targetname");
-  thread ref_123a4();
+  thread ref_123A4();
   land_at_airport(level.c130);
 }
 
-function ref_123a4() {
+function ref_123A4() {
   var_0 = ["tag_wheels_front", "tag_wheels_middle", "tag_wheels_rear"];
-  self.ref_145ac = [];
+  self.ref_145AC = [];
 
   foreach(var_2 in var_0) {
     if(self tagexists(var_2)) {
-      self.ref_145ac[var_2] = spawnfx(level._effect["plane_landing_fx"], self gettagorigin(var_2));
+      self.ref_145AC[var_2] = spawnfx(level._effect["plane_landing_fx"], self gettagorigin(var_2));
     }
   }
 
   wait 1;
 
-  foreach(var_5 in self.ref_145ac) {
+  foreach(var_5 in self.ref_145AC) {
     triggerfx(var_5);
   }
 }
@@ -2932,10 +2932,10 @@ function land_at_airport() {
 
 function plane_landed_idle(var_0) {
   var_1 = self.scenenode scripts\cp_mp\anim_scene::anim_scene([var_0], "idle", 0, 0);
-  level.c130.ref_12a4f playsoundonmovingent("scn_cp_plane_hijack_cargo_door_open");
+  level.c130.ref_12A4F playsoundonmovingent("scn_cp_plane_hijack_cargo_door_open");
   level.intro_fadeup = &intro_fadeup;
   var_1 = scripts\cp_mp\anim_scene::anim_scene([var_0], "open", 0, 0);
-  level.fly_to_node = createnavbadplacebyent(level.c130.ref_12a4f);
+  level.fly_to_node = createnavbadplacebyent(level.c130.ref_12A4F);
 
   foreach(var_3 in level.flytime) {
     if(var_3.classname == "light_spot" || var_3.classname == "light_omni") {
@@ -2947,7 +2947,7 @@ function plane_landed_idle(var_0) {
     }
   }
 
-  level.ref_123a3 = 1;
+  level.ref_123A3 = 1;
 
   if(isDefined(level.claxons["scripted_plane"])) {
     claxon_lights_on("scripted_plane");
@@ -3009,7 +3009,7 @@ function build_path(var_0) {
 
 function init_collect_nuclear_core(var_0, var_1) {
   level.chopper_death_callback = scripts\engine\utility::getStructArray("backup_teleport_start_points", "targetname");
-  level.ref_127f6 = &getdefaultweaponbasename;
+  level.ref_127F6 = &getdefaultweaponbasename;
 
   foreach(var_3 in level.players) {
     var_3 setclientomnvar("ui_cp_mission_fail_index", 0);
@@ -3137,7 +3137,7 @@ function watch_for_timer_on_plane(var_0) {
       thread screen_fade_to_black(var_2, 3);
     }
 
-    thread ref_123e2();
+    thread ref_123E2();
     scripts\cp\cp_objectives::ref_12868(var_0);
     level thread[[level.endgame]]("axis", level.end_game_string_index["kia"]);
     return;
@@ -3182,7 +3182,7 @@ function start_spawners_after_time() {
 
 function watch_for_escape_door_breached() {
   scripts\engine\utility::ent_flag_wait("c4_exploded");
-  level.ref_13e39 = 2;
+  level.ref_13E39 = 2;
   playFX(level._effect["breach_explosion_plane"], self.origin);
   playsoundatpos(self.origin, "scn_cp_747_breach_exp");
   playsoundatpos(self.origin, "breach_c4_expl_trans");
@@ -3205,7 +3205,7 @@ function watch_for_escape_door_breached() {
     }
   }
 
-  ref_137a8();
+  ref_137A8();
   thread labels(var_3, 20);
 }
 
@@ -3224,7 +3224,7 @@ function check_for_nearby_packages() {
   var_0 delete();
 }
 
-function ref_137a8() {
+function ref_137A8() {
   level.movement_vector = scripts\engine\utility::getStructArray("end_breach_smoke_fx", "targetname");
 
   foreach(var_1 in level.movement_vector) {
@@ -3240,7 +3240,7 @@ function ref_137a8() {
   }
 }
 
-function ref_138b7() {
+function ref_138B7() {
   foreach(var_1 in level.movement_vector) {
     var_1.fx delete();
   }
@@ -3283,7 +3283,7 @@ function playerinitpersstats() {
 
   while(istrue(var_0.isreviving)) {
     var_0.can_revive = 0;
-    var_0.ref_12d13 = self.forcespawnorigin;
+    var_0.ref_12D13 = self.forcespawnorigin;
     var_0 notify("revive_done");
     waitframe();
   }
@@ -3306,7 +3306,7 @@ function playerinitpersstats() {
 
   if(istrue(var_0.isreviving)) {
     var_0.can_revive = 0;
-    var_0.ref_12d13 = var_0.forcespawnorigin;
+    var_0.ref_12D13 = var_0.forcespawnorigin;
     var_0 notify("revive_done");
   }
 
@@ -3360,7 +3360,7 @@ function playerinitpersstats() {
   var_0 skydive_setbasejumpingstatus(0);
   var_0 skydive_setdeploymentstatus(0);
   thread teleport_black_overlay(var_0);
-  thread ref_13ae2();
+  thread ref_13AE2();
 
   if(var_0.class == "engineer" || var_0.class == "hunter") {
     var_0.disable_super = 1;
@@ -3391,7 +3391,7 @@ function playerinitpersstats() {
   }
 }
 
-function ref_12c8f() {
+function ref_12C8F() {
   level endon("game_ended");
   wait 8;
 
@@ -3407,7 +3407,7 @@ function ref_12c8f() {
     thread playerinitpersstats();
   }
 
-  level.ref_127f6 = undefined;
+  level.ref_127F6 = undefined;
 }
 
 function start_collect_nuclear_core(var_0, var_1) {
@@ -3419,8 +3419,8 @@ function start_collect_nuclear_core(var_0, var_1) {
   }
 
   thread ref_12404();
-  thread ref_11ee4(180);
-  thread ref_12c8f();
+  thread ref_11EE4(180);
+  thread ref_12C8F();
   level waittill("breached_upper_door");
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_plane_on_plane_20");
 
@@ -3454,12 +3454,12 @@ function start_collect_nuclear_core(var_0, var_1) {
 
 function lowpopcheck() {
   level endon("game_ended");
-  level thread scripts\cp\utility::ref_123fe("");
+  level thread scripts\cp\utility::ref_123FE("");
   wait 7.33;
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_c130_exfil");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_c130_exfil");
 }
 
-function ref_138cd(var_0, var_1) {
+function ref_138CD(var_0, var_1) {
   wait var_0 - var_1;
   level notify("clean_turbulence_threads");
 }
@@ -3559,7 +3559,7 @@ function upper_level_plane_combat_start(var_0) {
   scripts\cp\cp_modular_spawning::run_spawn_module("mhc_spawners");
   scripts\cp\cp_modular_spawning::run_spawn_module("mhc_spawn_smokers");
   level.ref_12213 = undefined;
-  level.ref_12b46 = undefined;
+  level.ref_12B46 = undefined;
 }
 
 function debug_teleport_to_c130(var_0, var_1) {
@@ -3783,7 +3783,7 @@ function disable_features_for_core_carrier(var_0) {}
 function lower_level_plane_combat_start() {
   level.c4_escape_array = [];
   var_0 = scripts\engine\utility::getStructArray("c4_interact_escape", "targetname");
-  level.brmini_createc130pathstruct = &ref_123ce;
+  level.brmini_createc130pathstruct = &ref_123CE;
 
   foreach(var_2 in var_0) {
     var_3 = scripts\cp\cp_breach_c4::setup_c4(var_2);
@@ -3800,7 +3800,7 @@ function start_turbulence_sequence() {
   level endon("clean_turbulence_threads");
   self endon("death");
   self endon("disconnect");
-  thread ref_137e4();
+  thread ref_137E4();
 
   for(;;) {
     var_0 = randomfloatrange(6, 10);
@@ -3813,16 +3813,16 @@ function start_turbulence_sequence() {
   }
 }
 
-function ref_137e4() {
+function ref_137E4() {
   self notify("clean_turbulence_threads");
   self endon("clean_turbulence_threads");
   level endon("clean_turbulence_threads");
   self endon("death");
   self endon("disconnect");
-  level.ref_13e39 = 1;
+  level.ref_13E39 = 1;
 
   for(;;) {
-    self earthquakeforplayer(0.169 * level.ref_13e39, 10, self.origin, 150);
+    self earthquakeforplayer(0.169 * level.ref_13E39, 10, self.origin, 150);
     wait 5;
   }
 }
@@ -3865,7 +3865,7 @@ function stumble_player() {
     return;
   }
 
-  if(istrue(self.ref_140ae)) {
+  if(istrue(self.ref_140AE)) {
     return;
   }
 
@@ -3922,8 +3922,8 @@ function init_exfil_plane(var_0, var_1) {
   level thread scripts\cp\cp_kidnapper::togglekidnappers(0);
   level.teleport_geo = getEntArray("teleport_geo", "targetname");
   level.teleport_trigger = getEnt("teleport_trigger", "script_noteworthy");
-  level.ref_13ae7 = getEnt("teleport_room", "script_noteworthy");
-  objective_setlocation(var_0.objectiveindex, 0, level.ref_13ae7.origin);
+  level.ref_13AE7 = getEnt("teleport_room", "script_noteworthy");
+  objective_setlocation(var_0.objectiveindex, 0, level.ref_13AE7.origin);
   objective_state(var_0.objectiveindex, "current");
   objective_setlabel(var_0.objectiveindex, &"CP_FUBAR/EXIT_ROOM_LABEL");
   thread lower_level_plane_combat_start();
@@ -3963,25 +3963,25 @@ function start_exfil_plane(var_0, var_1) {
   level.c130.mp_crash2 = (80648.1, 28300.1, 3333);
   level.c130.angles = (0, 15, 0);
   thread watch_for_objective_failure(level);
-  level.ref_13e39 = 2;
+  level.ref_13E39 = 2;
 
   if(!isDefined(level.landed_players)) {
     level.landed_players = [];
   }
 
   thread delay_plane_explosion();
-  thread ref_123e1();
-  var_2 = level scripts\engine\utility::ref_143ad("breached_exit", "breached_exit_timer");
+  thread ref_123E1();
+  var_2 = level scripts\engine\utility::ref_143AD("breached_exit", "breached_exit_timer");
   objective_unsetlocation(var_0.objectiveindex, 0);
 
   if(var_2 == "breached_exit") {
-    level.ref_13ae7 delete();
+    level.ref_13AE7 delete();
     thread ref_13805();
-    level.ref_13ae8 = getEnt("teleport_trigger", "targetname");
-    thread ref_13ade();
+    level.ref_13AE8 = getEnt("teleport_trigger", "targetname");
+    thread ref_13ADE();
     thread ref_14324(level, var_0);
 
-    while(!istrue(level.ref_128b8)) {
+    while(!istrue(level.ref_128B8)) {
       waitframe();
     }
 
@@ -3994,7 +3994,7 @@ function start_exfil_plane(var_0, var_1) {
   }
 }
 
-function ref_123e1() {
+function ref_123E1() {
   while(istrue(level.dialogue_playing)) {
     wait 1;
   }
@@ -4012,15 +4012,15 @@ function ref_14324(var_0, var_1) {
   level waittill(var_0.ref + "_timer_complete");
   level notify("enable_respawns");
 
-  if(isDefined(level.ref_134e1)) {
-    level.ref_134e1 delete();
+  if(isDefined(level.ref_134E1)) {
+    level.ref_134E1 delete();
   }
 
   if(isDefined(level.c130)) {
     level.c130 notify("airstrikes_done");
   }
 
-  if(istrue(level.ref_11eda)) {
+  if(istrue(level.ref_11EDA)) {
     foreach(var_3 in level.players) {
       if(scripts\engine\utility::array_contains(level.landed_players, var_3)) {
         continue;
@@ -4043,22 +4043,22 @@ function ref_14324(var_0, var_1) {
       var_3 dodamage(var_3.maxhealth + 100000, var_3.origin);
     }
 
-    level.ref_128b8 = 1;
+    level.ref_128B8 = 1;
     return;
   }
 
-  thread ref_123e2();
+  thread ref_123E2();
   scripts\cp\cp_objectives::ref_12868(var_3.ref);
   level thread[[level.endgame]]("axis", level.end_game_string_index["kia"]);
 }
 
-function ref_123e2(var_0) {
-  level.ref_13e39 = 5;
+function ref_123E2(var_0) {
+  level.ref_13E39 = 5;
   playsoundatpos((0, 0, 0), "scn_cp_747_turbulence_int");
 
   foreach(var_2 in level.players) {
     if(!istrue(var_2.inlaststand)) {
-      thread ref_137e4();
+      thread ref_137E4();
     }
   }
 
@@ -4084,7 +4084,7 @@ function ref_123e2(var_0) {
       playsoundatpos(var_5.origin, "scn_cp_747_breach_exp");
       playsoundatpos(var_5.origin, "breach_c4_expl_trans");
       thread check_for_nearby_packages();
-      ref_137a8();
+      ref_137A8();
     }
   }
 
@@ -4158,7 +4158,7 @@ function watch_for_objective_failure(var_0) {
   level waittill(var_0 + "_timer_complete");
 
   if(!istrue(level.ref_13844)) {
-    thread ref_123e2();
+    thread ref_123E2();
     scripts\cp\cp_objectives::ref_12868(var_0);
     level thread[[level.endgame]]("axis", level.end_game_string_index["kia"]);
     return;
@@ -4255,7 +4255,7 @@ function spawn_lz_spawners_on_landing(var_0) {
   var_0 endon("disconnect");
   var_0 notify("spawn_lz_spawners_on_landing");
   var_0 endon("spawn_lz_spawners_on_landing");
-  var_0 scripts\engine\utility::ref_143a6("parachute_complete", "parachute_landed", "skydive_end");
+  var_0 scripts\engine\utility::ref_143A6("parachute_complete", "parachute_landed", "skydive_end");
 
   if(level.landed_players.size < 1) {
     level notify("end_wave_fubar_spawners");
@@ -4279,10 +4279,10 @@ function init_land_at_lz(var_0, var_1) {
   objective_state(var_0.objectiveindex, "current");
   brjugg_oncrateactivate();
   scripts\cp\utility::skydivestreamhintdvars("plane_hijack_boneyard");
-  thread ref_135c3();
+  thread ref_135C3();
 }
 
-function ref_135c3() {
+function ref_135C3() {
   var_0 = scripts\engine\utility::getStructArray("rpg_interaction", "script_noteworthy");
   var_1 = ["iw8_la_rpapa7_mp", "iw8_la_gromeo_mp", "iw8_la_kgolf_mp", "iw8_la_mike32"];
 
@@ -4295,9 +4295,9 @@ function ref_135c3() {
 
 function start_land_at_lz(var_0, var_1) {
   setDvar("scr_pause_crate_drops", 0);
-  thread ref_123fb();
-  level thread scripts\cp\utility::ref_123fe("");
-  thread ref_1446d(level, scripts\engine\utility::getStruct("exfil_location", "targetname").origin);
+  thread ref_123FB();
+  level thread scripts\cp\utility::ref_123FE("");
+  thread ref_1446D(level, scripts\engine\utility::getStruct("exfil_location", "targetname").origin);
 
   foreach(var_3 in level.littlebirds) {
     var_4 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle(var_3.vehiclename);
@@ -4321,17 +4321,17 @@ function start_land_at_lz(var_0, var_1) {
         if(!isDefined(var_7.headicon)) {
           var_7.headicon = var_7 thread scripts\cp_mp\entityheadicons::setheadicon_singleimage(level.players, "cp_tac_hud_icon_nuke", 30, 1, 29000, 29000, undefined, 1, 0, undefined, 1);
         } else {
-          scripts\cp_mp\entityheadicons::ref_1315d(level.nuclear_core_carrier.headicon, var_7);
+          scripts\cp_mp\entityheadicons::ref_1315D(level.nuclear_core_carrier.headicon, var_7);
         }
 
         continue;
       }
 
-      scripts\cp_mp\entityheadicons::ref_1315d(level.nuclear_core_carrier.headicon, var_7);
+      scripts\cp_mp\entityheadicons::ref_1315D(level.nuclear_core_carrier.headicon, var_7);
     }
   }
 
-  scripts\cp\crate_drops\cp_crate_drops::ref_12c40("hijack_3");
+  scripts\cp\crate_drops\cp_crate_drops::ref_12C40("hijack_3");
 }
 
 function playericontriggerexit() {
@@ -4348,7 +4348,7 @@ function playericontriggerexit() {
   level notify("auto_respawn");
 }
 
-function ref_123fb() {
+function ref_123FB() {
   while(istrue(level.dialogue_playing)) {
     wait 1;
   }
@@ -4536,10 +4536,10 @@ function jugg_enemy_watcher(var_0) {
   var_1 thread scripts\cp\coop_stealth::run_common_functions(var_1, 0, 0);
 }
 
-function ref_13f60() {
+function ref_13F60() {
   self endon("death");
   level waittill("weapons_free");
-  ref_12bf6();
+  ref_12BF6();
 }
 
 function sniper_enemy_watcher(var_0) {
@@ -4593,7 +4593,7 @@ function init_destroy_c130(var_0, var_1) {
       thread screen_fade_to_black(var_3, 3);
     }
 
-    thread ref_123e2();
+    thread ref_123E2();
     scripts\cp\cp_objectives::ref_12868("infil_plane");
     level thread[[level.endgame]]("axis", level.end_game_string_index["kia"]);
     return;
@@ -5180,7 +5180,7 @@ function start_holdout(var_0, var_1) {
   }
 
   ref_14376(var_0, 7000);
-  scripts\cp\crate_drops\cp_crate_drops::ref_12c40("hijack_4");
+  scripts\cp\crate_drops\cp_crate_drops::ref_12C40("hijack_4");
 }
 
 function end_holdout(var_0, var_1) {}
@@ -5210,7 +5210,7 @@ function spawn_enemy_chopper() {
   var_0.vehicletype = "veh_apache_cp";
 
   for(var_1 = 0; var_1 < 1; var_1++) {
-    level.helis[var_1] = ref_1356a(var_0, level.skip_basic_combat);
+    level.helis[var_1] = ref_1356A(var_0, level.skip_basic_combat);
     thread watch_for_death(level.helis[var_1]);
     wait 10;
   }
@@ -5235,7 +5235,7 @@ function watch_for_death(var_0) {
   }
 }
 
-function ref_1356a(var_0, var_1) {
+function ref_1356A(var_0, var_1) {
   var_2 = undefined;
 
   if(var_1 != 0) {
@@ -5249,7 +5249,7 @@ function ref_1356a(var_0, var_1) {
   var_3.isheli = 1;
   var_3.health = 50000;
   var_3.maxhealth = 50000;
-  var_3 = ref_13f91(var_3);
+  var_3 = ref_13F91(var_3);
   var_3.team = "axis";
   var_3 setvehicleteam(var_3.team);
   var_3 thread scripts\cp\cp_vehicles::is_done_speaking();
@@ -5274,7 +5274,7 @@ function ref_1356a(var_0, var_1) {
   return var_3;
 }
 
-function ref_13f91(var_0) {
+function ref_13F91(var_0) {
   var_1 = 1;
 
   if(scripts\cp\cp_relics::calldropbag()) {
@@ -5355,7 +5355,7 @@ function init_extract_lz(var_0, var_1) {
   }
 
   thread ref_14456();
-  scripts\cp\cp_objectives::ref_1317e(var_0, [scripts\engine\utility::getStruct("exfil_location", "targetname").origin]);
+  scripts\cp\cp_objectives::ref_1317E(var_0, [scripts\engine\utility::getStruct("exfil_location", "targetname").origin]);
   objective_state(var_0.objectiveindex, "current");
   var_0.lz_struct = scripts\engine\utility::random(scripts\engine\utility::getStructArray("lz_point", "script_noteworthy"));
 }
@@ -5374,7 +5374,7 @@ function ref_14456() {
   }
 }
 
-function ref_1446d(var_0, var_1) {
+function ref_1446D(var_0, var_1) {
   level endon("game_ended");
   jumpiftrue(isDefined(var_1)) LOC_00000014;
   var_1 = 4096;
@@ -5440,7 +5440,7 @@ function playerhealthomnvarwatcher() {
 function start_extract_lz(var_0, var_1) {
   scripts\engine\utility::flag_init("endgame_delay");
   thread playerhealthomnvarwatcher();
-  level thread scripts\cp\utility::ref_123fe("mus_cp_armsrace_endmission");
+  level thread scripts\cp\utility::ref_123FE("mus_cp_armsrace_endmission");
 
   foreach(var_3 in level.players) {
     var_3 setsoundsubmix("cp_matchend_music", 5);
@@ -5448,7 +5448,7 @@ function start_extract_lz(var_0, var_1) {
 
   thread ref_12403(level, ["dx_cps_lass_plane_exfil_approach_10", "dx_cps_lass_plane_exfil_approach_20", "dx_cps_lass_plane_exfil_approach_30"]);
   level waittill("ready_to_exfil");
-  thread ref_130a8(level.heli_trip_vehicle);
+  thread ref_130A8(level.heli_trip_vehicle);
   level notify("end_current_nags");
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_plane_outro_10");
 
@@ -5475,7 +5475,7 @@ function start_extract_lz(var_0, var_1) {
 
   scripts\cp\cp_achievement::update_achievement_all_players("ARMED", 1);
   scripts\cp\cp_achievement::update_achievement_all_players("PICKLES", 1);
-  level thread scripts\cp\utility::ref_123fe("");
+  level thread scripts\cp\utility::ref_123FE("");
   scripts\engine\utility::flag_set("endgame_delay");
 }
 
@@ -5510,7 +5510,7 @@ function startplayerboarding() {
 
 function wait_for_all_players_ready(var_0) {
   for(;;) {
-    if(scripts\cp\infilexfil\blima_exfil::all_alive_players_in_chopper() && istrue(level.ref_11edb)) {
+    if(scripts\cp\infilexfil\blima_exfil::all_alive_players_in_chopper() && istrue(level.ref_11EDB)) {
       var_0 notify("all_players_on_board");
       return;
     }
@@ -5531,7 +5531,7 @@ function ref_14080(var_0, var_1) {
       continue;
     }
 
-    if(!istrue(level.ref_11edb)) {
+    if(!istrue(level.ref_11EDB)) {
       if(!isDefined(level.nuclear_core_carrier)) {
         thread scripts\cp\cp_hud_message::teamhudtutorialmessage(&"CP_FUBAR/PICK_CORE_WARNING", "allies", 3.75);
         continue;
@@ -5571,7 +5571,7 @@ function ref_14080(var_0, var_1) {
 
         var_2 scripts\cp\utility::hint_prompt("drop_core", 0);
         var_2 notify("end_nuke_threads");
-        level.ref_11edb = 1;
+        level.ref_11EDB = 1;
       } else {
         thread scripts\cp\cp_hud_message::teamhudtutorialmessage(&"CP_FUBAR/PICK_CORE_WARNING", "allies", 3.75);
         continue;
@@ -5930,7 +5930,7 @@ function swivel_dogtag_revive() {
   level.scr_eventanim["player_falling"]["player_4_end"] = "end_exit_plr4";
 }
 
-function ref_123ce(var_0) {
+function ref_123CE(var_0) {
   self.scenenode = getEnt("end_breach_sceneNode", "targetname");
   level.ref_13844 = 1;
   var_1 = spawn("script_model", self.scenenode.origin);
@@ -5969,7 +5969,7 @@ function check_for_trexremoval() {
   self playSound("breach_c4_plant_05");
 }
 
-function ref_1240d() {
+function ref_1240D() {
   self skydive_setbasejumpingstatus(0);
   self skydive_setdeploymentstatus(0);
   self disableweapons();
@@ -5997,7 +5997,7 @@ function ref_1240d() {
   thread parachute();
 }
 
-function ref_123c2() {
+function ref_123C2() {
   var_0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("multi_airstrike", self);
   var_1 = level.scr_anim[var_0.streakname]["airstrike_flyby"];
   var_2 = getanimlength(var_1);
@@ -6039,7 +6039,7 @@ function vehicle_remove_invulnerability_onenter() {
   }
 }
 
-function ref_13ade() {
+function ref_13ADE() {
   for(;;) {
     self waittill("trigger", var_0);
 
@@ -6053,11 +6053,11 @@ function ref_13ade() {
 
     thread playerhastrock(var_0);
 
-    if(scripts\cp\cp_weapon::ref_124ad(var_0)) {
+    if(scripts\cp\cp_weapon::ref_124AD(var_0)) {
       scripts\cp\cp_weapon::minigamefinishcount(var_0);
     }
 
-    thread ref_123ea(var_0);
+    thread ref_123EA(var_0);
   }
 }
 
@@ -6073,9 +6073,9 @@ function playerhastrock(var_0) {
   }
 }
 
-function ref_123ea(var_0) {
-  if(isDefined(level.ref_134e1)) {
-    level.ref_134e1 delete();
+function ref_123EA(var_0) {
+  if(isDefined(level.ref_134E1)) {
+    level.ref_134E1 delete();
   }
 
   if(!scripts\engine\utility::array_contains(level.landed_players, var_0)) {
@@ -6084,22 +6084,22 @@ function ref_123ea(var_0) {
 
   if(isDefined(level.nuclear_core_carrier)) {
     if(var_0 == level.nuclear_core_carrier) {
-      level.ref_11eda = 1;
+      level.ref_11EDA = 1;
 
       foreach(var_2 in level.players) {
         if(istrue(var_2.binc130)) {
-          scripts\cp_mp\entityheadicons::ref_1315e(level.nuclear_core_carrier.headicon, var_2);
+          scripts\cp_mp\entityheadicons::ref_1315E(level.nuclear_core_carrier.headicon, var_2);
           continue;
         }
 
         thread scripts\cp\respawn\cp_respawn::autofeeder(var_2, 4);
       }
-    } else if(istrue(level.ref_11eda)) {
+    } else if(istrue(level.ref_11EDA)) {
       if(isDefined(level.nuclear_core_carrier)) {
         thread scripts\cp\respawn\cp_respawn::autofeeder(var_0, 4);
       }
     } else if(isDefined(level.nuclear_core_carrier)) {
-      scripts\cp_mp\entityheadicons::ref_1315e(level.nuclear_core_carrier.headicon, var_0);
+      scripts\cp_mp\entityheadicons::ref_1315E(level.nuclear_core_carrier.headicon, var_0);
     }
   }
 
@@ -6122,7 +6122,7 @@ function ref_123ea(var_0) {
   var_0.vehicle_occupancy_mp_giveriotshield = getEnt("end_breach_sceneNode", "targetname");
   var_0.vehicle_occupancy_mp_giveriotshield scripts\cp_mp\anim_scene::anim_scene([var_4], "player_1", 1, 1);
   var_0 thread scripts\cp\respawn\cp_respawn::ref_12768(0, 1.2, 0.3, "white");
-  thread ref_1240d();
+  thread ref_1240D();
   level notify("enable_respawns");
 }
 
@@ -6324,14 +6324,14 @@ function winindex() {
   }
 }
 
-function ref_130a8(var_0) {
+function ref_130A8(var_0) {
   var_1 = scripts\engine\utility::getStruct("cp_plane_hijack_endgame_cam", "targetname");
   var_2 = var_1.origin;
   var_3 = scripts\engine\utility::ter_op(isDefined(var_1.angles), var_1.angles, (0, 0, 0));
   var_4 = scripts\engine\utility::getStruct(var_1.target, "targetname");
 
   foreach(var_6 in level.players) {
-    var_6 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(2, 1, 1);
+    var_6 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340D(2, 1, 1);
   }
 
   wait 2;

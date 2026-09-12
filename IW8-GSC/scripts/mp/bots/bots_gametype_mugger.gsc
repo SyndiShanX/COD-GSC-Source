@@ -167,7 +167,7 @@ function mugger_go_to_tag_pile(var_0) {
   var_1.script_goal_type = "objective";
   var_1.objective_radius = level.bot_tag_obj_radius;
   scripts\mp\bots\bots_strategy::bot_new_tactical_goal("kill_tag_pile", var_0, 25, var_1);
-  var_2 = scripts\engine\utility::ref_143ad("death", "tag_spotted");
+  var_2 = scripts\engine\utility::ref_143AD("death", "tag_spotted");
   self botclearscriptgoal();
   self.heading_for_tag_pile = 0;
   scripts\mp\bots\bots_strategy::bot_abort_tactical_goal("kill_tag_pile");

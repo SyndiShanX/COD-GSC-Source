@@ -3,7 +3,7 @@
  * Script: scripts\mp\killstreaks\nuke_mp.gsc
 ***********************************************/
 
-function ref_13fd1() {
+function ref_13FD1() {
   var_0 = getDvar("scr_moveVehicle", "");
 
   if(var_0 != "") {
@@ -20,7 +20,7 @@ function ref_13fd1() {
     var_1 = scripts\mp\gamelogic::gethostplayer();
 
     if(isDefined(var_1)) {
-      thread ref_123aa(var_1);
+      thread ref_123AA(var_1);
     }
   }
 
@@ -145,7 +145,7 @@ function level_death_notify(var_0) {
   }
 }
 
-function ref_123aa(var_0) {
+function ref_123AA(var_0) {
   var_1 = self;
   var_2 = var_1.origin;
   var_3 = var_1 getplayerangles();
@@ -279,7 +279,7 @@ function br_laststandfinishplayerisincapacitated(var_0) {
 
   if(var_10 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
     var_10.angles = (90, 0, 0);
-    var_18 = scripts\cp_mp\vehicles\vehicle::ref_14192(var_10, var_10.ref_13e92);
+    var_18 = scripts\cp_mp\vehicles\vehicle::ref_14192(var_10, var_10.ref_13E92);
     var_19 = 6;
     iprintlnbold("Plane Shooting Debug: Shooting ON");
 

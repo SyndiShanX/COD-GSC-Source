@@ -43,8 +43,8 @@ function main() {
   thread setup_vista_driving_boats();
   thread player_exfil_struct();
   battle_tracks_vehicleoccupancyenter(level);
-  thread ref_121f5();
-  thread ref_136ad();
+  thread ref_121F5();
+  thread ref_136AD();
 
   if(!getdvarint("r_reflectionProbeGenerate")) {
     foreach(var_2 in getEntArray("van_hackney_infil_alpha_lighting_model", "targetname")) {
@@ -343,16 +343,16 @@ function battle_tracks_vehicleoccupancyenter() {
   }
 }
 
-function ref_136ad() {
+function ref_136AD() {
   var_0 = spawn("trigger_radius", (1416, -80, 97), 0, 64, 100);
-  thread ref_144ff(var_0);
+  thread ref_144FF(var_0);
   var_1 = spawn("trigger_radius", (1595, -150, 97), 0, 64, 100);
-  thread ref_144ff(var_1);
+  thread ref_144FF(var_1);
   var_2 = spawn("trigger_radius", (1585, -920, 50), 0, 32, 100);
-  thread ref_144ff(var_2);
+  thread ref_144FF(var_2);
 }
 
-function ref_144ff(var_0) {
+function ref_144FF(var_0) {
   for(;;) {
     self waittill("trigger", var_1);
 
@@ -360,25 +360,25 @@ function ref_144ff(var_0) {
       continue;
     }
 
-    if(!isDefined(self.ref_126ce)) {
-      self.ref_126ce = [];
+    if(!isDefined(self.ref_126CE)) {
+      self.ref_126CE = [];
     }
 
-    if(scripts\engine\utility::array_contains(self.ref_126ce, var_1.guid)) {
+    if(scripts\engine\utility::array_contains(self.ref_126CE, var_1.guid)) {
       continue;
     }
 
-    self.ref_126ce = scripts\engine\utility::array_add(self.ref_126ce, var_1.guid);
+    self.ref_126CE = scripts\engine\utility::array_add(self.ref_126CE, var_1.guid);
 
     switch (var_0) {
       case "box":
         thread ref_14491(var_1);
         break;
       case "dumpster":
-        thread ref_1449c(var_1);
+        thread ref_1449C(var_1);
         break;
       case "trashcan":
-        thread ref_144fe(var_1);
+        thread ref_144FE(var_1);
         break;
     }
   }
@@ -415,10 +415,10 @@ function ref_14491(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }
 
-function ref_1449c(var_0) {
+function ref_1449C(var_0) {
   self endon("death_or_disconnect");
   var_1 = self.team;
   var_2 = self.guid;
@@ -449,10 +449,10 @@ function ref_1449c(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }
 
-function ref_144fe(var_0) {
+function ref_144FE(var_0) {
   self endon("death_or_disconnect");
   var_1 = self.team;
   var_2 = self.guid;
@@ -483,10 +483,10 @@ function ref_144fe(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }
 
-function ref_121f5() {
+function ref_121F5() {
   if(level.gametype == "infect") {
     if(!isDefined(level.outofboundstriggers)) {
       level.outofboundstriggers = [];

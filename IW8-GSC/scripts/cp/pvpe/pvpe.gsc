@@ -1045,7 +1045,7 @@ function give_kidnapper_loadout(var_0) {
 
 function kidnapper_clean_up(var_0) {
   var_0 endon("disconnect");
-  var_0 scripts\engine\utility::ref_143a5("last_stand", "disguise success");
+  var_0 scripts\engine\utility::ref_143A5("last_stand", "disguise success");
   var_0 scripts\cp\utility::hint_prompt("start_disguise", 0);
   unmark_kidnapper_target(var_0, var_0);
   var_0 setclientomnvar("ui_securing_progress", 0);
@@ -1524,7 +1524,7 @@ function long_range_laser_vfx_think(var_0) {
 }
 
 function laser_ent_clean_up_monitor(var_0, var_1) {
-  var_1 scripts\engine\utility::ref_143a5("disconnect", "last_stand");
+  var_1 scripts\engine\utility::ref_143A5("disconnect", "last_stand");
   var_0 delete();
 }
 

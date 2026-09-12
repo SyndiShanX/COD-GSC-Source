@@ -33,9 +33,9 @@ function init_wind_tunnels(var_0, var_1, var_2) {
 }
 
 function setup_tut_zones(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(ref_1331f(var_5, var_0, var_1, var_2)) {
-    ref_12ac6(var_0, var_4, var_7, var_8);
-  } else if(ref_132f1(var_1)) {
+  if(ref_1331F(var_5, var_0, var_1, var_2)) {
+    ref_12AC6(var_0, var_4, var_7, var_8);
+  } else if(ref_132F1(var_1)) {
     var_0 delete();
     return;
   } else if(ref_13309(var_1)) {
@@ -68,18 +68,18 @@ function start_bomb_vest_defusal(var_0, var_1, var_2, var_3, var_4) {
 function start_bomb_vest_defusal_sequence(var_0, var_1, var_2, var_3, var_4) {
   var_0.surfacetype = var_4;
   var_0 setscriptablepartstate("effects", "impact");
-  thread ref_13b25(var_0, var_1, var_2, var_3);
+  thread ref_13B25(var_0, var_1, var_2, var_3);
   var_5 = 0;
 
-  if(isDefined(level.ref_132a4) && [[level.ref_132a4.lowpopallowtweaks]](var_0)) {
+  if(isDefined(level.ref_132A4) && [[level.ref_132A4.lowpopallowtweaks]](var_0)) {
     var_5 = 1;
   }
 
   if(!var_5) {
-    thread ref_13b24(var_0, var_1);
+    thread ref_13B24(var_0, var_1);
   }
 
-  thread ref_13b23(var_0, var_5);
+  thread ref_13B23(var_0, var_5);
 }
 
 function start_box_set_up(var_0, var_1, var_2, var_3, var_4) {
@@ -100,12 +100,12 @@ function start_box_set_up(var_0, var_1, var_2, var_3, var_4) {
 function onsupportboxusedbyplayer(var_0, var_1) {
   self endon("disconnect");
   var_0 endon("entitydeleted");
-  var_0.grenade scripts\engine\utility::ref_143bf(var_1, "explode");
+  var_0.grenade scripts\engine\utility::ref_143BF(var_1, "explode");
   var_0 setscriptablepartstate("effects", "explode");
   var_2 = getcompleteweaponname("semtex_bolt_mp");
   var_3 = getcompleteweaponname("semtex_bolt_splash_mp");
-  var_2.ref_121d9 = var_0.weapon;
-  var_3.ref_121d9 = var_0.weapon;
+  var_2.ref_121D9 = var_0.weapon;
+  var_3.ref_121D9 = var_0.weapon;
 
   if(isDefined(var_0.stuckenemyentity) && isalive(var_0.stuckenemyentity)) {
     var_0.stuckenemyentity scripts\cp_mp\utility\damage_utility::playerplunderbankcallback();
@@ -116,18 +116,18 @@ function onsupportboxusedbyplayer(var_0, var_1) {
   radiusdamage(var_0.origin, 160, 65, 35, self, "MOD_EXPLOSIVE", var_3);
   wait 0.4;
 
-  if(!ref_140ca(var_0)) {
+  if(!ref_140CA(var_0)) {
     return;
   }
 
   var_0 delete();
 }
 
-function ref_13b25(var_0, var_1, var_2, var_3) {
+function ref_13B25(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   var_0 endon("entitydeleted");
   var_4 = getcompleteweaponname("thermite_bolt_mp");
-  var_4.ref_121d9 = var_0.weapon;
+  var_4.ref_121D9 = var_0.weapon;
 
   if(isDefined(var_0.stuckenemyentity) && isalive(var_0.stuckenemyentity)) {
     if(var_1 scripts\cp_mp\vehicles\vehicle::isvehicle() || isDefined(var_1.classname) && var_1.classname == "misc_turret") {
@@ -150,17 +150,17 @@ function ref_13b25(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_13b24(var_0, var_1) {
+function ref_13B24(var_0, var_1) {
   self endon("disconnect");
   var_0 endon("entitydeleted");
   var_2 = int(18);
   var_3 = getcompleteweaponname("thermite_bolt_radius_mp");
-  var_3.ref_121d9 = var_0.weapon;
-  var_0.ref_13b28 = var_3.basename;
+  var_3.ref_121D9 = var_0.weapon;
+  var_0.ref_13B28 = var_3.basename;
 
   while(var_2 > 0) {
     if(isDefined(var_0.stuckenemyentity) && isalive(var_0.stuckenemyentity)) {
-      var_0.stuckenemyentity scripts\cp_mp\utility\damage_utility::adddamagemodifier("thermiteBoltStuck", 0, 0, &ref_13b1c);
+      var_0.stuckenemyentity scripts\cp_mp\utility\damage_utility::adddamagemodifier("thermiteBoltStuck", 0, 0, &ref_13B1C);
     }
 
     var_0 radiusdamage(var_0.origin, 50, 5, 3, self, "MOD_FIRE", var_3);
@@ -174,12 +174,12 @@ function ref_13b24(var_0, var_1) {
   }
 }
 
-function ref_13b1c(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_13B1C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(var_0)) {
     return true;
   }
 
-  if(!isDefined(var_0.ref_13b28) || var_0.ref_13b28 != "thermite_bolt_radius_mp") {
+  if(!isDefined(var_0.ref_13B28) || var_0.ref_13B28 != "thermite_bolt_radius_mp") {
     return true;
   }
 
@@ -190,20 +190,20 @@ function ref_13b1c(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   return false;
 }
 
-function ref_13b23(var_0, var_1) {
+function ref_13B23(var_0, var_1) {
   var_0 endon("entitydeleted");
 
   if(!var_1) {
     wait 4.5;
 
-    if(!ref_140ca(var_0)) {
+    if(!ref_140CA(var_0)) {
       return;
     }
 
     var_0 setscriptablepartstate("effects", "burnEnd");
     wait randomfloatrange(0.3, 2);
 
-    if(!ref_140ca(var_0)) {
+    if(!ref_140CA(var_0)) {
       return;
     }
   }
@@ -216,7 +216,7 @@ function ref_13936(var_0) {
   var_0 endon("entitydeleted");
   wait 0.5;
 
-  if(!ref_140ca(var_0)) {
+  if(!ref_140CA(var_0)) {
     return;
   }
 
@@ -243,7 +243,7 @@ function ref_13937(var_0, var_1) {
   return true;
 }
 
-function ref_1362b(var_0, var_1, var_2, var_3) {
+function ref_1362B(var_0, var_1, var_2, var_3) {
   var_4 = regroup_points(var_2);
   var_5 = spawn("script_model", var_0);
   var_5 setModel(var_4);
@@ -254,16 +254,16 @@ function ref_1362b(var_0, var_1, var_2, var_3) {
   var_5.weapon = var_3;
   var_5.uavnoneid = 1;
 
-  if(ref_1330e(var_2)) {
-    var_5 = ref_11aa3(var_5);
+  if(ref_1330E(var_2)) {
+    var_5 = ref_11AA3(var_5);
   }
 
   thread countdownendcallback();
-  ref_11ab4(var_5);
+  ref_11AB4(var_5);
   return var_5;
 }
 
-function ref_1330e(var_0) {
+function ref_1330E(var_0) {
   if(var_0 == "bolt_default" || var_0 == "bolt_stun") {
     return true;
   }
@@ -271,7 +271,7 @@ function ref_1330e(var_0) {
   return false;
 }
 
-function ref_11aa3(var_0) {
+function ref_11AA3(var_0) {
   var_1 = var_0.origin + anglesToForward(var_0.angles) * 15;
   var_2 = axistoangles(anglestoup(var_0.angles), anglestoright(var_0.angles), anglesToForward(var_0.angles));
   var_3 = spawn("trigger_rotatable_radius", var_1, 0, 64, 79);
@@ -284,7 +284,7 @@ function ref_11aa3(var_0) {
   return var_0;
 }
 
-function ref_12c15(var_0) {
+function ref_12C15(var_0) {
   var_0 notify("removePickup");
 
   if(isDefined(var_0.ref_12357)) {
@@ -384,10 +384,10 @@ function ref_13143(var_0) {
   self endon("entitydeleted");
   wait var_0;
   self.last_saydefuse_time = 1;
-  ref_11ab4();
+  ref_11AB4();
 }
 
-function ref_11ab4(var_0) {
+function ref_11AB4(var_0) {
   if(isDefined(var_0)) {
     var_1 = [var_0];
   } else {
@@ -466,7 +466,7 @@ function regroup_points(var_0) {
   }
 }
 
-function ref_1331f(var_0, var_1, var_2, var_3) {
+function ref_1331F(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_2) && isDefined(var_3)) {
     return 1;
   }
@@ -514,7 +514,7 @@ function ref_1331f(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_12ac6(var_0, var_1, var_2, var_3) {
+function ref_12AC6(var_0, var_1, var_2, var_3) {
   var_4 = scripts\engine\math::vector_reflect(var_2, var_1);
   var_5 = abs(vectordot(var_2, var_1));
   var_6 = scripts\engine\math::factor_value(2300, 1000, var_5);
@@ -522,7 +522,7 @@ function ref_12ac6(var_0, var_1, var_2, var_3) {
   var_0 physicslaunchserver(var_3, var_4);
 }
 
-function ref_132f1(var_0) {
+function ref_132F1(var_0) {
   if(!isDefined(var_0)) {
     return false;
   }
@@ -575,7 +575,7 @@ function linktoent(var_0, var_1, var_2) {
 
   if(get_center_loc_among_target_players(var_1)) {
     var_0.stuckenemyentity = var_1;
-    thread ref_12c28(var_0);
+    thread ref_12C28(var_0);
   }
 
   var_0 notsolid();
@@ -585,17 +585,17 @@ function linktoent(var_0, var_1, var_2) {
   thread cosmeticattachment(var_0, var_1);
 }
 
-function ref_140ca() {
+function ref_140CA() {
   if(isDefined(self) && istrue(self.uavnoneid)) {
     return 1;
   }
 }
 
-function ref_12c28(var_0) {
+function ref_12C28(var_0) {
   self endon("entitydeleted");
-  var_0 scripts\engine\utility::ref_143a6("entitydeleted", "death", "disconnect");
+  var_0 scripts\engine\utility::ref_143A6("entitydeleted", "death", "disconnect");
 
-  if(!ref_140ca()) {
+  if(!ref_140CA()) {
     return;
   }
 
@@ -609,9 +609,9 @@ function ref_12c28(var_0) {
 
 function courtyard_intel_sequence(var_0) {
   self endon("entitydeleted");
-  var_0 scripts\engine\utility::ref_143a5("entitydeleted", "disconnect");
+  var_0 scripts\engine\utility::ref_143A5("entitydeleted", "disconnect");
 
-  if(!ref_140ca()) {
+  if(!ref_140CA()) {
     return;
   }
 
@@ -639,7 +639,7 @@ function cosmeticattachment(var_0, var_1) {
   self endon("entitydeleted");
   var_0 waittill(var_1);
 
-  if(!ref_140ca()) {
+  if(!ref_140CA()) {
     return;
   }
 

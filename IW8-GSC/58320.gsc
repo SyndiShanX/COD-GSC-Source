@@ -13,7 +13,7 @@ function create_vehicle_interact() {
   level.little_bird_mg_mp_initspawning = &scripts\mp\gametypes\br_armory_kiosk::little_bird_mg_mp_initmines;
   level.disablearmorytraderfrombomb = &scripts\mp\gametypes\br_armory_trader::little_bird_mg_mp_ondeathrespawncallback;
   level.ref_13352 = &scripts\mp\hud_message::showerrormessage;
-  level.ref_11a22 = &scripts\mp\gametypes\br_pickups::ref_11a21;
+  level.ref_11A22 = &scripts\mp\gametypes\br_pickups::ref_11A21;
   level.crossbowusageloop = &scripts\mp\rank::giverankxp;
   level.ctgs_recordmatchstats = &scripts\mp\rank::scoreeventpopup;
   level.cumulative_damage_monitor = &scripts\mp\hud_message::showsplash;
@@ -40,7 +40,7 @@ function create_vehicle_omnvars_data() {
   var_1 = getdvarfloat("scr_bt_respawn_delay", 100);
 
   if(var_1 >= 0) {
-    var_0.ref_12ca1 = var_1;
+    var_0.ref_12CA1 = var_1;
     return;
   }
 }
@@ -59,7 +59,7 @@ function create_vehicle_occupancy_data() {
 function create_weapon_pick_up(var_0, var_1) {
   var_2 = _calloutmarkerping_handleluinotify_mappingdeletemarker::create_mp_version_of_vehicle(var_0, var_1);
   var_3 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("veh_bt");
-  var_4 = isDefined(var_3) && isDefined(var_3.ref_12ca1);
+  var_4 = isDefined(var_3) && isDefined(var_3.ref_12CA1);
 
   if(isDefined(var_2) && (istrue(level.failsafe_triggered) || var_4)) {
     var_2.ondeathrespawn = &create_vehicle_vehicledata;
@@ -79,9 +79,9 @@ function create_weapon_pick_ups() {
   var_1.ref = var_0.ref;
   var_1.rallypointhealth = var_0.rallypointhealth;
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("veh_bt", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("veh_bt", var_1, var_2);
 }
 
 function create_vault_assault_loadout_selection(var_0, var_1, var_2, var_3, var_4) {
-  var_0 scripts\mp\gametypes\arm::ref_141ff(var_3.team);
+  var_0 scripts\mp\gametypes\arm::ref_141FF(var_3.team);
 }

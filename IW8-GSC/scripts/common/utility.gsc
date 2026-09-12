@@ -488,7 +488,7 @@ function wasdamagedbyoffhandshield() {
   return true;
 }
 
-function ref_132ec(var_0) {
+function ref_132EC(var_0) {
   if(var_0.basename == "molotov" || var_0.basename == "molotov_mp" || istrue(var_0.unlockableindex)) {
     return true;
   }
@@ -502,7 +502,7 @@ function wasdamagedbyexplosive() {
       return true;
     }
 
-    if(isDefined(self.damageweapon) && ref_132ec(self.damageweapon)) {
+    if(isDefined(self.damageweapon) && ref_132EC(self.damageweapon)) {
       return true;
     }
 
@@ -1755,7 +1755,7 @@ function playersinsphere(var_0, var_1) {
   return var_3;
 }
 
-function ref_13e0a(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+function ref_13E0A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(!isDefined(var_0)) {
     return;
   }

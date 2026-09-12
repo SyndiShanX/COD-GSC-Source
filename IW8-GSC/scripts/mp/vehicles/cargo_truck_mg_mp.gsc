@@ -6,10 +6,10 @@
 function main() {
   scripts\stealth\manager::main();
   level.stealth.cantracetoaiignoreents = [];
-  level.stealth.fnaddeventplaybcs = &ref_123cc;
+  level.stealth.fnaddeventplaybcs = &ref_123CC;
   level.stealth.fnthreatsightsetstateparameters = &threat_sight_set_state_parameters;
   level.fngetcorpsearrayfunc = &propaddtolocation;
-  level.stealth.playerdelaydisablezombie = &ref_119db;
+  level.stealth.playerdelaydisablezombie = &ref_119DB;
   level.stealth.playerclearspectatekillchainsystem = &scripts\cp\coop_stealth::quickdropnewitem;
   set_detect_ranges();
   ref_13078();
@@ -167,7 +167,7 @@ function propaddtolocation() {
   return level.stealth.corpses;
 }
 
-function ref_11cd7(var_0, var_1) {
+function ref_11CD7(var_0, var_1) {
   var_2 = undefined;
   var_3 = self.team;
 
@@ -211,7 +211,7 @@ function ref_11cd7(var_0, var_1) {
   scripts\stealth\event::event_broadcast_axis("ally_killed", "ally_hurt_peripheral", var_2, var_0, var_1);
 }
 
-function ref_119db() {
+function ref_119DB() {
   var_0 = 2;
   var_1 = 200;
   var_2 = 10;
@@ -302,7 +302,7 @@ function ref_119db() {
   }
 }
 
-function ref_123cc(var_0, var_1, var_2, var_3, var_4, var_5) {
+function ref_123CC(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!self isnearanyplayer(1024)) {
     return;
   }

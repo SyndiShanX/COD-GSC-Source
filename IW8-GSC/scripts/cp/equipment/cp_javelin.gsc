@@ -213,7 +213,7 @@ function javelin_holdstateupdate() {
   var_0 = 0;
   var_1 = 0;
 
-  if(!var_0 && self.javelin.target scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.javelin.target, self)) {
+  if(!var_0 && self.javelin.target scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141B9(self.javelin.target, self)) {
     javelin_queuestate("scanning");
     var_1 = 1;
   }
@@ -277,7 +277,7 @@ function javelin_firestateenter(var_0) {
 function javelin_firestateupdate() {
   var_0 = 0;
 
-  if(!var_0 && self.javelin.target scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.javelin.target, self)) {
+  if(!var_0 && self.javelin.target scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141B9(self.javelin.target, self)) {
     javelin_queuestate("scanning");
   }
 

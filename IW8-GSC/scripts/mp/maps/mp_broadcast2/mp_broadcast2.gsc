@@ -9,7 +9,7 @@ function main() {
   scripts\mp\maps\mp_broadcast2\mp_broadcast2_fx::main();
   scripts\mp\maps\mp_broadcast2\mp_broadcast2_lighting::main();
   scripts\mp\load::main();
-  scripts\cp_mp\utility\game_utility::ref_12b18();
+  scripts\cp_mp\utility\game_utility::ref_12B18();
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_broadcast2", "codcaster_compass_map_mp_broadcast2");

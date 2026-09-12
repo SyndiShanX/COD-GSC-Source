@@ -25,16 +25,16 @@ function init() {
   thread brolaride_initanims();
   thread brolaride_updateflagonleadersquads();
   brolaride_initbombsites(level);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("dangerCircleTick", &brolaride_dangercircletick);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("mapCenterFinalCircle", &getfinalcircle);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("getFinalCircleCenter", &getfinalcircle);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("dangerCircleTick", &brolaride_dangercircletick);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("mapCenterFinalCircle", &getfinalcircle);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("getFinalCircleCenter", &getfinalcircle);
   scripts\cp_mp\utility\script_utility::registersharedfunc("game", "onPing", &brolaride_onping);
   level.stage = 1;
   level.bombsite_objectiveitem_amount = getdvarint("scr_br_olaride_objective_item_reward", 1);
 }
 
 function groundz() {
-  ref_12fdc();
+  ref_12FDC();
   thread bindingpc();
   level.br_level.br_circledelaytimes = [80, 420, 300, 60, 0];
   level.br_level.br_circleclosetimes = [180, 60, 60, 30, 10];
@@ -44,7 +44,7 @@ function groundz() {
   level.br_level.default_suicidebomber_combat = [0, 0, 0, 0, 0];
 }
 
-function ref_12fdc() {
+function ref_12FDC() {
   if(level.mapname == "mp_br_mechanics") {
     level.grouptorewards = (626, -2400, 20);
     return;
@@ -85,23 +85,23 @@ function brolaride_initpostmain() {
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("dropBagLoop");
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("firstCircleVo");
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("playerCountLandmarks");
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerWelcomeSplashes", &brolaride_playerintrodialogs);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("canTakePickupLoot", &brolaride_cantakepickuploot);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("skipPickupFeedback", &brolaride_skippickupfeedback);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("lootUsedGiveFeedback", &brolaride_lootusedgivefeedback);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onUseCompleted", &brolaride_onusecompleted);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("endGame", &brolaride_endgame);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("preOnPlayerKilled", &brolaride_onplayerkilled);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("createC130PathStruct", &brolaride_createc130pathstruct);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onInfilSequenceEnd", &brolaride_infilsequenceend);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerConnect", &brolaride_onplayerconnect);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("giveStartingPlunder", &brolaride_givestartingplunder);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerWelcomeSplashes", &brolaride_playerintrodialogs);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("canTakePickupLoot", &brolaride_cantakepickuploot);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("skipPickupFeedback", &brolaride_skippickupfeedback);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("lootUsedGiveFeedback", &brolaride_lootusedgivefeedback);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onUseCompleted", &brolaride_onusecompleted);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("endGame", &brolaride_endgame);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("preOnPlayerKilled", &brolaride_onplayerkilled);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("createC130PathStruct", &brolaride_createc130pathstruct);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onInfilSequenceEnd", &brolaride_infilsequenceend);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerConnect", &brolaride_onplayerconnect);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("giveStartingPlunder", &brolaride_givestartingplunder);
   waittillframeend();
   brolaride_cleanupents();
-  level.ref_140d9 = [];
-  level.ref_140d9[0] = "assassination";
-  level.ref_140d9[1] = "domination";
-  level.ref_140d9[2] = "scavenger";
+  level.ref_140D9 = [];
+  level.ref_140D9[0] = "assassination";
+  level.ref_140D9[1] = "domination";
+  level.ref_140D9[2] = "scavenger";
   scripts\mp\rank::ref_12189("kill", 100);
   scripts\mp\rank::ref_12189("br_cacheOpen", 200);
   level.disable_super_in_turret.onspawn_slowspeed = getdvarint("scr_br_olaride_win_xp", 1500);
@@ -113,7 +113,7 @@ function brolaride_initpostmain() {
   thread brolaride_initcallbacks();
   level.disable_super_in_turret.heromatchpoints = [];
   level.disable_super_in_turret.villainmatchpoints = [];
-  level.disable_super_in_turret.ref_13ab8 = [];
+  level.disable_super_in_turret.ref_13AB8 = [];
   level.disable_super_in_turret.startingloadoutindex = getdvarint("scr_br_rebirth_starting_loadout_index", 2);
   level.disable_super_in_turret.startingplunder = getdvarint("scr_br_olaride_starting_plunder", 10);
   level.disable_super_in_turret.victorypoints = getdvarint("scr_br_olaride_victory_points", 8);
@@ -136,7 +136,7 @@ function brolaride_initpostmain() {
 }
 
 function brolaride_cleanupents() {
-  scripts\cp_mp\utility\game_utility::ref_12c10("delete_on_load", "targetname");
+  scripts\cp_mp\utility\game_utility::ref_12C10("delete_on_load", "targetname");
 }
 
 function brolaride_initdialog() {
@@ -232,7 +232,7 @@ function brolaride_showscorewidget() {
 
   foreach(var_1 in level.players) {
     if(isDefined(var_1)) {
-      var_1 _calloutmarkerping_handleluinotify_added::ref_1313e("ui_br_olaride_points", 30, 1, 1);
+      var_1 _calloutmarkerping_handleluinotify_added::ref_1313E("ui_br_olaride_points", 30, 1, 1);
     }
   }
 }
@@ -329,9 +329,9 @@ function brolaride_initbombsites() {
   level.disable_super_in_turret.bombsite_lastcalltimer = getdvarfloat("scr_br_olaride_bomb_last_call_timer", 70);
   level.disable_super_in_turret.bombsite_spawningradius = getdvarint("scr_br_olaride_bomb_site_start_spawning_radius", 40000);
   level.disable_super_in_turret.bombsite_wantedcount = getdvarint("scr_br_olaride_bomb_site_start_count", 15);
-  scripts\engine\scriptable::ref_12f5b("br_bombsite", &bombsite_used);
-  scripts\engine\scriptable::ref_12f5b("br_bomb", &bomb_used);
-  scripts\engine\scriptable::ref_12f5b("br_defusekit", &defusekit_used);
+  scripts\engine\scriptable::ref_12F5B("br_bombsite", &bombsite_used);
+  scripts\engine\scriptable::ref_12F5B("br_bomb", &bomb_used);
+  scripts\engine\scriptable::ref_12F5B("br_defusekit", &defusekit_used);
   level.disable_super_in_turret.br_bombs = [];
   level.disable_super_in_turret.br_defusekits = [];
 }
@@ -1076,7 +1076,7 @@ function bombsite_canstartusing(var_0, var_1, var_2) {
     return false;
   }
 
-  if(istrue(var_1 scripts\mp\gametypes\br_gametypes::ref_12e05("playerSkipKioskUse", var_0))) {
+  if(istrue(var_1 scripts\mp\gametypes\br_gametypes::ref_12E05("playerSkipKioskUse", var_0))) {
     return false;
   }
 
@@ -1285,7 +1285,7 @@ function bombsite_playusinganimation(var_0) {
   self endon("disconnect");
   self notify("olaride_bombsite_play_using_animation");
   self endon("olaride_bombsite_play_using_animation");
-  scripts\cp_mp\utility\weapon_utility::ref_12eb2();
+  scripts\cp_mp\utility\weapon_utility::ref_12EB2();
   var_1 = scripts\engine\utility::ter_op(var_0 == "active", "briefcase_bomb_mp_vilain", "briefcase_bomb_defuse_mp_vilain");
   var_2 = getcompleteweaponname(var_1);
 
@@ -1533,7 +1533,7 @@ function bombsite_givelootreward(var_0, var_1) {
 
     if(scripts\mp\gametypes\br_lootcache::get_bonus_targets(var_7)) {
       for(var_9 = 0; var_9 < var_8; var_9++) {
-        var_10 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_7, var_3.dropstruct, self.origin + (0, 0, var_3.dropstruct.silencer_pick_up_monitor), var_4, 0, 0);
+        var_10 = scripts\mp\gametypes\br_lootcache::ref_11A41(var_7, var_3.dropstruct, self.origin + (0, 0, var_3.dropstruct.silencer_pick_up_monitor), var_4, 0, 0);
 
         if(!var_0) {
           var_3.dropstruct.silencer_pick_up_monitor += 3;
@@ -1684,7 +1684,7 @@ function bombsite_createleadericon() {
   var_0 = 1;
   var_1 = 20;
   scripts\mp\gametypes\br_quest_util::init_tactical_boxes(var_0, var_1, 0, self.origin);
-  scripts\mp\gametypes\br_quest_util::ref_1316f(level.objectiveleadersmarksize);
+  scripts\mp\gametypes\br_quest_util::ref_1316F(level.objectiveleadersmarksize);
   self.hasleadericon = 1;
   self.showleadericon = 0;
 }
@@ -1706,7 +1706,7 @@ function bombsite_showleadericon(var_0) {
   }
 
   foreach(var_3 in var_1) {
-    scripts\mp\gametypes\br_quest_util::ref_1336a(var_3);
+    scripts\mp\gametypes\br_quest_util::ref_1336A(var_3);
   }
 
   self.showleadericon = 1;
@@ -1719,7 +1719,7 @@ function bombsite_hideleadericon() {
 
 function bomb_spawnbomb(var_0) {
   var_1 = easepower("br_bomb", var_0);
-  scripts\mp\gametypes\br_pickups::ref_12b3a(var_1);
+  scripts\mp\gametypes\br_pickups::ref_12B3A(var_1);
   level.disable_super_in_turret.br_bombs[level.disable_super_in_turret.br_bombs.size] = var_1;
 }
 
@@ -1729,7 +1729,7 @@ function bomb_used(var_0, var_1, var_2, var_3, var_4) {
 
 function defusekit_spawndefusekit(var_0) {
   var_1 = easepower("br_defusekit", var_0);
-  scripts\mp\gametypes\br_pickups::ref_12b3a(var_1);
+  scripts\mp\gametypes\br_pickups::ref_12B3A(var_1);
   level.disable_super_in_turret.br_defusekits[level.disable_super_in_turret.br_defusekits.size] = var_1;
 }
 
@@ -1913,7 +1913,7 @@ function brolaride_updatesquaddata(var_0) {
   var_2 = scripts\engine\utility::ter_op(isDefined(self.pers["squadMemberIndex"]), self.pers["squadMemberIndex"] - 1, 0);
   var_3 = var_2 * 2;
   var_4 = _calloutmarkerping_handleluinotify_added::repackomnvar(var_3, 2, var_1, var_0);
-  scripts\mp\gametypes\br_public::ref_131c3(self.team, self.squadindex, "ui_br_olaride_points", var_4);
+  scripts\mp\gametypes\br_public::ref_131C3(self.team, self.squadindex, "ui_br_olaride_points", var_4);
 
   if(var_4 != var_1) {
     var_5 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.team, self.squadindex);
@@ -1924,7 +1924,7 @@ function brolaride_updatesquaddata(var_0) {
         continue;
       }
 
-      var_7 _calloutmarkerping_handleluinotify_added::ref_1313e("ui_br_olaride_points", var_3, 8, var_4);
+      var_7 _calloutmarkerping_handleluinotify_added::ref_1313E("ui_br_olaride_points", var_3, 8, var_4);
     }
 
     return;
@@ -2394,7 +2394,7 @@ function doomstation_managepromptinteraction(var_0) {
       thread startshakewave(level.doomstationinfo.shakewave2start, level.doomstationinfo.shakewavefrequence, level.doomstationinfo.shakewaveintensity, level.doomstationinfo.shakewaveduration, level.doomstationinfo.shakewavedelay, level.doomstation.origin, level.doomstationinfo.shakewaveradius);
       doomstation_displayactivationbanners(var_1);
       thread doomstation_watchprogress();
-      scripts\mp\gametypes\br_quest_util::ref_140b1(level.doomstation.origin, "doomstation");
+      scripts\mp\gametypes\br_quest_util::ref_140B1(level.doomstation.origin, "doomstation");
       thread doomstation_chopperstart(level);
       branalytics_doomstationstate("activated");
     }
@@ -2509,7 +2509,7 @@ function doomstation_progresstriggerenter(var_0, var_1) {
 function doomstation_progresstriggerexit(var_0, var_1) {
   if(isPlayer(var_0)) {
     level.doomstationinfo.playersinradius = scripts\engine\utility::array_remove(level.doomstationinfo.playersinradius, var_0);
-    var_2 = var_0 scripts\engine\utility::ref_143b9(level.doomstationinfo.hideprogresstimer, "progress_trigger_entered");
+    var_2 = var_0 scripts\engine\utility::ref_143B9(level.doomstationinfo.hideprogresstimer, "progress_trigger_entered");
 
     if(var_2 == "timeout") {
       level.doomstationinfo.playerswatching = scripts\engine\utility::array_remove(level.doomstationinfo.playerswatching, var_0);
@@ -2635,7 +2635,7 @@ function doomstation_givereward() {
 
     if(scripts\mp\gametypes\br_lootcache::get_bonus_targets(var_9)) {
       for(var_11 = 0; var_11 < var_10; var_11++) {
-        var_12 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_9, var_5.dropstruct, var_5.origin + (0, 0, var_5.dropstruct.silencer_pick_up_monitor), var_6, 0, 0);
+        var_12 = scripts\mp\gametypes\br_lootcache::ref_11A41(var_9, var_5.dropstruct, var_5.origin + (0, 0, var_5.dropstruct.silencer_pick_up_monitor), var_6, 0, 0);
         level.doomstationinfo.itemsdropped++;
         waitframe();
       }
@@ -2825,11 +2825,11 @@ function playerplunderupdatedoomstation(var_0) {
     return 1;
   }
 
-  if(var_0.player.plundercount >= var_1 && var_0.player.plundercount - var_0.ref_127b4 >= var_1) {
+  if(var_0.player.plundercount >= var_1 && var_0.player.plundercount - var_0.ref_127B4 >= var_1) {
     return 0;
   }
 
-  if(var_0.player.plundercount < var_1 && var_0.player.plundercount - var_0.ref_127b4 < var_1) {
+  if(var_0.player.plundercount < var_1 && var_0.player.plundercount - var_0.ref_127B4 < var_1) {
     return 0;
   }
 
@@ -2939,7 +2939,7 @@ function giveheropoints(var_0) {
     return false;
   }
 
-  scripts\cp\vehicles\vehicle_compass_cp::ref_1301e("hvv_h", var_0);
+  scripts\cp\vehicles\vehicle_compass_cp::ref_1301E("hvv_h", var_0);
   var_2 = self.hvvplayerdata.hvv_allegiance;
   self.hvvplayerdata.gameheropoints += var_0;
   self.hvvplayerdata.totalheropoints += var_0;
@@ -2968,7 +2968,7 @@ function givevillainpoints(var_0) {
     return false;
   }
 
-  scripts\cp\vehicles\vehicle_compass_cp::ref_1301e("hvv_v", var_0);
+  scripts\cp\vehicles\vehicle_compass_cp::ref_1301E("hvv_v", var_0);
   var_2 = self.hvvplayerdata.hvv_allegiance;
   self.hvvplayerdata.gamevillainpoints += var_0;
   self.hvvplayerdata.totalvillainpoints += var_0;
@@ -3018,7 +3018,7 @@ function updatehvvallegiancesquaddataomnvar(var_0) {
   var_2 = scripts\engine\utility::ter_op(isDefined(self.pers["squadMemberIndex"]), self.pers["squadMemberIndex"] - 1, 0);
   var_3 = var_2 * 2;
   var_4 = _calloutmarkerping_handleluinotify_added::repackomnvar(var_3, 2, var_1, var_0);
-  scripts\mp\gametypes\br_public::ref_131c3(self.team, self.squadindex, "ui_br_hvv_points", var_4);
+  scripts\mp\gametypes\br_public::ref_131C3(self.team, self.squadindex, "ui_br_hvv_points", var_4);
 
   if(var_4 != var_1) {
     var_5 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(self.team, self.squadindex);
@@ -3029,7 +3029,7 @@ function updatehvvallegiancesquaddataomnvar(var_0) {
         continue;
       }
 
-      var_7 _calloutmarkerping_handleluinotify_added::ref_1313e("ui_br_hvv_points", var_3, 8, var_4);
+      var_7 _calloutmarkerping_handleluinotify_added::ref_1313E("ui_br_hvv_points", var_3, 8, var_4);
     }
 
     return;
@@ -3154,7 +3154,7 @@ function brolaride_updateteamscore(var_0) {
     }
   }
 
-  level.disable_super_in_turret.ref_13ab8[var_0] = var_8;
+  level.disable_super_in_turret.ref_13AB8[var_0] = var_8;
   updateolaridedataomnvar(var_0, var_1, var_2, var_5, var_6, var_8);
   brolaride_checkvictory(var_0, var_1 > var_2, var_3);
 }
@@ -3207,7 +3207,7 @@ function updateolaridedataomnvar(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   foreach(var_10 in var_6) {
     if(isDefined(var_10)) {
-      var_10 _calloutmarkerping_handleluinotify_added::ref_1313e("ui_br_olaride_points", 0, 22, var_7);
+      var_10 _calloutmarkerping_handleluinotify_added::ref_1313E("ui_br_olaride_points", 0, 22, var_7);
     }
   }
 }
@@ -3258,7 +3258,7 @@ function brolaride_endgame(var_0, var_1) {
   foreach(var_8 in level.players) {
     if(isDefined(var_8)) {
       setplayerashvfxactive(var_8, 0);
-      var_8 _calloutmarkerping_handleluinotify_added::ref_1313e("ui_br_olaride_points", 31, 1, var_1);
+      var_8 _calloutmarkerping_handleluinotify_added::ref_1313E("ui_br_olaride_points", 31, 1, var_1);
     }
   }
 
@@ -3296,8 +3296,8 @@ function brolaride_endgame(var_0, var_1) {
       continue;
     }
 
-    var_17 = scripts\engine\utility::ter_op(isDefined(level.disable_super_in_turret.ref_13ab8[var_21]), level.disable_super_in_turret.ref_13ab8[var_21], brolaride_getteamplacement(var_21));
-    thread scripts\mp\gametypes\br::ref_1209b(var_21, var_17, 0, 1, undefined, var_21 == var_0);
+    var_17 = scripts\engine\utility::ter_op(isDefined(level.disable_super_in_turret.ref_13AB8[var_21]), level.disable_super_in_turret.ref_13AB8[var_21], brolaride_getteamplacement(var_21));
+    thread scripts\mp\gametypes\br::ref_1209B(var_21, var_17, 0, 1, undefined, var_21 == var_0);
 
     if(var_21 == var_0) {
       continue;
@@ -3343,7 +3343,7 @@ function brolaride_processlastcalltimer() {
 
   foreach(var_2 in level.players) {
     if(isDefined(var_2)) {
-      var_2 _calloutmarkerping_handleluinotify_added::ref_1313e("ui_br_olaride_points", 21, 1, var_0);
+      var_2 _calloutmarkerping_handleluinotify_added::ref_1313E("ui_br_olaride_points", 21, 1, var_0);
     }
   }
 }
@@ -3523,12 +3523,12 @@ function _getcurrentbundleid(var_0) {
 
 function kiosk_initializecallbacks() {
   if(getdvarint("scr_br_enable_hvv_discounts", 0) > 0) {
-    scripts\mp\gametypes\br_gametypes::ref_12b11("kiosk_onPlayerKilled", &kiosk_onplayerkilled);
-    scripts\mp\gametypes\br_gametypes::ref_12b11("getScriptedDiscount", &kiosk_getscripteddiscount);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("kiosk_onPlayerKilled", &kiosk_onplayerkilled);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("getScriptedDiscount", &kiosk_getscripteddiscount);
   }
 
   if(getdvarint("scr_br_enable_hvv_kiosk_items", 0) > 0) {
-    scripts\mp\gametypes\br_gametypes::ref_12b11("kiosk_onPurchase", &kiosk_onpurchase);
+    scripts\mp\gametypes\br_gametypes::ref_12B11("kiosk_onPurchase", &kiosk_onpurchase);
     return;
   }
 }
@@ -3659,7 +3659,7 @@ function _isfullsquadalive() {
 
 function _getidfromrefinpurchasetable(var_0) {
   if(scripts\mp\gametypes\br_gametypes::tutorial_showtext("getIdFromRefInPurchaseTable")) {
-    return scripts\mp\gametypes\br_gametypes::ref_12e05("getIdFromRefInPurchaseTable", var_0);
+    return scripts\mp\gametypes\br_gametypes::ref_12E05("getIdFromRefInPurchaseTable", var_0);
   }
 
   return -1;
@@ -3667,7 +3667,7 @@ function _getidfromrefinpurchasetable(var_0) {
 
 function _gethvvbundlediscountid() {
   if(scripts\mp\gametypes\br_gametypes::tutorial_showtext("getScriptedDiscountId")) {
-    return scripts\mp\gametypes\br_gametypes::ref_12e05("getScriptedDiscountId", self, 1);
+    return scripts\mp\gametypes\br_gametypes::ref_12E05("getScriptedDiscountId", self, 1);
   }
 
   return -1;
@@ -3687,7 +3687,7 @@ function _sethvvlastcalldiscountid(var_0) {
 
 function _setscripteddiscountid(var_0, var_1, var_2) {
   if(scripts\mp\gametypes\br_gametypes::tutorial_showtext("setScriptedDiscountId")) {
-    scripts\mp\gametypes\br_gametypes::ref_12e06("setScriptedDiscountId", var_0, var_1, var_2);
+    scripts\mp\gametypes\br_gametypes::ref_12E06("setScriptedDiscountId", var_0, var_1, var_2);
     return;
   }
 }
@@ -3730,7 +3730,7 @@ function _weightlookup(var_0, var_1, var_2, var_3, var_4) {
   return var_5;
 }
 
-function ref_1458b(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_1458B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(var_0) && isDefined(var_0.targetname) && var_0.targetname == "trigger_multiple_lava") {
     return true;
   }
@@ -3741,7 +3741,7 @@ function ref_1458b(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 function setuplavatriggers() {
   level endon("game_ended");
   wait 5;
-  scripts\cp_mp\utility\script_utility::registersharedfunc("damage", "weaponIgnoresBRArmor", &ref_1458b);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("damage", "weaponIgnoresBRArmor", &ref_1458B);
   var_0 = getEntArray("trigger_multiple_lava", "targetname");
   var_1 = [];
 
@@ -3871,7 +3871,7 @@ function ref_13372(var_0, var_1) {
 
 function brolaride_initaudio() {
   scripts\mp\utility\sound::besttime("br_mode_olaride");
-  level.ref_11e96 = 1;
+  level.ref_11E96 = 1;
   level.nosuspensemusic = 1;
   level.musicstate = 0;
 }

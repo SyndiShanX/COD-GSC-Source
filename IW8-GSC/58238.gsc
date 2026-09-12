@@ -17,7 +17,7 @@ function ref_12102() {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("open_jeep", "init")]]();
   }
 
-  ref_1210a();
+  ref_1210A();
   ref_12107();
 }
 
@@ -30,9 +30,9 @@ function ref_12107() {
 
 function ref_12108() {
   var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforvehicle("open_jeep", 1);
-  var_0.enterendcallback = &ref_120fc;
+  var_0.enterendcallback = &ref_120FC;
   var_0.exitstartcallback = &scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_exitstartcallback;
-  var_0.exitendcallback = &ref_120fe;
+  var_0.exitendcallback = &ref_120FE;
   var_0.restrictions = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getcombatpassengerrestrictions();
   var_0.exitextents["front"] = 85;
   var_0.exitextents["back"] = 82;
@@ -50,11 +50,11 @@ function ref_12108() {
 
 function ref_12106() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("open_jeep", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("open_jeep", "single", ["driver", "fr_passenger", "bl_passenger", "br_passenger"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("open_jeep", "single", ["driver", "fr_passenger", "bl_passenger", "br_passenger"]);
 }
 
 function ref_12109() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("open_jeep", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("open_jeep", 1);
   var_0.id = 22;
   var_0.seatids["driver"] = 0;
   var_0.seatids["fr_passenger"] = 1;
@@ -63,21 +63,21 @@ function ref_12109() {
 }
 
 function ref_12104() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("open_jeep", 750);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("open_jeep", 750);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("open_jeep");
   var_0.class = "light";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("open_jeep");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("open_jeep");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("open_jeep", 5);
 
   if(level.gametype == "br") {
     scripts\cp_mp\vehicles\vehicle_damage::ref_14179("open_jeep", 8, "semtex_aalpha12_mp");
   }
 
-  scripts\cp_mp\vehicles\vehicle_damage::ref_14171("open_jeep", &ref_120fa);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_14171("open_jeep", &ref_120FA);
 }
 
 function ref_12103() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("open_jeep", 1);
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("open_jeep", 1);
   var_0.challengeevaluator = 1.83333;
   var_0.keycardlocs_chosen = 0.79166;
   var_0.is_using_stealth_debug = 350;
@@ -95,7 +95,7 @@ function ref_12105() {
   level._effect["open_jeep_explode"] = loadfx("vfx/iw8_br/island/veh/vfx_br3_jo_death_exp.vfx");
 }
 
-function ref_120f9(var_0, var_1) {
+function ref_120F9(var_0, var_1) {
   if(!isDefined(var_0.angles)) {
     var_0.angles = (0, 0, 0);
   }
@@ -111,7 +111,7 @@ function ref_120f9(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "open_jeep", var_0);
   var_2.objweapon = getcompleteweaponname("open_jeep_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   thread ref_12110(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 
@@ -149,7 +149,7 @@ function ref_12110(var_0, var_1, var_2, var_3) {
       }
     } else {
       if(var_4) {
-        scripts\cp_mp\vehicles\vehicle_occupancy::ref_141c6(var_0, 1);
+        scripts\cp_mp\vehicles\vehicle_occupancy::ref_141C6(var_0, 1);
         scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_allowvehicleuse(var_0, 1);
         var_4 = 0;
       }
@@ -164,7 +164,7 @@ function ref_12110(var_0, var_1, var_2, var_3) {
       }
 
       if(!var_4) {
-        scripts\cp_mp\vehicles\vehicle_occupancy::ref_141c6(var_0, 0);
+        scripts\cp_mp\vehicles\vehicle_occupancy::ref_141C6(var_0, 0);
         scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_allowvehicleuse(var_0, 0);
         var_4 = 1;
       }
@@ -204,7 +204,7 @@ function ref_12100(var_0, var_1) {
   scripts\cp_mp\vehicles\vehicle_damage::ref_14162(var_0);
   scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_killoccupants(self, var_0);
   scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_clearvisuals(undefined, undefined, 1);
-  thread ref_120fb();
+  thread ref_120FB();
 
   if(!istrue(level.suppressvehicleexplosion)) {
     var_2 = self gettagorigin("tag_origin");
@@ -219,7 +219,7 @@ function ref_12100(var_0, var_1) {
   }
 }
 
-function ref_120fb() {
+function ref_120FB() {
   scripts\cp_mp\vehicles\vehicle::ref_14185(self);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("open_jeep", "delete")) {
@@ -230,19 +230,19 @@ function ref_120fb() {
   scripts\cp_mp\vehicles\vehicle::ref_14186(self);
 }
 
-function ref_120fa(var_0) {
+function ref_120FA(var_0) {
   thread ref_12100(var_0);
   return true;
 }
 
-function ref_120fc(var_0, var_1, var_2, var_3, var_4) {
+function ref_120FC(var_0, var_1, var_2, var_3, var_4) {
   if(istrue(var_4.success)) {
-    ref_120fd(var_0, var_1, var_2, var_3, var_4);
+    ref_120FD(var_0, var_1, var_2, var_3, var_4);
     return;
   }
 }
 
-function ref_120fd(var_0, var_1, var_2, var_3, var_4) {
+function ref_120FD(var_0, var_1, var_2, var_3, var_4) {
   if(var_1 == "driver") {
     var_0 setotherent(var_3);
     var_0 setentityowner(var_3);
@@ -253,14 +253,14 @@ function ref_120fd(var_0, var_1, var_2, var_3, var_4) {
   scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_updateomnvarsonseatenter(var_0, var_2, var_1, var_3);
 }
 
-function ref_120fe(var_0, var_1, var_2, var_3, var_4) {
+function ref_120FE(var_0, var_1, var_2, var_3, var_4) {
   if(istrue(var_4.success)) {
-    ref_120ff(var_0, var_1, var_2, var_3, var_4);
+    ref_120FF(var_0, var_1, var_2, var_3, var_4);
     return;
   }
 }
 
-function ref_120ff(var_0, var_1, var_2, var_3, var_4) {
+function ref_120FF(var_0, var_1, var_2, var_3, var_4) {
   if(var_1 == "driver") {
     var_0 setotherent(undefined);
     var_0 setentityowner(undefined);
@@ -286,7 +286,7 @@ function ref_120ff(var_0, var_1, var_2, var_3, var_4) {
   scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_updateomnvarsonseatexit(var_0, var_1, var_2, var_3);
 }
 
-function ref_1210a() {
+function ref_1210A() {
   var_0 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_getleveldataforvehicle("open_jeep", 1);
   var_0.maxinstancecount = 2;
   var_0.priority = 75;

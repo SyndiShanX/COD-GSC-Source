@@ -167,7 +167,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) 
             var_17 += "|";
           }
 
-          var_22 = scripts\cp\cp_weapon::ref_12bbb(var_22);
+          var_22 = scripts\cp\cp_weapon::ref_12BBB(var_22);
           var_17 += var_22;
           var_18 = 0;
         }
@@ -202,7 +202,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) 
     if(isPlayer(var_8)) {
       var_30 |= 1;
     } else if(isagent(var_8)) {
-      var_30 = ref_12ce0(var_30, var_8);
+      var_30 = ref_12CE0(var_30, var_8);
     }
 
     var_31 = 0;
@@ -299,7 +299,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) 
   }
 }
 
-function ref_12ce0(var_0, var_1) {
+function ref_12CE0(var_0, var_1) {
   var_2 = var_1.aitype;
 
   if(!isDefined(var_1.aitype)) {
@@ -421,7 +421,7 @@ function onplayerkillassist(var_0) {
     if(isPlayer(var_0)) {
       var_6 |= 1;
     } else if(isagent(var_0)) {
-      var_6 = ref_12ce0(var_6, var_0);
+      var_6 = ref_12CE0(var_6, var_0);
     }
 
     var_7 = resetstuckthermite(var_1);
@@ -430,7 +430,7 @@ function onplayerkillassist(var_0) {
   }
 }
 
-function ref_1204a(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_1204A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -468,8 +468,8 @@ function ref_12033(var_0, var_1) {
   var_2 = var_0;
 
   if(var_0 == "super_recon_drone" && isDefined(self.recondronesuper)) {
-    if(isDefined(self.recondronesuper.ref_1406b)) {
-      var_1 = self.recondronesuper.ref_1406b;
+    if(isDefined(self.recondronesuper.ref_1406B)) {
+      var_1 = self.recondronesuper.ref_1406B;
     }
   }
 
@@ -509,7 +509,7 @@ function ref_12003(var_0) {
   self reportchallengeuserevent("capture", var_4, var_1, var_2);
 }
 
-function ref_1201f(var_0) {
+function ref_1201F(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -566,7 +566,7 @@ function ref_12092(var_0) {
   self reportchallengeuserevent("stim", var_0);
 }
 
-function ref_1203d(var_0) {
+function ref_1203D(var_0) {
   if(!challengesenabledforplayer()) {
     return;
   }
@@ -710,7 +710,7 @@ function killstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
             var_17 += "|";
           }
 
-          var_22 = scripts\cp\cp_weapon::ref_12bbb(var_22);
+          var_22 = scripts\cp\cp_weapon::ref_12BBB(var_22);
           var_17 += var_22;
           var_18 = 0;
         }
@@ -745,7 +745,7 @@ function killstreakkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     if(isPlayer(var_8)) {
       var_30 |= 1;
     } else if(isagent(var_8)) {
-      var_30 = ref_12ce0(var_30, var_8);
+      var_30 = ref_12CE0(var_30, var_8);
     }
 
     var_31 = 0;
@@ -902,7 +902,7 @@ function equipmentdestroyed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
             var_17 += "|";
           }
 
-          var_22 = scripts\cp\cp_weapon::ref_12bbb(var_22);
+          var_22 = scripts\cp\cp_weapon::ref_12BBB(var_22);
           var_17 += var_22;
           var_18 = 0;
         }
@@ -937,7 +937,7 @@ function equipmentdestroyed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     if(isPlayer(var_8)) {
       var_30 |= 1;
     } else if(isagent(var_8)) {
-      var_30 = ref_12ce0(var_30, var_8);
+      var_30 = ref_12CE0(var_30, var_8);
     }
 
     var_31 = 0;
@@ -1072,7 +1072,7 @@ function vehiclekilled(var_0, var_1, var_2, var_3) {
           var_13 += "|";
         }
 
-        var_18 = scripts\cp\cp_weapon::ref_12bbb(var_18);
+        var_18 = scripts\cp\cp_weapon::ref_12BBB(var_18);
         var_13 += var_18;
         var_14 = 0;
       }
@@ -1107,7 +1107,7 @@ function vehiclekilled(var_0, var_1, var_2, var_3) {
   if(isPlayer(var_4)) {
     var_26 |= 1;
   } else if(isagent(var_4)) {
-    var_26 = ref_12ce0(var_26, var_4);
+    var_26 = ref_12CE0(var_26, var_4);
   }
 
   var_27 = 0;
@@ -1257,7 +1257,7 @@ function ref_12071(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
             var_17 += "|";
           }
 
-          var_22 = scripts\cp\cp_weapon::ref_12bbb(var_22);
+          var_22 = scripts\cp\cp_weapon::ref_12BBB(var_22);
           var_17 += var_22;
           var_18 = 0;
         }
@@ -1292,7 +1292,7 @@ function ref_12071(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     if(isPlayer(var_8)) {
       var_30 |= 1;
     } else if(isagent(var_8)) {
-      var_30 = ref_12ce0(var_30, var_8);
+      var_30 = ref_12CE0(var_30, var_8);
     }
 
     var_31 = 0;

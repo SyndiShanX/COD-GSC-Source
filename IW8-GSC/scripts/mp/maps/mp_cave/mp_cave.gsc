@@ -34,8 +34,8 @@ function main() {
   thread destructibletrucksetup("destructibleTruck01", "truckHeadlights01", "destructibleTruck01_edges", "destructibleTruck01_edges_dst", 51);
   thread destructibletrucksetup("destructibleTruck02", "truckHeadlights02", "destructibleTruck02_edges", "destructibleTruck02_edges_dst", 52);
   thread matchfxexploder();
-  thread ref_11f11();
-  thread ref_12f8e();
+  thread ref_11F11();
+  thread ref_12F8E();
   thread player_fired_gun_monitor();
 }
 
@@ -149,7 +149,7 @@ function trucklightsoff(var_0) {
   }
 }
 
-function ref_11f11() {
+function ref_11F11() {
   level endon("game_ended");
   level waittill("used_nuke");
   var_0 = spawn("script_origin", (-106, 364, 216));
@@ -174,11 +174,11 @@ function players_in_laststand() {
   var_0 allowprone(0);
   var_0 scripts\common\utility::allow_killstreaks(0);
   var_0 scripts\common\utility::allow_supers(0);
-  var_0.ref_12e54 = 1;
+  var_0.ref_12E54 = 1;
   var_0 scripts\mp\hud_message::showerrormessage("MP_INGAME_ONLY/SAFE");
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   var_0 = [];
   GscBinSkip0(0x2e, var_0.size, scripts\mp\spawnlogic::init_trap_room_doors("mp_tdm_spawn_secondary", (-548, 2268, 100), (0, 330, 0)));
 }

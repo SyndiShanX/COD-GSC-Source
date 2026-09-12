@@ -127,7 +127,7 @@ function combatstate_removeupdatefunc(var_0) {
 
 function playerattackedmonitor() {
   for(;;) {
-    level scripts\engine\utility::ref_143a5("an_enemy_shot", "enemy_grenade_fire");
+    level scripts\engine\utility::ref_143A5("an_enemy_shot", "enemy_grenade_fire");
     self.lastattackedtime = gettime();
   }
 }
@@ -221,9 +221,9 @@ function stealthhints_aimonitor(var_0, var_1) {
 
   if(var_0[[var_0.fnisinstealthhunt]]()) {
     var_0 scripts\engine\utility::delaythread(10, &scripts\engine\utility::send_notify, "stealthHints_timeout");
-    var_0 scripts\engine\utility::ref_143a6("stealth_combat", "death", "stealthHints_timeout");
+    var_0 scripts\engine\utility::ref_143A6("stealth_combat", "death", "stealthHints_timeout");
   } else if(var_0[[var_0.fnisinstealthinvestigate]]()) {
-    var_0 scripts\engine\utility::ref_143a6("stealth_idle", "stealth_combat", "death");
+    var_0 scripts\engine\utility::ref_143A6("stealth_idle", "stealth_combat", "death");
   }
 
   self.stealth.hints.investigators = scripts\engine\utility::array_remove(self.stealth.hints.investigators, var_0);

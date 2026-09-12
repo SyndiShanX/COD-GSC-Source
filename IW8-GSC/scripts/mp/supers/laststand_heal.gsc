@@ -109,7 +109,7 @@ function laststandheal_drainsupermeter() {
 function laststandheal_setinactivewhendone() {
   level endon("game_ended");
   self endon("disconnect");
-  scripts\engine\utility::ref_143b4("death", "last_stand_finished");
+  scripts\engine\utility::ref_143B4("death", "last_stand_finished");
   self.laststandhealisactive = 0;
 }
 

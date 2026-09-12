@@ -9,33 +9,33 @@ function init() {
   }
 
   level.disable_super_in_turret.brmayconsiderplayerdead = 1;
-  level.disable_super_in_turret.ref_146e7 = 1;
-  level.disable_super_in_turret.ref_146c9 = init_warning_levels();
-  level.disable_super_in_turret.ref_146bd = getdvarint("scr_br_zxp_health", 300);
-  level.disable_super_in_turret.ref_146f1 = getdvarint("scr_br_zxp_zombiesDamageZombies", 0);
-  level.disable_super_in_turret.ref_146f2 = getdvarint("scr_br_zxp_zombiesDamageZombiesDamage", 80);
-  level.disable_super_in_turret.ref_146f8 = getdvarint("scr_br_zxp_zombieIgnoreVehicleExplosions", 1);
+  level.disable_super_in_turret.ref_146E7 = 1;
+  level.disable_super_in_turret.ref_146C9 = init_warning_levels();
+  level.disable_super_in_turret.ref_146BD = getdvarint("scr_br_zxp_health", 300);
+  level.disable_super_in_turret.ref_146F1 = getdvarint("scr_br_zxp_zombiesDamageZombies", 0);
+  level.disable_super_in_turret.ref_146F2 = getdvarint("scr_br_zxp_zombiesDamageZombiesDamage", 80);
+  level.disable_super_in_turret.ref_146F8 = getdvarint("scr_br_zxp_zombieIgnoreVehicleExplosions", 1);
   level.disable_super_in_turret.brking_movenextcirclecenter = getdvarint("scr_br_zxp_allow_zombie_uav", 1);
-  level.disable_super_in_turret.ref_146d5 = getdvarfloat("scr_br_zxp_ping_rate", -1);
-  level.disable_super_in_turret.ref_146d6 = getdvarfloat("scr_br_zxp_ping_time", 0.5);
-  level.disable_super_in_turret.ref_146d2 = getdvarint("scr_br_zxp_num_consume", 4);
-  level.disable_super_in_turret.ref_146e5 = getdvarfloat("scr_br_zxp_regen_rate_scale_in_gas", 1);
-  level.disable_super_in_turret.ref_146e6 = getdvarfloat("scr_br_zxp_regen_rate_scale_out_gas", 0.5);
-  level.disable_super_in_turret.ref_146e3 = getdvarfloat("scr_br_zxp_regen_delay_scale_in_gas", 1);
-  level.disable_super_in_turret.ref_146e4 = getdvarfloat("scr_br_zxp_regen_delay_scale_out_gas", 1.5);
-  level.disable_super_in_turret.ref_146e2 = getdvarint("scr_br_zxp_powers", 1);
+  level.disable_super_in_turret.ref_146D5 = getdvarfloat("scr_br_zxp_ping_rate", -1);
+  level.disable_super_in_turret.ref_146D6 = getdvarfloat("scr_br_zxp_ping_time", 0.5);
+  level.disable_super_in_turret.ref_146D2 = getdvarint("scr_br_zxp_num_consume", 4);
+  level.disable_super_in_turret.ref_146E5 = getdvarfloat("scr_br_zxp_regen_rate_scale_in_gas", 1);
+  level.disable_super_in_turret.ref_146E6 = getdvarfloat("scr_br_zxp_regen_rate_scale_out_gas", 0.5);
+  level.disable_super_in_turret.ref_146E3 = getdvarfloat("scr_br_zxp_regen_delay_scale_in_gas", 1);
+  level.disable_super_in_turret.ref_146E4 = getdvarfloat("scr_br_zxp_regen_delay_scale_out_gas", 1.5);
+  level.disable_super_in_turret.ref_146E2 = getdvarint("scr_br_zxp_powers", 1);
   level.disable_super_in_turret.ref_12820 = getdvarint("scr_br_zxp_powers_cooldown", 1);
-  level.disable_super_in_turret.ref_146cf = getdvarfloat("scr_br_zxp_numHits", 3);
-  level.disable_super_in_turret.ref_146d0 = getdvarfloat("scr_br_zxp_numHitsJugg", 20);
-  level.disable_super_in_turret.ref_146bf = getdvarint("scr_br_zxp_ignoreArmor", 1);
-  level.disable_super_in_turret.ref_146e8 = getdvarint("scr_br_zxp_respawn_shutdown_jugg", 1);
-  level.disable_super_in_turret.ref_146ce = getdvarfloat("scr_br_zxp_numHitsHeli", 2);
-  level.disable_super_in_turret.ref_146cc = getdvarfloat("scr_br_zxp_numHitsAtv", 2);
-  level.disable_super_in_turret.ref_146cd = getdvarfloat("scr_br_zxp_numHitsCar", 3);
-  level.disable_super_in_turret.ref_146d1 = getdvarfloat("scr_br_zxp_numHitsTruck", 4);
-  level.disable_super_in_turret.ref_146fc = getdvarint("scr_br_zxp_spawn_air", 1);
-  level.disable_super_in_turret.ref_1470a = getdvarint("scr_br_zxp_vehicle_laststand", 0);
-  level.disable_super_in_turret.ref_146fb = getdvarint("scr_br_zxp_zombie_spawn_above", 0);
+  level.disable_super_in_turret.ref_146CF = getdvarfloat("scr_br_zxp_numHits", 3);
+  level.disable_super_in_turret.ref_146D0 = getdvarfloat("scr_br_zxp_numHitsJugg", 20);
+  level.disable_super_in_turret.ref_146BF = getdvarint("scr_br_zxp_ignoreArmor", 1);
+  level.disable_super_in_turret.ref_146E8 = getdvarint("scr_br_zxp_respawn_shutdown_jugg", 1);
+  level.disable_super_in_turret.ref_146CE = getdvarfloat("scr_br_zxp_numHitsHeli", 2);
+  level.disable_super_in_turret.ref_146CC = getdvarfloat("scr_br_zxp_numHitsAtv", 2);
+  level.disable_super_in_turret.ref_146CD = getdvarfloat("scr_br_zxp_numHitsCar", 3);
+  level.disable_super_in_turret.ref_146D1 = getdvarfloat("scr_br_zxp_numHitsTruck", 4);
+  level.disable_super_in_turret.ref_146FC = getdvarint("scr_br_zxp_spawn_air", 1);
+  level.disable_super_in_turret.ref_1470A = getdvarint("scr_br_zxp_vehicle_laststand", 0);
+  level.disable_super_in_turret.ref_146FB = getdvarint("scr_br_zxp_zombie_spawn_above", 0);
   level.disable_super_in_turret.spawndragonsbreathstruct = getdvarint("scr_br_zxp_human_spawn_air", 1);
   level.disable_super_in_turret.fluctuatevalues = getdvarint("scr_br_zxp_buyback_human", 1);
   level.disable_super_in_turret.vehicle_occupancy_friendlystatuschangedcallback = getdvarint("scr_br_zxp_jugg_num_players", 3);
@@ -43,10 +43,10 @@ function init() {
   level.disable_super_in_turret.spawndistancemax = getdvarint("scr_br_zxp_server_hud", 0);
   level.disable_super_in_turret.vehicle_occupancy_monitorturretcontrols = getdvarint("scr_br_zxp_jump_trace_up1_offset", 20);
   level.disable_super_in_turret.vehicle_occupancy_mp_changedseats = getdvarint("scr_br_zxp_jump_trace_up2_offset", 30);
-  level.disable_super_in_turret.ref_1470c = getdvarint("scr_br_zxp_zombie_vision", 1);
-  level.disable_super_in_turret.ref_1470d = getdvarint("scr_br_zxp_zombie_vision_overlay", 1);
+  level.disable_super_in_turret.ref_1470C = getdvarint("scr_br_zxp_zombie_vision", 1);
+  level.disable_super_in_turret.ref_1470D = getdvarint("scr_br_zxp_zombie_vision_overlay", 1);
   level.disable_super_in_turret.ref_14061 = getdvarint("scr_br_zxp_use_armor_headshot_scale", 0);
-  level.disable_super_in_turret.ref_146bc = getdvarfloat("scr_br_zxp_zombie_headshot_scalar", 0.65);
+  level.disable_super_in_turret.ref_146BC = getdvarfloat("scr_br_zxp_zombie_headshot_scalar", 0.65);
   level.disable_super_in_turret.zombiecanseeandopenloot = getdvarint("scr_br_zxp_zombie_can_see_and_open_loot", 1);
   level.disable_super_in_turret.zombierespawnonexecute = getdvarint("scr_br_zxp_zombie_respawn_on_execute", 1);
   level.disable_super_in_turret.zombierespawnonlaststandexecute = getdvarint("scr_br_zxp_zombie_respawn_on_laststand_execute", 0);
@@ -71,10 +71,10 @@ function toggleusbstickinhand() {
   }
 
   thread ref_13283();
-  thread ref_1472d();
+  thread ref_1472D();
 }
 
-function ref_126a4() {
+function ref_126A4() {
   var_0 = self;
 
   if(!isDefined(var_0.spawndomplateflag)) {
@@ -82,23 +82,23 @@ function ref_126a4() {
   }
 
   wait 0.5;
-  ref_125fc(var_0);
+  ref_125FC(var_0);
   wait 2;
   ref_12723(var_0, 0);
 }
 
 function modifyplayerdamage(var_0) {
   var_1 = var_0.damage;
-  var_2 = isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125f3();
+  var_2 = isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125F3();
   var_3 = isDefined(var_0.attacker) && nukefridgewatcher(var_0.attacker);
-  var_4 = isPlayer(var_0.victim) && var_0.victim scripts\mp\gametypes\br_public::ref_125f3();
+  var_4 = isPlayer(var_0.victim) && var_0.victim scripts\mp\gametypes\br_public::ref_125F3();
   var_5 = scripts\mp\utility\weapon::getweaponbasenamescript(var_0.objweapon);
 
   if(var_2 && var_4 && var_0.meansofdeath == "MOD_MELEE") {
-    if(!level.disable_super_in_turret.ref_146f1) {
+    if(!level.disable_super_in_turret.ref_146F1) {
       var_1 = 0;
     } else {
-      var_1 = level.disable_super_in_turret.ref_146f2;
+      var_1 = level.disable_super_in_turret.ref_146F2;
     }
   } else if(var_2 && !var_4 && !var_0.attacker isinexecutionattack() && var_0.victim isinexecutionvictim()) {
     var_1 = 0;
@@ -110,24 +110,24 @@ function modifyplayerdamage(var_0) {
     var_6 = var_0.victim.maxhealth;
     var_7 = var_0.attacker.maxhealth;
     var_1 = var_0.damage * int(floor(var_6 / var_7));
-  } else if(level.disable_super_in_turret.ref_146f8 && var_4 && isexplosivedamagemod(var_0.meansofdeath) && isDefined(var_0.inflictor) && var_0.inflictor scripts\cp_mp\vehicles\vehicle::isvehicle()) {
+  } else if(level.disable_super_in_turret.ref_146F8 && var_4 && isexplosivedamagemod(var_0.meansofdeath) && isDefined(var_0.inflictor) && var_0.inflictor scripts\cp_mp\vehicles\vehicle::isvehicle()) {
     var_1 = 0;
   } else if(var_4 && (var_0.meansofdeath == "MOD_GRENADE_SPLASH" || var_0.meansofdeath == "MOD_EXPLOSIVE")) {
     var_1 = var_0.damage * getdvarfloat("scr_br_zxp_explosive_dmg_multiplier", 3);
   } else if(var_2 && !var_4 && var_0.meansofdeath == "MOD_MELEE") {
     var_8 = var_0.victim.maxhealth;
-    var_9 = level.disable_super_in_turret.ref_146cf;
+    var_9 = level.disable_super_in_turret.ref_146CF;
 
     if(istrue(var_0.victim.isjuggernaut)) {
-      var_9 = level.disable_super_in_turret.ref_146d0;
+      var_9 = level.disable_super_in_turret.ref_146D0;
     }
 
-    if(!level.disable_super_in_turret.ref_146bf) {
+    if(!level.disable_super_in_turret.ref_146BF) {
       var_8 += var_0.victim.br_maxarmorhealth;
     }
 
     var_1 = int(ceil(var_8 / var_9));
-  } else if(var_4 && var_3 && istrue(var_0.victim.ref_1423b)) {
+  } else if(var_4 && var_3 && istrue(var_0.victim.ref_1423B)) {
     var_1 = 0;
   } else if(var_2 && !var_4 && var_0.meansofdeath == "MOD_IMPACT" && var_5 == "rock_mp") {
     var_10 = spawnStruct();
@@ -144,9 +144,9 @@ function modifyplayerdamage(var_0) {
         case "sniper":
           if(var_0.shitloc == "head" || var_0.shitloc == "helmet") {
             if(scripts\mp\gametypes\br::usefailvehiclemsg(var_12)) {
-              var_1 = int(ceil(level.disable_super_in_turret.ref_146bd * var_11));
+              var_1 = int(ceil(level.disable_super_in_turret.ref_146BD * var_11));
             } else {
-              var_1 = level.disable_super_in_turret.ref_146bd;
+              var_1 = level.disable_super_in_turret.ref_146BD;
             }
           }
 
@@ -160,7 +160,7 @@ function modifyplayerdamage(var_0) {
               var_16 += scripts\mp\gametypes\br_armor::getdefaultmaxarmorhealth();
             }
 
-            var_1 = int(ceil(var_1 / var_16 * level.disable_super_in_turret.ref_146bd * level.disable_super_in_turret.ref_146bc));
+            var_1 = int(ceil(var_1 / var_16 * level.disable_super_in_turret.ref_146BD * level.disable_super_in_turret.ref_146BC));
           }
 
           break;
@@ -201,28 +201,28 @@ function nukefridgewatcher() {
   return scripts\common\vehicle::isvehicle() || isDefined(self.classname) && self.classname == "script_vehicle";
 }
 
-function ref_11ca1(var_0) {
+function ref_11CA1(var_0) {
   var_1 = var_0.damage;
   var_2 = var_0.victim;
-  var_3 = isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125f3();
+  var_3 = isPlayer(var_0.attacker) && var_0.attacker scripts\mp\gametypes\br_public::ref_125F3();
   var_4 = var_2.vehiclename;
 
   if(var_3 && var_0.meansofdeath == "MOD_MELEE") {
     switch (var_4) {
       case "atv":
-        var_1 = var_2.maxhealth / level.disable_super_in_turret.ref_146cc;
+        var_1 = var_2.maxhealth / level.disable_super_in_turret.ref_146CC;
         break;
       case "tac_rover":
       case "jeep":
-        var_1 = var_2.maxhealth / level.disable_super_in_turret.ref_146cd;
+        var_1 = var_2.maxhealth / level.disable_super_in_turret.ref_146CD;
         break;
       case "cargo_truck_mg":
       case "cargo_truck":
-        var_1 = var_2.maxhealth / level.disable_super_in_turret.ref_146d1;
+        var_1 = var_2.maxhealth / level.disable_super_in_turret.ref_146D1;
         break;
       case "little_bird_mg":
       case "little_bird":
-        var_1 = var_2.maxhealth / level.disable_super_in_turret.ref_146ce;
+        var_1 = var_2.maxhealth / level.disable_super_in_turret.ref_146CE;
         break;
       default:
         break;
@@ -234,7 +234,7 @@ function ref_11ca1(var_0) {
   return var_1;
 }
 
-function ref_11b80(var_0, var_1) {
+function ref_11B80(var_0, var_1) {
   if(!scripts\mp\flags::gameflag("prematch_done")) {
     return true;
   }
@@ -243,15 +243,15 @@ function ref_11b80(var_0, var_1) {
 
   if(var_2) {
     var_0.respawningfromtoken = 1;
-  } else if(scripts\mp\gametypes\br_public::ref_125f3()) {
+  } else if(scripts\mp\gametypes\br_public::ref_125F3()) {
     thread ref_12538();
   }
 
   return !var_2;
 }
 
-function ref_1365d(var_0) {
-  if(istrue(var_0.br_infilstarted) && scripts\mp\flags::gameflag("prematch_done") && var_0 scripts\mp\gametypes\br_public::ref_125f3()) {
+function ref_1365D(var_0) {
+  if(istrue(var_0.br_infilstarted) && scripts\mp\flags::gameflag("prematch_done") && var_0 scripts\mp\gametypes\br_public::ref_125F3()) {
     ref_12645(var_0);
     return true;
   }
@@ -259,7 +259,7 @@ function ref_1365d(var_0) {
   return false;
 }
 
-function ref_11b16() {
+function ref_11B16() {
   if(!scripts\mp\flags::gameflag("prematch_done")) {
     return false;
   }
@@ -269,27 +269,27 @@ function ref_11b16() {
 
 function playershouldzombiespawn(var_0) {
   if(!istrue(var_0)) {
-    if(scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(scripts\mp\gametypes\br_public::ref_125F3()) {
       return false;
     }
   }
 
-  if(!istrue(self.br_infilstarted) || !scripts\mp\flags::gameflag("prematch_done") || level.gameended || !level.disable_super_in_turret.ref_146e7) {
+  if(!istrue(self.br_infilstarted) || !scripts\mp\flags::gameflag("prematch_done") || level.gameended || !level.disable_super_in_turret.ref_146E7) {
     return false;
   }
 
   return true;
 }
 
-function ref_126d2(var_0) {
+function ref_126D2(var_0) {
   if(!istrue(var_0)) {
-    if(scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(scripts\mp\gametypes\br_public::ref_125F3()) {
       thread ref_12538();
       return false;
     }
   }
 
-  if(!istrue(self.br_infilstarted) || !scripts\mp\flags::gameflag("prematch_done") || level.gameended || !level.disable_super_in_turret.ref_146e7) {
+  if(!istrue(self.br_infilstarted) || !scripts\mp\flags::gameflag("prematch_done") || level.gameended || !level.disable_super_in_turret.ref_146E7) {
     return false;
   }
 
@@ -297,7 +297,7 @@ function ref_126d2(var_0) {
   return true;
 }
 
-function ref_125f7(var_0, var_1) {
+function ref_125F7(var_0, var_1) {
   if(!istrue(self.br_infilstarted) || !scripts\mp\flags::gameflag("prematch_done")) {
     return false;
   }
@@ -306,11 +306,11 @@ function ref_125f7(var_0, var_1) {
     return true;
   }
 
-  if(istrue(self.ref_12ca8)) {
+  if(istrue(self.ref_12CA8)) {
     return true;
   }
 
-  if(istrue(self.respawningfromtoken) && !scripts\mp\gametypes\br_public::ref_125f3()) {
+  if(istrue(self.respawningfromtoken) && !scripts\mp\gametypes\br_public::ref_125F3()) {
     self.respawningfromtoken = undefined;
     thread ref_12723(0);
   } else if(!scripts\mp\utility\damage::playershoulddofauxdeath(0)) {
@@ -326,10 +326,10 @@ function ref_12538() {
   self setscriptablepartstate("compassicon", "defaulticon");
   self setscriptablepartstate("skydiveVfx", "default", 0);
 
-  if(level.disable_super_in_turret.ref_1470c) {
-    ref_125da();
+  if(level.disable_super_in_turret.ref_1470C) {
+    ref_125DA();
 
-    if(!level.disable_super_in_turret.ref_1470d) {
+    if(!level.disable_super_in_turret.ref_1470D) {
       self setscriptablepartstate("headVFX", "neutral");
     }
 
@@ -338,12 +338,12 @@ function ref_12538() {
 
   waittillframeend();
   ref_12681(0, 1);
-  ref_1262b(0);
+  ref_1262B(0);
 }
 
-function ref_125da() {
+function ref_125DA() {
   foreach(var_1 in level.players) {
-    if(!var_1 scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(!var_1 scripts\mp\gametypes\br_public::ref_125F3()) {
       var_1 hudoutlinedisableforclient(self);
     }
   }
@@ -353,8 +353,8 @@ function ref_12681(var_0, var_1) {
   self.iszombie = var_0;
   ref_12682(var_0);
 
-  if(isDefined(level.disable_super_in_turret.ref_11b5b)) {
-    scripts\mp\gametypes\br_gametype_zxp::ref_126e6(var_0);
+  if(isDefined(level.disable_super_in_turret.ref_11B5B)) {
+    scripts\mp\gametypes\br_gametype_zxp::ref_126E6(var_0);
   }
 
   if(var_0) {
@@ -364,30 +364,30 @@ function ref_12681(var_0, var_1) {
       ref_12725();
     }
 
-    self.ref_11f39 = 0;
+    self.ref_11F39 = 0;
     self.bcdisabled = 1;
     self.plunderlimit = 1;
-    ref_1267d(0);
+    ref_1267D(0);
     scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_removecallout(7);
     scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_removecallout(9);
     scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_removecallout(10);
     scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_removecallout(11);
-    ref_14033("numVaccine", self.ref_11f39);
+    ref_14033("numVaccine", self.ref_11F39);
   } else {
     self notify("zombie_unset");
-    self.ref_11f39 = undefined;
+    self.ref_11F39 = undefined;
     self.bcdisabled = undefined;
     self.plunderlimit = undefined;
     scripts\cp\vehicles\little_bird_mg_cp::calloutmarkerping_removecallout(7);
 
-    if(isDefined(level.disable_super_in_turret.ref_11b5b) && !istrue(level.disable_super_in_turret.showdogtagstohumans)) {
-      scripts\mp\gametypes\br_gametype_zxp::ref_125ce();
+    if(isDefined(level.disable_super_in_turret.ref_11B5B) && !istrue(level.disable_super_in_turret.showdogtagstohumans)) {
+      scripts\mp\gametypes\br_gametype_zxp::ref_125CE();
     }
   }
 
   level notify("players_remaining_changed");
   scripts\cp_mp\utility\train_utility::br_ammorestock_playerupdatestructures();
-  scripts\mp\gametypes\br_comms_tower::ref_126e0();
+  scripts\mp\gametypes\br_comms_tower::ref_126E0();
 
   if(isDefined(level.playerupdateboatpromptsfunc)) {
     self[[level.playerupdateboatpromptsfunc]](self.iszombie);
@@ -398,7 +398,7 @@ function ref_12681(var_0, var_1) {
   if(istrue(var_1)) {
     self lerpfovbypreset("default");
 
-    if(level.disable_super_in_turret.ref_1470d) {
+    if(level.disable_super_in_turret.ref_1470D) {
       thread scripts\mp\supers\super_deadsilence::superdeadsilence_endhudsequence();
       return;
     }
@@ -419,7 +419,7 @@ function spawnangle(var_0) {
     var_4 = level.teamdata[var_3]["players"];
 
     foreach(var_6 in var_4) {
-      if(var_6 scripts\mp\gametypes\br_public::ref_125f3()) {
+      if(var_6 scripts\mp\gametypes\br_public::ref_125F3()) {
         if(level.disable_super_in_turret.spawndistancemax) {
           ref_12700(var_6);
         }
@@ -438,16 +438,16 @@ function vandalize_target_think(var_0) {
     return false;
   }
 
-  if(!isalive(var_0) && !istrue(var_0.respawningfromtoken) && !var_0 scripts\mp\gametypes\br_public::ref_125f3()) {
+  if(!isalive(var_0) && !istrue(var_0.respawningfromtoken) && !var_0 scripts\mp\gametypes\br_public::ref_125F3()) {
     return false;
   }
 
-  return !istrue(var_0.delay_enter_combat_after_investigating_grenade) || var_0 scripts\mp\gametypes\br_public::ref_125f3();
+  return !istrue(var_0.delay_enter_combat_after_investigating_grenade) || var_0 scripts\mp\gametypes\br_public::ref_125F3();
 }
 
 function get_chopper_minigun_start_node(var_0) {
   if(var_0.scriptablename == "brloot_zmb_stim") {
-    if(self.ref_11f39 >= level.disable_super_in_turret.ref_146d2) {
+    if(self.ref_11F39 >= level.disable_super_in_turret.ref_146D2) {
       return 12;
     }
 
@@ -462,7 +462,7 @@ function ref_12725() {
   var_1 = 120;
   var_2 = 180;
   self.spawnboardroom_juggdrop = ref_12530(var_0, var_1, "right", "middle", "center", "middle", &"MP_ZXP/NUM_CONSUMED", 0);
-  self.spawnboardroom_loadoutdrop = ref_12530(var_0, var_1, "left", "middle", "center", "middle", &"MP_ZXP/NUM_TO_CONSUME", level.disable_super_in_turret.ref_146d2);
+  self.spawnboardroom_loadoutdrop = ref_12530(var_0, var_1, "left", "middle", "center", "middle", &"MP_ZXP/NUM_TO_CONSUME", level.disable_super_in_turret.ref_146D2);
   self.spawndomplateflag = ref_12530(0, var_2, "center", "middle", "center", "middle", &"MP_ZXP/ZOMBIE");
 }
 
@@ -508,53 +508,53 @@ function ref_12723(var_0, var_1) {
     return;
   }
 
-  if(!isDefined(level.teamdata[self.team]["lastZombieTime"]) && !isDefined(level.ref_12d05)) {
+  if(!isDefined(level.teamdata[self.team]["lastZombieTime"]) && !isDefined(level.ref_12D05)) {
     scripts\mp\gametypes\br_public::dmztut_luicallback("zmb_need_someone_alive", self.team);
   }
 
-  ref_131cd(self.team);
-  ref_1267d(1);
+  ref_131CD(self.team);
+  ref_1267D(1);
   ref_12727(1);
   waittillframeend();
   ref_12681(1);
 
   if(istrue(var_1)) {
-    scripts\mp\gametypes\br::ref_13f21(self, "outbreak");
+    scripts\mp\gametypes\br::ref_13F21(self, "outbreak");
   } else {
-    self.ref_12ca8 = 1;
+    self.ref_12CA8 = 1;
   }
 
-  if(isDefined(level.ref_12d05)) {
+  if(isDefined(level.ref_12D05)) {
     ref_12645();
   } else if(var_0) {
-    ref_126ee();
+    ref_126EE();
   } else {
     ref_12645();
   }
 
   jumpiffalse(scripts\mp\gametypes\br_gametypes::tutorial_showtext("playerGetZombieSpawnLocation")) LOC_000000e9;
-  var_2 = scripts\mp\gametypes\br_gametypes::ref_12e05("playerGetZombieSpawnLocation");
+  var_2 = scripts\mp\gametypes\br_gametypes::ref_12E05("playerGetZombieSpawnLocation");
   var_3 = var_2[0];
   var_4 = var_2[1];
   var_2 = undefined;
   goto LOC_00000101;
 }
 
-function ref_1264b(var_0) {
-  if(scripts\mp\gametypes\br_public::ref_125f3()) {
-    if(istrue(self.ref_146c0)) {
-      return int(level.disable_super_in_turret.ref_146e5 * var_0);
+function ref_1264B(var_0) {
+  if(scripts\mp\gametypes\br_public::ref_125F3()) {
+    if(istrue(self.ref_146C0)) {
+      return int(level.disable_super_in_turret.ref_146E5 * var_0);
     } else {
-      return int(level.disable_super_in_turret.ref_146e6 * var_0);
+      return int(level.disable_super_in_turret.ref_146E6 * var_0);
     }
   }
 
   return undefined;
 }
 
-function ref_1262b(var_0) {
+function ref_1262B(var_0) {
   if(!istrue(level.disable_super_in_turret.zombiecanseeandopenloot)) {
-    scripts\mp\gametypes\br_public::ref_125cf(var_0);
+    scripts\mp\gametypes\br_public::ref_125CF(var_0);
   }
 
   if(var_0) {
@@ -572,18 +572,18 @@ function ref_1262b(var_0) {
   self enableweaponpickup();
 }
 
-function ref_131cd(var_0) {
+function ref_131CD(var_0) {
   level.teamdata[var_0]["lastZombieTime"] = gettime();
 }
 
-function ref_1267d(var_0) {
+function ref_1267D(var_0) {
   self.tut_popup_listener = var_0;
 }
 
 function ref_12727(var_0) {
   var_1 = self.team;
-  scripts\mp\utility\teams::ref_140c9("mode", var_1, self);
-  ref_126d8();
+  scripts\mp\utility\teams::ref_140C9("mode", var_1, self);
+  ref_126D8();
 
   if(istrue(var_0)) {
     [[level.updategameevents]]();
@@ -618,16 +618,16 @@ function kioskfiresaledoneforplayer(var_0, var_1) {
   }
 }
 
-function ref_125fa() {
-  return isDefined(self.ref_1472f);
+function ref_125FA() {
+  return isDefined(self.ref_1472F);
 }
 
-function ref_1264a(var_0) {
-  if(scripts\mp\gametypes\br_public::ref_125f3()) {
-    if(istrue(self.ref_146c0)) {
-      return (1 / level.disable_super_in_turret.ref_146e3 * var_0);
+function ref_1264A(var_0) {
+  if(scripts\mp\gametypes\br_public::ref_125F3()) {
+    if(istrue(self.ref_146C0)) {
+      return (1 / level.disable_super_in_turret.ref_146E3 * var_0);
     } else {
-      return (1 / level.disable_super_in_turret.ref_146e4 * var_0);
+      return (1 / level.disable_super_in_turret.ref_146E4 * var_0);
     }
   }
 
@@ -635,10 +635,10 @@ function ref_1264a(var_0) {
 }
 
 function onuse(var_0) {
-  thread ref_120a7(var_0);
+  thread ref_120A7(var_0);
 }
 
-function ref_120a7(var_0) {
+function ref_120A7(var_0) {
   if(!isDefined(var_0)) {
     thread scripts\mp\gametypes\br_gametype_zxp::removelootsyringe(self);
     return;
@@ -654,31 +654,31 @@ function ref_120a7(var_0) {
 
   thread scripts\mp\gametypes\br_gametype_zxp::removelootsyringe(self, undefined, var_0);
 
-  if(var_0.ref_11f39 >= level.disable_super_in_turret.ref_146d2) {
+  if(var_0.ref_11F39 >= level.disable_super_in_turret.ref_146D2) {
     return;
   }
 
-  var_0.ref_11f39++;
+  var_0.ref_11F39++;
 
   if(level.disable_super_in_turret.spawndistancemax) {
-    ref_125d4(var_0);
+    ref_125D4(var_0);
   }
 
-  ref_14033(var_0, "numVaccine", var_0.ref_11f39);
+  ref_14033(var_0, "numVaccine", var_0.ref_11F39);
 
-  if(isDefined(level.disable_super_in_turret.ref_11b5b) && var_0.ref_11f39 >= level.disable_super_in_turret.ref_146d2) {
-    var_0 thread scripts\mp\gametypes\br_gametype_zxp::ref_126fa();
+  if(isDefined(level.disable_super_in_turret.ref_11B5B) && var_0.ref_11F39 >= level.disable_super_in_turret.ref_146D2) {
+    var_0 thread scripts\mp\gametypes\br_gametype_zxp::ref_126FA();
     return;
   }
 }
 
 function playercanusetags(var_0) {
-  return var_0 scripts\mp\gametypes\br_public::ref_125f3();
+  return var_0 scripts\mp\gametypes\br_public::ref_125F3();
 }
 
-function ref_125d4() {
+function ref_125D4() {
   var_0 = (0, 1, 0);
-  self.spawnboardroom_juggdrop setvalue(self.ref_11f39);
+  self.spawnboardroom_juggdrop setvalue(self.ref_11F39);
   thread spawn_vindia_assault3(self.spawnboardroom_juggdrop);
   thread spawn_vindia_assault3(self.spawnboardroom_loadoutdrop);
 }
@@ -686,13 +686,13 @@ function ref_125d4() {
 function spawn_vindia_assault3(var_0) {
   self endon("death");
 
-  if(istrue(self.ref_1293b)) {
+  if(istrue(self.ref_1293B)) {
     return;
   }
 
   var_1 = 0.5;
   var_2 = 4;
-  self.ref_1293b = 1;
+  self.ref_1293B = 1;
   var_3 = self.fontscale;
   var_4 = self.color;
 
@@ -707,10 +707,10 @@ function spawn_vindia_assault3(var_0) {
   self.fontscale = var_3;
   wait var_1;
   self.color = var_4;
-  self.ref_1293b = undefined;
+  self.ref_1293B = undefined;
 }
 
-function ref_125fc() {
+function ref_125FC() {
   var_0 = spawnStruct();
   var_0.current = self getcurrentprimaryweapon();
   var_0.ref_12889 = [];
@@ -772,11 +772,11 @@ function ref_125fc() {
     var_0.super = self.equipment["super"];
   }
 
-  self.ref_1472f = var_0;
+  self.ref_1472F = var_0;
 }
 
-function ref_126ee() {
-  if(scripts\mp\gametypes\br_public::ref_125f3()) {
+function ref_126EE() {
+  if(scripts\mp\gametypes\br_public::ref_125F3()) {
     self waittill("spawnZombie");
     return;
   }
@@ -800,7 +800,7 @@ function run_track_enemy_patrollers(var_0, var_1, var_2) {
   return [undefined, undefined];
 }
 
-function ref_1270e() {
+function ref_1270E() {
   var_0 = undefined;
   var_1 = undefined;
   var_2 = getdvarfloat("scr_br_zxp_respawnTeamOffset", 10000);
@@ -877,7 +877,7 @@ function rocket_fuel_stability(var_0, var_1) {
 function ref_12582() {
   var_0 = 50;
   var_1 = 10000;
-  var_2 = ref_1270e();
+  var_2 = ref_1270E();
   var_3 = var_2[0];
   var_4 = var_2[1];
   var_2 = undefined;
@@ -887,7 +887,7 @@ function ref_12582() {
     return [var_3, var_4];
   }
 
-  if(!isDefined(level.br_circle) || !isDefined(level.br_circle.dangercircleent) || istrue(level.disable_super_in_turret.ref_146fb)) {
+  if(!isDefined(level.br_circle) || !isDefined(level.br_circle.dangercircleent) || istrue(level.disable_super_in_turret.ref_146FB)) {
     return [self.origin, self getplayerangles()];
   }
 
@@ -954,7 +954,7 @@ function ref_12582() {
 function ref_12722(var_0, var_1) {
   var_2 = var_0;
 
-  if(level.disable_super_in_turret.ref_146fc) {
+  if(level.disable_super_in_turret.ref_146FC) {
     var_3 = getdvarint("scr_br_zxp_respawnZombieHeight", 10000);
     var_4 = (0, 0, var_3);
     var_0 = scripts\mp\gametypes\br::getoffsetspawnorigin(var_0, var_4);
@@ -962,17 +962,17 @@ function ref_12722(var_0, var_1) {
     var_5.origin = var_0;
     var_5.angles = var_1;
     var_5.height = var_3;
-    var_2 = scripts\mp\gametypes\br_gulag::ref_1263e(var_5);
+    var_2 = scripts\mp\gametypes\br_gulag::ref_1263E(var_5);
   } else {
     self calloutmarkerping_getinventoryslot(0);
-    scripts\mp\gametypes\br_public::ref_126b9(var_2);
+    scripts\mp\gametypes\br_public::ref_126B9(var_2);
   }
 
   return [var_0, var_2];
 }
 
-function ref_126bd(var_0, var_1, var_2) {
-  scripts\mp\gametypes\br_gulag::ref_126c3(var_2, var_1);
+function ref_126BD(var_0, var_1, var_2) {
+  scripts\mp\gametypes\br_gulag::ref_126C3(var_2, var_1);
   var_3 = spawn("script_model", var_2);
   var_3 setModel("tag_origin");
   var_3.angles = var_1;
@@ -982,8 +982,8 @@ function ref_126bd(var_0, var_1, var_2) {
   self playerhide();
   thread scripts\mp\gametypes\br_gulag::ref_12524(var_3);
   waitframe();
-  scripts\mp\gametypes\br_public::ref_126ed();
-  scripts\mp\gametypes\br_public::ref_1252b();
+  scripts\mp\gametypes\br_public::ref_126ED();
+  scripts\mp\gametypes\br_public::ref_1252B();
   var_3.origin = var_0;
   waitframe();
   self unlink();
@@ -993,14 +993,14 @@ function ref_126bd(var_0, var_1, var_2) {
   self playershow();
   var_4 = 0;
 
-  if(isDefined(level.ref_121cc)) {
-    var_4 = level.ref_121cc;
+  if(isDefined(level.ref_121CC)) {
+    var_4 = level.ref_121CC;
   }
 
   thread scripts\cp_mp\parachute::startfreefall(var_4, 0, undefined, undefined, 1);
   self setclientomnvar("ui_br_transition_type", 0);
   self setclientomnvar("ui_show_spectateHud", -1);
-  scripts\mp\gametypes\br_gulag::ref_12c7a();
+  scripts\mp\gametypes\br_gulag::ref_12C7A();
   wait 0.5;
   scripts\mp\gametypes\br_gulag::gulagfadefromblack();
   waitframe();
@@ -1008,14 +1008,14 @@ function ref_126bd(var_0, var_1, var_2) {
   self notify("can_show_splashes");
 }
 
-function ref_126ff() {
+function ref_126FF() {
   self endon("death_or_disconnect");
   self endon("zombie_unset");
 
-  if(level.disable_super_in_turret.ref_1470c) {
+  if(level.disable_super_in_turret.ref_1470C) {
     self hudoutlinedisable();
 
-    if(!level.disable_super_in_turret.ref_1470d) {
+    if(!level.disable_super_in_turret.ref_1470D) {
       self setscriptablepartstate("headVFX", "zombieVision");
     }
 
@@ -1042,7 +1042,7 @@ function ref_126ff() {
 function playerzombieambienceoverride() {
   self endon("disconnect");
   self setclienttriggeraudiozonepartial("player_is_zombie", "ambient");
-  scripts\engine\utility::ref_143a5("zombie_unset", "death");
+  scripts\engine\utility::ref_143A5("zombie_unset", "death");
   self clearclienttriggeraudiozone(1);
 }
 
@@ -1055,7 +1055,7 @@ function ref_12713() {
   }
 
   foreach(var_3 in var_1) {
-    if(!var_3 scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(!var_3 scripts\mp\gametypes\br_public::ref_125F3()) {
       scripts\mp\utility\outline::outlineenableforplayer(var_3, self, "outline_depth_zombievision_enemy", "top");
     }
   }
@@ -1066,32 +1066,32 @@ function playerhumanhudoutlineenable() {
   var_1 = scripts\mp\utility\teams::getenemyplayers(self.team, 1);
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3) && var_3 scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(isDefined(var_3) && var_3 scripts\mp\gametypes\br_public::ref_125F3()) {
       scripts\mp\utility\outline::outlineenableforplayer(self, var_3, "outline_depth_zombievision_friendly", "top");
     }
   }
 
   foreach(var_3 in var_1) {
-    if(isDefined(var_3) && var_3 scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(isDefined(var_3) && var_3 scripts\mp\gametypes\br_public::ref_125F3()) {
       scripts\mp\utility\outline::outlineenableforplayer(self, var_3, "outline_depth_zombievision_enemy", "top");
     }
   }
 }
 
-function ref_1270d() {
+function ref_1270D() {
   level endon("game_ended");
   self endon("zombie_unset");
   self endon("disconnect");
-  self.ref_146c0 = undefined;
+  self.ref_146C0 = undefined;
 
   for(;;) {
     if(ref_12714()) {
-      if(!isDefined(self.ref_146c0) || !self.ref_146c0) {
-        self.ref_146c0 = 1;
+      if(!isDefined(self.ref_146C0) || !self.ref_146C0) {
+        self.ref_146C0 = 1;
         ref_12705();
       }
-    } else if(!isDefined(self.ref_146c0) || self.ref_146c0) {
-      self.ref_146c0 = 0;
+    } else if(!isDefined(self.ref_146C0) || self.ref_146C0) {
+      self.ref_146C0 = 0;
       ref_12706();
     }
 
@@ -1107,19 +1107,19 @@ function ref_12705() {
 function ref_12706() {
   self notify("zombie_exit_gas");
 
-  if(level.disable_super_in_turret.ref_146d5 >= 0) {
-    if(level.disable_super_in_turret.ref_146d5 == 0) {
+  if(level.disable_super_in_turret.ref_146D5 >= 0) {
+    if(level.disable_super_in_turret.ref_146D5 == 0) {
       self setperk("specialty_radarblip", 1);
       return;
     }
 
-    thread ref_1271f();
+    thread ref_1271F();
     return;
   }
 }
 
-function ref_1271f() {
-  if(level.disable_super_in_turret.ref_146d5 <= 0) {
+function ref_1271F() {
+  if(level.disable_super_in_turret.ref_146D5 <= 0) {
     return;
   }
 
@@ -1130,9 +1130,9 @@ function ref_1271f() {
 
   for(;;) {
     self setperk("specialty_radarblip", 1);
-    wait level.disable_super_in_turret.ref_146d6;
+    wait level.disable_super_in_turret.ref_146D6;
     self unsetperk("specialty_radarblip", 1);
-    wait level.disable_super_in_turret.ref_146d5;
+    wait level.disable_super_in_turret.ref_146D5;
   }
 }
 
@@ -1148,15 +1148,15 @@ function ref_12714() {
 
 function ref_12724() {
   self endon("disconnect");
-  self.ref_133e9 = 1;
+  self.ref_133E9 = 1;
   self.radarmode = "normal_radar";
   self.hasradar = 1;
   self waittill("zombie_unset");
-  self.ref_133e9 = undefined;
+  self.ref_133E9 = undefined;
   self.hasradar = 0;
 }
 
-function ref_1272a() {
+function ref_1272A() {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self endon("zombie_unset");
@@ -1182,7 +1182,7 @@ function ref_12710(var_0, var_1) {
   wait 1;
 
   while(!self isonground()) {
-    ref_125b8(var_0);
+    ref_125B8(var_0);
     waitframe();
   }
 
@@ -1195,7 +1195,7 @@ function ref_12710(var_0, var_1) {
   var_2 = gettime() + 2000;
 
   while(self getcurrentprimaryweapon().classname == "none" && gettime() < var_2) {
-    ref_125b8(var_0);
+    ref_125B8(var_0);
     waitframe();
   }
 
@@ -1235,7 +1235,7 @@ function ref_12710(var_0, var_1) {
   self freezelookcontrols(1);
   self allowsprint(0);
   thread ref_12720();
-  ref_125b8(var_0);
+  ref_125B8(var_0);
 
   if(istrue(self.respawnedfromoutbreak)) {
     self.respawnedfromoutbreak = undefined;
@@ -1259,7 +1259,7 @@ function ref_12710(var_0, var_1) {
   self allowsprint(1);
 }
 
-function ref_125b8(var_0) {
+function ref_125B8(var_0) {
   if(!self hasweapon(var_0)) {
     scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0, undefined, undefined, 1);
   }
@@ -1270,7 +1270,7 @@ function ref_125b8(var_0) {
   }
 }
 
-function ref_11ecd(var_0) {
+function ref_11ECD(var_0) {
   foreach(var_2 in level.players) {
     if(!isalive(var_2)) {
       continue;
@@ -1286,24 +1286,24 @@ function ref_11ecd(var_0) {
 }
 
 function clear_tier_lights_all(var_0) {
-  ref_11ecd(var_0);
+  ref_11ECD(var_0);
 
   foreach(var_2 in var_0) {
     var_3 = level.teamdata[var_2]["alivePlayers"];
 
     foreach(var_5 in var_3) {
-      if(isalive(var_5) && !var_5 scripts\mp\gametypes\br_public::ref_125f3()) {
+      if(isalive(var_5) && !var_5 scripts\mp\gametypes\br_public::ref_125F3()) {
         if(level.disable_super_in_turret.spawndomplateflagtestmap) {
-          ref_125fc(var_5);
+          ref_125FC(var_5);
         }
 
-        ref_1250e(var_5);
+        ref_1250E(var_5);
       }
     }
   }
 }
 
-function ref_1250e() {
+function ref_1250E() {
   if(istrue(self.inlaststand)) {
     scripts\mp\laststand::playanim_aibegindismountturret("self_revive_success", self);
   }
@@ -1335,9 +1335,9 @@ function onplayerdamaged(var_0) {
 
   var_2 = isDefined(var_0.attacker) && isDefined(var_0.attacker.ref_12369);
   var_3 = var_0.victim getentitynumber();
-  var_4 = var_2 && isDefined(var_0.attacker.ref_12369.ref_13a72) && isDefined(var_0.attacker.ref_12369.ref_13a72[var_3]) && var_0.attacker.ref_12369.ref_13a72[var_3] == var_0.victim;
+  var_4 = var_2 && isDefined(var_0.attacker.ref_12369.ref_13A72) && isDefined(var_0.attacker.ref_12369.ref_13A72[var_3]) && var_0.attacker.ref_12369.ref_13A72[var_3] == var_0.victim;
 
-  if(var_0.victim scripts\mp\gametypes\br_public::ref_125f3() && var_4) {
+  if(var_0.victim scripts\mp\gametypes\br_public::ref_125F3() && var_4) {
     thread removepingondamageheadicon(var_0.attacker, var_0.victim);
     return;
   }
@@ -1365,19 +1365,19 @@ function ref_12612(var_0, var_1) {
 }
 
 function ref_13283() {
-  if(!level.disable_super_in_turret.ref_146e2) {
+  if(!level.disable_super_in_turret.ref_146E2) {
     return;
   }
 
   level.disable_super_in_turret.ref_14693 = spawnStruct();
   level.disable_super_in_turret.ref_14693.powers = [];
   battlepassxpmultipliers(level.disable_super_in_turret.ref_14693, "jump", ["+speed_throw", "+toggleads_throw", "+ads_akimbo_accessible"], &ref_12716, 0, undefined, &ref_12718, undefined, &"MP_ZXP/CHARGED_JUMP", undefined, 6, "jumpStatus", "jumpProgress");
-  battlepassxpmultipliers(level.disable_super_in_turret.ref_14693, "jumpStop", ["-speed_throw", "-toggleads_throw", "-ads_akimbo_accessible"], &ref_1271b, 0);
-  battlepassxpmultipliers(level.disable_super_in_turret.ref_14693, "gas", "+smoke", &ref_12707, 0, &ref_1270a, &ref_12708, &ref_12709, &"MP_ZXP/GAS_GRENADE", undefined, 15, "gasGrenadeStatus", "gasGrenadeProgress");
+  battlepassxpmultipliers(level.disable_super_in_turret.ref_14693, "jumpStop", ["-speed_throw", "-toggleads_throw", "-ads_akimbo_accessible"], &ref_1271B, 0);
+  battlepassxpmultipliers(level.disable_super_in_turret.ref_14693, "gas", "+smoke", &ref_12707, 0, &ref_1270A, &ref_12708, &ref_12709, &"MP_ZXP/GAS_GRENADE", undefined, 15, "gasGrenadeStatus", "gasGrenadeProgress");
   battlepassxpmultipliers(level.disable_super_in_turret.ref_14693, "emp", "+frag", &ref_12703, 0, undefined, undefined, undefined, &"MP_ZXP/EMP", undefined, 15, "empStatus", "empProgress");
 
   if(getdvarint("scr_br_zxp_bumper_ping_support", 1)) {
-    battlepassxpmultipliers(level.disable_super_in_turret.ref_14693, "gas_or_emp", ["+equip_toggle_throw"], &ref_1270b, 0, undefined, &ref_1270c);
+    battlepassxpmultipliers(level.disable_super_in_turret.ref_14693, "gas_or_emp", ["+equip_toggle_throw"], &ref_1270B, 0, undefined, &ref_1270C);
     return;
   }
 }
@@ -1396,18 +1396,18 @@ function battlepassxpmultipliers(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   var_0.powers[var_1] = spawnStruct();
   var_0.powers[var_1].clients_hacked = var_2;
   var_0.powers[var_1].func = var_3;
-  var_0.powers[var_1].ref_1387b = var_5;
+  var_0.powers[var_1].ref_1387B = var_5;
   var_0.powers[var_1].has_ammo_drain_passive = var_6;
-  var_0.powers[var_1].ref_127fc = var_7;
+  var_0.powers[var_1].ref_127FC = var_7;
   var_0.powers[var_1].label = var_8;
   var_0.powers[var_1].waitforstreamsynccomplete = var_9;
   var_0.powers[var_1].idmask = var_10;
-  var_0.powers[var_1].ref_1388f = var_11;
-  var_0.powers[var_1].ref_128be = var_12;
+  var_0.powers[var_1].ref_1388F = var_11;
+  var_0.powers[var_1].ref_128BE = var_12;
   var_0.powers[var_1].ref_13060 = var_4;
 }
 
-function ref_1270b(var_0, var_1) {
+function ref_1270B(var_0, var_1) {
   level endon("game_ended");
   self endon("disconnect");
   self notify("playerZombieGasOrEMP");
@@ -1460,7 +1460,7 @@ function ref_12703(var_0, var_1) {
     var_15 dodamage(1, var_9.origin, var_9, var_9, "MOD_EXPLOSIVE", var_18);
     var_15 playsoundonmovingent("zxp_emp_impact_ent");
     var_19 = scripts\cp_mp\utility\damage_utility::packdamagedata(var_9, var_15, 1, var_18, "MOD_EXPLOSIVE", var_9, var_9.origin);
-    thread ref_126f9(var_19);
+    thread ref_126F9(var_19);
     LOC_00000149:
   }
 
@@ -1472,7 +1472,7 @@ function ref_12703(var_0, var_1) {
   }
 
   foreach(var_24 in var_22) {
-    if(var_24 scripts\mp\gametypes\br_public::ref_125f3()) {
+    if(var_24 scripts\mp\gametypes\br_public::ref_125F3()) {
       continue;
     }
 
@@ -1486,11 +1486,11 @@ function ref_12703(var_0, var_1) {
 
     var_24 dodamage(1, var_9.origin, var_9, var_9, "MOD_EXPLOSIVE", var_21);
     var_19 = scripts\cp_mp\utility\damage_utility::packdamagedata(var_9, var_24, 1, var_21, "MOD_EXPLOSIVE", var_9, var_9.origin);
-    thread ref_126f9(var_19);
+    thread ref_126F9(var_19);
     LOC_00000221:
   }
 
-  thread ref_1262c(var_0, var_1);
+  thread ref_1262C(var_0, var_1);
 }
 
 function ref_14697(var_0) {
@@ -1501,7 +1501,7 @@ function ref_14697(var_0) {
   self enableplayerbreathsystem(1);
 }
 
-function ref_1262c(var_0, var_1) {
+function ref_1262C(var_0, var_1) {
   if(level.disable_super_in_turret.spawndistancemax) {
     self.ref_12821[var_1].choppergunner_refillmissiles scripts\mp\hud_util::updatebar(1, 0);
   } else {
@@ -1511,38 +1511,38 @@ function ref_1262c(var_0, var_1) {
   thread ref_12639(var_0, var_1);
 }
 
-function ref_1270c(var_0, var_1) {
+function ref_1270C(var_0, var_1) {
   self notify("playerZombieGasOrEMP");
 }
 
 function ref_12720() {
-  if(!level.disable_super_in_turret.ref_146e2) {
+  if(!level.disable_super_in_turret.ref_146E2) {
     return;
   }
 
-  thread ref_126b4(level.disable_super_in_turret.ref_14693);
+  thread ref_126B4(level.disable_super_in_turret.ref_14693);
 }
 
-function ref_126b4(var_0) {
+function ref_126B4(var_0) {
   thread ref_12637(var_0);
   thread ref_12634(var_0);
   thread ref_12635(var_0);
 
   if(level.disable_super_in_turret.spawndistancemax) {
-    thread ref_1263a(var_0);
+    thread ref_1263A(var_0);
   }
 
   thread ref_12638(var_0);
   thread ref_12630(var_0);
 
   foreach(var_2 in var_0.powers) {
-    if(isDefined(var_0.powers[var_3].ref_1388f)) {
-      ref_14033(var_0.powers[var_3].ref_1388f, 2);
+    if(isDefined(var_0.powers[var_3].ref_1388F)) {
+      ref_14033(var_0.powers[var_3].ref_1388F, 2);
     }
   }
 }
 
-function ref_126f9(var_0) {
+function ref_126F9(var_0) {
   var_1 = 5;
   var_2 = 2;
   scripts\cp_mp\emp_debuff::apply_emp_struct(var_0);
@@ -1572,7 +1572,7 @@ function ref_126f9(var_0) {
   }
 }
 
-function ref_1270a(var_0, var_1) {
+function ref_1270A(var_0, var_1) {
   scripts\mp\equipment::giveequipment("equip_gas_grenade", "secondary");
   scripts\mp\equipment::setequipmentslotammo("secondary", 1);
 }
@@ -1589,7 +1589,7 @@ function ref_12707(var_0, var_1) {
   }
 
   self playSound("zxp_grenade_vo_npc", self, self);
-  thread ref_1262c(var_0, var_1);
+  thread ref_1262C(var_0, var_1);
 }
 
 function ref_12709(var_0, var_1) {
@@ -1614,8 +1614,8 @@ function moraleslaptopthink(var_0, var_1) {
 function ref_12630(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  scripts\engine\utility::ref_143a6("death", "zombie_unset", "zombie_set");
-  thread ref_1262d(var_0);
+  scripts\engine\utility::ref_143A6("death", "zombie_unset", "zombie_set");
+  thread ref_1262D(var_0);
   thread ref_12632(var_0);
   thread ref_12633(var_0);
   thread ref_12631(var_0);
@@ -1662,7 +1662,7 @@ function ref_12634(var_0) {
   foreach(var_6, var_5 in var_0.powers) {
     if(isDefined(var_5.label)) {
       if(level.disable_super_in_turret.spawndistancemax) {
-        self.ref_12821[var_6] = ref_1262f(var_5.label, var_5.waitforstreamsynccomplete, var_3, var_5.ref_13060);
+        self.ref_12821[var_6] = ref_1262F(var_5.label, var_5.waitforstreamsynccomplete, var_3, var_5.ref_13060);
       } else {
         self.ref_12821[var_6] = spawnStruct();
         self.ref_12821[var_6].frac = 0;
@@ -1674,7 +1674,7 @@ function ref_12634(var_0) {
   }
 }
 
-function ref_1262f(var_0, var_1, var_2, var_3) {
+function ref_1262F(var_0, var_1, var_2, var_3) {
   var_4 = scripts\mp\hud_util::createfontstring("default", 1.5);
   var_4.x = 15;
   var_4.y = var_2;
@@ -1701,7 +1701,7 @@ function ref_1262f(var_0, var_1, var_2, var_3) {
   var_5.horzalign = "left_adjustable";
   var_5.vertalign = "top_adjustable";
   var_5.alpha = var_3;
-  ref_132a8(var_5);
+  ref_132A8(var_5);
   var_5.archived = 0;
   var_5.hidewheninmenu = 1;
   var_5.bar.archived = 0;
@@ -1711,7 +1711,7 @@ function ref_1262f(var_0, var_1, var_2, var_3) {
   return var_4;
 }
 
-function ref_132a8(var_0, var_1, var_2, var_3) {
+function ref_132A8(var_0, var_1, var_2, var_3) {
   self.bar.horzalign = self.horzalign;
   self.bar.vertalign = self.vertalign;
   self.bar.alignx = "left";
@@ -1741,7 +1741,7 @@ function ref_12633(var_0) {
   }
 }
 
-function ref_1262d(var_0) {
+function ref_1262D(var_0) {
   if(!isDefined(var_0) || !isDefined(self.ref_12821)) {
     return;
   }
@@ -1768,7 +1768,7 @@ function ref_1262d(var_0) {
   self.vehicle_occupancy_mp_hidecashbag = undefined;
 }
 
-function ref_12bba(var_0) {
+function ref_12BBA(var_0) {
   if(!isDefined(level.teamdata[var_0]["aliveCountHuman"])) {
     return level.teamdata[var_0]["aliveCount"];
   }
@@ -1793,10 +1793,10 @@ function wait_for_chopper_boss_finish_turning(var_0, var_1) {
 
   if(!isalive(var_2) && istrue(var_2.delay_enter_combat_after_investigating_grenade)) {
     if(!level.disable_super_in_turret.fluctuatevalues) {
-      ref_1267d(var_2, 1);
+      ref_1267D(var_2, 1);
     }
 
-    var_5 = scripts\mp\gametypes\br_gulag::ref_125c7(var_0, var_1, 0, 1, "zombiesRevive");
+    var_5 = scripts\mp\gametypes\br_gulag::ref_125C7(var_0, var_1, 0, 1, "zombiesRevive");
     var_3 = var_5[0];
     var_4 = var_5[1];
     var_5 = undefined;
@@ -1805,7 +1805,7 @@ function wait_for_chopper_boss_finish_turning(var_0, var_1) {
   }
 
   var_2.respawningfromtoken = 1;
-  var_6 = var_2 scripts\mp\gametypes\br_gulag::ref_126e8();
+  var_6 = var_2 scripts\mp\gametypes\br_gulag::ref_126E8();
 
   if(var_6) {
     var_2 scripts\mp\utility\lower_message::setlowermessageomnvar(0);
@@ -1814,7 +1814,7 @@ function wait_for_chopper_boss_finish_turning(var_0, var_1) {
   var_2 scripts\mp\hud_message::heartbeat_sensor_pick_up_monitor();
 
   if(level.disable_super_in_turret.fluctuatevalues) {
-    var_2 scripts\mp\gametypes\br_gametype_zxp::ref_126fa(1);
+    var_2 scripts\mp\gametypes\br_gametype_zxp::ref_126FA(1);
   } else {
     ref_12723(var_2, 0);
   }
@@ -1830,8 +1830,8 @@ function wait_for_chopper_boss_finish_turning(var_0, var_1) {
 
 function ref_12638(var_0) {
   foreach(var_2 in var_0.powers) {
-    if(isDefined(var_2.ref_1387b)) {
-      self thread[[var_2.ref_1387b]](var_0, var_3);
+    if(isDefined(var_2.ref_1387B)) {
+      self thread[[var_2.ref_1387B]](var_0, var_3);
     }
   }
 }
@@ -1873,7 +1873,7 @@ function ref_12614() {
   }
 }
 
-function ref_1263a(var_0) {
+function ref_1263A(var_0) {
   level endon("game_ended");
   self endon("zombie_unset");
   self endon("zombie_set");
@@ -1928,7 +1928,7 @@ function ref_12639(var_0, var_1) {
       var_3 = getdvarint(var_4, 0);
     }
 
-    thread ref_126de(var_0, var_1, var_3, int(var_2.frac * 100));
+    thread ref_126DE(var_0, var_1, var_3, int(var_2.frac * 100));
     var_5 = var_2.frac;
     var_3 *= var_5;
 
@@ -1948,31 +1948,31 @@ function ref_12639(var_0, var_1) {
       var_2.frac = 0;
     }
 
-    thread ref_126de(var_0, var_1, 0, 0);
+    thread ref_126DE(var_0, var_1, 0, 0);
   }
 
   if(level.disable_super_in_turret.spawndistancemax) {
     var_2.choppergunner_refillmissiles.bar.color = (1, 1, 1);
   }
 
-  if(isDefined(var_0.powers[var_1].ref_127fc)) {
-    self[[var_0.powers[var_1].ref_127fc]](var_0, var_1);
+  if(isDefined(var_0.powers[var_1].ref_127FC)) {
+    self[[var_0.powers[var_1].ref_127FC]](var_0, var_1);
     return;
   }
 }
 
-function ref_126de(var_0, var_1, var_2, var_3) {
+function ref_126DE(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self endon("zombie_unset");
   self endon("zombie_set");
   self endon("disableCooldown");
 
-  if(!isDefined(var_0.powers[var_1].ref_1388f) || !isDefined(var_0.powers[var_1].ref_128be)) {
+  if(!isDefined(var_0.powers[var_1].ref_1388F) || !isDefined(var_0.powers[var_1].ref_128BE)) {
     return;
   }
 
-  ref_14033(var_0.powers[var_1].ref_1388f, 1);
+  ref_14033(var_0.powers[var_1].ref_1388F, 1);
   var_4 = var_2 * 1000 * var_3 / 100;
   var_5 = gettime();
   var_6 = var_5 + var_4;
@@ -1981,12 +1981,12 @@ function ref_126de(var_0, var_1, var_2, var_3) {
     var_7 = gettime();
     var_8 = (var_6 - gettime()) / var_4;
     var_9 = var_8 * var_3;
-    ref_14033(var_0.powers[var_1].ref_128be, int(var_9));
+    ref_14033(var_0.powers[var_1].ref_128BE, int(var_9));
     waitframe();
   }
 
-  ref_14033(var_0.powers[var_1].ref_128be, 0);
-  ref_14033(var_0.powers[var_1].ref_1388f, 2);
+  ref_14033(var_0.powers[var_1].ref_128BE, 0);
+  ref_14033(var_0.powers[var_1].ref_1388F, 2);
 }
 
 function ref_14033(var_0, var_1) {
@@ -2026,12 +2026,12 @@ function ref_14033(var_0, var_1) {
       break;
   }
 
-  if(!isDefined(level.ref_146e0)) {
-    level.ref_146e0 = [];
+  if(!isDefined(level.ref_146E0)) {
+    level.ref_146E0 = [];
   }
 
-  if(!isDefined(level.ref_146e0["ui_br_zombie_powers"])) {
-    level.ref_146e0["ui_br_zombie_powers"] = 0;
+  if(!isDefined(level.ref_146E0["ui_br_zombie_powers"])) {
+    level.ref_146E0["ui_br_zombie_powers"] = 0;
   }
 
   var_4 = int(pow(2, var_3)) - 1;
@@ -2040,8 +2040,8 @@ function ref_14033(var_0, var_1) {
   var_7 = self calloutmarkerping_entityzoffset("ui_br_zombie_powers");
   var_8 = var_7 &var_6;
   var_9 = var_8 + var_5;
-  level.ref_146e0["ui_br_zombie_powers"] = var_9;
-  self setclientomnvar("ui_br_zombie_powers", level.ref_146e0["ui_br_zombie_powers"]);
+  level.ref_146E0["ui_br_zombie_powers"] = var_9;
+  self setclientomnvar("ui_br_zombie_powers", level.ref_146E0["ui_br_zombie_powers"]);
 }
 
 function ref_12716(var_0, var_1) {
@@ -2068,7 +2068,7 @@ function ref_12716(var_0, var_1) {
     waitframe();
   }
 
-  thread ref_1270f();
+  thread ref_1270F();
   thread ref_13982();
   var_7 = undefined;
   var_8 = 0;
@@ -2078,8 +2078,8 @@ function ref_12716(var_0, var_1) {
     self.vehicle_occupancy_mp_hidecashbag = gettime() + 500;
   }
 
-  jumpiffalse(isDefined(var_0.powers[var_1].ref_1388f)) LOC_00000102;
-  ref_14033(var_0.powers[var_1].ref_1388f, 0);
+  jumpiffalse(isDefined(var_0.powers[var_1].ref_1388F)) LOC_00000102;
+  ref_14033(var_0.powers[var_1].ref_1388F, 0);
 
   while(!ref_12717()) {
     if(level.disable_super_in_turret.spawndistancemax) {
@@ -2099,7 +2099,7 @@ function ref_12716(var_0, var_1) {
           var_7 = gettime() + var_5 * 1000;
 
           if(level.disable_super_in_turret.spawndistancemax) {
-            thread ref_1271a(var_1, var_5);
+            thread ref_1271A(var_1, var_5);
           }
         }
 
@@ -2117,9 +2117,9 @@ function ref_12716(var_0, var_1) {
       self playlocalsound("ui_zxp_charge_jump_full");
     }
 
-    if(isDefined(var_0.powers[var_1].ref_128be)) {
+    if(isDefined(var_0.powers[var_1].ref_128BE)) {
       var_8 = max(int(self.vehicle_occupancy_monitormovementcontrols * 100), 0);
-      ref_14033(var_0.powers[var_1].ref_128be, var_8);
+      ref_14033(var_0.powers[var_1].ref_128BE, var_8);
     }
 
     waitframe();
@@ -2132,7 +2132,7 @@ function ref_12717() {
   return self getstance() == "prone" || istrue(self.usingascender);
 }
 
-function ref_1271c() {
+function ref_1271C() {
   if(level.disable_super_in_turret.vehicle_occupancy_monitorturretcontrols != 0) {
     var_0 = self.origin + (0, 0, level.disable_super_in_turret.vehicle_occupancy_monitorturretcontrols);
     var_1 = playerphysicstrace(self.origin, var_0);
@@ -2165,14 +2165,14 @@ function ref_12719(var_0, var_1) {
   var_2 = getdvarfloat("scr_br_zxp_powers_jump_min_frac", 0.25);
   var_3 = getdvarint("scr_br_zxp_powers_jump_min_frac_refund", 1);
 
-  if(self.vehicle_occupancy_monitormovementcontrols >= var_2 && !ref_12717() && ref_1271c() && !self ismantling()) {
+  if(self.vehicle_occupancy_monitormovementcontrols >= var_2 && !ref_12717() && ref_1271C() && !self ismantling()) {
     self playsoundtoplayer("zxp_superjump_vo", self, self);
     self playSound("zxp_superjump_sfx_npc", self, self);
     var_4 = getdvarfloat("scr_br_zxp_powers_jump_velocity", 1300);
     var_5 = self getplayerangles();
     thread ref_12711();
-    ref_1250a(var_5, var_4, self.vehicle_occupancy_monitormovementcontrols);
-    thread ref_126d7();
+    ref_1250A(var_5, var_4, self.vehicle_occupancy_monitormovementcontrols);
+    thread ref_126D7();
     thread ref_12528();
     self.laststandattackermodifiers = undefined;
     self.vehicle_occupancy_mp_hidecashbag = undefined;
@@ -2183,7 +2183,7 @@ function ref_12719(var_0, var_1) {
       self.ref_12821[var_1].frac = 0;
     }
 
-    ref_14033(var_0.powers[var_1].ref_128be, 0);
+    ref_14033(var_0.powers[var_1].ref_128BE, 0);
     self enableoffhandweapons();
     self allowmelee(1);
     self notify("endSuperJumpFov");
@@ -2195,7 +2195,7 @@ function ref_12719(var_0, var_1) {
   ref_12718(var_0, var_1, 1);
 }
 
-function ref_1270f() {
+function ref_1270F() {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self endon("zombie_unset");
@@ -2248,7 +2248,7 @@ function ref_12715() {
   return self isonground() || self isonladder() || self ismantling();
 }
 
-function ref_1250a(var_0, var_1, var_2, var_3) {
+function ref_1250A(var_0, var_1, var_2, var_3) {
   var_4 = 1;
   var_5 = (0, 0, 20);
 
@@ -2304,7 +2304,7 @@ function ref_1250a(var_0, var_1, var_2, var_3) {
   radiusdamage(var_25, 100, 1, 1);
 }
 
-function ref_126d7() {
+function ref_126D7() {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self endon("zombie_unset");
@@ -2370,7 +2370,7 @@ function isvalidpointinbounds(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-function ref_1271b(var_0, var_1) {
+function ref_1271B(var_0, var_1) {
   if(isDefined(self.vehicle_occupancy_monitormovementcontrols)) {
     ref_12719(var_0, "jump");
     return;
@@ -2436,7 +2436,7 @@ function ref_12718(var_0, var_1, var_2) {
   self.vehicle_occupancy_monitormovementcontrols = undefined;
 }
 
-function ref_1271a(var_0, var_1) {
+function ref_1271A(var_0, var_1) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self endon("zombie_unset");
@@ -2462,28 +2462,28 @@ function ref_1271a(var_0, var_1) {
   }
 }
 
-function ref_125d7(var_0, var_1) {
+function ref_125D7(var_0, var_1) {
   var_2 = 1800;
   var_3 = spawnStruct();
   var_3.origin = self.origin;
   var_0 thread scripts\mp\equipment\concussion_grenade::applyconcussion(var_3, self);
-  thread ref_1262e(var_0);
+  thread ref_1262E(var_0);
   var_4 = var_0.origin - self.origin;
   var_5 = vectortoangles(var_4);
   var_6 = distance(var_0.origin, self.origin);
   var_7 = 1 - var_6 / var_1;
-  ref_1250a(var_0, var_5, var_2, var_7);
+  ref_1250A(var_0, var_5, var_2, var_7);
 }
 
 function checkspawnwithinmapradius(var_0) {
   if(istrue(level.usenavmeshforzombierespawn) && isscriptabledefined()) {
-    if(isDefined(level.ref_12ca9) && level.ref_12ca9 >= 0) {
+    if(isDefined(level.ref_12CA9) && level.ref_12CA9 >= 0) {
       var_1 = getclosestpointonnavmesh(var_0);
       var_2 = var_1 - var_0;
 
-      if(length2d(var_2) > level.ref_12ca9) {
+      if(length2d(var_2) > level.ref_12CA9) {
         var_2 = vectorNormalize(var_2);
-        var_2 = (var_2[0] * level.ref_12ca9, var_2[1] * level.ref_12ca9, 0);
+        var_2 = (var_2[0] * level.ref_12CA9, var_2[1] * level.ref_12CA9, 0);
         var_0 = var_1 + var_2;
       }
     }
@@ -2500,7 +2500,7 @@ function standard_health(var_0) {
   return 0;
 }
 
-function ref_1262e(var_0) {
+function ref_1262E(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -2513,7 +2513,7 @@ function ref_1262e(var_0) {
     }
 
     self.ref_12821[var_3].incooldown = 0;
-    thread ref_1262c(var_0, var_3);
+    thread ref_1262C(var_0, var_3);
   }
 }
 
@@ -2528,27 +2528,27 @@ function ref_13982() {
 }
 
 function addtoteamlives(var_0, var_1) {
-  ref_126d8(var_0);
+  ref_126D8(var_0);
 }
 
 function removefromteamlives(var_0, var_1) {
-  ref_126d8(var_0);
+  ref_126D8(var_0);
 }
 
-function ref_125e9() {
+function ref_125E9() {
   return istrue(self.tut_popup_listener);
 }
 
 function watch_flight_collision(var_0) {
-  if(scripts\mp\gametypes\br_public::ref_125f3()) {
+  if(scripts\mp\gametypes\br_public::ref_125F3()) {
     var_1 = isDefined(var_0.attacker) && nukefridgewatcher(var_0.attacker);
 
-    if(!var_1 || !level.disable_super_in_turret.ref_1470a) {
+    if(!var_1 || !level.disable_super_in_turret.ref_1470A) {
       return false;
     }
 
-    thread ref_1262e(level.disable_super_in_turret.ref_14693);
-    thread ref_1271d();
+    thread ref_1262E(level.disable_super_in_turret.ref_14693);
+    thread ref_1271D();
     thread ref_12731(var_0);
     thread ref_12701();
   }
@@ -2574,18 +2574,18 @@ function ref_12731(var_0) {
   var_9 = (var_7, var_8, 0);
   var_10 = vectorNormalize((var_5[0], var_5[1], 0));
   var_11 = var_10 * var_4 + (0, 0, var_4);
-  ref_1250a(var_9, var_1, 1, var_11);
+  ref_1250A(var_9, var_1, 1, var_11);
 }
 
 function ref_12701() {
   self endon("disconnect");
-  self.ref_1423b = 1;
+  self.ref_1423B = 1;
   var_0 = getdvarfloat("scr_br_zxp_vehicle_immunity", 1.5);
   wait var_0;
-  self.ref_1423b = undefined;
+  self.ref_1423B = undefined;
 }
 
-function ref_1271d() {
+function ref_1271D() {
   level endon("game_ended");
   self endon("last_stand_finished");
   self endon("death_or_disconnect");
@@ -2664,8 +2664,8 @@ function ref_12810() {
     level.disable_super_in_turret.vehicle_occupancy_getplayerfriendlyto = 1;
     thread clear_tier_lights_all(var_2);
 
-    if(level.disable_super_in_turret.ref_146e8) {
-      level.disable_super_in_turret.ref_146e7 = 0;
+    if(level.disable_super_in_turret.ref_146E8) {
+      level.disable_super_in_turret.ref_146E7 = 0;
     }
   }
 
@@ -2673,34 +2673,34 @@ function ref_12810() {
     return;
   }
 
-  var_7 = scripts\mp\utility\script::quicksort(var_1, &ref_134d6);
+  var_7 = scripts\mp\utility\script::quicksort(var_1, &ref_134D6);
 
   for(var_8 = 0; var_8 < var_7.size; var_8++) {
     var_4 = var_7[var_8];
     var_9 = var_8 + 2;
-    thread scripts\mp\gametypes\br::ref_1209b(var_4, var_9, 0, 1);
+    thread scripts\mp\gametypes\br::ref_1209B(var_4, var_9, 0, 1);
   }
 
   thread scripts\mp\gamelogic::endgame(var_2[0], game["end_reason"]["enemies_eliminated"]);
 }
 
-function ref_134d6(var_0, var_1) {
+function ref_134D6(var_0, var_1) {
   var_2 = level.teamdata[var_0]["lastZombieTime"];
   var_3 = level.teamdata[var_1]["lastZombieTime"];
   return var_2 >= var_3;
 }
 
-function ref_1472d() {
+function ref_1472D() {
   wait 5;
   scripts\mp\utility\sound::besttime("br_zxp");
 }
 
-function ref_126d8() {
+function ref_126D8() {
   var_0 = self.team;
   level.teamdata[var_0]["aliveCountHuman"] = 0;
 
   foreach(var_2 in level.teamdata[var_0]["alivePlayers"]) {
-    if(!var_2 scripts\mp\gametypes\br_public::ref_125f3() && !ref_125e9(var_2)) {
+    if(!var_2 scripts\mp\gametypes\br_public::ref_125F3() && !ref_125E9(var_2)) {
       level.teamdata[var_0]["aliveCountHuman"]++;
     }
   }

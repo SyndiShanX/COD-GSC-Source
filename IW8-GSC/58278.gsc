@@ -8,7 +8,7 @@ function init() {
   level.ref_12838.area1_targets = [];
   level.ref_12838.applyquest = [];
   scripts\engine\scriptable::scriptable_addusedcallback(&scriptable_used);
-  scripts\engine\scriptable::ref_12f57(&scriptable_used);
+  scripts\engine\scriptable::ref_12F57(&scriptable_used);
   thread ref_12832();
 }
 
@@ -17,7 +17,7 @@ function ref_12832() {
 
   for(;;) {
     level waittill("player_spawned", var_0);
-    thread ref_13f7e(var_0, undefined, 0);
+    thread ref_13F7E(var_0, undefined, 0);
   }
 }
 
@@ -51,15 +51,15 @@ function scriptable_used(var_0, var_1, var_2, var_3, var_4) {
 }
 
 function ref_12833(var_0, var_1) {
-  thread ref_1393a(var_0);
+  thread ref_1393A(var_0);
   scripts\cp\vehicles\little_bird_mg_cp::addedcollision();
   var_1 freescriptable();
-  thread ref_1282f();
+  thread ref_1282F();
 }
 
-function ref_12af4(var_0) {
-  level.ref_12838.area1_targets[var_0.ref_138fd] = var_0;
-  level.ref_12838.applyquest[var_0.ref_138fd] = [];
+function ref_12AF4(var_0) {
+  level.ref_12838.area1_targets[var_0.ref_138FD] = var_0;
+  level.ref_12838.applyquest[var_0.ref_138FD] = [];
 }
 
 function race_monitor_out_of_vehicle(var_0) {
@@ -70,7 +70,7 @@ function race_monitor_out_of_vehicle(var_0) {
   return level.ref_12838.area1_targets[var_0];
 }
 
-function ref_1393a(var_0) {
+function ref_1393A(var_0) {
   if(!cargo_truck_mg_cp_createfromstructs(var_0)) {
     return 0;
   }
@@ -83,16 +83,16 @@ function ref_1393a(var_0) {
       if(var_5 == var_0) {
         var_1 = 1;
 
-        if(isDefined(var_4.ref_12e2d.ref_12a35)) {
-          var_4[[var_4.ref_12e2d.ref_12a35]]();
+        if(isDefined(var_4.ref_12E2D.ref_12A35)) {
+          var_4[[var_4.ref_12E2D.ref_12A35]]();
         }
 
         continue;
       }
 
       if(!var_2) {
-        if(isDefined(var_4.ref_12e2d.isdisconnecting)) {
-          var_4[[var_4.ref_12e2d.isdisconnecting]]();
+        if(isDefined(var_4.ref_12E2D.isdisconnecting)) {
+          var_4[[var_4.ref_12E2D.isdisconnecting]]();
         }
       }
     }
@@ -109,16 +109,16 @@ function assignvehiclestoteams(var_0) {
   level.ref_12838.applyquest[var_0] = scripts\engine\utility::array_add(level.ref_12838.applyquest[var_0], self);
   var_2 = race_monitor_vehicle(var_0);
 
-  if(isDefined(var_1.ref_12e2d.parachute_get_path)) {
-    thread ref_13f7e(int(var_1.ref_12e2d.parachute_get_path), var_2, 1);
+  if(isDefined(var_1.ref_12E2D.parachute_get_path)) {
+    thread ref_13F7E(int(var_1.ref_12E2D.parachute_get_path), var_2, 1);
   }
 
-  if(isDefined(var_1.ref_12e2d.asm_playfacialanim_mp)) {
-    var_1 thread[[var_1.ref_12e2d.asm_playfacialanim_mp]]();
+  if(isDefined(var_1.ref_12E2D.asm_playfacialanim_mp)) {
+    var_1 thread[[var_1.ref_12E2D.asm_playfacialanim_mp]]();
   }
 
-  if(isDefined(var_1.ref_12e2d.parachute_get_path)) {
-    thread ref_1449f();
+  if(isDefined(var_1.ref_12E2D.parachute_get_path)) {
+    thread ref_1449F();
     return;
   }
 
@@ -126,15 +126,15 @@ function assignvehiclestoteams(var_0) {
   thread isempdamage();
 }
 
-function ref_1449f() {
+function ref_1449F() {
   level endon("game_ended");
   self endon("death");
   self endon("stop_powerup");
   self.player endon("disconnect");
   thread moveplayertotoppos();
 
-  if(isDefined(self.ref_12e2d.ref_1449e)) {
-    self thread[[self.ref_12e2d.ref_1449e]]();
+  if(isDefined(self.ref_12E2D.ref_1449E)) {
+    self thread[[self.ref_12E2D.ref_1449E]]();
   }
 
   while(gettime() < self.mp_layover_patch) {
@@ -149,28 +149,28 @@ function moveplayertotoppos() {
   self endon("death");
   self endon("stop_powerup");
   self.player endon("disconnect");
-  self.player scripts\engine\utility::ref_143a6("death", "joined_team", "joined_spectators");
+  self.player scripts\engine\utility::ref_143A6("death", "joined_team", "joined_spectators");
   thread isempdamage();
 }
 
 function isempdamage() {
   self.player endon("disconnect");
-  var_0 = self.ref_12e2d.ref_138fd;
-  ref_13f73(var_0);
+  var_0 = self.ref_12E2D.ref_138FD;
+  ref_13F73(var_0);
   var_1 = race_monitor_vehicle(var_0);
 
-  if(isDefined(self.ref_12e2d.parachute_get_path)) {
-    thread ref_13f7e(self.player, undefined, var_1);
+  if(isDefined(self.ref_12E2D.parachute_get_path)) {
+    thread ref_13F7E(self.player, undefined, var_1);
   }
 
-  if(isDefined(self.ref_12e2d.isdeathshieldskippingenabled)) {
-    self thread[[self.ref_12e2d.isdeathshieldskippingenabled]]();
+  if(isDefined(self.ref_12E2D.isdeathshieldskippingenabled)) {
+    self thread[[self.ref_12E2D.isdeathshieldskippingenabled]]();
   }
 
   self notify("stop_powerup");
 }
 
-function ref_13f73(var_0) {
+function ref_13F73(var_0) {
   if(!cargo_truck_mg_cp_createfromstructs(var_0)) {
     return 0;
   }
@@ -185,17 +185,17 @@ function ref_13f73(var_0) {
 
 function init_internal(var_0) {
   var_1 = spawnStruct();
-  var_1.ref_12e2d = race_monitor_out_of_vehicle(var_0);
+  var_1.ref_12E2D = race_monitor_out_of_vehicle(var_0);
   var_1.player = self;
   var_1.team = self.team;
-  var_1.ref_13ab1 = scripts\mp\utility\teams::getteamdata(self.team, "players");
+  var_1.ref_13AB1 = scripts\mp\utility\teams::getteamdata(self.team, "players");
   var_1.origin = self.origin;
   var_1.angles = self.angles;
   var_1.squadleaderbeacon_isactive = [];
-  var_1.ref_1381c = gettime();
+  var_1.ref_1381C = gettime();
 
-  if(isDefined(var_1.ref_12e2d.parachute_get_path)) {
-    var_1.mp_layover_patch = gettime() + var_1.ref_12e2d.parachute_get_path * 1000;
+  if(isDefined(var_1.ref_12E2D.parachute_get_path)) {
+    var_1.mp_layover_patch = gettime() + var_1.ref_12E2D.parachute_get_path * 1000;
   }
 
   carriable_pickup_wait(var_1, var_1.player);
@@ -207,18 +207,18 @@ function carriable_pickup_wait(var_0) {
     var_0.are_players_nearby_turret = [];
   }
 
-  var_0.are_players_nearby_turret[self.ref_12e2d.ref_138fd] = self;
+  var_0.are_players_nearby_turret[self.ref_12E2D.ref_138FD] = self;
 }
 
 function lbravo_actorthinkpath(var_0) {
-  if(!isDefined(var_0.are_players_nearby_turret) || !isDefined(var_0.are_players_nearby_turret[self.ref_12e2d.ref_138fd])) {
+  if(!isDefined(var_0.are_players_nearby_turret) || !isDefined(var_0.are_players_nearby_turret[self.ref_12E2D.ref_138FD])) {
     return;
   }
 
-  var_0.are_players_nearby_turret[self.ref_12e2d.ref_138fd] = undefined;
+  var_0.are_players_nearby_turret[self.ref_12E2D.ref_138FD] = undefined;
 }
 
-function ref_124dd(var_0) {
+function ref_124DD(var_0) {
   if(scripts\engine\utility::array_contains(level.ref_12838.applyquest[var_0], self)) {
     return true;
   }
@@ -226,8 +226,8 @@ function ref_124dd(var_0) {
   return false;
 }
 
-function ref_1249c(var_0) {
-  if(!ref_124dd(var_0)) {
+function ref_1249C(var_0) {
+  if(!ref_124DD(var_0)) {
     return;
   }
 
@@ -276,7 +276,7 @@ function ref_12425(var_0, var_1, var_2) {
   scripts\mp\gametypes\br_quest_util::displayplayersplash(var_0, var_1, var_3);
 }
 
-function ref_13f7e(var_0, var_1, var_2) {
+function ref_13F7E(var_0, var_1, var_2) {
   var_3 = 0;
 
   if(isDefined(var_0)) {
@@ -309,7 +309,7 @@ function modify_juggernaut_damage(var_0, var_1) {
     return;
   }
 
-  var_3 = ref_1233d();
+  var_3 = ref_1233D();
   var_4 = "brloot_rumble_powerup_" + var_3;
 
   if(!isent(self) || self isscriptable()) {
@@ -326,12 +326,12 @@ function modify_juggernaut_damage(var_0, var_1) {
 }
 
 function script_model_spawn_and_use_logic() {
-  var_0 = ref_1233d();
+  var_0 = ref_1233D();
   var_1 = "brloot_rumble_powerup_" + var_0;
-  thread ref_1393a(var_0);
+  thread ref_1393A(var_0);
 }
 
-function ref_1233d() {
+function ref_1233D() {
   var_0 = [];
 
   foreach(var_2 in level.ref_12838.area1_targets) {
@@ -342,7 +342,7 @@ function ref_1233d() {
   return var_0[0];
 }
 
-function ref_1282f() {
+function ref_1282F() {
   if(level.disable_super_in_turret.name == "rumble") {
     scripts\mp\supers::givesuperpoints(scripts\mp\supers::getsuperpointsneeded());
   }
@@ -357,12 +357,12 @@ function ref_1282f() {
     self.br_armorhealth = self.br_maxarmorhealth;
     self setclientomnvar("ui_br_armor_damage", 1);
     scripts\mp\equipment\armor_plate::debug_state(self.br_armorhealth);
-    thread ref_12ccb();
+    thread ref_12CCB();
     return;
   }
 }
 
-function ref_12ccb() {
+function ref_12CCB() {
   self endon("death_or_disconnect");
   thread scripts\mp\equipment::givescavengerammo();
   thread scripts\mp\equipment::givescavengerammo();

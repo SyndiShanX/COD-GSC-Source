@@ -5,7 +5,7 @@
 
 function equipmentinteract_init() {
   level.useobjs = [];
-  scripts\engine\scriptable::ref_12f5b("hack_usable", &numrequireddestinations);
+  scripts\engine\scriptable::ref_12F5B("hack_usable", &numrequireddestinations);
   thread _updateuseobjs();
 }
 
@@ -245,7 +245,7 @@ function _waituntilinteractfinished(var_0) {
 function addtolittlebirdmglist() {
   level endon("game_ended");
   self endon("disconnect");
-  scripts\engine\utility::ref_143a5("death", "tabletPutAway");
+  scripts\engine\utility::ref_143A5("death", "tabletPutAway");
   _toggletabletallows(0);
 }
 

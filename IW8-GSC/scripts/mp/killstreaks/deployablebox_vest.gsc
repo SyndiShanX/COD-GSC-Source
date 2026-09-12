@@ -43,7 +43,7 @@ function tryusedeployablevest(var_0, var_1) {
     return false;
   }
 
-  scripts\common\utility::ref_13e0a(level.ref_11b2a, "deployable_vest", self.origin);
+  scripts\common\utility::ref_13E0A(level.ref_11B2A, "deployable_vest", self.origin);
   return true;
 }
 

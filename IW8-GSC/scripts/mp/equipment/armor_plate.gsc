@@ -79,9 +79,9 @@ function denyascendmessagelaststand() {
   self endon("disconnect");
   debug_run_helicopter_boss();
   thread depletiondelay();
-  self.ref_138d4 = 0;
-  scripts\engine\utility::ref_143a9("death", "mantle_start", "last_stand_start", "special_weapon_fired", "br_try_armor_cancel", "br_armor_plate_done");
-  self.ref_138d4 = 1;
+  self.ref_138D4 = 0;
+  scripts\engine\utility::ref_143A9("death", "mantle_start", "last_stand_start", "special_weapon_fired", "br_try_armor_cancel", "br_armor_plate_done");
+  self.ref_138D4 = 1;
   thread debug_trans_1_start();
 }
 
@@ -122,7 +122,7 @@ function delay_end_common_combat(var_0) {
   self endon("disconnect");
   self endon("br_armor_repair_end");
 
-  if(!delay_end_soldiers_spawns() || istrue(self.ref_138d4)) {
+  if(!delay_end_soldiers_spawns() || istrue(self.ref_138D4)) {
     return;
   }
 
@@ -182,7 +182,7 @@ function delay_end_soldiers_spawns() {
   }
 
   var_1 = self isskydiving() || self isonladder();
-  var_2 = istrue(self.ref_12d1e) || istrue(self.isjuggernaut);
+  var_2 = istrue(self.ref_12D1E) || istrue(self.isjuggernaut);
   var_2 |= scripts\mp\supers::issuperinuse() && self.super.staticdata.ref != "super_deadsilence" && self.super.staticdata.ref != "super_serum_gadget";
 
   if(var_1 || var_2) {

@@ -6,7 +6,7 @@
 function alley_start() {
   scripts\engine\utility::flag_wait("fade_in");
   var_0 = scripts\engine\utility::getStruct("alley_push_1", "targetname").origin;
-  var_1 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_134ed("enemy_spawner", scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::propchange(16), var_0);
+  var_1 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_134ED("enemy_spawner", scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::propchange(16), var_0);
 
   foreach(var_3 in var_1) {
     if(var_3.origin == (-2177.8, -850.952, 56)) {
@@ -22,7 +22,7 @@ function alley_start() {
 }
 
 function brmoderemovefromteamlives() {
-  var_0 = scripts\cp\laser_traps\cp_laser_traps::ref_134f1("enemy_cp_alq_desert_lmg", (-2009.28, -486.884, 60), (0, 270, 0), 1, 1);
+  var_0 = scripts\cp\laser_traps\cp_laser_traps::ref_134F1("enemy_cp_alq_desert_lmg", (-2009.28, -486.884, 60), (0, 270, 0), 1, 1);
   var_1 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
   var_0 endon("death");
   var_0.goalradius = 50;
@@ -42,7 +42,7 @@ function brloadoutcratepostcapture() {
 
   if(var_0 <= 2) {
     var_1 = getEnt("ally_heli", "targetname");
-    var_2 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_134f0("ally_spawners_heli_ground");
+    var_2 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_134F0("ally_spawners_heli_ground");
     level.infil_heli = var_1 scripts\common\vehicle::spawn_vehicle_and_gopath();
     level.infil_heli thread scripts\cp\maps\cp_so_embassy\cp_so_embassy::givequestrewardgroup();
     thread steve();
@@ -86,7 +86,7 @@ function steve() {
   self delete();
 }
 
-function ref_11a6e() {
+function ref_11A6E() {
   self.attackeraccuracy = 0.1;
   self.health = 1000;
 
@@ -129,7 +129,7 @@ function first_convoy() {
   }
 
   wait 8;
-  ref_135b1();
+  ref_135B1();
   thread ref_12389();
 
   while(getaiarray("axis").size > 10) {
@@ -151,7 +151,7 @@ function first_convoy() {
     wait 0.1;
   }
 
-  thread ref_13d1e();
+  thread ref_13D1E();
 
   while(getaiarray("axis").size > 4) {
     wait 0.1;
@@ -182,7 +182,7 @@ function ref_12389() {
   badplace_delete("right_roof_badplace");
 }
 
-function ref_13d1e() {
+function ref_13D1E() {
   var_0 = [];
   GscBinSkip0(0x2e, var_0.size, [(249.8, -325.5, 4), (0, 270, 0)]);
 }
@@ -193,7 +193,7 @@ function gasfxground() {
   self.goalradius = 200;
 }
 
-function ref_11a77(var_0) {
+function ref_11A77(var_0) {
   foreach(var_2 in var_0) {
     if(distance2d(var_2.origin, (-307.915, 463.628, 148)) <= 400) {
       var_2.og_fov = 1;
@@ -207,7 +207,7 @@ function createhudstring() {
   GscBinSkip0(0x2e, var_0.size, (203.162, -1024.91, 56));
 }
 
-function ref_135b1() {
+function ref_135B1() {
   var_0 = [];
   GscBinSkip0(0x2e, var_0.size, [(-1380.93, -979.18, 18.0409), (0, 270, 0)]);
 }
@@ -221,20 +221,20 @@ function create_oscilloscope_screen() {
 }
 
 function hit_by_emp_internal() {
-  level.ref_13bd3 = 6000;
-  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1238d((69.25, 399, 62), 50, 150, "axis");
-  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1238d((2311.76, 1671.9, 54.1039), 50, 150, "axis", "allies");
-  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1238d((-166.454, 139.447, 46.5), 50, 150, "axis", "allies");
+  level.ref_13BD3 = 6000;
+  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1238D((69.25, 399, 62), 50, 150, "axis");
+  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1238D((2311.76, 1671.9, 54.1039), 50, 150, "axis", "allies");
+  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1238D((-166.454, 139.447, 46.5), 50, 150, "axis", "allies");
   scripts\engine\utility::flag_set("illumination_flare_enabled");
   thread brloadoutcratefirstactivation();
-  thread ref_12ab9();
-  thread ref_12bef();
+  thread ref_12AB9();
+  thread ref_12BEF();
   scripts\engine\utility::flag_set("compound_cleared");
   scripts\engine\utility::flag_set("alley_push_04");
   thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::hitbytrain();
   level.hitslocs = 0;
   var_0 = scripts\engine\utility::getStruct("server_struct", "targetname");
-  var_1 = var_0 scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_11a9a(&"CP_SO_EMBASSY/SERVER_PROMPT");
+  var_1 = var_0 scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_11A9A(&"CP_SO_EMBASSY/SERVER_PROMPT");
   var_1 waittill("trigger", var_2);
   var_1 delete();
 
@@ -253,7 +253,7 @@ function hit_by_emp_internal() {
   scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::justbecamehvt();
 }
 
-function ref_12bef() {
+function ref_12BEF() {
   var_0 = getnodesinradius((-676.247, 477.233, 167), 30, 0, 50);
 
   foreach(var_2 in var_0) {
@@ -289,7 +289,7 @@ function brloadoutcratefirstactivation() {
   }
 }
 
-function ref_12ab9() {
+function ref_12AB9() {
   scripts\engine\utility::delaythread(5, &scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::weapon_xp_iw8_sm_beta, "sentry", 1, 1);
 
   if(level.players.size > 1) {
@@ -310,8 +310,8 @@ function ref_12ab9() {
     var_3 = spawnStruct();
     var_3.origin = (-150.89, -56.1799, 567);
     var_3.angles = (0, 75.6521, 0);
-    level.ref_12aba = var_2;
-    scripts\engine\utility::array_thread(var_2.riders, &ref_12ab8);
+    level.ref_12ABA = var_2;
+    scripts\engine\utility::array_thread(var_2.riders, &ref_12AB8);
     var_2 thread scripts\cp\maps\cp_so_embassy\cp_so_embassy::givequestrewardgroup();
     var_4 = var_2.riders;
     var_2 settargetyaw(var_3.angles[1]);
@@ -339,7 +339,7 @@ function ref_12ab9() {
   }
 }
 
-function ref_12ab8() {
+function ref_12AB8() {
   self endon("death");
   var_0 = getEnt("defend_vol", "targetname");
   self.ignoreme = 1;
@@ -348,11 +348,11 @@ function ref_12ab8() {
   self clearpath();
   self setgoalpos((-108.179, -141.79, 32));
   self setgoalvolumeauto(var_0);
-  level.ref_12aba scripts\engine\utility::ref_143b9(30, "unloaded");
+  level.ref_12ABA scripts\engine\utility::ref_143B9(30, "unloaded");
   self.ignoreme = 0;
 }
 
-function ref_119e5() {
+function ref_119E5() {
   var_0 = [];
   var_1 = scripts\engine\utility::getStructArray("ammo_crate_spawn_struct", "targetname");
   var_1 = sortbydistance(var_1, (-410.812, 520.18, 60));

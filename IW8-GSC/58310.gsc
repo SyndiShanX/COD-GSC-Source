@@ -3,7 +3,7 @@
  * Script: 58310.gsc
 ***********************************************/
 
-function ref_13d79() {
+function ref_13D79() {
   self.thermiteradiusweaponref = anglesToForward(self.angles);
   self.initial_up = anglestoup(self.angles);
   self.thermitestuckpains = anglestoright(self.angles);
@@ -24,7 +24,7 @@ function ref_13d79() {
         break;
       case "target_plate_dest":
         self.plate = var_1;
-        self.ref_123b5 = var_1;
+        self.ref_123B5 = var_1;
         break;
       case "target_arm":
         self.arm = var_1;
@@ -87,25 +87,25 @@ function ref_13d79() {
     level.enemy_targets[level.enemy_targets.size] = self;
   }
 
-  thread ref_13d72();
+  thread ref_13D72();
 
-  if(isDefined(self.ref_123b5)) {
-    thread ref_13d70();
+  if(isDefined(self.ref_123B5)) {
+    thread ref_13D70();
   }
 
   self.activated = 0;
-  thread ref_13d78();
+  thread ref_13D78();
 
   if(issubstr(self.script_noteworthy, "moving")) {
-    thread ref_13d55();
+    thread ref_13D55();
   }
 
-  if(isDefined(level.ref_13d7a)) {
-    self[[level.ref_13d7a]]();
+  if(isDefined(level.ref_13D7A)) {
+    self[[level.ref_13D7A]]();
   }
 
-  if(isDefined(level.ref_13d7b)) {
-    self thread[[level.ref_13d7b]]();
+  if(isDefined(level.ref_13D7B)) {
+    self thread[[level.ref_13D7B]]();
   }
 
   level.targets_thinking--;
@@ -136,10 +136,10 @@ function gettargetarray() {
   return scripts\engine\utility::array_combine_multiple(var_1);
 }
 
-function ref_13d72() {
+function ref_13D72() {
   var_0 = undefined;
 
-  if(isDefined(self.ref_123b5)) {
+  if(isDefined(self.ref_123B5)) {
     var_1 = "trial_sfx_target_report_clay_smash";
     var_0 = level.start_area_fx;
     goto LOC_00000027;
@@ -158,9 +158,9 @@ function ref_13d72() {
     self.plate playSound(var_1);
 
     if(self.is_civilian == 1) {
-      level.player thread _tablethide::ref_13d4b(self, 0, 1, 0);
+      level.player thread _tablethide::ref_13D4B(self, 0, 1, 0);
     } else {
-      level.player thread _tablethide::ref_13d4b(self, 1, 0, 0);
+      level.player thread _tablethide::ref_13D4B(self, 1, 0, 0);
     }
 
     self.activated = 1;
@@ -169,36 +169,36 @@ function ref_13d72() {
       level.player notify("fake_weapon_fired");
     }
 
-    if(self.is_civilian && isDefined(level.ref_13d71)) {
-      self[[level.ref_13d71]]();
-    } else if(isDefined(level.ref_13d73)) {
-      self[[level.ref_13d73]]();
+    if(self.is_civilian && isDefined(level.ref_13D71)) {
+      self[[level.ref_13D71]]();
+    } else if(isDefined(level.ref_13D73)) {
+      self[[level.ref_13D73]]();
     }
 
-    if(isDefined(level.ref_13d76) && self.plate tagexists("tag_head") && distance(self.plate gettagorigin("tag_head"), var_5) <= 5) {
-      self[[level.ref_13d76]]();
+    if(isDefined(level.ref_13D76) && self.plate tagexists("tag_head") && distance(self.plate gettagorigin("tag_head"), var_5) <= 5) {
+      self[[level.ref_13D76]]();
     }
 
     if(isDefined(var_1)) {
       playFX(var_1, var_5);
     }
 
-    if(isDefined(self.ref_123b5)) {
-      self.ref_123b5 hide();
+    if(isDefined(self.ref_123B5)) {
+      self.ref_123B5 hide();
       wait randomfloatrange(0.7, 1);
     }
 
-    thread ref_13d74("down");
+    thread ref_13D74("down");
     level waittill("course_ended");
 
-    if(isDefined(self.ref_123b5)) {
+    if(isDefined(self.ref_123B5)) {
       _tablethide::trial_ui_waittill_retry();
-      self.ref_123b5 show();
+      self.ref_123B5 show();
     }
   }
 }
 
-function ref_13d74(var_0) {
+function ref_13D74(var_0) {
   if(var_0 == "up") {
     if(isDefined(self.script_delay)) {
       wait self.script_delay;
@@ -300,7 +300,7 @@ function ref_13d74(var_0) {
   self.flipping = 0;
 }
 
-function ref_13d55() {
+function ref_13D55() {
   self.mover = scripts\engine\utility::getclosest(self.origin, level.course_movers, 32);
 
   if(!isDefined(self.mover)) {
@@ -323,7 +323,7 @@ function ref_13d55() {
   }
 
   level waittill("player_spawned");
-  thread ref_13d54();
+  thread ref_13D54();
 
   for(;;) {
     if(self.moving && (90 > distance(level.player.origin, self.origin) || !self.state_up)) {
@@ -333,21 +333,21 @@ function ref_13d55() {
       self.plate playSound("trial_sfx_target_move_stop");
       self.dummy thread scripts\engine\utility::stop_loop_sound_on_entity("trial_sfx_target_move_loop");
     } else if(self.flipping == 0 && self.moving == 0 && 90 < distance(level.player.origin, self.origin) && self.state_up == 1) {
-      thread ref_13d53();
+      thread ref_13D53();
     }
 
     waitframe();
   }
 }
 
-function ref_13d53() {
+function ref_13D53() {
   self endon("stop_moving");
   self.moving = 1;
   self.dummy = spawn("script_origin", self.origin);
   GscBinSkip4(0x35);
 }
 
-function ref_13d54() {
+function ref_13D54() {
   for(;;) {
     level waittill("trial_results_screen_opened");
     waitframe();
@@ -357,7 +357,7 @@ function ref_13d54() {
   }
 }
 
-function ref_13d75() {
+function ref_13D75() {
   for(;;) {
     self.origin = self.dummy.origin;
     self.base.origin = self.dummy.origin;
@@ -365,7 +365,7 @@ function ref_13d75() {
   }
 }
 
-function ref_13d70() {
+function ref_13D70() {
   self.arm setCanDamage(1);
 
   for(;;) {
@@ -377,7 +377,7 @@ function ref_13d70() {
   }
 }
 
-function ref_13d78() {
+function ref_13D78() {
   waitframe();
 
   if(isDefined(self.targetname)) {
@@ -397,7 +397,7 @@ function ref_13d78() {
     }
 
     if(var_1 == 1) {
-      ref_13d74("up");
+      ref_13D74("up");
       level waittill("course_ended");
     }
 
@@ -405,7 +405,7 @@ function ref_13d78() {
   }
 }
 
-function ref_13d82() {
+function ref_13D82() {
   var_0 = getEntArray("end_checkpoint", "script_noteworthy");
 
   for(;;) {
@@ -439,8 +439,8 @@ function ref_13d82() {
     self.activated = 1;
     level notify("trigger_activated");
 
-    if(isDefined(level.ref_13d81)) {
-      self[[level.ref_13d81]]();
+    if(isDefined(level.ref_13D81)) {
+      self[[level.ref_13D81]]();
     }
 
     level waittill("course_ended");

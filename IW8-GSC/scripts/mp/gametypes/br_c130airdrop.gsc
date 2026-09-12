@@ -126,7 +126,7 @@ function fnanimatedprop_setanim(var_0, var_1, var_2) {
     goto LOC_000000fc;
   }
 
-  var_5 = scripts\mp\gametypes\br_c130::ref_1361a(var_6, var_12);
+  var_5 = scripts\mp\gametypes\br_c130::ref_1361A(var_6, var_12);
   return var_5;
 }
 
@@ -231,7 +231,7 @@ function fntrapdeactivation(var_0, var_1, var_2, var_3) {
   var_4.centerpt = var_0.centerpt;
   var_4.dir = vectorNormalize(var_4.endpt - var_4.startpt);
   var_4.angles = vectortoangles(var_4.dir);
-  var_4.ref_121fe = var_1;
+  var_4.ref_121FE = var_1;
   var_4.speed = var_2;
   var_4.lifetime = var_3;
   var_4.getcircleclosetime = spawn("script_model", var_4.startpt);
@@ -330,7 +330,7 @@ function fnanimatedprop_startanim(var_0, var_1, var_2, var_3) {
 
     var_12++;
     var_15 = scripts\cp_mp\killstreaks\airdrop::gettriggerobject(var_14);
-    var_15.ref_140a0 = 5;
+    var_15.ref_140A0 = 5;
     level.focus_fire_attacker_timeout[level.focus_fire_attacker_timeout.size] = var_14;
   }
 }
@@ -428,15 +428,15 @@ function fntrapactivation(var_0) {
   var_2 = scripts\engine\utility::array_combine(var_2, var_3);
 
   foreach(var_9 in var_2) {
-    var_9.ref_11a40 = "c130_box";
+    var_9.ref_11A40 = "c130_box";
   }
 
-  if(!isDefined(var_0.ref_11a01)) {
-    var_0.ref_11a01 = 1;
+  if(!isDefined(var_0.ref_11A01)) {
+    var_0.ref_11A01 = 1;
   } else {
-    var_0.ref_11a01++;
+    var_0.ref_11A01++;
   }
 
-  var_0 scripts\mp\utility\stats::setextrascore1(var_0.ref_11a01);
+  var_0 scripts\mp\utility\stats::setextrascore1(var_0.ref_11A01);
   var_0 thread scripts\mp\utility\points::giveunifiedpoints("br_c130_box_open");
 }

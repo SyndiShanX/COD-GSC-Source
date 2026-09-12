@@ -12,19 +12,19 @@ function init() {
 
   level.disable_super_in_turret.platform_model = [];
   level.disable_super_in_turret.play_3p_anim = 0;
-  thread ref_143f9();
+  thread ref_143F9();
   tr_vis_radius_override_lod1();
 }
 
 function tr_vis_radius_override_lod1() {
   level.disable_super_in_turret.play_3p_anim_non_animscene = spawnStruct();
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11c1c = getdvarint("scr_fear_min", 0);
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11b5e = getdvarint("scr_fear_max", 500);
-  level.disable_super_in_turret.play_3p_anim_non_animscene.setsuperweapondisabledbr = level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11b5e / 2;
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11C1C = getdvarint("scr_fear_min", 0);
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11B5E = getdvarint("scr_fear_max", 500);
+  level.disable_super_in_turret.play_3p_anim_non_animscene.setsuperweapondisabledbr = level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11B5E / 2;
   level.disable_super_in_turret.play_3p_anim_non_animscene.is_wave_gametype = getdvarint("scr_fear_damage_max", 100);
   level.disable_super_in_turret.play_3p_anim_non_animscene.isangleoffset = getdvarfloat("scr_fear_damage_scalar", 2);
   level.disable_super_in_turret.play_3p_anim_non_animscene.calloutmarkerpingvo_playpredictivepinginventoryrequest = getdvarfloat("scr_fear_armor_damage_scalar", 2);
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1423c = getdvarfloat("scr_fear_vehicle_damage_scalar", 2);
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1423C = getdvarfloat("scr_fear_vehicle_damage_scalar", 2);
   level.disable_super_in_turret.play_3p_anim_non_animscene.circle_speed = int(getdvarfloat("scr_fear_baseline_interval", 1) * 1000);
   level.disable_super_in_turret.play_3p_anim_non_animscene.circle_acceleration = getdvarint("scr_fear_baseline_increment", 2);
   level.disable_super_in_turret.play_3p_anim_non_animscene.circle_back_to_combat = getdvarint("scr_fear_baseline_increment_camping", 2);
@@ -32,9 +32,9 @@ function tr_vis_radius_override_lod1() {
   level.disable_super_in_turret.play_3p_anim_non_animscene.saw_headicons = getdvarint("scr_fear_ghost_radius", 500);
   level.disable_super_in_turret.play_3p_anim_non_animscene.sat_wait_for_controller = int(getdvarfloat("scr_fear_ghost_interval", 5) * 1000);
   level.disable_super_in_turret.play_3p_anim_non_animscene.scn_infil_hackney_heli_npc5 = getdvarint("scr_fear_ghost_spectral_blast", 25);
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1209e = int(getdvarfloat("scr_fear_onteammatekilled", 0.15) * 500);
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1204d = int(getdvarfloat("scr_fear_onlaststandenteredself", 0.15) * 500);
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1204e = int(getdvarfloat("scr_fear_onlaststandenteredteammate", 0.15) * 500);
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1209E = int(getdvarfloat("scr_fear_onteammatekilled", 0.15) * 500);
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1204D = int(getdvarfloat("scr_fear_onlaststandenteredself", 0.15) * 500);
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1204E = int(getdvarfloat("scr_fear_onlaststandenteredteammate", 0.15) * 500);
   level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12049 = int(getdvarfloat("scr_fear_onkillstreakdanger", 0.1) * 500);
   level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12022 = int(getdvarfloat("scr_fear_onenemyequipment", 0.1) * 500);
   level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12068 = int(getdvarfloat("scr_fear_onplayerdied", 0.1) * 500);
@@ -42,7 +42,7 @@ function tr_vis_radius_override_lod1() {
   level.disable_super_in_turret.play_3p_anim_non_animscene.onplayerkilled = int(getdvarfloat("scr_fear_onplayerkilled", 0.15) * 500);
   level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12039 = int(getdvarfloat("scr_fear_onghostkilled", 0.25) * 500);
   level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12050 = int(getdvarfloat("scr_fear_onlaststandrevive", 0.2) * 500);
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11fff = int(getdvarfloat("scr_fear_onarmorplate", 0.05) * 500);
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11FFF = int(getdvarfloat("scr_fear_onarmorplate", 0.05) * 500);
   level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12008 = int(getdvarfloat("scr_fear_oncontractcomplete", 0.1) * 500);
   level.disable_super_in_turret.play_3p_anim_non_animscene.gasmask_onpickupcreated = getdvarint("scr_fear_camping_grace_period", 3);
   level.disable_super_in_turret.play_3p_anim_non_animscene.gasgrenade_crate_use = getdvarint("scr_fear_camping_distance_decay", 50);
@@ -52,15 +52,15 @@ function tr_vis_radius_override_lod1() {
   level.disable_super_in_turret.play_3p_anim_non_animscene.clear_players_from_door_way_think[0] = "br_gov_fear_heart_high";
   level.disable_super_in_turret.play_3p_anim_non_animscene.clear_players_from_door_way_think[1] = "br_gov_fear_heart_high";
   level.disable_super_in_turret.play_3p_anim_non_animscene.clear_players_from_door_way_think[2] = "br_gov_fear_heart_low";
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_138ae = [];
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_138ae[0] = "br_gov_fear_whsp_high";
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_13b4a = [];
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_13b4a[0] = "br_gov_fear_sting_high";
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_13b4a[1] = "br_gov_fear_sting_med";
-  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_13b4a[2] = "br_gov_fear_sting_low";
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_138AE = [];
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_138AE[0] = "br_gov_fear_whsp_high";
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_13B4A = [];
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_13B4A[0] = "br_gov_fear_sting_high";
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_13B4A[1] = "br_gov_fear_sting_med";
+  level.disable_super_in_turret.play_3p_anim_non_animscene.ref_13B4A[2] = "br_gov_fear_sting_low";
 }
 
-function ref_143f9() {
+function ref_143F9() {
   waittillframeend();
   scripts\mp\flags::gameflagwait("prematch_fade_done");
 
@@ -74,37 +74,37 @@ function ref_143f9() {
     }
   }
 
-  ref_12b20("onPlayerDamaged", &plant_bomb_cleanup_on_death);
-  ref_12b20("onPlayerArmorDamaged", &plant_add_zplanes_override);
-  ref_12b20("onLastStandEnter", &plane_landing_fx);
-  ref_12b20("onKillstreakDanger", &plane_door_opened);
-  ref_12b20("onTeammateKilled", &plane, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1209e);
-  ref_12b20("onPlayerDied", &plane, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12068);
-  ref_12b20("onVehicleDamaged", &plate_dest);
-  ref_12b20("onPlayerHallucinate", &plant_enemy_claymore);
-  ref_12b20("onLastStandRevive", &placing_c4_interaction_use_monitor, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12050);
-  ref_12b20("onArmorPlate", &placing_c4_interaction_use_monitor, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11fff);
-  ref_12b20("onContractEnd", &plane_collmap, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12008);
-  ref_12b20("onOpenLootBox", &planewaittillcandrop);
-  ref_12b20("onPlayerKilled", &plant_remove_zplanes_override);
-  thread ref_13fee();
+  ref_12B20("onPlayerDamaged", &plant_bomb_cleanup_on_death);
+  ref_12B20("onPlayerArmorDamaged", &plant_add_zplanes_override);
+  ref_12B20("onLastStandEnter", &plane_landing_fx);
+  ref_12B20("onKillstreakDanger", &plane_door_opened);
+  ref_12B20("onTeammateKilled", &plane, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1209E);
+  ref_12B20("onPlayerDied", &plane, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12068);
+  ref_12B20("onVehicleDamaged", &plate_dest);
+  ref_12B20("onPlayerHallucinate", &plant_enemy_claymore);
+  ref_12B20("onLastStandRevive", &placing_c4_interaction_use_monitor, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12050);
+  ref_12B20("onArmorPlate", &placing_c4_interaction_use_monitor, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11FFF);
+  ref_12B20("onContractEnd", &plane_collmap, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12008);
+  ref_12B20("onOpenLootBox", &planewaittillcandrop);
+  ref_12B20("onPlayerKilled", &plant_remove_zplanes_override);
+  thread ref_13FEE();
 
   if(!getdvarint("scr_br_gxp_disable_hallucination_player_vfx", 0)) {
-    level thread scripts\mp\gametypes\br_gxp_hallucination::ref_11e33();
+    level thread scripts\mp\gametypes\br_gxp_hallucination::ref_11E33();
     return;
   }
 }
 
 function start_preserverroom_spawners(var_0) {
   var_1 = remove_flag_trig();
-  self.setarenaomnvarhealthtype = clamp(self.setarenaomnvarhealthtype + var_0, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11c1c, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11b5e);
-  self setclientomnvar("ui_br_fear_meter", (self.setarenaomnvarhealthtype - level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11c1c) / (level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11b5e - level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11c1c));
+  self.setarenaomnvarhealthtype = clamp(self.setarenaomnvarhealthtype + var_0, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11C1C, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11B5E);
+  self setclientomnvar("ui_br_fear_meter", (self.setarenaomnvarhealthtype - level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11C1C) / (level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11B5E - level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11C1C));
   place_bad_place_until_flag(var_1);
 }
 
 function juggernaut_damage_thread(var_0) {
-  self.setarenaomnvarhealthtype = clamp(self.setarenaomnvarhealthtype - var_0, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11c1c, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11b5e);
-  self setclientomnvar("ui_br_fear_meter", (self.setarenaomnvarhealthtype - level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11c1c) / (level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11b5e - level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11c1c));
+  self.setarenaomnvarhealthtype = clamp(self.setarenaomnvarhealthtype - var_0, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11C1C, level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11B5E);
+  self setclientomnvar("ui_br_fear_meter", (self.setarenaomnvarhealthtype - level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11C1C) / (level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11B5E - level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11C1C));
 }
 
 function get_ai_hearing_bomb_plant_sound() {
@@ -124,7 +124,7 @@ function remove_flag_trig() {
     return 0;
   }
 
-  return (self.setarenaomnvarhealthtype - level.disable_super_in_turret.play_3p_anim_non_animscene.setsuperweapondisabledbr) / (level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11b5e - level.disable_super_in_turret.play_3p_anim_non_animscene.setsuperweapondisabledbr);
+  return (self.setarenaomnvarhealthtype - level.disable_super_in_turret.play_3p_anim_non_animscene.setsuperweapondisabledbr) / (level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11B5E - level.disable_super_in_turret.play_3p_anim_non_animscene.setsuperweapondisabledbr);
 }
 
 function onplayerconnect(var_0) {
@@ -166,7 +166,7 @@ function placementupdatewait(var_0, var_1, var_2) {
   }
 }
 
-function ref_12b20(var_0, var_1, var_2) {
+function ref_12B20(var_0, var_1, var_2) {
   if(isDefined(level.disable_super_in_turret.platform_model[var_0])) {
     scripts\mp\utility\script::laststand_dogtags("registerFearCause already has " + var_0 + " defined.");
   }
@@ -195,7 +195,7 @@ function unset_heavy_hitter() {
   return false;
 }
 
-function ref_13b0c() {
+function ref_13B0C() {
   var_0 = level.disable_super_in_turret.play_3p_anim_non_animscene.gasmask_onpickupcreated;
   var_1 = 1;
 
@@ -242,7 +242,7 @@ function calloutmarkerping_initcommon() {
         continue;
       }
 
-      if(scripts\mp\gametypes\br_public::ref_125ec()) {
+      if(scripts\mp\gametypes\br_public::ref_125EC()) {
         self.setburningdamage = 1;
         break;
       }
@@ -259,14 +259,14 @@ function trackendangeredobjs() {
 function circle_acceleration() {
   if(self.setarenaomnvarplayertype + level.disable_super_in_turret.play_3p_anim_non_animscene.circle_speed < gettime()) {
     var_0 = trackendangeredobjs();
-    scripts\mp\gametypes\br_gametype_gxp_ghost::ref_13fdd("inSafeZone", var_0);
+    scripts\mp\gametypes\br_gametype_gxp_ghost::ref_13FDD("inSafeZone", var_0);
 
     if(var_0) {
-      juggernaut_damage_thread(level.disable_super_in_turret.ref_12e6c);
+      juggernaut_damage_thread(level.disable_super_in_turret.ref_12E6C);
     } else {
       var_1 = level.disable_super_in_turret.play_3p_anim_non_animscene.circle_acceleration;
 
-      if(ref_13b0c()) {
+      if(ref_13B0C()) {
         var_1 += level.disable_super_in_turret.play_3p_anim_non_animscene.circle_back_to_combat;
       }
 
@@ -291,7 +291,7 @@ function ref_13312() {
     return false;
   }
 
-  if(scripts\mp\gametypes\br_public::ref_125ec()) {
+  if(scripts\mp\gametypes\br_public::ref_125EC()) {
     return false;
   }
 
@@ -302,7 +302,7 @@ function ref_13312() {
   return true;
 }
 
-function ref_132ee() {
+function ref_132EE() {
   if(self.sessionstate != "playing") {
     return true;
   }
@@ -311,14 +311,14 @@ function ref_132ee() {
     return true;
   }
 
-  if(scripts\mp\gametypes\br_public::ref_125ec()) {
+  if(scripts\mp\gametypes\br_public::ref_125EC()) {
     return true;
   }
 
   return false;
 }
 
-function ref_13fd7() {
+function ref_13FD7() {
   self endon("disconnect");
 
   if(ref_13312()) {
@@ -335,13 +335,13 @@ function ref_13fd7() {
 
   scripts\mp\gametypes\br_gxp_hallucination::has_target_player();
 
-  if(ref_132ee()) {
+  if(ref_132EE()) {
     headlessinfils();
     return;
   }
 }
 
-function ref_13fee() {
+function ref_13FEE() {
   for(;;) {
     if(isDefined(level.players) && level.players.size) {
       level.disable_super_in_turret.play_3p_anim %= level.players.size;
@@ -351,7 +351,7 @@ function ref_13fee() {
         var_2 = level.disable_super_in_turret.play_3p_anim;
         var_3 = level.players[var_2];
         level.disable_super_in_turret.play_3p_anim = (level.disable_super_in_turret.play_3p_anim + 1) % level.players.size;
-        thread ref_13fd7();
+        thread ref_13FD7();
         thread pkg_lbl_vo();
       }
     }
@@ -396,7 +396,7 @@ function plant_add_zplanes_override(var_0, var_1) {
 
 function plate_dest(var_0, var_1) {
   var_2 = clamp(var_1.damage, 0, level.disable_super_in_turret.play_3p_anim_non_animscene.is_wave_gametype);
-  var_3 = var_2 * level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1423c;
+  var_3 = var_2 * level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1423C;
   var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(self);
 
   if(isDefined(var_4)) {
@@ -416,15 +416,15 @@ function plane_landing_fx(var_0, var_1) {
   }
 
   if(self == var_1) {
-    start_preserverroom_spawners(level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1204d);
+    start_preserverroom_spawners(level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1204D);
     return;
   }
 
-  start_preserverroom_spawners(level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1204e);
+  start_preserverroom_spawners(level.disable_super_in_turret.play_3p_anim_non_animscene.ref_1204E);
 }
 
 function plane_door_opened(var_0, var_1) {
-  if(istrue(var_1.ref_12466) && scripts\mp\utility\killstreak::getkillstreakenemyusedialogue(var_1.ref_11ed2)) {
+  if(istrue(var_1.ref_12466) && scripts\mp\utility\killstreak::getkillstreakenemyusedialogue(var_1.ref_11ED2)) {
     var_2 = level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12049;
     start_preserverroom_spawners(var_2);
     return;
@@ -436,8 +436,8 @@ function placing_c4_interaction_use_monitor(var_0, var_1) {
 }
 
 function plant_enemy_claymore(var_0, var_1) {
-  scripts\mp\gametypes\br_gametype_gxp_challenges::ref_11ff0(self, var_0);
-  var_2 = var_1.pity_timer_end_time * level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11b5e;
+  scripts\mp\gametypes\br_gametype_gxp_challenges::ref_11FF0(self, var_0);
+  var_2 = var_1.pity_timer_end_time * level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11B5E;
   juggernaut_damage_thread(var_2);
 }
 
@@ -449,7 +449,7 @@ function plane_collmap(var_0, var_1) {
 }
 
 function planewaittillcandrop(var_0) {
-  if(_getactualcost::ref_13e19()) {
+  if(_getactualcost::ref_13E19()) {
     start_preserverroom_spawners(level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12055);
     return;
   }
@@ -459,7 +459,7 @@ function plant_remove_zplanes_override(var_0, var_1) {
   var_2 = var_1.victim;
   var_3 = var_1.attacker;
 
-  if(var_2 scripts\mp\gametypes\br_public::ref_125ec()) {
+  if(var_2 scripts\mp\gametypes\br_public::ref_125EC()) {
     juggernaut_damage_thread(level.disable_super_in_turret.play_3p_anim_non_animscene.ref_12039);
     return;
   }
@@ -470,7 +470,7 @@ function plant_remove_zplanes_override(var_0, var_1) {
 function pkg_lbl_vo() {
   var_0 = gettime();
 
-  if(isDefined(self.ref_11e76) && var_0 < self.ref_11e76) {
+  if(isDefined(self.ref_11E76) && var_0 < self.ref_11E76) {
     return;
   }
 
@@ -478,14 +478,14 @@ function pkg_lbl_vo() {
   var_2 = 1;
   var_3 = 0.5;
   var_4 = scripts\engine\math::lerp(var_2, var_3, var_1);
-  self.ref_11e76 = var_0 + int(1000 * var_4);
+  self.ref_11E76 = var_0 + int(1000 * var_4);
 
   if(var_1 <= 0) {
     return;
   }
 
   for(var_5 = 0; var_5 < level.disable_super_in_turret.setsuperisinuse.size; var_5++) {
-    var_6 = level.disable_super_in_turret.setsuperisinuse[var_5].ref_13db4;
+    var_6 = level.disable_super_in_turret.setsuperisinuse[var_5].ref_13DB4;
 
     if(var_1 < var_6) {
       continue;
@@ -497,12 +497,12 @@ function pkg_lbl_vo() {
       self playlocalsound(var_7, self);
     }
 
-    var_8 = level.disable_super_in_turret.play_3p_anim_non_animscene.ref_138ae[var_5];
+    var_8 = level.disable_super_in_turret.play_3p_anim_non_animscene.ref_138AE[var_5];
 
     if(isDefined(var_8)) {
-      if(!isDefined(self.ref_11e77) || var_0 >= self.ref_11e77) {
+      if(!isDefined(self.ref_11E77) || var_0 >= self.ref_11E77) {
         self playlocalsound(var_8);
-        self.ref_11e77 = var_0 + int(1000 * randomfloatrange(3, 5));
+        self.ref_11E77 = var_0 + int(1000 * randomfloatrange(3, 5));
       }
     }
 
@@ -524,10 +524,10 @@ function place_bad_place_until_flag(var_0) {
   var_2 = 0;
 
   while(var_2 < level.disable_super_in_turret.setsuperisinuse.size) {
-    var_3 = level.disable_super_in_turret.setsuperisinuse[var_2].ref_13db4;
+    var_3 = level.disable_super_in_turret.setsuperisinuse[var_2].ref_13DB4;
 
     if(var_0 <= var_3 && var_1 >= var_3) {
-      var_4 = level.disable_super_in_turret.play_3p_anim_non_animscene.ref_13b4a[var_2];
+      var_4 = level.disable_super_in_turret.play_3p_anim_non_animscene.ref_13B4A[var_2];
 
       if(isDefined(var_4)) {
         self playlocalsound(var_4, self);
@@ -553,7 +553,7 @@ function lethal_crate_spawn() {
     return;
   }
 
-  if(scripts\mp\gametypes\br_public::ref_125ec()) {
+  if(scripts\mp\gametypes\br_public::ref_125EC()) {
     return;
   }
 
@@ -580,7 +580,7 @@ function level_respawn_func() {
     var_2 = self.setarenaomnvarhealthtype;
 
     if(var_0 != var_2) {
-      var_3 = var_2 / level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11b5e;
+      var_3 = var_2 / level.disable_super_in_turret.play_3p_anim_non_animscene.ref_11B5E;
 
       if(var_3 > 1) {
         var_3 = 1;

@@ -5,8 +5,8 @@
 
 function main() {
   level.playerent = &scripts\cp\cp_weapon::bomber_spawn_origin_array_init;
-  level.ref_127f3 = &playerattractiontriggerexit;
-  level.ref_11b51 = 48;
+  level.ref_127F3 = &playerattractiontriggerexit;
+  level.ref_11B51 = 48;
   scripts\cp\helicopter\chopper_boss::init();
   thread onplayerconnect();
   level.skip_playerhudphoto = 1;
@@ -39,14 +39,14 @@ function main() {
   scripts\cp\laser_traps\cp_laser_traps::stopinteract();
   scripts\cp\laser_traps\cp_laser_traps::teamanchoredwidgetinstances();
   scripts\cp\killstreaks\nuke_cp::init_script_triggers();
-  scripts\engine\utility::create_func_ref("spawn_ai", &ref_134ec);
+  scripts\engine\utility::create_func_ref("spawn_ai", &ref_134EC);
   scripts\cp_mp\utility\script_utility::registersharedfunc("game", "returnObjectiveID", &lastdepositinstruct);
   scripts\cp\helicopter\chopper_boss::clearmatchhasmorethan1playervariablesonroundend();
-  scripts\cp\laser_traps\cp_laser_traps::ref_1430d();
+  scripts\cp\laser_traps\cp_laser_traps::ref_1430D();
 }
 
-function ref_134ec(var_0) {
-  return scripts\cp\laser_traps\cp_laser_traps::ref_134f1(self.script_type, self.origin, self.angles, 1);
+function ref_134EC(var_0) {
+  return scripts\cp\laser_traps\cp_laser_traps::ref_134F1(self.script_type, self.origin, self.angles, 1);
 }
 
 function lastdepositinstruct(var_0) {
@@ -283,7 +283,7 @@ function onplayerconnect() {
       var_0 scripts\cp\utility::allow_player_teleport(0);
       var_0.achievement_registration_func = &scripts\cp\cp_achievement::register_default_achievements;
       var_0 scripts\cp\cp_achievement::switchminimapid(var_0);
-      var_0.ref_136a1 = var_0.connect_time;
+      var_0.ref_136A1 = var_0.connect_time;
       var_0 scripts\cp\cp_mapselect::set_uav_radarstrength(var_0);
       var_0 scripts\cp\cp_persistence::lb_player_update_stat("waveNum", level.wave_num, 1);
       var_0 scripts\cp\cp_wall_buys::setup_player_weapon_models(var_0);
@@ -330,8 +330,8 @@ function pausemenu_think() {
     self waittill("luinotifyserver", var_0, var_1);
 
     if(var_0 == "vote_retry") {
-      scripts\cp\laser_traps\cp_laser_traps::ref_1430e("retry", 30);
-      scripts\cp\laser_traps\cp_laser_traps::ref_1430b("retry", 1);
+      scripts\cp\laser_traps\cp_laser_traps::ref_1430E("retry", 30);
+      scripts\cp\laser_traps\cp_laser_traps::ref_1430B("retry", 1);
     }
   }
 }
@@ -1003,7 +1003,7 @@ function kick_for_inactivity(var_0) {
     var_4 = 0.1;
 
     for(;;) {
-      var_5 = scripts\engine\utility::ref_143c0(var_4, "inputReceived", "currency_earned");
+      var_5 = scripts\engine\utility::ref_143C0(var_4, "inputReceived", "currency_earned");
 
       if(var_5 != "timeout") {
         var_3 = 120;

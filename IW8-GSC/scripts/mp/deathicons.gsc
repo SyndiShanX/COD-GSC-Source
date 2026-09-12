@@ -8,7 +8,7 @@ function init() {}
 function adddeathicon(var_0, var_1, var_2, var_3, var_4) {
   var_2 endon("disconnect");
 
-  if(istrue(var_2.ref_133cb)) {
+  if(istrue(var_2.ref_133CB)) {
     return;
   }
 
@@ -131,7 +131,7 @@ function setup_train_entarray_composite(var_0, var_1) {
       continue;
     }
 
-    scripts\cp_mp\entityheadicons::ref_1315e(var_0, var_6);
+    scripts\cp_mp\entityheadicons::ref_1315E(var_0, var_6);
   }
 
   if(var_3 > 0) {
@@ -151,7 +151,7 @@ function setup_train_entarray_composite(var_0, var_1) {
         continue;
       }
 
-      scripts\cp_mp\entityheadicons::ref_1315e(var_0, var_6);
+      scripts\cp_mp\entityheadicons::ref_1315E(var_0, var_6);
     }
 
     return;
@@ -196,10 +196,10 @@ function spawn_carriables_from_prefabs_all(var_0) {
     return;
   }
 
-  scripts\cp_mp\entityheadicons::ref_1315e(var_0.waittill_usebutton_released_or_time_or_bomb_planted, var_0);
+  scripts\cp_mp\entityheadicons::ref_1315E(var_0.waittill_usebutton_released_or_time_or_bomb_planted, var_0);
 }
 
-function ref_12c01(var_0) {
+function ref_12C01(var_0) {
   if(!isDefined(var_0) || !isDefined(var_0.waittill_usebutton_released_or_time_or_bomb_planted)) {
     return;
   }
@@ -209,9 +209,9 @@ function ref_12c01(var_0) {
   var_0 notify("removed_death_icon");
 }
 
-function ref_12bfd() {
+function ref_12BFD() {
   foreach(var_1 in level.players) {
-    ref_12c01(var_1);
+    ref_12C01(var_1);
   }
 }
 

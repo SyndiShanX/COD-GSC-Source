@@ -345,7 +345,7 @@ function create_convoy_truck(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
       thread trial_stat_row();
     }
 
-    thread ref_135da(level, var_10, var_2);
+    thread ref_135DA(level, var_10, var_2);
   }
 
   thread killoff_vis_passed(var_10);
@@ -364,7 +364,7 @@ function create_convoy_truck(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
         break;
     }
 
-    level thread scripts\cp\cp_vehicles::ref_135cb(var_10, var_11);
+    level thread scripts\cp\cp_vehicles::ref_135CB(var_10, var_11);
     var_10 scripts\engine\utility::ent_flag_set("driver_spawned");
     thread wait_to_deposit_driver(level);
   }
@@ -382,13 +382,13 @@ function create_convoy_truck(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
   }
 
   if(isDefined(var_6) && var_6 != "") {
-    thread ref_135e2(var_10);
+    thread ref_135E2(var_10);
   }
 
   return var_10;
 }
 
-function ref_135e2(var_0) {
+function ref_135E2(var_0) {
   var_0.computerscriptable = 1;
   var_0.zombiejumping = [];
   var_1 = (-62, 0, 45);
@@ -419,7 +419,7 @@ function ref_135e2(var_0) {
   var_0.computerscriptable = undefined;
 }
 
-function ref_135da(var_0, var_1, var_2) {
+function ref_135DA(var_0, var_1, var_2) {
   level thread scripts\cp\cp_vehicles::spawn_ai_in_truck(var_0, var_1, var_2.spawner, 0, undefined);
 }
 
@@ -434,8 +434,8 @@ function trial_start_time(var_0) {
   self waittill("stop_follow_path");
   var_1 = "entirecab";
 
-  if(isDefined(var_0) && isDefined(var_0.settings.ref_13f14)) {
-    var_1 = var_0.settings.ref_13f14;
+  if(isDefined(var_0) && isDefined(var_0.settings.ref_13F14)) {
+    var_1 = var_0.settings.ref_13F14;
   }
 
   scripts\common\vehicle::vehicle_unload(var_1);
@@ -1852,7 +1852,7 @@ function waittillhealthlow(var_0) {
 
 function main_truck_compromise(var_0) {
   if(isalive(var_0.main_truck) && istrue(var_0.not_compromised)) {
-    var_0.settings.ref_13f14 = undefined;
+    var_0.settings.ref_13F14 = undefined;
     var_0.main_truck.disable_leave_truck = 0;
 
     if(istrue(var_0.main_truck.hull_invulnerable)) {
@@ -3202,22 +3202,22 @@ function convoy_pickup_hvt_settings(var_0, var_1) {
 function binoculars_setexpirationtimer(var_0, var_1) {
   if(isai(self)) {
     self.scripted_mode = 1;
-    self.restoreweapon = self.ref_1237e;
+    self.restoreweapon = self.ref_1237E;
     self takeweapon(self.weapon);
     var_0.clearandrestoreinfectedtacinsert = 1;
     var_0.play_trialympic_flames = 1;
     var_2 = spawn("script_origin", var_0.origin);
     var_2.origin = var_0.origin;
     var_2.angles = var_0.angles;
-    self.ref_12f89 = var_2;
-    self.ref_12f89 scripts\common\anim::anim_first_frame_solo(var_0.body, "pickup_hvt_ground");
-    thread binoculars_setpendingtimer(self.ref_12f89, self);
-    scripts\asm\shared\mp\utility::burningpartlogic("sdr_cp_hostage_pickup_ground_player", self.ref_12f89, undefined, 0, "animscripted2");
+    self.ref_12F89 = var_2;
+    self.ref_12F89 scripts\common\anim::anim_first_frame_solo(var_0.body, "pickup_hvt_ground");
+    thread binoculars_setpendingtimer(self.ref_12F89, self);
+    scripts\asm\shared\mp\utility::burningpartlogic("sdr_cp_hostage_pickup_ground_player", self.ref_12F89, undefined, 0, "animscripted2");
   }
 
-  if(isDefined(self.ref_12f89)) {
-    self.ref_12f89 delete();
-    self.ref_12f89 = undefined;
+  if(isDefined(self.ref_12F89)) {
+    self.ref_12F89 delete();
+    self.ref_12F89 = undefined;
   }
 
   var_0.clearandrestoreinfectedtacinsert = 0;

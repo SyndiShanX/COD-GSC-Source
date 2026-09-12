@@ -1092,7 +1092,7 @@ function loop_fx_on_vehicle_tag(var_0, var_1, var_2) {
 
 function death_firesound(var_0) {
   thread scripts\engine\utility::script_func("playloopsound_on_tag", var_0, undefined, 0, 1);
-  scripts\engine\utility::ref_143a5("fire_extinguish", "stop_crash_loop_sound");
+  scripts\engine\utility::ref_143A5("fire_extinguish", "stop_crash_loop_sound");
 
   if(!isDefined(self)) {
     return;
@@ -2188,7 +2188,7 @@ function vehicle_damagelogic() {
     if(isDefined(var_3)) {
       var_3 scripts\engine\utility::script_func("register_shot_hit");
 
-      if(scripts\engine\utility::func_ref_exist("vehicle_damage_modifier")) {
+      if(scripts\engine\utility::func_ref_EXIST("vehicle_damage_modifier")) {
         var_15 = undefined;
 
         if(isDefined(level.player_xp)) {
@@ -2233,7 +2233,7 @@ function vehicle_damagelogic() {
       var_1 = self.health;
     }
 
-    if(!istrue(self.ref_13dd4) && self.health <= self.healthbuffer) {
+    if(!istrue(self.ref_13DD4) && self.health <= self.healthbuffer) {
       self notify("death", var_3, var_6, var_11, var_5);
     }
   }
@@ -2330,7 +2330,7 @@ function is_invulnerable_from_ai(var_0) {
 }
 
 function attacker_troop_isonmyteam(var_0) {
-  if(!istrue(self.ref_13dd4) && isDefined(self.script_team) && self.script_team == "allies" && isDefined(var_0) && isPlayer(var_0)) {
+  if(!istrue(self.ref_13DD4) && isDefined(self.script_team) && self.script_team == "allies" && isDefined(var_0) && isPlayer(var_0)) {
     return 1;
   }
 
@@ -2738,7 +2738,7 @@ function helicopter_crash_path(var_0) {
 
     self setneargoalnotifydist(var_1);
     self setvehgoalpos(var_0.origin, 0);
-    scripts\engine\utility::ref_143a5("goal", "near_goal");
+    scripts\engine\utility::ref_143A5("goal", "near_goal");
   }
 }
 

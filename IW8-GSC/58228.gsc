@@ -3,7 +3,7 @@
  * Script: 58228.gsc
 ***********************************************/
 
-function ref_124f5() {
+function ref_124F5() {
   var_0 = self getmovingplatformparent();
 
   if(isDefined(var_0)) {
@@ -16,8 +16,8 @@ function ref_124f5() {
 }
 
 function tugofwar_tank(var_0) {
-  if(isDefined(level.ref_145f1)) {
-    foreach(var_2 in level.ref_145f1.ref_13c8d) {
+  if(isDefined(level.ref_145F1)) {
+    foreach(var_2 in level.ref_145F1.ref_13C8D) {
       if(var_2 == var_0) {
         return true;
       }
@@ -26,12 +26,12 @@ function tugofwar_tank(var_0) {
         return true;
       }
     }
-  } else if(isDefined(level.ref_13cd3) && isDefined(level.ref_13cd3.helis_assault2_check_size) && isDefined(level.ref_13cd3.ref_11c70)) {
-    if(var_0 == level.ref_13cd3.ref_11c70) {
+  } else if(isDefined(level.ref_13CD3) && isDefined(level.ref_13CD3.helis_assault2_check_size) && isDefined(level.ref_13CD3.ref_11C70)) {
+    if(var_0 == level.ref_13CD3.ref_11C70) {
       return true;
     }
 
-    foreach(var_2 in level.ref_13cd3.helis_assault2_check_size) {
+    foreach(var_2 in level.ref_13CD3.helis_assault2_check_size) {
       if(var_2 == var_0) {
         return true;
       }
@@ -42,8 +42,8 @@ function tugofwar_tank(var_0) {
 }
 
 function tryspawnweapons(var_0) {
-  if(isDefined(level.ref_1394c)) {
-    foreach(var_2 in level.ref_1394c) {
+  if(isDefined(level.ref_1394C)) {
+    foreach(var_2 in level.ref_1394C) {
       if(isDefined(var_2)) {
         if(var_2 == var_0) {
           return true;
@@ -64,8 +64,8 @@ function trophy_tryreflectsnapshot(var_0) {
     return false;
   }
 
-  if(isDefined(level.ref_145f1)) {
-    foreach(var_2 in level.ref_145f1.ref_13c8d) {
+  if(isDefined(level.ref_145F1)) {
+    foreach(var_2 in level.ref_145F1.ref_13C8D) {
       if(var_2 == var_0) {
         return true;
       }
@@ -76,9 +76,9 @@ function trophy_tryreflectsnapshot(var_0) {
 }
 
 function manageworldspawnedbolts(var_0) {
-  if(isDefined(level.ref_145f1)) {
-    if(isDefined(var_0) && isDefined(var_0.tablet) && istrue(var_0.tablet.ref_11ff8)) {
-      level.ref_145f1 notify("train_dom_contract_complete", var_0);
+  if(isDefined(level.ref_145F1)) {
+    if(isDefined(var_0) && isDefined(var_0.tablet) && istrue(var_0.tablet.ref_11FF8)) {
+      level.ref_145F1 notify("train_dom_contract_complete", var_0);
       return;
     }
 
@@ -113,15 +113,15 @@ function c130airdrop_deleteatlifetime(var_0, var_1) {
 }
 
 function c130airdrop_createpathstruct(var_0) {
-  for(var_1 = 0; var_1 < level.ref_145f1.animents.size; var_1++) {
-    var_2 = level.scr_anim["br_cargo_train_anim"][level.ref_145f1.animents[var_1].bullet][0];
+  for(var_1 = 0; var_1 < level.ref_145F1.animents.size; var_1++) {
+    var_2 = level.scr_anim["br_cargo_train_anim"][level.ref_145F1.animents[var_1].bullet][0];
 
     if(!isDefined(var_2)) {
       return;
     }
 
     var_3 = getanimlength(var_2);
-    var_4 = level.ref_145f1.animents[var_1] getanimtime(var_2);
+    var_4 = level.ref_145F1.animents[var_1] getanimtime(var_2);
     var_5 = var_4 * var_3;
 
     if(var_5 + var_0 > var_3) {
@@ -138,7 +138,7 @@ function c130airdrop_createpathstruct(var_0) {
       return 0;
     }
 
-    if(ref_127da(var_8)) {
+    if(ref_127DA(var_8)) {
       return 1;
     }
   }
@@ -147,9 +147,9 @@ function c130airdrop_createpathstruct(var_0) {
 }
 
 function c130airdrop_createpath() {
-  if(isDefined(level.ref_145f1) && isDefined(level.ref_145f1.ref_13c8d)) {
-    foreach(var_1 in level.ref_145f1.ref_13c8d) {
-      if(ref_127da(var_1.origin)) {
+  if(isDefined(level.ref_145F1) && isDefined(level.ref_145F1.ref_13C8D)) {
+    foreach(var_1 in level.ref_145F1.ref_13C8D) {
+      if(ref_127DA(var_1.origin)) {
         return true;
       }
     }
@@ -158,7 +158,7 @@ function c130airdrop_createpath() {
   return false;
 }
 
-function ref_127da(var_0, var_1) {
+function ref_127DA(var_0, var_1) {
   if(istrue(level.br_circle_disabled)) {
     return false;
   }
@@ -226,7 +226,7 @@ function updatelocationbesttime(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
 function updateleadmarkers(var_0, var_1) {
   var_2 = var_1.ref_14724;
   var_3 = var_0.origin - var_2;
-  var_4 = vectordot(var_3, var_1.ref_12ac3);
+  var_4 = vectordot(var_3, var_1.ref_12AC3);
 
   if(var_4 > var_1.halflength) {
     return false;
@@ -236,7 +236,7 @@ function updateleadmarkers(var_0, var_1) {
     return false;
   }
 
-  var_5 = vectordot(var_3, var_1.ref_12ac4);
+  var_5 = vectordot(var_3, var_1.ref_12AC4);
 
   if(var_5 > var_1.halfwidth) {
     return false;
@@ -246,7 +246,7 @@ function updateleadmarkers(var_0, var_1) {
     return false;
   }
 
-  var_6 = vectordot(var_3, var_1.ref_12ac5);
+  var_6 = vectordot(var_3, var_1.ref_12AC5);
 
   if(var_6 > var_1.setplayerbeingrevivedextrainfo) {
     return false;
@@ -261,11 +261,11 @@ function updateleadmarkers(var_0, var_1) {
 
 function init_timer(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = spawnStruct();
-  var_8.ref_12ac3 = anglesToForward(var_0.angles);
-  var_8.ref_12ac4 = anglestoright(var_0.angles);
-  var_8.ref_12ac5 = anglestoup(var_0.angles);
+  var_8.ref_12AC3 = anglesToForward(var_0.angles);
+  var_8.ref_12AC4 = anglestoright(var_0.angles);
+  var_8.ref_12AC5 = anglestoup(var_0.angles);
   var_9 = var_0 gettagorigin(var_1);
-  var_8.ref_14724 = var_9 + var_8.ref_12ac3 * var_2 + var_8.ref_12ac4 * var_3 + var_8.ref_12ac5 * var_4;
+  var_8.ref_14724 = var_9 + var_8.ref_12AC3 * var_2 + var_8.ref_12AC4 * var_3 + var_8.ref_12AC5 * var_4;
   var_10 = [];
   var_8.halflength = var_5 / 2;
   var_8.halfwidth = var_6 / 2;
@@ -273,7 +273,7 @@ function init_timer(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   return var_8;
 }
 
-function ref_124d8(var_0, var_1) {
+function ref_124D8(var_0, var_1) {
   return updatelocationbesttime(var_1, var_0, "tag_origin", 0, 0, 88, 760, 112, 124);
 }
 
@@ -281,13 +281,13 @@ function updateleaders() {
   var_0 = 0;
 
   if(level.gametype == "br") {
-    if(isDefined(level.ref_1394c)) {
-      foreach(var_2 in level.ref_1394c) {
+    if(isDefined(level.ref_1394C)) {
+      foreach(var_2 in level.ref_1394C) {
         if(!isDefined(var_2)) {
           continue;
         }
 
-        if(ref_124d8(var_2, self)) {
+        if(ref_124D8(var_2, self)) {
           var_0 = 1;
           break;
         }

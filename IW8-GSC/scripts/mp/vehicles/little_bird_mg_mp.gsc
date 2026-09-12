@@ -12,13 +12,13 @@ function blockade_gate_explode_sequence(var_0, var_1) {
   var_5 = "wm_eq_ascender_" + var_0 + "_get_on_ascender";
   var_6 = "wm_eq_ascender_" + var_0 + "_loop_ascender";
   var_7 = "wm_eq_ascender_" + var_0 + "_get_off_ascender";
-  thread ref_12b4e(var_1);
+  thread ref_12B4E(var_1);
   var_8 = blockade_barbwires(var_2, var_1);
   var_8.mp_backlot2_patch = scripts\engine\utility::getStruct(var_1.target, "targetname");
-  ref_13baa(1, var_8);
+  ref_13BAA(1, var_8);
   thread blinking_light_thread(var_2, var_4, var_3, var_5, var_7, var_6, var_8, var_1, var_0);
   var_1.inuse = 0;
-  scripts\engine\utility::ref_143a5("ascended", "death");
+  scripts\engine\utility::ref_143A5("ascended", "death");
 }
 
 function bomb_sites_spawn(var_0) {
@@ -33,7 +33,7 @@ function bomb_sites_spawn(var_0) {
   var_0.inuse = 1;
 }
 
-function ref_12b4e(var_0) {
+function ref_12B4E(var_0) {
   self endon("ascended");
   self waittill("death");
   var_0.inuse = 0;
@@ -61,7 +61,7 @@ function blinking_light_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   blink_wheelson_chosen_spawn(var_14, var_6);
   blinkblackoverlay(var_4, var_11, var_12);
   blockade_gate();
-  ref_13baa(0);
+  ref_13BAA(0);
   self notify("ascended");
 }
 
@@ -147,7 +147,7 @@ function canplaycircleopendialog() {
   var_0 delete();
 }
 
-function ref_13baa(var_0, var_1) {
+function ref_13BAA(var_0, var_1) {
   if(var_0) {
     self.ignoreall = 1;
 

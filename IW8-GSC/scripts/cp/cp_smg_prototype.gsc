@@ -37,7 +37,7 @@ function smg_flank_player(var_0, var_1) {
     }
 
     self setgoalpos(var_4);
-    var_5 = scripts\engine\utility::ref_143ad("goal_reached", "goal");
+    var_5 = scripts\engine\utility::ref_143AD("goal_reached", "goal");
     watchforenemydistance();
   }
 }

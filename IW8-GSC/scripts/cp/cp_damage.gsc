@@ -58,7 +58,7 @@ function callback_playerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
       level thread[[level.overcook_func[var_14]]](var_15, var_14);
     }
 
-    if(scripts\cp\cp_relics::try_start_fake_infil_chopper("relic_amped") && istrue(var_15.ref_12a7e)) {
+    if(scripts\cp\cp_relics::try_start_fake_infil_chopper("relic_amped") && istrue(var_15.ref_12A7E)) {
       var_2 = var_13;
     }
   }
@@ -993,7 +993,7 @@ function finishplayerdamagewrapper(var_0, var_1, var_2, var_3, var_4, var_5, var
         }
 
         if(van_initdamage()) {
-          thread ref_127e1();
+          thread ref_127E1();
           self waittill("stopped_using_remote");
           var_2 = self.health + 100000;
 
@@ -1020,7 +1020,7 @@ function finishplayerdamagewrapper(var_0, var_1, var_2, var_3, var_4, var_5, var
         self waittill("juggernaut_end");
         self finishplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
       } else if(isDefined(self.vehicle)) {
-        scripts\engine\utility::ref_143ba(2, "exited_vehicle", "vehicle_exit");
+        scripts\engine\utility::ref_143BA(2, "exited_vehicle", "vehicle_exit");
         self finishplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
         self disableusability();
       } else {
@@ -1093,7 +1093,7 @@ function callback_killingblow(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
   return true;
 }
 
-function ref_127e1() {
+function ref_127E1() {
   self endon("disconnect");
   self endon("death");
   self endon("laststand");
@@ -1298,27 +1298,27 @@ function deathshieldinvulnerability(var_0, var_1, var_2, var_3, var_4, var_5, va
   enabledeathsdoor();
   var_9 = level.framedurationseconds * 1000 * 40;
 
-  if(istrue(level.ref_12bac)) {
+  if(istrue(level.ref_12BAC)) {
     var_9 = level.framedurationseconds * 1000 * 10;
   }
 
   self.damageshieldexpiretime = gettime() + var_9;
 
   if(!istrue(self.adrenalinepoweractive)) {
-    ref_1433e(var_7, "force_regeneration");
+    ref_1433E(var_7, "force_regeneration");
   }
 
   setdamageflag(1, 0);
   disabledamageinvulnerability();
 
   if(!istrue(self.adrenalinepoweractive)) {
-    ref_1433e(var_8, "force_regeneration");
+    ref_1433E(var_8, "force_regeneration");
   }
 
   disabledeathsdoor();
 }
 
-function ref_1433e(var_0, var_1) {
+function ref_1433E(var_0, var_1) {
   self endon(var_1);
   wait var_0;
 }
@@ -1391,7 +1391,7 @@ function bloodoverlay(var_0, var_1, var_2) {
   self endon("stopPainOverlays");
   self.damage.bloodoverlay fadeovertime(0.05);
   self.damage.bloodoverlay.alpha = var_0;
-  ref_1433e(var_1, "force_regeneration");
+  ref_1433E(var_1, "force_regeneration");
 
   if(var_2 <= 0) {
     var_2 = 1;
@@ -2086,7 +2086,7 @@ function oldhealthregen(var_0, var_1) {
       break;
     }
 
-    scripts\engine\utility::ref_143b9(var_2.waittimebetweenregen, "force_regeneration");
+    scripts\engine\utility::ref_143B9(var_2.waittimebetweenregen, "force_regeneration");
   }
 
   self notify("healed");
@@ -2108,7 +2108,7 @@ function core_health_regen() {
   level endon("game_ended");
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143af("damage", "health_perk_upgrade", "force_regeneration", "relic_resume_health_regen");
+    var_0 = scripts\engine\utility::ref_143AF("damage", "health_perk_upgrade", "force_regeneration", "relic_resume_health_regen");
 
     if(var_0 == "force_regeneration") {
       regenerate_health();
@@ -2119,12 +2119,12 @@ function core_health_regen() {
       continue;
     }
 
-    ref_12ace();
+    ref_12ACE();
     regenerate_health();
   }
 }
 
-function ref_12ace() {
+function ref_12ACE() {
   self endon("force_regeneration");
   var_0 = gethealthregendelay();
   wait var_0;

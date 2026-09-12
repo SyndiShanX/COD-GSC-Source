@@ -6,7 +6,7 @@
 function create_juggernaut_spawner() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("veh_bt", "initLate", &create_keycard_for_reader);
   scripts\cp_mp\utility\script_utility::registersharedfunc("veh_bt", "create", &create_heli_stuct);
-  scripts\engine\utility::create_func_ref("veh_bt", &ref_134f5);
+  scripts\engine\utility::create_func_ref("veh_bt", &ref_134F5);
   scripts\cp_mp\utility\script_utility::registersharedfunc("veh_bt", "spawnCallback", &create_laser_trap);
   scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_registeroutoftimecallback("veh_bt", &_calloutmarkerping_handleluinotify_mappingdeletemarker::create_script_wait_for_flags);
 }
@@ -46,7 +46,7 @@ function create_heli_stuct(var_0) {
   var_0.health = var_0.maxhealth;
 }
 
-function ref_134f5(var_0) {
+function ref_134F5(var_0) {
   var_1 = spawnStruct();
   var_1.origin = var_0.origin + (0, 0, 100);
   var_1.angles = var_0.angles * (0, 1, 0);

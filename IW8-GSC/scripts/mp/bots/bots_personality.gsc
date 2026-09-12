@@ -360,7 +360,7 @@ function clear_script_goal_on(var_0, var_1, var_2, var_3, var_4) {
   var_6 = 1;
 
   while(var_6) {
-    var_7 = scripts\engine\utility::ref_143b1(var_0, var_1, var_2, var_3, var_4, "script_goal_changed");
+    var_7 = scripts\engine\utility::ref_143B1(var_0, var_1, var_2, var_3, var_4, "script_goal_changed");
     var_6 = 0;
     var_8 = 1;
 

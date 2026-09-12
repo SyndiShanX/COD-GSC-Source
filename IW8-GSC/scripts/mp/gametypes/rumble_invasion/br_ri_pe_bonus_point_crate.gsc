@@ -16,16 +16,16 @@ function init() {
   var_0 = spawnStruct();
   var_0.weight = getdvarfloat("scr_ri_pe_bonus_point_crate_weight", 1);
   var_0.attackerswaittime = &attackerswaittime;
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.ref_14382 = &ref_14382;
-  var_0.ref_11b78 = getdvarint("scr_ri_pe_bonus_point_crate_max_times", 1);
+  var_0.ref_11B78 = getdvarint("scr_ri_pe_bonus_point_crate_max_times", 1);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("hardpoint", "10 5 0 00 0 0 0");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(102, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(102, var_0);
   _killstreakneedslocationselection::subtract_from_spawn_count_from_group();
   thread zombienumhitscar();
 }
 
-function ref_140cf() {
+function ref_140CF() {
   return false;
 }
 
@@ -55,12 +55,12 @@ function attackerswaittime() {
 function zombienumhitscar() {
   waitframe();
 
-  if(!isDefined(level.current_safehouse_spawn_structs.ref_12e2c)) {
-    level.current_safehouse_spawn_structs.ref_12e2c = spawnStruct();
-    level.current_safehouse_spawn_structs.ref_12e2c.ref_13904 = "rumble_incursion";
+  if(!isDefined(level.current_safehouse_spawn_structs.ref_12E2C)) {
+    level.current_safehouse_spawn_structs.ref_12E2C = spawnStruct();
+    level.current_safehouse_spawn_structs.ref_12E2C.ref_13904 = "rumble_incursion";
   }
 
-  level.current_safehouse_spawn_structs.ref_12e2c.arena_bot_pickup_weapon = undefined;
+  level.current_safehouse_spawn_structs.ref_12E2C.arena_bot_pickup_weapon = undefined;
   var_0 = level.currentability;
 
   if(var_0.size > 0) {
@@ -70,7 +70,7 @@ function zombienumhitscar() {
       var_1 = var_3.origin;
     }
 
-    level.current_safehouse_spawn_structs.ref_12e2c.arena_bot_pickup_weapon = var_1;
+    level.current_safehouse_spawn_structs.ref_12E2C.arena_bot_pickup_weapon = var_1;
 
     if(var_1.size <= level.current_safehouse_spawn_structs.specialistbr) {
       level.current_safehouse_spawn_structs.specialistbr = var_1.size;

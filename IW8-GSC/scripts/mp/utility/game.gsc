@@ -393,7 +393,7 @@ function islastwinbytwo() {
   return shouldplaywinbytwo() && game["overtimeRoundsPlayed"] == getmaxwinbytworounds() - 1;
 }
 
-function ref_1332b() {
+function ref_1332B() {
   var_0 = game["roundsWon"]["allies"];
   var_1 = game["roundsWon"]["axis"];
   return abs(var_0 - var_1) < 2;
@@ -887,7 +887,7 @@ function getlastlivingplayer(var_0) {
   return var_1;
 }
 
-function ref_13e13() {
+function ref_13E13() {
   var_0 = undefined;
 
   foreach(var_2 in level.players) {
@@ -1479,8 +1479,8 @@ function repair_grill_fixing_short_sfx() {
 function runbrgametypefunc() {
   var_0 = self;
 
-  if(isDefined(var_0.ref_120b4)) {
-    return var_0.ref_120b4;
+  if(isDefined(var_0.ref_120B4)) {
+    return var_0.ref_120B4;
   }
 
   return undefined;
@@ -1823,7 +1823,7 @@ function mapsupportsbasejumping() {
   }
 }
 
-function ref_119ac(var_0, var_1, var_2, var_3, var_4) {
+function ref_119AC(var_0, var_1, var_2, var_3, var_4) {
   var_5 = scripts\mp\matchdata::gettimefrommatchstart(gettime());
 
   if(!isDefined(var_2)) {
@@ -1899,11 +1899,11 @@ function get_allowed_vehicle_types_from_spawnpoint(var_0) {
 
   if((getgametype() == "arm" || unset_relic_landlocked()) && vcloseangles() || getdvarint("scr_game_forceEnableParachuteCut", 0) == 1) {
     if(var_3 != "mp_aniyah") {
-      if(istrue(level.ref_121c8)) {
+      if(istrue(level.ref_121C8)) {
         var_1 = 1;
       }
 
-      if(istrue(level.ref_121c9) && !istrue(var_0.little_bird_mg_playerexitturret)) {
+      if(istrue(level.ref_121C9) && !istrue(var_0.little_bird_mg_playerexitturret)) {
         var_2 = 1;
       }
     }
@@ -1973,7 +1973,7 @@ function updatetextongamepadchange() {
   return true;
 }
 
-function ref_131a3(var_0, var_1) {
+function ref_131A3(var_0, var_1) {
   if(var_1) {
     var_0.c130 = 1;
     return;

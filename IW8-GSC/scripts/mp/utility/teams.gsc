@@ -38,10 +38,10 @@ function addtoteamlives(var_0, var_1, var_2, var_3) {
     level.teamdata[var_1]["deathEvent"] = 0;
   }
 
-  ref_140c9("add", var_1, var_0);
+  ref_140C9("add", var_1, var_0);
 
-  if(isDefined(level.ref_11c65)) {
-    [[level.ref_11c65]](var_0, var_1, var_3);
+  if(isDefined(level.ref_11C65)) {
+    [[level.ref_11C65]](var_0, var_1, var_3);
   }
 
   if(scripts\mp\utility\game::lpcfeaturegated()) {
@@ -66,10 +66,10 @@ function addtoteamlives(var_0, var_1, var_2, var_3) {
 function removefromteamlives(var_0, var_1, var_2, var_3) {
   level.teamdata[var_1]["aliveCount"]--;
   level.teamdata[var_1]["alivePlayers"] = scripts\engine\utility::array_remove(level.teamdata[var_1]["alivePlayers"], var_0);
-  ref_140c9("remove", var_1, var_0);
+  ref_140C9("remove", var_1, var_0);
 
-  if(isDefined(level.ref_11c7e)) {
-    [[level.ref_11c7e]](var_0, var_1, var_3);
+  if(isDefined(level.ref_11C7E)) {
+    [[level.ref_11C7E]](var_0, var_1, var_3);
   }
 
   if(istrue(var_2) && isgameplayteam(var_1) && !scripts\cp_mp\utility\game_utility::isrealismenabled()) {
@@ -101,7 +101,7 @@ function removefromteamlives(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_140c9(var_0, var_1, var_2) {
+function ref_140C9(var_0, var_1, var_2) {
   var_3 = getdvarint("scr_alive_count_fix", 1);
   var_4 = 0;
   var_5 = 0;
@@ -328,7 +328,7 @@ function getcustomgametypeteammax() {
   return getdvarint("scr_" + var_0 + "_teamcount", -1);
 }
 
-function ref_13a9f() {
+function ref_13A9F() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("team_utility", "getFriendlyPlayers", &getfriendlyplayers);
   scripts\cp_mp\utility\script_utility::registersharedfunc("team_utility", "getEnemyPlayers", &getenemyplayers);
 }

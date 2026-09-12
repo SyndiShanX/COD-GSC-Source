@@ -4,28 +4,28 @@
 *********************************************************/
 
 function init() {
-  scripts\engine\scriptable::ref_12f5b("body", &postspawn_rpg);
+  scripts\engine\scriptable::ref_12F5B("body", &postspawn_rpg);
   var_0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("geigerstash", 1);
 
   if(!var_0) {
     return;
   }
 
-  scripts\mp\gametypes\br_quest_util::getquestdata("geigerstash").ref_12fa0 = getdvarint("scr_br_geigerstash_searchCircleSize", 7000);
-  scripts\mp\gametypes\br_quest_util::getquestdata("geigerstash").ref_11c4c = getdvarint("scr_br_geigerstash_missionTimeBase", 180);
-  scripts\mp\gametypes\br_quest_util::ref_12b3d("geigerstash", &postspawn_sniper);
+  scripts\mp\gametypes\br_quest_util::getquestdata("geigerstash").ref_12FA0 = getdvarint("scr_br_geigerstash_searchCircleSize", 7000);
+  scripts\mp\gametypes\br_quest_util::getquestdata("geigerstash").ref_11C4C = getdvarint("scr_br_geigerstash_missionTimeBase", 180);
+  scripts\mp\gametypes\br_quest_util::ref_12B3D("geigerstash", &postspawn_sniper);
   scripts\mp\gametypes\br_quest_util::registerremovequestinstance("geigerstash", &postspawn_assault3_bombers);
-  scripts\mp\gametypes\br_quest_util::ref_12b2e("geigerstash", &postplunder);
+  scripts\mp\gametypes\br_quest_util::ref_12B2E("geigerstash", &postplunder);
   scripts\mp\gametypes\br_quest_util::registerquestcircletick("geigerstash", &postgamestate);
-  scripts\mp\gametypes\br_quest_util::ref_12b2d("geigerstash", &postkillcamplunderlost);
-  scripts\mp\gametypes\br_quest_util::ref_12b30("geigerstash", &postspawn_initial_allies);
-  scripts\mp\gametypes\br_quest_util::ref_1297c("geigerstash", 1);
-  scripts\mp\gametypes\br_quest_util::ref_12b31("geigerstash", &postlaunchscenenodecorrection);
+  scripts\mp\gametypes\br_quest_util::ref_12B2D("geigerstash", &postkillcamplunderlost);
+  scripts\mp\gametypes\br_quest_util::ref_12B30("geigerstash", &postspawn_initial_allies);
+  scripts\mp\gametypes\br_quest_util::ref_1297C("geigerstash", 1);
+  scripts\mp\gametypes\br_quest_util::ref_12B31("geigerstash", &postlaunchscenenodecorrection);
 }
 
 function postspawn_sniper() {
   var_0 = self.origin;
-  var_1 = ref_11a00(var_0);
+  var_1 = ref_11A00(var_0);
   var_2 = scripts\mp\gametypes\br_quest_util::play_train_speaker_vo("geigerstash", var_1);
 
   if(!isDefined(var_2)) {
@@ -34,7 +34,7 @@ function postspawn_sniper() {
 
   getlootspawnpointcount(var_2.index);
   var_0 = var_2.origin;
-  self.ref_12c4a = var_2;
+  self.ref_12C4A = var_2;
   return true;
 }
 
@@ -84,11 +84,11 @@ function postlaunchscenenodecorrection() {
 function postshipmodifychevrons(var_0) {
   var_1 = "secondary";
   var_2 = "equip_geiger_counter";
-  var_0[0] scripts\mp\equipment::ref_13a30(var_0, var_1, var_2, 0);
+  var_0[0] scripts\mp\equipment::ref_13A30(var_0, var_1, var_2, 0);
 
   foreach(var_4 in var_0) {
     if(isDefined(var_4.modespawnclient)) {
-      scripts\mp\gametypes\br_pickups::ref_11a21(var_4.modespawnclient);
+      scripts\mp\gametypes\br_pickups::ref_11A21(var_4.modespawnclient);
     }
   }
 }
@@ -133,47 +133,47 @@ function gethillspawnshutofforigin(var_0) {
 function takequestitem(var_0) {
   var_1 = scripts\mp\gametypes\br_quest_util::createquestinstance("geigerstash", self.team, var_0.index, var_0);
   var_1 scripts\mp\gametypes\br_quest_util::registerteamonquest(self.team, self);
-  var_1 scripts\mp\gametypes\br_quest_util::ref_12b15(self);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_12B15(self);
   var_1.team = self.team;
   var_1.startlocation = self.origin;
   var_1.intelprogress = self.origin;
-  var_1.ref_12c4a = var_0.ref_12c4a;
+  var_1.ref_12C4A = var_0.ref_12C4A;
   var_1.playerlist = scripts\mp\utility\teams::getteamdata(self.team, "players");
-  var_2 = ref_11a00(var_1.startlocation, var_1.ref_12c4a);
-  ref_13659(var_1, var_1.ref_12c4a.origin, var_1.ref_12c4a.angles);
-  ref_13fdc(var_1);
+  var_2 = ref_11A00(var_1.startlocation, var_1.ref_12C4A);
+  ref_13659(var_1, var_1.ref_12C4A.origin, var_1.ref_12C4A.angles);
+  ref_13FDC(var_1);
   scripts\mp\gametypes\br_quest_util::uiobjectiveshowtoteam("geigerstash", self.team);
-  var_1 scripts\mp\gametypes\br_quest_util::ref_1297d(scripts\mp\gametypes\br_quest_util::getquestdata("geigerstash").ref_11c4c, 4);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_1297D(scripts\mp\gametypes\br_quest_util::getquestdata("geigerstash").ref_11C4C, 4);
   scripts\mp\gametypes\br_quest_util::addquestinstance("geigerstash", var_1);
   scripts\mp\gametypes\br_quest_util::ref_13879("geigerstash", self, self.team);
   var_3 = spawnStruct();
   var_3.excludedplayers = [];
   var_3.excludedplayers[0] = self;
-  var_3.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("geigerstash", scripts\mp\gametypes\br_quest_util::ringing(self.team));
+  var_3.ref_127D5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("geigerstash", scripts\mp\gametypes\br_quest_util::ringing(self.team));
   scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_geigerstash_quest_start_team_notify", var_3);
   scripts\mp\gametypes\br_quest_util::displayplayersplash(self, "br_geigerstash_quest_start_tablet_finder", var_3);
   scripts\mp\gametypes\br_quest_util::searchfunc(self.team, "br_mission_pickup_tablet");
 }
 
-function ref_11a00(var_0, var_1) {
+function ref_11A00(var_0, var_1) {
   var_2 = spawnStruct();
-  var_2.ref_12fa3 = "getUnusedLootCacheArray";
-  var_2.ref_12f9f = var_0;
-  var_2.ref_12fa6 = 10000;
-  var_2.ref_12fa7 = 0;
-  var_2.ref_12fa4 = 4000;
-  var_2.ref_12fa5 = 2000;
-  var_2.ref_12fa1 = 1;
-  var_2.ref_12c4a = var_1;
+  var_2.ref_12FA3 = "getUnusedLootCacheArray";
+  var_2.ref_12F9F = var_0;
+  var_2.ref_12FA6 = 10000;
+  var_2.ref_12FA7 = 0;
+  var_2.ref_12FA4 = 4000;
+  var_2.ref_12FA5 = 2000;
+  var_2.ref_12FA1 = 1;
+  var_2.ref_12C4A = var_1;
   var_2.mintime = 60;
 
   if(getDvar("scr_br_gametype", "") == "dmz" || getDvar("scr_br_gametype", "") == "rat_race") {
-    if(var_2.ref_12fa6 < level.ref_12969) {
-      var_2.ref_12fa6 = level.ref_12969;
+    if(var_2.ref_12FA6 < level.ref_12969) {
+      var_2.ref_12FA6 = level.ref_12969;
     }
 
-    var_2.ref_12fa4 = level.ref_12969;
-    var_2.ref_12fa5 = level.ref_1296a;
+    var_2.ref_12FA4 = level.ref_12969;
+    var_2.ref_12FA5 = level.ref_1296A;
   }
 
   return var_2;
@@ -206,7 +206,7 @@ function ref_13659(var_0, var_1) {
   }
 }
 
-function ref_13fdc() {
+function ref_13FDC() {
   var_0 = scripts\mp\gametypes\br_quest_util::sortvalidplayersinarray(self.playerlist);
 
   foreach(var_2 in var_0["valid"]) {
@@ -229,7 +229,7 @@ function lastboredscore() {
 }
 
 function postspawn_rpg(var_0, var_1, var_2, var_3, var_4) {
-  if(istrue(var_3 scripts\mp\gametypes\br_gametypes::ref_12e05("playerSkipLootPickup", var_0))) {
+  if(istrue(var_3 scripts\mp\gametypes\br_gametypes::ref_12E05("playerSkipLootPickup", var_0))) {
     return;
   }
 
@@ -237,15 +237,15 @@ function postspawn_rpg(var_0, var_1, var_2, var_3, var_4) {
     var_5 = var_0.entity.ref_12970;
 
     if(istrue(var_5.removed)) {
-      var_3 scripts\mp\utility\lower_message::ref_1316e("contract_expired", undefined, 5);
+      var_3 scripts\mp\utility\lower_message::ref_1316E("contract_expired", undefined, 5);
       return;
     }
 
     var_0 setscriptablepartstate("body", "geigerstash_opening");
     var_6 = getdvarint("scr_br_geigerstash_cacheDeleteDelay", 30);
     var_0.entity scripts\engine\utility::delaycallwatchself(var_6, &delete);
-    var_5.ref_12d2e = var_0.origin;
-    var_5.ref_12d2b = var_0.angles;
+    var_5.ref_12D2E = var_0.origin;
+    var_5.ref_12D2B = var_0.angles;
     hint_escape_maze(var_5, var_0.entity);
     level notify("lootcache_opened_kill_callout" + var_0.origin);
     var_7 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getFriendlyPlayers")]](var_3.team, 0);
@@ -264,10 +264,10 @@ function hint_escape_maze(var_0) {
   var_2 = scripts\mp\gametypes\br_quest_util::ringing(self.team);
   var_3 = scripts\mp\gametypes\br_quest_util::getquestindex("geigerstash");
   var_4 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("geigerstash"));
-  var_1.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_3, var_2, var_4);
+  var_1.ref_121B5 = scripts\mp\gametypes\br_quest_util::ref_121B9(var_3, var_2, var_4);
   scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_geigerstash_quest_complete", var_1);
-  self.ref_12d2e = var_0.origin;
-  self.ref_12d2b = var_0.angles;
+  self.ref_12D2E = var_0.origin;
+  self.ref_12D2B = var_0.angles;
   self.result = "success";
 
   foreach(var_6 in self.playerlist) {

@@ -338,7 +338,7 @@ function callbacksoldieragentdamaged(var_0, var_1, var_2, var_3, var_4, var_5, v
     }
   }
 
-  ref_1289f(var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
+  ref_1289F(var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14);
   var_4 = int(min(var_4, var_15.maxhealth));
 
   if(isDefined(level.updateondamagerelicsfunc)) {
@@ -373,7 +373,7 @@ function turn_off_have_target_hud(var_0) {
   return false;
 }
 
-function ref_1289f(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
+function ref_1289F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
   var_13 = self;
   var_13 endon("death");
 
@@ -382,8 +382,8 @@ function ref_1289f(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   }
 
   if(var_2 >= var_13.health) {
-    if(isDefined(var_1.ref_119d4) && var_1.ref_119d4.size > 0) {
-      if(istrue(var_1.ref_119d4[var_13 getentitynumber()])) {
+    if(isDefined(var_1.ref_119D4) && var_1.ref_119D4.size > 0) {
+      if(istrue(var_1.ref_119D4[var_13 getentitynumber()])) {
         return;
       }
     }
@@ -426,11 +426,11 @@ function setuphudelemninfilcover(var_0, var_1, var_2, var_3, var_4, var_5, var_6
 
       if(isDefined(var_22) && var_22 == self) {
         self.clearspaceforscriptableinstance = 1;
-        self.ref_13b2a = 0;
+        self.ref_13B2A = 0;
       }
     } else if(var_8 != "none") {
       self.clearspaceforscriptableinstance = undefined;
-      self.ref_13b2a = undefined;
+      self.ref_13B2A = undefined;
     }
   }
 
@@ -442,13 +442,13 @@ function setuphudelemninfilcover(var_0, var_1, var_2, var_3, var_4, var_5, var_6
     var_23 = var_0 getlinkedparent();
 
     if(istrue(self.clearspaceforscriptableinstance) && var_14 && isDefined(var_23) && var_23 == self) {
-      if(!isDefined(self.ref_13b2c)) {
-        self.ref_13b2c = [var_0];
-      } else if(!scripts\engine\utility::array_contains(self.ref_13b2c, var_0)) {
-        self.ref_13b2c[self.ref_13b2c.size] = var_0;
+      if(!isDefined(self.ref_13B2C)) {
+        self.ref_13B2C = [var_0];
+      } else if(!scripts\engine\utility::array_contains(self.ref_13B2C, var_0)) {
+        self.ref_13B2C[self.ref_13B2C.size] = var_0;
       }
 
-      self.ref_13b2a++;
+      self.ref_13B2A++;
       return true;
     } else if(issubstr(var_13, "molotov")) {
       var_24 = var_0.origin - self.origin;
@@ -551,8 +551,8 @@ function ai_drop_func(var_0) {
     return;
   }
 
-  if(isDefined(level.ref_13fd4)) {
-    [[level.ref_13fd4]](self.origin, var_0);
+  if(isDefined(level.ref_13FD4)) {
+    [[level.ref_13FD4]](self.origin, var_0);
   }
 
   if(isDefined(self.force_drop)) {
@@ -607,7 +607,7 @@ function check_for_drop(var_0) {
 }
 
 function drop_weapon_func(var_0) {
-  if(!istrue(var_0.eattacker.ref_11e8e)) {
+  if(!istrue(var_0.eattacker.ref_11E8E)) {
     self.dropweapon = 1;
   }
 
@@ -616,13 +616,13 @@ function drop_weapon_func(var_0) {
   }
 
   if(isDefined(var_0.eattacker.class) && var_0.eattacker.class == "crusader" || isDefined(level.blueprintextract_trygetreward)) {
-    if(ref_132c8(var_0.eattacker)) {
+    if(ref_132C8(var_0.eattacker)) {
       drop_grenade(var_0);
     }
   }
 
   if(var_0.eattacker scripts\cp\utility::_hasperk("specialty_scavenger")) {
-    if(ref_132cb(var_0.eattacker)) {
+    if(ref_132CB(var_0.eattacker)) {
       var_1 = self.origin - (10, 10, 0);
       minigun_origin_offset(var_0, var_1);
       return;
@@ -632,7 +632,7 @@ function drop_weapon_func(var_0) {
   }
 }
 
-function ref_132cb(var_0) {
+function ref_132CB(var_0) {
   if(isDefined(self.chute)) {
     return false;
   }
@@ -882,7 +882,7 @@ function cangive_ammo() {
   return 0;
 }
 
-function ref_132c8(var_0) {
+function ref_132C8(var_0) {
   if(isDefined(self.chute)) {
     return false;
   }
@@ -979,9 +979,9 @@ function should_do_damage_checks(var_0, var_1, var_2, var_3, var_4, var_5) {
     return false;
   }
 
-  if(isDefined(level.ref_132c6)) {
-    if(isarray(level.ref_132c6) && level.ref_132c6.size > 0) {
-      foreach(var_7 in level.ref_132c6) {
+  if(isDefined(level.ref_132C6)) {
+    if(isarray(level.ref_132C6) && level.ref_132C6.size > 0) {
+      foreach(var_7 in level.ref_132C6) {
         if(![[var_7]](var_0, var_1, var_2, var_3, var_4, var_5)) {
           return false;
         }
@@ -1110,7 +1110,7 @@ function callbacksoldieragentgametypekilled(var_0, var_1, var_2, var_3, var_4, v
     self.died_poorly = undefined;
     var_10 = scripts\cp\cp_endgame::get_current_zone(var_2);
     var_11 = 1;
-    scripts\cp\cp_analytics::ref_119b5(var_2, self, var_5);
+    scripts\cp\cp_analytics::ref_119B5(var_2, self, var_5);
 
     if(isDefined(var_2.perk_data) && var_2 scripts\cp\utility::_hasperk("specialty_chain_killstreaks")) {
       var_12 = 10;
@@ -1175,7 +1175,7 @@ function callbacksoldieragentgametypekilled(var_0, var_1, var_2, var_3, var_4, v
   level thread scripts\cp\utility::add_to_notify_queue("ai_killed", self.origin, var_5, var_4, var_2, self, self.team);
 }
 
-function ref_13c35() {
+function ref_13C35() {
   self endon("death_or_disconnect");
   self notify("stop_tracking_consec_kills");
   self endon("stop_tracking_consec_kills");
@@ -1189,11 +1189,11 @@ function ref_13c35() {
       self.hostdamagefactormedium += 1;
     }
 
-    thread ref_13b82();
+    thread ref_13B82();
   }
 }
 
-function ref_13b82() {
+function ref_13B82() {
   self endon("death_or_disconnect");
   self notify("stop_timeout_consec_kills");
   self endon("stop_timeout_consec_kills");
@@ -1340,7 +1340,7 @@ function give_attacker_kill_rewards(var_0, var_1, var_2, var_3, var_4) {
           var_20 = spawnStruct();
           var_20.killcount = 1;
           var_20.basename = var_10.basename;
-          var_20.ref_1213c = var_7.pers["killsPerWeapon"].size;
+          var_20.ref_1213C = var_7.pers["killsPerWeapon"].size;
           var_7.pers["killsPerWeapon"][var_17] = var_20;
         }
       }

@@ -19,8 +19,8 @@ function initparachutedvars() {
   setdvarifuninitialized("scr_parachute_hint_xyvelscale_maxheight", 10000);
   setdvarifuninitialized("scr_parachute_hint_xylimit", 7500);
   setdvarifuninitialized("scr_parachute_hint_falling_xyratio", -2);
-  level.ref_121c8 = getdvarint("scr_parachute_autodeploy_cut", 1);
-  level.ref_121c9 = getdvarint("scr_parachute_cut", 1);
+  level.ref_121C8 = getdvarint("scr_parachute_autodeploy_cut", 1);
+  level.ref_121C9 = getdvarint("scr_parachute_cut", 1);
   level.parachuteinitfinished = 1;
   level.audio_player_stop_mud_loop = [];
 
@@ -48,21 +48,21 @@ function initparachutedvars() {
     level.parachuterestoreweaponscb = &norestoreweaponsdefaultfunc;
   }
 
-  if(!isDefined(level.ref_121d1)) {
-    level.ref_121d1 = &ref_121d2;
+  if(!isDefined(level.ref_121D1)) {
+    level.ref_121D1 = &ref_121D2;
   }
 
-  level.ref_133f9 = spawnStruct();
-  level.ref_133f9.ref_13918 = getdvarint("scr_parachute_hint_enabled", 1);
-  level.ref_133f9.ref_1467b = getdvarfloat("scr_parachute_hint_xyvelscale_high", 0);
-  level.ref_133f9.ref_1467c = getdvarfloat("scr_parachute_hint_xyvelscale_low", 0);
-  level.ref_133f9.ref_1467d = getdvarfloat("scr_parachute_hint_xyvelscale_maxheight", 0);
-  level.ref_133f9.ref_1467a = getdvarfloat("scr_parachute_hint_xylimit", 0);
-  level.ref_133f9.ref_1468f = getdvarfloat("scr_parachute_hint_zdrop", 0);
-  level.ref_133f9.zoffset = getdvarfloat("scr_parachute_hint_zoffset", 0);
-  level.ref_133f9.ref_1472c = getdvarfloat("scr_parachute_hint_zvelscale", 0);
-  level.ref_133f9.ref_14690 = getdvarfloat("scr_parachute_hint_zlimit", 0);
-  level.ref_133f9.pe_chopper_zones = getdvarfloat("scr_parachute_hint_falling_xyratio", 0);
+  level.ref_133F9 = spawnStruct();
+  level.ref_133F9.ref_13918 = getdvarint("scr_parachute_hint_enabled", 1);
+  level.ref_133F9.ref_1467B = getdvarfloat("scr_parachute_hint_xyvelscale_high", 0);
+  level.ref_133F9.ref_1467C = getdvarfloat("scr_parachute_hint_xyvelscale_low", 0);
+  level.ref_133F9.ref_1467D = getdvarfloat("scr_parachute_hint_xyvelscale_maxheight", 0);
+  level.ref_133F9.ref_1467A = getdvarfloat("scr_parachute_hint_xylimit", 0);
+  level.ref_133F9.ref_1468F = getdvarfloat("scr_parachute_hint_zdrop", 0);
+  level.ref_133F9.zoffset = getdvarfloat("scr_parachute_hint_zoffset", 0);
+  level.ref_133F9.ref_1472C = getdvarfloat("scr_parachute_hint_zvelscale", 0);
+  level.ref_133F9.ref_14690 = getdvarfloat("scr_parachute_hint_zlimit", 0);
+  level.ref_133F9.pe_chopper_zones = getdvarfloat("scr_parachute_hint_falling_xyratio", 0);
 }
 
 function startfreefall(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -544,10 +544,10 @@ function parachutemidairdeathwatcher() {
 
 function freefallstartdefault() {
   self disableusability();
-  thread ref_126cb();
+  thread ref_126CB();
 }
 
-function ref_126cb() {
+function ref_126CB() {
   self endon("death_or_disconnect");
   self allowfire(0);
   wait 0.5;
@@ -780,7 +780,7 @@ function watchfordoublejump() {
   }
 }
 
-function ref_121d2() {
+function ref_121D2() {
   var_0 = self;
 
   if(level.gametype == "br") {
@@ -803,25 +803,25 @@ function ref_121d2() {
 function ref_14002() {
   var_0 = self;
   var_1 = var_0 getvelocity();
-  var_2 = clamp(var_0.origin[2], 0, level.ref_133f9.ref_1467d) / level.ref_133f9.ref_1467d;
-  var_3 = level.ref_133f9.ref_1467c + (level.ref_133f9.ref_1467b - level.ref_133f9.ref_1467c) * var_2;
+  var_2 = clamp(var_0.origin[2], 0, level.ref_133F9.ref_1467D) / level.ref_133F9.ref_1467D;
+  var_3 = level.ref_133F9.ref_1467C + (level.ref_133F9.ref_1467B - level.ref_133F9.ref_1467C) * var_2;
   var_4 = var_1 * (1, 1, 0);
   var_5 = length(var_4);
   var_6 = var_4 * var_3;
   var_7 = var_5 * var_3;
 
-  if(var_7 > level.ref_133f9.ref_1467a) {
-    var_6 *= level.ref_133f9.ref_1467a / var_7;
+  if(var_7 > level.ref_133F9.ref_1467A) {
+    var_6 *= level.ref_133F9.ref_1467A / var_7;
   }
 
   var_8 = 0;
-  var_8 -= var_0.origin[2] * level.ref_133f9.ref_1468f;
-  var_8 += level.ref_133f9.zoffset;
-  var_8 += var_1[2] * level.ref_133f9.ref_1472c;
-  var_8 = clamp(var_8, -1 * level.ref_133f9.ref_14690, 0);
+  var_8 -= var_0.origin[2] * level.ref_133F9.ref_1468F;
+  var_8 += level.ref_133F9.zoffset;
+  var_8 += var_1[2] * level.ref_133F9.ref_1472C;
+  var_8 = clamp(var_8, -1 * level.ref_133F9.ref_14690, 0);
   var_9 = 1;
 
-  if(var_5 < level.ref_133f9.pe_chopper_zones * var_1[2]) {
+  if(var_5 < level.ref_133F9.pe_chopper_zones * var_1[2]) {
     var_9 = 2;
   }
 
@@ -850,7 +850,7 @@ function playerpowerresetpowers(var_0, var_1, var_2, var_3, var_4, var_5, var_6)
   }
 
   for(;;) {
-    if(level.ref_133f9.ref_13918 && var_7.play_contract_announcer_maybe < gettime()) {
+    if(level.ref_133F9.ref_13918 && var_7.play_contract_announcer_maybe < gettime()) {
       ref_14002(var_7);
       var_7.play_contract_announcer_maybe = gettime() + 500;
     }
@@ -977,12 +977,12 @@ function play_death_sound_with_global_cooldown() {
 
 function play_death_audio() {
   self notify("freefall_complete");
-  var_0 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
-  var_1 = scripts\cp_mp\utility\script_utility::ref_140de("game", "getSubGameType", "");
+  var_0 = scripts\cp_mp\utility\script_utility::ref_140DE("game", "isGameTypeBR", 0);
+  var_1 = scripts\cp_mp\utility\script_utility::ref_140DE("game", "getSubGameType", "");
   var_2 = var_1 != "truckwar" && var_1 != "reveal" && var_1 != "brdov";
 
   if(var_0 && var_2 && istrue(self.stickers)) {
-    var_3 = scripts\cp_mp\utility\script_utility::ref_140de("music", "getRandomMusicSet", "", ["br_infil_jump_parachute"]);
+    var_3 = scripts\cp_mp\utility\script_utility::ref_140DE("music", "getRandomMusicSet", "", ["br_infil_jump_parachute"]);
     self setplayermusicstate(var_3);
     self.stickers = undefined;
   }
@@ -997,8 +997,8 @@ function play_death_audio() {
     self[[level.parachuteopencb]]();
   }
 
-  if(isDefined(level.ref_1205e)) {
-    self[[level.ref_1205e]]();
+  if(isDefined(level.ref_1205E)) {
+    self[[level.ref_1205E]]();
   }
 
   if(istrue(level.pilot_linkto_origin_offset)) {
@@ -1049,7 +1049,7 @@ function play_counter_beep_sfx_on_bomb_vests() {
   if(isparachutegametype()) {
     level.audio_player_stop_mud_loop[self getxuid()] = undefined;
     self setclientomnvar("ui_br_altimeter_state", 0);
-    thread ref_1274e();
+    thread ref_1274E();
 
     if(isDefined(level.ref_12036)) {
       self[[level.ref_12036]](self);
@@ -1064,18 +1064,18 @@ function play_counter_beep_sfx_on_bomb_vests() {
   }
 }
 
-function ref_1274e() {
+function ref_1274E() {
   self endon("death_or_disconnect");
   wait 0.3;
 
   if(isalive(self) && self.sessionstate == "playing") {
     self playlocalsound("plr_breath_land_parachute", self);
     self playsoundonmovingent("breath_land_parachute_npc");
-    var_0 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
+    var_0 = scripts\cp_mp\utility\script_utility::ref_140DE("game", "isGameTypeBR", 0);
 
     if(var_0) {
       wait 5;
-      var_1 = scripts\cp_mp\utility\script_utility::ref_140de("music", "isBRSuspenseMusicEnabled", 0, [self]);
+      var_1 = scripts\cp_mp\utility\script_utility::ref_140DE("music", "isBRSuspenseMusicEnabled", 0, [self]);
 
       if(var_1) {
         self.nosuspensemusic = undefined;
@@ -1089,7 +1089,7 @@ function ref_1274e() {
   }
 }
 
-function ref_121ca() {
+function ref_121CA() {
   var_0 = self;
   var_0 skydive_interrupt();
 

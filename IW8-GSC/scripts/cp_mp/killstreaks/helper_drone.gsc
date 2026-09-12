@@ -31,10 +31,10 @@ function init() {
   level.helperdronesettings["radar_drone_recon"].postmoddamagefunc = &helperdrone_modifydamageresponse;
   level.helperdronesettings["radar_drone_recon"].deathfunc = &helperdronedestroyed;
   level.helperdronesettings["radar_drone_recon"].deployweaponname = "ks_remote_drone_mp";
-  level.helperdronesettings["radar_drone_recon"].ref_11b06 = 1;
-  level.helperdronesettings["radar_drone_recon"].ref_11b07 = 1;
-  level.helperdronesettings["radar_drone_recon"].ref_11b17 = 3062500;
-  level.helperdronesettings["radar_drone_recon"].ref_11b18 = 6250000;
+  level.helperdronesettings["radar_drone_recon"].ref_11B06 = 1;
+  level.helperdronesettings["radar_drone_recon"].ref_11B07 = 1;
+  level.helperdronesettings["radar_drone_recon"].ref_11B17 = 3062500;
+  level.helperdronesettings["radar_drone_recon"].ref_11B18 = 6250000;
   level.helperdronesettings["radar_drone_overwatch"] = spawnStruct();
   level.helperdronesettings["radar_drone_overwatch"].timeout = 45;
   level.helperdronesettings["radar_drone_overwatch"].maxhealth = 700;
@@ -165,14 +165,14 @@ function init() {
   level.helperdronesettings["assault_drone"].postmoddamagefunc = &helperdrone_modifydamageresponse;
   level.helperdronesettings["assault_drone"].deathfunc = &helperdronedestroyed;
   level.helperdronesettings["assault_drone"].deployweaponname = "ks_assault_drone_mp";
-  level.helperdronesettings["assault_drone"].ref_11b06 = 0;
-  level.helperdronesettings["assault_drone"].ref_11b07 = 0;
-  level.helperdronesettings["assault_drone"].ref_11b17 = 73984;
-  level.helperdronesettings["assault_drone"].ref_11b18 = 73984;
+  level.helperdronesettings["assault_drone"].ref_11B06 = 0;
+  level.helperdronesettings["assault_drone"].ref_11B07 = 0;
+  level.helperdronesettings["assault_drone"].ref_11B17 = 73984;
+  level.helperdronesettings["assault_drone"].ref_11B18 = 73984;
   level.helperdronesettings["assault_drone"].leaderinteractionthink = 1;
   level.helperdronesettings["assault_drone"].leaderboarddata = undefined;
   level.helperdronesettings["assault_drone"].leaderplunderstring = 1;
-  level.helperdronesettings["assault_drone"].ref_1217e = undefined;
+  level.helperdronesettings["assault_drone"].ref_1217E = undefined;
   var_0 = "br";
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType")) {
@@ -514,7 +514,7 @@ function tryusehelperdronefromstruct(var_0) {
 
     var_10 = 0.6;
     var_11 = 2;
-    var_12 = scripts\engine\utility::ref_143ba(var_10, "death", "weapon_switch_started");
+    var_12 = scripts\engine\utility::ref_143BA(var_10, "death", "weapon_switch_started");
 
     if(!isDefined(var_12) || var_12 != "timeout") {
       if(!var_4) {
@@ -540,7 +540,7 @@ function tryusehelperdronefromstruct(var_0) {
     }
 
     scripts\common\utility::allow_weapon_switch(0);
-    var_12 = scripts\engine\utility::ref_143b9(var_11 - var_10, "death");
+    var_12 = scripts\engine\utility::ref_143B9(var_11 - var_10, "death");
 
     if(!isDefined(var_12) || var_12 != "timeout") {
       if(!var_4) {
@@ -602,8 +602,8 @@ function tryusehelperdronefromstruct(var_0) {
   } else if(var_6 == "scrambler_drone_guard") {
     var_14 = self.origin;
 
-    if(isDefined(level.ref_13c34)) {
-      var_15 = [[level.ref_13c34]](self.origin);
+    if(isDefined(level.ref_13C34)) {
+      var_15 = [[level.ref_13C34]](self.origin);
       var_14 = var_15["position"];
     }
 
@@ -623,7 +623,7 @@ function tryusehelperdronefromstruct(var_0) {
 
   if(level.gametype == "br") {
     if(var_6 == "scrambler_drone_guard") {
-      scripts\cp_mp\killstreaks\uav::ref_13ed5(self.team, 15000, "scrambler_drone_guard");
+      scripts\cp_mp\killstreaks\uav::ref_13ED5(self.team, 15000, "scrambler_drone_guard");
     }
   }
 
@@ -884,7 +884,7 @@ function createhelperdrone(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_9.scrambler = var_12;
       break;
     case "scrambler_drone_guard":
-      if(istrue(level.ref_11a9d)) {
+      if(istrue(level.ref_11A9D)) {
         var_12 = helperdrone_spawnnewscrambler(var_9, "large");
         var_9.scrambler = var_12;
       }
@@ -1117,7 +1117,7 @@ function helperdrone_setscramblerplayerbuffs(var_0, var_1) {
 }
 
 function helperdrone_managescramblerplayerbuff(var_0) {
-  scripts\engine\utility::ref_143a5("death_or_disconnect", "scramble_off");
+  scripts\engine\utility::ref_143A5("death_or_disconnect", "scramble_off");
   helperdrone_setscramblerplayerbuffs(0, var_0);
 }
 
@@ -1147,7 +1147,7 @@ function helperdrone_setscramblerjammed(var_0, var_1, var_2) {
 
 function helperdrone_managescramblereffect(var_0, var_1) {
   level endon("game_ended");
-  scripts\engine\utility::ref_143a5("death", "scramble_off");
+  scripts\engine\utility::ref_143A5("death", "scramble_off");
 
   if(isDefined(self)) {
     helperdrone_setscramblerjammed(0, var_0, var_1);
@@ -1499,7 +1499,7 @@ function helperdrone_overwatchplayer() {
     var_7 = (var_4, var_5, var_6);
     self setlookatent(self.owner);
     self setvehgoalpos(var_7, 1);
-    scripts\engine\utility::ref_143a5("goal", "begin_evasive_maneuvers");
+    scripts\engine\utility::ref_143A5("goal", "begin_evasive_maneuvers");
 
     if(istrue(var_0)) {
       var_0 = undefined;
@@ -1597,7 +1597,7 @@ function helperdrone_watchpingedstatus(var_0, var_1) {
   }
 
   self.ref_12368[self.ref_12368.size] = var_0;
-  var_0 scripts\engine\utility::ref_143b9(3, "death");
+  var_0 scripts\engine\utility::ref_143B9(3, "death");
   self.ref_12368 = scripts\engine\utility::array_remove(self.ref_12368, var_0);
 }
 
@@ -1832,10 +1832,10 @@ function setreconmodesettings(var_0) {
   self.owner cameralinkTo(self, "tag_origin");
   self.owner remotecontrolvehicle(self);
   self.owner painvisionoff();
-  scripts\cp_mp\utility\killstreak_utility::ref_11dc0(self.owner);
+  scripts\cp_mp\utility\killstreak_utility::ref_11DC0(self.owner);
 
   if(!istrue(var_1)) {
-    ref_131b7(self.owner, 1, self);
+    ref_131B7(self.owner, 1, self);
     self.owner setclientomnvar("ui_rcd_outer_ring", 0);
     self.owner setclientomnvar("ui_killstreak_countdown", gettime() + int(self.timeout * 1000));
     self.owner setclientomnvar("ui_killstreak_health", helperdrone_getcurrenthealth() / var_0.maxhealth);
@@ -1887,10 +1887,10 @@ function ref_13128(var_0) {
   self.owner cameralinkTo(self, "tag_origin");
   self.owner remotecontrolvehicle(self);
   self.owner painvisionoff();
-  scripts\cp_mp\utility\killstreak_utility::ref_11dc0(self.owner);
+  scripts\cp_mp\utility\killstreak_utility::ref_11DC0(self.owner);
 
   if(!istrue(var_1)) {
-    ref_131b7(self.owner, 1, self);
+    ref_131B7(self.owner, 1, self);
     self.owner setclientomnvar("ui_rcd_outer_ring", 0);
     self.owner setclientomnvar("ui_killstreak_countdown", gettime() + int(self.timeout * 1000));
     self.owner setclientomnvar("ui_killstreak_health", helperdrone_getcurrenthealth() / var_0.maxhealth);
@@ -1988,7 +1988,7 @@ function helperdrone_watchearlyexit(var_0) {
   self.owner endon("disconnect");
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "allowRideKillstreakPlayerExit")) {
-    self thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "allowRideKillstreakPlayerExit")]]("death", var_0.ref_1217e);
+    self thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "allowRideKillstreakPlayerExit")]]("death", var_0.ref_1217E);
   }
 
   self waittill("killstreakExit");
@@ -2191,7 +2191,7 @@ function helperdrone_markplayers(var_0) {
       }
 
       var_2++;
-      ref_131c9(self.targetmarkergroup, var_5, 1);
+      ref_131C9(self.targetmarkergroup, var_5, 1);
       var_6 = canseetarget(var_5);
       var_7 = helperdrone_istargetinreticle(var_1, var_5, 70, 40);
       var_8 = isinmarkingrange(var_5);
@@ -2216,12 +2216,12 @@ function helperdrone_markplayers(var_0) {
       }
 
       if(var_9) {
-        ref_131c9(self.targetmarkergroup, var_5, 3);
+        ref_131C9(self.targetmarkergroup, var_5, 3);
         continue;
       }
 
       if(!var_8 || !var_6) {
-        ref_131c9(self.targetmarkergroup, var_5, 0);
+        ref_131C9(self.targetmarkergroup, var_5, 0);
         continue;
       }
 
@@ -2271,20 +2271,20 @@ function sp_stealth_broken_listener(var_0) {
       }
 
       var_2++;
-      ref_131c9(self.targetmarkergroup, var_6, 1);
+      ref_131C9(self.targetmarkergroup, var_6, 1);
       var_7 = canseetarget(var_6);
       var_8 = isinmarkingrange(var_6);
 
       if(!var_8 || !var_7) {
-        ref_131c9(self.targetmarkergroup, var_6, 0);
+        ref_131C9(self.targetmarkergroup, var_6, 0);
         continue;
       }
 
       var_4 = 1;
-      ref_131c9(self.targetmarkergroup, var_6, 2);
+      ref_131C9(self.targetmarkergroup, var_6, 2);
     }
 
-    self.ref_13a79 = var_4;
+    self.ref_13A79 = var_4;
     var_2 = 0;
     waitframe();
   }
@@ -2318,10 +2318,10 @@ function spawn_ai_individual(var_0) {
   var_1 = 0;
 
   for(;;) {
-    if(istrue(self.ref_13a79) && var_1 == 0) {
+    if(istrue(self.ref_13A79) && var_1 == 0) {
       self.owner setclientomnvar("ui_rcd_outer_ring", 1);
       var_1 = 1;
-    } else if(!istrue(self.ref_13a79) && var_1 == 1) {
+    } else if(!istrue(self.ref_13A79) && var_1 == 1) {
       self.owner setclientomnvar("ui_rcd_outer_ring", 0);
       var_1 = 0;
     }
@@ -2402,7 +2402,7 @@ function helperdrone_watchouterreticletargets(var_0) {
           }
         }
 
-        if(!istrue(var_0.ref_11b06)) {
+        if(!istrue(var_0.ref_11B06)) {
           if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("perk", "hasPerk")) {
             if(var_10[[scripts\cp_mp\utility\script_utility::getsharedfunc("perk", "hasPerk")]]("specialty_noscopeoutline")) {
               continue;
@@ -2443,7 +2443,7 @@ function helperdrone_watchouterreticletargets(var_0) {
 
       var_0 = level.helperdronesettings[self.helperdronetype];
 
-      if(istrue(var_0.ref_11b07) && !helperdrone_istargetinreticle(self.owner, var_10, 70, 300)) {
+      if(istrue(var_0.ref_11B07) && !helperdrone_istargetinreticle(self.owner, var_10, 70, 300)) {
         continue;
       }
 
@@ -2457,16 +2457,16 @@ function helperdrone_watchouterreticletargets(var_0) {
 function canseetarget(var_0) {
   var_1 = 0;
 
-  if(isDefined(var_0.ref_12a9b)) {
-    var_2 = var_0.ref_12a9b;
+  if(isDefined(var_0.ref_12A9B)) {
+    var_2 = var_0.ref_12A9B;
   } else {
     var_2 = scripts\engine\trace::create_contents(0, 1, 0, 1, 1, 1, 0, 1);
   }
 
   var_3 = var_1.origin;
 
-  if(isDefined(var_1.ref_12a9c)) {
-    var_3 += var_1.ref_12a9c;
+  if(isDefined(var_1.ref_12A9C)) {
+    var_3 += var_1.ref_12A9C;
   }
 
   var_4 = [var_3];
@@ -2528,7 +2528,7 @@ function startmarkingpassivetarget(var_0) {
 
   self.targetsinouterradius[self.targetsinouterradius.size] = var_0;
   scripts\cp_mp\targetmarkergroups::targetmarkergroup_markentity(var_0, self.targetmarkergroup, 0);
-  ref_131c9(self.targetmarkergroup, var_0, 0);
+  ref_131C9(self.targetmarkergroup, var_0, 0);
 
   while(isDefined(var_0)) {
     if(isPlayer(var_0) && scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "isReallyAlive")) {
@@ -2543,7 +2543,7 @@ function startmarkingpassivetarget(var_0) {
 
     var_2 = level.helperdronesettings[self.helperdronetype];
 
-    if(istrue(var_2.ref_11b07) && !helperdrone_istargetinreticle(self.owner, var_0, 70, 300)) {
+    if(istrue(var_2.ref_11B07) && !helperdrone_istargetinreticle(self.owner, var_0, 70, 300)) {
       break;
     }
 
@@ -2600,7 +2600,7 @@ function startmarkingtarget(var_0, var_1, var_2, var_3) {
   var_5.beingmarked = 1;
   self.markingtarget = 1;
   self.owner notify("marking_target");
-  ref_131b7(self.owner, 2, self);
+  ref_131B7(self.owner, 2, self);
   var_6 = getmarkingdelay(var_0);
   self.owner playlocalsound("recon_drone_marking_owner");
 
@@ -2613,7 +2613,7 @@ function startmarkingtarget(var_0, var_1, var_2, var_3) {
       var_5.beingmarked = undefined;
       self.markingtarget = undefined;
       self.owner stoplocalsound("recon_drone_marking_owner");
-      ref_131b7(self.owner, 1, self);
+      ref_131B7(self.owner, 1, self);
       return;
     }
 
@@ -2621,8 +2621,8 @@ function startmarkingtarget(var_0, var_1, var_2, var_3) {
     wait 0.05;
   }
 
-  if(isDefined(var_0.ref_12a99)) {
-    [[var_0.ref_12a99]](var_4, var_0);
+  if(isDefined(var_0.ref_12A99)) {
+    [[var_0.ref_12A99]](var_4, var_0);
   }
 
   var_5.reconmarked = 1;
@@ -2630,8 +2630,8 @@ function startmarkingtarget(var_0, var_1, var_2, var_3) {
   markent(var_5, undefined);
   self.owner playlocalsound("recon_drone_marked_owner");
   self.owner stoplocalsound("recon_drone_marking_owner");
-  ref_131b7(self.owner, 4, self);
-  ref_131c9(self.targetmarkergroup, var_0, 2);
+  ref_131B7(self.owner, 4, self);
+  ref_131C9(self.targetmarkergroup, var_0, 2);
   addmarkpoints(var_0, var_1);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("pers", "incPersStat")) {
@@ -2705,7 +2705,7 @@ function resetreticlemarkingprogressstate(var_0) {
   var_1 endon("disconnect");
   var_1 endon("marking_target");
   wait var_0;
-  ref_131b7(self.owner, 1, self);
+  ref_131B7(self.owner, 1, self);
 }
 
 function islocationmarked(var_0) {
@@ -2747,10 +2747,10 @@ function isreconmarked(var_0) {
 function isinmarkingrange(var_0) {
   var_1 = level.helperdronesettings[self.helperdronetype];
   var_2 = scripts\cp_mp\utility\game_utility::islargemap();
-  var_3 = scripts\engine\utility::ter_op(var_2, var_1.ref_11b18, var_1.ref_11b17);
+  var_3 = scripts\engine\utility::ter_op(var_2, var_1.ref_11B18, var_1.ref_11B17);
 
-  if(isDefined(var_0.ref_11b08)) {
-    var_3 = var_0.ref_11b08;
+  if(isDefined(var_0.ref_11B08)) {
+    var_3 = var_0.ref_11B08;
   }
 
   var_4 = var_0.origin;
@@ -2847,7 +2847,7 @@ function earlyremoveradarperk(var_0) {
 
 function marklocation_watchmarkentstatus(var_0, var_1, var_2) {
   level endon("game_ended");
-  scripts\engine\utility::ref_143ba(var_2, "death", "explode");
+  scripts\engine\utility::ref_143BA(var_2, "death", "explode");
 
   if(isDefined(var_0.icon)) {
     scripts\cp_mp\entityheadicons::setheadicon_deleteicon(var_0.icon);
@@ -2916,7 +2916,7 @@ function markent(var_0, var_1) {
   thread resetreticlemarkingprogressstate(getmarkingdelay(var_3.target));
 }
 
-function ref_131b7(var_0, var_1) {
+function ref_131B7(var_0, var_1) {
   var_2 = 0;
 
   if(isDefined(var_1)) {
@@ -2931,7 +2931,7 @@ function ref_131b7(var_0, var_1) {
   self notify("omnvar_ui_rcd_changed", var_0);
 }
 
-function ref_131c9(var_0, var_1, var_2) {
+function ref_131C9(var_0, var_1, var_2) {
   var_3 = (var_2 >> 0) % 2 == 1;
   var_4 = (var_2 >> 1) % 2 == 1;
   targetmarkergroupsetextrastate(var_0, var_1, var_3);
@@ -3042,11 +3042,11 @@ function markupdateheadicon(var_0, var_1) {
 
   if(isDefined(var_0.headicon)) {
     if(var_2 && !var_5) {
-      scripts\cp_mp\entityheadicons::ref_1315d(var_0.headicon, var_1);
+      scripts\cp_mp\entityheadicons::ref_1315D(var_0.headicon, var_1);
       return;
     }
 
-    scripts\cp_mp\entityheadicons::ref_1315e(var_0.headicon, var_1);
+    scripts\cp_mp\entityheadicons::ref_1315E(var_0.headicon, var_1);
     return;
   }
 }
@@ -3091,7 +3091,7 @@ function helperdrone_watchforgoal() {
   self endon("owner_gone");
   self notify("helperDrone_watchForGoal");
   self endon("helperDrone_watchForGoal");
-  var_0 = scripts\engine\utility::ref_143ae("goal", "near_goal", "hit_goal");
+  var_0 = scripts\engine\utility::ref_143AE("goal", "near_goal", "hit_goal");
   self.intransit = 0;
   self.inactive = 0;
   self notify("hit_goal");
@@ -3239,7 +3239,7 @@ function helperdrone_watchroundend() {
   self endon("explode");
   self.owner endon("disconnect");
   self endon("owner_gone");
-  level scripts\engine\utility::ref_143a6("round_end_finished", "game_ended", "prematch_cleanup");
+  level scripts\engine\utility::ref_143A6("round_end_finished", "game_ended", "prematch_cleanup");
   thread helperdrone_leave();
 }
 
@@ -3507,7 +3507,7 @@ function removehelperdrone(var_0, var_1, var_2) {
     }
 
     self.streakinfo.onspray = istrue(var_2);
-    self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+    self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
   }
 
   if(var_0 == "scrambler_drone_guard") {
@@ -3555,7 +3555,7 @@ function helperdrone_returnplayer(var_0) {
   thread soundorg_int();
   var_0 cameraunlink(self);
   var_0 remotecontrolvehicleoff();
-  scripts\cp_mp\utility\killstreak_utility::ref_11dc1(var_0);
+  scripts\cp_mp\utility\killstreak_utility::ref_11DC1(var_0);
 
   if(isDefined(var_0.restoreangles)) {
     var_0 setplayerangles((var_0.restoreangles[0], var_0.restoreangles[1], 0));
@@ -3572,7 +3572,7 @@ function soundorg_int() {
   var_1 = 1000;
 
   while(gettime() - var_0 < var_1) {
-    ref_131b7(0);
+    ref_131B7(0);
     waitframe();
   }
 }
@@ -3771,7 +3771,7 @@ function helperdrone_destroyongameend() {
   self endon("death");
   self endon("leaving");
   self endon("explode");
-  level scripts\engine\utility::ref_143a6("bro_shot_start", "game_ended", "ending_sequence");
+  level scripts\engine\utility::ref_143A6("bro_shot_start", "game_ended", "ending_sequence");
   helperdronedestroyed();
 }
 
@@ -3825,8 +3825,8 @@ function helperdrone_istargetinreticle(var_0, var_1, var_2) {
   var_3 = 0;
   var_4 = var_0.origin;
 
-  if(isDefined(var_0.ref_12a9c)) {
-    var_4 += var_0.ref_12a9c;
+  if(isDefined(var_0.ref_12A9C)) {
+    var_4 += var_0.ref_12A9C;
   }
 
   var_5 = [var_4];
@@ -3864,7 +3864,7 @@ function find_safe_spawn(var_0) {
     var_9 += 25;
   }
 
-  if(_calloutmarkerping_handleluinotify_enemyrepinged::ref_124f5()) {
+  if(_calloutmarkerping_handleluinotify_enemyrepinged::ref_124F5()) {
     var_4 += (0, 0, 130);
   }
 
@@ -4009,7 +4009,7 @@ function recondrone_endsuper(var_0) {
 
 function recondrone_watchsuper(var_0) {
   self endon("disconnect");
-  var_1 = ref_12a98(var_0);
+  var_1 = ref_12A98(var_0);
 
   if(!isDefined(var_1)) {
     thread recondrone_takedeployweapon(!isalive(self), 1);
@@ -4033,7 +4033,7 @@ function recondrone_watchsuper(var_0) {
   }
 }
 
-function ref_12a98(var_0) {
+function ref_12A98(var_0) {
   self endon("death");
   self endon("reconDroneEnded");
   self endon("reconDroneUnset");

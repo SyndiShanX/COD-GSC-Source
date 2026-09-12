@@ -287,7 +287,7 @@ function go_fight(var_0) {
   scripts\asm\asm_bb::bb_requestmovetype("combat");
   var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   self setgoalpos(getclosestpointonnavmesh(var_1.origin));
-  scripts\engine\utility::ref_143a5("goal_reached", "goal");
+  scripts\engine\utility::ref_143A5("goal_reached", "goal");
 
   if(getdvarint("scr_alerted_hunt_enable") == 1) {
     scripts\cp\cp_agent_patrol::enter_combat();
@@ -376,7 +376,7 @@ function target_patrol_path(var_0) {
 
   for(;;) {
     self setgoalpos(getclosestpointonnavmesh(var_1.origin));
-    scripts\engine\utility::ref_143a5("goal_reached", "goal");
+    scripts\engine\utility::ref_143A5("goal_reached", "goal");
 
     if(isDefined(var_1.target)) {
       var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
@@ -455,7 +455,7 @@ function patrol_path(var_0, var_1) {
   for(var_5 = getscoredpatrolpoint(self, var_4);; var_5 = getscoredpatrolpoint(self, var_4, var_5)) {
     thread setcooldown(var_5, var_5);
     self setgoalpos(getclosestpointonnavmesh(var_5.origin));
-    scripts\engine\utility::ref_143ba(15, "goal_reached", "goal");
+    scripts\engine\utility::ref_143BA(15, "goal_reached", "goal");
 
     if(scripts\engine\utility::cointoss()) {
       wait randomfloatrange(2.5, 5);
@@ -613,7 +613,7 @@ function trigger_temp_stealth_meter(var_0, var_1, var_2, var_3) {
       }
 
       if(isDefined(var_5) && var_5 != "can_see") {
-        var_5 = scripts\engine\utility::ref_143be(var_0, var_2, "can_see", "death", "near_me", "damage", "hear_turret");
+        var_5 = scripts\engine\utility::ref_143BE(var_0, var_2, "can_see", "death", "near_me", "damage", "hear_turret");
       }
     }
 
@@ -697,7 +697,7 @@ function temp_stealthicon_changecolor(var_0, var_1, var_2) {
 function detected_temp_stealth_meter(var_0, var_1) {
   self notify("icon_cancel_delete");
   self endon("icon_deleted");
-  scripts\engine\utility::ref_143ba(var_1, "death", "alerted");
+  scripts\engine\utility::ref_143BA(var_1, "death", "alerted");
   wait 0.5;
   thread detected_temp_stealth_meter_delete(var_0);
 }
@@ -1148,7 +1148,7 @@ function fallback_to_closest_spot(var_0) {
   var_2 = scripts\engine\utility::getclosest(self.origin, var_1);
   self.goalradius = 128;
   self setgoalpos(getclosestpointonnavmesh(var_2.origin));
-  scripts\engine\utility::ref_143a5("goal", "goal_reached");
+  scripts\engine\utility::ref_143A5("goal", "goal_reached");
   self.goalradius = 1500;
 }
 

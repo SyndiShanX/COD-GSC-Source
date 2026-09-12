@@ -47,7 +47,7 @@ function init() {
 function laststandthink() {
   level endon("game_ended");
   onenter();
-  var_0 = scripts\engine\utility::ref_143b8("last_stand_heal_success", "last_stand_revived", "last_stand_bleedout", "death", "disconnect", "last_stand_self_revive");
+  var_0 = scripts\engine\utility::ref_143B8("last_stand_heal_success", "last_stand_revived", "last_stand_bleedout", "death", "disconnect", "last_stand_self_revive");
 
   switch (var_0) {
     case "last_stand_revived":
@@ -97,7 +97,7 @@ function onenter() {
   scripts\mp\utility\perk::giveperk("specialty_block_health_regen");
   scripts\mp\utility\perk::giveperk("specialty_blindeye");
   self.inlaststand = 1;
-  self.ref_125b9 = undefined;
+  self.ref_125B9 = undefined;
   self.hasshownlaststandicon = 0;
 
   if(isDefined(level.playerdatafield) && [[level.playerdatafield]]()) {
@@ -122,7 +122,7 @@ function onenter() {
       self.get_tv_station_infil_rider_start_targetname = undefined;
       scripts\mp\gametypes\br_public::runbrgametypefuncwrapper("onLastStandEnter");
 
-      if(!istrue(level.ref_133d8)) {
+      if(!istrue(level.ref_133D8)) {
         var_1 = scripts\mp\gametypes\br_public::rotationrefsbyseatandweapon(self.team, self.squadindex);
 
         foreach(var_3 in var_1) {
@@ -206,7 +206,7 @@ function onenter() {
   scripts\cp_mp\utility\shellshock_utility::_shellshock("last_stand_mp", "damage", var_9, 0);
   thread revivesetup(self);
   self.fastcrouchspeedmod = getdvarfloat("scr_player_lastStandSpeedAddition", 0);
-  scripts\cp\vehicles\vehicle_compass_cp::ref_138d5("alive_not_downed");
+  scripts\cp\vehicles\vehicle_compass_cp::ref_138D5("alive_not_downed");
 
   if(isDefined(self.watch_for_attack) && self.watch_for_attack scripts\mp\utility\perk::_hasperk("specialty_reduce_regen_delay_on_kill")) {
     self.watch_for_attack scripts\mp\perks\perkfunctions::regendelayreduce_onkill();
@@ -268,7 +268,7 @@ function setup_volumes(var_0) {
   givelaststandweapon(var_0);
 }
 
-function ref_13a34() {
+function ref_13A34() {
   var_0 = self;
   var_1 = getcompleteweaponname("iw8_gunless_last_stand_enter");
 
@@ -324,7 +324,7 @@ function givelaststandweapon(var_0) {
 function disableweaponsovertime(var_0) {
   level endon("game_ended");
   scripts\common\utility::allow_weapon(0);
-  scripts\engine\utility::ref_143b9(var_0, "death_or_disconnect");
+  scripts\engine\utility::ref_143B9(var_0, "death_or_disconnect");
   scripts\common\utility::allow_weapon(1);
 }
 
@@ -456,7 +456,7 @@ function ref_13013() {
   level endon("game_ended");
   var_0 endon("death_or_disconnect");
   var_0 endon("last_stand_finished");
-  var_1.ref_1438a = 0;
+  var_1.ref_1438A = 0;
   thread ref_13011();
 
   while(scripts\mp\utility\player::isreallyalive(var_0) && ref_13012(var_0) && var_1.curprogress < var_1.usetime) {
@@ -471,9 +471,9 @@ function ref_13013() {
     if(!istrue(var_0.usedprops)) {
       var_0 thread scripts\mp\gametypes\br_public::ref_12616("iw8_ges_plyr_self_revive", 10);
 
-      if(!istrue(var_0.ref_138ad)) {
+      if(!istrue(var_0.ref_138AD)) {
         var_0 attach("wm_equip_gen_stim_motau_ch3", "tag_accessory_left");
-        var_0.ref_138ad = 1;
+        var_0.ref_138AD = 1;
       }
 
       var_0.usedprops = 1;
@@ -507,8 +507,8 @@ function ref_13013() {
 
       playanim_aibegindismountturret(var_0, "self_revive_success", var_0);
 
-      if(isDefined(level.ref_12c1f)) {
-        var_0[[level.ref_12c1f]]();
+      if(isDefined(level.ref_12C1F)) {
+        var_0[[level.ref_12C1F]]();
       }
 
       return;
@@ -519,7 +519,7 @@ function ref_13013() {
 
   LOC_000001a3:
     if(!istrue(var_0.beingrevived)) {
-      scripts\mp\gametypes\br::ref_1401f(var_0, var_0, var_1.curprogress, 1);
+      scripts\mp\gametypes\br::ref_1401F(var_0, var_0, var_1.curprogress, 1);
       thread decayreviveprogress();
     }
 
@@ -532,7 +532,7 @@ function ref_13011() {
   level endon("game_ended");
   var_0 notify("self_revive_cleanup_start");
   var_0 endon("self_revive_cleanup_start");
-  var_0 scripts\engine\utility::ref_143b5("last_stand_finished", "stopped_self_revive", "death_or_disconnect");
+  var_0 scripts\engine\utility::ref_143B5("last_stand_finished", "stopped_self_revive", "death_or_disconnect");
 
   if(!istrue(var_0.beingrevived)) {
     var_0 scripts\mp\gameobjects::updateuiprogress(var_1, 0);
@@ -540,9 +540,9 @@ function ref_13011() {
 
   var_0 allowmovement(1);
 
-  if(istrue(var_0.ref_138ad)) {
+  if(istrue(var_0.ref_138AD)) {
     var_0 detach("wm_equip_gen_stim_motau_ch3", "tag_accessory_left");
-    var_0.ref_138ad = 0;
+    var_0.ref_138AD = 0;
   }
 
   var_0 stopgestureviewmodel("ges_equip_stim_self_revive");
@@ -590,19 +590,19 @@ function onexitcommon(var_0) {
   self.laststandoldweapon = undefined;
 
   if(istrue(scripts\mp\utility\player::registerpuzzleinteractions())) {
-    scripts\mp\utility\player::ref_1312b(0);
+    scripts\mp\utility\player::ref_1312B(0);
   }
 
   if(level.gametype == "br") {
-    scripts\mp\gametypes\br::ref_1401f(self, self, 0, 1);
-    scripts\mp\gametypes\br_public::ref_1319c(0);
+    scripts\mp\gametypes\br::ref_1401F(self, self, 0, 1);
+    scripts\mp\gametypes\br_public::ref_1319C(0);
     self.disable_hotjoining_after_time = undefined;
   }
 
   scripts\mp\utility\lower_message::setlowermessageomnvar(0);
 
-  if(isDefined(level.ref_11c79)) {
-    self[[level.ref_11c79]](var_0);
+  if(isDefined(level.ref_11C79)) {
+    self[[level.ref_11C79]](var_0);
   }
 
   waittillframeend();
@@ -646,12 +646,12 @@ function onrevive(var_0, var_1) {
     scripts\mp\gamelogic::freezeplayerforroundend();
   }
 
-  scripts\mp\utility\player::ref_1312b(0);
+  scripts\mp\utility\player::ref_1312B(0);
 
   if(scripts\mp\utility\game::getgametype() == "br" && !istrue(self.gulag)) {
     scripts\common\utility::allow_weapon_switch_clip(1);
 
-    if(!istrue(level.ref_133d8)) {
+    if(!istrue(level.ref_133D8)) {
       var_5 = scripts\mp\gametypes\br_public::rotationrefsbyseatandweapon(self.team, self.squadindex);
 
       foreach(var_7 in var_5) {
@@ -711,7 +711,7 @@ function ondeath(var_0) {
   }
 
   if(isDefined(var_0) && isDefined(self.watch_for_attack) && istrue(self.watch_for_attack.inlaststand)) {
-    thread ref_1204f(self.watch_for_attack, var_0, self.watch_for_level_weapons_free);
+    thread ref_1204F(self.watch_for_attack, var_0, self.watch_for_level_weapons_free);
   }
 
   if(istrue(self.usedprops)) {
@@ -768,13 +768,13 @@ function revivesetup(var_0) {
   thread endreviveonownerdeathordisconnect();
 
   if(getdvarint("scr_player_lastStandEnableSecondWind", 0) && getdvarint("scr_player_enableSecondWindAndPistol", 0)) {
-    thread ref_12fb4();
+    thread ref_12FB4();
   }
 
   var_0.laststandreviveent = var_1;
   level.laststandreviveents[var_1 getentitynumber()] = var_1;
   thread removereviveentfromlevelarrayondeath();
-  thread ref_144d0();
+  thread ref_144D0();
 
   if(var_0 scripts\mp\gametypes\br_public::shouldgetnewspawnpoint()) {
     ref_13014(var_0.laststandreviveent);
@@ -782,7 +782,7 @@ function revivesetup(var_0) {
   }
 }
 
-function ref_12fb4() {
+function ref_12FB4() {
   var_0 = self;
   var_0 endon("death_or_disconnect");
   var_0 endon("last_stand_finished");
@@ -826,7 +826,7 @@ function ref_12fb4() {
   }
 }
 
-function ref_1204f(var_0, var_1, var_2) {
+function ref_1204F(var_0, var_1, var_2) {
   var_3 = var_0.victim;
   var_4 = var_0.inflictor;
   var_5 = var_0.objweapon;
@@ -845,7 +845,7 @@ function ref_1204f(var_0, var_1, var_2) {
 
 function endreviveonownerdeathordisconnect() {
   self endon("death");
-  self.owner scripts\engine\utility::ref_143a6("death_or_disconnect", "last_stand_finished", "last_stand_heal_active");
+  self.owner scripts\engine\utility::ref_143A6("death_or_disconnect", "last_stand_finished", "last_stand_heal_active");
   self delete();
 }
 
@@ -893,7 +893,7 @@ function revivetriggerthink(var_0) {
       continue;
     }
 
-    if(var_1 scripts\mp\gametypes\br_public::ref_125ec()) {
+    if(var_1 scripts\mp\gametypes\br_public::ref_125EC()) {
       continue;
     }
 
@@ -913,29 +913,29 @@ function revivetriggerthink(var_0) {
       continue;
     }
 
-    self.owner scripts\mp\utility\player::ref_1312b(1);
+    self.owner scripts\mp\utility\player::ref_1312B(1);
     var_2 = 0;
     self.owner notify("handle_revive_message");
     self makeunusable();
     self.owner allowmovement(0);
     var_1 isholdingbreath(1);
-    var_1.ref_12d1e = 1;
+    var_1.ref_12D1E = 1;
     self.reviver = var_1;
     thread useholdthink(var_1);
-    thread ref_139d5(var_1);
+    thread ref_139D5(var_1);
 
     if(level.gametype == "br") {
-      self.owner scripts\mp\gametypes\br_public::ref_1319c(1);
+      self.owner scripts\mp\gametypes\br_public::ref_1319C(1);
     }
 
-    var_3 = scripts\engine\utility::ref_143b5("use_hold_revive_success", "use_hold_revive_fail", "death_or_disconnect");
+    var_3 = scripts\engine\utility::ref_143B5("use_hold_revive_success", "use_hold_revive_fail", "death_or_disconnect");
 
     if(var_3 == "use_hold_revive_success") {
       var_2 = 1;
     }
 
     var_1 notify("finish_buddy_reviving");
-    self.owner scripts\mp\utility\player::ref_1312b(0);
+    self.owner scripts\mp\utility\player::ref_1312B(0);
     var_2 = playanim_aibegindismountturret(self.owner, var_3, var_1);
 
     if(var_2) {
@@ -951,46 +951,46 @@ function revivetriggerthink(var_0) {
 }
 
 function rpggetclosetoapc() {
-  if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140AA()) {
     return "teammate_revive_stim_mp_ch3";
   }
 
   return "teammate_revive_stim_mp";
 }
 
-function ref_139d5(var_0) {
+function ref_139D5(var_0) {
   var_1 = self;
   var_1 endon("death_or_disconnect");
   level endon("game_ended");
 
-  if(istrue(var_1.ref_1438b)) {
+  if(istrue(var_1.ref_1438B)) {
     return;
   }
 
   var_2 = getcompleteweaponname(rpggetclosetoapc());
   var_3 = var_1 scripts\cp_mp\utility\killstreak_utility::createstreakinfo("", var_1);
-  var_3.ref_12d1d = var_2;
+  var_3.ref_12D1D = var_2;
   var_4 = 0;
 
   while(!var_4 || istrue(var_1.consecutive_kills)) {
-    var_4 = var_1 scripts\cp_mp\killstreaks\killstreakdeploy::switchtodeployweapon(var_2, var_3, &ref_13ab4, undefined, &ref_1209f, undefined, &ref_120a0, 0);
+    var_4 = var_1 scripts\cp_mp\killstreaks\killstreakdeploy::switchtodeployweapon(var_2, var_3, &ref_13AB4, undefined, &ref_1209F, undefined, &ref_120A0, 0);
     waitframe();
-    var_1.ref_1438b = 1;
+    var_1.ref_1438B = 1;
   }
 
   var_1.consecutive_kills = 1;
-  var_1.ref_1438b = 0;
-  thread ref_144b4();
-  thread ref_144d5(var_1);
-  thread ref_144d6(var_1);
+  var_1.ref_1438B = 0;
+  thread ref_144B4();
+  thread ref_144D5(var_1);
+  thread ref_144D6(var_1);
 }
 
-function ref_1209f(var_0, var_1) {
+function ref_1209F(var_0, var_1) {
   var_2 = self;
   var_2 disableweaponswitch();
 }
 
-function ref_120a0(var_0, var_1) {
+function ref_120A0(var_0, var_1) {
   var_2 = self;
   var_2 enableweaponswitch();
   var_2 notify("revive_stim_finished");
@@ -1003,18 +1003,18 @@ function ref_120a0(var_0, var_1) {
   var_2.consecutive_kills = 0;
 }
 
-function ref_13ab4(var_0) {
+function ref_13AB4(var_0) {
   var_1 = self;
   level endon("game_ended");
 
-  if(!istrue(var_1.ref_12d1e)) {
+  if(!istrue(var_1.ref_12D1E)) {
     return;
   }
 
-  var_1 scripts\engine\utility::ref_143b5("death_or_disconnect", "finish_buddy_reviving", "last_stand_start");
+  var_1 scripts\engine\utility::ref_143B5("death_or_disconnect", "finish_buddy_reviving", "last_stand_start");
 }
 
-function ref_144b4() {
+function ref_144B4() {
   var_0 = self;
   var_0 endon("finish_buddy_reviving");
   var_0 endon("disconnect");
@@ -1023,7 +1023,7 @@ function ref_144b4() {
   var_0 enableweaponswitch();
 }
 
-function ref_144d5(var_0) {
+function ref_144D5(var_0) {
   var_1 = self;
   var_1 endon("finish_buddy_reviving");
   var_1 endon("death_or_disconnect");
@@ -1036,7 +1036,7 @@ function ref_144d5(var_0) {
   var_1 notify("finish_buddy_reviving");
 }
 
-function ref_144d6(var_0) {
+function ref_144D6(var_0) {
   var_1 = self;
   var_1 endon("finish_buddy_reviving");
   var_1 endon("death_or_disconnect");
@@ -1045,7 +1045,7 @@ function ref_144d6(var_0) {
   var_1 notify("finish_buddy_reviving");
 }
 
-function ref_144d0() {
+function ref_144D0() {
   var_0 = self;
 
   if(!isPlayer(var_0)) {
@@ -1084,12 +1084,12 @@ function ref_144d0() {
     var_4 = 350;
 
     if(var_3 < var_4) {
-      ref_13bc9(var_0);
+      ref_13BC9(var_0);
     }
   }
 }
 
-function ref_13bc9(var_0) {
+function ref_13BC9(var_0) {
   var_0.changesleft = !istrue(var_0.changesleft);
   var_1 = istrue(var_0.changesleft);
   var_2 = scripts\engine\utility::ter_op(var_1, "MP_BR_INGAME/WILL_REVIVE_INTO_PRONE", "MP_BR_INGAME/WILL_REVIVE_INTO_CROUCH");
@@ -1117,8 +1117,8 @@ function playanim_aibegindismountturret(var_0, var_1) {
 
   if(level.gametype == "br") {
     self.watch_for_driver_death = undefined;
-    var_2 scripts\mp\gametypes\br_public::ref_1319c(0);
-    var_2 scripts\mp\gametypes\br_public::ref_131a6(0);
+    var_2 scripts\mp\gametypes\br_public::ref_1319C(0);
+    var_2 scripts\mp\gametypes\br_public::ref_131A6(0);
   }
 
   var_2 allowmovement(1);
@@ -1131,10 +1131,10 @@ function playanim_aibegindismountturret(var_0, var_1) {
 
     if(level.gametype == "br") {
       if(!istrue(level.gameended)) {
-        var_2 scripts\mp\gametypes\br_public::ref_1319e(0);
+        var_2 scripts\mp\gametypes\br_public::ref_1319E(0);
         scripts\mp\events::revivedplayer(var_1, var_2);
         scripts\cp\vehicles\vehicle_compass_cp::ref_12050(var_1, var_2);
-        var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_1383b("alive_not_downed");
+        var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_1383B("alive_not_downed");
 
         if(var_1 != var_2) {
           var_1 scripts\mp\utility\stats::incpersstat("rescues", 1);
@@ -1180,7 +1180,7 @@ function playanim_aibegindismountturret(var_0, var_1) {
     }
   }
 
-  ref_13a34(var_2);
+  ref_13A34(var_2);
   thread has_filled_amped_bar();
   return var_3;
 }
@@ -1195,7 +1195,7 @@ function has_filled_amped_bar() {
   scripts\common\utility::allow_offhand_secondary_weapons(0, "laststand_throwback");
 
   while(self isthrowingbackgrenade()) {
-    self.ref_13b4f = 1;
+    self.ref_13B4F = 1;
     self giveandfireoffhand("rock_mp");
     wait 1;
   }
@@ -1293,12 +1293,12 @@ function useholdthinkcleanup(var_0, var_1) {
   self endon("death_or_disconnect");
   var_2 = getdvarint("scr_player_lastStandAllyDragEnable");
   var_3 = self.owner;
-  var_4 = var_3 scripts\engine\utility::ref_143b6("death_or_disconnect", "use_hold_think_success", "use_hold_think_fail", "last_stand_finished");
+  var_4 = var_3 scripts\engine\utility::ref_143B6("death_or_disconnect", "use_hold_think_success", "use_hold_think_fail", "last_stand_finished");
   self.inuse = 0;
   var_1 delete();
   var_0 setlaststandselfreviving();
   var_0 isholdingbreath(0);
-  var_0.ref_12d1e = 0;
+  var_0.ref_12D1E = 0;
 
   if(isDefined(var_0)) {
     var_0 scripts\mp\gameobjects::updateuiprogress(self, 0);
@@ -1396,7 +1396,7 @@ function suicidesetup() {
     }
   }
 
-  ref_1396a();
+  ref_1396A();
 }
 
 function ref_13969() {
@@ -1419,7 +1419,7 @@ function ref_13969() {
       var_0 = gettime();
     }
 
-    var_5 = scripts\engine\utility::ref_143bd(0.5, "stance_pressed_down", "stance_pressed_up", "last_stand_finished", "last_stand_self_revive", "last_stand_bleedout");
+    var_5 = scripts\engine\utility::ref_143BD(0.5, "stance_pressed_down", "stance_pressed_up", "last_stand_finished", "last_stand_self_revive", "last_stand_bleedout");
 
     switch (var_5) {
       case "stance_pressed_down":
@@ -1443,7 +1443,7 @@ function ref_13969() {
   }
 
   if(var_1) {
-    ref_1396a();
+    ref_1396A();
   }
 
   self notifyonplayercommandremove("stance_pressed_down", "+movedown");
@@ -1452,7 +1452,7 @@ function ref_13969() {
   self notifyonplayercommandremove("stance_pressed_up", "-stancedown");
 }
 
-function ref_1396a() {
+function ref_1396A() {
   if(istrue(self.allowselfrevive)) {
     self notify("last_stand_self_revive");
     return;
@@ -1517,7 +1517,7 @@ function handlerevivemessage() {
     }
 
     for(;;) {
-      var_2 = scripts\engine\utility::ref_143b4("super_ready", "handle_revive_message");
+      var_2 = scripts\engine\utility::ref_143B4("super_ready", "handle_revive_message");
 
       if(var_2 == "super_ready" && scripts\mp\supers::getcurrentsuperref() != "super_laststand_heal") {
         continue;

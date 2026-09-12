@@ -235,8 +235,8 @@ function spawnchopper(var_0, var_1) {
   var_22.ref_13766 = 50;
   var_22.ref_13767 = 25;
   var_22.ref_13768 = undefined;
-  var_22.ref_11c43 = 7;
-  var_22.ref_11c44 = 12;
+  var_22.ref_11C43 = 7;
+  var_22.ref_11C44 = 12;
   var_22 setvehicleteam(var_22.team);
   var_22.health = 3500;
   var_22.maxhealth = 3500;
@@ -354,7 +354,7 @@ function choppersupport_monitorowner() {
     return;
   }
 
-  self.owner scripts\engine\utility::ref_143a5("joined_team", "disconnect");
+  self.owner scripts\engine\utility::ref_143A5("joined_team", "disconnect");
   thread choppersupport_leave();
 }
 
@@ -420,7 +420,7 @@ function choppersupport_engageturrettarget(var_0) {
   self endon("death");
 
   for(;;) {
-    if(!istrue(var_0.turreton) || istrue(var_0.ref_13e86)) {
+    if(!istrue(var_0.turreton) || istrue(var_0.ref_13E86)) {
       waitframe();
       continue;
     }
@@ -437,8 +437,8 @@ function choppersupport_engageturrettarget(var_0) {
       if(!choppersupport_checkifactivetargets()) {
         if(istrue(self.chopper_boss_explosion) && isDefined(self.intro_enemy_respawner)) {
           self thread[[self.intro_enemy_respawner]]();
-        } else if(isDefined(self.ref_1220c)) {
-          self thread[[self.ref_1220c]]();
+        } else if(isDefined(self.ref_1220C)) {
+          self thread[[self.ref_1220C]]();
         } else {
           thread choppersupport_patrolfield();
         }
@@ -496,8 +496,8 @@ function choppersupport_clearcurrenttarget(var_0) {
     self.currenttarget = undefined;
   }
 
-  if(istrue(var_0.ref_13a71)) {
-    var_0.ref_13a71 = undefined;
+  if(istrue(var_0.ref_13A71)) {
+    var_0.ref_13A71 = undefined;
   }
 
   var_0.attackingtarget = undefined;
@@ -539,14 +539,14 @@ function choppersupport_fireonturrettarget(var_0, var_1, var_2, var_3, var_4) {
 
   var_8 = 20;
 
-  if(isDefined(self.ref_11c43)) {
-    var_8 = self.ref_11c43;
+  if(isDefined(self.ref_11C43)) {
+    var_8 = self.ref_11C43;
   }
 
   var_9 = 40;
 
-  if(isDefined(self.ref_11c44)) {
-    var_9 = self.ref_11c44;
+  if(isDefined(self.ref_11C44)) {
+    var_9 = self.ref_11C44;
   }
 
   if(istrue(var_4)) {
@@ -564,7 +564,7 @@ function choppersupport_fireonturrettarget(var_0, var_1, var_2, var_3, var_4) {
   thread grenade_chances(var_0);
 
   while(istrue(goalyaw(var_0, var_1))) {
-    if(istrue(var_0.ref_13a71)) {
+    if(istrue(var_0.ref_13A71)) {
       if(isDefined(self.currenttarget) && var_1 == self.currenttarget && !istrue(self.chopper_boss_explosion)) {
         self[[level.grenade_effect]](self.currenttarget, 1);
       } else {
@@ -734,7 +734,7 @@ function choppersupport_watchtargetlos(var_0, var_1) {
   }
 
   for(;;) {
-    if(!istrue(var_0.ref_13a71) && isDefined(var_0.attackingtarget)) {
+    if(!istrue(var_0.ref_13A71) && isDefined(var_0.attackingtarget)) {
       var_7 = scripts\engine\trace::ray_trace_passed(var_0 gettagorigin("tag_barrel"), var_0.attackingtarget gettagorigin("j_head"), var_5, var_4);
 
       if(!istrue(var_7)) {
@@ -743,7 +743,7 @@ function choppersupport_watchtargetlos(var_0, var_1) {
         }
 
         if(gettime() - var_2 > var_3) {
-          var_0.ref_13a71 = 1;
+          var_0.ref_13A71 = 1;
         }
       } else {
         var_2 = undefined;
@@ -829,8 +829,8 @@ function choppersupport_patrolfield(var_0) {
     self.owner endon("disconnect");
   }
 
-  if(isDefined(self.ref_1220c)) {
-    self[[self.ref_1220c]](var_0);
+  if(isDefined(self.ref_1220C)) {
+    self[[self.ref_1220C]](var_0);
     return;
   }
 
@@ -991,7 +991,7 @@ function choppersupport_movetolocation(var_0, var_1) {
     }
 
     self setvehgoalpos(var_2, var_14);
-    scripts\engine\utility::ref_143a5("near_goal", "begin_evasive_maneuvers");
+    scripts\engine\utility::ref_143A5("near_goal", "begin_evasive_maneuvers");
 
     if(!istrue(var_8)) {
       break;
@@ -1058,7 +1058,7 @@ function debugtimedelta(var_0, var_1) {
 
     var_2 = (var_13, var_14, var_15);
     self setvehgoalpos(var_2, var_16);
-    scripts\engine\utility::ref_143a5("near_goal", "begin_evasive_maneuvers");
+    scripts\engine\utility::ref_143A5("near_goal", "begin_evasive_maneuvers");
 
     if(!istrue(var_12)) {
       break;
@@ -1071,7 +1071,7 @@ function going_to(var_0) {
   self endon("leaving");
   self endon("crashing");
 
-  if(!isDefined(level.ref_119e7) || level.ref_119e7.size == 0) {
+  if(!isDefined(level.ref_119E7) || level.ref_119E7.size == 0) {
     return var_0;
   }
 
@@ -1081,12 +1081,12 @@ function going_to(var_0) {
   var_4 = 0;
 
   while(!var_4 && var_1 < 360) {
-    for(var_5 = 0; var_5 < level.ref_119e7.size; var_5++) {
-      if(self == level.ref_119e7[var_5]) {
+    for(var_5 = 0; var_5 < level.ref_119E7.size; var_5++) {
+      if(self == level.ref_119E7[var_5]) {
         continue;
       }
 
-      var_4 = distance2d(var_0, level.ref_119e7[var_5].pathgoal) >= var_3;
+      var_4 = distance2d(var_0, level.ref_119E7[var_5].pathgoal) >= var_3;
 
       if(!var_4) {
         break;
@@ -1098,7 +1098,7 @@ function going_to(var_0) {
     }
 
     var_1 += 10;
-    var_0 = rotatepointaroundvector(self.ref_1220d, var_0, var_1);
+    var_0 = rotatepointaroundvector(self.ref_1220D, var_0, var_1);
     var_0 = (var_0[0], var_0[1], var_2);
   }
 
@@ -1156,9 +1156,9 @@ function choppersupport_cleanup(var_0) {
     self.streakinfo.onspray = istrue(var_0);
   }
 
-  if(!istrue(self.ref_12aa4)) {
+  if(!istrue(self.ref_12AA4)) {
     if(isDefined(self.streakinfo)) {
-      self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+      self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
     }
   }
 
@@ -1185,10 +1185,10 @@ function choppersupport_watchgameendleave() {
   self endon("leaving");
   self endon("crashing");
   level waittill("game_ended");
-  self.ref_12aa4 = 1;
+  self.ref_12AA4 = 1;
 
   if(isDefined(self.streakinfo)) {
-    self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+    self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
   }
 
   thread choppersupport_leave();
@@ -1252,8 +1252,8 @@ function choppersupport_gettargets(var_0, var_1, var_2, var_3) {
     if(istrue(var_10)) {
       var_13 = spawnStruct();
       var_13.player = var_8;
-      var_13.ref_12fa2 = var_11;
-      var_13.ref_13a93 = var_12;
+      var_13.ref_12FA2 = var_11;
+      var_13.ref_13A93 = var_12;
       var_4 = var_13;
     } else {
       continue;
@@ -1361,7 +1361,7 @@ function choppersupport_getbesttarget(var_0, var_1) {
       continue;
     }
 
-    if(choppersupport_isactivetarget(var_7.player) && !istrue(var_7.ref_13a93)) {
+    if(choppersupport_isactivetarget(var_7.player) && !istrue(var_7.ref_13A93)) {
       continue;
     }
 
@@ -1380,12 +1380,12 @@ function choppersupport_getbesttarget(var_0, var_1) {
       }
     }
 
-    if(istrue(var_7.ref_12fa2)) {
+    if(istrue(var_7.ref_12FA2)) {
       var_8 = 1;
       var_10 += 40;
     }
 
-    if(istrue(var_7.ref_13a93)) {
+    if(istrue(var_7.ref_13A93)) {
       var_9 = 1;
       var_10 += 20;
     }
@@ -1629,7 +1629,7 @@ function beginevasivemaneuvers() {
   self notify("begin_evasive_maneuvers");
   self endon("begin_evasive_maneuvers");
   self.evasivemaneuvers = 1;
-  var_0 = scripts\engine\utility::ref_143b9(3, "death");
+  var_0 = scripts\engine\utility::ref_143B9(3, "death");
 
   if(var_0 == "timeout") {
     self.evasivemaneuvers = 0;
@@ -1689,9 +1689,9 @@ function choppersupport_handledeathdamage(var_0) {
 
   if(istrue(self.usefuncoverride) && isDefined(level.ref_13457)) {
     if(isDefined(var_0.objweapon)) {
-      [[level.ref_13457.ref_1346a]](var_0.objweapon.basename);
+      [[level.ref_13457.ref_1346A]](var_0.objweapon.basename);
     } else {
-      [[level.ref_13457.ref_1346a]]("none");
+      [[level.ref_13457.ref_1346A]]("none");
     }
   }
 

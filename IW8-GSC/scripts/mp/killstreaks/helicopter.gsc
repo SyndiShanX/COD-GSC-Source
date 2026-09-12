@@ -108,7 +108,7 @@ function starthelicopter(var_0, var_1) {
   var_3 = "helicopter";
   var_4 = self.pers["team"];
   var_2 = level.heli_start_nodes[randomint(level.heli_start_nodes.size)];
-  scripts\common\utility::ref_13e0a(level.ref_11b2a, var_3, self.origin);
+  scripts\common\utility::ref_13E0A(level.ref_11B2A, var_3, self.origin);
   thread heli_think(var_0, self, var_2, self.pers["team"], var_1);
 }
 
@@ -277,7 +277,7 @@ function heli_think(var_0, var_1, var_2, var_3, var_4) {
 
 function heli_existance() {
   var_0 = self getentitynumber();
-  scripts\engine\utility::ref_143a6("death", "crashing", "leaving");
+  scripts\engine\utility::ref_143A6("death", "crashing", "leaving");
   scripts\mp\utility\killstreak::removefromhelilist(var_0);
   self notify("helicopter_done");
   self notify("helicopter_removed");
@@ -715,7 +715,7 @@ function heli_leave_on_disconnect(var_0) {
 function heli_leave_on_changeteams(var_0) {
   self endon("death");
   self endon("helicopter_done");
-  var_0 scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
+  var_0 scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
   thread heli_leave();
 }
 
@@ -799,7 +799,7 @@ function fireontarget(var_0) {
 
   self setlookatent(var_8);
   thread isfacing(10, var_8);
-  scripts\engine\utility::ref_143b9(4, "facing");
+  scripts\engine\utility::ref_143B9(4, "facing");
 
   if(!isDefined(var_8) || !isalive(var_8)) {
     return;
@@ -819,7 +819,7 @@ function fireontarget(var_0) {
     }
   }
 
-  scripts\engine\utility::ref_143b9(3, "near_goal");
+  scripts\engine\utility::ref_143B9(3, "near_goal");
 }
 
 function attackgroundtarget(var_0) {
@@ -1323,7 +1323,7 @@ function heli_leave(var_0) {
 
   if(isDefined(self.helitype) && self.helitype == "osprey" && isDefined(self.pathgoal)) {
     _setvehgoalpos(self.pathgoal, 1);
-    scripts\engine\utility::ref_143b9(5, "goal");
+    scripts\engine\utility::ref_143B9(5, "goal");
   }
 
   if(!isDefined(var_0)) {
@@ -1342,7 +1342,7 @@ function heli_leave(var_0) {
   heli_reset();
   self vehicle_setspeed(180, 45);
   _setvehgoalpos(var_3, 1);
-  scripts\engine\utility::ref_143b9(12, "goal");
+  scripts\engine\utility::ref_143B9(12, "goal");
   self notify("gone");
   self notify("death");
   waitframe();

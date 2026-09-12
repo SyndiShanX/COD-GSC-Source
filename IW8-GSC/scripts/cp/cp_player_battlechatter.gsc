@@ -1097,7 +1097,7 @@ function dosound(var_0, var_1) {
   updatechatter(var_0);
   var_13 = max(var_9, var_10) / 1000;
   thread timehack(var_5, var_13);
-  scripts\engine\utility::ref_143a5(var_5, "death_or_disconnect");
+  scripts\engine\utility::ref_143A5(var_5, "death_or_disconnect");
   removespeaker(level, self, var_12);
   return 1;
 }
@@ -1174,7 +1174,7 @@ function ref_12455(var_0, var_1, var_2, var_3, var_4) {
 }
 
 function dothreatcalloutresponse(var_0, var_1) {
-  var_2 = scripts\engine\utility::ref_143ad(var_0, "death_or_disconnect");
+  var_2 = scripts\engine\utility::ref_143AD(var_0, "death_or_disconnect");
 
   if(isDefined(var_2) && var_2 == var_0) {
     var_3 = self.team;
@@ -1982,7 +1982,7 @@ function checkcasualty() {
   var_2 = undefined;
 }
 
-function ref_13bc8(var_0) {
+function ref_13BC8(var_0) {
   level.battlechatterenabled = var_0;
 }
 
@@ -2204,7 +2204,7 @@ function getfriendlyplayers(var_0, var_1) {
   goto LOC_00000085;
 }
 
-function ref_1274c(var_0, var_1) {
+function ref_1274C(var_0, var_1) {
   if(!isDefined(var_1)) {
     return;
   }

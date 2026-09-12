@@ -10,9 +10,9 @@ function init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "createHintObject", &manual_turret_createhintobject);
   scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "getTargetMarker", &manual_turret_gettargetmarker);
   scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "getEnemyPlayers", &manual_turret_getenemyplayers);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "munitionUsed", &ref_11ac3);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "watchForPlayerEnteringLastStand", &ref_11ac2);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "allowPickupOfTurret", &ref_11abf);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "munitionUsed", &ref_11AC3);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "watchForPlayerEnteringLastStand", &ref_11AC2);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("manual_turret", "allowPickupOfTurret", &ref_11ABF);
 }
 
 function init_manual_turret_settings() {
@@ -74,24 +74,24 @@ function manual_turret_getenemyplayers(var_0) {
   return scripts\cp\utility::getteamarray(var_0, 1);
 }
 
-function ref_11ac3(var_0, var_1) {
+function ref_11AC3(var_0, var_1) {
   self notify("munitions_used", "manual_turret");
 }
 
-function ref_11ac2() {
+function ref_11AC2() {
   self endon("disconnect");
   self endon("death");
   self notify("stop_manual_turret_lastStandWatcher");
   self endon("stop_manual_turret_lastStandWatcher");
   self endon("turret_placement_finished");
-  thread scripts\cp_mp\killstreaks\manual_turret::ref_11ac6("last_stand");
+  thread scripts\cp_mp\killstreaks\manual_turret::ref_11AC6("last_stand");
   self waittill("last_stand");
   scripts\mp\playeractions::allowactionset("target_marker", 1);
-  scripts\cp_mp\killstreaks\manual_turret::ref_11acc(1);
+  scripts\cp_mp\killstreaks\manual_turret::ref_11ACC(1);
   self.bgivensentry = 0;
 }
 
-function ref_11abf() {
+function ref_11ABF() {
   if(isDefined(level.nuclear_core_carrier)) {
     if(self == level.nuclear_core_carrier) {
       return false;

@@ -162,7 +162,7 @@ function giveplayeraccessory(var_0, var_1, var_2) {
   self.accessorydata = var_0;
   self.accessoryfullweapon = var_3;
   self.accessorylogic = var_2;
-  var_4 = ref_1330d();
+  var_4 = ref_1330D();
   scripts\cp_mp\utility\inventory_utility::_giveweapon(self.accessoryfullweapon);
   self giveaccessory(self.accessorydata, self.accessoryfullweapon, var_4);
 
@@ -190,12 +190,12 @@ function giveplayeraccessory(var_0, var_1, var_2) {
   }
 
   if(isDefined(self.suit) && self.suit == "iw8_suit_cp") {
-    thread scripts\cp_mp\gestures::ref_13e1a();
+    thread scripts\cp_mp\gestures::ref_13E1A();
     return;
   }
 }
 
-function ref_1330d() {
+function ref_1330D() {
   var_0 = scripts\cp\survival\survival_loadout::getcustomization();
   var_1 = var_0["body"];
   var_2 = tablelookup("mp/cac/bodies.csv", 1, var_1, 22);
@@ -261,8 +261,8 @@ function clearplayeraccessory() {
 }
 
 function tower_ground_mortar_2() {
-  if(!isDefined(self.ref_13b2d)) {
-    self.ref_13b2d = 1;
+  if(!isDefined(self.ref_13B2D)) {
+    self.ref_13B2D = 1;
     var_0 = removeriotshield();
     self setclientomnvar("ui_pet_watch_state", var_0);
     return;

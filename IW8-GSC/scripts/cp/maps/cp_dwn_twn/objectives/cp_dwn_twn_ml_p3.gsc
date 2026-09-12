@@ -27,7 +27,7 @@ function register_ml_p3_objectives() {
   scripts\cp\cp_objectives::registerobjective("ml_p3_intel", &init_ml_p3_intel, &start_ml_p3_intel, &end_ml_p3_intel, &debugbeatobjective, &debug_m1_p3_obj_start);
   scripts\cp\cp_objectives::registerobjective("ml_p3_intel_2", &init_ml_p3_intel_2, &start_ml_p3_intel_2, &end_ml_p3_intel_2, &debugbeatobjective, &debug_m1_p3_obj_start);
   scripts\cp\cp_objectives::registerobjective("ml_p3_intel_3", &init_ml_p3_intel_3, &start_ml_p3_intel_3, &end_ml_p3_intel_3, &debugbeatobjective, &debug_m1_p3_obj_start);
-  scripts\cp\cp_objectives::registerobjective("ml_p3_exfil", undefined, &ref_137d4, &movingplatforment, &debugbeatobjective, &debug_m1_p3_obj_start);
+  scripts\cp\cp_objectives::registerobjective("ml_p3_exfil", undefined, &ref_137D4, &movingplatforment, &debugbeatobjective, &debug_m1_p3_obj_start);
   scripts\cp\cp_pickup_hostage::registerhvtscriptmodels();
   thread init_cs_ents();
   thread register_spawn_functions();
@@ -224,7 +224,7 @@ function vfx_smoke() {
   scripts\cp\cp_modular_spawning::stop_all_groups();
 }
 
-function ref_11c5d() {
+function ref_11C5D() {
   var_0 = getEntArray("mlp1_safehouse_intel", "targetname");
 
   foreach(var_2 in var_0) {
@@ -243,11 +243,11 @@ function init_ml_p3_intel(var_0, var_1) {
   level.initlethalmaxoffsetmap = "ml_p3_intel";
   scripts\cp\cp_create_script_utility::cleanup_cs_file_objects("cp_dwn_twn_ml_p1_create_script");
   scripts\mp\brclientmatchdata::getprophealth("ml_p3");
-  scripts\cp\crate_drops\cp_crate_drops::ref_12c40("ml_p3");
+  scripts\cp\crate_drops\cp_crate_drops::ref_12C40("ml_p3");
   level.setovertimeomnvarprogress = 0;
   level.setovertimeomnvarenabled = 2;
-  level.ref_12dc0 = 0;
-  level.ref_12dbf = 2;
+  level.ref_12DC0 = 0;
+  level.ref_12DBF = 2;
   scripts\cp\utility::objective_update("ml_p3_intel", undefined, undefined, undefined, undefined, 0);
   level.final_hack_locations = scripts\engine\utility::getStructArray("comp_interact", "targetname");
 
@@ -258,7 +258,7 @@ function init_ml_p3_intel(var_0, var_1) {
   level.final_hack_location = level.final_hack_locations[0];
   thread stop_intel_spawning_and_start_p3();
   scripts\cp\utility::skydivestreamhintdvars("ml_p3");
-  level thread scripts\cp\cp_munitions::ref_12be1(level.final_hack_location.origin, 200);
+  level thread scripts\cp\cp_munitions::ref_12BE1(level.final_hack_location.origin, 200);
   thread autorespawnwaittime();
   at_mine_test();
 }
@@ -292,7 +292,7 @@ function stop_intel_spawning_and_start_p3() {
 function start_ml_p3_intel(var_0, var_1) {
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_ml_p3_multihack_brief_10");
   wait 0.5;
-  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("ping_response_affirm");
+  level thread scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("ping_response_affirm");
   var_2 = scripts\engine\utility::getStruct("ml_p3_obj", "targetname");
   var_3 = var_2;
   objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
@@ -331,14 +331,14 @@ function update_objective_marker_when_close(var_0, var_1) {
   objective_state(var_0.objectiveindex, "done");
 
   for(var_2 = 0; var_2 < level.final_hack_locations.size; var_2++) {
-    thread ref_13f8c(level);
+    thread ref_13F8C(level);
     thread ref_13083(level);
   }
 
   scripts\engine\utility::flag_wait("ml_p3_hack_visual");
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_ml_p3_multihack_connect_decrypt_10");
   wait 0.5;
-  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("ping_response_affirm");
+  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("ping_response_affirm");
 }
 
 function ref_13083(var_0) {
@@ -346,7 +346,7 @@ function ref_13083(var_0) {
   scripts\engine\utility::flag_set("ml_p3_hack_visual");
 }
 
-function ref_13f8c(var_0) {
+function ref_13F8C(var_0) {
   var_1 = scripts\cp\cp_objectives::requestworldid("hack_marker_" + var_0);
   var_2 = level.final_hack_locations[var_0];
   objective_setplayintro(var_1, 1);
@@ -364,7 +364,7 @@ function play_vo_when_near(var_0, var_1, var_2, var_3, var_4) {
   ref_14359(var_1, var_2, var_3);
 
   if(istrue(var_4)) {
-    scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb(var_0);
+    scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB(var_0);
     return;
   }
 
@@ -399,17 +399,17 @@ function init_ml_p3_intel_2(var_0, var_1) {}
 function start_ml_p3_intel_2(var_0, var_1) {
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_lass_bank_enemy_reinforcements_10");
   wait 0.5;
-  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("ping_response_copy");
+  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("ping_response_copy");
   scripts\engine\utility::flag_set("reinforce_vo_done");
   thread get_enemies_to_advance_on_players();
   thread scripts\cp\cp_modular_spawning::run_spawn_module("ml_p3_rein");
   thread scripts\cp\cp_modular_spawning::run_spawn_module("ml_p3_rein_rpg");
-  scripts\cp\cp_modular_spawning::set_wave_ref_override("ml_p3");
+  scripts\cp\cp_modular_spawning::set_wave_ref_OVERRIDE("ml_p3");
   thread get_rid_of_guys_blocking_path();
-  scripts\cp\utility::ref_123fe("mus_cp_money_files_copied_1");
+  scripts\cp\utility::ref_123FE("mus_cp_money_files_copied_1");
   thread hacking_sfx(level);
   thread setobjectivetypesomvarbit();
-  thread ref_11cf1();
+  thread ref_11CF1();
   level waittill("cpu_hacking_done");
   level notify("mlp3_hack_pause");
   is_ai_in_stealth();
@@ -427,7 +427,7 @@ function end_ml_p3_intel_2(var_0, var_1) {
   scripts\cp\cp_objectives::overridenextstep(var_0, "ml_p3_intel_3");
 }
 
-function ref_11cf1() {
+function ref_11CF1() {
   level endon("game_ended");
   level endon("cpu_hacking_done");
   var_0 = 0.33;
@@ -475,7 +475,7 @@ function hacking_sfx(var_0) {
   var_1 = spawn("script_origin", var_0.origin);
   wait 0.05;
   var_1 playLoopSound("cp_hacking_struct_lp");
-  level scripts\engine\utility::ref_143a5("cpu_hacking_done", "hacking_paused");
+  level scripts\engine\utility::ref_143A5("cpu_hacking_done", "hacking_paused");
   var_1 stoploopsound("cp_hacking_struct_lp");
 }
 
@@ -554,7 +554,7 @@ function is_ambient(var_0) {
 }
 
 function is_ai_in_stealth() {
-  scripts\cp\utility::ref_123fe("");
+  scripts\cp\utility::ref_123FE("");
   var_0 = ["dx_cps_cyph_cypher_connection_complete_shut_out_10", "dx_cps_cyph_cypher_connection_complete_shut_out_20", "dx_cps_cyph_cypher_connection_complete_shut_out_30"];
   gettimetogulagclosed(var_0);
   wait 5;
@@ -605,7 +605,7 @@ function start_ml_p3_intel_3(var_0, var_1) {
   var_3 = scripts\cp\cp_modular_spawning::get_module_structs_by_groupname("wave_spawning");
 
   foreach(var_5 in var_3) {
-    var_5 scripts\cp\cp_modular_spawning::clear_wave_ref_override();
+    var_5 scripts\cp\cp_modular_spawning::clear_wave_ref_OVERRIDE();
   }
 
   scripts\engine\utility::flag_set("ml_p3_vo_finished");
@@ -622,7 +622,7 @@ function lootleadermarksize() {
   wait 0.5;
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_kama_ml_p3_multihack_go_to_safehouse_10");
   wait 0.5;
-  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123cb("ping_response_affirm");
+  scripts\cp\maps\cp_dwn_twn\objectives\cp_dwn_twn_ml_p1::ref_123CB("ping_response_affirm");
 }
 
 function computer_test() {
@@ -793,7 +793,7 @@ function final_hack_spot_activate(var_0, var_1) {
     if(!istrue(var_0.setnexthistorydestination)) {
       var_0.setnexthistorydestination = 1;
       level.setovertimeomnvarprogress++;
-      thread ref_135c2(level);
+      thread ref_135C2(level);
       scripts\cp\utility::objective_update("ml_p3_intel", undefined, undefined, undefined, undefined, level.setovertimeomnvarprogress);
       level notify("delete_hack_marker_" + var_0.setnewabilitycount);
 
@@ -805,13 +805,13 @@ function final_hack_spot_activate(var_0, var_1) {
   }
 
   if(scripts\engine\utility::flag("ml_p3_hack_done") && !scripts\engine\utility::flag("ml_p3_router_picked_up")) {
-    if(!istrue(var_0.ref_12dbc)) {
-      var_0.ref_12dbc = 1;
-      level.ref_12dc0++;
-      scripts\cp\utility::objective_update("ml_p3_intel_3", undefined, undefined, undefined, undefined, level.ref_12dc0);
+    if(!istrue(var_0.ref_12DBC)) {
+      var_0.ref_12DBC = 1;
+      level.ref_12DC0++;
+      scripts\cp\utility::objective_update("ml_p3_intel_3", undefined, undefined, undefined, undefined, level.ref_12DC0);
       var_0.model delete();
 
-      if(level.ref_12dc0 >= level.ref_12dbf) {
+      if(level.ref_12DC0 >= level.ref_12DBF) {
         scripts\engine\utility::flag_set("ml_p3_router_picked_up");
         scripts\cp\cp_player_battlechatter::trysaylocalsound(var_1, "obj_device_pickup");
         return;
@@ -825,16 +825,16 @@ function final_hack_spot_activate(var_0, var_1) {
 }
 
 function lootleadermarkweaksize() {
-  ref_123f7();
-  ref_137bc();
+  ref_123F7();
+  ref_137BC();
 }
 
-function ref_135c2(var_0) {
+function ref_135C2(var_0) {
   var_0.model setModel("equipment_router_flat");
   setup_headicon_on_jammer(var_0.model, "icon_waypoint_cyber_bombsite", 20);
 }
 
-function ref_123f7() {
+function ref_123F7() {
   is_any_player_in_region();
 }
 
@@ -842,15 +842,15 @@ function init_hacking_table() {
   scripts\cp\cp_hacking::parsehackingtable("cp/cp_quarry_hacking_objective.csv");
 }
 
-function ref_137bc() {
+function ref_137BC() {
   level.hackingfunc = &init_hacking_table;
   level.hack_duration = 300;
-  thread ref_11ce1();
+  thread ref_11CE1();
   level thread scripts\cp\cp_hacking::hacking_init();
   level thread scripts\cp\cp_hacking::hacking_objective_time();
 }
 
-function ref_11ce1() {
+function ref_11CE1() {
   level endon("game_ended");
   level endon("ml_p3_hack_done");
   level endon("cpu_hacking_done");
@@ -863,12 +863,12 @@ function ref_11ce1() {
     var_4 = 0;
 
     foreach(var_6 in var_2) {
-      var_6.ref_11f20 = 0;
+      var_6.ref_11F20 = 0;
 
       foreach(var_8 in level.players) {
         if(distancesquared(var_8.origin, var_6.origin) < var_1) {
           var_4++;
-          var_6.ref_11f20++;
+          var_6.ref_11F20++;
         }
       }
     }
@@ -876,7 +876,7 @@ function ref_11ce1() {
     var_11 = 0;
 
     foreach(var_6 in var_2) {
-      if(var_6.ref_11f20 == 0) {
+      if(var_6.ref_11F20 == 0) {
         var_11 = 1;
         break;
       }
@@ -983,7 +983,7 @@ function send_guy_to_org(var_0) {
   self setgoalpos(var_0);
   self.goalradius = 16;
   thread stop_ignoring_after_timer(5);
-  var_1 = scripts\engine\utility::ref_143ad("goal_reached", "goal");
+  var_1 = scripts\engine\utility::ref_143AD("goal_reached", "goal");
   self.goalradius = 512;
 }
 
@@ -1022,7 +1022,7 @@ function ref_13504() {
   var_6 waittill("goal");
   var_6.instantbleedoutsquadwipe = "center";
   var_6 vehicle_setspeed(15, 10);
-  var_6.ref_11e98 = 1;
+  var_6.ref_11E98 = 1;
   thread skip_navmesh_check(var_6);
   thread skipburndownforvehicle(var_6);
   thread ref_14454(level);
@@ -1155,7 +1155,7 @@ function ref_14454(var_0) {
   }
 }
 
-function ref_137d4(var_0) {
+function ref_137D4(var_0) {
   thread ref_13547();
   thread lootleadermarksize();
   thread scripts\cp\cp_hud_message::teamhudtutorialmessage(&"CP_DWN_TWN_OBJECTIVES/EXFIL_HEADER", "allies", 5);
@@ -1186,7 +1186,7 @@ function movingplatforment(var_0) {
 
 function mp_shipment_patch() {
   foreach(var_1 in level.players) {
-    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(2, 1, 1);
+    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340D(2, 1, 1);
   }
 
   wait 2;
@@ -1268,7 +1268,7 @@ function ref_13547() {
   objective_setshowoncompass(var_4, 1);
   objective_setminimapiconsize(var_4, "icon_regular");
   var_3 waittill("started_boarding");
-  scripts\cp\cp_objectives::ref_11f80(var_4);
+  scripts\cp\cp_objectives::ref_11F80(var_4);
   var_3 waittill("heli_taking_off");
   objective_delete(var_4);
   scripts\cp\cp_objectives::freeworldid("ml_p3_exfil");

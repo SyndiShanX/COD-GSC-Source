@@ -73,9 +73,9 @@ function main() {
   level.eogscoreboard = ["currency", "kills", "headShots", "downs", "revives"];
   scripts\cp\cp_compass::setupminimap("compass_map_mp_piccadilly");
   scripts\engine\utility::flag_set("infil_complete");
-  thread ref_121f5();
-  thread ref_12f82();
-  thread ref_121f0();
+  thread ref_121F5();
+  thread ref_12F82();
+  thread ref_121F0();
 }
 
 function rundebugstartobjective(var_0) {
@@ -242,7 +242,7 @@ function register_create_script_arrays(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_121f5() {
+function ref_121F5() {
   if(!isDefined(level.outofboundstriggers)) {
     level.outofboundstriggers = [];
   }
@@ -255,7 +255,7 @@ function ref_121f5() {
   }
 }
 
-function ref_12f82() {
+function ref_12F82() {
   while(!istrue(level.doorsetupfinished)) {
     waitframe();
   }
@@ -291,7 +291,7 @@ function ref_12f82() {
   }
 }
 
-function ref_121f0() {
+function ref_121F0() {
   var_0 = getEntArray("clip128x128x8", "targetname");
   var_1 = spawn("script_model", (-3246.5, -3351, 56));
   var_2 = spawn("script_model", (-3118.5, -3351, 56));

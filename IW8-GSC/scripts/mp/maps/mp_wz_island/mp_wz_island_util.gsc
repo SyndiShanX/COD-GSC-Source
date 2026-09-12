@@ -3,14 +3,14 @@
  * Script: scripts\mp\maps\mp_wz_island\mp_wz_island_util.gsc
 **************************************************************/
 
-function ref_1326b() {
+function ref_1326B() {
   var_0 = spawnStruct();
   var_0.playbattlechattersoundexpensive = getdvarint("scr_shallow_water_fire_extinguish_enabled", 1);
   var_0.playdeathsoundph = getdvarint("scr_shallow_water_fire_smoke_enabled", 1);
-  var_0.ref_12abc = getdvarint("scr_shallow_water_reduced_lethal_damage_enabled", 1);
-  var_0.ref_12abd = getdvarfloat("scr_shallow_water_reduced_lethal_damage_multiplier", 0.5);
-  var_0.ref_11eb8 = getdvarint("scr_shallow_water_noprone_volumes_enabled", 1);
-  var_0.ref_13c4d = getdvarint("scr_shallow_water_tracker_no_footprint_enabled", 1);
+  var_0.ref_12ABC = getdvarint("scr_shallow_water_reduced_lethal_damage_enabled", 1);
+  var_0.ref_12ABD = getdvarfloat("scr_shallow_water_reduced_lethal_damage_multiplier", 0.5);
+  var_0.ref_11EB8 = getdvarint("scr_shallow_water_noprone_volumes_enabled", 1);
+  var_0.ref_13C4D = getdvarint("scr_shallow_water_tracker_no_footprint_enabled", 1);
   var_0.helis_assault2 = getdvarint("scr_shallow_water_cold_blooded_enabled", 1);
   var_0.watch_for_owner_disconnect = getdvarint("scr_shallow_water_last_stand_water_suit_enabled", 1);
   var_1 = spawnStruct();
@@ -22,39 +22,39 @@ function ref_1326b() {
   var_1.setupbobbingboatmultiple = &setuphunters;
   var_1.setupmission = &setupinfectedairdroppositions;
   var_1.module_unpause_funcs = var_0;
-  level.ref_132a4 = var_1;
+  level.ref_132A4 = var_1;
   level.playerdatafield = &update_spot_limit;
   level.playerconnectwatcher = &unset_relic_vampire;
   level.playercleanupinfilondisconnect = &move_player_from_under_heli_and_kill;
   level.playercleargulagomnvars = &move_window_light;
-  level.playerexitcombatarea = &ref_126d4;
-  level.playerexecutionsenable = &ref_126d3;
+  level.playerexitcombatarea = &ref_126D4;
+  level.playerexecutionsenable = &ref_126D3;
 
   if(getdvarint("scr_shallow_water_use_trigger_volumes", 1)) {
     thread throwingknifemelee();
   }
 
-  if(istrue(level.ref_132a4.module_unpause_funcs.ref_11eb8)) {
+  if(istrue(level.ref_132A4.module_unpause_funcs.ref_11EB8)) {
     thread throwingknife_fire_clear_fx();
   }
 
   thread getlootteamleader();
-  ref_1326c();
+  ref_1326C();
 }
 
-function ref_1326c() {
+function ref_1326C() {
   level._effect["shallow_water_molotov"] = loadfx("vfx/iw8_br/island/equip/vfx_molotov_shallow_water");
   level._effect["shallow_water_thermite"] = loadfx("vfx/iw8_br/island/equip/vfx_thermite_shallow_water");
 }
 
 function throwingknifemelee() {
-  level.ref_132a5 = [];
+  level.ref_132A5 = [];
   var_0 = getEntArray("triggers_water_knee", "script_noteworthy");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
-    level.ref_132a5[var_1] = var_2;
-    level.ref_132a5[var_1].occupants = [];
+    level.ref_132A5[var_1] = var_2;
+    level.ref_132A5[var_1].occupants = [];
     var_3 = var_2.origin[2];
 
     if(isDefined(var_2.target)) {
@@ -65,18 +65,18 @@ function throwingknifemelee() {
       }
     }
 
-    level.ref_132a5[var_1].ref_14513 = var_3;
-    scripts\mp\utility\trigger::makeenterexittrigger(var_2, &ref_132a0, &ref_132a3);
+    level.ref_132A5[var_1].ref_14513 = var_3;
+    scripts\mp\utility\trigger::makeenterexittrigger(var_2, &ref_132A0, &ref_132A3);
   }
 
-  thread ref_1329f();
+  thread ref_1329F();
 }
 
 function throwingknife_fire_clear_fx() {
-  level.ref_11eb7 = [];
-  level.ref_11eb7 = getEntArray("trigger_multiple_water_shallow", "classname");
+  level.ref_11EB7 = [];
+  level.ref_11EB7 = getEntArray("trigger_multiple_water_shallow", "classname");
 
-  foreach(var_1 in level.ref_11eb7) {
+  foreach(var_1 in level.ref_11EB7) {
     scripts\mp\utility\trigger::makeenterexittrigger(var_1, &nuke_vault_oilfire_player_vision, &onprematchfadedone);
   }
 }
@@ -92,7 +92,7 @@ function nuke_vault_oilfire_player_vision(var_0, var_1) {
     return;
   }
 
-  ref_126d4(var_0);
+  ref_126D4(var_0);
 }
 
 function onprematchfadedone(var_0, var_1) {
@@ -107,10 +107,10 @@ function onprematchfadedone(var_0, var_1) {
     return;
   }
 
-  ref_126d3(var_0);
+  ref_126D3(var_0);
 }
 
-function ref_126d4() {
+function ref_126D4() {
   var_0 = self;
 
   if(istrue(var_0.inlaststand)) {
@@ -120,7 +120,7 @@ function ref_126d4() {
   move_window_light(var_0, 0);
 
   if(!isbot(var_0)) {
-    thread ref_144cc();
+    thread ref_144CC();
     var_0 notifyonplayercommand("prone_in_water", "+prone");
     var_0 notifyonplayercommand("prone_in_water", "goprone");
     var_0 notifyonplayercommand("prone_in_water", "toggleprone");
@@ -130,7 +130,7 @@ function ref_126d4() {
   }
 }
 
-function ref_126d3() {
+function ref_126D3() {
   var_0 = self;
 
   if(istrue(var_0.inlaststand)) {
@@ -149,14 +149,14 @@ function ref_126d3() {
   }
 }
 
-function ref_144cc() {
+function ref_144CC() {
   var_0 = self;
   var_0 endon("death_or_disconnect");
   var_0 endon("exited_shallow_water");
   level endon("game_ended");
 
   for(;;) {
-    var_1 = var_0 scripts\engine\utility::ref_143ad("prone_in_water", "prone_from_crouch_in_water");
+    var_1 = var_0 scripts\engine\utility::ref_143AD("prone_in_water", "prone_from_crouch_in_water");
 
     if(var_1 == "prone_from_crouch_in_water") {
       if(var_0 getstance() != "prone") {
@@ -185,7 +185,7 @@ function unset_relic_vampire() {
   return istrue(var_0.unset_relic_vampire);
 }
 
-function ref_1329f() {
+function ref_1329F() {
   level endon("game_ended");
   var_0 = 1;
   var_1 = 100;
@@ -194,7 +194,7 @@ function ref_1329f() {
     var_2 = getdvarfloat("scr_shallow_water_delay", var_0);
     var_3 = getdvarfloat("scr_shallow_water_lower_bound_speed", var_1);
 
-    foreach(var_5 in level.ref_132a5) {
+    foreach(var_5 in level.ref_132A5) {
       if(var_5.occupants.size == 0) {
         continue;
       }
@@ -231,7 +231,7 @@ function ref_1329f() {
   }
 }
 
-function ref_132a0(var_0, var_1) {
+function ref_132A0(var_0, var_1) {
   if(!isPlayer(var_0)) {
     return;
   }
@@ -241,7 +241,7 @@ function ref_132a0(var_0, var_1) {
   allsupportboxes(var_1.origin + " - Incoming occupant: " + var_0.name);
 }
 
-function ref_132a3(var_0, var_1) {
+function ref_132A3(var_0, var_1) {
   if(!isPlayer(var_0)) {
     return;
   }
@@ -270,10 +270,10 @@ function getlootteamleader() {
         var_0 = 0;
       }
 
-      if(!isDefined(var_2.ref_120ac) && update_restock_ui(var_2)) {
-        ref_132a1(var_2);
-      } else if(isDefined(var_2.ref_120ac) && !update_restock_ui(var_2)) {
-        ref_132a2(var_2);
+      if(!isDefined(var_2.ref_120AC) && update_restock_ui(var_2)) {
+        ref_132A1(var_2);
+      } else if(isDefined(var_2.ref_120AC) && !update_restock_ui(var_2)) {
+        ref_132A2(var_2);
       }
 
       var_0++;
@@ -283,7 +283,7 @@ function getlootteamleader() {
   }
 }
 
-function ref_1208a() {
+function ref_1208A() {
   self endon("disconnect");
 
   while(update_restock_ui(self)) {
@@ -307,13 +307,13 @@ function ref_1208a() {
 }
 
 function ref_12088() {
-  if(istrue(level.ref_132a4.module_unpause_funcs.helis_assault2)) {
+  if(istrue(level.ref_132A4.module_unpause_funcs.helis_assault2)) {
     scripts\mp\utility\perk::giveperk("specialty_coldblooded");
   }
 
   self.ui_damage_num_elems = 1;
 
-  if(istrue(level.ref_132a4.module_unpause_funcs.playbattlechattersoundexpensive)) {
+  if(istrue(level.ref_132A4.module_unpause_funcs.playbattlechattersoundexpensive)) {
     if(scripts\mp\equipment\molotov::molotov_is_burning()) {
       scripts\mp\equipment\molotov::molotov_clear_burning();
       return;
@@ -324,44 +324,44 @@ function ref_12088() {
 }
 
 function ref_12089() {
-  if(istrue(level.ref_132a4.module_unpause_funcs.helis_assault2)) {
+  if(istrue(level.ref_132A4.module_unpause_funcs.helis_assault2)) {
     scripts\mp\utility\perk::removeperk("specialty_coldblooded");
   }
 
   self.ui_damage_num_elems = undefined;
 }
 
-function ref_132a1(var_0) {
+function ref_132A1(var_0) {
   if(!isPlayer(var_0)) {
     return;
   }
 
-  if(isDefined(var_0.ref_120ac)) {
-    var_0.ref_120ac++;
+  if(isDefined(var_0.ref_120AC)) {
+    var_0.ref_120AC++;
     return;
   }
 
-  var_0.ref_120ac = 1;
+  var_0.ref_120AC = 1;
 
-  if(istrue(level.ref_132a4.module_unpause_funcs.ref_13c4d)) {
+  if(istrue(level.ref_132A4.module_unpause_funcs.ref_13C4D)) {
     var_0 scripts\mp\utility\perk::giveperk("specialty_tracker_jammer");
   }
 
-  thread ref_1208a();
+  thread ref_1208A();
 }
 
-function ref_132a2(var_0) {
+function ref_132A2(var_0) {
   if(!isPlayer(var_0)) {
     return;
   }
 
-  if(isDefined(var_0.ref_120ac)) {
-    var_0.ref_120ac--;
+  if(isDefined(var_0.ref_120AC)) {
+    var_0.ref_120AC--;
 
-    if(var_0.ref_120ac == 0) {
-      var_0.ref_120ac = undefined;
+    if(var_0.ref_120AC == 0) {
+      var_0.ref_120AC = undefined;
 
-      if(istrue(level.ref_132a4.module_unpause_funcs.ref_13c4d) && var_0 hasperk("specialty_tracker_jammer")) {
+      if(istrue(level.ref_132A4.module_unpause_funcs.ref_13C4D) && var_0 hasperk("specialty_tracker_jammer")) {
         var_0 scripts\mp\utility\perk::removeperk("specialty_tracker_jammer");
         return;
       }
@@ -388,7 +388,7 @@ function update_restock_ui(var_0) {
 }
 
 function maxtagradius(var_0) {
-  return level.ref_132a4.module_unpause_funcs.playdeathsoundph && update_restock_ui(var_0);
+  return level.ref_132A4.module_unpause_funcs.playdeathsoundph && update_restock_ui(var_0);
 }
 
 function setuphunters(var_0) {
@@ -406,28 +406,28 @@ function maxrangesq(var_0) {
 }
 
 function getquickdropammotype(var_0) {
-  return level.ref_132a4.module_unpause_funcs.playbattlechattersoundexpensive && istrue(var_0.ui_damage_num_elems);
+  return level.ref_132A4.module_unpause_funcs.playbattlechattersoundexpensive && istrue(var_0.ui_damage_num_elems);
 }
 
 function getquickdroparmorcount(var_0) {
-  return level.ref_132a4.module_unpause_funcs.playbattlechattersoundexpensive && update_restock_ui(var_0);
+  return level.ref_132A4.module_unpause_funcs.playbattlechattersoundexpensive && update_restock_ui(var_0);
 }
 
 function roof_enemy_groups(var_0) {
-  if(!level.ref_132a4.module_unpause_funcs.ref_12abc || !isDefined(var_0) || !function_0437(var_0.origin)) {
+  if(!level.ref_132A4.module_unpause_funcs.ref_12ABC || !isDefined(var_0) || !function_0437(var_0.origin)) {
     return 1;
   }
 
-  return level.ref_132a4.module_unpause_funcs.ref_12abd;
+  return level.ref_132A4.module_unpause_funcs.ref_12ABD;
 }
 
-function ref_1450c() {
+function ref_1450C() {
   waitframe();
   level.arena_turret_op = getEntArray("script_model_water_wheel", "targetname");
-  scripts\engine\utility::array_thread(level.arena_turret_op, &ref_1450d);
+  scripts\engine\utility::array_thread(level.arena_turret_op, &ref_1450D);
 }
 
-function ref_1450d() {
+function ref_1450D() {
   level endon("game_ended");
   var_0 = (0, 0, -90);
   var_1 = (10, 0, 0);
@@ -539,7 +539,7 @@ function update_spot_limit() {
 }
 
 function move_player_from_under_heli_and_kill(var_0) {
-  if(!isDefined(level.ref_132a4) || !isDefined(level.ref_132a4.module_unpause_funcs) || !level.ref_132a4.module_unpause_funcs.watch_for_owner_disconnect) {
+  if(!isDefined(level.ref_132A4) || !isDefined(level.ref_132A4.module_unpause_funcs) || !level.ref_132A4.module_unpause_funcs.watch_for_owner_disconnect) {
     return;
   }
 

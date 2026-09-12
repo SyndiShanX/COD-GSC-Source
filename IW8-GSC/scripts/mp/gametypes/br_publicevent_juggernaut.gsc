@@ -7,13 +7,13 @@ function init() {
   var_0 = spawnStruct();
   var_0.weight = getdvarfloat("scr_br_pe_juggernaut_weight", 1);
   var_0.attackerswaittime = &attackerswaittime;
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.ref_14382 = &ref_14382;
   var_0.postinitfunc = &postinitfunc;
-  var_0.ref_11b78 = getdvarint("scr_br_pe_juggernaut_max_times", 1);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_juggernaut_max_times", 1);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("juggernaut", "10 5 0 0 0 0 0 0");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("juggernaut");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(4, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(4, var_0);
 }
 
 function postinitfunc() {
@@ -22,7 +22,7 @@ function postinitfunc() {
   scripts\mp\gametypes\br_jugg_common::strafe_internal("drop_on_death", var_0, "public_event");
 }
 
-function ref_140cf() {
+function ref_140CF() {
   return level.disable_super_in_turret.name != "jugg";
 }
 
@@ -36,13 +36,13 @@ function ref_14382() {
 function attackerswaittime() {
   var_0 = scripts\mp\gametypes\br_jugg_common::resetafkchecks(getdvarint("scr_br_pe_juggernaut_dropNumTeamBased", 1));
   level.vehicle_isneutraltoplayer = scripts\engine\utility::array_randomize(level.vehicle_isneutraltoplayer);
-  var_1 = scripts\mp\gametypes\br_jugg_common::ref_1334b(var_0, 0);
+  var_1 = scripts\mp\gametypes\br_jugg_common::ref_1334B(var_0, 0);
   scripts\mp\gametypes\br_public::brleaderdialog("public_events_juggernaut_start");
-  level scripts\mp\gametypes\br_jugg_common::ref_1383f(var_1, "public_event");
-  ref_1436c();
+  level scripts\mp\gametypes\br_jugg_common::ref_1383F(var_1, "public_event");
+  ref_1436C();
 }
 
-function ref_1436c() {
+function ref_1436C() {
   for(;;) {
     wait 1;
     var_0 = 0;

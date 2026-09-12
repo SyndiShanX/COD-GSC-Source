@@ -206,7 +206,7 @@ function playremotesequence(var_0, var_1) {
   scripts\cp\utility::_freezecontrols(1);
   thread scripts\cp\cp_weapons::unfreezeonroundend();
   thread scripts\cp\cp_weapons::startfadetransition(1.3);
-  var_4 = scripts\engine\utility::ref_143b9(1.8, "death");
+  var_4 = scripts\engine\utility::ref_143B9(1.8, "death");
   self notify("ks_freeze_end");
   scripts\cp\utility::_freezecontrols(0);
   scripts\cp\utility::clearusingremote();
@@ -509,7 +509,7 @@ function startmarkingtarget(var_0, var_1, var_2, var_3) {
   scripts\cp\utility::playsoundatpos_safe(var_0.origin, "recondrone_tag");
   targetmarkergroupsetextrastate(self.enemytargetmarkergroup, var_0, 1);
   var_7 = 30;
-  var_0 scripts\engine\utility::ref_143ba(var_7, "death", "set_noscopeoutline");
+  var_0 scripts\engine\utility::ref_143BA(var_7, "death", "set_noscopeoutline");
 
   if(helperdrone_istargetinreticle(var_4, var_0, 70, 150) && !var_0 scripts\cp\utility::_hasperk("specialty_noscopeoutline")) {
     targetmarkergroupsetextrastate(self.enemytargetmarkergroup, var_0, 0);
@@ -619,7 +619,7 @@ function markent_getweaponicon(var_0, var_1, var_2) {
 function markent_watchmarkingentstatus(var_0) {
   level endon("game_ended");
   var_0 endon("unmarked");
-  scripts\engine\utility::ref_143a6("explode", "death", "leaving");
+  scripts\engine\utility::ref_143A6("explode", "death", "leaving");
   wait 3;
   unmark(var_0);
 }
@@ -630,9 +630,9 @@ function markent_watchtargetstatus(var_0, var_1, var_2) {
   thread resetreticlemarkingprogressstate(0.5);
 
   if(isDefined(var_1)) {
-    var_0 scripts\engine\utility::ref_143bb(var_1, "death", "disconnect", var_2);
+    var_0 scripts\engine\utility::ref_143BB(var_1, "death", "disconnect", var_2);
   } else {
-    var_0 scripts\engine\utility::ref_143a6("death", "disconnect", var_2);
+    var_0 scripts\engine\utility::ref_143A6("death", "disconnect", var_2);
   }
 
   unmark(var_0);

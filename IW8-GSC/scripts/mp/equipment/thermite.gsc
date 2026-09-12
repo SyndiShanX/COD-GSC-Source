@@ -21,7 +21,7 @@ function thermite_used(var_0, var_1) {
   }
 
   thread thermite_watchdisowned();
-  thread ref_13b21();
+  thread ref_13B21();
   thread thermite_watchstuck(var_0);
 }
 
@@ -29,7 +29,7 @@ function thermite_watchstuck(var_0) {
   self endon("death");
   var_1 = undefined;
   jumpiffalse(istrue(var_0)) LOC_0000003d;
-  var_2 = ref_13b20();
+  var_2 = ref_13B20();
 
   if(!istrue(var_2)) {
     thread thermite_delete();
@@ -43,7 +43,7 @@ function thermite_watchstuck(var_0) {
   goto LOC_00000057;
 }
 
-function ref_13b20() {
+function ref_13B20() {
   self.see_equipment_dist endon("death");
   self.owner endon("disconnect");
   self.owner endon("joined_team");
@@ -74,7 +74,7 @@ function ref_13b20() {
   return true;
 }
 
-function ref_13b22() {
+function ref_13B22() {
   self endon("death");
   var_0 = self getlinkedparent();
 
@@ -85,7 +85,7 @@ function ref_13b22() {
   self.badplace = createnavbadplacebybounds(self.origin, (125, 125, 125), (0, 0, 0));
 }
 
-function ref_13b1d(var_0) {
+function ref_13B1D(var_0) {
   var_1 = 125;
   var_2 = 25;
   var_3 = 10;
@@ -101,13 +101,13 @@ function ref_13b1d(var_0) {
 
   if(isDefined(var_5)) {
     if(isPlayer(var_5) && var_5 scripts\cp_mp\utility\player_utility::_isalive()) {
-      if(isDefined(level.ref_132a4) && [[level.ref_132a4.getheliflyheight]](var_5)) {
+      if(isDefined(level.ref_132A4) && [[level.ref_132A4.getheliflyheight]](var_5)) {
         thread thermite_destroy();
         return;
       }
 
       var_5 dodamage(var_2, self.origin, self.owner, self, var_4, var_0);
-      var_5 scripts\cp_mp\utility\damage_utility::adddamagemodifier("thermiteStuck", 0, 0, &ref_13b1c);
+      var_5 scripts\cp_mp\utility\damage_utility::adddamagemodifier("thermiteStuck", 0, 0, &ref_13B1C);
     } else {
       var_5 = undefined;
     }
@@ -121,7 +121,7 @@ function ref_13b1d(var_0) {
   }
 }
 
-function ref_13b1c(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_13B1C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(var_0)) {
     return true;
   }
@@ -139,11 +139,11 @@ function ref_13b1c(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
 function thermite_watchdisowned() {
   self endon("death");
-  self.owner scripts\engine\utility::ref_143a6("joined_team", "joined_spectators", "disconnect");
+  self.owner scripts\engine\utility::ref_143A6("joined_team", "joined_spectators", "disconnect");
   thread thermite_destroy();
 }
 
-function ref_13b21() {
+function ref_13B21() {
   self endon("death");
   level waittill("br_prematchEnded");
   thread thermite_destroy();

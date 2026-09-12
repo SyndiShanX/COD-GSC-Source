@@ -76,21 +76,21 @@ function atv_initoccupancy() {
 
 function atv_initinteract() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("atv", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("atv", "single", ["driver", "rear"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("atv", "single", ["driver", "rear"]);
 }
 
 function check_dropped_locations_and_offset() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("atv", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("atv", 1);
   var_0.id = 4;
   var_0.seatids["driver"] = 0;
   var_0.seatids["rear"] = 1;
 }
 
 function check_digit_models_to_create() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("atv", 500);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("atv", 500);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("atv");
   var_0.class = "super_light";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("atv");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("atv");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("atv", 4);
 
   if(level.gametype == "br") {
@@ -101,7 +101,7 @@ function check_digit_models_to_create() {
 }
 
 function check_crate_unreachable() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("atv", 1);
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("atv", 1);
   var_0.challengeevaluator = 1;
   var_0.keycardlocs_chosen = 1;
   var_0.is_using_stealth_debug = 350;
@@ -113,7 +113,7 @@ function check_crate_unreachable() {
   var_0.isattachmentgrenadelauncher = 0;
   var_0.isattachmentselectfire = 0;
   var_0.isassaulting = 1;
-  var_1 = _calloutmarkerping_predicted_log::ref_1410e();
+  var_1 = _calloutmarkerping_predicted_log::ref_1410E();
   var_1.keycardlocs_chosen["atv"] = [];
   var_1.keycardlocs_chosen["atv"]["cargo_truck"] = 2;
 }
@@ -138,7 +138,7 @@ function atv_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "atv", var_0);
   var_2.objweapon = getcompleteweaponname("atv_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 

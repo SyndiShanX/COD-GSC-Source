@@ -10,7 +10,7 @@ function main() {
 
 function setup_callbacks() {
   level.bot_funcs["gametype_think"] = &deactivate_minigun;
-  level.bot_funcs["should_start_cautious_approach"] = &ref_132e0;
+  level.bot_funcs["should_start_cautious_approach"] = &ref_132E0;
 }
 
 function setup_bot_koth() {
@@ -209,7 +209,7 @@ function custom_ground_vehicle_death_func(var_0) {
   GscBinSkip1(0x45, "entrance_points_index", var_0.entrance_indices);
 }
 
-function ref_132e0(var_0) {
+function ref_132E0(var_0) {
   if(var_0) {
     var_1 = level.zone scripts\mp\gameobjects::getownerteam();
 

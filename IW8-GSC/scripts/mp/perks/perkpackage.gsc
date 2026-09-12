@@ -24,13 +24,13 @@ function perkpackage_checkifready() {
           self.perkpackagedata.super = "super_select";
           scripts\mp\supers::givesuper(self.perkpackagedata.super, 0, 1);
 
-          if(isDefined(level.ref_122ff)) {
-            [[level.ref_122ff]]();
+          if(isDefined(level.ref_122FF)) {
+            [[level.ref_122FF]]();
           }
         }
       }
 
-      if(var_0 && !istrue(self.ref_133e7)) {
+      if(var_0 && !istrue(self.ref_133E7)) {
         thread scripts\mp\supers::showsuperremindersplash();
       }
     }
@@ -88,7 +88,7 @@ function perkpackage_updateifchanged() {
       scripts\mp\supers::givesuper(self.perkpackagedata.super, 1, 0);
     }
 
-    if(scripts\mp\supers::issuperready() && !istrue(self.ref_133e7)) {
+    if(scripts\mp\supers::issuperready() && !istrue(self.ref_133E7)) {
       thread scripts\mp\supers::showsuperremindersplash();
     }
 
@@ -119,8 +119,8 @@ function perkpackage_setstate(var_0) {
 function perkpackage_getfirstfieldupgrade() {
   var_0 = self.loadoutfieldupgrade1;
 
-  if(isDefined(self.ref_1217f)) {
-    var_0 = self.ref_1217f;
+  if(isDefined(self.ref_1217F)) {
+    var_0 = self.ref_1217F;
   }
 
   return var_0;
@@ -217,7 +217,7 @@ function perkpackagemenu_menuthink() {
   self endon("giveLoadout_start");
   perkpackage_setstate(2);
   wait 0.3;
-  var_0 = scripts\engine\utility::ref_143af("perkPackageMenu_option1", "perkPackageMenu_option2", "perkPackageMenu_close", "death");
+  var_0 = scripts\engine\utility::ref_143AF("perkPackageMenu_option1", "perkPackageMenu_option2", "perkPackageMenu_close", "death");
   var_1 = 0;
 
   if(var_0 == "perkPackageMenu_option1") {
@@ -419,13 +419,13 @@ function ref_12300(var_0, var_1) {
     var_1 = "none";
   }
 
-  self.ref_1217f = var_0;
+  self.ref_1217F = var_0;
   self.ref_12180 = var_1;
   perkpackage_updateifchanged();
 }
 
 function ref_12301() {
-  self.ref_1217f = undefined;
+  self.ref_1217F = undefined;
   self.ref_12180 = undefined;
 }
 

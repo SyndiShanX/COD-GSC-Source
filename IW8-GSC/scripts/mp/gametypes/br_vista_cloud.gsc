@@ -21,15 +21,15 @@ function ref_12800() {
   atv_trail(var_0, var_1, var_2, var_3);
   var_4 = getdvarint("scr_br_vista_storm_cloud", 0);
 
-  if(istrue(var_4) && level._effect["storm_cloud"] != 0 && !isDefined(level.ref_138fa)) {
-    level.ref_138fa = spawnfx(level._effect["storm_cloud"], (95588, -136838, 12687), anglesToForward((0, 131.247, 0)), anglestoup((0, 131.247, 0)));
-    level.ref_138fa unmarkkeyframedmover(1);
-    triggerfx(level.ref_138fa);
+  if(istrue(var_4) && level._effect["storm_cloud"] != 0 && !isDefined(level.ref_138FA)) {
+    level.ref_138FA = spawnfx(level._effect["storm_cloud"], (95588, -136838, 12687), anglesToForward((0, 131.247, 0)), anglestoup((0, 131.247, 0)));
+    level.ref_138FA unmarkkeyframedmover(1);
+    triggerfx(level.ref_138FA);
     return;
   }
 
-  if(!istrue(var_4) && isDefined(level.ref_138fa)) {
-    level.ref_138fa delete();
+  if(!istrue(var_4) && isDefined(level.ref_138FA)) {
+    level.ref_138FA delete();
     return;
   }
 }
@@ -39,16 +39,16 @@ function atv_trail(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_4)) {
     if(istrue(var_3)) {
-      ref_131be(var_4, var_2, 1);
+      ref_131BE(var_4, var_2, 1);
       return;
     }
 
-    ref_131be(var_4, var_2, 0);
+    ref_131BE(var_4, var_2, 0);
     return;
   }
 }
 
-function ref_131be(var_0, var_1, var_2) {
+function ref_131BE(var_0, var_1, var_2) {
   if(istrue(var_2)) {
     var_0 setscriptablepartstate(var_1, "visible");
     return;

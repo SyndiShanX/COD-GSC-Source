@@ -86,7 +86,7 @@ function player_unresolved_collision_suspend() {
   self delete();
 }
 
-function ref_135b0(var_0, var_1, var_2) {
+function ref_135B0(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_1);
   var_3 setModel("veh8_mil_air_acharlie130_ks");
   var_3.angles = vectortoangles(var_2 - var_3.origin);
@@ -110,15 +110,15 @@ function paratrooper_spawnfunc(var_0) {
 function create_paratrooper() {
   self endon("death");
   thread watch_for_death();
-  ref_121c4();
-  ref_121c3();
-  ref_121c5();
-  ref_121c6();
-  ref_121c1();
+  ref_121C4();
+  ref_121C3();
+  ref_121C5();
+  ref_121C6();
+  ref_121C1();
   parachute_idle();
 }
 
-function ref_121c4() {
+function ref_121C4() {
   self allowedstances("stand");
   self.ignoreme = 1;
   self.ignoreall = 1;
@@ -139,13 +139,13 @@ function ref_121c4() {
   if(isDefined(var_0)) {
     self.ac130 = var_0;
     self asmsetstate(self.asmname, "parachute_freefall");
-    self._blackboard.ref_121d3 = "freefall";
+    self._blackboard.ref_121D3 = "freefall";
     self setOrigin(var_0.origin + (0, 0, 50), 0);
     return;
   }
 }
 
-function ref_121c3() {
+function ref_121C3() {
   self endon("death");
   self.landing_spot = getgroundposition(self.spawnpoint.parachute_land_origin, 64);
   var_0 = (0, 0, 0);
@@ -158,7 +158,7 @@ function ref_121c3() {
   self.skydive_dest = self.landing_spot + (0, 0, 1500) + (var_0[0], var_0[1], 0);
 }
 
-function ref_121c5() {
+function ref_121C5() {
   self endon("death");
 
   if(isDefined(self.ac130)) {
@@ -175,18 +175,18 @@ function ref_121c5() {
   self dodamage(self.health + 100, self.origin);
 }
 
-function ref_121c6() {
+function ref_121C6() {
   var_0 = spawn("script_model", self gettagorigin("j_spine4"));
   var_0.angles = self gettagangles("j_spine4");
   var_0 setModel("misc_wm_br_parachute");
   var_0 linkTo(self, "j_spine4", (0, 0, 0), (0, 0, 0));
   self.chute = var_0;
-  thread ref_13f11(var_0);
+  thread ref_13F11(var_0);
 }
 
-function ref_121c1() {
+function ref_121C1() {
   self.chute scriptmodelplayanim("sdr_com_parachute_pullcord");
-  self._blackboard.ref_121d3 = "parachuting";
+  self._blackboard.ref_121D3 = "parachuting";
   self asmsetstate(self.asmname, "parachute_deploy");
   thread ks_circleclosetime();
 }
@@ -219,7 +219,7 @@ function parachute_move() {
   var_1 = 3;
   self.anchor moveTo(self.landing_spot, var_0, 3, var_1);
   wait var_0 - 1.5;
-  self._blackboard.ref_121d3 = "landing";
+  self._blackboard.ref_121D3 = "landing";
   self.chute scriptmodelplayanim("sdr_com_parachute_prepare_for_landing");
   wait 3.4;
   self.chute delete();
@@ -267,7 +267,7 @@ function watch_for_death() {
   }
 }
 
-function ref_13f11(var_0) {
+function ref_13F11(var_0) {
   self endon("death");
   var_0 endon("parachute_detached");
   var_0 waittill("death");

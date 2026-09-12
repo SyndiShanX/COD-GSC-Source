@@ -111,7 +111,7 @@ function hoopty_initinteract() {
 }
 
 function spawn_mindia_juggs() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("hoopty", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("hoopty", 1);
   var_0.id = 9;
   var_0.seatids["driver"] = 0;
   var_0.seatids["front_right"] = 1;
@@ -122,13 +122,13 @@ function spawn_mindia_juggs() {
 }
 
 function spawn_manual_turret() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("hoopty", 1000);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("hoopty", 1000);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("hoopty");
   var_0.class = "medium_light";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("hoopty");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("hoopty");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("hoopty", 6);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("hoopty", &hoopty_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("hoopty_mp", 3);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("hoopty_mp", 3);
 }
 
 function hoopty_initfx() {
@@ -151,7 +151,7 @@ function hoopty_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "hoopty", var_0);
   var_2.objweapon = getcompleteweaponname("hoopty_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 

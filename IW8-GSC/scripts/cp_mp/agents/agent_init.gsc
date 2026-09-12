@@ -20,7 +20,7 @@ function agent_init() {
   initanimcallbacks();
   initstealthfuncsmp();
   scripts\anim\face::initlevelface();
-  scripts\cp\vehicle::ref_1422b();
+  scripts\cp\vehicle::ref_1422B();
 }
 
 function setupgrenades() {

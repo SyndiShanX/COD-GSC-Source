@@ -11,7 +11,7 @@ function game_utility_mp_gettimesincegamestart() {
   return scripts\mp\matchdata::gettimefrommatchstart(gettime());
 }
 
-function ref_11c7f() {
+function ref_11C7F() {
   switch (scripts\mp\utility\game::getgametype()) {
     case "infect":
       return 0;
@@ -26,7 +26,7 @@ function ref_11c7f() {
   }
 }
 
-function ref_11c80() {
+function ref_11C80() {
   switch (scripts\mp\utility\game::getgametype()) {
     case "oic":
     case "infect":
@@ -48,7 +48,7 @@ function ref_11c80() {
   }
 }
 
-function ref_11c8a(var_0) {
+function ref_11C8A(var_0) {
   if(isDefined(var_0.script_team)) {
     if(scripts\mp\utility\game::getgametype() == "arm") {
       return true;

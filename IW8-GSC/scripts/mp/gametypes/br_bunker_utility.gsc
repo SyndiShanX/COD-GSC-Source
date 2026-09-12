@@ -100,7 +100,7 @@ function ref_13619(var_0, var_1) {
   for(var_16 = 0; var_16 < var_15; var_16++) {
     if(isDefined(var_4[var_16])) {
       var_17 = easepower(var_4[var_16].script_noteworthy, var_4[var_16].origin, var_4[var_16].angles);
-      scripts\mp\gametypes\br_pickups::ref_12b3a(var_17);
+      scripts\mp\gametypes\br_pickups::ref_12B3A(var_17);
     }
   }
 
@@ -109,13 +109,13 @@ function ref_13619(var_0, var_1) {
   for(var_16 = 0; var_16 < var_15; var_16++) {
     if(isDefined(var_5[var_16])) {
       var_17 = easepower(var_5[var_16].script_noteworthy, var_5[var_16].origin, var_5[var_16].angles);
-      scripts\mp\gametypes\br_pickups::ref_12b3a(var_17);
+      scripts\mp\gametypes\br_pickups::ref_12B3A(var_17);
     }
   }
 
   foreach(var_13 in var_6) {
     if(isDefined(var_13.script_noteworthy)) {
-      var_19 = ref_13f0b(var_13.script_noteworthy);
+      var_19 = ref_13F0B(var_13.script_noteworthy);
       var_20 = remove_reduce_recoil(var_19);
       var_21 = var_13.origin;
       var_22 = var_13.angles;
@@ -154,7 +154,7 @@ function ref_13619(var_0, var_1) {
       var_17 = scripts\mp\gametypes\br_pickups::spawnpickup(var_19, var_23, var_20, 0);
 
       if(isDefined(var_17)) {
-        var_17.ref_13f0a = var_13.script_noteworthy;
+        var_17.ref_13F0A = var_13.script_noteworthy;
       }
     }
   }
@@ -198,7 +198,7 @@ function remove_reduce_recoil(var_0) {
   return 1;
 }
 
-function ref_13f0b(var_0) {
+function ref_13F0B(var_0) {
   switch (var_0) {
     case "uniqueLootItem_2":
     case "uniqueLootItem_1":
@@ -402,8 +402,8 @@ function vehiclelinkTo(var_0) {
           scripts\mp\gametypes\br_keypad_util::ref_12685(2);
           var_0.helileave = 2;
 
-          if(isDefined(var_0.ref_1395d)) {
-            [[var_0.ref_1395d]](var_0);
+          if(isDefined(var_0.ref_1395D)) {
+            [[var_0.ref_1395D]](var_0);
           }
 
           break;
@@ -652,7 +652,7 @@ function relic_dogtags(var_0, var_1) {
   return var_0.logplayermatchstart[var_1];
 }
 
-function ref_119a3(var_0) {
+function ref_119A3(var_0) {
   if(isDefined(var_0.doors)) {
     foreach(var_2 in var_0.doors) {
       var_2 scriptabledoorfreeze(1);
@@ -662,7 +662,7 @@ function ref_119a3(var_0) {
   }
 }
 
-function ref_13f1e(var_0) {
+function ref_13F1E(var_0) {
   if(isDefined(var_0.doors)) {
     foreach(var_2 in var_0.doors) {
       var_2 scriptabledoorfreeze(0);
@@ -672,14 +672,14 @@ function ref_13f1e(var_0) {
   }
 }
 
-function ref_1212e(var_0, var_1) {
+function ref_1212E(var_0, var_1) {
   foreach(var_3 in var_0.doors) {
     var_3 constraintoscriptgoalRadius("away", var_0.origin);
   }
 
   if(istrue(var_1)) {
     wait 1;
-    ref_119a3(var_0);
+    ref_119A3(var_0);
     return;
   }
 }
@@ -708,20 +708,20 @@ function heli_screenshake(var_0, var_1) {
       waitframe();
     }
 
-    ref_119a3(var_0);
+    ref_119A3(var_0);
     return;
   }
 }
 
 function top_roof_enemy_watcher() {
   level.max_pt = getdvarint("NROSLKMMQQ", 0) > 0;
-  scripts\mp\gamelogic::ref_12c4c(9);
+  scripts\mp\gamelogic::ref_12C4C(9);
   level.max_extra_enemies = getEnt("clip128x128x8", "targetname");
 }
 
-function ref_12f70(var_0) {
+function ref_12F70(var_0) {
   foreach(var_2 in var_0) {
-    thread ref_12f6f();
+    thread ref_12F6F();
   }
 
   var_4 = 0;
@@ -730,7 +730,7 @@ function ref_12f70(var_0) {
     var_4 = 1;
 
     foreach(var_2 in var_0) {
-      if(ref_12f75(var_2)) {
+      if(ref_12F75(var_2)) {
         var_4 = 0;
         break;
       }
@@ -743,13 +743,13 @@ function ref_12f70(var_0) {
     return true;
 }
 
-function ref_12f71(var_0) {
+function ref_12F71(var_0) {
   foreach(var_2 in var_0) {
-    ref_12f72(var_2);
+    ref_12F72(var_2);
   }
 }
 
-function ref_12f6f() {
+function ref_12F6F() {
   self endon("door_cl_end");
 
   if(istrue(self.max_dist_sq_from_node)) {
@@ -794,7 +794,7 @@ function ref_12f6f() {
         }
 
         if(!isDefined(self.max_projectile_check[var_13])) {
-          ref_12f73(var_12, 1);
+          ref_12F73(var_12, 1);
           self.max_projectile_check[var_13] = var_12;
         }
       }
@@ -815,7 +815,7 @@ function ref_12f6f() {
         }
 
         if(var_16) {
-          ref_12f73(var_12, 0);
+          ref_12F73(var_12, 0);
           self.max_projectile_check[var_13] = undefined;
         }
       }
@@ -825,10 +825,10 @@ function ref_12f6f() {
   }
 
   self scriptabledoorfreeze();
-  thread ref_12f72();
+  thread ref_12F72();
 }
 
-function ref_12f72() {
+function ref_12F72() {
   self notify("door_cl_end");
   self.max_dist_sq_from_node = undefined;
 
@@ -843,23 +843,23 @@ function ref_12f72() {
         continue;
       }
 
-      ref_12f73(var_1, 0);
+      ref_12F73(var_1, 0);
     }
   }
 
   self.max_projectile_check = undefined;
 }
 
-function ref_12f73(var_0) {
+function ref_12F73(var_0) {
   scripts\common\utility::allow_melee(!var_0, "door_cl");
   scripts\common\utility::allow_usability(!var_0, "door_cl");
 }
 
-function ref_12f75() {
+function ref_12F75() {
   return istrue(self.max_dist_sq_from_node);
 }
 
-function ref_12f74() {
+function ref_12F74() {
   return istrue(level.max_pt);
 }
 

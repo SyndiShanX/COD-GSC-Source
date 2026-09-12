@@ -233,7 +233,7 @@ function infil_player_rig(var_0, var_1, var_2) {
   }
 
   self[[level.prematchallowfunc]](0);
-  scripts\engine\utility::ref_143a6("remove_rig", "player_free_spot", "death");
+  scripts\engine\utility::ref_143A6("remove_rig", "player_free_spot", "death");
   self[[level.prematchallowfunc]](1);
 
   if(isDefined(var_2) && var_2) {
@@ -286,7 +286,7 @@ function infil_scene_fade_in(var_0, var_1, var_2) {
   var_3.foreground = 1;
   var_3 setshader("black", 640, 480);
   var_3 endon("death");
-  scripts\engine\utility::ref_143a6(var_2, "player_free_spot", "disconnect");
+  scripts\engine\utility::ref_143A6(var_2, "player_free_spot", "disconnect");
   wait var_0;
   var_3 fadeovertime(var_1);
   var_3.alpha = 0;

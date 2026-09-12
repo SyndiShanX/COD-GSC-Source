@@ -29,12 +29,12 @@ function helperdrone_updateheadicononjointeam(var_0) {}
 
 function spawn_addtoarrays() {
   if(scripts\mp\utility\game::getgametype() == "br" && !scripts\mp\flags::gameflag("prematch_fade_done")) {
-    thread ref_12a97();
+    thread ref_12A97();
     return;
   }
 }
 
-function ref_12a97() {
+function ref_12A97() {
   self endon("death_or_disconnect");
   self endon("reconDroneEnded");
   self endon("reconDroneUnset");

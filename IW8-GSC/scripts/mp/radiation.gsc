@@ -36,7 +36,7 @@ function playerleavearea(var_0) {
 }
 
 function soundwatcher(var_0) {
-  scripts\engine\utility::ref_143a5("death", "leftTrigger");
+  scripts\engine\utility::ref_143A5("death", "leftTrigger");
   self stoploopsound();
 }
 

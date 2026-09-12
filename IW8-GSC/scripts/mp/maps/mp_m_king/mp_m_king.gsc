@@ -20,10 +20,10 @@ function main() {
   game["defenders"] = "axis";
   game["allies_outfit"] = "desert";
   game["axis_outfit"] = "desert";
-  thread ref_121f4();
+  thread ref_121F4();
 }
 
-function ref_121f4() {
+function ref_121F4() {
   var_0 = spawn("script_model", (0, 0, 8));
   var_0 setModel("mp_m_king_shotblocker");
   var_0.angles = (0, 180, 0);

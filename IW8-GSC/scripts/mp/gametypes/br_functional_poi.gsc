@@ -40,14 +40,14 @@ function _spawnpois() {
     level.binoculars_checkexpirationtimer = getdvarint("scr_bmo_event_distribution_pad", 35);
     level.ref_12946 = getdvarint("scr_bmo_event_distribution_pad_push", 1);
     level.fly_over_path = getdvarint("scr_bmo_buystation_distribution_pad", 0);
-    thread ref_1325b();
+    thread ref_1325B();
   }
 
-  level.ref_11c41 = getdvarint("br_min_plunder_extractions", var_4);
-  level.ref_11b6d = getdvarint("br_max_plunder_extractions", var_3);
+  level.ref_11C41 = getdvarint("br_min_plunder_extractions", var_4);
+  level.ref_11B6D = getdvarint("br_max_plunder_extractions", var_3);
 
-  if(level.ref_11c41 < level.ref_11b6d) {
-    level.ref_11b6d = randomintrange(level.ref_11c41, level.ref_11b6d + 1);
+  if(level.ref_11C41 < level.ref_11B6D) {
+    level.ref_11B6D = randomintrange(level.ref_11C41, level.ref_11B6D + 1);
   }
 
   var_5 = getdvarint("br_max_armory_kiosk", 65);
@@ -58,7 +58,7 @@ function _spawnpois() {
     var_6 = ai_semtex_swapp(var_6, var_5, level.fly_over_path);
 
     if(isDefined(var_6) && var_6.size > 0) {
-      scripts\mp\gametypes\br_armory_kiosk::ref_131c0(var_6);
+      scripts\mp\gametypes\br_armory_kiosk::ref_131C0(var_6);
     }
   }
 
@@ -70,17 +70,17 @@ function _spawnpois() {
     var_8 = ai_semtex_swapp(var_8, var_7, level.fly_over_path);
 
     if(isDefined(var_8) && var_8.size > 0) {
-      scripts\mp\gametypes\br_armory_trader::ref_131c0(var_8);
+      scripts\mp\gametypes\br_armory_trader::ref_131C0(var_8);
     }
   }
 
   var_9 = scripts\mp\gametypes\br_plunder::register_vfx();
 
   if(isDefined(var_9) && var_9.size > 0) {
-    var_9 = ai_semtex_swapp(var_9, level.ref_11b6d, 1);
+    var_9 = ai_semtex_swapp(var_9, level.ref_11B6D, 1);
 
     if(isDefined(var_9) && var_9.size > 0) {
-      scripts\mp\gametypes\br_plunder::ref_1314b(var_9);
+      scripts\mp\gametypes\br_plunder::ref_1314B(var_9);
     }
   }
 
@@ -254,7 +254,7 @@ function _poistateupdate(var_0) {
   }
 }
 
-function ref_1325b() {
+function ref_1325B() {
   if(!isDefined(level.mapcorners)) {
     waitframe();
   }
@@ -380,17 +380,17 @@ function ref_1325b() {
     }
 
     var_24 = [];
-    level.ref_121bb = [];
-    level.ref_121ba = abs(distance(var_23, var_20));
-    level.ref_127de = level.ref_121ba / 2;
+    level.ref_121BB = [];
+    level.ref_121BA = abs(distance(var_23, var_20));
+    level.ref_127DE = level.ref_121BA / 2;
     var_10 = 1;
 
     while(var_10 < 4) {
-      var_11 = var_10 * level.ref_121ba / 2;
+      var_11 = var_10 * level.ref_121BA / 2;
       var_12 = 1;
 
       while(var_12 < 4) {
-        var_13 = var_12 * level.ref_121ba / 2;
+        var_13 = var_12 * level.ref_121BA / 2;
         var_14 = (var_23[0] + var_11 / 2, var_23[1] + var_13 / 2, 0);
         var_24 = var_14;
         var_12 += 2;
@@ -400,72 +400,72 @@ function ref_1325b() {
     }
 
     if(level.ref_12946 == 2) {
-      level.ref_121bb = scripts\engine\utility::array_randomize(var_24);
+      level.ref_121BB = scripts\engine\utility::array_randomize(var_24);
       return;
     }
 
     switch (var_21) {
       case 0:
         if(level.ref_12946) {
-          level.ref_121bb[level.ref_121bb.size] = var_24[2];
-          level.ref_121bb[level.ref_121bb.size] = var_24[3];
-          level.ref_121bb[level.ref_121bb.size] = var_24[1];
-          level.ref_121bb[level.ref_121bb.size] = var_24[0];
+          level.ref_121BB[level.ref_121BB.size] = var_24[2];
+          level.ref_121BB[level.ref_121BB.size] = var_24[3];
+          level.ref_121BB[level.ref_121BB.size] = var_24[1];
+          level.ref_121BB[level.ref_121BB.size] = var_24[0];
         } else {
-          level.ref_121bb[level.ref_121bb.size] = var_24[1];
-          level.ref_121bb[level.ref_121bb.size] = var_24[3];
-          level.ref_121bb[level.ref_121bb.size] = var_24[2];
-          level.ref_121bb[level.ref_121bb.size] = var_24[0];
+          level.ref_121BB[level.ref_121BB.size] = var_24[1];
+          level.ref_121BB[level.ref_121BB.size] = var_24[3];
+          level.ref_121BB[level.ref_121BB.size] = var_24[2];
+          level.ref_121BB[level.ref_121BB.size] = var_24[0];
         }
 
         break;
       case 1:
         if(level.ref_12946) {
-          level.ref_121bb[level.ref_121bb.size] = var_24[0];
-          level.ref_121bb[level.ref_121bb.size] = var_24[2];
-          level.ref_121bb[level.ref_121bb.size] = var_24[3];
-          level.ref_121bb[level.ref_121bb.size] = var_24[1];
+          level.ref_121BB[level.ref_121BB.size] = var_24[0];
+          level.ref_121BB[level.ref_121BB.size] = var_24[2];
+          level.ref_121BB[level.ref_121BB.size] = var_24[3];
+          level.ref_121BB[level.ref_121BB.size] = var_24[1];
         } else {
-          level.ref_121bb[level.ref_121bb.size] = var_24[3];
-          level.ref_121bb[level.ref_121bb.size] = var_24[2];
-          level.ref_121bb[level.ref_121bb.size] = var_24[0];
-          level.ref_121bb[level.ref_121bb.size] = var_24[1];
+          level.ref_121BB[level.ref_121BB.size] = var_24[3];
+          level.ref_121BB[level.ref_121BB.size] = var_24[2];
+          level.ref_121BB[level.ref_121BB.size] = var_24[0];
+          level.ref_121BB[level.ref_121BB.size] = var_24[1];
         }
 
         break;
       case 2:
         if(level.ref_12946) {
-          level.ref_121bb[level.ref_121bb.size] = var_24[1];
-          level.ref_121bb[level.ref_121bb.size] = var_24[0];
-          level.ref_121bb[level.ref_121bb.size] = var_24[2];
-          level.ref_121bb[level.ref_121bb.size] = var_24[3];
+          level.ref_121BB[level.ref_121BB.size] = var_24[1];
+          level.ref_121BB[level.ref_121BB.size] = var_24[0];
+          level.ref_121BB[level.ref_121BB.size] = var_24[2];
+          level.ref_121BB[level.ref_121BB.size] = var_24[3];
         } else {
-          level.ref_121bb[level.ref_121bb.size] = var_24[2];
-          level.ref_121bb[level.ref_121bb.size] = var_24[0];
-          level.ref_121bb[level.ref_121bb.size] = var_24[1];
-          level.ref_121bb[level.ref_121bb.size] = var_24[3];
+          level.ref_121BB[level.ref_121BB.size] = var_24[2];
+          level.ref_121BB[level.ref_121BB.size] = var_24[0];
+          level.ref_121BB[level.ref_121BB.size] = var_24[1];
+          level.ref_121BB[level.ref_121BB.size] = var_24[3];
         }
 
         break;
       case 3:
         if(level.ref_12946) {
-          level.ref_121bb[level.ref_121bb.size] = var_24[3];
-          level.ref_121bb[level.ref_121bb.size] = var_24[1];
-          level.ref_121bb[level.ref_121bb.size] = var_24[0];
-          level.ref_121bb[level.ref_121bb.size] = var_24[2];
+          level.ref_121BB[level.ref_121BB.size] = var_24[3];
+          level.ref_121BB[level.ref_121BB.size] = var_24[1];
+          level.ref_121BB[level.ref_121BB.size] = var_24[0];
+          level.ref_121BB[level.ref_121BB.size] = var_24[2];
         } else {
-          level.ref_121bb[level.ref_121bb.size] = var_24[0];
-          level.ref_121bb[level.ref_121bb.size] = var_24[1];
-          level.ref_121bb[level.ref_121bb.size] = var_24[3];
-          level.ref_121bb[level.ref_121bb.size] = var_24[2];
+          level.ref_121BB[level.ref_121BB.size] = var_24[0];
+          level.ref_121BB[level.ref_121BB.size] = var_24[1];
+          level.ref_121BB[level.ref_121BB.size] = var_24[3];
+          level.ref_121BB[level.ref_121BB.size] = var_24[2];
         }
 
         break;
       case 4:
-        level.ref_121bb = scripts\engine\utility::array_randomize(var_24);
+        level.ref_121BB = scripts\engine\utility::array_randomize(var_24);
         break;
       default:
-        level.ref_121bb = scripts\engine\utility::array_randomize(var_24);
+        level.ref_121BB = scripts\engine\utility::array_randomize(var_24);
         break;
     }
 
@@ -501,12 +501,12 @@ function play_music_to_team(var_0) {
 
     foreach(var_9 in level.calloutglobals.calloutzones) {
       if(ispointinvolume(var_6.origin, var_9)) {
-        if(!isDefined(var_9.ref_13c6a)) {
-          var_9.ref_13c6a = [];
+        if(!isDefined(var_9.ref_13C6A)) {
+          var_9.ref_13C6A = [];
         }
 
         var_7 = 1;
-        var_9.ref_13c6a[var_9.ref_13c6a.size] = var_6;
+        var_9.ref_13C6A[var_9.ref_13C6A.size] = var_6;
         break;
       }
     }
@@ -517,12 +517,12 @@ function play_music_to_team(var_0) {
   }
 
   foreach(var_9 in level.calloutglobals.calloutzones) {
-    if(!isDefined(var_9.ref_13c6a) || var_9.ref_13c6a.size == 0) {
-      var_9.ref_13c6a = undefined;
+    if(!isDefined(var_9.ref_13C6A) || var_9.ref_13C6A.size == 0) {
+      var_9.ref_13C6A = undefined;
       continue;
     }
 
-    var_13 = scripts\engine\utility::array_randomize(var_9.ref_13c6a);
+    var_13 = scripts\engine\utility::array_randomize(var_9.ref_13C6A);
     var_4 = var_13[0];
     var_14 = [];
     var_14 = var_13[0];
@@ -549,7 +549,7 @@ function play_music_to_team(var_0) {
       }
     }
 
-    var_9.ref_13c6a = undefined;
+    var_9.ref_13C6A = undefined;
   }
 
   return var_4;
@@ -558,7 +558,7 @@ function play_music_to_team(var_0) {
 function battle_tracks_onexitvehicle(var_0, var_1) {
   var_2 = spawnStruct();
   var_2.origin = var_0;
-  var_2.ref_129e5 = var_1;
+  var_2.ref_129E5 = var_1;
   var_2.wait_for_computer_power = [];
   return var_2;
 }

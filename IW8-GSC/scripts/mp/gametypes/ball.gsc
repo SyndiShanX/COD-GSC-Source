@@ -423,7 +423,7 @@ function ball_carrier_touched_goal(var_0) {
 
   if(isPlayer(var_0)) {
     var_0 scripts\mp\utility\stats::setextrascore0(var_0.pers["touchdowns"]);
-    var_0 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "dunk", var_0.origin);
+    var_0 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "dunk", var_0.origin);
   }
 
   var_2 = self.goal.team;
@@ -484,7 +484,7 @@ function ball_touched_goal(var_0) {
 
     if(isPlayer(self.lastcarrier)) {
       self.lastcarrier scripts\mp\utility\stats::setextrascore1(self.lastcarrier.pers["fieldgoals"]);
-      self.lastcarrier thread scripts\common\utility::ref_13e0a(level.ref_11b29, "fieldgoal", self.lastcarrier.origin);
+      self.lastcarrier thread scripts\common\utility::ref_13E0A(level.ref_11B29, "fieldgoal", self.lastcarrier.origin);
     }
   }
 
@@ -620,7 +620,7 @@ function scorefrozentimer() {
 
 function dogoalreset() {
   ball_waypoint_reset(self.useobject);
-  level scripts\engine\utility::ref_143b9(10, "goal_ready");
+  level scripts\engine\utility::ref_143B9(10, "goal_ready");
   goal_waypoint(self.useobject);
 }
 
@@ -718,7 +718,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
     if(isDefined(var_10.ball_carried)) {
       var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
       var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
-      thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "carrying");
+      thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "carrying");
       scripts\mp\gametypes\obj_ball::updatetimers("neutral", 1, 0);
       var_11 = 1;
     }

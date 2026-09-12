@@ -31,21 +31,21 @@ function maphint_computerscriptableused() {
     var_5.onunoccupied = &manualturret_disablecrouchpronemantle;
     var_5.onpinnedstate = &manual_turret_operate_by_nearby_enemies;
     var_5.onunpinnedstate = &manualturret_domonitoredweaponswitch;
-    var_5.ref_138b2 = &manualadjustlittlebirdlocs;
+    var_5.ref_138B2 = &manualadjustlittlebirdlocs;
     var_5.stompprogressreward = &manualturret_watchdeathongameend;
     var_5.id = "domFlag";
     var_5.pinobj = 1;
     var_5.lockupdatingicons = 0;
     var_5.trigger = var_4;
     var_5.get_current_bush_zone = 0;
-    var_5.ref_133a5 = 1;
+    var_5.ref_133A5 = 1;
     var_5.get_current_building_obj_struct = var_3;
     var_5.pos = var_2.origin;
     var_5.vfxent = spawn("script_model", var_5.pos);
     var_5.vfxent setModel("vfx_ri_dom");
     var_5.vfxent setscriptablepartstate("base", "neutral");
     var_5 scripts\mp\gameobjects::setcapturebehavior("persistent");
-    var_5 scripts\mp\gameobjects::setusetime(level.start_reach_exhaust_waste.ref_122a1);
+    var_5 scripts\mp\gameobjects::setusetime(level.start_reach_exhaust_waste.ref_122A1);
     thread map_dev_name_to_actual_station_name();
     thread mapcalloutsready();
     playencryptedcinematicforall(var_5.objidnum, 1);
@@ -74,9 +74,9 @@ function manualturret_endturretuseonexecution(var_0) {
 function manual_turret_allowpickupofturret(var_0) {
   self.userate = 1;
 
-  if(!isDefined(self.ref_11f63) || !self.ref_11f63) {
-    self.ref_11f63 = 1;
-    scripts\mp\gametypes\br_quest_util::ref_140b1(self.curorigin, "dom");
+  if(!isDefined(self.ref_11F63) || !self.ref_11F63) {
+    self.ref_11F63 = 1;
+    scripts\mp\gametypes\br_quest_util::ref_140B1(self.curorigin, "dom");
     var_1 = scripts\mp\utility\teams::getfriendlyplayers(var_0.team, 0);
 
     foreach(var_3 in var_1) {
@@ -141,7 +141,7 @@ function manned_turret_spawned_nodes() {
   self endon("flag_uncontest");
 
   while(self.stalemate) {
-    foreach(var_1 in self.ref_1265b) {
+    foreach(var_1 in self.ref_1265B) {
       if(isDefined(var_1.waittill_track_is_operational) && gettime() - var_1.waittill_track_is_operational < 5000) {
         continue;
       }
@@ -348,8 +348,8 @@ function mapedgeextractionlocs() {
 }
 
 function manualturret_toggleallowplacementactions() {
-  level thread scripts\mp\gametypes\br_gametype_rumble_invasion::ref_119f7(self.pos, "loot_table_dom_flag_capture_cash", 25);
-  level thread scripts\mp\gametypes\br_gametype_rumble_invasion::ref_119f7(self.pos, "loot_table_dom_flag_capture_weapons", 5);
+  level thread scripts\mp\gametypes\br_gametype_rumble_invasion::ref_119F7(self.pos, "loot_table_dom_flag_capture_cash", 25);
+  level thread scripts\mp\gametypes\br_gametype_rumble_invasion::ref_119F7(self.pos, "loot_table_dom_flag_capture_weapons", 5);
 }
 
 function mantlebrush() {
@@ -366,12 +366,12 @@ function mantlebrush() {
 
 function map_dev_name_to_actual_station_name() {
   level endon("game_ended");
-  self.ref_1265b = [];
+  self.ref_1265B = [];
 
   for(;;) {
     self.trigger waittill("trigger", var_0);
 
-    if((isPlayer(var_0) || isbot(var_0)) && !scripts\engine\utility::array_contains(self.ref_1265b, var_0)) {
+    if((isPlayer(var_0) || isbot(var_0)) && !scripts\engine\utility::array_contains(self.ref_1265B, var_0)) {
       manual_turret_laststandwatcher(var_0);
     }
 
@@ -383,7 +383,7 @@ function mapcalloutsready() {
   level endon("game_ended");
 
   for(;;) {
-    foreach(var_1 in self.ref_1265b) {
+    foreach(var_1 in self.ref_1265B) {
       if(!var_1 istouching(self.trigger) || !isalive(var_1)) {
         manual_turret_munitionused(var_1);
       }
@@ -394,12 +394,12 @@ function mapcalloutsready() {
 }
 
 function manual_turret_laststandwatcher(var_0) {
-  self.ref_1265b = scripts\engine\utility::array_add(self.ref_1265b, var_0);
+  self.ref_1265B = scripts\engine\utility::array_add(self.ref_1265B, var_0);
   var_0.truck_03_node = 1;
 }
 
 function manual_turret_munitionused(var_0) {
-  self.ref_1265b = scripts\engine\utility::array_remove(self.ref_1265b, var_0);
+  self.ref_1265B = scripts\engine\utility::array_remove(self.ref_1265B, var_0);
   var_0.truck_03_node = 0;
 }
 

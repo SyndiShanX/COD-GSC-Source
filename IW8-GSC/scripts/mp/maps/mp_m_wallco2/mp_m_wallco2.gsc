@@ -22,13 +22,13 @@ function main() {
 }
 
 function monitor() {
-  level.ref_13dee = getEnt("EggTruckFullCol", "targetname");
-  level.ref_13def = getEnt("EggDoorLeft", "targetname");
-  level.ref_13df0 = getEnt("EggTruckDoorLeftCol", "targetname");
-  level.ref_13df0 linkTo(level.ref_13def);
-  level.ref_13df1 = getEnt("EggDoorRight", "targetname");
-  level.ref_13df2 = getEnt("EggTruckDoorRightCol", "targetname");
-  level.ref_13df2 linkTo(level.ref_13df1);
+  level.ref_13DEE = getEnt("EggTruckFullCol", "targetname");
+  level.ref_13DEF = getEnt("EggDoorLeft", "targetname");
+  level.ref_13DF0 = getEnt("EggTruckDoorLeftCol", "targetname");
+  level.ref_13DF0 linkTo(level.ref_13DEF);
+  level.ref_13DF1 = getEnt("EggDoorRight", "targetname");
+  level.ref_13DF2 = getEnt("EggTruckDoorRightCol", "targetname");
+  level.ref_13DF2 linkTo(level.ref_13DF1);
   level.molotov_trigger_timeout = getEnt("EggBox", "targetname");
   level.molotovrecentlyused = getEntArray("EggRolls", "targetname");
 
@@ -69,14 +69,14 @@ function monitor_enemy_death() {
   }
 
   level.molotov_trigger_timeout hide();
-  level.ref_13dee hide();
-  level.ref_13dee connectpaths();
-  level.ref_13def rotateby((0, -230, 0), 0.5, 0, 0);
+  level.ref_13DEE hide();
+  level.ref_13DEE connectpaths();
+  level.ref_13DEF rotateby((0, -230, 0), 0.5, 0, 0);
   wait 0.05;
-  level.ref_13df1 rotateby((0, 270, 0), 0.45, 0, 0);
+  level.ref_13DF1 rotateby((0, 270, 0), 0.45, 0, 0);
   wait 0.45;
-  level.ref_13def rotateby((0, 30, 0), 1.5, 0, 0.5);
-  level.ref_13df1 rotateby((0, -20, 0), 1, 0, 0.25);
+  level.ref_13DEF rotateby((0, 30, 0), 1.5, 0, 0.5);
+  level.ref_13DF1 rotateby((0, -20, 0), 1, 0, 0.25);
 }
 
 function ref_13295() {

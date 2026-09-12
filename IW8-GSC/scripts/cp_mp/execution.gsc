@@ -25,7 +25,7 @@ function _giveexecution(var_0) {
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "lpcFeatureGated") && ![[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "lpcFeatureGated")]]()) {
-    thread ref_144e0();
+    thread ref_144E0();
     return;
   }
 }
@@ -180,7 +180,7 @@ function execution_blockladders() {
   }
 }
 
-function ref_144e0() {
+function ref_144E0() {
   self endon("disconnect");
   self notify("watchInExecution");
   self endon("watchInExecution");

@@ -14,13 +14,13 @@ function init() {
 
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("drogBagLoadout");
   scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("dropBagLoop");
-  scripts\mp\gametypes\br_gametypes::ref_13f25("playerNakedDropLoadout");
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerNakedDropLoadout", &ref_13380);
+  scripts\mp\gametypes\br_gametypes::ref_13F25("playerNakedDropLoadout");
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerNakedDropLoadout", &ref_13380);
 }
 
 function ref_13380() {
   var_0 = self;
-  level.deletescriptableinstanceaftertime = ref_1337f();
+  level.deletescriptableinstanceaftertime = ref_1337F();
   var_0 scripts\mp\class::loadout_emptycacheofloadout("gamemode");
   var_0 scripts\mp\gametypes\br::searchcircleorigin(0, 1, 0);
   var_0 scripts\mp\gametypes\br_armor::searchcirclesize();
@@ -47,7 +47,7 @@ function ref_13380() {
   }
 }
 
-function ref_1337f() {
+function ref_1337F() {
   var_0 = [];
   GscBinSkip0(0x2e, "loadoutArchetype", "archetype_assault");
 }

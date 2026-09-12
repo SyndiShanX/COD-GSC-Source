@@ -55,13 +55,13 @@ function init() {
   level.killstreakweaponmap["hover_jet_proj_mp"] = "hover_jet";
   level.killstreakweaponmap["iw8_minigunksjugg_mp"] = "juggernaut";
   level.killstreakweaponmap["deploy_juggernaut_mp"] = "juggernaut";
-  level.ref_11eaf = ["iw8_spotter_scope_mp"];
+  level.ref_11EAF = ["iw8_spotter_scope_mp"];
 }
 
 function onkillstreakfinishuse(var_0) {
   if(var_0.streakname == "gunship") {
     if(isDefined(var_0.owner)) {
-      var_0.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
+      var_0.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_0);
       return;
     }
 
@@ -70,7 +70,7 @@ function onkillstreakfinishuse(var_0) {
 }
 
 function gastrap_dmg_trig(var_0) {
-  if(scripts\engine\utility::array_contains(level.ref_11eaf, var_0.basename)) {
+  if(scripts\engine\utility::array_contains(level.ref_11EAF, var_0.basename)) {
     return 0;
   }
 

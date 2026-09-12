@@ -4,20 +4,20 @@
 **********************************************************/
 
 function init() {
-  scripts\engine\scriptable::ref_12f5b("trappedchest", &ref_13d04);
+  scripts\engine\scriptable::ref_12F5B("trappedchest", &ref_13D04);
 }
 
-function ref_136a2(var_0, var_1) {
+function ref_136A2(var_0, var_1) {
   var_2 = easepower("br_loot_cache_trapped", var_0, var_1);
-  var_2.ref_13a98 = spawn("trigger_radius", var_0, 0, 90, 64);
-  var_2.ref_13a98.ref_121d6 = var_2;
-  scripts\mp\utility\trigger::makeenterexittrigger(var_2.ref_13a98, &ref_13a97, undefined);
+  var_2.ref_13A98 = spawn("trigger_radius", var_0, 0, 90, 64);
+  var_2.ref_13A98.ref_121D6 = var_2;
+  scripts\mp\utility\trigger::makeenterexittrigger(var_2.ref_13A98, &ref_13A97, undefined);
   return var_2;
 }
 
-function ref_13a97(var_0, var_1) {
+function ref_13A97(var_0, var_1) {
   wait 0.3;
-  var_2 = var_1.ref_121d6 getscriptablepartstate("trappedchest");
+  var_2 = var_1.ref_121D6 getscriptablepartstate("trappedchest");
 
   if(var_2 != "closed") {
     var_1 delete();
@@ -29,7 +29,7 @@ function ref_13a97(var_0, var_1) {
   var_1 delete();
 }
 
-function ref_13d04(var_0, var_1, var_2, var_3, var_4) {
+function ref_13D04(var_0, var_1, var_2, var_3, var_4) {
   level endon("game_ended");
   var_0 endon("death");
   var_5 = ["dx_brm_stc_timer_go_10", "dx_brm_stc_player_death_10", "dx_brm_stc_player_death_20", "dx_brm_stc_timer_go_20", "dx_brm_stc_trap_active_20"];

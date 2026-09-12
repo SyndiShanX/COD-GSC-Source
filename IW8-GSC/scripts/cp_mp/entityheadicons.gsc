@@ -513,7 +513,7 @@ function setheadicon_findoldestcreatedicon(var_0) {
   return var_2;
 }
 
-function ref_1315d(var_0, var_1) {
+function ref_1315D(var_0, var_1) {
   var_2 = setheadicon_getexistingiconinfo(var_0);
 
   if(isDefined(var_2)) {
@@ -522,7 +522,7 @@ function ref_1315d(var_0, var_1) {
   }
 }
 
-function ref_1315e(var_0, var_1) {
+function ref_1315E(var_0, var_1) {
   var_2 = setheadicon_getexistingiconinfo(var_0);
 
   if(isDefined(var_2)) {

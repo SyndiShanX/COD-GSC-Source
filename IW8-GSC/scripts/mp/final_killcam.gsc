@@ -158,7 +158,7 @@ function dopotgkillcamforplayer() {
   }
 
   thread scripts\mp\killcam::potg_killcam(var_0.spectateentity, var_0.psoffsettime, var_0.starttime, var_0.endtime);
-  var_1 = scripts\engine\utility::ref_143b4("begin_killcam", "killcam_ended");
+  var_1 = scripts\engine\utility::ref_143B4("begin_killcam", "killcam_ended");
 
   if(var_1 == "killcam_ended") {
     potgkillcamover();
@@ -330,7 +330,7 @@ function skipkillcamduringdeathtimer(var_0) {
   if(!isai(self)) {
     thread waitskipkillcambuttonduringdeathtimer();
     thread waitskipkillcamduringdeathtimer(var_0);
-    var_1 = scripts\engine\utility::ref_143ad("killcam_death_done_waiting", "killcam_death_button_cancel");
+    var_1 = scripts\engine\utility::ref_143AD("killcam_death_done_waiting", "killcam_death_button_cancel");
 
     if(isDefined(var_1) && var_1 == "killcam_death_done_waiting") {
       self.skippedkillcam = 0;

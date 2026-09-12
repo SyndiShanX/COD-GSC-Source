@@ -4,11 +4,11 @@
 ***********************************************/
 
 function keypad_check_levelinput() {
-  if(!isDefined(level.ref_13d51)) {
-    level.ref_13d51 = [];
+  if(!isDefined(level.ref_13D51)) {
+    level.ref_13D51 = [];
   }
 
-  level.ref_13d51["lava"] = &init;
+  level.ref_13D51["lava"] = &init;
 }
 
 function init() {
@@ -24,10 +24,10 @@ function init() {
   level.plunder_initrepositories = loadfx("vfx/iw8_mp/trials/fl_petrograd/vfx_trials_gas_jet_start.vfx");
   level.plunder_registerrepositoryinstance = loadfx("vfx/iw8_mp/trials/fl_petrograd/vfx_trials_gas_cloud_linger_lg.vfx");
   level.plunder_removeanchoredwidgetfromrepositoryinstance = loadfx("vfx/iw8/level/captive/vfx_cpt_gas_cloud_linger.vfx");
-  level.ref_11c15 = loadfx("vfx/core/equipment/vfx_at_mine_light_en.vfx");
-  level.ref_11c14 = loadfx("vfx/iw8_mp/equipment/vfx_at_mine_launch.vfx");
-  level.ref_11c12 = loadfx("vfx/iw8_mp/equipment/c4/vfx_gen_c4_exp_dud.vfx");
-  level.ref_11c13 = loadfx("vfx/iw8_mp/equipment/mine/vfx_at_mine_exp.vfx");
+  level.ref_11C15 = loadfx("vfx/core/equipment/vfx_at_mine_light_en.vfx");
+  level.ref_11C14 = loadfx("vfx/iw8_mp/equipment/vfx_at_mine_launch.vfx");
+  level.ref_11C12 = loadfx("vfx/iw8_mp/equipment/c4/vfx_gen_c4_exp_dud.vfx");
+  level.ref_11C13 = loadfx("vfx/iw8_mp/equipment/mine/vfx_at_mine_exp.vfx");
 
   if(!isDefined(game["trial"])) {
     game["trial"] = [];
@@ -42,12 +42,12 @@ function init() {
   }
 
   level.set_force_aitype_suicidebomber = [];
-  level.ref_1453f = 0;
-  level.ref_13b67 = 0;
+  level.ref_1453F = 0;
+  level.ref_13B67 = 0;
   level.timeelapsed = 0;
   level.totaltime = 0;
-  level.ref_11f8e = 0;
-  level.ref_11b77 = 59999900;
+  level.ref_11F8E = 0;
+  level.ref_11B77 = 59999900;
   level.battlechatterenabled = 0;
   level scripts\engine\utility::flag_init("trial_prestart");
   level scripts\engine\utility::flag_init("trial_in_progress");
@@ -69,8 +69,8 @@ function init() {
   level.enemybodymodels[0] = "body_spetsnaz_cqc";
   waitframe();
 
-  if(isDefined(level.ref_13d57)) {
-    while(level.ref_13d57 == 0) {
+  if(isDefined(level.ref_13D57)) {
+    while(level.ref_13D57 == 0) {
       waitframe();
     }
   }
@@ -122,14 +122,14 @@ function trial_start_init() {
     waitframe();
   }
 
-  ref_1453c();
+  ref_1453C();
 
   if(game["trial"]["tries_remaining"] == 3) {
     wait 3.5;
   }
 
-  _tablethide::ref_13d88();
-  _tablethide::ref_13d89(0);
+  _tablethide::ref_13D88();
+  _tablethide::ref_13D89(0);
   wait 7.5;
   level scripts\engine\utility::flag_set("trial_prestart");
   thread player_set_weapon();
@@ -137,10 +137,10 @@ function trial_start_init() {
   switch (level.trial["variant"]) {
     case "free":
       level.dogtags = scripts\engine\utility::getStructArray("trial_waypoint_free", "targetname");
-      thread ref_1453d();
+      thread ref_1453D();
       break;
     default:
-      thread ref_1453e();
+      thread ref_1453E();
       break;
   }
 
@@ -155,15 +155,15 @@ function trial_start_init() {
   var_2 linkTo(var_0);
   var_3 linkTo(var_1);
 
-  if(!isDefined(level.ref_13d83)) {
-    level.ref_13d83 = 150;
+  if(!isDefined(level.ref_13D83)) {
+    level.ref_13D83 = 150;
   }
 
-  var_1 rotateYaw(level.ref_13d83, 2);
-  var_0 rotateYaw(level.ref_13d83 * -1, 2);
+  var_1 rotateYaw(level.ref_13D83, 2);
+  var_0 rotateYaw(level.ref_13D83 * -1, 2);
 }
 
-function ref_1453c() {
+function ref_1453C() {
   while(!isDefined(level.struct_class_names)) {
     waitframe();
   }
@@ -174,7 +174,7 @@ function ref_1453c() {
     level.ref_14540 = scripts\engine\utility::getStructArray("trial_waypoint_" + var_0, "targetname");
   }
 
-  level.ref_1453b = [];
+  level.ref_1453B = [];
 
   foreach(var_2 in level.ref_14540) {
     var_3 = spawn("script_model", var_2.origin);
@@ -193,58 +193,58 @@ function ref_1453c() {
       var_3.script_noteworthy = var_2.script_noteworthy;
     }
 
-    level.ref_1453b[int(var_3.script_index)] = var_3;
+    level.ref_1453B[int(var_3.script_index)] = var_3;
   }
 }
 
-function ref_1453d() {
+function ref_1453D() {
   level scripts\engine\utility::flag_wait("trial_prestart");
   var_0 = 0;
 
   foreach(var_2 in level.dogtags) {
     thread ref_13533(var_2, var_2, level.player);
-    thread ref_135a8();
+    thread ref_135A8();
     var_0++;
   }
 
-  while(level.ref_1453f < level.ref_1453b.size) {
+  while(level.ref_1453F < level.ref_1453B.size) {
     wait 0.05;
   }
 
   level scripts\engine\utility::flag_set("trial_completed");
 }
 
-function ref_1453e() {
+function ref_1453E() {
   level scripts\engine\utility::flag_wait("trial_prestart");
   var_0 = ref_13563();
   var_1 = undefined;
   waitframe();
 
-  for(var_2 = 0; var_2 < level.ref_1453b.size; var_2++) {
+  for(var_2 = 0; var_2 < level.ref_1453B.size; var_2++) {
     waitframe();
 
-    if(var_2 + 1 == level.ref_1453b.size) {
-      var_3 = spawn("script_model", level.ref_1453b[var_2].origin);
-      var_3.angles = (level.ref_1453b[var_2].angles[0] - 90, level.ref_1453b[var_2].angles[1], level.ref_1453b[var_2].angles[2]);
+    if(var_2 + 1 == level.ref_1453B.size) {
+      var_3 = spawn("script_model", level.ref_1453B[var_2].origin);
+      var_3.angles = (level.ref_1453B[var_2].angles[0] - 90, level.ref_1453B[var_2].angles[1], level.ref_1453B[var_2].angles[2]);
       var_3 setModel("tag_origin");
       waitframe();
       playFXOnTag(level.ref_14536, var_3, "TAG_ORIGIN");
     }
 
-    if(isDefined(level.ref_1453b[var_2 + 1])) {
-      playFXOnTag(level.ref_14538, level.ref_1453b[var_2 + 1], "TAG_ORIGIN");
+    if(isDefined(level.ref_1453B[var_2 + 1])) {
+      playFXOnTag(level.ref_14538, level.ref_1453B[var_2 + 1], "TAG_ORIGIN");
     }
 
     waitframe();
-    killfxontag(level.ref_14538, level.ref_1453b[var_2], "TAG_ORIGIN");
-    playFXOnTag(level.ref_14534, level.ref_1453b[var_2], "TAG_ORIGIN");
-    thread ref_135a8();
+    killfxontag(level.ref_14538, level.ref_1453B[var_2], "TAG_ORIGIN");
+    playFXOnTag(level.ref_14534, level.ref_1453B[var_2], "TAG_ORIGIN");
+    thread ref_135A8();
     waitframe();
-    var_0 moveTo((level.ref_1453b[var_2].origin[0], level.ref_1453b[var_2].origin[1], level.ref_1453b[var_2].origin[2] + 30), 1, 0.1, 0.3);
-    ref_14539(level.ref_1453b[var_2]);
+    var_0 moveTo((level.ref_1453B[var_2].origin[0], level.ref_1453B[var_2].origin[1], level.ref_1453B[var_2].origin[2] + 30), 1, 0.1, 0.3);
+    ref_14539(level.ref_1453B[var_2]);
 
     if(var_2 == 0) {
-      killfxontag(level.ref_14536, level.ref_1453b[0], "TAG_ORIGIN");
+      killfxontag(level.ref_14536, level.ref_1453B[0], "TAG_ORIGIN");
     }
   }
 
@@ -268,11 +268,11 @@ function ref_14539() {
     level scripts\engine\utility::flag_set("trial_in_progress");
   }
 
-  level.ref_1453f++;
+  level.ref_1453F++;
   killfxontag(level.ref_14534, self, "TAG_ORIGIN");
   playFXOnTag(level.ref_14535, self, "TAG_ORIGIN");
 
-  if(level.ref_1453f < level.ref_1453b.size) {
+  if(level.ref_1453F < level.ref_1453B.size) {
     level.player playSound("trial_sfx_success");
   }
 
@@ -310,7 +310,7 @@ function ref_13533(var_0, var_1, var_2) {
   GscBinSkip1(0x45, 0, spawn("script_model", (0, 0, 0)));
 }
 
-function ref_135a8() {
+function ref_135A8() {
   var_0 = undefined;
 
   switch (level.trial["variant"]) {
@@ -322,8 +322,8 @@ function ref_135a8() {
       break;
   }
 
-  var_1 = level.ref_11f8e;
-  level.ref_11f8e++;
+  var_1 = level.ref_11F8E;
+  level.ref_11F8E++;
   objective_state(var_1, "active");
   objective_position(var_1, self.origin);
   objective_setplayintro(var_1, 0);
@@ -391,7 +391,7 @@ function set_ending_pack() {
       level.player thread scripts\mp\equipment\gas_grenade::gas_removeblur();
       var_5 = gettime();
       var_1 = var_5 - var_3;
-      level.ref_13b67 += var_1;
+      level.ref_13B67 += var_1;
     }
 
     waitframe();
@@ -481,7 +481,7 @@ function plundercountdownupdatetime(var_0, var_1, var_2) {
 }
 
 function player_init() {
-  if(istrue(level.ref_13d93)) {
+  if(istrue(level.ref_13D93)) {
     var_0 = undefined;
   } else {
     switch (level.trial["variant"]) {
@@ -522,12 +522,12 @@ function player_init() {
   waitframe();
   level.player freezecontrols(1);
 
-  if(istrue(level.ref_125ca)) {
+  if(istrue(level.ref_125CA)) {
     level.player scripts\mp\equipment::giveequipment("equip_throwing_knife", "primary");
     level.player scripts\mp\equipment::incrementequipmentslotammo("primary", 1);
   }
 
-  if(istrue(level.ref_125cb)) {
+  if(istrue(level.ref_125CB)) {
     level.player scripts\mp\equipment::giveequipment("equip_rock", "primary");
     level.player scripts\mp\equipment::incrementequipmentslotammo("primary", 1);
   }
@@ -536,10 +536,10 @@ function player_init() {
   level.player.health = 250;
   waitframe();
 
-  if(isDefined(level.ref_126a5)) {
-    var_1 = spawn("script_model", level.ref_126a5.origin);
+  if(isDefined(level.ref_126A5)) {
+    var_1 = spawn("script_model", level.ref_126A5.origin);
     var_1 setModel("tag_origin");
-    var_1.angles = level.ref_126a5.angles;
+    var_1.angles = level.ref_126A5.angles;
     wait 0.5;
     level.player playerlinkTo(var_1, "tag_origin", 1, 0, 0, 0, 0);
 
@@ -590,10 +590,10 @@ function player_monitor_death() {
   level.player waittill("spawned_player");
   thread hud_fade_to_black(4, 1);
 
-  if(isDefined(level.ref_126a5)) {
-    var_0 = spawn("script_model", level.ref_126a5.origin);
+  if(isDefined(level.ref_126A5)) {
+    var_0 = spawn("script_model", level.ref_126A5.origin);
     var_0 setModel("tag_origin");
-    var_0.angles = level.ref_126a5.angles;
+    var_0.angles = level.ref_126A5.angles;
     wait 0.5;
     level.player playerlinkTo(var_0, "tag_origin", 1, 0, 0, 0, 0);
 
@@ -684,7 +684,7 @@ function nextbombplanttime() {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     scripts\engine\utility::array_contains(level.players, var_1);
     self kill();
-    level.player thread _tablethide::ref_13d4b(self, 1, 0, 1);
+    level.player thread _tablethide::ref_13D4B(self, 1, 0, 1);
   }
 }
 
@@ -704,7 +704,7 @@ function enemy_monitor_death() {
   }
 
   if(var_3) {
-    level.player thread _tablethide::ref_13d4b(self, 1, 0, 1);
+    level.player thread _tablethide::ref_13D4B(self, 1, 0, 1);
   }
 
   level.player notify("enemy_killed");
@@ -771,7 +771,7 @@ function no_aerial_munitions() {
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2)) {
-      playFXOnTag(level.ref_11c15, var_2, "j_bomb");
+      playFXOnTag(level.ref_11C15, var_2, "j_bomb");
     }
   }
 }
@@ -793,8 +793,8 @@ function ninetypercent_music() {
   var_2 = self.origin + (0, 0, 55);
   var_3 = 1;
   var_4 = magicgrenademanual("at_mine_ap_mp", var_2, (0, 0, 0), var_3);
-  killfxontag(level.ref_11c15, self, "j_bomb");
-  playFXOnTag(level.ref_11c14, self, "tag_origin");
+  killfxontag(level.ref_11C15, self, "j_bomb");
+  playFXOnTag(level.ref_11C14, self, "tag_origin");
   self moveTo(var_2, var_3 / 2, 0, var_3 / 3);
   self rotateby((0, 1080, 0), var_3);
   self playsoundonmovingent("mine_betty_click");
@@ -807,7 +807,7 @@ function ninetypercent_music() {
     radiusdamage(var_2, var_7, var_5, var_6, self, "MOD_GRENADE_SPLASH");
   }
 
-  playFX(level.ref_11c13, var_2);
+  playFX(level.ref_11C13, var_2);
   level.player playRumbleOnEntity("damage_heavy");
   self notify("mine_explosion");
   self setModel("tag_origin");
@@ -819,8 +819,8 @@ function nexttrackindex() {
   self endon("mine_explosion");
   self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
   level.player scripts\mp\damagefeedback::updatedamagefeedback("standard");
-  killfxontag(level.ref_11c15, self, "j_bomb");
-  playFX(level.ref_11c12, self.origin);
+  killfxontag(level.ref_11C15, self, "j_bomb");
+  playFX(level.ref_11C12, self.origin);
   self playsoundonmovingent("mp_equip_destroyed");
   self notify("mine_neutralized");
   waitframe();
@@ -848,22 +848,22 @@ function hud_init() {
 }
 
 function hud_objectives() {
-  while(!isDefined(level.ref_1453b)) {
+  while(!isDefined(level.ref_1453B)) {
     waitframe();
   }
 
   _tablethide::trial_ui_set_objective_icon_index(0);
-  _tablethide::trial_ui_set_objective_progress(level.ref_1453f, level.ref_1453b.size);
+  _tablethide::trial_ui_set_objective_progress(level.ref_1453F, level.ref_1453B.size);
   _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", 0, 0);
 
   while(!isDefined(level.player)) {
     wait 0.05;
   }
 
-  _tablethide::trial_ui_set_objective_progress(level.ref_1453f, level.ref_1453b.size);
+  _tablethide::trial_ui_set_objective_progress(level.ref_1453F, level.ref_1453B.size);
   scripts\engine\utility::flag_wait("trial_prestart");
 
-  while(level.ref_1453f < level.ref_1453b.size) {
+  while(level.ref_1453F < level.ref_1453B.size) {
     spawn_soldiers_in_convoy_truck();
     wait 0.05;
   }
@@ -875,9 +875,9 @@ function hud_objectives() {
 }
 
 function spawn_soldiers_in_convoy_truck() {
-  _tablethide::trial_ui_set_objective_progress(level.ref_1453f, level.ref_1453b.size);
-  var_0 = scripts\mp\utility\script::limitdecimalplaces(level.ref_13b67 / 1000, 1);
-  _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", level.ref_13b67, var_0);
+  _tablethide::trial_ui_set_objective_progress(level.ref_1453F, level.ref_1453B.size);
+  var_0 = scripts\mp\utility\script::limitdecimalplaces(level.ref_13B67 / 1000, 1);
+  _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", level.ref_13B67, var_0);
 }
 
 function spawn_spawners_multi() {
@@ -900,14 +900,14 @@ function hud_timer() {
 
   if(!scripts\engine\utility::flag("trial_player_death")) {
     level.timeelapsed = scripts\engine\math::round_float(level.timeelapsed / 1000, 1, 0) * 1000;
-    level.ref_13b67 = scripts\engine\math::round_float(level.ref_13b67 / 1000, 1, 0) * 1000;
-    level.totaltime = level.timeelapsed + level.ref_13b67;
+    level.ref_13B67 = scripts\engine\math::round_float(level.ref_13B67 / 1000, 1, 0) * 1000;
+    level.totaltime = level.timeelapsed + level.ref_13B67;
     spawn_spawners_multi();
 
     if(game["trial"]["best_time"] <= 0 || level.totaltime < game["trial"]["best_time"]) {
       game["trial"]["best_time"] = level.totaltime;
       hud_besttime_update();
-      game["trial"]["analytics"]["best_floortime"] = level.ref_13b67;
+      game["trial"]["analytics"]["best_floortime"] = level.ref_13B67;
     }
   } else {
     _tablethide::trial_ui_set_main_time(0);
@@ -915,7 +915,7 @@ function hud_timer() {
     level.totaltime = -1;
   }
 
-  if(istrue(level.ref_13d6c)) {
+  if(istrue(level.ref_13D6C)) {
     level.score["total"] = level.totaltime;
 
     if(level.score["total"] < level.trial["tier1"]) {
@@ -1004,12 +1004,12 @@ function hud_attempt_over() {
   setomnvar("allow_server_pause", 1);
   setomnvarforallclients("post_game_state", 0);
   level scripts\engine\utility::flag_wait("trial_ready_for_endscreen");
-  var_5 = scripts\mp\utility\script::limitdecimalplaces(level.ref_13b67 / 1000, 1);
-  _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", level.ref_13b67, var_5);
-  _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", level.ref_13b67, level.ref_13b67);
+  var_5 = scripts\mp\utility\script::limitdecimalplaces(level.ref_13B67 / 1000, 1);
+  _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", level.ref_13B67, var_5);
+  _tablethide::trial_ui_set_stat_and_bonus_time(1, "floor_time", level.ref_13B67, level.ref_13B67);
   thread _tablethide::trial_ui_open_results_screen();
   level.player freezecontrols(1);
-  level.ref_13d60 = 1;
+  level.ref_13D60 = 1;
   _tablethide::trial_ui_waittill_retry();
   level.player freezecontrols(1);
   level.player freezelookcontrols(1);
@@ -1021,7 +1021,7 @@ function hud_attempt_over() {
     level notify("restarting");
     level notify("trial_retry");
     game["state"] = "playing";
-    _tablethide::ref_13d5e();
+    _tablethide::ref_13D5E();
     return;
   }
 }
@@ -1070,7 +1070,7 @@ function lgsplittransients() {
   }
 
   for(;;) {
-    if(level.ref_1453f == var_2) {
+    if(level.ref_1453F == var_2) {
       var_1++;
     } else {
       var_1 = 0;
@@ -1081,7 +1081,7 @@ function lgsplittransients() {
       var_1 = 0;
     }
 
-    var_2 = level.ref_1453f;
+    var_2 = level.ref_1453F;
     wait 1;
   }
 }
@@ -1103,7 +1103,7 @@ function lgvadaptive() {
 function lgvmergesufix() {
   level endon("trial_completed");
 
-  if(istrue(level.ref_125ca)) {
+  if(istrue(level.ref_125CA)) {
     return;
   }
 
@@ -1162,7 +1162,7 @@ function lgnoshadow() {
 }
 
 function build_vehicle_drop_off_list() {
-  level.ref_13d32 = &ref_13d36;
+  level.ref_13D32 = &ref_13D36;
 
   if(!isDefined(game["trial"]["analytics"])) {
     game["trial"]["analytics"] = [];
@@ -1171,7 +1171,7 @@ function build_vehicle_drop_off_list() {
   }
 }
 
-function ref_13d36() {
+function ref_13D36() {
   var_0 = level.trial["missionID"];
   var_1 = getomnvar("ui_trial_reward_tier");
   var_2 = getomnvar("ui_trial_best_time");

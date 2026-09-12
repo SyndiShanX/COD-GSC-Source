@@ -6,14 +6,14 @@
 function init() {
   var_0 = spawnStruct();
   var_0.weight = getdvarfloat("scr_br_pe_auavscan_weight", 0);
-  var_0.ref_140cf = &ref_140cf;
+  var_0.ref_140CF = &ref_140CF;
   var_0.attackerswaittime = &attackerswaittime;
   var_0.ref_14382 = &ref_14382;
   var_0.postinitfunc = &postinitfunc;
-  var_0.ref_11b78 = getdvarint("scr_br_pe_auavscan_max_times", 1);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_auavscan_max_times", 1);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("auavscan", "20 20151510101010");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("auavscan");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(10, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(10, var_0);
   scripts\mp\utility\spawn_event_aggregator::registeronplayerspawncallback(&onplayerspawned);
 }
 
@@ -31,7 +31,7 @@ function postinitfunc() {
   level.auavscanpostinitdone = 1;
 }
 
-function ref_140cf() {
+function ref_140CF() {
   return true;
 }
 
@@ -388,7 +388,7 @@ function playscanbink(var_0, var_1) {
     self preloadcinematicforplayer(var_0);
   }
 
-  scripts\engine\utility::ref_143a7("pe_auavscan_end", "pe_auavscan_player_spotted", "pe_auavscan_player_unspotted", "death_or_disconnect");
+  scripts\engine\utility::ref_143A7("pe_auavscan_end", "pe_auavscan_player_spotted", "pe_auavscan_player_unspotted", "death_or_disconnect");
   self skydive_cutparachuteoff();
   self setclientomnvar("ui_br_bink_overlay_state", 0);
   level.advanceduavbinkisplaying = 0;
@@ -422,7 +422,7 @@ function watchdronereconuse() {
 }
 
 function setauavradar() {
-  var_0 = level.ref_13ed9;
+  var_0 = level.ref_13ED9;
   var_1 = "constant_radar";
   var_2 = 1;
   var_3 = 1;
@@ -445,7 +445,7 @@ function attackerregenammo(var_0, var_1, var_2, var_3) {
   self.radarstrength = var_4;
   level.activeuavs[self.guid + "_radarStrength"] = var_4;
   level.activeadvanceduavs[self.guid] = var_2;
-  self.ref_133e9 = var_3;
+  self.ref_133E9 = var_3;
   level.audio_heli_end_fade_out = level.teamnamelist.size;
   scripts\cp_mp\killstreaks\uav::updateplayersuavstatus();
 }

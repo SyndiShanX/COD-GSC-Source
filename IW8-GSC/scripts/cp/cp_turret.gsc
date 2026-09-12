@@ -225,7 +225,7 @@ function endturretusewatch(var_0, var_1) {
 }
 
 function endturretonplayer(var_0, var_1) {
-  var_0 scripts\engine\utility::ref_143a6("death", "disconnect", "last_stand");
+  var_0 scripts\engine\utility::ref_143A6("death", "disconnect", "last_stand");
   self notify("end_turret_use_" + var_1.turretindex);
 }
 
@@ -268,7 +268,7 @@ function aiturretthink() {
     }
 
     var_0 settargetentity(var_3);
-    var_0 scripts\engine\utility::ref_143b9(3, "turret_on_target");
+    var_0 scripts\engine\utility::ref_143B9(3, "turret_on_target");
     aiturretshoottarget(var_0, var_3);
   }
 }

@@ -41,8 +41,8 @@ function module_set_script_origin_other_on_ai() {
   level.ai_event.binoculars_processtargetlos = getdvarfloat("scr_arms_deal_agent_agent_brute_stop_agent_spawns_at_health_percentage", 0.2);
   level.ai_event.binoculars_removeheadicon = getdvarint("scr_arms_deal_agent_melee_damage", 30);
   level.ai_event.binoculars_processtargetdata = getdvarint("scr_arms_deal_agent_brute_melee_damage", 90);
-  level.ai_event.ref_11c20 = getdvarfloat("scr_arms_deal_agent_minimap_ping_lifetime", 0.5);
-  level.ai_event.ref_11c1f = getdvarfloat("scr_arms_deal_agent_minimap_ping_interval", 2.5);
+  level.ai_event.ref_11C20 = getdvarfloat("scr_arms_deal_agent_minimap_ping_lifetime", 0.5);
+  level.ai_event.ref_11C1F = getdvarfloat("scr_arms_deal_agent_minimap_ping_interval", 2.5);
 }
 
 function object_is_valid() {
@@ -52,7 +52,7 @@ function object_is_valid() {
   level.agent_funcs["actor_enemy_lw_br"]["gametype_on_damage_finished"] = &blade_trigger_think;
   level.agent_funcs["actor_enemy_lw_br_brute"]["gametype_on_damage_finished"] = &blade_trigger_think;
   level.disable_oob_immunity_on_riders = 1;
-  level.playerentersafearea = &ref_1320f;
+  level.playerentersafearea = &ref_1320F;
 
   if(!isDefined(level.ai_event)) {
     level.ai_event = spawnStruct();
@@ -61,22 +61,22 @@ function object_is_valid() {
   level.ai_event.inited = 0;
   level.ai_event.states = ["inactive", "wave_incoming", "wave_active", "wave_active_brute", "wave_complete", "complete"];
   level.ai_event.current_state = "inactive";
-  level.ai_event.ref_13b97 = -1;
+  level.ai_event.ref_13B97 = -1;
   level.ai_event.spawn_points = scripts\engine\utility::getStructArray("agent_spawn_point_team_200", "targetname");
-  level.ai_event.ref_135b5 = [];
+  level.ai_event.ref_135B5 = [];
   level.ai_event.helidestroyvehiclestouchtrace = [];
   level.ai_event.select_hostage_room_three_spawners = bomb_wires_to_cut();
   level.ai_event.select_hostage_room_two_spawners = [];
   level.ai_event.occupied_rpg_trig = getEnt("br_soa_tower_ai_event_vol", "targetname");
-  level.ai_event scripts\mp\utility\trigger::makeenterexittrigger(level.ai_event.occupied_rpg_trig, &ref_13dab, &ref_13dac, undefined, undefined, &ref_13da5);
+  level.ai_event scripts\mp\utility\trigger::makeenterexittrigger(level.ai_event.occupied_rpg_trig, &ref_13DAB, &ref_13DAC, undefined, undefined, &ref_13DA5);
   level.ai_event.ref_12659 = [];
   level.ai_event.ref_12662 = [];
   level.ai_event.ref_12663 = [];
   level.ai_event.ref_12660 = [];
   level.ai_event.brclearscoreboardstats = [];
-  level.ai_event.ref_13be2 = 0;
-  level.ai_event.ref_13be3 = [];
-  level.ai_event.ref_13be4 = 0;
+  level.ai_event.ref_13BE2 = 0;
+  level.ai_event.ref_13BE3 = [];
+  level.ai_event.ref_13BE4 = 0;
   level.ai_event.ref_14525 = [];
   level.ai_event.new_col_map = -1;
   level.ai_event.enemy_mine_damaged_think = 0;
@@ -136,7 +136,7 @@ function obj_room_fire_05() {
 
   level.ai_event.start_coop_escort_enter_vehicles = 1;
   level.ai_event.initoperatorunlocks += 1;
-  ref_13ee8();
+  ref_13EE8();
   objectivelocations(level.ai_event);
 }
 
@@ -174,7 +174,7 @@ function obj_room_fire_06() {
   level.ai_event endon("soa_tower_stop_ai_event");
   level endon("game_ended");
   level.ai_event.current_state = "wave_incoming";
-  ref_13eea("wave_incoming");
+  ref_13EEA("wave_incoming");
   var_0 = 0;
   var_1 = gettime() / 1000;
   var_2 = gettime() / 1000;
@@ -209,10 +209,10 @@ function obj_room_fire_06() {
     }
   }
 
-  level.ai_event.ref_13b97 = gettime();
+  level.ai_event.ref_13B97 = gettime();
   level.ai_event.current_state = "wave_active";
   level.ai_event.new_col_map = level.ai_event.binoculars_settargetmarkerstate[level.ai_event.initoperatorunlocks];
-  ref_13eea("wave_active");
+  ref_13EEA("wave_active");
 }
 
 function obj_room_fire_11() {
@@ -250,7 +250,7 @@ function obj_room_fire_10(var_0) {
   switch (var_0) {
     case "success":
       level.ai_event.current_state = "wave_complete";
-      ref_13eea("wave_complete");
+      ref_13EEA("wave_complete");
 
       if(level.ai_event.initoperatorunlocks < 2) {
         objective_minimapupdate("br_soa_tower_ai_event_wave_cleared", int(level.ai_event.initoperatorunlocks));
@@ -259,12 +259,12 @@ function obj_room_fire_10(var_0) {
       } else {
         objective_minimapupdate("br_soa_tower_event_arms_deal_complete_full_splash");
         level.ai_event.current_state = "complete";
-        ref_13eea("complete");
-        scripts\mp\gametypes\br_soa_tower_rewards::ref_12d21("most_agent_kills");
+        ref_13EEA("complete");
+        scripts\mp\gametypes\br_soa_tower_rewards::ref_12D21("most_agent_kills");
 
         foreach(var_2 in level.ai_event.ref_12662) {
           if(getdvarint("MLNNMOPQOP", 0) == 6) {
-            var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_side_mission_for_s3_5_event_wz", 1);
+            var_2 scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_complete_side_mission_for_s3_5_event_wz", 1);
           }
         }
 
@@ -276,7 +276,7 @@ function obj_room_fire_10(var_0) {
       objective_minimapupdate("br_soa_tower_ai_event_timer_expired");
 
       foreach(var_5 in level.ai_event.brclearscoreboardstats) {
-        var_5.ref_11e90 = 1;
+        var_5.ref_11E90 = 1;
         var_5[[var_5.isinlaststand]]();
         var_5 kill();
       }
@@ -291,12 +291,12 @@ function objectiveloc() {
   level.ai_event.ref_13005 = [];
   level.ai_event.enemy_mine_damaged_think = 0;
   level.ai_event.start_coop_escort_enter_vehicles = 0;
-  level.ai_event.ref_13b97 = -1;
+  level.ai_event.ref_13B97 = -1;
   level.ai_event.initoperatorunlocks = 0;
   level.ai_event.current_state = "inactive";
   level.ai_event.new_col_map = -1;
   level.ai_event.ref_14525 = [];
-  ref_13ee9();
+  ref_13EE9();
 
   foreach(var_1 in level.ai_event.ref_12660) {
     var_1.boardroomopen = 0;
@@ -372,7 +372,7 @@ function objective_timers_reset_both() {
     level.ai_event.ref_12662 = scripts\engine\utility::array_add(level.ai_event.ref_12662, self);
     self.boardroomopen = 0;
     self.body0 = 0;
-    ref_13ef3();
+    ref_13EF3();
 
     if(level.ai_event.current_state != "inactive") {
       objective_locations_logic(self, "br_soa_tower_event_arms_deal");
@@ -395,7 +395,7 @@ function objectivedescription() {
   }
 
   if(objective_set_hot()) {
-    ref_13ef4();
+    ref_13EF4();
     level.ai_event.ref_12662 = scripts\engine\utility::array_remove(level.ai_event.ref_12662, self);
     level.ai_event.ref_12663 = scripts\engine\utility::array_remove(level.ai_event.ref_12663, self);
     return;
@@ -475,7 +475,7 @@ function objloc(var_0) {
   return "ui_mp_timer_countdown_10";
 }
 
-function ref_13dab(var_0, var_1) {
+function ref_13DAB(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -506,7 +506,7 @@ function ref_13dab(var_0, var_1) {
   }
 }
 
-function ref_13dac(var_0, var_1) {
+function ref_13DAC(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -538,7 +538,7 @@ function ref_13dac(var_0, var_1) {
   }
 }
 
-function ref_13da5(var_0, var_1) {
+function ref_13DA5(var_0, var_1) {
   if(!isDefined(var_0)) {
     return true;
   }
@@ -574,7 +574,7 @@ function objective_locations_logic(var_0, var_1, var_2) {
   scripts\mp\gametypes\br_quest_util::displayplayersplash(var_0, var_1, var_3);
 }
 
-function ref_1320f() {
+function ref_1320F() {
   if(scripts\mp\utility\game::getgametype() != "brtdm") {
     return;
   }
@@ -598,7 +598,7 @@ function bot_allowed_weapons(var_0, var_1, var_2, var_3) {
   thread bomber_death_thread();
   var_5.type = var_2;
   var_5.enemy_left_monitor = var_4;
-  var_5 scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349f("frag_grenade_mp", 1);
+  var_5 scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349F("frag_grenade_mp", 1);
   bomb_detonator_bomb_type(var_5);
   bomber(var_5);
   thread bomber_delay_thread();
@@ -619,7 +619,7 @@ function bot_allowed_weapons(var_0, var_1, var_2, var_3) {
 
     if(level.ai_event.initoperatorunlocks == 2) {
       level.ai_event.enemy_mine_damaged_think = 1;
-      ref_13eea("wave_active_brute");
+      ref_13EEA("wave_active_brute");
     }
   }
 
@@ -638,7 +638,7 @@ function bomber() {
   self.pers["cur_kill_streak_for_nuke"] = 0;
   self.tookweaponfrom = [];
   self.killedplayers = [];
-  self.ref_1407d = 0;
+  self.ref_1407D = 0;
 }
 
 function boss_one_minion_watcher() {
@@ -649,9 +649,9 @@ function boss_one_minion_watcher() {
   self.showsplashtoall = level.ai_event.binoculars_registertargetstate;
   self.meleedamageoverride = level.ai_event.binoculars_removeheadicon;
   self.sound_events = 0;
-  self.ref_12d29 = undefined;
-  self.ref_12d2a = undefined;
-  self.ref_12d25 = 0;
+  self.ref_12D29 = undefined;
+  self.ref_12D2A = undefined;
+  self.ref_12D25 = 0;
   var_0 = level.ai_event.binoculars_onstateunmarkedexit;
   var_1 = level.ai_event.binoculars_onstatemarkpendingupdate;
   var_2 = level.ai_event.binoculars_onstateunmarkedupdate;
@@ -662,10 +662,10 @@ function boss_one_minion_watcher() {
   self.scripted_long_deaths = 0;
   self.agentdamagefeedback = 1;
   self.isinlaststand = &blank_relic_func;
-  self.ref_119ea = &scripts\mp\gametypes\br_soa_tower_rewards::ref_119f7;
-  self.ref_130df = &scripts\mp\gametypes\br_soa_tower_rewards::ref_12d28;
-  self.scriptable_carriable_damage = &scripts\mp\gametypes\br_soa_tower_rewards::ref_12d22;
-  self.ref_11e90 = scripts\mp\utility\game::getgametype() == "brtdm";
+  self.ref_119EA = &scripts\mp\gametypes\br_soa_tower_rewards::ref_119F7;
+  self.ref_130DF = &scripts\mp\gametypes\br_soa_tower_rewards::ref_12D28;
+  self.scriptable_carriable_damage = &scripts\mp\gametypes\br_soa_tower_rewards::ref_12D22;
+  self.ref_11E90 = scripts\mp\utility\game::getgametype() == "brtdm";
   self.enemy_mine_proximity_think = 0;
   self.ignoreall = getdvarint("scr_br_arms_ai_diable_agent_fire", 0);
 }
@@ -748,11 +748,11 @@ function boss_two_minion_watcher(var_0) {
   }
 
   if(isDefined(var_1)) {
-    scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349f(var_1, 2);
+    scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349F(var_1, 2);
   }
 
   if(self.enemy_left_monitor) {
-    scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349f("frag_grenade_mp", 10);
+    scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349F("frag_grenade_mp", 10);
     self.baseaccuracy = 0.65;
     self.meleedamageoverride = 30;
     self.scripted_long_deaths = 1;
@@ -769,31 +769,31 @@ function boss_two_minion_watcher(var_0) {
 
     switch (var_0) {
       case "brute_danny_the_firecracker":
-        scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349f("molotov_mp", 99);
+        scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349F("molotov_mp", 99);
         bomb_hostage_play_anim("iw8_ar_mike4", 30);
         boss_wave(10);
         self.agentname = &"BR_SOA_EVENT/BRUTE_DANNY";
         break;
       case "brute_johnny_the_detonator":
-        scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349f("frag_grenade_mp", 99);
+        scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349F("frag_grenade_mp", 99);
         bomb_hostage_play_anim("iw8_ar_mike4", 32);
         boss_wave(11);
         self.agentname = &"BR_SOA_EVENT/BRUTE_JOHNNY";
         break;
       case "brute_tommy_the_toxic":
-        scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349f("gas_grenade_mp", 99);
+        scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349F("gas_grenade_mp", 99);
         bomb_hostage_play_anim("iw8_ar_mcharlie", 24);
         boss_wave(12);
         self.agentname = &"BR_SOA_EVENT/BRUTE_TOMMY";
         break;
       case "brute_gary_the_blinder":
-        scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349f("flash_grenade_mp", 99);
+        scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349F("flash_grenade_mp", 99);
         bomb_hostage_play_anim("iw8_ar_akilo47", 20);
         boss_wave(13);
         self.agentname = &"BR_SOA_EVENT/BRUTE_GARY";
         break;
       case "brute_anthony_fogwalker":
-        scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349f("smoke_grenade_mp", 99);
+        scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_1349F("smoke_grenade_mp", 99);
         bomb_hostage_play_anim("iw8_ar_anovember94", 3);
         boss_wave(14);
         self.agentname = &"BR_SOA_EVENT/BRUTE_ANTHONY";
@@ -941,7 +941,7 @@ function boss_wave(var_0) {
   }
 
   if(var_1.size > 0) {
-    scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_134b1(var_1);
+    scripts\mp\trials\mp_euphrates_create_script_gunnonlinear::ref_134B1(var_1);
     return;
   }
 }
@@ -991,14 +991,14 @@ function bonuskillscharge() {
     var_1 = self getgoalvolume();
     var_2 = distance2d(self.origin, var_1.origin);
     var_3 = var_2 < 600;
-    self.ref_145d4 = var_3;
+    self.ref_145D4 = var_3;
 
     if(var_3) {
       var_4 = gettime() / 1000;
       var_5 = var_4 - var_0;
-      self.ref_13b6b = var_5;
+      self.ref_13B6B = var_5;
       var_6 = level.ai_event.binoculars_targetisvalid;
-      self.ref_13b6c = var_6 - var_5;
+      self.ref_13B6C = var_6 - var_5;
 
       if(var_4 - var_0 >= var_6) {
         var_7 = [];
@@ -1032,9 +1032,9 @@ function bomber_delay_thread() {
 
   while(!self.enemy_left_monitor) {
     self setperk("specialty_radarblip", 1);
-    wait level.ai_event.ref_11c20;
+    wait level.ai_event.ref_11C20;
     self unsetperk("specialty_radarblip", 1);
-    wait level.ai_event.ref_11c1f;
+    wait level.ai_event.ref_11C1F;
   }
 }
 
@@ -1093,7 +1093,7 @@ function black_screen_overlay(var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
 
 function blade_trigger_think(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14) {
   var_15 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, 0) + scripts\engine\utility::ter_op(isDefined(var_13), var_13, 0);
-  [[self.ref_130df]](var_1, var_12, var_4, var_15);
+  [[self.ref_130DF]](var_1, var_12, var_4, var_15);
 
   if(self.enemy_left_monitor) {
     objective_show_for_mlg_spectator(var_1);
@@ -1105,12 +1105,12 @@ function blade_trigger_think(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
 function blank_relic_func(var_0) {
   level.ai_event.brclearscoreboardstats = scripts\engine\utility::array_remove(level.ai_event.brclearscoreboardstats, self);
 
-  if(!isDefined(level.ai_event.ref_13be3[level.ai_event.initoperatorunlocks])) {
-    level.ai_event.ref_13be3[level.ai_event.initoperatorunlocks] = 0;
+  if(!isDefined(level.ai_event.ref_13BE3[level.ai_event.initoperatorunlocks])) {
+    level.ai_event.ref_13BE3[level.ai_event.initoperatorunlocks] = 0;
   }
 
-  level.ai_event.ref_13be3[level.ai_event.initoperatorunlocks] += 1;
-  level.ai_event.ref_13be2 += 1;
+  level.ai_event.ref_13BE3[level.ai_event.initoperatorunlocks] += 1;
+  level.ai_event.ref_13BE2 += 1;
   bombzone_press_use(3);
 
   if(isDefined(self.squadleaderbeacon_fxent)) {
@@ -1119,7 +1119,7 @@ function blank_relic_func(var_0) {
 
   if(self.enemy_left_monitor) {
     objective_minimapupdate("br_soa_tower_reward_brute_eliminated");
-    scripts\mp\gametypes\br_soa_tower_rewards::ref_12d21("most_brute_damage");
+    scripts\mp\gametypes\br_soa_tower_rewards::ref_12D21("most_brute_damage");
     level.ai_event notify("stop_pending_agent_spawns");
     level.ai_event.ref_14525 = [];
 
@@ -1130,11 +1130,11 @@ function blank_relic_func(var_0) {
 
     level.ai_event.enemy_mine_damaged_think = 0;
     bombzone_press_use(level.ai_event.brclearscoreboardstats.size);
-    ref_13eea("wave_active_brute");
+    ref_13EEA("wave_active_brute");
   }
 
   level.ai_event.new_col_map--;
-  ref_13eec();
+  ref_13EEC();
 
   if(!isDefined(var_0)) {
     return;
@@ -1148,34 +1148,34 @@ function blank_relic_func(var_0) {
   var_4.origin = self.origin;
   var_4.angles = self.angles;
 
-  if(!self.ref_11e90) {
-    level.ai_event thread[[self.ref_119ea]]("loot_table_ammo", 1, var_4);
-    level.ai_event thread[[self.ref_119ea]]("loot_table_cash", 1, var_4);
-    level.ai_event thread[[self.ref_119ea]]("loot_table_gear", 1, var_4);
-    level.ai_event thread[[self.ref_119ea]]("loot_table_deployables", 1, var_4);
+  if(!self.ref_11E90) {
+    level.ai_event thread[[self.ref_119EA]]("loot_table_ammo", 1, var_4);
+    level.ai_event thread[[self.ref_119EA]]("loot_table_cash", 1, var_4);
+    level.ai_event thread[[self.ref_119EA]]("loot_table_gear", 1, var_4);
+    level.ai_event thread[[self.ref_119EA]]("loot_table_deployables", 1, var_4);
 
     if(self.enemy_left_monitor) {
-      level.ai_event thread[[self.ref_119ea]]("loot_table_brute", 25, var_4);
-      level.ai_event thread[[self.ref_119ea]]("loot_table_deployables", 6, var_4);
-      level.ai_event thread[[self.ref_119ea]]("loot_table_brute_legendary_weapon", 1, var_4);
+      level.ai_event thread[[self.ref_119EA]]("loot_table_brute", 25, var_4);
+      level.ai_event thread[[self.ref_119EA]]("loot_table_deployables", 6, var_4);
+      level.ai_event thread[[self.ref_119EA]]("loot_table_brute_legendary_weapon", 1, var_4);
       playFX(scripts\engine\utility::getfx("vfx_golden_loot_explosion_flare"), self.origin);
 
       if(getDvar("scr_br_gametype", "") == "bodycount") {
-        level.ai_event thread[[self.ref_119ea]]("loot_table_power_grab_revive_token", 1, var_4);
+        level.ai_event thread[[self.ref_119EA]]("loot_table_power_grab_revive_token", 1, var_4);
       }
     }
 
     if(level.ai_event.initoperatorunlocks == 2 && level.ai_event.brclearscoreboardstats.size == 0) {
       playFX(scripts\engine\utility::getfx("vfx_golden_loot_explosion_flare"), self.origin);
-      level.ai_event thread[[self.ref_119ea]]("loot_table_brute_vault_key", 1, var_4);
+      level.ai_event thread[[self.ref_119EA]]("loot_table_brute_vault_key", 1, var_4);
 
       if(getDvar("scr_br_gametype", "") == "bodycount") {
-        level.ai_event thread[[self.ref_119ea]]("loot_table_power_grab_dog_tags", 2, var_4);
+        level.ai_event thread[[self.ref_119EA]]("loot_table_power_grab_dog_tags", 2, var_4);
       }
     }
   }
 
-  [[self.ref_130df]](var_0.eattacker, var_0.shitloc, var_0.smeansofdeath, var_0.idamage);
+  [[self.ref_130DF]](var_0.eattacker, var_0.shitloc, var_0.smeansofdeath, var_0.idamage);
   [[self.scriptable_carriable_damage]]("takedown");
   [[self.scriptable_carriable_damage]]("assist");
   [[self.scriptable_carriable_damage]]("killing_blow");
@@ -1354,7 +1354,7 @@ function bootcampmodewatcher(var_0) {
   foreach(var_3 in var_0) {
     var_4 = [];
 
-    foreach(var_6 in var_3.ref_11e34) {
+    foreach(var_6 in var_3.ref_11E34) {
       if(var_6.players.size > 0) {
         var_4 = scripts\engine\utility::array_combine_unique(var_4, var_6.players);
       }
@@ -1445,16 +1445,16 @@ function blockclasschange(var_0) {
         var_5 = vectorlerp(var_22, var_23, var_20 / 100);
       }
 
-      var_0[var_1].ref_134da = var_21;
+      var_0[var_1].ref_134DA = var_21;
     }
 
-    level.ai_event.ref_135b5 = scripts\engine\utility::array_sort_with_func(var_0, &blockedvariantidsmap);
+    level.ai_event.ref_135B5 = scripts\engine\utility::array_sort_with_func(var_0, &blockedvariantidsmap);
     wait 0.1;
   }
 }
 
 function blockedvariantidsmap(var_0, var_1) {
-  return var_0.ref_134da > var_1.ref_134da;
+  return var_0.ref_134DA > var_1.ref_134DA;
 }
 
 function blockade_get_bomb_icon_on_cell_phone() {
@@ -1481,13 +1481,13 @@ function blockade_get_bomb_icon_on_cell_phone() {
           var_5.helidisapateextractvfx = var_1;
           var_5.helidrivable = var_2;
           var_7 = 2000;
-          var_5.ref_11e34 = [];
+          var_5.ref_11E34 = [];
 
           foreach(var_9 in level.ai_event.select_hostage_room_three_spawners) {
             var_10 = distance2d(var_5.origin, var_9.origin);
 
             if(var_10 < var_7) {
-              var_5.ref_11e34 = scripts\engine\utility::array_add(var_5.ref_11e34, var_9);
+              var_5.ref_11E34 = scripts\engine\utility::array_add(var_5.ref_11E34, var_9);
             }
           }
         }
@@ -1510,30 +1510,30 @@ function bomb_wires_to_cut() {
       var_0 = getEnt("vol_garage_" + var_4, "targetname");
       var_0[var_4].ref_12953 = var_4;
       var_0[var_4].players = [];
-      level.ai_event scripts\mp\utility\trigger::makeenterexittrigger(var_0[var_4], &ref_13dab, &ref_13dac, undefined, undefined, &ref_13da5);
+      level.ai_event scripts\mp\utility\trigger::makeenterexittrigger(var_0[var_4], &ref_13DAB, &ref_13DAC, undefined, undefined, &ref_13DA5);
     }
   }
 
   return var_0;
 }
 
-function ref_13ef3() {
+function ref_13EF3() {
   if(isDefined(self.boardroomdoorcodeentrysuccess)) {
     return;
   }
 
-  self.boltsinflight = ref_13ee0(&"BR_SOA_EVENT/WAVE_COUNT", -1, 1, (1, 1, 1), 0, 50);
-  self.boltunlink = ref_13ee0(&"BR_SOA_EVENT/WAVE_INCOMING", -1, 1, (1, 1, 1), 0, 62);
-  self.boltnumber = ref_13ee0(&"BR_SOA_EVENT/WAVE_COMPLETE", -1, 1, (1, 1, 1), 0, 50);
-  self.bolt_trytopickup = ref_13ee0(&"BR_SOA_EVENT/WAVE_ENEMIES_REMAINING", -1, 1, (1, 1, 1), 0, 62);
-  self.bolt_watchpickup = ref_13ee0(&"BR_SOA_EVENT/AI_EVENT_KILL_THE_BRUTE", undefined, 1, (1, 1, 1), 0, 62);
-  self.boltdeleteonnote = ref_13ee1();
-  self.boltdeletethread = ref_13ee0(&"BR_SOA_EVENT/AI_EVENT_UNSUBSCRIBING", -1, 1.2, (1, 1, 1), -300, 100);
-  ref_13ef5();
-  ref_13ef6(level.ai_event.current_state);
+  self.boltsinflight = ref_13EE0(&"BR_SOA_EVENT/WAVE_COUNT", -1, 1, (1, 1, 1), 0, 50);
+  self.boltunlink = ref_13EE0(&"BR_SOA_EVENT/WAVE_INCOMING", -1, 1, (1, 1, 1), 0, 62);
+  self.boltnumber = ref_13EE0(&"BR_SOA_EVENT/WAVE_COMPLETE", -1, 1, (1, 1, 1), 0, 50);
+  self.bolt_trytopickup = ref_13EE0(&"BR_SOA_EVENT/WAVE_ENEMIES_REMAINING", -1, 1, (1, 1, 1), 0, 62);
+  self.bolt_watchpickup = ref_13EE0(&"BR_SOA_EVENT/AI_EVENT_KILL_THE_BRUTE", undefined, 1, (1, 1, 1), 0, 62);
+  self.boltdeleteonnote = ref_13EE1();
+  self.boltdeletethread = ref_13EE0(&"BR_SOA_EVENT/AI_EVENT_UNSUBSCRIBING", -1, 1.2, (1, 1, 1), -300, 100);
+  ref_13EF5();
+  ref_13EF6(level.ai_event.current_state);
 }
 
-function ref_13ef4() {
+function ref_13EF4() {
   if(!isDefined(self.boardroomdoorcodeentrysuccess)) {
     return;
   }
@@ -1547,7 +1547,7 @@ function ref_13ef4() {
   self.boardroomdoorcodeentrysuccess = undefined;
 }
 
-function ref_13ef5() {
+function ref_13EF5() {
   if(!isDefined(self.boardroomdoorcodeentrysuccess)) {
     return;
   }
@@ -1557,33 +1557,33 @@ function ref_13ef5() {
   }
 }
 
-function ref_13eea(var_0) {
+function ref_13EEA(var_0) {
   foreach(var_2 in level.ai_event.ref_12662) {
-    ref_13ef6(var_2, var_0);
+    ref_13EF6(var_2, var_0);
   }
 }
 
-function ref_13eec() {
+function ref_13EEC() {
   foreach(var_1 in level.ai_event.ref_12662) {
     var_2 = scripts\engine\utility::ter_op(level.ai_event.initoperatorunlocks < 2, level.ai_event.new_col_map, level.ai_event.brclearscoreboardstats.size);
     var_1.bolt_trytopickup setvalue(var_2);
   }
 }
 
-function ref_13ee8() {
+function ref_13EE8() {
   foreach(var_1 in level.ai_event.ref_12662) {
-    ref_13ef3(var_1);
+    ref_13EF3(var_1);
   }
 }
 
-function ref_13ee9() {
+function ref_13EE9() {
   foreach(var_1 in level.ai_event.ref_12662) {
-    ref_13ef4(var_1);
+    ref_13EF4(var_1);
   }
 }
 
-function ref_13ef6(var_0) {
-  ref_13ef5();
+function ref_13EF6(var_0) {
+  ref_13EF5();
 
   switch (var_0) {
     case "inactive":
@@ -1606,7 +1606,7 @@ function ref_13ef6(var_0) {
       if(level.ai_event.enemy_mine_damaged_think) {
         self.bolt_watchpickup scripts\mp\hud_util::showelem();
       } else {
-        ref_13eec();
+        ref_13EEC();
         self.bolt_trytopickup scripts\mp\hud_util::showelem();
       }
 
@@ -1623,7 +1623,7 @@ function ref_13ef6(var_0) {
   }
 }
 
-function ref_13edf(var_0) {
+function ref_13EDF(var_0) {
   if(!isDefined(self.boardroomdoorcodeentrysuccess)) {
     self.boardroomdoorcodeentrysuccess = [];
   }
@@ -1631,7 +1631,7 @@ function ref_13edf(var_0) {
   self.boardroomdoorcodeentrysuccess = scripts\engine\utility::array_add(self.boardroomdoorcodeentrysuccess, var_0);
 }
 
-function ref_13ee0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+function ref_13EE0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(!isDefined(var_6)) {
     var_6 = "TOPLEFT";
   }
@@ -1649,11 +1649,11 @@ function ref_13ee0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   var_7 scripts\mp\hud_util::setparent(level.uiparent);
-  ref_13edf(var_7);
+  ref_13EDF(var_7);
   return var_7;
 }
 
-function ref_13ee1() {
+function ref_13EE1() {
   var_0 = newclienthudelem(self);
   var_0.elemtype = "timer";
   var_0.font = "default";
@@ -1668,6 +1668,6 @@ function ref_13ee1() {
   var_0.children = [];
   var_0.hidden = 0;
   var_0 scripts\mp\hud_util::setparent(level.uiparent);
-  ref_13edf(var_0);
+  ref_13EDF(var_0);
   return var_0;
 }

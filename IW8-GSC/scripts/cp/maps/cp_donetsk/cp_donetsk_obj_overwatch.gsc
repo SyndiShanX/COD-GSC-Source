@@ -31,13 +31,13 @@ function register_overwatch_objective() {
 function register_interactions() {}
 
 function obj_maj_intro_init(var_0) {
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
   thread spawn_overwatch_extraguns();
   thread spawn_fake_loots();
-  thread ref_135ac();
+  thread ref_135AC();
   thread spawn_exfil_heli_and_rpgs();
-  thread ref_131f0();
-  thread ref_11a7d();
+  thread ref_131F0();
+  thread ref_11A7D();
   scripts\cp\cp_objectives::reset_subobjective_slot("obj_tmtyl");
   scripts\cp\cp_objectives::reset_subobjective_slot("obj_tmtyl_0");
 }
@@ -49,11 +49,11 @@ function obj_maj_intro_start(var_0) {
   objective_setplayoutro(var_0.objectiveindex, 1);
   objective_position(var_0.objectiveindex, var_1.origin);
   objective_state(var_0.objectiveindex, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   objective_setlabel(var_0.objectiveindex, &"CP_SUBURBS_OBJECTIVES/STADIUM_APPROACH");
   objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
-  thread ref_135ae();
-  thread ref_123ff();
+  thread ref_135AE();
+  thread ref_123FF();
   var_2 = 4100;
   var_3 = var_2 * var_2;
 
@@ -61,7 +61,7 @@ function obj_maj_intro_start(var_0) {
     wait 0.1;
   }
 
-  scripts\cp\crate_drops\cp_crate_drops::ref_12c40("stadium_1", ["deployable_cover"]);
+  scripts\cp\crate_drops\cp_crate_drops::ref_12C40("stadium_1", ["deployable_cover"]);
   thread play_intro_vo();
   level waittill("overwatch_played_intro_vo");
   var_4 = scripts\engine\utility::getStruct("obj_bomb_01", "targetname");
@@ -88,7 +88,7 @@ function obj_maj_bombdefuse_init(var_0) {
 function obj_maj_bombdefuse_start(var_0) {
   level endon("mission_fail");
   scripts\cp\cp_hacking::hacking_init();
-  scripts\cp\utility::ref_123fe("mus_cp_landlord_stadium");
+  scripts\cp\utility::ref_123FE("mus_cp_landlord_stadium");
 
   for(var_1 = 0; var_1 < 5; var_1++) {
     hack_relocate(var_1, var_0);
@@ -123,7 +123,7 @@ function obj_maj_bombdefuse_start(var_0) {
     objective_setplayintro(var_0.objectiveindex, 1);
     objective_setplayoutro(var_0.objectiveindex, 1);
     objective_state(var_0.objectiveindex, "current");
-    scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+    scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
     objective_setlabel(var_0.objectiveindex, &"CP_SUBURBS_OBJECTIVES/BOSS_TANKS_OBJ");
     objective_setdescription(var_0.objectiveindex, &"CP_SUBURBS_OBJECTIVES/BOSS_TANKS");
     objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
@@ -131,7 +131,7 @@ function obj_maj_bombdefuse_start(var_0) {
     objective_setbackground(var_0.objectiveindex, 1);
     objective_addalltomask(var_0.objectiveindex);
     objective_showtoplayersinmask(var_0.objectiveindex);
-    thread ref_13f61(level, level.overwatch_tanks[0]);
+    thread ref_13F61(level, level.overwatch_tanks[0]);
 
     while(level.overwatch_tanks.size > 0) {
       wait 1;
@@ -143,7 +143,7 @@ function obj_maj_bombdefuse_start(var_0) {
   thread play_win_vo();
 }
 
-function ref_13f61(var_0, var_1) {
+function ref_13F61(var_0, var_1) {
   var_0 waittill("death");
   objective_unsetlocation(var_1, 0);
 }
@@ -151,7 +151,7 @@ function ref_13f61(var_0, var_1) {
 function obj_maj_bombdefuse_end(var_0) {
   stop_emp_effects_on_players(level);
   level.set_up_blockade_gate_anims = undefined;
-  thread ref_12dd6();
+  thread ref_12DD6();
 }
 
 function wait_for_boss_death() {
@@ -173,7 +173,7 @@ function wait_for_boss_death() {
   level.overwatch_boss.obj_pos = var_2;
   objective_setlocation(var_1, 0, level.overwatch_boss.obj_pos);
   objective_state(var_1, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_1);
+  scripts\cp\cp_objectives::ref_11F80(var_1);
   objective_setlabel(var_1, &"CP_SUBURBS_OBJECTIVES/BOSS_HELI_SHOOT");
   objective_setdescription(var_1, &"CP_SUBURBS_OBJECTIVES/BOSS_HELI");
   objective_icon(var_1, "icon_waypoint_objective_general");
@@ -181,7 +181,7 @@ function wait_for_boss_death() {
   objective_setbackground(var_1, 0);
   objective_addalltomask(var_1);
   objective_showtoplayersinmask(var_1);
-  scripts\cp\utility::ref_123fe("mus_cp_landlord_juggernaut");
+  scripts\cp\utility::ref_123FE("mus_cp_landlord_juggernaut");
   level thread scripts\cp\utility::objective_update("obj_overwatch_heli", undefined, undefined, undefined, 1, undefined, 4);
 
   if(isDefined(level.overwatch_boss) && isalive(level.overwatch_boss)) {
@@ -189,7 +189,7 @@ function wait_for_boss_death() {
   }
 
   scripts\cp\cp_objectives::lua_objective_complete("obj_overwatch_heli");
-  scripts\cp\utility::ref_123fe("");
+  scripts\cp\utility::ref_123FE("");
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("overwatch_soldiers_05_bombers");
   objective_state(var_1, "done");
   scripts\cp\cp_objectives::freeworldid(var_0);
@@ -200,13 +200,13 @@ function wait_for_tank_deaths() {
   thread spawn_overwatch_tanks();
   thread tank_hint_message();
   thread give_all_players_munition(level, level.priority_player);
-  level.ref_121a6 = scripts\cp\cp_modular_spawning::run_spawn_module("overwatch_tank_backup");
+  level.ref_121A6 = scripts\cp\cp_modular_spawning::run_spawn_module("overwatch_tank_backup");
   var_0 = "obj_overwatch_tanks";
   var_1 = scripts\cp\cp_objectives::requestworldid(var_0, 15);
   objective_setplayintro(var_1, 1);
   objective_setplayoutro(var_1, 1);
   objective_state(var_1, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_1);
+  scripts\cp\cp_objectives::ref_11F80(var_1);
   objective_setlabel(var_1, &"CP_SUBURBS_OBJECTIVES/BOSS_TANKS_OBJ");
   objective_setdescription(var_1, &"CP_SUBURBS_OBJECTIVES/BOSS_TANKS");
   objective_icon(var_1, "icon_waypoint_objective_general");
@@ -214,10 +214,10 @@ function wait_for_tank_deaths() {
   objective_setbackground(var_1, 1);
   objective_addalltomask(var_1);
   objective_showtoplayersinmask(var_1);
-  scripts\cp\utility::ref_123fe("mus_cp_landlord_juggernaut");
+  scripts\cp\utility::ref_123FE("mus_cp_landlord_juggernaut");
   level thread scripts\cp\utility::objective_update("obj_overwatch_tanks", undefined, undefined, undefined, 1, undefined, 3);
-  thread ref_13a59();
-  level.ref_11f68 = var_1;
+  thread ref_13A59();
+  level.ref_11F68 = var_1;
 
   while(!isDefined(level.overwatch_tanks) || level.overwatch_tanks.size < 2) {
     wait 1;
@@ -230,13 +230,13 @@ function wait_for_tank_deaths() {
   level notify("overwatch_tanks_dead");
   scripts\cp\cp_modular_spawning::stop_module_by_groupname("overwatch_tank_backup");
   scripts\cp\cp_objectives::lua_objective_complete("obj_overwatch_tanks");
-  scripts\cp\utility::ref_123fe("");
+  scripts\cp\utility::ref_123FE("");
   scripts\cp\cp_objectives::screenent_c("minor_objective");
   objective_state(var_1, "done");
   scripts\cp\cp_objectives::freeworldid(var_0);
 }
 
-function ref_13a59() {
+function ref_13A59() {
   level endon("game_ended");
   var_0 = 12544;
   var_1 = scripts\engine\utility::getStruct("obj_bomb_03", "targetname");
@@ -255,7 +255,7 @@ function ref_13a59() {
       objective_sethot(var_5, 0);
       objective_position(var_5, var_2);
       objective_state(var_5, "current");
-      scripts\cp\cp_objectives::ref_11f80(var_5);
+      scripts\cp\cp_objectives::ref_11F80(var_5);
       objective_icon(var_5, "icon_waypoint_objective_general");
       objective_setlabel(var_5, &"CP_SUBURBS_OBJECTIVES/BOSS_TANKS");
       objective_setownerteam(var_5, "allies");
@@ -300,9 +300,9 @@ function debugbeatobjective(var_0) {
 
 function spawn_intro_soldiers() {}
 
-function ref_135ae() {
-  level.ref_135a1 = scripts\cp\cp_modular_spawning::run_spawn_module("overwatch_soldiers_01");
-  thread ref_1436a(level);
+function ref_135AE() {
+  level.ref_135A1 = scripts\cp\cp_modular_spawning::run_spawn_module("overwatch_soldiers_01");
+  thread ref_1436A(level);
 }
 
 function spawn_overwatch_soldiers_02(var_0) {
@@ -377,7 +377,7 @@ function watch_for_player_damage() {
     self waittill("damage", var_0, var_1);
 
     if(isPlayer(var_1)) {
-      self.ref_132b8 = 1;
+      self.ref_132B8 = 1;
       return;
     }
   }
@@ -391,7 +391,7 @@ function vehicle_damage_updatestate(var_0) {
   thread watch_for_player_damage();
 
   for(;;) {
-    if(istrue(self.ref_132b8)) {
+    if(istrue(self.ref_132B8)) {
       break;
     }
 
@@ -490,15 +490,15 @@ function ref_13583() {
 }
 
 function ref_13584() {
-  level.ref_1359a = scripts\cp\cp_modular_spawning::run_spawn_module("ow_lmg_3");
+  level.ref_1359A = scripts\cp\cp_modular_spawning::run_spawn_module("ow_lmg_3");
 }
 
 function ref_13585() {
-  level.ref_1359b = scripts\cp\cp_modular_spawning::run_spawn_module("ow_lmg_4");
+  level.ref_1359B = scripts\cp\cp_modular_spawning::run_spawn_module("ow_lmg_4");
 }
 
 function ref_13586() {
-  level.ref_1359c = scripts\cp\cp_modular_spawning::run_spawn_module("ow_lmg_5");
+  level.ref_1359C = scripts\cp\cp_modular_spawning::run_spawn_module("ow_lmg_5");
 }
 
 function complete_game() {
@@ -558,7 +558,7 @@ function hack_relocate(var_0, var_1) {
       var_4 = scripts\engine\utility::getStruct("overwatch_origin_02", "targetname");
       var_8 = "mus_cp_landlord_filescopied_2";
       var_9 = "stadium_2";
-      thread ref_1350a();
+      thread ref_1350A();
       thread spawn_overwatch_soldiers_02(level);
       thread ref_13583();
       thread convoy_start_2(level);
@@ -601,7 +601,7 @@ function hack_relocate(var_0, var_1) {
       var_4 = scripts\engine\utility::getStruct("overwatch_origin_05", "targetname");
       var_8 = "mus_cp_landlord_filescopied_2";
       var_9 = "stadium_5";
-      thread ref_13a6f(level);
+      thread ref_13A6F(level);
       thread spawn_overwatch_soldiers_05();
       thread ref_13586();
       thread convoy_start_5();
@@ -621,19 +621,19 @@ function hack_relocate(var_0, var_1) {
     level notify("data_relocated", var_2);
     objective_setbackground(var_1.objectiveindex, 1);
     objective_setlocation(var_1.objectiveindex, 0, var_2.origin + var_5);
-    level thread scripts\cp\cp_objectives::ref_1317e(var_1, var_2.origin);
+    level thread scripts\cp\cp_objectives::ref_1317E(var_1, var_2.origin);
     objective_icon(var_1.objectiveindex, "icon_waypoint_cyber_bombsite");
     objective_sethot(var_1.objectiveindex, 0);
     objective_setownerteam(var_1.objectiveindex, "neutral");
     objective_setlabel(var_1.objectiveindex, &"CP_SUBURBS_OBJECTIVES/OBJ_DOWNLOAD");
     objective_setdescription(var_1.objectiveindex, &"CP_SUBURBS_OBJECTIVES/OBJ_DOWNLOAD");
     objective_state(var_1.objectiveindex, "current");
-    scripts\cp\cp_objectives::ref_11f80(var_1.objectiveindex);
+    scripts\cp\cp_objectives::ref_11F80(var_1.objectiveindex);
     thread relocate_gunship_origin(level);
     thread setup_enemy_sentries(level);
 
     if(isDefined(var_9)) {
-      scripts\cp\crate_drops\cp_crate_drops::ref_12c40(var_9, ["deployable_cover"]);
+      scripts\cp\crate_drops\cp_crate_drops::ref_12C40(var_9, ["deployable_cover"]);
     }
 
     var_1.use_old_label = 1;
@@ -647,13 +647,13 @@ function hack_relocate(var_0, var_1) {
     level waittill("router_placed");
 
     if(var_0 == 4) {
-      thread ref_13b07();
+      thread ref_13B07();
     }
 
     level.overwatch_emp_low = 4;
     level.overwatch_emp_high = 9;
     level.overwatch_emp_free = 1.1;
-    scripts\cp\utility::ref_123fe(var_8);
+    scripts\cp\utility::ref_123FE(var_8);
     thread start_hack_threaded(level, var_1, var_2, var_6);
     level waittill("cpu_hacking_done");
     wait 1;
@@ -661,7 +661,7 @@ function hack_relocate(var_0, var_1) {
   }
 }
 
-function ref_13a6f(var_0) {
+function ref_13A6F(var_0) {
   var_1 = scripts\cp\cp_modular_spawning::get_module_structs_by_groupname("wave_spawning");
 
   foreach(var_3 in var_1) {
@@ -699,14 +699,14 @@ function start_hack_threaded(var_0, var_1, var_2, var_3) {
   level notify("data_downloaded");
 }
 
-function ref_11a7d() {
+function ref_11A7D() {
   level endon("game_ended");
 
-  if(isDefined(level.ref_121aa)) {
+  if(isDefined(level.ref_121AA)) {
     return;
   }
 
-  level.ref_121aa = 0;
+  level.ref_121AA = 0;
   var_0 = scripts\engine\utility::getStruct("obj_bomb_01", "targetname");
   var_1 = scripts\engine\utility::getStruct("obj_bomb_02", "targetname");
   var_2 = scripts\engine\utility::getStruct("obj_bomb_03", "targetname");
@@ -718,13 +718,13 @@ function ref_11a7d() {
   }
 
   var_5 = node_set_children(var_0, 1);
-  ref_1432e(var_1, var_5);
+  ref_1432E(var_1, var_5);
   var_5 = node_set_children(var_1, 2);
-  ref_1432e(var_2, var_5);
+  ref_1432E(var_2, var_5);
   var_5 = node_set_children(var_2, 3);
-  ref_1432e(var_3, var_5);
+  ref_1432E(var_3, var_5);
   var_5 = node_set_children(var_3, 4);
-  ref_1432e(undefined, var_5);
+  ref_1432E(undefined, var_5);
   level waittill("cpu_hacking_done");
   waitframe();
 
@@ -735,7 +735,7 @@ function ref_11a7d() {
 }
 
 function node_set_children(var_0) {
-  if(level.ref_121aa >= 3) {
+  if(level.ref_121AA >= 3) {
     return undefined;
   }
 
@@ -743,12 +743,12 @@ function node_set_children(var_0) {
   var_1.team = "allies";
   var_1.id = var_0;
   var_1 makescrambler(level.players[0], "little");
-  thread ref_12f1d(level);
-  level.ref_121aa += 1;
+  thread ref_12F1D(level);
+  level.ref_121AA += 1;
   return var_1;
 }
 
-function ref_1432e(var_0, var_1) {
+function ref_1432E(var_0, var_1) {
   level endon("game_ended");
   level waittill("cpu_hacking_done");
   waitframe();
@@ -775,10 +775,10 @@ function next_threshold(var_0) {
 
   var_0 clearscrambler();
   var_0 notify("clear_scrambler");
-  level.ref_121aa -= 1;
+  level.ref_121AA -= 1;
 }
 
-function ref_12f1d(var_0) {
+function ref_12F1D(var_0) {
   level endon("game_ended");
   var_0 endon("clear_scrambler");
   level.players[0] waittill("disconnect");
@@ -876,13 +876,13 @@ function emp_effects_flickering(var_0) {
 
   for(;;) {
     var_2 = randomfloatrange(level.overwatch_emp_low, level.overwatch_emp_high);
-    level thread scripts\cp_mp\emp_debuff::ref_1241a(var_0, 5);
+    level thread scripts\cp_mp\emp_debuff::ref_1241A(var_0, 5);
     var_3 = randomfloat(level.overwatch_emp_free);
     wait var_2 + var_1 + var_3;
   }
 }
 
-function ref_131f0() {
+function ref_131F0() {
   scripts\cp\utility::skydivestreamhintdvars("overwatch");
 }
 
@@ -973,11 +973,11 @@ function lb_impulse_dmg_factor_mid_high(var_0, var_1) {
     objective_setownerteam(var_1.objectiveindex, "neutral");
     objective_setlabel(var_1.objectiveindex, &"CP_SUBURBS_OBJECTIVES/OBJ_SHOOT");
     objective_state(var_1.objectiveindex, "current");
-    scripts\cp\cp_objectives::ref_11f80(var_1.objectiveindex);
+    scripts\cp\cp_objectives::ref_11F80(var_1.objectiveindex);
     thread hint_jammer_damage(level);
     thread enable_jammer_damage(level, var_8);
     level waittill("jammer_destroyed");
-    scripts\cp\utility::ref_123fe("");
+    scripts\cp\utility::ref_123FE("");
     scripts\cp\cp_objectives::screenent_c("minor_objective");
     thread play_jammer_destroyed_vo();
     thread scripts\cp\utility::objective_update("obj_overwatch_bombs", undefined, undefined, undefined, 1, var_0 + 1);
@@ -1008,7 +1008,7 @@ function start_heli_spawner(var_0) {
   }
 }
 
-function ref_1350a() {
+function ref_1350A() {
   level endon("game_ended");
   level endon("jammer_destroyed");
   level waittill("router_placed");
@@ -1061,7 +1061,7 @@ function lb_impulse_dmg_factor_mid_low(var_0) {
   objective_setownerteam(var_0.objectiveindex, "axis");
   objective_setprogressteam(var_0.objectiveindex, "axis");
   objective_setlabel(var_0.objectiveindex, &"CP_SUBURBS_OBJECTIVES/OBJ_DESTROY_VEHICLES");
-  level.ref_11f67 = 0;
+  level.ref_11F67 = 0;
   var_2 = 16900;
 
   if(!isDefined(level.player_can_mount)) {
@@ -1089,14 +1089,14 @@ function lb_impulse_dmg_factor_mid_low(var_0) {
 
     if(isalive(var_3.riders[var_5]) && distance2dsquared(var_3.riders[var_5].origin, var_3.origin) < var_2) {
       if(istrue(var_3.riders[var_5].i_see_laststand_player_watcher)) {
-        level.ref_11f67 += 1;
+        level.ref_11F67 += 1;
         var_3.riders[var_5] hudoutlineenable("outlinefill_nodepth_red");
-        thread ref_1432c();
+        thread ref_1432C();
       }
     }
   }
 
-  while(level.ref_11f67 > 0) {
+  while(level.ref_11F67 > 0) {
     wait 0.1;
   }
 
@@ -1105,11 +1105,11 @@ function lb_impulse_dmg_factor_mid_low(var_0) {
   }
 }
 
-function ref_1432c() {
+function ref_1432C() {
   level endon("game_ended");
   thread zombiekilledlootcachecount(self.origin);
-  scripts\engine\utility::ref_143a5("death", "lmg_too_far");
-  level.ref_11f67 -= 1;
+  scripts\engine\utility::ref_143A5("death", "lmg_too_far");
+  level.ref_11F67 -= 1;
 }
 
 function zombiekilledlootcachecount(var_0) {
@@ -1359,7 +1359,7 @@ function similar_convoy_settings(var_0, var_1, var_2) {
 function allow_driver_exit(var_0) {
   waitframe();
   var_0 notify("able_to_deposit_driver");
-  var_0 scripts\cp\cp_convoy_manager::ref_1307d(0);
+  var_0 scripts\cp\cp_convoy_manager::ref_1307D(0);
 }
 
 function register_spawn_functions() {
@@ -1376,7 +1376,7 @@ function register_spawn_functions() {
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("overwatch_juggs", &vehicle_dismount_watcher);
   [[var_0]]("overwatch_soldiers_01", 10, 10, 10, 0.1, 0, "overwatch_soldiers_01", &watchforstopwaves, undefined, undefined);
   scripts\cp\cp_modular_spawning::set_spawn_scoring_params_for_group("overwatch_soldiers_01", undefined, 20000, 30000);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("overwatch_soldiers_01", &ref_1220a);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("overwatch_soldiers_01", &ref_1220A);
   [[var_0]]("overwatch_soldiers_02", 7, 7, 7, 0.1, 0, "overwatch_soldiers_02", &watchforstopwaves, undefined, undefined);
   scripts\cp\cp_modular_spawning::set_spawn_scoring_params_for_group("overwatch_soldiers_02", undefined, 20000, 30000);
   [[var_0]]("overwatch_soldiers_03", 9, 9, 9, 0.1, 0, "overwatch_soldiers_03", &watchforstopwaves, undefined, undefined);
@@ -1497,7 +1497,7 @@ function register_spawn_functions() {
   level.stack_patch_waittill_leaf = scripts\engine\utility::array_add(level.stack_patch_waittill_leaf, "techo_ow_5b_lmg");
 }
 
-function ref_1220a(var_0, var_1) {
+function ref_1220A(var_0, var_1) {
   self.sightmaxdistance = 2000;
   thread scripts\cp\coop_stealth::run_common_functions(self, 1, 1, 60, 160000);
 }
@@ -1543,7 +1543,7 @@ function setup_manual_goalpos(var_0, var_1) {
   }
 }
 
-function ref_1436a(var_0) {
+function ref_1436A(var_0) {
   level endon("game_ended");
   level endon("router_placed");
 
@@ -1638,12 +1638,12 @@ function handle_wavespawner_amount(var_0) {
   }
 
   if(var_0 == 0) {
-    level scripts\engine\utility::ref_143a5("router_placed", "ow_activate_first_wave");
+    level scripts\engine\utility::ref_143A5("router_placed", "ow_activate_first_wave");
     wait 15;
   }
 
   if(var_0 == 4) {
-    level scripts\engine\utility::ref_143a5("router_placed");
+    level scripts\engine\utility::ref_143A5("router_placed");
     wait 15;
   }
 
@@ -1696,7 +1696,7 @@ function spawn_overwatch_tanks() {
   }
 }
 
-function ref_135ad() {
+function ref_135AD() {
   if(!isDefined(level.overwatch_tanks)) {
     level.overwatch_tanks = [];
   }
@@ -1741,7 +1741,7 @@ function spawn_overwatch_tank(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_5.objiconid = var_1;
-    objective_setlocation(level.ref_11f68, var_5.objiconid, var_5);
+    objective_setlocation(level.ref_11F68, var_5.objiconid, var_5);
   }
 
   level.overwatch_tanks[level.overwatch_tanks.size] = var_5;
@@ -1762,9 +1762,9 @@ function spawn_overwatch_tank(var_0, var_1, var_2) {
   var_9 = 36000000;
   var_10 = scripts\engine\utility::getStructArray("overwatch_tank_path", "targetname");
   var_11 = sortbydistance(var_10, var_5.origin)[0];
-  var_5.ref_13a4c = build_tank_path(var_11);
-  var_5.ref_13a46 = build_tank_duration(var_11);
-  var_5 startpathnodes(var_5.ref_13a4c, var_5.ref_13a46, 0, 0.5, 0.5, 0, 0, 1);
+  var_5.ref_13A4C = build_tank_path(var_11);
+  var_5.ref_13A46 = build_tank_duration(var_11);
+  var_5 startpathnodes(var_5.ref_13A4C, var_5.ref_13A46, 0, 0.5, 0.5, 0, 0, 1);
   thread ref_14350();
 
   for(;;) {
@@ -1784,7 +1784,7 @@ function spawn_overwatch_tank(var_0, var_1, var_2) {
         var_7 settargetentity(var_12.vehicle);
       }
     } else {
-      ref_130f2(var_6, var_12, 9, var_2, var_8);
+      ref_130F2(var_6, var_12, 9, var_2, var_8);
       var_7 settargetentity(var_12);
     }
 
@@ -1794,7 +1794,7 @@ function spawn_overwatch_tank(var_0, var_1, var_2) {
   }
 }
 
-function ref_130f2(var_0, var_1, var_2, var_3) {
+function ref_130F2(var_0, var_1, var_2, var_3) {
   if(distancesquared(self.origin, var_0.origin) < var_3) {
     self settargetentity(var_0);
     return;
@@ -1891,7 +1891,7 @@ function tank_waittill_death() {
   }
 
   if(isDefined(self.objiconid)) {
-    objective_unsetlocation(level.ref_11f68, self.objiconid);
+    objective_unsetlocation(level.ref_11F68, self.objiconid);
   }
 
   level.overwatch_tanks = scripts\engine\utility::array_remove(level.overwatch_tanks, self);
@@ -2008,7 +2008,7 @@ function follow_path_until(var_0) {
       self setvehgoalpos(var_2, 0);
     }
 
-    scripts\engine\utility::ref_143bb(15, "goal", "goal_reached", "near_goal");
+    scripts\engine\utility::ref_143BB(15, "goal", "goal_reached", "near_goal");
 
     if(isDefined(var_1.target) && var_1.target != var_0) {
       var_1 = scripts\engine\utility::getStruct(var_1.target, "targetname");
@@ -2338,9 +2338,9 @@ function give_gunship_access_after_personal_delay(var_0, var_1) {
   var_0.saved_lastweapon = var_0 getcurrentweapon().basename;
   var_6 = scripts\cp\loot_system::get_empty_munition_slot(var_0);
 
-  if(isDefined(var_6) && !istrue(ref_1246b(var_0))) {
+  if(isDefined(var_6) && !istrue(ref_1246B(var_0))) {
     var_0 scripts\cp\cp_munitions::give_munition_to_slot("ac130", var_6, "overwatch");
-    var_0.ref_121ab = var_6;
+    var_0.ref_121AB = var_6;
 
     if(!isDefined(var_0.gunship_uses)) {
       wait 3;
@@ -2352,9 +2352,9 @@ function give_gunship_access_after_personal_delay(var_0, var_1) {
   }
 }
 
-function ref_1246b() {
+function ref_1246B() {
   foreach(var_1 in self.munition_slots) {
-    if(isDefined(var_1.ref_134e2) && var_1.ref_134e2 == "overwatch") {
+    if(isDefined(var_1.ref_134E2) && var_1.ref_134E2 == "overwatch") {
       return true;
     }
   }
@@ -2370,11 +2370,11 @@ function force_gunship_off_time() {
 
 function take_away_players_gunshipmunition() {
   for(var_0 = 0; var_0 < level.players.size; var_0++) {
-    if(isDefined(level.players[var_0].ref_121ab)) {
-      var_1 = level.players[var_0].ref_121ab;
+    if(isDefined(level.players[var_0].ref_121AB)) {
+      var_1 = level.players[var_0].ref_121AB;
       var_2 = level.players[var_0].munition_slots[var_1];
 
-      if(isDefined(var_2) && isDefined(var_2.ref_134e2) && var_2.ref_134e2 == "overwatch") {
+      if(isDefined(var_2) && isDefined(var_2.ref_134E2) && var_2.ref_134E2 == "overwatch") {
         haspassedsquadleader(level.players[var_0], var_1, var_2.ref);
         level.players[var_0] scripts\cp\cp_munitions::update_lua_inventory_slot(var_1);
       }
@@ -2387,7 +2387,7 @@ function take_away_players_gunshipmunition() {
 function haspassedsquadleader(var_0, var_1) {
   for(var_2 = 0; var_2 < self.munition_slots.size; var_2++) {
     if(var_2 == var_0) {
-      if(isDefined(self.munition_slots[var_2].ref) && self.munition_slots[var_2].ref == var_1 && isDefined(self.munition_slots[var_2].ref_134e2) && self.munition_slots[var_2].ref_134e2 == "overwatch") {
+      if(isDefined(self.munition_slots[var_2].ref) && self.munition_slots[var_2].ref == var_1 && isDefined(self.munition_slots[var_2].ref_134E2) && self.munition_slots[var_2].ref_134E2 == "overwatch") {
         scripts\cp\cp_munitions::give_munition_to_slot("none", var_0);
         var_3 = "cp_munition_1_timer";
 
@@ -2407,26 +2407,26 @@ function haspassedsquadleader(var_0, var_1) {
         }
 
         self setclientomnvar(var_3, 0);
-        self.munition_slots[var_2].ref_134e2 = undefined;
-        thread ref_11e0b(level);
+        self.munition_slots[var_2].ref_134E2 = undefined;
+        thread ref_11E0B(level);
       }
     }
   }
 }
 
-function ref_11e0b(var_0) {
+function ref_11E0B(var_0) {
   var_0 endon("disconnect");
   var_0 scripts\cp\utility::setlowermessage("gunship_removed_message", &"CP_SUBURBS_OBJECTIVES/GUNSHIP_REMOVED");
   wait 3;
   var_0 scripts\cp\utility::clearlowermessage("gunship_removed_message");
 }
 
-function ref_13b07() {
+function ref_13B07() {
   wait 15;
   var_0 = scripts\engine\utility::getStructArray("overwatch_mortar", "targetname");
-  thread ref_135ad();
-  thread ref_1358f();
-  thread ref_135d5();
+  thread ref_135AD();
+  thread ref_1358F();
+  thread ref_135D5();
   wait 5;
 
   for(var_1 = 0; var_1 < 4; var_1++) {
@@ -2441,36 +2441,36 @@ function ref_13b07() {
   }
 }
 
-function ref_135d5() {
+function ref_135D5() {
   wait 15;
-  level.ref_121a5 = scripts\cp\cp_modular_spawning::run_spawn_module("overwatch_soldiers_05_bombers");
+  level.ref_121A5 = scripts\cp\cp_modular_spawning::run_spawn_module("overwatch_soldiers_05_bombers");
 }
 
-function ref_12a06(var_0) {
+function ref_12A06(var_0) {
   var_1 = randomfloatrange(var_0 * -1, var_0);
   var_2 = randomfloatrange(var_0 * -1, var_0);
   return (var_1, var_2, 0);
 }
 
-function ref_1358f() {
+function ref_1358F() {
   level endon("overwatch_final_tank_dead");
   level endon("game_ended");
   level.vehicle_occupancy_giveriotshield = scripts\cp\cp_modular_spawning::run_spawn_module("juggheli_spawner_jam5_1");
-  thread ref_138bd(level, 60);
+  thread ref_138BD(level, 60);
   wait 4;
   level.vehicle_occupancy_handleplayerbc = scripts\cp\cp_modular_spawning::run_spawn_module("juggheli_spawner_jam5_2");
-  thread ref_138bd(level, 60);
+  thread ref_138BD(level, 60);
   wait 4;
   spawn_lmg_soldiers_04(level.vehicle_occupancy_giveriotshield);
   level.vehicle_occupancy_hidecashbag = scripts\cp\cp_modular_spawning::run_spawn_module("juggheli_spawner_jam5_3");
-  thread ref_138bd(level, 60);
+  thread ref_138BD(level, 60);
   wait 4;
   spawn_lmg_soldiers_04(level.vehicle_occupancy_handleplayerbc);
   level.vehicle_occupancy_instanceisregistered = scripts\cp\cp_modular_spawning::run_spawn_module("juggheli_spawner_jam5_4");
-  thread ref_138bd(level, 60);
+  thread ref_138BD(level, 60);
 }
 
-function ref_138bd(var_0, var_1) {
+function ref_138BD(var_0, var_1) {
   wait var_0;
   scripts\cp\cp_modular_spawning::stop_module_by_groupname(var_1);
 }
@@ -2521,7 +2521,7 @@ function watchalleyplayerexit(var_0, var_1) {
     var_1 = getgroundposition(self.origin + anglesToForward(self.angles) * 2000, 8, 1000);
   }
 
-  thread ref_142e2(var_1);
+  thread ref_142E2(var_1);
   var_5 = scripts\engine\utility::spawn_tag_origin(var_4, (0, 0, 0));
   playFX(scripts\engine\utility::getfx("vfx_flare_launch"), var_3.origin + (0, 0, 3) + anglesToForward(var_3.angles) * 8, anglesToForward(var_3.angles));
   playsoundatpos(var_4, "weap_mortar_fire_dist");
@@ -2539,7 +2539,7 @@ function watchalleyplayerexit(var_0, var_1) {
   var_5 stoploopsound();
   var_7 = (0, 0, 40);
   thread scripts\engine\utility::play_sound_in_space("smoke_grenade_expl_trans", var_1);
-  thread ref_11d31(var_1);
+  thread ref_11D31(var_1);
   var_8 = spawn("script_model", var_1 + (0, 0, 2));
   var_8 setModel("tag_origin");
   var_8 show();
@@ -2584,8 +2584,8 @@ function anglemortar() {
   self.prevorigin = self.origin;
 }
 
-function ref_142e2(var_0) {
-  if(gettime() < level.ref_11e67) {
+function ref_142E2(var_0) {
+  if(gettime() < level.ref_11E67) {
     return;
   }
 
@@ -2597,10 +2597,10 @@ function ref_142e2(var_0) {
     thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var_5, var_3);
   }
 
-  level.ref_11e67 = gettime() + 30000;
+  level.ref_11E67 = gettime() + 30000;
 }
 
-function ref_11d31(var_0) {
+function ref_11D31(var_0) {
   var_1 = 3;
   var_2 = 45;
   wait var_1;
@@ -2758,18 +2758,18 @@ function jammer_hitmarkers() {
   }
 }
 
-function ref_12dd6() {
+function ref_12DD6() {
   wait 10;
   scripts\engine\utility::flag_init("endgame_delay");
   level thread scripts\cp\utility::objective_update("obj_overwatch_exfil", undefined, undefined, undefined, 1, undefined, 2);
   var_0 = scripts\engine\utility::getStruct("obj_exfil_landing", "targetname");
   var_1 = scripts\engine\utility::getStruct("ow_exfil_spawn", "targetname");
-  level.ref_1248f = var_1;
+  level.ref_1248F = var_1;
   level thread scripts\cp\infilexfil\blima_exfil::listen_for_exfil("obj_exfil_landing");
   waitframe();
   level notify("call_exfil", var_0.origin);
   level waittill("ready_to_exfil");
-  ref_130a8(level.heli_trip_vehicle);
+  ref_130A8(level.heli_trip_vehicle);
 
   foreach(var_3 in level.players) {
     var_3 thread scripts\cp_mp\xmike109::screenent_d("headhunter");
@@ -2827,12 +2827,12 @@ function spawn_overwatch_extraguns() {
   }
 }
 
-function ref_135ac() {
-  if(istrue(level.ref_11f69)) {
+function ref_135AC() {
+  if(istrue(level.ref_11F69)) {
     return;
   }
 
-  level.ref_11f69 = 1;
+  level.ref_11F69 = 1;
 
   if(!isDefined(level.atvs)) {
     level.atvs = [];
@@ -2862,7 +2862,7 @@ function spawn_exfil_heli_and_rpgs() {
     var_7 hudoutlineenable("outline_nodepth_green");
   }
 
-  var_9 = level scripts\engine\utility::ref_143b9(60, "router_placed");
+  var_9 = level scripts\engine\utility::ref_143B9(60, "router_placed");
   level notify("disable_atv_outlines");
 
   foreach(var_7 in var_3) {
@@ -2895,7 +2895,7 @@ function make_enemies_ignore_you() {
     scripts\cp\utility::allow_player_ignore_me(1);
   }
 
-  scripts\engine\utility::ref_143a6("stop_remote_sequence", "gunshipPlayer_removed", "death");
+  scripts\engine\utility::ref_143A6("stop_remote_sequence", "gunshipPlayer_removed", "death");
 
   if(scripts\cp\utility::isignoremeenabled()) {
     scripts\cp\utility::allow_player_ignore_me(0);
@@ -2948,7 +2948,7 @@ function suicide_bomber_combat_func() {
   }
 }
 
-function ref_123ff() {
+function ref_123FF() {
   level endon("game_ended");
   level endon("playing_intro_vo");
   level endon("stop_intro_vo");
@@ -2977,7 +2977,7 @@ function play_intro_vo() {
 
 function play_intro2_vo() {
   play_vo_delay(level, "dx_cps_lass_overwatch_brief_40");
-  level.ref_139b5 = 0;
+  level.ref_139B5 = 0;
 }
 
 function play_jammer_destroyed_vo() {
@@ -2989,7 +2989,7 @@ function play_jammer_destroyed_vo() {
 
   var_0 = undefined;
   var_1 = undefined;
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
 
   switch (level.vo_jammerdestroyed) {
     case 1:
@@ -3041,7 +3041,7 @@ function play_jammer_destroyed_vo() {
     }
   }
 
-  level.ref_139b5 = 0;
+  level.ref_139B5 = 0;
 }
 
 function play_jammer_returning_vo() {
@@ -3051,7 +3051,7 @@ function play_jammer_returning_vo() {
     level.vo_jammerreturning++;
   }
 
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
   var_0 = undefined;
 
   switch (level.vo_jammerreturning) {
@@ -3080,13 +3080,13 @@ function play_jammer_returning_vo() {
     play_vo_delay(level, var_0, undefined, undefined, undefined, 0.25);
   }
 
-  level.ref_139b5 = 0;
+  level.ref_139B5 = 0;
 }
 
 function play_helicopter_vo() {
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
   play_vo_delay(level, "dx_cps_lass_overwatch_enemy_helo_nag_30", undefined, undefined);
-  level.ref_139b5 = 0;
+  level.ref_139B5 = 0;
   level thread scripts\cp\cp_vo::remove_from_nag_vo("dx_cps_lass_overwatch_enemy_helo_nag_30");
   play_vo_delay(level, "dx_cps_lass_overwatch_enemy_helo_nag_30", undefined, undefined, 1, undefined, 40);
   level.overwatch_boss waittill("death", var_0);
@@ -3119,7 +3119,7 @@ function tank_help(var_0) {
 }
 
 function play_win_vo() {
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
   play_vo_delay(level, "dx_cps_lass_overwatch_mission_complete_10");
   wait 1;
   play_vo_delay(level, "dx_cps_kama_overwatch_mission_complete_20");
@@ -3127,12 +3127,12 @@ function play_win_vo() {
   play_vo_delay(level, "dx_cps_lass_overwatch_mission_complete_30");
   wait 1;
   play_vo_delay(level, "dx_cps_kama_overwatch_mission_complete_40");
-  level.ref_139b5 = 0;
+  level.ref_139B5 = 0;
 }
 
-function ref_130a8(var_0) {
+function ref_130A8(var_0) {
   foreach(var_2 in level.players) {
-    var_2 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(2, 1, 1);
+    var_2 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340D(2, 1, 1);
   }
 
   wait 2;

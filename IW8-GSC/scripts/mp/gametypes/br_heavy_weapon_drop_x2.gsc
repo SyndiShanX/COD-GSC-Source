@@ -83,7 +83,7 @@ function shut_down_station() {
 
     if(scripts\mp\gametypes\br_lootcache::get_bonus_targets(var_5)) {
       for(var_7 = 0; var_7 < var_6; var_7++) {
-        var_8 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_5, var_2, self.origin, self.angles, 0, 1);
+        var_8 = scripts\mp\gametypes\br_lootcache::ref_11A41(var_5, var_2, self.origin, self.angles, 0, 1);
       }
     }
   }

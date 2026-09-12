@@ -158,11 +158,11 @@ function little_bird_initoccupancy() {
 
 function little_bird_initinteract() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("little_bird", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("little_bird", "single", ["pilot", "fl_platform", "fr_platform", "bl_platform", "br_platform"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("little_bird", "single", ["pilot", "fl_platform", "fr_platform", "bl_platform", "br_platform"]);
 }
 
 function x1opsinfilsequenceendinternal() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("little_bird", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("little_bird", 1);
   var_0.brtruck_initdialog["flares"] = 1;
   var_0.id = 2;
 
@@ -188,20 +188,20 @@ function x1opsinfilsequenceend() {
     var_0 = 2500;
   }
 
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("little_bird", var_0);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("little_bird", var_0);
   var_1 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("little_bird");
   var_1.class = "medium_heavy";
-  var_2 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414d("little_bird", "heavy");
+  var_2 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414D("little_bird", "heavy");
   var_2.ref_12024 = &zombiehealth;
-  var_2.ref_1202d = &zombiehud;
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("little_bird");
+  var_2.ref_1202D = &zombiehud;
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("little_bird");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("little_bird", 12);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("little_bird", &little_bird_deathcallback);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("little_bird_mp", 5);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("little_bird_mp", 5);
 }
 
 function x1opsentercalloutarea() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("little_bird", 1);
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("little_bird", 1);
   var_0.challengeevaluator = 1.5;
   var_0.keycardlocs_chosen = 0.875;
   var_0.is_using_stealth_debug = 350;
@@ -239,7 +239,7 @@ function little_bird_create(var_0, var_1) {
   var_2.player_is_trying_self_revive = 1;
 
   if(isDefined(level.littlebird_overrideoobseconds)) {
-    var_2.ref_120b4 = level.littlebird_overrideoobseconds;
+    var_2.ref_120B4 = level.littlebird_overrideoobseconds;
   }
 
   if(level.gametype == "br") {
@@ -250,7 +250,7 @@ function little_bird_create(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "little_bird", var_0);
   var_2.objweapon = getcompleteweaponname("little_bird_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("little_bird", "create")) {
@@ -443,7 +443,7 @@ function little_bird_enterstart(var_0, var_1, var_2, var_3, var_4) {
 
 function little_bird_enterend(var_0, var_1, var_2, var_3, var_4) {
   if(istrue(var_4.success)) {
-    var_3 scripts\cp_mp\parachute::ref_121ca();
+    var_3 scripts\cp_mp\parachute::ref_121CA();
     little_bird_enterendinternal(var_0, var_1, var_2, var_3, var_4);
     return;
   }
@@ -659,7 +659,7 @@ function ref_14194(var_0) {
 
     if(isDefined(level.missiles)) {
       foreach(var_3 in level.missiles) {
-        if(!isDefined(var_3.ref_119a0) || var_3.ref_119a0 != self) {
+        if(!isDefined(var_3.ref_119A0) || var_3.ref_119A0 != self) {
           continue;
         }
 
@@ -679,7 +679,7 @@ function ref_14194(var_0) {
 
     self.player_is_trying_self_revive = 0;
     scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_setammo("little_bird", "flares", 0, var_0);
-    scripts\cp_mp\vehicles\vehicle_occupancy::ref_141d2(var_0);
+    scripts\cp_mp\vehicles\vehicle_occupancy::ref_141D2(var_0);
   }
 }
 

@@ -18,9 +18,9 @@ function main() {
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "woodland";
-  thread ref_1327b();
-  level.ref_138b3 = 3000;
-  thread ref_1323c();
+  thread ref_1327B();
+  level.ref_138B3 = 3000;
+  thread ref_1323C();
   level.music_style = "england";
 }
 
@@ -28,11 +28,11 @@ function monitor_dropped_phones() {
   for(;;) {
     level waittill("eggStoneBroke");
     scripts\engine\utility::stop_exploder("teddydrop");
-    ref_13dc1();
+    ref_13DC1();
   }
 }
 
-function ref_13dc1() {
+function ref_13DC1() {
   thread molotov_register_trigger();
   wait 3;
   scripts\engine\utility::exploder("teddydrop");
@@ -40,7 +40,7 @@ function ref_13dc1() {
   earthquake(0.75, 5, (8224, 2064, 0), 50000);
 
   foreach(var_1 in level.players) {
-    thread ref_1329e(var_1);
+    thread ref_1329E(var_1);
     var_1 playlocalsound("train_ee_teddy_wave");
   }
 }
@@ -71,7 +71,7 @@ function molotov_register_trigger() {
   var_0 delete();
 }
 
-function ref_1329e(var_0) {
+function ref_1329E(var_0) {
   var_0 playrumbleonpositionforclient("artillery_rumble", var_0.origin);
   wait 0.1;
   var_0 playrumbleonpositionforclient("artillery_rumble", var_0.origin);
@@ -109,7 +109,7 @@ function ref_1329e(var_0) {
   var_0 playrumbleonpositionforclient("slide_loop", var_0.origin);
 }
 
-function ref_1323c() {
+function ref_1323C() {
   level.molotov_watch_cleanup_pool_internal = 1;
   waitframe();
   level.monitor_dropmenu = getEnt("eggStoneKey", "targetname");
@@ -125,42 +125,42 @@ function ref_1323c() {
   level.monitor_dropkit_marker_throw = getEnt("eggStone5", "targetname");
   thread ref_13275(level.monitor_dropkit_marker_throw);
   level.helihint_gotopad[0] = randomintrange(1, 10);
-  ref_1313f(level.monitor_balloon_marker_throw, level.helihint_gotopad[0]);
+  ref_1313F(level.monitor_balloon_marker_throw, level.helihint_gotopad[0]);
   level.helihint_gotopad[1] = level.helihint_gotopad[0];
 
   while(level.helihint_gotopad[1] == level.helihint_gotopad[0]) {
     level.helihint_gotopad[1] = randomintrange(1, 10);
   }
 
-  ref_1313f(level.monitor_balloons, level.helihint_gotopad[1]);
+  ref_1313F(level.monitor_balloons, level.helihint_gotopad[1]);
   level.helihint_gotopad[2] = level.helihint_gotopad[0];
 
   while(level.helihint_gotopad[2] == level.helihint_gotopad[0] || level.helihint_gotopad[2] == level.helihint_gotopad[1]) {
     level.helihint_gotopad[2] = randomintrange(1, 10);
   }
 
-  ref_1313f(level.monitor_bush_trig, level.helihint_gotopad[2]);
+  ref_1313F(level.monitor_bush_trig, level.helihint_gotopad[2]);
   level.helihint_gotopad[3] = level.helihint_gotopad[0];
 
   while(level.helihint_gotopad[3] == level.helihint_gotopad[0] || level.helihint_gotopad[3] == level.helihint_gotopad[1] || level.helihint_gotopad[3] == level.helihint_gotopad[2]) {
     level.helihint_gotopad[3] = randomintrange(1, 10);
   }
 
-  ref_1313f(level.monitor_death_thread, level.helihint_gotopad[3]);
+  ref_1313F(level.monitor_death_thread, level.helihint_gotopad[3]);
   level.helihint_gotopad[4] = level.helihint_gotopad[0];
 
   while(level.helihint_gotopad[4] == level.helihint_gotopad[0] || level.helihint_gotopad[4] == level.helihint_gotopad[1] || level.helihint_gotopad[4] == level.helihint_gotopad[2] || level.helihint_gotopad[4] == level.helihint_gotopad[3]) {
     level.helihint_gotopad[4] = randomintrange(1, 10);
   }
 
-  ref_1313f(level.monitor_dropkit_marker_throw, level.helihint_gotopad[4]);
+  ref_1313F(level.monitor_dropkit_marker_throw, level.helihint_gotopad[4]);
   level.insertingarmorplate = 0;
 }
 
 function ref_13275(var_0) {
   level endon("game_ended");
   var_0 setCanDamage(1);
-  var_0.health = level.ref_138b3;
+  var_0.health = level.ref_138B3;
   var_1 = scripts\engine\utility::spawn_tag_origin();
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
@@ -187,7 +187,7 @@ function ref_13275(var_0) {
 }
 
 function molotov_watch_cleanup_pool() {
-  level.ref_138b3 = 1;
+  level.ref_138B3 = 1;
 }
 
 function vehicles_spawned() {
@@ -207,7 +207,7 @@ function vehicles_spawned() {
     }
 
     level.molotov_watch_cleanup_pool_internal = 0;
-    thread ref_13dc1();
+    thread ref_13DC1();
   }
 }
 
@@ -234,7 +234,7 @@ function vehiclespawn_armoredtruck(var_0) {
   }
 }
 
-function ref_1313f(var_0, var_1) {
+function ref_1313F(var_0, var_1) {
   switch (var_1) {
     case 1:
       var_0.heligotoplunderrepository = getEnt("Num1", "targetname");
@@ -295,15 +295,15 @@ function ref_1313f(var_0, var_1) {
   }
 }
 
-function ref_1327b() {
+function ref_1327B() {
   wait randomint(20);
   var_0 = getEntArray("Train", "script_noteworthy");
-  level.ref_13cd2 = 1;
-  wait level.ref_13cd2;
-  level.ref_12a13 = spawn("script_origin", (656, 968, 180));
-  level.ref_12a14 = spawn("script_origin", (572, 332, 80));
-  level.ref_12a15 = spawn("script_origin", (656, -436, 180));
-  level.ref_12a16 = spawn("script_origin", (216, -196, 80));
+  level.ref_13CD2 = 1;
+  wait level.ref_13CD2;
+  level.ref_12A13 = spawn("script_origin", (656, 968, 180));
+  level.ref_12A14 = spawn("script_origin", (572, 332, 80));
+  level.ref_12A15 = spawn("script_origin", (656, -436, 180));
+  level.ref_12A16 = spawn("script_origin", (216, -196, 80));
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.targetname)) {
@@ -319,7 +319,7 @@ function ref_1327b() {
         case "engine":
           if(isDefined(var_2.targetname) && var_2.targetname == "TrainFront") {
             playFXOnTag(level._effect["vfx_train_moving_train_lights"], var_2, "tag_origin");
-            thread ref_13c97(var_2);
+            thread ref_13C97(var_2);
           }
 
           break;
@@ -332,14 +332,14 @@ function ref_1327b() {
       }
     }
 
-    thread ref_13cc9(var_2);
-    thread ref_13ccc(var_2);
-    level.ref_13cd2 = randomint(30);
-    thread ref_13c96();
+    thread ref_13CC9(var_2);
+    thread ref_13CCC(var_2);
+    level.ref_13CD2 = randomint(30);
+    thread ref_13C96();
   }
 }
 
-function ref_13ccc(var_0) {
+function ref_13CCC(var_0) {
   wait randomfloat(1);
 
   for(;;) {
@@ -348,7 +348,7 @@ function ref_13ccc(var_0) {
   }
 }
 
-function ref_13cc9(var_0) {
+function ref_13CC9(var_0) {
   var_1 = 0.0025;
   var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
@@ -362,12 +362,12 @@ function ref_13cc9(var_0) {
     if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "teleport") {
       var_0.origin = var_2.origin;
       var_0.angles = var_2.angles;
-      wait level.ref_13cd2;
+      wait level.ref_13CD2;
     }
   }
 }
 
-function ref_13c96() {
+function ref_13C96() {
   var_0 = spawn("script_origin", self.origin);
   var_0 endon("death");
   thread scripts\engine\utility::delete_on_death(var_0);
@@ -395,18 +395,18 @@ function ref_13c96() {
   var_0 delete();
 }
 
-function ref_13c97(var_0) {
+function ref_13C97(var_0) {
   waitframe();
 
   for(;;) {
-    if(isDefined(var_0) && isDefined(level.ref_12a13)) {
-      if(distance2dsquared(var_0.origin, level.ref_12a13.origin) < 7000000) {
-        level.ref_12a13 playSound("emt_train_rattle_fence");
+    if(isDefined(var_0) && isDefined(level.ref_12A13)) {
+      if(distance2dsquared(var_0.origin, level.ref_12A13.origin) < 7000000) {
+        level.ref_12A13 playSound("emt_train_rattle_fence");
         wait 1.5;
-        level.ref_12a14 playSound("emt_train_rattle_flatbed");
+        level.ref_12A14 playSound("emt_train_rattle_flatbed");
         wait 1.5;
-        level.ref_12a15 playSound("emt_train_rattle_fence");
-        level.ref_12a16 playSound("emt_train_rattle_flatbed");
+        level.ref_12A15 playSound("emt_train_rattle_fence");
+        level.ref_12A16 playSound("emt_train_rattle_flatbed");
         wait 30;
       } else {
         wait 1;

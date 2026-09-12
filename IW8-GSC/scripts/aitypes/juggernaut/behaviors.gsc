@@ -240,9 +240,9 @@ function juggernaut_move(var_0) {
 
   if(var_3 >= var_1.nextupdatetime) {
     var_1.targetpos = self getclosestreachablepointonnavmesh(var_1.enemy.origin);
-    var_1.ref_13a80 = !self iswithinscriptgoalRadius(var_1.targetpos);
+    var_1.ref_13A80 = !self iswithinscriptgoalRadius(var_1.targetpos);
 
-    if(var_1.ref_13a80) {
+    if(var_1.ref_13A80) {
       var_1.targetpos = self getplayerip(var_1.targetpos);
       var_1.targetpos = self getclosestreachablepointonnavmesh(var_1.targetpos);
     }
@@ -283,13 +283,13 @@ function juggernaut_move(var_0) {
     var_1.canseeenemytime = undefined;
   }
 
-  if(var_1.ref_13a80 && var_8) {
+  if(var_1.ref_13A80 && var_8) {
     self setbtgoalRadius(0, max(min(self.vehicle_occupancy_errormessage, self.goalradius / 2), 25));
   } else {
     self setbtgoalRadius(0, self.juggernautgoalradius);
   }
 
-  if(var_1.ref_13a80) {
+  if(var_1.ref_13A80) {
     var_8 = 0;
     var_1.canseeenemytime = undefined;
   }
@@ -453,7 +453,7 @@ function vehicle_occupancy_cp_giveriotshield(var_0) {
     return anim.failure;
   }
 
-  if(isDefined(self.ref_13b80) && gettime() - self.ref_13b80 < var_1) {
+  if(isDefined(self.ref_13B80) && gettime() - self.ref_13B80 < var_1) {
     return anim.failure;
   }
 
@@ -471,7 +471,7 @@ function vehicle_occupancy_cp_giveriotshield(var_0) {
 }
 
 function vehicle_occupancy_clearseatcorpse(var_0) {
-  self.ref_13b80 = gettime();
+  self.ref_13B80 = gettime();
   var_1 = self.origin - self.enemy.origin;
   var_2 = vectortoyaw(var_1);
   var_3 = angleclamp180(var_2 - self.enemy.angles[1]);

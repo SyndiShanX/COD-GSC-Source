@@ -59,7 +59,7 @@ function watch_dpad() {
   self notifyonplayercommand("pullout_sentry", "+actionslot 1");
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143ad("pullout_sentry", "pullout_ammocrate");
+    var_0 = scripts\engine\utility::ref_143AD("pullout_sentry", "pullout_ammocrate");
 
     if(!isDefined(var_0)) {
       continue;
@@ -151,7 +151,7 @@ function setcarryingsentry(var_0, var_1) {
   self notifyonplayercommand("cancel_sentry", "+actionslot 7");
 
   for(;;) {
-    var_2 = scripts\engine\utility::ref_143b1("place_sentry", "cancel_sentry_left", "cancel_sentry_right", "cancel_sentry_down", "force_cancel_placement", "cancel_sentry");
+    var_2 = scripts\engine\utility::ref_143B1("place_sentry", "cancel_sentry_left", "cancel_sentry_right", "cancel_sentry_down", "force_cancel_placement", "cancel_sentry");
 
     if(!isDefined(var_0)) {
       scripts\common\utility::allow_weapon(1);

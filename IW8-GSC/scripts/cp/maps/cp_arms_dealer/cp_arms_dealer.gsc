@@ -64,8 +64,8 @@ function main() {
 
   level thread scripts\cp\cp_objectives::objectives_init();
   level thread scripts\cp\maps\cp_payload\cp_objs_payload::registerpayloadvfx();
-  level thread scripts\cp\cp_relics::ref_12b99();
-  level thread scripts\cp\maps\cp_armsrace\armsrace_objective\cp_armsrace_objective::ref_12b0e();
+  level thread scripts\cp\cp_relics::ref_12B99();
+  level thread scripts\cp\maps\cp_armsrace\armsrace_objective\cp_armsrace_objective::ref_12B0E();
   level thread scripts\cp\maps\cp_donetsk\cp_donetsk_intel::init_intel_pieces();
   scripts\common\vehicle::init_vehicles();
   scripts\cp\vehicle::init_vehicles();
@@ -73,7 +73,7 @@ function main() {
   init_global_systems();
   thread spawn_technicals_for_players();
   visionsetnaked("mp_donetsk");
-  scripts\cp\maps\cp_arms_dealer\cp_arms_dealer_checkpoints::ref_131ed();
+  scripts\cp\maps\cp_arms_dealer\cp_arms_dealer_checkpoints::ref_131ED();
   scripts\mp\brclientmatchdata::getquestrewardgroupindex();
   scripts\mp\brclientmatchdata::getpresettruckspawns("apce_p1", &scripts\cp\maps\cp_arms_dealer\cp_arms_dealer_checkpoints::c4_obj_and_progress);
   scripts\mp\brclientmatchdata::getpresettruckspawns("arms_race_p1", &scripts\cp\maps\cp_arms_dealer\cp_arms_dealer_checkpoints::camera_loadout_showcase_preview_large_sticker_alt2);
@@ -82,7 +82,7 @@ function main() {
   if(isDefined(var_0) && var_0 != "") {
     scripts\mp\brclientmatchdata::getnextprop(var_0);
     scripts\mp\brclientmatchdata::getnextrpgspawnmodule(var_0);
-    level thread[[level.ref_12b19[var_0]]]();
+    level thread[[level.ref_12B19[var_0]]]();
   } else {
     var_1 = getDvar("cp_arms_dealer_start_obj", "safehouse_armsdealer_mnu");
 
@@ -100,7 +100,7 @@ function main() {
   thread increase_hp_from_relic_mythic();
   scripts\engine\utility::flag_set("infil_complete");
   thread ref_13528();
-  thread ref_11e0a();
+  thread ref_11E0A();
 }
 
 function init_global_systems() {
@@ -146,10 +146,10 @@ function spawn_technicals_for_players() {
   scripts\cp_mp\vehicles\technical::technical_create(var_0);
 }
 
-function ref_11e0a() {
+function ref_11E0A() {
   wait 10;
   var_0 = (-18200, 1423, -100);
-  level scripts\cp\cp_munitions::ref_12be1(var_0, 50);
+  level scripts\cp\cp_munitions::ref_12BE1(var_0, 50);
 }
 
 function heli_crash_path_loc_setup() {

@@ -105,7 +105,7 @@ function watchplayerkillstreakemp(var_0) {
 }
 
 function watchplayerkillstreakend(var_0) {
-  scripts\engine\utility::ref_143a5(var_0, "level_game_ended");
+  scripts\engine\utility::ref_143A5(var_0, "level_game_ended");
   stopcontrol();
 }
 

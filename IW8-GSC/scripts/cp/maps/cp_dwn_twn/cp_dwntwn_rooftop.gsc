@@ -12,7 +12,7 @@ function register_objectives() {
   scripts\cp\cp_objectives::registerobjective("rooftop_raid_heli", &add_module_ai_spawn_func_to_module, &angle_molotov_mortar, &add_module_ai_spawn_func_to_module, &add_module_ai_spawn_func_to_module, &adjustlootleadermarkcount);
   scripts\cp\cp_objectives::registerobjective("rooftop_raid_activatesats", &add_module_ai_spawn_func_to_module, &anglesoffset, &add_module_ai_spawn_func_to_module, &add_module_ai_spawn_func_to_module, &adjusteventdistributionpadding);
   scripts\cp\cp_objectives::registerobjective("rooftop_raid_exfil", &add_module_ai_spawn_func_to_module, &anchoredwidgetid, &add_module_ai_spawn_func_to_module, &add_module_ai_spawn_func_to_module, &adjustmatchtimerpausedstatefromleadchange);
-  level.ref_1404b = 1;
+  level.ref_1404B = 1;
 }
 
 function add_module_ai_spawn_func_to_module(var_0, var_1) {}
@@ -33,7 +33,7 @@ function adjusteventdistributionpadding(var_0) {
   setup_flags();
   level.sats_connected = 0;
   setDvar("scr_sat_debug", 1);
-  ref_12e95();
+  ref_12E95();
   trigger_spawn_init();
   register_spawn_groups();
   thread playtutsound();
@@ -77,7 +77,7 @@ function anglesoffset(var_0) {
   var_1 = (level.rooftop1_sat.ref_13393 + level.rooftop2_sat.ref_13393 + level.rooftop3_sat.ref_13393) / 3;
   var_1 = int(max(1, var_1));
   setomnvar("ui_signal_strength_total", var_1);
-  ref_12ea3();
+  ref_12EA3();
 
   foreach(var_3 in level.players) {
     var_3 sethudtutorialmessage(&"CP_DWN_TWN_OBJECTIVES/ROOFTOP_TRANS_COMPLETE");
@@ -93,7 +93,7 @@ function anglesoffset(var_0) {
 function angle_molotov_mortar(var_0) {
   scripts\cp\cp_create_script_utility::thermometerwatch("cp_dwntwn_rooftop_script");
   level.teamnamelist = ["axis", "allies"];
-  level.get_mortar_impact_pos = &ref_11d2d;
+  level.get_mortar_impact_pos = &ref_11D2D;
   level.sixthsenselastvotime = &sixthsense_shouldwarnaboutotherplayer;
   var_1 = scripts\engine\utility::getStruct("rooftop_raid_player_heli", "targetname");
   level.player_lb = scripts\cp_mp\vehicles\little_bird::little_bird_create(var_1);
@@ -106,19 +106,19 @@ function angle_molotov_mortar(var_0) {
 
 function analytics_lui_mission_end_dlog(var_0) {
   scripts\cp\cp_create_script_utility::thermometerwatch("cp_dwntwn_rooftop_script");
-  level.ref_12d8b = 1;
+  level.ref_12D8B = 1;
   level.dogtag_revive = 0;
   setDvar("scr_sat_debug", 0);
-  scripts\cp\cp_spawning_util::ref_13bbd(1);
+  scripts\cp\cp_spawning_util::ref_13BBD(1);
   thread playtutsound();
   setup_flags();
   trigger_spawn_init();
   register_spawn_groups();
-  thread ref_11d2f();
+  thread ref_11D2F();
   level.rooftop1_sat = sat_setup(1);
   level.rooftop2_sat = sat_setup(2);
   level.rooftop3_sat = sat_setup(3);
-  ref_12e95();
+  ref_12E95();
   thread wait_for_any_sat_death(level);
   level.sats_connected = 0;
   scripts\cp\utility::objective_update("rooftop_raid_heli", undefined, undefined, undefined, undefined, level.sats_connected);
@@ -137,29 +137,29 @@ function sat_setup(var_0) {
   var_1.ref_13394 = 0;
   var_1.computer = getEnt("rooftop_" + var_0 + "_sat_com", "targetname");
   var_1.computer setModel("military_hq_crate_01_proxy_cp_noantenna");
-  var_1.computer.ref_12a45 = scripts\engine\utility::getclosest(var_1.computer.origin, getEntArray("reader", "targetname"));
+  var_1.computer.ref_12A45 = scripts\engine\utility::getclosest(var_1.computer.origin, getEntArray("reader", "targetname"));
 
   switch (var_0) {
     case 1:
-      var_1.computer.ref_12a45.ref_1281e = "military_keycard_reader_green";
-      init_freight_lift("green", var_1.computer.ref_12a45);
-      var_1.computer.ref_12a45.onsoccerballreset.get_total_successful_vehicle_spawns_from_module = "green_keycard_carry";
+      var_1.computer.ref_12A45.ref_1281E = "military_keycard_reader_green";
+      init_freight_lift("green", var_1.computer.ref_12A45);
+      var_1.computer.ref_12A45.onsoccerballreset.get_total_successful_vehicle_spawns_from_module = "green_keycard_carry";
       break;
     case 2:
-      var_1.computer.ref_12a45.ref_1281e = "military_keycard_reader_red";
-      init_freight_lift("red", var_1.computer.ref_12a45);
-      var_1.computer.ref_12a45.onsoccerballreset.get_total_successful_vehicle_spawns_from_module = "red_keycard_carry";
+      var_1.computer.ref_12A45.ref_1281E = "military_keycard_reader_red";
+      init_freight_lift("red", var_1.computer.ref_12A45);
+      var_1.computer.ref_12A45.onsoccerballreset.get_total_successful_vehicle_spawns_from_module = "red_keycard_carry";
       break;
     case 3:
-      var_1.computer.ref_12a45.ref_1281e = "military_keycard_reader_blue";
-      init_freight_lift("blue", var_1.computer.ref_12a45);
-      var_1.computer.ref_12a45.onsoccerballreset.get_total_successful_vehicle_spawns_from_module = "blue_keycard_carry";
+      var_1.computer.ref_12A45.ref_1281E = "military_keycard_reader_blue";
+      init_freight_lift("blue", var_1.computer.ref_12A45);
+      var_1.computer.ref_12A45.onsoccerballreset.get_total_successful_vehicle_spawns_from_module = "blue_keycard_carry";
       break;
   }
 
-  var_1.radar = ref_12e8b("satellite_piece_" + var_0, "military_deployable_satellite_radar_rig_skeleton");
-  var_1.radio = ref_12e8b("satellite_piece_" + var_0, "military_deployable_satellite_radio_rig_skeleton");
-  var_1.buy_point_loop = ref_12e8b("satellite_piece_" + var_0, "military_deployable_satellite_antenna_rig_skeleton");
+  var_1.radar = ref_12E8B("satellite_piece_" + var_0, "military_deployable_satellite_radar_rig_skeleton");
+  var_1.radio = ref_12E8B("satellite_piece_" + var_0, "military_deployable_satellite_radio_rig_skeleton");
+  var_1.buy_point_loop = ref_12E8B("satellite_piece_" + var_0, "military_deployable_satellite_antenna_rig_skeleton");
   var_1.buy_point_loop.get_total_successful_vehicle_spawns_from_module = "satellite_radar_carry";
   var_1.radio.get_total_successful_vehicle_spawns_from_module = "satellite_controller_carry";
   var_1.radar.get_total_successful_vehicle_spawns_from_module = "satellite_antenna_carry";
@@ -169,7 +169,7 @@ function sat_setup(var_0) {
   scripts\cp\maps\cp_donetsk\milbase\ai_flare::initialize_alarm_box(var_1.power_switch, 0);
   thread sat_damage_monitor(var_1);
   sat_computer_init(var_1, var_0);
-  thread ref_12e96(var_1, var_0);
+  thread ref_12E96(var_1, var_0);
   return var_1;
 }
 
@@ -177,7 +177,7 @@ function init_freight_lift(var_0, var_1) {
   var_1.get_destinations_in_current_circle = var_1.origin + (0, 0, 9.5) + anglestoleft(var_1.angles) * 1.5;
   var_1.get_destination_in_current_circle = var_1.angles + (90, 0, 90);
   var_1.onsoccerballreset = previous_bullet_weapon(var_1);
-  var_2 = ref_12ff8(var_1.onsoccerballreset);
+  var_2 = ref_12FF8(var_1.onsoccerballreset);
 
   if(isDefined(var_2)) {
     var_1.onsoccerballreset.origin = var_2.origin;
@@ -241,7 +241,7 @@ function bomb_plant_think() {
       continue;
     }
 
-    if(!isDefined(self.ref_11e6e) || gettime() > self.ref_11e6e) {
+    if(!isDefined(self.ref_11E6E) || gettime() > self.ref_11E6E) {
       level.cpoperationcratecapturecallback = 0;
       scripts\cp\maps\cp_donetsk\milbase\ai_flare::attract_agent_to_bomb_plant(self.bombplantent);
     }
@@ -255,7 +255,7 @@ function bomb_plant_think() {
       }
 
       footprint_mask_clipheight();
-      self.ref_11e6e = gettime() + randomintrange(30000, 45000);
+      self.ref_11E6E = gettime() + randomintrange(30000, 45000);
     }
 
     level.cpoperationcratecapturecallback = 1;
@@ -429,7 +429,7 @@ function register_spawn_groups() {
   scripts\cp\cp_modular_spawning::registerambientgroup("ai_heli_reinforce", 4, 4, 4, 0.1, undefined, "ai_heli_reinforce", undefined, undefined, 15);
   scripts\cp\cp_modular_spawning::registerambientgroup("ai_heli_reinforce_2", 4, 4, 4, 0.1, undefined, "ai_heli_reinforce_2", undefined, undefined, 15);
   var_0 = getEnt("ai_rooftop_trig", "targetname");
-  thread ref_12b4b(var_0, ["paratrooper_snipers", "ai_heli_reinforce", "ai_heli_reinforce_2", "ascender_rpg"]);
+  thread ref_12B4B(var_0, ["paratrooper_snipers", "ai_heli_reinforce", "ai_heli_reinforce_2", "ascender_rpg"]);
 }
 
 function wave_reinforce(var_0, var_1, var_2, var_3) {
@@ -478,7 +478,7 @@ function wave_reinforce(var_0, var_1, var_2, var_3) {
   return 4;
 }
 
-function ref_11d2d(var_0) {
+function ref_11D2D(var_0) {
   if(!isDefined(var_0.targets)) {
     return undefined;
   }
@@ -489,14 +489,14 @@ function ref_11d2d(var_0) {
   return var_3["position"];
 }
 
-function ref_11d2f() {
-  ref_11d2e("rooftop_1_mortar", 1);
-  ref_11d2e("rooftop_2_mortar", 2);
-  ref_11d2e("rooftop_3_mortar", 3);
+function ref_11D2F() {
+  ref_11D2E("rooftop_1_mortar", 1);
+  ref_11D2E("rooftop_2_mortar", 2);
+  ref_11D2E("rooftop_3_mortar", 3);
   var_0 = scripts\cp\cp_modular_spawning::run_spawn_module("mortar_ai_reinforce");
 }
 
-function ref_11d2e(var_0, var_1) {
+function ref_11D2E(var_0, var_1) {
   var_2 = getEnt(var_0, "targetname");
   var_2 hidepart("j_mortar_shell", "misc_wm_mortar");
   thread mortar_think(var_2);
@@ -537,11 +537,11 @@ function get_players_on_rooftop(var_0) {
   return var_2;
 }
 
-function ref_12e95() {
-  scripts\engine\utility::array_thread(getEntArray("usb_drive", "targetname"), &ref_12e94);
+function ref_12E95() {
+  scripts\engine\utility::array_thread(getEntArray("usb_drive", "targetname"), &ref_12E94);
 }
 
-function ref_12e94() {
+function ref_12E94() {
   self setHintString(&"CP_DWN_TWN_OBJECTIVES/RED_KEYCARD");
   self setCursorHint("HINT_BUTTON");
   self sethintdisplayrange(128);
@@ -561,7 +561,7 @@ function ref_12e94() {
 
     if(isDefined(var_0.armorweapon)) {
       if(getdvarint("allow_card_swap") > 0) {
-        ref_139c0(var_0, self);
+        ref_139C0(var_0, self);
       } else {
         var_0 scripts\cp\utility::setlowermessage("alreadyhave", &"CP_DWN_TWN_OBJECTIVES/ALREADY_HAVE_USB", 5);
         var_0 playlocalsound("cp_pickup_deny");
@@ -572,19 +572,19 @@ function ref_12e94() {
     var_0 playlocalsound("cp_generic_placement");
     self.get_track_location_index = scripts\cp\utility::ref_13070(var_0, self.get_total_successful_vehicle_spawns_from_module);
     var_0.armorweapon = self;
-    thread ref_12c37();
+    thread ref_12C37();
     self makeunusable();
     self hide();
     return;
   }
 }
 
-function ref_139c0(var_0) {
+function ref_139C0(var_0) {
   var_1 = self.armorweapon;
   var_2 = var_1.get_track_location_index;
 
   if(isDefined(self)) {
-    scripts\cp\utility::ref_12bc6(self, var_2.slot);
+    scripts\cp\utility::ref_12BC6(self, var_2.slot);
   }
 
   var_0 hide();
@@ -592,34 +592,34 @@ function ref_139c0(var_0) {
   var_1.angles = var_0.angles;
   var_1.get_track_location_index = undefined;
   var_1 show();
-  var_1 scripts\engine\utility::delaythread(1, &ref_12e94);
+  var_1 scripts\engine\utility::delaythread(1, &ref_12E94);
 }
 
-function ref_12c37() {
+function ref_12C37() {
   self endon("placed_card");
   var_0 = self.armorweapon;
   var_1 = var_0.get_track_location_index;
-  scripts\engine\utility::ref_143a5("death", "disconnect");
+  scripts\engine\utility::ref_143A5("death", "disconnect");
 
   if(isDefined(self)) {
-    scripts\cp\utility::ref_12bc6(self, var_1.slot);
+    scripts\cp\utility::ref_12BC6(self, var_1.slot);
   }
 
   var_0 show();
-  thread ref_12e94();
+  thread ref_12E94();
 }
 
-function ref_12c38(var_0, var_1, var_2, var_3) {
+function ref_12C38(var_0, var_1, var_2, var_3) {
   self endon("placed_sat_piece");
-  var_4 = self.ref_12e91;
+  var_4 = self.ref_12E91;
   var_5 = var_4.get_track_location_index;
-  scripts\engine\utility::ref_143a5("death", "disconnect");
+  scripts\engine\utility::ref_143A5("death", "disconnect");
 
   if(isDefined(self)) {
-    scripts\cp\utility::ref_12bc6(self, var_5.slot);
+    scripts\cp\utility::ref_12BC6(self, var_5.slot);
   }
 
-  thread ref_12e92(var_0, var_1, var_2, var_3);
+  thread ref_12E92(var_0, var_1, var_2, var_3);
   var_4 show();
 }
 
@@ -658,7 +658,7 @@ function trigger_spawn() {
   var_1 = self.target;
   var_2 = scripts\cp\cp_modular_spawning::run_spawn_module(var_1);
   wait 60;
-  ref_12b4b(["r" + self.rooftopid + "_ascender_reinforcements", "r" + self.rooftopid + "_ascender_reinforcements_2", "r" + self.rooftopid + "_paratrooper_reinforcements", "r" + self.rooftopid + "_paratrooper_reinforcements_2", "r" + self.rooftopid + "_paratrooper_reinforcements_3", "r" + self.rooftopid + "_heli_reinforce", "r" + self.rooftopid + "_heli_reinforce_2"], 1, 1);
+  ref_12B4B(["r" + self.rooftopid + "_ascender_reinforcements", "r" + self.rooftopid + "_ascender_reinforcements_2", "r" + self.rooftopid + "_paratrooper_reinforcements", "r" + self.rooftopid + "_paratrooper_reinforcements_2", "r" + self.rooftopid + "_paratrooper_reinforcements_3", "r" + self.rooftopid + "_heli_reinforce", "r" + self.rooftopid + "_heli_reinforce_2"], 1, 1);
 }
 
 function kill_rate_too_slow() {
@@ -666,7 +666,7 @@ function kill_rate_too_slow() {
   self makeusable();
 }
 
-function ref_12e8c(var_0) {
+function ref_12E8C(var_0) {
   var_1 = int(100 - anglesdelta((0, var_0.buy_point_loop.angles[1], 0), (0, var_0.ref_13394, 0)));
 
   if(var_1 > 100) {
@@ -680,22 +680,22 @@ function ref_12e8c(var_0) {
   return var_1;
 }
 
-function ref_12ea3() {
+function ref_12EA3() {
   level endon("game_ended");
   level.hack_duration = 120;
-  thread ref_12e98();
-  thread ref_12ea4();
+  thread ref_12E98();
+  thread ref_12EA4();
   var_0 = 0;
 
   while(var_0 < level.hack_duration) {
-    var_1 = ref_12e8c(level.rooftop1_sat);
-    var_2 = ref_12e8c(level.rooftop2_sat);
-    var_3 = ref_12e8c(level.rooftop3_sat);
+    var_1 = ref_12E8C(level.rooftop1_sat);
+    var_2 = ref_12E8C(level.rooftop2_sat);
+    var_3 = ref_12E8C(level.rooftop3_sat);
     var_4 = (var_1 + var_2 + var_3) / 3;
     var_4 = int(max(1, var_4));
 
     if(var_4 < 80) {
-      thread ref_12e97();
+      thread ref_12E97();
       level.hacking_paused = 1;
     } else {
       if(!scripts\engine\utility::flag("transmission_started")) {
@@ -718,15 +718,15 @@ function ref_12ea3() {
   scripts\engine\utility::flag_set("transmission_complete");
 }
 
-function ref_12ea4() {
+function ref_12EA4() {
   scripts\engine\utility::flag_wait("transmission_started");
   level scripts\cp\cp_hacking::hacking_init();
   level thread scripts\cp\cp_hacking::hacking_objective_time();
-  thread ref_12e8d();
+  thread ref_12E8D();
   scripts\cp\utility::objective_update("rooftop_raid_activatesats_start");
 }
 
-function ref_12e97() {
+function ref_12E97() {
   level endon("game_ended");
 
   if(!scripts\engine\utility::flag("transmission_started")) {
@@ -765,19 +765,19 @@ function ref_12e97() {
   level.ref_13392 = 0;
 }
 
-function ref_12e87(var_0, var_1, var_2, var_3) {
+function ref_12E87(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   var_0 endon("disconnect");
   var_0 forceusehinton(&"CP_DWN_TWN_OBJECTIVES/HINT_ADJUST_SAT");
   var_0 playerlinkTo(self);
   var_0 playerlinkedoffsetenable();
 
-  while(!istrue(var_0.ref_140ae)) {
+  while(!istrue(var_0.ref_140AE)) {
     wait 0.05;
   }
 
   for(;;) {
-    if(!istrue(var_0.ref_140ae) || istrue(var_0.inlaststand)) {
+    if(!istrue(var_0.ref_140AE) || istrue(var_0.inlaststand)) {
       var_0 forceusehintoff();
       var_0 unlink();
       var_0 notify("stop_adjusting");
@@ -792,13 +792,13 @@ function ref_12e87(var_0, var_1, var_2, var_3) {
       var_1.buy_point_loop rotateYaw(-1.25, 0.05);
 
       if(!isDefined(var_1.ref_12746)) {
-        thread ref_12e99();
+        thread ref_12E99();
       }
     } else if(var_0 secondaryoffhandbuttonPressed()) {
       var_1.buy_point_loop rotateYaw(1.25, 0.05);
 
       if(!isDefined(var_1.ref_12746)) {
-        thread ref_12e99();
+        thread ref_12E99();
       }
     } else if(isDefined(var_1.ref_12746)) {
       var_1 notify("stop_sounds");
@@ -810,13 +810,13 @@ function ref_12e87(var_0, var_1, var_2, var_3) {
     }
 
     wait 0.05;
-    var_1.ref_13393 = ref_12e8c(var_1);
+    var_1.ref_13393 = ref_12E8C(var_1);
     setomnvar(var_3, var_1.ref_13393);
     LOC_00000174:
   }
 }
 
-function ref_12e99() {
+function ref_12E99() {
   self endon("stop_sounds");
   self.ref_12746 = 1;
   self.buy_point_loop stopsounds();
@@ -826,13 +826,13 @@ function ref_12e99() {
   self.buy_point_loop playLoopSound("scn_cp_satellite_in_use_lp");
 }
 
-function ref_12e8e(var_0) {
+function ref_12E8E(var_0) {
   var_0 endon("stop_adjusting");
   var_0 waittill("disconnect");
   thread kill_rate_too_slow();
 }
 
-function ref_12e98() {
+function ref_12E98() {
   level endon("game_ended");
   level endon("transfer_complete");
 
@@ -858,7 +858,7 @@ function ref_12e98() {
     if(var_2 == var_5) {
       var_6 = scripts\engine\utility::random(var_0);
       var_6.ref_13394 = scripts\engine\utility::random(var_1);
-      var_6.ref_13393 = ref_12e8c(var_6);
+      var_6.ref_13393 = ref_12E8C(var_6);
       setomnvar(var_6.ref_13395, var_6.ref_13393);
       var_4++;
 
@@ -869,7 +869,7 @@ function ref_12e98() {
   }
 }
 
-function ref_12e8d() {
+function ref_12E8D() {
   level endon("game_ended");
   level endon("transfer_complete");
 
@@ -934,7 +934,7 @@ function plundercountdownplayers() {
   var_7 = 5;
   var_8 = [];
   var_9 = var_5 - (0, 0, 800);
-  thread ref_13eb3(level, var_9, var_6, 800);
+  thread ref_13EB3(level, var_9, var_6, 800);
   var_10 = 0;
   var_11 = (var_6, 0, 0);
 
@@ -950,7 +950,7 @@ function plundercountdownplayers() {
   }
 }
 
-function ref_13eb3(var_0, var_1, var_2, var_3) {
+function ref_13EB3(var_0, var_1, var_2, var_3) {
   var_4 = var_0 - (0, 0, 1000);
   var_5 = spawn("trigger_radius", var_4, 0, 7000, 1000);
 
@@ -1117,29 +1117,29 @@ function sat_computer_init(var_0, var_1) {
     var_0.computer.has_dongle = 1;
   }
 
-  var_0.computer.ref_11e3b = 1;
-  thread ref_12e89(var_0.computer, var_1);
+  var_0.computer.ref_11E3B = 1;
+  thread ref_12E89(var_0.computer, var_1);
 }
 
-function ref_12e89(var_0, var_1) {
+function ref_12E89(var_0, var_1) {
   var_1.ref_13395 = "ui_signal_strength" + var_0;
 
   if(istrue(self.has_antennae)) {
-    if(istrue(self.ref_11e3b)) {
-      ref_12ea0(var_1);
+    if(istrue(self.ref_11E3B)) {
+      ref_12EA0(var_1);
     } else {
-      var_1.computer.ref_12a45 setModel(var_1.computer.ref_12a45.ref_1281e);
+      var_1.computer.ref_12A45 setModel(var_1.computer.ref_12A45.ref_1281E);
     }
 
     if(!istrue(self.has_dongle)) {
-      ref_12e9a(var_1, var_0);
+      ref_12E9A(var_1, var_0);
     } else {
       self setscriptablepartstate("main", "on_noidle");
       scripts\engine\utility::flag_set(self.flagname);
       level.sats_connected++;
 
       if(!istrue(var_1.activated) && (!istrue(var_1.radio.connected) || !istrue(var_1.buy_point_loop.connected) || !istrue(var_1.radar.connected))) {
-        thread ref_12e9b();
+        thread ref_12E9B();
       } else {
         var_1.computer setHintString(&"CP_DWN_TWN_OBJECTIVES/SAT_WAITING");
       }
@@ -1156,24 +1156,24 @@ function ref_12e89(var_0, var_1) {
   var_1.computer setHintString(&"CP_DWN_TWN_OBJECTIVES/SAT_WAITING");
   wait 6;
   self makeusable();
-  var_1.ref_13393 = ref_12e8c(var_1);
+  var_1.ref_13393 = ref_12E8C(var_1);
   setomnvar("ui_signal_strength" + var_0, var_1.ref_13393);
   var_1.computer setHintString(&"CP_DWN_TWN_OBJECTIVES/SAT_WAITING");
-  thread ref_12e9d();
+  thread ref_12E9D();
   sat_wait_for_all_connected();
   var_1.computer setHintString(&"CP_DWN_TWN_OBJECTIVES/ADJUST_DISH");
 
   for(;;) {
     self waittill("trigger", var_2);
     self makeunusable();
-    thread ref_12e87(var_2, var_1, undefined, "ui_signal_strength" + var_0);
-    thread ref_12e8e(var_2);
+    thread ref_12E87(var_2, var_1, undefined, "ui_signal_strength" + var_0);
+    thread ref_12E8E(var_2);
     scripts\cp\cp_computerscreen::hit_by_emp_monitor(var_2);
     LOC_000001cd:
   }
 }
 
-function ref_12e8b(var_0, var_1) {
+function ref_12E8B(var_0, var_1) {
   var_2 = getEntArray(var_0, "targetname");
 
   foreach(var_4 in var_2) {
@@ -1183,16 +1183,16 @@ function ref_12e8b(var_0, var_1) {
   }
 }
 
-function ref_12ea0(var_0) {
+function ref_12EA0(var_0) {
   update_computer_hint(self, &"CP_DWN_TWN_OBJECTIVES/REQUIRES_POWER", "screen_joint");
-  thread ref_12ea1(var_0.power_switch.alarm_box);
+  thread ref_12EA1(var_0.power_switch.alarm_box);
   var_0.power_switch.alarm_box scripts\engine\utility::ent_flag_wait("switch_on");
   var_0.power_switch.alarm_box makeunusable();
   var_0.powered_on = 1;
-  var_0.computer.ref_12a45 setModel(var_0.computer.ref_12a45.ref_1281e);
+  var_0.computer.ref_12A45 setModel(var_0.computer.ref_12A45.ref_1281E);
 }
 
-function ref_12ea1(var_0) {
+function ref_12EA1(var_0) {
   self endon("switch_on");
 
   for(;;) {
@@ -1204,7 +1204,7 @@ function ref_12ea1(var_0) {
   }
 }
 
-function ref_12e9b() {
+function ref_12E9B() {
   self endon("sat_activated");
   update_computer_hint(self, &"CP_DWN_TWN_OBJECTIVES/SAT_LINK_FAILED", "screen_joint");
 
@@ -1217,7 +1217,7 @@ function ref_12e9b() {
   }
 }
 
-function ref_12e9d() {
+function ref_12E9D() {
   level endon("sats_connected");
 
   for(;;) {
@@ -1229,46 +1229,46 @@ function ref_12e9d() {
   }
 }
 
-function ref_12e9a(var_0, var_1) {
+function ref_12E9A(var_0, var_1) {
   self makeunusable();
-  var_0.computer.ref_12a45 setHintString(&"CP_DWN_TWN_OBJECTIVES/MISSING_DONGLE");
-  var_0.computer.ref_12a45 setCursorHint("HINT_BUTTON");
-  var_0.computer.ref_12a45 sethintdisplayrange(96);
-  var_0.computer.ref_12a45 sethintdisplayfov(65);
-  var_0.computer.ref_12a45 setuserange(96);
-  var_0.computer.ref_12a45 setusefov(65);
-  var_0.computer.ref_12a45 sethintonobstruction("show");
-  var_0.computer.ref_12a45 setuseholdduration("duration_short");
-  var_0.computer.ref_12a45 makeusable();
-  var_0.computer.ref_12a45 setusepriority(-10);
+  var_0.computer.ref_12A45 setHintString(&"CP_DWN_TWN_OBJECTIVES/MISSING_DONGLE");
+  var_0.computer.ref_12A45 setCursorHint("HINT_BUTTON");
+  var_0.computer.ref_12A45 sethintdisplayrange(96);
+  var_0.computer.ref_12A45 sethintdisplayfov(65);
+  var_0.computer.ref_12A45 setuserange(96);
+  var_0.computer.ref_12A45 setusefov(65);
+  var_0.computer.ref_12A45 sethintonobstruction("show");
+  var_0.computer.ref_12A45 setuseholdduration("duration_short");
+  var_0.computer.ref_12A45 makeusable();
+  var_0.computer.ref_12A45 setusepriority(-10);
 
   for(;;) {
-    var_0.computer.ref_12a45 waittill("trigger", var_2);
+    var_0.computer.ref_12A45 waittill("trigger", var_2);
 
     if(!var_2 scripts\cp\utility::is_valid_player()) {
       continue;
     }
 
-    var_0.computer.ref_12a45 makeunusable();
+    var_0.computer.ref_12A45 makeunusable();
 
     if(!isDefined(var_2.armorweapon) && !istrue(getdvarint("scr_sat_haveall") > 0)) {
       var_2 scripts\cp\utility::setlowermessage("missing", &"CP_DWN_TWN_OBJECTIVES/NO_ITEM", 5);
       var_2 playlocalsound("cp_pickup_deny");
       wait 1;
-      var_0.computer.ref_12a45 makeusable();
+      var_0.computer.ref_12A45 makeusable();
       continue;
     }
 
-    if(!istrue(getdvarint("scr_sat_haveall") > 0) && var_2.armorweapon != var_0.computer.ref_12a45.onsoccerballreset) {
+    if(!istrue(getdvarint("scr_sat_haveall") > 0) && var_2.armorweapon != var_0.computer.ref_12A45.onsoccerballreset) {
       var_2 scripts\cp\utility::setlowermessage("missing", &"CP_DWN_TWN_OBJECTIVES/WRONG_DONGLE", 5);
       var_2 playlocalsound("cp_pickup_deny");
       wait 1;
-      var_0.computer.ref_12a45 makeusable();
+      var_0.computer.ref_12A45 makeusable();
       continue;
     }
 
     if(istrue(getdvarint("scr_sat_haveall") > 0)) {
-      var_2.armorweapon = var_0.computer.ref_12a45.onsoccerballreset;
+      var_2.armorweapon = var_0.computer.ref_12A45.onsoccerballreset;
     }
 
     var_2 scripts\cp\utility::setlowermessage("missing", &"CP_DWN_TWN_OBJECTIVES/CORRECT_DONGLE", 5);
@@ -1276,8 +1276,8 @@ function ref_12e9a(var_0, var_1) {
     var_2 playlocalsound("cp_computer_success");
     scripts\engine\utility::flag_set(self.flagname);
     level.sats_connected++;
-    var_2.armorweapon.origin = var_0.computer.ref_12a45.get_destinations_in_current_circle;
-    var_2.armorweapon.angles = var_0.computer.ref_12a45.get_destination_in_current_circle;
+    var_2.armorweapon.origin = var_0.computer.ref_12A45.get_destinations_in_current_circle;
+    var_2.armorweapon.angles = var_0.computer.ref_12A45.get_destination_in_current_circle;
     var_2.armorweapon show();
     var_2.armorweapon makeunusable();
     var_3 = var_2.armorweapon.get_track_location_index;
@@ -1288,11 +1288,11 @@ function ref_12e9a(var_0, var_1) {
     var_0.setupzombiepowers = 1;
 
     if(!istrue(getdvarint("scr_sat_haveall") > 0)) {
-      scripts\cp\utility::ref_12bc6(var_2, var_3.slot);
+      scripts\cp\utility::ref_12BC6(var_2, var_3.slot);
     }
 
     if(!istrue(var_0.activated) && (!istrue(var_0.radio.connected) || !istrue(var_0.buy_point_loop.connected) || !istrue(var_0.radar.connected))) {
-      thread ref_12e9b();
+      thread ref_12E9B();
     } else {
       var_0.computer setHintString(&"CP_DWN_TWN_OBJECTIVES/SAT_WAITING");
     }
@@ -1308,42 +1308,42 @@ function ref_12e9a(var_0, var_1) {
   }
 }
 
-function ref_12e96(var_0, var_1) {
-  var_2 = ref_12e88();
+function ref_12E96(var_0, var_1) {
+  var_2 = ref_12E88();
 
   switch (var_2) {
     case "controller":
-      var_0.ref_11e3a = 1;
-      var_0.ref_11e39 = 0;
-      var_0.ref_11e3c = 0;
+      var_0.ref_11E3A = 1;
+      var_0.ref_11E39 = 0;
+      var_0.ref_11E3C = 0;
       break;
     case "radar":
-      var_0.ref_11e3a = 0;
-      var_0.ref_11e39 = 0;
-      var_0.ref_11e3c = 1;
+      var_0.ref_11E3A = 0;
+      var_0.ref_11E39 = 0;
+      var_0.ref_11E3C = 1;
       break;
     case "antenna":
-      var_0.ref_11e3a = 0;
-      var_0.ref_11e39 = 1;
-      var_0.ref_11e3c = 0;
+      var_0.ref_11E3A = 0;
+      var_0.ref_11E39 = 1;
+      var_0.ref_11E3C = 0;
       break;
     case "debug":
-      var_0.ref_11e3a = 0;
-      var_0.ref_11e39 = 0;
-      var_0.ref_11e3c = 0;
+      var_0.ref_11E3A = 0;
+      var_0.ref_11E39 = 0;
+      var_0.ref_11E3C = 0;
       break;
   }
 
-  if(istrue(var_0.ref_11e39)) {
-    thread ref_12e9c(var_0);
-  } else if(!istrue(var_0.ref_11e39)) {
+  if(istrue(var_0.ref_11E39)) {
+    thread ref_12E9C(var_0);
+  } else if(!istrue(var_0.ref_11E39)) {
     var_0.buy_point_loop linkTo(var_0, "j_antenna_pivot", (0, 0, 0), (0, 0, 0));
     var_0.buy_point_loop show();
     var_0.buy_point_loop.connected = 1;
   }
 
-  if(istrue(var_0.ref_11e3a)) {
-    thread ref_12e9e(var_0);
+  if(istrue(var_0.ref_11E3A)) {
+    thread ref_12E9E(var_0);
   } else {
     var_0.radio.origin = var_0 gettagorigin("j_frame_pivot");
     var_0.radio.angles = var_0 gettagangles("j_frame_pivot");
@@ -1353,9 +1353,9 @@ function ref_12e96(var_0, var_1) {
     var_0.radio.connected = 1;
   }
 
-  if(istrue(var_0.ref_11e3c)) {
-    thread ref_12ea2(var_0);
-  } else if(!istrue(var_0.ref_11e39)) {
+  if(istrue(var_0.ref_11E3C)) {
+    thread ref_12EA2(var_0);
+  } else if(!istrue(var_0.ref_11E39)) {
     var_0.radar linkTo(var_0, "j_radar_rot_01", (0, 0, 0), (0, 0, 0));
     var_0.radar show();
     var_0.radar.connected = 1;
@@ -1367,11 +1367,11 @@ function ref_12e96(var_0, var_1) {
 
   wait 1;
   var_0.activated = 1;
-  ref_12e86(var_0);
-  ref_12e8f(var_0);
+  ref_12E86(var_0);
+  ref_12E8F(var_0);
 }
 
-function ref_12e92(var_0, var_1, var_2, var_3) {
+function ref_12E92(var_0, var_1, var_2, var_3) {
   self setHintString(var_0);
   self setCursorHint("HINT_BUTTON");
   self sethintdisplayrange(96);
@@ -1392,15 +1392,15 @@ function ref_12e92(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    if(isDefined(var_4.ref_12e91)) {
+    if(isDefined(var_4.ref_12E91)) {
       var_4 scripts\cp\utility::setlowermessage("haveant", &"CP_DWN_TWN_OBJECTIVES/HAVE_SAT_PIECE", 5);
       var_4 playlocalsound("cp_pickup_deny");
       continue;
     }
 
     var_4 playlocalsound("cp_generic_placement");
-    var_4.ref_12e91 = self;
-    thread ref_12c38(var_4, var_0, var_1, var_2);
+    var_4.ref_12E91 = self;
+    thread ref_12C38(var_4, var_0, var_1, var_2);
     self.get_track_location_index = scripts\cp\utility::ref_13070(var_4, self.get_total_successful_vehicle_spawns_from_module);
     break;
   }
@@ -1417,15 +1417,15 @@ function ref_12e92(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_12e9c(var_0, var_1) {
+function ref_12E9C(var_0, var_1) {
   var_0.radar linkTo(var_0.buy_point_loop, "j_radar_rot_01", (0, 0, 0), (0, 0, 0));
   var_0.radar.connected = 1;
-  thread ref_12e92(var_0.buy_point_loop, &"CP_DWN_TWN_OBJECTIVES/PICKUP_RADAR", var_0);
+  thread ref_12E92(var_0.buy_point_loop, &"CP_DWN_TWN_OBJECTIVES/PICKUP_RADAR", var_0);
   var_2 = anglestoleft(var_0.angles);
   var_2 = var_0.origin + var_2 * 35 + (0, 0, 25);
-  var_3 = ref_12e8a(var_2);
+  var_3 = ref_12E8A(var_2);
   var_3 setHintString(&"CP_DWN_TWN_OBJECTIVES/PLACE_RADAR");
-  ref_12e9f(var_3, var_0.buy_point_loop);
+  ref_12E9F(var_3, var_0.buy_point_loop);
   var_3 delete();
   var_0.buy_point_loop linkTo(var_0, "j_antenna_pivot", (0, 0, 0), (0, 0, 0));
   var_0.buy_point_loop show();
@@ -1434,13 +1434,13 @@ function ref_12e9c(var_0, var_1) {
   var_0.radar show();
 }
 
-function ref_12e9e(var_0) {
-  thread ref_12e92(var_0.radio, &"CP_DWN_TWN_OBJECTIVES/PICKUP_CONTROLLER", var_0, undefined);
+function ref_12E9E(var_0) {
+  thread ref_12E92(var_0.radio, &"CP_DWN_TWN_OBJECTIVES/PICKUP_CONTROLLER", var_0, undefined);
   var_1 = anglestoleft(var_0.angles);
   var_1 = var_0.origin + var_1 * 14 + (0, 0, 25);
-  var_2 = ref_12e8a(var_1);
+  var_2 = ref_12E8A(var_1);
   var_2 setHintString(&"CP_DWN_TWN_OBJECTIVES/PLACE_CONTROLLER");
-  ref_12e9f(var_2, var_0.radio);
+  ref_12E9F(var_2, var_0.radio);
   var_0.radio.origin = var_0 gettagorigin("j_frame_pivot");
   var_0.radio.angles = var_0 gettagangles("j_frame_pivot");
   var_0.radio linkTo(var_0);
@@ -1450,22 +1450,22 @@ function ref_12e9e(var_0) {
   var_2 delete();
 }
 
-function ref_12ea2(var_0) {
+function ref_12EA2(var_0) {
   var_0.buy_point_loop linkTo(var_0, "j_antenna_pivot", (0, 0, 0), (0, 0, 0));
   var_0.buy_point_loop.connected = 1;
-  thread ref_12e92(var_0.radar, &"CP_DWN_TWN_OBJECTIVES/PICKUP_ANT");
+  thread ref_12E92(var_0.radar, &"CP_DWN_TWN_OBJECTIVES/PICKUP_ANT");
   var_1 = anglestoleft(var_0.angles);
   var_1 = var_0.origin + var_1 * 45 + (0, 0, 15);
-  var_2 = ref_12e8a(var_1);
+  var_2 = ref_12E8A(var_1);
   var_2 setHintString(&"CP_DWN_TWN_OBJECTIVES/MISSING_ANT");
-  ref_12e9f(var_2, var_0.radar);
+  ref_12E9F(var_2, var_0.radar);
   var_2 delete();
   var_0.radar linkTo(var_0, "j_radar_rot_01", (0, 0, 0), (0, 0, 0));
   var_0.radar show();
   var_0.radar.connected = 1;
 }
 
-function ref_12e9f(var_0, var_1) {
+function ref_12E9F(var_0, var_1) {
   for(;;) {
     var_0 waittill("trigger", var_2);
 
@@ -1473,17 +1473,17 @@ function ref_12e9f(var_0, var_1) {
       continue;
     }
 
-    if(isDefined(var_2.ref_12e91) && var_2.ref_12e91 == var_1 || istrue(getdvarint("scr_sat_haveall") > 0)) {
+    if(isDefined(var_2.ref_12E91) && var_2.ref_12E91 == var_1 || istrue(getdvarint("scr_sat_haveall") > 0)) {
       var_2 playlocalsound("cp_generic_placement");
       var_2 notify("placed_sat_piece");
 
       if(!istrue(getdvarint("scr_sat_haveall") > 0)) {
-        scripts\cp\utility::ref_12bc6(var_2, var_2.ref_12e91.get_track_location_index.slot);
+        scripts\cp\utility::ref_12BC6(var_2, var_2.ref_12E91.get_track_location_index.slot);
       } else {
         var_1 makeunusable();
       }
 
-      var_2.ref_12e91 = undefined;
+      var_2.ref_12E91 = undefined;
       break;
     }
 
@@ -1492,7 +1492,7 @@ function ref_12e9f(var_0, var_1) {
   }
 }
 
-function ref_12e8a(var_0) {
+function ref_12E8A(var_0) {
   var_1 = spawn("script_model", var_0);
   var_1 setCursorHint("HINT_BUTTON");
   var_1 sethintdisplayrange(256);
@@ -1506,9 +1506,9 @@ function ref_12e8a(var_0) {
   return var_1;
 }
 
-function ref_12e86(var_0) {
+function ref_12E86(var_0) {
   var_0.power_switch.alarm_box scripts\engine\utility::ent_flag_wait("switch_on");
-  thread ref_12e93(var_0);
+  thread ref_12E93(var_0);
   var_0.radio scriptmodelplayanim("cp_satellite_apparatus_unfold");
   var_0.buy_point_loop scriptmodelplayanim("cp_satellite_apparatus_unfold");
   var_0.radar scriptmodelplayanim("cp_satellite_apparatus_unfold");
@@ -1516,7 +1516,7 @@ function ref_12e86(var_0) {
   wait 6.65;
 }
 
-function ref_12e93(var_0) {
+function ref_12E93(var_0) {
   var_0 playSound("scn_cp_satellite_unfold_start");
   wait 0.25;
   var_0 playLoopSound("scn_cp_satellite_unfold_lp");
@@ -1527,24 +1527,24 @@ function ref_12e93(var_0) {
   var_0.radar playLoopSound("scn_cp_satellite_idle");
 }
 
-function ref_12e8f(var_0) {
+function ref_12E8F(var_0) {
   var_0.buy_point_loop scriptmodelplayanim("cp_satellite_apparatus_loop");
   var_0.radar linkTo(var_0.buy_point_loop, "j_radar_rot_01");
   var_0.buy_point_loop.angles = var_0.angles + (0, 45, -15);
   var_0.buy_point_loop unlink();
 }
 
-function ref_12e88() {
+function ref_12E88() {
   if(getdvarint("scr_sat_debug") > 0) {
     return "debug";
   }
 
-  if(!isDefined(level.ref_12e90)) {
-    level.ref_12e90 = ["controller", "radar", "antenna"];
+  if(!isDefined(level.ref_12E90)) {
+    level.ref_12E90 = ["controller", "radar", "antenna"];
   }
 
-  var_0 = scripts\engine\utility::random(level.ref_12e90);
-  level.ref_12e90 = scripts\engine\utility::array_remove(level.ref_12e90, var_0);
+  var_0 = scripts\engine\utility::random(level.ref_12E90);
+  level.ref_12E90 = scripts\engine\utility::array_remove(level.ref_12E90, var_0);
   return var_0;
 }
 
@@ -1552,7 +1552,7 @@ function previous_bullet_weapon(var_0) {
   var_1 = getEntArray("usb_drive", "targetname");
 
   foreach(var_3 in var_1) {
-    switch (var_0.ref_1281e) {
+    switch (var_0.ref_1281E) {
       case "military_keycard_reader_green":
         if(var_3.model == "electronics_keycard_office_01_green") {
           return var_3;
@@ -1575,7 +1575,7 @@ function previous_bullet_weapon(var_0) {
   }
 }
 
-function ref_12ff8() {
+function ref_12FF8() {
   var_0 = undefined;
 
   switch (self.model) {
@@ -1668,7 +1668,7 @@ function canplaygasmaskgesturebr(var_0, var_1, var_2) {
 }
 
 function minigun_should_keep_firing() {
-  level.ref_12d8c = &init_ai_spawns;
+  level.ref_12D8C = &init_ai_spawns;
   var_0 = scripts\engine\utility::getStructArray("crate_drop", "targetname");
 
   foreach(var_2 in var_0) {
@@ -1677,10 +1677,10 @@ function minigun_should_keep_firing() {
 }
 
 function init_ai_spawns(var_0) {
-  ref_1234d(var_0);
+  ref_1234D(var_0);
 }
 
-function ref_1234d() {
+function ref_1234D() {
   self playlocalsound("weap_ammo_pickup");
   scripts\cp_mp\gasmask::init();
   thread headequiptoggleloop();
@@ -1722,7 +1722,7 @@ function flag_bot_attacker_limit_for_team() {
   self makeunusable();
 }
 
-function ref_12b4b(var_0, var_1, var_2) {
+function ref_12B4B(var_0, var_1, var_2) {
   level endon("transfer_complete");
 
   foreach(var_4 in var_0) {
@@ -1739,7 +1739,7 @@ function ref_12b4b(var_0, var_1, var_2) {
   var_9 = 15;
 
   for(;;) {
-    var_4 = ref_135be(var_0);
+    var_4 = ref_135BE(var_0);
     var_10 = [];
 
     if(issubstr(var_4, "heli")) {
@@ -1755,15 +1755,15 @@ function ref_12b4b(var_0, var_1, var_2) {
     }
 
     wait randomintrange(var_8, var_9);
-    var_4 = ref_135be(var_10);
+    var_4 = ref_135BE(var_10);
     ref_14328();
     ref_14327(var_1);
     wait randomintrange(var_6, var_7);
   }
 }
 
-function ref_135be(var_0) {
-  var_1 = ref_13e01(var_0);
+function ref_135BE(var_0) {
+  var_1 = ref_13E01(var_0);
 
   if(!isDefined(var_1)) {
     foreach(var_1 in var_0) {
@@ -1795,8 +1795,8 @@ function gcd(var_0) {
     level.skipequippedstreakcheck = getEntArray("heli_landing_volumes", "targetname");
   }
 
-  if(!isDefined(level.ref_124b2)) {
-    level.ref_124b2 = [];
+  if(!isDefined(level.ref_124B2)) {
+    level.ref_124B2 = [];
   }
 
   if(!isDefined(level.skipburndown)) {
@@ -1814,7 +1814,7 @@ function gcd(var_0) {
   var_1 = 1;
   var_2 = getEnt(var_0, "script_noteworthy");
 
-  foreach(var_4 in level.ref_124b2) {
+  foreach(var_4 in level.ref_124B2) {
     if(!isDefined(var_4)) {
       continue;
     }
@@ -1881,20 +1881,20 @@ function sixthsense_shouldwarnaboutotherplayer(var_0) {
   var_2.maxhealth = 5000;
   var_2.health = 5000;
   var_2.vehicle_specific_onentervehicle = &ref_14209;
-  thread ref_12bd6(var_2);
-  level.ref_124b2[level.ref_124b2.size] = var_2;
+  thread ref_12BD6(var_2);
+  level.ref_124B2[level.ref_124B2.size] = var_2;
   var_0 scripts\cp\cp_vehicles::delete_nav_obstacle();
   var_0 delete();
 }
 
-function ref_12bd6(var_0) {
+function ref_12BD6(var_0) {
   self notify("removeinvulnerable");
   self endon("removeinvulnerable");
   self endon("death");
   self.health = self.maxhealth;
 
   if(var_0 > 0) {
-    scripts\engine\utility::ref_143b9(var_0, "landing_collision_damage");
+    scripts\engine\utility::ref_143B9(var_0, "landing_collision_damage");
   }
 
   self.invulnerable = undefined;
@@ -1907,7 +1907,7 @@ function ref_14209(var_0, var_1, var_2, var_3) {
   var_0.invulnerable = undefined;
 }
 
-function ref_13e01(var_0) {
+function ref_13E01(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {

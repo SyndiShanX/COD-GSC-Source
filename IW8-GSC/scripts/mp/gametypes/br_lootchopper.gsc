@@ -5,12 +5,12 @@
 
 function init() {
   level.averagealliesz = 0;
-  level.ref_119e7 = [];
-  scripts\cp_mp\utility\script_utility::registersharedfunc("br_lootchopper", "lootChopper_onCrateUse", &ref_11a11);
-  thread ref_12b27();
+  level.ref_119E7 = [];
+  scripts\cp_mp\utility\script_utility::registersharedfunc("br_lootchopper", "lootChopper_onCrateUse", &ref_11A11);
+  thread ref_12B27();
 }
 
-function ref_12b27() {
+function ref_12B27() {
   while(!isDefined(level.vehicle)) {
     waitframe();
   }
@@ -19,13 +19,13 @@ function ref_12b27() {
   var_0.canfly = 1;
 }
 
-function ref_11a0d(var_0) {
-  var_1 = ref_11a09(var_0);
-  level.ref_119e6 = [];
-  level.ref_119e6["quad_1"] = [];
-  level.ref_119e6["quad_2"] = [];
-  level.ref_119e6["quad_3"] = [];
-  level.ref_119e6["quad_4"] = [];
+function ref_11A0D(var_0) {
+  var_1 = ref_11A09(var_0);
+  level.ref_119E6 = [];
+  level.ref_119E6["quad_1"] = [];
+  level.ref_119E6["quad_2"] = [];
+  level.ref_119E6["quad_3"] = [];
+  level.ref_119E6["quad_4"] = [];
 
   if(!isDefined(var_1)) {
     return;
@@ -60,11 +60,11 @@ function ref_11a0d(var_0) {
 
     var_3.origin *= (1, 1, 0);
     var_3.origin = scripts\mp\gametypes\br::resetcircuitbreakers(var_3.origin, (0, 0, 10000));
-    level.ref_119e6[var_6][level.ref_119e6[var_6].size] = var_3;
+    level.ref_119E6[var_6][level.ref_119E6[var_6].size] = var_3;
   }
 }
 
-function ref_11a09(var_0) {
+function ref_11A09(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.delete_script_object) {
@@ -82,7 +82,7 @@ function ref_11a09(var_0) {
   return var_1;
 }
 
-function ref_11a0c(var_0, var_1) {
+function ref_11A0C(var_0, var_1) {
   var_2 = spawnStruct();
   var_2.isvalid = isDefined(var_0) && isDefined(var_1);
 
@@ -101,7 +101,7 @@ function ref_11a0c(var_0, var_1) {
   return var_2;
 }
 
-function ref_11a0f() {
+function ref_11A0F() {
   level endon("game_ended");
 
   if(scripts\mp\gametypes\br_public::uniquelootitemid()) {
@@ -116,8 +116,8 @@ function ref_11a0f() {
     var_1 = scripts\mp\gametypes\br_circle::getsafecircleradius();
   }
 
-  var_2 = ref_11a0c(var_0, var_1);
-  ref_11a0d(var_2);
+  var_2 = ref_11A0C(var_0, var_1);
+  ref_11A0D(var_2);
   level waittill("br_prematchEnded");
   var_3 = getdvarint("scr_dmz_lc_max_active", 5);
   var_4 = getdvarint("scr_dmz_lc_min_spawn_dist", 6000);
@@ -142,8 +142,8 @@ function ref_11a0f() {
       wait var_8;
     }
 
-    if(level.ref_119e7.size < var_3) {
-      var_9 = var_3 - level.ref_119e7.size;
+    if(level.ref_119E7.size < var_3) {
+      var_9 = var_3 - level.ref_119E7.size;
 
       for(var_10 = 0; var_10 < var_9; var_10++) {
         var_11 = var_10 + 1;
@@ -152,7 +152,7 @@ function ref_11a0f() {
           var_11 = 1;
         }
 
-        var_12 = ref_11a07(level.ref_119e6["quad_" + var_11], var_4);
+        var_12 = ref_11A07(level.ref_119E6["quad_" + var_11], var_4);
 
         if(!isDefined(var_12)) {
           wait 1;
@@ -162,7 +162,7 @@ function ref_11a0f() {
           scripts\mp\gametypes\br_gametype_dmz::ref_13371("br_lootchopper_incoming");
         }
 
-        ref_11a18(var_12);
+        ref_11A18(var_12);
 
         if(istrue(level.ref_14086)) {
           wait randomintrange(1, 2);
@@ -176,13 +176,13 @@ function ref_11a0f() {
       continue;
     }
 
-    while(level.ref_119e7.size >= var_3) {
+    while(level.ref_119E7.size >= var_3) {
       waitframe();
     }
   }
 }
 
-function ref_11a07(var_0, var_1) {
+function ref_11A07(var_0, var_1) {
   var_2 = undefined;
 
   if(var_0.size > 0) {
@@ -193,7 +193,7 @@ function ref_11a07(var_0, var_1) {
         continue;
       }
 
-      if(ref_11a0e(var_5, var_1)) {
+      if(ref_11A0E(var_5, var_1)) {
         continue;
       }
 
@@ -209,9 +209,9 @@ function ref_11a07(var_0, var_1) {
   return var_2;
 }
 
-function ref_11a0e(var_0, var_1) {
+function ref_11A0E(var_0, var_1) {
   var_2 = 0;
-  var_3 = level.ref_119e6;
+  var_3 = level.ref_119E6;
   var_4 = var_1 * var_1;
 
   foreach(var_6 in var_3) {
@@ -232,11 +232,11 @@ function ref_11a0e(var_0, var_1) {
   return var_2;
 }
 
-function ref_11a0a(var_0) {
+function ref_11A0A(var_0) {
   var_1 = undefined;
   var_2 = 0;
 
-  foreach(var_4 in level.ref_119e6) {
+  foreach(var_4 in level.ref_119E6) {
     if(var_2 == var_0) {
       var_1 = var_4;
       break;
@@ -248,7 +248,7 @@ function ref_11a0a(var_0) {
   return var_1;
 }
 
-function ref_11a18(var_0, var_1, var_2, var_3, var_4) {
+function ref_11A18(var_0, var_1, var_2, var_3, var_4) {
   var_5 = undefined;
   var_6 = getdvarint("scr_dmz_lc_patrol_radius", 4000);
 
@@ -285,8 +285,8 @@ function ref_11a18(var_0, var_1, var_2, var_3, var_4) {
   var_13 = vectortoangles(var_5 - var_12);
   var_14 = -1200;
 
-  if(isDefined(level.br_level) && isDefined(level.br_level.ref_11a5b)) {
-    var_14 = level.br_level.ref_11a5b;
+  if(isDefined(level.br_level) && isDefined(level.br_level.ref_11A5B)) {
+    var_14 = level.br_level.ref_11A5B;
   }
 
   var_15 = var_14 + 10000;
@@ -304,7 +304,7 @@ function ref_11a18(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_2) && isDefined(var_3)) {
     var_17.chopper_boss_explosion = var_2;
-    var_17.ref_1220e = var_3;
+    var_17.ref_1220E = var_3;
   } else {
     var_17.chopper_boss_explosion = 0;
   }
@@ -322,8 +322,8 @@ function ref_11a18(var_0, var_1, var_2, var_3, var_4) {
   var_17.currenttarget = undefined;
   var_17.heightoffset = (0, 0, getdvarint("scr_dmz_lc_height", 1500));
   var_17.ref_12210 = var_0;
-  var_17.ref_1220d = var_5;
-  var_17.ref_1220f = var_6;
+  var_17.ref_1220D = var_5;
+  var_17.ref_1220F = var_6;
   var_17.ref_13768 = 35;
   var_17.infil_complete = var_17.heightoffset[2] - 250;
 
@@ -343,7 +343,7 @@ function ref_11a18(var_0, var_1, var_2, var_3, var_4) {
   var_17.health = getdvarint("scr_dmz_lc_health", 5000);
   var_17.maxhealth = getdvarint("scr_dmz_lc_health", 5000);
   var_17 scripts\mp\sentientpoolmanager::registersentient("Level_Vehicle", var_17.team);
-  ref_11a15(var_17);
+  ref_11A15(var_17);
   var_17 setscriptablepartstate("blinking_lights", "on", 0);
   var_17 setscriptablepartstate("engine", "on", 0);
   var_17.frontturret = spawnturret("misc_turret", var_17 gettagorigin("tag_turret_front"), "chopper_support_turret_mp");
@@ -378,17 +378,17 @@ function ref_11a18(var_0, var_1, var_2, var_3, var_4) {
   var_17.rearturret.groundtargetent = spawn("script_model", var_17.origin);
   var_17.rearturret.groundtargetent setModel("tag_origin");
   var_17.rearturret.groundtargetent dontinterpolate();
-  level.ref_119e7[level.ref_119e7.size] = var_17;
+  level.ref_119E7[level.ref_119E7.size] = var_17;
 
   if(var_17.chopper_boss_explosion && isDefined(var_17.intro_enemy_respawner)) {
-    var_17.ref_1220c = var_17.intro_enemy_respawner;
+    var_17.ref_1220C = var_17.intro_enemy_respawner;
   } else {
-    var_17.ref_1220c = &ref_11a12;
+    var_17.ref_1220C = &ref_11A12;
   }
 
-  var_17.lootfunc = &ref_11a05;
-  var_17.has_ammo_drain_passive = &ref_11a03;
-  ref_11a04(var_17);
+  var_17.lootfunc = &ref_11A05;
+  var_17.has_ammo_drain_passive = &ref_11A03;
+  ref_11A04(var_17);
   var_17 thread scripts\cp_mp\killstreaks\chopper_support::choppersupport_neargoalsettings();
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("flares", "handleIncomingStinger")) {
@@ -402,88 +402,88 @@ function ref_11a18(var_0, var_1, var_2, var_3, var_4) {
   return var_17;
 }
 
-function ref_11a15() {
+function ref_11A15() {
   self.vehiclename = "loot_chopper";
   scripts\mp\vehicles\damage::set_vehicle_hit_damage_data(self.vehiclename, 20);
-  ref_11a10("iw8_la_gromeo_mp", 4, 20);
-  ref_11a10("iw8_la_kgolf_mp", 4, 20);
-  ref_11a10("iw8_la_t9standard_mp", 4, 20);
-  ref_11a10("iw8_la_rpapa7_mp", 4, 20);
-  ref_11a10("iw8_la_t9freefire_mp", 4, 20);
-  ref_11a10("iw8_la_juliet_mp", 5, 20);
-  ref_11a10("iw8_la_gromeoks_mp", 4, 20);
-  ref_11a10("iw8_la_mike32_mp", 2.85714, 20);
-  ref_11a10("iw8_la_t9launcher_mp", 2.85714, 20);
-  ref_11a10("iw8_ar_mike4_mp", 2.85714, 20);
-  ref_11a10("iw8_ar_akilo47_mp", 2.85714, 20);
-  ref_11a10("c4_mp_p", 4, 20);
-  ref_11a10("semtex_mp", 2.85714, 20);
-  ref_11a10("frag_grenade_mp", 2.85714, 20);
-  ref_11a10("pop_rocket_mp", 2.85714, 20);
-  ref_11a10("molotov_mp", 1.81818, 20);
-  ref_11a10("at_mine_ap_mp", 1.81818, 20);
-  ref_11a10("at_mine_mp", 2.85714, 20);
-  ref_11a10("thermite_mp", 1, 36);
-  ref_11a10("thermite_av_mp", 1, 36);
-  ref_11a10("thermite_bolt_mp", 1, 30);
-  ref_11a10("thermite_xmike109_mp", 1, 52);
-  ref_11a10("emp_grenade_mp", 2.85714, 20);
-  ref_11a10("claymore_mp", 2.85714, 20);
-  ref_11a10("semtex_bolt_mp", 2, 20);
-  ref_11a10("semtex_xmike109_mp", 1.42857, 20);
-  ref_11a10("semtex_aalpha12_mp", 1, 20);
-  ref_11a10("apache_proj_mp", 5, 20);
-  ref_11a10("toma_proj_mp", 2.85714, 20);
-  ref_11a10("cruise_proj_mp", 6.66667, 20);
-  ref_11a10("artillery_mp", 6.66667, 20);
-  ref_11a10("nuke_mp", 10, 20);
-  ref_11a10("ac130_105mm_mp", 10, 20);
-  ref_11a10("ac130_40mm_mp", 5, 20);
-  ref_11a10("ac130_25mm_mp", 2.85714, 20);
-  ref_11a10("hover_jet_proj_mp", 5, 20);
+  ref_11A10("iw8_la_gromeo_mp", 4, 20);
+  ref_11A10("iw8_la_kgolf_mp", 4, 20);
+  ref_11A10("iw8_la_t9standard_mp", 4, 20);
+  ref_11A10("iw8_la_rpapa7_mp", 4, 20);
+  ref_11A10("iw8_la_t9freefire_mp", 4, 20);
+  ref_11A10("iw8_la_juliet_mp", 5, 20);
+  ref_11A10("iw8_la_gromeoks_mp", 4, 20);
+  ref_11A10("iw8_la_mike32_mp", 2.85714, 20);
+  ref_11A10("iw8_la_t9launcher_mp", 2.85714, 20);
+  ref_11A10("iw8_ar_mike4_mp", 2.85714, 20);
+  ref_11A10("iw8_ar_akilo47_mp", 2.85714, 20);
+  ref_11A10("c4_mp_p", 4, 20);
+  ref_11A10("semtex_mp", 2.85714, 20);
+  ref_11A10("frag_grenade_mp", 2.85714, 20);
+  ref_11A10("pop_rocket_mp", 2.85714, 20);
+  ref_11A10("molotov_mp", 1.81818, 20);
+  ref_11A10("at_mine_ap_mp", 1.81818, 20);
+  ref_11A10("at_mine_mp", 2.85714, 20);
+  ref_11A10("thermite_mp", 1, 36);
+  ref_11A10("thermite_av_mp", 1, 36);
+  ref_11A10("thermite_bolt_mp", 1, 30);
+  ref_11A10("thermite_xmike109_mp", 1, 52);
+  ref_11A10("emp_grenade_mp", 2.85714, 20);
+  ref_11A10("claymore_mp", 2.85714, 20);
+  ref_11A10("semtex_bolt_mp", 2, 20);
+  ref_11A10("semtex_xmike109_mp", 1.42857, 20);
+  ref_11A10("semtex_aalpha12_mp", 1, 20);
+  ref_11A10("apache_proj_mp", 5, 20);
+  ref_11A10("toma_proj_mp", 2.85714, 20);
+  ref_11A10("cruise_proj_mp", 6.66667, 20);
+  ref_11A10("artillery_mp", 6.66667, 20);
+  ref_11A10("nuke_mp", 10, 20);
+  ref_11A10("ac130_105mm_mp", 10, 20);
+  ref_11A10("ac130_40mm_mp", 5, 20);
+  ref_11A10("ac130_25mm_mp", 2.85714, 20);
+  ref_11A10("hover_jet_proj_mp", 5, 20);
   scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_enableownerdamage(self);
   scripts\mp\vehicles\damage::get_vehicle_mod_damage_data(self.vehiclename, 1);
-  scripts\mp\vehicles\damage::set_pre_mod_damage_callback(self.vehiclename, &ref_11a14);
-  scripts\mp\vehicles\damage::set_post_mod_damage_callback(self.vehiclename, &ref_11a13);
-  scripts\mp\vehicles\damage::set_death_callback(self.vehiclename, &ref_11a0b);
+  scripts\mp\vehicles\damage::set_pre_mod_damage_callback(self.vehiclename, &ref_11A14);
+  scripts\mp\vehicles\damage::set_post_mod_damage_callback(self.vehiclename, &ref_11A13);
+  scripts\mp\vehicles\damage::set_death_callback(self.vehiclename, &ref_11A0B);
   scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_registerinstance(self);
 }
 
-function ref_11a10(var_0, var_1, var_2) {
+function ref_11A10(var_0, var_1, var_2) {
   scripts\mp\vehicles\damage::set_weapon_hit_damage_data_for_vehicle(var_0, var_1, self.vehiclename);
   scripts\mp\vehicles\damage::set_vehicle_hit_damage_data_for_weapon(self.vehiclename, var_2, var_0);
 }
 
-function ref_11a14(var_0) {
+function ref_11A14(var_0) {
   var_1 = var_0.damage;
   var_2 = var_0.attacker;
   return true;
 }
 
-function ref_11a13(var_0) {
+function ref_11A13(var_0) {
   scripts\cp_mp\killstreaks\chopper_support::choppersupport_modifydamage(var_0);
 
   if(!isDefined(self.attackers)) {
     self.attackers = [];
   }
 
-  var_1 = ref_11a08(var_0.attacker);
+  var_1 = ref_11A08(var_0.attacker);
 
   if(!isDefined(var_1)) {
     var_2 = spawnStruct();
     var_2.player = var_0.attacker;
     var_2.objweapon = var_0.objweapon;
-    var_2.ref_13bee = var_0.damage;
+    var_2.ref_13BEE = var_0.damage;
     self.attackers[self.attackers.size] = var_2;
   } else {
-    var_1.ref_13bee += var_0.damage;
+    var_1.ref_13BEE += var_0.damage;
     var_1.objweapon = var_0.objweapon;
   }
 
   return true;
 }
 
-function ref_11a0b(var_0) {
+function ref_11A0B(var_0) {
   scripts\cp_mp\killstreaks\chopper_support::choppersupport_handledeathdamage(var_0);
 
   if(istrue(level.tryupdategenericprogress)) {
@@ -517,7 +517,7 @@ function ref_11a0b(var_0) {
   return true;
 }
 
-function ref_11a12(var_0) {
+function ref_11A12(var_0) {
   self endon("death");
   self endon("leaving");
   self endon("crashing");
@@ -548,7 +548,7 @@ function ref_11a12(var_0) {
       var_1 = 0;
     }
 
-    var_3 = self.ref_1220d + anglesToForward((0, var_2, 0)) * int(self.ref_1220f / 1.2);
+    var_3 = self.ref_1220D + anglesToForward((0, var_2, 0)) * int(self.ref_1220F / 1.2);
     var_2 += 90;
     scripts\cp_mp\killstreaks\chopper_support::debugtimedelta(var_3, 1);
 
@@ -560,8 +560,8 @@ function ref_11a12(var_0) {
   }
 }
 
-function ref_11a05() {
-  var_0 = ref_11a06(self.origin + (0, 0, 500));
+function ref_11A05() {
+  var_0 = ref_11A06(self.origin + (0, 0, 500));
 
   if(isDefined(var_0) && istrue(level.ref_14088) && isscriptabledefined()) {
     var_0 = getclosestpointonnavmesh(var_0);
@@ -570,12 +570,12 @@ function ref_11a05() {
   if(isDefined(var_0)) {
     var_1 = scripts\cp_mp\killstreaks\airdrop::missionbonustimer(self.origin, var_0);
     var_2 = scripts\cp_mp\killstreaks\airdrop::gettriggerobject(var_1);
-    var_2.ref_140a0 = 10;
+    var_2.ref_140A0 = 10;
     return;
   }
 }
 
-function ref_11a06(var_0) {
+function ref_11A06(var_0) {
   var_1 = undefined;
   var_2 = var_0 - (0, 0, 20000);
   var_3 = [self, self.frontturret, self.rearturret];
@@ -588,7 +588,7 @@ function ref_11a06(var_0) {
   return var_1;
 }
 
-function ref_11a11(var_0) {
+function ref_11A11(var_0) {
   var_1 = getdvarint("scr_dmz_lc_plunder_reward", 100000);
 
   if(istrue(level.convoy_handle_stuck_compromise)) {
@@ -605,20 +605,20 @@ function ref_11a11(var_0) {
   var_4 = scripts\mp\gametypes\br_plunder::dropplunderbyrarity(var_1 / 100, var_3);
 
   foreach(var_6 in var_4) {
-    var_6.ref_11a40 = "loot_chopper";
+    var_6.ref_11A40 = "loot_chopper";
   }
 
-  if(!isDefined(var_0.ref_11a01)) {
-    var_0.ref_11a01 = 1;
+  if(!isDefined(var_0.ref_11A01)) {
+    var_0.ref_11A01 = 1;
   } else {
-    var_0.ref_11a01++;
+    var_0.ref_11A01++;
   }
 
-  var_0 scripts\mp\utility\stats::setextrascore1(var_0.ref_11a01);
+  var_0 scripts\mp\utility\stats::setextrascore1(var_0.ref_11A01);
   var_0 thread scripts\mp\utility\points::giveunifiedpoints("br_loot_chopper_box_open");
 }
 
-function ref_11a03() {
+function ref_11A03() {
   if(isDefined(self.modifyvehicledamage)) {
     self.modifyvehicledamage delete();
   }
@@ -632,10 +632,10 @@ function ref_11a03() {
   }
 
   scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_deregisterinstance(self);
-  level.ref_119e7 = scripts\engine\utility::array_remove(level.ref_119e7, self);
+  level.ref_119E7 = scripts\engine\utility::array_remove(level.ref_119E7, self);
 }
 
-function ref_11a04() {
+function ref_11A04() {
   var_0 = scripts\mp\objidpoolmanager::requestobjectiveid(1);
 
   if(var_0 != -1) {
@@ -649,7 +649,7 @@ function ref_11a04() {
   self.objectiveiconid = var_0;
 }
 
-function ref_11a08(var_0) {
+function ref_11A08(var_0) {
   var_1 = undefined;
 
   if(!isDefined(var_0)) {

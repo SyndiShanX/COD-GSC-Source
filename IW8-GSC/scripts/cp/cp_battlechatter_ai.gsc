@@ -1087,7 +1087,7 @@ function addresponseevent_internal(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("removed from battleChatter");
   self endon("responseEvent_failsafe");
   thread responseevent_failsafe(var_2);
-  var_6 = var_2 scripts\engine\utility::ref_143ae("death", "done speaking", "cancel speaking");
+  var_6 = var_2 scripts\engine\utility::ref_143AE("death", "done speaking", "cancel speaking");
 
   if(var_6 == "cancel speaking") {
     return;

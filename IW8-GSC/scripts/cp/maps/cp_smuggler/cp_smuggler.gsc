@@ -28,16 +28,16 @@ function main() {
   init_global_systems();
   init_objectives();
   init_level_systems();
-  scripts\cp\maps\cp_smuggler\cp_smuggler_checkpoints::ref_131ed();
+  scripts\cp\maps\cp_smuggler\cp_smuggler_checkpoints::ref_131ED();
   scripts\mp\brclientmatchdata::getquestrewardgroupindex();
   level.incorrectcodeentered = 1.5;
-  scripts\mp\brclientmatchdata::getpresettruckspawns("tow_p1", &scripts\cp\maps\cp_smuggler\cp_smuggler_checkpoints::ref_11c58);
+  scripts\mp\brclientmatchdata::getpresettruckspawns("tow_p1", &scripts\cp\maps\cp_smuggler\cp_smuggler_checkpoints::ref_11C58);
   var_0 = getDvar("restart_checkpoint", "");
 
   if(isDefined(var_0) && var_0 != "") {
     scripts\mp\brclientmatchdata::getnextprop(var_0);
     scripts\mp\brclientmatchdata::getnextrpgspawnmodule(var_0);
-    level thread[[level.ref_12b19[var_0]]]();
+    level thread[[level.ref_12B19[var_0]]]();
   } else {
     var_1 = getDvar("cp_smuggler_start_obj", "safehouse_suburbs11_mnu");
 

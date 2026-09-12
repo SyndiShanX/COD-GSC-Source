@@ -600,7 +600,7 @@ function player_unresolved_collision_watch() {
         } else if(isDefined(var_0.unresolved_collision_kill) && var_0.unresolved_collision_kill) {
           unresolved_collision_owner_damage(var_0, self);
         } else if(var_0 scripts\cp_mp\vehicles\vehicle::isvehicle()) {
-          if(!scripts\cp_mp\vehicles\vehicle::ref_1418b(var_0, self)) {
+          if(!scripts\cp_mp\vehicles\vehicle::ref_1418B(var_0, self)) {
             unresolved_collision_nearest_node(var_0, self);
           }
         } else {
@@ -865,7 +865,7 @@ function script_mover_unlink_from_use_object(var_0) {
 
 function sciprt_mover_use_object_wait_for_disconnect(var_0) {
   self endon("removeMoverLinkDummy");
-  scripts\engine\utility::ref_143a5("death", "disconnect");
+  scripts\engine\utility::ref_143A5("death", "disconnect");
   self.scriptmoverlinkdummy delete();
   self.scriptmoverlinkdummy = undefined;
 }

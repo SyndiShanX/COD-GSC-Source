@@ -7,7 +7,7 @@ function init() {
   setsaveddvar("scr_suppression", 1);
 }
 
-function ref_145bd() {
+function ref_145BD() {
   self._whizbyfxent = [];
   thread whizbythink();
 }

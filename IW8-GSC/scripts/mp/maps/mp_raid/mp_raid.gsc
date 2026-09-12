@@ -34,7 +34,7 @@ function main() {
   game["axis"] = "RUSF";
   thread managegate();
   thread player_exfil_struct();
-  thread ref_12f8e();
+  thread ref_12F8E();
 }
 
 function managegate() {
@@ -98,7 +98,7 @@ function player_exfil_struct() {
   var_17 clonebrushmodeltoscriptmodel(var_16);
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   level.chopper_gunner_assignedtargetmarkers_onnewai = getnodesinradius((-2075, 512, 272), 100, 0, 100);
   var_0 = getnodesinradius((-2226, 1811, 272), 32, 0, 100);
 

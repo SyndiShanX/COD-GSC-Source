@@ -78,7 +78,7 @@ function infil_init() {
     return;
   }
 
-  if(istrue(level.ref_133d5)) {
+  if(istrue(level.ref_133D5)) {
     game["infil"] = undefined;
     scripts\mp\flags::gameflagset("infil_setup_complete");
     return;
@@ -88,7 +88,7 @@ function infil_init() {
     waitframe();
   }
 
-  if(scripts\mp\gamelogic::ref_1330a()) {
+  if(scripts\mp\gamelogic::ref_1330A()) {
     logstring("IWH-315293: ALBACORE: level.teamNameList while finished");
   }
 
@@ -141,7 +141,7 @@ function infil_init() {
       var_9 = var_2[[var_6["spawn_func"]]](var_2.script_team, var_2.target, var_8, var_7);
       var_9.players = [];
       var_9.type = var_3;
-      var_9.ref_1214c = var_7;
+      var_9.ref_1214C = var_7;
       var_9.subtype = var_8;
       var_9.infillength = var_9[[var_6["get_length_func"]]](var_8);
 
@@ -179,11 +179,11 @@ function onplayerspawned() {
 
   for(;;) {
     level waittill("player_spawned", var_0);
-    thread ref_1437e();
+    thread ref_1437E();
   }
 }
 
-function ref_1437e() {
+function ref_1437E() {
   level endon("infil_started");
   self endon("death_or_disconnect");
 
@@ -259,7 +259,7 @@ function onplayerchangeteams() {
   level endon("prematch_over");
   self endon("player_free_spot");
   var_0 = self.team;
-  scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
+  scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
   player_free_spot(self, var_0);
 }
 
@@ -439,7 +439,7 @@ function register_infil_spots(var_0, var_1, var_2, var_3, var_4, var_5) {
     game["infil"][var_0]["spots"][var_8]["callback"] = var_5;
   }
 
-  if(!istrue(level.ref_12c49)) {
+  if(!istrue(level.ref_12C49)) {
     level.requiredplayercount[var_0] += var_3;
     return;
   }
@@ -830,7 +830,7 @@ function infil_player_rig(var_0, var_1, var_2) {
   }
 
   self notify("rig_created");
-  scripts\engine\utility::ref_143a5("remove_rig", "player_free_spot");
+  scripts\engine\utility::ref_143A5("remove_rig", "player_free_spot");
 
   if(isDefined(self)) {
     if(isDefined(var_2) && var_2) {
@@ -1112,7 +1112,7 @@ function heli_wait_node(var_0, var_1, var_2) {
 
   if(isDefined(var_8.radius)) {
     self setneargoalnotifydist(var_8.radius);
-    scripts\engine\utility::ref_143a5("near_goal", "goal");
+    scripts\engine\utility::ref_143A5("near_goal", "goal");
   } else {
     self waittill("goal");
   }

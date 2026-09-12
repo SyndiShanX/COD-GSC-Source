@@ -33,7 +33,7 @@ function main() {
   thread spawnstaticvan();
   thread ref_13664();
   thread player_fired_gun_monitor();
-  thread ref_121f5();
+  thread ref_121F5();
   thread battle_tracks_vehicleoccupancyenter();
 }
 
@@ -76,10 +76,10 @@ function spawnstaticvan() {
 
 function ref_13664() {
   var_0 = spawn("trigger_radius", (-340, 655, 240), 0, 192, 100);
-  thread ref_144ff(var_0);
+  thread ref_144FF(var_0);
 }
 
-function ref_144ff(var_0) {
+function ref_144FF(var_0) {
   for(;;) {
     self waittill("trigger", var_1);
 
@@ -87,15 +87,15 @@ function ref_144ff(var_0) {
       continue;
     }
 
-    if(!isDefined(self.ref_126ce)) {
-      self.ref_126ce = [];
+    if(!isDefined(self.ref_126CE)) {
+      self.ref_126CE = [];
     }
 
-    if(scripts\engine\utility::array_contains(self.ref_126ce, var_1.guid)) {
+    if(scripts\engine\utility::array_contains(self.ref_126CE, var_1.guid)) {
       continue;
     }
 
-    self.ref_126ce = scripts\engine\utility::array_add(self.ref_126ce, var_1.guid);
+    self.ref_126CE = scripts\engine\utility::array_add(self.ref_126CE, var_1.guid);
 
     switch (var_0) {
       case "alley":
@@ -140,7 +140,7 @@ function ref_14486(var_0) {
     scripts\mp\spawnlogic::removespawndangerzone(var_10);
   }
 
-  var_0.ref_126ce = scripts\engine\utility::array_remove(var_0.ref_126ce, var_2);
+  var_0.ref_126CE = scripts\engine\utility::array_remove(var_0.ref_126CE, var_2);
 }
 
 function player_fired_gun_monitor() {
@@ -150,7 +150,7 @@ function player_fired_gun_monitor() {
   var_1 clonebrushmodeltoscriptmodel(var_0);
 }
 
-function ref_121f5() {
+function ref_121F5() {
   if(!isDefined(level.outofboundstriggers)) {
     level.outofboundstriggers = [];
   }

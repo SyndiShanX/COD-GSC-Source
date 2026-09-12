@@ -287,7 +287,7 @@ function starttankdropoff(var_0) {
   }
 
   scripts\cp_mp\utility\killstreak_utility::playkillstreakoperatordialog("use_" + var_0.streakname, 1);
-  scripts\common\utility::ref_13e0a(level.ref_11b2a, "pac_sentry", self.origin);
+  scripts\common\utility::ref_13E0A(level.ref_11B2A, "pac_sentry", self.origin);
   thread scripts\mp\hud_util::teamplayercardsplash("used_pac_sentry", self);
   return true;
 }
@@ -412,8 +412,8 @@ function createtank(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   thread tank_watchfortimeoutdisowned();
-  thread ref_13a50();
-  thread ref_13a51();
+  thread ref_13A50();
+  thread ref_13A51();
   thread tank_handleairburst();
   thread tank_handlewheeldustfx();
   thread tank_updatehudchassisangles();
@@ -730,13 +730,13 @@ function tank_watchfortimeoutdisownedendearly() {
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(self.lifetime);
 }
 
-function ref_13a50() {
+function ref_13A50() {
   self endon("death");
   level waittill("game_ended");
   thread tank_destroy();
 }
 
-function ref_13a51() {
+function ref_13A51() {
   self endon("death");
 
   for(;;) {
@@ -778,7 +778,7 @@ function tank_destroy(var_0, var_1) {
   scripts\cp_mp\emp_debuff::allow_emp(0);
   scripts\mp\outofbounds::clearoob(self, 1);
   self.streakinfo.onspray = istrue(var_1);
-  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
   waitframe();
   self playSound("mp_killstreak_disappear");
   var_2 = level._effect["remote_tank_explode"];
@@ -825,7 +825,7 @@ function tank_driverexit(var_0) {
   if(var_0 scripts\cp_mp\utility\player_utility::_isalive()) {
     var_0 scripts\cp_mp\utility\shellshock_utility::_stopshellshock();
     var_0 scripts\common\utility::allow_shellshock(1);
-    level thread scripts\cp_mp\utility\killstreak_utility::ref_12cc6(var_0);
+    level thread scripts\cp_mp\utility\killstreak_utility::ref_12CC6(var_0);
     return;
   }
 }
@@ -1020,7 +1020,7 @@ function tank_empstarted(var_0) {
   }
 
   self.owner controlsunlink();
-  thread scripts\cp_mp\emp_debuff::ref_1241a(self.owner, 5);
+  thread scripts\cp_mp\emp_debuff::ref_1241A(self.owner, 5);
 }
 
 function tank_empcleared(var_0) {

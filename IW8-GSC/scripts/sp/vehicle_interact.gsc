@@ -285,8 +285,8 @@ function interact_vehicle_inside(var_0) {
   var_12.angles = var_2.angles;
   var_15 = interact_vehicle_movement(var_12, self, var_0, var_2, var_3);
 
-  if(isDefined(level.player.ground_ref_ent)) {
-    interact_vehicle_delete_ground_ref_ent(level);
+  if(isDefined(level.player.ground_ref_ENT)) {
+    interact_vehicle_delete_ground_ref_ENT(level);
   }
 
   var_16 = undefined;
@@ -479,8 +479,8 @@ function interact_entry_anim() {
   level.player enableweapons();
 }
 
-function interact_vehicle_delete_ground_ref_ent() {
-  var_0 = level.player.ground_ref_ent;
+function interact_vehicle_delete_ground_ref_ENT() {
+  var_0 = level.player.ground_ref_ENT;
   var_0.vehicleinteract = undefined;
   var_0 rotateTo((0, 0, 0), 0.3, 0.1, 0.1);
 }
@@ -644,16 +644,16 @@ function qlerp(var_0, var_1, var_2) {
 function set_viewangles() {
   level.player endon("death");
 
-  if(!isDefined(level.player.ground_ref_ent)) {
-    level.player.ground_ref_ent = spawn("script_origin", (0, 0, 0));
+  if(!isDefined(level.player.ground_ref_ENT)) {
+    level.player.ground_ref_ENT = spawn("script_origin", (0, 0, 0));
   }
 
-  if(!isDefined(level.player.ground_ref_ent.vehicleinteract)) {
-    level.player.ground_ref_ent.vehicleinteract = 1;
-    level.player playersetgroundreferenceent(level.player.ground_ref_ent);
+  if(!isDefined(level.player.ground_ref_ENT.vehicleinteract)) {
+    level.player.ground_ref_ENT.vehicleinteract = 1;
+    level.player playersetgroundreferenceent(level.player.ground_ref_ENT);
   }
 
-  var_0 = level.player.ground_ref_ent;
+  var_0 = level.player.ground_ref_ENT;
   var_1 = 2;
   var_2 = 1.5;
   var_3 = -1;

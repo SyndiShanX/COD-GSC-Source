@@ -286,11 +286,11 @@ function startchoppergunnerintro(var_0, var_1, var_2) {
     var_18 = scripts\engine\utility::random(var_17);
     var_19 = (var_18.origin[0], var_18.origin[1], 1750);
 
-    while(level.ref_11f7e.size == 0) {
+    while(level.ref_11F7E.size == 0) {
       waitframe();
     }
 
-    var_20 = scripts\engine\utility::getclosest(var_19, level.ref_11f7e);
+    var_20 = scripts\engine\utility::getclosest(var_19, level.ref_11F7E);
     var_21 = (var_20.origin[0], var_20.origin[1], 1750);
     var_22 = vectorNormalize(var_19 - var_21);
     var_8 = var_21 - var_22 * 11000;
@@ -732,7 +732,7 @@ function choppergunner_updatetargetmarkergroups(var_0) {
 
 function choppergunner_notifyonkillstreakover() {
   level endon("game_ended");
-  scripts\engine\utility::ref_143a6("leaving", "death", "explode");
+  scripts\engine\utility::ref_143A6("leaving", "death", "explode");
   self notify("chopper_gunner_ended");
 
   if(isDefined(self.owner)) {
@@ -744,7 +744,7 @@ function choppergunner_notifyonkillstreakover() {
 function choppergunner_watchendstrobefx(var_0) {
   self endon("death");
   level endon("game_ended");
-  var_0 scripts\engine\utility::ref_143a5("death", "leaving");
+  var_0 scripts\engine\utility::ref_143A5("death", "leaving");
   self delete();
 }
 
@@ -989,8 +989,8 @@ function choppergunner_watchgameendleave(var_0) {
   self endon("leaving");
   self endon("crashing");
   level waittill("game_ended");
-  self.ref_12aa4 = 1;
-  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+  self.ref_12AA4 = 1;
+  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
   thread choppergunner_leave(var_0);
 }
 
@@ -1332,8 +1332,8 @@ function choppergunner_delete(var_0) {
 
   self.streakinfo.onspray = istrue(var_0);
 
-  if(!istrue(self.ref_12aa4)) {
-    self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(self.streakinfo);
+  if(!istrue(self.ref_12AA4)) {
+    self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(self.streakinfo);
   }
 
   self stoploopsound();
@@ -1422,7 +1422,7 @@ function choppergunner_returnplayer(var_0, var_1) {
         var_2 unlink();
       }
 
-      level thread scripts\cp_mp\utility\killstreak_utility::ref_12cc6(var_2);
+      level thread scripts\cp_mp\utility\killstreak_utility::ref_12CC6(var_2);
       var_2 setclientomnvar("ui_apache_screens_state", 0);
       var_2 painvisionon();
       var_2 scripts\cp_mp\utility\killstreak_utility::killstreak_restorenvgstate();
@@ -1540,7 +1540,7 @@ function choppergunner_getvisionsetbystrength(var_0, var_1) {
 }
 
 function choppergunner_empstarted(var_0) {
-  thread scripts\cp_mp\emp_debuff::ref_1241a(self.owner, 5);
+  thread scripts\cp_mp\emp_debuff::ref_1241A(self.owner, 5);
   choppergunner_updatetargetmarkergroups();
 }
 

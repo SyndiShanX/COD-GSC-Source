@@ -3,7 +3,7 @@
  * Script: 58335.gsc
 ***********************************************/
 
-function ref_11fe3(var_0, var_1, var_2) {
+function ref_11FE3(var_0, var_1, var_2) {
   if(istrue(self.clearsoundsubmixmpbrinfilanim)) {
     scripts\asm\soldier\death::lbravo_spawner_jammer1();
   }

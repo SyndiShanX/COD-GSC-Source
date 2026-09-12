@@ -5,7 +5,7 @@
 
 function friendlyfire_allowed() {
   var_0 = spawnStruct();
-  var_0.ref_1393d = [];
+  var_0.ref_1393D = [];
   return var_0;
 }
 
@@ -13,17 +13,17 @@ function friendlystatusdirty(var_0, var_1) {
   var_3 = spawnStruct();
   var_3.target = var_1;
   var_3.friendly_hvi_vehicle_extra_riders_intro_scene = var_0;
-  self.ref_1393d = scripts\engine\utility::array_removeundefined(self.ref_1393d);
-  self.ref_1393d[self.ref_1393d.size] = var_3;
+  self.ref_1393D = scripts\engine\utility::array_removeundefined(self.ref_1393D);
+  self.ref_1393D[self.ref_1393D.size] = var_3;
 }
 
 function front_struct(var_0, var_1) {
   var_2 = 0;
 
-  foreach(var_4 in self.ref_1393d) {
+  foreach(var_4 in self.ref_1393D) {
     if(var_4.friendly_hvi_vehicle_extra_riders_intro_scene == var_0) {
       if(var_4.target == var_1) {
-        self.ref_1393d[var_5] = undefined;
+        self.ref_1393D[var_5] = undefined;
         return;
       }
     }
@@ -31,13 +31,13 @@ function front_struct(var_0, var_1) {
 }
 
 function from(var_0, var_1, var_2, var_3) {
-  foreach(var_5 in self.ref_1393d) {
+  foreach(var_5 in self.ref_1393D) {
     if(!isDefined(var_5.target)) {
-      self.ref_1393d[var_6] = undefined;
+      self.ref_1393D[var_6] = undefined;
     }
   }
 
-  var_7 = self.ref_1393d;
+  var_7 = self.ref_1393D;
 
   if(isDefined(var_3)) {
     foreach(var_5 in var_7) {

@@ -8,7 +8,7 @@ function init() {
     return;
   }
 
-  scripts\engine\scriptable::ref_12f5b("gxp_telephone", &buy_menu_closed);
+  scripts\engine\scriptable::ref_12F5B("gxp_telephone", &buy_menu_closed);
   thread toggle_safehouse_doors();
 }
 
@@ -305,7 +305,7 @@ function topteam() {
     }
 
     for(var_7 = 0; var_7 < var_15.size && var_7 < var_16; var_7++) {
-      ref_1367c(var_15[var_7].origin, var_15[var_7].angles, var_17);
+      ref_1367C(var_15[var_7].origin, var_15[var_7].angles, var_17);
     }
   }
 
@@ -352,7 +352,7 @@ function battle_tracks_playbattletrackstoalloccupants(var_0, var_1, var_2) {
   level.setcodenumber[var_0][var_3] = var_4;
 }
 
-function ref_1367c(var_0, var_1, var_2) {
+function ref_1367C(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
   }
@@ -417,7 +417,7 @@ function ref_14003() {
 
       if(!update_track_timer(var_5.origin)) {
         var_1 = 0;
-        thread ref_12d48(var_5);
+        thread ref_12D48(var_5);
       }
 
       if(var_3 >= var_2) {
@@ -436,26 +436,26 @@ function ref_14003() {
 
 function loadout_updateglobalclass(var_0) {
   foreach(var_2 in level.players) {
-    if(var_2 scripts\mp\gametypes\br_public::ref_125ec()) {
+    if(var_2 scripts\mp\gametypes\br_public::ref_125EC()) {
       var_0 disablescriptableplayeruse(var_2);
     }
   }
 }
 
-function ref_12d48(var_0) {
+function ref_12D48(var_0) {
   var_0 setscriptablepartstate("gxp_telephone", "ring");
   loadout_updateglobalclass(var_0);
-  ref_12d44(var_0);
+  ref_12D44(var_0);
 }
 
-function ref_12d44(var_0) {
+function ref_12D44(var_0) {
   var_0 endon("answer");
   wait 30;
   var_0 setscriptablepartstate("gxp_telephone", "off");
 }
 
 function buy_menu_closed(var_0, var_1, var_2, var_3, var_4) {
-  scripts\mp\gametypes\br_gametype_gxp_challenges::ref_11fd2(var_3);
+  scripts\mp\gametypes\br_gametype_gxp_challenges::ref_11FD2(var_3);
   thread add_ai_rider_to_decho(var_0, var_1, var_2, var_3);
 }
 

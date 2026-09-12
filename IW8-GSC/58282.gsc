@@ -3,14 +3,14 @@
  * Script: 58282.gsc
 ***********************************************/
 
-function ref_11ed7() {
+function ref_11ED7() {
   level._effects["vfx_nova_round_scrnfx"] = loadfx("vfx/iw8_br/gameplay/rumble/vfx_nova_round_scrnfx");
   level._effect["vfx_chem_round_enemy_death"] = loadfx("vfx/iw8_br/island/weap/_imp/chem_round/vfx_br3_chem_smk_down_enemy");
   level._effect["vfx_br3_canister_exp_large_chem"] = loadfx("vfx/iw8_br/island/weap/_imp/cannister/vfx_br3_canister_exp_large_chem");
   scripts\cp_mp\utility\script_utility::registersharedfunc("nova_rounds", "hitByNovaRounds", &spawn_juggernauts_hangar);
   scripts\mp\utility\sound::besttime("proj_bullet_chem_rounds");
   test_bag_pickup();
-  thread ref_11ed8();
+  thread ref_11ED8();
 }
 
 function test_bag_pickup() {
@@ -19,7 +19,7 @@ function test_bag_pickup() {
     level.getserverroomspawnpoint.plunder_economy_shapshot_loop = [];
   }
 
-  level.getserverroomspawnpoint.ref_127e0 = getdvarfloat("scr_chem_rounds_poisoned_duration", 5);
+  level.getserverroomspawnpoint.ref_127E0 = getdvarfloat("scr_chem_rounds_poisoned_duration", 5);
   level.getserverroomspawnpoint.plunder_awarded_by_missions_total = getdvarfloat("scr_chem_rounds_gas_cloud_lifetime", 10);
   level.getserverroomspawnpoint.plunder_getleveldataforrepository = getdvarfloat("scr_chem_rounds_gas_damage_per_tick", 5);
   level.getserverroomspawnpoint.gas_damage_per_tick_agent_multiplier = getdvarfloat("scr_chem_rounds_gas_damage_per_tick_agent_multiplier", 5);
@@ -27,17 +27,17 @@ function test_bag_pickup() {
   level.getserverroomspawnpoint.gas_cloud_height = getdvarint("scr_chem_rounds_gas_cloud_height", 96);
 }
 
-function ref_11ed8() {
+function ref_11ED8() {
   waitframe();
 
   if(getdvarint("scr_city_killer_nova_rounds_chain_cloud", 0) == 1) {
     level.brjugg_watchtimerstart = 1;
   }
 
-  level.ref_12074 = &ref_1447f;
-  level.ref_120ad _calloutmarkerping_handleluinotify_acknowledgedcancel::friendlystatusdirty(&gettacroverspawns, level);
-  level.ref_120ae _calloutmarkerping_handleluinotify_acknowledgedcancel::friendlystatusdirty(&getteamcarriedplunder, level);
-  level.ref_1203f = &spawn_juggernauts_hangar;
+  level.ref_12074 = &ref_1447F;
+  level.ref_120AD _calloutmarkerping_handleluinotify_acknowledgedcancel::friendlystatusdirty(&gettacroverspawns, level);
+  level.ref_120AE _calloutmarkerping_handleluinotify_acknowledgedcancel::friendlystatusdirty(&getteamcarriedplunder, level);
+  level.ref_1203F = &spawn_juggernauts_hangar;
 }
 
 function spawn_juggernauts_hangar(var_0, var_1, var_2, var_3) {
@@ -45,7 +45,7 @@ function spawn_juggernauts_hangar(var_0, var_1, var_2, var_3) {
     if(isDefined(var_1)) {
       if(isDefined(var_2)) {
         var_4 = easepower("vfx_chem_rounds_enemy_hit", var_1);
-        thread ref_12aab(var_4);
+        thread ref_12AAB(var_4);
 
         if(!istrue(var_2.updateteamplunderscore)) {
           if(isPlayer(var_2)) {
@@ -60,7 +60,7 @@ function spawn_juggernauts_hangar(var_0, var_1, var_2, var_3) {
           }
         }
 
-        thread ref_1447f(var_2);
+        thread ref_1447F(var_2);
         return;
       }
 
@@ -71,13 +71,13 @@ function spawn_juggernauts_hangar(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_12aab(var_0) {
+function ref_12AAB(var_0) {
   level endon("game_ended");
   wait var_0;
   self freescriptable();
 }
 
-function ref_1447f(var_0, var_1) {
+function ref_1447F(var_0, var_1) {
   if(isPlayer(self) || isbot(self)) {
     self endon("disconnect");
   }
@@ -85,14 +85,14 @@ function ref_1447f(var_0, var_1) {
   level endon("game_ended");
   self notify("poisoned_watching_for_death");
   self endon("poisoned_watching_for_death");
-  var_2 = level.getserverroomspawnpoint.ref_127e0;
+  var_2 = level.getserverroomspawnpoint.ref_127E0;
 
   if(isDefined(var_1)) {
     var_2 = var_1;
   }
 
   if(var_2 > 0) {
-    var_3 = scripts\engine\utility::ref_143b9(level.getserverroomspawnpoint.ref_127e0, "death");
+    var_3 = scripts\engine\utility::ref_143B9(level.getserverroomspawnpoint.ref_127E0, "death");
 
     if(var_3 == "timeout") {
       if(isPlayer(self)) {
@@ -118,7 +118,7 @@ function ref_1447f(var_0, var_1) {
   waitframe();
   var_7 = easepower("vfx_chem_rounds_enemy_death", var_4);
   var_5 setscriptablepartstate("sfx_gas_npc", "npc_gas_expl");
-  scripts\mp\utility\trigger::makeenterexittrigger(var_6, &ref_13dab, &ref_13dac, undefined, undefined, &ref_13da5);
+  scripts\mp\utility\trigger::makeenterexittrigger(var_6, &ref_13DAB, &ref_13DAC, undefined, undefined, &ref_13DA5);
   level.getserverroomspawnpoint.plunder_economy_shapshot_loop = scripts\engine\utility::array_add(level.getserverroomspawnpoint.plunder_economy_shapshot_loop, var_6);
   wait level.getserverroomspawnpoint.plunder_awarded_by_missions_total;
   level.getserverroomspawnpoint.plunder_economy_shapshot_loop = scripts\engine\utility::array_remove(level.getserverroomspawnpoint.plunder_economy_shapshot_loop, var_6);
@@ -141,7 +141,7 @@ function playericonfilter(var_0, var_1, var_2, var_3) {
   var_5 = scripts\engine\utility::ter_op(isDefined(var_3), var_3, level.getserverroomspawnpoint.gas_cloud_height);
   var_6 = spawn("trigger_radius", var_1, 0, var_5, var_5);
   var_6.attacker = var_0;
-  scripts\mp\utility\trigger::makeenterexittrigger(var_6, &ref_13dab, &ref_13dac, undefined, undefined, &ref_13da5);
+  scripts\mp\utility\trigger::makeenterexittrigger(var_6, &ref_13DAB, &ref_13DAC, undefined, undefined, &ref_13DA5);
   var_7 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, "vfx_chem_rounds_enemy_death");
 
   if(isDefined(var_2) && var_2 == "nospawn") {
@@ -150,7 +150,7 @@ function playericonfilter(var_0, var_1, var_2, var_3) {
 
   if(var_7 != "nospawn") {
     var_8 = easepower(var_7, var_1);
-    thread ref_12aab(var_8);
+    thread ref_12AAB(var_8);
   }
 
   level.getserverroomspawnpoint.plunder_economy_shapshot_loop = scripts\engine\utility::array_add(level.getserverroomspawnpoint.plunder_economy_shapshot_loop, var_6);
@@ -168,11 +168,11 @@ function playericonfilter(var_0, var_1, var_2, var_3) {
   var_4 freescriptable();
 }
 
-function ref_13dab(var_0, var_1) {
-  thread ref_11c1d(var_0);
+function ref_13DAB(var_0, var_1) {
+  thread ref_11C1D(var_0);
 }
 
-function ref_13dac(var_0, var_1) {
+function ref_13DAC(var_0, var_1) {
   var_0.start_coop_escape_safehouse = 0;
   var_0 notify("out_of_poison_cloud");
 
@@ -182,7 +182,7 @@ function ref_13dac(var_0, var_1) {
   }
 }
 
-function ref_13da5(var_0, var_1) {
+function ref_13DA5(var_0, var_1) {
   if(!isDefined(var_0)) {
     return true;
   }
@@ -204,7 +204,7 @@ function getstreamedinplayercount() {
   return true;
 }
 
-function ref_11c1d(var_0) {
+function ref_11C1D(var_0) {
   level endon("game_ended");
   self endon("death_or_disconnect");
   self notify("gas_damage_watcher_triggered");
@@ -253,7 +253,7 @@ function ref_11c1d(var_0) {
 
       if(istrue(level.brjugg_watchtimerstart) && self.health - level.getserverroomspawnpoint.plunder_getleveldataforrepository <= 0) {
         self.updateteamplunderscore = 1;
-        thread ref_1447f(var_0.attacker);
+        thread ref_1447F(var_0.attacker);
       }
 
       var_2 = scripts\engine\utility::ter_op(isagent(self), level.getserverroomspawnpoint.gas_damage_per_tick_agent_multiplier, 1);
@@ -273,7 +273,7 @@ function ref_11c1d(var_0) {
 
       if(isagent(self)) {
         var_5 = easepower("vfx_chem_rounds_enemy_hit", self.origin + (0, 0, 50));
-        thread ref_12aab(var_5);
+        thread ref_12AAB(var_5);
       }
 
       if(!scripts\mp\gametypes\br_pickups::ks_circlecount(self)) {
@@ -281,7 +281,7 @@ function ref_11c1d(var_0) {
       }
     }
 
-    scripts\mp\gametypes\br_circle::ref_13e18();
+    scripts\mp\gametypes\br_circle::ref_13E18();
   }
 
   scripts\mp\gametypes\br_pickups::plunderrankupdate("chem_rounds_gas");
@@ -296,7 +296,7 @@ function getsearchparams() {
   for(;;) {
     self waittill("missile_fire", var_0, var_1);
 
-    if(!istrue(self.ref_11ed4)) {
+    if(!istrue(self.ref_11ED4)) {
       return;
     }
 
@@ -318,7 +318,7 @@ function getscrapassistplayers() {
       continue;
     }
 
-    if(!istrue(self.ref_11ed4)) {
+    if(!istrue(self.ref_11ED4)) {
       return;
     }
 
@@ -332,11 +332,11 @@ function getserachparams(var_0) {
   thread ref_13580(var_0);
 }
 
-function ref_12be2() {
+function ref_12BE2() {
   wait 0.1;
 
   if(isDefined(self)) {
-    self.ref_11ed4 = 0;
+    self.ref_11ED4 = 0;
     self notify("stop_watching_chem_fire");
     return;
   }
@@ -354,7 +354,7 @@ function ref_13580(var_0) {
   var_1 delete();
 }
 
-function ref_11ed6() {
+function ref_11ED6() {
   var_0 = self.lastweaponobj;
   var_1 = isundefinedweapon();
 
@@ -367,7 +367,7 @@ function ref_11ed6() {
   }
 
   self.should_take_damage = 1;
-  self.ref_11ed4 = 1;
+  self.ref_11ED4 = 1;
   thread getsearchparams();
   thread getscrapassistplayers();
   var_2 = getsixthsensedirection();
@@ -613,7 +613,7 @@ function getteamplunderhud() {
       if(!self.post_blockade_combat_logic) {
         self.player scripts\mp\utility\perk::giveperk("specialty_chemrounds");
         self.player.should_take_damage = 1;
-        self.player.ref_11ed4 = 1;
+        self.player.ref_11ED4 = 1;
         self.post_blockade_combat_logic = 1;
         self.player setclientomnvar("ui_chemRounds", 1);
         thread getsearchparams();
@@ -622,7 +622,7 @@ function getteamplunderhud() {
     } else if(self.post_blockade_combat_logic) {
       self.player scripts\mp\utility\perk::removeperk("specialty_chemrounds");
       self.player.should_take_damage = 0;
-      thread ref_12be2();
+      thread ref_12BE2();
       self.post_blockade_combat_logic = 0;
       self.player setclientomnvar("ui_chemRounds", 0);
     }
@@ -670,7 +670,7 @@ function getteamfactionsfrommap(var_0) {
   }
 
   self.waittill_trigger_player = 1;
-  scripts\engine\utility::ref_143c0(2, "weapon_fired", "weapon_change");
+  scripts\engine\utility::ref_143C0(2, "weapon_fired", "weapon_change");
   self.waittill_trigger_player = undefined;
 }
 
@@ -684,7 +684,7 @@ function getteamcontenders() {
       }
 
       self.player.should_take_damage = 0;
-      thread ref_12be2();
+      thread ref_12BE2();
       self.player setclientomnvar("ui_chemRounds", 0);
     }
 
@@ -754,7 +754,7 @@ function getspecialdaycosmetics() {
 function getspreadpelletspershot() {
   self.player endon("death_or_disconnect");
   self.player scripts\mp\utility\perk::giveperk("specialty_fastreload");
-  self.player scripts\engine\utility::ref_143a6("weapon_fired", "weapon_change", "chemicalRounds_removeHCR");
+  self.player scripts\engine\utility::ref_143A6("weapon_fired", "weapon_change", "chemicalRounds_removeHCR");
   self.player scripts\mp\utility\perk::removeperk("specialty_fastreload");
 }
 

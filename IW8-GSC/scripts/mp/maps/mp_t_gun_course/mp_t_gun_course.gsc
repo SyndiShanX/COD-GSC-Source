@@ -5,7 +5,7 @@
 
 function main() {
   _start_rooftop_raid_exfil::keypad_check_levelinput();
-  level.ref_13d50 = 1;
+  level.ref_13D50 = 1;
   level.music_style = "middle_east";
   var_0 = getentarrayinradius("trial_weapon", "targetname", (-610.39, 705.465, 45.9237), 1)[0];
   var_0.origin += (0, 0, 1);
@@ -42,7 +42,7 @@ function main() {
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "woodland";
-  thread ref_12c55();
+  thread ref_12C55();
   thread door_surprise_breach();
   thread progression_gates();
   thread target_random_models();
@@ -149,7 +149,7 @@ function progression_gates() {
   }
 }
 
-function ref_12c55() {
+function ref_12C55() {
   for(;;) {
     level waittill("course_ended");
     var_0 = getentitylessscriptablearrayinradius("scriptable_scriptable_door_industrial_metal_mp_01", "classname");

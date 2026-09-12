@@ -135,7 +135,7 @@ function giveaward(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     self.awardsthislife[var_1] = 1;
   }
 
-  scripts\common\utility::ref_13e0a(level.ref_11b27, var_1);
+  scripts\common\utility::ref_13E0A(level.ref_11B27, var_1);
 }
 
 function queuemidmatchaward(var_0) {

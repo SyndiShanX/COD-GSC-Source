@@ -55,7 +55,7 @@ function onstartgametype() {
   scripts\mp\gametypes\bradley_spawner::inittankspawns();
 
   if(getdvarint("scr_hotfoot", 0) != 0) {
-    thread ref_11d09();
+    thread ref_11D09();
     return;
   }
 }
@@ -181,7 +181,7 @@ function tdmanywhere_debugshowlocs() {
   thread scripts\mp\utility\debug::drawline(level.mapcenter - var_0, level.mapcenter - var_0 - var_1, 1000, (0, 0, 1));
 }
 
-function ref_11d09() {
+function ref_11D09() {
   level endon("game_ended");
   level.outlinedplayers = [];
   level.spawn_player_vehicle = 0;
@@ -277,7 +277,7 @@ function ref_12040(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   self.spawn_real_letter = 1;
 }
 
-function ref_132fe() {
+function ref_132FE() {
   var_0 = int(game["teamScores"]["axis"]);
   var_1 = int(game["teamScores"]["allies"]);
   var_2 = var_0 - var_1;

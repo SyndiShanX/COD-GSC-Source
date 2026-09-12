@@ -70,7 +70,7 @@ function main() {
   init_global_systems();
   thread spawn_technicals_for_players();
   visionsetnaked("mp_donetsk");
-  scripts\cp\maps\cp_arms_dealer\cp_arms_dealer_checkpoints::ref_131ed();
+  scripts\cp\maps\cp_arms_dealer\cp_arms_dealer_checkpoints::ref_131ED();
   scripts\mp\brclientmatchdata::getquestrewardgroupindex();
   scripts\mp\brclientmatchdata::getpresettruckspawns("apce_p1", &scripts\cp\maps\cp_arms_dealer\cp_arms_dealer_checkpoints::c4_obj_and_progress);
   scripts\mp\brclientmatchdata::getpresettruckspawns("arms_race_p1", &scripts\cp\maps\cp_arms_dealer\cp_arms_dealer_checkpoints::camera_loadout_showcase_preview_large_sticker_alt2);
@@ -79,7 +79,7 @@ function main() {
   if(isDefined(var_0) && var_0 != "") {
     scripts\mp\brclientmatchdata::getnextprop(var_0);
     scripts\mp\brclientmatchdata::getnextrpgspawnmodule(var_0);
-    level thread[[level.ref_12b19[var_0]]]();
+    level thread[[level.ref_12B19[var_0]]]();
   } else {
     var_1 = getDvar("cp_armsdealer_2_start_obj", "safehouse_armsdealer_return");
 

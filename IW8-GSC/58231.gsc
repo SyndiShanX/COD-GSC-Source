@@ -5,7 +5,7 @@
 
 function get_priority_player() {
   var_0 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle("cargo_truck_susp", 1);
-  var_0.destroycallback = &get_power_ref_from_weapon;
+  var_0.destroycallback = &get_power_ref_FROM_weapon;
   get_random_impact_point_on_line();
   get_random_circle_direction();
   get_random_leftover_letter();
@@ -75,28 +75,28 @@ function get_random_impact_point_on_line() {
 
 function get_random_circle_direction() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("cargo_truck_susp", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("cargo_truck_susp", "single", ["driver", "passenger"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("cargo_truck_susp", "single", ["driver", "passenger"]);
 }
 
 function get_random_leftover_letter() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("cargo_truck_susp", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("cargo_truck_susp", 1);
   var_0.id = 21;
   var_0.seatids["driver"] = 0;
   var_0.seatids["passenger"] = 1;
 }
 
 function get_proximity_alias() {
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("cargo_truck_susp", 2300);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("cargo_truck_susp", 2300);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("cargo_truck_susp");
   var_0.class = "heavy";
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("cargo_truck_susp");
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("cargo_truck_susp");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("cargo_truck_susp", 12);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("cargo_truck_susp", &get_players_inside_the_plane);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("cargo_truck_mp", 5);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("cargo_truck_mp", 5);
 }
 
 function get_prohibited_weapons_back() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("cargo_truck_susp", 1);
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("cargo_truck_susp", 1);
   var_0.challengeevaluator = 2;
   var_0.keycardlocs_chosen = 0.75;
   var_0.is_using_stealth_debug = 350;
@@ -130,7 +130,7 @@ function get_players_in_mortar_range(var_0, var_1) {
 
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "cargo_truck_susp", var_0);
   var_2.objweapon = getcompleteweaponname("cargo_truck_mp");
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
   thread scripts\cp_mp\vehicles\vehicle::vehicle_watchflipped(var_2, undefined, &scripts\cp_mp\vehicles\vehicle::vehicle_flippedendcallback);
 
@@ -141,7 +141,7 @@ function get_players_in_mortar_range(var_0, var_1) {
   return var_2;
 }
 
-function get_power_ref_from_weapon(var_0, var_1) {
+function get_power_ref_FROM_weapon(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = spawnStruct();
     var_0.inflictor = self;
@@ -179,7 +179,7 @@ function get_players_not_targeted_by_other_battle_station() {
 }
 
 function get_players_inside_the_plane(var_0) {
-  thread get_power_ref_from_weapon(var_0);
+  thread get_power_ref_FROM_weapon(var_0);
   return true;
 }
 

@@ -3,7 +3,7 @@
  * Script: scripts\cp\maps\cp_smuggler\cp_smuggler_checkpoints.gsc
 *******************************************************************/
 
-function ref_131ed() {
+function ref_131ED() {
   level.getplunderextractionsites = &getplatformweaponrankxpmultiplier;
   level.getnextpayloadspawnmodule = &getnexthelimodule;
 }
@@ -23,7 +23,7 @@ function getnexthelimodule() {
   return [var_0, var_1, var_2, var_4, var_5, var_3];
 }
 
-function ref_11c58() {
+function ref_11C58() {
   level.skip_nav_check_on_spectate_respawn = 1;
 
   if(scripts\engine\utility::flag_exist("player_spawned_with_loadout")) {
@@ -33,7 +33,7 @@ function ref_11c58() {
   thread scripts\cp\cp_objectives::run_objective("obj_tug_of_war", "primary");
 }
 
-function ref_11c5b() {
+function ref_11C5B() {
   if(scripts\engine\utility::flag_exist("player_spawned_with_loadout")) {
     scripts\engine\utility::flag_wait("player_spawned_with_loadout");
   }
@@ -41,4 +41,4 @@ function ref_11c5b() {
   thread scripts\cp\cp_objectives::run_objective("convoy4_secure_tower", "primary");
 }
 
-function ref_11c5c() {}
+function ref_11C5C() {}

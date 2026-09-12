@@ -12,8 +12,8 @@ function tac_cover_init() {
     }
   }
 
-  level.ref_139ff = getEntArray("dcover_blocker", "targetname");
-  level.ref_139fd = getdvarfloat("scr_tacCover_timeoutOverride", 150);
+  level.ref_139FF = getEntArray("dcover_blocker", "targetname");
+  level.ref_139FD = getdvarfloat("scr_tacCover_timeoutOverride", 150);
 }
 
 function tac_cover_on_give(var_0, var_1) {
@@ -40,11 +40,11 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
   var_5 = tac_cover_ignore_list(self);
   var_6 = anglesToForward(self.angles);
   var_7 = self.origin + var_6 * 32;
-  var_8 = _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12f67(var_7, 140, 20);
+  var_8 = _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12F67(var_7, 140, 20);
   var_9 = undefined;
   var_10 = 0;
 
-  if(ref_139ee(var_7)) {
+  if(ref_139EE(var_7)) {
     tac_cover_fire_failed(0);
     return false;
   }
@@ -95,7 +95,7 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
     var_24 = undefined;
 
     foreach(var_26 in var_8) {
-      if(var_9 _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12f68(var_26)) {
+      if(var_9 _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12F68(var_26)) {
         var_24 = var_26;
         break;
       }
@@ -109,10 +109,10 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
     }
 
     if(var_10 < 1600 && var_23 && var_28) {
-      var_30 = ref_139f4(var_9);
+      var_30 = ref_139F4(var_9);
 
       if(isDefined(var_24)) {
-        var_30 |= ref_139f4(var_24);
+        var_30 |= ref_139F4(var_24);
       }
 
       if(!istrue(var_30)) {
@@ -131,7 +131,7 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
 
       var_9.tutonplayerkilled = 1;
       self.taccoverrefund = undefined;
-      thread ref_139f6(var_9, var_24, var_3, var_4);
+      thread ref_139F6(var_9, var_24, var_3, var_4);
       scripts\mp\utility\stats::incpersstat("deployableCoverUsed", 1);
       return true;
     } else if(var_14 < 6400) {
@@ -204,7 +204,7 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
 
   var_45 = var_33[0]["entity"];
 
-  if(isDefined(var_45) && !ref_139f0(var_45)) {
+  if(isDefined(var_45) && !ref_139F0(var_45)) {
     tac_cover_fire_failed();
     return false;
   }
@@ -212,7 +212,7 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
   var_46 = var_33[0]["shape_position"];
   var_42 = var_33[0]["position"];
   var_47 = var_46 - (0, 0, 2.5);
-  var_48 = ref_139f2(var_45);
+  var_48 = ref_139F2(var_45);
   var_49 = 25.025;
   var_50 = pow(var_49 * 0.14, 2);
   var_51 = var_46;
@@ -250,7 +250,7 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
 
     var_45 = var_33[0]["entity"];
 
-    if(isDefined(var_45) && !ref_139f0(var_45)) {
+    if(isDefined(var_45) && !ref_139F0(var_45)) {
       tac_cover_fire_failed();
       return false;
     }
@@ -273,7 +273,7 @@ function tac_cover_on_fired(var_0, var_1, var_2, var_3) {
   return true;
 }
 
-function ref_139f2(var_0) {
+function ref_139F2(var_0) {
   if(isDefined(var_0)) {
     if(_calloutmarkerping_handleluinotify_enemyrepinged::tugofwar_tank(var_0) || _calloutmarkerping_handleluinotify_enemyrepinged::tryspawnweapons(var_0) || scripts\mp\gametypes\br_gondola::triggereliminatedoverlay(var_0) || scripts\mp\gametypes\br_soa_tower::triggeraddobjectivetext(var_0)) {
       return var_0;
@@ -300,7 +300,7 @@ function tac_cover_adjust_for_player_space(var_0, var_1, var_2) {
   var_6 = anglesToForward(var_1);
   var_7 = var_0 + var_6 * var_5;
 
-  foreach(var_9 in level.ref_139ff) {
+  foreach(var_9 in level.ref_139FF) {
     if(ispointinvolume(var_7 + (0, 0, 20), var_9)) {
       var_7 += (0, 0, -6);
       break;
@@ -343,7 +343,7 @@ function tac_cover_get_free_space(var_0, var_1, var_2, var_3, var_4) {
   return var_26;
 }
 
-function ref_139ee(var_0) {
+function ref_139EE(var_0) {
   if(isDefined(level.turrets)) {
     foreach(var_2 in level.turrets) {
       if(!isDefined(var_2)) {
@@ -392,7 +392,7 @@ function tac_cover_entmanagerdelete() {
   thread tac_cover_delete(0);
 }
 
-function ref_139f6(var_0, var_1, var_2, var_3) {
+function ref_139F6(var_0, var_1, var_2, var_3) {
   self endon("death_or_disconnect");
   self endon("tac_cover_taken");
   level endon("game_ended");
@@ -416,7 +416,7 @@ function ref_139f6(var_0, var_1, var_2, var_3) {
   tac_cover_spawn(var_12, var_13, var_14, var_2, var_3, var_0, var_1);
 }
 
-function ref_139f4(var_0) {
+function ref_139F4(var_0) {
   self endon("death_or_disconnect");
   self endon("tac_cover_taken");
   level endon("game_ended");
@@ -451,7 +451,7 @@ function tac_cover_spawn(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7.moving_platform = var_2;
     var_8 = spawnStruct();
     var_8.linkparent = var_7.moving_platform;
-    var_8.deathoverridecallback = &ref_139f5;
+    var_8.deathoverridecallback = &ref_139F5;
     var_8.validateaccuratetouching = 1;
     var_7 thread scripts\mp\movers::handle_moving_platforms(var_8);
     thread tac_cover_destroy_on_unstuck();
@@ -536,14 +536,14 @@ function tac_cover_spawn_collision(var_0) {
   var_2 linkTo(var_0);
   var_2 setentityowner(self);
 
-  if(!isDefined(level.ref_139fe)) {
+  if(!isDefined(level.ref_139FE)) {
     var_2 disconnectPaths();
   }
 
   return var_2;
 }
 
-function ref_139f1(var_0, var_1) {
+function ref_139F1(var_0, var_1) {
   var_2 = 100;
 
   if(!isDefined(var_1)) {
@@ -563,7 +563,7 @@ function ref_139f1(var_0, var_1) {
     if(isDefined(var_10.equipmentref)) {
       if(var_10.equipmentref == "equip_tac_cover") {
         tac_cover_destroy(var_10, undefined, 1);
-        var_10.ref_11b0d = 1;
+        var_10.ref_11B0D = 1;
       }
     }
   }
@@ -641,7 +641,7 @@ function tac_cover_delete(var_0) {
 
 function tac_cover_destroy_on_timeout() {
   self endon("death");
-  wait level.ref_139fd;
+  wait level.ref_139FD;
   tac_cover_destroy(undefined, 0);
 }
 
@@ -679,7 +679,7 @@ function tac_cover_set_can_damage(var_0) {
 }
 
 function tac_cover_handle_damage(var_0) {
-  var_1 = ref_139ed(var_0);
+  var_1 = ref_139ED(var_0);
 
   if(isDefined(self.owner)) {
     var_2 = max(self.maxhealth - self.damagetaken, 0);
@@ -690,7 +690,7 @@ function tac_cover_handle_damage(var_0) {
   return var_1;
 }
 
-function ref_139ed(var_0) {
+function ref_139ED(var_0) {
   var_1 = var_0.attacker;
   var_2 = var_0.objweapon;
   var_3 = var_0.meansofdeath;
@@ -826,7 +826,7 @@ function tac_cover_ignore_list(var_0) {
   return var_1;
 }
 
-function ref_139f0(var_0) {
+function ref_139F0(var_0) {
   if(isPlayer(var_0)) {
     return false;
   }
@@ -875,10 +875,10 @@ function tac_cover_on_take_super() {
 function tac_cover_destroy_on_disowned(var_0) {
   self endon("death");
   var_0 endon("tac_cover_taken");
-  var_0 scripts\engine\utility::ref_143a5("joined_team", "disconnect");
+  var_0 scripts\engine\utility::ref_143A5("joined_team", "disconnect");
   thread tac_cover_destroy(undefined, undefined, 0);
 }
 
-function ref_139f5(var_0) {
+function ref_139F5(var_0) {
   tac_cover_destroy(var_0.attacker, undefined, 0);
 }

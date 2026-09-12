@@ -47,7 +47,7 @@ function init_each_perk() {
   self.perk_data["enemy_damage_to_player_armor_scalar"] = 1;
   self.perk_data["damage_to_enemy_armor_scalar"] = 1;
   self.perk_data["hack_speed_boost"] = 0;
-  thread scripts\cp\cp_agent_damage::ref_13c35();
+  thread scripts\cp\cp_agent_damage::ref_13C35();
   init_class_changed_values();
 }
 
@@ -177,7 +177,7 @@ function reduce_recoil() {
   scripts\cp\cp_weapon::updateviewkickscale();
 }
 
-function ref_12bee() {
+function ref_12BEE() {
   if(isDefined(self.old_recoil_scale)) {
     if(self.old_recoil_scale != -1) {
       self player_recoilscaleon(self.old_recoil_scale);
@@ -257,7 +257,7 @@ function init_core_mp_perks() {
   registerscriptperk("specialty_improved_field_upgrades");
   registerscriptperk("specialty_faster_field_upgrade", &give_tune_up, &take_tune_up);
   registerscriptperk("specialty_quick_fix", undefined, undefined, ["specialty_reduce_regen_delay_on_kill", "specialty_reduce_regen_delay_on_objective"]);
-  registerscriptperk("specialty_reduce_regen_delay_on_kill", &ref_131b9, &ref_13f6d);
+  registerscriptperk("specialty_reduce_regen_delay_on_kill", &ref_131B9, &ref_13F6D);
   registerscriptperk("specialty_reduce_regen_delay_on_objective", &setreduceregendelayonobjective, &unsetreduceregendelayonobjective);
   registerscriptperk("specialty_hardline", &sethardline, &unsethardline);
   registerscriptperk("specialty_warhead", &give_amped, &take_amped, ["specialty_fastreload_launchers"]);
@@ -293,7 +293,7 @@ function init_core_mp_perks() {
   registerscriptperk("specialty_engineer", &setengineer, &unsetengineer, ["specialty_outlinekillstreaks"]);
   registerscriptperk("specialty_markequipment", &setmarkequipment, &unsetmarkequipment);
   registerscriptperk("specialty_outlinekillstreaks", &setoutlinekillstreaks, &unsetoutlinekillstreaks);
-  thread ref_1309d();
+  thread ref_1309D();
   registerscriptperk("specialty_eod", undefined, undefined, ["specialty_blastshield", "specialty_hack", "specialty_throwback", "specialty_shrapnel_resist"]);
   registerscriptperk("specialty_blastshield", &setblastshield, &unsetblastshield);
   registerscriptperk("specialty_hack");
@@ -304,7 +304,7 @@ function init_core_mp_perks() {
   registerscriptperk("specialty_ammo_disabling");
   registerscriptperk("specialty_viewkickoverride", &setviewkickoverride, &unsetviewkickoverride);
   registerscriptperk("specialty_delayhealing");
-  registerscriptperk("specialty_hardmelee", &ref_13094, &ref_13f31);
+  registerscriptperk("specialty_hardmelee", &ref_13094, &ref_13F31);
 }
 
 function registerscriptperk(var_0, var_1, var_2, var_3) {
@@ -370,9 +370,9 @@ function unsetgasgrenaderesist() {
   }
 }
 
-function ref_131b9() {}
+function ref_131B9() {}
 
-function ref_13f6d() {}
+function ref_13F6D() {}
 
 function setreduceregendelayonobjective() {}
 
@@ -386,7 +386,7 @@ function sethardline() {
     return;
   }
 
-  thread ref_12de9();
+  thread ref_12DE9();
   self.hardlineactive["assists"] = 0;
 }
 
@@ -395,7 +395,7 @@ function unsethardline() {
   self notify("perk_end_hardline");
 }
 
-function ref_12de9() {
+function ref_12DE9() {
   level endon("game_ended");
   self endon("disconnect");
   self endon("perk_end_hardline");
@@ -696,7 +696,7 @@ function brjugg_initdialog() {
   }
 }
 
-function ref_11a96() {
+function ref_11A96() {
   var_0 = ["brloot_munition", "brloot_munition_airdrop", "brloot_munition_ammo", "brloot_munition_armor", "brloot_munition_c4_launcher", "brloot_munition_cluster_strike", "brloot_munition_cruise_missile", "brloot_munition_cruise_predator", "brloot_munition_deployable_cover", "brloot_munition_grenade_crate", "brloot_munition_grenade_launcher", "brloot_munition_juggernaut", "brloot_munition_precision_airstrike", "brloot_munition_thermite_launcher", "brloot_munition_trophysystem", "brloot_munition_turret", "brloot_munition_uav", "brloot_munition_white_phos"];
 
   foreach(var_2 in var_0) {
@@ -716,22 +716,22 @@ function ref_11a96() {
   }
 }
 
-function ref_11a8d() {
+function ref_11A8D() {
   var_0 = 10;
-  level.ref_1215f = [];
-  level.ref_1215e = [];
+  level.ref_1215F = [];
+  level.ref_1215E = [];
 
   for(var_1 = 0; var_1 < var_0; var_1++) {
-    level.ref_1215f[var_1] = spawn("script_model", (0, 0, 0));
-    level.ref_1215f[var_1].angles = (0, 0, 0);
-    level.ref_1215f[var_1] setModel("container_ammo_box_01_nophysics_cp");
-    level.ref_1215f[var_1] enableplayermarks("equipment");
+    level.ref_1215F[var_1] = spawn("script_model", (0, 0, 0));
+    level.ref_1215F[var_1].angles = (0, 0, 0);
+    level.ref_1215F[var_1] setModel("container_ammo_box_01_nophysics_cp");
+    level.ref_1215F[var_1] enableplayermarks("equipment");
   }
 
-  thread ref_11ce7();
+  thread ref_11CE7();
 }
 
-function ref_11ce7() {
+function ref_11CE7() {
   level endon("game_ended");
 
   for(;;) {
@@ -758,12 +758,12 @@ function prohibited_weapon_list_from_vehicle() {
   }
 
   var_3 = sortbydistance(var_3, self.origin);
-  var_11 = level.ref_1215f;
+  var_11 = level.ref_1215F;
   var_12 = [];
   var_13 = [];
 
   for(var_14 = 0; var_14 < var_3.size; var_14++) {
-    if(!isDefined(level.ref_1215e[var_3[var_14].index])) {
+    if(!isDefined(level.ref_1215E[var_3[var_14].index])) {
       var_13 = var_3[var_14];
     }
   }
@@ -772,21 +772,21 @@ function prohibited_weapon_list_from_vehicle() {
     var_15 = 0;
 
     for(var_14 = 0; var_14 < min(var_13.size, var_1); var_14++) {
-      for(var_16 = 0; var_16 < level.ref_1215f.size; var_16++) {
+      for(var_16 = 0; var_16 < level.ref_1215F.size; var_16++) {
         if(isDefined(var_12[var_16])) {
           continue;
         }
 
-        if(isDefined(level.ref_1215f[var_16])) {
-          level.ref_1215f[var_16] dontinterpolate();
+        if(isDefined(level.ref_1215F[var_16])) {
+          level.ref_1215F[var_16] dontinterpolate();
         }
 
-        level.ref_1215f[var_16].origin = var_13[var_14].origin;
-        level.ref_1215f[var_16].angles = var_13[var_14].angles;
-        level.ref_1215f[var_16].index = var_13[var_14].index;
-        level.ref_1215e[level.ref_1215f[var_16].index] = undefined;
-        level.ref_1215e[var_13[var_14].index] = level.ref_1215f[var_16];
-        unmarkent(level.ref_1215f[var_16]);
+        level.ref_1215F[var_16].origin = var_13[var_14].origin;
+        level.ref_1215F[var_16].angles = var_13[var_14].angles;
+        level.ref_1215F[var_16].index = var_13[var_14].index;
+        level.ref_1215E[level.ref_1215F[var_16].index] = undefined;
+        level.ref_1215E[var_13[var_14].index] = level.ref_1215F[var_16];
+        unmarkent(level.ref_1215F[var_16]);
         var_12 = var_13[var_14];
         break;
       }
@@ -846,10 +846,10 @@ function markequipment_monitorlook() {
   }
 }
 
-function ref_1309d() {
-  level.ref_12fbe = 6000;
-  level.ref_12fc0 = 1500;
-  level.ref_12fbf = 1000;
+function ref_1309D() {
+  level.ref_12FBE = 6000;
+  level.ref_12FC0 = 1500;
+  level.ref_12FBF = 1000;
 }
 
 function markequipment_updatestate() {
@@ -860,11 +860,11 @@ function markequipment_updatestate() {
   var_1 = 0;
 
   if(self entityhasmark("air_killstreak", self.markequipmentstate.markingent)) {
-    var_1 = level.ref_12fbe;
+    var_1 = level.ref_12FBE;
   } else if(self entityhasmark("killstreak", self.markequipmentstate.markingent)) {
-    var_1 = level.ref_12fc0;
+    var_1 = level.ref_12FC0;
   } else if(self entityhasmark("equipment", self.markequipmentstate.markingent)) {
-    var_1 = level.ref_12fbf;
+    var_1 = level.ref_12FBF;
   }
 
   var_2 = var_1 * var_1;
@@ -1135,7 +1135,7 @@ function unsetoutlinekillstreaks() {
   self notify("unsetOutlineKillstreak");
 }
 
-function ref_11b0b(var_0, var_1) {
+function ref_11B0B(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
@@ -1163,7 +1163,7 @@ function markedentities_think() {
       }
 
       if(isDefined(self.markequipmentstate)) {
-        self.markequipmentstate.markedents = ref_11b0b(self.markequipmentstate.markedents, var_0);
+        self.markequipmentstate.markedents = ref_11B0B(self.markequipmentstate.markedents, var_0);
 
         if(self.markequipmentstate.markedentindex > self.markequipmentstate.markedents.size) {
           self.markequipmentstate.markedentindex = self.markequipmentstate.markedents.size;
@@ -1195,7 +1195,7 @@ function unsetblastshield() {
 
 function settracker() {
   thread runtrackkillstreakuse();
-  thread ref_12dfd();
+  thread ref_12DFD();
 }
 
 function unsettracker() {
@@ -1223,12 +1223,12 @@ function runtrackkillstreakuse() {
   }
 }
 
-function ref_12dfd() {
+function ref_12DFD() {
   self endon("death_or_disconnect");
   self endon("tracker_removed");
   var_0 = cos(70);
   var_1 = 0;
-  self.ref_142b0 = [];
+  self.ref_142B0 = [];
   self.outlineids = [];
   var_2 = 5000;
 
@@ -1245,7 +1245,7 @@ function ref_12dfd() {
         continue;
       }
 
-      if(var_5 scripts\cp\coop_stealth::ref_132d7()) {
+      if(var_5 scripts\cp\coop_stealth::ref_132D7()) {
         if(isDefined(var_5.fnisinstealthcombat) && var_5[[var_5.fnisinstealthcombat]]()) {
           continue;
         }
@@ -1268,13 +1268,13 @@ function ref_12dfd() {
       var_8 = sighttracepassed(self getEye(), var_5 getEye(), 0, undefined);
 
       if(!var_8) {
-        if(isDefined(self.ref_142b0[var_6])) {
+        if(isDefined(self.ref_142B0[var_6])) {
           var_9 = gettime();
           var_10 = var_9 - var_2;
 
-          if(self.ref_142b0[var_6] < var_10) {} else {
+          if(self.ref_142B0[var_6] < var_10) {} else {
             awardobjtimeforcarrier(var_5, var_6, self);
-            thread ref_13f75(var_5, self);
+            thread ref_13F75(var_5, self);
           }
         }
 
@@ -1282,8 +1282,8 @@ function ref_12dfd() {
       }
 
       var_9 = gettime();
-      self.ref_142b0[var_6] = var_9;
-      ref_12be6(var_5, var_6, self);
+      self.ref_142B0[var_6] = var_9;
+      ref_12BE6(var_5, var_6, self);
     }
 
     var_1 = 0;
@@ -1298,14 +1298,14 @@ function awardobjtimeforcarrier(var_0, var_1) {
   }
 }
 
-function ref_13f75(var_0, var_1) {
+function ref_13F75(var_0, var_1) {
   self endon("track_enemy");
   var_2 = self getentitynumber();
   wait var_1;
-  ref_12be6(var_2, var_0);
+  ref_12BE6(var_2, var_0);
 }
 
-function ref_12be6(var_0, var_1) {
+function ref_12BE6(var_0, var_1) {
   var_2 = var_1.outlineids[var_0];
 
   if(isDefined(var_2)) {
@@ -1318,8 +1318,8 @@ function ref_12be6(var_0, var_1) {
 
 function setviewkickoverride() {
   self.overrideviewkickscale = 0.05;
-  self.ref_1218d = 0.05;
-  self.ref_1218e = 0.02;
+  self.ref_1218D = 0.05;
+  self.ref_1218E = 0.02;
   self.overrideviewkickscalesniper = 0.3;
   self.overrideviewkickscalepistol = 0.05;
   scripts\cp\cp_weapon::updateviewkickscale();
@@ -1327,8 +1327,8 @@ function setviewkickoverride() {
 
 function unsetviewkickoverride() {
   self.overrideviewkickscale = undefined;
-  self.ref_1218d = undefined;
-  self.ref_1218e = undefined;
+  self.ref_1218D = undefined;
+  self.ref_1218E = undefined;
   self.overrideviewkickscalesniper = undefined;
   self.overrideviewkickscalepistol = undefined;
   scripts\cp\cp_weapon::updateviewkickscale();
@@ -1338,7 +1338,7 @@ function ref_13094() {
   self.perk_data["melee_scalar"] = 2;
 }
 
-function ref_13f31() {
+function ref_13F31() {
   self.perk_data["melee_scalar"] = 1;
 }
 
@@ -1362,9 +1362,9 @@ function recharge_lethals_over_time(var_0) {
   self endon("death");
   level endon("game_ended");
   self endon("take_restock");
-  thread ref_12c5f();
-  thread ref_12c5d();
-  thread ref_13f8b();
+  thread ref_12C5F();
+  thread ref_12C5D();
+  thread ref_13F8B();
 
   for(;;) {
     self.ref_12141 = register_chopper_boss_combat_actions(self, "primary");
@@ -1392,7 +1392,7 @@ function recharge_lethals_over_time(var_0) {
   }
 }
 
-function ref_13f8b() {
+function ref_13F8B() {
   self endon("death");
   level endon("game_ended");
   self endon("take_restock");
@@ -1404,7 +1404,7 @@ function ref_13f8b() {
   }
 }
 
-function ref_12c5f() {
+function ref_12C5F() {
   level endon("game_ended");
   self waittill("take_restock");
   self.ref_14388 = 0;
@@ -1414,7 +1414,7 @@ function ref_12c5f() {
   self setclientomnvar("ui_tactical_recharge_progress", 0);
 }
 
-function ref_12c5d() {
+function ref_12C5D() {
   level endon("game_ended");
   self endon("take_restock");
   var_0 = 30;
@@ -1440,9 +1440,9 @@ function kill_drone_turret(var_0, var_1) {
     return;
   }
 
-  thread ref_138c5("ui_lethal_recharge_progress", "primary");
+  thread ref_138C5("ui_lethal_recharge_progress", "primary");
   var_0.ref_14387 = 1;
-  ref_13fac("ui_lethal_recharge_progress", var_1, 0);
+  ref_13FAC("ui_lethal_recharge_progress", var_1, 0);
   var_0.ref_14387 = 0;
   var_0 scripts\cp\cp_powers::power_addammo(race_is_player_driving_vehicle(var_0, "primary"), 1);
 
@@ -1464,9 +1464,9 @@ function kill_furthest_enemy(var_0, var_1) {
     return;
   }
 
-  thread ref_138c5("ui_tactical_recharge_progress", "secondary");
+  thread ref_138C5("ui_tactical_recharge_progress", "secondary");
   var_0.ref_14388 = 1;
-  ref_13fac("ui_tactical_recharge_progress", var_1, 1);
+  ref_13FAC("ui_tactical_recharge_progress", var_1, 1);
   var_0.ref_14388 = 0;
   var_0 scripts\cp\cp_powers::power_addammo(race_is_player_driving_vehicle(var_0, "secondary"), 1);
 
@@ -1478,7 +1478,7 @@ function kill_furthest_enemy(var_0, var_1) {
   var_0 notify("restock_done");
 }
 
-function ref_13fac(var_0, var_1, var_2) {
+function ref_13FAC(var_0, var_1, var_2) {
   self setclientomnvar("ui_recharge_notify", -1);
   var_3 = gettime();
   var_4 = var_3 + var_1 * 1000;
@@ -1501,7 +1501,7 @@ function ref_13fac(var_0, var_1, var_2) {
   self setclientomnvar(var_0, 0);
 }
 
-function ref_138c5(var_0, var_1) {
+function ref_138C5(var_0, var_1) {
   self endon("death");
   level endon("game_ended");
   self endon("take_restock");

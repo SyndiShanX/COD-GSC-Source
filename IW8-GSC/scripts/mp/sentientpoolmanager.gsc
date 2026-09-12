@@ -97,7 +97,7 @@ function monitorsentient(var_0) {
   var_2 = self.sentientpoolindex;
 
   if(isDefined(var_0)) {
-    scripts\engine\utility::ref_143a6("death", "remove_sentient", var_0);
+    scripts\engine\utility::ref_143A6("death", "remove_sentient", var_0);
   } else {
     scripts\engine\utility::waittill_either("death", "remove_sentient");
   }

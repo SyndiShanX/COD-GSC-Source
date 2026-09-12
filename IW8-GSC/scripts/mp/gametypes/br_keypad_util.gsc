@@ -4,11 +4,11 @@
 ***************************************************/
 
 function removedeathicon() {
-  return ref_126d6("ui_keypad_data", 0, 2);
+  return ref_126D6("ui_keypad_data", 0, 2);
 }
 
 function removealldeathicons() {
-  return ref_126d6("ui_keypad_data", 2, 4);
+  return ref_126D6("ui_keypad_data", 2, 4);
 }
 
 function ref_12685(var_0) {
@@ -114,7 +114,7 @@ function ref_12610(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_126d6(var_0, var_1, var_2) {
+function ref_126D6(var_0, var_1, var_2) {
   var_3 = self calloutmarkerping_entityzoffset(var_0);
   var_4 = (1 << var_2) - 1;
   var_5 = var_3 >> var_1;

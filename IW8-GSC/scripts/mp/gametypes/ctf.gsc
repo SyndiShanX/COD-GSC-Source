@@ -23,7 +23,7 @@ function initializematchrules() {
 }
 
 function onspawnplayer() {
-  ref_13ffa();
+  ref_13FFA();
 }
 
 function onstartgametype() {
@@ -114,14 +114,14 @@ function createflagsandhud() {
   level.iconcaptureflag = "waypoint_take_flag";
   level.icondefendflag = "waypoint_defend_flag";
   level.iconreturnflag = "waypoint_recover_flag";
-  level.ref_11c5f = "waypoint_mlg_empty_flag";
-  level.ref_11c60 = "waypoint_mlg_full_flag";
+  level.ref_11C5F = "waypoint_mlg_empty_flag";
+  level.ref_11C60 = "waypoint_mlg_full_flag";
   level.teamflags[game["defenders"]] = createteamflag(game["defenders"], "axis");
   level.teamflags[game["attackers"]] = createteamflag(game["attackers"], "allies");
   level.capzones[game["defenders"]] = createcapzone(game["defenders"], "axis");
   level.capzones[game["attackers"]] = createcapzone(game["attackers"], "allies");
-  scripts\mp\objidpoolmanager::ref_11f84(level.capzones[game["defenders"]].objidnum, 1);
-  scripts\mp\objidpoolmanager::ref_11f84(level.capzones[game["attackers"]].objidnum, 1);
+  scripts\mp\objidpoolmanager::ref_11F84(level.capzones[game["defenders"]].objidnum, 1);
+  scripts\mp\objidpoolmanager::ref_11F84(level.capzones[game["attackers"]].objidnum, 1);
 }
 
 function flag_setupvfx() {}
@@ -459,12 +459,12 @@ function createteamflag(var_0, var_1) {
   var_9 scripts\mp\gameobjects::setteamusetime("friendly", level.pickuptime);
   var_9 scripts\mp\gameobjects::setteamusetime("enemy", level.returntime);
   var_9 scripts\mp\gameobjects::setvisibleteam("none");
-  var_9 scripts\mp\gameobjects::ref_1317f(level.iconescort, level.iconkill, level.ref_11c60);
+  var_9 scripts\mp\gameobjects::ref_1317F(level.iconescort, level.iconkill, level.ref_11C60);
   var_9 scripts\mp\objidpoolmanager::objective_set_play_intro(var_9.objidnum, 0);
   var_9 scripts\mp\objidpoolmanager::objective_set_play_outro(var_9.objidnum, 0);
-  var_9 scripts\mp\gameobjects::ref_12b13(&player_infil_already_played);
+  var_9 scripts\mp\gameobjects::ref_12B13(&player_infil_already_played);
   var_9.allowweapons = 1;
-  var_9.ref_1214b = var_8;
+  var_9.ref_1214B = var_8;
   var_9.onpickup = &onpickup;
   var_9.onpickupfailed = &onpickup;
   var_9.ondrop = &ondrop;
@@ -517,7 +517,7 @@ function createteamflag(var_0, var_1) {
     scripts\mp\objidpoolmanager::objective_set_play_outro(var_10, 0);
     var_9 scripts\mp\gameobjects::setvisibleteam("none", var_10);
     objective_setownerteam(var_10, var_0);
-    var_9 scripts\mp\gameobjects::ref_1317f(level.iconescort, level.iconkill, level.ref_11c60, var_10);
+    var_9 scripts\mp\gameobjects::ref_1317F(level.iconescort, level.iconkill, level.ref_11C60, var_10);
   } else {
     var_9.objidpingfriendly = 1;
     var_9.objidpingenemy = 0;
@@ -572,7 +572,7 @@ function createcapzone(var_0, var_1) {
   var_6 = scripts\mp\gameobjects::createuseobject(var_0, var_3, var_5, (0, 0, 85));
   var_6 scripts\mp\gameobjects::allowuse("friendly");
   var_6 scripts\mp\gameobjects::setvisibleteam("any");
-  var_6 scripts\mp\gameobjects::ref_1317f(level.icondefendflag, level.iconcaptureflag, level.ref_11c60);
+  var_6 scripts\mp\gameobjects::ref_1317F(level.icondefendflag, level.iconcaptureflag, level.ref_11C60);
   var_6 scripts\mp\gameobjects::setusetime(0);
   var_6 scripts\mp\gameobjects::setkeyobject(level.teamflags[scripts\mp\utility\game::getotherteam(var_0)[0]]);
   var_6.onuse = &onuse;
@@ -637,11 +637,11 @@ function onpickup(var_0, var_1, var_2) {
     var_1 thread scripts\mp\utility\points::giveunifiedpoints("flag_return");
 
     if(level.codcasterenabled) {
-      level.capzones[var_1.team] scripts\mp\gameobjects::ref_12c75();
+      level.capzones[var_1.team] scripts\mp\gameobjects::ref_12C75();
     }
 
     thread returnflag();
-    var_1 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "obj_return", var_1.origin);
+    var_1 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "obj_return", var_1.origin);
     scripts\mp\utility\print::printandsoundoneveryone(var_5, scripts\mp\utility\game::getotherteam(var_5)[0], undefined, undefined, "mp_obj_returned", "mp_obj_returned", var_1);
     scripts\mp\utility\dialog::leaderdialog("enemy_flag_returned", var_5, "status");
     scripts\mp\utility\dialog::leaderdialog("flag_returned", var_5, "status");
@@ -653,7 +653,7 @@ function onpickup(var_0, var_1, var_2) {
       var_1 scripts\mp\utility\stats::setextrascore1(var_1.pers["returns"]);
     }
 
-    if(self.ref_1214b == "allies") {
+    if(self.ref_1214B == "allies") {
       setomnvar("ui_ctf_flag_axis", -2);
       return;
     }
@@ -671,7 +671,7 @@ function onpickup(var_0, var_1, var_2) {
   var_1 scripts\mp\utility\stats::incpersstat("pickups", 1);
   level.closecapturekiller[var_5] = undefined;
 
-  if(self.ref_1214b == "allies") {
+  if(self.ref_1214B == "allies") {
     setomnvar("ui_ctf_flag_axis", var_1 getentitynumber());
   } else {
     setomnvar("ui_ctf_flag_allies", var_1 getentitynumber());
@@ -687,18 +687,18 @@ function onpickup(var_0, var_1, var_2) {
       objective_state(self.pingobjidnum, "current");
       scripts\mp\gameobjects::updatecompassicon("enemy", self.pingobjidnum);
       objective_icon(self.pingobjidnum, "icon_waypoint_kill");
-      scripts\mp\objidpoolmanager::ref_11f7d(self.pingobjidnum, 1);
+      scripts\mp\objidpoolmanager::ref_11F7D(self.pingobjidnum, 1);
     }
   }
 
-  scripts\mp\gameobjects::ref_1317f(level.iconescort, level.iconkill, level.ref_11c60);
+  scripts\mp\gameobjects::ref_1317F(level.iconescort, level.iconkill, level.ref_11C60);
 
   if(level.capturecondition == 0) {
     level.capzones[var_5] scripts\mp\gameobjects::allowuse("none");
   }
 
   level.capzones[var_5] scripts\mp\gameobjects::setvisibleteam("none");
-  level.capzones[var_5] scripts\mp\gameobjects::ref_13172(level.ref_11c5f);
+  level.capzones[var_5] scripts\mp\gameobjects::ref_13172(level.ref_11C5F);
   scripts\mp\utility\print::printandsoundoneveryone(var_5, var_5, undefined, undefined, "mp_obj_taken", "mp_enemy_obj_taken", var_1);
   scripts\mp\utility\dialog::leaderdialog("enemy_flag_taken", var_5);
   scripts\mp\utility\dialog::leaderdialog("flag_getback", var_5);
@@ -708,7 +708,7 @@ function onpickup(var_0, var_1, var_2) {
     var_1 thread scripts\mp\utility\points::giveunifiedpoints("flag_grab");
   }
 
-  var_1 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "pickup", var_1.origin);
+  var_1 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "pickup", var_1.origin);
   self.previouscarrier = var_1;
 
   if(level.codcasterenabled) {
@@ -729,13 +729,13 @@ function ondrop(var_0) {
     self.droppedteam = var_0.leaving_team;
     var_0.leaving_team = undefined;
   } else if(!isDefined(var_0)) {
-    self.droppedteam = self.ref_1214b;
+    self.droppedteam = self.ref_1214B;
   } else {
     self.droppedteam = var_0.team;
   }
 
   if(isDefined(var_0)) {
-    ref_13ffa(var_0);
+    ref_13FFA(var_0);
   }
 
   scripts\mp\gameobjects::setownerteam(scripts\mp\utility\game::getotherteam(self.droppedteam)[0]);
@@ -746,13 +746,13 @@ function ondrop(var_0) {
   objective_state(self.pingobjidnum, "done");
 
   if(level.returntime >= 0) {
-    scripts\mp\gameobjects::ref_1317f(level.iconreturnflag, level.iconcaptureflag, level.ref_11c60);
+    scripts\mp\gameobjects::ref_1317F(level.iconreturnflag, level.iconcaptureflag, level.ref_11C60);
   } else {
-    scripts\mp\gameobjects::ref_1317f(level.icondefendflag, level.iconcaptureflag, level.ref_11c60);
-    scripts\mp\objidpoolmanager::ref_11f7d(self.objidnum, 1);
+    scripts\mp\gameobjects::ref_1317F(level.icondefendflag, level.iconcaptureflag, level.ref_11C60);
+    scripts\mp\objidpoolmanager::ref_11F7D(self.objidnum, 1);
   }
 
-  if(self.ref_1214b == "allies") {
+  if(self.ref_1214B == "allies") {
     setomnvar("ui_ctf_flag_axis", -1);
   } else {
     setomnvar("ui_ctf_flag_allies", -1);
@@ -782,8 +782,8 @@ function ondrop(var_0) {
     scripts\mp\utility\sound::playsoundonplayers("mp_war_objective_lost", var_2);
   }
 
-  scripts\mp\utility\dialog::leaderdialog("enemy_flag_dropped", self.ref_1214b, "status");
-  scripts\mp\utility\dialog::leaderdialog("flag_dropped", scripts\mp\utility\game::getotherteam(self.ref_1214b)[0], "status");
+  scripts\mp\utility\dialog::leaderdialog("enemy_flag_dropped", self.ref_1214B, "status");
+  scripts\mp\utility\dialog::leaderdialog("flag_dropped", scripts\mp\utility\game::getotherteam(self.ref_1214B)[0], "status");
 
   if(level.idleresettime > 0) {
     thread returnaftertime();
@@ -822,7 +822,7 @@ function onreset() {
   scripts\mp\gameobjects::setvisibleteam("none");
   scripts\mp\gameobjects::setobjectivestatusicons(level.iconescort, level.iconkill);
 
-  if(self.ref_1214b == "allies") {
+  if(self.ref_1214B == "allies") {
     setomnvar("ui_ctf_flag_axis", -2);
   } else {
     setomnvar("ui_ctf_flag_allies", -2);
@@ -830,7 +830,7 @@ function onreset() {
 
   level.capzones[var_1] scripts\mp\gameobjects::allowuse("friendly");
   level.capzones[var_1] scripts\mp\gameobjects::setvisibleteam("any");
-  level.capzones[var_1] scripts\mp\gameobjects::ref_1317f(level.icondefendflag, level.iconcaptureflag, level.ref_11c60);
+  level.capzones[var_1] scripts\mp\gameobjects::ref_1317F(level.icondefendflag, level.iconcaptureflag, level.ref_11C60);
   self.previouscarrier = undefined;
 }
 
@@ -853,12 +853,12 @@ function onuse(var_0) {
     scripts\mp\utility\dialog::leaderdialog("flag_captured", var_2, "status");
     scripts\mp\utility\game::setmlgannouncement(17, var_1.team, var_1 getentitynumber());
     objective_state(level.teamflags[var_2].pingobjidnum, "done");
-    ref_13ffa(var_1);
+    ref_13FFA(var_1);
     thread scripts\mp\hud_util::teamplayercardsplash("callout_flagcapture", var_1);
     var_1 thread scripts\mp\rank::scoreeventpopup("flag_capture");
     var_1 thread scripts\mp\awards::givemidmatchaward("mode_ctf_cap");
     var_1 notify("objective", "captured");
-    var_1 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_1.origin);
+    var_1 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_1.origin);
 
     if(level.codcasterenabled) {
       var_1 setgametypevip(0);
@@ -885,7 +885,7 @@ function onuse(var_0) {
     level.closecapturekiller[var_2] = undefined;
 
     if(level.codcasterenabled) {
-      level.capzones[var_2] scripts\mp\gameobjects::ref_12c75();
+      level.capzones[var_2] scripts\mp\gameobjects::ref_12C75();
     }
 
     returnflag(level.teamflags[var_2]);
@@ -980,7 +980,7 @@ function superabilitywatcher() {
 
     switch (var_3.staticdata.ref) {
       case "super_rewind":
-        scripts\engine\utility::ref_143a5("teleport_success", "rewind_success");
+        scripts\engine\utility::ref_143A5("teleport_success", "rewind_success");
         var_2 thread scripts\mp\gameobjects::setdropped();
         return;
     }
@@ -1050,7 +1050,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       var_1 scripts\mp\utility\stats::incpersstat("carrierKills", 1);
       var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
       var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
-      thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "carrying");
+      thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "carrying");
       scripts\mp\utility\game::setmlgannouncement(20, var_1.team, var_1 getentitynumber());
       var_10 = 1;
     }
@@ -1075,14 +1075,14 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       if(var_14) {
         var_1 thread scripts\mp\rank::scoreeventpopup("assault");
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
-        thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "defending");
+        thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "defending");
         var_1 scripts\mp\utility\stats::incpersstat("assaults", 1);
       } else if(var_15) {
         var_1 thread scripts\mp\rank::scoreeventpopup("defend");
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
         var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
         var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
-        thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "assaulting");
+        thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "assaulting");
       }
     }
   }
@@ -1105,7 +1105,7 @@ function distsquaredcheck(var_0, var_1, var_2) {
 }
 
 function attachflag() {
-  ref_13ff9();
+  ref_13FF9();
   var_0 = scripts\mp\utility\game::getotherteam(self.pers["team"])[0];
   self attach(level.carryflag[var_0], "tag_stowed_back3", 1);
   self.carryflag = level.carryflag[var_0];
@@ -1237,10 +1237,10 @@ function setupwaypointicons() {
   scripts\mp\gamelogic::setwaypointiconinfo("waypoint_mlg_full_flag", 0, "friendly", "MP_INGAME_ONLY/OBJ_DEFEND_CAPS", "codcaster_icon_waypoint_ctf_full", 0);
 }
 
-function ref_13ffa() {
+function ref_13FFA() {
   self setclientomnvar("ui_match_status_hint_text", 37);
 }
 
-function ref_13ff9() {
+function ref_13FF9() {
   self setclientomnvar("ui_match_status_hint_text", 38);
 }

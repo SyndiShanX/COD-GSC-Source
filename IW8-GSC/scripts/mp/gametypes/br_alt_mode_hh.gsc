@@ -11,7 +11,7 @@ function airfield_safehouse_loot() {
   level.ref_13443["vanish"] = loadfx("vfx/core/impacts/small_snowhit");
   level.helidrivableenablesiteonflyaway["vanish"] = loadfx("vfx/iw8_br/island/gameplay/festferv/vfx_br_holiday_coal_dust_emit.vfx");
   level.helidrivableenablesiteonflyaway["screen"] = loadfx("vfx/iw8_br/island/gameplay/festferv/vfx_br_holiday_coal_imp_1st.vfx");
-  level.ref_1207b = &airlock_show_back_doors;
+  level.ref_1207B = &airlock_show_back_doors;
   level.playerwaittospawn = &airlock_button_r;
   level._effect["vfx_br_loot_cache_holiday_coal"] = loadfx("vfx/iw8_br/island/gameplay/festferv/vfx_br_loot_cache_holiday_coal");
 
@@ -59,8 +59,8 @@ function airfield_safehouse_loot() {
   }
 
   thread airlock_callbutton_think();
-  scripts\engine\scriptable::ref_12f5b("brloot_coal", &airdrop_playdeploydialog);
-  scripts\engine\scriptable::ref_12f5b("brloot_snowball", &airstrike_movewithplane);
+  scripts\engine\scriptable::ref_12F5B("brloot_coal", &airdrop_playdeploydialog);
+  scripts\engine\scriptable::ref_12F5B("brloot_snowball", &airstrike_movewithplane);
 }
 
 function airlock_callbutton_think() {
@@ -74,7 +74,7 @@ function airlock_callbutton_think() {
     }
 
     foreach(var_1 in level.spawn_and_enter_little_bird_mg) {
-      all_modes(var_1.ref_13d19);
+      all_modes(var_1.ref_13D19);
     }
   }
 }
@@ -145,7 +145,7 @@ function airlock_back_blocker(var_0, var_1, var_2) {
     var_3++;
     var_3 %= var_2;
     var_5.spawn_maint_wave = var_1;
-    var_5.ref_11a25 = var_3;
+    var_5.ref_11A25 = var_3;
   }
 }
 
@@ -177,7 +177,7 @@ function airholder() {
     airstrike_addactivestrike(level.spawn_and_enter_little_bird_mg[var_3], var_2);
     thread airstrike_canbeused(level, level.spawn_and_enter_little_bird_mg[var_3], var_2, 1);
     level.spawn_and_enter_little_bird_mg[var_3] setscriptablepartstate("dom_circle", "white", 0);
-    level.spawn_and_enter_little_bird_mg[var_3].ref_13d19 scripts\mp\gametypes\br_gulag::calloutmarkerping_watchwhenobjectivedeleted(1);
+    level.spawn_and_enter_little_bird_mg[var_3].ref_13D19 scripts\mp\gametypes\br_gulag::calloutmarkerping_watchwhenobjectivedeleted(1);
   }
 }
 
@@ -217,7 +217,7 @@ function airstrike_addactivestrike(var_0, var_1) {
     var_1 = 0;
   }
 
-  var_0.ref_13a12 = var_1;
+  var_0.ref_13A12 = var_1;
 
   switch (var_1) {
     case 0:
@@ -238,12 +238,12 @@ function airstrike_addactivestrike(var_0, var_1) {
 function airstrike_canbeused(var_0, var_1, var_2, var_3) {
   var_0 notify("newTreeSettings");
   var_0 endon("newTreeSettings");
-  var_0.ref_13d1b = var_1;
+  var_0.ref_13D1B = var_1;
   wait var_3;
   airdrop_watchforcrateuseend("Setting tree to level: " + var_1 + " refreshing crates: " + var_2);
 
-  if(isDefined(var_0.ref_13d19.claimplayer)) {
-    scripts\mp\gametypes\br_analytics::destroy_vehicles(var_0.ref_13d19.claimplayer, var_1);
+  if(isDefined(var_0.ref_13D19.claimplayer)) {
+    scripts\mp\gametypes\br_analytics::destroy_vehicles(var_0.ref_13D19.claimplayer, var_1);
   }
 
   switch (var_1) {
@@ -356,15 +356,15 @@ function all_but_one_player_in_vehicle() {
   for(var_4 = 0; var_4 < level.spawn_and_enter_little_bird_mg.size; var_4++) {
     var_5 = level.spawn_and_enter_little_bird_mg[var_4].origin;
     var_6 = spawn("trigger_radius", var_5, 0, var_0, var_1);
-    var_6.ref_13dc7 = [];
+    var_6.ref_13DC7 = [];
     var_7 = scripts\mp\gametypes\obj_dom::setupobjective(var_6, "neutral");
-    var_7.ref_13d1a = var_4;
-    var_6.ref_13d19 = var_7;
+    var_7.ref_13D1A = var_4;
+    var_6.ref_13D19 = var_7;
     var_7.onuse = &aitype_counts;
     var_7.onbeginuse = &all_alive_players;
     var_7.onuseupdate = &all_alive_players_entities;
     var_7.onenduse = &all_alive_players_entites;
-    var_7.ref_128b9 = &all_but_one_player_downed;
+    var_7.ref_128B9 = &all_but_one_player_downed;
     var_7.ref_12079 = &alertforspawngroupdirection;
     var_7.oncontested = &alcove_trig;
     var_7.onuncontested = &alivejuggernauts;
@@ -382,7 +382,7 @@ function all_but_one_player_in_vehicle() {
     var_7.outlineent = undefined;
     var_7.visibilitymanuallycontrolled = 1;
     var_7 scripts\mp\gametypes\br_gulag::calloutmarkerping_watchwhenobjectivedeleted(0);
-    level.spawn_and_enter_little_bird_mg[var_4].ref_13d19 = var_7;
+    level.spawn_and_enter_little_bird_mg[var_4].ref_13D19 = var_7;
     level.spawn_and_enter_little_bird_mg[var_4].weapongroupdata = [];
     level.spawn_and_enter_little_bird_mg[var_4].weapongetflinchtype = [];
     level.spawn_and_enter_little_bird_mg[var_4].trial_mount_nag = [];
@@ -403,7 +403,7 @@ function airfield_safehouse_edit_loadout(var_0) {
   }
 
   var_3 = 520;
-  var_4 = scripts\mp\utility\player::getplayersinradius(var_0.ref_13d19.trigger.origin, var_3);
+  var_4 = scripts\mp\utility\player::getplayersinradius(var_0.ref_13D19.trigger.origin, var_3);
 
   if(var_4.size > 0) {
     thread airfield_safehouse_edit_loadout(var_0);
@@ -426,7 +426,7 @@ function airfield_safehouse_edit_loadout(var_0) {
         continue;
       }
 
-      scripts\mp\gametypes\br_pickups::ref_11a21(var_7);
+      scripts\mp\gametypes\br_pickups::ref_11A21(var_7);
     }
 
     return;
@@ -465,7 +465,7 @@ function all_alive_players_near_exfil(var_0, var_1) {
 
 function alivejuggernauts(var_0) {
   var_1 = self;
-  var_2 = level.spawn_and_enter_little_bird_mg[var_1.ref_13d1a];
+  var_2 = level.spawn_and_enter_little_bird_mg[var_1.ref_13D1A];
   var_2.trial_mount_nag = [];
   scripts\mp\gametypes\br_gametype_bodycount::onarmorboxusedbyplayer(var_0, 0);
   all_modes(var_1);
@@ -473,7 +473,7 @@ function alivejuggernauts(var_0) {
 
 function aitype_counts(var_0) {
   var_1 = self;
-  var_2 = level.spawn_and_enter_little_bird_mg[var_1.ref_13d1a];
+  var_2 = level.spawn_and_enter_little_bird_mg[var_1.ref_13D1A];
   var_2.cheese = 1;
   var_1.claimteam = var_0.team;
   var_1.curprogress = var_1.usetime;
@@ -482,7 +482,7 @@ function aitype_counts(var_0) {
 
 function all_but_one_player_downed(var_0) {
   var_1 = self;
-  var_2 = level.spawn_and_enter_little_bird_mg[var_1.ref_13d1a];
+  var_2 = level.spawn_and_enter_little_bird_mg[var_1.ref_13D1A];
 
   if(istrue(var_2.stopdragonsbreathburning)) {
     return 0;
@@ -511,10 +511,10 @@ function all_alive_players_entities(var_0, var_1, var_2, var_3) {
 
 function alertforspawngroupdirection(var_0) {
   var_1 = self;
-  var_2 = level.spawn_and_enter_little_bird_mg[var_1.ref_13d1a];
+  var_2 = level.spawn_and_enter_little_bird_mg[var_1.ref_13D1A];
   var_3 = var_1.curprogress / var_1.usetime;
 
-  if(!isDefined(var_2.ref_13d1b)) {
+  if(!isDefined(var_2.ref_13D1B)) {
     return;
   }
 
@@ -546,20 +546,20 @@ function alertforspawngroupdirection(var_0) {
     }
   }
 
-  var_6 = var_2.ref_13d1b;
+  var_6 = var_2.ref_13D1B;
 
   if(var_3 == 1) {
     if(var_6 != 3) {
       var_7 = "dx_brm_sant_santa_holidays_10";
       all_alive_players_near_exfil(var_1, var_7);
       var_8 = 265;
-      var_9 = scripts\mp\utility\player::getplayersinradius(var_2.ref_13d19.trigger.origin, var_8);
+      var_9 = scripts\mp\utility\player::getplayersinradius(var_2.ref_13D19.trigger.origin, var_8);
 
       foreach(var_11 in var_9) {
         if(var_11.team == var_1.claimteam) {
           scripts\mp\gametypes\br_quest_util::displayplayersplash(var_11, "br_tree_decoration_completed");
-          var_11 scripts\cp\vehicles\vehicle_compass_cp::ref_120a4("hh_tree_completed");
-          var_11 scripts\cp\vehicles\vehicle_compass_cp::ref_120a4("hh_riddle_completed");
+          var_11 scripts\cp\vehicles\vehicle_compass_cp::ref_120A4("hh_tree_completed");
+          var_11 scripts\cp\vehicles\vehicle_compass_cp::ref_120A4("hh_riddle_completed");
         }
       }
 
@@ -579,7 +579,7 @@ function alertforspawngroupdirection(var_0) {
       }
 
       if(!istrue(var_2.ref_12744)) {
-        airlock_slot(var_1.ref_13d1a);
+        airlock_slot(var_1.ref_13D1A);
       }
     }
   } else if(var_3 > 0.5) {
@@ -621,7 +621,7 @@ function alertforspawngroupdirection(var_0) {
     }
   }
 
-  var_18 = var_2.ref_13a12;
+  var_18 = var_2.ref_13A12;
 
   if(var_3 > 0.5 && var_0) {
     if(var_18 != 3) {
@@ -652,16 +652,16 @@ function alertforspawngroupdirection(var_0) {
 }
 
 function all_end_checkpoints_activated(var_0) {
-  if(isDefined(var_0.ref_11e61)) {
-    if(gettime() < var_0.ref_11e61) {
+  if(isDefined(var_0.ref_11E61)) {
+    if(gettime() < var_0.ref_11E61) {
       return;
     }
   }
 
   var_1 = var_0.trigger.origin;
-  level thread scripts\mp\gametypes\br_quest_util::ref_140b1(var_1, "dom", 3);
+  level thread scripts\mp\gametypes\br_quest_util::ref_140B1(var_1, "dom", 3);
   var_2 = 15000;
-  var_0.ref_11e61 = gettime() + var_2;
+  var_0.ref_11E61 = gettime() + var_2;
 }
 
 function all_obit_models(var_0) {
@@ -678,11 +678,11 @@ function all_obit_models(var_0) {
 
 function all_alive_players(var_0) {
   var_1 = self;
-  var_2 = level.spawn_and_enter_little_bird_mg[var_1.ref_13d1a];
+  var_2 = level.spawn_and_enter_little_bird_mg[var_1.ref_13D1A];
   var_2 notify("loot_clear_delay_extended");
 
-  if(!scripts\engine\utility::array_contains(var_1.trigger.ref_13dc7, var_0)) {
-    var_1.trigger.ref_13dc7 = scripts\engine\utility::array_add(var_1.trigger.ref_13dc7, var_0);
+  if(!scripts\engine\utility::array_contains(var_1.trigger.ref_13DC7, var_0)) {
+    var_1.trigger.ref_13DC7 = scripts\engine\utility::array_add(var_1.trigger.ref_13DC7, var_0);
   }
 
   var_1 thread scripts\mp\gameobjects::useobjectdecay(var_0.team);
@@ -704,8 +704,8 @@ function all_alive_players(var_0) {
     all_alive_players_near_exfil(var_1, var_6);
   }
 
-  if(!isDefined(var_1.ref_11f63) || !var_1.ref_11f63) {
-    var_1.ref_11f63 = 1;
+  if(!isDefined(var_1.ref_11F63) || !var_1.ref_11F63) {
+    var_1.ref_11F63 = 1;
     var_7 = scripts\mp\utility\teams::getfriendlyplayers(var_0.team, 0);
 
     foreach(var_9 in var_7) {
@@ -715,7 +715,7 @@ function all_alive_players(var_0) {
 
   if(!istrue(var_2.stopdragonsbreathburning) && !scripts\engine\utility::array_contains(var_2.trial_missionscript_init_funcs, var_0)) {
     var_2.trial_missionscript_init_funcs = scripts\engine\utility::array_add(var_2.trial_missionscript_init_funcs, var_0);
-    var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_120a4("codmas_intel_6");
+    var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_120A4("codmas_intel_6");
   }
 
   all_modes(var_1);
@@ -733,14 +733,14 @@ function all_alive_players_entites(var_0, var_1, var_2) {
 }
 
 function airstrikecount(var_0) {
-  var_1 = level.spawn_and_enter_little_bird_mg[var_0.ref_13d1a];
+  var_1 = level.spawn_and_enter_little_bird_mg[var_0.ref_13D1A];
   var_2 = getdvarint("scr_br_hh_tree_dom_radius", 250);
   var_3 = var_2 + 15;
   var_4 = var_3 * var_3;
   var_5 = [];
 
-  for(var_6 = var_0.trigger.ref_13dc7.size - 1; var_6 >= 0; var_6--) {
-    var_7 = var_0.trigger.ref_13dc7[var_6];
+  for(var_6 = var_0.trigger.ref_13DC7.size - 1; var_6 >= 0; var_6--) {
+    var_7 = var_0.trigger.ref_13DC7[var_6];
     var_8 = distance2dsquared(var_7.origin, var_0.trigger.origin);
     var_9 = var_8 > var_4;
     var_10 = scripts\engine\utility::array_contains(var_1.weapongetflinchtype, var_7.team);
@@ -792,7 +792,7 @@ function all_gas_trap_structs(var_0, var_1) {
 }
 
 function all_modes(var_0) {
-  var_1 = level.spawn_and_enter_little_bird_mg[var_0.ref_13d1a];
+  var_1 = level.spawn_and_enter_little_bird_mg[var_0.ref_13D1A];
 
   if(istrue(var_1.stopdragonsbreathburning)) {
     return;
@@ -805,13 +805,13 @@ function all_modes(var_0) {
     thread airstrike_canbeused(level, var_1, 1, 0);
   }
 
-  var_2 = var_0.trigger.ref_13dc7;
+  var_2 = var_0.trigger.ref_13DC7;
   var_3 = all_gas_trap_structs(var_0, var_2);
   var_4 = var_3[0];
   var_5 = var_3[1];
   var_6 = var_3[2];
   var_3 = undefined;
-  var_0.trigger.ref_13dc7 = var_4;
+  var_0.trigger.ref_13DC7 = var_4;
 
   foreach(var_8 in var_5) {
     var_8 setclientomnvar("ui_securing_progress", 0);
@@ -936,7 +936,7 @@ function airlock_show_front_doors(var_0, var_1, var_2, var_3) {
   [[var_3]](var_1);
   wait var_4 * 7;
   var_1.ref_12744 = 0;
-  thread airstrike_canbeused(level, var_1, var_1.ref_13d1b, 0);
+  thread airstrike_canbeused(level, var_1, var_1.ref_13D1B, 0);
 }
 
 function airlock_positions(var_0) {
@@ -966,7 +966,7 @@ function airlock_show_back_doors(var_0) {
     var_1 = istrue(var_0.play_found_leads_counting_building_two);
 
     if(airlock_show_room_doors(var_0) && !var_1) {
-      var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_120a4("hh_riddle_completed");
+      var_0 scripts\cp\vehicles\vehicle_compass_cp::ref_120A4("hh_riddle_completed");
       var_0.play_found_leads_counting_building_two = 1;
       airlock_front_blocker(var_0);
       return;
@@ -1086,33 +1086,33 @@ function airlock_button_r(var_0, var_1) {
     var_6 = 5;
     var_3 = getdvarint("scr_br_hh_common_cache_coal_chance", var_6);
     var_7 = 5;
-    var_2 = verifybunkercode("festive_fervor_base_crate", var_0.ref_11a25);
+    var_2 = verifybunkercode("festive_fervor_base_crate", var_0.ref_11A25);
   } else if(var_0.type == "br_loot_always_spawn_cache_legendary") {
     var_8 = 15;
     var_4 = getdvarint("scr_br_hh_legendary_cache_snow_chance", var_8);
     var_9 = 15;
     var_3 = getdvarint("scr_br_hh_legendary_cache_coal_chance", var_9);
     var_7 = 5;
-    var_2 = verifybunkercode("festive_fervor_lege_crate", var_0.ref_11a25);
+    var_2 = verifybunkercode("festive_fervor_lege_crate", var_0.ref_11A25);
   } else if(var_0.type == "br_loot_always_spawn_cache_holiday") {
     var_10 = 10;
     var_4 = getdvarint("scr_br_hh_holiday_cache_snow_chance", var_10);
     var_11 = 30;
     var_3 = getdvarint("scr_br_hh_holiday_cache_coal_chance", var_11);
     var_7 = 5;
-    var_2 = verifybunkercode("festive_fervor_ultra_crate", var_0.ref_11a25);
+    var_2 = verifybunkercode("festive_fervor_ultra_crate", var_0.ref_11A25);
   }
 
-  var_1 scripts\cp\vehicles\vehicle_compass_cp::ref_120a4("codmas_intel_5");
+  var_1 scripts\cp\vehicles\vehicle_compass_cp::ref_120A4("codmas_intel_5");
   var_12 = randomint(100);
   var_13 = var_12 <= var_3;
   var_14 = var_12 > var_3 && var_12 <= var_3 + var_4;
 
-  if(!isDefined(var_1.ref_136ca)) {
-    var_1.ref_136ca = [];
+  if(!isDefined(var_1.ref_136CA)) {
+    var_1.ref_136CA = [];
   }
 
-  var_15 = !scripts\engine\utility::array_contains(var_1.ref_136ca, var_0.spawn_maint_wave);
+  var_15 = !scripts\engine\utility::array_contains(var_1.ref_136CA, var_0.spawn_maint_wave);
   var_16 = 15;
   var_17 = getdvarint("scr_br_hh_holiday_blueprint_chance", var_16);
   var_12 = randomint(100);
@@ -1140,12 +1140,12 @@ function airlock_button_r(var_0, var_1) {
       var_19 = "dx_brm_sant_santa_naughty_10";
       var_1 playsoundtoplayer(var_19, var_1, var_1);
       airdrop_crushchicken(var_1);
-      var_1.ref_136ca = scripts\engine\utility::array_add(var_1.ref_136ca, var_0.spawn_maint_wave);
+      var_1.ref_136CA = scripts\engine\utility::array_add(var_1.ref_136CA, var_0.spawn_maint_wave);
     } else if(var_14) {
       var_2 = "brloot_snowball";
       var_20 = "dx_brm_sant_santa_nice_10";
       var_1 playsoundtoplayer(var_20, var_1, var_1);
-      var_1.ref_136ca = scripts\engine\utility::array_add(var_1.ref_136ca, var_0.spawn_maint_wave);
+      var_1.ref_136CA = scripts\engine\utility::array_add(var_1.ref_136CA, var_0.spawn_maint_wave);
     }
   }
 

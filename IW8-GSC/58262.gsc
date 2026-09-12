@@ -4,7 +4,7 @@
 ***********************************************/
 
 function init() {
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("circle_peek", &ref_13e25, undefined, &ref_13e0d);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("circle_peek", &ref_13E25, undefined, &ref_13E0D);
   var_0 = "circle_peak";
   game["dialog"]["use_circle_peek"] = var_0 + "_use";
   game["dialog"]["timeout_circle_peek"] = var_0 + "_timeout";
@@ -14,18 +14,18 @@ function weapongivenchoppergunner(var_0) {
   return true;
 }
 
-function ref_13e24() {
+function ref_13E24() {
   var_0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("circle_peek", self);
-  return ref_13e25(var_0);
+  return ref_13E25(var_0);
 }
 
-function ref_13e0d() {
+function ref_13E0D() {
   var_0 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("circle_peek", self);
-  var_0.ref_133ce = 1;
-  return ref_13e25(var_0, 1);
+  var_0.ref_133CE = 1;
+  return ref_13E25(var_0, 1);
 }
 
-function ref_13e25(var_0, var_1) {
+function ref_13E25(var_0, var_1) {
   self endon("disconnect");
   level endon("game_ended");
 
@@ -74,7 +74,7 @@ function ref_13e25(var_0, var_1) {
 }
 
 function gulag_intro_vo(var_0) {
-  if(!isDefined(level.ref_13aca)) {
+  if(!isDefined(level.ref_13ACA)) {
     return false;
   }
 
@@ -82,11 +82,11 @@ function gulag_intro_vo(var_0) {
     return false;
   }
 
-  if(!isDefined(level.ref_13aca[self.team])) {
-    level.ref_13aca[self.team] = 0;
+  if(!isDefined(level.ref_13ACA[self.team])) {
+    level.ref_13ACA[self.team] = 0;
   }
 
-  var_1 = level.ref_13aca[self.team] + level.br_circle.circleindex + 1;
+  var_1 = level.ref_13ACA[self.team] + level.br_circle.circleindex + 1;
 
   for(var_2 = var_1; var_2 < level.gulag_tutorial_vo.size; var_2++) {
     scripts\mp\gametypes\br_quest_util::ref_12972(self.team);

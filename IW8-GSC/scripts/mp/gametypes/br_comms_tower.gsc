@@ -86,7 +86,7 @@ function spawntowers() {
   }
 
   foreach(var_8 in level.players) {
-    thread ref_126e0();
+    thread ref_126E0();
   }
 }
 
@@ -100,7 +100,7 @@ function managetowerpromptinteraction(var_0, var_1, var_2) {
   for(;;) {
     var_0 waittill("trigger", var_4);
 
-    if(ref_1392a(var_0, var_4)) {
+    if(ref_1392A(var_0, var_4)) {
       thread doscan(var_4);
       thread playdialog(level);
       commstowersanalytics(var_4, self.id);
@@ -144,7 +144,7 @@ function doscan(var_0) {
 function towerpostplunder(var_0) {
   if(!scripts\mp\gametypes\br_publicevents::upload_station_interact_used_think(2)) {
     if(playerplunderupdate(var_0)) {
-      thread ref_126e0();
+      thread ref_126E0();
       return;
     }
 
@@ -159,26 +159,26 @@ function playerplunderupdate(var_0) {
     return 1;
   }
 
-  if(var_0.player.plundercount >= var_1 && var_0.player.plundercount - var_0.ref_127b4 >= var_1) {
+  if(var_0.player.plundercount >= var_1 && var_0.player.plundercount - var_0.ref_127B4 >= var_1) {
     return 0;
   }
 
-  if(var_0.player.plundercount < var_1 && var_0.player.plundercount - var_0.ref_127b4 < var_1) {
+  if(var_0.player.plundercount < var_1 && var_0.player.plundercount - var_0.ref_127B4 < var_1) {
     return 0;
   }
 
   return 1;
 }
 
-function ref_126e0() {
+function ref_126E0() {
   foreach(var_1 in level.commstowersinfo.commstowers) {
-    ref_126df(var_1);
+    ref_126DF(var_1);
   }
 }
 
 function playersupdatestructures() {
   foreach(var_1 in level.players) {
-    thread ref_126e0();
+    thread ref_126E0();
   }
 }
 
@@ -194,12 +194,12 @@ function disabletowerpromptuse(var_0) {
 function enabletowerpromptuse(var_0) {
   foreach(var_2 in level.players) {
     if(isDefined(var_2)) {
-      ref_126df(var_2, var_0);
+      ref_126DF(var_2, var_0);
     }
   }
 }
 
-function ref_126df(var_0) {
+function ref_126DF(var_0) {
   if(var_0.inuse) {
     return;
   }
@@ -225,7 +225,7 @@ function ref_126df(var_0) {
   }
 }
 
-function ref_1392a(var_0) {
+function ref_1392A(var_0) {
   if(scripts\mp\gametypes\br_publicevents::upload_station_interact_used_think(2)) {
     return true;
   }

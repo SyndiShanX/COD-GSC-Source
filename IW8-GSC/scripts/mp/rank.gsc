@@ -45,7 +45,7 @@ function init() {
   level.weaponranktable = [];
   var_4 = function_0428();
   level.maxrank = int(tablelookup(var_4, 0, "maxrank", 1));
-  level.ref_11b5c = int(tablelookup(var_4, 0, "maxelder", 1));
+  level.ref_11B5C = int(tablelookup(var_4, 0, "maxelder", 1));
 
   for(var_5 = 0; var_5 <= level.maxrank; var_5++) {
     level.ranktable[var_5][0] = int(tablelookup(var_4, 0, var_5, 2));
@@ -127,33 +127,33 @@ function initcpammoarmorcrate(var_0) {
   var_1 = spawnStruct();
   var_2 = level.loadoutsgroup;
   var_1.ref_12507 = var_0 getplayerdata(var_2, "squadMembers", "player_xp");
-  var_1.ref_1454f = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_mike4");
+  var_1.ref_1454F = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_mike4");
   var_1.ref_14548 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_akilo47");
   var_1.ref_14549 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_asierra12");
-  var_1.ref_1454b = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_falpha");
-  var_1.ref_1454e = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_mcharlie");
-  var_1.ref_1454c = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_golf36");
-  var_1.ref_1454d = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_kilo433");
-  var_1.ref_1454a = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_falima");
+  var_1.ref_1454B = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_falpha");
+  var_1.ref_1454E = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_mcharlie");
+  var_1.ref_1454C = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_golf36");
+  var_1.ref_1454D = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_kilo433");
+  var_1.ref_1454A = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_falima");
   var_1.ref_14550 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_scharlie");
-  var_1.ref_1456e = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_mpapa5");
-  var_1.ref_1456c = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_beta");
-  var_1.ref_1456b = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_augolf");
+  var_1.ref_1456E = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_mpapa5");
+  var_1.ref_1456C = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_beta");
+  var_1.ref_1456B = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_augolf");
   var_1.ref_14570 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_papa90");
-  var_1.ref_1456f = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_mpapa7");
+  var_1.ref_1456F = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_mpapa7");
   var_1.ref_14572 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_uzulu");
   var_1.ref_14573 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_victor");
   var_1.ref_14567 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sh_dpapa12");
   var_1.ref_14566 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sh_charlie725");
   var_1.ref_14569 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sh_oscar12");
-  var_1.ref_1456a = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sh_romeo870");
-  var_1.ref_1455a = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_kilo121");
-  var_1.ref_1455f = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_pkilo");
-  var_1.ref_1455b = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_lima86");
-  var_1.ref_1455c = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_mgolf34");
-  var_1.ref_1457b = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sn_mike14");
-  var_1.ref_1457a = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sn_kilo98");
-  var_1.ref_1457c = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sn_sbeta");
+  var_1.ref_1456A = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sh_romeo870");
+  var_1.ref_1455A = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_kilo121");
+  var_1.ref_1455F = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_pkilo");
+  var_1.ref_1455B = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_lima86");
+  var_1.ref_1455C = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_mgolf34");
+  var_1.ref_1457B = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sn_mike14");
+  var_1.ref_1457A = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sn_kilo98");
+  var_1.ref_1457C = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sn_sbeta");
   var_1.ref_14574 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sn_alpha50");
   var_1.ref_14575 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sn_awhiskey");
   var_1.ref_14577 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sn_delta");
@@ -172,11 +172,11 @@ function initcpammoarmorcrate(var_0) {
   var_1.ref_14554 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_knife");
   var_1.ref_14560 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_me_riotshield");
   var_1.ref_14553 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_fists");
-  var_1.ref_1456d = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_charlie9");
+  var_1.ref_1456D = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_charlie9");
   var_1.ref_14552 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_tango21");
-  var_1.ref_1455d = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_mgolf36");
+  var_1.ref_1455D = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_mgolf36");
   var_1.ref_14551 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_ar_sierra552");
-  var_1.ref_1455e = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_mkilo3");
+  var_1.ref_1455E = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_lm_mkilo3");
   var_1.ref_14578 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sn_golf28");
   var_1.ref_14571 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sm_smgolf45");
   var_1.ref_14568 = var_0 getplayerdata(var_2, "squadMembers", "weapon_xp", "iw8_sh_mike26");
@@ -198,33 +198,33 @@ function initcprooftopcrate(var_0, var_1) {
   var_3 = spawnStruct();
   var_3.xp = 0;
   var_3.count = 0;
-  initcrossbowusage(var_0.ref_1454f, var_1.ref_1454f, var_3);
+  initcrossbowusage(var_0.ref_1454F, var_1.ref_1454F, var_3);
   initcrossbowusage(var_0.ref_14548, var_1.ref_14548, var_3);
   initcrossbowusage(var_0.ref_14549, var_1.ref_14549, var_3);
-  initcrossbowusage(var_0.ref_1454b, var_1.ref_1454b, var_3);
-  initcrossbowusage(var_0.ref_1454e, var_1.ref_1454e, var_3);
-  initcrossbowusage(var_0.ref_1454c, var_1.ref_1454c, var_3);
-  initcrossbowusage(var_0.ref_1454d, var_1.ref_1454d, var_3);
-  initcrossbowusage(var_0.ref_1454a, var_1.ref_1454a, var_3);
+  initcrossbowusage(var_0.ref_1454B, var_1.ref_1454B, var_3);
+  initcrossbowusage(var_0.ref_1454E, var_1.ref_1454E, var_3);
+  initcrossbowusage(var_0.ref_1454C, var_1.ref_1454C, var_3);
+  initcrossbowusage(var_0.ref_1454D, var_1.ref_1454D, var_3);
+  initcrossbowusage(var_0.ref_1454A, var_1.ref_1454A, var_3);
   initcrossbowusage(var_0.ref_14550, var_1.ref_14550, var_3);
-  initcrossbowusage(var_0.ref_1456e, var_1.ref_1456e, var_3);
-  initcrossbowusage(var_0.ref_1456c, var_1.ref_1456c, var_3);
-  initcrossbowusage(var_0.ref_1456b, var_1.ref_1456b, var_3);
+  initcrossbowusage(var_0.ref_1456E, var_1.ref_1456E, var_3);
+  initcrossbowusage(var_0.ref_1456C, var_1.ref_1456C, var_3);
+  initcrossbowusage(var_0.ref_1456B, var_1.ref_1456B, var_3);
   initcrossbowusage(var_0.ref_14570, var_1.ref_14570, var_3);
-  initcrossbowusage(var_0.ref_1456f, var_1.ref_1456f, var_3);
+  initcrossbowusage(var_0.ref_1456F, var_1.ref_1456F, var_3);
   initcrossbowusage(var_0.ref_14572, var_1.ref_14572, var_3);
   initcrossbowusage(var_0.ref_14573, var_1.ref_14573, var_3);
   initcrossbowusage(var_0.ref_14567, var_1.ref_14567, var_3);
   initcrossbowusage(var_0.ref_14566, var_1.ref_14566, var_3);
   initcrossbowusage(var_0.ref_14569, var_1.ref_14569, var_3);
-  initcrossbowusage(var_0.ref_1456a, var_1.ref_1456a, var_3);
-  initcrossbowusage(var_0.ref_1455a, var_1.ref_1455a, var_3);
-  initcrossbowusage(var_0.ref_1455f, var_1.ref_1455f, var_3);
-  initcrossbowusage(var_0.ref_1455b, var_1.ref_1455b, var_3);
-  initcrossbowusage(var_0.ref_1455c, var_1.ref_1455c, var_3);
-  initcrossbowusage(var_0.ref_1457b, var_1.ref_1457b, var_3);
-  initcrossbowusage(var_0.ref_1457a, var_1.ref_1457a, var_3);
-  initcrossbowusage(var_0.ref_1457c, var_1.ref_1457c, var_3);
+  initcrossbowusage(var_0.ref_1456A, var_1.ref_1456A, var_3);
+  initcrossbowusage(var_0.ref_1455A, var_1.ref_1455A, var_3);
+  initcrossbowusage(var_0.ref_1455F, var_1.ref_1455F, var_3);
+  initcrossbowusage(var_0.ref_1455B, var_1.ref_1455B, var_3);
+  initcrossbowusage(var_0.ref_1455C, var_1.ref_1455C, var_3);
+  initcrossbowusage(var_0.ref_1457B, var_1.ref_1457B, var_3);
+  initcrossbowusage(var_0.ref_1457A, var_1.ref_1457A, var_3);
+  initcrossbowusage(var_0.ref_1457C, var_1.ref_1457C, var_3);
   initcrossbowusage(var_0.ref_14574, var_1.ref_14574, var_3);
   initcrossbowusage(var_0.ref_14575, var_1.ref_14575, var_3);
   initcrossbowusage(var_0.ref_14577, var_1.ref_14577, var_3);
@@ -243,11 +243,11 @@ function initcprooftopcrate(var_0, var_1) {
   initcrossbowusage(var_0.ref_14554, var_1.ref_14554, var_3);
   initcrossbowusage(var_0.ref_14560, var_1.ref_14560, var_3);
   initcrossbowusage(var_0.ref_14553, var_1.ref_14553, var_3);
-  initcrossbowusage(var_0.ref_1456d, var_1.ref_1456d, var_3);
+  initcrossbowusage(var_0.ref_1456D, var_1.ref_1456D, var_3);
   initcrossbowusage(var_0.ref_14552, var_1.ref_14552, var_3);
-  initcrossbowusage(var_0.ref_1455d, var_1.ref_1455d, var_3);
+  initcrossbowusage(var_0.ref_1455D, var_1.ref_1455D, var_3);
   initcrossbowusage(var_0.ref_14551, var_1.ref_14551, var_3);
-  initcrossbowusage(var_0.ref_1455e, var_1.ref_1455e, var_3);
+  initcrossbowusage(var_0.ref_1455E, var_1.ref_1455E, var_3);
   initcrossbowusage(var_0.ref_14578, var_1.ref_14578, var_3);
   initcrossbowusage(var_0.ref_14571, var_1.ref_14571, var_3);
   initcrossbowusage(var_0.ref_14568, var_1.ref_14568, var_3);
@@ -512,8 +512,8 @@ function waitandapplyxp(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = 0;
 
   if(isDefined(var_4)) {
-    if(isDefined(var_4.ref_121d9)) {
-      var_4 = var_4.ref_121d9;
+    if(isDefined(var_4.ref_121D9)) {
+      var_4 = var_4.ref_121D9;
     }
 
     if(scripts\mp\weaponrank::weaponshouldgetxp(var_4.basename)) {
@@ -528,7 +528,7 @@ function waitandapplyxp(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(level.playerxpenabled && !isai(self)) {
     if(isDefined(var_4) && (scripts\mp\utility\weapon::iscacprimaryweapon(var_4) || scripts\mp\utility\weapon::iscacsecondaryweapon(var_4))) {
       if(!scripts\mp\utility\weapon::ispickedupweapon(var_4) || scripts\mp\utility\game::getgametype() == "br") {
-        scripts\common\utility::ref_13e0a(level.ref_11b31, scripts\mp\utility\weapon::getweaponrootname(var_4), "xp_earned", var_7, -1, var_4);
+        scripts\common\utility::ref_13E0A(level.ref_11B31, scripts\mp\utility\weapon::getweaponrootname(var_4), "xp_earned", var_7, -1, var_4);
       }
     }
   }
@@ -620,7 +620,7 @@ function updaterank(var_0) {
   self.pers["rank"] = var_1;
   self.pers["prestige"] = var_2;
 
-  if(var_4 == var_3 || var_4 >= level.maxrank + level.ref_11b5c) {
+  if(var_4 == var_3 || var_4 >= level.maxrank + level.ref_11B5C) {
     return false;
   }
 
@@ -912,11 +912,11 @@ function incrankxp(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  if(!isDefined(level.ref_11b53)) {
-    level.ref_11b53 = getdvarint("scr_beta_max_level", 0);
+  if(!isDefined(level.ref_11B53)) {
+    level.ref_11B53 = getdvarint("scr_beta_max_level", 0);
   }
 
-  if(level.ref_11b53 > 0 && getrank() + 1 >= level.ref_11b53) {
+  if(level.ref_11B53 > 0 && getrank() + 1 >= level.ref_11B53) {
     var_0 = 0;
   }
 
@@ -974,7 +974,7 @@ function incrankxp(var_0, var_1, var_2, var_3) {
 
   var_21 = int(scripts\cp_mp\utility\game_utility::gettimesincegamestart() / 1000);
   self reportchallengeuserevent("mp_addxp", var_0, scripts\mp\teams::lookupcurrentoperator(self.team), var_9, var_2, var_7, int(var_16 * 100), int(var_17 * 100), int(var_18 * 100), var_21, var_13, int(var_19 * 100), var_15, int(var_20 * 100));
-  scripts\mp\analyticslog::ref_119bf(self, var_0, var_9, var_2, var_3);
+  scripts\mp\analyticslog::ref_119BF(self, var_0, var_9, var_2, var_3);
 }
 
 function syncxpstat() {

@@ -87,7 +87,7 @@ function deathmonitor() {
 function ownermonitor() {
   level endon("game_ended");
   self endon("death");
-  self.owner scripts\engine\utility::ref_143a6("joined_team", "joined_spectators", "disconnect");
+  self.owner scripts\engine\utility::ref_143A6("joined_team", "joined_spectators", "disconnect");
   dovisualdeath();
 }
 

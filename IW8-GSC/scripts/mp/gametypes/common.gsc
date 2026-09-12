@@ -15,9 +15,9 @@ function setupcommoncallbacks() {
   level.set_systems_init_flag = getdvarint("scr_game_gunGameWeapons", 0);
 
   if(level.set_systems_init_flag > 0) {
-    ref_131c1();
+    ref_131C1();
     setomnvar("ui_gamemode_override", 1);
-    thread ref_1439c();
+    thread ref_1439C();
   }
 
   var_0 = undefined;
@@ -51,8 +51,8 @@ function setupcommoncallbacks() {
 
   if(level.maxtagsvisible || istrue(var_0)) {
     ref_11962();
-    level.ref_1326e = &ref_1326e;
-    level thread[[level.ref_1326e]]();
+    level.ref_1326E = &ref_1326E;
+    level thread[[level.ref_1326E]]();
     level thread scripts\mp\utility\entity::global_physics_sound_monitor();
 
     if(getdvarint("scr_game_soccergoal", 1) == 1) {
@@ -94,7 +94,7 @@ function setupcommoncallbacks() {
     }
   }
 
-  level.ref_1368d = undefined;
+  level.ref_1368D = undefined;
   scripts\mp\utility\join_team_aggregator::registeronplayerjointeamcallback(&onplayerjointeamcommon);
   scripts\mp\utility\game::registerdogtagsenableddvar(scripts\mp\utility\game::getgametype(), 0);
   level._effect["cranked_explode"] = loadfx("vfx/iw8_mp/gamemode/vfx_search_bombsite_destroy.vfx");
@@ -131,7 +131,7 @@ function oncommonnormaldeath(var_0, var_1, var_2, var_3, var_4, var_5) {
     scripts\mp\flashpoint::flashpoint_processnewevent(var_1, var_0, gettime(), "kill_by_" + var_1.team);
   }
 
-  var_7 = scripts\mp\utility\game::islaststandenabled() && istrue(var_0.ref_125b9);
+  var_7 = scripts\mp\utility\game::islaststandenabled() && istrue(var_0.ref_125B9);
 
   if(!var_7 && var_1.team != self.team) {
     var_8 = level.scoremod["death"] * -1;
@@ -236,8 +236,8 @@ function onspawnplayercommon() {
     var_0 = istrue(level.allowprematchdamage) && istrue(level.spawnprotectiontimer);
     thread managespawnprotection(var_0);
   } else if(istrue(level.spawnprotectiontimer)) {
-    if(isDefined(level.ref_1368d)) {
-      if([[level.ref_1368d]]()) {
+    if(isDefined(level.ref_1368D)) {
+      if([[level.ref_1368D]]()) {
         thread managespawnprotection(1);
       }
     } else {
@@ -269,7 +269,7 @@ function onspawnplayercommon() {
   }
 
   if(istrue(game["practiceRound"])) {
-    if(istrue(level.ref_1343f)) {
+    if(istrue(level.ref_1343F)) {
       thread ref_13440();
     } else {
       self sethudtutorialmessage("MP_INGAME_ONLY/PRACTICE_ROUND");
@@ -279,18 +279,18 @@ function onspawnplayercommon() {
   }
 
   if(istrue(level.set_systems_init_flag)) {
-    thread ref_1438c();
+    thread ref_1438C();
   }
 
   if(istrue(level.setplayerselfrevivingextrainfo)) {
     self.spawnloot = 0;
 
     if(scripts\mp\flags::gameflag("prematch_done")) {
-      thread ref_1439b();
+      thread ref_1439B();
     }
 
     if(getdvarint("scr_player_event_models", 1) == 2) {
-      thread ref_136b2();
+      thread ref_136B2();
       return;
     }
 
@@ -594,12 +594,12 @@ function ref_12070(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   }
 }
 
-function ref_1439b() {
+function ref_1439B() {
   waitframe();
   self setscriptablepartstate("headVFX", "neutral", 0);
 }
 
-function ref_136b2() {
+function ref_136B2() {
   self endon("death_or_disconnect");
   self waittill("spawned_player");
 
@@ -618,7 +618,7 @@ function ref_136b2() {
   self.headmodel = var_3;
 }
 
-function ref_1439c() {
+function ref_1439C() {
   scripts\mp\flags::initgameflags();
   scripts\mp\flags::gameflaginit("gungame_set", 0);
 
@@ -911,7 +911,7 @@ function ref_12038(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   }
 }
 
-function ref_1438c() {
+function ref_1438C() {
   level endon("game_ended");
   self endon("disconnect");
   self waittill("spawned_player");
@@ -1020,7 +1020,7 @@ function getnextgun(var_0) {
   return var_2;
 }
 
-function ref_131c1() {
+function ref_131C1() {
   level.gun_loadouts["axis"]["loadoutPrimary"] = "iw8_pi_cpapa";
   level.gun_loadouts["axis"]["loadoutPrimaryAttachment"] = "none";
   level.gun_loadouts["axis"]["loadoutPrimaryAttachment2"] = "none";
@@ -1060,8 +1060,8 @@ function turret_enemy_watcher_internal() {
   return level.set_systems_init_flag == 7 || level.set_systems_init_flag == 8 || level.set_systems_init_flag == 9 || level.set_systems_init_flag == 10;
 }
 
-function ref_1326e() {
-  level.ref_1346d = [];
+function ref_1326E() {
+  level.ref_1346D = [];
   var_0 = [];
   var_1 = undefined;
 
@@ -1098,7 +1098,7 @@ function ref_1326e() {
     var_7 = var_10.origin;
   }
 
-  level.ref_11e00 = var_7;
+  level.ref_11E00 = var_7;
   var_12 = undefined;
 
   if(getdvarint("scr_soccer_randomSpawnLoc", 0) == 1 && var_7.size > 0) {
@@ -1125,10 +1125,10 @@ function init_reach_exhaust_waste(var_0, var_1) {
   var_5.visuals = spawn("script_model", var_0);
   var_5.visuals setModel("art_stadium_ball");
   var_5.visuals dontinterpolate();
-  var_5.ref_12c7b = var_0;
+  var_5.ref_12C7B = var_0;
   var_5.usemilestonephases = 1;
-  var_5.onreset = &ref_1208b;
-  var_5.ref_1203a = &ref_1203a;
+  var_5.onreset = &ref_1208B;
+  var_5.ref_1203A = &ref_1203A;
   var_5.ref_13472 = &ref_13789;
   var_6 = (0, 30, 0);
   var_7 = anglestoup(var_6);
@@ -1154,7 +1154,7 @@ function init_reach_exhaust_waste(var_0, var_1) {
     var_6[[var_6.ref_13472]]();
   }
 
-  level.ref_1346d[level.ref_1346d.size] = var_6;
+  level.ref_1346D[level.ref_1346D.size] = var_6;
 }
 
 function ref_13789() {
@@ -1191,21 +1191,21 @@ function ball_impact_sounds(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
   var_0.playing_sound = undefined;
 }
 
-function ref_1208b(var_0) {
+function ref_1208B(var_0) {
   self.stage3accradius = 1;
 
   if(!istrue(var_0)) {
     wait 0.5;
     self.visuals playSound("soc_ball_vanish");
-    playFX(level.ref_1346c["vanish"], self.visuals.origin);
+    playFX(level.ref_1346C["vanish"], self.visuals.origin);
   } else {
     wait 0.1;
-    playFX(level.ref_1346c["vanish"], self.visuals.origin);
+    playFX(level.ref_1346C["vanish"], self.visuals.origin);
   }
 
   self.visuals hide();
   wait 1;
-  self.visuals.origin = self.ref_12c7b;
+  self.visuals.origin = self.ref_12C7B;
   var_1 = (0, 30, 0);
   var_2 = anglestoup(var_1);
   var_3 = anglesToForward(var_1);
@@ -1226,7 +1226,7 @@ function ref_1208b(var_0) {
   }
 }
 
-function ref_1203a(var_0) {
+function ref_1203A(var_0) {
   if(istrue(self.stage3accradius)) {
     self.stage3accradius = 0;
     return;
@@ -1313,7 +1313,7 @@ function select_lobby_door_two_spawners(var_0, var_1) {
 
 function ref_14017(var_0) {
   foreach(var_2 in level.brking_playerwelcomesplashes) {
-    if(var_2.ref_12f11 == var_0.team) {
+    if(var_2.ref_12F11 == var_0.team) {
       if(var_0.select_low_roof_spawners >= 10) {
         var_2.scriptable setscriptablepartstate("score", "10");
         continue;
@@ -1423,7 +1423,7 @@ function ref_12168() {
       continue;
     }
 
-    if(distancesquared(self.visuals.origin, self.ref_12c7b) > 9000000) {
+    if(distancesquared(self.visuals.origin, self.ref_12C7B) > 9000000) {
       if(isDefined(self.onreset)) {
         self thread[[self.onreset]]();
       }
@@ -1459,15 +1459,15 @@ function ref_13471() {
       level.chooseanim_vehicleturretdeath.select_low_roof_spawners = game["axisGoals"];
     }
 
-    level.ref_1346e = [level.chooseanim_vehicleturretdeath, level.briotshieldinitialized];
-    thread ref_1439a();
+    level.ref_1346E = [level.chooseanim_vehicleturretdeath, level.briotshieldinitialized];
+    thread ref_1439A();
     return;
   }
 
   level notify("stop_soccer_goal");
 }
 
-function ref_1439a() {
+function ref_1439A() {
   wait 1;
   level.brjugg_dropfunc = scripts\engine\utility::getStructArray("home", "targetname");
   level.choosedropbagmodel = scripts\engine\utility::getStructArray("away", "targetname");
@@ -1477,14 +1477,14 @@ function ref_1439a() {
     var_1.scriptable = spawn("script_model", var_1.origin);
     var_1.scriptable.angles = var_1.angles;
     var_1.scriptable setModel("vfx_stadium_scoreboard_scriptable");
-    var_1.ref_12f11 = "allies";
+    var_1.ref_12F11 = "allies";
   }
 
   foreach(var_1 in level.choosedropbagmodel) {
     var_1.scriptable = spawn("script_model", var_1.origin);
     var_1.scriptable.angles = var_1.angles;
     var_1.scriptable setModel("vfx_stadium_scoreboard_scriptable");
-    var_1.ref_12f11 = "axis";
+    var_1.ref_12F11 = "axis";
   }
 
   ref_14017(level, level.briotshieldinitialized);
@@ -1496,7 +1496,7 @@ function ref_13470(var_0) {
   level endon("stop_soccer_goal");
 
   for(;;) {
-    jumpiftrue(isDefined(level.ref_1346e)) LOC_0000001e;
+    jumpiftrue(isDefined(level.ref_1346E)) LOC_0000001e;
     waitframe();
   }
 
@@ -1507,27 +1507,27 @@ function ref_13470(var_0) {
       continue;
     }
 
-    for(var_1 = 0; var_1 < level.ref_1346e.size; var_1++) {
-      if(!validatefunc(level.ref_1346e[var_1], self.visuals)) {
+    for(var_1 = 0; var_1 < level.ref_1346E.size; var_1++) {
+      if(!validatefunc(level.ref_1346E[var_1], self.visuals)) {
         continue;
       }
 
-      if(!ref_132e7(level.ref_1346e[var_1], self.visuals)) {
+      if(!ref_132E7(level.ref_1346E[var_1], self.visuals)) {
         continue;
       }
 
       var_2 = self.visuals getentitynumber();
-      level.ref_1346e[var_1].entsinside[var_2] = self.visuals;
-      self.visuals.ref_1346f = level.ref_1346e[var_1];
+      level.ref_1346E[var_1].entsinside[var_2] = self.visuals;
+      self.visuals.ref_1346F = level.ref_1346E[var_1];
 
-      if(isDefined(self.ref_1203a)) {
-        [[self.ref_1203a]](level.ref_1346e[var_1]);
+      if(isDefined(self.ref_1203A)) {
+        [[self.ref_1203A]](level.ref_1346E[var_1]);
       }
     }
   }
 }
 
-function ref_132e7(var_0, var_1) {
+function ref_132E7(var_0, var_1) {
   var_2 = var_1 getentitynumber();
 
   if(isDefined(var_0.entsinside[var_2])) {
@@ -1542,8 +1542,8 @@ function validatefunc(var_0, var_1) {
     var_2 = var_1 getentitynumber();
     var_0.entsinside[var_2] = undefined;
 
-    if(isDefined(var_1.ref_1346f) && var_1.ref_1346f == var_0) {
-      var_1.ref_1346f = undefined;
+    if(isDefined(var_1.ref_1346F) && var_1.ref_1346F == var_0) {
+      var_1.ref_1346F = undefined;
     }
 
     return false;
@@ -1562,18 +1562,18 @@ function ref_14397(var_0) {
 
 function ref_11962() {
   level.select_stairway_spawners["gos_fireworks"] = loadfx("vfx/iw8_mp/gamemode/vfx_gos_firework.vfx");
-  level.ref_1346c["vanish"] = loadfx("vfx/iw8_mp/gamemode/vfx_soccer_ball_burst.vfx");
-  level.ref_1346c["score_00"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_00.vfx");
-  level.ref_1346c["score_01"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_01.vfx");
-  level.ref_1346c["score_02"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_02.vfx");
-  level.ref_1346c["score_03"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_03.vfx");
-  level.ref_1346c["score_04"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_04.vfx");
-  level.ref_1346c["score_05"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_05.vfx");
-  level.ref_1346c["score_06"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_06.vfx");
-  level.ref_1346c["score_07"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_07.vfx");
-  level.ref_1346c["score_08"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_08.vfx");
-  level.ref_1346c["score_09"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_09.vfx");
-  level.ref_1346c["score_10"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_10.vfx");
+  level.ref_1346C["vanish"] = loadfx("vfx/iw8_mp/gamemode/vfx_soccer_ball_burst.vfx");
+  level.ref_1346C["score_00"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_00.vfx");
+  level.ref_1346C["score_01"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_01.vfx");
+  level.ref_1346C["score_02"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_02.vfx");
+  level.ref_1346C["score_03"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_03.vfx");
+  level.ref_1346C["score_04"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_04.vfx");
+  level.ref_1346C["score_05"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_05.vfx");
+  level.ref_1346C["score_06"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_06.vfx");
+  level.ref_1346C["score_07"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_07.vfx");
+  level.ref_1346C["score_08"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_08.vfx");
+  level.ref_1346C["score_09"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_09.vfx");
+  level.ref_1346C["score_10"] = loadfx("vfx/iw8_mp/level/stadium/vfx_stad_score_10.vfx");
 }
 
 function ref_13237() {

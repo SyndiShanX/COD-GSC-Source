@@ -13,22 +13,22 @@ function init() {
   var_0 = scripts\mp\gametypes\br_quest_util::registerquestcategory("domination_redacted", 1);
 
   if(var_0) {
-    scripts\mp\gametypes\br_quest_util::ref_12b2a("domination_redacted", "brloot_redacted_domination_tablet");
-    scripts\mp\gametypes\br_quest_util::ref_12b3d("domination_redacted", &markplayeraseliminatedonkilled);
+    scripts\mp\gametypes\br_quest_util::ref_12B2A("domination_redacted", "brloot_redacted_domination_tablet");
+    scripts\mp\gametypes\br_quest_util::ref_12B3D("domination_redacted", &markplayeraseliminatedonkilled);
   }
 
-  scripts\mp\gametypes\br_quest_util::ref_12b3d("domination", &markplayeraseliminatedonkilled);
+  scripts\mp\gametypes\br_quest_util::ref_12B3D("domination", &markplayeraseliminatedonkilled);
   scripts\mp\gametypes\br_quest_util::registerremovequestinstance("domination", &domquest_removequestinstance);
   scripts\mp\gametypes\br_quest_util::registerquestlocale("dom_locale");
   scripts\mp\gametypes\br_quest_util::registercreatequestlocale("dom_locale", &domlocale_createquestlocale);
   scripts\mp\gametypes\br_quest_util::registercheckiflocaleisavailable("dom_locale", &domlocale_checkiflocaleisavailable);
   scripts\mp\gametypes\br_quest_util::registerremovequestinstance("dom_locale", &domlocale_removelocaleinstance);
   scripts\mp\gametypes\br_quest_util::registerquestcircletick("dom_locale", &domlocale_circletick);
-  scripts\mp\gametypes\br_quest_util::ref_12b2d("dom_locale", &marked_for_no_death);
-  scripts\mp\gametypes\br_quest_util::ref_12b30("dom_locale", &markedentities_removeentsbyindex);
+  scripts\mp\gametypes\br_quest_util::ref_12B2D("dom_locale", &marked_for_no_death);
+  scripts\mp\gametypes\br_quest_util::ref_12B30("dom_locale", &markedentities_removeentsbyindex);
   scripts\mp\gametypes\br_quest_util::getquestdata("dom_locale").nextid = 0;
-  scripts\mp\gametypes\br_quest_util::ref_1297c("domination", 1);
-  scripts\mp\gametypes\br_quest_util::ref_12b31("domination", &maphint_offerscriptableused);
+  scripts\mp\gametypes\br_quest_util::ref_1297C("domination", 1);
+  scripts\mp\gametypes\br_quest_util::ref_12B31("domination", &maphint_offerscriptableused);
   ref_13239();
   game["dialog"]["mission_dom_accept"] = "mission_mission_dom_accept_secure";
   game["dialog"]["mission_dom_success"] = "mission_mission_dom_success";
@@ -63,7 +63,7 @@ function markplayeraseliminatedonkilled() {
   }
 
   getlootspawnpointcount(var_1.index);
-  self.ref_12c4a = var_1;
+  self.ref_12C4A = var_1;
   return true;
 }
 
@@ -94,8 +94,8 @@ function domlocale_createquestlocale(var_0) {
   var_5.lockupdatingicons = 1;
   var_5.getrandompointincirclewithindistance = 1;
 
-  if(istrue(self.tablet.ref_11ff8) && isDefined(var_0.traincar)) {
-    if(istrue(level.ref_145f1.maphint_debugthink)) {
+  if(istrue(self.tablet.ref_11FF8) && isDefined(var_0.traincar)) {
+    if(istrue(level.ref_145F1.maphint_debugthink)) {
       var_5.flagmodel setModel("lm_domination_point_01_mover_nocol");
     } else {
       var_5.flagmodel setModel("lm_domination_point_01_mover");
@@ -132,7 +132,7 @@ function domlocale_createquestlocale(var_0) {
   var_1.domflag = var_5;
   var_1.curorigin = var_5.curorigin;
   var_5.locale = var_1;
-  var_5.flagmodel.unresolved_collision_func = &ref_13f27;
+  var_5.flagmodel.unresolved_collision_func = &ref_13F27;
   scripts\mp\gametypes\br_quest_util::addquestinstance("dom_locale", var_1);
   return var_1;
 }
@@ -213,11 +213,11 @@ function takequestitem(var_0) {
 
   var_1.modifier = var_2;
   var_1 scripts\mp\gametypes\br_quest_util::registerteamonquest(self.team, self);
-  var_1 scripts\mp\gametypes\br_quest_util::ref_12b15(self);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_12B15(self);
   var_1.team = self.team;
   var_1.tablet = var_0;
   var_3 = getdvarint("scr_br_DOM_questTime", 240);
-  var_1 scripts\mp\gametypes\br_quest_util::ref_1297d(var_3, 4);
+  var_1 scripts\mp\gametypes\br_quest_util::ref_1297D(var_3, 4);
   var_4 = role_edit(var_0);
   var_5 = var_1 scripts\mp\gametypes\br_quest_util::requestquestlocale("dom_locale", var_4, 1);
 
@@ -239,7 +239,7 @@ function takequestitem(var_0) {
   var_6 = spawnStruct();
   var_6.excludedplayers = [];
   var_6.excludedplayers[0] = self;
-  var_6.ref_127d5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("domination", scripts\mp\gametypes\br_quest_util::ringing(self.team), var_1.modifier);
+  var_6.ref_127D5 = scripts\mp\gametypes\br_quest_util::rewardmodifier("domination", scripts\mp\gametypes\br_quest_util::ringing(self.team), var_1.modifier);
   scripts\mp\gametypes\br_quest_util::displayteamsplash(self.team, "br_domination_quest_start_team", var_6);
   scripts\mp\gametypes\br_quest_util::displayplayersplash(self, "br_domination_quest_start_tablet_finder", var_6);
   scripts\mp\gametypes\br_quest_util::searchfunc(self.team, "br_mission_pickup_tablet");
@@ -352,17 +352,17 @@ function domflag_onuseupdate(var_0, var_1, var_2, var_3) {
 }
 
 function mark_danger_timeout(var_0) {
-  if(!isDefined(self.ref_11f63) || !self.ref_11f63) {
-    self.ref_11f63 = 1;
+  if(!isDefined(self.ref_11F63) || !self.ref_11F63) {
+    self.ref_11F63 = 1;
 
     if(isDefined(self.traincar)) {
-      if(isDefined(level.ref_145f1) && istrue(level.ref_145f1.mark_armor)) {
+      if(isDefined(level.ref_145F1) && istrue(level.ref_145F1.mark_armor)) {
         var_1 = self.traincar.maphint_keypadscriptableused + (200, 0, 0);
         var_2 = self.traincar.origin + rotatevector(var_1, self.traincar.angles);
-        level thread scripts\mp\gametypes\br_quest_util::ref_140b1(var_2, "dom", 3);
+        level thread scripts\mp\gametypes\br_quest_util::ref_140B1(var_2, "dom", 3);
       }
     } else {
-      level thread scripts\mp\gametypes\br_quest_util::ref_140b1(self.curorigin, "dom");
+      level thread scripts\mp\gametypes\br_quest_util::ref_140B1(self.curorigin, "dom");
     }
 
     var_3 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_0.team, self.squadindex);
@@ -392,13 +392,13 @@ function domflag_onuse(var_0) {
       var_5 = scripts\mp\gametypes\br_quest_util::getquestindex("domination" + var_2.modifier);
       var_6 = scripts\mp\gametypes\br_quest_util::rewardtovalue(scripts\mp\gametypes\br_quest_util::rewardtotype("domination", var_2.modifier));
       var_7 = scripts\mp\gametypes\br_alt_mode_bblitz::clear_all_remaining(var_0);
-      var_3.ref_121b5 = scripts\mp\gametypes\br_quest_util::ref_121b9(var_5, var_4, var_6, undefined, var_7);
+      var_3.ref_121B5 = scripts\mp\gametypes\br_quest_util::ref_121B9(var_5, var_4, var_6, undefined, var_7);
       self.squadindex = var_2.squadindex;
       scripts\mp\gametypes\br_quest_util::displayteamsplash(var_2.team, "br_domination_quest_complete", var_3);
       scripts\mp\gametypes\br_quest_util::lookforvehicles(var_2.team, var_0, 8, var_5);
       level thread scripts\mp\gametypes\br_public::dmztut_luicallback("mission_dom_success", var_2.team, 1, 1);
-      var_2.ref_12d2e = self.flagmodel.origin;
-      var_2.ref_12d2b = self.flagmodel.angles;
+      var_2.ref_12D2E = self.flagmodel.origin;
+      var_2.ref_12D2B = self.flagmodel.angles;
       var_2.result = "success";
 
       if(isDefined(var_2.tablet.trackriotshield_grenadepullbackforc4)) {
@@ -419,9 +419,9 @@ function domflag_onuse(var_0) {
             continue;
           }
 
-          var_11 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_recon_objective_for_operator_mission", 1);
-          var_11 scripts\cp\vehicles\vehicle_compass_cp::ref_12c3f("t9_ch_global_complete_recon_objective_for_operator_mission_op2", 1);
-          var_2 scripts\mp\gametypes\br_quest_util::ref_12b15(var_11);
+          var_11 scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_complete_recon_objective_for_operator_mission", 1);
+          var_11 scripts\cp\vehicles\vehicle_compass_cp::ref_12C3F("t9_ch_global_complete_recon_objective_for_operator_mission_op2", 1);
+          var_2 scripts\mp\gametypes\br_quest_util::ref_12B15(var_11);
         }
       }
 
@@ -484,7 +484,7 @@ function domflag_setdomscriptablepartstate(var_0, var_1, var_2) {
 
 function mark_loot(var_0) {
   if(getdvarint("scr_br_alt_mode_gxp", 0)) {
-    if(var_0 scripts\mp\gametypes\br_public::ref_125ec()) {
+    if(var_0 scripts\mp\gametypes\br_public::ref_125EC()) {
       return false;
     }
   }
@@ -501,7 +501,7 @@ function mark_loot(var_0) {
 }
 
 function maphint_offerscriptableused() {
-  while(self.ref_1393b.domflag.numtouching[self.id]) {
+  while(self.ref_1393B.domflag.numtouching[self.id]) {
     waitframe();
   }
 
@@ -511,40 +511,40 @@ function maphint_offerscriptableused() {
 
 function role_edit(var_0) {
   var_1 = spawnStruct();
-  var_1.ref_12fa3 = "questPointsArray";
-  var_1.ref_12f9f = (var_0.origin[0], var_0.origin[1], 0);
-  var_1.ref_12fa6 = 12000;
-  var_1.ref_12fa7 = 0;
-  var_1.ref_12fa4 = 8000;
-  var_1.ref_12fa5 = 6000;
-  var_1.ref_1297f = 7;
+  var_1.ref_12FA3 = "questPointsArray";
+  var_1.ref_12F9F = (var_0.origin[0], var_0.origin[1], 0);
+  var_1.ref_12FA6 = 12000;
+  var_1.ref_12FA7 = 0;
+  var_1.ref_12FA4 = 8000;
+  var_1.ref_12FA5 = 6000;
+  var_1.ref_1297F = 7;
   var_1.mintime = getdvarfloat("scr_br_dom_quest_capture_time", 30);
-  var_1.ref_12fa1 = 1;
-  var_1.ref_12c4a = var_0.ref_12c4a;
+  var_1.ref_12FA1 = 1;
+  var_1.ref_12C4A = var_0.ref_12C4A;
 
   if(playmatchendcamera()) {
-    if(var_1.ref_12fa6 < level.ref_12965) {
-      var_1.ref_12fa6 = level.ref_12965;
+    if(var_1.ref_12FA6 < level.ref_12965) {
+      var_1.ref_12FA6 = level.ref_12965;
     }
 
-    var_1.ref_12fa4 = level.ref_12965;
-    var_1.ref_12fa5 = level.ref_12966;
+    var_1.ref_12FA4 = level.ref_12965;
+    var_1.ref_12FA5 = level.ref_12966;
   }
 
-  if(istrue(var_0.ref_11ff8)) {
-    var_1.ref_12fa3 = "questPointsArrayWZTrain";
-    var_1.ref_1407e = 1;
+  if(istrue(var_0.ref_11FF8)) {
+    var_1.ref_12FA3 = "questPointsArrayWZTrain";
+    var_1.ref_1407E = 1;
   }
 
   var_2 = getdvarint("scr_br_questDomDistMin", -1);
   var_3 = getdvarint("scr_br_questDomDistMax", -1);
 
   if(var_2 >= 0) {
-    var_1.ref_12fa5 = var_2;
+    var_1.ref_12FA5 = var_2;
   }
 
   if(var_3 >= 0) {
-    var_1.ref_12fa4 = var_3;
+    var_1.ref_12FA4 = var_3;
   }
 
   return var_1;
@@ -552,7 +552,7 @@ function role_edit(var_0) {
 
 function playmatchendcamera() {
   var_0 = 0;
-  var_1 = scripts\mp\gametypes\br_gametypes::ref_12e05("overrideQuestSearchParams", "domination");
+  var_1 = scripts\mp\gametypes\br_gametypes::ref_12E05("overrideQuestSearchParams", "domination");
 
   if(isDefined(var_1)) {
     return var_1;
@@ -573,7 +573,7 @@ function playmatchendcamera() {
   return var_0;
 }
 
-function ref_13f27(var_0, var_1) {
+function ref_13F27(var_0, var_1) {
   var_0 setOrigin(var_0.origin + (0, 0, 34));
   var_0 setstance("crouch");
 }

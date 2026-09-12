@@ -5,35 +5,35 @@
 
 function init() {
   var_0 = spawnStruct();
-  var_0.ref_11b78 = getdvarint("scr_br_pe_plunder_crate_max_times", 2);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_plunder_crate_max_times", 2);
   var_0.isfeaturedisabled = &deactivate;
-  var_0.ref_140cf = &ref_140d1;
+  var_0.ref_140CF = &ref_140D1;
   var_0.attackerswaittime = &atv_initdamage;
   var_0.postinitfunc = &postinitplundercrate;
   var_0.weight = getdvarfloat("scr_br_pe_plunder_crate_weight", 0);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("plunder_crate", "20 15101010151010");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("plunder_crate");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(12, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(12, var_0);
   var_0 = spawnStruct();
-  var_0.ref_11b78 = getdvarint("scr_br_pe_weapon_crate_max_times", 2);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_weapon_crate_max_times", 2);
   var_0.isfeaturedisabled = &deactivate;
   var_0.attackerswaittime = &aud_breached_exit_wind;
-  var_0.ref_140cf = &ref_140d8;
+  var_0.ref_140CF = &ref_140D8;
   var_0.postinitfunc = &postinitweaponcrate;
   var_0.weight = getdvarfloat("scr_br_pe_weapon_crate_weight", 0);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("weapon_crate", "20 15101010152025");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("weapon_crate");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(13, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(13, var_0);
   var_0 = spawnStruct();
-  var_0.ref_11b78 = getdvarint("scr_br_pe_medical_crate_max_times", 2);
+  var_0.ref_11B78 = getdvarint("scr_br_pe_medical_crate_max_times", 2);
   var_0.isfeaturedisabled = &deactivate;
-  var_0.ref_140cf = &validatemedicalcrate;
+  var_0.ref_140CF = &validatemedicalcrate;
   var_0.attackerswaittime = &activatemedicalcrate;
   var_0.postinitfunc = &postinitmedicalcrate;
   var_0.weight = getdvarfloat("scr_br_pe_medical_crate_weight", 0);
   var_0.guard_door_clip = scripts\mp\gametypes\br_publicevents::relic_squadlink_init_vfx("medical_crate", "20 15101010152025");
   var_0.pemetereventweights = scripts\mp\gametypes\br_publicevents_meter::getdvarpemetereventweights("medical_crate");
-  scripts\mp\gametypes\br_publicevents::ref_12b35(20, var_0);
+  scripts\mp\gametypes\br_publicevents::ref_12B35(20, var_0);
 }
 
 function postinitplundercrate() {
@@ -59,19 +59,19 @@ function postinitfunc() {
   game["dialog"]["medical_drop"] = "medical_announcement";
   level.conf_fx["vanish"] = loadfx("vfx/core/impacts/small_snowhit");
 
-  if(istrue(level.ref_1406f)) {
-    level.ref_11a1f = level.minigun_warning_time;
-    level.ref_1395a = [];
+  if(istrue(level.ref_1406F)) {
+    level.ref_11A1F = level.minigun_warning_time;
+    level.ref_1395A = [];
     return;
   }
 }
 
-function ref_140d1() {
+function ref_140D1() {
   var_0 = scripts\mp\gametypes\br_armory_kiosk::resetarenaomnvardata();
   return var_0 >= 1;
 }
 
-function ref_140d8() {
+function ref_140D8() {
   return true;
 }
 
@@ -165,7 +165,7 @@ function attackpressed(var_0) {
   var_9 = scripts\mp\gametypes\br_circle::getdangercircleradius();
 
   for(var_10 = 0; var_10 < var_6; var_10++) {
-    if(istrue(level.ref_1406f)) {
+    if(istrue(level.ref_1406F)) {
       var_7 = return_same_module_as_next_module(var_8, var_9);
       continue;
     }
@@ -206,7 +206,7 @@ function attackpressed(var_0) {
       }
 
       var_20 = scripts\cp_mp\killstreaks\airdrop::gettriggerobject(var_19);
-      var_20.ref_140a0 = level.br_pe_crate_usetimeoverride;
+      var_20.ref_140A0 = level.br_pe_crate_usetimeoverride;
       level.delete_covernodes[level.delete_covernodes.size] = var_19;
     }
   }
@@ -234,19 +234,19 @@ function return_same_module_as_next_module(var_0, var_1) {
   var_2 = undefined;
   var_3 = [];
 
-  foreach(var_5 in level.ref_11a1f) {
+  foreach(var_5 in level.ref_11A1F) {
     if(scripts\mp\gametypes\br_circle::updateprestreamrespawn(var_5.origin)) {
       var_3 = scripts\engine\utility::array_add(var_3, var_5);
     }
   }
 
-  level.ref_11a1f = var_3;
-  var_7 = freight_lift_dogtag_revive(level.ref_11a1f);
+  level.ref_11A1F = var_3;
+  var_7 = freight_lift_dogtag_revive(level.ref_11A1F);
   var_8 = 5;
 
   while(var_8 >= 0) {
     var_9 = randomfloat(var_7);
-    var_10 = play_scramble_for_player_until_cleared(level.ref_11a1f, var_9);
+    var_10 = play_scramble_for_player_until_cleared(level.ref_11A1F, var_9);
 
     if(isDefined(var_10)) {
       var_11 = scripts\mp\gametypes\br_circle::risk_flagspawnshiftingpercent(var_10.origin, var_10.radius, 0.1, 0.85, 1, 1);
@@ -275,7 +275,7 @@ function return_same_module_as_next_module(var_0, var_1) {
     var_1 = scripts\mp\gametypes\br_circle::risk_flagspawnshiftingpercent( < error > , var_0, 0.1, 0.85, 1, 1);
   }
 
-  level.ref_1395a[level.ref_1395a.size] = var_1;
+  level.ref_1395A[level.ref_1395A.size] = var_1;
   return var_1;
 }
 
@@ -283,7 +283,7 @@ function update_objective_mlgicon(var_0) {
   var_1 = getdvarint("scr_br_pe_lootcrate_min_dist", 2500);
   var_2 = var_1 * var_1;
 
-  foreach(var_4 in level.ref_1395a) {
+  foreach(var_4 in level.ref_1395A) {
     if(distance2dsquared(var_0, var_4) < var_2) {
       return true;
     }

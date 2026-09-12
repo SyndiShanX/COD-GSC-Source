@@ -16,8 +16,8 @@ function get_olarideexfil_transient() {
 
 function olarideexfil_loadtransient() {
   if(!getdvarint("scr_br_ending_placement")) {
-    self.ref_13ce3 = get_olarideexfil_transient();
-    unloadinfiltransient(self.ref_13ce3);
+    self.ref_13CE3 = get_olarideexfil_transient();
+    unloadinfiltransient(self.ref_13CE3);
     setomnvarforallclients("ui_br_end_game_splash_type", 18);
     var_0 = getdvarfloat("scr_br_end_transient_wait", level.brendingoverrideinfo.preloadwaittime);
     thread olarideexfil_fadetoblack(var_0 - 1, 0.9, 1.5, 0.75, 1);
@@ -129,7 +129,7 @@ foreach(var_5 in level.players) {
 }
 
 function olarideexfil_setupchopper() {
-  var_0 = scripts\mp\gametypes\br_ending::ref_135ca("veh8_mil_air_blima_scriptmodel");
+  var_0 = scripts\mp\gametypes\br_ending::ref_135CA("veh8_mil_air_blima_scriptmodel");
   var_0 unmarkkeyframedmover(1);
   self.onkillingblow = var_0;
 }
@@ -192,7 +192,7 @@ if(var_0 == "villains") {
 function olarideexfil_setwind(var_0) {
   foreach(var_2 in self.winners) {
     if(isDefined(var_2)) {
-      var_2 scripts\mp\utility\player::ref_1328c(var_0, 1);
+      var_2 scripts\mp\utility\player::ref_1328C(var_0, 1);
     }
   }
 }
@@ -223,7 +223,7 @@ function olarideexfil_deleteloot(var_0) {
         var_5 = "body";
       }
 
-      scripts\mp\gametypes\br_pickups::ref_11a21(var_4, var_5);
+      scripts\mp\gametypes\br_pickups::ref_11A21(var_4, var_5);
     }
   }
 
@@ -290,7 +290,7 @@ function olarideexfil_preloadlocation(var_0) {
   foreach(var_2 in level.players) {
     if(isDefined(var_2)) {
       var_2 calloutmarkerping_getinventoryslot(0);
-      var_2 scripts\mp\gametypes\br_public::ref_126b9(var_0);
+      var_2 scripts\mp\gametypes\br_public::ref_126B9(var_0);
     }
   }
 }
@@ -306,7 +306,7 @@ function olarideexfil_teleportplayers(var_0, var_1) {
 
 function olarideexfil_playerremovecinematicblacklayerifneeded() {
   foreach(var_1 in level.players) {
-    if(isDefined(var_1) && var_1 scripts\mp\gametypes\br_gulag::ref_125ea()) {
+    if(isDefined(var_1) && var_1 scripts\mp\gametypes\br_gulag::ref_125EA()) {
       var_1 thread scripts\mp\gametypes\br_gulag::ref_12523();
     }
   }
@@ -331,105 +331,105 @@ function heroesexfil_pack(var_0) {
   olarideexfil_loadtransient();
   olarideexfil_playerremovecinematicblacklayerifneeded();
   thread olarideexfil_music_sfx_start();
-  self.ref_142d0 = "mp_wz_island_s05_exfil_g_ltm";
+  self.ref_142D0 = "mp_wz_island_s05_exfil_g_ltm";
   scripts\mp\gametypes\br_gametype_olaride::brolaride_detachallflag();
   olarideexfil_setupchopper();
   heroesexfil_setupfightersaircraft();
   olarideexfil_deleteloot(self.origin);
   olarideexfil_deletesmokecolumn();
   olarideexfil_updatewinners();
-  thread scripts\mp\gametypes\br_gametypes::ref_12e05("exfilStart", self.winners);
+  thread scripts\mp\gametypes\br_gametypes::ref_12E05("exfilStart", self.winners);
   self.gameending = scripts\mp\gametypes\br_ending::init_carepackages();
-  self.ref_121b8 = [];
+  self.ref_121B8 = [];
   var_1 = 0;
-  self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene1");
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh010_start);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh010);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint($br_exfil_olaride_g_cam_sh010);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh010, %br_exfil_olaride_g_guy0_sh010_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh010, %br_exfil_olaride_g_guy1_sh010_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh010, %br_exfil_olaride_g_guy2_sh010_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh010, %br_exfil_olaride_g_guy3_sh010_fem);
+  self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene1");
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh010_start);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh010);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint($br_exfil_olaride_g_cam_sh010);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh010, %br_exfil_olaride_g_guy0_sh010_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh010, %br_exfil_olaride_g_guy1_sh010_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh010, %br_exfil_olaride_g_guy2_sh010_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh010, %br_exfil_olaride_g_guy3_sh010_fem);
   var_1++;
-  self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene2");
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh020_start);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh020);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh020, %br_exfil_olaride_g_guy0_sh020_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh020, %br_exfil_olaride_g_guy1_sh020_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh020, %br_exfil_olaride_g_guy2_sh020_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh020, %br_exfil_olaride_g_guy3_sh020_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh020);
+  self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene2");
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh020_start);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh020);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh020, %br_exfil_olaride_g_guy0_sh020_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh020, %br_exfil_olaride_g_guy1_sh020_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh020, %br_exfil_olaride_g_guy2_sh020_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh020, %br_exfil_olaride_g_guy3_sh020_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh020);
   var_1++;
-  self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene3");
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh030_start);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh030);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh030, %br_exfil_olaride_g_guy0_sh030_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh030, %br_exfil_olaride_g_guy1_sh030_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh030, %br_exfil_olaride_g_guy2_sh030_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh030, %br_exfil_olaride_g_guy3_sh030_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh030);
+  self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene3");
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh030_start);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh030);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh030, %br_exfil_olaride_g_guy0_sh030_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh030, %br_exfil_olaride_g_guy1_sh030_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh030, %br_exfil_olaride_g_guy2_sh030_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh030, %br_exfil_olaride_g_guy3_sh030_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh030);
 
   if(self.winners.size >= 2) {
     var_1++;
-    self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene4");
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh040_start);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh040);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh040, %br_exfil_olaride_g_guy0_sh040_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh040, %br_exfil_olaride_g_guy1_sh040_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh040, %br_exfil_olaride_g_guy2_sh040_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh040, %br_exfil_olaride_g_guy3_sh040_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh040);
+    self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene4");
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh040_start);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh040);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh040, %br_exfil_olaride_g_guy0_sh040_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh040, %br_exfil_olaride_g_guy1_sh040_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh040, %br_exfil_olaride_g_guy2_sh040_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh040, %br_exfil_olaride_g_guy3_sh040_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh040);
   }
 
   if(self.winners.size >= 3) {
     var_1++;
-    self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene5");
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh050_start);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh050);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh050, %br_exfil_olaride_g_guy0_sh050_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh050, %br_exfil_olaride_g_guy1_sh050_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh050, %br_exfil_olaride_g_guy2_sh050_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh050, %br_exfil_olaride_g_guy3_sh050_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh050);
+    self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene5");
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh050_start);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh050);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh050, %br_exfil_olaride_g_guy0_sh050_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh050, %br_exfil_olaride_g_guy1_sh050_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh050, %br_exfil_olaride_g_guy2_sh050_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh050, %br_exfil_olaride_g_guy3_sh050_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh050);
   }
 
   if(self.winners.size == 4) {
     var_1++;
-    self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene6");
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh060_start);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh060);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh060, %br_exfil_olaride_g_guy0_sh060_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh060, %br_exfil_olaride_g_guy1_sh060_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh060, %br_exfil_olaride_g_guy2_sh060_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh060, %br_exfil_olaride_g_guy3_sh060_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh060);
+    self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene6");
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh060_start);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh060);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh060, %br_exfil_olaride_g_guy0_sh060_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh060, %br_exfil_olaride_g_guy1_sh060_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh060, %br_exfil_olaride_g_guy2_sh060_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh060, %br_exfil_olaride_g_guy3_sh060_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh060);
   }
 
   var_1++;
-  self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene7");
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh070_start);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh070);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh070, %br_exfil_olaride_g_guy0_sh070_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh070, %br_exfil_olaride_g_guy1_sh070_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh070, %br_exfil_olaride_g_guy2_sh070_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh070, %br_exfil_olaride_g_guy3_sh070_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh070);
+  self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene7");
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh070_start);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh070);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh070, %br_exfil_olaride_g_guy0_sh070_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh070, %br_exfil_olaride_g_guy1_sh070_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh070, %br_exfil_olaride_g_guy2_sh070_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh070, %br_exfil_olaride_g_guy3_sh070_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh070);
   var_1++;
-  self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene75");
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh075_start);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh075);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh075, %br_exfil_olaride_g_guy0_sh075_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh075, %br_exfil_olaride_g_guy1_sh075_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh075, %br_exfil_olaride_g_guy2_sh075_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh075, %br_exfil_olaride_g_guy3_sh075_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh075);
+  self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene75");
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh075_start);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh075);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_g_guy0_sh075, %br_exfil_olaride_g_guy0_sh075_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_g_guy1_sh075, %br_exfil_olaride_g_guy1_sh075_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_g_guy2_sh075, %br_exfil_olaride_g_guy2_sh075_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_g_guy3_sh075, %br_exfil_olaride_g_guy3_sh075_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh075);
   var_1++;
-  self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene8");
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh080_start);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh080);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.aircraftfighter1, %br_exfil_olaride_g_suniform01_sh080);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.aircraftfighter2, %br_exfil_olaride_g_suniform02_sh080);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh080);
+  self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene8");
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olarideheroes_sh080_start);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_g_blima_sh080);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.aircraftfighter1, %br_exfil_olaride_g_suniform01_sh080);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.aircraftfighter2, %br_exfil_olaride_g_suniform02_sh080);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_g_cam_sh080);
 }
 
 function olarideheroes_sh010_start(var_0) {
@@ -510,8 +510,8 @@ function heroesexfil_override_ending_structs(var_0) {
 function heroesexfil_setupfightersaircraft() {
   var_0 = spawn("script_origin", (0, 0, 0));
   var_1 = "veh8_mil_air_suniform25";
-  self.aircraftfighter1 = var_0 scripts\mp\gametypes\br_ending::ref_135ca(var_1, "br_exfil_olaride_g_suniform01_sh080");
-  self.aircraftfighter2 = var_0 scripts\mp\gametypes\br_ending::ref_135ca(var_1, "br_exfil_olaride_g_suniform02_sh080");
+  self.aircraftfighter1 = var_0 scripts\mp\gametypes\br_ending::ref_135CA(var_1, "br_exfil_olaride_g_suniform01_sh080");
+  self.aircraftfighter2 = var_0 scripts\mp\gametypes\br_ending::ref_135CA(var_1, "br_exfil_olaride_g_suniform02_sh080");
   self.aircraftfighter1 hide();
   self.aircraftfighter2 hide();
 }
@@ -550,109 +550,109 @@ function villainsexfil_pack(var_0) {
   olarideexfil_loadtransient();
   olarideexfil_playerremovecinematicblacklayerifneeded();
   thread olarideexfil_music_sfx_start();
-  self.ref_142d0 = "mp_wz_island_s05_exfil_b_ltm";
+  self.ref_142D0 = "mp_wz_island_s05_exfil_b_ltm";
   scripts\mp\gametypes\br_gametype_olaride::brolaride_detachallflag();
   olarideexfil_setupchopper();
   villainsexfil_setupprops();
   olarideexfil_deleteloot(self.origin);
   olarideexfil_updatewinners();
-  thread scripts\mp\gametypes\br_gametypes::ref_12e05("exfilStart", self.winners);
+  thread scripts\mp\gametypes\br_gametypes::ref_12E05("exfilStart", self.winners);
   self.gameending = scripts\mp\gametypes\br_ending::init_carepackages();
-  self.ref_121b8 = [];
+  self.ref_121B8 = [];
   var_1 = 0;
-  self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene1");
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh010_start);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh010);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh010);
+  self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene1");
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh010_start);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh010);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh010);
   var_1++;
-  self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene2");
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh020_start);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh020);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh020);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh020);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh020, %br_exfil_olaride_b_guy0_sh020_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh020, %br_exfil_olaride_b_guy1_sh020_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh020, %br_exfil_olaride_b_guy2_sh020_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh020, %br_exfil_olaride_b_guy3_sh020_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh020);
+  self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene2");
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh020_start);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh020);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh020);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh020);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh020, %br_exfil_olaride_b_guy0_sh020_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh020, %br_exfil_olaride_b_guy1_sh020_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh020, %br_exfil_olaride_b_guy2_sh020_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh020, %br_exfil_olaride_b_guy3_sh020_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh020);
   villainsexfil_shootfromnotetrack();
   var_1++;
-  self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene3");
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh030_start);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh030);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh030);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh030);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh030, %br_exfil_olaride_b_guy0_sh030_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh030, %br_exfil_olaride_b_guy1_sh030_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh030, %br_exfil_olaride_b_guy2_sh030_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh030, %br_exfil_olaride_b_guy3_sh030_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh030);
+  self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene3");
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh030_start);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh030);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh030);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh030);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh030, %br_exfil_olaride_b_guy0_sh030_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh030, %br_exfil_olaride_b_guy1_sh030_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh030, %br_exfil_olaride_b_guy2_sh030_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh030, %br_exfil_olaride_b_guy3_sh030_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh030);
   villainsexfil_shootfromnotetrack();
 
   if(self.winners.size >= 2) {
     var_1++;
-    self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene4");
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh040_start);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh040);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.pistolprop, %br_exfil_olaride_b_pistol_sh040);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh040);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh040);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh040, %br_exfil_olaride_b_guy0_sh040_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh040, %br_exfil_olaride_b_guy1_sh040_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh040, %br_exfil_olaride_b_guy2_sh040_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh040, %br_exfil_olaride_b_guy3_sh040_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh040);
+    self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene4");
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh040_start);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh040);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.pistolprop, %br_exfil_olaride_b_pistol_sh040);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh040);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh040);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh040, %br_exfil_olaride_b_guy0_sh040_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh040, %br_exfil_olaride_b_guy1_sh040_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh040, %br_exfil_olaride_b_guy2_sh040_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh040, %br_exfil_olaride_b_guy3_sh040_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh040);
     villainsexfil_shootfromnotetrack();
   }
 
   if(self.winners.size >= 3) {
     var_1++;
-    self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene5");
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh050_start);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh050);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.grenadeprop, %br_exfil_olaride_b_grenade_sh050);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh050);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh050);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh050, %br_exfil_olaride_b_guy0_sh050_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh050, %br_exfil_olaride_b_guy1_sh050_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh050, %br_exfil_olaride_b_guy2_sh050_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh050, %br_exfil_olaride_b_guy3_sh050_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh050);
+    self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene5");
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh050_start);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh050);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.grenadeprop, %br_exfil_olaride_b_grenade_sh050);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh050);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh050);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh050, %br_exfil_olaride_b_guy0_sh050_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh050, %br_exfil_olaride_b_guy1_sh050_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh050, %br_exfil_olaride_b_guy2_sh050_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh050, %br_exfil_olaride_b_guy3_sh050_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh050);
     villainsexfil_shootfromnotetrack();
   }
 
   if(self.winners.size == 4) {
     var_1++;
-    self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene6");
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh060_start);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh060);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh060);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh060);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh060, %br_exfil_olaride_b_guy0_sh060_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh060, %br_exfil_olaride_b_guy1_sh060_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh060, %br_exfil_olaride_b_guy2_sh060_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh060, %br_exfil_olaride_b_guy3_sh060_fem);
-    self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh060);
+    self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene6");
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh060_start);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh060);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh060);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh060);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh060, %br_exfil_olaride_b_guy0_sh060_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh060, %br_exfil_olaride_b_guy1_sh060_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh060, %br_exfil_olaride_b_guy2_sh060_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh060, %br_exfil_olaride_b_guy3_sh060_fem);
+    self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh060);
     villainsexfil_shootfromnotetrack();
   }
 
   var_1++;
-  self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene7");
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh070_start);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh070);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh070);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh070);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh070, %br_exfil_olaride_b_guy0_sh070_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh070, %br_exfil_olaride_b_guy1_sh070_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh070, %br_exfil_olaride_b_guy2_sh070_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh070, %br_exfil_olaride_b_guy3_sh070_fem);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh070);
+  self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene7");
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh070_start);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh070);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner1, %br_exfil_olaride_b_gunner1_sh070);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.gunner2, %br_exfil_olaride_b_gunner2_sh070);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[0], %br_exfil_olaride_b_guy0_sh070, %br_exfil_olaride_b_guy0_sh070_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[1], %br_exfil_olaride_b_guy1_sh070, %br_exfil_olaride_b_guy1_sh070_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[2], %br_exfil_olaride_b_guy2_sh070, %br_exfil_olaride_b_guy2_sh070_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_vector(self.winners[3], %br_exfil_olaride_b_guy3_sh070, %br_exfil_olaride_b_guy3_sh070_fem);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh070);
   villainsexfil_shootfromnotetrack();
   var_1++;
-  self.ref_121b8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene8");
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh080_start);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh080);
-  self.ref_121b8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh080);
+  self.ref_121B8[var_1] = scripts\mp\gametypes\br_ending::init_bomb_objective("scene8");
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::backendevent([], &olaridevillains_sh080_start);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::back_struct(self.onkillingblow, %br_exfil_olaride_b_blima_sh080);
+  self.ref_121B8[var_1] scripts\mp\gametypes\br_ending::awardstadiumblueprint(%br_exfil_olaride_b_cam_sh080);
 }
 
 function olaridevillains_sh010_start(var_0) {
@@ -751,12 +751,12 @@ function villainsexfil_bombplayFX() {
 
 function villainsexfil_setupprops() {
   var_0 = "offhand_wm_grenade_mike67";
-  self.grenadeprop = scripts\mp\gametypes\br_ending::ref_135ca(var_0, "br_exfil_olaride_b_grenade_sh050");
+  self.grenadeprop = scripts\mp\gametypes\br_ending::ref_135CA(var_0, "br_exfil_olaride_b_grenade_sh050");
   var_1 = "weapon_wm_stream_pi";
-  self.pistolprop = scripts\mp\gametypes\br_ending::ref_135ca(var_1, "br_exfil_olaride_b_pistol_sh040");
+  self.pistolprop = scripts\mp\gametypes\br_ending::ref_135CA(var_1, "br_exfil_olaride_b_pistol_sh040");
   var_2 = "fullbody_zombie_a_br";
-  self.gunner1 = scripts\mp\gametypes\br_ending::ref_135ca(var_2, "br_exfil_olaride_b_gunner1_sh020");
-  self.gunner2 = scripts\mp\gametypes\br_ending::ref_135ca(var_2, "br_exfil_olaride_b_gunner2_sh020");
+  self.gunner1 = scripts\mp\gametypes\br_ending::ref_135CA(var_2, "br_exfil_olaride_b_gunner1_sh020");
+  self.gunner2 = scripts\mp\gametypes\br_ending::ref_135CA(var_2, "br_exfil_olaride_b_gunner2_sh020");
 }
 
 function villainsexfil_shootfromnotetrack() {

@@ -10,7 +10,7 @@ function main() {
   scripts\mp\maps\mp_piccadilly\gen\mp_piccadilly_art::main();
   scripts\mp\maps\mp_piccadilly\mp_piccadilly_fx::main();
   scripts\mp\maps\mp_piccadilly\mp_piccadilly_lighting::main();
-  scripts\cp_mp\utility\game_utility::ref_12b2c();
+  scripts\cp_mp\utility\game_utility::ref_12B2C();
   scripts\mp\load::main();
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   level.outofboundstriggers[0].origin -= (0, 0, 20);
@@ -33,15 +33,15 @@ function main() {
   thread play_movie("mp_pic_screens_002");
   thread metal_detectors();
   thread laser_shut_down_button();
-  thread ref_12f8e();
-  thread ref_121f3();
-  thread ref_121f5();
+  thread ref_12F8E();
+  thread ref_121F3();
+  thread ref_121F5();
   thread spawnstaticvan();
   scripts\mp\flags::levelflagwait("scriptables_ready");
   wait 6;
-  scripts\engine\utility::array_thread(getscriptablearray("scriptable_veh8_civ_lnd_victor40_police_mp_piccadilly", "classname"), &ref_141bd);
-  scripts\engine\utility::array_thread(getscriptablearray("scriptable_veh8_civ_lnd_palfa_ambulance_london", "classname"), &ref_141bd);
-  thread ref_12f82();
+  scripts\engine\utility::array_thread(getscriptablearray("scriptable_veh8_civ_lnd_victor40_police_mp_piccadilly", "classname"), &ref_141BD);
+  scripts\engine\utility::array_thread(getscriptablearray("scriptable_veh8_civ_lnd_palfa_ambulance_london", "classname"), &ref_141BD);
+  thread ref_12F82();
   level.outofboundstime = 2;
 }
 
@@ -80,7 +80,7 @@ function metal_detectors() {
   }
 }
 
-function ref_141bd() {
+function ref_141BD() {
   level endon("game_ended");
   wait randomfloat(2);
 
@@ -141,7 +141,7 @@ function spawnstaticvan() {
   }
 }
 
-function ref_12f82() {
+function ref_12F82() {
   while(!istrue(level.doorsetupfinished)) {
     waitframe();
   }
@@ -177,7 +177,7 @@ function ref_12f82() {
   }
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
@@ -202,7 +202,7 @@ function ref_12f8e() {
   }
 }
 
-function ref_121f3() {
+function ref_121F3() {
   var_0 = getEnt("clip512x512x8", "targetname");
   var_1 = spawn("script_model", (-3248, -976, 0));
   var_1.angles = (270, 0, 0);
@@ -230,7 +230,7 @@ function ref_121f3() {
   var_3 notsolid();
 }
 
-function ref_121f5() {
+function ref_121F5() {
   if(!isDefined(level.outofboundstriggers)) {
     level.outofboundstriggers = [];
   }

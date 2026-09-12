@@ -30,29 +30,29 @@ function table_getrole() {
   scripts\mp\gametypes\br_gametypes::move_molotov_mortar("planeUseCircleRadius");
   scripts\mp\gametypes\br_gametypes::move_molotov_mortar("tabletReplace");
   level.decoyassists = &groundz;
-  scripts\mp\gametypes\br_gametypes::ref_12b11("lastStandAllowed", &watch_flight_collision);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("getFinalCircleCenter", &relic_steelballs_health_boost);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("mapCenterFinalCircle", &relic_steelballs_health_boost);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("addToC130Infil", &being_hacked);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("createC130PathStruct", &init_relic_aggressive_melee);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("spawnHandled", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::ref_1365d);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerKilledSpawn", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::playerrespawn);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("gulagWinnerRespawn", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::ref_1264f);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerKilled", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::onplayerkilled);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onPlayerConnect", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::onplayerconnect);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("infilSequence", &manage_fakebody_hides);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("skipInfilSequence", &ref_133d6);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("spawnInitialVehicles", &scripts\mp\gametypes\rumble_invasion\br_ri_vehicles::ref_13570);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("dangerCircleTick", &dangercircletick);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerDropPlunderOnDeath", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::playerdropplunderondeath);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("addDropOnPlayerDeath", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::battle_tracks_hidetogglewidget);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("addSpawnLootContents", &beaker_end_time);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("modifyPlayerDamage", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::modifyplayerdamage);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerWelcomeSplashes", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::ref_126f1);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("endGame", &defenderflag_starts);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerHandleRedeploy", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::ref_125c4);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerSkipKioskUse", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::ref_1269b);
-  scripts\cp_mp\utility\script_utility::registersharedfunc("aa_turret", "destroyedTurretThink", &scripts\mp\gametypes\rumble_invasion\br_ri_vehicles::ref_12d35);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("lastStandAllowed", &watch_flight_collision);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("getFinalCircleCenter", &relic_steelballs_health_boost);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("mapCenterFinalCircle", &relic_steelballs_health_boost);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("addToC130Infil", &being_hacked);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("createC130PathStruct", &init_relic_aggressive_melee);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("spawnHandled", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::ref_1365D);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerKilledSpawn", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::playerrespawn);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("gulagWinnerRespawn", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::ref_1264F);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerKilled", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::onplayerkilled);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onPlayerConnect", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::onplayerconnect);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("infilSequence", &manage_fakebody_hides);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("skipInfilSequence", &ref_133D6);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("spawnInitialVehicles", &scripts\mp\gametypes\rumble_invasion\br_ri_vehicles::ref_13570);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("dangerCircleTick", &dangercircletick);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerDropPlunderOnDeath", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::playerdropplunderondeath);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("addDropOnPlayerDeath", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::battle_tracks_hidetogglewidget);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("addSpawnLootContents", &beaker_end_time);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("modifyPlayerDamage", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::modifyplayerdamage);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerWelcomeSplashes", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::ref_126F1);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("endGame", &defenderflag_starts);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerHandleRedeploy", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::ref_125C4);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerSkipKioskUse", &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::ref_1269B);
+  scripts\cp_mp\utility\script_utility::registersharedfunc("aa_turret", "destroyedTurretThink", &scripts\mp\gametypes\rumble_invasion\br_ri_vehicles::ref_12D35);
   _keypadscriptableused_bunkeralt::init();
   _ispointinbadarea::init();
   _initignoredtabspergamemode::init();
@@ -65,42 +65,42 @@ function table_getrole() {
 
 function tarmac_techo_start() {
   level.start_reach_exhaust_waste = spawnStruct();
-  level.start_reach_exhaust_waste.ref_11b1e = getdvarint("scr_br_timelimit");
+  level.start_reach_exhaust_waste.ref_11B1E = getdvarint("scr_br_timelimit");
   level.start_reach_exhaust_waste.ref_13376 = getdvarint("scr_ri_showTeammateOutlineShader", 0);
   level.start_reach_exhaust_waste.spawnrope = getdvarint("scr_ri_default_spawn_height", 12000);
-  level.start_reach_exhaust_waste.ref_127b6 = getdvarfloat("scr_ri_plunderDropPercent", 0);
-  level.start_reach_exhaust_waste.ref_127b5 = getdvarfloat("scr_ri_plunderDropAmount", 5);
-  level.start_reach_exhaust_waste.ref_127be = getdvarfloat("scr_ri_plunderKeepPercent", 1);
+  level.start_reach_exhaust_waste.ref_127B6 = getdvarfloat("scr_ri_plunderDropPercent", 0);
+  level.start_reach_exhaust_waste.ref_127B5 = getdvarfloat("scr_ri_plunderDropAmount", 5);
+  level.start_reach_exhaust_waste.ref_127BE = getdvarfloat("scr_ri_plunderKeepPercent", 1);
   level.start_reach_exhaust_waste.spin_fan_blades = getdvarint("scr_ri_points_per_kill", 1);
   level.start_reach_exhaust_waste.spectatingthisplayer = getdvarint("scr_ri_points_for_quest_completion", 5);
   level.start_reach_exhaust_waste.spawnrisktoken = getdvarint("scr_ri_comeback_mechanics_enabled", 1) == 1;
   level.start_reach_exhaust_waste.maphints = getdvarint("scr_ri_pe_dom_radius", 750);
-  level.start_reach_exhaust_waste.ref_122a1 = getdvarint("scr_ri_pe_dom_capture_time", 30);
+  level.start_reach_exhaust_waste.ref_122A1 = getdvarint("scr_ri_pe_dom_capture_time", 30);
   level.start_reach_exhaust_waste.manualturret_watchturretusetimeout = getdvarfloat("scr_ri_pe_dom_stompRate", 2);
   level.start_reach_exhaust_waste.spawned_vehicles = [];
   level.start_reach_exhaust_waste.ref_14225 = ["tac_rover", "atv", "cargo_truck", "jeep", "little_bird_mg", "motorcycle"];
-  level.start_reach_exhaust_waste.ref_12b1b = [];
+  level.start_reach_exhaust_waste.ref_12B1B = [];
   level.ref_14062 = getdvarint("scr_ri_useAutoRespawn", 1);
   level.checkpoint_objective_id = getdvarfloat("scr_ri_defaultRespawnTime", 5);
-  level.ref_13bcd = getdvarint("scr_ri_tokenRespawnWaitTime", level.checkpoint_objective_id);
+  level.ref_13BCD = getdvarint("scr_ri_tokenRespawnWaitTime", level.checkpoint_objective_id);
   level.start_persistent_turbulence = getdvarint("scr_ri_respawn_penalty", 0);
   level.start_pipe_room = getdvarfloat("scr_ri_respawn_penalty_max", 15);
-  level.ref_12ca7 = getdvarint("scr_ri_respawnHeightOverride", 12000);
-  level.ref_12cb4 = getdvarint("scr_ri_respawn_time_disable", 0);
-  level.ref_121cc = getdvarfloat("scr_ri_parachuteDeployDelay", 0.5);
+  level.ref_12CA7 = getdvarint("scr_ri_respawnHeightOverride", 12000);
+  level.ref_12CB4 = getdvarint("scr_ri_respawn_time_disable", 0);
+  level.ref_121CC = getdvarfloat("scr_ri_parachuteDeployDelay", 0.5);
   level.brking_initdialog = 1;
   level.spawn_set_jugg_value = spawnStruct();
   level.spawn_set_jugg_value.chosen = undefined;
   level.spawn_set_jugg_value.choppersupport_watchtargetrange = undefined;
-  level.ref_133ea = getdvarint("scr_ri_skipWeaponDropOnDeath", 1);
-  level.ref_133cd = getdvarint("scr_ri_skipEquipmentDropOnDeath", 1);
+  level.ref_133EA = getdvarint("scr_ri_skipWeaponDropOnDeath", 1);
+  level.ref_133CD = getdvarint("scr_ri_skipEquipmentDropOnDeath", 1);
   level.playerismatchedplayerready = getdvarint("scr_ri_forceArmorDropOnDeath", 1);
-  level.ref_133e6 = getdvarint("scr_ri_skipSuperDropOnDeath", 1);
+  level.ref_133E6 = getdvarint("scr_ri_skipSuperDropOnDeath", 1);
   level.laststand = getdvarint("scr_ri_allowLastStand", 0);
   level.playerkillstreakgetownerlookatignoreents = !level.laststand;
   level.disable_back_light = 1;
   level.ref_13364 = 1;
-  scripts\engine\scriptable::ref_12f5b("body", &ref_11ff5);
+  scripts\engine\scriptable::ref_12F5B("body", &ref_11FF5);
   thread tank_path();
 }
 
@@ -142,7 +142,7 @@ function subwave_progression() {
   _setdomflagiconinfo("waypoint_losing_br_e", "enemy", "MP_INGAME_ONLY/OBJ_LOSING_CAPS", "icon_waypoint_dom_e", 1);
   level._effect["vfx_smk_signal_green"] = loadfx("vfx/iw8_cp/prop/vfx_smk_signal_green");
   scripts\mp\gametypes\br_dom_quest::ref_13239();
-  thread ref_13bb1();
+  thread ref_13BB1();
 }
 
 function tank_path() {
@@ -201,7 +201,7 @@ function _setdomflagiconinfo(var_0, var_1, var_2, var_3, var_4) {
   level.waypointpulses[var_0] = var_4;
 }
 
-function ref_13bb1() {
+function ref_13BB1() {
   level waittill("br_dialog_initialized");
   level.disableinitplayergameobjects = 0;
 }
@@ -224,15 +224,15 @@ function tabletreplace() {
   level thread scripts\mp\gametypes\rumble_invasion\br_ri_pe_choppers::init();
   level.delete_crate_objectives = 1;
   var_0 = getdvarint("scr_br_pe_count", 3);
-  level.ref_122cd = int(level.start_reach_exhaust_waste.ref_11b1e / (var_0 + 1));
-  level.ref_122cc = 0;
+  level.ref_122CD = int(level.start_reach_exhaust_waste.ref_11B1E / (var_0 + 1));
+  level.ref_122CC = 0;
   level.ref_13006 = [];
   var_1 = getdvarint("scr_br_pe_force_type", 0);
 
   if(var_1 != 0) {
     level.ref_13006[0] = var_1;
     level.ref_13006[1] = 6;
-    level.ref_122cd = getdvarint("scr_br_pe_force_delay", 45);
+    level.ref_122CD = getdvarint("scr_br_pe_force_delay", 45);
     return;
   }
 
@@ -250,13 +250,13 @@ function tabletreplace() {
 
 function strict_ff_disable() {
   var_0 = getdvarfloat("scr_ri_specialist_in_trucks_odds", 1);
-  _handlevehiclerepair::ref_11a44("ai_convoy_killstreaks", "brloot_specialist_bonus", var_0);
+  _handlevehiclerepair::ref_11A44("ai_convoy_killstreaks", "brloot_specialist_bonus", var_0);
 }
 
 function table_getaddblueprintattachments() {
   waitframe();
-  level.ref_13b7e = &ref_13b66;
-  level.ontimelimit = &ref_11ff6;
+  level.ref_13B7E = &ref_13B66;
+  level.ontimelimit = &ref_11FF6;
   level.endgame = &endgame;
   level.defenderflagreset = &defenderflagpickupscorefrozen;
   level.ref_12888 = &scripts\mp\gametypes\rumble_invasion\br_ri_spawns::emp_drone_proximity_explode;
@@ -282,8 +282,8 @@ function syringe_out() {
   thread ref_13277(game["defenders"], "outline_ally");
   scripts\mp\flags::gameflagwait("infil_complete");
   level.defensefactormod = 5;
-  thread ref_12efb();
-  level thread scripts\mp\gametypes\rumble_invasion\br_ri_ui::ref_13eee();
+  thread ref_12EFB();
+  level thread scripts\mp\gametypes\rumble_invasion\br_ri_ui::ref_13EEE();
   thread carepackage_glowsticks();
   scripts\mp\gametypes\rumble_invasion\br_ri_dom::maphint_computerscriptableused();
   var_0 = level.allteamnamelist;
@@ -309,19 +309,19 @@ function activate_battle_station() {}
 
 function groundz() {
   level.br_level.ref_13884 = 1;
-  level.start_reach_exhaust_waste.ref_12e2c = randgetpropsizetoallocate();
+  level.start_reach_exhaust_waste.ref_12E2C = randgetpropsizetoallocate();
 
   if(!scripts\mp\flags::playerzombiethermalcleanup("rumble_location_selected ")) {
     scripts\mp\flags::gameflaginit("rumble_location_selected", 1);
   }
 
   level notify("rumble_location_selected");
-  level.grouptorewards = level.start_reach_exhaust_waste.ref_12e2c.ground_detection_think;
+  level.grouptorewards = level.start_reach_exhaust_waste.ref_12E2C.ground_detection_think;
   level.br_level.default_class_chosen = [level.grouptorewards];
-  level.br_level.br_circledelaytimes = [level.start_reach_exhaust_waste.ref_11b1e * 2];
-  level.br_level.br_circleclosetimes = [level.start_reach_exhaust_waste.ref_11b1e * 2];
-  level.br_level.br_circleradii = [level.start_reach_exhaust_waste.ref_12e2c.circle_radius, level.start_reach_exhaust_waste.ref_12e2c.circle_radius];
-  level.br_level.br_circleminimapradii = [level.start_reach_exhaust_waste.ref_12e2c.circle_radius];
+  level.br_level.br_circledelaytimes = [level.start_reach_exhaust_waste.ref_11B1E * 2];
+  level.br_level.br_circleclosetimes = [level.start_reach_exhaust_waste.ref_11B1E * 2];
+  level.br_level.br_circleradii = [level.start_reach_exhaust_waste.ref_12E2C.circle_radius, level.start_reach_exhaust_waste.ref_12E2C.circle_radius];
+  level.br_level.br_circleminimapradii = [level.start_reach_exhaust_waste.ref_12E2C.circle_radius];
   level.br_level.default_player_connect_black_screen = [0];
   level.br_level.default_suicidebomber_combat = [0];
   scripts\mp\gametypes\rumble_invasion\br_ri_spawns::tank_x1_capacity();
@@ -339,7 +339,7 @@ function groundz() {
 }
 
 function relic_steelballs_health_boost() {
-  return level.start_reach_exhaust_waste.ref_12e2c.ground_detection_think;
+  return level.start_reach_exhaust_waste.ref_12E2C.ground_detection_think;
 }
 
 function init_relic_aggressive_melee() {}
@@ -366,7 +366,7 @@ function vehomn_getleveldata() {
 function activate_laser_trap() {}
 
 function manage_fakebody_hides() {
-  scripts\mp\deathicons::ref_12bfd();
+  scripts\mp\deathicons::ref_12BFD();
 
   for(var_0 = 0; var_0 < level.players.size; var_0++) {
     var_1 = level.players[var_0];
@@ -380,14 +380,14 @@ function manage_fakebody_hides() {
     }
 
     if(istrue(var_1.delay_enter_combat_after_investigating_grenade)) {
-      scripts\mp\gametypes\br::ref_13f21(var_1);
+      scripts\mp\gametypes\br::ref_13F21(var_1);
     }
 
     var_1 setclientomnvar("ui_br_infil_started", 1);
     var_1 setclientomnvar("ui_br_infiled", 1);
     var_1 scripts\mp\gametypes\br_gulag::gulagfadetoblack();
     var_2 = var_1 scripts\mp\gametypes\rumble_invasion\br_ri_spawns::rear_door_collision(0);
-    var_3 = var_1 scripts\mp\gametypes\br_gulag::ref_1263e(var_2);
+    var_3 = var_1 scripts\mp\gametypes\br_gulag::ref_1263E(var_2);
   }
 
   wait 2;
@@ -400,7 +400,7 @@ function manage_fakebody_hides() {
     var_1 thread scripts\mp\gametypes\rumble_invasion\br_ri_spawns::ref_12496();
   }
 
-  thread ref_138cc();
+  thread ref_138CC();
   scripts\mp\flags::gameflagset("prematch_fade_done");
   scripts\mp\flags::gameflagset("infil_complete");
   waitframe();
@@ -412,13 +412,13 @@ function manage_fakebody_hides() {
   setomnvar("ui_br_circle_state", 4);
 }
 
-function ref_138cc() {
+function ref_138CC() {
   level endon("game_ended");
   wait 10;
   level thread scripts\mp\music_and_dialog::stopsuspensemusic();
 }
 
-function ref_133d6() {
+function ref_133D6() {
   scripts\mp\flags::gameflagset("infil_complete");
 }
 
@@ -428,7 +428,7 @@ function randgetpropsizetoallocate() {
   var_0 = spawnStruct();
   var_0.ground_detection_think = (7300, 3300, 0);
   var_0.circle_radius = 45600;
-  var_0.ref_134ff = 45;
+  var_0.ref_134FF = 45;
   var_0.ref_13500 = 225;
   var_0.ref_13564 = level.start_reach_exhaust_waste.spawnrope;
   var_0.ref_13565 = level.start_reach_exhaust_waste.spawnrope;
@@ -436,12 +436,12 @@ function randgetpropsizetoallocate() {
   var_0.ref_13501 = 30;
   var_0.ref_13532 = 0.9;
   var_0.ref_13531 = 0.99;
-  var_0.ref_1354f = 0;
-  var_0.ref_135aa = 1000;
-  var_0.ref_135a9 = 3000;
-  var_0.ref_136e1 = (0, 0, 0);
-  var_0.ref_136e0 = (0, 0, 0);
-  var_0.ref_122b5 = -1;
+  var_0.ref_1354F = 0;
+  var_0.ref_135AA = 1000;
+  var_0.ref_135A9 = 3000;
+  var_0.ref_136E1 = (0, 0, 0);
+  var_0.ref_136E0 = (0, 0, 0);
+  var_0.ref_122B5 = -1;
   scripts\mp\gametypes\br_rumble_invasion_veh_mp_wz_island::initstructs();
   level.start_reach_exhaust_waste.ref_14218 = [];
   var_1 = scripts\engine\utility::getStructArray("brRumbleInv_vehicle_spawns", "targetname");
@@ -455,7 +455,7 @@ function randgetpropsizetoallocate() {
       }
 
       level.start_reach_exhaust_waste.ref_14218[var_4] = scripts\engine\utility::array_add(level.start_reach_exhaust_waste.ref_14218[var_4], var_3);
-      ref_12b04(var_0, var_4, var_3.origin, var_3.angles);
+      ref_12B04(var_0, var_4, var_3.origin, var_3.angles);
     }
   }
 
@@ -463,7 +463,7 @@ function randgetpropsizetoallocate() {
   level.start_reach_exhaust_waste.wait_display_pavelow_boss_health_bar = scripts\engine\utility::getStructArray("brRumbleInv_kiosk_locations", "targetname");
 
   foreach(var_7 in level.start_reach_exhaust_waste.wait_display_pavelow_boss_health_bar) {
-    ref_12ae8(var_7.origin, var_7.angles);
+    ref_12AE8(var_7.origin, var_7.angles);
   }
 
   thread tac_rover();
@@ -486,7 +486,7 @@ function kill_all_enemies() {
 function tac_rover() {
   level endon("game_ended");
 
-  if(level.start_reach_exhaust_waste.ref_12b1b.size < 1) {
+  if(level.start_reach_exhaust_waste.ref_12B1B.size < 1) {
     return;
   }
 
@@ -497,33 +497,33 @@ function tac_rover() {
   wait 1;
 
   if(getdvarint("scr_ri_default_kiosk_spawns", 0) != 0) {
-    level.start_reach_exhaust_waste.ref_12b1b = scripts\engine\utility::array_combine(level.start_reach_exhaust_waste.ref_12b1b, level.br_armory_kiosk.scriptables);
+    level.start_reach_exhaust_waste.ref_12B1B = scripts\engine\utility::array_combine(level.start_reach_exhaust_waste.ref_12B1B, level.br_armory_kiosk.scriptables);
   }
 
-  scripts\mp\gametypes\br_armory_kiosk::ref_131c0(level.start_reach_exhaust_waste.ref_12b1b);
+  scripts\mp\gametypes\br_armory_kiosk::ref_131C0(level.start_reach_exhaust_waste.ref_12B1B);
 }
 
-function ref_12ae8(var_0, var_1) {
+function ref_12AE8(var_0, var_1) {
   var_2 = getgroundposition(var_0, 2.5);
   var_3 = easepower("br_plunder_box", var_2, var_1);
-  level.start_reach_exhaust_waste.ref_12b1b[level.start_reach_exhaust_waste.ref_12b1b.size] = var_3;
+  level.start_reach_exhaust_waste.ref_12B1B[level.start_reach_exhaust_waste.ref_12B1B.size] = var_3;
 }
 
-function ref_12b04(var_0, var_1, var_2) {
+function ref_12B04(var_0, var_1, var_2) {
   if(var_0 == "little_bird_mg" && getdvarfloat("lb_mg_spawn_percent", 100) < 1) {
     var_0 = "little_bird";
   }
 
-  if(!isDefined(self.ref_141be)) {
-    self.ref_141be = [];
+  if(!isDefined(self.ref_141BE)) {
+    self.ref_141BE = [];
   }
 
-  self.ref_141be[self.ref_141be.size] = [var_0, var_1, var_2];
+  self.ref_141BE[self.ref_141BE.size] = [var_0, var_1, var_2];
 }
 
 function activate_subway_track_trigger_hurt() {}
 
-function ref_13b66() {
+function ref_13B66() {
   level endon("game_ended");
   var_0 = 0;
   var_1 = 0;
@@ -540,18 +540,18 @@ function ref_13b66() {
     if(!level.timerstopped && scripts\mp\utility\game::gettimelimit()) {
       var_7 = scripts\mp\gamelogic::gettimeremaining() / 1000;
       var_8 = int(var_7 + 0.5);
-      var_9 = level.start_reach_exhaust_waste.ref_11b1e - level.ref_122cd * (level.ref_122cc + 1);
+      var_9 = level.start_reach_exhaust_waste.ref_11B1E - level.ref_122CD * (level.ref_122CC + 1);
       var_10 = 0;
 
       if(var_5 == 2 && var_8 % 2 == 1) {
         var_10 = 1;
       }
 
-      if(var_8 == level.manned_turret_createhintobject) {} else if(var_8 == var_9 && level.ref_122cc < level.ref_13006.size - 1) {
-        level thread scripts\mp\gametypes\br_publicevents::ref_12e1f(level.ref_13006[level.ref_122cc], var_6);
-        level.ref_122cc++;
+      if(var_8 == level.manned_turret_createhintobject) {} else if(var_8 == var_9 && level.ref_122CC < level.ref_13006.size - 1) {
+        level thread scripts\mp\gametypes\br_publicevents::ref_12E1F(level.ref_13006[level.ref_122CC], var_6);
+        level.ref_122CC++;
       } else if(var_8 == getdvarint("scr_ri_ot_start_time", 180) && !istrue(level.start_reach_exhaust_waste.inovertime)) {
-        ref_13dad();
+        ref_13DAD();
       } else if(!var_2 && (var_10 == 1 && var_8 == 61 || var_10 == 0 && var_8 == 60)) {
         level scripts\mp\music_and_dialog::matchendingsoonleaderdialog("timesup_sixty");
         level notify("match_ending_soon", "time");
@@ -597,7 +597,7 @@ function ref_13b66() {
   }
 }
 
-function ref_13dad(var_0) {
+function ref_13DAD(var_0) {
   if(istrue(level.start_reach_exhaust_waste.inovertime) && !istrue(var_0)) {
     return;
   }
@@ -615,14 +615,14 @@ function ref_13dad(var_0) {
     return;
   }
 
-  for(var_4 = level.ref_122cc; var_4 < level.ref_13006.size - 1; var_4++) {
+  for(var_4 = level.ref_122CC; var_4 < level.ref_13006.size - 1; var_4++) {
     if(level.ref_13006[var_4] == 100) {
       level.ref_13006[var_4] = level.ref_13006[level.ref_13006.size - 1];
     }
   }
 }
 
-function ref_124fa() {
+function ref_124FA() {
   var_0 = scripts\engine\utility::ter_op(self.team == "allies", "axis", "allies");
   self notify("ri_ot_trackTeam");
   self endon("ri_ot_trackTeam");
@@ -637,11 +637,11 @@ function ref_124fa() {
 
 function active_healthpacks() {}
 
-function ref_13e4b() {
+function ref_13E4B() {
   scripts\mp\utility\outline::outlineenableforteam(self, self.team, "outline_depth_rumble", "level_script");
 }
 
-function ref_12efb() {
+function ref_12EFB() {
   level endon("game_ended");
   var_0 = 0;
   var_1 = 0;
@@ -677,9 +677,9 @@ function ref_12efb() {
       }
     }
 
-    if(!istrue(level.start_reach_exhaust_waste.ref_12fc4)) {
+    if(!istrue(level.start_reach_exhaust_waste.ref_12FC4)) {
       if(var_4 >= 0.7 || var_6 >= 0.7) {
-        ref_13dad();
+        ref_13DAD();
       }
     }
 
@@ -731,7 +731,7 @@ function beaker_end_time() {
   }
 
   var_2 = scripts\mp\gametypes\br_pickups::test_ai_anim();
-  ref_119eb(var_2, var_1, var_1);
+  ref_119EB(var_2, var_1, var_1);
 }
 
 function projectileunlinkonnote(var_0) {
@@ -741,7 +741,7 @@ function projectileunlinkonnote(var_0) {
 
   var_1 = spawnStruct();
   var_2 = recent_position_monitor();
-  var_3 = var_2.ref_138fe;
+  var_3 = var_2.ref_138FE;
   var_4 = var_2.splashtime_lzs;
   var_1.hideextractionobjectivefromteam = var_0.team != var_3 && var_4 >= 50;
 
@@ -761,7 +761,7 @@ function projectileunlinkonnote(var_0) {
   return var_1;
 }
 
-function ref_11ff6() {
+function ref_11FF6() {
   if(getdvarint("scr_ri_disable_game_end_on_timer", 0)) {
     return;
   }
@@ -784,7 +784,7 @@ function defenderflag_starts(var_0) {
   thread mp_t_gun_course_patch(level, var_0);
   thread mp_speedball_check_trigger_pos(level);
   wait level.defensefactormod - 0.5;
-  level thread scripts\mp\gametypes\br::ref_1209b(var_1, 2, undefined, 1, 1, 1);
+  level thread scripts\mp\gametypes\br::ref_1209B(var_1, 2, undefined, 1, 1, 1);
 }
 
 function mp_speedball_check_trigger_pos(var_0) {
@@ -827,19 +827,19 @@ function dangercircletick(var_0, var_1) {
   }
 }
 
-function ref_11aff(var_0) {
+function ref_11AFF(var_0) {
   level endon("game_ended");
   wait 3;
   var_1 = getdvarint("scr_ri_spawn_camp_trigger_radius", 4400);
   var_2 = getdvarint("scr_ri_spawn_camp_trigger_height", 5000);
   var_3 = getdvarint("scr_ri_spawn_camp_trigger_center_offset", 500);
   var_4 = getdvarint("scr_ri_spawn_camp_trigger_z_offset", -1000);
-  var_5 = scripts\engine\utility::drop_to_ground(self.origin) + vectorNormalize(level.start_reach_exhaust_waste.ref_12e2c.ref_136a8[var_0]) * var_3;
+  var_5 = scripts\engine\utility::drop_to_ground(self.origin) + vectorNormalize(level.start_reach_exhaust_waste.ref_12E2C.ref_136A8[var_0]) * var_3;
   var_5 += (0, 0, var_4);
   var_6 = spawn("trigger_radius", var_5, 0, var_1, var_2);
-  var_6.ref_13ab7 = var_0;
+  var_6.ref_13AB7 = var_0;
   var_6 scripts\mp\gametypes\br_quest_util::init_tactical_boxes(11, 0, 2, var_5);
-  var_6 scripts\mp\gametypes\br_quest_util::ref_1316f(var_1);
+  var_6 scripts\mp\gametypes\br_quest_util::ref_1316F(var_1);
 
   for(;;) {
     var_6 waittill("trigger", var_7);
@@ -848,17 +848,17 @@ function ref_11aff(var_0) {
       continue;
     }
 
-    thread ref_11b0a(var_7);
+    thread ref_11B0A(var_7);
     wait 0.25;
   }
 }
 
-function ref_11b0a(var_0) {
+function ref_11B0A(var_0) {
   self endon("disconnect");
   self.trophy_get_best_tag = 1;
   self setperk("specialty_radarblip", 1);
   thread scripts\cp_mp\killstreaks\helper_drone::markflash();
-  var_0 scripts\mp\gametypes\br_quest_util::ref_1336a(self);
+  var_0 scripts\mp\gametypes\br_quest_util::ref_1336A(self);
 
   while(self istouching(var_0) && isalive(self)) {
     thread scripts\cp_mp\killstreaks\helper_drone::markeduion();
@@ -871,19 +871,19 @@ function ref_11b0a(var_0) {
   self unsetperk("specialty_radarblip", 1);
 }
 
-function ref_11ff5(var_0, var_1, var_2, var_3, var_4) {
+function ref_11FF5(var_0, var_1, var_2, var_3, var_4) {
   if(var_1 == "body") {
     var_0.waittill_drone_defined = var_3;
   }
 
   if(var_0.type == "br_reusable_loot_cache") {
     var_5 = 150;
-    thread ref_140b2(var_0, var_0.origin);
+    thread ref_140B2(var_0, var_0.origin);
     return;
   }
 }
 
-function ref_140b2(var_0, var_1) {
+function ref_140B2(var_0, var_1) {
   level endon("game_ended");
   self notify("util_remove_scriptables_nearby");
   self endon("util_remove_scriptables_nearby");
@@ -925,7 +925,7 @@ function recent_position_monitor() {
     var_1 = "contested";
   }
 
-  var_0.ref_138fe = var_1;
+  var_0.ref_138FE = var_1;
   return var_0;
 }
 
@@ -933,17 +933,17 @@ function activate_trap_object() {}
 
 function takerevivepickup() {
   _handlevehiclerepair::init();
-  level.start_reach_exhaust_waste.ref_119fc = [];
+  level.start_reach_exhaust_waste.ref_119FC = [];
   var_0 = [];
   GscBinSkip0(0x2e, "nothing", getdvarfloat("scr_ri_dom_flag_capture_lt_cash_loot_id_nothing_cash_table", 5));
 }
 
-function ref_119ec(var_0) {
+function ref_119EC(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
 
-  var_1 = level.start_reach_exhaust_waste.ref_119fc[var_0];
+  var_1 = level.start_reach_exhaust_waste.ref_119FC[var_0];
   var_2 = randomfloat(1);
 
   foreach(var_4 in var_1) {
@@ -956,7 +956,7 @@ function ref_119ec(var_0) {
   }
 }
 
-function ref_119f7(var_0, var_1, var_2) {
+function ref_119F7(var_0, var_1, var_2) {
   playFX(scripts\engine\utility::getfx("vfx_golden_loot_explosion_flare"), var_0);
   var_3 = spawnStruct();
   var_3.origin = var_0;
@@ -964,7 +964,7 @@ function ref_119f7(var_0, var_1, var_2) {
   var_3.dropstruct = scripts\mp\gametypes\br_pickups::test_ai_anim();
   var_3.dropstruct.ml_p3_to_safehouse_transition = scripts\engine\utility::ter_op(var_2 == 1, 6 + randomintrange(1, 10), 6);
   var_3.dropstruct.silencer_pick_up_monitor = 0;
-  var_4 = level.start_reach_exhaust_waste.ref_119fc[var_1];
+  var_4 = level.start_reach_exhaust_waste.ref_119FC[var_1];
 
   for(var_5 = 0; var_5 < var_2; var_5++) {
     var_6 = randomfloat(1);
@@ -989,7 +989,7 @@ function ref_119f7(var_0, var_1, var_2) {
             break;
         }
 
-        thread ref_119f6(var_11, var_3);
+        thread ref_119F6(var_11, var_3);
         var_3.dropstruct.ml_p3_to_safehouse_transition += 2;
         waitframe();
       }
@@ -997,7 +997,7 @@ function ref_119f7(var_0, var_1, var_2) {
   }
 }
 
-function ref_119f6(var_0, var_1) {
+function ref_119F6(var_0, var_1) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -1011,11 +1011,11 @@ function ref_119f6(var_0, var_1) {
   }
 
   var_3 = var_1.origin + (0, 0, var_1.dropstruct.silencer_pick_up_monitor);
-  var_4 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_0, var_1.dropstruct, var_3, var_1.angles, 0, var_1.legendary, 0);
+  var_4 = scripts\mp\gametypes\br_lootcache::ref_11A41(var_0, var_1.dropstruct, var_3, var_1.angles, 0, var_1.legendary, 0);
   var_1.dropstruct.silencer_pick_up_monitor += 15;
 }
 
-function ref_119f1(var_0) {
+function ref_119F1(var_0) {
   var_1 = scripts\mp\gametypes\br_pickups::test_ai_anim();
   var_1.origin = var_0;
   var_1.angles = (0, 0, randomfloatrange(0, 180));
@@ -1024,7 +1024,7 @@ function ref_119f1(var_0) {
   return var_1;
 }
 
-function ref_119e8(var_0, var_1) {
+function ref_119E8(var_0, var_1) {
   var_2 = [];
   var_3 = 0;
 
@@ -1053,10 +1053,10 @@ function ref_119e8(var_0, var_1) {
     var_7++;
   }
 
-  level.start_reach_exhaust_waste.ref_119fc[var_1] = var_2;
+  level.start_reach_exhaust_waste.ref_119FC[var_1] = var_2;
 }
 
-function ref_119eb(var_0, var_1, var_2) {
+function ref_119EB(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     var_1 = 100;
   }
@@ -1070,13 +1070,13 @@ function ref_119eb(var_0, var_1, var_2) {
       return;
     }
 
-    var_5 = ref_119ec("loot_table_random_powerup_favor_2x");
+    var_5 = ref_119EC("loot_table_random_powerup_favor_2x");
   } else {
     if(var_1 < var_3) {
       return;
     }
 
-    var_4 = _keypadscriptableused_bunkeralt::ref_1233d();
+    var_4 = _keypadscriptableused_bunkeralt::ref_1233D();
     var_5 = "brloot_rumble_powerup_" + var_4;
   }
 

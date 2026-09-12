@@ -6,7 +6,7 @@
 function start_safehouse_restart() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("veh_indigo", "initLate", &start_safehouse_return);
   scripts\cp_mp\utility\script_utility::registersharedfunc("veh_indigo", "create", &start_safehouse_regroup);
-  scripts\engine\utility::create_func_ref("veh_indigo", &ref_134f9);
+  scripts\engine\utility::create_func_ref("veh_indigo", &ref_134F9);
   scripts\cp_mp\utility\script_utility::registersharedfunc("veh_indigo", "spawnCallback", &start_silo_elevator_menu);
   scripts\cp\vehicles\vehicle_oob_cp::vehicle_oob_cp_registeroutoftimecallback("veh_indigo", &_calloutmarkerping_onpingchallenge::start_trap_room_combat);
 }
@@ -46,7 +46,7 @@ function start_safehouse_regroup(var_0) {
   var_0.health = var_0.maxhealth;
 }
 
-function ref_134f9(var_0) {
+function ref_134F9(var_0) {
   var_1 = spawnStruct();
   var_1.origin = var_0.origin + (0, 0, 100);
   var_1.angles = var_0.angles * (0, 1, 0);

@@ -52,7 +52,7 @@ function give_assault_class() {
   scripts\cp\utility::giveperk("specialty_fastreload");
 }
 
-function ref_12bc2() {
+function ref_12BC2() {
   scripts\cp\utility::takeperk("specialty_fastreload");
 }
 
@@ -60,7 +60,7 @@ function give_crusader_class() {
   self.class = "crusader";
 }
 
-function ref_12bc8() {}
+function ref_12BC8() {}
 
 function wait_and_give_perk(var_0, var_1) {
   wait var_1;
@@ -81,13 +81,13 @@ function screenent() {
   }
 }
 
-function ref_12bf8() {
+function ref_12BF8() {
   var_0 = self getcurrentweapon();
 
   if(scripts\cp\cp_weapon::is_launcher(var_0) && !scripts\cp\cp_weapon::is_killstreak_weapon(var_0)) {
     var_1 = self getweaponammoclip(var_0);
     var_2 = self getweaponammostock(var_0);
-    var_0 = scripts\cp\cp_weapon::ref_12bda(var_0);
+    var_0 = scripts\cp\cp_weapon::ref_12BDA(var_0);
     self setweaponammoclip(var_0, var_1);
     self setweaponammostock(var_0, var_2);
     return;
@@ -98,22 +98,22 @@ function give_medic_class() {
   self.class = "medic";
 }
 
-function ref_12bde() {}
+function ref_12BDE() {}
 
 function give_hunter_class() {
   self.class = "hunter";
   scripts\cp\perks\cp_perks::reduce_recoil();
 }
 
-function ref_12bd5() {
-  scripts\cp\perks\cp_perks::ref_12bee();
+function ref_12BD5() {
+  scripts\cp\perks\cp_perks::ref_12BEE();
 }
 
 function give_engineer_class() {
   self.class = "engineer";
 }
 
-function ref_12bca() {}
+function ref_12BCA() {}
 
 function give_default_class() {
   var_0 = scripts\engine\utility::random(["medic", "tank", "crusader", "assault", "hunter", "engineer"]);

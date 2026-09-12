@@ -3,8 +3,8 @@
  * Script: scripts\mp\trials\mp_trials_patches_petrograd.gsc
 *************************************************************/
 
-function ref_134b3(var_0, var_1, var_2) {
-  thread ref_134a0(var_0, var_1);
+function ref_134B3(var_0, var_1, var_2) {
+  thread ref_134A0(var_0, var_1);
 
   if(scripts\asm\asm_bb::bb_moverequested()) {
     return;
@@ -14,7 +14,7 @@ function ref_134b3(var_0, var_1, var_2) {
   scripts\asm\asm::asm_playadditiveanimloopstate(var_0, var_1, var_2);
 }
 
-function ref_134a0(var_0, var_1) {
+function ref_134A0(var_0, var_1) {
   self endon(var_1 + "_finished");
 
   if(!istrue(self.ignoreburstdelay)) {
@@ -33,7 +33,7 @@ function ref_13483() {
     return;
   }
 
-  var_0 = ref_1349d();
+  var_0 = ref_1349D();
 
   if(var_0) {
     wait var_0;
@@ -41,7 +41,7 @@ function ref_13483() {
   }
 }
 
-function ref_1349d() {
+function ref_1349D() {
   var_0 = (gettime() - self.a.lastshoottime) / 1000;
   var_1 = ref_13499();
 

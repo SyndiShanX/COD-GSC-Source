@@ -24,12 +24,12 @@ function main() {
   setDvar("cg_defaultWindAmplitudeScale", 3);
   setDvar("cg_defaultWindFrequencyScale", 3);
   setDvar("cg_defaultWindNoiseScale", 0.5);
-  thread ref_12f8e();
+  thread ref_12F8E();
   thread player_exfil_struct();
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   scripts\mp\compass::setupminimap("compass_map_mp_euphrates", "codcaster_compass_map_mp_euphrates");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
-  thread ref_121f5();
+  thread ref_121F5();
   var_0 = scripts\mp\utility\game::getgametype();
 
   if(var_0 == "sd" || var_0 == "dd") {
@@ -66,7 +66,7 @@ function player_exfil_struct() {
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   var_0 = [];
 
   switch (scripts\mp\utility\game::getgametype()) {
@@ -91,7 +91,7 @@ function ref_12f8e() {
   }
 }
 
-function ref_121f5() {
+function ref_121F5() {
   if(!isDefined(level.outofboundstriggers)) {
     level.outofboundstriggers = [];
   }

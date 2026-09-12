@@ -3,16 +3,16 @@
  * Script: scripts\mp\supers\super_stoppingpower.gsc
 *****************************************************/
 
-function ref_138e7() {
-  level.ref_120ad _calloutmarkerping_handleluinotify_acknowledgedcancel::friendlystatusdirty(&ref_138ed, level);
-  level.ref_120ae _calloutmarkerping_handleluinotify_acknowledgedcancel::friendlystatusdirty(&ref_138ee, level);
+function ref_138E7() {
+  level.ref_120AD _calloutmarkerping_handleluinotify_acknowledgedcancel::friendlystatusdirty(&ref_138ED, level);
+  level.ref_120AE _calloutmarkerping_handleluinotify_acknowledgedcancel::friendlystatusdirty(&ref_138EE, level);
 }
 
 function stoppingpower_beginuse() {
   var_0 = self.lastweaponobj;
   var_1 = isundefinedweapon();
 
-  if(!scripts\mp\weapons::isnormallastweapon(var_0) || scripts\mp\utility\weapon::ismeleeonly(var_0) || scripts\mp\utility\weapon::isgamemodeweapon(var_0) || scripts\mp\utility\weapon::issinglehitweapon(var_0.basename) || !ref_138ea(var_0) || ref_138e8(var_0)) {
+  if(!scripts\mp\weapons::isnormallastweapon(var_0) || scripts\mp\utility\weapon::ismeleeonly(var_0) || scripts\mp\utility\weapon::isgamemodeweapon(var_0) || scripts\mp\utility\weapon::issinglehitweapon(var_0.basename) || !ref_138EA(var_0) || ref_138E8(var_0)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
       self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("MP/SUPPORT_BOX_INCOMPAT");
     }
@@ -61,7 +61,7 @@ function stoppingpower_beginuse() {
           var_9 = self getweaponammoclip(var_7, "left") + self getweaponammoclip(var_7, "right");
           var_4 = self getweaponammostock(var_7);
           var_11 = var_9 + var_4;
-          var_12 = int(min(ref_138e4(var_7, var_11), var_11 + var_10));
+          var_12 = int(min(ref_138E4(var_7, var_11), var_11 + var_10));
           self setweaponammostock(var_7, var_12);
           self setweaponammoclip(var_7, 0, "left");
           self setweaponammoclip(var_7, 0, "right");
@@ -69,7 +69,7 @@ function stoppingpower_beginuse() {
           var_10 = self getweaponammoclip(var_8);
           var_5 = self getweaponammostock(var_8);
           var_11 = var_10 + var_5;
-          var_13 = ref_138e4(var_8, var_11);
+          var_13 = ref_138E4(var_8, var_11);
           var_14 = var_11 + var_11;
           var_6 = int(var_14 - var_13);
           var_15 = int(min(var_13, var_14));
@@ -93,11 +93,11 @@ function stoppingpower_beginuse() {
 
   var_7 = undefined;
   var_9 = undefined;
-  thread ref_138f0(var_1, var_5, var_6);
+  thread ref_138F0(var_1, var_5, var_6);
   return true;
 }
 
-function ref_138e4(var_0, var_1) {
+function ref_138E4(var_0, var_1) {
   var_2 = var_0.maxammo;
 
   if(var_1 > var_2) {
@@ -107,7 +107,7 @@ function ref_138e4(var_0, var_1) {
   return var_2;
 }
 
-function ref_138ea(var_0) {
+function ref_138EA(var_0) {
   if(!self isalternatemode(var_0)) {
     return 1;
   }
@@ -116,7 +116,7 @@ function ref_138ea(var_0) {
   return scripts\mp\weapons::turretoverridefunc(var_1);
 }
 
-function ref_138e8(var_0) {
+function ref_138E8(var_0) {
   switch (var_0.basename) {
     case "iw8_lm_dblmg_mp":
     case "iw8_me_t9ballisticknife_mp":
@@ -128,7 +128,7 @@ function ref_138e8(var_0) {
   return false;
 }
 
-function ref_138f0(var_0, var_1, var_2) {
+function ref_138F0(var_0, var_1, var_2) {
   level endon("game_ended");
   self endon("death_or_disconnect");
 
@@ -164,7 +164,7 @@ function ref_138f0(var_0, var_1, var_2) {
 
 function stoppingpower_givehcr(var_0, var_1, var_2) {
   var_3 = init_relic_steelballs(var_0, var_1, var_2);
-  ref_138e6(var_0, var_3);
+  ref_138E6(var_0, var_3);
 }
 
 function init_relic_steelballs(var_0, var_1, var_2) {
@@ -177,7 +177,7 @@ function init_relic_steelballs(var_0, var_1, var_2) {
   return var_3;
 }
 
-function ref_138e6(var_0, var_1) {
+function ref_138E6(var_0, var_1) {
   if(!isDefined(var_0.hcrdata)) {
     var_0.hcrdata = [];
   }
@@ -191,20 +191,20 @@ function ref_138e6(var_0, var_1) {
 
   var_0.hcrdata[var_2] = var_1;
   thread stoppingpower_clearhcrondeath();
-  thread ref_138e2();
-  thread ref_138e3();
+  thread ref_138E2();
+  thread ref_138E3();
   thread stoppingpower_givefastreload();
   thread stoppingpower_breaksprint();
   thread stoppingpower_watchhcrweaponchange();
   thread stoppingpower_watchhcrweaponfire();
 }
 
-function ref_138ed(var_0, var_1, var_2) {
+function ref_138ED(var_0, var_1, var_2) {
   if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
 
-  var_3 = ref_138e5(var_1, var_2);
+  var_3 = ref_138E5(var_1, var_2);
 
   if(isDefined(var_3)) {
     var_4 = init_relic_steelballs(var_3.player, var_3.objweapon, var_3.rounds);
@@ -214,7 +214,7 @@ function ref_138ed(var_0, var_1, var_2) {
   }
 }
 
-function ref_138ee(var_0, var_1, var_2) {
+function ref_138EE(var_0, var_1, var_2) {
   var_3 = var_0.hcrdata;
 
   if(!isDefined(var_3)) {
@@ -226,10 +226,10 @@ function ref_138ee(var_0, var_1, var_2) {
   }
 
   var_3.player = var_1;
-  ref_138e6(var_1, var_3);
+  ref_138E6(var_1, var_3);
 }
 
-function ref_138e5(var_0) {
+function ref_138E5(var_0) {
   if(!isDefined(var_0)) {
     return undefined;
   }
@@ -254,7 +254,7 @@ function stoppingpower_watchhcrweaponchange() {
   self.player endon("disconnect");
 
   while(self.player hasweapon(self.objweapon)) {
-    if(ref_138e9(self.player getcurrentweapon())) {
+    if(ref_138E9(self.player getcurrentweapon())) {
       if(!self.gavehcr) {
         self.player scripts\mp\utility\perk::giveperk("specialty_bulletdamage");
         self.gavehcr = 1;
@@ -277,7 +277,7 @@ function stoppingpower_watchhcrweaponfire() {
   while(self.player hasweapon(self.objweapon)) {
     self.player waittill("weapon_fired", var_0);
 
-    if(ref_138e9(var_0)) {
+    if(ref_138E9(var_0)) {
       self.rounds--;
 
       if(self.rounds <= 0) {
@@ -286,11 +286,11 @@ function stoppingpower_watchhcrweaponfire() {
     }
   }
 
-  thread ref_138ef(self.player);
+  thread ref_138EF(self.player);
   thread stoppingpower_removehcr();
 }
 
-function ref_138ef(var_0) {
+function ref_138EF(var_0) {
   self endon("disconnect");
 
   if(!isDefined(self)) {
@@ -304,7 +304,7 @@ function ref_138ef(var_0) {
   }
 
   self.waittill_unload_complete = 1;
-  scripts\engine\utility::ref_143c0(2, "weapon_fired", "weapon_change");
+  scripts\engine\utility::ref_143C0(2, "weapon_fired", "weapon_change");
   self.waittill_unload_complete = undefined;
 }
 
@@ -316,21 +316,21 @@ function stoppingpower_removehcr() {
       self.player scripts\mp\utility\perk::removeperk("specialty_bulletdamage");
     }
 
-    ref_138e1();
+    ref_138E1();
     return;
   }
 }
 
-function ref_138eb() {
+function ref_138EB() {
   self notify("stoppingPower_removeHCR");
 
   if(isDefined(self.player)) {
-    ref_138e1();
+    ref_138E1();
     return;
   }
 }
 
-function ref_138e1() {
+function ref_138E1() {
   if(isDefined(self.player.hcrdata)) {
     var_0 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(self.objweapon);
     var_1 = self.player.hcrdata[var_0];
@@ -345,7 +345,7 @@ function ref_138e1() {
   }
 }
 
-function ref_138ec(var_0) {
+function ref_138EC(var_0) {
   if(isDefined(var_0)) {
     var_1 = scripts\mp\utility\weapon::getcompleteweaponnamenoalt(var_0);
     var_2 = self.hcrdata[var_1];
@@ -362,7 +362,7 @@ function ref_138ec(var_0) {
   }
 }
 
-function ref_138e9(var_0) {
+function ref_138E9(var_0) {
   var_1 = self.player getammotype(self.objweapon);
   var_2 = self.player getammotype(var_0);
   var_3 = var_1 == var_2;
@@ -376,24 +376,24 @@ function stoppingpower_clearhcrondeath() {
   thread stoppingpower_removehcr();
 }
 
-function ref_138e2() {
+function ref_138E2() {
   self.player endon("disconnect");
   self endon("stoppingPower_removeHCR");
   level waittill("game_ended");
   thread stoppingpower_removehcr();
 }
 
-function ref_138e3() {
+function ref_138E3() {
   self.player endon("disconnect");
   self endon("stoppingPower_removeHCR");
   self.player waittill("all_perks_cleared");
-  thread ref_138eb();
+  thread ref_138EB();
 }
 
 function stoppingpower_givefastreload() {
   self.player endon("death_or_disconnect");
   self.player scripts\mp\utility\perk::giveperk("specialty_fastreload");
-  self.player scripts\engine\utility::ref_143a6("weapon_fired", "weapon_change", "stoppingPower_removeHCR");
+  self.player scripts\engine\utility::ref_143A6("weapon_fired", "weapon_change", "stoppingPower_removeHCR");
   self.player scripts\mp\utility\perk::removeperk("specialty_fastreload");
 }
 

@@ -197,7 +197,7 @@ function box_setactive(var_0, var_1, var_2) {
 
       if(isDefined(var_3.canusecallback) && !var_6[[var_3.canusecallback]](self)) {
         if(isDefined(self.boxiconid)) {
-          scripts\cp_mp\entityheadicons::ref_1315e(self.boxiconid, var_6);
+          scripts\cp_mp\entityheadicons::ref_1315E(self.boxiconid, var_6);
         }
       }
     }
@@ -320,7 +320,7 @@ function box_addboxforplayer(var_0) {
   box_disableplayeruse(var_0);
 
   if(isDefined(self.boxiconid)) {
-    scripts\cp_mp\entityheadicons::ref_1315e(self.boxiconid, var_0);
+    scripts\cp_mp\entityheadicons::ref_1315E(self.boxiconid, var_0);
     return;
   }
 }
@@ -495,7 +495,7 @@ function boxthink(var_0) {
           box_disableplayeruse(var_4, var_0);
 
           if(isDefined(var_4.boxiconid)) {
-            scripts\cp_mp\entityheadicons::ref_1315e(var_4.boxiconid, var_0);
+            scripts\cp_mp\entityheadicons::ref_1315E(var_4.boxiconid, var_0);
           }
 
           thread doubledip(var_4);
@@ -505,7 +505,7 @@ function boxthink(var_0) {
       }
 
       if(isDefined(self.boxiconid)) {
-        scripts\cp_mp\entityheadicons::ref_1315e(self.boxiconid, var_0);
+        scripts\cp_mp\entityheadicons::ref_1315E(self.boxiconid, var_0);
       }
 
       box_disableplayeruse(var_0);
@@ -524,7 +524,7 @@ function doubledip(var_0) {
   if(level.teambased) {
     if(self.team == var_0.team) {
       if(isDefined(self.boxiconid)) {
-        scripts\cp_mp\entityheadicons::ref_1315d(self.boxiconid, var_0);
+        scripts\cp_mp\entityheadicons::ref_1315D(self.boxiconid, var_0);
       }
 
       box_enableplayeruse(var_0);
@@ -536,7 +536,7 @@ function doubledip(var_0) {
 
   if(isDefined(self.owner) && self.owner == var_0) {
     if(isDefined(self.boxiconid)) {
-      scripts\cp_mp\entityheadicons::ref_1315d(self.boxiconid, var_0);
+      scripts\cp_mp\entityheadicons::ref_1315D(self.boxiconid, var_0);
     }
 
     box_enableplayeruse(var_0);

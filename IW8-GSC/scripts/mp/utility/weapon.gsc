@@ -841,8 +841,8 @@ function weapongroupmap(var_0) {
 }
 
 function ref_14594(var_0) {
-  if(isDefined(level.weaponmapdata[var_0]) && isDefined(level.weaponmapdata[var_0].ref_11bd1)) {
-    return level.weaponmapdata[var_0].ref_11bd1;
+  if(isDefined(level.weaponmapdata[var_0]) && isDefined(level.weaponmapdata[var_0].ref_11BD1)) {
+    return level.weaponmapdata[var_0].ref_11BD1;
   }
 
   return undefined;
@@ -928,7 +928,7 @@ function weaponexistsinstatstable(var_0) {
   return isDefined(level.weaponmapdata[var_0]);
 }
 
-function ref_1458c(var_0, var_1) {
+function ref_1458C(var_0, var_1) {
   var_2 = weaponexistsinstatstable(var_0);
   var_3 = 1;
 
@@ -1359,7 +1359,7 @@ function carrier_cleanup(var_0, var_1) {
   return isDefined(var_2) && isDefined(var_2[var_1]);
 }
 
-function ref_12bbb(var_0) {
+function ref_12BBB(var_0) {
   switch (var_0) {
     case "laserads":
     case "laserbalanced":

@@ -34,11 +34,11 @@ function updaterevivetriggerspawnposition() {
 
   if(!istrue(scripts\mp\flags::gameflag("prematch_done"))) {
     if(scripts\mp\flags::gameflag("infil_will_run")) {
-      level scripts\engine\utility::ref_143a6("prematch_done", "start_mode_setup", "infil_started");
+      level scripts\engine\utility::ref_143A6("prematch_done", "start_mode_setup", "infil_started");
       var_0 = int(max(level.prematchperiodend - 5, 5));
       wait var_0;
     } else {
-      level scripts\engine\utility::ref_143a6("prematch_done", "start_mode_setup", "match_start_real_countdown");
+      level scripts\engine\utility::ref_143A6("prematch_done", "start_mode_setup", "match_start_real_countdown");
     }
   }
 
@@ -332,7 +332,7 @@ function revivetriggerteamupdater(var_0) {
   var_0 endon("death");
 
   for(;;) {
-    scripts\engine\utility::ref_143a5("disconnect", "joined_team");
+    scripts\engine\utility::ref_143A5("disconnect", "joined_team");
     thread removetrigger(self.guid, 1, 1);
   }
 }
@@ -436,7 +436,7 @@ function revivetriggerholdonuse(var_0) {
 
 function revivetriggerholdonusebegin(var_0, var_1) {
   var_2 = self.trigger.owner;
-  var_2 scripts\mp\utility\player::ref_1312b(1);
+  var_2 scripts\mp\utility\player::ref_1312B(1);
 
   if(var_0 scripts\mp\utility\perk::_hasperk("specialty_medic")) {
     var_3 = level.revivetriggers[var_2.guid].defaultusetime;
@@ -445,7 +445,7 @@ function revivetriggerholdonusebegin(var_0, var_1) {
 
   thread _updatereviveplayerusable(self.trigger);
   var_2.reviver = var_0;
-  var_2 scripts\mp\utility\player::ref_1312b(1);
+  var_2 scripts\mp\utility\player::ref_1312B(1);
   level thread scripts\mp\battlechatter_mp::trysaylocalsound(var_0, "reviving");
 
   if(!istrue(var_1)) {
@@ -588,7 +588,7 @@ function revivetriggerholdonuseend(var_0, var_1, var_2, var_3) {
     var_4 = self.trigger.owner;
     var_5 = level.revivetriggers[var_4.guid].defaultusetime;
     level.revivetriggers[var_4.guid] scripts\mp\gameobjects::setusetime(var_5);
-    var_4 scripts\mp\utility\player::ref_1312b(0);
+    var_4 scripts\mp\utility\player::ref_1312B(0);
 
     if(var_2) {
       if(!isDefined(var_4.revivecount)) {

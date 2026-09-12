@@ -24,20 +24,20 @@ function disablepersupdates() {
 }
 
 function disableplayerkillrewards() {
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerWelcomeSplashes", &disableteamkillrewards);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerWelcomeSplashes", &disableteamkillrewards);
   waittillframeend();
   scripts\mp\flags::gameflaginit("start_jugg_delivery", 0);
   level.ontimelimit = &disabletargetmarkergroups;
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onJuggCrateActivate", &disablespawncamera);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onJuggCrateUse", &disablespawningforplayerfunc);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onJuggCrateDestroy", &disablespawningforplayer);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("onJuggDropOnDeath", &disablelootbunkercachelocations);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onJuggCrateActivate", &disablespawncamera);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onJuggCrateUse", &disablespawningforplayerfunc);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onJuggCrateDestroy", &disablespawningforplayer);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("onJuggDropOnDeath", &disablelootbunkercachelocations);
   disablefeature();
-  level.ref_140d9 = [];
-  level.ref_140d9[0] = "assassination";
-  level.ref_140d9[1] = "domination";
-  level.ref_140d9[2] = "scavenger";
-  level.ref_1385f = 0;
+  level.ref_140D9 = [];
+  level.ref_140D9[0] = "assassination";
+  level.ref_140D9[1] = "domination";
+  level.ref_140D9[2] = "scavenger";
+  level.ref_1385F = 0;
   thread disableplayerrewards();
 }
 
@@ -47,10 +47,10 @@ function disableonemilannounce() {
 }
 
 function disablefeature() {
-  scripts\cp_mp\utility\game_utility::ref_12c10("delete_on_load", "targetname");
-  scripts\cp_mp\utility\game_utility::ref_12c11("door_prison_cell_metal_mp", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c11("door_wooden_panel_mp_01", 1);
-  scripts\cp_mp\utility\game_utility::ref_12c11("me_electrical_box_street_01", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C10("delete_on_load", "targetname");
+  scripts\cp_mp\utility\game_utility::ref_12C11("door_prison_cell_metal_mp", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C11("door_wooden_panel_mp_01", 1);
+  scripts\cp_mp\utility\game_utility::ref_12C11("me_electrical_box_street_01", 1);
 }
 
 function disablepersonalnuke() {}
@@ -107,19 +107,19 @@ function disableplayerrewards() {
 
     var_2 = scripts\mp\gametypes\br_jugg_common::resetafkchecks();
 
-    if(level.ref_11f2c > 0) {
-      var_2 -= level.ref_11f2c;
+    if(level.ref_11F2C > 0) {
+      var_2 -= level.ref_11F2C;
     }
 
     level.vehicle_isneutraltoplayer = scripts\engine\utility::array_randomize(level.vehicle_isneutraltoplayer);
-    var_3 = scripts\mp\gametypes\br_jugg_common::ref_1334b(var_2, var_0);
+    var_3 = scripts\mp\gametypes\br_jugg_common::ref_1334B(var_2, var_0);
 
-    while(!istrue(level.ref_1385f)) {
+    while(!istrue(level.ref_1385F)) {
       waitframe();
     }
 
     var_0 = 0;
-    level thread scripts\mp\gametypes\br_jugg_common::ref_1383f(var_3, "gametype_juggernaut");
+    level thread scripts\mp\gametypes\br_jugg_common::ref_1383F(var_3, "gametype_juggernaut");
     level waittill("continue_jugg_drops");
     var_4 = getdvarint("scr_br_jugg_delivery_interval", 20);
     wait var_4;
@@ -129,7 +129,7 @@ function disableplayerrewards() {
 function display_already_have_weapon_message() {
   level endon("game_ended");
   scripts\mp\flags::gameflagwait("start_jugg_delivery");
-  level.ref_1385f = 1;
+  level.ref_1385F = 1;
 }
 
 function dismount_after_accum_damage_internal(var_0) {

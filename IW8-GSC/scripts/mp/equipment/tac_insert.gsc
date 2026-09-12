@@ -4,27 +4,27 @@
 ***********************************************/
 
 function tacinsert_init() {
-  level.ref_13a10 = [];
-  scripts\mp\utility\join_team_aggregator::registeronplayerjointeamcallback(&ref_13a0a);
+  level.ref_13A10 = [];
+  scripts\mp\utility\join_team_aggregator::registeronplayerjointeamcallback(&ref_13A0A);
 
   if(scripts\mp\utility\game::getgametype() == "br") {
-    thread ref_13a02();
+    thread ref_13A02();
     return;
   }
 }
 
-function ref_13a0a(var_0) {
-  foreach(var_2 in level.ref_13a10) {
-    ref_13a0f(var_2, var_0);
-    ref_13a0e(var_2, var_0);
+function ref_13A0A(var_0) {
+  foreach(var_2 in level.ref_13A10) {
+    ref_13A0F(var_2, var_0);
+    ref_13A0E(var_2, var_0);
   }
 }
 
-function ref_13a02() {
+function ref_13A02() {
   level endon("game_ended");
 
   for(;;) {
-    var_0 = level.ref_13a10;
+    var_0 = level.ref_13A10;
     var_1 = 0;
 
     foreach(var_3 in var_0) {
@@ -60,14 +60,14 @@ function ref_13a02() {
 }
 
 function tacinsert_set(var_0, var_1) {
-  thread ref_13a09();
+  thread ref_13A09();
 }
 
 function tacinsert_unset(var_0, var_1) {
   self notify("end_monitorTIUse");
 }
 
-function ref_13a09() {
+function ref_13A09() {
   self endon("disconnect");
   level endon("game_ended");
   self endon("end_monitorTIUse");
@@ -78,11 +78,11 @@ function ref_13a09() {
     var_0 = self getheldoffhand();
     var_1 = var_0.basename == "flare_mp";
     var_2 = scripts\engine\utility::ter_op(var_1, 0.05, 1);
-    scripts\engine\utility::ref_143b9(var_2, "offhand_pullback");
+    scripts\engine\utility::ref_143B9(var_2, "offhand_pullback");
   }
 }
 
-function ref_13a08(var_0) {
+function ref_13A08(var_0) {
   var_0 endon("disconnect");
   level endon("game_ended");
   var_0 endon("end_monitorTIUse");
@@ -99,7 +99,7 @@ function tacinsert_updatespawnposition() {
   var_1 = tacinsert_isvalidspawnposition(var_0);
 
   if(istrue(var_1)) {
-    ref_13a01(var_0);
+    ref_13A01(var_0);
     return;
   }
 }
@@ -128,7 +128,7 @@ function tacinsert_isvalidspawnposition(var_0) {
   return true;
 }
 
-function ref_13a01(var_0) {
+function ref_13A01(var_0) {
   if(isDefined(self.tispawnposition[0]) && self.tispawnposition[0] == var_0) {
     return;
   }
@@ -137,7 +137,7 @@ function ref_13a01(var_0) {
   self.tispawnposition[0] = var_0;
 }
 
-function ref_13a07() {
+function ref_13A07() {
   if(isDefined(self.tispawnposition)) {
     if(isDefined(self.tispawnposition[1])) {
       return self.tispawnposition[1];
@@ -155,11 +155,11 @@ function deletetacinsert() {
 
 function tacinsert_used(var_0) {
   var_0 delete();
-  var_1 = ref_13a07();
+  var_1 = ref_13A07();
 
   if(!isDefined(var_1)) {
     scripts\mp\hud_message::showerrormessage("MP/TAC_INSERT_CANNOT_PLACE");
-    thread ref_13a0c();
+    thread ref_13A0C();
     return false;
   }
 
@@ -167,22 +167,22 @@ function tacinsert_used(var_0) {
 
   if(var_2 >= 14400) {
     scripts\mp\hud_message::showerrormessage("MP/TAC_INSERT_CANNOT_PLACE");
-    thread ref_13a0c();
+    thread ref_13A0C();
     return false;
   }
 
   if(scripts\mp\utility\entity::touchingbadtrigger()) {
     scripts\mp\hud_message::showerrormessage("MP/TAC_INSERT_CANNOT_PLACE");
-    thread ref_13a0c();
+    thread ref_13A0C();
     return false;
   }
 
   var_3 = var_1 + (0, 0, 16);
   var_4 = var_1 + (0, 0, -16);
 
-  if(!ref_13a03(var_0, var_3, var_4)) {
+  if(!ref_13A03(var_0, var_3, var_4)) {
     scripts\mp\hud_message::showerrormessage("MP/TAC_INSERT_CANNOT_PLACE");
-    thread ref_13a0c();
+    thread ref_13A0C();
     return false;
   }
 
@@ -194,10 +194,10 @@ function tacinsert_used(var_0) {
 function tacinsert_setupandwaitfordeath(var_0) {
   self.headicon = thread scripts\cp_mp\entityheadicons::setheadicon_factionimage(0, 0);
   thread tacinsert_damagelistener(var_0);
-  thread ref_13a05(var_0);
+  thread ref_13A05(var_0);
 
   if(!self.issuper) {
-    thread ref_13a0b(var_0);
+    thread ref_13A0B(var_0);
     return;
   }
 }
@@ -222,7 +222,7 @@ function tacinsert_handledeathdamage(var_0) {
   thread tacinsert_destroy(var_1, 1);
 }
 
-function ref_13a0b(var_0) {
+function ref_13A0B(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
@@ -233,7 +233,7 @@ function ref_13a0b(var_0) {
   self.ref_12357 linkTo(self);
 
   foreach(var_2 in level.players) {
-    ref_13a0f(var_2);
+    ref_13A0F(var_2);
   }
 
   for(;;) {
@@ -244,7 +244,7 @@ function ref_13a0b(var_0) {
   }
 }
 
-function ref_13a0f(var_0) {
+function ref_13A0F(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -278,7 +278,7 @@ function tacinsert_destroy(var_0, var_1, var_2, var_3) {
 
   if(isDefined(self.owner)) {
     if(istrue(var_2)) {
-      thread ref_13a00();
+      thread ref_13A00();
       self.owner scripts\mp\utility\stats::incpersstat("tacticalInsertionSpawns", 1);
       self.owner scripts\mp\supers::hide_plunderboxes("super_tac_insert");
       self.owner scripts\cp\vehicles\vehicle_compass_cp::ref_12032("super_tac_insert", 1, var_0, var_1);
@@ -289,7 +289,7 @@ function tacinsert_destroy(var_0, var_1, var_2, var_3) {
     }
 
     if(!istrue(var_2) && !istrue(var_3)) {
-      thread ref_13a0d();
+      thread ref_13A0D();
     }
 
     self.owner.setspawnpoint = undefined;
@@ -303,7 +303,7 @@ function tacinsert_destroy(var_0, var_1, var_2, var_3) {
 
   self notify("death");
 
-  if(!istrue(self.ref_133e3)) {
+  if(!istrue(self.ref_133E3)) {
     self setscriptablepartstate("smoke", "neutral", 0);
   }
 
@@ -315,7 +315,7 @@ function tacinsert_destroy(var_0, var_1, var_2, var_3) {
   thread tacinsert_delayeddelete();
 }
 
-function ref_13a0d() {
+function ref_13A0D() {
   level endon("game_ended");
   self endon("disconnect");
   var_0 = 0;
@@ -332,7 +332,7 @@ function ref_13a0d() {
   scripts\mp\damagefeedback::hudicontype("tacinsert_destroyed");
 }
 
-function ref_13a00() {
+function ref_13A00() {
   if(scripts\mp\utility\game::getgametype() != "br") {
     return;
   }
@@ -344,7 +344,7 @@ function ref_13a00() {
   var_0 thread scripts\mp\hud_message::showsplash("tac_insert_success_br");
 }
 
-function ref_13a04() {
+function ref_13A04() {
   self endon("death");
   level waittill("game_ended");
   thread tacinsert_destroy(undefined, 0, 0, 1);
@@ -360,7 +360,7 @@ function tacinsert_delayeddelete() {
   self delete();
 }
 
-function ref_13a05(var_0) {
+function ref_13A05(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
@@ -369,7 +369,7 @@ function ref_13a05(var_0) {
   self setHintString(&"MP_PATCH/DESTROY_TI");
 
   foreach(var_2 in level.players) {
-    ref_13a0e(var_2);
+    ref_13A0E(var_2);
   }
 
   for(;;) {
@@ -381,7 +381,7 @@ function ref_13a05(var_0) {
   }
 }
 
-function ref_13a0e(var_0) {
+function ref_13A0E(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -424,7 +424,7 @@ function tacinsert_givepointsfordeath(var_0) {
   }
 }
 
-function ref_13a03(var_0, var_1, var_2) {
+function ref_13A03(var_0, var_1, var_2) {
   var_3 = 1;
   var_4 = self;
   var_5 = scripts\engine\trace::create_contents(0, 1, 1, 1, 1, 1, 1, 1, 1);
@@ -476,7 +476,7 @@ function ref_13a03(var_0, var_1, var_2) {
   return istrue(var_3);
 }
 
-function ref_13a0c() {
+function ref_13A0C() {
   self endon("disconnect");
   level endon("game_ended");
   var_0 = getdvarint("scr_tac_insert_refund", 1);
@@ -490,7 +490,7 @@ function ref_13a0c() {
       scripts\mp\equipment::giveequipment(level.infectedtactical, "secondary");
     }
 
-    var_1 = scripts\engine\utility::ref_143b9(5, "super_use_finished_lb");
+    var_1 = scripts\engine\utility::ref_143B9(5, "super_use_finished_lb");
 
     if(isDefined(var_1) && var_1 == "super_use_finished_lb") {
       thread scripts\mp\supers::givesuperpoints(scripts\mp\supers::getsuperpointsneeded());

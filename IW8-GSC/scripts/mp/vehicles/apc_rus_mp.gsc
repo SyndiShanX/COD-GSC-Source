@@ -16,7 +16,7 @@ function apc_rus_mp_initspawning() {
   var_0.areplayersnear = 180;
 
   if(scripts\mp\utility\game::getgametype() == "arm") {
-    var_0.ref_12ca1 = level.c4_obj_and_progress_clear;
+    var_0.ref_12CA1 = level.c4_obj_and_progress_clear;
     return;
   }
 }
@@ -53,7 +53,7 @@ function apc_rus_mp_waitandspawn() {
   var_1.ref = var_0.ref;
   var_1.rallypointhealth = var_0.rallypointhealth;
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("apc_russian", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("apc_russian", var_1, var_2);
 
   if(isDefined(var_3)) {
     if(isDefined(var_1.ref) && istrue(level.userallypointvehicles) && level.userallypointvehicles != 2) {

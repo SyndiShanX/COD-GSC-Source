@@ -40,7 +40,7 @@ function tryusenukefromstruct(var_0) {
 
   if(!isDefined(level.nukeincoming)) {
     level.nukeincoming = 1;
-    level.ref_11f14 = self;
+    level.ref_11F14 = self;
   } else {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("hud", "showErrorMessage")) {
       self[[scripts\cp_mp\utility\script_utility::getsharedfunc("hud", "showErrorMessage")]]("KILLSTREAKS/NUKE_ALREADY_INBOUND");
@@ -62,7 +62,7 @@ function tryusenukefromstruct(var_0) {
     if(isDefined(var_5)) {
       thread nuke_warnenemiesnukeincoming(level);
     }
-  } else if(!istrue(level.ref_11bd4)) {
+  } else if(!istrue(level.ref_11BD4)) {
     var_4 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweapontabletdeploy(var_1, undefined, undefined, undefined, undefined, "ks_remote_nuke_mp", 0);
   } else {
     var_4 = 1;
@@ -70,7 +70,7 @@ function tryusenukefromstruct(var_0) {
 
   if(!istrue(var_4) || level.gameended) {
     level.nukeincoming = undefined;
-    level.ref_11f14 = undefined;
+    level.ref_11F14 = undefined;
     var_2 notify("killstreak_finished_with_deploy_weapon");
     return false;
   }
@@ -78,7 +78,7 @@ function tryusenukefromstruct(var_0) {
   if(isDefined(level.killstreakbeginusefunc)) {
     if(!level[[level.killstreakbeginusefunc]](var_2)) {
       level.nukeincoming = undefined;
-      level.ref_11f14 = undefined;
+      level.ref_11F14 = undefined;
       var_2 notify("killstreak_finished_with_deploy_weapon");
       return false;
     }
@@ -86,8 +86,8 @@ function tryusenukefromstruct(var_0) {
 
   thread nuke_start(var_2, 0, undefined, undefined, var_4, undefined, var_4);
 
-  if(var_3 != 1 && !istrue(level.ref_11bd4)) {
-    scripts\common\utility::ref_13e0a(level.ref_11b2a, "nuke", self.origin);
+  if(var_3 != 1 && !istrue(level.ref_11BD4)) {
+    scripts\common\utility::ref_13E0A(level.ref_11B2A, "nuke", self.origin);
   }
 
   return true;
@@ -204,7 +204,7 @@ function nuke_start(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   level.nuke_inflictor.owner = self;
   level.nuke_inflictor.streakinfo = var_0;
 
-  if(istrue(level.ref_11bd4)) {
+  if(istrue(level.ref_11BD4)) {
     var_12 = 0.7;
   }
 
@@ -237,20 +237,20 @@ function nuke_start(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 }
 
 function nuke_watchownerdisconnect(var_0) {
-  if(!isDefined(level.ref_11ef8)) {
+  if(!isDefined(level.ref_11EF8)) {
     createheadiconatorigin("nuke");
-    level.ref_11ef8 = 1;
+    level.ref_11EF8 = 1;
   }
 
   level endon("game_ended");
   var_0 waittill("disconnect");
-  ref_11ede();
+  ref_11EDE();
 }
 
-function ref_11ede() {
+function ref_11EDE() {
   level.nukecancel = 1;
   level.nukeincoming = undefined;
-  level.ref_11f14 = undefined;
+  level.ref_11F14 = undefined;
   nuke_cleartimer();
   setslowmotion(1, 1, 0);
   level notify("nuke_cancelled");
@@ -259,7 +259,7 @@ function ref_11ede() {
 function nuke_starttimer(var_0) {
   level endon("nuke_cancelled");
 
-  if(istrue(level.ref_11bd4)) {
+  if(istrue(level.ref_11BD4)) {
     _calloutmarkerping_handleluinotify_added::ref_13191("ui_nuke_data", 9, 2, 2);
   } else {
     _calloutmarkerping_handleluinotify_added::ref_13191("ui_nuke_data", 9, 2, 1);
@@ -340,7 +340,7 @@ function nuke_startlaunchsequence(var_0, var_1, var_2, var_3, var_4, var_5, var_
       }
     }
 
-    thread ref_11edc();
+    thread ref_11EDC();
     level.loadoutdefaultfiresalediscount = 1;
   }
 
@@ -481,9 +481,9 @@ function nuke_slowmo(var_0, var_1) {
 }
 
 function setnuketimescalefactor() {
-  if(!isDefined(level.ref_11ef8)) {
+  if(!isDefined(level.ref_11EF8)) {
     createheadiconatorigin("nuke");
-    level.ref_11ef8 = 1;
+    level.ref_11EF8 = 1;
     return;
   }
 }
@@ -552,7 +552,7 @@ function nuke_death(var_0, var_1) {
 
           if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "isReallyAlive")) {
             if([[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "isReallyAlive")]](var_5)) {
-              if(!istrue(var_5.ref_12e54)) {
+              if(!istrue(var_5.ref_12E54)) {
                 if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("nuke", "killPlayerWithAttacker")) {
                   [[scripts\cp_mp\utility\script_utility::getsharedfunc("nuke", "killPlayerWithAttacker")]](var_5);
                 }
@@ -597,7 +597,7 @@ function nuke_death(var_0, var_1) {
 
 function nuke_delayendgame(var_0, var_1) {
   level endon("game_ended");
-  thread ref_11ef1(level);
+  thread ref_11EF1(level);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("nuke", "delayEndGame")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("nuke", "delayEndGame")]](var_0, var_1);
@@ -605,7 +605,7 @@ function nuke_delayendgame(var_0, var_1) {
   }
 }
 
-function ref_11ef1(var_0) {
+function ref_11EF1(var_0) {
   level endon("game_ended");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
   level notify("play_nuke_bnk");
@@ -713,10 +713,10 @@ function nuke_setaftermathvision(var_0) {
     level thread[[level.nukedeathvisionfunc]]();
   }
 
-  ref_11ef4();
+  ref_11EF4();
 }
 
-function ref_11ef4() {
+function ref_11EF4() {
   setomnvarforallclients("post_game_state", 12);
 
   foreach(var_1 in level.players) {
@@ -729,10 +729,10 @@ function ref_11ef4() {
     var_1 setclienttriggeraudiozonepartialwithfade("nuke_killstreak", 2, "ambient", "ambient_events");
   }
 
-  thread ref_11ef2();
+  thread ref_11EF2();
 }
 
-function ref_11ef2() {
+function ref_11EF2() {
   level endon("game_ended");
   level waittill("play_nuke_bnk");
 
@@ -748,7 +748,7 @@ function ref_11ef2() {
 function nuke_startnukedeathfx() {
   self endon("disconnect");
 
-  if(!istrue(self.ref_12e54)) {
+  if(!istrue(self.ref_12E54)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("weapons", "enableBurnFX")) {
       self[[scripts\cp_mp\utility\script_utility::getsharedfunc("weapons", "enableBurnFX")]](1, "nuke_active");
     }
@@ -953,7 +953,7 @@ function nuke_finalizelocationnuke(var_0) {
   visionsetnaked("", 1);
 }
 
-function ref_11edc() {
+function ref_11EDC() {
   level endon("game_ended");
 
   for(;;) {

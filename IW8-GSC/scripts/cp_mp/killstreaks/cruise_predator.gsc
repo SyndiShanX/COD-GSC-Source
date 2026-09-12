@@ -459,7 +459,7 @@ function initbattleroyalelootchoppercratedata(var_0) {
   self.owner endon("disconnect");
   self.owner endon("cruise_missile_finished");
   level waittill("game_ended");
-  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
+  self.owner scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_0);
 }
 
 function cruisepredator_watchmissileinfo(var_0) {
@@ -589,7 +589,7 @@ function cruisepredator_watchmissileexplosion(var_0, var_1, var_2, var_3, var_4,
       wait 0.5;
       var_1 notify("cruise_missile_finished");
       cruisepredator_returnplayer(var_1, var_9, var_20);
-      var_1 scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_9);
+      var_1 scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_9);
     }
   }
 
@@ -625,7 +625,7 @@ function cruisepredator_returnplayer(var_0, var_1) {
   scripts\common\utility::allow_shellshock(1);
   self painvisionon();
   scripts\cp_mp\utility\killstreak_utility::killstreak_restorenvgstate();
-  level thread scripts\cp_mp\utility\killstreak_utility::ref_12cc6(self);
+  level thread scripts\cp_mp\utility\killstreak_utility::ref_12CC6(self);
   var_0 notify("killstreak_finished_with_deploy_weapon");
 }
 

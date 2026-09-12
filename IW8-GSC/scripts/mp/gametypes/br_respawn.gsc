@@ -298,7 +298,7 @@ function playershoulddofauxdeath() {
 function playersetinlaststand() {
   self.brwasinlaststand = 1;
   _calloutmarkerping_isvehicleoccupiedbyenemy::loadout_finalizeweapons("laststand");
-  scripts\mp\gametypes\br_public::ref_1319e(1);
+  scripts\mp\gametypes\br_public::ref_1319E(1);
 }
 
 function playerdied(var_0, var_1) {
@@ -530,7 +530,7 @@ function playertrytakedefibrillator(var_0) {
 
 function useentrespawntimeout(var_0, var_1, var_2) {
   self endon("respawnComplete");
-  var_1 scripts\engine\utility::ref_143bf(var_0, "disconnect");
+  var_1 scripts\engine\utility::ref_143BF(var_0, "disconnect");
   self notify("timeout");
   waittillframeend();
 
@@ -666,13 +666,13 @@ function playersetcarryteammates(var_0) {
 
 function useentdropbodyonplayerdone(var_0, var_1, var_2) {
   self endon("droppedBody");
-  var_0 scripts\engine\utility::ref_143a6("disconnect", "death", "last_stand_start");
+  var_0 scripts\engine\utility::ref_143A6("disconnect", "death", "last_stand_start");
   dropbody(self, var_0, var_1, var_2);
 }
 
 function useentdropbodywhencomplete(var_0, var_1, var_2) {
   self endon("droppedBody");
-  scripts\engine\utility::ref_143a5("timeout", "respawnComplete");
+  scripts\engine\utility::ref_143A5("timeout", "respawnComplete");
   dropbody(self, var_0, var_1, var_2);
 }
 
@@ -1053,7 +1053,7 @@ function playermonitorweaponchange(var_0) {
 }
 
 function playertakeawaydefibrillator(var_0) {
-  scripts\engine\utility::ref_143a6("death", "disconnect", "last_stand_start", "defibrillator_done");
+  scripts\engine\utility::ref_143A6("death", "disconnect", "last_stand_start", "defibrillator_done");
 
   if(isDefined(self) && self hasweapon(var_0)) {
     self takeweapon(var_0);

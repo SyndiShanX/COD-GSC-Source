@@ -19,7 +19,7 @@ function main() {
     }
 
     scripts\mp\gametypes\arm::arm_initoutofbounds();
-    thread ref_12e15();
+    thread ref_12E15();
     thread minarmordropondeath();
   } else {
     level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
@@ -39,11 +39,11 @@ function main() {
   thread player_exfil_struct();
   thread player_exit();
   thread setlowermessageomnvarref();
-  thread ref_145f0();
-  thread ref_12f8e();
+  thread ref_145F0();
+  thread ref_12F8E();
 }
 
-function ref_12e15() {
+function ref_12E15() {
   level.weaponstocycle = [];
   level.setallclientomnvarot[0] = (7298, -26583, -199);
   level.setallclientomnvarot[1] = (31947, 8236, -108);
@@ -54,12 +54,12 @@ function ref_12e15() {
   level.setallclientomnvarot[6] = (4457, 227, 84);
   level.setallclientomnvarot[7] = (53887, -33922, 1383);
   wait 15;
-  thread ref_12e14();
-  thread ref_12e13();
-  thread ref_12e12();
+  thread ref_12E14();
+  thread ref_12E13();
+  thread ref_12E12();
 }
 
-function ref_12e11() {
+function ref_12E11() {
   level.weapons_that_can_stun = [];
   level.weapons_that_can_stun[0] = (9222, -19971, -202);
   level.weapons_that_can_stun[1] = (10809, -10631, 306);
@@ -83,17 +83,17 @@ function ref_12e11() {
   }
 }
 
-function ref_12e14() {
+function ref_12E14() {
   var_0 = [];
   GscBinSkip0(0x2e, 0, (35313, 5404, -641));
 }
 
-function ref_12e12() {
+function ref_12E12() {
   playFX(scripts\engine\utility::getfx("vfx_gw_ambient_planes"), (-7956, 8572, -308), (10, 316, 0));
   playFX(scripts\engine\utility::getfx("vfx_gw_ambient_planes"), (57277, -44955, 1719), (12, 134, 0));
 }
 
-function ref_12e13() {
+function ref_12E13() {
   foreach(var_1 in level.setallclientomnvarot) {
     playFX(scripts\engine\utility::getfx("vfx_gw_smoke_plume_bg_01"), var_1, (0, 100, 0));
   }
@@ -269,12 +269,12 @@ function player_exit() {
 
 function setlowermessageomnvarref() {
   var_0 = spawn("trigger_radius", (22824, -13160, -1360), 0, 15848, 715);
-  thread ref_12e19();
+  thread ref_12E19();
   var_1 = spawn("trigger_radius", (21969, -10078, -190), 0, 160, 128);
-  thread ref_12e19();
+  thread ref_12E19();
 }
 
-function ref_12e19() {
+function ref_12E19() {
   level endon("game_ended");
 
   for(;;) {
@@ -286,7 +286,7 @@ function ref_12e19() {
   }
 }
 
-function ref_145f0() {
+function ref_145F0() {
   var_0 = getdvarint("gw_gas_circle_size", 0);
   wait 3;
 
@@ -308,7 +308,7 @@ function ref_145f0() {
   }
 }
 
-function ref_12f8e() {
+function ref_12F8E() {
   level.modifiedspawnpoints["19982 -13043"]["mp_tdm_spawn"]["remove"] = 1;
   var_0 = [];
 

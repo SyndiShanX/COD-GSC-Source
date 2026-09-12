@@ -56,7 +56,7 @@ function hostage_rescue_fight(var_0, var_1, var_2, var_3) {
   var_10 = 30;
   thread waitfor_death(var_4, var_10, var_5, &death_fight1);
   thread waitfor_save(var_5, var_4);
-  var_5 scripts\engine\utility::ref_143c0(30, "saved", "death");
+  var_5 scripts\engine\utility::ref_143C0(30, "saved", "death");
 }
 
 function hostage_rescue_meatshield(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -238,7 +238,7 @@ function reset_guy(var_0) {
 }
 
 function stealth_sitting_laptop(var_0) {
-  if(scripts\cp\coop_stealth::ref_132d7()) {
+  if(scripts\cp\coop_stealth::ref_132D7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "sit_laptop";
     self._blackboard.idlenode.origin = self.origin;
@@ -275,7 +275,7 @@ function stealth_sitting_laptop(var_0) {
 }
 
 function stealth_sitting_pistol(var_0) {
-  if(scripts\cp\coop_stealth::ref_132d7()) {
+  if(scripts\cp\coop_stealth::ref_132D7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "sit_pistol_clean";
     self._blackboard.idlenode.origin = self.origin;
@@ -328,7 +328,7 @@ function idle_crouching_phone(var_0) {
 }
 
 function stealth_sitting_cell_no_props(var_0) {
-  if(scripts\cp\coop_stealth::ref_132d7()) {
+  if(scripts\cp\coop_stealth::ref_132D7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "sit_cellphone";
     self._blackboard.idlenode.origin = self.origin;
@@ -359,7 +359,7 @@ function stealth_sitting_cell_no_props(var_0) {
 }
 
 function stealth_sitting_cell(var_0) {
-  if(scripts\cp\coop_stealth::ref_132d7()) {
+  if(scripts\cp\coop_stealth::ref_132D7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "sit_cellphone";
     self._blackboard.idlenode.origin = self.origin;
@@ -395,7 +395,7 @@ function stealth_sitting_cell(var_0) {
 }
 
 function stealth_sitting_sleep(var_0) {
-  if(scripts\cp\coop_stealth::ref_132d7()) {
+  if(scripts\cp\coop_stealth::ref_132D7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "sit_sleeping";
     self._blackboard.idlenode.origin = self.origin;
@@ -491,7 +491,7 @@ function stealth_sit_death(var_0, var_1) {
 function smoking() {
   self.playing_skit = 1;
 
-  if(scripts\cp\coop_stealth::ref_132d7()) {
+  if(scripts\cp\coop_stealth::ref_132D7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "smoking";
     self._blackboard.idlenode.origin = self.origin;
@@ -519,7 +519,7 @@ function smoking_idle(var_0) {
     smoking_idle_end("smoking_idle_end");
     ai_smoking_cleanup();
 
-    if(istrue(self.ref_133a4)) {
+    if(istrue(self.ref_133A4)) {
       self notify("ai_notetrack_Loop");
       self notify("cancel_loop");
       reset_guy(self);
@@ -544,7 +544,7 @@ function smoking_react(var_0) {
   self endon("death");
   self endon("cancel_loop");
   level scripts\cp\utility::add_wait(&scripts\cp\utility::waittill_msg, "weapons_free");
-  scripts\cp\utility::add_wait(&scripts\engine\utility::ref_143a5, "alerted", "checking_friendly_corpse");
+  scripts\cp\utility::add_wait(&scripts\engine\utility::ref_143A5, "alerted", "checking_friendly_corpse");
   scripts\cp\utility::do_wait_any();
   scripts\cp\cp_modular_spawning::set_kill_off_time(20);
   ai_smoking_cleanup();
@@ -644,7 +644,7 @@ function ai_smoking_cleanup() {
 }
 
 function standing_cellphone(var_0) {
-  if(scripts\cp\coop_stealth::ref_132d7()) {
+  if(scripts\cp\coop_stealth::ref_132D7()) {
     self._blackboard.idlenode = spawnStruct();
     self._blackboard.idlenode.script_idle = "cellphone";
     self._blackboard.idlenode.origin = self.origin;
@@ -711,7 +711,7 @@ function ai_notehandler_cellphone(var_0) {
 function cellphone_react(var_0) {
   self endon("death");
   level scripts\cp\utility::add_wait(&scripts\cp\utility::waittill_msg, "weapons_free");
-  scripts\cp\utility::add_wait(&scripts\engine\utility::ref_143a5, "alerted", "checking_friendly_corpse");
+  scripts\cp\utility::add_wait(&scripts\engine\utility::ref_143A5, "alerted", "checking_friendly_corpse");
   scripts\cp\utility::do_wait_any();
   scripts\cp\cp_modular_spawning::set_kill_off_time(20);
   ai_cellphone_cleanup();

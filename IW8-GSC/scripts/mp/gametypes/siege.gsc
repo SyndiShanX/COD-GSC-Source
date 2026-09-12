@@ -82,10 +82,10 @@ function onstartgametype() {
     scripts\mp\gametypes\arm::initspawns(isDefined(game["roundsPlayed"]) && game["roundsPlayed"] != 0);
     level thread scripts\mp\gametypes\arm::setupwaypointicons();
     scripts\mp\gametypes\arm::debug_setupmatchdata();
-    scripts\mp\gametypes\arm::ref_1324d();
+    scripts\mp\gametypes\arm::ref_1324D();
     scripts\mp\gametypes\arm::calculatehqmidpoint();
-    level.ref_11f45 = getdvarint("scr_siege_flagcount", 3);
-    setomnvar("ui_num_dom_flags", level.ref_11f45);
+    level.ref_11F45 = getdvarint("scr_siege_flagcount", 3);
+    setomnvar("ui_num_dom_flags", level.ref_11F45);
     scripts\mp\gametypes\arm::setupobjectives();
     thread runobjectives();
     thread scripts\mp\gametypes\arm::init_groundwarvehicles();
@@ -170,9 +170,9 @@ function trace_to_eye_weight() {
   }
 
   level.vehiclespawnlocs = scripts\engine\utility::array_randomize(level.vehiclespawnlocs);
-  var_10 = level.ref_11f41;
+  var_10 = level.ref_11F41;
 
-  if(!isDefined(level.ref_11f41)) {
+  if(!isDefined(level.ref_11F41)) {
     var_10 = 25;
   }
 
@@ -538,7 +538,7 @@ function vehiclespawn_jeep(var_0, var_1) {
 function play_nag_intro_vo(var_0) {
   var_1 = [];
 
-  if(getdvarint("scr_brtdm_disable_radiant_vehicles", level.endsuperdisableweaponbr.ref_1196b["scr_brtdm_disable_radiant_vehicles"]) == 1) {
+  if(getdvarint("scr_brtdm_disable_radiant_vehicles", level.endsuperdisableweaponbr.ref_1196B["scr_brtdm_disable_radiant_vehicles"]) == 1) {
     return var_1;
   }
 
@@ -669,7 +669,7 @@ function onplayerconnect(var_0) {
   var_0.siegelatecomer = 1;
 
   if(level.unset_relic_lfo && isDefined(game["roundsPlayed"]) && game["roundsPlayed"] != 0 && !scripts\mp\flags::gameflag("prematch_done")) {
-    thread ref_11aaf();
+    thread ref_11AAF();
     return;
   }
 }
@@ -760,10 +760,10 @@ function domflags() {
     var_7 = var_1[var_8];
   }
 
-  level.ref_11f45 = 3;
-  setomnvar("ui_num_dom_flags", level.ref_11f45);
+  level.ref_11F45 = 3;
+  setomnvar("ui_num_dom_flags", level.ref_11F45);
 
-  if(level.ref_11f45 == 3) {
+  if(level.ref_11F45 == 3) {
     foreach(var_10 in var_0) {
       var_10 scripts\mp\gametypes\dom::remapdomtriggerscriptlabel();
     }
@@ -774,7 +774,7 @@ function domflags() {
   for(var_8 = 0; var_8 < var_7.size; var_8++) {
     var_10 = var_7[var_8];
 
-    if(level.ref_11f45 == 3) {
+    if(level.ref_11F45 == 3) {
       if(var_10.script_label == "_d" || var_10.script_label == "_e") {
         continue;
       }
@@ -845,7 +845,7 @@ function domflags() {
   scripts\mp\gametypes\dom::flagsetup();
 
   if(!scripts\mp\flags::gameflag("prematch_done")) {
-    level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+    level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   }
 
   foreach(var_24 in level.objectives) {
@@ -860,7 +860,7 @@ function domflags() {
     var_24.onunoccupied = &onunoccupied;
     var_24.onpinnedstate = &onpinnedstate;
     var_24.onunpinnedstate = &onunpinnedstate;
-    var_24.ref_138b2 = &ref_12093;
+    var_24.ref_138B2 = &ref_12093;
     var_24.stompprogressreward = &stompprogressreward;
     var_24 scripts\mp\gameobjects::setobjectivestatusicons("waypoint_defend", "waypoint_target");
     var_24 scripts\mp\gameobjects::setvisibleteam("any");
@@ -958,7 +958,7 @@ function iswinningteam(var_0) {
   var_1 = 0;
   var_2 = getflagcount(var_0);
 
-  if(level.ref_11f45 == 3) {
+  if(level.ref_11F45 == 3) {
     if(var_2 == 2) {
       var_1 = 1;
     }
@@ -1045,9 +1045,9 @@ function watchflagenduse(var_0) {
     }
   }
 
-  if(var_1 == level.ref_11f45) {
+  if(var_1 == level.ref_11F45) {
     setwinner("allies", "siege_allflags_win", "siege_allflags_loss");
-  } else if(var_2 == level.ref_11f45) {
+  } else if(var_2 == level.ref_11F45) {
     setwinner("axis", "siege_allflags_win", "siege_allflags_loss");
   } else if(level.rushtimer) {
     if(var_1 == 2 || var_2 == 2) {
@@ -1237,7 +1237,7 @@ function onuse(var_0) {
     var_4 = scripts\mp\gametypes\obj_dom::getteamflagcount(var_1);
 
     if(var_4 < level.objectives.size) {
-      if(var_4 == 2 && level.ref_11f45 == 3) {
+      if(var_4 == 2 && level.ref_11F45 == 3) {
         scripts\mp\utility\dialog::statusdialog("friendly_captured_2", var_1);
         scripts\mp\utility\dialog::statusdialog("enemy_captured_2", var_3, 1);
       } else {
@@ -1305,7 +1305,7 @@ function getquickdropitemcount(var_0) {
   var_1 = 0;
   var_2 = getflagcount(var_0);
 
-  if(level.ref_11f45 == 3) {
+  if(level.ref_11F45 == 3) {
     if(var_2 == 2) {
       var_1 = 1;
     }
@@ -1582,7 +1582,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
             }
 
             var_11 = 1;
-            thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_9, "assaulting");
+            thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_9, "assaulting");
             continue;
           }
         } else if(var_21.claimteam == var_16) {
@@ -1597,7 +1597,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
             var_12 = 1;
             var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
             var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
-            thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_9, "defending");
+            thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_9, "defending");
             continue;
           }
         }
@@ -1619,7 +1619,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
           }
 
           var_11 = 1;
-          thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_9, "assaulting");
+          thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_9, "assaulting");
           continue;
         }
       }
@@ -1641,7 +1641,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
         var_12 = 1;
         var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
         var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
-        thread scripts\common\utility::ref_13e0a(level.ref_11b26, var_9, "defending");
+        thread scripts\common\utility::ref_13E0A(level.ref_11B26, var_9, "defending");
       }
     }
   }
@@ -1755,7 +1755,7 @@ function giveflagcapturexp(var_0, var_1, var_2) {
 
   if(isPlayer(var_3)) {
     level thread scripts\mp\hud_util::teamplayercardsplash("callout_securedposition" + self.objectivekey, var_3);
-    var_3 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_3.origin);
+    var_3 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_3.origin);
   }
 
   var_4 = getarraykeys(var_0);
@@ -1828,12 +1828,12 @@ function checkendgame() {
   var_0 = getflagcount("allies");
   var_1 = getflagcount("axis");
 
-  if(var_0 == level.ref_11f45) {
+  if(var_0 == level.ref_11F45) {
     setwinner("allies", "siege_allflags_win", "siege_allflags_loss");
     return;
   }
 
-  if(var_1 == level.ref_11f45) {
+  if(var_1 == level.ref_11F45) {
     setwinner("axis", "siege_allflags_win", "siege_allflags_loss");
     return;
   }
@@ -1865,41 +1865,41 @@ function runobjectives(var_0) {
   }
 
   foreach(var_2 in level.gw_objstruct.startingfobs_neutral) {
-    if(level.ref_11f45 == 3) {
+    if(level.ref_11F45 == 3) {
       if(level.mapname == "mp_downtown_gw") {
         if(var_2.trigger.objkey == "_a" || var_2.trigger.objkey == "_e") {
           continue;
         } else {
-          ref_12bbd(var_2.trigger);
+          ref_12BBD(var_2.trigger);
         }
       } else if(level.mapname == "mp_aniyah") {
         if(var_2.trigger.objkey == "_b" || var_2.trigger.objkey == "_d") {
           continue;
         } else {
-          ref_12bbd(var_2.trigger);
+          ref_12BBD(var_2.trigger);
         }
       } else if(level.mapname == "mp_farms2_gw") {
         if(var_2.trigger.objkey == "_b" || var_2.trigger.objkey == "_d") {
           continue;
         } else {
-          ref_12bbd(var_2.trigger);
+          ref_12BBD(var_2.trigger);
         }
       } else if(level.mapname == "mp_promenade_gw") {
         if(var_2.trigger.objkey == "_a" || var_2.trigger.objkey == "_e") {
           continue;
         } else {
-          ref_12bbd(var_2.trigger);
+          ref_12BBD(var_2.trigger);
         }
       } else if(level.mapname == "mp_riverside_gw") {
         if(var_2.trigger.objkey == "_b" || var_2.trigger.objkey == "_d") {
           continue;
         } else {
-          ref_12bbd(var_2.trigger);
+          ref_12BBD(var_2.trigger);
         }
       } else if(var_2.trigger.objkey == "_a" || var_2.trigger.objkey == "_e") {
         continue;
       } else {
-        ref_12bbd(var_2.trigger);
+        ref_12BBD(var_2.trigger);
       }
     }
 
@@ -1924,7 +1924,7 @@ function runobjectives(var_0) {
     var_2.trigger.gameobject.onunoccupied = &onunoccupied;
     var_2.trigger.gameobject.onpinnedstate = &onpinnedstate;
     var_2.trigger.gameobject.onunpinnedstate = &onunpinnedstate;
-    var_2.trigger.gameobject.ref_138b2 = &ref_12093;
+    var_2.trigger.gameobject.ref_138B2 = &ref_12093;
     var_2.trigger.gameobject.stompprogressreward = &stompprogressreward;
     var_2.trigger.gameobject scripts\mp\gameobjects::setobjectivestatusicons("waypoint_defend", "waypoint_target");
     var_2.trigger.gameobject scripts\mp\gameobjects::setvisibleteam("any");
@@ -1937,7 +1937,7 @@ function runobjectives(var_0) {
   level.bestspawnflag["axis"] = scripts\mp\gametypes\obj_dom::getunownedflagneareststart("axis", level.bestspawnflag["allies"]);
 
   if(level.precappoints) {
-    scripts\mp\gametypes\obj_dom::precap(level.ref_11f45 == 5);
+    scripts\mp\gametypes\obj_dom::precap(level.ref_11F45 == 5);
   }
 
   scripts\mp\gametypes\dom::flagsetup();
@@ -1961,24 +1961,24 @@ function objective_manageobjectivesintrovisibility() {
   }
 }
 
-function ref_12bbd(var_0) {
+function ref_12BBD(var_0) {
   if(level.mapname == "mp_downtown_gw") {
-    if(var_0.objkey == "_b" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_a";
+    if(var_0.objkey == "_b" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_a";
       var_0.objkey = "_a";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_c";
+    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_c";
       var_0.objkey = "_b";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_d" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_d";
+    if(var_0.objkey == "_d" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_d";
       var_0.objkey = "_c";
       var_0.script_label = var_0.objkey;
       return;
@@ -1988,22 +1988,22 @@ function ref_12bbd(var_0) {
   }
 
   if(level.mapname == "mp_boneyard_gw") {
-    if(var_0.objkey == "_b" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_b";
+    if(var_0.objkey == "_b" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_b";
       var_0.objkey = "_a";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_d" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_d";
+    if(var_0.objkey == "_d" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_d";
       var_0.objkey = "_b";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_c";
+    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_c";
       var_0.objkey = "_c";
       var_0.script_label = var_0.objkey;
       return;
@@ -2013,22 +2013,22 @@ function ref_12bbd(var_0) {
   }
 
   if(level.mapname == "mp_aniyah") {
-    if(var_0.objkey == "_a" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_a";
+    if(var_0.objkey == "_a" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_a";
       var_0.objkey = "_a";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_c";
+    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_c";
       var_0.objkey = "_b";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_e" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_e";
+    if(var_0.objkey == "_e" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_e";
       var_0.objkey = "_c";
       var_0.script_label = var_0.objkey;
       return;
@@ -2038,22 +2038,22 @@ function ref_12bbd(var_0) {
   }
 
   if(level.mapname == "mp_promenade_gw") {
-    if(var_0.objkey == "_b" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_b";
+    if(var_0.objkey == "_b" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_b";
       var_0.objkey = "_a";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_c";
+    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_c";
       var_0.objkey = "_b";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_d" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_e";
+    if(var_0.objkey == "_d" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_e";
       var_0.objkey = "_c";
       var_0.script_label = var_0.objkey;
       return;
@@ -2063,22 +2063,22 @@ function ref_12bbd(var_0) {
   }
 
   if(level.mapname == "mp_farms2_gw") {
-    if(var_0.objkey == "_a" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_a";
+    if(var_0.objkey == "_a" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_a";
       var_0.objkey = "_a";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_c";
+    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_c";
       var_0.objkey = "_b";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_e" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_e";
+    if(var_0.objkey == "_e" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_e";
       var_0.objkey = "_c";
       var_0.script_label = var_0.objkey;
       return;
@@ -2088,22 +2088,22 @@ function ref_12bbd(var_0) {
   }
 
   if(level.mapname == "mp_riverside_gw") {
-    if(var_0.objkey == "_a" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_a";
+    if(var_0.objkey == "_a" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_a";
       var_0.objkey = "_a";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_c";
+    if(var_0.objkey == "_c" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_c";
       var_0.objkey = "_b";
       var_0.script_label = var_0.objkey;
       return;
     }
 
-    if(var_0.objkey == "_e" && !isDefined(var_0.ref_11fcb)) {
-      var_0.ref_11fcb = "_e";
+    if(var_0.objkey == "_e" && !isDefined(var_0.ref_11FCB)) {
+      var_0.ref_11FCB = "_e";
       var_0.objkey = "_c";
       var_0.script_label = var_0.objkey;
       return;
@@ -2112,22 +2112,22 @@ function ref_12bbd(var_0) {
     return;
   }
 
-  if(var_0.objkey == "_b" && !isDefined(var_0.ref_11fcb)) {
-    var_0.ref_11fcb = "_b";
+  if(var_0.objkey == "_b" && !isDefined(var_0.ref_11FCB)) {
+    var_0.ref_11FCB = "_b";
     var_0.objkey = "_a";
     var_0.script_label = var_0.objkey;
     return;
   }
 
-  if(var_0.objkey == "_c" && !isDefined(var_0.ref_11fcb)) {
-    var_0.ref_11fcb = "_c";
+  if(var_0.objkey == "_c" && !isDefined(var_0.ref_11FCB)) {
+    var_0.ref_11FCB = "_c";
     var_0.objkey = "_b";
     var_0.script_label = var_0.objkey;
     return;
   }
 
-  if(var_0.objkey == "_d" && !isDefined(var_0.ref_11fcb)) {
-    var_0.ref_11fcb = "_d";
+  if(var_0.objkey == "_d" && !isDefined(var_0.ref_11FCB)) {
+    var_0.ref_11FCB = "_d";
     var_0.objkey = "_c";
     var_0.script_label = var_0.objkey;
     return;
@@ -2156,21 +2156,21 @@ function runobjflag(var_0, var_1) {
   return var_2;
 }
 
-function ref_11aaf(var_0, var_1) {
+function ref_11AAF(var_0, var_1) {
   self endon("disconnect");
   var_2 = 0;
   var_3 = 0.5;
-  thread ref_11ab0(var_2, var_3);
+  thread ref_11AB0(var_2, var_3);
 }
 
-function ref_11ab0(var_0, var_1) {
+function ref_11AB0(var_0, var_1) {
   self endon("disconnect");
 
-  if(istrue(self.ref_12ca6)) {
+  if(istrue(self.ref_12CA6)) {
     return;
   }
 
-  self.ref_12ca6 = 1;
+  self.ref_12CA6 = 1;
   self notify("fadeDown_start");
 
   if(!isDefined(var_0)) {
@@ -2238,6 +2238,6 @@ function ref_11ab0(var_0, var_1) {
     scripts\mp\utility\player::hidehuddisable();
   }
 
-  self.ref_12ca6 = undefined;
+  self.ref_12CA6 = undefined;
   self notify("fadeUp_complete");
 }

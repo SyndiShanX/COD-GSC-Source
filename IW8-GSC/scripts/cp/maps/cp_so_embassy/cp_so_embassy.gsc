@@ -4,10 +4,10 @@
 ***********************************************************/
 
 function main() {
-  ref_11c1e();
+  ref_11C1E();
   thread labelpc();
-  thread ref_12bcf((-3688.5, -1275.5, 128));
-  thread ref_12bce((-2009.28, -486.884, 60), "alley_push_04");
+  thread ref_12BCF((-3688.5, -1275.5, 128));
+  thread ref_12BCE((-2009.28, -486.884, 60), "alley_push_04");
   thread ref_13927((-3718.76, -1644.87, 40), 100);
   thread lb_dmg_factor_main_rotor((2156, 1629, 92), 200);
   thread lb_dmg_factor_main_rotor((-1022.36, -1363.69, 84), 100);
@@ -38,15 +38,15 @@ function main() {
   level thread scripts\cp\cp_objectives::objectives_init();
   level.ref_12177 = 1;
   level.hostdamagefactorlow = 0;
-  level.ref_133ba = 1;
+  level.ref_133BA = 1;
   level.map_interaction_func = &scripts\cp\maps\cp_so_embassy\cp_so_embassy_interactions::register_interactions;
-  level.custom_onspawnplayer_func = &scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_124a6;
+  level.custom_onspawnplayer_func = &scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_124A6;
   level.custom_onplayerconnect_func = &scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::onplayerconnect;
   level.weapon_rank_event_table = "scripts/cp/maps/cp_so_embassy/cp_so_embassy_weaponrank_event.csv";
   level.player_interaction_monitor = &scripts\cp\maps\cp_so_embassy\cp_so_embassy_interactions::level_specific_player_interaction_monitor;
   level.wait_for_interaction_func = &scripts\cp\maps\cp_so_embassy\cp_so_embassy_interactions::level_specific_wait_for_interaction_triggered;
   level.interaction_trigger_properties_func = &scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::interaction_trigger_properties;
-  level.strike_player_connect_black_screen_fn = &scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1247b;
+  level.strike_player_connect_black_screen_fn = &scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1247B;
   level.mud_sfx = &mud_sfx;
 
   if(!scripts\engine\utility::flag_exist("introscreen_over")) {
@@ -158,7 +158,7 @@ function labelpc() {
   GscBinSkip0(0x2e, var_0.size, "technical_truck_spawner_01_techo");
 }
 
-function ref_12bcf(var_0) {
+function ref_12BCF(var_0) {
   var_1 = getentarrayinradius(undefined, undefined, var_0, 1500);
 
   foreach(var_3 in var_1) {
@@ -168,7 +168,7 @@ function ref_12bcf(var_0) {
   }
 }
 
-function ref_12bce(var_0, var_1) {
+function ref_12BCE(var_0, var_1) {
   var_2 = getentarrayinradius(undefined, undefined, var_0, 1500);
 
   foreach(var_4 in var_2) {
@@ -190,24 +190,24 @@ function ref_13927(var_0, var_1) {
   }
 }
 
-function ref_11cf3(var_0, var_1) {
+function ref_11CF3(var_0, var_1) {
   var_2 = getnodesinradius(var_0, var_1, 0, 200);
 
   foreach(var_4 in var_2) {
     if(scripts\engine\utility::is_equal(var_4.type, "Begin")) {
-      ref_11cf4(var_4);
+      ref_11CF4(var_4);
     }
   }
 }
 
-function ref_11cf4() {
+function ref_11CF4() {
   scripts\engine\utility::flag_set("moody_traversal_on");
   badplace_global("moody_traversal", 10, "axis");
   wait 10;
   scripts\engine\utility::flag_clear("moody_traversal_on");
 }
 
-function ref_11cf5() {
+function ref_11CF5() {
   self endon("death");
 
   while(isalive(self)) {
@@ -224,12 +224,12 @@ function getcorpstablestate(var_0) {
 
   foreach(var_3 in var_1) {
     if(scripts\engine\utility::is_equal(var_3.type, "Begin")) {
-      ref_11cf4(var_3);
+      ref_11CF4(var_3);
     }
   }
 }
 
-function ref_11c1e() {
+function ref_11C1E() {
   var_0 = getEntArray("minimap_corner", "targetname");
   GscBinSkip1(0x45, 0, (5128.15, 2125.27, 25));
 }
@@ -290,10 +290,10 @@ function monitoraveragevelocityandupdate() {
   level.flare_light_up setlightintensity(0);
   level.flare_light.intensity = undefined;
   level.flare_lifetime = 20;
-  level.ref_13af4 = 0;
+  level.ref_13AF4 = 0;
   level.jumpcomandsregistered = 0;
   level.vfx_htown_stab_blink_2 = 0;
-  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::ref_13af6();
+  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::ref_13AF6();
   createthreatbiasgroup("players");
   createthreatbiasgroup("allies");
   createthreatbiasgroup("axis");
@@ -304,21 +304,21 @@ function monitoraveragevelocityandupdate() {
   thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::starscores();
   thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::openbunkerdoor();
   thread mid_encounter_package_thread();
-  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::ref_13d20();
+  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::ref_13D20();
   thread wavetime();
-  thread ref_12a61();
-  thread ref_11c4a();
-  thread ref_13d1f();
+  thread ref_12A61();
+  thread ref_11C4A();
+  thread ref_13D1F();
   thread chopper_boss_fight_stage_trigger_think();
   thread set_relic_healthpacks();
-  thread ref_1305c();
+  thread ref_1305C();
   thread set_relic_hideobjicons();
   thread playscorestatusdialog();
-  thread ref_12d3c();
+  thread ref_12D3C();
   thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::createheliextractobjectiveicons();
 }
 
-function ref_12d3c() {
+function ref_12D3C() {
   var_0 = scripts\engine\utility::getStructArray("enemy_spawner_defend_right", "targetname");
 
   foreach(var_2 in var_0) {
@@ -328,7 +328,7 @@ function ref_12d3c() {
   }
 }
 
-function ref_11c4a() {
+function ref_11C4A() {
   var_0 = [(-3522, -1400, 94), (-3475, -1400, 94), (-3381, -1400.5, 94), (-3334, -1400.5, 94)];
 
   foreach(var_2 in var_0) {
@@ -358,7 +358,7 @@ function playscorestatusdialog() {
   }
 }
 
-function ref_13d1f() {
+function ref_13D1F() {
   var_0 = getEnt("clip64x64x8", "targetname");
   var_1 = [(-605, 380.5, 58), (-605, 380.5, 100)];
 
@@ -391,7 +391,7 @@ function set_relic_healthpacks() {
   }
 }
 
-function ref_1305c() {
+function ref_1305C() {
   var_0 = getEnt("clip32x32x32", "targetname");
   var_1 = [(-13.5, 682.5, 91), (-13.5, 682.5, 59), (-13.5, 682.5, 26), (19, 682.5, 91), (19, 682.5, 59), (19, 682.5, 26)];
 
@@ -420,7 +420,7 @@ function wavetime() {
   var_0.origin = (1476.15, 2064.08, 25.617);
 }
 
-function ref_12a61() {}
+function ref_12A61() {}
 
 function mid_encounter_package_thread() {
   var_0 = spawn("script_model", (-1461.5, -166.5, 14));
@@ -448,12 +448,12 @@ function monitorcontrolscallback() {
   scripts\cp\laser_traps\cp_laser_traps::add_global_spawn_function("axis", &bomber_radiusdamage);
   scripts\cp\laser_traps\cp_laser_traps::add_global_spawn_function("allies", &brinitloadoutoption);
   thread handle_roof_spawning();
-  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_alley::ref_119e5();
+  thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_alley::ref_119E5();
   thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_alley::brloadoutcratepostcapture();
-  thread ref_1321e("mike14_pickups");
-  thread ref_1321e("res_pickups");
-  ref_1321f();
-  ref_128bb();
+  thread ref_1321E("mike14_pickups");
+  thread ref_1321E("res_pickups");
+  ref_1321F();
+  ref_128BB();
 }
 
 function handle_roof_spawning() {
@@ -476,7 +476,7 @@ function bonuswingamescharge() {
     }
 
     if(!scripts\engine\utility::flag("ai_push_player")) {
-      var_0 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::ref_12bcc(getaiarray("axis"));
+      var_0 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::ref_12BCC(getaiarray("axis"));
       lootchopper_findunoccupiedpatrolzone(var_0);
       scripts\engine\utility::flag_set("ai_push_player");
     }
@@ -526,16 +526,16 @@ function brleaderdialogteam() {
   }
 }
 
-function ref_1321e(var_0) {
+function ref_1321E(var_0) {
   var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
-  var_1 = ref_12bf4(var_1);
+  var_1 = ref_12BF4(var_1);
   var_2 = "iw8_ar_mcharlie_mp+thermal_west01+laserbalanced+fastreload+griphip";
   var_3 = "iw8_sn_mike14_mp+thermaldmr_west01+laserads_bar";
   var_4 = "iw8_ar_mike4_mp+hybrid_thermal+laserbalanced+fastreload+griphip";
   GscBinSkip1(0x45, 0, var_2);
 }
 
-function ref_12bf4(var_0) {
+function ref_12BF4(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -570,12 +570,12 @@ function teamanchoredwidget(var_0) {
   }
 }
 
-function ref_1321f() {
+function ref_1321F() {
   var_0 = [];
   GscBinSkip0(0x2e, var_0.size, "iw8_ar_mcharlie_mp+thermal_west01+laserbalanced+fastreload+griphip+fmj_medium+gunperk_marksman+ammomod_impact+gripangpro+pistolgrip03_mcharlie");
 }
 
-function ref_1238f(var_0) {
+function ref_1238F(var_0) {
   foreach(var_2 in var_0) {
     var_3 = var_2[0];
     var_4 = var_2[1];
@@ -649,17 +649,17 @@ function init_spawners() {
 }
 
 function ref_14379() {
-  scripts\cp\laser_traps\cp_laser_traps::ref_1437a();
+  scripts\cp\laser_traps\cp_laser_traps::ref_1437A();
   scripts\engine\utility::flag_wait("introscreen_over");
   scripts\engine\utility::flag_set("players_connected");
 }
 
-function ref_128bb() {
+function ref_128BB() {
   thread bonuswingamescharge();
   scripts\cp\maps\cp_so_embassy\cp_so_embassy_alley::alley_start();
 }
 
-function ref_134f3() {
+function ref_134F3() {
   var_0 = scripts\engine\utility::getStructArray("ally_spawners_heli", "targetname");
   var_1 = [];
   var_2 = 0;
@@ -690,7 +690,7 @@ function ref_134f3() {
   }
 }
 
-function ref_12f4b() {
+function ref_12F4B() {
   var_0 = scripts\engine\utility::getStruct("exfil_heli_nodes_08", "targetname");
   var_0.origin += (-768, 0, 0);
   var_1 = scripts\engine\utility::getStruct("exfil_heli_nodes_09", "targetname");
@@ -714,7 +714,7 @@ function ref_12f4b() {
   level.onlaststandkillenemy = var_5 scripts\common\vehicle::spawn_vehicle_and_gopath();
   thread givequestrewardgroup();
   thread onkioskpurchaseitem();
-  thread ref_1352a();
+  thread ref_1352A();
   level.onlaststandkillenemy thread scripts\common\vehicle::godon();
   thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::omnvars();
   level.onlaststandkillenemy waittill("goal");
@@ -729,13 +729,13 @@ function ref_12f4b() {
   level.onlaststandkillenemy vehicle_setspeed(5);
   level.onlaststandkillenemy settargetyaw(90);
   level.onlaststandkillenemy setvehgoalpos(level.onlaststandkillenemy.origin + (-75, 70, -320));
-  level.onlaststandkillenemy.ref_13bfe = level.onlaststandkillenemy.origin + (-75, 70, -330);
+  level.onlaststandkillenemy.ref_13BFE = level.onlaststandkillenemy.origin + (-75, 70, -330);
   level.onlaststandkillenemy waittill("near_goal");
-  var_6 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::ref_135eb(level.ref_13de3, "truck_04");
+  var_6 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::ref_135EB(level.ref_13DE3, "truck_04");
   thread skipfriendlyfire();
   scripts\engine\utility::flag_clear("pause_mission_spawning");
   thread audio_chopper_struggling();
-  thread ref_11a6d();
+  thread ref_11A6D();
   scripts\engine\utility::flag_set("exfil_unsafe");
   wait 2;
   thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_defend::play_nags_from_array();
@@ -744,7 +744,7 @@ function ref_12f4b() {
   wait 5;
   thread skipequipmentdropondeath();
 
-  while(level.ref_12dc6.size > 1) {
+  while(level.ref_12DC6.size > 1) {
     wait 0.1;
   }
 
@@ -766,11 +766,11 @@ function ref_12f4b() {
   level thread[[level.endgame]]("allies", level.end_game_string_index["win"]);
 }
 
-function ref_1352a() {
-  var_0 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_134eb("ally_cp_usmc_ar", level.onlaststandkillenemy, 0);
-  var_0 thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_alley::ref_11a6e();
-  var_0 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_134eb("ally_cp_usmc_ar", level.onlaststandkillenemy, 1);
-  var_0 thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_alley::ref_11a6e();
+function ref_1352A() {
+  var_0 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_134EB("ally_cp_usmc_ar", level.onlaststandkillenemy, 0);
+  var_0 thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_alley::ref_11A6E();
+  var_0 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_134EB("ally_cp_usmc_ar", level.onlaststandkillenemy, 1);
+  var_0 thread scripts\cp\maps\cp_so_embassy\cp_so_embassy_alley::ref_11A6E();
 }
 
 function audio_chopper_struggling() {
@@ -837,7 +837,7 @@ function skipequipmentdropondeath() {
   level.onlaststandkillenemy vehicle_setspeed(75);
   level.onlaststandkillenemy setvehgoalpos(var_1.origin + (-75, 70, -150), 1);
   level.onlaststandkillenemy settargetyaw(90);
-  level.onlaststandkillenemy scripts\engine\utility::ref_143b9(8, "goal");
+  level.onlaststandkillenemy scripts\engine\utility::ref_143B9(8, "goal");
   level.onlaststandkillenemy sethoverparams(0, 0, 0);
   level.onlaststandkillenemy vehicle_setspeed(0);
   scripts\engine\utility::flag_wait("exfil_land");
@@ -854,14 +854,14 @@ function ref_14680(var_0) {
 
 function skipburndownforclass() {
   var_0 = level.onlaststandkillenemy gettagorigin("tag_guy5");
-  var_1 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1352b("ally_cp_usmc_ar", var_0, (0, 0, 0), undefined, 1);
+  var_1 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1352B("ally_cp_usmc_ar", var_0, (0, 0, 0), undefined, 1);
   var_1 forceteleport(var_0);
   var_1 linkTo(level.onlaststandkillenemy, "tag_guy5");
   var_1.baseaccuracy = 1.8;
   var_1 allowedstances("crouch");
   wait 0.1;
   var_0 = level.onlaststandkillenemy gettagorigin("tag_guy7");
-  var_2 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1352b("ally_cp_usmc_ar", var_0, (0, 0, 0), undefined, 1);
+  var_2 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1352B("ally_cp_usmc_ar", var_0, (0, 0, 0), undefined, 1);
   var_2 forceteleport(var_0);
   var_2 linkTo(level.onlaststandkillenemy, "tag_guy7");
   var_2.baseaccuracy = 1.8;
@@ -872,36 +872,36 @@ function skipburndownforclass() {
   thread scripts\cp\vehicle::matchdata_logweaponstat(level.onlaststandkillenemy, var_4);
 }
 
-function ref_11a6d() {
+function ref_11A6D() {
   var_0 = spawnStruct();
   var_0.origin = (1756, 2309, 307);
   var_0.angles = (0, 270, 0);
   var_1 = (2648, 2623, 169);
   var_2 = (1750, -165, -10);
-  level.ref_12dc6 = [];
+  level.ref_12DC6 = [];
   var_3 = scripts\engine\utility::spawn_tag_origin((2733, 2051, 320), (0, 270, 0));
-  ref_1353f(var_1, var_3, "enemy_cp_alq_desert_rpg");
+  ref_1353F(var_1, var_3, "enemy_cp_alq_desert_rpg");
   var_4 = getaiarray("axis")[0];
   var_5 = magicbullet("iw8_la_rpapa7_mp", var_0.origin, level.onlaststandkillenemy.origin + (0, 0, -150), var_4);
   var_5 waittill("explode");
   level notify("rocket_impact");
   var_3 = scripts\engine\utility::spawn_tag_origin((2783, 2051, 320), (0, 270, 0));
-  thread ref_1353f(var_1, var_3, "enemy_cp_alq_desert_rpg");
+  thread ref_1353F(var_1, var_3, "enemy_cp_alq_desert_rpg");
   var_3 = scripts\engine\utility::spawn_tag_origin((1717, 2335, 267), (0, 270, 0));
-  thread ref_1353f(var_1, var_3, "enemy_cp_alq_desert_rpg");
+  thread ref_1353F(var_1, var_3, "enemy_cp_alq_desert_rpg");
   var_3 = scripts\engine\utility::spawn_tag_origin((1575, 2301, 565), (0, 270, 0));
-  thread ref_1353f(var_1, var_3, "enemy_cp_alq_desert_lmg");
+  thread ref_1353F(var_1, var_3, "enemy_cp_alq_desert_lmg");
   var_3 = scripts\engine\utility::spawn_tag_origin((1500, 2301, 565), (0, 270, 0));
-  thread ref_1353f(var_1, var_3, "enemy_cp_alq_desert_lmg");
+  thread ref_1353F(var_1, var_3, "enemy_cp_alq_desert_lmg");
   wait 4;
   magicbullet("iw8_la_rpapa7_mp", var_0.origin, level.onlaststandkillenemy.origin + (200, 0, 500));
 }
 
-function ref_1353f(var_0, var_1, var_2) {
-  var_3 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1352b(var_2, var_0, (0, 0, 0), undefined, 1);
+function ref_1353F(var_0, var_1, var_2) {
+  var_3 = scripts\cp\maps\cp_so_embassy\cp_so_embassy_util::ref_1352B(var_2, var_0, (0, 0, 0), undefined, 1);
   var_3.og_fov = 1;
   var_3 allowedstances("prone");
-  level.ref_12dc6[level.ref_12dc6.size] = var_3;
+  level.ref_12DC6[level.ref_12DC6.size] = var_3;
   thread ref_13540();
   wait 1;
   var_3 forceteleport(var_1.origin);
@@ -913,5 +913,5 @@ function ref_1353f(var_0, var_1, var_2) {
 
 function ref_13540() {
   self waittill("death");
-  level.ref_12dc6 = scripts\engine\utility::array_remove(level.ref_12dc6, self);
+  level.ref_12DC6 = scripts\engine\utility::array_remove(level.ref_12DC6, self);
 }

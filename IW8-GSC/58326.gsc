@@ -53,7 +53,7 @@ function xyvelscale_maxheight() {
   var_1.ref = var_0.ref;
   var_1.rallypointhealth = var_0.rallypointhealth;
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("little_bird_mg", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("little_bird_mg", var_1, var_2);
 
   if(isDefined(var_3)) {
     if(isDefined(var_1.ref) && istrue(level.userallypointvehicles) && level.userallypointvehicles != 2) {
@@ -64,7 +64,7 @@ function xyvelscale_maxheight() {
     }
 
     if(istrue(level.ref_13375)) {
-      scripts\mp\gametypes\arm::ref_1413a(var_3, var_3.team);
+      scripts\mp\gametypes\arm::ref_1413A(var_3, var_3.team);
       return;
     }
 
@@ -74,7 +74,7 @@ function xyvelscale_maxheight() {
 
 function xpperplayerpershare(var_0, var_1, var_2, var_3, var_4) {
   if(istrue(level.ref_13375)) {
-    var_0 scripts\mp\gametypes\arm::ref_141ff(var_3.team);
+    var_0 scripts\mp\gametypes\arm::ref_141FF(var_3.team);
     return;
   }
 }

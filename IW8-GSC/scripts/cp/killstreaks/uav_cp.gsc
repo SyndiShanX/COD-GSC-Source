@@ -49,7 +49,7 @@ function init_uav_cp() {
 }
 
 function scriptable_adddamagedcallback() {
-  scripts\cp\utility\spawn_event_aggregator::registeronplayerspawncallback(&ref_131b6);
+  scripts\cp\utility\spawn_event_aggregator::registeronplayerspawncallback(&ref_131B6);
 
   foreach(var_1 in level.players) {
     var_1.radarmode = "normal_radar";
@@ -69,7 +69,7 @@ function spawn_bomb() {
   }
 }
 
-function ref_131b6() {
+function ref_131B6() {
   self.radarmode = "normal_radar";
 }
 
@@ -182,7 +182,7 @@ function setup_radio_tower_uavs(var_0, var_1, var_2) {
   var_9 thread scripts\cp_mp\killstreaks\uav::handlewiretap();
   level notify("uav_update");
   var_27 = level.uavsettings["uav"].timeout;
-  var_9 scripts\engine\utility::ref_143ba(var_27, "death", "uav_disabled");
+  var_9 scripts\engine\utility::ref_143BA(var_27, "death", "uav_disabled");
 
   if(var_9.damagetaken < var_9.maxhealth) {
     var_9 unlink();

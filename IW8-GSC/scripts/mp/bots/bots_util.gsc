@@ -1225,7 +1225,7 @@ function watch_nodes_aborted() {
   self endon("disconnect");
 
   for(;;) {
-    var_0 = scripts\engine\utility::ref_143b9(0.5, "still_watching_nodes");
+    var_0 = scripts\engine\utility::ref_143B9(0.5, "still_watching_nodes");
 
     if(!isDefined(var_0) || var_0 != "still_watching_nodes") {
       thread watch_nodes_stop();
@@ -1545,7 +1545,7 @@ function damagestatedata(var_0) {
   var_3 = 0;
 
   foreach(var_5 in var_1) {
-    var_5.ref_11a53 = 0;
+    var_5.ref_11A53 = 0;
     var_6 = weaponclipsize(var_5);
     var_7 = self getweaponammostock(var_5);
 

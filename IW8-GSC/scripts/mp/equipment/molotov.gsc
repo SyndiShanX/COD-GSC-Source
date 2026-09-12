@@ -6,11 +6,11 @@
 function molotov_init() {
   var_0 = spawnStruct();
   level.molotov = var_0;
-  var_0.ref_11b6e = getdvarint("scr_molotovMaxPools", 100);
-  var_0.ref_11b57 = getdvarint("scr_molotovMaxCastsPerFrame", 8);
+  var_0.ref_11B6E = getdvarint("scr_molotovMaxPools", 100);
+  var_0.ref_11B57 = getdvarint("scr_molotovMaxCastsPerFrame", 8);
   var_0.start_airfield_safehouse = getdvarint("scr_molotovInstantCleanup", 1) > 0;
-  var_0.ref_13f0c = 0;
-  var_0.ref_127e4 = [];
+  var_0.ref_13F0C = 0;
+  var_0.ref_127E4 = [];
   var_0.scriptables = [];
   var_0.triggers = [];
   var_0.frametimestamp = 0;
@@ -20,7 +20,7 @@ function molotov_init() {
 }
 
 function molotov_init_cast_data() {
-  var_0 = ref_11cc2();
+  var_0 = ref_11CC2();
   var_1 = var_0.castdata;
 
   if(!isDefined(var_1)) {
@@ -66,7 +66,7 @@ function molotov_init_cast_data() {
 }
 
 function molotov_init_pool_data() {
-  var_0 = ref_11cc2();
+  var_0 = ref_11CC2();
   var_1 = var_0.pooldata;
 
   if(!isDefined(var_1)) {
@@ -97,7 +97,7 @@ function molotov_init_pool_data() {
 }
 
 function molotov_init_pool_mask() {
-  var_0 = ref_11cc3();
+  var_0 = ref_11CC3();
   var_1 = [];
   GscBinSkip0(0x2e, 4, "coreCenter");
 }
@@ -119,9 +119,9 @@ function molotov_used(var_0) {
   var_0 waittill("missile_stuck", var_4, var_5, var_6, var_7, var_8, var_9);
   var_0.surfacetype = var_6;
 
-  if(isDefined(level.ref_132a4) && [[level.ref_132a4.make_control_station_interaction]](var_0)) {
-    if(isDefined(level.ref_132a4) && isDefined(level.ref_132a4.setupbobbingboatmultiple)) {
-      [[level.ref_132a4.setupbobbingboatmultiple]](var_0);
+  if(isDefined(level.ref_132A4) && [[level.ref_132A4.make_control_station_interaction]](var_0)) {
+    if(isDefined(level.ref_132A4) && isDefined(level.ref_132A4.setupbobbingboatmultiple)) {
+      [[level.ref_132A4.setupbobbingboatmultiple]](var_0);
       return;
     }
   }
@@ -171,7 +171,7 @@ function molotov_stuck(var_0, var_1, var_2, var_3) {
 function molotov_stuck_player(var_0, var_1, var_2, var_3) {
   scripts\mp\weapons::grenadestuckto(var_0, var_1);
 
-  if(!isDefined(level.ref_132a4) || ![[level.ref_132a4.getheliflyheight]](var_1)) {
+  if(!isDefined(level.ref_132A4) || ![[level.ref_132A4.getheliflyheight]](var_1)) {
     thread molotov_burn_for_time(var_1, 6, self, var_0);
   }
 
@@ -179,7 +179,7 @@ function molotov_stuck_player(var_0, var_1, var_2, var_3) {
   var_0 setscriptablepartstate("effects", "explode", 0);
   var_0 missilehidetrail();
 
-  if(!isDefined(level.ref_132a4) || ![[level.ref_132a4.gethelinextgroupafterwait]](var_1)) {
+  if(!isDefined(level.ref_132A4) || ![[level.ref_132A4.gethelinextgroupafterwait]](var_1)) {
     var_3 *= (0, 0, 1);
     var_4 = var_0.origin;
     var_5 = (0, 0, -1);
@@ -344,7 +344,7 @@ function molotov_simulate_impact(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_22 = molotov_create_branch(var_18, var_20, var_21, undefined, var_13, var_34, var_3, 0, var_26, var_27);
   var_18.branches[var_18.branches.size] = var_22;
-  ref_11cc7(var_18);
+  ref_11CC7(var_18);
 
   foreach(var_22 in var_18.branches) {
     thread molotov_start_branch();
@@ -389,7 +389,7 @@ function molotov_create_shared_data(var_0, var_1, var_2, var_3) {
   var_4.burnsource = var_2;
   var_4.burnid = var_3;
   var_4.branches = [];
-  var_4.ref_12f6e = 0;
+  var_4.ref_12F6E = 0;
   var_4.caststotal = 0;
   var_4.caststhisframe = 0;
   var_4.frametimestamp = gettime();
@@ -398,66 +398,66 @@ function molotov_create_shared_data(var_0, var_1, var_2, var_3) {
   return var_4;
 }
 
-function ref_11cc7(var_0) {
+function ref_11CC7(var_0) {
   var_0.caststotal++;
   var_0.caststhisframe++;
   var_0.frametimestamp = gettime();
-  var_1 = ref_11cc2();
+  var_1 = ref_11CC2();
   var_1.caststhisframe++;
 }
 
-function ref_11cc8(var_0) {
-  var_0.ref_12f6e++;
-  var_1 = ref_11cc2();
+function ref_11CC8(var_0) {
+  var_0.ref_12F6E++;
+  var_1 = ref_11CC2();
   var_1.scriptables[self.id] = self;
 
-  if(var_1.scriptables.size > var_1.ref_11b6e) {
-    ref_11cbc();
+  if(var_1.scriptables.size > var_1.ref_11B6E) {
+    ref_11CBC();
     return;
   }
 }
 
-function ref_11cc9(var_0) {
-  var_1 = ref_11cc2();
+function ref_11CC9(var_0) {
+  var_1 = ref_11CC2();
   var_1.triggers[self.id] = self;
 
-  if(var_1.triggers.size > var_1.ref_11b6e) {
-    ref_11cbd();
+  if(var_1.triggers.size > var_1.ref_11B6E) {
+    ref_11CBD();
     return;
   }
 }
 
-function ref_11cbf() {
-  var_0 = ref_11cc2();
+function ref_11CBF() {
+  var_0 = ref_11CC2();
   var_0.scriptables[self.id] = undefined;
   var_1 = var_0.triggers[self.id];
 
   if(!isDefined(var_1)) {
-    var_0.ref_127e4 = scripts\engine\utility::array_remove(var_0.ref_127e4, self.id);
+    var_0.ref_127E4 = scripts\engine\utility::array_remove(var_0.ref_127E4, self.id);
   }
 
   self notify("death");
   self freescriptable();
 }
 
-function ref_11cc0() {
-  var_0 = ref_11cc2();
+function ref_11CC0() {
+  var_0 = ref_11CC2();
   var_0.triggers[self.id] = undefined;
   var_1 = var_0.scriptables[self.id];
 
   if(!isDefined(var_1)) {
-    var_0.ref_127e4 = scripts\engine\utility::array_remove(var_0.ref_127e4, self.id);
+    var_0.ref_127E4 = scripts\engine\utility::array_remove(var_0.ref_127E4, self.id);
   }
 
   self delete();
 }
 
-function ref_11cbc(var_0) {
-  var_1 = ref_11cc2();
+function ref_11CBC(var_0) {
+  var_1 = ref_11CC2();
   var_2 = undefined;
   var_3 = undefined;
 
-  foreach(var_3 in var_1.ref_127e4) {
+  foreach(var_3 in var_1.ref_127E4) {
     var_2 = var_1.scriptables[var_3];
 
     if(isDefined(var_2)) {
@@ -468,17 +468,17 @@ function ref_11cbc(var_0) {
   var_0 = istrue(var_0) || var_1.start_airfield_safehouse;
 
   if(!isDefined(var_2)) {
-    ref_11cbe(var_3, var_0);
+    ref_11CBE(var_3, var_0);
     return;
   }
 }
 
-function ref_11cbd(var_0) {
-  var_1 = ref_11cc2();
+function ref_11CBD(var_0) {
+  var_1 = ref_11CC2();
   var_2 = undefined;
   var_3 = undefined;
 
-  foreach(var_3 in var_1.ref_127e4) {
+  foreach(var_3 in var_1.ref_127E4) {
     var_2 = var_1.triggers[var_3];
 
     if(isDefined(var_2)) {
@@ -489,36 +489,36 @@ function ref_11cbd(var_0) {
   var_0 = istrue(var_0) || var_1.start_airfield_safehouse;
 
   if(isDefined(var_2)) {
-    ref_11cbe(var_3, var_0);
+    ref_11CBE(var_3, var_0);
     return;
   }
 }
 
-function ref_11cbe(var_0, var_1) {
-  var_2 = ref_11cc2();
+function ref_11CBE(var_0, var_1) {
+  var_2 = ref_11CC2();
   var_3 = var_2.scriptables[var_0];
 
   if(isDefined(var_3)) {
     if(!istrue(var_1)) {
       var_2.scriptables[var_0] = undefined;
       var_2.triggers[var_0] = undefined;
-      var_2.ref_127e4 = scripts\engine\utility::array_remove(var_2.ref_127e4, var_0);
+      var_2.ref_127E4 = scripts\engine\utility::array_remove(var_2.ref_127E4, var_0);
       thread molotov_pool_end();
       return;
     }
 
-    thread ref_11cbf();
+    thread ref_11CBF();
   }
 
   var_4 = var_2.triggers[var_0];
 
   if(isDefined(var_4)) {
-    thread ref_11cc0();
+    thread ref_11CC0();
     return;
   }
 }
 
-function ref_11cb3(var_0) {
+function ref_11CB3(var_0) {
   if(var_0.frametimestamp < gettime()) {
     var_0.frametimestamp = gettime();
     var_0.caststhisframe = 0;
@@ -528,14 +528,14 @@ function ref_11cb3(var_0) {
     return false;
   }
 
-  var_1 = ref_11cc2();
+  var_1 = ref_11CC2();
 
   if(var_1.frametimestamp < gettime()) {
     var_1.frametimestamp = gettime();
     var_1.caststhisframe = 0;
   }
 
-  if(var_1.caststhisframe >= var_1.ref_11b57) {
+  if(var_1.caststhisframe >= var_1.ref_11B57) {
     return false;
   }
 
@@ -549,7 +549,7 @@ function molotov_shared_data_is_complete(var_0) {
 
   if(self.caststotal >= var_2) {
     var_1 = 1;
-  } else if(self.ref_12f6e >= var_3) {
+  } else if(self.ref_12F6E >= var_3) {
     var_1 = 1;
   } else if(istrue(var_0)) {
     var_4 = 1;
@@ -568,28 +568,28 @@ function molotov_shared_data_is_complete(var_0) {
 
   if(var_1) {
     self.iscomplete = 1;
-    ref_11cca();
+    ref_11CCA();
     self.branches = [];
   }
 
   return var_1;
 }
 
-function ref_11cca() {
+function ref_11CCA() {
   var_0 = self;
 
   if(isDefined(self.shareddata)) {
     var_0 = self.shareddata;
   }
 
-  if(!isDefined(var_0.ref_11fc8)) {
-    var_0.ref_11fc8 = [];
+  if(!isDefined(var_0.ref_11FC8)) {
+    var_0.ref_11FC8 = [];
   }
 
   foreach(var_2 in self.branches) {
     foreach(var_4 in var_2.ents) {
       if(isDefined(var_4)) {
-        var_0.ref_11fc8[var_0.ref_11fc8.size] = var_4;
+        var_0.ref_11FC8[var_0.ref_11FC8.size] = var_4;
       }
     }
   }
@@ -652,7 +652,7 @@ function molotov_start_branch() {
       break;
     }
 
-    if(!ref_11cb3(self.shareddata)) {
+    if(!ref_11CB3(self.shareddata)) {
       waitframe();
       continue;
     }
@@ -843,7 +843,7 @@ function molotov_branch_is_complete(var_0, var_1) {
 
   if(var_2) {
     self.iscomplete = 1;
-    ref_11cca();
+    ref_11CCA();
     self.branches = [];
   }
 
@@ -851,7 +851,7 @@ function molotov_branch_is_complete(var_0, var_1) {
 }
 
 function molotov_branch_register_cast(var_0, var_1, var_2) {
-  ref_11cc7(self.shareddata);
+  ref_11CC7(self.shareddata);
   self.casts++;
 
   if(isDefined(var_1)) {
@@ -892,7 +892,7 @@ function molotov_create_pool(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
     var_11 validatecollision(var_2, var_12, var_13);
   }
 
-  thread ref_11ccc();
+  thread ref_11CCC();
   return var_11;
 }
 
@@ -913,8 +913,8 @@ function molotov_branch_create_pool(var_0, var_1, var_2) {
   var_7 = molotov_create_pool(var_0, var_1, var_2, self.shareddata.owner, self.shareddata.burnsource, self.shareddata.burnid, var_6, self.pooldata, var_3);
   self.preventstarttime = var_6;
   self.ents[self.ents.size] = var_7;
-  var_7.id = ref_11cc4();
-  ref_11cc8(var_7, self.shareddata);
+  var_7.id = ref_11CC4();
+  ref_11CC8(var_7, self.shareddata);
   return var_7;
 }
 
@@ -940,7 +940,7 @@ function molotov_pool_start() {
     return;
   }
 
-  thread ref_11cc6(level, var_1);
+  thread ref_11CC6(level, var_1);
 }
 
 function molotov_watch_pool() {
@@ -980,38 +980,38 @@ function molotov_pool_end(var_0) {
   }
 
   if(isDefined(self.trigger)) {
-    thread ref_11cc0();
+    thread ref_11CC0();
   }
 
   if(!istrue(var_0)) {
     wait 3.5;
   }
 
-  thread ref_11cbf();
+  thread ref_11CBF();
 }
 
-function ref_11cc6(var_0, var_1) {
+function ref_11CC6(var_0, var_1) {
   if(isDefined(var_0)) {
-    thread ref_11cc0();
+    thread ref_11CC0();
   }
 
-  var_2 = ref_11cc2();
+  var_2 = ref_11CC2();
   var_2.scriptables[var_1] = undefined;
   var_0 = var_2.triggers[var_1];
 
   if(!isDefined(var_0)) {
-    var_2.ref_127e4 = scripts\engine\utility::array_remove(var_2.ref_127e4, var_1);
+    var_2.ref_127E4 = scripts\engine\utility::array_remove(var_2.ref_127E4, var_1);
     return;
   }
 }
 
-function ref_11ccc() {
+function ref_11CCC() {
   self endon("death");
-  ref_11ccd();
-  thread ref_11cbf();
+  ref_11CCD();
+  thread ref_11CBF();
 }
 
-function ref_11ccd() {
+function ref_11CCD() {
   self.owner endon("disconnect");
   self.owner endon("joined_team");
 
@@ -1046,7 +1046,7 @@ function molotov_create_pool_trigger(var_0, var_1, var_2) {
   thread molotov_watch_pool_trigger_enter();
   thread molotov_watch_pool_trigger_exit();
   thread molotov_cleanup_pool_trigger();
-  ref_11cc9(var_4);
+  ref_11CC9(var_4);
   return var_4;
 }
 
@@ -1122,7 +1122,7 @@ function molotov_cleanup_pool_trigger() {
   }
 
   if(isDefined(self.trigger)) {
-    thread ref_11cc0();
+    thread ref_11CC0();
     return;
   }
 }
@@ -1142,7 +1142,7 @@ function molotov_cleanup_pool_trigger_end_early() {
 }
 
 function molotov_pool_update_scriptable() {
-  var_0 = ref_11cc3();
+  var_0 = ref_11CC3();
   var_1 = var_0.scriptablestates[self.poolmask];
   self setscriptablepartstate("effects", var_1, 0);
 }
@@ -1247,36 +1247,36 @@ function molotov_cleanup_burn_source() {
 
 function molotov_cleanup_grenade(var_0) {
   var_0 endon("death");
-  scripts\engine\utility::ref_143ba(7, "disconnect", "joined_team");
+  scripts\engine\utility::ref_143BA(7, "disconnect", "joined_team");
   var_0 delete();
 }
 
-function ref_11cc2() {
+function ref_11CC2() {
   return level.molotov;
 }
 
-function ref_11cc3() {
-  var_0 = ref_11cc2();
+function ref_11CC3() {
+  var_0 = ref_11CC2();
   var_1 = var_0.pooldata;
   return var_1;
 }
 
-function ref_11cc1() {
-  var_0 = ref_11cc2();
+function ref_11CC1() {
+  var_0 = ref_11CC2();
   var_1 = var_0.castdata;
   return var_1;
 }
 
-function ref_11cc4() {
-  var_0 = ref_11cc2();
-  var_1 = var_0.ref_13f0c;
-  var_0.ref_13f0c++;
-  var_0.ref_127e4 = scripts\engine\utility::array_add(var_0.ref_127e4, var_1);
+function ref_11CC4() {
+  var_0 = ref_11CC2();
+  var_1 = var_0.ref_13F0C;
+  var_0.ref_13F0C++;
+  var_0.ref_127E4 = scripts\engine\utility::array_add(var_0.ref_127E4, var_1);
   return var_1;
 }
 
 function molotov_get_cast_data(var_0) {
-  var_1 = ref_11cc1();
+  var_1 = ref_11CC1();
   var_2 = spawnStruct();
   var_2.distforward = var_1.distforward[var_0];
   var_2.distdown = var_1.distdown[var_0];
@@ -1300,7 +1300,7 @@ function molotov_get_cast_data(var_0) {
 }
 
 function molotov_get_pool_data(var_0) {
-  var_1 = ref_11cc3();
+  var_1 = ref_11CC3();
   var_2 = spawnStruct();
   var_2.typeid = var_0;
   var_2.triggerradius = var_1.triggerradius[var_0];
@@ -1361,7 +1361,7 @@ function molotov_rebuild_angles_up_forward(var_0, var_1) {
 function molotov_start_burning(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {}
 
-  if(isDefined(level.ref_132a4) && [[level.ref_132a4.getheliflyheight]](self)) {
+  if(isDefined(level.ref_132A4) && [[level.ref_132A4.getheliflyheight]](self)) {
     return;
   }
 
@@ -1582,7 +1582,7 @@ function molotov_burning_source_is_valid() {
 }
 
 function molotov_get_next_burning_id() {
-  var_0 = ref_11cc2();
+  var_0 = ref_11CC2();
 
   if(!isDefined(var_0.burningid)) {
     var_0.burningid = 0;
@@ -1673,12 +1673,12 @@ function molotov_end_fx() {
   self.ref_12743 = undefined;
 }
 
-function ref_11cb6() {
+function ref_11CB6() {
   self notify("molotov_clear_fx");
   thread molotov_end_fx();
 }
 
-function ref_11cb4(var_0, var_1) {
+function ref_11CB4(var_0, var_1) {
   var_0 notify("cleanup_branch");
 
   if(isDefined(var_0.ents)) {
@@ -1692,16 +1692,16 @@ function ref_11cb4(var_0, var_1) {
   }
 }
 
-function ref_11cb5(var_0, var_1) {
+function ref_11CB5(var_0, var_1) {
   if(isDefined(var_0.shareddata)) {
     if(isDefined(var_0.shareddata.branches)) {
       foreach(var_3 in var_0.shareddata.branches) {
-        ref_11cb4(var_3, var_1);
+        ref_11CB4(var_3, var_1);
       }
     }
 
-    if(isDefined(var_0.shareddata.ref_11fc8)) {
-      foreach(var_6 in var_0.shareddata.ref_11fc8) {
+    if(isDefined(var_0.shareddata.ref_11FC8)) {
+      foreach(var_6 in var_0.shareddata.ref_11FC8) {
         if(isDefined(var_6)) {
           thread molotov_pool_end(var_6);
         }

@@ -35,7 +35,7 @@ function isinvehicle(var_0) {
   }
 
   if(istrue(var_0)) {
-    if(isDefined(self.ref_1425d) && isDefined(self.ref_1425d.vehiclename)) {
+    if(isDefined(self.ref_1425D) && isDefined(self.ref_1425D.vehiclename)) {
       return true;
     }
   }
@@ -98,7 +98,7 @@ function watchthermalinputchange() {
   for(;;) {
     var_0 = getthermalswitchplayercommand();
     self notifyonplayercommand("switch_thermal_mode", var_0);
-    var_1 = scripts\engine\utility::ref_143b4("input_type_changed", "thermal_handling_ended");
+    var_1 = scripts\engine\utility::ref_143B4("input_type_changed", "thermal_handling_ended");
     self notifyonplayercommandremove("switch_thermal_mode", var_0);
 
     if(!isDefined(var_1) || var_1 == "thermal_handling_ended") {
@@ -210,46 +210,46 @@ function ref_12510() {
 }
 
 function temp_debug_wait_and_stop_music_loop() {
-  level.ref_126c0 = [];
+  level.ref_126C0 = [];
 }
 
 function being_kicked_from_inactivity() {
   if(!self clearvehicleturretsticker()) {
-    level.ref_126c0[self getxuid()] = self;
+    level.ref_126C0[self getxuid()] = self;
     return;
   }
 }
 
-function ref_12c03() {
-  level.ref_126c0[self getxuid()] = undefined;
+function ref_12C03() {
+  level.ref_126C0[self getxuid()] = undefined;
 }
 
 function relic_nuketimer_timer() {
-  return level.ref_126c0;
+  return level.ref_126C0;
 }
 
 function allowunresolvedcollision() {
-  if(!isDefined(self.ref_125cd)) {
-    self.ref_125cd = 0;
+  if(!isDefined(self.ref_125CD)) {
+    self.ref_125CD = 0;
   }
 
-  if(self.ref_125cd == 0) {
+  if(self.ref_125CD == 0) {
     self playerhide();
   }
 
-  self.ref_125cd++;
+  self.ref_125CD++;
 }
 
 function allplayers_clearphysicaldof() {
-  if(isDefined(self.ref_125cd)) {
-    if(self.ref_125cd == 1) {
+  if(isDefined(self.ref_125CD)) {
+    if(self.ref_125CD == 1) {
       self playershow();
     }
 
-    self.ref_125cd--;
+    self.ref_125CD--;
 
-    if(self.ref_125cd <= 0) {
-      self.ref_125cd = undefined;
+    if(self.ref_125CD <= 0) {
+      self.ref_125CD = undefined;
       return;
     }
 
@@ -259,8 +259,8 @@ function allplayers_clearphysicaldof() {
   self playershow();
 }
 
-function ref_125d0() {
-  self.ref_125cd = undefined;
+function ref_125D0() {
+  self.ref_125CD = undefined;
 
   if(!isDefined(level.ref_12693)) {
     level.ref_12693 = getdvarint("scr_playerShowOnReset", 0);

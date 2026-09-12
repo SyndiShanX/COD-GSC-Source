@@ -100,7 +100,7 @@ function set_proto_values(var_0, var_1) {
   var_5 thread scripts\cp\cp_convoy_manager::show_objective_icon(1);
   level thread scripts\cp\cp_vo::try_to_play_vo_on_team("dx_cps_ovl_convoy_update_10", "allies", 1);
   var_5 waittill("convoy_center_death");
-  var_5 scripts\engine\utility::ref_143b9(25, "convoy_all_loot_taken");
+  var_5 scripts\engine\utility::ref_143B9(25, "convoy_all_loot_taken");
   var_5 thread scripts\cp\cp_convoy_manager::set_despawn_at_distance(1);
   var_5 thread scripts\cp\cp_convoy_manager::set_despawn_distance(7000);
   thread reset_convoy_soon();

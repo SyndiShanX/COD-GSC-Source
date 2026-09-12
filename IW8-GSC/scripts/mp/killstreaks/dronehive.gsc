@@ -123,14 +123,14 @@ function rundronehive(var_0, var_1, var_2, var_3) {
   thread watchhostmigrationstartedinit(var_10);
   thread watchhostmigrationfinishedinit(var_10);
   var_10 thread scripts\mp\utility\killstreak::watchsupertrophynotify(var_0);
-  var_0 scripts\common\utility::ref_13e0a(level.ref_11b2a, var_2, var_10.origin);
+  var_0 scripts\common\utility::ref_13E0A(level.ref_11B2A, var_2, var_10.origin);
   var_11 = 0;
   var_10.missilesleft = 2;
   var_12 = 2;
   var_0 setclientomnvar("ui_predator_missiles_left", var_10.missilesleft);
 
   for(;;) {
-    var_13 = var_10 scripts\engine\utility::ref_143ad("death", "missileTargetSet");
+    var_13 = var_10 scripts\engine\utility::ref_143AD("death", "missileTargetSet");
     scripts\mp\hostmigration::waittillhostmigrationdone();
 
     if(istrue(var_10.unlimitedammo)) {
@@ -517,7 +517,7 @@ function applygasdamageovertime(var_0, var_1, var_2) {
 
   while(var_2 istouching(self)) {
     var_2 dodamage(20, self.origin, var_0, self, "MOD_EXPLOSIVE", var_1);
-    var_3 = scripts\engine\utility::ref_143b9(0.5, "death");
+    var_3 = scripts\engine\utility::ref_143B9(0.5, "death");
 
     if(var_3 == "death") {
       break;

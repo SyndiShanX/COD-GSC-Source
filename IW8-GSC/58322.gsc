@@ -45,5 +45,5 @@ function get_player_drone() {
   var_1 = spawnStruct();
   scripts\cp_mp\vehicles\vehicle_tracking::copyvehiclespawndata(var_0, var_1);
   var_2 = spawnStruct();
-  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421c("cargo_truck_susp_aa", var_1, var_2);
+  var_3 = scripts\cp_mp\vehicles\vehicle_spawn::ref_1421C("cargo_truck_susp_aa", var_1, var_2);
 }

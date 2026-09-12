@@ -5,14 +5,14 @@
 
 function main() {
   setup_callbacks();
-  ref_131dd();
+  ref_131DD();
 }
 
 function setup_callbacks() {
   level.bot_funcs["gametype_think"] = &currenttime_bonus;
 }
 
-function ref_131dd() {}
+function ref_131DD() {}
 
 function currenttime_bonus() {
   self notify("bot_brtdm_think");

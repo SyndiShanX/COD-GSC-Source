@@ -39,7 +39,7 @@ function getsharedfunc(var_0, var_1) {
   return level.sharedfuncs[var_0][var_1];
 }
 
-function ref_140de(var_0, var_1, var_2, var_3) {
+function ref_140DE(var_0, var_1, var_2, var_3) {
   if(issharedfuncdefined(var_0, var_1)) {
     var_4 = getsharedfunc(var_0, var_1);
     var_5 = undefined;

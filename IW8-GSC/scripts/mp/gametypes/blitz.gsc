@@ -497,7 +497,7 @@ function onpickup(var_0, var_1, var_2) {
     level.closecapturekiller[var_1.team] = undefined;
     var_1 thread scripts\mp\utility\points::giveunifiedpoints("flag_return");
     thread returnflag(var_4);
-    var_1 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "obj_return", var_1.origin);
+    var_1 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "obj_return", var_1.origin);
     scripts\mp\utility\sound::playsoundonplayers("mp_obj_returned", var_4);
     scripts\mp\utility\sound::playsoundonplayers("mp_obj_returned", scripts\mp\utility\game::getotherteam(var_4)[0]);
     scripts\mp\utility\dialog::leaderdialog("ourblitzflag_return", var_4, "status");
@@ -559,7 +559,7 @@ function onpickup(var_0, var_1, var_2) {
     var_1 thread scripts\mp\utility\points::giveunifiedpoints("flag_grab");
   }
 
-  var_1 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "pickup", var_1.origin);
+  var_1 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "pickup", var_1.origin);
   self.previouscarrier = var_1;
 
   if(level.codcasterenabled) {
@@ -705,7 +705,7 @@ function onuse(var_0) {
     thread scripts\mp\hud_util::teamplayercardsplash("callout_flagcapture", var_1);
     var_1 thread scripts\mp\awards::givemidmatchaward("mode_ctf_cap");
     var_1 notify("objective", "captured");
-    var_1 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_1.origin);
+    var_1 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_1.origin);
 
     if(level.codcasterenabled) {
       var_1 setgametypevip(0);
@@ -859,7 +859,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       var_1 thread scripts\mp\awards::givemidmatchaward("mode_ctf_kill_carrier");
       var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
       var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
-      thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "carrying");
+      thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "carrying");
       var_10 = 1;
     }
 
@@ -882,12 +882,12 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 
       if(var_14) {
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
-        thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "defending");
+        thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "defending");
       } else if(var_15) {
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
         var_1 scripts\mp\utility\stats::incpersstat("defends", 1);
         var_1 scripts\mp\persistence::statsetchild("round", "defends", var_1.pers["defends"]);
-        thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "assaulting");
+        thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "assaulting");
       }
     }
   }

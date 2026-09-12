@@ -6,7 +6,7 @@
 function startarmsracedef2obj() {
   var_0 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle("veh_indigo", 1);
   var_0.destroycallback = &start_trap_room_combat;
-  var_0.ref_13e92 = "tur_gun_indigo_mp";
+  var_0.ref_13E92 = "tur_gun_indigo_mp";
   startchallengetimer();
   startbluntwatchvfx();
   startcheck();
@@ -49,7 +49,7 @@ function startarmsracedef2obj() {
 }
 
 function startbmoexfilprocess() {
-  thread ref_1327d();
+  thread ref_1327D();
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("veh_indigo", "initLate")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("veh_indigo", "initLate")]]();
@@ -87,8 +87,8 @@ function startchallengetimer() {
   var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getleveldataforseat("veh_indigo", var_3, 1);
   var_4.seatswitcharray = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_generateseatswitcharray(var_3, var_2);
   var_4.exitids = ["back_left", "back_right", "back"];
-  var_4.restrictions = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141d8();
-  var_4.ref_13e8a = getcompleteweaponname("tur_gun_indigo_mp");
+  var_4.restrictions = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141D8();
+  var_4.ref_13E8A = getcompleteweaponname("tur_gun_indigo_mp");
   var_4.animtag = "tag_seat_0";
   var_4.ref_12023 = "ping_vehicle_pilot";
   var_3 = "gunner";
@@ -102,41 +102,41 @@ function startchallengetimer() {
 
 function startbluntwatchvfx() {
   var_0 = scripts\cp_mp\vehicles\vehicle_interact::vehicle_interact_getleveldataforvehicle("veh_indigo", 1);
-  scripts\cp_mp\vehicles\vehicle_interact::ref_1419d("veh_indigo", "single", ["pilot", "gunner"]);
+  scripts\cp_mp\vehicles\vehicle_interact::ref_1419D("veh_indigo", "single", ["pilot", "gunner"]);
 }
 
 function startcheck() {
-  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427e("veh_indigo", 1);
+  var_0 = scripts\cp_mp\utility\vehicle_omnvar_utility::ref_1427E("veh_indigo", 1);
   var_0.id = 27;
   var_0.seatids["pilot"] = 0;
   var_0.seatids["gunner"] = 1;
-  var_0.ref_12da2[0] = 0;
-  var_0.ref_12da2[1] = 1;
-  var_0.ref_12da3["pilot"]["little_bird_mp"] = 0;
-  var_0.ref_12da3["pilot"]["tur_gun_indigo_mp"] = 1;
-  var_0.ref_12da3["gunner"]["little_bird_mp"] = 0;
-  var_0.ref_12da3["gunner"]["tur_gun_indigo_mp"] = 1;
+  var_0.ref_12DA2[0] = 0;
+  var_0.ref_12DA2[1] = 1;
+  var_0.ref_12DA3["pilot"]["little_bird_mp"] = 0;
+  var_0.ref_12DA3["pilot"]["tur_gun_indigo_mp"] = 1;
+  var_0.ref_12DA3["gunner"]["little_bird_mp"] = 0;
+  var_0.ref_12DA3["gunner"]["tur_gun_indigo_mp"] = 1;
 }
 
 function startarmsracedef4obj() {
   level.startplunderextractiontimers = getdvarfloat("scr_br_indigo_health_override", 3950);
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1416c("veh_indigo", level.startplunderextractiontimers, undefined, undefined, undefined, 8);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1416C("veh_indigo", level.startplunderextractiontimers, undefined, undefined, undefined, 8);
   var_0 = scripts\cp_mp\vehicles\vehicle_damage::vehicle_damage_getleveldataforvehicle("veh_indigo");
   var_0.class = "heavy";
-  var_1 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414d("veh_indigo", "heavy");
+  var_1 = scripts\cp_mp\vehicles\vehicle_damage::ref_1414D("veh_indigo", "heavy");
   var_1.ref_12024 = &starthacktimer;
-  var_1.ref_1202d = &startholowatchvfx;
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1413d("veh_indigo");
+  var_1.ref_1202D = &startholowatchvfx;
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1413D("veh_indigo");
   scripts\cp_mp\vehicles\vehicle_damage::ref_14178("veh_indigo", 17);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14175("veh_indigo", &starting_boxes);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14171("veh_indigo", &start_silo_thrust_menu);
   scripts\cp_mp\vehicles\vehicle_damage::ref_14173("veh_indigo", "pilot", getdvarfloat("indigo_occupant_damage_scale", 0.7));
   scripts\cp_mp\vehicles\vehicle_damage::ref_14172("veh_indigo", "pilot", getdvarfloat("indigo_occupant_damage_clamp", 15));
-  scripts\cp_mp\vehicles\vehicle_damage::ref_1417b("little_bird_mp", 5);
+  scripts\cp_mp\vehicles\vehicle_damage::ref_1417B("little_bird_mp", 5);
 }
 
 function startarmsracedef3obj() {
-  var_0 = _calloutmarkerping_predicted_log::ref_1410f("veh_indigo", 1);
+  var_0 = _calloutmarkerping_predicted_log::ref_1410F("veh_indigo", 1);
   var_0.challengeevaluator = 2;
   var_0.keycardlocs_chosen = 0.75;
   var_0.is_using_stealth_debug = 350;
@@ -156,7 +156,7 @@ function startarmsraceopencrateobj() {
 
 function start_vault_assault_retrieve_saw() {
   var_0 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle("veh_indigo");
-  return var_0.ref_13e92;
+  return var_0.ref_13E92;
 }
 
 function start_silo_jump_menu(var_0, var_1) {
@@ -183,12 +183,12 @@ function start_silo_jump_menu(var_0, var_1) {
   scripts\cp_mp\vehicles\vehicle::ref_14207(var_2, var_5, getcompleteweaponname(var_3));
   scripts\cp_mp\vehicles\vehicle::ref_14138(var_2, "veh_indigo", var_0);
   var_2.objweapon = getcompleteweaponname("little_bird_mp");
-  var_2.ref_13e92 = var_3;
-  var_2.ref_11b7b = 3;
+  var_2.ref_13E92 = var_3;
+  var_2.ref_11B7B = 3;
   var_2.minigunbackup = level.startmatchobjectiveicons;
   var_2.shouldmodeplayfinalmoments = 0;
   thread startpayloadreturnobj();
-  _calloutmarkerping_predicted_timeout::ref_1412b(var_2);
+  _calloutmarkerping_predicted_timeout::ref_1412B(var_2);
   scripts\cp_mp\vehicles\vehicle::ref_14139(var_2, var_0);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("veh_indigo", "create")) {
@@ -317,7 +317,7 @@ function start_smoke_door_fx() {
 }
 
 function starting_boxes(var_0) {
-  if(scripts\cp_mp\vehicles\vehicle_interact::ref_141ac(self, "armor")) {
+  if(scripts\cp_mp\vehicles\vehicle_interact::ref_141AC(self, "armor")) {
     var_0.damage *= start_trap_timer();
   }
 
@@ -345,7 +345,7 @@ function startholowatchvfx(var_0, var_1) {
   scripts\cp_mp\vehicles\vehicle_damage::ref_14169(var_0, var_1);
 }
 
-function ref_1327d() {
+function ref_1327D() {
   level.startjuggdelivery = spawnStruct();
   level.startjuggdelivery.powers = [];
   bhadriotshield(level.startjuggdelivery, "pilotgunner", "+attack", &startptui);
@@ -453,7 +453,7 @@ function start_timer(var_0, var_1, var_2, var_3, var_4) {
 
   if(istrue(level.startofxptime)) {
     init_respawns(var_3);
-    thread ref_1315f();
+    thread ref_1315F();
   }
 
   thread start_safehouse_quarry();
@@ -462,17 +462,17 @@ function start_timer(var_0, var_1, var_2, var_3, var_4) {
     thread ref_14231(var_3);
     thread ref_12635(var_3);
     thread staticcircle();
-    scripts\cp_mp\vehicles\vehicle_occupancy::ref_141dc(var_3, var_4);
-    scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_giveturret(var_3, var_0.ref_13e92, var_4, 1);
+    scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DC(var_3, var_4);
+    scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_giveturret(var_3, var_0.ref_13E92, var_4, 1);
   }
 
   if(var_1 == "gunner") {
-    scripts\cp_mp\vehicles\vehicle_occupancy::ref_141dc(var_3, var_4);
+    scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DC(var_3, var_4);
     return;
   }
 
   if(isDefined(var_2) && var_2 == "gunner") {
-    scripts\cp_mp\vehicles\vehicle_occupancy::ref_141dc(var_3, var_4);
+    scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DC(var_3, var_4);
     return;
   }
 }
@@ -507,7 +507,7 @@ function start_target_move_loop(var_0, var_1, var_2, var_3, var_4) {
   if(!istrue(var_4.playerdisconnect) && !istrue(var_4.playerdeath)) {
     if(var_1 == "pilot") {
       startingcodephone(var_3);
-      scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_taketurret(var_3, var_0, var_0.ref_13e92, var_4, 1);
+      scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_taketurret(var_3, var_0, var_0.ref_13E92, var_4, 1);
       return;
     }
 
@@ -541,14 +541,14 @@ function start_timed_event_on_detection(var_0, var_1, var_2, var_3, var_4) {
     }
 
     thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_disablefirefortime(var_3, 0);
-    var_7 = scripts\cp_mp\vehicles\vehicle::ref_14192(var_0, var_0.ref_13e92);
+    var_7 = scripts\cp_mp\vehicles\vehicle::ref_14192(var_0, var_0.ref_13E92);
     var_7.owner = var_3;
     var_3.vehicle.turret = var_7;
     start_safehouse_gunshop(var_3);
   }
 
   var_3 thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_animateplayer(var_0, var_1, var_2, undefined, var_5, var_6);
-  thread scripts\cp_mp\vehicles\vehicle_occupancy::ref_141f6(var_4, 1);
+  thread scripts\cp_mp\vehicles\vehicle_occupancy::ref_141F6(var_4, 1);
   scripts\cp_mp\utility\vehicle_omnvar_utility::vehomn_updateomnvarsonseatenter(var_0, var_2, var_1, var_3);
 }
 
@@ -592,15 +592,15 @@ function start_trap_room(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = !isDefined(var_2);
 
-  if(var_1 == "pilot" || var_5 && var_3 hasweapon(var_0.ref_13e92)) {
-    var_6 = scripts\cp_mp\vehicles\vehicle::ref_14192(var_0, var_0.ref_13e92);
+  if(var_1 == "pilot" || var_5 && var_3 hasweapon(var_0.ref_13E92)) {
+    var_6 = scripts\cp_mp\vehicles\vehicle::ref_14192(var_0, var_0.ref_13E92);
 
     if(!istrue(var_4.playerdisconnect)) {
       var_3 enableturretdismount();
       var_3 controlturretoff(var_6);
 
       if(!istrue(var_4.playerdeath)) {
-        scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_taketurret(var_3, var_0, var_0.ref_13e92, var_4, 1);
+        scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_taketurret(var_3, var_0, var_0.ref_13E92, var_4, 1);
       }
 
       thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_cleardisablefirefortime(var_3, var_4.playerdeath);
@@ -642,7 +642,7 @@ function start_safehouse_gunshop(var_0) {
   var_0.set_thirdperson = 1;
   var_1 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle("veh_indigo");
 
-  if(istrue(var_1.ref_133d3)) {
+  if(istrue(var_1.ref_133D3)) {
     return;
   }
 
@@ -657,7 +657,7 @@ function startingcodephone(var_0) {
   var_0.set_thirdperson = undefined;
   var_1 = scripts\cp_mp\vehicles\vehicle::vehicle_getleveldataforvehicle("veh_indigo");
 
-  if(istrue(var_1.ref_133d3)) {
+  if(istrue(var_1.ref_133D3)) {
     return;
   }
 
@@ -692,24 +692,24 @@ function start_waypoint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 function starting_struct(var_0, var_1, var_2, var_3, var_4) {
-  scripts\cp_mp\vehicles\vehicle_occupancy::ref_141f6(var_4);
+  scripts\cp_mp\vehicles\vehicle_occupancy::ref_141F6(var_4);
   thread starting_trigger_fix(var_0, var_1, var_2, var_3, var_4);
 }
 
 function starting_trigger_fix(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_2) && var_2 == "pilot") {
-    var_5 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141dc(var_3, var_4);
-    scripts\cp_mp\vehicles\vehicle_occupancy::ref_141f7(var_5);
+    var_5 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DC(var_3, var_4);
+    scripts\cp_mp\vehicles\vehicle_occupancy::ref_141F7(var_5);
     return;
   }
 }
 
-function ref_13dda() {
+function ref_13DDA() {
   return true;
 }
 
 function trophy_protectionsuccessful(var_0) {
-  self.ref_13ddf--;
+  self.ref_13DDF--;
   var_1 = var_0.origin;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle_trophyDestroyTarget", "init")) {
@@ -725,7 +725,7 @@ function trophy_protectionsuccessful(var_0) {
     self.explosion thread[[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_trophyExplode", "init")]](var_1, var_4);
   }
 
-  if(self.ref_13ddf == 0) {
+  if(self.ref_13DDF == 0) {
     self notify("upgrade_message", "trophy_no_ammo");
     self waittill("trophy_ammo_refill");
     return;
@@ -783,8 +783,8 @@ function startdeadsilence() {
 }
 
 function start_unlock_silo() {
-  if(isDefined(level.ref_1218c) && level.ref_1218c.size != 0) {
-    var_0 = level.ref_1218c;
+  if(isDefined(level.ref_1218C) && level.ref_1218C.size != 0) {
+    var_0 = level.ref_1218C;
   } else {
     var_0 = scripts\engine\utility::getStructArray("veh_indigo", "targetname");
   }
@@ -895,10 +895,10 @@ function init_rpg_spawns(var_0, var_1) {
 
 function init_respawns() {
   self.startteamcontractchallenge = spawnStruct();
-  self.startteamcontractchallenge.ref_13a72 = [];
+  self.startteamcontractchallenge.ref_13A72 = [];
 }
 
-function ref_1315f() {
+function ref_1315F() {
   var_0 = self;
   level endon("game_ended");
   var_0 endon("death");
@@ -927,7 +927,7 @@ function ref_1315f() {
         }
       }
 
-      var_8 = ref_13d9c(var_2.origin, var_0.vehicle.origin, var_5, var_6);
+      var_8 = ref_13D9C(var_2.origin, var_0.vehicle.origin, var_5, var_6);
 
       if(istrue(var_8)) {
         thread staticmodelid(var_0);
@@ -970,7 +970,7 @@ function rooftop_active() {
   return [var_8, var_9];
 }
 
-function ref_13d9c(var_0, var_1, var_2, var_3) {
+function ref_13D9C(var_0, var_1, var_2, var_3) {
   var_4 = updatescrapassistdataforcecredit(var_0, var_1, var_2, var_3);
 
   if(var_4) {
@@ -1009,7 +1009,7 @@ function staticmodelid(var_0) {
   var_4 = 1;
   var_5 = 500;
   var_6 = 40000;
-  var_1.startteamcontractchallenge.ref_13a72[var_0 getentitynumber()] = var_0;
+  var_1.startteamcontractchallenge.ref_13A72[var_0 getentitynumber()] = var_0;
   var_7 = var_0;
   var_7.headicon = var_0 scripts\cp_mp\entityheadicons::setheadicon_singleimage(var_1, var_2, var_3, var_4, var_6, var_5, undefined, 1, 1);
   station_names(var_1, var_0);
@@ -1027,12 +1027,12 @@ function station_name_chosen_as_starting(var_0) {
   var_1 = self;
   var_2 = var_0 getentitynumber();
 
-  if(isDefined(var_1.startteamcontractchallenge) && isDefined(var_1.startteamcontractchallenge.ref_13a72)) {
-    var_3 = var_1.startteamcontractchallenge.ref_13a72[var_2];
+  if(isDefined(var_1.startteamcontractchallenge) && isDefined(var_1.startteamcontractchallenge.ref_13A72)) {
+    var_3 = var_1.startteamcontractchallenge.ref_13A72[var_2];
 
     if(isDefined(var_3) && isDefined(var_3.headicon)) {
       scripts\cp_mp\entityheadicons::setheadicon_deleteicon(var_3.headicon);
-      var_1.startteamcontractchallenge.ref_13a72[var_2] = undefined;
+      var_1.startteamcontractchallenge.ref_13A72[var_2] = undefined;
       return;
     }
 

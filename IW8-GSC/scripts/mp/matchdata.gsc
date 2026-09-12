@@ -47,23 +47,23 @@ function init() {
   level.maxsupersexpired = 50;
   level.matchdataattachmentstatsenabled = 0;
   level.get_alive_nonspecating_players = scripts\mp\utility\game::getgametype() == "br" && getdvarint("scr_log_br_weapon_stats", 0) == 1;
-  level.ref_11b33 = &onmatchstart;
-  level.ref_11b34 = &onroundend;
-  level.ref_11b2a = &logkillstreakevent;
-  level.ref_11b29 = &loggameevent;
-  level.ref_11b26 = &logattackerkillevent;
-  level.ref_11b30 = &logvictimkillevent;
-  level.ref_11b2b = &logmultikill;
-  level.ref_11b2e = &logplayerlife;
-  level.ref_11b2d = &logplayerdeath;
-  level.ref_11b2c = &logplayerdata;
-  level.ref_11b2f = &logscoreevent;
-  level.ref_11b35 = &ref_12aa9;
-  level.ref_11b31 = &logweaponstat;
-  level.ref_11b25 = &logattachmentstat;
-  level.ref_11b23 = &buildweaponrootlist;
-  level.ref_11b28 = &logchallenge;
-  level.ref_11b27 = &logaward;
+  level.ref_11B33 = &onmatchstart;
+  level.ref_11B34 = &onroundend;
+  level.ref_11B2A = &logkillstreakevent;
+  level.ref_11B29 = &loggameevent;
+  level.ref_11B26 = &logattackerkillevent;
+  level.ref_11B30 = &logvictimkillevent;
+  level.ref_11B2B = &logmultikill;
+  level.ref_11B2E = &logplayerlife;
+  level.ref_11B2D = &logplayerdeath;
+  level.ref_11B2C = &logplayerdata;
+  level.ref_11B2F = &logscoreevent;
+  level.ref_11B35 = &ref_12AA9;
+  level.ref_11B31 = &logweaponstat;
+  level.ref_11B25 = &logattachmentstat;
+  level.ref_11B23 = &buildweaponrootlist;
+  level.ref_11B28 = &logchallenge;
+  level.ref_11B27 = &logaward;
   thread endofgamesummarylogger();
 }
 
@@ -87,7 +87,7 @@ function onmatchstart() {
   getentitylessscriptablearray("dlog_event_server_match_start", ["map", level.script, "game_type", var_0, "is_playtest", var_2, "experiment_name", var_3, "dedi_server_guid", isdismembermentenabled(), "sub_game_type", var_1, "playlist_name", var_4]);
 
   if(var_0 == "br") {
-    scripts\common\utility::ref_13e0a(level.ref_11b22);
+    scripts\common\utility::ref_13E0A(level.ref_11B22);
   }
 
   onmatchend();
@@ -194,7 +194,7 @@ function monitorweaponfire() {
 
   for(;;) {
     self waittill("begin_firing");
-    thread ref_11d21();
+    thread ref_11D21();
     var_0 = self.lastdroppableweaponobj;
     var_0 = scripts\mp\utility\weapon::mapweapon(var_0);
     var_1 = createheadicon(var_0);
@@ -202,7 +202,7 @@ function monitorweaponfire() {
   }
 }
 
-function ref_11d21() {
+function ref_11D21() {
   self endon("disconnect");
   self.watch_for_players_touching_ground = gettime();
   self notify("monitorWeaponFireTime");
@@ -211,7 +211,7 @@ function ref_11d21() {
   self.watch_for_players_regrouping_to_plane = gettime();
 }
 
-function ref_11d78() {
+function ref_11D78() {
   var_0 = self playermounttype();
 
   if(isDefined(var_0)) {
@@ -267,7 +267,7 @@ function logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) 
   var_21 = 0.4226;
   var_22 = scripts\engine\utility::within_fov(self.origin, self.angles, var_3.origin, var_21);
   var_23 = scripts\engine\utility::within_fov(var_3.origin, var_3.angles, self.origin, var_21);
-  var_24 = ref_11d78(var_3);
+  var_24 = ref_11D78(var_3);
   var_25 = var_3.origin;
   var_26 = var_3.angles;
 
@@ -403,7 +403,7 @@ function getplayerdebuffs() {
   GscBinSkip0(0x2e, 0, scripts\cp_mp\utility\killstreak_utility::enemyhascuav(self.team));
 }
 
-function ref_119cc(var_0) {
+function ref_119CC(var_0) {
   if(isDefined(var_0)) {
     var_1 = var_0;
   } else {
@@ -550,7 +550,7 @@ function logplayerdata(var_0) {
   }
 
   var_1 = self getplayerdata(level.loadoutsgroup, "squadMembers", "player_xp");
-  ref_119cc(var_0);
+  ref_119CC(var_0);
   initdialog();
 
   if(!isai(self) && !scripts\mp\utility\game::rankingenabled()) {
@@ -630,7 +630,7 @@ function logplayerdata(var_0) {
       var_22 = var_6.stats["time_used_s"];
     }
 
-    self dlog_recordplayerevent("dlog_event_player_weapon_stats_br", ["weapon", var_6.weapon, "variant_id", var_6.variantid, "from_loadout", var_19, "died", var_20, "time_used_s", var_22, "longest_hit_distance", var_21, "deaths", var_9, "headshots", var_10, "hits", var_11, "kills", var_12, "shots", var_13, "damage", var_14, "attachment_0", var_6.attachments[0], "attachment_1", var_6.attachments[1], "attachment_2", var_6.attachments[2], "attachment_3", var_6.attachments[3], "attachment_4", var_6.attachments[4], "sticker_0", var_6.ref_138a8[0], "sticker_1", var_6.ref_138a8[1], "sticker_2", var_6.ref_138a8[2], "sticker_3", var_6.ref_138a8[3], "reticle", var_6.reticle, "cosmetic_attachment", var_6.impactfunc_carbon, "camo", var_6.camo, "match_time_created_s", var_6.pickuptime]);
+    self dlog_recordplayerevent("dlog_event_player_weapon_stats_br", ["weapon", var_6.weapon, "variant_id", var_6.variantid, "from_loadout", var_19, "died", var_20, "time_used_s", var_22, "longest_hit_distance", var_21, "deaths", var_9, "headshots", var_10, "hits", var_11, "kills", var_12, "shots", var_13, "damage", var_14, "attachment_0", var_6.attachments[0], "attachment_1", var_6.attachments[1], "attachment_2", var_6.attachments[2], "attachment_3", var_6.attachments[3], "attachment_4", var_6.attachments[4], "sticker_0", var_6.ref_138A8[0], "sticker_1", var_6.ref_138A8[1], "sticker_2", var_6.ref_138A8[2], "sticker_3", var_6.ref_138A8[3], "reticle", var_6.reticle, "cosmetic_attachment", var_6.impactfunc_carbon, "camo", var_6.camo, "match_time_created_s", var_6.pickuptime]);
   }
 }
 
@@ -723,7 +723,7 @@ function endofgamesummarylogger() {
   }
 }
 
-function ref_12aa9() {
+function ref_12AA9() {
   if(scripts\mp\utility\game::matchmakinggame()) {
     var_0 = tolower(getDvar("mapname"));
     var_1 = getdvarint("playlistID");

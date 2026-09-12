@@ -4,21 +4,21 @@
 ***********************************************/
 
 function keypad_check_levelinput() {
-  if(!isDefined(level.ref_13d51)) {
-    level.ref_13d51 = [];
+  if(!isDefined(level.ref_13D51)) {
+    level.ref_13D51 = [];
   }
 
-  level.ref_13d51["gunslinger"] = &init;
+  level.ref_13D51["gunslinger"] = &init;
 }
 
 function init() {
   build_vehicle_drop_off_list();
   scripts\engine\utility::flag_init("endwave_audiocountdown_running");
-  level.ref_13d26 = 0;
+  level.ref_13D26 = 0;
 
   if(level.trial["missionID"] == 1021) {
     init_nuke_vault((1735, 1184.25, 40), (0, 108, -90), "trial_variant_pickup", "outline", "iw8_pi_mike9+trigcust03+stockcust+reflexmini+fastreload+xmagslrg+barlong");
-    level.ref_13d26 = 1;
+    level.ref_13D26 = 1;
     level.armsrace_c4_planter_super = 500;
     level.showplacementsplashesandmusic = 5;
     level.player_retry_thread = 0.4;
@@ -49,9 +49,9 @@ function init() {
     level.armsrace_c4_planter_super = 500;
     level.showplacementsplashesandmusic = 8.5;
     level.player_retry_thread = 0.4;
-    thread ref_12a8f();
+    thread ref_12A8F();
     thread script_model_spawn_and_use();
-    thread ref_1378e();
+    thread ref_1378E();
   } else if(level.trial["variant"] == "memory") {
     init_nuke_vault((-82, 1250, -195), (0, 180, -90), "trial_variant_pickup", "outline", "iw8_sn_sksierra+fastreload+smags+pistolgrip03+barshort+laserbalanced");
     level.ref_14533 = [4100, 5100, 6100, 6100];
@@ -83,17 +83,17 @@ function init() {
   level.nodes_set_children = [];
   level.current_shield_tagattach = [];
   level.current_steps = [];
-  level.ref_13d7c = [];
-  level.ref_13d7d = [];
+  level.ref_13D7C = [];
+  level.ref_13D7D = [];
 
   foreach(var_7 in var_4) {
-    if(!isDefined(level.ref_13d7c[var_7])) {
-      level.ref_13d7c[var_7] = [];
+    if(!isDefined(level.ref_13D7C[var_7])) {
+      level.ref_13D7C[var_7] = [];
     }
 
     foreach(var_9 in var_5) {
-      if(!isDefined(level.ref_13d7c[var_7][var_9])) {
-        level.ref_13d7c[var_7][var_9] = [];
+      if(!isDefined(level.ref_13D7C[var_7][var_9])) {
+        level.ref_13D7C[var_7][var_9] = [];
       }
     }
   }
@@ -101,10 +101,10 @@ function init() {
   foreach(var_13 in level.course_targets) {
     var_7 = var_13.targetname[4];
     var_9 = var_13.targetname[5];
-    level.ref_13d7c[var_7][var_9][level.ref_13d7c[var_7][var_9].size] = var_13;
+    level.ref_13D7C[var_7][var_9][level.ref_13D7C[var_7][var_9].size] = var_13;
 
     if(var_7 == "4") {
-      level.ref_13d7d[level.ref_13d7d.size] = var_13;
+      level.ref_13D7D[level.ref_13D7D.size] = var_13;
     }
   }
 
@@ -133,23 +133,23 @@ function progression() {
       thread serverroomrewardspawn();
     }
 
-    level.ref_13a6e = 0;
-    _tablethide::trial_ui_set_wave(1, level.ref_13d7c.size);
+    level.ref_13A6E = 0;
+    _tablethide::trial_ui_set_wave(1, level.ref_13D7C.size);
     course_start_wait();
-    level.ref_13d64 = 0;
-    thread ref_12efa();
-    _tablethide::ref_13d88();
-    _tablethide::ref_13d89(0);
+    level.ref_13D64 = 0;
+    thread ref_12EFA();
+    _tablethide::ref_13D88();
+    _tablethide::ref_13D89(0);
 
-    if(level.ref_13d26) {
+    if(level.ref_13D26) {
       hideconesifinfil();
-      level.ref_13d64 = 1;
+      level.ref_13D64 = 1;
     } else {
       ref_14523();
       thread targets_missed_calculate();
     }
 
-    _tablethide::ref_13d89(1);
+    _tablethide::ref_13D89(1);
     score_calculate(1);
 
     foreach(var_7 in level.player.primaryinventory) {
@@ -186,22 +186,22 @@ function course_start_wait() {
 }
 
 function hideconesifinfil() {
-  level.ref_13d2d = 0;
+  level.ref_13D2D = 0;
   level endon("trial_combo_died");
   level.player playSound("trial_sfx_success");
   scripts\mp\gamelogic::teamstarttimer(level.player.team, 5);
   level.player setclientomnvar("ui_match_start_countdown", -1);
   level.player playSound("trial_sfx_start");
   level.player scripts\mp\utility\dialog::leaderdialogonplayer("kh_sniper_search");
-  level.ref_13d6e = gettime();
+  level.ref_13D6E = gettime();
   thread hidedangercircle();
-  var_0 = int(level.ref_13d7d.size * 0.35);
-  ref_129ff(level.ref_13d7d, var_0);
+  var_0 = int(level.ref_13D7D.size * 0.35);
+  ref_129FF(level.ref_13D7D, var_0);
   var_1 = 0;
-  level.ref_13d4f = 0;
+  level.ref_13D4F = 0;
 
   for(;;) {
-    var_2 = scripts\engine\utility::array_randomize(level.ref_13d7d);
+    var_2 = scripts\engine\utility::array_randomize(level.ref_13D7D);
     var_3 = var_2[0];
 
     foreach(var_3 in var_2) {
@@ -209,7 +209,7 @@ function hideconesifinfil() {
         if(!var_3.iscivilian) {
           var_3.script_speed = randomfloatrange(48, 128);
           var_1 = 1;
-          level.ref_13d4f = min(level.ref_13d4f + 100, 3000);
+          level.ref_13D4F = min(level.ref_13D4F + 100, 3000);
         } else if(var_1 == 1) {
           var_3.script_speed = 32;
           var_1 = 0;
@@ -232,32 +232,32 @@ function hidedeathicon() {
   target_flip("up");
   self endon("flip_down");
   var_0 = gettime();
-  var_1 = max(5000 - level.ref_13d4f, 2000);
+  var_1 = max(5000 - level.ref_13D4F, 2000);
 
   while(gettime() < var_0 + var_1) {
     waitframe();
   }
 
-  thread ref_13a5f();
+  thread ref_13A5F();
 }
 
 function ref_14523() {
-  foreach(var_5, var_1 in level.ref_13d7c) {
+  foreach(var_5, var_1 in level.ref_13D7C) {
     hud_inter_round_flow(int(var_5));
-    _tablethide::trial_ui_set_wave(int(var_5), level.ref_13d7c.size);
+    _tablethide::trial_ui_set_wave(int(var_5), level.ref_13D7C.size);
 
     foreach(var_3 in var_1) {
-      ref_1393f(var_5, var_4);
+      ref_1393F(var_5, var_4);
     }
   }
 }
 
-function ref_1393f(var_0, var_1) {
+function ref_1393F(var_0, var_1) {
   var_2 = gettime();
   _tablethide::trial_ui_set_secondary_timer(var_2 + level.ref_14533[int(var_0) - 1]);
-  ref_129ff(level.ref_13d7c[var_0][var_1], level.ref_13938[int(var_1) - 1]);
+  ref_129FF(level.ref_13D7C[var_0][var_1], level.ref_13938[int(var_1) - 1]);
 
-  foreach(var_4 in level.ref_13d7c[var_0][var_1]) {
+  foreach(var_4 in level.ref_13D7C[var_0][var_1]) {
     thread target_flip(var_4);
   }
 
@@ -267,7 +267,7 @@ function ref_1393f(var_0, var_1) {
     waitframe();
   }
 
-  foreach(var_4 in level.ref_13d7c[var_0][var_1]) {
+  foreach(var_4 in level.ref_13D7C[var_0][var_1]) {
     thread target_flip(var_4);
   }
 
@@ -275,7 +275,7 @@ function ref_1393f(var_0, var_1) {
   wait 2;
 }
 
-function ref_129ff(var_0) {
+function ref_129FF(var_0) {
   var_1 = ["ee_military_shooting_range_plate_02_enemy_01", "ee_military_shooting_range_plate_02_enemy_02", "ee_military_shooting_range_plate_02_enemy_03", "ee_military_shooting_range_plate_02_enemy_04", "ee_military_shooting_range_plate_02_enemy_05", "ee_military_shooting_range_plate_02_enemy_06"];
   var_2 = ["ee_military_shooting_range_plate_civilian_01", "ee_military_shooting_range_plate_civilian_02", "ee_military_shooting_range_plate_civilian_03"];
   var_3 = scripts\engine\utility::array_randomize(self);
@@ -384,20 +384,20 @@ function target_damage() {
     self.activated = 0;
     self.spawn_infil_lbravo = 0;
     self.plate waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-    level.ref_13d77 = 1;
+    level.ref_13D77 = 1;
     self.plate setCanDamage(0);
     self.plate playSound("trial_sfx_target_report_metal");
 
     if(self.iscivilian) {
       self.spawn_infil_lbravo = 1;
       self.activated = 1;
-      level.player thread _tablethide::ref_13d4b(self, 0, 1, 0);
+      level.player thread _tablethide::ref_13D4B(self, 0, 1, 0);
       level.player thread scripts\mp\rank::scoreeventpopup("trial_civilian_killed");
       self playSound("trial_sfx_buzzer_bad_1");
-      ref_12efe();
+      ref_12EFE();
     } else {
       self.spawn_infil_lbravo = 1;
-      level.player thread _tablethide::ref_13d4b(self, 1, 0, 0);
+      level.player thread _tablethide::ref_13D4B(self, 1, 0, 0);
       self.activated = 1;
       thread score_event_target_hit();
       var_10 = self.plate gettagorigin("tag_head");
@@ -406,7 +406,7 @@ function target_damage() {
 
       if(var_11 < level.showplacementsplashesandmusic) {
         level.nodes_set_children = level.nodes_set_children scripts\engine\utility::array_add(level.nodes_set_children, self);
-        thread ref_12f02();
+        thread ref_12F02();
       }
     }
 
@@ -440,7 +440,7 @@ function target_damage() {
       waittillframeend();
     }
 
-    thread ref_13a5f();
+    thread ref_13A5F();
     waittillframeend();
 
     if(level.targethitsinaframecount > 1 && self.iscivilian) {
@@ -450,7 +450,7 @@ function target_damage() {
     level notify("accuracy_update");
     level.targethitsinaframecount = 0;
 
-    if(level.ref_13d26) {
+    if(level.ref_13D26) {
       self waittill("flip_up");
       continue;
     }
@@ -459,7 +459,7 @@ function target_damage() {
   }
 }
 
-function ref_13a5f() {
+function ref_13A5F() {
   while(self.flipping) {
     waitframe();
   }
@@ -473,7 +473,7 @@ function ref_13a5f() {
 
 function target_flip(var_0) {
   if(var_0 == "up") {
-    if(!level.ref_13d26 && isDefined(self.script_delay)) {
+    if(!level.ref_13D26 && isDefined(self.script_delay)) {
       wait self.script_delay;
     }
 
@@ -531,12 +531,12 @@ function target_flip(var_0) {
     wait 0.4;
     self.plate setCanDamage(0);
     self rotatepitch(self.initial_up[2] * var_3 * var_1, var_2);
-  } else if(!self.state_up && isDefined(level.lasttargethitinaframe) && level.lasttargethitinaframe.spawn_infil_lbravo && !level.ref_13d26) {
+  } else if(!self.state_up && isDefined(level.lasttargethitinaframe) && level.lasttargethitinaframe.spawn_infil_lbravo && !level.ref_13D26) {
     self rotatepitch(self.initial_up[2] * var_3 * var_1, var_2);
     self.plate setCanDamage(0);
     level.lasttargethitinaframe.spawn_infil_lbravo = 0;
 
-    if(!level.ref_13d26) {
+    if(!level.ref_13D26) {
       level waittill("course_ended");
       wait 6;
       self rotateroll(self.initial_up[2] * var_4 * var_1, var_5);
@@ -647,7 +647,7 @@ function trial_score_init() {
   level.course_accuracy = 0;
   level.headshot = 0;
   level.current_tablet = 0;
-  level.ref_13d2c = 0;
+  level.ref_13D2C = 0;
   level.current_tablet = 0;
   _tablethide::trial_ui_set_stat_and_bonus_score(1, "accuracy", 100 * level.course_accuracy, level.score["accuracy"]);
   _tablethide::trial_ui_set_stat_and_bonus_score(2, "head_shot", level.headshot, level.score["head_shot"]);
@@ -661,7 +661,7 @@ function trial_score_init() {
 }
 
 function score_event_target_hit() {
-  if(istrue(level.ref_13d64)) {
+  if(istrue(level.ref_13D64)) {
     return;
   }
 
@@ -669,15 +669,15 @@ function score_event_target_hit() {
   level.player thread scripts\mp\rank::scorepointspopup(100);
   level.enemies_killed++;
 
-  if(level.ref_13d26) {
+  if(level.ref_13D26) {
     thread hidedangercircle();
   }
 
   score_calculate();
 }
 
-function ref_12efe() {
-  if(istrue(level.ref_13d64)) {
+function ref_12EFE() {
+  if(istrue(level.ref_13D64)) {
     return;
   }
 
@@ -691,8 +691,8 @@ function ref_12efe() {
   _tablethide::trial_ui_set_stat_and_bonus_score(3, "civilian_targets_hit", level.civs_killed, -1 * level.score["civilian_targets_hit"]);
 }
 
-function ref_12f02() {
-  if(istrue(level.ref_13d64)) {
+function ref_12F02() {
+  if(istrue(level.ref_13D64)) {
     return;
   }
 
@@ -715,24 +715,24 @@ function ref_12f02() {
   _tablethide::trial_ui_set_stat_and_bonus_score(2, "head_shot", level.headshot, 0);
 }
 
-function ref_12efa() {
+function ref_12EFA() {
   level endon("course_ended");
   level.shots_fired = 0;
 
   for(;;) {
-    level.player scripts\engine\utility::ref_143a6("weapon_fired", "fake_weapon_fired", "grenade_fire");
+    level.player scripts\engine\utility::ref_143A6("weapon_fired", "fake_weapon_fired", "grenade_fire");
     level.shots_fired++;
     waittillframeend();
 
-    if(istrue(level.ref_13d77)) {
+    if(istrue(level.ref_13D77)) {
       level waittill("accuracy_update");
-      level.ref_13d77 = 0;
+      level.ref_13D77 = 0;
     }
 
     if(level.trial["variant"] == "knife") {
       level.course_accuracy = (level.enemy_targets.size + level.current_steps.size - level.enemies_missed) / max(1, level.shots_fired);
-    } else if(level.ref_13d26) {
-      if(istrue(level.ref_13d64)) {
+    } else if(level.ref_13D26) {
+      if(istrue(level.ref_13D64)) {
         continue;
       }
 
@@ -804,7 +804,7 @@ function score_calculate(var_0) {
     hud_set_reward_tier(1);
     level notify("course_ended");
 
-    if(istrue(level.ref_13d6c)) {
+    if(istrue(level.ref_13D6C)) {
       wait 5;
     }
 
@@ -817,15 +817,15 @@ function hidedangercircle() {
   level notify("combo_reset");
   level endon("combo_reset");
 
-  if(istrue(level.ref_13d2d)) {
+  if(istrue(level.ref_13D2D)) {
     return;
   }
 
   waitframe();
   var_0 = hideassassinationtargethud();
-  level.ref_13d2c++;
-  _tablethide::ref_13d8c(var_0);
-  _tablethide::ref_13d8b(max(level.ref_13d2c, 1));
+  level.ref_13D2C++;
+  _tablethide::ref_13D8C(var_0);
+  _tablethide::ref_13D8B(max(level.ref_13D2C, 1));
   var_1 = gettime();
 
   while(gettime() < var_1 + var_0) {
@@ -834,16 +834,16 @@ function hidedangercircle() {
 
   wait 0.25;
   level notify("trial_combo_died");
-  level.ref_13d2d = 1;
-  _tablethide::ref_13d8b(0);
+  level.ref_13D2D = 1;
+  _tablethide::ref_13D8B(0);
 
-  foreach(var_3 in level.ref_13d7d) {
-    thread ref_13a5f();
+  foreach(var_3 in level.ref_13D7D) {
+    thread ref_13A5F();
   }
 }
 
 function hideassassinationtargethud() {
-  var_0 = gettime() - level.ref_13d6e;
+  var_0 = gettime() - level.ref_13D6E;
   var_1 = int(var_0 / 10);
   var_2 = level.civs_killed * 750;
   var_3 = clamp(7500 - var_1 - var_2, 1250, 7500);
@@ -856,12 +856,12 @@ function hideassassinationtargethud() {
 }
 
 function hud_init() {
-  level.ref_13a6e = 0;
+  level.ref_13A6E = 0;
   level.wave_time = 30;
   level.timer_paused = 0;
   level.score["trickshot"] = 0;
   _tablethide::trial_ui_set_subscore(0);
-  _tablethide::trial_ui_set_wave(1, level.ref_13d7c.size);
+  _tablethide::trial_ui_set_wave(1, level.ref_13D7C.size);
   _tablethide::trial_ui_set_reward_tier_preview(0);
   _tablethide::trial_ui_set_objective_icon_index(1);
 }
@@ -932,7 +932,7 @@ function hud_inter_round_flow(var_0) {
   level.player setclientomnvar("ui_match_start_countdown", -1);
   setomnvar("ui_match_start_text", "none");
   level.player playSound("trial_sfx_start");
-  _tablethide::trial_ui_set_wave(int(var_0), level.ref_13d7c.size);
+  _tablethide::trial_ui_set_wave(int(var_0), level.ref_13D7C.size);
   _tablethide::trial_ui_freeze_secondary_timer(0);
   level.player scripts\mp\utility\dialog::leaderdialogonplayer("kh_sniper_search");
 }
@@ -985,12 +985,12 @@ function init_nuke_vault(var_0, var_1, var_2, var_3, var_4) {
 }
 
 function weapon_xp_iw8_sn_awhiskey() {
-  level.ref_12d3a = getEntArray("rifle", "targetname");
+  level.ref_12D3A = getEntArray("rifle", "targetname");
   level.ref_12382 = getEntArray("pitcher", "targetname");
   wait 0.05;
   jumpiffalse(level.trial["missionID"] == 1002) LOC_00000095;
 
-  foreach(var_1 in level.ref_12d3a) {
+  foreach(var_1 in level.ref_12D3A) {
     var_1 setlightintensity(1);
   }
 
@@ -1002,7 +1002,7 @@ function weapon_xp_iw8_sn_awhiskey() {
 }
 
 function build_vehicle_drop_off_list() {
-  level.ref_13d32 = &ref_13d34;
+  level.ref_13D32 = &ref_13D34;
 
   if(!isDefined(game["trial"]["analytics"])) {
     game["trial"]["analytics"] = [];
@@ -1013,7 +1013,7 @@ function build_vehicle_drop_off_list() {
   }
 }
 
-function ref_13d34() {
+function ref_13D34() {
   var_0 = level.trial["missionID"];
   var_1 = getomnvar("ui_trial_reward_tier");
   var_2 = getomnvar("ui_trial_best_score");
@@ -1023,7 +1023,7 @@ function ref_13d34() {
   level.player dlog_recordplayerevent("dlog_event_trial_complete_gunslinger", ["id", var_0, "tier", var_1, "score", var_2, "accuracy", var_3, "missed", var_4, "civilians", var_5]);
 }
 
-function ref_12a90(var_0, var_1) {
+function ref_12A90(var_0, var_1) {
   var_2 = var_0.rechargeequipmentstate;
 
   if(!isDefined(var_2.progress[var_1])) {
@@ -1055,14 +1055,14 @@ function ref_12a90(var_0, var_1) {
   }
 }
 
-function ref_12a8f() {
+function ref_12A8F() {
   while(!isalive(level.player)) {
     waitframe();
   }
 
   for(;;) {
     while(isalive(level.player)) {
-      ref_12a91(level.player);
+      ref_12A91(level.player);
       wait 0.1;
     }
 
@@ -1070,19 +1070,19 @@ function ref_12a8f() {
   }
 }
 
-function ref_12a91(var_0) {
+function ref_12A91(var_0) {
   if(!isDefined(var_0.rechargeequipmentstate)) {
     var_0.rechargeequipmentstate = spawnStruct();
     var_0.rechargeequipmentstate.progress = [];
     var_0.rechargeequipmentstate.recharged = [];
   }
 
-  ref_12a90(var_0, "primary");
-  ref_12a90(var_0, "secondary");
-  ref_12a92(var_0);
+  ref_12A90(var_0, "primary");
+  ref_12A90(var_0, "secondary");
+  ref_12A92(var_0);
 }
 
-function ref_12a92(var_0) {
+function ref_12A92(var_0) {
   var_1 = 0;
   var_2 = 0;
   var_3 = -1;
@@ -1136,7 +1136,7 @@ function script_model_spawn_and_use() {
   }
 }
 
-function ref_1378e() {
+function ref_1378E() {
   var_0 = getEnt("grenade_box_knife", "targetname");
   var_0 setHintString(&"MP_INGAME_ONLY/PRESS_TO_START_GAME");
   var_0 setCursorHint("hint_button");
@@ -1165,14 +1165,14 @@ function process_struct_angle_tilt() {
   level.explosion = loadfx("vfx/iw8/prop/scriptables/vfx_ee_food_fruit_watermelon_02_debris.vfx");
 
   foreach(var_1 in level.current_shield_tagattach) {
-    var_1.ref_11e37 = 1;
+    var_1.ref_11E37 = 1;
     var_1 hide();
   }
 
   for(;;) {
     foreach(var_1 in level.current_shield_tagattach) {
-      if(istrue(var_1.ref_11e37)) {
-        var_1.ref_11e37 = 0;
+      if(istrue(var_1.ref_11E37)) {
+        var_1.ref_11E37 = 0;
         var_4 = spawn("script_model", var_1.origin);
         var_4 setModel(var_1.model);
         var_4.angles = var_1.angles;
@@ -1201,7 +1201,7 @@ function current_spawner(var_0) {
   level.current_tablet++;
   thread current_struct();
   self setCanDamage(0);
-  var_0.ref_11e37 = 1;
+  var_0.ref_11E37 = 1;
   self delete();
 }
 

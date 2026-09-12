@@ -8,7 +8,7 @@ function slinger_init() {
   slinger_initparams();
   scripts\mp\utility\sound::besttime("equip_skyhook");
   level.slingers = [];
-  scripts\engine\scriptable::ref_12f5b("balloon_use_cache", &slingerscriptableused);
+  scripts\engine\scriptable::ref_12F5B("balloon_use_cache", &slingerscriptableused);
 }
 
 #using_animtree("");
@@ -34,7 +34,7 @@ function slinger_initparams() {
   level.slingerparams.thermitedps = getdvarint("scr_slinger_thermite_dps", 100);
   level.slingerparams.cantakedamage = loadfx("vfx/iw8_br/island/equip/barrage_balloon/vfx_barrage_balloon_scrnfx");
   level.slingerparams.explosionfx = loadfx("vfx/iw8_br/island/equip/barrage_balloon/vfx_barrage_balloon_explosion_port");
-  level.slingerparams.ref_127e6 = loadfx("vfx/iw8_br/island/equip/barrage_balloon/vfx_barrage_balloon_timeout_port");
+  level.slingerparams.ref_127E6 = loadfx("vfx/iw8_br/island/equip/barrage_balloon/vfx_barrage_balloon_timeout_port");
   level.slingerparams.destroyedfx = loadfx("vfx/iw8_br/island/gameplay/vfx_br3_jammer_dmg.vfx");
 }
 
@@ -86,8 +86,8 @@ function slinger_refundsuper() {
   var_0 notify("super_use_finished");
   scripts\cp\vehicles\vehicle_compass_cp::ref_12097(var_0.super, 1);
   var_2 = var_0 scripts\mp\supers::getcurrentsuper();
-  var_0 scripts\mp\supers::ref_131c7(0);
-  var_0 scripts\mp\supers::ref_131c6(0);
+  var_0 scripts\mp\supers::ref_131C7(0);
+  var_0 scripts\mp\supers::ref_131C6(0);
   var_2.wasrefunded = 1;
   var_0 scripts\mp\supers::setsuperbasepoints(var_0 scripts\mp\supers::getsuperpointsneeded());
 }
@@ -164,10 +164,10 @@ function run_deployed_slinger(var_0) {
   playsoundatpos(var_1.origin + (0, 0, 4500), "skyhook_balloon_inflate");
   var_1.laststandplayers = 1;
   var_3 = getdvarfloat("scr_slinger_deploy_duration", 30);
-  var_4 = var_1 scripts\engine\utility::ref_143b9(var_3, "slinger_destroyed");
+  var_4 = var_1 scripts\engine\utility::ref_143B9(var_3, "slinger_destroyed");
 
   if(var_4 == "timeout") {
-    playFX(level.slingerparams.ref_127e6, var_1.origin + (0, 0, 4500));
+    playFX(level.slingerparams.ref_127E6, var_1.origin + (0, 0, 4500));
     playsoundatpos(var_1.origin + (0, 0, 4500), "skyhook_pop");
   } else {
     playFX(level.slingerparams.explosionfx, var_1.origin + (0, 0, 4500));
@@ -312,7 +312,7 @@ function drop_players_on_break_watcher() {
   foreach(var_2 in var_0.ascendingplayers) {
     var_3 = var_2 getentitynumber();
     var_4 = var_0.ascenderscenenodes[var_3];
-    var_4 thread scripts\mp\gametypes\br_skyhook::ref_133fc(var_2);
+    var_4 thread scripts\mp\gametypes\br_skyhook::ref_133FC(var_2);
     var_4 stoploopsound("br_auto_ascender_device_lp_npc");
     slingerfullcleanup(var_2, var_3, var_0);
   }
@@ -405,14 +405,14 @@ function useslinger(var_0) {
   var_2 = var_0.entity;
   var_2 endon("death");
   var_2.ascendingplayers[var_2.ascendingplayers.size] = var_1;
-  var_1.ref_140af = 1;
+  var_1.ref_140AF = 1;
   var_1.shouldskiplaststand = 1;
 
   if(isDefined(var_1.get_search_turret_target_player)) {
     var_1.get_search_turret_target_player thread scripts\mp\equipment\binoculars::get_subway_train_hit_damage_multiplier(0);
   }
 
-  scripts\mp\gametypes\br_skyhook::ref_1246f(var_1);
+  scripts\mp\gametypes\br_skyhook::ref_1246F(var_1);
   var_1 scripts\common\utility::allow_usability(0);
   var_0 thread scripts\mp\gametypes\br_skyhook::ref_13405();
   var_1.usingascender = 1;
@@ -436,7 +436,7 @@ function useslinger(var_0) {
   var_2.ascenderworldmodels[var_3] = var_6;
   thread slingerascendingdeathlistener(var_1, var_0);
   var_1.slingerdofreefall = 0;
-  var_7 = var_4 scripts\mp\gametypes\br_skyhook::ref_133fb(var_1, var_5, var_6);
+  var_7 = var_4 scripts\mp\gametypes\br_skyhook::ref_133FB(var_1, var_5, var_6);
 
   if(!var_7) {
     slingerfullcleanup(var_1, var_3, var_2);
@@ -444,9 +444,9 @@ function useslinger(var_0) {
     return;
   }
 
-  var_1 childthread scripts\mp\gametypes\br_skyhook::ref_133fe();
+  var_1 childthread scripts\mp\gametypes\br_skyhook::ref_133FE();
   var_1 thread scripts\mp\gametypes\br_skyhook::ref_12505();
-  var_4 thread scripts\mp\gametypes\br_skyhook::ref_133fd(var_1, var_5, var_6);
+  var_4 thread scripts\mp\gametypes\br_skyhook::ref_133FD(var_1, var_5, var_6);
   var_4 playLoopSound("br_auto_ascender_device_lp_npc");
   var_4 moveTo(var_4.origin + (0, 0, level.slingerparams.ascentheight), level.slingerparams.ascenttime, level.slingerparams.ascenttime);
   playfxontagforclients(level.slingerparams.cantakedamage, var_4, "tag_origin", var_1);
@@ -455,7 +455,7 @@ function useslinger(var_0) {
   wait level.slingerparams.ascenttime * 0.65;
   stopFXOnTag(level.slingerparams.cantakedamage, var_4, "tag_origin");
   var_1 notify("kill_skyhook_ascend_earthquake");
-  var_4 thread scripts\mp\gametypes\br_skyhook::ref_133fc(var_1, var_5, var_6);
+  var_4 thread scripts\mp\gametypes\br_skyhook::ref_133FC(var_1, var_5, var_6);
   var_4 stoploopsound("br_auto_ascender_device_lp_npc");
   var_1 playlocalsound("scr_br_infil_jump_stinger", var_1);
   var_1 earthquakeforplayer(0.2, 1.5, var_1.origin, 1000);
@@ -517,7 +517,7 @@ function slingerfullcleanup(var_0, var_1, var_2) {
 
     var_0.player_rig stopanimScripted();
     var_0.usingascender = 0;
-    var_0.ref_140af = 0;
+    var_0.ref_140AF = 0;
     var_0 notify("kill_skyhook_ascend_earthquake");
 
     if(isDefined(var_0.slingerlaunchvelocity)) {

@@ -2008,7 +2008,7 @@ function rappel_player() {
   playworldsound("slide_start_plr", level.player.origin);
   scripts\engine\utility::flag_set("rappel_end");
   level.player.animarms delete();
-  level.player.dof_ref_ent = undefined;
+  level.player.dof_ref_ENT = undefined;
   level.player scripts\common\utility::allow_crouch(1, "rappel");
   level.player scripts\common\utility::allow_prone(1, "rappel");
 }
@@ -2187,7 +2187,7 @@ function link_player_to_rappel_scene() {
   level.player playersetgroundreferenceent(level.player.groundrefent);
   level.player playerlinktodelta(level.player.animarms, "tag_player", 1, 0, 0, 0, 0, 1);
   level.player lerpviewangleclamp(1, 0.5, 0.5, 10, 10, 10, 10);
-  level.player.dof_ref_ent = level.player.animarms;
+  level.player.dof_ref_ENT = level.player.animarms;
   wait 0.15;
   level.player enablequickweaponswitch(0);
   player_rappel_weapon_switch(var_0);

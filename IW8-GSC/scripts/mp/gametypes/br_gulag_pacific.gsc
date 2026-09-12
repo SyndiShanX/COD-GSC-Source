@@ -5,13 +5,13 @@
 
 function thermite_damage_over_time() {
   scripts\engine\scriptable::scriptable_addusedcallback(&scriptable_used);
-  scripts\engine\scriptable::ref_12f5a(&ref_12f64);
+  scripts\engine\scriptable::ref_12F5A(&ref_12F64);
   waitframe();
   all_players_skip_last_stand();
   ally_initial_spawners();
   allownvgsatmatchstart();
   activenumber();
-  thread ref_144ce();
+  thread ref_144CE();
   thread apc_rus_monitordriverturretfire();
 }
 
@@ -57,7 +57,7 @@ function recentghostridekillcount(var_0, var_1, var_2) {
 function processcashpileovertimemultiplier(var_0, var_1, var_2) {
   var_3 = [];
 
-  if(isDefined(var_0) && isDefined(var_0.ref_13a7b) && isDefined(level.set_relic_martyrdom[var_0.ref_13a7b])) {
+  if(isDefined(var_0) && isDefined(var_0.ref_13A7B) && isDefined(level.set_relic_martyrdom[var_0.ref_13A7B])) {
     if(!isDefined(var_1)) {
       var_1 = var_0.origin;
     }
@@ -66,7 +66,7 @@ function processcashpileovertimemultiplier(var_0, var_1, var_2) {
       var_2 = 1200;
     }
 
-    var_4 = level.set_relic_martyrdom[var_0.ref_13a7b];
+    var_4 = level.set_relic_martyrdom[var_0.ref_13A7B];
 
     foreach(var_6 in var_4) {
       var_7 = getentitylessscriptablearrayinradius(var_6, "script_noteworthy", var_1, var_2);
@@ -131,7 +131,7 @@ function activeintelchallengekeys(var_0) {
 function allow_nvgs(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = spawnStruct();
   var_6.name = var_0;
-  var_6.ref_13a7b = var_1;
+  var_6.ref_13A7B = var_1;
   var_6.timer = var_2;
   var_6.flightyaw = var_3;
   var_6.light = var_4;
@@ -143,7 +143,7 @@ function allow_nvgs(var_0, var_1, var_2, var_3, var_4, var_5) {
 function allow_offhand_throwback(var_0, var_1, var_2) {
   var_3 = spawnStruct();
   var_3.name = var_0;
-  var_3.ref_12c7e = var_1;
+  var_3.ref_12C7E = var_1;
   var_3.timeout = var_2;
   return var_3;
 }
@@ -190,7 +190,7 @@ function activenumber() {
 }
 
 function allassassin_initteamlist(var_0) {
-  if(isDefined(var_0.ref_1202a) && var_0.ref_1202a == 1) {
+  if(isDefined(var_0.ref_1202A) && var_0.ref_1202A == 1) {
     return true;
   }
 
@@ -202,20 +202,20 @@ function analytics_init(var_0, var_1) {
     return;
   }
 
-  var_0.ref_1202a = 1;
+  var_0.ref_1202A = 1;
   wait var_1;
   ammobox_tryuse(var_0, 0);
-  var_0.ref_1202a = 0;
+  var_0.ref_1202A = 0;
 }
 
 function ammobox_canweaponacceptmoreattachments(var_0) {
   level.set_relic_mythic = [];
 
-  if(!isDefined(var_0.ref_12c7e)) {
+  if(!isDefined(var_0.ref_12C7E)) {
     return;
   }
 
-  var_1 = strtok(var_0.ref_12c7e, ",");
+  var_1 = strtok(var_0.ref_12C7E, ",");
   var_2 = [];
 
   foreach(var_4 in var_1) {
@@ -320,7 +320,7 @@ function any_player_in_laststand(var_0) {
   }
 }
 
-function ref_12f64(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+function ref_12F64(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(var_2.classname == "scriptable_scriptable_door_button") {
     scriptable_used(var_2, "button", "usable", var_1, 0);
     return;
@@ -370,7 +370,7 @@ function scriptable_used(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-function ref_144ce() {
+function ref_144CE() {
   self endon("death_or_disconnect");
 
   for(;;) {
@@ -380,7 +380,7 @@ function ref_144ce() {
       var_0 waittill("trigger", var_1);
 
       if(var_1 == level.player) {
-        ref_12ab1(var_1);
+        ref_12AB1(var_1);
       }
 
       waitframe();
@@ -390,7 +390,7 @@ function ref_144ce() {
   }
 }
 
-function ref_12ab1() {
+function ref_12AB1() {
   if(!isDefined(self.arena)) {
     var_0 = scripts\mp\gametypes\br_gulag::playergetnextarena();
     self.arena = var_0;

@@ -31,7 +31,7 @@ function spawn_enemy_tank(var_0) {
 
   wait 10;
   level.enemy_tanks[level.enemy_tanks.size] = var_3;
-  thread ref_13a3e();
+  thread ref_13A3E();
   thread tank_waittill_death();
   thread ref_14350();
   var_3 endon("death");
@@ -66,8 +66,8 @@ function spawn_enemy_tank(var_0) {
       continue;
     }
 
-    ref_13a4f(var_8, var_11);
-    ref_13a4f(var_9, var_11);
+    ref_13A4F(var_8, var_11);
+    ref_13A4F(var_9, var_11);
 
     if(scripts\engine\utility::flag_exist("weapons_free") && !scripts\engine\utility::flag("weapons_free")) {
       scripts\engine\utility::flag_set("weapons_free");
@@ -91,7 +91,7 @@ function initdragonsbreathusage() {
       continue;
     }
 
-    if(ref_124f8(var_3)) {
+    if(ref_124F8(var_3)) {
       continue;
     }
 
@@ -101,7 +101,7 @@ function initdragonsbreathusage() {
   return var_1;
 }
 
-function ref_124f8(var_0) {
+function ref_124F8(var_0) {
   var_1 = 2000;
 
   if(istrue(self.alerted)) {
@@ -137,7 +137,7 @@ function ref_14350() {
   }
 }
 
-function ref_13a4f(var_0, var_1) {
+function ref_13A4F(var_0, var_1) {
   var_2 = 0;
 
   if(var_0 scripts\cp_mp\emp_debuff::is_empd()) {
@@ -159,7 +159,7 @@ function ref_13a4f(var_0, var_1) {
 }
 
 function tank_empstarted(var_0) {
-  ref_13a49();
+  ref_13A49();
 }
 
 function tank_empcleared(var_0) {
@@ -167,10 +167,10 @@ function tank_empcleared(var_0) {
     return;
   }
 
-  ref_13a49();
+  ref_13A49();
 }
 
-function ref_13a49() {
+function ref_13A49() {
   if(scripts\cp_mp\emp_debuff::is_empd()) {
     self turretfiredisable();
     self laseroff();
@@ -223,7 +223,7 @@ function build_tank_duration(var_0) {
   return var_1;
 }
 
-function ref_13a3e() {
+function ref_13A3E() {
   for(var_0 = 0; !var_0; var_0 = 1) {
     self waittill("alerted", var_1);
 

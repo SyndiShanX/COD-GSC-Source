@@ -9,7 +9,7 @@ function init() {
 
 function supply_crate_vo_when_used() {
   level._effect["sentry_overheat_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_overheat_smoke");
-  level.ref_13d65 = [];
+  level.ref_13D65 = [];
 
   while(!isDefined(level.struct_class_names)) {
     waitframe();
@@ -27,13 +27,13 @@ function supply_crate_vo_when_used() {
 
   foreach(var_2 in var_0) {
     waitframe();
-    level.ref_13d65[level.ref_13d65.size] = ref_131ea(var_2);
+    level.ref_13D65[level.ref_13D65.size] = ref_131EA(var_2);
   }
 
   level.ref_13022 = 1;
 }
 
-function ref_131ea(var_0, var_1) {
+function ref_131EA(var_0, var_1) {
   var_2 = "trial_sentry_turret";
   var_3 = level.sentrysettings[var_2];
   var_4 = spawnturret("misc_turret", var_0.origin, level.sentrysettings[var_2].weaponinfo);
@@ -91,8 +91,8 @@ function ref_131ea(var_0, var_1) {
   var_5 = "icon_minimap_sentry";
   var_4.minimapid = var_4.helperdrone_isbeingpingedbydrone scripts\mp\objidpoolmanager::createobjective(var_5, var_4.team, undefined, 1, 1);
 
-  if(isDefined(level.ref_13d85)) {
-    var_4 thread[[level.ref_13d85]]();
+  if(isDefined(level.ref_13D85)) {
+    var_4 thread[[level.ref_13D85]]();
   }
 
   return var_4;
@@ -210,7 +210,7 @@ function sentry_burstfirestop() {
 }
 
 function sentry_heatmonitor() {
-  if(istrue(self.ref_133bc)) {
+  if(istrue(self.ref_133BC)) {
     return;
   }
 
@@ -282,9 +282,9 @@ function sentry_handledeath() {
   self setmode("sentry_offline");
   self setscriptablepartstate("explode", "violent");
 
-  if(isDefined(level.ref_13d84)) {
+  if(isDefined(level.ref_13D84)) {
     if(isDefined(self.cave_combat) && gettime() < self.cave_combat + 4000) {
-      self[[level.ref_13d84]]();
+      self[[level.ref_13D84]]();
     }
   }
 

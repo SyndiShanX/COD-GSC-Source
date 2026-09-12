@@ -51,16 +51,16 @@ function vehicle_interact_getinstancedataforvehicle(var_0, var_1, var_2) {
   return var_4;
 }
 
-function ref_1419d(var_0, var_1, var_2) {
+function ref_1419D(var_0, var_1, var_2) {
   var_3 = vehicle_interact_getleveldataforvehicle(var_0, undefined, 1);
 
   if(!isDefined(var_3)) {
     return;
   }
 
-  var_4 = ref_141a3(var_1);
+  var_4 = ref_141A3(var_1);
   var_3.trial_lap_time = scripts\engine\utility::array_add(var_3.trial_lap_time, var_1);
-  ref_141aa("activate", var_1, var_2, var_3);
+  ref_141AA("activate", var_1, var_2, var_3);
 }
 
 function vehicle_interact_registerinstance(var_0) {
@@ -153,9 +153,9 @@ function vehicle_interact_init() {
   var_0.vehicledata = [];
   var_0.trial_lap_time = [];
   var_0.disabledbyallow = 0;
-  ref_141a7("single", &ref_141a2, &ref_141a0, &ref_1419f, &ref_141a1);
-  ref_141a7("upgrade", &ref_141b2, &ref_141ae, &ref_141ad, &ref_141af);
-  ref_141a7("copyofupgrade", &ref_141b2, &ref_141ae, &ref_141ad, &ref_141af);
+  ref_141A7("single", &ref_141A2, &ref_141A0, &ref_1419F, &ref_141A1);
+  ref_141A7("upgrade", &ref_141B2, &ref_141AE, &ref_141AD, &ref_141AF);
+  ref_141A7("copyofupgrade", &ref_141B2, &ref_141AE, &ref_141AD, &ref_141AF);
   scripts\engine\scriptable::scriptable_addusedcallback(&vehicle_interact_scriptableused);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle_interact", "init", 1)) {
@@ -164,7 +164,7 @@ function vehicle_interact_init() {
   }
 }
 
-function ref_141a7(var_0, var_1, var_2, var_3, var_4) {
+function ref_141A7(var_0, var_1, var_2, var_3, var_4) {
   var_5 = vehicle_interact_getleveldata();
   var_6 = spawnStruct();
   var_7 = [];
@@ -181,7 +181,7 @@ function vehicle_interact_scriptableused(var_0, var_1, var_2, var_3, var_4) {
         if(vehicle_interact_playercanusevehicle(var_3, var_5)) {
           if(vehicle_interact_pointcanbeused(var_5, var_6)) {
             var_7 = vehicle_interact_getinstancedataforpoint(var_5, var_6);
-            ref_141aa("useInstance", var_6, var_7, var_5, var_3);
+            ref_141AA("useInstance", var_6, var_7, var_5, var_3);
           }
         }
       }
@@ -224,12 +224,12 @@ function vehicle_interact_getleveldata() {
   return level.vehicle.interact;
 }
 
-function ref_141a3(var_0) {
+function ref_141A3(var_0) {
   return level.vehicle.interact.trial_lap_time[var_0];
 }
 
-function ref_141aa(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = ref_141a3(var_1);
+function ref_141AA(var_0, var_1, var_2, var_3, var_4) {
+  var_5 = ref_141A3(var_1);
   var_6 = var_5.callbacks[var_0];
 
   if(isDefined(var_6)) {
@@ -302,7 +302,7 @@ function vehicle_interact_playercanusevehicle(var_0, var_1) {
       return false;
     }
   } else {
-    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141d5(var_1);
+    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141D5(var_1);
 
     if(isDefined(var_3) && var_3 != var_0) {
       return false;
@@ -345,13 +345,13 @@ function vehicle_interact_cleanvehicle(var_0) {
   }
 
   if(level.teambased) {
-    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141d7(var_0);
+    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141D7(var_0);
 
     if(isDefined(var_3)) {
       var_2.availableteam = var_3;
     } else {
       var_4 = undefined;
-      var_5 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141d6(var_0);
+      var_5 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141D6(var_0);
 
       foreach(var_7 in var_5) {
         if(isDefined(var_7)) {
@@ -390,7 +390,7 @@ function vehicle_interact_getinstancedataforpoint(var_0, var_1, var_2, var_3) {
       var_4.pointdata[var_1] = var_5;
       var_5.dirty = 1;
       var_5.disabled = undefined;
-      ref_141aa("createInstance", var_1, var_5, var_0);
+      ref_141AA("createInstance", var_1, var_5, var_0);
     }
   }
 
@@ -456,7 +456,7 @@ function vehicle_interact_cleanpoint(var_0, var_1) {
     return;
   }
 
-  ref_141aa("cleanInstance", var_1, var_2, var_0);
+  ref_141AA("cleanInstance", var_1, var_2, var_0);
   var_2.dirty = 0;
 }
 
@@ -513,13 +513,13 @@ function vehicle_interact_updateusability(var_0) {
   }
 }
 
-function ref_141a2(var_0, var_1, var_2, var_3) {
+function ref_141A2(var_0, var_1, var_2, var_3) {
   var_4 = var_1.availableseatid;
   thread scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_enter(var_2, var_4, var_3);
 }
 
-function ref_141a0(var_0, var_1, var_2, var_3) {
-  var_4 = var_1.ref_12fa8;
+function ref_141A0(var_0, var_1, var_2, var_3) {
+  var_4 = var_1.ref_12FA8;
   var_5 = undefined;
 
   foreach(var_7 in var_4) {
@@ -533,17 +533,17 @@ function ref_141a0(var_0, var_1, var_2, var_3) {
   var_1.availableseatid = var_5;
 }
 
-function ref_1419f(var_0, var_1, var_2, var_3) {
-  var_2.ref_12fa8 = var_1;
+function ref_1419F(var_0, var_1, var_2, var_3) {
+  var_2.ref_12FA8 = var_1;
 }
 
-function ref_141a1(var_0, var_1, var_2, var_3) {
+function ref_141A1(var_0, var_1, var_2, var_3) {
   var_4 = vehicle_interact_getleveldataforvehicle(var_2.vehiclename, undefined, 1);
   var_1.availableseatid = undefined;
-  var_1.ref_12fa8 = var_4.ref_12fa8;
+  var_1.ref_12FA8 = var_4.ref_12FA8;
 }
 
-function ref_1419e(var_0, var_1) {
+function ref_1419E(var_0, var_1) {
   if(isDefined(var_0)) {
     if(!isDefined(var_0.ref_12664)) {
       var_0.ref_12664 = [];
@@ -554,14 +554,14 @@ function ref_1419e(var_0, var_1) {
   }
 }
 
-function ref_141a8(var_0, var_1) {
+function ref_141A8(var_0, var_1) {
   if(isDefined(var_0) && isDefined(var_0.ref_12664)) {
     var_0.ref_12664 = scripts\engine\utility::array_remove(var_0.ref_12664, var_1);
     return;
   }
 }
 
-function ref_141b2(var_0, var_1, var_2, var_3) {
+function ref_141B2(var_0, var_1, var_2, var_3) {
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("vehicle_upgrade", "init")) {
     if(!isDefined(level.delayedeventtypes)) {
       var_3 iprintlnbold("BR Kiosk station is not activated in this game mode");
@@ -571,20 +571,20 @@ function ref_141b2(var_0, var_1, var_2, var_3) {
     [[var_1.emp_nearby_targets]](var_2, var_3);
     var_3 setclientomnvar("ui_br_purchase_file_override", var_1.emp_effect_duration);
     var_3.delete_silo_lights = 1;
-    var_3.ref_1424d = var_2;
-    ref_1419e(var_2, var_3);
+    var_3.ref_1424D = var_2;
+    ref_1419E(var_2, var_3);
     var_4 = scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle_upgrade", "init");
-    var_5 = ref_141b1(var_2, var_0);
+    var_5 = ref_141B1(var_2, var_0);
     var_3 thread[[var_4]](var_5);
     return;
   }
 }
 
-function ref_141ae(var_0, var_1, var_2, var_3) {
+function ref_141AE(var_0, var_1, var_2, var_3) {
   var_1.disabled = 0;
 }
 
-function ref_141ad(var_0, var_1, var_2, var_3) {
+function ref_141AD(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_2.wait_for_lmg_dead)) {
     var_2.wait_for_lmg_dead = [];
   }
@@ -602,29 +602,29 @@ function ref_141ad(var_0, var_1, var_2, var_3) {
   var_2.emp_nearby_targets[var_0] = var_1[2];
 }
 
-function ref_141af(var_0, var_1, var_2, var_3) {
+function ref_141AF(var_0, var_1, var_2, var_3) {
   var_4 = vehicle_interact_getleveldataforvehicle(var_2.vehiclename, undefined, 1);
   var_1.emp_effect_duration = var_4.emp_drone_success_use[var_0];
   var_1.emp_nearby_targets = var_4.emp_nearby_targets[var_0];
   var_5 = var_4.wait_for_lmg_dead[var_0];
-  ref_141b0(var_2, var_0, var_5);
+  ref_141B0(var_2, var_0, var_5);
 }
 
-function ref_141b1(var_0, var_1) {
+function ref_141B1(var_0, var_1) {
   return var_0.wait_for_kills[var_1];
 }
 
-function ref_141b0(var_0, var_1, var_2) {
+function ref_141B0(var_0, var_1, var_2) {
   if(!isDefined(var_0.wait_for_kills)) {
     var_0.wait_for_kills = [];
   }
 
   var_3 = spawnStruct();
-  thread ref_141ab(var_3, var_0);
+  thread ref_141AB(var_3, var_0);
   var_0.wait_for_kills[var_1] = var_3;
 }
 
-function ref_141ab(var_0, var_1) {
+function ref_141AB(var_0, var_1) {
   var_0 endon("death");
 
   for(;;) {
@@ -633,28 +633,28 @@ function ref_141ab(var_0, var_1) {
   }
 }
 
-function ref_141ac(var_0, var_1) {
-  ref_141a6(var_0);
+function ref_141AC(var_0, var_1) {
+  ref_141A6(var_0);
   return isDefined(var_0.ref_14034) && istrue(var_0.ref_14034[var_1]);
 }
 
-function ref_141a6(var_0) {
+function ref_141A6(var_0) {
   if(!isDefined(var_0.ref_14034)) {
     var_0.ref_14034 = [];
     return;
   }
 }
 
-function ref_141a4(var_0, var_1, var_2) {
-  ref_141a9(var_0, var_1);
+function ref_141A4(var_0, var_1, var_2) {
+  ref_141A9(var_0, var_1);
   var_0 notify("give_upgrade", var_1, var_2);
 }
 
-function ref_141a9(var_0, var_1) {
-  ref_141a6(var_0);
+function ref_141A9(var_0, var_1) {
+  ref_141A6(var_0);
   var_0.ref_14034[var_1] = 1;
 }
 
-function ref_141a5() {
+function ref_141A5() {
   var_0 = setdvarifuninitialized("scr_enterVehicleSeatOverride", 0);
 }

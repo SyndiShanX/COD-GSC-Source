@@ -18,7 +18,7 @@ function main() {
   game["defenders"] = "axis";
   game["allies_outfit"] = "urban";
   game["axis_outfit"] = "woodland";
-  thread ref_139c6();
+  thread ref_139C6();
   thread playerspawnexfilchopper();
   thread get_recently_shot_at_by_rpg();
   thread player_fired_gun_monitor();
@@ -56,7 +56,7 @@ function increase_accuracy_after_delay() {
   var_2 setModel("weapon_wm_la_juliet_missile_fat");
 }
 
-function ref_139c6() {
+function ref_139C6() {
   var_0 = getEnt("swayCrate", "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
 
@@ -64,11 +64,11 @@ function ref_139c6() {
     var_3 linkTo(var_0);
   }
 
-  thread ref_139c8(var_0);
-  thread ref_11fa8();
+  thread ref_139C8(var_0);
+  thread ref_11FA8();
 }
 
-function ref_11fa8() {
+function ref_11FA8() {
   var_0 = getEnt("ocean", "targetname");
   var_1 = 7;
   var_0 rotateTo((0, 0, -1.5), 5, 2.25, 2.25);
@@ -82,7 +82,7 @@ function ref_11fa8() {
   }
 }
 
-function ref_139c8(var_0) {
+function ref_139C8(var_0) {
   var_1 = 4;
 
   for(;;) {
@@ -130,23 +130,23 @@ function get_recently_shot_at_by_rpg() {
     var_1 = getEntArray("toy", "targetname");
   }
 
-  level.ref_11f3c = 0;
+  level.ref_11F3C = 0;
 
   foreach(var_3 in var_1) {
     thread trackhiddenobj(var_3);
   }
 
-  level.ref_11f3e = 0;
+  level.ref_11F3E = 0;
 
   foreach(var_3 in var_0) {
-    thread ref_13c4c(var_3);
+    thread ref_13C4C(var_3);
   }
 
-  while(level.ref_11f3c < var_1.size && level.ref_11f3e == 0) {
+  while(level.ref_11F3C < var_1.size && level.ref_11F3E == 0) {
     wait 1;
   }
 
-  if(level.ref_11f3e == 0) {
+  if(level.ref_11F3E == 0) {
     for(var_7 = 30; var_7 > 0; var_7--) {
       var_8 = (randomintrange(-400, 400), randomintrange(-400, 400), 800);
       var_9 = spawn("script_model", var_8);
@@ -191,11 +191,11 @@ function trackhiddenobj(var_0) {
     }
   }
 
-  level.ref_11f3c++;
+  level.ref_11F3C++;
   self delete();
 }
 
-function ref_13c4c(var_0) {
+function ref_13C4C(var_0) {
   level endon("game_ended");
   self setCanDamage(1);
   self.found = [];
@@ -227,6 +227,6 @@ function ref_13c4c(var_0) {
     }
   }
 
-  level.ref_11f3e++;
+  level.ref_11F3E++;
   self delete();
 }

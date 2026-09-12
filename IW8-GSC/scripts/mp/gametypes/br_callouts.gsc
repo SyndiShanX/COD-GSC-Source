@@ -5,7 +5,7 @@
 
 function init() {
   level.calloutglobals.calloutzones = getEntArray("location_volume", "targetname");
-  level.calloutglobals.ref_11e29 = [];
+  level.calloutglobals.ref_11E29 = [];
 
   if(!tableexists(level.calloutglobals.callouttable)) {
     return;
@@ -41,14 +41,14 @@ function init() {
     var_12 = spawnStruct();
     var_12.origin = (var_8, var_9, 0);
     var_12.radius = var_10;
-    level.calloutglobals.ref_11e29[var_11] = var_12;
+    level.calloutglobals.ref_11E29[var_11] = var_12;
   }
 }
 
 function removeminigunrestrictions(var_0) {
   var_1 = "";
 
-  foreach(var_3 in level.calloutglobals.ref_11e29) {
+  foreach(var_3 in level.calloutglobals.ref_11E29) {
     if(distance2dsquared(var_0, var_3.origin) <= var_3.radius * var_3.radius) {
       var_1 = var_4;
       break;
@@ -72,7 +72,7 @@ function removematchingents_bymodel(var_0) {
   var_6 = var_2;
   var_7 = var_3;
 
-  foreach(var_9 in level.calloutglobals.ref_11e29) {
+  foreach(var_9 in level.calloutglobals.ref_11E29) {
     var_10 = distance2dsquared(var_4, var_9.origin);
 
     if(var_10 <= var_7) {

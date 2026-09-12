@@ -31,7 +31,7 @@ function aggro_player_weight() {
     scripts\mp\flags::gameflagwait("prematch_done");
   }
 
-  scripts\engine\scriptable::ref_12f5a(&ai_anim_relative);
+  scripts\engine\scriptable::ref_12F5A(&ai_anim_relative);
   thread ai_ascender_animin();
 }
 
@@ -96,7 +96,7 @@ function ai_ascender_animin() {
       level.monitor_waypoint_objective_on_front_truck[var_13] = spawnStruct();
       level.monitor_waypoint_objective_on_front_truck[var_13].monitor_player_plunder = var_13;
       level.monitor_waypoint_objective_on_front_truck[var_13].armsrace_c4_planter_attack = 0;
-      level.monitor_waypoint_objective_on_front_truck[var_13].ref_12ad3 = var_16;
+      level.monitor_waypoint_objective_on_front_truck[var_13].ref_12AD3 = var_16;
       level.monitor_waypoint_objective_on_front_truck[var_13].first_switch = var_18;
       var_13++;
     }
@@ -105,7 +105,7 @@ function ai_ascender_animin() {
   after_spawn_func("Spawning " + level.monitor_waypoint_objective_on_front_truck.size + " elves");
 
   foreach(var_20 in level.monitor_waypoint_objective_on_front_truck) {
-    var_21 = var_0[var_20.ref_12ad3][var_20.first_switch];
+    var_21 = var_0[var_20.ref_12AD3][var_20.first_switch];
     var_22 = scripts\engine\utility::array_randomize(var_21);
     var_23 = [];
     var_24 = getdvarint("scr_br_eas_num_lives", 3);
@@ -253,7 +253,7 @@ function aggressive_melee_active(var_0, var_1) {
   var_2.scriptable setscriptablepartstate("SOUND_IDLE", "SOUND_IDLE_OFF");
 
   if(isDefined(var_1) && isPlayer(var_1)) {
-    var_1 scripts\cp\vehicles\vehicle_compass_cp::ref_1301e("eas_elf_defeated", 1);
+    var_1 scripts\cp\vehicles\vehicle_compass_cp::ref_1301E("eas_elf_defeated", 1);
   }
 
   waitframe();

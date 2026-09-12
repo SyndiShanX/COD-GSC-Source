@@ -208,7 +208,7 @@ function createcarryobject(var_0, var_1, var_2, var_3, var_4, var_5) {
   return var_6;
 }
 
-function ref_12b13(var_0) {
+function ref_12B13(var_0) {
   self.ref_12355[self.ref_12355.size] = var_0;
 }
 
@@ -590,7 +590,7 @@ function updatecarryobjectorigin() {
         }
       }
 
-      scripts\engine\utility::ref_143c0(self.objpingdelay, "dropped", "reset");
+      scripts\engine\utility::ref_143C0(self.objpingdelay, "dropped", "reset");
       continue;
     }
 
@@ -808,7 +808,7 @@ function setdropped(var_0, var_1) {
   GscBinSkip0(0x2e, var_12.size, self.visuals[0]);
 }
 
-function ref_143fb(var_0) {
+function ref_143FB(var_0) {
   self endon("pickup_object");
   var_0 waittill("death");
   thread setdropped();
@@ -1278,8 +1278,8 @@ function useobjectusethink() {
       continue;
     }
 
-    if(isDefined(level.ref_11c89)) {
-      if(![[level.ref_11c89]](var_0)) {
+    if(isDefined(level.ref_11C89)) {
+      if(![[level.ref_11C89]](var_0)) {
         continue;
       }
     }
@@ -1651,8 +1651,8 @@ function canstompprogresswithstalemate(var_0) {
 }
 
 function applycaptureprogressanduseupdate() {
-  if(isDefined(self.ref_128b9)) {
-    var_0 = self[[self.ref_128b9]](1);
+  if(isDefined(self.ref_128B9)) {
+    var_0 = self[[self.ref_128B9]](1);
 
     if(!var_0) {
       return;
@@ -1672,8 +1672,8 @@ function applycaptureprogressanduseupdate() {
 }
 
 function stompenemyteamprogress(var_0) {
-  if(isDefined(self.ref_138b2)) {
-    self[[self.ref_138b2]](var_0);
+  if(isDefined(self.ref_138B2)) {
+    self[[self.ref_138B2]](var_0);
   }
 
   var_1 = level.frameduration * self.userate;
@@ -1811,13 +1811,13 @@ function canclaim(var_0) {
     var_1 = getnumtouchingforteam(var_0.pers["team"]);
     var_2 = getnumtouchingexceptteam(var_0.pers["team"]);
 
-    if(var_1 && !var_2 || var_1 && var_2 && var_1 != var_2 && !istrue(self.ref_133a5)) {
+    if(var_1 && !var_2 || var_1 && var_2 && var_1 != var_2 && !istrue(self.ref_133A5)) {
       self.majoritycapprogress = 1;
       self.wasmajoritycapprogress = 0;
       return true;
     }
 
-    if(var_1 && var_2 && (var_1 == var_2 || istrue(self.ref_133a5))) {
+    if(var_1 && var_2 && (var_1 == var_2 || istrue(self.ref_133A5))) {
       self.stalemate = 1;
       self.majoritycapprogress = 0;
       self.wasmajoritycapprogress = 1;
@@ -2681,7 +2681,7 @@ function updateuisecuring(var_0, var_1, var_2, var_3, var_4) {
         self setclientomnvar("ui_securing", 16);
       }
 
-      scripts\mp\gametypes\br::ref_1401f(var_6, self, var_0);
+      scripts\mp\gametypes\br::ref_1401F(var_6, self, var_0);
     }
   } else {
     if(isDefined(var_3.usedby) && existinarray(self, var_3.usedby)) {
@@ -2779,7 +2779,7 @@ function updateuserate() {
     }
   }
 
-  if(!istrue(self.ref_133e5)) {
+  if(!istrue(self.ref_133E5)) {
     self.stalemate = scripts\engine\utility::ter_op(istrue(self.alwaysstalemate), var_1 && var_2, var_1 && var_2 && var_1 == var_2);
   }
 
@@ -3114,7 +3114,7 @@ function usetest(var_0, var_1, var_2, var_3) {
     return false;
   }
 
-  if(isDefined(self.trigger) && isDefined(self.trigger.ref_1408a) && distance2dsquared(self.trigger.origin, var_0.origin) >= self.trigger.ref_1408a) {
+  if(isDefined(self.trigger) && isDefined(self.trigger.ref_1408A) && distance2dsquared(self.trigger.origin, var_0.origin) >= self.trigger.ref_1408A) {
     return false;
   }
 
@@ -3357,7 +3357,7 @@ function hideworldiconongameend() {
 
 function updatetimer(var_0, var_1) {}
 
-function ref_1317f(var_0, var_1, var_2, var_3, var_4) {
+function ref_1317F(var_0, var_1, var_2, var_3, var_4) {
   if(istrue(self.lockupdatingicons)) {
     return;
   }
@@ -3430,7 +3430,7 @@ function ref_13172(var_0, var_1, var_2) {
   updatecompassicons(var_1, var_2);
 }
 
-function ref_12c75(var_0, var_1) {
+function ref_12C75(var_0, var_1) {
   self.compassicons["codcaster"] = undefined;
   updatecompassicons(var_0, var_1);
 }

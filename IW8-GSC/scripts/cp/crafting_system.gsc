@@ -243,15 +243,15 @@ function giveitembasedoncraftingstruct(var_0) {
           break;
         } else {
           scriptable_autouse_funcs();
-          thread ref_12c8c(level);
+          thread ref_12C8C(level);
           var_2 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("respawn_flare", self);
-          scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_2);
+          scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_2);
           self notify("munitions_used", "respawn");
           break;
         }
       }
 
-      if(istrue(level.ref_11e8c) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
+      if(istrue(level.ref_11E8C) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
         scripts\cp\utility::hint_prompt("munition_unavailable", 1, 2);
         return 0;
       }
@@ -263,7 +263,7 @@ function giveitembasedoncraftingstruct(var_0) {
         scriptable_autouse_funcs();
         scripts\cp\respawn\cp_ac130_respawn::start_ac130_respawn_sequence(self.origin, level.players_in_respawn_queue, self);
         var_2 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo("respawn_flare", self);
-        scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_2);
+        scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_2);
         self notify("munitions_used", "respawn");
 
         foreach(var_4 in level.players) {
@@ -278,12 +278,12 @@ function giveitembasedoncraftingstruct(var_0) {
         break;
     case "apache":
     case "chopper_gunner":
-      if(istrue(level.ref_11e8c) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
+      if(istrue(level.ref_11E8C) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
         scripts\cp\utility::hint_prompt("munition_unavailable", 1, 2);
         return 0;
       }
 
-      if(scripts\cp\cp_weapon::ref_124ad(self)) {
+      if(scripts\cp\cp_weapon::ref_124AD(self)) {
         scripts\cp\cp_weapon::minigamefinishcount(self);
         scripts\cp\utility::hint_prompt("munition_unavailable", 1, 2);
         return 0;
@@ -300,7 +300,7 @@ function giveitembasedoncraftingstruct(var_0) {
 
       break;
     case "ac130":
-      if(istrue(level.ref_11e8c) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
+      if(istrue(level.ref_11E8C) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
         scripts\cp\utility::hint_prompt("munition_unavailable", 1, 2);
         return 0;
       }
@@ -316,7 +316,7 @@ function giveitembasedoncraftingstruct(var_0) {
 
       break;
     case "precision_airstrike":
-      if(istrue(level.ref_11e8c) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
+      if(istrue(level.ref_11E8C) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
         scripts\cp\utility::hint_prompt("munition_unavailable", 1, 2);
         return 0;
       }
@@ -328,7 +328,7 @@ function giveitembasedoncraftingstruct(var_0) {
       break;
     case "drone_strike":
     case "cruise_missile":
-      if(istrue(level.ref_11e8c) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
+      if(istrue(level.ref_11E8C) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
         scripts\cp\utility::hint_prompt("munition_unavailable", 1, 2);
         return 0;
       }
@@ -397,7 +397,7 @@ function giveitembasedoncraftingstruct(var_0) {
 
       break;
     case "uav":
-      if(istrue(level.ref_11e8c) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
+      if(istrue(level.ref_11E8C) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
         scripts\cp\utility::hint_prompt("munition_unavailable", 1, 2);
         return 0;
       }
@@ -413,7 +413,7 @@ function giveitembasedoncraftingstruct(var_0) {
       break;
     case "cluster_strike":
     case "toma_strike":
-      if(istrue(level.ref_11e8c) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
+      if(istrue(level.ref_11E8C) || scripts\cp\cp_objectives::is_objective_active("collect_nuclear_core") || scripts\cp\cp_objectives::is_objective_active("exfil_plane")) {
         scripts\cp\utility::hint_prompt("munition_unavailable", 1, 2);
         return 0;
       }
@@ -491,7 +491,7 @@ function scorerequiresbanking(var_0) {
   self endon("death");
   self endon("last_stand");
   self giveandfireoffhand(var_0);
-  var_1 = scripts\engine\utility::ref_143ae("offhand_fired", "weapon_fired", "offhand_end");
+  var_1 = scripts\engine\utility::ref_143AE("offhand_fired", "weapon_fired", "offhand_end");
 
   if(var_1 == "offhand_end") {
     return undefined;
@@ -505,7 +505,7 @@ function scriptable_autouse_funcs() {
   self giveandfireoffhand("flare_mp");
 }
 
-function ref_12c8b(var_0) {
+function ref_12C8B(var_0) {
   var_0 hide();
 
   if(!isDefined(self.tispawnposition)) {
@@ -565,7 +565,7 @@ function tacinsert_delayeddelete() {
   self delete();
 }
 
-function ref_12c8c(var_0) {
+function ref_12C8C(var_0) {
   level endon("game_ended");
   var_1 = "cp_super_revive_used";
   var_2 = [];
@@ -736,7 +736,7 @@ function laststandoutlineid() {
   self waittill("equip_deploy_end");
   waitframe();
   scripts\common\utility::allow_melee(1);
-  scripts\cp\powers\cp_tactical_cover::ref_139f3();
+  scripts\cp\powers\cp_tactical_cover::ref_139F3();
 }
 
 function fire_deployable_cover() {
@@ -1333,7 +1333,7 @@ function watchdropcratefrommanualheliinternal() {
   self.heli setyawspeed(40, 20, 20, 0.3);
 
   if(distancesquared(self.heli.origin, self.dropposition) > 5184) {
-    self.heli scripts\engine\utility::ref_143a5("death", "goal");
+    self.heli scripts\engine\utility::ref_143A5("death", "goal");
 
     if(!isDefined(self.heli) || istrue(self.heli.isdestroyed)) {
       thread docratedropfrommanualheli();
@@ -1359,7 +1359,7 @@ function watchdropcratefrommanualheliinternal() {
     if(distancesquared(self.heli.origin, self.exitposition) > 5184) {
       self.heli vehicle_setspeed(50, 30);
       self.heli setvehgoalpos(self.exitposition, 1);
-      self.heli scripts\engine\utility::ref_143a5("death", "goal");
+      self.heli scripts\engine\utility::ref_143A5("death", "goal");
       return;
     }
 
@@ -2373,7 +2373,7 @@ function airdropvisualmarkeractivate(var_0) {
 }
 
 function delete_model_and_fx_on_crate_drop(var_0, var_1) {
-  scripts\engine\utility::ref_143a5("change_loadout_timer", "stop_marker");
+  scripts\engine\utility::ref_143A5("change_loadout_timer", "stop_marker");
   var_0 delete();
   var_1 delete();
 }

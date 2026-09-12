@@ -3,7 +3,7 @@
  * Script: 58226.gsc
 ***********************************************/
 
-function ref_12f67(var_0, var_1, var_2) {
+function ref_12F67(var_0, var_1, var_2) {
   var_3 = getentitylessscriptablearrayinradius(undefined, undefined, var_0, var_1, "door");
 
   if(isDefined(var_2)) {
@@ -23,7 +23,7 @@ function ref_12f67(var_0, var_1, var_2) {
   return var_3;
 }
 
-function ref_12f66(var_0) {
+function ref_12F66(var_0) {
   self notify("scriptable_door_freeze_open");
   self endon("scriptable_door_freeze_open");
   var_1 = undefined;
@@ -52,7 +52,7 @@ function ref_12f66(var_0) {
   self scriptabledoorfreeze(1);
 }
 
-function ref_12f68(var_0) {
+function ref_12F68(var_0) {
   if(self == var_0) {
     return false;
   }

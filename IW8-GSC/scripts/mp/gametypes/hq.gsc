@@ -56,7 +56,7 @@ function onstartgametype() {
   seticonnames();
 
   if(!level.zonerandomlocationorder) {
-    ref_12bbc();
+    ref_12BBC();
   }
 
   thread hqmainloop();
@@ -72,7 +72,7 @@ function updategametypedvars() {
   level.zoneselectiondelay = scripts\mp\utility\dvars::dvarfloatvalue("zoneSelectionDelay", 15, 0, 120);
   level.zonerandomlocationorder = scripts\mp\utility\dvars::dvarintvalue("randomLocationOrder", 0, 0, 1);
   level.zoneadditivescoring = scripts\mp\utility\dvars::dvarintvalue("additiveScoring", 0, 0, 1);
-  level.ref_1221a = scripts\mp\utility\dvars::dvarintvalue("pauseTime", 1, 0, 1);
+  level.ref_1221A = scripts\mp\utility\dvars::dvarintvalue("pauseTime", 1, 0, 1);
   level.delayplayer = scripts\mp\utility\dvars::dvarintvalue("delayPlayer", 0, 0, 1);
   level.usehprules = scripts\mp\utility\dvars::dvarintvalue("useHPRules", 0, 0, 1);
 }
@@ -88,7 +88,7 @@ function hqmainloop() {
   level.zone.visuals[0] scriptmodelplayanim("iw8_mp_military_hq_crate_close");
 
   if(!scripts\mp\flags::gameflag("prematch_done")) {
-    level scripts\engine\utility::ref_143a5("prematch_done", "start_mode_setup");
+    level scripts\engine\utility::ref_143A5("prematch_done", "start_mode_setup");
   }
 
   level.zone scripts\mp\gametypes\obj_zonecapture::activatezone();
@@ -96,10 +96,10 @@ function hqmainloop() {
   level.zone.active = 1;
   level.zone scripts\mp\gameobjects::setvisibleteam("any");
   level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.icontarget);
-  level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_moved", level.zone.trigger.origin);
+  level.zone thread scripts\common\utility::ref_13E0A(level.ref_11B29, "hill_moved", level.zone.trigger.origin);
   scripts\mp\flags::gameflagwait("prematch_done");
 
-  if(level.ref_1221a) {
+  if(level.ref_1221A) {
     level scripts\mp\gamelogic::pausetimer();
   }
 
@@ -113,7 +113,7 @@ function hqmainloop() {
     setomnvar("ui_hardpoint_timer", level.zoneendtime);
     setomnvar("ui_hq_status", 1);
     thread waitthenplaynewobj();
-    level.zone thread scripts\mp\gametypes\obj_zonecapture::ref_1199e(level.firstzoneactivationdelay, level.zone.visuals[0].origin + (0, 0, 70));
+    level.zone thread scripts\mp\gametypes\obj_zonecapture::ref_1199E(level.firstzoneactivationdelay, level.zone.visuals[0].origin + (0, 0, 70));
     wait level.firstzoneactivationdelay;
     scripts\mp\utility\game::setmlgannouncement(7, "free");
   }
@@ -122,7 +122,7 @@ function hqmainloop() {
   scripts\mp\utility\sound::playsoundonplayers("mp_hq_activate_sfx");
 
   for(;;) {
-    if(!isDefined(level.ref_11ad5)) {
+    if(!isDefined(level.ref_11AD5)) {
       thread setupzonecallouts();
     }
 
@@ -157,7 +157,7 @@ function hqmainloop() {
     level.spectateoverride[game["defenders"]].allowenemyspectate = 0;
 
     if(level.usehprules) {
-      if(level.ref_1221a) {
+      if(level.ref_1221A) {
         level scripts\mp\gamelogic::resumetimer();
       }
     }
@@ -185,7 +185,7 @@ function hqmainloop() {
 
     if(!level.usehprules) {
       if(level.zoneselectiondelay > 0) {
-        if(level.ref_1221a) {
+        if(level.ref_1221A) {
           level scripts\mp\gamelogic::pausetimer();
         }
 
@@ -255,31 +255,31 @@ function killhardpointvfx() {
   self.neutralhardpointfx = [];
 }
 
-function ref_12bbc() {
+function ref_12BBC() {
   switch (level.mapname) {
     case "mp_hackney_yard":
     case "mp_hackney_am":
-      level.ref_12bbe = ["1", "4", "3", "9", "8"];
+      level.ref_12BBE = ["1", "4", "3", "9", "8"];
       break;
     case "mp_spear":
     case "mp_spear_pm":
-      level.ref_12bbe = ["5", "4", "3", "2", "6"];
+      level.ref_12BBE = ["5", "4", "3", "2", "6"];
       break;
     case "mp_cave":
     case "mp_cave_am":
-      level.ref_12bbe = ["1", "5", "2", "3", "4"];
+      level.ref_12BBE = ["1", "5", "2", "3", "4"];
       break;
     case "mp_petrograd":
-      level.ref_12bbe = ["1", "9", "4", "5", "2"];
+      level.ref_12BBE = ["1", "9", "4", "5", "2"];
       break;
     case "mp_deadzone":
-      level.ref_12bbe = ["12", "11", "3", "1", "2"];
+      level.ref_12BBE = ["12", "11", "3", "1", "2"];
       break;
     case "mp_raid":
-      level.ref_12bbe = ["20", "2", "8", "9", "5"];
+      level.ref_12BBE = ["20", "2", "8", "9", "5"];
       break;
     case "mp_piccadilly":
-      level.ref_12bbe = ["1", "5", "7", "3", "8"];
+      level.ref_12BBE = ["1", "5", "7", "3", "8"];
       break;
     default:
       break;
@@ -287,8 +287,8 @@ function ref_12bbc() {
 }
 
 function getfirstzone() {
-  if(isDefined(level.ref_12bbe)) {
-    var_0 = level.objectives[level.ref_12bbe[0]];
+  if(isDefined(level.ref_12BBE)) {
+    var_0 = level.objectives[level.ref_12BBE[0]];
     level.prevzoneindex = 0;
   } else {
     var_0 = level.objectives["1"];
@@ -366,14 +366,14 @@ function getnextzone() {
 
     var_23 = level.objectives[var_15];
     level.prevzoneindex = var_15;
-  } else if(isDefined(level.ref_12bbe)) {
+  } else if(isDefined(level.ref_12BBE)) {
     level.prevzoneindex++;
 
-    if(level.prevzoneindex > level.ref_12bbe.size - 1) {
+    if(level.prevzoneindex > level.ref_12BBE.size - 1) {
       level.prevzoneindex = 0;
     }
 
-    var_23 = level.objectives[level.ref_12bbe[level.prevzoneindex]];
+    var_23 = level.objectives[level.ref_12BBE[level.prevzoneindex]];
   } else {
     level.prevzoneindex++;
 
@@ -403,7 +403,7 @@ function spawn_next_zone() {
     level.zone scripts\mp\gameobjects::setobjectivestatusicons(level.iconneutral);
   }
 
-  level.zone thread scripts\common\utility::ref_13e0a(level.ref_11b29, "hill_moved", level.zone.trigger.origin);
+  level.zone thread scripts\common\utility::ref_13E0A(level.ref_11B29, "hill_moved", level.zone.trigger.origin);
 }
 
 function resetzone() {
@@ -443,11 +443,11 @@ function hqactivatenextzone(var_0, var_1) {
     setomnvar("ui_hardpoint_timer", level.zoneendtime);
     setomnvar("ui_hq_status", 1);
 
-    if(level.ref_1221a) {
+    if(level.ref_1221A) {
       level scripts\mp\gamelogic::pausetimer();
     }
 
-    level.zone thread scripts\mp\gametypes\obj_zonecapture::ref_1199e(level.zoneactivationdelay, level.zone.visuals[0].origin + (0, 0, 70));
+    level.zone thread scripts\mp\gametypes\obj_zonecapture::ref_1199E(level.zoneactivationdelay, level.zone.visuals[0].origin + (0, 0, 70));
     wait level.zoneactivationdelay;
     scripts\mp\utility\game::setmlgannouncement(7, "free");
   }
@@ -458,7 +458,7 @@ function hqactivatenextzone(var_0, var_1) {
 
   level thread scripts\mp\hud_message::notifyteam("hq_capture", "hq_capture", "allies");
 
-  if(level.ref_1221a) {
+  if(level.ref_1221A) {
     level scripts\mp\gamelogic::resumetimer();
   }
 
@@ -512,7 +512,7 @@ function hpcaptureloop() {
       level thread scripts\mp\gametypes\grnd::randomdrops();
     }
 
-    var_0 = level scripts\engine\utility::ref_143ad("zone_captured", "zone_destroyed");
+    var_0 = level scripts\engine\utility::ref_143AD("zone_captured", "zone_destroyed");
 
     if(var_0 == "zone_destroyed") {
       continue;
@@ -1172,7 +1172,7 @@ function onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       } else if(var_11 istouching(level.zone.trigger)) {
         var_1 thread scripts\mp\rank::scoreeventpopup("assault");
         var_1 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
-        thread scripts\common\utility::ref_13e0a(level.ref_11b30, var_9, "defending");
+        thread scripts\common\utility::ref_13E0A(level.ref_11B30, var_9, "defending");
       }
     } else if(var_1 istouching(level.zone.trigger)) {
       var_1 thread scripts\mp\rank::scoreeventpopup("defend");
@@ -1213,7 +1213,7 @@ function give_capture_credit(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isPlayer(var_6)) {
     if(!isscoreboosting(var_6)) {
-      var_6 thread scripts\common\utility::ref_13e0a(level.ref_11b29, "capture", var_6.origin);
+      var_6 thread scripts\common\utility::ref_13E0A(level.ref_11B29, "capture", var_6.origin);
       var_6 thread scripts\mp\rank::scoreeventpopup("hq_secure");
       var_6 thread scripts\mp\awards::givemidmatchaward("mode_hp_secure");
 
@@ -1327,7 +1327,7 @@ function awardcapturepoints() {
 
       scripts\mp\gamescore::giveteamscoreforobjective(var_3, var_1, 0);
 
-      if(!istrue(level.ref_12f0e)) {
+      if(!istrue(level.ref_12F0E)) {
         binoculars_cleanupheadiconondisconnect(var_3);
       }
 
@@ -1345,7 +1345,7 @@ function awardcapturepoints() {
 }
 
 function binoculars_cleanupheadiconondisconnect(var_0) {
-  if(!level.ref_1221a) {
+  if(!level.ref_1221A) {
     return;
   }
 
@@ -1353,7 +1353,7 @@ function binoculars_cleanupheadiconondisconnect(var_0) {
   var_2 = scripts\mp\gamescore::_getteamscore(scripts\mp\utility\game::getotherteam(var_0)[0]);
 
   if(var_1 > var_2) {
-    level.ref_12f0e = 1;
+    level.ref_12F0E = 1;
     level scripts\mp\gamelogic::resumetimer();
     return;
   }

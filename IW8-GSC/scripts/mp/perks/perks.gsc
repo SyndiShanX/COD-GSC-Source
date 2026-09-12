@@ -60,13 +60,13 @@ function init() {
   registerscriptperk("specialty_mercenary", undefined, undefined, ["specialty_bounty"]);
   registerscriptperk("specialty_sonar", undefined, undefined, ["specialty_always_minimap"]);
   registerscriptperk("specialty_graverobber", undefined, undefined, ["specialty_scrap_weapons"]);
-  registerscriptperk("specialty_specialist_bonus", &scripts\mp\perks\perkfunctions::ref_131c2, &scripts\mp\perks\perkfunctions::ref_13f6e);
+  registerscriptperk("specialty_specialist_bonus", &scripts\mp\perks\perkfunctions::ref_131C2, &scripts\mp\perks\perkfunctions::ref_13F6E);
   registerscriptperk("specialty_killstreak_to_scorestreak", &scripts\mp\perks\perkfunctions::setkillstreaktoscorestreak, &scripts\mp\perks\perkfunctions::unsetkillstreaktoscorestreak);
   registerscriptperk("specialty_improved_field_upgrades");
   registerscriptperk("specialty_recharge_equipment", &scripts\mp\perks\perkfunctions::setrechargeequipment, &scripts\mp\perks\perkfunctions::unsetrechargeequipment);
   registerscriptperk("specialty_super_sprint_kill_refresh");
   registerscriptperk("specialty_markequipment", &scripts\mp\perks\perkfunctions::setmarkequipment, &scripts\mp\perks\perkfunctions::unsetmarkequipment);
-  registerscriptperk("specialty_chain_killstreaks", &scripts\mp\perks\perkfunctions::ref_13137, &scripts\mp\perks\perkfunctions::ref_13f64);
+  registerscriptperk("specialty_chain_killstreaks", &scripts\mp\perks\perkfunctions::ref_13137, &scripts\mp\perks\perkfunctions::ref_13F64);
   registerscriptperk("specialty_scrap_weapons", &scripts\mp\perks\perkfunctions::setscrapweapons, &scripts\mp\perks\perkfunctions::unsetscrapweapons);
   registerscriptperk("specialty_door_alarm", &scripts\mp\perks\perkfunctions::setdooralarm, &scripts\mp\perks\perkfunctions::unsetdooralarm);
   registerscriptperk("specialty_always_minimap", &scripts\mp\perks\perkfunctions::setalwaysminimap, &scripts\mp\perks\perkfunctions::unsetalwaysminimap);
@@ -76,19 +76,19 @@ function init() {
   registerscriptperk("specialty_emp_resist");
   registerscriptperk("specialty_sixth_sense_immune");
   registerscriptperk("specialty_shrapnel_resist");
-  registerscriptperk("specialty_reduce_regen_delay_on_kill", &scripts\mp\perks\perkfunctions::ref_131b8, &scripts\mp\perks\perkfunctions::ref_13f6c);
-  registerscriptperk("specialty_reduce_regen_delay_on_plate", &scripts\mp\perks\perkfunctions::ref_131ba, undefined);
+  registerscriptperk("specialty_reduce_regen_delay_on_kill", &scripts\mp\perks\perkfunctions::ref_131B8, &scripts\mp\perks\perkfunctions::ref_13F6C);
+  registerscriptperk("specialty_reduce_regen_delay_on_plate", &scripts\mp\perks\perkfunctions::ref_131BA, undefined);
   registerscriptperk("specialty_reduce_regen_delay_on_objective", &scripts\mp\perks\perkfunctions::setreduceregendelayonobjective, &scripts\mp\perks\perkfunctions::unsetreduceregendelayonobjective);
   registerscriptperk("specialty_scrambler_resist");
   registerscriptperk("specialty_no_battle_chatter");
   registerscriptperk("specialty_br_cheaper_kiosk");
   registerscriptperk("specialty_br_faster_revive");
-  registerscriptperk("specialty_br_better_mission_rewards", &scripts\mp\perks\perkfunctions::ref_1312c, &scripts\mp\perks\perkfunctions::ref_13f63);
+  registerscriptperk("specialty_br_better_mission_rewards", &scripts\mp\perks\perkfunctions::ref_1312C, &scripts\mp\perks\perkfunctions::ref_13F63);
   registerscriptperk("specialty_br_extra_killstreak_chance");
 
   if(scripts\mp\utility\game::getgametype() == "br") {
-    registerscriptperk("specialty_br_ping_on_damage", &scripts\mp\perks\perkfunctions::ref_13199, &scripts\mp\perks\perkfunctions::ref_13f69);
-    registerscriptperk("specialty_br_stronger_armor", &scripts\mp\perks\perkfunctions::ref_131c5, &scripts\mp\perks\perkfunctions::ref_13f6f);
+    registerscriptperk("specialty_br_ping_on_damage", &scripts\mp\perks\perkfunctions::ref_13199, &scripts\mp\perks\perkfunctions::ref_13F69);
+    registerscriptperk("specialty_br_stronger_armor", &scripts\mp\perks\perkfunctions::ref_131C5, &scripts\mp\perks\perkfunctions::ref_13F6F);
   } else {
     registerscriptperk("specialty_br_ping_on_damage");
     registerscriptperk("specialty_br_stronger_armor");
@@ -148,14 +148,14 @@ function init() {
 
   registerscriptperk("specialty_br_serpentine", undefined, undefined, ["specialty_br_sprinting_dr"]);
   registerscriptperk("specialty_br_sprinting_dr", undefined, undefined);
-  registerscriptperk("specialty_quick", &scripts\mp\perks\perkfunctions::ref_131b3, &scripts\mp\perks\perkfunctions::ref_13f6a);
+  registerscriptperk("specialty_quick", &scripts\mp\perks\perkfunctions::ref_131B3, &scripts\mp\perks\perkfunctions::ref_13F6A);
   registerscriptperk("specialty_frenzy", undefined, undefined, ["specialty_reduce_regen_delay_on_kill"]);
   registerscriptperk("specialty_shrouded", undefined, undefined);
-  registerscriptperk("specialty_quickscope", &scripts\mp\perks\perkfunctions::ref_131b4, &scripts\mp\perks\perkfunctions::ref_13f6b);
-  registerscriptperk("specialty_hardscope", &scripts\mp\perks\perkfunctions::ref_13159, &scripts\mp\perks\perkfunctions::ref_13f65);
-  registerscriptperk("specialty_nervesofsteel", &scripts\mp\perks\perkfunctions::ref_13176, &scripts\mp\perks\perkfunctions::ref_13f66);
-  registerscriptperk("specialty_panic", &scripts\mp\perks\perkfunctions::ref_13195, &scripts\mp\perks\perkfunctions::ref_13f68);
-  registerscriptperk("specialty_scr_tightgrip", &scripts\mp\perks\perkfunctions::ref_131d0, &scripts\mp\perks\perkfunctions::ref_13f70);
+  registerscriptperk("specialty_quickscope", &scripts\mp\perks\perkfunctions::ref_131B4, &scripts\mp\perks\perkfunctions::ref_13F6B);
+  registerscriptperk("specialty_hardscope", &scripts\mp\perks\perkfunctions::ref_13159, &scripts\mp\perks\perkfunctions::ref_13F65);
+  registerscriptperk("specialty_nervesofsteel", &scripts\mp\perks\perkfunctions::ref_13176, &scripts\mp\perks\perkfunctions::ref_13F66);
+  registerscriptperk("specialty_panic", &scripts\mp\perks\perkfunctions::ref_13195, &scripts\mp\perks\perkfunctions::ref_13F68);
+  registerscriptperk("specialty_scr_tightgrip", &scripts\mp\perks\perkfunctions::ref_131D0, &scripts\mp\perks\perkfunctions::ref_13F70);
   registerscriptperk("specialty_vital");
   registerscriptperk("specialty_icyveins", undefined, undefined, ["specialty_nervesofsteel", "specialty_fastreload_injured"]);
   registerscriptperk("specialty_afterburner", &scripts\mp\perks\perkfunctions::setafterburner, &scripts\mp\perks\perkfunctions::unsetafterburner, ["specialty_thruster"]);
@@ -443,7 +443,7 @@ function initperktable() {
     var_6.ref = var_2;
     var_6.id = int(var_1);
     var_6.specialist = int(var_3);
-    var_6.ref_136d1 = int(var_4);
+    var_6.ref_136D1 = int(var_4);
 
     if(var_5 != "") {
       game["dialog"][var_2] = var_5;
@@ -461,7 +461,7 @@ function initspecialistkillstreaks() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("specialist_perk_1", undefined, &onspecialistkillstreakavailable);
   scripts\mp\killstreaks\killstreaks::registerkillstreak("specialist_perk_2", undefined, &onspecialistkillstreakavailable);
   scripts\mp\killstreaks\killstreaks::registerkillstreak("specialist_perk_3", undefined, &onspecialistkillstreakavailable);
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialist_perk_bonus", undefined, &ref_1208e);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("specialist_perk_bonus", undefined, &ref_1208E);
 }
 
 function onspecialistkillstreakavailable(var_0) {
@@ -511,7 +511,7 @@ function usescriptablemeleeblood(var_0) {
   }
 }
 
-function ref_1208e(var_0) {
+function ref_1208E(var_0) {
   bears();
 }
 
@@ -626,7 +626,7 @@ function battle_tracks_gettrackindex() {
 
 function bears() {
   foreach(var_1 in level.perktable) {
-    var_2 = scripts\engine\utility::ter_op(scripts\mp\utility\game::getgametype() == "br", istrue(var_1.ref_136d1), istrue(var_1.specialist));
+    var_2 = scripts\engine\utility::ter_op(scripts\mp\utility\game::getgametype() == "br", istrue(var_1.ref_136D1), istrue(var_1.specialist));
 
     if(!var_2) {
       continue;
@@ -659,9 +659,9 @@ function bears() {
   }
 }
 
-function ref_12c25() {
+function ref_12C25() {
   foreach(var_1 in level.perktable) {
-    var_2 = scripts\engine\utility::ter_op(scripts\mp\utility\game::getgametype() == "br", istrue(var_1.ref_136d1), istrue(var_1.specialist));
+    var_2 = scripts\engine\utility::ter_op(scripts\mp\utility\game::getgametype() == "br", istrue(var_1.ref_136D1), istrue(var_1.specialist));
 
     if(!var_2) {
       continue;

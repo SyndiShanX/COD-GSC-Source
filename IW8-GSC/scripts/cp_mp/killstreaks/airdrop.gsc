@@ -38,7 +38,7 @@ function initcratedata() {
   var_0.crates = [];
   var_0.usablecrates = [];
   level.cratedata = var_0;
-  level.cratedata.ref_13f28 = pow(getdvarfloat("scr_crateUnresolvedCollisionToleranceSqr", 2), 2);
+  level.cratedata.ref_13F28 = pow(getdvarfloat("scr_crateUnresolvedCollisionToleranceSqr", 2), 2);
   level.mpplayerallowcrateuse = &scripts\common\utility::allow_crate_use;
   level.cratedata.mountmantlemodel = getEnt("care_package_col", "targetname");
 
@@ -70,8 +70,8 @@ function initcratedata() {
       if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "brGetGameModeSpecificCrateData")) {
         var_3 = spawnStruct();
         var_3.model = relic_landlocked_do_explosion();
-        var_3.ref_140a1 = 0.5;
-        var_3.ref_1409f = 3;
+        var_3.ref_140A1 = 0.5;
+        var_3.ref_1409F = 3;
         var_3.usefov = 180;
         [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "brGetGameModeSpecificCrateData")]](var_3);
       }
@@ -91,7 +91,7 @@ function initcratedata() {
   initcratedropdata();
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "registerPlayerFrameUpdateCallback")) {
-    [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "registerPlayerFrameUpdateCallback")]](&ref_13c46);
+    [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "registerPlayerFrameUpdateCallback")]](&ref_13C46);
   }
 
   thread watchallcrateusability();
@@ -706,7 +706,7 @@ function watchdropcratefrommanualheliinternal() {
   self.heli setyawspeed(40, 20, 20, 0.3);
 
   if(distancesquared(self.heli.origin, self.dropposition) > 5184) {
-    self.heli scripts\engine\utility::ref_143a5("death", "goal");
+    self.heli scripts\engine\utility::ref_143A5("death", "goal");
 
     if(!isDefined(self.heli) || istrue(self.heli.isdestroyed)) {
       thread docratedropfrommanualheli();
@@ -739,7 +739,7 @@ function watchdropcratefrommanualheliinternal() {
       }
 
       self.heli setvehgoalpos(self.exitposition, 1);
-      self.heli scripts\engine\utility::ref_143a5("death", "goal");
+      self.heli scripts\engine\utility::ref_143A5("death", "goal");
       return;
     }
 
@@ -1221,8 +1221,8 @@ function watchcrateuse(var_0, var_1) {
   var_3.userate = 1;
   var_3.curprogress = 0;
 
-  if(isDefined(var_3.ref_140a0)) {
-    var_3.usetime = var_3.ref_140a0;
+  if(isDefined(var_3.ref_140A0)) {
+    var_3.usetime = var_3.ref_140A0;
   } else if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType")) {
     var_3.usetime = scripts\engine\utility::ter_op(var_0 == 1, var_2.ownerusetime, var_2.otherusetime);
   }
@@ -1373,7 +1373,7 @@ function startusingcrate(var_0, var_1) {
 function br_bunker_alt() {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\cp_mp\utility\weapon_utility::ref_12eb2();
+  scripts\cp_mp\utility\weapon_utility::ref_12EB2();
   var_0 = getcompleteweaponname("ks_use_crate_mp");
   scripts\cp_mp\utility\inventory_utility::_giveweapon(var_0);
   thread br_checkforlaststandfinish(var_0);
@@ -1393,7 +1393,7 @@ function br_checkforlaststandfinish(var_0) {
   scripts\cp_mp\utility\inventory_utility::_takeweapon(var_0);
 
   if(isDefined(self.lastdroppableweaponobj)) {
-    var_1 = scripts\cp_mp\utility\weapon_utility::ref_12cc7(self.lastdroppableweaponobj);
+    var_1 = scripts\cp_mp\utility\weapon_utility::ref_12CC7(self.lastdroppableweaponobj);
     self switchtoweapon(var_1);
     thread scripts\cp_mp\utility\inventory_utility::forcevalidweapon(var_1);
     return;
@@ -1562,7 +1562,7 @@ function cankeepusingcrate(var_0, var_1) {
   return true;
 }
 
-function ref_11a9c(var_0, var_1) {
+function ref_11A9C(var_0, var_1) {
   var_0 enableplayeruse(var_1);
 
   if(isDefined(var_0.useobject)) {
@@ -1624,7 +1624,7 @@ function ref_14485() {
         var_6 = distancesquared(var_1.origin, var_5.origin) < 57600;
 
         if(var_6) {
-          ref_11a9c(var_1, var_5);
+          ref_11A9C(var_1, var_5);
         }
       }
     }
@@ -1690,9 +1690,9 @@ function infinite_chopper(var_0, var_1) {
   physics_setbodycenterofmassnormal(var_3, (0, 0, -1));
   self.physicsactivated = 1;
   createdangerzone();
-  thread ref_11cfe();
-  thread ref_11d0b();
-  thread ref_11d17();
+  thread ref_11CFE();
+  thread ref_11D0B();
+  thread ref_11D17();
 }
 
 function infilweaponraise() {
@@ -1704,17 +1704,17 @@ function infilweaponraise() {
   self.ref_12332 = undefined;
   self physicsstopserver();
   headicon_z_offset();
-  ref_11d0c();
-  ref_11d18();
+  ref_11D0C();
+  ref_11D18();
   generatecodestoshow();
 }
 
-function ref_11cfe() {
+function ref_11CFE() {
   self endon("death");
   self notify("monitorAverageVelocityAndUpdate");
   self endon("monitorAverageVelocityAndUpdate");
   var_0 = 0.1;
-  thread ref_11cfd(var_0, 8);
+  thread ref_11CFD(var_0, 8);
   var_1 = 0;
   var_2 = 0;
   self.unset_relic_amped = 1;
@@ -1738,7 +1738,7 @@ function ref_11cfe() {
           thread activatecrate(self.unset_relic_amped);
 
           if(isDefined(var_4) && [[var_4]]()) {
-            ref_11d0c();
+            ref_11D0C();
 
             if(isDefined(self.killcament)) {
               self.killcament delete();
@@ -1746,7 +1746,7 @@ function ref_11cfe() {
           }
 
           var_0 = 0.1;
-          thread ref_11cfd(var_0, 3, 3);
+          thread ref_11CFD(var_0, 3, 3);
           lb_mg_dmg_factor_tail_rotor();
         }
       } else {
@@ -1764,7 +1764,7 @@ function ref_11cfe() {
           self.ref_12332 = undefined;
           thread deactivatecrate();
           var_0 = 0.1;
-          thread ref_11cfd(var_0, 8);
+          thread ref_11CFD(var_0, 8);
         }
       }
 
@@ -1776,13 +1776,13 @@ function ref_11cfe() {
   }
 }
 
-function ref_11cfd(var_0, var_1, var_2) {
+function ref_11CFD(var_0, var_1, var_2) {
   headicon_z_offset();
   self endon("death");
   self endon("clear_average_velocities");
   self.x1ops2 = [];
   self.buildrespawnlist = [];
-  self.ref_1428a = 0;
+  self.ref_1428A = 0;
   self.ref_14285 = 0;
   self.ref_14287 = var_1;
   jumpiffalse(isDefined(var_2)) LOC_0000007a;
@@ -1790,8 +1790,8 @@ function ref_11cfd(var_0, var_1, var_2) {
   jumpiffalse(var_2 > 0) LOC_0000007a;
 
   for(var_3 = 0; var_3 < var_2; var_3++) {
-    self.x1ops2[self.ref_1428a + var_3] = 0;
-    self.buildrespawnlist[self.ref_1428a + var_3] = 0;
+    self.x1ops2[self.ref_1428A + var_3] = 0;
+    self.buildrespawnlist[self.ref_1428A + var_3] = 0;
   }
 
   for(;;) {
@@ -1801,17 +1801,17 @@ function ref_11cfd(var_0, var_1, var_2) {
     self.x1ops2[self.ref_14285] = length(var_5);
     self.buildrespawnlist[self.ref_14285] = length(var_6);
     self.ref_14285++;
-    var_7 = self.ref_14285 - self.ref_1428a;
+    var_7 = self.ref_14285 - self.ref_1428A;
 
     if(var_7 > var_1) {
       var_8 = scripts\engine\utility::mod(var_7, var_1);
 
       for(var_3 = 0; var_3 < var_8; var_3++) {
-        self.x1ops2[self.ref_1428a + var_3] = undefined;
-        self.buildrespawnlist[self.ref_1428a + var_3] = undefined;
+        self.x1ops2[self.ref_1428A + var_3] = undefined;
+        self.buildrespawnlist[self.ref_1428A + var_3] = undefined;
       }
 
-      self.ref_1428a += var_8;
+      self.ref_1428A += var_8;
     }
 
     self.checkrequiredteamstreamcount = undefined;
@@ -1829,7 +1829,7 @@ function registeronplayerjointeamnospectatorcallback() {
     return undefined;
   }
 
-  if(self.ref_14285 - self.ref_1428a < self.ref_14287) {
+  if(self.ref_14285 - self.ref_1428A < self.ref_14287) {
     return undefined;
   }
 
@@ -1846,7 +1846,7 @@ function registeronplayerdisconnect() {
     return undefined;
   }
 
-  if(self.ref_14285 - self.ref_1428a < self.ref_14287) {
+  if(self.ref_14285 - self.ref_1428A < self.ref_14287) {
     return undefined;
   }
 
@@ -1858,7 +1858,7 @@ function forcestuckdamageclear() {
   var_0 = 0;
   var_1 = 0;
 
-  for(var_2 = self.ref_1428a; var_2 < self.ref_14285; var_2++) {
+  for(var_2 = self.ref_1428A; var_2 < self.ref_14285; var_2++) {
     var_0 += self.x1ops2[var_2];
     var_1 += self.buildrespawnlist[var_2];
   }
@@ -1872,27 +1872,27 @@ function headicon_z_offset() {
   self.x1ops2 = undefined;
   self.buildrespawnlist = undefined;
   self.ref_14287 = undefined;
-  self.ref_1428a = undefined;
+  self.ref_1428A = undefined;
   self.ref_14285 = undefined;
   self.checkrequiredteamstreamcount = undefined;
   self.checkreload = undefined;
 }
 
-function ref_11d0b(var_0) {
-  ref_11d0c();
+function ref_11D0B(var_0) {
+  ref_11D0C();
   self endon("monitorImpactEnd");
-  self.ref_11d0e = 1;
+  self.ref_11D0E = 1;
   self playLoopSound("mp_care_package_drop_lp");
   self physics_registerforcollisioncallback();
-  ref_11d0d(var_0);
+  ref_11D0D(var_0);
 
   if(isDefined(self)) {
-    thread ref_11d0c();
+    thread ref_11D0C();
     return;
   }
 }
 
-function ref_11d0d(var_0) {
+function ref_11D0D(var_0) {
   self endon("death");
 
   if(isDefined(var_0)) {
@@ -1931,23 +1931,23 @@ function ref_11d0d(var_0) {
         var_11 = "user_terrain_5";
       }
 
-      ref_1273b(var_6, var_7, var_8, var_11);
+      ref_1273B(var_6, var_7, var_8, var_11);
     }
   }
 }
 
 function getkioskyawoffsetoverride(var_0) {
   if(isDefined(var_0.script_noteworthy) && isstartstr(var_0.script_noteworthy, "train_") && !isDefined(self getlinkedparent())) {
-    if(isDefined(self.ref_13cc8)) {
-      if(self.ref_13cc8 == var_0) {
+    if(isDefined(self.ref_13CC8)) {
+      if(self.ref_13CC8 == var_0) {
         return;
       } else {
         generatecodestoshow();
       }
     }
 
-    self.ref_13cc8 = var_0;
-    self.ref_13cc7 = 4;
+    self.ref_13CC8 = var_0;
+    self.ref_13CC7 = 4;
     thread getknivesoutsetting(var_0);
     return;
   }
@@ -1965,27 +1965,27 @@ function getknivesoutsetting(var_0) {
     var_3 = var_5;
   }
 
-  self.ref_13cce = 0;
-  self.ref_13cd0 = 0;
+  self.ref_13CCE = 0;
+  self.ref_13CD0 = 0;
 
-  while(self.ref_13cce < 5) {
+  while(self.ref_13CCE < 5) {
     var_7 = self.origin + anglestoup(self.angles) * var_1.setplayerbeingrevivedextrainfo;
     var_8 = var_7 + (0, 0, -200);
     var_9 = scripts\engine\trace::ray_trace(var_7, var_8, var_3, var_2);
 
-    if(var_9.size > 0 && isDefined(var_9["entity"]) && var_9["entity"] == self.ref_13cc8) {
+    if(var_9.size > 0 && isDefined(var_9["entity"]) && var_9["entity"] == self.ref_13CC8) {
       var_10 = combineangles(invertangles(var_0.angles), var_0.origin - var_9["position"]);
 
-      if(!isDefined(self.ref_13ccf)) {} else if(distancesquared(var_10, self.ref_13ccf) > 25) {
-        self.ref_13cce++;
-        self.ref_13cd0 = 0;
-      } else if(vectordot(var_10, self.ref_13ccf) < 0.997) {
-        self.ref_13cce++;
-        self.ref_13cd0 = 0;
+      if(!isDefined(self.ref_13CCF)) {} else if(distancesquared(var_10, self.ref_13CCF) > 25) {
+        self.ref_13CCE++;
+        self.ref_13CD0 = 0;
+      } else if(vectordot(var_10, self.ref_13CCF) < 0.997) {
+        self.ref_13CCE++;
+        self.ref_13CD0 = 0;
       } else {
-        self.ref_13cd0++;
+        self.ref_13CD0++;
 
-        if(self.ref_13cd0 >= 4) {
+        if(self.ref_13CD0 >= 4) {
           self linkTo(var_0);
           activatecrate(self.unset_relic_amped);
           thread infilweaponraise();
@@ -1993,7 +1993,7 @@ function getknivesoutsetting(var_0) {
         }
       }
 
-      self.ref_13ccf = var_10;
+      self.ref_13CCF = var_10;
     } else {
       break;
     }
@@ -2006,10 +2006,10 @@ function getknivesoutsetting(var_0) {
 
 function generatecodestoshow() {
   self notify("cancel_link_to_train");
-  self.ref_13cc8 = undefined;
-  self.ref_13ccf = undefined;
-  self.ref_13cce = undefined;
-  self.ref_13cd0 = undefined;
+  self.ref_13CC8 = undefined;
+  self.ref_13CCF = undefined;
+  self.ref_13CCE = undefined;
+  self.ref_13CD0 = undefined;
 }
 
 function br_badcircleareas(var_0) {
@@ -2022,13 +2022,13 @@ function br_badcircleareas(var_0) {
   }
 }
 
-function ref_11d0c() {
-  if(!istrue(self.ref_11d0e)) {
+function ref_11D0C() {
+  if(!istrue(self.ref_11D0E)) {
     return;
   }
 
   self notify("monitorImpactEnd");
-  self.ref_11d0e = undefined;
+  self.ref_11D0E = undefined;
   self stoploopsound("mp_care_package_drop_lp");
   self physics_unregisterforcollisioncallback();
 }
@@ -2051,8 +2051,8 @@ function start_chants_on_movement(var_0) {
   return false;
 }
 
-function ref_11d17() {
-  ref_11d18();
+function ref_11D17() {
+  ref_11D18();
   self endon("death");
   self endon("monitorPlayerImpactEnd");
   var_0 = self;
@@ -2091,11 +2091,11 @@ function ref_11d17() {
   }
 }
 
-function ref_11d18() {
+function ref_11D18() {
   self notify("monitorPlayerImpactEnd");
 }
 
-function ref_1273b(var_0, var_1, var_2, var_3) {
+function ref_1273B(var_0, var_1, var_2, var_3) {
   playFX(scripts\engine\utility::getfx("airdrop_crate_impact"), var_0, var_1);
 
   if(var_2 < 150) {
@@ -2223,8 +2223,8 @@ function destroymountmantlemodel() {
 }
 
 function crateunresolvedcollisioncallback(var_0, var_1) {
-  if(level.cratedata.ref_13f28 > 0) {
-    if(lengthsquared(var_1) <= level.cratedata.ref_13f28) {
+  if(level.cratedata.ref_13F28 > 0) {
+    if(lengthsquared(var_1) <= level.cratedata.ref_13F28) {
       return;
     }
   }
@@ -2528,7 +2528,7 @@ function getnumdroppedcrates() {
   return level.cratedata.crates.size;
 }
 
-function ref_13c46() {
+function ref_13C46() {
   if(!isDefined(self.numactivejuggdrops)) {
     if(self ismantling()) {
       var_0 = self getmovingplatformparent();
@@ -3089,7 +3089,7 @@ function airdrop_watchplayerweapon(var_0) {
   self notifyonplayercommand("cancel_deploy", "+actionslot 4");
   self notifyonplayercommand("cancel_deploy", "+actionslot 5");
   self notifyonplayercommand("cancel_deploy", "+actionslot 6");
-  var_1 = scripts\engine\utility::ref_143ad("cancel_deploy", "weapon_switch_started");
+  var_1 = scripts\engine\utility::ref_143AD("cancel_deploy", "weapon_switch_started");
 
   if(!isDefined(var_1)) {
     return;
@@ -3275,7 +3275,7 @@ function airdropmarkeractivate(var_0, var_1, var_2) {
     return;
   }
 
-  var_5 scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_2);
+  var_5 scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_2);
 }
 
 function airdropmarkertaken(var_0) {
@@ -3642,8 +3642,8 @@ function minshotstostage3acc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     var_23 = getleveldata(var_14);
 
-    if(isDefined(var_23.ref_127fd)) {
-      var_15 thread[[var_23.ref_127fd]]();
+    if(isDefined(var_23.ref_127FD)) {
+      var_15 thread[[var_23.ref_127FD]]();
     }
   }
 
@@ -3915,7 +3915,7 @@ function teammatereviveweaponwaitputaway() {
   var_0.destroycallback = &display_fx_names_after_plane_spawns;
   var_0.activatecallback = &display_cypher_updated;
   var_0.ingame = &display_headicon_to_players;
-  var_0.ref_127fd = &display_hint_for_all;
+  var_0.ref_127FD = &display_hint_for_all;
   var_0.destroyoncapture = 1;
 }
 
@@ -4058,8 +4058,8 @@ function modifydestructibledamage(var_0) {
   var_1 = 4096;
   var_2 = var_0 + (0, 0, var_1);
   var_3 = var_0 + (0, 0, 512);
-  level.ref_12ce8.plundereventtime = spawnfx(level._effect["smoke_tactical_device"], level.ref_12ce8.level_carepackage_give_player_killstreak_incendiary_launcher - (0, 0, 60));
-  triggerfx(level.ref_12ce8.plundereventtime);
+  level.ref_12CE8.plundereventtime = spawnfx(level._effect["smoke_tactical_device"], level.ref_12CE8.level_carepackage_give_player_killstreak_incendiary_launcher - (0, 0, 60));
+  triggerfx(level.ref_12CE8.plundereventtime);
   var_4 = dropcrate(undefined, undefined, "battle_royale_tactical_device", var_2, (0, randomfloat(360), 0), var_3);
   var_4.skipminimapicon = 1;
   endround_timescalefactor(var_4);

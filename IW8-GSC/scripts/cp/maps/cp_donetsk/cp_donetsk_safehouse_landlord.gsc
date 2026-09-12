@@ -10,12 +10,12 @@ function registersafehouse() {
   scripts\engine\utility::flag_init("airfield_safehouse_open");
   scripts\cp\cp_objectives::registerobjective("safehouse_landlord_mnu", undefined, undefined, undefined, undefined, &debug_safehouse_start);
   scripts\cp\cp_objectives::registerobjective("safehouse_landlord", undefined, &start_safehouse, undefined, &debugbeatobjective, &debugbeatobjective);
-  scripts\cp\cp_objectives::registerobjective("safehouse_landlord_regroup_mnu", undefined, &ref_12e59, undefined, undefined, &debugbeatobjective);
-  scripts\cp\cp_objectives::registerobjective("safehouse_landlord_regroup", undefined, &ref_137f8, undefined, &debugbeatobjective, &debugbeatobjective);
+  scripts\cp\cp_objectives::registerobjective("safehouse_landlord_regroup_mnu", undefined, &ref_12E59, undefined, undefined, &debugbeatobjective);
+  scripts\cp\cp_objectives::registerobjective("safehouse_landlord_regroup", undefined, &ref_137F8, undefined, &debugbeatobjective, &debugbeatobjective);
   scripts\engine\utility::flag_set("cp_donetsk_safehouse_landlord_cs");
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_landlord_cs_completed");
   level.initlocs_bunkertest = scripts\engine\utility::getStructArray("landlord_safehouse_player_start", "targetname");
-  level thread scripts\mp\vehicles\vehicle_damage_mp::ref_12e57();
+  level thread scripts\mp\vehicles\vehicle_damage_mp::ref_12E57();
 }
 
 function debugbeatobjective(var_0) {}
@@ -39,7 +39,7 @@ function isprophuntgametype(var_0) {
   scripts\engine\utility::flag_set("cp_donetsk_safehouse_landlord_cs");
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_landlord_cs_completed");
   scripts\cp\utility::teleportallplayersinteamtostructs("allies", "landlord_safehouse_regroup_player_start");
-  thread ref_137f9();
+  thread ref_137F9();
 }
 
 function spawn_atvs() {
@@ -52,7 +52,7 @@ function spawn_atvs() {
 
   var_0 = scripts\engine\utility::getStructArray("landlord_atv_spawn", "script_noteworthy");
   level thread scripts\cp\vehicles\atv_cp::atv_cp_createfromstructs(var_0, 1);
-  level thread scripts\cp\maps\cp_donetsk\cp_donetsk_obj_overwatch::ref_135ac();
+  level thread scripts\cp\maps\cp_donetsk\cp_donetsk_obj_overwatch::ref_135AC();
 }
 
 function start_safehouse_objective() {
@@ -62,28 +62,28 @@ function start_safehouse_objective() {
 
 function start_safehouse(var_0) {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_landlord_cs_completed");
-  level.ref_121b1 = getEnt("Phase4OutOfBounds", "targetname");
+  level.ref_121B1 = getEnt("Phase4OutOfBounds", "targetname");
 
-  if(isDefined(level.ref_121b1)) {
-    thread scripts\cp\cp_outofbounds::watchoobtrigger(level.ref_121b1);
+  if(isDefined(level.ref_121B1)) {
+    thread scripts\cp\cp_outofbounds::watchoobtrigger(level.ref_121B1);
   }
 
   scripts\cp\utility::teleportallplayersinteamtostructs("allies", "landlord_safehouse_player_start");
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(1);
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC2(1);
   scripts\engine\utility::flag_wait("player_spawned_with_loadout");
   var_1 = scripts\mp\vehicles\little_bird_mg_mp::blockachievementstimestamp((16520, -4520, 1656));
   var_2 = getentitylessscriptablearrayinradius("scriptable_scriptable_auto_descender", "classname", var_1.origin, 256);
   var_3 = var_2[0];
   var_3 setscriptablepartstate("ascender", "noprompt");
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, (16520, -4520, 1656), 2048, "scriptable_door_metal_single_b_02_grey", "classname");
-  level.ref_139b5 = 1;
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(1, (16520, -4520, 1656), 2048, "scriptable_door_metal_single_b_02_grey", "classname");
+  level.ref_139B5 = 1;
   thread trial_spawn_wp();
   thread trial_special_end();
   thread spawn_atvs();
   thread managejumpmasterinfodisplay();
   level waittill("allow_descender");
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(0);
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, (16520, -4520, 1656), 2048, "scriptable_door_metal_single_b_02_grey", "classname");
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC2(0);
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(0, (16520, -4520, 1656), 2048, "scriptable_door_metal_single_b_02_grey", "classname");
 
   foreach(var_5 in level.players) {
     var_5 skydive_setbasejumpingstatus(1);
@@ -95,17 +95,17 @@ function start_safehouse(var_0) {
   scripts\cp\cp_objectives::overridenextstep(var_0, "obj_tmtyl_0");
 }
 
-function ref_137f9() {
+function ref_137F9() {
   wait 3;
   scripts\cp\cp_objectives::run_objective("safehouse_landlord_regroup", "primary", "allies");
 }
 
-function ref_12e59(var_0) {
+function ref_12E59(var_0) {
   scripts\engine\utility::flag_set("cp_airfield_create_script");
   scripts\engine\utility::flag_wait("cp_airfield_create_script_completed");
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
   scripts\cp\utility::teleportallplayersinteamtostructs("allies", "default_player_start_airfield");
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(1);
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC2(1);
   thread br_circleshowdelaysafe();
   thread br_clearinventory();
   setDvar("restart_checkpoint", "");
@@ -114,7 +114,7 @@ function ref_12e59(var_0) {
   ref_14329(1);
 }
 
-function ref_137f8(var_0) {
+function ref_137F8(var_0) {
   if(!scripts\engine\utility::flag_exist("cp_donetsk_safehouse_landlord_cs")) {
     scripts\engine\utility::flag_init("cp_donetsk_safehouse_landlord_cs");
   }
@@ -123,12 +123,12 @@ function ref_137f8(var_0) {
   scripts\engine\utility::flag_wait("cp_donetsk_safehouse_landlord_cs_completed");
 
   if(!scripts\engine\utility::flag("players_regrouped")) {
-    thread ref_12b44(var_0);
+    thread ref_12B44(var_0);
     scripts\engine\utility::flag_wait("players_regrouped");
-    thread ref_13ce6();
+    thread ref_13CE6();
 
-    if(isDefined(level.ref_121b1)) {
-      level.ref_121b1 scripts\engine\utility::trigger_off();
+    if(isDefined(level.ref_121B1)) {
+      level.ref_121B1 scripts\engine\utility::trigger_off();
     }
 
     setDvar("restart_checkpoint", "");
@@ -138,12 +138,12 @@ function ref_137f8(var_0) {
   }
 }
 
-function ref_12b44(var_0) {
+function ref_12B44(var_0) {
   var_1 = (19872, 3712, -442.974);
   thread return_to_safehouse_vo();
   objective_position(var_0.objectiveindex, var_1 + (0, 0, 90));
   objective_setlabel(var_0.objectiveindex, &"CP_STRIKE/SAFEHOUSE_REGROUP");
-  thread ref_12b47(var_1);
+  thread ref_12B47(var_1);
 }
 
 function return_to_safehouse_vo() {
@@ -152,12 +152,12 @@ function return_to_safehouse_vo() {
   scripts\cp\cp_dialogue::play_vo_to_all("dx_cps_ovl_safehouse_return_safehouse_10");
 }
 
-function ref_12b47(var_0) {
+function ref_12B47(var_0) {
   var_1 = 0;
   var_2 = 0;
 
   while(var_1 < 31) {
-    var_3 = ref_11f26(var_0);
+    var_3 = ref_11F26(var_0);
 
     if(var_3) {
       if(var_3 == level.players.size) {
@@ -192,7 +192,7 @@ function zombienumhitsatv() {
   scripts\engine\utility::flag_wait("cp_airfield_create_script_completed");
 }
 
-function ref_11f26(var_0) {
+function ref_11F26(var_0) {
   var_1 = 0;
   var_2 = 148996;
 
@@ -207,11 +207,11 @@ function ref_11f26(var_0) {
 
 function ref_14329(var_0) {
   scripts\cp\cp_compass::setupminimap("compass_map_cp_landlord_2");
-  ref_135b4();
+  ref_135B4();
 
-  if(!isDefined(level.ref_121b1)) {} else {
-    level.ref_121b1.origin = (24889, 13966, 11264);
-    level.ref_121b1 scripts\engine\utility::trigger_on();
+  if(!isDefined(level.ref_121B1)) {} else {
+    level.ref_121B1.origin = (24889, 13966, 11264);
+    level.ref_121B1 scripts\engine\utility::trigger_on();
   }
 
   if(!istrue(var_0)) {
@@ -235,7 +235,7 @@ function ref_14329(var_0) {
   }
 
   var_2 delete();
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(0);
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC2(0);
   var_4 = getEnt("airfield_safehouse_garage_door", "targetname");
   var_4 setscriptablepartstate("base", "opening");
   scripts\engine\utility::flag_set("airfield_safehouse_open");
@@ -271,7 +271,7 @@ function trial_spawn_wp() {
   thread scripts\mp\vehicles\vehicle_damage_mp::molotov_get_pool_level_data(var_0);
 }
 
-function ref_135e8(var_0, var_1) {
+function ref_135E8(var_0, var_1) {
   if(!isDefined(var_0.angles)) {
     var_0.angles = (0, 0, 0);
   }
@@ -290,19 +290,19 @@ function ref_135e8(var_0, var_1) {
   self.anchor rotateTo(var_2, 0.75);
   self.anchor moveTo(var_1.origin, 2);
   wait 1.85;
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(0.15, 0.25, 0.5);
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340D(0.15, 0.25, 0.5);
   wait 0.5;
   self cameraunlink();
   self.anchor delete();
   self clearpredictedstreampos();
 }
 
-function ref_13ce6() {
+function ref_13CE6() {
   foreach(var_1 in level.players) {
     level thread scripts\mp\vehicles\vehicle_damage_mp::regroup_blackscreen(var_1, "showtext", "safehouse_landlord_regroup", "fadein");
   }
 
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(1);
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC2(1);
   zombienumhitsatv();
   level notify("showtext");
   level waittill("regroup_text_done");
@@ -321,7 +321,7 @@ function ref_13ce6() {
   }
 
   var_6 = scripts\engine\utility::getStructArray(var_5, "targetname");
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_12e5a(var_6);
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_12E5A(var_6);
   wait 1;
   level notify("fadein");
   wait 3;
@@ -346,7 +346,7 @@ function managejumpmasterinfodisplay() {
     wait 3;
     level notify("allow_descender");
     level notify("intro_VO_Done");
-    level.ref_139b5 = 0;
+    level.ref_139B5 = 0;
     return;
   }
 
@@ -375,10 +375,10 @@ function managejumpmasterinfodisplay() {
   wait level scripts\cp\cp_player_battlechatter::trysaylocalsound(var_1, "conv_generic_affirm");
   level notify("intro_VO_Done");
   setDvar("intro_vo", 1);
-  level.ref_139b5 = 0;
+  level.ref_139B5 = 0;
 }
 
-function ref_135b4() {
+function ref_135B4() {
   var_0 = spawnStruct();
   var_0.origin = (3097.5, 61399, 758.734);
   var_0.angles = (0, 225, 0);
@@ -389,7 +389,7 @@ function ref_135b4() {
 function ref_13776(var_0) {
   zombienumhitsatv();
   scripts\cp\utility::teleportallplayersinteamtostructs("allies", "default_player_start_airfield");
-  scripts\mp\vehicles\vehicle_damage_mp::ref_13bc2(1);
+  scripts\mp\vehicles\vehicle_damage_mp::ref_13BC2(1);
   thread br_circleshowdelaysafe();
   thread br_clearinventory();
   setDvar("restart_checkpoint", "");

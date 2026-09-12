@@ -4,7 +4,7 @@
 ***********************************************/
 
 function x1opsnpcweaponbarrelmodel() {
-  scripts\engine\utility::create_func_ref("little_bird_mg", &ref_134fa);
+  scripts\engine\utility::create_func_ref("little_bird_mg", &ref_134FA);
   scripts\cp_mp\utility\script_utility::registersharedfunc("little_bird_mg", "create", &x1opsnpcheadmodel);
   scripts\cp_mp\utility\script_utility::registersharedfunc("little_bird_mg", "initLate", &x1opsnpcweaponmagmodel);
   scripts\cp_mp\utility\script_utility::registersharedfunc("little_bird_mg", "spawnCallback", &x1opspreplayertransition);
@@ -18,7 +18,7 @@ function x1opsnpcheadmodel(var_0) {
   var_0.vehicle_specific_onexitvehicle = &x1opsplayertransition;
   var_1 = var_0 getentitynumber();
   being_pickedup(var_0, var_1);
-  thread ref_12c04(var_0);
+  thread ref_12C04(var_0);
 }
 
 function x1opsnpcweaponmagmodel() {
@@ -59,7 +59,7 @@ function ref_13581(var_0, var_1, var_2, var_3) {
   }
 }
 
-function ref_134fa(var_0) {
+function ref_134FA(var_0) {
   var_1 = spawnStruct();
   var_1.origin = var_0.origin + (0, 0, 100);
   var_1.angles = var_0.angles * (0, 1, 0);
@@ -84,7 +84,7 @@ function being_pickedup(var_0) {
   level.zombiejumpbar[var_0] = self;
 }
 
-function ref_12c04(var_0) {
+function ref_12C04(var_0) {
   self waittill("death");
   level.zombiejumpbar[var_0] = undefined;
 }

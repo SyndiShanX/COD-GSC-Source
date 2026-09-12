@@ -3,7 +3,7 @@
  * Script: scripts\mp\vehicles\vehicle_damage_mp.gsc
 *****************************************************/
 
-function ref_1340d(var_0, var_1, var_2) {
+function ref_1340D(var_0, var_1, var_2) {
   var_3 = newclienthudelem(self);
   var_3.x = 0;
   var_3.y = 0;
@@ -91,7 +91,7 @@ function regroup_blackscreen(var_0, var_1, var_2, var_3) {
   var_4.alpha = 1;
   var_4.foreground = 1;
   level waittill(var_1);
-  thread ref_1333e(var_0);
+  thread ref_1333E(var_0);
   level waittill(var_3);
   var_0 setclientomnvar("ui_chyron_on", 0);
   var_0 setclientomnvar("ui_hide_hud", 0);
@@ -103,14 +103,14 @@ function regroup_blackscreen(var_0, var_1, var_2, var_3) {
   var_4 destroy();
 }
 
-function ref_13bc2(var_0) {
+function ref_13BC2(var_0) {
   if(istrue(var_0)) {
     level.disable_hotjoin_via_ac130 = 1;
     level.dogtag_revive = 1;
     level.disable_munitions = 1;
     level.ref_13666 = 1;
   } else {
-    if(!istrue(level.ref_12b73)) {
+    if(!istrue(level.ref_12B73)) {
       level.disable_hotjoin_via_ac130 = 0;
       level.dogtag_revive = 0;
     }
@@ -123,23 +123,23 @@ function ref_13bc2(var_0) {
 
   if(var_0) {
     level thread scripts\cp\cp_kidnapper::togglekidnappers(0);
-    level.ref_127f6 = &ref_127f6;
+    level.ref_127F6 = &ref_127F6;
   } else {
     level thread scripts\cp\cp_kidnapper::togglekidnappers(1);
-    level.ref_127f6 = undefined;
+    level.ref_127F6 = undefined;
   }
 
   foreach(var_2 in level.players) {
-    ref_13bbe(var_2, var_0);
+    ref_13BBE(var_2, var_0);
   }
 }
 
-function ref_13bbe(var_0) {
+function ref_13BBE(var_0) {
   var_1 = self;
 
   if(var_0) {
     var_1 setdemeanorviewmodel("safe", "iw8_ges_demeanor_safe");
-    thread ref_142b1();
+    thread ref_142B1();
     var_1 disableweaponswitch();
     var_1 disableoffhandweapons();
     var_1 allowmelee(0);
@@ -173,7 +173,7 @@ function ref_13bbe(var_0) {
   var_1.ignoreme = 0;
 }
 
-function ref_142b1() {
+function ref_142B1() {
   self endon("normal_demeanor");
   self notify("viewmodel_demeanor");
   self endon("viewmodel_demeanor");
@@ -226,7 +226,7 @@ function edit_loadout(var_0) {
   var_0 disableplayeruse(self);
   self setclientomnvar("cp_open_cac", -1);
   self setclientomnvar("ui_options_menu", 2);
-  scripts\engine\utility::ref_143a5("loadout_given", "loadout_menu_closed");
+  scripts\engine\utility::ref_143A5("loadout_given", "loadout_menu_closed");
   wait 1;
   self setclientomnvar("cp_open_cac", -2);
   var_0 enableplayeruse(self);
@@ -237,12 +237,12 @@ function ref_11952(var_0, var_1) {
   var_0 endon("death_or_disconnect");
   var_0 endon("loadout_menu_closed");
   var_0 waittill("last_stand_start");
-  thread ref_124e0(level, var_0);
+  thread ref_124E0(level, var_0);
   var_0 setclientomnvar("cp_open_cac", -2);
   var_0 clearsoundsubmix("cp_store_duck", 1);
 }
 
-function ref_124e0(var_0, var_1) {
+function ref_124E0(var_0, var_1) {
   level endon("game_ended");
   var_0 endon("disconnect");
   var_0 endon("revive");
@@ -275,7 +275,7 @@ function run_mission(var_0) {
   scripts\engine\utility::delaythread(2, &scripts\cp\cp_objectives::run_objective, var_0, "primary");
 }
 
-function ref_12e5a(var_0) {
+function ref_12E5A(var_0) {
   foreach(var_2 in level.players) {
     var_3 = 0;
 
@@ -283,11 +283,11 @@ function ref_12e5a(var_0) {
       var_3 = 1;
     }
 
-    thread ref_124ce(var_2, var_0, var_4);
+    thread ref_124CE(var_2, var_0, var_4);
   }
 }
 
-function ref_124ce(var_0, var_1, var_2) {
+function ref_124CE(var_0, var_1, var_2) {
   self endon("disconnect");
   var_0[var_1].angles = scripts\engine\utility::ter_op(isDefined(var_0[var_1].angles), var_0[var_1].angles, (0, 0, 0));
   self.respawn_forcespawnorigin = var_0[var_1].origin;
@@ -327,7 +327,7 @@ function ref_124ce(var_0, var_1, var_2) {
   self setplayerangles(var_0[var_1].angles);
 }
 
-function ref_11f27(var_0) {
+function ref_11F27(var_0) {
   var_1 = 0;
 
   if(isDefined(var_0)) {
@@ -341,12 +341,12 @@ function ref_11f27(var_0) {
   return var_1;
 }
 
-function ref_12e58(var_0, var_1) {
+function ref_12E58(var_0, var_1) {
   var_2 = 0;
   var_3 = 0;
 
   while(var_2 < 31) {
-    var_4 = ref_11f27(var_0);
+    var_4 = ref_11F27(var_0);
     var_5 = raid_seq3_objectives_func();
 
     if(var_4 && var_5.size == 0) {
@@ -395,13 +395,13 @@ function raid_seq3_objectives_func() {
   return var_0;
 }
 
-function ref_12e56(var_0) {
+function ref_12E56(var_0) {
   foreach(var_2 in var_0) {
     var_2 thread scripts\cp\utility::create_fake_loot();
   }
 }
 
-function ref_13bc1(var_0, var_1, var_2, var_3, var_4) {
+function ref_13BC1(var_0, var_1, var_2, var_3, var_4) {
   var_5 = getentitylessscriptablearrayinradius("scriptable_" + var_3, var_4, var_1, var_2);
 
   foreach(var_7 in var_5) {
@@ -476,19 +476,19 @@ function ref_12408(var_0, var_1) {
   wait 0.4 + randomfloat(0.4);
 }
 
-function ref_12e57() {
+function ref_12E57() {
   level endon("game_ended");
 
   for(;;) {
     level waittill("player_spawned", var_0);
 
     if(istrue(level.ref_13666)) {
-      thread ref_12e5b();
+      thread ref_12E5B();
     }
   }
 }
 
-function ref_12e5b() {
+function ref_12E5B() {
   self endon("disconnect");
   var_0 = self;
   var_1 = 0;
@@ -506,7 +506,7 @@ function ref_12e5b() {
           var_0 setOrigin(var_3.origin);
           var_0 setplayerangles(var_3.angles);
           var_0 dontinterpolate();
-          ref_13bbe(var_0, 1);
+          ref_13BBE(var_0, 1);
           var_1 = 1;
         }
       }
@@ -520,7 +520,7 @@ function ref_12e5b() {
   }
 }
 
-function ref_127f6() {
+function ref_127F6() {
   self endon("disconnect");
   level endon("game_ended");
 
@@ -533,13 +533,13 @@ function ref_127f6() {
 
   if(istrue(level.ref_13666)) {
     self setdemeanorviewmodel("safe", "iw8_ges_demeanor_safe");
-    ref_13bbe(1);
-    self.ref_124c8 = 1;
+    ref_13BBE(1);
+    self.ref_124C8 = 1;
     return;
   }
 }
 
-function ref_1333e(var_0) {
+function ref_1333E(var_0) {
   var_1 = getDvar("ui_mapname");
   var_2 = "cp/" + var_1 + "_objectives.csv";
   var_3 = int(tablelookup(var_2, 1, var_0, 0));

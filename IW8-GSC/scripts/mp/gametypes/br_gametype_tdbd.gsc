@@ -5,10 +5,10 @@
 
 function init() {
   setDvar("scr_br_altprematchloadout", "classtable_brdbd_prematch");
-  scripts\mp\gametypes\br_gametypes::ref_12b11("regenHealthAdd", &ref_1264b);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("postMainInit", &ref_12803);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerNakedDropLoadout", &ref_12604);
-  scripts\mp\gametypes\br_gametypes::ref_12b11("playerAdditionalGulagDropLogic", &playergulagdroploadout);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("regenHealthAdd", &ref_1264B);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("postMainInit", &ref_12803);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerNakedDropLoadout", &ref_12604);
+  scripts\mp\gametypes\br_gametypes::ref_12B11("playerAdditionalGulagDropLogic", &playergulagdroploadout);
 
   if(getdvarint("scr_br_tdbd_hunter_enabled", 1) == 1) {
     _keypadscriptableused_bunkeralt::init();
@@ -44,7 +44,7 @@ function init() {
     scripts\mp\gametypes\br_gametypes::load_sequence_3_vfx("motorcycleSpawns");
   }
 
-  level.ref_11c95 = &ref_11c95;
+  level.ref_11C95 = &ref_11C95;
   level.disable_super_in_turret.iscontender = getdvarfloat("scr_br_dbd_healthregenrate", 1);
   level.disable_super_in_turret.iscloseto = getdvarfloat("scr_br_dbd_gasdamagesclar", 1.5);
   level.disable_super_in_turret.iscrossbowbolt = getdvarfloat("scr_br_dbd_stimregenscalar", 4);
@@ -62,7 +62,7 @@ function ref_12803() {
   thread soundbank_load();
 }
 
-function ref_1264b(var_0) {
+function ref_1264B(var_0) {
   if(istrue(self.adrenalinepoweractive)) {
     return float(level.disable_super_in_turret.iscontender * level.disable_super_in_turret.iscrossbowbolt);
   }
@@ -70,7 +70,7 @@ function ref_1264b(var_0) {
   return float(level.disable_super_in_turret.iscontender);
 }
 
-function ref_11c95(var_0) {
+function ref_11C95(var_0) {
   return int(var_0 * level.disable_super_in_turret.iscloseto);
 }
 

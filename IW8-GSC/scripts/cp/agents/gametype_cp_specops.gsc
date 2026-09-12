@@ -171,7 +171,7 @@ function missilelauncherusage() {
       return;
     }
 
-    if(!var_0 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.missilelaunchertarget, self)) {
+    if(!var_0 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141B9(self.missilelaunchertarget, self)) {
       resetmissilelauncherlocking();
       return;
     }
@@ -222,7 +222,7 @@ function missilelauncherusage() {
       return;
     }
 
-    if(!var_0 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141b9(self.missilelaunchertarget, self)) {
+    if(!var_0 && self.missilelaunchertarget scripts\cp_mp\vehicles\vehicle::isvehicle() && scripts\cp_mp\vehicles\vehicle::ref_141B9(self.missilelaunchertarget, self)) {
       resetmissilelauncherlocking();
       return;
     }

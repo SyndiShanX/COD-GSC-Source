@@ -206,7 +206,7 @@ function empdrone_timeoutthink() {
 function monitorweaponswitchbr() {
   self.owner endon("disconnect");
   self endon("death");
-  level scripts\engine\utility::ref_143a5("game_ended", "prematch_cleanup");
+  level scripts\engine\utility::ref_143A5("game_ended", "prematch_cleanup");
   thread empdrone_destroy();
 }
 
@@ -326,7 +326,7 @@ function empdrone_explodeemp() {
     }
 
     var_8 = var_5 scripts\cp_mp\vehicles\vehicle::isvehicle();
-    var_9 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141de(var_5);
+    var_9 = scripts\cp_mp\vehicles\vehicle_occupancy::ref_141DE(var_5);
 
     if(var_8 && var_9) {
       var_10 = scripts\cp_mp\vehicles\vehicle_occupancy::vehicle_occupancy_getalloccupants(var_5);

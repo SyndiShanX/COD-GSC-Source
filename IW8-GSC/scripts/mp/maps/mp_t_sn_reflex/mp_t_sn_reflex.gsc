@@ -5,7 +5,7 @@
 
 function main() {
   _startragdollwithvehiclefeature::keypad_check_levelinput();
-  level.ref_13d50 = 1;
+  level.ref_13D50 = 1;
   scripts\mp\maps\mp_t_sn_reflex\mp_t_sn_reflex_precache::main();
   scripts\mp\maps\mp_t_sn_reflex\gen\mp_t_sn_reflex_art::main();
   scripts\mp\maps\mp_t_sn_reflex\mp_t_sn_reflex_fx::main();

@@ -229,7 +229,7 @@ function init() {
   registerbcsoundtype("flavor_hurryup", "flavor_hurryup", 0.4, 1, 5, 10, 0);
   registerbcsoundtype("flavor_taunt_point", "flavor_taunt_point", 0.4, 1, 5, 10, 0);
   registerbcsoundtype("flavor_taunt_wave", "flavor_taunt_wave", 0.4, 1, 5, 10, 0);
-  ref_12b0f();
+  ref_12B0F();
   registerbcsoundtype("ges_mtx_t9_taunt_all", "mtx_gst_taunt_all", 1, 1, 3, 5, 0);
 
   if(!scripts\mp\utility\game::unset_relic_landlocked()) {
@@ -418,7 +418,7 @@ function registerbcsoundtype(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
   level.bcinfo["additional_local_vo"][var_0] = var_10;
 }
 
-function ref_12b0f() {
+function ref_12B0F() {
   for(var_0 = 0;; var_0++) {
     var_1 = tablelookupbyrow("mp/gesturetable.csv", var_0, 0);
 
@@ -459,7 +459,7 @@ function onplayerspawned() {
     thread threatcallouttracking();
     thread onsixfriendlytracking();
 
-    if(istrue(self.ref_1443d)) {
+    if(istrue(self.ref_1443D)) {
       thread trysaylocalsound(level, self);
       return;
     }
@@ -760,7 +760,7 @@ function equipmentdestroyed(var_0) {
   }
 }
 
-function ref_1274c(var_0, var_1) {
+function ref_1274C(var_0, var_1) {
   if(!isDefined(var_1)) {
     return;
   }
@@ -1043,7 +1043,7 @@ function dosound(var_0, var_1) {
   updatechatter(var_0);
   var_16 = max(var_9, var_10) / 1000;
   thread timehack(var_5, var_16);
-  scripts\engine\utility::ref_143a5(var_5, "death_or_disconnect");
+  scripts\engine\utility::ref_143A5(var_5, "death_or_disconnect");
   removespeaker(level, self, var_15);
   return 1;
 }
@@ -1256,7 +1256,7 @@ function killsoundondeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 function dothreatcalloutresponse(var_0, var_1) {
-  var_2 = scripts\engine\utility::ref_143ad(var_0, "death_or_disconnect");
+  var_2 = scripts\engine\utility::ref_143AD(var_0, "death_or_disconnect");
 
   if(isDefined(var_2) && var_2 == var_0) {
     var_3 = self.team;
@@ -2124,7 +2124,7 @@ function trysaylocalsound(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  if(var_0 scripts\mp\gametypes\br_public::ref_125ec()) {
+  if(var_0 scripts\mp\gametypes\br_public::ref_125EC()) {
     return;
   }
 

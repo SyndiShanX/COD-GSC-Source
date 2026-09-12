@@ -6,48 +6,48 @@
 function spawnmalfunctioningscreamerdevice(var_0, var_1) {
   var_2 = _dropscreamercrate(var_1 + (0, 0, 2500), var_1);
   var_3 = scripts\cp_mp\killstreaks\airdrop::gettriggerobject(var_2);
-  var_3.ref_140a0 = 4;
-  level.ref_11e18.screamercrate = var_2;
-  level.ref_11e18.screamerareaorigin = var_0;
+  var_3.ref_140A0 = 4;
+  level.ref_11E18.screamercrate = var_2;
+  level.ref_11E18.screamerareaorigin = var_0;
 }
 
 function endevent_malfunctioningscreamerdevice() {
-  if(isDefined(level.ref_11e18.ref_12f3f) && isDefined(level.ref_11e18.ref_12f3f.owner)) {
-    level.ref_11e18.ref_12f3f.owner scripts\mp\killstreaks\killstreaks::awardkillstreak("greenbay_strike", "other", undefined, undefined, undefined, 1);
+  if(isDefined(level.ref_11E18.ref_12F3F) && isDefined(level.ref_11E18.ref_12F3F.owner)) {
+    level.ref_11E18.ref_12F3F.owner scripts\mp\killstreaks\killstreaks::awardkillstreak("greenbay_strike", "other", undefined, undefined, undefined, 1);
     return;
   }
 }
 
 function destroyscreamer() {
-  level.ref_11e18 notify("screamer_dropped");
-  level.ref_11e18 notify("screamer_destroyed");
+  level.ref_11E18 notify("screamer_dropped");
+  level.ref_11E18 notify("screamer_destroyed");
 
-  if(isDefined(level.ref_11e18.screamercrate)) {
-    level.ref_11e18.screamercrate thread scripts\cp_mp\killstreaks\airdrop::destroycrate();
-    level.ref_11e18.screamercrate = undefined;
+  if(isDefined(level.ref_11E18.screamercrate)) {
+    level.ref_11E18.screamercrate thread scripts\cp_mp\killstreaks\airdrop::destroycrate();
+    level.ref_11E18.screamercrate = undefined;
   }
 
-  level.ref_11e18.screamerareaorigin = undefined;
+  level.ref_11E18.screamerareaorigin = undefined;
 
-  if(isDefined(level.ref_11e18.ref_12f3f)) {
-    _worldiconhide(level.ref_11e18.ref_12f3f);
+  if(isDefined(level.ref_11E18.ref_12F3F)) {
+    _worldiconhide(level.ref_11E18.ref_12F3F);
 
-    if(isDefined(level.ref_11e18.ref_12f3f.owner)) {
+    if(isDefined(level.ref_11E18.ref_12F3F.owner)) {
       var_0 = scripts\mp\gametypes\br_pickups::test_ai_anim();
-      _dropscreamerinternal(level.ref_11e18.ref_12f3f.owner, var_0);
-      level.ref_11e18.ref_12f3f setscriptablepartstate("brloot_mendota_screamer", "disabled");
+      _dropscreamerinternal(level.ref_11E18.ref_12F3F.owner, var_0);
+      level.ref_11E18.ref_12F3F setscriptablepartstate("brloot_mendota_screamer", "disabled");
       wait 1.6;
     }
 
-    thread _explodescreamer(level.ref_11e18.ref_12f3f.origin);
+    thread _explodescreamer(level.ref_11E18.ref_12F3F.origin);
 
-    if(isent(level.ref_11e18.ref_12f3f)) {
-      level.ref_11e18.ref_12f3f delete();
+    if(isent(level.ref_11E18.ref_12F3F)) {
+      level.ref_11E18.ref_12F3F delete();
     } else {
-      level.ref_11e18.ref_12f3f freescriptable();
+      level.ref_11E18.ref_12F3F freescriptable();
     }
 
-    level.ref_11e18.ref_12f3f = undefined;
+    level.ref_11E18.ref_12F3F = undefined;
     return;
   }
 }
@@ -71,7 +71,7 @@ function initcratedata(var_0) {
   var_1.destroycallback = &_cratedestroycallback;
   var_1.activatecallback = &_crateactivatecallback;
   var_1.ingame = &_cratephysicsoncallback;
-  var_1.ref_127fd = &_cratepostcreatecallback;
+  var_1.ref_127FD = &_cratepostcreatecallback;
   var_1.destroyoncapture = 1;
 }
 
@@ -97,9 +97,9 @@ function pickupscreamer(var_0) {
 }
 
 function dropscreamer(var_0, var_1) {
-  level.ref_11e18 notify("screamer_dropped");
+  level.ref_11E18 notify("screamer_dropped");
   _dropscreamerinternal(var_0, var_1);
-  _worldiconshow(level.ref_11e18.ref_12f3f, "on_ground");
+  _worldiconshow(level.ref_11E18.ref_12F3F, "on_ground");
   scripts\mp\gametypes\br_publicevents::ref_13371("br_pe_fresno_screamer_recover");
 
   if(istrue(var_1)) {
@@ -109,48 +109,48 @@ function dropscreamer(var_0, var_1) {
 }
 
 function choosescreamertitan() {
-  var_0 = isDefined(level.ref_11e18.setincomingremovedcallback.ref_12930);
-  var_1 = isDefined(level.ref_11e18.wait_for_next_hack_complete.ref_12930);
-  level.ref_11e18.screamergg = undefined;
-  level.ref_11e18.screamerkk = undefined;
+  var_0 = isDefined(level.ref_11E18.setincomingremovedcallback.ref_12930);
+  var_1 = isDefined(level.ref_11E18.wait_for_next_hack_complete.ref_12930);
+  level.ref_11E18.screamergg = undefined;
+  level.ref_11E18.screamerkk = undefined;
 
   if(var_0) {
     if(!var_1 || randomintrange(0, 2) == 0) {
-      level.ref_11e18.screamergg = 1;
+      level.ref_11E18.screamergg = 1;
     }
   }
 
-  if(var_1 && !isDefined(level.ref_11e18.screamergg)) {
-    level.ref_11e18.screamerkk = 1;
+  if(var_1 && !isDefined(level.ref_11E18.screamergg)) {
+    level.ref_11E18.screamerkk = 1;
     return;
   }
 }
 
 function _dropscreamerinternal(var_0, var_1) {
-  if(isDefined(level.ref_11e18.ref_12f3f)) {
-    var_2 = scripts\engine\utility::ter_op(isPlayer(self), self, level.ref_11e18.ref_12f3f.owner);
+  if(isDefined(level.ref_11E18.ref_12F3F)) {
+    var_2 = scripts\engine\utility::ter_op(isPlayer(self), self, level.ref_11E18.ref_12F3F.owner);
 
     if(isDefined(var_2)) {
       var_2.iscarryingscreamer = 0;
     }
 
-    if(isent(level.ref_11e18.ref_12f3f) == 0) {
-      _worldiconhide(level.ref_11e18.ref_12f3f);
-      level.ref_11e18.ref_12f3f freescriptable();
-      level.ref_11e18.ref_12f3f = undefined;
+    if(isent(level.ref_11E18.ref_12F3F) == 0) {
+      _worldiconhide(level.ref_11E18.ref_12F3F);
+      level.ref_11E18.ref_12F3F freescriptable();
+      level.ref_11E18.ref_12F3F = undefined;
     }
   }
 
-  if(isDefined(level.ref_11e18.ref_12f3f) == 0) {
+  if(isDefined(level.ref_11E18.ref_12F3F) == 0) {
     if(istrue(var_1)) {
       var_3 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_0, self.origin, self.angles, self, 0, 0, 10, 1);
     } else {
       var_3 = scripts\mp\gametypes\br_pickups::getitemdroporiginandangles(var_1, self.origin, self.angles, self);
     }
 
-    level.ref_11e18.ref_12f3f = scripts\mp\gametypes\br_pickups::spawnpickup("brloot_mendota_screamer", var_3, 0, 1);
-    level.ref_11e18.ref_12f3f.keepinmap = 1;
-    level.ref_11e18.ref_12f3f.hidden = 0;
+    level.ref_11E18.ref_12F3F = scripts\mp\gametypes\br_pickups::spawnpickup("brloot_mendota_screamer", var_3, 0, 1);
+    level.ref_11E18.ref_12F3F.keepinmap = 1;
+    level.ref_11E18.ref_12F3F.hidden = 0;
     return;
   }
 }
@@ -173,34 +173,34 @@ function _explodescreamer(var_0) {
 
 function _trackscreameroob() {
   var_0 = self;
-  level.ref_11e18 endon("screamer_destroyed");
+  level.ref_11E18 endon("screamer_destroyed");
   level endon("game_ended");
   var_0 endon("death");
   var_1 = 10;
   var_2 = 0.1;
   var_3 = -1;
-  var_4 = float(level.ref_11e18.playerredeploy * level.ref_11e18.playerredeploy);
+  var_4 = float(level.ref_11E18.playerredeploy * level.ref_11E18.playerredeploy);
 
   for(;;) {
     wait var_2;
 
-    if(isDefined(level.ref_11e18.ref_12f3f) && isDefined(level.ref_11e18.screamerareaorigin)) {
-      var_5 = level.ref_11e18.ref_12f3f.origin;
+    if(isDefined(level.ref_11E18.ref_12F3F) && isDefined(level.ref_11E18.screamerareaorigin)) {
+      var_5 = level.ref_11E18.ref_12F3F.origin;
 
-      if(isDefined(level.ref_11e18.ref_12f3f.owner) && isDefined(level.ref_11e18.ref_12f3f.owner.origin)) {
-        var_5 = level.ref_11e18.ref_12f3f.owner.origin;
+      if(isDefined(level.ref_11E18.ref_12F3F.owner) && isDefined(level.ref_11E18.ref_12F3F.owner.origin)) {
+        var_5 = level.ref_11E18.ref_12F3F.owner.origin;
       }
 
-      var_6 = distance2dsquared(var_5, level.ref_11e18.screamerareaorigin);
+      var_6 = distance2dsquared(var_5, level.ref_11E18.screamerareaorigin);
 
       if(var_6 <= var_4) {
         if(var_3 >= 0) {
-          level.ref_11e18.ref_12f3f notify("screamer_in_bounds");
+          level.ref_11E18.ref_12F3F notify("screamer_in_bounds");
           var_3 = -1;
         }
       } else if(var_3 <= -1) {
         var_3 = var_1;
-        thread _playscreameroobalarm(level.ref_11e18.ref_12f3f);
+        thread _playscreameroobalarm(level.ref_11E18.ref_12F3F);
       } else if(var_3 >= 0) {
         var_7 = int(var_3);
         var_3 -= var_2;
@@ -221,8 +221,8 @@ function _trackscreameroob() {
 function _waitscreameroobalarm(var_0) {
   var_1 = self;
   level endon("game_ended");
-  level.ref_11e18 endon("screamer_destroyed");
-  level.ref_11e18 endon("screamer_dropped");
+  level.ref_11E18 endon("screamer_destroyed");
+  level.ref_11E18 endon("screamer_dropped");
   var_1 endon("death");
   var_1 scripts\engine\utility::waittill_notify_or_timeout("screamer_in_bounds", var_0);
 }
@@ -345,8 +345,8 @@ function _setscreamericonspickedup(var_0, var_1, var_2) {
 
 function _updatescreamericon(var_0, var_1, var_2) {
   var_3 = self;
-  level.ref_11e18 endon("screamer_dropped");
-  level.ref_11e18 endon("screamer_destroyed");
+  level.ref_11E18 endon("screamer_dropped");
+  level.ref_11E18 endon("screamer_destroyed");
 
   if(var_2 <= 0) {
     scripts\mp\objidpoolmanager::update_objective_setzoffset(var_1, 50);
@@ -479,7 +479,7 @@ function _cratecapturecallback(var_0) {
     self.ref_13428 delete();
   }
 
-  level.ref_11e18.screamercrate = undefined;
+  level.ref_11E18.screamercrate = undefined;
   var_1 = scripts\mp\gametypes\br_pickups::test_ai_anim();
   dropscreamer(var_1, 1);
 }
@@ -492,7 +492,7 @@ function _cratedestroycallback(var_0) {
     self.ref_13428 delete();
   }
 
-  level.ref_11e18.screamercrate = undefined;
+  level.ref_11E18.screamercrate = undefined;
 }
 
 function _cratephysicsoncallback(var_0, var_1) {

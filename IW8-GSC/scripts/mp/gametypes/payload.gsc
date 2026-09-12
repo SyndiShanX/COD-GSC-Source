@@ -230,7 +230,7 @@ function watchdamagecycle() {
       continue;
     }
 
-    scripts\engine\utility::ref_143b9(3, "damage");
+    scripts\engine\utility::ref_143B9(3, "damage");
     self.allowpartialrepairs = 1;
   }
 }

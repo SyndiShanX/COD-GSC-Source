@@ -48,7 +48,7 @@ function wait_to_set_player_currency(var_0) {
   set_player_currency(var_0);
 }
 
-function ref_130aa(var_0) {
+function ref_130AA(var_0) {
   self setplayerdata("cp", "coopCareerStats", "currency", int(var_0));
 }
 
@@ -420,7 +420,7 @@ function eog_player_update_pvpve_downs(var_0, var_1) {
 }
 
 function try_update_lb_playerdata(var_0, var_1, var_2) {
-  var_3 = get_mapped_lb_ref_from_eog_ref(var_0);
+  var_3 = get_mapped_lb_ref_FROM_eog_ref(var_0);
 
   if(!isDefined(var_3)) {
     return;
@@ -632,7 +632,7 @@ function rank_init() {
   level.zombie_max_rank = int(tablelookup(level.zombie_ranks_table, 0, "maxrank", 1));
 
   for(var_0 = 0; var_0 <= level.zombie_max_rank; var_0++) {
-    var_1 = get_ref_by_id(var_0);
+    var_1 = get_ref_BY_id(var_0);
 
     if(var_1 == "") {
       break;
@@ -658,7 +658,7 @@ function rank_init() {
   }
 }
 
-function get_ref_by_id(var_0) {
+function get_ref_BY_id(var_0) {
   return tablelookup(level.zombie_ranks_table, 0, var_0, 1);
 }
 
@@ -1002,7 +1002,7 @@ function register_eog_to_lb_playerdata_mapping() {
   GscBinSkip1(0x45, "kills", "kills");
 }
 
-function get_mapped_lb_ref_from_eog_ref(var_0) {
+function get_mapped_lb_ref_FROM_eog_ref(var_0) {
   return level.eog_to_lb_playerdata_mapping[var_0];
 }
 

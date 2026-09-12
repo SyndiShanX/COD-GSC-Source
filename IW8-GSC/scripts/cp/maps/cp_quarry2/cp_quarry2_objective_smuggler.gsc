@@ -42,7 +42,7 @@ function smuggler_interactions_threaded() {
 
   scripts\engine\utility::flag_wait("cp_quarry2_convoy4_create_script_completed");
   wait 0.25;
-  thread ref_131e3();
+  thread ref_131E3();
   thread scripts\cp\cp_destruction::destructible_interactions();
   scripts\cp\cp_interaction::registerinteraction("comms_laptop_interaction_a", &hintcommslaptop, &activationcommslaptop, &initcommslaptop, 0, "duration_long");
   scripts\cp\cp_interaction::registerinteraction("comms_laptop_interaction_b", &hintcommslaptop, &activationcommslaptop, &initcommslaptop, 0, "duration_long");
@@ -58,14 +58,14 @@ function smuggler_interactions_threaded() {
   scripts\cp\cp_interaction::removefrominteractionslistbynoteworthy("obj_convoy4_call_train");
 }
 
-function ref_131e3() {
-  ref_131e6("obj_support_crate_a");
-  ref_131e4();
-  ref_131e5();
-  ref_131e6("obj_support_crate_c");
+function ref_131E3() {
+  ref_131E6("obj_support_crate_a");
+  ref_131E4();
+  ref_131E5();
+  ref_131E6("obj_support_crate_c");
 }
 
-function ref_131e6(var_0) {
+function ref_131E6(var_0) {
   if(isDefined(level.hideintelscriptablesfromplayer) && isDefined(scripts\engine\utility::array_find(level.hideintelscriptablesfromplayer, var_0))) {
     return;
   }
@@ -86,21 +86,21 @@ function ref_131e6(var_0) {
   level.hideintelscriptablesfromplayer[level.hideintelscriptablesfromplayer.size] = var_0;
 }
 
-function ref_131e4() {
-  level.ref_11f54 = scripts\engine\utility::getStructArray("obj_a_goal", "targetname");
+function ref_131E4() {
+  level.ref_11F54 = scripts\engine\utility::getStructArray("obj_a_goal", "targetname");
 
-  foreach(var_1 in level.ref_11f54) {
-    var_1.ref_127ea = [];
+  foreach(var_1 in level.ref_11F54) {
+    var_1.ref_127EA = [];
 
     if(!isDefined(var_1.radius)) {
       var_1.radius = 500;
     }
   }
 
-  level.ref_11f53 = scripts\cp\cp_create_script_utility::ref_13529("obj_a_cover");
+  level.ref_11F53 = scripts\cp\cp_create_script_utility::ref_13529("obj_a_cover");
 }
 
-function ref_131e5() {
+function ref_131E5() {
   level waittill("started_hack_at_b");
   scripts\cp\cp_create_script_utility::land_usability_disabled("obj_a_cover");
   wait 1;
@@ -119,7 +119,7 @@ function spawn_objective_loot() {
   }
 }
 
-function ref_1321c() {
+function ref_1321C() {
   var_0 = scripts\engine\utility::getStructArray("no_wave_spawn", "targetname");
 
   foreach(var_2 in var_0) {
@@ -129,34 +129,34 @@ function ref_1321c() {
 
 function obj_maj_secure_init(var_0) {
   level.global_stealth_broken = 0;
-  thread ref_124d2();
-  thread ref_11f50();
-  thread ref_131f0();
+  thread ref_124D2();
+  thread ref_11F50();
+  thread ref_131F0();
 }
 
 function obj_maj_secure_start(var_0) {
   thread smuggler_door_lock();
-  level thread scripts\cp\maps\cp_suburbs11\cp_suburbs11_safehouse::ref_137f7();
-  ref_1321c();
+  level thread scripts\cp\maps\cp_suburbs11\cp_suburbs11_safehouse::ref_137F7();
+  ref_1321C();
   scripts\engine\utility::flag_wait("player_spawned_with_loadout");
   scripts\engine\utility::flag_wait("quarry_intro_vo_finished");
   var_1 = scripts\engine\utility::getStruct("convoy4_advancequarry", "targetname");
   objective_setplayintro(var_0.objectiveindex, 1);
   objective_setplayoutro(var_0.objectiveindex, 1);
   objective_state(var_0.objectiveindex, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
   objective_sethot(var_0.objectiveindex, 0);
   objective_position(var_0.objectiveindex, var_1.origin);
   objective_setlabel(var_0.objectiveindex, &"CP_QUARRY2_OBJECTIVES/CONVOY4_SECURE_WORLD");
-  level.ref_12d89 = scripts\cp\cp_create_script_utility::ref_13529("roof_rpg_cover");
-  level.ref_11f56 = scripts\cp\cp_modular_spawning::run_spawn_module("obj_a_roof_jugg");
+  level.ref_12D89 = scripts\cp\cp_create_script_utility::ref_13529("roof_rpg_cover");
+  level.ref_11F56 = scripts\cp\cp_modular_spawning::run_spawn_module("obj_a_roof_jugg");
   level.iconovertime = scripts\cp\cp_modular_spawning::run_spawn_module("convoy4_roof_jugg");
   level.icon_trigger_enter = scripts\cp\cp_modular_spawning::run_spawn_module("convoy4_snipers_1");
   level.icon_trigger_exit = scripts\cp\cp_modular_spawning::run_spawn_module("mortar_guys");
-  thread ref_13dbd(level, "quarry_right", "quarry_right_spawn_trig", "start_hacking_comms_laptop", undefined);
-  thread ref_13dbd(level, "quarry_left", "quarry_left_spawn_trig", "start_hacking_comms_laptop", undefined);
-  thread ref_13dbd(level, "quarry_fight_across", "quarry_fight_across_spawn_trig", "started_hack_at_a", undefined);
+  thread ref_13DBD(level, "quarry_right", "quarry_right_spawn_trig", "start_hacking_comms_laptop", undefined);
+  thread ref_13DBD(level, "quarry_left", "quarry_left_spawn_trig", "start_hacking_comms_laptop", undefined);
+  thread ref_13DBD(level, "quarry_fight_across", "quarry_fight_across_spawn_trig", "started_hack_at_a", undefined);
   thread setup_enemy_sentries(level);
   thread ref_12115();
   var_2 = 163840000;
@@ -167,11 +167,11 @@ function obj_maj_secure_start(var_0) {
 
   level scripts\engine\utility::delaythread(3, &nextstar);
   level scripts\engine\utility::delaythread(randomintrange(60, 90), &nextstar);
-  thread ref_1295d();
+  thread ref_1295D();
   scripts\engine\utility::delaythread(5, &ref_14408);
   level.ref_12959 = scripts\cp\cp_modular_spawning::run_spawn_module("quarry_intro1_chopper");
   wait 1.5;
-  level.ref_1295a = scripts\cp\cp_modular_spawning::run_spawn_module("quarry_intro2_chopper");
+  level.ref_1295A = scripts\cp\cp_modular_spawning::run_spawn_module("quarry_intro2_chopper");
   var_2 = 81000000;
 
   while(!scripts\cp\utility::any_player_nearby(var_1.origin, var_2)) {
@@ -235,11 +235,11 @@ function ref_12115() {
   var_0 = scripts\engine\utility::getStructArray("open_this_door", "targetname");
 
   foreach(var_2 in var_0) {
-    thread ref_1211b(var_2);
+    thread ref_1211B(var_2);
   }
 }
 
-function ref_1211b(var_0) {
+function ref_1211B(var_0) {
   var_1 = var_0.origin;
   var_2 = var_0.radius;
   var_3 = [];
@@ -256,7 +256,7 @@ function ref_1211b(var_0) {
   }
 }
 
-function ref_13dbd(var_0, var_1, var_2, var_3, var_4) {
+function ref_13DBD(var_0, var_1, var_2, var_3, var_4) {
   level endon("game_ended");
 
   if(isDefined(var_2)) {
@@ -291,14 +291,14 @@ function ref_13dbd(var_0, var_1, var_2, var_3, var_4) {
 
   level notify(var_0 + "_spawned");
 
-  if(!isDefined(level.ref_13dbc)) {
-    level.ref_13dbc = [];
+  if(!isDefined(level.ref_13DBC)) {
+    level.ref_13DBC = [];
   }
 
-  level.ref_13dbc[var_0] = scripts\cp\cp_modular_spawning::run_spawn_module(var_0);
+  level.ref_13DBC[var_0] = scripts\cp\cp_modular_spawning::run_spawn_module(var_0);
 }
 
-function ref_13dbe(var_0, var_1) {
+function ref_13DBE(var_0, var_1) {
   level endon(var_0 + "_spawned");
   var_2 = var_1.origin;
   var_3 = scripts\engine\utility::getStruct(var_1.target, "targetname");
@@ -317,7 +317,7 @@ function ref_13dbe(var_0, var_1) {
   level notify(var_0 + "_cancel");
 }
 
-function ref_1295f(var_0) {
+function ref_1295F(var_0) {
   var_1 = scripts\engine\utility::getStruct("quarry_intro_wave_spawn_poi", "targetname");
   var_2 = var_1.radius;
   var_3 = var_1.origin;
@@ -352,12 +352,12 @@ function ref_14408() {
   }
 }
 
-function ref_1295d() {
+function ref_1295D() {
   level.get_mortar_impact_pos = &get_mortar_impact_spot;
-  level.ref_1295d = getEntArray("quarry_mortar", "targetname");
+  level.ref_1295D = getEntArray("quarry_mortar", "targetname");
   var_0 = scripts\engine\utility::getStruct("quarry_approach", "targetname");
 
-  foreach(var_2 in level.ref_1295d) {
+  foreach(var_2 in level.ref_1295D) {
     var_2 hidepart("j_mortar_shell", "misc_wm_mortar");
     thread mortar_think(var_2);
   }
@@ -425,11 +425,11 @@ function get_mortar_impact_spot(var_0) {
 }
 
 function nextstar() {
-  level.ref_1359d = scripts\cp\cp_modular_spawning::run_spawn_module("lbravo_spawner_p3_form_a");
-  level.ref_1359e = scripts\cp\cp_modular_spawning::run_spawn_module("lbravo_spawner_p3_form_b");
-  level.ref_1359f = scripts\cp\cp_modular_spawning::run_spawn_module("lbravo_spawner_p3_form_c");
+  level.ref_1359D = scripts\cp\cp_modular_spawning::run_spawn_module("lbravo_spawner_p3_form_a");
+  level.ref_1359E = scripts\cp\cp_modular_spawning::run_spawn_module("lbravo_spawner_p3_form_b");
+  level.ref_1359F = scripts\cp\cp_modular_spawning::run_spawn_module("lbravo_spawner_p3_form_c");
   wait randomintrange(4, 8);
-  level.ref_135a0 = scripts\cp\cp_modular_spawning::run_spawn_module("lbravo_spawner_p3_form_d");
+  level.ref_135A0 = scripts\cp\cp_modular_spawning::run_spawn_module("lbravo_spawner_p3_form_d");
 }
 
 function obj_maj_secure_end(var_0) {}
@@ -442,23 +442,23 @@ function ref_13779() {
   level.scr_anim["quarry_train_anim"]["approach"] = $cp_scripted_train_arrival;
   level.scr_animname["quarry_train_anim"]["approach"] = "cp_scripted_train_arrival";
   waitframe();
-  level.ref_1295e = getEnt("smuggler_train", "targetname");
-  level.ref_1295e.animname = "quarry_train_anim";
-  level.ref_1295e useanimtree(level.scr_animtree[level.ref_1295e.animname]);
+  level.ref_1295E = getEnt("smuggler_train", "targetname");
+  level.ref_1295E.animname = "quarry_train_anim";
+  level.ref_1295E useanimtree(level.scr_animtree[level.ref_1295E.animname]);
   var_1 = getEnt("train1_clip", "targetname");
   var_2 = getstartorigin(var_0.origin, var_0.angles, level.scr_anim["quarry_train_anim"]["approach"]);
   var_3 = getstartangles(var_0.origin, var_0.angles, level.scr_anim["quarry_train_anim"]["approach"]);
   level waittill("start_anim_train");
-  level.ref_1295e dontinterpolate();
-  level.ref_1295e.origin = var_2;
-  level.ref_1295e.angles = var_3;
+  level.ref_1295E dontinterpolate();
+  level.ref_1295E.origin = var_2;
+  level.ref_1295E.angles = var_3;
   var_1 dontinterpolate();
   var_1.origin = var_2;
   var_1.angles = var_3;
-  var_1 linkTo(level.ref_1295e, "tag_origin", (0, -6, 84), (0, 0, 0));
-  level.ref_1295e.clipmodel = var_1;
-  level.ref_1295e setscriptablepartstate("anim", "anim");
-  thread damage_infront_of_train(level.ref_1295e, level.ref_1295e);
+  var_1 linkTo(level.ref_1295E, "tag_origin", (0, -6, 84), (0, 0, 0));
+  level.ref_1295E.clipmodel = var_1;
+  level.ref_1295E setscriptablepartstate("anim", "anim");
+  thread damage_infront_of_train(level.ref_1295E, level.ref_1295E);
 }
 
 function obj_maj_comms_init(var_0) {
@@ -475,7 +475,7 @@ function obj_maj_comms_start(var_0) {
   obj_comms_start(level, "disable_comms_laptop", "a", var_0);
   setomnvar("cp_objective_sub_count_2", 1);
   scripts\cp\cp_objectives::screenent_c("minor_objective");
-  scripts\cp\crate_drops\cp_crate_drops::ref_12c40("quarry_1", ["deployable_cover", "precision_airstrike"]);
+  scripts\cp\crate_drops\cp_crate_drops::ref_12C40("quarry_1", ["deployable_cover", "precision_airstrike"]);
   thread setup_enemy_sentries(level);
   wait 1.1;
   obj_comms_start(level, "disable_comms_laptop", "b", var_0);
@@ -485,7 +485,7 @@ function obj_maj_comms_start(var_0) {
   obj_comms_start(level, "disable_comms_laptop", "c", var_0);
   setomnvar("cp_objective_sub_count_2", 3);
   scripts\cp\cp_objectives::screenent_c("minor_objective");
-  scripts\cp\crate_drops\cp_crate_drops::ref_12c40("quarry_2", ["juggernaut", "precision_airstrike", "cruise_missile"]);
+  scripts\cp\crate_drops\cp_crate_drops::ref_12C40("quarry_2", ["juggernaut", "precision_airstrike", "cruise_missile"]);
   thread setup_enemy_sentries(level);
   wait 1.1;
 }
@@ -537,19 +537,19 @@ function obj_maj_secure_tower_init(var_0) {
 }
 
 function obj_maj_secure_tower_start(var_0) {
-  ref_131e6("obj_support_crate_c");
-  thread ref_131f1();
+  ref_131E6("obj_support_crate_c");
+  thread ref_131F1();
   scripts\mp\brclientmatchdata::getprophealth("convoy4_secure_tower");
   thread scripts\cp\cp_modular_spawning::set_ambient_max_count(25);
   scripts\cp\cp_modular_spawning::increase_reserved_spawn_slots(3, "jugg_spawn");
   level.obj_reserved_juggs = 1;
   var_1 = scripts\engine\utility::getStruct("objective_convoy4_04_a", "targetname");
   objective_setlocation(var_0.objectiveindex, 0, var_1.origin);
-  level thread scripts\cp\cp_objectives::ref_1317e(var_0, var_1.origin);
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  level thread scripts\cp\cp_objectives::ref_1317E(var_0, var_1.origin);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
   level thread scripts\cp\cp_wave_spawning::killstreaks(1, "smugg_p3_intro");
-  thread ref_12dd5(level);
+  thread ref_12DD5(level);
   var_2 = 220;
   var_3 = var_2 * var_2;
 
@@ -629,9 +629,9 @@ function obj_maj_find_keys_start(var_0) {
   }
 
   LOC_000000fd:
-    thread ref_135cf(level, level.convoy4_module_juggs_1, "convoy4_juggs_1", "convoy4_04a_1");
-  thread ref_135cf(level, level.convoy4_module_juggs_2, "convoy4_juggs_2", "convoy4_04a_2");
-  thread ref_135cf(level, level.convoy4_module_juggs_3, "convoy4_juggs_3", "convoy4_04a_3");
+    thread ref_135CF(level, level.convoy4_module_juggs_1, "convoy4_juggs_1", "convoy4_04a_1");
+  thread ref_135CF(level, level.convoy4_module_juggs_2, "convoy4_juggs_2", "convoy4_04a_2");
+  thread ref_135CF(level, level.convoy4_module_juggs_3, "convoy4_juggs_3", "convoy4_04a_3");
 
   while(level.convoy4_terminal_keys < 3) {
     wait 0.2;
@@ -642,10 +642,10 @@ function obj_maj_find_keys_start(var_0) {
   level notify("end_wave_convoy4_spawners");
 }
 
-function ref_135cf(var_0, var_1, var_2, var_3) {
+function ref_135CF(var_0, var_1, var_2, var_3) {
   level endon("jugg_" + var_2 + "_stop");
   thread ref_13575(var_0, var_1, var_2, var_3);
-  thread ref_13dd0(var_0, var_1, var_2, var_3);
+  thread ref_13DD0(var_0, var_1, var_2, var_3);
 
   while(!isDefined(var_0) || var_0.ai_spawned.size == 0) {
     wait 0.05;
@@ -698,7 +698,7 @@ function ref_13575(var_0, var_1, var_2, var_3) {
   level notify("jugg_" + var_2 + "_stop");
 }
 
-function ref_13dd0(var_0, var_1, var_2, var_3) {
+function ref_13DD0(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   level endon("jugg_" + var_2 + "_stop");
   level waittill("jugg_" + var_2 + "_failsafe");
@@ -707,7 +707,7 @@ function ref_13dd0(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_0) || var_0.ai_spawned.size == 0) {
     level.convoy4_terminal_keys += 1;
     var_0.patrolfunc = 1;
-    thread ref_123d7();
+    thread ref_123D7();
     scripts\cp\cp_modular_spawning::stop_module_by_groupname(var_2);
     scripts\cp\cp_modular_spawning::stop_module_by_groupname(var_1);
     scripts\cp\cp_modular_spawning::stop_module_by_groupname(var_3);
@@ -736,7 +736,7 @@ function spawn_key_objective(var_0, var_1, var_2) {
   thread disable_jugg_objective_position_on_death(level, var_1, var_3, 0);
   thread jugg_hold(var_1);
   objective_state(var_3, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_3);
+  scripts\cp\cp_objectives::ref_11F80(var_3);
   objective_icon(var_3, "icon_waypoint_objective_general");
   objective_sethot(var_3, 0);
   objective_setbackground(var_3, 0);
@@ -826,14 +826,14 @@ function obj_maj_call_train_start(var_0) {
   objective_position(var_0.objectiveindex, var_1.origin);
   objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
   objective_setlabel(var_0.objectiveindex, &"CP_QUARRY2_OBJECTIVES/CONVOY4_CALL_TRAIN_WORLD");
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   level waittill("obj_called_train");
 
   if(istrue(level.convoy4_failed_calltrain)) {
     wait 99;
   }
 
-  scripts\cp\utility::ref_123fe("mus_cp_smuggler_traincall");
+  scripts\cp\utility::ref_123FE("mus_cp_smuggler_traincall");
   scripts\cp\cp_objectives::lua_objective_complete("convoy4_call_train");
   scripts\cp\cp_objectives::reset_objective_timers();
   scripts\cp\cp_objectives::screenent_c("major_objective");
@@ -868,7 +868,7 @@ function obj_maj_take_apache_start() {
   objective_setplayintro(var_5, 1);
   objective_setplayoutro(var_5, 1);
   objective_state(var_5, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_5);
+  scripts\cp\cp_objectives::ref_11F80(var_5);
   objective_icon(var_5, "icon_waypoint_objective_general");
   objective_sethot(var_5, 0);
   objective_setlabel(var_5, &"CP_QUARRY2_OBJECTIVES/CONVOY4_TAKEAPACHE");
@@ -878,7 +878,7 @@ function obj_maj_take_apache_start() {
   var_7 = spawn("script_model", var_0 + (0, 0, -210));
   var_7 setModel("veh8_mil_air_ahotel64_ks_east_mp");
   thread activate_ks_on_use();
-  level scripts\engine\utility::ref_143a5("player_used_quarry_ks", "players_near_exfil");
+  level scripts\engine\utility::ref_143A5("player_used_quarry_ks", "players_near_exfil");
   objective_state(var_5, "done");
   scripts\cp\cp_objectives::freeworldid(var_3);
 
@@ -918,7 +918,7 @@ function activate_ks_on_use() {
       continue;
     }
 
-    if(scripts\cp\cp_weapon::ref_124ad(var_1)) {
+    if(scripts\cp\cp_weapon::ref_124AD(var_1)) {
       scripts\cp\cp_weapon::minigamefinishcount(var_1);
       continue;
     }
@@ -963,7 +963,7 @@ function make_traindoors_outlines_disabled_ks(var_0) {
 
 function obj_maj_wait_train_init(var_0) {
   scripts\cp\cp_modular_spawning::increase_reserved_spawn_slots(1, "convoy4_the_smuggler");
-  thread ref_131f0();
+  thread ref_131F0();
 }
 
 function obj_maj_wait_train_start(var_0) {
@@ -976,8 +976,8 @@ function obj_maj_wait_train_start(var_0) {
   var_1 = scripts\engine\utility::getStruct("convoy4_obj_train", "targetname");
   objective_setdescription(var_0.objectiveindex, &"CP_QUARRY2_OBJECTIVES/CONVOY4_WAITTRAIN");
   objective_position(var_0.objectiveindex, var_1.origin);
-  level thread scripts\cp\cp_objectives::ref_1317e(var_0, var_1.origin);
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  level thread scripts\cp\cp_objectives::ref_1317E(var_0, var_1.origin);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
   objective_sethot(var_0.objectiveindex, 0);
   thread obj_maj_take_apache_start();
@@ -1147,7 +1147,7 @@ function create_usable_c4_model(var_0) {
   objective_setplayintro(var_1, 1);
   objective_setplayoutro(var_1, 1);
   objective_state(var_1, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_1);
+  scripts\cp\cp_objectives::ref_11F80(var_1);
   objective_setbackground(var_1, 0);
   objective_setlabel(var_1, &"CP_QUARRY2_OBJECTIVES/LABEL_LOOT");
   objective_icon(var_1, "icon_waypoint_objective_general");
@@ -1155,7 +1155,7 @@ function create_usable_c4_model(var_0) {
   var_2 = spawn("script_model", self.origin + (0, 0, 4));
   var_2 setModel("tag_origin");
   var_2.angles = self.angles;
-  var_2.ref_12ead = var_2.angles;
+  var_2.ref_12EAD = var_2.angles;
 
   if(isDefined(self.script_parameters)) {
     var_2.script_parameters = self.script_parameters;
@@ -1239,18 +1239,18 @@ function obj_maj_extraction_start(var_0) {
   thread scripts\cp\cp_modular_spawning::set_ambient_max_count(24);
   var_1 = scripts\engine\utility::getStruct("objective_convoy4_05_a", "targetname");
   objective_position(var_0.objectiveindex, var_1.origin);
-  level thread scripts\cp\cp_objectives::ref_1317e(var_0, var_1.origin);
-  scripts\cp\cp_objectives::ref_11f80(var_0.objectiveindex);
+  level thread scripts\cp\cp_objectives::ref_1317E(var_0, var_1.origin);
+  scripts\cp\cp_objectives::ref_11F80(var_0.objectiveindex);
   objective_setownerteam(var_0.objectiveindex, "allies");
   objective_sethot(var_0.objectiveindex, 0);
   objective_icon(var_0.objectiveindex, "icon_waypoint_objective_general");
   objective_setdescription(var_0.objectiveindex, &"CP_QUARRY2_OBJECTIVES/CONVOY4_REGROUP_EXTRACT");
   objective_setlabel(var_0.objectiveindex, &"CP_QUARRY2_OBJECTIVES/LABEL_REGROUP");
-  scripts\cp\utility::ref_123fe("mus_cp_smuggler_mission_end");
+  scripts\cp\utility::ref_123FE("mus_cp_smuggler_mission_end");
   thread spawn_map_ac130();
   thread disable_nearby_vehicles(level, var_1.origin);
-  thread ref_123e3(level);
-  thread ref_1240e(level);
+  thread ref_123E3(level);
+  thread ref_1240E(level);
   wait_for_start_extraction(level, var_1.origin, var_0.objectiveindex);
   level.obj_allow_fulton = 0;
   thread kiosksearchradiusidealmin();
@@ -1279,13 +1279,13 @@ function smuggler_door_lock() {
   wait 10;
   var_0 = scripts\engine\utility::getStruct("smuggler_base_room", "targetname").origin;
   var_1 = "scriptable_construction_doors_metal_b_02_mp";
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(1, var_0, 128, var_1, "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(1, var_0, 128, var_1, "classname");
 }
 
 function smuggler_door_unlock() {
   var_0 = scripts\engine\utility::getStruct("smuggler_base_room", "targetname").origin;
   var_1 = "scriptable_construction_doors_metal_b_02_mp";
-  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13bc1(0, var_0, 128, var_1, "classname");
+  thread scripts\mp\vehicles\vehicle_damage_mp::ref_13BC1(0, var_0, 128, var_1, "classname");
 }
 
 function start_smuggler_heli_flyin() {
@@ -1380,7 +1380,7 @@ function set_smuggler_crash_loc(var_0) {
   var_0.perferred_crash_location = scripts\engine\utility::getclosest(var_0.origin, var_2);
   var_3 = var_0.perferred_crash_location.origin;
   thread getcurrentxp();
-  var_4 = var_0 scripts\engine\utility::ref_143b9(25, "vehicle_crashDone");
+  var_4 = var_0 scripts\engine\utility::ref_143B9(25, "vehicle_crashDone");
 
   foreach(var_6 in level.players) {
     if(isDefined(var_1) && isPlayer(var_1) && var_6 == var_1) {
@@ -1461,7 +1461,7 @@ function spawn_smuggler_and_board_heli() {
   var_0.ignoreme = 1;
   var_0 scripts\common\utility::demeanor_override("sprint");
   var_0.scripted_mode = 1;
-  thread ref_1342b(level);
+  thread ref_1342B(level);
   thread smuggler_base_room();
   wait 18;
 
@@ -1492,19 +1492,19 @@ function spawn_smuggler_and_board_heli() {
   var_0.origin = (34917, 29465, 562);
   var_2 = getclosestpointonnavmesh(var_0.origin);
   var_0 setgoalpos(var_2);
-  thread ref_1342c();
+  thread ref_1342C();
   level.smuggler_heli.smugglermdl = thread setup_pilot(level.smuggler_heli, "tag_pilot1");
   wait 0.5;
   scripts\engine\utility::flag_set("smuggler_aboard");
 }
 
-function ref_1342b(var_0) {
+function ref_1342B(var_0) {
   var_0 endon("got_to_heli");
   var_0 waittill("death");
-  level.ref_11f79 = 1;
+  level.ref_11F79 = 1;
 }
 
-function ref_1342c() {
+function ref_1342C() {
   self endon("death");
   wait 5;
   self kill();
@@ -1593,7 +1593,7 @@ function smuggler_heli_objective(var_0) {
   }
 
   objective_state(var_2, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_2);
+  scripts\cp\cp_objectives::ref_11F80(var_2);
   objective_setlabel(var_2, &"CP_QUARRY2_OBJECTIVES/KILL_SMUGGLER");
   objective_icon(var_2, "icon_waypoint_objective_general");
   objective_sethot(var_2, 1);
@@ -1601,14 +1601,14 @@ function smuggler_heli_objective(var_0) {
   objective_addalltomask(var_2);
   objective_showtoplayersinmask(var_2);
 
-  if(istrue(level.ref_11f79)) {
+  if(istrue(level.ref_11F79)) {
     level thread scripts\cp\utility::objective_update("convoy4_kill_smuggler", undefined, undefined, undefined, 1, undefined, 2);
     wait 1;
   } else {
     level thread scripts\cp\utility::objective_update("convoy4_kill_smuggler", undefined, undefined, undefined, 1, undefined, 2);
 
     if(isDefined(var_0) && isent(var_0)) {
-      thread ref_1241e();
+      thread ref_1241E();
       thread smuggler_too_far_fail(level, 60, var_1, var_2);
     }
 
@@ -1818,9 +1818,9 @@ function obj_comms_start(var_0, var_1, var_2) {
   objective_setplayintro(var_2.objectiveindex, 1);
   objective_setplayoutro(var_2.objectiveindex, 1);
   objective_position(var_2.objectiveindex, var_11.origin);
-  level thread scripts\cp\cp_objectives::ref_1317e(var_2, var_11.origin);
+  level thread scripts\cp\cp_objectives::ref_1317E(var_2, var_11.origin);
   objective_state(var_2.objectiveindex, "current");
-  scripts\cp\cp_objectives::ref_11f80(var_2.objectiveindex);
+  scripts\cp\cp_objectives::ref_11F80(var_2.objectiveindex);
   objective_icon(var_2.objectiveindex, var_7);
   objective_sethot(var_2.objectiveindex, 0);
   objective_setlabel(var_2.objectiveindex, var_6);
@@ -1839,7 +1839,7 @@ function obj_comms_start(var_0, var_1, var_2) {
 
   level waittill("cpu_hacking_done");
   level notify("comms_laptop_hacked");
-  scripts\cp\utility::ref_123fe("");
+  scripts\cp\utility::ref_123FE("");
   thread play_hack_vo(level);
   playsoundatpos(var_11.origin, "cp_hacking_success");
   level.i_see_player_shield_watcher = 0;
@@ -1867,15 +1867,15 @@ function activationcommslaptop(var_0, var_1) {
 
   switch (level.ref_12958) {
     case 1:
-      scripts\cp\utility::ref_123fe("mus_cp_smuggler_files_copied_1");
+      scripts\cp\utility::ref_123FE("mus_cp_smuggler_files_copied_1");
       var_3 = 220;
       break;
     case 2:
-      scripts\cp\utility::ref_123fe("mus_cp_smuggler_files_copied_2");
+      scripts\cp\utility::ref_123FE("mus_cp_smuggler_files_copied_2");
       var_3 = 120;
       break;
     case 3:
-      scripts\cp\utility::ref_123fe("mus_cp_smuggler_files_copied_3");
+      scripts\cp\utility::ref_123FE("mus_cp_smuggler_files_copied_3");
       var_3 = 120;
       break;
   }
@@ -2098,7 +2098,7 @@ function train_handler() {
   GscBinSkip0(0x2e, var_11.size, var_7, var_10, var_5, var_5, var_5, var_7, var_5, level, level);
 }
 
-function ref_13c9b(var_0) {
+function ref_13C9B(var_0) {
   wait 37.1;
   level notify("start_anim_train");
   level notify("convoy4_stop_train");
@@ -2120,27 +2120,27 @@ function show_headicon_to(var_0) {
   wait 1;
 
   if(var_0.script_noteworthy == "2") {
-    var_1 = level.ref_1295e gettagorigin("cargo_03_tag_body");
-    var_2 = level.ref_1295e gettagangles("cargo_03_tag_body");
+    var_1 = level.ref_1295E gettagorigin("cargo_03_tag_body");
+    var_2 = level.ref_1295E gettagangles("cargo_03_tag_body");
     var_0.origin = var_1;
     var_0.angles = var_2;
-    var_0 linkTo(level.ref_1295e, "cargo_03_tag_body", (0, 0, 56), (0, 0, 0));
+    var_0 linkTo(level.ref_1295E, "cargo_03_tag_body", (0, 0, 56), (0, 0, 0));
     return;
   }
 
   if(var_0.script_noteworthy == "4") {
-    var_1 = level.ref_1295e gettagorigin("cargo_02_tag_body");
-    var_2 = level.ref_1295e gettagangles("cargo_02_tag_body");
+    var_1 = level.ref_1295E gettagorigin("cargo_02_tag_body");
+    var_2 = level.ref_1295E gettagangles("cargo_02_tag_body");
     var_0.origin = var_1;
     var_0.angles = var_2;
-    var_0 linkTo(level.ref_1295e, "cargo_02_tag_body", (0, 0, 56), (0, 0, 0));
+    var_0 linkTo(level.ref_1295E, "cargo_02_tag_body", (0, 0, 56), (0, 0, 0));
     return;
   }
 }
 
-function ref_13cbb() {
+function ref_13CBB() {
   wait 73;
-  ref_130fb();
+  ref_130FB();
 }
 
 function train_sfx_1() {
@@ -2151,8 +2151,8 @@ function train_sfx_1() {
   var_0 playsoundonmovingent("cp_quarry_train_1_arrive");
   wait 20;
   var_0 unlink();
-  var_0.origin = level.ref_1295e gettagorigin("engine_01_tag_origin");
-  var_0 linkTo(level.ref_1295e, "engine_01_tag_origin");
+  var_0.origin = level.ref_1295E gettagorigin("engine_01_tag_origin");
+  var_0 linkTo(level.ref_1295E, "engine_01_tag_origin");
   wait 41;
   var_0 delete();
 }
@@ -2232,14 +2232,14 @@ function spawn_train_nav_blocker(var_0) {
 function waitfor_train_explode() {
   wait 3;
 
-  if(!isDefined(level.ref_1295e)) {
+  if(!isDefined(level.ref_1295E)) {
     return;
   }
 
-  var_0 = level.ref_1295e gettagorigin("engine_01_tag_origin");
-  var_1 = level.ref_1295e gettagorigin("cargo_03_tag_origin");
-  var_2 = level.ref_1295e gettagorigin("loader_02_tag_origin");
-  var_3 = level.ref_1295e gettagorigin("cargo_02_tag_origin");
+  var_0 = level.ref_1295E gettagorigin("engine_01_tag_origin");
+  var_1 = level.ref_1295E gettagorigin("cargo_03_tag_origin");
+  var_2 = level.ref_1295E gettagorigin("loader_02_tag_origin");
+  var_3 = level.ref_1295E gettagorigin("cargo_02_tag_origin");
   thread explode_results(level);
   thread explode_results(level);
   thread explode_results(level);
@@ -2342,7 +2342,7 @@ function complete_game_win() {
 
 function mp_shipment_patch() {
   wait 1.8;
-  thread ref_130a8();
+  thread ref_130A8();
 }
 
 function move_train_along_struct_path(var_0, var_1, var_2) {
@@ -2425,10 +2425,10 @@ function move_train_along_struct_path(var_0, var_1, var_2) {
     var_3 = var_5;
   }
 
-  ref_130fb();
+  ref_130FB();
 }
 
-function ref_130fb() {
+function ref_130FB() {
   level.obj_train_stopped = 1;
   level notify("convoy4_train_stopped");
 }
@@ -2562,7 +2562,7 @@ function wait_for_start_extraction(var_0, var_1) {
   level thread scripts\cp\infilexfil\cp_fulton::fulton_group_exfil_at_pos(var_0 - (0, 0, 64), (0, 237, 0), var_6, var_5);
   thread wait_extraction_timer(level, var_4 - 2);
   level thread scripts\cp\utility::objective_update("convoy4_extraction", var_4, var_4 - 1, var_4 * 0.08333, 1);
-  level thread scripts\cp\infilexfil\cp_fulton::ref_123be(var_4);
+  level thread scripts\cp\infilexfil\cp_fulton::ref_123BE(var_4);
   level waittill("launched_player_fultons");
   level notify("players_fultoned");
   level.obj_players_fultoning = 1;
@@ -2640,7 +2640,7 @@ function init_bombs() {
 function all_players_fulton() {
   level endon("game_ended");
   level waittill("continue_fulton_extraction");
-  level.ref_139b5 = 1;
+  level.ref_139B5 = 1;
   wait 0.1;
   thread waitfor_train_explode();
   level thread scripts\cp\utility::objective_update("convoy4_extraction");
@@ -2726,25 +2726,25 @@ function collect_jugg_key(var_0, var_1, var_2, var_3, var_4) {
   level notify("stop_module_" + var_3);
   objective_unsetlocation(var_1, var_2);
   var_4 thread scripts\cp\utility::playerplaypickupanim();
-  thread ref_123d7();
+  thread ref_123D7();
   objective_setdescription(var_1, &"CP_QUARRY2_OBJECTIVES/CONVOY4_KEYS_1");
   scripts\cp\utility::objective_update("convoy4_keys_" + level.convoy4_terminal_keys);
 }
 
-function ref_123d7() {
+function ref_123D7() {
   var_0 = undefined;
 
   switch (level.convoy4_terminal_keys) {
     case 1:
       var_0 = &"CP_QUARRY2_OBJECTIVES/KEYS_HUD_1";
-      scripts\cp\utility::ref_123fe("mus_cp_smuggler_keyfound");
+      scripts\cp\utility::ref_123FE("mus_cp_smuggler_keyfound");
       break;
     case 2:
       var_0 = &"CP_QUARRY2_OBJECTIVES/KEYS_HUD_2";
       break;
     case 3:
       var_0 = &"CP_QUARRY2_OBJECTIVES/KEYS_HUD_3";
-      scripts\cp\utility::ref_123fe("mus_cp_smuggler_terminal_activated");
+      scripts\cp\utility::ref_123FE("mus_cp_smuggler_terminal_activated");
       break;
   }
 
@@ -2802,10 +2802,10 @@ function register_spawn_functions() {
   wait 0.5;
   scripts\cp\coop_stealth::coop_stealth_init();
   var_0 = &scripts\cp\cp_modular_spawning::registerambientgroup;
-  [[var_0]]("lbravo_spawner_p3_form_a", 0, 1, 1, 0.1, 0, "lbravo_spawner_p3_form_a", &scripts\cp\cp_modular_spawning::ref_13bac, undefined, undefined);
-  [[var_0]]("lbravo_spawner_p3_form_b", 0, 1, 1, 0.1, 0, "lbravo_spawner_p3_form_b", &scripts\cp\cp_modular_spawning::ref_13bac, undefined, undefined);
-  [[var_0]]("lbravo_spawner_p3_form_c", 0, 1, 1, 0.1, 0, "lbravo_spawner_p3_form_c", &scripts\cp\cp_modular_spawning::ref_13bac, undefined, undefined);
-  [[var_0]]("lbravo_spawner_p3_form_d", 0, 1, 1, 0.1, 0, "lbravo_spawner_p3_form_d", &scripts\cp\cp_modular_spawning::ref_13bac, undefined, undefined);
+  [[var_0]]("lbravo_spawner_p3_form_a", 0, 1, 1, 0.1, 0, "lbravo_spawner_p3_form_a", &scripts\cp\cp_modular_spawning::ref_13BAC, undefined, undefined);
+  [[var_0]]("lbravo_spawner_p3_form_b", 0, 1, 1, 0.1, 0, "lbravo_spawner_p3_form_b", &scripts\cp\cp_modular_spawning::ref_13BAC, undefined, undefined);
+  [[var_0]]("lbravo_spawner_p3_form_c", 0, 1, 1, 0.1, 0, "lbravo_spawner_p3_form_c", &scripts\cp\cp_modular_spawning::ref_13BAC, undefined, undefined);
+  [[var_0]]("lbravo_spawner_p3_form_d", 0, 1, 1, 0.1, 0, "lbravo_spawner_p3_form_d", &scripts\cp\cp_modular_spawning::ref_13BAC, undefined, undefined);
   [[var_0]]("quarry_intro1_chopper", 5, 5, 5, 0.1, 0, "quarry_intro1_chopper", undefined, undefined, undefined);
   [[var_0]]("quarry_intro2_chopper", 4, 4, 4, 0.1, 0, "quarry_intro2_chopper", undefined, undefined, undefined);
   [[var_0]]("obj_a_roof_jugg", 1, 1, 1, 0.1, 0, "obj_a_roof_jugg", undefined, undefined, undefined);
@@ -2815,7 +2815,7 @@ function register_spawn_functions() {
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("convoy4_roof_jugg", &ref_13890);
   scripts\cp\cp_modular_spawning::set_spawn_scoring_params_for_group("convoy4_roof_jugg", undefined, 20000, 30000);
   [[var_0]]("convoy4_roof_rpgs", 4, 6, 10, 0.1, 0, "convoy4_roof_rpgs", &watchforstopwaves, undefined, undefined);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("convoy4_roof_rpgs", &ref_12d87);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("convoy4_roof_rpgs", &ref_12D87);
   [[var_0]]("convoy4_01a_1", 7, 11, 40, 0.1, 0, "convoy4_01a_1", &watchforstopwaves, undefined, undefined);
   [[var_0]]("convoy4_01b_1", 7, 9, 40, 0.1, 0, "convoy4_01b_1", &watchforstopwaves, undefined, undefined);
   [[var_0]]("convoy4_01c_1", 7, 9, 40, 0.1, 0, "convoy4_01c_1", &watchforstopwaves, undefined, undefined);
@@ -2836,7 +2836,7 @@ function register_spawn_functions() {
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("convoy4_snipers_1", &ks_pointkingsgetnobonus);
   scripts\cp\cp_modular_spawning::set_spawn_scoring_params_for_group("convoy4_snipers_1", undefined, 20000, 30000);
   [[var_0]]("mortar_guys", 4, 4, 4, 0.1, 0, "mortar_guys", &watchforstopwaves, undefined, undefined);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("mortar_guys", &ref_1295b);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("mortar_guys", &ref_1295B);
   scripts\cp\cp_modular_spawning::set_spawn_scoring_params_for_group("mortar_guys", undefined, 20000, 30000);
   [[var_0]]("spawned_hostage_a", 1, 1, 1, 0.1, 0, "spawned_hostage_a", undefined, undefined, undefined);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("spawned_hostage_a", &make_civ_usable);
@@ -2860,10 +2860,10 @@ function register_spawn_functions() {
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("spawned_hostages_c", &scripts\cp\cp_hostage::make_hostage_usable);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("spawned_hostages_c", &scripts\cp\cp_hostage::setup_hostage_anims);
   [[var_0]]("convoy4_02a_1_pre", 8, 8, 10, 2, 0, "convoy4_02a_1", &watchforstopwaves, undefined, undefined);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("convoy4_02a_1_pre", &ref_11f52);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("convoy4_02a_1_pre", &ref_11F52);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("convoy4_02a_1_pre", &ks_pointsperkingslain);
   [[var_0]]("convoy4_02a_1", 6, 12, 200, 2, 0, "convoy4_02a_1", &watchforstopwaves, undefined, undefined);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("convoy4_02a_1", &ref_11f52);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("convoy4_02a_1", &ref_11F52);
   [[var_0]]("convoy4_02b_1_pre", 4, 6, 12, 2.25, 0, "convoy4_02b_1", &watchforstopwaves, undefined, undefined);
   [[var_0]]("convoy4_02b_2_pre", 4, 8, 10, 1, 0, "convoy4_02b_2", &watchforstopwaves, undefined, undefined);
   [[var_0]]("convoy4_02b_1", 4, [ &scripts\cp\cp_modular_spawning::set_count_based_on_grouped_modules, "group_test", 28, 20], 150, [ &scripts\cp\cp_modular_spawning::module_wave_spawn, 25, 2], 0, "convoy4_02b_1", &watchforstopwaves, undefined, undefined);
@@ -2906,13 +2906,13 @@ function register_spawn_functions() {
   [[var_0]]("techo_phys_quarry2", 3, 6, 6, 0.1, 0, "techo_phys_quarry2", undefined, undefined, undefined);
   [[var_0]]("techo_phys_quarry3", 3, 6, 6, 0.1, 0, "techo_phys_quarry3", undefined, undefined, undefined);
   [[var_0]]("techo_phys_quarry4", 3, 6, 6, 0.1, 0, "techo_phys_quarry4", undefined, undefined, undefined);
-  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("wave_spawning", &ref_11e4f);
+  scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("wave_spawning", &ref_11E4F);
   [[var_0]]("cover_guys_debug", 1, 1, 50, 0.1, 0, "cover_guys_debug", &watchforstopwaves, undefined, undefined);
   scripts\cp\cp_modular_spawning::set_spawn_scoring_params_for_group("cover_guys_debug", undefined, 20000, 30000);
   scripts\cp\cp_modular_spawning::register_module_ai_spawn_func("cover_guys_debug", &spawn_in_cover);
 }
 
-function ref_11e4f(var_0) {
+function ref_11E4F(var_0) {
   if(isDefined(self.unittype) && self.unittype == "suicidebomber") {
     self.never_kill_off = 1;
     self.dont_kill_off = 1;
@@ -2920,11 +2920,11 @@ function ref_11e4f(var_0) {
   }
 }
 
-function ref_1295b(var_0) {
-  ref_1295c(var_0);
+function ref_1295B(var_0) {
+  ref_1295C(var_0);
 }
 
-function ref_1295c(var_0) {
+function ref_1295C(var_0) {
   self endon("death");
   level endon("game_ended");
   scripts\common\utility::demeanor_override("sprint");
@@ -3006,7 +3006,7 @@ function blueprintextract_beforepickupspawned(var_0, var_1, var_2) {
     var_2 = "forever";
   }
 
-  level scripts\engine\utility::ref_143a6(var_0, var_1, var_2);
+  level scripts\engine\utility::ref_143A6(var_0, var_1, var_2);
 
   while(scripts\cp\cp_modular_spawning::has_seen_any_player_recently()) {
     var_3 -= 0.25;
@@ -3046,14 +3046,14 @@ function watchforjuggstop(var_0) {
   thread _watchforjuggstop(level);
 }
 
-function ref_11f52(var_0) {
-  if(!isDefined(level.ref_11f54)) {
+function ref_11F52(var_0) {
+  if(!isDefined(level.ref_11F54)) {
     return;
   }
 
   var_1 = "cpu_hacking_done";
-  thread bomb_label(level.ref_11f54, var_1);
-  thread ref_11f55(var_1);
+  thread bomb_label(level.ref_11F54, var_1);
+  thread ref_11F55(var_1);
 }
 
 function bomb_label(var_0, var_1) {
@@ -3087,8 +3087,8 @@ function bomb_on_vehicle_clean_up_monior(var_0) {
     var_2 = var_0.radius;
     level thread scripts\engine\utility::draw_circle(var_1, var_2, (1, 1, 0), 0.5, 0, 20);
 
-    if(isDefined(var_0.ref_127ea) && var_0.ref_127ea.size) {
-      foreach(var_4 in var_0.ref_127ea) {
+    if(isDefined(var_0.ref_127EA) && var_0.ref_127EA.size) {
+      foreach(var_4 in var_0.ref_127EA) {
         if(isDefined(var_4) && isai(var_4) && isalive(var_4)) {
           var_5 = var_4 getentitynumber();
 
@@ -3105,7 +3105,7 @@ function bomb_on_vehicle_clean_up_monior(var_0) {
 
 function bomb_plant_allowed(var_0) {
   handlemeleekillsteelballs(var_0);
-  var_0.ref_127ea[var_0.ref_127ea.size] = self;
+  var_0.ref_127EA[var_0.ref_127EA.size] = self;
   self waittill("death");
   handlemeleekillsteelballs(var_0);
 }
@@ -3117,7 +3117,7 @@ function printdata(var_0) {
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_4 = var_0[var_3];
 
-    if(isDefined(var_4.script_count_max) && int(var_4.script_count_max) <= var_4.ref_127ea.size) {
+    if(isDefined(var_4.script_count_max) && int(var_4.script_count_max) <= var_4.ref_127EA.size) {
       if(var_1 == var_4 && var_3 < var_0.size - 1) {
         var_1 = var_0[var_3 + 1];
       }
@@ -3127,7 +3127,7 @@ function printdata(var_0) {
       var_2 = var_4;
     }
 
-    if(var_1.ref_127ea.size > var_4.ref_127ea.size) {
+    if(var_1.ref_127EA.size > var_4.ref_127EA.size) {
       var_1 = var_4;
     }
   }
@@ -3135,7 +3135,7 @@ function printdata(var_0) {
   return var_1;
 }
 
-function ref_11f55(var_0) {
+function ref_11F55(var_0) {
   self endon("death");
   level endon("game_ended");
   level waittill(var_0);
@@ -3148,13 +3148,13 @@ function ref_11f55(var_0) {
 function handlemeleekillsteelballs(var_0) {
   var_1 = [];
 
-  foreach(var_3 in var_0.ref_127ea) {
+  foreach(var_3 in var_0.ref_127EA) {
     if(isDefined(var_3) && isalive(var_3)) {
       var_1 = var_3;
     }
   }
 
-  var_0.ref_127ea = var_1;
+  var_0.ref_127EA = var_1;
 }
 
 function ref_12926(var_0) {
@@ -3175,7 +3175,7 @@ function ref_12927(var_0) {
   self endon("death");
   scripts\cp\cp_modular_spawning::set_goal_pos(self.script_origin_other);
   scripts\cp\cp_modular_spawning::set_goal_radius(32);
-  ref_143cf(1);
+  ref_143CF(1);
   level waittill("cpu_hacking_done");
   self.script_origin_other = undefined;
   scripts\cp\cp_modular_spawning::set_goal_radius(2048);
@@ -3187,7 +3187,7 @@ function ref_12927(var_0) {
   }
 }
 
-function ref_143cf(var_0) {
+function ref_143CF(var_0) {
   for(;;) {
     level waittill("start_hacking_comms_laptop", var_1);
 
@@ -3199,11 +3199,11 @@ function ref_143cf(var_0) {
   }
 }
 
-function ref_12d87(var_0) {
-  thread ref_12d88(var_0);
+function ref_12D87(var_0) {
+  thread ref_12D88(var_0);
 }
 
-function ref_12d88(var_0) {
+function ref_12D88(var_0) {
   self endon("death");
   level endon("game_ended");
   wait 0.5;
@@ -3291,7 +3291,7 @@ function spawn_soldiers_switch_01() {
   level.convoy4_module_02a_pre = scripts\cp\cp_modular_spawning::run_spawn_module("convoy4_02a_1_pre");
   level waittill("start_hacking_comms_laptop");
   level notify("end_wave_convoy4_spawners");
-  scripts\cp\cp_spawning_util::ref_13bbd(0);
+  scripts\cp\cp_spawning_util::ref_13BBD(0);
   wait 0.5;
   level.convoy4_module_02a = scripts\cp\cp_modular_spawning::run_spawn_module("convoy4_02a_1");
 }
@@ -3458,7 +3458,7 @@ function activationcalltraininteract(var_0, var_1) {
   }
 }
 
-function ref_124d2() {
+function ref_124D2() {
   level endon("game_ended");
   level endon("start_hacking_comms_laptop");
   level endon("player_triggered_obit");
@@ -3470,7 +3470,7 @@ function ref_124d2() {
 
     for(var_3 = 0; var_3 < var_2.size; var_3++) {
       if(var_2[var_3] getclantag() == "egan") {
-        thread ref_1436b(var_2[var_3], var_0.origin);
+        thread ref_1436B(var_2[var_3], var_0.origin);
       }
     }
 
@@ -3478,25 +3478,25 @@ function ref_124d2() {
   }
 }
 
-function ref_1436b(var_0, var_1) {
+function ref_1436B(var_0, var_1) {
   level endon("player_triggered_obit");
   self endon("death_or_disconnect");
 
-  if(istrue(self.ref_13c51)) {
+  if(istrue(self.ref_13C51)) {
     return;
   }
 
-  self.ref_13c51 = 1;
+  self.ref_13C51 = 1;
   var_2 = 0;
 
   for(;;) {
     if(distance2dsquared(self.origin, var_0) > var_1) {
-      self.ref_13c51 = undefined;
+      self.ref_13C51 = undefined;
       return;
     }
 
     if(var_2 > 60) {
-      thread ref_11f51();
+      thread ref_11F51();
       return;
     }
 
@@ -3505,7 +3505,7 @@ function ref_1436b(var_0, var_1) {
   }
 }
 
-function ref_11f51() {
+function ref_11F51() {
   level notify("player_triggered_obit");
   var_0 = getEnt("obit_model", "targetname");
   var_0 makeusable();
@@ -3526,20 +3526,20 @@ function ref_11f51() {
       }
 
       var_1 playlocalsound("grenade_pickup");
-      thread ref_11f4f(level);
+      thread ref_11F4F(level);
       var_0 makeunusable();
     }
   }
 }
 
-function ref_11f4f(var_0) {
-  var_1 = &ref_135a7;
+function ref_11F4F(var_0) {
+  var_1 = &ref_135A7;
   var_2 = [];
   var_2 = [[[var_1]]((7488, -11168, 224), (0, 267.5, 0)), [[var_1]]((7488, -11120, 224), (0, 267.5, 0)), [[var_1]]((7504, -11120, 224), (0, 267.5, 0)), [[var_1]]((7472, -11120, 224), (0, 267.5, 0)), [[var_1]]((7536, -11120, 224), (0, 267.5, 0)), [[var_1]]((7552, -11120, 224), (0, 267.5, 0)), [[var_1]]((7568, -11120, 224), (0, 267.5, 0)), [[var_1]]((7568, -11144, 224), (0, 267.5, 0)), [[var_1]]((7536, -11144, 224), (0, 267.5, 0)), [[var_1]]((7536, -11168, 224), (0, 267.5, 0)), [[var_1]]((7552, -11168, 224), (0, 267.5, 0)), [[var_1]]((7568, -11168, 224), (0, 267.5, 0)), [[var_1]]((7608, -11120, 224), (0, 267.5, 0)), [[var_1]]((7608, -11144, 224), (0, 267.5, 0)), [[var_1]]((7608, -11168, 224), (0, 267.5, 0)), [[var_1]]((7624, -11136, 224), (0, 267.5, 0)), [[var_1]]((7640, -11144, 224), (0, 267.5, 0)), [[var_1]]((7656, -11136, 224), (0, 267.5, 0)), [[var_1]]((7672, -11120, 224), (0, 267.5, 0)), [[var_1]]((7672, -11144, 224), (0, 267.5, 0)), [[var_1]]((7672, -11168, 224), (0, 267.5, 0)), [[var_1]]((7448, -11208, 224), (0, 267.5, 0)), [[var_1]]((7464, -11200, 224), (0, 357.5, 0)), [[var_1]]((7520, -11232, 224), (0, 267.5, 0)), [[var_1]]((7448, -11232, 224), (0, 267.5, 0)), [[var_1]]((7448, -11256, 224), (0, 267.5, 0)), [[var_1]]((7464, -11264, 224), (0, 357.5, 0)), [[var_1]]((7528, -11256, 224), (0, 327.5, 0)), [[var_1]]((7464, -11232, 224), (0, 357.5, 0)), [[var_1]]((7524, -11208, 224), (0, 252.5, 0)), [[var_1]]((7552, -11252, 224), (0, 222.5, 0)), [[var_1]]((7560, -11232, 224), (0, 177.5, 0)), [[var_1]]((7540, -11196, 224), (0, 182.5, 0)), [[var_1]]((7600, -11248, 224), (0, 267.5, 0)), [[var_1]]((7608, -11224, 224), (0, 267.5, 0)), [[var_1]]((7616, -11200, 224), (0, 267.5, 0)), [[var_1]]((7632, -11224, 224), (0, 267.5, 0)), [[var_1]]((7640, -11248, 224), (0, 267.5, 0)), [[var_1]]((7616, -11232, 224), (0, 357.5, 0)), [[var_1]]((7672, -11248, 224), (0, 267.5, 0)), [[var_1]]((7672, -11224, 224), (0, 267.5, 0)), [[var_1]]((7680, -11208, 224), (0, 282.5, 0)), [[var_1]]((7688, -11232, 224), (0, 282.5, 0)), [[var_1]]((7696, -11248, 224), (0, 282.5, 0)), [[var_1]]((7712, -11248, 224), (0, 267.5, 0)), [[var_1]]((7712, -11224, 224), (0, 267.5, 0)), [[var_1]]((7712, -11200, 224), (0, 267.5, 0)), [[var_1]]((7352, -11304, 224), (0, 267.5, 0)), [[var_1]]((7352, -11328, 224), (0, 267.5, 0)), [[var_1]]((7352, -11352, 224), (0, 267.5, 0)), [[var_1]]((7352, -11376, 224), (0, 267.5, 0)), [[var_1]]((7392, -11320, 224), (0, 267.5, 0)), [[var_1]]((7424, -11320, 224), (0, 267.5, 0)), [[var_1]]((7408, -11312, 224), (0, 192.5, 0)), [[var_1]]((7408, -11344, 224), (0, 327.5, 0)), [[var_1]]((7424, -11344, 224), (0, 267.5, 0)), [[var_1]]((7424, -11368, 224), (0, 267.5, 0)), [[var_1]]((7456, -11320, 224), (0, 267.5, 0)), [[var_1]]((7456, -11344, 224), (0, 267.5, 0)), [[var_1]]((7472, -11352, 224), (0, 297.5, 0)), [[var_1]]((7488, -11368, 224), (0, 267.5, 0)), [[var_1]]((7472, -11384, 224), (0, 177.5, 0)), [[var_1]]((7472, -11312, 224), (0, 267.5, 0)), [[var_1]]((7488, -11312, 224), (0, 267.5, 0)), [[var_1]]((7528, -11304, 224), (0, 177.5, 0)), [[var_1]]((7536, -11312, 224), (0, 282.5, 0)), [[var_1]]((7544, -11336, 224), (0, 267.5, 0)), [[var_1]]((7528, -11344, 224), (0, 177.5, 0)), [[var_1]]((7544, -11360, 224), (0, 267.5, 0)), [[var_1]]((7528, -11376, 224), (0, 357.5, 0)), [[var_1]]((7584, -11352, 224), (0, 177.5, 0)), [[var_1]]((7608, -11352, 224), (0, 177.5, 0)), [[var_1]]((7632, -11304, 224), (0, 267.5, 0)), [[var_1]]((7664, -11304, 224), (0, 267.5, 0)), [[var_1]]((7680, -11328, 224), (0, 267.5, 0)), [[var_1]]((7656, -11344, 224), (0, 222.5, 0)), [[var_1]]((7632, -11368, 224), (0, 267.5, 0)), [[var_1]]((7656, -11376, 224), (0, 177.5, 0)), [[var_1]]((7680, -11376, 224), (0, 177.5, 0)), [[var_1]]((7720, -11320, 224), (0, 267.5, 0)), [[var_1]]((7736, -11304, 224), (0, 267.5, 0)), [[var_1]]((7760, -11320, 224), (0, 267.5, 0)), [[var_1]]((7760, -11344, 224), (0, 267.5, 0)), [[var_1]]((7720, -11344, 224), (0, 267.5, 0)), [[var_1]]((7728, -11368, 224), (0, 267.5, 0)), [[var_1]]((7752, -11368, 224), (0, 267.5, 0)), [[var_1]]((7792, -11304, 224), (0, 267.5, 0)), [[var_1]]((7792, -11328, 224), (0, 267.5, 0)), [[var_1]]((7792, -11352, 224), (0, 267.5, 0)), [[var_1]]((7792, -11376, 224), (0, 267.5, 0)), [[var_1]]((7864, -11304, 224), (0, 267.5, 0)), [[var_1]]((7856, -11328, 224), (0, 267.5, 0)), [[var_1]]((7848, -11352, 224), (0, 267.5, 0)), [[var_1]]((7840, -11376, 224), (0, 267.5, 0)), [[var_1]]((7848, -11296, 224), (0, 177.5, 0)), [[var_1]]((7832, -11296, 224), (0, 177.5, 0))];
   level.breakerstate = [];
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    level.breakerstate[level.breakerstate.size] = thread ref_135a6(var_2[var_3]);
+    level.breakerstate[level.breakerstate.size] = thread ref_135A6(var_2[var_3]);
     wait 0.25;
   }
 
@@ -3551,14 +3551,14 @@ function ref_11f4f(var_0) {
   }
 }
 
-function ref_135a7(var_0, var_1) {
+function ref_135A7(var_0, var_1) {
   var_2 = spawnStruct();
   var_2.origin = var_0;
   var_2.angles = var_1;
   return var_2;
 }
 
-function ref_135a6(var_0) {
+function ref_135A6(var_0) {
   var_1 = spawn("script_model", var_0 + self.origin + (-7500, 11182, 512));
   var_1 setModel("toy_teddy_bear_01_brown");
 
@@ -3569,7 +3569,7 @@ function ref_135a6(var_0) {
   return var_1;
 }
 
-function ref_11f50() {
+function ref_11F50() {
   var_0 = scripts\engine\utility::getStruct("quarry_obit", "targetname");
   var_1 = vehicle_getarray();
   var_2 = 2250000;
@@ -3585,11 +3585,11 @@ function ref_11f50() {
   }
 }
 
-function ref_131f0() {
+function ref_131F0() {
   scripts\cp\utility::skydivestreamhintdvars("quarry");
 }
 
-function ref_131f1() {
+function ref_131F1() {
   scripts\cp\utility::skydivestreamhintdvars("quarry_deep");
 }
 
@@ -3621,9 +3621,9 @@ function setup_enemy_sentries(var_0) {
   }
 }
 
-function ref_130a8() {
+function ref_130A8() {
   foreach(var_1 in level.players) {
-    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340d(2, 1, 1);
+    var_1 thread scripts\mp\vehicles\vehicle_damage_mp::ref_1340D(2, 1, 1);
   }
 
   wait 2;
@@ -3775,10 +3775,10 @@ function play_hack_vo(var_0) {
 
   if(level.convoy4_vo_hacks == 0) {
     play_vo_delay(level, "dx_cps_kama_quarry2_one_hack_down_10", undefined, undefined);
-    thread ref_123f0();
+    thread ref_123F0();
   } else if(level.convoy4_vo_hacks == 1) {
     play_vo_delay(level, "dx_cps_kama_quarry2_two_hacks_down_10", undefined, undefined);
-    thread ref_123f1();
+    thread ref_123F1();
   } else if(level.convoy4_vo_hacks == 2) {
     level.convoy4_vo_hacks = undefined;
     var_1 = var_0 scripts\cp\utility::get_closest_living_player();
@@ -3792,14 +3792,14 @@ function play_hack_vo(var_0) {
   }
 }
 
-function ref_123f0() {
+function ref_123F0() {
   level endon("game_ended");
   level endon("start_hacking_comms_laptop");
   wait 20;
   thread play_vo_delay(level);
 }
 
-function ref_123f1() {
+function ref_123F1() {
   level endon("game_ended");
   level endon("start_hacking_comms_laptop");
   wait 20;
@@ -3866,11 +3866,11 @@ function play_cargo_c4_nags() {
   }
 }
 
-function ref_1241e() {
+function ref_1241E() {
   thread play_vo_delay(level);
 }
 
-function ref_123e3(var_0) {
+function ref_123E3(var_0) {
   level endon("game_ended");
   level.obj_got_extract = 1;
   wait 0.5;
@@ -3901,7 +3901,7 @@ function ref_123e3(var_0) {
   }
 }
 
-function ref_1240e(var_0) {
+function ref_1240E(var_0) {
   level endon("game_ended");
   level endon("players_fultoned");
   var_1 = 14400;
@@ -3918,29 +3918,29 @@ function ref_1240e(var_0) {
 
   level notify("players_near_exfil");
   level thread scripts\mp\vehicles\vehicle_damage_mp::ref_12408(var_2, "obj_holding");
-  thread ref_12dfa();
-  thread ref_12de8();
+  thread ref_12DFA();
+  thread ref_12DE8();
 }
 
-function ref_12de8() {
+function ref_12DE8() {
   level.vehicle_occupancy_getteamfriendlyto = scripts\cp\cp_modular_spawning::run_spawn_module("juggheli_spawner_exfil");
-  thread ref_138bd(level, 60);
+  thread ref_138BD(level, 60);
 }
 
-function ref_12dfa() {
-  thread ref_12dd5(level);
+function ref_12DFA() {
+  thread ref_12DD5(level);
   wait randomfloatrange(10, 15);
-  thread ref_12dd5(level);
+  thread ref_12DD5(level);
   wait randomfloatrange(10, 15);
-  thread ref_12dd5(level);
+  thread ref_12DD5(level);
 }
 
-function ref_138bd(var_0, var_1) {
+function ref_138BD(var_0, var_1) {
   wait var_0;
   scripts\cp\cp_modular_spawning::stop_module_by_groupname(var_1);
 }
 
-function ref_12dd5(var_0) {
+function ref_12DD5(var_0) {
   var_1 = scripts\cp\cp_modular_spawning::run_spawn_module(var_0);
   wait 2;
   scripts\cp\cp_modular_spawning::stop_module_by_groupname(var_0);

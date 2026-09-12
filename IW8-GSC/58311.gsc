@@ -3,7 +3,7 @@
  * Script: 58311.gsc
 ***********************************************/
 
-function ref_13d4c() {
+function ref_13D4C() {
   var_0 = getDvar("LOQKLRKQMO");
 
   if(var_0 == "1") {
@@ -13,8 +13,8 @@ function ref_13d4c() {
   return false;
 }
 
-function ref_13d42() {
-  if(ref_13d4c()) {
+function ref_13D42() {
+  if(ref_13D4C()) {
     return "mp/trial_event_mission_table.csv";
   }
 
@@ -22,7 +22,7 @@ function ref_13d42() {
 }
 
 function trial_ui_set_main_score(var_0) {
-  if(istrue(level.ref_13d2e)) {
+  if(istrue(level.ref_13D2E)) {
     return;
   }
 
@@ -30,7 +30,7 @@ function trial_ui_set_main_score(var_0) {
 }
 
 function trial_ui_set_main_time(var_0) {
-  if(istrue(level.ref_13d2e)) {
+  if(istrue(level.ref_13D2E)) {
     return;
   }
 
@@ -39,7 +39,7 @@ function trial_ui_set_main_time(var_0) {
 }
 
 function trial_ui_set_subscore(var_0) {
-  if(istrue(level.ref_13d2e)) {
+  if(istrue(level.ref_13D2E)) {
     return;
   }
 
@@ -47,7 +47,7 @@ function trial_ui_set_subscore(var_0) {
 }
 
 function trial_ui_set_subtime(var_0) {
-  if(istrue(level.ref_13d2e)) {
+  if(istrue(level.ref_13D2E)) {
     return;
   }
 
@@ -68,7 +68,7 @@ function trial_ui_hide_secondary_timer() {
 }
 
 function trial_ui_set_best_score(var_0) {
-  if(istrue(level.ref_13d2e)) {
+  if(istrue(level.ref_13D2E)) {
     return;
   }
 
@@ -77,7 +77,7 @@ function trial_ui_set_best_score(var_0) {
 }
 
 function trial_ui_set_best_time(var_0) {
-  if(istrue(level.ref_13d2e)) {
+  if(istrue(level.ref_13D2E)) {
     return;
   }
 
@@ -96,7 +96,7 @@ function trial_ui_set_wave(var_0, var_1) {
   setomnvar("ui_trial_wave_total", var_1);
 }
 
-function ref_13d8d(var_0, var_1) {
+function ref_13D8D(var_0, var_1) {
   setomnvar("ui_trial_lap_progress", var_0);
   setomnvar("ui_trial_lap_total", var_1);
 }
@@ -106,7 +106,7 @@ function trial_ui_set_objective_icon_index(var_0) {
 }
 
 function trial_ui_set_reward_tier(var_0) {
-  if(istrue(level.ref_13d2e)) {
+  if(istrue(level.ref_13D2E)) {
     return;
   }
 
@@ -114,14 +114,14 @@ function trial_ui_set_reward_tier(var_0) {
 }
 
 function trial_ui_set_reward_tier_preview(var_0) {
-  if(istrue(level.ref_13d2e)) {
+  if(istrue(level.ref_13D2E)) {
     return;
   }
 
   setomnvar("ui_trial_reward_tier_preview", var_0);
 }
 
-function ref_13d88() {
+function ref_13D88() {
   if(getDvar("LOQKLRKQMO") == "1") {
     game["trial"]["tries_remaining"] = 2;
   } else {
@@ -159,7 +159,7 @@ function trial_ui_set_stat_and_bonus_time(var_0, var_1, var_2, var_3) {
   setomnvar("ui_trial_stats_row" + int(var_0) + "_bonus_time", int(var_3));
 }
 
-function ref_13d89(var_0) {
+function ref_13D89(var_0) {
   setomnvar("ui_trial_retry_disabled", var_0);
 }
 
@@ -195,11 +195,11 @@ function trial_ui_open_results_screen() {
   level.unset_stay_at_spawn_flag_on_entering_combat = 0;
 }
 
-function ref_13d8b(var_0) {
+function ref_13D8B(var_0) {
   setomnvar("ui_combo_bar_combo", int(var_0));
 }
 
-function ref_13d8c(var_0) {
+function ref_13D8C(var_0) {
   setomnvar("ui_combo_bar_duration", int(var_0));
 }
 
@@ -213,7 +213,7 @@ function trial_ui_waittill_retry() {
   }
 }
 
-function ref_13d8a(var_0, var_1) {
+function ref_13D8A(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_1 = 5000;
   }
@@ -237,7 +237,7 @@ function ref_13d8a(var_0, var_1) {
   level.player setclientomnvar("ui_out_of_bounds_countdown", int(0));
 }
 
-function ref_13d4b(var_0, var_1, var_2, var_3) {
+function ref_13D4B(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_1)) {
     var_1 = 0;
   }
@@ -260,10 +260,10 @@ function ref_13d4b(var_0, var_1, var_2, var_3) {
     self playSound(var_4);
   }
 
-  ref_13d8e("standard", var_1, 0, var_2);
+  ref_13D8E("standard", var_1, 0, var_2);
 }
 
-function ref_13d8e(var_0, var_1, var_2, var_3, var_4) {
+function ref_13D8E(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -280,7 +280,7 @@ function ref_13d8e(var_0, var_1, var_2, var_3, var_4) {
     var_3 = 0;
   }
 
-  var_5 = ref_13d47(var_0);
+  var_5 = ref_13D47(var_0);
 
   if(isDefined(self.lasthitmarkertime) && self.lasthitmarkertime == gettime() && var_5 <= self.lasthitmarkerpriority && !var_1) {
     return;
@@ -317,7 +317,7 @@ function ref_13d8e(var_0, var_1, var_2, var_3, var_4) {
   self setclientomnvar("damage_feedback_nonplayer", 0);
 }
 
-function ref_13d47(var_0) {
+function ref_13D47(var_0) {
   if(!isDefined(level.hitmarkerpriorities[var_0])) {
     return 0;
   }
@@ -331,9 +331,9 @@ function waittill_player_isDefined() {
   }
 }
 
-function ref_13d5e() {
+function ref_13D5E() {
   if(level.trial["missionScript"] == "race") {
-    level.ref_13d6a = 1;
+    level.ref_13D6A = 1;
     level.player kill();
   }
 

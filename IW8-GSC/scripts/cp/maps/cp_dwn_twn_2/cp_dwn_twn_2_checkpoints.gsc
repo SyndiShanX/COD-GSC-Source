@@ -3,7 +3,7 @@
  * Script: scripts\cp\maps\cp_dwn_twn_2\cp_dwn_twn_2_checkpoints.gsc
 *********************************************************************/
 
-function ref_131ed() {
+function ref_131ED() {
   level.getplunderextractionsites = &getplatformweaponrankxpmultiplier;
   level.getnextpayloadspawnmodule = &getnexthelimodule;
 }
@@ -25,7 +25,7 @@ function getnexthelimodule() {
   return [var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7];
 }
 
-function ref_11c58() {
+function ref_11C58() {
   if(scripts\engine\utility::flag_exist("player_spawned_with_loadout")) {
     scripts\engine\utility::flag_wait("player_spawned_with_loadout");
   }
@@ -33,7 +33,7 @@ function ref_11c58() {
   thread scripts\cp\cp_objectives::run_objective("ml_p2_get_heli", "primary");
 }
 
-function ref_11c5b() {
+function ref_11C5B() {
   if(scripts\engine\utility::flag_exist("player_spawned_with_loadout")) {
     scripts\engine\utility::flag_wait("player_spawned_with_loadout");
   }
@@ -42,7 +42,7 @@ function ref_11c5b() {
   thread scripts\cp\cp_objectives::run_objective("ml_p2_secure_loc", "primary");
 }
 
-function ref_11c5c() {
+function ref_11C5C() {
   if(scripts\engine\utility::flag_exist("player_spawned_with_loadout")) {
     scripts\engine\utility::flag_wait("player_spawned_with_loadout");
   }

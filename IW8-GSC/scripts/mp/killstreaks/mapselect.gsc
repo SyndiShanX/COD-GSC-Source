@@ -30,7 +30,7 @@ function getselectmappoint(var_0, var_1, var_2) {
 
   scripts\common\utility::allow_offhand_weapons(0);
   thread watchmapselectexit(var_0);
-  thread ref_144e5();
+  thread ref_144E5();
   thread watchownertimeoutdeath();
   var_4 = undefined;
   scripts\cp_mp\utility\killstreak_utility::starttabletscreen(var_0.streakname, 0.05);
@@ -111,7 +111,7 @@ function watchmapselectexit(var_0) {
   stopmapselectsequence(var_0);
 }
 
-function ref_144e5() {
+function ref_144E5() {
   self endon("disconnect");
   self endon("map_select_exit");
   level endon("game_ended");
@@ -131,7 +131,7 @@ function watchownertimeoutdeath() {
   self endon("map_select_exit");
   level endon("game_ended");
   self setclientomnvar("ui_location_selection_countdown", gettime() + 30000);
-  scripts\engine\utility::ref_143b9(30, "death");
+  scripts\engine\utility::ref_143B9(30, "death");
   self notify("cancel_location");
 }
 

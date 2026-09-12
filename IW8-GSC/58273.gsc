@@ -12,114 +12,114 @@ function stopusingbomb() {
   game["dialog"]["ebr_alert_missile_30"] = "ebr_alert_missile_30";
   level.create_agent_definition = 0;
   level.create_ai_type_override = (0, 0, 0);
-  level.ref_13b46 = getdvarfloat("scr_threat_max_radius_strikes_around_player", 3000);
-  level.ref_13b47 = getdvarfloat("scr_threat_min_radius_strikes_around_player", 1500);
-  level.ref_13b45 = getdvarint("scr_threat_explosion_per_strikes", 10);
-  level.ref_13b48 = getdvarfloat("scr_threat_thickness_radius_strikes_around_player", 400);
-  level.ref_13b43 = getdvarfloat("scr_threat_delay_between_strikes", 0.15);
-  level.ref_13b44 = getdvarint("scr_threat_explosion_damage", 10);
+  level.ref_13B46 = getdvarfloat("scr_threat_max_radius_strikes_around_player", 3000);
+  level.ref_13B47 = getdvarfloat("scr_threat_min_radius_strikes_around_player", 1500);
+  level.ref_13B45 = getdvarint("scr_threat_explosion_per_strikes", 10);
+  level.ref_13B48 = getdvarfloat("scr_threat_thickness_radius_strikes_around_player", 400);
+  level.ref_13B43 = getdvarfloat("scr_threat_delay_between_strikes", 0.15);
+  level.ref_13B44 = getdvarint("scr_threat_explosion_damage", 10);
   var_0 = scripts\cp_mp\utility\game_utility::getmapname();
 
   switch (var_0) {
     case "mp_br_mechanics":
-      ref_1322a();
+      ref_1322A();
       break;
     case "mp_don3":
     case "mp_don4":
-      ref_1322b();
+      ref_1322B();
       break;
     default:
-      ref_1322b();
+      ref_1322B();
       break;
   }
 }
 
-function ref_1322b() {
+function ref_1322B() {
   level.create_exfil_animstruct = [];
   level.create_exfil_animstruct[0] = spawnStruct();
   level.create_exfil_animstruct[0].locname = "Vodianoy";
   level.create_exfil_animstruct[0].refname = "ship_tac";
-  level.create_exfil_animstruct[0].ref_119a7 = (39696, -42616, -556);
-  level.create_exfil_animstruct[0].ref_119a8 = 4000;
+  level.create_exfil_animstruct[0].ref_119A7 = (39696, -42616, -556);
+  level.create_exfil_animstruct[0].ref_119A8 = 4000;
   level.create_exfil_animstruct[1] = spawnStruct();
   level.create_exfil_animstruct[1].locname = "Gulag";
   level.create_exfil_animstruct[1].refname = "gulag_tac";
-  level.create_exfil_animstruct[1].ref_119a7 = (51072, -39208, 1351);
-  level.create_exfil_animstruct[1].ref_119a8 = 4000;
+  level.create_exfil_animstruct[1].ref_119A7 = (51072, -39208, 1351);
+  level.create_exfil_animstruct[1].ref_119A8 = 4000;
   level.create_exfil_animstruct[2] = spawnStruct();
   level.create_exfil_animstruct[2].locname = "Hospital";
   level.create_exfil_animstruct[2].refname = "hospital_tac";
-  level.create_exfil_animstruct[2].ref_119a7 = (9072, -10984, -280);
-  level.create_exfil_animstruct[2].ref_119a8 = 3000;
+  level.create_exfil_animstruct[2].ref_119A7 = (9072, -10984, -280);
+  level.create_exfil_animstruct[2].ref_119A8 = 3000;
   level.create_exfil_animstruct[3] = spawnStruct();
   level.create_exfil_animstruct[3].locname = "Stadium";
   level.create_exfil_animstruct[3].refname = "stadium_tac";
-  level.create_exfil_animstruct[3].ref_119a7 = (28720, 2272, -816);
-  level.create_exfil_animstruct[3].ref_119a8 = 6000;
+  level.create_exfil_animstruct[3].ref_119A7 = (28720, 2272, -816);
+  level.create_exfil_animstruct[3].ref_119A8 = 6000;
   level.create_exfil_animstruct[4] = spawnStruct();
   level.create_exfil_animstruct[4].locname = "TV Station";
   level.create_exfil_animstruct[4].refname = "tvstation_tac";
-  level.create_exfil_animstruct[4].ref_119a7 = (15024, 18216, 152);
-  level.create_exfil_animstruct[4].ref_119a8 = 2000;
+  level.create_exfil_animstruct[4].ref_119A7 = (15024, 18216, 152);
+  level.create_exfil_animstruct[4].ref_119A8 = 2000;
   level.create_exfil_animstruct[5] = spawnStruct();
   level.create_exfil_animstruct[5].locname = "Super";
   level.create_exfil_animstruct[5].refname = "super_tac";
-  level.create_exfil_animstruct[5].ref_119a7 = (-12792, 7912, -392);
-  level.create_exfil_animstruct[5].ref_119a8 = 4000;
+  level.create_exfil_animstruct[5].ref_119A7 = (-12792, 7912, -392);
+  level.create_exfil_animstruct[5].ref_119A8 = 4000;
   level.create_exfil_animstruct[6] = spawnStruct();
   level.create_exfil_animstruct[6].locname = "Dam";
   level.create_exfil_animstruct[6].refname = "dam_tac";
-  level.create_exfil_animstruct[6].ref_119a7 = (-22080, 46160, -364);
-  level.create_exfil_animstruct[6].ref_119a8 = 6000;
+  level.create_exfil_animstruct[6].ref_119A7 = (-22080, 46160, -364);
+  level.create_exfil_animstruct[6].ref_119A8 = 6000;
   level.create_exfil_animstruct[7] = spawnStruct();
   level.create_exfil_animstruct[7].locname = "Bank";
   level.create_exfil_animstruct[7].refname = "bank_tac";
-  level.create_exfil_animstruct[7].ref_119a7 = (22688, -19272, 48);
-  level.create_exfil_animstruct[7].ref_119a8 = 2000;
+  level.create_exfil_animstruct[7].ref_119A7 = (22688, -19272, 48);
+  level.create_exfil_animstruct[7].ref_119A8 = 2000;
 }
 
-function ref_1322a() {
+function ref_1322A() {
   level.create_exfil_animstruct = [];
   level.create_exfil_animstruct[0] = spawnStruct();
   level.create_exfil_animstruct[0].locname = "Zombie Test Ground";
   level.create_exfil_animstruct[0].refname = "ship_tac";
-  level.create_exfil_animstruct[0].ref_119a7 = (-3890, -6375, 100);
-  level.create_exfil_animstruct[0].ref_119a8 = 1500;
+  level.create_exfil_animstruct[0].ref_119A7 = (-3890, -6375, 100);
+  level.create_exfil_animstruct[0].ref_119A8 = 1500;
   level.create_exfil_animstruct[1] = spawnStruct();
   level.create_exfil_animstruct[1].locname = "Gulag Mechanics";
   level.create_exfil_animstruct[1].refname = "gulag_tac";
-  level.create_exfil_animstruct[1].ref_119a7 = (1800, -6400, 100);
-  level.create_exfil_animstruct[1].ref_119a8 = 4000;
+  level.create_exfil_animstruct[1].ref_119A7 = (1800, -6400, 100);
+  level.create_exfil_animstruct[1].ref_119A8 = 4000;
   level.create_exfil_animstruct[2] = spawnStruct();
   level.create_exfil_animstruct[2].locname = "Mountan1";
   level.create_exfil_animstruct[2].refname = "hospital_tac";
-  level.create_exfil_animstruct[2].ref_119a7 = (-8245, 17400, 1000);
-  level.create_exfil_animstruct[2].ref_119a8 = 3000;
+  level.create_exfil_animstruct[2].ref_119A7 = (-8245, 17400, 1000);
+  level.create_exfil_animstruct[2].ref_119A8 = 3000;
   level.create_exfil_animstruct[3] = spawnStruct();
   level.create_exfil_animstruct[3].locname = "Jump Ramp";
   level.create_exfil_animstruct[3].refname = "stadium_tac";
-  level.create_exfil_animstruct[3].ref_119a7 = (-2300, 1640, 600);
-  level.create_exfil_animstruct[3].ref_119a8 = 2000;
+  level.create_exfil_animstruct[3].ref_119A7 = (-2300, 1640, 600);
+  level.create_exfil_animstruct[3].ref_119A8 = 2000;
   level.create_exfil_animstruct[4] = spawnStruct();
   level.create_exfil_animstruct[4].locname = "Loot Pile";
   level.create_exfil_animstruct[4].refname = "tvstation_tac";
-  level.create_exfil_animstruct[4].ref_119a7 = (2400, 0, 100);
-  level.create_exfil_animstruct[4].ref_119a8 = 5000;
+  level.create_exfil_animstruct[4].ref_119A7 = (2400, 0, 100);
+  level.create_exfil_animstruct[4].ref_119A8 = 5000;
   level.create_exfil_animstruct[5] = spawnStruct();
   level.create_exfil_animstruct[5].locname = "Mountan2";
   level.create_exfil_animstruct[5].refname = "super_tac";
-  level.create_exfil_animstruct[5].ref_119a7 = (-18200, 9800, 800);
-  level.create_exfil_animstruct[5].ref_119a8 = 4000;
+  level.create_exfil_animstruct[5].ref_119A7 = (-18200, 9800, 800);
+  level.create_exfil_animstruct[5].ref_119A8 = 4000;
   level.create_exfil_animstruct[6] = spawnStruct();
   level.create_exfil_animstruct[6].locname = "End of runway";
   level.create_exfil_animstruct[6].refname = "dam_tac";
-  level.create_exfil_animstruct[6].ref_119a7 = (-9300, -11150, 100);
-  level.create_exfil_animstruct[6].ref_119a8 = 6000;
+  level.create_exfil_animstruct[6].ref_119A7 = (-9300, -11150, 100);
+  level.create_exfil_animstruct[6].ref_119A8 = 6000;
   level.create_exfil_animstruct[7] = spawnStruct();
   level.create_exfil_animstruct[7].locname = "Bank";
   level.create_exfil_animstruct[7].refname = "bank_tac";
-  level.create_exfil_animstruct[7].ref_119a7 = (-3900, -2000, 480);
-  level.create_exfil_animstruct[7].ref_119a8 = 2000;
+  level.create_exfil_animstruct[7].ref_119A7 = (-3900, -2000, 480);
+  level.create_exfil_animstruct[7].ref_119A8 = 2000;
 }
 
 function changing_loadout(var_0) {
@@ -160,14 +160,14 @@ function chase(var_0, var_1, var_2) {
 function clear_three_room_screens(var_0, var_1, var_2, var_3) {
   level.create_agent_definition = 1;
 
-  if(!isDefined(level.ref_12d05)) {
-    ref_11eca(var_0, var_3, var_1);
+  if(!isDefined(level.ref_12D05)) {
+    ref_11ECA(var_0, var_3, var_1);
   }
 
   var_4 = getdvarfloat("scr_bombardment_delay_before_start", 8);
 
   if(getdvarint("scr_bombardment_show_zone_debug", 0)) {
-    thread ref_11aa8(level, var_0, var_2 + var_4);
+    thread ref_11AA8(level, var_0, var_2 + var_4);
   }
 
   wait var_4;
@@ -265,13 +265,13 @@ function create_execution_devgui(var_0, var_1, var_2) {
   }
 }
 
-function ref_11aa8(var_0, var_1, var_2) {
-  var_3 = ref_11a9b(var_0, var_2);
+function ref_11AA8(var_0, var_1, var_2) {
+  var_3 = ref_11A9B(var_0, var_2);
   wait var_1;
   var_3 delete();
 }
 
-function ref_11eca(var_0, var_1, var_2) {
+function ref_11ECA(var_0, var_1, var_2) {
   var_3 = [];
 
   foreach(var_5 in level.players) {
@@ -325,7 +325,7 @@ function updatemlgspectatorinfo() {
   return var_3;
 }
 
-function ref_11a9b(var_0, var_1) {
+function ref_11A9B(var_0, var_1) {
   var_2 = getmaxobjectivecount(var_0[0], var_0[1], var_1);
   var_2 setmapcirclecolorindex(12);
   var_2 setmapcircleiconindex(3);
@@ -341,24 +341,24 @@ function ref_13816(var_0, var_1) {
   level.ref_13922++;
 
   if(!isDefined(var_1) || !isPlayer(var_1)) {
-    ref_12e22(var_0, undefined);
+    ref_12E22(var_0, undefined);
     return;
   }
 
   if(level.ref_13922 % 3 == 0) {
-    ref_12e22(var_0, var_1);
+    ref_12E22(var_0, var_1);
     return;
   }
 
   if(level.ref_13922 % 3 == 1) {
-    ref_12e25(var_0, var_1);
+    ref_12E25(var_0, var_1);
     return;
   }
 
-  ref_12e24(var_0, var_1);
+  ref_12E24(var_0, var_1);
 }
 
-function ref_12e22(var_0, var_1) {
+function ref_12E22(var_0, var_1) {
   var_2 = 16;
   var_3 = [(0.33, 0.33, 0), (0.33, 0.66, 0), (0.66, 0.33, 0), (0.66, 0.66, 0), (-0.33, 0.33, 0), (-0.33, 0.66, 0), (-0.66, 0.33, 0), (-0.66, 0.66, 0), (0.33, -0.33, 0), (0.33, -0.66, 0), (0.66, -0.33, 0), (0.66, -0.66, 0), (-0.33, -0.33, 0), (-0.33, -0.66, 0), (-0.66, -0.33, 0), (-0.66, -0.66, 0)];
   var_4 = getdvarfloat("scr_bombardment_strike_radius", 514);
@@ -405,7 +405,7 @@ function ref_12e22(var_0, var_1) {
   var_7 delete();
 }
 
-function ref_12e25(var_0, var_1) {
+function ref_12E25(var_0, var_1) {
   var_2 = var_0 + scripts\engine\utility::randomvectorrange(-1000, 1000) + (0, 0, 3000);
   var_3 = scripts\cp_mp\utility\weapon_utility::_magicbullet(getcompleteweaponname("iw8_la_kgolf_mp"), var_2, var_0, var_1);
   wait 4;
@@ -416,7 +416,7 @@ function ref_12e25(var_0, var_1) {
   }
 }
 
-function ref_12e24(var_0, var_1) {
+function ref_12E24(var_0, var_1) {
   var_2 = var_0 + scripts\engine\utility::randomvectorrange(-1000, 1000) + (0, 0, 5000);
   var_3 = [(300, 300, 0), (-300, 300, 0), (-300, -300, 0), (300, -300, 0)];
   var_4 = getcompleteweaponname("ac130_40mm_mp");
@@ -485,14 +485,14 @@ function set_up_chopper_boss(var_0, var_1, var_2) {
   var_14 delete();
 }
 
-function ref_12e21(var_0, var_1, var_2) {
+function ref_12E21(var_0, var_1, var_2) {
   level endon("game_ended");
   var_3 = randomfloat(360);
   var_4 = vectortoangles((cos(var_3), sin(var_3), 0));
   var_0 = scripts\engine\utility::drop_to_ground(var_0);
 
-  if(isDefined(level.ref_13b41)) {
-    var_5 = level.ref_13b41;
+  if(isDefined(level.ref_13B41)) {
+    var_5 = level.ref_13B41;
   } else {
     var_5 = "vfx_br_x2_bomber_exp";
   }
@@ -584,12 +584,12 @@ function callstrike_playmultitracerfx(var_0, var_1, var_2, var_3) {
 function clear_trap_console_activation(var_0, var_1) {
   level endon("bombardment_finished");
   level.create_agent_definition = 1;
-  thread ref_11ab2();
-  thread ref_11ab1();
-  thread ref_13b40(var_0, var_1);
+  thread ref_11AB2();
+  thread ref_11AB1();
+  thread ref_13B40(var_0, var_1);
 }
 
-function ref_11ab1() {
+function ref_11AB1() {
   level endon("game_ended");
   level endon("bombardment_finished");
   level waittill("stop_bomb");
@@ -597,7 +597,7 @@ function ref_11ab1() {
   level notify("bombardment_finished");
 }
 
-function ref_11ab2() {
+function ref_11AB2() {
   self endon("bombardment_finished");
 
   while(level.create_agent_definition) {
@@ -618,7 +618,7 @@ function ref_11ab2() {
   }
 }
 
-function ref_13b40(var_0, var_1) {
+function ref_13B40(var_0, var_1) {
   level endon("game_ended");
   level notify("bomb_started");
   level endon("stop_bomb");
@@ -636,16 +636,16 @@ function ref_13b40(var_0, var_1) {
   }
 
   var_4 = level.players;
-  var_6 = level.ref_13b46;
-  var_7 = level.ref_13b45;
+  var_6 = level.ref_13B46;
+  var_7 = level.ref_13B45;
   var_8 = 0;
 
-  if(isDefined(level.ref_13b49)) {
-    var_8 = level.ref_13b49;
+  if(isDefined(level.ref_13B49)) {
+    var_8 = level.ref_13B49;
   }
 
-  var_9 = level.ref_13b43 + randomfloat(var_8);
-  var_10 = level.ref_13b44;
+  var_9 = level.ref_13B43 + randomfloat(var_8);
+  var_10 = level.ref_13B44;
   var_11 = 0;
 
   while(gettime() < var_2) {
@@ -666,9 +666,9 @@ function ref_13b40(var_0, var_1) {
         continue;
       }
 
-      var_14 = ref_13b3c(var_0, var_2);
-      var_15 = scripts\mp\gametypes\br_circle::getrandompointincircle(var_13, var_6, var_14.ref_11c42, var_14.ref_11b70, 1, 0);
-      ref_12e21(var_15, var_10, level.create_ambient_vehicle);
+      var_14 = ref_13B3C(var_0, var_2);
+      var_15 = scripts\mp\gametypes\br_circle::getrandompointincircle(var_13, var_6, var_14.ref_11C42, var_14.ref_11B70, 1, 0);
+      ref_12E21(var_15, var_10, level.create_ambient_vehicle);
       var_11++;
       var_11 %= var_7;
 
@@ -684,7 +684,7 @@ function ref_13b40(var_0, var_1) {
   level notify("bombardment_finished");
 }
 
-function ref_13b3d(var_0, var_1, var_2, var_3) {
+function ref_13B3D(var_0, var_1, var_2, var_3) {
   var_4 = getmaxobjectivecount(var_0[0], var_0[1], var_2);
   var_4 setmapcirclecolorindex(var_3);
   var_4 setmapcircleiconindex(1);
@@ -693,7 +693,7 @@ function ref_13b3d(var_0, var_1, var_2, var_3) {
   var_4 delete();
 }
 
-function ref_13b3e(var_0, var_1, var_2) {
+function ref_13B3E(var_0, var_1, var_2) {
   level endon("bombardment_finished");
   var_0 endon("disconnect");
   var_3 = 0.1;
@@ -704,19 +704,19 @@ function ref_13b3e(var_0, var_1, var_2) {
       break;
     }
 
-    var_5 = ref_13b3c(var_1, var_2);
-    thread ref_13b3d(level, var_0.origin, var_3, var_4 * var_5.ref_11c42);
-    thread ref_13b3d(level, var_0.origin, var_3, var_4 * var_5.ref_11b70);
+    var_5 = ref_13B3C(var_1, var_2);
+    thread ref_13B3D(level, var_0.origin, var_3, var_4 * var_5.ref_11C42);
+    thread ref_13B3D(level, var_0.origin, var_3, var_4 * var_5.ref_11B70);
     wait var_3;
   }
 
   var_0.issnipersemi = 0;
 }
 
-function ref_13b3c(var_0, var_1) {
-  var_2 = level.ref_13b46;
-  var_3 = level.ref_13b47;
-  var_4 = level.ref_13b48;
+function ref_13B3C(var_0, var_1) {
+  var_2 = level.ref_13B46;
+  var_3 = level.ref_13B47;
+  var_4 = level.ref_13B48;
   var_5 = var_3 / var_2;
   var_6 = var_4 / var_2;
   var_7 = var_1 - gettime();
@@ -728,11 +728,11 @@ function ref_13b3c(var_0, var_1) {
   }
 
   var_10 = spawnStruct();
-  var_10.ref_11c42 = clamp(var_6, 0, 1);
-  var_10.ref_11b70 = clamp(var_9, 0, 1);
+  var_10.ref_11C42 = clamp(var_6, 0, 1);
+  var_10.ref_11B70 = clamp(var_9, 0, 1);
   return var_10;
 }
 
-function ref_13b3f(var_0) {
+function ref_13B3F(var_0) {
   setDvar("scr_threat_min_radius_strikes_around_player", var_0);
 }

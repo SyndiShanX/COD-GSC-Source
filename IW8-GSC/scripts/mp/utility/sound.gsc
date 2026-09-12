@@ -95,7 +95,7 @@ function playplayerandnpcsounds(var_0, var_1, var_2) {
 }
 
 function playdeathsound(var_0) {
-  if(istrue(level.ref_133b4) || var_0 == "MOD_EXECUTION") {
+  if(istrue(level.ref_133B4) || var_0 == "MOD_EXECUTION") {
     return;
   }
 
@@ -161,7 +161,7 @@ function besttime(var_0) {
   level.amounttotal[var_0] = level.amounttotal.size;
 }
 
-function ref_12c2a(var_0) {
+function ref_12C2A(var_0) {
   any_player_nearby_same_floor();
 
   if(isDefined(level.amounttotal[var_0])) {

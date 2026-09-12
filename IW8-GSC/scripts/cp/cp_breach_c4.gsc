@@ -58,7 +58,7 @@ function c4_breach_think(var_0) {
     var_2 = spawn("script_model", self.scenenode.origin);
     var_2.angles = self.scenenode.angles;
     var_2 setModel("offhand_wm_c4_cp");
-    var_1.ref_140ae = 1;
+    var_1.ref_140AE = 1;
     var_3 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_1, "player_rig", 1);
     var_4 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_2, "c4_prop");
     var_4 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(1, "c4_plant", 1);
@@ -74,7 +74,7 @@ function c4_breach_think(var_0) {
       scripts\engine\utility::ent_flag_set("c4_planted");
       thread c4_explode(level, self);
       thread force_ai_to_drop_thermites(level);
-      var_1.ref_140ae = undefined;
+      var_1.ref_140AE = undefined;
       return;
     } else {
       if(isDefined(var_2)) {
@@ -84,7 +84,7 @@ function c4_breach_think(var_0) {
       self makeusable();
     }
 
-    var_1.ref_140ae = undefined;
+    var_1.ref_140AE = undefined;
     var_3 = undefined;
     var_4 = undefined;
   }

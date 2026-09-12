@@ -67,22 +67,22 @@ function hasselfrevivetoken() {
   if(isDefined(self.super)) {
     switch (self.super) {
       case "role_medic":
-        thread scripts\cp\classes\cp_class_progression::ref_12bde();
+        thread scripts\cp\classes\cp_class_progression::ref_12BDE();
         break;
       case "role_tank":
-        thread scripts\cp\classes\cp_class_progression::ref_12bf8();
+        thread scripts\cp\classes\cp_class_progression::ref_12BF8();
         break;
       case "role_assault":
-        thread scripts\cp\classes\cp_class_progression::ref_12bc2();
+        thread scripts\cp\classes\cp_class_progression::ref_12BC2();
         break;
       case "role_demolition":
-        thread scripts\cp\classes\cp_class_progression::ref_12bc8();
+        thread scripts\cp\classes\cp_class_progression::ref_12BC8();
         break;
       case "role_hunter":
-        thread scripts\cp\classes\cp_class_progression::ref_12bd5();
+        thread scripts\cp\classes\cp_class_progression::ref_12BD5();
         break;
       case "role_engineer":
-        thread scripts\cp\classes\cp_class_progression::ref_12bca();
+        thread scripts\cp\classes\cp_class_progression::ref_12BCA();
         break;
     }
 
@@ -181,7 +181,7 @@ function test_player_data_set() {
 }
 
 function update_super_icon(var_0) {
-  ref_130a6(var_0);
+  ref_130A6(var_0);
   self setclientomnvar("cp_loadout_changed", 0);
   wait 2;
   self setclientomnvar("cp_loadout_changed", 1);
@@ -196,7 +196,7 @@ function get_super_from_playerdata() {
   return var_0;
 }
 
-function ref_130a6(var_0) {
+function ref_130A6(var_0) {
   var_1 = int(tablelookup("cp/cp_fieldupgrades.csv", 1, var_0, 0));
   self setclientomnvar("ui_field_upgrade_icon", var_1);
 }
@@ -277,11 +277,11 @@ function watch_for_super_button(var_0) {
         var_3 = 1;
       } else if(istrue(self.disable_super)) {
         var_3 = 1;
-      } else if(istrue(level.ref_12b46)) {
+      } else if(istrue(level.ref_12B46)) {
         var_3 = 1;
       } else if(istrue(self.interrogating)) {
         var_3 = 1;
-      } else if(scripts\cp\cp_weapon::ref_124ad(self)) {
+      } else if(scripts\cp\cp_weapon::ref_124AD(self)) {
         var_3 = 1;
       } else if(!istrue(self isonground())) {
         var_3 = 1;
@@ -348,14 +348,14 @@ function recharge_super(var_0) {
     var_1 = var_2;
   }
 
-  if(istrue(self.ref_12d7d)) {
+  if(istrue(self.ref_12D7D)) {
     if(!isDefined(self.super_progress)) {
       self.super_progress = 997;
     } else if(self.super_progress > 996) {
       self.super_progress = 997;
     }
 
-    self.ref_12d7d = undefined;
+    self.ref_12D7D = undefined;
   } else {
     self.super_progress = 997;
   }
@@ -671,7 +671,7 @@ function activate_thermite_launcher() {
   self.super_activated = 1;
   self.gl_proj_override = "thermite";
 
-  if(scripts\cp\cp_weapon::ref_124ad(self)) {
+  if(scripts\cp\cp_weapon::ref_124AD(self)) {
     scripts\cp\cp_weapon::minigamefinishcount(self);
     self waittill("weapon_change");
 
@@ -683,7 +683,7 @@ function activate_thermite_launcher() {
 
   scripts\cp\crafting_system::givegrenadelauncher();
   thread drain_super_meter(1);
-  scripts\cp\cp_analytics::ref_119be(self, "thermite_launcher");
+  scripts\cp\cp_analytics::ref_119BE(self, "thermite_launcher");
   self setclientomnvar("ui_thermite_class_power_on", gettime());
   var_0 = self getentitynumber();
   var_1 = "cp_super_cluster_used";
@@ -730,7 +730,7 @@ function at_mine_movingplatform_update() {
   var_0 = scripts\cp_mp\killstreaks\helper_drone::recondrone_beginsuper();
 
   if(var_0) {
-    var_1 = scripts\engine\utility::ref_143ae("super_use_succeeded", "super_use_failed", "laststand");
+    var_1 = scripts\engine\utility::ref_143AE("super_use_succeeded", "super_use_failed", "laststand");
 
     if(var_1 == "super_use_succeeded") {
       var_2 = "cp_super_mark_used";
@@ -739,7 +739,7 @@ function at_mine_movingplatform_update() {
         var_4 scripts\cp\cp_hud_message::showsplash(var_2, undefined, self);
       }
 
-      scripts\cp\cp_analytics::ref_119be(self, "scout drone");
+      scripts\cp\cp_analytics::ref_119BE(self, "scout drone");
       thread drain_super_meter(1);
       ref_14356();
       return;
@@ -755,15 +755,15 @@ function at_mine_movingplatform_update() {
 function x1ops4() {
   self endon("death_or_disconnect");
   self waittill("killstreak_vehicle_made", var_0);
-  self.ref_12f15 = var_0;
+  self.ref_12F15 = var_0;
 }
 
 function ref_14356() {
   var_0 = self getentitynumber();
-  thread ref_143c5(5);
-  ref_143c4();
+  thread ref_143C5(5);
+  ref_143C4();
 
-  while(isDefined(self.ref_12f15)) {
+  while(isDefined(self.ref_12F15)) {
     waitframe();
   }
 
@@ -771,17 +771,17 @@ function ref_14356() {
   self.super_activated = 0;
 }
 
-function ref_143c4() {
+function ref_143C4() {
   self endon("scout_drone_timeout");
 
-  while(!isDefined(self.ref_12f15)) {
+  while(!isDefined(self.ref_12F15)) {
     wait 0.1;
   }
 
   self notify("scout_drone_timeout");
 }
 
-function ref_143c5(var_0) {
+function ref_143C5(var_0) {
   self endon("scout_drone_timeout");
   wait var_0;
   self notify("scout_drone_timeout");
@@ -810,7 +810,7 @@ function activate_mark_enemies() {
 function deactivate_mark_enemies(var_0) {
   level endon("disconnect");
   level endon("game_ended");
-  var_1 = scripts\engine\utility::ref_143b9(var_0, "force_end_super");
+  var_1 = scripts\engine\utility::ref_143B9(var_0, "force_end_super");
   self.marked_enemies = 0;
 }
 
@@ -985,7 +985,7 @@ function weapon_no_unlimited_check(var_0) {
 function deactivate_infinite_ammo(var_0) {
   level endon("disconnect");
   level endon("game_ended");
-  var_1 = scripts\engine\utility::ref_143b9(var_0, "force_end_super");
+  var_1 = scripts\engine\utility::ref_143B9(var_0, "force_end_super");
 
   foreach(var_3 in level.players) {
     var_3.has_infinite_ammo = undefined;
@@ -1033,7 +1033,7 @@ function activate_team_auto_revive(var_0) {
 
   if(var_2) {
     scripts\cp\cp_hud_message::showsplash(var_1, undefined, self);
-    scripts\cp\cp_analytics::ref_119be(self, "team auto-revive");
+    scripts\cp\cp_analytics::ref_119BE(self, "team auto-revive");
     drain_super_meter(1);
   }
 
@@ -1043,7 +1043,7 @@ function activate_team_auto_revive(var_0) {
 function team_instant_revive() {
   if(scripts\cp\cp_laststand::player_in_laststand(self)) {
     if(!isDefined(self.dogtag)) {
-      self.ref_140ac = 1;
+      self.ref_140AC = 1;
       self giveandfireoffhand("adrenaline_mp");
 
       if(isDefined(self.reviveiconent)) {
@@ -1053,7 +1053,7 @@ function team_instant_revive() {
 
       wait 3;
       scripts\cp\cp_laststand::instant_revive(self);
-      self.ref_140ac = undefined;
+      self.ref_140AC = undefined;
       return;
     }
 
@@ -1079,7 +1079,7 @@ function activate_instant_revive(var_0) {
 function deactivate_instant_revive(var_0) {
   level endon("disconnect");
   level endon("game_ended");
-  var_1 = scripts\engine\utility::ref_143b9(var_0, "force_end_super");
+  var_1 = scripts\engine\utility::ref_143B9(var_0, "force_end_super");
   self notify("stop_instant_revive");
   self.has_instant_revive = undefined;
   self.perk_data["revive_time_scalar"] = self.old_revive_time_scalar;
@@ -1114,7 +1114,7 @@ function activate_team_armor_buff() {
   level endon("game_ended");
   self.super_activated = 1;
   turn_on_team_armor_buff();
-  scripts\cp\cp_analytics::ref_119be(self, "team armor");
+  scripts\cp\cp_analytics::ref_119BE(self, "team armor");
   thread deactivate_team_armor_buff(20);
   drain_super_meter(1);
   self.super_activated = 0;
@@ -1164,7 +1164,7 @@ function deactivate_team_armor_buff(var_0) {
   level endon("disconnect");
   level endon("game_ended");
   var_1 = self getentitynumber();
-  var_2 = scripts\engine\utility::ref_143b9(var_0, "force_end_super");
+  var_2 = scripts\engine\utility::ref_143B9(var_0, "force_end_super");
   setomnvar("ui_class_power_reloading", var_1);
   setomnvar("ui_armor_class_power_used", 0);
   remove_team_armor_buff();
@@ -1174,7 +1174,7 @@ function activate_team_stopping_power() {
   level endon("disconnect");
   level endon("game_ended");
   self.super_activated = 1;
-  scripts\cp\cp_analytics::ref_119be(self, "team stopping_power");
+  scripts\cp\cp_analytics::ref_119BE(self, "team stopping_power");
   var_0 = "cp_super_ammo_used";
 
   foreach(var_2 in level.players) {
@@ -1196,14 +1196,14 @@ function scr_br_collection_findpath() {
 
 function ref_14442(var_0, var_1) {
   self endon("disconnect");
-  thread ref_12be5();
+  thread ref_12BE5();
   thread stoppingpower_watchhcrweaponchange(var_0);
   thread stoppingpower_watchhcrweaponfire(var_0, var_1);
   self waittill("stoppingPower_removeHCR");
   scripts\cp\utility::takeperk("specialty_bulletdamage");
 }
 
-function ref_12be5() {
+function ref_12BE5() {
   self waittill("death");
   scripts\cp\utility::takeperk("specialty_bulletdamage");
 }
@@ -1237,7 +1237,7 @@ function stoppingpower_watchhcrweaponfire(var_0, var_1) {
   self endon("disconnect");
   self endon("stoppingPower_clearHCR");
   self.rounds = var_1;
-  thread ref_138f1(var_0, var_1);
+  thread ref_138F1(var_0, var_1);
 
   while(self hasweapon(var_0)) {
     self waittill("weapon_fired", var_2);
@@ -1255,7 +1255,7 @@ function stoppingpower_watchhcrweaponfire(var_0, var_1) {
   self notify("stoppingPower_removeHCR");
 }
 
-function ref_138f1(var_0, var_1) {
+function ref_138F1(var_0, var_1) {
   self endon("stoppingPower_removeHCR");
   self endon("disconnect");
   self endon("stoppingPower_clearHCR");
@@ -1309,7 +1309,7 @@ function monitormounted() {
     var_2 scripts\cp\cp_hud_message::showsplash(var_0, undefined, self);
   }
 
-  scripts\cp\cp_analytics::ref_119be(self, "emp drone");
+  scripts\cp\cp_analytics::ref_119BE(self, "emp drone");
   thread drain_super_meter(1);
 }
 
@@ -1322,8 +1322,8 @@ function x1ops5() {
 }
 
 function ref_14357() {
-  thread ref_143e5(5);
-  ref_143e4();
+  thread ref_143E5(5);
+  ref_143E4();
 
   while(isDefined(self.monitorhotfoot)) {
     wait 0.1;
@@ -1332,7 +1332,7 @@ function ref_14357() {
   self.super_activated = 0;
 }
 
-function ref_143e4() {
+function ref_143E4() {
   self endon("emp_drone_timeout");
 
   while(!isDefined(self.monitorhotfoot)) {
@@ -1342,7 +1342,7 @@ function ref_143e4() {
   self notify("emp_drone_timeout");
 }
 
-function ref_143e5(var_0) {
+function ref_143E5(var_0) {
   self endon("emp_drone_timeout");
   wait var_0;
   self notify("emp_drone_timeout");
@@ -1374,7 +1374,7 @@ function monitoringimpact() {
             continue;
           }
 
-          ref_1292b();
+          ref_1292B();
           return;
         }
       }
@@ -1411,7 +1411,7 @@ function prewaitandspawnclient() {
   return var_1;
 }
 
-function ref_1292b() {
+function ref_1292B() {
   self.owner notify("emp_drone_detonate");
   var_0 = "emp_drone_player_mp";
   var_1 = prewaitandspawnclient();
@@ -1466,7 +1466,7 @@ function getcrossbowimpactfunc(var_0, var_1, var_2, var_3) {
 
     if(isDefined(var_4["entity"])) {
       if(scripts\engine\utility::array_contains(var_2, var_4["entity"])) {
-        ref_1292b();
+        ref_1292B();
         return;
       }
     }
@@ -1476,7 +1476,7 @@ function getcrossbowimpactfunc(var_0, var_1, var_2, var_3) {
         wait 0.25;
       }
 
-      ref_1292b();
+      ref_1292B();
       return;
     }
 

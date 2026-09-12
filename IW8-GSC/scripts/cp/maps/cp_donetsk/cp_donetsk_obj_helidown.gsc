@@ -220,7 +220,7 @@ function rescue_type_escort(var_0, var_1, var_2) {
   var_2 waittill("hidden");
   thread remove_heli_corpse_after_timeout(var_0, 0);
   thread escort_vip_to_chopper(var_2, var_2, var_0);
-  var_3 = var_2 scripts\engine\utility::ref_143b4("death", "exfil");
+  var_3 = var_2 scripts\engine\utility::ref_143B4("death", "exfil");
 
   if(var_3 == "death") {
     var_1 notify("vip_died");
@@ -760,7 +760,7 @@ function complete_killer(var_0, var_1) {
   level endon("objective_heli_down_kill_hvt");
   var_1 endon("stop_timer");
   level endon("pilot_rescued");
-  level scripts\engine\utility::ref_143a5("debug_beat_objective_heli_down_start_objective", "helidown_timer_expired");
+  level scripts\engine\utility::ref_143A5("debug_beat_objective_heli_down_start_objective", "helidown_timer_expired");
 
   if(isagent(self) && !istrue(self.onchopper)) {
     self dodamage(self.health + 100, self.origin);
@@ -832,7 +832,7 @@ function wait_for_door_cut(var_0, var_1) {
   var_2 = 0;
 
   for(;;) {
-    level scripts\engine\utility::ref_143a7("cut_1", "cut_2", "cut_3", "cut_4");
+    level scripts\engine\utility::ref_143A7("cut_1", "cut_2", "cut_3", "cut_4");
     var_2++;
 
     if(var_2 >= 4) {
@@ -853,7 +853,7 @@ function wait_for_door_cut(var_0, var_1) {
 
 function wait_for_door_cut_long(var_0, var_1) {
   var_1 endon("death");
-  level scripts\engine\utility::ref_143a7("cut_1", "cut_2", "cut_3", "cut_4");
+  level scripts\engine\utility::ref_143A7("cut_1", "cut_2", "cut_3", "cut_4");
   var_1 notify("harness_cut");
 
   if(isDefined(var_0)) {
@@ -920,14 +920,14 @@ function script_model_anims() {
   level.scr_animname["exfil_chopper"]["blima_drop_r"] = "sdr_cp_hostage_dropoff_blima_R_blima";
 }
 
-function ref_11fc3(var_0, var_1) {
+function ref_11FC3(var_0, var_1) {
   var_1 notify("handoff_hvt");
   var_0 notify("loading_hvt_onto_heli");
   var_2 = var_1.wmexfilally;
   var_3 = getcompleteweaponname("iw8_gunless");
   var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon(var_3, undefined, undefined, 1);
   var_4 = var_0 scripts\cp_mp\utility\inventory_utility::domonitoredweaponswitch(var_3, 0);
-  var_0 scripts\engine\utility::ref_143b9(1, "weapon_change");
+  var_0 scripts\engine\utility::ref_143B9(1, "weapon_change");
   var_0 resetcarryobject();
   var_0 setstance("stand");
   var_5 = var_0.hostagecarried;
@@ -1261,7 +1261,7 @@ function board_chopper(var_0, var_1) {
   var_2 = get_closest_heli_entrance(var_1, var_0);
   var_1.goalradius = 8;
   var_1 setgoalpos(var_2.origin);
-  var_1 scripts\engine\utility::ref_143a5("goal", "goal_reached");
+  var_1 scripts\engine\utility::ref_143A5("goal", "goal_reached");
   var_1.old_weapon = var_1.weapon;
   var_1.fists_weapon = scripts\cp\cp_weapon::buildweapon("iw8_fists_mp", [], "none", "none", -1);
   var_1 giveweapon(var_1.fists_weapon);
@@ -1325,7 +1325,7 @@ function create_escort_health_objective(var_0) {
 
 function destroy_bleedout_timer() {
   var_0 = self.objnum;
-  scripts\engine\utility::ref_143a5("death", "stop_bleedout_timer");
+  scripts\engine\utility::ref_143A5("death", "stop_bleedout_timer");
   objective_delete(var_0);
 }
 
@@ -1459,7 +1459,7 @@ function wave_reinforce(var_0, var_1, var_2, var_3) {
 }
 
 function reinforce_after_door_section(var_0) {
-  level scripts\engine\utility::ref_143a8("cut_1", "cut_2", "cut_3", "cut_4", "started_cutting");
+  level scripts\engine\utility::ref_143A8("cut_1", "cut_2", "cut_3", "cut_4", "started_cutting");
 }
 
 function end_spawn_group(var_0) {
@@ -1468,7 +1468,7 @@ function end_spawn_group(var_0) {
 
 function _end_spawn_group(var_0) {
   level endon("game_ended");
-  level scripts\engine\utility::ref_143a5("helidown_done", "objective_heli_down_kill_hvt");
+  level scripts\engine\utility::ref_143A5("helidown_done", "objective_heli_down_kill_hvt");
   level notify("spawn_module_" + var_0.moduleid + "_completed");
 }
 
@@ -1488,7 +1488,7 @@ function show_vip_waypoints(var_0) {
     thread cleanup_waypoint_when_near(var_3, self);
   }
 
-  scripts\engine\utility::ref_143a6("death", "vip_used", "cleanup_vip_waypoints");
+  scripts\engine\utility::ref_143A6("death", "vip_used", "cleanup_vip_waypoints");
 
   foreach(var_3 in var_0) {
     objective_unsetlocation(var_1, var_4);
@@ -1747,7 +1747,7 @@ function pilot_pickup_from_cockpit(var_0, var_1) {
   var_5 = getstartangles(self.origin, self.angles, level.scr_anim["cutter_player"]["hvt_cockpit_pickup"]);
   var_0 freezecontrols(1);
   var_0 setstance("stand");
-  var_0 scripts\engine\utility::ref_143b9(1, "weapon_change");
+  var_0 scripts\engine\utility::ref_143B9(1, "weapon_change");
   var_0 thread scripts\cp\cp_pickup_hostage::create_player_rig(var_0, "cutter_player");
   scripts\common\anim::anim_first_frame_solo(var_0.player_rig, "hvt_cockpit_pickup");
   scripts\cp\cp_pickup_hostage::link_player_to_rig(var_0, 0.5);
@@ -1876,7 +1876,7 @@ function cutout_pilot_long(var_0, var_1, var_2, var_3) {
   var_1 scripts\cp\utility::_giveweapon(var_4, undefined, undefined, 1);
   var_5 = var_1 scripts\cp\cp_weapons::switchtoweaponreliable(var_4, 0);
   var_1 scripts\common\utility::allow_weapon_switch(0);
-  var_1.ref_140ae = 1;
+  var_1.ref_140AE = 1;
   var_6 = getstartorigin(self.origin, self.angles, level.scr_anim["cutter_player"][var_2[0]]);
   var_7 = getstartangles(self.origin, self.angles, level.scr_anim["cutter_player"][var_2[0]]);
   var_1 setOrigin(var_6, 1);
@@ -1908,7 +1908,7 @@ function cutout_pilot_long(var_0, var_1, var_2, var_3) {
   var_1 scripts\cp\cp_weapons::_takeweapon(var_4);
   var_1 scripts\cp\cp_weapons::forcevalidweapon();
   var_1 setstance("stand");
-  var_1.ref_140ae = undefined;
+  var_1.ref_140AE = undefined;
 
   if(istrue(var_5)) {
     level notify("cutout_pilot_long_success");

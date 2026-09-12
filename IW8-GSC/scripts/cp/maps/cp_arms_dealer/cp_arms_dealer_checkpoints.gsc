@@ -3,7 +3,7 @@
  * Script: scripts\cp\maps\cp_arms_dealer\cp_arms_dealer_checkpoints.gsc
 *************************************************************************/
 
-function ref_131ed() {
+function ref_131ED() {
   level.getplunderextractionsites = &getplatformweaponrankxpmultiplier;
   level.getnextpayloadspawnmodule = &getnexthelimodule;
 }
@@ -47,4 +47,4 @@ function camera_loadout_showcase_preview_large_sticker_alt2() {
   thread scripts\cp\cp_objectives::run_objective("obj_armsrace", "primary");
 }
 
-function ref_11c5c() {}
+function ref_11C5C() {}

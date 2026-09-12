@@ -31,7 +31,7 @@ function init_airstrike_flyby_anims() {
   var_0 = % mp_alfa10_flyin;
   var_1 = "mp_alfa10_flyin";
 
-  if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140AA()) {
     var_0 = $mp_alfa10_flyin_br;
     var_1 = "mp_alfa10_flyin_br";
   }
@@ -102,7 +102,7 @@ function weaponswitchendedairstrike(var_0, var_1) {
 }
 
 function weaponfiredairstrike(var_0, var_1, var_2) {
-  if(!isDefined(var_0.ref_13a81)) {
+  if(!isDefined(var_0.ref_13A81)) {
     var_3 = airstrike_getownerlookatpos(self);
     var_4 = branalytics_secondwind(var_3);
 
@@ -168,12 +168,12 @@ function tryuseairstrikefromstruct(var_0) {
         var_3 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]();
 
         if(var_3 == "br" && isDefined(self.waitandunloadinfils)) {
-          var_0.ref_13a81 = self.waitandunloadinfils;
+          var_0.ref_13A81 = self.waitandunloadinfils;
           self.waitandunloadinfils = undefined;
         }
       }
 
-      if(isDefined(var_0.ref_13a81)) {
+      if(isDefined(var_0.ref_13A81)) {
         var_4 = weaponfiredairstrike(var_0, undefined, undefined);
         var_1 = var_4 == "success";
       } else {
@@ -219,8 +219,8 @@ function selectairstrikelocation(var_0) {
   var_6 = "used_" + var_0.streakname;
 
   if(var_0.streakname == "precision_airstrike") {
-    if(isDefined(var_0.ref_13a81)) {
-      var_1 = var_0.ref_13a81;
+    if(isDefined(var_0.ref_13A81)) {
+      var_1 = var_0.ref_13A81;
     } else {
       var_1 = airstrike_getownerlookatpos(self, 1);
     }
@@ -336,7 +336,7 @@ function finishmapselectairstrikeusage(var_0, var_1, var_2, var_3, var_4) {
     self[[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "printGameAction")]]("killstreak ended - " + var_4.streakname, self);
   }
 
-  scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_4);
+  scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_4);
 }
 
 function finishstandardairstrikeusage(var_0, var_1, var_2) {
@@ -362,7 +362,7 @@ function finishstandardairstrikeusage(var_0, var_1, var_2) {
     self[[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "printGameAction")]]("killstreak ended - " + var_2.streakname, self);
   }
 
-  scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_2);
+  scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_2);
 }
 
 function finishairstrikeusage(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -378,7 +378,7 @@ function doairstrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 function watchairstrikeowner(var_0) {
   self endon("airstrike_finished_" + var_0);
   level endon("game_ended");
-  scripts\engine\utility::ref_143a5("disconnect", "joined_team");
+  scripts\engine\utility::ref_143A5("disconnect", "joined_team");
   branalytics_seteventdelayedstate(self, var_0);
 }
 
@@ -490,7 +490,7 @@ function callstrike_findoptimaldirection(var_0, var_1, var_2) {
   return var_12;
 }
 
-function ref_144b7(var_0, var_1) {
+function ref_144B7(var_0, var_1) {
   level endon("game_ended");
   var_0 endon("air_strike_complete");
   var_1 waittill("disconnect");
@@ -499,7 +499,7 @@ function ref_144b7(var_0, var_1) {
     var_0.player_waittilljumpedfromc130 delete();
   }
 
-  ref_123ae(var_0);
+  ref_123AE(var_0);
 }
 
 function doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
@@ -539,7 +539,7 @@ function doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
   var_15.streakinfo = var_5;
   var_15.brbonusxpallowed = var_8;
 
-  if(!istrue(var_5.ref_133de)) {
+  if(!istrue(var_5.ref_133DE)) {
     var_15 setotherent(var_7);
   }
 
@@ -553,8 +553,8 @@ function doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("br", "challengeEvaluator")) {
     var_18 = spawnStruct();
-    var_18.ref_123a1 = var_15;
-    var_18.ref_13a8a = var_0;
+    var_18.ref_123A1 = var_15;
+    var_18.ref_13A8A = var_0;
     var_7[[scripts\cp_mp\utility\script_utility::getsharedfunc("br", "challengeEvaluator")]]("br_mastery_pointBlank_airstrike", var_18);
   }
 
@@ -590,7 +590,7 @@ function doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
   var_15.bulletpoint = spawn("script_model", var_15.origin);
   var_15.bulletpoint setModel("ks_airstrike_target_mp");
 
-  if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140AA()) {
     var_15.bulletpoint setModel("ks_airstrike_target_br_ch3");
   }
 
@@ -615,7 +615,7 @@ function doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 
   var_25 = scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType") && [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "br";
   var_26 = scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType") && [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "getGameType")]]() == "brtdm";
-  thread ref_144b7(var_15, var_7);
+  thread ref_144B7(var_15, var_7);
 
   if(var_25 || var_26) {
     var_15.scenenode childthread scripts\common\anim::anim_single_solo(var_15, "airstrike_flyby");
@@ -630,10 +630,10 @@ function doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
   }
 
   var_15 notify("air_strike_complete");
-  ref_123ae(var_15);
+  ref_123AE(var_15);
 }
 
-function ref_123ae(var_0) {
+function ref_123AE(var_0) {
   if(isDefined(var_0.minimapid)) {
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "returnObjectiveID")) {
       [[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "returnObjectiveID")]](var_0.minimapid);
@@ -686,7 +686,7 @@ function airstrike_playflyfx(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_0.player_waittilljumpedfromc130 = spawn("script_model", var_1);
   var_0.player_waittilljumpedfromc130 setModel("ks_airstrike_mp");
 
-  if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140AA()) {
     var_0.player_waittilljumpedfromc130 setModel("ks_airstrike_br_ch3");
   }
 
@@ -981,7 +981,7 @@ function airstrike_getownerlookatpos(var_0, var_1) {
   var_3 = physics_createcontents(var_2);
   var_4 = var_0 getvieworigin();
   var_5 = var_4 + anglesToForward(var_0 getplayerangles()) * 50000;
-  var_6 = var_0 scripts\cp_mp\utility\killstreak_utility::ref_125f8();
+  var_6 = var_0 scripts\cp_mp\utility\killstreak_utility::ref_125F8();
   var_7 = scripts\engine\trace::ray_trace(var_4, var_5, var_6, var_3);
   var_8 = var_7["position"];
 
@@ -999,7 +999,7 @@ function airstrike_watchforads(var_0, var_1) {
   var_2 = spawn("script_model", self.origin);
   var_2 setModel("ks_airstrike_marker_mp");
 
-  if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140AA()) {
     var_2 setModel("ks_airstrike_marker_br_ch3");
   }
 
@@ -1010,7 +1010,7 @@ function airstrike_watchforads(var_0, var_1) {
   var_2 setotherent(self);
   var_2 dontinterpolate();
   var_2 hide();
-  var_3 = scripts\cp_mp\utility\script_utility::ref_140de("game", "isGameTypeBR", 0);
+  var_3 = scripts\cp_mp\utility\script_utility::ref_140DE("game", "isGameTypeBR", 0);
 
   if(var_3) {
     var_4 = "icon_waypoint_airstrike_ww2";
@@ -1132,7 +1132,7 @@ function airstrike_watchdeployended(var_0) {
   var_0 endon("death_or_disconnect");
   self endon("death");
   level endon("game_ended");
-  var_1 = var_0 scripts\engine\utility::ref_143ad("cancel_fire", "successful_fire");
+  var_1 = var_0 scripts\engine\utility::ref_143AD("cancel_fire", "successful_fire");
 
   if(isDefined(var_1) && var_1 == "successful_fire") {
     var_0 notify("deploy_fired");
@@ -1210,7 +1210,7 @@ function branalytics_teameliminated(var_0, var_1) {
   self endon("airstrike_finished_" + var_1);
   self endon("disconnect");
   level waittill("game_ended");
-  scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0);
+  scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_0);
 }
 
 function branalytics_respawn(var_0, var_1) {
@@ -1278,7 +1278,7 @@ function game_end_watcher(var_0, var_1, var_2, var_3) {
   var_7 = undefined;
   var_8 = % mp_alfa10_flyin;
 
-  if(scripts\cp_mp\utility\game_utility::ref_140aa()) {
+  if(scripts\cp_mp\utility\game_utility::ref_140AA()) {
     var_8 = % mp_alfa10_flyin_br;
   }
 

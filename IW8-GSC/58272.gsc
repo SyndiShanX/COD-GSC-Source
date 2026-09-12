@@ -4,7 +4,7 @@
 ***********************************************/
 
 function init() {
-  if(isDefined(level.ref_119f9)) {
+  if(isDefined(level.ref_119F9)) {
     return;
   }
 
@@ -14,68 +14,68 @@ function init() {
 }
 
 function test_bag_pickup() {
-  if(!isDefined(level.ref_119f9)) {
-    level.ref_119f9 = spawnStruct();
-    level.ref_119f9.ammo_types = [];
-    level.ref_119f9.ammo_types["rifle"] = "brloot_ammo_762";
-    level.ref_119f9.ammo_types["mg"] = "brloot_ammo_762";
-    level.ref_119f9.ammo_types["pistol"] = "brloot_ammo_919";
-    level.ref_119f9.ammo_types["smg"] = "brloot_ammo_919";
-    level.ref_119f9.ammo_types["sniper"] = "brloot_ammo_50cal";
-    level.ref_119f9.ammo_types["rocketlauncher"] = "brloot_ammo_rocket";
-    level.ref_119f9.ammo_types["spread"] = "brloot_ammo_12g";
+  if(!isDefined(level.ref_119F9)) {
+    level.ref_119F9 = spawnStruct();
+    level.ref_119F9.ammo_types = [];
+    level.ref_119F9.ammo_types["rifle"] = "brloot_ammo_762";
+    level.ref_119F9.ammo_types["mg"] = "brloot_ammo_762";
+    level.ref_119F9.ammo_types["pistol"] = "brloot_ammo_919";
+    level.ref_119F9.ammo_types["smg"] = "brloot_ammo_919";
+    level.ref_119F9.ammo_types["sniper"] = "brloot_ammo_50cal";
+    level.ref_119F9.ammo_types["rocketlauncher"] = "brloot_ammo_rocket";
+    level.ref_119F9.ammo_types["spread"] = "brloot_ammo_12g";
   }
 
-  level.ref_119f9.ref_12148 = [];
-  level.ref_119f9.ref_119fd = [];
+  level.ref_119F9.ref_12148 = [];
+  level.ref_119F9.ref_119FD = [];
 }
 
-function ref_11a45(var_0, var_1) {
-  if(!isDefined(level.ref_119f9)) {
+function ref_11A45(var_0, var_1) {
+  if(!isDefined(level.ref_119F9)) {
     return;
   }
 
-  if(!scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var_0)) {
-    level.ref_119f9.ref_119fd[var_0] = allow_hotjoining(var_0, var_1);
+  if(!scripts\engine\utility::array_contains_key(level.ref_119F9.ref_119FD, var_0)) {
+    level.ref_119F9.ref_119FD[var_0] = allow_hotjoining(var_0, var_1);
     return;
   }
 }
 
-function ref_11a47(var_0, var_1) {
+function ref_11A47(var_0, var_1) {
   if(cargo_truck_mg_cp_spawncallback(var_0)) {
     return;
   }
 
-  if(scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var_0)) {
-    level.ref_119f9.ref_119fd[var_0] = var_1;
+  if(scripts\engine\utility::array_contains_key(level.ref_119F9.ref_119FD, var_0)) {
+    level.ref_119F9.ref_119FD[var_0] = var_1;
     return;
   }
 }
 
-function ref_11a44(var_0, var_1, var_2) {
+function ref_11A44(var_0, var_1, var_2) {
   if(cargo_truck_mg_cp_spawncallback(var_0)) {
     return;
   }
 
-  var_3 = level.ref_119f9.ref_119fd[var_0];
+  var_3 = level.ref_119F9.ref_119FD[var_0];
 
   if(!scripts\engine\utility::array_contains_key(var_3, var_1)) {
-    level.ref_119f9.ref_12148[var_0][var_1] = var_2;
-    level.ref_119f9.ref_119fd[var_0] = allow_hotjoining(var_0, level.ref_119f9.ref_12148[var_0]);
+    level.ref_119F9.ref_12148[var_0][var_1] = var_2;
+    level.ref_119F9.ref_119FD[var_0] = allow_hotjoining(var_0, level.ref_119F9.ref_12148[var_0]);
     return;
   }
 }
 
-function ref_11a46(var_0, var_1) {
+function ref_11A46(var_0, var_1) {
   if(cargo_truck_mg_cp_spawncallback(var_0)) {
     return;
   }
 
-  var_2 = level.ref_119f9.ref_119fd[var_0];
+  var_2 = level.ref_119F9.ref_119FD[var_0];
 
   if(scripts\engine\utility::array_contains_key(var_2, var_1)) {
-    level.ref_119f9.ref_12148[var_0] = scripts\engine\utility::array_remove_key(level.ref_119f9.ref_12148[var_0], var_1);
-    level.ref_119f9.ref_119fd[var_0] = allow_hotjoining(var_0, level.ref_119f9.ref_12148[var_0]);
+    level.ref_119F9.ref_12148[var_0] = scripts\engine\utility::array_remove_key(level.ref_119F9.ref_12148[var_0], var_1);
+    level.ref_119F9.ref_119FD[var_0] = allow_hotjoining(var_0, level.ref_119F9.ref_12148[var_0]);
     return;
   }
 }
@@ -85,11 +85,11 @@ function removepickup(var_0) {
     return;
   }
 
-  return level.ref_119f9.ref_119fd[var_0];
+  return level.ref_119F9.ref_119FD[var_0];
 }
 
 function loottableexist(var_0) {
-  return scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var_0);
+  return scripts\engine\utility::array_contains_key(level.ref_119F9.ref_119FD, var_0);
 }
 
 function ref_13673(var_0, var_1, var_2, var_3, var_4) {
@@ -138,7 +138,7 @@ function ref_13673(var_0, var_1, var_2, var_3, var_4) {
               continue;
             }
 
-            var_6.item = level.ref_119f9.ammo_types[var_14];
+            var_6.item = level.ref_119F9.ammo_types[var_14];
 
             if(!isDefined(var_6.item)) {
               continue;
@@ -159,7 +159,7 @@ function ref_13673(var_0, var_1, var_2, var_3, var_4) {
 }
 
 function cargo_truck_mg_cp_spawncallback(var_0) {
-  if(!scripts\engine\utility::array_contains_key(level.ref_119f9.ref_119fd, var_0)) {
+  if(!scripts\engine\utility::array_contains_key(level.ref_119F9.ref_119FD, var_0)) {
     return true;
   }
 
@@ -171,7 +171,7 @@ function ref_13672(var_0) {
   var_1 = var_0.item;
   var_2 = var_0.origin + (0, 0, var_0.heightoffset);
   var_3 = (0, 0, 0);
-  var_4 = scripts\mp\gametypes\br_lootcache::ref_11a41(var_1, var_0, var_2, var_3, 0, var_0.legendary, 0);
+  var_4 = scripts\mp\gametypes\br_lootcache::ref_11A41(var_1, var_0, var_2, var_3, 0, var_0.legendary, 0);
   var_0.heightoffset += 3;
 }
 
@@ -204,6 +204,6 @@ function allow_hotjoining(var_0, var_1) {
     var_7++;
   }
 
-  level.ref_119f9.ref_12148[var_0] = var_1;
+  level.ref_119F9.ref_12148[var_0] = var_1;
   return var_2;
 }

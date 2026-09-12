@@ -93,13 +93,13 @@ function bank_alarm_sfx() {
 function wait_for_door_cut(var_0) {
   level endon("end_door_cut_wait");
   level.waiting_for_door_cut = 1;
-  level.ref_140f6 = 0;
+  level.ref_140F6 = 0;
 
   for(;;) {
     level waittill("gate_cut");
-    level.ref_140f6++;
+    level.ref_140F6++;
 
-    if(level.ref_140f6 >= level.door_cut_interactions.size) {
+    if(level.ref_140F6 >= level.door_cut_interactions.size) {
       level notify("saws_have_been_used");
       scripts\engine\utility::flag_set("saws_have_been_used");
 
@@ -154,7 +154,7 @@ function init_cutout_anims() {
 }
 
 function cut_vault_gate(var_0, var_1) {
-  var_0.ref_140ae = 1;
+  var_0.ref_140AE = 1;
   var_2 = getcompleteweaponname("iw8_gunless_infil");
   var_0 scripts\cp\utility::_giveweapon(var_2, undefined, undefined, 1);
   var_3 = var_0 scripts\cp\cp_weapons::switchtoweaponreliable(var_2, 0);
@@ -187,7 +187,7 @@ function cut_vault_gate(var_0, var_1) {
   var_0 scripts\cp\cp_weapons::_takeweapon(var_2);
   var_0 scripts\cp\cp_weapons::forcevalidweapon();
   var_0 setstance("stand");
-  var_0.ref_140ae = undefined;
+  var_0.ref_140AE = undefined;
 
   if(istrue(var_3)) {
     return true;

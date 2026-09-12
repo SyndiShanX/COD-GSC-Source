@@ -265,39 +265,39 @@ function dochangeweapon(var_0) {
   updateweaponspeed(var_0);
   updatelastweaponobj(var_0);
   updatelauncherusage();
-  ref_13fd2(var_0);
-  ref_12f87(var_0);
+  ref_13FD2(var_0);
+  ref_12F87(var_0);
   updateweaponperks();
   updatedefaultflinchreduction();
   scripts\mp\mp_agent_damage::updateweaponchangetime();
   riotshieldonweaponchange(var_0);
 
   if(isDefined(self.suit) && self.suit == "iw8_suit_cp") {
-    thread scripts\cp_mp\gestures::ref_13e1a();
+    thread scripts\cp_mp\gestures::ref_13E1A();
     return;
   }
 }
 
-function ref_12f87(var_0) {
+function ref_12F87(var_0) {
   if(istrue(level.loadout_updateammo)) {
     return;
   }
 
-  if(ref_132f2(var_0)) {
+  if(ref_132F2(var_0)) {
     scripts\common\utility::allow_mount_top(0, "scriptedMountDisable");
     scripts\common\utility::allow_mount_side(0, "scriptedMountDisable");
-    thread ref_12f88();
+    thread ref_12F88();
     return;
   }
 }
 
-function ref_12f88() {
-  scripts\engine\utility::ref_143a5("death_or_disconnect", "weapon_change");
+function ref_12F88() {
+  scripts\engine\utility::ref_143A5("death_or_disconnect", "weapon_change");
   scripts\common\utility::allow_mount_top(1, "scriptedMountDisable");
   scripts\common\utility::allow_mount_side(1, "scriptedMountDisable");
 }
 
-function ref_132f2(var_0) {
+function ref_132F2(var_0) {
   var_1 = scripts\cp\utility::getweaponrootname(var_0);
 
   if(var_1 == "iw8_lm_sierrax" && var_0 hasattachment("stocksaw_sierrax")) {
@@ -307,7 +307,7 @@ function ref_132f2(var_0) {
   return false;
 }
 
-function ref_13fd2(var_0) {
+function ref_13FD2(var_0) {
   self notify("end_dragBreath");
 
   if(getweapongroup(var_0) == "weapon_shotgun") {
@@ -322,12 +322,12 @@ function ref_13fd2(var_0) {
 
 function terminal_pusher_approach_array(var_0) {
   var_0.unlockableindex = 1;
-  thread ref_138da(var_0);
+  thread ref_138DA(var_0);
 }
 
-function ref_138da(var_0) {
+function ref_138DA(var_0) {
   self endon("disconnect");
-  scripts\engine\utility::ref_143a5("end_dragBreath", "death");
+  scripts\engine\utility::ref_143A5("end_dragBreath", "death");
 
   if(isDefined(var_0)) {
     var_0.unlockableindex = undefined;
@@ -395,9 +395,9 @@ function updateviewkickscale(var_0) {
     if(var_1 == 1) {
       var_0 = self.overrideviewkickscalepistol;
     } else if(var_1 == 3) {
-      var_0 = self.ref_1218d;
+      var_0 = self.ref_1218D;
     } else if(var_1 == 2) {
-      var_0 = self.ref_1218e;
+      var_0 = self.ref_1218E;
     } else if(var_1 == 4) {
       var_0 = self.overrideviewkickscalesniper;
     }
@@ -551,22 +551,22 @@ function updatelastweaponobj(var_0) {
   }
 }
 
-function ref_13c57() {
+function ref_13C57() {
   for(;;) {
     self waittill("grenade_pullback", var_0);
 
     if(!nullweapon(var_0) && var_0.basename == "c4_mp_p" && scripts\cp\utility::isriotshield(self getcurrentweapon())) {
-      self.ref_1207e = 1;
+      self.ref_1207E = 1;
     }
   }
 }
 
-function ref_13c5d() {
-  if(!istrue(self.ref_1207e)) {
+function ref_13C5D() {
+  if(!istrue(self.ref_1207E)) {
     var_0 = self getheldoffhand();
 
     if(!nullweapon(var_0) && var_0.basename != "c4_mp_p" && scripts\cp\utility::isriotshield(self getcurrentweapon()) && scripts\cp\utility::valuehud(var_0)) {
-      self.ref_1207e = 1;
+      self.ref_1207E = 1;
       return;
     }
 
@@ -574,7 +574,7 @@ function ref_13c5d() {
   }
 }
 
-function ref_13c58(var_0) {
+function ref_13C58(var_0) {
   self notify("trackRiotShield_monitorShieldAttach");
   self endon("trackRiotShield_monitorShieldAttach");
   self endon("death_or_disconnect");
@@ -583,7 +583,7 @@ function ref_13c58(var_0) {
   GscBinSkip4(0x35);
 }
 
-function ref_13c5a() {
+function ref_13C5A() {
   var_0 = isDefined(self.riotshieldmodel);
   var_1 = isDefined(self.riotshieldmodelstowed);
 
@@ -598,7 +598,7 @@ function ref_13c5a() {
   }
 }
 
-function ref_13c59() {
+function ref_13C59() {
   var_0 = isDefined(self.riotshieldmodel);
   var_1 = isDefined(self.riotshieldmodelstowed);
 
@@ -613,7 +613,7 @@ function ref_13c59() {
   }
 }
 
-function ref_13c5b() {
+function ref_13C5B() {
   var_0 = isDefined(self.riotshieldmodel);
   var_1 = isDefined(self.riotshieldmodelstowed);
 
@@ -627,16 +627,16 @@ function ref_13c5b() {
   }
 }
 
-function ref_13c5c() {
+function ref_13C5C() {
   if(scripts\cp\utility::riotshield_hasweapon()) {
     var_0 = scripts\cp\utility::isriotshield(self getcurrentweapon());
 
     if(var_0) {
-      ref_13c59();
+      ref_13C59();
       return;
     }
 
-    ref_13c5a();
+    ref_13C5A();
     return;
   }
 
@@ -655,19 +655,19 @@ function ref_13c5c() {
 
 function riotshieldonweaponchange(var_0) {
   if(scripts\cp\utility::riotshield_hasweapon()) {
-    thread ref_13c58();
+    thread ref_13C58();
     return;
   }
 
-  ref_13c5c();
-  ref_12d4e();
+  ref_13C5C();
+  ref_12D4E();
   self notify("riotshield_detach");
 }
 
-function ref_12d4e(var_0) {
+function ref_12D4E(var_0) {
   self.watch_for_heli_bosses_dead = undefined;
   self.watch_for_heli_death = undefined;
-  self.ref_1443a = undefined;
+  self.ref_1443A = undefined;
 
   if(istrue(var_0)) {
     self.hasriotshield = undefined;
@@ -771,7 +771,7 @@ function watchmissileusage() {
     }
 
     if(scripts\cp_mp\utility\weapon_utility::islockonlauncher(var_0.weapon_name) && isDefined(var_1)) {
-      var_0.ref_119a0 = var_1;
+      var_0.ref_119A0 = var_1;
       level notify("stinger_fired", self, var_0, var_1);
       thread scripts\cp_mp\utility\weapon_utility::watchtargetlockedontobyprojectile(var_1, var_0);
     }
@@ -1046,7 +1046,7 @@ function lockonlaunchers_gettargetarray(var_0) {
       var_18 = scripts\cp_mp\vehicles\vehicle_tracking::vehicle_tracking_getgameinstances(var_17);
 
       foreach(var_20 in var_18) {
-        if(!scripts\cp_mp\vehicles\vehicle::ref_141b9(var_20, self) || var_2) {
+        if(!scripts\cp_mp\vehicles\vehicle::ref_141B9(var_20, self) || var_2) {
           var_1 = var_20;
         }
       }
@@ -1208,7 +1208,7 @@ function onplayerspawned() {
       self.trackingweapondeaths = 0;
     }
 
-    ref_12d4e(1);
+    ref_12D4E(1);
     thread watchgrenadeusage();
     thread scripts\mp\trials\trial_gun_course::x1ops3();
     thread stancerecoiladjuster();
@@ -1288,10 +1288,10 @@ function updatelauncherusage() {
       thread scripts\cp\equipment\cp_javelin::javelinusageloop();
       break;
     case "iw8_sn_xmike109":
-      thread scripts\cp_mp\utility\omnvar_utility::ref_1403e(var_0);
+      thread scripts\cp_mp\utility\omnvar_utility::ref_1403E(var_0);
       break;
     case "iw8_sh_aalpha12":
-      thread scripts\cp\utility\cp_safehouse_util::ref_1403e(var_0);
+      thread scripts\cp\utility\cp_safehouse_util::ref_1403E(var_0);
       break;
   }
 }
@@ -1380,7 +1380,7 @@ function stancerecoiladjuster() {
   self notifyonplayercommand("adjustedStance", "-prone");
 
   for(;;) {
-    scripts\engine\utility::ref_143a6("adjustedStance", "sprint_begin", "weapon_change");
+    scripts\engine\utility::ref_143A6("adjustedStance", "sprint_begin", "weapon_change");
     wait 0.5;
 
     if(isDefined(self.onhelisniper) && self.onhelisniper) {
@@ -1555,7 +1555,7 @@ function watchforweaponchange() {
       if(self.class == "tank") {
         var_0 = add_launcher_xmags(var_0);
       } else {
-        var_0 = ref_12bda(var_0);
+        var_0 = ref_12BDA(var_0);
       }
 
       if(isDefined(level.set_relics)) {
@@ -1591,7 +1591,7 @@ function minigamefinishcount(var_0) {
   thread watchweaponpickup();
 }
 
-function ref_1447d(var_0, var_1) {
+function ref_1447D(var_0, var_1) {
   var_0 endon("death");
   var_0 endon("disconnect");
   var_0 endon("faux_spawn");
@@ -1623,7 +1623,7 @@ function ref_12349(var_0) {
   return false;
 }
 
-function ref_139cf(var_0, var_1) {
+function ref_139CF(var_0, var_1) {
   if(var_1.basename == "iw8_lm_dblmg_mp") {
     return 0;
   }
@@ -1632,10 +1632,10 @@ function ref_139cf(var_0, var_1) {
     return 0;
   }
 
-  return ref_124ad(var_0);
+  return ref_124AD(var_0);
 }
 
-function ref_124ad(var_0) {
+function ref_124AD(var_0) {
   var_1 = ["iw8_minigunksjugg_mp", "iw8_lm_dblmg_mp"];
 
   foreach(var_3 in var_1) {
@@ -1702,7 +1702,7 @@ function add_launcher_xmags(var_0) {
   return var_0;
 }
 
-function ref_12bda(var_0) {
+function ref_12BDA(var_0) {
   var_1 = "xmags_cp_gromeo";
 
   switch (var_0.basename) {
@@ -1863,7 +1863,7 @@ function beginc4tracking() {
   self endon("beginC4Tracking");
   self endon("death");
   self endon("disconnect");
-  scripts\engine\utility::ref_143a6("grenade_fire", "weapon_change", "offhand_end");
+  scripts\engine\utility::ref_143A6("grenade_fire", "weapon_change", "offhand_end");
   self.changingweapon = undefined;
 }
 
@@ -1917,7 +1917,7 @@ function begingrenadetracking() {
         var_1.iscooked = 1;
       }
 
-      thread ref_144d9();
+      thread ref_144D9();
       var_1.originalowner = self;
       break;
     case "cluster_grenade_zm":
@@ -1955,7 +1955,7 @@ function begingrenadetracking() {
       thread scripts\cp\equipment\cp_trophy_system::trophy_used(var_1);
       break;
     case "flare_mp":
-      thread scripts\cp\crafting_system::ref_12c8b(var_1);
+      thread scripts\cp\crafting_system::ref_12C8B(var_1);
       break;
     case "concussion_grenade_mp":
       thread watchconcussiongrenadeexplode();
@@ -1981,7 +1981,7 @@ function begingrenadetracking() {
       break;
     case "flash_grenade_mp":
       var_1.ninebangticks = var_1.ticks;
-      thread ref_144a9();
+      thread ref_144A9();
 
       if(var_1.ticks >= 1) {
         var_1.iscooked = 1;
@@ -2089,7 +2089,7 @@ function rat_executevisuals(var_0) {
   self endon("disconnect");
   self playlocalsound("eye_pulse_plr_lr");
   self setscriptablepartstate("rat_eye_pulse", "active");
-  scripts\engine\utility::ref_143ba(var_0, "last_stand", "death");
+  scripts\engine\utility::ref_143BA(var_0, "last_stand", "death");
   self setscriptablepartstate("rat_eye_pulse", "inactive");
 }
 
@@ -2316,7 +2316,7 @@ function mineproximitytrigger(var_0) {
 }
 
 function minedeletetrigger(var_0) {
-  scripts\engine\utility::ref_143a7("mine_triggered", "mine_destroyed", "mine_selfdestruct", "death");
+  scripts\engine\utility::ref_143A7("mine_triggered", "mine_destroyed", "mine_selfdestruct", "death");
 
   if(isDefined(var_0)) {
     var_0 delete();
@@ -2391,13 +2391,13 @@ function stopblinkinglight() {
   }
 }
 
-function ref_144d9() {
+function ref_144D9() {
   var_0 = self.owner.name;
   self waittill("explode", var_1);
   level notify("grenade_exploded_during_stealth", var_1, "frag_grenade_mp", var_0);
 }
 
-function ref_144a9() {
+function ref_144A9() {
   var_0 = self.owner.name;
   self waittill("explode", var_1);
   level notify("grenade_exploded_during_stealth", var_1, "flash_grenade_mp", var_0);
@@ -2639,7 +2639,7 @@ function recordthrowingknifetraveldist() {
   var_0 = self.origin;
 
   for(;;) {
-    var_1 = scripts\engine\utility::ref_143ba(0.15, "death", "missile_stuck");
+    var_1 = scripts\engine\utility::ref_143BA(0.15, "death", "missile_stuck");
 
     if(!isDefined(self)) {
       break;
@@ -2669,7 +2669,7 @@ function throwingknifec4detonate(var_0, var_1, var_2) {
 function throwingknifeused_recordownerinvalid(var_0, var_1) {
   var_1 endon("missile_stuck");
   var_1 endon("death");
-  var_0 scripts\engine\utility::ref_143a5("death", "disconnect");
+  var_0 scripts\engine\utility::ref_143A5("death", "disconnect");
   var_1.knifeteleownerinvalid = 1;
 }
 
@@ -2742,7 +2742,7 @@ function fx_stun_damage(var_0, var_1) {
       var_0.allowpain = 1;
       var_0.stun_hit_time = gettime() + 1000;
       var_0.stunned = 1;
-      thread ref_12abb();
+      thread ref_12ABB();
     } else {
       return;
     }
@@ -2750,7 +2750,7 @@ function fx_stun_damage(var_0, var_1) {
     var_0.allowpain = 1;
     var_0.stun_hit_time = gettime() + 1000;
     var_0.stunned = 1;
-    thread ref_12abb();
+    thread ref_12ABB();
   }
 
   var_0 dodamage(1, var_0.origin, var_1, var_1, "MOD_GRENADE_SPLASH", "concussion_grenade_mp");
@@ -2759,13 +2759,13 @@ function fx_stun_damage(var_0, var_1) {
   var_0.stunned = undefined;
 }
 
-function ref_12abb() {
+function ref_12ABB() {
   self endon("death");
   self notify("sturn_accuracy_reduction");
   self endon("sturn_accuracy_reduction");
 
   if(self.baseaccuracy != 0) {
-    self.ref_11fbd = self.baseaccuracy;
+    self.ref_11FBD = self.baseaccuracy;
   }
 
   self.baseaccuracy = 0;
@@ -2774,8 +2774,8 @@ function ref_12abb() {
     waitframe();
   }
 
-  if(isDefined(self.ref_11fbd)) {
-    self.baseaccuracy = self.ref_11fbd;
+  if(isDefined(self.ref_11FBD)) {
+    self.baseaccuracy = self.ref_11FBD;
     return;
   }
 }
@@ -5101,7 +5101,7 @@ function equipmentdeletevfx() {
 function monitordisownedequipment(var_0, var_1) {
   level endon("game_ended");
   var_1 endon("death");
-  var_0 scripts\engine\utility::ref_143a6("joined_team", "joined_spectators", "disconnect");
+  var_0 scripts\engine\utility::ref_143A6("joined_team", "joined_spectators", "disconnect");
   deleteexplosive(var_1);
 }
 
@@ -5713,7 +5713,7 @@ function harpoon_impale_additional_func(var_0, var_1, var_2, var_3, var_4, var_5
 }
 
 function impale_cleanup(var_0, var_1, var_2, var_3) {
-  var_0 scripts\engine\utility::ref_143ba(var_2, "death", "disconnect");
+  var_0 scripts\engine\utility::ref_143BA(var_2, "death", "disconnect");
   var_3 delete();
   var_1 delete();
 }
@@ -6163,7 +6163,7 @@ function drop_script_weapon_from_ai(var_0, var_1) {
     var_3 = scripts\engine\utility::array_add(var_3, var_4);
   }
 
-  if(ref_124ae()) {
+  if(ref_124AE()) {
     var_5 = 1;
   } else {
     var_5 = undefined;
@@ -6189,7 +6189,7 @@ function drop_script_weapon_from_ai(var_0, var_1) {
   thread watchweaponpickup();
 }
 
-function ref_124ae() {
+function ref_124AE() {
   if(level.script == "cp_so_estate") {
     return true;
   }
@@ -6799,7 +6799,7 @@ function monitorsmokeactive() {
   self endon("monitorSmokeActive()");
   scripts\cp\utility::printgameaction("smoke grenade activated", self);
   self.hasactivesmokegrenade = 1;
-  var_0 = scripts\engine\utility::ref_143b9(9.25, "death");
+  var_0 = scripts\engine\utility::ref_143B9(9.25, "death");
   self.hasactivesmokegrenade = 0;
   scripts\cp\utility::printgameaction("smoke grenade deactivated", self);
 }
@@ -7899,7 +7899,7 @@ function buildweaponmap() {
 
             level.ref_14589[var_5][level.ref_14589[var_5].size] = var_3;
           } else {
-            level.weaponmapdata[var_3].ref_13efc = 1;
+            level.weaponmapdata[var_3].ref_13EFC = 1;
           }
         }
       }
@@ -8062,7 +8062,7 @@ function monitordisownedgrenade(var_0, var_1) {
   level endon("game_ended");
   var_1 endon("death");
   var_1 endon("mine_planted");
-  var_0 scripts\engine\utility::ref_143a6("joined_team", "joined_spectators", "disconnect");
+  var_0 scripts\engine\utility::ref_143A6("joined_team", "joined_spectators", "disconnect");
 
   if(isDefined(var_1)) {
     var_1 delete();
@@ -8178,7 +8178,7 @@ function carriedpunchcard(var_0, var_1) {
   return isDefined(var_3) && isDefined(var_3[var_1]);
 }
 
-function ref_12bbb(var_0) {
+function ref_12BBB(var_0) {
   switch (var_0) {
     case "laserbalanced":
     case "laserrange":

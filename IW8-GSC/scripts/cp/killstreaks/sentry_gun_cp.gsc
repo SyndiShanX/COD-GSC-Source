@@ -72,10 +72,10 @@ function sentryturret_laststandwatcher() {
   self notify("stop_sentryTurret_lastStandWatcher");
   self endon("stop_sentryTurret_lastStandWatcher");
   self endon("turret_placement_finished");
-  thread scripts\cp_mp\killstreaks\manual_turret::ref_11ac6("last_stand");
+  thread scripts\cp_mp\killstreaks\manual_turret::ref_11AC6("last_stand");
   self waittill("last_stand");
   scripts\mp\playeractions::allowactionset("target_marker", 1);
-  scripts\cp_mp\killstreaks\manual_turret::ref_11acc(1);
+  scripts\cp_mp\killstreaks\manual_turret::ref_11ACC(1);
   self.bgivensentry = 0;
 }
 

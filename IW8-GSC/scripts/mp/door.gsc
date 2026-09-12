@@ -325,7 +325,7 @@ function door_think() {
   for(;;) {
     var_0.statedone = undefined;
     var_0.stateinterrupted = undefined;
-    var_0 scripts\engine\utility::ref_143a5("door_state_done", "door_state_interrupted");
+    var_0 scripts\engine\utility::ref_143A5("door_state_done", "door_state_interrupted");
 
     if(isDefined(var_0.statedone) && var_0.statedone) {
       var_2 = door_state_next(var_0, var_0.statecurr);
@@ -2102,7 +2102,7 @@ function disownalarmmonitor() {
   }
 
   for(;;) {
-    self.dooralarmowner scripts\engine\utility::ref_143a6("joined_team", "joined_spectators", "disconnect");
+    self.dooralarmowner scripts\engine\utility::ref_143A6("joined_team", "joined_spectators", "disconnect");
 
     if(self.state != 8) {
       return;
@@ -2551,7 +2551,7 @@ function remove_player_rig(var_0) {
 }
 
 function watch_remove_rig(var_0) {
-  scripts\engine\utility::ref_143a5("remove_rig", "death_or_disconnect");
+  scripts\engine\utility::ref_143A5("remove_rig", "death_or_disconnect");
 }
 
 function givebreachscore(var_0) {

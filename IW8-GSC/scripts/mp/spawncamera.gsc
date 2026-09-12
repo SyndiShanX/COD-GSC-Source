@@ -251,7 +251,7 @@ function startspawncamera(var_0, var_1, var_2) {
   }
 
   thread playslamzoomflash(var_0, var_1, var_2);
-  scripts\engine\utility::ref_143bf(0.1, "force_spawn");
+  scripts\engine\utility::ref_143BF(0.1, "force_spawn");
   thread removecameraondisconnect(self.spawncameraent);
   self cameralinkTo(self.spawncameraent, "tag_origin", 1, 1);
   scripts\mp\utility\player::ref_12898("spawnCamera::startSpawnCamera() CameralinkTo()");
@@ -607,12 +607,12 @@ function runslamzoomonspawn(var_0) {
 
   scripts\mp\utility\player::updatesessionstate("playing");
 
-  if(istrue(self.ref_132ff)) {
+  if(istrue(self.ref_132FF)) {
     var_1 = scripts\mp\playerlogic::getspawnpoint();
     self setOrigin(var_1.spawnorigin);
     self setplayerangles(var_1.spawnangles);
     scripts\mp\spawnlogic::finalizespawnpointchoice(var_1.spawnpoint);
-    self.ref_132ff = undefined;
+    self.ref_132FF = undefined;
     self.selectedspawnarea = undefined;
   }
 
@@ -761,7 +761,7 @@ function fadeblackforgeo(var_0) {
     }
   }
 
-  if(istrue(self.ref_132ff)) {
+  if(istrue(self.ref_132FF)) {
     var_5 = min(var_5, 0.5);
     var_6 = 0;
     thread ref_14360();

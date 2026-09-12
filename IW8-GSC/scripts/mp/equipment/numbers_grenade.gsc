@@ -166,7 +166,7 @@ function decoy_ping_group(var_0) {
 }
 
 function player_effect_end_watcher(var_0, var_1) {
-  scripts\engine\utility::ref_143a6("death_or_disconnect", "numbers_debuff_end_early", "numbers_debuff_end");
+  scripts\engine\utility::ref_143A6("death_or_disconnect", "numbers_debuff_end_early", "numbers_debuff_end");
 
   if(isDefined(var_0)) {
     var_0.a_victims = scripts\engine\utility::array_remove(var_0.a_victims, self);

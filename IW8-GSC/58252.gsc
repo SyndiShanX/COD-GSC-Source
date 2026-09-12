@@ -23,16 +23,16 @@ function col_circletick(var_0, var_1, var_2, var_3) {
 
   var_4 = spawnStruct();
   var_4.ref_12025 = var_1;
-  var_4.ref_1202e = var_2;
-  var_4.ref_120a5 = var_3;
+  var_4.ref_1202E = var_2;
+  var_4.ref_120A5 = var_3;
   level.combined_counters_groups[var_0] = var_4;
 }
 
 function codeentered(var_0, var_1) {
   var_2 = level.combined_counters_groups[var_0];
 
-  if(isDefined(var_2.ref_120a5)) {
-    return self[[var_2.ref_120a5]](var_1);
+  if(isDefined(var_2.ref_120A5)) {
+    return self[[var_2.ref_120A5]](var_1);
   }
 }
 
@@ -47,8 +47,8 @@ function closeplundergate(var_0, var_1) {
 function closepos(var_0, var_1) {
   var_2 = level.combined_counters_groups[var_0];
 
-  if(isDefined(var_2.ref_1202e)) {
-    return self[[var_2.ref_1202e]](var_1);
+  if(isDefined(var_2.ref_1202E)) {
+    return self[[var_2.ref_1202E]](var_1);
   }
 }
 
@@ -104,7 +104,7 @@ function combatrecordequipmentused(var_0) {
 function combatrecordsupermisc(var_0) {
   self endon("binoculars_watchRaceEnd");
   self waittill("binoculars_take");
-  var_0.ref_13a2a = 1;
+  var_0.ref_13A2A = 1;
   self notify("binoculars_watchRaceStart");
 }
 
@@ -166,7 +166,7 @@ function close_exit_doors() {
 
     close_doors();
 
-    foreach(var_1 in self.combo_duration_calculate.ref_13a72) {
+    foreach(var_1 in self.combo_duration_calculate.ref_13A72) {
       if(!isDefined(var_1)) {
         continue;
       }
@@ -189,7 +189,7 @@ function col_createquestlocale() {
 
   if(!isDefined(self.combo_duration_calculate)) {
     self.combo_duration_calculate = spawnStruct();
-    self.combo_duration_calculate.ref_13a72 = [];
+    self.combo_duration_calculate.ref_13A72 = [];
   }
 
   self.combo_duration_calculate.binoculars_ongive = 1;
@@ -205,26 +205,26 @@ function col() {
   self endon("disconnect");
   self notify("binoculars_processTargetData");
   self endon("binoculars_processTargetData");
-  self.combo_duration_calculate.ref_11a50 = -1;
-  self.combo_duration_calculate.ref_11a4e = -1;
+  self.combo_duration_calculate.ref_11A50 = -1;
+  self.combo_duration_calculate.ref_11A4E = -1;
 
   for(;;) {
     var_0 = level.characters;
     var_1 = getdvarfloat("scr_binoculars_projection_distance", 72);
-    self.combo_duration_calculate.ref_11a4f = [];
-    self.combo_duration_calculate.ref_11a4d = [];
+    self.combo_duration_calculate.ref_11A4F = [];
+    self.combo_duration_calculate.ref_11A4D = [];
     self.combo_duration_calculate.maxrange = close_kioskgate();
-    self.combo_duration_calculate.ref_11b71 = self.combo_duration_calculate.maxrange * self.combo_duration_calculate.maxrange;
+    self.combo_duration_calculate.ref_11B71 = self.combo_duration_calculate.maxrange * self.combo_duration_calculate.maxrange;
     self.combo_duration_calculate.impact_vfx = cos(close_gunshop_door());
-    self.combo_duration_calculate.ref_128c2 = var_1 * var_1;
+    self.combo_duration_calculate.ref_128C2 = var_1 * var_1;
     self.combo_duration_calculate.markingtarget = 0;
-    self.combo_duration_calculate.ref_11b10 = 0;
-    self.combo_duration_calculate.ref_11b11 = 0;
+    self.combo_duration_calculate.ref_11B10 = 0;
+    self.combo_duration_calculate.ref_11B11 = 0;
     var_2 = 0;
 
     foreach(var_4 in var_0) {
       var_5 = 0;
-      var_6 = self.combo_duration_calculate.ref_13a72[var_4 getentitynumber()];
+      var_6 = self.combo_duration_calculate.ref_13A72[var_4 getentitynumber()];
 
       if(isDefined(var_6)) {
         var_5 = var_6.state;
@@ -289,23 +289,23 @@ function col_checkiflocaleisavailable(var_0) {
     break;
   }
 
-  var_15 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
-  var_15.ref_11a4c = gettime();
-  var_15.ref_11a4b = var_11;
+  var_15 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
+  var_15.ref_11A4C = gettime();
+  var_15.ref_11A4B = var_11;
 }
 
 function codephonescodeenteredringingfrenzy(var_0) {
-  if(!self.combo_duration_calculate.ref_11a4d.size) {
+  if(!self.combo_duration_calculate.ref_11A4D.size) {
     return 0;
   }
 
   var_1 = 0;
   var_2 = undefined;
 
-  foreach(var_5, var_4 in self.combo_duration_calculate.ref_11a4d) {
-    if(var_5 >= self.combo_duration_calculate.ref_11a4e) {
+  foreach(var_5, var_4 in self.combo_duration_calculate.ref_11A4D) {
+    if(var_5 >= self.combo_duration_calculate.ref_11A4E) {
       col_checkiflocaleisavailable(var_4);
-      self.combo_duration_calculate.ref_11a4e = var_5 + 1;
+      self.combo_duration_calculate.ref_11A4E = var_5 + 1;
       var_1++;
 
       if(!isDefined(var_2)) {
@@ -319,16 +319,16 @@ function codephonescodeenteredringingfrenzy(var_0) {
   }
 
   if(var_1 < var_0) {
-    self.combo_duration_calculate.ref_11a4e = -1;
+    self.combo_duration_calculate.ref_11A4E = -1;
 
-    foreach(var_5, var_4 in self.combo_duration_calculate.ref_11a4d) {
+    foreach(var_5, var_4 in self.combo_duration_calculate.ref_11A4D) {
       if(isDefined(var_2) && var_2 == var_5) {
         break;
       }
 
-      if(var_5 >= self.combo_duration_calculate.ref_11a4e) {
+      if(var_5 >= self.combo_duration_calculate.ref_11A4E) {
         col_checkiflocaleisavailable(var_4);
-        self.combo_duration_calculate.ref_11a4e = var_5 + 1;
+        self.combo_duration_calculate.ref_11A4E = var_5 + 1;
         var_1++;
 
         if(var_1 >= var_0) {
@@ -342,17 +342,17 @@ function codephonescodeenteredringingfrenzy(var_0) {
 }
 
 function codephonescriptableused(var_0) {
-  if(!self.combo_duration_calculate.ref_11a4f.size) {
+  if(!self.combo_duration_calculate.ref_11A4F.size) {
     return 0;
   }
 
   var_1 = 0;
   var_2 = undefined;
 
-  foreach(var_5, var_4 in self.combo_duration_calculate.ref_11a4f) {
-    if(var_5 >= self.combo_duration_calculate.ref_11a50) {
+  foreach(var_5, var_4 in self.combo_duration_calculate.ref_11A4F) {
+    if(var_5 >= self.combo_duration_calculate.ref_11A50) {
       col_checkiflocaleisavailable(var_4);
-      self.combo_duration_calculate.ref_11a50 = var_5 + 1;
+      self.combo_duration_calculate.ref_11A50 = var_5 + 1;
       var_1++;
 
       if(!isDefined(var_2)) {
@@ -366,16 +366,16 @@ function codephonescriptableused(var_0) {
   }
 
   if(var_1 < var_0) {
-    self.combo_duration_calculate.ref_11a50 = -1;
+    self.combo_duration_calculate.ref_11A50 = -1;
 
-    foreach(var_5, var_4 in self.combo_duration_calculate.ref_11a4f) {
+    foreach(var_5, var_4 in self.combo_duration_calculate.ref_11A4F) {
       if(isDefined(var_2) && var_2 == var_5) {
         break;
       }
 
-      if(var_5 >= self.combo_duration_calculate.ref_11a50) {
+      if(var_5 >= self.combo_duration_calculate.ref_11A50) {
         col_checkiflocaleisavailable(var_4);
-        self.combo_duration_calculate.ref_11a50 = var_5 + 1;
+        self.combo_duration_calculate.ref_11A50 = var_5 + 1;
         var_1++;
 
         if(var_1 >= var_0) {
@@ -396,7 +396,7 @@ function codenumber() {
 }
 
 function col_localethink_itemspawn(var_0, var_1) {
-  var_2 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_2 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
 
   if(!isDefined(var_2)) {
     if(var_1 == 0) {
@@ -404,7 +404,7 @@ function col_localethink_itemspawn(var_0, var_1) {
     }
 
     var_2 = spawnStruct();
-    self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()] = var_2;
+    self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()] = var_2;
   }
 
   var_2.state = var_1;
@@ -415,7 +415,7 @@ function close_trap_room_door(var_0) {
 }
 
 function collect_intel_anim(var_0, var_1) {
-  var_2 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_2 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
 
   if(isDefined(var_2)) {
     var_2.shouldpickup = 1;
@@ -462,7 +462,7 @@ function collorigin2(var_0, var_1) {
 }
 
 function close_tut_gate(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
 
   if(isDefined(var_1)) {
     var_1.shouldpickup = undefined;
@@ -488,13 +488,13 @@ function clone(var_0) {
   var_3 = 1;
   var_4 = 0;
   var_5 = 500;
-  var_6 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_6 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
   var_6.headicon = var_0 scripts\cp_mp\entityheadicons::setheadicon_singleimage([], var_1, var_2, var_3, var_4, var_5, undefined, 1, 1);
   thread clonesleft(var_0);
 }
 
 function collision_damage_watcher(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
 
   if(!isDefined(var_1) || !isDefined(var_1.headicon)) {
     return;
@@ -515,11 +515,11 @@ function collisioncheck(var_0, var_1) {
   }
 
   if(var_2) {
-    scripts\cp_mp\entityheadicons::ref_1315d(var_0.headicon, var_1);
+    scripts\cp_mp\entityheadicons::ref_1315D(var_0.headicon, var_1);
     return;
   }
 
-  scripts\cp_mp\entityheadicons::ref_1315e(var_0.headicon, var_1);
+  scripts\cp_mp\entityheadicons::ref_1315E(var_0.headicon, var_1);
 }
 
 function clonesleft(var_0) {
@@ -528,8 +528,8 @@ function clonesleft(var_0) {
   self endon("removeHeadIcon_" + var_1);
   var_0 waittill("disconnect");
 
-  if(isDefined(self.combo_duration_calculate) && isDefined(self.combo_duration_calculate.ref_13a72)) {
-    var_2 = self.combo_duration_calculate.ref_13a72[var_1];
+  if(isDefined(self.combo_duration_calculate) && isDefined(self.combo_duration_calculate.ref_13A72)) {
+    var_2 = self.combo_duration_calculate.ref_13A72[var_1];
 
     if(isDefined(var_2) && isDefined(var_2.headicon)) {
       scripts\cp_mp\entityheadicons::setheadicon_deleteicon(var_2.headicon);
@@ -541,7 +541,7 @@ function clonesleft(var_0) {
 }
 
 function col_createcircleobjectiveicon(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
   scripts\cp_mp\entityheadicons::setheadicon_deleteicon(var_1.headicon);
   self notify("removeHeadIcon_" + var_0 getentitynumber());
 }
@@ -612,7 +612,7 @@ function codecorrectlyenteredbyanyone(var_0) {
 
   if(closeelevatordoors(var_0)) {
     if(close_trap_room_door(var_0)) {
-      self.combo_duration_calculate.ref_11b10 = 1;
+      self.combo_duration_calculate.ref_11B10 = 1;
       return 2;
     }
 
@@ -657,10 +657,10 @@ function code(var_0) {
 
   self.combo_duration_calculate.markingtarget = 1;
 
-  if(self.combo_duration_calculate.ref_11b11 == 0) {
-    self.combo_duration_calculate.ref_11b11 = close_safehouse_doors(var_0);
+  if(self.combo_duration_calculate.ref_11B11 == 0) {
+    self.combo_duration_calculate.ref_11B11 = close_safehouse_doors(var_0);
   } else {
-    self.combo_duration_calculate.ref_11b11 = int(min(self.combo_duration_calculate.ref_11b11, close_safehouse_doors(var_0)));
+    self.combo_duration_calculate.ref_11B11 = int(min(self.combo_duration_calculate.ref_11B11, close_safehouse_doors(var_0)));
   }
 
   return 4;
@@ -777,7 +777,7 @@ function close_gunshop_door() {
 }
 
 function closedpos(var_0) {
-  return distancesquared(self.origin, var_0.origin) < self.combo_duration_calculate.ref_11b71;
+  return distancesquared(self.origin, var_0.origin) < self.combo_duration_calculate.ref_11B71;
 }
 
 function closedcenter(var_0) {
@@ -800,7 +800,7 @@ function closenukecrate(var_0) {
   foreach(var_7 in var_3) {
     var_8 = lengthsquared(vectorfromlinetopoint(var_1, var_2, var_7));
 
-    if(var_8 < self.combo_duration_calculate.ref_128c2) {
+    if(var_8 < self.combo_duration_calculate.ref_128C2) {
       return true;
     }
   }
@@ -810,19 +810,19 @@ function closenukecrate(var_0) {
 
 function collorigin1(var_0) {
   var_1 = closenukecrate(var_0);
-  var_2 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_2 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
 
   if(var_1) {
-    var_2.ref_145d9 = 1;
+    var_2.ref_145D9 = 1;
     return;
   }
 
-  var_2.ref_145d9 = undefined;
+  var_2.ref_145D9 = undefined;
 }
 
 function closeelevatordoors(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
-  return istrue(var_1.ref_145d9);
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
+  return istrue(var_1.ref_145D9);
 }
 
 function cloned_collision(var_0) {
@@ -833,41 +833,41 @@ function cloned_collision(var_0) {
   }
 
   if(var_1) {
-    self.combo_duration_calculate.ref_11a4d[var_0 getentitynumber()] = var_0;
+    self.combo_duration_calculate.ref_11A4D[var_0 getentitynumber()] = var_0;
     return;
   }
 
-  self.combo_duration_calculate.ref_11a4f[var_0 getentitynumber()] = var_0;
+  self.combo_duration_calculate.ref_11A4F[var_0 getentitynumber()] = var_0;
 }
 
 function clonedeath(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
 
-  if(!isDefined(var_1.ref_11a4c) || gettime() - var_1.ref_11a4c > 1000) {
+  if(!isDefined(var_1.ref_11A4C) || gettime() - var_1.ref_11A4C > 1000) {
     return false;
   }
 
-  return istrue(var_1.ref_11a4b);
+  return istrue(var_1.ref_11A4B);
 }
 
 function col_removelocaleinstance(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
-  var_1.ref_122f4 = gettime() + close_silo_entrance_doors(var_0);
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
+  var_1.ref_122F4 = gettime() + close_silo_entrance_doors(var_0);
 }
 
 function close_c130crate_gate(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
-  var_1.ref_122f4 = undefined;
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
+  var_1.ref_122F4 = undefined;
 }
 
 function cloneprop(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
 
-  if(!isDefined(var_1.ref_122f4)) {
+  if(!isDefined(var_1.ref_122F4)) {
     return false;
   }
 
-  return gettime() > var_1.ref_122f4;
+  return gettime() > var_1.ref_122F4;
 }
 
 function close_silo_entrance_doors(var_0) {
@@ -895,28 +895,28 @@ function close_silo_entrance_doors(var_0) {
 }
 
 function close_safehouse_doors(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
 
-  if(!isDefined(var_1.ref_122f4)) {
+  if(!isDefined(var_1.ref_122F4)) {
     return (gettime() + close_silo_entrance_doors(var_0));
   }
 
-  return var_1.ref_122f4;
+  return var_1.ref_122F4;
 }
 
 function col_localethink_objectivevisibility(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
   var_2 = getdvarint("scr_binoculars_expire_time", 5000);
   var_1.onspecialistbonusavailable = gettime() + var_2;
 }
 
 function close_assassination_door(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
   var_1.onspecialistbonusavailable = undefined;
 }
 
 function clonekey(var_0) {
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
 
   if(!isDefined(var_1.onspecialistbonusavailable)) {
     return true;
@@ -926,26 +926,26 @@ function clonekey(var_0) {
 }
 
 function clone_brushmodel_to_script_model(var_0) {
-  if(!isDefined(self.ref_11b0c)) {
-    self.ref_11b0c = [];
+  if(!isDefined(self.ref_11B0C)) {
+    self.ref_11B0C = [];
   }
 
   var_1 = var_0 getentitynumber();
   var_2 = scripts\engine\utility::ter_op(isDefined(self.matchdatalifeindex), self.matchdatalifeindex, 0);
 
-  if(!isDefined(self.ref_11b0c[var_1]) || self.ref_11b0c[var_1] > var_2) {
-    self.ref_11b0c[var_1] = var_2;
+  if(!isDefined(self.ref_11B0C[var_1]) || self.ref_11B0C[var_1] > var_2) {
+    self.ref_11B0C[var_1] = var_2;
     scripts\mp\utility\points::giveunifiedpoints("binoculars_marked");
     return;
   }
 }
 
 function collectall(var_0) {
-  if(!isDefined(self.combo_duration_calculate) || !isDefined(self.combo_duration_calculate.ref_13a72)) {
+  if(!isDefined(self.combo_duration_calculate) || !isDefined(self.combo_duration_calculate.ref_13A72)) {
     return false;
   }
 
-  var_1 = self.combo_duration_calculate.ref_13a72[var_0 getentitynumber()];
+  var_1 = self.combo_duration_calculate.ref_13A72[var_0 getentitynumber()];
 
   if(!isDefined(var_1)) {
     return false;
@@ -995,11 +995,11 @@ function colmaps() {
   var_0 = istrue(self.combo_duration_calculate.markingtarget);
 
   if(var_0) {
-    collbrush(1, self.combo_duration_calculate.ref_11b11);
+    collbrush(1, self.combo_duration_calculate.ref_11B11);
     return;
   }
 
-  var_1 = istrue(self.combo_duration_calculate.ref_11b10);
+  var_1 = istrue(self.combo_duration_calculate.ref_11B10);
 
   if(var_1) {
     collbrush(2, 0);

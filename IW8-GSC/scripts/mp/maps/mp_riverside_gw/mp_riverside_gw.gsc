@@ -9,7 +9,7 @@ function main() {
   scripts\mp\maps\mp_riverside_gw\mp_riverside_gw_fx::main();
   scripts\mp\maps\mp_riverside_gw\mp_riverside_gw_lighting::main();
   scripts\mp\load::main();
-  scripts\cp_mp\utility\game_utility::ref_12b18();
+  scripts\cp_mp\utility\game_utility::ref_12B18();
   scripts\cp_mp\utility\game_utility::registerlargemap();
 
   if(scripts\mp\utility\game::getgametype() == "arm" || scripts\mp\utility\game::unset_relic_landlocked()) {

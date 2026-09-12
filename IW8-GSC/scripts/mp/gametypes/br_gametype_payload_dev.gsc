@@ -3,7 +3,7 @@
  * Script: scripts\mp\gametypes\br_gametype_payload_dev.gsc
 ************************************************************/
 
-function ref_12e0a(var_0) {
+function ref_12E0A(var_0) {
   if(var_0.size == 0) {
     return;
   }

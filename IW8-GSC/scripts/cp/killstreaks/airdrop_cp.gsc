@@ -214,7 +214,7 @@ function infectbonusscore(var_0) {
 }
 
 function infectbonussuperontacinsert(var_0) {
-  [[level.ref_12d8c]](var_0);
+  [[level.ref_12D8C]](var_0);
 }
 
 function infectbonussuperonspawn(var_0) {
@@ -267,8 +267,8 @@ function infectbonussuperonspawn(var_0) {
   var_0 playlocalsound("weap_ammo_pickup");
   var_10 = ["precision_airstrike", "juggernaut", "cruise_missile", "cluster_strike"];
 
-  if(isDefined(self.ref_129f9)) {
-    var_10 = self.ref_129f9;
+  if(isDefined(self.ref_129F9)) {
+    var_10 = self.ref_129F9;
   }
 
   var_11 = scripts\engine\utility::random(var_10);

@@ -64,7 +64,7 @@ function watchdeployablemarkerplacement(var_0, var_1, var_2, var_3, var_4, var_5
   self notify("deployable_deployed");
   var_7 = "cp_used_" + var_0;
   var_8 = scripts\cp_mp\utility\killstreak_utility::createstreakinfo(var_7, self);
-  scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_8);
+  scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_8);
 
   foreach(var_10 in level.players) {
     var_10 thread scripts\cp\cp_hud_message::showsplash(var_7, undefined, self);
@@ -110,7 +110,7 @@ function marker_watchdisownedtimeoutinternal() {
 function markeractivate(var_0, var_1, var_2, var_3, var_4, var_5) {
   self notify("markerActivate");
   self endon("markerActivate");
-  var_6 = scripts\engine\utility::ref_143ae("missile_stuck", "explode", "death");
+  var_6 = scripts\engine\utility::ref_143AE("missile_stuck", "explode", "death");
   var_7 = self.owner;
   var_8 = self.origin;
   var_9 = level.boxsettings[var_1];
@@ -406,7 +406,7 @@ function box_handleownerdisconnect() {
   level endon("game_ended");
   self notify("box_handleOwner");
   self endon("box_handleOwner");
-  self.owner scripts\engine\utility::ref_143a5("killstreak_disowned", "disconnect");
+  self.owner scripts\engine\utility::ref_143A5("killstreak_disowned", "disconnect");
   self notify("death");
 }
 
@@ -430,8 +430,8 @@ function boxthink() {
         if(isDefined(self.owner) && var_1 != self.owner) {
           self.owner thread scripts\cp\agents\gametype_cp_wave_sv::giveunifiedpoints("munitions_box_teammate_used");
 
-          if(isDefined(var_0.ref_120aa)) {
-            level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var_1, var_0.ref_120aa);
+          if(isDefined(var_0.ref_120AA)) {
+            level thread scripts\cp\cp_player_battlechatter::trysaylocalsound(var_1, var_0.ref_120AA);
           }
         }
 

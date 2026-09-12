@@ -131,14 +131,14 @@ function register_spawn_groups() {
 
 function drive_down_hill_enemy_spawn_think() {
   level endon("game_ended");
-  level scripts\engine\utility::ref_143a5("ied_group_one_exploded", "reached_IED_zone_one");
+  level scripts\engine\utility::ref_143A5("ied_group_one_exploded", "reached_IED_zone_one");
   scripts\cp\cp_modular_spawning::run_spawn_module("drive_down_hill_house_one");
   scripts\cp\cp_modular_spawning::run_spawn_module("drive_down_hill_house_one_back_right");
   scripts\cp\cp_modular_spawning::run_spawn_module("drive_down_hill_house_two");
   scripts\cp\cp_modular_spawning::run_spawn_module("drive_down_hill_house_three");
   scripts\cp\cp_modular_spawning::run_spawn_module("drive_down_hill_house_three_back");
   scripts\cp\cp_modular_spawning::run_spawn_module("drive_down_hill_house_four_rpg");
-  level scripts\engine\utility::ref_143a5("ied_group_two_exploded", "reached_IED_zone_two");
+  level scripts\engine\utility::ref_143A5("ied_group_two_exploded", "reached_IED_zone_two");
   scripts\cp\cp_modular_spawning::run_spawn_module("drive_down_hill_house_five_mix");
   scripts\cp\cp_modular_spawning::run_spawn_module("drive_down_hill_house_five_back");
   scripts\cp\cp_modular_spawning::run_spawn_module("drive_down_hill_house_six");

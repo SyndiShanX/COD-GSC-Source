@@ -11,8 +11,8 @@ function main(var_0, var_1, var_2) {
   scripts\common\vehicle_build::build_deathmodel("veh8_mil_air_mindia8_open_back_wm_x");
   scripts\common\vehicle_build::build_deathfx("vfx/core/expl/grenadeexp_default", "tag_engine_left", "hind_helicopter_hit", undefined, undefined, undefined, 0.2, 1, undefined);
 
-  if(scripts\common\utility::iscp() && isDefined(level.ref_12d73)) {
-    scripts\common\vehicle_build::build_rocket_deathfx(level.ref_12d73, "tag_origin", "exp_helicopter_fuel", undefined, undefined, 0, 0, 1, undefined);
+  if(scripts\common\utility::iscp() && isDefined(level.ref_12D73)) {
+    scripts\common\vehicle_build::build_rocket_deathfx(level.ref_12D73, "tag_origin", "exp_helicopter_fuel", undefined, undefined, 0, 0, 1, undefined);
   }
 
   scripts\common\vehicle_build::build_deathfx("vfx/core/expl/grenadeexp_default", "tail_rotor_jnt", "hind_helicopter_secondary_exp", undefined, undefined, undefined, 0.5, 1, undefined);

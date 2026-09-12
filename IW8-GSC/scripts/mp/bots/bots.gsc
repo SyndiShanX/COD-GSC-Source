@@ -255,7 +255,7 @@ function bots_notify_on_disconnect(var_0) {
 }
 
 function bots_remove_from_array_on_notify(var_0) {
-  var_0 scripts\engine\utility::ref_143a5("bots_human_spawned", "bots_human_disconnected");
+  var_0 scripts\engine\utility::ref_143A5("bots_human_spawned", "bots_human_disconnected");
   level.players_waiting_to_join = scripts\engine\utility::array_remove(level.players_waiting_to_join, var_0);
 }
 
@@ -2062,7 +2062,7 @@ function revive_watch_for_finished(var_0) {
   self endon("death_or_disconnect");
   self endon("bad_path");
   self endon("goal");
-  var_0 scripts\engine\utility::ref_143a5("death", "revived");
+  var_0 scripts\engine\utility::ref_143A5("death", "revived");
   self notify("bad_path");
 }
 

@@ -36,5 +36,5 @@ function main() {
   scripts\cp\helicopter\cp_helicopter::heli_precache();
   scripts\cp\maps\cp_dwn_twn\cp_dwn_twn_door_cut::door_cut_precache();
   scripts\cp\maps\cp_donetsk\cp_donetsk_obj_helidown::heli_down_precache();
-  scripts\cp\cp_relics::ref_12b99();
+  scripts\cp\cp_relics::ref_12B99();
 }

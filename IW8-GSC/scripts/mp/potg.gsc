@@ -430,7 +430,7 @@ function waitformorerecordingtimeforscene(var_0) {
 
   if(var_4 > gettime()) {
     thread watchpendingscenetimeout(var_4);
-    var_5 = scripts\engine\utility::ref_143b4("potg_pending_scene_timeout", "potg_stop_recording");
+    var_5 = scripts\engine\utility::ref_143B4("potg_pending_scene_timeout", "potg_stop_recording");
     self notify("potg_scene_finished_pending");
   }
 
@@ -532,11 +532,11 @@ function eventtable_isevent(var_0) {
 function finalizescene(var_0) {
   var_0.finalized = 1;
   calcscenepsoffset(var_0);
-  ref_12c7c();
+  ref_12C7C();
   datalog_scenefinalized(var_0);
 }
 
-function ref_12c7c() {
+function ref_12C7C() {
   foreach(var_1 in level.players) {
     var_1 setclientomnvar("ui_potg_score_event_control", -1);
     var_1 setclientomnvar("ui_score_event_list_0", -1);

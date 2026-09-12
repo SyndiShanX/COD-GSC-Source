@@ -5,7 +5,7 @@
 
 function main() {
   level.brlatespawnplayer = &latespawnplayer;
-  level.stop_wave = ref_1300f();
+  level.stop_wave = ref_1300F();
   setdvarifuninitialized("br_infil_anim_enable_third_camera", 1);
   setdvarifuninitialized("br_infil_play_jump_anims", 1);
   setdvarifuninitialized("br_infil_bot_jumpmaster", 0);
@@ -26,7 +26,7 @@ function main() {
   initinfillocationselectionhandlers();
 }
 
-function ref_1300f() {
+function ref_1300F() {
   var_0 = 2;
   var_1 = getdvarint("scr_br_infilType", var_0);
 
@@ -73,7 +73,7 @@ function setplayerprematchallows() {
 function freefallstartfunc() {
   self allowmelee(1);
   self enableoffhandweapons();
-  thread scripts\cp_mp\parachute::ref_126cb();
+  thread scripts\cp_mp\parachute::ref_126CB();
 }
 
 function stop_player_trigger_monitor() {
@@ -91,7 +91,7 @@ function stop_player_trigger_monitor() {
   self setclientomnvar("ui_br_extended_load_screen", 0);
 }
 
-function ref_1435f(var_0, var_1, var_2) {
+function ref_1435F(var_0, var_1, var_2) {
   var_3 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, level.players);
 
   foreach(var_5 in var_3) {
@@ -103,7 +103,7 @@ function ref_1435f(var_0, var_1, var_2) {
     var_5 setmlgdamagedone();
 
     if(!istrue(level.br_infils_disabled)) {
-      var_5 scripts\mp\gametypes\br::ref_1254d();
+      var_5 scripts\mp\gametypes\br::ref_1254D();
     }
 
     if(!isalive(var_5) && !istrue(var_5.waitingtospawnamortize)) {
@@ -129,7 +129,7 @@ function ref_1435f(var_0, var_1, var_2) {
     }
 
     if(istrue(var_5.delay_enter_combat_after_investigating_grenade)) {
-      scripts\mp\gametypes\br::ref_13f21(var_5, "waitAndForceSpawnAllPlayers");
+      scripts\mp\gametypes\br::ref_13F21(var_5, "waitAndForceSpawnAllPlayers");
     }
 
     var_5 notify("beginC130");
@@ -143,14 +143,14 @@ function ref_1435f(var_0, var_1, var_2) {
         for(var_10 = 0; var_10 < var_9.size; var_10++) {
           var_11 = var_9[var_10];
           var_12 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_8, var_11);
-          var_13 = ref_1322c(var_12);
+          var_13 = ref_1322C(var_12);
 
           if(isDefined(var_13)) {
-            ref_12b12(var_13);
+            ref_12B12(var_13);
             thread ref_14494(var_13, var_8);
           }
 
-          scripts\mp\gametypes\br::ref_1401e(var_8, var_11);
+          scripts\mp\gametypes\br::ref_1401E(var_8, var_11);
         }
       }
     } else {
@@ -158,7 +158,7 @@ function ref_1435f(var_0, var_1, var_2) {
 
       foreach(var_5 in var_3) {
         if(isDefined(var_5)) {
-          ref_12b12(var_5);
+          ref_12B12(var_5);
         }
       }
     }
@@ -181,10 +181,10 @@ function neurotoxin_damage_loop() {
     var_0.play_disguise_vo = 5;
   }
 
-  var_0 scripts\cp_mp\parachute::ref_121ca();
+  var_0 scripts\cp_mp\parachute::ref_121CA();
 }
 
-function ref_12b12(var_0) {
+function ref_12B12(var_0) {
   if(!istrue(var_0.vehicle_occupancy_monitorcontrols)) {
     var_0.vehicle_occupancy_monitorcontrols = 1;
     var_0 scripts\mp\gametypes\br_public::updatebrscoreboardstat("jumpMasterState", 2);
@@ -195,12 +195,12 @@ function ref_12b12(var_0) {
 }
 
 function ref_14494(var_0, var_1) {
-  scripts\engine\utility::ref_143a5("death", "disconnect");
+  scripts\engine\utility::ref_143A5("death", "disconnect");
   var_2 = scripts\mp\gametypes\br_public::round_enemy_stuck_logic(var_0, var_1);
-  var_3 = ref_1322c(var_2);
+  var_3 = ref_1322C(var_2);
 
   if(isDefined(var_3)) {
-    ref_12b12(var_3);
+    ref_12B12(var_3);
     thread ref_14494(var_3, var_0);
     return;
   }
@@ -227,7 +227,7 @@ function latespawnplayer() {
   var_1 = scripts\mp\gametypes\br_public::validtousesticker() || scripts\mp\gametypes\br_public::uniquelootitemid();
 
   if(getDvar("scr_br_lateSpawnFallback") != "" || var_1) {
-    ref_11fcc();
+    ref_11FCC();
   } else if(!isalive(var_0)) {
     if(!istrue(level.debugnextpropindex)) {
       var_2 = isbot(var_0) && scripts\mp\gametypes\br_public::tutorial_playSound();
@@ -253,10 +253,10 @@ function latespawnplayer() {
           var_3 = [self];
         }
 
-        ref_1322c(var_3);
+        ref_1322C(var_3);
       }
 
-      thread ref_11c49();
+      thread ref_11C49();
     }
   }
 
@@ -316,7 +316,7 @@ function watch_for_usb_notetrack() {
 
   playerjoininfil(var_0);
   playerlinktopositionent(var_0, level.watch_for_total_counts_below_num);
-  scripts\mp\utility\game::ref_131a3(var_0, 1);
+  scripts\mp\utility\game::ref_131A3(var_0, 1);
   var_9 = remove_objective_on_flag(level.watch_for_total_counts_below_num);
   var_0 setOrigin(var_9.origin);
   playerplayinfilloopanim(var_0, level.watch_for_total_counts_below_num);
@@ -354,7 +354,7 @@ function fivecontracts(var_0) {
   return var_1;
 }
 
-function ref_11c49() {
+function ref_11C49() {
   var_0 = self;
   var_0.br_infilstarted = 1;
   var_0 scripts\mp\gametypes\br_pickups::addrespawntoken(1);
@@ -362,7 +362,7 @@ function ref_11c49() {
   var_0 scripts\mp\playerlogic::addtoalivecount("spawnPlayer");
 }
 
-function ref_11fcc() {
+function ref_11FCC() {
   self endon("disconnect");
   var_0 = self;
 
@@ -378,14 +378,14 @@ function ref_11fcc() {
         var_1 = [self];
       }
 
-      var_2 = ref_1322c(var_1);
+      var_2 = ref_1322C(var_1);
 
       if(isDefined(var_2)) {
-        ref_12b12(var_2);
+        ref_12B12(var_2);
       }
     } else {
       var_0 scripts\mp\gametypes\br_public::updatebrscoreboardstat("jumpMasterState", 2);
-      ref_12b12(var_0);
+      ref_12B12(var_0);
     }
   }
 
@@ -441,7 +441,7 @@ function getforcedloadoutweapon() {
   return scripts\mp\class::buildweapon("iw8_pi_golf21", ["reflex", "none", "none", "none", "none"], "none", "none", -1, undefined, undefined, undefined, undefined, undefined, 0);
 }
 
-function ref_1322c(var_0) {
+function ref_1322C(var_0) {
   if(var_0.size == 0) {
     return undefined;
   }
@@ -490,11 +490,11 @@ function ref_1322c(var_0) {
     return undefined;
   }
 
-  var_1 scripts\mp\gametypes\br::ref_1319d(1);
+  var_1 scripts\mp\gametypes\br::ref_1319D(1);
 
   foreach(var_3 in var_0) {
     if(var_3 != var_1) {
-      var_3 scripts\mp\gametypes\br::ref_1319d(0);
+      var_3 scripts\mp\gametypes\br::ref_1319D(0);
     }
 
     var_16 = scripts\engine\utility::ter_op(var_3 scripts\mp\gametypes\br_public::updatedragonsbreath(), 2, 1);
@@ -589,7 +589,7 @@ function firesaleforplayers(var_0, var_1) {
 
   if(isDefined(var_0)) {
     var_0.animstruct = var_2;
-    var_2.ref_11dbf = var_0;
+    var_2.ref_11DBF = var_0;
   }
 
   var_3 = scripts\engine\utility::getStruct("infil_plane_ch2", "script_noteworthy");
@@ -637,21 +637,21 @@ function firesaleforplayers(var_0, var_1) {
   var_2.playerpositionents["parent_squad"] linkTo(var_2.chopper, "tag_origin", (0, 0, 0), (0, 0, 0));
 
   if(var_1 == "script_model") {
-    var_2.ref_1269e = spawn("script_model", var_2.origin);
-    var_2.ref_1269e setModel("fullbody_usmc_ar_br_infil");
-    var_2.ref_1269e linkTo(var_2.playerpositionents["parent_solo"], "j_prop_1", (0, 0, 0), (0, 0, 0));
-    var_2.ref_1269f = spawn("script_model", var_2.origin);
-    var_2.ref_1269f setModel("fullbody_usmc_ar_br_infil");
-    var_2.ref_1269f linkTo(var_2.playerpositionents["parent_squad"], "j_prop_1", (0, 0, 0), (0, 0, 0));
-    var_2.ref_126a0 = spawn("script_model", var_2.origin);
-    var_2.ref_126a0 setModel("fullbody_usmc_ar_br_infil");
-    var_2.ref_126a0 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_2", (0, 0, 0), (0, 0, 0));
-    var_2.ref_126a1 = spawn("script_model", var_2.origin);
-    var_2.ref_126a1 setModel("fullbody_usmc_ar_br_infil");
-    var_2.ref_126a1 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_3", (0, 0, 0), (0, 0, 0));
-    var_2.ref_126a2 = spawn("script_model", var_2.origin);
-    var_2.ref_126a2 setModel("fullbody_usmc_ar_br_infil");
-    var_2.ref_126a2 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_4", (0, 0, 0), (0, 0, 0));
+    var_2.ref_1269E = spawn("script_model", var_2.origin);
+    var_2.ref_1269E setModel("fullbody_usmc_ar_br_infil");
+    var_2.ref_1269E linkTo(var_2.playerpositionents["parent_solo"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+    var_2.ref_1269F = spawn("script_model", var_2.origin);
+    var_2.ref_1269F setModel("fullbody_usmc_ar_br_infil");
+    var_2.ref_1269F linkTo(var_2.playerpositionents["parent_squad"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+    var_2.ref_126A0 = spawn("script_model", var_2.origin);
+    var_2.ref_126A0 setModel("fullbody_usmc_ar_br_infil");
+    var_2.ref_126A0 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_2", (0, 0, 0), (0, 0, 0));
+    var_2.ref_126A1 = spawn("script_model", var_2.origin);
+    var_2.ref_126A1 setModel("fullbody_usmc_ar_br_infil");
+    var_2.ref_126A1 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_3", (0, 0, 0), (0, 0, 0));
+    var_2.ref_126A2 = spawn("script_model", var_2.origin);
+    var_2.ref_126A2 setModel("fullbody_usmc_ar_br_infil");
+    var_2.ref_126A2 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_4", (0, 0, 0), (0, 0, 0));
     var_2.infil_anim_type = "script_model";
   } else {
     var_2.playerpositionents["child_solo"] = spawn("script_model", var_2.playerpositionents["parent_solo"] gettagorigin("j_prop_1"));
@@ -702,7 +702,7 @@ function fix_collision(var_0, var_1) {
 
   if(isDefined(var_0)) {
     var_0.animstruct = var_2;
-    var_2.ref_11dc3 = var_0;
+    var_2.ref_11DC3 = var_0;
   }
 
   var_2.ref_13886 = getEnt("infil_plane_ch3", "script_noteworthy");
@@ -725,9 +725,9 @@ function fix_collision(var_0, var_1) {
   var_2.chopper_kill_person setModel("veh8_mil_air_skilo_interior_infil_int_bags_back_right_low");
   var_2.chopper_kill_person linkTo(var_2.ref_13886, "tag_bags_back_right_low", (0, 0, 0), (0, 0, 0));
   var_2.ref_12915 = [var_2.chopper_kill, var_2.chopper_kill_vehicle, var_2.chopper_kill_person];
-  var_2.ref_12d98 = spawn("script_model", var_2.ref_13886.origin);
-  var_2.ref_12d98 setModel("veh8_mil_air_skilo_interior_infil_ropes");
-  var_2.ref_12d98 linkTo(var_2.ref_13886, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_2.ref_12D98 = spawn("script_model", var_2.ref_13886.origin);
+  var_2.ref_12D98 setModel("veh8_mil_air_skilo_interior_infil_ropes");
+  var_2.ref_12D98 linkTo(var_2.ref_13886, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_2.ref_13887 = getEnt("infil_skilo_door", "script_noteworthy");
   var_2.staticskilointerior = getEnt("static_skilo_interior", "script_noteworthy");
   var_2.staticskiloexterior = getEnt("static_skilo_exterior", "script_noteworthy");
@@ -760,21 +760,21 @@ function fix_collision(var_0, var_1) {
   var_2.playerpositionents["parent_squad"] linkTo(var_2.ref_13886, "tag_origin", (0, 0, 0), (0, 0, 0));
 
   if(var_1 == "script_model") {
-    var_2.ref_1269e = spawn("script_model", var_2.ref_13886.origin);
-    var_2.ref_1269e setModel("fullbody_usmc_ar_br_infil");
-    var_2.ref_1269e linkTo(var_2.playerpositionents["parent_solo"], "j_prop_1", (0, 0, 0), (0, 0, 0));
-    var_2.ref_1269f = spawn("script_model", var_2.ref_13886.origin);
-    var_2.ref_1269f setModel("fullbody_usmc_ar_br_infil");
-    var_2.ref_1269f linkTo(var_2.playerpositionents["parent_squad"], "j_prop_1", (0, 0, 0), (0, 0, 0));
-    var_2.ref_126a0 = spawn("script_model", var_2.ref_13886.origin);
-    var_2.ref_126a0 setModel("fullbody_usmc_ar_br_infil");
-    var_2.ref_126a0 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_2", (0, 0, 0), (0, 0, 0));
-    var_2.ref_126a1 = spawn("script_model", var_2.ref_13886.origin);
-    var_2.ref_126a1 setModel("fullbody_usmc_ar_br_infil");
-    var_2.ref_126a1 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_3", (0, 0, 0), (0, 0, 0));
-    var_2.ref_126a2 = spawn("script_model", var_2.ref_13886.origin);
-    var_2.ref_126a2 setModel("fullbody_usmc_ar_br_infil");
-    var_2.ref_126a2 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_4", (0, 0, 0), (0, 0, 0));
+    var_2.ref_1269E = spawn("script_model", var_2.ref_13886.origin);
+    var_2.ref_1269E setModel("fullbody_usmc_ar_br_infil");
+    var_2.ref_1269E linkTo(var_2.playerpositionents["parent_solo"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+    var_2.ref_1269F = spawn("script_model", var_2.ref_13886.origin);
+    var_2.ref_1269F setModel("fullbody_usmc_ar_br_infil");
+    var_2.ref_1269F linkTo(var_2.playerpositionents["parent_squad"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+    var_2.ref_126A0 = spawn("script_model", var_2.ref_13886.origin);
+    var_2.ref_126A0 setModel("fullbody_usmc_ar_br_infil");
+    var_2.ref_126A0 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_2", (0, 0, 0), (0, 0, 0));
+    var_2.ref_126A1 = spawn("script_model", var_2.ref_13886.origin);
+    var_2.ref_126A1 setModel("fullbody_usmc_ar_br_infil");
+    var_2.ref_126A1 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_3", (0, 0, 0), (0, 0, 0));
+    var_2.ref_126A2 = spawn("script_model", var_2.ref_13886.origin);
+    var_2.ref_126A2 setModel("fullbody_usmc_ar_br_infil");
+    var_2.ref_126A2 linkTo(var_2.playerpositionents["parent_squad"], "j_prop_4", (0, 0, 0), (0, 0, 0));
     var_2.infil_anim_type = "script_model";
   } else {
     var_2.playerpositionents["child_solo"] = spawn("script_model", var_2.playerpositionents["parent_solo"] gettagorigin("j_prop_1"));
@@ -795,8 +795,8 @@ function fix_collision(var_0, var_1) {
     var_2.infil_anim_type = "player";
   }
 
-  if(isDefined(var_0) && isDefined(var_2.ref_11dc3.innards)) {
-    var_2.ref_11dc3.innards linkTo(var_2.ref_11dc3, "", (0, 0, 0), (0, 0, 0));
+  if(isDefined(var_0) && isDefined(var_2.ref_11DC3.innards)) {
+    var_2.ref_11DC3.innards linkTo(var_2.ref_11DC3, "", (0, 0, 0), (0, 0, 0));
   }
 
   return var_2;
@@ -827,24 +827,24 @@ function handlefriendlyvisibility(var_0) {
     }
   }
 
-  if(isDefined(var_0.ref_1269e)) {
-    var_0.ref_1269e delete();
+  if(isDefined(var_0.ref_1269E)) {
+    var_0.ref_1269E delete();
   }
 
-  if(isDefined(var_0.ref_1269f)) {
-    var_0.ref_1269f delete();
+  if(isDefined(var_0.ref_1269F)) {
+    var_0.ref_1269F delete();
   }
 
-  if(isDefined(var_0.ref_126a0)) {
-    var_0.ref_126a0 delete();
+  if(isDefined(var_0.ref_126A0)) {
+    var_0.ref_126A0 delete();
   }
 
-  if(isDefined(var_0.ref_126a1)) {
-    var_0.ref_126a1 delete();
+  if(isDefined(var_0.ref_126A1)) {
+    var_0.ref_126A1 delete();
   }
 
-  if(isDefined(var_0.ref_126a2)) {
-    var_0.ref_126a2 delete();
+  if(isDefined(var_0.ref_126A2)) {
+    var_0.ref_126A2 delete();
   }
 
   if(isDefined(var_0.gas_trigger_think)) {
@@ -875,18 +875,18 @@ function handlefriendlyvisibility(var_0) {
     var_0.chopper delete();
   }
 
-  if(isDefined(var_0.ref_11dbf) && istrue(var_0.ref_11dbf.cleanme)) {
-    if(isDefined(var_0.ref_11dbf.innards) && istrue(var_0.ref_11dbf.innards.cleanme)) {
-      var_0.ref_11dbf.innards delete();
+  if(isDefined(var_0.ref_11DBF) && istrue(var_0.ref_11DBF.cleanme)) {
+    if(isDefined(var_0.ref_11DBF.innards) && istrue(var_0.ref_11DBF.innards.cleanme)) {
+      var_0.ref_11DBF.innards delete();
     }
 
-    var_0.ref_11dbf delete();
+    var_0.ref_11DBF delete();
     return;
   }
 }
 
 function handleimpact(var_0) {
-  scripts\mp\utility\sound::ref_12c2a("br_infil_skilo");
+  scripts\mp\utility\sound::ref_12C2A("br_infil_skilo");
 
   if(isDefined(var_0.playerpositionents)) {
     foreach(var_2 in var_0.playerpositionents) {
@@ -894,24 +894,24 @@ function handleimpact(var_0) {
     }
   }
 
-  if(isDefined(var_0.ref_1269e)) {
-    var_0.ref_1269e delete();
+  if(isDefined(var_0.ref_1269E)) {
+    var_0.ref_1269E delete();
   }
 
-  if(isDefined(var_0.ref_1269f)) {
-    var_0.ref_1269f delete();
+  if(isDefined(var_0.ref_1269F)) {
+    var_0.ref_1269F delete();
   }
 
-  if(isDefined(var_0.ref_126a0)) {
-    var_0.ref_126a0 delete();
+  if(isDefined(var_0.ref_126A0)) {
+    var_0.ref_126A0 delete();
   }
 
-  if(isDefined(var_0.ref_126a1)) {
-    var_0.ref_126a1 delete();
+  if(isDefined(var_0.ref_126A1)) {
+    var_0.ref_126A1 delete();
   }
 
-  if(isDefined(var_0.ref_126a2)) {
-    var_0.ref_126a2 delete();
+  if(isDefined(var_0.ref_126A2)) {
+    var_0.ref_126A2 delete();
   }
 
   if(isDefined(var_0.gas_trigger_think)) {
@@ -930,8 +930,8 @@ function handleimpact(var_0) {
     var_0.gas_vfx_and_triggers delete();
   }
 
-  if(isDefined(var_0.ref_12d98)) {
-    var_0.ref_12d98 delete();
+  if(isDefined(var_0.ref_12D98)) {
+    var_0.ref_12D98 delete();
   }
 
   foreach(var_5 in var_0.ref_12915) {
@@ -964,20 +964,20 @@ function handleimpact(var_0) {
     var_0.staticskilotoplight delete();
   }
 
-  if(isDefined(var_0.ref_11dc3) && istrue(var_0.ref_11dc3.cleanme)) {
-    if(isDefined(var_0.ref_11dc3.innards) && istrue(var_0.ref_11dc3.innards.cleanme)) {
-      var_0.ref_11dc3.innards delete();
+  if(isDefined(var_0.ref_11DC3) && istrue(var_0.ref_11DC3.cleanme)) {
+    if(isDefined(var_0.ref_11DC3.innards) && istrue(var_0.ref_11DC3.innards.cleanme)) {
+      var_0.ref_11DC3.innards delete();
     }
 
-    if(isDefined(var_0.ref_11dc3.bunker_numberstation) && istrue(var_0.ref_11dc3.bunker_numberstation.cleanme)) {
-      var_0.ref_11dc3.bunker_numberstation delete();
+    if(isDefined(var_0.ref_11DC3.bunker_numberstation) && istrue(var_0.ref_11DC3.bunker_numberstation.cleanme)) {
+      var_0.ref_11DC3.bunker_numberstation delete();
     }
 
-    if(isDefined(var_0.ref_11dc3.door) && istrue(var_0.ref_11dc3.door.cleanme)) {
-      var_0.ref_11dc3.door delete();
+    if(isDefined(var_0.ref_11DC3.door) && istrue(var_0.ref_11DC3.door.cleanme)) {
+      var_0.ref_11DC3.door delete();
     }
 
-    var_0.ref_11dc3 delete();
+    var_0.ref_11DC3 delete();
     return;
   }
 }
@@ -1043,8 +1043,8 @@ function remove_veh_spawners_from_passive_wave_spawning(var_0) {
 function remove_usability_crutch_on_death(var_0) {
   var_1 = self getplayerangles(1);
   var_2 = anglesToForward(var_1);
-  var_3 = anglesToForward(var_0.ref_11dbf.angles);
-  var_4 = anglestoright(var_0.ref_11dbf.angles);
+  var_3 = anglesToForward(var_0.ref_11DBF.angles);
+  var_4 = anglestoright(var_0.ref_11DBF.angles);
   var_5 = vectordot(var_2, var_3);
   var_6 = vectordot(var_2, var_4);
   var_7 = cos(45);
@@ -1099,8 +1099,8 @@ function remove_tank_class(var_0) {
 function removeaccesscard(var_0) {
   var_1 = self getplayerangles(1);
   var_2 = anglesToForward(var_1);
-  var_3 = anglesToForward(var_0.ref_11dc3.angles);
-  var_4 = anglestoright(var_0.ref_11dc3.angles);
+  var_3 = anglesToForward(var_0.ref_11DC3.angles);
+  var_4 = anglestoright(var_0.ref_11DC3.angles);
   var_5 = vectordot(var_2, var_3);
   var_6 = vectordot(var_2, var_4);
   var_7 = cos(45);
@@ -1124,7 +1124,7 @@ function removeaccesscard(var_0) {
   return ["wz_infil_skilo_jump_genpropx10_180_r", %wz_infil_skilo_jump_genpropx10_180_r, "wz_infil_skilo_jump01_pl01_180_r"];
 }
 
-function ref_1274b(var_0) {
+function ref_1274B(var_0) {
   var_1 = "";
 
   if(var_0 scripts\mp\gametypes\br_public::updatedragonsbreath()) {
@@ -1133,7 +1133,7 @@ function ref_1274b(var_0) {
     var_1 = "br_infil_squadmate_jump";
   }
 
-  var_0 scripts\mp\gametypes\br_public::ref_1276a(var_1, var_0.team, var_0);
+  var_0 scripts\mp\gametypes\br_public::ref_1276A(var_1, var_0.team, var_0);
 }
 
 function watchinfiljumpanim(var_0) {
@@ -1187,7 +1187,7 @@ function watchinfiljumpanim(var_0) {
       var_4.infilanimindex = undefined;
       var_4 stopanimscriptsceneevent();
       var_4 notify("infil_jump_done");
-      var_4 scripts\mp\gametypes\br::ref_1254e();
+      var_4 scripts\mp\gametypes\br::ref_1254E();
     }
 
     if(var_13) {
@@ -1206,7 +1206,7 @@ function watchinfiljumpanim(var_0) {
             }
 
             var_4 playershow(1);
-            thread ref_1274b(level);
+            thread ref_1274B(level);
           }
 
           return;
@@ -1223,7 +1223,7 @@ function watchinfiljumpanim(var_0) {
 }
 
 function playinfilplayeranims(var_0, var_1) {
-  var_2 = ref_1256d(var_0);
+  var_2 = ref_1256D(var_0);
   var_3 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, level.players);
 
   foreach(var_5 in var_3) {
@@ -1232,12 +1232,12 @@ function playinfilplayeranims(var_0, var_1) {
     }
 
     var_5 thread[[level.parachutetakeweaponscb]]();
-    var_5 scripts\mp\gametypes\br::ref_1254d();
-    scripts\mp\utility\game::ref_131a3(var_5, 1);
+    var_5 scripts\mp\gametypes\br::ref_1254D();
+    scripts\mp\utility\game::ref_131A3(var_5, 1);
     var_5.plotarmor = 1;
     var_5 unlink();
     playerlinktopositionent(var_5, var_0);
-    var_6 = ref_1256e(var_5, var_0);
+    var_6 = ref_1256E(var_5, var_0);
     var_5 playanimscriptsceneevent("scripted_scene", var_6);
   }
 
@@ -1253,7 +1253,7 @@ function playinfilplayeranims(var_0, var_1) {
   }
 }
 
-function ref_1256d(var_0) {
+function ref_1256D(var_0) {
   if(scripts\mp\gametypes\br_public::tv_station_intro_already_played()) {
     return getanimlength(%wz_infil_mindia8_solo_player);
   }
@@ -1265,7 +1265,7 @@ function ref_1256d(var_0) {
   return getanimlength(%sdr_mp_infil_ac130_redux_player1);
 }
 
-function ref_1256e(var_0) {
+function ref_1256E(var_0) {
   var_1 = "";
   var_2 = self hasfemalecustomizationmodel();
 
@@ -1292,7 +1292,7 @@ function ref_1256e(var_0) {
   return "sdr_mp_infil_ac130_redux_player" + self.infilanimindex;
 }
 
-function ref_1256f(var_0) {
+function ref_1256F(var_0) {
   if(scripts\mp\gametypes\br_public::tv_station_intro_already_played()) {
     if(self.stop_counter_beep_sfx_on_bomb_vests) {
       return "wz_infil_mindia8_loop_pl01";
@@ -1375,12 +1375,12 @@ function playerplayinfilloopanim(var_0) {
     self.stop_counter_beep_sfx_on_bomb_vests = var_1.size == 1;
   }
 
-  var_2 = ref_1256f(var_0);
+  var_2 = ref_1256F(var_0);
   self playanimscriptsceneevent("scripted_scene", var_2);
   thread watchinfiljumpanim(var_0);
 }
 
-function ref_12ab5(var_0) {
+function ref_12AB5(var_0) {
   var_0 endon("stopScene");
   var_0.staticc130 waittillmatch("plane", "gored");
   var_1 = getentitylessscriptablearrayinradius("infil_blinking_light", "script_noteworthy");
@@ -1400,7 +1400,7 @@ function serverroomrewardlocs(var_0) {
   }
 }
 
-function ref_133b1(var_0) {
+function ref_133B1(var_0) {
   var_0 endon("stopScene");
   var_1 = getentitylessscriptablearrayinradius("infil_green_light", "script_noteworthy");
   var_2 = getentitylessscriptablearrayinradius("infil_green_light_spot", "script_noteworthy");
@@ -1442,7 +1442,7 @@ function ref_133b1(var_0) {
   }
 }
 
-function ref_11fac(var_0) {
+function ref_11FAC(var_0) {
   var_1 = getentitylessscriptablearrayinradius("infil_blinking_light", "script_noteworthy");
 
   foreach(var_3 in var_1) {
@@ -1450,7 +1450,7 @@ function ref_11fac(var_0) {
   }
 }
 
-function ref_126f4(var_0, var_1) {
+function ref_126F4(var_0, var_1) {
   var_0 endon("stopScene");
   var_0.staticc130 scripts\engine\utility::waittill_match_or_timeout("plane", "opendoor", 30);
   var_2 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, level.players);
@@ -1460,10 +1460,10 @@ function ref_126f4(var_0, var_1) {
       continue;
     }
 
-    var_4 scripts\mp\utility\player::ref_1328c("100", 1);
+    var_4 scripts\mp\utility\player::ref_1328C("100", 1);
   }
 
-  var_0.aidoorchief scripts\mp\utility\player::ref_1328c("100");
+  var_0.aidoorchief scripts\mp\utility\player::ref_1328C("100");
 }
 
 function headoffset(var_0, var_1) {
@@ -1477,10 +1477,10 @@ function headoffset(var_0, var_1) {
     var_4.manualoverridewindmaterial = undefined;
   }
 
-  var_0.aidoorchief scripts\mp\utility\player::ref_1328c("0");
+  var_0.aidoorchief scripts\mp\utility\player::ref_1328C("0");
 }
 
-function ref_126f5(var_0, var_1) {
+function ref_126F5(var_0, var_1) {
   var_0 endon("stopScene");
   var_2 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, level.players);
 
@@ -1489,7 +1489,7 @@ function ref_126f5(var_0, var_1) {
       continue;
     }
 
-    var_4 scripts\mp\utility\player::ref_1328c("80", 1);
+    var_4 scripts\mp\utility\player::ref_1328C("80", 1);
   }
 }
 
@@ -1505,7 +1505,7 @@ function headshot_distance(var_0, var_1) {
   }
 }
 
-function ref_126f6(var_0, var_1) {
+function ref_126F6(var_0, var_1) {
   var_0 endon("stopScene");
   var_0.gas_trigger_think scripts\engine\utility::waittill_match_or_timeout("camera", "opendoor", 30);
   var_2 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, level.players);
@@ -1515,7 +1515,7 @@ function ref_126f6(var_0, var_1) {
       continue;
     }
 
-    var_4 scripts\mp\utility\player::ref_1328c("80", 1);
+    var_4 scripts\mp\utility\player::ref_1328C("80", 1);
   }
 }
 
@@ -1570,7 +1570,7 @@ function health_remaining_max(var_0) {
   }
 }
 
-function ref_131bf(var_0) {
+function ref_131BF(var_0) {
   ref_14361(2);
   var_1 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, level.players);
 
@@ -1584,7 +1584,7 @@ function ref_131bf(var_0) {
   }
 }
 
-function ref_12c3e(var_0) {
+function ref_12C3E(var_0) {
   var_1 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, level.players);
 
   foreach(var_3 in var_1) {
@@ -1625,11 +1625,11 @@ function ref_12c3e(var_0) {
   }
 }
 
-function ref_1273c(var_0, var_1) {
-  ref_12c3e(var_1);
+function ref_1273C(var_0, var_1) {
+  ref_12C3E(var_1);
 
   if(scripts\mp\gametypes\br_public::tv_station_intro_already_played()) {
-    ref_1245a(var_0, var_1);
+    ref_1245A(var_0, var_1);
     return;
   }
 
@@ -1641,24 +1641,24 @@ function ref_1273c(var_0, var_1) {
   playac130infilanim(var_0, var_1);
 }
 
-function ref_1245a(var_0, var_1) {
-  thread ref_131bf(var_1);
+function ref_1245A(var_0, var_1) {
+  thread ref_131BF(var_1);
   ref_12459(var_0, var_1);
-  ref_13ce9(var_0, var_1);
+  ref_13CE9(var_0, var_1);
   mp_m_trench_patch_giveplayer_c4(var_0, var_1);
 }
 
 function playac130infilanim(var_0, var_1) {
-  thread ref_131bf(var_1);
+  thread ref_131BF(var_1);
   ref_12442(var_0, var_1);
-  ref_13ce8(var_0, var_1);
+  ref_13CE8(var_0, var_1);
   mp_m_speed_patch(var_0, var_1);
 }
 
 function ref_12765(var_0, var_1) {
-  thread ref_131bf(var_1);
+  thread ref_131BF(var_1);
   ref_12764(var_0, var_1);
-  ref_13cf1(var_0, var_1);
+  ref_13CF1(var_0, var_1);
   neverspectate(var_0, var_1);
 }
 
@@ -1668,7 +1668,7 @@ function helicopter_death_lockon_clear(var_0) {
   triggerfx(var_0.helicountdownendcallback);
 }
 
-function ref_1324f(var_0) {
+function ref_1324F(var_0) {
   var_0.x = 0;
   var_0.y = 0;
   var_0 setshader("white", 640, 480);
@@ -1727,7 +1727,7 @@ function patch_ent_fixes(var_0, var_1) {
 
   if(var_4) {
     level.stop_passedby_once = newhudelem();
-    ref_1324f(level.stop_passedby_once);
+    ref_1324F(level.stop_passedby_once);
   } else {
     foreach(var_6 in var_3) {
       if(!isDefined(var_6)) {
@@ -1735,7 +1735,7 @@ function patch_ent_fixes(var_0, var_1) {
       }
 
       var_6.stop_passedby_once = newclienthudelem(var_6);
-      ref_1324f(var_6.stop_passedby_once);
+      ref_1324F(var_6.stop_passedby_once);
     }
   }
 
@@ -1945,7 +1945,7 @@ function cargo_truck_mg_initinteract(var_0, var_1) {
       }
     }
 
-    ref_12acc();
+    ref_12ACC();
 
     foreach(var_12 in level.players) {
       if(isDefined(var_12) && !isDefined(var_12.stop_counter_beep_sfx_on_bomb_vests)) {
@@ -1989,7 +1989,7 @@ function ref_12442(var_0, var_1) {
       var_10 setsoundsubmix("mp_br_infil_anim", 0);
       var_10 setsoundsubmix("mp_br_infil_music", 0);
 
-      if(!istrue(level.vehicle_collision_getleveldata) && !isDefined(level.ref_12d05)) {
+      if(!istrue(level.vehicle_collision_getleveldata) && !isDefined(level.ref_12D05)) {
         var_10 setsoundsubmix("mp_br_infil_ac130", 0);
       }
 
@@ -2028,10 +2028,10 @@ function ref_12442(var_0, var_1) {
   }
 
   var_0.aidoorchief scriptmodelplayanim("sdr_mp_infil_ac130_redux_doorchief", "doorchief");
-  thread ref_11fac(level);
-  thread ref_12ab5(level);
+  thread ref_11FAC(level);
+  thread ref_12AB5(level);
   thread serverroomrewardlocs(level);
-  thread ref_126f4(level, var_0);
+  thread ref_126F4(level, var_0);
   thread helicopter_death_lockon_clear(level);
   thread patch_ent_fixes(level, var_0);
   thread stimmodelattached(level);
@@ -2061,8 +2061,8 @@ function ref_12459(var_0, var_1, var_2, var_3) {
     var_0.gas_vfx_and_triggers scriptmodelplayanim("wz_infil_mindia8_squad_cam", "camera");
   }
 
-  if(isDefined(var_0.ref_11dbf)) {
-    var_0.ref_11dbf stoploopsound();
+  if(isDefined(var_0.ref_11DBF)) {
+    var_0.ref_11DBF stoploopsound();
   }
 
   var_0.bot_gametype_attacker_defender_ai_director_update hide();
@@ -2078,7 +2078,7 @@ function ref_12459(var_0, var_1, var_2, var_3) {
     var_11 setsoundsubmix("mp_br_infil_anim", 0);
     var_11 setsoundsubmix("mp_br_infil_music", 0);
 
-    if(!istrue(level.vehicle_collision_getleveldata) && !isDefined(level.ref_12d05)) {
+    if(!istrue(level.vehicle_collision_getleveldata) && !isDefined(level.ref_12D05)) {
       var_11 setsoundsubmix("mp_br_infil_ac130", 0);
     }
 
@@ -2098,8 +2098,8 @@ function ref_12459(var_0, var_1, var_2, var_3) {
 
   thread healthpool(var_1);
 
-  if(isDefined(var_0.ref_11dbf)) {
-    var_0.ref_11dbf setscriptablepartstate("infil_fx_hero", "on");
+  if(isDefined(var_0.ref_11DBF)) {
+    var_0.ref_11DBF setscriptablepartstate("infil_fx_hero", "on");
   }
 
   var_0.playerpositionents["parent_solo"] scriptmodelplayanim("wz_infil_mindia8_solo_character_link", "prop");
@@ -2107,17 +2107,17 @@ function ref_12459(var_0, var_1, var_2, var_3) {
 
   if(var_0.infil_anim_type == "script_model") {
     if(istrue(var_2)) {
-      var_0.ref_1269e show();
-      var_0.ref_1269f hide();
-      var_0.ref_126a0 hide();
-      var_0.ref_126a1 hide();
-      var_0.ref_126a2 hide();
+      var_0.ref_1269E show();
+      var_0.ref_1269F hide();
+      var_0.ref_126A0 hide();
+      var_0.ref_126A1 hide();
+      var_0.ref_126A2 hide();
     } else {
-      var_0.ref_1269e hide();
-      var_0.ref_1269f show();
-      var_0.ref_126a0 show();
-      var_0.ref_126a1 show();
-      var_0.ref_126a2 show();
+      var_0.ref_1269E hide();
+      var_0.ref_1269F show();
+      var_0.ref_126A0 show();
+      var_0.ref_126A1 show();
+      var_0.ref_126A2 show();
     }
 
     var_15 = "";
@@ -2126,11 +2126,11 @@ function ref_12459(var_0, var_1, var_2, var_3) {
       var_15 = "_fem";
     }
 
-    var_0.ref_1269e scriptmodelplayanim("wz_infil_mindia8_solo_player" + var_15, "p1");
-    var_0.ref_1269f scriptmodelplayanim("wz_infil_mindia8_squad_player1" + var_15, "p1");
-    var_0.ref_126a0 scriptmodelplayanim("wz_infil_mindia8_squad_player2" + var_15, "p2");
-    var_0.ref_126a1 scriptmodelplayanim("wz_infil_mindia8_squad_player3" + var_15, "p3");
-    var_0.ref_126a2 scriptmodelplayanim("wz_infil_mindia8_squad_player4" + var_15, "p4");
+    var_0.ref_1269E scriptmodelplayanim("wz_infil_mindia8_solo_player" + var_15, "p1");
+    var_0.ref_1269F scriptmodelplayanim("wz_infil_mindia8_squad_player1" + var_15, "p1");
+    var_0.ref_126A0 scriptmodelplayanim("wz_infil_mindia8_squad_player2" + var_15, "p2");
+    var_0.ref_126A1 scriptmodelplayanim("wz_infil_mindia8_squad_player3" + var_15, "p3");
+    var_0.ref_126A2 scriptmodelplayanim("wz_infil_mindia8_squad_player4" + var_15, "p4");
   } else if(var_0.infil_anim_type == "player") {
     thread playinfilplayeranims(var_0, var_1);
   }
@@ -2150,7 +2150,7 @@ function ref_12459(var_0, var_1, var_2, var_3) {
     }
   }
 
-  thread ref_126f5(level, var_0);
+  thread ref_126F5(level, var_0);
   thread givecustomloadout(level);
   thread patch_ent_fixes(level, var_0);
   thread stompeenemyprogressupdate(level);
@@ -2180,8 +2180,8 @@ function ref_12764(var_0, var_1, var_2, var_3) {
     var_0.gas_vfx_and_triggers scriptmodelplayanim("wz_infil_skilo_squad_cam", "camera");
   }
 
-  if(isDefined(var_0.ref_11dc3)) {
-    var_0.ref_11dc3 stoploopsound();
+  if(isDefined(var_0.ref_11DC3)) {
+    var_0.ref_11DC3 stoploopsound();
   }
 
   var_0.ref_13886 setscriptablepartstate("infil_fx_skilo", "static");
@@ -2205,7 +2205,7 @@ function ref_12764(var_0, var_1, var_2, var_3) {
       var_12 setsoundsubmix("mp_br_infil_anim", 0);
       var_12 setsoundsubmix("mp_br_infil_music", 0);
 
-      if(!istrue(level.vehicle_collision_getleveldata) && !isDefined(level.ref_12d05)) {
+      if(!istrue(level.vehicle_collision_getleveldata) && !isDefined(level.ref_12D05)) {
         var_12 setsoundsubmix("mp_br_infil_ac130", 0);
       }
 
@@ -2222,14 +2222,14 @@ function ref_12764(var_0, var_1, var_2, var_3) {
     var_12 setphysicaldepthoffield(var_5, var_6, var_7, var_8);
     var_12 scripts\mp\utility\player::_freezelookcontrols(1);
     var_12 calloutmarkerping_getinventoryslot(5000);
-    var_12 scripts\mp\gametypes\br_public::ref_126b9(var_0.ref_13886.origin);
+    var_12 scripts\mp\gametypes\br_public::ref_126B9(var_0.ref_13886.origin);
   }
 
   thread healthpool(var_1);
 
-  if(isDefined(var_0.ref_11dc3.bunker_numberstation)) {
-    var_0.ref_11dc3.bunker_numberstation setscriptablepartstate("infil_fx_clouds", "on");
-    var_0.ref_11dc3.bunker_numberstation setscriptablepartstate("infil_fx_skilo", "moving");
+  if(isDefined(var_0.ref_11DC3.bunker_numberstation)) {
+    var_0.ref_11DC3.bunker_numberstation setscriptablepartstate("infil_fx_clouds", "on");
+    var_0.ref_11DC3.bunker_numberstation setscriptablepartstate("infil_fx_skilo", "moving");
   }
 
   thread getlightingvalues();
@@ -2238,17 +2238,17 @@ function ref_12764(var_0, var_1, var_2, var_3) {
 
   if(var_0.infil_anim_type == "script_model") {
     if(istrue(var_2)) {
-      var_0.ref_1269e show();
-      var_0.ref_1269f hide();
-      var_0.ref_126a0 hide();
-      var_0.ref_126a1 hide();
-      var_0.ref_126a2 hide();
+      var_0.ref_1269E show();
+      var_0.ref_1269F hide();
+      var_0.ref_126A0 hide();
+      var_0.ref_126A1 hide();
+      var_0.ref_126A2 hide();
     } else {
-      var_0.ref_1269e hide();
-      var_0.ref_1269f show();
-      var_0.ref_126a0 show();
-      var_0.ref_126a1 show();
-      var_0.ref_126a2 show();
+      var_0.ref_1269E hide();
+      var_0.ref_1269F show();
+      var_0.ref_126A0 show();
+      var_0.ref_126A1 show();
+      var_0.ref_126A2 show();
     }
 
     var_16 = "";
@@ -2257,11 +2257,11 @@ function ref_12764(var_0, var_1, var_2, var_3) {
       var_16 = "_fem";
     }
 
-    var_0.ref_1269e scriptmodelplayanim("wz_infil_skilo_single_sdr01" + var_16, "p1");
-    var_0.ref_1269f scriptmodelplayanim("wz_infil_skilo_squad_sdr01" + var_16, "p1");
-    var_0.ref_126a0 scriptmodelplayanim("wz_infil_skilo_squad_sdr02" + var_16, "p2");
-    var_0.ref_126a1 scriptmodelplayanim("wz_infil_skilo_squad_sdr03" + var_16, "p3");
-    var_0.ref_126a2 scriptmodelplayanim("wz_infil_skilo_squad_sdr04" + var_16, "p4");
+    var_0.ref_1269E scriptmodelplayanim("wz_infil_skilo_single_sdr01" + var_16, "p1");
+    var_0.ref_1269F scriptmodelplayanim("wz_infil_skilo_squad_sdr01" + var_16, "p1");
+    var_0.ref_126A0 scriptmodelplayanim("wz_infil_skilo_squad_sdr02" + var_16, "p2");
+    var_0.ref_126A1 scriptmodelplayanim("wz_infil_skilo_squad_sdr03" + var_16, "p3");
+    var_0.ref_126A2 scriptmodelplayanim("wz_infil_skilo_squad_sdr04" + var_16, "p4");
   } else if(var_0.infil_anim_type == "player") {
     thread playinfilplayeranims(var_0, var_1);
   }
@@ -2270,8 +2270,8 @@ function ref_12764(var_0, var_1, var_2, var_3) {
     var_0.ref_13886 scriptmodelplayanim("wz_infil_skilo_single_veh", "plane", 0, 1);
   }
 
-  if(isDefined(var_0.ref_12d98)) {
-    var_0.ref_12d98 scriptmodelplayanim("wz_infil_skilo_single_veh_ropes", "plane", 0, 1);
+  if(isDefined(var_0.ref_12D98)) {
+    var_0.ref_12D98 scriptmodelplayanim("wz_infil_skilo_single_veh_ropes", "plane", 0, 1);
   }
 
   foreach(var_18 in var_0.ref_12915) {
@@ -2284,21 +2284,21 @@ function ref_12764(var_0, var_1, var_2, var_3) {
     var_0.ref_13887 scriptmodelplayanim("wz_infil_skilo_single_door", "plane", 0, 1);
   }
 
-  thread ref_126f6(level, var_0);
-  thread ref_133b1(level);
+  thread ref_126F6(level, var_0);
+  thread ref_133B1(level);
   thread patch_ent_fixes(level, var_0);
   thread helicopter_firendly_dmg_text_display(level, var_0);
   thread spawn_apache_chopper(level, var_0);
   thread laser_vfx_think(level, var_0);
   thread stimmodelattached(level);
   thread ks_circleminimapradius(level, var_0);
-  thread ref_12e63(level, var_0);
+  thread ref_12E63(level, var_0);
   var_0.gas_trigger_think scripts\engine\utility::waittill_match_or_timeout("camera", "transition", 30);
   var_0 notify("infil_reset_light_dvars");
   thread healdamage(level, var_0);
 }
 
-function ref_12e63(var_0, var_1) {
+function ref_12E63(var_0, var_1) {
   if(getdvarint("scr_br_infil_skilo_safe_remove_black_border", 1) == 0) {
     return;
   }
@@ -2375,14 +2375,14 @@ function ks_circleminimapradius(var_0, var_1) {
       }
 
       var_9 calloutmarkerping_getinventoryslot(0);
-      var_9 scripts\mp\gametypes\br_public::ref_126b9(var_4);
+      var_9 scripts\mp\gametypes\br_public::ref_126B9(var_4);
     }
 
     return;
   }
 }
 
-function ref_138f3(var_0, var_1) {
+function ref_138F3(var_0, var_1) {
   var_2 = remove_objective_on_flag(var_0);
 
   if(isDefined(var_2) && getdvarint("scr_br_streamToMovingPlane", 1) == 1) {
@@ -2395,14 +2395,14 @@ function ref_138f3(var_0, var_1) {
         continue;
       }
 
-      var_6 thread scripts\mp\gametypes\br_public::ref_1252b();
+      var_6 thread scripts\mp\gametypes\br_public::ref_1252B();
     }
 
     return;
   }
 }
 
-function ref_13f06(var_0, var_1) {
+function ref_13F06(var_0, var_1) {
   wait var_0;
   var_2 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, level.players);
 
@@ -2415,7 +2415,7 @@ function ref_13f06(var_0, var_1) {
   }
 }
 
-function ref_13ce8(var_0, var_1) {
+function ref_13CE8(var_0, var_1) {
   var_2 = 65;
   var_3 = 14;
   var_4 = 35;
@@ -2499,10 +2499,10 @@ function ref_13ce8(var_0, var_1) {
     var_2.gas_trigger waittillmatch("camera", "end");
   }
 
-  thread ref_13f06(1.2, var_3);
+  thread ref_13F06(1.2, var_3);
 }
 
-function ref_13ce9(var_0, var_1) {
+function ref_13CE9(var_0, var_1) {
   var_2 = 65;
   var_3 = 14;
   var_4 = 35;
@@ -2552,16 +2552,16 @@ function ref_13ce9(var_0, var_1) {
   var_2.playerpositionents["parent_solo"] unlink();
   var_2.playerpositionents["parent_squad"] unlink();
 
-  if(isDefined(var_2.ref_11dbf)) {
-    var_2.playerpositionents["parent_solo"] linkTo(var_2.ref_11dbf, "", (0, 0, 0), (0, 0, 0));
-    var_2.playerpositionents["parent_squad"] linkTo(var_2.ref_11dbf, "", (0, 0, 0), (0, 0, 0));
-    var_2.ref_11dbf notify("start_moving");
+  if(isDefined(var_2.ref_11DBF)) {
+    var_2.playerpositionents["parent_solo"] linkTo(var_2.ref_11DBF, "", (0, 0, 0), (0, 0, 0));
+    var_2.playerpositionents["parent_squad"] linkTo(var_2.ref_11DBF, "", (0, 0, 0), (0, 0, 0));
+    var_2.ref_11DBF notify("start_moving");
   }
 
   var_2.calloutmarkerpingvo_handleraddnewelement unlink();
 
-  if(isDefined(var_2.ref_11dbf)) {
-    var_2.calloutmarkerpingvo_handleraddnewelement linkTo(var_2.ref_11dbf, "", (0, 0, 0), (0, 0, 0));
+  if(isDefined(var_2.ref_11DBF)) {
+    var_2.calloutmarkerpingvo_handleraddnewelement linkTo(var_2.ref_11DBF, "", (0, 0, 0), (0, 0, 0));
   }
 
   setomnvar("ui_hide_player_icons", 0);
@@ -2578,11 +2578,11 @@ function ref_13ce9(var_0, var_1) {
   thread healthpack_health(var_3);
 
   if(var_2.infil_anim_type == "script_model") {
-    var_2.ref_1269e scriptmodelplayanim("wz_infil_mindia8_loop_pl01", "p1");
-    var_2.ref_1269f scriptmodelplayanim("wz_infil_mindia8_loop_pl01", "p1");
-    var_2.ref_126a0 scriptmodelplayanim("wz_infil_mindia8_loop_pl02", "p2");
-    var_2.ref_126a1 scriptmodelplayanim("wz_infil_mindia8_loop_pl03", "p3");
-    var_2.ref_126a2 scriptmodelplayanim("wz_infil_mindia8_loop_pl04", "p4");
+    var_2.ref_1269E scriptmodelplayanim("wz_infil_mindia8_loop_pl01", "p1");
+    var_2.ref_1269F scriptmodelplayanim("wz_infil_mindia8_loop_pl01", "p1");
+    var_2.ref_126A0 scriptmodelplayanim("wz_infil_mindia8_loop_pl02", "p2");
+    var_2.ref_126A1 scriptmodelplayanim("wz_infil_mindia8_loop_pl03", "p3");
+    var_2.ref_126A2 scriptmodelplayanim("wz_infil_mindia8_loop_pl04", "p4");
   }
 
   var_2.bot_gametype_attacker_defender_ai_director_update hide();
@@ -2593,10 +2593,10 @@ function ref_13ce9(var_0, var_1) {
     var_2.gas_triggers_init waittillmatch("camera", "end");
   }
 
-  thread ref_13f06(1.2, var_3);
+  thread ref_13F06(1.2, var_3);
 }
 
-function ref_13cf1(var_0, var_1) {
+function ref_13CF1(var_0, var_1) {
   var_2 = 65;
   var_3 = 14;
   var_4 = 35;
@@ -2646,10 +2646,10 @@ function ref_13cf1(var_0, var_1) {
   var_2.playerpositionents["parent_solo"] unlink();
   var_2.playerpositionents["parent_squad"] unlink();
 
-  if(isDefined(var_2.ref_11dc3)) {
-    var_2.playerpositionents["parent_solo"] linkTo(var_2.ref_11dc3, "", (0, 0, 0), (0, 0, 0));
-    var_2.playerpositionents["parent_squad"] linkTo(var_2.ref_11dc3, "", (0, 0, 0), (0, 0, 0));
-    var_2.ref_11dc3 notify("start_moving");
+  if(isDefined(var_2.ref_11DC3)) {
+    var_2.playerpositionents["parent_solo"] linkTo(var_2.ref_11DC3, "", (0, 0, 0), (0, 0, 0));
+    var_2.playerpositionents["parent_squad"] linkTo(var_2.ref_11DC3, "", (0, 0, 0), (0, 0, 0));
+    var_2.ref_11DC3 notify("start_moving");
   }
 
   setomnvar("ui_hide_player_icons", 0);
@@ -2674,15 +2674,15 @@ function ref_13cf1(var_0, var_1) {
 
   thread ref_12766(level);
 
-  if(isDefined(var_2.ref_11dc3.door)) {
-    var_2.ref_11dc3.door scriptmodelplayanim("wz_infil_skilo_single_door_loop", "plane", 0, 1);
+  if(isDefined(var_2.ref_11DC3.door)) {
+    var_2.ref_11DC3.door scriptmodelplayanim("wz_infil_skilo_single_door_loop", "plane", 0, 1);
   }
 
   if(isDefined(var_2.gas_triggers_init)) {
     var_2.gas_triggers_init waittillmatch("camera", "end");
   }
 
-  thread ref_13f06(1.2, var_3);
+  thread ref_13F06(1.2, var_3);
 }
 
 function mp_m_speed_patch(var_0, var_1) {
@@ -2708,14 +2708,14 @@ function mp_m_speed_patch(var_0, var_1) {
     var_4 scripts\mp\utility\player::setdof_default();
   }
 
-  thread ref_138f3(level, var_0);
+  thread ref_138F3(level, var_0);
 }
 
 function mp_m_trench_patch_giveplayer_c4(var_0, var_1) {
   var_0.chopper stoploopsound();
 
-  if(isDefined(var_0.ref_11dbf)) {
-    var_0.ref_11dbf playLoopSound("br_heli_infil_hero_lp");
+  if(isDefined(var_0.ref_11DBF)) {
+    var_0.ref_11DBF playLoopSound("br_heli_infil_hero_lp");
   }
 
   var_2 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, level.players);
@@ -2733,15 +2733,15 @@ function mp_m_trench_patch_giveplayer_c4(var_0, var_1) {
     var_4 scripts\mp\utility\player::setdof_default();
   }
 
-  thread ref_138f3(level, var_0);
+  thread ref_138F3(level, var_0);
 }
 
 function neverspectate(var_0, var_1) {
   thread wires_on_bombs();
   var_0.ref_13886 stoploopsound();
 
-  if(isDefined(var_0.ref_11dc3)) {
-    var_0.ref_11dc3 playLoopSound("br_infil_skilo_plane_lp");
+  if(isDefined(var_0.ref_11DC3)) {
+    var_0.ref_11DC3 playLoopSound("br_infil_skilo_plane_lp");
   }
 
   var_2 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, level.players);
@@ -2758,7 +2758,7 @@ function neverspectate(var_0, var_1) {
     var_4 scripts\mp\utility\player::setdof_default();
   }
 
-  thread ref_138f3(level, var_0);
+  thread ref_138F3(level, var_0);
 }
 
 function stop_hotjoining(var_0) {
@@ -2807,10 +2807,10 @@ function playac130infilloopanims(var_0) {
 }
 
 function ref_12766(var_0) {
-  if(isDefined(var_0.ref_11dc3)) {
-    var_0.ref_11dc3 scriptmodelplayanim("wz_infil_skilo_loop_veh", "plane");
-    var_0.ref_11dc3.bunker_numberstation scriptmodelplayanim("wz_infil_skilo_loop_veh", "plane");
-    var_0.ref_11dc3.innards scriptmodelplayanim("wz_infil_skilo_loop_veh", "planeInnards");
+  if(isDefined(var_0.ref_11DC3)) {
+    var_0.ref_11DC3 scriptmodelplayanim("wz_infil_skilo_loop_veh", "plane");
+    var_0.ref_11DC3.bunker_numberstation scriptmodelplayanim("wz_infil_skilo_loop_veh", "plane");
+    var_0.ref_11DC3.innards scriptmodelplayanim("wz_infil_skilo_loop_veh", "planeInnards");
   }
 
   var_0.playerpositionents["parent_solo"] scriptmodelplayanim("wz_infil_skilo_loop_genpropx10", "prop");
@@ -2818,9 +2818,9 @@ function ref_12766(var_0) {
 }
 
 function ref_12520(var_0) {
-  if(isDefined(var_0.ref_11dbf)) {
-    var_0.ref_11dbf scriptmodelplayanim("wz_infil_mindia8_loop_veh", "plane");
-    var_0.ref_11dbf.innards scriptmodelplayanim("wz_infil_mindia8_loop_veh", "planeInnards");
+  if(isDefined(var_0.ref_11DBF)) {
+    var_0.ref_11DBF scriptmodelplayanim("wz_infil_mindia8_loop_veh", "plane");
+    var_0.ref_11DBF.innards scriptmodelplayanim("wz_infil_mindia8_loop_veh", "planeInnards");
   }
 
   var_0.playerpositionents["parent_solo"] scriptmodelplayanim("wz_infil_mindia8_loop_genpropx10", "prop");
@@ -3117,8 +3117,8 @@ function stopchallengetimer(var_0) {
   wait var_1;
   var_2 = scripts\engine\utility::ter_op(isDefined(var_0), var_0, level.players);
 
-  if(isDefined(level.ref_133b4)) {
-    level.ref_133b4 = undefined;
+  if(isDefined(level.ref_133B4)) {
+    level.ref_133B4 = undefined;
   }
 
   foreach(var_4 in var_2) {
@@ -3222,11 +3222,11 @@ function remove_outline(var_0) {
 
 function remove_objective_on_flag(var_0) {
   if(scripts\mp\gametypes\br_public::tv_station_intro_already_played()) {
-    return var_0.ref_11dbf;
+    return var_0.ref_11DBF;
   }
 
   if(scripts\mp\gametypes\br_public::usefailcapacitymsg()) {
-    return var_0.ref_11dc3;
+    return var_0.ref_11DC3;
   }
 
   return var_0.movingc130;
@@ -3284,7 +3284,7 @@ function clear_tier_lights(var_0, var_1, var_2) {
 
   if(getdvarint("scr_br_c130_intro_s2", 0) == 1) {
     var_10 = 1;
-    ref_13cf0(var_3, "player", var_8, 1);
+    ref_13CF0(var_3, "player", var_8, 1);
     stoparmorinsert(var_3, "mp_donetsk_c130_intro_s2");
     stop_with_front_truck(var_3, "mp_donetsk_c130_intro_s2", var_9, 0, "s2");
     stopchallengetimer(var_3);
@@ -3297,7 +3297,7 @@ function clear_tier_lights(var_0, var_1, var_2) {
       var_5 setplayermusicstate(game["music"]["br_infil_intro"][var_12]);
     }
   } else if(scripts\mp\utility\game::round_vehicle_logic() == "reveal") {
-    ref_13cf0(var_3, var_1, var_8, 0);
+    ref_13CF0(var_3, var_1, var_8, 0);
     var_15 = undefined;
     var_16 = 0;
 
@@ -3314,7 +3314,7 @@ function clear_tier_lights(var_0, var_1, var_2) {
     stop_with_front_truck(var_3, var_15, var_9, var_16, "infil_dov_part1");
     stopchallengetimer(var_3);
   } else if(scripts\mp\utility\game::round_vehicle_logic() == "mendota") {
-    ref_13cf0(var_8, var_3, var_10, 0);
+    ref_13CF0(var_8, var_3, var_10, 0);
     var_15 = "mendota_infil_intro";
     var_16 = 0;
     var_17 = "skilo_infil_mxp";
@@ -3323,7 +3323,7 @@ function clear_tier_lights(var_0, var_1, var_2) {
     stop_with_front_truck(var_8, var_15, var_15, var_16, var_17);
     stopchallengetimer(var_8);
   } else if(scripts\mp\utility\game::round_vehicle_logic() == "tdbd") {
-    ref_13cf0(var_15, var_9, var_15, 0);
+    ref_13CF0(var_15, var_9, var_15, 0);
     var_15 = "mp_wz_tdbd_plane_intro";
     var_16 = 0;
     var_17 = "skilo_infil";
@@ -3337,7 +3337,7 @@ function clear_tier_lights(var_0, var_1, var_2) {
     stop_with_front_truck(var_15, var_15, var_16, var_16, "terminus_infil");
     stopchallengetimer(var_15);
   } else {
-    ref_13cf0(var_16, var_16, var_15, 0);
+    ref_13CF0(var_16, var_16, var_15, 0);
     var_15 = undefined;
     var_16 = 0;
     var_17 = undefined;
@@ -3392,16 +3392,16 @@ function clear_tier_lights(var_0, var_1, var_2) {
     thread infilsetupterminusbink(level, var_16);
   }
 
-  ref_1273c(var_17, var_15);
+  ref_1273C(var_17, var_15);
   var_16 = scripts\engine\utility::ter_op(isDefined(var_15), var_15, level.players);
-  ref_13cee(var_16, var_16);
+  ref_13CEE(var_16, var_16);
   level.stop_end_breach_fx = 0;
   level.infilstruct.infil_anim_type = var_16;
 
   if(isDefined(level.obit_activation)) {
     level thread scripts\mp\gametypes\br_alt_mode_escape::obj_fob2(var_15);
   } else {
-    thread scripts\mp\gametypes\br_gametypes::ref_12e05("onInfilSequenceEnd", var_15);
+    thread scripts\mp\gametypes\br_gametypes::ref_12E05("onInfilSequenceEnd", var_15);
 
     if(!scripts\mp\gametypes\br_gametypes::unset_relic_aggressive_melee("match_start_VO")) {
       scripts\mp\gametypes\br_public::brleaderdialog("match_start", 0, var_15);
@@ -3418,14 +3418,14 @@ function clear_tier_lights(var_0, var_1, var_2) {
       thread playerjoininfil();
 
       if(var_5 calloutmarkerping_getEnt()) {
-        ref_12b22(var_5);
+        ref_12B22(var_5);
         LOC_00000537:
       }
       LOC_00000537:
     }
 
     if(scripts\mp\gametypes\br_gametypes::tutorial_showtext("addToC130Infil")) {
-      level.br_ac130 scripts\mp\gametypes\br_gametypes::ref_12e05("addToC130Infil");
+      level.br_ac130 scripts\mp\gametypes\br_gametypes::ref_12E05("addToC130Infil");
     }
   }
 
@@ -3449,7 +3449,7 @@ function getfixedinfilname(var_0) {
   return var_0;
 }
 
-function ref_1324e(var_0) {
+function ref_1324E(var_0) {
   var_0.x = 0;
   var_0.y = 0;
   var_0 setshader("black", 640, 480);
@@ -3471,7 +3471,7 @@ function infilallfadetoblack(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_7 && !isDefined(level.infilblackoverlay)) {
     level.infilblackoverlay = newhudelem();
-    ref_1324e(level.infilblackoverlay);
+    ref_1324E(level.infilblackoverlay);
   } else if(!var_7) {
     foreach(var_9 in var_6) {
       if(!isDefined(var_9)) {
@@ -3479,7 +3479,7 @@ function infilallfadetoblack(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
 
       var_9.infilblackoverlay = newclienthudelem(var_9);
-      ref_1324e(var_9.infilblackoverlay);
+      ref_1324E(var_9.infilblackoverlay);
     }
   }
 
@@ -3494,7 +3494,7 @@ function infilallfadetoblack(var_0, var_1, var_2, var_3, var_4, var_5) {
       if(!var_5) {
         var_9 setsoundsubmix("iw8_br_infil_fadeout", 0);
 
-        if(!istrue(level.vehicle_collision_getleveldata) && !isDefined(level.ref_12d05)) {
+        if(!istrue(level.vehicle_collision_getleveldata) && !isDefined(level.ref_12D05)) {
           var_9 setsoundsubmix("mp_br_infil_music", 0);
         }
       }
@@ -3618,7 +3618,7 @@ function infilallfadetoblack(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-function ref_12acc(var_0) {
+function ref_12ACC(var_0) {
   var_1 = 0;
   var_2 = isDefined(var_0) && var_0.size != level.players.size;
 
@@ -3646,18 +3646,18 @@ function ref_12acc(var_0) {
   }
 }
 
-function ref_13cf0(var_0, var_1, var_2, var_3) {
+function ref_13CF0(var_0, var_1, var_2, var_3) {
   foreach(var_5 in var_0) {
     if(!isDefined(var_5)) {
       continue;
     }
 
-    scripts\mp\utility\game::ref_131a3(var_5, 1);
+    scripts\mp\utility\game::ref_131A3(var_5, 1);
     var_5 scripts\mp\utility\player::hidehudenable();
     var_5 scripts\mp\class::computerrebootsequence_init();
   }
 
-  scripts\mp\deathicons::ref_12bfd();
+  scripts\mp\deathicons::ref_12BFD();
   setomnvar("ui_hide_player_icons", 1);
   thread infilallfadetoblack(1, 3.5, 1, "prematch_respawn_finished", var_0, var_3);
 
@@ -3684,7 +3684,7 @@ function ref_13cf0(var_0, var_1, var_2, var_3) {
     var_5 playerhide();
   }
 
-  ref_1435f(var_0, var_2.origin, var_2);
+  ref_1435F(var_0, var_2.origin, var_2);
   level notify("prematch_respawn_finished");
   ref_14361(3.5);
 
@@ -3710,10 +3710,10 @@ function ref_13cf0(var_0, var_1, var_2, var_3) {
     return;
   }
 
-  ref_12acc(var_0);
+  ref_12ACC(var_0);
 }
 
-function ref_13cee(var_0, var_1) {
+function ref_13CEE(var_0, var_1) {
   var_2 = var_1 == "script_model";
 
   foreach(var_4 in var_0) {
@@ -3721,7 +3721,7 @@ function ref_13cee(var_0, var_1) {
       continue;
     }
 
-    var_4 scripts\mp\class::ref_13f02();
+    var_4 scripts\mp\class::ref_13F02();
     var_4.instantclassswapallowed = 1;
 
     if(scripts\mp\gametypes\br::get_int_or_0(var_4.hidehudenabled) > 0) {
@@ -3766,7 +3766,7 @@ function playerjoininfil() {
   playersetupcontrolsforinfil(var_0);
   var_0 scripts\mp\gametypes\br_public::updatebrscoreboardstat("isInInfilPlane", 1);
   level.infilstruct.playersinc130++;
-  var_0 scripts\mp\gametypes\br_public::ref_1264d();
+  var_0 scripts\mp\gametypes\br_public::ref_1264D();
   thread ref_12525();
 }
 
@@ -3936,7 +3936,7 @@ function setuplocalelocation(var_0, var_1, var_2) {
 function getquickdropplundercount(var_0, var_1, var_2, var_3) {
   var_4 = self;
 
-  foreach(var_6 in var_0.ref_134cc) {
+  foreach(var_6 in var_0.ref_134CC) {
     if(!isDefined(var_6)) {
       continue;
     }
@@ -4120,7 +4120,7 @@ function notifyafkofselection(var_0) {
   }
 }
 
-function ref_13aec() {
+function ref_13AEC() {
   var_0 = self;
   var_0 playershow(1);
   var_0 unlink(1);
@@ -4219,7 +4219,7 @@ function spawnselectionend() {
     postspawnselectionstream(var_2);
   }
 
-  thread ref_12c24();
+  thread ref_12C24();
   wait 4;
 
   foreach(var_2 in level.players) {
@@ -4245,8 +4245,8 @@ function roof_spawners() {
   var_1 = round_logic(var_0);
 
   if(isDefined(var_0.pers["squadMemberIndex"]) && isDefined(var_1)) {
-    if(isDefined(var_1.ref_134cc[var_0.pers["squadMemberIndex"]]) && isDefined(var_1.ref_134cc[var_0.pers["squadMemberIndex"]].locationorigin)) {
-      return var_1.ref_134cc[var_0.pers["squadMemberIndex"]];
+    if(isDefined(var_1.ref_134CC[var_0.pers["squadMemberIndex"]]) && isDefined(var_1.ref_134CC[var_0.pers["squadMemberIndex"]].locationorigin)) {
+      return var_1.ref_134CC[var_0.pers["squadMemberIndex"]];
     }
   }
 
@@ -4273,9 +4273,9 @@ function total_spawns() {
   var_1 = round_logic(var_0);
 
   if(isDefined(var_1) && isDefined(var_0.pers["squadMemberIndex"])) {
-    var_1.ref_134cc[var_0.pers["squadMemberIndex"]] = spawnStruct();
-    var_1.ref_134cc[var_0.pers["squadMemberIndex"]].circleent = undefined;
-    return var_1.ref_134cc[var_0.pers["squadMemberIndex"]];
+    var_1.ref_134CC[var_0.pers["squadMemberIndex"]] = spawnStruct();
+    var_1.ref_134CC[var_0.pers["squadMemberIndex"]].circleent = undefined;
+    return var_1.ref_134CC[var_0.pers["squadMemberIndex"]];
   }
 
   return undefined;
@@ -4291,7 +4291,7 @@ function totalhealth() {
   if(isDefined(level.br_spawns) && isDefined(var_0.team)) {
     level.br_spawns[var_0.team] = spawnStruct();
     level.br_spawns[var_0.team].circleent = undefined;
-    level.br_spawns[var_0.team].ref_134cc = [];
+    level.br_spawns[var_0.team].ref_134CC = [];
     return level.br_spawns[var_0.team];
   }
 
@@ -4326,13 +4326,13 @@ function classselectionendnonexclusion() {
   scripts\mp\flags::gameflagset("end_spawn_selection");
 }
 
-function ref_12c24() {
+function ref_12C24() {
   wait 25;
 
   if(isDefined(level.br_spawns)) {
     foreach(var_1 in level.br_spawns) {
-      if(isDefined(var_1.ref_134cc)) {
-        foreach(var_3 in var_1.ref_134cc) {
+      if(isDefined(var_1.ref_134CC)) {
+        foreach(var_3 in var_1.ref_134CC) {
           lastlocationcallouttime(var_3);
         }
       }
@@ -4500,11 +4500,11 @@ function ref_14361(var_0) {
   wait var_0;
 }
 
-function ref_11dbb(var_0, var_1, var_2, var_3) {
+function ref_11DBB(var_0, var_1, var_2, var_3) {
   self moveTo(var_0, var_1, var_2, var_3);
 }
 
-function ref_12d9f(var_0, var_1, var_2, var_3) {
+function ref_12D9F(var_0, var_1, var_2, var_3) {
   self rotateTo(var_0, var_1, var_2, var_3);
 }
 
@@ -4520,7 +4520,7 @@ function showextractionobjectivetoteam() {
   level.showexfilstartsplash = undefined;
 }
 
-function ref_12b22(var_0) {
+function ref_12B22(var_0) {
   if(!isDefined(level.showexfilstartsplash)) {
     level.showexfilstartsplash = [];
   }

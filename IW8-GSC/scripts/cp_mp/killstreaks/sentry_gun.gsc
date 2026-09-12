@@ -37,7 +37,7 @@ function tryusesentryturretfromstruct(var_0) {
     }
   }
 
-  scripts\cp_mp\utility\weapon_utility::ref_12eb2();
+  scripts\cp_mp\utility\weapon_utility::ref_12EB2();
   var_1 = scripts\cp_mp\killstreaks\killstreakdeploy::streakdeploy_doweaponswitchdeploy(var_0, getcompleteweaponname("deploy_sentry_mp"), 1, undefined, undefined, &weaponcleanupsentryturret);
 
   if(!istrue(var_1)) {
@@ -52,11 +52,11 @@ function tryusesentryturretfromstruct(var_0) {
     }
   }
 
-  scripts\cp_mp\killstreaks\manual_turret::ref_11acc(0);
+  scripts\cp_mp\killstreaks\manual_turret::ref_11ACC(0);
   var_2 = sentryturret_create("sentry_turret", var_0);
 
   if(!isDefined(var_2)) {
-    scripts\cp_mp\killstreaks\manual_turret::ref_11acc(1);
+    scripts\cp_mp\killstreaks\manual_turret::ref_11ACC(1);
     self.bgivensentry = 0;
     return false;
   }
@@ -64,7 +64,7 @@ function tryusesentryturretfromstruct(var_0) {
   var_3 = sentryturret_watchplacement(var_2, var_0, 0, 1.25);
 
   if(!isDefined(var_3)) {
-    scripts\cp_mp\killstreaks\manual_turret::ref_11acc(1);
+    scripts\cp_mp\killstreaks\manual_turret::ref_11ACC(1);
     var_2 delete();
     self.bgivensentry = 0;
     return false;
@@ -72,7 +72,7 @@ function tryusesentryturretfromstruct(var_0) {
 
   var_2 scripts\cp_mp\emp_debuff::set_start_emp_callback(&sentryturret_empstarted);
   var_2 scripts\cp_mp\emp_debuff::set_clear_emp_callback(&sentryturret_empcleared);
-  scripts\cp_mp\killstreaks\manual_turret::ref_11acc(1);
+  scripts\cp_mp\killstreaks\manual_turret::ref_11ACC(1);
   sentryturret_setplaced(var_2, var_3);
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("sentry_gun", "munitionUsed")) {
@@ -140,8 +140,8 @@ function sentryturret_delayplacementinstructions(var_0) {
   level endon("game_ended");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
   self setclientomnvar("ui_turret_placement", 1);
-  thread scripts\cp_mp\killstreaks\manual_turret::ref_11ac6("death");
-  thread scripts\cp_mp\killstreaks\manual_turret::ref_11ac6("turret_placement_finished");
+  thread scripts\cp_mp\killstreaks\manual_turret::ref_11AC6("death");
+  thread scripts\cp_mp\killstreaks\manual_turret::ref_11AC6("turret_placement_finished");
 }
 
 function sentryturret_create(var_0, var_1) {
@@ -261,8 +261,8 @@ function sentryturret_setplaced(var_0, var_1) {
 
   if(isDefined(var_1.moving_platform)) {
     var_0.moving_platform = var_1.moving_platform;
-    var_0.ref_11dbe = var_1.ref_11dbe;
-    var_0.ref_11dbd = var_1.ref_11dbd;
+    var_0.ref_11DBE = var_1.ref_11DBE;
+    var_0.ref_11DBD = var_1.ref_11DBD;
   }
 
   self.bgivensentry = 0;
@@ -362,8 +362,8 @@ function sentryturret_setcarried(var_0) {
 
   if(isDefined(var_0.moving_platform)) {
     var_0.moving_platform = undefined;
-    var_0.ref_11dbe = undefined;
-    var_0.ref_11dbd = undefined;
+    var_0.ref_11DBE = undefined;
+    var_0.ref_11DBD = undefined;
     var_0 unlink();
   }
 
@@ -404,18 +404,18 @@ function sentryturret_setcarried(var_0) {
   var_0.carriedby = self;
   var_0 notify("carried");
   var_0 playSound("sentry_pickup");
-  scripts\cp_mp\utility\weapon_utility::ref_12eb2();
+  scripts\cp_mp\utility\weapon_utility::ref_12EB2();
   scripts\cp_mp\utility\inventory_utility::_giveweapon("deploy_sentry_mp");
   scripts\cp_mp\utility\inventory_utility::_switchtoweapon("deploy_sentry_mp");
-  scripts\cp_mp\killstreaks\manual_turret::ref_11acc(0);
+  scripts\cp_mp\killstreaks\manual_turret::ref_11ACC(0);
   var_6 = sentryturret_watchplacement(var_0, var_0.streakinfo, 1, 2);
 
   if(!isDefined(var_6)) {
-    scripts\cp_mp\killstreaks\manual_turret::ref_11acc(1);
+    scripts\cp_mp\killstreaks\manual_turret::ref_11ACC(1);
     return 0;
   }
 
-  scripts\cp_mp\killstreaks\manual_turret::ref_11acc(1);
+  scripts\cp_mp\killstreaks\manual_turret::ref_11ACC(1);
   sentryturret_setplaced(var_0, var_6);
 }
 
@@ -602,7 +602,7 @@ function sentryturret_watchdeath(var_0) {
     }
 
     var_0.streakinfo.onspray = istrue(var_2);
-    scripts\cp_mp\utility\killstreak_utility::ref_12aa7(var_0.streakinfo);
+    scripts\cp_mp\utility\killstreak_utility::ref_12AA7(var_0.streakinfo);
   }
 
   sentryturret_setturretmodel(var_0, "destroyed");
@@ -683,7 +683,7 @@ function sentryturret_watchtimeout(var_0) {
 function sentryturret_watchdisown(var_0) {
   var_0 endon("kill_turret");
   var_0 endon("carried");
-  scripts\engine\utility::ref_143a6("disconnect", "joined_team", "joined_spectators");
+  scripts\engine\utility::ref_143A6("disconnect", "joined_team", "joined_spectators");
   var_0 notify("kill_turret", 0, 0);
 }
 
@@ -862,7 +862,7 @@ function ref_13023(var_0, var_1) {
 }
 
 function ref_13020() {
-  var_0 = _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12f67(self.origin, 140, 20);
+  var_0 = _calloutmarkerping_handleluinotify_brinventoryslotrequest::ref_12F67(self.origin, 140, 20);
   var_1 = undefined;
   var_2 = 0;
 

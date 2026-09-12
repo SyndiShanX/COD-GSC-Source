@@ -35,14 +35,14 @@ function at_mine_use(var_0) {
   var_0 setscriptablepartstate("visibility", "show", 0);
   var_2 = spawnStruct();
   var_2.endonstring = "mine_destroyed";
-  var_2.ref_133ca = 1;
+  var_2.ref_133CA = 1;
   var_0 thread scripts\mp\movers::handle_moving_platform_touch(var_2);
   var_0 waittill("missile_stuck", var_3);
 
   if(isDefined(var_3)) {
     if(isent(var_3) && tugofwar_tank(var_3)) {
       var_0.origin += (0, 0, 1.6);
-      var_2.ref_123b4 = 1;
+      var_2.ref_123B4 = 1;
       var_0 method_87bb(1);
     }
 
@@ -53,8 +53,8 @@ function at_mine_use(var_0) {
 }
 
 function tugofwar_tank(var_0) {
-  if(isDefined(level.ref_145f1)) {
-    foreach(var_2 in level.ref_145f1.ref_13c8d) {
+  if(isDefined(level.ref_145F1)) {
+    foreach(var_2 in level.ref_145F1.ref_13C8D) {
       if(var_2 == var_0) {
         return true;
       }
@@ -99,7 +99,7 @@ function at_mine_plant(var_0) {
   at_mine_update_danger_zone(var_0);
   wait 0.75;
 
-  if(istrue(var_0.ref_13bff)) {
+  if(istrue(var_0.ref_13BFF)) {
     thread carriable_detonate_propane();
   }
 
@@ -258,7 +258,7 @@ function at_mine_watch_trigger() {
           continue;
         }
 
-        if(var_2 scripts\mp\gametypes\br_public::ref_125ec()) {
+        if(var_2 scripts\mp\gametypes\br_public::ref_125EC()) {
           continue;
         }
 
@@ -300,7 +300,7 @@ function at_mine_vehicle_trigger(var_0, var_1) {
 
 function at_mine_watch_flight_mover(var_0) {
   self endon("death");
-  self.grenade scripts\engine\utility::ref_143ba(var_0, "death", "mine_destroyed");
+  self.grenade scripts\engine\utility::ref_143BA(var_0, "death", "mine_destroyed");
 
   if(isDefined(self.grenade)) {
     self moveTo(self.origin, 0.05, 0, 0);
@@ -372,7 +372,7 @@ function at_mine_watch_flight() {
       thread at_mine_watch_flight_mover(var_12);
       thread at_mine_watch_flight_effects(var_0);
       childthread scripts\mp\utility\equipment::ref_14444();
-      scripts\engine\utility::ref_143b9(var_0, "collision_with_platform");
+      scripts\engine\utility::ref_143B9(var_0, "collision_with_platform");
       thread at_mine_explode_from_player_trigger();
       return;
     }
@@ -422,7 +422,7 @@ function at_mine_watch_detonate() {
 function at_mine_watch_game_end() {
   self endon("mine_destroyed");
   self endon("death");
-  level scripts\engine\utility::ref_143a5("game_ended", "bro_shot_start");
+  level scripts\engine\utility::ref_143A5("game_ended", "bro_shot_start");
   thread at_mine_destroy();
 }
 

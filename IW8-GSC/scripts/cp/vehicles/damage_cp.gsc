@@ -95,7 +95,7 @@ function callback_vehicledamage_internal(var_0) {
     if(isDefined(self.occupants) && self.occupants.size > 0) {
       if(scripts\engine\utility::array_contains(self.occupants, var_0.attacker)) {
         if(isDefined(var_0.attacker.team)) {
-          if(isDefined(self.ref_13aad) && var_0.attacker.team == self.ref_13aad) {
+          if(isDefined(self.ref_13AAD) && var_0.attacker.team == self.ref_13AAD) {
             return;
           }
         }
@@ -158,7 +158,7 @@ function callback_vehicledamage_internal(var_0) {
     }
   }
 
-  var_6 = scripts\cp_mp\vehicles\vehicle_damage::ref_1417d(var_0);
+  var_6 = scripts\cp_mp\vehicles\vehicle_damage::ref_1417D(var_0);
 
   if(!var_6) {
     var_7 = scripts\cp_mp\vehicles\vehicle_damage::ref_14152();

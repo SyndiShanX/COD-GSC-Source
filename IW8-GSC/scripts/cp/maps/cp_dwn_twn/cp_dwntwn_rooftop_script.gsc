@@ -771,7 +771,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_goalyaw = "1";
   var_4.script_team = "axis";
   var_4.script_unload = "default";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (21549.4, -16450.1, 2030), (0, 29.99, 0), "r3_heli_reinforce", undefined, "ar_heavy", "269 220 270 271 272 362", "268", undefined, undefined, 450, 2000, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_4.script_function = "lbravo_carrier";
@@ -791,7 +791,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_maxdist = "20000";
   var_4.script_team = "axis";
   var_4.script_unload = "default";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (17813.2, -8621.62, 1558), (0, 44.99, 0), "r2_heli_reinforce", undefined, "ar_heavy", "110 111 112 113 114 115", "101", undefined, undefined, 450, 2000, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_4.script_goalyaw = "1";
@@ -818,7 +818,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_goalyaw = "1";
   var_4.script_team = "axis";
   var_4.script_unload = "default";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (18233.7, -8107.88, 1558), (0, 54.99, 0), "r2_heli_reinforce_2", undefined, "ar_heavy", "301 302 303 304 305 306", "300", undefined, undefined, 450, 2000, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_4.brjugg_oncratedestroy = "1";
@@ -933,7 +933,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_goalyaw = "1";
   var_4.script_team = "axis";
   var_4.script_unload = "default";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (22089.4, -16006.1, 2030), (0, 89.99, 0), "r3_heli_reinforce_2", undefined, "ar_heavy", "401 402 403 404 405 406", "400", undefined, undefined, 450, 2000, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_4.noteleport = "1";
@@ -1120,7 +1120,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_goalyaw = "1";
   var_4.script_team = "axis";
   var_4.script_unload = "default";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (27681.4, -9510.1, 1732), (0, 89.99, 0), "r1_heli_reinforce", undefined, "ar_heavy", "501 502 503 504 505 506", "500", undefined, undefined, 450, 2000, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_4.script_goalyaw = "1";
@@ -1147,7 +1147,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_goalyaw = "1";
   var_4.script_team = "axis";
   var_4.script_unload = "default";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (27626.5, -8776.33, 1732), (0, 264.99, 0), "r1_heli_reinforce_2", undefined, "ar_heavy", "601 602 603 604 605 606", "600", undefined, undefined, 450, 2000, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_4.script_goalyaw = "1";
@@ -1173,7 +1173,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_goalyaw = "1";
   var_4.script_team = "axis";
   var_4.script_unload = "default";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (21830.5, -9956.33, 1526), (0, 264.99, 0), "ai_heli_reinforce", undefined, "sniper_gasmask", "701 702 703 704 705 706", "700", undefined, undefined, 450, 2000, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_4.script_goalyaw = "1";
@@ -1199,7 +1199,7 @@ function createstructs(var_0, var_1, var_2) {
   var_4.script_goalyaw = "1";
   var_4.script_team = "axis";
   var_4.script_unload = "default";
-  var_4.ref_133bb = "1";
+  var_4.ref_133BB = "1";
   var_0[[var_3]](var_4, var_1, var_2, (22026.5, -11400.3, 1526), (0, 264.99, 0), "ai_heli_reinforce_2", undefined, "sniper_gasmask", "801 802 803 804 805 806", "800", undefined, undefined, 450, 2000, 40);
   var_4 = scripts\cp\so_trigger::s();
   var_4.script_demeanor = "default";

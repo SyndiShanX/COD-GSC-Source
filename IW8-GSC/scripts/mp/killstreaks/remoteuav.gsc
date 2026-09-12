@@ -81,7 +81,7 @@ function tryuseremoteuav(var_0, var_1) {
   var_3 = givecarryremoteuav(var_0, var_1);
 
   if(var_3) {
-    scripts\common\utility::ref_13e0a(level.ref_11b2a, var_1, self.origin);
+    scripts\common\utility::ref_13E0A(level.ref_11B2A, var_1, self.origin);
     thread scripts\mp\hud_util::teamplayercardsplash("used_remote_uav", self);
   } else {
     scripts\mp\utility\killstreak::decrementfauxvehiclecount();
@@ -310,7 +310,7 @@ function carryremoteuav_handleexistence() {
   level endon("game_ended");
   self.owner endon("place_carryRemoteUAV");
   self.owner endon("cancel_carryRemoteUAV");
-  self.owner scripts\engine\utility::ref_143a6("death_or_disconnect", "joined_team", "joined_spectators");
+  self.owner scripts\engine\utility::ref_143A6("death_or_disconnect", "joined_team", "joined_spectators");
 
   if(isDefined(self)) {
     if(isDefined(self.soundent)) {
@@ -377,7 +377,7 @@ function lockplayerforremoteuavlaunch() {
 
 function clearplayerlockfromremoteuavlaunch(var_0) {
   level endon("game_ended");
-  var_1 = scripts\engine\utility::ref_143ad("death_or_disconnect", "remoteuav_unlock");
+  var_1 = scripts\engine\utility::ref_143AD("death_or_disconnect", "remoteuav_unlock");
 
   if(var_1 != "disconnect") {
     self unlink();
@@ -839,7 +839,7 @@ function remoteuav_processtaggedassist(var_0) {
 
 function remoteuav_unmarkremovedplayer(var_0) {
   level endon("game_ended");
-  var_1 = scripts\engine\utility::ref_143ae("death_or_disconnect", "carried", "leaving");
+  var_1 = scripts\engine\utility::ref_143AE("death_or_disconnect", "carried", "leaving");
 
   if(var_1 == "leaving" || !isDefined(self.uavtype)) {
     self.uavremotemarkedby = undefined;
@@ -1007,7 +1007,7 @@ function remoteuav_explode_on_disconnect() {
 
 function remoteuav_explode_on_changeteams() {
   self endon("death");
-  self.owner scripts\engine\utility::ref_143a5("joined_team", "joined_spectators");
+  self.owner scripts\engine\utility::ref_143A5("joined_team", "joined_spectators");
   self notify("death");
 }
 

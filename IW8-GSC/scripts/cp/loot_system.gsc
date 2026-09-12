@@ -24,7 +24,7 @@ function loot_pickup(var_0, var_1, var_2, var_3, var_4) {
     var_5 = give_loot_based_on_pickup(var_1, var_3);
 
     if(istrue(var_5)) {
-      thread ref_119f4(level, var_0, var_1, var_2);
+      thread ref_119F4(level, var_0, var_1, var_2);
       return;
     }
 
@@ -32,7 +32,7 @@ function loot_pickup(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-function ref_119f4(var_0, var_1, var_2, var_3) {
+function ref_119F4(var_0, var_1, var_2, var_3) {
   var_4 = strtok(var_1, "_");
   var_5 = var_4[1];
   var_6 = var_4[2];

@@ -20,10 +20,10 @@ function fulton_group_exfil_at_pos_internal(var_0, var_1, var_2, var_3) {
 
   thread anim_init_exfil_fulton();
   thread launch_evac_box(level, var_5);
-  thread ref_1353a(level, var_0, var_1);
+  thread ref_1353A(level, var_0, var_1);
 }
 
-function ref_1353a(var_0, var_1, var_2) {
+function ref_1353A(var_0, var_1, var_2) {
   var_3 = var_0 - (0, 0, 192);
   var_2.modsforclass = spawn("script_model", var_3);
   var_2.modsforclass setModel("military_fulton_assembly_ks");
@@ -179,7 +179,7 @@ function infil_name(var_0, var_1, var_2) {
   var_4 = thread ref_13559(var_3);
   var_5 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_4, "fulton_ac130");
   var_5 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
-  thread ref_123bf(level, var_3, 0.2, var_5);
+  thread ref_123BF(level, var_3, 0.2, var_5);
   var_6 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_0, "device");
   var_6 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
   baloon_deposit_death_check(var_5, "ac130");
@@ -193,7 +193,7 @@ function infil_name(var_0, var_1, var_2) {
   foreach(var_8 in level.playerstoptimerdelete) {
     var_8.entity playsoundonmovingent("scn_cp_group_fulton_exfil_wind");
     thread ref_12498();
-    thread ref_123eb(var_8);
+    thread ref_123EB(var_8);
   }
 
   var_3 thread scripts\cp_mp\anim_scene::anim_scene([var_5, var_6], "fulton_evac", 0, 0);
@@ -210,7 +210,7 @@ function ref_12498() {
   scripts\cp\cp_player_battlechatter::trysaylocalsound(self, "flavor_awesome");
 }
 
-function ref_123eb(var_0) {
+function ref_123EB(var_0) {
   var_1 = self;
   var_2 = var_1.auto_respawn_timer;
   var_3 = var_1.audio_stop_obj_room_fires;
@@ -241,11 +241,11 @@ function ref_123eb(var_0) {
   var_6 linkTo(var_5, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_7 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_6, "player_" + var_3);
   var_7 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
-  thread ref_11aa5(var_1, var_6);
+  thread ref_11AA5(var_1, var_6);
   var_5 thread scripts\cp_mp\anim_scene::anim_scene([var_1, var_2, var_7], "fulton_evac", 0, 0);
 }
 
-function ref_11aa5(var_0, var_1) {
+function ref_11AA5(var_0, var_1) {
   var_1 hide();
   wait 2;
 
@@ -512,7 +512,7 @@ function anim_fulton_exfil_player_scene(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = 0.2;
   var_6 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_1, "player_" + var_2, 1, 1, 1);
-  var_7 = ref_1355a(var_0, var_1, "player_" + var_2);
+  var_7 = ref_1355A(var_0, var_1, "player_" + var_2);
   var_8 = scripts\cp_mp\anim_scene::anim_scene_create_actor(var_7, "ropes_" + var_2);
   var_8 scripts\cp_mp\anim_scene::anim_scene_set_actor_interruptable(0);
   thread autoapplyquest(var_8, var_0, var_8, var_2);
@@ -565,14 +565,14 @@ function ref_13559(var_0, var_1) {
   return level.playerstartrecondronewait;
 }
 
-function ref_123be(var_0) {
+function ref_123BE(var_0) {
   thread listen_for_emp_drone_ent(level);
   var_1 = 7;
   wait var_0 - var_1;
   level notify("continue_fulton_ac130");
 }
 
-function ref_123bf(var_0, var_1, var_2, var_3) {
+function ref_123BF(var_0, var_1, var_2, var_3) {
   level waittill("continue_fulton_ac130");
 
   if(istrue(level.ref_12461)) {
@@ -587,7 +587,7 @@ function ref_123bf(var_0, var_1, var_2, var_3) {
   level notify("continue_fulton_extraction");
 }
 
-function ref_1355a(var_0, var_1, var_2) {
+function ref_1355A(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_0.origin);
   var_3 setModel("military_fulton_rope");
   var_3.angles = var_0.angles;

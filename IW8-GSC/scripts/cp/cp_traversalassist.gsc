@@ -83,7 +83,7 @@ function actioncancellation(var_0) {
 }
 
 function playercancellation() {
-  scripts\engine\utility::ref_143a6("remove_rig", "death", "disconnect");
+  scripts\engine\utility::ref_143A6("remove_rig", "death", "disconnect");
   self notify("can_remove_rig");
 }
 
