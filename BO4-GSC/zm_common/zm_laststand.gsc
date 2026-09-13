@@ -70,7 +70,7 @@ __init__() {
 }
 
 on_player_connect() {
-  self thread function_b7c101fa();
+  self thread self_revive_player_setup();
   self thread function_6155752d();
 }
 
@@ -98,7 +98,7 @@ player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 
   self increment_downed_stat();
 
-  if(level flag::get("solo_game") && self function_618fd37e() == 0 && getnumconnectedplayers() < 2) {
+  if(level flag::get("solo_game") && self get_self_revive_count() == 0 && getnumconnectedplayers() < 2) {
     self zm_stats::increment_client_stat("deaths");
     self zm_stats::increment_player_stat("deaths");
     self zm_stats::forced_attachment("boas_deaths");
@@ -167,7 +167,7 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shit
   currweapon = self getcurrentweapon();
   self stats::function_e24eec31(currweapon, #"deathsduringuse", 1);
 
-  if(self function_618fd37e() > 0 && !(isDefined(level.var_28bbd30a) && level.var_28bbd30a)) {
+  if(self get_self_revive_count() > 0 && !(isDefined(level.var_28bbd30a) && level.var_28bbd30a)) {
     if(isDefined(level.var_af29d768)) {
       self[[level.var_af29d768]]();
     } else if(level.players.size == 1 || isDefined(self.var_20f86af4) && self.var_20f86af4) {
@@ -793,13 +793,13 @@ is_suiciding(revivee) {
 check_self_revive_for_hotjoin() {
   level notify(#"notify_check_self_revive_for_hotjoin");
   level endon(#"notify_check_self_revive_for_hotjoin");
-  var_9156a121 = 0;
+  b_solo_mode = 0;
   var_972a361b = 0;
   waitframe(1);
   a_e_players = getPlayers();
 
   if(a_e_players.size == 1) {
-    var_9156a121 = 1;
+    b_solo_mode = 1;
 
     if(!level flag::get("solo_game")) {
       var_972a361b = 1;
@@ -812,19 +812,19 @@ check_self_revive_for_hotjoin() {
 
   if(var_972a361b && !zm_utility::is_standard() && !zm_utility::is_trials()) {
     foreach(e_player in a_e_players) {
-      if(isDefined(e_player.var_240cf7be) && e_player.var_240cf7be) {
-        if(var_9156a121) {
-          e_player function_3d685b5f(int(max(0, e_player.var_d66589da - e_player.var_308dc243)));
+      if(isDefined(e_player.b_solo_self_revive) && e_player.b_solo_self_revive) {
+        if(b_solo_mode) {
+          e_player set_self_revive_count(int(max(0, e_player.var_d66589da - e_player.var_308dc243)));
           continue;
         }
 
-        e_player function_3d685b5f(int(max(0, e_player.var_5d4c5daf - e_player.var_308dc243)));
+        e_player set_self_revive_count(int(max(0, e_player.var_5d4c5daf - e_player.var_308dc243)));
       }
     }
   }
 }
 
-function_3d685b5f(self_revive_count) {
+set_self_revive_count(self_revive_count) {
   self_revive_count = int(max(self_revive_count, 0));
   self.var_72249004 = self_revive_count;
   self clientfield::set_player_uimodel("ZMInventoryPersonal.self_revive_count", self_revive_count);
@@ -834,28 +834,28 @@ function_3d685b5f(self_revive_count) {
   }
 }
 
-function_618fd37e() {
+get_self_revive_count() {
   return self.var_72249004;
 }
 
-function_3a00302e(n_count = 1, var_d47c52b4 = 1) {
+increment_self_revive_count(n_count = 1, var_d47c52b4 = 1) {
   if(var_d47c52b4) {
     self.var_d66589da += n_count;
     self.var_5d4c5daf += n_count;
   }
 
-  self function_3d685b5f(self function_618fd37e() + n_count);
+  self set_self_revive_count(self get_self_revive_count() + n_count);
 }
 
-function_409dc98e(n_count = 1, b_revived = 1) {
+decrement_self_revive_count(n_count = 1, b_revived = 1) {
   if(b_revived) {
     self.var_308dc243 += n_count;
   }
 
-  self function_3d685b5f(self function_618fd37e() - n_count);
+  self set_self_revive_count(self get_self_revive_count() - n_count);
 }
 
-function_b7c101fa() {
+self_revive_player_setup() {
   self endon(#"disconnect");
   self.var_72249004 = 0;
   self.var_308dc243 = 0;
@@ -867,7 +867,7 @@ function_b7c101fa() {
 
   if(getPlayers().size == 1) {
     self_revive_count = self.var_d66589da;
-    self.var_240cf7be = 1;
+    self.b_solo_self_revive = 1;
   } else {
     self_revive_count = self.var_5d4c5daf;
   }
@@ -877,11 +877,11 @@ function_b7c101fa() {
   if(var_48f2f554) {
     self.var_d66589da = int(var_48f2f554);
     self.var_5d4c5daf = int(var_48f2f554);
-    self function_3d685b5f(var_48f2f554);
+    self set_self_revive_count(var_48f2f554);
     return;
   }
 
-  self function_3d685b5f(self_revive_count);
+  self set_self_revive_count(self_revive_count);
 }
 
 function_3699b145() {
@@ -1465,7 +1465,7 @@ revive_internal(reviver, b_track_stats, var_c0ab6a65 = 0) {
   self.laststand = undefined;
 
   if(var_c0ab6a65) {
-    self function_409dc98e();
+    self decrement_self_revive_count();
   }
 
   self allowjump(1);

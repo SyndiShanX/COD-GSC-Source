@@ -29,7 +29,7 @@ class cluielem {
   }
 
   function function_7bfd10e6(player) {
-    return player function_3fc81484(_uid);
+    return player isluielemopenforplayer(_uid);
   }
 
   function open_luielem(player, menu_name, persistent = 0) {

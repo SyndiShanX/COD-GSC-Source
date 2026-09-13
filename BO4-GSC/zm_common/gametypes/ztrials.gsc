@@ -104,7 +104,7 @@ function_8277ff43() {
   self endon(#"disconnect");
   level flag::wait_till("start_zombie_round_logic");
   waitframe(1);
-  self zm_laststand::function_3d685b5f(0);
+  self zm_laststand::set_self_revive_count(0);
 }
 
 function_491101ba(player) {

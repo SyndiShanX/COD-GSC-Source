@@ -244,7 +244,7 @@ function_e16b5033(actor) {
 
     if(isDefined(actor ai::function_9139c839())) {
       min_health = actor ai::function_9139c839().minhealth;
-      var_6109b81d = actor ai::function_9139c839().var_854eebd;
+      var_6109b81d = actor ai::function_9139c839().numplayerhealthscale;
     }
 
     level.var_faf67c27[actor.archetype].min_health = min_health;

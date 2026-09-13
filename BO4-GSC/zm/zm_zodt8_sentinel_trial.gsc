@@ -371,9 +371,9 @@ function_bdf27083(str_script_noteworthy) {
   showmiscmodels("bridge_controls");
 }
 
-function_f4e792d3(var_d0b3106f, var_b267963b, var_a761a549) {
+function_f4e792d3(var_d0b3106f, var_b267963b, n_reset_time) {
   n_angle = -30 * var_d0b3106f;
-  self rotateroll(n_angle + var_b267963b, 0.5 * var_d0b3106f + var_a761a549);
+  self rotateroll(n_angle + var_b267963b, 0.5 * var_d0b3106f + n_reset_time);
   self waittill(#"rotatedone");
   var_e23f4bd9 = combineangles(-1 * self.original_angles, self.angles);
   var_a3ea9bcc = var_e23f4bd9[2];
@@ -3681,12 +3681,12 @@ function_28228fa2(s_tree) {
     player clientfield::set_to_player("" + #"iceberg_rumbles", 1);
     var_da9e0035 = arraysortclosest(var_da9e0035, player.origin);
     var_bd99878e = struct::get(var_da9e0035[0].target);
-    var_55e11aa9 = util::spawn_model("tag_origin", player.origin, player.angles);
-    player playerlinktodelta(var_55e11aa9, "tag_origin", 1, 30, 30, 30, 30, 1, 1);
+    mdl_linker = util::spawn_model("tag_origin", player.origin, player.angles);
+    player playerlinktodelta(mdl_linker, "tag_origin", 1, 30, 30, 30, 30, 1, 1);
     player ghost();
     player val::set(#"iceberg_event", "freezecontrols", 1);
     player val::set(#"iceberg_event", "disable_weapons", 1);
-    var_55e11aa9 thread function_2f2651ce(var_da9e0035[0], var_bd99878e, player);
+    mdl_linker thread function_2f2651ce(var_da9e0035[0], var_bd99878e, player);
     arrayremoveindex(var_da9e0035, 0);
     waitframe(1);
   }

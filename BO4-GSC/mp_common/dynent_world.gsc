@@ -287,11 +287,11 @@ function_7f2040e8() {
 use_dynent(dynent, activator) {
   stateindex = function_ffdbe8c2(dynent);
   bundle = function_489009c1(dynent);
-  var_9bdcfcd8 = undefined;
+  nextstateindex = undefined;
 
   if(isDefined(bundle) && isDefined(bundle.dynentstates) && isDefined(bundle.dynentstates[stateindex])) {
     state = bundle.dynentstates[stateindex];
-    var_9bdcfcd8 = isDefined(state.state_on_interact) ? state.state_on_interact : 0;
+    nextstateindex = isDefined(state.state_on_interact) ? state.state_on_interact : 0;
 
     if(isDefined(activator)) {
       var_b4b3af4c = anglesToForward(dynent.angles);
@@ -299,9 +299,9 @@ use_dynent(dynent, activator) {
       dot = vectordot(var_b4b3af4c, playerdir);
 
       if(dot > 0) {
-        var_9bdcfcd8 = isDefined(state.state_on_interact) ? state.state_on_interact : 0;
+        nextstateindex = isDefined(state.state_on_interact) ? state.state_on_interact : 0;
       } else {
-        var_9bdcfcd8 = isDefined(state.state_on_facing) ? state.state_on_facing : 0;
+        nextstateindex = isDefined(state.state_on_facing) ? state.state_on_facing : 0;
       }
     }
 
@@ -310,11 +310,11 @@ use_dynent(dynent, activator) {
     }
 
     if(isDefined(dynent.onuse)) {
-      succeeded = dynent thread[[dynent.onuse]](activator, stateindex, var_9bdcfcd8);
+      succeeded = dynent thread[[dynent.onuse]](activator, stateindex, nextstateindex);
     }
 
     if(!isDefined(succeeded) || succeeded == 1) {
-      setdynentstate(dynent, var_9bdcfcd8);
+      setdynentstate(dynent, nextstateindex);
     }
 
     return (isDefined(bundle.interpolationsec) ? bundle.interpolationsec : 0);

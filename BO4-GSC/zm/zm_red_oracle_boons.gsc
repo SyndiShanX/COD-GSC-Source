@@ -284,9 +284,9 @@ function_b4b16823(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     return;
   }
 
-  if(idamage >= self.health && self zm_laststand::function_618fd37e() == 0 && util::get_active_players().size === 1) {
+  if(idamage >= self.health && self zm_laststand::get_self_revive_count() == 0 && util::get_active_players().size === 1) {
     if(self function_3b81466e(5) == 1) {
-      self zm_laststand::function_3a00302e();
+      self zm_laststand::increment_self_revive_count();
 
       if(getPlayers().size > 1) {
         self.var_20f86af4 = 1;

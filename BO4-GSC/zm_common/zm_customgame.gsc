@@ -1509,7 +1509,7 @@ function_c25113() {
   switch (var_629da31e) {
     case 0:
       self.var_39c78617 = 1;
-      self zm_laststand::function_3d685b5f(0);
+      self zm_laststand::set_self_revive_count(0);
       return;
     case 1:
       self.var_b92e42da = 20;

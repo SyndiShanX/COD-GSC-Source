@@ -707,9 +707,9 @@ function_4f2c425d() {
     return;
   }
 
-  var_fe63ca41 = getteamplayersalive(self.team);
+  teammatesalive = getteamplayersalive(self.team);
 
-  if(var_fe63ca41 <= 0) {
+  if(teammatesalive <= 0) {
     self.var_6bd898f7 = level.bagomoney.carrier getentitynumber();
     return;
   }

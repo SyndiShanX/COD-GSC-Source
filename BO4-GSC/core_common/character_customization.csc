@@ -675,7 +675,7 @@ class class_7da27482 {
       while(!var_ff2bed36 isstreamed(params.var_5bd51249, params.var_13fb1841));
     }
 
-    var_ff704b7c = isDefined(params.var_99a89f83) && params.var_99a89f83;
+    var_ff704b7c = isDefined(params.forceanimation) && params.forceanimation;
 
     if(var_b627749c) {
       var_b627749c = 0;
@@ -1425,7 +1425,7 @@ updateeventthread(localclientnum, var_d0b01271, notifyname, var_1d7f1597 = &func
       case #"refresh_anim":
         params = {};
         [[var_1d7f1597]](localclientnum, var_d0b01271, waitresult, params);
-        params.var_99a89f83 = 1;
+        params.forceanimation = 1;
 
         if(isDefined(params.var_c76f3e47) && params.var_c76f3e47) {
           [[var_d0b01271]] - > function_27945cb8(1);

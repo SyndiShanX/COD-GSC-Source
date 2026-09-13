@@ -27,7 +27,7 @@ __init__() {
 
 enable() {
   self endon(#"disconnect", #"bled_out", #"bgb_update");
-  self thread bgb::function_f51e3503(720, &function_db295169, &function_cbaf1f69);
+  self thread bgb::player_proximity_watcher(720, &function_db295169, &function_cbaf1f69);
   self thread function_5cf91552();
 }
 

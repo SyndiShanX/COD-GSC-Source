@@ -433,7 +433,7 @@ function_e46fd633() {
 destroyspawnbeacon(destroyedbyenemy) {
   self notify(#"end_damage_watcher");
   self function_68a6ec15();
-  self.var_ab0875aa = 1;
+  self.isbeingdestroyed = 1;
   spawnbeacon = self;
   attacker = destroyedbyenemy ? self.var_846acfcf : self.owner;
   spawnbeacon dodamage(spawnbeacon.health + 10000, spawnbeacon.origin, attacker, undefined, undefined, "MOD_EXPLOSIVE");

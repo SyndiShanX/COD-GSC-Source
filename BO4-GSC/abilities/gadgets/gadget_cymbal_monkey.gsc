@@ -130,9 +130,9 @@ function_b9934c1d() {
   playFXOnTag(level._effect[#"monkey_glow"], self, "tag_weapon");
   self thread scene::play(#"cin_t8_monkeybomb_dance", self);
   self thread util::delay(6.5, "death", &function_4e61e1d);
-  var_de3026af = gettime() + int(8 * 1000);
+  fuse_end_time = gettime() + int(8 * 1000);
 
-  while(gettime() < var_de3026af) {
+  while(gettime() < fuse_end_time) {
     if(!isDefined(self.var_38af96b9)) {
       break;
     }

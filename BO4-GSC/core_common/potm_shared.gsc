@@ -641,17 +641,17 @@ function_60211cf4(sequence) {
         }
 
         if(isDefined(sequence.var_50c26ba) && sequence.var_50c26ba > 0) {
-          var_fa042c40 = sequence.var_50c26ba;
-          println("<dev string:xe8>" + var_fa042c40 + "<dev string:xe4>");
+          targetentitynumber = sequence.var_50c26ba;
+          println("<dev string:xe8>" + targetentitynumber + "<dev string:xe4>");
         } else if(isDefined(sequence.inflictorentnum)) {
-          var_fa042c40 = sequence.inflictorentnum;
-          println("<dev string:xf9>" + var_fa042c40 + "<dev string:xe4>");
+          targetentitynumber = sequence.inflictorentnum;
+          println("<dev string:xf9>" + targetentitynumber + "<dev string:xe4>");
         } else {
           println("<dev string:x10d>");
-          var_fa042c40 = 0;
+          targetentitynumber = 0;
         }
 
-        player function_705598e4(cmd, sequence.infoindex, sequence.var_9806ad5a, cameraindex, sequence.params.events[cameraindex].postfxtype, goto_btapi_refillammoifneededservice, var_fa042c40);
+        player function_705598e4(cmd, sequence.infoindex, sequence.var_9806ad5a, cameraindex, sequence.params.events[cameraindex].postfxtype, goto_btapi_refillammoifneededservice, targetentitynumber);
       }
 
       game.var_142de1de = 0;

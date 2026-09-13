@@ -60,7 +60,7 @@ __init__() {
   validate("<dev string:x8a>", "<dev string:x45>", &ishidden);
 }
 
-register(str_name, var_3509ed3e, call_on = "$self", func, ...) {
+register(str_name, default_set_value, call_on = "$self", func, ...) {
   if(!isDefined(level.values)) {
     level.values = [];
   }
@@ -76,7 +76,7 @@ register(str_name, var_3509ed3e, call_on = "$self", func, ...) {
   s_value.str_name = str_name;
   s_value.call_on = call_on;
   s_value.func = func;
-  s_value.var_3509ed3e = var_3509ed3e;
+  s_value.default_set_value = default_set_value;
   s_value.a_args = vararg;
   level.values[str_name] = s_value;
 }
@@ -111,7 +111,7 @@ default_value(str_name, value) {
 set(str_id, str_name, value) {
   if(assert_registered(str_name)) {
     if(!isDefined(value)) {
-      value = level.values[str_name].var_3509ed3e;
+      value = level.values[str_name].default_set_value;
     }
 
     _push_value(str_id, str_name, value);

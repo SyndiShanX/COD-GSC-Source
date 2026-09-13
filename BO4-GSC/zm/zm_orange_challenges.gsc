@@ -1808,7 +1808,7 @@ function_816f228f(e_who) {
   switch (str_reward) {
     case #"self_revives":
       foreach(e_player in getPlayers()) {
-        e_player zm_laststand::function_3a00302e();
+        e_player zm_laststand::increment_self_revive_count();
       }
 
       a_e_players = getPlayers();

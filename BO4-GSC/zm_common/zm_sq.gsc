@@ -181,7 +181,7 @@ run_step(ee, step, var_5ea5c94d) {
 
   ee.started = 1;
   step.started = 1;
-  level thread function_3f795dc3(ee, step, var_5ea5c94d);
+  level thread run_step_setup(ee, step, var_5ea5c94d);
 
   if(!step.completed) {
     waitresult = level waittill(step.var_e788cdd7 + "_setup_completed", step.var_e788cdd7 + "_ended_early");
@@ -272,7 +272,7 @@ run_step(ee, step, var_5ea5c94d) {
   }
 }
 
-function_3f795dc3(ee, step, var_5ea5c94d) {
+run_step_setup(ee, step, var_5ea5c94d) {
   level endon(#"game_ended");
   step endoncallback(&function_df365859, #"end_early");
   level notify(step.var_e788cdd7 + "_started");

@@ -1613,13 +1613,13 @@ zombie_devgui_think() {
 
         break;
       case #"100_self_revives":
-        array::thread_all(getPlayers(), &zm_laststand::function_3d685b5f, 100);
+        array::thread_all(getPlayers(), &zm_laststand::set_self_revive_count, 100);
         break;
       case #"hash_72783b08840a3ab7":
         players = getPlayers();
 
         if(players.size >= 1) {
-          players[0] thread zm_laststand::function_3d685b5f(100);
+          players[0] thread zm_laststand::set_self_revive_count(100);
         }
 
         break;
@@ -1627,7 +1627,7 @@ zombie_devgui_think() {
         players = getPlayers();
 
         if(players.size >= 2) {
-          players[1] thread zm_laststand::function_3d685b5f(100);
+          players[1] thread zm_laststand::set_self_revive_count(100);
         }
 
         break;
@@ -1635,7 +1635,7 @@ zombie_devgui_think() {
         players = getPlayers();
 
         if(players.size >= 3) {
-          players[2] thread zm_laststand::function_3d685b5f(100);
+          players[2] thread zm_laststand::set_self_revive_count(100);
         }
 
         break;
@@ -1643,7 +1643,7 @@ zombie_devgui_think() {
         players = getPlayers();
 
         if(players.size >= 4) {
-          players[3] thread zm_laststand::function_3d685b5f(100);
+          players[3] thread zm_laststand::set_self_revive_count(100);
         }
 
         break;
@@ -2333,7 +2333,7 @@ function_4bb7eb36() {
   origin = chest.zbarrier.origin;
   forward = anglesToForward(chest.zbarrier.angles);
   right = anglestoright(chest.zbarrier.angles);
-  var_21f5823e = vectortoangles(right);
+  plangles = vectortoangles(right);
   plorigin = origin - 48 * right;
 
   switch (entnum) {
@@ -2352,7 +2352,7 @@ function_4bb7eb36() {
   }
 
   self setOrigin(plorigin);
-  self setplayerangles(var_21f5823e);
+  self setplayerangles(plangles);
 }
 
 function_84f0a909() {
@@ -2367,7 +2367,7 @@ function_84f0a909() {
   origin = pap.origin;
   forward = anglesToForward(pap.angles);
   right = anglestoright(pap.angles);
-  var_21f5823e = vectortoangles(right * -1);
+  plangles = vectortoangles(right * -1);
   plorigin = origin + 72 * right;
 
   switch (entnum) {
@@ -2386,7 +2386,7 @@ function_84f0a909() {
   }
 
   self setOrigin(plorigin);
-  self setplayerangles(var_21f5823e);
+  self setplayerangles(plangles);
 }
 
 zombie_devgui_cool_jetgun() {

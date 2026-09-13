@@ -254,15 +254,15 @@ updatetextongamepadchange() {
   }
 
   waittillframeend();
-  var_8671d17 = self is_player_gamepad_enabled();
+  lastgamepad = self is_player_gamepad_enabled();
 
   while(true) {
-    var_4084aa7 = self is_player_gamepad_enabled();
+    nowgamepad = self is_player_gamepad_enabled();
 
-    if(var_4084aa7 != var_8671d17) {
-      var_8671d17 = var_4084aa7;
+    if(nowgamepad != lastgamepad) {
+      lastgamepad = nowgamepad;
 
-      if(var_4084aa7) {
+      if(nowgamepad) {
         if(!(isDefined(self.slopelocked) && self.slopelocked)) {
           self.matchslopekey.label = #"mp_ph_slope";
         } else {

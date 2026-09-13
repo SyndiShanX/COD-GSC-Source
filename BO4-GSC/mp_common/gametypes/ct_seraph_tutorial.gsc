@@ -1395,8 +1395,8 @@ function_3ea10d34(var_e8437733, str_level_endon) {
   }
 }
 
-spawn_robot(var_8b84b3ce, var_ce2b0d5) {
-  robot = ct_ai::function_4c8f915a(var_8b84b3ce);
+spawn_robot(v_spawn_loc, var_ce2b0d5) {
+  robot = ct_ai::function_4c8f915a(v_spawn_loc);
   ai_tank::function_9b13ebf(robot);
   robot.goalradius = 300;
   robot setgoal(var_ce2b0d5);

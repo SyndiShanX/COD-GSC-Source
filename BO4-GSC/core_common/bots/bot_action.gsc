@@ -2739,20 +2739,20 @@ get_max_health() {
 }
 
 look_along_path() {
-  var_e125ba43 = "Path";
+  debuglabel = "Path";
   debugcolor = (1, 1, 1);
   var_8be65bb9 = self function_f04bd922();
 
   if(isDefined(var_8be65bb9) && isDefined(var_8be65bb9.var_2cfdc66d)) {
     var_104d463 = var_8be65bb9.var_2cfdc66d;
-    var_e125ba43 = "Corner";
+    debuglabel = "Corner";
 
     if(isDefined(var_8be65bb9.var_b7af6731)) {
       distsq = distance2dsquared(self.origin, var_104d463);
 
       if(distsq < 4096) {
         var_104d463 = var_8be65bb9.var_b7af6731;
-        var_e125ba43 = "Next Corner";
+        debuglabel = "Next Corner";
       }
     }
 
@@ -2760,17 +2760,17 @@ look_along_path() {
     debugcolor = (1, 1, 0);
   } else if(isDefined(self.overridegoalpos)) {
     lookpoint = self.overridegoalpos;
-    var_e125ba43 = "Override Goal Pos";
+    debuglabel = "Override Goal Pos";
     debugcolor = (1, 0, 1);
   } else {
     lookpoint = self.goalpos;
-    var_e125ba43 = self.goalforced ? "Goal Pos (Forced)" : "Goal Pos";
+    debuglabel = self.goalforced ? "Goal Pos (Forced)" : "Goal Pos";
     debugcolor = self.goalforced ? (0, 1, 1) : (0, 1, 0);
   }
 
   viewheight = self getplayerviewheight();
   lookpoint += (0, 0, viewheight);
-  self look_at_point(lookpoint, var_e125ba43, debugcolor);
+  self look_at_point(lookpoint, debuglabel, debugcolor);
 }
 
 function_412e04fa(node) {
@@ -2805,12 +2805,12 @@ function_412e04fa(node) {
   self botsetlookangles(lookangles);
 }
 
-look_at_point(point, var_e125ba43, debugcolor) {
+look_at_point(point, debuglabel, debugcolor) {
   self botsetlookpoint(point);
 
   if(self bot::should_record("<dev string:x635>")) {
     recordsphere(point, 4, debugcolor, "<dev string:x4b>");
-    record3dtext(var_e125ba43, point + (0, 0, 5), debugcolor, "<dev string:x4b>", undefined, 0.5);
+    record3dtext(debuglabel, point + (0, 0, 5), debugcolor, "<dev string:x4b>", undefined, 0.5);
   }
 }
 
@@ -2903,9 +2903,9 @@ function_2b8f7067() {
   if(isDefined(self.var_83867a22)) {
     viewheight = self getplayerviewheight();
     lookpoint = self.var_83867a22.origin + (0, 0, viewheight);
-    var_e125ba43 = "Neighboring Region Entrance";
+    debuglabel = "Neighboring Region Entrance";
     debugcolor = (1, 0, 0);
-    self look_at_point(lookpoint, var_e125ba43, debugcolor);
+    self look_at_point(lookpoint, debuglabel, debugcolor);
     return;
   }
 

@@ -55,9 +55,9 @@ on_player_spawned(local_client_num) {
 
 on_player_corpse(localclientnum, params) {
   self endon(#"death");
-  var_1edcbdd3 = params.player.visionpulsereveal;
+  isrevealed = params.player.visionpulsereveal;
 
-  if(isDefined(var_1edcbdd3) && var_1edcbdd3) {
+  if(isDefined(isrevealed) && isrevealed) {
     self.visionpulsereveal = 1;
     self.var_a768b7b6 = params.player.var_a768b7b6;
     self util::waittill_dobj(localclientnum);

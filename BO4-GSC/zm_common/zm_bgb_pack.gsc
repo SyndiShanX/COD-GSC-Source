@@ -264,7 +264,7 @@ function_5d618bb4(str_bgb, n_index) {
 
   if(b_succeed) {
     if(isDefined(self.bgb_pack[n_index]) && isDefined(level.bgb[self.bgb_pack[n_index]]) && !(isDefined(level.bgb[self.bgb_pack[n_index]].var_8fd0fb47) && level.bgb[self.bgb_pack[n_index]].var_8fd0fb47)) {
-      self.var_22fbe1cc++;
+      self.n_round_counter++;
     }
 
     self function_b2308cd(n_index, 1);
@@ -422,11 +422,11 @@ function_261a46f4() {
 function_efe33e13() {
   self notify(#"hash_5d9f5eee2722843a");
   self endon(#"hash_5d9f5eee2722843a", #"disconnect");
-  self.var_22fbe1cc = 0;
+  self.n_round_counter = 0;
 
   for(;;) {
     level waittill(#"end_of_round");
-    self.var_22fbe1cc = 0;
+    self.n_round_counter = 0;
 
     if(!zm_trial_disable_bgbs::is_active()) {
       self function_f2173c97(0);
@@ -475,7 +475,7 @@ global_cooldown(n_index) {
 
   self function_a1f97e79(0, undefined, var_10b7b97a);
 
-  if(self.var_22fbe1cc >= 4) {
+  if(self.n_round_counter >= 4) {
     self function_f2173c97(1);
   } else {
     self playlocalsound(#"hash_2a9d100a5cbc7dbe");

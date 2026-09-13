@@ -263,7 +263,7 @@ function_8d7ad318(launchpos, trajectory, targetpos) {
 function_4b28fc8c(entity) {
   assert(isDefined(entity.ai.var_a05929e4));
   launchpos = entity gettagorigin("j_head");
-  var_d82e1fd1 = entity gettagangles("j_head");
+  launchangle = entity gettagangles("j_head");
 
   recordsphere(launchpos, 3, (0, 0, 1), "<dev string:x41>");
 
@@ -850,7 +850,7 @@ function_4c731a08() {
   self.maxhealth = self ai::function_9139c839().minhealth;
 
   for(i = 0; i < level.players.size - 1; i++) {
-    self.maxhealth += int(self ai::function_9139c839().minhealth * self ai::function_9139c839().var_854eebd);
+    self.maxhealth += int(self ai::function_9139c839().minhealth * self ai::function_9139c839().numplayerhealthscale);
   }
 
   self.health = self.maxhealth;
@@ -1283,7 +1283,7 @@ function_4d479d22(elephant) {
   elephant.maxhealth = elephant ai::function_9139c839().minhealth;
 
   for(i = 0; i < level.players.size - 1; i++) {
-    elephant.maxhealth += int(elephant ai::function_9139c839().minhealth * elephant ai::function_9139c839().var_854eebd);
+    elephant.maxhealth += int(elephant ai::function_9139c839().minhealth * elephant ai::function_9139c839().numplayerhealthscale);
   }
 
   elephant.health = elephant.maxhealth;

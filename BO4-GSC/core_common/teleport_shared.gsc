@@ -10,7 +10,7 @@
 #include scripts\core_common\vehicle_shared;
 #namespace teleport;
 
-team(kvp, var_dad37549, var_b095575e = 0) {
+team(kvp, var_dad37549, b_skip_flash = 0) {
   level function_1d2a3300();
   var_bac46abd = self function_166effac(kvp, var_dad37549);
 
@@ -26,7 +26,7 @@ team(kvp, var_dad37549, var_b095575e = 0) {
   foreach(e_player in level.players) {
     foreach(s_teleport in var_bac46abd.a_s_players) {
       if(!(isDefined(s_teleport.b_used) && s_teleport.b_used)) {
-        e_player function_29305761(s_teleport, var_bac46abd.var_dad37549, var_b095575e);
+        e_player function_29305761(s_teleport, var_bac46abd.var_dad37549, b_skip_flash);
         break;
       }
     }
@@ -51,7 +51,7 @@ team(kvp, var_dad37549, var_b095575e = 0) {
   return 1;
 }
 
-player(e_player, kvp, var_dad37549, var_b095575e = 0) {
+player(e_player, kvp, var_dad37549, b_skip_flash = 0) {
   if(!isalive(e_player)) {
     return;
   }
@@ -63,7 +63,7 @@ player(e_player, kvp, var_dad37549, var_b095575e = 0) {
 
   foreach(s_teleport in level.a_s_teleport_players) {
     if(s_teleport.(str_key) === str_value && !(isDefined(s_teleport.b_used) && s_teleport.b_used)) {
-      e_player function_29305761(s_teleport, var_20212d26.var_dad37549, var_b095575e);
+      e_player function_29305761(s_teleport, var_20212d26.var_dad37549, b_skip_flash);
       return 1;
     }
   }
@@ -194,7 +194,7 @@ function_166effac(kvp, var_dad37549) {
   };
 }
 
-function_29305761(s_teleport, var_dad37549, var_b095575e = 0) {
+function_29305761(s_teleport, var_dad37549, b_skip_flash = 0) {
   self endon(#"death");
 
   if(distancesquared(s_teleport.origin, self.origin) < var_dad37549 * var_dad37549) {
@@ -203,7 +203,7 @@ function_29305761(s_teleport, var_dad37549, var_b095575e = 0) {
 
   s_teleport.b_used = 1;
 
-  if(!var_b095575e) {
+  if(!b_skip_flash) {
     self thread lui::screen_flash(0, 0.3, 0.3);
   }
 

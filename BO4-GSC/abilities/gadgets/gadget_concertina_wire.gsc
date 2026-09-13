@@ -82,7 +82,7 @@ onplayerkilled(s_params) {
   }
 
   weapon = s_params.weapon;
-  var_4fd6205f = isDefined(self.var_c6a21b50.owner) ? self.var_c6a21b50.owner == s_params.eattacker : 0;
+  attackerisowner = isDefined(self.var_c6a21b50.owner) ? self.var_c6a21b50.owner == s_params.eattacker : 0;
 
   if(!isDefined(s_params.eattacker) || !isPlayer(s_params.eattacker)) {
     return;
@@ -101,7 +101,7 @@ onplayerkilled(s_params) {
     killstreaks::processscoreevent(#"hash_152856ae19af395b", self.var_c6a21b50.owner, self, level.var_87226c31.concertinawireweapon);
   }
 
-  if(isDefined(level.playgadgetsuccess) && var_4fd6205f) {
+  if(isDefined(level.playgadgetsuccess) && attackerisowner) {
     relativepos = vectorNormalize(self.origin - s_params.eattacker.origin);
     dir = anglesToForward(s_params.eattacker getplayerangles());
     dotproduct = vectordot(dir, relativepos);

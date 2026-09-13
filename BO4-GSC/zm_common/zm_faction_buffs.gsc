@@ -60,7 +60,7 @@ function_9af806be(var_c5b25bc5) {
       self perks::perk_setperk(#"specialty_faction_helmet");
       break;
     case 6:
-      self zm_laststand::function_3a00302e(1);
+      self zm_laststand::increment_self_revive_count(1);
 
       if(!isDefined(self.n_regen_delay)) {
         self.n_regen_delay = zombie_utility::get_zombie_var("player_health_regen_delay");
@@ -93,7 +93,7 @@ function_2a94cd59() {
       self perks::perk_unsetperk(#"specialty_faction_helmet");
       break;
     case 6:
-      self zm_laststand::function_409dc98e(1, 0);
+      self zm_laststand::decrement_self_revive_count(1, 0);
       self.n_regen_delay -= 1;
       break;
   }
@@ -272,11 +272,11 @@ on_player_connect() {
   self devgui_player_menu();
 }
 
-function_c1ccd7f3(var_fc09f1a3, n_player, ...) {
+function_c1ccd7f3(func_to_run, n_player, ...) {
   a_e_players = getPlayers();
 
   if(a_e_players.size >= n_player) {
-    util::single_func_argarray(a_e_players[n_player - 1], var_fc09f1a3, vararg);
+    util::single_func_argarray(a_e_players[n_player - 1], func_to_run, vararg);
   }
 }
 

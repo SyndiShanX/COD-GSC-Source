@@ -1977,7 +1977,7 @@ player_give_reward(e_trig) {
 
   switch (var_aa4f9213) {
     case #"self_revive":
-      self zm_laststand::function_3a00302e();
+      self zm_laststand::increment_self_revive_count();
       self clientfield::set("force_challenge_model", 0);
       break;
     case #"free_perk":

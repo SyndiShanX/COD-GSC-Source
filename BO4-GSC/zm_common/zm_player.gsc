@@ -548,7 +548,7 @@ function_3799b373(var_fb6fa3e1, var_bbbf9a69 = 0) {
       continue;
     }
 
-    if(e_player laststand::player_is_in_laststand() && e_player zm_laststand::function_618fd37e() <= 0) {
+    if(e_player laststand::player_is_in_laststand() && e_player zm_laststand::get_self_revive_count() <= 0) {
       var_2af2f14d = 1;
       continue;
     }
@@ -784,7 +784,7 @@ player_out_of_playable_area_monitor() {
         }
 
         if(self.health <= n_damage) {
-          self zm_laststand::function_3d685b5f(0);
+          self zm_laststand::set_self_revive_count(0);
           self.var_39c78617 = 1;
         }
 
@@ -1741,8 +1741,8 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, w
     }
   }
 
-  if(self hasperk(#"specialty_whoswho") && self zm_laststand::function_618fd37e() > 0) {
-    self zm_laststand::function_409dc98e();
+  if(self hasperk(#"specialty_whoswho") && self zm_laststand::get_self_revive_count() > 0) {
+    self zm_laststand::decrement_self_revive_count();
 
     if(isDefined(level.whoswho_laststand_func)) {
       self thread[[level.whoswho_laststand_func]]();
@@ -1750,7 +1750,7 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, w
     }
   }
 
-  if(self zm_laststand::function_618fd37e() > 0) {
+  if(self zm_laststand::get_self_revive_count() > 0) {
     var_228d944 = 1;
   } else {
     var_228d944 = function_3799b373(self);

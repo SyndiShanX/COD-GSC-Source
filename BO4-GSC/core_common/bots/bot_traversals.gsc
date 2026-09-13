@@ -316,10 +316,10 @@ edge_approach(edgepos, normal, dist = 0) {
   }
 }
 
-jump(var_75f5c2cb) {
+jump(jumppos) {
   if(self should_record("<dev string:x152>")) {
-    record3dtext("<dev string:x1f0>", var_75f5c2cb, (1, 1, 1), "<dev string:x163>", undefined, 0.5);
-    recordsphere(var_75f5c2cb, 3, (1, 1, 1), "<dev string:x163>", self);
+    record3dtext("<dev string:x1f0>", jumppos, (1, 1, 1), "<dev string:x163>", undefined, 0.5);
+    recordsphere(jumppos, 3, (1, 1, 1), "<dev string:x163>", self);
   }
 
   self bottapbutton(10);

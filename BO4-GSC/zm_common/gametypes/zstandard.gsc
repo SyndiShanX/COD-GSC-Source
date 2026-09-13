@@ -829,8 +829,8 @@ function_c48750b() {
     self function_cd6476e(s_waitresult.n_points);
 
     if(self.score >= 20000 * var_273349fe) {
-      var_7b2ac985 = zm_laststand::function_618fd37e();
-      self zm_laststand::function_3d685b5f(var_7b2ac985 + 1);
+      var_7b2ac985 = zm_laststand::get_self_revive_count();
+      self zm_laststand::set_self_revive_count(var_7b2ac985 + 1);
       self zm_utility::function_846eb7dd(#"zombie_notification_extra_life", #"hash_3d34018a57f83b7c");
       level thread zm_audio::sndannouncerplayvox(#"extra_life", self, undefined, undefined, 1);
       var_273349fe = function_4e9a2af4(var_273349fe);
@@ -1613,14 +1613,14 @@ function_dcba938b() {
 
   switch (self.var_4a24e8f0) {
     case 0:
-      self zm_laststand::function_3d685b5f(level.numlives);
+      self zm_laststand::set_self_revive_count(level.numlives);
       break;
     case 1:
-      self zm_laststand::function_3d685b5f(1);
+      self zm_laststand::set_self_revive_count(1);
       self thread function_9850b18();
       break;
     default:
-      self zm_laststand::function_3d685b5f(0);
+      self zm_laststand::set_self_revive_count(0);
       self thread function_9850b18();
       break;
   }
@@ -1633,11 +1633,11 @@ function_3166e32b() {
   self function_10c7411b();
   self playsoundtoplayer(#"zmb_laststand_enter_plr", self);
 
-  if(zm_laststand::function_618fd37e() > 0) {
+  if(zm_laststand::get_self_revive_count() > 0) {
     level thread zm_audio::sndannouncerplayvox(#"player_down", self);
     zm_utility::function_3e549e65();
     self.var_d6229296 = 1;
-    self zm_laststand::function_409dc98e();
+    self zm_laststand::decrement_self_revive_count();
 
     if(!level.var_b9f167ba self_revive_visuals_rush::is_open(self)) {
       level.var_b9f167ba self_revive_visuals_rush::open(self);
@@ -1785,7 +1785,7 @@ function_a76ea907() {
 function_3928d86(params) {
   clientfield::set_world_uimodel("PlayerList.client" + self.entity_num + ".playerIsDowned", 0);
 
-  if(zm_laststand::function_618fd37e() >= 0) {
+  if(zm_laststand::get_self_revive_count() >= 0) {
     self thread function_9850b18();
   }
 }

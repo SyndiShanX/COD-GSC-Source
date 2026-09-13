@@ -37,7 +37,7 @@ enable() {
     level.var_67998b2d = 0;
   }
 
-  self thread bgb::function_f51e3503(240, &function_db295169, &function_cbaf1f69);
+  self thread bgb::player_proximity_watcher(240, &function_db295169, &function_cbaf1f69);
   self thread function_68acd38e();
   self thread revive_override();
 }

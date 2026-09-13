@@ -2647,8 +2647,8 @@ function_c9d90b42() {
     s_portal thread zm_white_portals::reenable_teleporter();
   }
 
-  foreach(var_5baafbb2 in level.var_76a7ad28) {
-    var_5baafbb2 function_f6ac524d();
+  foreach(s_perk_machine in level.var_76a7ad28) {
+    s_perk_machine function_f6ac524d();
   }
 
   level exploder::exploder("fxexp_script_perk_lgt");
@@ -2716,8 +2716,8 @@ function_12ea5b51() {
   level flag::clear("pap_power_ready");
   level exploder::stop_exploder("fxexp_script_pap_lgt");
 
-  foreach(var_5baafbb2 in level.var_76a7ad28) {
-    var_5baafbb2 function_d12682c5();
+  foreach(s_perk_machine in level.var_76a7ad28) {
+    s_perk_machine function_d12682c5();
   }
 
   level exploder::stop_exploder("fxexp_script_perk_lgt");

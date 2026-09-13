@@ -349,14 +349,14 @@ function_fc58f46f() {
 }
 
 get_target_offset(target) {
-  var_8134d046 = -12;
+  target_z_offset = -12;
   stance = target getstance();
 
   if(stance == "prone") {
-    var_8134d046 = -2;
+    target_z_offset = -2;
   }
 
-  return (0, 0, var_8134d046);
+  return (0, 0, target_z_offset);
 }
 
 turretscanning() {

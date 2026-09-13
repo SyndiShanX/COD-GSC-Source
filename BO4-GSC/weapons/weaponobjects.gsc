@@ -926,7 +926,7 @@ wasproximityalarmactivatedbyself() {
   return isDefined(self.owner.var_4cd6885) && self.owner.var_4cd6885 == self;
 }
 
-proximityalarmactivate(active, watcher, var_af12fba0 = undefined) {
+proximityalarmactivate(active, watcher, triggeringentity = undefined) {
   if(!isPlayer(self.owner)) {
     return;
   }
@@ -1019,7 +1019,7 @@ proximityalarmloop(watcher, owner) {
   self.proximity_deployed = 1;
   alarmstatusold = "notify";
   alarmstatus = "off";
-  var_af12fba0 = undefined;
+  triggeringentity = undefined;
 
   while(true) {
     wait 0.05;
@@ -1037,7 +1037,7 @@ proximityalarmloop(watcher, owner) {
       self proximityalarmactivate(0, watcher);
     } else if(alarmstatus != alarmstatusold || alarmstatus == "on" && !isDefined(self.owner.var_4cd6885)) {
       if(alarmstatus == "on") {
-        self proximityalarmactivate(1, watcher, var_af12fba0);
+        self proximityalarmactivate(1, watcher, triggeringentity);
       } else {
         self proximityalarmactivate(0, watcher);
       }
@@ -1046,7 +1046,7 @@ proximityalarmloop(watcher, owner) {
     }
 
     alarmstatus = "off";
-    var_af12fba0 = undefined;
+    triggeringentity = undefined;
     actors = getactorarray();
     players = getPlayers();
     detectentities = arraycombine(players, actors, 0, 0);
@@ -1119,7 +1119,7 @@ proximityalarmloop(watcher, owner) {
       }
 
       alarmstatus = "on";
-      var_af12fba0 = entity;
+      triggeringentity = entity;
       break;
     }
   }

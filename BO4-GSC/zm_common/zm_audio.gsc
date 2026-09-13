@@ -332,9 +332,9 @@ function_dd19aefa(death) {
   }
 
   e_speaker = undefined;
-  var_a841b5f1 = array::randomize(zm_vo::get_valid_players());
+  a_potential_players = array::randomize(zm_vo::get_valid_players());
 
-  foreach(e_player in var_a841b5f1) {
+  foreach(e_player in a_potential_players) {
     if(e_player != self && zm_vo::function_5c82f986(e_player, self)) {
       e_speaker = e_player;
       break;

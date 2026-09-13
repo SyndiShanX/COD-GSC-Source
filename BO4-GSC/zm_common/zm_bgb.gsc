@@ -1258,7 +1258,7 @@ function_3fa57f3f() {
   }
 }
 
-function_f51e3503(n_max_distance, var_5250f4f6, var_8bc18989) {
+player_proximity_watcher(n_max_distance, var_5250f4f6, var_8bc18989) {
   self endon(#"disconnect", #"bled_out", #"bgb_update");
   self.var_9c42f3fe = [];
 

@@ -98,8 +98,8 @@ function_834ab8cc() {
     e_pap zm_pack_a_punch::set_state_hidden();
   }
 
-  foreach(var_5baafbb2 in level.var_76a7ad28) {
-    var_5baafbb2 zm_perks::function_59fb56ff(0);
+  foreach(s_perk_machine in level.var_76a7ad28) {
+    s_perk_machine zm_perks::function_59fb56ff(0);
   }
 }
 
@@ -123,15 +123,15 @@ function_22bf8bd4(n_perk_index) {
     return;
   }
 
-  foreach(var_5baafbb2 in level.var_76a7ad28) {
-    assert(isDefined(var_5baafbb2.s_vapor_altar), "<dev string:xab>");
+  foreach(s_perk_machine in level.var_76a7ad28) {
+    assert(isDefined(s_perk_machine.s_vapor_altar), "<dev string:xab>");
 
-    if(var_5baafbb2.s_vapor_altar.script_int == n_perk_index) {
+    if(s_perk_machine.s_vapor_altar.script_int == n_perk_index) {
       var_fc50707f = getEntArray("zm_random_machine_blocker", "script_noteworthy");
-      var_46d6340f = arraygetclosest(var_5baafbb2.origin, var_fc50707f);
+      var_46d6340f = arraygetclosest(s_perk_machine.origin, var_fc50707f);
       var_46d6340f thread function_da95f7();
       exploder::exploder("fxexp_script_perk_lgt");
-      var_5baafbb2 function_4204dba2();
+      s_perk_machine function_4204dba2();
     }
   }
 }

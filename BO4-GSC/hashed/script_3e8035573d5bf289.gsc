@@ -35,7 +35,7 @@ function_386c20ef(player) {
     return;
   }
 
-  if(player zm_laststand::function_618fd37e() < 5) {
-    player zm_laststand::function_3a00302e();
+  if(player zm_laststand::get_self_revive_count() < 5) {
+    player zm_laststand::increment_self_revive_count();
   }
 }

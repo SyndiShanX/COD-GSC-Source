@@ -1811,11 +1811,11 @@ function_ce0c92c1(localclientnum, var_dde5862c) {
     level.var_e8250c7b = var_dde5862c;
 
     if(isDefined(level.var_4c6f850d)) {
-      var_19b413e2 = level.var_4c6f850d;
+      old_character_list = level.var_4c6f850d;
       var_375e4c88 = [];
       var_8632c0a1 = [];
 
-      foreach(xuid, data in var_19b413e2) {
+      foreach(xuid, data in old_character_list) {
         if(array::contains(var_dde5862c, xuid)) {
           var_375e4c88[xuid] = data;
         }

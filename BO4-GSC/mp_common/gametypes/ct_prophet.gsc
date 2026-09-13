@@ -339,12 +339,12 @@ function_b80b4832() {
   return false;
 }
 
-function_544df02a(var_468ef41, var_8b84b3ce) {
+function_544df02a(var_468ef41, v_spawn_loc) {
   while(var_468ef41 > 0) {
-    robot = ct_ai::function_4c8f915a(var_8b84b3ce);
+    robot = ct_ai::function_4c8f915a(v_spawn_loc);
     ai_tank::function_9b13ebf(robot);
     robot.goalradius = 900;
-    robot setgoal(var_8b84b3ce);
+    robot setgoal(v_spawn_loc);
     robot.health = 350;
     robot.overridevehicledamage = &function_e1086742;
     var_468ef41--;

@@ -272,7 +272,7 @@ get_player_index() {
   }
 }
 
-function_8bda2199(v_pos) {
+get_closest_zombie(v_pos) {
   a_ai_zombies = getaiteamarray(level.zombie_team);
 
   if(a_ai_zombies.size > 0) {

@@ -481,13 +481,13 @@ function_1eddbf9e() {
 
 function_c74f4cf4() {
   level endon(#"end_game", #"hash_5bc627cff03bad5");
-  var_22fbe1cc = 0;
+  n_round_counter = 0;
 
   while(true) {
     level waittill(#"end_of_round");
-    var_22fbe1cc++;
+    n_round_counter++;
 
-    if(var_22fbe1cc >= 7) {
+    if(n_round_counter >= 7) {
       level notify(#"hash_205c15aeab8e14c4");
       level thread zm_audio::sndmusicsystem_stopandflush();
       waitframe(1);

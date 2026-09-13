@@ -3989,12 +3989,12 @@ function_faee09d2() {
   }
 }
 
-defend_spawn(var_4bf95f4c) {
-  if(level.players.size < var_4bf95f4c.minplayers) {
+defend_spawn(s_spawn_info) {
+  if(level.players.size < s_spawn_info.minplayers) {
     return;
   }
 
-  foreach(n_lane in var_4bf95f4c.lanes) {
+  foreach(n_lane in s_spawn_info.lanes) {
     switch (n_lane) {
       case 1:
         var_97f729b = level.var_cc131a81;
@@ -4009,7 +4009,7 @@ defend_spawn(var_4bf95f4c) {
         return;
     }
 
-    for(i = 0; i < var_4bf95f4c.quantity; i++) {
+    for(i = 0; i < s_spawn_info.quantity; i++) {
       while(level.ai[#"axis"].size >= 24) {
         level.var_ec9554ad -= 0.1;
         waitframe(1);
@@ -4017,7 +4017,7 @@ defend_spawn(var_4bf95f4c) {
 
       s_random_spawn = array::random(var_97f729b);
 
-      switch (var_4bf95f4c.archetype) {
+      switch (s_spawn_info.archetype) {
         case #"normal":
           for(ai = undefined; !isDefined(ai); ai = zombie_utility::spawn_zombie(level.zombie_spawners[0], "defend_trilane_fill", s_random_spawn, function_92d8f779())) {
             wait 0.5;
@@ -4452,7 +4452,7 @@ boss_fight() {
   e_elephant.takedamage = 1;
   e_elephant notify(#"entrace_done");
   level thread function_4d682898();
-  level thread function_92e1954c();
+  level thread weakpoint_damage_watcher();
   level thread function_1a05e10c(#"boss_ranged_attack_2_start", #"m_quest", #"missile_warn");
   level thread function_1a05e10c(#"boss_ranged_attack_2_launched", #"m_quest", #"missile_track");
   level thread function_1a05e10c(#"towers_boss_charge", #"m_quest", #"charge_warn");
@@ -4970,7 +4970,7 @@ function_1a05e10c(str_notify, var_f13787ad, var_ca8a3a53) {
   }
 }
 
-function_92e1954c() {
+weakpoint_damage_watcher() {
   level endon(#"end_game", #"boss_battle_done");
 
   while(true) {

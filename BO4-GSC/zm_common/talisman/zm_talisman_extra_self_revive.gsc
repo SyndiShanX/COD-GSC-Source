@@ -24,5 +24,5 @@ __init__() {
 }
 
 activate_talisman() {
-  self zm_laststand::function_3a00302e(1);
+  self zm_laststand::increment_self_revive_count(1);
 }

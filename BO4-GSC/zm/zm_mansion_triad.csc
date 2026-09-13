@@ -56,7 +56,7 @@ function_da63d789(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       } else {
         self endon(#"kill_blue_fire_fx");
         var_77e629d2 = undefined;
-        var_6ab87412 = undefined;
+        b_third_person = undefined;
         fx_blue_fire = undefined;
 
         while(isDefined(self) && function_65b9eb0f(localclientnum)) {
@@ -68,16 +68,16 @@ function_da63d789(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
               fx_blue_fire = playviewmodelfx(localclientnum, level._effect[#"shield_fire_1p"], "tag_weapon_left");
               var_77e629d2 = 1;
-              var_6ab87412 = 0;
+              b_third_person = 0;
               self thread function_da5e1d54(localclientnum, fx_blue_fire);
             }
-          } else if(!(isDefined(var_6ab87412) && var_6ab87412)) {
+          } else if(!(isDefined(b_third_person) && b_third_person)) {
             if(isDefined(fx_blue_fire)) {
               killfx(localclientnum, fx_blue_fire);
             }
 
             fx_blue_fire = util::playFXOnTag(localclientnum, level._effect[#"shield_fire_3p"], self, "tag_weapon_left");
-            var_6ab87412 = 1;
+            b_third_person = 1;
             var_77e629d2 = 0;
             self thread function_da5e1d54(localclientnum, fx_blue_fire);
           }

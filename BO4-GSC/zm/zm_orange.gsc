@@ -121,8 +121,8 @@ event_handler[level_init] main(eventstruct) {
   if(zm_utility::is_standard()) {
     var_6811b7e = struct::get_array("perk_vapor_altar");
 
-    foreach(var_5baafbb2 in var_6811b7e) {
-      var_5baafbb2.var_21c535b = -1;
+    foreach(s_perk_machine in var_6811b7e) {
+      s_perk_machine.var_21c535b = -1;
     }
   }
 

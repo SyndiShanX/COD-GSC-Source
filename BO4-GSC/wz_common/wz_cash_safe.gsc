@@ -172,7 +172,7 @@ function_3d49217f(activator) {
   return undefined;
 }
 
-function_7c5a1e82(activator, stateindex, var_9bdcfcd8) {
+function_7c5a1e82(activator, stateindex, nextstateindex) {
   self clear_prompts(activator);
 
   if(!isDefined(activator) || !isstruct(activator.inventory) || !isarray(activator.inventory.items)) {

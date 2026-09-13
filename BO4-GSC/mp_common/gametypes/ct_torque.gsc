@@ -606,7 +606,7 @@ function_2444772e(n_time, var_94629f1a = 50) {
     wait var_6f0549ed;
   }
 
-  self ct_utils::function_c314f6b1(45);
+  self ct_utils::addtotimer(45);
   self thread ct_utils::function_b42ce622(#"sabotagedata_complete");
   level thread ct_utils::function_bfa522d1();
   level.ai_vip flag::clear("vip_checkpoint_action");

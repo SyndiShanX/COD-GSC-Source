@@ -886,59 +886,59 @@ function_48a6b85() {
   dpad_up = 0;
   dpad_down = 0;
 
-  if(!isDefined(level.var_94f4ca81)) {
-    level.var_94f4ca81 = spawnStruct();
-    level.var_94f4ca81.dataset = [];
+  if(!isDefined(level.spawninspection)) {
+    level.spawninspection = spawnStruct();
+    level.spawninspection.dataset = [];
     var_2e980658 = spawnStruct();
     var_2e980658.name = "<dev string:x451>";
     var_2e980658.spawns = level.spawnpoints;
-    level.var_94f4ca81.dataset[0] = var_2e980658;
+    level.spawninspection.dataset[0] = var_2e980658;
     var_bc7d1357 = spawnStruct();
     var_bc7d1357.name = "<dev string:x461>";
     var_bc7d1357.spawns = level.spawn_start[#"allies"];
-    level.var_94f4ca81.dataset[1] = var_bc7d1357;
+    level.spawninspection.dataset[1] = var_bc7d1357;
     var_2a1cb802 = spawnStruct();
     var_2a1cb802.name = "<dev string:x479>";
     var_2a1cb802.spawns = level.spawn_start[#"axis"];
-    level.var_94f4ca81.dataset[2] = var_2a1cb802;
+    level.spawninspection.dataset[2] = var_2a1cb802;
     var_c95c8eff = spawnStruct();
     var_c95c8eff.name = "<dev string:x48f>";
     var_c95c8eff.spawns = level.allspawnpoints;
-    level.var_94f4ca81.dataset[3] = var_c95c8eff;
+    level.spawninspection.dataset[3] = var_c95c8eff;
   }
 
-  level.var_94f4ca81.teamfilter = "<dev string:x3b>";
-  level.var_94f4ca81.currentsetindex = 0;
-  level.var_94f4ca81.currentspawnindex = 0;
-  var_f94a23 = 0;
+  level.spawninspection.teamfilter = "<dev string:x3b>";
+  level.spawninspection.currentsetindex = 0;
+  level.spawninspection.currentspawnindex = 0;
+  updateplayerposition = 0;
 
   while(true) {
     self setactionslot(3, "<dev string:x38>");
     self setactionslot(4, "<dev string:x38>");
 
     if(!dpad_up && self buttonPressed("<dev string:x4a0>")) {
-      level.var_94f4ca81.currentsetindex++;
+      level.spawninspection.currentsetindex++;
 
-      if(level.var_94f4ca81.currentsetindex >= level.var_94f4ca81.dataset.size) {
-        level.var_94f4ca81.currentsetindex = 0;
+      if(level.spawninspection.currentsetindex >= level.spawninspection.dataset.size) {
+        level.spawninspection.currentsetindex = 0;
       }
 
-      level.var_94f4ca81.currentspawnindex = 0;
+      level.spawninspection.currentspawnindex = 0;
       dpad_up = 1;
-      var_f94a23 = 1;
+      updateplayerposition = 1;
     } else if(!self buttonPressed("<dev string:x4a0>")) {
       dpad_up = 0;
     }
 
     if(!dpad_down && self buttonPressed("<dev string:x4aa>")) {
-      level.var_94f4ca81.currentsetindex--;
+      level.spawninspection.currentsetindex--;
 
-      if(level.var_94f4ca81.currentsetindex < 0) {
-        level.var_94f4ca81.currentsetindex = level.var_94f4ca81.dataset.size - 1;
+      if(level.spawninspection.currentsetindex < 0) {
+        level.spawninspection.currentsetindex = level.spawninspection.dataset.size - 1;
       }
 
-      level.var_94f4ca81.currentspawnindex = 0;
-      var_f94a23 = 1;
+      level.spawninspection.currentspawnindex = 0;
+      updateplayerposition = 1;
       dpad_down = 1;
     } else if(!self buttonPressed("<dev string:x4aa>")) {
       dpad_down = 0;
@@ -946,18 +946,18 @@ function_48a6b85() {
 
     if(!dpad_left && self buttonPressed("<dev string:x4b6>")) {
       while(true) {
-        level.var_94f4ca81.currentspawnindex--;
+        level.spawninspection.currentspawnindex--;
 
-        if(level.var_94f4ca81.currentspawnindex < 0) {
-          level.var_94f4ca81.currentspawnindex = level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].spawns.size - 1;
+        if(level.spawninspection.currentspawnindex < 0) {
+          level.spawninspection.currentspawnindex = level.spawninspection.dataset[level.spawninspection.currentsetindex].spawns.size - 1;
         }
 
-        if(!(isDefined(level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].spawns[level.var_94f4ca81.currentspawnindex].ct) && level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].spawns[level.var_94f4ca81.currentspawnindex].ct)) {
+        if(!(isDefined(level.spawninspection.dataset[level.spawninspection.currentsetindex].spawns[level.spawninspection.currentspawnindex].ct) && level.spawninspection.dataset[level.spawninspection.currentsetindex].spawns[level.spawninspection.currentspawnindex].ct)) {
           break;
         }
       }
 
-      var_f94a23 = 1;
+      updateplayerposition = 1;
       dpad_left = 1;
     } else if(!self buttonPressed("<dev string:x4b6>")) {
       dpad_left = 0;
@@ -965,34 +965,34 @@ function_48a6b85() {
 
     if(!dpad_right && self buttonPressed("<dev string:x4c2>")) {
       while(true) {
-        level.var_94f4ca81.currentspawnindex++;
+        level.spawninspection.currentspawnindex++;
 
-        if(level.var_94f4ca81.currentspawnindex >= level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].spawns.size) {
-          level.var_94f4ca81.currentspawnindex = 0;
+        if(level.spawninspection.currentspawnindex >= level.spawninspection.dataset[level.spawninspection.currentsetindex].spawns.size) {
+          level.spawninspection.currentspawnindex = 0;
         }
 
-        if(!(isDefined(level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].spawns[level.var_94f4ca81.currentspawnindex].ct) && level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].spawns[level.var_94f4ca81.currentspawnindex].ct)) {
+        if(!(isDefined(level.spawninspection.dataset[level.spawninspection.currentsetindex].spawns[level.spawninspection.currentspawnindex].ct) && level.spawninspection.dataset[level.spawninspection.currentsetindex].spawns[level.spawninspection.currentspawnindex].ct)) {
           break;
         }
       }
 
-      var_f94a23 = 1;
+      updateplayerposition = 1;
       dpad_right = 1;
     } else if(!self buttonPressed("<dev string:x4c2>")) {
       dpad_right = 0;
     }
 
-    if(var_f94a23) {
-      origin = level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].spawns[level.var_94f4ca81.currentspawnindex].origin;
-      angles = level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].spawns[level.var_94f4ca81.currentspawnindex].angles;
-      println("<dev string:x4cf>" + level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].name);
+    if(updateplayerposition) {
+      origin = level.spawninspection.dataset[level.spawninspection.currentsetindex].spawns[level.spawninspection.currentspawnindex].origin;
+      angles = level.spawninspection.dataset[level.spawninspection.currentsetindex].spawns[level.spawninspection.currentspawnindex].angles;
+      println("<dev string:x4cf>" + level.spawninspection.dataset[level.spawninspection.currentsetindex].name);
       self setOrigin(origin);
       self setplayerangles(angles);
-      var_f94a23 = 0;
+      updateplayerposition = 0;
     }
 
-    debug2dtext((100, 750, 0), "<dev string:x4f1>" + level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].name, (1, 0, 0));
-    debug2dtext((100, 800, 0), "<dev string:x4fd>" + string(level.var_94f4ca81.currentspawnindex) + "<dev string:x507>" + string(level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].spawns.size), (1, 0, 0));
+    debug2dtext((100, 750, 0), "<dev string:x4f1>" + level.spawninspection.dataset[level.spawninspection.currentsetindex].name, (1, 0, 0));
+    debug2dtext((100, 800, 0), "<dev string:x4fd>" + string(level.spawninspection.currentspawnindex) + "<dev string:x507>" + string(level.spawninspection.dataset[level.spawninspection.currentsetindex].spawns.size), (1, 0, 0));
     waitframe(1);
   }
 }

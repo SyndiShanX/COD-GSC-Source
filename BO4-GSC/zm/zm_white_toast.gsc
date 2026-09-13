@@ -412,8 +412,8 @@ function_ca3759b1() {
   exploder::exploder_stop("fxexp_elec_beds");
   level.pack_a_punch.trigger_stubs[0] function_cf62f3c7();
 
-  foreach(var_5baafbb2 in level.var_76a7ad28) {
-    var_5baafbb2 function_cf62f3c7();
+  foreach(s_perk_machine in level.var_76a7ad28) {
+    s_perk_machine function_cf62f3c7();
   }
 
   foreach(s_wallbuy in level._spawned_wallbuys) {
@@ -631,8 +631,8 @@ function_5ef0416() {
 
   level.pack_a_punch.trigger_stubs[0] function_641f4ec(&function_a96ea498, &function_c6c9b014, 5000, "discharge_pap");
 
-  foreach(var_5baafbb2 in level.var_76a7ad28) {
-    var_5baafbb2 function_641f4ec(&function_c03c3007, &function_c6c9b014, 3000, "discharge_perk");
+  foreach(s_perk_machine in level.var_76a7ad28) {
+    s_perk_machine function_641f4ec(&function_c03c3007, &function_c6c9b014, 3000, "discharge_perk");
   }
 
   foreach(s_wallbuy in level._spawned_wallbuys) {

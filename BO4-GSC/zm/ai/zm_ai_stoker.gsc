@@ -738,13 +738,13 @@ function_b2602782(entity) {
   }
 
   targetpos += (0, 0, entity ai::function_9139c839().var_f227d0d0);
-  var_872c6826 = vectortoangles(targetpos - launchpos);
+  dirangles = vectortoangles(targetpos - launchpos);
   angles = function_cc68801f(launchpos, targetpos, entity ai::function_9139c839().var_81da787, getdvarfloat(#"bg_lowgravity", 0));
 
   if(isDefined(angles) && angles[#"lowangle"] > 0) {
-    dir = anglesToForward((-1 * angles[#"lowangle"], var_872c6826[1], var_872c6826[2]));
+    dir = anglesToForward((-1 * angles[#"lowangle"], dirangles[1], dirangles[2]));
   } else {
-    dir = anglesToForward(var_872c6826);
+    dir = anglesToForward(dirangles);
   }
 
   velocity = dir * entity ai::function_9139c839().var_81da787;

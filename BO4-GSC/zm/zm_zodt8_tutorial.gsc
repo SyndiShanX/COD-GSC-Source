@@ -241,7 +241,7 @@ on_player_spawned() {
     level.tutorialbot = self;
     self.dontspeak = 1;
     self endon(#"disconnect");
-    self zm_laststand::function_3d685b5f(0);
+    self zm_laststand::set_self_revive_count(0);
     self ai::set_behavior_attribute("control", "autonomous");
     self zm_audio::function_654ec86b();
     self waittill(#"death");
@@ -551,7 +551,7 @@ tutorial() {
   level function_f1376337(0);
   level flag::wait_till("start_zombie_round_logic");
   waittillframeend();
-  level.tutorialplayer zm_laststand::function_3d685b5f(0);
+  level.tutorialplayer zm_laststand::set_self_revive_count(0);
 
   switch (level.var_ecdc2cb1) {
     case 0:
@@ -960,7 +960,7 @@ function_bfd3a7b1() {
   self zm_perks::give_perk_vapor(#"specialty_cooldown", 2);
   self zm_perks::give_perk_vapor(#"specialty_deadshot", 3);
   wait 1;
-  self zm_laststand::function_3d685b5f(0);
+  self zm_laststand::set_self_revive_count(0);
   self freeze_player_controls();
   self function_2b4bf122(5500);
   self function_e326c0a();

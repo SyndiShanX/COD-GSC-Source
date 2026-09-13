@@ -1546,7 +1546,7 @@ function_fe738a08(table_id) {
   origin = unitrigger.origin;
   forward = anglesToForward(unitrigger.angles);
   right = anglestoright(unitrigger.angles);
-  var_21f5823e = vectortoangles(forward * -1);
+  plangles = vectortoangles(forward * -1);
   plorigin = origin + 48 * forward;
 
   switch (entnum) {
@@ -1565,5 +1565,5 @@ function_fe738a08(table_id) {
   }
 
   self setOrigin(plorigin);
-  self setplayerangles(var_21f5823e);
+  self setplayerangles(plangles);
 }

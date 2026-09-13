@@ -216,7 +216,7 @@ function_8d44707e(var_7112190, var_fc65696c) {
   n_min = self ai::function_9139c839().minhealth;
   n_max = self ai::function_9139c839().maxhealth;
   var_cc83a31d = self ai::function_9139c839().var_250a1683;
-  var_1be13a31 = self ai::function_9139c839().var_854eebd;
+  var_1be13a31 = self ai::function_9139c839().numplayerhealthscale;
   n_health = n_min + var_cc83a31d * (isDefined(var_fc65696c) ? var_fc65696c : level.round_number);
 
   if(isDefined(var_1be13a31) && var_7112190 && level.players.size > 1) {

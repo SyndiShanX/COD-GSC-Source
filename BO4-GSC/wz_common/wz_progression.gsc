@@ -96,7 +96,7 @@ on_contract_complete(params) {
   }
 }
 
-give_xp(var_c14ca2e6, xpstat, amount) {
+give_xp(xptype, xpstat, amount) {
   player = self;
   assert(isPlayer(player));
   var_60a35182 = 0;
@@ -107,11 +107,11 @@ give_xp(var_c14ca2e6, xpstat, amount) {
 
   if(isDefined(var_60a35182) && var_60a35182) {
     prevxp = player stats::get_stat_global("PARAGON_RANKXP");
-    player addrankxpvalue(var_c14ca2e6, amount);
+    player addrankxpvalue(xptype, amount);
     curxp = player stats::get_stat_global("PARAGON_RANKXP");
   } else {
     prevxp = player stats::get_stat_global("RANKXP");
-    player addrankxpvalue(var_c14ca2e6, amount);
+    player addrankxpvalue(xptype, amount);
     curxp = player stats::get_stat_global("RANKXP");
 
     if(isDefined(player.pers) && isDefined(player.pers[#"plevel"]) && player.pers[#"plevel"] == level.maxprestige - 1) {

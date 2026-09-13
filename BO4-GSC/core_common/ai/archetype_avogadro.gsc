@@ -242,15 +242,15 @@ function_7e5905cd(entity) {
     self show();
   }
 
-  var_8706203c = 500;
+  ranged_attack_cooldown = 500;
 
   if(isDefined(entity.var_fffac33)) {
-    var_8706203c = [[entity.var_fffac33]](entity);
+    ranged_attack_cooldown = [[entity.var_fffac33]](entity);
   }
 
   blackboard::addblackboardevent(#"hash_27bee30b37f7debe", {
     #entity: self
-  }, var_8706203c);
+  }, ranged_attack_cooldown);
 }
 
 function_6cf71c35(entity) {

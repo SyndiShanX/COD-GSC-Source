@@ -335,8 +335,8 @@ function_185b0894(localclientnum, oldval, newval) {
   self endon("4f9ede08240c30af");
   basepitch = 0.8;
   var_9a7dc638 = 1;
-  var_f802a6b1 = 255;
-  progresspercentage = 1 / var_f802a6b1;
+  maxprogress = 255;
+  progresspercentage = 1 / maxprogress;
   waitresult = level waittill(#"zone_initialization");
 
   while(true) {

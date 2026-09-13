@@ -2414,8 +2414,8 @@ function_124486ee(delay) {
   var_892397fd = self;
   missile_owner = var_892397fd.var_52334e8c;
   blast_radius = 128;
-  var_83f35abe = 45;
-  var_6927cfa0 = 40;
+  blast_inner_damage = 45;
+  blast_outer_damage = 40;
   var_c45ef84c = 40 * 40;
 
   if(delay > 0) {
@@ -2444,7 +2444,7 @@ function_124486ee(delay) {
       player.var_c29c44ca = player.health;
     }
 
-    radiusdamage(explosion_point, blast_radius, var_83f35abe, var_6927cfa0, e_blightfather, "MOD_UNKNOWN", w_weapon);
+    radiusdamage(explosion_point, blast_radius, blast_inner_damage, blast_outer_damage, e_blightfather, "MOD_UNKNOWN", w_weapon);
     function_44e3e0d1(explosion_point);
 
     if(isDefined(var_892397fd)) {

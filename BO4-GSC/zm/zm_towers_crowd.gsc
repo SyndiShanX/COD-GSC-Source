@@ -408,8 +408,8 @@ function_5d6119de() {
     }
 
     if(var_be79df4d.size && var_f8b181cf.size) {
-      var_a841b5f1 = arraycombine(var_be79df4d, var_f8b181cf, 0, 0);
-      e_target_player = function_79b77be1(var_a841b5f1);
+      a_potential_players = arraycombine(var_be79df4d, var_f8b181cf, 0, 0);
+      e_target_player = function_79b77be1(a_potential_players);
     } else if(var_be79df4d.size) {
       e_target_player = function_79b77be1(var_be79df4d);
     } else if(var_f8b181cf.size) {

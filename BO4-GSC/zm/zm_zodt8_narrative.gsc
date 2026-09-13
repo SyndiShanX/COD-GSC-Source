@@ -139,13 +139,13 @@ function_7b89f32a() {
 
   s_loc = struct::get(#"clottedcreamtea");
   v_offset = (0, 0, -32);
-  var_55e11aa9 = util::spawn_model("tag_origin", mdl_painting.origin + v_offset, mdl_painting.angles);
-  mdl_painting linkTo(var_55e11aa9);
+  mdl_linker = util::spawn_model("tag_origin", mdl_painting.origin + v_offset, mdl_painting.angles);
+  mdl_painting linkTo(mdl_linker);
   v_offset = (0, 20, 24);
-  var_55e11aa9 moveTo(s_loc.origin + v_offset, 1.5, 1.5);
-  var_55e11aa9 rotatepitch(138, 1.5, 1.5);
-  var_55e11aa9 waittill(#"movedone");
-  var_55e11aa9 delete();
+  mdl_linker moveTo(s_loc.origin + v_offset, 1.5, 1.5);
+  mdl_linker rotatepitch(138, 1.5, 1.5);
+  mdl_linker waittill(#"movedone");
+  mdl_linker delete();
   mdl_painting disconnectPaths();
 }
 
@@ -573,10 +573,10 @@ function_c867ac0a(e_homunculus, var_21bb918c, var_c8279d50) {
   e_homunculus sethighdetail(1);
   var_21bb918c sethighdetail(1);
   var_c8279d50 sethighdetail(1);
-  var_21bb918c.var_55e11aa9 = util::spawn_model("tag_origin", var_21bb918c.origin);
-  var_c8279d50.var_55e11aa9 = util::spawn_model("tag_origin", var_c8279d50.origin);
-  var_21bb918c.var_55e11aa9 linkTo(level.e_sway);
-  var_c8279d50.var_55e11aa9 linkTo(level.e_sway);
+  var_21bb918c.mdl_linker = util::spawn_model("tag_origin", var_21bb918c.origin);
+  var_c8279d50.mdl_linker = util::spawn_model("tag_origin", var_c8279d50.origin);
+  var_21bb918c.mdl_linker linkTo(level.e_sway);
+  var_c8279d50.mdl_linker linkTo(level.e_sway);
   a_angles = function_a7ae2066();
   function_dc92e2d4(a_angles, var_21bb918c, var_c8279d50, #"start");
   wait 1;
@@ -664,8 +664,8 @@ function_c867ac0a(e_homunculus, var_21bb918c, var_c8279d50) {
   function_dc92e2d4(a_angles, var_21bb918c, var_c8279d50, #"d");
   callback::remove_on_connect(&function_e1a452f5);
   level notify(#"end_flag_semaphore");
-  var_21bb918c.var_55e11aa9 delete();
-  var_c8279d50.var_55e11aa9 delete();
+  var_21bb918c.mdl_linker delete();
+  var_c8279d50.mdl_linker delete();
   var_21bb918c delete();
   var_c8279d50 delete();
   e_homunculus scene::stop(#"aib_t8_zm_zod_homunculus_idle_01", 1);
@@ -681,8 +681,8 @@ function_dc92e2d4(a_angles, var_21bb918c, var_c8279d50, str_letter) {
   var_21bb918c rotateTo(a_angles[#"left"][str_letter], 0.5);
   var_c8279d50 rotateTo(a_angles[#"right"][str_letter], 0.5);
   var_c8279d50 waittill(#"rotatedone");
-  var_21bb918c.origin = var_21bb918c.var_55e11aa9.origin;
-  var_c8279d50.origin = var_c8279d50.var_55e11aa9.origin;
+  var_21bb918c.origin = var_21bb918c.mdl_linker.origin;
+  var_c8279d50.origin = var_c8279d50.mdl_linker.origin;
   var_21bb918c linkTo(level.e_sway);
   var_c8279d50 linkTo(level.e_sway);
   wait 1.25;
