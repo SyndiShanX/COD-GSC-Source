@@ -228,7 +228,7 @@ function function_5e04bf78() {
   org namespace_a3646565::move_to_position_over_time(point2.origin, timems, height);
   silverback thread namespace_eaa992c::function_285a2999("turret_impact");
   silverback playSound("zmb_simianaut_roar");
-  level.doa.var_63e2b87e = silverback;
+  level.doa.sidebay_to_medical = silverback;
   level notify("hash_5c2d4fa4", "end", "zombie_melee");
   level notify("hash_a284788a");
   wait(2);
@@ -239,7 +239,7 @@ function function_5e04bf78() {
   level thread function_46882430(&"DOA_MY_TREASURE", silverback.origin + vectorscale((0, 0, 1), 95), 2);
   wait(1.8);
   level notify("zombie_outro_mood_angry");
-  level.doa.var_63e2b87e = level.doa.var_e102b46;
+  level.doa.sidebay_to_medical = level.doa.var_e102b46;
   silverback playSound("evt_turret_takeoff");
   silverback thread namespace_eaa992c::function_285a2999("boss_takeoff");
   silverback thread namespace_eaa992c::function_285a2999("crater_dust");
@@ -526,10 +526,10 @@ function function_78713841() {
   level endon("hash_448ca7a6");
   self endon("death");
   while(true) {
-    if(!isDefined(level.doa.var_63e2b87e)) {
+    if(!isDefined(level.doa.sidebay_to_medical)) {
       wait(randomfloatrange(0.1, 2));
     } else {
-      anim_ang = vectortoangles(level.doa.var_63e2b87e.origin - self.origin);
+      anim_ang = vectortoangles(level.doa.sidebay_to_medical.origin - self.origin);
       self.org rotateTo((0, anim_ang[1], 0), randomfloatrange(0.5, 2));
       self.org waittill("rotatedone");
     }

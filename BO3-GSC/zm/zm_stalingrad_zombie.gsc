@@ -343,7 +343,7 @@ function function_cec23cbf() {
             var_36eeba73 = function_8caf1f25(var_a62c1873);
           }
         }
-      } else if(level.var_f73b438a > 1 && var_c48f3f8a <= n_current_time) {
+      } else if(level.p9_rus_utility_breaker_box_01_dark > 1 && var_c48f3f8a <= n_current_time) {
         if(zm_ai_sentinel_drone::function_74ab7484() && (zombie_utility::get_current_zombie_count() + level.zombie_total) > 5) {
           s_spawn_loc = array::random(var_bb6abcd9);
           if(zm_ai_sentinel_drone::function_19d0b055(1, undefined, 1, s_spawn_loc)) {

@@ -139,7 +139,7 @@ function function_a16ce474(str_model, var_475b0a4e, str_tag) {
       self.var_ad21546 = 0.5;
       self.n_margwa_head_damage_scale = 1.33;
       self.var_bbd3efb8 = 1.33;
-      self.var_fd3f1056 = 1;
+      self.ctffriendlyflagreturned = 1;
       self setperk("specialty_tombstone");
       self function_b712ee6f(4);
       self function_30fb8e63(1);
@@ -226,7 +226,7 @@ function function_e5974b49() {
   self.b_no_trap_damage = undefined;
   self.var_74fe492b = undefined;
   self.var_adaec269 = undefined;
-  self.var_fd3f1056 = undefined;
+  self.ctffriendlyflagreturned = undefined;
   self.var_eef0616b = undefined;
   self.var_15c79ed8 = undefined;
   self.n_player_health_boost = undefined;

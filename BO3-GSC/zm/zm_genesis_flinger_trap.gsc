@@ -167,9 +167,9 @@ function trap_lights_green() {
   }
 }
 
-function function_c7f4ae43(var_c4f1ee44, e_player) {
+function function_c7f4ae43(_k4452, e_player) {
   self flag::set("trap_active");
-  self thread function_ef013ee8(var_c4f1ee44, e_player);
+  self thread function_ef013ee8(_k4452, e_player);
   self waittill("trap_done");
   self flag::clear("trap_active");
   self flag::set("trap_cooldown");
@@ -177,7 +177,7 @@ function function_c7f4ae43(var_c4f1ee44, e_player) {
   self flag::clear("trap_cooldown");
 }
 
-function function_ef013ee8(var_c4f1ee44, e_player) {
+function function_ef013ee8(_k4452, e_player) {
   n_start_time = gettime();
   n_total_time = 0;
   level notify("trap_activate", self);

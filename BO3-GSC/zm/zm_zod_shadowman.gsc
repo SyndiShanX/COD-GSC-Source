@@ -655,11 +655,11 @@ function function_80fd208e(n_location_index) {
 }
 
 function function_479785a0(var_e28c6e5d) {
-  var_d7afb638 = "ee_plague_pods_" + var_e28c6e5d;
-  if(!isDefined(level.var_c0f45612[var_d7afb638].spawned)) {
+  oldzone = "ee_plague_pods_" + var_e28c6e5d;
+  if(!isDefined(level.var_c0f45612[oldzone].spawned)) {
     return undefined;
   }
-  var_c0eb23cc = array::filter(level.var_c0f45612[var_d7afb638].spawned, 0, &function_9edae260);
+  var_c0eb23cc = array::filter(level.var_c0f45612[oldzone].spawned, 0, &function_9edae260);
   if(var_c0eb23cc.size === 0) {
     return undefined;
   }

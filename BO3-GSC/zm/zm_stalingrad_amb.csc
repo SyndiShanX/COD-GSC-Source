@@ -22,7 +22,7 @@ function main() {
   level thread function_d4a3f122();
   level thread function_daa9b420();
   level thread play_flux_whispers();
-  level thread function_157aa38();
+  level thread i_mtl_p9_usa_bug_zapper_01_on_e();
   level thread function_1e68a892();
 }
 
@@ -183,7 +183,7 @@ function play_flux_whispers() {
   }
 }
 
-function function_157aa38() {
+function i_mtl_p9_usa_bug_zapper_01_on_e() {
   level waittill("power_on_level");
   playSound(0, "amb_sophia_boot", (300, 4862, 296));
   audio::playloopat("amb_sophia_computer_screen_lp", (-404, 4764, 223));

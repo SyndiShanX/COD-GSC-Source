@@ -174,7 +174,7 @@ function function_a9d852c2() {}
 
 function function_90eea052() {}
 
-function function_931550b9() {}
+function distscalar() {}
 
 function skipto_water_room_done() {}
 

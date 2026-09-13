@@ -940,7 +940,7 @@ function function_7427eacc(einflictor, eattacker, idamage, idflags, smeansofdeat
       idamage = idamage * self.var_eef0616b;
     }
   }
-  if(isDefined(self.var_fd3f1056) && self.var_fd3f1056) {
+  if(isDefined(self.ctffriendlyflagreturned) && self.ctffriendlyflagreturned) {
     if(isDefined(eattacker) && isDefined(eattacker.archetype) && eattacker.archetype == "zombie" && smeansofdeath == "MOD_EXPLOSIVE") {
       idamage = 0;
     }

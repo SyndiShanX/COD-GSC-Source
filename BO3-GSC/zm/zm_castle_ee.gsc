@@ -1390,29 +1390,29 @@ function function_3918d831(var_ff61ccd6) {
 function function_96ca12f5(var_2bfe2eca) {
   level endon("hash_a126360f");
   var_6589e15e = getEnt("symbols_lower_tower", "targetname");
-  var_d665b72a = getEnt("symbols_launch_platform", "targetname");
+  huey_anim_reference = getEnt("symbols_launch_platform", "targetname");
   while(true) {
     var_2bfe2eca waittill("trigger_activated");
     playSoundAtPosition("zmb_ee_simonsays_button", var_2bfe2eca.origin);
     if(!level flag::get("simon_press_check")) {
       level flag::set("simon_press_check");
       var_6589e15e hidepart((("tag_scn" + var_2bfe2eca.var_a95f1f56) + "_sym") + var_2bfe2eca.var_d82c7c68);
-      var_d665b72a hidepart((("tag_scn" + var_2bfe2eca.var_a95f1f56) + "_sym") + var_2bfe2eca.var_d82c7c68);
+      huey_anim_reference hidepart((("tag_scn" + var_2bfe2eca.var_a95f1f56) + "_sym") + var_2bfe2eca.var_d82c7c68);
       exploder::kill_exploder("lgt_EE_consol1_monitor_" + var_2bfe2eca.var_a95f1f56);
       exploder::kill_exploder("lgt_EE_consol2_monitor_" + var_2bfe2eca.var_a95f1f56);
       var_6589e15e showpart("tag_scn0_sym" + var_2bfe2eca.var_d82c7c68);
-      var_d665b72a showpart("tag_scn0_sym" + var_2bfe2eca.var_d82c7c68);
+      huey_anim_reference showpart("tag_scn0_sym" + var_2bfe2eca.var_d82c7c68);
       exploder::exploder("lgt_EE_consol1_monitor_main");
       exploder::exploder("lgt_EE_consol2_monitor_main");
       var_4bff825e = getEnt("safe_code_present", "targetname");
       var_4bff825e showpart((("tag_scn" + level.var_a44ebbe8.size) + "_sym") + var_2bfe2eca.var_d82c7c68);
       wait(1);
       var_6589e15e showpart((("tag_scn" + var_2bfe2eca.var_a95f1f56) + "_sym") + var_2bfe2eca.var_d82c7c68);
-      var_d665b72a showpart((("tag_scn" + var_2bfe2eca.var_a95f1f56) + "_sym") + var_2bfe2eca.var_d82c7c68);
+      huey_anim_reference showpart((("tag_scn" + var_2bfe2eca.var_a95f1f56) + "_sym") + var_2bfe2eca.var_d82c7c68);
       exploder::exploder("lgt_EE_consol1_monitor_" + var_2bfe2eca.var_a95f1f56);
       exploder::exploder("lgt_EE_consol2_monitor_" + var_2bfe2eca.var_a95f1f56);
       var_6589e15e hidepart("tag_scn0_sym" + var_2bfe2eca.var_d82c7c68);
-      var_d665b72a hidepart("tag_scn0_sym" + var_2bfe2eca.var_d82c7c68);
+      huey_anim_reference hidepart("tag_scn0_sym" + var_2bfe2eca.var_d82c7c68);
       exploder::kill_exploder("lgt_EE_consol1_monitor_main");
       exploder::kill_exploder("lgt_EE_consol2_monitor_main");
       if(!isDefined(level.var_a44ebbe8)) {

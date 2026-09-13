@@ -90,8 +90,8 @@ function gadget_roulette_on_connect() {
 
 function roulette_init_allow_spin() {
   if(self.isroulette === 1) {
-    if(!isDefined(self.pers[#"hash_9f129a92"])) {
-      self.pers[#"hash_9f129a92"] = 1;
+    if(!isDefined(self.pers[#"mp_stand_gun_butt_hit_01_lm_kilo121"])) {
+      self.pers[#"mp_stand_gun_butt_hit_01_lm_kilo121"] = 1;
     }
   }
 }
@@ -143,7 +143,7 @@ function watchrespin(weapon) {
   self endon("hero_gadget_activated");
   self notify("watchrespin");
   self endon("watchrespin");
-  if(!isDefined(self.pers[#"hash_9f129a92"]) || self.pers[#"hash_9f129a92"] == 0) {
+  if(!isDefined(self.pers[#"mp_stand_gun_butt_hit_01_lm_kilo121"]) || self.pers[#"mp_stand_gun_butt_hit_01_lm_kilo121"] == 0) {
     return;
   }
   self thread watchrespingadgetactivated();
@@ -156,7 +156,7 @@ function watchrespin(weapon) {
     if(self dpad_left_pressed()) {
       self.pers[#"hash_65987563"] = undefined;
       self giverandomweapon(weapon, 0);
-      self.pers[#"hash_9f129a92"] = 0;
+      self.pers[#"mp_stand_gun_butt_hit_01_lm_kilo121"] = 0;
       self notify("watchrespingadgetactivated");
       self notify("roulette_respin_activate");
       self clientfield::set_to_player("roulette_state", 2);
@@ -191,7 +191,7 @@ function watchgadgetactivated(weapon) {
   self notify("watchgadgetactivated");
   self endon("watchgadgetactivated");
   self waittill("hero_gadget_activated");
-  self.pers[#"hash_9f129a92"] = 1;
+  self.pers[#"mp_stand_gun_butt_hit_01_lm_kilo121"] = 1;
   if(isDefined(weapon) || weapon.name != "gadget_roulette") {
     self clientfield::set_to_player("roulette_state", 0);
   }

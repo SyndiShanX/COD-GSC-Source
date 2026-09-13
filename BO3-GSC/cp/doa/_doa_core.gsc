@@ -577,7 +577,7 @@ function function_53bcdb30() {
   level.doa.rules.fate_level_chance = 100;
   level.doa.rules.fate_wait = 30;
   level.doa.rules.var_9ff6711d = 26;
-  level.doa.rules.var_1d0b2f13 = 36;
+  level.doa.rules.parentpiece59 = 36;
   level.doa.rules.var_f5691d9b = 10;
   level.doa.rules.var_65fbf7bd = 300;
   level.doa.rules.var_a36002d3 = 120;

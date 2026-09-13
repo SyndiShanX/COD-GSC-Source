@@ -33,7 +33,7 @@ function autoexec init() {
   function_24ed806f();
   level flag::init("can_spawn_mechz", 1);
   spawner::add_archetype_spawn_function("mechz", &function_d8d01032);
-  spawner::add_archetype_spawn_function("mechz", &function_b7e11612);
+  spawner::add_archetype_spawn_function("mechz", &com_barrel_benzin);
   level thread function_76e7495b();
   level.mechz_should_stun_override = &function_f517cdd6;
   level.var_7f2a926d = &mechz_health_increases;
@@ -322,7 +322,7 @@ function spawn_effect() {
   self function_ee090a93();
 }
 
-function function_b7e11612() {
+function com_barrel_benzin() {
   self waittill("death");
   self zm_genesis_vo::function_f7879c72(self.attacker);
 }

@@ -153,7 +153,7 @@ function function_30137a38() {
 function function_8be04f83() {
   level.var_163a43e4 = [];
   level.var_428b5b88 = 0;
-  level.var_f73b438a = 0;
+  level.p9_rus_utility_breaker_box_01_dark = 0;
   level.var_fc730f22 = [];
   zm_weapons::add_custom_limited_weapon_check(&function_8c1bac65);
   level.var_6e68a823 = [];
@@ -479,7 +479,7 @@ function function_83dd194d() {
         var_2102f1cc++;
       }
     }
-    level.var_f73b438a++;
+    level.p9_rus_utility_breaker_box_01_dark++;
   }
   level waittill("hash_803aa6bf");
   level flag::clear("dragon_console_triggered");
