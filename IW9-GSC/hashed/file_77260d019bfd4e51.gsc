@@ -275,7 +275,7 @@ main() {
   if(scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508())
     brinit();
 
-  if(scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508() && getdvarint("dvar_ED4A71E34E488E86", 0) > 0)
+  if(scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508() && getdvarint("scr_wztrain_enable", 0) > 0)
     level thread _id_06AD4F9E2F4C6105::init();
 
   if(getdvarint("dvar_09A09DDBA14D94DA", 1)) {
@@ -315,7 +315,7 @@ brinit() {
   level.onlowpopstart = ::_id_0865DD7703C23C87;
   level.br_level = spawnStruct();
   _id_FDFE2D4AAF8EC33D = 19000;
-  _id_47C567A3B8B1E5E0 = getdvarint("dvar_512A3982CFB227FA", -1);
+  _id_47C567A3B8B1E5E0 = getdvarint("scr_game_c130heightoverride", -1);
 
   if(_id_47C567A3B8B1E5E0 != -1)
     _id_FDFE2D4AAF8EC33D = _id_47C567A3B8B1E5E0;
@@ -334,7 +334,7 @@ brinit() {
   level.br_level.br_mapboundsfull = [];
   level.br_level.br_mapboundsfull[0] = (_id_C978C90E8E5AB1F7, _id_C978C80E8E5AAFC4, 0);
   level.br_level.br_mapboundsfull[1] = (_id_3C590D0EE220B409, _id_3C590C0EE220B1D6, 0);
-  _id_1642D587A6F7F5EE = getdvarfloat("dvar_575DA0CEF7432907", 0.8);
+  _id_1642D587A6F7F5EE = getdvarfloat("scr_bounds_scale_mp_saba", 0.8);
   _id_3C590D0EE220B409 = level.mapcorners[0].origin[0] * _id_1642D587A6F7F5EE;
   _id_C978C90E8E5AB1F7 = level.mapcorners[1].origin[0] * _id_1642D587A6F7F5EE;
   _id_3C590C0EE220B1D6 = level.mapcorners[1].origin[1] * _id_1642D587A6F7F5EE;

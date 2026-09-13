@@ -23,7 +23,7 @@ callback_playerdamage_internal(einflictor, eattacker, victim, idamage, idflags, 
       return;
     }
 
-    if(getdvarint("dvar_B372945583547BE6", 0) && isPlayer(eattacker) && isPlayer(victim) && eattacker != victim) {
+    if(getdvarint("scr_dmz_pve_enabled", 0) && isPlayer(eattacker) && isPlayer(victim) && eattacker != victim) {
       _id_403E958ECD04F255(victim, "scr_dmz_pve_enabled 1");
       return;
     }
@@ -471,7 +471,7 @@ postplayerdamaged(einflictor, eattacker, victim, idamage, idflags, smeansofdeath
       case "MOD_EXPLOSIVE":
         victim scripts\mp\utility\stats::incpersstat("explosionsSurvived", 1);
 
-        if(getdvarint("dvar_CF6378092DB0D69C", 0) == 1) {
+        if(getdvarint("scr_live_ragdoll_on_explosives", 0) == 1) {
           if(isDefined(einflictor)) {
             _id_ACD8FAA0E7DDE1B2 = _id_347074F909E9DEA5(einflictor, objweapon);
 
@@ -1549,7 +1549,7 @@ modifyvehicletoplayerdamage(einflictor, eattacker, victim, idamage, smeansofdeat
     if(victim scripts\mp\utility\killstreak::isjuggernaut())
       _id_702BFC08FABD86CB = victim scripts\mp\juggernaut::jugg_modifyvehicletoplayerdamage(idamage, smeansofdeath);
 
-    if(getdvarint("dvar_EC8CD89141EAD8D9", 0) == 1) {
+    if(getdvarint("scr_live_ragdoll_on_vehicles", 0) == 1) {
       velocity = einflictor vehicle_getvelocity();
       _id_702BFC08FABD86CB = victim.health - 1;
 

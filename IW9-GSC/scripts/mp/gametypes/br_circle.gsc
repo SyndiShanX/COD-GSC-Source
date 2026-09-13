@@ -15,8 +15,8 @@ initcircle() {
   level.br_circle = spawnStruct();
   level.br_circle.mapbounds = level.br_level.br_mapbounds;
 
-  if(getdvarint("dvar_B5133E800E8D7FEF", 0) > 0)
-    level.br_circle.damagetick = [getdvarint("dvar_B5133E800E8D7FEF", 0)];
+  if(getdvarint("scr_br_circle_fixed_damage", 0) > 0)
+    level.br_circle.damagetick = [getdvarint("scr_br_circle_fixed_damage", 0)];
   else if(level.mapname == "mp_quarry2" || level.mapname == "mp_prison" || level.mapname == "mp_lumber")
     level.br_circle.damagetick = [9, 9, 9, 9, 9];
   else
@@ -395,7 +395,7 @@ circledamagetick() {
   if(_id_362C58E8BB39BCDA::isfeatureenabled("circleEarlyStart"))
     level waittill("infils_ready");
 
-  _id_5D954F1724092F5A = getdvarfloat("dvar_D6D1181CD67D957D", 1000.0);
+  _id_5D954F1724092F5A = getdvarfloat("scr_br_circle_object_cleanup_threshold", 1000.0);
   _id_A058DC250ACE641D = _id_CE6456364079CCE7();
 
   for(;;) {
@@ -437,7 +437,7 @@ circledamagetick() {
               _id_ACFA1A113BA7D7C7 = 1;
               player _id_F8D9C5F59FC6C187();
 
-              if(getdvarint("dvar_2B717602559E86B8", 0) == 1)
+              if(getdvarint("scr_time_in_gas_damage_modifier_enabled", 0) == 1)
                 _id_36E462D047634362 = player _id_1E0F84E555B3DE7D(_id_A058DC250ACE641D, damagetick);
               else
                 _id_36E462D047634362 = damagetick;
@@ -1097,7 +1097,7 @@ _id_64F6D9B4BA95ED35(_id_21231F7B22A75955) {
   }
 
   level.br_circle.br_finalcircleoverride = undefined;
-  _id_D7BD8769331C5B66 = getdvarvector("dvar_EB589C6BD2884BBB", (0, 0, 0));
+  _id_D7BD8769331C5B66 = getdvarvector("br_final_circle_override", (0, 0, 0));
 
   if(length(_id_D7BD8769331C5B66) > 0)
     level.br_circle.br_finalcircleoverride = _id_D7BD8769331C5B66;
@@ -1112,7 +1112,7 @@ _id_84E5EF30B000EF20() {
   if(!isDefined(level.br_level._id_257DEE2BBC2480F5)) {
     return;
   }
-  _id_E60BFC21D3DCED49 = getdvarint("dvar_D87502944AFEEE16", 0);
+  _id_E60BFC21D3DCED49 = getdvarint("scr_br_final_circle_override", 0);
 
   if(isDefined(level._id_B31733F431ED12E0) && isDefined(level._id_B31733F431ED12E0._id_E60BFC21D3DCED49))
     _id_E60BFC21D3DCED49 = level._id_B31733F431ED12E0._id_E60BFC21D3DCED49;
@@ -1207,7 +1207,7 @@ _precalcsafecirclecenters(_id_21231F7B22A75955, _id_B7C9FE00120EA96C, _id_437C3E
     return;
   }
 
-  _id_B0FDC1A74465D5B3 = getdvarfloat("dvar_14F6D33E8F4F0C84", 0.0);
+  _id_B0FDC1A74465D5B3 = getdvarfloat("scr_br_circle_first_placement_scale", 0.0);
   _id_BA2D3E495CF92C77 = _id_B0FDC1A74465D5B3 * level.br_level.br_circleradii[1];
   _id_DCB0CCFA24D727CA = [];
   _id_DCB0CCFA24D727CA[0] = level.br_circle.mapbounds[0][0] - _id_BA2D3E495CF92C77;
@@ -1291,7 +1291,7 @@ _precalcsafecirclecenters(_id_21231F7B22A75955, _id_B7C9FE00120EA96C, _id_437C3E
     return;
   }
   _id_7A50883C31353C77 = getdvarfloat("dvar_917B939513F89B55", 200);
-  _id_11C1E6222DA58849 = getdvarint("dvar_E65611A4D524BCBE", 0);
+  _id_11C1E6222DA58849 = getdvarint("scr_br_circle_clamp_max_circle_speed", 0);
   _id_C80692862885CC6B = 0;
 
   if(getdvarint("dvar_BBF992A979DF8E2C", 0) == 1) {
@@ -1934,15 +1934,15 @@ deletecircle(circleindex) {
 }
 
 applymovingcircles() {
-  if(!getdvarint("dvar_39A8907D7F184021", 1) || _id_362C58E8BB39BCDA::isfeaturedisabled("movingCircle")) {
+  if(!getdvarint("scr_br_moving_circle_enabled", 1) || _id_362C58E8BB39BCDA::isfeaturedisabled("movingCircle")) {
     level.br_level.br_movingcirclecount = 0;
     return;
   }
 
-  level.br_level.br_movingcirclecount = getdvarint("dvar_2499127213B409AF", 0);
-  level.br_level.br_movingcirclemovedistmin = getdvarfloat("dvar_C2162F0FAF12F429", 100);
-  level.br_level.br_movingcirclemovedistmax = getdvarfloat("dvar_C1F3210FAEEC8DA7", 300);
-  _id_9A7CC3CF1CC979D2 = getdvarint("dvar_7EDC88917D09C24F", 0);
+  level.br_level.br_movingcirclecount = getdvarint("scr_br_moving_circle_count", 0);
+  level.br_level.br_movingcirclemovedistmin = getdvarfloat("scr_br_moving_circle_move_dist_min", 100);
+  level.br_level.br_movingcirclemovedistmax = getdvarfloat("scr_br_moving_circle_move_dist_max", 300);
+  _id_9A7CC3CF1CC979D2 = getdvarint("scr_br_moving_circle_preset", 0);
   _id_209967C144016964 = level.br_level.br_circleradii.size - 1;
 
   switch (_id_9A7CC3CF1CC979D2) {
@@ -2274,7 +2274,7 @@ assertcirclesettings() {
     circlesettingsassert(_id_43A22B73F7AB26B7 <= _id_74B5B12BB6514385, "level.br_level.br_circleDelayTimes[" + _id_AC0E594AC96AA3A8 + "] " + _id_74B5B12BB6514385 + " > " + _id_43A22B73F7AB26B7);
   }
 
-  if(getdvarint("dvar_39A8907D7F184021", 1) && !_id_362C58E8BB39BCDA::isfeaturedisabled("movingCircle"))
+  if(getdvarint("scr_br_moving_circle_enabled", 1) && !_id_362C58E8BB39BCDA::isfeaturedisabled("movingCircle"))
     circlesettingsassert(level.br_level.br_circleradii[0] == level.br_level.br_circleradiizero, "Changing circle radius 0 is not supported");
 }
 

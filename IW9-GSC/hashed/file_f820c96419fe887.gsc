@@ -4,7 +4,7 @@
 ***********************************************/
 
 init() {
-  if(!getdvarint("dvar_58125DD5024D18CA", 0)) {
+  if(!getdvarint("scr_br_alt_mode_zxp", 0)) {
     return;
   }
   level._id_14CC24A75E8CD64D = ::_id_14CC24A75E8CD64D;

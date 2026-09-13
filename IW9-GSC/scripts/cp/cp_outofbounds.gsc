@@ -683,7 +683,7 @@ getmaxoutofboundstime() {
   outofboundstime = level.outofboundstime;
 
   if(!isDefined(outofboundstime)) {
-    outofboundstime = max(0, getdvarfloat("dvar_B773758221A0C100", 15));
+    outofboundstime = max(0, getdvarfloat("scr_outofboundstime", 15));
     level.outofboundstime = outofboundstime;
   }
 
@@ -694,7 +694,7 @@ getmaxoutofboundscooldown() {
   outofboundscooldown = level.outofboundscooldown;
 
   if(!isDefined(outofboundscooldown)) {
-    outofboundscooldown = max(0, getdvarfloat("dvar_1E90A42100FF3964", 3));
+    outofboundscooldown = max(0, getdvarfloat("scr_outofboundscooldown", 3));
     level.outofboundscooldown = outofboundscooldown;
   }
 
@@ -705,7 +705,7 @@ getmaxoutofboundsminefieldtime() {
   outofboundstimeminefield = level.outofboundstimeminefield;
 
   if(!isDefined(outofboundstimeminefield)) {
-    outofboundstimeminefield = max(0, getdvarfloat("dvar_E4BB2AF9293410E5", 10));
+    outofboundstimeminefield = max(0, getdvarfloat("scr_outofboundstimeminefield", 10));
     level.outofboundstimeminefield = outofboundstimeminefield;
   }
 

@@ -71,7 +71,7 @@ main() {
 }
 
 _id_A18E0DB907847C09() {
-  setDvar("dvar_ED4A71E34E488E86", 1);
+  setDvar("scr_wztrain_enable", 1);
   train_car_model = getEnt("train_car_model_26", "script_noteworthy");
   _id_A2DF5D611A749AC6 = scripts\engine\utility::getStructArray("train_car_26_loot", "script_noteworthy");
 

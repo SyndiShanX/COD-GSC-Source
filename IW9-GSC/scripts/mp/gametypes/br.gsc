@@ -19,8 +19,8 @@ main() {
   level._id_7D17E26667BE2792 = getdvarint("dvar_55D9444D8A3CE31A", 1);
   level._id_472D7A6D15E57940 = getdvarint("dvar_586D32848F833922", 1);
   level._id_1D814F83596D0A02 = getdvarint("dvar_07A1DA73FA673ED8", 1);
-  level._id_47207B7B330CF8E0 = getdvarint("dvar_7A10DC1404D50BC2", 0);
-  level._id_0F478C1F94CAA7E9 = getdvarint("dvar_4F0A12B17756A2D0", 1);
+  level._id_47207B7B330CF8E0 = getdvarint("scr_disableprematchsuper", 0);
+  level._id_0F478C1F94CAA7E9 = getdvarint("scr_use_playerdata_weapon_slot", 1);
   level._id_87A4731D4DCE4C3F = _id_2D9D24F7C63AC143::_id_8237B4EEAB275F08;
   level._id_58ADCE74179AB9EF = scripts\mp\utility\game::getsubgametype() != "dmz" && scripts\mp\utility\game::getsubgametype() != "exgm";
   scripts\cp_mp\utility\game_utility::removematchingents_bykey("delete_on_load", "targetname");
@@ -30,7 +30,7 @@ main() {
   _id_9BBACB179DEA3237[_id_9BBACB179DEA3237.size] = scripts\mp\utility\game::getsubgametype();
   scripts\mp\gameobjects::main(_id_9BBACB179DEA3237);
 
-  if(getdvarint("dvar_169CF144591321B3", 0) == 1) {
+  if(getdvarint("scr_br_voice_proxy_enabled", 0) == 1) {
     setDvar("voice_proximity_team", 0);
     setDvar("voice_proximity_radius", 2200);
 
@@ -71,10 +71,10 @@ main() {
     setdvarifuninitialized("dvar_DDD02929770FCC8C", 0);
     setdvarifuninitialized("dvar_7A493092F8A1C04C", getdvarint("dvar_DDD02929770FCC8C", 0));
     setdvarifuninitialized("dvar_A3A7191F4314591F", 2);
-    setdvarifuninitialized("dvar_BBA79EEB1C990103", 1);
+    setdvarifuninitialized("scr_player_laststandreviveretainhealth", 1);
     setdvarifuninitialized("dvar_1A0DE898609317B4", 1.0);
     setdvarifuninitialized("dvar_5C93DCD7535822E6", 0);
-    setdvarifuninitialized("dvar_1C8C6EC12CB275CA", 1);
+    setdvarifuninitialized("scr_br_respawn_token_is_self_revive", 1);
     setdvarifuninitialized("dvar_296DEC2CBCFB6606", 0);
     setdvarifuninitialized("dvar_1F9797AA5675C82A", 1);
     setdvarifuninitialized("dvar_1D3C72CAB41E5D7C", 1);
@@ -191,7 +191,7 @@ main() {
   level.traceselectedmaplocation = ::traceselectedmaplocation;
   level._id_947925F5FC6939A3 = ::_id_227CA42A35B0398B;
 
-  if(getdvarint("dvar_18B7464A93050781", 0)) {
+  if(getdvarint("scr_br_prematchffa", 0)) {
     level.br_prematchffa = 1;
 
     if(scripts\mp\utility\game::getsubgametype() != "dmz")
@@ -270,7 +270,7 @@ main() {
   if(!isDefined(level.skipprematchdropspawn))
     level.skipprematchdropspawn = getdvarint("dvar_D182F4551B978E2B", 0);
 
-  level.br_debugsolotest = getdvarint("dvar_C163D5DB19834C48", 0);
+  level.br_debugsolotest = getdvarint("scr_br_solo_test", 0);
   level._id_D804888D9484FF69 = getdvarint("dvar_732CD1E227920A87", 0);
 
   if(_id_A587B0B0998C6D13())
@@ -286,11 +286,11 @@ main() {
   if(scripts\mp\utility\game::getsubgametype() != "dmz")
     level._id_ED844DB90CB6D370 = 0;
 
-  level.br_pelletmaxdamage = getdvarint("dvar_316757C170FC976D", -1);
+  level.br_pelletmaxdamage = getdvarint("scr_br_pelletmaxdamage", -1);
   level._id_2CACA637693D024D = getdvarint("dvar_0FC3E181B5B3E5B7", -1);
-  level._id_22DB86FD48FEE384 = getdvarint("dvar_A72B8DAD6EDB5D9E", -1);
+  level._id_22DB86FD48FEE384 = getdvarint("scr_br_slugmaxdamage", -1);
   level._id_E247454AC2869696 = getdvarint("dvar_005FCBCE13EF8D5F", 9);
-  level._id_A7F81DFDC88E53E6 = getdvarint("dvar_4449685517101675", 0);
+  level._id_A7F81DFDC88E53E6 = getdvarint("unified_backpack_size", 0);
   level._id_4941FC1EE570D4CB = ::_id_C8915AC8C8987452;
   level._id_4C124F424CDFA325 = getdvarint("dvar_170C10715AF6A431", -1);
   level._id_6BED852A909E4F70 = getdvarint("dvar_ECA4CF1DB65156C9", 0);
@@ -305,11 +305,11 @@ main() {
   level._id_B13E35608B336D65 = _id_2D9D24F7C63AC143::_id_B13E35608B336D65;
   level._id_6196D9EA9A30E609 = _id_2D9D24F7C63AC143::_id_6196D9EA9A30E609;
   level._id_AFA6AFA7165491D8 = _id_2D9D24F7C63AC143::_id_897B29ADB37F06A7;
-  level._id_DC52A11D1EE2690E = getdvarint("dvar_4F15F2AA925E8391", 17000);
-  level._id_5B5A1FCD1024EDA5 = getdvarint("dvar_6928F1749EE75AF5", 0);
-  level._id_B257658F289A3108 = getdvarfloat("dvar_C8E65E0736E16B65", 0.09);
-  level._id_27506E83D743E391 = getdvarint("dvar_71F3055701408861", -1);
-  level._id_5321A1377F9CC5AA = getdvarint("dvar_81D2ECDEE8B86ABA", 6500);
+  level._id_DC52A11D1EE2690E = getdvarint("scr_br_default_spawn_height", 17000);
+  level._id_5B5A1FCD1024EDA5 = getdvarint("scr_br_dynamic_spawn_height_enable", 0);
+  level._id_B257658F289A3108 = getdvarfloat("scr_br_dynamic_spawn_height_reduction_percent", 0.09);
+  level._id_27506E83D743E391 = getdvarint("scr_br_dynamic_spawn_height_circle_index_limit", -1);
+  level._id_5321A1377F9CC5AA = getdvarint("scr_br_dynamic_spawn_height_minimum", 6500);
   _id_0CDA409F3A76DAC5();
 
   if(!isDefined(level.br_loadout_option))
@@ -355,7 +355,7 @@ main() {
   thread _id_828026E0C887CD11();
   thread _id_57D3850A12CF1D8F::_id_A894D6041798CC06();
   _id_48814951E916AF89::_id_93ADD0B65DB9F722(::_id_56869E118720CA3B, level);
-  level._id_9A849908E60B857C = getdvarint("dvar_9B611CF0CB4BF80E", 0);
+  level._id_9A849908E60B857C = getdvarint("br_perk_package_enabled", 0);
 
   if(!scripts\engine\utility::flag_exist("stealth_enabled")) {
     scripts\engine\utility::flag_init("stealth_enabled");
@@ -363,7 +363,7 @@ main() {
     scripts\engine\utility::flag_init("stealth_spotted");
   }
 
-  if(getdvarint("dvar_110917CAEA6FC144", 1) == 1)
+  if(getdvarint("scr_dmz_nukemapdataafterprematch", 1) == 1)
     level thread _id_EA010C4D09365B32();
 
   scripts\cp_mp\utility\script_utility::registersharedfunc("hud", "showBrDMZSplash", _id_4480C6CE37B2BDF3::_id_AE6091699E25D8B4);
@@ -1764,7 +1764,7 @@ updateplayerlocationcallouts() {
 }
 
 _id_0CDA409F3A76DAC5() {
-  _id_B68065A3DB843DD9 = getdvarint("dvar_2DBEFC43A77EFB18", 4);
+  _id_B68065A3DB843DD9 = getdvarint("scr_drop_on_death_version", 4);
   level._id_A2ED7C61B6DA2D72 = getdvarint("dvar_EECDEA7818A7FE27", 1) == 1;
 
   switch (_id_B68065A3DB843DD9) {
@@ -1843,7 +1843,7 @@ watchprematchdone() {
   level.challengesdisabled = 0;
   brclearscoreboardstats();
 
-  if(getdvarint("dvar_169CF144591321B3", 0) == 1) {
+  if(getdvarint("scr_br_voice_proxy_enabled", 0) == 1) {
     setDvar("voice_proximity_enemy", 1);
     setDvar("dvar_58A078A367C02AB3", 1);
   } else
@@ -2048,7 +2048,7 @@ getprematchlocationspawnorigins() {
       location.minradius = 500;
   }
 
-  _id_504A04C57A458DD1 = getdvarint("dvar_23F58BFEF9C3DD88", 5);
+  _id_504A04C57A458DD1 = getdvarint("scr_br_maxprematchlocations", 5);
 
   if(isDefined(level._id_2F78F22EDF92FAA9) && level._id_2F78F22EDF92FAA9 < _id_504A04C57A458DD1)
     _id_504A04C57A458DD1 = level._id_2F78F22EDF92FAA9;
@@ -2335,7 +2335,7 @@ onspawnplayer(_id_9156B53BCF7CE573) {
 
   thread _id_467380E90C7DB5A7();
 
-  if(getdvarint("dvar_12CA000DD2976EBC", 0) && getdvarint("dvar_DC29833577096D47", 0))
+  if(getdvarint("bg_bristotallynormal", 0) && getdvarint("dvar_DC29833577096D47", 0))
     thread _id_7AEC3C7A702AEC62();
 
   level thread updateplayerandteamcountui();
@@ -2649,14 +2649,14 @@ brmodifyplayerdamage(einflictor, victim, eattacker, idamage, smeansofdeath, objw
     return idamage;
   }
 
-  if(victim _id_2CEDCC356F1B9FC8::isplayeringulag() && istrue(victim.gulagarena) && getdvarint("dvar_AF4F48DA15FD9BA1", 1))
+  if(victim _id_2CEDCC356F1B9FC8::isplayeringulag() && istrue(victim.gulagarena) && getdvarint("scr_gulag_mp_damage", 1))
     return idamage;
 
   if(!isDefined(_id_BE4285B26ED99AB1))
     _id_BE4285B26ED99AB1 = idamage;
 
   if(idamage > 0) {
-    if(istrue(victim.insertingarmorplate) && (!scripts\cp_mp\utility\damage_utility::_id_0CB9BA92488B23C5(objweapon) || getdvarint("dvar_22AA9E2B2BD6A191", 1) == 1))
+    if(istrue(victim.insertingarmorplate) && (!scripts\cp_mp\utility\damage_utility::_id_0CB9BA92488B23C5(objweapon) || getdvarint("scr_radiation_cancelsarmor", 1) == 1))
       victim notify("try_armor_cancel", "damage_received");
 
     if(scripts\mp\loot::_id_6F45E7311F77EAC4(victim) && !scripts\cp_mp\utility\damage_utility::_id_0CB9BA92488B23C5(objweapon) && !scripts\mp\loot::_id_73D8C72E055E8640(victim))
@@ -2669,7 +2669,7 @@ brmodifyplayerdamage(einflictor, victim, eattacker, idamage, smeansofdeath, objw
     if(smeansofdeath == "MOD_FALLING") {
       if(isDefined(level.modifybrfalldamage))
         idamage = victim[[level.modifybrfalldamage]](idamage);
-      else if(victim scripts\mp\utility\killstreak::isjuggernaut()) {} else if(getdvarint("dvar_69F152910149BC10", 0)) {
+      else if(victim scripts\mp\utility\killstreak::isjuggernaut()) {} else if(getdvarint("scr_br_alt_mode_rocketjump", 0)) {
         if(victim isskydiving())
           victim skydive_interrupt();
 
@@ -2689,7 +2689,7 @@ brmodifyplayerdamage(einflictor, victim, eattacker, idamage, smeansofdeath, objw
             idamage = 0;
         }
       }
-    } else if(getdvarint("dvar_AD67CF67992FE5F2", 0) && smeansofdeath != "MOD_TRIGGER_HURT")
+    } else if(getdvarint("scr_br_alt_mode_gg", 0) && smeansofdeath != "MOD_TRIGGER_HURT")
       idamage = brclampdamagealtmodegg(idflags, weapontype, _id_49E6EF3EDADD524E, shitloc, idamage);
     else if(istrue(level._id_F561FC43A226DAE4) && !victim _id_07C40FA80892A721::hasarmor() && getdvarint("dvar_6B68C911DBD04FD2", istrue(level.clampstepbulletdamage)) && smeansofdeath != "MOD_TRIGGER_HURT")
       idamage = brclampdamage(idflags, weapontype, _id_49E6EF3EDADD524E, shitloc, _id_BE4285B26ED99AB1, idamage, objweapon, smeansofdeath);
@@ -2707,7 +2707,7 @@ brmodifyplayerdamage(einflictor, victim, eattacker, idamage, smeansofdeath, objw
         idamage = 0;
     }
 
-    if(isDefined(einflictor) && getdvarint("dvar_69F152910149BC10", 0)) {
+    if(isDefined(einflictor) && getdvarint("scr_br_alt_mode_rocketjump", 0)) {
       if(_id_F7F3032369F275C6(smeansofdeath)) {
         _id_5528888BDD4C85D6 = getdvarfloat("dvar_D4F0BBE5DF7312CC", 0.1);
 
@@ -4071,7 +4071,7 @@ setplacementxpshare() {
   _id_2CE07AC87B732035 = max(_id_2CE07AC87B732035, 1);
   xpperplayerpershare = int(_id_D176C6FA97AE9438 / (_id_2CE07AC87B732035 * _id_0774C9CA5D1D6221) + 0.9);
   xpperplayerpershare = int(clamp(xpperplayerpershare, _id_409D356961C27474, _id_2121AA51C2C8132E));
-  _id_FFFC590CE12509E3 = getdvarint("dvar_BD328F0DBC44AACC", xpperplayerpershare);
+  _id_FFFC590CE12509E3 = getdvarint("scr_br_placement_xp_share", xpperplayerpershare);
   logstring("PLACEMENT CALCULATION LOGa: placementPool=" + _id_E0F4D3685FF5C5BC + "; numberOfTeams=" + _id_E34E0F7B6E831845 + "; totalShares=" + _id_2CE07AC87B732035 + "; xpPerPlayerPerShare=" + xpperplayerpershare + "; xpToUse=" + _id_FFFC590CE12509E3);
   level.xpperplayerpershare = _id_FFFC590CE12509E3;
   level.xpteamsatmatchstart = _id_E34E0F7B6E831845;
@@ -5888,7 +5888,7 @@ brgetloadoutoptionforname(_id_194D8BC9C448E603) {
 
 brinitloadoutoption() {
   _id_A14D77328BA7E8F1 = "pistolarmordropbagtime";
-  _id_194D8BC9C448E603 = getDvar("dvar_F6F24E020168ADE8", _id_A14D77328BA7E8F1);
+  _id_194D8BC9C448E603 = getDvar("scr_br_loadout_option", _id_A14D77328BA7E8F1);
   _id_E4AAE95542F412AF = brgetloadoutoptionforname(_id_194D8BC9C448E603);
   level.br_loadout_option = _id_E4AAE95542F412AF;
   level._id_58C406E460511EA8 = getdvarint("dvar_D70B4DE72AD5AD0B", 0);
@@ -5945,10 +5945,10 @@ brgetloadoutdropbagsdelayseconds() {
   _id_21BE5F4D451EFD18 = -15;
   firsttime = _id_2695A20D4011076D::getcircleclosetime(0);
   _id_5FD1D7EEEBE96215 = max(0, firsttime + _id_21BE5F4D451EFD18);
-  _id_23F3A96159A40D18 = getdvarfloat("dvar_B81B25BCD8C7D749", _id_5FD1D7EEEBE96215);
+  _id_23F3A96159A40D18 = getdvarfloat("scr_br_dropbag_delay", _id_5FD1D7EEEBE96215);
   _id_70BCBF0AD5028219[_id_70BCBF0AD5028219.size] = _id_23F3A96159A40D18;
 
-  if(getdvarint("dvar_B29888D711D2B473", 0) && !_id_362C58E8BB39BCDA::isfeatureenabled("dropBagLoop")) {
+  if(getdvarint("scr_br_dropbag2_enabled", 0) && !_id_362C58E8BB39BCDA::isfeatureenabled("dropBagLoop")) {
     _id_9C06DBDBE08EB98C = 15;
     _id_04CD425AAB99F4F0 = _id_67708F418B1FAC79::gettimetogulagclosed();
     _id_05582E42C9CCDD59 = max(0, _id_04CD425AAB99F4F0 + _id_9C06DBDBE08EB98C);

@@ -379,7 +379,7 @@ _id_656EADA20254E131() {
   self endon("death");
   self notify("fleeFromPlayerProximity");
   self endon("fleeFromPlayerProximity");
-  _id_2E0D80DAAAB7F018 = getdvarint("dvar_F862C6AE0538549F", 768);
+  _id_2E0D80DAAAB7F018 = getdvarint("scr_dmz_civ_player_flee_dist", 768);
   _id_B8C1899ADC1A8760 = _id_2E0D80DAAAB7F018 * _id_2E0D80DAAAB7F018;
 
   for(;;) {

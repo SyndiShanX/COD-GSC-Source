@@ -81,7 +81,7 @@ _id_27D74F1CF559CA7B() {
 }
 
 _id_647A8C40104E4866(team) {
-  if(istrue(level.br_circle_disabled) || getdvarint("dvar_907618E8F550CB42") == 1) {
+  if(istrue(level.br_circle_disabled) || getdvarint("br_circle_pause") == 1) {
     return;
   }
   if(!isDefined(level.teamswithcirclepeek[team]))

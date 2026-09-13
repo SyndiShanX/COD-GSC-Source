@@ -324,7 +324,7 @@ ammorestock_used(instance, part, state, player, _id_A5B2C541413AA895, _id_CC3847
     if(result == 1) {
       if(scripts\mp\flags::gameflag("prematch_done") && (getDvar("dvar_7611A2790A0BF7FE", "") != "plunder" && getDvar("dvar_7611A2790A0BF7FE", "") != "risk" && getDvar("dvar_7611A2790A0BF7FE", "") != "rumble_mgl")) {
         thread ammorestock_disableusefortime(instance, player, 0.1);
-        thread _id_9F58210B67259AC8(player, instance, getdvarint("dvar_C9F983ED98245328", 60));
+        thread _id_9F58210B67259AC8(player, instance, getdvarint("ammorestockcooldown", 60));
       } else
         thread ammorestock_disableusefortime(instance, player, 5);
     } else if(result == 0)
@@ -336,7 +336,7 @@ ammorestock_used(instance, part, state, player, _id_A5B2C541413AA895, _id_CC3847
 
     if(result == 1) {
       thread ammorestock_disableusefortime(instance, player, 0.1);
-      thread _id_9F58210B67259AC8(player, instance, getdvarint("dvar_C9F983ED98245328", 60));
+      thread _id_9F58210B67259AC8(player, instance, getdvarint("ammorestockcooldown", 60));
     } else if(result == 0)
       thread ammorestock_disableusefortime(instance, player, 0.1);
     else

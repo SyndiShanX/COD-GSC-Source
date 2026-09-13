@@ -23,7 +23,7 @@ init() {
   scripts\engine\scriptable::scriptable_addusedcallbackbypart("br_armory_trader", ::_id_C0972A3A09A99AB6);
   _id_3B64EB40368C1450::_id_2D6E7E0B80767910("TraderUse", ["offhand_weapons", "fire", "melee", "weapon_switch", "killstreaks", "supers"]);
   level._id_90D5AC9F18D44A51._id_3848126FC180B0F8 = strtok(getDvar("loot_table_filter", ""), "|");
-  level._id_90D5AC9F18D44A51._id_D8DD94861DA28AFE = strtok(getDvar("dvar_A077A83EAD32F0C2", "brloot_offhand_advancedsupplydrop|brloot_plunder_extract|brloot_perk_point_overkill"), "|");
+  level._id_90D5AC9F18D44A51._id_D8DD94861DA28AFE = strtok(getDvar("scr_br_armory_trader_filter", "brloot_offhand_advancedsupplydrop|brloot_plunder_extract|brloot_perk_point_overkill"), "|");
   _id_D09A84CDBF4FCDAB();
   _id_07C49BDB271D5CB0();
   thread _id_03C3A74C32ED3A62();
@@ -31,7 +31,7 @@ init() {
 }
 
 _id_D09A84CDBF4FCDAB() {
-  _id_6686D1519FD59C8D = getDvar("dvar_A077A83EAD32F0C2", "undefined_default");
+  _id_6686D1519FD59C8D = getDvar("scr_br_armory_trader_filter", "undefined_default");
   logstring("br_armory_trader scr_br_armory_trader_filter value is: " + _id_6686D1519FD59C8D);
   _id_297D6CBB50675600 = "";
 
@@ -42,12 +42,12 @@ _id_D09A84CDBF4FCDAB() {
 }
 
 _id_07C49BDB271D5CB0() {
-  _id_DF433E8B91D06E83 = getDvar("dvar_F2E5F0AF7E8689F3", "armory_trader_default");
+  _id_DF433E8B91D06E83 = getDvar("scr_br_armory_trader_scriptbundle", "armory_trader_default");
   level._id_90D5AC9F18D44A51._id_25EA48876F86D21E = getscriptbundle(_func_2EF675C13CA1C4AF("enum_7A7811456F8710F2", _id_DF433E8B91D06E83));
 }
 
 _id_3953D88977707504() {
-  return randomint(getdvarint("dvar_4D0B67ABA31EFB57", 32767));
+  return randomint(getdvarint("scr_br_armory_trader_randomizer", 32767));
 }
 
 _id_707D6CFAA04DBE98(position) {

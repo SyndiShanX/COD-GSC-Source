@@ -12,12 +12,12 @@ init() {
   _id_04CDABCD91A92977::_id_0EAD10448A780A58(::_id_3E87EBE7F88F1249);
   level._id_C8001F5313A05589 = getdvarint("dvar_B5256FB3F4ED76AF", 0);
   level._id_7272C293F31C587C = getdvarint("dvar_0A94C6ED8A414196", 0);
-  level._id_8EED04DC7BDC9766 = getdvarint("dvar_B77C6C674502AD38", 60);
+  level._id_8EED04DC7BDC9766 = getdvarint("leagueplay_wait_for_players_s", 60);
   level._id_764459B234D5C391 = getdvarint("live_lobby_minplayers_start", 0);
-  level._id_58BEC65EC9494D11 = getdvarint("dvar_7FD4184E42F5D97D", 60);
+  level._id_58BEC65EC9494D11 = getdvarint("max_time_to_backfill_s", 60);
   level._id_8A4997CA061AA1E5 = getdvarint("dvar_683C426D1EE9A40B", 3);
-  level._id_809AA817D70FD977 = getdvarint("dvar_4AABEE233FAC8DBA", 99);
-  level._id_CCE73E718062D33C = getdvarint("dvar_198448220F60DCF0", 150);
+  level._id_809AA817D70FD977 = getdvarint("minplayers_before_disband", 99);
+  level._id_CCE73E718062D33C = getdvarint("max_vsps_during_backfill", 150);
   level._id_79814D80C62F8EBE = getdvarint("dvar_4838B7C39021124C", 1);
   level._id_A176083F858EC97B = getdvarint("wz_leagueplay_sr_triggers_version", 0);
   scripts\mp\rank::registerscoreinfo("stat_E3569AEC4686A8D6", "stat_7CE4FD9430E80CEA", 25);

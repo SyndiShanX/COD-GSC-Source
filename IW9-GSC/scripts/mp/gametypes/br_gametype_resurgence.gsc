@@ -19,9 +19,9 @@ init() {
   setdvarifuninitialized("dvar_98FAD011285F3011", 0);
 
   if(scripts\cp_mp\utility\game_utility::_id_BA5574C7F287C587())
-    setdvarifuninitialized("dvar_E82B8618853A182C", 2000);
+    setdvarifuninitialized("scr_br_project_kick", 2000);
   else
-    setDvar("dvar_E82B8618853A182C", 2000);
+    setDvar("scr_br_project_kick", 2000);
 }
 
 _id_D7A7AA9EE1CC1071() {
@@ -50,13 +50,13 @@ _id_D7A7AA9EE1CC1071() {
   _id_E30BFEC8B3D65B77();
   level.brgametype._id_6420B42C7ADD53CC = getdvarint("dvar_D2891D4180DE0553", 1);
   level.brgametype._id_840B848760F488A4 = getdvarint("dvar_96C8E4682FF85B5F", 0);
-  level.brgametype._id_428C736511619824 = getdvarfloat("dvar_DC284649B5343DF1", 2.5);
+  level.brgametype._id_428C736511619824 = getdvarfloat("scr_br_tracked_teams_clear_delay", 2.5);
   level.brgametype._id_6EE71092BE57820C = getdvarfloat("dvar_8217B0DFA2D04C31", 10);
   level.brgametype._id_F6682C80C3C868D6 = getdvarint("dvar_B13B80D2A347596E", 1);
   level.brgametype._id_FBC20F6D398B973E = getdvarint("dvar_9F287F2A37CD90F4", 0);
   level.brgametype._id_7B3746FD57041FB7 = getdvarint("dvar_0D834C362EAEEF3A", 1);
   level.brgametype._id_3DD997E45E444B3D = getdvarint("dvar_CFB769A290798F09", 1);
-  level.respawnheightoverride = getdvarint("dvar_AE35E4BB8A3AA9E7", 7500);
+  level.respawnheightoverride = getdvarint("scr_bmo_respawnheightoverride", 7500);
   level.brgametype._id_2CFDC1D6E92251BF = getdvarint("dvar_E72DBD678E8FC4F4", 5);
   level.brgametype._id_B30E180B0B50D598 = getdvarint("dvar_5DC7BA56C5253EE8", 1);
   level.brgametype._id_14AFB82AA29BC57C = getdvarint("dvar_77028B51CD3D0A56", -1);
@@ -2045,7 +2045,7 @@ _id_0DECD4293C451C70() {
     if(_id_BC5632FFDB336731)
       scripts\mp\perks\perks::addspecialistbonus();
   } else {
-    _id_CE214AFC7B96A3A7 = getdvarint("dvar_CD33C7AD9A88587F", 0);
+    _id_CE214AFC7B96A3A7 = getdvarint("scr_br_give_self_revive_on_respawn", 0);
 
     if(_id_CE214AFC7B96A3A7)
       _id_7E52B56769FA7774::addselfrevivetoken(1);
@@ -2405,7 +2405,7 @@ _id_010870C1A437402B() {
   circleindex = getdvarint("dvar_0D8B0FCD21FAAA19", 1);
   _id_C2D7D58BFAD1B1EE = _id_2695A20D4011076D::getcircleclosetime(circleindex);
   _id_A14D77328BA7E8F1 = max(0, _id_C2D7D58BFAD1B1EE + _id_56DDE920C84C7B04);
-  _id_7B76B8BB6B541A17 = getdvarfloat("dvar_B81B25BCD8C7D749", _id_A14D77328BA7E8F1);
+  _id_7B76B8BB6B541A17 = getdvarfloat("scr_br_dropbag_delay", _id_A14D77328BA7E8F1);
 
   if(_id_7B76B8BB6B541A17 == -1.0)
     _id_7B76B8BB6B541A17 = _id_A14D77328BA7E8F1;
@@ -2449,7 +2449,7 @@ _id_9680317AFD0E4558() {
 }
 
 _id_C2E48F2200BD249B() {
-  circlecenter = getdvarvector("dvar_EB589C6BD2884BBB", level._id_E6BDEFD8842BDD49);
+  circlecenter = getdvarvector("br_final_circle_override", level._id_E6BDEFD8842BDD49);
   return circlecenter;
 }
 

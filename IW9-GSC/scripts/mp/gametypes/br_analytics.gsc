@@ -2615,7 +2615,7 @@ _onmatchstartbr() {
 
   _id_9D8974FF163F463D = [];
 
-  if(getdvarint("dvar_90A3DFD557408611", 1) && isDefined(level.questinfo)) {
+  if(getdvarint("scr_br_quests_enabled", 1) && isDefined(level.questinfo)) {
     foreach(type, info in level.questinfo.tabletinfo) {
       _id_9D8974FF163F463D[_id_9D8974FF163F463D.size] = "name";
       _id_9D8974FF163F463D[_id_9D8974FF163F463D.size] = type;

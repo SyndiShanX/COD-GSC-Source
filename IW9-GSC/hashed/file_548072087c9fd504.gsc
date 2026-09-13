@@ -85,17 +85,17 @@ _id_B6FD5F72A2973C10() {
 }
 
 _id_6FC852802774B304(_id_D72F1F113E6FE171, discardtime) {
-  if(getdvarint("dvar_588C1DED10E6DF94") == 1 && level.gametype != "koth") {
-    if(getdvarint("dvar_E69436F6610D6667") == 0)
-      setDvar("dvar_E69436F6610D6667", 1);
+  if(getdvarint("bg_esports_should_timeout") == 1 && level.gametype != "koth") {
+    if(getdvarint("bg_esports_is_in_timeout") == 0)
+      setDvar("bg_esports_is_in_timeout", 1);
 
     if(_id_D72F1F113E6FE171)
       _id_5FFBC7F1400D0FFC(discardtime);
 
-    while(getdvarint("dvar_588C1DED10E6DF94") == 1)
+    while(getdvarint("bg_esports_should_timeout") == 1)
       waitframe();
 
-    setDvar("dvar_E69436F6610D6667", 0);
+    setDvar("bg_esports_is_in_timeout", 0);
     return 5;
   }
 

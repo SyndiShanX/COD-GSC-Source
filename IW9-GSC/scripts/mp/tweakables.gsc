@@ -331,13 +331,13 @@ init() {
   registertweakable("game", "suicidepointloss", "scr_game_suicidepointloss", 0);
   registertweakable("team", "teamkillpointloss", "scr_team_teamkillpointloss", 0);
   registertweakable("game", "thirdperson", "camera_thirdPerson", 0);
-  registertweakable("game", "lowgravity", "dvar_12CA000DD2976EBC", 0);
+  registertweakable("game", "lowgravity", "bg_bristotallynormal", 0);
   registertweakable("game", "lowgravitystrength", "dvar_02F4CF62DF1AF9A6", 125);
   registertweakable("game", "minfalldamageheight", "bg_fallDamageMinHeight", 225);
   registertweakable("game", "herodrop", "dvar_F1B2BD0A1FA58A73", 0);
-  registertweakable("game", "perkpackage", "dvar_B01050DA9B96D273", 1);
+  registertweakable("game", "perkpackage", "perk_package_enabled", 1);
   registertweakable("game", "showperksonspawn", "scr_showperksonspawn", 1);
-  registertweakable("game", "loadoutperksoff", "dvar_8463BC866E14F4C7", 0);
+  registertweakable("game", "loadoutperksoff", "scr_loadoutperksoff", 0);
   registertweakable("game", "one_tap_headshot", "dvar_C0F3F80EC94308D1", 0);
   registertweakable("team", "fftype", "scr_team_fftype", 0);
   registertweakable("team", "teamkillspawndelay", "scr_team_teamkillspawndelay", 0);

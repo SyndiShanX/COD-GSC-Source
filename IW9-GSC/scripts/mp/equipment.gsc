@@ -4,7 +4,7 @@
 ***********************************************/
 
 init() {
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0)
+  if(getdvarint("t10", 0) > 0)
     level._id_E5255D7C501309DD = "equipmentlist:equipment_list_t10_mp";
   else if(getdvarint("mgl", 0) > 0)
     level._id_E5255D7C501309DD = "equipmentlist:equipment_list_mgl_mp";

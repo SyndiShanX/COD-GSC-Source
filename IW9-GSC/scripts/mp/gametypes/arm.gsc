@@ -26,8 +26,8 @@ main() {
   }
 
   setDvar("dvar_405E7E20D91344CC", 0);
-  setDvar("dvar_42EECE3F15E35B3D", 1);
-  setDvar("dvar_A22F98E2C5B506CE", 30);
+  setDvar("scr_allow_technicals", 1);
+  setDvar("scr_runlean_max_technicals", 30);
   setDvar("dvar_E4FA721677F03DE0", 1);
   setDvar("cg_friendlyReviveNameplateEnabled", 0);
   setomnvar("ui_num_dom_flags", 5);
@@ -121,7 +121,7 @@ main() {
   level._id_3CE1055115EDCBBB = _id_1D4B01C1EC829364::_id_3CE1055115EDCBBB;
   level._id_EFBC646224FDA4FA = _id_1D4B01C1EC829364::_id_EFBC646224FDA4FA;
   level.dropbrloot = getdvarint("dvar_1D196605F8A290E3", 0);
-  level.br_plunder_enabled = getdvarint("dvar_A6A9B41B654AFD1D", 0);
+  level.br_plunder_enabled = getdvarint("scr_game_cash", 0);
 
   if(level.br_plunder_enabled) {
     _id_600B944A95C3A7BF::init();
@@ -134,18 +134,18 @@ main() {
   if(level._id_1E17E3480B1D264D)
     level._id_9C1E3C18B99409E9 = scripts\mp\utility\points::_id_9C1E3C18B99409E9;
 
-  level.spawnselectionshowenemy = getdvarint("dvar_3F0DB83EA7503667", 0);
-  level.spawnselectionshowfriendly = getdvarint("dvar_4134532F274E5DFA", 0);
+  level.spawnselectionshowenemy = getdvarint("scr_spawnselectionshowenemy", 0);
+  level.spawnselectionshowfriendly = getdvarint("scr_spawnselectionshowfriendly", 0);
   level.forcetopickafob = getdvarint("dvar_04A4C22866751F8E", 0);
-  level.maxhqtanks = getdvarint("dvar_9DD6B3477D4B53C6", 2);
+  level.maxhqtanks = getdvarint("scr_arm_maxhqtanks", 2);
   level.tankrespawntime = getdvarint("dvar_B624863894A18F21", 120);
   level.apcrespawntime = getdvarint("dvar_BA2474692378B203", 120);
   level.longdialoguecooldown = getdvarint("dvar_E01953FCF34A5D51", 1);
   level.mercymatchending_nuke = getdvarint("dvar_647CFD0A848D6ED6", 1);
-  level.mercymatchending_time = getdvarint("dvar_7106E5F59987983A", 30);
+  level.mercymatchending_time = getdvarint("scr_arm_mercyendingtime", 30);
   level.numnonrallyvehicles = getdvarint("scr_arm_numnonrallyvehicles", 25);
   level.disablepersonalnuke = getdvarint("dvar_F271257BDDC28C95", 0);
-  level.personalnukecostoverride = getdvarint("dvar_D9455F252FCCDB97", 30);
+  level.personalnukecostoverride = getdvarint("scr_personalnukecostoverride", 30);
   level.showteamtanks = getdvarint("dvar_236401104966B535", 1);
   level.spawnselectionafktime = getdvarint("dvar_DA4E1D4C2111A1BC", 120);
   level.manualadjustlittlebirdlocs = getdvarint("dvar_1D04716268113CB5", 1);
@@ -158,12 +158,12 @@ main() {
   }
 
   if(level.useobjectives || level.userallypointvehicles || level.usesquadspawnselection) {
-    setDvar("dvar_6E73595F4CE7501E", 1);
-    setDvar("dvar_5FC696F5BBB3CA62", 0);
+    setDvar("scr_game_usespawnselection", 1);
+    setDvar("scr_game_disablespawncamera", 0);
     setDvar("dvar_1A2C3B67392B6657", 1);
   } else {
-    setDvar("dvar_6E73595F4CE7501E", 0);
-    setDvar("dvar_5FC696F5BBB3CA62", 1);
+    setDvar("scr_game_usespawnselection", 0);
+    setDvar("scr_game_disablespawncamera", 1);
     setDvar("dvar_1A2C3B67392B6657", 1);
   }
 

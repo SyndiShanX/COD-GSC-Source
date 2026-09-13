@@ -610,7 +610,7 @@ createoperatorcustomization(operatorref, _id_5864EA4E21A60CD4) {
     _id_5864EA4E21A60CD4 = _id_ED273E317490CB02(operatorref);
   }
 
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0) {
+  if(getdvarint("t10", 0) > 0) {
     if(isDefined(self.team) && self.team == "allies") {
       operatorref = "t10_usa_bravo_infiltration";
       _id_5864EA4E21A60CD4 = 22;
@@ -636,7 +636,7 @@ createoperatorcustomization(operatorref, _id_5864EA4E21A60CD4) {
   operatorcustomization.execution = getoperatorexecution(operatorref);
   operatorcustomization.executionquip = getoperatorexecutionquip(operatorref);
 
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0)
+  if(getdvarint("t10", 0) > 0)
     operatorcustomization.suit = "t10_defaultsuit_mp";
   else
     operatorcustomization.suit = _id_ADA9A2308A4046E2(operatorref);
@@ -2342,7 +2342,7 @@ validateloadout(loadout) {
 }
 
 isvalidattachmentunlock(_id_49E6EF3EDADD524E, _id_55F8624E7216D9AA) {
-  _id_338C04A2F19BA8B6 = getdvarint("dvar_464624F0183DE3D0", 0) == 1;
+  _id_338C04A2F19BA8B6 = getdvarint("scr_checkvalidattachmentunlock", 0) == 1;
 
   if(_id_338C04A2F19BA8B6)
     return attachmentisselectablerootname(_id_49E6EF3EDADD524E, _id_55F8624E7216D9AA);

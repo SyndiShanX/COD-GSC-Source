@@ -168,7 +168,7 @@ _id_CF8F519F5EA70BDB() {
   if(!isDefined(offset))
     offset = 0;
 
-  return level.br_level.br_circledelaytimes.size - 1 - getdvarint("dvar_1141FEA0C6EF428F", 3) - offset;
+  return level.br_level.br_circledelaytimes.size - 1 - getdvarint("scr_br_fc_circle_disable", 3) - offset;
 }
 
 _id_3C238BA7323E4681() {
@@ -505,7 +505,7 @@ _id_B7ABE335B0B028D0(_id_9FDC1F9E4FC628E4) {
 _id_F8F8CB082D70138E(_id_9FDC1F9E4FC628E4) {
   if(istrue(self._id_060F4C86076523F3)) {
     self._id_060F4C86076523F3 = undefined;
-    self setclientdvar("dvar_B21F1157C582FF15", 1);
+    self setclientdvar("voice_proximity_enemy_client", 1);
   }
 
   self.plotarmor = undefined;

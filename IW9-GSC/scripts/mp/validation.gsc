@@ -21,7 +21,7 @@ validationerror(_id_3B3FC6A41B9C37DD, slot, item) {
 }
 
 isvalidattachmentunlock(_id_49E6EF3EDADD524E, _id_55F8624E7216D9AA) {
-  _id_338C04A2F19BA8B6 = getdvarint("dvar_464624F0183DE3D0", 0) == 1;
+  _id_338C04A2F19BA8B6 = getdvarint("scr_checkvalidattachmentunlock", 0) == 1;
 
   if(_id_338C04A2F19BA8B6)
     return scripts\mp\utility\weapon::attachmentisselectablerootname(_id_49E6EF3EDADD524E, _id_55F8624E7216D9AA);
@@ -232,7 +232,7 @@ validateloadout(loadout) {
   if(getdvarint("unlockAllItems", 0) == 1)
     return loadout;
 
-  if(scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508() && (scripts\mp\utility\game::getsubgametype() == "dmz" || scripts\mp\utility\game::getsubgametype() == "exgm") && getdvarint("dvar_65F0EA4FF58C3FA0", 0) == 1)
+  if(scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508() && (scripts\mp\utility\game::getsubgametype() == "dmz" || scripts\mp\utility\game::getsubgametype() == "exgm") && getdvarint("ui_use_dmz_loadouts", 0) == 1)
     return loadout;
 
   _id_6433B6E8ECDE2AE9 = _id_9480A79A4852090F();

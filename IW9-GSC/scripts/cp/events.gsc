@@ -14,7 +14,7 @@ init() {
 
   scriptbundlename = "score_event_list_" + _id_C8F690457A04A764;
 
-  if(getdvarint("dvar_A464CB031C16EE87") > 0)
+  if(getdvarint("t10") > 0)
     scriptbundlename = scriptbundlename + "_t10_cp";
   else
     scriptbundlename = scriptbundlename + "_iw9_cp";

@@ -677,7 +677,7 @@ _id_97C32F66EFF29610(vehicle, _id_5473A133B9D77893) {
 }
 
 _id_A717A31AE35BA01C() {
-  return getdvarint("dvar_548A5A7DCB6BDE02", 0) == 1;
+  return getdvarint("scr_vehicle_enable_fuel", 0) == 1;
 }
 
 _id_F588087BF9D7FEFB() {

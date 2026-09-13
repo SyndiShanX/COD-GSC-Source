@@ -4,14 +4,14 @@
 **********************************************************/
 
 init() {
-  if(!getdvarint("dvar_9D10EC32552BD102", 0)) {
+  if(!getdvarint("scr_br_alt_mode_inflation", 0)) {
     return;
   }
   level.br_alt_mode_inflation = spawnStruct();
   level.br_alt_mode_inflation.disabled = 0;
   level.br_alt_mode_inflation.cost = getdvarint("dvar_EC3657BEE62B649E", 45);
-  level.br_alt_mode_inflation.drop_percent = getdvarfloat("dvar_4D6E3B73A7976700", 1.0);
-  level.br_alt_mode_inflation.drop_max = getdvarint("dvar_7FD93EE5262C8A9B", -1);
+  level.br_alt_mode_inflation.drop_percent = getdvarfloat("scr_br_alt_mode_inflation_drop_percent", 1.0);
+  level.br_alt_mode_inflation.drop_max = getdvarint("scr_br_alt_mode_inflation_drop_max", -1);
   level.br_alt_mode_inflation.respawn_delay = getdvarfloat("dvar_82A04F5B65ED7D09", 10.0);
 
   if(scripts\cp_mp\utility\game_utility::_id_BA5574C7F287C587())

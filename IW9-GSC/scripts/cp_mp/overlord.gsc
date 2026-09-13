@@ -21,7 +21,7 @@ init() {
   if(getdvarint("dvar_B1DBB741DA6AA657", 0) == 1)
     level thread _id_96E4F7AC9D0F56E4();
 
-  if(getdvarint("dvar_859FB74D1557C0B1", 1) && scripts\common\utility::ismp())
+  if(getdvarint("scr_overlord_enemy_proximity_enabled", 1) && scripts\common\utility::ismp())
     level thread _id_B0C21EABFFCE3FD4();
 }
 
@@ -187,7 +187,7 @@ isvalidplayer(player) {
 }
 
 _id_B0C21EABFFCE3FD4() {
-  _id_DEB4634FF3CFF859 = getdvarint("dvar_57797986A6D60476", 4096);
+  _id_DEB4634FF3CFF859 = getdvarint("scr_overlord_enemy_proximity_radius", 4096);
   _id_DEB4634FF3CFF859 = _id_DEB4634FF3CFF859 * _id_DEB4634FF3CFF859;
   _id_5CC086A792B04FCE = getdvarfloat("dvar_32244D6ACF101808", 60.0);
   _id_A93508890D2545D1 = [];
@@ -250,7 +250,7 @@ _id_AEA00C3815B226DA(player) {
   player endon("death");
   level endon("game_ended");
   player endon("monitor_enemy_prox");
-  _id_DEB4634FF3CFF859 = getdvarint("dvar_57797986A6D60476", 4096);
+  _id_DEB4634FF3CFF859 = getdvarint("scr_overlord_enemy_proximity_radius", 4096);
   _id_DEB4634FF3CFF859 = _id_DEB4634FF3CFF859 * _id_DEB4634FF3CFF859;
   _id_5CC086A792B04FCE = getdvarfloat("dvar_32244D6ACF101808", 60.0);
   _id_A93508890D2545D1 = [];

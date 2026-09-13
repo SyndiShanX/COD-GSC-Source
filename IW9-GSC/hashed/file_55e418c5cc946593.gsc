@@ -28,13 +28,13 @@ _id_CA7E33035F7F102F() {
 
 _id_C0D385A09D173A36() {
   if(scripts\mp\utility\game::getsubgametype() == "br")
-    return getdvarint("dvar_9B611CF0CB4BF80E", 1) > 0;
+    return getdvarint("br_perk_package_enabled", 1) > 0;
   else
-    return getdvarint("dvar_9B611CF0CB4BF80E", -1) > 0;
+    return getdvarint("br_perk_package_enabled", -1) > 0;
 }
 
 _id_2980F22FB01F43E6() {
-  return _id_C0D385A09D173A36() && getdvarint("dvar_A8B771882E2FBC7A", 1);
+  return _id_C0D385A09D173A36() && getdvarint("br_perk_package_dropping_enabled", 1);
 }
 
 _id_53B52A367576CBE3() {
@@ -249,7 +249,7 @@ _id_3F643D9C78963AD5(perk) {
 }
 
 _id_BDD930EEE0042052() {
-  return getdvarint("dvar_FAA72EDE42EA5FAA", 1);
+  return getdvarint("br_perk_package_inventory_items_enabled", 1);
 }
 
 _id_C3023358DC648BF1(_id_3E89258CCB54EB4B, _id_A24F1824F93081A8, _id_A5B2C541413AA895, _id_65B695F0C0D909ED, _id_44EE85DCF52B4001) {

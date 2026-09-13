@@ -8,10 +8,10 @@ init() {
   level._id_87436FEBDC194615 = _id_D67FA72229E8393D("scriptable_digital_billboards_vertical", 5);
   level._id_F52634F659CE0777 = _id_D67FA72229E8393D("scriptable_digital_billboards_horizontal", 2);
 
-  if(getdvarint("dvar_686A109B1E1C9BB1", 0) == 0) {
+  if(getdvarint("scr_mp_billboards_enabled", 0) == 0) {
     return;
   }
-  _id_A1E312C81D78F53E = "digitalbillboardadvertisements:" + getDvar("dvar_EEF99A597DB1CEBA");
+  _id_A1E312C81D78F53E = "digitalbillboardadvertisements:" + getDvar("scr_mp_billboards_advertisement_set");
   _id_04BFB302739681A2 = getscriptbundle(_id_A1E312C81D78F53E);
 
   if(!isDefined(_id_04BFB302739681A2)) {
@@ -41,7 +41,7 @@ init() {
 
   _id_09F49F87BC82EFA7 = _id_95681BCCCC148C4A._id_E0A363ADF11C8946.size;
   level._id_2040B676CC5B064A = getdvarint("dvar_FC255BCF24C83B71", _id_09F49F87BC82EFA7);
-  _id_10DE73A7DF631B43 = getdvarint("dvar_948D664AE50F79AC", 7);
+  _id_10DE73A7DF631B43 = getdvarint("scr_mp_billboards_advertisement_display_time", 7);
   level._id_10DE73A7DF631B43 = _id_10DE73A7DF631B43;
   _id_E4C472585AF18F5D = [];
 

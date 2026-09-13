@@ -13,7 +13,7 @@ init_quest_util() {
   level waittill("player_spawned_with_loadout");
   wait 2;
 
-  if(!getdvarint("dvar_90A3DFD557408611", 1)) {
+  if(!getdvarint("scr_br_quests_enabled", 1)) {
     return;
   }
   level.questinfo = spawnStruct();

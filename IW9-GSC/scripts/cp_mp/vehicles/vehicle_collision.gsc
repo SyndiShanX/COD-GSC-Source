@@ -235,7 +235,7 @@ _id_74CE9DC0A18AC393(vehicle, position, normal, _id_0FAA5640B98769E9) {
   _id_0FAA5640B98769E9 = _id_0FAA5640B98769E9 * _id_98EA5AFB293A76A2;
   _id_89134ACB0056DE26 = [2.0, 2.75, 3.5, 4.5, 10.0];
 
-  if(getdvarint("dvar_12CA000DD2976EBC", 0))
+  if(getdvarint("bg_bristotallynormal", 0))
     _id_89134ACB0056DE26 = [4.5, 6.0, 7.5, 9.5, 15.0];
 
   _id_C40B0D3609E9B480 = 0;

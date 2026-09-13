@@ -991,9 +991,9 @@ setcommonrulesfrommatchrulesdata(skipfriendlyfire) {
   setdynamicdvar("scr_player_maxhealth", getmatchrulesdata("commonOption", "maxHealth"));
   setdynamicdvar("scr_player_healthregentime", getmatchrulesdata("commonOption", "healthRegen"));
   setdynamicdvar(_func_2EF675C13CA1C4AF("scr_", getgametype(), "_healthregentime"), getmatchrulesdata("commonOption", "healthRegen"));
-  setdynamicdvar("dvar_A4D532F42D919827", getmatchrulesdata("commonOption", "allowArmor"));
-  setdynamicdvar("dvar_D75D5638785F3B09", getmatchrulesdata("commonOption", "spawnArmor"));
-  setdynamicdvar("dvar_A6A3FD965485D4BC", getmatchrulesdata("commonOption", "spawnArmorPlates"));
+  setdynamicdvar("scr_player_allowarmor", getmatchrulesdata("commonOption", "allowArmor"));
+  setdynamicdvar("scr_player_spawnarmor", getmatchrulesdata("commonOption", "spawnArmor"));
+  setdynamicdvar("scr_player_spawnarmorplates", getmatchrulesdata("commonOption", "spawnArmorPlates"));
   setdynamicdvar("dvar_08AD1AB9436BCCCA", getmatchrulesdata("commonOption", "dropArmorOnDeath"));
   setdynamicdvar("dvar_28D450F7F28644B7", getmatchrulesdata("commonOption", "armorDropAmount"));
   setdynamicdvar("scr_player_disableSuperSprint", getmatchrulesdata("commonOption", "disableSuperSprint"));
@@ -1026,7 +1026,7 @@ setcommonrulesfrommatchrulesdata(skipfriendlyfire) {
   setdynamicdvar("scr_game_radarHidePings", getmatchrulesdata("commonOption", "radarHideShots"));
   setdynamicdvar("scr_game_navBarHideEnemy", getmatchrulesdata("commonOption", "compassHideEnemy"));
   setdynamicdvar("scr_game_navBarHidePings", getmatchrulesdata("commonOption", "compassHidePings"));
-  setdynamicdvar("dvar_5FC696F5BBB3CA62", getmatchrulesdata("commonOption", "disableSpawnCamera"));
+  setdynamicdvar("scr_game_disablespawncamera", getmatchrulesdata("commonOption", "disableSpawnCamera"));
   setdynamicdvar(_func_2EF675C13CA1C4AF("scr_", getgametype(), "_playerrespawndelay"), getmatchrulesdata("commonOption", "respawnDelay"));
   setdynamicdvar(_func_2EF675C13CA1C4AF("scr_", getgametype(), "_suicidespawndelay"), getmatchrulesdata("commonOption", "suicideSpawnDelay"));
   setdynamicdvar(_func_2EF675C13CA1C4AF("scr_", getgametype(), "_waverespawndelay"), getmatchrulesdata("commonOption", "waveRespawnDelay"));
@@ -1050,7 +1050,7 @@ setcommonrulesfrommatchrulesdata(skipfriendlyfire) {
   setdynamicdvar(_func_2EF675C13CA1C4AF("scr_", getgametype(), "_roundRetainStreakProg"), getmatchrulesdata("commonOption", "roundRetainStreakProg"));
   setdynamicdvar(_func_2EF675C13CA1C4AF("scr_", getgametype(), "_deathRetainStreaks"), getmatchrulesdata("commonOption", "deathRetainStreaks"));
   setdynamicdvar("scr_game_casualScoreStreaks", getmatchrulesdata("commonOption", "casualScoreStreaks"));
-  setdynamicdvar("dvar_614165A37AC2DB61", getmatchrulesdata("commonOption", "wrapKillstreaks"));
+  setdynamicdvar("scr_game_wrapkillstreaks", getmatchrulesdata("commonOption", "wrapKillstreaks"));
   setdynamicdvar("scr_game_superFastChargeRate", getmatchrulesdata("commonOption", "superFastChargeRate"));
   setdynamicdvar("scr_game_superPointsMod", getmatchrulesdata("commonOption", "superPointsMod"));
   setdynamicdvar("scr_game_spawnprotectiontimer", getmatchrulesdata("commonOption", "spawnProtectionTimer"));
@@ -1347,7 +1347,7 @@ getmaxoutofboundstime() {
   outofboundstime = level.outofboundstime;
 
   if(!isDefined(outofboundstime)) {
-    outofboundstime = max(0, scripts\engine\utility::ter_op(matchmakinggame(), getdvarfloat("dvar_B773758221A0C100", 3), 3));
+    outofboundstime = max(0, scripts\engine\utility::ter_op(matchmakinggame(), getdvarfloat("scr_outofboundstime", 3), 3));
     level.outofboundstime = outofboundstime;
   }
 
@@ -1362,7 +1362,7 @@ getmaxoutofboundscooldown() {
   outofboundscooldown = level.outofboundscooldown;
 
   if(!isDefined(outofboundscooldown)) {
-    outofboundscooldown = max(0, getdvarfloat("dvar_1E90A42100FF3964", 3));
+    outofboundscooldown = max(0, getdvarfloat("scr_outofboundscooldown", 3));
     level.outofboundscooldown = outofboundscooldown;
   }
 
@@ -1373,7 +1373,7 @@ getmaxoutofboundsminefieldtime() {
   outofboundstimeminefield = level.outofboundstimeminefield;
 
   if(!isDefined(outofboundstimeminefield)) {
-    outofboundstimeminefield = max(0, getdvarfloat("dvar_E4BB2AF9293410E5", 3));
+    outofboundstimeminefield = max(0, getdvarfloat("scr_outofboundstimeminefield", 3));
     level.outofboundstimeminefield = outofboundstimeminefield;
   }
 
@@ -1386,7 +1386,7 @@ getmaxoutofboundsrestrictedtime() {
 }
 
 getmaxoutofboundsbrtime() {
-  _id_61D3A4299744033E = getdvarfloat("dvar_B773758221A0C100", 5);
+  _id_61D3A4299744033E = getdvarfloat("scr_outofboundstime", 5);
 
   if(_id_61D3A4299744033E > 0)
     level.outofboundstimebr = _id_61D3A4299744033E;

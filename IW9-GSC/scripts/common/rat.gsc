@@ -124,10 +124,10 @@ _id_38FD7126D56ED438(params) {
   player = _id_C98BC8F1BC6DECB2(params);
 
   if(_id_26FE25F7F39DE3A8) {
-    _id_8E3F23290B67F726 = getdvarint("dvar_45DD70C0AC1AFDA2");
-    setDvar("dvar_45DD70C0AC1AFDA2", 1);
+    _id_8E3F23290B67F726 = getdvarint("scr_force_damage");
+    setDvar("scr_force_damage", 1);
     success = player dodamage(amount, player.origin);
-    setDvar("dvar_45DD70C0AC1AFDA2", _id_8E3F23290B67F726);
+    setDvar("scr_force_damage", _id_8E3F23290B67F726);
   } else
     success = player dodamage(amount, player.origin, player);
 

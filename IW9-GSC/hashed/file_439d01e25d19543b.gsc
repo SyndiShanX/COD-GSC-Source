@@ -41,7 +41,7 @@ _id_E456F5964BA54D64() {
     level._id_C5B14273ADC323E2 = undefined;
   }
 
-  _id_A620CB0E6444887F = getdvarint("dvar_D796F74DCF2618EF", 1);
+  _id_A620CB0E6444887F = getdvarint("scr_emptypalfa_numgascans", 1);
 
   foreach(chosen in scripts\engine\utility::array_randomize(level._id_343E61767F194B9D)) {
     _id_CF9BA498AF4E41E9 = spawnscriptable("brloot_gascan_palfa", chosen.origin, chosen.angles);

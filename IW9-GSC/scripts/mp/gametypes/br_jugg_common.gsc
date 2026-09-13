@@ -489,7 +489,7 @@ getcrateusetime() {
 }
 
 getnumdrops() {
-  return getdvarint("dvar_8E428A709DD8F019", 3);
+  return getdvarint("scr_br_jugg_num_drops", 3);
 }
 
 getjuggdamagescale() {

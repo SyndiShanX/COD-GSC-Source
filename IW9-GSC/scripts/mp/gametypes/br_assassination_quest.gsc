@@ -11,15 +11,15 @@ _id_FB7271D5EE18B98D(data) {
   else
     level._id_7E12F6EB4FCB4EA1.time = _id_64ACB6CE534155B7::_id_B891F0C9814330EB("assassination");
 
-  level._id_7E12F6EB4FCB4EA1._id_987F2ECCF1688B21 = getdvarint("dvar_7959DF486CBCDFD1", 5000);
+  level._id_7E12F6EB4FCB4EA1._id_987F2ECCF1688B21 = getdvarint("scr_br_asn_min_search_radius", 5000);
   level._id_7E12F6EB4FCB4EA1._id_877E83278A9F2EAC = getdvarint("dvar_C7054640761BE2EF", 30000);
   level._id_7E12F6EB4FCB4EA1._id_8718AEB5B6F8EB16 = getdvarint("dvar_34D149DFDDECFA91", 5000);
-  level._id_7E12F6EB4FCB4EA1._id_FDDF856CA727F674 = getdvarint("dvar_4CAF4C58C978D604", 100000);
-  level._id_7E12F6EB4FCB4EA1._id_2A708F42DF785976 = getdvarint("dvar_50295A3311CE37EE", 100);
-  level._id_7E12F6EB4FCB4EA1._id_2A938142DF9E8264 = getdvarint("dvar_50064C3311A7D16C", 1000);
+  level._id_7E12F6EB4FCB4EA1._id_FDDF856CA727F674 = getdvarint("scr_br_asn_min_plunder", 100000);
+  level._id_7E12F6EB4FCB4EA1._id_2A708F42DF785976 = getdvarint("scr_br_asn_circle_range_min", 100);
+  level._id_7E12F6EB4FCB4EA1._id_2A938142DF9E8264 = getdvarint("scr_br_asn_circle_range_max", 1000);
   level._id_7E12F6EB4FCB4EA1._id_3BD4A66A02968ECC = getdvarint("dvar_025BA69E846763B6", 1500);
   level._id_7E12F6EB4FCB4EA1._id_5094B22FD45A3EF6 = getdvarint("dvar_DD2F37F5EC580F08", 2000);
-  level._id_7E12F6EB4FCB4EA1._id_A3487335038DF794 = getdvarint("dvar_FADEC1D4ADEB8AC2", 3500);
+  level._id_7E12F6EB4FCB4EA1._id_A3487335038DF794 = getdvarint("scr_br_asn_circle_radius_large", 3500);
   level._id_7E12F6EB4FCB4EA1._id_65DD392CAFAB8111 = getdvarint("dvar_5B3F6111A22668CD", 2500);
   level._id_7E12F6EB4FCB4EA1._id_A12A720226632B47 = getdvarint("dvar_BEFDE6C410585907", 5000);
   level._id_7E12F6EB4FCB4EA1._id_7BE7F4C0BDC1C7B0 = getdvarint("dvar_581D50A4690192AE", 1);

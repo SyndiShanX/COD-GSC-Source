@@ -63,7 +63,7 @@ _id_8BE9BAE8228A91F7(eventname) {
 _id_276BE8B8EA7B9DA7() {
   _id_0D4622DBFFCAD86C = spawnStruct();
   _id_0D4622DBFFCAD86C._id_82819A1606FDDCC0 = [];
-  _id_B47E0ED9BA26B84F = getDvar("dvar_279E65FDA89136B4", "");
+  _id_B47E0ED9BA26B84F = getDvar("scr_br_pe_meter_predetermined_events", "");
   _id_F4EF4AD8C3051332 = strtok(_id_B47E0ED9BA26B84F, ",");
 
   if(_id_F4EF4AD8C3051332.size == 0) {

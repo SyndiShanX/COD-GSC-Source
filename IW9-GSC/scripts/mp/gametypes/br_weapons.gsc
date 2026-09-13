@@ -1629,7 +1629,7 @@ _id_D885E66811EE3A4D(_id_4CE224053F650637) {
 }
 
 _id_937ACC181CFC6285() {
-  if(getdvarint("dvar_F84E49A704687827", 0))
+  if(getdvarint("bg_weapondiscardoptionsenabled", 0))
     return !self _meth_27BB46EAF2ECD374();
 
   return getdvarint("dvar_8C2F43C3816349FA", 0);

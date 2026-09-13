@@ -7,18 +7,18 @@ init() {
   if(isDefined(level.br_armory_kiosk)) {
     return;
   }
-  setDvar("dvar_F8E5C3DAA6C01012", "cp_core");
+  setDvar("br_buy_station", "cp_core");
   level.br_armory_kiosk = spawnStruct();
   level.br_armory_kiosk.scriptables = [];
   level.br_armory_kiosk_enabled = getdvarint("scr_br_armory_kiosk", 1);
-  level._id_011A3973390A71E8 = getDvar("dvar_F8E5C3DAA6C01012", "cp_core");
+  level._id_011A3973390A71E8 = getDvar("br_buy_station", "cp_core");
   level._id_E7CEE4FBB5B46EF2 = _id_600B944A95C3A7BF::_id_54B046AA3BA2678A(level._id_011A3973390A71E8);
 
   if(level.br_armory_kiosk_enabled) {
     scripts\engine\scriptable::scriptable_addusedcallback(::armorykioskused);
     scripts\engine\scriptable::scriptable_addautousecallback(::armorykioskused);
     _id_098B53A7358927D9::_id_9BC69C26770D9533(::onarmorykioskpurchase);
-    level._id_D03E6BA38B56B4AB = getdvarint("dvar_E77AB3A32453AE92", 1);
+    level._id_D03E6BA38B56B4AB = getdvarint("br_kiosk_itemdrop_spawn_override", 1);
     level._id_E9F7702D839B262C = getdvarint("dvar_0624B1F6964C696D", 180.0);
     level._id_F454C63919420AA9 = getdvarint("dvar_69C62CAE4D7929C9", 10.0);
     level._id_FB60F0244999D528 = getdvarint("dvar_9C3612143E0AD401", 1.0);
@@ -33,7 +33,7 @@ init() {
 }
 
 _id_B38F5FFE645943C3(_id_1BD79A12120F1848) {
-  setDvar("dvar_F8E5C3DAA6C01012", _id_1BD79A12120F1848);
+  setDvar("br_buy_station", _id_1BD79A12120F1848);
   level._id_E7CEE4FBB5B46EF2 = _id_600B944A95C3A7BF::_id_54B046AA3BA2678A(_id_1BD79A12120F1848);
 
   if(!isDefined(level._id_6BE7B375EC4A629C))
@@ -55,7 +55,7 @@ _initignoredtabspergamemode() {
 }
 
 _initsalesdiscount() {
-  _id_DB834D1CAC99EA96 = getdvarint("dvar_828FB46E27EF695D", 0);
+  _id_DB834D1CAC99EA96 = getdvarint("br_kiosk_sales_discount", 0);
   level.br_armory_kiosk.sales_discount = int(clamp(_id_DB834D1CAC99EA96, 0, 100));
   _id_BC97C6F634D832A0 = getDvar("dvar_068EB502C50F9A22", "");
   level.br_armory_kiosk.sales_discount_items = strtok(_id_BC97C6F634D832A0, ",");
@@ -73,7 +73,7 @@ _initsalesdiscount() {
   }
 
   if(_id_DB834D1CAC99EA96 != level.br_armory_kiosk.sales_discount)
-    setDvar("dvar_828FB46E27EF695D", level.br_armory_kiosk.sales_discount);
+    setDvar("br_kiosk_sales_discount", level.br_armory_kiosk.sales_discount);
 }
 
 _applysalesdiscount(_id_9D384A51D5F0A3CF, _id_5805A52EC044F672) {
@@ -202,7 +202,7 @@ _id_517B8730DDEC7F59(_id_CB325DDB4A764623) {
 }
 
 _id_7E0281196D6407C8() {
-  return getdvarint("dvar_1696DF050AD70202", 0);
+  return getdvarint("br_kiosk_quick_purchase_enabled", 0);
 }
 
 _id_4D81AE9CB22F4180(dvar, _id_A0732421235E346C) {
@@ -242,7 +242,7 @@ _id_4D81AE9CB22F4180(dvar, _id_A0732421235E346C) {
 
 _parsepurchaseitemtables() {
   if(!isDefined(level._id_6BE7B375EC4A629C))
-    level._id_6BE7B375EC4A629C = _id_4D81AE9CB22F4180("dvar_894C0B1C4E700989", level._id_011A3973390A71E8);
+    level._id_6BE7B375EC4A629C = _id_4D81AE9CB22F4180("scr_buy_station_pool", level._id_011A3973390A71E8);
 
   if(!isDefined(level._id_3899105CEEC08FB8))
     level._id_3899105CEEC08FB8 = _id_4D81AE9CB22F4180("dvar_F4138AD8E0DE3AC6");
@@ -441,7 +441,7 @@ onprematchdone() {
 }
 
 dangercircletick(_id_819EDACDACB810E4, _id_E86632D645C137D0) {
-  if(_id_098B53A7358927D9::_id_946938D9FDE4BDCE("kiosk") || getdvarint("dvar_AC54858B3FD07DAF", 0) == 1) {
+  if(_id_098B53A7358927D9::_id_946938D9FDE4BDCE("kiosk") || getdvarint("scr_br_kiosk_ignore_circle", 0) == 1) {
     return;
   }
   _id_8FA87D2C8780E014 = _id_E86632D645C137D0 * _id_E86632D645C137D0;
@@ -453,7 +453,7 @@ dangercircletick(_id_819EDACDACB810E4, _id_E86632D645C137D0) {
 }
 
 _id_1A1709943670772A() {
-  if(_id_098B53A7358927D9::_id_946938D9FDE4BDCE("kiosk") || getdvarint("dvar_AC54858B3FD07DAF", 0) == 1) {
+  if(_id_098B53A7358927D9::_id_946938D9FDE4BDCE("kiosk") || getdvarint("scr_br_kiosk_ignore_circle", 0) == 1) {
     return;
   }
   _id_31966DAE052C3D71 = [];
@@ -803,7 +803,7 @@ _findgivearmoramountanddropleftovers(_id_7F437A5779C8787C, _id_2737CAC9EE8F6098)
   _id_1CD29382D1867470 = player _id_07C40FA80892A721::_id_0600F6CF462E983F();
   _id_A81ADEB0E1F89320 = player _id_07C40FA80892A721::_id_047320A25B8EE003();
 
-  if(getdvarint("dvar_AD67CF67992FE5F2", 0))
+  if(getdvarint("scr_br_alt_mode_gg", 0))
     _id_CF60CDC4E2F0E3D0 = 2;
   else
     _id_CF60CDC4E2F0E3D0 = 5;

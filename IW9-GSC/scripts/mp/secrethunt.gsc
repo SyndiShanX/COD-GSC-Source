@@ -53,7 +53,7 @@ secrethunt_debuglocations() {
   self endon("death");
 
   for(;;) {
-    if(getdvarint("dvar_7A5A40586350D163", 0) == 1) {
+    if(getdvarint("scr_debugsecrethunt", 0) == 1) {
       self hudoutlineenable("outlinefill_nodepth_green");
       self.outlined = 1;
     } else if(istrue(self.outlined)) {

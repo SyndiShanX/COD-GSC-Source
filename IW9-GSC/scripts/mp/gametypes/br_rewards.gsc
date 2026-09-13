@@ -341,8 +341,8 @@ precomputedropbagpositions(_id_D0DE15F793F14825) {
   if(isDefined(level.dropbagstruct.clusters) && level.dropbagstruct.clusters.size && isDefined(level.dropbagstruct.clusters[0].droplocations))
     _id_342822C35FBA7025 = level.dropbagstruct.clusters[0].droplocations.size;
 
-  _id_2827E1B47AE2AB6E = getdvarfloat("dvar_CCC87B710135B98B", 3000);
-  _id_DEEEF4B8CB10CAE0 = getdvarfloat("dvar_2C7210432530F899", 7000);
+  _id_2827E1B47AE2AB6E = getdvarfloat("scr_dropbag_mindist", 3000);
+  _id_DEEEF4B8CB10CAE0 = getdvarfloat("scr_dropbag_maxdist", 7000);
   _id_833736327534C698 = spawnStruct();
   _id_833736327534C698.origin = (0, 0, 0);
   _id_E4B7E99A96C8829F = [_id_833736327534C698];
@@ -601,8 +601,8 @@ spawndropbagonlanding() {
   choosenlocation = findunuseddropbaglocation(self);
 
   if(!isDefined(choosenlocation)) {
-    _id_2827E1B47AE2AB6E = getdvarfloat("dvar_CCC87B710135B98B", 3000);
-    _id_DEEEF4B8CB10CAE0 = getdvarfloat("dvar_2C7210432530F899", 7000);
+    _id_2827E1B47AE2AB6E = getdvarfloat("scr_dropbag_mindist", 3000);
+    _id_DEEEF4B8CB10CAE0 = getdvarfloat("scr_dropbag_maxdist", 7000);
     choosenlocation = calculatedroplocationnearlocation(self, _id_2827E1B47AE2AB6E, _id_DEEEF4B8CB10CAE0);
   }
 
@@ -615,8 +615,8 @@ spawndropbagonlanding() {
 
 findunuseddropbaglocation(player) {
   _id_16ADD9D62303E2D6 = [];
-  _id_2827E1B47AE2AB6E = getdvarfloat("dvar_CCC87B710135B98B", 3000);
-  _id_DEEEF4B8CB10CAE0 = getdvarfloat("dvar_2C7210432530F899", 7000);
+  _id_2827E1B47AE2AB6E = getdvarfloat("scr_dropbag_mindist", 3000);
+  _id_DEEEF4B8CB10CAE0 = getdvarfloat("scr_dropbag_maxdist", 7000);
   _id_4F0FC1C36324AFFB = _id_2827E1B47AE2AB6E * _id_2827E1B47AE2AB6E;
   _id_CDC5DD6C28C9709D = _id_DEEEF4B8CB10CAE0 * _id_DEEEF4B8CB10CAE0;
 

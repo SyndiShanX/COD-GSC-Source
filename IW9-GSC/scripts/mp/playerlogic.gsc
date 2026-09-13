@@ -1069,7 +1069,7 @@ spawnplayer(_id_13FE2B86C5E85A64, _id_9156B53BCF7CE573) {
   }
 
   thread scripts\cp_mp\challenges::onspawn();
-  _id_CC0031B0B6EC18B1 = getDvar("dvar_F2BDD0A9974968AA", "65");
+  _id_CC0031B0B6EC18B1 = getDvar("scr_overridefov", "65");
 
   if(self isconsoleplayer())
     self setclientdvar("cg_fov", _id_CC0031B0B6EC18B1);
@@ -2568,9 +2568,9 @@ initclientdvars() {
   if(level.teambased)
     self setclientdvars("cg_everyoneHearsEveryone", 0);
 
-  self setclientdvar("dvar_B21F1157C582FF15", 1);
+  self setclientdvar("voice_proximity_enemy_client", 1);
   self setclientdvar("cg_fov", 65.0);
-  self setclientdvar("dvar_71C6C0B8428E44A7", 0);
+  self setclientdvar("cg_disable_user_fov", 0);
 
   if(getdvarint("scr_hitloc_debug")) {
     for(_id_AC0E594AC96AA3A8 = 0; _id_AC0E594AC96AA3A8 < 6; _id_AC0E594AC96AA3A8++)
@@ -2584,7 +2584,7 @@ connect_validateplayerteam() {
   if(!isDefined(self)) {
     return;
   }
-  _id_155C56B2E3DB23C9 = getDvar("dvar_AEA3AC32A07685BA", "");
+  _id_155C56B2E3DB23C9 = getDvar("scr_force_team", "");
 
   if(self.sessionteam == "none" && scripts\mp\utility\game::matchmakinggame() && level.teambased && !isbot(self) && !istestclient(self) && !self _meth_8420670EAFC8D391() && scripts\mp\utility\game::getgametype() != "infect" && !scripts\mp\utility\teams::isgameplayteam(_id_155C56B2E3DB23C9)) {
     dlog_recordevent("mp_invalid_team_error", ["player_xuid", self getxuid(), "isHost", self ishost()]);
@@ -2725,7 +2725,7 @@ updateplayersegmentdata() {
 }
 
 shouldshowwidemapshot(_id_C924752368853F99) {
-  if(istrue(level._id_A6954A050D77D75C) || getdvarint("dvar_FABB903693771C08", 1))
+  if(istrue(level._id_A6954A050D77D75C) || getdvarint("scr_shoulddisablemapflyin", 1))
     return 0;
 
   return !scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508() && _id_C924752368853F99 < level.prematchperiod && !istrue(self.btestclient) && !scripts\mp\flags::gameflag("infil_will_run");
@@ -3131,7 +3131,7 @@ callback_playerconnect() {
       if(_id_CE91130A97F4C478)
         thread spawnspectator();
 
-      if((getDvar("dvar_7611A2790A0BF7FE", "") == "dmz" || getDvar("dvar_7611A2790A0BF7FE", "") == "exgm" || getDvar("dvar_7611A2790A0BF7FE", "") == "plunder" || getDvar("dvar_7611A2790A0BF7FE", "") == "risk") && getdvarint("dvar_825151346AD147F2", 0) == 1)
+      if((getDvar("dvar_7611A2790A0BF7FE", "") == "dmz" || getDvar("dvar_7611A2790A0BF7FE", "") == "exgm" || getDvar("dvar_7611A2790A0BF7FE", "") == "plunder" || getDvar("dvar_7611A2790A0BF7FE", "") == "risk") && getdvarint("scr_br_manual_team_assignment", 0) == 1)
         thread scripts\mp\teams::persistantgametypeteamassign();
       else
         thread scripts\mp\menus::setteam(self.sessionteam, _id_7EC298E587EB6719);
@@ -3304,7 +3304,7 @@ forcespawn() {
 }
 
 kickifdontspawn() {
-  if(getdvarint("dvar_B66208719C6BAE6A", 0) == 1) {
+  if(getdvarint("debug_stopafkcheck", 0) == 1) {
     return;
   }
   if(istrue(self.spawnedasspectator) && !mayspawn()) {

@@ -26,10 +26,10 @@ main() {
     scripts\mp\utility\game::registerhalftimedvar(scripts\mp\utility\game::getgametype(), 0);
   }
 
-  setDvar("dvar_320C4DB6AF00B215", 0);
+  setDvar("ai_allowdormancy", 0);
   setDvar("dvar_405E7E20D91344CC", 0);
-  setDvar("dvar_42EECE3F15E35B3D", 1);
-  setDvar("dvar_A22F98E2C5B506CE", 30);
+  setDvar("scr_allow_technicals", 1);
+  setDvar("scr_runlean_max_technicals", 30);
   setDvar("dvar_E4FA721677F03DE0", 1);
   setDvar("cg_friendlyReviveNameplateEnabled", 0);
   enablegroundwarspawnlogic(400, 1200);
@@ -111,7 +111,7 @@ main() {
   level._id_FA789E7BAB605E4C = getdvarint("dvar_72771BED0CB9E6FB", 1) == 1;
   level._id_AADF4E234F763771 = getdvarint("dvar_D141C82B315573ED", 9);
   level.dropbrloot = getdvarint("dvar_1D196605F8A290E3", 0);
-  level.br_plunder_enabled = getdvarint("dvar_A6A9B41B654AFD1D", 0);
+  level.br_plunder_enabled = getdvarint("scr_game_cash", 0);
 
   if(level.br_plunder_enabled) {
     _id_600B944A95C3A7BF::init();
@@ -124,16 +124,16 @@ main() {
   if(level._id_1E17E3480B1D264D)
     level._id_9C1E3C18B99409E9 = scripts\mp\utility\points::_id_9C1E3C18B99409E9;
 
-  level.spawnselectionshowenemy = getdvarint("dvar_3F0DB83EA7503667", 0);
-  level.spawnselectionshowfriendly = getdvarint("dvar_4134532F274E5DFA", 0);
+  level.spawnselectionshowenemy = getdvarint("scr_spawnselectionshowenemy", 0);
+  level.spawnselectionshowfriendly = getdvarint("scr_spawnselectionshowfriendly", 0);
   level.forcetopickafob = getdvarint("dvar_04A4C22866751F8E", 0);
-  level.maxhqtanks = getdvarint("dvar_9DD6B3477D4B53C6", 2);
+  level.maxhqtanks = getdvarint("scr_arm_maxhqtanks", 2);
   level.tankrespawntime = getdvarint("dvar_B624863894A18F21", 120);
   level.apcrespawntime = getdvarint("dvar_BA2474692378B203", 120);
   level.longdialoguecooldown = getdvarint("dvar_E01953FCF34A5D51", 1);
   level.numnonrallyvehicles = getdvarint("scr_arm_numnonrallyvehicles", 25);
   level.disablepersonalnuke = getdvarint("dvar_F271257BDDC28C95", 0);
-  level.personalnukecostoverride = getdvarint("dvar_D9455F252FCCDB97", 30);
+  level.personalnukecostoverride = getdvarint("scr_personalnukecostoverride", 30);
   level.showteamtanks = getdvarint("dvar_236401104966B535", 1);
   level.spawnselectionafktime = getdvarint("dvar_DA4E1D4C2111A1BC", 120);
   level.manualadjustlittlebirdlocs = getdvarint("dvar_1D04716268113CB5", 1);

@@ -110,7 +110,7 @@ tryuseuavfromstruct(streakinfo) {
   level endon("game_ended");
   self endon("disconnect");
 
-  if(streakinfo.streakname == "uav" && scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508() && getdvarint("dvar_970BE8DB72985238", 0))
+  if(streakinfo.streakname == "uav" && scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508() && getdvarint("scr_uav_bigmap_enabled", 0))
     return _id_509A782DD5B89CF1::_id_E5931B9F76ED6CDA(streakinfo);
 
   if(isDefined(level.killstreaktriggeredfunc)) {

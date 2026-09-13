@@ -32,7 +32,7 @@ init() {
   level.sentrysettings["ai_sentry_turret"].scorepopup = "destroyed_sentry";
   level.sentrysettings["ai_sentry_turret"].lightfxtag = "tag_fx";
 
-  if(getdvarint("dvar_70D8CBA45C5014EC", 1) == 0) {
+  if(getdvarint("scr_ai_sentry_turret", 1) == 0) {
     return;
   }
   level._id_B08CAEEDD32CFDAF = spawnStruct();
@@ -95,7 +95,7 @@ _id_2DD8DD0EBC078F25() {
 }
 
 _id_F33B0AFADF9107EB(_id_B5DEFF62BA0378CA, team, _id_B43BC01927D1C26A) {
-  if(!istrue(_id_B43BC01927D1C26A) && getdvarint("dvar_70D8CBA45C5014EC", 1) == 0) {
+  if(!istrue(_id_B43BC01927D1C26A) && getdvarint("scr_ai_sentry_turret", 1) == 0) {
     return;
   }
   if(!isDefined(team))

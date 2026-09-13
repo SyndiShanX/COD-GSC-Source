@@ -234,7 +234,7 @@ fillmaxarmorplate() {
 addplatepouch(skipsplash) {
   player = self;
 
-  if(getdvarint("dvar_BE1B706F310C8E63", 0) == 0)
+  if(getdvarint("scr_br_skiplegendarypickupsound", 0) == 0)
     self playsoundtoplayer("br_legendary_loot_pickup", self);
 
   player.hasplatepouch = 1;

@@ -70,11 +70,11 @@ _id_A94C90DC6C858DA4() {
   level.br_level.br_mapcenter = ((_id_3C590D0EE220B409 + _id_C978C90E8E5AB1F7) / 2, (_id_3C590C0EE220B1D6 + _id_C978C80E8E5AAFC4) / 2, 0);
   level.br_level.br_mapsize = (abs(_id_C978C90E8E5AB1F7 - _id_3C590D0EE220B409), abs(_id_C978C80E8E5AAFC4 - _id_3C590C0EE220B1D6), abs(level.br_level.c130_heightoverride - level.br_level.c130_sealeveloverride));
 
-  if(getdvarint("dvar_FFCE528E382DF177", 0)) {
+  if(getdvarint("scr_br_alt_mode_nonstop", 0)) {
     level.br_level.br_circleclosetimes = [360, 270, 225, 135, 90, 60, 45, 90];
     level.br_level.br_circledelaytimes = [60, 0, 0, 0, 0, 0, 0, 0];
     level.br_level.br_circleshowdelaydanger = [60, 0, 0, 0, 0, 0, 0, 0];
-  } else if(getdvarint("dvar_CF84A5D55B19B30E", 0)) {
+  } else if(getdvarint("scr_br_alt_mode_rlh", 0)) {
     level.br_level.br_circleclosetimes = [270, 150, 120, 90, 60, 45, 45, 90];
     level.br_level.br_circledelaytimes = [60, 10, 10, 10, 10, 10, 10, 0];
     level.br_level.br_circleshowdelaydanger = [60, 0, 0, 0, 0, 0, 0, 0];
@@ -125,5 +125,5 @@ _id_A94C90DC6C858DA4() {
   _id_2695A20D4011076D::applycirclesettings();
   level.br_prematchspawnlocations = [_id_1E4A61DB11011446::createspawnlocation((-1261, -10218.5, 519.66), 0, 500), _id_1E4A61DB11011446::createspawnlocation((301.573, -6134.04, 692.001), 0, 500), _id_1E4A61DB11011446::createspawnlocation((-3932.99, -2860.85, 622.534), 0, 500), _id_1E4A61DB11011446::createspawnlocation((3565.82, -6494.82, 497.727), 0, 500), _id_1E4A61DB11011446::createspawnlocation((2784.2, -1387.21, 839.998), 0, 500)];
   level.br_badcircleareas = [_id_2695A20D4011076D::createinvalidcirclearea((-18691, 12376, 200), 15000), _id_2695A20D4011076D::createinvalidcirclearea((-19459, -12712, 200), 15000), _id_2695A20D4011076D::createinvalidcirclearea((19261, -12712, 200), 15000), _id_2695A20D4011076D::createinvalidcirclearea((18493, 12376, 200), 15000), _id_2695A20D4011076D::createinvalidcirclearea((-707, 20888, 200), 8000), _id_2695A20D4011076D::createinvalidcirclearea((-707, -22632, 200), 8000), _id_2695A20D4011076D::createinvalidcirclearea((5255, -15805, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((8323, -9836, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((8642, 3052, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((7015, 9413, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((4349, 13144, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((-7087, 13998, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((-8292, 8684, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((-9920, 2816, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((-8292, 8684, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((-9088, -5312, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((-7424, -12800, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((-1600, -17344, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((9923, -2860, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((-1859, 16600, 200), 4500), _id_2695A20D4011076D::createinvalidcirclearea((2388, -11256, 200), 2400), _id_2695A20D4011076D::createinvalidcirclearea((-4140, -8184, 200), 2000), _id_2695A20D4011076D::createinvalidcirclearea((-6085, 2857, 200), 1100), _id_2695A20D4011076D::createinvalidcirclearea((-92, 12848, 200), 1100), _id_2695A20D4011076D::createinvalidcirclearea((-4582, 10069, 200), 1100), _id_2695A20D4011076D::createinvalidcirclearea((4957, 4374, 200), 1100), _id_2695A20D4011076D::createinvalidcirclearea((4579, 6143, 200), 1100), _id_2695A20D4011076D::createinvalidcirclearea((-6700, -824, 200), 1100), _id_2695A20D4011076D::createinvalidcirclearea((-3820, -9656, 200), 1100), _id_2695A20D4011076D::createinvalidcirclearea((1556, -13880, 200), 1100)];
-  setDvar("dvar_4AEA002979A25696", 10);
+  setDvar("br_max_armory_kiosk", 10);
 }

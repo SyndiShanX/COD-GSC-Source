@@ -4,7 +4,7 @@
 ***********************************************/
 
 main() {
-  if(getdvarint("dvar_E9E247C60CD8800A"))
+  if(getdvarint("scr_debug_scripted_melee"))
     iprintlnbold("SCRIPTED MELEE ACTIVE!");
 
   if(istrue(level._id_74A171505D979CBC.enabled)) {

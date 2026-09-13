@@ -219,7 +219,7 @@ _id_0A48B4BEDB9BD286(_id_607899D4420FE1A5, arena) {
 }
 
 _id_DB27FF4A01BA7ACE(offset) {
-  return level.br_level.br_circledelaytimes.size - 1 - getdvarint("dvar_1141FEA0C6EF428F", 4) - offset;
+  return level.br_level.br_circledelaytimes.size - 1 - getdvarint("scr_br_fc_circle_disable", 4) - offset;
 }
 
 _id_301ED1C7AC115606() {
@@ -938,7 +938,7 @@ _id_0FB48C109B5C01F0(arena) {
 }
 
 _id_A4F7AA7494769DCC(arena, _id_37E3A1EAA43EA82C) {
-  _id_D0EAD7E588A015C5 = getdvarint("dvar_177D32D81BD6BC15", 130);
+  _id_D0EAD7E588A015C5 = getdvarint("scr_br_fc_flag_radius", 130);
   _id_D30B471F5A146C39 = spawn("trigger_radius", _id_37E3A1EAA43EA82C, 0, _id_D0EAD7E588A015C5, 120);
   _id_D30B471F5A146C39.script_label = "_a";
   arenaflag = _id_6663215F917210AE::setupobjective(_id_D30B471F5A146C39, "neutral", undefined, 1);

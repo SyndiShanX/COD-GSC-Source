@@ -39,7 +39,7 @@ _id_9AFDEAB1E38DAC18(animstruct, _id_46B59AA03461A82E) {
 
 _id_55F2480B4B819AEA(movingc130) {
   animstruct = spawnStruct();
-  animstruct.origin = getdvarvector("dvar_223915C6339DBC10", (0, 0, 0));
+  animstruct.origin = getdvarvector("br_infil_anim_pos", (0, 0, 0));
   animstruct.angles = (0, 0, 0);
   animstruct._id_7A2AF7FE0EF35BAA = getdvarint("dvar_4EE80A43D1C50CA2", 1);
   animstruct._id_03772737101AA4AF = level._id_2655050B4D075E87;
@@ -510,7 +510,7 @@ _id_F3AE4B41DF047BA0(array) {
 
       foreach(player in players) {
         player setclientdvar("cg_fov", _id_69FF9B8BE936AC16);
-        player setclientdvar("dvar_71C6C0B8428E44A7", 1);
+        player setclientdvar("cg_disable_user_fov", 1);
       }
     }
   }
@@ -1142,7 +1142,7 @@ _id_8D5C19A9B693E913() {
 
   if(getdvarint("dvar_549DF6AB370A2BC4", 1)) {
     self lerpfovscalefactor(0.0, 0.0);
-    self setclientdvar("dvar_71C6C0B8428E44A7", 0);
+    self setclientdvar("cg_disable_user_fov", 0);
   }
 }
 
@@ -1161,8 +1161,8 @@ _id_DC0BC83A31193177() {
   }
 
   self setclientdvar("cg_fov", 65.0);
-  self setclientdvar("dvar_86BF34D5F48FA435", 65.0);
-  self setclientdvar("dvar_71C6C0B8428E44A7", 0);
+  self setclientdvar("cg_fov_viewmodel", 65.0);
+  self setclientdvar("cg_disable_user_fov", 0);
 }
 
 _id_52BEDAE2CED8E191() {

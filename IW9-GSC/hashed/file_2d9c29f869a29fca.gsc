@@ -741,7 +741,7 @@ _id_8B680B3EF155FC34() {
 }
 
 _id_354EBFF91B3C29CA() {
-  if(getdvarint("dvar_320C4DB6AF00B215", 0) == 1 && _id_5DEF7AF2A9F04234::_id_47D356083884F913()) {
+  if(getdvarint("ai_allowdormancy", 0) == 1 && _id_5DEF7AF2A9F04234::_id_47D356083884F913()) {
     foreach(_id_B205D90302DA2F07 in level._id_B205D90302DA2F07) {
       if(isDefined(_id_B205D90302DA2F07["subAreas"])) {
         foreach(_id_D1CF55B36FACF5A8 in _id_B205D90302DA2F07["subAreas"]) {

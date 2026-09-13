@@ -61,7 +61,7 @@ onforfeit(team) {
 forfeitwaitforabort() {
   level endon("game_ended");
 
-  if(getdvarfloat("dvar_739BBD49F9779978") == 1) {
+  if(getdvarfloat("scr_disable_forfeit_ship") == 1) {
     level.disableforfeit = 1;
     level notify("abort_forfeit");
   } else
@@ -894,7 +894,7 @@ prematchperiod() {
 
     game["inLiveLobby"] = 1;
 
-    if(getdvarint("dvar_466714DAD346A907", 0) == 1)
+    if(getdvarint("scr_enable_dev_livelobby_overrides", 0) == 1)
       level thread watchdevoverridematchstart();
 
     level thread watchforlowpopmatchstart(1);
@@ -934,7 +934,7 @@ prematchperiod() {
         _id_04CDABCD91A92977::_id_C5728699E6B79552(1);
       } else
         setDvar("dvar_925F7DCEB8E6205E", 0);
-    } else if(getdvarint("dvar_022EDDF44003BAF9", 0) != 0 && getdvarint("dvar_8AF519063CE59CE9", 0) != 0) {
+    } else if(getdvarint("dvar_022EDDF44003BAF9", 0) != 0 && getdvarint("online_privatematch_rejoin_allowed", 0) != 0) {
       setDvar("dvar_15DC0D6798E4BDD8", 1);
       setDvar("dvar_925F7DCEB8E6205E", 1);
       _id_04CDABCD91A92977::_id_C5728699E6B79552(1);
@@ -2994,7 +2994,7 @@ callback_startgametype() {
   level.gameended = 0;
   level.forcedend = 0;
   level.hostforcedend = 0;
-  setdvarifuninitialized("dvar_B66208719C6BAE6A", 0);
+  setdvarifuninitialized("debug_stopafkcheck", 0);
   setdvarifuninitialized("dvar_E32EBDBB97A1EC4E", 0);
   level.disablepersonalnuke = scripts\mp\utility\game::isanymlgmatch();
 
@@ -3006,7 +3006,7 @@ callback_startgametype() {
   level._id_DC65C33DFDD9EFE8 = getdvarint("scr_thirdperson");
   level.diehardmode = getdvarint("scr_diehard");
   level.casualscorestreaks = getdvarint("scr_game_casualScoreStreaks");
-  level._id_7DFAD9748480C388 = getdvarint("dvar_614165A37AC2DB61");
+  level._id_7DFAD9748480C388 = getdvarint("scr_game_wrapkillstreaks");
 
   if(!isDefined(level.crankedbombtimer))
     level.crankedbombtimer = getdvarint(_func_2EF675C13CA1C4AF("scr_", scripts\mp\utility\game::getgametype(), "_crankedBombTimer"), 0);
@@ -3285,7 +3285,7 @@ callback_startgametype() {
   thread scripts\mp\accolades::init();
   thread scripts\mp\ammorestock::init();
 
-  if(getdvarint("dvar_8A1945C94D5092C2") == 1) {
+  if(getdvarint("scr_game_allow_loot") == 1) {
     _id_7E52B56769FA7774::br_pickups_init();
     _id_6AFF3948CF4CCA03::init();
   }
@@ -6273,7 +6273,7 @@ watchforminplayersmatchstart() {
       }
 
       _id_AC0F8BE89FA21057 = (_id_0E5EAE91657533F2 - _id_428422CF7B2EB8AC) / 1000;
-      _id_A37E3649CFB19F73 = getdvarint("dvar_F79CD84983250EDA", 300);
+      _id_A37E3649CFB19F73 = getdvarint("live_lobby_max_time", 300);
 
       if(_id_A37E3649CFB19F73 > 0 && _id_AC0F8BE89FA21057 >= _id_A37E3649CFB19F73) {
         if(_id_7CC9D575418D740E == 0 || _id_7CC9D575418D740E <= getactiveclientcount(_id_80593585EB825BA2)) {

@@ -421,7 +421,7 @@ _id_DC5361A955493964() {
   game["dialog"]["boost"] = "boost_tdm";
   game["dialog"]["offense_obj"] = "boost_tdm";
   game["dialog"]["defense_obj"] = "boost_tdm";
-  level.testtdmanywhere = getdvarint("dvar_157F06AFF3C1F357", 0);
+  level.testtdmanywhere = getdvarint("scr_tdmanywhere", 0);
   level.tdmanywhere_dropheight = getdvarfloat("dvar_0C692D2A11DD6615", 1000);
   level.tdmanywhere_perpenoffset = getdvarfloat("dvar_631C58033F43C2DC", 2048);
   level.tdmanywhere_distoffset = getdvarfloat("dvar_F314048C87AE28AA", 4092);

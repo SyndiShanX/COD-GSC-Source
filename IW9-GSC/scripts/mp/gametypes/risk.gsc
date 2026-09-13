@@ -28,8 +28,8 @@ main() {
   }
 
   setDvar("dvar_405E7E20D91344CC", 0);
-  setDvar("dvar_42EECE3F15E35B3D", 1);
-  setDvar("dvar_A22F98E2C5B506CE", 30);
+  setDvar("scr_allow_technicals", 1);
+  setDvar("scr_runlean_max_technicals", 30);
   setDvar("dvar_E4FA721677F03DE0", 1);
   setDvar("cg_friendlyReviveNameplateEnabled", 0);
   updategametypedvars();
@@ -155,17 +155,17 @@ main() {
   level.c130alignedtolocale = getdvarfloat("dvar_F4DA32C36B5DCD26", 1);
   level.parachutedeploydelay = getdvarfloat("dvar_10A03CAB3EBE8CFA", 3.0);
   level.dropbrloot = getdvarint("dvar_1D196605F8A290E3", 1);
-  level.br_plunder_enabled = getdvarint("dvar_A6A9B41B654AFD1D", 1);
+  level.br_plunder_enabled = getdvarint("scr_game_cash", 1);
   level._id_1E17E3480B1D264D = getdvarint("dvar_D18FA801B9479B9C", 1);
   level._id_1F42DAB41EFF5CB2 = getdvarint("dvar_A62824C80691FDE2", 1);
 
   if(level._id_1E17E3480B1D264D)
     level._id_9C1E3C18B99409E9 = scripts\mp\utility\points::_id_9C1E3C18B99409E9;
 
-  level.spawnselectionshowenemy = getdvarint("dvar_3F0DB83EA7503667", 0);
-  level.spawnselectionshowfriendly = getdvarint("dvar_4134532F274E5DFA", 0);
+  level.spawnselectionshowenemy = getdvarint("scr_spawnselectionshowenemy", 0);
+  level.spawnselectionshowfriendly = getdvarint("scr_spawnselectionshowfriendly", 0);
   level.forcetopickafob = getdvarint("dvar_04A4C22866751F8E", 0);
-  level.maxhqtanks = getdvarint("dvar_9DD6B3477D4B53C6", 2);
+  level.maxhqtanks = getdvarint("scr_arm_maxhqtanks", 2);
   level.tankrespawntime = getdvarint("dvar_B624863894A18F21", 120);
   level.apcrespawntime = getdvarint("dvar_BA2474692378B203", 120);
   level.longdialoguecooldown = getdvarint("dvar_E01953FCF34A5D51", 1);
@@ -174,7 +174,7 @@ main() {
   level._id_AE48BC1A4B9CAA1C = getdvarint("dvar_0667DE5DFFC8B4CC", 1);
   level.numnonrallyvehicles = getdvarint("scr_arm_numnonrallyvehicles", 25);
   level.disablepersonalnuke = getdvarint("dvar_F271257BDDC28C95", 0);
-  level.personalnukecostoverride = getdvarint("dvar_D9455F252FCCDB97", 30);
+  level.personalnukecostoverride = getdvarint("scr_personalnukecostoverride", 30);
   level.showteamtanks = getdvarint("dvar_236401104966B535", 1);
   level.spawnselectionafktime = getdvarint("dvar_DA4E1D4C2111A1BC", 120);
   level.manualadjustlittlebirdlocs = getdvarint("dvar_1D04716268113CB5", 1);
@@ -195,12 +195,12 @@ main() {
   level._id_EFBC646224FDA4FA = ::_id_EFBC646224FDA4FA;
 
   if(level.useobjectives || level.userallypointvehicles || level.usesquadspawnselection) {
-    setDvar("dvar_6E73595F4CE7501E", 1);
-    setDvar("dvar_5FC696F5BBB3CA62", 0);
+    setDvar("scr_game_usespawnselection", 1);
+    setDvar("scr_game_disablespawncamera", 0);
     setDvar("dvar_1A2C3B67392B6657", 1);
   } else {
-    setDvar("dvar_6E73595F4CE7501E", 0);
-    setDvar("dvar_5FC696F5BBB3CA62", 1);
+    setDvar("scr_game_usespawnselection", 0);
+    setDvar("scr_game_disablespawncamera", 1);
     setDvar("dvar_1A2C3B67392B6657", 1);
   }
 
@@ -1121,7 +1121,7 @@ nuke_startmercycountdown(team) {
     }
 
     if(gettime() > endtime) {
-      if(getdvarint("dvar_716A70AD116D6C62", 0) == 1) {
+      if(getdvarint("scr_risk_combine_team_on_defcon", 0) == 1) {
         level._id_D37D95AC1717903C = ::_id_D37D95AC1717903C;
         _id_E6A7BB0501F0EBD4 = level thread _id_1347E3AB3C68B20E(team);
         level._id_9584DCC5D16D3469 = team;
@@ -1172,7 +1172,7 @@ nuke_startmercycountdown(team) {
 
   if(istrue(level._id_AE48BC1A4B9CAA1C) && !isDefined(level._id_9584CEC5D16D159F))
     level thread nuke_mercyending_think();
-  else if(getdvarint("dvar_716A70AD116D6C62", 0) == 1) {
+  else if(getdvarint("scr_risk_combine_team_on_defcon", 0) == 1) {
     if(getdvarint("dvar_48C89C3E6B934D79", 1))
       level thread _id_2A8ADCC9B74F4838();
   } else
@@ -2462,7 +2462,7 @@ arm_initoutofbounds() {
 }
 
 _id_2C3C204D81FEB239() {
-  level._id_6AF5CEB6EEC10FEA = getdvarint("dvar_ECD2DCC19FC4D16E", 0);
+  level._id_6AF5CEB6EEC10FEA = getdvarint("scr_risk_agent_debug_output", 0);
 
   if(getdvarint("dvar_EB48BCB91D80ECEE", 0) == 1)
     return;
@@ -3051,7 +3051,7 @@ _id_AA0D1F90DCC5D366() {
 }
 
 _id_FB11675119ADE7D4() {
-  if(getdvarint("dvar_8A1945C94D5092C2") == 1) {
+  if(getdvarint("scr_game_allow_loot") == 1) {
     return;
   }
   level.brloottablename = getDvar("loot_table_name", "mp/loot/br/default/loot_item_defs.csv");
@@ -3091,7 +3091,7 @@ _id_FB11675119ADE7D4() {
 }
 
 _id_5456C21DE8F2BBBC() {
-  if(getdvarint("dvar_8A1945C94D5092C2") == 1) {
+  if(getdvarint("scr_game_allow_loot") == 1) {
     return;
   }
   level._effect["vfx_extract_smoke"] = loadfx("vfx/iw8_br/gameplay/vfx_br_adv_supply_drop_marker");

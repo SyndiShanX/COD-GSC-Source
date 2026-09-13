@@ -56,7 +56,7 @@ brmini_initpostmain() {
   level.validautoassignquests[2] = "scavenger";
   level waittill("br_circle_set", circleindex);
   level waittill("br_circle_set", circleindex);
-  _id_5D954F1724092F5A = getdvarfloat("dvar_D6D1181CD67D957D", 1000.0);
+  _id_5D954F1724092F5A = getdvarfloat("scr_br_circle_object_cleanup_threshold", 1000.0);
   _id_819EDACDACB810E4 = _id_2695A20D4011076D::getdangercircleorigin();
   _id_E86632D645C137D0 = _id_2695A20D4011076D::getdangercircleradius();
   _id_3ACF1C0EBAF602F2::dangercircletick(_id_819EDACDACB810E4, _id_E86632D645C137D0, _id_5D954F1724092F5A);

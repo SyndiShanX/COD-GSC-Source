@@ -24,7 +24,7 @@ main() {
   if(issubstr(getDvar("g_mapname"), "mp_t_"))
     setDvar("scr_game_enableMinimap", 0);
 
-  if(getDvar("dvar_A1767CFD7EDE043B") == "1")
+  if(getDvar("bg_trial_mission_is_event") == "1")
     setDvar("dvar_4D8ED5D95D54900A", 1);
   else
     setDvar("lui_trial_ending", 1);
@@ -177,7 +177,7 @@ trialendgame(winner, _id_F0500919D8C387B9) {
     setomnvar("ui_trial_reward_received", 1);
     setomnvar("ui_trial_failed", 0);
 
-    if(getDvar("dvar_A1767CFD7EDE043B") != "1") {
+    if(getDvar("bg_trial_mission_is_event") != "1") {
       wait 0.1;
       level.player openmenu("RoundEndTeamHud");
       wait 3;

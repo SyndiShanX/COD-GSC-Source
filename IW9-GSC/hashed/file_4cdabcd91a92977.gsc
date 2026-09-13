@@ -125,10 +125,10 @@ _id_87FC9992C0B60276(_id_C4F3E9732AA81389) {
       _id_9642449AFA2EBF37 = getdvarint("dvar_B37DBAA903C45CCD", 1);
       break;
     case 7:
-      _id_9642449AFA2EBF37 = getdvarint("dvar_BEA9CF0DCCF411EC", 0);
+      _id_9642449AFA2EBF37 = getdvarint("online_rejoin_allow_inactivity", 0);
       break;
     case 14:
-      _id_9642449AFA2EBF37 = getdvarint("dvar_8F3ADC0694DED53C", 0);
+      _id_9642449AFA2EBF37 = getdvarint("online_rejoin_allow_force_disconnect", 0);
       break;
     default:
       _id_9642449AFA2EBF37 = 1;
@@ -324,7 +324,7 @@ _id_59121677F31F75A5() {
   }
   xuid = self getxuid();
 
-  if(getdvarint("dvar_7D06167BC4176E5E", 0)) {
+  if(getdvarint("online_rejoin_wait_for_streaming", 0)) {
     if(isDefined(level._id_67A646DC2B984DAC))
       self thread[[level._id_67A646DC2B984DAC]]();
 
@@ -369,7 +369,7 @@ _id_8CF8FF669AC52156(_id_934DC135AAF6F953, _id_CF51D5A9282DF88B) {
 
         if(scripts\engine\utility::array_contains(game["rejoinedPlayers"], xuid)) {
           _id_C4F3E9732AA81389 = 5;
-          _id_38968EF355B4D2EC = getdvarint("dvar_42D413A1A32E906F", 0);
+          _id_38968EF355B4D2EC = getdvarint("online_rejoin_allow_repeated_disconnect", 0);
         }
       }
     }
@@ -489,7 +489,7 @@ _id_C5728699E6B79552(_id_38968EF355B4D2EC) {
 
 _id_FB67B62BBD718B34() {
   _id_64F88D0441939203 = getsystemtime() * 1000;
-  _id_84C6DC2345234A61 = getdvarint("dvar_F4417CC21744FB67", 0) * 1000;
+  _id_84C6DC2345234A61 = getdvarint("online_rejoin_expiry_time_s", 0) * 1000;
   _id_1517A9CFB1F4DE62 = scripts\engine\utility::ter_op(_id_84C6DC2345234A61 == 0, 0, _id_64F88D0441939203 + _id_84C6DC2345234A61);
   return _id_1517A9CFB1F4DE62;
 }

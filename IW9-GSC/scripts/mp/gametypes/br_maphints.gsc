@@ -4,7 +4,7 @@
 ************************************************/
 
 init() {
-  if(getdvarint("dvar_5420F6CDC8C693D3", 1) == 0) {
+  if(getdvarint("scr_maphints", 1) == 0) {
     return;
   }
   level.maphints = [];

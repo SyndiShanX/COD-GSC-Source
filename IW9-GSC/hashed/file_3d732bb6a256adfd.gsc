@@ -385,7 +385,7 @@ _id_6849C870429C1CBE() {
 _id_E17D55EB83D261B3() {
   level endon("game_ended");
 
-  if(getdvarint("dvar_70D8CBA45C5014EC", 1) == 0) {
+  if(getdvarint("scr_ai_sentry_turret", 1) == 0) {
     return;
   }
   while(!isDefined(level.struct_class_names))

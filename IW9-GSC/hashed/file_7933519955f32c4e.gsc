@@ -731,7 +731,7 @@ buildac130infilanimstruct(movingc130, infil_anim_type) {
   if(isDefined(animstruct.staticc130))
     animstruct.staticc130 show();
   else {
-    animstruct.staticc130 = spawn("script_model", getdvarvector("dvar_223915C6339DBC10", (0, 0, 0)));
+    animstruct.staticc130 = spawn("script_model", getdvarvector("br_infil_anim_pos", (0, 0, 0)));
     animstruct.staticc130 setModel("veh8_mil_air_acharlie130_magma_animated");
     animstruct.staticc130.cleanme = 1;
   }

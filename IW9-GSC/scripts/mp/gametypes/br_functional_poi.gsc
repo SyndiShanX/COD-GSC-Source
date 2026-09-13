@@ -64,11 +64,11 @@ _spawnpois() {
       level.maxplunderextractions = randomintrange(level.minplunderextractions, level.maxplunderextractions + 1);
   }
 
-  if((!getdvarint("dvar_BE0526203E262092", 0) || !getdvarint("scr_ssc_enabled", 0)) && (!isDefined(level.br_armory_kiosk_enabled) || istrue(level.br_armory_kiosk_enabled))) {
+  if((!getdvarint("scr_ssc_use_buy_station", 0) || !getdvarint("scr_ssc_enabled", 0)) && (!isDefined(level.br_armory_kiosk_enabled) || istrue(level.br_armory_kiosk_enabled))) {
     if(istrue(level._id_8DEA6607B3189A60))
       _id_4384ABBF498DF6A7::_id_E486C07C28A71F34();
     else {
-      _id_9D5A5091F02C88BD = getdvarint("dvar_4AEA002979A25696", _id_EBE0ECFBA3880C6A);
+      _id_9D5A5091F02C88BD = getdvarint("br_max_armory_kiosk", _id_EBE0ECFBA3880C6A);
       _id_D3DB633BF63A5134 = _id_4384ABBF498DF6A7::getallspawninstances();
 
       if(isDefined(_id_D3DB633BF63A5134) && _id_D3DB633BF63A5134.size > 0) {
@@ -155,7 +155,7 @@ _getlocationscircleinfluencedwithnoise(_id_1EB07A39FF244CD5, maxinstancecount, _
     return _getrandomlocations(_id_1EB07A39FF244CD5, maxinstancecount);
 
   _id_6756BD882736E8BC = level.br_level.br_circlecenters.size - 1;
-  _id_CA10D004515B90A1 = int(max(1, _id_6756BD882736E8BC * getdvarfloat("dvar_5455E317C3719308", 1.0)));
+  _id_CA10D004515B90A1 = int(max(1, _id_6756BD882736E8BC * getdvarfloat("br_poi_noise", 1.0)));
 
   for(_id_AC0E594AC96AA3A8 = 0; _id_AC0E594AC96AA3A8 < _id_1EB07A39FF244CD5.size; _id_AC0E594AC96AA3A8++) {
     instance = _id_1EB07A39FF244CD5[_id_AC0E594AC96AA3A8];
@@ -476,11 +476,11 @@ setupmapquadrantcornersandgrid() {
 }
 
 _id_360198969036BD2A(_id_1EB07A39FF244CD5) {
-  if(getdvarint("dvar_A54B73257618E553", 0) == 0)
+  if(getdvarint("scr_br_kiosk_distribute", 0) == 0)
     return _id_1EB07A39FF244CD5;
 
   _id_E0A3FB2A899EC453 = getdvarfloat("dvar_333F89D956059704", 1.0);
-  _id_A9B92C79B1BAC699 = getdvarfloat("dvar_7801D124D3586409", 7000);
+  _id_A9B92C79B1BAC699 = getdvarfloat("scr_br_kiosk_distribute_min_dist", 7000);
   _id_4F367C294562DB01 = _id_A9B92C79B1BAC699 * _id_A9B92C79B1BAC699;
   _id_7CB19F95DBC68942 = [];
   _id_5D0BB59F45D65C1C = [];

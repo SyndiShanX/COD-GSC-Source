@@ -176,7 +176,7 @@ _id_2C9EC2084CA01277(grenade, _id_C39F2C11290B6AEA) {
   self endon("disconnect");
   grenade endon("explode");
   grenade endon("death");
-  _id_AD5532BD0A7F34D7 = getdvarfloat("dvar_7ECEF2F8627473E8", 1.0);
+  _id_AD5532BD0A7F34D7 = getdvarfloat("bunkerbuster_fuse_timer", 1.0);
 
   if(istrue(grenade._id_25939B3C785FABB9))
     _id_AD5532BD0A7F34D7 = 3.0;

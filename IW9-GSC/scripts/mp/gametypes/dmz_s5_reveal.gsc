@@ -836,7 +836,7 @@ _id_8171B741D99155F8(_id_76AC573DBB08ECE4) {
 
 _id_55F2480B4B819AEA(movingc130) {
   animstruct = spawnStruct();
-  animstruct.origin = getdvarvector("dvar_223915C6339DBC10", (0, 0, 0));
+  animstruct.origin = getdvarvector("br_infil_anim_pos", (0, 0, 0));
   animstruct.angles = (0, 0, 0);
   animstruct._id_7A2AF7FE0EF35BAA = getdvarint("dvar_4EE80A43D1C50CA2", 1);
   animstruct._id_03772737101AA4AF = level._id_2655050B4D075E87;

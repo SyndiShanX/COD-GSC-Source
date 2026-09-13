@@ -57,11 +57,11 @@ _id_6E3CCE6A02667476() {
 
 _id_DA7C9335E454C032(player) {
   if(getdvarint("camera_thirdPerson") == 1 || istrue(level._id_DC65C33DFDD9EFE8))
-    setDvar("dvar_31F818870138CD26", 1);
+    setDvar("camera_thirdpersonforceinteriorcamera", 1);
 }
 
 _id_5B2361E97848CABD() {
   self endon("disconnect");
   level waittill("game_ended");
-  setDvar("dvar_31F818870138CD26", 0);
+  setDvar("camera_thirdpersonforceinteriorcamera", 0);
 }

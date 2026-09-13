@@ -32,7 +32,7 @@ init() {
 
     if(_id_55E418C5CC946593::_id_56F3D322E17B9974())
       _id_55E418C5CC946593::_id_CA7E33035F7F102F();
-  } else if(getdvarint("dvar_B01050DA9B96D273", 1)) {
+  } else if(getdvarint("perk_package_enabled", 1)) {
     _id_287EDC73EAC41DB5 = int(tablelookup("mp/gametypesTable.csv", 0, scripts\mp\utility\game::getgametype(), 29));
     _id_D59F742FEB2ABEC1 = int(tablelookup("mp/gametypesTable.csv", 0, scripts\mp\utility\game::getgametype(), 30));
 

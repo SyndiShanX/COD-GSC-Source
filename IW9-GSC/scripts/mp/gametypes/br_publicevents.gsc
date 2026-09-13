@@ -211,7 +211,7 @@ _id_7DDADB6D5643BEE4() {
 }
 
 getpubliceventcount() {
-  return getdvarint("dvar_CB12FA4BCD5C4FA3", 1);
+  return getdvarint("scr_br_pe_count", 1);
 }
 
 getpubliceventchance() {

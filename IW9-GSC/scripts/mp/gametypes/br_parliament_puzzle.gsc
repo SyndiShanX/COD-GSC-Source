@@ -4,7 +4,7 @@
 *********************************************************/
 
 init() {
-  level._id_4556E51A733145B4 = getdvarint("dvar_4F4F4598B9CFCBCD", 1);
+  level._id_4556E51A733145B4 = getdvarint("scr_parliament_puzzle", 1);
   level._id_BA18E950012E7D13 = spawnStruct();
 
   if(level._id_4556E51A733145B4) {

@@ -44,7 +44,7 @@ activatefunc() {
   waitforgulagfightstocomplete();
   _id_337BD370F7C5E6F9::showsplashtoall("br_pe_jailbreak_incoming");
   playjailbreakvo("incoming");
-  eventduration = getdvarfloat("dvar_9E78730EC3BAA38C", 30.0);
+  eventduration = getdvarfloat("scr_br_pe_jailbreak_duration", 30.0);
   _id_91A988004AA42D31 = gettime() + eventduration * 1000;
   setomnvar("ui_publicevent_timer_type", 2);
   setomnvar("ui_publicevent_timer", _id_91A988004AA42D31);
@@ -75,8 +75,8 @@ activatefunc() {
 }
 
 calculateeventstarttime() {
-  _id_87940078241E4580 = getdvarfloat("dvar_5AD075411172856E", 795.0);
-  _id_07AF9598177DC2DE = getdvarfloat("dvar_5AAD6741114C1EEC", 1110.0);
+  _id_87940078241E4580 = getdvarfloat("scr_br_pe_jailbreak_starttime_min", 795.0);
+  _id_07AF9598177DC2DE = getdvarfloat("scr_br_pe_jailbreak_starttime_max", 1110.0);
 
   if(_id_07AF9598177DC2DE > _id_87940078241E4580)
     return randomfloatrange(_id_87940078241E4580, _id_07AF9598177DC2DE);

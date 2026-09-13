@@ -6,12 +6,12 @@
 initcarriables() {
   setdvarifuninitialized("dvar_29937C7775CF43E8", 0);
   setdvarifuninitialized("dvar_4E50A1220C7FD1B7", 300);
-  setdvarifuninitialized("dvar_AC0CFAC5BBC642A1", 0);
+  setdvarifuninitialized("scr_br_carriable_spawn_system", 0);
   setdvarifuninitialized("dvar_B52D6FD4249064E5", 50);
-  setdvarifuninitialized("dvar_538DA4CBDF728CCC", 0);
+  setdvarifuninitialized("scr_br_carriable_spawn_chance", 0);
   precachestring(&"MP_BR_INGAME/PICKUP_PROPANE");
   precachestring(&"MP_BR_INGAME/PICKUP_POISON");
-  setdvarifuninitialized("dvar_7BBA431554C05335", 5);
+  setdvarifuninitialized("carriablefusetime", 5);
   setdvarifuninitialized("dvar_30E08E7AA2432F46", 500);
   level.carriabletypes = [];
   level.carriabletypes["propane"] = spawnStruct();
@@ -110,7 +110,7 @@ clean_and_spawn_carriables() {
 
   level.usablecarriables = [];
 
-  switch (getdvarint("dvar_AC0CFAC5BBC642A1", 0)) {
+  switch (getdvarint("scr_br_carriable_spawn_system", 0)) {
     case 0:
       spawn_carriables_from_scriptables_total_percentage();
       break;
@@ -131,7 +131,7 @@ spawn_carriables_from_scriptables_total_percentage() {
   if(_id_0DC44D971BA523F8.size == 0) {
     return;
   }
-  _id_E4CAD961DAE4B508 = getdvarfloat("dvar_538DA4CBDF728CCC", 0);
+  _id_E4CAD961DAE4B508 = getdvarfloat("scr_br_carriable_spawn_chance", 0);
   _id_4573280B0F353D64 = floor(_id_E4CAD961DAE4B508 * _id_0DC44D971BA523F8.size);
 
   for(_id_AC0E594AC96AA3A8 = 0; _id_AC0E594AC96AA3A8 < _id_0DC44D971BA523F8.size; _id_AC0E594AC96AA3A8++) {
@@ -145,7 +145,7 @@ spawn_carriables_from_scriptables_total_percentage() {
 }
 
 spawn_carriables_from_scriptables_individual_percentage() {
-  _id_E4CAD961DAE4B508 = getdvarfloat("dvar_538DA4CBDF728CCC", 0);
+  _id_E4CAD961DAE4B508 = getdvarfloat("scr_br_carriable_spawn_chance", 0);
   _id_F6765E70DD9AD53F = scripts\engine\utility::array_randomize(getentitylessscriptablearray("scriptable_br_carriable_propane", "classname"));
   _id_187CCFE910B75663 = scripts\engine\utility::array_randomize(getentitylessscriptablearray("scriptable_br_carriable_neurotoxin", "classname"));
 
@@ -344,7 +344,7 @@ carriable_lightfuse(player) {
   self.fuselit = 1;
   self playsoundonmovingent(self.carriabletype.fusesound);
   playFXOnTag(level._effect[self.carriabletype.fusefx], self, "tag_fx");
-  _id_CFD88798AF9072E4 = getdvarfloat("dvar_7BBA431554C05335", 5);
+  _id_CFD88798AF9072E4 = getdvarfloat("carriablefusetime", 5);
   wait(_id_CFD88798AF9072E4);
   self.owner = player;
   self.team = player.team;
@@ -355,7 +355,7 @@ carriable_fuse_ui(player) {
   _id_B15BCCA3144FD7DD = player scripts\mp\hud_util::createprimaryprogressbar();
   _id_721E3650DE671DA6 = player scripts\mp\hud_util::createprimaryprogressbartext();
   _id_721E3650DE671DA6 settext("FUSE LIT");
-  _id_CFD88798AF9072E4 = getdvarfloat("dvar_7BBA431554C05335", 5);
+  _id_CFD88798AF9072E4 = getdvarfloat("carriablefusetime", 5);
 
   if(_id_CFD88798AF9072E4 <= 0)
     _id_CFD88798AF9072E4 = 1;

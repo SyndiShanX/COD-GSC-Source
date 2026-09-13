@@ -4,7 +4,7 @@
 ******************************************************/
 
 init() {
-  level.stadiumpuzzleactive = getdvarint("dvar_3C07E307BEC0051B", 1);
+  level.stadiumpuzzleactive = getdvarint("scr_stadium_puzzle", 1);
   level.stadium_puzzle = spawnStruct();
 
   if(level.stadiumpuzzleactive) {

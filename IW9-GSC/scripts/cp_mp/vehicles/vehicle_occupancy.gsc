@@ -766,7 +766,7 @@ vehicle_occupancy_init() {
   level._id_ABE9BCB8A67FF917 = getdvarfloat("dvar_83928D2D50DC276C") + 50;
   level._id_D9DC5B053FB57856 = getdvarfloat("dvar_C9B7B0F34821B869") + 50;
   level._id_DF44F8CC05382071 = getdvarfloat("dvar_94DB90BABE43CDC4", 100);
-  level._id_49B09BD5297D4967 = getdvarint("dvar_A459BB531AF563B7", 1);
+  level._id_49B09BD5297D4967 = getdvarint("scr_vehicle_lights", 1);
 
   if(istrue(level._id_351AAB391DA578A8))
     level.scr_animtree["player_exit_vehicle_to_roof"] = #animtree;

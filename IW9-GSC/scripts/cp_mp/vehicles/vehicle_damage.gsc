@@ -839,8 +839,8 @@ vehicle_damage_loadtable() {
   _id_870D49F076632BF2["weaponHPA"] = [];
   _id_870D49F076632BF2["weaponSkipBurnDown"] = [];
 
-  if(getDvar("dvar_6EDEBC535543F0BC", "") != "")
-    table = getDvar("dvar_6EDEBC535543F0BC", "");
+  if(getDvar("scr_vehicle_damage_table", "") != "")
+    table = getDvar("scr_vehicle_damage_table", "");
   else
     table = "mp_cp/vehicleDamageTable.csv";
 

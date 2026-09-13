@@ -55,7 +55,7 @@ initializematchrules() {
   scripts\mp\utility\game::setcommonrulesfrommatchrulesdata();
   setdynamicdvar("scr_conf_pointsperconfirm", getmatchrulesdata("confData", "pointsPerConfirm"));
   setdynamicdvar("scr_conf_pointsperdeny", getmatchrulesdata("confData", "pointsPerDeny"));
-  setdynamicdvar("dvar_BF39ADE48CF2D6C1", getmatchrulesdata("confData", "killstreakConfirmed"));
+  setdynamicdvar("scr_conf_killstreakconfirmed", getmatchrulesdata("confData", "killstreakConfirmed"));
   setdynamicdvar("scr_conf_halftime", 0);
   scripts\mp\utility\game::registerhalftimedvar("conf", 0);
   setdynamicdvar("scr_conf_promode", 0);
@@ -96,7 +96,7 @@ _id_0952BD6E10104D8A() {
 }
 
 initspawns() {
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0)
+  if(getdvarint("t10", 0) > 0)
     scripts\mp\spawnlogic::setactivespawnlogic("Default", "Crit_Default");
   else
     scripts\mp\spawnlogic::setactivespawnlogic("Default", "Crit_Frontline");

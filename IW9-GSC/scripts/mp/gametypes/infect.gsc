@@ -9,7 +9,7 @@ main() {
   matchmakingmatch = getdvarint("onlinegame") && !getdvarint("xblive_privatematch");
 
   if(matchmakingmatch)
-    level.isgroundwarinfected = getdvarint("dvar_119729A5FCBD2AAB", 0);
+    level.isgroundwarinfected = getdvarint("scr_infect_groundwarinfect", 0);
 
   _id_9BBACB179DEA3237[0] = scripts\mp\utility\game::getgametype();
   _id_9BBACB179DEA3237[_id_9BBACB179DEA3237.size] = "grnd";
@@ -56,9 +56,9 @@ main() {
   level._id_29F84151A47F0A35 = ::_id_48C5A587383A90E7;
   level.disablecopycatloadout = 1;
   setomnvar("ui_killcam_copycat", 0);
-  level.infectednightmode = getdvarint("dvar_298B7643D2BD0413", 0);
+  level.infectednightmode = getdvarint("scr_infect_nvgmode", 0);
   level.infecteddisablenvg = getdvarint("dvar_B236732B505B9983", 0);
-  level.onlineprimaryoverride = getdvarint("dvar_2712996CCB16A4DE", 0);
+  level.onlineprimaryoverride = getdvarint("scr_infect_onlineprimaryoverride", 0);
 
   if(scripts\cp_mp\utility\game_utility::_id_0B2C4B42F9236924())
     game["dialog"]["gametype"] = "iw9_infc_mode_uktl_int1";
@@ -201,7 +201,7 @@ updategametypedvars() {
   level._id_5AAA30C2942D7A75 = getdvarint("dvar_B577C0842850BF7E", 24);
   level._id_6F84C741AB4B49D1 = getdvarint("dvar_2748C18C28569B64", 1);
   level.survivorstreakoverride = [];
-  survivorstreakoverride = getDvar("dvar_57BBA4DA542DFA17", "");
+  survivorstreakoverride = getDvar("scr_infect_survivorstreakoverride", "");
 
   if(survivorstreakoverride != "")
     level.survivorstreakoverride = strtok(survivorstreakoverride, ",");

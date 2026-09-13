@@ -308,7 +308,7 @@ autoassign() {
   if(scripts\mp\utility\game::getgametype() == "infect")
     thread setteam("allies");
   else {
-    _id_155C56B2E3DB23C9 = getDvar("dvar_AEA3AC32A07685BA", "");
+    _id_155C56B2E3DB23C9 = getDvar("scr_force_team", "");
 
     if(scripts\mp\utility\teams::isgameplayteam(_id_155C56B2E3DB23C9)) {
       setsessionteam(_id_155C56B2E3DB23C9);

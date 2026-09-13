@@ -6,7 +6,7 @@
 brvehiclesinit() {
   level.modecontrolledvehiclespawningonly = 1;
   _id_6FC423AF9A153F6B = getdvarint("dvar_BB06B4F8C704366B", 1);
-  _id_84F2FDAB2B0451DA = getdvarint("dvar_2D93BD0EAC4C5E38", 24);
+  _id_84F2FDAB2B0451DA = getdvarint("scr_br_dynamic_spawn_veh_buffer", 24);
   level.br_totalvehiclesmax = 128 - _id_84F2FDAB2B0451DA;
   level.br_totalvehiclesspawned = 0;
   level.br_helosmax = getdvarint("dvar_389F02283326428E", 3);

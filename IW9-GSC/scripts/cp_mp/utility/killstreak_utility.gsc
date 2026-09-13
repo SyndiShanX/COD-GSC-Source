@@ -238,7 +238,7 @@ _id_D57FB9ABF76F9515(streakname) {
 }
 
 _id_0708853C5D755F72() {
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0)
+  if(getdvarint("t10", 0) > 0)
     return "killstreaklist:killstreak_list_t10_mp";
   else if(getdvarint("mgl", 0) > 0)
     return "killstreaklist:killstreak_list_mgl_mp";

@@ -4,7 +4,7 @@
 ****************************************************/
 
 init() {
-  if(getdvarint("dvar_BD987CE7239AB732", 0) == 0) {
+  if(getdvarint("scr_br_multi_circle", 0) == 0) {
     return;
   }
   logstring("br_multi_circle::init");
@@ -28,7 +28,7 @@ _id_CCACFDCC7AA6B6D7() {
   level.br_circle._id_BF394857229861A5 = ::_id_01B21DE2360BEAFF;
   level._id_2DF69B8E552238B6 = 1;
   level._id_B31733F431ED12E0 = spawnStruct();
-  level._id_B31733F431ED12E0._id_209967C144016964 = getdvarint("dvar_DB9E0A9D41057BAE", 1);
+  level._id_B31733F431ED12E0._id_209967C144016964 = getdvarint("scr_br_multi_circle_count", 1);
   level._id_B31733F431ED12E0._id_8A10C39962F6D9FD = getdvarint("dvar_C87134A23557BE72", 1);
   level._id_B31733F431ED12E0._id_C22567ED8CFE3761 = getdvarint("dvar_638DA851601CA79A", 1);
   level._id_B31733F431ED12E0._id_DFC65F80AF9670DE = getdvarfloat("dvar_8E7EF4C30D5B5A55", 0.0);
@@ -50,7 +50,7 @@ _id_21FFE8D91278BBAA() {
     return;
   }
   logstring("br_multi_circle::initMultiCircleConfigData");
-  _id_0592732704EEC44A = getDvar("dvar_8BE0F964D36B6D6A", "iw9_multicircleconfig_list");
+  _id_0592732704EEC44A = getDvar("scr_br_multi_circle_config_list", "iw9_multicircleconfig_list");
   _id_F6684AC355C9345D = getscriptbundle("multicircleconfiglist:" + _id_0592732704EEC44A);
 
   if(isDefined(_id_F6684AC355C9345D)) {
@@ -186,7 +186,7 @@ _id_8FF39B7A49D2BD92(config) {
 
   if(!isDefined(config._id_68E354FCEB08D97B)) {
     if(getdvarint("dvar_DD0BAB5C26CB2240", 1) == 1)
-      setDvar("dvar_14F6D33E8F4F0C84", config._id_FC8ABDEEAC961E8C);
+      setDvar("scr_br_circle_first_placement_scale", config._id_FC8ABDEEAC961E8C);
 
     level._id_B31733F431ED12E0._id_E60BFC21D3DCED49 = config._id_B4DEBDC14C4F2A53;
 
@@ -305,7 +305,7 @@ _id_2D74067ACCCAF1A4(circleindex) {
     _id_2DCF644323BDFEDB._id_933B2A39EBFD2AD9.origin = (centertarget[0], centertarget[1], _id_154EF61B7A7F747A);
   }
 
-  if(getdvarint("dvar_EE18596487FA7230", 0))
+  if(getdvarint("scr_br_multi_circle_hide_with_delay", 0))
     _id_58F20490049AF6AC::_id_57F3FD16B628C829(circleindex);
 
   _id_DC59F76C34681EDE = (_id_F2E5F195D91A8B4F || _id_96CA8E35A7B219E3) && _id_C669C821EE772A3D != 1;
@@ -591,7 +591,7 @@ _id_D835881B2D4842D3() {
               _id_ACFA1A113BA7D7C7 = 1;
               player _id_2695A20D4011076D::_id_F8D9C5F59FC6C187();
 
-              if(getdvarint("dvar_2B717602559E86B8", 0) == 1)
+              if(getdvarint("scr_time_in_gas_damage_modifier_enabled", 0) == 1)
                 _id_36E462D047634362 = player _id_2695A20D4011076D::_id_1E0F84E555B3DE7D(_id_A058DC250ACE641D, damagetick);
               else
                 _id_36E462D047634362 = damagetick;
@@ -874,7 +874,7 @@ _id_59D0AB7E24248AD7() {
 }
 
 _id_7C70020CF67057AB(index, team) {
-  if(!getdvarint("dvar_76E1DBE6C4D5F900", 1)) {
+  if(!getdvarint("scr_br_multi_circle_winner", 1)) {
     return;
   }
   if(!istrue(level._id_B31733F431ED12E0._id_CE4D234D77082447)) {
@@ -971,7 +971,7 @@ _id_1EE81753ADBE0CCE() {
 
 _id_E71987651701448A() {
   _id_F0A1762EEB5BA01F();
-  _id_3B5686B7D0848557 = getdvarint("dvar_5741B69FC7803A21", 100);
+  _id_3B5686B7D0848557 = getdvarint("scr_br_multi_circle_reroll", 100);
 
   for(_id_C4B448E975A0779B = 0; _id_C4B448E975A0779B < _id_3B5686B7D0848557 && _id_BB8DC18FDC2C007A(); _id_C4B448E975A0779B++)
     _id_F0A1762EEB5BA01F();

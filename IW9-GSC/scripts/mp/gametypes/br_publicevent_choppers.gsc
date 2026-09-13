@@ -29,7 +29,7 @@ init() {
   _id_7EC7671A1E0C788F._id_F0F6529C88A18128 = _id_337BD370F7C5E6F9::_id_4634160166FB7F8B("choppers", "00 0 00 0 0 0");
   _id_7EC7671A1E0C788F._id_B9B56551E1ACFEE2 = _id_294DDA4A4B00FFE3::_id_8BE9BAE8228A91F7("choppers");
   _id_92294971F87D4169 = scripts\engine\utility::ter_op(scripts\mp\utility\game::getsubgametype() == "plunder", 120.0, 0);
-  lifetime = getdvarint("dvar_98BD89274E7E4312", _id_92294971F87D4169);
+  lifetime = getdvarint("scr_br_pe_choppers_lifetime", _id_92294971F87D4169);
   _id_7EC7671A1E0C788F.helilifetime = lifetime;
   scripts\cp_mp\utility\script_utility::registersharedfunc("br_lootchopper", "lootChopper_onCrateUse", ::oncrateuse);
   _id_337BD370F7C5E6F9::registerpublicevent(1, _id_7EC7671A1E0C788F);
@@ -56,7 +56,7 @@ waitfunc() {
 
 activatefunc() {
   level endon("game_ended");
-  _id_7A5DADB6081D4303 = getdvarint("dvar_352A2EBCA39850C0", 6);
+  _id_7A5DADB6081D4303 = getdvarint("scr_br_pe_choppers_count", 6);
   scripts\mp\hud_util::showsplashtoall("br_plunder_pe_attack_choppers_active", undefined, undefined, undefined, undefined, "splash_list_br_plunder_iw9_mp");
   _id_2CEDCC356F1B9FC8::brleaderdialog("public_events_choppers_start");
   setomnvar("ui_publicevent_timer_type", 12);
@@ -71,8 +71,8 @@ activatefunc() {
 }
 
 calculateeventstarttime() {
-  _id_87940078241E4580 = getdvarfloat("dvar_1EFF74E2CF4C0351", 555.0);
-  _id_07AF9598177DC2DE = getdvarfloat("dvar_1F2286E2CF72729F", 765.0);
+  _id_87940078241E4580 = getdvarfloat("scr_br_pe_choppers_starttime_min", 555.0);
+  _id_07AF9598177DC2DE = getdvarfloat("scr_br_pe_choppers_starttime_max", 765.0);
 
   if(_id_07AF9598177DC2DE > _id_87940078241E4580)
     return randomfloatrange(_id_87940078241E4580, _id_07AF9598177DC2DE);
@@ -151,9 +151,9 @@ spawnchoppers(_id_7A5DADB6081D4303) {
 
     if(isDefined(_id_51ABC28B8D72CF10)) {
       _id_51ABC28B8D72CF10.lootfunc = ::dropcrate;
-      _id_51ABC28B8D72CF10.flaresreservecount = getdvarint("dvar_F572ACB2A1F29288", 0);
-      _id_51ABC28B8D72CF10.health = getdvarint("dvar_51CD58C60B7DEF3B", 3000);
-      _id_51ABC28B8D72CF10.maxhealth = getdvarint("dvar_51CD58C60B7DEF3B", 3000);
+      _id_51ABC28B8D72CF10.flaresreservecount = getdvarint("scr_br_pe_choppers_flares", 0);
+      _id_51ABC28B8D72CF10.health = getdvarint("scr_br_pe_choppers_health", 3000);
+      _id_51ABC28B8D72CF10.maxhealth = getdvarint("scr_br_pe_choppers_health", 3000);
 
       if(self.helilifetime)
         _id_51ABC28B8D72CF10.lifetime = self.helilifetime;
@@ -242,7 +242,7 @@ dangercircletick(_id_819EDACDACB810E4, _id_E86632D645C137D0, _id_5D954F1724092F5
     }
   }
 
-  _id_94A346917FF9B52F = getdvarfloat("dvar_D6D1181CD67D957D", 1000.0);
+  _id_94A346917FF9B52F = getdvarfloat("scr_br_circle_object_cleanup_threshold", 1000.0);
   crates = level.br_pe_chopper_crates;
 
   if(isDefined(crates)) {

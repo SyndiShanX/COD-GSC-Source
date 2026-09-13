@@ -53,7 +53,7 @@ _id_D721BA3A92DFFD4C() {
     level.gulag.arenas = sortbydistance(level.gulag.arenas, level.mapcorners[0].origin);
     level.gulag.maxuses = -1;
     level.gulag.timelimit = 15;
-    setDvar("dvar_1FF83F4F24656C5B", 15);
+    setDvar("scr_br_fc_overtime", 15);
     setDvar("dvar_E5F703A38F6E8043", 95);
     setDvar("dvar_8BDEE07FA09E810A", -1);
     setDvar("dvar_E43719F8CB449C07", 0);
@@ -835,7 +835,7 @@ _id_77A10F0EEC39CB4F(_id_434809FD34BABEE0, _id_50BBC2CAB314EDAB, _id_92B132654E8
 
   if(argshave(_id_434809FD34BABEE0, "gulag8")) {
     level.gulag.timelimit = 3;
-    setDvar("dvar_1FF83F4F24656C5B", 3);
+    setDvar("scr_br_fc_overtime", 3);
     setDvar("dvar_E5F703A38F6E8043", -1);
     killplayer(_id_50BBC2CAB314EDAB, _id_5D192B4C08040010[0]);
     _id_50BBC2CAB314EDAB waittill("killcam_ended");
@@ -1102,7 +1102,7 @@ _id_77A10F0EEC39CB4F(_id_434809FD34BABEE0, _id_50BBC2CAB314EDAB, _id_92B132654E8
         killplayerinstant(player, _id_5D192B4C08040010[0]);
     }
 
-    wait(getdvarfloat("dvar_B436AD5A39CB1F59", 5));
+    wait(getdvarfloat("test_teamwipe", 5));
     enemy = killplayerinstant(_id_50BBC2CAB314EDAB, _id_5D192B4C08040010[0]);
     wait(getdvarfloat("dvar_1F5EA86D19B61851", 13));
     killplayerinstant(enemy, _id_5D192B4C08040010[1]);
@@ -1144,7 +1144,7 @@ _id_77A10F0EEC39CB4F(_id_434809FD34BABEE0, _id_50BBC2CAB314EDAB, _id_92B132654E8
     _id_904659E4437C9887 = _id_5D192B4C08040010[0][1];
     _id_90465AE4437C9ABA _id_DF49F9975E17B225(1);
     killplayerinstant(_id_90465AE4437C9ABA, _id_50BBC2CAB314EDAB);
-    wait(getdvarfloat("dvar_32C6816AEE4FDB27", 4));
+    wait(getdvarfloat("test_squadwidget", 4));
     killplayerinstant(_id_50BBC2CAB314EDAB, _id_904659E4437C9887);
   }
 
@@ -1481,7 +1481,7 @@ _id_77A10F0EEC39CB4F(_id_434809FD34BABEE0, _id_50BBC2CAB314EDAB, _id_92B132654E8
     while(!isDefined(_id_50BBC2CAB314EDAB getspectatingplayer()) || _id_50BBC2CAB314EDAB getspectatingplayer() != _id_F0EA4030349A33D5)
       waitframe();
 
-    wait(getdvarint("dvar_C12D58979B7C7CA8", 3));
+    wait(getdvarint("test_waitafter", 3));
     killplayer(_id_F0EA4030349A33D5, _id_90465AE4437C9ABA);
 
     while(!isDefined(_id_50BBC2CAB314EDAB getspectatingplayer()) || _id_50BBC2CAB314EDAB getspectatingplayer() != _id_B03F2C4AB975486E)
@@ -1520,7 +1520,7 @@ _id_77A10F0EEC39CB4F(_id_434809FD34BABEE0, _id_50BBC2CAB314EDAB, _id_92B132654E8
 
     killplayer(_id_50BBC2CAB314EDAB, _id_9AF272F7C0618531);
     killplayer(_id_F0EA4030349A33D5, _id_9AF272F7C0618531);
-    setDvar("dvar_9E78730EC3BAA38C", 0.1);
+    setDvar("scr_br_pe_jailbreak_duration", 0.1);
     eventdata = level.br_pe_data[3];
     eventdata.active = 1;
     _id_337BD370F7C5E6F9::_id_145E3D3099BB97C4(eventdata);
@@ -1556,7 +1556,7 @@ _id_77A10F0EEC39CB4F(_id_434809FD34BABEE0, _id_50BBC2CAB314EDAB, _id_92B132654E8
     killplayer(_id_50BBC2CAB314EDAB, _id_24B7D6DC16777F00);
     killplayer(_id_F0EA4030349A33D5, _id_24B7D6DC16777F00);
     wait 10;
-    setDvar("dvar_9E78730EC3BAA38C", 0.1);
+    setDvar("scr_br_pe_jailbreak_duration", 0.1);
     eventdata = level.br_pe_data[3];
     eventdata.active = 1;
     _id_337BD370F7C5E6F9::_id_145E3D3099BB97C4(eventdata);
@@ -1861,7 +1861,7 @@ _id_77A10F0EEC39CB4F(_id_434809FD34BABEE0, _id_50BBC2CAB314EDAB, _id_92B132654E8
     killplayer(_id_4995472795B82809, _id_5D192B4C08040010[1]);
     killplayer(_id_4995442795B82170, _id_5D192B4C08040010[0]);
     wait(getdvarint("dvar_3A9D33277E079F99", 10));
-    setDvar("dvar_9E78730EC3BAA38C", 0.1);
+    setDvar("scr_br_pe_jailbreak_duration", 0.1);
     eventdata = level.br_pe_data[3];
     eventdata.active = 1;
     _id_337BD370F7C5E6F9::_id_145E3D3099BB97C4(eventdata);

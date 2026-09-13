@@ -7,7 +7,7 @@ _id_C08668FE290FC31A() {
   if(getdvarint("dvar_2CC531E644D4FDB3", 1) == 0) {
     return;
   }
-  level._id_B0EAE20487331106 = getdvarint("dvar_AF96CBE00F226832", 0);
+  level._id_B0EAE20487331106 = getdvarint("scr_poi_disable_all", 0);
   level._id_0D35175EC20B444C = getdvarint("dvar_AD89F1C2B195EDA2", 120) * 1000;
   level._id_B205D90302DA2F07 = [];
   level._id_AB20B3A256911579 = [];

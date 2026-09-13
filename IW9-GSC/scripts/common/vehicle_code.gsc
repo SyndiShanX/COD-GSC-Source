@@ -6,14 +6,14 @@
 vehicle_initlevelvariables() {
   setdvarifuninitialized("dvar_9403D7D31FC1D981", 1);
   setdvarifuninitialized("dvar_FB816855F6554343", 0);
-  setdvarifuninitialized("dvar_80E8717F617516CF", 0);
+  setdvarifuninitialized("scr_vehicle_husk", 0);
   setdvarifuninitialized("dvar_9CDCAF7A53494C37", 0);
   setdvarifuninitialized("dvar_CFD8073837710CEF", 0);
   setdvarifuninitialized("dvar_0A56728DAA842E5E", 0);
   setdvarifuninitialized("dvar_F0F3E5A83F3F2843", 1);
   setdvarifuninitialized("dvar_7598045EE90E851D", 1);
   setdvarifuninitialized("dvar_4BD69B09131419CA", 1);
-  setdvarifuninitialized("dvar_3A76C9F686D280FC", 0);
+  setdvarifuninitialized("ai_debugvehicleinfo", 0);
 
   if(scripts\common\utility::issp()) {
     setsaveddvar("movingplatformcinematicmotion", 1);

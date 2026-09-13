@@ -316,15 +316,15 @@ allplayers_setphysicaldof(fstop, _id_ED8206FEF1806FEF, focusspeed, aperturespeed
 allplayers_setfov(fov) {
   foreach(player in level.players) {
     player setclientdvar("cg_fov", fov);
-    player setclientdvar("dvar_71C6C0B8428E44A7", 1);
+    player setclientdvar("cg_disable_user_fov", 1);
   }
 }
 
 _id_CF47AB3F9DEFE35B() {
   foreach(player in level.players) {
     player setclientdvar("cg_fov", 65.0);
-    player setclientdvar("dvar_86BF34D5F48FA435", 65.0);
-    player setclientdvar("dvar_71C6C0B8428E44A7", 0);
+    player setclientdvar("cg_fov_viewmodel", 65.0);
+    player setclientdvar("cg_disable_user_fov", 0);
   }
 }
 

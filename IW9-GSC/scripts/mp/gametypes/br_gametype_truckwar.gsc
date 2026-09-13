@@ -70,7 +70,7 @@ init() {
   level._id_6D02A364E8331928 = getdvarfloat("dvar_F56E42C98F9F52BC", 1);
 
   if(level._id_AF6EC941D2B4E283) {
-    setDvar("dvar_39A8907D7F184021", 1);
+    setDvar("scr_br_moving_circle_enabled", 1);
     level.br_circle_init_func = ::alternatebrcircle;
   }
 
@@ -1012,7 +1012,7 @@ playerrespawn(_id_5A1633A0A398BEE1, _id_642470E1ABC1BBF9, _id_8B3F6477DBED24D7) 
   _id_11F3B4465C8B637B = _id_5BAB271917698DC4::playerprestreamrespawnorigin(spawnpoint);
   flareorigin = level.teamvehicles[self.team].origin;
 
-  if(getdvarint("dvar_DF02345C60008647", 1) == 0)
+  if(getdvarint("scr_skip_respawn_gate", 1) == 0)
     _id_2CEDCC356F1B9FC8::playerwaittillstreamhintcomplete();
 
   scripts\engine\utility::ent_flag_clear("playerRespawn_intermission_spawned");
@@ -1629,7 +1629,7 @@ _id_9F5606E3BD1C508D(ref, players, delay) {
 
 _id_73BDF8B18E29B13F(players) {
   thread _id_664EA636B19A418F(players);
-  level._id_6273D0C32535D86E = getdvarint("dvar_EC075EAAC396B9BB", 0) == 1;
+  level._id_6273D0C32535D86E = getdvarint("scr_truckwar_repair_station", 0) == 1;
   level._id_EB56E1684153708A = getdvarint("dvar_4E6765B5F47964DF", 0) == 1;
 
   foreach(_id_E4A6D0A55FD775A7 in level._id_354F6E3EEBCE5123) {
@@ -2075,7 +2075,7 @@ alternatebrcircle() {
     level.br_level.br_circleradii = [_id_0D232DBFD1F080AF, _id_0D232DBFD1F080AF];
   }
 
-  setDvar("dvar_2499127213B409AF", level._id_944B40A215902330);
+  setDvar("scr_br_moving_circle_count", level._id_944B40A215902330);
   circleradius = [];
   _id_04F81729168C0B8A = [];
   _id_74B5B12BB6514385 = [];

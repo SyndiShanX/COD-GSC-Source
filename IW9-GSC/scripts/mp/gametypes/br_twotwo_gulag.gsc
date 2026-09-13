@@ -463,11 +463,11 @@ _id_F0E6F4161C97D369(arena) {
 }
 
 _id_50019571D7C08658(offset) {
-  return level.br_level.br_circledelaytimes.size - 1 - getdvarint("dvar_1141FEA0C6EF428F", 3) - offset;
+  return level.br_level.br_circledelaytimes.size - 1 - getdvarint("scr_br_fc_circle_disable", 3) - offset;
 }
 
 _id_F592BABBD034685B() {
-  return getdvarint("dvar_1FF83F4F24656C5B", 15.0);
+  return getdvarint("scr_br_fc_overtime", 15.0);
 }
 
 _id_F12807F1BED9E2CB() {
@@ -974,7 +974,7 @@ _id_618BF5253A72136F() {
     return;
   }
   player._id_36386F3F03C2AB4B = 1;
-  player setclientdvar("dvar_B21F1157C582FF15", 0);
+  player setclientdvar("voice_proximity_enemy_client", 0);
   _id_1F058C408F19EDDB = _id_861C9EC1A22D6AA4(player);
   playertospectate = undefined;
 
@@ -1009,7 +1009,7 @@ _id_618BF5253A72136F() {
     return;
   }
   player cameraunlink();
-  player setclientdvar("dvar_B21F1157C582FF15", 1);
+  player setclientdvar("voice_proximity_enemy_client", 1);
   player._id_36386F3F03C2AB4B = undefined;
 }
 

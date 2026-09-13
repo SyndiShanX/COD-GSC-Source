@@ -31,7 +31,7 @@ _id_DF15F72187363229() {
   level._id_D1404CD77B68F22E = getdvarint("dvar_51CA2E83111F7340", 0);
   level._id_FC3962361E2033A9 = getdvarint("dvar_A17F8C87A9FFEFA6", 1);
   level._id_427F173FA29D4E80 = getdvarint("dvar_F173806BC718DDD1", 1);
-  level._id_0A4840E7885EF58E = getdvarint("dvar_66A4A1572A0E159D", 1);
+  level._id_0A4840E7885EF58E = getdvarint("scr_activity_autoassign", 1);
 
   if(istrue(level._id_1E0470DBB6CF1859))
     level._id_0A4840E7885EF58E = 0;

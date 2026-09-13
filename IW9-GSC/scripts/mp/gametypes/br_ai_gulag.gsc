@@ -175,7 +175,7 @@ _id_D1B3EED24BB52B44(_id_607899D4420FE1A5, arena) {
 }
 
 _id_EBAFDB7112DB8628(offset) {
-  return level.br_level.br_circledelaytimes.size - 1 - getdvarint("dvar_1141FEA0C6EF428F", 4) - offset;
+  return level.br_level.br_circledelaytimes.size - 1 - getdvarint("scr_br_fc_circle_disable", 4) - offset;
 }
 
 _id_441F914BA636643B() {

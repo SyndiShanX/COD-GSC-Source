@@ -31,7 +31,7 @@ wait_for_sequence_start(_id_54DD3D9BC29908A2) {
     }
   }
 
-  if(getdvarint("dvar_ED4A71E34E488E86", 0) == 0 || istrue(_id_54DD3D9BC29908A2)) {
+  if(getdvarint("scr_wztrain_enable", 0) == 0 || istrue(_id_54DD3D9BC29908A2)) {
     return;
   }
   level thread play_train_sequence();
@@ -75,7 +75,7 @@ train_wzcircle_override() {
   level.wztrain_info.circletimestruct.lengthdelta = lengthdelta;
   level.wztrain_info.circletimestruct.totalroundtime = totalroundtime;
   level.wztrain_info.circletimestruct.circleposattime = circleposattime;
-  setDvar("dvar_EB589C6BD2884BBB", circleposattime);
+  setDvar("br_final_circle_override", circleposattime);
 }
 
 train_wzcircle_time_subtractfrom(totalroundtime) {

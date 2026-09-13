@@ -4,7 +4,7 @@
 ***********************************************/
 
 trial_is_event() {
-  _id_C280D7A702434B56 = getDvar("dvar_A1767CFD7EDE043B");
+  _id_C280D7A702434B56 = getDvar("bg_trial_mission_is_event");
 
   if(_id_C280D7A702434B56 == "1")
     return 1;
@@ -112,7 +112,7 @@ trial_ui_set_reward_tier_preview(tier) {
 }
 
 trial_ui_decrease_tries_remaining() {
-  if(getDvar("dvar_A1767CFD7EDE043B") == "1")
+  if(getDvar("bg_trial_mission_is_event") == "1")
     game["trial"]["tries_remaining"] = 2;
   else
     game["trial"]["tries_remaining"]--;
@@ -163,7 +163,7 @@ trial_ui_open_results_screen() {
   level.player freezecontrols(1);
   wait 0.5;
 
-  if(getDvar("dvar_A1767CFD7EDE043B") != "1") {
+  if(getDvar("bg_trial_mission_is_event") != "1") {
     level.player openmenu("RoundEndTeamHud");
     wait 3;
   } else {

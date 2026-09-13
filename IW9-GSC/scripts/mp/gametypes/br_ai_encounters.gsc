@@ -4,9 +4,9 @@
 *****************************************************/
 
 init() {
-  setdvarifuninitialized("dvar_66A4F62FEFC77EFD", 0);
+  setdvarifuninitialized("scr_br_ai_encounters", 0);
 
-  if(!getdvarint("dvar_66A4F62FEFC77EFD", 0)) {
+  if(!getdvarint("scr_br_ai_encounters", 0)) {
     return;
   }
   setdvarifuninitialized("dvar_AB50F58BB9979459", 30);

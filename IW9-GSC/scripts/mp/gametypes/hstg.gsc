@@ -40,7 +40,7 @@ main() {
   game["dialog"]["boost"] = "boost_tdm";
   game["dialog"]["offense_obj"] = "boost_tdm";
   game["dialog"]["defense_obj"] = "boost_tdm";
-  level.testtdmanywhere = getdvarint("dvar_157F06AFF3C1F357", 0);
+  level.testtdmanywhere = getdvarint("scr_tdmanywhere", 0);
   level.tdmanywhere_dropheight = getdvarfloat("dvar_0C692D2A11DD6615", 1000);
   level.tdmanywhere_perpenoffset = getdvarfloat("dvar_631C58033F43C2DC", 2048);
   level.tdmanywhere_distoffset = getdvarfloat("dvar_F314048C87AE28AA", 4092);
@@ -125,9 +125,9 @@ initspawns() {
   scripts\mp\spawnlogic::registerspawnset("fallback", _id_3A5288F40C8BE099);
 
   if(istrue(level.testtdmanywhere)) {
-    x = getdvarfloat("dvar_B6294C84C04E377B", randomfloatrange(-4096, 4096));
-    y = getdvarfloat("dvar_B6294B84C04E3548", randomfloatrange(-4096, 4096));
-    z = getdvarfloat("dvar_B6294E84C04E3BE1", randomfloatrange(0, 512));
+    x = getdvarfloat("scr_tdmanywhere_centerx", randomfloatrange(-4096, 4096));
+    y = getdvarfloat("scr_tdmanywhere_centery", randomfloatrange(-4096, 4096));
+    z = getdvarfloat("scr_tdmanywhere_centerz", randomfloatrange(0, 512));
     level.mapcenter = (x, y, z);
     tdmanywhere_debugshowlocs();
   } else {

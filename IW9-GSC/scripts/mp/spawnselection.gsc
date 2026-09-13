@@ -5,13 +5,13 @@
 
 init() {
   if(_id_167619FE3D0CFF00())
-    setDvar("dvar_5FC696F5BBB3CA62", 0);
+    setDvar("scr_game_disablespawncamera", 0);
   else
     return;
 
-  level.usec130spawn = getdvarint("dvar_D5257119DAEC762D", 0) == 1;
-  level.usesquadspawn = getdvarint("dvar_2314646DEABE3144", 0) == 1;
-  level.usesquadspawnselection = getdvarint("dvar_923F96B1D9A290B4", 1) == 1;
+  level.usec130spawn = getdvarint("scr_game_c130_spawn", 0) == 1;
+  level.usesquadspawn = getdvarint("scr_game_squad_spawn", 0) == 1;
+  level.usesquadspawnselection = getdvarint("scr_game_spawnselection_squad", 1) == 1;
   level.spawnsquadleaderonly = getdvarint("dvar_FC11053944AB5F7E", 0) == 1;
   level._id_F15BECFBC1B01A1B = getdvarint("dvar_EE75F0B9D9E03349", 1) == 1;
   level._id_A50B22FA98674A50 = getdvarint("dvar_EF54007B614237DA", 0) == 1;
@@ -24,7 +24,7 @@ init() {
   level._id_CA4FE20B267C4F54 = getdvarint("dvar_9FE20711E5BCEE42", 0) == 1;
   level._id_4D2556C1D0F4893E = getdvarint("dvar_A959156DFF929A38", 0) == 1;
   level._id_7119A108C4BA4D2C = getdvarint("dvar_4CE0B40AAC178E56", 0) == 1;
-  level._id_C0E8540C63B7AF50 = getdvarfloat("dvar_79708DD3DDF8ED32", 0);
+  level._id_C0E8540C63B7AF50 = getdvarfloat("scr_spawnselection_obj_owned_partial_pct", 0);
   level._id_F335C53DB1D6DD34 = getdvarint("dvar_8E9E98F013DB1AC4", 1) == 1;
   level.availablespawnlocations = [];
 
@@ -643,7 +643,7 @@ isvehicleindanger(_id_C6577C1382E4B40D) {
 
 _id_167619FE3D0CFF00() {
   if(!isDefined(level.usespawnselection))
-    level.usespawnselection = getdvarint("dvar_6E73595F4CE7501E", 0) != 0;
+    level.usespawnselection = getdvarint("scr_game_usespawnselection", 0) != 0;
 
   return level.usespawnselection;
 }

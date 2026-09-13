@@ -39,7 +39,7 @@ main() {
 _id_B588D148AE6131FD() {
   setDvar("dvar_C90BDE85E15978EF", 1);
   setDvar("scr_skipclasschoice", 1);
-  setDvar("dvar_C55DC89EF275CDAA", 1);
+  setDvar("scr_skip_infils", 1);
   setDvar("scr_game_graceperiod", 0);
   setDvar("scr_game_matchstarttime", 0);
   setDvar("scr_game_disableAnnouncer", 1);

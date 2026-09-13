@@ -32,8 +32,8 @@ init() {
   level.challengesallowed = level.playerxpenabled || getdvarint("force_challenges");
   level.enforceantiboosting = level.playerxpenabled || level.weaponxpenabled || level.challengesallowed;
   level.onlinestatsenabled = level.rankedmatch;
-  level._id_EC2FB549B15AD827 = level.rankedmatch && getdvarint("dvar_5DBEC0FB7158C834");
-  level._id_77907D733ABE8B63 = level.rankedmatch && getdvarint("dvar_BEAAC6D270585321");
+  level._id_EC2FB549B15AD827 = level.rankedmatch && getdvarint("online_matchmaking_is_league_play");
+  level._id_77907D733ABE8B63 = level.rankedmatch && getdvarint("online_matchmaking_is_league_play_br");
   level.starttimeutcseconds = getsystemtime();
   scripts\mp\utility\stats::setplayerdatagroups();
   level.framedurationseconds = level.frameduration / 1000;
@@ -128,7 +128,7 @@ registerdvars() {
 registerfalldamagedvars() {
   if(scripts\mp\utility\game::_id_E417D8EF1C70CBCB()) {
     if(scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508()) {
-      if(getdvarint("dvar_12CA000DD2976EBC", 0)) {
+      if(getdvarint("bg_bristotallynormal", 0)) {
         setDvar("bg_fallDamageMinHeight", 100000000);
         setDvar("bg_fallDamageMaxHeight", 100000001);
         setDvar("bg_softLandingMinHeight", 100000000);
@@ -154,8 +154,8 @@ registerfalldamagedvars() {
 }
 
 _id_D62A31437E2D4568() {
-  setDvar("dvar_A1EBE22197CB5CC0", 1);
-  setDvar("dvar_569C1F8E8857B817", 1);
+  setDvar("lui_show_turret_overheat", 1);
+  setDvar("bg_turretoverheatreset", 1);
 }
 
 _id_32E2D220EBF5A876() {

@@ -1105,7 +1105,7 @@ initspawns() {
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
 
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0)
+  if(getdvarint("t10", 0) > 0)
     scripts\mp\spawnlogic::setactivespawnlogic("Default", "Crit_Default");
   else if(isDefined(scripts\cp_mp\utility\game_utility::getlocaleid()))
     scripts\mp\spawnlogic::setactivespawnlogic("BigTDM", "Crit_Frontline");

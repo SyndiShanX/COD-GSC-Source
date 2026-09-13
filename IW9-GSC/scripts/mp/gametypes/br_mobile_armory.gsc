@@ -7,7 +7,7 @@ init() {
   level._effect["poi_mobile_armory_available"] = loadfx("vfx/iw8_br/gameplay/vfx_br_poi_armory_white.vfx");
   level._effect["poi_mobile_armory_charging"] = loadfx("vfx/iw8_br/gameplay/vfx_br_poi_armory_red.vfx");
   level.br_mobilearmories = [];
-  level.br_mobile_armory_enabled = getdvarint("dvar_FAF37A1BB44F33A1", 0) != 0;
+  level.br_mobile_armory_enabled = getdvarint("scr_br_mobile_armory", 0) != 0;
   level.mobilearmoryplundercost = getdvarint("dvar_9C45DD1E0492AB50", 1);
   _id_1F6BC044DD1738AB::initstatemachineforpoitype("mobile_armory");
   _id_1F6BC044DD1738AB::registerstatecallbacksforpoitype("mobile_armory", 0, ::_onenterdefaultstate, undefined, ::_onexitdefaultstate);

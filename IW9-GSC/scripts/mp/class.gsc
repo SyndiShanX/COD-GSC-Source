@@ -50,7 +50,7 @@ init() {
     level.classtablename = "classtable:classtable_weapon_test";
   else if(getdvarint("dvar_48B4D51AD390DA4F", 0))
     level.classtablename = "classtable:classtable_gwplus";
-  else if(getdvarint("dvar_9FDEAB749D8F74A1", 0))
+  else if(getdvarint("scr_test_loadouts", 0))
     level.classtablename = "classtable:" + level._id_1A2B600A06EC21F4._id_6452BBDFE7671A5D;
   else if(scripts\mp\utility\game::isanymlgmatch())
     level.classtablename = "classtable:classtable_cdl";
@@ -66,7 +66,7 @@ init() {
 
   level._id_C4809F80B4230099 = "kills";
 
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0)
+  if(getdvarint("t10", 0) > 0)
     level._id_C4809F80B4230099 = "score";
 
   level thread onplayerconnecting();
@@ -164,7 +164,7 @@ cac_getkillstreak(index, class) {
     }
   }
 
-  if(isDefined(level._id_B231AD92292E3018) && getdvarint("dvar_A464CB031C16EE87", 0) > 0) {
+  if(isDefined(level._id_B231AD92292E3018) && getdvarint("t10", 0) > 0) {
     _id_A7F68D4AD3AAA3A3 = level._id_B231AD92292E3018[index];
 
     if(!isDefined(_id_A7F68D4AD3AAA3A3))
@@ -2284,14 +2284,14 @@ loadout_updateplayerperks(struct, class) {
 
   if(!isDefined(class) || class != "juggernaut") {
     if(struct.loadoutstandardperks.size > 0) {
-      _id_1B7E9DC9EB756EF5 = getdvarint("dvar_8463BC866E14F4C7", 0) == 0;
+      _id_1B7E9DC9EB756EF5 = getdvarint("scr_loadoutperksoff", 0) == 0;
 
       if(_id_1B7E9DC9EB756EF5) {
         scripts\mp\perks\perks::giveperks(loadoutperks);
         scripts\mp\perks\perks::_id_4613EC15F87B7CF2(_id_15F3E6DF722FB1CF, _id_15F3E5DF722FAF9C);
       }
 
-      if(getdvarint("dvar_9FDEAB749D8F74A1", 0)) {
+      if(getdvarint("scr_test_loadouts", 0)) {
         self._id_90E8BBDBA663D7C6 = "1st";
 
         foreach(perk in loadoutperks) {
@@ -3736,7 +3736,7 @@ loadout_updateglobalclassstruct() {
   struct.loadoutfieldupgrade2 = "none";
 
   if(!isagent(self)) {
-    if(!isDefined(self.loadoutfieldupgrade1) && getdvarint("dvar_A464CB031C16EE87", 0)) {
+    if(!isDefined(self.loadoutfieldupgrade1) && getdvarint("t10", 0)) {
       if(getDvar("dvar_953B8C504C0DD6F2", "") == "zm_t10")
         struct.loadoutfieldupgrade1 = "super_aether_shroud";
       else

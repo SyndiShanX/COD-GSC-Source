@@ -6,7 +6,7 @@
 init() {
   level.teambalance = getdvarint("scr_teambalance");
   level.maxclients = getmaxclients();
-  level._id_12CA3A9EE540A9ED = getdvarint("dvar_819016FCBA31A2C2");
+  level._id_12CA3A9EE540A9ED = getdvarint("online_allowteamchange");
   _id_F2DA32F8A5F3E866 = ["free", "axis", "allies", "team_three", "team_four", "team_five", "team_six", "team_seven", "team_eight", "team_nine", "team_ten", "team_eleven", "team_twelve", "team_thirteen", "team_fourteen", "team_fifteen", "team_sixteen", "team_seventeen", "team_eighteen", "team_nineteen", "team_twenty", "team_twenty_one", "team_twenty_two", "team_twenty_three", "team_twenty_four", "team_twenty_five", "team_twenty_six", "team_twenty_seven", "team_twenty_eight", "team_twenty_nine", "team_thirty", "team_thirty_one", "team_thirty_two", "team_thirty_three", "team_thirty_four", "team_thirty_five", "team_thirty_six", "team_thirty_seven", "team_thirty_eight", "team_thirty_nine", "team_forty", "team_forty_one", "team_forty_two", "team_forty_three", "team_forty_four", "team_forty_five", "team_forty_six", "team_forty_seven", "team_forty_eight", "team_forty_nine", "team_fifty", "team_fifty_one", "team_fifty_two", "team_fifty_three", "team_fifty_four", "team_fifty_five", "team_fifty_six", "team_fifty_seven", "team_fifty_eight", "team_fifty_nine", "team_sixty", "team_sixty_one", "team_sixty_two", "team_sixty_three", "team_sixty_four", "team_sixty_five", "team_sixty_six", "team_sixty_seven", "team_sixty_eight", "team_sixty_nine", "team_seventy", "team_seventy_one", "team_seventy_two", "team_seventy_three", "team_seventy_four", "team_seventy_five", "team_seventy_six", "team_seventy_seven", "team_seventy_eight", "team_seventy_nine", "team_eighty", "team_eighty_one", "team_eighty_two", "team_eighty_three", "team_eighty_four", "team_eighty_five", "team_eighty_six", "team_eighty_seven", "team_eighty_eight", "team_eighty_nine", "team_ninety", "team_ninety_one", "team_ninety_two", "team_ninety_three", "team_ninety_four", "team_ninety_five", "team_ninety_six", "team_ninety_seven", "team_ninety_eight", "team_ninety_nine", "team_hundred", "team_hundred_one", "team_hundred_two", "team_hundred_three", "team_hundred_four", "team_hundred_five", "team_hundred_six", "team_hundred_seven", "team_hundred_eight", "team_hundred_nine", "team_hundred_ten", "team_hundred_eleven", "team_hundred_twelve", "team_hundred_thirteen", "team_hundred_fourteen", "team_hundred_fifteen", "team_hundred_sixteen", "team_hundred_seventeen", "team_hundred_eightteen", "team_hundred_nineteen", "team_hundred_twenty", "team_hundred_twenty_one", "team_hundred_twenty_two", "team_hundred_twenty_three", "team_hundred_twenty_four", "team_hundred_twenty_five", "team_hundred_twenty_six", "team_hundred_twenty_seven", "team_hundred_twenty_eight", "team_hundred_twenty_nine", "team_hundred_thirty", "team_hundred_thirty_one", "team_hundred_thirty_two", "team_hundred_thirty_three", "team_hundred_thirty_four", "team_hundred_thirty_five", "team_hundred_thirty_six", "team_hundred_thirty_seven", "team_hundred_thirty_eight", "team_hundred_thirty_nine", "team_hundred_forty", "team_hundred_forty_one", "team_hundred_forty_two", "team_hundred_forty_three", "team_hundred_forty_four", "team_hundred_forty_five", "team_hundred_forty_six", "team_hundred_forty_seven", "team_hundred_forty_eight", "team_hundred_forty_nine", "team_hundred_fifty", "team_hundred_fifty_one", "team_hundred_fifty_two", "team_hundred_fifty_three", "team_hundred_fifty_four", "team_hundred_fifty_five", "team_hundred_fifty_six", "team_hundred_fifty_seven", "team_hundred_fifty_eight", "team_hundred_fifty_nine", "team_hundred_sixty", "team_hundred_sixty_one", "team_hundred_sixty_two", "team_hundred_sixty_three", "team_hundred_sixty_four", "team_hundred_sixty_five", "team_hundred_sixty_six", "team_hundred_sixty_seven", "team_hundred_sixty_eight", "team_hundred_sixty_nine", "team_hundred_seventy", "team_hundred_seventy_one", "team_hundred_seventy_two", "team_hundred_seventy_three", "team_hundred_seventy_four", "team_hundred_seventy_five", "team_hundred_seventy_six", "team_hundred_seventy_seven", "team_hundred_seventy_eight", "team_hundred_seventy_nine", "team_hundred_eighty", "team_hundred_eighty_one", "team_hundred_eighty_two", "team_hundred_eighty_three", "team_hundred_eighty_four", "team_hundred_eighty_five", "team_hundred_eighty_six", "team_hundred_eighty_seven", "team_hundred_eighty_eight", "team_hundred_eighty_nine", "team_hundred_ninety", "team_hundred_ninety_one", "team_hundred_ninety_two", "team_hundred_ninety_three", "team_hundred_ninety_four", "team_hundred_ninety_five", "team_hundred_ninety_six", "team_hundred_ninety_seven", "team_hundred_ninety_eight", "team_hundred_ninety_nine", "team_two_hundred", "spectator", "codcaster", "civilian", "team_big_map_agent"];
   level.allteamnamelist = _id_F2DA32F8A5F3E866;
   _id_F5798B9364E0158D = ["axis", "allies"];
@@ -69,7 +69,7 @@ init() {
   if(scripts\mp\utility\game::matchmakinggame() && !isintournament() && !getdvarint("dvar_9B383028DFD6542D", 0))
     level thread watchafk();
 
-  if(getdvarint("dvar_CF58BC10C64A1977", 0) == 1)
+  if(getdvarint("scr_debug_teams", 0) == 1)
     level thread debugprintteams();
 
   _id_6F61A7EBCD7859F6();
@@ -582,7 +582,7 @@ createoperatorcustomization(operatorref, _id_5864EA4E21A60CD4) {
     _id_5864EA4E21A60CD4 = _id_ED273E317490CB02(operatorref);
   }
 
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0) {
+  if(getdvarint("t10", 0) > 0) {
     if(isDefined(self.team) && self.team == "allies") {
       operatorref = "t10_usa_bravo_infiltration";
       _id_5864EA4E21A60CD4 = 22;
@@ -605,7 +605,7 @@ createoperatorcustomization(operatorref, _id_5864EA4E21A60CD4) {
   operatorcustomization.executionquip = getoperatorexecutionquip(operatorref);
   operatorcustomization.parachute = _id_66B30579F9F18786();
 
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0)
+  if(getdvarint("t10", 0) > 0)
     operatorcustomization.suit = "t10_defaultsuit_mp";
   else
     operatorcustomization.suit = _id_ADA9A2308A4046E2(operatorref);
@@ -1288,7 +1288,7 @@ forcedefaultmodel() {
 }
 
 watchafk() {
-  if(getdvarint("dvar_B66208719C6BAE6A", 0) == 1) {
+  if(getdvarint("debug_stopafkcheck", 0) == 1) {
     return;
   }
   scripts\mp\flags::gameflagwait("prematch_done");

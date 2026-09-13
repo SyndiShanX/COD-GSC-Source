@@ -169,7 +169,7 @@ setdropbagdelay() {
   _id_21BE5F4D451EFD18 = -15;
   firsttime = _id_2695A20D4011076D::getcircleclosetime(1);
   _id_5FD1D7EEEBE96215 = max(0, firsttime + _id_21BE5F4D451EFD18);
-  _id_23F3A96159A40D18 = getdvarfloat("dvar_B81B25BCD8C7D749", _id_5FD1D7EEEBE96215);
+  _id_23F3A96159A40D18 = getdvarfloat("scr_br_dropbag_delay", _id_5FD1D7EEEBE96215);
   _id_362C58E8BB39BCDA::registerbrgametypedata("dropBagDelay", _id_23F3A96159A40D18);
 }
 

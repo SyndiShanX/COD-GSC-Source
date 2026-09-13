@@ -11,7 +11,7 @@ main() {
   matchmakingmatch = getdvarint("onlinegame") && !getdvarint("xblive_privatematch");
 
   if(matchmakingmatch)
-    level.isgroundwarsiege = getdvarint("dvar_F2D9A572DB1504F1", 0);
+    level.isgroundwarsiege = getdvarint("scr_siege_groundwarsiege", 0);
 
   level.allowmodestructs = [];
 

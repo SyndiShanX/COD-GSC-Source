@@ -125,7 +125,7 @@ _id_7642A6BEE4CDAAA2(spawnpoint, _id_11F3B4465C8B637B, _id_30A91E1938CFD1B2) {
   if(isDefined(_id_30A91E1938CFD1B2._id_260A81DF7CA3956D))
     self[[_id_30A91E1938CFD1B2._id_260A81DF7CA3956D]](_id_30A91E1938CFD1B2._id_9FDC1F9E4FC628E4);
 
-  if(getdvarint("dvar_DF02345C60008647", 1) == 0)
+  if(getdvarint("scr_skip_respawn_gate", 1) == 0)
     _id_2CEDCC356F1B9FC8::playerwaittillstreamhintcomplete();
 
   _id_2CEDCC356F1B9FC8::playerclearstreamhintorigin();
@@ -692,7 +692,7 @@ _id_952548D8AED47102(_id_447913206D1F7916, timeuntilspawn, _id_F9A785628F97EEC6)
     return spawnpoint;
   }
 
-  _id_F6AC3C609E85CB74 = getdvarfloat("dvar_B3366FB6BBCD6DAB", -1);
+  _id_F6AC3C609E85CB74 = getdvarfloat("scr_br_respawnmaxlastdeathoffset", -1);
 
   if(!isDefined(spawnorigin) && _id_F6AC3C609E85CB74 >= 0 && isDefined(self.lastdeathpos)) {
     startorigin = getsafeoriginaroundpoint(self.lastdeathpos, _id_F6AC3C609E85CB74, timeuntilspawn);
@@ -704,7 +704,7 @@ _id_952548D8AED47102(_id_447913206D1F7916, timeuntilspawn, _id_F9A785628F97EEC6)
     }
   }
 
-  _id_F6AC3C609E85CB74 = getdvarfloat("dvar_8D9AD523F40BE455", 1000);
+  _id_F6AC3C609E85CB74 = getdvarfloat("scr_br_respawnmaxteammateoffset", 1000);
 
   if(!isDefined(spawnorigin) && _id_F6AC3C609E85CB74 >= 0) {
     _id_B4E45DBE012F4A40 = playergetbestrespawnteammate(_id_447913206D1F7916, timeuntilspawn);
@@ -714,7 +714,7 @@ _id_952548D8AED47102(_id_447913206D1F7916, timeuntilspawn, _id_F9A785628F97EEC6)
       _id_06E6B11A5415DC87 = getdvarfloat("dvar_5845AE9020002373", 30.0) * 1000;
       brgametype = getDvar("dvar_7611A2790A0BF7FE", "");
 
-      if((brgametype == "plunder" || brgametype == "risk" || brgametype == "kingslayer") && isDefined(level.teamdata[self.team]["lastParachuteTime"]) && level.teamdata[self.team]["lastParachuteTime"] + _id_06E6B11A5415DC87 > gettime() + _id_B1959D90F987E135 && distance2d(level.teamdata[self.team]["lastParachuteOrigin"], _id_B4E45DBE012F4A40.origin) < getdvarfloat("dvar_8D9AD523F40BE455", 1000) * 1.25) {
+      if((brgametype == "plunder" || brgametype == "risk" || brgametype == "kingslayer") && isDefined(level.teamdata[self.team]["lastParachuteTime"]) && level.teamdata[self.team]["lastParachuteTime"] + _id_06E6B11A5415DC87 > gettime() + _id_B1959D90F987E135 && distance2d(level.teamdata[self.team]["lastParachuteOrigin"], _id_B4E45DBE012F4A40.origin) < getdvarfloat("scr_br_respawnmaxteammateoffset", 1000) * 1.25) {
         spawnorigin = level.teamdata[self.team]["lastParachuteOrigin"];
         spawnangles = level.teamdata[self.team]["lastParachuteAngles"];
         spawntype = "abovePlayerCached";
@@ -1228,7 +1228,7 @@ _id_844BDF70E8A61534() {
   if(isteamextracted(self.team)) {
     return;
   }
-  if(getdvarint("dvar_DF02345C60008647", 1) == 0)
+  if(getdvarint("scr_skip_respawn_gate", 1) == 0)
     _id_2CEDCC356F1B9FC8::playerwaittillstreamhintcomplete();
 
   scripts\engine\utility::ent_flag_clear("playerRespawn_intermission_spawned");

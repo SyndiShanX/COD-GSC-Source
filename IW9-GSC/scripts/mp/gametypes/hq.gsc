@@ -602,7 +602,7 @@ updaterespawntimer() {
 }
 
 initspawns() {
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0)
+  if(getdvarint("t10", 0) > 0)
     scripts\mp\spawnlogic::setactivespawnlogic("Default", "Crit_Default", 1);
   else
     scripts\mp\spawnlogic::setactivespawnlogic("Default", "Crit_Frontline", 1);

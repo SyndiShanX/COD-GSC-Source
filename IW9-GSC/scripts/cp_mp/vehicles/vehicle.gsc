@@ -17,7 +17,7 @@ vehicle_init() {
   level.vehicle._id_2F4397218F74E45A = ::_id_2F4397218F74E45A;
   [[scripts\cp_mp\utility\script_utility::getsharedfunc("vehicle", "init")]]();
 
-  if(getdvarint("dvar_A464CB031C16EE87") > 0)
+  if(getdvarint("t10") > 0)
     level._id_7BF42D565645A485 = 1;
 
   if(getdvarint("dvar_50E5FEED8F9F6F56", 0) == 1)

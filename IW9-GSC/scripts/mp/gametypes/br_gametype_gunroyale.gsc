@@ -341,7 +341,7 @@ _id_EC2B0D7C087A30E5() {
 _id_903461B2C1A68908(weapon) {}
 
 _id_CF7B53136C0EDD17() {
-  level.respawnheightoverride = getdvarint("dvar_AE35E4BB8A3AA9E7", 19000);
+  level.respawnheightoverride = getdvarint("scr_bmo_respawnheightoverride", 19000);
   level.brgametype._id_F50EBEFCC7D069A2 = getdvarint("dvar_C37516BB0903A37C", 1);
   level.brgametype._id_65F8FA4978A64FF2 = getdvarint("dvar_559F1E8919659440", 2);
   level.brgametype.respawndelay = getdvarint("dvar_2A410697B1CFE7F5", 10);
@@ -490,7 +490,7 @@ _id_FE0F59869B5ADF07(spawnpoint, _id_11F3B4465C8B637B) {
   waitframe();
   _id_8A9081C470563AC0();
 
-  if(getdvarint("dvar_DF02345C60008647", 1) == 0)
+  if(getdvarint("scr_skip_respawn_gate", 1) == 0)
     _id_2CEDCC356F1B9FC8::playerwaittillstreamhintcomplete();
 
   _id_2CEDCC356F1B9FC8::playerclearstreamhintorigin();

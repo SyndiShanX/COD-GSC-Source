@@ -1982,21 +1982,21 @@ _id_29E99A60706E08B1() {
   _id_64309F7F1E2E9563 = 300;
 
   if(isusingmatchrulesdata())
-    setdvarifuninitialized("dvar_A90D27D1557C455B", getmatchrulesdata("commonOption", "killstreakLottery"));
+    setdvarifuninitialized("scr_killstreak_lottery", getmatchrulesdata("commonOption", "killstreakLottery"));
   else
-    setdvarifuninitialized("dvar_A90D27D1557C455B", 0);
+    setdvarifuninitialized("scr_killstreak_lottery", 0);
 
   setdvarifuninitialized("dvar_6B62B5BF5E934E32", _id_7C15DD97287BEEEF);
   setdvarifuninitialized("dvar_6B3FBFBF5E6D1C78", _id_5FAAB0AFC3B30725);
   setdvarifuninitialized("dvar_6AB0E10E85AF33B4", _id_87C79731F32EFC1E);
-  setdvarifuninitialized("dvar_2E6280037C0547E5", _id_64309F7F1E2E9563);
+  setdvarifuninitialized("scr_killstreak_lottery_cooldown", _id_64309F7F1E2E9563);
   scripts\mp\flags::gameflagwait("prematch_done");
 
   if(scripts\cp_mp\utility\game_utility::islargebrmap()) {
     return;
   }
   for(;;) {
-    _id_79D58CAA88B7674F = getdvarint("dvar_A90D27D1557C455B", 0);
+    _id_79D58CAA88B7674F = getdvarint("scr_killstreak_lottery", 0);
 
     if(!istrue(_id_79D58CAA88B7674F)) {
       waitframe();
@@ -2025,7 +2025,7 @@ _id_29E99A60706E08B1() {
 
     for(_id_AC0E594AC96AA3A8 = 0; _id_AC0E594AC96AA3A8 < _id_16F6338C00A23CC7; _id_AC0E594AC96AA3A8++) {
       _id_8DCEF6FA6B6A6EC5 = _id_5F4B5D4938755DCB[randomint(_id_5F4B5D4938755DCB.size)];
-      _id_8DCEF6FA6B6A6EC5._id_E73D59C16D88212B = getdvarint("dvar_2E6280037C0547E5", _id_64309F7F1E2E9563);
+      _id_8DCEF6FA6B6A6EC5._id_E73D59C16D88212B = getdvarint("scr_killstreak_lottery_cooldown", _id_64309F7F1E2E9563);
       _id_8DCEF6FA6B6A6EC5 _id_7797C8D5DA974B60();
       _id_8DCEF6FA6B6A6EC5 thread _id_3FFEB63ACB58F504();
       _id_5F4B5D4938755DCB = scripts\engine\utility::array_remove(_id_5F4B5D4938755DCB, _id_8DCEF6FA6B6A6EC5);

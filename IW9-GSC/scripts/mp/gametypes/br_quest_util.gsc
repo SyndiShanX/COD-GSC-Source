@@ -4,7 +4,7 @@
 **************************************************/
 
 init_quest_util() {
-  if(!getdvarint("dvar_90A3DFD557408611", 1)) {
+  if(!getdvarint("scr_br_quests_enabled", 1)) {
     return;
   }
   level.questinfo = spawnStruct();
@@ -2321,7 +2321,7 @@ getquestrewardsgrouptable() {
 }
 
 _id_29C4F14EE8C99D3F() {
-  _id_122320381EA5BBE9 = getDvar("dvar_F29FA998FB70C4D5", "mp/brmission_rewards.csv");
+  _id_122320381EA5BBE9 = getDvar("br_mission_reward_filename", "mp/brmission_rewards.csv");
 
   if(_id_122320381EA5BBE9 == "")
     return "mp/brmission_rewards.csv";

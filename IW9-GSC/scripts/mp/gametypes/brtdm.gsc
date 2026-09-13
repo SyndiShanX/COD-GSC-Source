@@ -116,7 +116,7 @@ updategametypedvars() {
   level.autorespawnwaittime = getdvarint("dvar_4BEAC336193A373D", 3);
   level.parachutedeploydelay = getdvarfloat("dvar_12027360B079C1DB", 0.5);
   level.brtdm_config = spawnStruct();
-  level.brtdm_config.locale = getDvar("dvar_7DCD947B5E9ADD11", "");
+  level.brtdm_config.locale = getDvar("scr_brtdm_locale", "");
   applylocaledefaults();
   level.brtdm_config.circlecenter = getdvarvector("dvar_01AFADBBBA931661", level.brtdm_config.locale_defaults["dvar_01AFADBBBA931661"]);
   level.brtdm_config.circleradius = getdvarint("scr_brtdm_circle_radius", level.brtdm_config.locale_defaults["scr_brtdm_circle_radius"]);

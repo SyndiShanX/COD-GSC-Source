@@ -16,7 +16,7 @@ init() {
   level thread initpostmain();
   level thread initdialog();
   setdvarifuninitialized("dvar_98FAD011285F3011", 0);
-  setdvarifuninitialized("dvar_E82B8618853A182C", 1500);
+  setdvarifuninitialized("scr_br_project_kick", 1500);
   level thread _id_7B49B147E0D292E5();
   level thread _id_90066BC128FBD493();
   _id_303FD53078A244F1::init();
@@ -38,7 +38,7 @@ _id_7B49B147E0D292E5() {
   level.brgametype._id_3DD997E45E444B3D = getdvarint("dvar_CFB769A290798F09", 1);
   level.brgametype._id_8CB996B879748BB1 = getdvarfloat("dvar_6772E6C744D1D962", 30);
   level.brgametype._id_59AF2E5140D3FED7 = getdvarfloat("dvar_E9B60187D57107B9", 1.0);
-  level.respawnheightoverride = getdvarint("dvar_AE35E4BB8A3AA9E7", 7500);
+  level.respawnheightoverride = getdvarint("scr_bmo_respawnheightoverride", 7500);
   level.brgametype._id_A916B204F027AF6B = getdvarint("dvar_A91B489383D89274", 0);
   level.brgametype._id_6F3C4D74A8C614AB = getdvarint("dvar_38AFF65BDA44B82A", 1);
   level.brgametype._id_B43745B85F249E68 = 1;
@@ -552,7 +552,7 @@ _id_7CA4D46DFE174E90(_id_A1B4FAB5A3B4FA5E, _id_CF7D42708E58BB98, _id_BB58BCC7B06
 
   _id_3E00D2D6FB1BD934 = scripts\cp_mp\utility\player_utility::getteamindex(_id_CF7D42708E58BB98);
   _id_D6D795DB2CAE2C1B(_id_29412B34AF141C29, _id_3E00D2D6FB1BD934, _id_BB58BCC7B0654344);
-  _id_776DF703E8901349 = getdvarfloat("dvar_DC284649B5343DF1", 2.5);
+  _id_776DF703E8901349 = getdvarfloat("scr_br_tracked_teams_clear_delay", 2.5);
   wait(_id_776DF703E8901349);
   _id_D6D795DB2CAE2C1B(_id_29412B34AF141C29, 0, _id_BB58BCC7B0654344);
 }
@@ -1062,7 +1062,7 @@ respawn(spawnpoint, _id_11F3B4465C8B637B) {
   waitframe();
   playerrespawncleanup();
 
-  if(getdvarint("dvar_DF02345C60008647", 1) == 0)
+  if(getdvarint("scr_skip_respawn_gate", 1) == 0)
     _id_2CEDCC356F1B9FC8::playerwaittillstreamhintcomplete();
 
   _id_2CEDCC356F1B9FC8::playerclearstreamhintorigin();
@@ -1210,7 +1210,7 @@ playernakeddroploadout() {
     if(_id_BC5632FFDB336731)
       scripts\mp\perks\perks::addspecialistbonus();
   } else {
-    _id_CE214AFC7B96A3A7 = getdvarint("dvar_CD33C7AD9A88587F", 0);
+    _id_CE214AFC7B96A3A7 = getdvarint("scr_br_give_self_revive_on_respawn", 0);
 
     if(_id_CE214AFC7B96A3A7)
       _id_7E52B56769FA7774::addselfrevivetoken(1);
@@ -1367,7 +1367,7 @@ setdropbagdelay() {
   _id_56DDE920C84C7B04 = -15;
   _id_C2D7D58BFAD1B1EE = _id_2695A20D4011076D::getcircleclosetime(1);
   _id_A14D77328BA7E8F1 = max(0, _id_C2D7D58BFAD1B1EE + _id_56DDE920C84C7B04);
-  _id_7B76B8BB6B541A17 = getdvarfloat("dvar_B81B25BCD8C7D749", _id_A14D77328BA7E8F1);
+  _id_7B76B8BB6B541A17 = getdvarfloat("scr_br_dropbag_delay", _id_A14D77328BA7E8F1);
   _id_362C58E8BB39BCDA::registerbrgametypedata("dropBagDelay", _id_7B76B8BB6B541A17);
 }
 

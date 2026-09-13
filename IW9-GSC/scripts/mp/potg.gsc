@@ -653,7 +653,7 @@ screenprint_dosceneprintplayback() {
 }
 
 datalog_getlogversion() {
-  if(getdvarint("dvar_6AF7E4425B1F5D10", 0) != 0)
+  if(getdvarint("scr_playtest_qa", 0) != 0)
     return -1;
 
   if(getdvarint("scr_playtest", 0) != 0)
@@ -663,7 +663,7 @@ datalog_getlogversion() {
 }
 
 datalog_isloggingenabled() {
-  return getdvarint("dvar_1FD181EBEEBE83BF") != 0;
+  return getdvarint("potg_datalog") != 0;
 }
 
 datalog_scenefinalized(scene) {

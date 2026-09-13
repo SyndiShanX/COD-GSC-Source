@@ -4,10 +4,10 @@
 ***********************************************/
 
 init() {
-  level._id_21B6EAFDC9B89B24 = getdvarint("dvar_F6A4BBF063E6B985", 0);
+  level._id_21B6EAFDC9B89B24 = getdvarint("scr_br_playtest_tool_phoenix", 0);
   level._id_81699AA174DD5A52 = getdvarint("dvar_10D7B61BFF0B17A3", 1);
 
-  if(!istrue(getdvarint("dvar_2E58447FA1CA4F20", 0))) {
+  if(!istrue(getdvarint("dlog_is_playtest", 0))) {
     return;
   }
   level thread _id_21B6EAFDC9B89B24();
@@ -110,7 +110,7 @@ _id_21B6EAFDC9B89B24() {
     }
 
     _id_9DBFA659B21102E3 = strtok(_id_87F59B7E34EA1556, getDvar("dvar_C72DAF352FF527F5", "^P^"));
-    _id_93CDBA842F067FEE = tolower(getDvar("dvar_C88E6F69321E91CA"));
+    _id_93CDBA842F067FEE = tolower(getDvar("scr_br_redeploy_playtester"));
 
     if(_id_C7A92F961200261C(_id_93CDBA842F067FEE, _id_9DBFA659B21102E3[0])) {
       foreach(player in level.players) {

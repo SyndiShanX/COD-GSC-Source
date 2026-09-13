@@ -38,7 +38,7 @@ door_dynamic_setup_adapter(_id_497A14A8727744F4, _id_3F79972B04564171, _id_42ECB
 
     door.state = 0;
     doortarget = door.target;
-    _id_95A8D8ADDB57380E = isDefined(door.script_noteworthy) && door.script_noteworthy == "OPEN" || getdvarint("dvar_A35456DDCB0A6051", 0) != 0;
+    _id_95A8D8ADDB57380E = isDefined(door.script_noteworthy) && door.script_noteworthy == "OPEN" || getdvarint("scr_doors_open", 0) != 0;
     _id_74FB145EC8B5103D = isDefined(door.script_noteworthy) && door.script_noteworthy == "LOCKED";
     door.length = 52;
     door.height = 96;
@@ -118,7 +118,7 @@ door_dynamic_setup_adapter(_id_497A14A8727744F4, _id_3F79972B04564171, _id_42ECB
 door_dynamic_setup_post_init() {
   waitframe();
 
-  if(getdvarint("dvar_A35456DDCB0A6051", 0) != 0) {
+  if(getdvarint("scr_doors_open", 0) != 0) {
     foreach(door in level.doors) {
       door.statecurr = 2;
       door.angles = door.doortarget.angles;

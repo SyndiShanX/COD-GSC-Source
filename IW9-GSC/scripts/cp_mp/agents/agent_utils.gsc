@@ -1087,7 +1087,7 @@ _id_E2FA9B378BBF03A6(aitype, origin, angles, priority, category, _id_1C9CB43BCF3
 _id_B04C0433E8107615() {
   level._id_74E9C02B56E4BA52 = ::_id_13812F40F38587C4;
   level._id_8A42B71F799936AD = ::_id_9FA011B7807309A8;
-  level._id_FE093E9B2B6C3751 = getdvarint("dvar_320C4DB6AF00B215", 0);
+  level._id_FE093E9B2B6C3751 = getdvarint("ai_allowdormancy", 0);
   level._id_53DB9BACADEF066D = spawnStruct();
   level._id_53DB9BACADEF066D._id_D4053E1A1D2983CE = 0;
   level._id_879053468F168806 = [];

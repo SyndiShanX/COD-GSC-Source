@@ -241,7 +241,7 @@ _id_9CA10C69808B00A5(_id_25978461C6E4F61B) {
   if(!isDefined(_id_25978461C6E4F61B))
     return 0;
 
-  return issubstr(getDvar("loot_table_filter", ""), _id_25978461C6E4F61B) || issubstr(getDvar("dvar_AC347C5A6346B8AC", ""), _id_25978461C6E4F61B);
+  return issubstr(getDvar("loot_table_filter", ""), _id_25978461C6E4F61B) || issubstr(getDvar("loot_table_filter_global", ""), _id_25978461C6E4F61B);
 }
 
 _id_5D47301F7BB7A6BA(lootid) {

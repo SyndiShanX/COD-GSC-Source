@@ -644,7 +644,7 @@ kickwhenoutofbounds(_id_1CFA28A2CDB812A7) {
     waitframe();
   }
 
-  _id_35A6A9C45130EC10 = getdvarint("dvar_E82B8618853A182C", 3500);
+  _id_35A6A9C45130EC10 = getdvarint("scr_br_project_kick", 3500);
 
   for(;;) {
     _id_7A05F5CEED8AB610 = anglesToForward(self.angles);

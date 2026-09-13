@@ -1831,7 +1831,7 @@ _id_418B248FC7829336() {
   _id_371B4C2AB5861E62::_id_B04C0433E8107615();
   level._id_74E9C02B56E4BA52 = ::_id_2CDD250EBE64308F;
   level._id_8A42B71F799936AD = ::_id_A362AF8FE3C74D33;
-  level._id_FE093E9B2B6C3751 = getdvarint("dvar_320C4DB6AF00B215", 0);
+  level._id_FE093E9B2B6C3751 = getdvarint("ai_allowdormancy", 0);
   level._id_53DB9BACADEF066D = spawnStruct();
   level._id_53DB9BACADEF066D._id_D4053E1A1D2983CE = 0;
   level._id_879053468F168806 = [];

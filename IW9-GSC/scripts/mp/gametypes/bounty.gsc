@@ -141,7 +141,7 @@ initspawns() {
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
 
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0)
+  if(getdvarint("t10", 0) > 0)
     scripts\mp\spawnlogic::setactivespawnlogic("Default", "Crit_Default");
   else if(isDefined(scripts\cp_mp\utility\game_utility::getlocaleid()))
     scripts\mp\spawnlogic::setactivespawnlogic("BigTDM", "Crit_Frontline");
@@ -166,9 +166,9 @@ initspawns() {
   scripts\mp\spawnlogic::registerspawnset("fallback", _id_3A5288F40C8BE099);
 
   if(istrue(level.testtdmanywhere)) {
-    x = getdvarfloat("dvar_B6294C84C04E377B", randomfloatrange(-4096, 4096));
-    y = getdvarfloat("dvar_B6294B84C04E3548", randomfloatrange(-4096, 4096));
-    z = getdvarfloat("dvar_B6294E84C04E3BE1", randomfloatrange(0, 512));
+    x = getdvarfloat("scr_tdmanywhere_centerx", randomfloatrange(-4096, 4096));
+    y = getdvarfloat("scr_tdmanywhere_centery", randomfloatrange(-4096, 4096));
+    z = getdvarfloat("scr_tdmanywhere_centerz", randomfloatrange(0, 512));
     level.mapcenter = (x, y, z);
     tdmanywhere_debugshowlocs();
   } else {

@@ -281,7 +281,7 @@ allplayers_setfov(fov) {
       continue;
     }
     player setclientdvar("cg_fov", fov);
-    player setclientdvar("dvar_71C6C0B8428E44A7", 1);
+    player setclientdvar("cg_disable_user_fov", 1);
   }
 }
 
@@ -292,7 +292,7 @@ _id_CF47AB3F9DEFE35B() {
         continue;
       }
       player setclientdvar("cg_fov", 65.0);
-      player setclientdvar("dvar_86BF34D5F48FA435", 65.0);
+      player setclientdvar("cg_fov_viewmodel", 65.0);
     }
   } else {
     foreach(player in level.infilstruct.players) {
@@ -300,8 +300,8 @@ _id_CF47AB3F9DEFE35B() {
         continue;
       }
       player setclientdvar("cg_fov", 65.0);
-      player setclientdvar("dvar_86BF34D5F48FA435", 65.0);
-      player setclientdvar("dvar_71C6C0B8428E44A7", 0);
+      player setclientdvar("cg_fov_viewmodel", 65.0);
+      player setclientdvar("cg_disable_user_fov", 0);
     }
   }
 }
@@ -682,7 +682,7 @@ _id_6D8AC534AD288AA5(player) {
 }
 
 getinfilspawnoffset() {
-  return getdvarfloat("dvar_F2BABC025530C2A1", 12000);
+  return getdvarfloat("scr_br_dropspawnoffsetminz", 12000);
 }
 
 _id_8663DA4077FA7E20() {

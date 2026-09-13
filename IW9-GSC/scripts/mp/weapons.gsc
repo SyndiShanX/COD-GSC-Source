@@ -20,7 +20,7 @@ init() {
   level.scavenger_secondary = 1;
   level.maxperplayerexplosives = max(scripts\mp\utility\dvars::getintproperty("scr_maxperplayerexplosives", 2), 1);
   level.riotshieldxpbullets = scripts\mp\utility\dvars::getintproperty("scr_riotshieldxpbullets", 15);
-  level._id_34777CC7C85EDBE6 = getdvarint("dvar_17EB9DB052738F30", 96);
+  level._id_34777CC7C85EDBE6 = getdvarint("scr_weapondeletedist", 96);
 
   switch (scripts\mp\utility\dvars::getintproperty("perk_scavengermode", 0)) {
     case 1:
@@ -1698,7 +1698,7 @@ _id_071DAF3623150970(player) {
 
 _id_44E99168F6830136(player) {
   _id_5153E7F029B5AC1E = 1;
-  _id_21A4E3934B724B7E = getdvarint("dvar_A464CB031C16EE87", 0) > 0;
+  _id_21A4E3934B724B7E = getdvarint("t10", 0) > 0;
   _id_7E245BDD13045367 = player scripts\mp\utility\perk::_hasperk("specialty_scavenger_equipment");
 
   if(istrue(_id_21A4E3934B724B7E) && !istrue(_id_7E245BDD13045367))

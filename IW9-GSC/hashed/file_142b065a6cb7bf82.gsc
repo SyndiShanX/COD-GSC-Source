@@ -22,7 +22,7 @@ init() {
 _id_55F2480B4B819AEA(_id_D40A73AF6AC75726) {
   animstruct = spawnStruct();
   _id_D40A73AF6AC75726.animstruct = animstruct;
-  animstruct.origin = getdvarvector("dvar_223915C6339DBC10", (4319, 0, -28644));
+  animstruct.origin = getdvarvector("br_infil_anim_pos", (4319, 0, -28644));
   animstruct.angles = (0, 0, 0);
   animstruct._id_D40A73AF6AC75726 = _id_D40A73AF6AC75726;
   animstruct.cleanupfunc = ::_id_A5668882499FB369;
@@ -257,7 +257,7 @@ _id_447159EC37003898(player, array) {
   player setsoundsubmix("mp_br_infil_ac130", 0.0);
   player setclienttriggeraudiozone("mp_br_c130_infil_int", 1.0);
   player setclientdvar("cg_fov", _id_28844396B0024FAF);
-  player setclientdvar("dvar_71C6C0B8428E44A7", 1);
+  player setclientdvar("cg_disable_user_fov", 1);
   player enablephysicaldepthoffieldscripting();
   player setphysicaldepthoffield(_id_D1C04FF6328D20D6, _id_095288242E2D19A2, _id_8A3CE4D151659D21, _id_9B5197CC4BB4356A);
   self._id_DF521449D9601357 showtoplayer(player);
@@ -453,7 +453,7 @@ _id_88BA30853F3D01F0(c130) {
       player cameraunlink();
       player cameralinkTo(cameraent, _id_1EDD840D40B43222, 1, 1);
       player setclientdvar("cg_fov", _id_1992F143059AC1D5);
-      player setclientdvar("dvar_71C6C0B8428E44A7", 1);
+      player setclientdvar("cg_disable_user_fov", 1);
       player setphysicaldepthoffield(_id_E49FE50208C2823C, _id_60A2FCCF1C5E6D84, _id_AF0267D0EC57107F, _id_92DE264F62389DB4);
       player thread _id_9441CFEE5F114846();
     }
@@ -500,14 +500,14 @@ infil_light_dvars() {
   _id_1800E53D66415E2D = getdvarint("sm_spotUpdateLimit");
   _id_5506432D2291C178 = getdvarint("sm_roundRobinPrioritySpotShadows");
   _id_488F9B9FE1EAD0A6 = getdvarfloat("sm_sunSampleSizeNear");
-  _id_64224ECF1E2975D9 = getdvarint("dvar_E6AC75AB2927895B");
+  _id_64224ECF1E2975D9 = getdvarint("cg_brcircleenableoutsidevisionset");
   _id_8A123774D2925E5D = getdvarint("dvar_27D9CB2953410E87");
   _id_99598B81BA0F7519 = getdvarfloat("dvar_A589D43A51D526DF");
   setDvar("sm_spotDistCull", 1000.0);
   setDvar("sm_spotUpdateLimit", 8);
   setDvar("sm_roundRobinPrioritySpotShadows", 8);
   setDvar("sm_sunSampleSizeNear", 0.25);
-  setDvar("dvar_E6AC75AB2927895B", 0);
+  setDvar("cg_brcircleenableoutsidevisionset", 0);
   setDvar("dvar_27D9CB2953410E87", 1);
   setDvar("dvar_A589D43A51D526DF", 0.15);
   scripts\engine\utility::waittill_either("infil_reset_light_dvars", "stopScene");
@@ -515,7 +515,7 @@ infil_light_dvars() {
   setDvar("sm_spotUpdateLimit", _id_1800E53D66415E2D);
   setDvar("sm_roundRobinPrioritySpotShadows", _id_5506432D2291C178);
   setDvar("sm_sunSampleSizeNear", _id_488F9B9FE1EAD0A6);
-  setDvar("dvar_E6AC75AB2927895B", _id_64224ECF1E2975D9);
+  setDvar("cg_brcircleenableoutsidevisionset", _id_64224ECF1E2975D9);
   setDvar("dvar_27D9CB2953410E87", _id_8A123774D2925E5D);
   setDvar("dvar_A589D43A51D526DF", _id_99598B81BA0F7519);
 }

@@ -7,7 +7,7 @@ init() {
   level._effect["poi_sat_truck_available"] = loadfx("vfx/iw8_br/gameplay/vfx_br_poi_satnav_white.vfx");
   level._effect["poi_sat_truck_charging"] = loadfx("vfx/iw8_br/gameplay/vfx_br_poi_satnav_red.vfx");
   level.br_satellitetruck = [];
-  level.br_satellite_truck_enabled = getdvarint("dvar_2F77EC116B49BDF9", 0) != 0;
+  level.br_satellite_truck_enabled = getdvarint("scr_br_satellite_truck", 0) != 0;
   level.satellitetruckactivetimeseconds = getdvarfloat("dvar_AED581BEB83F1B08", 15);
   level.satellitetruckplundercost = getdvarint("dvar_E361609D81154A08", 1);
   _id_1F6BC044DD1738AB::initstatemachineforpoitype("satellite_truck");

@@ -9,7 +9,7 @@ _id_D3915632A8C61EB2() {
   else if(isDefined(level._id_103A870683641C69._id_2D2C68EDDE7FAC19))
     return istrue(level._id_103A870683641C69._id_2D2C68EDDE7FAC19);
 
-  level._id_103A870683641C69._id_2D2C68EDDE7FAC19 = getdvarint("dvar_669AE0558E9A0A64", 0) == 1;
+  level._id_103A870683641C69._id_2D2C68EDDE7FAC19 = getdvarint("scr_enable_server_halloween_content", 0) == 1;
   return istrue(level._id_103A870683641C69._id_2D2C68EDDE7FAC19);
 }
 

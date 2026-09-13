@@ -457,7 +457,7 @@ _id_D5BCE87878A08018() {
   _id_63ABC2408F9EF4BA("SetDvars");
 
   for(_id_AC0E594AC96AA3A8 = 0; _id_AC0E594AC96AA3A8 < _id_380081ED3D43C6AA; _id_AC0E594AC96AA3A8++)
-    setDvar("dvar_E717CC3034FBDF76", _id_AC0E594AC96AA3A8);
+    setDvar("benchmark_test", _id_AC0E594AC96AA3A8);
 
   _id_B41D4C50A5CB0A36("SetDvars");
 }
@@ -626,16 +626,16 @@ _id_63D722F2C9E256A4(a) {
 main() {
   level thread _id_041E013DCB5B7B2A();
   setdvarifuninitialized("dvar_939FFA702B7DA068", 10000);
-  setdvarifuninitialized("dvar_5217B32EB9C32512", 0);
+  setdvarifuninitialized("scr_benchmark", 0);
   setdvarifuninitialized("dvar_44E9F4A106F9B4A1", 0);
   setdvarifuninitialized("dvar_86EF66E581C77F50", "0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,");
 
   for(;;) {
-    while(getdvarint("dvar_5217B32EB9C32512", 0) == 0)
+    while(getdvarint("scr_benchmark", 0) == 0)
       wait 1;
 
     _id_D69DB7DFBC818978();
-    setDvar("dvar_5217B32EB9C32512", 0);
+    setDvar("scr_benchmark", 0);
   }
 }
 

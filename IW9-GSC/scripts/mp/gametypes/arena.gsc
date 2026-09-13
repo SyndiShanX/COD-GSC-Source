@@ -532,10 +532,10 @@ getspawnpoint() {
   if(self.pers["team"] == game["attackers"])
     _id_700A871A46435669 = level.alliesstartspawn;
 
-  if(getdvarint("dvar_9684A3D8CE5DD398", 0) > 0) {
+  if(getdvarint("scr_arena_force_spawn_noteworthy", 0) > 0) {
     scripts\mp\spawnlogic::setactivespawnlogic("StartSpawn", "Crit_Default");
     spawnpoints = scripts\mp\spawnlogic::getspawnpointarray(_id_700A871A46435669);
-    spawnpoint = _id_E77A290B26C3E849(spawnpoints, scripts\engine\utility::string(getdvarint("dvar_9684A3D8CE5DD398", 0)));
+    spawnpoint = _id_E77A290B26C3E849(spawnpoints, scripts\engine\utility::string(getdvarint("scr_arena_force_spawn_noteworthy", 0)));
   } else if(scripts\mp\spawnlogic::shoulduseteamstartspawn() || istrue(level.alwaysusestartspawns) || isintournament()) {
     scripts\mp\spawnlogic::setactivespawnlogic("StartSpawn", "Crit_Default");
     spawnpoints = scripts\mp\spawnlogic::getspawnpointarray(_id_700A871A46435669);
@@ -3802,7 +3802,7 @@ snowballmeleewatcher() {
 
 getknivesoutsetting() {
   if(scripts\mp\utility\game::matchmakinggame())
-    return getdvarint("dvar_C4677C34D20593A7", 0);
+    return getdvarint("scr_arena_knivesout", 0);
   else if(isthrowingknifeequipment(level.arenaweapont1.weapon) && isthrowingknifeequipment(level.arenaweapont2.weapon) && isthrowingknifeequipment(level.arenaweapont3.weapon) && isthrowingknifeequipment(level.arenaweapont4.weapon) && isthrowingknifeequipment(level.arenaweapont5.weapon) && isthrowingknifeequipment(level.arenaweapont6.weapon) && isthrowingknifeequipment(level.arenaweapont7.weapon) && isthrowingknifeequipment(level.arenaweapont8.weapon)) {
     if(isthrowingknifeequipment(level.startweapon.weapon))
       return 2;

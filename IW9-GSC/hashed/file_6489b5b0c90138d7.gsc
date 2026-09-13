@@ -40,10 +40,10 @@ setupcallbacks() {
   }
   data = spawnStruct();
   data.dropcount = getdvarint("dvar_0A883D4D8DEC18E3", 1);
-  data.maxcount = getdvarint("dvar_23B3D2EB188B1230", 6);
+  data.maxcount = getdvarint("scr_scorpiontrophyevent_maxcount", 6);
   data._id_FF2AFEEAAA71F4BC = getdvarint("dvar_C80CE9FC7BBC1E00", _id_950CDE7E875198D1());
   data._id_7D56C242C2C9880A = getdvarint("dvar_A4F1B7232D99C28F", 10);
-  data._id_DBAD26986EC8F069 = getdvarint("dvar_404A77E17612EEE5", 1);
+  data._id_DBAD26986EC8F069 = getdvarint("scr_scorpiontrophyevent_aidropcount", 1);
   data._id_8E3CD6BCC3E4F17C = getdvarint("dvar_884AF2871BE336E8", _id_FDF3D038AD278D6B());
   data._id_A082B242B6FAE420 = 200;
   data._id_4E54EDC5768A0AD4 = getdvarint("dvar_3F33F4C872C90245", 20);

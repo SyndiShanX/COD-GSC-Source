@@ -6,7 +6,7 @@
 init_battlechatter() {
   setdvarifuninitialized("bcs_enable", 1);
   setdvarifuninitialized("bcs_debug", 0);
-  setdvarifuninitialized("dvar_44EF18550505E010", 0);
+  setdvarifuninitialized("bcs_loopdebug", 0);
   setdvarifuninitialized("dvar_350B154807F4D745", 0);
   setdvarifuninitialized("dvar_5AEA525F549D2546", 0);
 
@@ -27,7 +27,7 @@ init_battlechatter() {
   setdvarifuninitialized("dvar_702217AE066916B9", "");
   setdvarifuninitialized("dvar_21778F568437CD09", "");
   setdvarifuninitialized("debug_bcprint", "off");
-  setdvarifuninitialized("dvar_1C663353DAE9FAB0", "off");
+  setdvarifuninitialized("debug_bcprintscreen", "off");
   setdvarifuninitialized("debug_bcprintdump", "off");
   setdvarifuninitialized("debug_bcprintdumptype", "csv");
   setdvarifuninitialized("debug_bcshowqueue", "off");

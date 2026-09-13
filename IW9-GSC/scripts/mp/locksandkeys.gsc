@@ -215,7 +215,7 @@ init() {
   _id_B35796A7C0A71079();
   _id_E726302A1F8D9A1A();
 
-  if(getdvarint("dvar_3260888995A11BF7", 0) != 1)
+  if(getdvarint("scr_disable_unique_doors", 0) != 1)
     _id_3E0F1CEEB525C408();
 
   _id_E6DF49DDA3F9A00E();

@@ -1263,7 +1263,7 @@ _id_21C3E8D48552A4FA() {
   if(level.script == "mp_br_mechanics")
     _id_8BA51064F8A54F29 = (-20728, -2000, 58);
 
-  circlecenter = getdvarvector("dvar_EB589C6BD2884BBB", _id_8BA51064F8A54F29);
+  circlecenter = getdvarvector("br_final_circle_override", _id_8BA51064F8A54F29);
   return circlecenter;
 }
 
@@ -1457,7 +1457,7 @@ x1playerspawnoverride(respawn) {
       self.prespawnspawn.origin = undefined;
       self.prespawnspawn.height = undefined;
       self.prespawnspawn.index = -1;
-      _id_F6AC3C609E85CB74 = getdvarfloat("dvar_8D9AD523F40BE455", 1000);
+      _id_F6AC3C609E85CB74 = getdvarfloat("scr_br_respawnmaxteammateoffset", 1000);
       spawnorigin = scripts\engine\utility::player_drop_to_ground(self.brradialspawnorigin, 32, undefined, undefined, (0, 0, 1));
       heightoffset = getdvarint("dvar_A17EDC27C246B722", 2000);
       _id_A6427A6A24F058DC = (0, 0, heightoffset + spawnorigin[2]);
@@ -1706,7 +1706,7 @@ x1ops6(_id_C74A250153BAD6AB) {
   brcircleradialedgespawn(level.players, 0, _id_F92F5E52F78CE181);
   thread setupx1timelimit();
   thread x1opsenableelimination(level.br_level.br_circledelaytimes[0]);
-  _id_03D9F98F82018559 = getdvarvector("dvar_EB589C6BD2884BBB", circlecenter);
+  _id_03D9F98F82018559 = getdvarvector("br_final_circle_override", circlecenter);
   _id_91D9E1E8C558E3EA = spawn("script_model", _id_03D9F98F82018559);
   _id_91D9E1E8C558E3EA setModel("risk_dom_plate");
   _id_91D9E1E8C558E3EA setscriptablepartstate("risk_dom_beacon", "on", 0);

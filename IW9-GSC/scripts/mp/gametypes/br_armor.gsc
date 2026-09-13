@@ -53,7 +53,7 @@ givestartingarmor(_id_25D647AF59249079) {
   else
     _id_9A5097FE8A19DCFD = 100;
 
-  if(getdvarint("dvar_AD67CF67992FE5F2", 0))
+  if(getdvarint("scr_br_alt_mode_gg", 0))
     _id_9A5097FE8A19DCFD = 150;
 
   _id_4FB4B206A997692D = getdvarint("dvar_6F491F10C40CF0A9", -1);

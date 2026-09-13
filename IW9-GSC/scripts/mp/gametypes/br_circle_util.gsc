@@ -23,7 +23,7 @@ _id_C7F3AE56442546D1(origin, _id_CF3800024083ABBE, _id_79A6E85C95FE549B, _id_B7C
     return _id_8AE269616D09DFC5;
 
   _id_7A50883C31353C77 = getdvarfloat("dvar_917B939513F89B55", 200);
-  _id_11C1E6222DA58849 = getdvarint("dvar_E65611A4D524BCBE", 0);
+  _id_11C1E6222DA58849 = getdvarint("scr_br_circle_clamp_max_circle_speed", 0);
 
   for(circleindex = _id_2082F17F2E1C69BF - 1; circleindex >= 0; circleindex--) {
     origin = _id_8AE269616D09DFC5[circleindex + 1];
@@ -640,7 +640,7 @@ _id_06EC3B4C4B5A9EDD(time) {
 }
 
 _id_8E779F490BBD1AE9() {
-  if(getdvarint("dvar_CB361CA8AA1B869F", 0) == 0) {
+  if(getdvarint("adex_vortexwind_enabled", 0) == 0) {
     return;
   }
   _id_9676775270CEF770 = _id_0A3920E4DDD93CF3();

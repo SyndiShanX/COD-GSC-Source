@@ -28,7 +28,7 @@ take_all_currency() {
 }
 
 get_starting_currency() {
-  _id_C7A775AC491B210F = getdvarint("dvar_66D046D1CFE3ECC9", 0);
+  _id_C7A775AC491B210F = getdvarint("scr_start_currency", 0);
 
   if(_id_C7A775AC491B210F != 0)
     return _id_C7A775AC491B210F;

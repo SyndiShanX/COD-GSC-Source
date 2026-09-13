@@ -4,7 +4,7 @@
 ************************************************/
 
 infil_add(type, subtype, _id_F30FD2E505C341C8, _id_AA0773494F0D374D, _id_8EE2EF1B890C0C7B, spawn_func, _id_1FC48C4B6E73E047, _id_C2EB4C229CFC9D83) {
-  if(getdvarint("dvar_C55DC89EF275CDAA", 0) == 1) {
+  if(getdvarint("scr_skip_infils", 0) == 1) {
     if(scripts\engine\utility::flag_exist("infil_complete"))
       scripts\engine\utility::flag_set("infil_complete");
 

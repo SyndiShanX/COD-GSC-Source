@@ -4,8 +4,8 @@
 ***********************************************/
 
 init() {
-  setdvarifuninitialized("dvar_4C86EC08060DC308", 0);
-  level.br_respawn_enabled = getdvarint("dvar_4C86EC08060DC308", 0) != 0;
+  setdvarifuninitialized("scr_br_respawn", 0);
+  level.br_respawn_enabled = getdvarint("scr_br_respawn", 0) != 0;
 
   if(!istrue(level.br_respawn_enabled)) {
     removeambulances();

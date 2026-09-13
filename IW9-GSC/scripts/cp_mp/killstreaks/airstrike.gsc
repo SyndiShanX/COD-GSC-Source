@@ -22,7 +22,7 @@ init() {
   level._id_9FC34B4B891723F8 = getdvarint("dvar_39459995DF574C02", 1000);
   level._id_605EAAC73A2853D3 = getdvarint("dvar_77900C1535C539F5", 1);
   level._id_480D0E884A4F8E2A = getdvarint("dvar_20F5D09C276DA17C", 0);
-  level._id_B8200908FD2377D3 = getdvarint("dvar_F6C1CAC5DA2B9DFB", 0);
+  level._id_B8200908FD2377D3 = getdvarint("scr_airstrike_notify_time", 0);
 }
 
 #using_animtree("script_model");

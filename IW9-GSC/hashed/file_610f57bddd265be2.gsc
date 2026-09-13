@@ -39,8 +39,8 @@ init() {
 
 _id_C592E91FC6604AD0() {
   level._id_FC4BB27A820F54DD = spawnStruct();
-  level._id_FC4BB27A820F54DD._id_5103BC8AADF9AF64 = getdvarint("dvar_27F51798E10E62A0", 4);
-  level._id_FC4BB27A820F54DD._id_1131F855E49656BF = getdvarint("dvar_2AF4EFAAFAE6489B", 270);
+  level._id_FC4BB27A820F54DD._id_5103BC8AADF9AF64 = getdvarint("scr_redeploy_drone_count", 4);
+  level._id_FC4BB27A820F54DD._id_1131F855E49656BF = getdvarint("scr_redeploy_drone_health", 270);
   level._id_FC4BB27A820F54DD._id_43C609D0BF76CEDC = getdvarint("dvar_FC06CF8B2E6FF7C8", 100);
   level._id_FC4BB27A820F54DD._id_3BC74411A49EF743 = getdvarint("dvar_4D3F3DDCF9C9AE8F", 2000);
   level._id_FC4BB27A820F54DD._id_94CA860762F3C07B = getdvarint("dvar_2044315C6A32E0CF", 512);
@@ -53,7 +53,7 @@ _id_C592E91FC6604AD0() {
   level._id_FC4BB27A820F54DD._id_7E1E2DEB54381DCE = getdvarint("dvar_07A6046AF43F645A", 10);
   level._id_FC4BB27A820F54DD._id_B09E88FF96D15C04 = getdvarint("dvar_67144A280E505EB0", 10);
   level._id_FC4BB27A820F54DD._id_73E374CE21FB4FB5 = getdvarint("dvar_0E0052F554FB1D69", 50);
-  level._id_FC4BB27A820F54DD._id_1BB94B0F20FB3532 = getdvarint("dvar_B81D9B0920A22A50", 0) && getdvarint("scr_ssc_enabled", 0);
+  level._id_FC4BB27A820F54DD._id_1BB94B0F20FB3532 = getdvarint("scr_ssc_use_redeploy_drone", 0) && getdvarint("scr_ssc_enabled", 0);
   _id_E375F6BD7E1961C9 = getdvarint("dvar_9BD3724F70106775", 9000);
   level._id_FC4BB27A820F54DD._id_D1343ED4C5B69716 = squared(_id_E375F6BD7E1961C9);
   _id_D961317263B789A2 = getdvarint("dvar_59C137234DAD4AD6", 7000);

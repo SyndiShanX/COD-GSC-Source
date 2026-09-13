@@ -9,12 +9,12 @@ init() {
   level.blueprint_chancepercontract = undefined;
 
   if(getDvar("dvar_7611A2790A0BF7FE", "") == "plunder" || getDvar("dvar_7611A2790A0BF7FE", "") == "risk") {
-    level.blueprint_maxpermatch = getdvarfloat("dvar_D8044C322F6B5042", 4);
-    level.blueprint_chancebase = getdvarfloat("dvar_13B736C9BA95D40D", 0.02);
-    level.blueprint_chancepercontract = getdvarfloat("dvar_8A876E2C4B13F819", 0.0);
+    level.blueprint_maxpermatch = getdvarfloat("scr_blueprint_plunder_maxpermatch", 4);
+    level.blueprint_chancebase = getdvarfloat("scr_blueprint_plunder_chancebase", 0.02);
+    level.blueprint_chancepercontract = getdvarfloat("scr_blueprint_plunder_chancepercontract", 0.0);
   } else {
-    level.blueprint_maxpermatch = getdvarfloat("dvar_412E34085BCD2B1A", 4);
-    level.blueprint_chancebase = getdvarfloat("dvar_AA3250E2CE395B55", 0.02);
+    level.blueprint_maxpermatch = getdvarfloat("scr_blueprint_br_maxpermatch", 4);
+    level.blueprint_chancebase = getdvarfloat("scr_blueprint_br_chancebase", 0.02);
     level.blueprint_chancepercontract = getdvarfloat("dvar_09C3219408286E11", 0.0);
   }
 

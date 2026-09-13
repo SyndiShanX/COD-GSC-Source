@@ -4,7 +4,7 @@
 ************************************************************/
 
 init() {
-  level.bunker11puzzleactive = getdvarint("dvar_2B4E25FD276456BE", 1);
+  level.bunker11puzzleactive = getdvarint("scr_bunker_numberstation", 1);
   scripts\mp\flags::gameflaginit("stop_phone_code_ringing", 0);
   level.bunker_numberstation = spawnStruct();
   doors = getEntArray("bunker_door_11", "targetname");

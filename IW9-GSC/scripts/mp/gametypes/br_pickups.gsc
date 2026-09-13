@@ -37,8 +37,8 @@ br_pickups_init() {
   level._id_A3443D8EBDAF7C00 = getdvarint("dvar_3481B39EB4C2F17A", 0);
   level._id_7582DC4260722BF1 = getdvarint("dvar_53D1E9738538BB23", 0);
   level._id_BC1086A365D70B30 = getdvarint("dvar_957BF05692B129CA", 0);
-  level._id_E8FC7C00FD85A565 = getdvarint("dvar_DBB95D9FB9DB4E73", 0);
-  level._id_9DD3CE936C1DEC1D = getdvarint("dvar_C108CC4C4E3A3653", 0);
+  level._id_E8FC7C00FD85A565 = getdvarint("scr_br_auto_loot_plunder_container", 0);
+  level._id_9DD3CE936C1DEC1D = getdvarint("scr_br_auto_loot_plunder_feedback", 0);
   level._id_66A7A8B388D5DE9E = getdvarint("dvar_A55C2DF135B06DC0", 2);
   scripts\cp_mp\utility\script_utility::registersharedfunc("pickups", "isDogTag", ::_id_9E3428357E5DF2E3);
   scripts\cp_mp\utility\script_utility::registersharedfunc("pickups", "isGasMask", ::isgasmask);
@@ -215,7 +215,7 @@ initarrays() {
               camo = strtok(part, "|")[1];
           }
 
-          if(getdvarint("dvar_AD67CF67992FE5F2", 0))
+          if(getdvarint("scr_br_alt_mode_gg", 0))
             camo = "camo_11a";
 
           fullweaponobj = undefined;
@@ -236,7 +236,7 @@ initarrays() {
           if(isDefined(_id_FC5B5CABB888A488) && _id_FC5B5CABB888A488.size)
             _id_7CE98C8199BE3D76 = strtok(_id_FC5B5CABB888A488, _id_55DFF3C24D1396C9);
 
-          if(getdvarint("dvar_AD67CF67992FE5F2", 0))
+          if(getdvarint("scr_br_alt_mode_gg", 0))
             fullweaponobj = _id_2669878CF5A1B6BC::buildweapon(_id_92FCE7B1696254E3, _id_7CE98C8199BE3D76, "camo_11a", "none", -1);
           else
             fullweaponobj = _id_2669878CF5A1B6BC::buildweapon(_id_92FCE7B1696254E3, _id_7CE98C8199BE3D76, "none", "none", -1);
@@ -423,14 +423,14 @@ initarrays() {
   level.br_pickups._id_EC7422F11A61C100 = "MP/BR_EQUIP_DENY_BACKPACK_LESS";
   level.br_pickups._id_7BD397B2E9D8A434 = "MP/BR_EQUIP_DENY_PLATE_CARRIER_SAME";
   level.br_pickups.br_dropoffsets = [(24, 24, 6), (-24, -24, 6), (24, -24, 6), (-24, 24, 6), (48, 0, 6), (-48, 0, 6), (0, -48, 6), (0, 48, 6), (72, 0, 6), (-72, 0, 6), (0, -72, 6), (0, 72, 6), (72, -72, 6), (-72, 72, 6), (-72, -72, 6), (72, 72, 6)];
-  level.br_pickups.respawntokenenabled = getdvarint("dvar_C9D9BC1BAE348282", 1);
-  level.br_pickups.respawntokenclosewithgulag = getdvarint("dvar_8603626DC2EC647D", 1);
-  level.br_pickups._id_174664C71517F679 = getdvarint("dvar_410F6B398C585156", 1);
+  level.br_pickups.respawntokenenabled = getdvarint("scr_br_respawn_token", 1);
+  level.br_pickups.respawntokenclosewithgulag = getdvarint("scr_br_respawn_token_gulag", 1);
+  level.br_pickups._id_174664C71517F679 = getdvarint("scr_br_gulag_token", 1);
   level.br_pickups._id_5609DE5240E42E84 = getdvarint("dvar_2DF02EC7E7EFE5C9", 1);
   level.br_pickups._id_AD49A38DD7C4C10F = undefined;
   level.br_pickups._id_3B53BC0EEE6AE84E = undefined;
 
-  if(getdvarint("dvar_249A73868C9CD7D8", 0)) {
+  if(getdvarint("bg_weaponautograboptionsenabled", 0)) {
     _id_F8B204E807CC62ED();
     _id_E6CABC9F20DCBC23();
   }
@@ -665,7 +665,7 @@ _id_3F0CE5CF3481F56C(dropstruct, _id_ADF4A147715DABA0, baseorigin, baseangles, _
     _id_ADF4A147715DABA0._id_37FBA60B9CB411EB = (0.0, _id_ADF4A147715DABA0.yaw, 0.0);
     _id_ADF4A147715DABA0.dir = anglesToForward(_id_ADF4A147715DABA0._id_37FBA60B9CB411EB);
 
-    if(getdvarint("dvar_F621128B1EE62123", 1) && _id_ADF4A147715DABA0.ring < 1)
+    if(getdvarint("scr_item_should_check_area", 1) && _id_ADF4A147715DABA0.ring < 1)
       _id_4EE41241BBF56557(_id_ADF4A147715DABA0, baseorigin);
 
     _id_ADF4A147715DABA0._id_2BE6462FF6BE9915 = baseorigin + _id_ADF4A147715DABA0.dir * _id_ADF4A147715DABA0.dist;
@@ -774,7 +774,7 @@ getitemdroporiginandangles(dropstruct, baseorigin, baseangles, _id_447F40C814B97
   _id_ADF4A147715DABA0._id_37FBA60B9CB411EB = (0.0, _id_ADF4A147715DABA0.yaw, 0.0);
   _id_ADF4A147715DABA0.dir = anglesToForward(_id_ADF4A147715DABA0._id_37FBA60B9CB411EB);
 
-  if(getdvarint("dvar_F621128B1EE62123", 1) && !isDefined(_id_F71D4F78D508DA69) && !isDefined(_id_7591ED99E87A77D3) && !istrue(_id_688E4DA4CB16116D) && _id_ADF4A147715DABA0.ring < 1)
+  if(getdvarint("scr_item_should_check_area", 1) && !isDefined(_id_F71D4F78D508DA69) && !isDefined(_id_7591ED99E87A77D3) && !istrue(_id_688E4DA4CB16116D) && _id_ADF4A147715DABA0.ring < 1)
     _id_4EE41241BBF56557(_id_ADF4A147715DABA0, baseorigin);
 
   _id_ADF4A147715DABA0._id_2BE6462FF6BE9915 = baseorigin + _id_ADF4A147715DABA0.dir * _id_ADF4A147715DABA0.dist;
@@ -2260,7 +2260,7 @@ _id_ED254D7BE7FF977A(pickupent) {
 addspecialistbonuspickup(skipsplash) {
   player = self;
 
-  if(getdvarint("dvar_BE1B706F310C8E63", 0) == 0)
+  if(getdvarint("scr_br_skiplegendarypickupsound", 0) == 0)
     self playsoundtoplayer("br_legendary_loot_pickup", self);
 
   player.hasbrspecialistbonus = 1;
@@ -4517,7 +4517,7 @@ _id_EFDDDF60C5DB058C(pickupent, _id_A5B2C541413AA895) {
       _id_09D5BC8E32EE3635 = getcashsoundaliasforplayer(self, pickupent.scriptablename);
     else if(_id_E68E1669597A3F4D(pickupent.scriptablename))
       _id_09D5BC8E32EE3635 = _id_01193C0B83FCE13B::_id_5D4530EBFA3DA544(self);
-    else if(isDefined(level.br_pickups.br_pickupsfx[pickupent.scriptablename]) && level.br_pickups.br_pickupsfx[pickupent.scriptablename].size > 0 && !(getdvarint("dvar_BE1B706F310C8E63", 0) != 0 && (level.br_pickups.br_pickupsfx[pickupent.scriptablename] == "br_legendary_loot_pickup" || issubstr(level.br_pickups.br_pickupsfx[pickupent.scriptablename], "dmz_specialty_loot_pickup_")))) {
+    else if(isDefined(level.br_pickups.br_pickupsfx[pickupent.scriptablename]) && level.br_pickups.br_pickupsfx[pickupent.scriptablename].size > 0 && !(getdvarint("scr_br_skiplegendarypickupsound", 0) != 0 && (level.br_pickups.br_pickupsfx[pickupent.scriptablename] == "br_legendary_loot_pickup" || issubstr(level.br_pickups.br_pickupsfx[pickupent.scriptablename], "dmz_specialty_loot_pickup_")))) {
       if(level.br_pickups.br_pickupsfx[pickupent.scriptablename] == "br_legendary_loot_pickup" || issubstr(level.br_pickups.br_pickupsfx[pickupent.scriptablename], "dmz_specialty_loot_pickup_")) {
         _id_A0BEA370D6A72CEB = level.br_pickups.br_pickupsfx[pickupent.scriptablename];
 
@@ -5105,7 +5105,7 @@ dropbrequipment(dropstruct, _id_7F437A5779C8787C, _id_1E736A37C3737585, equipmen
 
       if(isDefined(_id_FEB782334DD23A66)) {
         _id_CB4FAD49263E20C4 = getitemdroporiginandangles(dropstruct, self.origin, self.angles, self);
-        _id_1AD2DB70C8D01F51 = isalive(self) || getdvarint("dvar_F74983A33E4CE283", 0);
+        _id_1AD2DB70C8D01F51 = isalive(self) || getdvarint("scr_br_allow_auto_pickup_dropped_tactical_gadgets", 0);
         item = spawnpickup(_id_FEB782334DD23A66, _id_CB4FAD49263E20C4, ammocount, 1, undefined, _id_1AD2DB70C8D01F51);
         _id_2F4E0022C686DBE6(item);
       }
@@ -5177,7 +5177,7 @@ dropbrhealthpack(dropstruct) {
   }
 
   if(_id_9BE70D6D4FF253A1 > 0 && isDefined(itemname)) {
-    _id_1AD2DB70C8D01F51 = getdvarint("dvar_654510829E5B59D7", 1) || isalive(self);
+    _id_1AD2DB70C8D01F51 = getdvarint("scr_br_allow_auto_pickup_dropped_armor", 1) || isalive(self);
 
     if(_id_9BE70D6D4FF253A1 > level.br_pickups.maxcounts[itemname]) {
       _id_9BE70D6D4FF253A1 = _id_9BE70D6D4FF253A1 - level.br_pickups.maxcounts[itemname];
@@ -5375,7 +5375,7 @@ _id_A61F07010C727C0A(dropstruct) {
 }
 
 _id_5EBF3E99B419D949(dropstruct) {
-  if(getdvarint("dvar_74ABB928AB13113B", 0) == 0) {
+  if(getdvarint("scr_br_elite_broken_arrow", 0) == 0) {
     return;
   }
   [_id_3793828403C6873E, lootid] = _id_728FFCEE8CBF30EE::_id_C1A30DB229B1311D(self, 0);
@@ -7056,7 +7056,7 @@ initscriptablemanagement() {
   _id_962A30A9BB8C0F09.scriptables = [];
   _id_962A30A9BB8C0F09.scriptablesstartid = 0;
   _id_962A30A9BB8C0F09.scriptablescurid = 0;
-  _id_962A30A9BB8C0F09.scriptablesmax = getdvarint("dvar_3A100E962F0A003A", 750);
+  _id_962A30A9BB8C0F09.scriptablesmax = getdvarint("scr_br_pickupscriptablesmax", 750);
   _id_962A30A9BB8C0F09.scriptablescleanupbatchsize = getdvarint("dvar_1E71982A0A539739", 10);
   scripts\engine\utility::create_func_ref("deregisterScriptable", ::_id_007B67823458CD14);
 }
@@ -7967,7 +7967,7 @@ _id_990BE1AA4AD3C9D4() {
     return 1;
   }
 
-  if(isDefined(self._id_BED158A6DFAC230D) && (getdvarint("dvar_62882304CC93BA77", 0) == 1 && self._id_BED158A6DFAC230D == 2) || self._id_BED158A6DFAC230D == 3 && getdvarint("dvar_86DC98A10DFE9205", 1) == 1 && !_id_4AE930E26ECEE422)
+  if(isDefined(self._id_BED158A6DFAC230D) && (getdvarint("dvar_62882304CC93BA77", 0) == 1 && self._id_BED158A6DFAC230D == 2) || self._id_BED158A6DFAC230D == 3 && getdvarint("scr_br_drop_three_carrier", 1) == 1 && !_id_4AE930E26ECEE422)
     return 1;
 
   return 0;

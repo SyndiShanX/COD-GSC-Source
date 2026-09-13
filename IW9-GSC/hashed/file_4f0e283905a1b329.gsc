@@ -4,7 +4,7 @@
 ***********************************************/
 
 init() {
-  _id_40F522DB9C1FD341 = getdvarint("dvar_B81B25BCD8C7D749", 0);
+  _id_40F522DB9C1FD341 = getdvarint("scr_br_dropbag_delay", 0);
 
   if(_id_40F522DB9C1FD341 > 0)
     _id_362C58E8BB39BCDA::registerbrgametypedata("dropBagDelay", _id_40F522DB9C1FD341);

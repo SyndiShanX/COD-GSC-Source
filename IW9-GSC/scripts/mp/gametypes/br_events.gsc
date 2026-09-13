@@ -4,7 +4,7 @@
 ***********************************************/
 
 breventsinit() {
-  _id_099015E34F2AD75F = getdvarint("dvar_BD271A0988589E8D", 0);
+  _id_099015E34F2AD75F = getdvarint("scr_br_events", 0);
 
   if(!_id_099015E34F2AD75F) {
     return;
@@ -36,7 +36,7 @@ brevent1(_id_4F105563CA74CF73) {
   if(_id_2CEDCC356F1B9FC8::isanytutorialorbotpracticematch()) {
     return;
   }
-  _id_302E82DA1A1989AD = getdvarfloat("dvar_8C16995CC3015D14", 0.04);
+  _id_302E82DA1A1989AD = getdvarfloat("scr_br_event1_chance", 0.04);
 
   if(_id_302E82DA1A1989AD <= randomfloat(1.0)) {
     return;

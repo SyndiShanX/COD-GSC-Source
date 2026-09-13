@@ -457,7 +457,7 @@ _id_5038458E3CEEB5BD(arena, _id_55E69FB0CE97F15E) {
     helmet = getdvarint("dvar_BEB5C0190B33FEA0", 1500);
 
   armor = getdvarint("dvar_882A30A0C7844F34", 3400);
-  agent scripts\mp\mp_agent::set_agent_health(getdvarint("dvar_971882D628502DEF", 100));
+  agent scripts\mp\mp_agent::set_agent_health(getdvarint("br_ai_gulag_jailer_health", 100));
   _id_A664AAD02EE98BD2 = getdvarint("dvar_617969F5D3FA5BB5", "frag_grenade_mp");
   grenadeammo = getdvarint("dvar_6529E1ACE08F3F17", 0);
   agent _id_371B4C2AB5861E62::_id_C37C4F9D687074FF(body, head, weapon, _id_A664AAD02EE98BD2, grenadeammo, armor, helmet, 1);
@@ -478,7 +478,7 @@ _id_5038458E3CEEB5BD(arena, _id_55E69FB0CE97F15E) {
   agent._id_789BF98B36E292DB = getdvarint("dvar_34A27361609EFE2F", 1000);
   agent._id_7878EF8B36BC3525 = getdvarint("dvar_347F81616078D541", 500);
   _id_4AAF2FA9E5D0F74A = 8.0;
-  _id_8C0F071F480A9D9A = getdvarfloat("dvar_8BE34599DFA102B8", 30.0) + getdvarfloat("dvar_1FF83F4F24656C5B", 30.0) - (getdvarfloat("dvar_28FC993237FC1087", 25.0) + _id_4AAF2FA9E5D0F74A);
+  _id_8C0F071F480A9D9A = getdvarfloat("dvar_8BE34599DFA102B8", 30.0) + getdvarfloat("scr_br_fc_overtime", 30.0) - (getdvarfloat("dvar_28FC993237FC1087", 25.0) + _id_4AAF2FA9E5D0F74A);
   _func_1B688B532168CD14(::_id_5E687A5A783B435D);
   agent _meth_E451EECC3A7441C3("default", _id_8C0F071F480A9D9A);
   agent._id_6C66AFBC7F2CE4B0 = 1;

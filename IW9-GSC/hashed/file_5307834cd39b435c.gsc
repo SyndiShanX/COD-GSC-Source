@@ -19,24 +19,24 @@ _id_36F1BD0F5D72054A() {
   level._id_B91D57DF9D8EC00E = getdvarint("dvar_28CC46B930476566", 10);
   level._id_745BEBF82B7D49F8 = getdvarint("dvar_ED723AB06879FDB5", 60);
   level._id_DF3A6E8886416B36 = int(getdvarint("dvar_918D5EA00183221C", 999) * 100);
-  level._id_D962891163D17D4A = getdvarint("dvar_F2F7F7118FBF4F48", 0);
-  level._id_C8FF03474C1DE67F = getdvarint("dvar_66B127960B89BBE5", 2);
+  level._id_D962891163D17D4A = getdvarint("scr_dmz_dmzsamepoiexfil", 0);
+  level._id_C8FF03474C1DE67F = getdvarint("scr_dmz_dmznumofpoiawayexfil", 2);
   level._id_6B712F0345BF6F12 = getdvarint("dvar_8E317CE550E11531", 30);
-  level._id_662586EDE589F49C = getdvarint("dvar_D0B1A615C1D96C4B", 0);
-  level._id_08F7D92F10FC80CE = getdvarint("dvar_AE0BC0D702B078C5", 0);
-  level._id_9B6B8C7ECB7AC7C0 = getdvarint("dvar_D335466B3A2CB667", 0);
+  level._id_662586EDE589F49C = getdvarint("scr_dmz_exfilremoveonuse", 0);
+  level._id_08F7D92F10FC80CE = getdvarint("scr_dmz_exfilunlockonmissioncomplete", 0);
+  level._id_9B6B8C7ECB7AC7C0 = getdvarint("scr_dmz_exfilusesharedpool", 0);
   level._id_4644C9DA9A611950 = getdvarint("dvar_4F0A08CC7285B3C7", 0);
-  level._id_CDC76BC962358072 = getdvarint("dvar_4B12EFC1E76639D1", 1);
-  level._id_858DBA9DA8DC5419 = getdvarint("dvar_41A3991A16D88A2A", 3);
+  level._id_CDC76BC962358072 = getdvarint("scr_dmz_exfilforceshared", 1);
+  level._id_858DBA9DA8DC5419 = getdvarint("scr_dmz_exfilinitialshared", 3);
   level._id_50477DC063210A56 = getdvarint("dvar_F96D14F35ABA8181", 0) == 1;
   level._id_C69D2B1EEB329A5A = getdvarint("dvar_7ACEAF0413D3F442", 1);
   level._id_F3A3F7CF0A42D67C = getdvarint("dvar_71DE0410D6B8A154", 5000);
   level._id_68CDDDBBE057395D = getdvarint("dvar_BA94141588893FF2", 1);
   level._id_09B3294726F6D3A6 = getdvarint("dvar_987DA8AB1C15D96B", 1) == 1;
   level._id_DD83D323306DCBA7 = getdvarint("dvar_761322608DA01456", 0) == 1;
-  level._id_540F24BB9ACF4C02 = getdvarint("dvar_654FAC10FC85947E", 2);
+  level._id_540F24BB9ACF4C02 = getdvarint("scr_dmz_exfilusesharedpoolcount", 2);
   level._id_01EFF61A95657CA2 = getdvarint("dvar_04726749F66554EE", 1);
-  level._id_628F636DE1F2DDA3 = getdvarint("dvar_9756404935AC6487", 2);
+  level._id_628F636DE1F2DDA3 = getdvarint("scr_dmz_exfilusesharedpoolmaxteams", 2);
   level._id_A276CD366472B025 = getdvarint("dvar_4AC155BCB91CC93E", 5);
   level._id_BBF4A84349D0FDEB = getdvarint("dvar_06719472694F0112", 2000);
   level._id_CF4723BFB4CC7643 = getdvarint("dvar_B41C17E4FF85FB3C", 0);
@@ -46,12 +46,12 @@ _id_36F1BD0F5D72054A() {
   level._id_E5261A9A2FEAF655 = getdvarint("dvar_277D1A4CBE10E33C", 4);
   level._id_C7825757649C018E = getdvarint("dvar_1D32C1595DE57577", 15);
   level._id_50FF14B675031D14 = getdvarint("dvar_A9EBE44E535CC367", 0);
-  level._id_C42D6E4A40F70691 = getdvarint("dvar_BD4B7EBA67F38088", 0);
+  level._id_C42D6E4A40F70691 = getdvarint("scr_dmz_exfil_req_missions", 0);
 
   if(level._id_C42D6E4A40F70691 || level._id_08F7D92F10FC80CE)
     level._id_FAA873310ADD1096 = ::_id_52781BE0B4E8A959;
 
-  level._id_FF04728F8E36403F = getdvarint("dvar_2BF795E2BB163C72", 0);
+  level._id_FF04728F8E36403F = getdvarint("scr_dmz_exfil_req_time", 0);
   level._id_53BDD63AC87A9076 = getdvarint("dvar_62CC42AA2ACA04C9", 1);
   level._id_4BE8962610EE659B = getdvarfloat("dvar_82CA0DECE965EFBA", 0);
   level._id_CD6E8342A9C09C26 = getdvarfloat("dvar_3BBB199DFB8A5BC7", 0.9);
@@ -486,7 +486,7 @@ _id_5086B40CFD533087() {
     }
 
     _id_1EB20C7E1F001A1E = [];
-    _id_6DB47C254E98CC63 = getdvarint("dvar_BC7A50C09583D48F", 1) == 1;
+    _id_6DB47C254E98CC63 = getdvarint("scr_dmz_exfils_useendareas", 1) == 1;
 
     foreach(node in _id_5F48EE4ED384234C) {
       groundpos = scripts\engine\utility::drop_to_ground(node.origin);

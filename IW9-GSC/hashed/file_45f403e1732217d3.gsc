@@ -57,7 +57,7 @@ _id_393BAF20DB478C0D() {
 
   _id_ACF2F1A05BFEA87F = getdvarint("party_maxplayers", -1);
   _id_527BEDD9C6434673 = _func_676CFE2AB64EA758();
-  dlog_recordevent("dlog_event_mp_server_match_start", ["utc_start_time_s", _id_BBB1DABA2B06CB38, "map", level.script, "game_type", _id_C8F690457A04A764, "is_playtest", getdvarint("dvar_2E58447FA1CA4F20") && getdvarint("dvar_051F11C2E135ABC7"), "experiment_name", getDvar("experiment_name"), "dedi_server_guid", getdediserverguid(), "sub_game_type", _id_32AE710BD6009C5D, "playlist_id", _id_76C6444F1C3454AD, "playlist_name", _id_8F3E1B856A8C20B3, "is_offline", !level.onlinegame, "max_players_allowed", _id_ACF2F1A05BFEA87F, "frame_duration", _id_527BEDD9C6434673, "is_ranked", _id_FA5B633F7DF67D3D]);
+  dlog_recordevent("dlog_event_mp_server_match_start", ["utc_start_time_s", _id_BBB1DABA2B06CB38, "map", level.script, "game_type", _id_C8F690457A04A764, "is_playtest", getdvarint("dlog_is_playtest") && getdvarint("dvar_051F11C2E135ABC7"), "experiment_name", getDvar("experiment_name"), "dedi_server_guid", getdediserverguid(), "sub_game_type", _id_32AE710BD6009C5D, "playlist_id", _id_76C6444F1C3454AD, "playlist_name", _id_8F3E1B856A8C20B3, "is_offline", !level.onlinegame, "max_players_allowed", _id_ACF2F1A05BFEA87F, "frame_duration", _id_527BEDD9C6434673, "is_ranked", _id_FA5B633F7DF67D3D]);
   _id_37AAB353FE84A505 = "{\"game_type\":\"" + _id_C8F690457A04A764 + "\",\"sub_game_type\":\"" + _id_32AE710BD6009C5D + "\",\"map\":\"" + level.script + "\"}";
   _func_7BCD667FC073FC12("server_match_start", _id_37AAB353FE84A505);
 

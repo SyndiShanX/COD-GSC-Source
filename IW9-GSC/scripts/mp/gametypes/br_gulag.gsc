@@ -17,9 +17,9 @@ initgulag() {
   setomnvar("ui_gulag_state", 1);
   setomnvar("ui_gulag_show_closing_state", 0);
   level.gulag = spawnStruct();
-  level.gulag.arenaflag = getdvarint("dvar_5052FB481D0F9342", 1);
+  level.gulag.arenaflag = getdvarint("scr_br_fc_flag", 1);
   level.gulag.maxplayers = getmaxplayers();
-  level.gulag.maxuses = getdvarint("dvar_75651466DDF2A023", 1);
+  level.gulag.maxuses = getdvarint("scr_br_fc_max_uses", 1);
   level.gulag.endonshutdown = getdvarint("dvar_A208C2044D682252", 3);
   level.gulag.maxqueue = getdvarint("dvar_288E3F85A1389BEE", 3);
   level.gulag.onekillwin = getdvarint("dvar_87F668A2B16E5A88", 1);
@@ -349,7 +349,7 @@ gulaggesturesinit() {
 }
 
 getmaxplayers() {
-  maxplayers = int(clamp(getdvarint("dvar_29BF69A5061EBFC3", 2), 2, 2));
+  maxplayers = int(clamp(getdvarint("scr_br_fc_max_players", 2), 2, 2));
 
   if(maxplayers % 2 != 0)
     maxplayers = maxplayers - 1;
@@ -811,7 +811,7 @@ getgulagclosedcircleindex() {
   if(_id_5BC60484D17FA95C::_id_CFE304859F30E747("gulagGetClosedCircleIndex"))
     return _id_5BC60484D17FA95C::_id_3CCEB052D780FEF1("gulagGetClosedCircleIndex", offset);
   else
-    return level.br_level.br_circledelaytimes.size - 1 - getdvarint("dvar_1141FEA0C6EF428F", 3) - offset;
+    return level.br_level.br_circledelaytimes.size - 1 - getdvarint("scr_br_fc_circle_disable", 3) - offset;
 }
 
 setupgulagtimer() {
@@ -1510,7 +1510,7 @@ getovertimelength() {
   if(_id_5BC60484D17FA95C::_id_CFE304859F30E747("gulagGetOvertimeLength"))
     return _id_5BC60484D17FA95C::_id_3CCEB052D780FEF1("gulagGetOvertimeLength");
   else
-    return getdvarint("dvar_1FF83F4F24656C5B", 15.0);
+    return getdvarint("scr_br_fc_overtime", 15.0);
 }
 
 _id_59D019F0169C03BE() {
@@ -3203,7 +3203,7 @@ _id_6414FDC0080486D8(_id_9FDC1F9E4FC628E4) {
 _id_F85939BEC8DDD156(_id_9FDC1F9E4FC628E4) {
   if(istrue(self._id_36386F3F03C2AB4B)) {
     self._id_36386F3F03C2AB4B = undefined;
-    self setclientdvar("dvar_B21F1157C582FF15", 1);
+    self setclientdvar("voice_proximity_enemy_client", 1);
   }
 
   self.plotarmor = undefined;
@@ -4633,7 +4633,7 @@ _id_4BCEDFE145EE674E() {
       level.gulagloadouts[level.gulagloadouts.size] = creategulagarenaloadout(_id_089688461C79EF11);
   }
 
-  if(getdvarint("dvar_249A73868C9CD7D8", 0))
+  if(getdvarint("bg_weaponautograboptionsenabled", 0))
     _id_7E52B56769FA7774::_id_23A8498A6613DE14();
 }
 
@@ -4725,7 +4725,7 @@ playergivearenaloadout(arena, loadoutindex) {
 }
 
 checkforarenaloadoutoverride(loadoutindex) {
-  if(getdvarint("dvar_AD67CF67992FE5F2", 0)) {
+  if(getdvarint("scr_br_alt_mode_gg", 0)) {
     switch (loadoutindex) {
       case 0:
         primary = "iw8_pi_decho";
@@ -4827,7 +4827,7 @@ setupdomendflag(arena) {
     if(isDefined(arena._id_1DF1ACEE38DCCA72))
       _id_37E3A1EAA43EA82C = getgroundposition(arena._id_1DF1ACEE38DCCA72, 1);
 
-    _id_D0EAD7E588A015C5 = getdvarint("dvar_177D32D81BD6BC15", 450);
+    _id_D0EAD7E588A015C5 = getdvarint("scr_br_fc_flag_radius", 450);
     _id_01230EA36A300368 = _id_37E3A1EAA43EA82C;
   } else if(_id_03AA8E63A56E3416::_id_6E3541FD8FAB45BC()) {
     _id_37E3A1EAA43EA82C = getgroundposition(arena.center, 1);
@@ -4835,10 +4835,10 @@ setupdomendflag(arena) {
     if(isDefined(arena._id_1DF1ACEE38DCCA72))
       _id_37E3A1EAA43EA82C = getgroundposition(arena._id_1DF1ACEE38DCCA72, 1);
 
-    _id_D0EAD7E588A015C5 = getdvarint("dvar_177D32D81BD6BC15", 100);
+    _id_D0EAD7E588A015C5 = getdvarint("scr_br_fc_flag_radius", 100);
     _id_01230EA36A300368 = _id_37E3A1EAA43EA82C;
   } else {
-    _id_D0EAD7E588A015C5 = getdvarint("dvar_177D32D81BD6BC15", 50);
+    _id_D0EAD7E588A015C5 = getdvarint("scr_br_fc_flag_radius", 50);
     _id_01230EA36A300368 = getgroundposition(arena.center, 1);
   }
 

@@ -19,7 +19,7 @@ br_armor_plate_used() {
 
   _id_830009CEFCE35A66 = self.br_armorhealth + 5;
   _id_1C07EF7BC0E3723A = clamp(_id_830009CEFCE35A66, 0, self.br_maxarmorhealth);
-  _id_43167C86311C997E = max(1, getdvarint("dvar_5CEA4FC8ADFEF297", 50));
+  _id_43167C86311C997E = max(1, getdvarint("scr_br_armor_heal_amount", 50));
   _id_1C07EF7BC0E3723A = int(_id_1C07EF7BC0E3723A / _id_43167C86311C997E) * _id_43167C86311C997E + _id_43167C86311C997E;
   self.br_armorhealth = clamp(_id_1C07EF7BC0E3723A, 0, self.br_maxarmorhealth);
   br_armor_plate_amount_equipped_set(self.br_armorhealth);
@@ -31,7 +31,7 @@ br_armor_plate_used() {
 br_armor_plate_broken_remove() {
   _id_830009CEFCE35A66 = self.br_armorhealth + 5;
   _id_1C07EF7BC0E3723A = clamp(_id_830009CEFCE35A66, 0, self.br_maxarmorhealth);
-  _id_43167C86311C997E = max(1, getdvarint("dvar_5CEA4FC8ADFEF297", 50));
+  _id_43167C86311C997E = max(1, getdvarint("scr_br_armor_heal_amount", 50));
   _id_1C07EF7BC0E3723A = int(_id_1C07EF7BC0E3723A / _id_43167C86311C997E) * _id_43167C86311C997E;
   _id_517C920EC0A48022 = clamp(_id_1C07EF7BC0E3723A, 0, self.br_maxarmorhealth);
 

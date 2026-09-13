@@ -103,7 +103,7 @@ main() {
   level._id_359D1318419A254D = 1;
   level.outofboundstriggers = getEntArray("OutOfBounds", "targetname");
   level.kill_border_triggers = getEntArray("kill_border_trigger", "targetname");
-  level._id_529DB71B08D8F57A = getdvarint("dvar_D87502944AFEEE16", 0);
+  level._id_529DB71B08D8F57A = getdvarint("scr_br_final_circle_override", 0);
   level._id_12885FA5DED97213 = getdvarint("dvar_433FA7CA2836C6F1", 0);
   setDvar("r_umbraMinObjectContribution", 8);
   setDvar("cg_defaultWindFrequencyScale", 0.5);
@@ -115,7 +115,7 @@ main() {
   setDvar("r_vertexDeformCutOffDist", 3000);
   setDvar("r_vertexDeformFadeDist", 1500);
   setDvar("r_st_displacementDistance", 1000);
-  setdvarifuninitialized("dvar_223915C6339DBC10", (62000, 62000, 3000));
+  setdvarifuninitialized("br_infil_anim_pos", (62000, 62000, 3000));
   scripts\mp\compass::setupminimap("compass_map_mp_delta");
   level._id_1789643B227CF471 = ::_id_1789643B227CF471;
   level._id_FFAE696F4EF77D0E = ::_id_FFAE696F4EF77D0E;
@@ -172,7 +172,7 @@ main() {
   if(scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508())
     brinit();
 
-  if(getdvarint("dvar_ED4A71E34E488E86", 0) > 0)
+  if(getdvarint("scr_wztrain_enable", 0) > 0)
     level thread _id_617950B1774AF3F1::init();
 
   level thread _id_594757B74170A035::init();
@@ -237,10 +237,10 @@ brinit() {
   if(istrue(level._id_C62D39D6E6AFB119))
     _id_8E61CD66A8BF3A15();
 
-  if(getdvarint("dvar_4059E9A29BBB06E7", 1) == 1) {
+  if(getdvarint("scr_br_mood_manager", 1) == 1) {
     _id_8413D24B1DE421B0();
     _id_5F23C51AA82AF90A = getDvar("dvar_814A58E4F810F2D8");
-    _id_17E4F9DE4E9C7906 = getDvar("dvar_A353331C600232B0", "delta_moodlist_fog_to_clear");
+    _id_17E4F9DE4E9C7906 = getDvar("scr_br_moodlist_set", "delta_moodlist_fog_to_clear");
 
     if(isDefined(_id_5F23C51AA82AF90A) && _id_5F23C51AA82AF90A != "")
       thread _id_3099E12A7555BF85::_id_AFD4C1E75AEE7F02(_id_5F23C51AA82AF90A);
@@ -264,7 +264,7 @@ _id_0865DD7703C23C87() {
 }
 
 _id_2A4FBC2A0576365A(_id_E891C8F4915DFF8A) {
-  _id_C4FDD0A586C8AE61 = getDvar("dvar_FEA1133FC54C1315", "");
+  _id_C4FDD0A586C8AE61 = getDvar("scr_br_circlesettings", "");
 
   if(!isDefined(_id_C4FDD0A586C8AE61) || _id_C4FDD0A586C8AE61 == "")
     _id_C4FDD0A586C8AE61 = "brcirclesettings:mp_delta_br_circle_settings";

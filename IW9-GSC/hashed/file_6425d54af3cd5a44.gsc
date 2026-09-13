@@ -1269,7 +1269,7 @@ getassignedspawnpoint(spawnpoints) {
 }
 
 enable_lbravo_player_infil() {
-  if(getdvarint("dvar_C55DC89EF275CDAA", 0) == 1) {
+  if(getdvarint("scr_skip_infils", 0) == 1) {
     return;
   }
   if(player_infil_already_played()) {

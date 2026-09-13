@@ -4,7 +4,7 @@
 ***********************************************/
 
 _id_9A7305EA8EE1E807() {
-  if(getdvarint("dvar_365D77262B3A350E", 1) == 0) {
+  if(getdvarint("scr_starsystem", 1) == 0) {
     return;
   }
   level._id_01A6233BC0D61FAF = spawnStruct();

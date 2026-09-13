@@ -57,7 +57,7 @@ _id_81E08A62A6B5C2FC(timeout) {
   if(isDefined(timeout))
     return timeout * 1000;
 
-  return getdvarint("dvar_9FEED7A9D0B00557", _id_20F555E2261730D5);
+  return getdvarint("quickprompt_timeout", _id_20F555E2261730D5);
 }
 
 _id_48C352E46A0677D1(_id_C8DF752C18209187) {
@@ -75,7 +75,7 @@ _id_5FE394C76F3BB67E(_id_C8DF752C18209187) {
 }
 
 _id_7BA31CB6B21C346F() {
-  return istrue(getdvarint("dvar_7023569777F7F76D", 1));
+  return istrue(getdvarint("quickprompt_enabled", 1));
 }
 
 _id_9E4834F9AE737884() {

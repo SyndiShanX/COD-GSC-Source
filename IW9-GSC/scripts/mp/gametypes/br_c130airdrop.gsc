@@ -7,7 +7,7 @@ init() {
   scripts\cp_mp\utility\script_utility::registersharedfunc("br_c130Airdrop", "c130Airdrop_onCrateUse", ::c130airdrop_oncrateuse);
   level.c130deliveriesinprogress = [];
   level.c130successfulairdrops = [];
-  level.c130airdrop_heightoverride = getdvarint("dvar_5697CE5DB08F0E93", 12000);
+  level.c130airdrop_heightoverride = getdvarint("scr_plunder_airdropcrateheightoverride", 12000);
 }
 
 c130airdrop_managedrop() {

@@ -280,7 +280,7 @@ loadspawnlogicweights() {
   level.spawnglobals.spawnfactorweights = [];
   level.spawnglobals.criticalfactortypes = [];
 
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0)
+  if(getdvarint("t10", 0) > 0)
     _id_10554CC50F831D91 = "mp/spawnweights_t10.csv";
   else
     _id_10554CC50F831D91 = "mp/spawnweights.csv";

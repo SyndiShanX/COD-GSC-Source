@@ -346,7 +346,7 @@ _id_1123C27B444D9B1F() {
 }
 
 _id_4DCCA048A83A2F3C(_id_0C0AB0189903C9D4) {
-  setdvarifuninitialized("dvar_8483522C1E47A279", 0);
+  setdvarifuninitialized("scr_wind_debug", 0);
   level._id_6BCBE686F8635184 = _id_0C0AB0189903C9D4;
   scripts\engine\utility::flag_wait("scriptables_ready");
 
@@ -361,12 +361,12 @@ _id_4DCCA048A83A2F3C(_id_0C0AB0189903C9D4) {
       guys[guys.size] = ent;
   }
 
-  if(getdvarint("dvar_8483522C1E47A279"))
+  if(getdvarint("scr_wind_debug"))
     scripts\engine\utility::array_thread(guys, ::_id_EE3867FAFBAD621B);
 
   foreach(guy in guys) {
     if(!guy isscriptable()) {
-      if(getdvarint("dvar_8483522C1E47A279")) {
+      if(getdvarint("scr_wind_debug")) {
         if(isDefined(guy.model)) {} else {}
       }
 

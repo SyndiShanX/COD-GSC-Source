@@ -398,7 +398,7 @@ anim_loop_packet(_id_3D308E5CD595225D, anime, ender, _id_8E3B87ACAAD3DE58) {
   _id_405D3683254D21E8 = 0;
 
   if(_id_6BEB6C37769023F8) {
-    setdvarifuninitialized("dvar_E35578A601BCD680", 0);
+    setdvarifuninitialized("scr_debug_nags", 0);
     _id_D851A74F8DF27DE9 = spawnStruct();
     _id_D851A74F8DF27DE9.last_nag_time = gettime();
     _id_D851A74F8DF27DE9.nag_anims = level.scr_anim[_id_F9909A84715A4DDF][anime + "_nags"];

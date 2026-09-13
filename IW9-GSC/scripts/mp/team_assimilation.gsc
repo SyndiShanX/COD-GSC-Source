@@ -37,7 +37,7 @@ _id_80139212A4C66A94(player, _id_8A04AA0E0755E7E3, _id_EB06B338608EF354) {
 
 _id_6934349B7823D888() {
   if(!isDefined(level._id_CC0D5A1E8A904E5C))
-    level._id_CC0D5A1E8A904E5C = getdvarint("dvar_AF509AC21EC3BD6A", 0);
+    level._id_CC0D5A1E8A904E5C = getdvarint("scr_team_assimilation_enabled", 0);
 
   return level._id_CC0D5A1E8A904E5C;
 }

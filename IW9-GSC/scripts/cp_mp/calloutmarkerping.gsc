@@ -216,7 +216,7 @@ _calloutmarkerping_predicted_timeout(_id_394466C2DDB208CB) {
         else if(isDefined(level.lootleaders) && getDvar("dvar_7611A2790A0BF7FE", "") == "kingslayer" && scripts\engine\utility::array_contains(level.lootleaders, ent))
           waittime = getdvarfloat("dvar_736F9D37695743D5", 0.0);
         else
-          waittime = getdvarfloat("dvar_EAC22ABE7A18C2D3", 3.0);
+          waittime = getdvarfloat("scr_calloutmarkerping_track_player_time", 3.0);
 
         _id_93B12C2DCE7C2AA8 = ent;
         _calloutmarkerping_predicted_log("Enemy tracked!");

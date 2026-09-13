@@ -62,7 +62,7 @@ init() {
   initteamdatafields();
   inithelirepository();
 
-  if(getdvarint("dvar_91FBC1BBAC0C27D7", 0) == 1)
+  if(getdvarint("scr_enableplunderpileoverrides", 0) == 1)
     processcashpilevalueoverrides();
 
   _id_2695A20D4011076D::_id_ECA79FA0F341EE08(0, ::dangercircletick, ::_id_1A1709943670772A);
@@ -89,7 +89,7 @@ plunder_economy_shapshot_loop(duration, safecircleent, _id_FB3B2613D6F0EB05) {
 }
 
 plunder_infils_ready() {
-  _id_DC4FDC0D3E50E80B = getdvarint("dvar_611D72C9417EE39E", 0);
+  _id_DC4FDC0D3E50E80B = getdvarint("scr_br_plunder_start_amount", 0);
   _id_D437BEA518F94DD0 = getdvarint("dvar_B26DA3EE25C25A6C", _id_DC4FDC0D3E50E80B);
 
   if(!_id_DC4FDC0D3E50E80B && !_id_D437BEA518F94DD0) {
@@ -1226,7 +1226,7 @@ dropcondensedplunder(amount, dropstruct, _id_1AD2DB70C8D01F51) {
   }
 
   _id_CB4FAD49263E20C4 = _id_7E52B56769FA7774::getitemdroporiginandangles(dropstruct, self.origin, self.angles, self);
-  _id_307BCADB5A20BD5E = isalive(self) || istrue(_id_1AD2DB70C8D01F51) || getdvarint("dvar_56A4511198080C62", 0);
+  _id_307BCADB5A20BD5E = isalive(self) || istrue(_id_1AD2DB70C8D01F51) || getdvarint("scr_br_allow_auto_pickup_dropped_plunder", 0);
   pickupent = _id_7E52B56769FA7774::spawnpickup(level.br_plunder.names[_id_8E0B722357754D9E], _id_CB4FAD49263E20C4, amount, 1, undefined, _id_307BCADB5A20BD5E);
   modify_plunder_itemsinworld(level.br_plunder.names[_id_8E0B722357754D9E], 1);
 

@@ -237,7 +237,7 @@ applyshrapnelfxinternal() {
 
 _id_6410111BAF734017() {
   if(!isDefined(level._id_194088D9669CB53D)) {
-    level._id_194088D9669CB53D = getdvarint("dvar_57BAC575C6D501C4", 2000);
+    level._id_194088D9669CB53D = getdvarint("scr_attacker_time_buffer_ms", 2000);
     level._id_1736DE83D797ADC0 = getdvarint("dvar_2FD03831CB8A51E6", 4000);
   }
 
@@ -648,7 +648,7 @@ _id_47B9C7C77690BB03(_id_5E6F92830ACAB138, time) {
 
 _id_2CA98396C7F5CC85(_id_FED4732DD8EC7225) {
   _id_CCBBA16287668F0A = _id_FED4732DD8EC7225 / self.maxhealth;
-  _id_2FF497A47C266950 = getdvarfloat("dvar_6B03D4DBA904D25E", 0.5);
+  _id_2FF497A47C266950 = getdvarfloat("scr_falling_damage_min_shock_factor", 0.5);
 
   if(_id_CCBBA16287668F0A >= _id_2FF497A47C266950) {
     _id_4BC08DB3876DE031 = getdvarfloat("dvar_02558D1926211903", 3.0);

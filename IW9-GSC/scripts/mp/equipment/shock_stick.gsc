@@ -342,9 +342,9 @@ _id_F47AB824A48FE570() {
   objweapon = makeweapon("shock_stick_mp");
   contents = ["physicscontents_item", "physicscontents_vehicle", "physicscontents_characterproxy", "physicscontents_explosionclip", "physicscontents_clipshot", "physicscontents_missileclip", "physicscontents_explosionclip"];
   _id_703E9FC257D523F1 = scripts\engine\utility::_id_53C4C53197386572(_id_D442547D75DFFD09._id_48D181037894A0FE, 5.0);
-  _id_703E9FC257D523F1 = getdvarfloat("dvar_2C69CB8CD7D267CD", _id_703E9FC257D523F1);
+  _id_703E9FC257D523F1 = getdvarfloat("shockstick_duration", _id_703E9FC257D523F1);
   _id_988C511564BEE3EA = scripts\engine\utility::_id_53C4C53197386572(_id_D442547D75DFFD09._id_ABA76142349AF9C0, 0.2);
-  _id_988C511564BEE3EA = getdvarfloat("dvar_B2F16983A17DC833", _id_988C511564BEE3EA);
+  _id_988C511564BEE3EA = getdvarfloat("shockstick_tick_rate", _id_988C511564BEE3EA);
   _id_5112E7794DCA9367 = _id_703E9FC257D523F1 / _id_988C511564BEE3EA;
   _id_6CE919400E8C5E02 = scripts\engine\utility::_id_53C4C53197386572(_id_D442547D75DFFD09._id_F196CC01F2B12053, 125);
   _id_D38B72705084C645 = scripts\engine\utility::_id_53C4C53197386572(_id_D442547D75DFFD09._id_4D5D534EF8820D0A, 6);

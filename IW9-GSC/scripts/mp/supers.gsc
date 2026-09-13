@@ -26,7 +26,7 @@ init() {
   scripts\mp\utility\spawn_event_aggregator::registeronplayerspawncallback(::clearsuperreminderondeath);
   thread watchforgameend();
 
-  if(getdvarint("dvar_350B9A835C1F30B8", 0) > 0)
+  if(getdvarint("scr_superlotteryenabled", 0) > 0)
     thread watchsuperlottery();
 
   if(level.allowsupers || scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508())
@@ -2893,7 +2893,7 @@ watchsuperlottery() {
 
   for(;;) {
     _id_650C8ACDFFCC5AF7 = _id_6799761943648F6A;
-    _id_6799761943648F6A = getdvarint("dvar_350B9A835C1F30B8", 0) > 0;
+    _id_6799761943648F6A = getdvarint("scr_superlotteryenabled", 0) > 0;
 
     if(!isDefined(_id_650C8ACDFFCC5AF7) || _id_650C8ACDFFCC5AF7 != _id_6799761943648F6A) {
       if(_id_6799761943648F6A)
@@ -2971,7 +2971,7 @@ awardsuperlottery(player) {
 }
 
 getscriptdataversion() {
-  if(getdvarint("dvar_6AF7E4425B1F5D10", 0) != 0)
+  if(getdvarint("scr_playtest_qa", 0) != 0)
     return 254;
 
   if(getdvarint("scr_playtest", 0) != 0)

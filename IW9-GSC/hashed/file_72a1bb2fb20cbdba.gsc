@@ -53,7 +53,7 @@ _id_A3DB364A0CCC4FD8() {
   level.br_prematchspawnlocations = [_id_1E4A61DB11011446::createspawnlocation(scripts\engine\utility::drop_to_ground((20980, -7872, -365)), 0, 0)];
   setDvar("dvar_047D8674C992E098", 1);
   setDvar("dvar_192990FC79B06600", 1);
-  setDvar("dvar_90A3DFD557408611", 0);
+  setDvar("scr_br_quests_enabled", 0);
   setDvar("dvar_56D4C1121BFFCDF1", 0);
   setDvar("dvar_82BDE055B11E6698", 0);
   setDvar("dvar_18AFE7A288A4B1E4", 1);

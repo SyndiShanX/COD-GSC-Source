@@ -25,12 +25,12 @@ init() {
   level._id_33CF4079B4096EB8 = getdvarint("dvar_935057B8878CA60C", 1);
   level._id_1BDF3AF6B78DC2CA = getdvarint("dvar_DB81671BBB108B36", 2);
   level._id_8912CCAD342445F7 = getdvarint("dvar_F34E4FBAEB441E24", 2048);
-  level._id_E38979EB8FD7F7FD = getdvarint("dvar_E0BF53C6689C5A5C", 24);
-  level._id_6BA4985B66D62A71 = getdvarint("dvar_7632DAB7786BD590", 33);
-  level._id_7EB56682F591EA8D = getdvarint("dvar_81420364EA25C1EA", 80);
-  level._id_9CF526926A72864C = getdvarint("dvar_7ACE3F07AE09FAA9", 17);
-  level._id_0E2FBC9E65108B1E = getdvarint("dvar_A3642102F1C5F0AF", 75);
-  level._id_47AEDB539717AEA5 = getdvarint("dvar_CCB7C4B155A770F8", 60);
+  level._id_E38979EB8FD7F7FD = getdvarint("scr_agent_maxdamage", 24);
+  level._id_6BA4985B66D62A71 = getdvarint("scr_agent_maxdamage_assault", 33);
+  level._id_7EB56682F591EA8D = getdvarint("scr_agent_maxdamage_sniper", 80);
+  level._id_9CF526926A72864C = getdvarint("scr_agent_maxdamage_shotgun", 17);
+  level._id_0E2FBC9E65108B1E = getdvarint("scr_agent_maxdamage_melee", 75);
+  level._id_47AEDB539717AEA5 = getdvarint("scr_agent_maxdamage_explosive", 60);
   level._id_4899061E2E21DD13 = getdvarfloat("dvar_B98593547931BA38", 0.6);
   level._id_3E6588E7A225A933 = getdvarint("dvar_9AD5DBDD1DFB3FAC", 3);
   level._id_1B4461E4447DA676 = 0;
@@ -2077,7 +2077,7 @@ _id_271DAFF60F7D1DE3() {
 
   level._id_23D3E499C3DDE07B = scripts\engine\utility::array_randomize(level._id_23D3E499C3DDE07B);
 
-  for(_id_AC0E594AC96AA3A8 = 0; _id_AC0E594AC96AA3A8 < getdvarint("dvar_C70617339B76D58B", 15); _id_AC0E594AC96AA3A8++) {
+  for(_id_AC0E594AC96AA3A8 = 0; _id_AC0E594AC96AA3A8 < getdvarint("scr_aibudget_extraguards", 15); _id_AC0E594AC96AA3A8++) {
     if(!isDefined(level._id_23D3E499C3DDE07B[_id_AC0E594AC96AA3A8])) {
       continue;
     }
@@ -2085,7 +2085,7 @@ _id_271DAFF60F7D1DE3() {
     _id_591B22E0CA8A8BE1(level._id_23D3E499C3DDE07B[_id_AC0E594AC96AA3A8], _id_A784428198C5658B, undefined, "low", "extraGuards");
   }
 
-  _id_3B7047DEA3E6835C = getdvarint("dvar_6091D5BB83AF8214", 15);
+  _id_3B7047DEA3E6835C = getdvarint("scr_aibudget_extrapatrols", 15);
   _id_BEEC4BCF2979EE14 = 0;
   level._id_4E8126C3305A5431 = scripts\engine\utility::array_randomize(level._id_4E8126C3305A5431);
 
@@ -4790,7 +4790,7 @@ _id_305B1BA9C9B7F7B4(_id_C6D51ABE72F8B012, _id_1BE58AA13BA9F7DA, agent, dropstru
   }
 
   if(!isDefined(level._id_7C24540CB1744AD9))
-    level._id_7C24540CB1744AD9 = getdvarint("dvar_6991420CA3598113", 1);
+    level._id_7C24540CB1744AD9 = getdvarint("scr_dmz_agentdroploadoutlootonground", 1);
 
   _id_C6D51ABE72F8B012 = _id_C6D51ABE72F8B012 | (level._id_7C24540CB1744AD9 && istrue(_id_1BE58AA13BA9F7DA._id_B30D9F22E554E6EE));
   _id_C6D51ABE72F8B012 = _id_C6D51ABE72F8B012 | getdvarint("dvar_142657A7943B806A", 0);

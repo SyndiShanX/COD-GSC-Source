@@ -377,7 +377,7 @@ keypad_playerinteractwithkeypadloop(instance) {
 
     if(isDefined(message)) {
       if(message == "submit_br_keypad") {
-        if(getdvarint("dvar_CC6142F2BF8A87B7", 0))
+        if(getdvarint("scr_br_bunker_keypad_refresh_idle_timer_on_try", 0))
           thread keypad_playeridlewatch();
 
         if(isDefined(instance.code) && iscodecorrect(instance, value)) {

@@ -537,7 +537,7 @@ onrevive(_id_4920BF02DF960BE9, _id_D07B7DCC79B24490) {
   if(!istrue(_id_D07B7DCC79B24490)) {
     _id_A776F097EB36E500 = level.laststandrevivehealth;
 
-    if(!getdvarint("dvar_BBA79EEB1C990103") || self.health < level.laststandrevivehealth)
+    if(!getdvarint("scr_player_laststandreviveretainhealth") || self.health < level.laststandrevivehealth)
       self.health = level.laststandrevivehealth;
   } else
     self.health = self.maxhealth;

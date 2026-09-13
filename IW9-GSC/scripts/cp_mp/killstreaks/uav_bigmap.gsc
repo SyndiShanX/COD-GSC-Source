@@ -206,9 +206,9 @@ _id_D8F7D7425EE3435B(player) {
 
 _id_B26DF19671891830(owner, streakinfo) {
   duration = getdvarfloat("dvar_2C4AA32449462D6E", 25);
-  _id_5888FE9DAC2D7D8E = getdvarfloat("dvar_8CAA0944A27274AA", 2);
-  _id_A2A010CA62B6691E = getdvarfloat("dvar_BAEA8656875E8F33", 4);
-  radius = getdvarint("dvar_B0336DA463C5B9A4", 12000);
+  _id_5888FE9DAC2D7D8E = getdvarfloat("scr_uav_bigmap_sweep_duration", 2);
+  _id_A2A010CA62B6691E = getdvarfloat("scr_uav_bigmap_sweep_interval", 4);
+  radius = getdvarint("scr_uav_bigmap_sweep_radius", 12000);
 
   if(owner scripts\cp_mp\utility\player_utility::_id_EBA2F2E094684B8F("specialty_overwatch")) {
     _id_5888FE9DAC2D7D8E = _id_5888FE9DAC2D7D8E * 0.5;

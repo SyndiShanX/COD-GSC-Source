@@ -8,15 +8,15 @@ init() {
   level._effect["flashpoint_pulse_friendly"] = loadfx("vfx/iw8_mp/flashpoint/vfx_fp_pulse_friendly.vfx");
   level._effect["flashpoint_pulse_squad"] = loadfx("vfx/iw8_mp/flashpoint/vfx_fp_pulse_squad.vfx");
   level._effect["flashpoint_pulse_enemy"] = loadfx("vfx/iw8_mp/flashpoint/vfx_fp_pulse_enemy.vfx");
-  _id_90D2FED9A87F1697 = getDvar("dvar_67B0BCF9DE3DF0B0", 0);
-  level.flashpoint_objectives = getDvar("dvar_9F66FBD7BB66E22C", 0) == "1";
+  _id_90D2FED9A87F1697 = getDvar("scr_flashpoint_toggle", 0);
+  level.flashpoint_objectives = getDvar("scr_flashpoint_objectives", 0) == "1";
   level.iconflashpointfriendly = "icon_swords_friendly";
   level.iconflashpointenemy = "icon_swords_enemy";
   level.iconflashpointcontested = "icon_swords_contested";
   level.iconflashpointneutral = "icon_swords_neutral";
   level.flashpoint_struct = spawnStruct();
   level.flashpoint_struct.flashpoints = [];
-  level.flashpointdebugactive = getdvarint("dvar_9F7206466118E24C", 0);
+  level.flashpointdebugactive = getdvarint("scr_flashpointdebugactive", 0);
 
   if(istrue(level.flashpoint_usebigmapsettings))
     level.flashpointmindist = 16777216;
@@ -34,7 +34,7 @@ init() {
 
 flashpoint_systemtoggle() {
   for(;;) {
-    if(getDvar("dvar_67B0BCF9DE3DF0B0", 0) != "0") {
+    if(getDvar("scr_flashpoint_toggle", 0) != "0") {
       if(level.flashpoint_objectives)
         thread flashpoint_systemthink();
 

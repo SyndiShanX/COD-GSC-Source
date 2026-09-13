@@ -317,7 +317,7 @@ avoidlastattackerlocation(spawnpoint) {
 initfrontline() {
   frontlineinfo = getglobalfrontlineinfo();
 
-  if(getdvarint("dvar_8F796EB7D29945D9", 0) == 1) {
+  if(getdvarint("scr_ignore_frontline_anchor", 0) == 1) {
     return;
   }
   _id_35F37345312ECE32 = [];

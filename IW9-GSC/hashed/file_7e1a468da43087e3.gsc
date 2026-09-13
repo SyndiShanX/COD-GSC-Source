@@ -146,7 +146,7 @@ waittill_vehicle_node_reached_targetname(_id_D68857EDCCFB97D3) {
 }
 
 player_infil_played_or_skipped() {
-  return istrue(game["player_infil_already_played"]) || getdvarint("dvar_C55DC89EF275CDAA", 0) == 1;
+  return istrue(game["player_infil_already_played"]) || getdvarint("scr_skip_infils", 0) == 1;
 }
 
 try_start_fake_infil_chopper() {

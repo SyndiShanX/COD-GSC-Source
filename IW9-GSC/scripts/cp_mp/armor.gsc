@@ -4,7 +4,7 @@
 ***********************************************/
 
 init() {
-  level._id_D73697030C5D4E05 = getdvarint("dvar_A4D532F42D919827", 1) == 1;
+  level._id_D73697030C5D4E05 = getdvarint("scr_player_allowarmor", 1) == 1;
 
   if(scripts\common\utility::iscp()) {
     level._id_4B78859BACC88808 = getdvarint("dvar_EA4FD87F53EC4456", 120);
@@ -14,15 +14,15 @@ init() {
     level._id_FB2B3C3DB6061DF5 = getdvarint("dvar_95E3CDFA6F3B12A1", 1);
   }
 
-  level._id_34867328231CA54B = getdvarint("dvar_D75D5638785F3B09", 0);
-  level._id_BF6C149BC4124962 = getdvarint("dvar_A6A3FD965485D4BC", 0);
+  level._id_34867328231CA54B = getdvarint("scr_player_spawnarmor", 0);
+  level._id_BF6C149BC4124962 = getdvarint("scr_player_spawnarmorplates", 0);
   level._id_23500029F84B30D0 = getdvarint("dvar_A729499D07BCD90A", 1) == 1;
   level._id_36304CC9071BF738 = getdvarint("dvar_08AD1AB9436BCCCA", 0);
   level._id_2B27FF18B10AD519 = getdvarint("dvar_28D450F7F28644B7", 0);
   level._id_6835A3D279520DC9 = getdvarint("dvar_2BCFBE19DAC56DD7", 3);
   level._id_699BB1FCAE5B2EEE = getdvarint("dvar_BE3A8D807C217559", 1);
   level._id_23960E36343A87A6 = getdvarint("dvar_571F1AB18FCF566C", 1);
-  level._id_1FE86BFC07EAA587 = getdvarint("dvar_8B7EED58460969A6", 0);
+  level._id_1FE86BFC07EAA587 = getdvarint("scr_br_platesactivatequickfix", 0);
   level._id_27720C0C325958C1 = getdvarint("dvar_D2591F329D2EC7D4", 1) > 0;
   scripts\cp_mp\utility\damage_utility::_id_0ABFCDEE8FDA20A4();
 
@@ -85,7 +85,7 @@ initarmor(_id_B5C8BC15F7117B19) {
   }
 
   if(istrue(level._id_FB2B3C3DB6061DF5)) {
-    _id_2E1D1AF8AFE39BA8 = getdvarint("dvar_FDE1113CE9981D91", 3);
+    _id_2E1D1AF8AFE39BA8 = getdvarint("scr_br_plate_carrier_start_level", 3);
 
     if(isDefined(level.gametype) && scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508()) {
       if(getDvar("dvar_7611A2790A0BF7FE", "") == "dmz") {
@@ -93,7 +93,7 @@ initarmor(_id_B5C8BC15F7117B19) {
           [[scripts\cp_mp\utility\script_utility::getsharedfunc("instanceInventory", "restorePlateCarrier")]](self);
 
         if(isbot(self))
-          _id_2E1D1AF8AFE39BA8 = getdvarint("dvar_734001C752AD4A12", 2);
+          _id_2E1D1AF8AFE39BA8 = getdvarint("scr_br_plate_carrier_br_start_level", 2);
         else
           _id_2E1D1AF8AFE39BA8 = self getplayerdata(level._id_5D69837CF4DB0407, "dmzPlateCarrierLevel");
 
@@ -102,7 +102,7 @@ initarmor(_id_B5C8BC15F7117B19) {
         if(_id_0CB44A7B7EDD34BD != -1)
           _id_2E1D1AF8AFE39BA8 = _id_0CB44A7B7EDD34BD;
       } else {
-        _id_2E1D1AF8AFE39BA8 = getdvarint("dvar_734001C752AD4A12", 2);
+        _id_2E1D1AF8AFE39BA8 = getdvarint("scr_br_plate_carrier_br_start_level", 2);
         _id_7293FBE4C07E316F(_id_2E1D1AF8AFE39BA8);
       }
 
@@ -178,10 +178,10 @@ givestartingarmor(_id_D16569F10048FCE9, _id_10FD8ED3FED0E0AE, _id_AC1D8E40765A42
     self.equipment["health"] = "equip_armorplate";
 
   if(scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508() && getDvar("dvar_7611A2790A0BF7FE", "") != "dmz") {
-    if(isDefined(_id_10FD8ED3FED0E0AE) && _id_10FD8ED3FED0E0AE > getdvarint("dvar_734001C752AD4A12", 3))
+    if(isDefined(_id_10FD8ED3FED0E0AE) && _id_10FD8ED3FED0E0AE > getdvarint("scr_br_plate_carrier_br_start_level", 3))
       self._id_BED158A6DFAC230D = _id_10FD8ED3FED0E0AE;
     else
-      self._id_BED158A6DFAC230D = getdvarint("dvar_734001C752AD4A12", 3);
+      self._id_BED158A6DFAC230D = getdvarint("scr_br_plate_carrier_br_start_level", 3);
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("player", "isInGulagCheck")) {
       _id_1B7F5108008D55B6 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("player", "isInGulagCheck")]]();

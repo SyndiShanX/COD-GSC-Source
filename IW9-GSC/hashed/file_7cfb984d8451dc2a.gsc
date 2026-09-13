@@ -19,7 +19,7 @@ init() {
 
 _id_55F2480B4B819AEA(movingc130) {
   animstruct = spawnStruct();
-  animstruct.origin = getdvarvector("dvar_223915C6339DBC10", (0, 0, 0));
+  animstruct.origin = getdvarvector("br_infil_anim_pos", (0, 0, 0));
   animstruct.angles = (0, 0, 0);
   animstruct.cleanupfunc = ::_id_72145194F4F38714;
   animstruct._id_AB8494260B910B51 = ::_id_52BEDAE2CED8E191;

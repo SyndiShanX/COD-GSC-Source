@@ -757,12 +757,12 @@ setdof_dynamic() {
   _id_641EF3FC1EF694A5 = 0;
   _id_03206C3880F4B4D7 = [];
   _id_03206C3880F4B4D7["geo"] = spawnStruct();
-  _id_03206C3880F4B4D7["geo"].nearstartfactor = getdvarfloat("dvar_477D20AC52A6D418", 0.01);
-  _id_03206C3880F4B4D7["geo"].nearendfactor = getdvarfloat("dvar_E3404A5A9AE5315D", 0.95);
+  _id_03206C3880F4B4D7["geo"].nearstartfactor = getdvarfloat("dof_nearstart_geo", 0.01);
+  _id_03206C3880F4B4D7["geo"].nearendfactor = getdvarfloat("dof_nearend_geo", 0.95);
   _id_03206C3880F4B4D7["geo"].farstartfactor = getdvarfloat("dvar_03207700A54CD601", 1.5);
-  _id_03206C3880F4B4D7["geo"].farendfactor = getdvarfloat("dvar_DB3504CAF0E15404", 2.5);
-  _id_03206C3880F4B4D7["geo"].nearblur = getdvarfloat("dvar_AE45BAA306E4AE81", 3.9);
-  _id_03206C3880F4B4D7["geo"].farblur = getdvarfloat("dvar_8BC87003C9FC085E", 2.25);
+  _id_03206C3880F4B4D7["geo"].farendfactor = getdvarfloat("dof_farend_geo", 2.5);
+  _id_03206C3880F4B4D7["geo"].nearblur = getdvarfloat("dof_nearblur_geo", 3.9);
+  _id_03206C3880F4B4D7["geo"].farblur = getdvarfloat("dof_farblur_geo", 2.25);
   _id_03206C3880F4B4D7["interest"] = spawnStruct();
   _id_03206C3880F4B4D7["interest"].nearstartfactor = getdvarfloat("dof_nearstart", 0.01);
   _id_03206C3880F4B4D7["interest"].nearendfactor = getdvarfloat("dof_nearend", 0.95);

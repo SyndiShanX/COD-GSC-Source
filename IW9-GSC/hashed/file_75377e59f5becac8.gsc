@@ -166,7 +166,7 @@ _id_38F6E236E493C28B() {
   _id_179AD01817AE940B(level.infilstruct.c130);
   _id_1B7E57BFE648F609();
   _id_0930A1E7BD882C1D::_id_10F93BB3F3966751(1, "stateMachine");
-  self setclientdvar("dvar_B21F1157C582FF15", 0);
+  self setclientdvar("voice_proximity_enemy_client", 0);
 }
 
 _id_540BAB0E9A607717() {
@@ -531,10 +531,10 @@ _id_25A0C882B7E8BB02() {
 
   if(!istrue(level.infilstruct._id_EB0E85A583F21B9D)) {
     self setclientdvar("cg_fov", 65);
-    self setclientdvar("dvar_86BF34D5F48FA435", 65);
+    self setclientdvar("cg_fov_viewmodel", 65);
 
     if(!istrue(level.infilstruct._id_012C912EE9672FA1))
-      self setclientdvar("dvar_71C6C0B8428E44A7", 0);
+      self setclientdvar("cg_disable_user_fov", 0);
 
     self disablephysicaldepthoffieldscripting();
     scripts\mp\utility\player::setdof_default();
@@ -686,7 +686,7 @@ playjumpsoundtosquad() {
 _id_DD86C05DAA1432C3() {
   self endon("disconnect");
   wait 5;
-  self setclientdvar("dvar_B21F1157C582FF15", 1);
+  self setclientdvar("voice_proximity_enemy_client", 1);
 }
 
 watchinfiljumpanim() {
@@ -1339,7 +1339,7 @@ _id_7E1BBC382AD810F9() {
     self._id_CD09849E16631C71 = undefined;
   }
 
-  self setclientdvar("dvar_B21F1157C582FF15", 1);
+  self setclientdvar("voice_proximity_enemy_client", 1);
   scripts\cp_mp\utility\player_utility::_id_6FB380927695EE76();
   scripts\cp_mp\utility\player_utility::_id_985B0973F29DA4F8("br_infils_common::lateSpawnPlayerAfterInfil()");
   self.plotarmor = 0;
@@ -1347,8 +1347,8 @@ _id_7E1BBC382AD810F9() {
   self cameraunlink();
   self _meth_8FF8FD7841F6EBA2();
   self setclientdvar("cg_fov", 65);
-  self setclientdvar("dvar_86BF34D5F48FA435", 65);
-  self setclientdvar("dvar_71C6C0B8428E44A7", 0);
+  self setclientdvar("cg_fov_viewmodel", 65);
+  self setclientdvar("cg_disable_user_fov", 0);
   self disablephysicaldepthoffieldscripting();
   scripts\mp\utility\player::setdof_default();
 

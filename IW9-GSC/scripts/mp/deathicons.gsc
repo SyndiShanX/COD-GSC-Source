@@ -103,7 +103,7 @@ handleteamvisibility(_id_D9622D6CF6275394) {
 }
 
 handlefriendlyvisibility(icon, team) {
-  _id_BE5E71251B2FDB9D = getdvarfloat("dvar_8BBF501270A5BCF2", 10.0);
+  _id_BE5E71251B2FDB9D = getdvarfloat("death_icon_teammate_duration", 10.0);
   _id_EC15E7C2B73E1708 = getdvarfloat("dvar_D4E44EECF9BC8099", 0.0);
   wait(_id_BE5E71251B2FDB9D);
   _id_6D5ED003AF1F9612 = scripts\mp\utility\teams::getfriendlyplayers(team);

@@ -7,13 +7,13 @@ init() {
   level.br_armory_kiosk = spawnStruct();
   level.br_armory_kiosk.scriptables = [];
   level.br_armory_kiosk_enabled = getdvarint("scr_br_armory_kiosk", 1) != 0;
-  level._id_011A3973390A71E8 = getDvar("dvar_F8E5C3DAA6C01012", "purchases");
+  level._id_011A3973390A71E8 = getDvar("br_buy_station", "purchases");
 
   if(level.mapname == "mp_saba" || level.mapname == "mp_saba2" || level.mapname == "mp_saba_pm")
     level._id_8DEA6607B3189A60 = getdvarint("dvar_32C09327627C883C", 1);
 
   level._id_77E4ADD813FCA6AE = getdvarint("dvar_E024CF932EF753DC", 0);
-  level._id_F38C74334D6FF472 = getdvarint("dvar_6E135C0A5EDC02B1", 0);
+  level._id_F38C74334D6FF472 = getdvarint("scr_br_kiosk_perk_package_enabled", 0);
   level._id_EE08B1F41E7C2444 = scripts\cp_mp\utility\game_utility::_id_BA5574C7F287C587();
   level._id_E7CEE4FBB5B46EF2 = _id_600B944A95C3A7BF::_id_54B046AA3BA2678A(level._id_011A3973390A71E8);
 
@@ -30,7 +30,7 @@ init() {
     _id_067FB1233E876ED8::_id_4F7660CFD85CD517("buy_station", ::_id_E6C1C35181A2870F);
     _id_067FB1233E876ED8::_id_412F527EF0863F0E("buy_station", ::_id_7CB54F604C35BE8C);
     _id_067FB1233E876ED8::_id_EDED5B87F8F7BDFD("buy_station", ::_id_086F5339F1334E16);
-    level._id_D03E6BA38B56B4AB = getdvarint("dvar_E77AB3A32453AE92", 1);
+    level._id_D03E6BA38B56B4AB = getdvarint("br_kiosk_itemdrop_spawn_override", 1);
     level._id_E9F7702D839B262C = getdvarint("dvar_0624B1F6964C696D", 180.0);
     level._id_F454C63919420AA9 = getdvarint("dvar_69C62CAE4D7929C9", 10.0);
     level._id_FB60F0244999D528 = getdvarint("dvar_9C3612143E0AD401", 1.0);
@@ -47,7 +47,7 @@ init() {
 }
 
 _id_B38F5FFE645943C3(_id_1BD79A12120F1848) {
-  setDvar("dvar_F8E5C3DAA6C01012", _id_1BD79A12120F1848);
+  setDvar("br_buy_station", _id_1BD79A12120F1848);
   level._id_E7CEE4FBB5B46EF2 = _id_600B944A95C3A7BF::_id_54B046AA3BA2678A(_id_1BD79A12120F1848);
 
   if(!isDefined(level._id_6BE7B375EC4A629C))
@@ -69,7 +69,7 @@ _initignoredtabspergamemode() {
 }
 
 _initsalesdiscount() {
-  _id_DB834D1CAC99EA96 = getdvarint("dvar_828FB46E27EF695D", 0);
+  _id_DB834D1CAC99EA96 = getdvarint("br_kiosk_sales_discount", 0);
   level.br_armory_kiosk.sales_discount = int(clamp(_id_DB834D1CAC99EA96, 0, 100));
   _id_BC97C6F634D832A0 = getDvar("dvar_068EB502C50F9A22", "");
   level.br_armory_kiosk.sales_discount_items = strtok(_id_BC97C6F634D832A0, ",");
@@ -87,7 +87,7 @@ _initsalesdiscount() {
   }
 
   if(_id_DB834D1CAC99EA96 != level.br_armory_kiosk.sales_discount)
-    setDvar("dvar_828FB46E27EF695D", level.br_armory_kiosk.sales_discount);
+    setDvar("br_kiosk_sales_discount", level.br_armory_kiosk.sales_discount);
 }
 
 _applysalesdiscount(_id_9D384A51D5F0A3CF, _id_5805A52EC044F672) {
@@ -487,7 +487,7 @@ _id_517B8730DDEC7F59(_id_CB325DDB4A764623) {
 }
 
 _id_7E0281196D6407C8() {
-  return getdvarint("dvar_1696DF050AD70202", 0);
+  return getdvarint("br_kiosk_quick_purchase_enabled", 0);
 }
 
 _id_4D81AE9CB22F4180(dvar, _id_A0732421235E346C) {
@@ -659,7 +659,7 @@ _parsepurchaseitemtables() {
 
 _id_3E6DDD0AE062AC75() {
   if(!isDefined(level._id_6BE7B375EC4A629C))
-    level._id_6BE7B375EC4A629C = _id_4D81AE9CB22F4180("dvar_894C0B1C4E700989", level._id_011A3973390A71E8);
+    level._id_6BE7B375EC4A629C = _id_4D81AE9CB22F4180("scr_buy_station_pool", level._id_011A3973390A71E8);
 
   if(!isDefined(level._id_3899105CEEC08FB8))
     level._id_3899105CEEC08FB8 = _id_4D81AE9CB22F4180("dvar_F4138AD8E0DE3AC6");
@@ -839,7 +839,7 @@ showdiscountsplash(_id_04400D6A8D876BD9) {
 }
 
 _id_8807282A387BB5B4() {
-  return getdvarint("dvar_E6B890D479B028F4", 0);
+  return getdvarint("br_kiosk_visual_marker_enabled", 0);
 }
 
 _id_F29B0D39F0DA104D() {
@@ -870,10 +870,10 @@ onprematchdone() {
 }
 
 dangercircletick(_id_819EDACDACB810E4, _id_E86632D645C137D0, _id_5D954F1724092F5A) {
-  if(_id_362C58E8BB39BCDA::isfeaturedisabled("kiosk") || getdvarint("dvar_AC54858B3FD07DAF", 0) == 1) {
+  if(_id_362C58E8BB39BCDA::isfeaturedisabled("kiosk") || getdvarint("scr_br_kiosk_ignore_circle", 0) == 1) {
     return;
   }
-  _id_52D59C928EB97C81 = _id_E86632D645C137D0 + getdvarfloat("dvar_64432E664D4AE36A", 0.0);
+  _id_52D59C928EB97C81 = _id_E86632D645C137D0 + getdvarfloat("scr_br_circle_object_long_distance_cleanup_threshold", 0.0);
   _id_C434624FF361BBA2 = _id_52D59C928EB97C81 * _id_52D59C928EB97C81;
 
   foreach(_id_CF635E78F21650CA in level.br_armory_kiosk.scriptables) {
@@ -892,7 +892,7 @@ dangercircletick(_id_819EDACDACB810E4, _id_E86632D645C137D0, _id_5D954F1724092F5
 }
 
 _id_1A1709943670772A() {
-  if(_id_362C58E8BB39BCDA::isfeaturedisabled("kiosk") || getdvarint("dvar_AC54858B3FD07DAF", 0) == 1) {
+  if(_id_362C58E8BB39BCDA::isfeaturedisabled("kiosk") || getdvarint("scr_br_kiosk_ignore_circle", 0) == 1) {
     return;
   }
   _id_31966DAE052C3D71 = [];
@@ -1014,7 +1014,7 @@ _id_96E56767B949C013(_id_61B36239E6C3D026, _id_3D329EBB0D03D6DB, _id_849E91C5E0D
   _id_2FA65F34EB9042F5 = spawnscriptable(_id_5715A6F63100CA0F, _id_61B36239E6C3D026.origin, _id_61B36239E6C3D026.angles);
   _id_11A7769E6C3C691F = "visible";
 
-  if(getdvarint("dvar_BE0526203E262092", 0) && getdvarint("dvar_BAC643B1A9D211A7", 0))
+  if(getdvarint("scr_ssc_use_buy_station", 0) && getdvarint("dvar_BAC643B1A9D211A7", 0))
     _id_11A7769E6C3C691F = "hidden";
 
   _id_2FA65F34EB9042F5 setscriptablepartstate("br_plunder_box", _id_11A7769E6C3C691F);
@@ -1793,7 +1793,7 @@ _findgivearmoramountanddropleftovers(_id_7F437A5779C8787C, _id_2737CAC9EE8F6098)
 
   _id_AC932F5B44405F3B = player scripts\mp\equipment::getequipmentmaxammo("equip_armorplate");
 
-  if(getdvarint("dvar_AD67CF67992FE5F2", 0))
+  if(getdvarint("scr_br_alt_mode_gg", 0))
     _id_CF60CDC4E2F0E3D0 = 2;
   else
     _id_CF60CDC4E2F0E3D0 = 5;

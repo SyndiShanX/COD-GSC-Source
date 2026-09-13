@@ -80,7 +80,7 @@ reset_path_node_placement() {
   struct.y_done = 0;
   struct.z_done = 0;
   struct.auto_write_to_map = 1;
-  struct.use_bsp_nodes = getdvarint("dvar_6DFA92B12C1B37B6", 1);
+  struct.use_bsp_nodes = getdvarint("scr_use_bsp_nodes", 1);
   struct.debug_boxes = getdvarint("dvar_621E43977DAE92FF", 0);
   struct.edge_placement = 1;
   struct.file_path = level.script + "_script_paths.map";
@@ -127,7 +127,7 @@ reset_path_node_placement() {
   struct.found_right_edge = 0;
   struct.found_up_edge = 0;
   struct.found_exposed_pos = 0;
-  struct.use_trace_data = getdvarint("dvar_7B41CE964C40BC15", 0);
+  struct.use_trace_data = getdvarint("scr_save_trace_data", 0);
   struct.save_trace_data = 0;
   struct.temp_trace_data = [];
   struct.temp_trace_data_colors = [];
@@ -768,7 +768,7 @@ close_map_write() {
       level notify("stop_creating_nodes");
   }
 
-  if(getdvarint("dvar_7B41CE964C40BC15", 0))
+  if(getdvarint("scr_save_trace_data", 0))
     level thread debug_node_array(data.all_node_positions);
 }
 
@@ -1382,7 +1382,7 @@ reposition_cover_node() {
   data.found_valid_node_pos = 0;
   data.temp_trace_data_colors = [];
 
-  if(getdvarint("dvar_7B41CE964C40BC15", 0)) {
+  if(getdvarint("scr_save_trace_data", 0)) {
     data.save_trace_data = 1;
     data.temp_trace_data[data.temp_trace_data.size] = starting_pos;
     data.temp_trace_data_colors[data.temp_trace_data_colors.size] = (1, 1, 1);
@@ -1826,7 +1826,7 @@ run_path_node_removal() {
     struct.origin = data.origin;
     data.all_node_positions[data.all_node_positions.size] = struct;
 
-    if(getdvarint("dvar_7B41CE964C40BC15", 0)) {
+    if(getdvarint("scr_save_trace_data", 0)) {
       data.trace_data[data.map_ent_index] = data.temp_trace_data;
       data.trace_data_colors[data.map_ent_index] = data.temp_trace_data_colors;
     }

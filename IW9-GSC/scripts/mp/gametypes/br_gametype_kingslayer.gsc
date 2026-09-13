@@ -22,7 +22,7 @@ brking_initfeatures() {
   if(getdvarint("dvar_2F45AF91DFB7A5A0", 0) == 1)
     _id_362C58E8BB39BCDA::enablefeature("allowLateJoiners");
 
-  setDvar("dvar_39A8907D7F184021", 1);
+  setDvar("scr_br_moving_circle_enabled", 1);
   setDvar("dvar_C0DBA6A7250AAD33", 1);
   setomnvar("ui_gulag_state", 1);
   setomnvar("ui_hide_redeploy_timer", 1);
@@ -41,8 +41,8 @@ brking_initfeatures() {
   level.showplacementsplashesandmusic = getdvarint("dvar_63908C5E06402524", 1);
   level.secondsbeforeplacementupdates = getdvarint("dvar_E616CB0E727859DD", 60);
   level.disablepercentageannouncements = getdvarint("dvar_69E6435403E5C322", 0);
-  level.lootleadermarkcount = getdvarint("dvar_3ADA79B2236A5C12", 3);
-  level.maxlootleadermarkcount = getdvarint("dvar_3ADA79B2236A5C12", 3);
+  level.lootleadermarkcount = getdvarint("scr_plunder_loot_leader_mark_count", 3);
+  level.maxlootleadermarkcount = getdvarint("scr_plunder_loot_leader_mark_count", 3);
   level.lootleadermarksize = getdvarint("dvar_1650346812659DF2", 1000);
   level.lootleaderoneperteam = getdvarint("dvar_5FD1126EC81D6B0B", 1) == 1;
   level.lootleadermarksizedynamic = getdvarint("dvar_1B7554A04B02683C", 0);
@@ -50,7 +50,7 @@ brking_initfeatures() {
   level.lootleadermarkstrongvalue = getdvarint("dvar_F53E6F6FDDBBBC11", 5000);
   level.lootleadermarkweaksize = getdvarint("dvar_FC8B22A888365974", 5000);
   level.lootleadermarkweakvalue = getdvarint("dvar_43D67F5054412E02", 1000);
-  level.lootleadermarksontopteams = getdvarint("dvar_66CAF7F753F08487", 3);
+  level.lootleadermarksontopteams = getdvarint("scr_plunder_loot_leader_mark_top_teams", 3);
   level._id_69F99BB835E36684 = getdvarint("dvar_2E8375198ED09E2A", 0);
   level.plundermusicfirst = getdvarfloat("dvar_24C7C305D1EAD986", 0.3);
   level.plundermusicsecond = getdvarfloat("dvar_3F1F73F0AEEC8FD4", 0.5);
@@ -63,7 +63,7 @@ brking_initfeatures() {
   level.tokenrespawnwaittime = getdvarint("dvar_728CBA7A2ADC64DB", level.autorespawnwaittime);
   level.incrementalrespawnpunish = getdvarint("dvar_FC3A0F4F0CDD615E", 0);
   level.incrementalrespawnpunishmax = getdvarfloat("dvar_5EB645F42926F53B", 15);
-  level.respawnheightoverride = getdvarint("dvar_8495AD89C3580163", 5000);
+  level.respawnheightoverride = getdvarint("scr_plunder_respawnheightoverride", 5000);
   level.respawntimedisable = getdvarint("dvar_73DBC19AD4C85D57", 0);
   level.parachutedeploydelay = getdvarfloat("dvar_12027360B079C1DB", 0.5);
   level._id_94F0E9B9A73DFD18 = getdvarint("dvar_D851FF5831A4337F", 1) == 1;
@@ -178,7 +178,7 @@ brking_initpostmain() {
   thread waitandstartscorepolling();
   level thread placementupdatewait();
 
-  if(getdvarfloat("dvar_81BE161D3102CC0E", 15.0) > 0.0)
+  if(getdvarfloat("scr_plunder_loot_leader_update_interval", 15.0) > 0.0)
     level thread updatelootleadersonfixedinterval();
 
   if(istrue(level.endmatchcameratransitions))
@@ -1401,7 +1401,7 @@ updatelootleadersonfixedinterval() {
   level notify("restartLootLeaders");
   level endon("restartLootLeaders");
   level endon("game_ended");
-  interval = getdvarfloat("dvar_81BE161D3102CC0E", 15.0);
+  interval = getdvarfloat("scr_plunder_loot_leader_update_interval", 15.0);
   _id_35D7D56101FB07A0 = getdvarfloat("dvar_B82244F91B963437", 5.0);
   _id_9C18968676DF1094 = getdvarint("dvar_114AA0DB563F4C19", 800);
   _id_32E688C1E2CF28C0 = getdvarint("dvar_4F47F4BD5CFEF308", 200);

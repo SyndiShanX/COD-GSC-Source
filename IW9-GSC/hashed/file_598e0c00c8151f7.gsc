@@ -1505,7 +1505,7 @@ getassignedspawnpoint(spawnpoints) {
 }
 
 enable_lbravo_player_infil() {
-  if(getdvarint("dvar_C55DC89EF275CDAA", 0) == 1) {
+  if(getdvarint("scr_skip_infils", 0) == 1) {
     return;
   }
   if(!scripts\cp\utility::_id_A3577E8E6C88A56B()) {
@@ -1742,11 +1742,11 @@ _id_52343D5C1B190CF0() {
       setDvar("scr_player_healthregentime", 0);
       setDvar("scr_team_fftype", 4);
       setDvar("scr_game_allowkillcam", 0);
-      setDvar("dvar_A4D532F42D919827", 0);
-      setDvar("dvar_D75D5638785F3B09", 0);
+      setDvar("scr_player_allowarmor", 0);
+      setDvar("scr_player_spawnarmor", 0);
       setDvar("dvar_08AD1AB9436BCCCA", 0);
       setDvar("dvar_28D450F7F28644B7", 0);
-      setDvar("dvar_8A1945C94D5092C2", 0);
+      setDvar("scr_game_allow_loot", 0);
     }
 
     _id_14609B809484646E::_id_8ECE37593311858A(::_id_3708850EAB3864C2);

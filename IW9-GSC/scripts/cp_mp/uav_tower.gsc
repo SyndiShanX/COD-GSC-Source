@@ -7,7 +7,7 @@ init(_id_07B60FA5A9F22356) {
   if(!_id_0FCD65DE73A5FD25() || isDefined(level._id_A1141D47AB94D2A1)) {
     return;
   }
-  if(getdvarint("dvar_2B66F14A52279087", 0) && getdvarint("scr_ssc_enabled", 0)) {
+  if(getdvarint("scr_ssc_use_uav_tower", 0) && getdvarint("scr_ssc_enabled", 0)) {
     scripts\mp\flags::_id_1240434F4201AC9D("ssc_initialized");
     _id_067FB1233E876ED8::_id_4F7660CFD85CD517("uav_tower", ::_id_E6C1C35181A2870F);
     _id_067FB1233E876ED8::_id_412F527EF0863F0E("uav_tower", ::_id_DC8FD3D5775FE8BD);
@@ -20,11 +20,11 @@ init(_id_07B60FA5A9F22356) {
   }
 
   script_model_anims();
-  level._id_CB86CA442250CA58 = getdvarfloat("dvar_401140680B9E3119", 3.0);
+  level._id_CB86CA442250CA58 = getdvarfloat("scr_uav_tower_use_time", 3.0);
   level._id_6ACF91BBF5273E8F = getdvarint("dvar_BD581B3A13B81DB8", 5000);
   level._id_39F69F7DFC40A323 = getdvarint("dvar_E466D59282ECB790", 3000);
   level._id_AB2C4542C95656CB = getdvarint("dvar_D6193A209D3948A4", 3);
-  level._id_20EBE48820FD70A2 = getdvarint("dvar_62BA9CF492C77F30", 120);
+  level._id_20EBE48820FD70A2 = getdvarint("scr_uav_tower_uptime", 120);
   level._id_C5BBB7914CB760CF = getdvarint("dvar_25AF310C5BC4BC7C", 3);
   level._id_EB56EA0BFDAA4011 = getdvarint("dvar_4704CC015DB60AD2", 3);
   level._id_174FE9ECCE8FB96B = randomintrange(level._id_C5BBB7914CB760CF, level._id_EB56EA0BFDAA4011 + 1);
@@ -33,7 +33,7 @@ init(_id_07B60FA5A9F22356) {
   level._id_79228B5606945E9F = getdvarint("dvar_2FD1561A14BC4D7D", 1);
   level._id_815479DA1DAFBDB0 = getdvarint("dvar_45F42BCB4E5D758D", 0);
   level._id_66BF5BFCA21A8D52 = getdvarint("dvar_0C7C9D45312DD7EC", 1);
-  level._id_D507E35282B50614 = getdvarint("dvar_87EDEC4CE0D7B969", 0);
+  level._id_D507E35282B50614 = getdvarint("scr_uav_tower_cost", 0);
   level._id_DB9587440497015C = getdvarint("dvar_086826C94B10ECAB", 0);
   level._id_9F740C9281D0C7F4 = getdvarint("dvar_5569456C0EFF0D5B", 0);
   level._id_38C78BAB762BFFF6 = [];
@@ -42,7 +42,7 @@ init(_id_07B60FA5A9F22356) {
   level._id_4414DBBF9D80D75D = [];
   scripts\engine\scriptable::scriptable_addusedcallbackbypart("dmz_uav_tower", ::_id_888A7CB98B23E26A);
 
-  if(!getdvarint("dvar_2B66F14A52279087", 0) || !getdvarint("scr_ssc_enabled", 0))
+  if(!getdvarint("scr_ssc_use_uav_tower", 0) || !getdvarint("scr_ssc_enabled", 0))
     level thread _id_D45B1FDDB87CF6BC();
 
   thread _id_02A905DA0882C958();

@@ -159,7 +159,7 @@ _id_DFFAC413ED66BCD0(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
   if(_id_B2883531AFA6B83D || _id_C99801D3991FA429)
     idflags = idflags | level.idflags_br_armor_hit;
 
-  if(getdvarint("dvar_DF80C6D770BA0231", 1) == 1) {
+  if(getdvarint("scr_agent_hitmarkers", 1) == 1) {
     _id_1DA1A66B5C6A06A7 = _id_64D2A3801BD9AD7E + _id_9285B238A06E0C02;
     _id_986B2E0350629522 = 0;
     iskillstreakweapon = 0;

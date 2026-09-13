@@ -41,15 +41,15 @@ main() {
   level.bypassclasschoicefunc = scripts\mp\class::alwaysgamemodeclass;
   level.nosuspensemusic = 1;
   level.requiredplayercountoveride = 1;
-  level.requiredplayercount["allies"] = getdvarint("dvar_803B34B433CA1A24", 3);
-  level.requiredplayercount["axis"] = getdvarint("dvar_803B34B433CA1A24", 3);
+  level.requiredplayercount["allies"] = getdvarint("ballmode_requiredplayercount", 3);
+  level.requiredplayercount["axis"] = getdvarint("ballmode_requiredplayercount", 3);
 
   if(getdvarint("dvar_CD7A289C3A33CEDA", 0) != 0)
     level.onplayerkilled = ::onhotfootplayerkilled;
 
   game["dialog"]["offense_obj"] = "iw9_gmst_anno_uktl_gsoa";
   game["dialog"]["defense_obj"] = "iw9_gmst_anno_uktl_gsoa";
-  level.testtdmanywhere = getdvarint("dvar_157F06AFF3C1F357", 0);
+  level.testtdmanywhere = getdvarint("scr_tdmanywhere", 0);
   level.tdmanywhere_dropheight = getdvarfloat("dvar_0C692D2A11DD6615", 1000);
   level.tdmanywhere_perpenoffset = getdvarfloat("dvar_631C58033F43C2DC", 2048);
   level.tdmanywhere_distoffset = getdvarfloat("dvar_F314048C87AE28AA", 4092);
@@ -76,7 +76,7 @@ main() {
   thread _id_2EF7BEF336791C1E();
   thread _id_0EAE183E660ED1BD();
   thread _id_B98A63C3E6F4D6DB();
-  setDvar("dvar_8CF08F678CE293C9", 1);
+  setDvar("cg_vehiclecameraoverridepolarclamping", 1);
 }
 
 _id_B98A63C3E6F4D6DB() {
@@ -440,7 +440,7 @@ _id_E69BA41CCDF770AF(_id_0979E96006D8A4E2) {
     _id_373C494D2156CD01 playSound("equip_codball_shockstick_pickup");
     _id_373C494D2156CD01._id_A9FBDE0565FC4BE7 = 1;
     _id_373C494D2156CD01 setclientomnvar("ballmode_grenade", _id_373C494D2156CD01._id_A9FBDE0565FC4BE7);
-    wait(getdvarint("dvar_5DA7E98D7F5DD03E", 20));
+    wait(getdvarint("ballmode_grenade_respawn", 20));
     pickup setscriptablepartstate("grenade_pickup", "ready", 1);
     playsoundatpos(_id_0979E96006D8A4E2.origin, "equip_codball_shockstick_spawn");
   }
@@ -1118,7 +1118,7 @@ initspawns() {
   level.spawnmins = (0, 0, 0);
   level.spawnmaxs = (0, 0, 0);
 
-  if(getdvarint("dvar_A464CB031C16EE87", 0) > 0)
+  if(getdvarint("t10", 0) > 0)
     scripts\mp\spawnlogic::setactivespawnlogic("Default", "Crit_Default");
   else if(isDefined(scripts\cp_mp\utility\game_utility::getlocaleid()))
     scripts\mp\spawnlogic::setactivespawnlogic("BigTDM", "Crit_Frontline");
@@ -1143,9 +1143,9 @@ initspawns() {
   scripts\mp\spawnlogic::registerspawnset("fallback", _id_3A5288F40C8BE099);
 
   if(istrue(level.testtdmanywhere)) {
-    x = getdvarfloat("dvar_B6294C84C04E377B", randomfloatrange(-4096, 4096));
-    y = getdvarfloat("dvar_B6294B84C04E3548", randomfloatrange(-4096, 4096));
-    z = getdvarfloat("dvar_B6294E84C04E3BE1", randomfloatrange(0, 512));
+    x = getdvarfloat("scr_tdmanywhere_centerx", randomfloatrange(-4096, 4096));
+    y = getdvarfloat("scr_tdmanywhere_centery", randomfloatrange(-4096, 4096));
+    z = getdvarfloat("scr_tdmanywhere_centerz", randomfloatrange(0, 512));
     level.mapcenter = (x, y, z);
     tdmanywhere_debugshowlocs();
   } else {

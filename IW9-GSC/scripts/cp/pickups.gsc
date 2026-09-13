@@ -4,10 +4,10 @@
 ***********************************************/
 
 init() {
-  setDvar("dvar_A6A9B41B654AFD1D", 1);
+  setDvar("scr_game_cash", 1);
   level._id_E247454AC2869696 = getdvarint("dvar_005FCBCE13EF8D5F", 9);
   level._id_C59C301EAABC2E32 = getdvarint("dvar_19FAE1AAD58E8C50", 0);
-  level.br_plunder_enabled = getdvarint("dvar_A6A9B41B654AFD1D", 0);
+  level.br_plunder_enabled = getdvarint("scr_game_cash", 0);
   level._id_1D814F83596D0A02 = getdvarint("dvar_07A1DA73FA673ED8", 1);
   level._id_A7F81DFDC88E53E6 = 1;
   level._id_201C841C4668A94F = "dmzBackpack";
@@ -163,7 +163,7 @@ initarrays() {
           _id_92FCE7B1696254E3 = _id_4BB9768282D4260D;
           camo = undefined;
 
-          if(getdvarint("dvar_AD67CF67992FE5F2", 0))
+          if(getdvarint("scr_br_alt_mode_gg", 0))
             camo = "camo_11a";
 
           fullweaponobj = undefined;
@@ -188,7 +188,7 @@ initarrays() {
           if(isDefined(_id_FC5B5CABB888A488) && _id_FC5B5CABB888A488.size)
             _id_7CE98C8199BE3D76 = strtok(_id_FC5B5CABB888A488, _id_55DFF3C24D1396C9);
 
-          if(getdvarint("dvar_AD67CF67992FE5F2", 0))
+          if(getdvarint("scr_br_alt_mode_gg", 0))
             fullweaponobj = _id_2669878CF5A1B6BC::buildweapon(_id_92FCE7B1696254E3, _id_7CE98C8199BE3D76, "camo_11a", "none", -1);
           else
             fullweaponobj = _id_2669878CF5A1B6BC::buildweapon(_id_92FCE7B1696254E3, _id_7CE98C8199BE3D76, "none", "none", -1);
@@ -351,12 +351,12 @@ initarrays() {
   level.br_pickups._id_EC7422F11A61C100 = "MP/BR_EQUIP_DENY_BACKPACK_LESS";
   level.br_pickups._id_7BD397B2E9D8A434 = "MP/BR_EQUIP_DENY_PLATE_CARRIER_SAME";
   level.br_pickups.br_dropoffsets = [(24, 24, 6), (-24, -24, 6), (24, -24, 6), (-24, 24, 6), (48, 0, 6), (-48, 0, 6), (0, -48, 6), (0, 48, 6), (72, 0, 6), (-72, 0, 6), (0, -72, 6), (0, 72, 6), (72, -72, 6), (-72, 72, 6), (-72, -72, 6), (72, 72, 6)];
-  level.br_pickups.respawntokenenabled = getdvarint("dvar_C9D9BC1BAE348282", 1);
-  level.br_pickups.respawntokenclosewithgulag = getdvarint("dvar_8603626DC2EC647D", 0);
+  level.br_pickups.respawntokenenabled = getdvarint("scr_br_respawn_token", 1);
+  level.br_pickups.respawntokenclosewithgulag = getdvarint("scr_br_respawn_token_gulag", 0);
   level.br_pickups._id_AD49A38DD7C4C10F = undefined;
   level.br_pickups._id_3B53BC0EEE6AE84E = undefined;
 
-  if(getdvarint("dvar_249A73868C9CD7D8", 0))
+  if(getdvarint("bg_weaponautograboptionsenabled", 0))
     _id_F8B204E807CC62ED();
 
   if(_id_B1DD9DCAE2F63965())
@@ -1960,7 +1960,7 @@ takeweaponpickup(pickupent, _id_DB943473454F6EA6) {
   }
 
   if(_id_7DC30386B50647A1) {
-    if(istrue(pickupent.isautouse) && getdvarint("dvar_F84E49A704687827", 0)) {
+    if(istrue(pickupent.isautouse) && getdvarint("bg_weapondiscardoptionsenabled", 0)) {
       _id_0EC22A950F210E39 = _id_531CB1BE084314F7::_id_823964AA15B30575();
       _id_7B9DE6DB6A90DBE7 = isDefined(_id_0EC22A950F210E39) && !issameweapon(_id_0EC22A950F210E39, self getcurrentweapon());
     }
@@ -3237,7 +3237,7 @@ initscriptablemanagement() {
   _id_962A30A9BB8C0F09.scriptables = [];
   _id_962A30A9BB8C0F09.scriptablesstartid = 0;
   _id_962A30A9BB8C0F09.scriptablescurid = 0;
-  _id_962A30A9BB8C0F09.scriptablesmax = getdvarint("dvar_3A100E962F0A003A", 750);
+  _id_962A30A9BB8C0F09.scriptablesmax = getdvarint("scr_br_pickupscriptablesmax", 750);
   _id_962A30A9BB8C0F09.scriptablescleanupbatchsize = getdvarint("dvar_1E71982A0A539739", 10);
 }
 
@@ -3764,7 +3764,7 @@ dropbrequipment(_id_7F437A5779C8787C, _id_1E736A37C3737585, equipmentref) {
 
       if(isDefined(_id_FEB782334DD23A66)) {
         _id_CB4FAD49263E20C4 = getitemdroporiginandangles(_id_65CAD465FD8E737C, self.origin, self.angles, self);
-        _id_1AD2DB70C8D01F51 = isalive(self) || getdvarint("dvar_F74983A33E4CE283", 0);
+        _id_1AD2DB70C8D01F51 = isalive(self) || getdvarint("scr_br_allow_auto_pickup_dropped_tactical_gadgets", 0);
         item = spawnpickup(_id_FEB782334DD23A66, _id_CB4FAD49263E20C4, ammocount, 1, undefined, _id_1AD2DB70C8D01F51);
         _id_2F4E0022C686DBE6(item);
       }
@@ -4042,7 +4042,7 @@ _id_EFDDDF60C5DB058C(pickupent, _id_A5B2C541413AA895) {
   if(isDefined(pickupent.scriptablename)) {
     if(_id_531CB1BE084314F7::isplunder(pickupent.scriptablename))
       _id_09D5BC8E32EE3635 = getcashsoundaliasforplayer(self, pickupent.scriptablename);
-    else if(isDefined(level.br_pickups.br_pickupsfx[pickupent.scriptablename]) && level.br_pickups.br_pickupsfx[pickupent.scriptablename].size > 0 && !(getdvarint("dvar_BE1B706F310C8E63", 0) != 0 && level.br_pickups.br_pickupsfx[pickupent.scriptablename] == "br_legendary_loot_pickup"))
+    else if(isDefined(level.br_pickups.br_pickupsfx[pickupent.scriptablename]) && level.br_pickups.br_pickupsfx[pickupent.scriptablename].size > 0 && !(getdvarint("scr_br_skiplegendarypickupsound", 0) != 0 && level.br_pickups.br_pickupsfx[pickupent.scriptablename] == "br_legendary_loot_pickup"))
       _id_09D5BC8E32EE3635 = level.br_pickups.br_pickupsfx[pickupent.scriptablename];
     else if(isweaponpickupitem(pickupent))
       _id_09D5BC8E32EE3635 = "br_pickup_weap";

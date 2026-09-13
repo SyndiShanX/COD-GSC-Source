@@ -89,14 +89,14 @@ _id_0FBB2D5E09E58DB7() {
   if(_id_8812000C33AED3C9 && _id_CC5318567913F501)
     eventduration = _id_2695A20D4011076D::_id_ABBFB4D18D1A9CA7();
 
-  _id_5F651E1139EF776F = getdvarint("dvar_394BCE38A6950030", 15.0);
+  _id_5F651E1139EF776F = getdvarint("scr_br_pe_firesale_minduration", 15.0);
   eventduration = max(eventduration, _id_5F651E1139EF776F);
   return eventduration;
 }
 
 calculateeventstarttime() {
-  _id_87940078241E4580 = getdvarfloat("dvar_3549564826254716", 795.0);
-  _id_07AF9598177DC2DE = getdvarfloat("dvar_356D4848264DA304", 1110.0);
+  _id_87940078241E4580 = getdvarfloat("scr_br_pe_firesale_starttime_min", 795.0);
+  _id_07AF9598177DC2DE = getdvarfloat("scr_br_pe_firesale_starttime_max", 1110.0);
 
   if(_id_07AF9598177DC2DE > _id_87940078241E4580)
     return randomfloatrange(_id_87940078241E4580, _id_07AF9598177DC2DE);

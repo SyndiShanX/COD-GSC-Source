@@ -6,7 +6,7 @@
 init() {
   _id_046CF752D93DC17B::init();
 
-  if(getdvarint("dvar_74ABB928AB13113B", 0) && !getdvarint("dvar_82BDE055B11E6698", 0) && isDefined(level._id_C83AA9DBC3654AFA)) {
+  if(getdvarint("scr_br_elite_broken_arrow", 0) && !getdvarint("dvar_82BDE055B11E6698", 0) && isDefined(level._id_C83AA9DBC3654AFA)) {
     dropstruct = _id_046CF752D93DC17B::_id_69B2E5235BFB7998("br_elite_arrow_bombsite_drop", "military_carepackage_01_cq");
     dropstruct _id_046CF752D93DC17B::_id_80E49E34FC8D70B8("br_elite_arrow_bombsite_drop", "planeDropRun", ::_id_4583DCD65450A629);
     dropstruct _id_046CF752D93DC17B::_id_80E49E34FC8D70B8("br_elite_arrow_bombsite_drop", "spawnDropCrate", ::_id_849AA3A04CEF2D5C);

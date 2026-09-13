@@ -205,7 +205,7 @@ _id_DAA39D0822248E1C() {
     return;
   }
   level._id_03AE5F7DE11D142F = ::_id_CF12CD77AB7CDC78;
-  level._id_4FE0C43951F6CE37 = getdvarint("dvar_2E4907CCD20A8761", 0);
+  level._id_4FE0C43951F6CE37 = getdvarint("sv_ai_spawn_director_enabled", 0);
   level._id_F3A4ECD257A6CA36 = [];
   level._id_BB30AF111A46C7A3 = [];
 }

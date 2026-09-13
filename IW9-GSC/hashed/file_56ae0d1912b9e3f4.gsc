@@ -310,7 +310,7 @@ _id_15D8E2B3B6EED007() {
   level._id_215CD837F06FA79E._id_BE6E74B71830F399[_id_A2B11613E4C46ED8] = 1500;
   level._id_215CD837F06FA79E._id_AC09429F0F9FF18F[_id_A2B11613E4C46ED8] = "Wave Four: Velikan.";
   level._id_215CD837F06FA79E._id_4757143D8FD7202C[_id_A2B11613E4C46ED8] = 12;
-  scripts\cp\utility::_id_0C72FF775CD61B11("dvar_B773758221A0C100", 7, 15);
+  scripts\cp\utility::_id_0C72FF775CD61B11("scr_outofboundstime", 7, 15);
   level.outofboundstime = 7;
   level._id_ED42A79A82EED1E4 = 1;
   level._id_215CD837F06FA79E._id_B4703EA502094BC1 = 999;
@@ -691,7 +691,7 @@ _id_D525F1534752BFC7() {
   setDvar("dvar_BC802DEB1FF2A842", 1);
   setDvar("dvar_A474FDC25AD6AB13", 0);
   setDvar("dvar_88E213738A43D195", 1);
-  setDvar("dvar_C55DC89EF275CDAA", 1);
+  setDvar("scr_skip_infils", 1);
   setDvar("dvar_B13C2AA9660602C9", 1);
   setDvar("dvar_BF4E690B12A81B75", 0);
   setDvar("dvar_88F99F8AAD71F40D", 0);

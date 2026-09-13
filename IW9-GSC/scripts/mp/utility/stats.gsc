@@ -119,12 +119,12 @@ _id_785A9AED533E514C() {
 
 getplayerdataloadoutgroup() {
   if(istrue(level._id_EC2FB549B15AD827)) {
-    if(getdvarint("dvar_6299BE121597B3C5", 0))
+    if(getdvarint("leagueplay_loadouts_enabled", 0))
       return "leagueplayloadouts";
     else
       return "rankedloadouts";
   } else if(istrue(level._id_77907D733ABE8B63)) {
-    if(getdvarint("dvar_1FBC8F2B34C06713", 0))
+    if(getdvarint("wz_leagueplay_loadouts_enabled", 0))
       return "wzleagueplayloadouts";
     else
       return "wzrankedloadouts";

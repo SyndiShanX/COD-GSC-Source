@@ -459,7 +459,7 @@ _id_E7EC9888699DD8CF() {
     if(_id_0CB44A7B7EDD34BD != -1)
       _id_2E1D1AF8AFE39BA8 = _id_0CB44A7B7EDD34BD;
   } else
-    _id_2E1D1AF8AFE39BA8 = getdvarint("dvar_FDE1113CE9981D91", 3);
+    _id_2E1D1AF8AFE39BA8 = getdvarint("scr_br_plate_carrier_start_level", 3);
 
   _id_0347AA4935F42810 = _id_2CEDCC356F1B9FC8::_id_C2F2BB9E0AE9A454(_id_2E1D1AF8AFE39BA8);
   _id_7E52B56769FA7774::_id_E98A5A4E0E001AC3(self, _id_0347AA4935F42810);
@@ -1351,7 +1351,7 @@ _id_C6B3799B231916BB(victim, dropstruct) {
   [_id_BF23A60678978C19, _id_A0E9FEF038504BD0, _id_C299C08E4B8A8E56, _id_C31356A794D8CB46, _id_0EC22A950F210E39, _id_DFDB8AEFC4328EA0] = _id_45013DFE9531841F(victim, dogtag);
 
   if(_id_4FF6E95896E65939.size > 0 || _id_BF23A60678978C19.size > 0) {
-    if(istrue(level._id_A2ED7C61B6DA2D72) && scripts\mp\utility\game::isteamreviveenabled() && !getdvarint("dvar_4536E887A50F692E", 0)) {
+    if(istrue(level._id_A2ED7C61B6DA2D72) && scripts\mp\utility\game::isteamreviveenabled() && !getdvarint("scr_test_backpack", 0)) {
       _id_04F6CDE716E0C3D7 = undefined;
       _id_6FB67C8525B1D79E = undefined;
       _id_3EF503345DC57957 = undefined;

@@ -300,7 +300,7 @@ _id_279964C2C969DDA3() {
   level thread _id_390BB92B200E27FA::_id_B1E1270400324B2C();
   scripts\cp\utility::_id_B4CA8A0FC3169F35();
 
-  if(getdvarint("dvar_C55DC89EF275CDAA", 0) == 1)
+  if(getdvarint("scr_skip_infils", 0) == 1)
     scripts\engine\utility::flag_set("infil_complete");
   else {
     checkpoint = scripts\cp\cp_checkpoint::_id_9EED75023A958C18();
@@ -1960,11 +1960,11 @@ _id_8D5C19A9B693E913() {
 _id_DC0BC83A31193177() {
   self endon("disconnect");
   wait 1;
-  self setclientdvar("dvar_71C6C0B8428E44A7", 0);
+  self setclientdvar("cg_disable_user_fov", 0);
 }
 
 _id_856F3155AB36A710(animstruct) {
-  animstruct.origin = getdvarvector("dvar_223915C6339DBC10", (0, 0, 0));
+  animstruct.origin = getdvarvector("br_infil_anim_pos", (0, 0, 0));
   animstruct.angles = (0, 0, 0);
   animstruct._id_E73CE295AE9D4104 = animstruct spawn_script_model("generic_prop_x30", "camera");
   animstruct._id_E73CE295AE9D4104 linkTo(animstruct.c130, "", (0, 0, 0), (0, 0, 0));

@@ -32,7 +32,7 @@ spawned() {
   _id_4C9BD9A3BF3F8CF7::_id_C827480E6D21A271();
 
   if(_id_D2C758DFB50B7949 && !scripts\mp\gamelogic::_id_1147BBC93EA9B83C()) {
-    _id_21E1F88E3B6C27BB = getdvarint("dvar_611D72C9417EE39E", 0);
+    _id_21E1F88E3B6C27BB = getdvarint("scr_br_plunder_start_amount", 0);
     _id_D437BEA518F94DD0 = getdvarint("dvar_B26DA3EE25C25A6C", _id_21E1F88E3B6C27BB);
     _id_6AFF3948CF4CCA03::playersetplundercount(_id_D437BEA518F94DD0);
   }
@@ -104,7 +104,7 @@ _id_F09BCFCFE853F63F() {
 }
 
 _id_6ACBB2AF086C64FA() {
-  if(getdvarint("dvar_BEAAC6D270585321", 0)) {
+  if(getdvarint("online_matchmaking_is_league_play_br", 0)) {
     _id_602223D6E01FD5B5 = _id_45C730EB0C47724E();
     _id_22BA435FE8F3E8F6 = _id_9467E76F2BDBD0EB(_id_602223D6E01FD5B5, _id_6C4F073450168827(1));
   } else {
@@ -186,7 +186,7 @@ _id_6C4F073450168827(_id_4DA07EB3D5ED2BE5) {
   } else {
     _id_47EF1080427D4D3A = 1;
     _id_C6F4DD3F470D961E = "scr_skill_based_bot_difficulties_config_";
-    _id_64ED35DBEB7BEB76 = getdvarint("dvar_8B89C88EBBDE4299");
+    _id_64ED35DBEB7BEB76 = getdvarint("scr_skill_based_bot_difficulties_config_count");
   }
 
   if(_id_64ED35DBEB7BEB76 <= 0)

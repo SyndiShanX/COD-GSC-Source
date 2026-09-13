@@ -748,7 +748,7 @@ helperdrone_watchscramblereffectdist(owner) {
 
   self._id_88F72D2C0421F8B1 = [];
   _id_04EFAF0D84225539 = 0;
-  _id_105FCA5E47D7EE56 = getdvarfloat("dvar_97A2272A19AD3843", 1000);
+  _id_105FCA5E47D7EE56 = getdvarfloat("compassscramblerradius", 1000);
   _id_F3B7CC3138382DFB = _id_105FCA5E47D7EE56 * _id_105FCA5E47D7EE56;
   _id_556DB0B72A96514E = physics_createcontents(["physicscontents_characterproxy"]);
   _id_863C619037F3AC74 = self.origin - (0, 0, 3000);
@@ -878,7 +878,7 @@ helperdrone_watchscramblestrength(_id_479E3F358A1F244E, _id_699323575339379A) {
   _id_479E3F358A1F244E._id_EF42676D437AB065 = scripts\engine\utility::_id_53C4C53197386572(_id_479E3F358A1F244E._id_EF42676D437AB065, []);
   _id_D0F37CCCE4E88C3D = 0;
   _id_8CE1ABD1A0602291 = 0;
-  _id_105FCA5E47D7EE56 = getdvarfloat("dvar_97A2272A19AD3843", 1000);
+  _id_105FCA5E47D7EE56 = getdvarfloat("compassscramblerradius", 1000);
 
   if(isDefined(_id_479E3F358A1F244E._id_32EFB854DF6D5296))
     _id_105FCA5E47D7EE56 = _id_479E3F358A1F244E._id_32EFB854DF6D5296;

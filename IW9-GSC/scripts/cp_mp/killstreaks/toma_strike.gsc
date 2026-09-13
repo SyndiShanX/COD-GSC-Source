@@ -410,7 +410,7 @@ tomastrike_attacktarget(_id_EBFC9454321CB5C3, vehicle, marker, streakinfo, _id_6
 findunobstructedfiringinfo(_id_27C77D35F1DE2019, _id_A0EDD3F59D938FB1, _id_D77253C873D2B420, _id_558047C7AC5A2D65, _id_3C5A1B26C6973C2A) {
   gravity = getdvarint("bg_gravity", 800);
 
-  if(getdvarint("dvar_12CA000DD2976EBC", 0))
+  if(getdvarint("bg_bristotallynormal", 0))
     gravity = getdvarfloat("dvar_02F4CF62DF1AF9A6", 125);
 
   _id_FA378E997A33A137 = spawnStruct();

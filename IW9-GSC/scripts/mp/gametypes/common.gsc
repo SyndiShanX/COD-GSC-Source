@@ -28,15 +28,15 @@ setupcommoncallbacks() {
 }
 
 _id_6B6AB19619B97010() {
-  setdynamicdvar("dvar_8D99F31DD75FCF9C", getmatchrulesdata("commonOption", "aiSpawnOnDeath"));
-  setdynamicdvar("dvar_148266EA4825C4B0", getmatchrulesdata("commonOption", "aiSpawnOnDeath"));
-  setdynamicdvar("dvar_BA25FABADE697401", getmatchrulesdata("commonOption", "buyMode"));
+  setdynamicdvar("scr_game_aiagentsinmp", getmatchrulesdata("commonOption", "aiSpawnOnDeath"));
+  setdynamicdvar("scr_game_aispawnondeath", getmatchrulesdata("commonOption", "aiSpawnOnDeath"));
+  setdynamicdvar("scr_game_buymode", getmatchrulesdata("commonOption", "buyMode"));
   setdynamicdvar("dvar_4E33F79A5437AA5C", getmatchrulesdata("commonOption", "classForceLoadouts"));
   setdynamicdvar("dvar_A88F1329561BC6E1", getmatchrulesdata("commonOption", "carePackageDropTime"));
   setdynamicdvar("dvar_127490A7577F169F", getmatchrulesdata("commonOption", "tier1ModeEnabled"));
   setdynamicdvar("dvar_A2C2C2007177185E", getmatchrulesdata("commonOption", "hardcoreModeEnabled"));
   setdynamicdvar("calloutmarkerping_enabled", getmatchrulesdata("commonOption", "allowCalloutMarkerPing"));
-  setdynamicdvar("dvar_D20B1B97FDEFA92A", getmatchrulesdata("commonOption", "allowCalloutMarkerPing"));
+  setdynamicdvar("calloutmarkerping_wheel_enabled", getmatchrulesdata("commonOption", "allowCalloutMarkerPing"));
 }
 
 _id_3149B2E03CE13DD9() {
@@ -447,7 +447,7 @@ addspecialistdialog() {
 }
 
 _id_E9AD38AF5A6BEDCD() {
-  if(getdvarint("dvar_BA25FABADE697401", 0) == 1)
+  if(getdvarint("scr_game_buymode", 0) == 1)
     _id_88B47710BECE931F();
 }
 
@@ -461,7 +461,7 @@ _id_88B47710BECE931F() {
   level._id_1E17E3480B1D264D = 1;
   level.armoronweaponswitchlongpress = 1;
   setDvar("dvar_ED6E4FFA933AF621", 1);
-  setDvar("dvar_8A1945C94D5092C2", 1);
+  setDvar("scr_game_allow_loot", 1);
   setDvar("loot_table_name", "mp/loot/br/default/loot_item_defs.csv");
   setDvar("loot_table_zones", " mp/loot/core/risk/loot_table_zones.csv");
   setDvar("bg_piggybackArmorOnNVG", 1);
@@ -917,10 +917,10 @@ _id_5C5F49069EB558EC(_id_D7B9856A19F9B6B5, loadout, _id_995DC1BB9AC37BF2) {
 }
 
 _id_9081E2D33D0B53F9() {
-  if(getdvarint("dvar_8D99F31DD75FCF9C", 0) == 1) {
+  if(getdvarint("scr_game_aiagentsinmp", 0) == 1) {
     level._id_D0D511BA6517842A = 1;
 
-    if(getdvarint("dvar_148266EA4825C4B0", 0) == 1) {
+    if(getdvarint("scr_game_aispawnondeath", 0) == 1) {
       level._id_5DF506226294AA65 = ::_id_5DF506226294AA65;
       level._id_484F1A4BDB5CDA1E = ::_id_484F1A4BDB5CDA1E;
     }
@@ -1864,11 +1864,11 @@ _id_52343D5C1B190CF0() {
       setDvar("scr_player_maxhealth", 50);
       setDvar("scr_team_fftype", 4);
       setDvar("scr_game_allowkillcam", 0);
-      setDvar("dvar_A4D532F42D919827", 0);
-      setDvar("dvar_D75D5638785F3B09", 0);
+      setDvar("scr_player_allowarmor", 0);
+      setDvar("scr_player_spawnarmor", 0);
       setDvar("dvar_08AD1AB9436BCCCA", 0);
       setDvar("dvar_28D450F7F28644B7", 0);
-      setDvar("dvar_8A1945C94D5092C2", 0);
+      setDvar("scr_game_allow_loot", 0);
     }
 
     _id_451A1A9BD9613164::_id_8ECE37593311858A(::_id_3708850EAB3864C2);

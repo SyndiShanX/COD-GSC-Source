@@ -4,7 +4,7 @@
 *************************************************/
 
 _id_AD4172A44F169CB6() {
-  if(!getdvarint("dvar_FA0D15FA95281A06", 1)) {
+  if(!getdvarint("scr_dmz_samsites", 1)) {
     return;
   }
   level._id_D57C61FE001F1707 = spawnStruct();

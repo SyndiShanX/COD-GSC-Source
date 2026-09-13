@@ -99,7 +99,7 @@ _id_15FD33EB83CE9723() {
       scriptbundlename = "score_event_list_cdl_" + _id_C8F690457A04A764;
   }
 
-  if(getdvarint("dvar_A464CB031C16EE87") > 0)
+  if(getdvarint("t10") > 0)
     scriptbundlename = scriptbundlename + "_t10_mp";
   else if(getdvarint("jup") > 0) {
     if(scripts\cp_mp\utility\game_utility::_id_0BEFF479639E6508())
@@ -108,7 +108,7 @@ _id_15FD33EB83CE9723() {
       scriptbundlename = scriptbundlename + "_jup_mp";
   } else if(getdvarint("dvar_3A8BBF8D767FB421") > 0)
     scriptbundlename = scriptbundlename + "_iw9_mp_dmz_biolab";
-  else if(getdvarint("dvar_AAE99DD3B5AD1A77") > 0)
+  else if(getdvarint("score_event_dmz_biobunker") > 0)
     scriptbundlename = scriptbundlename + "_iw9_mp_dmz_biobunker";
   else if(scripts\cp_mp\utility\game_utility::_id_6C1FCE6F6B8779D5() == "resurgence")
     scriptbundlename = scriptbundlename + "_iw9_mp_resurgence";

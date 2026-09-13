@@ -9,15 +9,15 @@ init() {
   if(_id_16E73B10A8080DD2) {
     level.modifyplayerdamage = ::_id_B18F9E23B7BBBC7F;
     level._id_3FF7C73209FCF59D = getdvarint("dvar_8DCDF86E1A8C0268", 1) == 1;
-    level._id_C701C6304D25847B = getdvarint("dvar_FE4E43D689D53652", 1);
-    level._id_62B412340037B5F2 = getdvarfloat("dvar_B8697B26628BF8F9", 15.0);
+    level._id_C701C6304D25847B = getdvarint("scr_skydivespawnprotectiontimeoutenabled", 1);
+    level._id_62B412340037B5F2 = getdvarfloat("scr_skydivespawnprotectiontimeoutduration", 15.0);
     level._id_762E79833C568872 = getdvarfloat("dvar_9B573A0D1AA67773", 0.2);
     level._id_A616020822A64869 = getdvarfloat("dvar_2D766A7032695E80", 0.1);
-    level._id_F56012F3862E7747 = getdvarint("dvar_75A6778B7AFBE4AE", 2500);
-    level._id_6C3525C5C767BE2F = getdvarint("dvar_135E4A643E2D5610", 750);
+    level._id_F56012F3862E7747 = getdvarint("scr_skydivespawnprotectionscaleheighttop", 2500);
+    level._id_6C3525C5C767BE2F = getdvarint("scr_skydivespawnprotectionscaleheightbottom", 750);
     level._id_99F79C82A10BB035 = getdvarfloat("dvar_014EAF6CEDD5CB4A", 0.25);
     level._id_94CE8B45176DB281 = getdvarfloat("dvar_7F2806A81CFAE7BC", 0.25);
-    level._id_D5AF0D323EADE962 = getdvarfloat("dvar_EEFED2A5AB0F62F7", 750);
+    level._id_D5AF0D323EADE962 = getdvarfloat("scr_skydivespawnprotectionsafetydistance", 750);
     level._id_B1FA8D290EF1D796 = level._id_D5AF0D323EADE962 * level._id_D5AF0D323EADE962;
   }
 }
@@ -54,7 +54,7 @@ _id_54559C834E6C17AA() {
 }
 
 _id_F0F8107CB455BE5C() {
-  _id_63F004E086B39A49 = getdvarint("dvar_B943D9F6A81CEC77", 0);
+  _id_63F004E086B39A49 = getdvarint("scr_skydivespawnprotectionsafetydistanceignoreai", 0);
   _id_12EF154B846BACFF = undefined;
 
   foreach(player in scripts\common\utility::playersnear(self.origin, level._id_D5AF0D323EADE962)) {

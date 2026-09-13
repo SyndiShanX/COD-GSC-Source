@@ -4,7 +4,7 @@
 **************************************************/
 
 isbunkeraltenabled() {
-  return getdvarint("dvar_79E97EC7BBD29877", 1);
+  return getdvarint("scr_br_bunker_alt_enabled", 1);
 }
 
 initnonbunkerdoors() {
@@ -57,7 +57,7 @@ initpostmain() {
   level thread _id_7D625073C6379D53::initbunkerdoor(level.br_bunker_alt.bunkervaults.doors[3], _id_56111283B44EA65D, _id_92EBFEAE4937512F);
   level thread _id_7D625073C6379D53::initbunkerdoor(level.br_bunker_alt.bunkervaults.doors[10], _id_56111283B44EA65D, _id_92EBFEAE4937512F);
 
-  if(getdvarint("dvar_310CCFC727D89074", 0)) {
+  if(getdvarint("scr_br_bunker_alt_keypad_enable", 0)) {
     _id_30B1A181FB7CB8D0 = 1;
     _id_F07E92F4B471331D = 1;
     level _id_6D85175C3353BA4D::initlootvaultkeypad(_id_56111283B44EA65D, 1, _id_30B1A181FB7CB8D0, _id_F07E92F4B471331D);
@@ -65,7 +65,7 @@ initpostmain() {
     level _id_6D85175C3353BA4D::initlootvaultkeypad(_id_56111283B44EA65D, 10, _id_30B1A181FB7CB8D0, _id_F07E92F4B471331D);
   }
 
-  if(getdvarint("dvar_310CCFC727D89074", 0))
+  if(getdvarint("scr_br_bunker_alt_keypad_enable", 0))
     level initnonbunkerdoorkeypad();
 
   level thread locknonbunkerdoors();
@@ -82,7 +82,7 @@ locknonbunkerdoors() {
 }
 
 initnonbunkerdoorkeypad() {
-  if(!getdvarint("dvar_310CCFC727D89074", 0)) {
+  if(!getdvarint("scr_br_bunker_alt_keypad_enable", 0)) {
     return;
   }
   foreach(_id_9D5E1298A954ED30, _id_A8D50C407151B462 in level.br_bunker_alt.nonbunkerdoors) {
@@ -171,7 +171,7 @@ _keypadscriptableused_bunkeralt(instance, part, state, player, _id_A5B2C541413AA
   player notify("_keypadScriptableUsed_bunkerAlt");
   player endon("_keypadScriptableUsed_bunkerAlt");
 
-  if(!scripts\mp\flags::gameflag("prematch_done") && !getdvarint("dvar_AF01339226D5DA59", 0)) {
+  if(!scripts\mp\flags::gameflag("prematch_done") && !getdvarint("scr_br_bunker_alt_devtest", 0)) {
     return;
   }
   if(getdvarint("dvar_CB72EF230BF544AE", 1) && !istrue(self.br_infilstarted)) {
@@ -211,7 +211,7 @@ bunkeralt_playerinteractwithkeypadloop(_id_5F8D7D12C2C0F0FD, instance) {
 
     if(isDefined(message)) {
       if(message == "submit_br_keypad") {
-        if(getdvarint("dvar_88C0A775180E459C", 0))
+        if(getdvarint("scr_br_bunker_alt_refresh_idle_timer_on_try", 0))
           thread bunkeralt_playeridlewatch();
 
         if(verifybunkercode(_id_5F8D7D12C2C0F0FD, value) && getdvarint(_func_2EF675C13CA1C4AF("dvar_7B8E27E53A0FF743", _id_5F8D7D12C2C0F0FD), 0)) {

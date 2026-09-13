@@ -8,7 +8,7 @@ _id_E1B062A375B4A629() {
 }
 
 _id_91B0046262BD8519() {
-  return getdvarint("dvar_611D72C9417EE39E", 0);
+  return getdvarint("scr_br_plunder_start_amount", 0);
 }
 
 _id_E22745F1660C79DE(_id_0E318E240DD21247, position, _id_AB57E86CA58B81F2) {

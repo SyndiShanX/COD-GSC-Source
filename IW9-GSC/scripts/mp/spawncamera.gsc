@@ -5,7 +5,7 @@
 
 init() {
   if(!isDefined(level.disablespawncamera))
-    level.disablespawncamera = getdvarint("dvar_5FC696F5BBB3CA62", 1) == 1;
+    level.disablespawncamera = getdvarint("scr_game_disablespawncamera", 1) == 1;
 
   level.snaptospawncamera = getdvarint("dvar_1A2C3B67392B6657", 1) == 1;
   level.evaluatefrontline = getdvarint("dvar_405E7E20D91344CC", 0) == 1;

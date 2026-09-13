@@ -105,7 +105,7 @@ _id_4F17B386A3683F6C(_id_0592732704EEC44A) {
 
 _id_3CC5A4BEF905953F() {
   _id_3A3FD78BC079353B = self;
-  _id_2B59B7BD72FF71BF = strtok(getDvar("dvar_7F18CC33E088E923", ""), " ");
+  _id_2B59B7BD72FF71BF = strtok(getDvar("scr_ssc_config_overrides", ""), " ");
 
   if(_id_2B59B7BD72FF71BF.size == 0)
     return _id_3A3FD78BC079353B;
@@ -113,7 +113,7 @@ _id_3CC5A4BEF905953F() {
   foreach(_id_AE998328CE2FBE36 in _id_2B59B7BD72FF71BF)
   _id_3A3FD78BC079353B = _id_7DBB2F79E1942E4D(_id_3A3FD78BC079353B, _id_AE998328CE2FBE36);
 
-  debug_print("Config overrides loaded: " + getDvar("dvar_7F18CC33E088E923", ""));
+  debug_print("Config overrides loaded: " + getDvar("scr_ssc_config_overrides", ""));
   return _id_3A3FD78BC079353B;
 }
 

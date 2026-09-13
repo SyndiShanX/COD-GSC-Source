@@ -17,20 +17,20 @@ init() {
   level thread _id_4FB6F74E053A49D6();
   level thread _id_E1FA80F536692A32();
   setDvar("scr_br_magcount", 3);
-  setDvar("dvar_F6F24E020168ADE8", "nothing");
+  setDvar("scr_br_loadout_option", "nothing");
   setDvar("voice_proximity_team", 0);
   setDvar("voice_proximity_enemy", 1);
   setDvar("dvar_58A078A367C02AB3", 1);
   setDvar("voice_proximity_radius", 2200);
   setdvarifuninitialized("dvar_A44CF32FF2620BC2", 9);
-  setdvarifuninitialized("dvar_8D9AD523F40BE455", 10000);
+  setdvarifuninitialized("scr_br_respawnmaxteammateoffset", 10000);
   setomnvar("ui_br_circle_state", 5);
   setomnvar("ui_gulag_state", 1);
   setomnvar("ui_hide_redeploy_timer", 1);
-  _id_35A334482F930BE6 = getdvarint("dvar_B773758221A0C100", -1);
+  _id_35A334482F930BE6 = getdvarint("scr_outofboundstime", -1);
 
   if(_id_35A334482F930BE6 == -1)
-    setDvar("dvar_B773758221A0C100", 10);
+    setDvar("scr_outofboundstime", 10);
 
   level._id_E4A482EDC1542597 = getdvarint("dvar_0BB9178DA63CE4B9", 1) == 1;
   level._id_D040719163E20394 = 1;
@@ -81,14 +81,14 @@ init() {
   level._id_1D814F83596D0A02 = getdvarint("dvar_07A1DA73FA673ED8", 1);
   level._id_8DEA6607B3189A60 = getdvarint("dvar_32C09327627C883C", 1);
   level.minplunderdropondeath = getdvarint("dvar_E0A487B88D0E4410", 0);
-  level._id_0F478C1F94CAA7E9 = getdvarint("dvar_4F0A12B17756A2D0", 1);
+  level._id_0F478C1F94CAA7E9 = getdvarint("scr_use_playerdata_weapon_slot", 1);
   level._id_7D17E26667BE2792 = getdvarint("dvar_55D9444D8A3CE31A", 1);
   _id_42692985AEBCEA16 = getDvar("dvar_53BC1DFEE47E5C6D", "brloot_weapon_ar_schotel_lege,brloot_weapon_ar_golf3_lege,brloot_weapon_br_msecho_lege,brloot_weapon_br_soscar14_lege,brloot_weapon_ar_mike4_lege,brloot_weapon_ar_mike16_lege,brloot_weapon_ar_akilo_lege");
   level._id_808A69414F52F6BC = strtok(_id_42692985AEBCEA16, ",");
   level._id_184726567A9F58D8 = getdvarfloat("dvar_D2B4C84CDDA73751", 0.02);
   level._id_E5993849FC7D5987 = getdvarint("dvar_BEB500581164E4BC", 1);
   level._id_38AE6E498DB315FF = getdvarint("dvar_FE9052D4AAA052E0", 1000);
-  level._id_499B5E2905BFA698 = getdvarint("dvar_19476575934AB4CE", 4);
+  level._id_499B5E2905BFA698 = getdvarint("scr_dmz_maxteamsperpoi", 4);
   level.disablewinonscore = getdvarint("dvar_4A9C110CFC54A4C5", 0);
   level._id_EF3E0EB58D1263C5 = getdvarint("dvar_8985888259FDE494", 30);
   level._id_376762409014CC8E = getdvarint("dvar_D7B1D34D99C190A8", 0);
@@ -104,7 +104,7 @@ init() {
   if(level._id_FB7D41D7C65922B7)
     level._id_76EBA5FACACD254B = ::_id_BFD9F11E955ACE89;
 
-  setDvar("dvar_A6A3FD965485D4BC", 2);
+  setDvar("scr_player_spawnarmorplates", 2);
   level thread _id_62B40B6A6C2CF37A();
   level thread _id_3114E3023D0EDF66();
   level thread checkendgame();
@@ -1700,8 +1700,8 @@ _id_E1FA80F536692A32() {
         _id_7E52B56769FA7774::registerscriptableinstance(item);
     }
 
-    if(getdvarint("dvar_77012BC5215F715E", 0)) {
-      setDvar("dvar_77012BC5215F715E", 0);
+    if(getdvarint("scr_debug_loot_items", 0)) {
+      setDvar("scr_debug_loot_items", 0);
       items = getentitylessscriptablearray(undefined, undefined, undefined, undefined, "brloot_black_mous_intel");
       level.players[0] setOrigin(items[0].origin);
     }
@@ -2555,7 +2555,7 @@ _id_BFD9F11E955ACE89(player) {
   if(!isDefined(level._id_FE2E551DA0962C3C) || level._id_FE2E551DA0962C3C.size == 0)
     return 0;
 
-  dist = getdvarint("dvar_57797986A6D60476", 4096);
+  dist = getdvarint("scr_overlord_enemy_proximity_radius", 4096);
   distsq = dist * dist;
 
   foreach(exfil in level._id_FE2E551DA0962C3C) {

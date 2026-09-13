@@ -568,7 +568,7 @@ _id_44D9A690ED5B6E76() {
 
 _id_CFF2F4F168B29B81() {
   if(!isDefined(level._id_B2729F28A675BE79))
-    level._id_B2729F28A675BE79 = getdvarint("dvar_5A8C71E376F35349", 0);
+    level._id_B2729F28A675BE79 = getdvarint("pmc_mission_enabled", 0);
 
   return level._id_B2729F28A675BE79;
 }

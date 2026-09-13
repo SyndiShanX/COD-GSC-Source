@@ -21,11 +21,11 @@ error() {
 }
 
 main() {
-  setdvarifuninitialized("dvar_3B4E5F0E69F46421", 0);
+  setdvarifuninitialized("scr_unittest", 0);
 
   for(;;) {
     wait 1;
-    _id_C990B60E12F60D87 = getdvarint("dvar_3B4E5F0E69F46421", 0);
+    _id_C990B60E12F60D87 = getdvarint("scr_unittest", 0);
 
     switch (_id_C990B60E12F60D87) {
       case 0:
@@ -38,6 +38,6 @@ main() {
         break;
     }
 
-    setDvar("dvar_3B4E5F0E69F46421", 0);
+    setDvar("scr_unittest", 0);
   }
 }

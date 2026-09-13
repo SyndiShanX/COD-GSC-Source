@@ -25,7 +25,7 @@ init() {
   registerbcsoundtype("stat_40D708EB58419C23", undefined, 1.0, 1.0, 10, 10, 0);
   scriptbundlename = "battlechatter_list";
 
-  if(getdvarint("dvar_A464CB031C16EE87") > 0)
+  if(getdvarint("t10") > 0)
     scriptbundlename = scriptbundlename + "_iw9_mp";
   else if(_id_2CEDCC356F1B9FC8::_id_55B494A07469298A())
     scriptbundlename = scriptbundlename + "_mgl_ftue";

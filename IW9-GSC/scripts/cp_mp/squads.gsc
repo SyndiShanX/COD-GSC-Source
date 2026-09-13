@@ -29,7 +29,7 @@ setsquad(team, index) {
   if(!isDefined(team) || team == "spectator" || team == "codcaster") {
     return;
   }
-  if(getdvarint("dvar_CCA323E71A05DB50", 0) != 0) {
+  if(getdvarint("scr_assign_squad_from_team", 0) != 0) {
     _id_3EDA0EF65C9478AC = 0;
 
     foreach(index, name in level.teamnamelist) {
