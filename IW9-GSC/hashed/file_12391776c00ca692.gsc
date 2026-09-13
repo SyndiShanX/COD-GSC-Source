@@ -1,0 +1,255 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: hashed\file_12391776c00ca692.gsc
+***********************************************/
+
+main(_id_97282C14346A7FCF, _id_CDDA4278F5259F6D) {
+  if(scripts\engine\utility::flag_exist("mp_biobunker_office_create_script")) {
+    return;
+  }
+  if(!isDefined(_id_CDDA4278F5259F6D))
+    _id_CDDA4278F5259F6D = scripts\common\create_script_utility::_id_B055D49370405173();
+
+  scripts\engine\utility::flag_init("mp_biobunker_office_create_script");
+  s = spawnStruct();
+  level thread cs_return_and_wait_for_flag(_id_CDDA4278F5259F6D, s, "mp_biobunker_office_create_script");
+
+  if(!scripts\common\create_script_utility::cs_is_starttime())
+    scripts\common\create_script_utility::endcreatescript(s);
+}
+
+cs_return_and_wait_for_flag(_id_CDDA4278F5259F6D, s, _id_CE173D78F5680530) {
+  level endon("game_ended");
+  scripts\common\create_script_utility::wait_for_cs_flag(_id_CE173D78F5680530);
+
+  if(!isDefined(_id_CDDA4278F5259F6D))
+    _id_CDDA4278F5259F6D = "pfx";
+
+  s scripts\common\create_script_utility::cs_setup_arrays(_id_CDDA4278F5259F6D, "mp_biobunker_office_create_script");
+  scripts\common\create_script_utility::cs_flags_init(s);
+  level thread createstructs(s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530);
+  level thread scripts\common\create_script_utility::wait_for_flags(s, "mp_biobunker_office_create_script");
+}
+
+createstructs(_id_CE2D3C78F5803630, _id_CDDA4278F5259F6D, _id_CE173D78F5680530) {
+  f = scripts\common\create_script_utility::strike_additem;
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "elite";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_office";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3989.65, 6824.17, 1422), (0, 270, 0), "cspf_0_auto34", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_room5";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3783.15, 4684.67, 1433.5), (0, 90, 0), "cspf_0_auto182", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_room6";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3615.15, 4676.67, 1433.5), (0, 90, 0), "cspf_0_auto183", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_bath";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-2819.15, 4739.67, 1427), (0, 270, 0), "cspf_0_auto26", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_office";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3733.65, 6520.17, 1422), (0, 270, 0), "cspf_0_auto34", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_guard";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3879.15, 5692.67, 1433.5), (0, 270, 0), "cspf_0_auto3", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s._id_4B62AA3A1860D0AC = "0";
+  s._id_13DF181474836A29 = "Office_Package";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3966.5, 5268, 1443), (0, 270, 0), undefined, "cspf_0_auto181", "spawnPackage_mainNode");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_room4";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3975.15, 4684.67, 1433.5), (0, 90, 0), "cspf_0_auto181", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_cctv";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-5229.65, 6720.17, 1558), (0, 270, 0), "cspf_0_auto171", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s._id_13DF181474836A29 = "Office_Package";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-5463, 6579.5, 1646.5), (0, 270, 0), undefined, "cspf_0_auto171", "spawnPackage_mainNode");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_cctv";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-5405.65, 6736.17, 1558), (0, 270, 0), "cspf_0_auto171", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s._id_13DF181474836A29 = "Office_Package";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3951, 6459.5, 1510.5), (0, 270, 0), undefined, "cspf_0_auto34", "spawnPackage_mainNode");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_office";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3893.65, 6664.17, 1422), (0, 270, 0), "cspf_0_auto34", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_office";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3920.65, 6285.67, 1430), (0, 270, 0), "cspf_0_auto34", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_cctv";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-5256.65, 6485.67, 1566), (0, 270, 0), "cspf_0_auto171", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_living";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-2530.65, 6364.17, 1418.5), (0, 270, 0), "cspf_0_auto15", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_living";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-2740.4, 6525.67, 1418.5), (0, 270, 0), "cspf_0_auto15", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_living";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3085.65, 7240.17, 1418.5), (0, 270, 0), "cspf_0_auto15", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_cctv";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-5320.65, 5989.67, 1566), (0, 270, 0), "cspf_0_auto171", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_cctv";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-5653.65, 6040.17, 1558), (0, 270, 0), "cspf_0_auto171", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s._id_13DF181474836A29 = "Office_Package";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-5071, 6563.5, 1494.5), (0, 270, 0), undefined, "cspf_0_auto176", "spawnPackage_mainNode");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_delivery";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-5029.65, 6776.17, 1438), (0, 270, 0), "cspf_0_auto176", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_delivery";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-4968.65, 6501.67, 1446), (0, 270, 0), "cspf_0_auto176", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_delivery";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-4896.65, 6621.67, 1446), (0, 270, 0), "cspf_0_auto176", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_guard";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3695.15, 5740.67, 1433.5), (0, 270, 0), "cspf_0_auto3", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_room2";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-4207.15, 5180.67, 1433.5), (0, 0, 0), "cspf_0_auto183", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_room1";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-4207.15, 5436.67, 1433.5), (0, 0, 0), "cspf_0_auto181", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_stealthgroup = "stealthVolume_Office_room7";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3383.15, 4932.67, 1433.5), (0, 180, 0), "cspf_0_auto182", undefined, "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s._id_4B62AA3A1860D0AC = "0";
+  s._id_13DF181474836A29 = "Office_Package";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3710.5, 4916, 1475), (0, 270, 0), undefined, "cspf_0_auto182", "spawnPackage_mainNode");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s._id_4B62AA3A1860D0AC = "0";
+  s._id_13DF181474836A29 = "Office_Package";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3998.5, 4916, 1539), (0, 270, 0), undefined, "cspf_0_auto183", "spawnPackage_mainNode");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s._id_4B62AA3A1860D0AC = "1";
+  s._id_13DF181474836A29 = "Office_Package";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3870.5, 5732, 1507), (0, 270, 0), undefined, "cspf_0_auto3", "spawnPackage_mainNode");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3621, 4896.5, 1436), (0, 270, 0), "cspf_0_auto9", undefined, "patrolStart");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s._id_13DF181474836A29 = "Office_Package";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3056, 6912, 1507), (0, 270, 0), undefined, "cspf_0_auto15", "spawnPackage_mainNode");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_living";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3050.65, 7277.17, 1418.5), (0, 270, 0), "cspf_0_auto15", "cspf_0_auto16", "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3053, 6779, 1427.5), (0, 270, 0), "cspf_0_auto16", undefined, "patrolStart");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_living";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3393.65, 7277.17, 1418.5), (0, 270, 0), "cspf_0_auto15", "cspf_0_auto21", "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3396, 6779, 1427.5), (0, 270, 0), "cspf_0_auto21", undefined, "patrolStart");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s._id_4B62AA3A1860D0AC = "1";
+  s._id_13DF181474836A29 = "Office_Package";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-2915, 4914, 1515), (0, 270, 0), undefined, "cspf_0_auto26", "spawnPackage_mainNode");
+  s = scripts\common\create_script_utility::s();
+  s.agent_type = "topTier";
+  s._id_26242E8921AE5B22 = "guard_spawnset_patrol_primary";
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  s.script_label = "lv2RightWay";
+  s.script_stealthgroup = "stealthVolume_Office_bath";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3114.65, 4620.67, 1427), (0, 270, 0), "cspf_0_auto26", "cspf_0_auto27", "guard_spawnset_biolab");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-3091.5, 5158, 1436), (0, 90, 0), "cspf_0_auto27", "cspf_0_auto29", "patrolStart");
+  s = scripts\common\create_script_utility::s();
+  s._id_B205D90302DA2F07 = "biobunker_office";
+  _id_CE2D3C78F5803630[[f]](s, _id_CDDA4278F5259F6D, _id_CE173D78F5680530, (-2539.5, 5158, 1436), (0, 90, 0), "cspf_0_auto29", undefined, "patrolStart");
+  _id_CE2D3C78F5803630 scripts\engine\utility::ent_flag_set("cs_objects_created");
+  _id_7AF6D59EEF91A7DD();
+}
+
+_id_7AF6D59EEF91A7DD() {}

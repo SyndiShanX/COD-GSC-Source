@@ -1,0 +1,21 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: hashed\file_b105e2a89476bd8.gsc
+***********************************************/
+
+_id_FBFF191ACE79186C() {
+  if(!_id_19A75654090611B7::_id_2A0A83F0371D3F6A()) {
+    return;
+  }
+  _id_AED74300DAF62896 = spawnStruct();
+  _id_AED74300DAF62896.armor = getdvarfloat("dvar_73DFA9A4272483DA", 5000);
+  _id_AED74300DAF62896.maxdamage = getdvarint("dvar_7B0F15773F96AAA0", 100);
+  _id_AED74300DAF62896._id_BFE291B401A9BF2A = [];
+  _id_AED74300DAF62896.name = "mummy";
+  _id_AED74300DAF62896._id_649245B52DBF88A9 = undefined;
+  _id_AED74300DAF62896._id_EC2EC5F083DF61CD = _id_19A75654090611B7::_id_E06277CAEAA2935F;
+  _id_AED74300DAF62896.spawnfunc = _id_19A75654090611B7::_id_5CEAA439E031DDB0;
+  _id_AED74300DAF62896._id_E68429B39C75B6EE = _id_19A75654090611B7::_id_007B6091AF439B3F;
+  _id_2636152C566D6C64::_id_613E13E7416BFAA5(_id_AED74300DAF62896);
+  _id_19A75654090611B7::_id_E06277CAEAA2935F(_id_AED74300DAF62896);
+}

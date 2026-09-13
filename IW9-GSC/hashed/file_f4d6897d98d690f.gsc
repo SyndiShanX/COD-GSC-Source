@@ -1,0 +1,105 @@
+/***********************************************
+ * Decompiled by ATE47 and Edited by SyndiShanX
+ * Script: hashed\file_f4d6897d98d690f.gsc
+***********************************************/
+
+main() {
+  self.type = "human";
+  self.unittype = "soldier";
+  self.subclass = "tier3";
+  self.baseaccuracy = 0.2;
+  self.accuracy = self.baseaccuracy;
+  self.health = 300;
+  self.maxhealth = 300;
+  self.behaviortreeasset = "soldier_agent";
+  self.asmasset = "soldier";
+  self.defaultcoverselector = "cover_spread_cp";
+  self.enemyselector = "enemyselector_default";
+  self _meth_E99626ADD202FE1A(0, "entity");
+  self setengagementmindist(150.0, 0.0);
+  self setengagementmaxdist(500.0, 620.0);
+  self _meth_9215CE6FC83759B9(1800.0);
+
+  switch (scripts\code\character::get_random_weapon(3)) {
+    case 0:
+      _id_FEA750D6814B803D = "iw9_sh_mike1014_mp, [ grip_angled01 ], none, none";
+      self.weapon = level._id_67B54180A55F70E1[_id_FEA750D6814B803D];
+      break;
+    case 1:
+      _id_FEA750D6814B803D = "iw9_sh_mike1014_mp, [ stockr_sh_heavy_p12, reflex04_tall, comp_sh_02 ], none, none";
+      self.weapon = level._id_67B54180A55F70E1[_id_FEA750D6814B803D];
+      break;
+    case 2:
+      _id_FEA750D6814B803D = "iw9_sh_mike1014_mp, [ bar_sh_short_p12, stockno_sh_p12, grip_vert02 ], none, none";
+      self.weapon = level._id_67B54180A55F70E1[_id_FEA750D6814B803D];
+      break;
+  }
+
+  self giveweapon(self.weapon);
+  self setspawnweapon(self.weapon);
+  self.bulletsinclip = weaponclipsize(self.weapon);
+  self.primaryweapon = self.weapon;
+  _id_4F04B9C326EB7400 = "iw9_pi_papa220_mp, [ none, none, none, none, none, none ], none, none";
+  self.sidearm = level._id_67B54180A55F70E1[_id_4F04B9C326EB7400];
+  _id_A68442EBADB66EB1 = "frag_grenade_mp";
+  self.grenadeweapon = level._id_67B54180A55F70E1[_id_A68442EBADB66EB1];
+  self.grenadeammo = 2;
+}
+
+setup_model(agent_type) {
+  _id_59A8486F252C8ABA::_id_8EE09B8CB8661567();
+}
+
+precache() {
+  agent_type = "actor_enemy_cp_shotgun_tier3_cartel";
+
+  if(!isDefined(level.agent_definition))
+    level.agent_definition = [];
+
+  if(!isDefined(level.agent_definition[agent_type])) {
+    level.agent_definition[agent_type] = [];
+    level.agent_definition[agent_type]["team"] = "axis";
+    level.agent_definition[agent_type]["setup_func"] = ::main;
+    level.agent_definition[agent_type]["setup_model_func"] = ::setup_model;
+    _id_59A8486F252C8ABA::_id_8168FBF6282D398B();
+  }
+
+  scripts\aitypes\bt_util::init();
+  behaviortree\soldier_agent::registerbehaviortree();
+  scripts\cp_mp\agents\agent_init::agent_init();
+  scripts\aitypes\assets::soldier();
+  thread _id_E8CF870298E36BDC();
+}
+
+_id_E8CF870298E36BDC() {
+  while(!isDefined(level.weaponmapdata))
+    waitframe();
+
+  if(!isDefined(level._id_67B54180A55F70E1))
+    level._id_67B54180A55F70E1 = [];
+
+  _id_5576D3BE590A9A64 = "iw9_sh_mike1014_mp, [ grip_angled01 ], none, none";
+
+  if(!isDefined(level._id_67B54180A55F70E1[_id_5576D3BE590A9A64]))
+    level._id_67B54180A55F70E1[_id_5576D3BE590A9A64] = scripts\cp\cp_weapon::_id_E83615F8A92E4378("iw9_sh_mike1014_mp", ["grip_angled01"], "none", "none");
+
+  _id_5576D6BE590AA0FD = "iw9_sh_mike1014_mp, [ stockr_sh_heavy_p12, reflex04_tall, comp_sh_02 ], none, none";
+
+  if(!isDefined(level._id_67B54180A55F70E1[_id_5576D6BE590AA0FD]))
+    level._id_67B54180A55F70E1[_id_5576D6BE590AA0FD] = scripts\cp\cp_weapon::_id_E83615F8A92E4378("iw9_sh_mike1014_mp", ["stockr_sh_heavy_p12", "reflex04_tall", "comp_sh_02"], "none", "none");
+
+  _id_5576D5BE590A9ECA = "iw9_sh_mike1014_mp, [ bar_sh_short_p12, stockno_sh_p12, grip_vert02 ], none, none";
+
+  if(!isDefined(level._id_67B54180A55F70E1[_id_5576D5BE590A9ECA]))
+    level._id_67B54180A55F70E1[_id_5576D5BE590A9ECA] = scripts\cp\cp_weapon::_id_E83615F8A92E4378("iw9_sh_mike1014_mp", ["bar_sh_short_p12", "stockno_sh_p12", "grip_vert02"], "none", "none");
+
+  _id_4F04B9C326EB7400 = "iw9_pi_papa220_mp, [ none, none, none, none, none, none ], none, none";
+
+  if(!isDefined(level._id_67B54180A55F70E1[_id_4F04B9C326EB7400]))
+    level._id_67B54180A55F70E1[_id_4F04B9C326EB7400] = scripts\cp\cp_weapon::_id_E83615F8A92E4378("iw9_pi_papa220_mp", ["none", "none", "none", "none", "none", "none"], "none", "none");
+
+  _id_A68442EBADB66EB1 = "frag_grenade_mp";
+
+  if(!isDefined(level._id_67B54180A55F70E1[_id_A68442EBADB66EB1]))
+    level._id_67B54180A55F70E1[_id_A68442EBADB66EB1] = makeweapon("frag_grenade_mp");
+}
