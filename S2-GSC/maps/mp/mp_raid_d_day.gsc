@@ -588,7 +588,7 @@ func_54D8(param_00, param_01) {
       continue;
     }
 
-    var_04 = self.var_116;
+    var_04 = self.origin;
     var_05 = "step";
     if(common_scripts\utility::func_9467(var_02, "footstep_left")) {
       var_05 = function_036D(var_02, "footstep_left_");
@@ -1335,7 +1335,7 @@ func_0C6E() {
   var_00 = randomintrange(0, 10);
   if(var_00 < 4) {
     var_01 = "MOD_EXPLOSIVE";
-    playFX(common_scripts\utility::func_44F5("mortar_explosion_lrg"), self.var_116);
+    playFX(common_scripts\utility::func_44F5("mortar_explosion_lrg"), self.origin);
     lib_0378::func_8D74("aud_beach_mortar_explode_npc");
   } else {
     var_01 = "MOD_RIFLE_BULLET";
@@ -1344,7 +1344,7 @@ func_0C6E() {
     wait(0.1);
   }
 
-  self dodamage(9999, self.var_116, undefined, undefined, var_01);
+  self dodamage(9999, self.origin, undefined, undefined, var_01);
   lib_0380::func_6844("generic_death_american_1", undefined, self, 0, 1);
 }
 
@@ -1661,7 +1661,7 @@ func_63E1() {
   level endon("game_ended");
   self.var_1D33 = "waypoint_buildable_active_map";
   waittillframeend;
-  self.var_1D34 = self.var_116;
+  self.var_1D34 = self.origin;
   objective_position(self.var_6989, self.var_1D34);
   self waittill("trigger");
   if(self.var_6989 >= 0) {
@@ -1765,7 +1765,7 @@ func_90B7() {
   wait(25);
   var_00 = common_scripts\utility::func_46B7("struct_vista_planes", "targetname");
   foreach(var_02 in var_00) {
-    var_03 = spawn("script_model", self.var_116);
+    var_03 = spawn("script_model", self.origin);
     var_03 setModel("usa_bomber_b17_raid");
     var_03 moveTo(common_scripts\utility::func_46B5(self.var_1A2, "targetname").var_116, 20);
     wait(20);

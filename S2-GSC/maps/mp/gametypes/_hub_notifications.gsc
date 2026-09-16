@@ -409,7 +409,7 @@ givetimertagbombmodel() {
 }
 
 deletetimertagbombmodel() {
-  maps\mp\_utility::func_0735("specialty_ballcarrier");
+  maps\mp\_utility::unsetperk("specialty_ballcarrier");
   self takeallweapons();
   maps\mp\_utility::func_0642("emote_weapon_mp");
   self switchtoweaponimmediate("emote_weapon_mp");

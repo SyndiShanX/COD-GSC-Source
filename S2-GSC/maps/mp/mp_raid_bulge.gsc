@@ -1850,7 +1850,7 @@ cavewaitforplantedplayer() {
   for(;;) {
     level.caveplantedkillvolume waittill("trigger", var_00);
     if(var_00 playerisweaponplantenabled()) {
-      var_00 maps\mp\_utility::func_728();
+      var_00 maps\mp\_utility::_suicide();
     }
   }
 }
@@ -2005,7 +2005,7 @@ func_9E01(param_00) {
 
 func_9E00(param_00, param_01, param_02, param_03) {
   var_04 = "breakObject";
-  maps\mp\_utility::func_2CED(param_03, ::lib_04F3::func_79CB, "wood_break_med_conc", self.var_116);
+  maps\mp\_utility::func_2CED(param_03, ::lib_04F3::func_79CB, "wood_break_med_conc", self.origin);
   if(param_02 > 0) {
     wait(param_02);
   }
@@ -2102,9 +2102,9 @@ blowuptank_handletank3toofarforward() {
   }
 
   var_00 = -5700;
-  if(self.var_116[0] > var_00) {
+  if(self.origin[0] > var_00) {
     self.var_383C.var_79AD lib_04FF::func_3845("reverse");
-    while(self.var_116[0] > var_00) {
+    while(self.origin[0] > var_00) {
       wait 0.05;
     }
   }
@@ -2391,7 +2391,7 @@ func_3CDC(param_00) {
   for(;;) {
     var_01 = level.var_3CE5[level.var_3CE4].var_116;
     if(common_scripts\utility::func_562E(self.var_9827)) {
-      var_01 = self.var_116 + anglesToForward(self.var_1D) * 200 + (0, 0, 400);
+      var_01 = self.origin + anglesToForward(self.var_1D) * 200 + (0, 0, 400);
       level.var_3CE6 = 0;
     }
 

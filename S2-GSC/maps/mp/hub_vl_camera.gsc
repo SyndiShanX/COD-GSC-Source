@@ -1348,7 +1348,7 @@ func_8F7D(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     func_05E0(self getentitynumber(), var_13, "create", var_16);
     func_05E0(self getentitynumber(), var_13, "angles", var_11.var_001D);
     if(isDefined(self)) {
-      var_11.var_A561[self.var_2418] = 1;
+      var_11.var_A561[self.clientid] = 1;
     }
   }
 
@@ -2260,14 +2260,14 @@ func_631E() {
         var_18[8] = maps\mp\_utility::func_452A(tablelookup(var_00, 0, var_07.var_012B, 1));
         var_19 = 1;
         if(!maps\mp\gametypes\_class::func_5835(var_09, var_19) && !maps\mp\gametypes\_class::func_5839(var_0F, var_19)) {
-          var_09 = maps\mp\gametypes\_class::func_9590(level.var_2324, 10, 0);
+          var_09 = maps\mp\gametypes\_class::func_9590(level.classtablename, 10, 0);
           for(var_1A = 0; var_1A < 6; var_1A++) {
             var_0A[var_1A] = 0;
           }
         }
 
         if(!maps\mp\gametypes\_class::func_5839(var_0F, var_19)) {
-          var_0F = maps\mp\gametypes\_class::func_9590(level.var_2324, 10, 1);
+          var_0F = maps\mp\gametypes\_class::func_9590(level.classtablename, 10, 1);
           for(var_1A = 0; var_1A < 6; var_1A++) {
             var_10[var_1A] = 0;
           }

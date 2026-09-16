@@ -18,7 +18,7 @@ truuseserumc(param_00) {
 truuseserumcinternal() {
   if(maps\mp\_utility::func_57A0(self)) {
     if(!isDefined(self.raidserumactive) || !self.raidserumactive) {
-      maps\mp\_matchdata::func_5E9A("raid_ss_serum_c", self.var_116);
+      maps\mp\_matchdata::func_5E9A("raid_ss_serum_c", self.origin);
       thread startmaniac();
       lib_0378::func_8D74("aud_serum_syringe_foley");
       lib_0378::func_8D74("aud_serum_buff_start");

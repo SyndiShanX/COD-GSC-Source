@@ -108,7 +108,7 @@ func_8A4C(param_00) {
     if(var_03.var_3A == "trigger_use_touch") {
       if(var_03.var_165 == "canBuildTurret") {
         self.var_1F89 = var_03;
-        var_04 = self.var_116 + self.var_79E8["useLocationOffset"];
+        var_04 = self.origin + self.var_79E8["useLocationOffset"];
         self.var_1F89 usetouchtriggerrequirefacingposition(1, var_04);
         self.var_1D4F = maps\mp\gametypes\_gameobjects::func_2837("neutral", self.var_1F89, [self], (0, 0, 32), 1);
         self.var_1D4F maps\mp\gametypes\_gameobjects::func_8A5A(self.var_79E8["constructTime"]);
@@ -128,7 +128,7 @@ func_8A4C(param_00) {
         var_03 func_52BB(self);
       } else if(var_03.var_165 == "flipTrigger") {
         self.var_3D79 = var_03;
-        var_04 = self.var_116 + self.var_79E8["useLocationOffset"];
+        var_04 = self.origin + self.var_79E8["useLocationOffset"];
         self.var_3D79 usetouchtriggerrequirefacingposition(1, var_04);
         self.var_1D4F = maps\mp\gametypes\_gameobjects::func_2837("neutral", self.var_3D79, [], (0, 0, 32), 1);
         self.var_1D4F maps\mp\gametypes\_gameobjects::func_8A5A(self.var_79E8["flipTime"]);
@@ -152,7 +152,7 @@ func_8A4C(param_00) {
     }
   }
 
-  self.var_E9E = spawn("script_model", self.var_116);
+  self.var_E9E = spawn("script_model", self.origin);
   self.var_E9E.var_1D = self.var_1D;
   if(isDefined(self.var_3D73)) {
     self.var_E9E.var_92F0 = self.var_92F0;
@@ -207,7 +207,7 @@ func_52BB(param_00) {
   }
 
   var_01 = common_scripts\utility::func_46B7(self.var_1A2, "targetname");
-  self.var_92F0 = self.var_116;
+  self.var_92F0 = self.origin;
   self.var_92B8 = self.var_1D;
   self.var_92D1 = self.var_92F0;
   self.var_92D0 = self.var_92B8;
@@ -238,7 +238,7 @@ func_52BB(param_00) {
   }
 
   if(isDefined(self.var_3D73)) {
-    var_05 = transformmove(self.var_3D73, self.var_3D6E, self.var_92D1, self.var_92D0, self.var_116, self.var_1D);
+    var_05 = transformmove(self.var_3D73, self.var_3D6E, self.var_92D1, self.var_92D0, self.origin, self.var_1D);
     self.var_3D73 = var_05["origin"];
     self.var_3D6E = var_05["angles"];
     thread func_3D78(param_00);
@@ -263,10 +263,10 @@ func_3D78(param_00) {
   self endon("death");
   for(;;) {
     param_00 waittill("flip");
-    self.var_116 = self.var_3D73;
+    self.origin = self.var_3D73;
     self.var_1D = self.var_3D6E;
     param_00 waittill("flip");
-    self.var_116 = self.var_92F0;
+    self.origin = self.var_92F0;
     self.var_1D = self.var_92B8;
   }
 }
@@ -299,7 +299,7 @@ func_9F79(param_00) {
     var_02 = strtok(var_01, ";");
     var_03 = var_02[0];
     var_04 = var_02[1];
-    var_05 = self.var_116;
+    var_05 = self.origin;
     if(isDefined(var_04)) {
       var_05 = self gettagorigin(var_04);
     }
@@ -359,7 +359,7 @@ func_9F7A(param_00) {
   var_01 = getanimlength(self.var_79E8["buildAnimRef"]);
   var_02 = self.var_1D4F.var_28D5 / self.var_1D4F.var_A23F;
   var_03 = var_01 / self.var_1D4F.var_A23F / 1000;
-  if(isDefined(param_00) && param_00 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+  if(isDefined(param_00) && param_00 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
     var_03 = var_03 * param_00.var_696D;
   }
 

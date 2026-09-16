@@ -1031,9 +1031,9 @@ func_6BA4(param_00) {
 
       lib_0547::func_A00(self, self getcurrentprimaryweapon());
       thread func_4AE1();
-      var_06 = getmatchdata("players", self.var_2418, "utc_first_spawn_time_s");
+      var_06 = getmatchdata("players", self.clientid, "utc_first_spawn_time_s");
       if(!isDefined(var_06) || var_06 == 0) {
-        setmatchdata("players", self.var_2418, "utc_first_spawn_time_s", getsystemtime());
+        setmatchdata("players", self.clientid, "utc_first_spawn_time_s", getsystemtime());
       }
     }
 
@@ -4390,7 +4390,7 @@ func_AC55(param_00, param_01, param_02, param_03) {}
 
 func_446E() {
   var_00 = self getrankedplayerdata(common_scripts\utility::func_46A8(), "selectedLoadout", "ability");
-  setmatchdata("players", self.var_2418, "loadout", "special", var_00);
+  setmatchdata("players", self.clientid, "loadout", "special", var_00);
   var_01 = maps\mp\_utility::func_452B(var_00);
   if(!lib_0547::func_5823(var_01)) {
     var_01 = "role_ability_stunning_burst_zm";

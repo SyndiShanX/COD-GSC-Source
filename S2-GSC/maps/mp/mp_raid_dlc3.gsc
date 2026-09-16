@@ -1295,7 +1295,7 @@ handlebridgedebrispaths() {
   var_00 = getEnt("bridge_nodes_connect_clip", "targetname");
   var_00.var_116 = var_00.var_116 + (0, 0, 1024);
   wait(0.25);
-  var_00 method_8060();
+  var_00 connectpaths();
   wait(0.25);
   var_00 delete();
 }
@@ -1468,7 +1468,7 @@ stopdebriskill(param_00) {
 }
 
 turret_build_armored_train(param_00, param_01, param_02, param_03) {
-  var_04 = spawnturret("misc_turret", self.var_116, param_00);
+  var_04 = spawnturret("misc_turret", self.origin, param_00);
   var_04.var_1D = self.var_1D;
   var_04 setModel(param_01);
   var_04 setdefaultdroppitchyaw(0);
@@ -1675,7 +1675,7 @@ armoredtrainthink() {
   level waittill("objective_A_complete");
   lib_0378::func_8D74("aud_train_start_moving");
   wait(5);
-  self moveTo(self.var_116 + anglesToForward(self.var_1D) * var_00, 25, 4);
+  self moveTo(self.origin + anglesToForward(self.var_1D) * var_00, 25, 4);
   self.train_engine scriptmodelplayanim(self.train_engine.var_EA4);
   wait(13);
   self notify("Armored_Train_Inactive");

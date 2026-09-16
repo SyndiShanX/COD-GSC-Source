@@ -16,7 +16,7 @@ truuseseruma(param_00) {
 truuseserumainternal() {
   if(maps\mp\_utility::func_57A0(self)) {
     if(!isDefined(self.raidserumactive) || !self.raidserumactive) {
-      maps\mp\_matchdata::func_5E9A("raid_ss_serum_a", self.var_116);
+      maps\mp\_matchdata::func_5E9A("raid_ss_serum_a", self.origin);
       thread startawareness();
       lib_0378::func_8D74("aud_serum_syringe_foley");
       lib_0378::func_8D74("aud_serum_buff_start");
@@ -34,7 +34,7 @@ startawareness() {
   thread awarenessdeathlistener();
   self.raidserumactive = 1;
   self.raidpreserumperkslist = self.var_6F65;
-  if(!maps\mp\_utility::func_649("specialty_perception")) {
+  if(!maps\mp\_utility::hasperk("specialty_perception")) {
     maps\mp\_utility::func_47A2("specialty_perception");
   }
 

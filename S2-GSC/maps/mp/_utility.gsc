@@ -3,9 +3,9 @@
  * Script: maps\mp\_utility.gsc
 *********************************************/
 
-func_3941() {
-  if(isDefined(self.var_161)) {
-    wait(self.var_161);
+exploder_sound() {
+  if(isDefined(self.script_delay)) {
+    wait(self.script_delay);
   }
 
   self playSound(level.var_80D2[self.var_828A]);
@@ -131,7 +131,7 @@ func_36E5() {
   func_940B(0, "hostmigrate");
 }
 
-func_5679(param_00) {
+isattachment(param_00) {
   var_01 = tablelookup("mp/attachmenttable.csv", 3, param_00, 0);
   if(isDefined(var_01) && var_01 != "") {
     return 1;
@@ -140,7 +140,7 @@ func_5679(param_00) {
   return 0;
 }
 
-func_4429(param_00) {
+getattachmenttype(param_00) {
   var_01 = tablelookup("mp/attachmenttable.csv", 3, param_00, 1);
   return var_01;
 }
@@ -423,7 +423,7 @@ func_2CEF(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   thread[[param_00]](param_02, param_03, param_04, param_05, param_06);
 }
 
-func_4617() {
+getplant() {
   var_00 = self.origin + (0, 0, 10);
   var_01 = 11;
   var_02 = anglesToForward(self.angles);
@@ -749,7 +749,7 @@ func_2401(param_00) {
   func_A131();
 }
 
-func_2402() {
+clearlowermessages() {
   for(var_00 = 0; var_00 < self.var_5F2B.size; var_00++) {
     self.var_5F2B[var_00] = undefined;
   }
@@ -926,7 +926,7 @@ func_069F(param_00) {
   self playlocalsound(param_00);
 }
 
-func_3517(param_00, param_01, param_02, param_03) {
+dvarintvalue(param_00, param_01, param_02, param_03) {
   param_00 = "scr_" + level.gametype + "_" + param_00;
   if(getDvar(param_00) == "") {
     setDvar(param_00, param_01);
@@ -946,7 +946,7 @@ func_3517(param_00, param_01, param_02, param_03) {
   return var_04;
 }
 
-func_3516(param_00, param_01, param_02, param_03) {
+dvarfloatvalue(param_00, param_01, param_02, param_03) {
   param_00 = "scr_" + level.gametype + "_" + param_00;
   if(getDvar(param_00) == "") {
     setDvar(param_00, param_01);
@@ -1567,15 +1567,15 @@ func_45CD(param_00) {
 }
 
 gettimepassed() {
-  if(!isDefined(level.var_9309) || !isDefined(level.var_2FB1)) {
+  if(!isDefined(level.starttime) || !isDefined(level.var_2FB1)) {
     return 0;
   }
 
   if(level.var_9A12) {
-    return level.var_9A11 - level.var_9309 - level.var_2FB1;
+    return level.var_9A11 - level.starttime - level.var_2FB1;
   }
 
-  return gettime() - level.var_9309 - level.var_2FB1;
+  return gettime() - level.starttime - level.var_2FB1;
 }
 
 func_4705() {
@@ -1606,7 +1606,7 @@ func_467B() {
   return gettimepassed() / 1000;
 }
 
-func_4589() {
+getminutespassed() {
   return func_467B() / 60;
 }
 
@@ -1659,7 +1659,7 @@ func_5727() {
   return self.spectatekillcam;
 }
 
-func_5822(param_00) {
+isvalidclass(param_00) {
   return isDefined(param_00) && param_00 != "";
 }
 
@@ -1840,7 +1840,7 @@ func_072B(param_00) {
   }
 }
 
-func_8064() {
+savedata() {
   var_00 = spawnStruct();
   var_00.var_69A9 = self getplayersoffhands();
   var_00.var_888 = self.var_805F;
@@ -2676,7 +2676,7 @@ func_06D7(param_00, param_01, param_02) {
   self setperk(param_00, !isDefined(level.var_8324[param_00]), param_01);
 }
 
-func_0735(param_00) {
+unsetperk(param_00) {
   self.var_6F65[param_00] = undefined;
   self.var_6F6A[param_00] = undefined;
   if(isDefined(level.var_6F6C[param_00])) {
@@ -3146,7 +3146,7 @@ func_4730(param_00, param_01) {
   var_02 = func_4738(param_00);
   for(var_03 = 1; var_03 < var_02.size; var_03++) {
     var_04 = var_02[var_03];
-    if(!func_5679(var_04) && issubstr(var_04, param_01)) {
+    if(!isattachment(var_04) && issubstr(var_04, param_01)) {
       return var_04;
     }
   }
@@ -3844,7 +3844,7 @@ func_9AC1() {
   return 0;
 }
 
-func_8742(param_00) {
+setthirdpersondof(param_00) {
   if(param_00) {
     self setdepthoffield(0, 110, 512, 4096, 6, 1.8);
     return;
@@ -5365,13 +5365,13 @@ func_86F7(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 
 func_56D9(param_00) {
   if(level.teambased) {
-    return func_5781(param_00);
+    return isplayeronenemyteam(param_00);
   }
 
   return func_577B(param_00);
 }
 
-func_5781(param_00) {
+isplayeronenemyteam(param_00) {
   return param_00.team != self.team;
 }
 

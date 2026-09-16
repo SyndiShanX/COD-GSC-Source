@@ -269,9 +269,9 @@ func_4466() {
   var_08 = 500000000;
   var_09 = undefined;
   foreach(var_06 in var_04) {
-    var_0B = distancesquared(var_06.var_116, self.var_116);
+    var_0B = distancesquared(var_06.var_116, self.origin);
     if(var_0B < var_08) {
-      if(sighttracepassed(var_06.var_116 + var_00, self.var_116 + var_01, 0, self)) {
+      if(sighttracepassed(var_06.var_116 + var_00, self.origin + var_01, 0, self)) {
         var_08 = var_0B;
         var_09 = var_06;
       }
@@ -284,14 +284,14 @@ func_4466() {
 
   var_08 = 500000000;
   foreach(var_0E in var_03) {
-    var_0B = distancesquared(var_0E.var_116, self.var_116);
+    var_0B = distancesquared(var_0E.var_116, self.origin);
     if(var_0B < var_08) {
       var_0F = var_0E.var_116;
       if(isDefined(var_0E.var_57C4) && var_0E.var_57C4) {
         var_0F = var_0F + var_02;
       }
 
-      if(sighttracepassed(var_0F, self.var_116 + var_02, 0, self, var_0E)) {
+      if(sighttracepassed(var_0F, self.origin + var_02, 0, self, var_0E)) {
         var_08 = var_0B;
         var_09 = var_0E;
       }
@@ -432,7 +432,7 @@ func_4816(param_00, param_01) {
   for(var_02 = 0; var_02 < self.var_A3F8.size; var_02++) {
     self.var_66CA = self.var_A3F8[var_02];
     self method_8224(self.var_66CA.var_116, param_00);
-    while(distance2d(self.var_116, self.var_66CA.var_116) > 64) {
+    while(distance2d(self.origin, self.var_66CA.var_116) > 64) {
       wait 0.05;
     }
   }

@@ -122,7 +122,7 @@ func_60B2() {
 
 func_9035() {
   self endon("becameSpectator");
-  if(isDefined(self.var_2418)) {} else {}
+  if(isDefined(self.clientid)) {} else {}
 
   if(isDefined(self.var_A6EF) && self.var_A6EF) {
     self waittill("notWaitingToSelectClass");
@@ -192,11 +192,11 @@ func_4006(param_00, param_01) {
   }
 
   var_03 = param_01;
-  if(!maps\mp\_utility::func_5822(var_03)) {
+  if(!maps\mp\_utility::isvalidclass(var_03)) {
     var_03 = self.var_2319;
   }
 
-  if(maps\mp\_utility::func_5822(var_03)) {
+  if(maps\mp\_utility::isvalidclass(var_03)) {
     var_04 = maps\mp\gametypes\_class::func_455F(self.team, var_03, undefined, undefined, 1);
     var_02[var_02.size] = var_04.var_76F8;
     if(!isDefined(param_00) || !param_00) {
@@ -243,7 +243,7 @@ func_A686() {
   self endon("end_respawn");
   level endon("game_ended");
   self notify("attempted_spawn");
-  if(isDefined(self.var_2418)) {} else {}
+  if(isDefined(self.clientid)) {} else {}
 
   var_00 = 0;
   var_01 = undefined;
@@ -532,7 +532,7 @@ func_9084(param_00, param_01) {
   self notify("spawned");
   self notify("end_respawn");
   self notify("started_spawnPlayer");
-  if(isDefined(self.var_2418)) {} else {}
+  if(isDefined(self.clientid)) {} else {}
 
   if(!isDefined(param_00)) {
     param_00 = 0;
@@ -768,7 +768,7 @@ func_9084(param_00, param_01) {
     }
 
     if(isDefined(self.team) && level.iszombiegame == 0 && !function_0367()) {
-      setmatchdata("players", self.var_2418, "team", self.team);
+      setmatchdata("players", self.clientid, "team", self.team);
     }
 
     if(var_0F) {
@@ -857,7 +857,7 @@ func_9084(param_00, param_01) {
       var_15 = self.var_2943;
     }
 
-    self dlogevent("dtel_spawn", ["spawn", ["life_index", self.var_5CC6, "player_index", self.var_2418, "spawn_pos", [int(self.var_9092[0]), int(self.var_9092[1]), int(self.var_9092[2])], "spawn_time_ms", self.var_5BE2, "loadout_index", var_15]]);
+    self dlogevent("dtel_spawn", ["spawn", ["life_index", self.var_5CC6, "player_index", self.clientid, "spawn_pos", [int(self.var_9092[0]), int(self.var_9092[1]), int(self.var_9092[2])], "spawn_time_ms", self.var_5BE2, "loadout_index", var_15]]);
   }
 
   if(!param_00) {
@@ -876,7 +876,7 @@ func_9084(param_00, param_01) {
   }
 
   if(getdvarint("311")) {
-    maps\mp\_utility::func_8742(1);
+    maps\mp\_utility::setthirdpersondof(1);
   }
 
   if(!function_0367()) {
@@ -1016,7 +1016,7 @@ func_9073() {
   self notify("spawned");
   self notify("end_respawn");
   func_872B();
-  maps\mp\_utility::func_2402();
+  maps\mp\_utility::clearlowermessages();
   maps\mp\_utility::func_3E8E(1);
   self method_800F();
   self setclientdvar("3724", 1);
@@ -1075,7 +1075,7 @@ func_9049() {
   self notify("spawned");
   self notify("end_respawn");
   func_872B();
-  maps\mp\_utility::func_2402();
+  maps\mp\_utility::clearlowermessages();
   self setclientdvar("3724", 1);
   maps\mp\_utility::updatesessionstate("dead");
   maps\mp\_utility::func_23FF();
@@ -1116,29 +1116,29 @@ func_5EA9() {
   }
 
   if(isDefined(self.pers["totalKillcamsSkipped"])) {
-    setmatchdata("players", self.var_2418, "killcams_skipped", maps\mp\_utility::func_2314(self.pers["totalKillcamsSkipped"]));
+    setmatchdata("players", self.clientid, "killcams_skipped", maps\mp\_utility::func_2314(self.pers["totalKillcamsSkipped"]));
   }
 
   if(isDefined(self.pers["totalKillcamsInterrupted"])) {
-    setmatchdata("players", self.var_2418, "killcams_interrupted", maps\mp\_utility::func_2314(self.pers["totalKillcamsInterrupted"]));
+    setmatchdata("players", self.clientid, "killcams_interrupted", maps\mp\_utility::func_2314(self.pers["totalKillcamsInterrupted"]));
   }
 
   if(isDefined(self.pers["weaponPickupsCount"])) {
-    setmatchdata("players", self.var_2418, "weapon_pickups_count", maps\mp\_utility::func_2314(self.pers["weaponPickupsCount"]));
+    setmatchdata("players", self.clientid, "weapon_pickups_count", maps\mp\_utility::func_2314(self.pers["weaponPickupsCount"]));
   }
 
   if(isDefined(self.pers["suicides"])) {
-    setmatchdata("players", self.var_2418, "suicides_total", maps\mp\_utility::func_2314(self.pers["suicides"]));
+    setmatchdata("players", self.clientid, "suicides_total", maps\mp\_utility::func_2314(self.pers["suicides"]));
   }
 
   if(isDefined(self.pers["headshots"])) {
-    setmatchdata("players", self.var_2418, "headshots_total", maps\mp\_utility::clamptoshort(self.pers["headshots"]));
+    setmatchdata("players", self.clientid, "headshots_total", maps\mp\_utility::clamptoshort(self.pers["headshots"]));
   }
 
   if(isDefined(self.pers["pingAccumulation"]) && isDefined(self.pers["pingSampleCount"])) {
     if(self.pers["pingSampleCount"] > 0) {
       var_00 = maps\mp\_utility::func_2314(self.pers["pingAccumulation"] / self.pers["pingSampleCount"]);
-      setmatchdata("players", self.var_2418, "average_ping", var_00);
+      setmatchdata("players", self.clientid, "average_ping", var_00);
     }
   }
 
@@ -1153,12 +1153,12 @@ func_5EA9() {
     }
 
     if(var_02 > 0) {
-      setmatchdata("players", self.var_2418, "xp_multiplier", var_02);
+      setmatchdata("players", self.clientid, "xp_multiplier", var_02);
     }
   }
 
   if(isDefined(self.pers["summary"]) && isDefined(self.pers["summary"]["clanWarsXP"])) {
-    setmatchdata("players", self.var_2418, "clanwars_xp", self.pers["summary"]["clanWarsXP"]);
+    setmatchdata("players", self.clientid, "clanwars_xp", self.pers["summary"]["clanWarsXP"]);
   }
 }
 
@@ -1174,7 +1174,7 @@ func_1E6A(param_00) {
         var_01 = -1;
       }
 
-      var_02 = self.var_2418;
+      var_02 = self.clientid;
       if(!isDefined(var_02)) {
         var_02 = -1;
       }
@@ -1186,24 +1186,24 @@ func_1E6A(param_00) {
       self dlogevent("telemetry_hq_event", ["base", ["hq_guid", function_0398(), "utc_timestamp_join", var_01, "data_center_id", function_0397(), "game_time", gettime(), "player_index", var_02, "player_count", level.players.size, "event_name", "leave", "event_category", "hq_session_info", "duration_seconds", 0], "leave", ["reason", param_00]]);
     }
   } else {
-    setmatchdata("players", self.var_2418, "utc_disconnect_time_s", getsystemtime());
-    setmatchdata("players", self.var_2418, "disconnect_reason", param_00);
+    setmatchdata("players", self.clientid, "utc_disconnect_time_s", getsystemtime());
+    setmatchdata("players", self.clientid, "disconnect_reason", param_00);
     var_03 = getmatchdata("match_common", "player_count_left");
     var_03++;
     setmatchdata("match_common", "player_count_left", var_03);
     if(!level.iszombiegame) {
-      setmatchdata("players", self.var_2418, "match_result", "quit");
+      setmatchdata("players", self.clientid, "match_result", "quit");
     }
 
     if(level.iszombiegame) {
-      setmatchdata("players", self.var_2418, "play_time", self.timeplayed["total"]);
-      setmatchdata("players", self.var_2418, "player_quit_on_round", maps\mp\_utility::func_2314(level.var_A980));
+      setmatchdata("players", self.clientid, "play_time", self.timeplayed["total"]);
+      setmatchdata("players", self.clientid, "player_quit_on_round", maps\mp\_utility::func_2314(level.var_A980));
     }
 
-    var_04 = getmatchdata("players", self.var_2418, "playermatchtime_start_ms");
-    var_05 = getmatchdata("players", self.var_2418, "playermatchtime_total_ms");
+    var_04 = getmatchdata("players", self.clientid, "playermatchtime_start_ms");
+    var_05 = getmatchdata("players", self.clientid, "playermatchtime_total_ms");
     var_05 = var_05 + gettime() - var_04;
-    setmatchdata("players", self.var_2418, "playermatchtime_total_ms", var_05);
+    setmatchdata("players", self.clientid, "playermatchtime_total_ms", var_05);
     if(maps\mp\_utility::rankingenabled()) {
       maps\mp\_matchdata::func_5E92();
     }
@@ -1221,23 +1221,23 @@ func_1E6A(param_00) {
     if(!level.iszombiegame) {
       if(maps\mp\_utility::func_57B2()) {
         var_06 = game["roundsPlayed"] + 1;
-        setmatchdata("players", self.var_2418, "player_quit_round", var_06);
+        setmatchdata("players", self.clientid, "player_quit_round", var_06);
         if(isDefined(self.team) && self.team == "allies" || self.team == "axis") {
           if(self.team == "allies") {
-            setmatchdata("players", self.var_2418, "player_quit_team_score", game["roundsWon"]["allies"]);
-            setmatchdata("players", self.var_2418, "player_quit_enemy_team_score", game["roundsWon"]["axis"]);
+            setmatchdata("players", self.clientid, "player_quit_team_score", game["roundsWon"]["allies"]);
+            setmatchdata("players", self.clientid, "player_quit_enemy_team_score", game["roundsWon"]["axis"]);
           } else {
-            setmatchdata("players", self.var_2418, "player_quit_team_score", game["roundsWon"]["axis"]);
-            setmatchdata("players", self.var_2418, "player_quit_enemy_team_score", game["roundsWon"]["allies"]);
+            setmatchdata("players", self.clientid, "player_quit_team_score", game["roundsWon"]["axis"]);
+            setmatchdata("players", self.clientid, "player_quit_enemy_team_score", game["roundsWon"]["allies"]);
           }
         }
       } else if(isDefined(self.team) && (self.team == "allies" || self.team == "axis") && level.teambased) {
         if(self.team == "allies") {
-          setmatchdata("players", self.var_2418, "player_quit_team_score", game["teamScores"]["allies"]);
-          setmatchdata("players", self.var_2418, "player_quit_enemy_team_score", game["teamScores"]["axis"]);
+          setmatchdata("players", self.clientid, "player_quit_team_score", game["teamScores"]["allies"]);
+          setmatchdata("players", self.clientid, "player_quit_enemy_team_score", game["teamScores"]["axis"]);
         } else {
-          setmatchdata("players", self.var_2418, "player_quit_team_score", game["teamScores"]["axis"]);
-          setmatchdata("players", self.var_2418, "player_quit_enemy_team_score", game["teamScores"]["allies"]);
+          setmatchdata("players", self.clientid, "player_quit_team_score", game["teamScores"]["axis"]);
+          setmatchdata("players", self.clientid, "player_quit_enemy_team_score", game["teamScores"]["allies"]);
         }
       }
     }
@@ -1270,7 +1270,7 @@ func_1E6A(param_00) {
   }
 
   maps\mp\gametypes\_gamelogic::func_8700(self);
-  function_00F5("script_mp_playerquit: player_name %s, player %d, gameTime %d", self.name, self.var_2418, gettime());
+  function_00F5("script_mp_playerquit: player_name %s, player %d, gameTime %d", self.name, self.clientid, gettime());
   var_09 = self getentitynumber();
   var_0A = self.guid;
   function_015A("Q;" + var_0A + ";" + var_09 + ";" + self.name + "\n");
@@ -1432,7 +1432,7 @@ func_5EA2() {
 
   var_0A = self getrankedplayerdata(common_scripts\utility::getstatgamemode(), "deviceConnectionHistory", var_04, "onWifi");
   if(var_0A) {
-    setmatchdata("players", self.var_2418, "onwifi", 1);
+    setmatchdata("players", self.clientid, "onwifi", 1);
   }
 }
 
@@ -1524,54 +1524,54 @@ callback_playerconnect() {
     }
   }
 
-  self.var_2418 = self.pers["clientid"];
+  self.clientid = self.pers["clientid"];
   self.pers["teamKillPunish"] = 0;
   self.pers["suicideSpawnDelay"] = 0;
   if(var_01) {
-    function_00F5("script_mp_playerjoin: player_name %s, player %d, gameTime %d", self.name, self.var_2418, gettime());
+    function_00F5("script_mp_playerjoin: player_name %s, player %d, gameTime %d", self.name, self.clientid, gettime());
   }
 
   function_015A("J;" + self.guid + ";" + self getentitynumber() + ";" + self.name + "\n");
   if(!function_0367() && game["clientid"] < 24 && game["clientid"] != getmatchdata("match_common", "player_count")) {
     if(!isai(self) && maps\mp\_utility::func_602B() && getdvarint("4017", 0) == 0) {
-      self registerparty(self.var_2418);
+      self registerparty(self.clientid);
     }
 
     setmatchdata("match_common", "player_count", game["clientid"]);
-    setmatchdata("players", self.var_2418, "client", "gamer_tag", func_9E05(self.name));
-    setmatchdata("players", self.var_2418, "client", "country", self getrankedplayerdata(common_scripts\utility::getstatgamemode(), "country"));
-    setmatchdata("players", self.var_2418, "client", "language", self getrankedplayerdata(common_scripts\utility::getstatgamemode(), "language"));
-    setmatchdata("players", self.var_2418, "client", "timezone", self getrankedplayerdata(common_scripts\utility::getstatgamemode(), "timezone"));
+    setmatchdata("players", self.clientid, "client", "gamer_tag", func_9E05(self.name));
+    setmatchdata("players", self.clientid, "client", "country", self getrankedplayerdata(common_scripts\utility::getstatgamemode(), "country"));
+    setmatchdata("players", self.clientid, "client", "language", self getrankedplayerdata(common_scripts\utility::getstatgamemode(), "language"));
+    setmatchdata("players", self.clientid, "client", "timezone", self getrankedplayerdata(common_scripts\utility::getstatgamemode(), "timezone"));
     if(!isDefined(level.iszombiegame) && level.iszombiegame) {
       var_06 = self getrankedplayerdata(common_scripts\utility::func_46A9(), "activeCostume");
-      setmatchdata("players", self.var_2418, "costume", "head", self getrankedplayerdata(common_scripts\utility::func_46A9(), "globalCostume", "head"));
-      setmatchdata("players", self.var_2418, "costume", "shirt", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "shirt"));
-      setmatchdata("players", self.var_2418, "costume", "pants", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "pants"));
-      setmatchdata("players", self.var_2418, "costume", "eyewear", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "eyewear"));
-      setmatchdata("players", self.var_2418, "costume", "hat", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "hat"));
-      setmatchdata("players", self.var_2418, "costume", "gear", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "gear"));
-      setmatchdata("players", self.var_2418, "costume", "uniform", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "uniform"));
+      setmatchdata("players", self.clientid, "costume", "head", self getrankedplayerdata(common_scripts\utility::func_46A9(), "globalCostume", "head"));
+      setmatchdata("players", self.clientid, "costume", "shirt", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "shirt"));
+      setmatchdata("players", self.clientid, "costume", "pants", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "pants"));
+      setmatchdata("players", self.clientid, "costume", "eyewear", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "eyewear"));
+      setmatchdata("players", self.clientid, "costume", "hat", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "hat"));
+      setmatchdata("players", self.clientid, "costume", "gear", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "gear"));
+      setmatchdata("players", self.clientid, "costume", "uniform", self getrankedplayerdata(common_scripts\utility::func_46A9(), "costumes", var_06, "uniform"));
     }
 
     var_07 = self getentitynumber();
-    setmatchdata("players", self.var_2418, "code_client_num", maps\mp\_utility::func_2314(var_07));
-    function_039F(self, self.var_2418);
-    setmatchdata("players", self.var_2418, "join_type", self getjointype());
+    setmatchdata("players", self.clientid, "code_client_num", maps\mp\_utility::func_2314(var_07));
+    function_039F(self, self.clientid);
+    setmatchdata("players", self.clientid, "join_type", self getjointype());
     if(var_01) {
-      setmatchdata("players", self.var_2418, "utc_connect_time_s", getsystemtime());
+      setmatchdata("players", self.clientid, "utc_connect_time_s", getsystemtime());
     }
 
     if(maps\mp\_utility::func_585F()) {
       if(var_01) {
-        setmatchdata("players", self.var_2418, "utc_first_spawn_time_s", 0);
+        setmatchdata("players", self.clientid, "utc_first_spawn_time_s", 0);
       }
     } else {
-      setmatchdata("players", self.var_2418, "is_bot", isai(self));
+      setmatchdata("players", self.clientid, "is_bot", isai(self));
     }
 
     func_5EA2();
     if(self ishost()) {
-      setmatchdata("players", self.var_2418, "was_host", 1);
+      setmatchdata("players", self.clientid, "was_host", 1);
     }
 
     if(maps\mp\_utility::rankingenabled()) {
@@ -1764,7 +1764,7 @@ callback_playerconnect() {
   }
 
   maps\mp\gametypes\_menus::func_9FC(self.pers["team"], 1);
-  if(maps\mp\_utility::func_5822(self.pers["class"]) && !maps\mp\_utility::isprophuntgametype()) {
+  if(maps\mp\_utility::isvalidclass(self.pers["class"]) && !maps\mp\_utility::isprophuntgametype()) {
     thread func_9035();
     return;
   }
@@ -1815,7 +1815,7 @@ func_1E6F() {
 
   if(self ishost()) {
     func_52A3();
-    setmatchdata("players", self.var_2418, "was_host", 1);
+    setmatchdata("players", self.clientid, "was_host", 1);
   }
 
   var_00 = 0;
@@ -1848,7 +1848,7 @@ func_3E2A() {
     return;
   }
 
-  if(!maps\mp\_utility::func_5822(self.pers["class"])) {
+  if(!maps\mp\_utility::isvalidclass(self.pers["class"])) {
     self.pers["class"] = "CLASS_CUSTOM1";
     self.var_2319 = self.pers["class"];
     maps\mp\gametypes\_class::func_23DC();
@@ -1865,7 +1865,7 @@ watchforhostmigrationonconnect() {
   self endon("attempted_spawn");
   for(;;) {
     self waittill("player_migrated");
-    if(maps\mp\_utility::func_5822(self.pers["class"])) {
+    if(maps\mp\_utility::isvalidclass(self.pers["class"])) {
       return;
     }
 

@@ -158,7 +158,7 @@ func_64E1() {
   self.var_3A68 scriptmodelplayanim(self.var_3A68.var_8109);
   wait(1.133333);
   self.var_3A69 notsolid();
-  self.var_3A69 method_8060();
+  self.var_3A69 connectpaths();
   self.var_3A69 delete();
   self.var_3A6A = 1;
 }
@@ -258,7 +258,7 @@ func_86E5(param_00) {
     var_03[var_04] = var_01[var_04];
   }
 
-  var_02 thread maps / mp / mp_zombie_nest_ee_util::func_649B(var_03, 450, 0);
+  var_02 thread maps / mp / mp_zombie_nest_ee_util::hasperkB(var_03, 450, 0);
   func_38F5();
   var_02 waittill("path complete");
   func_A072(var_02, param_00);
@@ -455,7 +455,7 @@ func_3299(param_00) {
     param_00 = 0;
   }
 
-  level.var_6E33.var_1E2D method_8060();
+  level.var_6E33.var_1E2D connectpaths();
   level.var_6E33.var_1E2D notsolid();
   level.var_6E33.var_1E2D delete();
   if(param_00) {

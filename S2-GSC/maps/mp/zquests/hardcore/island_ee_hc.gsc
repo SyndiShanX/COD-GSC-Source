@@ -2864,8 +2864,8 @@ pomel_door_open(param_00) {
     var_02 notsolid();
   }
 
-  var_02 method_8060();
-  var_01.door_blocker method_8060();
+  var_02 connectpaths();
+  var_01.door_blocker connectpaths();
   level thread common_scripts\_exploder::func_88E(214);
   wait(5);
   if(common_scripts\utility::func_562E(param_00)) {

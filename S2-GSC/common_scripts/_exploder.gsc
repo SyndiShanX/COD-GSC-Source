@@ -53,7 +53,7 @@ func_885C(param_00) {
     param_00 notsolid();
     if(isDefined(param_00.spawnflags) && param_00.spawnflags & 1) {
       if(isDefined(param_00.var_8166)) {
-        param_00 method_8060();
+        param_00 connectpaths();
       }
     }
 
@@ -64,7 +64,7 @@ func_885C(param_00) {
     param_00 hide();
     param_00 notsolid();
     if(isDefined(param_00.spawnflags) && param_00.spawnflags & 1) {
-      param_00 method_8060();
+      param_00 connectpaths();
     }
   }
 }
@@ -606,7 +606,7 @@ func_1CB2() {
 
   if(isDefined(self.model.classname)) {
     if(common_scripts\utility::func_57D7() && self.model.spawnflags & 1) {
-      self.model[[level.var_2587]]();
+      self.model[[level.connectpathsfunction]]();
     }
   }
 
@@ -724,7 +724,7 @@ func_1CB3() {
   self.var_1CB4 = 1;
   if(common_scripts\utility::func_57D7() && !isDefined(self.model.var_8205) && self.model.spawnflags & 1) {
     if(!isDefined(self.model.var_2FBF)) {
-      self.model[[level.var_2587]]();
+      self.model[[level.connectpathsfunction]]();
     } else {
       self.model[[level.var_2FC3]]();
     }

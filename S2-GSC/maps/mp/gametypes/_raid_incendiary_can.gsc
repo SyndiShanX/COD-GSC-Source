@@ -26,7 +26,7 @@ useincendiarycanwatcher() {
 }
 
 spawnandattachcan() {
-  var_00 = spawn("script_model", self.var_116);
+  var_00 = spawn("script_model", self.origin);
   var_00 setModel("ger_jerry_can_01_gas_raid_projectile");
   var_01 = spawn("trigger_radius", var_00.var_116, 0, 48, 20);
   var_01 enablelinkTo();
@@ -499,7 +499,7 @@ incendiarycanitemenable() {
 }
 
 incendiarydamagecallback(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
-  var_0C = self.var_116;
+  var_0C = self.origin;
   var_0D = self.var_1D;
   if(isDefined(self.var_2016)) {
     self.var_2016 maps\mp\gametypes\_gameobjects::func_2F93();

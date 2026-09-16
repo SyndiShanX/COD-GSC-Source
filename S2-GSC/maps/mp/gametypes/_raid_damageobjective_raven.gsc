@@ -20,7 +20,7 @@ func_2E32(param_00) {
   lib_04FF::func_6961("OvertimeDurationArray", var_01);
   lib_04FF::func_6983(self.var_1A5);
   param_00.var_1A7 = game["attackers"];
-  var_02 = lib_04FF::func_27DE("A", param_00.var_1A7, self.var_116);
+  var_02 = lib_04FF::func_27DE("A", param_00.var_1A7, self.origin);
   var_02 maps\mp\gametypes\_gameobjects::func_8A60("any");
   param_00.var_2563 = var_02;
   param_00.totalobjects = 0;
@@ -50,7 +50,7 @@ func_2E31(param_00) {
   wait 0.05;
   var_01 = self.var_6896 * 1000;
   param_00.var_A23F = var_01;
-  param_00 lib_04FF::func_990(self.var_116, undefined, (0, 0, 0), var_01, 110, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, self.var_6896);
+  param_00 lib_04FF::func_990(self.origin, undefined, (0, 0, 0), var_01, 110, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, self.var_6896);
   param_00 lib_04FF::func_860A(110);
   var_02 = self.var_6896;
   for(;;) {
@@ -195,7 +195,7 @@ runovertimezone(param_00) {
   var_05.snapicon = 1;
   var_05.var_681A = 1;
   var_05.var_A23F = var_04;
-  var_05 lib_04FF::func_990(self.var_116, undefined, (0, 0, 0), var_04, 110, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, self.var_6896);
+  var_05 lib_04FF::func_990(self.origin, undefined, (0, 0, 0), var_04, 110, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, self.var_6896);
   var_05 lib_04FF::func_860A(110);
   lib_04FF::func_6942(var_05);
   thread destructionobjectiveupdate(var_05);
@@ -401,8 +401,8 @@ func_2E2E() {
   wait 0.05;
   self.var_65EA destructionobjectdestroyed(self);
   endallfx();
-  self.var_3F6E = playFX(destructiongetdeathfx(self), self.var_116);
-  lib_04F3::func_79CB("mp_war_small_explo", self.var_116);
+  self.var_3F6E = playFX(destructiongetdeathfx(self), self.origin);
+  lib_04F3::func_79CB("mp_war_small_explo", self.origin);
   killdestructibleoutlinethread(self);
   if(isDefined(self.destroyed_model)) {
     setdestructionpropmodel(self.destroyed_model);
@@ -676,7 +676,7 @@ func_74E0() {
     return;
   }
 
-  var_00 = spawn("script_model", self.var_116);
+  var_00 = spawn("script_model", self.origin);
   var_00 setModel("tag_origin");
   var_00.var_1D = self.var_1D;
   var_01 = self.var_6E56["effect"];

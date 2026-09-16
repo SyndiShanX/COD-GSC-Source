@@ -192,7 +192,7 @@ func_3CD3() {
   var_02 = randomfloatrange(0.5, 0.6);
   foreach(var_04 in var_00) {
     var_04.var_6C48 = var_04.var_1D;
-    var_05 = var_04.var_116 - self.var_116;
+    var_05 = var_04.var_116 - self.origin;
     var_05 = (var_05[0], var_05[1], 0);
     var_05 = vectorNormalize(var_05);
     var_04 rotateTo(vectortoangles(var_05), var_02);
@@ -205,7 +205,7 @@ func_3CD3() {
       var_0B linkTo(var_08);
     }
 
-    var_05 = var_08.var_116 - self.var_116;
+    var_05 = var_08.var_116 - self.origin;
     var_05 = vectorNormalize(var_05);
     var_08 rotateTo(vectortoangles(var_05), var_02);
   }
@@ -213,14 +213,14 @@ func_3CD3() {
   wait(var_02);
   while(!isDefined(level.var_3CD0) || !level.var_3CD0) {
     foreach(var_04 in var_00) {
-      var_05 = var_04.var_116 - self.var_116;
+      var_05 = var_04.var_116 - self.origin;
       var_05 = (var_05[0], var_05[1], 0);
       var_05 = vectorNormalize(var_05);
       var_04.var_1D = vectortoangles(var_05);
     }
 
     foreach(var_11, var_08 in var_01) {
-      var_05 = var_08.var_116 - self.var_116;
+      var_05 = var_08.var_116 - self.origin;
       var_05 = vectorNormalize(var_05);
       var_08.var_1D = vectortoangles(var_05);
       if(var_08.var_1D[0] > 50) {
@@ -267,7 +267,7 @@ func_3CCC() {
   var_01 = anglestoright(self.var_1D);
   var_02 = randomintrange(-1200, 1200);
   var_03 = randomintrange(-600, 600);
-  playFX(common_scripts\utility::func_44F5("flak_gun_explosion"), self.var_116 + var_00 * var_02 + var_01 * var_03);
+  playFX(common_scripts\utility::func_44F5("flak_gun_explosion"), self.origin + var_00 * var_02 + var_01 * var_03);
 }
 
 func_2721(param_00) {
@@ -277,7 +277,7 @@ func_2721(param_00) {
   playFXOnTag(common_scripts\utility::func_44F5("flak_intro_vehicle_flame_trail"), self, "tag_origin");
   lib_0378::func_8D74("mp_intro_flak_plane_deathspin");
   wait(3.25);
-  playFX(common_scripts\utility::func_44F5("flak_intro_vehicle_explosion_midair"), self.var_116);
+  playFX(common_scripts\utility::func_44F5("flak_intro_vehicle_explosion_midair"), self.origin);
   lib_0378::func_8D74("mp_intro_flak_plane_explode");
   self method_805C();
 }

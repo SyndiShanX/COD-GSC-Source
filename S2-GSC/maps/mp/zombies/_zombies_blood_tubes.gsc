@@ -790,8 +790,8 @@ transport_open(param_00) {
   }
 
   var_01 = 1;
-  self.door_l.var_241F method_8060();
-  self.door_r.var_241F method_8060();
+  self.door_l.var_241F connectpaths();
+  self.door_r.var_241F connectpaths();
   if(!common_scripts\utility::func_562E(param_00)) {
     wait(self.blood_fill.var_A796);
   }

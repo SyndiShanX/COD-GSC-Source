@@ -2039,7 +2039,7 @@ func_258B() {
     return;
   }
 
-  var_00[[level.var_2587]]();
+  var_00[[level.connectpathsfunction]]();
   var_00.origin = var_00.origin - (0, 0, 10000);
 }
 
@@ -2362,7 +2362,7 @@ func_24E0(param_00) {
 
   self waittill("exploded");
   if(common_scripts\utility::func_57D7() && param_00.spawnflags & 1) {
-    param_00[[level.var_2587]]();
+    param_00[[level.connectpathsfunction]]();
   }
 
   param_00 delete();
@@ -2371,7 +2371,7 @@ func_24E0(param_00) {
 func_24DF(param_00) {
   param_00 notsolid();
   if(common_scripts\utility::func_57D7() && param_00.spawnflags & 1) {
-    param_00[[level.var_2587]]();
+    param_00[[level.connectpathsfunction]]();
   }
 
   self waittill("exploded");

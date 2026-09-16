@@ -23,7 +23,7 @@ drop_pod_init_drop_points() {
         case "drop_pod_shell_collide":
           var_02.clip_shell = var_05;
           var_02.clip_shell notsolid();
-          var_02.clip_shell method_8060();
+          var_02.clip_shell connectpaths();
           break;
 
         case "drop_pod_door_collide":
@@ -34,7 +34,7 @@ drop_pod_init_drop_points() {
         case "drop_pod_floor_collide":
           var_02.clip_floor = var_05;
           var_02.clip_floor notsolid();
-          var_02.clip_floor method_8060();
+          var_02.clip_floor connectpaths();
           break;
 
         case "drop_pod_fall_collide":
@@ -111,7 +111,7 @@ drop_pod_set_drop_point_active() {
   wait 0.05;
   if(isDefined(self.clip_floor)) {
     self.clip_floor solid();
-    self.clip_floor method_8060();
+    self.clip_floor connectpaths();
   }
 
   wait 0.05;
@@ -160,13 +160,13 @@ drop_pod_set_drop_point_active() {
 
 drop_pod_set_drop_point_inactive() {
   self.clip_shell notsolid();
-  self.clip_shell method_8060();
+  self.clip_shell connectpaths();
   self.clip_shell method_8511();
   self.clip_door notsolid();
-  self.clip_door method_8060();
+  self.clip_door connectpaths();
   self.clip_door method_8511();
   self.clip_floor notsolid();
-  self.clip_floor method_8060();
+  self.clip_floor connectpaths();
   self.clip_floor method_8511();
   self.spawned_model delete();
   foreach(var_01 in self.spawned_debris) {

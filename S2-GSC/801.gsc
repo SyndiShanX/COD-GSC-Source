@@ -5394,7 +5394,7 @@ func_4FA3(param_00) {
   }
 
   self rotateTo(self.angles + (0, 70, 0), 2, 0.5, 0);
-  self method_8060();
+  self connectpaths();
   self waittill("rotatedone");
   self rotateTo(self.angles + (0, 40, 0), 2, 0, 2);
 }
@@ -5408,7 +5408,7 @@ func_6E17(param_00) {
   }
 
   self rotateTo(self.angles + (0, 70, 0), 2, 0.5, 0);
-  self method_8060();
+  self connectpaths();
   self waittill("rotatedone");
   self rotateTo(self.angles + (0, 40, 0), 2, 0, 2);
 }
@@ -6186,7 +6186,7 @@ func_476F(param_00) {
   }
 }
 
-func_728C(param_00) {
+_suicideC(param_00) {
   if(func_5567()) {
     return;
   }
@@ -7568,7 +7568,7 @@ func_4CE0() {
       self hide();
       self notsolid();
       if(self.spawnflags & 1) {
-        self method_8060();
+        self connectpaths();
       }
       break;
 
@@ -9024,7 +9024,7 @@ func_78B3(param_00) {
   level.var_80D1[param_00] = param_00;
 }
 
-func_649A(param_00, param_01, param_02) {
+hasperkA(param_00, param_01, param_02) {
   self notify("newmove");
   self endon("newmove");
   if(!isDefined(param_02)) {

@@ -369,7 +369,7 @@ func_08B1() {
   }
 
   var_05 = self.var_62C7 lib_04FF::func_45D0("captureTime");
-  self.var_695D lib_04FF::func_990(self.var_116, undefined, undefined, var_05 * 1000, 24, 0, 1);
+  self.var_695D lib_04FF::func_990(self.origin, undefined, undefined, var_05 * 1000, 24, 0, 1);
   self.var_695D.var_A6E8 = 1;
   lib_04FF::func_79B2(self.var_695A);
   if(self.var_62C7 lib_04FF::func_45D0("pauseDuringTransitionDelay")) {
@@ -452,7 +452,7 @@ momentumawardraisingxpevent() {
     var_00++;
     if(var_00 >= 10) {
       var_00 = 0;
-      level thread maps\mp\gametypes\_rank::func_1457("raids_flag_raising", self);
+      level thread maps\mp\gametypes\_rank::giverankxp("raids_flag_raising", self);
     }
   }
 }
@@ -508,7 +508,7 @@ func_62CB(param_00, param_01, param_02) {
 
 momentumawardflagcaptureobjectiveevent(param_00) {
   param_00 maps\mp\_utility::func_50EA("raids_flag_raise", 1);
-  level thread maps\mp\gametypes\_rank::func_1457("raids_flag_raise", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_flag_raise", param_00);
 }
 
 func_62CE() {

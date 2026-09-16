@@ -140,7 +140,7 @@ deathmatchsubobjectiveinit(param_00) {
   lib_04FF::func_6983(self.var_1A5);
   param_00.var_1A7 = game[param_00.var_82B2];
   self.var_651B = 1;
-  var_01 = lib_04FF::func_27DE(param_00.var_81E8, param_00.var_82B2, self.var_116);
+  var_01 = lib_04FF::func_27DE(param_00.var_81E8, param_00.var_82B2, self.origin);
   var_01 maps\mp\gametypes\_gameobjects::func_8A60("none");
   param_00.var_2563 = var_01;
   param_00 thread rundeathmatchsubobjective();
@@ -162,7 +162,7 @@ deathmatchsubobjectiveimagetimer(param_00) {
   var_01 = self.scoretowin * 1000;
   param_00.var_A23F = var_01;
   var_02 = lib_0502::func_4518("deathmatch", self.var_81E1);
-  param_00 lib_04FF::func_990(self.var_116, undefined, (0, 0, 0), var_01, var_02, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, self.scoretowin);
+  param_00 lib_04FF::func_990(self.origin, undefined, (0, 0, 0), var_01, var_02, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, self.scoretowin);
   param_00 lib_04FF::func_860A(var_02);
   for(;;) {
     if(self.currentscore != self.scoretowin) {

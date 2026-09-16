@@ -485,7 +485,7 @@ hc_quest_bat_step03_door_open_follower() {
   var_04 = getEnt("hc_bat_smuggler_door", "script_noteworthy");
   var_05 = getEnt("hc_bat_smuggler_door_clip", "script_noteworthy");
   var_05 notsolid();
-  var_05 method_8060();
+  var_05 connectpaths();
   var_05 solid();
   lib_0378::func_8D74("smugglers_bat_door_break_down", var_04.origin);
   var_04 rotateroll(-90, 0.25);
@@ -506,7 +506,7 @@ hc_quest_bat_step03_door_open_escaped() {
   lib_0378::func_8D74("smugglers_bat_door_open_squeaky", var_02.origin);
   var_02 rotateYaw(120, 2, 0.8, 0.4);
   var_03 notsolid();
-  var_03 method_8060();
+  var_03 connectpaths();
   var_04 = getEntArray("hc_bat_smuggler_door_escape", "script_noteworthy");
   foreach(var_06 in var_04) {
     var_06.angles = var_06.angles - (0, 15, 0);
@@ -2598,8 +2598,8 @@ hc_quest_finale_utility_open_doors(param_00) {
   var_05 method_8449(var_06);
   var_02 notsolid();
   var_05 notsolid();
-  var_02 method_8060();
-  var_05 method_8060();
+  var_02 connectpaths();
+  var_05 connectpaths();
   var_02 solid();
   var_05 solid();
   lib_0378::func_8D74("aud_open_barbarosa_area_door", var_01.origin);
@@ -2623,8 +2623,8 @@ hc_quest_finale_utility_close_doors() {
   var_04 method_8449(var_05);
   var_01 notsolid();
   var_04 notsolid();
-  var_01 method_8060();
-  var_04 method_8060();
+  var_01 connectpaths();
+  var_04 connectpaths();
   var_01 solid();
   var_04 solid();
   lib_0378::func_8D74("aud_close_barbarosa_area_door", var_00.origin);

@@ -1049,7 +1049,7 @@ func_2837(param_00, param_01, param_02, param_03, param_04, param_05) {
   return var_06;
 }
 
-func_6497(param_00, param_01) {
+hasperk7(param_00, param_01) {
   if(!isDefined(param_01)) {
     param_01 = (0, 0, 0);
   }

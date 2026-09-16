@@ -903,7 +903,7 @@ func_7445(param_00, param_01) {
   }
 
   if(getdvarint("311")) {
-    maps\mp\_utility::func_8742(1);
+    maps\mp\_utility::setthirdpersondof(1);
   }
 
   self setshadows(1);

@@ -40,7 +40,7 @@ func_9E26(param_00, param_01) {
     return 0;
   }
 
-  self.var_1162 = [];
+  self.origin2 = [];
   return func_A207();
 }
 
@@ -62,17 +62,17 @@ func_A207() {
   }
 
   for(var_01 = 0; var_01 < 4; var_01++) {
-    self.var_1162 = common_scripts\utility::func_FA0(self.var_1162);
-    var_02 = self.var_1162.size;
-    self.var_1162[var_02] = maps / mp / agents / _agent_common::func_2586("dog", self.team);
-    if(!isDefined(self.var_1162[var_02])) {
+    self.origin2 = common_scripts\utility::func_FA0(self.origin2);
+    var_02 = self.origin2.size;
+    self.origin2[var_02] = maps / mp / agents / _agent_common::func_2586("dog", self.team);
+    if(!isDefined(self.origin2[var_02])) {
       return 0;
     }
 
-    self.var_1162[var_02] maps / mp / agents / _agent_utility::func_83FE(self.team, self);
+    self.origin2[var_02] maps / mp / agents / _agent_utility::func_83FE(self.team, self);
     var_03 = var_00[var_01].origin;
     var_04 = var_00[var_01].angles;
-    self.var_1162[var_02] thread[[self.var_1162[var_02] maps / mp / agents / _agent_utility::func_A59("spawn")]](var_03, var_04, self);
+    self.origin2[var_02] thread[[self.origin2[var_02] maps / mp / agents / _agent_utility::func_A59("spawn")]](var_03, var_04, self);
   }
 
   thread func_93B8();
@@ -93,7 +93,7 @@ func_93B8() {
 func_77C2() {
   level endon("game_ended");
   self waittill("end_attack_dogs");
-  foreach(var_01 in self.var_1162) {
+  foreach(var_01 in self.origin2) {
     if(isDefined(var_01)) {
       maps / mp / agents / _agent_utility::func_5A28(var_01);
     }
@@ -122,10 +122,10 @@ func_7DA6() {
   self endon("end_attack_dogs");
   for(var_00 = 0; var_00 < 4; var_00++) {
     self waittill("respawn_dog");
-    self.var_1162 = common_scripts\utility::func_FA0(self.var_1162);
-    var_01 = self.var_1162.size;
-    self.var_1162[var_01] = maps / mp / agents / _agent_common::func_2586("dog", self.team);
-    if(!isDefined(self.var_1162[var_01])) {
+    self.origin2 = common_scripts\utility::func_FA0(self.origin2);
+    var_01 = self.origin2.size;
+    self.origin2[var_01] = maps / mp / agents / _agent_common::func_2586("dog", self.team);
+    if(!isDefined(self.origin2[var_01])) {
       return 0;
     }
 
@@ -135,7 +135,7 @@ func_7DA6() {
       var_02 = [[level.var_4696]]();
     }
 
-    self.var_1162[var_01] thread[[self.var_1162[var_01] maps / mp / agents / _agent_utility::func_A59("spawn")]](var_02.origin, var_02.angles, self);
+    self.origin2[var_01] thread[[self.origin2[var_01] maps / mp / agents / _agent_utility::func_A59("spawn")]](var_02.origin, var_02.angles, self);
   }
 }
 

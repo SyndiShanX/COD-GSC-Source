@@ -1167,7 +1167,7 @@ cleanupbroadcastersplashlist() {
     self waittill("luinotifyserver", var_00, var_01);
     if(var_00 == "broadcaster_client_change") {
       var_02 = int(floor(var_01 / 100));
-      if(var_02 == self.var_2418) {
+      if(var_02 == self.clientid) {
         self notify("cleanupBroadcasterSplashList");
         self.var_7AD5 = undefined;
         self notify("splash_list_cleared");

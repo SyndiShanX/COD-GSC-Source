@@ -920,7 +920,7 @@ sub_pen_blocker_listener() {
       }
 
       self.var_241F.var_565F = 0;
-      self.var_241F method_8060();
+      self.var_241F connectpaths();
       self.var_241F notsolid();
       self.var_3255 setscriptablepartstate("gate", "opening");
       wait(0.7);
@@ -1008,7 +1008,7 @@ cgate_blocker_init() {
       switch (var_06.script_noteworthy) {
         case "blocker_clip":
           var_02.var_241F = var_06;
-          var_02.var_241F common_scripts\utility::func_2CBE(3, ::method_8060);
+          var_02.var_241F common_scripts\utility::func_2CBE(3, ::connectpaths);
           var_02.var_241F notsolid();
           break;
       }
@@ -1165,7 +1165,7 @@ cgate_set_state(param_00) {
       var_01.var_3255 method_80B1();
       wait(15.16667);
       foreach(var_03 in var_01.clip_blockers) {
-        var_03 method_8060();
+        var_03 connectpaths();
         var_03 delete();
       }
 

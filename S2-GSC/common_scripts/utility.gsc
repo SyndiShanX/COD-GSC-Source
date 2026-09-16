@@ -895,8 +895,8 @@ func_A70B(param_00, param_01) {
 }
 
 func_0161() {
-  if(isDefined(self.var_161) && self.var_161 > 0) {
-    wait(self.var_161);
+  if(isDefined(self.script_delay) && self.script_delay > 0) {
+    wait(self.script_delay);
     return 1;
   } else if(isDefined(self.var_8154) && isDefined(self.var_8153)) {
     wait(randomfloatrange(self.var_8154, self.var_8153));
@@ -907,7 +907,7 @@ func_0161() {
 }
 
 func_4B3F() {
-  if(isDefined(self.var_161)) {
+  if(isDefined(self.script_delay)) {
     return 1;
   }
 
@@ -2955,7 +2955,7 @@ func_5818() {
   return !self.var_2F80;
 }
 
-func_0601() {
+_disableusability() {
   if(!isDefined(self.var_2F80)) {
     self.var_2F80 = 0;
   }
@@ -2964,7 +2964,7 @@ func_0601() {
   self disableusability();
 }
 
-func_0615() {
+_enableusability() {
   if(!isDefined(self.var_2F80)) {
     self.var_2F80 = 0;
     return;
@@ -2984,7 +2984,7 @@ func_7D75() {
   self enableusability();
 }
 
-func_0602() {
+_disableweapon() {
   if(!isDefined(self.var_2F81)) {
     self.var_2F81 = 0;
   }
@@ -2993,7 +2993,7 @@ func_0602() {
   self disableweapons();
 }
 
-func_0616() {
+_enableweapon() {
   if(!isDefined(self.var_2F81)) {
     self.var_2F81 = 0;
   }
@@ -3032,7 +3032,7 @@ func_0668() {
   return !self.var_2F82;
 }
 
-func_0600() {
+_disableoffhandweapons() {
   if(!isDefined(self.var_2F7E)) {
     self.var_2F7E = 0;
   }
@@ -3041,7 +3041,7 @@ func_0600() {
   self disableoffhandweapons();
 }
 
-func_0614() {
+_enableoffhandweapons() {
   if(!isDefined(self.var_2F7E)) {
     self.var_2F7E = 0;
   }
@@ -3702,8 +3702,8 @@ func_AA4A(param_00, param_01, param_02, param_03) {
 }
 
 func_7237(param_00, param_01, param_02) {
-  if(isDefined(self.var_2418)) {
-    var_03 = self.var_2418;
+  if(isDefined(self.clientid)) {
+    var_03 = self.clientid;
   } else {
     var_03 = 0;
   }
@@ -3791,7 +3791,7 @@ func_37CE(param_00) {
       if(var_04) {
         self method_805F();
       } else {
-        self method_8060();
+        self connectpaths();
       }
 
       var_01 = var_04;

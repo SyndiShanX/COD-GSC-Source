@@ -49,7 +49,7 @@ func_8744() {
   var_00 = getdvarint("ds_time_limit");
   if(var_00 > 0) {
     var_01 = getdvarfloat("ds_time_limit") / 60;
-    level.var_9309 = gettime();
+    level.starttime = gettime();
     var_02 = "scr_" + level.var_3FDC + "_timelimit";
     level.var_A901[var_02].var_A281 = var_01;
     setDvar(var_02, var_01);

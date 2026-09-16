@@ -418,12 +418,12 @@ func_989A(param_00) {
   var_03["allies"] = level.var_289D["allies"].origin;
   var_03["axis"] = level.var_289D["axis"].origin;
   foreach(var_05 in var_01) {
-    var_05 maps\mp\gametypes\_gameobjects::func_6497(var_03[var_05.var_6DB2], (0, 0, 85));
+    var_05 maps\mp\gametypes\_gameobjects::hasperk7(var_03[var_05.var_6DB2], (0, 0, 85));
     var_05.var_9D65 common_scripts\utility::func_9D9F();
   }
 
   foreach(var_08 in level.var_9853) {
-    var_08 maps\mp\gametypes\_gameobjects::func_6497(var_03[var_08.var_6DB2], (0, 0, 85));
+    var_08 maps\mp\gametypes\_gameobjects::hasperk7(var_03[var_08.var_6DB2], (0, 0, 85));
     if(isDefined(var_08.var_2006)) {
       var_08 maps\mp\gametypes\_gameobjects::func_8A60("any");
       var_08 maps\mp\gametypes\_gameobjects::func_860A("friendly", level.var_5014);

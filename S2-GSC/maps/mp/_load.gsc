@@ -132,7 +132,7 @@ main() {
   level.var_3F02["setTeamHeadIcon"] = ::maps\mp\_entityheadicons::func_873C;
   level.var_5B0E = ::method_80A4;
   level.var_5B0C = ::method_80A5;
-  level.var_2587 = ::method_8060;
+  level.connectpathsfunction = ::connectpaths;
   level.var_2FC3 = ::method_805F;
   func_84B5();
   func_8A15();

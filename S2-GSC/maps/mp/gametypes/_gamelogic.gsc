@@ -983,7 +983,7 @@ func_A198(param_00) {
 
 func_9412(param_00) {
   self endon("disconnect");
-  maps\mp\_utility::func_2402();
+  maps\mp\_utility::clearlowermessages();
   if(!isDefined(param_00)) {
     param_00 = 0.05;
   }
@@ -1207,8 +1207,8 @@ func_21EC(param_00) {
   }
 
   if(maps\mp\_utility::func_46E2() <= 0) {
-    if(isDefined(level.var_9309)) {
-      setgameendtime(level.var_9309);
+    if(isDefined(level.starttime)) {
+      setgameendtime(level.starttime);
     } else {
       setgameendtime(0);
     }
@@ -1221,7 +1221,7 @@ func_21EC(param_00) {
     return;
   }
 
-  if(!isDefined(level.var_9309)) {
+  if(!isDefined(level.starttime)) {
     return;
   }
 
@@ -1271,7 +1271,7 @@ func_21C3() {
     var_01 = int(var_00 / 2 + 0.5);
     if(game["teamScores"]["allies"] >= var_01 || game["teamScores"]["axis"] >= var_01) {
       game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::gettimepassed();
-      game["round_time_to_beat"] = maps\mp\_utility::func_4589();
+      game["round_time_to_beat"] = maps\mp\_utility::getminutespassed();
       return 1;
     }
   }
@@ -1427,7 +1427,7 @@ func_21E3() {
 func_A121() {
   level endon("game_ended");
   while(game["state"] == "playing") {
-    if(isDefined(level.var_9309)) {
+    if(isDefined(level.starttime)) {
       if(func_46E5() < 3000) {
         wait(0.1);
         continue;
@@ -1702,12 +1702,12 @@ func_9A1B() {
     return undefined;
   }
 
-  if(!isDefined(level.var_9309)) {
+  if(!isDefined(level.starttime)) {
     return undefined;
   }
 
   var_02 = maps\mp\_utility::func_46E2();
-  var_00 = gettime() - level.var_9309 / 1000;
+  var_00 = gettime() - level.starttime / 1000;
   var_01 = maps\mp\_utility::func_46E2() * 60 - var_02;
   if(isDefined(level.var_2FB1)) {
     var_02 = var_02 + level.var_2FB1;
@@ -2577,7 +2577,7 @@ func_99F6() {
   while(game["state"] == "playing") {
     thread func_21EC(var_00);
     var_00 = maps\mp\_utility::gettimepassed();
-    if(isDefined(level.var_9309)) {
+    if(isDefined(level.starttime)) {
       if(func_46E5() < 3000) {
         wait(0.1);
         continue;
@@ -2662,11 +2662,11 @@ func_99F3() {
 func_3FD8() {
   level endon("game_ended");
   level waittill("prematch_over");
-  level.var_9309 = gettime();
+  level.starttime = gettime();
   level.var_2FB1 = 0;
   level.var_6027 = gettime();
   if(isDefined(game["roundMillisecondsAlreadyPassed"])) {
-    level.var_9309 = level.var_9309 - game["roundMillisecondsAlreadyPassed"];
+    level.starttime = level.starttime - game["roundMillisecondsAlreadyPassed"];
     level.var_3C68 = game["roundMillisecondsAlreadyPassed"];
     game["roundMillisecondsAlreadyPassed"] = undefined;
   }
@@ -3626,7 +3626,7 @@ func_6028(param_00, param_01, param_02) {
           setmatchdata("match_common", "isDedicated", isdedicatedserver());
         }
 
-        setmatchdata("match_common", "levelMaxClients", level.var_6079);
+        setmatchdata("match_common", "levelMaxClients", sv_maxclients);
         if(isDefined(game["trapSpawnDiedTooFastCount"]) && isDefined(game["trapSpawnKilledTooFastCount"])) {
           var_21 = game["trapSpawnDiedTooFastCount"] + game["trapSpawnKilledTooFastCount"];
         } else {
@@ -4230,8 +4230,8 @@ func_6028(param_00, param_01, param_02) {
         }
 
         var_08 = maps\mp\_utility::getpersstat("headshots");
-        var_09 = getmatchdata("players", self.var_2418, "playermatchtime_total_ms");
-        var_0A = getmatchdata("players", self.var_2418, "total_xp");
+        var_09 = getmatchdata("players", self.clientid, "playermatchtime_total_ms");
+        var_0A = getmatchdata("players", self.clientid, "total_xp");
         self setrankedplayerdata(common_scripts\utility::func_46AE(), "combatRecord", "trend", var_03 - 1, "timestamp", var_04);
         self setrankedplayerdata(common_scripts\utility::func_46AE(), "combatRecord", "trend", var_03 - 1, "kills", var_05);
         self setrankedplayerdata(common_scripts\utility::func_46AE(), "combatRecord", "trend", var_03 - 1, "deaths", var_06);
@@ -4299,7 +4299,7 @@ func_6028(param_00, param_01, param_02) {
         }
 
         var_02 = maps\mp\_utility::getpersstat("headshots");
-        var_03 = int(getmatchdata("players", self.var_2418, "playermatchtime_total_ms") / 1000);
+        var_03 = int(getmatchdata("players", self.clientid, "playermatchtime_total_ms") / 1000);
         var_04 = function_03B5();
         var_05 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_04, "kills");
         var_06 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_04, "deaths");
@@ -4498,7 +4498,7 @@ func_6028(param_00, param_01, param_02) {
         var_04 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "combatRecord", var_03, param_00);
         if(param_01 > var_04) {
           func_8651(param_00, param_01);
-          setmatchdata("players", self.var_2418, param_02, 1);
+          setmatchdata("players", self.clientid, param_02, 1);
         }
       }
 

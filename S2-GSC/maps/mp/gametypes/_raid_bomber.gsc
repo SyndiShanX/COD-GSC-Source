@@ -1223,29 +1223,29 @@ update_map_center(param_00) {
 }
 
 is_plane_outside_boundary() {
-  var_00 = distancesquared(self.var_116, level.var_5FEB);
-  var_01 = distance2dsquared(self.var_116, level.var_5FEB);
+  var_00 = distancesquared(self.origin, level.var_5FEB);
+  var_01 = distance2dsquared(self.origin, level.var_5FEB);
   if(0) {
     if(var_00 >= 2025000000) {
       return 1;
     }
 
     if(0) {
-      if(var_00 > 1024000000 && var_00 <= 2025000000 && !common_scripts\utility::func_AA4A(self.var_116, self.var_1D, level.var_5FEB, cos(32.5))) {
+      if(var_00 > 1024000000 && var_00 <= 2025000000 && !common_scripts\utility::func_AA4A(self.origin, self.var_1D, level.var_5FEB, cos(32.5))) {
         return 1;
       }
     } else if(var_00 > 1024000000 && var_00 <= 2025000000) {
       return 1;
     }
 
-    if(abs(self.var_116[2] - level.var_5FEB[2]) > 20000) {
+    if(abs(self.origin[2] - level.var_5FEB[2]) > 20000) {
       return 1;
     }
 
     return 0;
   }
 
-  var_02 = abs(self.var_116[2] - level.var_5FEB[2]);
+  var_02 = abs(self.origin[2] - level.var_5FEB[2]);
   if(var_01 >= 729000000) {
     return 1;
   }
@@ -1255,7 +1255,7 @@ is_plane_outside_boundary() {
   }
 
   if(0) {
-    if(((var_02 > 10000 && var_02 < 14000) || var_01 > 484000000 && var_01 < 729000000) && !common_scripts\utility::func_AA4A(self.var_116, self.var_1D, level.var_5FEB, cos(32.5))) {
+    if(((var_02 > 10000 && var_02 < 14000) || var_01 > 484000000 && var_01 < 729000000) && !common_scripts\utility::func_AA4A(self.origin, self.var_1D, level.var_5FEB, cos(32.5))) {
       return 1;
     }
   } else if((var_02 > 10000 && var_02 < 14000) || var_01 > 484000000 && var_01 < 729000000) {
@@ -1266,8 +1266,8 @@ is_plane_outside_boundary() {
 }
 
 is_plane_outside_hard_boundary() {
-  var_00 = distance2dsquared(self.var_116, level.var_5FEB);
-  var_01 = abs(self.var_116[2] - level.var_5FEB[2]);
+  var_00 = distance2dsquared(self.origin, level.var_5FEB);
+  var_01 = abs(self.origin[2] - level.var_5FEB[2]);
   if(var_00 >= 729000000) {
     return 1;
   }
@@ -1692,7 +1692,7 @@ func_51FC() {
     self.var_522C = level.b17_cluster_ent.var_116 + self.cluster_offset;
     self.var_515C = level.b17_cluster_ent.var_1D;
   } else {
-    self.var_522C = self.var_116;
+    self.var_522C = self.origin;
     self.var_515C = self.var_1D;
   }
 
@@ -1864,24 +1864,24 @@ func_14DE(param_00, param_01) {
 
     var_05 = common_scripts\utility::func_7A33(level.pp_array);
     var_04 = gettime() + randomfloatrange(2, 4) * 1000;
-    var_06 = distance2d(self.var_116, var_05.var_116);
+    var_06 = distance2d(self.origin, var_05.var_116);
     self notify("turret_sound_on");
     while(isDefined(var_05) && var_05.var_BC > 1 && var_04 > gettime() || var_06 < 7000) {
       var_07 = 0;
-      var_08 = var_05.var_116 - self.var_116;
+      var_08 = var_05.var_116 - self.origin;
       var_08 = (var_08[0], var_08[1], 0);
       var_08 = vectorNormalize(var_08);
       var_09 = vectordot(var_08, var_02);
       var_0A = vectordot(var_08, var_03);
       switch (param_01) {
         case "belly":
-          if(var_05.var_116[2] < self.var_116[2]) {
+          if(var_05.var_116[2] < self.origin[2]) {
             var_07 = 1;
           }
           break;
 
         case "top":
-          if(var_05.var_116[2] > self.var_116[2] + 96) {
+          if(var_05.var_116[2] > self.origin[2] + 96) {
             var_07 = 1;
           }
           break;
@@ -1914,7 +1914,7 @@ func_14DE(param_00, param_01) {
       if(var_06 > 768 && var_07) {
         var_0B = combineangles(param_00.var_1D, self.var_1D);
         foreach(var_11, var_0D in param_00.var_3BB7[param_01]) {
-          var_0E = rotatevector(var_0D.var_116, var_0B) + self.var_116;
+          var_0E = rotatevector(var_0D.var_116, var_0B) + self.origin;
           var_0F = anglesToForward(var_05.var_1D) * var_05 method_8283() * 7;
           var_10 = vectorNormalize(var_05.var_116 + var_0F - var_0E);
           var_10 = common_scripts\utility::func_7A60(var_10, 5);
@@ -1925,7 +1925,7 @@ func_14DE(param_00, param_01) {
 
       wait 0.05;
       if(isDefined(var_05)) {
-        var_06 = distance2dsquared(self.var_116, var_05.var_116);
+        var_06 = distance2dsquared(self.origin, var_05.var_116);
       }
     }
 
@@ -1944,22 +1944,22 @@ func_14C3(param_00) {
 
 func_3742() {
   self endon("death");
-  self.var_1195 = 0;
-  self.var_1194 = gettime() + 200;
+  self.angles5 = 0;
+  self.angles4 = gettime() + 200;
   for(;;) {
     self waittill("b17_attacking", var_00);
     if((!common_scripts\utility::func_3794("is_dogfight_target") && level.var_14DC >= 2) || level.var_14DC >= 1 && !isDefined(level.var_7610.var_31E7) && level.var_7610.var_31E7 == self) {
-      if(self.var_1194 < gettime()) {
-        self.var_1194 = gettime() + 200;
-        self.var_1195 = 0;
+      if(self.angles4 < gettime()) {
+        self.angles4 = gettime() + 200;
+        self.angles5 = 0;
       }
 
-      self.var_1195++;
-      if(self.var_1195 * level.var_14DC > 5) {
-        if(common_scripts\utility::func_AA4A(level.var_721C getEye(), level.var_721C geteyeangles(), self.var_116, 0.83)) {
+      self.angles5++;
+      if(self.angles5 * level.var_14DC > 5) {
+        if(common_scripts\utility::func_AA4A(level.var_721C getEye(), level.var_721C geteyeangles(), self.origin, 0.83)) {
           self notify("damage");
           wait(0.2);
-          self.var_1195 = 0;
+          self.angles5 = 0;
         }
       }
     }
@@ -2574,7 +2574,7 @@ fighter_damage_callback(param_00, param_01, param_02, param_03, param_04, param_
     var_0C.var_BC = 1;
     var_0C thread fighter_death(var_0D, param_06, param_01, param_00, param_04, param_05, param_08);
     if(isPlayer(param_01)) {
-      level thread maps\mp\gametypes\_rank::func_1457("raids_dogfight_kill", param_01, param_05, var_0D, param_04, param_00);
+      level thread maps\mp\gametypes\_rank::giverankxp("raids_dogfight_kill", param_01, param_05, var_0D, param_04, param_00);
       return;
     }
 
@@ -2584,7 +2584,7 @@ fighter_damage_callback(param_00, param_01, param_02, param_03, param_04, param_
   if(isPlayer(param_01)) {
     var_12 = anglesToForward(var_0D.var_1D);
     var_12 = vectorNormalize(var_12);
-    var_13 = param_01.var_116 - self.var_116;
+    var_13 = param_01.var_116 - self.origin;
     var_13 = vectorNormalize(var_13);
     var_14 = vectordot(var_12, var_13);
     if(var_14 < 0) {
@@ -3250,7 +3250,7 @@ func_0A40(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 }
 
 agent_killed(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
-  level thread maps\mp\gametypes\_rank::func_1457("raids_npc_kill", param_01, param_04, self, param_03, param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_npc_kill", param_01, param_04, self, param_03, param_00);
   if(isDefined(level.var_6A75)) {
     [[level.var_6A75]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
   }

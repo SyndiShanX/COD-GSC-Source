@@ -53,7 +53,7 @@ func_14C9() {
     }
 
     if(var_0A.size > 0 && gettime() - var_02 > var_03 * 1000) {
-      earthquake(0.15, var_03, self.var_116, 5000, var_0A);
+      earthquake(0.15, var_03, self.origin, 5000, var_0A);
       var_02 = gettime();
     }
 

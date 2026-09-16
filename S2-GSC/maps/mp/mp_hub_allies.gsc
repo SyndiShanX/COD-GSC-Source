@@ -671,7 +671,7 @@ begindevicesequence() {
     var_07 = spawn("script_model", var_06.var_0116);
     var_07.var_001D = var_06.var_001D;
     var_07 setModel("hub_resistance_device_radio");
-    var_07 method_8617("mp_hammerhead_morse_lp");
+    var_07 playSound("mp_hammerhead_morse_lp");
     playFXOnTag(common_scripts\utility::func_44F5("hub_resistance_radio_ping"), var_07, "tag_origin");
     var_08 = level.deviceinteract common_scripts\utility::func_A715("timed_out", "trigger");
     if(var_08 == "timed_out") {

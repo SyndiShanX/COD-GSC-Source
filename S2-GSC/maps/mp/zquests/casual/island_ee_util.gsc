@@ -202,7 +202,7 @@ run_bomber_door() {
   wait_for_door_destroyed();
   self.bomb_target delete();
   foreach(var_01 in self.door_pieces) {
-    var_01 method_8060();
+    var_01 connectpaths();
     var_01 delete();
   }
 }

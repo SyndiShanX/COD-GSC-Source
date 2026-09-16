@@ -832,7 +832,7 @@ airship_objects_hide(param_00) {
   self hide();
   self notsolid();
   if(isDefined(param_00) && param_00) {
-    self method_8060();
+    self connectpaths();
   }
 }
 
@@ -1511,7 +1511,7 @@ airship_animation_pull_down_airship(param_00) {
   var_0F method_805F();
   var_10 = getEnt("clip_door", "script_noteworthy");
   var_10 notsolid();
-  var_10 method_8060();
+  var_10 connectpaths();
   var_02 scriptmodelclearanim();
   var_02 scriptmodelplayanim("s2_zmb_drop_pod_open_front", "drop_pod_door_open");
   var_02 = getEnt("drop_pod_model", "script_noteworthy");
@@ -1546,7 +1546,7 @@ airship_animation_drop_pod_movement(param_00) {
     level.straub_airship method_8495("s2_zom_zep_tether_scene_zep_up", param_00.origin, param_00.angles);
     level.drop_pod_up_start_time = gettime();
     var_03 notsolid();
-    var_03 method_8060();
+    var_03 connectpaths();
     var_0A = level common_scripts\utility::func_A74D("drop_pod_moving_down", var_06);
     if(isDefined(var_0A) && var_0A == "timeout") {
       level notify("drop_pod_reached_airship");
@@ -1565,7 +1565,7 @@ airship_animation_drop_pod_movement(param_00) {
     var_03 method_805F();
     var_03 notsolid();
     var_04 notsolid();
-    var_04 method_8060();
+    var_04 connectpaths();
   }
 }
 

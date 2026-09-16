@@ -440,7 +440,7 @@ func_939E(param_00) {
   wait(1);
   for(;;) {
     if(isDefined(param_00)) {
-      self.var_116 = param_00.var_116;
+      self.origin = param_00.var_116;
     } else {
       return;
     }
@@ -785,7 +785,7 @@ func_6AD6(param_00) {
   maps\mp\gametypes\_gameobjects::func_8740("enemy", self.var_79AD lib_04FF::func_45D0("flagPickupTime"));
   func_28A9();
   lib_04FF::func_6981(self.var_695A, "progress", 0, 1, self.var_9D65.var_81E1);
-  if(param_00 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+  if(param_00 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
     self.var_6993 = 7.5;
   } else {
     self.var_6993 = 5;

@@ -86,7 +86,7 @@ func_5332() {
     var_06 = var_04[1];
     if(isDefined(level.var_25A0[var_05]) && var_02 > 0) {
       func_477D(var_03, var_05, var_06, "upSlot", var_01);
-      setmatchdata("players", self.var_2418, "loadout", "consumables", 0, var_01);
+      setmatchdata("players", self.clientid, "loadout", "consumables", 0, var_01);
     }
 
     var_07 = self getrankedplayerdata(common_scripts\utility::func_46A8(), "equippedConsumables", 1, "ID");
@@ -97,7 +97,7 @@ func_5332() {
     var_0C = var_0A[1];
     if(isDefined(level.var_25A0[var_0B]) && var_08 > 0 && !var_01 == var_07 || var_08 > 1) {
       func_477D(var_09, var_0B, var_0C, "downSlot", var_07);
-      setmatchdata("players", self.var_2418, "loadout", "consumables", 1, var_07);
+      setmatchdata("players", self.clientid, "loadout", "consumables", 1, var_07);
     }
 
     var_0D = self getrankedplayerdata(common_scripts\utility::func_46A8(), "equippedConsumables", 2, "ID");
@@ -374,7 +374,7 @@ func_25A2(param_00) {
     }
   }
 
-  lib_0547::writeusedconsumable(self.var_259F[param_00].var_7B7D, self.var_2418, self.origin);
+  lib_0547::writeusedconsumable(self.var_259F[param_00].var_7B7D, self.clientid, self.origin);
 }
 
 func_AABA() {

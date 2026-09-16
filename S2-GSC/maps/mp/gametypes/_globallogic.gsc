@@ -118,15 +118,15 @@ func_8A0C() {
   level.var_4696 = ::func_4437;
   level.var_7658 = ::lib_050E::func_4436;
   level.var_A278 = ::lib_050E::func_A278;
-  level.var_6BA7 = ::func_1786;
-  level.var_6B96 = ::func_1786;
+  level.var_6BA7 = ::blank;
+  level.var_6B96 = ::blank;
   level.var_6BB6 = ::maps\mp\gametypes\_gamelogic::func_2BB0;
   level.var_6B42 = ::maps\mp\gametypes\_gamelogic::func_2BAE;
   level.var_6AE2 = ::maps\mp\gametypes\_gamelogic::func_2BAD;
   level.var_6B5E = ::maps\mp\gametypes\_gamelogic::func_2BAF;
-  level.var_6B86 = ::func_1786;
-  level.var_6BAF = ::func_1786;
-  level.var_6B7B = ::func_1786;
+  level.var_6B86 = ::blank;
+  level.var_6BAF = ::blank;
+  level.var_6B7B = ::blank;
   level.var_1385 = ::maps\mp\gametypes\_menus::func_1385;
 }
 
@@ -194,7 +194,7 @@ func_4437() {
   return var_00;
 }
 
-func_1786(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {}
+blank(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {}
 
 func_991A() {
   self endon("death");
@@ -224,7 +224,7 @@ func_991C() {
 }
 
 onxpevent(param_00) {
-  level thread maps\mp\gametypes\_rank::func_1457(param_00, self);
+  level thread maps\mp\gametypes\_rank::giverankxp(param_00, self);
 }
 
 func_2B57(param_00, param_01) {

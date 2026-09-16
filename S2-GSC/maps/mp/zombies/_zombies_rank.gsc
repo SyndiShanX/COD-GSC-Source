@@ -106,19 +106,19 @@ func_536F() {
 
 func_7B39() {
   var_00 = lib_0547::func_4745(self, "totalGames");
-  setmatchdata("players", self.var_2418, "start_zm_games_played", var_00);
-  setmatchdata("players", self.var_2418, "start_total_xp", self.var_AB46["totalXP"]);
-  setmatchdata("players", self.var_2418, "start_rank", self.var_AB46["rank"]);
+  setmatchdata("players", self.clientid, "start_zm_games_played", var_00);
+  setmatchdata("players", self.clientid, "start_total_xp", self.var_AB46["totalXP"]);
+  setmatchdata("players", self.clientid, "start_rank", self.var_AB46["rank"]);
   var_01 = lib_0547::func_4745(self, "totalHeadshots");
   var_02 = lib_0547::func_4745(self, "totalKills");
   var_03 = lib_0547::func_4745(self, "totalRevives");
   var_04 = lib_0547::func_4745(self, "totalMoneyEarned");
   var_05 = lib_0547::func_4745(self, "totalRounds");
-  setmatchdata("players", self.var_2418, "start_lifetime_headshots", var_01);
-  setmatchdata("players", self.var_2418, "start_lifetime_kills", var_02);
-  setmatchdata("players", self.var_2418, "start_lifetime_revives", var_03);
-  setmatchdata("players", self.var_2418, "start_lifetime_score", var_04);
-  setmatchdata("players", self.var_2418, "start_lifetime_waves", var_05);
+  setmatchdata("players", self.clientid, "start_lifetime_headshots", var_01);
+  setmatchdata("players", self.clientid, "start_lifetime_kills", var_02);
+  setmatchdata("players", self.clientid, "start_lifetime_revives", var_03);
+  setmatchdata("players", self.clientid, "start_lifetime_score", var_04);
+  setmatchdata("players", self.clientid, "start_lifetime_waves", var_05);
 }
 
 func_5370() {

@@ -525,7 +525,7 @@ func_36EC(param_00, param_01) {
 
 func_282D() {}
 
-func_649B(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+hasperkB(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   var_08 = 8;
   self.var_5787 = 0;
   if(!isDefined(param_05)) {
@@ -733,7 +733,7 @@ func_86E4(param_00) {
   self.origin = var_01.origin;
   self setplayerangles(var_01.angles);
   self playerlinktoabsolute(var_01);
-  var_01 thread func_649B(param_00, 1000, 0, undefined, undefined, 1, self);
+  var_01 thread hasperkB(param_00, 1000, 0, undefined, undefined, 1, self);
   var_01 waittill("path complete");
   self unlink();
   var_01 delete();

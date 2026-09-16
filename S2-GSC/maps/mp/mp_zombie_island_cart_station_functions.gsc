@@ -69,7 +69,7 @@ set_doors_closed(param_00) {
 }
 
 set_doors_opened(param_00) {
-  self.zmb_mine_cart_path_blocker[param_00] method_8060();
+  self.zmb_mine_cart_path_blocker[param_00] connectpaths();
   self.zmb_mine_cart_path_blocker[param_00] notsolid();
   var_01 = "s2_zom_mine_cart_gate_open";
   if(lib_0547::func_5565(self.zmb_mine_cart_gates[param_00].prevstate, 1)) {

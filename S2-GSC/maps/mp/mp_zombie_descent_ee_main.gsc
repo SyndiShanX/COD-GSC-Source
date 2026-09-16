@@ -385,7 +385,7 @@ run_bomber_debris_puzzle() {
   }
 
   var_00 hide();
-  var_01 method_8060();
+  var_01 connectpaths();
   var_01 notsolid();
   common_scripts\utility::func_3C8F("limbo_debris_exploded");
 }
@@ -4477,7 +4477,7 @@ moonraven_init_bookshelf() {
   var_12 = 8;
   var_01 moveTo(var_11.origin, var_12);
   var_13 = getEnt("moonraven_bookshelf_path", "targetname");
-  var_13 method_8060();
+  var_13 connectpaths();
   var_13 notsolid();
   enable_bookshelf_zombies(1);
   common_scripts\utility::func_3C8F("moonraven_reveal_chart");
@@ -4556,7 +4556,7 @@ moonraven_debug_reveal_chart() {
   var_0B = 1;
   var_05 moveTo(var_07.origin, var_0B);
   var_0C = getEnt("moonraven_bookshelf_path", "targetname");
-  var_0C method_8060();
+  var_0C connectpaths();
   var_0C notsolid();
   common_scripts\utility::func_3C8F("moonraven_reveal_chart");
   common_scripts\utility::func_3C8F("moonraven_all_keys_placed");
@@ -6142,13 +6142,13 @@ ice_block_break() {
   }
 
   if(isDefined(self.var_241F)) {
-    self.var_241F method_8060();
+    self.var_241F connectpaths();
     self.var_241F hide();
     self.var_241F notsolid();
   }
 
   if(isDefined(self.clip_broke)) {
-    self.clip_broke method_8060();
+    self.clip_broke connectpaths();
     self.clip_broke solid();
   }
 

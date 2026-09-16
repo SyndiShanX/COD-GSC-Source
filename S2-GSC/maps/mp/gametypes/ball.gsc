@@ -1005,7 +1005,7 @@ func_1526(param_00, param_01) {
   level maps\mp\gametypes\_gamescore::func_47BD(param_00, param_01, 1);
   if(game["status"] == "overtime") {
     game["ball_overtime_team"] = param_00;
-    game["round_time_to_beat"] = maps\mp\_utility::func_4589();
+    game["round_time_to_beat"] = maps\mp\_utility::getminutespassed();
     level thread maps\mp\gametypes\_gamelogic::endgame("overtime_halftime", game["end_reason"]["switching_sides"]);
     return;
   }

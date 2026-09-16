@@ -72,7 +72,7 @@ func_9081(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   func_86FA(var_08, param_01, "machine_gun", 1);
   thread func_3C19(var_08, param_01);
   if(getdvarint("311")) {
-    param_01 maps\mp\_utility::func_8742(0);
+    param_01 maps\mp\_utility::setthirdpersondof(0);
   }
 
   param_01 setclientomnvar("ui_plane_gunner_reloading", 0);
@@ -636,7 +636,7 @@ func_7445(param_00) {
   }
 
   if(getdvarint("311")) {
-    maps\mp\_utility::func_8742(1);
+    maps\mp\_utility::setthirdpersondof(1);
   }
 
   self setshadows(1);

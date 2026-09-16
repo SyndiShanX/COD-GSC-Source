@@ -1077,7 +1077,7 @@ ee_quest_step_escort_frank_collect_prize_think() {
   level thread common_scripts\_exploder::func_88E(205);
   var_00 delete();
   var_03 rotateby((0, -120, 0), 1, 0.25, 0.25);
-  var_02 method_8060();
+  var_02 connectpaths();
   lib_0378::func_8D74("wine_cellar_door_open", var_03.origin);
   var_05 = getEnt("sword_hilt", "targetname");
   var_05 lib_0547::func_AC41(&"ZOMBIE_DLC3_PICKUP_PART_1");

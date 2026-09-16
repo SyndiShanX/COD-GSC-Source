@@ -120,8 +120,8 @@ func_6BAF() {
   level thread func_3211();
   level thread func_A109();
   level thread func_A160();
-  level.var_4958 = maps\mp\_utility::func_3517("halftimeswitchsides", 1, 0, 1);
-  level.var_C27 = maps\mp\_utility::func_3517("allowNeutral", 0, 0, 1);
+  level.var_4958 = maps\mp\_utility::dvarintvalue("halftimeswitchsides", 1, 0, 1);
+  level.var_C27 = maps\mp\_utility::dvarintvalue("allowNeutral", 0, 0, 1);
 }
 
 func_A160() {
@@ -802,11 +802,11 @@ func_A101() {
   }
 
   self.var_6885++;
-  if(maps\mp\_utility::func_4589() < 1) {
+  if(maps\mp\_utility::getminutespassed() < 1) {
     return;
   }
 
-  self.var_270D = self.var_6885 / maps\mp\_utility::func_4589();
+  self.var_270D = self.var_6885 / maps\mp\_utility::getminutespassed();
 }
 
 func_444A() {

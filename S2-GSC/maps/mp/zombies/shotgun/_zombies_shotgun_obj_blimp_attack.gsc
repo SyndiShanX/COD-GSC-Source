@@ -985,7 +985,7 @@ battery_init_drop_points() {
         case "zmb_blimp_pieces_clip":
           var_02.var_241F = var_05;
           var_02.var_241F notsolid();
-          var_02.var_241F method_8060();
+          var_02.var_241F connectpaths();
           var_02.var_241F method_8511();
           break;
       }
@@ -1212,7 +1212,7 @@ battery_set_drop_point_inactive() {
     self.var_7F41 delete();
   }
 
-  self.var_241F method_8060();
+  self.var_241F connectpaths();
   self.var_241F notsolid();
   self.var_241F hide();
   self.var_57F7 = 0;

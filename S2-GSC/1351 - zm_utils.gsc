@@ -865,7 +865,7 @@ lib_0547::func_6B9E(param_00, param_01, param_02, param_03, param_04, param_05, 
 
   var_10 = maps\mp\agents\_scripted_agent_anim_util::func_434D(var_0D);
   if(isDefined(self.var_9D07)) {
-    lib_0547::func_649D();
+    lib_0547::hasperkD();
   }
 
   self method_839D("gravity");
@@ -974,7 +974,7 @@ lib_0547::func_1F67(param_00) {
   return var_02.size == 0;
 }
 
-lib_0547::func_649D() {
+lib_0547::hasperkD() {
   var_00 = 20;
   var_01 = vectortoangles(self.var_9D07);
   var_02 = anglestoup(var_01);
@@ -1652,7 +1652,7 @@ lib_0547::func_0C23(param_00) {
   }
 
   if(maps\mp\_utility::func_0649(var_01)) {
-    maps\mp\_utility::func_0735(var_01);
+    maps\mp\_utility::unsetperk(var_01);
   }
 }
 
@@ -1668,7 +1668,7 @@ lib_0547::func_0C26(param_00) {
   }
 
   if(maps\mp\_utility::func_0649(var_01)) {
-    maps\mp\_utility::func_0735(var_01);
+    maps\mp\_utility::unsetperk(var_01);
   }
 }
 
@@ -5212,7 +5212,7 @@ lib_0547::func_8A6B(param_00) {
 }
 
 lib_0547::func_A086(param_00) {
-  maps\mp\_utility::func_0735(param_00);
+  maps\mp\_utility::unsetperk(param_00);
 }
 
 lib_0547::func_9470(param_00) {
@@ -6379,7 +6379,7 @@ zmsustainedholdthink(param_00, param_01, param_02) {
     param_00 linkTo(self);
   }
 
-  param_00 common_scripts\utility::func_0602();
+  param_00 common_scripts\utility::_disableweapon();
   thread zmsustainedholdthinkplayerreset(param_00, param_02);
   self.var_28D5 = 0;
   self.var_54F5 = 1;
@@ -6408,7 +6408,7 @@ zmsustainedholdthinkplayerreset(param_00, param_01) {
 
   var_03 = common_scripts\utility::func_A712(var_02);
   if(isalive(param_00)) {
-    param_00 common_scripts\utility::func_0616();
+    param_00 common_scripts\utility::_enableweapon();
     if(param_00 islinked()) {
       param_00 unlink();
     }

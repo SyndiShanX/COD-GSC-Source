@@ -1319,7 +1319,7 @@ ch_kills(param_00) {
       var_01 processchallenge("ch_precision_sitaware");
     }
 
-    if(maps\mp\_utility::func_5781(var_01) && var_01 maps\mp\_utility::_hasperk("specialty_class_bang")) {
+    if(maps\mp\_utility::isplayeronenemyteam(var_01) && var_01 maps\mp\_utility::_hasperk("specialty_class_bang")) {
       var_01 processchallenge("ch_explosives_bang");
     }
 
@@ -2721,7 +2721,7 @@ func_4724(param_00) {
   var_02 = strtok(param_00, "_");
   if(var_02.size > 0) {
     var_03 = var_02[var_02.size - 1];
-    if(isDefined(var_03) && maps\mp\_utility::func_5679(var_03)) {
+    if(isDefined(var_03) && maps\mp\_utility::isattachment(var_03)) {
       return var_03;
     }
   }

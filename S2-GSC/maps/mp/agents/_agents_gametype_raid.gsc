@@ -195,7 +195,7 @@ func_0A60() {
 
 func_6A79(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
   self[[level.var_A5D]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, 0);
-  level thread maps\mp\gametypes\_rank::func_1457("raids_npc_kill", param_01, param_04, self, param_03);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_npc_kill", param_01, param_04, self, param_03);
   if(isDefined(level.var_6A75)) {
     [[level.var_6A75]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
   }

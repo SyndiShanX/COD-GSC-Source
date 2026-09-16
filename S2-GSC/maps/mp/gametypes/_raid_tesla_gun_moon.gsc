@@ -20,7 +20,7 @@ tryuseteslamoon(param_00) {
 
 tryuseteslamooninternal() {
   if(maps\mp\_utility::func_57A0(self)) {
-    maps\mp\_matchdata::func_5E9A("raid_tesla_moon", self.var_116);
+    maps\mp\_matchdata::func_5E9A("raid_tesla_moon", self.origin);
     return 1;
   }
 

@@ -624,7 +624,7 @@ func_2AB1(param_00) {
   func_747F();
   if(isDefined(self method_85E2())) {
     self method_80F4();
-    self dodamage(self.var_FB * 10, self.var_116, self, undefined, "MOD_EXPLOSIVE");
+    self dodamage(self.var_FB * 10, self.origin, self, undefined, "MOD_EXPLOSIVE");
     return;
   }
 
@@ -633,7 +633,7 @@ func_2AB1(param_00) {
 
 func_2AB2(param_00) {
   var_01 = self;
-  var_02 = self.var_116;
+  var_02 = self.origin;
   var_03 = self.var_1D;
   var_04 = self getEye() + anglesToForward(var_03) * 40;
   var_05 = var_02 + anglesToForward(var_03) * 70;

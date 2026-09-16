@@ -665,7 +665,7 @@ quest_drop_pod_init() {
   wait 0.05;
   var_02 method_8449(var_00);
   var_02 notsolid();
-  var_02 method_8060();
+  var_02 connectpaths();
   var_03 = getEnt("drop_pod_cable", "script_noteworthy");
   var_03 hide();
   var_00.lightfx = spawnlinkedfx(common_scripts\utility::func_44F5("zmb_drop_pod_light"), var_00, "tag_origin");
@@ -696,12 +696,12 @@ quest_drop_pod_init() {
   var_0D movez(-128, 0.05);
   wait 0.05;
   var_0D notsolid();
-  var_0D method_8060();
+  var_0D connectpaths();
   var_0E = getEnt("clip_door", "script_noteworthy");
   var_0E movez(-128, 0.05);
   wait 0.05;
   var_0E notsolid();
-  var_0E method_8060();
+  var_0E connectpaths();
   var_0F = getEnt("model_airship_drop_pod", "script_noteworthy");
   var_0F.airpodlightfx = spawnlinkedfx(common_scripts\utility::func_44F5("zmb_drop_pod_light"), var_0F, "tag_origin");
   triggerfx(var_0F.airpodlightfx);
@@ -1433,7 +1433,7 @@ quest_wunderbuss_open_close_doors() {
 
       foreach(var_09 in var_02) {
         var_09 notsolid();
-        var_09 method_8060();
+        var_09 connectpaths();
       }
       break;
 
@@ -1625,7 +1625,7 @@ escape_airship_init() {
   var_00 = getEnt("clip_airship_drop_pod_closed", "script_noteworthy");
   var_00 notsolid();
   wait 0.05;
-  var_00 method_8060();
+  var_00 connectpaths();
 }
 
 escape_airship_logic() {
@@ -1978,7 +1978,7 @@ quest_pap_handler(param_00) {
 open_elevator_doors(param_00, param_01, param_02) {
   param_01 method_8495("zmb_elevator_door_open_02", param_00.origin, param_00.angles, "script_anim");
   param_01 lib_0378::func_8D74("aud_pap_open_elevator");
-  param_02 method_8060();
+  param_02 connectpaths();
   wait 0.05;
   param_02 delete();
 }

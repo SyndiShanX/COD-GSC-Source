@@ -412,7 +412,7 @@ func_82F2() {
         continue;
       }
 
-      var_09 method_8060();
+      var_09 connectpaths();
     }
 
     var_04 = var_04 - var_05;
@@ -430,7 +430,7 @@ func_82F2() {
 
     var_09 notsolid();
     if(var_05 == 0) {
-      var_09 method_8060();
+      var_09 connectpaths();
     }
 
     var_09 hide();
@@ -746,12 +746,12 @@ func_7F5E(param_00) {
   }
 
   if(param_00 maps\mp\_movers::func_8221()) {
-    param_00 method_8060();
+    param_00 connectpaths();
   }
 
   foreach(var_04 in param_00.var_5DBD) {
     if(var_04 maps\mp\_movers::func_8221()) {
-      var_04 method_8060();
+      var_04 connectpaths();
     }
   }
 }

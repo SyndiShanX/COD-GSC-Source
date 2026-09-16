@@ -200,7 +200,7 @@ func_8675() {
   self.maxhealth = maps\mp\gametypes\_tweakables::gettweakablevalue("player", "maxhealth") * 4;
   self.health = self.maxhealth;
   self.endgame = 1;
-  self.var_119A[0] = "";
+  self.anglesA[0] = "";
   self visionsetnakedforplayer("end_game", 5);
   thread func_36BB(7);
   self.var_4B62 = 1;
@@ -708,8 +708,8 @@ func_47EA(param_00) {
   for(;;) {
     self.var_3773 waittill("trigger", var_01);
     var_01 notify("destroyed_explosive");
-    level thread maps\mp\gametypes\_rank::func_1457("tac_insert_enemy_destroyed", var_01);
-    level thread maps\mp\gametypes\_rank::func_1457("tac_insert_destroyed", param_00);
+    level thread maps\mp\gametypes\_rank::giverankxp("tac_insert_enemy_destroyed", var_01);
+    level thread maps\mp\gametypes\_rank::giverankxp("tac_insert_destroyed", param_00);
     var_01 maps\mp\gametypes\_missions::processchallenge("ch_boot_field");
     if(var_01 maps\mp\_utility::_hasperk("specialty_detectexplosive")) {
       var_01 maps\mp\gametypes\_missions::processchallenge("ch_perks3_engineer");
@@ -2943,11 +2943,11 @@ handleclassifiedboostaftermultikillorheadshot(param_00) {
         break;
     }
 
-    level thread maps\mp\gametypes\_rank::func_1457(var_02, self);
+    level thread maps\mp\gametypes\_rank::giverankxp(var_02, self);
   }
 
   if(param_00) {
-    level thread maps\mp\gametypes\_rank::func_1457("classified_bonus_headshot", self);
+    level thread maps\mp\gametypes\_rank::giverankxp("classified_bonus_headshot", self);
   }
 
   if(var_01 || param_00) {

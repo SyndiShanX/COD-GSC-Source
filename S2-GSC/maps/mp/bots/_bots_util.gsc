@@ -1353,8 +1353,8 @@ func_1A02() {
 func_19EE() {
   var_00 = function_0364();
   var_00 = max(var_00, getdvarint("5321", 0));
-  if(var_00 > level.var_6079) {
-    return level.var_6079;
+  if(var_00 > sv_maxclients) {
+    return sv_maxclients;
   }
 
   return var_00;

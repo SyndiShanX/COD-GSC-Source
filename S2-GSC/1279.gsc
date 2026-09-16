@@ -793,9 +793,9 @@ func_17CE(param_00, param_01, param_02) {
 func_17C6(param_00, param_01) {
   self endon("disconnect");
   var_02 = (0, 0, self getviewheight());
-  var_03 = spawn("script_model", self.var_116 + var_02);
+  var_03 = spawn("script_model", self.origin + var_02);
   var_03.var_1D = self.var_1D;
-  var_03.var_116 = self.var_116 + var_02;
+  var_03.var_116 = self.origin + var_02;
   var_03 setModel("tag_player");
   self method_81E2(var_03, "tag_player");
   self setOrigin(param_00);
@@ -1099,7 +1099,7 @@ func_7E12(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   self.var_6A = self.var_6A + param_02;
   if(self.var_6A >= self.var_FB) {
-    var_0C = self.var_116;
+    var_0C = self.origin;
     self.var_3FCA maps\mp\gametypes\_gameobjects::func_7E30();
     playFX(common_scripts\utility::func_44F5("objective_resupply_death"), var_0C);
     var_0C = var_0C + (0, 0, 5);
@@ -1413,7 +1413,7 @@ func_7935() {
   maps\mp\_utility::func_50EA("pointscaptured", 1);
   maps\mp\_utility::func_50E9("captures", 1);
   maps\mp\gametypes\_persistence::func_933A("round", "captures", self.var_12C["captures"]);
-  level thread maps\mp\gametypes\_rank::func_1457("capture", self);
+  level thread maps\mp\gametypes\_rank::giverankxp("capture", self);
   maps\mp\gametypes\_missions::func_7750("ch_heroics_destroyer");
 }
 
@@ -1751,7 +1751,7 @@ func_1FBE() {
 
           var_0D.capturing_objective_time = var_0D.capturing_objective_time + gettime() - var_05;
           if(var_0D.capturing_objective_time >= var_04 * 1000) {
-            if(var_0D maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+            if(var_0D maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
               lib_0502::raidawardsecuringobjectiveevent(var_0D);
             }
 
@@ -2410,7 +2410,7 @@ func_3859(param_00) {
   self.var_6920 = 0;
   self.var_6911 = 0;
   self.var_6906 = 0;
-  self.var_1197 = 0;
+  self.angles7 = 0;
   self.var_2C7E = 0;
   self.var_9263 = 1;
   self.var_931A = "";
@@ -2451,8 +2451,8 @@ func_3855(param_00) {
   self.var_6920 = 0;
   self.var_6911 = 0;
   self.var_6906 = 0;
-  self.var_1196 = 0;
-  self.var_1197 = 0;
+  self.angles6 = 0;
+  self.angles7 = 0;
   self.var_2C7D = 0;
   self.var_2C7E = 0;
   self.var_9263 = 1;
@@ -2664,7 +2664,7 @@ func_3847() {
     var_06 = func_3844(game["attackers"]);
     var_07 = func_3844(game["defenders"]);
     if(var_06) {
-      self.var_1197 = gettime();
+      self.angles7 = gettime();
     }
 
     if(var_07) {
@@ -2737,7 +2737,7 @@ func_3847() {
     if(!var_06 && !var_07) {
       if(func_3841() && var_0C) {
         var_09 = "blocked_reverse";
-      } else if(gettime() - self.var_1197 > var_00 * 1000 && var_0C) {
+      } else if(gettime() - self.angles7 > var_00 * 1000 && var_0C) {
         var_09 = "reverse";
       } else {
         var_09 = "stop";
@@ -2749,7 +2749,7 @@ func_3847() {
     } else if(var_07 && !var_06) {
       if(func_3841() && var_0C) {
         var_09 = "blocked_reverse";
-      } else if(gettime() - self.var_1197 > var_00 * 1000 && var_0C) {
+      } else if(gettime() - self.angles7 > var_00 * 1000 && var_0C) {
         var_09 = "reverse";
       } else {
         var_09 = "stop";
@@ -2795,7 +2795,7 @@ func_3847() {
 
           var_10.escorting_tank_time = var_10.escorting_tank_time + gettime() - var_04;
           if(var_10.escorting_tank_time >= var_01 * 1000) {
-            if(var_10 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+            if(var_10 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
               lib_0502::raidawardtankescortevent(var_10);
             }
 
@@ -3561,7 +3561,7 @@ func_3866(param_00, param_01) {
   self.currentcheckpoint++;
   foreach(var_03 in self.var_383C.var_9AC3[game["attackers"]]) {
     var_04 = var_03.var_721C;
-    if(var_04 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+    if(var_04 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
       lib_0502::raidawardtankescortcheckpointevent(var_04);
     }
   }
@@ -4895,8 +4895,8 @@ hostageobjectiveinit(param_00) {
   var_03 = self.var_982D["door_clip"][0].var_982D["objective_icon"][0].var_116;
   var_04 = lib_0502::func_4518("rescue_hostage", var_02);
   self.var_A23F = 1000 * self.numhostagesstart + 1;
-  var_05 = var_03 - self.var_116;
-  func_0990(self.var_116, undefined, var_05, self.var_A23F, var_04, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, 3);
+  var_05 = var_03 - self.origin;
+  func_0990(self.origin, undefined, var_05, self.var_A23F, var_04, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, 3);
   func_8615(0);
   var_06 = func_27DE(self.var_81E8, game["attackers"], var_03);
   var_06 maps\mp\gametypes\_gameobjects::func_8A60("any");
@@ -5254,7 +5254,7 @@ hostagedoorconnectpathsforvisuals(param_00) {
   if(isDefined(param_00)) {
     foreach(var_02 in param_00) {
       if(var_02 lib_0502::func_56D3()) {
-        var_02 method_8060();
+        var_02 connectpaths();
       }
     }
   }

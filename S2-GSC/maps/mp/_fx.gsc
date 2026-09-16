@@ -4,7 +4,7 @@
 *********************************************/
 
 func_8274() {
-  if(!isDefined(self.var_81BB) || !isDefined(self.var_81BA) || !isDefined(self.var_161)) {
+  if(!isDefined(self.var_81BB) || !isDefined(self.var_81BA) || !isDefined(self.script_delay)) {
     self delete();
     return;
   }

@@ -141,7 +141,7 @@ ship_tilting_object_movement() {
     var_02 = var_00 * 0.05;
     var_03 = level common_scripts\utility::waittill_any_return("ship_tilting_starboard", "ship_tilting_port");
     wait(var_00 * 0.2);
-    self.tilterclip method_8060();
+    self.tilterclip connectpaths();
     var_04 = getnodearray("ship_tilting_collision_nodes", "targetname");
     if(isDefined(level.var_9068.var_9090) && isarray(level.var_9068.var_9090)) {
       var_04 = common_scripts\utility::func_F73(var_04, level.var_9068.var_9090);

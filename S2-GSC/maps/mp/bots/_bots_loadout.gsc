@@ -160,7 +160,7 @@ func_1A68(param_00, param_01, param_02) {
       break;
 
     case "attachment":
-      var_05 = maps\mp\_utility::func_4429(param_01);
+      var_05 = maps\mp\_utility::getattachmenttype(param_01);
       break;
 
     case "killstreak":
@@ -601,37 +601,37 @@ func_1A5E(param_00, param_01) {
   var_02 = int(getsubstr(param_00, 5, 6)) - 1;
   switch (param_01) {
     case "loadoutDivision":
-      return maps\mp\gametypes\_class::func_9583(level.var_2324, var_02);
+      return maps\mp\gametypes\_class::func_9583(level.classtablename, var_02);
 
     case "loadoutPrimaryGUID":
-      return maps\mp\gametypes\_class::func_9590(level.var_2324, var_02, 0);
+      return maps\mp\gametypes\_class::func_9590(level.classtablename, var_02, 0);
 
     case "loadoutPrimaryAttachmentGUID1":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 0, 0);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 0);
 
     case "loadoutPrimaryAttachmentGUID2":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 0, 1);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 1);
 
     case "loadoutPrimaryAttachmentGUID3":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 0, 2);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 2);
 
     case "loadoutPrimaryAttachmentGUID4":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 0, 3);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 3);
 
     case "loadoutPrimaryAttachmentGUID5":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 0, 4);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 4);
 
     case "loadoutPrimaryAttachmentGUID6":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 0, 5);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 5);
 
     case "loadoutPrimaryCamoGUID":
-      return maps\mp\gametypes\_class::func_958E(level.var_2324, var_02, 0);
+      return maps\mp\gametypes\_class::func_958E(level.classtablename, var_02, 0);
 
     case "loadoutPrimaryCamo2GUID":
       return 0;
 
     case "loadoutPrimaryReticleGUID":
-      return maps\mp\gametypes\_class::func_9591(level.var_2324, var_02, 0);
+      return maps\mp\gametypes\_class::func_9591(level.classtablename, var_02, 0);
 
     case "loadoutPrimaryPaintjobId":
       return 0;
@@ -640,34 +640,34 @@ func_1A5E(param_00, param_01) {
       return 0;
 
     case "loadoutSecondaryGUID":
-      return maps\mp\gametypes\_class::func_9590(level.var_2324, var_02, 1);
+      return maps\mp\gametypes\_class::func_9590(level.classtablename, var_02, 1);
 
     case "loadoutSecondaryAttachmentGUID1":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 1, 0);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 0);
 
     case "loadoutSecondaryAttachmentGUID2":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 1, 1);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 1);
 
     case "loadoutSecondaryAttachmentGUID3":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 1, 2);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 2);
 
     case "loadoutSecondaryAttachmentGUID4":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 1, 3);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 3);
 
     case "loadoutSecondaryAttachmentGUID5":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 1, 4);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 4);
 
     case "loadoutSecondaryAttachmentGUID6":
-      return maps\mp\gametypes\_class::func_958B(level.var_2324, var_02, 1, 5);
+      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 5);
 
     case "loadoutSecondaryCamoGUID":
-      return maps\mp\gametypes\_class::func_958E(level.var_2324, var_02, 1);
+      return maps\mp\gametypes\_class::func_958E(level.classtablename, var_02, 1);
 
     case "loadoutSecondaryCamo2GUID":
       return 0;
 
     case "loadoutSecondaryReticleGUID":
-      return maps\mp\gametypes\_class::func_9591(level.var_2324, var_02, 1);
+      return maps\mp\gametypes\_class::func_9591(level.classtablename, var_02, 1);
 
     case "loadoutSecondaryPaintjobId":
       return 0;
@@ -676,10 +676,10 @@ func_1A5E(param_00, param_01) {
       return 0;
 
     case "loadoutEquipmentGUID":
-      return maps\mp\gametypes\_class::func_9584(level.var_2324, var_02);
+      return maps\mp\gametypes\_class::func_9584(level.classtablename, var_02);
 
     case "loadoutEquipmentNumExtra":
-      var_03 = maps\mp\gametypes\_class::func_9585(level.var_2324, var_02);
+      var_03 = maps\mp\gametypes\_class::func_9585(level.classtablename, var_02);
       if(function_030D(var_03) || isstringinteger(var_03)) {
         return var_03;
       } else {
@@ -689,10 +689,10 @@ func_1A5E(param_00, param_01) {
       break;
 
     case "loadoutOffhandGUID":
-      return maps\mp\gametypes\_class::func_9587(level.var_2324, var_02);
+      return maps\mp\gametypes\_class::func_9587(level.classtablename, var_02);
 
     case "loadoutOffhandNumExtra":
-      var_04 = maps\mp\gametypes\_class::func_9588(level.var_2324, var_02);
+      var_04 = maps\mp\gametypes\_class::func_9588(level.classtablename, var_02);
       if(function_030D(var_04) || isstringinteger(var_04)) {
         return var_04;
       } else {
@@ -702,16 +702,16 @@ func_1A5E(param_00, param_01) {
       break;
 
     case "loadoutStreakGUID1":
-      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_02, 0);
+      return maps\mp\gametypes\_class::func_9586(level.classtablename, var_02, 0);
 
     case "loadoutStreakGUID2":
-      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_02, 1);
+      return maps\mp\gametypes\_class::func_9586(level.classtablename, var_02, 1);
 
     case "loadoutStreakGUID3":
-      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_02, 2);
+      return maps\mp\gametypes\_class::func_9586(level.classtablename, var_02, 2);
 
     case "loadoutStreakGUID4":
-      return maps\mp\gametypes\_class::func_9586(level.var_2324, var_02, 3);
+      return maps\mp\gametypes\_class::func_9586(level.classtablename, var_02, 3);
 
     case "loadoutPerkGUID3":
     case "loadoutPerkGUID2":
@@ -723,7 +723,7 @@ func_1A5E(param_00, param_01) {
     case "loadoutPerkGUID5":
     case "loadoutPerkGUID4":
       var_05 = int(getsubstr(param_01, 15)) - 1;
-      return maps\mp\gametypes\_class::func_9589(level.var_2324, var_02, var_05);
+      return maps\mp\gametypes\_class::func_9589(level.classtablename, var_02, var_05);
   }
 
   return param_01;

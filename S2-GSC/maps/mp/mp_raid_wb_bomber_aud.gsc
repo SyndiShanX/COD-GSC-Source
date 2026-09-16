@@ -244,9 +244,9 @@ func_1585() {
 func_62E3() {
   self endon("stop_p47_sounds");
   self endon("death");
-  var_00 = self.var_116[2];
+  var_00 = self.origin[2];
   while(isDefined(self) == 1) {
-    var_01 = self.var_116[2];
+    var_01 = self.origin[2];
     self.var_11CB.var_CAC = var_01 - var_00;
     var_00 = var_01;
     wait 0.05;
@@ -441,8 +441,8 @@ func_14D7() {
       }
 
       var_07 = lib_02EF::func_42DD(var_00, "b17_plane_impact_aliases", 7);
-      maps\mp\_audio_submixes::func_7FFA(var_07, self.var_116);
-      maps\mp\_audio_submixes::func_7FFA("blg_17_plane_bullet_impact_close", self.var_116);
+      maps\mp\_audio_submixes::func_7FFA(var_07, self.origin);
+      maps\mp\_audio_submixes::func_7FFA("blg_17_plane_bullet_impact_close", self.origin);
     }
   }
 }
@@ -462,10 +462,10 @@ func_31DA() {
 }
 
 func_31DB(param_00) {
-  maps\mp\_audio_submixes::func_7FFA("bulge_plane_destruct_exp_vclose", self.var_116);
-  maps\mp\_audio_submixes::func_7FFA("bulge_plane_destruct_trans", self.var_116);
-  maps\mp\_audio_submixes::func_7FFA("bulge_plane_destruct_sub", self.var_116);
-  maps\mp\_audio_submixes::func_7FFA("bulge_plane_destruct_metal", self.var_116);
+  maps\mp\_audio_submixes::func_7FFA("bulge_plane_destruct_exp_vclose", self.origin);
+  maps\mp\_audio_submixes::func_7FFA("bulge_plane_destruct_trans", self.origin);
+  maps\mp\_audio_submixes::func_7FFA("bulge_plane_destruct_sub", self.origin);
+  maps\mp\_audio_submixes::func_7FFA("bulge_plane_destruct_metal", self.origin);
   level notify("player_death_spin_stop" + param_00);
   level notify("shut_off_cockpit_alarm" + param_00);
 }

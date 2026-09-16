@@ -490,7 +490,7 @@ tank_push_truck(param_00) {
 }
 
 tank_break_crate() {
-  lib_0380::func_2889("tank_break_crate", undefined, self.var_116);
+  lib_0380::func_2889("tank_break_crate", undefined, self.origin);
 }
 
 tank_fires_at_bell(param_00) {}

@@ -34,11 +34,11 @@ func_6B86() {
 }
 
 func_A121() {
-  level.var_7078 = maps\mp\_utility::func_3516("planttime", 5, 0, 20);
-  level.var_2CA9 = maps\mp\_utility::func_3516("defusetime", 5, 0, 20);
-  level.var_1909 = maps\mp\_utility::func_3516("bombtimer", 45, 1, 300);
-  level.var_6510 = maps\mp\_utility::func_3517("multibomb", 0, 0, 1);
-  level.var_8C56 = maps\mp\_utility::func_3517("silentplant", 0, 0, 1);
+  level.var_7078 = maps\mp\_utility::dvarfloatvalue("planttime", 5, 0, 20);
+  level.var_2CA9 = maps\mp\_utility::dvarfloatvalue("defusetime", 5, 0, 20);
+  level.var_1909 = maps\mp\_utility::dvarfloatvalue("bombtimer", 45, 1, 300);
+  level.var_6510 = maps\mp\_utility::dvarintvalue("multibomb", 0, 0, 1);
+  level.var_8C56 = maps\mp\_utility::dvarintvalue("silentplant", 0, 0, 1);
 }
 
 func_872D() {

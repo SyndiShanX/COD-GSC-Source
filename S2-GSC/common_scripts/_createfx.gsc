@@ -2051,742 +2051,748 @@ func_AAB7(param_00, param_01) {
 }
 
 func_AAB8(param_00, param_01, param_02, param_03, param_04) {
-    var_05 = "\t";
-    func_208C();
-    func_208A("func_208A("#include common_scripts\\utility;"); func_208A("#include common_scripts\\_createfx;\n"); func_208A(""); func_208A("main()"); func_208A("{"); var_06 = param_00.size;
-        if(isDefined(param_04)) {
-          var_07 = 0;
-          foreach(var_09 in param_04) {
-            if(!isDefined(var_09["radiant"])) {
-              var_07++;
-            }
-          }
+  var_05 = "\t";
+  func_208C();
+  func_208A("func_208A(\"#include common_scripts\\utility;");
+  func_208A("#include common_scripts\\_createfx;\n");
+  func_208A("");
+  func_208A("main()");
+  func_208A("{");
+  var_06 = param_00.size;
+  if(isDefined(param_04)) {
+    var_07 = 0;
+    foreach(var_09 in param_04) {
+      if(!isDefined(var_09["radiant"])) {
+        var_07++;
+      }
+    }
 
-          var_06 = var_06 + var_07;
+    var_06 = var_06 + var_07;
+  }
+
+  func_208A(var_05 + "foreach(var_0C in param_00) {
+    if(level.var_27FD > 16) {
+      level.var_27FD = 0;
+      wait(0.1);
+    }
+
+    level.var_27FD++; func_AAB7(var_0C, param_02);
+  }
+
+  if(isDefined(param_04)) {
+    foreach(var_09 in param_04) {
+      if(level.var_27FD > 16) {
+        level.var_27FD = 0;
+        wait(0.1);
+      }
+
+      if(!isDefined(var_09["radiant"])) {
+        level.var_27FD++;
+        var_0C = spawnStruct();
+        var_0C.var_A265 = var_09;
+        func_AAB7(var_0C, param_02);
+      }
+    }
+  }
+
+  func_208A("}");
+  func_208A(" ");
+  func_208B(param_02, param_03, param_01);
+}
+
+func_27EF() {
+  var_00 = 0.1;
+  foreach(var_02 in level.var_2804) {
+    var_03 = [];
+    var_04 = [];
+    for(var_05 = 0; var_05 < 3; var_05++) {
+      var_03[var_05] = var_02.var_A265["origin"][var_05];
+      var_04[var_05] = var_02.var_A265["angles"][var_05];
+      if(var_03[var_05] < var_00 && var_03[var_05] > var_00 * -1) {
+        var_03[var_05] = 0;
+      }
+
+      if(var_04[var_05] < var_00 && var_04[var_05] > var_00 * -1) {
+        var_04[var_05] = 0;
+      }
+    }
+
+    var_02.var_A265["origin"] = (var_03[0], var_03[1], var_03[2]);
+    var_02.var_A265["angles"] = (var_04[0], var_04[1], var_04[2]);
+  }
+}
+
+func_4125(param_00) {
+  var_01 = func_4126(param_00);
+  var_02 = [];
+  foreach(var_05, var_04 in var_01) {
+    var_02[var_05] = [];
+  }
+
+  foreach(var_07 in level.var_2804) {
+    var_08 = 0;
+    foreach(var_05, param_00 in var_01) {
+      if(var_07.var_A265["type"] != param_00) {
+        continue;
+      }
+
+      var_08 = 1;
+      var_02[var_05][var_02[var_05].size] = var_07;
+      break;
+    }
+  }
+
+  var_0B = [];
+  for(var_0C = 0; var_0C < var_01.size; var_0C++) {
+    foreach(var_07 in var_02[var_0C]) {
+      var_0B[var_0B.size] = var_07;
+    }
+  }
+
+  return var_0B;
+}
+
+func_4126(param_00) {
+  var_01 = [];
+  if(param_00 == "fx") {
+    var_01[0] = "loopfx";
+    var_01[1] = "oneshotfx";
+    var_01[2] = "exploder";
+  } else {
+    var_01[0] = "soundfx";
+    var_01[1] = "soundfx_interval";
+    var_01[2] = "reactive_fx";
+    var_01[3] = "soundfx_dynamic";
+  }
+
+  return var_01;
+}
+
+func_5556(param_00, param_01) {
+  var_02 = func_4126(param_01);
+  foreach(var_04 in var_02) {
+    if(param_00.var_A265["type"] == var_04) {
+      return 1;
+    }
+  }
+
+  return 0;
+}
+
+func_27F8() {
+  var_00 = [];
+  var_00[0] = "soundfx";
+  var_00[1] = "loopfx";
+  var_00[2] = "oneshotfx";
+  var_00[3] = "exploder";
+  var_00[4] = "soundfx_interval";
+  var_00[5] = "reactive_fx";
+  var_00[6] = "soundfx_dynamic";
+  var_01 = [];
+  foreach(var_04, var_03 in var_00) {
+    var_01[var_04] = [];
+  }
+
+  foreach(var_06 in level.var_2804) {
+    var_07 = 0;
+    foreach(var_04, var_09 in var_00) {
+      if(var_06.var_A265["type"] != var_09) {
+        continue;
+      }
+
+      var_07 = 1;
+      var_01[var_04][var_01[var_04].size] = var_06;
+      break;
+    }
+  }
+
+  var_0B = [];
+  for(var_0C = 0; var_0C < var_00.size; var_0C++) {
+    foreach(var_06 in var_01[var_0C]) {
+      var_0B[var_0B.size] = var_06;
+    }
+  }
+
+  level.var_2804 = var_0B;
+}
+
+func_208C() {
+  common_scripts\utility:: fileprint_launcher_start_file();
+}
+
+func_208A(param_00) {
+  common_scripts\utility:: fileprint_launcher(param_00);
+}
+
+func_208B(param_00, param_01, param_02) {
+  var_03 = 1;
+  if(param_01 != "" || param_00) {
+    var_03 = 0;
+  }
+
+  if(common_scripts\utility::func_57D7()) {
+    var_04 = common_scripts\utility::func_4381() + param_01 + "_" + param_02 + ".gsc";
+    if(param_00) {
+      var_04 = "backup_" + param_02 + ".gsc";
+    }
+  } else {
+    var_04 = common_scripts\utility::func_4381() + param_02 + "_" + var_03 + ".gsc";
+    if(param_00) {
+      var_04 = "backup.gsc";
+    }
+  }
+
+  common_scripts\utility:: fileprint_launcher_end_file("/share/raw/maps/createfx/" + var_04,var_03);
+}
+
+func_7745() {
+  func_0905("mouse1");
+  func_0905("BUTTON_RSHLDR");
+  func_0905("BUTTON_LSHLDR");
+  func_0905("BUTTON_RSTICK");
+  func_0905("BUTTON_LSTICK");
+  func_0905("BUTTON_A");
+  func_0905("BUTTON_B");
+  func_0905("BUTTON_X");
+  func_0905("BUTTON_Y");
+  func_0905("DPAD_UP");
+  func_0905("DPAD_LEFT");
+  func_0905("DPAD_RIGHT");
+  func_0905("DPAD_DOWN");
+  func_0938("shift");
+  func_0938("ctrl");
+  func_0938("escape");
+  func_0938("F1");
+  func_0938("F5");
+  func_0938("F4");
+  func_0938("F2");
+  func_0938("a");
+  func_0938("b");
+  func_0938("g");
+  func_0938("c");
+  func_0938("h");
+  func_0938("i");
+  func_0938("j");
+  func_0938("f");
+  func_0938("k");
+  func_0938("l");
+  func_0938("m");
+  func_0938("o");
+  func_0938("p");
+  func_0938("r");
+  func_0938("s");
+  func_0938("u");
+  func_0938("v");
+  func_0938("x");
+  func_0938("y");
+  func_0938("z");
+  func_0938("del");
+  func_0938("end");
+  func_0938("tab");
+  func_0938("ins");
+  func_0938("add");
+  func_0938("space");
+  func_0938("enter");
+  func_0938("1");
+  func_0938("2");
+  func_0938("3");
+  func_0938("4");
+  func_0938("5");
+  func_0938("6");
+  func_0938("7");
+  func_0938("8");
+  func_0938("9");
+  func_0938("0");
+  func_0938("-");
+  func_0938("=");
+  func_0938(",");
+  func_0938(".");
+  func_0938("[");
+  func_0938("]");
+  func_0938("leftarrow");
+  func_0938("rightarrow");
+  func_0938("uparrow");
+  func_0938("downarrow");
+}
+
+func_5E6A(param_00) {
+  if(isDefined(level._createfx.var_5E6F[param_00])) {
+    return 0;
+  }
+
+  return func_5996(param_00);
+}
+
+func_5996(param_00) {
+  return level.var_27FB && isDefined(level.var_1DD0[param_00]);
+}
+
+func_0905(param_00) {
+  if(func_5E6A(param_00)) {
+    return;
+  }
+
+  if(!isDefined(level.var_1DDB[param_00])) {
+    if(level.player buttonpresseddevonly(param_00)) {
+      level.var_1DDB[param_00] = 1;
+      level.var_1DD8[param_00] = 1;
+      return;
+    }
+
+    return;
+  }
+
+  if(!level.player buttonpresseddevonly(param_00)) {
+    level.var_1DDB[param_00] = undefined;
+  }
+}
+
+func_0938(param_00) {
+  level.var_1DD0[param_00] = 1;
+  func_0905(param_00);
+}
+
+func_1DD9(param_00, param_01) {
+  return func_1DDE(param_00) || func_1DDE(param_01);
+}
+
+func_1DDE(param_00) {
+  if(!isDefined(param_00)) {
+    return 0;
+  }
+
+  if(func_5996(param_00)) {
+    return 0;
+  }
+
+  return level.player buttonpresseddevonly(param_00);
+}
+
+func_1DCF(param_00, param_01) {
+  if(isDefined(param_01)) {
+    if(isDefined(level.var_1DDB[param_01])) {
+      return 1;
+    }
+  }
+
+  return isDefined(level.var_1DDB[param_00]);
+}
+
+func_1DCE(param_00, param_01) {
+  if(isDefined(param_01)) {
+    if(isDefined(level.var_1DD8[param_01])) {
+      return 1;
+    }
+  }
+
+  return isDefined(level.var_1DD8[param_00]);
+}
+
+func_51E1() {
+  level._createfx.var_4F6E = [];
+  level._createfx.var_4F6C = 20;
+  level.var_2411 = newhudelem();
+  level.var_2411.alpha = 0;
+  for(var_00 = 0; var_00 < level._createfx.var_4F6C; var_00++) {
+    var_01 = newhudelem();
+    var_01.alignx = "left";
+    var_01.location = 0;
+    var_01.foreground = 1;
+    var_01.fontscale = 1.4;
+    var_01.sort = 20;
+    var_01.alpha = 1;
+    var_01.y = 60 + var_00 * 15;
+    level._createfx.var_4F6E[var_00] = var_01;
+  }
+
+  var_01 = newhudelem();
+  var_01.alignx = "center";
+  var_01.location = 0;
+  var_01.foreground = 1;
+  var_01.fontscale = 1.4;
+  var_01.sort = 20;
+  var_01.alpha = 1;
+  var_01.color = (1, 1, 0);
+  var_01.x = 320;
+  var_01.y = 240;
+  level.var_27F1 = var_01;
+}
+
+func_51A1() {
+  var_00 = newhudelem();
+  var_00.location = 0;
+  var_00.alignx = "center";
+  var_00.aligny = "middle";
+  var_00.foreground = 1;
+  var_00.fontscale = 2;
+  var_00.sort = 20;
+  var_00.alpha = 1;
+  var_00.x = 320;
+  var_00.y = 233;
+}
+
+func_23BA() {
+  level.var_2411 method_80BE();
+  for(var_00 = 0; var_00 < level._createfx.var_4F6C; var_00++) {}
+
+  level.var_3F72 = 0;
+}
+
+func_84AD(param_00) {
+  level.var_3F72++;
+}
+
+func_5272() {
+  if(!isDefined(level._createfx.var_9A91)) {
+    level._createfx.var_9A91 = [];
+  }
+
+  if(!isDefined(level._createfx.var_9A90)) {
+    level._createfx.var_9A90 = 1;
+  }
+
+  if(!isDefined(level._createfx.var_9A8F)) {
+    level._createfx.var_9A8F = "";
+  }
+}
+
+func_6691(param_00) {
+  foreach(var_03, var_02 in level._createfx.var_9A91) {
+    if(isDefined(var_02.var_A282)) {
+      var_02.var_A282 destroy();
+    }
+
+    var_02 destroy();
+    level._createfx.var_9A91[var_03] = undefined;
+  }
+
+  level._createfx.var_9A8F = param_00;
+}
+
+func_2906(param_00) {
+  return level._createfx.var_9A8F == param_00;
+}
+
+func_23D2() {
+  func_6691("");
+}
+
+func_6692(param_00) {
+  var_01 = newhudelem();
+  var_01.alignx = "left";
+  var_01.location = 0;
+  var_01.foreground = 1;
+  var_01.fontscale = 1.2;
+  var_01.alpha = 1;
+  var_01.x = 0;
+  var_01.y = 320 + param_00 * 15;
+  return var_01;
+}
+
+func_4386(param_00) {
+  if(isDefined(level._createfx.var_9A91[param_00])) {
+    return level._createfx.var_9A91[param_00];
+  }
+
+  return undefined;
+}
+
+func_85A6(param_00, param_01, param_02) {
+  var_03 = func_4386(param_00);
+  if(!isDefined(var_03)) {
+    var_03 = func_6692(level._createfx.var_9A91.size);
+    level._createfx.var_9A91[param_00] = var_03;
+    var_03.var_991F = param_00;
+  }
+
+  if(isDefined(param_01)) {
+    if(!isDefined(param_02)) {
+      param_02 = (1, 1, 1);
+    }
+
+    var_03.color = param_02;
+  }
+}
+
+func_838F() {
+  var_00 = getDvar("select_by_substring");
+  if(var_00 == "") {
+    return 0;
+  }
+
+  setDvar("select_by_substring", "");
+  var_01 = [];
+  foreach(var_04, var_03 in level.var_2804) {
+    if(issubstr(var_03.var_A265["fxid"], var_00)) {
+      var_01[var_01.size] = var_04;
+    }
+  }
+
+  if(var_01.size == 0) {
+    return 0;
+  }
+
+  func_2D93();
+  func_8391(var_01);
+  foreach(var_06 in var_01) {
+    var_03 = level.var_2804[var_06];
+    func_8390(var_06, var_03);
+  }
+
+  return 1;
+}
+
+func_8391(param_00) {
+  foreach(var_02 in param_00) {
+    var_03 = level.var_2804[var_02];
+    func_8390(var_02, var_03);
+  }
+}
+
+func_2D93() {
+  foreach(var_01 in level._createfx.var_83A3) {
+    var_02 = func_44C7(var_01);
+    func_2D94(var_02, var_01);
+  }
+}
+
+func_8875() {
+  wait(0.5);
+  for(;;) {
+    level.var_27FC = level.var_27FC + 0.05;
+    if(level.var_27FC == 0.15) {
+      foreach(var_01 in level._createfx.var_83A3) {
+        if(var_01.var_A265["type"] == "exploder") {
+          var_01 common_scripts\utility::func_894();
+        }
+      }
+
+      common_scripts\_createfxmenu::func_2FF2();
+      func_805A();
+    }
+
+    if(level.var_27FC == 0.05) {
+      var_01 = common_scripts\_createfxmenu::func_41E4();
+      common_scripts\_createfxmenu::func_2FF2();
+    }
+
+    wait 0.05;
+  }
+}
+
+func_3E70() {
+  if(level._createfx.var_83A3.size < 1) {
+    return;
+  }
+
+  if(level._createfx.var_83A3.size > 1) {
+    var_00 = func_40ED(level._createfx.var_83A3);
+    var_01 = func_42D8(level._createfx.var_83A3) + 200;
+  } else {
+    var_00 = level._createfx.var_83A3[0].var_A265["origin"];
+    var_01 = 200;
+  }
+
+  var_02 = anglesToForward(level.player getplayerangles());
+  var_03 = var_02 * -1 * var_01;
+  var_04 = level.player getEye();
+  var_05 = var_04 - level.player.origin;
+  level.player setOrigin(var_00 + var_03 - var_05);
+}
+
+func_5984(param_00) {
+  if(level._createfx.var_83A3.size < 1) {
+    return;
+  }
+
+  var_01 = "fxid";
+  if(level._createfx.var_83A3[0].var_A265["fxid"] == "No FX" && level._createfx.var_83A3[0].var_A265["soundalias"] != "null") {
+    var_01 = "soundalias";
+  }
+
+  var_02 = level._createfx.var_83A3[0].var_A265[var_01];
+  var_03 = [];
+  foreach(var_06, var_05 in level.var_2804) {
+    if(isDefined(var_05.var_A265[var_01]) && issubstr(var_05.var_A265[var_01], var_02)) {
+      if(var_01 == "soundalias") {
+        if(var_05.var_A265["type"] == "soundfx_interval" || var_05.var_A265["type"] == "soundfx") {
+          var_03[var_03.size] = var_06;
         }
 
-        func_208A(var_05 + "foreach(var_0C in param_00) {
-            if(level.var_27FD > 16) {
-              level.var_27FD = 0;
-              wait(0.1);
-            }
-
-            level.var_27FD++;
-            func_AAB7(var_0C, param_02);
-          }
-
-          if(isDefined(param_04)) {
-            foreach(var_09 in param_04) {
-              if(level.var_27FD > 16) {
-                level.var_27FD = 0;
-                wait(0.1);
-              }
-
-              if(!isDefined(var_09["radiant"])) {
-                level.var_27FD++;
-                var_0C = spawnStruct();
-                var_0C.var_A265 = var_09;
-                func_AAB7(var_0C, param_02);
-              }
-            }
-          }
-
-          func_208A("}"); func_208A(" "); func_208B(param_02, param_03, param_01);
-        }
-
-        func_27EF() {
-          var_00 = 0.1;
-          foreach(var_02 in level.var_2804) {
-            var_03 = [];
-            var_04 = [];
-            for(var_05 = 0; var_05 < 3; var_05++) {
-              var_03[var_05] = var_02.var_A265["origin"][var_05];
-              var_04[var_05] = var_02.var_A265["angles"][var_05];
-              if(var_03[var_05] < var_00 && var_03[var_05] > var_00 * -1) {
-                var_03[var_05] = 0;
-              }
-
-              if(var_04[var_05] < var_00 && var_04[var_05] > var_00 * -1) {
-                var_04[var_05] = 0;
-              }
-            }
-
-            var_02.var_A265["origin"] = (var_03[0], var_03[1], var_03[2]);
-            var_02.var_A265["angles"] = (var_04[0], var_04[1], var_04[2]);
-          }
-        }
-
-        func_4125(param_00) {
-          var_01 = func_4126(param_00);
-          var_02 = [];
-          foreach(var_05, var_04 in var_01) {
-            var_02[var_05] = [];
-          }
-
-          foreach(var_07 in level.var_2804) {
-            var_08 = 0;
-            foreach(var_05, param_00 in var_01) {
-              if(var_07.var_A265["type"] != param_00) {
-                continue;
-              }
-
-              var_08 = 1;
-              var_02[var_05][var_02[var_05].size] = var_07;
-              break;
-            }
-          }
-
-          var_0B = [];
-          for(var_0C = 0; var_0C < var_01.size; var_0C++) {
-            foreach(var_07 in var_02[var_0C]) {
-              var_0B[var_0B.size] = var_07;
-            }
-          }
-
-          return var_0B;
-        }
-
-        func_4126(param_00) {
-          var_01 = [];
-          if(param_00 == "fx") {
-            var_01[0] = "loopfx";
-            var_01[1] = "oneshotfx";
-            var_01[2] = "exploder";
-          } else {
-            var_01[0] = "soundfx";
-            var_01[1] = "soundfx_interval";
-            var_01[2] = "reactive_fx";
-            var_01[3] = "soundfx_dynamic";
-          }
-
-          return var_01;
-        }
-
-        func_5556(param_00, param_01) {
-          var_02 = func_4126(param_01);
-          foreach(var_04 in var_02) {
-            if(param_00.var_A265["type"] == var_04) {
-              return 1;
-            }
-          }
-
-          return 0;
-        }
-
-        func_27F8() {
-          var_00 = [];
-          var_00[0] = "soundfx";
-          var_00[1] = "loopfx";
-          var_00[2] = "oneshotfx";
-          var_00[3] = "exploder";
-          var_00[4] = "soundfx_interval";
-          var_00[5] = "reactive_fx";
-          var_00[6] = "soundfx_dynamic";
-          var_01 = [];
-          foreach(var_04, var_03 in var_00) {
-            var_01[var_04] = [];
-          }
-
-          foreach(var_06 in level.var_2804) {
-            var_07 = 0;
-            foreach(var_04, var_09 in var_00) {
-              if(var_06.var_A265["type"] != var_09) {
-                continue;
-              }
-
-              var_07 = 1;
-              var_01[var_04][var_01[var_04].size] = var_06;
-              break;
-            }
-          }
-
-          var_0B = [];
-          for(var_0C = 0; var_0C < var_00.size; var_0C++) {
-            foreach(var_06 in var_01[var_0C]) {
-              var_0B[var_0B.size] = var_06;
-            }
-          }
-
-          level.var_2804 = var_0B;
-        }
-
-        func_208C() {
-          common_scripts\utility:: fileprint_launcher_start_file();
-        }
-
-        func_208A(param_00) {
-          common_scripts\utility:: fileprint_launcher(param_00);
-        }
-
-        func_208B(param_00, param_01, param_02) {
-          var_03 = 1;
-          if(param_01 != "" || param_00) {
-            var_03 = 0;
-          }
-
-          if(common_scripts\utility::func_57D7()) {
-            var_04 = common_scripts\utility::func_4381() + param_01 + "_" + param_02 + ".gsc";
-            if(param_00) {
-              var_04 = "backup_" + param_02 + ".gsc";
-            }
-          } else {
-            var_04 = common_scripts\utility::func_4381() + param_02 + "_" + var_03 + ".gsc";
-            if(param_00) {
-              var_04 = "backup.gsc";
-            }
-          }
-
-          common_scripts\utility:: fileprint_launcher_end_file("/share/raw/maps/createfx/" + var_04,var_03);
-        }
-
-        func_7745() {
-          func_0905("mouse1");
-          func_0905("BUTTON_RSHLDR");
-          func_0905("BUTTON_LSHLDR");
-          func_0905("BUTTON_RSTICK");
-          func_0905("BUTTON_LSTICK");
-          func_0905("BUTTON_A");
-          func_0905("BUTTON_B");
-          func_0905("BUTTON_X");
-          func_0905("BUTTON_Y");
-          func_0905("DPAD_UP");
-          func_0905("DPAD_LEFT");
-          func_0905("DPAD_RIGHT");
-          func_0905("DPAD_DOWN");
-          func_0938("shift");
-          func_0938("ctrl");
-          func_0938("escape");
-          func_0938("F1");
-          func_0938("F5");
-          func_0938("F4");
-          func_0938("F2");
-          func_0938("a");
-          func_0938("b");
-          func_0938("g");
-          func_0938("c");
-          func_0938("h");
-          func_0938("i");
-          func_0938("j");
-          func_0938("f");
-          func_0938("k");
-          func_0938("l");
-          func_0938("m");
-          func_0938("o");
-          func_0938("p");
-          func_0938("r");
-          func_0938("s");
-          func_0938("u");
-          func_0938("v");
-          func_0938("x");
-          func_0938("y");
-          func_0938("z");
-          func_0938("del");
-          func_0938("end");
-          func_0938("tab");
-          func_0938("ins");
-          func_0938("add");
-          func_0938("space");
-          func_0938("enter");
-          func_0938("1");
-          func_0938("2");
-          func_0938("3");
-          func_0938("4");
-          func_0938("5");
-          func_0938("6");
-          func_0938("7");
-          func_0938("8");
-          func_0938("9");
-          func_0938("0");
-          func_0938("-");
-          func_0938("=");
-          func_0938(",");
-          func_0938(".");
-          func_0938("[");
-          func_0938("]");
-          func_0938("leftarrow");
-          func_0938("rightarrow");
-          func_0938("uparrow");
-          func_0938("downarrow");
-        }
-
-        func_5E6A(param_00) {
-          if(isDefined(level._createfx.var_5E6F[param_00])) {
-            return 0;
-          }
-
-          return func_5996(param_00);
-        }
-
-        func_5996(param_00) {
-          return level.var_27FB && isDefined(level.var_1DD0[param_00]);
-        }
-
-        func_0905(param_00) {
-          if(func_5E6A(param_00)) {
-            return;
-          }
-
-          if(!isDefined(level.var_1DDB[param_00])) {
-            if(level.player buttonpresseddevonly(param_00)) {
-              level.var_1DDB[param_00] = 1;
-              level.var_1DD8[param_00] = 1;
-              return;
-            }
-
-            return;
-          }
-
-          if(!level.player buttonpresseddevonly(param_00)) {
-            level.var_1DDB[param_00] = undefined;
-          }
-        }
-
-        func_0938(param_00) {
-          level.var_1DD0[param_00] = 1;
-          func_0905(param_00);
-        }
-
-        func_1DD9(param_00, param_01) {
-          return func_1DDE(param_00) || func_1DDE(param_01);
-        }
-
-        func_1DDE(param_00) {
-          if(!isDefined(param_00)) {
-            return 0;
-          }
-
-          if(func_5996(param_00)) {
-            return 0;
-          }
-
-          return level.player buttonpresseddevonly(param_00);
-        }
-
-        func_1DCF(param_00, param_01) {
-          if(isDefined(param_01)) {
-            if(isDefined(level.var_1DDB[param_01])) {
-              return 1;
-            }
-          }
-
-          return isDefined(level.var_1DDB[param_00]);
-        }
-
-        func_1DCE(param_00, param_01) {
-          if(isDefined(param_01)) {
-            if(isDefined(level.var_1DD8[param_01])) {
-              return 1;
-            }
-          }
-
-          return isDefined(level.var_1DD8[param_00]);
-        }
-
-        func_51E1() {
-          level._createfx.var_4F6E = [];
-          level._createfx.var_4F6C = 20;
-          level.var_2411 = newhudelem();
-          level.var_2411.alpha = 0;
-          for(var_00 = 0; var_00 < level._createfx.var_4F6C; var_00++) {
-            var_01 = newhudelem();
-            var_01.alignx = "left";
-            var_01.location = 0;
-            var_01.foreground = 1;
-            var_01.fontscale = 1.4;
-            var_01.sort = 20;
-            var_01.alpha = 1;
-            var_01.y = 60 + var_00 * 15;
-            level._createfx.var_4F6E[var_00] = var_01;
-          }
-
-          var_01 = newhudelem();
-          var_01.alignx = "center";
-          var_01.location = 0;
-          var_01.foreground = 1;
-          var_01.fontscale = 1.4;
-          var_01.sort = 20;
-          var_01.alpha = 1;
-          var_01.color = (1, 1, 0);
-          var_01.x = 320;
-          var_01.y = 240;
-          level.var_27F1 = var_01;
-        }
-
-        func_51A1() {
-          var_00 = newhudelem();
-          var_00.location = 0;
-          var_00.alignx = "center";
-          var_00.aligny = "middle";
-          var_00.foreground = 1;
-          var_00.fontscale = 2;
-          var_00.sort = 20;
-          var_00.alpha = 1;
-          var_00.x = 320;
-          var_00.y = 233;
-        }
-
-        func_23BA() {
-          level.var_2411 method_80BE();
-          for(var_00 = 0; var_00 < level._createfx.var_4F6C; var_00++) {}
-
-          level.var_3F72 = 0;
-        }
-
-        func_84AD(param_00) {
-          level.var_3F72++;
-        }
-
-        func_5272() {
-          if(!isDefined(level._createfx.var_9A91)) {
-            level._createfx.var_9A91 = [];
-          }
-
-          if(!isDefined(level._createfx.var_9A90)) {
-            level._createfx.var_9A90 = 1;
-          }
-
-          if(!isDefined(level._createfx.var_9A8F)) {
-            level._createfx.var_9A8F = "";
-          }
-        }
-
-        func_6691(param_00) {
-          foreach(var_03, var_02 in level._createfx.var_9A91) {
-            if(isDefined(var_02.var_A282)) {
-              var_02.var_A282 destroy();
-            }
-
-            var_02 destroy();
-            level._createfx.var_9A91[var_03] = undefined;
-          }
-
-          level._createfx.var_9A8F = param_00;
-        }
-
-        func_2906(param_00) {
-          return level._createfx.var_9A8F == param_00;
-        }
-
-        func_23D2() {
-          func_6691("");
-        }
-
-        func_6692(param_00) {
-          var_01 = newhudelem();
-          var_01.alignx = "left";
-          var_01.location = 0;
-          var_01.foreground = 1;
-          var_01.fontscale = 1.2;
-          var_01.alpha = 1;
-          var_01.x = 0;
-          var_01.y = 320 + param_00 * 15;
-          return var_01;
-        }
-
-        func_4386(param_00) {
-          if(isDefined(level._createfx.var_9A91[param_00])) {
-            return level._createfx.var_9A91[param_00];
-          }
-
-          return undefined;
-        }
-
-        func_85A6(param_00, param_01, param_02) {
-          var_03 = func_4386(param_00);
-          if(!isDefined(var_03)) {
-            var_03 = func_6692(level._createfx.var_9A91.size);
-            level._createfx.var_9A91[param_00] = var_03;
-            var_03.var_991F = param_00;
-          }
-
-          if(isDefined(param_01)) {
-            if(!isDefined(param_02)) {
-              param_02 = (1, 1, 1);
-            }
-
-            var_03.color = param_02;
-          }
-        }
-
-        func_838F() {
-          var_00 = getDvar("select_by_substring");
-          if(var_00 == "") {
-            return 0;
-          }
-
-          setDvar("select_by_substring", "");
-          var_01 = [];
-          foreach(var_04, var_03 in level.var_2804) {
-            if(issubstr(var_03.var_A265["fxid"], var_00)) {
-              var_01[var_01.size] = var_04;
-            }
-          }
-
-          if(var_01.size == 0) {
-            return 0;
-          }
-
-          func_2D93();
-          func_8391(var_01);
-          foreach(var_06 in var_01) {
-            var_03 = level.var_2804[var_06];
-            func_8390(var_06, var_03);
-          }
-
-          return 1;
-        }
-
-        func_8391(param_00) {
-          foreach(var_02 in param_00) {
-            var_03 = level.var_2804[var_02];
-            func_8390(var_02, var_03);
-          }
-        }
-
-        func_2D93() {
-          foreach(var_01 in level._createfx.var_83A3) {
-            var_02 = func_44C7(var_01);
-            func_2D94(var_02, var_01);
-          }
-        }
-
-        func_8875() {
-          wait(0.5);
-          for(;;) {
-            level.var_27FC = level.var_27FC + 0.05;
-            if(level.var_27FC == 0.15) {
-              foreach(var_01 in level._createfx.var_83A3) {
-                if(var_01.var_A265["type"] == "exploder") {
-                  var_01 common_scripts\utility::func_894();
-                }
-              }
-
-              common_scripts\_createfxmenu::func_2FF2();
-              func_805A();
-            }
-
-            if(level.var_27FC == 0.05) {
-              var_01 = common_scripts\_createfxmenu::func_41E4();
-              common_scripts\_createfxmenu::func_2FF2();
-            }
-
-            wait 0.05;
-          }
-        }
-
-        func_3E70() {
-          if(level._createfx.var_83A3.size < 1) {
-            return;
-          }
-
-          if(level._createfx.var_83A3.size > 1) {
-            var_00 = func_40ED(level._createfx.var_83A3);
-            var_01 = func_42D8(level._createfx.var_83A3) + 200;
-          } else {
-            var_00 = level._createfx.var_83A3[0].var_A265["origin"];
-            var_01 = 200;
-          }
-
-          var_02 = anglesToForward(level.player getplayerangles());
-          var_03 = var_02 * -1 * var_01;
-          var_04 = level.player getEye();
-          var_05 = var_04 - level.player.origin;
-          level.player setOrigin(var_00 + var_03 - var_05);
-        }
-
-        func_5984(param_00) {
-          if(level._createfx.var_83A3.size < 1) {
-            return;
-          }
-
-          var_01 = "fxid";
-          if(level._createfx.var_83A3[0].var_A265["fxid"] == "No FX" && level._createfx.var_83A3[0].var_A265["soundalias"] != "null") {
-            var_01 = "soundalias";
-          }
-
-          var_02 = level._createfx.var_83A3[0].var_A265[var_01];
-          var_03 = [];
-          foreach(var_06, var_05 in level.var_2804) {
-            if(isDefined(var_05.var_A265[var_01]) && issubstr(var_05.var_A265[var_01], var_02)) {
-              if(var_01 == "soundalias") {
-                if(var_05.var_A265["type"] == "soundfx_interval" || var_05.var_A265["type"] == "soundfx") {
-                  var_03[var_03.size] = var_06;
-                }
-
-                continue;
-              }
-
-              var_03[var_03.size] = var_06;
-            }
-          }
-
-          var_07 = 0;
-          if(var_03.size > 1) {
-            for(var_06 = 0; var_06 < var_03.size; var_06++) {
-              if(level.var_2804[var_03[var_06]] == level._createfx.var_83A3[0]) {
-                var_07 = var_06;
-              }
-            }
-
-            if(var_07 >= var_03.size - 1 && param_00 == "next") {
-              var_08 = var_03[0];
-            } else if(var_08 == 0 && var_01 == "prev") {
-              var_08 = var_04[var_04.size - 1];
-            } else if(var_01 == "next") {
-              var_08 = var_04[var_08 + 1];
-            } else {
-              var_08 = var_04[var_08 - 1];
-            }
-
-            func_2D93();
-            func_8390(var_08, level.var_2804[var_08]);
-            func_3E70();
-          }
-        }
-
-        func_239F() {
-          foreach(var_01 in level.var_2804) {
-            if(isDefined(var_01.var_5EED)) {
-              var_01.var_5EED delete();
-            }
-
-            var_01 func_93D7();
-          }
-        }
-
-        func_7DCF() {
-          foreach(var_01 in level.var_2804) {
-            if(var_01.var_A265["type"] == "oneshotfx") {
-              var_01 restart_fx_looper();
-            }
-          }
-        }
-
-        func_7DD0() {
-          foreach(var_01 in level._createfx.var_83A3) {
-            if(isDefined(var_01) && var_01.var_A265["type"] == "exploder") {
-              var_01 common_scripts\utility::func_894();
-            }
-          }
-        }
-
-        func_805C() {
-          if(isDefined(level.var_2804) && level.var_27FC > 0.15) {
-            level.var_2806 = func_266A(level.var_2804);
-          }
-        }
-
-        func_805A() {
-          if(isDefined(level.var_2804)) {
-            level.var_2805 = func_266A(level.var_2804);
-          }
-        }
-
-        func_A01B() {
-          if(isDefined(level.var_2806)) {
-            func_239F();
-            level.var_2804 = [];
-            level.var_2804 = func_266A(level.var_2806);
-            func_23BA();
-            func_7D27();
-            func_7DCF();
-            func_7DD0();
-          }
-        }
-
-        func_7B4F() {
-          if(isDefined(level.var_2805)) {
-            func_239F();
-            level.var_2804 = [];
-            level.var_2804 = func_266A(level.var_2805);
-            func_23BA();
-            func_7D27();
-            func_7DCF();
-            func_7DD0();
-          }
-        }
-
-        func_266A(param_00) {
-          var_01 = [];
-          if(param_00.size > 0) {
-            for(var_02 = 0; var_02 < param_00.size; var_02++) {
-              var_03 = spawnStruct();
-              if(isDefined(param_00[var_02].var_A265)) {
-                var_03.var_A265 = [];
-                var_03.var_A265["type"] = param_00[var_02].var_A265["type"];
-                var_03.var_A265["fxid"] = param_00[var_02].var_A265["fxid"];
-                var_03.var_A265["soundalias"] = param_00[var_02].var_A265["soundalias"];
-                var_03.var_A265["loopsound"] = param_00[var_02].var_A265["loopsound"];
-                var_03.var_A265["angles"] = param_00[var_02].var_A265["angles"];
-                var_03.var_A265["origin"] = param_00[var_02].var_A265["origin"];
-                var_03.var_A265["exploder"] = param_00[var_02].var_A265["exploder"];
-                var_03.var_A265["flag"] = param_00[var_02].var_A265["flag"];
-                var_03.var_A265["exploder_type"] = param_00[var_02].var_A265["exploder_type"];
-                var_03.var_A265["server_culled"] = param_00[var_02].var_A265["server_culled"];
-                var_03.var_A265["delay_min"] = param_00[var_02].var_A265["delay_min"];
-                var_03.var_A265["delay_max"] = param_00[var_02].var_A265["delay_max"];
-                var_03.var_A265["delay"] = param_00[var_02].var_A265["delay"];
-                var_03.var_A265["forward"] = param_00[var_02].var_A265["forward"];
-                var_03.var_A265["up"] = param_00[var_02].var_A265["up"];
-                var_01[var_02] = var_03;
-              }
-
-              var_01[var_02].var_33DB = param_00[var_02].var_33DB;
-              var_01[var_02].var_9929 = param_00[var_02].var_9929;
-            }
-          }
-
-          return var_01;
-        }
-
-        func_7CE2(param_00) {
-          var_01 = [];
-          foreach(var_03 in level.var_2804) {
-            if(isDefined(var_03.model) && var_03.model == param_00) {
-              continue;
-            }
-
-            var_01[var_01.size] = var_03;
-          }
-
-          level.var_2804 = var_01;
-        }
-
-        func_44C7(param_00) {
-          for(var_01 = 0; var_01 < level.var_2804.size; var_01++) {
-            if(param_00 == level.var_2804[var_01]) {
-              return var_01;
-            }
-          }
-        }
-
-        func_55E9(param_00) {
-          var_01 = level.var_5FEB - (32768, 32768, 32768);
-          var_02 = level.var_5FEB + (32768, 32768, 32768);
-          var_03 = param_00[0] > var_01[0] && param_00[0] < var_02[0];
-          var_04 = param_00[1] > var_01[1] && param_00[1] < var_02[1];
-          var_05 = param_00[2] > var_01[2] && param_00[2] < var_02[2];
-          if(var_03 && var_04 && var_05) {
-            return 1;
-          }
-
-          return 0;
-        }
-
-        func_0646() {
-          wait(0.25);
-          level._createfx.var_83A3 = [];
-          for(var_00 = 0; var_00 < level.var_2804.size; var_00++) {
-            var_01 = level.var_2804[var_00];
-            if(isDefined(var_01.var_A265["type"]) == 0) {
-              continue;
-            }
-
-            if(var_01.var_A265["type"] == "soundfx") {
-              level._createfx.var_83A3[level._createfx.var_83A3.size] = var_01;
-            }
-          }
-
-          func_A0CA();
-          level._createfx.var_83A3 = [];
-        }
+        continue;
+      }
+
+      var_03[var_03.size] = var_06;
+    }
+  }
+
+  var_07 = 0;
+  if(var_03.size > 1) {
+    for(var_06 = 0; var_06 < var_03.size; var_06++) {
+      if(level.var_2804[var_03[var_06]] == level._createfx.var_83A3[0]) {
+        var_07 = var_06;
+      }
+    }
+
+    if(var_07 >= var_03.size - 1 && param_00 == "next") {
+      var_08 = var_03[0];
+    } else if(var_08 == 0 && var_01 == "prev") {
+      var_08 = var_04[var_04.size - 1];
+    } else if(var_01 == "next") {
+      var_08 = var_04[var_08 + 1];
+    } else {
+      var_08 = var_04[var_08 - 1];
+    }
+
+    func_2D93();
+    func_8390(var_08, level.var_2804[var_08]);
+    func_3E70();
+  }
+}
+
+func_239F() {
+  foreach(var_01 in level.var_2804) {
+    if(isDefined(var_01.var_5EED)) {
+      var_01.var_5EED delete();
+    }
+
+    var_01 func_93D7();
+  }
+}
+
+func_7DCF() {
+  foreach(var_01 in level.var_2804) {
+    if(var_01.var_A265["type"] == "oneshotfx") {
+      var_01 restart_fx_looper();
+    }
+  }
+}
+
+func_7DD0() {
+  foreach(var_01 in level._createfx.var_83A3) {
+    if(isDefined(var_01) && var_01.var_A265["type"] == "exploder") {
+      var_01 common_scripts\utility::func_894();
+    }
+  }
+}
+
+func_805C() {
+  if(isDefined(level.var_2804) && level.var_27FC > 0.15) {
+    level.var_2806 = func_266A(level.var_2804);
+  }
+}
+
+func_805A() {
+  if(isDefined(level.var_2804)) {
+    level.var_2805 = func_266A(level.var_2804);
+  }
+}
+
+func_A01B() {
+  if(isDefined(level.var_2806)) {
+    func_239F();
+    level.var_2804 = [];
+    level.var_2804 = func_266A(level.var_2806);
+    func_23BA();
+    func_7D27();
+    func_7DCF();
+    func_7DD0();
+  }
+}
+
+func_7B4F() {
+  if(isDefined(level.var_2805)) {
+    func_239F();
+    level.var_2804 = [];
+    level.var_2804 = func_266A(level.var_2805);
+    func_23BA();
+    func_7D27();
+    func_7DCF();
+    func_7DD0();
+  }
+}
+
+func_266A(param_00) {
+  var_01 = [];
+  if(param_00.size > 0) {
+    for(var_02 = 0; var_02 < param_00.size; var_02++) {
+      var_03 = spawnStruct();
+      if(isDefined(param_00[var_02].var_A265)) {
+        var_03.var_A265 = [];
+        var_03.var_A265["type"] = param_00[var_02].var_A265["type"];
+        var_03.var_A265["fxid"] = param_00[var_02].var_A265["fxid"];
+        var_03.var_A265["soundalias"] = param_00[var_02].var_A265["soundalias"];
+        var_03.var_A265["loopsound"] = param_00[var_02].var_A265["loopsound"];
+        var_03.var_A265["angles"] = param_00[var_02].var_A265["angles"];
+        var_03.var_A265["origin"] = param_00[var_02].var_A265["origin"];
+        var_03.var_A265["exploder"] = param_00[var_02].var_A265["exploder"];
+        var_03.var_A265["flag"] = param_00[var_02].var_A265["flag"];
+        var_03.var_A265["exploder_type"] = param_00[var_02].var_A265["exploder_type"];
+        var_03.var_A265["server_culled"] = param_00[var_02].var_A265["server_culled"];
+        var_03.var_A265["delay_min"] = param_00[var_02].var_A265["delay_min"];
+        var_03.var_A265["delay_max"] = param_00[var_02].var_A265["delay_max"];
+        var_03.var_A265["delay"] = param_00[var_02].var_A265["delay"];
+        var_03.var_A265["forward"] = param_00[var_02].var_A265["forward"];
+        var_03.var_A265["up"] = param_00[var_02].var_A265["up"];
+        var_01[var_02] = var_03;
+      }
+
+      var_01[var_02].var_33DB = param_00[var_02].var_33DB;
+      var_01[var_02].var_9929 = param_00[var_02].var_9929;
+    }
+  }
+
+  return var_01;
+}
+
+func_7CE2(param_00) {
+  var_01 = [];
+  foreach(var_03 in level.var_2804) {
+    if(isDefined(var_03.model) && var_03.model == param_00) {
+      continue;
+    }
+
+    var_01[var_01.size] = var_03;
+  }
+
+  level.var_2804 = var_01;
+}
+
+func_44C7(param_00) {
+  for(var_01 = 0; var_01 < level.var_2804.size; var_01++) {
+    if(param_00 == level.var_2804[var_01]) {
+      return var_01;
+    }
+  }
+}
+
+func_55E9(param_00) {
+  var_01 = level.var_5FEB - (32768, 32768, 32768);
+  var_02 = level.var_5FEB + (32768, 32768, 32768);
+  var_03 = param_00[0] > var_01[0] && param_00[0] < var_02[0];
+  var_04 = param_00[1] > var_01[1] && param_00[1] < var_02[1];
+  var_05 = param_00[2] > var_01[2] && param_00[2] < var_02[2];
+  if(var_03 && var_04 && var_05) {
+    return 1;
+  }
+
+  return 0;
+}
+
+func_0646() {
+  wait(0.25);
+  level._createfx.var_83A3 = [];
+  for(var_00 = 0; var_00 < level.var_2804.size; var_00++) {
+    var_01 = level.var_2804[var_00];
+    if(isDefined(var_01.var_A265["type"]) == 0) {
+      continue;
+    }
+
+    if(var_01.var_A265["type"] == "soundfx") {
+      level._createfx.var_83A3[level._createfx.var_83A3.size] = var_01;
+    }
+  }
+
+  func_A0CA();
+  level._createfx.var_83A3 = [];
+}

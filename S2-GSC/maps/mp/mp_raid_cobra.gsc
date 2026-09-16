@@ -190,7 +190,7 @@ func_54D2(param_00, param_01) {
       continue;
     }
 
-    var_07 = self.var_116;
+    var_07 = self.origin;
     var_08 = "step";
     if(common_scripts\utility::func_9467(var_05, "footstep_left")) {
       var_08 = function_036D(var_05, "footstep_left_");
@@ -315,7 +315,7 @@ func_54D8(param_00, param_01) {
       continue;
     }
 
-    var_04 = self.var_116;
+    var_04 = self.origin;
     var_05 = "step";
     if(common_scripts\utility::func_9467(var_02, "footstep_left")) {
       var_05 = function_036D(var_02, "footstep_left_");
@@ -402,7 +402,7 @@ func_7FB3() {
 
 func_7FB2() {
   self method_808C();
-  var_00 = spawn("script_origin", self.var_116);
+  var_00 = spawn("script_origin", self.origin);
   var_00 linkTo(self, "tag_origin");
   wait 0.05;
   self method_808C();
@@ -1014,7 +1014,7 @@ func_3CDC(param_00) {
   for(;;) {
     var_01 = level.var_3CE5[level.var_3CE4].var_116;
     if(common_scripts\utility::func_562E(self.var_9827)) {
-      var_01 = self.var_116 + anglesToForward(self.var_1D) * 200 + (0, 0, 400);
+      var_01 = self.origin + anglesToForward(self.var_1D) * 200 + (0, 0, 400);
       level.var_3CE6 = 0;
     }
 
@@ -1453,7 +1453,7 @@ func_9786(param_00, param_01) {
 
 func_4AFA() {
   wait(0.15);
-  var_00 = spawn("script_model", self.var_116);
+  var_00 = spawn("script_model", self.origin);
   var_00.var_1D = self.var_1D;
   var_00 setModel(self.var_106 + "_destroyed");
   var_00 scriptmodelplayanim("ger_btry_flak88_turret_destroy", "flak88_anim");

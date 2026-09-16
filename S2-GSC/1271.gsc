@@ -454,7 +454,7 @@ func_796A(param_00, param_01) {
 func_7967(param_00, param_01) {
   self endon("stop_timer");
   var_02 = 5;
-  if(isDefined(param_01) && param_01 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+  if(isDefined(param_01) && param_01 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
     var_02 = 2.5;
   }
 
@@ -583,7 +583,7 @@ func_7964(param_00, param_01) {
       case "explosive_planted":
         if(var_07 == var_03) {
           var_0B = 5;
-          if(isDefined(var_06) && var_06 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+          if(isDefined(var_06) && var_06 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
             var_0B = 2.5;
           }
 
@@ -1162,7 +1162,7 @@ func_7A0A(param_00, param_01, param_02) {
 
 func_7A0B(param_00, param_01, param_02) {
   if(param_00 lib_0502::func_56D3()) {
-    param_00 method_8060();
+    param_00 connectpaths();
     if(isDefined(param_02)) {
       func_2FC5(param_02);
       foreach(var_04 in param_02) {
@@ -1477,12 +1477,12 @@ func_7A0C(param_00, param_01, param_02, param_03, param_04) {
   }
 
   if(isDefined(param_01)) {
-    if(isDefined(param_04) && param_04 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+    if(isDefined(param_04) && param_04 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
       self scriptmodelplayanim(param_00, "raidWall", param_01, param_04.var_696D);
     } else {
       self scriptmodelplayanim(param_00, "raidWall", param_01);
     }
-  } else if(isDefined(param_04) && param_04 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+  } else if(isDefined(param_04) && param_04 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
     self scriptmodelplayanim(param_00, "raidWall", 0, param_04.var_696D);
   } else {
     self scriptmodelplayanim(param_00, "raidWall");
@@ -1499,7 +1499,7 @@ func_7A0F(param_00, param_01) {
   }
 
   if(isDefined(param_00)) {
-    var_02 = self.var_116 + (0, 0, 48);
+    var_02 = self.origin + (0, 0, 48);
     var_03 = playclientsound(param_00, undefined, var_02, "world", undefined, undefined, undefined, undefined, param_01);
     return var_03;
   }
@@ -1510,7 +1510,7 @@ func_7A0F(param_00, param_01) {
 func_7A0E(param_00) {
   if(isDefined(param_00)) {
     if(!isDefined(self.var_5F05)) {
-      var_01 = self.var_116 + (0, 0, 48);
+      var_01 = self.origin + (0, 0, 48);
       self.var_5F05 = func_7A0F(param_00);
     }
   }
@@ -1599,7 +1599,7 @@ func_7A01(param_00, param_01, param_02, param_03, param_04) {
   var_06 = 999999;
   var_07 = undefined;
   foreach(var_09 in var_05.var_982D["explosive_trigger"]) {
-    var_0A = distancesquared(var_09.var_116, self.var_116);
+    var_0A = distancesquared(var_09.var_116, self.origin);
     if(var_0A < var_06) {
       var_06 = var_0A;
       var_07 = var_09;
@@ -1901,7 +1901,7 @@ raidwireanimatedtrigger(param_00) {
 raidwireaimatedexplosivetimer(param_00, param_01) {
   self endon("stop_timer");
   var_02 = 5;
-  if(isDefined(param_01) && param_01 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+  if(isDefined(param_01) && param_01 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
     var_02 = 2.5;
   }
 
@@ -1998,7 +1998,7 @@ raidwireanimatedanimatedmodel(param_00) {
 
     var_02 = lib_0380::func_2889("buildable_barbed_wire_start", undefined, self.var_9D65.var_116);
     thread barbed_wire_lp_snd_handler(self.var_9D65);
-    if(isDefined(var_01) && var_01 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+    if(isDefined(var_01) && var_01 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
       param_00 method_8278("mp_raids_barbedwire_full_repair_fast", "barbedwire");
     } else {
       param_00 method_8278("mp_raids_barbedwire_full_repair", "barbedwire");
@@ -2105,7 +2105,7 @@ raidwireanimatedexplosivemodel(param_00, param_01) {
 
       case "bomb_planted":
         var_07 = 5;
-        if(isDefined(var_05) && var_05 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+        if(isDefined(var_05) && var_05 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
           var_07 = 2.5;
         }
 
@@ -2334,7 +2334,7 @@ play_barbed_wire_exit() {
   level endon("game_ended");
   for(;;) {
     self waittill("player_out_of_slowtrigger");
-    var_00 = lib_0380::func_2889("buildable_barbed_wire_end", undefined, self.var_116);
+    var_00 = lib_0380::func_2889("buildable_barbed_wire_end", undefined, self.origin);
     wait 0.05;
   }
 }
@@ -2380,14 +2380,14 @@ func_79C7(param_00) {
     self waittill("trigger", var_03, var_04);
     switch (var_03) {
       case "open":
-        param_00 method_8617("aac_train_open");
+        param_00 playSound("aac_train_open");
         lib_0502::func_64D5(param_00, "open_pos", 0.4, 1);
         wait(0.4);
         func_7A0B(param_00, var_02, var_01);
         break;
 
       case "close":
-        param_00 method_8617("aac_train_close");
+        param_00 playSound("aac_train_close");
         lib_0502::func_64D5(param_00, "close_pos", 0.4, 1);
         wait(0.4);
         func_7A09(param_00, var_02, var_01);

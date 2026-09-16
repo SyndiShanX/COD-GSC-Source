@@ -59,12 +59,12 @@ func_86DE(param_00, param_01) {
     }
 
     var_05 = var_05 + level.var_201B;
-    var_06 = maps\mp\_utility::func_4589();
+    var_06 = maps\mp\_utility::getminutespassed();
     var_07 = var_05 / -5536;
     var_08 = var_06 + var_07;
     func_8671(var_02, var_08 + 0.01694915);
   } else {
-    var_06 = maps\mp\_utility::func_4589();
+    var_06 = maps\mp\_utility::getminutespassed();
     var_08 = var_08 + param_01;
     func_8671(var_02, var_08 + 0.01694915);
     var_09 = "raids_time_limit_objective_" + level.var_9A6B[param_01];
@@ -86,7 +86,7 @@ addtoobjectivetimelimit(param_00, param_01) {
   var_03 = level.currentobjectiveovertimetime / -5536;
   var_04 = gettime() - level.var_2946 / -5536;
   var_05 = level.currentobjectiveaddedtime / 60;
-  var_06 = gettime() - level.var_9309 - level.var_2FB1 / -5536;
+  var_06 = gettime() - level.starttime - level.var_2FB1 / -5536;
   var_07 = var_06 + var_05 + level.currentobjectiveoriginaltimelimit + var_03 - var_04;
   func_8671(var_02, var_07 + 0.01694915);
   var_08 = "raids_time_limit_objective_" + level.var_9A6B[param_01];
@@ -174,7 +174,7 @@ raidobjectivefailure(param_00) {
 }
 
 raidawardflagraiserkillevent(param_00) {
-  level thread maps\mp\gametypes\_rank::func_1457("raids_flag_raiser_kill", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_flag_raiser_kill", param_00);
 }
 
 func_7922(param_00) {
@@ -194,7 +194,7 @@ func_7922(param_00) {
   param_00 maps\mp\_utility::func_86F5("constructs", param_00.var_259A);
   param_00 maps\mp\_utility::func_50EA("raids_construct", 1);
   param_00 setclientomnvar("ui_onevone_class_3", param_00.var_259A);
-  level thread maps\mp\gametypes\_rank::func_1457("raids_construct", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_construct", param_00);
 }
 
 func_7923(param_00) {
@@ -210,7 +210,7 @@ func_7923(param_00) {
   param_00 maps\mp\_utility::func_86F5("destructs", param_00.var_2E36);
   param_00 maps\mp\_utility::func_50EA("raids_destruct", 1);
   param_00 setclientomnvar("ui_onevone_class_4", param_00.var_2E36);
-  level thread maps\mp\gametypes\_rank::func_1457("raids_destruct", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_destruct", param_00);
 }
 
 raidawarddestructionpropevent(param_00) {
@@ -218,50 +218,50 @@ raidawarddestructionpropevent(param_00) {
   param_00 maps\mp\_utility::func_86F5("destructs", param_00.var_2E36);
   param_00 maps\mp\_utility::func_50EA("raids_destruct", 1);
   param_00 setclientomnvar("ui_onevone_class_4", param_00.var_2E36);
-  level thread maps\mp\gametypes\_rank::func_1457("raids_destruct_equipment", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_destruct_equipment", param_00);
   level thread maps\mp\_utility::func_9863("raids_subobjective_destroyed", param_00);
 }
 
 func_7921(param_00) {
   param_00 maps\mp\_utility::func_50EA("raids_build_objective", 1);
-  level thread maps\mp\gametypes\_rank::func_1457("raids_build_objective", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_build_objective", param_00);
 }
 
 func_7925(param_00) {
   param_00 maps\mp\_utility::func_50EA("raids_progress", 1);
-  level thread maps\mp\gametypes\_rank::func_1457("raids_progress", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_progress", param_00);
   param_00 thread maps\mp\gametypes\_hud_message::func_9102(func_45CC(param_00.var_1A7));
 }
 
 raidawardsecuringobjectiveevent(param_00) {
-  level thread maps\mp\gametypes\_rank::func_1457("raids_secure", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_secure", param_00);
 }
 
 raidawardtankescortevent(param_00) {
-  level thread maps\mp\gametypes\_rank::func_1457("raids_tank_escort", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_tank_escort", param_00);
 }
 
 raidawardtankescortcheckpointevent(param_00) {
-  level thread maps\mp\gametypes\_rank::func_1457("raids_tank_escort_checkpoint", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_tank_escort_checkpoint", param_00);
 }
 
 func_7924(param_00) {
   param_00 maps\mp\_utility::func_50EA("raids_escort", 1);
-  level thread maps\mp\gametypes\_rank::func_1457("raids_escort", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_escort", param_00);
 }
 
 func_7926(param_00) {
   param_00 maps\mp\_utility::func_50EA("raids_retreat", 1);
-  level thread maps\mp\gametypes\_rank::func_1457("raids_retreat", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_retreat", param_00);
 }
 
 raidawardhostagedoorbreachevent(param_00) {
-  level thread maps\mp\gametypes\_rank::func_1457("raids_hostage_door_breach", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_hostage_door_breach", param_00);
 }
 
 raidawardhostagereleasedevent(param_00) {
   param_00 maps\mp\_utility::func_50EA("raids_hostage_release", 1);
-  level thread maps\mp\gametypes\_rank::func_1457("raids_hostage_release", param_00);
+  level thread maps\mp\gametypes\_rank::giverankxp("raids_hostage_release", param_00);
 }
 
 raidawardbuildxpevent() {
@@ -276,7 +276,7 @@ raidawardbuildxpevent() {
     var_00++;
     if(var_00 >= 10) {
       var_00 = 0;
-      level thread maps\mp\gametypes\_rank::func_1457("raids_building", self);
+      level thread maps\mp\gametypes\_rank::giverankxp("raids_building", self);
     }
   }
 }
@@ -312,7 +312,7 @@ func_7997() {
       if(isDefined(self.var_8260) && self.var_8260 == "start_disconnected") {
         self method_805F();
       } else {
-        self method_8060();
+        self connectpaths();
       }
     }
 
@@ -353,7 +353,7 @@ func_79C6() {
     self solid();
     if(self.var_799A) {
       if(isDefined(self.var_8260) && self.var_8260 == "start_disconnected") {
-        self method_8060();
+        self connectpaths();
       } else {
         self method_805F();
       }
@@ -945,7 +945,7 @@ func_1D36(param_00, param_01, param_02) {
       case "frag_grenade_german_mp":
       case "semtex_mp":
       case "frag_grenade_mp":
-        if(isDefined(param_00) && param_00 maps\mp\_utility::func_649("specialty_explosivewareffectiveness")) {
+        if(isDefined(param_00) && param_00 maps\mp\_utility::hasperk("specialty_explosivewareffectiveness")) {
           var_03 = 2;
         } else {
           var_03 = 1;
@@ -955,7 +955,7 @@ func_1D36(param_00, param_01, param_02) {
       case "panzerschreck_mp":
       case "bazooka_mp":
       case "c4_mp":
-        if(isDefined(param_00) && param_00 maps\mp\_utility::func_649("specialty_explosivewareffectiveness")) {
+        if(isDefined(param_00) && param_00 maps\mp\_utility::hasperk("specialty_explosivewareffectiveness")) {
           var_03 = 4;
         } else {
           var_03 = 2;
@@ -1003,7 +1003,7 @@ func_64EE(param_00, param_01, param_02) {
   param_00 endon("death");
   param_00 endon("moveToPos");
   if(param_00 func_56D3() && !common_scripts\utility::func_562E(param_02)) {
-    param_00 method_8060();
+    param_00 connectpaths();
   }
 
   wait(param_01);
@@ -1832,11 +1832,11 @@ func_2FC4() {
   var_06 = 0;
   var_07 = gettime() + randomintrange(5000, 10000);
   for(;;) {
-    var_08 = distancesquared(var_05, self.var_116);
+    var_08 = distancesquared(var_05, self.origin);
     var_09 = angleclamp360(var_06) - angleclamp360(self.var_1D[1]);
     if(gettime() > var_07 && var_08 > 0.01 || abs(var_09) > 0.01) {
-      var_00 = self.var_116;
-      var_05 = self.var_116;
+      var_00 = self.origin;
+      var_05 = self.origin;
       var_01 = self.var_1D[1];
       var_06 = self.var_1D[1];
       var_02 = 0;
@@ -1847,10 +1847,10 @@ func_2FC4() {
       var_07 = gettime() + randomintrange(5000, 10000);
     }
 
-    var_0A = distancesquared(var_00, self.var_116);
+    var_0A = distancesquared(var_00, self.origin);
     var_0B = angleclamp360(var_01) - angleclamp360(self.var_1D[1]);
     if(var_0A > var_04 * var_04 || (var_0A > 0.01 || abs(var_0B) > 0.01) && var_02 >= 2) {
-      var_00 = self.var_116;
+      var_00 = self.origin;
       var_01 = self.var_1D[1];
       var_02 = 0;
       if(common_scripts\utility::func_64F3()) {
@@ -1866,7 +1866,7 @@ func_2FC4() {
 func_93FE() {
   self notify("stopDisconnectingPaths");
   if(common_scripts\utility::func_64F3()) {
-    self method_8060(0);
+    self connectpaths(0);
   }
 }
 
@@ -1878,10 +1878,10 @@ func_2FC2() {
   var_02 = 0;
   var_03 = 0.05;
   for(;;) {
-    var_04 = distancesquared(var_00, self.var_116);
+    var_04 = distancesquared(var_00, self.origin);
     var_05 = angleclamp360(var_01) - angleclamp360(self.var_1D[1]);
     if((var_04 > 0.01 || abs(var_05) > 0.01) && var_02 >= 2) {
-      var_00 = self.var_116;
+      var_00 = self.origin;
       var_01 = self.var_1D[1];
       var_02 = 0;
       if(common_scripts\utility::func_64F3()) {
@@ -2456,7 +2456,7 @@ func_A3EC() {
   foreach(var_14 in var_0F) {
     var_15 = var_14[0];
     var_16 = var_14[1];
-    var_17 = self.var_116 + var_10 * var_15 + var_11 * var_16 + var_12 * var_0E;
+    var_17 = self.origin + var_10 * var_15 + var_11 * var_16 + var_12 * var_0E;
     var_18 = spawn("script_origin", var_17);
     var_18.var_1D = self.var_1D;
     var_18 method_805C();
@@ -2749,8 +2749,8 @@ raid_spawn_tag_origin() {
   }
 
   var_00 setModel("tag_origin");
-  if(isDefined(self.var_116)) {
-    var_00.var_116 = self.var_116;
+  if(isDefined(self.origin)) {
+    var_00.var_116 = self.origin;
   }
 
   if(isDefined(self.var_1D)) {

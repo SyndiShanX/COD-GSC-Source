@@ -380,7 +380,7 @@ func_8223(param_00, param_01) {
 }
 
 func_8215(param_00) {
-  self method_8060();
+  self connectpaths();
 }
 
 func_8219(param_00) {

@@ -137,7 +137,7 @@ hotpotatoobjectiveimagetimer(param_00) {
   wait 0.05;
   var_01 = self.var_6896 * 1000;
   param_00.var_A23F = var_01;
-  param_00 lib_04FF::func_990(self.var_116, undefined, (0, 0, 0), var_01, 110, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, self.var_6896);
+  param_00 lib_04FF::func_990(self.origin, undefined, (0, 0, 0), var_01, 110, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, self.var_6896);
   param_00 lib_04FF::func_860A(110);
   var_02 = self.var_6896;
   for(;;) {
@@ -378,7 +378,7 @@ potatophysicslaunch(param_00, param_01) {
     self.var_1D = (0, var_02[1] + 250, 120);
   }
 
-  self physicslaunchserver(self.var_116, param_00);
+  self physicslaunchserver(self.origin, param_00);
 }
 
 potatoobjectcallback(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
@@ -395,17 +395,17 @@ potatoobjectcallback(param_00, param_01, param_02, param_03, param_04, param_05,
   }
 
   param_01 maps\mp\gametypes\_damagefeedback::func_A102("standard");
-  lib_04F3::func_79CB("mp_war_bomb_explo", self.var_116);
-  playFX(common_scripts\utility::func_44F5("hill_thermite_grenade_exp"), self.var_116);
-  physicsexplosionsphere(self.var_116, 300, 50, 2);
+  lib_04F3::func_79CB("mp_war_bomb_explo", self.origin);
+  playFX(common_scripts\utility::func_44F5("hill_thermite_grenade_exp"), self.origin);
+  physicsexplosionsphere(self.origin, 300, 50, 2);
   self delete();
 }
 
 detonateatrest() {
   self endon("death");
   self waittill("physics_finished");
-  playFX(common_scripts\utility::func_44F5("hill_thermite_grenade_exp"), self.var_116);
-  physicsexplosionsphere(self.var_116, 300, 50, 2);
+  playFX(common_scripts\utility::func_44F5("hill_thermite_grenade_exp"), self.origin);
+  physicsexplosionsphere(self.origin, 300, 50, 2);
   self delete();
 }
 
@@ -419,7 +419,7 @@ potatocatchtriggerwatch(param_00) {
       if(self istouching(var_07)) {
         param_00.objectivehelth = clamp(param_00.objectivehelth + param_00 lib_04FF::func_45D0("objectiveCatchScore"), 0, param_00 lib_04FF::func_45D0("objectiveScoreGoal"));
         param_00 notify("objectiveHit");
-        playFX(common_scripts\utility::func_44F5("hill_thermite_grenade_burn"), self.var_116);
+        playFX(common_scripts\utility::func_44F5("hill_thermite_grenade_burn"), self.origin);
         self delete();
       }
     }
@@ -433,9 +433,9 @@ potatobadtriggerwatch() {
     if(potatoistouchingbadtrigger()) {
       waittillframeend;
       if(isDefined(self)) {
-        lib_04F3::func_79CB("mp_war_bomb_explo", self.var_116);
-        playFX(common_scripts\utility::func_44F5("hill_thermite_grenade_exp"), self.var_116);
-        physicsexplosionsphere(self.var_116, 300, 50, 2);
+        lib_04F3::func_79CB("mp_war_bomb_explo", self.origin);
+        playFX(common_scripts\utility::func_44F5("hill_thermite_grenade_exp"), self.origin);
+        physicsexplosionsphere(self.origin, 300, 50, 2);
         self delete();
       }
 

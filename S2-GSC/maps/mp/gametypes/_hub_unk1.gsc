@@ -1040,7 +1040,7 @@ func_1535(param_00) {
   self.var_A582[0] method_805B();
   self.var_A582[0] method_8511();
   param_00 method_82FA("hub_ball_mp", 1);
-  param_00 method_8617("grid_ball_pickup");
+  param_00 playSound("grid_ball_pickup");
   param_00 maps\mp\_utility::func_47A2("specialty_ballcarrier");
   param_00 method_812B(1);
   param_00.var_56A4 = 1;
@@ -1054,7 +1054,7 @@ func_1535(param_00) {
     param_00 thread maps\mp\gametypes\_missions::func_7750("ch_hq_balls", var_05, 1);
   }
 
-  param_00 common_scripts\utility::func_0601();
+  param_00 common_scripts\utility::_disableusability();
 }
 
 func_1550(param_00) {
@@ -1102,10 +1102,10 @@ func_1511() {
   if(isDefined(self.var_2006)) {
     var_00 = self.var_2006;
     var_00.var_6735 = gettime() + 500;
-    var_00 common_scripts\utility::func_0615();
+    var_00 common_scripts\utility::_enableusability();
     var_00.var_56A4 = 0;
     var_00.var_155F = undefined;
-    var_00 maps\mp\_utility::func_0735("specialty_ballcarrier");
+    var_00 maps\mp\_utility::unsetperk("specialty_ballcarrier");
     var_00 method_812B(0);
     var_00 switchtoweaponimmediate("emote_weapon_mp");
   }
@@ -1142,7 +1142,7 @@ func_1557() {
     var_04 = anglesToForward(var_03);
     self method_85C9(0);
     lib_0468::func_0A27("passBall");
-    self method_8617("grid_ball_throw");
+    self playSound("grid_ball_throw");
     self.var_2016 thread func_1543(var_04 * var_01, self);
   }
 }
@@ -1201,7 +1201,7 @@ func_6FA2() {
     self waittill("physics_impact", var_00, var_01, var_02, var_03);
     var_04 = vectordot(var_02, var_01);
     if(var_04 > 0.5) {
-      self method_8617("grid_ball_bounce");
+      self playSound("grid_ball_bounce");
     }
 
     wait(0.3);
@@ -1484,7 +1484,7 @@ func_83DC(param_00, param_01, param_02, param_03, param_04) {
     param_01 = "unknown_category";
   }
 
-  function_00F5("script_mp_hub_event: game_time %d, player_name %s, player_id %d, event_category %s, event_name %s, event_value_int %d, event_value_float %f, event_value_string %s, player_count %d", gettime(), self.var_0109, self.var_2418, param_01, param_00, param_02, param_03, param_04, level.var_744A.size);
+  function_00F5("script_mp_hub_event: game_time %d, player_name %s, player_id %d, event_category %s, event_name %s, event_value_int %d, event_value_float %f, event_value_string %s, player_count %d", gettime(), self.var_0109, self.clientid, param_01, param_00, param_02, param_03, param_04, level.var_744A.size);
 }
 
 func_50F0(param_00, param_01, param_02, param_03) {
@@ -1612,7 +1612,7 @@ func_5E88(param_00, param_01, param_02, param_03) {
     var_04 = -1;
   }
 
-  var_05 = self.var_2418;
+  var_05 = self.clientid;
   if(!isDefined(var_05)) {
     var_05 = -1;
   }

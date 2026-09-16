@@ -65,7 +65,7 @@ func_A351() {
 
   var_09 = func_A353(var_04, var_05);
   if(isDefined(level.var_A2F0[var_01])) {
-    earthquake(level.var_A2F0[var_01].var_807E, level.var_A2F0[var_01].var_3511, self.var_116, level.var_A2F0[var_01].var_14F);
+    earthquake(level.var_A2F0[var_01].var_807E, level.var_A2F0[var_01].var_3511, self.origin, level.var_A2F0[var_01].var_14F);
   }
 
   wait(0.5);
@@ -255,8 +255,8 @@ func_066A(param_00, param_01) {
     return;
   }
 
-  level notify("vehicle_explosion", self.var_116);
-  self notify("explode", self.var_116);
+  level notify("vehicle_explosion", self.origin);
+  self notify("explode", self.origin);
   if(isDefined(self.var_508C) && self.var_508C) {
     return;
   }

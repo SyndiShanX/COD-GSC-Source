@@ -667,7 +667,7 @@ func_2DD9(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
 func_63A1(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
   if(isPlayer(param_00)) {
-    self method_8617("mp_hub_jerry_can_explode");
+    self playSound("mp_hub_jerry_can_explode");
     if(isDefined(level.var_5959)) {
       playFX(level.var_5959, self.var_0116);
     }
@@ -1073,7 +1073,7 @@ func_638E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       param_01 maps\mp\gametypes\_hub_unk1::func_50F0(["hubFeatureStats", "hubFiringRangeStats", "grenadeBucketHits"], 1, undefined, undefined);
     }
 
-    self method_8617("mp_hub_allies_frange_tire_bomb_swtn");
+    self playSound("mp_hub_allies_frange_tire_bomb_swtn");
     if(isDefined(level.var_4871)) {
       playFX(level.var_4871, self.var_0116);
     }
@@ -1088,7 +1088,7 @@ func_638E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         param_01 maps\mp\gametypes\_hub_unk1::func_50F0(["hubFeatureStats", "hubFiringRangeStats", "grenadeBucketHits"], 1, undefined, undefined);
       }
 
-      self method_8617("mp_hub_allies_frange_tire_bomb_swtn");
+      self playSound("mp_hub_allies_frange_tire_bomb_swtn");
       if(isDefined(level.var_5959)) {
         playFX(level.var_5959, self.var_0116);
         return;

@@ -1589,8 +1589,8 @@ func_9CF1(param_00, param_01, param_02, param_03) {
       foreach(var_06 in level.players) {
         var_07 = var_06 method_8551();
         if(isDefined(var_07) && var_07 == self.var_AC77.var_241F) {
-          var_08 = distance2d(self.var_1167.origin, var_06.origin);
-          if(var_08 < self.var_1167.var_1173) {
+          var_08 = distance2d(self.origin7.origin, var_06.origin);
+          if(var_08 < self.origin7.var_1173) {
             var_04[var_04.size] = var_06;
           }
         }

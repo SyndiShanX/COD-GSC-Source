@@ -24,7 +24,7 @@ init() {
   level.var_AAD1 = [];
   level.var_7A6B = [];
   level.var_609A = int(tablelookup(var_00, 0, "maxrank", 1));
-  level.var_6097 = int(tablelookup(var_00, 0, "maxprestige", 1));
+  level.maxprestige = int(tablelookup(var_00, 0, "maxprestige", 1));
   level.var_609B = int(tablelookup(var_00, 0, "maxrankfinalprestige", 1));
   level.var_AAD3 = 0;
   setdvarifuninitialized("spv_rankedPlayMatchBonusXP_win", 0);
@@ -91,7 +91,7 @@ onplayerconnect() {
     var_00.explosivekills[0] = 0;
     var_00 setrank(var_05, var_01);
     var_06 = func_4657(level.var_609A) - var_03;
-    var_00.pers["masterPrestige"] = var_01 == level.var_6097 && var_02 >= var_06;
+    var_00.pers["masterPrestige"] = var_01 == level.maxprestige && var_02 >= var_06;
     if(!function_0367() && var_00.var_2418 < level.var_608C) {
       setmatchdata("players", var_00.var_2418, "prestige", var_01);
       setmatchdata("players", var_00.var_2418, "start_rank", maps\mp\_utility::func_2314(var_00.pers["rank"]));
@@ -252,7 +252,7 @@ func_4659(param_00) {
   return level.var_7A6B[param_00][18];
 }
 
-func_1457(param_00, param_01, param_02, param_03, param_04, param_05) {
+giverankxp(param_00, param_01, param_02, param_03, param_04, param_05) {
   if(maps\mp\_utility::func_551F() && !function_0367()) {
     return;
   }
@@ -556,7 +556,7 @@ func_47B4(param_00) {
     }
   }
 
-  func_9575();
+  syncxpstat();
   if(var_03 && function_0367() && getdvarint("5956", 0) == 1) {
     self uploadhub1v1leaderboarddata();
   }
@@ -587,13 +587,13 @@ func_A157(param_00) {
 
   var_06 = self.pers["prestige"];
   if(getdvarint("spv_hub_masterPrestigeDrops_kswitch", 1) == 0) {
-    if(var_06 == level.var_6097 && var_01 >= level.var_609A) {
+    if(var_06 == level.maxprestige && var_01 >= level.var_609A) {
       lib_0468::ae_sendmasterprestigerankevent(var_01, "mp");
     }
   }
 
   thread setsize(var_01 - var_02);
-  if(var_06 == level.var_6097 && var_01 == level.var_609A + 1) {
+  if(var_06 == level.maxprestige && var_01 == level.var_609A + 1) {
     lib_0468::func_A2A("general", 11);
   }
 
@@ -676,7 +676,7 @@ getrank() {
 
 func_4653(param_00) {
   var_01 = self.pers["prestige"];
-  var_02 = var_01 == level.var_6097 && param_00 > func_4657(level.var_609A);
+  var_02 = var_01 == level.maxprestige && param_00 > func_4657(level.var_609A);
   if(var_02) {
     var_03 = level.var_609A;
     var_04 = level.var_609B;
@@ -746,7 +746,7 @@ func_50EB(param_00) {
 
   var_01 = func_465C();
   var_02 = self.pers["prestige"];
-  if(var_02 == level.var_6097) {
+  if(var_02 == level.maxprestige) {
     var_03 = func_4657(level.var_609B) - func_465F();
   } else if(getdvarint("1258", 0) == 1 || getdvarint("2803", 0) == 1) {
     var_03 = func_4658(level.var_609A) - func_465F();
@@ -765,13 +765,13 @@ func_50EB(param_00) {
 
 func_775B(param_00, param_01) {
   var_02 = func_4657(level.var_609A) - func_465F();
-  if(param_00 == level.var_6097 && param_01 >= var_02 && !self.pers["masterPrestige"]) {
+  if(param_00 == level.maxprestige && param_01 >= var_02 && !self.pers["masterPrestige"]) {
     self.pers["masterPrestige"] = 1;
     thread maps\mp\gametypes\_hud_message::func_9104("prestigeMaster");
   }
 }
 
-func_9575() {
+syncxpstat() {
   var_00 = func_465C();
   maps\mp\gametypes\_persistence::statset("experience", var_00);
 }

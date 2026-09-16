@@ -414,9 +414,9 @@ func_6BD4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     if(level.gametype == "undead") {
       if(param_01 istouching(level.var_AC7C.var_9D5E)) {
         maps\mp\gametypes\_gamescore::func_47BD(param_01.team, 1, 1);
-        level thread maps\mp\gametypes\_rank::func_1457("undead_zombie_killed_hp", param_01, param_04, undefined, param_03);
+        level thread maps\mp\gametypes\_rank::giverankxp("undead_zombie_killed_hp", param_01, param_04, undefined, param_03);
       } else {
-        level thread maps\mp\gametypes\_rank::func_1457("undead_zombie_killed", param_01, param_04, undefined, param_03);
+        level thread maps\mp\gametypes\_rank::giverankxp("undead_zombie_killed", param_01, param_04, undefined, param_03);
       }
 
       level maps / mp / gametypes / undead::attemptdropteslagun(self.origin);

@@ -60,7 +60,7 @@ handle_island_pack_a_punch(param_00) {
     wait(getanimlength(var_09["zmb_elevator_cart_move_0" + var_0B + 1]));
   }
 
-  var_04 method_8060();
+  var_04 connectpaths();
   var_04 delete();
   maps / mp / gametypes / zombies::func_47A8("DLC1_ZM_GOINGUP");
   common_scripts\utility::func_3C8F("pap_elevator_arrived");

@@ -546,7 +546,7 @@ func_3456() {
 func_3469() {
   self.var_17EB notsolid();
   self.var_17EB hide();
-  self.var_17EB method_8060();
+  self.var_17EB connectpaths();
   self.var_17E9 = 0;
   foreach(var_01 in self.var_2F0F) {
     var_01.var_17E9 = 0;

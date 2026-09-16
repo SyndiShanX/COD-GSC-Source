@@ -666,13 +666,13 @@ raid_flyby_watcher(param_00) {
       }
 
       self.plane_data[var_15].lastdistance = self.plane_data[var_15].var_3018;
-      self.plane_data[var_15].var_3018 = distance(self.var_116, var_14.var_116);
+      self.plane_data[var_15].var_3018 = distance(self.origin, var_14.var_116);
       self.plane_data[var_15].approachspeed = self.plane_data[var_15].lastdistance - self.plane_data[var_15].var_3018;
       if(self.plane_data[var_15].var_3018 < var_07) {
         if(self.plane_data[var_15].approachspeed > var_08 && self.plane_data[var_15].closeoneshotstarted == 0 && self.plane_data[var_15].closetimer >= var_0A) {
           self.plane_data[var_15].closeoneshotstarted = 1;
           self.plane_data[var_15].closetimer = 0;
-          var_0E = common_scripts\utility::func_AA4A(self.var_116, self.var_1D, var_16.var_116, cos(45));
+          var_0E = common_scripts\utility::func_AA4A(self.origin, self.var_1D, var_16.var_116, cos(45));
           if(isDefined(var_0E) && var_0E == 0) {
             var_0B = var_0B * var_0D;
           }

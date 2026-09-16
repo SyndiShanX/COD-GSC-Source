@@ -212,7 +212,7 @@ func_5302() {
   var_03 = self getrankedplayerdata(common_scripts\utility::func_46AA(), "hubLifetimeStats", "lifetimeHubSessions") + 1;
   self setrankedplayerdata(common_scripts\utility::func_46AA(), "hubLifetimeStats", "lifetimeHubSessions", var_03);
   self setrankedplayerdata(common_scripts\utility::func_46AB(), "hubStats", "lifetimeSessions", var_03);
-  function_00F5("script_mp_hub_event: game_time %d, player_name %s, player_id %d, event_category %s, event_name %s, event_value_int %d, event_value_float %f, event_value_string %s, player_count %d", gettime(), self.var_0109, self.var_2418, "hub_session_info", "entered_hub", 1, -1, "NA", level.var_744A.size);
+  function_00F5("script_mp_hub_event: game_time %d, player_name %s, player_id %d, event_category %s, event_name %s, event_value_int %d, event_value_float %f, event_value_string %s, player_count %d", gettime(), self.var_0109, self.clientid, "hub_session_info", "entered_hub", 1, -1, "NA", level.var_744A.size);
   maps\mp\gametypes\_hub_unk1::func_5E88("join", "hq_session_info", 0, ["join_type", var_02]);
   maps\mp\gametypes\_hub_unk1::func_531B();
   maps\mp\gametypes\_missions::func_A0F3();

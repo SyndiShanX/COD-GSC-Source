@@ -1219,7 +1219,7 @@ func_4AF1(param_00) {
   }
 
   if(var_01 maps\mp\_utility::_hasperk("specialty_scorestreakresupply")) {
-    level thread maps\mp\gametypes\_rank::func_1457("scorestreak_pack", var_01);
+    level thread maps\mp\gametypes\_rank::giverankxp("scorestreak_pack", var_01);
     var_05 = 1;
   }
 
@@ -2932,7 +2932,7 @@ tiwatchraidsboundarychange(param_00) {
     foreach(var_02 in level.var_1B69) {
       if(param_00.team != var_02.team && var_02.var_931A == "active" || var_02.var_931A == "incoming") {
         if(var_02.var_9D65 method_858B(self.var_7464)) {
-          level thread maps\mp\gametypes\_rank::func_1457("tac_insert_destroyed", param_00);
+          level thread maps\mp\gametypes\_rank::giverankxp("tac_insert_destroyed", param_00);
           maps\mp\perks\_perkfunctions::func_2D54(self);
         }
       }
@@ -2988,8 +2988,8 @@ func_99C2() {
       var_0B = self.owner.pers["team"];
       if(isDefined(var_0A) && isDefined(var_0B) && var_0A != var_0B) {
         var_00 notify("destroyed_explosive");
-        level thread maps\mp\gametypes\_rank::func_1457("tac_insert_enemy_destroyed", var_00, var_09);
-        level thread maps\mp\gametypes\_rank::func_1457("tac_insert_destroyed", self.owner);
+        level thread maps\mp\gametypes\_rank::giverankxp("tac_insert_enemy_destroyed", var_00, var_09);
+        level thread maps\mp\gametypes\_rank::giverankxp("tac_insert_destroyed", self.owner);
         var_00 maps\mp\gametypes\_missions::processchallenge("ch_boot_field");
         if(var_00 maps\mp\_utility::_hasperk("specialty_detectexplosive")) {
           var_00 maps\mp\gametypes\_missions::processchallenge("ch_perks3_engineer");
@@ -2998,8 +2998,8 @@ func_99C2() {
     }
   } else if(isDefined(self.owner) && isDefined(var_00) && var_00 != self.owner) {
     var_00 notify("destroyed_explosive");
-    level thread maps\mp\gametypes\_rank::func_1457("tac_insert_enemy_destroyed", var_00, var_09);
-    level thread maps\mp\gametypes\_rank::func_1457("tac_insert_destroyed", self.owner);
+    level thread maps\mp\gametypes\_rank::giverankxp("tac_insert_enemy_destroyed", var_00, var_09);
+    level thread maps\mp\gametypes\_rank::giverankxp("tac_insert_destroyed", self.owner);
     var_00 maps\mp\gametypes\_missions::processchallenge("ch_boot_field");
     if(var_00 maps\mp\_utility::_hasperk("specialty_detectexplosive")) {
       var_00 maps\mp\gametypes\_missions::processchallenge("ch_perks3_engineer");
@@ -3666,7 +3666,7 @@ func_1DF0() {
       var_0B = self.owner.pers["team"];
       if(isDefined(var_0A) && isDefined(var_0B) && var_0A != var_0B) {
         var_00 notify("destroyed_explosive");
-        level thread maps\mp\gametypes\_rank::func_1457("equipment_destroyed", var_00, var_09);
+        level thread maps\mp\gametypes\_rank::giverankxp("equipment_destroyed", var_00, var_09);
         var_00 maps\mp\gametypes\_missions::processchallenge("ch_boot_field");
         if(var_00 maps\mp\_utility::_hasperk("specialty_detectexplosive")) {
           var_00 maps\mp\gametypes\_missions::processchallenge("ch_perks3_engineer");
@@ -3675,7 +3675,7 @@ func_1DF0() {
     }
   } else if(isDefined(self.owner) && isDefined(var_00) && var_00 != self.owner) {
     var_00 notify("destroyed_explosive");
-    level thread maps\mp\gametypes\_rank::func_1457("equipment_destroyed", var_00, var_09);
+    level thread maps\mp\gametypes\_rank::giverankxp("equipment_destroyed", var_00, var_09);
     var_00 maps\mp\gametypes\_missions::processchallenge("ch_boot_field");
     if(var_00 maps\mp\_utility::_hasperk("specialty_detectexplosive")) {
       var_00 maps\mp\gametypes\_missions::processchallenge("ch_perks3_engineer");
@@ -4719,7 +4719,7 @@ func_61DD() {
       var_0B = self.owner.pers["team"];
       if(isDefined(var_0A) && isDefined(var_0B) && var_0A != var_0B) {
         var_00 notify("destroyed_explosive");
-        level thread maps\mp\gametypes\_rank::func_1457("equipment_destroyed", var_00, var_09);
+        level thread maps\mp\gametypes\_rank::giverankxp("equipment_destroyed", var_00, var_09);
         var_00 maps\mp\gametypes\_missions::processchallenge("ch_boot_field");
         if(var_00 maps\mp\_utility::_hasperk("specialty_detectexplosive")) {
           var_00 maps\mp\gametypes\_missions::processchallenge("ch_perks3_engineer");
@@ -4728,7 +4728,7 @@ func_61DD() {
     }
   } else if(isDefined(self.owner) && isDefined(var_00) && var_00 != self.owner) {
     var_00 notify("destroyed_explosive");
-    level thread maps\mp\gametypes\_rank::func_1457("equipment_destroyed", var_00, var_09);
+    level thread maps\mp\gametypes\_rank::giverankxp("equipment_destroyed", var_00, var_09);
     var_00 maps\mp\gametypes\_missions::processchallenge("ch_boot_field");
     if(var_00 maps\mp\_utility::_hasperk("specialty_detectexplosive")) {
       var_00 maps\mp\gametypes\_missions::processchallenge("ch_perks3_engineer");

@@ -161,7 +161,7 @@ func_AA05() {
   var_02 = getEnt("well_clip_door", "script_noteworthy");
   foreach(var_04 in var_00) {
     var_04 notsolid();
-    var_04 method_8060();
+    var_04 connectpaths();
     wait 0.05;
     var_04 delete();
   }
@@ -197,7 +197,7 @@ func_AA07() {
   wait 0.05;
   var_00 solid();
   var_01 = getEnt("well_clip_door_ai", "script_noteworthy");
-  var_01 method_8060();
+  var_01 connectpaths();
   var_01 notsolid();
 }
 

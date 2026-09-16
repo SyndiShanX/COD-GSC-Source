@@ -987,7 +987,7 @@ playerkilled_internal(param_00, param_01, param_02, param_03, param_04, param_05
     var_29 = maps\mp\gametypes\_killcam::func_5A33(var_24, param_05, 0, var_27, var_28, var_25, 0);
     var_2A = maps\mp\gametypes\_killcam::func_5A2A(var_29, var_26, var_0D, param_08 / 1000);
     param_02 maps\mp\gametypes\_killcam::func_7681(param_00, param_01, var_2A, var_16);
-  } else if(maps\mp\_utility::func_5822(param_02.var_2319)) {
+  } else if(maps\mp\_utility::isvalidclass(param_02.var_2319)) {
     param_02 maps\mp\gametypes\_playerlogic::func_9455();
   }
 
@@ -1062,7 +1062,7 @@ playerkilled_internal(param_00, param_01, param_02, param_03, param_04, param_05
 
   var_33 = maps\mp\_utility::func_44FC();
   var_34 = self.pers["lives"];
-  if(maps\mp\_utility::func_5822(param_02.var_2319)) {
+  if(maps\mp\_utility::isvalidclass(param_02.var_2319)) {
     param_02 thread maps\mp\gametypes\_playerlogic::func_9035();
   }
 }
@@ -3066,7 +3066,7 @@ func_7E64(param_00) {
 
     self.owner maps\mp\_utility::func_3E8E(0);
     if(var_02) {
-      level thread maps\mp\gametypes\_rank::func_1457("reviver", var_01);
+      level thread maps\mp\gametypes\_rank::giverankxp("reviver", var_01);
       self.owner.laststand = undefined;
       self.owner maps\mp\_utility::func_2401("last_stand");
       self.owner common_scripts\utility::func_616();
@@ -3615,7 +3615,7 @@ func_6B4B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   if(isDefined(var_08)) {
     var_08 notify("destroyed_killstreak", param_01);
     var_08 maps\mp\_utility::incplayerstat(param_04, 1);
-    level thread maps\mp\gametypes\_rank::func_1457(param_04, var_08, param_01, undefined, param_02);
+    level thread maps\mp\gametypes\_rank::giverankxp(param_04, var_08, param_01, undefined, param_02);
     if(isDefined(level.var_5A7D) && isDefined(level.var_5A7D[param_01])) {
       var_09 = level.var_5A7D[param_01];
       if(var_09 == "counter_uav" || var_09 == "flak_gun") {

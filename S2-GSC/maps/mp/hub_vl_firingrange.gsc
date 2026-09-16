@@ -358,7 +358,7 @@ func_6377(param_00) {
     }
 
     var_0B = self gettagorigin("tag_chest");
-    param_00 method_8615("mp_hit_default");
+    param_00 playlocalsound("mp_hit_default");
     var_0C = func_4591(var_0A, var_08, param_00);
     var_01 = common_scripts\utility::func_7F03(float(var_01) * var_0C, 0);
     var_01 = int(var_01);
@@ -394,7 +394,7 @@ func_6378(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   var_0C = self gettagorigin("tag_chest");
-  param_01 method_8615("mp_hit_default");
+  param_01 playlocalsound("mp_hit_default");
   var_0D = 1;
   if(isDefined(param_01)) {
     var_0D = func_4591(param_05, param_0B, param_01);
@@ -1187,7 +1187,7 @@ func_9810() {
         break;
 
       case "move":
-        thread func_649E();
+        thread hasperkE();
         break;
     }
   }
@@ -1266,7 +1266,7 @@ func_7574() {
   }
 }
 
-func_649E() {
+hasperkE() {
   level endon("shutdown_hologram");
   self endon("death");
   var_00 = undefined;

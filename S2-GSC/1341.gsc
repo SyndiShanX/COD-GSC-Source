@@ -40,7 +40,7 @@ func_51B0() {
 
   foreach(var_09 in self.var_17E7) {
     if(var_09.classname != "script_model") {
-      var_09 method_8060();
+      var_09 connectpaths();
     }
 
     var_09 notsolid();

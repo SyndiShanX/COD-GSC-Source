@@ -546,7 +546,7 @@ func_54E1() {
 }
 
 continue_multi_shot_anim(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = self.var_116;
+  var_05 = self.origin;
   var_06 = self.var_1D;
   for(var_07 = 1; var_07 < param_02; var_07++) {
     level waittill("next_shot_anim_" + param_04);
@@ -555,7 +555,7 @@ continue_multi_shot_anim(param_00, param_01, param_02, param_03, param_04) {
 }
 
 continue_multi_shot_anims(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = self.var_116;
+  var_05 = self.origin;
   var_06 = self.var_1D;
   for(var_07 = 1; var_07 < param_02; var_07++) {
     level waittill("next_shot_anim_" + param_04);

@@ -21,7 +21,7 @@ func_1E6E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     level.var_32CF = level.var_32CF + 1;
     setmatchdata("down_count", maps\mp\_utility::clamptoshort(level.var_32CF));
     setmatchdata("downs", self.var_32CE, "round_downed", maps\mp\_utility::clamptoshort(level.var_A980));
-    setmatchdata("downs", self.var_32CE, "player_index", maps\mp\_utility::func_2314(self.var_2418));
+    setmatchdata("downs", self.var_32CE, "player_index", maps\mp\_utility::func_2314(self.clientid));
     var_0A = maps\mp\_utility::func_467B();
     setmatchdata("downs", self.var_32CE, "down_time", maps\mp\_utility::clamptoshort(var_0A));
     setmatchdata("downs", self.var_32CE, "down_pos", 0, maps\mp\_utility::clamptoshort(int(self.origin[0])));

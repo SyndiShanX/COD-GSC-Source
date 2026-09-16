@@ -907,7 +907,7 @@ func_6AA6(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       var_0A = func_5643(param_01);
       if(isDefined(var_0A)) {
         var_0A maps\mp\_utility::incplayerstat(var_09, 1);
-        level thread maps\mp\gametypes\_rank::func_1457(var_09, var_0A, param_04, undefined, param_03);
+        level thread maps\mp\gametypes\_rank::giverankxp(var_09, var_0A, param_04, undefined, param_03);
       }
     }
   }

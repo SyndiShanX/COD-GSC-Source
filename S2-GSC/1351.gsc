@@ -865,7 +865,7 @@ func_6B9E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   var_10 = maps / mp / agents / _scripted_agent_anim_util::func_434D(var_0C);
   if(isDefined(self.var_9D07)) {
-    func_649D();
+    hasperkD();
   }
 
   self method_839D("gravity");
@@ -974,7 +974,7 @@ func_1F67(param_00) {
   return var_02.size == 0;
 }
 
-func_649D() {
+hasperkD() {
   var_00 = 20;
   var_01 = vectortoangles(self.var_9D07);
   var_02 = anglestoup(var_01);

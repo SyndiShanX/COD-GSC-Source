@@ -110,18 +110,18 @@ func_7947() {
         continue;
       }
 
-      var_06 = distancesquared(var_05.var_116, self.var_116);
+      var_06 = distancesquared(var_05.var_116, self.origin);
       var_07 = 0;
       if(var_06 < var_00) {
         var_08 = anglesToForward(var_05 getangles());
-        var_09 = vectorNormalize(self.var_116 - var_05 getvieworigin());
+        var_09 = vectorNormalize(self.origin - var_05 getvieworigin());
         var_0A = vectordot(var_08, var_09);
         if(var_0A >= var_01) {
           var_07 = 1;
         }
       }
 
-      if(var_07 && bullettracepassed(var_05 getvieworigin(), self.var_116 + (0, 0, 30), 0, self)) {
+      if(var_07 && bullettracepassed(var_05 getvieworigin(), self.origin + (0, 0, 30), 0, self)) {
         if(!isDefined(var_05.var_97BC)) {
           var_05.var_97BC = var_05 maps\mp\gametypes\_hud_util::func_27CF((1, 1, 1), 200, 10);
           var_05.var_97BC maps\mp\gametypes\_hud_util::func_8707("CENTER", undefined, 0, -200);
@@ -242,7 +242,7 @@ func_A3FE(param_00) {
   }
 
   if(common_scripts\utility::func_562E(param_00.var_5A4C)) {
-    param_00 maps\mp\_utility::func_728();
+    param_00 maps\mp\_utility::_suicide();
     return;
   }
 
@@ -405,7 +405,7 @@ func_795E(param_00) {
     } else {
       var_03 = self.var_1D;
       var_04 = anglesToForward(var_06);
-      var_05 = self.var_116 + (0, 0, 100);
+      var_05 = self.origin + (0, 0, 100);
       var_06 = var_06 + var_05 * 1000;
       self method_825B(var_06);
     }
@@ -427,14 +427,14 @@ func_9F82(param_00) {
 
   var_03 = 0;
   var_04 = 0;
-  for(var_05 = self.var_116; isDefined(var_02); var_05 = var_05 method_864F()) {
+  for(var_05 = self.origin; isDefined(var_02); var_05 = var_05 method_864F()) {
     var_06 = var_02.var_116;
     var_03 = var_03 + distance2d(var_05, var_06);
     if(var_03 > param_00) {
       var_07 = param_00 - var_04;
       var_08 = vectorNormalize(var_06 - var_05);
       var_09 = var_05 + var_08 * var_07;
-      var_09 = (var_09[0], var_09[1], self.var_116[2] + 100);
+      var_09 = (var_09[0], var_09[1], self.origin[2] + 100);
       return var_09;
     }
 
@@ -1462,7 +1462,7 @@ func_7990(param_00) {
 func_7989(param_00, param_01) {
   self endon("stop_timer");
   var_02 = 5;
-  if(isDefined(param_01) && param_01 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+  if(isDefined(param_01) && param_01 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
     var_02 = 2.5;
   }
 
@@ -1560,7 +1560,7 @@ func_797E(param_00) {
       continue;
     }
 
-    if(isDefined(var_02) && var_02 maps\mp\_utility::func_649("specialty_improvedobjectives")) {
+    if(isDefined(var_02) && var_02 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
       param_00 method_8278("mp_raids_hedgehog_assemble_fast", "hedgehog");
     } else {
       param_00 method_8278("mp_raids_hedgehog_assemble", "hedgehog");
@@ -1808,7 +1808,7 @@ func_79DD() {
       var_02 = var_00.var_A2C8.var_116;
     }
 
-    var_03 = self.var_116;
+    var_03 = self.origin;
     var_04 = distance2d(var_02, var_03);
     if(var_04 <= var_01) {
       if(self.var_565F) {

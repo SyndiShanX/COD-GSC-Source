@@ -646,7 +646,7 @@ func_6679() {
 func_6678() {
   var_00 = undefined;
   foreach(var_02 in self.var_A2C8.var_118F) {
-    level thread maps\mp\gametypes\_rank::func_1457("raids_neutralize", var_02.var_721C);
+    level thread maps\mp\gametypes\_rank::giverankxp("raids_neutralize", var_02.var_721C);
     if(!isDefined(var_00)) {
       var_00 = var_02;
       continue;

@@ -509,7 +509,7 @@ func_6BBE() {
 func_843F(param_00) {
   param_00.owner = "none";
   level.var_9FC0.var_AC7C = param_00;
-  level.var_9FC0 maps\mp\gametypes\_gameobjects::func_6497(param_00.origin, (0, 0, 100));
+  level.var_9FC0 maps\mp\gametypes\_gameobjects::hasperk7(param_00.origin, (0, 0, 100));
   foreach(var_02 in level.var_9FC2) {
     if(var_02 != param_00) {
       var_02.var_776E show();
@@ -1423,7 +1423,7 @@ func_6AA5(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     }
 
     param_01.var_6219++;
-    level thread maps\mp\gametypes\_rank::func_1457("kill_minion", param_01, param_04, self, param_03);
+    level thread maps\mp\gametypes\_rank::giverankxp("kill_minion", param_01, param_04, self, param_03);
     if(isDefined(param_01)) {
       func_093C(param_01.team);
     }

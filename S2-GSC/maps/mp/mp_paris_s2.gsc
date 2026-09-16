@@ -50,8 +50,8 @@ animate_tanks() {
 rumbletankloop() {
   level endon("game_ended");
   for(;;) {
-    function_01BB("tank_convoy_rumble_low", self.var_116);
-    earthquake(0.1, 1, self.var_116, 650);
+    function_01BB("tank_convoy_rumble_low", self.origin);
+    earthquake(0.1, 1, self.origin, 650);
     wait(0.5);
   }
 }

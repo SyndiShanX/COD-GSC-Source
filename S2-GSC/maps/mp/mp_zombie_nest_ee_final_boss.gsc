@@ -418,7 +418,7 @@ func_4AD1() {
       level.var_400E[level.var_400E.size] = ["bat_elite_set 1 1", "all"];
     }
 
-    if(gettime() - level.var_9309 <= 4500000) {
+    if(gettime() - level.starttime <= 4500000) {
       level.var_400E[level.var_400E.size] = ["bat_elite_set 2 1", "all"];
     }
 
@@ -984,11 +984,11 @@ func_5CCA(param_00) {
 
   var_0E = getEnt("brute_debris_floor_clip", "targetname");
   var_0E solid();
-  var_0E method_8060();
+  var_0E connectpaths();
   var_0F = getEntArray("brute_exit_blocker_village_gallows", "targetname");
   foreach(var_08 in var_0F) {
     var_08 notsolid();
-    var_08 method_8060();
+    var_08 connectpaths();
   }
 
   var_12 = getEnt("brute_exit_blocker_tower_path", "targetname");
@@ -1048,7 +1048,7 @@ func_5F28() {
 
   foreach(var_07 in var_00) {
     if(var_07.classname != "script_model") {
-      var_07 method_8060();
+      var_07 connectpaths();
     }
 
     if(isDefined(var_07.var_3BBC)) {
@@ -1074,7 +1074,7 @@ func_5F28() {
 func_1CB7() {
   var_00 = getEnt("brute_debris_floor_clip", "targetname");
   var_00 solid();
-  var_00 method_8060();
+  var_00 connectpaths();
 }
 
 func_83DF() {

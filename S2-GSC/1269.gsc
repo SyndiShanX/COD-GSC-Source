@@ -19,7 +19,7 @@ func_2E32(param_00) {
   lib_04FF::func_6965("objectHealth", 750, []);
   lib_04FF::func_6963("grenadeDamageMult", 0.1, [0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]);
   param_00.var_1A7 = game["attackers"];
-  var_01 = lib_04FF::func_27DE("A", param_00.var_1A7, self.var_116);
+  var_01 = lib_04FF::func_27DE("A", param_00.var_1A7, self.origin);
   var_01 maps\mp\gametypes\_gameobjects::func_8A60("any");
   param_00.var_2563 = var_01;
   param_00.var_6896 = 0;
@@ -55,7 +55,7 @@ func_2E31(param_00) {
   if(isDefined(self.externaliconent)) {
     param_00 lib_04FF::func_990(self.externaliconent, undefined, (0, 0, 0), var_01, var_02, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, self.var_6896);
   } else {
-    param_00 lib_04FF::func_990(self.var_116, undefined, (0, 0, 0), var_01, var_02, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, self.var_6896);
+    param_00 lib_04FF::func_990(self.origin, undefined, (0, 0, 0), var_01, var_02, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, self.var_6896);
   }
 
   param_00 lib_04FF::func_860A(var_02);
@@ -201,8 +201,8 @@ func_2E2E() {
     var_01 func_36EB();
   }
 
-  playFX(common_scripts\utility::func_44F5("destructionExplode"), self.var_116);
-  self method_8617("mp_war_radio_lrg_explo");
+  playFX(common_scripts\utility::func_44F5("destructionExplode"), self.origin);
+  self playSound("mp_war_radio_lrg_explo");
   if(isDefined(self.destroyed_model)) {
     self hudoutlinedisable();
     self setModel(self.destroyed_model);
@@ -247,7 +247,7 @@ func_2E2C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   if(isPlayer(param_01)) {
     var_0C = param_01 getcurrentprimaryweapon();
     if(var_0C != "flamethrower_mp" && var_0C != "flamethrower_grenadier_mp") {
-      self method_8617("mp_war_radio_lrg_hit");
+      self playSound("mp_war_radio_lrg_hit");
     }
   }
 
@@ -263,14 +263,14 @@ func_2E2C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   if(self.var_6A >= self.var_FB) {
     var_11 = self.var_6A - self.var_FB;
     var_0E = var_0E - var_11;
-    level thread maps\mp\gametypes\_rank::func_1457("raids_destruct_equipment", param_01);
+    level thread maps\mp\gametypes\_rank::giverankxp("raids_destruct_equipment", param_01);
     func_2E2E();
     level notify(var_0F);
   } else {
     var_12 = func_469D(self);
     if(var_12 != self.var_3F7C) {
       func_0A15(var_12);
-      var_13 = lib_0380::func_2889(var_10, undefined, self.var_116, 1);
+      var_13 = lib_0380::func_2889(var_10, undefined, self.origin, 1);
       lib_0380::func_5F2(var_13, 1, var_0F);
     }
   }
@@ -294,7 +294,7 @@ modifydamagefordestructibles(param_00, param_01, param_02, param_03) {
     }
 
     if(var_04 != 0) {
-      var_05 = distance(self.var_116, param_03.var_116);
+      var_05 = distance(self.origin, param_03.var_116);
       var_06 = lerp(0.1, self.var_65EA lib_04FF::func_45D0("grenadeDamageMult"), var_05 / var_04);
     } else {
       var_06 = self.var_65EA lib_04FF::func_45D0("grenadeDamageMult");
@@ -411,7 +411,7 @@ func_74E0() {
     return;
   }
 
-  var_00 = spawn("script_model", self.var_116);
+  var_00 = spawn("script_model", self.origin);
   var_00 setModel("tag_origin");
   var_00.var_1D = self.var_1D;
   self.var_3F6E = var_00;

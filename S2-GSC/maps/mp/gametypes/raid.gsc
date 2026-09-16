@@ -111,7 +111,7 @@ func_535B() {
   }
 
   for(;;) {
-    if(isDefined(level.var_9309) && gettime() > level.var_9309 + 1000) {
+    if(isDefined(level.starttime) && gettime() > level.starttime + 1000) {
       var_01 = game["defenders"];
       var_03 = var_01 + "_raids";
       function_0226(&"set_prev_round_objective_times", 4, game[var_03]["time_split_1"], game[var_03]["time_split_2"], game[var_03]["time_split_3"], game[var_03]["time_split_4"]);
@@ -150,7 +150,7 @@ func_4665() {
 }
 
 func_6B80(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = maps\mp\gametypes\_rank::func_4671(param_00);
+  var_05 = maps\mp\gametypes\_rank::getscoreinfovalue(param_00);
   if(isDefined(var_05) && var_05 > 0 && !getdvarint("raid_allow_scorestreaks", 0)) {
     param_01 maps\mp\killstreaks\_killstreaks::func_300F(param_00, var_05);
   }
@@ -566,11 +566,11 @@ func_2011() {
   self.var_3E24 = 1;
   self.var_3E19 = 1;
   if(isDefined(self.var_2012)) {
-    playFX(common_scripts\utility::func_44F5(self.var_2012), self.var_116);
+    playFX(common_scripts\utility::func_44F5(self.var_2012), self.origin);
   }
 
   wait(0.1);
-  physicsexplosionsphere(self.var_116 + (0, 0, 5), 200, 50, 3);
+  physicsexplosionsphere(self.origin + (0, 0, 5), 200, 50, 3);
 }
 
 func_6AB8() {
@@ -717,7 +717,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.var_116, var_01.var_116, 30, 90, 30625)) {
+    if(isweaponnearinteractable(self.origin, var_01.var_116, 30, 90, 30625)) {
       return 0;
     }
   }
@@ -727,7 +727,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.var_116, var_04.var_116, 30, 90, 19600)) {
+    if(isweaponnearinteractable(self.origin, var_04.var_116, 30, 90, 19600)) {
       return 0;
     }
   }
@@ -737,7 +737,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.var_116, var_07.var_116, 30, 90, 65536)) {
+    if(isweaponnearinteractable(self.origin, var_07.var_116, 30, 90, 65536)) {
       return 0;
     }
   }
@@ -747,7 +747,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.var_116, var_0A.var_116, 30, 90, 65536)) {
+    if(isweaponnearinteractable(self.origin, var_0A.var_116, 30, 90, 65536)) {
       return 0;
     }
   }
@@ -757,7 +757,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.var_116, var_0D.var_116, 30, 90, 262144)) {
+    if(isweaponnearinteractable(self.origin, var_0D.var_116, 30, 90, 262144)) {
       return 0;
     }
   }
@@ -767,7 +767,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.var_116, var_10.var_116, 30, 90, 262144)) {
+    if(isweaponnearinteractable(self.origin, var_10.var_116, 30, 90, 262144)) {
       return 0;
     }
   }
@@ -777,7 +777,7 @@ func_79A6() {
       continue;
     }
 
-    if(ispointinvolume(self.var_116, var_13)) {
+    if(ispointinvolume(self.origin, var_13)) {
       return 0;
     }
   }

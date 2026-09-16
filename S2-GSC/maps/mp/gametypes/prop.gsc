@@ -129,7 +129,7 @@ onplayerconnect() {
   }
 }
 
-func_1786() {}
+blank() {}
 
 propmovespeedscale() {
   if(self.team == game["defenders"]) {
@@ -1412,18 +1412,18 @@ stillalivexp() {
         continue;
       }
 
-      level thread maps\mp\gametypes\_rank::func_1457("still_alive", var_01);
+      level thread maps\mp\gametypes\_rank::giverankxp("still_alive", var_01);
       switch (var_01.var_777D.var_5135.propsize) {
         case 250:
-          level thread maps\mp\gametypes\_rank::func_1457("still_alive_medium_bonus", var_01);
+          level thread maps\mp\gametypes\_rank::giverankxp("still_alive_medium_bonus", var_01);
           break;
 
         case 450:
-          level thread maps\mp\gametypes\_rank::func_1457("still_alive_large_bonus", var_01);
+          level thread maps\mp\gametypes\_rank::giverankxp("still_alive_large_bonus", var_01);
           break;
 
         case 550:
-          level thread maps\mp\gametypes\_rank::func_1457("still_alive_extra_large_bonus", var_01);
+          level thread maps\mp\gametypes\_rank::giverankxp("still_alive_extra_large_bonus", var_01);
           break;
 
         default:
@@ -1528,7 +1528,7 @@ attackerswaittime() {
   }
 
   maps\mp\_utility::func_3FA5("prematch_done");
-  while(!isDefined(level.var_9309)) {
+  while(!isDefined(level.starttime)) {
     wait 0.05;
   }
 
@@ -1536,7 +1536,7 @@ attackerswaittime() {
     wait 0.05;
   }
 
-  var_00 = gettime() - level.var_9309 / 1000;
+  var_00 = gettime() - level.starttime / 1000;
   var_01 = level.phsettings.prophidetime - var_00;
   if(var_01 > 0) {
     maps\mp\_utility::func_3E8E(1);

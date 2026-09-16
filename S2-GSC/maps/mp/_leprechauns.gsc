@@ -286,7 +286,7 @@ on_leprechaun_killed(param_00, param_01, param_02, param_03, param_04, param_05,
   var_09 = maps\mp\_events::func_43D6(param_04, param_03);
   level thread all_player_card_splash("leprechaun_killed", param_01);
   if(isPlayer(param_01)) {
-    level thread maps\mp\gametypes\_rank::func_1457("leprechaun_killed", param_01, param_04, undefined, param_03);
+    level thread maps\mp\gametypes\_rank::giverankxp("leprechaun_killed", param_01, param_04, undefined, param_03);
     param_01 thread give_leprechaun_score_over_time();
     param_01 thread lib_0468::func_A22("lepKill");
   }

@@ -146,7 +146,7 @@ func_5E99(param_00) {
   setmatchdata("killstreaks_available", var_01, "event_time_ms", var_02);
   setmatchdata("killstreaks_available", var_01, "life_index", self.var_5CC6);
   if(function_03BC()) {
-    self dlogevent("dtel_killstreak", ["killstreak", ["life_index", self.var_5CC6, "player_index", self.var_2418, "event_type", param_00, "event_time_ms", var_02, "event_pos", [0, 0, 0], "deployed", 0]]);
+    self dlogevent("dtel_killstreak", ["killstreak", ["life_index", self.var_5CC6, "player_index", self.clientid, "event_type", param_00, "event_time_ms", var_02, "event_pos", [0, 0, 0], "deployed", 0]]);
   }
 }
 
@@ -187,10 +187,10 @@ func_5E9A(param_00, param_01) {
   setmatchdata("killstreaks", var_02, "life_index", self.var_5CC6);
   self.var_293B = var_02;
   if(function_03BC()) {
-    self dlogevent("dtel_killstreak", ["killstreak", ["life_index", self.var_5CC6, "player_index", self.var_2418, "event_type", param_00, "event_time_ms", var_03, "event_pos", [int(param_01[0]), int(param_01[1]), int(param_01[2])], "deployed", 1]]);
+    self dlogevent("dtel_killstreak", ["killstreak", ["life_index", self.var_5CC6, "player_index", self.clientid, "event_type", param_00, "event_time_ms", var_03, "event_pos", [int(param_01[0]), int(param_01[1]), int(param_01[2])], "deployed", 1]]);
   }
 
-  function_00F6(param_01, "script_mp_killstreak: eventType %s, player_name %s, player %d, gameTime %d", param_00, self.name, self.var_2418, gettime());
+  function_00F6(param_01, "script_mp_killstreak: eventType %s, player_name %s, player %d, gameTime %d", param_00, self.name, self.clientid, gettime());
 }
 
 logkillstreakassist(param_00) {
@@ -244,8 +244,8 @@ func_5E93(param_00, param_01, param_02) {
     self dlogevent("dtel_gameevent", ["gameevent", ["life_index", var_03, "event_type", param_00, "event_time_ms", var_05, "event_pos", [int(param_01[0]), int(param_01[1]), int(param_01[2])], "extra_data", var_06]]);
   }
 
-  if(var_03 != -1 && isDefined(self.name) && isDefined(self.var_2418)) {
-    function_00F6(param_01, "script_mp_event: event_type %s, player_name %s, player %d, gameTime %d", param_00, self.name, self.var_2418, gettime());
+  if(var_03 != -1 && isDefined(self.name) && isDefined(self.clientid)) {
+    function_00F6(param_01, "script_mp_event: event_type %s, player_name %s, player %d, gameTime %d", param_00, self.name, self.clientid, gettime());
   }
 }
 
@@ -256,7 +256,7 @@ func_5E96(param_00, param_01) {
 
   setmatchdata("lives", param_00, "death_modifiers", param_01, 1);
   if(function_03BC()) {
-    self dlogevent("dtel_death_modifier", ["death", ["life_index", param_00, "player_index", self.var_2418, "modifier", param_01]]);
+    self dlogevent("dtel_death_modifier", ["death", ["life_index", param_00, "player_index", self.clientid, "modifier", param_01]]);
   }
 }
 
@@ -267,7 +267,7 @@ func_5E9D(param_00, param_01) {
 
   setmatchdata("lives", param_00, "multikill", param_01);
   if(function_03BC()) {
-    self dlogevent("dtel_multikill", ["death", ["life_index", param_00, "player_index", self.var_2418, "multikill", param_01]]);
+    self dlogevent("dtel_multikill", ["death", ["life_index", param_00, "player_index", self.clientid, "multikill", param_01]]);
   }
 }
 
@@ -278,7 +278,7 @@ func_5EA6(param_00) {
 
   var_01 = gettime() - level.var_5CC7[self.var_5CC6];
   self.var_9AB6 = self.var_9AB6 + var_01;
-  setmatchdata("lives", self.var_5CC6, "player_index", self.var_2418);
+  setmatchdata("lives", self.var_5CC6, "player_index", self.clientid);
   setmatchdata("lives", self.var_5CC6, "spawn_pos", 0, int(self.var_9092[0]));
   setmatchdata("lives", self.var_5CC6, "spawn_pos", 1, int(self.var_9092[1]));
   setmatchdata("lives", self.var_5CC6, "spawn_pos", 2, int(self.var_9092[2]));
@@ -313,7 +313,7 @@ func_5EAA(param_00, param_01) {
     return;
   }
 
-  setmatchdata("players", self.var_2418, param_01, param_00);
+  setmatchdata("players", self.clientid, param_01, param_00);
 }
 
 func_5EA1(param_00, param_01) {
@@ -321,10 +321,10 @@ func_5EA1(param_00, param_01) {
     return;
   }
 
-  var_02 = getmatchdata("players", self.var_2418, "awards", param_00);
+  var_02 = getmatchdata("players", self.clientid, "awards", param_00);
   var_02 = var_02 + param_01;
   var_02 = maps\mp\_utility::func_2314(var_02);
-  setmatchdata("players", self.var_2418, "awards", param_00, var_02);
+  setmatchdata("players", self.clientid, "awards", param_00, var_02);
 }
 
 func_5E9F(param_00, param_01) {
@@ -384,7 +384,7 @@ func_2E62(param_00, param_01) {
     var_08 = function_0061(param_00);
     var_06 = 0;
     foreach(var_0A in var_08) {
-      if(!maps\mp\_utility::func_5679(var_0A)) {
+      if(!maps\mp\_utility::isattachment(var_0A)) {
         continue;
       }
 
@@ -605,7 +605,7 @@ func_5EA5(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       setmatchdata("lives", param_04, "attacker_minimap_callout_index", 255);
     }
 
-    setmatchdata("lives", param_04, "player_index", self.var_2418);
+    setmatchdata("lives", param_04, "player_index", self.clientid);
     setmatchdata("lives", param_04, "victim_pos", 0, int(self.origin[0]));
     setmatchdata("lives", param_04, "victim_pos", 1, int(self.origin[1]));
     setmatchdata("lives", param_04, "victim_pos", 2, int(self.origin[2]));
@@ -781,7 +781,7 @@ func_5EA5(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
                   var_3D = [int(var_3E[0]), int(var_3E[1]), int(var_3E[2])];
                 }
 
-                self dlogevent("dtel_death", ["death", ["life_index", param_04, "player_index", self.var_2418, "death_pos", var_3A, "death_time_ms", var_11, "victim_weapon_guid", var_14.guid, "attacker_life_index", var_3B, "attacker_player_index", var_3C, "attacker_pos", var_3D, "attacker_weapon_guid", var_0E.guid]]);
+                self dlogevent("dtel_death", ["death", ["life_index", param_04, "player_index", self.clientid, "death_pos", var_3A, "death_time_ms", var_11, "victim_weapon_guid", var_14.guid, "attacker_life_index", var_3B, "attacker_player_index", var_3C, "attacker_pos", var_3D, "attacker_weapon_guid", var_0E.guid]]);
               }
             }
 
@@ -790,24 +790,24 @@ func_5EA5(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
                 return;
               }
 
-              setmatchdata("players", self.var_2418, "score", maps\mp\_utility::getpersstat("score"));
+              setmatchdata("players", self.clientid, "score", maps\mp\_utility::getpersstat("score"));
               if(maps\mp\_utility::getpersstat("assists") > 255) {
-                setmatchdata("players", self.var_2418, "assists", 255);
+                setmatchdata("players", self.clientid, "assists", 255);
               } else {
-                setmatchdata("players", self.var_2418, "assists", maps\mp\_utility::getpersstat("assists"));
+                setmatchdata("players", self.clientid, "assists", maps\mp\_utility::getpersstat("assists"));
               }
 
               if(maps\mp\_utility::getpersstat("longestStreak") > 255) {
-                setmatchdata("players", self.var_2418, "longest_streak", 255);
+                setmatchdata("players", self.clientid, "longest_streak", 255);
               } else {
-                setmatchdata("players", self.var_2418, "longest_streak", maps\mp\_utility::getpersstat("longestStreak"));
+                setmatchdata("players", self.clientid, "longest_streak", maps\mp\_utility::getpersstat("longestStreak"));
               }
 
               if(isDefined(self) && isDefined(self.pers) && isDefined(self.pers["validationInfractions"])) {
                 if(maps\mp\_utility::getpersstat("validationInfractions") > 255) {
-                  setmatchdata("players", self.var_2418, "validation_infractions", 255);
+                  setmatchdata("players", self.clientid, "validation_infractions", 255);
                 } else {
-                  setmatchdata("players", self.var_2418, "validation_infractions", maps\mp\_utility::getpersstat("validationInfractions"));
+                  setmatchdata("players", self.clientid, "validation_infractions", maps\mp\_utility::getpersstat("validationInfractions"));
                 }
               }
 
@@ -836,11 +836,11 @@ func_5EA5(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
                 var_04 = self.pers["causedVictimSpawnCount"];
               }
 
-              setmatchdata("players", self.var_2418, "spawns", maps\mp\_utility::clamptoshort(var_00));
-              setmatchdata("players", self.var_2418, "immediate_action_spawns", maps\mp\_utility::clamptoshort(var_01));
-              setmatchdata("players", self.var_2418, "victim_spawns", maps\mp\_utility::clamptoshort(var_02));
-              setmatchdata("players", self.var_2418, "immediate_actions_caused", maps\mp\_utility::clamptoshort(var_03));
-              setmatchdata("players", self.var_2418, "victim_spawns_caused", maps\mp\_utility::clamptoshort(var_04));
+              setmatchdata("players", self.clientid, "spawns", maps\mp\_utility::clamptoshort(var_00));
+              setmatchdata("players", self.clientid, "immediate_action_spawns", maps\mp\_utility::clamptoshort(var_01));
+              setmatchdata("players", self.clientid, "victim_spawns", maps\mp\_utility::clamptoshort(var_02));
+              setmatchdata("players", self.clientid, "immediate_actions_caused", maps\mp\_utility::clamptoshort(var_03));
+              setmatchdata("players", self.clientid, "victim_spawns_caused", maps\mp\_utility::clamptoshort(var_04));
               if(isDefined(level.iszombiegame) && level.iszombiegame) {
                 return;
               }
@@ -851,19 +851,19 @@ func_5EA5(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
               foreach(var_07 in self.pers["mpMatchdataWeaponStats"]) {
                 if(var_05 < level.var_60A7) {
                   foreach(var_0A, var_09 in var_07) {
-                    setmatchdata("players", self.var_2418, "weapon_stats", var_05, var_0A, var_09);
+                    setmatchdata("players", self.clientid, "weapon_stats", var_05, var_0A, var_09);
                   }
 
                   var_05++;
                 }
               }
 
-              setmatchdata("players", self.var_2418, "kills", maps\mp\_utility::clamptoshort(self.pers["kills"]));
-              setmatchdata("players", self.var_2418, "deaths", maps\mp\_utility::clamptoshort(self.pers["deaths"]));
+              setmatchdata("players", self.clientid, "kills", maps\mp\_utility::clamptoshort(self.pers["kills"]));
+              setmatchdata("players", self.clientid, "deaths", maps\mp\_utility::clamptoshort(self.pers["deaths"]));
               var_0C = self getrankedplayerdata(common_scripts\utility::getstatgamemode(), "callingCardIndex");
               var_0D = self getrankedplayerdata(common_scripts\utility::getstatgamemode(), "activeEmblemSlot");
-              setmatchdata("players", self.var_2418, "calling_card_index", var_0C);
-              setmatchdata("players", self.var_2418, "active_emblem_slot", var_0D);
+              setmatchdata("players", self.clientid, "calling_card_index", var_0C);
+              setmatchdata("players", self.clientid, "active_emblem_slot", var_0D);
             }
 
             func_36DB() {
@@ -1113,7 +1113,7 @@ func_5EA5(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
                 return;
               }
 
-              setmatchdata("players", self.var_2418, "kills_confirmed", self.pers["confirmed"]);
+              setmatchdata("players", self.clientid, "kills_confirmed", self.pers["confirmed"]);
             }
 
             func_5E98() {
@@ -1121,7 +1121,7 @@ func_5EA5(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
                 return;
               }
 
-              setmatchdata("players", self.var_2418, "kills_denied", self.pers["denied"]);
+              setmatchdata("players", self.clientid, "kills_denied", self.pers["denied"]);
             }
 
             func_5E95() {
@@ -1131,57 +1131,57 @@ func_5EA5(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
               if(getdvarint("2506") > 0) {
                 var_00 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "experience");
-                setmatchdata("players", self.var_2418, "start_xp", var_00);
-                setmatchdata("players", self.var_2418, "start_kills", self getrankedplayerdata(common_scripts\utility::func_46AE(), "kills"));
-                setmatchdata("players", self.var_2418, "start_deaths", self getrankedplayerdata(common_scripts\utility::func_46AE(), "deaths"));
-                setmatchdata("players", self.var_2418, "start_wins", self getrankedplayerdata(common_scripts\utility::func_46AE(), "wins"));
-                setmatchdata("players", self.var_2418, "start_losses", self getrankedplayerdata(common_scripts\utility::func_46AE(), "losses"));
-                setmatchdata("players", self.var_2418, "start_hits", self getrankedplayerdata(common_scripts\utility::func_46AE(), "hits"));
-                setmatchdata("players", self.var_2418, "start_misses", self getrankedplayerdata(common_scripts\utility::func_46AE(), "misses"));
-                setmatchdata("players", self.var_2418, "start_games_played", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gamesPlayed"));
-                setmatchdata("players", self.var_2418, "start_time_played_total", self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedTotal"));
-                setmatchdata("players", self.var_2418, "start_score", self getrankedplayerdata(common_scripts\utility::func_46AE(), "score"));
-                setmatchdata("players", self.var_2418, "start_unlock_points", self getrankedplayerdata(common_scripts\utility::func_46AE(), "unlockPoints"));
-                setmatchdata("players", self.var_2418, "start_prestige", self getrankedplayerdata(common_scripts\utility::func_46AE(), "prestige"));
-                setmatchdata("players", self.var_2418, "start_gdf_rating", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gdfRating"));
-                setmatchdata("players", self.var_2418, "start_gdf_variance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gdfVariance"));
-                setmatchdata("players", self.var_2418, "start_sos_rating", self getrankedplayerdata(common_scripts\utility::func_46AE(), "sosRating"));
-                setmatchdata("players", self.var_2418, "start_sos_weight", self getrankedplayerdata(common_scripts\utility::func_46AE(), "sosWeight"));
-                setmatchdata("players", self.var_2418, "start_division_xp", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "experience"));
-                setmatchdata("players", self.var_2418, "start_division_xp", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "experience"));
-                setmatchdata("players", self.var_2418, "start_division_xp", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "experience"));
-                setmatchdata("players", self.var_2418, "start_division_xp", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "experience"));
-                setmatchdata("players", self.var_2418, "start_division_xp", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "experience"));
-                setmatchdata("players", self.var_2418, "start_division_xp", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "experience"));
-                setmatchdata("players", self.var_2418, "start_division_xp", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "experience"));
-                setmatchdata("players", self.var_2418, "start_division_xp", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "experience"));
-                setmatchdata("players", self.var_2418, "start_division_xp", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "experience"));
-                setmatchdata("players", self.var_2418, "start_division_xp", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "experience"));
-                setmatchdata("players", self.var_2418, "start_division_level", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "level"));
-                setmatchdata("players", self.var_2418, "start_division_level", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "level"));
-                setmatchdata("players", self.var_2418, "start_division_level", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "level"));
-                setmatchdata("players", self.var_2418, "start_division_level", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "level"));
-                setmatchdata("players", self.var_2418, "start_division_level", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "level"));
-                setmatchdata("players", self.var_2418, "start_division_level", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "level"));
-                setmatchdata("players", self.var_2418, "start_division_level", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "level"));
-                setmatchdata("players", self.var_2418, "start_division_level", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "level"));
-                setmatchdata("players", self.var_2418, "start_division_level", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "level"));
-                setmatchdata("players", self.var_2418, "start_division_level", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "level"));
-                setmatchdata("players", self.var_2418, "start_division_prestige", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "start_division_prestige", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "start_division_prestige", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "start_division_prestige", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "start_division_prestige", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "start_division_prestige", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "start_division_prestige", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "start_division_prestige", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "start_division_prestige", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "start_division_prestige", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "start_xp", var_00);
+                setmatchdata("players", self.clientid, "start_kills", self getrankedplayerdata(common_scripts\utility::func_46AE(), "kills"));
+                setmatchdata("players", self.clientid, "start_deaths", self getrankedplayerdata(common_scripts\utility::func_46AE(), "deaths"));
+                setmatchdata("players", self.clientid, "start_wins", self getrankedplayerdata(common_scripts\utility::func_46AE(), "wins"));
+                setmatchdata("players", self.clientid, "start_losses", self getrankedplayerdata(common_scripts\utility::func_46AE(), "losses"));
+                setmatchdata("players", self.clientid, "start_hits", self getrankedplayerdata(common_scripts\utility::func_46AE(), "hits"));
+                setmatchdata("players", self.clientid, "start_misses", self getrankedplayerdata(common_scripts\utility::func_46AE(), "misses"));
+                setmatchdata("players", self.clientid, "start_games_played", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gamesPlayed"));
+                setmatchdata("players", self.clientid, "start_time_played_total", self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedTotal"));
+                setmatchdata("players", self.clientid, "start_score", self getrankedplayerdata(common_scripts\utility::func_46AE(), "score"));
+                setmatchdata("players", self.clientid, "start_unlock_points", self getrankedplayerdata(common_scripts\utility::func_46AE(), "unlockPoints"));
+                setmatchdata("players", self.clientid, "start_prestige", self getrankedplayerdata(common_scripts\utility::func_46AE(), "prestige"));
+                setmatchdata("players", self.clientid, "start_gdf_rating", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gdfRating"));
+                setmatchdata("players", self.clientid, "start_gdf_variance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gdfVariance"));
+                setmatchdata("players", self.clientid, "start_sos_rating", self getrankedplayerdata(common_scripts\utility::func_46AE(), "sosRating"));
+                setmatchdata("players", self.clientid, "start_sos_weight", self getrankedplayerdata(common_scripts\utility::func_46AE(), "sosWeight"));
+                setmatchdata("players", self.clientid, "start_division_xp", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "experience"));
+                setmatchdata("players", self.clientid, "start_division_xp", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "experience"));
+                setmatchdata("players", self.clientid, "start_division_xp", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "experience"));
+                setmatchdata("players", self.clientid, "start_division_xp", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "experience"));
+                setmatchdata("players", self.clientid, "start_division_xp", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "experience"));
+                setmatchdata("players", self.clientid, "start_division_xp", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "experience"));
+                setmatchdata("players", self.clientid, "start_division_xp", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "experience"));
+                setmatchdata("players", self.clientid, "start_division_xp", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "experience"));
+                setmatchdata("players", self.clientid, "start_division_xp", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "experience"));
+                setmatchdata("players", self.clientid, "start_division_xp", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "experience"));
+                setmatchdata("players", self.clientid, "start_division_level", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "level"));
+                setmatchdata("players", self.clientid, "start_division_level", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "level"));
+                setmatchdata("players", self.clientid, "start_division_level", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "level"));
+                setmatchdata("players", self.clientid, "start_division_level", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "level"));
+                setmatchdata("players", self.clientid, "start_division_level", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "level"));
+                setmatchdata("players", self.clientid, "start_division_level", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "level"));
+                setmatchdata("players", self.clientid, "start_division_level", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "level"));
+                setmatchdata("players", self.clientid, "start_division_level", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "level"));
+                setmatchdata("players", self.clientid, "start_division_level", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "level"));
+                setmatchdata("players", self.clientid, "start_division_level", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "level"));
+                setmatchdata("players", self.clientid, "start_division_prestige", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "start_division_prestige", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "start_division_prestige", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "start_division_prestige", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "start_division_prestige", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "start_division_prestige", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "start_division_prestige", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "start_division_prestige", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "start_division_prestige", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "start_division_prestige", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "prestigeLevel"));
                 var_01 = 12;
                 var_02 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_current_season");
                 if(var_02 >= 0 && var_02 < var_01) {
-                  setmatchdata("players", self.var_2418, "ranked_play_current_season", var_02);
-                  setmatchdata("players", self.var_2418, "start_mmr_current", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "mmr_current"));
+                  setmatchdata("players", self.clientid, "ranked_play_current_season", var_02);
+                  setmatchdata("players", self.clientid, "start_mmr_current", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "mmr_current"));
                 }
               }
             }
@@ -1193,66 +1193,66 @@ func_5EA5(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
               if(getdvarint("2506") > 0) {
                 var_00 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "experience");
-                setmatchdata("players", self.var_2418, "end_xp", var_00);
-                setmatchdata("players", self.var_2418, "end_kills", self getrankedplayerdata(common_scripts\utility::func_46AE(), "kills"));
-                setmatchdata("players", self.var_2418, "end_deaths", self getrankedplayerdata(common_scripts\utility::func_46AE(), "deaths"));
-                setmatchdata("players", self.var_2418, "end_wins", self getrankedplayerdata(common_scripts\utility::func_46AE(), "wins"));
-                setmatchdata("players", self.var_2418, "end_losses", self getrankedplayerdata(common_scripts\utility::func_46AE(), "losses"));
-                setmatchdata("players", self.var_2418, "end_hits", self getrankedplayerdata(common_scripts\utility::func_46AE(), "hits"));
-                setmatchdata("players", self.var_2418, "end_misses", self getrankedplayerdata(common_scripts\utility::func_46AE(), "misses"));
-                setmatchdata("players", self.var_2418, "end_games_played", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gamesPlayed"));
-                setmatchdata("players", self.var_2418, "end_time_played_total", self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedTotal"));
-                setmatchdata("players", self.var_2418, "end_score", self getrankedplayerdata(common_scripts\utility::func_46AE(), "score"));
-                setmatchdata("players", self.var_2418, "end_unlock_points", self getrankedplayerdata(common_scripts\utility::func_46AE(), "unlockPoints"));
-                setmatchdata("players", self.var_2418, "end_prestige", self getrankedplayerdata(common_scripts\utility::func_46AE(), "prestige"));
-                setmatchdata("players", self.var_2418, "end_gdf_rating", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gdfRating"));
-                setmatchdata("players", self.var_2418, "end_gdf_variance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gdfVariance"));
-                setmatchdata("players", self.var_2418, "end_sos_rating", self getrankedplayerdata(common_scripts\utility::func_46AE(), "sosRating"));
-                setmatchdata("players", self.var_2418, "end_sos_weight", self getrankedplayerdata(common_scripts\utility::func_46AE(), "sosWeight"));
-                setmatchdata("players", self.var_2418, "end_division_xp", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "experience"));
-                setmatchdata("players", self.var_2418, "end_division_xp", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "experience"));
-                setmatchdata("players", self.var_2418, "end_division_xp", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "experience"));
-                setmatchdata("players", self.var_2418, "end_division_xp", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "experience"));
-                setmatchdata("players", self.var_2418, "end_division_xp", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "experience"));
-                setmatchdata("players", self.var_2418, "end_division_xp", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "experience"));
-                setmatchdata("players", self.var_2418, "end_division_xp", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "experience"));
-                setmatchdata("players", self.var_2418, "end_division_xp", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "experience"));
-                setmatchdata("players", self.var_2418, "end_division_xp", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "experience"));
-                setmatchdata("players", self.var_2418, "end_division_xp", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "experience"));
-                setmatchdata("players", self.var_2418, "end_division_level", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "level"));
-                setmatchdata("players", self.var_2418, "end_division_level", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "level"));
-                setmatchdata("players", self.var_2418, "end_division_level", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "level"));
-                setmatchdata("players", self.var_2418, "end_division_level", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "level"));
-                setmatchdata("players", self.var_2418, "end_division_level", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "level"));
-                setmatchdata("players", self.var_2418, "end_division_level", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "level"));
-                setmatchdata("players", self.var_2418, "end_division_level", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "level"));
-                setmatchdata("players", self.var_2418, "end_division_level", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "level"));
-                setmatchdata("players", self.var_2418, "end_division_level", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "level"));
-                setmatchdata("players", self.var_2418, "end_division_level", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "level"));
-                setmatchdata("players", self.var_2418, "end_division_prestige", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "end_division_prestige", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "end_division_prestige", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "end_division_prestige", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "end_division_prestige", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "end_division_prestige", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "end_division_prestige", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "end_division_prestige", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "end_division_prestige", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "prestigeLevel"));
-                setmatchdata("players", self.var_2418, "end_division_prestige", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "end_xp", var_00);
+                setmatchdata("players", self.clientid, "end_kills", self getrankedplayerdata(common_scripts\utility::func_46AE(), "kills"));
+                setmatchdata("players", self.clientid, "end_deaths", self getrankedplayerdata(common_scripts\utility::func_46AE(), "deaths"));
+                setmatchdata("players", self.clientid, "end_wins", self getrankedplayerdata(common_scripts\utility::func_46AE(), "wins"));
+                setmatchdata("players", self.clientid, "end_losses", self getrankedplayerdata(common_scripts\utility::func_46AE(), "losses"));
+                setmatchdata("players", self.clientid, "end_hits", self getrankedplayerdata(common_scripts\utility::func_46AE(), "hits"));
+                setmatchdata("players", self.clientid, "end_misses", self getrankedplayerdata(common_scripts\utility::func_46AE(), "misses"));
+                setmatchdata("players", self.clientid, "end_games_played", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gamesPlayed"));
+                setmatchdata("players", self.clientid, "end_time_played_total", self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedTotal"));
+                setmatchdata("players", self.clientid, "end_score", self getrankedplayerdata(common_scripts\utility::func_46AE(), "score"));
+                setmatchdata("players", self.clientid, "end_unlock_points", self getrankedplayerdata(common_scripts\utility::func_46AE(), "unlockPoints"));
+                setmatchdata("players", self.clientid, "end_prestige", self getrankedplayerdata(common_scripts\utility::func_46AE(), "prestige"));
+                setmatchdata("players", self.clientid, "end_gdf_rating", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gdfRating"));
+                setmatchdata("players", self.clientid, "end_gdf_variance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "gdfVariance"));
+                setmatchdata("players", self.clientid, "end_sos_rating", self getrankedplayerdata(common_scripts\utility::func_46AE(), "sosRating"));
+                setmatchdata("players", self.clientid, "end_sos_weight", self getrankedplayerdata(common_scripts\utility::func_46AE(), "sosWeight"));
+                setmatchdata("players", self.clientid, "end_division_xp", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "experience"));
+                setmatchdata("players", self.clientid, "end_division_xp", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "experience"));
+                setmatchdata("players", self.clientid, "end_division_xp", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "experience"));
+                setmatchdata("players", self.clientid, "end_division_xp", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "experience"));
+                setmatchdata("players", self.clientid, "end_division_xp", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "experience"));
+                setmatchdata("players", self.clientid, "end_division_xp", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "experience"));
+                setmatchdata("players", self.clientid, "end_division_xp", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "experience"));
+                setmatchdata("players", self.clientid, "end_division_xp", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "experience"));
+                setmatchdata("players", self.clientid, "end_division_xp", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "experience"));
+                setmatchdata("players", self.clientid, "end_division_xp", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "experience"));
+                setmatchdata("players", self.clientid, "end_division_level", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "level"));
+                setmatchdata("players", self.clientid, "end_division_level", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "level"));
+                setmatchdata("players", self.clientid, "end_division_level", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "level"));
+                setmatchdata("players", self.clientid, "end_division_level", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "level"));
+                setmatchdata("players", self.clientid, "end_division_level", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "level"));
+                setmatchdata("players", self.clientid, "end_division_level", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "level"));
+                setmatchdata("players", self.clientid, "end_division_level", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "level"));
+                setmatchdata("players", self.clientid, "end_division_level", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "level"));
+                setmatchdata("players", self.clientid, "end_division_level", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "level"));
+                setmatchdata("players", self.clientid, "end_division_level", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "level"));
+                setmatchdata("players", self.clientid, "end_division_prestige", "infantry", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "infantry", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "end_division_prestige", "airborne", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "airborne", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "end_division_prestige", "armored", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "armored", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "end_division_prestige", "mountain", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "mountain", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "end_division_prestige", "expeditionary", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "expeditionary", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "end_division_prestige", "resistance", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "resistance", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "end_division_prestige", "grenadier", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "grenadier", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "end_division_prestige", "commando", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "commando", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "end_division_prestige", "scout", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "scout", "prestigeLevel"));
+                setmatchdata("players", self.clientid, "end_division_prestige", "artillery", self getrankedplayerdata(common_scripts\utility::func_46AE(), "divisionStats", "artillery", "prestigeLevel"));
                 var_01 = 12;
                 var_02 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_current_season");
                 if(var_02 >= 0 && var_02 < var_01) {
-                  setmatchdata("players", self.var_2418, "end_mmr_min", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "mmr_min"));
-                  setmatchdata("players", self.var_2418, "end_mmr_max", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "mmr_max"));
-                  setmatchdata("players", self.var_2418, "end_mmr_current", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "mmr_current"));
-                  setmatchdata("players", self.var_2418, "end_weight_current", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "weight_current"));
-                  setmatchdata("players", self.var_2418, "end_ranked_games_completed", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "ranked_games_completed"));
-                  setmatchdata("players", self.var_2418, "end_ranked_games_abandoned", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "ranked_games_abandoned"));
+                  setmatchdata("players", self.clientid, "end_mmr_min", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "mmr_min"));
+                  setmatchdata("players", self.clientid, "end_mmr_max", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "mmr_max"));
+                  setmatchdata("players", self.clientid, "end_mmr_current", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "mmr_current"));
+                  setmatchdata("players", self.clientid, "end_weight_current", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "weight_current"));
+                  setmatchdata("players", self.clientid, "end_ranked_games_completed", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "ranked_games_completed"));
+                  setmatchdata("players", self.clientid, "end_ranked_games_abandoned", self getrankedplayerdata(common_scripts\utility::func_46AE(), "ranked_play_season_data", var_02, "ranked_games_abandoned"));
                 }
 
                 if(isDefined(self.pers["rank"])) {
                   var_03 = maps\mp\_utility::func_2314(maps\mp\gametypes\_rank::getrank());
-                  setmatchdata("players", self.var_2418, "end_rank", var_03);
+                  setmatchdata("players", self.clientid, "end_rank", var_03);
                 }
               }
             }

@@ -99,7 +99,7 @@ func_7323(param_00) {
   }
 }
 
-func_7283(param_00) {
+_suicide3(param_00) {
   if(func_734C()) {
     func_7323(param_00);
     return param_00.var_3A08;
@@ -130,7 +130,7 @@ func_738B(param_00) {
 }
 
 func_7699(param_00, param_01) {
-  param_00.var_942C = func_7283(param_00);
+  param_00.var_942C = _suicide3(param_00);
   param_00.var_7EF8 = 0;
   param_00.var_942A = param_00.var_001D[1];
   param_00.var_6469 = 0;
@@ -264,7 +264,7 @@ func_7E92(param_00, param_01) {
 }
 
 func_73F8(param_00) {
-  var_01 = func_7283(param_00);
+  var_01 = _suicide3(param_00);
   var_02 = angleclamp360(var_01 - param_00.var_942C);
   if(self.var_4B9E == 0) {
     if(abs(var_02) >= 1) {

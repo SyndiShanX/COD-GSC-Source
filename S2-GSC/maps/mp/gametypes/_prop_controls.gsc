@@ -918,9 +918,9 @@ deleteclone(param_00) {
   var_01 = 0.25;
   param_00 common_scripts\utility::func_A70C(self, "death");
   if(isDefined(self.lastattacker)) {
-    level thread maps\mp\gametypes\_rank::func_1457("clone_destroyed", self.lastattacker);
+    level thread maps\mp\gametypes\_rank::giverankxp("clone_destroyed", self.lastattacker);
     if(isDefined(self.var_7433)) {
-      level thread maps\mp\gametypes\_rank::func_1457("clone_was_destroyed", self.var_7433);
+      level thread maps\mp\gametypes\_rank::giverankxp("clone_was_destroyed", self.var_7433);
     }
   }
 

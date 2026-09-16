@@ -221,7 +221,7 @@ func_6BBF(param_00) {
   } else {
     var_04 = lib_0380::func_6842("mp_kc_tag_collected", undefined, param_00.origin);
     if(isPlayer(self.attacker) && self.attacker != param_00) {
-      level thread maps\mp\gametypes\_rank::func_1457("team_confirmed", self.attacker);
+      level thread maps\mp\gametypes\_rank::giverankxp("team_confirmed", self.attacker);
     }
 
     param_00 maps\mp\_events::func_5A35();

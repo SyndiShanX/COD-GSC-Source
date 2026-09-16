@@ -54,7 +54,7 @@ objectivecountdownmusic() {
 }
 
 footstepnotetrack(param_00) {
-  var_01 = self.var_116;
+  var_01 = self.origin;
   var_02 = undefined;
   var_03 = 0;
   var_04 = 0;

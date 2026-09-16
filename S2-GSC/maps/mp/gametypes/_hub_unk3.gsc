@@ -233,14 +233,14 @@ func_631E() {
         var_0B = 1;
         var_0C = 1;
         if(!maps\mp\gametypes\_class::func_5835(var_09.var_76F7, var_0A) && !maps\mp\gametypes\_class::func_5839(var_09.var_8357, var_0B, var_0C)) {
-          var_09.var_76F7 = maps\mp\gametypes\_class::func_9590(level.var_2324, 10, 0);
+          var_09.var_76F7 = maps\mp\gametypes\_class::func_9590(level.classtablename, 10, 0);
           for(var_0D = 0; var_0D < 6; var_0D++) {
             var_09.var_76F3[var_0D] = 0;
           }
         }
 
         if(!maps\mp\gametypes\_class::func_5839(var_09.var_8357, var_0B, var_0C)) {
-          var_09.var_8357 = maps\mp\gametypes\_class::func_9590(level.var_2324, 10, 1);
+          var_09.var_8357 = maps\mp\gametypes\_class::func_9590(level.classtablename, 10, 1);
           for(var_0D = 0; var_0D < 6; var_0D++) {
             var_09.var_8353[var_0D] = 0;
           }

@@ -419,7 +419,7 @@ func_9032() {
   var_00 scriptmodelplayanim("ks_emergency_airdrop_usa");
   thread func_3EB7(var_00);
   var_00.var_01A7 = "allies";
-  var_00 thread func_649F(var_02);
+  var_00 thread hasperkF(var_02);
   var_00 hudoutlineenableforclients(level.var_744A, 2, 0);
 }
 
@@ -428,7 +428,7 @@ func_3EB7(param_00) {
   lib_0380::func_288B("mp_hub_friendly_plane_flyby", undefined, param_00);
 }
 
-func_649F(param_00) {
+hasperkF(param_00) {
   level endon("game_ended");
   var_01 = 10;
   self moveTo(level.var_702E.var_0116 + (0, 0, 1500), var_01);

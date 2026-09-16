@@ -166,7 +166,7 @@ func_6BAF() {
   var_04[0] = "ctf";
   var_04[1] = "blocker_ctf";
   maps\mp\gametypes\_gameobjects::main(var_04);
-  level.var_3992 = maps\mp\_utility::func_3517("extraTime", maps\mp\_utility::func_4529("scr_ctf_extratime", 1), 0, 3);
+  level.var_3992 = maps\mp\_utility::dvarintvalue("extraTime", maps\mp\_utility::func_4529("scr_ctf_extratime", 1), 0, 3);
   level.var_289F = 0;
   level thread func_2896();
   level thread func_A15F();
@@ -822,7 +822,7 @@ func_21E2(param_00) {
   if(maps\mp\_utility::func_5380()) {
     func_A15D(param_00);
     if(game["status"] == "overtime") {
-      game["round_time_to_beat"] = maps\mp\_utility::func_4589();
+      game["round_time_to_beat"] = maps\mp\_utility::getminutespassed();
       level thread maps\mp\gametypes\_gamelogic::endgame("overtime_halftime", game["end_reason"]["score_limit_reached"]);
       return;
     }

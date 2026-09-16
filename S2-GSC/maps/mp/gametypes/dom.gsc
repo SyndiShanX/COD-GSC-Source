@@ -115,8 +115,8 @@ func_6BAF() {
   level thread func_3211();
   level thread func_A109();
   level thread func_A160();
-  level.var_4958 = maps\mp\_utility::func_3517("halftimeswitchsides", 1, 0, 1);
-  level.var_C27 = maps\mp\_utility::func_3517("allowNeutral", 0, 0, 1);
+  level.var_4958 = maps\mp\_utility::dvarintvalue("halftimeswitchsides", 1, 0, 1);
+  level.var_C27 = maps\mp\_utility::dvarintvalue("allowNeutral", 0, 0, 1);
 }
 
 func_A160() {
@@ -309,7 +309,7 @@ func_8BF4() {
 func_3211() {
   level.var_5BFF["allies"] = 0;
   level.var_5BFF["axis"] = 0;
-  var_00 = maps\mp\_utility::func_3517("domFlagCount", 5, 3, 5);
+  var_00 = maps\mp\_utility::dvarintvalue("domFlagCount", 5, 3, 5);
   level.var_3CC5 = [];
   var_01 = getEntArray("mp_dom_flag_" + var_00, "script_noteworthy");
   if(var_01.size == 0) {
@@ -1046,11 +1046,11 @@ func_A101() {
   }
 
   self.var_6885++;
-  if(maps\mp\_utility::func_4589() < 1) {
+  if(maps\mp\_utility::getminutespassed() < 1) {
     return;
   }
 
-  self.var_270D = self.var_6885 / maps\mp\_utility::func_4589();
+  self.var_270D = self.var_6885 / maps\mp\_utility::getminutespassed();
 }
 
 func_444A() {

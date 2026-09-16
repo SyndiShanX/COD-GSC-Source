@@ -162,7 +162,7 @@ beach_mortar() {
 }
 
 beach_mortars_explode_npc() {
-  var_00 = self.var_116;
+  var_00 = self.origin;
   lib_0380::func_6842("dday_beach_exp_close", undefined, var_00);
 }
 

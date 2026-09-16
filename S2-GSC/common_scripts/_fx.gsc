@@ -441,7 +441,7 @@ func_8681(param_00) {
 }
 
 func_8834() {
-  if(!isDefined(self.var_81BB) || !isDefined(self.var_81BA) || !isDefined(self.var_161)) {
+  if(!isDefined(self.var_81BB) || !isDefined(self.var_81BA) || !isDefined(self.script_delay)) {
     return;
   }
 
@@ -471,15 +471,15 @@ func_8834() {
   }
 
   if(self.var_81BA == "OneShotfx") {
-    func_6B10(self.var_81BB, self.origin, self.var_161, var_00);
+    func_6B10(self.var_81BB, self.origin, self.script_delay, var_00);
   }
 
   if(self.var_81BA == "loopfx") {
-    func_5EEE(self.var_81BB, self.origin, self.var_161, var_00, var_02, var_03);
+    func_5EEE(self.var_81BB, self.origin, self.script_delay, var_00, var_02, var_03);
   }
 
   if(self.var_81BA == "loopsound") {
-    func_5F02(self.var_81BB, self.origin, self.var_161);
+    func_5F02(self.var_81BB, self.origin, self.script_delay);
   }
 
   self delete();

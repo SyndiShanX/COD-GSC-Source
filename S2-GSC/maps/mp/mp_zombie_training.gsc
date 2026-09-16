@@ -363,7 +363,7 @@ func_3FD2() {
         thread func_3281(var_03, 0);
       }
 
-      var_00 maps\mp\_utility::func_2CED(0.5, ::func_728D);
+      var_00 maps\mp\_utility::func_2CED(0.5, ::_suicideD);
       var_00 maps\mp\_utility::func_2CED(0.5, ::lib_0547::func_7454, 0);
       var_00 maps\mp\_utility::func_2CED(0.5, ::player_stripmods);
       var_00 maps\mp\_utility::func_2CED(0.5, ::maps / mp / gametypes / zombies::func_7D63, 1000);
@@ -427,7 +427,7 @@ func_284F() {
     lib_0378::func_8D74("aud_pickup_shovel");
   }
 
-  var_01 func_728D();
+  var_01 _suicideD();
   common_scripts\utility::func_3C8F("flag_player_has_weapon");
   common_scripts\utility::func_3C8F("flag_stop_aftermath_sway");
   wait(1.37);
@@ -941,7 +941,7 @@ playerinstartorfield() {
   return lib_055A::func_7413(self, "zone_training_start") || lib_055A::func_7413(self, "zone_training_field");
 }
 
-func_728D() {
+_suicideD() {
   if(!isPlayer(self)) {
     return;
   }
@@ -2367,7 +2367,7 @@ func_3281(param_00, param_01) {
 
     param_00 lib_0378::func_8D74("door_open");
     param_00 notsolid();
-    param_00 method_8060();
+    param_00 connectpaths();
     return;
   }
 

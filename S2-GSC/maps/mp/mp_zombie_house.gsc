@@ -287,7 +287,7 @@ func_3281(param_00, param_01) {
     }
 
     param_00 notsolid();
-    param_00 method_8060();
+    param_00 connectpaths();
     return;
   }
 

@@ -6,7 +6,7 @@
 init() {
   func_534C();
   level.var_984C = getdvarint("scr_teambalance");
-  level.var_6079 = getdvarint("2299");
+  sv_maxclients = getdvarint("2299");
   func_86FF();
   level.var_3E8B = [];
   if(level.teambased) {
@@ -180,11 +180,11 @@ func_A172() {
 
 func_A171() {
   if(function_0154() == "hub") {
-    level.var_9858 = level.var_6079;
+    level.var_9858 = sv_maxclients;
     return;
   }
 
-  level.var_9858 = level.var_6079 / 2;
+  level.var_9858 = sv_maxclients / 2;
   level thread func_A172();
   wait(0.15);
   if(level.var_984C && maps\mp\_utility::func_57B2()) {

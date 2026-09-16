@@ -895,7 +895,7 @@ func_0A1E(param_00, param_01, param_02, param_03) {
     var_07 = 2;
     if(level.players.size > 5) {
       foreach(var_09 in var_06) {
-        if(self.var_2418 == var_09.var_2418) {
+        if(self.clientid == var_09.var_2418) {
           var_07 = 1;
         }
       }
