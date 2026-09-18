@@ -131,8 +131,8 @@ func_52A9() {
   level.var_2FDE[8]["dismemberSound"] = "zmb_dism_leg";
   level.var_2FDE[16]["dismemberSound"] = "zmb_dism_head";
   level.var_2FDE["full"]["dismemberSound"] = "zmb_dism_instakill_explosion";
-  level.var_611["torso_arm_loss_right"] = loadfx("vfx/blood/mp_torso_loss_arm_ri");
-  level.var_611["torso_loss_left"] = loadfx("vfx/blood/mp_torso_loss_impact_le");
+  level._effect["torso_arm_loss_right"] = loadfx("vfx/blood/mp_torso_loss_arm_ri");
+  level._effect["torso_loss_left"] = loadfx("vfx/blood/mp_torso_loss_impact_le");
   setdvarifuninitialized("scr_dismemberment_style", 0);
 }
 
@@ -166,7 +166,7 @@ func_4AAB(param_00) {
       var_04 = var_02[2];
       self.var_5D9F = 1;
     } else {
-      var_04 = common_scripts\utility::func_7A33(var_02);
+      var_04 = common_scripts\utility::random(var_02);
       var_03 = 0.5;
     }
 

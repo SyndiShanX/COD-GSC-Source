@@ -4,8 +4,8 @@
 ****************************************************/
 
 main() {
-  common_scripts\utility::func_3C87("flag_all_players_in_hilt");
-  common_scripts\utility::func_3C87("flag_hilt_collected");
+  common_scripts\utility::flag_init("flag_all_players_in_hilt");
+  common_scripts\utility::flag_init("flag_hilt_collected");
   var_00 = getEntArray("nest_brute_uber_inserts", "targetname");
   foreach(var_02 in var_00) {
     var_02 hide();
@@ -42,7 +42,7 @@ func_785A() {
   }
 
   if(var_00 >= level.players.size) {
-    common_scripts\utility::func_3C8F("flag_all_players_in_hilt");
+    common_scripts\utility::flag_set("flag_all_players_in_hilt");
   } else {
     thread func_0C34();
     if(1) {
@@ -210,7 +210,7 @@ func_0C34() {
     }
 
     if(var_00 >= level.players.size) {
-      common_scripts\utility::func_3C8F("flag_all_players_in_hilt");
+      common_scripts\utility::flag_set("flag_all_players_in_hilt");
       break;
     } else {
       wait(1);
@@ -349,7 +349,7 @@ func_8A09() {
 func_8A0A() {
   self.var_3ACE = getEnt("brute_boss_agent_interact", "targetname");
   self.var_3ACE enablelinkTo();
-  self.var_3ACE method_8449(self);
+  self.var_3ACE linktosynchronizedparent(self);
   self.var_3ACE setHintString(&"ZOMBIES_EMPTY_STRING");
 }
 
@@ -465,11 +465,11 @@ func_4AD1() {
 
   if(var_01) {
     wait(4.666);
-    common_scripts\utility::func_3C87("flag_dlg_klaus_reached_pnt_1");
-    common_scripts\utility::func_3C87("flag_dlg_klaus_reached_pnt_2");
-    common_scripts\utility::func_3C87("flag_dlg_klaus_reached_pnt_3");
-    common_scripts\utility::func_3C87("flag_dlg_klaus_reached_pnt_4");
-    common_scripts\utility::func_3C87("flag_klaus_reached_well");
+    common_scripts\utility::flag_init("flag_dlg_klaus_reached_pnt_1");
+    common_scripts\utility::flag_init("flag_dlg_klaus_reached_pnt_2");
+    common_scripts\utility::flag_init("flag_dlg_klaus_reached_pnt_3");
+    common_scripts\utility::flag_init("flag_dlg_klaus_reached_pnt_4");
+    common_scripts\utility::flag_init("flag_klaus_reached_well");
     maps / mp / mp_zombie_nest_ee_fire_well::func_AA07();
     maps / mp / mp_zombie_nest_ee_fire_well::func_848C();
     level notify("klaus_getup");
@@ -489,13 +489,13 @@ func_4AD1() {
     var_13 = common_scripts\utility::func_46B5("klaus_ent_point", "targetname");
     thread func_5A9D();
     level.var_5A89 lib_0568::func_5A90(var_10);
-    common_scripts\utility::func_3C8F("flag_dlg_klaus_reached_pnt_1");
+    common_scripts\utility::flag_set("flag_dlg_klaus_reached_pnt_1");
     level.var_5A89 lib_0568::func_5A90(var_11);
-    common_scripts\utility::func_3C8F("flag_dlg_klaus_reached_pnt_2");
+    common_scripts\utility::flag_set("flag_dlg_klaus_reached_pnt_2");
     level.var_5A89 lib_0568::func_5A90(var_12);
-    common_scripts\utility::func_3C8F("flag_dlg_klaus_reached_pnt_3");
+    common_scripts\utility::flag_set("flag_dlg_klaus_reached_pnt_3");
     level.var_5A89 lib_0568::func_5A90(var_13);
-    common_scripts\utility::func_3C8F("flag_dlg_klaus_reached_pnt_4");
+    common_scripts\utility::flag_set("flag_dlg_klaus_reached_pnt_4");
     func_647E();
   } else {
     wait(7.3);
@@ -562,7 +562,7 @@ func_647E() {
   level.var_5A89 endon("klaus_exploit_warp");
   var_00 = common_scripts\utility::func_46B5("klaus_revive_death_point", "targetname");
   level.var_5A89 lib_0568::func_5A90(var_00);
-  common_scripts\utility::func_3C8F("flag_klaus_reached_well");
+  common_scripts\utility::flag_set("flag_klaus_reached_well");
   func_5A8D();
 }
 
@@ -582,7 +582,7 @@ func_5A8D() {
 
 func_35A7() {
   wait(3.5);
-  playFXOnTag(level.var_611["zmb_klaus_fire_hide"], level.var_5A89, "TAG_ORIGIN");
+  playFXOnTag(level._effect["zmb_klaus_fire_hide"], level.var_5A89, "TAG_ORIGIN");
 }
 
 func_8F93(param_00) {
@@ -598,7 +598,7 @@ func_74BE(param_00, param_01, param_02, param_03) {
   }
 
   common_scripts\utility::func_603();
-  common_scripts\utility::func_600();
+  common_scripts\utility::_disableoffhandweapons();
   wait 0.05;
   lib_0586::func_78C(var_04);
   self enableweapons();
@@ -612,7 +612,7 @@ func_74BE(param_00, param_01, param_02, param_03) {
     lib_0586::func_790(var_04);
   }
 
-  maps\mp\_utility::func_3E8E(0);
+  maps\mp\_utility::freezecontrolswrapper(0);
   self allowmovement(1);
   self allowjump(1);
   self method_8113(1);
@@ -622,7 +622,7 @@ func_74BE(param_00, param_01, param_02, param_03) {
   self method_812A(1);
   self method_8114(1);
   self method_85BF(1);
-  self method_8309(1);
+  self scripted_elems(1);
 }
 
 func_9308(param_00) {
@@ -682,7 +682,7 @@ func_A68E() {
 
 func_A696() {
   var_00 = common_scripts\utility::func_46B5("put_brute_out_of_misery", "targetname");
-  while(distance(self.origin, var_00.origin) > var_00.var_14F) {
+  while(distance(self.origin, var_00.origin) > var_00.radius) {
     wait(0.5);
   }
 }
@@ -763,7 +763,7 @@ func_310A() {
 
   wait(0.5);
   foreach(var_0A in level.players) {
-    var_0A maps\mp\_utility::func_3E8E(1);
+    var_0A maps\mp\_utility::freezecontrolswrapper(1);
     var_0A.var_324E = 1;
     var_0A method_8483("mp_zombie_nest_01");
     var_0A setclientomnvar("ui_hide_hud", 1);
@@ -836,7 +836,7 @@ func_310A() {
     var_0A method_8004();
     var_0A method_848C();
     var_0A enableweapons();
-    var_0A maps\mp\_utility::func_3E8E(0);
+    var_0A maps\mp\_utility::freezecontrolswrapper(0);
     var_0A method_8114(1);
     var_0A method_8113(1);
     var_0A allowjump(1);
@@ -893,7 +893,7 @@ func_310B(param_00) {
   foreach(var_03 in level.players) {
     var_03 disableweapons();
     var_03 method_8003();
-    var_03 maps\mp\_utility::func_3E8E(1);
+    var_03 maps\mp\_utility::freezecontrolswrapper(1);
     var_03 lib_0547::func_8A6D(1);
     var_03 setclientomnvar("ui_hide_hud", 1);
     var_03.var_324E = 1;
@@ -978,7 +978,7 @@ func_5CCA(param_00) {
   foreach(var_08 in var_01) {
     if(var_08.classname != "script_model") {
       wait 0.05;
-      var_08 method_805F();
+      var_08 saved_actionslotdata();
     }
   }
 
@@ -1063,7 +1063,7 @@ func_5F28() {
   foreach(var_07 in var_09) {
     var_07 solid();
     if(var_07.classname != "script_model") {
-      var_07 method_805F();
+      var_07 saved_actionslotdata();
     }
   }
 
@@ -1108,7 +1108,7 @@ func_83E0(param_00) {
     level.players[var_02] method_812A(0);
     level.players[var_02] method_8114(0);
     level.players[var_02] method_85BF(0);
-    level.players[var_02] method_8309(0);
+    level.players[var_02] scripted_elems(0);
   }
 }
 

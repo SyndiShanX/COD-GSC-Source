@@ -5,13 +5,13 @@
 
 func_00F9() {
   level.add_bcs_location_mappings_callback = ::add_bcs_location_mappings_callback;
-  maps\mp\mp_prague_precache::func_F9();
-  maps\createart\mp_prague_art::func_F9();
-  maps\mp\mp_prague_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_prague_lighting::func_F9();
-  maps\mp\mp_prague_aud::func_F9();
-  maps\mp\_water::func_D5();
+  maps\mp\mp_prague_precache::main();
+  maps\createart\mp_prague_art::main();
+  maps\mp\mp_prague_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_prague_lighting::main();
+  maps\mp\mp_prague_aud::main();
+  maps\mp\_water::init();
   maps\mp\_compass::func_8A2F("compass_map_mp_prague");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -61,21 +61,21 @@ setperformancedvars() {
 }
 
 add_bcs_location_mappings_callback() {
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_columns", "mp_prag_columns");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_sandbags", "mp_prag_sandbags");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_stairwell", "mp_prag_stairwell");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_upstairs_window", "mp_prag_upstairs_window");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_window", "mp_prag_window");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_archway", "mp_prag_archway");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_street", "mp_prag_street");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_tree", "mp_prag_tree");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_road", "mp_prag_road");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_balcony", "mp_prag_balcony");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_stairs", "mp_prag_stairs");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_ambulance", "mp_prag_ambulance");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_statue", "mp_prag_statue");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_headquarters", "mp_prag_headquarters");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_loading_dock", "mp_prag_loading_dock");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_truck", "mp_prag_truck");
-  common_scripts\_bcs_location_trigs::func_903("trigger_multiple_bcs_dlc_mp_prag_vehicles", "mp_prag_vehicles");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_columns", "mp_prag_columns");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_sandbags", "mp_prag_sandbags");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_stairwell", "mp_prag_stairwell");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_upstairs_window", "mp_prag_upstairs_window");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_window", "mp_prag_window");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_archway", "mp_prag_archway");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_street", "mp_prag_street");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_tree", "mp_prag_tree");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_road", "mp_prag_road");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_balcony", "mp_prag_balcony");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_stairs", "mp_prag_stairs");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_ambulance", "mp_prag_ambulance");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_statue", "mp_prag_statue");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_headquarters", "mp_prag_headquarters");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_loading_dock", "mp_prag_loading_dock");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_truck", "mp_prag_truck");
+  common_scripts\_bcs_location_trigs::add_bcs_location_mapping("trigger_multiple_bcs_dlc_mp_prag_vehicles", "mp_prag_vehicles");
 }

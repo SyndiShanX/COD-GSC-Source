@@ -9,12 +9,12 @@ init_sg() {
   setomnvar("ui_zm_rs_active", 0);
   level.objectivescompleted = 0;
   maps / mp / zombies / shotgun / _zombies_shotgun_difficulty::init();
-  common_scripts\utility::func_3C87("zmb_players_gamemode_escaped");
-  common_scripts\utility::func_3C87("zmb_players_gamemode_boss_defeated");
-  common_scripts\utility::func_3C87("zmb_objectives_defense_start");
-  common_scripts\utility::func_3C87("zmb_objectives_defense_end");
-  common_scripts\utility::func_3C87("zmb_objectives_quest_end");
-  common_scripts\utility::func_3C87("shotgun_classic_add_to_box");
+  common_scripts\utility::flag_init("zmb_players_gamemode_escaped");
+  common_scripts\utility::flag_init("zmb_players_gamemode_boss_defeated");
+  common_scripts\utility::flag_init("zmb_objectives_defense_start");
+  common_scripts\utility::flag_init("zmb_objectives_defense_end");
+  common_scripts\utility::flag_init("zmb_objectives_quest_end");
+  common_scripts\utility::flag_init("shotgun_classic_add_to_box");
   precacheshader("s2_morale_focus_overlay_01");
   level.sg_wallbuyclasses = ["weapon_pistol", "weapon_smg", "weapon_shotgun", "weapon_assault", "weapon_sniper", "weapon_heavy"];
   level.insane_mode_available = 0;
@@ -64,7 +64,7 @@ init_sg() {
   level.zombies_shotgun_weapon_waypoints["weapon_heavy"] = "zm_hud_wallbuy_lmg";
   level.zmb_boss_damage_reduction_func = ::zmb_shattered_boss_nerfs;
   foreach(var_02, var_01 in level.zombies_shotgun_weapons_splashes) {
-    var_01 = tablelookup(maps\mp\gametypes\_hud_message::func_4369(), 0, var_01, 3);
+    var_01 = tablelookup(maps\mp\gametypes\_hud_message::get_splash_table(), 0, var_01, 3);
     level.zombies_shotgun_weapons_splashes[var_02 + "_shader"] = var_01;
   }
 
@@ -174,7 +174,7 @@ spawn_weapon_pickup_on_zombies(param_00, param_01, param_02, param_03, param_04,
     var_0A = ["dp28_pap_zm", "sdk_pap_zm", "charlton_pap_zm", "emp44_pap_zm", "m1911_pap_zm", "p38_pap_zm", "svt40_pap_zm", "m1garand_pap_zm", "blunderbuss_pap_zm"];
   }
 
-  var_0B = common_scripts\utility::func_7A33(var_0A);
+  var_0B = common_scripts\utility::random(var_0A);
   var_0C = issubstr(var_0B, "_pap");
   var_0B = maps\mp\zombies\_zombies_magicbox::func_454B(param_01, var_0B);
   if(var_0C) {
@@ -207,20 +207,20 @@ spawn_weapon_pickup_on_zombies(param_00, param_01, param_02, param_03, param_04,
   level.zmb_wustling_weapon_spawned = 1;
   var_12 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::spawn_a_floating_weapon_award(var_0B, var_09 + (0, 0, 8), undefined);
   foreach(var_0F in var_0D) {
-    var_12 thread maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::func_A653(var_0F, var_12.var_3F2F, var_0B, 1);
+    var_12 thread maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::func_A653(var_0F, var_12.fx, var_0B, 1);
   }
 
   level waittill("wustling_weapon_pickup", var_15);
   foreach(var_0F in var_0D) {
-    var_12 maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::remove_weapon_pickup(var_0F, var_12.var_3F2F);
+    var_12 maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::remove_weapon_pickup(var_0F, var_12.fx);
   }
 
   if(isDefined(var_12)) {
     var_12 delete();
   }
 
-  if(isDefined(var_12.var_3F2F)) {
-    var_12.var_3F2F delete();
+  if(isDefined(var_12.fx)) {
+    var_12.fx delete();
   }
 
   foreach(var_0F in var_0D) {
@@ -250,7 +250,7 @@ run_red_skull_mode() {
     lib_0547::func_8A4F(var_02, ::assignpathtoplayer, ::hidefromothers);
   }
 
-  while(!common_scripts\utility::func_562E(level.var_3FA6)) {
+  while(!common_scripts\utility::func_562E(level.gamehasstarted)) {
     wait 0.05;
   }
 
@@ -523,7 +523,7 @@ include_shotgun_v1_common_objectives(param_00) {
 initialize_common_sg_weapons() {
   level thread lib_057D::func_5162();
   level thread maps / mp / zombies / weapons / _zombie_dlc2_melee::init();
-  common_scripts\utility::func_3C87("dlc2_melee_packable");
+  common_scripts\utility::flag_init("dlc2_melee_packable");
   level.sworddeliveryoff = 1;
   level thread maps / mp / zombies / weapons / _zombie_dlc3_melee::init();
   level thread lib_0580::init();
@@ -562,8 +562,8 @@ collect_souls_to_unlock_pack_a_punch() {
 
   level.pack_a_punc_pre_func = ::wait_for_pap_available;
   for(var_07 = 0; var_07 < var_01.size; var_07++) {
-    common_scripts\utility::func_3C87("zmb_sg_soul_collect_flag_" + var_01[var_07].var_81E1);
-    common_scripts\utility::func_3C87("zmb_sg_soul_collect_ready_flag_" + var_01[var_07].var_81E1);
+    common_scripts\utility::flag_init("zmb_sg_soul_collect_flag_" + var_01[var_07].var_81E1);
+    common_scripts\utility::flag_init("zmb_sg_soul_collect_ready_flag_" + var_01[var_07].var_81E1);
   }
 
   common_scripts\utility::array_thread(var_01, ::set_pack_key_unlocked);
@@ -592,7 +592,7 @@ unlock_next_reciever() {
   level.zmb_pap_reciver_unlocks++;
   var_00 = "zmb_sg_soul_collect_ready_flag_" + level.zmb_pap_reciver_unlocks;
   if(common_scripts\utility::func_3C83(var_00)) {
-    common_scripts\utility::func_3C8F(var_00);
+    common_scripts\utility::flag_set(var_00);
   }
 }
 
@@ -627,7 +627,7 @@ set_pack_key_unlocked() {
 
   var_01.ignoresighttrace = 1;
   var_01 maps / mp / mp_zombies_soul_collection::func_170B(10, var_02, 70, "zmb_sg_soul_collect_ping_" + var_00, undefined, "tag_origin", undefined, "tag_origin");
-  common_scripts\utility::func_3C8F("zmb_sg_soul_collect_flag_" + self.var_81E1);
+  common_scripts\utility::flag_set("zmb_sg_soul_collect_flag_" + self.var_81E1);
   level thread maps / mp / gametypes / zombies::orders_and_contracts_report_event("geistcraft_device_powered");
 }
 
@@ -726,11 +726,11 @@ onshotgunstart() {
   }
 
   level thread start_match_in_time(10);
-  common_scripts\utility::func_3C8F("ripsaw_punch_active");
+  common_scripts\utility::flag_set("ripsaw_punch_active");
 }
 
 start_match_in_time(param_00) {
-  while(!common_scripts\utility::func_562E(level.var_3FA6)) {
+  while(!common_scripts\utility::func_562E(level.gamehasstarted)) {
     wait 0.05;
   }
 
@@ -783,7 +783,7 @@ script_index_compare(param_00, param_01) {
 }
 
 set_game_won() {
-  common_scripts\utility::func_3C8F("zmb_players_gamemode_escaped");
+  common_scripts\utility::flag_set("zmb_players_gamemode_escaped");
   level.zmb_shotgun_game_won = 1;
   maps / mp / zquests / dlc3_trophies_shattered_mode::complete_shattered_escape_event();
 }
@@ -1726,6 +1726,6 @@ shotgun_classic_add_classic_to_box() {
     thread shotgun_classic_jolt_drop_fx(var_02.origin);
   }
 
-  common_scripts\utility::func_3C8F("shotgun_classic_add_to_box");
+  common_scripts\utility::flag_set("shotgun_classic_add_to_box");
   level notify("classic_added_to_box");
 }

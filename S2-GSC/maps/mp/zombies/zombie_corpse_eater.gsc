@@ -173,8 +173,8 @@ wait_for_eating_done() {
   }
 
   self.loc_beam = launchbeam("zmb_geistkraft_reg_beam_med", self, "jnt_mandible", var_00, "j_neck");
-  playFXOnTag(level.var_611["zmb_corpse_eater_feed"], self, "j_head");
-  playFXOnTag(level.var_611["dark_energy_burst"], var_00, "J_Head");
+  playFXOnTag(level._effect["zmb_corpse_eater_feed"], self, "j_head");
+  playFXOnTag(level._effect["dark_energy_burst"], var_00, "J_Head");
   lib_0378::func_8D74("aud_corpse_eater_soul_suck", self.origin, var_00.origin);
   childthread kill_zombie_target();
   var_02 = get_feed_secondary_count();
@@ -208,8 +208,8 @@ wait_for_eating_done() {
 
     foreach(var_0C in var_03) {
       self.secondary_loc_beams[self.secondary_loc_beams.size] = launchbeam("zmb_geistkraft_reg_beam_med", self, "jnt_mandible", var_0C, "j_neck");
-      playFXOnTag(level.var_611["zmb_corpse_eater_feed"], self, "j_head");
-      playFXOnTag(level.var_611["dark_energy_burst"], var_00, "J_Head");
+      playFXOnTag(level._effect["zmb_corpse_eater_feed"], self, "j_head");
+      playFXOnTag(level._effect["dark_energy_burst"], var_00, "J_Head");
       lib_0378::func_8D74("aud_corpse_eater_soul_suck", self.origin, var_0C.origin);
       thread kill_zombie_target(var_0C);
     }
@@ -246,7 +246,7 @@ periodically_spawn_corpse_eaters() {
       wait(1);
     }
 
-    foreach(var_03 in common_scripts\utility::func_F92(var_01)) {
+    foreach(var_03 in common_scripts\utility::array_randomize(var_01)) {
       if(var_03 lib_055A::func_905D()) {
         var_07 = lib_054D::func_90BA("zombie_dlc4", var_03, "corpse_eater", 1, 1, 0);
         break;
@@ -540,7 +540,7 @@ try_detonation() {
 
   if(should_detonate_on_players()) {
     var_00 = self gettagorigin("TAG_ORIGIN");
-    playFX(level.var_611["zmb_corpse_eater_detonate"], var_00);
+    playFX(level._effect["zmb_corpse_eater_detonate"], var_00);
     lib_0378::func_8D74("aud_corpse_eater_explosion");
     level notify("ce_explosion", self.origin);
     var_01 = 240;

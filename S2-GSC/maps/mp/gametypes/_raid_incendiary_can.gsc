@@ -4,7 +4,7 @@
 ******************************************************/
 
 runincendiarycanlogic() {
-  level.var_611["incendiary_fire"] = loadfx("vfx/fire/fire_bomb_impact_fire");
+  level._effect["incendiary_fire"] = loadfx("vfx/fire/fire_bomb_impact_fire");
   level.var_5A61["incendiary_can"] = ::tryuseincendiarycan;
   level.var_5A7D["incendiary_can"] = "tripwire";
   setdvarifuninitialized("scorestreak_enabled_incendiary_can", 1);
@@ -28,7 +28,7 @@ useincendiarycanwatcher() {
 spawnandattachcan() {
   var_00 = spawn("script_model", self.origin);
   var_00 setModel("ger_jerry_can_01_gas_raid_projectile");
-  var_01 = spawn("trigger_radius", var_00.var_116, 0, 48, 20);
+  var_01 = spawn("trigger_radius", var_00.origin, 0, 48, 20);
   var_01 enablelinkTo();
   var_01.var_66F0 = 1;
   var_02 = [var_00];
@@ -63,7 +63,7 @@ spawnandattachcan() {
   var_03.var_1F6A = ::canseeincendiarycan;
   var_03.var_C33 = 1;
   var_03.var_2D5A = 0;
-  var_03.var_501F = spawn("script_origin", var_02[0].var_116);
+  var_03.var_501F = spawn("script_origin", var_02[0].origin);
   var_03.var_501F setModel("tag_origin");
   var_03.ignoreboundaries = 1;
   var_03.var_4B80 = [];
@@ -74,8 +74,8 @@ spawnandattachcan() {
 onincediarycanpickup(param_00) {
   self notify("picked_up");
   self.var_A879 = 0;
-  var_01 = param_00.var_12C["team"];
-  var_02 = maps\mp\_utility::func_45DE(var_01);
+  var_01 = param_00.pers["team"];
+  var_02 = maps\mp\_utility::getotherteam(var_01);
   self.var_10F5 = 0;
   var_03 = self.var_A582[0] getlinkedparent();
   if(isDefined(var_03)) {
@@ -86,7 +86,7 @@ onincediarycanpickup(param_00) {
   self.var_A582[0] maps\mp\_movers::func_67F9();
   self.var_A582[0] method_805B();
   self.var_A582[0] method_8511();
-  self.var_A582[0].var_116 = self.var_A582[0].var_116 + (0, 0, -10000);
+  self.var_A582[0].origin = self.var_A582[0].origin + (0, 0, -10000);
   self.var_9D65 maps\mp\_movers::func_93CE();
   param_00 thread attachcan(self);
   param_00 common_scripts\utility::func_601();
@@ -130,26 +130,26 @@ func_941D(param_00) {
     }
 
     var_02 = spawnStruct();
-    var_02.var_109 = self method_834A();
-    var_02.var_2420 = self getweaponammoclip(var_02.var_109, "right");
-    var_02.var_93AF = self getweaponammostock(var_02.var_109);
+    var_02.name = self method_834A();
+    var_02.var_2420 = self getweaponammoclip(var_02.name, "right");
+    var_02.var_93AF = self getweaponammostock(var_02.name);
     self.var_9426["lethal_offhand"] = var_02;
     var_03 = spawnStruct();
-    var_03.var_109 = self method_831F();
-    var_03.var_2420 = self getweaponammoclip(var_03.var_109, "right");
-    var_03.var_93AF = self getweaponammostock(var_03.var_109);
+    var_03.name = self getoffhandsecondaryclass();
+    var_03.var_2420 = self getweaponammoclip(var_03.name, "right");
+    var_03.var_93AF = self getweaponammostock(var_03.name);
     self.var_9426["tactical_offhand"] = var_03;
-    if(var_02.var_109 != "none") {
-      self takeweapon(var_02.var_109);
+    if(var_02.name != "none") {
+      self takeweapon(var_02.name);
     }
 
-    if(var_03.var_109 != "none") {
-      self takeweapon(var_03.var_109);
+    if(var_03.name != "none") {
+      self takeweapon(var_03.name);
     }
 
     self method_8349(var_01);
     self giveweapon(var_01);
-    self method_82FA(var_01, 1, "right");
+    self setweaponammoclip(var_01, 1, "right");
     self setweaponammostock(var_01, 1);
     return;
   }
@@ -168,7 +168,7 @@ supplycarrierwithammo() {
 
   var_00 endon("death");
   var_00 endon("disconnect");
-  while(maps\mp\_utility::func_57A0(var_00)) {
+  while(maps\mp\_utility::isreallyalive(var_00)) {
     var_00 waittill("reload");
     var_01 = var_00 getcurrentprimaryweapon();
     var_02 = var_00 getweaponammostock(var_01);
@@ -221,19 +221,19 @@ func_7DE9(param_00) {
   }
 
   var_03 = self.var_9426["lethal_offhand"];
-  if(var_03.var_109 != "none") {
-    self method_8349(var_03.var_109);
-    self giveweapon(var_03.var_109);
-    self method_82FA(var_03.var_109, var_03.var_2420, "right");
-    self setweaponammostock(var_03.var_109, var_03.var_93AF);
+  if(var_03.name != "none") {
+    self method_8349(var_03.name);
+    self giveweapon(var_03.name);
+    self setweaponammoclip(var_03.name, var_03.var_2420, "right");
+    self setweaponammostock(var_03.name, var_03.var_93AF);
   }
 
   var_04 = self.var_9426["tactical_offhand"];
-  if(var_04.var_109 != "none") {
-    self method_831E(var_04.var_109);
-    self giveweapon(var_04.var_109);
-    self method_82FA(var_04.var_109, var_04.var_2420, "right");
-    self setweaponammostock(var_04.var_109, var_04.var_93AF);
+  if(var_04.name != "none") {
+    self setoffhandsecondaryclass(var_04.name);
+    self giveweapon(var_04.name);
+    self setweaponammoclip(var_04.name, var_04.var_2420, "right");
+    self setweaponammostock(var_04.name, var_04.var_93AF);
   }
 }
 
@@ -245,7 +245,7 @@ detachcan() {
   }
 
   if(isDefined(self.var_2013)) {
-    var_01 = self method_802E(self.var_2013, self.carryflagtag, !function_02BD());
+    var_01 = self detach(self.var_2013, self.carryflagtag, !function_02BD());
   }
 
   self.var_A871 = 0;
@@ -264,23 +264,23 @@ onincendiarycansetdropped(param_00) {
     var_01.var_230C.var_28D5 = 0;
   }
 
-  if(isDefined(var_01) && var_01.var_12C["team"] != "spectator") {
-    var_02 = var_01.var_116;
+  if(isDefined(var_01) && var_01.pers["team"] != "spectator") {
+    var_02 = var_01.origin;
   } else {
-    var_02 = self.var_802F;
+    var_02 = self.detachall;
   }
 
   var_02 = var_02 + (0, 0, 40);
   var_03 = (0, 0, 0);
   for(var_04 = 0; var_04 < self.var_A582.size; var_04++) {
-    self.var_A582[var_04].var_116 = var_02;
+    self.var_A582[var_04].origin = var_02;
     self.var_A582[var_04].var_1D = var_03;
     self.var_A582[var_04] method_805B();
   }
 
-  self.var_9D65.var_116 = var_02;
+  self.var_9D65.origin = var_02;
   self.var_A582[0] method_808C();
-  self.var_28D4 = self.var_9D65.var_116;
+  self.var_28D4 = self.var_9D65.origin;
   can_carrier_cleanup();
   if(isDefined(self.var_6AEF)) {
     self[[self.var_6AEF]](self.var_2006);
@@ -299,7 +299,7 @@ onincendiarycansetdropped(param_00) {
   var_05 = self.var_A582[0];
   var_05.var_2016 = self;
   var_05 setdamagecallbackon(1);
-  var_05.var_29B5 = ::incendiarydamagecallback;
+  var_05.damagecallback = ::incendiarydamagecallback;
   var_05 setCanDamage(1);
   var_05 method_86B7();
   var_05 method_80B0(8576);
@@ -321,7 +321,7 @@ canphysicslaunch(param_00, param_01) {
     var_02.var_1D = (0, var_03[1] + 250, 120);
   }
 
-  var_02 physicslaunchserver(var_02.var_116, param_00);
+  var_02 physicslaunchserver(var_02.origin, param_00);
 }
 
 oncanbeginuse(param_00) {
@@ -336,7 +336,7 @@ oncanenduse(param_00, param_01, param_02) {
 }
 
 shouldplayerkeepcarryweapon(param_00) {
-  return param_00.var_12C["team"] == maps\mp\gametypes\_gameobjects::func_45F7();
+  return param_00.pers["team"] == maps\mp\gametypes\_gameobjects::func_45F7();
 }
 
 func_A900() {
@@ -384,7 +384,7 @@ throwphysicscan(param_00, param_01) {
 
   var_02.var_A879 = 1;
   var_02 thread onincendiarycansetdropped(1);
-  var_02.var_A582[0].var_116 = param_01.var_116;
+  var_02.var_A582[0].origin = param_01.origin;
   var_02 canphysicslaunch(var_07 * var_05 + var_0B, param_00);
 }
 
@@ -413,7 +413,7 @@ oncanupdateuserate() {
   self.var_A22B = 0;
   if(self.var_230F != "none") {
     var_00 = self.var_689F[self.var_230F];
-    var_01 = self.var_689F[maps\mp\_utility::func_45DE(self.var_230F)];
+    var_01 = self.var_689F[maps\mp\_utility::getotherteam(self.var_230F)];
     var_02 = var_00 && var_01;
     if(var_00 && !var_01) {
       self.var_A22B = 1;
@@ -434,7 +434,7 @@ canuseincendiarycan(param_00) {
     return 0;
   }
 
-  if(isDefined(param_00.var_99AC)) {
+  if(isDefined(param_00.throwinggrenade)) {
     return 0;
   }
 
@@ -466,12 +466,12 @@ canseeincendiarycan(param_00, param_01) {
     var_04[var_04.size] = var_03 method_8549(0, 0, var_07);
   }
 
-  var_09 = param_00.var_116 - self.var_9D65.var_116;
+  var_09 = param_00.origin - self.var_9D65.origin;
   var_0A = common_scripts\utility::func_3D5D(var_09);
   var_0B = vectorNormalize(var_0A);
   var_0C = var_0B * 5;
   foreach(var_0E in var_04) {
-    var_0F = param_00.var_116 + (0, 0, 10);
+    var_0F = param_00.origin + (0, 0, 10);
     var_10 = var_0E + var_0C;
     var_11 = bulletTrace(var_0F, var_10, 0, var_02, 0, 0, 0, 0, 1, 0, 0);
     if(var_11["fraction"] == 1) {
@@ -493,7 +493,7 @@ incendiarycandisable() {
 
 incendiarycanitemenable() {
   maps\mp\gametypes\_gameobjects::func_365D();
-  self.var_9D65.var_116 = self.var_A582[0].var_116;
+  self.var_9D65.origin = self.var_A582[0].origin;
   self.var_9D65 linkTo(self.var_A582[0]);
   maps\mp\gametypes\_gameobjects::func_8A60("any");
 }
@@ -514,13 +514,13 @@ incendiarydamagecallback(param_00, param_01, param_02, param_03, param_04, param
 
     radiusdamage(var_0C, 50, 20, 200);
     level thread func_749B(var_0C, var_0D);
-    level thread monitorfiredamage(var_0C, var_0D, param_01, param_01.var_1A7);
+    level thread monitorfiredamage(var_0C, var_0D, param_01, param_01.team);
   }
 }
 
 func_749B(param_00, param_01) {
   var_02 = undefined;
-  var_02 = spawnfx(level.var_611["incendiary_fire"], param_00);
+  var_02 = spawnfx(level._effect["incendiary_fire"], param_00);
   triggerfx(var_02);
   wait(12);
   if(isDefined(var_02)) {
@@ -540,18 +540,18 @@ monitorfiredamage(param_00, param_01, param_02, param_03, param_04) {
   var_07 = (var_07[0], var_07[1], 0);
   var_07 = vectorNormalize(var_07);
   while(var_06 < 12) {
-    foreach(var_09 in level.var_744A) {
+    foreach(var_09 in level.players) {
       if(function_0279(var_09)) {
         continue;
       }
 
-      if(var_09.var_1A7 != param_03 || (isDefined(param_02) && var_09 == param_02) || isDefined(level.var_4B17) && level.var_4B17) {
+      if(var_09.team != param_03 || (isDefined(param_02) && var_09 == param_02) || isDefined(level.hardcoremode) && level.hardcoremode) {
         if(!isDefined(var_09.var_A019)) {
           if(!isDefined(var_09.lastincendiarycandamagetime) || var_09.lastincendiarycandamagetime != gettime()) {
             if(func_73E1(var_09, param_00, var_07)) {
               if(func_740F(var_09, param_00)) {
                 var_09.lastincendiarycandamagetime = gettime();
-                var_09 dodamage(40, var_09.var_116, param_02, undefined, "MOD_BURNED", "firebomb_flames_mp");
+                var_09 dodamage(40, var_09.origin, param_02, undefined, "MOD_BURNED", "firebomb_flames_mp");
               }
             }
           }
@@ -565,11 +565,11 @@ monitorfiredamage(param_00, param_01, param_02, param_03, param_04) {
 }
 
 func_740F(param_00, param_01) {
-  if(param_00.var_116[2] <= param_01[2]) {
-    return bullettracepassed(param_00.var_116 + (0, 0, 10), (param_00.var_116[0], param_00.var_116[1], param_01[2] + 10), 0, param_00) && bullettracepassed(param_01 + (0, 0, 10), (param_00.var_116[0], param_00.var_116[1], param_01[2] + 10), 0, param_00);
+  if(param_00.origin[2] <= param_01[2]) {
+    return bullettracepassed(param_00.origin + (0, 0, 10), (param_00.origin[0], param_00.origin[1], param_01[2] + 10), 0, param_00) && bullettracepassed(param_01 + (0, 0, 10), (param_00.origin[0], param_00.origin[1], param_01[2] + 10), 0, param_00);
   }
 
-  return bullettracepassed(param_01 + (0, 0, 10), (param_01[0], param_01[1], param_00.var_116[2] + 10), 0, param_00) && bullettracepassed(param_00.var_116 + (0, 0, 10), (param_01[0], param_01[1], param_00.var_116[2] + 10), 0, param_00);
+  return bullettracepassed(param_01 + (0, 0, 10), (param_01[0], param_01[1], param_00.origin[2] + 10), 0, param_00) && bullettracepassed(param_00.origin + (0, 0, 10), (param_01[0], param_01[1], param_00.origin[2] + 10), 0, param_00);
 }
 
 func_73E1(param_00, param_01, param_02) {

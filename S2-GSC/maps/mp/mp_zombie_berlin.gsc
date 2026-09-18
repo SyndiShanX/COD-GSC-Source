@@ -44,8 +44,8 @@ main() {
   thread tether_fakery();
   level.var_ABD3 = -3500;
   level.var_AC2E = 4;
-  common_scripts\utility::func_3C87("power_sz2");
-  common_scripts\utility::func_3C87("airship_tethers_out");
+  common_scripts\utility::flag_init("power_sz2");
+  common_scripts\utility::flag_init("airship_tethers_out");
   init_quests();
   init_zones();
   init_berlin_traps();
@@ -133,7 +133,7 @@ init_drop_pod_doors() {
   wait 0.05;
   var_00 = common_scripts\utility::func_46B7("door", "targetname");
   foreach(var_02 in var_00) {
-    foreach(var_04 in var_02.var_8301) {
+    foreach(var_04 in var_02.setclientdvars) {
       if(var_04 method_85CE() == "animated_zbr_drop_pod") {
         var_04 setscriptablepartstate("light", "red", 0);
       }
@@ -142,7 +142,7 @@ init_drop_pod_doors() {
 }
 
 init_quests() {
-  common_scripts\utility::func_3C87("berlin_cinematic_done");
+  common_scripts\utility::flag_init("berlin_cinematic_done");
   lib_0557::func_786C();
   thread maps / mp / mp_zombie_berlin_ee::init();
   thread maps / mp / mp_zombie_berlin_ee_hc::init();
@@ -163,7 +163,7 @@ init_berlin_quest_notebook() {
   var_00 = "flag_hc_projector_notebook";
   var_01 = ["flag_quest_wunderbuss_battery_collected", "flag_quest_wunderbuss_geistbolt_collected", maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("wunderbuss_zm"), "pap_ww_blasted_2", "flag_hc_quest_bat_step01_contact_survivor_complete", "flag_hc_quest_bat_step02_give_weapon_complete", "flag_hc_quest_bat_step02_give_jolts_complete", maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("bat"), lib_0557::func_7838("quest_contact_hq", "step_use_radio"), "quest_contact_soviets", lib_0557::func_7838("quest_draw_airship", "step_ignite_flare"), lib_0557::func_7838("quest_bring_down_airship", "step_reel_anchors"), "apartment_dagger_painting_found", var_00, maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("dagger"), "flag_hc_quest_finale_door_open", "statue_puzzle_success", maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("sword"), "flag_hc_quest_axe_step02_obtained_scale_cup", "flag_hc_quest_axe_step03_placed_sizzler_armored_head", maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("pickaxe"), "quest_bring_down_airship", "quest_defeat_straub", "berlin_cinematic_done"];
   foreach(var_03 in [maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("bat"), maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("sword"), maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("pickaxe"), maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("dagger"), maps / mp / mp_zombie_berlin_utils::get_special_melee_weapon_flag_name("wunderbuss_zm"), var_00]) {
-    common_scripts\utility::func_3C87(var_03);
+    common_scripts\utility::flag_init(var_03);
   }
 
   for(var_05 = 0; !all_flags_exist(var_01); var_05++) {
@@ -205,7 +205,7 @@ init_new_zombie_types() {
 }
 
 init_sizzler_arrival() {
-  common_scripts\utility::func_3C87("flag_sizzlers_active");
+  common_scripts\utility::flag_init("flag_sizzlers_active");
   common_scripts\utility::func_3C9F("flag_sizzlers_active");
   if(isDefined(level.straub_airship)) {
     level.straub_airship.canmakesizzlers = 1;
@@ -250,8 +250,8 @@ sizzler_max_count_manager() {
 }
 
 mute_audio_on_intro() {
-  self method_8626("berl_intro_movie");
-  while(!level.var_3FA6) {
+  self setaltsceneobj("berl_intro_movie");
+  while(!level.gamehasstarted) {
     self freezecontrols(1);
     self method_812B(0);
     self disableoffhandweapons();
@@ -288,7 +288,7 @@ performance_stuff() {
 }
 
 church_door_listener() {
-  common_scripts\utility::func_3C87("garden_to_church");
+  common_scripts\utility::flag_init("garden_to_church");
   common_scripts\utility::func_3C9F("garden_to_church");
   foreach(var_01 in level.var_AC1D) {
     if(isDefined(var_01.var_819A) && var_01.var_819A == "garden_to_church" && !isDefined(var_01.var_6BE1) || !var_01.var_6BE1) {
@@ -298,7 +298,7 @@ church_door_listener() {
 }
 
 cabaret_door_listener() {
-  common_scripts\utility::func_3C87("club_to_garden");
+  common_scripts\utility::flag_init("club_to_garden");
   common_scripts\utility::func_3C9F("club_to_garden");
   foreach(var_01 in level.var_AC1D) {
     if(isDefined(var_01.var_819A) && var_01.var_819A == "club_to_garden" && !isDefined(var_01.var_6BE1) || !var_01.var_6BE1) {
@@ -308,7 +308,7 @@ cabaret_door_listener() {
 }
 
 museum_door_listener() {
-  common_scripts\utility::func_3C87("museum_to_garden");
+  common_scripts\utility::flag_init("museum_to_garden");
   common_scripts\utility::func_3C9F("museum_to_garden");
   foreach(var_01 in level.var_AC1D) {
     if(isDefined(var_01.var_819A) && var_01.var_819A == "museum_to_garden" && !isDefined(var_01.var_6BE1) || !var_01.var_6BE1) {

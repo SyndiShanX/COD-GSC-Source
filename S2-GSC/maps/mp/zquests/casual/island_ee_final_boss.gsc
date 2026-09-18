@@ -8,8 +8,8 @@ init() {
   level.zmb_final_boss_intro_goal = common_scripts\utility::func_46B5("zmb_final_boss_intro_goal", "targetname");
   level thread ensure_no_fireman_spawn();
   level.zmb_island_final_boss_phases_spawns = common_scripts\utility::func_46B7("zmb_final_boss_start_spawns", "targetname");
-  common_scripts\utility::func_3C87("spawn_the_fireman_zombie");
-  common_scripts\utility::func_3C87("fireman_boss_wait");
+  common_scripts\utility::flag_init("spawn_the_fireman_zombie");
+  common_scripts\utility::flag_init("fireman_boss_wait");
   var_00 = spawnStruct();
   var_00.var_3F11 = [::wait_for_boss_intro_done];
   var_00.asn_arr = [1, 0, 0, 0];
@@ -91,7 +91,7 @@ spawn_a_fireman() {
 
   level notify("sub_pen_blockers_close");
   wait(7.5);
-  common_scripts\utility::func_3C8F("fireman_boss_wait");
+  common_scripts\utility::flag_set("fireman_boss_wait");
   var_09 = [];
   var_0A = getEntArray("stove_panel", "targetname");
   var_0B = [];
@@ -110,7 +110,7 @@ spawn_a_fireman() {
   level.continue_final_boss_fire = 1;
   while(level.continue_final_boss_fire) {
     var_10 = var_0B;
-    var_10 = common_scripts\utility::func_FA3(common_scripts\utility::func_F92(var_10), 0, int(maps / mp / zquests / casual / island_ee_main::get_difficulty_setting("zmb_assassin_boss_num_fire_panels") - 1));
+    var_10 = common_scripts\utility::func_FA3(common_scripts\utility::array_randomize(var_10), 0, int(maps / mp / zquests / casual / island_ee_main::get_difficulty_setting("zmb_assassin_boss_num_fire_panels") - 1));
     foreach(var_05 in var_10) {
       level thread maps / mp / zquests / casual / island_ee_main::fire_panels_new(var_05);
     }
@@ -147,7 +147,7 @@ start_zombie_island_boss_phase(param_00) {
   level thread run_assassin_boss_phase(param_00.phase_flag, param_00.phase_num, param_00.optionalbossspawnoverride, int(maps / mp / zquests / casual / island_ee_main::get_difficulty_setting("zmb_assassin_boss_health_" + param_00.phase_num)), param_00.num_alive, param_00.num_to_kill, param_00.enable_death, param_00.assassin_alarm_overrides, param_00.optionalsetenteredgame);
   wait_for_phase_combat(param_00);
   if(param_00.final_phase) {
-    common_scripts\utility::func_3C8F(param_00.phase_flag);
+    common_scripts\utility::flag_set(param_00.phase_flag);
     return;
   }
 
@@ -199,7 +199,7 @@ set_fireman_spawn_flag() {
   }
 
   maps / mp / mp_zombie_island_cart::wait_for_cart_finished_with_mid_route();
-  common_scripts\utility::func_3C8F("spawn_the_fireman_zombie");
+  common_scripts\utility::flag_set("spawn_the_fireman_zombie");
 }
 
 run_assassin_zombie_rush(param_00) {
@@ -253,7 +253,7 @@ wait_for_players_to_mine_cart(param_00) {
     }
 
     level.zmb_island_artillery_sled waittill("arrived at " + param_00.next_zone);
-    common_scripts\utility::func_3C8F(param_00.phase_flag);
+    common_scripts\utility::flag_set(param_00.phase_flag);
   }
 }
 
@@ -288,7 +288,7 @@ run_an_island_beach_assault(param_00, param_01, param_02) {
   level.zmb_locked_spawn_zones = param_01;
   maps / mp / mp_zombie_nest_ee_wave_manipulation::func_8606();
   wait(param_02 - 10);
-  common_scripts\utility::func_3C8F(param_00 + "_rush_defeated");
+  common_scripts\utility::flag_set(param_00 + "_rush_defeated");
   wait(10);
   level.zmb_locked_spawn_zones = undefined;
   maps / mp / mp_zombie_nest_ee_wave_manipulation::func_8608();
@@ -320,9 +320,9 @@ add_zmb_island_boss_phase(param_00, param_01, param_02, param_03, param_04, para
   var_0B.optionalbossspawnoverride = param_01;
   var_0B.assassin_alarm_overrides = param_09;
   var_0B.optionalsetenteredgame = param_0A;
-  common_scripts\utility::func_3C87(var_0B.phase_flag + "_assassins_defeated");
-  common_scripts\utility::func_3C87(var_0B.phase_flag + "_rush_defeated");
-  common_scripts\utility::func_3C87(var_0B.phase_flag);
+  common_scripts\utility::flag_init(var_0B.phase_flag + "_assassins_defeated");
+  common_scripts\utility::flag_init(var_0B.phase_flag + "_rush_defeated");
+  common_scripts\utility::flag_init(var_0B.phase_flag);
   level.zmb_island_final_boss_phases = common_scripts\utility::func_F6F(level.zmb_island_final_boss_phases, var_0B);
 }
 
@@ -384,7 +384,7 @@ run_assassin_boss_phase(param_00, param_01, param_02, param_03, param_04, param_
     wait_for_assassin_wave_clear();
   }
 
-  common_scripts\utility::func_3C8F(param_00 + "_assassins_defeated");
+  common_scripts\utility::flag_set(param_00 + "_assassins_defeated");
 }
 
 wait_for_assassin_wave_clear(param_00) {
@@ -453,7 +453,7 @@ move_players_to_boss_start() {
     level.players[var_01] thread maps / mp / mp_zombie_island_fog_zones::set_light_and_fog("mp_zombie_island", "mp_zombie_island", 1, 1);
   }
 
-  common_scripts\utility::func_3C8F("players_boss_spawn_done");
+  common_scripts\utility::flag_set("players_boss_spawn_done");
   wait(1);
   level thread maps / mp / zquests / casual / island_ee_util::func_7432(1, 0, "black");
   common_scripts\utility::func_3C9F("asn_players_are_blinded");

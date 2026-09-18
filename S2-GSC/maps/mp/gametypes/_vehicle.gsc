@@ -48,9 +48,9 @@ func_1D02(param_00, param_01, param_02) {
 
 func_1D1C(param_00, param_01, param_02, param_03, param_04) {
   var_05 = spawnStruct();
-  var_05.var_807E = param_00;
-  var_05.var_3511 = param_01;
-  var_05.var_14F = param_02;
+  var_05.fadeovertime = param_00;
+  var_05.duration = param_01;
+  var_05.radius = param_02;
   if(isDefined(param_03)) {
     var_05.var_162F = param_03;
   }
@@ -78,12 +78,12 @@ func_1D0B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_0B = spawnStruct();
   var_0B.var_359B = loadfx(param_00);
   var_0B.var_95A6 = param_01;
-  var_0B.var_8F2C = param_02;
+  var_0B.sound = param_02;
   var_0B.var_1CD7 = param_05;
   var_0B.var_2CAC = param_04;
   var_0B.var_A68B = param_06;
   var_0B.var_9340 = param_07;
-  var_0B.var_6810 = param_08;
+  var_0B.notifystring = param_08;
   var_0B.var_16FE = param_03;
   var_0B.var_83C2 = param_09;
   var_0B.var_7C80 = param_0A;
@@ -133,7 +133,7 @@ func_1D14(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 
   var_06 = spawnStruct();
-  var_06.var_109 = param_01;
+  var_06.name = param_01;
   var_06.var_95A6 = param_02;
   var_06.var_2CAC = param_05;
   var_06.var_359B = loadfx(param_03);

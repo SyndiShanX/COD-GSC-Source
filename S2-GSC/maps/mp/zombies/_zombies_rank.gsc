@@ -272,7 +272,7 @@ func_AC23(param_00) {
     return;
   }
 
-  if(!level.var_6B4D && !getdvarint("zm_enable_lan_xp", 0)) {
+  if(!level.onlinegame && !getdvarint("zm_enable_lan_xp", 0)) {
     return;
   }
 
@@ -323,7 +323,7 @@ func_AC39(param_00) {
 
   if(!common_scripts\utility::func_562E(param_00)) {
     thread maps\mp\gametypes\_hud_message::func_7A6C(level.var_AB42[var_02][18], var_02 + 1, self.var_AB46["prestigeLevel"]);
-    if(level.var_6B4D) {
+    if(level.onlinegame) {
       if(level.var_AB42[var_02][19] != 0) {
         if(level.var_AB42[var_02][19] == 1) {
           thread maps\mp\gametypes\_hud_message::func_9102("zm_reward_supply");

@@ -20,13 +20,13 @@ main() {
   lib_0557::func_781E("2 open salt mine", "use power machines", ::func_7867, ::func_7EFD, &"ZOMBIE_NEST_HINT_STEP_REROUTE_POWER");
   lib_0557::func_781E("2 open salt mine", "salt mine door open", ::func_785F, ::lib_0557::func_30D8, &"ZOMBIE_NEST_HINT_STEP_OPEN_SALT_MINE");
   lib_0557::func_7848("2 open salt mine");
-  common_scripts\utility::func_3C87("flag_salt_mine_opened");
-  common_scripts\utility::func_3C87("flag_salt_mine_main_ent_opened");
-  common_scripts\utility::func_3C87("flag_med_enigma_set");
-  common_scripts\utility::func_3C87("flag_rnd_enigma_set");
-  common_scripts\utility::func_3C87("flag_both_enigmas_set");
-  common_scripts\utility::func_3C87("flag_salt_mine_door_found");
-  common_scripts\utility::func_3C87("salt_mine_opened");
+  common_scripts\utility::flag_init("flag_salt_mine_opened");
+  common_scripts\utility::flag_init("flag_salt_mine_main_ent_opened");
+  common_scripts\utility::flag_init("flag_med_enigma_set");
+  common_scripts\utility::flag_init("flag_rnd_enigma_set");
+  common_scripts\utility::flag_init("flag_both_enigmas_set");
+  common_scripts\utility::flag_init("flag_salt_mine_door_found");
+  common_scripts\utility::flag_init("salt_mine_opened");
   func_52B6();
   func_5348();
 }
@@ -34,7 +34,7 @@ main() {
 func_1389() {
   wait(1);
   var_00 = func_44F7();
-  common_scripts\utility::func_3C8F(var_00.var_81A1);
+  common_scripts\utility::flag_set(var_00.var_81A1);
 }
 
 func_784F() {
@@ -140,7 +140,7 @@ func_5348() {
 func_785F() {
   var_00 = func_4470();
   if(0) {
-    var_01 = lib_0557::func_782F(undefined, var_00.var_8301);
+    var_01 = lib_0557::func_782F(undefined, var_00.setclientdvars);
     lib_0557::func_781D("2 open salt mine", var_01);
   }
 
@@ -208,9 +208,9 @@ func_8035() {
 
   if(level.var_36B0) {
     var_04 = func_4470();
-    var_05 = var_04.var_8301[0].origin;
+    var_05 = var_04.setclientdvars[0].origin;
     common_scripts\utility::func_3C9F("com_to_mine");
-    common_scripts\utility::func_3C8F("flag_salt_mine_main_ent_opened");
+    common_scripts\utility::flag_set("flag_salt_mine_main_ent_opened");
     thread maps / mp / mp_zombie_nest_ee_util::func_7213("entermine", var_05, 200, 512);
   }
 
@@ -292,10 +292,10 @@ func_7EFC() {
     lib_0378::func_8D74("aud_enigma_switch_activate");
     if(isDefined(self.var_8260)) {
       if(self.var_8260 == "rotor_machine_rnd") {
-        common_scripts\utility::func_3C8F("flag_rnd_enigma_set");
+        common_scripts\utility::flag_set("flag_rnd_enigma_set");
         thread func_A10A("rnd", "green");
       } else if(self.var_8260 == "rotor_machine_med") {
-        common_scripts\utility::func_3C8F("flag_med_enigma_set");
+        common_scripts\utility::flag_set("flag_med_enigma_set");
         thread func_A10A("med", "green");
       }
     }
@@ -322,7 +322,7 @@ func_7EFC() {
       if(level.var_3591 >= level.var_357D) {
         thread lib_0378::func_8D74("aud_fuse_timer_stop", level.var_358E);
         level notify("nest_ee_both_machines_used");
-        common_scripts\utility::func_3C8F("flag_both_enigmas_set");
+        common_scripts\utility::flag_set("flag_both_enigmas_set");
         var_00 lib_0378::func_8D74("aud_saltmine_door_powered");
         if(isDefined(level.var_3590)) {
           lib_0557::func_7847("2 open salt mine", level.var_3590);
@@ -468,12 +468,12 @@ func_A0FF(param_00) {
   }
 
   var_01.var_5671 = 1;
-  foreach(var_06 in var_01.var_8301) {
+  foreach(var_06 in var_01.setclientdvars) {
     var_06 setscriptablepartstate("gate", var_02);
   }
 
   wait(var_04);
-  foreach(var_06 in var_01.var_8301) {
+  foreach(var_06 in var_01.setclientdvars) {
     var_06 setscriptablepartstate("gate", var_03);
   }
 
@@ -496,7 +496,7 @@ func_A10A(param_00, param_01) {
     var_04 = "off";
   }
 
-  foreach(var_06 in var_02.var_8301) {
+  foreach(var_06 in var_02.setclientdvars) {
     var_06 setscriptablepartstate(var_03, var_04);
   }
 }
@@ -575,7 +575,7 @@ func_2EA6() {
       wait(0.5);
       continue;
     } else if(!isDefined(var_01.var_306B)) {
-      common_scripts\utility::func_3C8F("flag_salt_mine_door_found");
+      common_scripts\utility::flag_set("flag_salt_mine_door_found");
       var_02 = var_01 lib_0367::func_8E3D("saltminedoorexamine");
       if(isDefined(var_02)) {
         var_01.var_306B = 1;

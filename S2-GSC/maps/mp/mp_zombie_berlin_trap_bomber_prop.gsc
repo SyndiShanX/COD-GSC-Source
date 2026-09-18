@@ -45,7 +45,7 @@ do_ground_blood(param_00, param_01) {
     }
 
     level thread common_scripts\_exploder::func_88E(205);
-    var_03 = spawnlinkedfx(level.var_611["zmb_ber_prop_trap_grit"], param_01, "Tag_Origin");
+    var_03 = spawnlinkedfx(level._effect["zmb_ber_prop_trap_grit"], param_01, "Tag_Origin");
     triggerfx(var_03);
     wait(10);
     var_03 delete();
@@ -56,16 +56,16 @@ toss_ragdoll(param_00, param_01) {
   var_02 = self gettagorigin("J_Head");
   var_03 = vectorNormalize(var_02 - param_00.origin);
   var_04 = ["head", "neck"];
-  var_05 = common_scripts\utility::func_7A33(var_04);
+  var_05 = common_scripts\utility::random(var_04);
   lib_0547::func_5A85(var_05, 500 * var_03, param_01, "trap_zm_mp");
-  var_06 = spawnfx(level.var_611["zmb_ber_blood_impact_prop"], var_02, var_03);
+  var_06 = spawnfx(level._effect["zmb_ber_blood_impact_prop"], var_02, var_03);
   triggerfx(var_06);
   wait(0.2);
   var_06 delete();
 }
 
 spin_propeller(param_00) {
-  var_01 = spawnlinkedfx(level.var_611["zmb_ber_prop_trap_spin"], param_00, "prop");
+  var_01 = spawnlinkedfx(level._effect["zmb_ber_prop_trap_spin"], param_00, "prop");
   triggerfx(var_01);
   level thread common_scripts\_exploder::func_88E(203);
   param_00 scriptmodelplayanim("s2_zom_propeller_01_start");

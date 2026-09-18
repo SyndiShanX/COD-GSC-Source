@@ -19,7 +19,7 @@ main() {
   level.var_943B.var_38E6["s2_zom_straub_table_cleaver_exit_6"] = % s2_zom_straub_table_cleaver_exit_6;
   level.var_943B.var_38E6["s2_zom_straub_table_hacksaw_exit_6"] = % s2_zom_straub_table_hacksaw_exit_6;
   level.var_943B.var_241F = getEnt("straub_bullet_clip", "targetname");
-  level.var_611["temp_straub_radius"] = loadfx("vfx/weaponimpact/zmb_straub_impact");
+  level._effect["temp_straub_radius"] = loadfx("vfx/weaponimpact/zmb_straub_impact");
   level.var_943B.var_9097 = func_9442();
   if(!isDefined(level.var_943B.var_9097) || level.var_943B.var_9097.size <= 0) {
     return;
@@ -89,7 +89,7 @@ func_9446() {
   var_01 = undefined;
   var_02 = level.var_943B.var_9097;
   while(!var_00) {
-    var_03 = common_scripts\utility::func_7A33(var_02);
+    var_03 = common_scripts\utility::random(var_02);
     var_04 = func_943C(var_03);
     if(!var_04) {
       var_01 = var_03;
@@ -342,7 +342,7 @@ func_9447() {
 func_09EF(param_00, param_01, param_02, param_03) {
   self.var_5D99[param_00] = spawnStruct();
   self.var_5D99[param_00].var_BB4 = param_01;
-  self.var_5D99[param_00].var_3511 = param_02;
+  self.var_5D99[param_00].duration = param_02;
   self.var_5D99[param_00].var_3DD3 = param_03;
   if(!issubstr(param_00, "_2") && !issubstr(param_00, "_3") && !issubstr(param_00, "_4")) {
     self.var_13B1[self.var_13B1.size] = param_00;
@@ -357,7 +357,7 @@ func_7CFC(param_00) {
 
 func_46B3(param_00) {
   var_01 = level.var_943B.var_5D99[param_00].var_BB4;
-  var_02 = level.var_943B.var_5D99[param_00].var_3511;
+  var_02 = level.var_943B.var_5D99[param_00].duration;
   var_03 = undefined;
   if(isDefined(level.var_943B.var_5D99[param_00].var_3DD3)) {
     var_03 = level.var_943B.var_5D99[param_00].var_3DD3;
@@ -440,7 +440,7 @@ func_74E2(param_00, param_01) {
       level.var_943B.var_90C2 = 1;
       lib_0378::func_8D74("snd_zmb_mus_stop_all_players", 4);
       wait(2);
-      var_02 = common_scripts\utility::func_7A33(level.var_943B.var_13B1);
+      var_02 = common_scripts\utility::random(level.var_943B.var_13B1);
       var_07 = func_46B3(var_02);
       var_03 = var_07[0];
       var_04 = var_07[1];

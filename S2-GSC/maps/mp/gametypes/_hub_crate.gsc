@@ -298,7 +298,7 @@ func_86E7() {
   self endon("autoFinishSupplyDrop");
   var_00 = 85;
   while(!self.var_2759) {
-    foreach(var_02 in level.var_744A) {
+    foreach(var_02 in level.players) {
       if(isDefined(var_02) && var_02 != self) {
         if(distance(var_02.var_0116, self.var_0116) > var_00) {
           var_02 showtoclient(self);
@@ -312,7 +312,7 @@ func_86E7() {
     wait(0.1);
   }
 
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(isDefined(var_02) && var_02 != self) {
       var_02 showtoclient(self);
     }
@@ -396,7 +396,7 @@ func_7FAF(param_00, param_01, param_02) {
     return;
   }
 
-  thread maps\mp\_utility::func_772A(&"HUB_NOTIFY_OPEN_SUPPLY_DROP", self.var_01A7, self.var_0109);
+  thread maps\mp\_utility::printonteam(&"HUB_NOTIFY_OPEN_SUPPLY_DROP", self.var_01A7, self.var_0109);
   self setclientomnvar("hub_hide_killfeed", 1);
   self.var_2759 = 0;
   thread func_86E7();
@@ -533,7 +533,7 @@ func_7FAF(param_00, param_01, param_02) {
 
     if(var_0E == 0) {
       self.var_7D07 = undefined;
-      foreach(var_10 in level.var_744A) {
+      foreach(var_10 in level.players) {
         if(isDefined(var_10) && var_10 != self) {
           var_10 showtoclient(self);
         }
@@ -561,7 +561,7 @@ func_7FAF(param_00, param_01, param_02) {
   thread func_238A();
   thread func_7423();
   thread func_2393(self);
-  foreach(var_10 in level.var_744A) {
+  foreach(var_10 in level.players) {
     if(isDefined(var_10) && var_10 != self) {
       var_10 showtoclient(self);
     }
@@ -696,11 +696,11 @@ func_5106(param_00, param_01, param_02) {
     playFXOnTag(param_02[var_05], self.var_08DD, var_08);
     switch (var_05) {
       case 3:
-        thread maps\mp\_utility::func_772A(&"HUB_NOTIFY_RECEIVED_EPIC_ITEM", self.var_01A7, self.var_0109);
+        thread maps\mp\_utility::printonteam(&"HUB_NOTIFY_RECEIVED_EPIC_ITEM", self.var_01A7, self.var_0109);
         break;
 
       case 4:
-        thread maps\mp\_utility::func_772A(&"HUB_NOTIFY_RECEIVED_HEROIC_ITEM", self.var_01A7, self.var_0109);
+        thread maps\mp\_utility::printonteam(&"HUB_NOTIFY_RECEIVED_HEROIC_ITEM", self.var_01A7, self.var_0109);
         break;
 
       default:
@@ -867,7 +867,7 @@ func_7421(param_00) {
 func_49E9() {
   self endon("death");
   self endon("disconnect");
-  self method_802E("npc_usa_m18_smoke_green", "tag_weapon_right");
+  self detach("npc_usa_m18_smoke_green", "tag_weapon_right");
   if(!isDefined(self.var_08DD)) {
     return;
   }
@@ -944,7 +944,7 @@ func_7422() {
   self method_85B3(1);
   self.var_579F = 1;
   wait(0.1);
-  self method_802E("npc_usa_m18_smoke_green", "tag_weapon_right");
+  self detach("npc_usa_m18_smoke_green", "tag_weapon_right");
 }
 
 func_743D(param_00) {
@@ -1073,8 +1073,8 @@ oncarrierdeathordisconnect() {
 
 func_1459(param_00) {
   var_01 = [];
-  foreach(var_03 in level.var_744A) {
-    if(isPlayer(var_03) && maps\mp\_utility::func_57A0(var_03) && self != var_03) {
+  foreach(var_03 in level.players) {
+    if(isPlayer(var_03) && maps\mp\_utility::isreallyalive(var_03) && self != var_03) {
       if(common_scripts\utility::func_302B(self.var_08DD.var_0116, var_03.var_0116) < 65536) {
         var_01[var_01.size] = var_03;
         if(isDefined(param_00)) {
@@ -1104,7 +1104,7 @@ func_A85E() {
     level.var_77A6 = common_scripts\utility::func_46B7("psd_spawn_location", "targetname");
   }
 
-  var_00 = common_scripts\utility::func_7A33(level.var_77A6);
+  var_00 = common_scripts\utility::random(level.var_77A6);
   self.warpingtosupplydrop = 1;
   self method_85C9(1);
   self setOrigin(function_0236(var_00.var_0116), 1);
@@ -1113,11 +1113,11 @@ func_A85E() {
 
 checksafewarpposition() {
   var_00 = level.var_77A6;
-  var_01 = common_scripts\utility::func_7A33(var_00);
+  var_01 = common_scripts\utility::random(var_00);
   while(var_00.size > 1) {
     if(var_01.var_0116 == (-297, 747.5, 0) || var_01.var_0116 == (242.5, 946.5, 0) || var_01.var_0116 == (-402.5, 914, 0) || var_01.var_0116 == (128.5, 998.5, 0) || var_01.var_0116 == (130, 753.5, 0) || var_01.var_0116 == (-190, 856, 0) || var_01.var_0116 == (-311, 849.5, 0) || var_01.var_0116 == (-245.5, 980.5, 0) || var_01.var_0116 == (-189, 1077.5, 0)) {
       var_00 = common_scripts\utility::func_0F93(var_00, var_01);
-      var_01 = common_scripts\utility::func_7A33(var_00);
+      var_01 = common_scripts\utility::random(var_00);
       continue;
     }
 

@@ -100,7 +100,7 @@ func_49A0() {
       self.var_1649 = self.var_1649 - 1;
       maps\mp\gametypes\_weapons::func_A13B();
       if(!maps\mp\_utility::_hasperk("specialty_fastreload")) {
-        maps\mp\_utility::func_47A2("specialty_fastreload");
+        maps\mp\_utility::giveperk("specialty_fastreload");
       }
 
       self.var_98E2 = 4;
@@ -220,7 +220,7 @@ func_3212() {
   self endon("disconnect");
   for(;;) {
     self waittill("dominated_battlecry");
-    if(isDefined(self.team) && maps / mp / gametypes / dom::func_46CC(maps\mp\_utility::func_45DE(self.team)) == level.var_3CC5.size && self.var_1642 == 0 && self.var_1647 == 0) {
+    if(isDefined(self.team) && maps / mp / gametypes / dom::func_46CC(maps\mp\_utility::getotherteam(self.team)) == level.var_3CC5.size && self.var_1642 == 0 && self.var_1647 == 0) {
       func_1647();
     }
 

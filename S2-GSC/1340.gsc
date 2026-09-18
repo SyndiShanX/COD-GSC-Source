@@ -49,14 +49,14 @@ func_4F84() {
   }
 
   if(!isDefined(self.var_5BC1) || distancesquared(self.var_5BC1, self.origin) > 256) {
-    self.var_60ED = self.var_108;
+    self.var_60ED = self.vectortoangles;
   }
 
   if(isDefined(self.custom_on_melee_func)) {
     self thread[[self.custom_on_melee_func]]();
   }
 
-  self method_83A1(self.var_28D2);
+  self selected_ent_buttons(self.var_28D2);
   return 1;
 }
 
@@ -383,7 +383,7 @@ func_4F9B(param_00) {
   }
 
   if(isDefined(var_01)) {
-    var_02 = self.var_11AB + self.var_14F * 2;
+    var_02 = self.var_11AB + self.radius * 2;
     var_03 = var_02 * var_02;
     var_04 = self.var_11AB;
     var_05 = var_04 * var_04;
@@ -393,7 +393,7 @@ func_4F9B(param_00) {
     var_08 = distancesquared(var_06.origin, self.origin);
     var_09 = distancesquared(var_07, self.origin);
     var_0A = self.var_173E;
-    if(var_09 < squared(self.var_14F) && distancesquared(var_07, var_06.origin) > squared(self.var_14F)) {
+    if(var_09 < squared(self.radius) && distancesquared(var_07, var_06.origin) > squared(self.radius)) {
       var_0A = 1;
       self notify("attack_anim", "end");
     }
@@ -487,7 +487,7 @@ humanoid_is_valid_target(param_00) {
     return 0;
   }
 
-  if(param_00 method_8541() || isDefined(param_00.owner) && param_00.owner method_8541()) {
+  if(param_00 set_off_exploders() || isDefined(param_00.owner) && param_00.owner set_off_exploders()) {
     return 0;
   }
 
@@ -926,7 +926,7 @@ func_4F8D() {
         self method_8395(self.var_2308.origin);
       }
 
-      var_03 = self.var_14F * self.var_14F;
+      var_03 = self.radius * self.radius;
       var_04 = distance2dsquared(self.origin, self.var_2308.origin);
       if(var_04 > var_03) {
         return 1;
@@ -1132,8 +1132,8 @@ func_346C(param_00, param_01, param_02, param_03) {
     var_08 = randomfloatrange(0, var_08);
   }
 
-  var_0A = getstartorigin(param_01.var_8310, param_01.var_830F, var_07);
-  var_0B = getstartangles(param_01.var_8310, param_01.var_830F, var_07);
+  var_0A = getstartorigin(param_01.getweaponlistall, param_01.var_830F, var_07);
+  var_0B = getstartangles(param_01.getweaponlistall, param_01.var_830F, var_07);
   self setOrigin(var_0A, 0);
   self method_839C("anim deltas");
   self scragentsetorientmode("face angle abs", var_0B);

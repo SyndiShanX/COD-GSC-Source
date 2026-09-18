@@ -21,14 +21,14 @@ func_408C() {
 }
 
 devguigiveweapon(param_00) {
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 giveweapon(param_00);
     var_02 switchtoweapon(param_00);
   }
 }
 
 devguitakeweapon(param_00) {
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 takeweapon(param_00);
   }
 }
@@ -63,9 +63,9 @@ func_98F9(param_00) {
     var_0B.var_1D = var_01.var_1D;
     var_0B setModel("tag_origin");
     var_0B.var_2DA7 = var_0A["position"];
-    var_0B.var_2F0C = vectorNormalize(var_0B.var_2DA7 - var_0B.var_116);
+    var_0B.var_2F0C = vectorNormalize(var_0B.var_2DA7 - var_0B.origin);
     var_0B.var_9B7F = var_0A["fraction"];
-    var_0B.var_721C = var_01;
+    var_0B.player = var_01;
     var_0B.var_953E = param_00.var_953E;
     var_0B thread func_98FC();
     var_0B thread[[param_00.var_A0A7]]();
@@ -85,7 +85,7 @@ func_98FC() {
   var_03 = 0;
   for(;;) {
     wait 0.05;
-    foreach(var_05 in get_all_enemies(var_00.var_721C)) {
+    foreach(var_05 in get_all_enemies(var_00.player)) {
       if(!isalive(var_05)) {
         continue;
       }
@@ -95,7 +95,7 @@ func_98FC() {
         var_06 = var_05.var_8303;
       }
 
-      if(distance2d(var_05.var_116, var_00.var_116) > var_06 + var_01) {
+      if(distance2d(var_05.origin, var_00.origin) > var_06 + var_01) {
         continue;
       }
 
@@ -104,7 +104,7 @@ func_98FC() {
         var_07 = var_05.var_8302;
       }
 
-      if(var_00.var_116[2] < var_05.var_116[2] - var_01 || var_00.var_116[2] > var_05.var_116[2] + var_07 + var_01) {
+      if(var_00.origin[2] < var_05.origin[2] - var_01 || var_00.origin[2] > var_05.origin[2] + var_07 + var_01) {
         continue;
       }
 
@@ -133,8 +133,8 @@ func_5565(param_00, param_01) {
 
 get_all_enemies(param_00) {
   var_01 = [];
-  foreach(var_03 in level.var_744A) {
-    if(param_00 != var_03 && isDefined(var_03.var_1A7) && param_00.var_1A7 != var_03.var_1A7) {
+  foreach(var_03 in level.players) {
+    if(param_00 != var_03 && isDefined(var_03.team) && param_00.team != var_03.team) {
       var_01[var_01.size] = var_03;
     }
   }

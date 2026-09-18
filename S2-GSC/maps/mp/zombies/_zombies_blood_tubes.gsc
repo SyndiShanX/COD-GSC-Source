@@ -146,7 +146,7 @@ tube_setup() {
         self.door_l.var_241F = getEnt(self.door_l_pivot.target, "targetname");
         self.door_l.var_241F.var_A045 = ::transport_unresolved_collide;
         self.door_l.var_241F.var_206B = self;
-        self.door_l.var_241F method_8449(self.door_l_pivot);
+        self.door_l.var_241F linktosynchronizedparent(self.door_l_pivot);
         break;
 
       case "door_r_pivot":
@@ -155,7 +155,7 @@ tube_setup() {
         self.door_r.var_241F = getEnt(self.door_r_pivot.target, "targetname");
         self.door_r.var_241F.var_A045 = ::transport_unresolved_collide;
         self.door_r.var_241F.var_206B = self;
-        self.door_r.var_241F method_8449(self.door_r_pivot);
+        self.door_r.var_241F linktosynchronizedparent(self.door_r_pivot);
         break;
 
       case "bt_navmesh_clip":
@@ -175,8 +175,8 @@ tube_setup() {
     }
   }
 
-  self.door_l method_8449(self.door_l_pivot);
-  self.door_r method_8449(self.door_r_pivot);
+  self.door_l linktosynchronizedparent(self.door_l_pivot);
+  self.door_r linktosynchronizedparent(self.door_r_pivot);
   self.transport_inactive = 1;
 }
 
@@ -267,7 +267,7 @@ tube_transport_logic(param_00) {
         level notify("wustlinground_trip");
       }
 
-      common_scripts\utility::func_3C8F(var_09.var_A4B + "_trophy_event_3");
+      common_scripts\utility::flag_set(var_09.var_A4B + "_trophy_event_3");
       if(isDefined(var_09.ismooncontrolled)) {
         var_09.stall_mc_death = 1;
       }
@@ -369,7 +369,7 @@ run_blood_intro(param_00, param_01) {
   lib_0547::playfxclient("zmb_desc_bloodtube_screen", param_01, var_02, 7);
   lib_0378::func_8D74("aud_blood_tube_engulf", param_01);
   wait(5);
-  playFX(level.var_611["zmb_desc_bloodtube_drip_exit"], param_01);
+  playFX(level._effect["zmb_desc_bloodtube_drip_exit"], param_01);
 }
 
 do_transport_rumble(param_00, param_01) {
@@ -611,7 +611,7 @@ set_next_pap_unlock_flag() {
   level.num_unique_destinations++;
   var_00 = "pap_raise_" + level.num_unique_destinations;
   if(common_scripts\utility::func_3C83(var_00)) {
-    common_scripts\utility::func_3C8F(var_00);
+    common_scripts\utility::flag_set(var_00);
   }
 }
 
@@ -780,8 +780,8 @@ transport_close(param_00) {
   self.doing_transport = 1;
   if(!common_scripts\utility::func_562E(param_00)) {}
 
-  self.door_l.var_241F method_805F();
-  self.door_r.var_241F method_805F();
+  self.door_l.var_241F saved_actionslotdata();
+  self.door_r.var_241F saved_actionslotdata();
 }
 
 transport_open(param_00) {
@@ -796,7 +796,7 @@ transport_open(param_00) {
     wait(self.blood_fill.var_A796);
   }
 
-  playFX(level.var_611["zmb_desc_bloodtube_drip_exit"], self.door_l_pivot.origin);
+  playFX(level._effect["zmb_desc_bloodtube_drip_exit"], self.door_l_pivot.origin);
   var_02 = 3;
   self.door_r_pivot rotateTo(self.door_r_pivot.initialangles + (0, -60, 0), var_02);
   self.door_l_pivot rotateTo(self.door_l_pivot.initialangles + (0, 60, 0), var_02);
@@ -886,12 +886,12 @@ boss_tube_wait_for_interact() {
 
     self.var_65DC.var_6642 = 1;
     self.var_65DC.var_2F74 = 1;
-    common_scripts\utility::func_3C8F("flag_boss_arena_teleport_began");
+    common_scripts\utility::flag_set("flag_boss_arena_teleport_began");
     wait 0.05;
     level notify("blood_tube_boss_valid_use");
     level notify("blood_tube_valid_use");
     level waittill("blood_tube_players_teleported");
-    common_scripts\utility::func_3C8F("flag_entered_boss_arena");
+    common_scripts\utility::flag_set("flag_entered_boss_arena");
   }
 }
 

@@ -4,18 +4,18 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_raid_dlc4_precache::func_F9();
-  maps\createart\mp_raid_dlc4_art::func_F9();
-  maps\mp\mp_raid_dlc4_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_raid_dlc4_lighting::func_F9();
-  maps\mp\mp_raid_dlc4_aud::func_F9();
+  maps\mp\mp_raid_dlc4_precache::main();
+  maps\createart\mp_raid_dlc4_art::main();
+  maps\mp\mp_raid_dlc4_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_raid_dlc4_lighting::main();
+  maps\mp\mp_raid_dlc4_aud::main();
   maps\mp\_audio_submixes::func_524C();
   setnorthyaw(90);
   level.var_1BB7 = ::func_1BB7;
   level thread func_1BB8();
   maps\mp\_compass::func_8A2F("compass_map_mp_raid_dlc4");
-  maps\mp\_special_weapons::func_D5();
+  maps\mp\_special_weapons::init();
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   level.var_6C5F = "mp_raid_dlc4_osp";
@@ -88,8 +88,8 @@ removeextravisuals() {
   var_01 = 64;
   var_02 = getEntArray("script_brushmodel", "classname");
   foreach(var_04 in var_02) {
-    if(isDefined(var_04.var_165) && var_04.var_165 == "visuals") {
-      var_05 = distance2dsquared(var_00, var_04.var_116);
+    if(isDefined(var_04.exitlevel) && var_04.exitlevel == "visuals") {
+      var_05 = distance2dsquared(var_00, var_04.origin);
       if(var_05 <= var_01) {
         var_04 delete();
       }
@@ -160,7 +160,7 @@ set_allies_ents_dont_interpolate() {
     }
   }
 
-  foreach(var_0B in level.introvignette_allies_struct.var_A9E7) {
+  foreach(var_0B in level.introvignette_allies_struct.weapons) {
     if(isDefined(var_0B)) {
       var_0B dontinterpolatesafe();
     }
@@ -242,7 +242,7 @@ func_0BFD(param_00) {
 func_54D7(param_00) {
   level.introvignette_allies_struct = spawnStruct();
   var_01 = common_scripts\utility::func_46B5("anim_allies_intro", "targetname");
-  var_02 = var_01.var_116;
+  var_02 = var_01.origin;
   var_03 = var_01.var_1D;
   lib_0378::func_8D74("aud_intro_start_sfx");
   var_04 = [];
@@ -263,7 +263,7 @@ func_54D7(param_00) {
   var_10 = "stg44_mp";
   foreach(var_12 in var_0D) {
     var_13 = spawn("script_model", var_02);
-    var_13.var_1A7 = "allies";
+    var_13.team = "allies";
     var_13.var_267E = [2, 1, 2, 2, 2, 0];
     var_13 setcostumemodels(var_13.var_267E, "axis");
     var_14 = spawn("weapon_" + var_10, (0, 0, 0), 1);
@@ -278,18 +278,18 @@ func_54D7(param_00) {
   var_16 setModel("vehicle_usa_tank_sherman_75mm_hatch");
   var_17 = "mp_raids_dlc4_ally_intro_tank";
   foreach(var_19 in level.var_97C5) {
-    var_19 method_805C();
-    var_19.var_9EDD method_805C();
+    var_19 save_undo_buffer();
+    var_19.var_9EDD save_undo_buffer();
   }
 
   var_16 animscripts\notetracks_common::give_player_xp("mp_raids_dlc4_ally_intro_tank_shot_01", var_02, var_03);
   var_01 thread continue_multi_shot_anim(var_17, var_16, 6, "_shot_0", "allies");
   var_1B = getEntArray("ally_intro_gate_whole", "script_noteworthy");
   var_1C = getEntArray("ally_intro_gate_broken", "script_noteworthy");
-  common_scripts\utility::func_F71(var_1C, ::method_805C);
+  common_scripts\utility::func_F71(var_1C, ::save_undo_buffer);
   var_16 thread introvignette_allies_show_broken_gate(var_1B, var_1C);
   level.introvignette_allies_struct.ally_soldiers = var_0E;
-  level.introvignette_allies_struct.var_A9E7 = var_0F;
+  level.introvignette_allies_struct.weapons = var_0F;
   level.introvignette_allies_struct.var_9600 = var_16;
 }
 
@@ -305,7 +305,7 @@ introvignette_allies_show_broken_gate(param_00, param_01) {
 
 func_54D3() {
   var_00 = level.introvignette_allies_struct.ally_soldiers;
-  var_01 = level.introvignette_allies_struct.var_A9E7;
+  var_01 = level.introvignette_allies_struct.weapons;
   var_02 = level.introvignette_allies_struct.var_9600;
   common_scripts\utility::func_F71(var_00, ::delete);
   common_scripts\utility::func_F71(var_01, ::delete);
@@ -397,7 +397,7 @@ set_axis_ents_dont_interpolate() {
     }
   }
 
-  foreach(var_0B in level.introvignette_axis_struct.var_A9E7) {
+  foreach(var_0B in level.introvignette_axis_struct.weapons) {
     if(isDefined(var_0B)) {
       var_0B dontinterpolatesafe();
     }
@@ -479,7 +479,7 @@ func_1483(param_00) {
 func_54E1() {
   level.introvignette_axis_struct = spawnStruct();
   var_00 = common_scripts\utility::func_46B5("anim_axis_intro", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   var_03 = level.var_54D0["axis"].var_8CA7;
   var_04 = [];
@@ -499,7 +499,7 @@ func_54E1() {
   var_0D = "stg44_mp";
   foreach(var_0F in var_0A) {
     var_10 = spawn("script_model", var_01);
-    var_10.var_1A7 = "allies";
+    var_10.team = "allies";
     var_10.var_267E = function_0283();
     var_10 setcostumemodels(var_10.var_267E, "axis");
     var_09 = spawn("weapon_" + var_0D, (0, 0, 0), 1);
@@ -542,7 +542,7 @@ func_54E1() {
   level.introvignette_axis_struct.switch01 = var_18;
   level.introvignette_axis_struct.cart01 = var_1A;
   level.introvignette_axis_struct.axis_soldiers = var_0B;
-  level.introvignette_axis_struct.var_A9E7 = var_0C;
+  level.introvignette_axis_struct.weapons = var_0C;
 }
 
 continue_multi_shot_anim(param_00, param_01, param_02, param_03, param_04) {
@@ -572,7 +572,7 @@ func_54D9() {
   var_03 = level.introvignette_axis_struct.switch01;
   var_04 = level.introvignette_axis_struct.cart01;
   var_05 = level.introvignette_axis_struct.axis_soldiers;
-  var_06 = level.introvignette_axis_struct.var_A9E7;
+  var_06 = level.introvignette_axis_struct.weapons;
   var_00 delete();
   var_01 delete();
   var_02 delete();
@@ -610,14 +610,14 @@ func_7FB4() {
   thread bellanimationthink();
   var_00 = common_scripts\utility::func_46B5("truck_push_node", "targetname");
   var_01 = getEnt("truck_push", "script_noteworthy");
-  var_02 = getEnt(var_01.var_1A2, "targetname");
+  var_02 = getEnt(var_01.target, "targetname");
   var_02 linkTo(var_01, "truck");
   var_03 = getEnt("tank_push_trigger", "script_noteworthy");
   var_04 = getEnt("obj1_tankpush_kill", "targetname");
   level waittill("tank_push");
-  foreach(var_06 in level.var_744A) {
+  foreach(var_06 in level.players) {
     if(isalive(var_06) && var_06 istouching(var_04)) {
-      var_06 dodamage(999999, var_06.var_116);
+      var_06 dodamage(999999, var_06.origin);
     }
 
     if(isDefined(var_06.var_872A)) {
@@ -627,7 +627,7 @@ func_7FB4() {
     }
   }
 
-  var_01 method_8495("mp_raids_dlc4_halftrack_push", var_01.var_116, var_01.var_1D);
+  var_01 method_8495("mp_raids_dlc4_halftrack_push", var_01.origin, var_01.var_1D);
   lib_0378::func_8D74("aud_tank_push_truck", var_01);
 }
 
@@ -671,19 +671,19 @@ func_6C8C() {
 
 outro_vignette_allies_late_setup() {
   wait(10);
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 method_8512("thompson_mp", "bar_mp", "m1911_mp", "m1919_mp", "teslagunmtx_mp");
   }
 
   lib_04FF::func_6982("tank_escort");
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 method_8512("thompson_mp", "bar_mp", "m1911_mp", "m1919_mp", "teslagunmtx_mp");
   }
 }
 
 func_6C87(param_00) {
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 setscriptmotionblurparams(2, 1, 1);
       }
@@ -695,8 +695,8 @@ func_6C87(param_00) {
   level.var_A4B5["scaleX"] = 1;
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
       }
@@ -728,14 +728,14 @@ func_6C8D() {
   lib_0378::func_8D74("aud_allies_victory_sfx");
   level.outrovignette_ally_struct = spawnStruct();
   var_00 = common_scripts\utility::func_46B5("anim_allies_win_outro", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   var_03 = ["mp_raids_dlc4_ally_outro_guy1", "mp_raids_dlc4_ally_outro_guy2", "mp_raids_dlc4_ally_outro_guy3", "mp_raids_dlc4_ally_outro_guy4", "mp_raids_dlc4_ally_outro_guy5", "mp_raids_dlc4_ally_outro_guy6"];
   var_04 = [];
   var_05 = lib_0502::func_4627(game["attackers"]);
   foreach(var_09, var_07 in var_03) {
     var_08 = spawn("script_model", var_01);
-    var_08.var_1A7 = "allies";
+    var_08.team = "allies";
     if(var_09 >= var_05.size) {
       var_08.var_267E = [1, 1, 1, 1, 1, 1];
       var_08 setcostumemodels(var_08.var_267E, "allies");
@@ -773,8 +773,8 @@ func_6C8D() {
   var_0A setModel("vehicle_usa_tank_sherman_75mm_hatch");
   var_0A animscripts\notetracks_common::give_player_xp("mp_raids_dlc4_ally_outro_tank", var_01, var_02);
   foreach(var_0C in level.var_97C5) {
-    var_0C method_805C();
-    var_0C.var_9EDD method_805C();
+    var_0C save_undo_buffer();
+    var_0C.var_9EDD save_undo_buffer();
   }
 
   var_0E = getEnt("axis_outro_bell", "targetname");
@@ -824,8 +824,8 @@ func_6C8B() {
     var_05.var_9EDD method_805B();
   }
 
-  if(isDefined(level.var_744A)) {
-    foreach(var_08 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_08 in level.players) {
       if(isalive(var_08)) {
         var_08 vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
         var_08 setscriptmotionblurparams(0.35, 0, 0);
@@ -858,8 +858,8 @@ func_6C93() {
 }
 
 func_6C8E(param_00) {
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 setscriptmotionblurparams(2, 1, 1);
       }
@@ -871,8 +871,8 @@ func_6C8E(param_00) {
   level.var_A4B5["scaleX"] = 1;
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
       }
@@ -900,14 +900,14 @@ func_6C94() {
   level.outrovignette_axis_struct = spawnStruct();
   lib_0378::func_8D74("aud_axis_victory_sfx");
   var_00 = common_scripts\utility::func_46B5("anim_axis_win_outro", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   var_03 = ["mp_raids_dlc4_axis_outro_shot_01_ally_01", "mp_raids_dlc4_axis_outro_shot_01_ally_02", "mp_raids_dlc4_axis_outro_shot_01_ally_03", "mp_raids_dlc4_axis_outro_shot_01_ally_04", "mp_raids_dlc4_axis_outro_shot_01_ally_05", "mp_raids_dlc4_axis_outro_shot_01_ally_06"];
   var_04 = [];
   var_05 = lib_0502::func_4627(game["attackers"]);
   foreach(var_0A, var_07 in var_03) {
     var_08 = spawn("script_model", var_01);
-    var_08.var_1A7 = "allies";
+    var_08.team = "allies";
     var_09 = var_0A >= var_05.size || var_0A == 0;
     if(var_09) {
       var_08.var_267E = [1, 1, 1, 1, 1, 1];
@@ -926,7 +926,7 @@ func_6C94() {
   foreach(var_0A, var_0F in var_0C) {
     var_10 = "stg44_mp";
     var_08 = spawn("script_model", var_01);
-    var_08.var_1A7 = "axis";
+    var_08.team = "axis";
     if(var_0A >= var_0D.size) {
       var_08.var_267E = [2, 1, 2, 2, 2, 0];
       var_08 setcostumemodels(var_08.var_267E, "axis");
@@ -961,7 +961,7 @@ func_6C94() {
   }
 
   var_19 = getEnt("axis_outro_door", "targetname");
-  var_19 method_805C();
+  var_19 save_undo_buffer();
   level.outrovignette_axis_struct.ally_soldiers = var_04;
   level.outrovignette_axis_struct.axis_soldiers = var_0B;
   level.outrovignette_axis_struct.rope_models = var_14;
@@ -982,8 +982,8 @@ func_6C92() {
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
   level.var_A4B5["lerpDuration"] = 0.1;
-  if(isDefined(level.var_744A)) {
-    foreach(var_05 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_05 in level.players) {
       if(isalive(var_05)) {
         var_05 vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
         var_05 setscriptmotionblurparams(0.35, 0, 0);
@@ -1023,7 +1023,7 @@ func_7FCF() {
 
 func_7F89() {
   waittillframeend;
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   lib_04F4::func_863D("allies_A", "active", 5);
   lib_04F4::func_863D("axis_A", "active", 5);
   lib_04F4::func_863D("axis_B", "active", 5);
@@ -1090,7 +1090,7 @@ runbreachobjective() {
   setomnvar("ui_raid_objective_index_allies", 0);
   setomnvar("ui_raid_objective_index_axis", 3);
   lib_04FF::func_6972("breach");
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   lib_0502::func_86DE(lib_0501::func_4647("bomb_objectiveTime"), 1);
   lib_04FF::func_6982("breach");
   level notify("tank_move_to_tunnell");
@@ -1141,14 +1141,14 @@ randomizepickuplocation(param_00) {
     var_01 = "plans_location_b";
   }
 
-  var_02 = getEntArray(param_00.var_1A2, "targetname");
-  var_03 = common_scripts\utility::func_46B7(param_00.var_1A2, "targetname");
+  var_02 = getEntArray(param_00.target, "targetname");
+  var_03 = common_scripts\utility::func_46B7(param_00.target, "targetname");
   var_04 = common_scripts\utility::func_F73(var_02, var_03);
   var_04 = common_scripts\utility::func_F6F(var_04, param_00);
   var_05 = common_scripts\utility::func_46B5(var_01, "targetname");
-  var_06 = var_05.var_116 - param_00.var_116;
+  var_06 = var_05.origin - param_00.origin;
   foreach(var_08 in var_04) {
-    var_08.var_116 = var_08.var_116 + var_06;
+    var_08.origin = var_08.origin + var_06;
   }
 }
 
@@ -1169,7 +1169,7 @@ monitorsecretweaponunlock() {
 activatepickupbox(param_00) {
   var_01 = getEnt(param_00, "targetname");
   var_02 = common_scripts\utility::func_46B7("special_weapon", "targetname");
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     var_04 method_8512("teslagun_war_regular_mp");
   }
 
@@ -1202,7 +1202,7 @@ tankbreakables() {
 removebreakables(param_00) {
   var_01 = getEntArray(param_00, "targetname");
   foreach(var_03 in var_01) {
-    var_03 method_805C();
+    var_03 save_undo_buffer();
     var_03 notsolid();
   }
 }
@@ -1211,11 +1211,11 @@ func_1BB7(param_00) {
   var_01 = getEntArray(param_00, "targetname");
   var_02 = [];
   foreach(var_04 in var_01) {
-    if(!isDefined(var_04.var_165)) {
+    if(!isDefined(var_04.exitlevel)) {
       continue;
     }
 
-    switch (var_04.var_165) {
+    switch (var_04.exitlevel) {
       case "delete":
         var_04 delete();
         break;
@@ -1226,7 +1226,7 @@ func_1BB7(param_00) {
 
       case "animate_hide":
         func_1BB3(var_04, level.var_1BB5[param_00][var_04.var_81E1]);
-        var_04 common_scripts\utility::func_2CBE(1, ::method_805C);
+        var_04 common_scripts\utility::func_2CBE(1, ::save_undo_buffer);
         break;
 
       default:
@@ -1345,18 +1345,18 @@ func_1BB3(param_00, param_01) {
 }
 
 breakobjectdisconnectpathnodes(param_00) {
-  if(!isDefined(param_00) || !isDefined(param_00.var_1A5)) {
+  if(!isDefined(param_00) || !isDefined(param_00.targetname)) {
     return;
   }
 
-  if(param_00.var_1A5 != "break_objects_C" || !isDefined(param_00.var_116)) {
+  if(param_00.targetname != "break_objects_C" || !isDefined(param_00.origin)) {
     return;
   }
 
-  var_01 = getnodesinradius(param_00.var_116, 512, 0, 128, "Begin");
+  var_01 = getnodesinradius(param_00.origin, 512, 0, 128, "Begin");
   foreach(var_03 in var_01) {
-    if(isDefined(var_03.var_1A2)) {
-      var_04 = getnode(var_03.var_1A2, "targetname");
+    if(isDefined(var_03.target)) {
+      var_04 = getnode(var_03.target, "targetname");
       if(isDefined(var_04) && isDefined(var_03)) {
         disconnectnodepair(var_03, var_04);
       }
@@ -1381,7 +1381,7 @@ func_1BB6(param_00, param_01, param_02) {
     wait(param_02);
   }
 
-  param_00 setModel(level.var_1BB9[param_00.var_106]);
+  param_00 setModel(level.var_1BB9[param_00.model]);
   param_00 method_8278(param_01, "breakObject");
   param_00 thread func_1BB4();
 }
@@ -1417,7 +1417,7 @@ func_97DC(param_00, param_01) {
     return;
   }
 
-  if(isDefined(self.var_9696) && self.var_9696.var_1A5 == param_00) {
+  if(isDefined(self.var_9696) && self.var_9696.targetname == param_00) {
     self.var_9696.var_1A4.var_9827 = undefined;
     func_97B3();
     return;
@@ -1437,9 +1437,9 @@ func_97DC(param_00, param_01) {
 
   self.var_9734 = 1;
   self.var_9696 = spawnStruct();
-  self.var_9696.var_1A5 = param_00;
+  self.var_9696.targetname = param_00;
   self.var_9696.var_1A4 = var_03[0];
-  self.var_9696.var_9832 = var_03[0].var_116 + (0, 0, 75);
+  self.var_9696.var_9832 = var_03[0].origin + (0, 0, 75);
   self method_825B(self.var_9696.var_9832);
   self.var_9696.var_1A4 notify("tank_targeting_ent");
   self.var_9696.var_1A4.var_9827 = 1;
@@ -1489,7 +1489,7 @@ dontinterpolatesafe() {
 bellanimationthink() {
   thread finalebellthink();
   var_00 = common_scripts\utility::func_46B5("bell_arena_animorg", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   var_03 = getEnt("bell01", "targetname");
   var_03 animscripts\notetracks_common::give_player_xp("mp_raids_dlc4_bell_idle", var_01, var_02);
@@ -1531,7 +1531,7 @@ bellanimationthink() {
 
 finalebellthink() {
   var_00 = common_scripts\utility::func_46B5("anim_allies_win_outro", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   var_03 = getEnt("axis_outro_bell", "targetname");
   var_03 animscripts\notetracks_common::give_player_xp("mp_raids_dlc4_bell_idle_2", var_01, var_02);

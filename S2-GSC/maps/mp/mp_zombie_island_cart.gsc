@@ -72,10 +72,10 @@ get_transport_finishes_flag() {
 main() {
   precacherumble("damage_heavy");
   level.zmb_mine_cart_transport_requests = [];
-  common_scripts\utility::func_3C87("any_minecart_used");
-  common_scripts\utility::func_3C87("transport complete");
-  common_scripts\utility::func_3C87("flag_exposed_secret_entrance");
-  common_scripts\utility::func_3C87("flag_found_pommel_door");
+  common_scripts\utility::flag_init("any_minecart_used");
+  common_scripts\utility::flag_init("transport complete");
+  common_scripts\utility::flag_init("flag_exposed_secret_entrance");
+  common_scripts\utility::flag_init("flag_found_pommel_door");
   lib_0557::func_4BC9("flag_found_pommel_door", undefined, undefined, 1);
   level.valid_island_cart_destinations = ["start_zone", "mining_corner", "sub_pens_1_zone"];
   level.island_cart_structs = common_scripts\utility::func_46B7("mine_cart_struct", "targetname");
@@ -300,7 +300,7 @@ leave_station(param_00, param_01) {
     return;
   }
 
-  common_scripts\utility::func_3C8F("transport complete");
+  common_scripts\utility::flag_set("transport complete");
 }
 
 attach_players_to_transport(param_00, param_01, param_02) {
@@ -378,7 +378,7 @@ run_pomel_exit(param_00) {
   lib_0378::func_8D74("pagen_room_flush_begin");
   level thread common_scripts\_exploder::func_88E(216, [self]);
   wait(0.4);
-  pomel_launch(common_scripts\utility::func_7A33(param_00));
+  pomel_launch(common_scripts\utility::random(param_00));
   self.isflushing = 0;
   respawn_pommel_room_zombies_if_player_vacant();
 }
@@ -437,9 +437,9 @@ initialize_pomel_exits() {
 handle_pomel_detor() {
   var_00 = common_scripts\utility::func_46B7("zmb_island_secret_rock_exit_struct", "targetname");
   foreach(var_02 in var_00) {
-    common_scripts\utility::func_3C87(var_02.var_819A + "_bomb_placed");
+    common_scripts\utility::flag_init(var_02.var_819A + "_bomb_placed");
     if(!common_scripts\utility::func_3C83(var_02.var_819A + "_bomb_detonated")) {
-      common_scripts\utility::func_3C87(var_02.var_819A + "_bomb_detonated");
+      common_scripts\utility::flag_init(var_02.var_819A + "_bomb_detonated");
     }
 
     var_03 = common_scripts\utility::func_44BE(var_02.target, "targetname");
@@ -479,7 +479,7 @@ run_pomel_door_explosion() {
   thread wait_for_bomber_explosion();
   common_scripts\utility::func_3C9F(self.var_819A + "_bomb_detonated");
   level thread common_scripts\_exploder::func_88E(220);
-  common_scripts\utility::func_3C8F("flag_exposed_secret_entrance");
+  common_scripts\utility::flag_set("flag_exposed_secret_entrance");
   set_bomb_exploded();
   var_00 = spawnStruct();
   var_00.unlink_spawns = common_scripts\utility::func_46B7("zmb_isolated_room_spawns", "targetname");
@@ -490,7 +490,7 @@ run_pomel_door_explosion() {
     }
 
     if(!common_scripts\utility::func_3C77("flag_found_pommel_door")) {
-      maps\mp\_utility::func_2CED(1.4, ::common_scripts\utility::func_3C8F, "flag_found_pommel_door");
+      maps\mp\_utility::func_2CED(1.4, ::common_scripts\utility::flag_set, "flag_found_pommel_door");
     }
 
     level thread try_to_snag_players_from_cart(var_00);
@@ -569,7 +569,7 @@ wait_for_bomber_explosion() {
     var_01 = distance(var_03, var_02.origin);
   }
 
-  common_scripts\utility::func_3C8F(self.var_819A + "_bomb_detonated");
+  common_scripts\utility::flag_set(self.var_819A + "_bomb_detonated");
 }
 
 set_bomb_exploded(param_00) {
@@ -591,12 +591,12 @@ set_bomb_placed() {
 
 wait_for_bomb_placement() {
   self.bomb_trigger waittill("trigger", var_00);
-  common_scripts\utility::func_3C8F(self.var_819A + "_bomb_placed");
+  common_scripts\utility::flag_set(self.var_819A + "_bomb_placed");
 }
 
 wait_for_bomb_detonate(param_00) {
   param_00 waittill("damage");
-  common_scripts\utility::func_3C8F(self.var_819A + "_bomb_detonated");
+  common_scripts\utility::flag_set(self.var_819A + "_bomb_detonated");
 }
 
 initialize_lever() {
@@ -690,17 +690,17 @@ do_spider() {
   var_02 = getEnt(var_01.target, "targetname");
   var_03 = getEnt(var_02.target, "targetname");
   var_04 = [var_00, var_02];
-  var_01 method_8449(var_00);
-  var_02 method_8449(var_01);
-  var_03 method_8449(var_02);
+  var_01 linktosynchronizedparent(var_00);
+  var_02 linktosynchronizedparent(var_01);
+  var_03 linktosynchronizedparent(var_02);
   if(isDefined(var_03.target)) {
     var_05 = getEnt(var_03.target, "targetname");
-    var_05 method_8449(var_03);
+    var_05 linktosynchronizedparent(var_03);
   }
 
   wait(randomfloat(3));
   for(;;) {
-    var_06 = common_scripts\utility::func_7A33(var_04);
+    var_06 = common_scripts\utility::random(var_04);
     var_06 rotateroll(30, 0.25);
     wait(0.3);
     var_06 rotateroll(-30, 0.25);
@@ -1070,7 +1070,7 @@ attach_to_cart(param_00, param_01, param_02) {
   self playerlinkTo(level.zmb_island_artillery_sled);
   self.oncartride = 1;
   self.ignoreme = 1;
-  common_scripts\utility::func_3C8F("any_minecart_used");
+  common_scripts\utility::flag_set("any_minecart_used");
   self endon("enter_pomel");
   param_00 waittill("transport complete");
   set_has_left_cart(param_01, param_02);
@@ -1136,7 +1136,7 @@ do_cart_path(param_00, param_01) {
   level.zmb_island_artillery_sled common_scripts\utility::func_379C("zmb_island_cart_path_end_complete");
   maps / mp / mp_zombie_island_cart_station_functions::set_station_ready(param_00.var_819A);
   level.zmb_transport_system["current_station"] = param_00.var_819A;
-  common_scripts\utility::func_3C8F("transport complete");
+  common_scripts\utility::flag_set("transport complete");
   self notify("transport complete");
   level.zmb_island_artillery_sled notify("arrived at " + param_00.var_819A);
   maps / mp / mp_zombie_island_cart_station_functions::set_transport_light_states(self.var_819A, "deactivated", param_00.var_819A, "deactivated");
@@ -1344,7 +1344,7 @@ do_cart_zombie_spawns(param_00, param_01) {
   var_02[3] = 3;
   var_02[4] = 4;
   var_02[5] = 5;
-  var_03 = common_scripts\utility::func_7A33(var_02);
+  var_03 = common_scripts\utility::random(var_02);
   var_04 = 0;
   if(var_03 == 0) {
     return;
@@ -1560,7 +1560,7 @@ get_cart_path_from(param_00) {
 }
 
 get_random_destination(param_00) {
-  param_00 = common_scripts\utility::func_F92(param_00);
+  param_00 = common_scripts\utility::array_randomize(param_00);
   var_01 = ["secret_room_zone", "pack_a_punch_opened", "pack_a_punch_exit"];
   for(var_02 = 0; var_02 < param_00.size; var_02++) {
     if(common_scripts\utility::func_562E(param_00[var_02].cart_activated) && !common_scripts\utility::func_F79(var_01, param_00[var_02].var_819A)) {

@@ -39,14 +39,14 @@ func_51D0() {
   var_00.var_6F48 = 0;
   var_00.var_8BB1 = 0;
   var_00.var_7F0E = 176;
-  var_00.var_99DA = 0;
+  var_00.time = 0;
   var_00.var_4895 = 5;
   var_00.var_7F12 = 0;
   var_00.var_57CC = 0;
   var_00.var_A48D = loadfx("vfx/props/holo_target_red_spawn_in");
   var_00.var_A48E = loadfx("vfx/props/holo_target_red_spawn_out");
   var_00.var_A48C = loadfx("vfx/beam/firing_range_edge_glow");
-  common_scripts\utility::func_0FB2(var_00.var_0C3B, ::func_9DAD);
+  common_scripts\utility::array_thread(var_00.var_0C3B, ::func_9DAD);
   level.var_9804 = (1.3, 0, 25);
   level.var_9817 = 12;
   level.var_4DD0 = 18;
@@ -66,7 +66,7 @@ func_3C32() {
 func_3C2E() {
   var_00 = getEntArray("display_3dui_mesh", "targetname");
   foreach(var_02 in var_00) {
-    var_02 method_805C();
+    var_02 save_undo_buffer();
   }
 
   return var_00;
@@ -155,7 +155,7 @@ func_9838(param_00) {
   var_02 solid();
   var_02 setCanDamage(1);
   var_02 setdamagecallbackon(1);
-  var_02.var_29B5 = ::func_6378;
+  var_02.damagecallback = ::func_6378;
   var_02.var_00BC = 9999;
   var_02.var_00FB = 9999;
   foreach(var_04 in level.var_3C3B.var_0C39) {
@@ -451,7 +451,7 @@ func_4591(param_00, param_01, param_02) {
   var_05 = strtok(param_00, "_");
   var_06 = var_05[0];
   if(param_00 != "specialty_null" && param_00 != "none" && param_00 != "combatknife_mp") {
-    if(maps\mp\gametypes\_class::func_5835(var_06) || maps\mp\gametypes\_class::func_5839(var_06, 0)) {
+    if(maps\mp\gametypes\_class::isvalidprimary(var_06) || maps\mp\gametypes\_class::isvalidsecondary(var_06, 0)) {
       if(param_01 == "tag_head") {
         var_03 = "head";
       } else if(param_01 == "tag_chest") {
@@ -632,7 +632,7 @@ func_9301(param_00) {
   level notify("start_round");
   level.var_3C3B.var_29BB = 0;
   level.var_3C3B.var_7A64 = 0;
-  level.var_3C3B.var_99DA = 0;
+  level.var_3C3B.time = 0;
   level.var_3C3B.var_7F12 = 1;
   level.var_3C3B.var_8BB1 = 1;
   self setclientomnvar("ui_vlobby_round_distance", level.var_3C3B.var_7A64);
@@ -750,7 +750,7 @@ func_4D11(param_00) {
   level endon("shutdown_hologram");
   foreach(var_02 in param_00) {
     if(isDefined(var_02) && !function_0279(var_02)) {
-      var_02 method_805C();
+      var_02 save_undo_buffer();
       var_02 notsolid();
     }
   }
@@ -761,7 +761,7 @@ func_4D19() {
     level.var_3C3B.var_9C7C = common_scripts\utility::func_0F97(level.var_3C3B.var_9C7C);
     foreach(var_01 in level.var_3C3B.var_9C7C) {
       if(isDefined(var_01) && !function_0279(var_01)) {
-        var_01 method_805C();
+        var_01 save_undo_buffer();
         var_01 notsolid();
       }
     }
@@ -837,7 +837,7 @@ func_8C35(param_00, param_01) {
   param_01 setclientomnvar("ui_vlobby_round_accuracy", 0);
   param_01 thread func_4864(1);
   foreach(var_03 in level.var_3C3B.var_0BDC[param_00]) {
-    var_03 method_805C();
+    var_03 save_undo_buffer();
     var_03 notsolid();
   }
 
@@ -859,18 +859,18 @@ func_8C35(param_00, param_01) {
       var_08.var_0B6E method_81D3();
       var_08.var_0116 = var_08.var_6C4F;
       var_08.var_001D = var_08.var_6C4D;
-      var_08.var_0B6E method_805C();
+      var_08.var_0B6E save_undo_buffer();
       var_08.var_0B6E notsolid();
-      var_08 method_805C();
+      var_08 save_undo_buffer();
       var_08 notsolid();
-      var_08.var_A580 method_805C();
+      var_08.var_A580 save_undo_buffer();
       var_08.var_A580 notsolid();
       var_08.var_0BC0 = 0;
     }
   }
 
   foreach(var_0E in level.var_3C3B.var_0BD8) {
-    var_0E method_805C();
+    var_0E save_undo_buffer();
   }
 
   level.var_3C3B.var_621E = undefined;
@@ -956,22 +956,22 @@ func_A673(param_00, param_01) {
   param_01 thread maps\mp\hub_vl_base::func_3639();
   level.var_3C3B.var_8F41 = [];
   param_01 thread func_8087();
-  if(maps\mp\gametypes\_class::func_5826(maps\mp\_utility::func_44CD(param_01.var_5DF5), 0) && !maps\mp\gametypes\_class::func_5682(param_01.var_5DF5.var_48CA)) {
+  if(maps\mp\gametypes\_class::func_5826(maps\mp\_utility::func_44CD(param_01.var_5DF5), 0) && !maps\mp\gametypes\_class::func_5682(param_01.var_5DF5.guid)) {
     param_01 thread func_6311(maps\mp\_utility::func_44CD(param_01.var_5DF5), 0);
   }
 
-  if(maps\mp\gametypes\_class::func_5826(maps\mp\_utility::func_44CD(param_01.var_5DF8), 0) && !maps\mp\gametypes\_class::func_5682(param_01.var_5DF8.var_48CA)) {
+  if(maps\mp\gametypes\_class::func_5826(maps\mp\_utility::func_44CD(param_01.var_5DF8), 0) && !maps\mp\gametypes\_class::func_5682(param_01.var_5DF8.guid)) {
     param_01 thread func_6311(maps\mp\_utility::func_44CD(param_01.var_5DF8), 1);
   }
 
-  if(param_01.var_7704 != "specialty_null" && param_01.var_7704 != "none" && param_01.var_7704 != "combatknife_mp" && !issubstr(param_01.var_7704, "em1") && !issubstr(param_01.var_7704, "epm3") && !issubstr(param_01.var_7704, "dlcgun1_mp") && !issubstr(param_01.var_7704, "dlcgun1loot")) {
-    param_01 thread func_635E(param_01.var_7704);
-    if(issubstr(param_01.var_7704, "_gl")) {
-      param_01 thread func_635E("alt_" + param_01.var_7704);
+  if(param_01.primaryweapon != "specialty_null" && param_01.primaryweapon != "none" && param_01.primaryweapon != "combatknife_mp" && !issubstr(param_01.primaryweapon, "em1") && !issubstr(param_01.primaryweapon, "epm3") && !issubstr(param_01.primaryweapon, "dlcgun1_mp") && !issubstr(param_01.primaryweapon, "dlcgun1loot")) {
+    param_01 thread func_635E(param_01.primaryweapon);
+    if(issubstr(param_01.primaryweapon, "_gl")) {
+      param_01 thread func_635E("alt_" + param_01.primaryweapon);
     }
   }
 
-  if(param_01.var_835A != "specialty_null" && param_01.var_835A != "none" && param_01.var_835A != "combatknife_mp" && !issubstr(param_01.var_835A, "em1") && !issubstr(param_01.var_835A, "epm3") && !issubstr(param_01.var_7704, "dlcgun1_mp") && !issubstr(param_01.var_7704, "dlcgun1loot")) {
+  if(param_01.var_835A != "specialty_null" && param_01.var_835A != "none" && param_01.var_835A != "combatknife_mp" && !issubstr(param_01.var_835A, "em1") && !issubstr(param_01.var_835A, "epm3") && !issubstr(param_01.primaryweapon, "dlcgun1_mp") && !issubstr(param_01.primaryweapon, "dlcgun1loot")) {
     param_01 thread func_635E(param_01.var_835A);
     if(issubstr(param_01.var_835A, "_gl")) {
       param_01 thread func_635E("alt_" + param_01.var_835A);
@@ -1018,26 +1018,26 @@ func_089E(param_00) {
 func_63EE(param_00) {
   level endon("shutdown_hologram");
   level endon("round_done");
-  var_01 = maps\mp\_utility::func_46E3();
+  var_01 = maps\mp\_utility::gettimepassed();
   for(;;) {
-    var_02 = maps\mp\_utility::func_46E3();
+    var_02 = maps\mp\_utility::gettimepassed();
     var_03 = var_02 - var_01;
     var_04 = common_scripts\utility::func_7F03(var_03 / 1000, 1);
     if(var_04 > 9999.9) {
-      level.var_3C3B.var_99DA = 0;
-      param_00 setclientomnvar("ui_vlobby_round_timer", level.var_3C3B.var_99DA);
+      level.var_3C3B.time = 0;
+      param_00 setclientomnvar("ui_vlobby_round_timer", level.var_3C3B.time);
       param_00 setclientomnvar("ui_vlobby_round_state", 0);
       thread func_8C35(level.var_3C3B.var_7F1F, param_00);
       return;
     } else if(var_04 < 0) {
-      level.var_3C3B.var_99DA = 0;
-      param_00 setclientomnvar("ui_vlobby_round_timer", level.var_3C3B.var_99DA);
+      level.var_3C3B.time = 0;
+      param_00 setclientomnvar("ui_vlobby_round_timer", level.var_3C3B.time);
       param_00 setclientomnvar("ui_vlobby_round_state", 0);
       thread func_8C35(level.var_3C3B.var_7F1F, param_00);
       return;
     } else {
-      level.var_3C3B.var_99DA = var_04;
-      param_00 setclientomnvar("ui_vlobby_round_timer", level.var_3C3B.var_99DA);
+      level.var_3C3B.time = var_04;
+      param_00 setclientomnvar("ui_vlobby_round_timer", level.var_3C3B.time);
     }
 
     wait 0.05;
@@ -1100,9 +1100,9 @@ func_9000(param_00, param_01, param_02) {
   var_03 = maps\mp\agents\_agents::func_0933("player", game["defenders"], undefined, param_00, param_01, undefined, undefined, 0, undefined, undefined);
   if(isDefined(var_03)) {
     var_04 = 1;
-    var_03 method_8528(var_04, maps\mp\_utility::func_45DE(param_02.var_01A7));
+    var_03 method_8528(var_04, maps\mp\_utility::getotherteam(param_02.var_01A7));
     var_03 method_83E1("cloth");
-    var_03 func_861F(var_04, maps\mp\_utility::func_45DE(param_02.var_01A7));
+    var_03 func_861F(var_04, maps\mp\_utility::getotherteam(param_02.var_01A7));
   }
 
   return var_03;
@@ -1323,8 +1323,8 @@ func_80A5() {
   for(;;) {
     var_00 = [];
     for(var_01 = 0; var_01 < self.var_4DDE.size; var_01++) {
-      self.var_4DDE[var_01].var_99DA = self.var_4DDE[var_01].var_99DA - 1;
-      if(self.var_4DDE[var_01].var_99DA > 0) {
+      self.var_4DDE[var_01].time = self.var_4DDE[var_01].time - 1;
+      if(self.var_4DDE[var_01].time > 0) {
         var_00[var_00.size] = self.var_4DDE[var_01];
       }
     }
@@ -1439,7 +1439,7 @@ func_3C30() {
   var_00 = getEntArray("round_environment", "targetname");
   var_01 = [];
   foreach(var_03 in var_00) {
-    var_03 method_805C();
+    var_03 save_undo_buffer();
     var_03 notsolid();
     var_04 = undefined;
     if(isDefined(var_03.var_81E1)) {
@@ -1492,23 +1492,23 @@ func_3C36() {
     var_03.var_01A7 = "axis";
     var_03.var_6C3E = getEnt(var_03.var_01A2, "targetname");
     var_03.var_0B6E = getEnt(var_03.var_6C3E.var_01A2, "targetname");
-    var_03.var_0B6E method_8449(var_03);
+    var_03.var_0B6E linktosynchronizedparent(var_03);
     var_03.var_0B6E.var_012C["team"] = "axis";
     var_03.var_0B6E.var_01A7 = "axis";
     if(isDefined(var_03.var_0B6E.var_01A2)) {
       var_03.var_A580 = getEnt(var_03.var_0B6E.var_01A2, "targetname");
-      var_03.var_A580 method_8449(var_03);
+      var_03.var_A580 linktosynchronizedparent(var_03);
     } else {
       var_03.var_A580 = var_03;
     }
 
     var_03.var_6C4F = var_03.var_0116;
     var_03.var_6C4D = var_03.var_001D;
-    var_03.var_0B6E method_805C();
+    var_03.var_0B6E save_undo_buffer();
     var_03.var_0B6E notsolid();
-    var_03 method_805C();
+    var_03 save_undo_buffer();
     var_03 notsolid();
-    var_03.var_A580 method_805C();
+    var_03.var_A580 save_undo_buffer();
     var_03.var_A580 notsolid();
     if(isDefined(var_03.var_81E1)) {
       var_04 = int(var_03.var_81E1);
@@ -1559,7 +1559,7 @@ func_9802() {
 
 func_9819() {
   self setCanDamage(0);
-  self method_805C();
+  self save_undo_buffer();
   self notsolid();
   self.var_0BC0 = 0;
   if(isDefined(self.var_0B6E)) {
@@ -1567,7 +1567,7 @@ func_9819() {
   }
 
   if(isDefined(self.var_A580)) {
-    self.var_A580 method_805C();
+    self.var_A580 save_undo_buffer();
   }
 }
 
@@ -1623,7 +1623,7 @@ func_6311(param_00, param_01) {
   self endon("enter_lobby");
   while(level.var_50CA == 1) {
     wait(1.5);
-    var_02 = self method_817F(param_00);
+    var_02 = self getammocount(param_00);
     if(var_02 == 0) {
       maps\mp\gametypes\_class::func_479F(param_00);
       continue;
@@ -1664,7 +1664,7 @@ func_4D1A(param_00, param_01) {
     if(isDefined(var_04.var_003A) && var_04.var_003A == "script_model") {
       if(isDefined(var_04.var_0106) && issubstr(var_04.var_0106, "rec_holo_range")) {
         if(isstring(param_01[var_02])) {
-          var_04 method_805C();
+          var_04 save_undo_buffer();
           var_04 setModel(param_01[var_02]);
         }
       }

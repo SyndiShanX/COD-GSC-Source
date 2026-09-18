@@ -49,7 +49,7 @@ func_8E75(param_00, param_01, param_02) {
   var_04 = 1;
   if(param_00 == "begin") {
     var_03 method_85A7("snd_zmb_player_is_speaking", 1);
-    var_03 method_8626("zmb_mute_player_vox", 0);
+    var_03 setaltsceneobj("zmb_mute_player_vox", 0);
     var_04 = var_03 sndx_get_threat_dialog_volume();
   } else if(param_00 == "end") {
     var_03 method_85A7("snd_zmb_player_is_speaking", 0);
@@ -258,7 +258,7 @@ func_8E00(param_00) {
   if(isDefined(level.players) && level.players.size > 0) {
     foreach(var_02 in level.players) {
       if(isDefined(var_02)) {
-        var_02 method_8626(param_00);
+        var_02 setaltsceneobj(param_00);
         wait 0.05;
       }
     }
@@ -267,9 +267,9 @@ func_8E00(param_00) {
 
 func_7247() {
   self method_85A7("ClientScriptInit", "zombies");
-  self method_8626("zmb_init_mix");
-  self method_8626("zmb_init_overrides_mix");
-  self method_8626("zmb_headroom_mix");
+  self setaltsceneobj("zmb_init_mix");
+  self setaltsceneobj("zmb_init_overrides_mix");
+  self setaltsceneobj("zmb_headroom_mix");
   func_8E45();
   thread func_8E21();
   thread func_8E1C();
@@ -409,7 +409,7 @@ func_7A83() {
 }
 
 func_7A82() {
-  lib_0380::func_2893(level.var_11CB.var_9570, 0.25);
+  lib_0380::_stoplocalsound(level.var_11CB.var_9570, 0.25);
   level.var_11CB.var_9570 = undefined;
 }
 
@@ -449,10 +449,10 @@ func_690B(param_00) {
   }
 
   if(isDefined(self.var_71D.var_690C)) {
-    lib_0380::func_2893(self.var_71D.var_690C, 1);
+    lib_0380::_stoplocalsound(self.var_71D.var_690C, 1);
     self.var_71D.var_690C = undefined;
   } else {
-    self method_8626("zmb_objective_complete_mix");
+    self setaltsceneobj("zmb_objective_complete_mix");
   }
 
   var_01 = level.var_71D.var_690D[randomint(level.var_71D.var_690D.size)];
@@ -1286,7 +1286,7 @@ sndx_monitor_num_players_in_combat(param_00) {
     var_01 = 0;
     var_02 = 0;
     foreach(var_04 in level.players) {
-      if(maps\mp\_utility::func_57A0(var_04)) {
+      if(maps\mp\_utility::isreallyalive(var_04)) {
         if(lib_0547::func_577E(var_04)) {
           var_02 = 1;
           continue;
@@ -1723,7 +1723,7 @@ func_93BD(param_00) {
   if(isDefined(param_00.var_8E52)) {
     var_01 = 3;
     var_02 = param_00.var_8E52;
-    lib_0380::func_2893(var_02, var_01);
+    lib_0380::_stoplocalsound(var_02, var_01);
     param_00.var_8E52 = undefined;
   }
 }
@@ -1785,7 +1785,7 @@ assassin_use_camoflage() {
 
 strt_asn_camo_blur(param_00) {
   var_01 = self;
-  var_01 method_8626("zmb_blurry_vision");
+  var_01 setaltsceneobj("zmb_blurry_vision");
   var_01.var_71D.blurry_vision_snd = lib_0380::func_6840("zmb_blurry_vision", var_01, 0.2);
 }
 
@@ -1825,7 +1825,7 @@ func_9D22() {
 
 func_9D21() {
   var_00 = self;
-  lib_0380::func_2893(level.var_11CB.var_9D36);
+  lib_0380::_stoplocalsound(level.var_11CB.var_9D36);
   level.var_11CB.var_9D36 = undefined;
 }
 

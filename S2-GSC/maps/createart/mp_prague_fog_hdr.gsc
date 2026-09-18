@@ -4,8 +4,8 @@
 ************************************************/
 
 func_00F9() {
-  var_00 = maps\mp\_art::func_27C6("mp_prague");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_prague");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.371731, 0.44957, 0.573272);
   var_00.var_1108 = (0.328245, 0.205416, 0.0184965);
@@ -48,8 +48,8 @@ func_00F9() {
   var_00.var_1119 = 81.8526;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_prague_underwater");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_prague_underwater");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.777604, 0.647145, 0.517099);
   var_00.var_1108 = (0.794761, 0.857735, 0.936416);
@@ -92,8 +92,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 28.9794;
-  var_00 = maps\mp\_art::func_27C6("mp_prague_osp");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_prague_osp");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -136,8 +136,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_prague_drone");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_prague_drone");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -180,8 +180,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_prague_warbird");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_prague_warbird");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -224,8 +224,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("dna_bomb");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("dna_bomb");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.371731, 0.159441, 0.0813162);
   var_00.var_1108 = (0.328245, 0.194508, 0.135914);
@@ -268,8 +268,8 @@ func_00F9() {
   var_00.var_1119 = 81.8526;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("");
+  var_00.transitiontime = 0;
   var_00.var_1105 = 0;
   var_00.var_110E = 0;
   var_00.var_110F = 0;
@@ -294,8 +294,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_prague_killstreak");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_prague_killstreak");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.356283, 0.408895, 0.456084);
   var_00.var_1108 = (0.586057, 0.57828, 0.405657);
@@ -338,8 +338,8 @@ func_00F9() {
   var_00.var_1119 = 81.8526;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_countdown");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_countdown");
+  var_00.transitiontime = 0;
   var_00.var_1105 = 0;
   var_00.var_110E = 0;
   var_00.var_110F = 0;

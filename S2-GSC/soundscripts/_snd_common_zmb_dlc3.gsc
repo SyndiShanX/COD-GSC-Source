@@ -139,7 +139,7 @@ dlc3_player_repair_start(param_00, param_01) {
 
 dlc3_player_repair_stop(param_00) {
   if(isDefined(level.var_11CB.repair_wrench_snd)) {
-    lib_0380::func_2893(level.var_11CB.repair_wrench_snd, 0.1);
+    lib_0380::_stoplocalsound(level.var_11CB.repair_wrench_snd, 0.1);
     level.var_11CB.repair_wrench_snd = undefined;
   }
 }
@@ -182,7 +182,7 @@ dlc3_stop_escape_music(param_00) {
 dlc3_play_escape_complete_stinger(param_00) {
   if(!isDefined(self.playing_escape_complete_stinger)) {
     self.playing_escape_complete_stinger = 1;
-    self method_8626("dlc3_escape_complete_stinger", 4);
+    self setaltsceneobj("dlc3_escape_complete_stinger", 4);
     lib_0380::func_2888("dlc3_escape_complete_stinger_01", self);
     wait(param_00);
     self method_8627("dlc3_escape_complete_stinger", 4);
@@ -213,7 +213,7 @@ dlc3_magic_poof(param_00) {
 }
 
 dlc3_altered_state_init() {
-  self method_8626("dlc3_pre_altered_state");
+  self setaltsceneobj("dlc3_pre_altered_state");
 }
 
 dlc3_altered_state_fade() {
@@ -252,7 +252,7 @@ dlc3_altered_state_apply(param_00, param_01) {
     var_02 = ["zmb_mus_creepy_amb_lp_01", "zmb_mus_creepy_amb_lp_02", "zmb_mus_creepy_amb_lp_03", "zmb_mus_creepy_amb_lp_04", "zmb_mus_creepy_amb_lp_05", "zmb_mus_creepy_amb_lp_06"];
     lib_0366::func_8E31(var_02[randomint(var_02.size)], 4);
     var_03 = "dlc3_altered_state" + param_00;
-    self method_8626(var_03, 3);
+    self setaltsceneobj(var_03, 3);
     self.var_11CB.dlc3_altered_state_submix = var_03;
     param_01 = lib_0378::func_8D49("altered_state_end", param_01);
     self waittill(param_01);
@@ -362,7 +362,7 @@ dlc_handle_bob_killed_music() {
 }
 
 dlc_play_boss_killed_stinger() {
-  self method_8626("bob_death_stinger", 0.2);
+  self setaltsceneobj("bob_death_stinger", 0.2);
   lib_0380::func_2888("mus_bob_death_stinger", self);
   wait(10);
   self method_8627("bob_death_stinger", 4);
@@ -477,7 +477,7 @@ dlc3_rune_jolt_absorb() {
 }
 
 dlc3_player_spawned() {
-  self method_8626("dlc3_default_mix");
+  self setaltsceneobj("dlc3_default_mix");
   lib_0366::snd_zmb_set_plr_vox_scare_count_max(0);
 }
 
@@ -541,7 +541,7 @@ dlc3_wave_mus_switcher() {
 
     if(!var_13 && var_11 - var_08 > var_14 && var_12 <= var_05 && var_0C) {
       var_0C = 0;
-      var_00 method_8626("dlc3_plr_idle_mus_fade", var_0E);
+      var_00 setaltsceneobj("dlc3_plr_idle_mus_fade", var_0E);
     } else if(!var_0C && var_13 || var_12 > var_05 && var_11 - var_09 > var_14 * 0.5) {
       var_0C = 1;
       var_00 method_8627("dlc3_plr_idle_mus_fade", var_0D);

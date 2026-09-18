@@ -28,7 +28,7 @@ tryusebasictrainingserum(param_00) {
 }
 
 tryusebasictrainingseruminternal() {
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     if(!isDefined(self.raidserumactive) || !self.raidserumactive) {
       maps\mp\_matchdata::func_5E9A("basic_training_serum", self.origin);
       self.pers["basicTrainingSerumsUsed"]++;
@@ -56,7 +56,7 @@ startcombatbuff() {
   maps\mp\gametypes\_weapons::func_A13B();
   foreach(var_01 in level.basictrainingserumperks) {
     if(!maps\mp\_utility::_hasperk(var_01)) {
-      maps\mp\_utility::func_47A2(var_01);
+      maps\mp\_utility::giveperk(var_01);
     }
   }
 

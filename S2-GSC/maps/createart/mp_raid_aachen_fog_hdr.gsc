@@ -4,8 +4,8 @@
 *****************************************************/
 
 func_00F9() {
-  var_00 = maps\mp\_art::func_27C6("mp_raid_aachen");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_raid_aachen");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.0433495, 0.0604185, 0.09375);
   var_00.var_1108 = (0.166557, 0.125519, 0.0390625);
@@ -48,8 +48,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_raid_aachen_killstreak");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_raid_aachen_killstreak");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (1, 0.957032, 0.914063);
   var_00.var_1108 = (1, 0.9345, 0.869);
@@ -92,8 +92,8 @@ func_00F9() {
   var_00.var_1119 = 18.67;
   var_00.var_111A = 8.95145;
   var_00.var_1121 = 28.9794;
-  var_00 = maps\mp\_art::func_27C6("mp_raid_aachen_underwater");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_raid_aachen_underwater");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 0;
   var_00.var_1128 = (0.891419, 0.891419, 0.891419);
   var_00.var_1108 = (0.955511, 0.955511, 0.955511);
@@ -136,8 +136,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_raid_aachen_osp");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_raid_aachen_osp");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -180,8 +180,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_raid_aachen_drone");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_raid_aachen_drone");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -224,8 +224,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_raid_aachen_warbird");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_raid_aachen_warbird");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -268,8 +268,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("dna_bomb");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("dna_bomb");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.30495, 0.992188, 0.0390625);
   var_00.var_1108 = (0.328125, 1, 0);
@@ -312,8 +312,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("dna_bomb_cg");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("dna_bomb_cg");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 0;
   var_00.var_1128 = (0.484637, 0.920391, 0.255807);
   var_00.var_1108 = (1, 0.778993, 0.417681);
@@ -356,8 +356,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 0;
   var_00.var_1128 = (0.484637, 0.920391, 0.255807);
   var_00.var_1108 = (1, 0.778993, 0.417681);

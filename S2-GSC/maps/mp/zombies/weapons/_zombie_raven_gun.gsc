@@ -5,7 +5,7 @@
 
 init() {
   level.ravengunisactive = 0;
-  common_scripts\utility::func_3C87("flag_outlaw_raven_puzzle_complete");
+  common_scripts\utility::flag_init("flag_outlaw_raven_puzzle_complete");
   common_scripts\utility::func_3C9F("flag_outlaw_raven_puzzle_complete");
   thread raven_gun_delayed_init();
   lib_054D::func_7BC6(::raven_gun_check_for_crit);

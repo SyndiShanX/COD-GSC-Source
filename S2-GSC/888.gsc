@@ -31,23 +31,23 @@ func_A8E4() {
         foreach(var_01 in level.players) {
           var_01 method_8628(0.5);
           wait 0.05;
-          var_01 method_8626("mp_init_mix");
+          var_01 setaltsceneobj("mp_init_mix");
         }
       } else if(getdvarint("e3_trailer_submix", 0) == 1) {
         foreach(var_01 in level.players) {
           var_01 method_8628(0.5);
           wait 0.05;
-          var_01 method_8626("mp_init_mix");
+          var_01 setaltsceneobj("mp_init_mix");
           wait 0.05;
-          var_01 method_8626("mp_e3_trailer_mix_no_vox");
+          var_01 setaltsceneobj("mp_e3_trailer_mix_no_vox");
         }
       } else if(getdvarint("e3_trailer_submix", 0) == 2) {
         foreach(var_01 in level.players) {
           var_01 method_8628(0.5);
           wait 0.05;
-          var_01 method_8626("mp_init_mix");
+          var_01 setaltsceneobj("mp_init_mix");
           wait 0.05;
-          var_01 method_8626("mp_e3_trailer_mix_vox");
+          var_01 setaltsceneobj("mp_e3_trailer_mix_vox");
         }
       }
     }
@@ -480,7 +480,7 @@ func_7209(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 
 func_8D0B(param_00) {
   foreach(var_02 in level.players) {
-    var_02 method_8626(param_00);
+    var_02 setaltsceneobj(param_00);
   }
 }
 
@@ -498,7 +498,7 @@ func_8D0C(param_00, param_01) {
   }
 
   foreach(var_03 in param_01) {
-    var_03 method_8626(param_00);
+    var_03 setaltsceneobj(param_00);
   }
 }
 
@@ -621,7 +621,7 @@ func_3087(param_00, param_01, param_02, param_03, param_04) {
   var_05.var_90BE = param_01;
   var_05.var_5DD0 = param_02;
   var_05.var_90C0 = func_307B(param_01.var_20D8);
-  var_05.var_7734 = func_8D49(0, param_03);
+  var_05.priority = func_8D49(0, param_03);
   var_05.var_1F18 = func_8D49(0, param_04);
   var_05.var_3220 = param_00 + "_" + func_8D86();
   return var_05;

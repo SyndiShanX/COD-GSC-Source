@@ -248,7 +248,7 @@ func_A12D(param_00, param_01, param_02, param_03) {
     if(isDefined(param_03)) {
       var_08 = param_03;
     } else {
-      var_08 = maps / mp / agents / humanoid / _humanoid_util::func_4580() - self.var_14F;
+      var_08 = maps / mp / agents / humanoid / _humanoid_util::func_4580() - self.radius;
     }
 
     var_09 = var_07 - var_04;
@@ -277,7 +277,7 @@ func_A12D(param_00, param_01, param_02, param_03) {
     }
 
     self scragentsetorientmode("face enemy");
-    self method_83A4(self.origin, var_07, var_05);
+    self selected_fx_option_index(self.origin, var_07, var_05);
     wait(var_06);
     var_05 = var_05 - var_06;
   }

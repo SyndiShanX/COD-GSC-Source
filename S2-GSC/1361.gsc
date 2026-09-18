@@ -48,12 +48,12 @@ func_44E4() {
 
 func_3D50(param_00) {
   level endon("kill flashlight");
-  if(!isDefined(level.var_611["zmb_player_attached_light"])) {
-    level.var_611["zmb_player_attached_light"] = loadfx("vfx/lights/mp_zombie_nest/zmb_player_attached_light");
+  if(!isDefined(level._effect["zmb_player_attached_light"])) {
+    level._effect["zmb_player_attached_light"] = loadfx("vfx/lights/mp_zombie_nest/zmb_player_attached_light");
   }
 
-  level.var_611["zmb_player_attached_light_far"] = loadfx("vfx/lights/mp_zombie_nest/zmb_player_attached_light_far");
-  level.var_611["zmb_player_attached_light_stealth"] = loadfx("vfx/lights/mp_zombie_nest/zmb_player_attached_light_stealth");
+  level._effect["zmb_player_attached_light_far"] = loadfx("vfx/lights/mp_zombie_nest/zmb_player_attached_light_far");
+  level._effect["zmb_player_attached_light_stealth"] = loadfx("vfx/lights/mp_zombie_nest/zmb_player_attached_light_stealth");
   level.var_3D4F = ["zmb_player_attached_light", "zmb_player_attached_light_far", "zmb_player_attached_light_stealth"];
   level.var_28F8 = 0;
   if(common_scripts\utility::func_562E(param_00)) {

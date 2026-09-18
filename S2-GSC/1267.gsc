@@ -39,13 +39,13 @@ func_791F() {
 func_7920() {
   var_00 = self;
   var_00 waittill("spawned_player");
-  if(maps\mp\_utility::func_3FA0("prematch_waitforplayers_done") == 0) {
-    maps\mp\_utility::func_3FA5("prematch_waitforplayers_done");
+  if(maps\mp\_utility::gameflag("prematch_waitforplayers_done") == 0) {
+    maps\mp\_utility::gameflagwait("prematch_waitforplayers_done");
   }
 
-  var_01 = self.var_1A7;
+  var_01 = self.team;
   if(game["switchedsides"] == 1) {
-    var_01 = maps\mp\_utility::func_45DE(var_01);
+    var_01 = maps\mp\_utility::getotherteam(var_01);
   }
 
   var_02 = isDefined(var_01) == 1 && var_01 == "allies" || var_01 == "axis";
@@ -55,8 +55,8 @@ func_7920() {
 
   if(isDefined(var_01) == 1 && var_02 == 1) {
     var_03 = 0;
-    if(isDefined(level.var_54D0) && isDefined(level.var_54D0[var_01].var_9309) == 1) {
-      var_04 = level.var_54D0[var_01].var_9309;
+    if(isDefined(level.var_54D0) && isDefined(level.var_54D0[var_01].starttime) == 1) {
+      var_04 = level.var_54D0[var_01].starttime;
       var_05 = gettime();
       var_06 = var_05 - var_04;
       if(var_06 < 10000) {
@@ -205,10 +205,10 @@ raidmusiconteam(param_00, param_01, param_02) {
   if(var_06 == 1) {
     if(param_00 == "attackers" || param_00 == "defenders") {
       param_00 = game[param_00];
-      var_03 = maps\mp\_utility::func_45DE(param_00);
+      var_03 = maps\mp\_utility::getotherteam(param_00);
     } else {
       var_03 = param_00;
-      param_00 = maps\mp\_utility::func_45DE(var_03);
+      param_00 = maps\mp\_utility::getotherteam(var_03);
     }
 
     var_04 = game["music"][param_01];
@@ -218,7 +218,7 @@ raidmusiconteam(param_00, param_01, param_02) {
       param_00 = game[param_00];
     }
 
-    var_03 = maps\mp\_utility::func_45DE(param_00);
+    var_03 = maps\mp\_utility::getotherteam(param_00);
     var_04 = game["music"][param_01];
     var_05 = game["music"][param_02];
   }
@@ -243,7 +243,7 @@ raidmusicobjectivecomplete() {
       level._warcountdownmusictime = undefined;
     }
 
-    var_03 = level.var_744A;
+    var_03 = level.players;
     raidmusiconteam("attackers", "objective_gained", "objective_lost");
     foreach(var_05 in var_03) {
       var_05 maps\mp\_audio_submixes::func_8A9D("mp_war_objective", 0.2);
@@ -349,7 +349,7 @@ raidmusicovertimeplayer() {
   var_03 = 0.333;
   var_04 = 0.333;
   while(isDefined(level.var_774) == 1) {
-    foreach(var_06 in level.var_744A) {
+    foreach(var_06 in level.players) {
       var_07 = isDefined(var_06.var_776);
       var_06 maps\mp\_audio_submixes::func_8A9D("mp_war_overtime", 3);
       if(var_07 == 0) {
@@ -360,7 +360,7 @@ raidmusicovertimeplayer() {
     wait 0.05;
   }
 
-  foreach(var_06 in level.var_744A) {
+  foreach(var_06 in level.players) {
     var_07 = isDefined(var_06.var_776);
     if(var_07 == 1) {
       func_79D0(var_06.var_776, var_04);
@@ -369,7 +369,7 @@ raidmusicovertimeplayer() {
   }
 
   maps\mp\gametypes\_hostmigration::func_A6F5(4.5);
-  foreach(var_06 in level.var_744A) {
+  foreach(var_06 in level.players) {
     var_06 maps\mp\_audio_submixes::func_8A9F("mp_war_overtime", 5);
   }
 }
@@ -439,15 +439,15 @@ func_5342() {
 
 func_79F2(param_00) {
   var_01 = undefined;
-  if(common_scripts\utility::func_9462(param_00.var_106, "bomber_stuka") >= 0) {
+  if(common_scripts\utility::func_9462(param_00.model, "bomber_stuka") >= 0) {
     var_01 = "plane_stuka";
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "tank_sherman") >= 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "tank_sherman") >= 0) {
     var_01 = "tank_sherman";
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "tank_king_tiger") > 0 || common_scripts\utility::func_9462(param_00.var_106, "tank_tiger") > 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "tank_king_tiger") > 0 || common_scripts\utility::func_9462(param_00.model, "tank_tiger") > 0) {
     var_01 = "tank_tiger";
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "trans_cckw") >= 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "trans_cckw") >= 0) {
     var_01 = "truck_cckw";
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "trans_opel_blitz") >= 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "trans_opel_blitz") >= 0) {
     var_01 = "truck_opel_blitz";
   } else {}
 
@@ -456,15 +456,15 @@ func_79F2(param_00) {
 
 func_79F1(param_00) {
   var_01 = 8;
-  if(common_scripts\utility::func_9462(param_00.var_106, "bomber_stuka") >= 0) {
+  if(common_scripts\utility::func_9462(param_00.model, "bomber_stuka") >= 0) {
     var_01 = level.var_777["plane_stuka"];
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "tank_sherman") >= 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "tank_sherman") >= 0) {
     var_01 = level.var_777["tank_sherman"];
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "tank_king_tiger") > 0 || common_scripts\utility::func_9462(param_00.var_106, "tank_tiger") > 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "tank_king_tiger") > 0 || common_scripts\utility::func_9462(param_00.model, "tank_tiger") > 0) {
     var_01 = level.var_777["tank_tiger"];
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "trans_cckw") >= 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "trans_cckw") >= 0) {
     var_01 = level.var_777["truck_cckw"];
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "trans_opel_blitz") >= 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "trans_opel_blitz") >= 0) {
     var_01 = level.var_777["truck_opel_blitz"];
   } else {}
 
@@ -473,15 +473,15 @@ func_79F1(param_00) {
 
 raidvehiclegetdopplerscale(param_00) {
   var_01 = undefined;
-  if(common_scripts\utility::func_9462(param_00.var_106, "bomber_stuka") >= 0) {
+  if(common_scripts\utility::func_9462(param_00.model, "bomber_stuka") >= 0) {
     var_01 = level._warvehicledopplerscale["plane_stuka"];
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "tank_sherman") >= 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "tank_sherman") >= 0) {
     var_01 = level._warvehicledopplerscale["tank_sherman"];
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "tank_king_tiger") > 0 || common_scripts\utility::func_9462(param_00.var_106, "tank_tiger") > 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "tank_king_tiger") > 0 || common_scripts\utility::func_9462(param_00.model, "tank_tiger") > 0) {
     var_01 = level._warvehicledopplerscale["tank_tiger"];
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "trans_cckw") >= 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "trans_cckw") >= 0) {
     var_01 = level._warvehicledopplerscale["truck_cckw"];
-  } else if(common_scripts\utility::func_9462(param_00.var_106, "trans_opel_blitz") >= 0) {
+  } else if(common_scripts\utility::func_9462(param_00.model, "trans_opel_blitz") >= 0) {
     var_01 = level._warvehicledopplerscale["truck_opel_blitz"];
   } else {}
 
@@ -503,7 +503,7 @@ func_79F7(param_00, param_01) {
 
 snd_fullscalesubmix(param_00, param_01) {
   var_02 = int(param_01);
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     if(var_02 == 0) {
       var_04 maps\mp\_audio_submixes::func_8A9F("mp_war_full_scale", 0);
       continue;
@@ -586,48 +586,48 @@ func_79CD(param_00, param_01) {
 
 func_79CE(param_00, param_01, param_02) {
   var_03 = [];
-  if(level.var_910F) {
-    if(isDefined(level.var_744A[0])) {
-      var_03[var_03.size] = func_79CD(param_00, level.var_744A[0]);
+  if(level.splitscreen) {
+    if(isDefined(level.players[0])) {
+      var_03[var_03.size] = func_79CD(param_00, level.players[0]);
     }
   } else if(isDefined(param_01)) {
     if(isDefined(param_02)) {
-      for(var_04 = 0; var_04 < level.var_744A.size; var_04++) {
-        var_05 = level.var_744A[var_04];
+      for(var_04 = 0; var_04 < level.players.size; var_04++) {
+        var_05 = level.players[var_04];
         if(var_05 issplitscreenplayer() && !var_05 method_82ED()) {
           continue;
         }
 
-        if(isDefined(var_05.var_12C["team"]) && var_05.var_12C["team"] == param_01 && !maps\mp\_utility::func_56E0(var_05, param_02)) {
+        if(isDefined(var_05.pers["team"]) && var_05.pers["team"] == param_01 && !maps\mp\_utility::isexcluded(var_05, param_02)) {
           var_03[var_03.size] = func_79CD(param_00, var_05);
         }
       }
     } else {
-      for(var_04 = 0; var_04 < level.var_744A.size; var_04++) {
-        var_05 = level.var_744A[var_04];
+      for(var_04 = 0; var_04 < level.players.size; var_04++) {
+        var_05 = level.players[var_04];
         if(var_05 issplitscreenplayer() && !var_05 method_82ED()) {
           continue;
         }
 
-        if(isDefined(var_05.var_12C["team"]) && var_05.var_12C["team"] == param_01) {
+        if(isDefined(var_05.pers["team"]) && var_05.pers["team"] == param_01) {
           var_03[var_03.size] = func_79CD(param_00, var_05);
         }
       }
     }
   } else if(isDefined(var_04)) {
-    for(var_04 = 0; var_04 < level.var_744A.size; var_04++) {
-      var_05 = level.var_744A[var_04];
+    for(var_04 = 0; var_04 < level.players.size; var_04++) {
+      var_05 = level.players[var_04];
       if(var_05 issplitscreenplayer() && !var_05 method_82ED()) {
         continue;
       }
 
-      if(!maps\mp\_utility::func_56E0(var_05, param_02)) {
+      if(!maps\mp\_utility::isexcluded(var_05, param_02)) {
         var_03[var_03.size] = func_79CD(param_00, var_05);
       }
     }
   } else {
-    for(var_04 = 0; var_04 < level.var_744A.size; var_04++) {
-      var_05 = level.var_744A[var_04];
+    for(var_04 = 0; var_04 < level.players.size; var_04++) {
+      var_05 = level.players[var_04];
       if(var_05 issplitscreenplayer() && !var_05 method_82ED()) {
         continue;
       }

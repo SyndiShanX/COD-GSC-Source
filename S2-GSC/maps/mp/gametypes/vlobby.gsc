@@ -9,20 +9,20 @@ main() {
   }
 
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   level.rankedmatch = 0;
   level.var_6BAF = ::func_6BAF;
   level.var_4696 = ::func_4696;
   level.var_7658 = undefined;
   level.var_A278 = undefined;
   level.var_6BA7 = ::func_6BA7;
-  maps\mp\_utility::func_7BF1(level.gametype, 0);
-  maps\mp\_utility::func_7BFA(level.gametype, 0);
-  maps\mp\_utility::func_7BF9(level.gametype, 1);
-  maps\mp\_utility::func_7BE5(level.gametype, 0);
-  level.var_2322 = level.var_2319;
-  level.var_2319 = ::func_6111;
+  maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
+  maps\mp\_utility::registertimelimitdvar(level.gametype, 0);
+  maps\mp\_utility::registerscorelimitdvar(level.gametype, 1);
+  maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
+  level.var_2322 = level.class;
+  level.class = ::func_6111;
   game["menu_team"] = "main";
   game["menu_class_allies"] = "main";
   game["menu_class_axis"] = "main";
@@ -45,12 +45,12 @@ func_6BAF() {
     game["switchedsides"] = 0;
   }
 
-  maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_WAR");
-  maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_WAR");
-  maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_WAR");
-  maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_WAR");
-  maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_WAR");
-  maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_WAR");
   lib_050D::func_10E4();
   var_00[0] = level.gametype;
   maps\mp\gametypes\_gameobjects::main(var_00);

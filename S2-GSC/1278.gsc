@@ -21,8 +21,8 @@ func_6E8A(param_00) {
 }
 
 func_6671(param_00) {
-  level.var_611["tank_exhaust"] = loadfx("vfx/smoke/sherman_tank_exhaust");
-  level.var_611["tank_muzzle"] = loadfx("vfx/muzzleflash/us_tank_sherman_muzzle");
+  level._effect["tank_exhaust"] = loadfx("vfx/smoke/sherman_tank_exhaust");
+  level._effect["tank_muzzle"] = loadfx("vfx/muzzleflash/us_tank_sherman_muzzle");
   lib_04FF::func_6934(param_00);
   thread func_6673();
   var_01 = func_6E8A(param_00);
@@ -35,17 +35,17 @@ func_6671(param_00) {
 }
 
 func_667E(param_00) {
-  var_01 = function_01E0(param_00.var_106, param_00.var_1A5, param_00.var_1C8, param_00.var_116, param_00.var_1D);
+  var_01 = function_01E0(param_00.model, param_00.targetname, param_00.var_1C8, param_00.origin, param_00.var_1D);
   var_01.var_1C8 = param_00.var_1C8;
-  var_01.var_1A2 = param_00.var_1A2;
+  var_01.target = param_00.target;
   var_02 = param_00.var_82B2;
   if(common_scripts\utility::func_562E(level.var_79C1)) {
-    var_01.var_1A7 = maps\mp\_utility::func_45DE(var_02);
+    var_01.team = maps\mp\_utility::getotherteam(var_02);
   } else {
-    var_01.var_1A7 = var_02;
+    var_01.team = var_02;
   }
 
-  var_01 method_8253(var_01.var_1A7);
+  var_01 method_8253(var_01.team);
   var_01.var_A045 = ::lib_0504::func_A3FE;
   var_01 method_867B(1);
   var_01.var_4881 = 1;
@@ -55,7 +55,7 @@ func_667E(param_00) {
   var_01.var_FB = var_01.var_BC;
   var_01.var_6A = 0;
   var_01 setCanDamage(0);
-  var_01.var_29B5 = ::func_97B7;
+  var_01.damagecallback = ::func_97B7;
   var_01.var_118F = [];
   var_01 common_scripts\utility::func_3799("cannon_loaded");
   var_01 common_scripts\utility::func_379A("cannon_loaded");
@@ -112,11 +112,11 @@ func_6673() {
     var_02 method_8131();
     var_03 = var_02 common_scripts\utility::func_41ED();
     foreach(var_05 in var_03) {
-      if(!isDefined(var_05.var_165)) {
+      if(!isDefined(var_05.exitlevel)) {
         continue;
       }
 
-      switch (var_05.var_165) {
+      switch (var_05.exitlevel) {
         case "tank_notarget":
           var_02.var_675A = var_05;
           var_02.var_675A.var_8BE = 1;
@@ -158,7 +158,7 @@ func_2DDE(param_00) {
   param_00 setdefaultdroppitchyaw(0, 0);
   param_00 setCanDamage(0);
   param_00 setdamagecallbackon(0);
-  param_00.var_29B5 = undefined;
+  param_00.damagecallback = undefined;
   param_00.var_566B = 0;
   param_00 setModel("ger_btry_pak38_dstrypv_raid");
   if(isDefined(param_00.var_675A)) {
@@ -245,7 +245,7 @@ func_7487(param_00) {
 
 func_9787() {
   var_00 = [];
-  var_01 = maps\mp\_utility::func_45DE(self.var_1A7);
+  var_01 = maps\mp\_utility::getotherteam(self.team);
   var_02 = lib_0502::func_4627(var_01);
   foreach(var_04 in var_02) {
     if(isDefined(self.var_50A2) && var_04 == self.var_50A2) {
@@ -277,7 +277,7 @@ func_97B8() {
   var_03 = self gettagorigin("tag_barrel");
   var_04 = anglesToForward(self gettagangles("tag_barrel"));
   foreach(var_06 in var_00) {
-    var_07 = var_06.var_116 + func_46C0(var_06);
+    var_07 = var_06.origin + func_46C0(var_06);
     var_08 = var_07 - var_03;
     var_09 = vectorNormalize(var_08);
     var_0A = vectordot(var_03, var_09);
@@ -323,28 +323,28 @@ func_97E3(param_00) {
 func_9783(param_00) {
   var_01 = func_46C0(param_00);
   if(function_0296(param_00)) {
-    self.var_11B6.var_116 = param_00;
+    self.var_11B6.origin = param_00;
     param_00 = self.var_11B6;
   } else {
-    self.var_11B6.var_116 = param_00.var_116 + var_01;
+    self.var_11B6.origin = param_00.origin + var_01;
     if(!self.var_11B6 islinked()) {
       self.var_11B6 linkTo(param_00);
     }
   }
 
   var_02 = self gettagorigin("tag_barrel");
-  var_03 = param_00.var_116 + var_01;
+  var_03 = param_00.origin + var_01;
   var_04 = distance(var_02, var_03);
   if(var_04 < 500) {
     var_05 = var_03 - var_02;
     var_06 = vectorNormalize(var_05);
     var_07 = var_02 + var_06 * getdvarfloat("scr_raid_panzerSafeTargetDistance", 1000);
     self method_825B(var_07);
-    self.var_8030 = var_07;
+    self.getattachsize = var_07;
     return;
   }
 
-  self.var_8030 = undefined;
+  self.getattachsize = undefined;
   self method_825C(param_00, var_01);
 }
 
@@ -424,7 +424,7 @@ func_97BE(param_00) {
   }
 
   if(isPlayer(param_00)) {
-    if(param_00 method_8541()) {
+    if(param_00 set_off_exploders()) {
       return 0;
     }
 
@@ -446,7 +446,7 @@ func_46C1(param_00) {
   if(function_0296(param_00)) {
     var_01 = param_00;
   } else {
-    var_01 = var_01.var_116;
+    var_01 = var_01.origin;
   }
 
   var_01 = var_01 + func_46C0(param_00);
@@ -458,7 +458,7 @@ func_46C0(param_00) {
     return (0, 0, 0);
   } else if(lib_0504::func_5812(param_00)) {
     var_01 = param_00 gettagorigin("tag_aim");
-    var_02 = var_01 - param_00.var_116;
+    var_02 = var_01 - param_00.origin;
     return var_02;
   } else if(isPlayer(var_02)) {
     var_03 = var_02 getviewheight();
@@ -619,15 +619,15 @@ func_666F(param_00) {
 }
 
 func_667A(param_00, param_01, param_02) {
-  if(!isDefined(param_00.var_118F[param_01.var_48CA])) {
+  if(!isDefined(param_00.var_118F[param_01.guid])) {
     var_03 = spawnStruct();
-    var_03.var_721C = param_01;
-    var_03.var_9309 = gettime();
+    var_03.player = param_01;
+    var_03.starttime = gettime();
     var_03.var_9AB1 = 0;
-    param_00.var_118F[param_01.var_48CA] = var_03;
+    param_00.var_118F[param_01.guid] = var_03;
   }
 
-  var_03 = param_00.var_118F[param_01.var_48CA];
+  var_03 = param_00.var_118F[param_01.guid];
   var_03.var_9AB1 = var_03.var_9AB1 + param_02;
 }
 
@@ -635,7 +635,7 @@ func_667F(param_00) {
   var_01 = param_00.var_6A / param_00.var_BC;
   var_02 = clamp(var_01, 0, 1);
   var_03 = int(var_02 * 30000);
-  param_00 lib_04FF::func_8615(var_03);
+  param_00 lib_04FF::playlocalsound(var_03);
 }
 
 func_6679() {
@@ -646,7 +646,7 @@ func_6679() {
 func_6678() {
   var_00 = undefined;
   foreach(var_02 in self.var_A2C8.var_118F) {
-    level thread maps\mp\gametypes\_rank::giverankxp("raids_neutralize", var_02.var_721C);
+    level thread maps\mp\gametypes\_rank::giverankxp("raids_neutralize", var_02.player);
     if(!isDefined(var_00)) {
       var_00 = var_02;
       continue;
@@ -657,29 +657,29 @@ func_6678() {
       continue;
     }
 
-    if(var_02.var_9AB1 == var_00.var_9AB1 && var_02.var_9309 < var_00.var_9309) {
+    if(var_02.var_9AB1 == var_00.var_9AB1 && var_02.starttime < var_00.starttime) {
       var_00 = var_02;
     }
   }
 
   if(isDefined(var_00)) {
-    level thread maps\mp\_utility::func_9863("raids_callout_capture", var_00.var_721C);
+    level thread maps\mp\_utility::teamplayercardsplash("raids_callout_capture", var_00.player);
   }
 }
 
 func_4376(param_00) {
-  if(!isDefined(self.var_1A2)) {
+  if(!isDefined(self.target)) {
     return [];
   }
 
-  var_01 = getEntArray(self.var_1A2, "targetname");
+  var_01 = getEntArray(self.target, "targetname");
   if(!isDefined(param_00)) {
     return var_01;
   }
 
   var_02 = [];
   foreach(var_04 in var_01) {
-    if(isDefined(var_04.var_165) && issubstr(var_04.var_165, param_00)) {
+    if(isDefined(var_04.exitlevel) && issubstr(var_04.exitlevel, param_00)) {
       var_02[var_02.size] = var_04;
     }
   }
@@ -701,7 +701,7 @@ func_667C() {
   lib_04FF::func_6983(self.var_695A);
   thread func_666E();
   var_02 = self.var_A2C8;
-  var_03 = getvehiclenode(var_02.var_1A2, "targetname");
+  var_03 = getvehiclenode(var_02.target, "targetname");
   var_02 startpath(var_03);
   var_02 setCanDamage(1);
   var_02 lib_04FF::func_990(self.var_A2C8, "tag_body", (0, 0, 120), 30000, 22, 0, 1, 0, 1, 0, []);
@@ -717,7 +717,7 @@ func_6672(param_00) {
   var_01 = [];
   for(var_02 = param_00; isDefined(var_02); var_02 = var_02 common_scripts\utility::func_4375()) {
     var_01[var_01.size] = var_02;
-    if(!isDefined(var_02.var_1A2)) {
+    if(!isDefined(var_02.target)) {
       break;
     }
   }
@@ -733,10 +733,10 @@ func_8A03(param_00) {
   param_00.var_29BF = 0;
   param_00 setCanDamage(1);
   param_00 setdamagecallbackon(1);
-  param_00.var_29B5 = ::func_9F7C;
+  param_00.damagecallback = ::func_9F7C;
   param_00.var_566B = 1;
   param_00 thread func_9F8D();
-  var_01 = lib_04FF::func_27DE(param_00 getentitynumber(), game["defenders"], param_00.var_116, (0, 0, 60));
+  var_01 = lib_04FF::func_27DE(param_00 getentitynumber(), game["defenders"], param_00.origin, (0, 0, 60));
   var_01 maps\mp\gametypes\_gameobjects::func_8A60("none");
   var_01 maps\mp\gametypes\_gameobjects::func_860A("friendly", "waypoint_defend");
   var_01 maps\mp\gametypes\_gameobjects::func_860E("friendly", "waypoint_defend");
@@ -807,7 +807,7 @@ func_747A(param_00) {
   var_01 = param_00 method_856E();
   var_02 = param_00 method_8686();
   var_03 = maps\mp\gametypes\_hud_util::func_27CF((0, 1, 0), 120, 9);
-  var_03 maps\mp\gametypes\_hud_util::func_8707("CENTER", undefined, 0, 61);
+  var_03 maps\mp\gametypes\_hud_util::setpoint("CENTER", undefined, 0, 61);
   self.var_9F95 = var_03;
   if(var_02 > 0) {
     var_04 = 1 - var_02 / var_01;
@@ -834,7 +834,7 @@ func_747B(param_00, param_01, param_02) {
 func_73D2() {
   self notify("playerTurretHud");
   if(isDefined(self.var_9F95)) {
-    self.var_9F95 maps\mp\gametypes\_hud_util::func_2DCC();
+    self.var_9F95 maps\mp\gametypes\_hud_util::destroyelem();
   }
 }
 
@@ -843,6 +843,6 @@ func_667D() {
   lib_04FF::func_6963("reloadTime", 7);
   lib_04FF::func_6983(self.var_695A);
   var_00 = self.var_A2C8;
-  var_01 = getvehiclenode(var_00.var_1A2, "targetname");
+  var_01 = getvehiclenode(var_00.target, "targetname");
   var_00 startpath(var_01);
 }

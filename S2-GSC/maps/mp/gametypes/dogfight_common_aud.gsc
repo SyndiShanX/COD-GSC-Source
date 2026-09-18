@@ -54,8 +54,8 @@ fighter_spawn() {
   self.var_11CB.acceleration_vol_boost = 0;
   self.var_11CB.hard_bank = 0;
   self.var_11CB.pitching = 0;
-  common_scripts\utility::func_3C87("damage_state_1");
-  common_scripts\utility::func_3C87("damage_state_2");
+  common_scripts\utility::flag_init("damage_state_1");
+  common_scripts\utility::flag_init("damage_state_2");
   thread func_6DBE();
 }
 
@@ -408,7 +408,7 @@ raid_flyby_watcher(param_00) {
   var_12 = ["blg_dogfight_flyby_far_01", "blg_dogfight_flyby_far_02", "blg_dogfight_flyby_far_03", "blg_dogfight_flyby_far_04", "blg_dogfight_flyby_far_05", "blg_dogfight_flyby_far_06", "blg_dogfight_flyby_far_07", "blg_dogfight_flyby_far_08", "blg_dogfight_flyby_far_09", "blg_dogfight_flyby_far_10", "blg_dogfight_flyby_far_11", "blg_dogfight_flyby_far_12", "blg_dogfight_flyby_far_13", "blg_dogfight_flyby_far_14", "blg_dogfight_flyby_far_15", "blg_dogfight_flyby_far_16", "blg_dogfight_flyby_far_17"];
   for(;;) {
     foreach(var_14 in level.players) {
-      var_15 = var_14.var_2418;
+      var_15 = var_14.clientid;
       var_16 = var_14 method_85E2();
       if(var_14 == self || !isDefined(var_16)) {
         continue;
@@ -440,7 +440,7 @@ raid_flyby_watcher(param_00) {
         if(self.plane_data[var_15].approachspeed > var_08 && self.plane_data[var_15].closeoneshotstarted == 0 && self.plane_data[var_15].closetimer >= var_0A) {
           self.plane_data[var_15].closeoneshotstarted = 1;
           self.plane_data[var_15].closetimer = 0;
-          var_0E = common_scripts\utility::func_AA4A(self.origin, self.angles, var_16.origin, cos(45));
+          var_0E = common_scripts\utility::within_fov(self.origin, self.angles, var_16.origin, cos(45));
           if(isDefined(var_0E) && var_0E == 0) {
             var_0B = var_0B * var_0D;
           }
@@ -543,7 +543,7 @@ fighter_damage_state_change(param_00) {
 
   if(param_00 == 1) {
     if(!common_scripts\utility::func_3C77("damage_state_1")) {
-      common_scripts\utility::func_3C8F("damage_state_1");
+      common_scripts\utility::flag_set("damage_state_1");
       maps\mp\_audio_submixes::func_8001("husky_player_damage_oneshot");
       self.var_11CB.engine_damage_loop = maps\mp\_audio_submixes::func_8004("blg_p47_engine_damage_plr_lp", "stop_damage_engine_loop", 0, 0);
     }
@@ -555,7 +555,7 @@ fighter_damage_state_change(param_00) {
   }
 
   if(param_00 == 2 && !common_scripts\utility::func_3C77("damage_state_2")) {
-    common_scripts\utility::func_3C8F("damage_state_2");
+    common_scripts\utility::flag_set("damage_state_2");
     maps\mp\_audio_submixes::func_8001("husky_player_damage_oneshot");
   }
 }

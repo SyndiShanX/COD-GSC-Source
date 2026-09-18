@@ -8,11 +8,11 @@ func_00D5() {
   level.var_9A9B.var_3F48 = loadfx("vfx/unique/hub_top_player_loop");
   level.var_9A9B.var_3F52 = loadfx("vfx/unique/hub_top_player_spawn");
   level.var_9A9B.var_5022 = ["headicon_1st_place", "headicon_2nd_place", "headicon_3rd_place"];
-  thread func_6B6C();
+  thread onplayerconnect();
   thread func_A17F();
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
     var_00 thread func_9A99();
@@ -36,7 +36,7 @@ func_A17F() {
 
 func_A17E() {
   level endon("game_ended");
-  level.var_9A9B.var_7420 = common_scripts\utility::func_0FA5(level.var_744A, ::func_255A);
+  level.var_9A9B.var_7420 = common_scripts\utility::func_0FA5(level.players, ::func_255A);
   func_A17D();
 }
 
@@ -68,13 +68,13 @@ func_A17D() {
     var_01.var_9A9A = var_02;
     var_01.var_9A9C = var_00 + 1;
     if(var_00 == 0) {
-      foreach(var_04 in level.var_744A) {
+      foreach(var_04 in level.players) {
         var_04 iclientprintln(var_01.var_0109 + " is the new top player with a K/D of " + var_01.var_1FF4);
       }
     }
   }
 
-  for(var_00 = 3; var_00 < level.var_744A.size; var_00++) {
+  for(var_00 = 3; var_00 < level.players.size; var_00++) {
     if(isDefined(level.var_9A9B.var_7420[var_00].var_9A9A)) {
       level.var_9A9B.var_7420[var_00].var_9A9A destroy();
       level.var_9A9B.var_7420[var_00].var_9A9C = -1;

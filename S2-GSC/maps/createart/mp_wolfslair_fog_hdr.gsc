@@ -4,8 +4,8 @@
 ***************************************************/
 
 func_00F9() {
-  var_00 = maps\mp\_art::func_27C6("mp_wolfslair");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_wolfslair");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.632334, 0.773059, 0.875);
   var_00.var_1108 = (0.757813, 0.64949, 0.469726);
@@ -48,8 +48,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_wolfslair_killstreak");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_wolfslair_killstreak");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.792003, 0.892605, 1);
   var_00.var_1108 = (0.999995, 1, 1);
@@ -92,8 +92,8 @@ func_00F9() {
   var_00.var_1119 = 25.048;
   var_00.var_111A = 12.7935;
   var_00.var_1121 = 8.90619;
-  var_00 = maps\mp\_art::func_27C6("mp_wolfslair_underwater");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_wolfslair_underwater");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.837819, 0.837819, 0.837819);
   var_00.var_1108 = (0.955511, 0.955511, 0.955511);
@@ -136,8 +136,8 @@ func_00F9() {
   var_00.var_1119 = 16.5296;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_wolfslair_osp");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_wolfslair_osp");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -180,8 +180,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_wolfslair_drone");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_wolfslair_drone");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -224,8 +224,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_wolfslair_warbird");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_wolfslair_warbird");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -268,8 +268,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("dna_bomb");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("dna_bomb");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.45, 0.342501, 0.173438);
   var_00.var_1108 = (0.5, 0.421875, 0.421875);
@@ -312,8 +312,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("");
+  var_00.transitiontime = 0;
   var_00.var_1105 = 0;
   var_00.var_110E = 0;
   var_00.var_110F = 0;
@@ -338,8 +338,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_countdown");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_countdown");
+  var_00.transitiontime = 0;
   var_00.var_1105 = 0;
   var_00.var_110E = 0;
   var_00.var_110F = 0;

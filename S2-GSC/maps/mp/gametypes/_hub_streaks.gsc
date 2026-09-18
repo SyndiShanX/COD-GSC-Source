@@ -132,7 +132,7 @@ handlenormalexit(param_00) {
     var_02 func_2F96(self);
   }
 
-  self method_80F6();
+  self script_accel();
   self method_85C7();
   self.var_5722 = 0;
   maps\mp\gametypes\_hub_unk1::func_870B(0);
@@ -206,7 +206,7 @@ func_681D(param_00) {
   if(isDefined(param_00)) {}
 
   var_02 = [];
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     if(!isDefined(param_00) || var_04 != param_00) {
       var_02[var_02.size] = var_04;
     }
@@ -230,7 +230,7 @@ func_4ADF() {
   level.totalplanesdestroyed = 0;
   level.var_2758 = 0;
   level.var_2DC7 = 0;
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(var_01.var_572A) {
       continue;
     }
@@ -270,12 +270,12 @@ func_4ADF() {
   }
 
   if(level.var_2758 > 0) {
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       var_01 lib_0468::func_0A21(level.var_2758);
       var_01 iclientprintln(&"MP_RECEIVED_ARMORY_CREDITS", level.var_2758 * 10);
     }
   } else if(level.var_2DC7) {
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       var_01 lib_0468::func_0A21(0);
     }
   }
@@ -399,7 +399,7 @@ func_365E(param_00) {
 
 func_2F96(param_00) {
   if(!isDefined(param_00)) {
-    foreach(param_00 in level.var_744A) {
+    foreach(param_00 in level.players) {
       self hudoutlinedisableforclient(param_00);
     }
 
@@ -420,7 +420,7 @@ func_9032() {
   thread func_3EB7(var_00);
   var_00.var_01A7 = "allies";
   var_00 thread hasperkF(var_02);
-  var_00 hudoutlineenableforclients(level.var_744A, 2, 0);
+  var_00 hudoutlineenableforclients(level.players, 2, 0);
 }
 
 func_3EB7(param_00) {
@@ -452,7 +452,7 @@ func_7032() {
 }
 
 notifyplayers(param_00, param_01) {
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(var_03.var_572A) {
       continue;
     }
@@ -464,7 +464,7 @@ notifyplayers(param_00, param_01) {
 func_4ACD(param_00) {
   self endon("captured");
   self endon("death");
-  common_scripts\utility::func_A74B("crate_start_countdown", 120);
+  common_scripts\utility::waittill_notify_or_timeout("crate_start_countdown", 120);
   if(isDefined(self.var_321B)) {
     if(!isDefined(self.var_321B.var_7450)) {
       self.var_321B.var_7450 = 0;
@@ -536,11 +536,11 @@ func_4AAD(param_00) {
   var_03.var_001D = var_02.var_001D;
   var_03 setModel("ger_carepackage_parachute");
   var_03 setCanDamage(1);
-  var_03 method_805C();
-  var_03 method_8449(var_02);
+  var_03 save_undo_buffer();
+  var_03 linktosynchronizedparent(var_02);
   var_01.var_001D = var_02 gettagangles("TAG_CRATE");
   var_01.var_0116 = var_02 gettagorigin("TAG_CRATE");
-  var_01 method_8449(var_02, "TAG_CRATE");
+  var_01 linktosynchronizedparent(var_02, "TAG_CRATE");
   var_01.var_6E4A = var_02;
   var_01.var_6E4C = var_03;
   var_01 thread func_4AB3(param_00);
@@ -581,7 +581,7 @@ func_1FF9() {
   var_02 = 0.5;
   var_03 = lib_0380::func_288B("mp_hub_crpkg_parachute_lp", undefined, var_00, var_01);
   var_00 waittill("detach");
-  lib_0380::func_2893(var_03, var_02);
+  lib_0380::_stoplocalsound(var_03, var_02);
   lib_0380::func_2889("mp_hub_crpkg_parachute_release", undefined, var_00.var_0116);
 }
 
@@ -592,7 +592,7 @@ func_9061() {
   var_03 = 0;
   while(var_03 < 12) {
     var_04 = var_01[var_02];
-    var_05 = function_01DC(var_04.var_81EF, "script_linkname");
+    var_05 = function_01DC(var_04.script_exploder, "script_linkname");
     var_05 = common_scripts\utility::func_0F92(var_05);
     func_9060(var_04);
     var_03++;
@@ -638,7 +638,7 @@ func_9060(param_00) {
   var_01 thread maps\mp\gametypes\_damage::func_8676(1500, undefined, ::func_7040);
   var_01.var_00BC = var_01.var_00FB;
   var_01.var_1193 = [];
-  var_01.var_29B5 = ::func_703F;
+  var_01.damagecallback = ::func_703F;
   var_01.firing = 0;
   var_01 func_365E();
   var_01 thread func_3BD4();
@@ -891,7 +891,7 @@ func_703F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   var_0C.var_1193 = maps\mp\_utility::func_2341(var_0C.var_1193);
   if(!common_scripts\utility::func_0F79(var_0C.var_1193, param_01)) {
-    var_0C.var_1193[param_01.var_48CA] = param_01;
+    var_0C.var_1193[param_01.guid] = param_01;
   }
 
   playFX(level.var_5959, self.var_0116);
@@ -904,7 +904,7 @@ func_703F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_01 maps\mp\gametypes\_damagefeedback::func_A102("killshot_nosound");
     var_0C func_5F15();
     foreach(var_0E in var_0C.var_1193) {
-      var_0E thread maps\mp\gametypes\_missions::func_7750("ch_hq_aagun");
+      var_0E thread maps\mp\gametypes\_missions::processchallenge("ch_hq_aagun");
     }
 
     return;
@@ -927,7 +927,7 @@ func_5F15() {
     self.var_4F7D destroy();
   }
 
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     func_2F96(var_02);
   }
 

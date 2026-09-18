@@ -16,7 +16,7 @@ truuseserumb(param_00) {
 }
 
 truuseserumbinternal() {
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     if(!isDefined(self.raidserumactive) || !self.raidserumactive) {
       maps\mp\_matchdata::func_5E9A("raid_ss_serum_b", self.origin);
       thread startcombatbuff();
@@ -40,7 +40,7 @@ startcombatbuff() {
   maps\mp\gametypes\_weapons::func_A13B();
   foreach(var_01 in level.raidserumbperks) {
     if(!maps\mp\_utility::hasperk(var_01)) {
-      maps\mp\_utility::func_47A2(var_01);
+      maps\mp\_utility::giveperk(var_01);
     }
   }
 

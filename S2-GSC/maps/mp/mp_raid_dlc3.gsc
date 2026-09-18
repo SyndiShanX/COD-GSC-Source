@@ -4,16 +4,16 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_raid_dlc3_precache::func_F9();
-  maps\createart\mp_raid_dlc3_art::func_F9();
-  maps\createart\mp_raid_dlc3_fog_hdr::func_F9();
-  maps\mp\mp_raid_dlc3_fx::func_F9();
+  maps\mp\mp_raid_dlc3_precache::main();
+  maps\createart\mp_raid_dlc3_art::main();
+  maps\createart\mp_raid_dlc3_fog_hdr::main();
+  maps\mp\mp_raid_dlc3_fx::main();
   maps\mp\_audio_submixes::func_524C();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_raid_dlc3_lighting::func_F9();
-  maps\mp\mp_raid_dlc3_aud::func_F9();
+  maps\mp\_load::main();
+  maps\mp\mp_raid_dlc3_lighting::main();
+  maps\mp\mp_raid_dlc3_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_raid_dlc3");
-  maps\mp\_special_weapons::func_D5();
+  maps\mp\_special_weapons::init();
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   level.var_6C5F = "mp_raid_dlc3_osp";
@@ -85,8 +85,8 @@ replacebadturrets() {
   var_04 = function_0024();
   foreach(var_06 in var_04) {
     if(var_06.maxhealth == var_03) {
-      var_07 = distancesquared(var_00, var_06.var_116);
-      var_08 = distancesquared(var_01, var_06.var_116);
+      var_07 = distancesquared(var_00, var_06.origin);
+      var_08 = distancesquared(var_01, var_06.origin);
       if(var_07 <= var_02 || var_08 <= var_02) {
         var_06 delete();
       }
@@ -283,7 +283,7 @@ vignetteparatroopers(param_00, param_01, param_02, param_03, param_04) {
   }
 
   var_05 = param_00;
-  var_06 = level.var_54D0[var_05].var_8F53.var_116;
+  var_06 = level.var_54D0[var_05].var_8F53.origin;
   var_07 = level.var_54D0[var_05].var_8F53.var_1D;
   var_08 = spawn("script_model", var_06);
   var_08.var_1D = var_07;
@@ -296,7 +296,7 @@ vignetteparatroopers(param_00, param_01, param_02, param_03, param_04) {
     wait 0.05;
   }
 
-  var_09 = var_08.var_116;
+  var_09 = var_08.origin;
   var_0A = [];
   for(var_0B = 1; var_0B <= 32; var_0B++) {
     var_0C = "TAG_ATTACH" + var_0B;
@@ -319,18 +319,18 @@ vignetteparatroopers(param_00, param_01, param_02, param_03, param_04) {
         if(isDefined(level.var_54D0[var_05].var_8CA7) && isDefined(level.var_54D0[var_05].var_8CA7[var_0B]) && isDefined(level.var_54D0[var_05].var_8CA7[var_0B].var_13B3)) {
           var_10 = level.var_54D0[var_05].var_8CA7[var_0B].var_13B3;
           var_10 scriptmodelclearanim();
-          if(isDefined(level.var_54D0[param_01].var_8CA7[var_0B].var_721C)) {
-            var_10 setclientowner(level.var_54D0[param_01].var_8CA7[var_0B].var_721C);
+          if(isDefined(level.var_54D0[param_01].var_8CA7[var_0B].player)) {
+            var_10 setclientowner(level.var_54D0[param_01].var_8CA7[var_0B].player);
           }
 
           var_11 = 0;
         }
-      } else if(isDefined(level.var_54D0[param_01].var_8CA7) && isDefined(level.var_54D0[param_01].var_8CA7[var_0B]) && isDefined(level.var_54D0[param_01].var_8CA7[var_0B].var_721C)) {
-        var_12 = level.var_54D0[param_01].var_8CA7[var_0B].var_721C;
+      } else if(isDefined(level.var_54D0[param_01].var_8CA7) && isDefined(level.var_54D0[param_01].var_8CA7[var_0B]) && isDefined(level.var_54D0[param_01].var_8CA7[var_0B].player)) {
+        var_12 = level.var_54D0[param_01].var_8CA7[var_0B].player;
         var_10 = spawn("script_model", var_0F);
-        var_13 = var_12.var_1A7;
+        var_13 = var_12.team;
         if(common_scripts\utility::func_562E(level.var_9565) && game["switchedsides"]) {
-          var_13 = maps\mp\_utility::func_45DE(var_12.var_1A7);
+          var_13 = maps\mp\_utility::getotherteam(var_12.team);
         }
 
         var_10 setcostumemodels(var_12.var_267E, var_13);
@@ -353,18 +353,18 @@ vignetteparatroopers(param_00, param_01, param_02, param_03, param_04) {
 
     if(isDefined(var_10)) {
       var_15 = 1;
-      var_10.var_1A7 = param_01;
-      var_10.var_116 = var_0F;
+      var_10.team = param_01;
+      var_10.origin = var_0F;
       var_10.var_1D = (0, randomfloatrange(-45, 45), 0);
       var_10.no_fx = 1;
-      var_16 = bulletTrace(var_10.var_116, var_10.var_116 - (0, 0, 3000), 0, undefined, 0);
+      var_16 = bulletTrace(var_10.origin, var_10.origin - (0, 0, 3000), 0, undefined, 0);
       var_17 = var_16["position"];
       var_10.parachute_idle_starttime = randomfloat(level.paratrooper_chute_loop_anim_duration[var_15] * 0.8);
       var_10 thread maps\mp\killstreaks\_paratroopers::do_paratrooper_drop(var_15, var_17[2], param_03, 1);
       var_0E[var_0E.size] = var_10.var_6E4F;
       var_18 = var_05;
       if(game["switchedsides"]) {
-        var_18 = maps\mp\_utility::func_45DE(var_05);
+        var_18 = maps\mp\_utility::getotherteam(var_05);
       }
 
       var_10 lib_0502::func_8C21(var_18);
@@ -401,7 +401,7 @@ play_animations_back_to_back(param_00, param_01, param_02, param_03) {
 func_54D7() {
   activateclientexploder(27);
   var_00 = common_scripts\utility::func_46B5("anim_allies_start", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   lib_0378::func_8D74("aud_intro_start_sfx");
   var_03 = ["mp_raids_tunisia_allies_intro_plane_01_2", "mp_raids_tunisia_allies_intro_plane_02_2", "mp_raids_tunisia_allies_intro_plane_03_2", "mp_raids_tunisia_allies_intro_plane_04", "mp_raids_tunisia_allies_intro_plane_05"];
@@ -559,7 +559,7 @@ func_54DC(param_00) {
 func_147F(param_00) {
   var_01 = lib_0502::func_4627(game["defenders"]);
   if(isDefined(var_01)) {
-    foreach(var_03 in level.var_744A) {
+    foreach(var_03 in level.players) {
       if(isalive(var_03)) {
         var_03 setscriptmotionblurparams(2, 1, 1);
       }
@@ -635,58 +635,58 @@ func_54D8(param_00, param_01) {
 
 axisintropropsanimate() {
   var_00 = lib_0502::func_4627(game["defenders"]);
-  var_01 = spawn("script_origin", level.var_54D0["axis"].var_8F53.var_116);
+  var_01 = spawn("script_origin", level.var_54D0["axis"].var_8F53.origin);
   var_01.var_1D = level.var_54D0["axis"].var_8F53.var_1D;
   var_02 = [];
   var_03 = spawn("script_model", (0, 0, 0));
   var_03 setModel("tun_soccer_ball_01");
-  var_03 method_8495("mp_tunisia_axis_intro_soccer_ball", var_01.var_116, var_01.var_1D);
+  var_03 method_8495("mp_tunisia_axis_intro_soccer_ball", var_01.origin, var_01.var_1D);
   var_02[var_02.size] = var_03;
   var_04 = spawn("script_model", (0, 0, 0));
   var_04 setModel("tun_card_deck_01");
-  var_04 method_8495("mp_tunisia_axis_intro_cards_deck", var_01.var_116, var_01.var_1D);
+  var_04 method_8495("mp_tunisia_axis_intro_cards_deck", var_01.origin, var_01.var_1D);
   var_02[var_02.size] = var_04;
   var_05 = spawn("script_model", (0, 0, 0));
   var_05 setModel("tun_card_hand_01");
-  var_05 method_8495("mp_tunisia_axis_intro_cards_hand_01", var_01.var_116, var_01.var_1D);
+  var_05 method_8495("mp_tunisia_axis_intro_cards_hand_01", var_01.origin, var_01.var_1D);
   var_02[var_02.size] = var_05;
   var_06 = spawn("script_model", (0, 0, 0));
   var_06 setModel("tun_card_hand_01");
-  var_06 method_8495("mp_tunisia_axis_intro_cards_hand_02", var_01.var_116, var_01.var_1D);
+  var_06 method_8495("mp_tunisia_axis_intro_cards_hand_02", var_01.origin, var_01.var_1D);
   var_02[var_02.size] = var_06;
   var_07 = spawn("script_model", (0, 0, 0));
   var_07 setModel("tun_card_hand_01");
-  var_07 method_8495("mp_tunisia_axis_intro_cards_hand_03", var_01.var_116, var_01.var_1D);
+  var_07 method_8495("mp_tunisia_axis_intro_cards_hand_03", var_01.origin, var_01.var_1D);
   var_02[var_02.size] = var_07;
   var_08 = spawn("script_model", (0, 0, 0));
   var_08 setModel("tun_ammo_crate_01");
-  var_08 method_8495("mp_tunisia_axis_intro_seat_03", var_01.var_116, var_01.var_1D);
+  var_08 method_8495("mp_tunisia_axis_intro_seat_03", var_01.origin, var_01.var_1D);
   var_02[var_02.size] = var_08;
   var_09 = spawn("script_model", (0, 0, 0));
   var_09 setModel("tun_crate_wooden_01");
-  var_09 method_8495("mp_tunisia_axis_intro_seat_01", var_01.var_116, var_01.var_1D);
+  var_09 method_8495("mp_tunisia_axis_intro_seat_01", var_01.origin, var_01.var_1D);
   var_02[var_02.size] = var_09;
   var_0A = spawn("script_model", (0, 0, 0));
   var_0A setModel("tun_crate_wooden_01");
-  var_0A method_8495("mp_tunisia_axis_intro_seat_02", var_01.var_116, var_01.var_1D);
+  var_0A method_8495("mp_tunisia_axis_intro_seat_02", var_01.origin, var_01.var_1D);
   var_02[var_02.size] = var_0A;
   var_0B = spawn("script_model", (0, 0, 0));
   var_0B setModel("tun_crate_wooden_01");
-  var_0B method_8495("mp_tunisia_axis_intro_seat_04", var_01.var_116, var_01.var_1D);
+  var_0B method_8495("mp_tunisia_axis_intro_seat_04", var_01.origin, var_01.var_1D);
   var_02[var_02.size] = var_0B;
   var_0C = spawn("script_model", (0, 0, 0));
   var_0C setModel("tun_crate_wooden_01");
-  var_0C method_8495("mp_tunisia_axis_intro_table", var_01.var_116, var_01.var_1D);
+  var_0C method_8495("mp_tunisia_axis_intro_table", var_01.origin, var_01.var_1D);
   var_02[var_02.size] = var_0C;
   var_0D = spawn("script_model", level.notebook_dudebro gettagorigin("TAG_WEAPON_LEFT"));
   var_0D setModel("tun_book_01");
   var_0D.var_1D = level.notebook_dudebro gettagangles("TAG_WEAPON_LEFT");
-  var_0D method_8449(level.notebook_dudebro, "TAG_WEAPON_LEFT");
+  var_0D linktosynchronizedparent(level.notebook_dudebro, "TAG_WEAPON_LEFT");
   var_02[var_02.size] = var_0D;
   var_0E = spawn("script_model", level.notebook_dudebro gettagorigin("TAG_INHAND"));
   var_0E setModel("tun_pencil_01");
   var_0E.var_1D = level.notebook_dudebro gettagangles("TAG_INHAND");
-  var_0E method_8449(level.notebook_dudebro, "TAG_INHAND");
+  var_0E linktosynchronizedparent(level.notebook_dudebro, "TAG_INHAND");
   var_02[var_02.size] = var_0E;
   level.axis_intro_props = var_02;
 }
@@ -701,7 +701,7 @@ func_54D9() {
   level.var_A4B5["squareAspectRatio"] = 0;
   level.var_A4B5["lerpDuration"] = 0.1;
   if(isDefined(var_00)) {
-    foreach(var_02 in level.var_744A) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
         var_02 setscriptmotionblurparams(0.35, 0, 0);
@@ -725,35 +725,35 @@ func_7FB4() {
 vistatankvignettes() {
   function_01DF("usa_tank_sherman_mp");
   wait(5);
-  maps\mp\_utility::func_3FA5("finished_intro_vignette_allies");
+  maps\mp\_utility::gameflagwait("finished_intro_vignette_allies");
   var_00 = getEnt("sherman_tank_vista01", "targetname");
-  var_01 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
+  var_01 = function_01E0(var_00.model, var_00.targetname, var_00.var_1C8, var_00.origin, var_00.var_1D);
   var_01 setCanDamage(0);
   var_01 lib_0378::func_8D74("aud_npc_tank_enter");
-  var_02 = spawn("script_model", var_01.var_116);
+  var_02 = spawn("script_model", var_01.origin);
   var_02 setModel("usa_tank_sherman_m1919_bucket_turret_mp");
-  var_02 method_8449(var_01, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
+  var_02 linktosynchronizedparent(var_01, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
   var_00 = getEnt("sherman_tank_vista02", "targetname");
-  var_03 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
+  var_03 = function_01E0(var_00.model, var_00.targetname, var_00.var_1C8, var_00.origin, var_00.var_1D);
   var_03 setCanDamage(0);
   var_03 lib_0378::func_8D74("aud_npc_tank_enter");
-  var_02 = spawn("script_model", var_03.var_116);
+  var_02 = spawn("script_model", var_03.origin);
   var_02 setModel("usa_tank_sherman_m1919_bucket_turret_mp");
-  var_02 method_8449(var_03, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
+  var_02 linktosynchronizedparent(var_03, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
   var_00 = getEnt("sherman_tank_vista03", "targetname");
-  var_04 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
+  var_04 = function_01E0(var_00.model, var_00.targetname, var_00.var_1C8, var_00.origin, var_00.var_1D);
   var_04 setCanDamage(0);
   var_04 lib_0378::func_8D74("aud_npc_tank_enter");
-  var_02 = spawn("script_model", var_04.var_116);
+  var_02 = spawn("script_model", var_04.origin);
   var_02 setModel("usa_tank_sherman_m1919_bucket_turret_mp");
-  var_02 method_8449(var_04, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
+  var_02 linktosynchronizedparent(var_04, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
   var_00 = getEnt("sherman_tank_vista04", "targetname");
-  var_05 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
+  var_05 = function_01E0(var_00.model, var_00.targetname, var_00.var_1C8, var_00.origin, var_00.var_1D);
   var_05 setCanDamage(0);
   var_05 lib_0378::func_8D74("aud_npc_tank_enter");
-  var_02 = spawn("script_model", var_05.var_116);
+  var_02 = spawn("script_model", var_05.origin);
   var_02 setModel("usa_tank_sherman_m1919_bucket_turret_mp");
-  var_02 method_8449(var_05, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
+  var_02 linktosynchronizedparent(var_05, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
   var_01 thread vistatankvignettestankmove("path01_start", 0, 27, "sherman01_target00", "objective_A_complete");
   var_03 thread vistatankvignettestankmove("path01b_start", 0, 31, "sherman01_target00", "objective_A_complete");
   var_04 thread vistatankvignettestankmove("path01c_start", 0, 42, "sherman01_target00", "objective_A_complete");
@@ -778,7 +778,7 @@ vistatankvignettestankmove(param_00, param_01, param_02, param_03, param_04) {
   self startpath(var_05);
   wait(param_02);
   var_06 = getEnt(param_03, "targetname");
-  self method_825B(var_06.var_116);
+  self method_825B(var_06.origin);
   wait(3);
   for(;;) {
     self method_8263();
@@ -789,36 +789,36 @@ vistatankvignettestankmove(param_00, param_01, param_02, param_03, param_04) {
 vistatankvignettesfinalobjective() {
   level waittill("momentum_point_0_attackers");
   var_00 = getEnt("flag01_tank01", "targetname");
-  var_01 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
+  var_01 = function_01E0(var_00.model, var_00.targetname, var_00.var_1C8, var_00.origin, var_00.var_1D);
   var_01 setCanDamage(0);
-  var_01 thread vistatankvignettestankmove(var_00.var_1A2, 0, 2, "sherman01_target03", "game_over");
+  var_01 thread vistatankvignettestankmove(var_00.target, 0, 2, "sherman01_target03", "game_over");
   var_01 lib_0378::func_8D74("aud_npc_tank_enter");
   var_00 = getEnt("flag01_tank02", "targetname");
-  var_02 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
+  var_02 = function_01E0(var_00.model, var_00.targetname, var_00.var_1C8, var_00.origin, var_00.var_1D);
   var_02 setCanDamage(0);
-  var_02 thread vistatankvignettestankmove(var_00.var_1A2, 3, 2, "sherman01_target03", "game_over");
+  var_02 thread vistatankvignettestankmove(var_00.target, 3, 2, "sherman01_target03", "game_over");
   var_02 lib_0378::func_8D74("aud_npc_tank_enter");
   level waittill("momentum_point_1_attackers");
   var_00 = getEnt("flag02_tank01", "targetname");
-  var_03 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
+  var_03 = function_01E0(var_00.model, var_00.targetname, var_00.var_1C8, var_00.origin, var_00.var_1D);
   var_03 setCanDamage(0);
-  var_03 thread vistatankvignettestankmove(var_00.var_1A2, 0, 2, "sherman01_target03", "game_over");
+  var_03 thread vistatankvignettestankmove(var_00.target, 0, 2, "sherman01_target03", "game_over");
   var_03 lib_0378::func_8D74("aud_npc_tank_enter");
   level waittill("momentum_point_2_attackers");
   var_00 = getEnt("flag03_tank01", "targetname");
-  var_04 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
+  var_04 = function_01E0(var_00.model, var_00.targetname, var_00.var_1C8, var_00.origin, var_00.var_1D);
   var_04 setCanDamage(0);
-  var_04 thread vistatankvignettestankmove(var_00.var_1A2, 0, 2, "sherman01_target04", "game_over");
+  var_04 thread vistatankvignettestankmove(var_00.target, 0, 2, "sherman01_target04", "game_over");
   var_04 lib_0378::func_8D74("aud_npc_tank_enter");
   var_00 = getEnt("flag03_tank02", "targetname");
-  var_05 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
+  var_05 = function_01E0(var_00.model, var_00.targetname, var_00.var_1C8, var_00.origin, var_00.var_1D);
   var_05 setCanDamage(0);
-  var_05 thread vistatankvignettestankmove(var_00.var_1A2, 8, 2, "sherman01_target05", "game_over");
+  var_05 thread vistatankvignettestankmove(var_00.target, 8, 2, "sherman01_target05", "game_over");
   var_05 lib_0378::func_8D74("aud_npc_tank_enter");
   var_00 = getEnt("flag03_tank03", "targetname");
-  var_06 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
+  var_06 = function_01E0(var_00.model, var_00.targetname, var_00.var_1C8, var_00.origin, var_00.var_1D);
   var_06 setCanDamage(0);
-  var_06 thread vistatankvignettestankmove(var_00.var_1A2, 4, 2, "sherman01_target05", "game_over");
+  var_06 thread vistatankvignettestankmove(var_00.target, 4, 2, "sherman01_target05", "game_over");
   var_06 lib_0378::func_8D74("aud_npc_tank_enter");
 }
 
@@ -838,8 +838,8 @@ func_6C8C() {
 }
 
 func_6C87(param_00) {
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 setscriptmotionblurparams(0.5, 1, 1);
       }
@@ -851,8 +851,8 @@ func_6C87(param_00) {
   level.var_A4B5["scaleX"] = 1;
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
         var_02 set_no_sand_visionset_lightset();
@@ -889,7 +889,7 @@ func_6C8D() {
   lib_0378::func_8D74("aud_allies_victory_sfx");
   level.outrovignette_allies = spawnStruct();
   var_00 = common_scripts\utility::func_46B5("allies_win_outro", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   var_03 = [];
   var_04 = ["mp_raids_tunisia_allies_win_outro_allies_02", "mp_raids_tunisia_allies_win_outro_allies_03"];
@@ -898,7 +898,7 @@ func_6C8D() {
     var_08 = "m1a1_mp";
     var_09 = spawn("script_model", var_01);
     var_09.var_267E = function_0283();
-    var_09.var_1A7 = "allies";
+    var_09.team = "allies";
     var_09 setcostumemodels(var_09.var_267E, "allies");
     var_0A = spawn("weapon_" + var_08, (0, 0, 0), 1);
     var_0A linkTo(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
@@ -913,7 +913,7 @@ func_6C8D() {
     var_08 = "m1a1_mp";
     var_09 = spawn("script_model", var_01);
     var_09.var_267E = function_0283();
-    var_09.var_1A7 = "allies";
+    var_09.team = "allies";
     var_09 setcostumemodels(var_09.var_267E, "allies");
     var_0A = spawn("weapon_" + var_08 + var_0D, (0, 0, 0), 1);
     var_0A linkTo(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
@@ -928,7 +928,7 @@ func_6C8D() {
     var_08 = "stg44_mp";
     var_09 = spawn("script_model", var_01);
     var_09.var_267E = function_0283();
-    var_09.var_1A7 = "axis";
+    var_09.team = "axis";
     var_09 setcostumemodels(var_09.var_267E, "axis");
     var_0A = spawn("weapon_" + var_08, (0, 0, 0), 1);
     var_0A linkTo(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
@@ -941,20 +941,20 @@ func_6C8D() {
   foreach(var_11 in var_0E) {
     var_09 = spawn("script_model", var_01);
     var_09.var_267E = function_0283();
-    var_09.var_1A7 = "axis";
+    var_09.team = "axis";
     var_09 setcostumemodels(var_09.var_267E, "axis");
     var_09 animscripts\notetracks_common::give_player_xp(var_11, var_01, var_02);
     var_0F[var_0F.size] = var_09;
   }
 
   level.outrovignette_allies.ally_soldiers = var_05;
-  level.outrovignette_allies.var_A9E7 = var_03;
+  level.outrovignette_allies.weapons = var_03;
   level.outrovignette_allies.axis_soldiers = var_0F;
 }
 
 func_6C8B() {
   var_00 = level.outrovignette_allies.ally_soldiers;
-  var_01 = level.outrovignette_allies.var_A9E7;
+  var_01 = level.outrovignette_allies.weapons;
   var_02 = level.outrovignette_allies.axis_soldiers;
   common_scripts\utility::func_F71(var_00, ::delete);
   common_scripts\utility::func_F71(var_01, ::delete);
@@ -965,8 +965,8 @@ func_6C8B() {
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
   level.var_A4B5["lerpDuration"] = 0.1;
-  if(isDefined(level.var_744A)) {
-    foreach(var_04 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_04 in level.players) {
       if(isalive(var_04)) {
         var_04 vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
         var_04 setscriptmotionblurparams(0.35, 0, 0);
@@ -997,8 +997,8 @@ func_6C93() {
 }
 
 func_6C8E(param_00) {
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 setscriptmotionblurparams(2, 1, 1);
       }
@@ -1010,8 +1010,8 @@ func_6C8E(param_00) {
   level.var_A4B5["scaleX"] = 1;
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
         var_02 set_no_sand_visionset_lightset();
@@ -1045,7 +1045,7 @@ func_6C94() {
   preoutrovignettecleanup();
   lib_0378::func_8D74("aud_axis_victory_sfx");
   var_00 = common_scripts\utility::func_46B5("axis_win_outro", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   if(!isDefined(var_02)) {
     var_02 = (0, 0, 0);
@@ -1060,7 +1060,7 @@ func_6C94() {
     foreach(var_0A, var_08 in var_06) {
       var_09 = spawn("script_model", var_01);
       var_09.var_267E = var_08.var_267E;
-      var_09.var_1A7 = "allies";
+      var_09.team = "allies";
       var_09 setcostumemodels(var_09.var_267E, "allies");
       var_09 animscripts\notetracks_common::give_player_xp(var_05[var_0A], var_01, var_02);
       var_04[var_04.size] = var_09;
@@ -1068,7 +1068,7 @@ func_6C94() {
   } else {
     var_09 = spawn("script_model", var_02);
     var_09.var_267E = [1, 1, 1, 1, 1, 1];
-    var_09.var_1A7 = "allies";
+    var_09.team = "allies";
     var_09 setcostumemodels(var_09.var_267E, "allies");
     var_09 animscripts\notetracks_common::give_player_xp("mp_raids_tunisia_axis_win_outro_allies_01", var_01, var_02);
     var_04[var_04.size] = var_09;
@@ -1077,7 +1077,7 @@ func_6C94() {
   foreach(var_0C in var_05) {
     var_09 = spawn("script_model", var_01);
     var_09.var_267E = [1, 1, 1, 1, 1, 1];
-    var_09.var_1A7 = "allies";
+    var_09.team = "allies";
     var_09 setcostumemodels(var_09.var_267E, "allies");
     var_09 animscripts\notetracks_common::give_player_xp(var_0C, var_01, var_02);
     var_04[var_04.size] = var_09;
@@ -1089,7 +1089,7 @@ func_6C94() {
     var_11 = "stg44_mp";
     var_09 = spawn("script_model", var_01);
     var_09.var_267E = [2, 1, 2, 2, 2, 0];
-    var_09.var_1A7 = "axis";
+    var_09.team = "axis";
     var_09 setcostumemodels(var_09.var_267E, "axis");
     var_09 animscripts\notetracks_common::give_player_xp(var_10, var_01, var_02);
     var_0D[var_0D.size] = var_09;
@@ -1100,7 +1100,7 @@ func_6C94() {
     var_11 = "stg44_mp";
     var_09 = spawn("script_model", var_01);
     var_09.var_267E = [4, 3, 3, 3, 0, 0];
-    var_09.var_1A7 = "axis";
+    var_09.team = "axis";
     var_09 setcostumemodels(var_09.var_267E, "axis");
     if(var_10 == "mp_raids_tunisia_axis_win_outro_axis_01") {}
 
@@ -1119,14 +1119,14 @@ func_6C94() {
   }
 
   level.outrovignette_axis_ground.axis_soldiers = var_0D;
-  level.outrovignette_axis_ground.var_A9E7 = var_03;
+  level.outrovignette_axis_ground.weapons = var_03;
   level.outrovignette_axis_ground.ally_soldiers = var_04;
   level.outrovignette_axis_ground.staic_line_array = var_15;
 }
 
 func_6C92() {
   var_00 = level.outrovignette_axis_ground.axis_soldiers;
-  var_01 = level.outrovignette_axis_ground.var_A9E7;
+  var_01 = level.outrovignette_axis_ground.weapons;
   var_02 = level.outrovignette_axis_ground.ally_soldiers;
   var_03 = level.outrovignette_axis_ground.staic_line_array;
   common_scripts\utility::func_F71(var_00, ::delete);
@@ -1138,8 +1138,8 @@ func_6C92() {
   level.var_A4B5["scaleX"] = 1;
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_05 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_05 in level.players) {
       if(isalive(var_05)) {
         var_05 setscriptmotionblurparams(0.35, 0, 0);
         var_05 vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
@@ -1187,7 +1187,7 @@ shiftdefenderspawnsobj3() {
 
 func_7F89() {
   waittillframeend;
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   lib_04F4::func_863D("allies_A", "active", 5);
   lib_04F4::func_863D("axis_A", "active", 5);
   lib_04F4::func_863D("axis_B", "active", 5);
@@ -1229,7 +1229,7 @@ func_7FDB() {}
 
 func_7FC0() {
   level endon("game_ended");
-  maps\mp\killstreaks\_paratroopers::func_D5();
+  maps\mp\killstreaks\_paratroopers::init();
   thread removebridgedebris();
   waittillframeend;
   runsecuresupplies();
@@ -1245,40 +1245,40 @@ removebridgedebris() {
   var_00 = getEntArray("bomb_model", "script_noteworthy");
   foreach(var_02 in var_00) {
     var_02.storeddata = spawnStruct();
-    if(isDefined(var_02.var_81EF)) {
-      var_03 = getEntArray(var_02.var_81EF, "script_linkname");
+    if(isDefined(var_02.script_exploder)) {
+      var_03 = getEntArray(var_02.script_exploder, "script_linkname");
       foreach(var_05 in var_03) {
-        if(isDefined(var_05.var_165)) {
-          if(var_05.var_165 == "bridge_destroyed_clip") {
+        if(isDefined(var_05.exitlevel)) {
+          if(var_05.exitlevel == "bridge_destroyed_clip") {
             if(!isDefined(var_02.storeddata.clipdestruction)) {
               var_02.storeddata.clipdestruction = [];
             }
 
             var_06 = var_05;
-            var_06.var_8066 = var_06.var_116 + (0, 0, 2000);
-            var_06.hurttrigger = getEnt(var_06.var_1A2, "targetname");
+            var_06.var_8066 = var_06.origin + (0, 0, 2000);
+            var_06.hurttrigger = getEnt(var_06.target, "targetname");
             var_02.storeddata.clipdestruction[var_02.storeddata.clipdestruction.size] = var_06;
             continue;
           }
 
-          if(var_05.var_165 == "bomb_mesh") {
+          if(var_05.exitlevel == "bomb_mesh") {
             var_02.storeddata.mesh = var_05;
             continue;
           }
 
-          if(var_05.var_165 == "animated_model") {
+          if(var_05.exitlevel == "animated_model") {
             var_02.storeddata.animatedmodel = var_05;
             continue;
           }
 
-          if(var_05.var_165 == "bomb_clip") {
+          if(var_05.exitlevel == "bomb_clip") {
             var_02.storeddata.var_241F = var_05;
-            var_02.storeddata.debrisarray = getEntArray(var_02.storeddata.var_241F.var_1A2, "targetname");
+            var_02.storeddata.debrisarray = getEntArray(var_02.storeddata.var_241F.target, "targetname");
             foreach(var_08 in var_02.storeddata.debrisarray) {
-              var_08.var_8066 = var_08.var_116;
+              var_08.var_8066 = var_08.origin;
               var_08 method_808C();
-              var_08.var_116 = var_08.var_116 + (0, 0, -80);
-              var_08 method_805C();
+              var_08.origin = var_08.origin + (0, 0, -80);
+              var_08 save_undo_buffer();
             }
           }
         }
@@ -1293,7 +1293,7 @@ handlebridgedebrispaths() {
   level waittill("connect_bridge_debris_paths");
   wait(0.25);
   var_00 = getEnt("bridge_nodes_connect_clip", "targetname");
-  var_00.var_116 = var_00.var_116 + (0, 0, 1024);
+  var_00.origin = var_00.origin + (0, 0, 1024);
   wait(0.25);
   var_00 connectpaths();
   wait(0.25);
@@ -1306,7 +1306,7 @@ runsecuresupplies() {
   lib_04FF::func_6972(var_00);
   setomnvar("ui_raid_objective_index_allies", 0);
   setomnvar("ui_raid_objective_index_axis", 3);
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   lib_0502::func_86DE(lib_0501::func_4647("capture_objectiveTime"), 1);
   lib_04FF::func_6982(var_00);
   level thread lib_0500::func_1E85(game["defenders"], 15, "bomb_plant");
@@ -1347,7 +1347,7 @@ delayedextratime() {
   waittillframeend;
   if(!level.var_3C77["raid_obj_complete_bomb_01"] && level.var_3C77["raid_obj_complete_bomb_02"] && level.var_3C77["raid_obj_complete_bomb_03"] && level.var_3C77["raid_obj_complete_bomb_04"]) {
     level thread lib_0502::addtoobjectivetimelimit(lib_0501::func_4647("multibomb_objectiveAddTime"), 2);
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       var_01 thread maps\mp\gametypes\_hud_message::func_9102("raids_extratime");
     }
   }
@@ -1358,7 +1358,7 @@ killbombdwalls(param_00, param_01, param_02, param_03) {
   var_04 = param_01 * param_01;
   var_05 = lib_04F7::func_440F();
   foreach(var_07 in var_05) {
-    var_08 = distancesquared(param_00, var_07.var_116);
+    var_08 = distancesquared(param_00, var_07.origin);
     if(var_08 < var_04) {
       var_09 = var_07 lib_0502::func_207E("explosive_trigger");
       if(isDefined(var_09)) {
@@ -1376,7 +1376,7 @@ addbridgedebris(param_00) {
   if(isDefined(param_00.var_982D["trigger"][0].var_982D["bomb_model"][0])) {
     var_02 = param_00.var_982D["trigger"][0].var_982D["bomb_model"][0];
     var_03 = var_02.storeddata;
-    var_03.bomborigin = var_02.var_116;
+    var_03.bomborigin = var_02.origin;
     var_03.var_241F delete();
     var_03.mesh delete();
     if(param_00.var_695A == "bomb_01") {
@@ -1384,7 +1384,7 @@ addbridgedebris(param_00) {
       lib_0378::func_8D74("aud_bridge_bomb_B_exp", var_01);
     } else if(param_00.var_695A == "bomb_02") {
       level thread common_scripts\_exploder::func_88E(11);
-      thread killbombdwalls(var_02.var_116, 100, undefined, var_01);
+      thread killbombdwalls(var_02.origin, 100, undefined, var_01);
       lib_0378::func_8D74("aud_bridge_bomb_D_exp", var_01);
     } else if(param_00.var_695A == "bomb_03") {
       level thread common_scripts\_exploder::func_88E(8);
@@ -1395,8 +1395,8 @@ addbridgedebris(param_00) {
     }
 
     wait(var_01);
-    earthquake(0.7, 1, param_00.var_116, 2000);
-    var_03.animatedmodel method_8278(var_03.animatedmodel.var_EA4, "bridge_debris");
+    earthquake(0.7, 1, param_00.origin, 2000);
+    var_03.animatedmodel method_8278(var_03.animatedmodel.animation, "bridge_debris");
     var_03.animatedmodel thread animscripts\notetracks_common::func_3222(undefined, "bridge_debris", ::waitforbridgenote, undefined, undefined, var_03);
   }
 }
@@ -1411,8 +1411,8 @@ waitforbridgenote(param_00, param_01) {
       var_06 method_805B();
       var_06.var_A046 = 1;
       var_06 moveTo(var_06.var_8066, 0.25, 0, 0.1);
-      if(!isDefined(var_04) && isDefined(var_06.var_1A2)) {
-        var_04 = getEnt(var_06.var_1A2, "targetname");
+      if(!isDefined(var_04) && isDefined(var_06.target)) {
+        var_04 = getEnt(var_06.target, "targetname");
       }
     }
   }
@@ -1429,10 +1429,10 @@ waitforbridgenote(param_00, param_01) {
     if(var_09.var_8260 == param_00) {
       var_09.var_A046 = 1;
       var_09 method_808C();
-      var_09.var_116 = var_09.var_8066;
-      var_09 common_scripts\utility::func_2CBE(0.05, ::method_805F, 1);
+      var_09.origin = var_09.var_8066;
+      var_09 common_scripts\utility::func_2CBE(0.05, ::saved_actionslotdata, 1);
       var_09.hurttrigger method_808C();
-      var_09.hurttrigger.var_116 = var_09.hurttrigger.var_116 + (0, 0, 2000);
+      var_09.hurttrigger.origin = var_09.hurttrigger.origin + (0, 0, 2000);
       var_09.hurttrigger thread triggerkillplayers(1.5, 3, 0);
       thread removeclipkill(var_09);
     }
@@ -1445,9 +1445,9 @@ triggerkillplayers(param_00, param_01, param_02) {
   var_05 = int(exp(param_00 / param_01 * var_04));
   wait(param_02);
   for(var_06 = 0; var_06 < var_05; var_06++) {
-    foreach(var_08 in level.var_744A) {
+    foreach(var_08 in level.players) {
       if(isDefined(var_08) && !function_0279(var_08) && isalive(var_08) && var_08 istouching(var_03)) {
-        var_08 dodamage(var_08.var_BC + 1000, var_08.var_116, undefined, var_03, "MOD_CRUSH", undefined, undefined);
+        var_08 dodamage(var_08.var_BC + 1000, var_08.origin, undefined, var_03, "MOD_CRUSH", undefined, undefined);
       }
     }
 
@@ -1494,10 +1494,10 @@ turret_build_armored_train(param_00, param_01, param_02, param_03) {
 
 armoredtrainsetup() {
   waittillframeend;
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   var_00 = getEnt("armored_train", "targetname");
   var_01 = getEnt("train_engine_01", "targetname");
-  var_01.var_EA4 = "mp_raids_tun_train_01";
+  var_01.animation = "mp_raids_tun_train_01";
   var_00.train_engine = var_01;
   var_02 = getEntArray("armored_train_turret", "targetname");
   var_03 = getEntArray("armored_train_turret_towers", "targetname");
@@ -1509,7 +1509,7 @@ armoredtrainsetup() {
     var_06 = var_02[var_04];
     var_07 = var_06 turret_build_armored_train(var_05[var_04], "ger_tra_panzerzug_61_bp42_base_01_turret_desert_camo", undefined, undefined);
     var_07 thread turretthink(var_00, var_04);
-    var_07 method_8449(var_00);
+    var_07 linktosynchronizedparent(var_00);
     var_00.var_9F96[var_00.var_9F96.size] = var_07;
     var_06 delete();
   }
@@ -1552,10 +1552,10 @@ turretdiscovertarget(param_00, param_01) {
   for(;;) {
     var_05 = undefined;
     var_06 = 9999999;
-    foreach(var_08 in level.var_744A) {
+    foreach(var_08 in level.players) {
       if(!isDefined(level.train_turret_target[var_04]) || level.train_turret_target[var_04] != var_08) {
-        if(var_08.var_1A7 == game["attackers"]) {
-          var_09 = distance2dsquared(var_02, var_08.var_116);
+        if(var_08.team == game["attackers"]) {
+          var_09 = distance2dsquared(var_02, var_08.origin);
           if(var_09 < var_06) {
             var_0A = self gettagorigin("tag_flash");
             if(turretcanseetarget(var_08, var_0A, var_03, param_00)) {
@@ -1603,7 +1603,7 @@ turretfoldintotunnel(param_00) {
 
 turretcanseetarget(param_00, param_01, param_02, param_03) {
   if(param_00 istouching(param_02)) {
-    var_04 = bulletTrace(param_01, param_00.var_116 + (0, 0, 48), 0, param_03);
+    var_04 = bulletTrace(param_01, param_00.origin + (0, 0, 48), 0, param_03);
     if(var_04["fraction"] == 1) {
       return 1;
     }
@@ -1633,7 +1633,7 @@ targetwithinturretangles() {
   var_00 = self gettagorigin("tag_aim");
   var_01 = self gettagangles("tag_aim");
   var_02 = self getturrettargetEnt();
-  var_03 = var_02.var_116;
+  var_03 = var_02.origin;
   var_04 = vectorNormalize(var_03 - var_00);
   var_05 = anglesToForward(var_01);
   var_06 = vectordot(var_05, var_04);
@@ -1676,7 +1676,7 @@ armoredtrainthink() {
   lib_0378::func_8D74("aud_train_start_moving");
   wait(5);
   self moveTo(self.origin + anglesToForward(self.var_1D) * var_00, 25, 4);
-  self.train_engine scriptmodelplayanim(self.train_engine.var_EA4);
+  self.train_engine scriptmodelplayanim(self.train_engine.animation);
   wait(13);
   self notify("Armored_Train_Inactive");
   wait(12);
@@ -1706,7 +1706,7 @@ delayedaddflagtime() {
   waittillframeend;
   if(self.var_62C7.var_292D != 4) {
     level thread lib_0502::addtoobjectivetimelimit(lib_0501::func_4647("flags_addTime"), 3);
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       var_01 thread maps\mp\gametypes\_hud_message::func_9102("raids_extratime");
     }
   }
@@ -1714,15 +1714,15 @@ delayedaddflagtime() {
 
 initbunkerturrets() {
   waittillframeend;
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   var_00 = getEntArray("raid_tank_bunker", "targetname");
   foreach(var_02 in var_00) {
     var_02 setHintString("Press and hold X to use turret");
-    var_02.ownedturret = getEnt(var_02.var_1A2, "targetname");
+    var_02.ownedturret = getEnt(var_02.target, "targetname");
     var_02 thread watchbunkerturretuse();
     if(isDefined(var_02.ownedturret)) {
       var_02.ownedturret setdamagecallbackon(1);
-      var_02.ownedturret.var_29B5 = ::turret_damage_callback;
+      var_02.ownedturret.damagecallback = ::turret_damage_callback;
       var_02.ownedturret setCanDamage(1);
       var_02.ownedturret method_8131();
       var_02.ownedturret.var_BC = 4000;
@@ -1733,9 +1733,9 @@ initbunkerturrets() {
 
       var_02.ownedturret.var_9D65 = var_02;
       if(game["switchedsides"]) {
-        var_02.ownedturret.var_1A7 = "allies";
+        var_02.ownedturret.team = "allies";
       } else {
-        var_02.ownedturret.var_1A7 = "axis";
+        var_02.ownedturret.team = "axis";
       }
 
       var_02.ownedturret setdefaultdroppitch(0);
@@ -1755,11 +1755,11 @@ watchbunkerturretuse() {
 
     var_00 method_80DF(self.ownedturret);
     self.var_117 = var_00;
-    self.ownedturret.var_1A7 = self.var_117.var_1A7;
+    self.ownedturret.team = self.var_117.team;
     var_00 turret_mount_callback(self.ownedturret);
     var_00 watchdismountbunkerturret(self.ownedturret);
     var_00 turret_dismount_callback(self.ownedturret);
-    self.ownedturret.var_1A7 = "axis";
+    self.ownedturret.team = "axis";
     if(self.ownedturret.var_BC < 0) {
       waittillturretrepaired(self.ownedturret);
     }
@@ -1858,11 +1858,11 @@ func_9EFF(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   self notify("turret_destroyed");
   self setdefaultdroppitchyaw(0, 0);
   self makeunusable();
-  self method_805C();
+  self save_undo_buffer();
   self.var_9D65 common_scripts\utility::func_9D9F();
   self setCanDamage(0);
   self setdamagecallbackon(0);
-  self.var_29B5 = undefined;
+  self.damagecallback = undefined;
   self.var_566B = 0;
   var_0C = self method_80E2();
   if(isDefined(var_0C)) {
@@ -1896,7 +1896,7 @@ run_sandstorm() {
   wait(randomintrange(15, 30));
   level.sandstorm = 1;
   lib_0378::func_8D74("aud_sandstorm_start");
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 set_exterior_sand_visionset_lightset(2);
     var_01.sand_int_on = 0;
   }
@@ -1935,8 +1935,8 @@ preoutrovignettecleanup() {
   level.var_A4B5["scaleX"] = 1;
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_01 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_01 in level.players) {
       if(isalive(var_01)) {
         var_01 setscriptmotionblurparams(0.35, 0, 0);
         var_01 vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);

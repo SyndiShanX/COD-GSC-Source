@@ -24,15 +24,15 @@ init() {
   level.var_902A = ::func_902A;
   maps / mp / mp_zombie_nest_ee_wave_manipulation::main();
   thread srv_gameplay();
-  common_scripts\utility::func_3C87("ripsaw_punch_active");
-  common_scripts\utility::func_3C87("pap_fuse_placed");
-  common_scripts\utility::func_3C87("dlc2_melee_packable");
+  common_scripts\utility::flag_init("ripsaw_punch_active");
+  common_scripts\utility::flag_init("pap_fuse_placed");
+  common_scripts\utility::flag_init("dlc2_melee_packable");
 }
 
 srv_allow_special_pap() {
-  common_scripts\utility::func_3C8F("ripsaw_punch_active");
-  common_scripts\utility::func_3C8F("teslagun_punch_active");
-  common_scripts\utility::func_3C8F("dlc2_melee_packable");
+  common_scripts\utility::flag_set("ripsaw_punch_active");
+  common_scripts\utility::flag_set("teslagun_punch_active");
+  common_scripts\utility::flag_set("dlc2_melee_packable");
 }
 
 srv_add_special_mystery() {
@@ -117,10 +117,10 @@ srvshowpapfuse() {
     var_01 = spawn("script_model", var_00.origin);
     var_01.angles = var_00.angles;
     var_01 setModel("zmb_fuse_04");
-    common_scripts\utility::func_3C8F("pap_fuse_placed");
-    common_scripts\utility::func_3C8F("ripsaw_punch_active");
-    common_scripts\utility::func_3C8F("teslagun_punch_active");
-    common_scripts\utility::func_3C8F("dlc2_melee_packable");
+    common_scripts\utility::flag_set("pap_fuse_placed");
+    common_scripts\utility::flag_set("ripsaw_punch_active");
+    common_scripts\utility::flag_set("teslagun_punch_active");
+    common_scripts\utility::flag_set("dlc2_melee_packable");
   }
 }
 
@@ -145,8 +145,8 @@ collect_souls_to_unlock_pack_a_punch() {
 
   level.pack_a_punc_pre_func = ::wait_for_pap_available;
   for(var_07 = 0; var_07 < var_01.size; var_07++) {
-    common_scripts\utility::func_3C87("zmb_sg_soul_collect_flag_" + var_01[var_07].var_81E1);
-    common_scripts\utility::func_3C87("zmb_sg_soul_collect_ready_flag_" + var_01[var_07].var_81E1);
+    common_scripts\utility::flag_init("zmb_sg_soul_collect_flag_" + var_01[var_07].var_81E1);
+    common_scripts\utility::flag_init("zmb_sg_soul_collect_ready_flag_" + var_01[var_07].var_81E1);
   }
 
   common_scripts\utility::array_thread(var_01, ::set_pack_key_unlocked);
@@ -175,7 +175,7 @@ unlock_next_reciever() {
   level.zmb_pap_reciver_unlocks++;
   var_00 = "zmb_sg_soul_collect_ready_flag_" + level.zmb_pap_reciver_unlocks;
   if(common_scripts\utility::func_3C83(var_00)) {
-    common_scripts\utility::func_3C8F(var_00);
+    common_scripts\utility::flag_set(var_00);
   }
 }
 
@@ -210,7 +210,7 @@ set_pack_key_unlocked() {
 
   var_01.ignoresighttrace = 1;
   var_01 maps / mp / mp_zombies_soul_collection::func_170B(10, var_02, 70, "zmb_sg_soul_collect_ping_" + var_00, undefined, "tag_origin", undefined, "tag_origin");
-  common_scripts\utility::func_3C8F("zmb_sg_soul_collect_flag_" + self.var_81E1);
+  common_scripts\utility::flag_set("zmb_sg_soul_collect_flag_" + self.var_81E1);
   level thread maps / mp / gametypes / zombies::orders_and_contracts_report_event("geistcraft_device_powered");
 }
 

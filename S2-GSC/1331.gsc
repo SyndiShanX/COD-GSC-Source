@@ -114,7 +114,7 @@ func_6B98() {
   self endon("disconnect");
   self endon("spawned");
   level waittill("game_ended");
-  if(maps\mp\_utility::func_57B2() && !maps\mp\_utility::func_5743()) {
+  if(maps\mp\_utility::isroundbased() && !maps\mp\_utility::islastround()) {
     var_00 = self rolecheckstate("active");
     self.var_7ED1["activeOnDeath"] = var_00;
     self roleondeath();

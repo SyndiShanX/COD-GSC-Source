@@ -24,8 +24,8 @@ main(param_00) {
       }
 
       if(var_03) {
-        if(isDefined(var_01[var_02].var_8186)) {
-          common_scripts\_createfx::func_7CE2(var_01[var_02]);
+        if(isDefined(var_01[var_02].setdepthoffield)) {
+          common_scripts\_createfx::removefxentwithentity(var_01[var_02]);
         }
 
         var_01[var_02] delete();
@@ -172,7 +172,7 @@ func_27D6(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   var_07.var_356E = undefined;
   var_07.var_200B = 0;
   var_07.var_A560 = "none";
-  var_07.var_2015 = undefined;
+  var_07.carryicon = undefined;
   var_07.var_6AEF = undefined;
   var_07.var_6B62 = undefined;
   var_07.var_6B93 = undefined;
@@ -242,15 +242,15 @@ func_2D2F() {
   var_00.var_A582 = undefined;
   if(!function_0367()) {
     if(isDefined(var_00.var_698A)) {
-      maps\mp\_utility::func_68B(var_00.var_698A);
+      maps\mp\_utility::_objective_delete(var_00.var_698A);
     }
 
     if(isDefined(var_00.var_698B)) {
-      maps\mp\_utility::func_68B(var_00.var_698B);
+      maps\mp\_utility::_objective_delete(var_00.var_698B);
     }
 
     if(isDefined(var_00.var_698C)) {
-      maps\mp\_utility::func_68B(var_00.var_698C);
+      maps\mp\_utility::_objective_delete(var_00.var_698C);
     }
   }
 
@@ -279,7 +279,7 @@ func_2D2F() {
   var_00.var_356E = undefined;
   var_00.var_200B = undefined;
   var_00.var_A560 = undefined;
-  var_00.var_2015 = undefined;
+  var_00.carryicon = undefined;
   var_00.var_6AEF = undefined;
   var_00.var_6B62 = undefined;
   var_00.var_6B93 = undefined;
@@ -310,7 +310,7 @@ func_201A() {
       continue;
     }
 
-    if(!maps\mp\_utility::func_57A0(var_00)) {
+    if(!maps\mp\_utility::isreallyalive(var_00)) {
       continue;
     }
 
@@ -334,7 +334,7 @@ func_201A() {
       continue;
     }
 
-    if(var_00 maps\mp\_utility::func_581D() || var_00 maps\mp\_utility::func_572D()) {
+    if(var_00 maps\mp\_utility::isusingremote() || var_00 maps\mp\_utility::func_572D()) {
       continue;
     }
 
@@ -391,7 +391,7 @@ func_2019() {
           }
         }
       } else {
-        if(maps\mp\_utility::func_57A0(self.var_230E)) {
+        if(maps\mp\_utility::isreallyalive(self.var_230E)) {
           func_86F9(self.var_230E);
         }
 
@@ -526,8 +526,8 @@ func_4D05() {
   self endon("death");
   self endon("drop_object");
   level waittill("game_ended");
-  if(isDefined(self.var_2015)) {
-    self.var_2015.alpha = 0;
+  if(isDefined(self.carryicon)) {
+    self.carryicon.alpha = 0;
   }
 }
 
@@ -545,7 +545,7 @@ func_479E(param_00) {
       self thread[[param_00.var_201D]]();
     }
 
-    maps\mp\_utility::func_642(param_00.var_201C);
+    maps\mp\_utility::_giveweapon(param_00.var_201C);
     self switchtoweapon(param_00.var_201C);
     self method_82CD();
     common_scripts\utility::func_603();
@@ -558,16 +558,16 @@ func_479E(param_00) {
     }
   }
 
-  if(isDefined(param_00.var_2015) && isPlayer(self)) {
+  if(isDefined(param_00.carryicon) && isPlayer(self)) {
     if(level.splitscreen) {
-      self.var_2015 = maps\mp\gametypes\_hud_util::createicon(param_00.var_2015, 33, 33);
-      self.var_2015 maps\mp\gametypes\_hud_util::setpoint("BOTTOM RIGHT", "BOTTOM RIGHT", -50, -78);
+      self.carryicon = maps\mp\gametypes\_hud_util::createicon(param_00.carryicon, 33, 33);
+      self.carryicon maps\mp\gametypes\_hud_util::setpoint("BOTTOM RIGHT", "BOTTOM RIGHT", -50, -78);
     } else {
-      self.var_2015 = maps\mp\gametypes\_hud_util::createicon(param_00.var_2015, 50, 50);
-      self.var_2015 maps\mp\gametypes\_hud_util::setpoint("BOTTOM RIGHT", "BOTTOM RIGHT", -90, -110);
+      self.carryicon = maps\mp\gametypes\_hud_util::createicon(param_00.carryicon, 50, 50);
+      self.carryicon maps\mp\gametypes\_hud_util::setpoint("BOTTOM RIGHT", "BOTTOM RIGHT", -90, -110);
     }
 
-    self.var_2015.hidewheninmenu = 1;
+    self.carryicon.hidewheninmenu = 1;
     thread func_4D05();
   }
 }
@@ -663,8 +663,8 @@ func_866E(param_00) {
       var_02 = bulletTrace(self.var_2006.origin + (0, 0, 20), self.var_2006.origin - (0, 0, 2000), 0);
     }
   } else {
-    var_01 = playerphysicstrace(self.var_802F + (0, 0, 20), self.var_802F - (0, 0, 20));
-    var_02 = bulletTrace(self.var_802F + (0, 0, 20), self.var_802F - (0, 0, 20), 0, undefined);
+    var_01 = playerphysicstrace(self.detachall + (0, 0, 20), self.detachall - (0, 0, 20));
+    var_02 = bulletTrace(self.detachall + (0, 0, 20), self.detachall - (0, 0, 20), 0, undefined);
   }
 
   var_03 = self.var_2006;
@@ -844,8 +844,8 @@ func_466D(param_00) {
 }
 
 func_95ED(param_00) {
-  if(isDefined(self.var_2015)) {
-    self.var_2015 maps\mp\gametypes\_hud_util::destroyelem();
+  if(isDefined(self.carryicon)) {
+    self.carryicon maps\mp\gametypes\_hud_util::destroyelem();
   }
 
   if(isDefined(self)) {
@@ -857,7 +857,7 @@ func_95ED(param_00) {
     thread func_6FCF(param_00.var_9D65.origin);
   }
 
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     if(isDefined(param_00.var_201C)) {
       var_01 = common_scripts\utility::func_562E(param_00.var_59D8);
       if(!var_01 && isDefined(param_00.var_59D9)) {
@@ -891,11 +891,11 @@ func_9BA1() {
   self endon("disconnect");
   self endon("death");
   self endon("drop_object");
-  while(isDefined(self.var_2016) && maps\mp\_utility::func_57A0(self)) {
+  while(isDefined(self.var_2016) && maps\mp\_utility::isreallyalive(self)) {
     if(self isonground()) {
       var_00 = bulletTrace(self.origin + (0, 0, 20), self.origin - (0, 0, 20), 0, undefined);
       if(var_00["fraction"] < 1) {
-        self.var_2016.var_802F = var_00["position"];
+        self.var_2016.detachall = var_00["position"];
       }
     }
 
@@ -925,17 +925,17 @@ func_5FD8() {
 
 deleteuseobjectobjectives() {
   if(isDefined(self.var_698A)) {
-    maps\mp\_utility::func_68B(self.var_698A);
+    maps\mp\_utility::_objective_delete(self.var_698A);
     self.var_698A = undefined;
   }
 
   if(isDefined(self.var_698B)) {
-    maps\mp\_utility::func_68B(self.var_698B);
+    maps\mp\_utility::_objective_delete(self.var_698B);
     self.var_698B = undefined;
   }
 
   if(isDefined(self.var_698C)) {
-    maps\mp\_utility::func_68B(self.var_698C);
+    maps\mp\_utility::_objective_delete(self.var_698C);
     self.var_698C = undefined;
   }
 }
@@ -1063,9 +1063,9 @@ hasperk7(param_00, param_01) {
     self.var_9D65.var_162D = param_00;
   }
 
-  if(isDefined(self.var_5CBA)) {
-    self.var_5CBA method_808C();
-    self.var_5CBA.origin = param_00;
+  if(isDefined(self.levelflag)) {
+    self.levelflag method_808C();
+    self.levelflag.origin = param_00;
   }
 
   if(isDefined(self.var_A582)) {
@@ -1147,7 +1147,7 @@ func_A227() {
   self endon("deleted");
   for(;;) {
     self.var_9D65 waittill("trigger", var_00);
-    if(!maps\mp\_utility::func_57A0(var_00)) {
+    if(!maps\mp\_utility::isreallyalive(var_00)) {
       continue;
     }
 
@@ -1257,7 +1257,7 @@ func_1F78() {
   self endon("finished_use");
   for(;;) {
     self.var_9D65 waittill("trigger", var_00);
-    if(!maps\mp\_utility::func_57A0(var_00)) {
+    if(!maps\mp\_utility::isreallyalive(var_00)) {
       continue;
     }
 
@@ -1273,7 +1273,7 @@ func_1F78() {
 
 func_44AF() {
   var_00 = self.var_230F;
-  if(maps\mp\_utility::func_57A0(self.var_230E)) {
+  if(maps\mp\_utility::isreallyalive(self.var_230E)) {
     var_01 = self.var_230E;
   } else {
     var_01 = undefined;
@@ -1284,9 +1284,9 @@ func_44AF() {
     var_03 = getarraykeys(self.var_9AC3[var_00]);
     for(var_04 = 0; var_04 < var_03.size; var_04++) {
       var_05 = self.var_9AC3[var_00][var_03[var_04]];
-      if(maps\mp\_utility::func_57A0(var_05.player) && !isDefined(var_02) || var_05.var_9309 < var_02) {
+      if(maps\mp\_utility::isreallyalive(var_05.player) && !isDefined(var_02) || var_05.starttime < var_02) {
         var_01 = var_05.player;
-        var_02 = var_05.var_9309;
+        var_02 = var_05.starttime;
       }
     }
   }
@@ -1433,7 +1433,7 @@ func_779A() {
     }
 
     self.var_9D65 waittill("trigger", var_01);
-    if(!maps\mp\_utility::func_57A0(var_01)) {
+    if(!maps\mp\_utility::isreallyalive(var_01)) {
       continue;
     }
 
@@ -1449,7 +1449,7 @@ func_779A() {
       continue;
     }
 
-    if(var_01 maps\mp\_utility::func_581D() || isDefined(var_01.var_9071) || var_01 maps\mp\_utility::func_572D()) {
+    if(var_01 maps\mp\_utility::isusingremote() || isDefined(var_01.var_9071) || var_01 maps\mp\_utility::func_572D()) {
       continue;
     }
 
@@ -1510,7 +1510,7 @@ func_779A() {
       }
     }
 
-    if(maps\mp\_utility::func_57A0(var_01) && !isDefined(var_01.var_9AC5[var_00])) {
+    if(maps\mp\_utility::isreallyalive(var_01) && !isDefined(var_01.var_9AC5[var_00])) {
       var_01 thread func_9DC3(self);
     }
   }
@@ -1576,7 +1576,7 @@ func_9DC3(param_00) {
   var_02 = self.guid;
   var_03 = spawnStruct();
   var_03.player = self;
-  var_03.var_9309 = gettime();
+  var_03.starttime = gettime();
   param_00.var_9AC3[var_01][var_02] = var_03;
   if(isDefined(param_00.var_6BB8)) {
     param_00[[param_00.var_6BB8]](self);
@@ -1592,7 +1592,7 @@ func_9DC3(param_00) {
   }
 
   param_00 func_A18F();
-  while(maps\mp\_utility::func_57A0(self) && isDefined(param_00.var_9D65) && self istouching(param_00.var_9D65) && !level.gameended) {
+  while(maps\mp\_utility::isreallyalive(self) && isDefined(param_00.var_9D65) && self istouching(param_00.var_9D65) && !level.gameended) {
     if(common_scripts\utility::func_562E(param_00.requirescontinuouslos) && isDefined(param_00.var_1F6A) && !param_00[[param_00.var_1F6A]](self, param_00.var_A582)) {
       break;
     }
@@ -1684,14 +1684,14 @@ func_A156(param_00, param_01) {
     }
   }
 
-  if(!isDefined(self.var_7794.var_5C0C) || self.var_7794.var_5C0C != param_00.var_A22B || self.var_7794.var_5BAA != isDefined(level.var_4E09)) {
+  if(!isDefined(self.var_7794.var_5C0C) || self.var_7794.var_5C0C != param_00.var_A22B || self.var_7794.var_5BAA != isDefined(level.hostmigrationtimer)) {
     if(param_00.var_28D5 > param_00.var_A23F) {
       param_00.var_28D5 = param_00.var_A23F;
     }
 
     var_04 = param_00.var_28D5 / param_00.var_A23F;
     var_05 = 1000 / param_00.var_A23F * param_00.var_A22B;
-    if(isDefined(level.var_4E09)) {
+    if(isDefined(level.hostmigrationtimer)) {
       var_05 = 0;
     }
 
@@ -1701,18 +1701,18 @@ func_A156(param_00, param_01) {
 
     self.var_7794 maps\mp\gametypes\_hud_util::updatebar(var_04, var_05);
     self.var_7794.var_5C0C = param_00.var_A22B;
-    self.var_7794.var_5BAA = isDefined(level.var_4E09);
+    self.var_7794.var_5BAA = isDefined(level.hostmigrationtimer);
   }
 }
 
 func_45CB(param_00) {
-  return self.var_689F[maps\mp\_utility::func_45DE(param_00)];
+  return self.var_689F[maps\mp\_utility::getotherteam(param_00)];
 }
 
 func_A18A(param_00, param_01) {
   var_02 = level.gametype;
   var_03 = param_00.var_502A;
-  if(!isDefined(level.var_4E09)) {
+  if(!isDefined(level.hostmigrationtimer)) {
     if(param_00.var_28D5 > param_00.var_A23F) {
       param_00.var_28D5 = param_00.var_A23F;
     }
@@ -2047,7 +2047,7 @@ func_A213(param_00) {
     }
 
     param_00.var_5BC5 = var_02;
-    param_00 maps\mp\_utility::func_642(var_01);
+    param_00 maps\mp\_utility::_giveweapon(var_01);
     param_00 disableoffhandweapons();
     param_00 setweaponammostock(var_01, 0);
     param_00 setweaponammoclip(var_01, 0);
@@ -2129,7 +2129,7 @@ func_A213(param_00) {
       param_00 unlink();
     }
 
-    if(!maps\mp\_utility::func_57A0(param_00)) {
+    if(!maps\mp\_utility::isreallyalive(param_00)) {
       param_00.var_5A3E = 1;
     }
   }
@@ -2146,7 +2146,7 @@ func_A213(param_00) {
 
 func_2E46() {
   if(isDefined(self.var_1147)) {
-    self method_802E(self.var_1147, "tag_inhand");
+    self detach(self.var_1147, "tag_inhand");
     self.var_1147 = undefined;
   }
 }
@@ -2165,7 +2165,7 @@ func_95F5(param_00) {
 }
 
 func_A23B(param_00, param_01, param_02, param_03) {
-  if(!maps\mp\_utility::func_57A0(param_00)) {
+  if(!maps\mp\_utility::isreallyalive(param_00)) {
     return 0;
   }
 
@@ -2311,7 +2311,7 @@ func_A214(param_00, param_01) {
         param_00 unlink();
       }
 
-      return maps\mp\_utility::func_57A0(param_00);
+      return maps\mp\_utility::isreallyalive(param_00);
     }
 
     wait 0.05;
@@ -2355,16 +2355,16 @@ func_6F82(param_00) {
   }
 
   var_03 = -1;
-  var_04 = isDefined(level.var_4E09);
-  while(maps\mp\_utility::func_57A0(self) && func_A224(param_00) && !level.gameended) {
-    if(var_03 != func_45D4(param_00) || var_04 != isDefined(level.var_4E09)) {
+  var_04 = isDefined(level.hostmigrationtimer);
+  while(maps\mp\_utility::isreallyalive(self) && func_A224(param_00) && !level.gameended) {
+    if(var_03 != func_45D4(param_00) || var_04 != isDefined(level.hostmigrationtimer)) {
       if(param_00.var_28D5 > param_00.var_A23F) {
         param_00.var_28D5 = param_00.var_A23F;
       }
 
       var_05 = param_00.var_28D5 / param_00.var_A23F;
       var_06 = 1000 / param_00.var_A23F * func_45D4(param_00);
-      if(isDefined(level.var_4E09)) {
+      if(isDefined(level.hostmigrationtimer)) {
         var_06 = 0;
       }
 
@@ -2385,7 +2385,7 @@ func_6F82(param_00) {
     }
 
     var_03 = func_45D4(param_00);
-    var_04 = isDefined(level.var_4E09);
+    var_04 = isDefined(level.hostmigrationtimer);
     func_A18A(param_00, 1);
     wait 0.05;
   }
@@ -2647,7 +2647,7 @@ func_A0FD(param_00, param_01) {
 
     objective_state(var_06, "active");
     if(self.type == "carryObject") {
-      if(maps\mp\_utility::func_57A0(self.var_2006) && !func_8B9A(param_00)) {
+      if(maps\mp\_utility::isreallyalive(self.var_2006) && !func_8B9A(param_00)) {
         objective_onentity(var_06, self.var_2006);
         continue;
       }
@@ -2880,7 +2880,7 @@ func_861A(param_00, param_01) {
 }
 
 func_8645(param_00) {
-  self.var_2015 = param_00;
+  self.carryicon = param_00;
 }
 
 func_471D(param_00) {
@@ -3096,12 +3096,12 @@ func_44B9(param_00) {
 }
 
 func_45A9() {
-  if(!isDefined(level.var_7AD6) || level.var_7AD6.size < 1) {
+  if(!isDefined(level.reclaimedreservedobjectives) || level.reclaimedreservedobjectives.size < 1) {
     var_00 = level.var_688F;
     level.var_688F++;
   } else {
-    var_00 = level.var_7AD6[level.var_7AD6.size - 1];
-    level.var_7AD6[level.var_7AD6.size - 1] = undefined;
+    var_00 = level.reclaimedreservedobjectives[level.reclaimedreservedobjectives.size - 1];
+    level.reclaimedreservedobjectives[level.reclaimedreservedobjectives.size - 1] = undefined;
   }
 
   if(var_00 > 31) {

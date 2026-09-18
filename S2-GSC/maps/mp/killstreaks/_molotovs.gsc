@@ -16,7 +16,7 @@ func_9E32(param_00) {
 }
 
 func_9E33() {
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     maps\mp\_matchdata::func_5E9A("molotovs", self.origin);
     return 1;
   }

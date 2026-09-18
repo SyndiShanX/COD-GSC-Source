@@ -95,11 +95,11 @@ func_86CE(param_00, param_01) {
   var_06 = int(var_05 * 10000);
   self.var_62C7.var_62CF[self.var_62C7.var_292D].var_695D lib_04FF::func_860D(param_00);
   if(param_01) {
-    self.var_62C7.var_62CF[self.var_62C7.var_292D].var_695D lib_04FF::func_8615(var_06, param_00, var_02, var_03);
+    self.var_62C7.var_62CF[self.var_62C7.var_292D].var_695D lib_04FF::playlocalsound(var_06, param_00, var_02, var_03);
     return;
   }
 
-  self.var_62C7.var_62CF[self.var_62C7.var_292D].var_695D lib_04FF::func_8617("taking", param_00);
+  self.var_62C7.var_62CF[self.var_62C7.var_292D].var_695D lib_04FF::playsound("taking", param_00);
 }
 
 func_1D4D() {
@@ -114,18 +114,18 @@ func_1D4D() {
 }
 
 func_45A7() {
-  if(!isDefined(self.var_1A2)) {
+  if(!isDefined(self.target)) {
     return undefined;
   }
 
   var_00 = [];
-  var_01 = getEntArray(self.var_1A2, "targetname");
+  var_01 = getEntArray(self.target, "targetname");
   foreach(var_03 in var_01) {
-    if(!isDefined(var_03.var_165)) {
-      var_03.var_165 = "trigger";
+    if(!isDefined(var_03.exitlevel)) {
+      var_03.exitlevel = "trigger";
     }
 
-    if(var_03.var_165 == "trigger") {
+    if(var_03.exitlevel == "trigger") {
       var_00[var_00.size] = var_03;
     }
   }
@@ -143,14 +143,14 @@ func_45A7() {
 
 func_4592() {
   var_00 = [];
-  if(isDefined(self.var_1A2)) {
-    var_01 = getEntArray(self.var_1A2, "targetname");
+  if(isDefined(self.target)) {
+    var_01 = getEntArray(self.target, "targetname");
     foreach(var_03 in var_01) {
-      if(!isDefined(var_03.var_165)) {
+      if(!isDefined(var_03.exitlevel)) {
         continue;
       }
 
-      if(var_03.var_165 == "visuals") {
+      if(var_03.exitlevel == "visuals") {
         var_00[var_00.size] = var_03;
       }
     }
@@ -173,8 +173,8 @@ handleflagoutline(param_00) {
     if(param_00) {
       var_06 = [];
       var_07 = [];
-      foreach(var_09 in level.var_744A) {
-        if(var_09.var_1A7 == var_01 || var_09.var_1A7 == "spectator") {
+      foreach(var_09 in level.players) {
+        if(var_09.team == var_01 || var_09.team == "spectator") {
           var_07[var_07.size] = var_09;
           continue;
         }
@@ -189,8 +189,8 @@ handleflagoutline(param_00) {
       if(var_06.size > 0) {
         var_02 hudoutlineenableforclients(var_06, var_05, 1);
       }
-    } else if(level.var_744A.size > 0) {
-      var_02 hudoutlineenableforclients(level.var_744A, var_03, 1);
+    } else if(level.players.size > 0) {
+      var_02 hudoutlineenableforclients(level.players, var_03, 1);
     }
 
     level waittill("joined_team");
@@ -202,25 +202,25 @@ handleflaguse() {
   self endon("disableFlag");
   var_00 = game["defenders"];
   var_01 = self.var_9D65;
-  foreach(var_03 in level.var_744A) {
-    if(var_03.var_1A7 == var_00 || var_03.var_1A7 == "spectator") {
+  foreach(var_03 in level.players) {
+    if(var_03.team == var_00 || var_03.team == "spectator") {
       var_01 disableplayeruse(var_03);
       continue;
     }
 
-    if(var_03.var_1A7 != var_00) {
+    if(var_03.team != var_00) {
       var_01 enableplayeruse(var_03);
     }
   }
 
   for(;;) {
     level waittill("joined_team", var_03);
-    if(var_03.var_1A7 == var_00 || var_03.var_1A7 == "spectator") {
+    if(var_03.team == var_00 || var_03.team == "spectator") {
       var_01 disableplayeruse(var_03);
       continue;
     }
 
-    if(var_03.var_1A7 != var_00) {
+    if(var_03.team != var_00) {
       var_01 enableplayeruse(var_03);
     }
   }
@@ -230,7 +230,7 @@ disableflaguse() {
   level endon("game_ended");
   self endon("activateFlag");
   var_00 = self.var_9D65;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_00 disableplayeruse(var_02);
   }
 
@@ -252,10 +252,10 @@ func_62D0(param_00, param_01) {
     var_04 lib_0502::func_7997();
   }
 
-  var_06 = getEnt(self.var_81EF, "script_linkname");
-  var_07 = getEnt(var_06.var_81EF, "script_linkname");
-  var_08 = getEnt(var_07.var_81EF, "script_linkname");
-  var_06 method_805C();
+  var_06 = getEnt(self.script_exploder, "script_linkname");
+  var_07 = getEnt(var_06.script_exploder, "script_linkname");
+  var_08 = getEnt(var_07.script_exploder, "script_linkname");
+  var_06 save_undo_buffer();
   lib_04FF::func_6983(self.var_62C7.var_695A);
   var_09 = lib_04FF::func_45CE(self);
   var_0A = "flags_raiseTime_" + param_01;
@@ -303,8 +303,8 @@ func_62D0(param_00, param_01) {
 updateflagprogress() {
   var_00 = self.alliedflag;
   var_01 = self.axisflag;
-  var_02 = var_01.var_116;
-  var_03 = var_00.var_116;
+  var_02 = var_01.origin;
+  var_03 = var_00.origin;
   var_04 = self.var_A23F;
   var_05 = distance(var_02, var_03);
   var_06 = vectorNormalize(var_02 - var_03);
@@ -314,16 +314,16 @@ updateflagprogress() {
     var_09 = self.var_28D5;
     if(var_09 < var_07) {
       var_0A = var_09 / var_07;
-      var_01.var_116 = var_02 - var_05 * var_06 * var_0A;
+      var_01.origin = var_02 - var_05 * var_06 * var_0A;
     } else {
       if(var_08) {
         var_00 method_805B();
-        var_01 method_805C();
+        var_01 save_undo_buffer();
         var_08 = 0;
       }
 
       var_0A = var_09 - var_07 / var_07;
-      var_00.var_116 = var_03 + var_05 * var_06 * var_0A;
+      var_00.origin = var_03 + var_05 * var_06 * var_0A;
     }
 
     wait 0.05;
@@ -351,7 +351,7 @@ handleobjsheen(param_00) {
 func_08B1() {
   self.var_695D notify("activateFlag");
   self.var_695D thread handleflaguse();
-  self.var_695D.flagpole.var_6C4C = self.var_695D.flagpole.var_106;
+  self.var_695D.flagpole.var_6C4C = self.var_695D.flagpole.model;
   self.var_695D.flagpole handleobjsheen(1);
   self.var_695D maps\mp\gametypes\_gameobjects::func_8A60("any");
   foreach(var_01 in self.var_695D.var_A582) {
@@ -427,11 +427,11 @@ func_62CA(param_00) {
   param_00 thread momentumawardraisingxpevent();
   self.var_A22B = 1;
   lib_04FF::func_860D(136);
-  lib_04FF::func_8617("taking", 136);
+  lib_04FF::playsound("taking", 136);
   var_01 = maps\mp\gametypes\_gameobjects::func_45F7();
   self.var_2EE9 = 0;
   self.var_2950 = 0;
-  if(param_00.var_1A7 == game["attackers"]) {
+  if(param_00.team == game["attackers"]) {
     lib_04FF::func_6981(self.var_62C7.var_695A, "progress", 0);
   } else {
     lib_04FF::func_6981(self.var_62C7.var_695A, "enemyprogress", 0);
@@ -463,7 +463,7 @@ func_62C5() {
 
 func_62CC(param_00) {
   var_01 = gettime();
-  var_02 = param_00.var_1A7;
+  var_02 = param_00.team;
   var_03 = maps\mp\gametypes\_gameobjects::func_45F7();
   self.var_1FC1 = gettime();
   self.var_4B25 = 1;
@@ -472,7 +472,7 @@ func_62CC(param_00) {
     [[var_04]]();
   }
 
-  self.var_9D65.var_62C7 notify("momentumCapture", param_00.var_1A7);
+  self.var_9D65.var_62C7 notify("momentumCapture", param_00.team);
 }
 
 func_62CB(param_00, param_01, param_02) {
@@ -507,7 +507,7 @@ func_62CB(param_00, param_01, param_02) {
 }
 
 momentumawardflagcaptureobjectiveevent(param_00) {
-  param_00 maps\mp\_utility::func_50EA("raids_flag_raise", 1);
+  param_00 maps\mp\_utility::incplayerstat("raids_flag_raise", 1);
   level thread maps\mp\gametypes\_rank::giverankxp("raids_flag_raise", param_00);
 }
 
@@ -528,8 +528,8 @@ func_62CE() {
         var_00 = var_00 - 0.05;
       }
 
-      foreach(var_04 in level.var_744A) {
-        if(var_04.var_1A7 == game["attackers"]) {
+      foreach(var_04 in level.players) {
+        if(var_04.team == game["attackers"]) {
           if(var_04 istouching(self)) {
             var_02 = 1;
           }

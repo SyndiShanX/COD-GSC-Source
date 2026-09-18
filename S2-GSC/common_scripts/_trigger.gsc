@@ -42,13 +42,13 @@ func_097B(param_00) {
 
 func_9D85() {
   thread func_9D86();
-  level endon("trigger_group_" + self.var_82BE);
+  level endon("trigger_group_" + self.addroll);
   self waittill("trigger");
-  level notify("trigger_group_" + self.var_82BE, self);
+  level notify("trigger_group_" + self.addroll, self);
 }
 
 func_9D86() {
-  level waittill("trigger_group_" + self.var_82BE, var_00);
+  level waittill("trigger_group_" + self.addroll, var_00);
   if(isDefined(self) && self != var_00) {
     self delete();
   }
@@ -91,13 +91,13 @@ func_9D79(param_00) {
   param_00 endon("death");
   var_01 = param_00 common_scripts\utility::func_4395();
   if(!common_scripts\utility::func_3C83(var_01)) {
-    common_scripts\utility::func_3C87(var_01);
+    common_scripts\utility::flag_init(var_01);
   }
 
   for(;;) {
     param_00 waittill("trigger", var_02);
-    param_00 common_scripts\utility::func_161();
-    common_scripts\utility::func_3C8F(var_01, var_02);
+    param_00 common_scripts\utility::script_delay();
+    common_scripts\utility::flag_set(var_01, var_02);
   }
 }
 
@@ -105,12 +105,12 @@ func_9D75(param_00) {
   param_00 endon("death");
   var_01 = param_00 common_scripts\utility::func_4395();
   if(!common_scripts\utility::func_3C83(var_01)) {
-    common_scripts\utility::func_3C87(var_01);
+    common_scripts\utility::flag_init(var_01);
   }
 
   for(;;) {
     param_00 waittill("trigger", var_02);
-    param_00 common_scripts\utility::func_161();
+    param_00 common_scripts\utility::script_delay();
     common_scripts\utility::func_3C7B(var_01, var_02);
   }
 }
@@ -119,14 +119,14 @@ func_9D7A(param_00) {
   param_00 endon("death");
   var_01 = param_00 common_scripts\utility::func_4395();
   if(!common_scripts\utility::func_3C83(var_01)) {
-    common_scripts\utility::func_3C87(var_01);
+    common_scripts\utility::flag_init(var_01);
   }
 
   for(;;) {
     param_00 waittill("trigger", var_02);
-    param_00 common_scripts\utility::func_161();
+    param_00 common_scripts\utility::script_delay();
     if(isalive(var_02) && var_02 istouching(param_00) && isDefined(param_00)) {
-      common_scripts\utility::func_3C8F(var_01, var_02);
+      common_scripts\utility::flag_set(var_01, var_02);
     }
 
     while(isalive(var_02) && var_02 istouching(param_00) && isDefined(param_00)) {
@@ -158,7 +158,7 @@ func_9D8E(param_00, param_01) {
   var_04 endon("death");
   var_06 = param_00 common_scripts\utility::func_4395();
   if(!common_scripts\utility::func_3C83(var_06)) {
-    common_scripts\utility::func_3C87(var_06);
+    common_scripts\utility::flag_init(var_06);
   }
 
   var_07 = 0;
@@ -193,7 +193,7 @@ func_9D8E(param_00, param_01) {
       var_0B = anglesToForward(var_0A);
       var_0C = vectordot(var_0B, var_09);
       if(var_0C >= var_02) {
-        common_scripts\utility::func_3C8F(var_06, var_08);
+        common_scripts\utility::flag_set(var_06, var_08);
       } else if(param_01) {
         common_scripts\utility::func_3C7B(var_06, param_00);
       }

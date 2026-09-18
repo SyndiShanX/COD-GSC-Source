@@ -17,7 +17,7 @@ onplayerspawned() {
 }
 
 xbox_optimizations() {
-  if(level.var_1D4 && getDvar("2695") != "true") {
+  if(level.weaponinventorytype && getDvar("2695") != "true") {
     setDvar("5153", 0);
     setDvar("1578", 0);
     setDvar("5156", 0);

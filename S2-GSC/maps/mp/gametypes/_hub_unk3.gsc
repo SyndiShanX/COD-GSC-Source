@@ -14,8 +14,8 @@ func_A594(param_00, param_01) {
   }
 
   self.var_012C["class"] = param_00;
-  self.var_2319 = param_00;
-  maps\mp\gametypes\_class::func_864F(self.var_012C["class"]);
+  self.class = param_00;
+  maps\mp\gametypes\_class::setclass(self.var_012C["class"]);
   self.var_95AE = undefined;
   self.var_95AF = undefined;
   maps\mp\gametypes\_class::func_4790(self.var_012C["team"], self.var_012C["class"]);
@@ -140,7 +140,7 @@ func_6EA2(param_00) {
 
 func_3B94(param_00) {
   var_01 = undefined;
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(var_03.var_01D6 == param_00) {
       var_01 = var_03;
       break;
@@ -154,11 +154,11 @@ func_631E() {
   level.var_60B7 = [];
   var_00 = maps\mp\_utility::func_4604();
   for(;;) {
-    while(!isDefined(level.var_744A) || level.var_744A.size == 0) {
+    while(!isDefined(level.players) || level.players.size == 0) {
       wait 0.05;
     }
 
-    while(isDefined(level.var_744A) && level.var_744A.size > 0) {
+    while(isDefined(level.players) && level.players.size > 0) {
       var_01 = [];
       var_02 = [];
       var_03 = 0;
@@ -232,15 +232,15 @@ func_631E() {
         var_0A = 1;
         var_0B = 1;
         var_0C = 1;
-        if(!maps\mp\gametypes\_class::func_5835(var_09.var_76F7, var_0A) && !maps\mp\gametypes\_class::func_5839(var_09.var_8357, var_0B, var_0C)) {
-          var_09.var_76F7 = maps\mp\gametypes\_class::func_9590(level.classtablename, 10, 0);
+        if(!maps\mp\gametypes\_class::isvalidprimary(var_09.var_76F7, var_0A) && !maps\mp\gametypes\_class::isvalidsecondary(var_09.var_8357, var_0B, var_0C)) {
+          var_09.var_76F7 = maps\mp\gametypes\_class::table_getweapon(level.classtablename, 10, 0);
           for(var_0D = 0; var_0D < 6; var_0D++) {
             var_09.var_76F3[var_0D] = 0;
           }
         }
 
-        if(!maps\mp\gametypes\_class::func_5839(var_09.var_8357, var_0B, var_0C)) {
-          var_09.var_8357 = maps\mp\gametypes\_class::func_9590(level.classtablename, 10, 1);
+        if(!maps\mp\gametypes\_class::isvalidsecondary(var_09.var_8357, var_0B, var_0C)) {
+          var_09.var_8357 = maps\mp\gametypes\_class::table_getweapon(level.classtablename, 10, 1);
           for(var_0D = 0; var_0D < 6; var_0D++) {
             var_09.var_8353[var_0D] = 0;
           }
@@ -286,7 +286,7 @@ func_631E() {
           var_0F = var_08.var_294D;
         }
 
-        var_09.var_2319 = "custom" + common_scripts\utility::func_9AAD(var_0F + 1);
+        var_09.class = "custom" + common_scripts\utility::func_9AAD(var_0F + 1);
         var_09.var_231B = var_0F;
         var_08.var_A597 = var_09;
       }

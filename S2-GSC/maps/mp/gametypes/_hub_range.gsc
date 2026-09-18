@@ -114,7 +114,7 @@ func_37BD(param_00) {
     if(isDefined(self.var_572F) && self.var_572F) {
       maps\mp\gametypes\_division_change::func_A050();
       maps\mp\_utility::func_05E4();
-      maps\mp\_utility::func_47A2("specialty_falldamage");
+      maps\mp\_utility::giveperk("specialty_falldamage");
       self takeallweapons();
       maps\mp\_utility::func_0642(self.var_8B27);
       thread maps\mp\_riotshield::func_9BC6();
@@ -202,7 +202,7 @@ func_8C70() {
     var_01 setModel("hub_water_basin_enamel_01_white_dirty");
     var_01 setCanDamage(1);
     var_01 setdamagecallbackon(1);
-    var_01.var_29B5 = ::func_2DD8;
+    var_01.damagecallback = ::func_2DD8;
     level.var_6898++;
     var_01 physicslaunchserver(var_01.var_0116, (4000, 0, 3000));
     var_01 thread func_2DD0();
@@ -342,7 +342,7 @@ func_9074(param_00) {
   var_01.var_001D = (0, 90, 0);
   var_01 setCanDamage(1);
   var_01 setdamagecallbackon(1);
-  var_01.var_29B5 = ::func_63A1;
+  var_01.damagecallback = ::func_63A1;
 }
 
 func_8A48() {
@@ -366,7 +366,7 @@ func_8A48() {
     var_03 setCanDamage(1);
     var_03 setdamagecallbackon(1);
     var_03.var_99F1 = 0;
-    var_03.var_29B5 = ::func_63D4;
+    var_03.damagecallback = ::func_63D4;
     var_03.var_4DC9 = 0;
     var_03.var_001D = (0, 180, 90);
     if(isDefined(var_03.var_0165) && var_03.var_0165 == "tower") {
@@ -379,7 +379,7 @@ func_8A48() {
   foreach(var_03 in level.var_7AB5) {
     var_03 setCanDamage(1);
     var_03 setdamagecallbackon(1);
-    var_03.var_29B5 = ::func_63D3;
+    var_03.damagecallback = ::func_63D3;
     var_03.var_4DC9 = 0;
     var_03.var_00BC = 99;
     if(isDefined(var_03.var_0165)) {
@@ -405,7 +405,7 @@ func_8A48() {
   foreach(var_03 in level.var_7AB2) {
     var_03 setCanDamage(1);
     var_03 setdamagecallbackon(1);
-    var_03.var_29B5 = ::func_63D1;
+    var_03.damagecallback = ::func_63D1;
     var_03.var_3D77 = [];
     var_08 = function_01AC(level.var_7AB3, var_03.var_0116);
     for(var_09 = 0; var_09 < 3; var_09++) {
@@ -416,7 +416,7 @@ func_8A48() {
   foreach(var_03 in level.var_7AB3) {
     var_03 setCanDamage(1);
     var_03 setdamagecallbackon(1);
-    var_03.var_29B5 = ::func_63D0;
+    var_03.damagecallback = ::func_63D0;
     var_03.var_4DC9 = 0;
     var_03.var_7584 = "down";
     var_03.var_001D = (0, 0, 0);
@@ -425,7 +425,7 @@ func_8A48() {
   foreach(var_03 in level.var_7AB4) {
     var_03 setCanDamage(1);
     var_03 setdamagecallbackon(1);
-    var_03.var_29B5 = ::func_63D2;
+    var_03.damagecallback = ::func_63D2;
     var_03.var_4DC9 = 0;
     var_03.var_001D = (-90, 0, 0);
     var_03.var_7546 = 2;
@@ -449,7 +449,7 @@ func_8A48() {
   foreach(var_03 in level.var_7AB1) {
     var_03 setCanDamage(1);
     var_03 setdamagecallbackon(1);
-    var_03.var_29B5 = ::func_638E;
+    var_03.damagecallback = ::func_638E;
   }
 
   if(level.var_7AB3.size == 0 || !isDefined(var_00)) {
@@ -492,7 +492,7 @@ func_906D(param_00) {
     var_01 setCanDamage(1);
     var_01 setdamagecallbackon(1);
     var_01.var_00BC = 99;
-    var_01.var_29B5 = ::func_639A;
+    var_01.damagecallback = ::func_639A;
     var_01.var_707D = param_00;
     param_00.var_4B11 = var_01;
     param_00.var_4B81 = 1;
@@ -522,7 +522,7 @@ func_639A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_01 maps\mp\gametypes\_damagefeedback::func_A102("killshot_nosound");
   }
 
-  param_01 thread maps\mp\gametypes\_missions::func_7750("ch_hq_firingrange");
+  param_01 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_firingrange");
   var_0C = playclientsound("mp_hub_allies_frange_wood_shot", undefined, self.var_0116);
   playFX(level.var_AA66, self.var_0116);
   if(!isDefined(common_scripts\utility::func_0F7E(level.var_83EC["plate"], param_01))) {
@@ -604,7 +604,7 @@ func_5C2B(param_00) {
     var_03 setModel("hub_range_target_clay_01");
     var_03 setCanDamage(1);
     var_03 setdamagecallbackon(1);
-    var_03.var_29B5 = ::func_2DD9;
+    var_03.damagecallback = ::func_2DD9;
     var_03.var_A985 = param_00;
     var_03 physicslaunchserver(var_03.var_0116, var_01[var_02].var_7083);
     var_03 thread func_2DD0();
@@ -649,7 +649,7 @@ func_2DD9(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   if(function_03AE() == 0) {
-    foreach(var_0D in level.var_744A) {
+    foreach(var_0D in level.players) {
       if(isDefined(common_scripts\utility::func_0F7E(level.var_83EC["plate"], var_0D))) {
         var_0D iclientprintln(&"HUB_RANGE_SEQUENCE_COMPLETE", &"HUB_RANGE_SEQUENCE_HELPED");
         var_0D lib_0468::func_0A20("completedSequence");
@@ -693,7 +693,7 @@ func_63D4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   self.var_99F1 = gettime() / 1000;
-  param_01 thread maps\mp\gametypes\_missions::func_7750("ch_hq_firingrange");
+  param_01 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_firingrange");
   var_0D = common_scripts\utility::func_0F7E(level.var_83EF[2], self);
   if(isDefined(var_0D) && self.var_4DC9) {
     return;
@@ -784,7 +784,7 @@ func_63D3(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_01 maps\mp\gametypes\_damagefeedback::func_A102("killshot_nosound");
   }
 
-  param_01 thread maps\mp\gametypes\_missions::func_7750("ch_hq_firingrange");
+  param_01 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_firingrange");
   var_0C = playclientsound("mp_hub_allies_frange_wood_shot", undefined, self.var_0116);
   self rotateTo((90, 0, 0), 0.2);
   self.var_4DC9 = 1;
@@ -882,7 +882,7 @@ func_4AFF() {
   var_04 setdamagecallbackon(1);
   var_04.var_4E00 = 1;
   var_04.var_00BC = 99;
-  var_04.var_29B5 = ::func_636F;
+  var_04.damagecallback = ::func_636F;
   var_05 = spawn("script_model", level.var_22FF.var_0116 + var_03);
   var_05.var_001D = (90, 0, 0);
   var_05 setModel("Hub_range_target_human_01");
@@ -890,7 +890,7 @@ func_4AFF() {
   var_05 setdamagecallbackon(1);
   var_05.var_4E00 = 1;
   var_05.var_00BC = 99;
-  var_05.var_29B5 = ::func_636F;
+  var_05.damagecallback = ::func_636F;
   var_06 = spawn("script_model", level.var_22FF.var_0116 + var_01);
   var_06.var_001D = (90, 0, 0);
   var_06 setModel("hub_range_target_human_03");
@@ -898,13 +898,13 @@ func_4AFF() {
   var_06 setdamagecallbackon(1);
   var_06.var_4E00 = 0;
   var_06.var_00BC = 1;
-  var_06.var_29B5 = ::func_636F;
+  var_06.damagecallback = ::func_636F;
   var_04 thread func_64D1(level.var_22FD, 3, var_02);
   var_05 thread func_64D1(level.var_22FD, 3, var_03);
   var_06 thread func_64D1(level.var_22FD, 3, var_01);
   wait(3.5);
   if(!level.var_22FE && function_03AE() == 0) {
-    foreach(var_08 in level.var_744A) {
+    foreach(var_08 in level.players) {
       if(isDefined(common_scripts\utility::func_0F7E(level.var_83EC["tower"], var_08))) {
         var_08 iclientprintln(&"HUB_RANGE_SEQUENCE_COMPLETE", &"HUB_RANGE_SEQUENCE_HELPED");
         var_08 lib_0468::func_0A20("completedSequence");
@@ -937,7 +937,7 @@ func_636F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   if(isPlayer(param_01)) {
     param_01 maps\mp\gametypes\_damagefeedback::func_A102("killshot_nosound");
-    param_01 thread maps\mp\gametypes\_missions::func_7750("ch_hq_firingrange");
+    param_01 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_firingrange");
     playFX(level.var_AA66, self.var_0116);
     param_01 notify("hitFRTarget");
     param_01 notify("hitFRDestroyed", self);
@@ -978,7 +978,7 @@ func_63D0(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_0C = playclientsound("mp_hub_allies_frange_dist_metal_shot", undefined, self.var_0116);
   if(isPlayer(param_01)) {
     param_01 maps\mp\gametypes\_damagefeedback::func_A102("standard_nosound");
-    param_01 thread maps\mp\gametypes\_missions::func_7750("ch_hq_firingrange");
+    param_01 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_firingrange");
     param_01 notify("hitFRTarget");
     param_01 notify("hitFRDestroyed", self);
   }
@@ -1043,7 +1043,7 @@ func_63D2(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   if(isPlayer(param_01)) {
     param_01 maps\mp\gametypes\_damagefeedback::func_A102("standard_nosound");
     param_01 notify("hitFRTarget");
-    param_01 thread maps\mp\gametypes\_missions::func_7750("ch_hq_firingrange");
+    param_01 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_firingrange");
   }
 
   if(isPlayer(param_01) && !self.var_4DC9) {
@@ -1173,7 +1173,7 @@ func_36E9(param_00) {
     var_02 setModel(level.melonmodel);
     var_02 setCanDamage(1);
     var_02 setdamagecallbackon(1);
-    var_02.var_29B5 = ::func_63B1;
+    var_02.damagecallback = ::func_63B1;
     var_02 physicslaunchserver(var_02.var_0116, (0, randomfloat(17500) + 10000, 0));
     level.var_6894++;
   }
@@ -1182,7 +1182,7 @@ func_36E9(param_00) {
   if(function_0367() && isDefined(param_00)) {
     param_00 maps\mp\gametypes\_hub_unk1::func_50F0(["hubFeatureStats", "hubFiringRangeStats", "hubFRSequencesCompleted"], 1, undefined, undefined);
     param_00 maps\mp\gametypes\_missions::func_7752("ch_daily_3");
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       if(isDefined(common_scripts\utility::func_0F7E(level.var_83EC["melon"], var_04))) {
         var_04 iclientprintln(&"HUB_RANGE_SEQUENCE_COMPLETE", &"HUB_RANGE_SEQUENCE_HELPED");
         var_04 lib_0468::func_0A20("completedSequence");
@@ -1302,7 +1302,7 @@ func_2DDB(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     if(int(self.var_707D.var_0165) == 4) {
       var_12 = 1;
       if(function_0367()) {
-        foreach(var_14 in level.var_744A) {
+        foreach(var_14 in level.players) {
           var_14 iclientprintln(param_01.var_0109, &"HUB_RANGE_SEQUENCE_COMPLETE");
         }
 
@@ -1374,12 +1374,12 @@ func_2DD0() {
 }
 
 func_21E4(param_00) {
-  thread maps\mp\gametypes\_missions::func_7750("ch_hq_data_sequence_" + param_00);
+  thread maps\mp\gametypes\_missions::processchallenge("ch_hq_data_sequence_" + param_00);
   var_01 = maps\mp\gametypes\_hud_util::func_2097("ch_hq_data_sequence_melon");
   var_02 = maps\mp\gametypes\_hud_util::func_2097("ch_hq_data_sequence_tower");
   var_03 = maps\mp\gametypes\_hud_util::func_2097("ch_hq_data_sequence_plate");
   var_04 = var_01 + var_02 + var_03;
-  thread maps\mp\gametypes\_missions::func_7750("ch_hq_sequences", var_04, 1);
+  thread maps\mp\gametypes\_missions::processchallenge("ch_hq_sequences", var_04, 1);
 }
 
 func_47A9(param_00, param_01) {
@@ -1429,7 +1429,7 @@ func_47AA() {
   for(;;) {
     self waittill("grenade_pullback");
     wait(5);
-    var_00 = self method_831F();
+    var_00 = self getoffhandsecondaryclass();
     if(var_00 != "none") {
       self givestartammo(var_00);
     }
@@ -1449,7 +1449,7 @@ func_47AB() {
   for(;;) {
     self waittill("grenade_pullback");
     wait(5);
-    var_00 = self method_831F();
+    var_00 = self getoffhandsecondaryclass();
     if(var_00 != "none") {
       self givestartammo(var_00);
     }
@@ -1471,7 +1471,7 @@ func_98C7() {
   }
 
   if(!isDefined(var_00)) {
-    var_00 = common_scripts\utility::func_7A33(level.var_3C3F);
+    var_00 = common_scripts\utility::random(level.var_3C3F);
   }
 
   self notify("weaponPlantFiringRange");
@@ -1509,7 +1509,7 @@ func_478B(param_00) {
     self.var_37FC = undefined;
     self.var_69AB = undefined;
     maps\mp\_utility::func_05E4();
-    maps\mp\_utility::func_47A2("specialty_falldamage");
+    maps\mp\_utility::giveperk("specialty_falldamage");
     var_03 = self.var_7706;
     var_04 = self.primarypaintjobid;
     var_05 = self.primarycharmguid;
@@ -1830,7 +1830,7 @@ func_9306(param_00, param_01) {
 
       var_05 thread func_4B07("win");
       var_06 thread func_4B07("loss");
-      foreach(var_08 in level.var_744A) {
+      foreach(var_08 in level.players) {
         var_08 iclientprintln(&"HUB_BROADCAST_SHOOTOUT_RESULTS_WIN", var_05.var_0109, var_06.var_0109);
       }
 

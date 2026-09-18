@@ -7,16 +7,16 @@ main() {
   level.var_2DA8 = 0;
   level.var_2DA9 = 0;
   level.var_305F = 0;
-  common_scripts\utility::func_3C87("flag_ww_part_01_picked_up");
-  common_scripts\utility::func_3C87("flag_ww_part_02_picked_up");
-  common_scripts\utility::func_3C87("flag_ww_part_01_placed");
-  common_scripts\utility::func_3C87("flag_ww_part_02_placed");
-  common_scripts\utility::func_3C87("flag_ww_forged");
-  common_scripts\utility::func_3C87("flag_workbench_found");
-  common_scripts\utility::func_3C87("flag_cart_reached_end");
-  common_scripts\utility::func_3C87("flag_cart_req_1_met");
-  common_scripts\utility::func_3C87("flag_cart_req_2_met");
-  common_scripts\utility::func_3C87("flag_cart_req_3_met");
+  common_scripts\utility::flag_init("flag_ww_part_01_picked_up");
+  common_scripts\utility::flag_init("flag_ww_part_02_picked_up");
+  common_scripts\utility::flag_init("flag_ww_part_01_placed");
+  common_scripts\utility::flag_init("flag_ww_part_02_placed");
+  common_scripts\utility::flag_init("flag_ww_forged");
+  common_scripts\utility::flag_init("flag_workbench_found");
+  common_scripts\utility::flag_init("flag_cart_reached_end");
+  common_scripts\utility::flag_init("flag_cart_req_1_met");
+  common_scripts\utility::flag_init("flag_cart_req_2_met");
+  common_scripts\utility::flag_init("flag_cart_req_3_met");
   lib_0557::func_7846("4 cart", ::func_2020, ["3 shard"], &"ZOMBIE_NEST_HINT_QUEST_CART", "ZOMBIE_NEST_HINT_QUEST_CART");
   lib_0557::func_781E("4 cart", "press button", ::func_7865, ::lib_0557::func_30D8, &"ZOMBIE_NEST_HINT_STEP_START_ASSEMBLY");
   lib_0557::func_781E("4 cart", "head to rnd", ::func_7859, ::lib_0557::func_30D8, &"ZOMBIE_NEST_HINT_STEP_ESCORT_CLAW");
@@ -39,7 +39,7 @@ func_7865() {
   thread func_9033();
   thread lib_0378::func_8D74("aud_cart_lights_off");
   level thread func_A0EF(level.var_3573, 0);
-  common_scripts\utility::func_3C8F("flag_bunker_lights_off");
+  common_scripts\utility::flag_set("flag_bunker_lights_off");
   lib_0378::func_8D74("aud_bunker_lights", "off");
   wait(4);
   var_01 = level.var_64C7;
@@ -94,7 +94,7 @@ func_7863() {
   level.var_3E3B.var_4D91 = lib_0559::func_7BE3(level.var_3E3B.var_6FC5, "tesla_barrel");
   var_02 = level.var_3E3B maps / mp / mp_zombie_nest_ee_util::func_8BEC();
   level.var_3E3B.var_4D91.var_2F74 = 1;
-  common_scripts\utility::func_3C8F("flag_ww_part_01_picked_up");
+  common_scripts\utility::flag_set("flag_ww_part_01_picked_up");
   var_02 func_2EBE(1);
   lib_0557::func_782D("4 cart", "pickup ww frame");
 }
@@ -120,7 +120,7 @@ func_7864() {
   level.var_5981.var_4D91 = lib_0559::func_7BE3(level.var_5981.var_6FC5, "tesla_core");
   var_02 = level.var_5981 maps / mp / mp_zombie_nest_ee_util::func_8BEC();
   level.var_5981.var_4D91.var_2F74 = 1;
-  common_scripts\utility::func_3C8F("flag_ww_part_02_picked_up");
+  common_scripts\utility::flag_set("flag_ww_part_02_picked_up");
   var_02 func_2EBE(2);
   lib_0557::func_782D("4 cart", "pickup ww core");
 }
@@ -134,7 +134,7 @@ func_7868() {
 func_7857() {
   level.var_3571 func_202D("com_1");
   lib_0378::func_8D74("aud_claw_move_stop", level.var_3571);
-  common_scripts\utility::func_3C8F("flag_cart_reached_end");
+  common_scripts\utility::flag_set("flag_cart_reached_end");
   level thread func_A0EF(level.var_3573, 1);
   common_scripts\utility::func_3C7B("flag_bunker_lights_off");
   level.var_6F18 = 0;
@@ -304,7 +304,7 @@ func_6A9F() {
 
 func_91C5(param_00, param_01) {
   maps / mp / mp_zombie_nest_special_event_creator::func_170B(param_00, 250, undefined, "zmb_cart_zombie_killed", undefined, "tag_fx");
-  common_scripts\utility::func_3C8F(param_01);
+  common_scripts\utility::flag_set(param_01);
 }
 
 func_202D(param_00) {
@@ -322,10 +322,10 @@ func_202D(param_00) {
     case "med_2":
     case "rnd_3":
     case "rnd_2":
-      playFXOnTag(level.var_611["zmb_gk_claw_full"], self, "TAG_FX");
-      playFXOnTag(level.var_611["zmb_gk_claw_battery_full_1"], self, "flap1_shroud");
-      playFXOnTag(level.var_611["zmb_gk_claw_battery_full_2"], self, "flap2_shroud");
-      playFXOnTag(level.var_611["zmb_gk_claw_battery_full_3"], self, "flap3_shroud");
+      playFXOnTag(level._effect["zmb_gk_claw_full"], self, "TAG_FX");
+      playFXOnTag(level._effect["zmb_gk_claw_battery_full_1"], self, "flap1_shroud");
+      playFXOnTag(level._effect["zmb_gk_claw_battery_full_2"], self, "flap2_shroud");
+      playFXOnTag(level._effect["zmb_gk_claw_battery_full_3"], self, "flap3_shroud");
       break;
 
     case "med_1":
@@ -405,7 +405,7 @@ func_2EAD() {
       continue;
     }
 
-    common_scripts\utility::func_3C8F("flag_workbench_found");
+    common_scripts\utility::flag_set("flag_workbench_found");
     if(!isDefined(var_01.var_3077) && isPlayer(var_01)) {
       var_02 = var_01 lib_0367::func_8E3D("workbench");
       if(isDefined(var_02)) {
@@ -526,7 +526,7 @@ func_8A2B(param_00, param_01, param_02, param_03, param_04) {
     var_07.var_760A = param_03;
     var_07.var_760B = param_02;
     var_07.var_760D = param_04;
-    var_07.var_8300 = param_01;
+    var_07.setclientdvar = param_01;
   }
 
   return var_05;

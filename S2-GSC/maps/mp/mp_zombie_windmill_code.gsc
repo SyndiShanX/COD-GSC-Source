@@ -24,7 +24,7 @@ ee_init() {
 
 windmill_completion_rewards() {
   maps / mp / zombies / shotgun / _zombies_shotgun_exp_events::award_exp_med();
-  common_scripts\utility::func_3C8F("zmb_objectives_quest_end");
+  common_scripts\utility::flag_set("zmb_objectives_quest_end");
   foreach(var_01 in level.players) {
     var_01 lib_056A::func_4772(1);
     var_01 thread maps\mp\gametypes\_hud_message::func_9102("zm_dlc3_ee_1_complete");
@@ -36,28 +36,28 @@ windmill_completion_rewards() {
 }
 
 ee_init_flags() {
-  common_scripts\utility::func_3C87("ee_find_frank_part_head_found");
-  common_scripts\utility::func_3C87("ee_find_frank_part_torso_found");
-  common_scripts\utility::func_3C87("ee_find_frank_part_left_leg_found");
-  common_scripts\utility::func_3C87("ee_find_frank_part_right_leg_found");
-  common_scripts\utility::func_3C87("ee_find_frank_part_left_arm_found");
-  common_scripts\utility::func_3C87("ee_find_frank_part_right_arm_found");
-  common_scripts\utility::func_3C87("ee_find_rope_part_shot");
-  common_scripts\utility::func_3C87("ee_find_rope_branch_pull_complete");
-  common_scripts\utility::func_3C87("ee_find_rope_part_collected");
-  common_scripts\utility::func_3C87("ee_find_rods_rods_found");
-  common_scripts\utility::func_3C87("ee_hang_frank_arm_dropped");
-  common_scripts\utility::func_3C87("ee_hang_frank_arm_acquired");
-  common_scripts\utility::func_3C87("ee_hang_frank_windmill_jammed");
-  common_scripts\utility::func_3C87("ee_hang_frank_complete");
-  common_scripts\utility::func_3C87("ee_call_lightning_complete");
-  common_scripts\utility::func_3C87("ee_call_lightning_frank_fell");
-  common_scripts\utility::func_3C87("ee_hang_frank_defend_complete");
-  common_scripts\utility::func_3C87("ee_escort_frank_reached_battery");
-  common_scripts\utility::func_3C87("ee_escort_frank_soul_collection_complete");
-  common_scripts\utility::func_3C87("ee_escort_frank_reached_basement");
-  common_scripts\utility::func_3C87("ee_escort_frank_battery_collected");
-  common_scripts\utility::func_3C87("ee_escort_hilt_collected");
+  common_scripts\utility::flag_init("ee_find_frank_part_head_found");
+  common_scripts\utility::flag_init("ee_find_frank_part_torso_found");
+  common_scripts\utility::flag_init("ee_find_frank_part_left_leg_found");
+  common_scripts\utility::flag_init("ee_find_frank_part_right_leg_found");
+  common_scripts\utility::flag_init("ee_find_frank_part_left_arm_found");
+  common_scripts\utility::flag_init("ee_find_frank_part_right_arm_found");
+  common_scripts\utility::flag_init("ee_find_rope_part_shot");
+  common_scripts\utility::flag_init("ee_find_rope_branch_pull_complete");
+  common_scripts\utility::flag_init("ee_find_rope_part_collected");
+  common_scripts\utility::flag_init("ee_find_rods_rods_found");
+  common_scripts\utility::flag_init("ee_hang_frank_arm_dropped");
+  common_scripts\utility::flag_init("ee_hang_frank_arm_acquired");
+  common_scripts\utility::flag_init("ee_hang_frank_windmill_jammed");
+  common_scripts\utility::flag_init("ee_hang_frank_complete");
+  common_scripts\utility::flag_init("ee_call_lightning_complete");
+  common_scripts\utility::flag_init("ee_call_lightning_frank_fell");
+  common_scripts\utility::flag_init("ee_hang_frank_defend_complete");
+  common_scripts\utility::flag_init("ee_escort_frank_reached_battery");
+  common_scripts\utility::flag_init("ee_escort_frank_soul_collection_complete");
+  common_scripts\utility::flag_init("ee_escort_frank_reached_basement");
+  common_scripts\utility::flag_init("ee_escort_frank_battery_collected");
+  common_scripts\utility::flag_init("ee_escort_hilt_collected");
 }
 
 audio_log_init() {
@@ -109,7 +109,7 @@ ee_quest_step_find_frank_parts_think() {
 
 ee_quest_step_find_frank_part_setup(param_00) {
   var_01 = common_scripts\utility::func_46B7("frank_" + param_00, "targetname");
-  var_02 = common_scripts\utility::func_7A33(var_01);
+  var_02 = common_scripts\utility::random(var_01);
   var_02 thread ee_quest_step_find_frank_part_think(param_00);
 }
 
@@ -147,7 +147,7 @@ ee_quest_step_find_frank_part_think(param_00) {
       }
 
       foreach(var_08 in var_06) {
-        if(!common_scripts\utility::func_AA4A(var_08 getEye(), var_08.angles, var_02.origin, cos(var_05))) {
+        if(!common_scripts\utility::within_fov(var_08 getEye(), var_08.angles, var_02.origin, cos(var_05))) {
           var_06 = common_scripts\utility::func_F93(var_06, var_08);
         }
       }
@@ -158,7 +158,7 @@ ee_quest_step_find_frank_part_think(param_00) {
 
       wait(0.2);
       foreach(var_08 in var_06) {
-        if(!common_scripts\utility::func_AA4A(var_08 getEye(), var_08.angles, var_02.origin, cos(var_05))) {
+        if(!common_scripts\utility::within_fov(var_08 getEye(), var_08.angles, var_02.origin, cos(var_05))) {
           var_06 = common_scripts\utility::func_F93(var_06, var_08);
         }
 
@@ -174,7 +174,7 @@ ee_quest_step_find_frank_part_think(param_00) {
 
     var_02 delete();
     level.zombie_parts_found++;
-    common_scripts\utility::func_3C8F("ee_find_frank_part_" + param_00 + "_found");
+    common_scripts\utility::flag_set("ee_find_frank_part_" + param_00 + "_found");
   }
 }
 
@@ -204,12 +204,12 @@ ee_quest_step_find_frank_get_modelname_by_partname(param_00) {
 }
 
 warp_find_frank_complete() {
-  common_scripts\utility::func_3C8F("ee_find_frank_part_head_found");
-  common_scripts\utility::func_3C8F("ee_find_frank_part_torso_found");
-  common_scripts\utility::func_3C8F("ee_find_frank_part_left_leg_found");
-  common_scripts\utility::func_3C8F("ee_find_frank_part_right_leg_found");
-  common_scripts\utility::func_3C8F("ee_find_frank_part_left_arm_found");
-  common_scripts\utility::func_3C8F("ee_find_frank_part_right_arm_found");
+  common_scripts\utility::flag_set("ee_find_frank_part_head_found");
+  common_scripts\utility::flag_set("ee_find_frank_part_torso_found");
+  common_scripts\utility::flag_set("ee_find_frank_part_left_leg_found");
+  common_scripts\utility::flag_set("ee_find_frank_part_right_leg_found");
+  common_scripts\utility::flag_set("ee_find_frank_part_left_arm_found");
+  common_scripts\utility::flag_set("ee_find_frank_part_right_arm_found");
   level.zombie_parts_found = 6;
 }
 
@@ -258,7 +258,7 @@ ee_quest_step_find_rope_waitfor_rope_shot() {
   wait(getanimlength(%zmb_windmill_rope_fall));
   var_01 scriptmodelclearanim();
   var_01 delete();
-  common_scripts\utility::func_3C8F("ee_find_rope_part_shot");
+  common_scripts\utility::flag_set("ee_find_rope_part_shot");
 }
 
 ee_quest_step_find_rope_waitfor_rope_recovered() {
@@ -293,7 +293,7 @@ ee_quest_step_find_rope_waitfor_rope_recovered() {
       var_04 = var_04 + gettime() - var_05;
       var_05 = gettime();
       if(var_04 >= getanimlength(%zmb_windmill_rope_recover) * 1000 - 100) {
-        common_scripts\utility::func_3C8F("ee_find_rope_branch_pull_complete");
+        common_scripts\utility::flag_set("ee_find_rope_branch_pull_complete");
         var_00 lib_0378::func_8D74("frank_pull_branch", "end");
         break;
       }
@@ -313,7 +313,7 @@ ee_quest_step_find_rope_waitfor_rope_recovered() {
     var_00 hidepart("dangle_0" + var_07);
   }
 
-  common_scripts\utility::func_3C8F("ee_find_rope_part_collected");
+  common_scripts\utility::flag_set("ee_find_rope_part_collected");
 }
 
 ee_quest_step_find_rope_return_branch_pulled(param_00) {
@@ -334,14 +334,14 @@ ee_quest_step_find_rope_return_branch_pulled(param_00) {
 ee_quest_step_find_rope_cleanup() {}
 
 warp_rope_shot() {
-  common_scripts\utility::func_3C8F("ee_find_rope_part_shot");
+  common_scripts\utility::flag_set("ee_find_rope_part_shot");
 }
 
 warp_rope_recovered() {
   warp_find_frank_complete();
-  common_scripts\utility::func_3C8F("ee_find_rope_part_shot");
-  common_scripts\utility::func_3C8F("ee_find_rope_branch_pull_complete");
-  common_scripts\utility::func_3C8F("ee_find_rope_part_collected");
+  common_scripts\utility::flag_set("ee_find_rope_part_shot");
+  common_scripts\utility::flag_set("ee_find_rope_branch_pull_complete");
+  common_scripts\utility::flag_set("ee_find_rope_part_collected");
 }
 
 ________________step_find_rods_______________________() {}
@@ -378,7 +378,7 @@ ee_quest_step_find_rods_spawn_pod_and_rods() {
     foreach(var_02 in level.drop_pod_rods) {
       var_03 = var_00.spawned_model.origin - var_00.pod_model.origin;
       var_02.origin = var_02.origin + var_03;
-      var_02 method_8449(var_00.spawned_model);
+      var_02 linktosynchronizedparent(var_00.spawned_model);
       var_02 common_scripts\utility::func_2CBE(0.05, ::show);
     }
 
@@ -412,13 +412,13 @@ ee_quest_step_find_rods_use_rod(param_00) {
   param_00 delete();
   level.num_rods_found++;
   if(level.num_rods_found >= level.num_rods_to_find) {
-    common_scripts\utility::func_3C8F("ee_find_rods_rods_found");
+    common_scripts\utility::flag_set("ee_find_rods_rods_found");
   }
 }
 
 warp_rods_found() {
   warp_rope_recovered();
-  common_scripts\utility::func_3C8F("ee_find_rods_rods_found");
+  common_scripts\utility::flag_set("ee_find_rods_rods_found");
   level.num_rods_found = level.num_rods_to_find;
 }
 
@@ -492,12 +492,12 @@ ee_quest_step_hang_frank_acquire_wustling_arm_drop_arm(param_00) {
   var_03 = spawn("script_model", var_02 + (0, 0, 4));
   var_03 setModel("zmw_wustling_arm_01");
   var_03 hudoutlineenableforclients(level.players, 2, 1);
-  common_scripts\utility::func_3C8F("ee_hang_frank_arm_dropped");
+  common_scripts\utility::flag_set("ee_hang_frank_arm_dropped");
   var_03 lib_0547::func_AC41(" ");
   var_03 waittill("player_used");
   var_03 hudoutlinedisableforclients(level.players);
   var_03 delete();
-  common_scripts\utility::func_3C8F("ee_hang_frank_arm_acquired");
+  common_scripts\utility::flag_set("ee_hang_frank_arm_acquired");
 }
 
 ee_quest_step_hang_frank_jam_windmill() {
@@ -519,7 +519,7 @@ ee_quest_step_hang_frank_jam_windmill() {
     var_01 rotateTo(var_03.angles, 0.5, 0, 0.05);
     level waittill("done_accelerating");
     iprintlnbold("JAMMED");
-    common_scripts\utility::func_3C8F("ee_hang_frank_windmill_jammed");
+    common_scripts\utility::flag_set("ee_hang_frank_windmill_jammed");
     var_00 waittill("trigger");
     maps / mp / mp_zombie_windmill_util::windmill_idle_with_speed(1);
     var_01 hide();
@@ -541,11 +541,11 @@ ee_quest_step_hang_frank_place_parts_think() {
   var_04 = getEnt("frank_fanblade_models_org", "targetname");
   var_05 = getEntArray("frank_fanblade_models", "script_noteworthy");
   foreach(var_07 in var_05) {
-    var_07 method_8449(var_04);
+    var_07 linktosynchronizedparent(var_04);
     var_07 hide();
   }
 
-  var_04 method_8449(var_03);
+  var_04 linktosynchronizedparent(var_03);
   common_scripts\utility::func_3C9F("ee_hang_frank_arm_acquired");
   while(var_00 < 6 || var_01 < level.drop_pod_rods.size) {
     common_scripts\utility::func_3C9F("ee_hang_frank_windmill_jammed");
@@ -583,7 +583,7 @@ ee_quest_step_hang_frank_place_parts_think() {
     wait 0.05;
   }
 
-  common_scripts\utility::func_3C8F("ee_hang_frank_complete");
+  common_scripts\utility::flag_set("ee_hang_frank_complete");
 }
 
 ee_quest_step_hang_frank_place_acquired_parts() {
@@ -675,9 +675,9 @@ ee_quest_step_hang_frank_cleanup() {}
 
 warp_hang_frank() {
   warp_rods_found();
-  common_scripts\utility::func_3C8F("ee_hang_frank_arm_dropped");
-  common_scripts\utility::func_3C8F("ee_hang_frank_arm_acquired");
-  common_scripts\utility::func_3C8F("ee_hang_frank_complete");
+  common_scripts\utility::flag_set("ee_hang_frank_arm_dropped");
+  common_scripts\utility::flag_set("ee_hang_frank_arm_acquired");
+  common_scripts\utility::flag_set("ee_hang_frank_complete");
   ee_quest_step_hang_frank_place_acquired_parts();
   var_00 = getEnt("windmill_fan", "targetname");
   var_00.current_speed = 0;
@@ -687,8 +687,8 @@ warp_hang_frank() {
 }
 
 cheat_give_wustling_arm() {
-  common_scripts\utility::func_3C8F("ee_hang_frank_arm_dropped");
-  common_scripts\utility::func_3C8F("ee_hang_frank_arm_acquired");
+  common_scripts\utility::flag_set("ee_hang_frank_arm_dropped");
+  common_scripts\utility::flag_set("ee_hang_frank_arm_acquired");
 }
 
 ___________step_call_lightning__________() {}
@@ -718,7 +718,7 @@ ee_quest_step_call_lightning_think() {
     }
 
     wait(5);
-    common_scripts\utility::func_3C8F("ee_call_lightning_complete");
+    common_scripts\utility::flag_set("ee_call_lightning_complete");
   }
 }
 
@@ -783,12 +783,12 @@ ee_quest_step_call_lightning_frank_fall() {
   level.frank_dudebroman method_839D("noclip");
   var_01 = "s2_zom_frank_lightning_lay_loop";
   level.frank_dudebroman thread maps / mp / agents / _scripted_agent_anim_util::func_71FA(var_01, 0, 1, "frank_getup");
-  common_scripts\utility::func_3C8F("ee_call_lightning_frank_fell");
+  common_scripts\utility::flag_set("ee_call_lightning_frank_fell");
 }
 
 warp_call_lightning() {
   warp_hang_frank();
-  common_scripts\utility::func_3C8F("ee_call_lightning_complete");
+  common_scripts\utility::flag_set("ee_call_lightning_complete");
 }
 
 _____________step_defend_frank____________() {}
@@ -803,7 +803,7 @@ ee_quest_step_defend_frank() {
     level.defend_tag_org delete();
   }
 
-  common_scripts\utility::func_3C8F("ee_hang_frank_defend_complete");
+  common_scripts\utility::flag_set("ee_hang_frank_defend_complete");
   lib_0557::func_782D("quest_frank", "step_defend_frank");
 }
 
@@ -891,7 +891,7 @@ ee_quest_step_escort_frank() {
     if((!isDefined(var_00) || !var_00) && !common_scripts\utility::func_3C77("ee_escort_frank_reached_battery")) {
       return;
     } else {
-      common_scripts\utility::func_3C8F("ee_escort_frank_reached_battery");
+      common_scripts\utility::flag_set("ee_escort_frank_reached_battery");
     }
 
     level waittill("round complete");
@@ -919,7 +919,7 @@ ee_quest_step_escort_frank() {
   }
 
   if(isDefined(var_00) && var_00) {
-    common_scripts\utility::func_3C8F("ee_escort_frank_reached_basement");
+    common_scripts\utility::flag_set("ee_escort_frank_reached_basement");
     ee_quest_step_escort_frank_drop_charged_battery();
     ee_quest_step_escort_frank_collect_prize_think();
     lib_0557::func_782D("quest_frank", "step_escort_frank");
@@ -927,10 +927,10 @@ ee_quest_step_escort_frank() {
   }
 
   if(common_scripts\utility::func_3C77("ee_escort_frank_soul_collection_complete")) {
-    killfxontag(level.var_611["battery_glow_finished"], level.frank_battery.fx_tag, "tag_origin");
+    killfxontag(level._effect["battery_glow_finished"], level.frank_battery.fx_tag, "tag_origin");
   } else {
-    killfxontag(level.var_611["battery_glow"], level.frank_battery.fx_tag, "tag_origin");
-    playFX(level.var_611["dlc_zmb_dig_02_uber_explode"], level.frank_battery.fx_tag.origin);
+    killfxontag(level._effect["battery_glow"], level.frank_battery.fx_tag, "tag_origin");
+    playFX(level._effect["dlc_zmb_dig_02_uber_explode"], level.frank_battery.fx_tag.origin);
   }
 
   level.frank_battery.fx_tag delete();
@@ -1017,14 +1017,14 @@ ee_quest_step_escort_frank_battery_setup() {
     level.frank_battery show();
     level.frank_battery.fx_tag = spawn("script_model", level.frank_battery.origin);
     level.frank_battery.fx_tag setModel("tag_origin");
-    level.frank_battery.fx_tag method_8449(level.frank_battery, "tag_origin");
-    playFXOnTag(level.var_611["battery_glow"], level.frank_battery.fx_tag, "tag_origin");
+    level.frank_battery.fx_tag linktosynchronizedparent(level.frank_battery, "tag_origin");
+    playFXOnTag(level._effect["battery_glow"], level.frank_battery.fx_tag, "tag_origin");
     level.frank_battery.origin = level.frank_dudebroman gettagorigin("J_Wrist_LE");
     level.frank_battery.angles = level.frank_dudebroman gettagangles("J_Wrist_LE");
     level.frank_battery.origin = level.frank_battery.origin - anglestoup(level.frank_battery.angles) * 2;
     level.frank_battery.origin = level.frank_battery.origin + anglesToForward(level.frank_battery.angles) * 3;
     level.frank_battery.origin = level.frank_battery.origin - anglestoright(level.frank_battery.angles) * 3;
-    level.frank_battery method_8449(level.frank_dudebroman, "J_Wrist_LE");
+    level.frank_battery linktosynchronizedparent(level.frank_dudebroman, "J_Wrist_LE");
   }
 }
 
@@ -1033,9 +1033,9 @@ ee_quest_step_escort_frank_soul_collection() {
   level.frank_battery.fx_tag endon("death");
   var_00 = 30;
   level.frank_battery.fx_tag maps / mp / mp_zombies_soul_collection::func_170B(var_00, 256, 64, "battery_soul_collected", undefined, "tag_origin", undefined, "tag_origin", undefined, undefined, (0, 0, 64), undefined, undefined, undefined, 0);
-  killfxontag(level.var_611["battery_glow"], level.frank_battery.fx_tag, "tag_origin");
-  playFXOnTag(level.var_611["battery_glow_finished"], level.frank_battery.fx_tag, "tag_origin");
-  common_scripts\utility::func_3C8F("ee_escort_frank_soul_collection_complete");
+  killfxontag(level._effect["battery_glow"], level.frank_battery.fx_tag, "tag_origin");
+  playFXOnTag(level._effect["battery_glow_finished"], level.frank_battery.fx_tag, "tag_origin");
+  common_scripts\utility::flag_set("ee_escort_frank_soul_collection_complete");
 }
 
 ee_quest_step_escort_frank_drop_charged_battery() {
@@ -1062,7 +1062,7 @@ ee_quest_step_escort_frank_drop_charged_battery() {
   level.frank_battery waittill("player_used");
   level.frank_battery hudoutlinedisableforclients(level.players);
   level.frank_battery delete();
-  common_scripts\utility::func_3C8F("ee_escort_frank_battery_collected");
+  common_scripts\utility::flag_set("ee_escort_frank_battery_collected");
 }
 
 ee_quest_step_escort_frank_collect_prize_think() {
@@ -1070,7 +1070,7 @@ ee_quest_step_escort_frank_collect_prize_think() {
   var_01 = getEnt("wine_cellar_batt", "targetname");
   var_02 = getEnt("wine_cellar_door_clip", "targetname");
   var_03 = getEnt("wine_cellar_door", "targetname");
-  var_02 method_8449(var_03);
+  var_02 linktosynchronizedparent(var_03);
   var_00 waittill("trigger", var_04);
   level thread maps / mp / zombies / weapons / _zombie_dlc3_melee::sword_post_ee_complete_handler();
   var_01 show();
@@ -1084,13 +1084,13 @@ ee_quest_step_escort_frank_collect_prize_think() {
   var_05 waittill("player_used", var_04);
   var_05 lib_0547::func_AC40();
   var_05 delete();
-  common_scripts\utility::func_3C8F("ee_escort_hilt_collected");
+  common_scripts\utility::flag_set("ee_escort_hilt_collected");
   level.shattered_ee_complete = 1;
 }
 
 warp_skip_escort_part01() {
   warp_defend_frank();
-  common_scripts\utility::func_3C8F("ee_escort_frank_reached_battery");
+  common_scripts\utility::flag_set("ee_escort_frank_reached_battery");
   common_scripts\utility::func_3C9F("ee_call_lightning_frank_fell");
   var_00 = common_scripts\utility::func_46B5("frank_first_half_escort_end", "script_noteworthy");
   level.frank_dudebroman setOrigin(var_00.origin);
@@ -1098,8 +1098,8 @@ warp_skip_escort_part01() {
 
 warp_skip_escort_part02() {
   warp_skip_escort_part01();
-  common_scripts\utility::func_3C8F("ee_escort_frank_reached_basement");
-  common_scripts\utility::func_3C8F("ee_escort_frank_soul_collection_complete");
+  common_scripts\utility::flag_set("ee_escort_frank_reached_basement");
+  common_scripts\utility::flag_set("ee_escort_frank_soul_collection_complete");
   var_00 = common_scripts\utility::func_46B5("frank_second_half_escort_end", "script_noteworthy");
   level.battery_drop_org = var_00.origin;
   level.frank_dudebroman setOrigin(var_00.origin);

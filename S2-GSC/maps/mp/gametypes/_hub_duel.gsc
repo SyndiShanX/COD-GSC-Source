@@ -338,7 +338,7 @@ func_237E(param_00, param_01, param_02) {
 func_7E2D(param_00) {
   self endon("death");
   self endon("disconnect");
-  if(isDefined(self) && maps\mp\_utility::func_57A0(self)) {
+  if(isDefined(self) && maps\mp\_utility::isreallyalive(self)) {
     self freezecontrols(1);
     self.var_00BC = self.var_00FB;
     self.var_542B = 1;

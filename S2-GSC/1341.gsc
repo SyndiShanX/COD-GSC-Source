@@ -35,7 +35,7 @@ func_51B0() {
 
   self waittill("debris_purchased", var_07);
   if(isDefined(self.var_819A)) {
-    common_scripts\utility::func_3C8F(self.var_819A, var_07);
+    common_scripts\utility::flag_set(self.var_819A, var_07);
   }
 
   foreach(var_09 in self.var_17E7) {

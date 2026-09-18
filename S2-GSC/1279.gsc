@@ -157,7 +157,7 @@ func_6972(param_00) {
   var_01 = common_scripts\utility::func_46B5(param_00, "targetname");
   level.var_79AE.var_8DB = common_scripts\utility::func_F6F(level.var_79AE.var_8DB, var_01);
   var_01.var_6974 = gettime();
-  common_scripts\utility::func_3C8F(func_6973(param_00));
+  common_scripts\utility::flag_set(func_6973(param_00));
   lib_0502::func_697F(param_00);
 }
 
@@ -168,7 +168,7 @@ func_6935(param_00) {
   level.var_79AE.completedobjectives = common_scripts\utility::func_F6F(level.var_79AE.completedobjectives, var_01);
   var_01.var_693F = gettime();
   lib_0502::func_697A(param_00);
-  common_scripts\utility::func_3C8F(func_6937(param_00));
+  common_scripts\utility::flag_set(func_6937(param_00));
   level.var_A239 = 0;
 }
 
@@ -197,16 +197,16 @@ func_6937(param_00) {
 }
 
 func_6934(param_00) {
-  self.var_695A = self.var_1A5;
+  self.var_695A = self.targetname;
   self.var_6956 = [];
   self.var_692D = [];
   self.var_6967 = [];
   self.var_6940 = ::func_2BCF;
   var_01 = [5, 4, 3, 2, 1];
   func_6961("OvertimeDurationArray", var_01);
-  common_scripts\utility::func_3C87(func_6973(self.var_695A));
-  common_scripts\utility::func_3C87(func_6937(self.var_695A));
-  level.var_79AF[self.var_165] = 1;
+  common_scripts\utility::flag_init(func_6973(self.var_695A));
+  common_scripts\utility::flag_init(func_6937(self.var_695A));
+  level.var_79AF[self.exitlevel] = 1;
   lib_0502::func_697C(self.var_695A);
 }
 
@@ -216,12 +216,12 @@ func_2BCF() {
 }
 
 func_6942(param_00) {
-  param_00.var_695A = self.var_1A5;
+  param_00.var_695A = self.targetname;
   param_00.var_79AD = self;
 }
 
 func_6955(param_00) {
-  param_00.var_9255 = param_00.var_116;
+  param_00.var_9255 = param_00.origin;
   param_00.var_9189 = param_00.var_1D;
   self.var_6956[self.var_6956.size] = param_00;
 }
@@ -260,12 +260,12 @@ func_6958() {
       var_04 = var_03.var_9255;
       var_05 = var_03.var_9189;
     } else {
-      var_04 = var_03.var_4800.var_116;
+      var_04 = var_03.var_4800.origin;
       var_05 = var_03.var_4800.var_1D;
     }
 
     var_03.var_480D = var_01;
-    if(var_03.var_116 != var_04) {
+    if(var_03.origin != var_04) {
       var_03 moveTo(var_04, var_00 / 1000);
     }
 
@@ -282,7 +282,7 @@ func_6957() {
     }
 
     var_01.var_480D = undefined;
-    var_01 moveTo(var_01.var_116, 0.05);
+    var_01 moveTo(var_01.origin, 0.05);
     var_01 rotateTo(var_01.var_1D, 0.05);
   }
 }
@@ -302,16 +302,16 @@ func_692E(param_00) {
   var_04["mp_raid_bridge_01_a"] = 1;
   var_04["mp_raid_bridge_01_b"] = 1;
   var_05 = func_45D1(self.var_695A, "modelNotetrackFuncs", []);
-  param_00.var_67B3 = var_05[param_00.var_106];
+  param_00.var_67B3 = var_05[param_00.model];
   param_00.var_8BF7 = [];
-  param_00.var_9222 = common_scripts\utility::func_562E(var_04[param_00.var_106]);
+  param_00.var_9222 = common_scripts\utility::func_562E(var_04[param_00.model]);
   if(param_00.var_9222) {
     param_00 hideallparts();
   }
 
-  param_00.var_692C = var_01[param_00.var_106];
-  param_00.var_6932 = var_02[param_00.var_106];
-  param_00.var_6969 = var_03[param_00.var_106];
+  param_00.var_692C = var_01[param_00.model];
+  param_00.var_6932 = var_02[param_00.model];
+  param_00.var_6969 = var_03[param_00.model];
   precachempanim(param_00.var_692C);
   if(isDefined(param_00.var_6969)) {
     precachempanim(param_00.var_6969);
@@ -494,7 +494,7 @@ func_692B(param_00) {
   }
 
   self.var_B82[self.var_B82.size] = param_00;
-  lib_0502::func_697D(self.var_982E.var_1A5, param_00);
+  lib_0502::func_697D(self.var_982E.targetname, param_00);
 }
 
 func_6985(param_00) {
@@ -502,7 +502,7 @@ func_6985(param_00) {
     return;
   }
 
-  lib_0502::func_697E(self.var_982E.var_1A5, param_00);
+  lib_0502::func_697E(self.var_982E.targetname, param_00);
 }
 
 func_6965(param_00, param_01, param_02) {
@@ -531,8 +531,8 @@ func_6964(param_00, param_01) {
 
 func_6960(param_00, param_01, param_02, param_03) {
   var_04 = spawnStruct();
-  var_04.var_109 = param_00;
-  var_04.var_1B9 = param_02;
+  var_04.name = param_00;
+  var_04.type = param_02;
   if(!isDefined(param_03)) {
     param_03 = [param_01];
   } else if(!isarray(param_03)) {
@@ -546,14 +546,14 @@ func_6960(param_00, param_01, param_02, param_03) {
   }
 
   var_04.var_7597 = param_03;
-  var_04.var_A281 = func_45D1(self.var_695A, param_00, param_01);
-  var_04.var_2BD8 = var_04.var_A281;
+  var_04.value = func_45D1(self.var_695A, param_00, param_01);
+  var_04.var_2BD8 = var_04.value;
   self.var_6967[param_00] = var_04;
 }
 
 func_45D0(param_00) {
   var_01 = self.var_6967[param_00];
-  var_02 = var_01.var_A281;
+  var_02 = var_01.value;
   return var_02;
 }
 
@@ -599,7 +599,7 @@ func_17CF(param_00) {
   var_02 func_17C7("enemyOwns");
   var_02 maps\mp\gametypes\_gameobjects::func_86CD(0);
   var_02.var_6BBF = undefined;
-  func_6983(self.var_1A5);
+  func_6983(self.targetname);
   var_03 = func_45D0("captureTimeSec");
   var_02 maps\mp\gametypes\_gameobjects::func_365D();
   var_02 maps\mp\gametypes\_gameobjects::func_8A5A(var_03);
@@ -621,7 +621,7 @@ func_17CF(param_00) {
   var_02 func_0990(var_02.var_28D4 + var_02.var_6A1D, undefined, undefined, 1000, 1, 0, 1);
   var_02 thread func_17C9();
   thread func_17C1(var_02);
-  func_6982(self.var_1A5);
+  func_6982(self.targetname);
   self notify("end_hud");
   foreach(var_05 in self.var_982D["visuals"]) {
     var_05 delete();
@@ -644,7 +644,7 @@ func_17C9() {
       continue;
     }
 
-    if(var_00.var_12C["team"] != game["attackers"]) {
+    if(var_00.pers["team"] != game["attackers"]) {
       continue;
     }
 
@@ -696,10 +696,10 @@ func_17CA(param_00, param_01) {
   }
 
   if(var_02) {
-    level thread maps\mp\_utility::func_9863("raids_callout_capture", param_00);
+    level thread maps\mp\_utility::teamplayercardsplash("raids_callout_capture", param_00);
     param_00 notify("raid_blitz_score");
     thread func_17CE(param_00, 0, self.var_79AD func_45D0("restockAfterCap"));
-    self.var_79AD.var_6967["numCapturesCurrent"].var_A281++;
+    self.var_79AD.var_6967["numCapturesCurrent"].value++;
     if(self.var_79AD func_45D0("numCapturesCurrent") >= self.var_79AD func_45D0("numCapturesTotal")) {
       func_6935(self.var_695A);
     } else {
@@ -779,15 +779,15 @@ func_17C7(param_00) {
 func_17CE(param_00, param_01, param_02) {
   var_03 = lib_050D::func_44F9(game["attackers"]);
   foreach(var_05 in var_03) {
-    if(var_05.var_165 == "axis_override") {
+    if(var_05.exitlevel == "axis_override") {
       var_03 = common_scripts\utility::func_F93(var_03, var_05);
     }
   }
 
-  var_07 = common_scripts\utility::func_7A33(var_03);
+  var_07 = common_scripts\utility::random(var_03);
   wait(param_01);
-  thread[[level.var_17C8]](param_00.var_116, param_00.var_1D, param_00 getstance(), game["attackers"], param_00.var_267E);
-  param_00 func_17C6(var_07.var_116, var_07.var_1D);
+  thread[[level.var_17C8]](param_00.origin, param_00.var_1D, param_00 getstance(), game["attackers"], param_00.var_267E);
+  param_00 func_17C6(var_07.origin, var_07.var_1D);
 }
 
 func_17C6(param_00, param_01) {
@@ -795,7 +795,7 @@ func_17C6(param_00, param_01) {
   var_02 = (0, 0, self getviewheight());
   var_03 = spawn("script_model", self.origin + var_02);
   var_03.var_1D = self.var_1D;
-  var_03.var_116 = self.origin + var_02;
+  var_03.origin = self.origin + var_02;
   var_03 setModel("tag_player");
   self method_81E2(var_03, "tag_player");
   self setOrigin(param_00);
@@ -822,7 +822,7 @@ func_17CD() {
   } else {
     self.var_17CC = newclienthudelem(self);
     self.var_17CC.maxsightdistsqrd = 0;
-    self.var_17CC.var_1D7 = 0;
+    self.var_17CC.y = 0;
     self.var_17CC.ignoreme = -5;
     self.var_17CC.var_C6 = "fullscreen";
     self.var_17CC.var_1CA = "fullscreen";
@@ -872,18 +872,18 @@ func_17C1(param_00) {
   var_05 = func_45D0("allowReversal");
   if(var_05) {
     var_03 = maps\mp\gametypes\_hud_util::func_282A("white", 3, 15);
-    var_03 maps\mp\gametypes\_hud_util::func_8707("LEFTTOP", undefined, 65, 190);
+    var_03 maps\mp\gametypes\_hud_util::setpoint("LEFTTOP", undefined, 65, 190);
     var_04 = maps\mp\gametypes\_hud_util::func_282A("white", 3, 15);
-    var_04 maps\mp\gametypes\_hud_util::func_8707("LEFTTOP", undefined, 115, 190);
+    var_04 maps\mp\gametypes\_hud_util::setpoint("LEFTTOP", undefined, 115, 190);
   }
 
   func_17C2(var_02, var_01);
   param_00 func_7CCA();
-  var_02 maps\mp\gametypes\_hud_util::func_2DCC();
-  var_01 maps\mp\gametypes\_hud_util::func_2DCC();
+  var_02 maps\mp\gametypes\_hud_util::destroyelem();
+  var_01 maps\mp\gametypes\_hud_util::destroyelem();
   if(var_05) {
-    var_03 maps\mp\gametypes\_hud_util::func_2DCC();
-    var_04 maps\mp\gametypes\_hud_util::func_2DCC();
+    var_03 maps\mp\gametypes\_hud_util::destroyelem();
+    var_04 maps\mp\gametypes\_hud_util::destroyelem();
   }
 }
 
@@ -899,7 +899,7 @@ func_17C2(param_00, param_01) {
 
 func_7E08(param_00) {
   if(!func_694B()) {
-    level.var_611["objective_resupply_death"] = loadfx("vfx/test/raid/objective_resupply_death");
+    level._effect["objective_resupply_death"] = loadfx("vfx/test/raid/objective_resupply_death");
   }
 
   func_6934(self);
@@ -946,8 +946,8 @@ func_7E07() {
   func_6982(self.var_695A);
   wait(1);
   foreach(var_01 in self.var_2DAB) {
-    var_01.var_4F78 maps\mp\gametypes\_hud_util::func_2DCC();
-    var_01.var_4F68 maps\mp\gametypes\_hud_util::func_2DCC();
+    var_01.var_4F78 maps\mp\gametypes\_hud_util::destroyelem();
+    var_01.var_4F68 maps\mp\gametypes\_hud_util::destroyelem();
   }
 }
 
@@ -1040,7 +1040,7 @@ func_7E01(param_00, param_01) {
   foreach(var_04 in var_02.var_A582) {
     var_04 setCanDamage(1);
     var_04 setdamagecallbackon(1);
-    var_04.var_29B5 = ::func_7E12;
+    var_04.damagecallback = ::func_7E12;
     var_04.var_3FCA = var_02;
   }
 
@@ -1053,7 +1053,7 @@ func_7E0D(param_00) {
 }
 
 func_7E0E(param_00) {
-  var_01 = func_27DE(param_00.var_982E getentitynumber(), game["attackers"], param_00.var_116, (0, 0, 0));
+  var_01 = func_27DE(param_00.var_982E getentitynumber(), game["attackers"], param_00.origin, (0, 0, 0));
   var_01 maps\mp\gametypes\_gameobjects::func_8A60("none");
   var_01 maps\mp\gametypes\_gameobjects::func_C30("friendly");
   func_7E0C(var_01);
@@ -1085,7 +1085,7 @@ func_7E13(param_00) {
   self endon("reset");
   self endon("pickup_object");
   param_00 setdamagecallbackon(1);
-  param_00.var_29B5 = ::func_7E12;
+  param_00.damagecallback = ::func_7E12;
 }
 
 func_7E12(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
@@ -1109,13 +1109,13 @@ func_7E12(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 }
 
 func_7DFD(param_00) {
-  param_00.var_2015 = param_00 maps\mp\gametypes\_hud_util::func_280B("icon_raid_objective_resupply_carry", 50, 50);
-  param_00.var_2015 maps\mp\gametypes\_hud_util::func_8707("BOTTOM LEFT", "BOTTOM LEFT", 0, -90);
+  param_00.carryicon = param_00 maps\mp\gametypes\_hud_util::createicon("icon_raid_objective_resupply_carry", 50, 50);
+  param_00.carryicon maps\mp\gametypes\_hud_util::setpoint("BOTTOM LEFT", "BOTTOM LEFT", 0, -90);
 }
 
 func_7DFE(param_00) {
-  if(isDefined(param_00.var_2015)) {
-    param_00.var_2015 maps\mp\gametypes\_hud_util::func_2DCC();
+  if(isDefined(param_00.carryicon)) {
+    param_00.carryicon maps\mp\gametypes\_hud_util::destroyelem();
   }
 }
 
@@ -1262,7 +1262,7 @@ func_1FBB(param_00) {
 }
 
 func_1FC2(param_00) {
-  func_6983(self.var_1A5);
+  func_6983(self.targetname);
   var_01 = undefined;
   if(common_scripts\utility::func_562E(self.var_651B)) {
     var_01 = self.var_81E1;
@@ -1338,14 +1338,14 @@ func_1FC2(param_00) {
   }
 
   var_06 thread func_1FBE();
-  func_6982(self.var_1A5);
+  func_6982(self.targetname);
   level.var_8D1 = common_scripts\utility::func_F93(level.var_8D1, var_06);
   if(level.var_8D1.size == 0) {
     level.var_695E = common_scripts\utility::func_F93(level.var_695E, ::func_1FBC);
   }
 
-  lib_04F7::func_5A4F(param_00.var_116, 750);
-  lib_04F7::func_2F99(param_00.var_116, 750);
+  lib_04F7::func_5A4F(param_00.origin, 750);
+  lib_04F7::func_2F99(param_00.origin, 750);
   self notify("end_hud");
   if(isDefined(self.var_1921)) {
     foreach(var_09 in self.var_1921) {
@@ -1365,12 +1365,12 @@ func_1FBC(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_0A = self;
   foreach(var_0C in level.var_8D1) {
     if(param_01 istouching(var_0C.var_9D65)) {
-      if(param_01.var_1A7 == game["attackers"]) {
+      if(param_01.team == game["attackers"]) {
         param_01 thread maps\mp\_events::func_5A82(var_0A, param_09, param_04);
         param_01.var_62A1["assaultObjective"] = var_0C;
       }
 
-      if(param_01.var_1A7 == game["defenders"]) {
+      if(param_01.team == game["defenders"]) {
         param_01 thread maps\mp\_events::func_2C80(var_0A, param_09, param_04);
         param_01.var_62A1["defendObjective"] = var_0C;
       }
@@ -1380,12 +1380,12 @@ func_1FBC(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
     if(var_0A istouching(var_0C.var_9D65)) {
       param_01 thread maps\mp\gametypes\_missions::func_80BB(param_04, param_03);
-      if(var_0A.var_1A7 == game["attackers"]) {
+      if(var_0A.team == game["attackers"]) {
         param_01 thread maps\mp\_events::func_2C80(var_0A, param_09, param_04);
         param_01.var_62A1["defendObjective"] = var_0C;
       }
 
-      if(var_0A.var_1A7 == game["defenders"]) {
+      if(var_0A.team == game["defenders"]) {
         param_01 thread maps\mp\_events::func_10BA(var_0A, param_09, param_04);
         param_01.var_62A1["assaultObjective"] = var_0C;
       }
@@ -1397,24 +1397,24 @@ func_6ACC(param_00) {
   var_01 = param_00;
   var_02 = undefined;
   foreach(var_04 in self.var_9AC3[game["attackers"]]) {
-    var_04.var_721C thread func_7935();
+    var_04.player thread func_7935();
     param_00 notify("ch_capture", self);
-    if(!isDefined(var_02) || var_04.var_9309 < var_02) {
-      var_01 = var_04.var_721C;
-      var_02 = var_04.var_9309;
+    if(!isDefined(var_02) || var_04.starttime < var_02) {
+      var_01 = var_04.player;
+      var_02 = var_04.starttime;
     }
   }
 
-  level thread maps\mp\_utility::func_9863("raids_callout_capture", var_01);
+  level thread maps\mp\_utility::teamplayercardsplash("raids_callout_capture", var_01);
   func_6935(self.var_695A);
 }
 
 func_7935() {
-  maps\mp\_utility::func_50EA("pointscaptured", 1);
-  maps\mp\_utility::func_50E9("captures", 1);
-  maps\mp\gametypes\_persistence::func_933A("round", "captures", self.var_12C["captures"]);
+  maps\mp\_utility::incplayerstat("pointscaptured", 1);
+  maps\mp\_utility::incpersstat("captures", 1);
+  maps\mp\gametypes\_persistence::statsetchild("round", "captures", self.pers["captures"]);
   level thread maps\mp\gametypes\_rank::giverankxp("capture", self);
-  maps\mp\gametypes\_missions::func_7750("ch_heroics_destroyer");
+  maps\mp\gametypes\_missions::processchallenge("ch_heroics_destroyer");
 }
 
 func_6ACB() {
@@ -1523,10 +1523,10 @@ func_8C94() {
   var_01[8] = 1.4;
   var_01[9] = 1.5;
   var_02 = game["attackers"];
-  var_03 = maps\mp\_utility::func_45DE(var_02);
+  var_03 = maps\mp\_utility::getotherteam(var_02);
   var_04 = self.var_689F[var_02];
   var_05 = self.var_689F[var_03];
-  if(level.var_3F9D) {
+  if(level.gameended) {
     self.var_A22B = 0;
   }
 
@@ -1743,7 +1743,7 @@ func_1FBE() {
       func_6981(self.var_695A, var_09);
       var_0A = [];
       foreach(var_0C in self.var_9AC3[game["attackers"]]) {
-        var_0D = var_0C.var_721C;
+        var_0D = var_0C.player;
         if(isDefined(var_06) && var_06.size > 0 && common_scripts\utility::func_F79(var_06, var_0D)) {
           if(!isDefined(var_0D.capturing_objective_time)) {
             var_0D.capturing_objective_time = 0;
@@ -1801,7 +1801,7 @@ func_1FBD(param_00) {
       maps\mp\gametypes\_gameobjects::func_C30("any");
       var_02 = lib_0502::func_4518("taking_losing", var_01);
       func_860A(var_02, var_01);
-      func_8617("taking", var_02);
+      playsound("taking", var_02);
       break;
 
     case "contested":
@@ -1817,7 +1817,7 @@ func_1FBD(param_00) {
       var_02 = lib_0502::func_4518("capture_defend_enemy", var_01);
       func_860A(var_02, var_01);
       if(common_scripts\utility::func_562E(self.var_57D2) || self.var_79AD func_45D0("allowReversal") && self.var_A22B) {
-        func_8617("losing", var_02);
+        playsound("losing", var_02);
       } else {
         func_8614(var_02);
       }
@@ -1852,20 +1852,20 @@ capturezonecenternodesetup(param_00) {
 }
 
 func_1FB4(param_00) {
-  lib_0502::func_2548(param_00.var_165);
+  lib_0502::func_2548(param_00.exitlevel);
   if(!isDefined(self.var_1921)) {
     self.var_1921 = [];
   }
 
   if(getdvarint("trailer_disable_borders", 0) > 0) {
-    param_00.var_116 = param_00.var_116 + (0, 0, -1000);
-    param_00 method_805C();
+    param_00.origin = param_00.origin + (0, 0, -1000);
+    param_00 save_undo_buffer();
     return;
   }
 
   var_01 = game["attackers"];
   var_02 = game["defenders"];
-  switch (param_00.var_165) {
+  switch (param_00.exitlevel) {
     case "BorderVisualization_unoccupied":
       self.var_1921["unoccupied"] = param_00;
       self.var_1921["unoccupied"] thread lib_0502::func_8C21(var_01);
@@ -1878,12 +1878,12 @@ func_1FB4(param_00) {
 
     case "BorderVisualization_enemy":
       self.var_1921["enemy"] = param_00;
-      param_00 method_805C();
+      param_00 save_undo_buffer();
       break;
 
     case "BorderVisualization_contested":
       self.var_1921["contested"] = param_00;
-      param_00 method_805C();
+      param_00 save_undo_buffer();
       break;
   }
 }
@@ -1894,7 +1894,7 @@ func_1FB5(param_00) {
   }
 
   foreach(var_02 in self.var_79AD.var_1921) {
-    var_02 method_805C();
+    var_02 save_undo_buffer();
     var_02 notify("clear");
   }
 
@@ -1931,7 +1931,7 @@ func_1FB5(param_00) {
 }
 
 captureworldsetup(param_00) {
-  lib_0502::func_2548(param_00.var_165);
+  lib_0502::func_2548(param_00.exitlevel);
   if(!isDefined(self.worldvisualizations)) {
     self.worldvisualizations = [];
   }
@@ -1953,14 +1953,14 @@ captureworldsetup(param_00) {
   }
 
   if(getdvarint("trailer_disable_borders", 0) > 0) {
-    param_00.var_116 = param_00.var_116 + (0, 0, -1000);
-    param_00 method_805C();
+    param_00.origin = param_00.origin + (0, 0, -1000);
+    param_00 save_undo_buffer();
     return;
   }
 
   var_01 = game["attackers"];
   var_02 = game["defenders"];
-  switch (param_00.var_165) {
+  switch (param_00.exitlevel) {
     case "WorldVisualization_unoccupied":
       self.worldvisualizationsunoccupied = common_scripts\utility::func_F6F(self.worldvisualizationsunoccupied, param_00);
       self.worldvisualizations["unoccupied"] = self.worldvisualizationsunoccupied;
@@ -1976,13 +1976,13 @@ captureworldsetup(param_00) {
     case "WorldVisualization_enemy":
       self.worldvisualizationsenemy = common_scripts\utility::func_F6F(self.worldvisualizationsenemy, param_00);
       self.worldvisualizations["enemy"] = self.worldvisualizationsenemy;
-      common_scripts\utility::func_F71(self.worldvisualizations["enemy"], ::method_805C);
+      common_scripts\utility::func_F71(self.worldvisualizations["enemy"], ::save_undo_buffer);
       break;
 
     case "WorldVisualization_contested":
       self.worldvisualizationscontested = common_scripts\utility::func_F6F(self.worldvisualizationscontested, param_00);
       self.worldvisualizations["contested"] = self.worldvisualizationscontested;
-      common_scripts\utility::func_F71(self.worldvisualizations["contested"], ::method_805C);
+      common_scripts\utility::func_F71(self.worldvisualizations["contested"], ::save_undo_buffer);
       break;
   }
 }
@@ -1994,7 +1994,7 @@ captureworldvisualization(param_00) {
 
   foreach(var_02 in self.var_79AD.worldvisualizations) {
     foreach(var_04 in var_02) {
-      var_04 method_805C();
+      var_04 save_undo_buffer();
       var_04 notify("clear");
     }
   }
@@ -2043,7 +2043,7 @@ func_A216(param_00) {
   func_6942(var_02);
   var_02 maps\mp\gametypes\_gameobjects::func_2F93();
   var_02 maps\mp\gametypes\_gameobjects::func_86CD(0);
-  func_6983(self.var_1A5);
+  func_6983(self.targetname);
   var_02 maps\mp\gametypes\_gameobjects::func_365D();
   var_02 maps\mp\gametypes\_gameobjects::func_C30("friendly");
   var_02 maps\mp\gametypes\_gameobjects::func_8A5A(func_45D0("useTime"));
@@ -2056,7 +2056,7 @@ func_A216(param_00) {
   var_02.var_6BBF = ::func_6BC7;
   var_02.var_6ABC = ::func_6BC5;
   var_02.var_6AFA = ::func_6BC6;
-  func_6982(self.var_1A5);
+  func_6982(self.targetname);
   foreach(var_04 in self.var_982D["visuals"]) {
     var_04 delete();
   }
@@ -2095,13 +2095,13 @@ func_A210(param_00) {
 func_1D5D(param_00) {
   level.var_79ED[level.var_79ED.size] = param_00;
   param_00 common_scripts\utility::func_9D9F();
-  func_6983(self.var_1A5);
+  func_6983(self.targetname);
   waittillframeend;
   var_01 = 0;
   var_02 = 1;
-  if(self.var_1A5 == "bridge_1") {
+  if(self.targetname == "bridge_1") {
     var_02 = 0.5;
-  } else if(self.var_1A5 == "bridge_2") {
+  } else if(self.targetname == "bridge_2") {
     var_01 = 0.5;
   }
 
@@ -2166,7 +2166,7 @@ func_1D5D(param_00) {
     thread func_2384(var_0D);
   }
 
-  func_6982(self.var_1A5);
+  func_6982(self.targetname);
   foreach(var_14 in self.var_692D) {
     var_14 showallparts();
     foreach(var_16 in var_14.var_8BF7) {
@@ -2291,10 +2291,10 @@ func_1D64(param_00) {
 func_1D5E(param_00) {
   self.var_1D58 notify("built");
   lib_0502::func_7921(param_00);
-  func_6935(self.var_1D58.var_1A5);
+  func_6935(self.var_1D58.targetname);
   var_01 = param_00;
   var_02 = param_00.var_1D5B;
-  foreach(var_04 in level.var_744A) {
+  foreach(var_04 in level.players) {
     if(common_scripts\utility::func_562E(var_04.var_581C)) {
       lib_0502::func_7921(var_04);
       if(!isDefined(var_02) || var_04.var_1D5B < var_02) {
@@ -2304,20 +2304,20 @@ func_1D5E(param_00) {
     }
   }
 
-  level thread maps\mp\_utility::func_9863("raids_callout_capture", var_01);
+  level thread maps\mp\_utility::teamplayercardsplash("raids_callout_capture", var_01);
 }
 
 func_1D4F(param_00) {
   param_00 lib_0502::func_7997();
-  func_6983(self.var_1A5);
+  func_6983(self.targetname);
   param_00 lib_0502::func_79C6();
-  func_6982(self.var_1A5);
+  func_6982(self.targetname);
   param_00 delete();
 }
 
 func_1D55(param_00) {
   param_00 lib_0502::func_7997();
-  func_6983(self.var_1A5);
+  func_6983(self.targetname);
   param_00 lib_0502::func_79C6();
   thread func_1D51(param_00);
   thread func_1D50(param_00);
@@ -2340,14 +2340,14 @@ func_1D51(param_00) {
 
 func_1D50(param_00) {
   param_00 endon("objectFinished");
-  func_6982(self.var_1A5);
+  func_6982(self.targetname);
   param_00 notify("objectFinished");
 }
 
 func_1D59(param_00) {
   var_01 = param_00.var_3B == "script_brushmodel";
   if(var_01) {
-    param_00 method_805F();
+    param_00 saved_actionslotdata();
   }
 
   thread func_1D51(param_00);
@@ -2369,7 +2369,7 @@ func_1D53(param_00) {
       break;
 
     case "building":
-      func_8617("build", 12);
+      playsound("build", 12);
       foreach(var_02 in self.var_21F7) {
         if(common_scripts\utility::func_562E(var_02.var_9D65.var_3C65)) {
           var_02 func_860D(12);
@@ -2383,7 +2383,7 @@ func_1D53(param_00) {
 }
 
 func_1D52(param_00) {
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   func_6983(self.var_695A);
   param_00 thread lib_0502::func_8C21(game["attackers"]);
   func_6982(self.var_695A);
@@ -2391,7 +2391,7 @@ func_1D52(param_00) {
 }
 
 func_1D4E(param_00) {
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   func_6983(self.var_695A);
   param_00 thread lib_0502::func_8C21(game["defenders"]);
   func_6982(self.var_695A);
@@ -2479,11 +2479,11 @@ func_3855(param_00) {
   }
 
   self.var_A2C8 = level.var_3836;
-  self.var_A2C8.var_1A2 = self.var_1A2;
+  self.var_A2C8.target = self.target;
   self.var_A2C8.var_693E = undefined;
   func_385A(self.var_A2C8);
   func_6983(self.var_695A);
-  self.var_A2C8.var_1C7 = "forward";
+  self.var_A2C8.getfirstarraykey = "forward";
   self.var_A2C8.var_1C1 = "forward";
   self.var_A2C8 startpath(self.var_A2C8.var_92ED);
   thread func_3847();
@@ -2524,18 +2524,18 @@ func_383D(param_00) {
     var_01 = undefined;
     var_02 = undefined;
     foreach(var_04 in self.var_383C.var_9AC3[game["attackers"]]) {
-      if(!isDefined(var_04.var_721C)) {
+      if(!isDefined(var_04.player)) {
         continue;
       }
 
-      lib_0502::func_7924(var_04.var_721C);
-      if(!isDefined(var_02) || var_04.var_9309 < var_02) {
-        var_01 = var_04.var_721C;
-        var_02 = var_04.var_9309;
+      lib_0502::func_7924(var_04.player);
+      if(!isDefined(var_02) || var_04.starttime < var_02) {
+        var_01 = var_04.player;
+        var_02 = var_04.starttime;
       }
     }
 
-    level thread maps\mp\_utility::func_9863("raids_callout_capture", var_01);
+    level thread maps\mp\_utility::teamplayercardsplash("raids_callout_capture", var_01);
   }
 }
 
@@ -2544,7 +2544,7 @@ func_3844(param_00) {
     return 0;
   }
 
-  if(param_00 == game["attackers"] && !maps\mp\_utility::func_3FA0("finished_intro_vignette_" + game["attackers"])) {
+  if(param_00 == game["attackers"] && !maps\mp\_utility::gameflag("finished_intro_vignette_" + game["attackers"])) {
     return 0;
   }
 
@@ -2554,17 +2554,17 @@ func_3844(param_00) {
 func_3843(param_00) {
   if(!isDefined(self.var_73B6)) {
     self.var_73B6["attackers"] = spawnStruct();
-    self.var_73B6["attackers"].var_99DA = -1;
+    self.var_73B6["attackers"].time = -1;
     self.var_73B6["defenders"] = spawnStruct();
-    self.var_73B6["defenders"].var_99DA = -1;
+    self.var_73B6["defenders"].time = -1;
   }
 
   var_01 = self.var_73B6[param_00];
-  if(var_01.var_99DA == gettime()) {
+  if(var_01.time == gettime()) {
     return var_01.var_7DF9;
   }
 
-  self.var_73B6[param_00].var_99DA = gettime();
+  self.var_73B6[param_00].time = gettime();
   var_02 = game[param_00];
   var_03 = anglesToForward(self.var_A2C8.var_1D);
   if(param_00 == "defenders") {
@@ -2580,17 +2580,17 @@ func_3843(param_00) {
       continue;
     }
 
-    var_06 = var_05.var_9D65.var_116 - self.var_A2C8.var_116;
+    var_06 = var_05.var_9D65.origin - self.var_A2C8.origin;
     if(vectordot(var_03, var_06) < 0) {
       continue;
     }
 
     foreach(var_08 in self.var_383C.var_9AC3[var_02]) {
-      if(!isDefined(var_08.var_721C)) {
+      if(!isDefined(var_08.player)) {
         continue;
       }
 
-      if(var_08.var_721C istouching(var_05.var_9D65)) {
+      if(var_08.player istouching(var_05.var_9D65)) {
         self.var_73B6[param_00].var_7DF9 = 1;
         return 1;
       }
@@ -2677,7 +2677,7 @@ func_3847() {
       return;
     }
 
-    if(level.var_3F9D) {
+    if(level.gameended) {
       func_3845("stop");
       return;
     }
@@ -2717,7 +2717,7 @@ func_3847() {
       continue;
     }
 
-    if(isDefined(level.var_4E09)) {
+    if(isDefined(level.hostmigrationtimer)) {
       func_3845("stop");
       if(var_08 && var_06) {
         func_6981(self.var_695A, undefined, 1, 0);
@@ -2733,7 +2733,7 @@ func_3847() {
     var_09 = undefined;
     var_0A = undefined;
     var_0B = 0;
-    var_0C = func_45D0("speedReverse") > 0 || !maps\mp\_utility::func_3FA0("finished_intro_vignette_" + game["attackers"]);
+    var_0C = func_45D0("speedReverse") > 0 || !maps\mp\_utility::gameflag("finished_intro_vignette_" + game["attackers"]);
     if(!var_06 && !var_07) {
       if(func_3841() && var_0C) {
         var_09 = "blocked_reverse";
@@ -2765,7 +2765,7 @@ func_3847() {
         if(func_3840(1)) {
           var_0A = "blocked_forward_scripted";
         }
-      } else if(self.var_A2C8.var_1C7 == "reverse" && self.var_A2C8 method_8283() > 0) {
+      } else if(self.var_A2C8.getfirstarraykey == "reverse" && self.var_A2C8 method_8283() > 0) {
         var_09 = "stop";
       } else {
         var_09 = "forward";
@@ -2786,8 +2786,8 @@ func_3847() {
     if(var_09 == "forward") {
       var_0D = [];
       foreach(var_0F in self.var_383C.var_9AC3[game["attackers"]]) {
-        var_10 = var_0F.var_721C;
-        var_11 = var_0F.var_9309;
+        var_10 = var_0F.player;
+        var_11 = var_0F.starttime;
         if(isDefined(var_05) && var_05.size > 0 && common_scripts\utility::func_F79(var_05, var_10)) {
           if(!isDefined(var_10.escorting_tank_time)) {
             var_10.escorting_tank_time = 0;
@@ -2853,7 +2853,7 @@ func_3845(param_00) {
   self.var_932E = gettime();
   switch (param_00) {
     case "needs_repair":
-      self.var_7D0B = spawnfx(common_scripts\utility::func_44F5("needs_repair"), self.var_A2C8.var_116 + (0, 0, 120));
+      self.var_7D0B = spawnfx(common_scripts\utility::func_44F5("needs_repair"), self.var_A2C8.origin + (0, 0, 120));
       triggerfx(self.var_7D0B);
       func_3870(self.var_A2C8);
       break;
@@ -2870,7 +2870,7 @@ func_3845(param_00) {
 
     case "forward":
       if(self.var_9263) {
-        self.var_A2C8.var_1C7 = "forward";
+        self.var_A2C8.getfirstarraykey = "forward";
         self.var_A2C8.var_1C1 = "forward";
         self.var_A2C8 startpath();
         self.var_9263 = 0;
@@ -2885,11 +2885,11 @@ func_3845(param_00) {
 }
 
 func_386F(param_00) {
-  var_01 = function_01E0(param_00.var_106, param_00.var_1A5, param_00.var_1C8, param_00.var_116, param_00.var_1D);
+  var_01 = function_01E0(param_00.model, param_00.targetname, param_00.var_1C8, param_00.origin, param_00.var_1D);
   var_01.var_1C8 = param_00.var_1C8;
   var_01 makeunusable();
   var_01 setCanDamage(0);
-  var_01.var_1A2 = param_00.var_1A2;
+  var_01.target = param_00.target;
   var_01.var_A045 = ::lib_0504::func_A3FE;
   var_01.var_A3EF = 1;
   var_01 method_867B(1);
@@ -2897,7 +2897,7 @@ func_386F(param_00) {
   var_01.var_4881 = 1;
   var_01.var_37D8 = var_01 getentitynumber();
   var_01.var_112 = self;
-  var_01.var_1A7 = param_00.var_82B2;
+  var_01.team = param_00.var_82B2;
   lib_0502::func_9FF(var_01);
   lib_0504::func_794B(var_01);
   self.var_A2C8 = var_01;
@@ -3034,7 +3034,7 @@ func_3849(param_00) {
       var_0C = var_0B.var_6EDA - var_03;
       if(var_0B.var_6968) {
         var_0D = func_3851(var_0B);
-        var_0C = var_0C + distance2d(self.var_A2C8.var_116, var_0D);
+        var_0C = var_0C + distance2d(self.var_A2C8.origin, var_0D);
       }
 
       var_0E = var_04.var_6EDA - var_03;
@@ -3067,35 +3067,35 @@ func_3849(param_00) {
             var_15 = lib_0502::func_4518("escort_halt", var_06);
             param_00 func_860A(var_15, var_06);
             param_00 func_3FCD(self.var_A2C8);
-            param_00 func_8617("escort", var_15, var_07, var_08, var_0A);
+            param_00 playsound("escort", var_15, var_07, var_08, var_0A);
             break;
 
           case "forward":
             var_15 = lib_0502::func_4518("escorting_halt", var_07);
             param_00 func_860A(var_15, var_06);
             param_00 func_3FCD(self.var_A2C8);
-            param_00 func_8617("escort", var_15, var_07, var_08, var_0A);
+            param_00 playsound("escort", var_15, var_07, var_08, var_0A);
             break;
 
           case "contested":
             var_15 = lib_0502::func_4518("contested_contested", var_07);
             param_00 func_860A(var_15, var_06);
             param_00 func_3FCD(self.var_A2C8);
-            param_00 func_8617("escort", var_15, var_07, var_08, var_0A);
+            param_00 playsound("escort", var_15, var_07, var_08, var_0A);
             break;
 
           case "enemy":
             var_15 = lib_0502::func_4518("escort_defenders_touch", var_07);
             param_00 func_860A(var_15, var_06);
             param_00 func_3FCD(self.var_A2C8);
-            param_00 func_8617("escort", var_15, var_07, var_08, var_0A);
+            param_00 playsound("escort", var_15, var_07, var_08, var_0A);
             break;
 
           case "blocked":
             var_15 = lib_0502::func_4518("escort_blocked", var_07);
             param_00 func_860A(var_15, var_06);
             param_00 func_3FCD(self.var_A2C8);
-            param_00 func_8617("escort", var_15, var_07, var_08, var_0A);
+            param_00 playsound("escort", var_15, var_07, var_08, var_0A);
             break;
         }
 
@@ -3130,8 +3130,8 @@ func_9542(param_00, param_01, param_02) {
     return;
   }
 
-  lib_0502::func_2D53("dropped_weapon", param_00.var_A2C8.var_116, 220);
-  lib_0502::func_2D53("care_package", param_00.var_A2C8.var_116, 210);
+  lib_0502::func_2D53("dropped_weapon", param_00.var_A2C8.origin, 220);
+  lib_0502::func_2D53("care_package", param_00.var_A2C8.origin, 210);
   if(param_01 == param_00.var_6F3C) {
     return;
   }
@@ -3148,8 +3148,8 @@ func_27E6(param_00, param_01) {
     var_02[var_02.size] = var_04.var_6EDA / self.var_6EDA;
   }
 
-  var_06 = param_00.var_9D65.var_116 + param_00.var_6A1D;
-  var_07 = var_06 - param_01.var_116;
+  var_06 = param_00.var_9D65.origin + param_00.var_6A1D;
+  var_07 = var_06 - param_01.origin;
   param_00 func_0990(param_01, undefined, var_07, 30000, 5, 0, 0, 0, var_02[0], 0, var_02, self.var_A2C8, self.var_A2C8.var_92ED, self.var_A2C8.var_291C);
   param_00.var_21DE = var_02;
   waittillframeend;
@@ -3295,8 +3295,8 @@ func_384C() {
   self.var_7D0F func_0990(self.var_7D0E[0].var_9D65, undefined, undefined, var_02 * 1000, 71, 0, 1);
   func_384D(var_01, var_00);
   self.var_7D0F func_7CCA();
-  var_01 maps\mp\gametypes\_hud_util::func_2DCC();
-  var_00 maps\mp\gametypes\_hud_util::func_2DCC();
+  var_01 maps\mp\gametypes\_hud_util::destroyelem();
+  var_00 maps\mp\gametypes\_hud_util::destroyelem();
 }
 
 func_384D(param_00, param_01) {
@@ -3308,7 +3308,7 @@ func_384D(param_00, param_01) {
     if(var_03 == 0) {
       self.var_7D0F func_8614(6);
     } else if(var_03 != var_02) {
-      self.var_7D0F func_8617("build", 12);
+      self.var_7D0F playsound("build", 12);
     }
 
     var_04 = clamp(self.var_7D0F.var_28D5 / self.var_7D0F.var_A23F, 0, 1);
@@ -3365,7 +3365,7 @@ func_385B(param_00) {
 func_385A(param_00) {
   var_01 = 0;
   var_02 = 0;
-  param_00.var_92ED = getvehiclenode(param_00.var_1A2, "targetname");
+  param_00.var_92ED = getvehiclenode(param_00.target, "targetname");
   param_00.var_6975 = param_00.var_92ED;
   param_00.var_291C = param_00.var_92ED;
   var_03 = param_00.var_92ED;
@@ -3373,12 +3373,12 @@ func_385A(param_00) {
   while(isDefined(var_03)) {
     var_03.var_112 = self;
     thread func_385E(param_00, var_03, ::func_385F);
-    if(!isDefined(var_03.var_1A2)) {
+    if(!isDefined(var_03.target)) {
       break;
     }
 
     var_04 = var_03;
-    var_03 = getvehiclenode(var_03.var_1A2, "targetname");
+    var_03 = getvehiclenode(var_03.target, "targetname");
   }
 
   self.var_6920 = param_00.var_6975 == param_00.var_92ED;
@@ -3424,11 +3424,11 @@ func_385A(param_00) {
     }
 
     var_04 = var_03;
-    if(!isDefined(var_03.var_1A2)) {
+    if(!isDefined(var_03.target)) {
       break;
     }
 
-    var_03 = getvehiclenode(var_03.var_1A2, "targetname");
+    var_03 = getvehiclenode(var_03.target, "targetname");
     var_04.var_66C9 = var_03;
   }
 
@@ -3450,13 +3450,13 @@ func_3851(param_00) {
     return param_00.var_6C42;
   }
 
-  return param_00.var_116;
+  return param_00.origin;
 }
 
 func_3858(param_00) {
-  var_01 = getvehiclenode(param_00.var_1A5, "target");
-  var_02 = getvehiclenode(param_00.var_1A2, "targetname");
-  var_03 = lib_0502::func_7771(param_00.var_116, func_3851(var_01), func_3851(var_02));
+  var_01 = getvehiclenode(param_00.targetname, "target");
+  var_02 = getvehiclenode(param_00.target, "targetname");
+  var_03 = lib_0502::func_7771(param_00.origin, func_3851(var_01), func_3851(var_02));
   var_04 = var_03[0];
   var_05 = var_03[1];
   return var_04;
@@ -3464,8 +3464,8 @@ func_3858(param_00) {
 
 func_385E(param_00, param_01, param_02) {
   var_03 = [];
-  if(isDefined(param_01.var_165)) {
-    var_03 = strtok(param_01.var_165, " ");
+  if(isDefined(param_01.exitlevel)) {
+    var_03 = strtok(param_01.exitlevel, " ");
   }
 
   foreach(var_05 in var_03) {
@@ -3560,7 +3560,7 @@ func_3866(param_00, param_01) {
   param_00.var_21DD = 1;
   self.currentcheckpoint++;
   foreach(var_03 in self.var_383C.var_9AC3[game["attackers"]]) {
-    var_04 = var_03.var_721C;
+    var_04 = var_03.player;
     if(var_04 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
       lib_0502::raidawardtankescortcheckpointevent(var_04);
     }
@@ -3705,8 +3705,8 @@ escortvehiclenodeprocesswait(param_00, param_01, param_02) {
         break;
 
       case "trigger_targets":
-        var_06 = getEntArray(param_01.var_1A2, "targetname");
-        var_07 = common_scripts\utility::func_46B7(param_01.var_1A2, "targetname");
+        var_06 = getEntArray(param_01.target, "targetname");
+        var_07 = common_scripts\utility::func_46B7(param_01.target, "targetname");
         var_08 = common_scripts\utility::func_F73(var_06, var_07);
         foreach(var_0A in var_08) {
           if(isDefined(param_01.var_8260)) {
@@ -3743,7 +3743,7 @@ escortvehiclenodeprocesswait(param_00, param_01, param_02) {
       var_0C = strtok(param_02, "_");
       var_0D = var_0C[1];
       if(isDefined(level.var_A3FB) && isDefined(level.var_A3FB[var_0D])) {
-        param_00 thread[[level.var_A3FB[var_0D]]](param_01.var_8260, param_01.var_81EF);
+        param_00 thread[[level.var_A3FB[var_0D]]](param_01.var_8260, param_01.script_exploder);
       }
     }
   }
@@ -3791,7 +3791,7 @@ func_3857(param_00) {
     param_00 method_8293(func_45D0("accel"));
   }
 
-  param_00.var_1C7 = "forward";
+  param_00.getfirstarraykey = "forward";
   param_00.var_1C1 = "forward";
   self.var_17DD = 0;
 }
@@ -3803,13 +3803,13 @@ func_386A(param_00) {
     param_00 method_8293(func_45D0("accelPreObjective"));
   }
 
-  param_00.var_1C7 = "reverse";
+  param_00.getfirstarraykey = "reverse";
   param_00.var_1C1 = "reverse";
   self.var_17DB = 0;
 }
 
 func_3870(param_00) {
-  if(!maps\mp\_utility::func_3FA0("finished_intro_vignette_" + game["attackers"])) {
+  if(!maps\mp\_utility::gameflag("finished_intro_vignette_" + game["attackers"])) {
     param_00 method_8280(0, func_45D0("accelPreObjective"), func_45D0("decelPreObjective"));
     return;
   }
@@ -3835,7 +3835,7 @@ func_3871(param_00) {
   func_6983(self.var_695A);
   while(var_01.size > 0) {
     if(!common_scripts\utility::func_562E(param_00.var_9734)) {
-      var_01 = common_scripts\utility::func_F92(var_01);
+      var_01 = common_scripts\utility::array_randomize(var_01);
       var_05 = undefined;
       var_06 = 0;
       foreach(var_03 in var_01) {
@@ -3860,7 +3860,7 @@ func_3871(param_00) {
 func_386C(param_00, param_01) {
   self endon("stopRandomTankTargeting");
   param_01.var_9734 = 1;
-  param_01 method_825B(param_00.var_116);
+  param_01 method_825B(param_00.origin);
   for(;;) {
     if(!func_583D(param_00, param_01)) {
       param_01 method_825D();
@@ -3868,7 +3868,7 @@ func_386C(param_00, param_01) {
       return;
     }
 
-    if(param_01 lib_0503::func_57FA(param_00.var_116)) {
+    if(param_01 lib_0503::func_57FA(param_00.origin)) {
       break;
     }
 
@@ -3885,24 +3885,24 @@ func_386C(param_00, param_01) {
 
 func_386D(param_00, param_01) {
   param_00.var_2DC4 = 1;
-  var_02 = getEntArray(param_00.var_1A2, "targetname");
-  var_03 = common_scripts\utility::func_46B7(param_00.var_1A2, "targetname");
+  var_02 = getEntArray(param_00.target, "targetname");
+  var_03 = common_scripts\utility::func_46B7(param_00.target, "targetname");
   var_04 = common_scripts\utility::func_F73(var_02, var_03);
   foreach(var_06 in var_04) {
-    if(!isDefined(var_06.var_165)) {
+    if(!isDefined(var_06.exitlevel)) {
       continue;
     }
 
-    thread func_386E(param_00, param_01, var_06, var_06.var_165);
+    thread func_386E(param_00, param_01, var_06, var_06.exitlevel);
   }
 }
 
 func_386E(param_00, param_01, param_02, param_03) {
-  switch (param_02.var_165) {
+  switch (param_02.exitlevel) {
     case "fx":
       var_04["concrete"] = "concrete_impact_large_chunks";
       var_04["car_explode"] = "veh_opel_blitz_explo_1_rnr";
-      playFX(common_scripts\utility::func_44F5(var_04[param_02.var_8260]), param_02.var_116, anglesToForward(param_02.var_1D));
+      playFX(common_scripts\utility::func_44F5(var_04[param_02.var_8260]), param_02.origin, anglesToForward(param_02.var_1D));
       break;
 
     case "model_destroy":
@@ -3911,8 +3911,8 @@ func_386E(param_00, param_01, param_02, param_03) {
       var_05["ger_trans_opel_blitz_static"] = "ger_trans_opel_blitz_static_exploded";
       var_06["ger_trans_opel_blitz_cannon_static"] = (0, -90, 0);
       var_06["ger_trans_opel_blitz_static"] = (0, -90, 0);
-      var_07 = var_06[param_02.var_106];
-      param_02 setModel(var_05[param_02.var_106]);
+      var_07 = var_06[param_02.model];
+      param_02 setModel(var_05[param_02.model]);
       if(isDefined(var_07)) {
         param_02.var_1D = param_02.var_1D + var_07;
       }
@@ -3923,7 +3923,7 @@ func_386E(param_00, param_01, param_02, param_03) {
       break;
 
     case "physics_launch":
-      var_08 = param_00.var_116 - param_01.var_116;
+      var_08 = param_00.origin - param_01.origin;
       var_08 = (var_08[0], var_08[1], 0);
       var_08 = vectorNormalize(var_08);
       var_08 = (var_08[0], var_08[1], 1);
@@ -3933,13 +3933,13 @@ func_386E(param_00, param_01, param_02, param_03) {
       break;
 
     case "move_gravity":
-      var_0A = common_scripts\utility::func_46B5(param_02.var_1A2, "targetname");
+      var_0A = common_scripts\utility::func_46B5(param_02.target, "targetname");
       var_0B = param_02.var_817A;
       if(!isDefined(var_0B)) {
         var_0B = 1;
       }
 
-      var_0C = trajectorycalculateinitialvelocity(param_02.var_116, var_0A.var_116, (0, 0, -800), var_0B);
+      var_0C = trajectorycalculateinitialvelocity(param_02.origin, var_0A.origin, (0, 0, -800), var_0B);
       param_02 gravitymove(var_0C, var_0B);
       param_02 rotateTo(var_0A.var_1D, var_0B, 0, var_0B);
       break;
@@ -3960,16 +3960,16 @@ func_583D(param_00, param_01) {
 
   if(isDefined(param_00.var_8172)) {
     var_02 = anglesToForward(param_00.var_1D);
-    var_03 = param_01.var_116 - param_00.var_116;
+    var_03 = param_01.origin - param_00.origin;
     var_03 = vectorNormalize(var_03);
     if(vectordot(var_02, var_03) < param_00.var_8172) {
       return 0;
     }
   }
 
-  if(isDefined(param_00.var_8276)) {
-    var_04 = distance(param_01.var_116, param_00.var_116);
-    if(var_04 > param_00.var_8276) {
+  if(isDefined(param_00.scriptmodelplayanim)) {
+    var_04 = distance(param_01.origin, param_00.origin);
+    if(var_04 > param_00.scriptmodelplayanim) {
       return 0;
     }
   }
@@ -3981,8 +3981,8 @@ func_3854(param_00) {
   var_01 = strtok(param_00.var_8260, " ");
   var_02 = float(var_01[0]);
   var_03 = float(var_01[1]);
-  var_04 = float(param_00.var_165);
-  var_05 = getEntArray(param_00.var_1A2, "targetname");
+  var_04 = float(param_00.exitlevel);
+  var_05 = getEntArray(param_00.target, "targetname");
   foreach(var_07 in var_05) {
     if(var_07.var_3A == "script_model") {
       continue;
@@ -4144,7 +4144,7 @@ func_190D(param_00, param_01) {
     param_01 maps\mp\gametypes\_gameobjects::func_8A5A(func_45D0("defuseTime"));
     var_03 = lib_0502::func_4518("defend_defuse", var_02);
     param_01 func_860A(var_03, var_02);
-    param_01 func_8617("bomb", var_03);
+    param_01 playsound("bomb", var_03);
     param_01.var_502A = "raidDefuseExplosive";
     param_01.var_6BBF = ::func_18D3;
     param_01.var_6ABC = ::func_6AC4;
@@ -4264,9 +4264,9 @@ func_190A(param_00, param_01, param_02) {
   self.var_2CA0 = gettime() + param_00 * 1000;
   var_03 = param_01.var_982D["bomb_model"][0];
   if(isDefined(var_03)) {
-    var_04 = var_03.var_116;
+    var_04 = var_03.origin;
   } else {
-    var_04 = param_02.var_116;
+    var_04 = param_02.origin;
   }
 
   var_05 = 0;
@@ -4289,7 +4289,7 @@ func_190A(param_00, param_01, param_02) {
     }
 
     maps\mp\gametypes\_hostmigration::func_A783(var_07);
-    if(isDefined(level.var_4E09)) {
+    if(isDefined(level.hostmigrationtimer)) {
       var_08 = maps\mp\gametypes\_hostmigration::func_A782();
       self.var_2CA0 = self.var_2CA0 + var_08;
     }
@@ -4333,17 +4333,17 @@ func_18F3(param_00) {
 
 func_1900(param_00) {
   var_01 = lib_0502::func_207E("trigger");
-  var_01.var_5A2C = spawn("script_model", param_00.var_116);
+  var_01.var_5A2C = spawn("script_model", param_00.origin);
   var_01.var_5A2C setscriptmoverkillcam("explosive");
 }
 
 func_1904(param_00) {
-  var_01 = spawn("script_origin", param_00.var_116);
+  var_01 = spawn("script_origin", param_00.origin);
   var_01.var_1D = param_00.var_1D;
   var_01 rotateYaw(-45, 0.05);
   wait 0.05;
-  var_02 = param_00.var_116 + (0, 0, 5);
-  var_03 = param_00.var_116 + anglesToForward(var_01.var_1D) * 100 + (0, 0, 96);
+  var_02 = param_00.origin + (0, 0, 5);
+  var_03 = param_00.origin + anglesToForward(var_01.var_1D) * 100 + (0, 0, 96);
   var_04 = bulletTrace(var_02, var_03, 0, param_00);
   self.var_5A2C = spawn("script_model", var_04["position"]);
   self.var_5A2C setscriptmoverkillcam("explosive");
@@ -4384,7 +4384,7 @@ func_18F4(param_00) {
 }
 
 func_1902(param_00) {
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   func_6983(self.var_695A);
   param_00 thread lib_0502::func_8C21(game["attackers"]);
   thread func_A0E6(param_00, game["defenders"], game["attackers"]);
@@ -4393,11 +4393,11 @@ func_1902(param_00) {
 }
 
 bombsiteobjectivemodeldestroyed(param_00) {
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   func_6983(self.var_695A);
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   func_6982(self.var_695A);
-  playFXOnTag(level.var_611["objective_exposion"], param_00, "TAG_ORIGIN");
+  playFXOnTag(level._effect["objective_exposion"], param_00, "TAG_ORIGIN");
   param_00 method_805B();
 }
 
@@ -4439,12 +4439,12 @@ func_18ED(param_00, param_01, param_02) {
   var_05 = 400;
   var_06 = 200;
   var_07 = 40;
-  param_00 thread func_2CDE(0.5, param_00.var_116, var_05, var_06, var_07, param_01, "MOD_EXPLOSIVE", "bomb_site_mp");
+  param_00 thread func_2CDE(0.5, param_00.origin, var_05, var_06, var_07, param_01, "MOD_EXPLOSIVE", "bomb_site_mp");
   var_08 = param_00.var_982D["bomb_model"][0];
   if(isDefined(var_08)) {
-    var_09 = var_08.var_116;
+    var_09 = var_08.origin;
   } else {
-    var_09 = param_01.var_116;
+    var_09 = param_01.origin;
   }
 
   lib_04F3::func_79CB("mp_war_bomb_explo", var_09);
@@ -4476,7 +4476,7 @@ func_2CD8(param_00, param_01) {
     }
   }
 
-  level thread maps\mp\_utility::func_9863("raids_callout_capture", param_01);
+  level thread maps\mp\_utility::teamplayercardsplash("raids_callout_capture", param_01);
 }
 
 func_2CD7(param_00, param_01, param_02) {
@@ -4522,8 +4522,8 @@ func_2C9D(param_00) {
   func_6963("defuseTime", 3, [1, 2, 3, 5, 7.5, 10]);
   func_6964("onBombExplodeFunc", undefined);
   self.var_1903 = [];
-  var_01 = common_scripts\utility::func_46B7(self.var_1A2, "targetname");
-  var_02 = getEntArray(self.var_1A2, "targetname");
+  var_01 = common_scripts\utility::func_46B7(self.target, "targetname");
+  var_02 = getEntArray(self.target, "targetname");
   self.var_1903 = common_scripts\utility::func_F73(var_01, var_02);
   foreach(var_04 in self.var_1903) {
     var_04 thread func_2CA7(self);
@@ -4559,8 +4559,8 @@ func_2C9E() {
     if(var_06 == self.var_1903.size) {
       func_6935(self.var_695A);
       wait(1);
-      var_03 maps\mp\gametypes\_hud_util::func_2DCC();
-      var_04 maps\mp\gametypes\_hud_util::func_2DCC();
+      var_03 maps\mp\gametypes\_hud_util::destroyelem();
+      var_04 maps\mp\gametypes\_hud_util::destroyelem();
       return;
     }
   }
@@ -4568,11 +4568,11 @@ func_2C9E() {
 
 func_2CA7(param_00) {
   self.var_2459 = param_00;
-  var_01 = common_scripts\utility::func_46B7(self.var_1A2, "targetname");
-  var_02 = getEntArray(self.var_1A2, "targetname");
+  var_01 = common_scripts\utility::func_46B7(self.target, "targetname");
+  var_02 = getEntArray(self.target, "targetname");
   self.var_982D = common_scripts\utility::func_F73(var_01, var_02);
   foreach(var_04 in self.var_982D) {
-    switch (var_04.var_165) {
+    switch (var_04.exitlevel) {
       case "bomb_model":
         break;
 
@@ -4670,7 +4670,7 @@ func_2C99(param_00) {
   self.var_79AD notify("bomb_defusing", param_00);
   param_00.var_581C = 1;
   func_860D(21);
-  func_8617("bomb", 21);
+  playsound("bomb", 21);
   func_8CFD(param_00);
 }
 
@@ -4678,7 +4678,7 @@ func_2C9A(param_00, param_01, param_02) {
   param_01.var_581C = 0;
   if(!param_02) {
     func_860D(19);
-    func_8617("bomb", 19);
+    playsound("bomb", 19);
   }
 
   func_A088(param_01);
@@ -4770,8 +4770,8 @@ func_2CAB(param_00, param_01) {
 
 func_2C93() {
   wait(1);
-  level.var_693C.var_7767 maps\mp\gametypes\_hud_util::func_2DCC();
-  level.var_693C.var_7764 maps\mp\gametypes\_hud_util::func_2DCC();
+  level.var_693C.var_7767 maps\mp\gametypes\_hud_util::destroyelem();
+  level.var_693C.var_7764 maps\mp\gametypes\_hud_util::destroyelem();
   level.var_693C = undefined;
 }
 
@@ -4805,9 +4805,9 @@ func_2C98(param_00) {
   self endon("end_think");
   var_01 = param_00.var_982D["bomb_model"][0];
   if(isDefined(var_01)) {
-    var_02 = var_01.var_116;
+    var_02 = var_01.origin;
   } else {
-    var_02 = var_01.var_116;
+    var_02 = var_01.origin;
   }
 
   var_03 = 0;
@@ -4852,7 +4852,7 @@ func_2C95(param_00) {
 }
 
 func_2C97(param_00) {
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   func_6983(self.var_695A);
   param_00 thread lib_0502::func_8C21(game["attackers"]);
   func_6982(self.var_695A);
@@ -4892,12 +4892,12 @@ hostageobjectiveinit(param_00) {
     var_02 = self.var_81E1;
   }
 
-  var_03 = self.var_982D["door_clip"][0].var_982D["objective_icon"][0].var_116;
+  var_03 = self.var_982D["door_clip"][0].var_982D["objective_icon"][0].origin;
   var_04 = lib_0502::func_4518("rescue_hostage", var_02);
   self.var_A23F = 1000 * self.numhostagesstart + 1;
   var_05 = var_03 - self.origin;
   func_0990(self.origin, undefined, var_05, self.var_A23F, var_04, 0, 1, 0, 1, 0, undefined, undefined, undefined, undefined, 3);
-  func_8615(0);
+  playlocalsound(0);
   var_06 = func_27DE(self.var_81E8, game["attackers"], var_03);
   var_06 maps\mp\gametypes\_gameobjects::func_8A60("any");
   var_06 func_860D(var_04);
@@ -4924,7 +4924,7 @@ hostageobjectivetrigger(param_00) {
   param_00.var_3290 = [];
   level.raidhostagecount++;
   self.numhostages++;
-  var_03 = param_00.var_982D["objective_icon"][0].var_116;
+  var_03 = param_00.var_982D["objective_icon"][0].origin;
   self.hostageoriginarray[self.hostageoriginarray.size] = var_03;
   func_6983(self.var_695A);
   var_02 maps\mp\gametypes\_gameobjects::func_365D();
@@ -4941,7 +4941,7 @@ hostageobjectivetrigger(param_00) {
   var_02.var_113F = 0;
   var_02.var_A248 = "war_rope_untie_mp";
   var_04 = var_02.var_9D65.var_982D["visuals"][0];
-  var_02.hostagevisual = spawnanimatedhostage(var_04.var_116, var_04.var_1D, self);
+  var_02.hostagevisual = spawnanimatedhostage(var_04.origin, var_04.var_1D, self);
   hostageobjectivetriggerusewait(var_02);
   self.hostageoriginarray = common_scripts\utility::func_F93(self.hostageoriginarray, var_03);
   self notify("hostage_use");
@@ -4960,15 +4960,15 @@ hostagebuildingtrigger(param_00) {
     func_6982(self.var_695A);
   }
 
-  lib_04F7::func_5A4F(param_00.var_116, 750);
-  lib_04F7::func_2F99(param_00.var_116, 750);
+  lib_04F7::func_5A4F(param_00.origin, 750);
+  lib_04F7::func_2F99(param_00.origin, 750);
 }
 
 watchhostagetrigger(param_00) {
   for(;;) {
     param_00.touchingattacker = undefined;
-    foreach(var_02 in level.var_744A) {
-      if(var_02.var_1A7 == game["attackers"]) {
+    foreach(var_02 in level.players) {
+      if(var_02.team == game["attackers"]) {
         if(!isalive(var_02)) {
           continue;
         }
@@ -5092,7 +5092,7 @@ handlehostageicon() {
   }
 
   hostageobjectiveseticonlocation(self.var_2563, hostageiconloc());
-  self.var_50A9.var_500F.var_116 = hostageiconloc();
+  self.var_50A9.var_500F.origin = hostageiconloc();
   self waittill("hostage_use");
 }
 
@@ -5167,7 +5167,7 @@ onusehostageobjectiveuse(param_00) {
   lib_0502::raidawardhostagereleasedevent(param_00);
   self.hostagevisual notify("hostage_update", "RELEASE");
   self.hostageused = 1;
-  self.var_79AD func_8615(self.var_79AD.numhostagesstart - self.var_79AD.numhostages + 1 * 1000);
+  self.var_79AD playlocalsound(self.var_79AD.numhostagesstart - self.var_79AD.numhostages + 1 * 1000);
   var_02 = "rescue" + var_01;
   if(self.var_79AD.numhostages <= 0) {
     var_02 = "both" + var_01;
@@ -5214,7 +5214,7 @@ hostagedoorclip(param_00) {
   self.var_3290[self.var_3290.size] = param_00;
   param_00.var_9DC2 = [];
   var_02 = func_45CE(param_00);
-  param_00.iconorigin = var_02 + param_00.var_116;
+  param_00.iconorigin = var_02 + param_00.origin;
   if(!isDefined(param_00.var_81E1)) {
     param_00.var_81E1 = 0;
   }
@@ -5264,7 +5264,7 @@ hostagedoordisconnectpathsforvisuals(param_00) {
   if(isDefined(param_00)) {
     foreach(var_02 in param_00) {
       if(var_02 lib_0502::func_56D3()) {
-        var_02 method_805F();
+        var_02 saved_actionslotdata();
       }
     }
   }
@@ -5315,7 +5315,7 @@ hostagedoortrigger(param_00, param_01) {
       self.doorunlocked = 1;
       var_07 = self.var_81E8;
       var_08 = "opened" + var_07;
-      func_8615(self.numhostagesstart - self.numhostages + 1 * 1000);
+      playlocalsound(self.numhostagesstart - self.numhostages + 1 * 1000);
       func_6981(self.var_695A, var_08, 0);
     }
 
@@ -5434,7 +5434,7 @@ spawnanimatedhostage(param_00, param_01, param_02) {
       break;
 
     case 3:
-      var_07.var_EAB = common_scripts\utility::func_7A33(var_06);
+      var_07.var_EAB = common_scripts\utility::random(var_06);
       break;
 
     default:
@@ -5500,7 +5500,7 @@ hostagenotetracks() {
   self endon("stop_notetracks");
   for(;;) {
     self waittill("hostage_notetrack", var_00);
-    var_01 = getsubstr(self.var_106, 23, 24);
+    var_01 = getsubstr(self.model, 23, 24);
     if(var_00 == "struggle") {
       switch (var_01) {
         case "f":
@@ -5531,7 +5531,7 @@ func_651D(param_00) {
   var_01 = 10;
   func_6934(param_00);
   self.var_6940 = ::func_651C;
-  var_02 = common_scripts\utility::func_46B7(param_00.var_81EF, "script_linkname");
+  var_02 = common_scripts\utility::func_46B7(param_00.script_exploder, "script_linkname");
   var_03 = [];
   foreach(var_05 in var_02) {
     var_05.var_651B = 1;
@@ -5572,24 +5572,24 @@ func_651C() {
   var_01 = undefined;
   if(var_00 != "") {
     foreach(var_03 in self.var_94CE) {
-      if(var_03.var_1A5 == var_00) {
+      if(var_03.targetname == var_00) {
         var_01 = var_03;
         break;
       }
     }
 
     if(!isDefined(var_01)) {
-      var_01 = common_scripts\utility::func_7A33(self.var_94CE);
+      var_01 = common_scripts\utility::random(self.var_94CE);
     }
   } else {
-    var_01 = common_scripts\utility::func_7A33(self.var_94CE);
+    var_01 = common_scripts\utility::random(self.var_94CE);
   }
 
   return var_01[[var_01.var_6940]]();
 }
 
 func_651E(param_00) {
-  func_6983(self.var_1A5);
+  func_6983(self.targetname);
   for(var_01 = param_00.size - 1; var_01 >= 0; var_01--) {
     var_02 = param_00[var_01];
     var_02.var_6E78 = self.var_695A;
@@ -5675,11 +5675,11 @@ func_4B4D() {
   return lib_04FA::func_50AC();
 }
 
-func_8615(param_00, param_01, param_02, param_03) {
+playlocalsound(param_00, param_01, param_02, param_03) {
   lib_04FA::func_6F1C(param_00, param_01, param_02, param_03);
 }
 
-func_8617(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
+playsound(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
   lib_04FA::func_7DFB(param_00, param_01, param_02, param_03, param_04, param_05, param_06);
 }
 
@@ -5703,8 +5703,8 @@ func_064D(param_00, param_01) {
   self notify("_hide3DIcons");
   self endon("_hide3DIcons");
   self endon("image_timer_removed");
-  foreach(var_03 in level.var_744A) {
-    if(!isDefined(param_01) || var_03.var_1A7 == param_01) {
+  foreach(var_03 in level.players) {
+    if(!isDefined(param_01) || var_03.team == param_01) {
       param_00 luaseticonvisibility(var_03, 0);
       continue;
     }
@@ -5714,7 +5714,7 @@ func_064D(param_00, param_01) {
 
   for(;;) {
     level waittill("connected", var_03);
-    if(!isDefined(param_01) || isDefined(var_03.var_1A7) && var_03.var_1A7 == param_01) {
+    if(!isDefined(param_01) || isDefined(var_03.team) && var_03.team == param_01) {
       param_00 luaseticonvisibility(var_03, 0);
     }
   }
@@ -5722,7 +5722,7 @@ func_064D(param_00, param_01) {
 
 func_071A(param_00) {
   self notify("_hide3DIcons");
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     param_00 luaseticonvisibility(var_02, 1);
   }
 }
@@ -5735,7 +5735,7 @@ func_860F(param_00) {
   thread func_064D(self.var_50A9);
   if(common_scripts\utility::func_562E(param_00)) {
     self.var_50A9.var_500F lib_0502::func_8C20();
-    self.var_50A9.var_500F method_805C();
+    self.var_50A9.var_500F save_undo_buffer();
   }
 }
 
@@ -5766,7 +5766,7 @@ func_8612(param_00, param_01) {
     return;
   }
 
-  thread func_064D(self.var_50A9, maps\mp\_utility::func_45DE(param_00));
+  thread func_064D(self.var_50A9, maps\mp\_utility::getotherteam(param_00));
   if(common_scripts\utility::func_562E(param_01)) {
     self.var_50A9.var_500F thread lib_0502::func_8C21(param_00);
   }
@@ -5793,7 +5793,7 @@ func_A088(param_00) {
 
 func_27DE(param_00, param_01, param_02, param_03) {
   var_04 = spawnStruct();
-  var_04.var_1B9 = "compassObject";
+  var_04.type = "compassObject";
   var_04.var_28D4 = param_02;
   var_04.var_6DB2 = param_01;
   var_04.var_9DC4 = "none";
@@ -5830,7 +5830,7 @@ func_45CE(param_00) {
     return (0, 0, 0);
   }
 
-  return param_00.var_982D["objective_icon"][0].var_116 - param_00.var_116;
+  return param_00.var_982D["objective_icon"][0].origin - param_00.origin;
 }
 
 func_6939(param_00) {
@@ -5869,7 +5869,7 @@ func_068D(param_00, param_01, param_02) {
       var_03 = var_03 + var_05.var_6944;
     }
 
-    param_00 maps\mp\gametypes\_hud_util::func_8707("LEFTTOP", undefined, 15 + param_02, var_03);
+    param_00 maps\mp\gametypes\_hud_util::setpoint("LEFTTOP", undefined, 15 + param_02, var_03);
     param_00 waittill("updateSetPoint");
   }
 }
@@ -5917,7 +5917,7 @@ func_A177(param_00, param_01) {
 }
 
 func_694B() {
-  return common_scripts\utility::func_562E(level.var_79AF[self.var_165]);
+  return common_scripts\utility::func_562E(level.var_79AF[self.exitlevel]);
 }
 
 func_09C2(param_00, param_01) {
@@ -6139,20 +6139,20 @@ func_3838() {
   var_02 = [];
   foreach(var_04 in self.var_21DB) {
     var_05 = maps\mp\gametypes\_hud_util::func_282A("white", 1, 15);
-    var_05 maps\mp\gametypes\_hud_util::func_86EF(var_01);
+    var_05 maps\mp\gametypes\_hud_util::setparent(var_01);
     var_06 = var_04.var_6EDA / self.var_6EDA;
     var_07 = var_01.var_1D2 * var_06;
-    var_05 maps\mp\gametypes\_hud_util::func_8707("CENTER", "LEFT", var_07, 0);
+    var_05 maps\mp\gametypes\_hud_util::setpoint("CENTER", "LEFT", var_07, 0);
     thread func_3839(var_05, var_04);
     var_02[var_02.size] = var_05;
   }
 
   func_383A(var_01, var_00);
   wait(1);
-  var_01 maps\mp\gametypes\_hud_util::func_2DCC();
-  var_00 maps\mp\gametypes\_hud_util::func_2DCC();
+  var_01 maps\mp\gametypes\_hud_util::destroyelem();
+  var_00 maps\mp\gametypes\_hud_util::destroyelem();
   foreach(var_0A in var_02) {
-    var_0A maps\mp\gametypes\_hud_util::func_2DCC();
+    var_0A maps\mp\gametypes\_hud_util::destroyelem();
   }
 }
 
@@ -6196,7 +6196,7 @@ func_383A(param_00, param_01) {
       var_09 = var_08.var_6EDA;
       if(var_08.var_6968) {
         var_0A = func_3851(var_08);
-        var_09 = var_09 + distance2d(self.var_A2C8.var_116, var_0A);
+        var_09 = var_09 + distance2d(self.var_A2C8.origin, var_0A);
       }
 
       var_0B = clamp(var_09 / var_07, 0, 1);
@@ -6217,18 +6217,18 @@ func_1FB7(param_00) {
   var_05 = func_45D0("allowReversal");
   if(var_05) {
     var_03 = maps\mp\gametypes\_hud_util::func_282A("white", 3, 15);
-    var_03 maps\mp\gametypes\_hud_util::func_8707("LEFTTOP", undefined, 65, 190);
+    var_03 maps\mp\gametypes\_hud_util::setpoint("LEFTTOP", undefined, 65, 190);
     var_04 = maps\mp\gametypes\_hud_util::func_282A("white", 3, 15);
-    var_04 maps\mp\gametypes\_hud_util::func_8707("LEFTTOP", undefined, 115, 190);
+    var_04 maps\mp\gametypes\_hud_util::setpoint("LEFTTOP", undefined, 115, 190);
   }
 
   func_1FB8(var_02, var_01);
   param_00 lib_04FA::func_7C95();
-  var_02 maps\mp\gametypes\_hud_util::func_2DCC();
-  var_01 maps\mp\gametypes\_hud_util::func_2DCC();
+  var_02 maps\mp\gametypes\_hud_util::destroyelem();
+  var_01 maps\mp\gametypes\_hud_util::destroyelem();
   if(var_05) {
-    var_03 maps\mp\gametypes\_hud_util::func_2DCC();
-    var_04 maps\mp\gametypes\_hud_util::func_2DCC();
+    var_03 maps\mp\gametypes\_hud_util::destroyelem();
+    var_04 maps\mp\gametypes\_hud_util::destroyelem();
   }
 }
 
@@ -6251,13 +6251,13 @@ mode_weapons_allowed(param_00, param_01) {
   if(param_00 > 0) {
     var_04 = maps\mp\gametypes\_hud_util::func_282A("white", 1, 15);
     var_04.maxsightdistsqrd = var_03.var_1D2 * param_00 + var_03.maxsightdistsqrd;
-    var_04.var_1D7 = var_03.var_1D7;
+    var_04.y = var_03.y;
   }
 
   if(param_01 < 1) {
     var_05 = maps\mp\gametypes\_hud_util::func_282A("white", 1, 15);
     var_05.maxsightdistsqrd = var_03.var_1D2 * param_01 + var_03.maxsightdistsqrd;
-    var_05.var_1D7 = var_03.var_1D7;
+    var_05.y = var_03.y;
   }
 
   func_1D4A(var_03, var_02, param_00, param_01);
@@ -6265,10 +6265,10 @@ mode_weapons_allowed(param_00, param_01) {
     var_05 thread func_1D49();
   }
 
-  var_03 maps\mp\gametypes\_hud_util::func_2DCC();
-  var_02 maps\mp\gametypes\_hud_util::func_2DCC();
+  var_03 maps\mp\gametypes\_hud_util::destroyelem();
+  var_02 maps\mp\gametypes\_hud_util::destroyelem();
   if(isDefined(var_04)) {
-    var_04 maps\mp\gametypes\_hud_util::func_2DCC();
+    var_04 maps\mp\gametypes\_hud_util::destroyelem();
   }
 
   waittillframeend;
@@ -6284,9 +6284,9 @@ func_1D49() {
   self scaleovertime(var_00, int(3 * var_01), int(3 * var_02));
   self moveovertime(var_00);
   self.maxsightdistsqrd = self.maxsightdistsqrd - self.var_1D2;
-  self.var_1D7 = self.var_1D7 - self.var_BD;
+  self.y = self.y - self.var_BD;
   wait(var_00);
-  maps\mp\gametypes\_hud_util::func_2DCC();
+  maps\mp\gametypes\_hud_util::destroyelem();
 }
 
 func_1D4A(param_00, param_01, param_02, param_03) {
@@ -6306,8 +6306,8 @@ agent_definition_override(param_00) {
   var_03 = func_45D0("fuseTime");
   param_00 lib_04FA::func_934(param_00.var_28D4 + param_00.var_6A1D, undefined, undefined, var_03 * 1000, 8, 0, undefined, undefined, undefined, 1);
   agent_funcs(var_02, var_01, param_00);
-  var_01 maps\mp\gametypes\_hud_util::func_2DCC();
-  var_02 maps\mp\gametypes\_hud_util::func_2DCC();
+  var_01 maps\mp\gametypes\_hud_util::destroyelem();
+  var_02 maps\mp\gametypes\_hud_util::destroyelem();
   param_00 lib_04FA::func_7C95();
 }
 

@@ -40,8 +40,8 @@ func_06E9() {
     var_00 = self.origin;
   }
 
-  if(isDefined(self.var_A265) == 1) {
-    var_00 = self.var_A265["origin"];
+  if(isDefined(self.v) == 1) {
+    var_00 = self.v["origin"];
     self.origin = var_00;
     self.var_6C3F = 1;
   }
@@ -75,8 +75,8 @@ func_06E9() {
 
 func_06EA() {
   var_00 = "unknown";
-  if(isDefined(self.var_A265) == 1 && isDefined(self.var_A265["soundalias"]) == 1) {
-    var_00 = self.var_A265["soundalias"];
+  if(isDefined(self.v) == 1 && isDefined(self.v["soundalias"]) == 1) {
+    var_00 = self.v["soundalias"];
   } else if(isDefined(self.var_8F3E) == 1) {
     var_00 = self.var_8F3E;
   }
@@ -104,7 +104,7 @@ func_06E8(param_00, param_01, param_02, param_03) {
     return -1;
   }
 
-  var_08 = common_scripts\utility::func_AA4A(param_00, param_01, var_06, param_02);
+  var_08 = common_scripts\utility::within_fov(param_00, param_01, var_06, param_02);
   if(var_08 == 0) {
     return -1;
   }
@@ -451,25 +451,25 @@ func_06E0(param_00) {
     }
   }
 
-  while(isDefined(level.var_2804) == 0) {
+  while(isDefined(level.createfxent) == 0) {
     wait 0.05;
   }
 
   level.var_5B0 = [];
   level.var_5B2 = 0;
   level.var_5B1 = 0;
-  for(var_01 = 0; var_01 < level.var_2804.size; var_01++) {
-    var_02 = level.var_2804[var_01];
-    if(isDefined(var_02.var_A265["type"]) == 0) {
+  for(var_01 = 0; var_01 < level.createfxent.size; var_01++) {
+    var_02 = level.createfxent[var_01];
+    if(isDefined(var_02.v["type"]) == 0) {
       continue;
     }
 
-    if(var_02.var_A265["type"] == "soundfx") {
+    if(var_02.v["type"] == "soundfx") {
       level.var_5B2++;
       level.var_5B0[level.var_5B0.size] = var_02;
     }
 
-    if(var_02.var_A265["type"] == "soundfx_interval") {
+    if(var_02.v["type"] == "soundfx_interval") {
       level.var_5B1++;
       level.var_5B0[level.var_5B0.size] = var_02;
     }

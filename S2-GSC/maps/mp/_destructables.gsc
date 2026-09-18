@@ -37,7 +37,7 @@ func_2DE1() {
   }
 
   if(isDefined(self.var_81BB)) {
-    self.var_3F2F = loadfx(self.var_81BB);
+    self.fx = loadfx(self.var_81BB);
   }
 
   var_04 = 0;
@@ -63,8 +63,8 @@ func_2DE0() {
     }
   }
 
-  if(isDefined(var_00.var_3F2F)) {
-    playFX(var_00.var_3F2F, var_00.origin + (0, 0, 6));
+  if(isDefined(var_00.fx)) {
+    playFX(var_00.fx, var_00.origin + (0, 0, 6));
   }
 
   var_00 delete();

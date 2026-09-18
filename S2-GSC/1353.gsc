@@ -83,7 +83,7 @@ func_15DB(param_00) {
     return undefined;
   }
 
-  self.var_1178 = common_scripts\utility::func_F92(self.var_1178);
+  self.var_1178 = common_scripts\utility::array_randomize(self.var_1178);
   var_01 = self.var_1178[self.var_1178.size - 1];
   self.var_1178[self.var_1178.size - 1] = undefined;
   self.var_1177 = common_scripts\utility::func_F6F(self.var_1177, var_01);
@@ -110,11 +110,11 @@ func_15DF(param_00) {
 }
 
 func_15DE() {
-  return common_scripts\utility::func_7A33(self.var_1176).var_A6E6;
+  return common_scripts\utility::random(self.var_1176).var_A6E6;
 }
 
 func_42E9() {
-  var_00 = common_scripts\utility::func_F92(self.var_188E);
+  var_00 = common_scripts\utility::array_randomize(self.var_188E);
   foreach(var_02 in var_00) {
     if(!isDefined(var_02.owner) && var_02.var_188A == 2) {
       return var_02;
@@ -125,7 +125,7 @@ func_42E9() {
 }
 
 func_42E4() {
-  var_00 = common_scripts\utility::func_F92(self.var_1890);
+  var_00 = common_scripts\utility::array_randomize(self.var_1890);
   foreach(var_02 in var_00) {
     if(var_02.var_188A == 0) {
       return var_02;
@@ -250,7 +250,7 @@ func_4F8E(param_00) {
 func_15DD(param_00) {
   var_01 = 3600;
   foreach(var_03 in level.players) {
-    if(maps\mp\_utility::func_57A0(var_03) && distancesquared(param_00.origin, var_03.origin) < var_01) {
+    if(maps\mp\_utility::isreallyalive(var_03) && distancesquared(param_00.origin, var_03.origin) < var_01) {
       return var_03;
     }
   }
@@ -269,7 +269,7 @@ func_51C5() {
   self.var_15D9 = "drop_gate";
   self.var_3FFE = undefined;
   self.var_17EB = undefined;
-  self.var_8310 = undefined;
+  self.getweaponlistall = undefined;
   self.var_830F = undefined;
   self.var_9553 = [];
   var_00 = common_scripts\utility::func_41EE();
@@ -301,7 +301,7 @@ func_51C5() {
         if(isDefined(var_05.script_noteworthy)) {
           switch (var_05.script_noteworthy) {
             case "scripted_node":
-              self.var_8310 = var_05.origin;
+              self.getweaponlistall = var_05.origin;
               self.var_830F = var_05.angles;
               break;
 
@@ -332,7 +332,7 @@ func_51C5() {
     var_0A.var_15D9 = "drop_gate";
     var_0A.var_17D8 = 0;
     var_0A.var_7E4A = isDefined(var_0A.var_81E1) && var_0A.var_81E1 == 1;
-    var_0A.var_8310 = self.var_8310;
+    var_0A.getweaponlistall = self.getweaponlistall;
     var_0A.var_830F = self.var_830F;
     if(var_0A.var_7E4A) {
       var_0A.var_830F = combineangles(var_0A.var_830F, (0, 180, 0));
@@ -378,7 +378,7 @@ func_3466() {
         thread func_3461(0);
         thread func_3460(1);
         func_3456();
-        lib_0378::func_8D74("drop_gate", "drop", self.var_8310);
+        lib_0378::func_8D74("drop_gate", "drop", self.getweaponlistall);
         func_7127("s2_zom_gate_lift_drop_gate", 1);
         func_84AE(0);
         break;
@@ -390,7 +390,7 @@ func_3466() {
         thread func_3467();
         self waittill("pull_state_change");
         self.var_5CCB = 1;
-        lib_0378::func_8D74("drop_gate", "pos1", self.var_8310);
+        lib_0378::func_8D74("drop_gate", "pos1", self.getweaponlistall);
         thread func_3458();
         func_7127("s2_zom_gate_lift_position_1_gate", 1);
         func_84AE(1);
@@ -404,7 +404,7 @@ func_3466() {
         thread func_3467();
         self waittill("pull_state_change");
         self.var_5CCB = 1;
-        lib_0378::func_8D74("drop_gate", "pos2", self.var_8310);
+        lib_0378::func_8D74("drop_gate", "pos2", self.getweaponlistall);
         thread func_3458();
         func_7127("s2_zom_gate_lift_position_2_gate", 1);
         func_84AE(2);
@@ -417,7 +417,7 @@ func_3466() {
         thread func_3467();
         self waittill("pull_state_change");
         self.var_5CCB = 1;
-        lib_0378::func_8D74("drop_gate", "pos3", self.var_8310);
+        lib_0378::func_8D74("drop_gate", "pos3", self.getweaponlistall);
         thread func_3458();
         func_7127("s2_zom_gate_lift_position_3_gate", 1, ::func_3FFF);
         func_84AE(3);
@@ -504,7 +504,7 @@ func_7127(param_00, param_01, param_02) {
 
   var_04 = getanimlength(var_03);
   var_05 = animhasnotetrack(var_03, "unblock");
-  self.var_3FFE method_8495(param_00, self.var_8310, self.var_830F, "drop_gate");
+  self.var_3FFE method_8495(param_00, self.getweaponlistall, self.var_830F, "drop_gate");
   if(isDefined(param_02)) {
     thread func_4A2C(param_02, var_04);
   }
@@ -533,7 +533,7 @@ func_A1E0(param_00) {
 func_3456() {
   self.var_17EB solid();
   self.var_17EB show();
-  self.var_17EB method_805F();
+  self.var_17EB saved_actionslotdata();
   self.var_17E9 = 1;
   foreach(var_01 in self.var_2F0F) {
     var_01.var_17E9 = 1;
@@ -619,7 +619,7 @@ func_346B() {
     }
   }
 
-  lib_0378::func_8D74("drop_gate_pull_level", self.var_8310, var_02);
+  lib_0378::func_8D74("drop_gate_pull_level", self.getweaponlistall, var_02);
   self.var_5B26 = gettime();
 }
 
@@ -685,8 +685,8 @@ func_345C(param_00, param_01) {
   var_03 = var_02 func_345B(param_00, "mount");
   var_04 = param_00 maps / mp / agents / _scripted_agent_anim_util::func_434D(var_03);
   var_05 = param_00 method_83D8(var_04, 0);
-  param_01.origin = getstartorigin(self.var_8310, self.var_830F, var_05);
-  param_01.angles = getstartangles(self.var_8310, self.var_830F, var_05);
+  param_01.origin = getstartorigin(self.getweaponlistall, self.var_830F, var_05);
+  param_01.angles = getstartangles(self.getweaponlistall, self.var_830F, var_05);
   if(getdvarint("drop_gate_debug", 0) != 0) {}
 }
 
@@ -824,7 +824,7 @@ func_885D() {
     var_00 = 6;
   }
 
-  var_01 = common_scripts\utility::func_F92(self.var_188D);
+  var_01 = common_scripts\utility::array_randomize(self.var_188D);
   if(var_00 == self.var_6044) {
     common_scripts\utility::func_9D9F();
   }
@@ -842,7 +842,7 @@ func_885D() {
 }
 
 func_563C(param_00) {
-  if(!maps\mp\_utility::func_57A0(param_00)) {
+  if(!maps\mp\_utility::isreallyalive(param_00)) {
     return 0;
   }
 
@@ -897,7 +897,7 @@ func_AA28() {
       self waittill("trigger", var_00);
     }
 
-    var_05 = common_scripts\utility::func_F92(self.var_1890);
+    var_05 = common_scripts\utility::array_randomize(self.var_1890);
     var_06 = var_05[0];
     thread func_15D4(var_06.var_1887);
     if(isDefined(var_00.var_7F11)) {

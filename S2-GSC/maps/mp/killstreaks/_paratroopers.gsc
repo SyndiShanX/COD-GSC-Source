@@ -5,7 +5,7 @@
 
 init() {
   thread func_87A7();
-  level.var_611["paratrooper_landing"] = loadfx("vfx/code/paratrooper_land_medium");
+  level._effect["paratrooper_landing"] = loadfx("vfx/code/paratrooper_land_medium");
   level.var_6E5E = getEntArray("paratrooper_bad_lz", "targetname");
   level.var_6E71 = [];
   setDvar("show_bad_paratrooper_origins", 0);
@@ -77,7 +77,7 @@ func_9E36(param_00) {
     return 0;
   }
 
-  if(!maps\mp\_utility::func_57A0(self)) {
+  if(!maps\mp\_utility::isreallyalive(self)) {
     return 0;
   }
 
@@ -261,7 +261,7 @@ func_A8D2(param_00) {
   }
 
   if(isDefined(self) && !common_scripts\utility::func_562E(self.no_fx)) {
-    playFX(level.var_611["paratrooper_landing"], self.origin);
+    playFX(level._effect["paratrooper_landing"], self.origin);
   }
 
   if(isPlayer(self) && (!isDefined(self.playerparachutemovementenabled) && 0) || isDefined(self.playerparachutemovementenabled) && self.playerparachutemovementenabled == 0) {
@@ -386,7 +386,7 @@ func_1132(param_00, param_01) {
     var_06 setModel("ger_carepackage_parachute");
     var_06 setCanDamage(1);
     var_06 hide();
-    var_06 method_8449(self.var_6E4F);
+    var_06 linktosynchronizedparent(self.var_6E4F);
     self.var_6E4F.parachute_collision = var_06;
   }
 
@@ -437,7 +437,7 @@ func_6E5F(param_00, param_01, param_02) {
   var_03 = self.var_6E4F;
   var_04 = self.team;
   var_05 = common_scripts\utility::waittill_any_return("death", "paratrooper_released", "disconnect");
-  if(isDefined(level.var_4E09)) {
+  if(isDefined(level.hostmigrationtimer)) {
     maps\mp\gametypes\_hostmigration::func_A782();
   }
 
@@ -623,7 +623,7 @@ func_64B8(param_00) {
   }
 
   for(;;) {
-    if(isDefined(level.var_4E09)) {
+    if(isDefined(level.hostmigrationtimer)) {
       var_04 = (0, 0, 0);
     } else if(isDefined(param_00)) {
       var_04 = (0, 0, param_00);
@@ -774,7 +774,7 @@ func_8FE1(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     var_07 = var_0D;
   }
 
-  self method_838F(var_07, var_08);
+  self select_by_substring(var_07, var_08);
   if(isDefined(param_05)) {
     self.var_A43 = param_05;
   }
@@ -812,41 +812,41 @@ func_8FE1(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     maps\mp\gametypes\_class::func_4774();
   } else {
     self[[level.var_A5B]]();
-    maps\mp\gametypes\_class::func_4773(self.team, self.var_2319, 1);
+    maps\mp\gametypes\_class::func_4773(self.team, self.class, 1);
   }
 
   self setperk("specialty_radarparatrooper", 1, 0);
   if(isDefined(self.owner) && self.owner maps\mp\_utility::_hasperk("specialty_improvedstreaks")) {
-    maps\mp\_utility::func_47A2("specialty_sprintreload");
-    maps\mp\_utility::func_47A2("specialty_fastreload");
-    maps\mp\_utility::func_47A2("specialty_silentmovement");
-    maps\mp\_utility::func_47A2("specialty_plainsight");
-    maps\mp\_utility::func_47A2("specialty_stalker");
-    maps\mp\_utility::func_47A2("specialty_reducedsway");
-    maps\mp\_utility::func_47A2("specialty_fastermelee");
-    maps\mp\_utility::func_47A2("specialty_silentkill");
-    maps\mp\_utility::func_47A2("specialty_coldblooded");
-    maps\mp\_utility::func_47A2("specialty_spygame");
-    maps\mp\_utility::func_47A2("specialty_heartbreaker");
-    maps\mp\_utility::func_47A2("specialty_uavhidden");
-    maps\mp\_utility::func_47A2("specialty_delaymine");
+    maps\mp\_utility::giveperk("specialty_sprintreload");
+    maps\mp\_utility::giveperk("specialty_fastreload");
+    maps\mp\_utility::giveperk("specialty_silentmovement");
+    maps\mp\_utility::giveperk("specialty_plainsight");
+    maps\mp\_utility::giveperk("specialty_stalker");
+    maps\mp\_utility::giveperk("specialty_reducedsway");
+    maps\mp\_utility::giveperk("specialty_fastermelee");
+    maps\mp\_utility::giveperk("specialty_silentkill");
+    maps\mp\_utility::giveperk("specialty_coldblooded");
+    maps\mp\_utility::giveperk("specialty_spygame");
+    maps\mp\_utility::giveperk("specialty_heartbreaker");
+    maps\mp\_utility::giveperk("specialty_uavhidden");
+    maps\mp\_utility::giveperk("specialty_delaymine");
     self.var_90DA = 6;
-    maps\mp\_utility::func_47A2("specialty_paint");
-    maps\mp\_utility::func_47A2("specialty_paint_pro");
-    maps\mp\_utility::func_47A2("specialty_blastshield2");
-    self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale", 35) / 100;
+    maps\mp\_utility::giveperk("specialty_paint");
+    maps\mp\_utility::giveperk("specialty_paint_pro");
+    maps\mp\_utility::giveperk("specialty_blastshield2");
+    self.var_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale", 35) / 100;
     if(isDefined(level.hardcoremode) && level.hardcoremode) {
-      self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale_HC", 9) / 100;
+      self.var_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale_HC", 9) / 100;
     }
 
-    maps\mp\_utility::func_47A2("specialty_stun_resistance");
-    maps\mp\_utility::func_47A2("specialty_resistshellshock");
-    maps\mp\_utility::func_47A2("specialty_immunesmoke");
+    maps\mp\_utility::giveperk("specialty_stun_resistance");
+    maps\mp\_utility::giveperk("specialty_resistshellshock");
+    maps\mp\_utility::giveperk("specialty_immunesmoke");
     self.var_94BE = 0.1;
-    maps\mp\_utility::func_47A2("specialty_fireshield");
-    self.var_90D8 = maps\mp\_utility::func_4529("perk_fireShieldScale", 35) / 100;
+    maps\mp\_utility::giveperk("specialty_fireshield");
+    self.var_90D8 = maps\mp\_utility::getintproperty("perk_fireShieldScale", 35) / 100;
     if(isDefined(level.hardcoremode) && level.hardcoremode) {
-      self.var_90D8 = maps\mp\_utility::func_4529("perk_fireShieldScale_HC", 9) / 100;
+      self.var_90D8 = maps\mp\_utility::getintproperty("perk_fireShieldScale_HC", 9) / 100;
     }
   }
 
@@ -919,7 +919,7 @@ func_6AA6(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   thread maps\mp\gametypes\_weapons::func_34A9(param_01, param_03, param_04);
   if(self.var_565F) {
     self.var_4B60 = 1;
-    if(maps\mp\_utility::func_44FC() != 1 && isDefined(self.var_7DAD) && self.var_7DAD) {
+    if(maps\mp\_utility::getgametypenumlives() != 1 && isDefined(self.var_7DAD) && self.var_7DAD) {
       self thread[[maps / mp / agents / _agent_utility::func_A59("spawn")]]();
     } else {
       maps / mp / agents / _agent_utility::func_2A73();
@@ -1150,10 +1150,10 @@ player_paratroopers_spawn_thread(param_00, param_01, param_02) {
 }
 
 player_paratroopers_spawn_after_raidvignette(param_00) {
-  maps\mp\_utility::func_3FA5("finished_intro_vignette_" + param_00);
+  maps\mp\_utility::gameflagwait("finished_intro_vignette_" + param_00);
   var_01 = param_00;
   if(game["switchedsides"]) {
-    var_01 = maps\mp\_utility::func_45DE(param_00);
+    var_01 = maps\mp\_utility::getotherteam(param_00);
   }
 
   thread player_paratroopers_spawn_thread(var_01, "kill_paratroopers_thread", 1);

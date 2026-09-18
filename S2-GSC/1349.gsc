@@ -49,7 +49,7 @@ func_955B() {
 
   common_scripts\utility::func_3799("needs_update");
   if(!common_scripts\utility::func_3C83(self.var_819A)) {
-    common_scripts\utility::func_3C87(self.var_819A);
+    common_scripts\utility::flag_init(self.var_819A);
   }
 
   waittillframeend;
@@ -157,7 +157,7 @@ func_9561() {
         continue;
       }
 
-      common_scripts\utility::func_3C8F(self.var_819A);
+      common_scripts\utility::flag_set(self.var_819A);
       common_scripts\utility::func_379A("needs_update");
     }
   }
@@ -167,7 +167,7 @@ func_9560(param_00) {
   for(;;) {
     common_scripts\utility::func_3C9F(param_00);
     common_scripts\utility::func_379A("needs_update");
-    common_scripts\utility::func_3CA9(param_00);
+    common_scripts\utility::flag_waitopen(param_00);
     common_scripts\utility::func_379A("needs_update");
   }
 }
@@ -292,8 +292,8 @@ func_955F() {
 }
 
 func_954C(param_00) {
-  if(!isDefined(level.var_611[param_00.var_81BB])) {
-    level.var_611[param_00.var_81BB] = loadfx(param_00.var_81BB);
+  if(!isDefined(level._effect[param_00.var_81BB])) {
+    level._effect[param_00.var_81BB] = loadfx(param_00.var_81BB);
   }
 }
 

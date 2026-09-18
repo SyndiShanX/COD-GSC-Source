@@ -120,7 +120,7 @@ func_9DDB(param_00) {
   param_00 endon("death");
   self.var_9D65 setCursorHint("HINT_NOICON");
   self.var_9D65 setHintString(&"MP_PICKUP_TROPHY");
-  self.var_9D65 maps\mp\_utility::func_871E(param_00);
+  self.var_9D65 maps\mp\_utility::setselfusable(param_00);
   self.var_9D65 thread maps\mp\_utility::func_6819(param_00);
   for(;;) {
     self.var_9D65 waittill("trigger", param_00);
@@ -236,7 +236,7 @@ func_9DCC(param_00, param_01, param_02, param_03) {
           if(isDefined(var_07.classname) && var_07.classname == "rocket" && isDefined(var_07.type) && var_07.type == "remote") {
             if(isDefined(var_07.type) && var_07.type == "remote") {
               level thread maps\mp\gametypes\_missions::vehiclekilled(var_07.owner, param_00, undefined, param_00, undefined, "MOD_EXPLOSIVE", param_03);
-              level thread maps\mp\_utility::func_9863("callout_destroyed_predator_missile", param_00);
+              level thread maps\mp\_utility::teamplayercardsplash("callout_destroyed_predator_missile", param_00);
               level thread maps\mp\gametypes\_rank::giverankxp("kill", param_00, param_03, undefined, "MOD_EXPLOSIVE");
               param_00 notify("destroyed_killstreak", param_03);
             }

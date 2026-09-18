@@ -53,7 +53,7 @@ func_468F(param_00, param_01) {
   return int(var_02);
 }
 
-func_80A2(param_00, param_01, param_02, param_03, param_04) {
+delete(param_00, param_01, param_02, param_03, param_04) {
   if(isDefined(param_04)) {
     var_05 = [[param_01]](param_02, param_03, param_04);
   } else {
@@ -175,7 +175,7 @@ func_1442(param_00, param_01) {
 }
 
 func_765F(param_00, param_01) {
-  var_02 = maps\mp\_utility::func_45DE(param_00);
+  var_02 = maps\mp\_utility::getotherteam(param_00);
   if(getdvarint("disableSpawnClaim") || level.var_909B["preferClaimedSpawn"]["scoreFactorWeight"] == 0) {
     return 0;
   }
@@ -218,7 +218,7 @@ func_765F(param_00, param_01) {
   }
 
   if(level.var_9034) {
-    var_12 = maps\mp\_utility::func_45DE(param_00);
+    var_12 = maps\mp\_utility::getotherteam(param_00);
   } else {
     var_12 = param_01;
   }
@@ -295,7 +295,7 @@ func_1438(param_00, param_01) {
 }
 
 func_3B92(param_00, param_01, param_02) {
-  var_03 = maps\mp\_utility::func_45DE(param_00);
+  var_03 = maps\mp\_utility::getotherteam(param_00);
   if(!level.teambased) {
     param_00 = "all";
     var_03 = "all";
@@ -345,7 +345,7 @@ func_1450(param_00, param_01, param_02) {
 
 func_143F(param_00, param_01) {
   var_02 = level.var_909B["avoidEnemySpawnLocations"]["scoreFactorWeight"];
-  var_03 = maps\mp\_utility::func_45DE(param_00);
+  var_03 = maps\mp\_utility::getotherteam(param_00);
   if(!level.teambased) {
     param_00 = "all";
     var_03 = "all";
@@ -361,7 +361,7 @@ func_143F(param_00, param_01) {
 
     var_05[var_05.size] = var_07;
     if(level.teambased || var_07["player"] != self.guid) {
-      var_04 = var_04 + func_80A2(var_02, ::func_1450, param_00, param_01, var_07);
+      var_04 = var_04 + delete(var_02, ::func_1450, param_00, param_01, var_07);
     }
   }
 
@@ -492,7 +492,7 @@ func_1435(param_00, param_01) {
 
     var_04[var_04.size] = var_06;
     if(level.teambased || var_06["player"] == self.guid) {
-      var_03 = var_03 + func_80A2(var_02, ::func_143B, param_00, param_01, var_06);
+      var_03 = var_03 + delete(var_02, ::func_143B, param_00, param_01, var_06);
     }
   }
 
@@ -505,7 +505,7 @@ func_1445(param_00, param_01) {
     return 100;
   }
 
-  if(!maps\mp\_utility::func_57A0(self.lastattacker)) {
+  if(!maps\mp\_utility::isreallyalive(self.lastattacker)) {
     return 100;
   }
 
@@ -566,7 +566,7 @@ func_AAFF(param_00, param_01) {
 
 func_7669(param_00, param_01, param_02) {
   var_03 = getspawnpointdistancetoplayer(param_01.index, param_02 getentitynumber());
-  if(!isDefined(var_03) || !maps\mp\_utility::func_57A0(param_02)) {
+  if(!isDefined(var_03) || !maps\mp\_utility::isreallyalive(param_02)) {
     return 100;
   }
 
@@ -576,7 +576,7 @@ func_7669(param_00, param_01, param_02) {
 
 func_1449(param_00, param_01, param_02) {
   var_03 = getspawnpointdistancetoplayer(param_01.index, param_02 getentitynumber());
-  if(!isDefined(var_03) || !maps\mp\_utility::func_57A0(param_02)) {
+  if(!isDefined(var_03) || !maps\mp\_utility::isreallyalive(param_02)) {
     return 100;
   }
 
@@ -602,12 +602,12 @@ func_143C(param_00, param_01) {
         continue;
       } else {
         if(((level.teambased && var_06.team != param_00) || !level.teambased) && var_02 > 0) {
-          var_04 = var_04 + func_80A2(var_02, ::func_1449, param_00, param_01, var_06);
+          var_04 = var_04 + delete(var_02, ::func_1449, param_00, param_01, var_06);
           continue;
         }
 
         if(level.teambased && var_06.team == param_00 && var_03 > 0) {
-          var_04 = var_04 + func_80A2(var_03, ::func_7669, param_00, param_01, var_06);
+          var_04 = var_04 + delete(var_03, ::func_7669, param_00, param_01, var_06);
         }
       }
     }
@@ -671,7 +671,7 @@ func_765E(param_00, param_01) {
 }
 
 func_143D(param_00, param_01) {
-  var_02 = maps / mp / gametypes / dom::func_4638(maps\mp\_utility::func_45DE(param_00));
+  var_02 = maps / mp / gametypes / dom::func_4638(maps\mp\_utility::getotherteam(param_00));
   if(!isDefined(param_01.var_766F) || !var_02[param_01.var_766F]) {
     return 100;
   }
@@ -763,7 +763,7 @@ prefernearrelic(param_00, param_01) {
 }
 
 func_7668(param_00, param_01) {
-  var_02 = maps\mp\_utility::func_45DE(param_00);
+  var_02 = maps\mp\_utility::getotherteam(param_00);
   var_03 = getspawnpointnearbyfriendlies(param_01.index, param_00);
   var_04 = getspawnpointnearbyenemies(param_01.index, var_02);
   if(var_03 == 0) {
@@ -966,10 +966,10 @@ func_A11B() {
     var_00.var_530B = undefined;
   }
 
-  var_0F = clamp(var_08[0], var_01.var_5FEB[0] - var_01.var_14F, var_01.var_5FEB[0] + var_01.var_14F);
+  var_0F = clamp(var_08[0], var_01.var_5FEB[0] - var_01.radius, var_01.var_5FEB[0] + var_01.radius);
   var_10 = var_01.var_5FEB[1];
   var_08 = (var_0F, var_10, var_08[2]);
-  var_11 = 1 - abs(var_08[0] - var_01.var_5FEB[0] / var_01.var_14F);
+  var_11 = 1 - abs(var_08[0] - var_01.var_5FEB[0] / var_01.radius);
   var_12 = 0;
   if(var_07 < var_01.var_6224 * var_11 && var_07 > -180 - var_01.var_6224 * var_11) {
     if(var_07 >= -90) {
@@ -1095,7 +1095,7 @@ func_44F2(param_00) {
       continue;
     }
 
-    if(!maps\mp\_utility::func_57A0(var_03)) {
+    if(!maps\mp\_utility::isreallyalive(var_03)) {
       continue;
     }
 
@@ -1108,7 +1108,7 @@ func_44F2(param_00) {
     return undefined;
   }
 
-  var_05 = maps\mp\_utility::func_442E(var_01);
+  var_05 = maps\mp\_utility::getaverageorigin(var_01);
   return var_05;
 }
 
@@ -1128,7 +1128,7 @@ func_7FA2(param_00) {
     var_02 = 4;
   }
 
-  var_03 = maps\mp\_utility::func_45DE(param_00);
+  var_03 = maps\mp\_utility::getotherteam(param_00);
   var_04 = 0;
   var_05 = level.var_908B;
   var_05 = lib_050D::func_44F9();
@@ -1192,7 +1192,7 @@ func_4572() {
     level.var_3EF4 = spawnStruct();
     var_00 = getEntArray("minimap_corner", "targetname");
     level.var_3EF4.var_5FEB = lib_050D::func_3B89(var_00[0].origin, var_00[1].origin);
-    level.var_3EF4.var_14F = 500;
+    level.var_3EF4.radius = 500;
     level.var_3EF4.var_60A8 = 20;
     level.var_3EF4.var_6224 = -20;
     level.var_3EF4.var_3D70 = 50;

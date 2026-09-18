@@ -5,7 +5,7 @@
 
 func_5366() {
   level endon("game_ended");
-  maps\mp\_utility::func_3FA3("intro_vo_complete", 0);
+  maps\mp\_utility::gameflaginit("intro_vo_complete", 0);
   waittillframeend;
   waittillframeend;
   if(!game["switchedsides"]) {
@@ -219,15 +219,15 @@ func_5366() {
 func_7FDF() {
   level endon("game_ended");
   waittillframeend;
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   runbreachvo();
   runacquiretechvo();
   runescortvo();
 }
 
 runbreachvo() {
-  if(maps\mp\_utility::func_3FA0("started_vignettes")) {
-    maps\mp\_utility::func_3FA5("finished_intro_vignette_allies");
+  if(maps\mp\_utility::gameflag("started_vignettes")) {
+    maps\mp\_utility::gameflagwait("finished_intro_vignette_allies");
   } else {}
 
   var_00 = maps\mp\gametypes\_gamelogic::func_46E5() / 1000;
@@ -258,7 +258,7 @@ runescortvo() {
 
 func_A617(param_00, param_01, param_02) {
   var_03 = 8000;
-  if(level.var_3F9D) {
+  if(level.gameended) {
     return;
   }
 

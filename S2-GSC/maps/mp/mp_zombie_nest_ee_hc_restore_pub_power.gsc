@@ -5,15 +5,15 @@
 
 main() {
   lib_0557::func_4BC9("pub powered", "powering pub", "CONST_HC_ANALYTICS_PUB_POWERED");
-  common_scripts\utility::func_3C87("flag_nest_hc_ee_record_player_active");
-  common_scripts\utility::func_3C87("flag_nest_hc_ee_weathervane_switch_shot");
+  common_scripts\utility::flag_init("flag_nest_hc_ee_record_player_active");
+  common_scripts\utility::flag_init("flag_nest_hc_ee_weathervane_switch_shot");
   level.var_A9FC = 3;
   var_00 = func_52E7();
   var_00 thread func_7EF1();
 }
 
 func_8B28(param_00, param_01) {
-  var_02 = common_scripts\utility::func_7A33(self["switch_scriptables"]);
+  var_02 = common_scripts\utility::random(self["switch_scriptables"]);
   var_03 = getanimlength(%zmb_obj_glass_fuse_open);
   while(!func_3B8F(self["weather_vane"], var_02, 30, 1)) {
     self["weather_vane"] rotateYaw(15, 0.1);
@@ -30,9 +30,9 @@ func_8B28(param_00, param_01) {
   wait(var_03);
   var_02 setscriptablepartstate("fuse", "open_idle");
   var_02 waittill("damage");
-  playFXOnTag(level.var_611["zmb_ee_switch_sparks"], var_02, "tag_origin");
+  playFXOnTag(level._effect["zmb_ee_switch_sparks"], var_02, "tag_origin");
   var_02 lib_0378::func_8D74("aud_switch_damaged");
-  common_scripts\utility::func_3C8F("flag_nest_hc_ee_weathervane_switch_shot");
+  common_scripts\utility::flag_set("flag_nest_hc_ee_weathervane_switch_shot");
   thread func_8B1C();
 }
 
@@ -58,7 +58,7 @@ func_3B8F(param_00, param_01, param_02, param_03) {
 }
 
 func_8B1C() {
-  self["electric_panel"] method_8449(self["waterwheel"]);
+  self["electric_panel"] linktosynchronizedparent(self["waterwheel"]);
   level thread common_scripts\_exploder::func_88E(223);
   self["waterwheel"] rotateroll(155, 12, 1, 1);
   thread func_9419();
@@ -68,7 +68,7 @@ func_8B1C() {
   self["electric_panel"] thread maps\mp\gametypes\_damage::func_8676(1, "head_gibs", ::maps / mp / mp_zombie_nest_ee_util::func_9902, ::maps / mp / mp_zombie_nest_ee_util::func_9903);
   self["electric_panel"] waittill("death", var_00, var_01, var_02);
   thread func_77AB();
-  playFX(level.var_611["zmb_elec_coil_charge"], self["electric_panel"].origin, anglesToForward(self["electric_panel"].angles));
+  playFX(level._effect["zmb_elec_coil_charge"], self["electric_panel"].origin, anglesToForward(self["electric_panel"].angles));
   self["electric_panel"] lib_0378::func_8D74("aud_wonder_weapon_elec_coil_charge");
   thread func_08B4();
 }
@@ -88,8 +88,8 @@ func_77AB() {
 }
 
 func_08B4() {
-  common_scripts\utility::func_3C8F("nest_ee_hc_radio_available");
-  common_scripts\utility::func_3C8F("flag_nest_hc_ee_record_player_active");
+  common_scripts\utility::flag_set("nest_ee_hc_radio_available");
+  common_scripts\utility::flag_set("flag_nest_hc_ee_record_player_active");
   lib_0557::func_4BC8("pub powered");
 }
 

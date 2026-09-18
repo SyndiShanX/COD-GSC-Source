@@ -52,7 +52,7 @@ func_8BFA() {
 }
 
 func_A117() {
-  var_00 = maps\mp\_utility::func_4529("scr_drawfriend", level.var_33D6);
+  var_00 = maps\mp\_utility::getintproperty("scr_drawfriend", level.var_33D6);
   if(level.var_33D6 != var_00) {
     level.var_33D6 = var_00;
     func_A116();

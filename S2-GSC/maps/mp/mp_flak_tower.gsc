@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  lib_04A4::func_F9();
-  lib_040C::func_F9();
-  lib_04A3::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_flak_tower_lighting::func_F9();
-  maps\mp\mp_flak_tower_aud::func_F9();
+  lib_04A4::main();
+  lib_040C::main();
+  lib_04A3::main();
+  maps\mp\_load::main();
+  maps\mp\mp_flak_tower_lighting::main();
+  maps\mp\mp_flak_tower_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_flak_tower");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -62,13 +62,13 @@ func_542C() {
     return;
   }
 
-  if(!isDefined(level.var_984D) || !level.var_984D) {
+  if(!isDefined(level.teambased) || !level.teambased) {
     return;
   }
 
   level waittill("matchStartTimer");
-  var_02 = var_00.var_116;
-  var_03 = var_01.var_116;
+  var_02 = var_00.origin;
+  var_03 = var_01.origin;
   var_04 = 9;
   var_05 = 1;
   var_06 = 5;
@@ -79,8 +79,8 @@ func_542C() {
   wait(var_05);
   while(var_09 <= var_06) {
     var_0B = randomintrange(3000, 3200);
-    var_02 = var_00.var_116 + (0, 0, var_0B);
-    var_03 = var_01.var_116 + (0, 0, var_0B);
+    var_02 = var_00.origin + (0, 0, var_0B);
+    var_03 = var_01.origin + (0, 0, var_0B);
     var_0C = spawn("script_model", var_02);
     var_0C.var_1D = (0, 90, 0);
     var_0C setModel(var_08);
@@ -89,32 +89,32 @@ func_542C() {
     var_0F = "flk_intro_thunderbolt_flyby";
     switch (var_09) {
       case 1:
-        var_0C.var_116 = var_02;
+        var_0C.origin = var_02;
         var_0C thread func_3CD3();
         var_0C thread func_7017();
         var_0C.var_7021 = 1;
         break;
 
       case 2:
-        var_0C.var_116 = var_02 + var_0E * var_07 * -1 + var_0D * var_07 * -1;
+        var_0C.origin = var_02 + var_0E * var_07 * -1 + var_0D * var_07 * -1;
         var_0F = "flk_intro_thunderbolt_crash";
         var_0C.var_7021 = 2;
         break;
 
       case 3:
-        var_0C.var_116 = var_02 + var_0E * var_07 + var_0D * var_07 * -1;
+        var_0C.origin = var_02 + var_0E * var_07 + var_0D * var_07 * -1;
         var_0C thread func_7017();
         var_0C.var_7021 = 3;
         break;
 
       case 4:
-        var_0C.var_116 = var_02 + var_0E * var_07 * -2 + var_0D * var_07 * -2;
+        var_0C.origin = var_02 + var_0E * var_07 * -2 + var_0D * var_07 * -2;
         var_0C thread func_7017();
         var_0C.var_7021 = 4;
         break;
 
       case 5:
-        var_0C.var_116 = var_02 + var_0E * var_07 * 2 + var_0D * var_07 * -2;
+        var_0C.origin = var_02 + var_0E * var_07 * 2 + var_0D * var_07 * -2;
         var_0C thread func_7017();
         var_0C.var_7021 = 5;
         break;
@@ -192,7 +192,7 @@ func_3CD3() {
   var_02 = randomfloatrange(0.5, 0.6);
   foreach(var_04 in var_00) {
     var_04.var_6C48 = var_04.var_1D;
-    var_05 = var_04.var_116 - self.origin;
+    var_05 = var_04.origin - self.origin;
     var_05 = (var_05[0], var_05[1], 0);
     var_05 = vectorNormalize(var_05);
     var_04 rotateTo(vectortoangles(var_05), var_02);
@@ -200,12 +200,12 @@ func_3CD3() {
 
   foreach(var_08 in var_01) {
     var_08.var_6C48 = var_08.var_1D;
-    var_09 = getEntArray(var_08.var_1A2, "targetname");
+    var_09 = getEntArray(var_08.target, "targetname");
     foreach(var_0B in var_09) {
       var_0B linkTo(var_08);
     }
 
-    var_05 = var_08.var_116 - self.origin;
+    var_05 = var_08.origin - self.origin;
     var_05 = vectorNormalize(var_05);
     var_08 rotateTo(vectortoangles(var_05), var_02);
   }
@@ -213,14 +213,14 @@ func_3CD3() {
   wait(var_02);
   while(!isDefined(level.var_3CD0) || !level.var_3CD0) {
     foreach(var_04 in var_00) {
-      var_05 = var_04.var_116 - self.origin;
+      var_05 = var_04.origin - self.origin;
       var_05 = (var_05[0], var_05[1], 0);
       var_05 = vectorNormalize(var_05);
       var_04.var_1D = vectortoangles(var_05);
     }
 
     foreach(var_11, var_08 in var_01) {
-      var_05 = var_08.var_116 - self.origin;
+      var_05 = var_08.origin - self.origin;
       var_05 = vectorNormalize(var_05);
       var_08.var_1D = vectortoangles(var_05);
       if(var_08.var_1D[0] > 50) {
@@ -246,9 +246,9 @@ func_3CD3() {
 
 func_3BBA(param_00) {
   param_00 endon("death");
-  var_01 = getEntArray(self.var_1A2, "targetname");
+  var_01 = getEntArray(self.target, "targetname");
   foreach(var_03 in var_01) {
-    shootblank(var_03.var_116, param_00.var_116, "mg42_mp", 1);
+    shootblank(var_03.origin, param_00.origin, "mg42_mp", 1);
     param_00 maps\mp\_utility::func_2CED(randomfloatrange(0.05, 0.45), ::func_3CCC);
     wait(randomfloatrange(0.05, 0.15));
   }
@@ -279,7 +279,7 @@ func_2721(param_00) {
   wait(3.25);
   playFX(common_scripts\utility::func_44F5("flak_intro_vehicle_explosion_midair"), self.origin);
   lib_0378::func_8D74("mp_intro_flak_plane_explode");
-  self method_805C();
+  self save_undo_buffer();
 }
 
 func_7EEA() {

@@ -16,7 +16,7 @@ func_1F51(param_00, param_01, param_02) {
     var_06 = 0;
   }
 
-  return capsuletracepassed(var_04, self.var_14F, self.height - param_02, self, var_06, 0, 0, var_05);
+  return capsuletracepassed(var_04, self.radius, self.height - param_02, self, var_06, 0, 0, var_05);
 }
 
 func_45C6() {
@@ -237,16 +237,16 @@ func_4583(param_00, param_01) {
       var_09 = var_02[var_13];
       if(!isDefined(var_0C) && gettime() - var_09.var_9A18 >= self.var_60F6) {
         if(isDefined(level.var_9E16) && isDefined(level.var_9E16[self.var_A4B])) {
-          [[level.var_9E16[self.var_A4B]]](var_09, var_04, self.var_11AB, self.var_14F);
+          [[level.var_9E16[self.var_A4B]]](var_09, var_04, self.var_11AB, self.radius);
         } else {
-          func_9E16(var_09, var_04, self.var_11AB, self.var_14F);
+          func_9E16(var_09, var_04, self.var_11AB, self.radius);
         }
       }
 
       if(!isDefined(var_0C) && isDefined(var_09.origin)) {
         var_14 = 0;
         if(isDefined(var_09.var_230B) && var_09.var_230B != self) {
-          var_15 = vectorNormalize(var_04 - var_09.var_230B.origin) * self.var_14F * 2;
+          var_15 = vectorNormalize(var_04 - var_09.var_230B.origin) * self.radius * 2;
           var_14 = distancesquared(var_09.var_230B.origin + var_15, var_04);
         }
 
@@ -370,7 +370,7 @@ func_3141(param_00, param_01, param_02, param_03) {
   self.var_3137 = ["back", "right", "left"];
   self.var_3138 = [];
   foreach(var_06, var_05 in self.var_3137) {
-    self.var_3138[var_06] = level.var_611[param_03 + var_05];
+    self.var_3138[var_06] = level._effect[param_03 + var_05];
   }
 }
 
@@ -609,7 +609,7 @@ func_6F54(param_00, param_01) {
   self endon("death");
   self endon("killanimscript");
   level endon("game_ended");
-  self method_83A4(self.origin, param_00, param_01);
+  self selected_fx_option_index(self.origin, param_00, param_01);
   wait(param_01);
   self method_839C("anim deltas");
 }
@@ -635,7 +635,7 @@ func_56DD(param_00) {
     return 0;
   }
 
-  var_02 = self.origin[2] + self.height + 2 * self.var_14F;
+  var_02 = self.origin[2] + self.height + 2 * self.radius;
   if(param_00.origin[2] > var_02) {
     return 0;
   }
@@ -648,11 +648,11 @@ func_56DD(param_00) {
   }
 
   var_04 = 15;
-  if(isDefined(param_00.var_14F)) {
-    var_04 = param_00.var_14F;
+  if(isDefined(param_00.radius)) {
+    var_04 = param_00.radius;
   }
 
-  var_05 = self.var_14F + var_04;
+  var_05 = self.radius + var_04;
   var_05 = var_05 * var_05;
   if(distance2dsquared(self.origin, param_00.origin) > var_05) {
     return 0;
@@ -721,9 +721,9 @@ func_8859() {
   var_00 = clamp(level.var_A980 / 20, 0, 1);
   var_01 = lerp(0.35, 0.55, var_00);
   var_02 = lerp(0.06, 0.12, var_00);
-  func_5F4E(5, self.var_60F0 * 2, self.var_60F0 * 1.5, "attack_lunge_boost", level.var_611["boost_lunge"]);
+  func_5F4E(5, self.var_60F0 * 2, self.var_60F0 * 1.5, "attack_lunge_boost", level._effect["boost_lunge"]);
   func_3141(5, var_01, "dodge_boost", "boost_dodge_");
-  func_5C5B(10, 2, var_02, 550, 350, "leap_boost", level.var_611["boost_jump"]);
+  func_5C5B(10, 2, var_02, 550, 350, "leap_boost", level._effect["boost_jump"]);
 }
 
 func_362C() {

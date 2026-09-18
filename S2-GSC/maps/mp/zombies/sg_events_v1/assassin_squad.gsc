@@ -16,7 +16,7 @@ init() {
 basic_assassin_squad_run(param_00) {
   level endon("sg_obj_timeout");
   var_01 = common_scripts\utility::func_46B7("zmb_assassin_spawnpoint_leader", "targetname");
-  var_02 = common_scripts\utility::func_7A33(var_01);
+  var_02 = common_scripts\utility::random(var_01);
   var_02.leader = 1;
   var_03 = common_scripts\utility::func_46B7(var_02.target, "targetname");
   var_04 = common_scripts\utility::func_F73(var_03, [var_02]);
@@ -24,7 +24,7 @@ basic_assassin_squad_run(param_00) {
   var_05 = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("meuchler_common_leader_type");
   var_06 = 0;
   if(int(maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("meuchler_common_all_leaders"))) {
-    var_07 = common_scripts\utility::func_7A33(var_05);
+    var_07 = common_scripts\utility::random(var_05);
   } else {
     var_07 = undefined;
   }
@@ -87,7 +87,7 @@ respawnanassassinsquadzombie() {
   }
 
   var_02 = common_scripts\utility::func_46B7("zmb_assassin_spawnpoint_leader", "targetname");
-  var_03 = common_scripts\utility::func_7A33(var_02);
+  var_03 = common_scripts\utility::random(var_02);
   var_04 = spawn_sh_assassin(undefined, var_00, var_03);
   self.var_6701 = 1;
   self.var_2A9D = undefined;

@@ -66,12 +66,12 @@ func_5258() {
       level thread common_scripts\_trigger::func_9DAB(var_04[var_17]);
     }
 
-    if(isDefined(var_04[var_17].var_82BE)) {
+    if(isDefined(var_04[var_17].addroll)) {
       var_04[var_17] thread common_scripts\_trigger::func_9D85();
     }
 
     if(isDefined(var_04[var_17].var_8272)) {
-      var_04[var_17].var_8186 = var_04[var_17].var_8272;
+      var_04[var_17].setdepthoffield = var_04[var_17].var_8272;
     }
   }
 }

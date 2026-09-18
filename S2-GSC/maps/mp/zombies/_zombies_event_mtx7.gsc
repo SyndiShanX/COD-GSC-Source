@@ -91,7 +91,7 @@ spawn_fish_on_zombies() {
   var_00 = get_random_attached_prop();
   var_01 = spawn("script_model", (0, 0, 0));
   var_01 setModel(var_00.char_model);
-  var_01 method_8449(self, var_00.joint, var_00.pos_offset, var_00.var_DD2);
+  var_01 linktosynchronizedparent(self, var_00.joint, var_00.pos_offset, var_00.var_DD2);
   self.attached_ocean_model = var_01;
 }
 
@@ -195,7 +195,7 @@ register_prop_placement(param_00, param_01, param_02, param_03) {
 }
 
 get_random_attached_prop() {
-  return common_scripts\utility::func_7A33(level.zmb_mtx7_event_attached_props);
+  return common_scripts\utility::random(level.zmb_mtx7_event_attached_props);
 }
 
 add_ocean_zombie_look() {

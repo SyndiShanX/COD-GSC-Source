@@ -14,9 +14,9 @@ watchaudiologsubmixes() {
     var_01 = getdvarint("snd_playing_log");
     if(var_01 != var_00) {
       if(var_01) {
-        level.var_721C method_8626("zm_audio_log_mix");
+        level.player setaltsceneobj("zm_audio_log_mix");
       } else {
-        level.var_721C method_8627("zm_audio_log_mix");
+        level.player method_8627("zm_audio_log_mix");
       }
 
       var_00 = var_01;

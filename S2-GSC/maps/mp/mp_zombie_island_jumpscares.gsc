@@ -20,7 +20,7 @@ manage_possums() {
   wait_for_cycle();
   for(;;) {
     var_08 = undefined;
-    foreach(var_0A in common_scripts\utility::func_F92(var_03)) {
+    foreach(var_0A in common_scripts\utility::array_randomize(var_03)) {
       var_0B = var_0A.scare_zone;
       var_0C = lib_055A::func_4626(var_0B, 1);
       if(var_0C.size == 0 && common_scripts\utility::func_562E(level.var_AC80.var_ACB3[var_0B].var_556E)) {

@@ -8,8 +8,8 @@ func_5326() {
     return;
   }
 
-  common_scripts\utility::func_3C87("pap_in_use");
-  common_scripts\utility::func_3C87("pap_weapon_ready");
+  common_scripts\utility::flag_init("pap_in_use");
+  common_scripts\utility::flag_init("pap_weapon_ready");
   lib_0547::func_A78B();
   common_scripts\utility::func_92C("zmb_pack_a_punch_lathe", "vfx/map/mp_zombie_nest/zmb_pack_a_punch_lathe");
   common_scripts\utility::func_92C("zmb_pack_a_punch_lathe_ammo", "vfx/map/mp_zombie_nest/zmb_pack_a_punch_lathe_ammo");
@@ -116,7 +116,7 @@ func_6E41() {
       maps\mp\zombies\_zombies_magicbox::func_AC57(var_03, var_05);
       lib_0547::func_4AE4(var_03, "pack_a_punch_ammo", var_07, var_05, "none");
       if(!common_scripts\utility::func_3C77("pap_in_use")) {
-        playFXOnTag(level.var_611["zmb_pack_a_punch_lathe_ammo"], self.var_82EF, "lathe_01");
+        playFXOnTag(level._effect["zmb_pack_a_punch_lathe_ammo"], self.var_82EF, "lathe_01");
       }
 
       continue;
@@ -180,11 +180,11 @@ func_6E41() {
       level thread[[level.zmb_events_upgraded_a_weapon]](var_03);
     }
 
-    common_scripts\utility::func_3C8F("pap_in_use");
+    common_scripts\utility::flag_set("pap_in_use");
     self.var_738D = var_03;
     level notify("pap_state_change");
     self.var_82EF func_854A(var_05, var_08);
-    common_scripts\utility::func_3C8F("pap_weapon_ready");
+    common_scripts\utility::flag_set("pap_weapon_ready");
     if(0) {
       self setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
     }
@@ -311,7 +311,7 @@ func_854A(param_00, param_01) {
     thread func_3C72(level.var_6DDD);
   }
 
-  var_08 = spawnfx(level.var_611["zmb_pack_a_punch_lathe"], var_04, anglesToForward(self gettagangles("lathe_01")), anglestoup(self gettagangles("lathe_01")));
+  var_08 = spawnfx(level._effect["zmb_pack_a_punch_lathe"], var_04, anglesToForward(self gettagangles("lathe_01")), anglestoup(self gettagangles("lathe_01")));
   triggerfx(var_08);
   self setscriptablepartstate("lathes", "turn_on");
   thread func_9EDC();

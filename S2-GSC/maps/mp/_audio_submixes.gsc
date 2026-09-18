@@ -69,9 +69,9 @@ func_8A9D(param_00, param_01, param_02, param_03) {
   }
 
   if(isDefined(param_03) == 1) {
-    var_04 method_8626(param_00, param_01, param_02, param_03);
+    var_04 setaltsceneobj(param_00, param_01, param_02, param_03);
   } else {
-    var_04 method_8626(param_00, param_01, param_02);
+    var_04 setaltsceneobj(param_00, param_01, param_02);
   }
 
   var_04._audiosubmixes[param_00] = param_02;
@@ -250,7 +250,7 @@ func_8001(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_09 = lib_02F0::func_800B(param_00, var_08, param_06, param_05, param_02, param_07);
   if(isDefined(var_09) == 1) {
     if(isDefined(param_04) == 1) {
-      lib_02F0::func_800D(var_09, param_04, 0);
+      lib_02F0::disableplayeruse(var_09, param_04, 0);
     }
 
     var_09 thread func_06C6(param_01, param_03, var_08);
@@ -263,7 +263,7 @@ func_7FFA(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   var_07 = lib_02F0::func_800A(param_00, param_01, param_03, param_06);
   if(isDefined(var_07) == 1) {
     if(isDefined(param_05) == 1) {
-      lib_02F0::func_800D(var_07, param_05, 0);
+      lib_02F0::disableplayeruse(var_07, param_05, 0);
     }
 
     var_07 thread func_06C6(param_02, param_04);
@@ -276,7 +276,7 @@ func_7FF9(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = lib_02F0::func_800A(param_00, undefined, param_02, param_05);
   if(isDefined(var_06) == 1) {
     if(isDefined(param_04) == 1) {
-      lib_02F0::func_800D(var_06, param_04, 0);
+      lib_02F0::disableplayeruse(var_06, param_04, 0);
     }
 
     var_06 thread func_06C6(param_01, param_03);
@@ -290,7 +290,7 @@ func_8004(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_09 = lib_02F0::func_800B(param_00, var_08, param_06, param_05, param_02, param_07);
   if(isDefined(var_09) == 1) {
     if(isDefined(param_04) == 1) {
-      lib_02F0::func_800D(var_09, param_04, 0);
+      lib_02F0::disableplayeruse(var_09, param_04, 0);
     }
 
     var_09 thread func_06C6(param_01, param_03, var_08);
@@ -303,7 +303,7 @@ func_8002(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = lib_02F0::func_800A(param_00, undefined, param_02, param_05);
   if(isDefined(var_06) == 1) {
     if(isDefined(param_04) == 1) {
-      lib_02F0::func_800D(var_06, param_04, 0);
+      lib_02F0::disableplayeruse(var_06, param_04, 0);
     }
 
     var_06 thread func_06C6(param_01, param_03);

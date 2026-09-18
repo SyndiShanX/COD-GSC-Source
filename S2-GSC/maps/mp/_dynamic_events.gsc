@@ -109,7 +109,7 @@ func_49DC(param_00, param_01, param_02) {
   var_03 = func_44AE();
   var_04 = func_44AD();
   var_05 = undefined;
-  var_06 = maps\mp\_utility::func_4672();
+  var_06 = maps\mp\_utility::getscorelimit();
   if(!isDefined(param_02)) {
     param_02 = 1;
   }
@@ -169,14 +169,14 @@ func_44AC() {
 }
 
 func_44AE() {
-  var_00 = maps\mp\_utility::func_46E2();
+  var_00 = maps\mp\_utility::gettimelimit();
   if(var_00 == 0) {
     var_00 = 600;
   } else {
     var_00 = var_00 * 60;
   }
 
-  var_01 = maps\mp\_utility::func_4502();
+  var_01 = maps\mp\_utility::gethalftime();
   if(isDefined(var_01) && var_01) {
     var_00 = var_00 / 2;
   }

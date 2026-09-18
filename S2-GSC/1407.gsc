@@ -39,11 +39,11 @@ func_522E() {
 }
 
 func_7BAD() {
-  level.var_611["zmb_raven_sword_burst"] = loadfx("vfx/zombie/zmb_sword_burst");
-  level.var_611["zmb_raven_sword_touch_of_death_aoe"] = loadfx("vfx/explosion/zmb_sword_tod_aoe");
-  level.var_611["zmb_sword_activate"] = loadfx("vfx/zombie/zmb_sword_activate");
-  level.var_611["zmb_sword_impale_head"] = loadfx("vfx/blood/zmb_sword_impale_head");
-  level.var_611["zmb_sword_slice"] = loadfx("vfx/blood/zmb_sword_slice");
+  level._effect["zmb_raven_sword_burst"] = loadfx("vfx/zombie/zmb_sword_burst");
+  level._effect["zmb_raven_sword_touch_of_death_aoe"] = loadfx("vfx/explosion/zmb_sword_tod_aoe");
+  level._effect["zmb_sword_activate"] = loadfx("vfx/zombie/zmb_sword_activate");
+  level._effect["zmb_sword_impale_head"] = loadfx("vfx/blood/zmb_sword_impale_head");
+  level._effect["zmb_sword_slice"] = loadfx("vfx/blood/zmb_sword_slice");
 }
 
 func_4B3A() {

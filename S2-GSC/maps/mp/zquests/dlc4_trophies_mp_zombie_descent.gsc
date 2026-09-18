@@ -49,7 +49,7 @@ run_shattered_trophy_event_3() {
       continue;
     }
 
-    common_scripts\utility::func_3C87(var_03 + "_trophy_event_3");
+    common_scripts\utility::flag_init(var_03 + "_trophy_event_3");
   }
 
   foreach(var_03, var_02 in level.var_A50) {

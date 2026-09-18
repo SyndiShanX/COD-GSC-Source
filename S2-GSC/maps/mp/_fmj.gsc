@@ -22,8 +22,8 @@ func_3D93() {
     }
 
     if(!maps\mp\_utility::_hasperk("specialty_bulletpenetration")) {
-      maps\mp\_utility::func_47A2("specialty_bulletpenetration");
-      maps\mp\_utility::func_47A2("specialty_armorpiercing");
+      maps\mp\_utility::giveperk("specialty_bulletpenetration");
+      maps\mp\_utility::giveperk("specialty_armorpiercing");
     }
 
     wait 0.05;

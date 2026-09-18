@@ -12,7 +12,7 @@ zmb_do_weapon_inspect(param_00) {
   var_01 lib_0586::func_78C(param_00);
   var_01 lib_0586::func_78E(param_00);
   var_01 common_scripts\utility::func_603();
-  var_01 common_scripts\utility::func_600();
+  var_01 common_scripts\utility::_disableoffhandweapons();
   wait(1);
   while(var_01 isswitchingweapon()) {
     wait 0.05;

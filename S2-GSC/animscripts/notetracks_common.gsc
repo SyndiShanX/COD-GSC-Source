@@ -154,8 +154,8 @@ func_297E(param_00, param_01) {
     return;
   }
 
-  if(isai(self) && isDefined(var_03.var_3F2F)) {
-    playFXOnTag(var_03.var_3F2F, self, var_03.var_95A6);
+  if(isai(self) && isDefined(var_03.fx)) {
+    playFXOnTag(var_03.fx, self, var_03.var_95A6);
   }
 
   if(!isDefined(var_03.var_8F3A) && !isDefined(var_03.var_8F3C)) {
@@ -220,10 +220,10 @@ func_6794(param_00, param_01, param_02, param_03) {
 
 func_801F(param_00, param_01) {
   if(isDefined(param_01) && func_55BA(param_00, param_01)) {
-    self method_802E(param_00, param_01);
+    self detach(param_00, param_01);
     return 1;
   } else if(!isDefined(param_01) && func_55BA(param_00, undefined)) {
-    self method_802E(param_00);
+    self detach(param_00);
     return 1;
   }
 
@@ -382,9 +382,9 @@ notetrackplayfxontag_internal(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  if(!isDefined(level.var_611[var_05])) {
-    level.var_611[var_05] = loadfx(var_05);
-    if(!isDefined(level.var_611[var_05])) {
+  if(!isDefined(level._effect[var_05])) {
+    level._effect[var_05] = loadfx(var_05);
+    if(!isDefined(level._effect[var_05])) {
       return;
     }
   }
@@ -399,23 +399,23 @@ notetrackplayfxontag_internal(param_00, param_01, param_02, param_03) {
 
   var_07 = 1;
   if(param_00 == "PlayFxOnTag") {
-    playFXOnTag(level.var_611[var_05], self, var_06);
+    playFXOnTag(level._effect[var_05], self, var_06);
     return;
   }
 
   if(param_00 == "StopFxOnTag") {
-    stopFXOnTag(level.var_611[var_05], self, var_06);
+    stopFXOnTag(level._effect[var_05], self, var_06);
     return;
   }
 
   if(param_00 == "KillFXOnTag") {
-    killfxontag(level.var_611[var_05], self, var_06);
+    killfxontag(level._effect[var_05], self, var_06);
     return;
   }
 
   if(param_00 == "PlayFXOnTagForClient") {
     foreach(var_09 in param_03) {
-      playfxontagforclients(level.var_611[var_05], self, var_06, var_09);
+      playfxontagforclients(level._effect[var_05], self, var_06, var_09);
     }
 
     return;
@@ -423,7 +423,7 @@ notetrackplayfxontag_internal(param_00, param_01, param_02, param_03) {
 
   if(param_00 == "StopFXOnTagForClient") {
     foreach(var_09 in param_03) {
-      function_0294(level.var_611[var_05], self, var_06, var_09);
+      function_0294(level._effect[var_05], self, var_06, var_09);
     }
 
     return;
@@ -431,7 +431,7 @@ notetrackplayfxontag_internal(param_00, param_01, param_02, param_03) {
 
   if(param_00 == "KillFXOnTagForClient") {
     foreach(var_09 in param_03) {
-      function_0295(level.var_611[var_05], self, var_06, var_09);
+      function_0295(level._effect[var_05], self, var_06, var_09);
     }
 
     return;

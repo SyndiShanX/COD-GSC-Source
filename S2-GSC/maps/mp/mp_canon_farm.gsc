@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  lib_049E::func_F9();
-  lib_0406::func_F9();
-  lib_049D::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_canon_farm_lighting::func_F9();
-  maps\mp\mp_canon_farm_aud::func_F9();
+  lib_049E::main();
+  lib_0406::main();
+  lib_049D::main();
+  maps\mp\_load::main();
+  maps\mp\mp_canon_farm_lighting::main();
+  maps\mp\mp_canon_farm_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_canon_farm");
   game["attackers"] = "allies";
   game["defenders"] = "axis";

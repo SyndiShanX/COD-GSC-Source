@@ -4,7 +4,7 @@
 *********************************************/
 
 init() {
-  common_scripts\utility::func_3C87("door_opened");
+  common_scripts\utility::flag_init("door_opened");
   if(!isDefined(level.var_328C)) {
     level.var_328C = [];
   }
@@ -29,11 +29,11 @@ func_51BE() {
   }
 
   if(isDefined(self.var_819A) && !common_scripts\utility::func_3C83(self.var_819A)) {
-    common_scripts\utility::func_3C87(self.var_819A);
+    common_scripts\utility::flag_init(self.var_819A);
   }
 
   if(isDefined(self.var_81A1) && !common_scripts\utility::func_3C83(self.var_81A1)) {
-    common_scripts\utility::func_3C87(self.var_81A1);
+    common_scripts\utility::flag_init(self.var_81A1);
   }
 
   waittillframeend;
@@ -83,7 +83,7 @@ func_51C1() {
     return;
   }
 
-  self.var_8301 = function_021F(self.target, "targetname");
+  self.setclientdvars = function_021F(self.target, "targetname");
   var_00 = getEntArray(self.target, "targetname");
   foreach(var_02 in var_00) {
     var_03 = var_02.script_noteworthy;
@@ -128,23 +128,23 @@ func_51C1() {
     }
   }
 
-  if(isDefined(self.var_8301) && isDefined(self.var_8301[0])) {
-    var_05 = self.var_8301[0] method_85CE();
+  if(isDefined(self.setclientdvars) && isDefined(self.setclientdvars[0])) {
+    var_05 = self.setclientdvars[0] method_85CE();
     if(lib_0547::func_5565(var_05, "animated_zmb_door_bunker_entrance_2")) {
       foreach(var_07 in self.var_64C5) {
         if(var_07.var_8260 == "door_r") {
-          var_07 linkTo(self.var_8301[0], "door_R");
+          var_07 linkTo(self.setclientdvars[0], "door_R");
           continue;
         }
 
         if(var_07.var_8260 == "door_l") {
-          var_07 linkTo(self.var_8301[0], "door_L");
+          var_07 linkTo(self.setclientdvars[0], "door_L");
         }
       }
     }
   }
 
-  if((self.var_9DC2.size || common_scripts\utility::func_562E(self.var_57B4)) && self.var_64C5.size || self.var_8301.size) {
+  if((self.var_9DC2.size || common_scripts\utility::func_562E(self.var_57B4)) && self.var_64C5.size || self.setclientdvars.size) {
     func_7F5C();
   }
 }
@@ -243,7 +243,7 @@ func_7F5C() {
 
   var_05 = func_3278() && func_4B39();
   if(var_05) {
-    foreach(var_07 in self.var_8301) {
+    foreach(var_07 in self.setclientdvars) {
       var_07 setscriptablepartstate("power_light", "power_off", 0);
     }
 
@@ -261,14 +261,14 @@ func_7F5C() {
 
   func_82F2();
   self.var_6BE1 = 1;
-  common_scripts\utility::func_3C8F("door_opened");
+  common_scripts\utility::flag_set("door_opened");
   if(level.var_A980 <= 20) {
     level.var_400E[level.var_400E.size] = ["mountain_man_set 0 -1", "all"];
     level.var_400E[level.var_400E.size] = ["mountain_man_set 1 -1", "all"];
   }
 
   if(isDefined(self.var_819A)) {
-    common_scripts\utility::func_3C8F(self.var_819A, var_09);
+    common_scripts\utility::flag_set(self.var_819A, var_09);
     if(isDefined(level.var_3283[self.var_819A])) {
       level.var_3294 = level.var_3294 | level.var_3283[self.var_819A];
     }
@@ -307,7 +307,7 @@ func_7F5C() {
 
 func_9E96() {
   common_scripts\utility::func_3C9F(self.var_81A1);
-  foreach(var_01 in self.var_8301) {
+  foreach(var_01 in self.setclientdvars) {
     var_01 setscriptablepartstate("power_light", "power_on", 0);
   }
 }
@@ -319,14 +319,14 @@ func_4B39() {
 func_82F2() {
   self endon("scriptable_door_close");
   self notify("scriptable_door_open");
-  foreach(var_01 in self.var_8301) {
+  foreach(var_01 in self.setclientdvars) {
     var_01 setscriptablepartstate("gate", "opening", 0);
   }
 
   var_03 = 0;
   var_04 = 0;
   var_05 = 0;
-  var_06 = self.var_8301[0] method_85CE();
+  var_06 = self.setclientdvars[0] method_85CE();
   var_07 = 0;
   switch (var_06) {
     case "animated_zmb_door_bunker":
@@ -373,19 +373,19 @@ func_82F2() {
       break;
 
     case "animated_zbr_drop_pod":
-      self.var_8301[0] setscriptablepartstate("light", "green", 0);
+      self.setclientdvars[0] setscriptablepartstate("light", "green", 0);
       var_03 = getanimlength(%s2_zom_drop_pod_open);
       var_04 = 0.5;
       break;
 
     case "animated_zbr_ger_mil_door":
-      self.var_8301[0] setscriptablepartstate("light", "green", 0);
+      self.setclientdvars[0] setscriptablepartstate("light", "green", 0);
       var_03 = getanimlength(%s2_zom_ger_mil_door_open);
       var_04 = 0.5;
       break;
 
     case "animated_zbr_zep_interior_bar_gate_01":
-      self.var_8301[0] setscriptablepartstate("light", "green", 0);
+      self.setclientdvars[0] setscriptablepartstate("light", "green", 0);
       var_03 = getanimlength(%s2_zom_zep_bar_gate_open);
       var_04 = 0.5;
       break;
@@ -420,7 +420,7 @@ func_82F2() {
 
   wait(var_04);
   if(var_07) {
-    self.var_8301[0] hide();
+    self.setclientdvars[0] hide();
   }
 
   foreach(var_09 in self.var_64C5) {
@@ -445,7 +445,7 @@ func_82F3(param_00) {
     wait(param_00);
   }
 
-  foreach(var_02 in self.var_8301) {
+  foreach(var_02 in self.setclientdvars) {
     var_02 setscriptablepartstate("gate", "opened", 0);
   }
 }
@@ -453,12 +453,12 @@ func_82F3(param_00) {
 func_82F1() {
   self endon("scriptable_door_open");
   self notify("scriptable_door_close");
-  foreach(var_01 in self.var_8301) {
+  foreach(var_01 in self.setclientdvars) {
     var_01 setscriptablepartstate("gate", "closing", 0);
   }
 
   wait(2);
-  foreach(var_01 in self.var_8301) {
+  foreach(var_01 in self.setclientdvars) {
     var_01 setscriptablepartstate("gate", "closed", 0);
   }
 
@@ -469,7 +469,7 @@ func_82F1() {
 
     var_06 show();
     var_06 solid();
-    var_06 method_805F();
+    var_06 saved_actionslotdata();
   }
 }
 
@@ -668,7 +668,7 @@ func_7F5D(param_00) {
           param_00.var_7778.var_6642 = 1;
         }
 
-        common_scripts\utility::func_3CA9(self.var_81A1);
+        common_scripts\utility::flag_waitopen(self.var_81A1);
       }
     } else {
       if(0) {
@@ -727,7 +727,7 @@ func_7F5E(param_00) {
 
   param_00.var_5B37 = param_00.origin;
   param_00.var_5B12 = param_00.angles;
-  var_01 = common_scripts\utility::func_7A33(param_00.var_64A9);
+  var_01 = common_scripts\utility::random(param_00.var_64A9);
   param_00 moveTo(var_01.origin, 1);
   if(param_00.classname == "script_model") {
     param_00 rotateTo(var_01.angles, 1);
@@ -774,13 +774,13 @@ func_2435(param_00) {
   }
 
   if(param_00 maps\mp\_movers::func_8221()) {
-    param_00 method_805F();
+    param_00 saved_actionslotdata();
   }
 
   if(isDefined(param_00.var_5DBD)) {
     foreach(var_03 in param_00.var_5DBD) {
       if(var_03 maps\mp\_movers::func_8221()) {
-        var_03 method_805F();
+        var_03 saved_actionslotdata();
       }
     }
   }

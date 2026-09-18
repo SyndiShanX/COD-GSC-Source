@@ -5,10 +5,10 @@
 
 init() {
   self.var_983B = 0;
-  level.var_611["taunt_burst_aoe"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_taunt_aoe");
-  level.var_611["taunt_lure"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_zmb_lure");
-  level.var_611["zmb_moon_zmb_instakill"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_zmb_instakill");
-  level.var_611["zmb_death_hand_to_hand_melee_hit"] = loadfx("vfx/zombie/abilities_perks/zmb_death_hand_to_hand_melee_hit");
+  level._effect["taunt_burst_aoe"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_taunt_aoe");
+  level._effect["taunt_lure"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_zmb_lure");
+  level._effect["zmb_moon_zmb_instakill"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_zmb_instakill");
+  level._effect["zmb_death_hand_to_hand_melee_hit"] = loadfx("vfx/zombie/abilities_perks/zmb_death_hand_to_hand_melee_hit");
 }
 
 func_3662() {
@@ -149,7 +149,7 @@ play_crit_melee_effects() {
     return;
   }
 
-  var_01 = spawnlinkedfx(level.var_611["zmb_death_hand_to_hand_melee_hit"], var_00, "J_Head");
+  var_01 = spawnlinkedfx(level._effect["zmb_death_hand_to_hand_melee_hit"], var_00, "J_Head");
   triggerfx(var_01);
   wait(1);
   var_01 delete();
@@ -157,7 +157,7 @@ play_crit_melee_effects() {
 
 func_6B73(param_00) {
   if(isDefined(param_00) && isai(param_00) && common_scripts\utility::func_562E(self.var_983B) && lib_0547::func_4BA7("specialty_class_hit_em_hard_zm")) {
-    playFX(level.var_611["zmb_moon_zmb_instakill"], param_00.origin + (0, 0, 40));
+    playFX(level._effect["zmb_moon_zmb_instakill"], param_00.origin + (0, 0, 40));
     var_01 = param_00.health + 1;
     var_02 = 0;
     if(isDefined(param_00.var_A4B)) {

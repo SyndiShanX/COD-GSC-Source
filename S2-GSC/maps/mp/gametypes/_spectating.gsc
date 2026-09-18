@@ -152,7 +152,7 @@ func_872F() {
         self allowspectateteam("freelook", 0);
       } else if(isDefined(var_00) && (var_00 == "allies" || var_00 == "axis") && !level.multiteambased) {
         self allowspectateteam(var_00, 1);
-        self allowspectateteam(maps\mp\_utility::func_45DE(var_00), 0);
+        self allowspectateteam(maps\mp\_utility::getotherteam(var_00), 0);
         self allowspectateteam("freelook", 0);
         self allowspectateteam("none", 0);
       } else if(isDefined(var_00) && issubstr(var_00, "team_") && level.multiteambased) {
@@ -228,7 +228,7 @@ func_872F() {
     }
 
     if(isDefined(level.var_90E2[var_00].var_C22)) {
-      self allowspectateteam(maps\mp\_utility::func_45DE(var_00), 1);
+      self allowspectateteam(maps\mp\_utility::getotherteam(var_00), 1);
     }
 
     if(isDefined(level.var_90E2[var_00].allownonespectate)) {

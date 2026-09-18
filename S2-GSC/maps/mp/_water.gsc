@@ -5,27 +5,27 @@
 
 init() {
   if(isDefined(level.water_wake)) {
-    level.var_611["water_wake"] = loadfx(level.water_wake);
+    level._effect["water_wake"] = loadfx(level.water_wake);
   } else {
-    level.var_611["water_wake"] = loadfx("vfx/treadfx/body_wake_water");
+    level._effect["water_wake"] = loadfx("vfx/treadfx/body_wake_water");
   }
 
   if(isDefined(level.water_wake_stationary)) {
-    level.var_611["water_wake_stationary"] = loadfx(level.water_wake_stationary);
+    level._effect["water_wake_stationary"] = loadfx(level.water_wake_stationary);
   } else {
-    level.var_611["water_wake_stationary"] = loadfx("vfx/treadfx/body_wake_water_stationary");
+    level._effect["water_wake_stationary"] = loadfx("vfx/treadfx/body_wake_water_stationary");
   }
 
   if(isDefined(level.water_splash_emerge)) {
-    level.var_611["water_splash_emerge"] = loadfx(level.water_splash_emerge);
+    level._effect["water_splash_emerge"] = loadfx(level.water_splash_emerge);
   } else {
-    level.var_611["water_splash_emerge"] = loadfx("vfx/water/body_splash_exit");
+    level._effect["water_splash_emerge"] = loadfx("vfx/water/body_splash_exit");
   }
 
   if(isDefined(level.water_splash_enter)) {
-    level.var_611["water_splash_enter"] = loadfx(level.water_splash_enter);
+    level._effect["water_splash_enter"] = loadfx(level.water_splash_enter);
   } else {
-    level.var_611["water_splash_enter"] = loadfx("vfx/water/body_splash");
+    level._effect["water_splash_enter"] = loadfx("vfx/water/body_splash");
   }
 
   precacheshellshock("underwater");
@@ -175,7 +175,7 @@ func_740D(param_00) {
   self.var_3999 = 0;
   self.var_3997 = 0;
   for(;;) {
-    if(maps\mp\_utility::func_581D()) {
+    if(maps\mp\_utility::isusingremote()) {
       if(isDefined(self.var_A019) && isDefined(self.var_57C9)) {
         self notify("stop_water_shellshock");
         self stopshellshock();
@@ -197,7 +197,7 @@ func_740D(param_00) {
       maps\mp\gametypes\_weapons::func_A13B();
       self notify("out_of_water");
       self.var_5849 = undefined;
-      if(!maps\mp\_utility::func_581D()) {
+      if(!maps\mp\_utility::isusingremote()) {
         self stopshellshock();
         self method_812A(1);
         self.var_57C9 = undefined;
@@ -207,7 +207,7 @@ func_740D(param_00) {
       maps\mp\_utility::func_73AF(1);
       var_01 = distance(self getvelocity(), (0, 0, 0));
       var_02 = (self.origin[0], self.origin[1], func_471B(param_00));
-      playFX(level.var_611["water_splash_emerge"], var_02, anglesToForward((0, self.angles[1], 0) + (270, 180, 0)));
+      playFX(level._effect["water_splash_emerge"], var_02, anglesToForward((0, self.angles[1], 0) + (270, 180, 0)));
       break;
     }
 
@@ -249,7 +249,7 @@ func_740D(param_00) {
       }
 
       maps\mp\_utility::func_73AF(0);
-      if(!maps\mp\_utility::func_581D()) {
+      if(!maps\mp\_utility::isusingremote()) {
         thread playerapplyshellshock();
         self method_812A(0);
       }
@@ -311,8 +311,8 @@ func_740D(param_00) {
       self notify("above_water");
       var_01 = distance(self getvelocity(), (0, 0, 0));
       var_02 = (self.origin[0], self.origin[1], func_471B(param_00));
-      playFX(level.var_611["water_splash_emerge"], var_02, anglesToForward((0, self.angles[1], 0) + (270, 180, 0)));
-      if(!maps\mp\_utility::func_581D()) {
+      playFX(level._effect["water_splash_emerge"], var_02, anglesToForward((0, self.angles[1], 0) + (270, 180, 0)));
+      if(!maps\mp\_utility::isusingremote()) {
         self stopshellshock();
         self method_812A(1);
         self.var_57C9 = undefined;
@@ -417,7 +417,7 @@ func_5526(param_00) {
   var_01 = distance(self getvelocity(), (0, 0, 0));
   if(var_01 > 90) {
     var_02 = (self.origin[0], self.origin[1], func_471B(param_00));
-    playFX(level.var_611["water_splash_enter"], var_02, anglesToForward((0, self.angles[1], 0) + (270, 180, 0)));
+    playFX(level._effect["water_splash_enter"], var_02, anglesToForward((0, self.angles[1], 0) + (270, 180, 0)));
   }
 
   var_03 = spawnlinkedfx(common_scripts\utility::func_44F5("water_wake"), self, "tag_origin");
@@ -571,7 +571,7 @@ func_73DE(param_00) {
 
   self method_82CD();
   common_scripts\utility::func_603();
-  common_scripts\utility::func_600();
+  common_scripts\utility::_disableoffhandweapons();
 }
 
 func_73D6() {

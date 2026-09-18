@@ -8,21 +8,21 @@ func_00F9() {
     return;
   }
 
-  maps\mp\gametypes\_globallogic::func_D5();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  maps\mp\gametypes\_globallogic::init();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.var_3FDC, 0, 0, 9);
-    maps\mp\_utility::func_7BFA(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BF9(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BF7(level.var_3FDC, 1);
-    maps\mp\_utility::func_7C04(level.var_3FDC, 1);
-    maps\mp\_utility::func_7BF1(level.var_3FDC, 0);
-    maps\mp\_utility::func_7BE5(level.var_3FDC, 0);
+    maps\mp\_utility::registerroundswitchdvar(level.gametype, 0, 0, 9);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
@@ -139,7 +139,7 @@ func_535B() {
 
 func_4665() {
   if(level.var_7DB3 == 1) {
-    if(self.var_1A7 == game["defenders"]) {
+    if(self.team == game["defenders"]) {
       return level.defendersrespawndelay;
     }
 
@@ -208,7 +208,7 @@ func_6BB6() {
     }
   }
 
-  if(maps\mp\_utility::func_5CBA("raid_victory")) {
+  if(maps\mp\_utility::levelflag("raid_victory")) {
     return;
   }
 
@@ -225,8 +225,8 @@ func_469A() {
     level.var_541E = [];
     var_00 = getEntArray("mp_global_intermission", "classname");
     foreach(var_02 in var_00) {
-      if(isDefined(var_02.var_165)) {
-        var_03 = int(var_02.var_165);
+      if(isDefined(var_02.exitlevel)) {
+        var_03 = int(var_02.exitlevel);
         var_04 = var_02.var_8260;
         if(!isDefined(var_04)) {
           var_04 = "attackers";
@@ -248,7 +248,7 @@ func_469A() {
   var_06 = getomnvar("ui_war_active_sector");
   if(isDefined(level.var_541E[var_06])) {
     var_07 = level.var_541E[var_06];
-    var_08 = self.var_12C["team"];
+    var_08 = self.pers["team"];
     if(isDefined(var_07["defenders"]) && isDefined(var_08) && var_08 == game["defenders"]) {
       return var_07["defenders"];
     }
@@ -263,13 +263,13 @@ func_469A() {
 func_5300() {
   maps\mp\_utility::func_8653();
   setdynamicdvar("scr_raid_roundswitch", 0);
-  maps\mp\_utility::func_7BF8("raid", 0, 0, 9);
+  maps\mp\_utility::registerroundswitchdvar("raid", 0, 0, 9);
   setdynamicdvar("scr_raid_roundlimit", 1);
-  maps\mp\_utility::func_7BF7("raid", 1);
+  maps\mp\_utility::registerroundlimitdvar("raid", 1);
   setdynamicdvar("scr_raid_winlimit", 1);
-  maps\mp\_utility::func_7C04("raid", 1);
+  maps\mp\_utility::registerwinlimitdvar("raid", 1);
   setdynamicdvar("scr_raid_halftime", 0);
-  maps\mp\_utility::func_7BE5("raid", 0);
+  maps\mp\_utility::registerhalftimedvar("raid", 0);
 }
 
 func_6BAF() {
@@ -295,14 +295,14 @@ func_6BAF() {
 
   lib_050D::func_10E4();
   var_02 = lib_050D::func_46A0(game["attackers"]);
-  maps\mp\_utility::func_5CBC("raid_victory", 0);
+  maps\mp\_utility::levelflaginit("raid_victory", 0);
   lib_04F9::func_52C6();
   lib_04F8::func_52B4();
   lib_04F7::func_533C();
   lib_0504::func_5341();
   thread lib_0500::func_533F();
-  lib_04F4::func_D5();
-  lib_0505::func_D5();
+  lib_04F4::init();
+  lib_0505::init();
   func_5352();
   lib_0502::func_2549();
   if(isDefined(level.var_75EE)) {
@@ -310,16 +310,16 @@ func_6BAF() {
   }
 
   lib_0503::func_5282();
-  var_03[0] = level.var_3FDC;
-  maps\mp\gametypes\_gameobjects::func_F9(var_03);
+  var_03[0] = level.gametype;
+  maps\mp\gametypes\_gameobjects::main(var_03);
   level.var_46D9 = ::lib_0506::func_7977;
   if(getdvarint("raid_auto_advance", 0)) {
     level.var_A16 = 1;
   }
 
-  level thread func_6B6C();
+  level thread onplayerconnect();
   level thread func_6B79();
-  level thread func_6B82();
+  level thread onplayerspawned();
   level thread func_79DE();
 }
 
@@ -353,13 +353,13 @@ func_73BE(param_00) {
 }
 
 func_79DE() {
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   if(func_6976()) {
     return;
   }
 
   var_00 = maps\mp\gametypes\_hud_util::func_282B("hudbig", 1);
-  var_00 maps\mp\gametypes\_hud_util::func_8707("LEFTBOTTOM", undefined, 125, -30);
+  var_00 maps\mp\gametypes\_hud_util::setpoint("LEFTBOTTOM", undefined, 125, -30);
   var_00.var_56 = (1, 1, 1);
   var_00.var_1F = 0;
   var_00 settimerup(0);
@@ -378,7 +378,7 @@ func_09DB(param_00) {
   var_01 = "scr_raid_timelimit";
   var_02 = getdvarfloat(var_01, 0);
   lib_0502::func_8671(var_01, var_02 + param_00);
-  maps\mp\_utility::func_A193(var_01);
+  maps\mp\_utility::updatewatcheddvar(var_01);
 }
 
 func_6BA7() {
@@ -402,15 +402,15 @@ func_62AE(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       var_0A = 1;
       var_0B = lib_0502::func_799F();
       if(var_0B && param_04 != "MOD_EXPLOSIVE" && isPlayer(param_02) && isDefined(param_06)) {
-        iprintlnbold("Spawn-Protected player hit with bullet damage at (" + param_00.var_116[0] + "," + param_00.var_116[1] + "," + param_00.var_116[2] + ")");
-        iprintln("Spawn-Protected player hit with bullet damage at (" + param_00.var_116[0] + "," + param_00.var_116[1] + "," + param_00.var_116[2] + ")");
-        level thread maps\mp\_utility::func_33D8(param_02.var_116 + (0, 0, 60), param_06, 60, (1, 0, 0));
+        iprintlnbold("Spawn-Protected player hit with bullet damage at (" + param_00.origin[0] + "," + param_00.origin[1] + "," + param_00.origin[2] + ")");
+        iprintln("Spawn-Protected player hit with bullet damage at (" + param_00.origin[0] + "," + param_00.origin[1] + "," + param_00.origin[2] + ")");
+        level thread maps\mp\_utility::func_33D8(param_02.origin + (0, 0, 60), param_06, 60, (1, 0, 0));
       }
     }
 
     var_0C = isDefined(param_00 method_85E3());
     if(var_0C) {
-      if(isPlayer(param_02) && maps\mp\_utility::func_5694(param_04) && func_581B(param_00) || var_0A < 100) {
+      if(isPlayer(param_02) && maps\mp\_utility::isbulletdamage(param_04) && func_581B(param_00) || var_0A < 100) {
         var_0D = maps\mp\_utility::func_3B8E(param_00, param_02, 100);
         var_0E = isDefined(param_02 method_85E3());
         var_0F = maps\mp\_utility::func_570A(param_05, param_08, param_04, param_02);
@@ -462,7 +462,7 @@ func_581F(param_00) {
 
 func_581B(param_00) {
   var_01 = param_00 method_85E3();
-  if(isDefined(var_01) && isDefined(var_01.var_165) && var_01.var_165 == "armored_mg") {
+  if(isDefined(var_01) && isDefined(var_01.exitlevel) && var_01.exitlevel == "armored_mg") {
     return 1;
   }
 
@@ -497,17 +497,17 @@ func_9026(param_00) {
   self notify("spawnAllowClassSelection");
   self endon("spawnAllowClassSelection");
   self.var_C1F = 1;
-  common_scripts\utility::func_A74B("death", param_00);
+  common_scripts\utility::waittill_notify_or_timeout("death", param_00);
   self.var_C1F = undefined;
 }
 
-func_6B6C() {
+onplayerconnect() {
   level endon("game_ended");
   for(;;) {
     level waittill("connected", var_00);
     level thread func_2820(var_00);
     var_00.var_7682 = ::func_743C;
-    var_00 thread func_6B82();
+    var_00 thread onplayerspawned();
   }
 }
 
@@ -515,7 +515,7 @@ func_6B79() {
   level endon("game_ended");
   for(;;) {
     level waittill("joined_team", var_00);
-    if(var_00.var_1A7 == "spectator") {
+    if(var_00.team == "spectator") {
       continue;
     }
 
@@ -523,7 +523,7 @@ func_6B79() {
   }
 }
 
-func_6B82() {
+onplayerspawned() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
@@ -601,32 +601,32 @@ func_2820(param_00) {
   param_00.var_259A = 0;
   param_00.var_2E36 = 0;
   param_00.var_38D3 = 1;
-  if(!isDefined(param_00 maps\mp\_utility::func_4607("raidKillz"))) {
-    param_00 maps\mp\_utility::func_532D("raidKillz");
+  if(!isDefined(param_00 maps\mp\_utility::getpersstat("raidKillz"))) {
+    param_00 maps\mp\_utility::initpersstat("raidKillz");
   }
 
-  if(!isDefined(param_00 maps\mp\_utility::func_4607("constructs"))) {
-    param_00 maps\mp\_utility::func_532D("constructs");
+  if(!isDefined(param_00 maps\mp\_utility::getpersstat("constructs"))) {
+    param_00 maps\mp\_utility::initpersstat("constructs");
   }
 
-  if(!isDefined(param_00 maps\mp\_utility::func_4607("destructs"))) {
-    param_00 maps\mp\_utility::func_532D("destructs");
+  if(!isDefined(param_00 maps\mp\_utility::getpersstat("destructs"))) {
+    param_00 maps\mp\_utility::initpersstat("destructs");
   }
 
   if(game["switchedsides"]) {
-    param_00.var_79A2 = param_00 maps\mp\_utility::func_4607("raidKillz");
+    param_00.var_79A2 = param_00 maps\mp\_utility::getpersstat("raidKillz");
     param_00 setclientomnvar("ui_onevone_class_1", param_00.var_79A2);
-    param_00 setclientomnvar("ui_onevone_class_2", param_00 maps\mp\_utility::func_4607("defends"));
-    param_00.var_259A = param_00 maps\mp\_utility::func_4607("constructs");
+    param_00 setclientomnvar("ui_onevone_class_2", param_00 maps\mp\_utility::getpersstat("defends"));
+    param_00.var_259A = param_00 maps\mp\_utility::getpersstat("constructs");
     param_00 setclientomnvar("ui_onevone_class_3", param_00.var_259A);
-    param_00.var_2E36 = param_00 maps\mp\_utility::func_4607("destructs");
+    param_00.var_2E36 = param_00 maps\mp\_utility::getpersstat("destructs");
     param_00 setclientomnvar("ui_onevone_class_4", param_00.var_2E36);
   }
 }
 
 func_36C3(param_00, param_01, param_02, param_03) {
-  foreach(var_05 in level.var_744A) {
-    if(isDefined(var_05.var_2583) || var_05.var_12C["team"] == "spectator" && !var_05 method_8436()) {
+  foreach(var_05 in level.players) {
+    if(isDefined(var_05.var_2583) || var_05.pers["team"] == "spectator" && !var_05 method_8436()) {
       continue;
     }
 
@@ -640,27 +640,27 @@ func_36C3(param_00, param_01, param_02, param_03) {
 }
 
 func_36C0() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     transferandzeroroundstats(var_01);
   }
 
-  foreach(var_01 in level.var_744A) {
-    var_01.var_1E24 = var_01.var_12C["team"];
-    var_01.cacheloss = var_01.var_12C["recordedLoss"];
-    var_01.cachejip = var_01.var_12C["jip_game_one"];
+  foreach(var_01 in level.players) {
+    var_01.var_1E24 = var_01.pers["team"];
+    var_01.cacheloss = var_01.pers["recordedLoss"];
+    var_01.cachejip = var_01.pers["jip_game_one"];
   }
 
   function_03A4();
-  foreach(var_01 in level.var_744A) {
-    var_01.var_12C["team"] = var_01.var_1E24;
-    var_01.var_12C["recordedLoss"] = var_01.cacheloss;
-    var_01.var_12C["jip_game_one"] = var_01.cachejip;
+  foreach(var_01 in level.players) {
+    var_01.pers["team"] = var_01.var_1E24;
+    var_01.pers["recordedLoss"] = var_01.cacheloss;
+    var_01.pers["jip_game_one"] = var_01.cachejip;
   }
 
   game["gamestarted"] = undefined;
   game["clientMatchDataDef"] = undefined;
-  foreach(var_01 in level.var_744A) {
-    var_01.var_12C["secondHalfInitialConnect"] = 1;
+  foreach(var_01 in level.players) {
+    var_01.pers["secondHalfInitialConnect"] = 1;
   }
 }
 
@@ -717,7 +717,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.origin, var_01.var_116, 30, 90, 30625)) {
+    if(isweaponnearinteractable(self.origin, var_01.origin, 30, 90, 30625)) {
       return 0;
     }
   }
@@ -727,7 +727,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.origin, var_04.var_116, 30, 90, 19600)) {
+    if(isweaponnearinteractable(self.origin, var_04.origin, 30, 90, 19600)) {
       return 0;
     }
   }
@@ -737,7 +737,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.origin, var_07.var_116, 30, 90, 65536)) {
+    if(isweaponnearinteractable(self.origin, var_07.origin, 30, 90, 65536)) {
       return 0;
     }
   }
@@ -747,7 +747,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.origin, var_0A.var_116, 30, 90, 65536)) {
+    if(isweaponnearinteractable(self.origin, var_0A.origin, 30, 90, 65536)) {
       return 0;
     }
   }
@@ -757,7 +757,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.origin, var_0D.var_116, 30, 90, 262144)) {
+    if(isweaponnearinteractable(self.origin, var_0D.origin, 30, 90, 262144)) {
       return 0;
     }
   }
@@ -767,7 +767,7 @@ func_79A6() {
       continue;
     }
 
-    if(isweaponnearinteractable(self.origin, var_10.var_116, 30, 90, 262144)) {
+    if(isweaponnearinteractable(self.origin, var_10.origin, 30, 90, 262144)) {
       return 0;
     }
   }

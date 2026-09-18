@@ -14,15 +14,15 @@ func_00F9() {
 func_A3ED() {
   var_00 = self;
   var_01 = undefined;
-  if(isDefined(var_00.var_106) == 0) {
+  if(isDefined(var_00.model) == 0) {
     var_01 = "no model!";
     return;
   }
 
-  switch (var_00.var_106) {
+  switch (var_00.model) {
     case "vehicle_usa_tank_sherman_75mm_no_turret":
     default:
-      var_01 = "unhandled model \'" + var_00.var_106 + "\'";
+      var_01 = "unhandled model \'" + var_00.model + "\'";
       break;
 
     case "vehicle_ger_tank_king_tiger_mp":
@@ -157,8 +157,8 @@ func_54E4() {
   var_04 = 1 - var_03;
   var_05 = 14;
   var_06 = 1;
-  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {
-    var_07 = level.var_54D0["allies"].var_9309;
+  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {
+    var_07 = level.var_54D0["allies"].starttime;
     var_00 maps\mp\_audio_submixes::func_8A9D("mp_war_intro_vignette", 0.1, 1);
     wait 0.05;
     var_00 maps\mp\_audio_submixes::func_8A9E("mp_war_intro_vignette", var_04, var_01);
@@ -177,8 +177,8 @@ func_54E5() {
   var_04 = 1 - var_03;
   var_05 = 25;
   var_06 = 1;
-  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {
-    var_07 = level.var_54D0["allies"].var_9309;
+  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {
+    var_07 = level.var_54D0["allies"].starttime;
     var_00 maps\mp\_audio_submixes::func_8A9D("mp_war_intro_vignette", 0.1, 1);
     wait 0.05;
     var_00 maps\mp\_audio_submixes::func_8A9E("mp_war_intro_vignette", var_04, var_01);

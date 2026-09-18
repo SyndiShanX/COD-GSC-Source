@@ -503,7 +503,7 @@ func_7752(param_00) {
     return;
   }
 
-  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::func_773F()) {
+  if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::privatematch()) {
     return;
   }
 
@@ -850,7 +850,7 @@ ch_kills(param_00) {
       var_2C = 0;
       if(isDefined(level.var_9FDA)) {
         if(level.teambased) {
-          var_2C = level.var_9FDA[maps\mp\_utility::func_45DE(param_00.attacker.team)].size;
+          var_2C = level.var_9FDA[maps\mp\_utility::getotherteam(param_00.attacker.team)].size;
         } else if(level.var_9FDA.size > 0) {
           var_2D = 0;
           foreach(var_2F in level.var_9FDA) {
@@ -921,7 +921,7 @@ ch_kills(param_00) {
       var_34 = 0;
       if(isDefined(level.var_9FDA)) {
         if(level.teambased) {
-          foreach(var_2F in level.var_9FDA[maps\mp\_utility::func_45DE(var_01.team)]) {
+          foreach(var_2F in level.var_9FDA[maps\mp\_utility::getotherteam(var_01.team)]) {
             if(isDefined(var_2F.var_9FE0) && var_2F.var_9FE0 == "counter") {
               var_34 = 1;
               break;
@@ -1571,7 +1571,7 @@ func_6359() {
   self endon("disconnect");
   level endon("game_ended");
   wait(5);
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     processchallenge("ch_operations_undercover");
   }
 }
@@ -1962,7 +1962,7 @@ playerdamaged(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 
   if(isDefined(self) && isDefined(param_01) && isDefined(self.team) && isDefined(param_01.team)) {
-    if(self.team != param_01.team && maps\mp\_utility::_hasperk("specialty_class_hunker") && isexplosivedamagemod(var_06.smeansofdeath) && maps\mp\_utility::func_57A0(self) && !maps\mp\perks\_perks::isreallyalive(param_04)) {
+    if(self.team != param_01.team && maps\mp\_utility::_hasperk("specialty_class_hunker") && isexplosivedamagemod(var_06.smeansofdeath) && maps\mp\_utility::isreallyalive(self) && !maps\mp\perks\_perks::isreallyalive(param_04)) {
       processchallenge("ch_explosives_hunker");
     }
 
@@ -2016,7 +2016,7 @@ playerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_0
   }
 
   waitandprocessplayerkilledcallback(var_08);
-  if(isDefined(param_01) && maps\mp\_utility::func_57A0(param_01)) {
+  if(isDefined(param_01) && maps\mp\_utility::isreallyalive(param_01)) {
     param_01.killsthislife[param_01.killsthislife.size] = var_08;
     param_01.recentkills = common_scripts\utility::func_F86(param_01.recentkills, var_08, 0);
     if(!isDefined(level.recentkillers)) {
@@ -2447,7 +2447,7 @@ processchallenge(param_00, param_01, param_02) {
   if(isDefined(level.challengeinfo[param_00]) && isDefined(level.challengeinfo[param_00]["requiresPrestige"])) {
     var_04 = level.challengeinfo[param_00]["requiresPrestige"];
     if(var_04 != "") {
-      if(maps\mp\gametypes\_rank::func_4639() < int(var_04)) {
+      if(maps\mp\gametypes\_rank::getprestigelevel() < int(var_04)) {
         return;
       }
     }
@@ -2700,7 +2700,7 @@ func_4732(param_00) {
       var_03 = var_02[var_04];
     }
 
-    if(isDefined(var_03) && maps\mp\gametypes\_class::func_5835(var_03) || maps\mp\gametypes\_class::func_5839(var_03, 0)) {
+    if(isDefined(var_03) && maps\mp\gametypes\_class::isvalidprimary(var_03) || maps\mp\gametypes\_class::isvalidsecondary(var_03, 0)) {
       return var_03;
     }
   }

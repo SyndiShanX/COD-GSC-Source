@@ -31,7 +31,7 @@ func_AB91() {
     var_00["move_style"] = "crippled";
     var_00["move_speed"] = "passive";
   } else {
-    var_00["move_speed"] = self.var_108;
+    var_00["move_speed"] = self.vectortoangles;
   }
 
   return var_00;

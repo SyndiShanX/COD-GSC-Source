@@ -101,7 +101,7 @@ func_1AC0() {
   self.var_9526 = undefined;
   self.var_4B44 = 0;
   self.var_10F7 = 0;
-  self.var_8311 = undefined;
+  self.getweaponlistprimaries = undefined;
   self.var_2C7B = undefined;
   self.var_2CA5 = 0;
   if(!isDefined(level.var_52CA) && !level.var_6510) {
@@ -160,22 +160,22 @@ func_1AC0() {
       continue;
     }
 
-    if(level.var_18F9 && isDefined(level.var_8330)) {
-      if(distancesquared(self.origin, level.var_8330.origin) > squared(level.var_7790 * 2)) {
+    if(level.var_18F9 && isDefined(level.freezecontrols)) {
+      if(distancesquared(self.origin, level.freezecontrols.origin) > squared(level.var_7790 * 2)) {
         if(!isDefined(self.var_2C7B)) {
           self.var_2C7B = 1;
           self botsetpathingstyle("scripted");
         }
-      } else if(isDefined(self.var_2C7B) && !isDefined(self.var_8311)) {
+      } else if(isDefined(self.var_2C7B) && !isDefined(self.getweaponlistprimaries)) {
         self.var_2C7B = undefined;
         self botsetpathingstyle(undefined);
       }
     }
 
-    if(level.var_18F9 && isDefined(level.var_18B5) && isDefined(level.var_8330) && self.var_7ECA != "defuser") {
-      if(!maps / mp / bots / _bots_util::func_1A2E(level.var_8330.origin)) {
+    if(level.var_18F9 && isDefined(level.var_18B5) && isDefined(level.freezecontrols) && self.var_7ECA != "defuser") {
+      if(!maps / mp / bots / _bots_util::func_1A2E(level.freezecontrols.origin)) {
         self method_8358();
-        maps / mp / bots / _bots_strategy::func_1AA6(level.var_8330.origin, level.var_7790);
+        maps / mp / bots / _bots_strategy::func_1AA6(level.freezecontrols.origin, level.var_7790);
       }
 
       continue;
@@ -376,7 +376,7 @@ func_23CF() {
       if(!maps / mp / bots / _bots_util::func_1A2E(var_01.var_28D4)) {
         var_01["min_goal_time"] = 2;
         var_01["max_goal_time"] = 4;
-        var_01["override_origin_node"] = common_scripts\utility::func_7A33(var_01.var_1B49);
+        var_01["override_origin_node"] = common_scripts\utility::random(var_01.var_1B49);
         maps / mp / bots / _bots_strategy::func_1AA6(var_01.var_28D4, level.var_7790, var_01);
         return;
       }
@@ -386,21 +386,21 @@ func_23CF() {
 
 func_2C3B() {
   self endon("new_role");
-  if(level.var_18F9 && isDefined(level.var_8330)) {
+  if(level.var_18F9 && isDefined(level.freezecontrols)) {
     if(level.var_115F == "rush") {
       func_2F3A();
     }
 
-    if(!maps / mp / bots / _bots_util::func_1A2E(level.var_8330.origin)) {
+    if(!maps / mp / bots / _bots_util::func_1A2E(level.freezecontrols.origin)) {
       var_00["score_flags"] = "strongly_avoid_center";
-      maps / mp / bots / _bots_strategy::func_1AA6(level.var_8330.origin, level.var_7790, var_00);
+      maps / mp / bots / _bots_strategy::func_1AA6(level.freezecontrols.origin, level.var_7790, var_00);
     }
   }
 }
 
 func_18B6() {
   self endon("new_role");
-  if(level.var_18D3 || !isDefined(level.var_8330)) {
+  if(level.var_18D3 || !isDefined(level.freezecontrols)) {
     return;
   }
 
@@ -409,8 +409,8 @@ func_18B6() {
     return;
   }
 
-  var_01 = common_scripts\utility::func_40B0(level.var_8330.origin, var_00.var_1B49);
-  var_02 = (level.var_8330.origin[0], level.var_8330.origin[1], var_01[0].origin[2]);
+  var_01 = common_scripts\utility::func_40B0(level.freezecontrols.origin, var_00.var_1B49);
+  var_02 = (level.freezecontrols.origin[0], level.freezecontrols.origin[1], var_01[0].origin[2]);
   if(self.var_2CA5 <= 1) {
     var_03 = func_2056(var_02, undefined);
   } else {
@@ -460,7 +460,7 @@ func_18B6() {
     }
 
     var_0B = gettime() >= var_0A;
-    var_0C = level.var_8330.origin[2] - self.origin[2];
+    var_0C = level.freezecontrols.origin[2] - self.origin[2];
     var_0D = maps / mp / bots / _bots_gametype_common::func_1911(level.var_2CA9 + 2, "bomb_defused", var_0B, var_0C > 40);
     if(!var_0D && self.var_2CA5 >= 4) {
       self.var_2CA5++;
@@ -478,7 +478,7 @@ func_551A() {
   }
 
   var_00 = maps / mp / bots / _bots_gametype_common::func_3B69(self);
-  self botsetscriptgoalnode(common_scripts\utility::func_7A33(var_00.var_1B49), "critical");
+  self botsetscriptgoalnode(common_scripts\utility::random(var_00.var_1B49), "critical");
   var_01 = maps / mp / bots / _bots_util::func_1B21();
   if(var_01 == "goal") {
     wait(2);
@@ -507,7 +507,7 @@ func_2C7C() {
   self endon("new_role");
   if(!maps / mp / bots / _bots_util::func_1A2E(self.var_2C75.var_28D4)) {
     var_00["score_flags"] = "strict_los";
-    var_00["override_origin_node"] = common_scripts\utility::func_7A33(self.var_2C75.var_1B49);
+    var_00["override_origin_node"] = common_scripts\utility::random(self.var_2C75.var_1B49);
     maps / mp / bots / _bots_strategy::func_1AA6(self.var_2C75.var_28D4, level.var_7790, var_00);
   }
 }
@@ -558,7 +558,7 @@ func_14ED() {
 
   if(self.var_14EC == "2_move_to_enemy_spawn") {
     var_0B = lib_050D::func_46A0("allies");
-    var_0C = common_scripts\utility::func_7A33(var_0B);
+    var_0C = common_scripts\utility::random(var_0B);
     self botsetpathingstyle("scripted");
     var_09 = self botsetscriptgoal(var_0C.origin, 250, "guard");
     if(var_09) {
@@ -575,7 +575,7 @@ func_14ED() {
     }
 
     self botsetpathingstyle(undefined);
-    var_09 = self botsetscriptgoal(common_scripts\utility::func_7A33(level.var_1913[self.var_1910].var_1B49).origin, 160, "objective");
+    var_09 = self botsetscriptgoal(common_scripts\utility::random(level.var_1913[self.var_1910].var_1B49).origin, 160, "objective");
     if(var_09) {
       var_0A = maps / mp / bots / _bots_util::func_1B21();
       if(var_0A == "goal") {
@@ -612,9 +612,9 @@ func_2F3A() {
 }
 
 func_8578() {
-  if(!isDefined(self.var_8311)) {
+  if(!isDefined(self.getweaponlistprimaries)) {
     self botsetpathingstyle("scripted");
-    self.var_8311 = 1;
+    self.getweaponlistprimaries = 1;
   }
 }
 
@@ -870,7 +870,7 @@ func_52E9() {
       return;
     }
 
-    self.var_2C75 = common_scripts\utility::func_7A33(var_0E);
+    self.var_2C75 = common_scripts\utility::random(var_0E);
     return;
   }
 }
@@ -968,7 +968,7 @@ func_1ABD() {
             var_0B = var_09 botgetdifficultysetting("strategyLevel");
             if(var_0B > 0 && var_09.var_7ECA != "camp_bomb" && isDefined(var_0A) && function_01F4(var_05, var_0A, 1)) {
               var_0C = var_09 method_8375();
-              if(common_scripts\utility::func_AA4A(var_09.origin, var_09 getplayerangles(), level.var_832F.var_28D4, var_0C)) {
+              if(common_scripts\utility::within_fov(var_09.origin, var_09 getplayerangles(), level.var_832F.var_28D4, var_0C)) {
                 if(var_0B >= 2 || distancesquared(var_09.origin, level.var_832F.var_28D4) < squared(700)) {
                   var_06 = 1;
                   break;
@@ -1005,7 +1005,7 @@ func_1ABD() {
             }
 
             if(var_15.size > 0) {
-              var_18 = common_scripts\utility::func_7A33(var_15);
+              var_18 = common_scripts\utility::random(var_15);
               var_18 maps / mp / bots / _bots_strategy::func_19A3();
               var_18.var_2C75 = var_10[var_12];
             }
@@ -1030,8 +1030,8 @@ func_1ABD() {
           var_19 = var_1C;
         }
 
-        if(var_19.size > 0 && isDefined(level.var_8330)) {
-          var_1D = common_scripts\utility::func_40B0(level.var_8330.origin, var_19);
+        if(var_19.size > 0 && isDefined(level.freezecontrols)) {
+          var_1D = common_scripts\utility::func_40B0(level.freezecontrols.origin, var_19);
           level.var_18B5 = var_1D[0];
           level.var_18B5 func_1AD7("defuser");
           level.var_18B5 maps / mp / bots / _bots_strategy::func_19B0();

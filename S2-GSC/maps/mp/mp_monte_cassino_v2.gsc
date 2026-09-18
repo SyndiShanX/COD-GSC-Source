@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_monte_cassino_v2_precache::func_F9();
-  maps\createart\mp_monte_cassino_v2_art::func_F9();
-  maps\mp\mp_monte_cassino_v2_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_monte_cassino_v2_lighting::func_F9();
-  maps\mp\mp_monte_cassino_v2_aud::func_F9();
+  maps\mp\mp_monte_cassino_v2_precache::main();
+  maps\createart\mp_monte_cassino_v2_art::main();
+  maps\mp\mp_monte_cassino_v2_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_monte_cassino_v2_lighting::main();
+  maps\mp\mp_monte_cassino_v2_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_monte_cassino_v2");
   game["attackers"] = "allies";
   game["defenders"] = "axis";

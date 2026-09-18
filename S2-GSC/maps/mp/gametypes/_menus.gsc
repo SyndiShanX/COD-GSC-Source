@@ -64,7 +64,7 @@ onplayerconnect() {
   }
 }
 
-func_445C(param_00) {
+getclasschoice(param_00) {
   if(param_00 <= 100) {
     if(maps\mp\_utility::practiceroundgame()) {
       param_00 = "practice" + param_00;
@@ -110,7 +110,7 @@ func_4AAF(param_00) {
     return;
   }
 
-  if(!function_026D(self) && !isai(self)) {
+  if(!istestclient(self) && !isai(self)) {
     if("" + param_00 != "callback") {
       self setclientomnvar("ui_loadout_selected", param_00);
     }
@@ -126,21 +126,21 @@ func_4AAF(param_00) {
 
   self setclientomnvar("ui_options_menu", 0);
   if("" + param_00 != "callback") {
-    if(isbot(self) || function_026D(self)) {
+    if(isbot(self) || istestclient(self)) {
       self.pers["class"] = param_00;
-      self.var_2319 = param_00;
+      self.class = param_00;
       maps\mp\gametypes\_class::func_23DC();
       return;
     }
 
     var_01 = param_00 + 1;
-    var_01 = func_445C(var_01);
+    var_01 = getclasschoice(var_01);
     if(!isDefined(self.pers["class"]) || var_01 == self.pers["class"]) {
       return;
     }
 
     self.pers["class"] = var_01;
-    self.var_2319 = var_01;
+    self.class = var_01;
     maps\mp\gametypes\_class::func_23DC();
     thread func_6112();
     return;
@@ -155,7 +155,7 @@ func_4AD2() {
 
 func_4AFB(param_00) {
   if(!getdvarint("3193") && level.gametype != "infect") {
-    if(maps\mp\_utility::func_602B() && !getdvarint("850") && !getdvarint("5357")) {
+    if(maps\mp\_utility::matchmakinggame() && !getdvarint("850") && !getdvarint("5357")) {
       return;
     }
   }
@@ -361,7 +361,7 @@ func_8730() {
   self notify("becameSpectator");
   func_09FC("spectator");
   self.pers["class"] = undefined;
-  self.var_2319 = undefined;
+  self.class = undefined;
   thread maps\mp\gametypes\_playerlogic::func_90A5();
 }
 
@@ -391,14 +391,14 @@ func_A69A() {
     }
 
     if("" + var_01 != "callback") {
-      if(isbot(self) || function_026D(self)) {
+      if(isbot(self) || istestclient(self)) {
         self.pers["class"] = var_01;
-        self.var_2319 = var_01;
+        self.class = var_01;
         maps\mp\gametypes\_class::func_23DC();
       } else {
         var_01 = var_01 + 1;
-        self.pers["class"] = func_445C(var_01);
-        self.var_2319 = func_445C(var_01);
+        self.pers["class"] = getclasschoice(var_01);
+        self.class = getclasschoice(var_01);
         maps\mp\gametypes\_class::func_23DC();
       }
 
@@ -478,7 +478,7 @@ func_170E(param_00) {
 func_1DE9() {
   maps\mp\gametypes\_class::func_23DC();
   self.var_83A7 = 1;
-  self.var_2319 = "class0";
+  self.class = "class0";
   if(isDefined(level.var_1DEA)) {
     self[[level.var_1DEA]]();
   }
@@ -507,7 +507,7 @@ func_6116() {
 
   func_09FC("spectator");
   self.pers["class"] = undefined;
-  self.var_2319 = undefined;
+  self.class = undefined;
   maps\mp\gametypes\_class::func_23DC();
   thread maps\mp\gametypes\_playerlogic::func_90A5();
 }
@@ -547,7 +547,7 @@ func_6112() {
       self method_8533(0);
     }
 
-    maps\mp\gametypes\_class::func_864F(self.pers["class"]);
+    maps\mp\gametypes\_class::setclass(self.pers["class"]);
     self.var_95AE = undefined;
     self.var_95AF = undefined;
     maps\mp\gametypes\_class::func_4790(self.pers["team"], self.pers["class"]);
@@ -573,8 +573,8 @@ func_6112() {
 
 func_6111(param_00) {
   var_01 = self.pers["team"];
-  var_02 = maps\mp\gametypes\_class::func_445C(param_00);
-  var_03 = maps\mp\gametypes\_class::func_4729(param_00);
+  var_02 = maps\mp\gametypes\_class::getclasschoice(param_00);
+  var_03 = maps\mp\gametypes\_class::getweaponchoice(param_00);
   if(var_02 == "restricted") {
     func_170E();
     return;
@@ -591,11 +591,11 @@ func_6111(param_00) {
   if(self.sessionstate == "playing") {
     if(isDefined(self.pers["lastClass"]) && isDefined(self.pers["class"])) {
       self.pers["lastClass"] = self.pers["class"];
-      self.var_5B84 = self.pers["lastClass"];
+      self.lastclass = self.pers["lastClass"];
     }
 
     self.pers["class"] = var_02;
-    self.var_2319 = var_02;
+    self.class = var_02;
     maps\mp\gametypes\_class::func_23DC();
     self.pers["primary"] = var_03;
     if(game["state"] == "postgame") {
@@ -606,11 +606,11 @@ func_6111(param_00) {
   } else {
     if(isDefined(self.pers["lastClass"]) && isDefined(self.pers["class"])) {
       self.pers["lastClass"] = self.pers["class"];
-      self.var_5B84 = self.pers["lastClass"];
+      self.lastclass = self.pers["lastClass"];
     }
 
     self.pers["class"] = var_02;
-    self.var_2319 = var_02;
+    self.class = var_02;
     maps\mp\gametypes\_class::func_23DC();
     self.pers["primary"] = var_03;
     if(game["state"] == "postgame") {
@@ -637,7 +637,7 @@ func_09FC(param_00, param_01, param_02) {
 
   self.pers["team"] = param_00;
   self.team = param_00;
-  if(!getdvarint("4036", 0) && getdvarint("3193") || !maps\mp\_utility::func_602B() || isbot(self) || function_026D(self) || !maps\mp\_utility::func_C2D() || getdvarint("850") || getdvarint("5357")) {
+  if(!getdvarint("4036", 0) && getdvarint("3193") || !maps\mp\_utility::matchmakinggame() || isbot(self) || istestclient(self) || !maps\mp\_utility::func_C2D() || getdvarint("850") || getdvarint("5357")) {
     if(level.teambased) {
       self.sessionteam = param_00;
     } else if(param_00 == "spectator") {
@@ -647,7 +647,7 @@ func_09FC(param_00, param_01, param_02) {
     }
   }
 
-  if(isdedicatedserver() && !function_0367() && level.teambased && !isbot(self) || function_026D(self) && self.sessionteam == "none") {
+  if(isdedicatedserver() && !function_0367() && level.teambased && !isbot(self) || istestclient(self) && self.sessionteam == "none") {
     var_03 = getmatchdata("match_common", "matchID");
     self dlogevent("telemetry_error_event", ["error", ["category_id", 14, "message", "no team assigned", "code", 0, "stack_trace", "", "match_id", var_03]]);
   }
@@ -660,14 +660,14 @@ func_09FC(param_00, param_01, param_02) {
   }
 
   if(!maps\mp\_utility::func_579B()) {
-    maps\mp\_utility::func_A143();
+    maps\mp\_utility::updateobjectivetext();
   }
 
   if(isDefined(param_01) && param_01) {
     waittillframeend;
   }
 
-  maps\mp\_utility::func_A132();
+  maps\mp\_utility::updatemainmenu();
   if(param_00 == "spectator") {
     self notify("joined_spectators");
     level notify("joined_team", self);

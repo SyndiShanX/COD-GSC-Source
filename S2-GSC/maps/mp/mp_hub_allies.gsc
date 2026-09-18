@@ -116,7 +116,7 @@ func_63D6() {
   }
 
   var_00 = tolower(getDvar("hub_reveal_remove_nametags_on_kit"));
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(tolower(var_02.var_0109) == var_00) {
       var_02 maps\mp\gametypes\_hub_unk1::func_4D02();
       break;
@@ -134,7 +134,7 @@ func_6364() {
   }
 
   var_00 = tolower(getDvar("hub_reveal_add_nametags_on_kit"));
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(tolower(var_02.var_0109) == var_00) {
       var_02 maps\mp\gametypes\_hub_unk1::func_8BEB();
       break;
@@ -367,7 +367,7 @@ func_9152() {
     var_03.var_001D = var_02.var_001D;
     var_03 method_8278("generic_land_driver_idle");
     var_03.var_01A5 = "truckDriver";
-    var_03 method_8449(var_02, "tag_origin", (38, 10, 42), (0, 0, 0));
+    var_03 linktosynchronizedparent(var_02, "tag_origin", (38, 10, 42), (0, 0, 0));
     var_01++;
     wait(95);
   }
@@ -395,7 +395,7 @@ func_4AF6() {
   var_03 maps\mp\gametypes\_hub_unk1::func_8627();
   var_03.var_001D = var_00.var_001D;
   var_03 method_8278("generic_land_driver_idle");
-  var_03 method_8449(var_02, "tag_origin", (38, 10, 42), (0, 0, 0));
+  var_03 linktosynchronizedparent(var_02, "tag_origin", (38, 10, 42), (0, 0, 0));
   var_04 = spawn("script_model", var_01.var_0116);
   var_04 setModel("vehicle_usa_trans_cckw_base_hub");
   var_04.var_001D = var_01.var_001D;
@@ -404,7 +404,7 @@ func_4AF6() {
   var_05 maps\mp\gametypes\_hub_unk1::func_8627();
   var_05.var_001D = var_01.var_001D;
   var_05 method_8278("generic_land_driver_idle");
-  var_05 method_8449(var_04, "tag_origin", (38, 10, 42), (0, 0, 0));
+  var_05 linktosynchronizedparent(var_04, "tag_origin", (38, 10, 42), (0, 0, 0));
   var_02 thread func_4AF5("mp_hub_beach_road_truck_f", var_00);
   var_04 thread func_4AF5("mp_hub_beach_road_truck_e", var_01);
   lib_0378::func_8D74("truck_grp_b_moving", var_02, var_04);
@@ -660,7 +660,7 @@ begindevicesequence() {
   var_01 = 0;
   var_02 = 10;
   for(var_03 = 0; var_03 < var_02; var_03++) {
-    var_04 = common_scripts\utility::func_7A33(level.devicestructs);
+    var_04 = common_scripts\utility::random(level.devicestructs);
     var_00[var_03] = var_04;
     level.devicestructs = common_scripts\utility::func_0F93(level.devicestructs, var_04);
   }

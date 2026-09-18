@@ -29,7 +29,7 @@ func_1A0D(param_00, param_01) {
         if(common_scripts\utility::func_F79(var_04, param_01)) {
           var_05 = param_01;
         } else {
-          var_05 = common_scripts\utility::func_7A33(var_04);
+          var_05 = common_scripts\utility::random(var_04);
         }
 
         maps / mp / bots / _bots_util::func_1AD5(var_05);

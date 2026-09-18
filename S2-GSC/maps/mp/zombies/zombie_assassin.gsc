@@ -35,7 +35,7 @@ init() {
 init_assassin_phase_handler() {
   var_00 = spawnStruct();
   var_00.var_3F02 = ::lib_0547::func_4B2C;
-  var_00.var_A281 = 0;
+  var_00.value = 0;
   register_assassin_phase("Phase 1: Entrance", "Phase 2: IDLE TRANSITION", ::prowl_timeout_func, [0.2], ["assassin_was_koed", "zmb_assassin_is_alarmed"], [var_00]);
   register_assassin_phase("Phase 2: IDLE TRANSITION", "Phase 2: IDLE", ::assassin_begin_ambush, [], ["assassin_was_koed", "zmb_assassin_is_alarmed"], [var_00]);
   register_assassin_phase("Phase 2: IDLE", "Phase 2: EXIT AMBUSH", ::assassin_continue_ambush, [], ["assassin_was_koed", "zmb_assassin_is_alarmed"], [var_00]);
@@ -110,7 +110,7 @@ assassin_get_action_params() {
   var_00 = lib_054D::func_AC22();
   var_00["action_table"] = "zombie_assassin";
   var_00["zombie_subtype"] = "zombie_assassin";
-  var_00["move_speed"] = self.var_108;
+  var_00["move_speed"] = self.vectortoangles;
   if(self.prowl_timer < 2 && common_scripts\utility::func_3794("Phase 1: Entrance")) {
     var_00["script_var"] = "looking_to_crouch";
   } else {
@@ -950,7 +950,7 @@ start_assassin_taunt() {
   self endon("death");
   self endon("stop_assassin_vocals");
   while(isDefined(self)) {
-    var_00 = common_scripts\utility::func_7A33(level.players);
+    var_00 = common_scripts\utility::random(level.players);
     var_01 = randomint(256) - 128;
     var_02 = randomint(256) - 128;
     var_03 = randomint(256) - 128;
@@ -1130,7 +1130,7 @@ phase_handler(param_00) {
   var_01 = assassin_has_excuse_to_skip(param_00);
   if(!var_01) {
     foreach(var_03 in param_00.reasons_to_block_progress) {
-      if(self[[var_03.var_3F02]]() == var_03.var_A281) {
+      if(self[[var_03.var_3F02]]() == var_03.value) {
         return;
       }
     }
@@ -1188,7 +1188,7 @@ report_damage(param_00, param_01) {
 }
 
 init_assassin_vo_flags() {
-  common_scripts\utility::func_3C87("special_assassin_sighting");
+  common_scripts\utility::flag_init("special_assassin_sighting");
   level.asn_dmg_flags = [];
   level.asn_dmg_flags["zombie_assassin"] = "zombie_assassinasn_damaged";
   level.asn_dmg_flags["zombie_assassin_frontline"] = "zombie_assassin_frontlineasn_damaged";
@@ -1196,7 +1196,7 @@ init_assassin_vo_flags() {
   level.asn_dmg_flags["zombie_assassin_shellshock"] = "zombie_assassin_shellshockasn_damaged";
   level.asn_dmg_flags["zombie_assassin_camoflauge"] = "zombie_assassin_camoflaugeasn_damaged";
   foreach(var_01 in level.asn_dmg_flags) {
-    common_scripts\utility::func_3C87(var_01);
+    common_scripts\utility::flag_init(var_01);
   }
 }
 

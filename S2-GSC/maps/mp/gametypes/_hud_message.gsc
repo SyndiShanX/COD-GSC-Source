@@ -53,18 +53,18 @@ init() {
 onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
-    var_00 thread func_5F2C();
-    var_00 thread func_5320();
+    var_00 thread lowermessagethink();
+    var_00 thread initnotifymessage();
   }
 }
 
-func_4DC1(param_00) {
+hintmessage(param_00) {
   var_01 = spawnStruct();
-  var_01.var_6811 = param_00;
-  func_680B(var_01);
+  var_01.notifytext = param_00;
+  notifymessage(var_01);
 }
 
-func_5320() {
+initnotifymessage() {
   if((level.splitscreen || self issplitscreenplayer()) && !function_03BA()) {
     var_00 = 1.5;
     var_01 = 1.25;
@@ -85,95 +85,95 @@ func_5320() {
     var_07 = 0;
   }
 
-  self.var_6813 = maps\mp\gametypes\_hud_util::createfontstring(var_03, var_00);
-  self.var_6813 maps\mp\gametypes\_hud_util::setpoint(var_04, undefined, var_07, var_06);
-  self.var_6813.hidewheninmenu = 1;
-  self.var_6813.archived = 0;
-  self.var_6813.alpha = 0;
-  self.var_6811 = maps\mp\gametypes\_hud_util::createfontstring(var_03, var_01);
-  self.var_6811 maps\mp\gametypes\_hud_util::setparent(self.var_6813);
-  self.var_6811 maps\mp\gametypes\_hud_util::setpoint(var_04, var_05, 0, 0);
-  self.var_6811.hidewheninmenu = 1;
-  self.var_6811.archived = 0;
-  self.var_6811.alpha = 0;
-  self.var_6812 = maps\mp\gametypes\_hud_util::createfontstring(var_03, var_01);
-  self.var_6812 maps\mp\gametypes\_hud_util::setparent(self.var_6813);
-  self.var_6812 maps\mp\gametypes\_hud_util::setpoint(var_04, var_05, 0, 0);
-  self.var_6812.hidewheninmenu = 1;
-  self.var_6812.archived = 0;
-  self.var_6812.alpha = 0;
-  self.var_680A = maps\mp\gametypes\_hud_util::createicon("white", var_02, var_02);
-  self.var_680A maps\mp\gametypes\_hud_util::setparent(self.var_6812);
-  self.var_680A maps\mp\gametypes\_hud_util::setpoint(var_04, var_05, 0, 0);
-  self.var_680A.hidewheninmenu = 1;
-  self.var_680A.archived = 0;
-  self.var_680A.alpha = 0;
-  self.var_680F = maps\mp\gametypes\_hud_util::createicon("white", var_02, var_02);
-  self.var_680F maps\mp\gametypes\_hud_util::setparent(self.var_680A);
-  self.var_680F maps\mp\gametypes\_hud_util::setpoint("CENTER", "CENTER", 0, 0);
-  self.var_680F.hidewheninmenu = 1;
-  self.var_680F.archived = 0;
-  self.var_680F.alpha = 0;
-  self.var_3202 = [];
-  self.var_3202[0] = undefined;
-  self.var_3202[1] = undefined;
-  self.var_3202[2] = undefined;
-  self.var_3202[3] = undefined;
-  self.var_9106 = [];
-  self.var_9106[0] = [];
-  self.var_9106[1] = [];
-  self.var_9106[2] = [];
-  self.var_9106[3] = [];
+  self.notifytitle = maps\mp\gametypes\_hud_util::createfontstring(var_03, var_00);
+  self.notifytitle maps\mp\gametypes\_hud_util::setpoint(var_04, undefined, var_07, var_06);
+  self.notifytitle.hidewheninmenu = 1;
+  self.notifytitle.archived = 0;
+  self.notifytitle.alpha = 0;
+  self.notifytext = maps\mp\gametypes\_hud_util::createfontstring(var_03, var_01);
+  self.notifytext maps\mp\gametypes\_hud_util::setparent(self.notifytitle);
+  self.notifytext maps\mp\gametypes\_hud_util::setpoint(var_04, var_05, 0, 0);
+  self.notifytext.hidewheninmenu = 1;
+  self.notifytext.archived = 0;
+  self.notifytext.alpha = 0;
+  self.notifytext2 = maps\mp\gametypes\_hud_util::createfontstring(var_03, var_01);
+  self.notifytext2 maps\mp\gametypes\_hud_util::setparent(self.notifytitle);
+  self.notifytext2 maps\mp\gametypes\_hud_util::setpoint(var_04, var_05, 0, 0);
+  self.notifytext2.hidewheninmenu = 1;
+  self.notifytext2.archived = 0;
+  self.notifytext2.alpha = 0;
+  self.notifyicon = maps\mp\gametypes\_hud_util::createicon("white", var_02, var_02);
+  self.notifyicon maps\mp\gametypes\_hud_util::setparent(self.notifytext2);
+  self.notifyicon maps\mp\gametypes\_hud_util::setpoint(var_04, var_05, 0, 0);
+  self.notifyicon.hidewheninmenu = 1;
+  self.notifyicon.archived = 0;
+  self.notifyicon.alpha = 0;
+  self.notifyoverlay = maps\mp\gametypes\_hud_util::createicon("white", var_02, var_02);
+  self.notifyoverlay maps\mp\gametypes\_hud_util::setparent(self.notifyicon);
+  self.notifyoverlay maps\mp\gametypes\_hud_util::setpoint("CENTER", "CENTER", 0, 0);
+  self.notifyoverlay.hidewheninmenu = 1;
+  self.notifyoverlay.archived = 0;
+  self.notifyoverlay.alpha = 0;
+  self.doingsplash = [];
+  self.doingsplash[0] = undefined;
+  self.doingsplash[1] = undefined;
+  self.doingsplash[2] = undefined;
+  self.doingsplash[3] = undefined;
+  self.splashqueue = [];
+  self.splashqueue[0] = [];
+  self.splashqueue[1] = [];
+  self.splashqueue[2] = [];
+  self.splashqueue[3] = [];
 }
 
-func_6A64(param_00, param_01, param_02, param_03, param_04, param_05) {
+oldnotifymessage(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = spawnStruct();
-  var_06.var_9A2E = param_00;
-  var_06.var_6811 = param_01;
-  var_06.var_5019 = param_02;
+  var_06.titletext = param_00;
+  var_06.notifytext = param_01;
+  var_06.iconname = param_02;
   var_06.glowcolor = param_03;
-  var_06.var_8F2C = param_04;
-  var_06.var_3511 = param_05;
-  func_680B(var_06);
+  var_06.sound = param_04;
+  var_06.duration = param_05;
+  notifymessage(var_06);
 }
 
-func_680B(param_00) {
+notifymessage(param_00) {
   self endon("death");
   self endon("disconnect");
-  if(!isDefined(param_00.var_8CA3)) {
-    param_00.var_8CA3 = 0;
+  if(!isDefined(param_00.slot)) {
+    param_00.slot = 0;
   }
 
-  var_01 = param_00.var_8CA3;
+  var_01 = param_00.slot;
   if(!isDefined(param_00.type)) {
     param_00.type = "";
   }
 
-  if(!isDefined(self.var_3202[var_01])) {
-    thread func_8C0F(param_00);
+  if(!isDefined(self.doingsplash[var_01])) {
+    thread shownotifymessage(param_00);
     return;
   }
 
-  self.var_9106[var_01][self.var_9106[var_01].size] = param_00;
+  self.splashqueue[var_01][self.splashqueue[var_01].size] = param_00;
 }
 
-func_2FEF(param_00) {
+dispatchnotify(param_00) {
   waittillframeend;
-  var_01 = self.var_9106[param_00][0];
-  for(var_02 = 1; var_02 < self.var_9106[param_00].size; var_02++) {
-    self.var_9106[param_00][var_02 - 1] = self.var_9106[param_00][var_02];
+  var_01 = self.splashqueue[param_00][0];
+  for(var_02 = 1; var_02 < self.splashqueue[param_00].size; var_02++) {
+    self.splashqueue[param_00][var_02 - 1] = self.splashqueue[param_00][var_02];
   }
 
-  self.var_9106[param_00][var_02 - 1] = undefined;
+  self.splashqueue[param_00][var_02 - 1] = undefined;
   if(isDefined(var_01.name)) {
     func_0884(var_01);
     return;
   }
 
-  func_8C0F(var_01);
+  shownotifymessage(var_01);
 }
 
-func_7777() {
+promotionsplashnotify() {
   if(!isPlayer(self)) {
     return;
   }
@@ -182,13 +182,13 @@ func_7777() {
   var_00 = spawnStruct();
   var_01 = "promotion";
   var_00.name = var_01;
-  var_00.type = tablelookup(func_4369(), 0, var_01, 11);
-  var_00.var_8F2C = tablelookup(func_4369(), 0, var_01, 9);
-  var_00.var_8CA3 = 0;
+  var_00.type = tablelookup(get_splash_table(), 0, var_01, 11);
+  var_00.sound = tablelookup(get_splash_table(), 0, var_01, 9);
+  var_00.slot = 0;
   thread func_0884(var_00);
 }
 
-func_7A6A(param_00) {
+ranksplashnotify(param_00) {
   if(!isPlayer(self)) {
     return;
   }
@@ -197,163 +197,163 @@ func_7A6A(param_00) {
   var_01 = spawnStruct();
   var_02 = "callout_rankPromoted";
   var_01.name = var_02;
-  var_01.type = tablelookup(func_4369(), 0, var_02, 11);
-  var_01.var_8F2C = tablelookup(func_4369(), 0, var_02, 9);
+  var_01.type = tablelookup(get_splash_table(), 0, var_02, 11);
+  var_01.sound = tablelookup(get_splash_table(), 0, var_02, 9);
   var_01.var_73C1 = param_00;
-  var_01.var_8CA3 = 0;
+  var_01.slot = 0;
   if(var_01.type == "playercard_splash") {
-    var_01.var_8CA3 = 1;
+    var_01.slot = 1;
   }
 
   thread func_0884(var_01);
 }
 
-func_8C0F(param_00) {
+shownotifymessage(param_00) {
   self endon("disconnect");
-  var_01 = param_00.var_8CA3;
+  var_01 = param_00.slot;
   if(level.gameended) {
     if(isDefined(param_00.type) && param_00.type == "rank") {
       self setclientdvar("ui_promotion", 1);
-      self.var_75E5 = 1;
+      self.postgamepromotion = 1;
     }
 
-    if(self.var_9106[var_01].size) {
-      thread func_2FEF(var_01);
+    if(self.splashqueue[var_01].size) {
+      thread dispatchnotify(var_01);
     }
 
     return;
   }
 
-  self.var_3202[var_01] = param_00;
-  thread func_7D65();
-  func_A6F9(0);
-  if(isDefined(param_00.var_3511)) {
-    var_02 = param_00.var_3511;
+  self.doingsplash[var_01] = param_00;
+  thread resetoncancel();
+  waitrequirevisibility(0);
+  if(isDefined(param_00.duration)) {
+    var_02 = param_00.duration;
   } else if(level.gameended) {
     var_02 = 2;
   } else {
     var_02 = 4;
   }
 
-  if(isDefined(param_00.var_8F2C)) {
-    self playlocalsound(param_00.var_8F2C);
+  if(isDefined(param_00.sound)) {
+    self playlocalsound(param_00.sound);
   }
 
-  if(isDefined(param_00.var_5C49)) {
-    maps\mp\_utility::func_5C43(param_00.var_5C49);
+  if(isDefined(param_00.leadersound)) {
+    maps\mp\_utility::leaderdialogonplayer(param_00.leadersound);
   }
 
   var_03 = param_00.glowcolor;
-  var_04 = self.var_6813;
-  if(isDefined(param_00.var_9A2E)) {
-    if(isDefined(param_00.var_9A2D)) {
-      self.var_6813.label = param_00.var_9A2D;
+  var_04 = self.notifytitle;
+  if(isDefined(param_00.titletext)) {
+    if(isDefined(param_00.titlelabel)) {
+      self.notifytitle.label = param_00.titlelabel;
     } else {
-      self.var_6813.label = &"";
+      self.notifytitle.label = &"";
     }
 
-    if(isDefined(param_00.var_9A2D) && !isDefined(param_00.var_9A2C)) {
-      self.var_6813 setvalue(param_00.var_9A2E);
+    if(isDefined(param_00.titlelabel) && !isDefined(param_00.titleisstring)) {
+      self.notifytitle setvalue(param_00.titletext);
     } else {
-      self.var_6813 settext(param_00.var_9A2E);
+      self.notifytitle settext(param_00.titletext);
     }
 
     if(isDefined(var_03)) {
-      self.var_6813.glowcolor = var_03;
+      self.notifytitle.glowcolor = var_03;
     }
 
-    self.var_6813.alpha = 1;
-    self.var_6813 fadeovertime(var_02 * 1.25);
-    self.var_6813.alpha = 0;
+    self.notifytitle.alpha = 1;
+    self.notifytitle fadeovertime(var_02 * 1.25);
+    self.notifytitle.alpha = 0;
   }
 
-  if(isDefined(param_00.var_992B)) {
-    var_03 = param_00.var_992B;
+  if(isDefined(param_00.textglowcolor)) {
+    var_03 = param_00.textglowcolor;
   }
 
-  if(isDefined(param_00.var_6811)) {
+  if(isDefined(param_00.notifytext)) {
     if(isDefined(param_00.var_992E)) {
-      self.var_6811.label = param_00.var_992E;
+      self.notifytext.label = param_00.var_992E;
     } else {
-      self.var_6811.label = &"";
+      self.notifytext.label = &"";
     }
 
     if(isDefined(param_00.var_992E) && !isDefined(param_00.var_992D)) {
-      self.var_6811 setvalue(param_00.var_6811);
+      self.notifytext setvalue(param_00.notifytext);
     } else {
-      self.var_6811 settext(param_00.var_6811);
+      self.notifytext settext(param_00.notifytext);
     }
 
     if(isDefined(var_03)) {
-      self.var_6811.glowcolor = var_03;
+      self.notifytext.glowcolor = var_03;
     }
 
-    self.var_6811.alpha = 1;
-    self.var_6811 fadeovertime(var_02 * 1.25);
-    self.var_6811.alpha = 0;
-    var_04 = self.var_6811;
+    self.notifytext.alpha = 1;
+    self.notifytext fadeovertime(var_02 * 1.25);
+    self.notifytext.alpha = 0;
+    var_04 = self.notifytext;
   }
 
-  if(isDefined(param_00.var_6812)) {
-    self.var_6812 maps\mp\gametypes\_hud_util::setparent(var_04);
-    if(isDefined(param_00.var_9928)) {
-      self.var_6812.label = param_00.var_9928;
+  if(isDefined(param_00.notifytext2)) {
+    self.notifytext2 maps\mp\gametypes\_hud_util::setparent(var_04);
+    if(isDefined(param_00.text2label)) {
+      self.notifytext2.label = param_00.text2label;
     } else {
-      self.var_6812.label = &"";
+      self.notifytext2.label = &"";
     }
 
-    self.var_6812 settext(param_00.var_6812);
+    self.notifytext2 settext(param_00.notifytext2);
     if(isDefined(var_03)) {
-      self.var_6812.glowcolor = var_03;
+      self.notifytext2.glowcolor = var_03;
     }
 
-    self.var_6812.alpha = 1;
-    self.var_6812 fadeovertime(var_02 * 1.25);
-    self.var_6812.alpha = 0;
-    var_04 = self.var_6812;
+    self.notifytext2.alpha = 1;
+    self.notifytext2 fadeovertime(var_02 * 1.25);
+    self.notifytext2.alpha = 0;
+    var_04 = self.notifytext2;
   }
 
-  if(isDefined(param_00.var_5019)) {
-    self.var_680A maps\mp\gametypes\_hud_util::setparent(var_04);
+  if(isDefined(param_00.iconname)) {
+    self.notifyicon maps\mp\gametypes\_hud_util::setparent(var_04);
     if((level.splitscreen || self issplitscreenplayer()) && !function_03BA()) {
-      self.var_680A setshader(param_00.var_5019, 30, 30);
+      self.notifyicon setshader(param_00.iconname, 30, 30);
     } else {
-      self.var_680A setshader(param_00.var_5019, 60, 60);
+      self.notifyicon setshader(param_00.iconname, 60, 60);
     }
 
-    self.var_680A.alpha = 0;
-    if(isDefined(param_00.var_501E)) {
-      self.var_680A fadeovertime(0.15);
-      self.var_680A.alpha = 1;
-      param_00.var_6CAE = 0;
-      self.var_680F maps\mp\gametypes\_hud_util::setparent(self.var_680A);
-      self.var_680F maps\mp\gametypes\_hud_util::setpoint("CENTER", "CENTER", 0, param_00.var_6CAE);
-      self.var_680F setshader(param_00.var_501E, 511, 511);
-      self.var_680F.alpha = 0;
-      self.var_680F.color = game["colors"]["orange"];
-      self.var_680F fadeovertime(0.4);
-      self.var_680F.alpha = 0.85;
-      self.var_680F scaleovertime(0.4, 32, 32);
-      func_A6F9(var_02);
-      self.var_680A fadeovertime(0.75);
-      self.var_680A.alpha = 0;
-      self.var_680F fadeovertime(0.75);
-      self.var_680F.alpha = 0;
+    self.notifyicon.alpha = 0;
+    if(isDefined(param_00.iconoverlay)) {
+      self.notifyicon fadeovertime(0.15);
+      self.notifyicon.alpha = 1;
+      param_00.overlayoffsety = 0;
+      self.notifyoverlay maps\mp\gametypes\_hud_util::setparent(self.notifyicon);
+      self.notifyoverlay maps\mp\gametypes\_hud_util::setpoint("CENTER", "CENTER", 0, param_00.overlayoffsety);
+      self.notifyoverlay setshader(param_00.iconoverlay, 511, 511);
+      self.notifyoverlay.alpha = 0;
+      self.notifyoverlay.color = game["colors"]["orange"];
+      self.notifyoverlay fadeovertime(0.4);
+      self.notifyoverlay.alpha = 0.85;
+      self.notifyoverlay scaleovertime(0.4, 32, 32);
+      waitrequirevisibility(var_02);
+      self.notifyicon fadeovertime(0.75);
+      self.notifyicon.alpha = 0;
+      self.notifyoverlay fadeovertime(0.75);
+      self.notifyoverlay.alpha = 0;
     } else {
-      self.var_680A fadeovertime(1);
-      self.var_680A.alpha = 1;
-      func_A6F9(var_02);
-      self.var_680A fadeovertime(0.75);
-      self.var_680A.alpha = 0;
+      self.notifyicon fadeovertime(1);
+      self.notifyicon.alpha = 1;
+      waitrequirevisibility(var_02);
+      self.notifyicon fadeovertime(0.75);
+      self.notifyicon.alpha = 0;
     }
   } else {
-    func_A6F9(var_02);
+    waitrequirevisibility(var_02);
   }
 
   self notify("notifyMessageDone");
-  self.var_3202[var_01] = undefined;
-  if(self.var_9106[var_01].size) {
-    thread func_2FEF(var_01);
+  self.doingsplash[var_01] = undefined;
+  if(self.splashqueue[var_01].size) {
+    thread dispatchnotify(var_01);
   }
 }
 
@@ -370,15 +370,15 @@ func_265F(param_00, param_01) {
 
   var_02 = spawnStruct();
   var_02.name = param_00;
-  var_02.type = tablelookup(func_4369(), 0, param_00, 11);
-  var_02.var_6C18 = 0;
-  var_02.var_8F2C = tablelookup(func_4369(), 0, param_00, 9);
-  var_02.var_5C49 = param_01;
-  var_02.var_8CA3 = 0;
+  var_02.type = tablelookup(get_splash_table(), 0, param_00, 11);
+  var_02.optionalnumber = 0;
+  var_02.sound = tablelookup(get_splash_table(), 0, param_00, 9);
+  var_02.leadersound = param_01;
+  var_02.slot = 0;
   thread func_0884(var_02);
 }
 
-func_5A78(param_00, param_01, param_02, param_03, param_04) {
+killstreaksplashnotify(param_00, param_01, param_02, param_03, param_04) {
   if(!isPlayer(self)) {
     return;
   }
@@ -399,15 +399,15 @@ func_5A78(param_00, param_01, param_02, param_03, param_04) {
   }
 
   var_05.name = param_00;
-  var_05.type = tablelookup(func_4369(), 0, param_00, 11);
-  var_05.var_6C18 = param_01;
-  var_05.var_8F2C = maps\mp\_utility::func_4547(param_00);
-  var_05.var_5C49 = param_00;
-  var_05.var_5C4A = "killstreak_earned";
-  var_05.var_8CA3 = 0;
+  var_05.type = tablelookup(get_splash_table(), 0, param_00, 11);
+  var_05.optionalnumber = param_01;
+  var_05.sound = maps\mp\_utility::func_4547(param_00);
+  var_05.leadersound = param_00;
+  var_05.leadersoundgroup = "killstreak_earned";
+  var_05.slot = 0;
   var_05.var_5A76 = param_03;
   if(isDefined(param_04)) {
-    var_05.var_5C49 = param_04;
+    var_05.leadersound = param_04;
   }
 
   thread func_0884(var_05);
@@ -433,11 +433,11 @@ challengesplashnotify(param_00, param_01, param_02) {
 
     var_05 = spawnStruct();
     var_05.name = param_00;
-    var_05.type = tablelookup(func_4369(), 0, param_00, 11);
+    var_05.type = tablelookup(get_splash_table(), 0, param_00, 11);
     var_05.var_20AC = var_03;
-    var_05.var_6C18 = var_04;
-    var_05.var_8F2C = tablelookup(func_4369(), 0, param_00, 9);
-    var_05.var_8CA3 = 0;
+    var_05.optionalnumber = var_04;
+    var_05.sound = tablelookup(get_splash_table(), 0, param_00, 9);
+    var_05.slot = 0;
     thread func_0884(var_05);
   }
 }
@@ -451,15 +451,15 @@ func_9102(param_00, param_01, param_02) {
   wait 0.05;
   var_03 = spawnStruct();
   var_03.name = param_00;
-  var_03.type = tablelookup(func_4369(), 0, param_00, 11);
-  var_03.var_6C18 = param_01;
-  var_03.var_8F2C = tablelookup(func_4369(), 0, var_03.name, 9);
+  var_03.type = tablelookup(get_splash_table(), 0, param_00, 11);
+  var_03.optionalnumber = param_01;
+  var_03.sound = tablelookup(get_splash_table(), 0, var_03.name, 9);
   if(!isDefined(param_02)) {
     param_02 = -1;
   }
 
   var_03.var_5A76 = param_02;
-  var_03.var_8CA3 = 0;
+  var_03.slot = 0;
   if(common_scripts\utility::func_562E(level.var_2FA1)) {
     switch (var_03.type) {
       case "specialist_splash":
@@ -486,10 +486,10 @@ func_9104(param_00, param_01) {
   wait 0.05;
   var_02 = spawnStruct();
   var_02.name = param_00;
-  var_02.type = tablelookup(func_4369(), 0, param_00, 11);
-  var_02.var_6C18 = param_01;
-  var_02.var_8F2C = tablelookup(func_4369(), 0, param_00, 9);
-  var_02.var_8CA3 = 0;
+  var_02.type = tablelookup(get_splash_table(), 0, param_00, 11);
+  var_02.optionalnumber = param_01;
+  var_02.sound = tablelookup(get_splash_table(), 0, param_00, 9);
+  var_02.slot = 0;
   thread func_0884(var_02);
 }
 
@@ -506,10 +506,10 @@ func_9103(param_00, param_01) {
 
   var_02 = spawnStruct();
   var_02.name = param_00;
-  var_02.type = tablelookup(func_4369(), 0, param_00, 11);
-  var_02.var_6C18 = param_01;
-  var_02.var_8F2C = tablelookup(func_4369(), 0, param_00, 9);
-  var_02.var_8CA3 = 0;
+  var_02.type = tablelookup(get_splash_table(), 0, param_00, 11);
+  var_02.optionalnumber = param_01;
+  var_02.sound = tablelookup(get_splash_table(), 0, param_00, 9);
+  var_02.slot = 0;
   thread func_0884(var_02);
 }
 
@@ -526,14 +526,14 @@ func_7A6C(param_00, param_01, param_02) {
 
   var_03 = spawnStruct();
   var_03.name = param_00;
-  var_03.type = tablelookup(func_4369(), 0, param_00, 11);
-  var_03.var_8F2C = tablelookup(func_4369(), 0, param_00, 9);
+  var_03.type = tablelookup(get_splash_table(), 0, param_00, 11);
+  var_03.sound = tablelookup(get_splash_table(), 0, param_00, 9);
   var_03.var_7A65 = param_01;
   if(isDefined(param_02)) {
     var_03.var_76B0 = param_02;
   }
 
-  var_03.var_8CA3 = 0;
+  var_03.slot = 0;
   thread func_0884(var_03);
 }
 
@@ -550,10 +550,10 @@ func_A9DD(param_00, param_01, param_02) {
 
   var_03 = spawnStruct();
   var_03.name = param_00;
-  var_03.type = tablelookup(func_4369(), 0, param_00, 11);
-  var_03.var_8F2C = tablelookup(func_4369(), 0, param_00, 9);
+  var_03.type = tablelookup(get_splash_table(), 0, param_00, 11);
+  var_03.sound = tablelookup(get_splash_table(), 0, param_00, 9);
   var_03.var_A9D0 = param_02;
-  var_03.var_8CA3 = 0;
+  var_03.slot = 0;
   thread func_0884(var_03);
 }
 
@@ -570,14 +570,14 @@ func_3055(param_00, param_01) {
 
   var_02 = spawnStruct();
   var_02.name = param_00;
-  var_02.type = tablelookup(func_4369(), 0, param_00, 11);
-  var_02.var_8F2C = tablelookup(func_4369(), 0, param_00, 9);
+  var_02.type = tablelookup(get_splash_table(), 0, param_00, 11);
+  var_02.sound = tablelookup(get_splash_table(), 0, param_00, 9);
   var_02.var_3054 = param_01;
-  var_02.var_8CA3 = 0;
+  var_02.slot = 0;
   thread func_0884(var_02);
 }
 
-func_73C2(param_00, param_01, param_02) {
+playercardsplashnotify(param_00, param_01, param_02) {
   if(!isPlayer(self)) {
     return;
   }
@@ -590,13 +590,13 @@ func_73C2(param_00, param_01, param_02) {
 
   var_03 = spawnStruct();
   var_03.name = param_00;
-  var_03.type = tablelookup(func_4369(), 0, param_00, 11);
-  var_03.var_6C18 = param_02;
-  var_03.var_8F2C = tablelookup(func_4369(), 0, param_00, 9);
+  var_03.type = tablelookup(get_splash_table(), 0, param_00, 11);
+  var_03.optionalnumber = param_02;
+  var_03.sound = tablelookup(get_splash_table(), 0, param_00, 9);
   var_03.var_73C1 = param_01;
-  var_03.var_8CA3 = 0;
+  var_03.slot = 0;
   if(var_03.type == "playercard_splash") {
-    var_03.var_8CA3 = 1;
+    var_03.slot = 1;
   }
 
   thread func_0884(var_03);
@@ -605,12 +605,12 @@ func_73C2(param_00, param_01, param_02) {
 func_0884(param_00) {
   self endon("death");
   self endon("disconnect");
-  var_01 = param_00.var_8CA3;
+  var_01 = param_00.slot;
   if(!isDefined(param_00.type)) {
     param_00.type = "";
   }
 
-  if(!isDefined(self.var_3202[var_01])) {
+  if(!isDefined(self.doingsplash[var_01])) {
     thread func_0885(param_00);
     return;
   } else {
@@ -618,9 +618,9 @@ func_0884(param_00) {
       case "urgent_splash":
       case "specialist_splash":
       case "largewar_splash":
-        self.var_6811.alpha = 0;
-        self.var_6812.alpha = 0;
-        self.var_680A.alpha = 0;
+        self.notifytext.alpha = 0;
+        self.notifytext2.alpha = 0;
+        self.notifyicon.alpha = 0;
         self setclientomnvar("ui_splash_idx", -1);
         self setclientomnvar("ui_splash_killstreak_idx", -1);
         self setclientomnvar("ui_daily_challenge_idx", -1);
@@ -631,10 +631,10 @@ func_0884(param_00) {
       case "splash":
       case "killstreak_splash":
       case "killstreak_coop_splash":
-        if(self.var_3202[var_01].type != "splash" && self.var_3202[var_01].type != "urgent_splash" && self.var_3202[var_01].type != "largewar_splash" && self.var_3202[var_01].type != "killstreak_coop_splash" && self.var_3202[var_01].type != "killstreak_splash" && self.var_3202[var_01].type != "challenge_splash" && self.var_3202[var_01].type != "promotion_splash" && self.var_3202[var_01].type != "intel_splash" && self.var_3202[var_01].type != "rankup_splash" && self.var_3202[var_01].type != "weapon_level_splash" && self.var_3202[var_01].type != "division_level_splash" && self.var_3202[var_01].type != "daily_challenge_splash" && self.var_3202[var_01].type != "specialist_splash") {
-          self.var_6811.alpha = 0;
-          self.var_6812.alpha = 0;
-          self.var_680A.alpha = 0;
+        if(self.doingsplash[var_01].type != "splash" && self.doingsplash[var_01].type != "urgent_splash" && self.doingsplash[var_01].type != "largewar_splash" && self.doingsplash[var_01].type != "killstreak_coop_splash" && self.doingsplash[var_01].type != "killstreak_splash" && self.doingsplash[var_01].type != "challenge_splash" && self.doingsplash[var_01].type != "promotion_splash" && self.doingsplash[var_01].type != "intel_splash" && self.doingsplash[var_01].type != "rankup_splash" && self.doingsplash[var_01].type != "weapon_level_splash" && self.doingsplash[var_01].type != "division_level_splash" && self.doingsplash[var_01].type != "daily_challenge_splash" && self.doingsplash[var_01].type != "specialist_splash") {
+          self.notifytext.alpha = 0;
+          self.notifytext2.alpha = 0;
+          self.notifyicon.alpha = 0;
           thread func_0885(param_00);
           return;
         }
@@ -643,45 +643,45 @@ func_0884(param_00) {
   }
 
   if(param_00.type == "challenge_splash" || param_00.type == "killstreak_splash" || param_00.type == "killstreak_coop_splash" || param_00.type == "daily_challenge_splash") {
-    if(param_00.type == "daily_challenge_splash" && self.var_9106[var_01].size > 0) {
+    if(param_00.type == "daily_challenge_splash" && self.splashqueue[var_01].size > 0) {
       var_02 = "";
       if(issubstr(param_00.name, "_complete")) {
         var_02 = "_complete";
       }
 
-      foreach(var_04 in self.var_9106[var_01]) {
+      foreach(var_04 in self.splashqueue[var_01]) {
         if(var_04.name + var_02 == param_00.name) {
-          self.var_9106[var_01] = common_scripts\utility::func_F93(self.var_9106[var_01], var_04);
+          self.splashqueue[var_01] = common_scripts\utility::func_F93(self.splashqueue[var_01], var_04);
           break;
         }
       }
     }
 
-    for(var_06 = self.var_9106[var_01].size; var_06 > 0; var_06--) {
-      self.var_9106[var_01][var_06] = self.var_9106[var_01][var_06 - 1];
+    for(var_06 = self.splashqueue[var_01].size; var_06 > 0; var_06--) {
+      self.splashqueue[var_01][var_06] = self.splashqueue[var_01][var_06 - 1];
     }
 
-    self.var_9106[var_01][0] = param_00;
+    self.splashqueue[var_01][0] = param_00;
     return;
   }
 
-  self.var_9106[var_01][self.var_9106[var_01].size] = param_00;
+  self.splashqueue[var_01][self.splashqueue[var_01].size] = param_00;
 }
 
 func_0885(param_00) {
   self endon("disconnect");
-  var_01 = param_00.var_8CA3;
+  var_01 = param_00.slot;
   if(level.gameended) {
     if(isDefined(param_00.type) && param_00.type == "promotion_splash" || param_00.type == "promotion_weapon_splash") {
       self setclientdvar("ui_promotion", 1);
-      self.var_75E5 = 1;
+      self.postgamepromotion = 1;
     } else if(isDefined(param_00.type) && param_00.type == "challenge_splash") {
       self.pers["postGameChallenges"]++;
       self setclientdvar("ui_challenge_" + self.pers["postGameChallenges"] + "_ref", param_00.name);
     }
 
-    if(self.var_9106[var_01].size) {
-      thread func_2FEF(var_01);
+    if(self.splashqueue[var_01].size) {
+      thread dispatchnotify(var_01);
     }
 
     return;
@@ -691,9 +691,9 @@ func_0885(param_00) {
     self.var_66CE = 0;
   }
 
-  if(tablelookup(func_4369(), 0, param_00.name, 0) != "") {
-    var_02 = tablelookuprownum(func_4369(), 0, param_00.name);
-    var_03 = common_scripts\utility::func_9468(tablelookupbyrow(func_4369(), var_02, 4));
+  if(tablelookup(get_splash_table(), 0, param_00.name, 0) != "") {
+    var_02 = tablelookuprownum(get_splash_table(), 0, param_00.name);
+    var_03 = common_scripts\utility::stringtofloat(tablelookupbyrow(get_splash_table(), var_02, 4));
     switch (param_00.type) {
       case "killstreak_splash":
       case "killstreak_coop_splash":
@@ -709,8 +709,8 @@ func_0885(param_00) {
             self setclientomnvar("ui_splash_playercard_clientnum", param_00.var_73C1 getentitynumber());
           }
 
-          if(isDefined(param_00.var_6C18)) {
-            self setclientomnvar("ui_splash_playercard_optional_number", param_00.var_6C18);
+          if(isDefined(param_00.optionalnumber)) {
+            self setclientomnvar("ui_splash_playercard_optional_number", param_00.optionalnumber);
           }
         }
         break;
@@ -723,7 +723,7 @@ func_0885(param_00) {
       case "specialist_splash":
       case "challenge_splash":
       case "largewar_splash":
-        func_8C18(param_00.name, param_00.var_6C18);
+        func_8C18(param_00.name, param_00.optionalnumber);
         break;
 
       case "rankup_splash":
@@ -742,132 +742,132 @@ func_0885(param_00) {
         break;
     }
 
-    self.var_3202[var_01] = param_00;
-    if(isDefined(param_00.var_5C49)) {
-      if(isDefined(param_00.var_5C4A)) {
-        maps\mp\_utility::func_5C43(param_00.var_5C49, param_00.var_5C4A, 1);
+    self.doingsplash[var_01] = param_00;
+    if(isDefined(param_00.leadersound)) {
+      if(isDefined(param_00.leadersoundgroup)) {
+        maps\mp\_utility::leaderdialogonplayer(param_00.leadersound, param_00.leadersoundgroup, 1);
       } else {
-        maps\mp\_utility::func_5C43(param_00.var_5C49);
+        maps\mp\_utility::leaderdialogonplayer(param_00.leadersound);
       }
     }
 
     self notify("actionNotifyMessage" + var_01);
     self endon("actionNotifyMessage" + var_01);
-    self.var_3202[var_01] = undefined;
+    self.doingsplash[var_01] = undefined;
   }
 
-  if(self.var_9106[var_01].size) {
-    thread func_2FEF(var_01);
+  if(self.splashqueue[var_01].size) {
+    thread dispatchnotify(var_01);
   }
 }
 
-func_A6F9(param_00) {
+waitrequirevisibility(param_00) {
   var_01 = 0.05;
-  while(!func_1F68()) {
+  while(!canreadtext()) {
     wait(var_01);
   }
 
   while(param_00 > 0) {
     wait(var_01);
-    if(func_1F68()) {
+    if(canreadtext()) {
       param_00 = param_00 - var_01;
     }
   }
 }
 
-func_1F68() {
-  if(maps\mp\_flashgrenades::func_56F3()) {
+canreadtext() {
+  if(maps\mp\_flashgrenades::isflashbanged()) {
     return 0;
   }
 
   return 1;
 }
 
-func_7D66() {
+resetondeath() {
   self endon("notifyMessageDone");
   self endon("disconnect");
   level endon("game_ended");
   self waittill("death");
-  func_7D64();
+  resetnotify();
 }
 
-func_7D65() {
+resetoncancel() {
   self notify("resetOnCancel");
   self endon("resetOnCancel");
   self endon("notifyMessageDone");
   self endon("disconnect");
   level waittill("cancel_notify");
-  func_7D64();
+  resetnotify();
 }
 
-func_7D64() {
-  self.var_6813.alpha = 0;
-  self.var_6811.alpha = 0;
-  self.var_680A.alpha = 0;
-  self.var_680F.alpha = 0;
-  self.var_3202[0] = undefined;
-  self.var_3202[1] = undefined;
-  self.var_3202[2] = undefined;
-  self.var_3202[3] = undefined;
+resetnotify() {
+  self.notifytitle.alpha = 0;
+  self.notifytext.alpha = 0;
+  self.notifyicon.alpha = 0;
+  self.notifyoverlay.alpha = 0;
+  self.doingsplash[0] = undefined;
+  self.doingsplash[1] = undefined;
+  self.doingsplash[2] = undefined;
+  self.doingsplash[3] = undefined;
 }
 
-func_5F2C() {
+lowermessagethink() {
   self endon("disconnect");
-  self.var_5F2B = [];
+  self.lowermessages = [];
   var_00 = "default";
   if(isDefined(level.var_5F2A)) {
     var_00 = level.var_5F2A;
   }
 
   var_01 = -140;
-  var_02 = level.var_5F2D;
+  var_02 = level.lowertextfontsize;
   var_03 = 1.25;
   if((level.splitscreen || self issplitscreenplayer() && !isai(self)) && !function_03BA()) {
     var_01 = var_01 - 40;
-    var_02 = level.var_5F2D * 1.3;
+    var_02 = level.lowertextfontsize * 1.3;
     var_03 = var_03 * 1.5;
   }
 
-  self.var_5F29 = maps\mp\gametypes\_hud_util::createfontstring(var_00, var_02);
-  self.var_5F29 settext("");
-  self.var_5F29.archived = 0;
-  self.var_5F29.sort = 10;
-  self.var_5F29.showinkillcam = 0;
-  self.var_5F29 maps\mp\gametypes\_hud_util::setpoint("CENTER", level.var_5F2F, 0, var_01);
-  self.var_5F30 = maps\mp\gametypes\_hud_util::createfontstring("default", var_03);
-  self.var_5F30 maps\mp\gametypes\_hud_util::setparent(self.var_5F29);
-  self.var_5F30 maps\mp\gametypes\_hud_util::setpoint("TOP", "BOTTOM", 0, 0);
-  self.var_5F30 settext("");
-  self.var_5F30.archived = 0;
-  self.var_5F30.sort = 10;
-  self.var_5F30.showinkillcam = 0;
+  self.lowermessage = maps\mp\gametypes\_hud_util::createfontstring(var_00, var_02);
+  self.lowermessage settext("");
+  self.lowermessage.archived = 0;
+  self.lowermessage.sort = 10;
+  self.lowermessage.showinkillcam = 0;
+  self.lowermessage maps\mp\gametypes\_hud_util::setpoint("CENTER", level.lowetextyalign, 0, var_01);
+  self.lowertimer = maps\mp\gametypes\_hud_util::createfontstring("default", var_03);
+  self.lowertimer maps\mp\gametypes\_hud_util::setparent(self.lowermessage);
+  self.lowertimer maps\mp\gametypes\_hud_util::setpoint("TOP", "BOTTOM", 0, 0);
+  self.lowertimer settext("");
+  self.lowertimer.archived = 0;
+  self.lowertimer.sort = 10;
+  self.lowertimer.showinkillcam = 0;
 }
 
-func_6C66(param_00) {
+outcomeoverlay(param_00) {
   if(level.teambased) {
     if(param_00 == "tie") {
-      func_602C("draw");
+      matchoutcomenotify("draw");
       return;
     }
 
     if(param_00 == self.team) {
-      func_602C("victory");
+      matchoutcomenotify("victory");
       return;
     }
 
-    func_602C("defeat");
+    matchoutcomenotify("defeat");
     return;
   }
 
   if(param_00 == self) {
-    func_602C("victory");
+    matchoutcomenotify("victory");
     return;
   }
 
-  func_602C("defeat");
+  matchoutcomenotify("defeat");
 }
 
-func_602C(param_00) {
+matchoutcomenotify(param_00) {
   var_01 = self.team;
   var_02 = maps\mp\gametypes\_hud_util::createfontstring("bigfixed", 1);
   var_02 maps\mp\gametypes\_hud_util::setpoint("TOP", undefined, 0, 50);
@@ -903,27 +903,27 @@ func_602C(param_00) {
   var_03 maps\mp\gametypes\_hud_util::destroyelem();
 }
 
-func_56CE() {
-  if(isDefined(self.var_3202[0])) {
+isdoingsplash() {
+  if(isDefined(self.doingsplash[0])) {
     return 1;
   }
 
-  if(isDefined(self.var_3202[1])) {
+  if(isDefined(self.doingsplash[1])) {
     return 1;
   }
 
-  if(isDefined(self.var_3202[2])) {
+  if(isDefined(self.doingsplash[2])) {
     return 1;
   }
 
-  if(isDefined(self.var_3202[3])) {
+  if(isDefined(self.doingsplash[3])) {
     return 1;
   }
 
   return 0;
 }
 
-func_985C(param_00, param_01, param_02, param_03) {
+teamoutcomenotify(param_00, param_01, param_02, param_03) {
   self endon("disconnect");
   self notify("reset_outcome");
   thread func_5CA5(32, 1);
@@ -933,7 +933,7 @@ func_985C(param_00, param_01, param_02, param_03) {
     var_04 = "allies";
   }
 
-  while(func_56CE()) {
+  while(isdoingsplash()) {
     wait 0.05;
   }
 
@@ -993,7 +993,7 @@ func_985C(param_00, param_01, param_02, param_03) {
   if(isDefined(level.gametyperoundendscoresetomnvar) && [[level.gametyperoundendscoresetomnvar]](param_00, param_01, param_02, param_03, var_04)) {} else if(var_05 && !level.var_AA24) {
     self setclientomnvar("ui_round_end_friendly_score", game["roundsWon"][var_04]);
     self setclientomnvar("ui_round_end_enemy_score", game["roundsWon"][level.var_6C63[var_04]]);
-  } else if(!maps\mp\_utility::func_57B2() || !maps\mp\_utility::func_5760()) {
+  } else if(!maps\mp\_utility::isroundbased() || !maps\mp\_utility::isobjectivebased()) {
     self setclientomnvar("ui_round_end_friendly_score", maps\mp\gametypes\_gamescore::func_63E(var_04));
     self setclientomnvar("ui_round_end_enemy_score", maps\mp\gametypes\_gamescore::func_63E(level.var_6C63[var_04]));
   } else {
@@ -1012,10 +1012,10 @@ func_985C(param_00, param_01, param_02, param_03) {
   self setclientomnvar("ui_round_end", 1);
 }
 
-func_6C65(param_00, param_01) {
+outcomenotify(param_00, param_01) {
   self endon("disconnect");
   self notify("reset_outcome");
-  while(func_56CE()) {
+  while(isdoingsplash()) {
     wait 0.05;
   }
 
@@ -1059,7 +1059,7 @@ func_5CA5(param_00, param_01) {
   self setblurforplayer(param_00, param_01);
 }
 
-func_4369() {
+get_splash_table() {
   return "mp/splashTable.csv";
 }
 
@@ -1069,7 +1069,7 @@ func_8C18(param_00, param_01) {
     return;
   }
 
-  if(!maps\mp\_utility::func_57A0(self)) {
+  if(!maps\mp\_utility::isreallyalive(self)) {
     func_788E(param_00, param_01);
     return;
   }
@@ -1090,7 +1090,7 @@ func_8C19(param_00, param_01) {
     return;
   }
 
-  var_02 = tablelookuprownum(func_4369(), 0, param_00);
+  var_02 = tablelookuprownum(get_splash_table(), 0, param_00);
   if(!isDefined(var_02) || var_02 < 0) {
     return;
   }
@@ -1141,7 +1141,7 @@ func_2389() {
   self notify("cleanupLocalPlayerSplashList()");
   self endon("cleanupLocalPlayerSplashList()");
   common_scripts\utility::waittill_notify_or_timeout("death", 0.5);
-  while(!maps\mp\_utility::func_57A0(self)) {
+  while(!maps\mp\_utility::isreallyalive(self)) {
     wait(0.15);
   }
 
@@ -1179,7 +1179,7 @@ cleanupbroadcastersplashlist() {
 func_788E(param_00, param_01) {
   var_02 = spawnStruct();
   var_02.var_7B79 = param_00;
-  var_02.var_6C18 = param_01;
+  var_02.optionalnumber = param_01;
   if(!isDefined(self.var_9107)) {
     self.var_9107 = var_02;
     self.var_9108 = var_02;
@@ -1200,7 +1200,7 @@ func_4AF7() {
     common_scripts\utility::waittill_any("splash_list_cleared", "spawned_player");
     for(var_00 = 0; var_00 < 6; var_00++) {
       var_01 = self.var_9107;
-      func_8C19(var_01.var_7B79, var_01.var_6C18);
+      func_8C19(var_01.var_7B79, var_01.optionalnumber);
       self.var_9107 = var_01.var_66CD;
       if(!isDefined(self.var_9107)) {
         break;

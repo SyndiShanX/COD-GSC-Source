@@ -5,7 +5,7 @@
 
 func_5366() {
   level endon("game_ended");
-  maps\mp\_utility::func_3FA3("intro_vo_complete", 0);
+  maps\mp\_utility::gameflaginit("intro_vo_complete", 0);
   waittillframeend;
   waittillframeend;
   if(!game["switchedsides"]) {
@@ -181,7 +181,7 @@ func_5366() {
 func_7FDF() {
   level endon("game_ended");
   waittillframeend;
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   thread runoutrovo();
   runsecuresupplyvo("secure_supplies");
   runbombplantvo("bomb_plant");
@@ -190,8 +190,8 @@ func_7FDF() {
 
 runsecuresupplyvo(param_00) {
   level.intelobjectivevoplayedcount = 0;
-  if(maps\mp\_utility::func_3FA0("started_vignettes")) {
-    maps\mp\_utility::func_3FA5("finished_intro_vignette_allies");
+  if(maps\mp\_utility::gameflag("started_vignettes")) {
+    maps\mp\_utility::gameflagwait("finished_intro_vignette_allies");
   } else {}
 
   lib_0506::func_A61C(param_00, "airdrop_start", 0.5);
@@ -356,7 +356,7 @@ capturebunkerstaking(param_00) {
   var_02 = var_01;
   for(;;) {
     level waittill("momentum_point_capture_start_attmept_vo");
-    var_03 = common_scripts\utility::func_7A33(var_02);
+    var_03 = common_scripts\utility::random(var_02);
     thread lib_0506::func_A619(var_03);
     if(var_02.size <= 1) {
       var_02 = var_01;

@@ -6,8 +6,8 @@
 main() {
   level.var_7AC8 = ["clear_tower_behavior", "is_tower_battle_distracted"];
   thread maps / mp / mp_zombie_nest_ee_tower_battle_zombie_states::func_528A();
-  common_scripts\utility::func_3C87("flag_fuse_entered_correct");
-  common_scripts\utility::func_3C87("aud_stop_rod_movement_sounds");
+  common_scripts\utility::flag_init("flag_fuse_entered_correct");
+  common_scripts\utility::flag_init("aud_stop_rod_movement_sounds");
   func_52ED();
 }
 
@@ -163,7 +163,7 @@ func_A0E2(param_00, param_01) {
       }
 
       var_02 = anglesToForward(self.angles);
-      self.var_299D = spawnfx(level.var_611["zmb_ee_fuse_dmg_lt"], self.origin, var_02);
+      self.var_299D = spawnfx(level._effect["zmb_ee_fuse_dmg_lt"], self.origin, var_02);
       triggerfx(self.var_299D);
       self.var_28FC = 1;
       return;
@@ -179,7 +179,7 @@ func_A0E2(param_00, param_01) {
       }
 
       var_02 = anglesToForward(self.angles);
-      self.var_299D = spawnfx(level.var_611["zmb_ee_fuse_dmg_med"], self.origin, var_02);
+      self.var_299D = spawnfx(level._effect["zmb_ee_fuse_dmg_med"], self.origin, var_02);
       triggerfx(self.var_299D);
       self.var_28FC = 2;
       return;
@@ -195,7 +195,7 @@ func_A0E2(param_00, param_01) {
       }
 
       var_02 = anglesToForward(self.angles);
-      self.var_299D = spawnfx(level.var_611["zmb_ee_fuse_dmg_hvy"], self.origin, var_02);
+      self.var_299D = spawnfx(level._effect["zmb_ee_fuse_dmg_hvy"], self.origin, var_02);
       triggerfx(self.var_299D);
       self.var_28FC = 3;
       return;

@@ -247,7 +247,7 @@ func_7248() {
 
 func_7330() {
   thread berlin_player_inside_outside_mixer();
-  self method_8626("dlc2_default_mix");
+  self setaltsceneobj("dlc2_default_mix");
   lib_0366::snd_zmb_set_plr_vox_scare_count_max(0);
 }
 
@@ -311,7 +311,7 @@ wave_mus_switcher() {
 
     if(!var_13 && var_11 - var_08 > var_14 && var_12 <= var_05 && var_0C) {
       var_0C = 0;
-      var_00 method_8626("dlc2_plr_idle_mus_fade", var_0E);
+      var_00 setaltsceneobj("dlc2_plr_idle_mus_fade", var_0E);
     } else if(!var_0C && var_13 || var_12 > var_05 && var_11 - var_09 > var_14 * 0.5) {
       var_0C = 1;
       var_00 method_8627("dlc2_plr_idle_mus_fade", var_0D);
@@ -490,7 +490,7 @@ play_radio_tuner_idle_static() {
 
 player_using_radio() {
   var_00 = self;
-  var_00 method_8626("radio_interact_mix");
+  var_00 setaltsceneobj("radio_interact_mix");
 }
 
 radio_tuning(param_00, param_01) {
@@ -518,7 +518,7 @@ radio_tuning(param_00, param_01) {
       break;
 
     case "morse_code":
-      common_scripts\utility::func_3C87("morse_code_freq_changed");
+      common_scripts\utility::flag_init("morse_code_freq_changed");
       lib_0380::func_684E(level.var_11CB.radio_tuner_idle_static_lp, 0.5, 0.2);
       if(isDefined(level.var_11CB.tuning_radio_lp)) {
         lib_0380::func_6850(level.var_11CB.tuning_radio_lp, 0.2);
@@ -576,11 +576,11 @@ morse_code_loop_watcher(param_00, param_01) {
         var_08 = abs(var_07 - var_06);
       }
 
-      common_scripts\utility::func_3C8F("morse_code_freq_changed");
+      common_scripts\utility::flag_set("morse_code_freq_changed");
       wait 0.05;
       common_scripts\utility::func_3C7B("morse_code_freq_changed");
       lib_0380::func_684E(level.var_11CB.radio_tuner_idle_static_lp, 1, 0.1);
-      lib_0380::func_2893(level.var_11CB.morse_code_loop_snd, 0.2);
+      lib_0380::_stoplocalsound(level.var_11CB.morse_code_loop_snd, 0.2);
       lib_0380::func_288B("zmb_berl_radio_morse_end", undefined, param_01);
       continue;
     }
@@ -624,14 +624,14 @@ flare_triggered(param_00) {
 }
 
 snd_mute_horror_audio_vignettes() {
-  self method_8626("mute_horror_audio_vignettes");
+  self setaltsceneobj("mute_horror_audio_vignettes");
 }
 
 drop_pod_intro_mix() {
   for(;;) {
     if(isDefined(level.players)) {
       foreach(var_01 in level.players) {
-        var_01 method_8626("berl_zepp_intro_mix");
+        var_01 setaltsceneobj("berl_zepp_intro_mix");
         level waittill("zombie_wave_ended");
         var_01 method_8627("berl_zepp_intro_mix");
         return;
@@ -648,7 +648,7 @@ berlin_player_inside_outside_mixer() {
   wait(0.5);
   var_01 = snd_is_outside(self);
   if(!var_01) {
-    self method_8626("player_inside", 1);
+    self setaltsceneobj("player_inside", 1);
   }
 
   var_02 = self.var_295A;
@@ -678,10 +678,10 @@ berlin_player_inside_outside_mixer() {
         }
 
         if(var_04) {
-          self method_8626("player_inside_airship", 1);
+          self setaltsceneobj("player_inside_airship", 1);
           self method_8627("player_inside", 1);
         } else {
-          self method_8626("player_inside", 1);
+          self setaltsceneobj("player_inside", 1);
           self method_8627("player_inside_airship", 1);
         }
       }
@@ -765,7 +765,7 @@ stop_trap_tank() {
   lib_0380::func_6850(self.trap_elec_lp2);
   lib_0380::func_6850(self.trap_elec_lp3);
   lib_0380::func_6850(self.trap_elec_lp4);
-  lib_0380::func_2893(self.trap_arc_sfx);
+  lib_0380::_stoplocalsound(self.trap_arc_sfx);
   lib_0380::func_2889("trap_elec_stop", undefined, var_00);
 }
 
@@ -803,7 +803,7 @@ stop_trap_cage() {
   lib_0380::func_6850(self.trap_elec_lp2);
   lib_0380::func_6850(self.trap_elec_lp3);
   lib_0380::func_6850(self.trap_elec_lp4);
-  lib_0380::func_2893(self.trap_arc_sfx);
+  lib_0380::_stoplocalsound(self.trap_arc_sfx);
   lib_0380::func_2889("trap_elec_stop", undefined, var_00);
 }
 
@@ -930,7 +930,7 @@ start_drop_pod_sway() {
 
 inside_droppod_submix_strt() {
   foreach(var_01 in level.players) {
-    var_01 method_8626("inside_droppod");
+    var_01 setaltsceneobj("inside_droppod");
   }
 }
 
@@ -1101,7 +1101,7 @@ bob_engine(param_00) {
 bob_spawned_submix() {
   foreach(var_01 in level.players) {
     var_01 method_8627("escape_zepplin_loud");
-    var_01 method_8626("escape_zepplin_soft");
+    var_01 setaltsceneobj("escape_zepplin_soft");
   }
 }
 
@@ -1125,7 +1125,7 @@ handle_bob_killed_music() {
 }
 
 play_boss_killed_stinger() {
-  self method_8626("bob_death_stinger", 0.2);
+  self setaltsceneobj("bob_death_stinger", 0.2);
   lib_0380::func_2888("mus_bob_death_stinger", self);
   wait(10);
   self method_8627("bob_death_stinger", 4);
@@ -1230,7 +1230,7 @@ electroschnell_overload_explo() {
 straub_death_maul() {
   wait(1.7);
   foreach(var_01 in level.players) {
-    var_01 method_8626("straub_death_vignette");
+    var_01 setaltsceneobj("straub_death_vignette");
   }
 
   lib_0380::func_288B("zmb_berl_straub_death_zom_vox", undefined, level.airship_straub);
@@ -1249,7 +1249,7 @@ straub_death_maul() {
   lib_0380::func_2889("zmb_berl_straub_death_shutters_steam", undefined, (948, 6892, -3170));
   foreach(var_01 in level.players) {
     var_01 method_8627("straub_death_vignette");
-    var_01 method_8626("escape_zepplin_loud");
+    var_01 setaltsceneobj("escape_zepplin_loud");
   }
 }
 
@@ -1265,7 +1265,7 @@ zepplin_damaged_sounds() {
 post_bob_zepplin_events() {
   foreach(var_01 in level.players) {
     var_01 method_8627("escape_zepplin_soft");
-    var_01 method_8626("escape_zepplin_loud");
+    var_01 setaltsceneobj("escape_zepplin_loud");
   }
 
   level.var_11CB.zepplin_damaged_sub = lib_0380::func_6840("zmb_berl_zepplin_damaged_sub_lp");
@@ -1451,7 +1451,7 @@ ddagger_projector_on(param_00) {
 }
 
 ddagger_projector_off() {
-  lib_0380::func_2893(level.var_11CB.ddagger_projector_loop, 1);
+  lib_0380::_stoplocalsound(level.var_11CB.ddagger_projector_loop, 1);
 }
 
 ddagger_vault_door_open(param_00) {

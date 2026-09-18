@@ -52,7 +52,7 @@ func_56DB(param_00) {
 
 func_4625() {
   var_00 = undefined;
-  if(common_scripts\utility::func_57D7() == 1) {
+  if(common_scripts\utility::issp() == 1) {
     var_00 = [level.player];
   } else if(isarray(level.players) == 1) {
     var_00 = level.players;
@@ -275,7 +275,7 @@ func_4719() {
       }
     } else if(isDefined(level.var_148) == 1 && level.var_148 != 0) {
       var_00 = int(var_02);
-    } else if(isDefined(level.var_1D4) == 1 && level.var_1D4 != 0) {
+    } else if(isDefined(level.weaponinventorytype) == 1 && level.weaponinventorytype != 0) {
       var_00 = int(var_02);
     }
   }
@@ -1163,10 +1163,10 @@ func_070D(param_00, param_01, param_02) {
 func_070F(param_00, param_01, param_02) {
   param_00.var_378F method_808C();
   param_00.var_378F.var_8F47 = lib_02F0::func_800B(param_00.var_BB4, param_00.var_378F);
-  lib_02F0::func_800D(param_00.var_378F.var_8F47, 0, 0);
-  lib_02F0::func_800C(param_00.var_378F.var_8F47, param_02, 0);
-  common_scripts\utility::func_2CB4(0.05, ::lib_02F0::func_800D, param_00.var_378F.var_8F47, param_01, 0.05);
-  common_scripts\utility::func_2CB4(0.05, ::lib_02F0::func_800C, param_00.var_378F.var_8F47, param_02, 0.05);
+  lib_02F0::disableplayeruse(param_00.var_378F.var_8F47, 0, 0);
+  lib_02F0::enableplayeruse(param_00.var_378F.var_8F47, param_02, 0);
+  common_scripts\utility::func_2CB4(0.05, ::lib_02F0::disableplayeruse, param_00.var_378F.var_8F47, param_01, 0.05);
+  common_scripts\utility::func_2CB4(0.05, ::lib_02F0::enableplayeruse, param_00.var_378F.var_8F47, param_02, 0.05);
 }
 
 func_0710(param_00, param_01, param_02) {
@@ -1182,7 +1182,7 @@ func_0710(param_00, param_01, param_02) {
         param_02 = "easeinout";
       }
 
-      lib_02F0::func_800D(var_04, 0, param_01, param_02);
+      lib_02F0::disableplayeruse(var_04, 0, param_01, param_02);
       wait(param_01);
     }
 
@@ -1233,8 +1233,8 @@ func_06FE(param_00, param_01) {
 
     var_12 = abs(var_04 - var_05.var_378F.var_90EE);
     if(var_12 > var_02) {
-      lib_02F0::func_800D(var_05.var_378F.var_8F47, var_10, 0.05, var_0A);
-      lib_02F0::func_800C(var_05.var_378F.var_8F47, var_11, 0.05, var_0F);
+      lib_02F0::disableplayeruse(var_05.var_378F.var_8F47, var_10, 0.05, var_0A);
+      lib_02F0::enableplayeruse(var_05.var_378F.var_8F47, var_11, 0.05, var_0F);
       var_05.var_378F.var_90EE = var_04;
       return;
     }
@@ -1418,29 +1418,29 @@ func_06F6() {
       var_02 = var_01.var_1E61;
       var_03 = var_01.var_59E1;
       var_04 = getDvar(var_03);
-      if(isDefined(var_02) && isDefined(var_03) && isDefined(var_04) && var_01.var_A281 != var_04) {
+      if(isDefined(var_02) && isDefined(var_03) && isDefined(var_04) && var_01.value != var_04) {
         var_05 = [[var_02]](var_03, var_04);
         if(isDefined(var_05)) {
           setDvar(var_03, var_05);
-          var_01.var_A281 = var_05;
+          var_01.value = var_05;
         } else {
-          var_01.var_A281 = var_04;
+          var_01.value = var_04;
         }
       }
     }
 
     wait 0.05;
-    if(isDefined(level.var_4E09)) {
+    if(isDefined(level.hostmigrationtimer)) {
       func_A782();
       foreach(var_01 in level.var_5C0) {
-        _sfx_dvar_init_value(var_01.var_59E1, var_01.var_A281);
+        _sfx_dvar_init_value(var_01.var_59E1, var_01.value);
       }
     }
   }
 }
 
 func_A782() {
-  if(!isDefined(level.var_4E09)) {
+  if(!isDefined(level.hostmigrationtimer)) {
     return 0;
   }
 
@@ -1461,7 +1461,7 @@ func_06F4(param_00, param_01, param_02) {
   level.var_5C0[param_00] = spawnStruct();
   level.var_5C0[param_00].var_1E61 = param_02;
   level.var_5C0[param_00].var_59E1 = param_00;
-  level.var_5C0[param_00].var_A281 = param_01;
+  level.var_5C0[param_00].value = param_01;
   _sfx_dvar_init_value(param_00, param_01);
 }
 
@@ -1493,13 +1493,13 @@ func_0705() {
     var_00 = gettime();
     var_01 = [];
     foreach(var_03 in level.var_5B6) {
-      if(var_03.var_3511 > 0) {
+      if(var_03.duration > 0) {
         var_01[var_01.size] = var_03;
         if(var_03.time == var_00) {
           continue;
         }
 
-        var_03.var_3511 = var_03.var_3511 - 1;
+        var_03.duration = var_03.duration - 1;
         if(var_03.var_99F9 <= var_00) {
           var_03.alpha = 0;
           var_03 settext("");
@@ -1768,7 +1768,7 @@ func_0717(param_00) {
     var_02 = level.var_5D0.var_75F6;
     var_03 = level.var_5D0.var_75F7;
     var_04 = 1;
-    var_05 = level.var_5D0.var_807E;
+    var_05 = level.var_5D0.fadeovertime;
     var_06 = func_0714(param_00, level.var_5D0.var_3E71, level.var_5D0.var_3E6B);
     var_07 = func_0715(var_06, level.var_5D0.var_3E6B);
     func_8AA0(var_02, var_03, var_07, (1, 1, 1), var_04, var_05, 1);
@@ -1854,7 +1854,7 @@ func_8ABE(param_00, param_01, param_02, param_03, param_04, param_05) {
 
   level.var_5D0.var_75F6 = param_02;
   level.var_5D0.var_75F7 = param_03;
-  level.var_5D0.var_807E = param_01;
+  level.var_5D0.fadeovertime = param_01;
   level.var_5D0.var_3E6B = param_00;
   level.var_5D0.var_5848 = var_06;
   level.var_5D0.var_A231 = param_04;
@@ -1997,7 +1997,7 @@ func_063D() {
     var_00[var_00.size] = "soundtables/mp_raid_defaults.csv";
   }
 
-  if(common_scripts\utility::func_57D7() == 1) {
+  if(common_scripts\utility::issp() == 1) {
     var_00[var_00.size] = "soundtables/sp_defaults.csv";
   } else {
     var_00[var_00.size] = "soundtables/mp_defaults.csv";
@@ -2046,7 +2046,7 @@ func_0711(param_00, param_01, param_02, param_03, param_04) {
     param_04 = 1;
   }
 
-  var_05 method_8626(param_00, 0);
+  var_05 setaltsceneobj(param_00, 0);
   var_05 method_8629(param_00, 0, 0);
   wait 0.05;
   var_05 method_8629(param_00, param_04, param_01);
@@ -2060,7 +2060,7 @@ func_0711(param_00, param_01, param_02, param_03, param_04) {
 
 func_8AB8(param_00, param_01, param_02, param_03, param_04, param_05) {
   if(isDefined(param_05) == 0) {
-    if(common_scripts\utility::func_57D7() == 1) {
+    if(common_scripts\utility::issp() == 1) {
       param_05 = [level.player];
     } else if(isDefined(level.players) == 1) {
       param_05 = level.players;
@@ -2082,11 +2082,11 @@ func_42DD(param_00, param_01, param_02) {
   }
 
   if(!isDefined(level.var_5A9[param_01])) {
-    level.var_5A9[param_01] = common_scripts\utility::func_F92(getarraykeys(param_00));
+    level.var_5A9[param_01] = common_scripts\utility::array_randomize(getarraykeys(param_00));
   }
 
   if(level.var_5A9[param_01].size <= param_02) {
-    var_03 = common_scripts\utility::func_F92(common_scripts\utility::func_F94(getarraykeys(param_00), level.var_5A9[param_01]));
+    var_03 = common_scripts\utility::array_randomize(common_scripts\utility::func_F94(getarraykeys(param_00), level.var_5A9[param_01]));
     level.var_5A9[param_01] = common_scripts\utility::func_F73(var_03, level.var_5A9[param_01]);
   }
 
@@ -2251,24 +2251,24 @@ func_8DC9(param_00, param_01) {
 }
 
 func_8DCA(param_00, param_01) {
-  level._createfx.var_83A3 = [];
-  for(var_02 = 0; var_02 < level.var_2804.size; var_02++) {
-    var_03 = level.var_2804[var_02];
-    if(isDefined(var_03.var_A265["type"]) == 0) {
+  level._createfx.selected_fx_ents = [];
+  for(var_02 = 0; var_02 < level.createfxent.size; var_02++) {
+    var_03 = level.createfxent[var_02];
+    if(isDefined(var_03.v["type"]) == 0) {
       continue;
     }
 
-    if(isDefined(var_03.var_A265["origin"]) == 1 && common_scripts\utility::string_starts_with(var_03.var_A265["type"], "soundfx") == 1) {
-      var_04 = var_03.var_A265["origin"];
+    if(isDefined(var_03.v["origin"]) == 1 && common_scripts\utility::string_starts_with(var_03.v["type"], "soundfx") == 1) {
+      var_04 = var_03.v["origin"];
       var_05 = (270, 0, 0);
       var_04 = (floor(var_04[0]), floor(var_04[1]), floor(var_04[2]));
-      var_03.var_A265["angles"] = var_05;
-      var_03.var_A265["origin"] = var_04;
-      level._createfx.var_83A3[level._createfx.var_83A3.size] = var_03;
+      var_03.v["angles"] = var_05;
+      var_03.v["origin"] = var_04;
+      level._createfx.selected_fx_ents[level._createfx.selected_fx_ents.size] = var_03;
     }
   }
 
-  common_scripts\_createfx::func_A0CA();
-  level._createfx.var_83A3 = [];
+  common_scripts\_createfx::update_selected_ents();
+  level._createfx.selected_fx_ents = [];
   return "";
 }

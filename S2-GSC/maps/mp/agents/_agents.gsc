@@ -106,7 +106,7 @@ func_8F70(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     var_07 = var_0D;
   }
 
-  self method_838F(var_07, var_08);
+  self select_by_substring(var_07, var_08);
   if(isDefined(param_05)) {
     self.var_A43 = param_05;
   }
@@ -161,7 +161,7 @@ func_8F70(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     maps\mp\gametypes\_class::func_4774();
   } else {
     self[[level.var_A5B]]();
-    maps\mp\gametypes\_class::func_4773(self.team, self.var_2319, 1);
+    maps\mp\gametypes\_class::func_4773(self.team, self.class, 1);
   }
 
   self thread[[level.var_19D5["bot_think_watch_enemy"]]](1);
@@ -221,15 +221,15 @@ func_0A40(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     if(isDefined(param_01) && param_04 != "MOD_FALLING" && param_04 != "MOD_SUICIDE") {
       if(level.teambased) {
         if(isDefined(param_01.team) && param_01.team != self.team) {
-          self method_8391(param_01);
+          self select_index_array(param_01);
         }
       } else {
-        self method_8391(param_01);
+        self select_index_array(param_01);
       }
     }
   }
 
-  var_0B = self method_8390(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, 0);
+  var_0B = self select_entity(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, 0);
   if(isDefined(var_0B)) {
     thread func_3BA5(var_0B[0], var_0B[1], var_0B[2], var_0B[3], var_0B[4], var_0B[5], var_0B[6]);
   }
@@ -271,7 +271,7 @@ func_6A73(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return 0;
   }
 
-  if(!isDefined(self) || !maps\mp\_utility::func_57A0(self)) {
+  if(!isDefined(self) || !maps\mp\_utility::isreallyalive(self)) {
     return 0;
   }
 
@@ -312,7 +312,7 @@ func_6A73(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   if(isDefined(param_01) && param_01 != self && param_02 > 0 && !isDefined(param_08) || param_08 != "shield") {
-    if(param_03 &level.var_5040) {
+    if(param_03 &level.idflags_shield_explosive_impact) {
       var_0E = "stun";
     } else if(!maps\mp\gametypes\_damage::func_8BB3(param_06)) {
       var_0E = "none";
@@ -335,7 +335,7 @@ func_6A74(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return 0;
   }
 
-  maps\mp\gametypes\_damage::func_1E68(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
+  maps\mp\gametypes\_damage::callback_playerdamage(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
 }
 
 func_6A75(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
@@ -351,7 +351,7 @@ func_6A75(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   thread maps\mp\gametypes\_weapons::func_34A9(param_01, param_03, param_04);
   if(self.var_565F) {
     self.var_4B60 = 1;
-    if(maps\mp\_utility::func_44FC() != 1 && isDefined(self.var_7DAD) && self.var_7DAD) {
+    if(maps\mp\_utility::getgametypenumlives() != 1 && isDefined(self.var_7DAD) && self.var_7DAD) {
       self thread[[maps / mp / agents / _agent_utility::func_A59("spawn")]]();
       return;
     }
@@ -378,7 +378,7 @@ func_6AA3(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     self thread[[level.var_A9C5]](param_01, param_03, param_04);
   }
 
-  self.var_18A8 = self method_8392(param_08);
+  self.var_18A8 = self select_last_entity(param_08);
   if(!maps\mp\gametypes\_damage::func_8B8B(self)) {
     self.var_18A8 startragdoll();
   } else {
@@ -390,14 +390,14 @@ func_6AA3(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
 func_5331() {
   if(isDefined(self.var_231C)) {
-    self.var_2319 = self.var_231C;
+    self.class = self.var_231C;
     return;
   }
 
   if(maps / mp / bots / _bots_loadout::func_1ADE()) {
-    self.var_2319 = "callback";
+    self.class = "callback";
     return;
   }
 
-  self.var_2319 = "class1";
+  self.class = "class1";
 }

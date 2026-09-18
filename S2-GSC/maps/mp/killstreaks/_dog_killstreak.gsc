@@ -36,7 +36,7 @@ func_9E26(param_00, param_01) {
     return 0;
   }
 
-  if(!maps\mp\_utility::func_57A0(self)) {
+  if(!maps\mp\_utility::isreallyalive(self)) {
     return 0;
   }
 
@@ -148,7 +148,7 @@ func_6A72(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   if(isPlayer(param_01) && isDefined(self.owner) && param_01 != self.owner) {
-    self.owner maps\mp\_utility::func_5C43("dog_killed");
+    self.owner maps\mp\_utility::leaderdialogonplayer("dog_killed");
     maps\mp\gametypes\_damage::func_6B4B(param_01, param_04, param_03, param_02, "attack_dogs_destroyed", undefined, undefined, 1);
     if(isPlayer(param_01)) {
       param_01 maps\mp\gametypes\_missions::processchallenge("ch_notsobestfriend");
@@ -162,7 +162,7 @@ func_6A72(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_09 = self method_83D8();
   var_0A = getanimlength(var_09);
   param_08 = int(var_0A * 1000);
-  self.var_18A8 = self method_8392(param_08);
+  self.var_18A8 = self select_last_entity(param_08);
   lib_0380::func_6844("anml_doberman_death", undefined, self);
   maps / mp / agents / _agent_utility::func_2A73();
   self notify("killanimscript");
@@ -225,7 +225,7 @@ func_8F96(param_00, param_01, param_02, param_03) {
 
   maps / mp / agents / _agent_utility::func_8A7();
   self[[level.var_31F2]]();
-  self method_838F(param_00, param_01, "dog_animclass", 15, 40, self);
+  self select_by_substring(param_00, param_01, "dog_animclass", 15, 40, self);
   level notify("spawned_agent", self);
   maps / mp / agents / _agent_common::func_83FD(100);
   if(isDefined(param_03)) {
@@ -308,7 +308,7 @@ func_0A57() {
   thread func_0A56();
   for(;;) {
     if(self.var_BA4 != "melee" && !self.statelocked && self[[level.var_31F5]]() && !self[[level.var_31B2]]()) {
-      self method_83A1(self.var_28D2);
+      self selected_ent_buttons(self.var_28D2);
     }
 
     if(self.var_7A58 > gettime()) {
@@ -327,7 +327,7 @@ func_0A57() {
     } else {
       var_02 = self[[level.var_31F1]](self.enemy);
       self.var_28D2 = self.enemy;
-      self.var_108 = "sprint";
+      self.vectortoangles = "sprint";
       self.var_15E1 = 0;
       if(distancesquared(var_02, self.var_5B10) > 4096) {
         self method_8395(var_02);

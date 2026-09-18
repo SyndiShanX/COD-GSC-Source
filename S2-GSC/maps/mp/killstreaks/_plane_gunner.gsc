@@ -4,7 +4,7 @@
 *************************************************/
 
 init() {
-  level.var_611["airstrike_death"] = loadfx("vfx/scorestreaks/plane_gunner_death");
+  level._effect["airstrike_death"] = loadfx("vfx/scorestreaks/plane_gunner_death");
   self.var_701F = 0;
   self.var_7020 = 0;
   level.var_5A7D["plane_gunner_bomber_projectile_mp"] = "plane_gunner";
@@ -55,7 +55,7 @@ func_9081(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   level thread func_636E(var_08, param_01);
   level thread func_63D9(var_08, param_01);
   level thread func_7CF3(var_08, param_01);
-  param_01 maps\mp\_utility::func_3E8E(1);
+  param_01 maps\mp\_utility::freezecontrolswrapper(1);
   var_0A = "usa_bomber_b17_ballturret_axis";
   if(param_01.team == "allies") {
     var_0A = "usa_bomber_b17_ballturret";
@@ -86,7 +86,7 @@ func_9081(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     var_08.var_620D = spawnplane("script_model", param_03);
     var_08.var_620D setModel("tag_origin");
     var_08.var_620D method_8351(param_01, lib_0527::func_4613(param_05), 20, 20);
-    var_08.var_620D method_8449(var_08, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_08.var_620D linktosynchronizedparent(var_08, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
 
   var_08.var_1C8 = param_05;
@@ -191,7 +191,7 @@ func_702D(param_00, param_01, param_02) {
   self.var_5683 = undefined;
   var_07 = self.origin - 3000 * anglestoright(param_01);
   self.var_9E9F = spawn("script_origin", var_07);
-  self method_8449(self.var_9E9F);
+  self linktosynchronizedparent(self.var_9E9F);
   var_08 = 3.141593;
   var_09 = var_08 * 3000;
   if(var_03) {
@@ -223,7 +223,7 @@ func_7034() {
   self.var_933D = "flying_out";
   self notify("leaving");
   if(isDefined(self.owner)) {
-    self.owner thread maps\mp\_utility::func_5C43("planegun_ended");
+    self.owner thread maps\mp\_utility::leaderdialogonplayer("planegun_ended");
   }
 
   if(1 && isDefined(self.var_620D)) {
@@ -365,7 +365,7 @@ func_329A(param_00, param_01, param_02, param_03) {
   }
 
   maps\mp\_matchdata::func_5E9A(param_01, param_02);
-  maps\mp\_utility::func_8A5B("plane_gunner");
+  maps\mp\_utility::setusingremote("plane_gunner");
   self notify("used");
   if(level.gametype == "scorestreak_training") {
     maps / mp / gametypes / scorestreak_training::func_244D();
@@ -396,7 +396,7 @@ func_6B6A(param_00, param_01, param_02, param_03) {
   var_06 = "callout_destroyed_plane_gunner";
   maps\mp\gametypes\_damage::func_6B4B(param_00, param_01, param_02, param_03, var_04, var_05, var_06, 1);
   if(isDefined(param_00)) {
-    param_00 maps\mp\_utility::func_5C43("planegun_destroyed");
+    param_00 maps\mp\_utility::leaderdialogonplayer("planegun_destroyed");
   }
 }
 
@@ -601,8 +601,8 @@ func_7CF2(param_00) {
   self takeweapon("turretweapon_plane_gunner_turret_mp");
   self takeweapon("turretweapon_plane_gunner_turret_grenadier_mp");
   self unlink();
-  if(maps\mp\_utility::func_581D()) {
-    maps\mp\_utility::func_2414();
+  if(maps\mp\_utility::isusingremote()) {
+    maps\mp\_utility::clearusingremote();
   }
 
   self setclientomnvar("ui_plane_gunner_phase", 0);
@@ -619,7 +619,7 @@ func_7445(param_00) {
     param_00 = 1;
   }
 
-  maps\mp\_utility::func_3E8E(1);
+  maps\mp\_utility::freezecontrolswrapper(1);
   self setclientomnvar("fov_scale", 1);
   if(param_00) {
     wait(0.5);
@@ -630,9 +630,9 @@ func_7445(param_00) {
   self notify("clearAerialKillstreakMarkers");
   self method_84B6();
   self cameraunlink();
-  maps\mp\_utility::func_3E8E(0);
-  if(maps\mp\_utility::func_581D()) {
-    maps\mp\_utility::func_2414();
+  maps\mp\_utility::freezecontrolswrapper(0);
+  if(maps\mp\_utility::isusingremote()) {
+    maps\mp\_utility::clearusingremote();
   }
 
   if(getdvarint("311")) {
@@ -647,7 +647,7 @@ func_7445(param_00) {
 }
 
 func_4D17() {
-  if(!maps\mp\_utility::func_57A0(self)) {
+  if(!maps\mp\_utility::isreallyalive(self)) {
     self waittill("spawned");
     wait 0.05;
     self setclientomnvar("ui_plane_gunner_phase", 0);
@@ -708,7 +708,7 @@ func_703A(param_00, param_01) {
   var_02 = anglesToForward(param_00.angles);
   var_03 = spawn("script_model", param_00.var_7039.origin);
   param_00.var_7039.var_5A2C = var_03;
-  var_03 method_8449(param_00.var_7039, "tag_player");
+  var_03 linktosynchronizedparent(param_00.var_7039, "tag_player");
 }
 
 func_9082() {
@@ -741,11 +741,11 @@ func_86FA(param_00, param_01, param_02, param_03) {
 
     param_01 setclientomnvar("ui_plane_gunner_phase_end_time", gettime() + 30000);
   } else if(param_02 == "bomber") {
-    if(param_01 maps\mp\_utility::func_581D() && isDefined(param_00.var_7039)) {
+    if(param_01 maps\mp\_utility::isusingremote() && isDefined(param_00.var_7039)) {
       param_01 method_80E0(param_00.var_7039);
     }
 
-    param_01 maps\mp\_utility::func_3E8E(1);
+    param_01 maps\mp\_utility::freezecontrolswrapper(1);
     param_01 cameralinkTo(param_00.var_7037, "tag_origin");
     param_00.var_7037.var_D95 = 7;
     param_01 notify("clearAerialKillstreakMarkers");

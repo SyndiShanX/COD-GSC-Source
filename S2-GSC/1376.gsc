@@ -43,18 +43,18 @@ func_7F59(param_00) {
     var_01 = func_A6AD();
     switch (var_01) {
       case "zepplin_brt_cinematic":
-        func_85FD();
+        isitemunlocked2();
         break;
 
       case "zepplin_brt_exit_cinematic":
-        func_85FE();
+        isitemunlocked();
         break;
 
       case "zepplin_new_objective":
         thread func_7204(self.var_F1D, 0);
         func_7D43();
         func_8408();
-        common_scripts\utility::func_3C8F("sky_rush");
+        common_scripts\utility::flag_set("sky_rush");
         break;
 
       case "zepplin_leave_village":
@@ -79,7 +79,7 @@ func_7D52(param_00) {
   }
 
   func_53C9();
-  common_scripts\utility::func_3C8F("sky_rush");
+  common_scripts\utility::flag_set("sky_rush");
   func_1F46();
 }
 
@@ -161,14 +161,14 @@ func_85FF() {
   self.var_5704 = 1;
 }
 
-func_85FD() {
+isitemunlocked2() {
   common_scripts\utility::func_3799("blimp_cinematic_done");
   self.var_571C = 1;
   var_00 = common_scripts\utility::func_46B5("final_boss_anim_intro_scripted_node", "targetname");
   level.var_179A func_71F6("s2_zom_brt_blimp_intro", var_00);
 }
 
-func_85FE() {
+isitemunlocked() {
   level.var_179A common_scripts\utility::func_379A("blimp_cinematic_done");
 }
 
@@ -249,7 +249,7 @@ func_83DA(param_00, param_01) {
   if(!common_scripts\utility::func_562E(param_01) && self.var_1F5D.var_5DDA > 0) {
     func_AB84();
     func_863A("s2_zmb_zeppelin_flight_entrance_0" + param_00);
-    var_02 = common_scripts\utility::func_7A33(level.players);
+    var_02 = common_scripts\utility::random(level.players);
     if(isDefined(var_02)) {
       var_02 thread lib_0367::func_8EA3("zepreturns");
       return;
@@ -327,9 +327,9 @@ func_113A(param_00) {
 
   foreach(var_08 in var_01) {
     var_08 enablelinkTo();
-    var_08 method_8449(self);
-    var_08.var_65D8 method_8449(self);
-    var_08.var_65D9 method_8449(self);
+    var_08 linktosynchronizedparent(self);
+    var_08.var_65D8 linktosynchronizedparent(self);
+    var_08.var_65D9 linktosynchronizedparent(self);
     var_08.var_65D8 scriptmodelplayanim("zom_zeppelin_panels_01_closed_idle");
   }
 
@@ -339,13 +339,13 @@ func_113A(param_00) {
 func_113E(param_00, param_01) {
   var_02 = common_scripts\utility::func_46B5(param_00, "targetname");
   self.var_6655 = var_02 func_1D62(param_01, var_02.script_noteworthy, ::func_17B0, ::func_17B1);
-  self.var_6655 method_8449(self);
+  self.var_6655 linktosynchronizedparent(self);
   self.var_6655 hide();
 }
 
 func_113D(param_00) {
   self.var_1F5D = getEnt(param_00, "targetname");
-  self.var_1F5D method_8449(self);
+  self.var_1F5D linktosynchronizedparent(self);
 }
 
 func_8641(param_00) {
@@ -365,7 +365,7 @@ func_AAF5() {
   }
 
   self waittill("blimp_weakpoint_destroyed", var_00, var_02);
-  playFX(level.var_611["zmb_zeppelin_battery_explosion"], var_02.origin);
+  playFX(level._effect["zmb_zeppelin_battery_explosion"], var_02.origin);
   self.var_327A = undefined;
   if(!isDefined(level.var_6658)) {
     level.var_6658 = 1;
@@ -419,7 +419,7 @@ func_95CA(param_00) {
     }
 
     if(randomint(100) < 30) {
-      playFX(level.var_611["zmb_zeppelin_battery_damage"], self.origin);
+      playFX(level._effect["zmb_zeppelin_battery_damage"], self.origin);
     }
 
     var_07 maps\mp\gametypes\_damagefeedback::func_A102("standard");
@@ -496,7 +496,7 @@ func_A649(param_00, param_01, param_02) {
   }
 
   if(!common_scripts\utility::func_562E(level.var_1CBA)) {
-    common_scripts\utility::func_7A33(level.players) lib_0378::func_8D74("dialogue_queue", "zmb_jeff_thezeppelinitsbackmaybeic");
+    common_scripts\utility::random(level.players) lib_0378::func_8D74("dialogue_queue", "zmb_jeff_thezeppelinitsbackmaybeic");
   }
 }
 
@@ -640,7 +640,7 @@ func_9025(param_00) {
   if(func_8B88()) {
     level thread maps / mp / mp_zombie_nest_ee_overcharge::func_A788(var_0B, var_0A);
     if(1) {
-      playFXOnTag(level.var_611["zmb_geistkraft_radius_400"], var_0A, "TAG_ORIGIN");
+      playFXOnTag(level._effect["zmb_geistkraft_radius_400"], var_0A, "TAG_ORIGIN");
     }
 
     var_0C = 20;
@@ -648,7 +648,7 @@ func_9025(param_00) {
     var_0A maps / mp / mp_zombie_nest_special_event_creator::func_170B(var_0C, 400, 100, var_0B, undefined, "tag_fx", "zmb_zep_receiver_charge_pnt", "tag_origin", undefined, var_0A.var_34A5.var_7F41, (0, 0, 48));
     level thread maps / mp / gametypes / zombies::orders_and_contracts_report_event("geistcraft_device_powered");
     if(1) {
-      stopFXOnTag(level.var_611["zmb_geistkraft_radius_400"], var_0A, "TAG_ORIGIN");
+      stopFXOnTag(level._effect["zmb_geistkraft_radius_400"], var_0A, "TAG_ORIGIN");
     }
   }
 
@@ -691,7 +691,7 @@ func_8C16(param_00) {
       wait 0.05;
     }
 
-    var_03 = spawnfx(level.var_611["gk_raven_hc_ee_uber_stg_" + var_02 + 1], param_00.var_9FE6.origin, anglesToForward(param_00.var_9FE6.angles), anglestoup(param_00.var_9FE6.angles));
+    var_03 = spawnfx(level._effect["gk_raven_hc_ee_uber_stg_" + var_02 + 1], param_00.var_9FE6.origin, anglesToForward(param_00.var_9FE6.angles), anglestoup(param_00.var_9FE6.angles));
     triggerfx(var_03);
     var_02++;
   }
@@ -722,7 +722,7 @@ func_17AA(param_00, param_01, param_02, param_03) {
   maps / mp / mp_zombie_nest_ee_overcharge::func_8C89();
   param_03 = maps / mp / mp_zombie_nest_ee_util::func_98ED(param_01, param_03);
   if(randomint(100) < 30) {
-    playFX(level.var_611["zmb_zeppelin_battery_damage"], self.origin);
+    playFX(level._effect["zmb_zeppelin_battery_damage"], self.origin);
   }
 
   var_04 = param_03;
@@ -739,7 +739,7 @@ func_17A7(param_00, param_01, param_02, param_03) {
   maps / mp / mp_zombie_nest_ee_overcharge::func_8C89();
   param_03 = maps / mp / mp_zombie_nest_ee_util::func_98ED(param_01, param_03);
   if(randomint(100) < 30) {
-    playFX(level.var_611["zmb_zeppelin_battery_damage"], self.origin);
+    playFX(level._effect["zmb_zeppelin_battery_damage"], self.origin);
   }
 
   var_04 = param_03;
@@ -756,7 +756,7 @@ func_7EB9() {
   var_01 = getEntArray(var_00.target, "targetname");
   var_02 = ["J_searchlight_A_LE_2", "J_searchlight_A_RI_2", "J_searchlight_B_LE_2", "J_searchlight_B_RI_2", "J_searchlight_C_LE_2", "J_searchlight_C_RI_2"];
   foreach(var_04 in var_01) {
-    var_04 method_8449(self);
+    var_04 linktosynchronizedparent(self);
     var_04 thread func_4A52();
   }
 
@@ -772,7 +772,7 @@ func_7EB9() {
           continue;
         }
 
-        var_07 = common_scripts\utility::func_7A33(level.players);
+        var_07 = common_scripts\utility::random(level.players);
         var_08 = getclosestpointonnavmesh(var_07.origin + (randomint(512) - 256, randomint(512) - 256, 0), var_07);
         var_09 = var_04.origin + var_04 func_4306();
         var_0A = bullettracepassed(var_09, var_08, 0, var_04);
@@ -805,7 +805,7 @@ func_3BAE(param_00) {
   self scriptmodelplayanim("zmb_zeppelin_rocket_pod_open_idle");
   var_01 = spawn("script_model", self.origin + func_4306());
   var_01 setModel("npc_usa_bazooka_rocket_base");
-  playFXOnTag(level.var_611["zmb_zep_rocket_smoketrail"], var_01, "tag_origin");
+  playFXOnTag(level._effect["zmb_zep_rocket_smoketrail"], var_01, "tag_origin");
   var_01 thread func_3A12(param_00);
   wait(0.5);
   self scriptmodelplayanim("zmb_zeppelin_rocket_pod_close");
@@ -921,7 +921,7 @@ func_AAEE() {
   if(!isDefined(level.var_179A.var_982A)) {
     level.var_179A.var_982A = spawn("script_model", level.var_179A gettagorigin("J_searchlight_A_RI_2"));
     level.var_179A.var_982A setModel("tag_origin");
-    level.var_179A.var_982A method_8449(level.var_179A);
+    level.var_179A.var_982A linktosynchronizedparent(level.var_179A);
   }
 
   for(;;) {
@@ -954,7 +954,7 @@ func_AAEE() {
       var_04 = level.var_179A.var_6655 gettagorigin("TAG_PITCH");
       var_05 = spawn("script_model", var_04);
       var_05 setModel("Tag_Origin");
-      var_05 method_8449(level.var_179A.var_6655);
+      var_05 linktosynchronizedparent(level.var_179A.var_6655);
       var_05 lib_0378::func_8D74("blimp_charge");
       var_06 = 0;
       while(isalive(var_02)) {
@@ -997,11 +997,11 @@ func_AAEE() {
       var_14 = spawn("script_model", var_12);
       var_14 setModel("tag_origin");
       var_14.angles = var_13;
-      var_14 method_8449(level.var_179A.var_6655);
-      playFXOnTag(level.var_611["zmb_zeppelin_spotlight_assault"], var_14, "tag_origin");
-      playFXOnTag(level.var_611["zmb_zeppelin_shot"], var_10, "tag_origin");
+      var_14 linktosynchronizedparent(level.var_179A.var_6655);
+      playFXOnTag(level._effect["zmb_zeppelin_spotlight_assault"], var_14, "tag_origin");
+      playFXOnTag(level._effect["zmb_zeppelin_shot"], var_10, "tag_origin");
       wait(1);
-      stopFXOnTag(level.var_611["zmb_zeppelin_spotlight_assault"], var_14, "tag_origin");
+      stopFXOnTag(level._effect["zmb_zeppelin_spotlight_assault"], var_14, "tag_origin");
       func_17B3();
       var_15 = launchbeam("zmb_tesla_zep_beam", level.var_179A.var_6655, "tag_flash", var_10, "tag_origin");
       wait(1);
@@ -1024,7 +1024,7 @@ func_7E3A() {
   self notify("door_anim_change");
   self endon("door_anim_change");
   if(maps / mp / mp_zombie_nest_ee_hc_true_voice::func_744B()) {
-    var_00 = common_scripts\utility::func_7A33(self.var_AAF7);
+    var_00 = common_scripts\utility::random(self.var_AAF7);
     func_6BFA(var_00);
     var_00.var_65D8 show();
     var_00.var_565B = 0;
@@ -1212,7 +1212,7 @@ func_863B() {
 func_90B9(param_00, param_01) {
   wait(param_01 / 2);
   var_02 = getEnt("nest_ee_blimp_attack_gun", "targetname");
-  var_02 method_8449(level.var_179A);
+  var_02 linktosynchronizedparent(level.var_179A);
   var_03 = spawn("script_model", var_02.origin);
   var_03 setModel("tag_origin");
   playFXOnTag(common_scripts\utility::func_44F5("zmb_zeppelin_projectile"), var_03, "tag_origin");
@@ -1236,7 +1236,7 @@ func_180A(param_00, param_01) {
   thread func_2E75(param_00);
   var_02 = spawn("script_model", self.origin);
   var_02 setModel("zmb_uberschnalle_battery_chunk_01");
-  playFXOnTag(level.var_611["zmb_zep_battery_fire_trail"], var_02, "tag_origin");
+  playFXOnTag(level._effect["zmb_zep_battery_fire_trail"], var_02, "tag_origin");
   var_02 lib_0378::func_8D74("blimp_turret_explode");
   var_03 = common_scripts\utility::func_46B7("zmb_blimp_pieces_struct", "targetname");
   var_04 = (0, 0, -800);
@@ -1269,12 +1269,12 @@ func_180A(param_00, param_01) {
     var_02.var_9FE6.angles = var_07.var_9FE1.angles;
   }
 
-  var_02.var_9FE6 method_8449(var_02);
+  var_02.var_9FE6 linktosynchronizedparent(var_02);
   if(isDefined(level.var_1CBF)) {
     var_02.origin = var_02.origin + (0, 0, 4);
   }
 
-  playFX(level.var_611["zmb_zep_battery_land_explosion"], var_07.var_4DEA.origin + (0, 0, -20));
+  playFX(level._effect["zmb_zep_battery_land_explosion"], var_07.var_4DEA.origin + (0, 0, -20));
   lib_0378::func_8D74("blimp_battery_land", var_07.var_4DEA);
   if(!common_scripts\utility::func_562E(level.var_1CBA)) {
     thread maps / mp / mp_zombie_nest_ee_util::func_7213("zepuberhint", var_02.origin, 450, 512);
@@ -1309,7 +1309,7 @@ func_8427() {
   self.var_7F41 = var_00;
   self.var_241F solid();
   self.var_241F show();
-  self.var_241F method_805F();
+  self.var_241F saved_actionslotdata();
   var_01 = common_scripts\utility::func_F73(level.players, lib_0547::func_408F());
   foreach(var_03 in var_01) {
     if(function_01EF(var_03)) {

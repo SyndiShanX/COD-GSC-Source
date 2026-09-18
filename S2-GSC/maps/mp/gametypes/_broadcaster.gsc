@@ -29,7 +29,7 @@ monitorpuckcolor(param_00) {
       if(var_06 == self getentitynumber()) {
         var_07 = var_05 % 100;
         var_08 = tablelookupbyrow(var_01, var_07 - 1, var_02);
-        level.var_611[var_03 + "_" + param_00] = loadfx("vfx/ui/" + var_08);
+        level._effect[var_03 + "_" + param_00] = loadfx("vfx/ui/" + var_08);
         break;
       }
     }
@@ -51,8 +51,8 @@ monitorzoom() {
 }
 
 initializeclientvalues() {
-  if(!isDefined(level.var_611["broadcaster_followed_player"])) {
-    level.var_611["broadcaster_followed_player"] = loadfx("vfx/ui/esports_ui_puck_selected");
+  if(!isDefined(level._effect["broadcaster_followed_player"])) {
+    level._effect["broadcaster_followed_player"] = loadfx("vfx/ui/esports_ui_puck_selected");
   }
 
   thread monitorpuckcolor("allies");
@@ -534,8 +534,8 @@ func_1C9A(param_00) {
   self.var_1E99 thread func_1C8C(param_00);
   self visionsetnakedforplayer("airplane", param_00);
   wait(param_00);
-  if(isDefined(level.bomboutlineactive) && level.bomboutlineactive && isDefined(level.var_8330)) {
-    level.var_8330 hudoutlineenableforclient(self, maps\mp\_utility::func_46D4(game["attackers"]), 0);
+  if(isDefined(level.bomboutlineactive) && level.bomboutlineactive && isDefined(level.freezecontrols)) {
+    level.freezecontrols hudoutlineenableforclient(self, maps\mp\_utility::func_46D4(game["attackers"]), 0);
   }
 }
 
@@ -560,8 +560,8 @@ func_1C99(param_00) {
   setDvar("scr_game_lockspectatorpov", 1);
   self forcespectatepov(self getxuid(), "first_person");
   self.var_1E99.var_A4A8 = "first_person";
-  if(isDefined(level.bomboutlineactive) && level.bomboutlineactive && isDefined(level.var_8330)) {
-    level.var_8330 hudoutlinedisableforclient(self);
+  if(isDefined(level.bomboutlineactive) && level.bomboutlineactive && isDefined(level.freezecontrols)) {
+    level.freezecontrols hudoutlinedisableforclient(self);
   }
 }
 

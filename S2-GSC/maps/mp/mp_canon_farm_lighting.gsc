@@ -7,7 +7,7 @@ func_00F9() {
   setDvar("2893", 7);
 }
 
-func_6B82() {
+onplayerspawned() {
   level endon("game_ended");
   for(;;) {
     level waittill("player_spawned", var_00);

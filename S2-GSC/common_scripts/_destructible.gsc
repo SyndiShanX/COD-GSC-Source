@@ -38,7 +38,7 @@ func_3B74() {
   }
 
   var_00 = [];
-  foreach(var_02 in level.var_9478) {
+  foreach(var_02 in level.struct) {
     if(isDefined(var_02.script_noteworthy) && var_02.script_noteworthy == "destructible_dot") {
       var_00[var_00.size] = var_02;
     }
@@ -113,7 +113,7 @@ func_2E02(param_00) {
   }
 
   for(var_01 = 0; var_01 < level.var_75.size; var_01++) {
-    if(param_00 == level.var_75[var_01].var_A265["type"]) {
+    if(param_00 == level.var_75[var_01].v["type"]) {
       return var_01;
     }
   }
@@ -210,17 +210,17 @@ func_87D2() {
     self.var_2E10 = [];
     for(var_05 = 0; var_05 < level.var_75[self.var_2E25].var_6E9F.size; var_05++) {
       self.var_2E10[var_05] = spawnStruct();
-      self.var_2E10[var_05].var_A265["currentState"] = 0;
-      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_05][0].var_A265["health"])) {
-        self.var_2E10[var_05].var_A265["health"] = level.var_75[self.var_2E25].var_6E9F[var_05][0].var_A265["health"];
+      self.var_2E10[var_05].v["currentState"] = 0;
+      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_05][0].v["health"])) {
+        self.var_2E10[var_05].v["health"] = level.var_75[self.var_2E25].var_6E9F[var_05][0].v["health"];
       }
 
-      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_05][0].var_A265["random_dynamic_attachment_1"])) {
-        var_06 = randomint(level.var_75[self.var_2E25].var_6E9F[var_05][0].var_A265["random_dynamic_attachment_1"].size);
-        var_07 = level.var_75[self.var_2E25].var_6E9F[var_05][0].var_A265["random_dynamic_attachment_tag"][var_06];
-        var_08 = level.var_75[self.var_2E25].var_6E9F[var_05][0].var_A265["random_dynamic_attachment_1"][var_06];
-        var_09 = level.var_75[self.var_2E25].var_6E9F[var_05][0].var_A265["random_dynamic_attachment_2"][var_06];
-        var_0A = level.var_75[self.var_2E25].var_6E9F[var_05][0].var_A265["clipToRemove"][var_06];
+      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_05][0].v["random_dynamic_attachment_1"])) {
+        var_06 = randomint(level.var_75[self.var_2E25].var_6E9F[var_05][0].v["random_dynamic_attachment_1"].size);
+        var_07 = level.var_75[self.var_2E25].var_6E9F[var_05][0].v["random_dynamic_attachment_tag"][var_06];
+        var_08 = level.var_75[self.var_2E25].var_6E9F[var_05][0].v["random_dynamic_attachment_1"][var_06];
+        var_09 = level.var_75[self.var_2E25].var_6E9F[var_05][0].v["random_dynamic_attachment_2"][var_06];
+        var_0A = level.var_75[self.var_2E25].var_6E9F[var_05][0].v["clipToRemove"][var_06];
         thread func_30DF(var_07, var_08, var_09, var_0A);
       }
 
@@ -228,11 +228,11 @@ func_87D2() {
         continue;
       }
 
-      var_0B = level.var_75[self.var_2E25].var_6E9F[var_05][0].var_A265["modelName"];
-      var_0C = level.var_75[self.var_2E25].var_6E9F[var_05][0].var_A265["tagName"];
+      var_0B = level.var_75[self.var_2E25].var_6E9F[var_05][0].v["modelName"];
+      var_0C = level.var_75[self.var_2E25].var_6E9F[var_05][0].v["tagName"];
       for(var_0D = 1; isDefined(level.var_75[self.var_2E25].var_6E9F[var_05][var_0D]); var_0D++) {
-        var_0E = level.var_75[self.var_2E25].var_6E9F[var_05][var_0D].var_A265["tagName"];
-        var_0F = level.var_75[self.var_2E25].var_6E9F[var_05][var_0D].var_A265["modelName"];
+        var_0E = level.var_75[self.var_2E25].var_6E9F[var_05][var_0D].v["tagName"];
+        var_0F = level.var_75[self.var_2E25].var_6E9F[var_05][var_0D].v["modelName"];
         if(isDefined(var_0E) && var_0E != var_0C) {
           func_4D03(var_0E);
           if(self.var_6297) {
@@ -251,7 +251,7 @@ func_87D2() {
     self setCanDamage(1);
   }
 
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     thread func_258B();
   }
 
@@ -270,18 +270,18 @@ func_2DED(param_00, param_01, param_02, param_03, param_04, param_05) {
 
   var_06 = level.var_75.size;
   level.var_75[var_06] = spawnStruct();
-  level.var_75[var_06].var_A265["type"] = param_00;
+  level.var_75[var_06].v["type"] = param_00;
   level.var_75[var_06].var_6E9F = [];
   level.var_75[var_06].var_6E9F[0][0] = spawnStruct();
-  level.var_75[var_06].var_6E9F[0][0].var_A265["modelName"] = self.model;
-  level.var_75[var_06].var_6E9F[0][0].var_A265["tagName"] = param_01;
-  level.var_75[var_06].var_6E9F[0][0].var_A265["health"] = param_02;
-  level.var_75[var_06].var_6E9F[0][0].var_A265["validAttackers"] = param_03;
-  level.var_75[var_06].var_6E9F[0][0].var_A265["validDamageZone"] = param_04;
-  level.var_75[var_06].var_6E9F[0][0].var_A265["validDamageCause"] = param_05;
-  level.var_75[var_06].var_6E9F[0][0].var_A265["godModeAllowed"] = 1;
-  level.var_75[var_06].var_6E9F[0][0].var_A265["rotateTo"] = self.angles;
-  level.var_75[var_06].var_6E9F[0][0].var_A265["vehicle_exclude_anim"] = 0;
+  level.var_75[var_06].var_6E9F[0][0].v["modelName"] = self.model;
+  level.var_75[var_06].var_6E9F[0][0].v["tagName"] = param_01;
+  level.var_75[var_06].var_6E9F[0][0].v["health"] = param_02;
+  level.var_75[var_06].var_6E9F[0][0].v["validAttackers"] = param_03;
+  level.var_75[var_06].var_6E9F[0][0].v["validDamageZone"] = param_04;
+  level.var_75[var_06].var_6E9F[0][0].v["validDamageCause"] = param_05;
+  level.var_75[var_06].var_6E9F[0][0].v["godModeAllowed"] = 1;
+  level.var_75[var_06].var_6E9F[0][0].v["rotateTo"] = self.angles;
+  level.var_75[var_06].var_6E9F[0][0].v["vehicle_exclude_anim"] = 0;
 }
 
 func_2E0F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
@@ -296,7 +296,7 @@ func_2E1C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_09 = level.var_75[var_08].var_6E9F.size - 1;
   var_0A = level.var_75[var_08].var_6E9F[var_09].size;
   if(!isDefined(param_00) && var_09 == 0) {
-    param_00 = level.var_75[var_08].var_6E9F[var_09][0].var_A265["tagName"];
+    param_00 = level.var_75[var_08].var_6E9F[var_09][0].v["tagName"];
   }
 
   func_2E08(var_09, var_0A, param_00, param_01, param_02, param_03, param_04, param_05, undefined, undefined, param_06, param_07);
@@ -331,59 +331,59 @@ func_2DFB(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_09 = level.var_75[var_08].var_6E9F.size - 1;
   var_0A = level.var_75[var_08].var_6E9F[var_09].size - 1;
   var_0B = 0;
-  if(isDefined(level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["fx_filename"])) {
-    if(isDefined(level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["fx_filename"][param_04])) {
-      var_0B = level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["fx_filename"][param_04].size;
+  if(isDefined(level.var_75[var_08].var_6E9F[var_09][var_0A].v["fx_filename"])) {
+    if(isDefined(level.var_75[var_08].var_6E9F[var_09][var_0A].v["fx_filename"][param_04])) {
+      var_0B = level.var_75[var_08].var_6E9F[var_09][var_0A].v["fx_filename"][param_04].size;
     }
   }
 
   if(isDefined(param_03)) {
-    level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["fx_valid_damagetype"][param_04][var_0B] = param_03;
+    level.var_75[var_08].var_6E9F[var_09][var_0A].v["fx_valid_damagetype"][param_04][var_0B] = param_03;
   }
 
-  level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["fx_filename"][param_04][var_0B] = param_01;
-  level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["fx_tag"][param_04][var_0B] = param_00;
-  level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["fx_useTagAngles"][param_04][var_0B] = param_02;
-  level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["fx_cost"][param_04][var_0B] = param_05;
-  level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["spawn_immediate"][param_04][var_0B] = param_06;
-  level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["state_change_kill"][param_04][var_0B] = param_07;
+  level.var_75[var_08].var_6E9F[var_09][var_0A].v["fx_filename"][param_04][var_0B] = param_01;
+  level.var_75[var_08].var_6E9F[var_09][var_0A].v["fx_tag"][param_04][var_0B] = param_00;
+  level.var_75[var_08].var_6E9F[var_09][var_0A].v["fx_useTagAngles"][param_04][var_0B] = param_02;
+  level.var_75[var_08].var_6E9F[var_09][var_0A].v["fx_cost"][param_04][var_0B] = param_05;
+  level.var_75[var_08].var_6E9F[var_09][var_0A].v["spawn_immediate"][param_04][var_0B] = param_06;
+  level.var_75[var_08].var_6E9F[var_09][var_0A].v["state_change_kill"][param_04][var_0B] = param_07;
 }
 
 func_2DEE(param_00) {
   var_01 = level.var_75.size - 1;
   var_02 = level.var_75[var_01].var_6E9F.size - 1;
   var_03 = level.var_75[var_01].var_6E9F[var_02].size - 1;
-  if(!isDefined(level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["dot"])) {
-    level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["dot"] = [];
+  if(!isDefined(level.var_75[var_01].var_6E9F[var_02][var_03].v["dot"])) {
+    level.var_75[var_01].var_6E9F[var_02][var_03].v["dot"] = [];
   }
 
-  var_04 = level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["dot"].size;
+  var_04 = level.var_75[var_01].var_6E9F[var_02][var_03].v["dot"].size;
   var_05 = func_27E2();
   var_05.type = "predefined";
   var_05.index = param_00;
-  level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["dot"][var_04] = var_05;
+  level.var_75[var_01].var_6E9F[var_02][var_03].v["dot"][var_04] = var_05;
 }
 
 func_2DEF(param_00, param_01, param_02, param_03) {
   var_04 = level.var_75.size - 1;
   var_05 = level.var_75[var_04].var_6E9F.size - 1;
   var_06 = level.var_75[var_04].var_6E9F[var_05].size - 1;
-  if(!isDefined(level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["dot"])) {
-    level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["dot"] = [];
+  if(!isDefined(level.var_75[var_04].var_6E9F[var_05][var_06].v["dot"])) {
+    level.var_75[var_04].var_6E9F[var_05][var_06].v["dot"] = [];
   }
 
-  var_07 = level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["dot"].size;
+  var_07 = level.var_75[var_04].var_6E9F[var_05][var_06].v["dot"].size;
   var_08 = func_27E3((0, 0, 0), param_01, param_02, param_03);
   var_08.var_95A6 = param_00;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["dot"][var_07] = var_08;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["dot"][var_07] = var_08;
 }
 
 func_2E13(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
   var_08 = level.var_75.size - 1;
   var_09 = level.var_75[var_08].var_6E9F.size - 1;
   var_0A = level.var_75[var_08].var_6E9F[var_09].size - 1;
-  var_0B = level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["dot"].size - 1;
-  var_0C = level.var_75[var_08].var_6E9F[var_09][var_0A].var_A265["dot"][var_0B];
+  var_0B = level.var_75[var_08].var_6E9F[var_09][var_0A].v["dot"].size - 1;
+  var_0C = level.var_75[var_08].var_6E9F[var_09][var_0A].v["dot"][var_0B];
   var_0C func_866A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07);
   func_52AF(param_06);
 }
@@ -392,8 +392,8 @@ func_2E14(param_00, param_01, param_02) {
   var_03 = level.var_75.size - 1;
   var_04 = level.var_75[var_03].var_6E9F.size - 1;
   var_05 = level.var_75[var_03].var_6E9F[var_04].size - 1;
-  var_06 = level.var_75[var_03].var_6E9F[var_04][var_05].var_A265["dot"].size - 1;
-  var_07 = level.var_75[var_03].var_6E9F[var_04][var_05].var_A265["dot"][var_06];
+  var_06 = level.var_75[var_03].var_6E9F[var_04][var_05].v["dot"].size - 1;
+  var_07 = level.var_75[var_03].var_6E9F[var_04][var_05].v["dot"][var_06];
   var_08 = var_07.var_99C1.size;
   var_07.var_99C1[var_08].var_6B05 = param_00;
   var_07.var_99C1[var_08].var_6B33 = param_01;
@@ -404,8 +404,8 @@ func_2DE8(param_00, param_01) {
   var_02 = level.var_75.size - 1;
   var_03 = level.var_75[var_02].var_6E9F.size - 1;
   var_04 = level.var_75[var_02].var_6E9F[var_03].size - 1;
-  var_05 = level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["dot"].size - 1;
-  var_06 = level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["dot"][var_05];
+  var_05 = level.var_75[var_02].var_6E9F[var_03][var_04].v["dot"].size - 1;
+  var_06 = level.var_75[var_02].var_6E9F[var_03][var_04].v["dot"][var_05];
   var_06 func_1D45(param_00, param_01);
 }
 
@@ -413,8 +413,8 @@ func_2DE9(param_00) {
   var_01 = level.var_75.size - 1;
   var_02 = level.var_75[var_01].var_6E9F.size - 1;
   var_03 = level.var_75[var_01].var_6E9F[var_02].size - 1;
-  var_04 = level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["dot"].size - 1;
-  var_05 = level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["dot"][var_04];
+  var_04 = level.var_75[var_01].var_6E9F[var_02][var_03].v["dot"].size - 1;
+  var_05 = level.var_75[var_01].var_6E9F[var_02][var_03].v["dot"][var_04];
   var_05 func_1D46(param_00);
 }
 
@@ -422,8 +422,8 @@ func_2DE7(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = level.var_75.size - 1;
   var_07 = level.var_75[var_06].var_6E9F.size - 1;
   var_08 = level.var_75[var_06].var_6E9F[var_07].size - 1;
-  var_09 = level.var_75[var_06].var_6E9F[var_07][var_08].var_A265["dot"].size - 1;
-  var_0A = level.var_75[var_06].var_6E9F[var_07][var_08].var_A265["dot"][var_09];
+  var_09 = level.var_75[var_06].var_6E9F[var_07][var_08].v["dot"].size - 1;
+  var_0A = level.var_75[var_06].var_6E9F[var_07][var_08].v["dot"][var_09];
   var_0A func_1D44(param_00, param_01, param_02, param_03, param_04, param_05);
 }
 
@@ -431,8 +431,8 @@ func_2DEA(param_00) {
   var_01 = level.var_75.size - 1;
   var_02 = level.var_75[var_01].var_6E9F.size - 1;
   var_03 = level.var_75[var_01].var_6E9F[var_02].size - 1;
-  var_04 = level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["dot"].size - 1;
-  var_05 = level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["dot"][var_04];
+  var_04 = level.var_75[var_01].var_6E9F[var_02][var_03].v["dot"].size - 1;
+  var_05 = level.var_75[var_01].var_6E9F[var_02][var_03].v["dot"][var_04];
   var_05 func_1D47(param_00);
 }
 
@@ -445,24 +445,24 @@ func_2E0A(param_00, param_01, param_02, param_03) {
   var_05 = level.var_75[var_04].var_6E9F.size - 1;
   var_06 = level.var_75[var_04].var_6E9F[var_05].size - 1;
   var_07 = 0;
-  if(isDefined(level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["loopfx_filename"])) {
-    var_07 = level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["loopfx_filename"].size;
+  if(isDefined(level.var_75[var_04].var_6E9F[var_05][var_06].v["loopfx_filename"])) {
+    var_07 = level.var_75[var_04].var_6E9F[var_05][var_06].v["loopfx_filename"].size;
   }
 
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["loopfx_filename"][var_07] = param_01;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["loopfx_tag"][var_07] = param_00;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["loopfx_rate"][var_07] = param_02;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["loopfx_cost"][var_07] = param_03;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["loopfx_filename"][var_07] = param_01;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["loopfx_tag"][var_07] = param_00;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["loopfx_rate"][var_07] = param_02;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["loopfx_cost"][var_07] = param_03;
 }
 
 func_2E07(param_00, param_01, param_02, param_03) {
   var_04 = level.var_75.size - 1;
   var_05 = level.var_75[var_04].var_6E9F.size - 1;
   var_06 = level.var_75[var_04].var_6E9F[var_05].size - 1;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["healthdrain_amount"] = param_00;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["healthdrain_interval"] = param_01;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["badplace_radius"] = param_02;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["badplace_team"] = param_03;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["healthdrain_amount"] = param_00;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["healthdrain_interval"] = param_01;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["badplace_radius"] = param_02;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["badplace_team"] = param_03;
 }
 
 func_2E15(param_00, param_01, param_02) {
@@ -473,33 +473,33 @@ func_2E15(param_00, param_01, param_02) {
     param_02 = 0;
   }
 
-  if(!isDefined(level.var_75[var_03].var_6E9F[var_04][var_05].var_A265["sound"])) {
-    level.var_75[var_03].var_6E9F[var_04][var_05].var_A265["sound"] = [];
-    level.var_75[var_03].var_6E9F[var_04][var_05].var_A265["soundCause"] = [];
+  if(!isDefined(level.var_75[var_03].var_6E9F[var_04][var_05].v["sound"])) {
+    level.var_75[var_03].var_6E9F[var_04][var_05].v["sound"] = [];
+    level.var_75[var_03].var_6E9F[var_04][var_05].v["soundCause"] = [];
   }
 
-  if(!isDefined(level.var_75[var_03].var_6E9F[var_04][var_05].var_A265["sound"][param_02])) {
-    level.var_75[var_03].var_6E9F[var_04][var_05].var_A265["sound"][param_02] = [];
-    level.var_75[var_03].var_6E9F[var_04][var_05].var_A265["soundCause"][param_02] = [];
+  if(!isDefined(level.var_75[var_03].var_6E9F[var_04][var_05].v["sound"][param_02])) {
+    level.var_75[var_03].var_6E9F[var_04][var_05].v["sound"][param_02] = [];
+    level.var_75[var_03].var_6E9F[var_04][var_05].v["soundCause"][param_02] = [];
   }
 
-  var_06 = level.var_75[var_03].var_6E9F[var_04][var_05].var_A265["sound"][param_02].size;
-  level.var_75[var_03].var_6E9F[var_04][var_05].var_A265["sound"][param_02][var_06] = param_00;
-  level.var_75[var_03].var_6E9F[var_04][var_05].var_A265["soundCause"][param_02][var_06] = param_01;
+  var_06 = level.var_75[var_03].var_6E9F[var_04][var_05].v["sound"][param_02].size;
+  level.var_75[var_03].var_6E9F[var_04][var_05].v["sound"][param_02][var_06] = param_00;
+  level.var_75[var_03].var_6E9F[var_04][var_05].v["soundCause"][param_02][var_06] = param_01;
 }
 
 func_2E0B(param_00, param_01) {
   var_02 = level.var_75.size - 1;
   var_03 = level.var_75[var_02].var_6E9F.size - 1;
   var_04 = level.var_75[var_02].var_6E9F[var_03].size - 1;
-  if(!isDefined(level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["loopsound"])) {
-    level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["loopsound"] = [];
-    level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["loopsoundCause"] = [];
+  if(!isDefined(level.var_75[var_02].var_6E9F[var_03][var_04].v["loopsound"])) {
+    level.var_75[var_02].var_6E9F[var_03][var_04].v["loopsound"] = [];
+    level.var_75[var_02].var_6E9F[var_03][var_04].v["loopsoundCause"] = [];
   }
 
-  var_05 = level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["loopsound"].size;
-  level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["loopsound"][var_05] = param_00;
-  level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["loopsoundCause"][var_05] = param_01;
+  var_05 = level.var_75[var_02].var_6E9F[var_03][var_04].v["loopsound"].size;
+  level.var_75[var_02].var_6E9F[var_03][var_04].v["loopsound"][var_05] = param_00;
+  level.var_75[var_02].var_6E9F[var_03][var_04].v["loopsoundCause"][var_05] = param_01;
 }
 
 func_2DE3(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
@@ -544,7 +544,7 @@ func_093B(param_00) {
   var_02 = level.var_75[var_01].var_6E9F.size - 1;
   var_03 = level.var_75[var_01].var_6E9F[var_02].size - 1;
   foreach(var_06, var_05 in param_00) {
-    level.var_75[var_01].var_6E9F[var_02][var_03].var_A265[var_06] = var_05;
+    level.var_75[var_01].var_6E9F[var_02][var_03].v[var_06] = var_05;
   }
 }
 
@@ -552,20 +552,20 @@ func_0901(param_00, param_01) {
   var_02 = level.var_75.size - 1;
   var_03 = level.var_75[var_02].var_6E9F.size - 1;
   var_04 = level.var_75[var_02].var_6E9F[var_03].size - 1;
-  var_05 = level.var_75[var_02].var_6E9F[var_03][var_04].var_A265;
+  var_05 = level.var_75[var_02].var_6E9F[var_03][var_04].v;
   if(!isDefined(var_05[param_00])) {
     var_05[param_00] = [];
   }
 
   var_05[param_00][var_05[param_00].size] = param_01;
-  level.var_75[var_02].var_6E9F[var_03][var_04].var_A265 = var_05;
+  level.var_75[var_02].var_6E9F[var_03][var_04].v = var_05;
 }
 
 func_2DEB() {
   var_00 = level.var_75.size - 1;
   var_01 = level.var_75[var_00].var_6E9F.size - 1;
   var_02 = level.var_75[var_00].var_6E9F[var_01].size - 1;
-  level.var_75[var_00].var_6E9F[var_01][var_02].var_A265["triggerCarAlarm"] = 1;
+  level.var_75[var_00].var_6E9F[var_01][var_02].v["triggerCarAlarm"] = 1;
 }
 
 func_2E09(param_00) {
@@ -576,7 +576,7 @@ func_2E09(param_00) {
   var_01 = level.var_75.size - 1;
   var_02 = level.var_75[var_01].var_6E9F.size - 1;
   var_03 = level.var_75[var_01].var_6E9F[var_02].size - 1;
-  level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["break_nearby_lights"] = param_00;
+  level.var_75[var_01].var_6E9F[var_02][var_03].v["break_nearby_lights"] = param_00;
 }
 
 func_7A38(param_00, param_01, param_02, param_03) {
@@ -587,86 +587,86 @@ func_7A38(param_00, param_01, param_02, param_03) {
   var_04 = level.var_75.size - 1;
   var_05 = level.var_75[var_04].var_6E9F.size - 1;
   var_06 = 0;
-  if(!isDefined(level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["random_dynamic_attachment_1"])) {
-    level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["random_dynamic_attachment_1"] = [];
-    level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["random_dynamic_attachment_2"] = [];
-    level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["random_dynamic_attachment_tag"] = [];
+  if(!isDefined(level.var_75[var_04].var_6E9F[var_05][var_06].v["random_dynamic_attachment_1"])) {
+    level.var_75[var_04].var_6E9F[var_05][var_06].v["random_dynamic_attachment_1"] = [];
+    level.var_75[var_04].var_6E9F[var_05][var_06].v["random_dynamic_attachment_2"] = [];
+    level.var_75[var_04].var_6E9F[var_05][var_06].v["random_dynamic_attachment_tag"] = [];
   }
 
-  var_07 = level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["random_dynamic_attachment_1"].size;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["random_dynamic_attachment_1"][var_07] = param_01;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["random_dynamic_attachment_2"][var_07] = param_02;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["random_dynamic_attachment_tag"][var_07] = param_00;
-  level.var_75[var_04].var_6E9F[var_05][var_06].var_A265["clipToRemove"][var_07] = param_03;
+  var_07 = level.var_75[var_04].var_6E9F[var_05][var_06].v["random_dynamic_attachment_1"].size;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["random_dynamic_attachment_1"][var_07] = param_01;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["random_dynamic_attachment_2"][var_07] = param_02;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["random_dynamic_attachment_tag"][var_07] = param_00;
+  level.var_75[var_04].var_6E9F[var_05][var_06].v["clipToRemove"][var_07] = param_03;
 }
 
 func_2E11(param_00, param_01) {
   var_02 = level.var_75.size - 1;
   var_03 = level.var_75[var_02].var_6E9F.size - 1;
   var_04 = level.var_75[var_02].var_6E9F[var_03].size - 1;
-  if(!isDefined(level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["physics"])) {
-    level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["physics"] = [];
-    level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["physics_tagName"] = [];
-    level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["physics_velocity"] = [];
+  if(!isDefined(level.var_75[var_02].var_6E9F[var_03][var_04].v["physics"])) {
+    level.var_75[var_02].var_6E9F[var_03][var_04].v["physics"] = [];
+    level.var_75[var_02].var_6E9F[var_03][var_04].v["physics_tagName"] = [];
+    level.var_75[var_02].var_6E9F[var_03][var_04].v["physics_velocity"] = [];
   }
 
-  var_05 = level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["physics"].size;
-  level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["physics"][var_05] = 1;
-  level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["physics_tagName"][var_05] = param_00;
-  level.var_75[var_02].var_6E9F[var_03][var_04].var_A265["physics_velocity"][var_05] = param_01;
+  var_05 = level.var_75[var_02].var_6E9F[var_03][var_04].v["physics"].size;
+  level.var_75[var_02].var_6E9F[var_03][var_04].v["physics"][var_05] = 1;
+  level.var_75[var_02].var_6E9F[var_03][var_04].v["physics_tagName"][var_05] = param_00;
+  level.var_75[var_02].var_6E9F[var_03][var_04].v["physics_velocity"][var_05] = param_01;
 }
 
 func_2E18(param_00) {
   var_01 = level.var_75.size - 1;
   var_02 = level.var_75[var_01].var_6E9F.size - 1;
   var_03 = level.var_75[var_01].var_6E9F[var_02].size - 1;
-  level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["splash_damage_scaler"] = param_00;
+  level.var_75[var_01].var_6E9F[var_02][var_03].v["splash_damage_scaler"] = param_00;
 }
 
 func_2DF4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C, param_0D) {
   var_0E = level.var_75.size - 1;
   var_0F = level.var_75[var_0E].var_6E9F.size - 1;
   var_10 = level.var_75[var_0E].var_6E9F[var_0F].size - 1;
-  if(common_scripts\utility::func_57D7()) {
-    level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["explode_range"] = param_02;
+  if(common_scripts\utility::issp()) {
+    level.var_75[var_0E].var_6E9F[var_0F][var_10].v["explode_range"] = param_02;
   } else {
-    level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["explode_range"] = param_03;
+    level.var_75[var_0E].var_6E9F[var_0F][var_10].v["explode_range"] = param_03;
   }
 
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["explode"] = 1;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["explode_force_min"] = param_00;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["explode_force_max"] = param_01;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["explode_mindamage"] = param_04;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["explode_maxdamage"] = param_05;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["continueDamage"] = param_06;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["originOffset"] = param_07;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["earthQuakeScale"] = param_08;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["earthQuakeRadius"] = param_09;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["originOffset3d"] = param_0A;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["delaytime"] = param_0B;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["explode_angularImpulse_min"] = param_0C;
-  level.var_75[var_0E].var_6E9F[var_0F][var_10].var_A265["explode_angularImpulse_max"] = param_0D;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["explode"] = 1;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["explode_force_min"] = param_00;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["explode_force_max"] = param_01;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["explode_mindamage"] = param_04;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["explode_maxdamage"] = param_05;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["continueDamage"] = param_06;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["originOffset"] = param_07;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["earthQuakeScale"] = param_08;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["earthQuakeRadius"] = param_09;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["originOffset3d"] = param_0A;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["delaytime"] = param_0B;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["explode_angularImpulse_min"] = param_0C;
+  level.var_75[var_0E].var_6E9F[var_0F][var_10].v["explode_angularImpulse_max"] = param_0D;
 }
 
 func_2DF9(param_00) {
   var_01 = level.var_75.size - 1;
   var_02 = level.var_75[var_01].var_6E9F.size - 1;
   var_03 = level.var_75[var_01].var_6E9F[var_02].size - 1;
-  level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["function"] = param_00;
+  level.var_75[var_01].var_6E9F[var_02][var_03].v["function"] = param_00;
 }
 
 func_2E0E(param_00) {
   var_01 = level.var_75.size - 1;
   var_02 = level.var_75[var_01].var_6E9F.size - 1;
   var_03 = level.var_75[var_01].var_6E9F[var_02].size - 1;
-  level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["functionNotify"] = param_00;
+  level.var_75[var_01].var_6E9F[var_02][var_03].v["functionNotify"] = param_00;
 }
 
 func_2DF0(param_00) {
   var_01 = level.var_75.size - 1;
   var_02 = level.var_75[var_01].var_6E9F.size - 1;
   var_03 = level.var_75[var_01].var_6E9F[var_02].size - 1;
-  level.var_75[var_01].var_6E9F[var_02][var_03].var_A265["damage_threshold"] = param_00;
+  level.var_75[var_01].var_6E9F[var_02][var_03].v["damage_threshold"] = param_00;
 }
 
 func_2DE5(param_00, param_01) {
@@ -689,18 +689,18 @@ func_2E08(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   var_0D = level.var_75.size - 1;
   level.var_75[var_0D].var_6E9F[param_00][param_01] = spawnStruct();
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["modelName"] = param_03;
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["tagName"] = param_02;
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["health"] = param_04;
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["validAttackers"] = param_05;
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["validDamageZone"] = param_06;
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["validDamageCause"] = param_07;
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["alsoDamageParent"] = param_08;
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["physicsOnExplosion"] = param_09;
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["grenadeImpactDeath"] = param_0A;
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["godModeAllowed"] = 0;
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["splashRotation"] = param_0B;
-  level.var_75[var_0D].var_6E9F[param_00][param_01].var_A265["receiveDamageFromParent"] = param_0C;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["modelName"] = param_03;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["tagName"] = param_02;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["health"] = param_04;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["validAttackers"] = param_05;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["validDamageZone"] = param_06;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["validDamageCause"] = param_07;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["alsoDamageParent"] = param_08;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["physicsOnExplosion"] = param_09;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["grenadeImpactDeath"] = param_0A;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["godModeAllowed"] = 0;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["splashRotation"] = param_0B;
+  level.var_75[var_0D].var_6E9F[param_00][param_01].v["receiveDamageFromParent"] = param_0C;
 }
 
 func_7643() {
@@ -720,12 +720,12 @@ func_7643() {
         continue;
       }
 
-      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_03][var_04].var_A265["modelName"])) {
-        precachemodel(level.var_75[self.var_2E25].var_6E9F[var_03][var_04].var_A265["modelName"]);
+      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_03][var_04].v["modelName"])) {
+        precachemodel(level.var_75[self.var_2E25].var_6E9F[var_03][var_04].v["modelName"]);
       }
 
-      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_03][var_04].var_A265["animation"])) {
-        var_05 = level.var_75[self.var_2E25].var_6E9F[var_03][var_04].var_A265["animation"];
+      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_03][var_04].v["animation"])) {
+        var_05 = level.var_75[self.var_2E25].var_6E9F[var_03][var_04].v["animation"];
         foreach(var_07 in var_05) {
           if(isDefined(var_07["mpAnim"])) {
             common_scripts\utility::func_6756("precacheMpAnim", var_07["mpAnim"]);
@@ -733,15 +733,15 @@ func_7643() {
         }
       }
 
-      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_03][var_04].var_A265["random_dynamic_attachment_1"])) {
-        foreach(var_0A in level.var_75[self.var_2E25].var_6E9F[var_03][var_04].var_A265["random_dynamic_attachment_1"]) {
+      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_03][var_04].v["random_dynamic_attachment_1"])) {
+        foreach(var_0A in level.var_75[self.var_2E25].var_6E9F[var_03][var_04].v["random_dynamic_attachment_1"]) {
           if(isDefined(var_0A) && var_0A != "") {
             precachemodel(var_0A);
             precachemodel(var_0A + "_destroy");
           }
         }
 
-        foreach(var_0A in level.var_75[self.var_2E25].var_6E9F[var_03][var_04].var_A265["random_dynamic_attachment_2"]) {
+        foreach(var_0A in level.var_75[self.var_2E25].var_6E9F[var_03][var_04].v["random_dynamic_attachment_2"]) {
           if(isDefined(var_0A) && var_0A != "") {
             precachemodel(var_0A);
             precachemodel(var_0A + "_destroy");
@@ -764,35 +764,35 @@ func_091C() {
       }
 
       var_02 = level.var_75[self.var_2E25].var_6E9F[var_00][var_01];
-      if(isDefined(var_02.var_A265["fx_filename"])) {
-        for(var_03 = 0; var_03 < var_02.var_A265["fx_filename"].size; var_03++) {
-          var_04 = var_02.var_A265["fx_filename"][var_03];
-          var_05 = var_02.var_A265["fx_tag"][var_03];
+      if(isDefined(var_02.v["fx_filename"])) {
+        for(var_03 = 0; var_03 < var_02.v["fx_filename"].size; var_03++) {
+          var_04 = var_02.v["fx_filename"][var_03];
+          var_05 = var_02.v["fx_tag"][var_03];
           if(isDefined(var_04)) {
-            if(isDefined(var_02.var_A265["fx"]) && isDefined(var_02.var_A265["fx"][var_03]) && var_02.var_A265["fx"][var_03].size == var_04.size) {
+            if(isDefined(var_02.v["fx"]) && isDefined(var_02.v["fx"][var_03]) && var_02.v["fx"][var_03].size == var_04.size) {
               continue;
             }
 
             for(var_06 = 0; var_06 < var_04.size; var_06++) {
               var_07 = var_04[var_06];
               var_08 = var_05[var_06];
-              level.var_75[self.var_2E25].var_6E9F[var_00][var_01].var_A265["fx"][var_03][var_06] = loadfx(var_07, var_08);
+              level.var_75[self.var_2E25].var_6E9F[var_00][var_01].v["fx"][var_03][var_06] = loadfx(var_07, var_08);
             }
           }
         }
       }
 
-      var_09 = level.var_75[self.var_2E25].var_6E9F[var_00][var_01].var_A265["loopfx_filename"];
-      var_0A = level.var_75[self.var_2E25].var_6E9F[var_00][var_01].var_A265["loopfx_tag"];
+      var_09 = level.var_75[self.var_2E25].var_6E9F[var_00][var_01].v["loopfx_filename"];
+      var_0A = level.var_75[self.var_2E25].var_6E9F[var_00][var_01].v["loopfx_tag"];
       if(isDefined(var_09)) {
-        if(isDefined(var_02.var_A265["loopfx"]) && var_02.var_A265["loopfx"].size == var_09.size) {
+        if(isDefined(var_02.v["loopfx"]) && var_02.v["loopfx"].size == var_09.size) {
           continue;
         }
 
         for(var_06 = 0; var_06 < var_09.size; var_06++) {
           var_0B = var_09[var_06];
           var_0C = var_0A[var_06];
-          level.var_75[self.var_2E25].var_6E9F[var_00][var_01].var_A265["loopfx"][var_06] = loadfx(var_0B, var_0C);
+          level.var_75[self.var_2E25].var_6E9F[var_00][var_01].v["loopfx"][var_06] = loadfx(var_0B, var_0C);
         }
       }
     }
@@ -839,7 +839,7 @@ func_2E1D() {
       continue;
     }
 
-    if(common_scripts\utility::func_57D7()) {
+    if(common_scripts\utility::issp()) {
       var_00 = var_00 * 0.5;
     } else {
       var_00 = var_00 * 1;
@@ -849,7 +849,7 @@ func_2E1D() {
       continue;
     }
 
-    if(common_scripts\utility::func_57D7()) {
+    if(common_scripts\utility::issp()) {
       if(isDefined(var_05) && isPlayer(var_05)) {
         self.var_29D4 = var_05;
       }
@@ -861,7 +861,7 @@ func_2E1D() {
 
     var_08 = func_4487(var_08);
     if(func_5609(var_05, var_08)) {
-      if(common_scripts\utility::func_57D7()) {
+      if(common_scripts\utility::issp()) {
         var_00 = var_00 * 8;
       } else {
         var_00 = var_00 * 4;
@@ -879,16 +879,16 @@ func_2E1D() {
         var_02 = undefined;
       }
 
-      var_0B = level.var_75[self.var_2E25].var_6E9F[0][0].var_A265["tagName"];
+      var_0B = level.var_75[self.var_2E25].var_6E9F[0][0].v["tagName"];
       if(isDefined(var_0B) && isDefined(var_09) && var_0B == var_09) {
         var_02 = undefined;
       }
     }
 
     if(var_08 == "splash" || var_08 == "energy") {
-      if(isDefined(level.var_75[self.var_2E25].var_6E9F[0][0].var_A265["splash_damage_scaler"])) {
-        var_00 = var_00 * level.var_75[self.var_2E25].var_6E9F[0][0].var_A265["splash_damage_scaler"];
-      } else if(common_scripts\utility::func_57D7()) {
+      if(isDefined(level.var_75[self.var_2E25].var_6E9F[0][0].v["splash_damage_scaler"])) {
+        var_00 = var_00 * level.var_75[self.var_2E25].var_6E9F[0][0].v["splash_damage_scaler"];
+      } else if(common_scripts\utility::issp()) {
         var_00 = var_00 * 9;
       } else {
         var_00 = var_00 * 13;
@@ -938,7 +938,7 @@ func_5609(param_00, param_01) {
 
 func_45FD(param_00, param_01) {
   var_02 = spawnStruct();
-  var_02.var_A265 = [];
+  var_02.v = [];
   var_03 = -1;
   var_04 = -1;
   if(tolower(param_00) == tolower(self.model) && !isDefined(param_01)) {
@@ -949,7 +949,7 @@ func_45FD(param_00, param_01) {
   }
 
   for(var_05 = 0; var_05 < level.var_75[self.var_2E25].var_6E9F.size; var_05++) {
-    var_04 = self.var_2E10[var_05].var_A265["currentState"];
+    var_04 = self.var_2E10[var_05].v["currentState"];
     if(level.var_75[self.var_2E25].var_6E9F[var_05].size <= var_04) {
       continue;
     }
@@ -958,8 +958,8 @@ func_45FD(param_00, param_01) {
       continue;
     }
 
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_05][var_04].var_A265["tagName"])) {
-      var_06 = level.var_75[self.var_2E25].var_6E9F[var_05][var_04].var_A265["tagName"];
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_05][var_04].v["tagName"])) {
+      var_06 = level.var_75[self.var_2E25].var_6E9F[var_05][var_04].v["tagName"];
       if(tolower(var_06) == tolower(param_01)) {
         var_03 = var_05;
         break;
@@ -967,8 +967,8 @@ func_45FD(param_00, param_01) {
     }
   }
 
-  var_02.var_A265["stateIndex"] = var_04;
-  var_02.var_A265["partIndex"] = var_03;
+  var_02.v["stateIndex"] = var_04;
+  var_02.v["partIndex"] = var_03;
   return var_02;
 }
 
@@ -986,8 +986,8 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   var_08 = func_45FD(param_01, param_02);
-  var_09 = var_08.var_A265["stateIndex"];
-  var_0A = var_08.var_A265["partIndex"];
+  var_09 = var_08.v["stateIndex"];
+  var_0A = var_08.v["partIndex"];
   if(var_0A < 0) {
     return;
   }
@@ -996,14 +996,14 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_0C = 0;
   var_0D = 0;
   for(;;) {
-    var_09 = self.var_2E10[var_0A].var_A265["currentState"];
+    var_09 = self.var_2E10[var_0A].v["currentState"];
     if(!isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_09])) {
       break;
     }
 
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][0].var_A265["alsoDamageParent"])) {
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][0].v["alsoDamageParent"])) {
       if(func_4487(param_06) != "splash") {
-        var_0E = level.var_75[self.var_2E25].var_6E9F[var_0A][0].var_A265["alsoDamageParent"];
+        var_0E = level.var_75[self.var_2E25].var_6E9F[var_0A][0].v["alsoDamageParent"];
         var_0F = int(param_00 * var_0E);
         thread func_6807(var_0F, param_05, param_04, param_03, param_06, "", "");
       }
@@ -1012,52 +1012,52 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     if(var_0A == 0 && func_4487(param_06) != "splash") {
       for(var_10 = 0; var_10 < level.var_75[self.var_2E25].var_6E9F.size; var_10++) {
         var_11 = level.var_75[self.var_2E25].var_6E9F[var_10];
-        if(!isDefined(var_11[0].var_A265["receiveDamageFromParent"])) {
+        if(!isDefined(var_11[0].v["receiveDamageFromParent"])) {
           continue;
         }
 
         var_12 = 0;
-        if(isDefined(self.var_2E10[var_10].var_A265["currentState"])) {
-          var_12 = self.var_2E10[var_10].var_A265["currentState"];
+        if(isDefined(self.var_2E10[var_10].v["currentState"])) {
+          var_12 = self.var_2E10[var_10].v["currentState"];
         }
 
         if(!isDefined(var_11[var_12])) {
           continue;
         }
 
-        if(!isDefined(var_11[var_12].var_A265["tagName"])) {
+        if(!isDefined(var_11[var_12].v["tagName"])) {
           continue;
         }
 
-        var_13 = var_11[var_12].var_A265["tagName"];
-        var_0E = var_11[0].var_A265["receiveDamageFromParent"];
+        var_13 = var_11[var_12].v["tagName"];
+        var_0E = var_11[0].v["receiveDamageFromParent"];
         var_14 = int(param_00 * var_0E);
         thread func_6807(var_14, param_05, param_04, param_03, param_06, "", var_13);
       }
     }
 
-    if(!isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].var_A265["health"])) {
+    if(!isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].v["health"])) {
       break;
     }
 
-    if(!isDefined(self.var_2E10[var_0A].var_A265["health"])) {
+    if(!isDefined(self.var_2E10[var_0A].v["health"])) {
       break;
     }
 
     if(var_0C) {
-      self.var_2E10[var_0A].var_A265["health"] = level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].var_A265["health"];
+      self.var_2E10[var_0A].v["health"] = level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].v["health"];
     }
 
     var_0C = 0;
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].var_A265["grenadeImpactDeath"]) && param_06 == "impact") {
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].v["grenadeImpactDeath"]) && param_06 == "impact") {
       param_00 = 100000000;
     }
 
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].var_A265["damage_threshold"]) && level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].var_A265["damage_threshold"] > param_00) {
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].v["damage_threshold"]) && level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].v["damage_threshold"] > param_00) {
       param_00 = 0;
     }
 
-    var_15 = self.var_2E10[var_0A].var_A265["health"];
+    var_15 = self.var_2E10[var_0A].v["health"];
     var_16 = func_567E(var_0A, var_09, param_05);
     if(var_16) {
       var_17 = func_5825(var_0A, var_09, param_06);
@@ -1076,16 +1076,16 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
           }
         }
 
-        self.var_2E10[var_0A].var_A265["health"] = self.var_2E10[var_0A].var_A265["health"] - param_00;
+        self.var_2E10[var_0A].v["health"] = self.var_2E10[var_0A].v["health"] - param_00;
       }
     }
 
-    if(self.var_2E10[var_0A].var_A265["health"] > 0) {
+    if(self.var_2E10[var_0A].v["health"] > 0) {
       return;
     }
 
     if(isDefined(param_07)) {
-      param_07.var_A265["fxcost"] = func_4283(var_0A, self.var_2E10[var_0A].var_A265["currentState"]);
+      param_07.v["fxcost"] = func_4283(var_0A, self.var_2E10[var_0A].v["currentState"]);
       func_091D(self, param_07, param_00);
       if(!isDefined(self.var_A6E7)) {
         self.var_A6E7 = 1;
@@ -1100,41 +1100,41 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       }
 
       if(!var_18) {
-        self.var_2E10[var_0A].var_A265["health"] = var_15;
+        self.var_2E10[var_0A].v["health"] = var_15;
         return;
       }
     }
 
-    param_00 = int(abs(self.var_2E10[var_0A].var_A265["health"]));
+    param_00 = int(abs(self.var_2E10[var_0A].v["health"]));
     if(param_00 < 0) {
       return;
     }
 
-    self.var_2E10[var_0A].var_A265["currentState"]++;
-    var_09 = self.var_2E10[var_0A].var_A265["currentState"];
+    self.var_2E10[var_0A].v["currentState"]++;
+    var_09 = self.var_2E10[var_0A].v["currentState"];
     var_19 = var_09 - 1;
     var_1A = undefined;
     if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19])) {
-      var_1A = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265;
+      var_1A = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v;
     }
 
     var_1B = undefined;
     if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_09])) {
-      var_1B = level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].var_A265;
+      var_1B = level.var_75[self.var_2E25].var_6E9F[var_0A][var_09].v;
     }
 
     if(!isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19])) {
       return;
     }
 
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["explode"])) {
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["explode"])) {
       self.var_3949 = 1;
     }
 
     if(isDefined(self.var_5EFB) && isDefined(self.var_5EFB[common_scripts\utility::func_9AAD(var_0A)])) {
       for(var_10 = 0; var_10 < self.var_5EFB[common_scripts\utility::func_9AAD(var_0A)].size; var_10++) {
         self notify(self.var_5EFB[common_scripts\utility::func_9AAD(var_0A)][var_10]);
-        if(common_scripts\utility::func_57D7() && self.var_6297) {
+        if(common_scripts\utility::issp() && self.var_6297) {
           self.var_6296 notify(self.var_5EFB[common_scripts\utility::func_9AAD(var_0A)][var_10]);
         }
       }
@@ -1151,7 +1151,7 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         var_1C = var_1B["modelName"];
         if(isDefined(var_1C) && var_1C != self.model) {
           self setModel(var_1C);
-          if(common_scripts\utility::func_57D7() && self.var_6297) {
+          if(common_scripts\utility::issp() && self.var_6297) {
             self.var_6296 setModel(var_1C);
           }
 
@@ -1159,14 +1159,14 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         }
       } else {
         func_4D03(param_02);
-        if(common_scripts\utility::func_57D7() && self.var_6297) {
+        if(common_scripts\utility::issp() && self.var_6297) {
           self.var_6296 func_4D03(param_02);
         }
 
         param_02 = var_1B["tagName"];
         if(isDefined(param_02)) {
           func_8BED(param_02);
-          if(common_scripts\utility::func_57D7() && self.var_6297) {
+          if(common_scripts\utility::issp() && self.var_6297) {
             self.var_6296 func_8BED(param_02);
           }
         }
@@ -1182,26 +1182,26 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     var_1E = func_2E00(var_1A, var_1D, param_06, var_0A, var_1E);
     self notify("FX_State_Change_Kill" + var_0A);
     var_1E = func_2E16(var_1A, var_1D, param_06, var_1E);
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["loopfx"])) {
-      var_1F = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["loopfx_filename"].size;
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["loopfx"])) {
+      var_1F = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["loopfx_filename"].size;
       if(var_1F > 0) {
         self notify("FX_State_Change" + var_0A);
       }
 
       for(var_20 = 0; var_20 < var_1F; var_20++) {
-        var_21 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["loopfx"][var_20];
-        var_22 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["loopfx_tag"][var_20];
-        var_23 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["loopfx_rate"][var_20];
+        var_21 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["loopfx"][var_20];
+        var_22 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["loopfx_tag"][var_20];
+        var_23 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["loopfx_rate"][var_20];
         thread func_5EEF(var_21, var_22, var_23, var_0A);
       }
     }
 
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["loopsound"])) {
-      for(var_10 = 0; var_10 < level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["loopsound"].size; var_10++) {
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["loopsound"])) {
+      for(var_10 = 0; var_10 < level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["loopsound"].size; var_10++) {
         var_24 = func_583B("loopsoundCause", var_1A, var_10, param_06);
         if(var_24) {
-          var_25 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["loopsound"][var_10];
-          var_26 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["tagName"];
+          var_25 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["loopsound"][var_10];
+          var_26 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["tagName"];
           thread func_7152(var_25, var_26);
           if(!isDefined(self.var_5EFB)) {
             self.var_5EFB = [];
@@ -1217,28 +1217,28 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       }
     }
 
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["triggerCarAlarm"])) {
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["triggerCarAlarm"])) {
       thread func_3097();
     }
 
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["break_nearby_lights"])) {
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["break_nearby_lights"])) {
       thread func_1BA6();
     }
 
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["healthdrain_amount"])) {
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["healthdrain_amount"])) {
       self notify("Health_Drain_State_Change" + var_0A);
-      var_28 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["healthdrain_amount"];
-      var_29 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["healthdrain_interval"];
-      var_2A = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["modelName"];
-      var_2B = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["tagName"];
-      var_2C = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["badplace_radius"];
-      var_2D = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["badplace_team"];
+      var_28 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["healthdrain_amount"];
+      var_29 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["healthdrain_interval"];
+      var_2A = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["modelName"];
+      var_2B = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["tagName"];
+      var_2C = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["badplace_radius"];
+      var_2D = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["badplace_team"];
       if(var_28 > 0) {
         thread func_4C08(var_28, var_29, var_0A, var_2A, var_2B, var_2C, var_2D);
       }
     }
 
-    var_2E = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["dot"];
+    var_2E = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["dot"];
     if(isDefined(var_2E)) {
       foreach(var_30 in var_2E) {
         var_31 = var_30.index;
@@ -1279,21 +1279,21 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       var_2E = undefined;
     }
 
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["explode"])) {
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["explode"])) {
       var_0D = 1;
-      var_3D = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["explode_force_min"];
-      var_3E = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["explode_force_max"];
-      var_3F = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["explode_angularImpulse_min"];
-      var_40 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["explode_angularImpulse_max"];
-      var_41 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["explode_range"];
-      var_42 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["explode_mindamage"];
-      var_43 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["explode_maxdamage"];
-      var_44 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["continueDamage"];
-      var_45 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["originOffset"];
-      var_46 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["earthQuakeScale"];
-      var_47 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["earthQuakeRadius"];
-      var_48 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["originOffset3d"];
-      var_49 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["delaytime"];
+      var_3D = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["explode_force_min"];
+      var_3E = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["explode_force_max"];
+      var_3F = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["explode_angularImpulse_min"];
+      var_40 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["explode_angularImpulse_max"];
+      var_41 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["explode_range"];
+      var_42 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["explode_mindamage"];
+      var_43 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["explode_maxdamage"];
+      var_44 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["continueDamage"];
+      var_45 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["originOffset"];
+      var_46 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["earthQuakeScale"];
+      var_47 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["earthQuakeRadius"];
+      var_48 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["originOffset3d"];
+      var_49 = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["delaytime"];
       if(isDefined(param_05) && param_05 != self) {
         self.attacker = param_05;
         if(self.code_classname == "script_vehicle") {
@@ -1305,11 +1305,11 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     }
 
     var_4A = undefined;
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["physics"])) {
-      for(var_10 = 0; var_10 < level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["physics"].size; var_10++) {
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["physics"])) {
+      for(var_10 = 0; var_10 < level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["physics"].size; var_10++) {
         var_4A = undefined;
-        var_4B = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["physics_tagName"][var_10];
-        var_4C = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["physics_velocity"][var_10];
+        var_4B = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["physics_tagName"][var_10];
+        var_4C = level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["physics_velocity"][var_10];
         var_4D = undefined;
         if(isDefined(var_4C)) {
           var_4E = undefined;
@@ -1346,11 +1346,11 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         if(isDefined(var_4B)) {
           var_56 = undefined;
           for(var_57 = 0; var_57 < level.var_75[self.var_2E25].var_6E9F.size; var_57++) {
-            if(!isDefined(level.var_75[self.var_2E25].var_6E9F[var_57][0].var_A265["tagName"])) {
+            if(!isDefined(level.var_75[self.var_2E25].var_6E9F[var_57][0].v["tagName"])) {
               continue;
             }
 
-            if(level.var_75[self.var_2E25].var_6E9F[var_57][0].var_A265["tagName"] != var_4B) {
+            if(level.var_75[self.var_2E25].var_6E9F[var_57][0].v["tagName"] != var_4B) {
               continue;
             }
 
@@ -1377,12 +1377,12 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       }
     }
 
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265) && isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["functionNotify"])) {
-      self notify(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["functionNotify"]);
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v) && isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["functionNotify"])) {
+      self notify(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["functionNotify"]);
     }
 
-    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["function"])) {
-      self thread[[level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].var_A265["function"]]]();
+    if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["function"])) {
+      self thread[[level.var_75[self.var_2E25].var_6E9F[var_0A][var_19].v["function"]]]();
     }
 
     var_0C = 1;
@@ -1443,7 +1443,7 @@ func_2E17(param_00, param_01, param_02, param_03, param_04) {
   var_05 = func_8666(var_05, param_01);
   var_06 = func_456B(var_05);
   foreach(var_08 in var_05) {
-    var_09 = var_08.var_A265["distance"] * 1.4;
+    var_09 = var_08.v["distance"] * 1.4;
     var_0A = param_00 - var_09 - var_06;
     if(var_0A <= 0) {
       continue;
@@ -1453,7 +1453,7 @@ func_2E17(param_00, param_01, param_02, param_03, param_04) {
       continue;
     }
 
-    thread func_2E1F(var_0A, var_08.var_A265["modelName"], var_08.var_A265["tagName"], param_01, param_02, param_03, param_04, var_08);
+    thread func_2E1F(var_0A, var_08.v["modelName"], var_08.v["tagName"], param_01, param_02, param_03, param_04, var_08);
   }
 }
 
@@ -1465,13 +1465,13 @@ func_440C(param_00) {
 
   for(var_02 = 0; var_02 < level.var_75[self.var_2E25].var_6E9F.size; var_02++) {
     var_03 = var_02;
-    var_04 = self.var_2E10[var_03].var_A265["currentState"];
+    var_04 = self.var_2E10[var_03].v["currentState"];
     for(var_05 = 0; var_05 < level.var_75[self.var_2E25].var_6E9F[var_03].size; var_05++) {
-      var_06 = level.var_75[self.var_2E25].var_6E9F[var_03][var_05].var_A265["splashRotation"];
+      var_06 = level.var_75[self.var_2E25].var_6E9F[var_03][var_05].v["splashRotation"];
       if(isDefined(var_06) && var_06) {
         var_07 = vectortoangles(param_00);
         var_08 = var_07[1] - 90;
-        level.var_75[self.var_2E25].var_6E9F[var_03][var_05].var_A265["rotateTo"] = (0, var_08, 0);
+        level.var_75[self.var_2E25].var_6E9F[var_03][var_05].v["rotateTo"] = (0, var_08, 0);
       }
     }
 
@@ -1479,7 +1479,7 @@ func_440C(param_00) {
       continue;
     }
 
-    var_09 = level.var_75[self.var_2E25].var_6E9F[var_03][var_04].var_A265["tagName"];
+    var_09 = level.var_75[self.var_2E25].var_6E9F[var_03][var_04].v["tagName"];
     if(!isDefined(var_09)) {
       var_09 = "";
     }
@@ -1488,15 +1488,15 @@ func_440C(param_00) {
       continue;
     }
 
-    var_0A = level.var_75[self.var_2E25].var_6E9F[var_03][var_04].var_A265["modelName"];
+    var_0A = level.var_75[self.var_2E25].var_6E9F[var_03][var_04].v["modelName"];
     if(!isDefined(var_0A)) {
       var_0A = "";
     }
 
     var_0B = var_01.size;
     var_01[var_0B] = spawnStruct();
-    var_01[var_0B].var_A265["modelName"] = var_0A;
-    var_01[var_0B].var_A265["tagName"] = var_09;
+    var_01[var_0B].v["modelName"] = var_0A;
+    var_01[var_0B].v["tagName"] = var_09;
   }
 
   return var_01;
@@ -1504,8 +1504,8 @@ func_440C(param_00) {
 
 func_8666(param_00, param_01) {
   for(var_02 = 0; var_02 < param_00.size; var_02++) {
-    var_03 = distance(param_01, self gettagorigin(param_00[var_02].var_A265["tagName"]));
-    param_00[var_02].var_A265["distance"] = var_03;
+    var_03 = distance(param_01, self gettagorigin(param_00[var_02].v["tagName"]));
+    param_00[var_02].v["distance"] = var_03;
   }
 
   return param_00;
@@ -1514,7 +1514,7 @@ func_8666(param_00, param_01) {
 func_456B(param_00) {
   var_01 = undefined;
   foreach(var_03 in param_00) {
-    var_04 = var_03.var_A265["distance"];
+    var_04 = var_03.v["distance"];
     if(!isDefined(var_01)) {
       var_01 = var_04;
     }
@@ -1550,7 +1550,7 @@ func_567E(param_00, param_01, param_02) {
     return 1;
   }
 
-  if(isDefined(level.var_75[self.var_2E25].var_6E9F[param_00][param_01].var_A265["explode"])) {
+  if(isDefined(level.var_75[self.var_2E25].var_6E9F[param_00][param_01].v["explode"])) {
     if(isDefined(self.var_323D)) {
       return 0;
     }
@@ -1564,7 +1564,7 @@ func_567E(param_00, param_01, param_02) {
     return 1;
   }
 
-  var_03 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].var_A265["validAttackers"];
+  var_03 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].v["validAttackers"];
   if(!isDefined(var_03)) {
     return 1;
   }
@@ -1607,12 +1607,12 @@ func_5825(param_00, param_01, param_02) {
     return 1;
   }
 
-  var_03 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].var_A265["godModeAllowed"];
+  var_03 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].v["godModeAllowed"];
   if(var_03 && (isDefined(self.var_480F) && self.var_480F) || isDefined(self.var_812F) && self.var_812F && param_02 == "bullet") {
     return 0;
   }
 
-  var_04 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].var_A265["validDamageCause"];
+  var_04 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].v["validDamageCause"];
   if(!isDefined(var_04)) {
     return 1;
   }
@@ -1730,11 +1730,11 @@ func_4C08(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   if(isDefined(param_05) && isDefined(level.var_14F6)) {
     var_07 = "" + gettime();
     if(!isDefined(self.var_2F71)) {
-      if(isDefined(self.var_8276)) {
-        param_05 = self.var_8276;
+      if(isDefined(self.scriptmodelplayanim)) {
+        param_05 = self.scriptmodelplayanim;
       }
 
-      if(common_scripts\utility::func_57D7() && isDefined(param_06)) {
+      if(common_scripts\utility::issp() && isDefined(param_06)) {
         if(param_06 == "both") {
           [[level.var_14F6]](var_07, 0, self.origin, param_05, 128, "allies", "bad_guys");
         } else {
@@ -1749,7 +1749,7 @@ func_4C08(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     }
   }
 
-  while(isDefined(self) && self.var_2E10[param_02].var_A265["health"] > 0) {
+  while(isDefined(self) && self.var_2E10[param_02].v["health"] > 0) {
     self notify("damage", param_00, self, (0, 0, 0), (0, 0, 0), "MOD_UNKNOWN", param_03, param_04);
     wait(param_01);
   }
@@ -1773,8 +1773,8 @@ func_6FA4(param_00, param_01, param_02, param_03) {
 }
 
 func_6FA6(param_00, param_01) {
-  var_02 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].var_A265["modelName"];
-  var_03 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].var_A265["tagName"];
+  var_02 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].v["modelName"];
+  var_03 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].v["tagName"];
   func_4D03(var_03);
   if(level.var_2E29.size >= level.var_2E2A) {
     func_6FA7(level.var_2E29[0]);
@@ -1834,7 +1834,7 @@ func_3923(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     self notify("death", param_0A, self.var_29B2);
   }
 
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     thread func_2FC6();
   }
 
@@ -1846,10 +1846,10 @@ func_3923(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  var_0F = self.var_2E10[param_00].var_A265["currentState"];
+  var_0F = self.var_2E10[param_00].v["currentState"];
   var_10 = undefined;
   if(isDefined(level.var_75[self.var_2E25].var_6E9F[param_00][var_0F])) {
-    var_10 = level.var_75[self.var_2E25].var_6E9F[param_00][var_0F].var_A265["tagName"];
+    var_10 = level.var_75[self.var_2E25].var_6E9F[param_00][var_0F].v["tagName"];
   }
 
   if(isDefined(var_10)) {
@@ -1867,13 +1867,13 @@ func_3923(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         continue;
       }
 
-      var_13 = self.var_2E10[var_12].var_A265["currentState"];
+      var_13 = self.var_2E10[var_12].v["currentState"];
       if(var_13 >= level.var_75[self.var_2E25].var_6E9F[var_12].size) {
         var_13 = level.var_75[self.var_2E25].var_6E9F[var_12].size - 1;
       }
 
-      var_14 = level.var_75[self.var_2E25].var_6E9F[var_12][var_13].var_A265["modelName"];
-      var_10 = level.var_75[self.var_2E25].var_6E9F[var_12][var_13].var_A265["tagName"];
+      var_14 = level.var_75[self.var_2E25].var_6E9F[var_12][var_13].v["modelName"];
+      var_10 = level.var_75[self.var_2E25].var_6E9F[var_12][var_13].v["tagName"];
       if(!isDefined(var_14)) {
         continue;
       }
@@ -1883,22 +1883,22 @@ func_3923(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       }
 
       var_15 = 0;
-      if(isDefined(self.var_2E10[var_12].var_A265["health"])) {
-        var_15 = self.var_2E10[var_12].var_A265["health"];
+      if(isDefined(self.var_2E10[var_12].v["health"])) {
+        var_15 = self.var_2E10[var_12].v["health"];
       }
 
       var_16 = 0;
-      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_12][var_13].var_A265["health"])) {
-        var_16 = level.var_75[self.var_2E25].var_6E9F[var_12][var_13].var_A265["health"];
+      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_12][var_13].v["health"])) {
+        var_16 = level.var_75[self.var_2E25].var_6E9F[var_12][var_13].v["health"];
       }
 
       if(var_16 > 0 && var_15 <= 0) {
         continue;
       }
 
-      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_12][0].var_A265["physicsOnExplosion"])) {
-        if(level.var_75[self.var_2E25].var_6E9F[var_12][0].var_A265["physicsOnExplosion"] > 0) {
-          var_17 = level.var_75[self.var_2E25].var_6E9F[var_12][0].var_A265["physicsOnExplosion"];
+      if(isDefined(level.var_75[self.var_2E25].var_6E9F[var_12][0].v["physicsOnExplosion"])) {
+        if(level.var_75[self.var_2E25].var_6E9F[var_12][0].v["physicsOnExplosion"] > 0) {
+          var_17 = level.var_75[self.var_2E25].var_6E9F[var_12][0].v["physicsOnExplosion"];
           var_18 = self gettagorigin(var_10);
           var_19 = vectorNormalize(var_18 - var_11);
           var_19 = var_19 * randomfloatrange(param_01, param_02) * var_17;
@@ -1929,7 +1929,7 @@ func_3923(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   var_1C = var_11 + (0, 0, param_07) + param_0B;
-  var_1D = getsubstr(level.var_75[self.var_2E25].var_A265["type"], 0, 7) == "vehicle";
+  var_1D = getsubstr(level.var_75[self.var_2E25].v["type"], 0, 7) == "vehicle";
   if(var_1D) {
     anim.var_5B7D = gettime();
     anim.var_5B7A = var_1C;
@@ -1946,7 +1946,7 @@ func_3923(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     thread[[level.var_2E12]]();
   }
 
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     if(level.var_3FD4 == 0 && !func_7381()) {
       self entityradiusdamage(var_1C, param_03, param_05, param_04, self, "MOD_RIFLE_BULLET");
     } else {
@@ -2100,7 +2100,7 @@ func_3DED() {
 }
 
 func_4168() {
-  if(!common_scripts\utility::func_57D7()) {
+  if(!common_scripts\utility::issp()) {
     return self;
   }
 
@@ -2145,7 +2145,7 @@ func_6807(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     return;
   }
 
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     param_00 = param_00 / 0.5;
   } else {
     param_00 = param_00 / 1;
@@ -2236,7 +2236,7 @@ func_8B54() {
 
 func_30DF(param_00, param_01, param_02, param_03) {
   var_04 = [];
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     self attach(param_01, param_00, 0);
     if(isDefined(param_02) && param_02 != "") {
       self attach(param_02, param_00, 0);
@@ -2263,11 +2263,11 @@ func_30DF(param_00, param_01, param_02, param_03) {
   }
 
   self waittill("exploded");
-  if(common_scripts\utility::func_57D7()) {
-    self method_802E(param_01, param_00);
+  if(common_scripts\utility::issp()) {
+    self detach(param_01, param_00);
     self attach(param_01 + "_destroy", param_00, 0);
     if(isDefined(param_02) && param_02 != "") {
-      self method_802E(param_02, param_00);
+      self detach(param_02, param_00);
       self attach(param_02 + "_destroy", param_00, 0);
       return;
     }
@@ -2356,12 +2356,12 @@ func_2E05() {
 
 func_24E0(param_00) {
   waittillframeend;
-  if(common_scripts\utility::func_57D7() && param_00.spawnflags & 1) {
+  if(common_scripts\utility::issp() && param_00.spawnflags & 1) {
     param_00[[level.var_2FC3]]();
   }
 
   self waittill("exploded");
-  if(common_scripts\utility::func_57D7() && param_00.spawnflags & 1) {
+  if(common_scripts\utility::issp() && param_00.spawnflags & 1) {
     param_00[[level.connectpathsfunction]]();
   }
 
@@ -2370,13 +2370,13 @@ func_24E0(param_00) {
 
 func_24DF(param_00) {
   param_00 notsolid();
-  if(common_scripts\utility::func_57D7() && param_00.spawnflags & 1) {
+  if(common_scripts\utility::issp() && param_00.spawnflags & 1) {
     param_00[[level.connectpathsfunction]]();
   }
 
   self waittill("exploded");
   waittillframeend;
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     if(param_00.spawnflags & 1) {
       param_00[[level.var_2FC3]]();
     }
@@ -2396,7 +2396,7 @@ func_2AFD(param_00) {}
 
 func_2E01(param_00) {
   var_01 = getEntArray("light_destructible", "targetname");
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     var_02 = getEntArray("light_destructible", "script_noteworthy");
     var_01 = common_scripts\utility::func_F73(var_01, var_02);
   }
@@ -2512,7 +2512,7 @@ func_9117(param_00, param_01, param_02, param_03, param_04) {
 }
 
 func_2E1B(param_00, param_01, param_02, param_03) {
-  if(!common_scripts\utility::func_57D7()) {
+  if(!common_scripts\utility::issp()) {
     return;
   }
 
@@ -2589,8 +2589,8 @@ func_2DFC(param_00) {
   self endon("FX_State_Change_Kill" + param_00);
   for(;;) {
     var_02 = -1;
-    if(isDefined(self.var_2E10[0].var_A265["currentState"])) {
-      var_02 = self.var_2E10[0].var_A265["currentState"];
+    if(isDefined(self.var_2E10[0].v["currentState"])) {
+      var_02 = self.var_2E10[0].v["currentState"];
     }
 
     if(var_02 == var_01) {
@@ -2694,19 +2694,19 @@ func_2DFF() {
   for(var_01 = 0; var_01 < level.var_75[self.var_2E25].var_6E9F.size; var_01++) {
     for(var_02 = 0; var_02 < level.var_75[self.var_2E25].var_6E9F[var_01].size; var_02++) {
       var_03 = level.var_75[self.var_2E25].var_6E9F[var_01][var_02];
-      if(isDefined(var_03.var_A265["fx_filename"])) {
-        for(var_04 = 0; var_04 < var_03.var_A265["fx_filename"].size; var_04++) {
-          var_05 = var_03.var_A265["fx_filename"][var_04];
-          var_06 = var_03.var_A265["fx_tag"][var_04];
-          var_07 = var_03.var_A265["spawn_immediate"][var_04];
+      if(isDefined(var_03.v["fx_filename"])) {
+        for(var_04 = 0; var_04 < var_03.v["fx_filename"].size; var_04++) {
+          var_05 = var_03.v["fx_filename"][var_04];
+          var_06 = var_03.v["fx_tag"][var_04];
+          var_07 = var_03.v["spawn_immediate"][var_04];
           if(isDefined(var_05) && isDefined(var_07)) {
             for(var_08 = 0; var_08 < var_05.size; var_08++) {
               if(var_07[var_08] == 1) {
-                var_09 = var_03.var_A265["state_change_kill"][var_04][var_08];
-                var_0A = level.var_75[self.var_2E25].var_6E9F[var_01][var_02].var_A265["fx"][var_04][var_08];
+                var_09 = var_03.v["state_change_kill"][var_04][var_08];
+                var_0A = level.var_75[self.var_2E25].var_6E9F[var_01][var_02].v["fx"][var_04][var_08];
                 var_0B = var_06[var_08];
                 var_0C = var_05[var_08];
-                var_0D = level.var_75[self.var_2E25].var_6E9F[var_01][var_02].var_A265["fx_useTagAngles"][var_04][var_08];
+                var_0D = level.var_75[self.var_2E25].var_6E9F[var_01][var_02].v["fx_useTagAngles"][var_04][var_08];
                 thread func_2DFE(var_00, var_0A, var_0B, var_01, var_0D, var_09);
               }
             }
@@ -2784,7 +2784,7 @@ func_2DE4(param_00, param_01, param_02, param_03) {
     wait 0.05;
   }
 
-  var_04 = common_scripts\utility::func_7A33(param_00["animation"]);
+  var_04 = common_scripts\utility::random(param_00["animation"]);
   var_05 = var_04["anim"];
   var_06 = var_04["animTree"];
   var_07 = var_04["groupNum"];
@@ -2826,7 +2826,7 @@ func_2DE4(param_00, param_01, param_02, param_03) {
     wait(randomfloat(var_09));
   }
 
-  if(!common_scripts\utility::func_57D7()) {
+  if(!common_scripts\utility::issp()) {
     if(isDefined(var_08)) {
       common_scripts\utility::func_83BE("scriptModelPlayAnim", var_08);
     }
@@ -2850,7 +2850,7 @@ func_2DE4(param_00, param_01, param_02, param_03) {
 func_23A2(param_00) {
   if(isDefined(self.var_ED4)) {
     foreach(var_02 in self.var_ED4) {
-      if(common_scripts\utility::func_57D7()) {
+      if(common_scripts\utility::issp()) {
         param_00 common_scripts\utility::func_83BE("clearanim", var_02, 0);
         continue;
       }
@@ -2863,7 +2863,7 @@ func_23A2(param_00) {
 func_51B4() {
   level.var_2DC8 = 0;
   level.var_2DC9 = 0.5;
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     level.var_607E = 20;
     return;
   }
@@ -2900,10 +2900,10 @@ func_091D(param_00, param_01, param_02) {
     level.var_2E24[var_03].var_3F6B = 0;
   }
 
-  level.var_2E24[var_03].var_3F6B = level.var_2E24[var_03].var_3F6B + param_01.var_A265["fxcost"];
+  level.var_2E24[var_03].var_3F6B = level.var_2E24[var_03].var_3F6B + param_01.v["fxcost"];
   level.var_2E24[var_03].var_9AB1 = level.var_2E24[var_03].var_9AB1 + param_02;
-  if(param_01.var_A265["distance"] < level.var_2E24[var_03].var_6635) {
-    level.var_2E24[var_03].var_6635 = param_01.var_A265["distance"];
+  if(param_01.v["distance"] < level.var_2E24[var_03].var_6635) {
+    level.var_2E24[var_03].var_6635 = param_01.v["distance"];
   }
 
   thread func_49CE();
@@ -2962,7 +2962,7 @@ func_4283(param_00, param_01) {
     return var_02;
   }
 
-  var_03 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].var_A265;
+  var_03 = level.var_75[self.var_2E25].var_6E9F[param_00][param_01].v;
   if(isDefined(var_03["fx"])) {
     foreach(var_05 in var_03["fx_cost"]) {
       foreach(var_07 in var_05) {
@@ -2976,16 +2976,16 @@ func_4283(param_00, param_01) {
 
 func_52AF(param_00) {
   if(!common_scripts\utility::func_3C83("FLAG_DOT_init")) {
-    common_scripts\utility::func_3C87("FLAG_DOT_init");
-    common_scripts\utility::func_3C8F("FLAG_DOT_init");
+    common_scripts\utility::flag_init("FLAG_DOT_init");
+    common_scripts\utility::flag_set("FLAG_DOT_init");
   }
 
   param_00 = tolower(param_00);
   switch (param_00) {
     case "poison":
       if(!common_scripts\utility::func_3C83("FLAG_DOT_poison_init")) {
-        common_scripts\utility::func_3C87("FLAG_DOT_poison_init");
-        common_scripts\utility::func_3C8F("FLAG_DOT_poison_init");
+        common_scripts\utility::flag_init("FLAG_DOT_poison_init");
+        common_scripts\utility::flag_set("FLAG_DOT_poison_init");
       }
       break;
 
@@ -3005,7 +3005,7 @@ func_27E3(param_00, param_01, param_02, param_03) {
   var_04.type = "trigger_radius";
   var_04.origin = param_00;
   var_04.spawnflags = param_01;
-  var_04.var_14F = param_02;
+  var_04.radius = param_02;
   var_04.var_6220 = param_02;
   var_04.var_6098 = param_02;
   var_04.height = param_03;
@@ -3044,7 +3044,7 @@ func_866A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   self.var_99C1[var_08].var_35FE = 0;
   self.var_99C1[var_08].var_2CAC = param_00;
   self.var_99C1[var_08].var_D9 = param_01;
-  self.var_99C1[var_08].var_3511 = param_02;
+  self.var_99C1[var_08].duration = param_02;
   self.var_99C1[var_08].var_61BD = param_03;
   self.var_99C1[var_08].var_607B = param_04;
   switch (param_05) {
@@ -3057,7 +3057,7 @@ func_866A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   self.var_99C1[var_08].var_93 = param_05;
-  self.var_99C1[var_08].var_9309 = 0;
+  self.var_99C1[var_08].starttime = 0;
   switch (param_06) {
     case "normal":
       break;
@@ -3086,7 +3086,7 @@ func_1D45(param_00, param_01) {
   param_01 = tolower(param_01);
   var_02 = self.var_99C1.size;
   self.var_99C1[var_02] = spawnStruct();
-  self.var_99C1[var_02].var_3511 = param_00;
+  self.var_99C1[var_02].duration = param_00;
   self.var_99C1[var_02].var_2CAC = 0;
   self.var_99C1[var_02].var_6B05 = ::func_6B00;
   self.var_99C1[var_02].var_6B33 = ::func_6B30;
@@ -3202,7 +3202,7 @@ func_92C7(param_00) {
     var_04 = undefined;
     switch (var_03.type) {
       case "trigger_radius":
-        var_04 = spawn("trigger_radius", var_03.origin, var_03.spawnflags, var_03.var_14F, var_03.height);
+        var_04 = spawn("trigger_radius", var_03.origin, var_03.spawnflags, var_03.radius, var_03.height);
         var_04.var_6220 = var_03.var_6220;
         var_04.var_6098 = var_03.var_6098;
         var_04.var_99C1 = var_03.var_99C1;
@@ -3220,7 +3220,7 @@ func_92C7(param_00) {
 
     var_05 = var_04.var_99C1;
     foreach(var_07 in var_05) {
-      var_07.var_9309 = gettime();
+      var_07.starttime = gettime();
     }
 
     foreach(var_07 in var_05) {
@@ -3267,7 +3267,7 @@ func_6381() {
   var_00 = gettime();
   while(isDefined(self)) {
     foreach(var_04, var_02 in self.var_99C1) {
-      if(isDefined(var_02) && gettime() - var_00 >= var_02.var_3511 * 1000) {
+      if(isDefined(var_02) && gettime() - var_00 >= var_02.duration * 1000) {
         var_03 = self getentitynumber();
         self notify("LISTEN_kill_tick_" + var_04 + "_" + var_03);
         self.var_99C1[var_04] = undefined;
@@ -3350,7 +3350,7 @@ func_6B04(param_00, param_01) {
   }
 
   self.var_6B02[param_00][var_02] = 0;
-  var_04 = common_scripts\utility::func_98E7(common_scripts\utility::func_57D7(), 1.5, 1);
+  var_04 = common_scripts\utility::func_98E7(common_scripts\utility::issp(), 1.5, 1);
   while(isDefined(param_01) && isDefined(param_01.var_99C1[param_00])) {
     self.var_6B02[param_00][var_02]++;
     switch (self.var_6B02[param_00][var_02]) {
@@ -3414,7 +3414,7 @@ func_6AE5() {
 }
 
 func_3149(param_00, param_01) {
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     return;
   }
 
@@ -3547,7 +3547,7 @@ func_7477(param_00, param_01, param_02) {
     self endon("death");
   }
 
-  if(!common_scripts\utility::func_57D7()) {
+  if(!common_scripts\utility::issp()) {
     var_03 = self.guid;
   } else {
     var_03 = "player" + gettime();
@@ -3574,7 +3574,7 @@ func_7477(param_00, param_01, param_02) {
   }
 
   self.var_9AC5[param_00.var_37D8] = param_00;
-  while(isalive(self) && common_scripts\utility::func_57D7() || !level.gameended) {
+  while(isalive(self) && common_scripts\utility::issp() || !level.gameended) {
     var_0B = 1;
     if(self istouching(param_00)) {
       wait 0.05;
@@ -3611,7 +3611,7 @@ func_7477(param_00, param_01, param_02) {
     }
   }
 
-  if(!common_scripts\utility::func_57D7() && level.gameended) {
+  if(!common_scripts\utility::issp() && level.gameended) {
     return;
   }
 
@@ -3647,7 +3647,7 @@ func_2E23() {
     if(isDefined(self.var_2E10)) {
       var_00 = 0;
       for(var_01 = 1; var_01 < self.var_2E10.size; var_01++) {
-        if(self.var_2E10[var_01].var_A265["currentState"] == 1) {
+        if(self.var_2E10[var_01].v["currentState"] == 1) {
           var_00++;
         }
       }

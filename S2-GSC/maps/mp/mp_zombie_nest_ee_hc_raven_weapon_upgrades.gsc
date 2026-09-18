@@ -4,10 +4,10 @@
 ******************************************************************/
 
 main() {
-  common_scripts\utility::func_3C87("flag_nest_hc_ee_death_assembled");
-  common_scripts\utility::func_3C87("flag_nest_hc_ee_moon_assembled");
-  common_scripts\utility::func_3C87("flag_nest_hc_ee_blood_assembled");
-  common_scripts\utility::func_3C87("flag_nest_hc_ee_storm_assembled");
+  common_scripts\utility::flag_init("flag_nest_hc_ee_death_assembled");
+  common_scripts\utility::flag_init("flag_nest_hc_ee_moon_assembled");
+  common_scripts\utility::flag_init("flag_nest_hc_ee_blood_assembled");
+  common_scripts\utility::flag_init("flag_nest_hc_ee_storm_assembled");
   lib_0557::func_4BC9("tesla gun upgraded", "upgrading tesla gun", "CONST_HC_ANALYTICS_TESLA_GUNS_UPGRADED");
   var_04 = [];
   var_04 = maps / mp / mp_zombie_nest_ee_workbench::func_536D();
@@ -240,7 +240,7 @@ func_7B96(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   lib_0557::func_4BC8(param_09);
   lib_0557::func_4BC8("tesla gun upgraded");
   if(isDefined(param_06) && common_scripts\utility::func_3C83(param_06)) {
-    common_scripts\utility::func_3C8F(param_06);
+    common_scripts\utility::flag_set(param_06);
   }
 }
 
@@ -499,7 +499,7 @@ func_902C(param_00, param_01) {
   }
 
   var_02 setModel("zmb_gp_uber_01");
-  playFXOnTag(level.var_611[param_01 + "_uber"], var_02, "tag_origin");
+  playFXOnTag(level._effect[param_01 + "_uber"], var_02, "tag_origin");
   return var_02;
 }
 
@@ -612,7 +612,7 @@ func_7A8B(param_00) {
   param_00["fuse_pickup"] hide();
   func_A6C3(param_00);
   param_00["cover_model"] scriptmodelplayanim("zmb_breakable_statue_bursting", "statue_burst");
-  playFX(level.var_611["zmb_hc_statue"], param_00["cover_model"].origin);
+  playFX(level._effect["zmb_hc_statue"], param_00["cover_model"].origin);
   param_00["cover_model"] lib_0378::func_8D74("aud_break_statue");
   param_00["fuse_pickup"] show();
   param_00["fuse_pickup"] maps / mp / mp_zombie_nest_ee_util::func_A725("teslagun_zm");
@@ -644,7 +644,7 @@ func_7A89(param_00) {
   var_02 setCanDamage(1);
   var_02 maps / mp / mp_zombie_nest_ee_util::func_A725("teslagun_zm");
   playFXOnTag(common_scripts\utility::func_44F5("temp_hc_challenge_indicator_lights"), var_03, "tag_origin");
-  var_03 method_8449(var_02);
+  var_03 linktosynchronizedparent(var_02);
   var_04 = maps / mp / mp_zombie_nest_ee_util::func_44C8(var_02.target, 1);
   var_02.var_775E = 0;
   lib_0378::func_8D74("tesla_hc_energy_lamp_loop_on", var_02.origin);
@@ -751,11 +751,11 @@ func_A6C1(param_00, param_01, param_02, param_03, param_04, param_05) {
 
     if(common_scripts\utility::func_562E(var_0B)) {
       if(!self.var_579D) {
-        playFX(level.var_611["zmb_receiver_charge_lost"], param_03.origin, anglesToForward(param_03.angles), anglestoup(param_03.angles));
+        playFX(level._effect["zmb_receiver_charge_lost"], param_03.origin, anglesToForward(param_03.angles), anglestoup(param_03.angles));
         continue;
       }
 
-      playFX(level.var_611["zmb_receiver_charge_pnt"], param_03.origin, anglesToForward(param_03.angles), anglestoup(param_03.angles));
+      playFX(level._effect["zmb_receiver_charge_pnt"], param_03.origin, anglesToForward(param_03.angles), anglestoup(param_03.angles));
       lib_0378::func_8D74("aud_battery_electrocute");
       var_0B = undefined;
       var_0C++;
@@ -770,7 +770,7 @@ func_A6C1(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 
   self notify("raven_trap_complete");
-  playFX(level.var_611["zmb_receiver_full"], param_03.origin, anglesToForward(param_03.angles), anglestoup(param_03.angles));
+  playFX(level._effect["zmb_receiver_full"], param_03.origin, anglesToForward(param_03.angles), anglestoup(param_03.angles));
 }
 
 func_A667() {

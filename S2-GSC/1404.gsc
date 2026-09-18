@@ -16,8 +16,8 @@ init() {
 }
 
 func_398E() {
-  level.var_9852["allies"] = 0;
-  level.var_9852["axis"] = 0;
+  level.teamemped["allies"] = 0;
+  level.teamemped["axis"] = 0;
   level.var_6C25 = 0;
   level.var_6241 = [];
 }
@@ -35,7 +35,7 @@ func_1A4E() {
 
 func_0B81() {}
 
-func_809C() {
+geteye() {
   var_00 = undefined;
   if(isDefined(level.var_AB45) && level.var_AB45.size > 0) {
     var_00 = level.var_AB45[level.var_AB45.size - 1];
@@ -57,7 +57,7 @@ func_809C() {
     var_01[var_01.size] = "camo";
   }
 
-  var_01 = common_scripts\utility::func_F92(var_01);
+  var_01 = common_scripts\utility::array_randomize(var_01);
   var_02 = var_01.size;
   for(var_03 = 0; var_03 < var_02; var_03++) {
     var_04 = func_45AC(var_01, var_02, var_00);
@@ -124,7 +124,7 @@ func_809B() {
   var_00[var_00.size] = 700;
   var_00[var_00.size] = 800;
   var_00[var_00.size] = 1000;
-  level.var_AB38 = common_scripts\utility::func_F92(var_00);
+  level.var_AB38 = common_scripts\utility::array_randomize(var_00);
   level.var_AB39 = 0;
 }
 
@@ -150,7 +150,7 @@ func_7F1C() {
   level.var_AB35 = 0;
   level.var_AB33 = 0;
   thread func_8A17();
-  thread func_809C();
+  thread geteye();
   thread func_809B();
   var_00 = randomintrange(3, 5);
   for(;;) {
@@ -194,7 +194,7 @@ func_4460(param_00) {
 
 func_4476(param_00) {
   if(level.var_AB45.size == level.var_AB44) {
-    func_809C();
+    geteye();
   }
 
   var_04 = level.var_AB45[level.var_AB44];
@@ -255,7 +255,7 @@ func_4478(param_00) {
     var_02 = func_470A();
   }
 
-  var_02 = common_scripts\utility::func_F92(var_02);
+  var_02 = common_scripts\utility::array_randomize(var_02);
   var_03 = undefined;
   var_04 = 0;
   foreach(var_06 in var_02) {
@@ -389,7 +389,7 @@ func_5A5F(param_00) {
       level.var_AB33 = 1;
     } else {}
 
-    var_01 thread maps\mp\gametypes\_hud_message::func_5A78(var_02, undefined, undefined, var_06);
+    var_01 thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(var_02, undefined, undefined, var_06);
     var_01 thread maps\mp\killstreaks\_killstreaks::func_478D(var_02, 0, 0, var_01, var_06);
     maps\mp\killstreaks\_airdrop::func_2D30(1);
   }

@@ -191,7 +191,7 @@ func_1A68(param_00, param_01, param_02) {
 func_1A5A(param_00) {
   var_01 = 0;
   var_02 = ["veteran", "hardened", "regular", "recruit"];
-  var_02 = common_scripts\utility::func_F92(var_02);
+  var_02 = common_scripts\utility::array_randomize(var_02);
   foreach(var_04 in var_02) {
     var_01 = func_1A61("weap_statstable", param_00, "loadoutPrimaryGUID", self.var_6F7D, var_04);
     if(var_01 != 0) {
@@ -200,7 +200,7 @@ func_1A5A(param_00) {
   }
 
   if(isDefined(level.var_1A91)) {
-    var_06 = common_scripts\utility::func_F92(level.var_1A91);
+    var_06 = common_scripts\utility::array_randomize(level.var_1A91);
     foreach(var_08 in var_06) {
       foreach(var_04 in var_02) {
         var_01 = func_1A61("weap_statstable", param_00, "loadoutPrimaryGUID", var_08, var_04);
@@ -258,7 +258,7 @@ func_199C() {
     }
   }
 
-  var_02 = common_scripts\utility::func_7A33(var_00);
+  var_02 = common_scripts\utility::random(var_00);
   var_03 = [];
   foreach(var_05 in level.var_1A64) {
     if(isstring(var_02)) {
@@ -279,7 +279,7 @@ func_1A97(param_00) {
     if(isDefined(var_02)) {
       var_03 = strtok(var_02, "| ");
       if(var_03.size > 0) {
-        maps / mp / bots / _bots_util::func_1AD5(common_scripts\utility::func_7A33(var_03));
+        maps / mp / bots / _bots_util::func_1AD5(common_scripts\utility::random(var_03));
         return;
       }
     }
@@ -479,9 +479,9 @@ func_5172() {
       var_07 = getbaseweaponguid(var_06);
       var_08 = maps\mp\_utility::func_452B(var_07);
       var_09 = "loadoutPrimaryGUID";
-      if(maps\mp\gametypes\_class::func_5839(var_08, 0, 0)) {
+      if(maps\mp\gametypes\_class::isvalidsecondary(var_08, 0, 0)) {
         var_09 = "loadoutSecondaryGUID";
-      } else if(!maps\mp\gametypes\_class::func_5835(var_08, 0)) {
+      } else if(!maps\mp\gametypes\_class::isvalidprimary(var_08, 0)) {
         var_00++;
         continue;
       }
@@ -601,37 +601,37 @@ func_1A5E(param_00, param_01) {
   var_02 = int(getsubstr(param_00, 5, 6)) - 1;
   switch (param_01) {
     case "loadoutDivision":
-      return maps\mp\gametypes\_class::func_9583(level.classtablename, var_02);
+      return maps\mp\gametypes\_class::table_getdivision(level.classtablename, var_02);
 
     case "loadoutPrimaryGUID":
-      return maps\mp\gametypes\_class::func_9590(level.classtablename, var_02, 0);
+      return maps\mp\gametypes\_class::table_getweapon(level.classtablename, var_02, 0);
 
     case "loadoutPrimaryAttachmentGUID1":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 0);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 0, 0);
 
     case "loadoutPrimaryAttachmentGUID2":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 1);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 0, 1);
 
     case "loadoutPrimaryAttachmentGUID3":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 2);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 0, 2);
 
     case "loadoutPrimaryAttachmentGUID4":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 3);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 0, 3);
 
     case "loadoutPrimaryAttachmentGUID5":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 4);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 0, 4);
 
     case "loadoutPrimaryAttachmentGUID6":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 0, 5);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 0, 5);
 
     case "loadoutPrimaryCamoGUID":
-      return maps\mp\gametypes\_class::func_958E(level.classtablename, var_02, 0);
+      return maps\mp\gametypes\_class::table_getweaponcamo(level.classtablename, var_02, 0);
 
     case "loadoutPrimaryCamo2GUID":
       return 0;
 
     case "loadoutPrimaryReticleGUID":
-      return maps\mp\gametypes\_class::func_9591(level.classtablename, var_02, 0);
+      return maps\mp\gametypes\_class::table_getweaponreticle(level.classtablename, var_02, 0);
 
     case "loadoutPrimaryPaintjobId":
       return 0;
@@ -640,34 +640,34 @@ func_1A5E(param_00, param_01) {
       return 0;
 
     case "loadoutSecondaryGUID":
-      return maps\mp\gametypes\_class::func_9590(level.classtablename, var_02, 1);
+      return maps\mp\gametypes\_class::table_getweapon(level.classtablename, var_02, 1);
 
     case "loadoutSecondaryAttachmentGUID1":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 0);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 1, 0);
 
     case "loadoutSecondaryAttachmentGUID2":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 1);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 1, 1);
 
     case "loadoutSecondaryAttachmentGUID3":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 2);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 1, 2);
 
     case "loadoutSecondaryAttachmentGUID4":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 3);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 1, 3);
 
     case "loadoutSecondaryAttachmentGUID5":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 4);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 1, 4);
 
     case "loadoutSecondaryAttachmentGUID6":
-      return maps\mp\gametypes\_class::func_958B(level.classtablename, var_02, 1, 5);
+      return maps\mp\gametypes\_class::table_getweaponattachment(level.classtablename, var_02, 1, 5);
 
     case "loadoutSecondaryCamoGUID":
-      return maps\mp\gametypes\_class::func_958E(level.classtablename, var_02, 1);
+      return maps\mp\gametypes\_class::table_getweaponcamo(level.classtablename, var_02, 1);
 
     case "loadoutSecondaryCamo2GUID":
       return 0;
 
     case "loadoutSecondaryReticleGUID":
-      return maps\mp\gametypes\_class::func_9591(level.classtablename, var_02, 1);
+      return maps\mp\gametypes\_class::table_getweaponreticle(level.classtablename, var_02, 1);
 
     case "loadoutSecondaryPaintjobId":
       return 0;
@@ -676,7 +676,7 @@ func_1A5E(param_00, param_01) {
       return 0;
 
     case "loadoutEquipmentGUID":
-      return maps\mp\gametypes\_class::func_9584(level.classtablename, var_02);
+      return maps\mp\gametypes\_class::table_getequipment(level.classtablename, var_02);
 
     case "loadoutEquipmentNumExtra":
       var_03 = maps\mp\gametypes\_class::func_9585(level.classtablename, var_02);
@@ -689,10 +689,10 @@ func_1A5E(param_00, param_01) {
       break;
 
     case "loadoutOffhandGUID":
-      return maps\mp\gametypes\_class::func_9587(level.classtablename, var_02);
+      return maps\mp\gametypes\_class::table_getoffhand(level.classtablename, var_02);
 
     case "loadoutOffhandNumExtra":
-      var_04 = maps\mp\gametypes\_class::func_9588(level.classtablename, var_02);
+      var_04 = maps\mp\gametypes\_class::table_getoffhandextra(level.classtablename, var_02);
       if(function_030D(var_04) || isstringinteger(var_04)) {
         return var_04;
       } else {
@@ -702,16 +702,16 @@ func_1A5E(param_00, param_01) {
       break;
 
     case "loadoutStreakGUID1":
-      return maps\mp\gametypes\_class::func_9586(level.classtablename, var_02, 0);
+      return maps\mp\gametypes\_class::table_getkillstreak(level.classtablename, var_02, 0);
 
     case "loadoutStreakGUID2":
-      return maps\mp\gametypes\_class::func_9586(level.classtablename, var_02, 1);
+      return maps\mp\gametypes\_class::table_getkillstreak(level.classtablename, var_02, 1);
 
     case "loadoutStreakGUID3":
-      return maps\mp\gametypes\_class::func_9586(level.classtablename, var_02, 2);
+      return maps\mp\gametypes\_class::table_getkillstreak(level.classtablename, var_02, 2);
 
     case "loadoutStreakGUID4":
-      return maps\mp\gametypes\_class::func_9586(level.classtablename, var_02, 3);
+      return maps\mp\gametypes\_class::table_getkillstreak(level.classtablename, var_02, 3);
 
     case "loadoutPerkGUID3":
     case "loadoutPerkGUID2":
@@ -723,7 +723,7 @@ func_1A5E(param_00, param_01) {
     case "loadoutPerkGUID5":
     case "loadoutPerkGUID4":
       var_05 = int(getsubstr(param_01, 15)) - 1;
-      return maps\mp\gametypes\_class::func_9589(level.classtablename, var_02, var_05);
+      return maps\mp\gametypes\_class::table_getperk(level.classtablename, var_02, var_05);
   }
 
   return param_01;
@@ -1121,7 +1121,7 @@ func_1A6D(param_00, param_01, param_02, param_03) {
       }
 
       var_04 = func_1A68("weapon", var_05, undefined);
-      var_04 = var_04 && maps\mp\gametypes\_class::func_5835(var_05, func_1A12(param_01, "specialty_class_serrated"));
+      var_04 = var_04 && maps\mp\gametypes\_class::isvalidprimary(var_05, func_1A12(param_01, "specialty_class_serrated"));
       var_04 = var_04 && func_1A69(param_00, param_03, self botgetdifficulty());
       break;
 
@@ -1212,7 +1212,7 @@ func_1A6D(param_00, param_01, param_02, param_03) {
       }
 
       var_04 = var_04 && func_1A68("weapon", var_05, undefined);
-      var_04 = var_04 && maps\mp\gametypes\_class::func_5839(var_05, func_1A12(param_01, "specialty_class_rifleman"), func_1A12(param_01, "specialty_class_launched"));
+      var_04 = var_04 && maps\mp\gametypes\_class::isvalidsecondary(var_05, func_1A12(param_01, "specialty_class_rifleman"), func_1A12(param_01, "specialty_class_launched"));
       var_04 = var_04 && func_1A69(param_00, param_03, self botgetdifficulty());
       break;
 
@@ -1317,7 +1317,7 @@ func_1A60(param_00, param_01, param_02, param_03, param_04) {
 
   if(param_01 == "classtable_any") {
     if(!isDefined(self.var_2B94)) {
-      self.var_2B94 = common_scripts\utility::func_7A33(["class1", "class2", "class3", "class4", "class5"]);
+      self.var_2B94 = common_scripts\utility::random(["class1", "class2", "class3", "class4", "class5"]);
     }
 
     param_00 = [self.var_2B94];
@@ -1540,7 +1540,7 @@ func_1A63(param_00) {
       }
 
       if(!var_0E) {
-        var_0C = common_scripts\utility::func_7A33(var_0D);
+        var_0C = common_scripts\utility::random(var_0D);
       }
     }
 

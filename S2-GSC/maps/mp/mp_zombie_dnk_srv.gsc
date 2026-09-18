@@ -31,8 +31,8 @@ main() {
   level.pap_camo_ref_override = "zom_camo_01";
   thread maps / mp / mp_zombie_dnk_code::ship_tilting_init();
   thread performance_stuff();
-  common_scripts\utility::func_3C87("dnk_defense_drop_spawner_enabled");
-  common_scripts\utility::func_3C8F("dnk_defense_drop_spawner_enabled");
+  common_scripts\utility::flag_init("dnk_defense_drop_spawner_enabled");
+  common_scripts\utility::flag_set("dnk_defense_drop_spawner_enabled");
   lib_055A::init();
   lib_055A::func_530A("zone_dunkirk", 1);
   lib_055A::func_88A();

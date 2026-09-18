@@ -5,9 +5,9 @@
 
 hotpotatoobjectiveinit(param_00) {
   if(!lib_04FF::func_694B()) {
-    level.var_611["hill_thermite_grenade_exp"] = loadfx("vfx/map/hill/hill_thermite_grenade_exp");
-    level.var_611["hill_thermite_grenade_burn"] = loadfx("vfx/map/hill/hill_thermite_grenade_burn");
-    level.var_611["hill_thermite_grenade_ignite"] = loadfx("vfx/map/hill/hill_thermite_grenade_ignite");
+    level._effect["hill_thermite_grenade_exp"] = loadfx("vfx/map/hill/hill_thermite_grenade_exp");
+    level._effect["hill_thermite_grenade_burn"] = loadfx("vfx/map/hill/hill_thermite_grenade_burn");
+    level._effect["hill_thermite_grenade_ignite"] = loadfx("vfx/map/hill/hill_thermite_grenade_ignite");
   }
 
   lib_04FF::func_6934(self);
@@ -42,7 +42,7 @@ hotpotatoobjectivethink() {
   for(;;) {
     self waittill("objectiveHit");
     var_00 = self.objectivehelth / lib_04FF::func_45D0("objectiveScoreGoal");
-    self.potatocatchpoints[0] lib_04FF::func_8615(10000 - 10000 * var_00);
+    self.potatocatchpoints[0] lib_04FF::playlocalsound(10000 - 10000 * var_00);
     if(self.objectivehelth >= lib_04FF::func_45D0("objectiveScoreGoal")) {
       lib_04FF::func_6935(self.var_695A);
       return;
@@ -62,7 +62,7 @@ hotpotatoobjectiveupdate() {
 onhotpotatoobjectivecompleted() {
   lib_04FF::func_6982(self.var_695A);
   level.var_695E = common_scripts\utility::func_F93(level.var_695E, ::onhotpotatoobjectivecompleted);
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 takehotpotato(self.var_79AD);
   }
 
@@ -112,11 +112,11 @@ onhotpotatodelivered(param_00) {
   self.var_79AD.objectivehelth = clamp(self.var_79AD.objectivehelth + self.var_79AD lib_04FF::func_45D0("objectiveCaptureScore"), 0, self.var_79AD lib_04FF::func_45D0("objectiveScoreGoal"));
   self.var_79AD notify("objectiveHit");
   param_00 takehotpotato(self.var_79AD);
-  var_01 = param_00.var_12C["team"];
-  var_02 = maps\mp\_utility::func_45DE(var_01);
+  var_01 = param_00.pers["team"];
+  var_02 = maps\mp\_utility::getotherteam(var_01);
   if(self.var_79AD.objectivehelth < self.var_79AD lib_04FF::func_45D0("objectiveScoreGoal")) {
-    maps\mp\_utility::func_74D9("mp_war_stinger_pos", var_01);
-    maps\mp\_utility::func_74D9("mp_war_stinger_neg", var_02);
+    maps\mp\_utility::playsoundonplayers("mp_war_stinger_pos", var_01);
+    maps\mp\_utility::playsoundonplayers("mp_war_stinger_neg", var_02);
   }
 }
 
@@ -125,8 +125,8 @@ hotpotatocatchtrigger(param_00) {
   self.potatocatchpoints[self.potatocatchpoints.size] = param_00;
   var_01 = lib_04FF::func_45D0("objectiveScoreGoal");
   param_00.var_A23F = 10000;
-  param_00 lib_04FF::func_990(param_00.var_116, undefined, undefined, 10000, 4, 0, 1, 0, 1);
-  param_00 lib_04FF::func_8615(10000);
+  param_00 lib_04FF::func_990(param_00.origin, undefined, undefined, 10000, 4, 0, 1, 0, 1);
+  param_00 lib_04FF::playlocalsound(10000);
   lib_04FF::func_6982(self.var_695A);
   param_00 common_scripts\utility::func_9D9F();
 }
@@ -143,7 +143,7 @@ hotpotatoobjectiveimagetimer(param_00) {
   for(;;) {
     if(self.var_6896 != var_02) {
       var_03 = var_02 - self.var_6896 * 1000;
-      param_00 lib_04FF::func_8615(var_03);
+      param_00 lib_04FF::playlocalsound(var_03);
     }
 
     self waittill("prop_destroyed");
@@ -170,7 +170,7 @@ hotpotatopickupzonetrigger(param_00) {
   var_03.var_A414 = 1;
   var_03.var_A23E = 9;
   var_04 = lib_0502::func_4518("grab_defend", param_00.var_81E1);
-  var_03 thread lib_04FF::func_990(param_00.var_116, undefined, var_01, lib_04FF::func_45D0("bombPickupTime") * 1000, var_04, 0, 1);
+  var_03 thread lib_04FF::func_990(param_00.origin, undefined, var_01, lib_04FF::func_45D0("bombPickupTime") * 1000, var_04, 0, 1);
   var_03 lib_04FF::func_860A(var_04, param_00.var_81E1);
   lib_04FF::func_6982(self.var_695A);
   var_03 common_scripts\utility::func_9D9F();
@@ -188,13 +188,13 @@ onpotatopickupzoneuse(param_00) {
 
 givehotpotato(param_00) {
   var_01 = self;
-  if(!var_01.var_1A7 == game["defenders"] && !common_scripts\utility::func_562E(var_01.hotpotato)) {
+  if(!var_01.team == game["defenders"] && !common_scripts\utility::func_562E(var_01.hotpotato)) {
     var_01.hotpotato = 1;
     var_02 = param_00 lib_04FF::func_45D0("bombGrenadeWeapon");
-    var_01.potatoicon = var_01 maps\mp\gametypes\_hud_util::func_280B("icon_raid_objective_resupply_carry", 50, 50);
-    var_01.potatoicon maps\mp\gametypes\_hud_util::func_8707("BOTTOM RIGHT", "BOTTOM RIGHT", 0, -90);
-    maps\mp\_utility::func_642(var_02);
-    maps\mp\_utility::func_6D0(4, "weapon", var_02);
+    var_01.potatoicon = var_01 maps\mp\gametypes\_hud_util::createicon("icon_raid_objective_resupply_carry", 50, 50);
+    var_01.potatoicon maps\mp\gametypes\_hud_util::setpoint("BOTTOM RIGHT", "BOTTOM RIGHT", 0, -90);
+    maps\mp\_utility::_giveweapon(var_02);
+    maps\mp\_utility::_setactionslot(4, "weapon", var_02);
     var_01 thread manualthrowthink_potato(param_00);
     foreach(var_04 in param_00.potatopickuppoints) {
       var_04.var_A223 lib_04FF::func_8610(var_01);
@@ -219,7 +219,7 @@ takehotpotato(param_00, param_01) {
     self takeweapon(var_03);
     maps\mp\killstreaks\_killstreaks::func_A170();
     if(isDefined(var_02.potatoicon)) {
-      var_02.potatoicon maps\mp\gametypes\_hud_util::func_2DCC();
+      var_02.potatoicon maps\mp\gametypes\_hud_util::destroyelem();
     }
 
     foreach(var_06 in param_00.potatopickuppoints) {
@@ -252,27 +252,27 @@ store_players_grenades_potato(param_00) {
   }
 
   var_01 = spawnStruct();
-  var_01.var_109 = self method_834A();
-  var_01.var_2420 = self getweaponammoclip(var_01.var_109, "right");
-  var_01.var_93AF = self getweaponammostock(var_01.var_109);
+  var_01.name = self method_834A();
+  var_01.var_2420 = self getweaponammoclip(var_01.name, "right");
+  var_01.var_93AF = self getweaponammostock(var_01.name);
   self.var_9426["lethal_offhand"] = var_01;
   var_02 = spawnStruct();
-  var_02.var_109 = self method_831F();
-  var_02.var_2420 = self getweaponammoclip(var_02.var_109, "right");
-  var_02.var_93AF = self getweaponammostock(var_02.var_109);
+  var_02.name = self getoffhandsecondaryclass();
+  var_02.var_2420 = self getweaponammoclip(var_02.name, "right");
+  var_02.var_93AF = self getweaponammostock(var_02.name);
   self.var_9426["tactical_offhand"] = var_02;
-  if(var_01.var_109 != "none") {
-    self takeweapon(var_01.var_109);
+  if(var_01.name != "none") {
+    self takeweapon(var_01.name);
   }
 
-  if(var_02.var_109 != "none") {
-    self takeweapon(var_02.var_109);
+  if(var_02.name != "none") {
+    self takeweapon(var_02.name);
   }
 
   var_03 = param_00 lib_04FF::func_45D0("flagGrenadeWeapon");
   self method_8349(var_03);
   self giveweapon(var_03);
-  self method_82FA(var_03, 1, "right");
+  self setweaponammoclip(var_03, 1, "right");
   self setweaponammostock(var_03, 1);
 }
 
@@ -296,19 +296,19 @@ restore_players_grenades_potato(param_00, param_01) {
   }
 
   var_04 = self.var_9426["lethal_offhand"];
-  if(var_04.var_109 != "none") {
-    self method_8349(var_04.var_109);
-    self giveweapon(var_04.var_109);
-    self method_82FA(var_04.var_109, var_04.var_2420, "right");
-    self setweaponammostock(var_04.var_109, var_04.var_93AF);
+  if(var_04.name != "none") {
+    self method_8349(var_04.name);
+    self giveweapon(var_04.name);
+    self setweaponammoclip(var_04.name, var_04.var_2420, "right");
+    self setweaponammostock(var_04.name, var_04.var_93AF);
   }
 
   var_05 = self.var_9426["tactical_offhand"];
-  if(var_05.var_109 != "none") {
-    self method_831E(var_05.var_109);
-    self giveweapon(var_05.var_109);
-    self method_82FA(var_05.var_109, var_05.var_2420, "right");
-    self setweaponammostock(var_05.var_109, var_05.var_93AF);
+  if(var_05.name != "none") {
+    self setoffhandsecondaryclass(var_05.name);
+    self giveweapon(var_05.name);
+    self setweaponammoclip(var_05.name, var_05.var_2420, "right");
+    self setweaponammostock(var_05.name, var_05.var_93AF);
   }
 }
 
@@ -342,12 +342,12 @@ isvalidpotato(param_00) {
 }
 
 throwphysicspotato(param_00, param_01, param_02) {
-  var_03 = spawn("script_model", param_01.var_116);
+  var_03 = spawn("script_model", param_01.origin);
   var_03 setModel("ger_jerry_can_01_gas_raid_projectile");
-  var_03.var_1A7 = param_00.var_1A7;
+  var_03.team = param_00.team;
   var_03.var_117 = param_00;
   var_03 setdamagecallbackon(1);
-  var_03.var_29B5 = ::potatoobjectcallback;
+  var_03.damagecallback = ::potatoobjectcallback;
   var_03 setCanDamage(1);
   var_03.var_BC = 999999;
   var_03.var_FB = 999999;
@@ -365,7 +365,7 @@ throwphysicspotato(param_00, param_01, param_02) {
     var_0B = 6000;
   }
 
-  var_03.var_116 = param_01.var_116;
+  var_03.origin = param_01.origin;
   var_03 thread detonateatrest();
   var_03 thread potatobadtriggerwatch();
   var_03 thread potatocatchtriggerwatch(param_02);
@@ -382,7 +382,7 @@ potatophysicslaunch(param_00, param_01) {
 }
 
 potatoobjectcallback(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
-  if(!isDefined(param_01) || !isDefined(param_01.var_1A7) || param_01.var_3A == "worldspawn" || !isPlayer(param_01)) {
+  if(!isDefined(param_01) || !isDefined(param_01.team) || param_01.var_3A == "worldspawn" || !isPlayer(param_01)) {
     return;
   }
 
@@ -390,7 +390,7 @@ potatoobjectcallback(param_00, param_01, param_02, param_03, param_04, param_05,
     return;
   }
 
-  if(self.var_1A7 == param_01.var_1A7 && param_01 != self.var_117) {
+  if(self.team == param_01.team && param_01 != self.var_117) {
     return;
   }
 

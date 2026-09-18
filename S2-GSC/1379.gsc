@@ -112,7 +112,7 @@ func_51C4() {
   self endon("death");
   waittillframeend;
   var_00 = lib_0547::func_A51("zombie_exploder");
-  self.var_3391 = common_scripts\utility::func_7A33(var_00.var_5ED2[self.var_18B0]["drag_weapons"]);
+  self.var_3391 = common_scripts\utility::random(var_00.var_5ED2[self.var_18B0]["drag_weapons"]);
   var_01 = spawnStruct();
   self attach(self.var_3391, self.var_A99D);
   self.var_3937 = var_01;
@@ -232,7 +232,7 @@ zombie_vib_exploder_is_weak_point(param_00, param_01, param_02, param_03, param_
 }
 
 func_AB9D() {
-  self method_802E(self.var_3391, self.var_A99D);
+  self detach(self.var_3391, self.var_A99D);
   self.var_3937.owner = undefined;
   self.var_3937 = undefined;
   self.var_392C = 0;

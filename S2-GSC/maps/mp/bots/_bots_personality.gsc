@@ -135,7 +135,7 @@ func_193F() {
   var_22 = 9999;
   var_23 = undefined;
   var_24 = -9999;
-  var_25 = common_scripts\utility::func_F92(level.var_1A90[var_11]);
+  var_25 = common_scripts\utility::array_randomize(level.var_1A90[var_11]);
   foreach(var_07 in var_25) {
     if(var_02[var_07] < var_22) {
       var_21 = var_07;
@@ -151,7 +151,7 @@ func_193F() {
   if(var_24 - var_22 >= 2) {
     var_20 = var_21;
   } else {
-    var_20 = common_scripts\utility::func_7A33(level.var_1A90[var_11]);
+    var_20 = common_scripts\utility::random(level.var_1A90[var_11]);
   }
 
   if(self method_8368() != var_20) {
@@ -474,7 +474,7 @@ func_19C5(param_00, param_01, param_02) {
   var_05 = param_02 * param_02;
   if(level.teambased) {
     foreach(var_07 in level.var_6E97) {
-      if(!maps\mp\_utility::func_57A0(var_07)) {
+      if(!maps\mp\_utility::isreallyalive(var_07)) {
         continue;
       }
 
@@ -578,7 +578,7 @@ func_3B68() {
         var_05 = getzonenodeforindex(var_09);
         var_06 = function_0204(var_05);
         if(var_06.size > 0) {
-          var_0A = common_scripts\utility::func_7A33(getzonenodes(var_09));
+          var_0A = common_scripts\utility::random(getzonenodes(var_09));
           var_0B = isDefined(var_0A.targetname) && var_0A.targetname == "no_bot_random_path";
           if(!var_0B) {
             var_0C = distance2dsquared(getzoneorigin(var_09), self.origin);

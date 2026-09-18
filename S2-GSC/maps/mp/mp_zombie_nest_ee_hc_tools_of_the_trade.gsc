@@ -4,7 +4,7 @@
 ***************************************************************/
 
 main() {
-  common_scripts\utility::func_3C87("flag_nest_hc_ee_sword_acquired");
+  common_scripts\utility::flag_init("flag_nest_hc_ee_sword_acquired");
   level.var_9A93 = 1;
   var_00 = func_52EC();
   var_00 thread func_9A92();
@@ -121,7 +121,7 @@ func_2575(param_00, param_01, param_02, param_03) {
         self.var_177E = level.var_A980;
       }
 
-      playFX(level.var_611["zmb_elec_coil_charge"], var_05.origin, var_06);
+      playFX(level._effect["zmb_elec_coil_charge"], var_05.origin, var_06);
       var_05 lib_0378::func_8D74("aud_wonder_weapon_elec_coil_charge");
       thread func_4BD0();
     } else if(!self.var_177E > level.var_A980) {}
@@ -136,8 +136,8 @@ func_4BD0() {
   }
 
   level thread func_7E3E();
-  common_scripts\utility::func_3C8F("flag_bunker_lights_off");
-  common_scripts\utility::func_3C8F("flag_bunker_lights_off");
+  common_scripts\utility::flag_set("flag_bunker_lights_off");
+  common_scripts\utility::flag_set("flag_bunker_lights_off");
   lib_0378::func_8D74("aud_bunker_lights", "off");
   level.var_9A93 = 1;
   wait(30);
@@ -333,7 +333,7 @@ func_6FDA() {
 
   lib_0586::func_78C("raven_sword_zm");
   lib_0586::func_78E("raven_sword_zm");
-  common_scripts\utility::func_3C8F("flag_nest_hc_ee_sword_acquired");
+  common_scripts\utility::flag_set("flag_nest_hc_ee_sword_acquired");
   lib_0557::func_4BC8("r.sword get");
   getswordreward();
 }
@@ -430,7 +430,7 @@ func_A64A(param_00) {
     var_03 lib_0378::func_8D74("aud_enigma_switch_activate");
     var_03.var_5F59 thread maps / mp / mp_zombie_nest_ee_enigma::func_8717();
     var_03.var_8A9 = 1;
-    common_scripts\utility::func_3C8F(var_03.var_8260);
+    common_scripts\utility::flag_set(var_03.var_8260);
     var_03 common_scripts\utility::func_9D9F();
   }
 }

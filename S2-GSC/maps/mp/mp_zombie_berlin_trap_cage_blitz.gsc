@@ -69,17 +69,17 @@ trap_cage_arcs() {
 trap_cage_current() {
   self endon("stop_fx");
   for(;;) {
-    playFX(level.var_611["cage_trap_current"], self.origin);
+    playFX(level._effect["cage_trap_current"], self.origin);
     wait(randomfloatrange(0.2, 0.5));
   }
 }
 
 trap_cage_idle_spark() {
-  common_scripts\utility::func_3C87("flag_trap_on");
+  common_scripts\utility::flag_init("flag_trap_on");
   for(;;) {
     while(!common_scripts\utility::func_3C77("flag_trap_on")) {
       wait(randomfloatrange(3, 5));
-      playFX(level.var_611["tank_trap_sparks"], self.origin);
+      playFX(level._effect["tank_trap_sparks"], self.origin);
     }
 
     wait(1);

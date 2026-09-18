@@ -12,7 +12,7 @@ func_7D14() {
     if(isDefined(level.players)) {
       foreach(var_01 in level.players) {
         if(!var_01 maps\mp\_utility::_hasperk("specialty_falldamage")) {
-          var_01 maps\mp\_utility::func_47A2("specialty_falldamage");
+          var_01 maps\mp\_utility::giveperk("specialty_falldamage");
           var_01.var_3A0F = float(0);
         }
       }

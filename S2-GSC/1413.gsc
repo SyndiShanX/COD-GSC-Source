@@ -32,7 +32,7 @@ func_8F7E(param_00, param_01, param_02, param_03, param_04) {
   }
 
   var_05.var_9D65 method_86C1(1);
-  var_05.var_65F9 = spawnlinkedfx(level.var_611[var_06], var_05, "tag_origin");
+  var_05.var_65F9 = spawnlinkedfx(level._effect[var_06], var_05, "tag_origin");
   triggerfx(var_05.var_65F9);
   var_05.var_6949 = param_04;
   var_05 thread func_A663();

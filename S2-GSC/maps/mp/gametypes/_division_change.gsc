@@ -27,7 +27,7 @@ func_8622(param_00, param_01) {
     func_A050();
   }
 
-  while(!maps\mp\_utility::func_3FA0("prematch_done")) {
+  while(!maps\mp\_utility::gameflag("prematch_done")) {
     wait 0.05;
   }
 
@@ -137,7 +137,7 @@ func_8725(param_00, param_01) {
   }
 
   if(maps\mp\_utility::func_585F()) {
-    maps\mp\_utility::func_47A2("specialty_sprintmeleechargelonger");
+    maps\mp\_utility::giveperk("specialty_sprintmeleechargelonger");
   }
 
   if(!isDefined(param_00) || !func_0F5B(param_00)) {
@@ -159,11 +159,11 @@ func_8725(param_00, param_01) {
 
     case "bayonet_level3":
     case "shield_charge":
-      maps\mp\_utility::func_47A2("specialty_sprintmeleechargelonger");
+      maps\mp\_utility::giveperk("specialty_sprintmeleechargelonger");
       break;
 
     case "bayonet_level2":
-      maps\mp\_utility::func_47A2("specialty_sprintmeleecharge");
+      maps\mp\_utility::giveperk("specialty_sprintmeleecharge");
       break;
 
     case "bayonet_level1":
@@ -176,8 +176,8 @@ func_8725(param_00, param_01) {
 
     case "sharpshooter_level3":
     case "sharpshooter_level2":
-      maps\mp\_utility::func_47A2("specialty_marksmanvision");
-      maps\mp\_utility::func_47A2("specialty_improvedholdbreath");
+      maps\mp\_utility::giveperk("specialty_marksmanvision");
+      maps\mp\_utility::giveperk("specialty_improvedholdbreath");
       break;
 
     case "sharpshooter_level1":
@@ -210,7 +210,7 @@ func_63AC(param_00) {
   self endon("endMonitorLMGMount");
   wait 0.05;
   if(func_5830(param_00)) {
-    maps\mp\_utility::func_3FA5("prematch_done");
+    maps\mp\_utility::gameflagwait("prematch_done");
     common_scripts\_plant_weapon::func_5369(param_00);
   }
 
@@ -687,7 +687,7 @@ setflashfrac(param_00, param_01, param_02, param_03, param_04) {
   var_09 = common_scripts\utility::func_F93(var_09, "special_grip");
   var_0A = func_440E(param_00, param_01, param_02, param_03, param_04, var_09);
   var_09 = common_scripts\utility::func_F73(var_09, var_0A);
-  var_09 = common_scripts\utility::func_C9E(var_09);
+  var_09 = common_scripts\utility::alphabetize(var_09);
   var_0B = getweapondisplayname(param_02);
   var_0C = var_0B;
   foreach(var_0E in var_09) {

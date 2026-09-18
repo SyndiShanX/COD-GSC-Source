@@ -196,7 +196,7 @@ func_1A37(param_00, param_01, param_02) {
   if(isDefined(var_03) && var_04 || param_00.var_6AA9) {
     var_05 = var_03 == param_01 || function_01F4(var_03, param_01, 1);
     if(var_05) {
-      var_06 = common_scripts\utility::func_AA4A(self.origin, self getplayerangles(), param_00.var_28D4, param_02);
+      var_06 = common_scripts\utility::within_fov(self.origin, self getplayerangles(), param_00.var_28D4, param_02);
       if(var_06) {
         if(var_04) {
           thread func_1E48(param_00);

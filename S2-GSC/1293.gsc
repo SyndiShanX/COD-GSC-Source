@@ -88,7 +88,7 @@ func_908A(param_00, param_01) {
     }
 
     if(isDefined(var_02.var_9849) && maps\mp\_utility::func_4571() == "mp_france_village" && level.gametype == "ball") {
-      var_02.var_9849 = maps\mp\_utility::func_45DE(var_02.var_9849);
+      var_02.var_9849 = maps\mp\_utility::getotherteam(var_02.var_9849);
     }
   }
 }
@@ -121,7 +121,7 @@ func_9BCD() {
 
 func_10E5(param_00, param_01) {
   if(isDefined(game["switchedsides"]) && game["switchedsides"]) {
-    param_00 = maps\mp\_utility::func_45DE(param_00);
+    param_00 = maps\mp\_utility::getotherteam(param_00);
   }
 
   if(isDefined(level.var_9307) && isDefined(level.var_9307[param_00])) {}

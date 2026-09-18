@@ -9,19 +9,19 @@ main() {
   }
 
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BFA(level.gametype, 30);
-    maps\mp\_utility::func_7BF9(level.gametype, 100);
-    maps\mp\_utility::func_7BF1(level.gametype, 0);
-    maps\mp\_utility::func_7BF7(level.gametype, 0);
-    maps\mp\_utility::func_7C04(level.gametype, 2);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 30);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 100);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 2);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
@@ -68,11 +68,11 @@ main() {
 func_5300() {
   maps\mp\_utility::func_8653();
   setdynamicdvar("scr_control_roundlimit", 0);
-  maps\mp\_utility::func_7BF7("control", 0);
+  maps\mp\_utility::registerroundlimitdvar("control", 0);
   setdynamicdvar("scr_control_winlimit", 2);
-  maps\mp\_utility::func_7C04("control", 1);
+  maps\mp\_utility::registerwinlimitdvar("control", 1);
   setdynamicdvar("scr_control_halftime", 0);
-  maps\mp\_utility::func_7BE5("control", 0);
+  maps\mp\_utility::registerhalftimedvar("control", 0);
   setdynamicdvar("scr_dom_allowNeutral", 0);
   setdynamicdvar("scr_dom_halftimeswitchsides", 0);
 }
@@ -97,18 +97,18 @@ func_6BAF() {
     setomnvar("ui_current_round", 4);
   }
 
-  maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_DOM");
-  maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_DOM");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_DOM");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_DOM");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_DOM");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_DOM");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DOM");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DOM");
   } else {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_DOM_SCORE");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_DOM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DOM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DOM_SCORE");
   }
 
-  maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_DOM_HINT");
-  maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_DOM_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_DOM_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_DOM_HINT");
   setclientnamemode("auto_change");
   func_5353();
   func_7651();
@@ -149,7 +149,7 @@ func_A0EA() {
     foreach(var_01 in level.players) {
       var_01.objective = 0;
       foreach(var_03 in level.var_3211) {
-        if(var_01 istouching(var_03.var_5CBA)) {
+        if(var_01 istouching(var_03.levelflag)) {
           if(var_03.var_689F["axis"] * var_03.var_689F["allies"] > 0) {
             var_01.objective = 1;
           } else if(var_03.var_6DB2 == "neutral") {
@@ -235,7 +235,7 @@ func_3211() {
 
   if(!isDefined(game["controlPointOrder"])) {
     game["controlPointOrder"] = ["_a", "_b", "_c"];
-    game["controlPointOrder"] = common_scripts\utility::func_F92(game["controlPointOrder"]);
+    game["controlPointOrder"] = common_scripts\utility::array_randomize(game["controlPointOrder"]);
     game["controlRoundNum"] = 0;
   }
 
@@ -285,7 +285,7 @@ func_3211() {
   var_06[0].origin = var_0B["position"];
   var_07 thread func_A192(1);
   level.var_2609.var_A222 = var_07;
-  var_07.var_5CBA = level.var_2609;
+  var_07.levelflag = level.var_2609;
   level.var_3211[level.var_3211.size] = var_07;
   var_0D = lib_050D::func_46A0("axis");
   var_0E = lib_050D::func_46A0("allies");
@@ -303,7 +303,7 @@ func_3211() {
 }
 
 func_260A(param_00) {
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   setomnvar("ui_control_countdown_time", gettime() + 30000);
   maps\mp\gametypes\_hostmigration::func_A6F5(30);
   param_00 maps\mp\gametypes\_gameobjects::func_C30("enemy");
@@ -374,8 +374,8 @@ func_6BCB(param_00, param_01, param_02) {
     maps\mp\gametypes\_gameobjects::func_86EC("neutral");
     func_A192();
     func_933E("lost" + self.label, var_03, 1);
-    level thread maps\mp\_utility::func_74D9("mp_obj_notify_pos_lrg", param_00);
-    level thread maps\mp\_utility::func_74D9("mp_obj_notify_neg_lrg", var_03);
+    level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_pos_lrg", param_00);
+    level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_neg_lrg", var_03);
     func_A189(self.label, "neutral");
     thread func_4787(self.var_9AC3[param_00]);
   }
@@ -519,16 +519,16 @@ func_6BBF(param_00) {
   func_A192();
   level.usestartspawns = 0;
   if(var_03 == "neutral") {
-    var_06 = maps\mp\_utility::func_45DE(var_02);
+    var_06 = maps\mp\_utility::getotherteam(var_02);
     func_933E("secured" + self.label, var_02, 1);
     func_933E("enemy_has" + self.label, var_06, 1);
-    level thread maps\mp\_utility::func_74D9("mp_obj_notify_pos_lrg", var_02);
+    level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_pos_lrg", var_02);
   } else {
     func_933E("secured" + self.label, var_02, 1);
     func_933E("lost" + self.label, var_03, 1);
-    level thread maps\mp\_utility::func_74D9("mp_obj_notify_pos_lrg", var_02);
-    level thread maps\mp\_utility::func_74D9("mp_obj_notify_neg_lrg", var_03);
-    level.var_1731[var_03] = self.var_5CBA;
+    level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_pos_lrg", var_02);
+    level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_neg_lrg", var_03);
+    level.var_1731[var_03] = self.levelflag;
   }
 
   func_A189(self.label, var_02);
@@ -544,7 +544,7 @@ func_4786(param_00, param_01, param_02) {
   }
 
   if(isPlayer(var_03)) {
-    level thread maps\mp\_utility::func_9863("callout_securedposition" + self.label, var_03);
+    level thread maps\mp\_utility::teamplayercardsplash("callout_securedposition" + self.label, var_03);
   }
 
   var_04 = getarraykeys(param_00);
@@ -572,7 +572,7 @@ func_4787(param_00) {
   }
 
   if(isPlayer(var_01)) {
-    level thread maps\mp\_utility::func_9863("callout_neutralized_position" + self.label, var_01);
+    level thread maps\mp\_utility::teamplayercardsplash("callout_neutralized_position" + self.label, var_01);
   }
 
   var_02 = getarraykeys(param_00);
@@ -595,14 +595,14 @@ func_2CDB(param_00, param_01) {
   level endon("game_ended");
   wait(0.1);
   maps\mp\_utility::waittillslowprocessallowed();
-  maps\mp\_utility::func_5C39(param_00, param_01);
+  maps\mp\_utility::leaderdialog(param_00, param_01);
 }
 
 func_2CDC(param_00, param_01, param_02, param_03) {
   level endon("game_ended");
   wait(0.1);
   maps\mp\_utility::waittillslowprocessallowed();
-  maps\mp\_utility::func_5C3E(param_00, param_01, param_02, param_03);
+  maps\mp\_utility::leaderdialogbothteams(param_00, param_01, param_02, param_03);
 }
 
 func_A109() {
@@ -630,7 +630,7 @@ func_A109() {
 
       if(level.var_3211.size == var_00.size && var_02 != "none" && level.players.size > 5) {
         level.var_BDB[var_02]["time"] = gettime() - var_01;
-        level.var_BDB[maps\mp\_utility::func_45DE(var_02)]["time"] = 0;
+        level.var_BDB[maps\mp\_utility::getotherteam(var_02)]["time"] = 0;
         if(level.var_BDB[var_02]["time"] > -5536 && level.var_BDB["axis"]["awarded"] == 0) {
           level.var_BDB["axis"]["awarded"] = 1;
           foreach(var_08 in level.players) {
@@ -656,7 +656,7 @@ func_A109() {
       }
     }
 
-    if(maps\mp\_utility::func_602B() && !level.var_C27 && !var_0A && func_4473() > 120000 && !getdvarint("850")) {
+    if(maps\mp\_utility::matchmakinggame() && !level.var_C27 && !var_0A && func_4473() > 120000 && !getdvarint("850")) {
       level.var_3B5C = "none";
       thread maps\mp\gametypes\_gamelogic::endgame("none", game["end_reason"]["time_limit_reached"]);
       return;
@@ -777,11 +777,11 @@ func_459D(param_00) {
   foreach(var_05 in level.var_3211) {
     var_06 = undefined;
     if(var_01) {
-      var_06 = getpathdist(param_00.origin, var_05.var_5CBA.origin, 999999);
+      var_06 = getpathdist(param_00.origin, var_05.levelflag.origin, 999999);
     }
 
     if(!isDefined(var_06) || var_06 == -1) {
-      var_06 = distancesquared(var_05.var_5CBA.origin, param_00.origin);
+      var_06 = distancesquared(var_05.levelflag.origin, param_00.origin);
     }
 
     if(!isDefined(var_02) || var_06 < var_03) {
@@ -790,7 +790,7 @@ func_459D(param_00) {
     }
   }
 
-  return var_02.var_5CBA;
+  return var_02.levelflag;
 }
 
 func_6BA7() {}

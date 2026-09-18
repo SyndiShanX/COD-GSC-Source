@@ -18,8 +18,8 @@ func_5305() {
   level.var_2448 = ::func_244B;
   level.var_6AD1 = ::func_6B9A;
   level.var_74C4 = ::func_64C6;
-  level.var_611["magic_box_light"] = loadfx("vfx/zombie/zmb_box_light_marker");
-  level.var_611["zmb_mystery_box_gun_gk"] = loadfx("vfx/zombie/zmb_mystery_box_gun_gk");
+  level._effect["magic_box_light"] = loadfx("vfx/zombie/zmb_box_light_marker");
+  level._effect["zmb_mystery_box_gun_gk"] = loadfx("vfx/zombie/zmb_mystery_box_gun_gk");
   func_09E8();
 }
 
@@ -120,7 +120,7 @@ func_4D18(param_00, param_01) {
 
   if(isDefined(param_00.var_6298)) {
     param_00.var_6298 hidepart("TAG_FX");
-    if(isDefined(level.var_611["magic_box_light"]) && isDefined(param_00.var_6298) && isDefined(param_00.var_6298.var_1B78)) {
+    if(isDefined(level._effect["magic_box_light"]) && isDefined(param_00.var_6298) && isDefined(param_00.var_6298.var_1B78)) {
       stopFXOnTag(common_scripts\utility::func_44F5("magic_box_light"), param_00.var_6298.var_1B78, "tag_origin");
       return;
     }
@@ -163,8 +163,8 @@ func_08B7(param_00) {
       param_00.var_6298.var_1B78.angles = (-90, -90, -90);
     }
 
-    if(isDefined(level.var_611["magic_box_light"]) && isDefined(param_00.var_6298.var_1B78)) {
-      playFXOnTag(level.var_611["magic_box_light"], param_00.var_6298.var_1B78, "tag_origin");
+    if(isDefined(level._effect["magic_box_light"]) && isDefined(param_00.var_6298.var_1B78)) {
+      playFXOnTag(level._effect["magic_box_light"], param_00.var_6298.var_1B78, "tag_origin");
     }
   }
 
@@ -277,7 +277,7 @@ choosepreviewweapon(param_00) {
     var_05 = worldweaponsloadedbyplayers([param_00], level.magicboxpreviewweapons);
   }
 
-  var_03 = common_scripts\utility::func_7A33(var_05);
+  var_03 = common_scripts\utility::random(var_05);
   return var_03;
 }
 
@@ -318,7 +318,7 @@ func_6C0A(param_00, param_01) {
   wait(1);
   param_00.var_A9EA.angles = combineangles(var_0B.angles, (0, 0, 0));
   param_00.var_A9EA movez(var_08, var_02, var_04, var_03);
-  playFXOnTag(level.var_611["zmb_mystery_box_gun_gk"], param_00.var_A9EA, "tag_origin");
+  playFXOnTag(level._effect["zmb_mystery_box_gun_gk"], param_00.var_A9EA, "tag_origin");
   lib_0378::func_8D74("mystery_box_elec", var_0B, 1);
   wait(1);
   var_11 = [];
@@ -1145,8 +1145,8 @@ func_348F(param_00) {
 func_AABC(param_00) {
   if(lib_0547::func_577E(param_00)) {
     if(isDefined(level.var_A9E2["LastStand"])) {
-      setmatchdata("players", param_00.var_2418, "end_misses", level.var_A9E2["LastStand"]);
-      setmatchdata("players", param_00.var_2418, "end_games_played", level.var_A9E2["LastStand"]);
+      setmatchdata("players", param_00.clientid, "end_misses", level.var_A9E2["LastStand"]);
+      setmatchdata("players", param_00.clientid, "end_games_played", level.var_A9E2["LastStand"]);
       return;
     }
 
@@ -1160,11 +1160,11 @@ func_AABC(param_00) {
   }
 
   if(isDefined(var_02[0]) && isDefined(level.var_A9E2[var_02[0]])) {
-    setmatchdata("players", param_00.var_2418, "end_misses", level.var_A9E2[var_02[0]]);
+    setmatchdata("players", param_00.clientid, "end_misses", level.var_A9E2[var_02[0]]);
   }
 
   if(isDefined(var_02[1]) && isDefined(level.var_A9E2[var_02[1]])) {
-    setmatchdata("players", param_00.var_2418, "end_games_played", level.var_A9E2[var_02[1]]);
+    setmatchdata("players", param_00.clientid, "end_games_played", level.var_A9E2[var_02[1]]);
   }
 }
 
@@ -1188,7 +1188,7 @@ func_A7D5(param_00, param_01, param_02) {
     var_04 = param_00 getplayersoffhands();
     if(var_04 != param_01) {
       param_00 lib_0586::func_790(var_04);
-      param_00 method_831E(param_01);
+      param_00 setoffhandsecondaryclass(param_01);
       param_00 lib_0586::func_78C(param_01);
       func_3AC1(param_00, param_01);
       param_00.zmb_plr_tactical = param_01;
@@ -1197,7 +1197,7 @@ func_A7D5(param_00, param_01, param_02) {
       }
 
       if(isDefined(level.var_A9E2[param_01])) {
-        setmatchdata("players", param_00.var_2418, "endHits", level.var_A9E2[param_01]);
+        setmatchdata("players", param_00.clientid, "endHits", level.var_A9E2[param_01]);
       }
 
       param_00 notify("new_equipment");
@@ -1304,35 +1304,35 @@ func_5F76(param_00) {
   for(;;) {
     common_scripts\utility::func_3C9F(param_00.var_81A1);
     var_01 = 0;
-    while(maps\mp\_utility::func_3FA0("fire_sale")) {
+    while(maps\mp\_utility::gameflag("fire_sale")) {
       var_01 = 1;
       wait 0.05;
     }
 
     var_02 = 0;
-    while(maps\mp\_utility::func_3FA0("power_off")) {
+    while(maps\mp\_utility::gameflag("power_off")) {
       var_02 = 1;
       wait 0.05;
     }
 
     if(var_01 || var_02) {
-      common_scripts\utility::func_3CA9(param_00.var_81A1);
+      common_scripts\utility::flag_waitopen(param_00.var_81A1);
       continue;
     }
 
     self.var_28F5 show();
     self.var_28F5.origin = param_00.origin;
-    common_scripts\utility::func_3CA9(param_00.var_81A1);
+    common_scripts\utility::flag_waitopen(param_00.var_81A1);
   }
 }
 
 func_5F75() {
   for(;;) {
     self.var_BCD hide();
-    maps\mp\_utility::func_3FA5("fire_sale");
+    maps\mp\_utility::gameflagwait("fire_sale");
     self.var_BCD show();
     self.var_28F5 hide();
-    while(maps\mp\_utility::func_3FA0("fire_sale")) {
+    while(maps\mp\_utility::gameflag("fire_sale")) {
       wait 0.05;
     }
 
@@ -1342,10 +1342,10 @@ func_5F75() {
 
 func_5F78() {
   for(;;) {
-    maps\mp\_utility::func_3FA5("power_off");
+    maps\mp\_utility::gameflagwait("power_off");
     self.var_BCD hide();
     self.var_28F5 hide();
-    while(maps\mp\_utility::func_3FA0("power_off")) {
+    while(maps\mp\_utility::gameflag("power_off")) {
       wait 0.05;
     }
 
@@ -1462,8 +1462,8 @@ func_5F7B() {
   func_5305();
   level.var_5F7C = 0;
   level.var_6AE8 = [];
-  common_scripts\utility::func_3C87("magic_box_init");
-  common_scripts\utility::func_3C87("magic_box_moved");
+  common_scripts\utility::flag_init("magic_box_init");
+  common_scripts\utility::flag_init("magic_box_moved");
   level.var_5F74 = getEntArray("magic_box", "targetname");
   if(level.var_5F74.size == 0) {
     return;
@@ -1505,7 +1505,7 @@ func_5F7B() {
     var_02.var_56C7 = 0;
     var_02.var_5759 = 0;
     if(isDefined(var_02.var_819A)) {
-      common_scripts\utility::func_3C87(var_02.var_819A);
+      common_scripts\utility::flag_init(var_02.var_819A);
     }
 
     if(isDefined(level.var_6AD1)) {
@@ -1518,7 +1518,7 @@ func_5F7B() {
   }
 
   if(!isDefined(var_00)) {
-    var_00 = common_scripts\utility::func_7A33(level.var_5F74);
+    var_00 = common_scripts\utility::random(level.var_5F74);
   }
 
   var_00.var_8BE = 1;
@@ -1527,18 +1527,18 @@ func_5F7B() {
     func_6AE1(var_02);
   }
 
-  common_scripts\utility::func_3C8F("magic_box_init");
+  common_scripts\utility::flag_set("magic_box_init");
   for(;;) {
     func_A922(var_00, 0);
-    while(maps\mp\_utility::func_3FA0("fire_sale")) {
-      while(maps\mp\_utility::func_3FA0("fire_sale") || var_00.var_56C7) {
+    while(maps\mp\_utility::gameflag("fire_sale")) {
+      while(maps\mp\_utility::gameflag("fire_sale") || var_00.var_56C7) {
         wait(0.15);
       }
 
       var_00 notify("fireSaleOver");
     }
 
-    common_scripts\utility::func_3C8F("magic_box_moved");
+    common_scripts\utility::flag_set("magic_box_moved");
     var_0F = [];
     foreach(var_11 in level.var_5F74) {
       if(var_00 == var_11) {
@@ -1605,7 +1605,7 @@ func_6AB4(param_00) {
   }
 
   if(isDefined(param_00.var_819A)) {
-    common_scripts\utility::func_3C8F(param_00.var_819A);
+    common_scripts\utility::flag_set(param_00.var_819A);
   }
 
   if(isDefined(param_00.var_24E3)) {
@@ -1793,7 +1793,7 @@ func_A922(param_00, param_01) {
   }
 
   for(;;) {
-    if(param_01 && !maps\mp\_utility::func_3FA0("fire_sale")) {
+    if(param_01 && !maps\mp\_utility::gameflag("fire_sale")) {
       break;
     }
 
@@ -1810,7 +1810,7 @@ func_A922(param_00, param_01) {
     var_0B = var_09 lib_0573::func_4B7B();
     var_0C = var_09 lib_056B::func_9D1C();
     var_0D = var_09 lib_0579::func_4BA5();
-    var_0E = maps\mp\_utility::func_3FA0("fire_sale") || var_0B || func_57C1(param_00) || var_0D || var_0C;
+    var_0E = maps\mp\_utility::gameflag("fire_sale") || var_0B || func_57C1(param_00) || var_0D || var_0C;
     var_0F = var_03 >= var_04 && !var_0E && level.var_5F74.size > 1;
     var_10 = func_43FF(var_09);
     var_11 = var_09 getcurrentprimaryweapon();
@@ -1838,7 +1838,7 @@ func_A922(param_00, param_01) {
       }
 
       level notify("magicBoxUse", param_00);
-      if(maps\mp\_utility::func_3FA0("fire_sale")) {} else if(var_0C) {
+      if(maps\mp\_utility::gameflag("fire_sale")) {} else if(var_0C) {
         var_09 lib_056B::func_9D1D();
       } else {
         var_09 lib_0573::func_A21E();
@@ -1938,7 +1938,7 @@ func_A922(param_00, param_01) {
 
       if(isDefined(param_00.var_5F72)) {
         param_00[[param_00.var_5F72]](var_16, var_09);
-      } else if(var_16 == "trigger" && maps\mp\_utility::func_57A0(var_09) && !lib_0547::func_577E(var_09)) {
+      } else if(var_16 == "trigger" && maps\mp\_utility::isreallyalive(var_09) && !lib_0547::func_577E(var_09)) {
         if(lib_0547::func_73F9(var_09, var_1A)) {
           var_09 lib_0586::func_790(var_1A);
         }
@@ -2151,7 +2151,7 @@ func_4520() {
 }
 
 func_43FF(param_00) {
-  if(maps\mp\_utility::func_3FA0("fire_sale")) {
+  if(maps\mp\_utility::gameflag("fire_sale")) {
     return int(10);
   }
 

@@ -84,7 +84,7 @@ initkillstreakvo() {
 
 func_7977(param_00) {
   if(common_scripts\utility::func_562E(level.var_79C1)) {
-    var_01 = maps\mp\_utility::func_45DE(param_00);
+    var_01 = maps\mp\_utility::getotherteam(param_00);
   } else {
     var_01 = var_01;
   }
@@ -135,11 +135,11 @@ func_A619(param_00, param_01, param_02, param_03) {
 
   if(!isDefined(param_03)) {
     level.var_A5E6[level.var_A5E6.size] = param_00;
-    maps\mp\_utility::func_5C3E(var_04, "allies", var_05, "axis");
-  } else if(param_03.var_1A7 == "allies") {
-    param_03 maps\mp\_utility::func_5C43(var_04);
+    maps\mp\_utility::leaderdialogbothteams(var_04, "allies", var_05, "axis");
+  } else if(param_03.team == "allies") {
+    param_03 maps\mp\_utility::leaderdialogonplayer(var_04);
   } else {
-    param_03 maps\mp\_utility::func_5C43(var_05);
+    param_03 maps\mp\_utility::leaderdialogonplayer(var_05);
   }
 
   return 1;
@@ -189,12 +189,12 @@ func_A61B(param_00, param_01, param_02, param_03) {
 func_A623(param_00) {
   game["dialog"]["offense_obj"] = game["dialog"]["attacker_" + param_00];
   game["dialog"]["defense_obj"] = game["dialog"]["defender_" + param_00];
-  foreach(var_02 in level.var_744A) {
-    if(!isDefined(var_02.var_1A7)) {
+  foreach(var_02 in level.players) {
+    if(!isDefined(var_02.team)) {
       continue;
     }
 
-    if(var_02.var_1A7 == game["attackers"]) {
+    if(var_02.team == game["attackers"]) {
       var_02.var_5BA8 = game["dialog"]["offense_obj"];
       continue;
     }
@@ -213,9 +213,9 @@ func_A5F8() {
   }
 
   func_2EC2();
-  if(self.var_1A7 == game["attackers"]) {
+  if(self.team == game["attackers"]) {
     if(!isDefined(self.var_5BA8) || self.var_5BA8 != game["dialog"]["offense_obj"]) {
-      maps\mp\_utility::func_5C43("offense_obj", "introboost");
+      maps\mp\_utility::leaderdialogonplayer("offense_obj", "introboost");
       return;
     }
 
@@ -223,7 +223,7 @@ func_A5F8() {
   }
 
   if(!isDefined(self.var_5BA8) || self.var_5BA8 != game["dialog"]["defense_obj"]) {
-    maps\mp\_utility::func_5C43("defense_obj", "introboost");
+    maps\mp\_utility::leaderdialogonplayer("defense_obj", "introboost");
   }
 }
 
@@ -369,7 +369,7 @@ func_7FA4(param_00, param_01) {
 }
 
 hijackeventfunc() {
-  if(self.var_1A7 == game["attackers"]) {
+  if(self.team == game["attackers"]) {
     thread func_A618("attacker_cpkg_enemysteal");
     return;
   }

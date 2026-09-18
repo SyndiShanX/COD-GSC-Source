@@ -36,7 +36,7 @@ func_7937(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = newclienthudelem(self);
   var_06.var_35B2 = "raid_cd_bar";
   var_06.maxsightdistsqrd = 0;
-  var_06.var_1D7 = 0;
+  var_06.y = 0;
   var_06.var_3E6E = 0;
   var_06.var_56 = param_04;
   var_06.ignoreme = -2;
@@ -45,9 +45,9 @@ func_7937(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06.var_606D = param_02;
   var_06.var_6058 = param_03;
   var_06.var_21F6 = [];
-  var_06 maps\mp\gametypes\_hud_util::func_86EF(level.var_A012);
+  var_06 maps\mp\gametypes\_hud_util::setparent(level.var_A012);
   var_06.var_4CC7 = 0;
-  var_06 maps\mp\gametypes\_hud_util::func_8707("CENTER", undefined, param_00, param_01);
+  var_06 maps\mp\gametypes\_hud_util::setpoint("CENTER", undefined, param_00, param_01);
   var_06.accuracy = "left";
   var_06.maxsightdistsqrd = var_06.maxsightdistsqrd - int(param_02 / 2);
   var_06.var_1F = 0;
@@ -88,8 +88,8 @@ func_7936(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   var_07.var_35B2 = "icon";
   var_07.var_21F6 = [];
   var_07 setshader(param_00, param_03, param_04);
-  var_07 maps\mp\gametypes\_hud_util::func_86EF(level.var_A012);
-  var_07 maps\mp\gametypes\_hud_util::func_8707("CENTER", undefined, param_01, param_02);
+  var_07 maps\mp\gametypes\_hud_util::setparent(level.var_A012);
+  var_07 maps\mp\gametypes\_hud_util::setpoint("CENTER", undefined, param_01, param_02);
   var_07.var_56 = (1, 1, 1);
   var_07.var_18 = param_05;
   var_07.ignoreme = param_06;
@@ -111,8 +111,8 @@ func_7938(param_00, param_01, param_02, param_03) {
   var_04 = newclienthudelem(self);
   var_04.var_35B2 = "text";
   var_04.var_21F6 = [];
-  var_04 maps\mp\gametypes\_hud_util::func_86EF(level.var_A012);
-  var_04 maps\mp\gametypes\_hud_util::func_8707("CENTER", undefined, param_00, param_01);
+  var_04 maps\mp\gametypes\_hud_util::setparent(level.var_A012);
+  var_04 maps\mp\gametypes\_hud_util::setpoint("CENTER", undefined, param_00, param_01);
   var_04.var_9B = 1;
   var_04.var_56 = (1, 1, 0);
   var_04.var_18 = param_02;

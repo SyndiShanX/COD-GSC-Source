@@ -341,7 +341,7 @@ ee_follow_fish_earthquake(param_00) {
 ctf_void_enter() {
   foreach(var_01 in level.players) {
     var_01 soundscripts / _snd_common_zmb_dlc3::dlc3_altered_state_clear();
-    var_01 method_8626("enter_the_void", 3);
+    var_01 setaltsceneobj("enter_the_void", 3);
     var_01 notify("kill_dlc3_wave_mus_switcher");
     var_01 thread play_void_music();
     var_01.var_11CB.in_the_void = 1;

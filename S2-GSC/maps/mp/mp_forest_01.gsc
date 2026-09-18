@@ -5,16 +5,16 @@
 
 func_00F9() {
   setdvarifuninitialized("loadscreen_poses", 0);
-  lib_04A6::func_F9();
-  lib_040E::func_F9();
-  lib_04A5::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_forest_01_lighting::func_F9();
-  maps\mp\mp_forest_01_aud::func_F9();
+  lib_04A6::main();
+  lib_040E::main();
+  lib_04A5::main();
+  maps\mp\_load::main();
+  maps\mp\mp_forest_01_lighting::main();
+  maps\mp\mp_forest_01_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_forest_01");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
-  level.var_611["intro_explosion"] = loadfx("vfx/scorestreaks/mortar_scorestreak_exp_01");
+  level._effect["intro_explosion"] = loadfx("vfx/scorestreaks/mortar_scorestreak_exp_01");
   level.var_7C62 = 5500;
   level.var_5A7C = "mp_forest_01_killstreak";
   level.var_5A6B = "mp_forest_01_killstreak";
@@ -46,12 +46,12 @@ setup_ctf_flag_offsets() {
 
 func_0EA3() {
   var_00 = getEnt("wheel", "targetname");
-  var_00.var_99DA = 60;
+  var_00.time = 60;
   var_00.var_18A = -15;
   level.var_AA10 = var_00;
   for(;;) {
-    var_00 rotatevelocity((level.var_AA10.var_18A, 0, 0), level.var_AA10.var_99DA);
-    wait(level.var_AA10.var_99DA);
+    var_00 rotatevelocity((level.var_AA10.var_18A, 0, 0), level.var_AA10.time);
+    wait(level.var_AA10.time);
   }
 }
 
@@ -65,7 +65,7 @@ func_542C() {
     return;
   }
 
-  if(!isDefined(level.var_984D) || !level.var_984D) {
+  if(!isDefined(level.teambased) || !level.teambased) {
     return;
   }
 
@@ -82,12 +82,12 @@ func_542C() {
   var_04 = 9;
   while(var_04 > 0) {
     var_05 = [];
-    var_06 = randomfloatrange(min(var_03[0].var_116[0], var_03[1].var_116[0]), max(var_03[0].var_116[0], var_03[1].var_116[1]));
-    var_07 = randomfloatrange(min(var_03[0].var_116[1], var_03[1].var_116[1]), max(var_03[0].var_116[1], var_03[1].var_116[1]));
+    var_06 = randomfloatrange(min(var_03[0].origin[0], var_03[1].origin[0]), max(var_03[0].origin[0], var_03[1].origin[1]));
+    var_07 = randomfloatrange(min(var_03[0].origin[1], var_03[1].origin[1]), max(var_03[0].origin[1], var_03[1].origin[1]));
     var_08 = (var_06, var_07, 0);
     var_05[var_05.size] = var_08;
-    var_09 = randomfloatrange(min(var_02[0].var_116[0], var_02[1].var_116[0]), max(var_02[0].var_116[0], var_02[1].var_116[1]));
-    var_0A = randomfloatrange(min(var_02[0].var_116[1], var_02[1].var_116[1]), max(var_02[0].var_116[1], var_02[1].var_116[1]));
+    var_09 = randomfloatrange(min(var_02[0].origin[0], var_02[1].origin[0]), max(var_02[0].origin[0], var_02[1].origin[1]));
+    var_0A = randomfloatrange(min(var_02[0].origin[1], var_02[1].origin[1]), max(var_02[0].origin[1], var_02[1].origin[1]));
     var_0B = (var_09, var_0A, 0);
     var_05[var_05.size] = var_0B;
     foreach(var_0D in var_05) {
@@ -108,7 +108,7 @@ func_1E43(param_00) {
   var_01 = lib_050D::func_46A0(param_00);
   var_02 = (0, 0, 0);
   foreach(var_04 in var_01) {
-    var_02 = var_02 + var_04.var_116;
+    var_02 = var_02 + var_04.origin;
   }
 
   var_06 = var_02 / var_01.size;

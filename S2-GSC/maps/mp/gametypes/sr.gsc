@@ -9,26 +9,26 @@ main() {
   }
 
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.gametype, 3, 0, 9);
-    maps\mp\_utility::func_7BFA(level.gametype, 2.5);
-    maps\mp\_utility::func_7BF9(level.gametype, 1);
-    maps\mp\_utility::func_7BF7(level.gametype, 0);
-    maps\mp\_utility::func_7C04(level.gametype, 4);
-    maps\mp\_utility::func_7BF1(level.gametype, 1);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
+    maps\mp\_utility::registerroundswitchdvar(level.gametype, 3, 0, 9);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 2.5);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 1);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 4);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 1);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
 
   level.var_10EB = 1;
-  level.var_6933 = 1;
+  level.objectivebased = 1;
   maps\mp\_utility::func_873B(1);
   level.var_6702 = 1;
   level.var_6B86 = ::maps / mp / gametypes / common_sd_sr::func_6B86;
@@ -66,24 +66,24 @@ func_5300() {
   maps\mp\_utility::func_8653();
   var_00 = getmatchrulesdata("srData", "roundLength");
   setdynamicdvar("scr_sr_timelimit", var_00);
-  maps\mp\_utility::func_7BFA("sr", var_00);
+  maps\mp\_utility::registertimelimitdvar("sr", var_00);
   var_01 = getmatchrulesdata("srData", "roundSwitch");
   setdynamicdvar("scr_sr_roundswitch", var_01);
-  maps\mp\_utility::func_7BF8("sr", var_01, 0, 9);
+  maps\mp\_utility::registerroundswitchdvar("sr", var_01, 0, 9);
   var_02 = getmatchrulesdata("commonOption", "scoreLimit");
   setdynamicdvar("scr_sr_winlimit", var_02);
-  maps\mp\_utility::func_7C04("sr", var_02);
+  maps\mp\_utility::registerwinlimitdvar("sr", var_02);
   setdynamicdvar("scr_sr_bombtimer", getmatchrulesdata("srData", "bombTimer"));
   setdynamicdvar("scr_sr_planttime", getmatchrulesdata("srData", "plantTime"));
   setdynamicdvar("scr_sr_defusetime", getmatchrulesdata("srData", "defuseTime"));
   setdynamicdvar("scr_sr_multibomb", getmatchrulesdata("srData", "multiBomb"));
   setdynamicdvar("scr_sr_silentplant", getmatchrulesdata("srData", "silentPlant"));
   setdynamicdvar("scr_sr_roundlimit", 0);
-  maps\mp\_utility::func_7BF7("sr", 0);
+  maps\mp\_utility::registerroundlimitdvar("sr", 0);
   setdynamicdvar("scr_sr_scorelimit", 1);
-  maps\mp\_utility::func_7BF9("sr", 1);
+  maps\mp\_utility::registerscorelimitdvar("sr", 1);
   setdynamicdvar("scr_sr_halftime", 0);
-  maps\mp\_utility::func_7BE5("sr", 0);
+  maps\mp\_utility::registerhalftimedvar("sr", 0);
 }
 
 func_6BAF() {
@@ -99,20 +99,20 @@ func_6BAF() {
   }
 
   setclientnamemode("manual_change");
-  level.var_611["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
-  level.var_611["search_dstry_bomb_arming_light"] = loadfx("vfx/unique/search_dstry_bomb_arming_light");
-  maps\mp\_utility::func_86DC(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
-  maps\mp\_utility::func_86DC(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
+  level._effect["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
+  level._effect["search_dstry_bomb_arming_light"] = loadfx("vfx/unique/search_dstry_bomb_arming_light");
+  maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+  maps\mp\_utility::setobjectivetext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
-    maps\mp\_utility::func_86DB(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
-    maps\mp\_utility::func_86DB(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
-    maps\mp\_utility::func_86DB(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
   }
 
-  maps\mp\_utility::func_86D8(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
-  maps\mp\_utility::func_86D8(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
+  maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
+  maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   lib_050D::func_10E4();
   var_02[0] = "sd";
   var_02[1] = "bombzone";
@@ -192,16 +192,16 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     self setclientomnvar("ui_carrying_bomb", 0);
   }
 
-  if(!maps\mp\_utility::func_3FA0("prematch_done")) {
-    maps\mp\gametypes\_playerlogic::func_60B2();
+  if(!maps\mp\_utility::gameflag("prematch_done")) {
+    maps\mp\gametypes\_playerlogic::mayspawn();
   } else {
     var_0A = func_8BAA(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
     if(var_0A) {
-      var_0A = var_0A && !maps\mp\_utility::func_57A0(self);
+      var_0A = var_0A && !maps\mp\_utility::isreallyalive(self);
     }
 
     if(var_0A) {
-      var_0A = var_0A && !maps\mp\gametypes\_playerlogic::func_60B2();
+      var_0A = var_0A && !maps\mp\gametypes\_playerlogic::mayspawn();
     }
 
     if(var_0A) {
@@ -252,7 +252,7 @@ func_903E(param_00, param_01) {
   level.var_31F9[param_00.guid].var_A582[1].origin = var_02;
   level.var_31F9[param_00.guid] maps\mp\gametypes\_gameobjects::func_5307();
   level.var_31F9[param_00.guid] maps\mp\gametypes\_gameobjects::func_C30("any");
-  level.var_31F9[param_00.guid].var_A582[0] thread func_8C21(level.var_31F9[param_00.guid], maps\mp\_utility::func_45DE(param_00.team));
+  level.var_31F9[param_00.guid].var_A582[0] thread func_8C21(level.var_31F9[param_00.guid], maps\mp\_utility::getotherteam(param_00.team));
   level.var_31F9[param_00.guid].var_A582[1] thread func_8C21(level.var_31F9[param_00.guid], param_00.team);
   level.var_31F9[param_00.guid].attacker = param_01;
   if(param_00.team == "axis") {
@@ -318,7 +318,7 @@ func_A6E1() {
   self endon("started_spawnPlayer");
   for(;;) {
     wait 0.05;
-    if(isDefined(self) && self.sessionstate == "spectator" || !maps\mp\_utility::func_57A0(self)) {
+    if(isDefined(self) && self.sessionstate == "spectator" || !maps\mp\_utility::isreallyalive(self)) {
       self.pers["lives"] = 1;
       maps\mp\gametypes\_playerlogic::func_9035();
       continue;
@@ -336,7 +336,7 @@ func_6BBF(param_00) {
     param_00 thread maps\mp\_events::func_7E63(self.victim);
     if(isDefined(self.victim)) {
       level notify("sr_player_respawned", self.victim);
-      self.victim maps\mp\_utility::func_5C43("revived");
+      self.victim maps\mp\_utility::leaderdialogonplayer("revived");
     }
 
     if(isDefined(self.victim)) {
@@ -366,7 +366,7 @@ func_6BBF(param_00) {
       self.victim.var_95B4 = undefined;
     }
 
-    param_00 maps\mp\_utility::func_5C43("kill_confirmed");
+    param_00 maps\mp\_utility::leaderdialogonplayer("kill_confirmed");
     param_00 maps\mp\gametypes\_missions::processchallenge("ch_hideandseek");
   }
 

@@ -17,7 +17,7 @@ func_9E2D(param_00) {
 }
 
 func_9E2E() {
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     thread func_9569();
     maps\mp\_matchdata::func_5E9A("flamethrower", self.origin);
     return 1;
@@ -41,7 +41,7 @@ func_9569() {
   var_00 = self.var_267E[3];
   var_01 = self.team;
   if(maps\mp\_utility::func_579B() && common_scripts\utility::func_562E(level.var_79C1)) {
-    var_01 = maps\mp\_utility::func_45DE(var_01);
+    var_01 = maps\mp\_utility::getotherteam(var_01);
   }
 
   if(!maps\mp\_riotshield::hasriotshieldequipped()) {

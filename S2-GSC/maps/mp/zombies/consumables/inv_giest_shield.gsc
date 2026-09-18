@@ -105,7 +105,7 @@ spawn_a_giest_bubble_shield(param_00, param_01) {
   }
 
   var_04 delete();
-  playFX(level.var_611["force_zombie_bubble_pop"], var_03.origin);
+  playFX(level._effect["force_zombie_bubble_pop"], var_03.origin);
   lib_0378::func_8D74("zmb_pomel_grenade_final_explosion", var_03.origin);
 }
 

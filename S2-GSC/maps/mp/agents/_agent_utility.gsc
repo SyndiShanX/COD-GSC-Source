@@ -40,12 +40,12 @@ func_5291() {
 
 func_5334(param_00) {
   if(!param_00) {
-    self.var_2319 = undefined;
-    self.var_5B84 = undefined;
+    self.class = undefined;
+    self.lastclass = undefined;
     self.var_1444 = undefined;
     self.guid = undefined;
     self.name = undefined;
-    self.var_805F = undefined;
+    self.saved_actionslotdata = undefined;
     self.var_6F65 = undefined;
     self.var_696D = undefined;
     self.var_9AC5 = undefined;
@@ -201,7 +201,7 @@ func_2A74() {
     }
   }
 
-  self.var_4BF2 = undefined;
+  self.headmodel = undefined;
   self detachall();
   self notify("disconnect");
   self method_8494();
@@ -259,14 +259,14 @@ func_45C8(param_00, param_01) {
 
 func_45AE(param_00) {
   if(!isDefined(level.var_60A5)) {
-    level.var_60A5 = level.var_608B;
+    level.var_60A5 = level.maxlives;
   } else {
     level.var_60A5++;
   }
 
   if(maps\mp\_utility::func_585F()) {
     if(level.var_60A5 > 10000) {
-      level.var_60A5 = level.var_608B;
+      level.var_60A5 = level.maxlives;
     }
   }
 

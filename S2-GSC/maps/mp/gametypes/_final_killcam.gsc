@@ -243,8 +243,8 @@ func_7B32(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     level.var_3B56[param_02.team] = param_06;
     level.var_3B50[param_02.team] = param_07;
     level.var_3B54[param_02.team] = param_08;
-    level.var_3B58[param_02.team] = maps\mp\_utility::func_467B();
-    level.var_3B57[param_02.team] = maps\mp\_utility::func_467B();
+    level.var_3B58[param_02.team] = maps\mp\_utility::getsecondspassed();
+    level.var_3B57[param_02.team] = maps\mp\_utility::getsecondspassed();
     level.var_3B55[param_02.team] = param_09;
     level.var_3B59[param_02.team] = param_0A;
     level.var_3B5A[param_02.team] = isDefined(param_0B) && param_0B;
@@ -261,9 +261,9 @@ func_7B32(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   level.var_3B56["none"] = param_06;
   level.var_3B50["none"] = param_07;
   level.var_3B54["none"] = param_08;
-  level.var_3B58["none"] = maps\mp\_utility::func_467B();
-  level.var_3B57["none"] = maps\mp\_utility::func_467B();
-  level.var_3B57["none"] = maps\mp\_utility::func_467B();
+  level.var_3B58["none"] = maps\mp\_utility::getsecondspassed();
+  level.var_3B57["none"] = maps\mp\_utility::getsecondspassed();
+  level.var_3B57["none"] = maps\mp\_utility::getsecondspassed();
   level.var_3B55["none"] = param_09;
   level.var_3B59["none"] = param_0A;
   level.var_3B5A["none"] = isDefined(param_0B) && param_0B;

@@ -38,11 +38,11 @@ func_80AF(param_00, param_01, param_02) {
 }
 
 func_80A9(param_00, param_01, param_02) {
-  var_03 = func_80A3(2, ::func_766A, param_00);
+  var_03 = setmodel(2, ::func_766A, param_00);
   param_00.var_9AB8 = param_00.var_9AB8 + var_03;
-  var_03 = func_80A3(1, ::func_144B, param_00);
+  var_03 = setmodel(1, ::func_144B, param_00);
   param_00.var_9AB8 = param_00.var_9AB8 + var_03;
-  var_03 = func_80A3(6, ::func_6025, param_00, param_01, param_02);
+  var_03 = setmodel(6, ::func_6025, param_00, param_01, param_02);
   param_00.var_9AB8 = param_00.var_9AB8 + var_03;
 }
 
@@ -92,7 +92,7 @@ func_7665(param_00) {
   return 100 * 1 - var_01 * 0.15;
 }
 
-func_80A3(param_00, param_01, param_02, param_03, param_04) {
+setmodel(param_00, param_01, param_02, param_03, param_04) {
   if(isDefined(param_04)) {
     var_05 = [[param_01]](param_02, param_03, param_04);
   } else if(isDefined(param_04)) {

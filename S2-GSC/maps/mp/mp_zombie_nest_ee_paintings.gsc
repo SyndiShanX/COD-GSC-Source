@@ -19,16 +19,16 @@ main() {
   level.var_3586 = "tumbler_";
   level.var_9333 = [];
   level.var_83A0 = 0;
-  common_scripts\utility::func_3C87("flag_head_picked_up");
-  common_scripts\utility::func_3C87("flag_head_hint_seen");
-  common_scripts\utility::func_3C87("flag_painting_hint_seen");
-  common_scripts\utility::func_3C87("flag_both_hints_seen");
-  common_scripts\utility::func_3C87("flag_all_paintings_revealed");
-  common_scripts\utility::func_3C87("flag_correct_code_entered");
-  common_scripts\utility::func_3C87("flag_one_painting_checked");
-  common_scripts\utility::func_3C87("flag_player_has_head");
+  common_scripts\utility::flag_init("flag_head_picked_up");
+  common_scripts\utility::flag_init("flag_head_hint_seen");
+  common_scripts\utility::flag_init("flag_painting_hint_seen");
+  common_scripts\utility::flag_init("flag_both_hints_seen");
+  common_scripts\utility::flag_init("flag_all_paintings_revealed");
+  common_scripts\utility::flag_init("flag_correct_code_entered");
+  common_scripts\utility::flag_init("flag_one_painting_checked");
+  common_scripts\utility::flag_init("flag_player_has_head");
   for(var_00 = 1; var_00 <= level.var_3582; var_00++) {
-    common_scripts\utility::func_3C87("ee_painting_reveal_" + var_00);
+    common_scripts\utility::flag_init("ee_painting_reveal_" + var_00);
   }
 
   lib_0557::func_7846("7 Voice paintings", ::func_6DF3, ["6B Left Hand overcharge"], &"ZOMBIE_NEST_HINT_QUEST_PAINTINGS", "ZOMBIE_NEST_HINT_QUEST_PAINTINGS");
@@ -154,10 +154,10 @@ func_8A24() {
     }
 
     if(var_02) {
-      common_scripts\utility::func_3C8F("flag_head_hint_seen");
+      common_scripts\utility::flag_set("flag_head_hint_seen");
       var_00 delete();
       if(common_scripts\utility::func_3C77("flag_painting_hint_seen")) {
-        common_scripts\utility::func_3C8F("flag_both_hints_seen");
+        common_scripts\utility::flag_set("flag_both_hints_seen");
       }
 
       break;
@@ -190,10 +190,10 @@ func_8A25() {
     }
 
     if(var_02) {
-      common_scripts\utility::func_3C8F("flag_painting_hint_seen");
+      common_scripts\utility::flag_set("flag_painting_hint_seen");
       var_00 delete();
       if(common_scripts\utility::func_3C77("flag_head_hint_seen")) {
-        common_scripts\utility::func_3C8F("flag_both_hints_seen");
+        common_scripts\utility::flag_set("flag_both_hints_seen");
       }
 
       break;
@@ -214,7 +214,7 @@ func_8A46() {
   foreach(var_03 in var_00) {
     var_04 = var_03.var_8260;
     var_05 = getsubstr(var_04, var_01.size, var_04.size);
-    var_05 = int(common_scripts\utility::func_9468(var_05)) - 1;
+    var_05 = int(common_scripts\utility::stringtofloat(var_05)) - 1;
     var_06 = common_scripts\utility::func_44BE(var_03.target, "targetname");
     foreach(var_08 in var_06) {
       if(!isDefined(var_08.script_noteworthy)) {
@@ -343,14 +343,14 @@ func_2580(param_00) {
         var_08 = getEntArray(var_07.target, "targetname");
         foreach(var_0A in var_08) {
           if(var_0A.classname == "script_model") {
-            playFXOnTag(level.var_611["zmb_vog_code_correct"], var_0A, "Flute");
+            playFXOnTag(level._effect["zmb_vog_code_correct"], var_0A, "Flute");
           }
         }
       }
 
       if(!common_scripts\utility::func_3C77("flag_correct_code_entered")) {
         thread func_2EBA(1, var_01);
-        common_scripts\utility::func_3C8F("flag_correct_code_entered");
+        common_scripts\utility::flag_set("flag_correct_code_entered");
       }
 
       break;
@@ -361,7 +361,7 @@ func_2580(param_00) {
         var_08 = getEntArray(var_07.target, "targetname");
         foreach(var_0A in var_08) {
           if(var_0A.classname == "script_model") {
-            playFXOnTag(level.var_611["zmb_vog_code_incorrect"], var_0A, "Flute");
+            playFXOnTag(level._effect["zmb_vog_code_incorrect"], var_0A, "Flute");
           }
         }
       }
@@ -490,7 +490,7 @@ func_A185(param_00) {
 func_8A39() {
   level.var_3581 = func_7A54();
   level.var_358A = common_scripts\utility::func_46B7("code_painting", "targetname");
-  level.var_358A common_scripts\utility::func_F92(level.var_358A);
+  level.var_358A common_scripts\utility::array_randomize(level.var_358A);
   for(var_00 = 0; var_00 < level.var_358A.size; var_00++) {
     level.var_358A[var_00].var_248B = undefined;
     level.var_358A[var_00].var_8CA4 = undefined;
@@ -626,7 +626,7 @@ func_8A22() {
     wait(1);
   }
 
-  common_scripts\utility::func_3C8F("flag_player_has_head");
+  common_scripts\utility::flag_set("flag_player_has_head");
 }
 
 func_2E7D(param_00) {
@@ -714,7 +714,7 @@ func_6DF2(param_00, param_01) {
   level.var_3585++;
   var_04 = "ee_painting_reveal_" + level.var_3585;
   if(common_scripts\utility::func_3C83(var_04)) {
-    common_scripts\utility::func_3C8F(var_04);
+    common_scripts\utility::flag_set(var_04);
   }
 
   if(level.var_3585 == 1) {
@@ -733,7 +733,7 @@ func_6DF2(param_00, param_01) {
   }
 
   if(level.var_3585 >= level.var_3582) {
-    common_scripts\utility::func_3C8F("flag_all_paintings_revealed");
+    common_scripts\utility::flag_set("flag_all_paintings_revealed");
     thread func_2EA3(level.var_3585, param_01);
     return;
   }

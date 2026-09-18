@@ -21,11 +21,11 @@ main() {
   game["defenders"] = "axis";
   setDvar("1520", "-1 -1 -1 5");
   setDvar("2494", "0.12, 0, 0");
-  common_scripts\utility::func_3C87("flag_zone1_start");
-  common_scripts\utility::func_3C87("flag_jumpscare_trigger");
-  common_scripts\utility::func_3C87("flag_generator_grate_look");
-  common_scripts\utility::func_3C87("flag_fuse_pickedup");
-  common_scripts\utility::func_3C87("flag_bunker_lights_off");
+  common_scripts\utility::flag_init("flag_zone1_start");
+  common_scripts\utility::flag_init("flag_jumpscare_trigger");
+  common_scripts\utility::flag_init("flag_generator_grate_look");
+  common_scripts\utility::flag_init("flag_fuse_pickedup");
+  common_scripts\utility::flag_init("flag_bunker_lights_off");
   lib_055A::init();
   level.var_8C96 = ::func_666B;
   maps\mp\_water::init();
@@ -50,7 +50,7 @@ main() {
 
   thread func_3FD2();
   thread maps / mp / mp_zombie_nest_pneumos::func_2037();
-  thread func_83FA("bunker_light_switch", 0);
+  thread setscriptablepartstate("bunker_light_switch", 0);
   thread func_7EAC();
   thread func_2033();
   thread func_1D8F();
@@ -240,7 +240,7 @@ func_5375() {
   lib_0547::func_3C8A("com_to_mine", "activate_mine");
   lib_0547::func_3C8A("rnd_to_mine", "activate_mine");
   lib_055A::func_88A();
-  common_scripts\utility::func_3C8F("flag_zone1_start");
+  common_scripts\utility::flag_set("flag_zone1_start");
   maps / mp / gametypes / zombies::flashthread("zone1", ::func_AC9A, ::func_AC90, ::func_AC97);
   maps / mp / gametypes / zombies::func_5294("zone1");
 }
@@ -254,7 +254,7 @@ func_6B5B() {
 }
 
 func_666A() {
-  var_00 = common_scripts\utility::func_7A33(level.players);
+  var_00 = common_scripts\utility::random(level.players);
   switch (level.var_A980) {
     case 5:
       wait(4);
@@ -341,7 +341,7 @@ func_6668(param_00) {
   var_07 = var_03 * 1000;
   var_08 = var_04;
   var_09 = var_05;
-  if(var_02 > var_06 && lib_0547::func_5565(self.var_108, "sprint")) {
+  if(var_02 > var_06 && lib_0547::func_5565(self.vectortoangles, "sprint")) {
     lib_054D::setheight("rageBuff", func_4641());
   }
 
@@ -403,7 +403,7 @@ func_3FD2(param_00) {
   thread func_8A19();
 }
 
-func_83FA(param_00, param_01) {
+setscriptablepartstate(param_00, param_01) {
   setdvarifuninitialized(param_00, param_01);
   var_02 = param_01;
   for(;;) {
@@ -807,7 +807,7 @@ func_2E93() {
 }
 
 func_3C0C() {
-  common_scripts\utility::func_3C87("flag_vo_fireman_head_spotted");
+  common_scripts\utility::flag_init("flag_vo_fireman_head_spotted");
   lib_0547::func_7BA9(::func_3C0B);
 }
 
@@ -816,7 +816,7 @@ func_3C0B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     if(isDefined(param_01)) {
       if(isPlayer(param_01) && !common_scripts\utility::func_3C77("flag_vo_fireman_head_spotted")) {
         param_01 thread lib_0367::func_8E3C("firemankilled");
-        common_scripts\utility::func_3C8F("flag_vo_fireman_head_spotted");
+        common_scripts\utility::flag_set("flag_vo_fireman_head_spotted");
         lib_0547::func_2D8C(::func_3C0B);
         return;
       }
@@ -1002,7 +1002,7 @@ func_34B6() {
       continue;
     }
 
-    common_scripts\utility::func_3C8F("sky_rush");
+    common_scripts\utility::flag_set("sky_rush");
     lib_055A::func_8712(1, "sky_rush_event");
     level waittill("zombie_wave_ended");
     common_scripts\utility::func_3C7B("sky_rush");
@@ -1116,7 +1116,7 @@ func_3DCD() {
     return;
   }
 
-  common_scripts\utility::func_3C8F("flag_fol_inc_armed");
+  common_scripts\utility::flag_set("flag_fol_inc_armed");
   var_00 = lib_055B::func_3DAF();
   foreach(var_02 in var_00) {
     var_02 thread lib_055B::func_3DAD();
@@ -1129,7 +1129,7 @@ func_3DCC() {
     return;
   }
 
-  common_scripts\utility::func_3C8F("flag_fol_inc_armed");
+  common_scripts\utility::flag_set("flag_fol_inc_armed");
   var_00 = lib_055B::func_3DAF();
   foreach(var_02 in var_00) {
     var_02 thread lib_055B::func_3DAD();
@@ -1226,9 +1226,9 @@ func_3BF6() {
 
 func_6E18() {
   var_00 = getEnt("move_cart_button_console", "targetname");
-  playFXOnTag(level.var_611["zmb_com_room_fire_panel"], var_00, "tag_origin");
+  playFXOnTag(level._effect["zmb_com_room_fire_panel"], var_00, "tag_origin");
   wait(18);
-  stopFXOnTag(level.var_611["zmb_com_room_fire_panel"], var_00, "tag_origin");
+  stopFXOnTag(level._effect["zmb_com_room_fire_panel"], var_00, "tag_origin");
 }
 
 func_3BF7(param_00) {
@@ -1266,7 +1266,7 @@ func_3BF7(param_00) {
     thread func_3BF5();
     var_05 = common_scripts\utility::waittill_any_return("fireman_intro_finished", "damage");
     if(var_05 == "damage") {
-      stopFXOnTag(level.var_611["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
+      stopFXOnTag(level._effect["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
       lib_0378::func_8D74("flamethrower_stop", "tag_flamethrower_fx");
     }
 
@@ -1297,10 +1297,10 @@ func_3BF5() {
   self endon("damage");
   maps / mp / agents / _scripted_agent_anim_util::func_8415("s2_fireman_intro_flame", 0, 1);
   wait(2.333333);
-  playFXOnTag(level.var_611["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
+  playFXOnTag(level._effect["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
   lib_0378::func_8D74("flamethrower_start", "tag_flamethrower_fx");
   wait(2.666667);
-  stopFXOnTag(level.var_611["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
+  stopFXOnTag(level._effect["zombie_fireman_flamethrower_expensive"], self, "tag_flamethrower_fx");
   lib_0378::func_8D74("flamethrower_stop", "tag_flamethrower_fx");
   wait(0.3333333);
   self notify("fireman_intro_finished");

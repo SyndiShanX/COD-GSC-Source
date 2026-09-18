@@ -18,12 +18,12 @@ func_47DC(param_00, param_01, param_02, param_03, param_04) {
   }
 
   foreach(var_07 in var_05) {
-    if(!isDefined(level.var_611)) {
-      level.var_611 = [];
+    if(!isDefined(level._effect)) {
+      level._effect = [];
     }
 
-    if(!isDefined(level.var_611[param_03])) {
-      level.var_611[param_03] = loadfx(param_01);
+    if(!isDefined(level._effect[param_03])) {
+      level._effect[param_03] = loadfx(param_01);
     }
 
     if(!isDefined(var_07.angles)) {
@@ -31,12 +31,12 @@ func_47DC(param_00, param_01, param_02, param_03, param_04) {
     }
 
     var_08 = common_scripts\utility::func_281B(param_03);
-    var_08.var_A265["origin"] = var_07.origin;
-    var_08.var_A265["angles"] = var_07.angles;
-    var_08.var_A265["fxid"] = param_03;
-    var_08.var_A265["delay"] = param_02;
+    var_08.v["origin"] = var_07.origin;
+    var_08.v["angles"] = var_07.angles;
+    var_08.v["fxid"] = param_03;
+    var_08.v["delay"] = param_02;
     if(isDefined(param_04)) {
-      var_08.var_A265["soundalias"] = param_04;
+      var_08.v["soundalias"] = param_04;
     }
   }
 }

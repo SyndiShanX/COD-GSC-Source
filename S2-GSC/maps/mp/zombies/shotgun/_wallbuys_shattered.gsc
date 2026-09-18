@@ -218,7 +218,7 @@ run_wallbuy_trigger_mysterybox_mod(param_00, param_01) {
   var_06 = spawn("script_model", var_02.var_A9E3);
   var_06 setModel("tag_origin");
   var_06 thread watch_player_consumable_usage(var_02);
-  var_07 = common_scripts\utility::func_F92(param_00);
+  var_07 = common_scripts\utility::array_randomize(param_00);
   var_08 = 0;
   var_09 = maps\mp\gametypes\_class::func_1D66("ppsh41_classic_zm", "extended_mag");
   for(;;) {
@@ -256,7 +256,7 @@ run_wallbuy_trigger_mysterybox_mod(param_00, param_01) {
     var_02 waittill("mystery_wallbuy_used", var_0D);
     var_03 = var_02.var_586E.var_A9E0;
     var_0C = var_03;
-    playFX(level.var_611["zmb_mystery_box_gun_gk"], var_02.var_A9E3);
+    playFX(level._effect["zmb_mystery_box_gun_gk"], var_02.var_A9E3);
     level.var_11CB.var_65F4 = lib_0380::func_2889("zmb_mystery_box_elec", undefined, var_02.var_A9E3);
     var_02.var_586E showtoclient(var_0D);
     if(!isDefined(var_02.var_586E.var_6C4E)) {
@@ -271,7 +271,7 @@ run_wallbuy_trigger_mysterybox_mod(param_00, param_01) {
     var_02.itementlink.origin = var_02.itementlink.var_6C4E;
     var_02.var_586E unlink();
     var_02.var_586E slide_left();
-    var_02.var_586E method_8449(var_02.itementlink);
+    var_02.var_586E linktosynchronizedparent(var_02.itementlink);
     var_0E = var_02.var_A9E3 + 6 * vectorNormalize(anglestoright(var_02.var_A9BD));
     var_02.itementlink moveTo(var_0E, 0.15);
     wait(0.25);
@@ -481,7 +481,7 @@ func_4D1B(param_00) {
 }
 
 getwallbuytriggercost(param_00) {
-  if(maps\mp\_utility::func_3FA0("fire_sale")) {
+  if(maps\mp\_utility::gameflag("fire_sale")) {
     return int(10);
   }
 
@@ -528,7 +528,7 @@ watch_for_player_purchase() {
     } else {
       self notify("mystery_wallbuy_used", var_00);
       self.canusewb = 0;
-      if(maps\mp\_utility::func_3FA0("fire_sale")) {
+      if(maps\mp\_utility::gameflag("fire_sale")) {
         continue;
       }
 
@@ -615,7 +615,7 @@ get_current_weapon_level(param_00) {
 }
 
 get_weapons_by_class(param_00) {
-  return common_scripts\utility::func_F92(level.zombies_shotgun_weapons_in_play[param_00]);
+  return common_scripts\utility::array_randomize(level.zombies_shotgun_weapons_in_play[param_00]);
 }
 
 get_use_player() {

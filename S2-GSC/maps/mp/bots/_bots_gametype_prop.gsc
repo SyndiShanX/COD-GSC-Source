@@ -65,7 +65,7 @@ bot_prop_think() {
         }
 
         if(isDefined(var_05) && !self method_8371(var_05)) {
-          var_09 = common_scripts\utility::func_7A33(getallnodes());
+          var_09 = common_scripts\utility::random(getallnodes());
           self method_8379(var_05, var_09.origin);
           var_00 = gettime();
         } else {

@@ -6,7 +6,7 @@
 init() {
   var_00 = common_scripts\utility::func_46B5("orbital_gravity_entangler", "targetname");
   var_01 = common_scripts\utility::func_46B5(var_00.target, "targetname");
-  var_00.var_14F = distance(var_00.origin, var_01.origin);
+  var_00.radius = distance(var_00.origin, var_01.origin);
   var_02 = var_00 common_scripts\utility::func_8FFC();
   var_02 show();
   var_02 thread rotate_me();
@@ -144,7 +144,7 @@ watch_for_grenades_and_projectiles(param_00) {
   var_01 = self;
   var_02 = 1200;
   var_01 endon("disconnect");
-  var_03 = param_00.var_14F;
+  var_03 = param_00.radius;
   var_04 = param_00.origin;
   childthread watch_for_grab();
   var_05 = ["frag_grenade_zm", "c4_zm", "semtex_zm", "throwingknife_zm"];
@@ -176,9 +176,9 @@ watch_for_grenades_and_projectiles(param_00) {
     }
 
     if(var_09) {
-      var_08 method_8449(level.oribital_rotator_1);
+      var_08 linktosynchronizedparent(level.oribital_rotator_1);
     } else {
-      var_08 method_8449(level.oribital_rotator_2);
+      var_08 linktosynchronizedparent(level.oribital_rotator_2);
     }
 
     if(!isDefined(var_08)) {
@@ -330,14 +330,14 @@ wait_frames(param_00) {
 }
 
 set_fx(param_00) {
-  if(isDefined(self.var_3F2F)) {
-    self.var_3F2F delete();
+  if(isDefined(self.fx)) {
+    self.fx delete();
   }
 
   self.var_3F74 = param_00;
-  self.var_3F2F = spawnlinkedfx(common_scripts\utility::func_44F5(param_00), self, "tag_fx");
+  self.fx = spawnlinkedfx(common_scripts\utility::func_44F5(param_00), self, "tag_fx");
   self.ee_color = get_color_for_grenade(param_00);
-  triggerfx(self.var_3F2F);
+  triggerfx(self.fx);
 }
 
 seek_enemy_targets(param_00, param_01) {
@@ -389,8 +389,8 @@ seek_enemy_targets(param_00, param_01) {
 }
 
 remove_fake_projectile() {
-  if(isDefined(self.var_3F2F)) {
-    self.var_3F2F delete();
+  if(isDefined(self.fx)) {
+    self.fx delete();
   }
 
   self delete();

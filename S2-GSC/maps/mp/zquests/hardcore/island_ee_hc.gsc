@@ -5,56 +5,56 @@
 
 init() {
   level.perk_machine_should_open = ::perk_machine_open;
-  common_scripts\utility::func_3C87("anointed_zombies_done_spawning");
-  common_scripts\utility::func_3C87("flag_monk_head_found");
-  common_scripts\utility::func_3C87("flag_monk_head_placed");
-  common_scripts\utility::func_3C87("flag_anointed_pest_head_drop");
-  common_scripts\utility::func_3C87("flag_anointed_fol_head_drop");
-  common_scripts\utility::func_3C87("flag_anointed_asn_head_drop");
-  common_scripts\utility::func_3C87("flag_anointed_pest_head_get");
-  common_scripts\utility::func_3C87("flag_anointed_fol_head_get");
-  common_scripts\utility::func_3C87("flag_anointed_asn_head_get");
-  common_scripts\utility::func_3C87("flag_monk_head_retrieved");
-  common_scripts\utility::func_3C87("flag_anointed_pest_head_placed");
-  common_scripts\utility::func_3C87("flag_anointed_fol_head_placed");
-  common_scripts\utility::func_3C87("flag_anointed_asn_head_placed");
-  common_scripts\utility::func_3C87("flag_anointed_monk_head_placed");
-  common_scripts\utility::func_3C87("flag_heads_complete");
-  common_scripts\utility::func_3C87("zmb_hc_pest_spawned");
-  common_scripts\utility::func_3C87("zmb_hc_follower_spawned");
-  common_scripts\utility::func_3C87("zmb_hc_assassin_spawned");
-  common_scripts\utility::func_3C87("zmb_hc_pest_destination");
-  common_scripts\utility::func_3C87("zmb_hc_follower_destination");
-  common_scripts\utility::func_3C87("zmb_hc_assassin_destination");
-  common_scripts\utility::func_3C87("zmb_hc_pest_destination");
-  common_scripts\utility::func_3C87("zmb_hc_follower_destination");
-  common_scripts\utility::func_3C87("zmb_hc_assassin_destination");
-  common_scripts\utility::func_3C87("pomel room opened");
-  common_scripts\utility::func_3C87("water_has_been_raised");
-  common_scripts\utility::func_3C87("flag_pommel_given");
-  common_scripts\utility::func_3C87("players_spawned_statue_piece_1");
-  common_scripts\utility::func_3C87("players_spawned_statue_piece_2");
-  common_scripts\utility::func_3C87("players_spawned_statue_piece_3");
-  common_scripts\utility::func_3C87("players_placed_statue_piece_1");
-  common_scripts\utility::func_3C87("players_placed_statue_piece_2");
-  common_scripts\utility::func_3C87("players_placed_statue_piece_3");
-  common_scripts\utility::func_3C87("flag_pest_painted_1");
-  common_scripts\utility::func_3C87("flag_pest_painted_2");
-  common_scripts\utility::func_3C87("flag_pest_painted_3");
-  common_scripts\utility::func_3C87("flag_pest_painted_4");
-  common_scripts\utility::func_3C87("flag_pest_painted_5");
-  common_scripts\utility::func_3C87("flag_hc_pest_paint_complete");
-  common_scripts\utility::func_3C87("flag_sacrificed_sprinter_spine");
-  common_scripts\utility::func_3C87("flag_sacrificed_follower_spine");
-  common_scripts\utility::func_3C87("flag_sacrificed_assassin_spine");
-  common_scripts\utility::func_3C87("flag_hc_asn_found_1");
-  common_scripts\utility::func_3C87("flag_hc_asn_found_2");
-  common_scripts\utility::func_3C87("flag_hc_asn_found_3");
-  common_scripts\utility::func_3C87("flag_hc_asn_escort_complete");
-  common_scripts\utility::func_3C87("flag_hc_escort_active");
-  common_scripts\utility::func_3C87("flag_pomel_room_players_wait");
-  common_scripts\utility::func_3C87("ibeam_complete");
-  common_scripts\utility::func_3C87("ripsaw_punch_active");
+  common_scripts\utility::flag_init("anointed_zombies_done_spawning");
+  common_scripts\utility::flag_init("flag_monk_head_found");
+  common_scripts\utility::flag_init("flag_monk_head_placed");
+  common_scripts\utility::flag_init("flag_anointed_pest_head_drop");
+  common_scripts\utility::flag_init("flag_anointed_fol_head_drop");
+  common_scripts\utility::flag_init("flag_anointed_asn_head_drop");
+  common_scripts\utility::flag_init("flag_anointed_pest_head_get");
+  common_scripts\utility::flag_init("flag_anointed_fol_head_get");
+  common_scripts\utility::flag_init("flag_anointed_asn_head_get");
+  common_scripts\utility::flag_init("flag_monk_head_retrieved");
+  common_scripts\utility::flag_init("flag_anointed_pest_head_placed");
+  common_scripts\utility::flag_init("flag_anointed_fol_head_placed");
+  common_scripts\utility::flag_init("flag_anointed_asn_head_placed");
+  common_scripts\utility::flag_init("flag_anointed_monk_head_placed");
+  common_scripts\utility::flag_init("flag_heads_complete");
+  common_scripts\utility::flag_init("zmb_hc_pest_spawned");
+  common_scripts\utility::flag_init("zmb_hc_follower_spawned");
+  common_scripts\utility::flag_init("zmb_hc_assassin_spawned");
+  common_scripts\utility::flag_init("zmb_hc_pest_destination");
+  common_scripts\utility::flag_init("zmb_hc_follower_destination");
+  common_scripts\utility::flag_init("zmb_hc_assassin_destination");
+  common_scripts\utility::flag_init("zmb_hc_pest_destination");
+  common_scripts\utility::flag_init("zmb_hc_follower_destination");
+  common_scripts\utility::flag_init("zmb_hc_assassin_destination");
+  common_scripts\utility::flag_init("pomel room opened");
+  common_scripts\utility::flag_init("water_has_been_raised");
+  common_scripts\utility::flag_init("flag_pommel_given");
+  common_scripts\utility::flag_init("players_spawned_statue_piece_1");
+  common_scripts\utility::flag_init("players_spawned_statue_piece_2");
+  common_scripts\utility::flag_init("players_spawned_statue_piece_3");
+  common_scripts\utility::flag_init("players_placed_statue_piece_1");
+  common_scripts\utility::flag_init("players_placed_statue_piece_2");
+  common_scripts\utility::flag_init("players_placed_statue_piece_3");
+  common_scripts\utility::flag_init("flag_pest_painted_1");
+  common_scripts\utility::flag_init("flag_pest_painted_2");
+  common_scripts\utility::flag_init("flag_pest_painted_3");
+  common_scripts\utility::flag_init("flag_pest_painted_4");
+  common_scripts\utility::flag_init("flag_pest_painted_5");
+  common_scripts\utility::flag_init("flag_hc_pest_paint_complete");
+  common_scripts\utility::flag_init("flag_sacrificed_sprinter_spine");
+  common_scripts\utility::flag_init("flag_sacrificed_follower_spine");
+  common_scripts\utility::flag_init("flag_sacrificed_assassin_spine");
+  common_scripts\utility::flag_init("flag_hc_asn_found_1");
+  common_scripts\utility::flag_init("flag_hc_asn_found_2");
+  common_scripts\utility::flag_init("flag_hc_asn_found_3");
+  common_scripts\utility::flag_init("flag_hc_asn_escort_complete");
+  common_scripts\utility::flag_init("flag_hc_escort_active");
+  common_scripts\utility::flag_init("flag_pomel_room_players_wait");
+  common_scripts\utility::flag_init("ibeam_complete");
+  common_scripts\utility::flag_init("ripsaw_punch_active");
   foreach(var_01 in ["flag_monk_head_found", "flag_monk_head_placed", "flag_anointed_pest_head_placed", "flag_anointed_fol_head_placed", "flag_anointed_asn_head_placed", "flag_heads_complete", "zmb_hc_pest_destination", "zmb_hc_follower_destination", "zmb_hc_assassin_destination", "pomel room opened", "flag_pommel_given", "players_placed_statue_piece_1", "players_placed_statue_piece_2", "players_placed_statue_piece_3", "flag_hc_pest_paint_complete", "flag_sacrificed_sprinter_spine", "flag_sacrificed_follower_spine", "flag_sacrificed_assassin_spine", "flag_hc_asn_found_1", "flag_hc_asn_found_2", "flag_hc_asn_found_3", "flag_hc_asn_escort_complete"]) {
     lib_0557::func_4BC9(var_01, undefined, undefined, 1);
   }
@@ -95,7 +95,7 @@ on_jack_landed_in_secret(param_00) {
   var_03 = common_scripts\utility::func_46B5("zmi_hc_secret", "targetname");
   var_04 = var_03.origin + (0, 0, var_02);
   for(var_05 = 0; var_05 < 3; var_05++) {
-    if(distance2d(self.origin, var_04) < var_03.var_14F && abs(self.origin[2] - var_04[2]) < var_01) {
+    if(distance2d(self.origin, var_04) < var_03.radius && abs(self.origin[2] - var_04[2]) < var_01) {
       level.jack_in_box_secret_handler = undefined;
       level.players_sacrificed_jack = 1;
       param_00 delete();
@@ -124,7 +124,7 @@ pomel_boss_fight_water_raise() {
     var_03 maps\mp\_utility::func_2CED(1.25, ::lib_0367::func_8E3C, "pommelattack");
   }
 
-  common_scripts\utility::func_3C8F("anointed_zombies_done_spawning");
+  common_scripts\utility::flag_set("anointed_zombies_done_spawning");
   common_scripts\utility::func_3C9F("water_has_been_raised");
   pommel_water_trigger(::common_scripts\utility::func_9DA3);
   maps / mp / mp_zombie_nest_ee_wave_manipulation::func_8607();
@@ -221,7 +221,7 @@ monk_head_find_think() {
   var_00 waittill("trigger", var_01);
   var_02 = getEnt(var_00.target, "targetname");
   var_02 delete();
-  common_scripts\utility::func_3C8F("flag_monk_head_found");
+  common_scripts\utility::flag_set("flag_monk_head_found");
 }
 
 monk_head_place_think() {
@@ -234,7 +234,7 @@ monk_head_place_think() {
     }
 
     var_01 show();
-    common_scripts\utility::func_3C8F("flag_monk_head_placed");
+    common_scripts\utility::flag_set("flag_monk_head_placed");
   }
 
   wait(0.75);
@@ -266,7 +266,7 @@ monk_head_operate_machine() {
           break;
         }
 
-        common_scripts\utility::func_3C8F("flag_sacrificed_sprinter_spine");
+        common_scripts\utility::flag_set("flag_sacrificed_sprinter_spine");
         var_01 = "hc_pest";
         break;
 
@@ -276,7 +276,7 @@ monk_head_operate_machine() {
           break;
         }
 
-        common_scripts\utility::func_3C8F("flag_sacrificed_follower_spine");
+        common_scripts\utility::flag_set("flag_sacrificed_follower_spine");
         var_01 = "hc_follower";
         break;
 
@@ -287,7 +287,7 @@ monk_head_operate_machine() {
         }
 
         var_01 = "hc_assassin";
-        common_scripts\utility::func_3C8F("flag_sacrificed_assassin_spine");
+        common_scripts\utility::flag_set("flag_sacrificed_assassin_spine");
         break;
 
       case "zombie_spine":
@@ -299,7 +299,7 @@ monk_head_operate_machine() {
     }
 
     common_scripts\utility::func_379A("freezer_machine_working");
-    common_scripts\utility::func_3C8F("flag_loader_zombie_unavailable");
+    common_scripts\utility::flag_set("flag_loader_zombie_unavailable");
     var_02 maps / mp / zquests / casual / island_ee_util::spine_player_clear_data();
     level notify("freezeer_summon_zombie", var_01);
     level waittill("freezer_zombie_placed", var_04);
@@ -354,7 +354,7 @@ spine_perform_escort(param_00, param_01) {
         return;
       }
 
-      common_scripts\utility::func_3C8F("flag_hc_escort_active");
+      common_scripts\utility::flag_set("flag_hc_escort_active");
       pest_escort_quest_main(param_01);
       break;
 
@@ -368,7 +368,7 @@ spine_perform_escort(param_00, param_01) {
         return;
       }
 
-      common_scripts\utility::func_3C8F("flag_hc_escort_active");
+      common_scripts\utility::flag_set("flag_hc_escort_active");
       assassin_escort_quest_main(param_01);
       break;
 
@@ -382,7 +382,7 @@ spine_perform_escort(param_00, param_01) {
         return;
       }
 
-      common_scripts\utility::func_3C8F("flag_hc_escort_active");
+      common_scripts\utility::flag_set("flag_hc_escort_active");
       wustling_escort_quest_main(param_01);
       break;
 
@@ -479,7 +479,7 @@ pest_escort_quest_main(param_00) {
   }
 
   common_scripts\utility::func_3C7B("flag_loader_zombie_unavailable");
-  common_scripts\utility::func_3C8F("flag_hc_pest_paint_complete");
+  common_scripts\utility::flag_set("flag_hc_pest_paint_complete");
   pagan_room_pest_wait_for_rush();
 }
 
@@ -490,7 +490,7 @@ pagan_room_pest_wait_for_rush() {
   thread pomel_door_close();
   lib_0547::func_AAFB("isolated_room_close_to_pool_trig");
   var_00 = common_scripts\utility::func_46B7("pagan_room_zombie_dropdown_top", "targetname");
-  var_01 = common_scripts\utility::func_7A33(var_00);
+  var_01 = common_scripts\utility::random(var_00);
   var_02 = lib_054D::func_90BA("zombie_berserker", var_01, "anointed_pest", 0, 1, 0);
   var_02.ispassiveexempt = 1;
   var_02.is_anointed = 1;
@@ -516,11 +516,11 @@ pagan_room_pest_wait_for_rush() {
   lib_0547::func_7BA9(::anointed_zombie_death_listener);
   lib_0547::func_7BA9(::pest_pagan_zombie_death_listener);
   pagan_room_do_pest_rush();
-  common_scripts\utility::func_3C8F("anointed_zombies_done_spawning");
+  common_scripts\utility::flag_set("anointed_zombies_done_spawning");
   wait_for_all_bosses_defeated();
   lib_0547::func_2D8C(::anointed_zombie_death_listener);
   lib_0547::func_2D8C(::pest_pagan_zombie_death_listener);
-  common_scripts\utility::func_3C8F("zmb_hc_pest_destination");
+  common_scripts\utility::flag_set("zmb_hc_pest_destination");
   pomel_door_open();
   common_scripts\utility::func_3C7B("flag_hc_escort_active");
 }
@@ -898,7 +898,7 @@ pest_hc_blade_update_color(param_00) {
   var_01 = pest_hc_util_get_trail_fx(self.current_color);
   var_02 = lib_055A::func_4562(self.origin);
   if(lib_0547::func_5565(var_02, "sub_pens_1_zone")) {
-    if(isDefined(level.var_611[var_01 + "_int"])) {
+    if(isDefined(level._effect[var_01 + "_int"])) {
       var_01 = var_01 + "_int";
     }
   }
@@ -1271,7 +1271,7 @@ pest_hc_main_do_challenge(param_00, param_01, param_02, param_03, param_04, para
   }
 
   if(lib_0547::func_5565(var_08, "hc_pest_hit")) {
-    common_scripts\utility::func_3C8F(param_04);
+    common_scripts\utility::flag_set(param_04);
     level.hc_pest lib_0378::func_8D74("charged_ripsaw_hit_pest");
     playFX(common_scripts\utility::func_44F5(pest_hc_util_get_impact_fx(param_03)), level.hc_pest.origin + (0, 0, 32));
     level.hc_pest thread pest_hc_zombie_stun_burst();
@@ -1682,7 +1682,7 @@ wustling_escort_quest_main(param_00) {
   }
 
   maps\mp\_utility::func_2CED(0.75, ::maps / mp / zquests / casual / island_ee_util::monk_head_dialogue, "zmb_isla_monk_ripthestrengthfromthemigh", 1);
-  common_scripts\utility::func_3C8F("zmb_hc_follower_destination");
+  common_scripts\utility::flag_set("zmb_hc_follower_destination");
   thread wustling_boss_fight_wait();
   common_scripts\utility::func_3C7B("flag_loader_zombie_unavailable");
   level.hc_wustling suicide();
@@ -1775,10 +1775,10 @@ hc_safe_linkTo(param_00, param_01) {
   self endon("wustling_player_track_timeout");
   self endon("wustling_break_safelink");
   param_00.origin = param_01 gettagorigin("TAG_ORIGIN");
-  param_00 method_8449(param_01, "TAG_ORIGIN");
+  param_00 linktosynchronizedparent(param_01, "TAG_ORIGIN");
   param_01 common_scripts\utility::waittill_any("death", "disconnect", "wustling_break_safelink");
   param_00.origin = self gettagorigin("TAG_ORIGIN");
-  param_00 method_8449(self, "TAG_ORIGIN");
+  param_00 linktosynchronizedparent(self, "TAG_ORIGIN");
   self notify("wustling_player_track_failed");
 }
 
@@ -1897,7 +1897,7 @@ wustling_buff_manager_setup() {
   self.buff_slot_4 linkTo(self, "J_Neck", (0, 5, 0), (60, 30, -90));
   self.buff_slot_4.var_3F44 = "zmb_electroschnelle_off_blood";
   self.buff_slot_4.sort_id = 4;
-  self.buff_slot_4.var_3F3F = spawnlinkedfx(level.var_611[self.buff_slot_4.var_3F44], self.buff_slot_4, "TAG_ORIGIN");
+  self.buff_slot_4.var_3F3F = spawnlinkedfx(level._effect[self.buff_slot_4.var_3F44], self.buff_slot_4, "TAG_ORIGIN");
   triggerfx(self.buff_slot_4.var_3F3F);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.buff_slot_4);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.buff_slot_4.var_3F3F);
@@ -1906,7 +1906,7 @@ wustling_buff_manager_setup() {
   self.buff_slot_3 linkTo(self, "J_Spine4", (4, 6, 0), (50, 30, -90));
   self.buff_slot_3.sort_id = 3;
   self.buff_slot_3.var_3F44 = "zmb_electroschnelle_off_blood";
-  self.buff_slot_3.var_3F3F = spawnlinkedfx(level.var_611[self.buff_slot_3.var_3F44], self.buff_slot_3, "TAG_ORIGIN");
+  self.buff_slot_3.var_3F3F = spawnlinkedfx(level._effect[self.buff_slot_3.var_3F44], self.buff_slot_3, "TAG_ORIGIN");
   triggerfx(self.buff_slot_3.var_3F3F);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.buff_slot_3);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.buff_slot_3.var_3F3F);
@@ -1915,7 +1915,7 @@ wustling_buff_manager_setup() {
   self.buff_slot_2 linkTo(self, "J_SpineUpper", (4, 6, 0), (40, 45, -90));
   self.buff_slot_2.sort_id = 2;
   self.buff_slot_2.var_3F44 = "zmb_electroschnelle_off_blood";
-  self.buff_slot_2.var_3F3F = spawnlinkedfx(level.var_611[self.buff_slot_2.var_3F44], self.buff_slot_2, "TAG_ORIGIN");
+  self.buff_slot_2.var_3F3F = spawnlinkedfx(level._effect[self.buff_slot_2.var_3F44], self.buff_slot_2, "TAG_ORIGIN");
   triggerfx(self.buff_slot_2.var_3F3F);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.buff_slot_2);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.buff_slot_2.var_3F3F);
@@ -1924,7 +1924,7 @@ wustling_buff_manager_setup() {
   self.buff_slot_1 linkTo(self, "J_SpineLower", (4, 5, 0), (30, 30, -90));
   self.buff_slot_1.sort_id = 1;
   self.buff_slot_1.var_3F44 = "zmb_electroschnelle_off_blood";
-  self.buff_slot_1.var_3F3F = spawnlinkedfx(level.var_611[self.buff_slot_1.var_3F44], self.buff_slot_1, "TAG_ORIGIN");
+  self.buff_slot_1.var_3F3F = spawnlinkedfx(level._effect[self.buff_slot_1.var_3F44], self.buff_slot_1, "TAG_ORIGIN");
   triggerfx(self.buff_slot_1.var_3F3F);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.buff_slot_1);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.buff_slot_1.var_3F3F);
@@ -1940,7 +1940,7 @@ wustling_buff_manager_add(param_00) {
   var_01.var_3F3F delete();
   self.active_buff_slots[self.active_buff_slots.size] = var_01;
   var_01.var_3F44 = wustling_buff_manager_get_buff_id(param_00);
-  var_01.var_3F3F = spawnlinkedfx(level.var_611[var_01.var_3F44], var_01, "TAG_ORIGIN");
+  var_01.var_3F3F = spawnlinkedfx(level._effect[var_01.var_3F44], var_01, "TAG_ORIGIN");
   triggerfx(var_01.var_3F3F);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(var_01.var_3F3F);
 }
@@ -1954,7 +1954,7 @@ wustling_buff_manager_remove(param_00) {
   self.buff_empty_slots = common_scripts\utility::func_FA4(self.buff_empty_slots, ::sort_empty_slots);
   var_01.var_3F3F delete();
   var_01.var_3F44 = "zmb_electroschnelle_off_blood";
-  var_01.var_3F3F = spawnlinkedfx(level.var_611[var_01.var_3F44], var_01, "TAG_ORIGIN");
+  var_01.var_3F3F = spawnlinkedfx(level._effect[var_01.var_3F44], var_01, "TAG_ORIGIN");
   triggerfx(var_01.var_3F3F);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(var_01.var_3F3F);
 }
@@ -2113,7 +2113,7 @@ pagan_room_do_wustling_rush() {
     var_09 wustling_miniboss_setup();
     var_09 maps / mp / agents / _agent_common::func_83FD(int(maps / mp / zquests / casual / island_ee_main::get_difficulty_setting("zmb_escort_hc_follower_health_buddy")));
     var_09.pommel_room_boss = 1;
-    var_0A = common_scripts\utility::func_7A33(var_03);
+    var_0A = common_scripts\utility::random(var_03);
     var_03 = common_scripts\utility::func_F93(var_03, var_0A);
     var_07++;
     var_08++;
@@ -2132,11 +2132,11 @@ pagan_room_do_wustling_rush() {
   level.hc_wustling = var_0B;
   wait 0.05;
   wustling_give_correct_buffs();
-  common_scripts\utility::func_3C8F("anointed_zombies_done_spawning");
+  common_scripts\utility::flag_set("anointed_zombies_done_spawning");
   wait_for_all_bosses_defeated();
   lib_054D::func_2D8D(::wustling_revive_listener);
   lib_0547::func_2D8C(::anointed_zombie_death_listener);
-  common_scripts\utility::func_3C8F("zmb_hc_follower_destination");
+  common_scripts\utility::flag_set("zmb_hc_follower_destination");
   common_scripts\utility::func_3C7B("flag_hc_escort_active");
 }
 
@@ -2235,7 +2235,7 @@ assassin_escort_quest_main(param_00) {
   maps / mp / mp_zombie_island_ee_fog_manager::unlock_fog_from_lock();
   maps / mp / mp_zombie_island_ee_fog_manager::toggle_next_fog_state();
   common_scripts\utility::func_3C7B("flag_loader_zombie_unavailable");
-  common_scripts\utility::func_3C8F("flag_hc_asn_escort_complete");
+  common_scripts\utility::flag_set("flag_hc_asn_escort_complete");
   run_assassin_escort_battle();
 }
 
@@ -2265,11 +2265,11 @@ run_assassin_escort_battle() {
   var_03 maps / mp / agents / _agent_utility::deleteentonagentdeath(var_02);
   var_02.anointed_fx maps / mp / agents / _agent_utility::deleteentonagentdeath(var_02);
   triggerfx(var_02.anointed_fx);
-  common_scripts\utility::func_3C8F("anointed_zombies_done_spawning");
+  common_scripts\utility::flag_set("anointed_zombies_done_spawning");
   wait_for_all_bosses_defeated();
   pomel_door_open();
   lib_0547::func_2D8C(::anointed_zombie_death_listener);
-  common_scripts\utility::func_3C8F("zmb_hc_assassin_destination");
+  common_scripts\utility::flag_set("zmb_hc_assassin_destination");
   common_scripts\utility::func_3C7B("flag_hc_escort_active");
 }
 
@@ -2347,7 +2347,7 @@ assassin_hc_zombie_spawn_at_nearest_point(param_00) {
   var_02 = 0;
   var_03 = 1;
   foreach(var_05 in level.players) {
-    var_06 = common_scripts\utility::func_AA4A(var_05 getEye(), var_05 geteyeangles(), param_00.origin + (0, 0, 32), cos(32.5));
+    var_06 = common_scripts\utility::within_fov(var_05 getEye(), var_05 geteyeangles(), param_00.origin + (0, 0, 32), cos(32.5));
     var_07 = bullettracepassed(var_05 getEye(), param_00.origin + (0, 0, 32), 0);
     if(var_06 || var_07) {
       var_02 = 1;
@@ -2383,7 +2383,7 @@ assassin_hc_main_do_hide_and_seek(param_00) {
 
   lib_0547::deregister_allykilledfunc(::assassin_hc_zombie_death_listener);
   if(lib_0547::func_5565(var_01, "hc_assassin_found")) {
-    common_scripts\utility::func_3C8F(param_00);
+    common_scripts\utility::flag_set(param_00);
     level.hc_assassin assassin_hc_zombie_retreat_and_suicide(1);
     return 1;
   }
@@ -2684,11 +2684,11 @@ assassin_hc_hide_point_select_optimal() {
         level.hc_asn_hide_pnts.seeded = 1;
       }
 
-      var_08 = maps\mp\_utility::func_442E(level.players);
+      var_08 = maps\mp\_utility::getaverageorigin(level.players);
       var_09 = common_scripts\utility::func_44D6(var_08, var_03);
       switch (var_07) {
         case 1:
-          var_00 = common_scripts\utility::func_7A33(var_03);
+          var_00 = common_scripts\utility::random(var_03);
           break;
 
         case 2:
@@ -2704,14 +2704,14 @@ assassin_hc_hide_point_select_optimal() {
             }
           }
 
-          var_00 = common_scripts\utility::func_7A33(var_0B);
+          var_00 = common_scripts\utility::random(var_0B);
           break;
       }
     }
   }
 
   if(!isDefined(var_00)) {
-    var_00 = common_scripts\utility::func_7A33(var_02);
+    var_00 = common_scripts\utility::random(var_02);
   }
 
   var_00.selected_recently = 1;
@@ -2783,7 +2783,7 @@ handle_pomel_door_interact(param_00, param_01) {
     var_0B lib_0586::func_78E(var_0B lib_0547::func_AB2B());
     for(var_0C = 0; var_0C < param_00.size; var_0C++) {
       if(common_scripts\utility::func_3C77(param_00[var_0C]) && !common_scripts\utility::func_3C77(param_01[var_0C])) {
-        common_scripts\utility::func_3C8F(param_01[var_0C]);
+        common_scripts\utility::flag_set(param_01[var_0C]);
         var_02.door_pieces["statue_piece_" + var_0C + 1] show();
         break;
       }
@@ -2804,7 +2804,7 @@ wait_for_door_opened(param_00) {
     common_scripts\utility::func_3C9F(var_02);
   }
 
-  common_scripts\utility::func_3C8F("pomel room opened");
+  common_scripts\utility::flag_set("pomel room opened");
   wait(2.5);
   thread pagan_room_open_zombie_cooldown();
   thread pagan_room_open_logic();
@@ -2858,7 +2858,7 @@ pomel_door_open(param_00) {
   level.disable_assassin_pushers = 0;
   var_01 = common_scripts\utility::func_46B5("pomel_room_door_struct", "targetname");
   var_01.door_scriptable setscriptablepartstate("gate", "opening");
-  common_scripts\utility::func_3C8F("isolated_entry_to_isolated");
+  common_scripts\utility::flag_set("isolated_entry_to_isolated");
   var_02 = getEnt("pomel_room_door_instant_blocker", "script_noteworthy");
   if(isDefined(var_02)) {
     var_02 notsolid();
@@ -2926,8 +2926,8 @@ pomel_door_close() {
   var_00.door_blocker notsolid();
   common_scripts\utility::func_3C7B("isolated_entry_to_isolated");
   wait(4.2);
-  var_00.door_blocker method_805F();
-  var_01 method_805F();
+  var_00.door_blocker saved_actionslotdata();
+  var_01 saved_actionslotdata();
   wait(2.333333);
   var_00.door_scriptable setscriptablepartstate("gate", "closed");
   var_01 notsolid();
@@ -2961,7 +2961,7 @@ stone_collect_1_think() {
     }
   }
 
-  common_scripts\utility::func_3C8F("players_spawned_statue_piece_1");
+  common_scripts\utility::flag_set("players_spawned_statue_piece_1");
   playFX(common_scripts\utility::func_44F5("zmb_flak_rock_explosion"), var_01.origin);
   var_01 delete();
   wait 0.05;
@@ -3099,7 +3099,7 @@ stone_2_spawn_baby_statue() {
   }
 
   maps / mp / zombies / weapons / _zombie_stone_baby_weapon::spawn_a_stone_baby_pickup(var_00, undefined, undefined, undefined, "players_spawned_statue_piece_2");
-  common_scripts\utility::func_3C8F("players_spawned_statue_piece_2");
+  common_scripts\utility::flag_set("players_spawned_statue_piece_2");
 }
 
 stone_collect_3_think() {
@@ -3159,7 +3159,7 @@ stone_setup_roots_object() {
 }
 
 stone_choose_stone_root(param_00) {
-  var_01 = common_scripts\utility::func_7A33(param_00);
+  var_01 = common_scripts\utility::random(param_00);
   var_01.hc_chosen_roots = 1;
 }
 
@@ -3185,7 +3185,7 @@ stone_roots_roots_think() {
     return;
   }
 
-  common_scripts\utility::func_3C8F("players_spawned_statue_piece_3");
+  common_scripts\utility::flag_set("players_spawned_statue_piece_3");
   wait 0.05;
   var_0B = magicartillery("zmi_stone_drop", self.statue_start_loc.origin, self.statue_end_loc.origin, 1.5, self.statue_start_loc.origin[2] + 100);
   playFX(common_scripts\utility::func_44F5("zmb_geiskraft_spark_poof"), self.statue_start_loc.origin);
@@ -3363,7 +3363,7 @@ head_hooks_setup() {
   maps\mp\_utility::func_2CED(1.25, ::monk_head_final_fight_dialogue);
   common_scripts\utility::func_3C9F("flag_monk_head_retrieved");
   common_scripts\utility::func_3CA0("flag_anointed_pest_head_get", "flag_anointed_fol_head_get", "flag_anointed_asn_head_get", "flag_anointed_monk_head_placed");
-  common_scripts\utility::func_3C8F("flag_heads_complete");
+  common_scripts\utility::flag_set("flag_heads_complete");
 }
 
 monk_head_final_fight_dialogue() {
@@ -3411,7 +3411,7 @@ head_spawn_type(param_00, param_01, param_02) {
       break;
   }
 
-  common_scripts\utility::func_3C8F(var_04);
+  common_scripts\utility::flag_set(var_04);
   var_07 = spawn("script_model", param_01 + (0, 0, 20));
   var_07.angles = param_02;
   var_07 setModel(var_06);
@@ -3420,7 +3420,7 @@ head_spawn_type(param_00, param_01, param_02) {
   var_07 waittill("player_used", var_08);
   var_07 lib_0547::func_AC40();
   var_07 delete();
-  common_scripts\utility::func_3C8F(var_05);
+  common_scripts\utility::flag_set(var_05);
 }
 
 head_hooks_spawn_temp_heads() {
@@ -3441,7 +3441,7 @@ head_hooks_attach_head(param_00, param_01, param_02) {
     level childthread common_scripts\_exploder::func_88E(param_00.exploder_num);
     thread head_hooks_attach_head_quake(var_03, param_00.origin);
     lib_0378::func_8D74("pagan_head_place", param_00, param_02);
-    common_scripts\utility::func_3C8F(param_02);
+    common_scripts\utility::flag_set(param_02);
     self delete();
   }
 }
@@ -3470,7 +3470,7 @@ func_3254(param_00, param_01) {
 head_retrieve_monk_head_from_freezer() {
   common_scripts\utility::func_3CA0("flag_anointed_pest_head_get", "flag_anointed_fol_head_get", "flag_anointed_asn_head_get");
   self.controller_trig waittill("trigger", var_00);
-  common_scripts\utility::func_3C8F("flag_monk_head_retrieved");
+  common_scripts\utility::flag_set("flag_monk_head_retrieved");
   self.var_82EF setscriptablepartstate("light", "red");
   self.var_B9 hide();
 }
@@ -3478,7 +3478,7 @@ head_retrieve_monk_head_from_freezer() {
 ______________pommel_____________() {}
 
 raise_water_objective(param_00) {
-  common_scripts\utility::func_3C87(self.var_819A);
+  common_scripts\utility::flag_init(self.var_819A);
   self.my_dest = getEnt(self.target, "targetname");
   if(!isDefined(self.my_dest)) {
     return;
@@ -3488,8 +3488,8 @@ raise_water_objective(param_00) {
   var_01 setModel("tag_origin");
   thread func_8C16(var_01);
   var_01.disable_end_sound = 1;
-  var_01 maps / mp / mp_zombies_soul_collection::func_170B(int(maps / mp / zquests / casual / island_ee_main::get_difficulty_setting("zmb_pommel_room_sacrifice_requirements")), param_00.var_14F, 64, self.var_819A, undefined, "tag_origin", undefined, "tag_origin", undefined, self, (0, 0, 64), undefined, 1, 1);
-  common_scripts\utility::func_3C8F("water_has_been_raised");
+  var_01 maps / mp / mp_zombies_soul_collection::func_170B(int(maps / mp / zquests / casual / island_ee_main::get_difficulty_setting("zmb_pommel_room_sacrifice_requirements")), param_00.radius, 64, self.var_819A, undefined, "tag_origin", undefined, "tag_origin", undefined, self, (0, 0, 64), undefined, 1, 1);
+  common_scripts\utility::flag_set("water_has_been_raised");
 }
 
 func_8C16(param_00) {
@@ -3571,7 +3571,7 @@ i_beam() {
     var_00 lib_0378::func_8D74("aud_ibeam_squeak");
     wait(0.15);
     if(var_01 > var_02) {
-      common_scripts\utility::func_3C8F("ibeam_complete");
+      common_scripts\utility::flag_set("ibeam_complete");
     }
   }
 
@@ -3584,7 +3584,7 @@ i_beam() {
 ee_rollers() {
   level.ee_rollers = spawnStruct();
   level.ee_rollers.sets = getEntArray("ee_roller_sets", "script_noteworthy");
-  level.ee_rollers.sets = common_scripts\utility::func_F92(level.ee_rollers.sets);
+  level.ee_rollers.sets = common_scripts\utility::array_randomize(level.ee_rollers.sets);
   level.ee_rollers.n1 = randomintrange(-5, 15);
   level.ee_rollers.n2 = 5 * randomint(11);
   if(common_scripts\utility::func_24A6()) {
@@ -3665,7 +3665,7 @@ ee_rollers() {
   level.ee_rollers.elek.var_9D5E waittill("trigger");
   level.ee_rollers.elek delete();
   level.ee_rollers.elek.var_9D5E delete();
-  common_scripts\utility::func_3C8F("ripsaw_punch_active");
+  common_scripts\utility::flag_set("ripsaw_punch_active");
 }
 
 ee_rollers_check(param_00, param_01) {

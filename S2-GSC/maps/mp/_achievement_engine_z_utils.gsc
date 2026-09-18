@@ -474,10 +474,10 @@ add_death_means_info(param_00, param_01, param_02, param_03) {
   if(isDefined(param_02) && maps\mp\_utility::func_5697(param_02, param_03)) {
     param_00[param_00.size] = 3;
     param_00[param_00.size] = 1;
-  } else if(isDefined(param_02) && maps\mp\_utility::func_56E5(param_02)) {
+  } else if(isDefined(param_02) && maps\mp\_utility::isexplosivedamage(param_02)) {
     param_00[param_00.size] = 3;
     param_00[param_00.size] = 3;
-  } else if(isDefined(param_01.idflags) && param_01.idflags &level.var_503B) {
+  } else if(isDefined(param_01.idflags) && param_01.idflags &level.idflags_penetration) {
     param_00[param_00.size] = 3;
     param_00[param_00.size] = 4;
   } else if(isDefined(param_02) && param_02 == "MOD_MELEE") {
@@ -530,12 +530,12 @@ get_player_kill_special(param_00, param_01, param_02, param_03, param_04) {
 
   foreach(var_08 in level.register_unique_kill_funcs) {
     var_09 = [[var_08.var_3F02]](param_01, param_02, param_03, param_04);
-    if(isDefined(var_08.var_A281) && var_09) {
-      var_05 = common_scripts\utility::func_F6F(var_05, var_08.var_A281);
+    if(isDefined(var_08.value) && var_09) {
+      var_05 = common_scripts\utility::func_F6F(var_05, var_08.value);
       continue;
     }
 
-    if(!isDefined(var_08.var_A281) && isDefined(var_09)) {
+    if(!isDefined(var_08.value) && isDefined(var_09)) {
       var_05 = common_scripts\utility::func_F6F(var_05, var_09);
     }
   }

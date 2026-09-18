@@ -150,12 +150,12 @@ func_A3EB() {
 }
 
 func_1963(param_00) {
-  if(isDefined(level.var_35F6)) {
+  if(isDefined(level.empplayer)) {
     return 0;
   }
 
   var_01 = level.var_6C63[self.team];
-  if(isDefined(level.var_9852) && isDefined(level.var_9852[var_01]) && level.var_9852[var_01]) {
+  if(isDefined(level.teamemped) && isDefined(level.teamemped[var_01]) && level.teamemped[var_01]) {
     return 0;
   }
 
@@ -199,7 +199,7 @@ bot_killstreak_weapon(param_00, param_01, param_02, param_03) {
     wait 0.05;
   }
 
-  while(self method_817F(param_00.var_1D0) > 0 && self getcurrentweapon() == param_00.var_1D0) {
+  while(self getammocount(param_00.var_1D0) > 0 && self getcurrentweapon() == param_00.var_1D0) {
     wait 0.05;
   }
 
@@ -261,9 +261,9 @@ func_1A3F(param_00, param_01, param_02, param_03, param_04) {
     if(var_0B.size > 5 && var_0A.size > var_0B.size * 0.6) {
       var_0F = common_scripts\utility::func_40B0(self.origin, var_0A, undefined, undefined, undefined, 150);
       if(var_0F.size > 0) {
-        var_09 = common_scripts\utility::func_7A33(var_0F);
+        var_09 = common_scripts\utility::random(var_0F);
       } else {
-        var_09 = common_scripts\utility::func_7A33(var_0A);
+        var_09 = common_scripts\utility::random(var_0A);
       }
     }
   } else if(var_07 == "hidden") {
@@ -365,7 +365,7 @@ func_1A3D(param_00, param_01, param_02, param_03) {
   if(var_06 >= 0) {
     var_0D = getzoneorigin(var_06);
   } else if(var_09.size > 0) {
-    var_0D = getzoneorigin(common_scripts\utility::func_7A33(var_09));
+    var_0D = getzoneorigin(common_scripts\utility::random(var_09));
   } else {
     var_0D = getzoneorigin(randomint(level.var_AC9C));
   }

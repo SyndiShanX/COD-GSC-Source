@@ -16,8 +16,8 @@ main() {
   maps\mp\_utility::func_843E();
   level.var_27F6 = getDvar("1459") != "";
   common_scripts\utility::func_947B();
-  maps\mp\_utility::func_52BE();
-  maps\mp\_utility::func_5315();
+  maps\mp\_utility::initgameflags();
+  maps\mp\_utility::initlevelflags();
   level.var_402A = 0;
   level.var_3C92 = spawnStruct();
   level.var_3C92 common_scripts\utility::func_10DA();
@@ -29,7 +29,7 @@ main() {
   level.requiredmapaspectratio = getdvarfloat("scr_RequiredMapAspectratio", 1);
   level.var_27D9 = ::maps\mp\gametypes\_hud_util::createfontstring;
   level.var_4F76 = ::maps\mp\gametypes\_hud_util::setpoint;
-  level.var_5C44 = ::maps\mp\_utility::func_5C43;
+  level.var_5C44 = ::maps\mp\_utility::leaderdialogonplayer;
   thread maps\mp\gametypes\_tweakables::init();
   if(!isDefined(level.var_3F02)) {
     level.var_3F02 = [];
@@ -111,10 +111,10 @@ main() {
     var_04 = getEntArray(var_03, "classname");
     for(var_01 = 0; var_01 < var_04.size; var_01++) {
       if(isDefined(var_04[var_01].var_8272)) {
-        var_04[var_01].var_8186 = var_04[var_01].var_8272;
+        var_04[var_01].setdepthoffield = var_04[var_01].var_8272;
       }
 
-      if(isDefined(var_04[var_01].var_8186)) {
+      if(isDefined(var_04[var_01].setdepthoffield)) {
         level thread func_3938(var_04[var_01]);
       }
     }
@@ -133,7 +133,7 @@ main() {
   level.var_5B0E = ::method_80A4;
   level.var_5B0C = ::method_80A5;
   level.connectpathsfunction = ::connectpaths;
-  level.var_2FC3 = ::method_805F;
+  level.var_2FC3 = ::saved_actionslotdata;
   func_84B5();
   func_8A15();
   level.var_3A62 = 0;
@@ -204,11 +204,11 @@ func_84B5() {
 }
 
 func_3938(param_00) {
-  level endon("killexplodertridgers" + param_00.var_8186);
+  level endon("killexplodertridgers" + param_00.setdepthoffield);
   param_00 waittill("trigger");
   if(isDefined(param_00.var_8136) && randomfloat(1) > param_00.var_8136) {
-    if(isDefined(param_00.var_161)) {
-      wait(param_00.var_161);
+    if(isDefined(param_00.script_delay)) {
+      wait(param_00.script_delay);
     } else {
       wait(4);
     }
@@ -217,8 +217,8 @@ func_3938(param_00) {
     return;
   }
 
-  common_scripts\_exploder::func_392A(param_00.var_8186);
-  level notify("killexplodertridgers" + param_00.var_8186);
+  common_scripts\_exploder::exploder(param_00.setdepthoffield);
+  level notify("killexplodertridgers" + param_00.setdepthoffield);
 }
 
 func_8A1A() {
@@ -230,10 +230,10 @@ func_8A1A() {
 
   for(var_02 = 0; var_02 < var_00.size; var_02++) {
     if(isDefined(var_00[var_02].var_8272)) {
-      var_00[var_02].var_8186 = var_00[var_02].var_8272;
+      var_00[var_02].setdepthoffield = var_00[var_02].var_8272;
     }
 
-    if(isDefined(var_00[var_02].var_8186)) {
+    if(isDefined(var_00[var_02].setdepthoffield)) {
       if(var_00[var_02].model == "fx" && !isDefined(var_00[var_02].targetname) || var_00[var_02].targetname != "exploderchunk") {
         var_00[var_02] hide();
         continue;
@@ -256,10 +256,10 @@ func_8A1A() {
   var_04 = getEntArray("script_brushmodel", "classname");
   for(var_02 = 0; var_02 < var_04.size; var_02++) {
     if(isDefined(var_04[var_02].var_8272)) {
-      var_04[var_02].var_8186 = var_04[var_02].var_8272;
+      var_04[var_02].setdepthoffield = var_04[var_02].var_8272;
     }
 
-    if(isDefined(var_04[var_02].var_8186)) {
+    if(isDefined(var_04[var_02].setdepthoffield)) {
       var_03[var_03.size] = var_04[var_02];
     }
   }
@@ -267,10 +267,10 @@ func_8A1A() {
   var_04 = getEntArray("script_model", "classname");
   for(var_02 = 0; var_02 < var_04.size; var_02++) {
     if(isDefined(var_04[var_02].var_8272)) {
-      var_04[var_02].var_8186 = var_04[var_02].var_8272;
+      var_04[var_02].setdepthoffield = var_04[var_02].var_8272;
     }
 
-    if(isDefined(var_04[var_02].var_8186)) {
+    if(isDefined(var_04[var_02].setdepthoffield)) {
       var_03[var_03.size] = var_04[var_02];
     }
   }
@@ -278,16 +278,16 @@ func_8A1A() {
   var_04 = getEntArray("item_health", "classname");
   for(var_02 = 0; var_02 < var_04.size; var_02++) {
     if(isDefined(var_04[var_02].var_8272)) {
-      var_04[var_02].var_8186 = var_04[var_02].var_8272;
+      var_04[var_02].setdepthoffield = var_04[var_02].var_8272;
     }
 
-    if(isDefined(var_04[var_02].var_8186)) {
+    if(isDefined(var_04[var_02].setdepthoffield)) {
       var_03[var_03.size] = var_04[var_02];
     }
   }
 
-  if(!isDefined(level.var_2804)) {
-    level.var_2804 = [];
+  if(!isDefined(level.createfxent)) {
+    level.createfxent = [];
   }
 
   var_05 = [];
@@ -296,50 +296,50 @@ func_8A1A() {
   var_05["exploder"] = 1;
   for(var_02 = 0; var_02 < var_03.size; var_02++) {
     var_06 = var_03[var_02];
-    var_07 = common_scripts\utility::func_27E7(var_06.var_81BB);
-    var_07.var_A265 = [];
-    var_07.var_A265["origin"] = var_06.origin;
-    var_07.var_A265["angles"] = var_06.angles;
-    var_07.var_A265["delay"] = var_06.var_161;
-    var_07.var_A265["firefx"] = var_06.var_8193;
-    var_07.var_A265["firefxdelay"] = var_06.var_8194;
-    var_07.var_A265["firefxsound"] = var_06.var_8195;
-    var_07.var_A265["firefxtimeout"] = var_06.var_8196;
-    var_07.var_A265["earthquake"] = var_06.var_817B;
-    var_07.var_A265["damage"] = var_06.var_8146;
-    var_07.var_A265["damage_radius"] = var_06.var_8276;
-    var_07.var_A265["soundalias"] = var_06.var_828B;
-    var_07.var_A265["repeat"] = var_06.var_8278;
-    var_07.var_A265["delay_min"] = var_06.var_8154;
-    var_07.var_A265["delay_max"] = var_06.var_8153;
-    var_07.var_A265["target"] = var_06.target;
-    var_07.var_A265["ender"] = var_06.var_817E;
-    var_07.var_A265["type"] = "exploder";
+    var_07 = common_scripts\utility::createexploder(var_06.var_81BB);
+    var_07.v = [];
+    var_07.v["origin"] = var_06.origin;
+    var_07.v["angles"] = var_06.angles;
+    var_07.v["delay"] = var_06.script_delay;
+    var_07.v["firefx"] = var_06.var_8193;
+    var_07.v["firefxdelay"] = var_06.var_8194;
+    var_07.v["firefxsound"] = var_06.var_8195;
+    var_07.v["firefxtimeout"] = var_06.var_8196;
+    var_07.v["earthquake"] = var_06.var_817B;
+    var_07.v["damage"] = var_06.var_8146;
+    var_07.v["damage_radius"] = var_06.scriptmodelplayanim;
+    var_07.v["soundalias"] = var_06.var_828B;
+    var_07.v["repeat"] = var_06.var_8278;
+    var_07.v["delay_min"] = var_06.var_8154;
+    var_07.v["delay_max"] = var_06.var_8153;
+    var_07.v["target"] = var_06.target;
+    var_07.v["ender"] = var_06.var_817E;
+    var_07.v["type"] = "exploder";
     if(isDefined(var_06.model)) {
-      var_07.var_A265["radiant"] = 1;
+      var_07.v["radiant"] = 1;
     }
 
     if(!isDefined(var_06.var_81BB)) {
-      var_07.var_A265["fxid"] = "No FX";
+      var_07.v["fxid"] = "No FX";
     } else {
-      var_07.var_A265["fxid"] = var_06.var_81BB;
+      var_07.v["fxid"] = var_06.var_81BB;
     }
 
-    var_07.var_A265["exploder"] = var_06.var_8186;
-    if(!isDefined(var_07.var_A265["delay"])) {
-      var_07.var_A265["delay"] = 0;
+    var_07.v["exploder"] = var_06.setdepthoffield;
+    if(!isDefined(var_07.v["delay"])) {
+      var_07.v["delay"] = 0;
     }
 
     if(isDefined(var_06.target)) {
-      var_08 = getEntArray(var_07.var_A265["target"], "targetname")[0];
+      var_08 = getEntArray(var_07.v["target"], "targetname")[0];
       if(isDefined(var_08)) {
         var_09 = var_08.origin;
-        var_07.var_A265["angles"] = vectortoangles(var_09 - var_07.var_A265["origin"]);
+        var_07.v["angles"] = vectortoangles(var_09 - var_07.v["origin"]);
       } else {
-        var_08 = common_scripts\utility::func_4375(var_07.var_A265["target"]);
+        var_08 = common_scripts\utility::func_4375(var_07.v["target"]);
         if(isDefined(var_08)) {
           var_09 = var_08.origin;
-          var_07.var_A265["angles"] = vectortoangles(var_09 - var_07.var_A265["origin"]);
+          var_07.v["angles"] = vectortoangles(var_09 - var_07.v["origin"]);
         }
       }
     }
@@ -350,12 +350,12 @@ func_8A1A() {
     }
 
     if(isDefined(var_06.targetname) && isDefined(var_05[var_06.targetname])) {
-      var_07.var_A265["exploder_type"] = var_06.targetname;
+      var_07.v["exploder_type"] = var_06.targetname;
     } else {
-      var_07.var_A265["exploder_type"] = "normal";
+      var_07.v["exploder_type"] = "normal";
     }
 
-    var_07 common_scripts\_createfx::func_75BE();
+    var_07 common_scripts\_createfx::post_entity_creation_function();
   }
 }
 
@@ -368,7 +368,7 @@ func_4FF4() {
   wait(randomfloat(1));
   for(;;) {
     foreach(var_01 in level.players) {
-      if(var_01 istouching(self) && maps\mp\_utility::func_57A0(var_01)) {
+      if(var_01 istouching(self) && maps\mp\_utility::isreallyalive(var_01)) {
         var_01 maps\mp\_utility::_suicide();
       }
     }

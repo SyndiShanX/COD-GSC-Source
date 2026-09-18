@@ -20,7 +20,7 @@ onplayerconnect(param_00) {
   if(common_scripts\utility::func_562E(0)) {
     var_01 = getarraykeys(level.var_7ED0);
     if(isDefined(var_01) && var_01.size > 0) {
-      param_00.var_7A3F = common_scripts\utility::func_7A33(var_01);
+      param_00.var_7A3F = common_scripts\utility::random(var_01);
     }
   }
 }
@@ -131,7 +131,7 @@ func_6B84(param_00, param_01, param_02) {
   }
 
   var_03 = 0;
-  if(var_03 && maps\mp\_utility::func_3FA0("double_points")) {
+  if(var_03 && maps\mp\_utility::gameflag("double_points")) {
     param_00 = int(param_00 * 2);
   }
 
@@ -141,7 +141,7 @@ func_6B84(param_00, param_01, param_02) {
 
 func_4789() {
   foreach(var_01 in level.players) {
-    if(maps\mp\_utility::func_57A0(var_01)) {
+    if(maps\mp\_utility::isreallyalive(var_01)) {
       var_01 lib_0533::func_F37(1, 1, 1);
     }
   }

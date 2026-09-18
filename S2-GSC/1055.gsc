@@ -4,8 +4,8 @@
 *********************************************/
 
 func_00F9() {
-  var_00 = maps\mp\_art::func_27C6("mp_raid_cobra");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_raid_cobra");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.495, 0.784, 1);
   var_00.var_1108 = (1, 0.91, 0.765);

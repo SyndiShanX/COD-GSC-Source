@@ -166,7 +166,7 @@ zombie_make_sizzler(param_00, param_01) {
   var_15.anglesoffset = var_14;
   var_15.var_5DBE = var_04;
   var_15 linkTo(self, var_04, var_13, var_14);
-  playFXOnTag(level.var_611["zmb_ber_bolt_rod_gk_attach"], var_15, "TAG_ORIGIN");
+  playFXOnTag(level._effect["zmb_ber_bolt_rod_gk_attach"], var_15, "TAG_ORIGIN");
   var_15 scriptmodelplayanim("s2_zom_ww_bolt_extend");
   var_15 thread monitor_sizzler_bolt(self);
   var_16 = getanimlength(var_0D);
@@ -181,7 +181,7 @@ zombie_make_sizzler(param_00, param_01) {
   level notify("spawn_sizzler_start");
   playFX(common_scripts\utility::func_44F5("zmb_ber_szlr_burst_1"), self.origin);
   lib_0378::func_8D74("zmb_siz_trans_fx_burst", var_18);
-  killfxontag(level.var_611["zmb_ber_bolt_rod_gk_attach"], var_15, "TAG_ORIGIN");
+  killfxontag(level._effect["zmb_ber_bolt_rod_gk_attach"], var_15, "TAG_ORIGIN");
   var_06.origin = self gettagorigin("tag_origin");
   var_06.angles = self gettagangles("tag_origin");
   var_06.ignoreforcedzombietype = 1;
@@ -190,7 +190,7 @@ zombie_make_sizzler(param_00, param_01) {
   var_15 unlink();
   if(isDefined(var_19)) {
     var_15 linkTo(var_19, var_04, var_13, var_14);
-    playFXOnTag(level.var_611["zmb_ber_bolt_rod_gk_attach"], var_15, "TAG_ORIGIN");
+    playFXOnTag(level._effect["zmb_ber_bolt_rod_gk_attach"], var_15, "TAG_ORIGIN");
     var_15 thread monitor_sizzler_bolt(var_19);
     thread maps / mp / agents / humanoid / _humanoid_util::func_8318(self.origin, self.angles, var_03, var_06.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_17);
     level.numactivesizzlers++;
@@ -288,7 +288,7 @@ monitor_sizzler_bolt(param_00) {
   var_01 endon("bolt_link_changed");
   var_01 childthread monitor_bolt_damage(param_00);
   param_00 waittill("body_spawned", var_02);
-  killfxontag(level.var_611["zmb_ber_bolt_rod_gk_attach"], var_01, "TAG_ORIGIN");
+  killfxontag(level._effect["zmb_ber_bolt_rod_gk_attach"], var_01, "TAG_ORIGIN");
   wait 0.05;
   var_01 notsolid();
   var_01 lib_0547::cleanup_damageable_script_model();
@@ -309,7 +309,7 @@ monitor_bolt_damage(param_00) {
 
   for(;;) {
     self waittill("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_0A);
-    playFXOnTag(level.var_611["zmb_ber_szlr_geistkraftexplode_1"], self, "TAG_ORIGIN");
+    playFXOnTag(level._effect["zmb_ber_szlr_geistkraftexplode_1"], self, "TAG_ORIGIN");
     param_00 dodamage(param_00.health, var_02.origin, var_02, self, var_05, var_0A, var_04);
   }
 }

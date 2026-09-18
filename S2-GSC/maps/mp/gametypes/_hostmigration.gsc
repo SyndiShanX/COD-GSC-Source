@@ -3,7 +3,7 @@
  * Script: maps\mp\gametypes\_hostmigration.gsc
 ************************************************/
 
-func_1E65() {
+callback_hostmigration() {
   level.var_4E08 = 0;
   if(level.gameended) {
     return;
@@ -16,7 +16,7 @@ func_1E65() {
     var_02.var_4E05 = 0;
   }
 
-  level.var_4E09 = 1;
+  level.hostmigrationtimer = 1;
   setDvar("ui_inhostmigration", 1);
   level notify("host_migration_begin");
   maps\mp\gametypes\_gamelogic::func_A17B();
@@ -39,7 +39,7 @@ func_1E65() {
   setDvar("2523", game["state"]);
   level endon("host_migration_begin");
   func_4E0C();
-  level.var_4E09 = undefined;
+  level.hostmigrationtimer = undefined;
   setDvar("ui_inhostmigration", 0);
   level notify("host_migration_end");
   maps\mp\gametypes\_gamelogic::func_A17B();
@@ -97,11 +97,11 @@ func_4E0B() {
   level endon("host_migration_end");
   self endon("disconnect");
   self.var_4E05 = 1;
-  while(!maps\mp\_utility::func_57A0(self)) {
+  while(!maps\mp\_utility::isreallyalive(self)) {
     self waittill("spawned");
   }
 
-  maps\mp\_utility::func_3E8E(1);
+  maps\mp\_utility::freezecontrolswrapper(1);
   self method_800F();
   level waittill("host_migration_end");
 }
@@ -115,8 +115,8 @@ func_4E0A() {
 
   func_4E0B();
   if(self.var_4E05) {
-    if(maps\mp\_utility::func_3FA0("prematch_done")) {
-      maps\mp\_utility::func_3E8E(0);
+    if(maps\mp\_utility::gameflag("prematch_done")) {
+      maps\mp\_utility::freezecontrolswrapper(0);
       self method_800E();
     }
 
@@ -125,7 +125,7 @@ func_4E0A() {
 }
 
 func_A782() {
-  if(!isDefined(level.var_4E09)) {
+  if(!isDefined(level.hostmigrationtimer)) {
     return 0;
   }
 
@@ -135,7 +135,7 @@ func_A782() {
 }
 
 func_A783(param_00) {
-  if(isDefined(level.var_4E09)) {
+  if(isDefined(level.hostmigrationtimer)) {
     return;
   }
 
@@ -152,7 +152,7 @@ func_A6F5(param_00) {
   var_02 = gettime() + param_00 * 1000;
   while(gettime() < var_02) {
     func_A783(var_02 - gettime() / 1000);
-    if(isDefined(level.var_4E09)) {
+    if(isDefined(level.hostmigrationtimer)) {
       var_03 = func_A782();
       var_02 = var_02 + var_03;
     }
@@ -172,7 +172,7 @@ func_A74C(param_00, param_01) {
   var_03 = gettime() + param_01 * 1000;
   while(gettime() < var_03) {
     func_A783(var_03 - gettime() / 1000);
-    if(isDefined(level.var_4E09)) {
+    if(isDefined(level.hostmigrationtimer)) {
       var_04 = func_A782();
       var_03 = var_03 + var_04;
     }
@@ -191,14 +191,14 @@ func_A6F4(param_00) {
   var_02 = gettime() + param_00 * 1000;
   while(gettime() < var_02) {
     func_A783(var_02 - gettime() / 1000);
-    while(isDefined(level.var_4E09)) {
+    while(isDefined(level.hostmigrationtimer)) {
       var_02 = var_02 + 1000;
       setgameendtime(int(var_02));
       wait(1);
     }
   }
 
-  while(isDefined(level.var_4E09)) {
+  while(isDefined(level.hostmigrationtimer)) {
     var_02 = var_02 + 1000;
     setgameendtime(int(var_02));
     wait(1);

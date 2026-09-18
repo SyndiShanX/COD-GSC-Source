@@ -4,16 +4,16 @@
 **********************************************************/
 
 init() {
-  level.var_611["zmb_blood_blast"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_med_trap_gib");
-  level.var_611["zmb_bat_long_hit_crit_blood"] = loadfx("vfx/blood/zmb_bat_long_hit_crit_blood");
-  level.var_611["zmb_raven_sword_barb_burst"] = loadfx("vfx/zombie/zmb_sword_barb_burst");
-  level.var_611["zmb_melee_drain_player"] = loadfx("vfx/gameplay/mp/zombie/zmb_melee_drain_player");
-  level.var_611["zmb_giestkraft_impact"] = loadfx("vfx/zombie/zmb_giestkraft_impact");
+  level._effect["zmb_blood_blast"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_med_trap_gib");
+  level._effect["zmb_bat_long_hit_crit_blood"] = loadfx("vfx/blood/zmb_bat_long_hit_crit_blood");
+  level._effect["zmb_raven_sword_barb_burst"] = loadfx("vfx/zombie/zmb_sword_barb_burst");
+  level._effect["zmb_melee_drain_player"] = loadfx("vfx/gameplay/mp/zombie/zmb_melee_drain_player");
+  level._effect["zmb_giestkraft_impact"] = loadfx("vfx/zombie/zmb_giestkraft_impact");
   if(!isDefined(level.var_6DF9)) {
     level.var_6DF9 = [];
   }
 
-  common_scripts\utility::func_3C87("dlc2_melee_packable");
+  common_scripts\utility::flag_init("dlc2_melee_packable");
   thread bat_init();
   thread bat_hc_init();
   thread trench_knife_init();
@@ -159,7 +159,7 @@ togglemarathonability(param_00) {
   }
 
   if(param_00) {
-    maps\mp\_utility::func_47A2("specialty_marathon");
+    maps\mp\_utility::giveperk("specialty_marathon");
     return;
   }
 
@@ -234,7 +234,7 @@ delayed_bat_hit(param_00, param_01) {
   var_03.delaysec = undefined;
   param_00 lib_0378::func_8D74("zmb_bat_melee_hit_wooden", var_03);
   param_00 dodamage(level.batcolumndamage, self getEye(), self, self, "MOD_MELEE", "baseballbat_aoe_zm", "none");
-  playFXOnTag(level.var_611["zmb_bat_long_hit_crit_blood"], param_00, "TAG_EYE");
+  playFXOnTag(level._effect["zmb_bat_long_hit_crit_blood"], param_00, "TAG_EYE");
   if(isDefined(param_00.var_A4B)) {
     var_04 = lib_0547::func_A51(param_00.var_A4B);
     if(isDefined(var_04) && common_scripts\utility::func_562E(var_04.knockbyravensword)) {
@@ -255,7 +255,7 @@ bat_hc_init() {
   level.zombiemeleeweapon["zom_dlc2_1hc_zm"] = 1;
   level.var_62B3["zom_dlc2_1hc_zm"] = ::bat_hc_modify_damage;
   level.meleeaoeweapons["baseballbat_hc_aoe_zm"] = 1;
-  level.var_611["zmb_hc_bat_aoe_fx"] = loadfx("vfx/trail/zmb_hc_bat_projectile");
+  level._effect["zmb_hc_bat_aoe_fx"] = loadfx("vfx/trail/zmb_hc_bat_projectile");
   var_00 = [];
   var_00[16]["noGib"] = 1;
   var_01 = (40, 2, 0);
@@ -370,7 +370,7 @@ bat_hc_blast_hit(param_00, param_01) {
     var_03.delaysec = undefined;
     param_00 lib_0378::func_8D74("zmb_bat_melee_hit_metal", var_03);
     param_00 dodamage(level.bathcaoedamage, var_02 getEye(), var_02, var_02, "MOD_MELEE", "baseballbat_hc_aoe_zm", "none");
-    playFXOnTag(level.var_611["zmb_giestkraft_impact"], param_00, "J_Spine4");
+    playFXOnTag(level._effect["zmb_giestkraft_impact"], param_00, "J_Spine4");
     if(isDefined(param_00.var_A4B)) {
       var_04 = lib_0547::func_A51(param_00.var_A4B);
       if(isDefined(var_04) && common_scripts\utility::func_562E(param_00.knockbyravensword)) {
@@ -459,7 +459,7 @@ axe_modify_damage(param_00, param_01, param_02, param_03, param_04, param_05, pa
 }
 
 axe_hc_init() {
-  level.var_611["zmb_hc_axe_aoe"] = loadfx("vfx/zombie/zmb_axe_burst");
+  level._effect["zmb_hc_axe_aoe"] = loadfx("vfx/zombie/zmb_axe_burst");
   level.zombiemeleeweapon["zom_dlc2_3hc_zm"] = 1;
   level.var_62B3["zom_dlc2_3hc_zm"] = ::axe_hc_modify_damage;
   level.var_A9C8["zom_dlc2_3hc_zm"] = ::axe_hc_heavy_melee_fatal;
@@ -585,7 +585,7 @@ axe_hc_explosion_delayed_hit(param_00, param_01, param_02) {
   param_00 endon("death");
   wait(param_01 * 0.05);
   param_00 dodamage(level.axehcaoedamage, param_02, self, self, "MOD_MELEE", "axe_aoe_zm", "none");
-  playFXOnTag(level.var_611["zmb_giestkraft_impact"], param_00, "J_Spine4");
+  playFXOnTag(level._effect["zmb_giestkraft_impact"], param_00, "J_Spine4");
   if(isDefined(param_00.var_A4B)) {
     var_03 = lib_0547::func_A51(param_00.var_A4B);
     if(isDefined(var_03) && common_scripts\utility::func_562E(var_03.knockbyravensword)) {
@@ -830,7 +830,7 @@ delayed_blade_hit(param_00, param_01) {
 
   lib_0378::func_8D74("zmb_sword_melee_hit_delayed", param_00.origin);
   param_00 dodamage(level.bladecleavedamage, self getEye(), self, self, "MOD_MELEE", "blade_aoe_zm", "none");
-  playFXOnTag(level.var_611["zmb_giestkraft_impact"], param_00, "J_Spine4");
+  playFXOnTag(level._effect["zmb_giestkraft_impact"], param_00, "J_Spine4");
   if(isDefined(param_00.var_A4B)) {
     var_03 = lib_0547::func_A51(param_00.var_A4B);
     if(isDefined(var_03) && common_scripts\utility::func_562E(var_03.knockbybladebarbarossa)) {

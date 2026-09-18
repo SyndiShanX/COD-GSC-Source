@@ -400,7 +400,7 @@ func_8A35(param_00, param_01, param_02) {
 }
 
 givetimertagbombmodel() {
-  maps\mp\_utility::func_47A2("specialty_ballcarrier");
+  maps\mp\_utility::giveperk("specialty_ballcarrier");
   self takeallweapons();
   maps\mp\_utility::func_0642("timer_tag_bomb_mp");
   self switchtoweaponimmediate("timer_tag_bomb_mp");

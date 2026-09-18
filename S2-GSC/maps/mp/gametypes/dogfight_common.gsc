@@ -134,7 +134,7 @@ get_formation_spawn_info_with_angle(param_00) {
   var_02 = (0, param_00, 0);
   var_03 = (1, 0, 0);
   var_04 = rotatevector(var_03, var_02);
-  var_05 = level.dogfightformationspawnstruct.var_14F;
+  var_05 = level.dogfightformationspawnstruct.radius;
   var_06 = (var_04[0] * var_05, var_04[1] * var_05, var_04[2] * var_05);
   var_07 = var_01 + var_06;
   var_08 = vectortoangles(var_01 - var_07);
@@ -187,7 +187,7 @@ ongameend() {
     var_01 setclientdvars("ui_raid_hide_fighter", "1");
     var_01.firstfighterspawn = undefined;
     var_01 dogfighthideboundaryoverlay();
-    var_01 maps\mp\_utility::func_3E8E(1);
+    var_01 maps\mp\_utility::freezecontrolswrapper(1);
   }
 }
 
@@ -200,11 +200,11 @@ ongameexit() {
 monitordogfightafk() {
   level endon("game_ended");
   self endon("disconnect");
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   self.lastinputtime = gettime();
   wait 0.05;
   for(;;) {
-    if(!isDefined(self.var_260C) && self.var_260C) {
+    if(!isDefined(self.controlsfrozen) && self.controlsfrozen) {
       var_00 = self method_86D4();
       var_01 = self method_86D5();
       var_02 = var_00[0] != 0 || var_00[1] != 0 || var_01[0] != 0 || var_01[1] != 0;
@@ -356,11 +356,11 @@ dogfight_kill_player(param_00, param_01, param_02, param_03, param_04, param_05,
 
 dogfight_prematch_wait(param_00, param_01) {
   level endon("game_ended");
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   if(isDefined(level.players)) {
     foreach(var_03 in level.players) {
       if(isDefined(var_03)) {
-        var_03 maps\mp\_utility::func_3E8E(0);
+        var_03 maps\mp\_utility::freezecontrolswrapper(0);
         var_03.ignoreboundary = 0;
       }
     }
@@ -504,57 +504,57 @@ precache_anims() {
 }
 
 load_vfx() {
-  level.var_611["fighter_dmg_low_start"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_start");
-  level.var_611["fighter_dmg_med_start"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_med_start");
-  level.var_611["fighter_dmg_hvy_start"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_hvy_start");
-  level.var_611["fighter_dmg_low_loop"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_lp_whitsmk");
-  level.var_611["fighter_dmg_medium_loop"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_lp_smk");
-  level.var_611["fighter_dmg_high_loop"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_lp_firesmk");
-  level.var_611["fighter_dmg_high_stop"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_stop");
+  level._effect["fighter_dmg_low_start"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_start");
+  level._effect["fighter_dmg_med_start"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_med_start");
+  level._effect["fighter_dmg_hvy_start"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_hvy_start");
+  level._effect["fighter_dmg_low_loop"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_lp_whitsmk");
+  level._effect["fighter_dmg_medium_loop"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_lp_smk");
+  level._effect["fighter_dmg_high_loop"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_lp_firesmk");
+  level._effect["fighter_dmg_high_stop"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_dmg_stop");
   if(1) {
-    level.var_611["flak_gun_explosion"] = loadfx("vfx/scorestreaks/ss_flak_explosion_dlc2");
+    level._effect["flak_gun_explosion"] = loadfx("vfx/scorestreaks/ss_flak_explosion_dlc2");
   }
 
-  level.var_611["mp_raid_bomber_throttle_fighter"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_throttle_fighter");
-  level.var_611["husky_p47_out_flak"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_p47_out_flak");
-  level.var_611["mp_husky_fighter_wing_smk_sml"] = loadfx("vfx/map/mp_raid_husky_dlc2/mp_husky_fighter_wing_smk_sml");
-  level.var_611["smoketrail_aircraft_damage_7"] = loadfx("vfx/trail/smoketrail_aircraft_damage_7");
-  level.var_611["smoketrail_aircraft_damage_6"] = loadfx("vfx/trail/smoketrail_aircraft_damage_6");
-  level.var_611["smoketrail_aircraft_damage_5"] = loadfx("vfx/trail/smoketrail_aircraft_damage_5");
-  level.var_611["husky_p47_contrail_ext_vel_b"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_p47_contrail_ext_vel_b");
-  level.var_611["husky_p47_contrail_ext_vel"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_p47_contrail_ext_vel");
-  level.var_611["mp_husky_fighter_blk_smk"] = loadfx("vfx/map/mp_raid_husky_dlc2/mp_husky_fighter_blk_smk");
-  level.var_611["mp_raid_fighter_bounds_death"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_bounds_death");
-  level.var_611["husky_fighter_cockpit_01"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_cockpit_01");
-  level.var_611["husky_plane_damage_trails"] = loadfx("vfx/trail/husky_plane_damage_trails");
-  level.var_611["smoketrail_aircraft_damage_3"] = loadfx("vfx/trail/smoketrail_aircraft_damage_3");
-  level.var_611["smoketrail_aircraft_damage_2"] = loadfx("vfx/trail/smoketrail_aircraft_damage_2");
-  level.var_611["husky_smoketrail_damage_1"] = loadfx("vfx/map/mp_raid_bomber/husky_smoketrail_damage_1");
-  level.var_611["husky_smoketrail_aircraft_damage_1"] = loadfx("vfx/map/mp_raid_bomber/husky_smoketrail_aircraft_damage_1");
-  level.var_611["mp_raid_bomber_speedup"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_speedup");
-  level.var_611["husky_fighter_fire_trail_03"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_fire_trail_03");
-  level.var_611["husky_fighter_fire_spurt_01"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_fire_spurt_01");
-  level.var_611["husky_fighter_explosion_small_01"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_explosion_small_01");
-  level.var_611["mp_raid_bomber_flak_script_single"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_flak_script_single");
-  level.var_611["mp_raid_p47_wing_evap"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_p47_wing_evap");
-  level.var_611["mp_raid_bf109_tracer"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bf109_tracer");
-  level.var_611["husky_fighter_explosion_01"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_explosion_01");
-  level.var_611["husky_fighter_explosion_death_01"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_explosion_death_01");
-  level.var_611["husky_fighter_fire_trail_02"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_fire_trail_02");
-  level.var_611["mp_raid_bomber_flak_return_rnr"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_flak_return_rnr");
-  level.var_611["mp_raid_bomber_flak_right_rnr"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_flak_right_rnr");
-  level.var_611["mp_raid_bomber_flak_left_rnr"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_flak_left_rnr");
-  level.var_611["mp_raid_fighter_spark_impact_rnr"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_spark_impact_rnr");
-  level.var_611["mp_raid_bomber_flak_rnr"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_flak_rnr");
-  level.var_611["ss_fighter_plane_death"] = loadfx("vfx/scorestreaks/ss_fighter_plane_death");
-  level.var_611["mp_raid_fighter_wing_evap"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_wing_evap");
-  level.var_611["mp_raid_fighter_mzlflash_single"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_mzlflash_single");
-  level.var_611["mp_raid_fighter_impacts_lrg"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_impacts_lrg");
-  level.var_611["mp_raid_bomber_aa_flak_runner"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_aa_flak_runner");
-  level.var_611["bulge_cam_wisps"] = loadfx("vfx/map/bulge/bulge_cam_wisps");
-  level.var_611["bulge_dogfight_moon"] = loadfx("vfx/map/bulge/bulge_dogfight_moon");
-  level.var_611["bulge_dogfight_blur"] = loadfx("vfx/map/bulge/bulge_dogfight_blur");
-  level.var_611["flak_dogfight"] = loadfx("vfx/map/bulge/bulge_flak_explosion_near");
+  level._effect["mp_raid_bomber_throttle_fighter"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_throttle_fighter");
+  level._effect["husky_p47_out_flak"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_p47_out_flak");
+  level._effect["mp_husky_fighter_wing_smk_sml"] = loadfx("vfx/map/mp_raid_husky_dlc2/mp_husky_fighter_wing_smk_sml");
+  level._effect["smoketrail_aircraft_damage_7"] = loadfx("vfx/trail/smoketrail_aircraft_damage_7");
+  level._effect["smoketrail_aircraft_damage_6"] = loadfx("vfx/trail/smoketrail_aircraft_damage_6");
+  level._effect["smoketrail_aircraft_damage_5"] = loadfx("vfx/trail/smoketrail_aircraft_damage_5");
+  level._effect["husky_p47_contrail_ext_vel_b"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_p47_contrail_ext_vel_b");
+  level._effect["husky_p47_contrail_ext_vel"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_p47_contrail_ext_vel");
+  level._effect["mp_husky_fighter_blk_smk"] = loadfx("vfx/map/mp_raid_husky_dlc2/mp_husky_fighter_blk_smk");
+  level._effect["mp_raid_fighter_bounds_death"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_bounds_death");
+  level._effect["husky_fighter_cockpit_01"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_cockpit_01");
+  level._effect["husky_plane_damage_trails"] = loadfx("vfx/trail/husky_plane_damage_trails");
+  level._effect["smoketrail_aircraft_damage_3"] = loadfx("vfx/trail/smoketrail_aircraft_damage_3");
+  level._effect["smoketrail_aircraft_damage_2"] = loadfx("vfx/trail/smoketrail_aircraft_damage_2");
+  level._effect["husky_smoketrail_damage_1"] = loadfx("vfx/map/mp_raid_bomber/husky_smoketrail_damage_1");
+  level._effect["husky_smoketrail_aircraft_damage_1"] = loadfx("vfx/map/mp_raid_bomber/husky_smoketrail_aircraft_damage_1");
+  level._effect["mp_raid_bomber_speedup"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_speedup");
+  level._effect["husky_fighter_fire_trail_03"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_fire_trail_03");
+  level._effect["husky_fighter_fire_spurt_01"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_fire_spurt_01");
+  level._effect["husky_fighter_explosion_small_01"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_explosion_small_01");
+  level._effect["mp_raid_bomber_flak_script_single"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_flak_script_single");
+  level._effect["mp_raid_p47_wing_evap"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_p47_wing_evap");
+  level._effect["mp_raid_bf109_tracer"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bf109_tracer");
+  level._effect["husky_fighter_explosion_01"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_explosion_01");
+  level._effect["husky_fighter_explosion_death_01"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_explosion_death_01");
+  level._effect["husky_fighter_fire_trail_02"] = loadfx("vfx/map/mp_raid_husky_dlc2/husky_fighter_fire_trail_02");
+  level._effect["mp_raid_bomber_flak_return_rnr"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_flak_return_rnr");
+  level._effect["mp_raid_bomber_flak_right_rnr"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_flak_right_rnr");
+  level._effect["mp_raid_bomber_flak_left_rnr"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_flak_left_rnr");
+  level._effect["mp_raid_fighter_spark_impact_rnr"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_spark_impact_rnr");
+  level._effect["mp_raid_bomber_flak_rnr"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_flak_rnr");
+  level._effect["ss_fighter_plane_death"] = loadfx("vfx/scorestreaks/ss_fighter_plane_death");
+  level._effect["mp_raid_fighter_wing_evap"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_wing_evap");
+  level._effect["mp_raid_fighter_mzlflash_single"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_mzlflash_single");
+  level._effect["mp_raid_fighter_impacts_lrg"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_impacts_lrg");
+  level._effect["mp_raid_bomber_aa_flak_runner"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_bomber_aa_flak_runner");
+  level._effect["bulge_cam_wisps"] = loadfx("vfx/map/bulge/bulge_cam_wisps");
+  level._effect["bulge_dogfight_moon"] = loadfx("vfx/map/bulge/bulge_dogfight_moon");
+  level._effect["bulge_dogfight_blur"] = loadfx("vfx/map/bulge/bulge_dogfight_blur");
+  level._effect["flak_dogfight"] = loadfx("vfx/map/bulge/bulge_flak_explosion_near");
 }
 
 spawn_fighter_vfx_states() {
@@ -608,14 +608,14 @@ onhostmigrationbegin() {
 spawn_client_fighter_fx(param_00) {
   var_01 = self;
   if(isPlayer(var_01) && !isbot(var_01)) {
-    playfxontagforclients(level.var_611["mp_raid_bomber_throttle_fighter"], param_00, "TAG_BODY", var_01);
+    playfxontagforclients(level._effect["mp_raid_bomber_throttle_fighter"], param_00, "TAG_BODY", var_01);
   }
 }
 
 remove_client_fighter_fx(param_00) {
   var_01 = self;
   if(isPlayer(var_01) && !isbot(var_01)) {
-    function_0294(level.var_611["mp_raid_bomber_throttle_fighter"], param_00, "TAG_BODY", var_01);
+    function_0294(level._effect["mp_raid_bomber_throttle_fighter"], param_00, "TAG_BODY", var_01);
   }
 }
 
@@ -774,7 +774,7 @@ fighter_get_crash_animation(param_00, param_01) {
   }
 
   if(var_08.size > 0) {
-    var_02 = common_scripts\utility::func_7A33(var_08);
+    var_02 = common_scripts\utility::random(var_08);
   } else {
     var_02 = "mp_raids_husky_usa_thunderbolt_graveyard_spiral_down";
     param_00.forcenodeathanim = 1;
@@ -908,7 +908,7 @@ clearagenticonsforplayer() {
 fighter_ui_hide() {
   self disableweapons();
   if(!function_01EF(self)) {
-    maps\mp\_utility::func_3E8E(1);
+    maps\mp\_utility::freezecontrolswrapper(1);
     self setclientdvars("ui_raid_hide_fighter", "1", "ui_force_dont_draw_fighter_names", "1", "cg_drawVehicleCrosshair", "0");
   }
 
@@ -923,12 +923,12 @@ fighter_ui_fade_up() {
       self setclientdvars("ui_raid_hide_fighter", "0", "ui_force_dont_draw_fighter_names", "0", "cg_drawVehicleCrosshair", "1");
     }
 
-    if(maps\mp\_utility::func_3FA0("prematch_done")) {
-      maps\mp\_utility::func_3E8E(0);
+    if(maps\mp\_utility::gameflag("prematch_done")) {
+      maps\mp\_utility::freezecontrolswrapper(0);
     }
   }
 
-  if(maps\mp\_utility::func_3FA0("prematch_done")) {
+  if(maps\mp\_utility::gameflag("prematch_done")) {
     self.ignoreboundary = 0;
   }
 }
@@ -1214,7 +1214,7 @@ setup_spawns_with_hard_boundary() {
   }
 
   level.dogfightspawnminstruct.height = 14000;
-  level.dogfightspawnminstruct.var_14F = 20500;
+  level.dogfightspawnminstruct.radius = 20500;
   var_00 = level.dogfighthardboundarystruct.height - level.dogfightspawnminstruct.height;
   level.dogfightspawnminstruct.origin = level.dogfighthardboundarystruct.origin + (0, 0, var_00 * 0.5);
   if(!isDefined(level.dogfightspawnmaxstruct)) {
@@ -1222,7 +1222,7 @@ setup_spawns_with_hard_boundary() {
   }
 
   level.dogfightspawnmaxstruct.height = 14000;
-  level.dogfightspawnmaxstruct.var_14F = 21000;
+  level.dogfightspawnmaxstruct.radius = 21000;
   var_00 = level.dogfighthardboundarystruct.height - level.dogfightspawnmaxstruct.height;
   level.dogfightspawnmaxstruct.origin = level.dogfighthardboundarystruct.origin + (0, 0, var_00 * 0.5);
 }
@@ -1234,9 +1234,9 @@ get_spawn_center() {
 get_spawn_radius(param_00) {
   var_01 = undefined;
   if(param_00) {
-    var_01 = level.dogfightspawnminstruct.var_14F;
+    var_01 = level.dogfightspawnminstruct.radius;
   } else {
-    var_01 = level.dogfightspawnmaxstruct.var_14F;
+    var_01 = level.dogfightspawnmaxstruct.radius;
   }
 
   return var_01;
@@ -1261,7 +1261,7 @@ setup_formation_spawn_struct() {
   var_00 = get_dogfight_boundary_center(0);
   level.dogfightformationspawnstruct.origin = var_00 - (0, 0, 50);
   level.dogfightformationspawnstruct.height = 100;
-  level.dogfightformationspawnstruct.var_14F = 23000;
+  level.dogfightformationspawnstruct.radius = 23000;
 }
 
 random_point_on_cylinder(param_00, param_01) {
@@ -1304,7 +1304,7 @@ get_formation_spawn_origin_angles(param_00) {
 
 is_spawn_targeted(param_00) {
   foreach(var_02 in level.players) {
-    if(!isDefined(var_02) || !maps\mp\_utility::func_57A0(var_02)) {
+    if(!isDefined(var_02) || !maps\mp\_utility::isreallyalive(var_02)) {
       continue;
     }
 
@@ -1391,7 +1391,7 @@ player_spawn_helper(param_00) {
 
   thread spawn_fighter(param_00);
   if(isPlayer(param_00) && !isbot(param_00)) {
-    param_00 maps\mp\gametypes\_class::func_4773(param_00.team, param_00.var_2319);
+    param_00 maps\mp\gametypes\_class::func_4773(param_00.team, param_00.class);
     fighter_set_perks(param_00);
     if(1) {
       thread maps / mp / gametypes / dogfight_scorestreaks::fighter_scorestreak_watcher(param_00);
@@ -1479,7 +1479,7 @@ spawn_player_p47(param_00) {
 }
 
 spawn_fighter(param_00) {
-  var_01 = !maps\mp\_utility::func_3FA0("prematch_done") && level.teambased;
+  var_01 = !maps\mp\_utility::gameflag("prematch_done") && level.teambased;
   var_02 = undefined;
   if(var_01) {
     param_00 setclientdvar("vehCam_chaseFD_camStartMode", 1);
@@ -1492,14 +1492,14 @@ spawn_fighter(param_00) {
   param_00 setclientdvar("vehCam_chaseFD_camStartLerpDuration", var_02);
   param_00 fighter_ui_hide();
   if(var_01 && isbot(param_00)) {
-    param_00 maps\mp\_utility::func_3E8E(0);
+    param_00 maps\mp\_utility::freezecontrolswrapper(0);
   }
 
   var_03 = spawn_player_p47(param_00);
   var_03.maxhealth = getdvarint("p47_maxhealth");
   var_03.health = var_03.maxhealth;
   var_03 setCanDamage(1);
-  var_03.var_29B5 = ::fighter_damage_callback;
+  var_03.damagecallback = ::fighter_damage_callback;
   var_03 method_8511();
   if(!level.flak_in_progress || !isDefined(param_00.flak_scorestreak_id) || param_00.flak_scorestreak_id != level.flak_scorestreak_id) {
     param_00.hasdiedtoflak = undefined;
@@ -1634,7 +1634,7 @@ set_boundary(param_00, param_01, param_02, param_03) {
     }
 
     level.dogfightsoftboundarystruct.origin = param_00;
-    level.dogfightsoftboundarystruct.var_14F = param_01;
+    level.dogfightsoftboundarystruct.radius = param_01;
     level.dogfightsoftboundarystruct.height = param_02;
     return;
   }
@@ -1644,7 +1644,7 @@ set_boundary(param_00, param_01, param_02, param_03) {
   }
 
   level.dogfighthardboundarystruct.origin = param_00;
-  level.dogfighthardboundarystruct.var_14F = param_01;
+  level.dogfighthardboundarystruct.radius = param_01;
   level.dogfighthardboundarystruct.height = param_02;
 }
 
@@ -1656,7 +1656,7 @@ setup_boundaries_with_origin(param_00) {
 
 validate_boundaries() {
   var_00 = level.dogfighthardboundarystruct.origin + (0, 0, level.dogfighthardboundarystruct.height * 0.5);
-  var_01 = level.dogfighthardboundarystruct.origin + (level.dogfighthardboundarystruct.var_14F, 0, 0);
+  var_01 = level.dogfighthardboundarystruct.origin + (level.dogfighthardboundarystruct.radius, 0, 0);
   var_02 = 1073676289;
   var_03 = level.dogfighthardboundarystruct.origin;
   var_04 = var_03 + (0, 0, level.dogfighthardboundarystruct.height);
@@ -1676,9 +1676,9 @@ validate_boundaries() {
 get_dogfight_boundary_radius(param_00) {
   var_01 = undefined;
   if(param_00) {
-    var_01 = level.dogfightsoftboundarystruct.var_14F;
+    var_01 = level.dogfightsoftboundarystruct.radius;
   } else {
-    var_01 = level.dogfighthardboundarystruct.var_14F;
+    var_01 = level.dogfighthardboundarystruct.radius;
   }
 
   return var_01;
@@ -1800,13 +1800,13 @@ play_boundary_flak() {
 
 get_flak_fx_for_direction(param_00) {
   if(param_00 == "forward") {
-    return level.var_611["mp_raid_bomber_flak_rnr"];
+    return level._effect["mp_raid_bomber_flak_rnr"];
   } else if(param_00 == "right") {
-    return level.var_611["mp_raid_bomber_flak_right_rnr"];
+    return level._effect["mp_raid_bomber_flak_right_rnr"];
   } else if(param_00 == "left") {
-    return level.var_611["mp_raid_bomber_flak_left_rnr"];
+    return level._effect["mp_raid_bomber_flak_left_rnr"];
   } else if(param_00 == "back") {
-    return level.var_611["mp_raid_bomber_flak_return_rnr"];
+    return level._effect["mp_raid_bomber_flak_return_rnr"];
   }
 }
 
@@ -1826,12 +1826,12 @@ watch_boundary(param_00) {
   var_03 = gettime();
   var_04 = undefined;
   var_05 = get_dogfight_boundary_center(0);
-  if(param_00 is_plane_outside_hard_boundary() && !isDefined(level.var_4E09)) {}
+  if(param_00 is_plane_outside_hard_boundary() && !isDefined(level.hostmigrationtimer)) {}
 
-  if(!common_scripts\utility::func_AA4A(param_00.origin, param_00.angles, var_05, cos(30)) && !isDefined(level.var_4E09)) {}
+  if(!common_scripts\utility::within_fov(param_00.origin, param_00.angles, var_05, cos(30)) && !isDefined(level.hostmigrationtimer)) {}
 
   for(;;) {
-    if(common_scripts\utility::func_562E(self.ignoreboundary) || isDefined(level.var_4E09)) {
+    if(common_scripts\utility::func_562E(self.ignoreboundary) || isDefined(level.hostmigrationtimer)) {
       wait 0.05;
       continue;
     }
@@ -2061,7 +2061,7 @@ fighter_death(param_00, param_01, param_02, param_03, param_04, param_05, param_
   if(function_01EF(param_00)) {
     param_00 disableweapons();
   } else {
-    param_00 maps\mp\_utility::func_3E8E(1);
+    param_00 maps\mp\_utility::freezecontrolswrapper(1);
   }
 
   if(var_10) {
@@ -2081,7 +2081,7 @@ fighter_death(param_00, param_01, param_02, param_03, param_04, param_05, param_
     var_14 = var_0E gettagorigin("TAG_AIM");
     var_07 lib_0378::func_8D74("aud_fighter_final_explosion", var_14);
     if(!var_10) {
-      playFX(level.var_611["mp_raid_fighter_bounds_death"], var_0E gettagorigin("prop"));
+      playFX(level._effect["mp_raid_fighter_bounds_death"], var_0E gettagorigin("prop"));
     }
 
     var_0E method_8511();
@@ -2121,7 +2121,7 @@ fighter_damage_callback(param_00, param_01, param_02, param_03, param_04, param_
     return;
   }
 
-  if(isDefined(level.var_4E09)) {
+  if(isDefined(level.hostmigrationtimer)) {
     return;
   }
 
@@ -2260,7 +2260,7 @@ bot_planeshootthink(param_00) {
   var_06 = 0;
   for(;;) {
     wait(var_02);
-    if(!maps\mp\_utility::func_3FA0("prematch_done")) {
+    if(!maps\mp\_utility::gameflag("prematch_done")) {
       continue;
     }
 
@@ -2314,7 +2314,7 @@ bot_planeflythink(param_00) {
   var_02 = 0.25;
   for(;;) {
     wait(var_02);
-    if(!maps\mp\_utility::func_3FA0("prematch_done")) {
+    if(!maps\mp\_utility::gameflag("prematch_done")) {
       continue;
     }
 
@@ -2374,7 +2374,7 @@ agent_spawn(param_00, param_01, param_02, param_03, param_04, param_05, param_06
   }
 
   if(!common_scripts\utility::func_562E(var_07.var_565F)) {
-    var_07 method_838F(param_00, param_01);
+    var_07 select_by_substring(param_00, param_01);
     var_07 method_83D6(0);
   }
 

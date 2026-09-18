@@ -63,7 +63,7 @@ canmediccreatepatient(param_00) {
     return 0;
   }
 
-  if(!isDefined(self) || !maps\mp\_utility::func_57A0(self)) {
+  if(!isDefined(self) || !maps\mp\_utility::isreallyalive(self)) {
     return 0;
   }
 
@@ -205,7 +205,7 @@ spawnmedicpatient(param_00, param_01, param_02, param_03, param_04, param_05, pa
     param_00 = var_09;
   }
 
-  self method_838F(param_00, param_01);
+  self select_by_substring(param_00, param_01);
   if(isDefined(param_05)) {
     self[[level.var_19D5["bot_set_difficulty"]]](param_05);
   }
@@ -213,7 +213,7 @@ spawnmedicpatient(param_00, param_01, param_02, param_03, param_04, param_05, pa
   self[[level.var_19D5["bot_set_personality"]]]("default");
   maps / mp / agents / _agent_common::func_83FD(getdvarint("scr_player_maxhealth", 100));
   self[[level.var_A5B]]();
-  maps\mp\gametypes\_class::func_4773(self.team, self.var_2319, 1);
+  maps\mp\gametypes\_class::func_4773(self.team, self.class, 1);
   if(isDefined(self.owner)) {
     self thread[[level.var_A55]](self.owner);
   }

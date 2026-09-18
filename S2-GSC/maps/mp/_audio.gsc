@@ -234,13 +234,13 @@ snd_veh_play_loops(param_00, param_01, param_02) {
   var_03 = self;
   var_04 = [param_00, param_01, param_02];
   var_05[0] = spawn("script_origin", var_03.origin);
-  var_05[0] method_8449(var_03);
+  var_05[0] linktosynchronizedparent(var_03);
   var_05[0] method_861D(param_00);
   var_05[1] = spawn("script_origin", var_03.origin);
-  var_05[1] method_8449(var_03);
+  var_05[1] linktosynchronizedparent(var_03);
   var_05[1] method_861D(param_01);
   var_05[2] = spawn("script_origin", var_03.origin);
-  var_05[2] method_8449(var_03);
+  var_05[2] linktosynchronizedparent(var_03);
   var_05[2] method_861D(param_02);
   var_03 waittill("death");
   foreach(var_07 in var_05) {

@@ -8,11 +8,11 @@ func_52F4(param_00) {
     return;
   }
 
-  level.var_611["care_package_axis_destroy"] = loadfx("vfx/props/care_package_explode_axis");
-  level.var_611["care_package_allies_destroy"] = loadfx("vfx/props/care_package_explode_allies");
-  level.var_611["care_package_allies_beacon"] = loadfx("vfx/lights/usa_carepackage_beacon");
-  level.var_611["care_package_axis_beacon"] = loadfx("vfx/lights/ger_carepackage_beacon");
-  level.var_611["care_package_landed"] = loadfx("vfx/smoke/care_package_landed");
+  level._effect["care_package_axis_destroy"] = loadfx("vfx/props/care_package_explode_axis");
+  level._effect["care_package_allies_destroy"] = loadfx("vfx/props/care_package_explode_allies");
+  level._effect["care_package_allies_beacon"] = loadfx("vfx/lights/usa_carepackage_beacon");
+  level._effect["care_package_axis_beacon"] = loadfx("vfx/lights/ger_carepackage_beacon");
+  level._effect["care_package_landed"] = loadfx("vfx/smoke/care_package_landed");
   level.var_5A7D["killstreak_carepackage_grenade_mp"] = "carepackage";
   level.var_5A7D["killstreak_carepackage_grenade_axis_mp"] = "carepackage";
   level.var_5A7D["killstreak_emergency_carepackage_grenade_mp"] = "emergency_carepackage";
@@ -219,7 +219,7 @@ func_448E(param_00, param_01) {
 }
 
 func_464E() {
-  return common_scripts\utility::func_F92(["lowEndStreak", "lowEndStreak", "highEndStreak"]);
+  return common_scripts\utility::array_randomize(["lowEndStreak", "lowEndStreak", "highEndStreak"]);
 }
 
 func_445E(param_00) {
@@ -346,10 +346,10 @@ func_8A0F(param_00, param_01, param_02, param_03, param_04) {
   var_07 setModel("ger_carepackage_parachute");
   var_07 setCanDamage(1);
   var_07 hide();
-  var_07 method_8449(var_06);
+  var_07 linktosynchronizedparent(var_06);
   var_05.angles = var_06 gettagangles("TAG_CRATE");
   var_05.origin = var_06 gettagorigin("TAG_CRATE");
-  var_05 method_8449(var_06, "TAG_CRATE");
+  var_05 linktosynchronizedparent(var_06, "TAG_CRATE");
   var_05.var_6E4A = var_06;
   var_05.var_6E4C = var_07;
   if(isDefined(var_05.var_5A2C)) {
@@ -767,7 +767,7 @@ func_5A2E(param_00) {
 func_275A(param_00) {
   if(function_0367()) {
     if(self.origin[2] >= 90) {
-      playFXOnTag(level.var_611["care_package_hit"], self, "tag_origin");
+      playFXOnTag(level._effect["care_package_hit"], self, "tag_origin");
       common_scripts\utility::func_F93(level.var_1FFD, self);
       setomnvar("ui_fge_carepackages_remaining", level.var_1FFD.size);
       func_2D30(1, 1, 1);
@@ -925,9 +925,9 @@ func_2744() {
 }
 
 preventactionslotspam() {
-  self method_8309(0);
+  self scripted_elems(0);
   common_scripts\utility::waittill_any_return_no_endon_death("death", "game_ended", "disconnect", "attemptCaptureEnd");
-  self method_8309(1);
+  self scripted_elems(1);
 }
 
 func_11C3(param_00) {
@@ -989,7 +989,7 @@ func_A7A0(param_00) {
 
   var_01 = param_00.origin;
   var_02 = gettime();
-  while(isDefined(param_00) && maps\mp\_utility::func_57A0(param_00) && !param_00 isonground() && var_01 == param_00.origin && param_00 useButtonPressed()) {
+  while(isDefined(param_00) && maps\mp\_utility::isreallyalive(param_00) && !param_00 isonground() && var_01 == param_00.origin && param_00 useButtonPressed()) {
     var_03 = gettime() - var_02;
     if(var_03 >= 200) {
       return 1;
@@ -1125,7 +1125,7 @@ func_5A5F(param_00) {
       }
 
       var_09 = var_05 maps\mp\killstreaks\_killstreaks::func_45A5(self.var_944E, 0);
-      var_05 thread maps\mp\gametypes\_hud_message::func_5A78(self.var_944E, undefined, undefined, var_09, var_08);
+      var_05 thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(self.var_944E, undefined, undefined, var_09, var_08);
       var_05 thread maps\mp\killstreaks\_killstreaks::func_478D(self.var_944E, 0, 0, self.owner);
       var_05 lib_0468::func_A28("packageCapped");
     }
@@ -1138,7 +1138,7 @@ func_2750() {
   self.var_6DDE = 0;
   self.var_6DDF = 0;
   while(!level.gameended && isDefined(self)) {
-    if(maps\mp\_utility::func_57A0(self.owner)) {
+    if(maps\mp\_utility::isreallyalive(self.owner)) {
       var_00 = self.owner getusableentity();
       if(isDefined(var_00) && var_00 == self && self.owner useButtonPressed()) {
         self.var_6DDE++;
@@ -1229,7 +1229,7 @@ func_6F82(param_00, param_01, param_02) {
   self setclientomnvar("ui_use_bar_text", 1);
   self setclientomnvar("ui_use_bar_start_time", int(gettime()));
   var_03 = -1;
-  while(maps\mp\_utility::func_57A0(self) && isDefined(param_00) && param_00.var_54F5 && !level.gameended) {
+  while(maps\mp\_utility::isreallyalive(self) && isDefined(param_00) && param_00.var_54F5 && !level.gameended) {
     if(var_03 != param_00.var_A22B) {
       if(param_00.var_28D5 > param_01) {
         param_00.var_28D5 = param_01;
@@ -1267,14 +1267,14 @@ func_6F82(param_00, param_01, param_02) {
 }
 
 func_A214(param_00, param_01) {
-  while(!level.gameended && isDefined(self) && maps\mp\_utility::func_57A0(param_00) && param_00 useButtonPressed() && self.var_28D5 < param_01) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(param_00) && param_00 useButtonPressed() && self.var_28D5 < param_01) {
     self.var_28D5 = self.var_28D5 + self.var_A22B * 50;
     if(!self.var_A22B) {
       self.var_A22B = 1;
     }
 
     if(self.var_28D5 >= param_01) {
-      return maps\mp\_utility::func_57A0(param_00);
+      return maps\mp\_utility::isreallyalive(param_00);
     }
 
     wait 0.05;
@@ -1312,11 +1312,11 @@ func_2D30(param_00, param_01, param_02) {
   }
 
   if(isDefined(self.var_698E)) {
-    maps\mp\_utility::func_68B(self.var_698E);
+    maps\mp\_utility::_objective_delete(self.var_698E);
   }
 
   if(isDefined(self.var_698D)) {
-    maps\mp\_utility::func_68B(self.var_698D);
+    maps\mp\_utility::_objective_delete(self.var_698D);
   }
 
   if(isDefined(self.var_5A2C)) {

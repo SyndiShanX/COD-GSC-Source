@@ -112,7 +112,7 @@ set_player_holding_an_baby_statue(param_00) {
   var_01 = self getweaponslistprimaries();
   lib_0586::func_78C("stone_baby_zm");
   lib_0586::func_78E("stone_baby_zm");
-  maps\mp\_utility::func_47A2("specialty_ballcarrier");
+  maps\mp\_utility::giveperk("specialty_ballcarrier");
   self disableweaponswitch();
   if(!common_scripts\utility::func_562E(self.oncartride)) {
     self method_8113(0);

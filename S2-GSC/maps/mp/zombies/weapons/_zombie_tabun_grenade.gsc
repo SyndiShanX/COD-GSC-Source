@@ -6,7 +6,7 @@
 init() {
   level.zm_grenade_funcs["tabun_grenade_zm"] = ::tabunzm_onfired;
   level.zombietacticalweapon["tabun_grenade_zm"] = 1;
-  level.var_611["zmb_tabun_stun"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_zmb_debuff");
+  level._effect["zmb_tabun_stun"] = loadfx("vfx/zombie/abilities_perks/zmb_storm_zmb_debuff");
   level.currentconverts = 0;
 }
 
@@ -18,7 +18,7 @@ tabun_player_give_tabun() {
   lib_0555::func_83DD("dlc3_tac_hint_2", self);
   var_00 = tabun_get_weapon_name();
   self.var_60A0 = 2;
-  self method_831E(var_00);
+  self setoffhandsecondaryclass(var_00);
   lib_0586::func_78C(var_00);
   self setweaponammoclip(var_00, 2);
 }
@@ -36,7 +36,7 @@ tabunzm_handle(param_00) {
   param_00 waittill("explode", var_01);
   var_02 = spawnStruct();
   var_02.var_2994 = 10;
-  var_02.var_14F = 100;
+  var_02.radius = 100;
   var_02.var_688C = 5;
   var_02.var_99EB = 1;
   var_02.var_6C2C = var_01;
@@ -61,7 +61,7 @@ tabunzm_managedamage(param_00, param_01, param_02) {
         continue;
       }
 
-      if(tabunzm_collisionpassed(var_06.origin, param_00.var_6C2C, param_00.var_14F)) {
+      if(tabunzm_collisionpassed(var_06.origin, param_00.var_6C2C, param_00.radius)) {
         if(tabunzm_zombieishittable(var_06, param_00.var_6C2C)) {
           if(isDefined(param_01) && isDefined(level.currentconverts) && level.currentconverts < 8) {
             level tabunzm_convertzombie(var_06, param_01);

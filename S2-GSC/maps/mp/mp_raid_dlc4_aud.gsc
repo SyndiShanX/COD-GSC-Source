@@ -327,7 +327,7 @@ func_7BD2() {
 
 intro_start_sfx() {
   var_00 = 27;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 thread maps\mp\_audio_submixes::func_8A9D("mp_war_intro_master", 0.1, 1);
     var_02 thread intro_mix_clear(var_00);
   }
@@ -381,8 +381,8 @@ intro_allies_mixing() {
   var_04 = 1 - var_03;
   var_05 = 30;
   var_06 = 1;
-  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {
-    var_07 = level.var_54D0["allies"].var_9309;
+  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {
+    var_07 = level.var_54D0["allies"].starttime;
     var_00 maps\mp\_audio_submixes::func_8A9D("mp_war_intro_allies_vignette", 0.1, 1);
     wait 0.05;
     var_00 maps\mp\_audio_submixes::func_8A9E("mp_war_intro_master", var_04, var_01);
@@ -412,8 +412,8 @@ intro_axis_mixing() {
   var_04 = 1 - var_03;
   var_05 = 30;
   var_06 = 1;
-  if(isDefined(level.var_54D0["axis"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {
-    var_07 = level.var_54D0["axis"].var_9309;
+  if(isDefined(level.var_54D0["axis"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {
+    var_07 = level.var_54D0["axis"].starttime;
     var_00 maps\mp\_audio_submixes::func_8A9D("mp_war_intro_axis_vignette", 0.1, 1);
     wait 0.05;
     var_00 maps\mp\_audio_submixes::func_8A9E("mp_war_intro_master", var_04, var_01);
@@ -453,7 +453,7 @@ axis_victory_sfx() {
 }
 
 outro_vignette_submix() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 maps\mp\_audio_submixes::func_8A9D("mp_war_outro_vignette");
   }
 }
@@ -486,7 +486,7 @@ bell_2_emitter() {
 }
 
 tank_push_truck(param_00) {
-  lib_0380::func_2889("tank_hit_truck_main", undefined, param_00.var_116);
+  lib_0380::func_2889("tank_hit_truck_main", undefined, param_00.origin);
 }
 
 tank_break_crate() {
@@ -496,6 +496,6 @@ tank_break_crate() {
 tank_fires_at_bell(param_00) {}
 
 tank_bell_impact(param_00) {
-  lib_0380::func_2889("tank_shoot_bell_impact", undefined, param_00.var_116);
+  lib_0380::func_2889("tank_shoot_bell_impact", undefined, param_00.origin);
   level notify("aud_stop_bell_loop");
 }

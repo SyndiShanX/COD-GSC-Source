@@ -61,7 +61,7 @@ get_riverside_door() {
 }
 
 func_902B(param_00) {
-  var_01 = common_scripts\utility::func_7A33(self);
+  var_01 = common_scripts\utility::random(self);
   var_02 = common_scripts\utility::func_46B5(var_01.target, "targetname");
   var_03 = spawn("script_model", var_01.origin + (0, 0, -128));
   var_03.var_9C92 = param_00;
@@ -73,13 +73,13 @@ func_902B(param_00) {
   var_04 setModel("tag_origin");
   var_04.angles = var_01.angles;
   var_03 movez(128, 0.5);
-  playFXOnTag(level.var_611["zmb_catacombs_saw_on"], var_04, "tag_origin");
+  playFXOnTag(level._effect["zmb_catacombs_saw_on"], var_04, "tag_origin");
   var_03 lib_0378::func_8D74("aud_saw_blade_sound");
   wait(0.5);
   var_03 moveTo(var_02.origin, 2.5, 0.25, 0.25);
   var_04 moveTo(var_02.origin, 2.5, 0.25, 0.25);
   var_03 func_8075(2.5, param_00);
-  stopFXOnTag(level.var_611["zmb_catacombs_saw_on"], var_04, "tag_origin");
+  stopFXOnTag(level._effect["zmb_catacombs_saw_on"], var_04, "tag_origin");
   var_03 movez(-128, 1);
   var_03 lib_0378::func_8D74("aud_saw_blade_end");
   wait(1);

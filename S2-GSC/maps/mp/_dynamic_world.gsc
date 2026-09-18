@@ -45,7 +45,7 @@ onplayerconnect() {
 }
 
 player_init() {
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     foreach(var_01 in level.players) {
       var_01.var_9AC5 = [];
       var_01 thread func_64B5();
@@ -136,7 +136,7 @@ func_5967() {
 }
 
 func_46E1() {
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     return 10;
   }
 
@@ -144,16 +144,16 @@ func_46E1() {
     return 1;
   }
 
-  return func_471A("timelimit");
+  return getwatcheddvar("timelimit");
 }
 
-func_471A(param_00) {
+getwatcheddvar(param_00) {
   param_00 = "scr_" + level.gametype + "_" + param_00;
   if(isDefined(level.var_6CC8) && isDefined(level.var_6CC8[param_00])) {
     return level.var_6CC8[param_00];
   }
 
-  return level.var_A901[param_00].var_A281;
+  return level.watchdvars[param_00].value;
 }
 
 func_5961() {
@@ -448,7 +448,7 @@ func_3E88() {
     self waittill("trigger_enter", var_01);
     if(!var_01 hasweapon(var_00)) {
       var_01 playSound("freefall_death");
-      var_01 maps\mp\_utility::func_642(var_00);
+      var_01 maps\mp\_utility::_giveweapon(var_00);
       var_01 setweaponammostock(var_00, 0);
       var_01 setweaponammoclip(var_00, 0);
       var_01 switchtoweapon(var_00);
@@ -479,7 +479,7 @@ func_6121() {
   var_05[5] = var_0B;
   var_01 delete();
   var_02 delete();
-  if(!common_scripts\utility::func_57D7()) {
+  if(!common_scripts\utility::issp()) {
     self.var_BAB = 7;
   } else {
     self.var_BAB = 2;
@@ -531,7 +531,7 @@ func_0F06() {
 
   var_01 = gettime();
   var_02 = 7;
-  if(common_scripts\utility::func_57D7()) {
+  if(common_scripts\utility::issp()) {
     var_02 = 2;
   }
 
@@ -965,7 +965,7 @@ func_6F8C() {
 func_6F90() {
   level endon("game_ended");
   self endon("death");
-  if(common_scripts\utility::func_4381() == "hamburg") {
+  if(common_scripts\utility::get_template_level() == "hamburg") {
     return;
   }
 
@@ -1126,7 +1126,7 @@ func_7477(param_00, param_01, param_02) {
     self endon("death");
   }
 
-  if(!common_scripts\utility::func_57D7()) {
+  if(!common_scripts\utility::issp()) {
     var_03 = self.guid;
   } else {
     var_03 = "player" + gettime();
@@ -1144,7 +1144,7 @@ func_7477(param_00, param_01, param_02) {
   }
 
   self.var_9AC5[param_00.var_37D8] = param_00;
-  while(isalive(self) && self istouching(param_00) && common_scripts\utility::func_57D7() || !level.gameended) {
+  while(isalive(self) && self istouching(param_00) && common_scripts\utility::issp() || !level.gameended) {
     wait 0.05;
   }
 
@@ -1160,7 +1160,7 @@ func_7477(param_00, param_01, param_02) {
     }
   }
 
-  if(!common_scripts\utility::func_57D7() && level.gameended) {
+  if(!common_scripts\utility::issp() && level.gameended) {
     return;
   }
 

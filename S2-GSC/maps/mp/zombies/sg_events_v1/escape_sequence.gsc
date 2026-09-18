@@ -30,14 +30,14 @@ hide_markers() {
 
 show_markers() {
   foreach(var_01 in level.zmf_shattered_hardpoint_structs) {
-    if(isDefined(var_01.var_3F2F)) {
-      var_01.var_3F2F show();
+    if(isDefined(var_01.fx)) {
+      var_01.fx show();
       continue;
     }
 
-    var_01.var_3F2F = lib_0547::func_8FBA(var_01, "hp_neutral");
-    level.zmf_shattered_hardpoint_markers = common_scripts\utility::func_F6F(level.zmf_shattered_hardpoint_markers, var_01.var_3F2F);
-    triggerfx(var_01.var_3F2F);
+    var_01.fx = lib_0547::func_8FBA(var_01, "hp_neutral");
+    level.zmf_shattered_hardpoint_markers = common_scripts\utility::func_F6F(level.zmf_shattered_hardpoint_markers, var_01.fx);
+    triggerfx(var_01.fx);
   }
 }
 

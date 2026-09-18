@@ -33,7 +33,7 @@ func_7BD2() {
 
 func_922A() {
   var_00 = self;
-  var_00 method_8626("mp_hub_allies_postmatch_mus_mix");
+  var_00 setaltsceneobj("mp_hub_allies_postmatch_mus_mix");
   var_00 thread func_483B();
   var_00 thread func_9216();
 }
@@ -65,7 +65,7 @@ func_9DEF() {
 
 func_4A76() {
   var_00 = self;
-  var_00 method_8626("duck_background_sfx");
+  var_00 setaltsceneobj("duck_background_sfx");
 }
 
 func_4A77() {

@@ -6,12 +6,12 @@
 init() {
   level.var_67B = [];
   level.var_67B["Particle_FX"] = spawnStruct();
-  level.var_611["fritz_streamers"] = loadfx("vfx/trail/fritzx_streamers");
-  level.var_611["fritz_explosion_1P"] = loadfx("vfx/explosion/fritzx_explosion_01_1p");
-  level.var_611["fritz_flying_1P"] = loadfx("vfx/vehicle/fritzx_flying_1p");
-  level.var_611["glidebomb_hatchdoors_light_bright"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_bright");
-  level.var_611["glidebomb_hatchdoors_light_med"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_med");
-  level.var_611["glidebomb_hatchdoors_light_low"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_low");
+  level._effect["fritz_streamers"] = loadfx("vfx/trail/fritzx_streamers");
+  level._effect["fritz_explosion_1P"] = loadfx("vfx/explosion/fritzx_explosion_01_1p");
+  level._effect["fritz_flying_1P"] = loadfx("vfx/vehicle/fritzx_flying_1p");
+  level._effect["glidebomb_hatchdoors_light_bright"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_bright");
+  level._effect["glidebomb_hatchdoors_light_med"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_med");
+  level._effect["glidebomb_hatchdoors_light_low"] = loadfx("vfx/scorestreaks/glidebomb_hatchdoors_light_low");
   level.var_67B["Audio"] = spawnStruct();
   level.var_67B["Launch_Value"] = spawnStruct();
   level.var_67B["Launch_Value"].var_A416 = 24000;
@@ -51,14 +51,14 @@ func_9E2F(param_00) {
   }
 
   maps\mp\_utility::func_744E();
-  maps\mp\_utility::func_8A5B("fritzx");
+  maps\mp\_utility::setusingremote("fritzx");
   self.var_3EE8 = 0;
   thread func_92D3(var_01);
   return 1;
 }
 
 func_92D3(param_00) {
-  maps\mp\_utility::func_3E8E(1);
+  maps\mp\_utility::freezecontrolswrapper(1);
   var_01 = level.var_5A6B;
   if(isDefined(level.var_47CD)) {
     var_01 = level.var_47CD;
@@ -100,13 +100,13 @@ func_3EEA(param_00, param_01) {
   self.var_5A88 = spawnplane("script_model", param_01);
   self.var_5A88 method_8351(param_00, "scorestreak_minimap_mortar_strike_kill", var_0B, var_0B, var_04, var_03, "", "scorestreak_minimap_mortar_strike_kill_fullscreen");
   self.var_5A88 method_8352(4000, var_05);
-  self.var_5A88 method_8449(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self.var_5A88 linktosynchronizedparent(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   if(var_0A < var_07) {
     var_0C = var_07 * 2;
     self.var_29E1 = spawnplane("script_model", param_01);
     self.var_29E1 method_8351(param_00, "scorestreak_minimap_mortar_strike_damage", var_0C, var_0C, var_04, var_03, "", "scorestreak_minimap_mortar_strike_damage_fullscreen");
     self.var_29E1 method_8352(4000, var_05);
-    self.var_29E1 method_8449(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    self.var_29E1 linktosynchronizedparent(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -345,7 +345,7 @@ func_1E9A(param_00, param_01) {
         var_0F = vectordot(var_0D, var_0E);
         if(var_0F > 0.99) {
           var_04 = 1;
-          param_01 maps\mp\_utility::func_3E8E(0);
+          param_01 maps\mp\_utility::freezecontrolswrapper(0);
           if(getdvarint("5270", 1)) {
             param_01 setclientomnvar("ui_show_fritzx_hud", 1);
           }
@@ -439,7 +439,7 @@ func_4434(param_00) {
   }
 
   foreach(var_06 in level.players) {
-    if(!maps\mp\_utility::func_57A0(var_06)) {
+    if(!maps\mp\_utility::isreallyalive(var_06)) {
       continue;
     }
 
@@ -544,7 +544,7 @@ func_7489() {
 func_7445() {
   self endon("disconnect");
   self method_8201();
-  maps\mp\_utility::func_3E8E(1);
+  maps\mp\_utility::freezecontrolswrapper(1);
   func_7CEF(self);
   self setclientomnvar("ui_show_fritzx_hud", 0);
   if(!level.gameended || isDefined(self.finalkill)) {
@@ -560,9 +560,9 @@ func_7445() {
   wait 0.05;
   self method_84B6();
   self cameraunlink();
-  maps\mp\_utility::func_3E8E(0);
-  if(maps\mp\_utility::func_581D()) {
-    maps\mp\_utility::func_2414();
+  maps\mp\_utility::freezecontrolswrapper(0);
+  if(maps\mp\_utility::isusingremote()) {
+    maps\mp\_utility::clearusingremote();
   }
 
   if(getdvarint("311")) {

@@ -101,7 +101,7 @@ func_8B86() {
     return 0;
   }
 
-  if(!maps\mp\_utility::func_57A0(self.enemy)) {
+  if(!maps\mp\_utility::isreallyalive(self.enemy)) {
     return 0;
   }
 

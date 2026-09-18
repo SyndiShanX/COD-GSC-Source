@@ -47,7 +47,7 @@ sg_obj_register(param_00, param_01, param_02, param_03, param_04, param_05, para
   level.zmb_sg_objectives[param_00].event_func = param_04;
   level.zmb_sg_objectives[param_00].timeout_win = var_0C;
   level.zmb_sg_objectives[param_00].max_occurences = var_0A;
-  level.zmb_sg_objectives[param_00].var_7734 = var_0B;
+  level.zmb_sg_objectives[param_00].priority = var_0B;
   level.zmb_sg_objectives[param_00].var_2A35 = param_05;
   level.zmb_sg_objectives[param_00].var_94D6 = param_06;
   level.zmb_sg_objectives[param_00].fail_func = param_07;
@@ -104,7 +104,7 @@ sg_obj_add_required_flags(param_00, param_01) {
 
     foreach(var_03 in param_01) {
       if(!common_scripts\utility::func_3C83(var_03)) {
-        common_scripts\utility::func_3C87(var_03);
+        common_scripts\utility::flag_init(var_03);
       }
 
       level.zmb_sg_objectives[param_00].required_flags = common_scripts\utility::func_F6F(level.zmb_sg_objectives[param_00].required_flags, var_03);
@@ -153,9 +153,9 @@ sg_obj_select() {
     if(var_00.size == 1) {
       var_01 = var_00[0];
     } else {
-      var_01 = common_scripts\utility::func_7A33(var_00);
+      var_01 = common_scripts\utility::random(var_00);
       foreach(var_03 in var_00) {
-        if(var_03.var_7734 > var_01.var_7734) {
+        if(var_03.priority > var_01.priority) {
           var_01 = var_03;
         }
       }
@@ -288,7 +288,7 @@ basic_collect_run(param_00) {
   level.parts_required = 7;
   level.parts_collected = 0;
   level.parts_destroyed = 0;
-  level.sg_obj_collection_parts = common_scripts\utility::func_F92(level.sg_obj_collection_parts);
+  level.sg_obj_collection_parts = common_scripts\utility::array_randomize(level.sg_obj_collection_parts);
   for(var_08 = 0; var_08 < level.sg_obj_collection_parts.size; var_08++) {
     level.sg_obj_collection_parts[var_08] thread basic_collect_part_think(var_08, var_05, var_04, var_06, var_07);
   }
@@ -345,7 +345,7 @@ basic_collect_part_think(param_00, param_01, param_02, param_03, param_04) {
   self.maxattackingzombies = 0;
   if(self.maxattackingzombies > 0) {
     foreach(var_08 in self.var_1171) {
-      var_08 method_8449(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+      var_08 linktosynchronizedparent(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     }
   }
 
@@ -391,7 +391,7 @@ basic_collect_attach_part_to_player_think(param_00, param_01, param_02) {
   param_00 lib_0547::func_AC40();
   param_00 hide();
   param_00.origin = param_01.origin + (0, 0, 50);
-  param_00 method_8449(param_01, "tag_origin", (0, 0, 50), (0, 0, 0));
+  param_00 linktosynchronizedparent(param_01, "tag_origin", (0, 0, 50), (0, 0, 0));
   if(param_00.maxattackingzombies > 0) {
     param_00.maxzombies = 0;
     param_00 maps / mp / mp_zombies_attack_object::clear_zombie_interest();
@@ -635,7 +635,7 @@ double_ent_health_display_setup(param_00, param_01) {
 assign_health_bar(param_00) {
   var_01 = common_scripts\utility::func_8FFC();
   var_01 show();
-  var_01 method_8449(self, "tag_origin");
+  var_01 linktosynchronizedparent(self, "tag_origin");
   var_01.var_3012 = "ui_zm_waypoint_ent_" + param_00;
   var_01.var_3013 = "ui_zm_waypoint_float_" + param_00;
   setomnvar(var_01.var_3012, var_01 getentitynumber());
@@ -748,7 +748,7 @@ spawn_player_reward(param_00, param_01, param_02, param_03) {
   }
 
   var_05 = spawn_a_floating_weapon_award(param_01, param_02, param_00);
-  var_06 = var_05.var_3F2F;
+  var_06 = var_05.fx;
   param_03 common_scripts\utility::func_9DA3();
   param_03.origin = var_05.origin + (0, 0, 30);
   var_07 = 0;
@@ -814,7 +814,7 @@ prespawn_a_floating_award(param_00, param_01, param_02) {
   var_05.origin = var_05.origin + (0, 0, 8);
   var_05 set_hidden_but_sent_to_player(param_02);
   var_04.origin = var_05.origin;
-  var_04 method_8449(var_05, "tag_origin");
+  var_04 linktosynchronizedparent(var_05, "tag_origin");
   var_04.linkent = var_05;
   var_05 rotateYaw(-29536, 850);
   var_06 = spawnStruct();
@@ -826,15 +826,15 @@ prespawn_a_floating_award(param_00, param_01, param_02) {
   }
 
   var_07.origin = var_06.origin;
-  var_04.var_3F2F = var_07;
+  var_04.fx = var_07;
   var_07 set_hidden_but_sent_to_player(param_02);
   return var_04;
 }
 
 show_prespawned_floating_award(param_00) {
   set_shown_only_to_player(param_00);
-  self.var_3F2F set_shown_only_to_player(param_00);
-  triggerfx(self.var_3F2F);
+  self.fx set_shown_only_to_player(param_00);
+  triggerfx(self.fx);
 }
 
 spawn_a_floating_weapon_award(param_00, param_01, param_02) {
@@ -1099,7 +1099,7 @@ remove_weapon_pickup(param_00, param_01) {
 register_care_package_reward(param_00, param_01, param_02, param_03, param_04) {
   level.zmb_shotgun_carepackage_rewards["level_" + param_00] = spawnStruct();
   level.zmb_shotgun_carepackage_rewards["level_" + param_00].normals = param_01;
-  level.zmb_shotgun_carepackage_rewards["level_" + param_00].var_90C5 = common_scripts\utility::func_7A33(param_02);
+  level.zmb_shotgun_carepackage_rewards["level_" + param_00].var_90C5 = common_scripts\utility::random(param_02);
   level.zmb_shotgun_carepackage_rewards["level_" + param_00].melees = param_03;
   level.zmb_shotgun_carepackage_rewards["level_" + param_00].upgrades = param_04;
 }
@@ -1154,13 +1154,13 @@ run_ingame_cinematic(param_00) {
   var_0C = -120;
   if(isstring(var_02)) {
     var_0D = common_scripts\utility::func_46B7(var_02, "targetname");
-    var_0E = common_scripts\utility::func_7A33(var_0D);
+    var_0E = common_scripts\utility::random(var_0D);
   } else {
     var_0E = var_03;
   }
 
   var_0F = common_scripts\utility::func_46B7(var_0E.target, "targetname");
-  var_10 = common_scripts\utility::func_7A33(var_0F);
+  var_10 = common_scripts\utility::random(var_0F);
   if(isDefined(var_0E.dest)) {
     var_10 = var_0E.dest;
   }

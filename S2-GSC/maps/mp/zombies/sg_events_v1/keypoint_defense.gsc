@@ -32,7 +32,7 @@ basic_defense_run(param_00) {
   var_03 = common_scripts\utility::func_46B5("zmb_shotgun_keypoint_defend_point_a", "targetname");
   var_04 = common_scripts\utility::func_46B5("zmb_shotgun_keypoint_defend_point_b", "targetname");
   var_05 = [var_03, var_04];
-  var_06 = common_scripts\utility::func_7A33(var_05);
+  var_06 = common_scripts\utility::random(var_05);
   level.outro_targetname = var_06.targetname + "_cam";
   var_07 = spawn("script_model", var_06.origin);
   var_07 setModel("tag_origin");
@@ -60,7 +60,7 @@ basic_defense_run(param_00) {
   }
 
   level thread maps\mp\_utility::func_6F74(::showoutlinehelp, [var_09]);
-  common_scripts\utility::func_3C8F("zmb_objectives_defense_start");
+  common_scripts\utility::flag_set("zmb_objectives_defense_start");
   var_0A = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_player_level_setting("type_defense_common_zombie_attacker_count");
   var_0B = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_difficulty_setting("type_defense_common_zombie_attacker_count_max");
   var_0C = maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::get_difficulty_setting("type_defense_common_zombie_attacker_count_wave");
@@ -74,7 +74,7 @@ basic_defense_run(param_00) {
   var_0D = basic_defense_waitfor_timeout_or_fail();
   level.var_1CC0 = undefined;
   level thread maps / mp / gametypes / zombies::orders_and_contracts_report_event("mp_zombie_nest_01_tower_battle", int(100 * var_07.capture_health / var_07.maxhealth));
-  common_scripts\utility::func_3C8F("zmb_objectives_defense_end");
+  common_scripts\utility::flag_set("zmb_objectives_defense_end");
   level thread maps\mp\_utility::func_6F74(::canceloutlinehelp);
   var_09 hide();
   if((lib_0547::func_5565(var_0D, "sg_obj_timeout") || lib_0547::func_5565(var_0D, "zombie_wave_ended")) && isDefined(var_07)) {
@@ -100,27 +100,27 @@ initialize_damage_states() {
     switch (var_03) {
       case 1:
         var_04.var_3F02 = ::set_condition_prestine;
-        var_04.var_3F2F = undefined;
+        var_04.fx = undefined;
         break;
 
       case 2:
         var_04.var_3F02 = ::set_condition_damage_low;
-        var_04.var_3F2F = "zmb_battery_defense_dmg_1";
+        var_04.fx = "zmb_battery_defense_dmg_1";
         break;
 
       case 3:
         var_04.var_3F02 = ::set_condition_damage_med;
-        var_04.var_3F2F = "zmb_battery_defense_dmg_2";
+        var_04.fx = "zmb_battery_defense_dmg_2";
         break;
 
       case 4:
         var_04.var_3F02 = ::set_condition_damage_high;
-        var_04.var_3F2F = "zmb_battery_defense_dmg_3";
+        var_04.fx = "zmb_battery_defense_dmg_3";
         break;
 
       case 5:
         var_04.var_3F02 = ::set_condition_damage_exp;
-        var_04.var_3F2F = "zmb_battery_defense_dmg_fail";
+        var_04.fx = "zmb_battery_defense_dmg_fail";
         break;
     }
 
@@ -166,7 +166,7 @@ set_condition(param_00) {
   }
 
   clear_dmg_fx();
-  spawn_defense_fx(var_01[param_00 - 1].var_3F2F);
+  spawn_defense_fx(var_01[param_00 - 1].fx);
   self[[var_01[param_00 - 1].var_3F02]]();
 }
 

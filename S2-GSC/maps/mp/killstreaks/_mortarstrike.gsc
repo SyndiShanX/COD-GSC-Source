@@ -20,7 +20,7 @@ func_9E34(param_00) {
 
 func_63B6(param_00, param_01) {
   self endon("stop_location_selection");
-  maps\mp\_utility::func_3E8E(1);
+  maps\mp\_utility::freezecontrolswrapper(1);
   for(;;) {
     var_02 = func_83B3(param_00, param_01);
     thread func_3C16(param_00, var_02, param_01);
@@ -44,7 +44,7 @@ func_63B5() {
   self endon("disconnect");
   common_scripts\utility::waittill_any("stop_location_selection", "mortars_empty");
   self switchtoweapon(common_scripts\utility::func_4550());
-  maps\mp\_utility::func_3E8E(0);
+  maps\mp\_utility::freezecontrolswrapper(0);
 }
 
 func_83B3(param_00, param_01) {

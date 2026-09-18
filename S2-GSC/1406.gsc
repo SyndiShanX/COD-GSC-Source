@@ -146,7 +146,7 @@ func_418D() {
 func_4758() {
   lib_0586::func_78C("sentryhead_zm");
   lib_0586::func_78E("sentryhead_zm");
-  maps\mp\_utility::func_47A2("specialty_ballcarrier");
+  maps\mp\_utility::giveperk("specialty_ballcarrier");
   self method_8112(1);
   self method_8113(0);
   self method_8114(0);

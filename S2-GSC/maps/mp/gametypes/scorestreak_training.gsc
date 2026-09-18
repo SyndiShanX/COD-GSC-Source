@@ -6,22 +6,22 @@
 main() {
   setdvarifuninitialized("previousScorestreakSelected", 0);
   level.var_80C0 = 8;
-  level.var_80BF = 4;
+  level.setshader = 4;
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.gametype, 0, 0, 9);
-    maps\mp\_utility::func_7BFA(level.gametype, 0);
-    maps\mp\_utility::func_7BF9(level.gametype, 0);
-    maps\mp\_utility::func_7BF7(level.gametype, 0);
-    maps\mp\_utility::func_7C04(level.gametype, 0);
-    maps\mp\_utility::func_7BF1(level.gametype, 0);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
+    maps\mp\_utility::registerroundswitchdvar(level.gametype, 0, 0, 9);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 0);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     setdynamicdvar("scr_game_allowkillcam", 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
@@ -59,7 +59,7 @@ main() {
   level.var_6BAF = ::func_6BAF;
   level.onnormaldeath = ::onnormaldeath;
   level.var_6B7F = ::func_6B7F;
-  level.var_1DEA = ::func_80BE;
+  level.var_1DEA = ::clearalltextafterhudelem;
   game["switchedsides"] = 0;
   if(level.var_6031 || level.var_6035) {
     level.var_62AD = ::maps\mp\gametypes\_damage::func_3FC8;
@@ -82,38 +82,38 @@ apply_score_training_mix() {
   var_00 = self;
   for(;;) {
     self waittill("spawned_player");
-    var_00 method_8626("score_training_mix", 1);
+    var_00 setaltsceneobj("score_training_mix", 1);
   }
 }
 
 func_5300() {
   maps\mp\_utility::func_8653(1);
   setdynamicdvar("scr_scorestreak_training_roundswitch", 0);
-  maps\mp\_utility::func_7BF8("scorestreak_training", 0, 0, 9);
+  maps\mp\_utility::registerroundswitchdvar("scorestreak_training", 0, 0, 9);
   setdynamicdvar("scr_scorestreak_training_roundlimit", 0);
-  maps\mp\_utility::func_7BF7("scorestreak_training", 0);
+  maps\mp\_utility::registerroundlimitdvar("scorestreak_training", 0);
   setdynamicdvar("scr_scorestreak_training_winlimit", 0);
-  maps\mp\_utility::func_7C04("scorestreak_training", 0);
+  maps\mp\_utility::registerwinlimitdvar("scorestreak_training", 0);
   setdynamicdvar("scr_scorestreak_training_halftime", 0);
-  maps\mp\_utility::func_7BE5("scorestreak_training", 0);
+  maps\mp\_utility::registerhalftimedvar("scorestreak_training", 0);
   setdynamicdvar("scr_scorestreak_training_timelimit", 0);
-  maps\mp\_utility::func_7BFA("scorestreak_training", 0);
+  maps\mp\_utility::registertimelimitdvar("scorestreak_training", 0);
 }
 
 func_6BAF() {
   setclientnamemode("auto_change");
-  maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_SCORESTREAK_TRAINING");
-  maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_SCORESTREAK_TRAINING");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_SCORESTREAK_TRAINING");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_SCORESTREAK_TRAINING");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_SCORESTREAK_TRAINING");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_SCORESTREAK_TRAINING");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_SCORESTREAK_TRAINING");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_SCORESTREAK_TRAINING");
   } else {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_SCORESTREAK_TRAINING_SCORE");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_SCORESTREAK_TRAINING_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_SCORESTREAK_TRAINING_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_SCORESTREAK_TRAINING_SCORE");
   }
 
-  maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_SCORESTREAK_TRAINING_HINT");
-  maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_SCORESTREAK_TRAINING_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_SCORESTREAK_TRAINING_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_SCORESTREAK_TRAINING_HINT");
   lib_050D::func_10E4();
   var_00[0] = "scorestreak_training";
   maps\mp\gametypes\_gameobjects::main(var_00);
@@ -221,17 +221,17 @@ func_872E() {
   level.var_80B1["loadoutDivision"] = 1;
   level.var_80B1["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::func_473C(16875520, 0);
   level.var_80B1["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::func_473C(16859136, 0);
-  level.var_80B2 = maps\mp\gametypes\_class::func_44B4();
-  level.var_80B2["loadoutDivision"] = 0;
-  level.var_80B2["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::func_473C(16879616, 0);
-  level.var_80B2["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::func_473C(16957440, 0);
+  level.makeusable = maps\mp\gametypes\_class::func_44B4();
+  level.makeusable["loadoutDivision"] = 0;
+  level.makeusable["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::func_473C(16879616, 0);
+  level.makeusable["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::func_473C(16957440, 0);
 }
 
 func_6B81() {
   thread func_47A9();
-  if(isbot(self) && self.team == "axis" && !isDefined(level.var_80C2) || !level.var_80C2) {
+  if(isbot(self) && self.team == "axis" && !isDefined(level.settimer) || !level.settimer) {
     level thread func_638D(self);
-    level.var_80C2 = 1;
+    level.settimer = 1;
   }
 
   if(isPlayer(self) && !isbot(self) && !function_01EF(self)) {
@@ -245,10 +245,10 @@ func_6B81() {
     return;
   }
 
-  func_80BE();
+  clearalltextafterhudelem();
 }
 
-func_80BE() {
+clearalltextafterhudelem() {
   var_00 = isPlayer(self) && !isbot(self) && !function_01EF(self);
   self.pers["class"] = "gamemode";
   self.pers["lastClass"] = "";
@@ -257,16 +257,16 @@ func_80BE() {
   } else if(self.team == "allies") {
     self.pers["gamemodeLoadout"] = level.var_80B1;
   } else {
-    self.pers["gamemodeLoadout"] = level.var_80B2;
+    self.pers["gamemodeLoadout"] = level.makeusable;
   }
 
-  self.var_2319 = self.pers["class"];
-  self.var_5B84 = self.pers["lastClass"];
-  maps\mp\gametypes\_class::func_4790(self.team, self.var_2319);
+  self.class = self.pers["class"];
+  self.lastclass = self.pers["lastClass"];
+  maps\mp\gametypes\_class::func_4790(self.team, self.class);
   if(var_00) {
     thread func_47A9();
     self.ignoreme = 1;
-    maps\mp\_utility::func_47A2("specialty_eagleeyes");
+    maps\mp\_utility::giveperk("specialty_eagleeyes");
   }
 }
 
@@ -335,7 +335,7 @@ func_A93E() {
     thread maps\mp\killstreaks\_killstreaks::func_2400();
     self setclientomnvar("ks_icon0", 0);
     var_02 = maps\mp\_utility::func_4544(var_01);
-    thread maps\mp\gametypes\_hud_message::func_5A78(var_02, maps\mp\killstreaks\_killstreaks::func_46B4(var_02), undefined, 0);
+    thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(var_02, maps\mp\killstreaks\_killstreaks::func_46B4(var_02), undefined, 0);
     thread maps\mp\killstreaks\_killstreaks::func_478D(var_02, 0, 0, self);
     lib_0468::func_A2A("streakTraining");
   }

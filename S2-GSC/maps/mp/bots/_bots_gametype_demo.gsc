@@ -53,7 +53,7 @@ func_199B() {
       func_1998();
     }
 
-    if(maps\mp\_utility::func_5380()) {
+    if(maps\mp\_utility::inovertime()) {
       var_00 = level.var_1913[0].var_6DB2 != self.team;
     } else {
       var_00 = self.team == game["attackers"];
@@ -71,7 +71,7 @@ func_199B() {
         if(!maps / mp / bots / _bots_util::func_1A2E(self.var_28EE.var_28D4)) {
           var_01["min_goal_time"] = 2;
           var_01["max_goal_time"] = 4;
-          var_01["override_origin_node"] = common_scripts\utility::func_7A33(self.var_28EE.var_1B49);
+          var_01["override_origin_node"] = common_scripts\utility::random(self.var_28EE.var_1B49);
           maps / mp / bots / _bots_strategy::func_1AA6(self.var_28EE.var_28D4, level.var_7790, var_01);
         }
       } else if(self.var_7ECA == "defend_zone") {
@@ -97,7 +97,7 @@ func_199B() {
     if(self.var_7ECA == "defend_zone") {
       if(!maps / mp / bots / _bots_util::func_1A2E(self.var_28EE.var_28D4)) {
         var_01["score_flags"] = "strict_los";
-        var_01["override_origin_node"] = common_scripts\utility::func_7A33(self.var_28EE.var_1B49);
+        var_01["override_origin_node"] = common_scripts\utility::random(self.var_28EE.var_1B49);
         maps / mp / bots / _bots_strategy::func_1AA6(self.var_28EE.var_28D4, level.var_7790, var_01);
       }
 
@@ -208,7 +208,7 @@ func_5519() {
     maps / mp / bots / _bots_strategy::func_19A3();
   }
 
-  self botsetscriptgoalnode(common_scripts\utility::func_7A33(self.var_28EE.var_1B49), "critical");
+  self botsetscriptgoalnode(common_scripts\utility::random(self.var_28EE.var_1B49), "critical");
   var_00 = maps / mp / bots / _bots_util::func_1B21();
   if(var_00 == "goal") {
     wait(2);
@@ -341,7 +341,7 @@ func_1973() {
 
       var_01 = func_1A94(var_00, var_04);
       if(!isDefined(var_01) && !isDefined(self.var_28EE)) {
-        var_01 = common_scripts\utility::func_7A33(var_00);
+        var_01 = common_scripts\utility::random(var_00);
       }
     } else if(var_03[0] || var_03[1]) {
       var_05 = common_scripts\utility::func_98E7(var_03[0], 0, 1);
@@ -379,7 +379,7 @@ func_1971() {
 
   if(!isDefined(level.var_2921) || !func_190F(level.var_2921) || gettime() > level.var_66B4) {
     level.var_66B4 = gettime() + 1000 * randomintrange(30, 45);
-    level.var_2921 = common_scripts\utility::func_7A33(func_405F());
+    level.var_2921 = common_scripts\utility::random(func_405F());
   }
 
   if(!isDefined(level.var_2921)) {

@@ -4,13 +4,13 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_wolfslair_precache::func_F9();
-  maps\createart\mp_wolfslair_art::func_F9();
-  maps\mp\mp_wolfslair_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_wolfslair_lighting::func_F9();
-  maps\mp\mp_wolfslair_aud::func_F9();
-  maps\mp\_water::func_D5();
+  maps\mp\mp_wolfslair_precache::main();
+  maps\createart\mp_wolfslair_art::main();
+  maps\mp\mp_wolfslair_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_wolfslair_lighting::main();
+  maps\mp\mp_wolfslair_aud::main();
+  maps\mp\_water::init();
   maps\mp\_compass::func_8A2F("compass_map_mp_wolfslair");
   game["attackers"] = "allies";
   game["defenders"] = "axis";

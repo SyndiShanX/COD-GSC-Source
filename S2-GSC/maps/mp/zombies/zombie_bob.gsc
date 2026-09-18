@@ -4,21 +4,21 @@
 *********************************************/
 
 init() {
-  level.var_611["zmb_ber_bob_front_smoke"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_front_smoke");
-  level.var_611["zmb_ber_bob_attack_smoke"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_attack_smoke");
-  level.var_611["zmb_ber_bob_ambient_smoke"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_ambient_smoke");
-  level.var_611["zmb_ber_bob_engine_glow"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_engine_glow");
-  level.var_611["zmb_ber_bob_crank_glow"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_crank_glow");
-  level.var_611["zmb_ber_bolt_stick_leg"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bolt_stick_leg");
-  level.var_611["zmb_ber_bolt_stick_side"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bolt_stick_side");
-  level.var_611["zmb_ber_bolt_stick_head"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bolt_stick_head");
-  level.var_611["zmb_ber_bob_charge_bolt"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_charge_bolt");
-  level.var_611["zmb_ber_bob_smk_cloud_5s"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_smk_cloud_5s");
-  level.var_611["zmb_ber_bob_smk_cloud_lp"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_smk_cloud_lp");
-  level.var_611["zmb_ber_bob_smk_electrify"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_smk_electrify");
-  level.var_611["zmb_ber_bob_smk_dmg"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_smk_dmg");
-  level.var_611["zmb_bob_metalhit_1"] = loadfx("vfx/weaponimpact/zmb_bob_metalhit_1");
-  level.var_611["zmb_ber_bob_beam_wv"] = loadfx("vfx/muzzleflash/zmb_ber_bob_beam_wv");
+  level._effect["zmb_ber_bob_front_smoke"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_front_smoke");
+  level._effect["zmb_ber_bob_attack_smoke"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_attack_smoke");
+  level._effect["zmb_ber_bob_ambient_smoke"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_ambient_smoke");
+  level._effect["zmb_ber_bob_engine_glow"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_engine_glow");
+  level._effect["zmb_ber_bob_crank_glow"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_crank_glow");
+  level._effect["zmb_ber_bolt_stick_leg"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bolt_stick_leg");
+  level._effect["zmb_ber_bolt_stick_side"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bolt_stick_side");
+  level._effect["zmb_ber_bolt_stick_head"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bolt_stick_head");
+  level._effect["zmb_ber_bob_charge_bolt"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_charge_bolt");
+  level._effect["zmb_ber_bob_smk_cloud_5s"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_smk_cloud_5s");
+  level._effect["zmb_ber_bob_smk_cloud_lp"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_smk_cloud_lp");
+  level._effect["zmb_ber_bob_smk_electrify"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_smk_electrify");
+  level._effect["zmb_ber_bob_smk_dmg"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bob_smk_dmg");
+  level._effect["zmb_bob_metalhit_1"] = loadfx("vfx/weaponimpact/zmb_bob_metalhit_1");
+  level._effect["zmb_ber_bob_beam_wv"] = loadfx("vfx/muzzleflash/zmb_ber_bob_beam_wv");
   maps / mp / agents / _scripted_agent_anim_util::func_5159("zombie_bob");
   level.var_A41["zombie_bob"] = level.var_A41["zombie"];
   level.var_A41["zombie_bob"]["think"] = ::zombie_bob_think;
@@ -88,7 +88,7 @@ init_bob_health() {
 init_bob_phase_handler() {
   var_00 = spawnStruct();
   var_00.var_3F02 = ::lib_0547::func_4B2C;
-  var_00.var_A281 = 0;
+  var_00.value = 0;
   register_bob_phase("bob_punch", "bob_sizzle", ::zombie_bob_punch_think, [], ["bob_was_koed"], [var_00]);
   register_bob_phase("bob_sizzle", "bob_smoke", ::zombie_bob_sizzle_think, [], ["bob_was_koed"], [var_00]);
   register_bob_phase("bob_smoke", "bob_smoke", ::zombie_bob_smoke_think, [], undefined, [var_00]);
@@ -399,7 +399,7 @@ bob_phase_handler(param_00) {
   var_01 = bob_has_excuse_to_skip(param_00);
   if(!var_01) {
     foreach(var_03 in param_00.reasons_to_block_progress) {
-      if(self[[var_03.var_3F02]]() == var_03.var_A281) {
+      if(self[[var_03.var_3F02]]() == var_03.value) {
         return;
       }
     }
@@ -499,7 +499,7 @@ zombie_bob_on_damaged(param_00, param_01, param_02, param_03, param_04, param_05
     return;
   }
 
-  playFXOnTag(level.var_611["zmb_bob_metalhit_1"], self, "Engine");
+  playFXOnTag(level._effect["zmb_bob_metalhit_1"], self, "Engine");
   lib_054D::func_6BD1(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A);
 }
 
@@ -548,9 +548,9 @@ zombie_bob_smoke_listen_for_damage(param_00, param_01) {
   param_00 endon("death");
   for(;;) {
     self waittill("damage", var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_0A, var_0B);
-    playFX(level.var_611["zmb_ber_bob_smk_electrify"], param_01);
+    playFX(level._effect["zmb_ber_bob_smk_electrify"], param_01);
     if(distance2d(param_00.origin, param_01) < 144) {
-      playFXOnTag(level.var_611["zmb_ber_bob_smk_dmg"], param_00, "Engine");
+      playFXOnTag(level._effect["zmb_ber_bob_smk_dmg"], param_00, "Engine");
       param_00.smoke_damage = 1;
       param_00 zombie_bob_on_damaged(self, var_03, var_02, var_0A, var_06, var_0B, var_05, var_04, var_08, 0, var_09);
       param_00.smoke_damage = undefined;
@@ -596,7 +596,7 @@ zombie_bob_smoke_atk_spawn_cloud(param_00) {
   var_01 = anglesToForward(param_00.angles);
   var_02 = anglestoup(param_00.angles);
   var_03 = param_00.origin;
-  var_04 = spawnfx(level.var_611["zmb_ber_bob_smk_cloud_lp"], var_03, var_01, var_02);
+  var_04 = spawnfx(level._effect["zmb_ber_bob_smk_cloud_lp"], var_03, var_01, var_02);
   lib_0378::func_8D74("aud_bob_smoke_attack_loop", 25, var_03);
   triggerfx(var_04);
   thread zombie_bob_smoke_atk_cloud_damage(var_03);
@@ -656,7 +656,7 @@ zombie_bob_make_sizzlers() {
         var_0D = -1 * var_0C;
         var_0A thread maps / mp / zombies / zombie_sizzler::zombie_make_sizzler(var_0D);
         var_0E = (0, 0, 40);
-        var_04 = playFX(level.var_611["zmb_ber_bob_beam_wv"], var_05, var_0A.origin + var_0E - var_05);
+        var_04 = playFX(level._effect["zmb_ber_bob_beam_wv"], var_05, var_0A.origin + var_0E - var_05);
         lib_0378::func_8D74("aud_bob_shoot_gun", var_05);
         var_02--;
       }
@@ -666,7 +666,7 @@ zombie_bob_make_sizzlers() {
       var_10 = 400;
       var_11 = (0, 0, -1000);
       var_12 = bulletTrace(var_05, var_05 + var_08 * var_10 + var_11, 1, self);
-      var_04 = playFXOnTag(level.var_611["zmb_ber_bob_beam_wv"], self, "TAG_FX_GUN");
+      var_04 = playFXOnTag(level._effect["zmb_ber_bob_beam_wv"], self, "TAG_FX_GUN");
       lib_0378::func_8D74("aud_bob_shoot_gun", var_05);
     }
 
@@ -690,9 +690,9 @@ zombie_bob_engine_pulse() {
     return;
   }
 
-  self.engine_pulse = spawnlinkedfx(level.var_611["zmb_ber_bob_engine_glow"], self, "engine");
+  self.engine_pulse = spawnlinkedfx(level._effect["zmb_ber_bob_engine_glow"], self, "engine");
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.engine_pulse);
-  self.crank_pulse = spawnlinkedfx(level.var_611["zmb_ber_bob_crank_glow"], self, "engineCrank");
+  self.crank_pulse = spawnlinkedfx(level._effect["zmb_ber_bob_crank_glow"], self, "engineCrank");
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.crank_pulse);
   self.zombie_bob_can_take_damage = 1;
   triggerfx(self.engine_pulse);
@@ -718,9 +718,9 @@ zombie_bob_engine_smk_ambient() {
 
   wait 0.05;
   wait 0.05;
-  self.engine_smoke_exhaust = spawnlinkedfx(level.var_611["zmb_ber_bob_ambient_smoke"], self, "engine");
+  self.engine_smoke_exhaust = spawnlinkedfx(level._effect["zmb_ber_bob_ambient_smoke"], self, "engine");
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.engine_smoke_exhaust);
-  self.engine_smoke = spawnlinkedfx(level.var_611["zmb_ber_bob_front_smoke"], self, "engine");
+  self.engine_smoke = spawnlinkedfx(level._effect["zmb_ber_bob_front_smoke"], self, "engine");
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.engine_smoke);
   triggerfx(self.engine_smoke_exhaust);
   triggerfx(self.engine_smoke);

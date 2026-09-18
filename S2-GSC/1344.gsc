@@ -95,7 +95,7 @@ func_ABA4(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 
   param_02 = param_00[2] + param_02;
-  var_06 = getgroundposition(param_00, self.var_14F, 64, 64);
+  var_06 = getgroundposition(param_00, self.radius, 64, 64);
   if(!isDefined(param_03)) {
     param_03 = "spawn_drop";
   }
@@ -118,7 +118,7 @@ func_ABA4(param_00, param_01, param_02, param_03, param_04, param_05) {
     var_0F[var_0F.size] = var_13;
   }
 
-  var_0F = common_scripts\utility::func_F92(var_0F);
+  var_0F = common_scripts\utility::array_randomize(var_0F);
   foreach(var_15 in var_0F) {
     var_0D = self method_83D8(var_07, var_15);
     var_16 = getanimname(var_0D);
@@ -142,9 +142,9 @@ func_ABA4(param_00, param_01, param_02, param_03, param_04, param_05) {
     var_1B = (0, 0, param_02 - var_1A[2]);
     var_0C = var_1A + var_1B;
     var_0A = var_0C + var_18;
-    var_1C = getgroundposition(var_1A + var_19, self.var_14F);
+    var_1C = getgroundposition(var_1A + var_19, self.radius);
     var_1D = (0, 0, 4);
-    var_1E = self method_83EB(var_0A, var_06 + var_1D, self.var_14F, self.height, 1, 1);
+    var_1E = self method_83EB(var_0A, var_06 + var_1D, self.radius, self.height, 1, 1);
     var_1F = function_02E6(var_06, self) && function_02DE(var_06, var_1C, self);
     if(var_1E["fraction"] < 1) {
       continue;

@@ -7,7 +7,7 @@ main() {
   lib_0557::func_4BC9("pub fought", "running through pub fight", "CONST_HC_ANALYTICS_PUB_FOUGHT");
   var_00 = func_52E6();
   var_00 thread func_77AA();
-  common_scripts\utility::func_3C87("flag_nest_hc_ee_pub_kills_collected");
+  common_scripts\utility::flag_init("flag_nest_hc_ee_pub_kills_collected");
 }
 
 func_9276() {
@@ -31,7 +31,7 @@ func_93E4() {
 }
 
 func_77AA() {
-  common_scripts\utility::func_3C87("nest_ee_hc_radio_available");
+  common_scripts\utility::flag_init("nest_ee_hc_radio_available");
   self["record_player_tech"] setscriptablepartstate("tech_light", "off");
   common_scripts\utility::func_3C9F("nest_ee_hc_radio_available");
   self["record_player"] lib_0547::func_AC41(&"ZOMBIE_NEST_PLACE_HC_RECORD", undefined, self["record_player_trig_offset"].origin);
@@ -51,7 +51,7 @@ func_77AA() {
   self["record_player_tech"] setscriptablepartstate("tech_light", "green_on");
   self["record_player"] notify("dark_wings_objective_finished");
   self["record_player"] thread func_7A4D(self["record_player_tech"]);
-  common_scripts\utility::func_3C8F("flag_nest_hc_ee_pub_kills_collected");
+  common_scripts\utility::flag_set("flag_nest_hc_ee_pub_kills_collected");
   lib_0557::func_4BC8("pub fought");
 }
 

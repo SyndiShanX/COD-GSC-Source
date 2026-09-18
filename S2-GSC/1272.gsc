@@ -7,7 +7,7 @@ func_52B4() {
   var_00 = 0;
   if(!var_00) {
     func_5364();
-    level.var_611["turret_destruction"] = loadfx("vfx/metal_equipment_sm_expl");
+    level._effect["turret_destruction"] = loadfx("vfx/metal_equipment_sm_expl");
   }
 
   if(isDefined(level.var_79C2)) {
@@ -40,7 +40,7 @@ func_52B4() {
 }
 
 func_7D01(param_00) {
-  var_01 = getEntArray(param_00.var_1A2, "targetname");
+  var_01 = getEntArray(param_00.target, "targetname");
   foreach(var_03 in var_01) {
     var_03 delete();
   }
@@ -67,7 +67,7 @@ func_7CCF() {
 func_5363(param_00, param_01) {
   level.var_79C2.var_9F96[level.var_79C2.var_9F96.size] = param_00;
   lib_0502::func_1D39(param_00);
-  param_00.var_79E8 = level.var_79E8[param_00.var_165];
+  param_00.var_79E8 = level.var_79E8[param_00.exitlevel];
   param_00 thread func_8A4C(param_01);
 }
 
@@ -91,7 +91,7 @@ func_5364() {
 
 func_5837() {
   var_00 = getarraykeys(level.var_79E8);
-  return common_scripts\utility::func_F79(var_00, self.var_165);
+  return common_scripts\utility::func_F79(var_00, self.exitlevel);
 }
 
 func_8A4C(param_00) {
@@ -100,13 +100,13 @@ func_8A4C(param_00) {
   self.var_1D3D = 0;
   self.var_1D3C = 0;
   self.var_2599 = 0;
-  self method_805C();
+  self save_undo_buffer();
   func_52BB(self);
   thread func_9F8C();
-  var_01 = getEntArray(self.var_1A2, "targetname");
+  var_01 = getEntArray(self.target, "targetname");
   foreach(var_03 in var_01) {
     if(var_03.var_3A == "trigger_use_touch") {
-      if(var_03.var_165 == "canBuildTurret") {
+      if(var_03.exitlevel == "canBuildTurret") {
         self.var_1F89 = var_03;
         var_04 = self.origin + self.var_79E8["useLocationOffset"];
         self.var_1F89 usetouchtriggerrequirefacingposition(1, var_04);
@@ -126,7 +126,7 @@ func_8A4C(param_00) {
         self.var_1D4F.var_7894 = 1;
         self.var_1D4F.var_A23E = 6;
         var_03 func_52BB(self);
-      } else if(var_03.var_165 == "flipTrigger") {
+      } else if(var_03.exitlevel == "flipTrigger") {
         self.var_3D79 = var_03;
         var_04 = self.origin + self.var_79E8["useLocationOffset"];
         self.var_3D79 usetouchtriggerrequirefacingposition(1, var_04);
@@ -198,7 +198,7 @@ func_9F8C() {
 }
 
 func_52BB(param_00) {
-  if(!isDefined(self.var_1A2)) {
+  if(!isDefined(self.target)) {
     return;
   }
 
@@ -206,7 +206,7 @@ func_52BB(param_00) {
     self.var_1D = (0, 0, 0);
   }
 
-  var_01 = common_scripts\utility::func_46B7(self.var_1A2, "targetname");
+  var_01 = common_scripts\utility::func_46B7(self.target, "targetname");
   self.var_92F0 = self.origin;
   self.var_92B8 = self.var_1D;
   self.var_92D1 = self.var_92F0;
@@ -216,14 +216,14 @@ func_52BB(param_00) {
       var_03.var_1D = (0, 0, 0);
     }
 
-    switch (var_03.var_165) {
+    switch (var_03.exitlevel) {
       case "origin":
-        self.var_92D1 = var_03.var_116;
+        self.var_92D1 = var_03.origin;
         self.var_92D0 = var_03.var_1D;
         break;
 
       case "flip":
-        self.var_3D73 = var_03.var_116;
+        self.var_3D73 = var_03.origin;
         self.var_3D6E = var_03.var_1D;
         break;
     }
@@ -445,14 +445,14 @@ func_2DDE() {
   self setdefaultdroppitchyaw(0, 0);
   self.var_1D3D = 0;
   self makeunusable();
-  self method_805C();
+  self save_undo_buffer();
   if(isDefined(self.var_A21B)) {
     self.var_A21B lib_0502::func_79C6();
   }
 
   self setCanDamage(0);
   self setdamagecallbackon(0);
-  self.var_29B5 = undefined;
+  self.damagecallback = undefined;
   self.var_566B = 0;
   if(isDefined(self method_80E2())) {
     self method_80E2() method_85E9();

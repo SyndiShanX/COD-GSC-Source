@@ -24,7 +24,7 @@ init() {
     level.var_9062 = loadfx("vfx/explosion/mp_tac_explosion");
   }
 
-  level.var_611["ricochet"] = loadfx("vfx/test/test_fx");
+  level._effect["ricochet"] = loadfx("vfx/test/test_fx");
   level.var_8324 = [];
   level.var_6F68 = [];
   level.var_6F6C = [];
@@ -505,7 +505,7 @@ onplayerspawned() {
 
 func_1E13(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {
   var_09 = 0;
-  if(maps\mp\_utility::func_5694(param_03)) {
+  if(maps\mp\_utility::isbulletdamage(param_03)) {
     if(!isDefined(param_01)) {
       return param_02;
     }
@@ -667,12 +667,12 @@ func_532A() {
   level.bayonetchargemovespeedscale = 1.04;
   level.shieldchargemovespeedscale = 1.07;
   level.launchedrocketlauncherdamagemod = 1.3;
-  level.var_1D7C = maps\mp\_utility::func_4529("perk_bulletDamage", 40) / 100;
-  level.var_395D = maps\mp\_utility::func_4529("perk_explosiveDamage", 40) / 100;
-  level.clumsydamagemod = maps\mp\_utility::func_4529("perk_clumsyDamage", 120) / 100;
-  level.var_60E3 = maps\mp\_utility::func_4529("perk_meleeDamage", 200) / 100;
-  level.var_7EA1 = maps\mp\_utility::func_4529("perk_riotShield", 100) / 100;
-  level.var_F6A = maps\mp\_utility::func_4529("perk_armorVest", 25) / 100;
+  level.var_1D7C = maps\mp\_utility::getintproperty("perk_bulletDamage", 40) / 100;
+  level.var_395D = maps\mp\_utility::getintproperty("perk_explosiveDamage", 40) / 100;
+  level.clumsydamagemod = maps\mp\_utility::getintproperty("perk_clumsyDamage", 120) / 100;
+  level.var_60E3 = maps\mp\_utility::getintproperty("perk_meleeDamage", 200) / 100;
+  level.var_7EA1 = maps\mp\_utility::getintproperty("perk_riotShield", 100) / 100;
+  level.var_F6A = maps\mp\_utility::getintproperty("perk_armorVest", 25) / 100;
   var_00 = getdvarfloat("1773");
   var_01 = getdvarfloat("2817");
   level.var_6EB1 = var_00 * var_00;
@@ -684,7 +684,7 @@ func_1E15() {}
 func_4778() {
   self endon("death");
   self endon("disconnect");
-  maps\mp\_utility::func_47A2("specialty_blindeye");
+  maps\mp\_utility::giveperk("specialty_blindeye");
   self.var_907E = 1;
   while(!isDefined(self.var_1444)) {
     wait 0.05;
@@ -726,173 +726,173 @@ func_0F36() {
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_hustle")) {
-    maps\mp\_utility::func_47A2("specialty_sprintreload");
-    maps\mp\_utility::func_47A2("specialty_fastreload");
+    maps\mp\_utility::giveperk("specialty_sprintreload");
+    maps\mp\_utility::giveperk("specialty_fastreload");
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_gunslinger")) {
-    maps\mp\_utility::func_47A2("specialty_sprintfire");
-    maps\mp\_utility::func_47A2("specialty_divefire");
+    maps\mp\_utility::giveperk("specialty_sprintfire");
+    maps\mp\_utility::giveperk("specialty_divefire");
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_energetic")) {
-    maps\mp\_utility::func_47A2("specialty_falldamage");
+    maps\mp\_utility::giveperk("specialty_falldamage");
     if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
       if(!maps\mp\_utility::_hasperk("specialty_sprintfasterovertime")) {
-        maps\mp\_utility::func_47A2("specialty_lightweight");
+        maps\mp\_utility::giveperk("specialty_lightweight");
       }
     } else {
-      maps\mp\_utility::func_47A2("specialty_sprintfastrecovery");
+      maps\mp\_utility::giveperk("specialty_sprintfastrecovery");
     }
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_inconspicuous")) {
-    maps\mp\_utility::func_47A2("specialty_quieter");
-    maps\mp\_utility::func_47A2("specialty_crouchmovement");
+    maps\mp\_utility::giveperk("specialty_quieter");
+    maps\mp\_utility::giveperk("specialty_crouchmovement");
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_scoped")) {
-    maps\mp\_utility::func_47A2("specialty_stalker");
-    maps\mp\_utility::func_47A2("specialty_reducedsway");
+    maps\mp\_utility::giveperk("specialty_stalker");
+    maps\mp\_utility::giveperk("specialty_reducedsway");
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_duelist")) {}
 
   if(maps\mp\_utility::_hasperk("specialty_class_rifleman")) {
-    maps\mp\_utility::func_47A2("specialty_twoprimaries");
-    maps\mp\_utility::func_47A2("specialty_overkill");
-    maps\mp\_utility::func_47A2("specialty_quickswap");
+    maps\mp\_utility::giveperk("specialty_twoprimaries");
+    maps\mp\_utility::giveperk("specialty_overkill");
+    maps\mp\_utility::giveperk("specialty_quickswap");
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_primed")) {
-    maps\mp\_utility::func_47A2("specialty_sharp_focus");
+    maps\mp\_utility::giveperk("specialty_sharp_focus");
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_forage")) {
-    maps\mp\_utility::func_47A2("specialty_scavenger");
-    maps\mp\_utility::func_47A2("specialty_bulletresupply");
+    maps\mp\_utility::giveperk("specialty_scavenger");
+    maps\mp\_utility::giveperk("specialty_bulletresupply");
     if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
-      maps\mp\_utility::func_47A2("specialty_extraammo");
-      maps\mp\_utility::func_47A2("specialty_regenbullets");
+      maps\mp\_utility::giveperk("specialty_extraammo");
+      maps\mp\_utility::giveperk("specialty_regenbullets");
     } else {
-      maps\mp\_utility::func_47A2("specialty_quickswap");
+      maps\mp\_utility::giveperk("specialty_quickswap");
     }
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_ordnance")) {
     if(!maps\mp\_utility::areexperimentalbasictrainingsenabled()) {
-      maps\mp\_utility::func_47A2("specialty_hardline");
+      maps\mp\_utility::giveperk("specialty_hardline");
       if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
-        maps\mp\_utility::func_47A2("specialty_scavenger");
-        maps\mp\_utility::func_47A2("specialty_scorestreakresupply");
+        maps\mp\_utility::giveperk("specialty_scavenger");
+        maps\mp\_utility::giveperk("specialty_scorestreakresupply");
       } else {
-        maps\mp\_utility::func_47A2("specialty_unwrapper");
+        maps\mp\_utility::giveperk("specialty_unwrapper");
       }
     }
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_serrated")) {
-    maps\mp\_utility::func_47A2("specialty_fastermelee");
+    maps\mp\_utility::giveperk("specialty_fastermelee");
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_requisitions")) {
     if(!maps\mp\_utility::areexperimentalbasictrainingsenabled()) {
-      maps\mp\_utility::func_47A2("specialty_supportstreaks");
+      maps\mp\_utility::giveperk("specialty_supportstreaks");
     }
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_concussed")) {}
 
   if(maps\mp\_utility::_hasperk("specialty_class_hunker")) {
-    maps\mp\_utility::func_47A2("specialty_explosiveearlywarning");
-    maps\mp\_utility::func_47A2("specialty_throwback");
+    maps\mp\_utility::giveperk("specialty_explosiveearlywarning");
+    maps\mp\_utility::giveperk("specialty_throwback");
     if(!maps\mp\_utility::_hasperk("specialty_class_armored_enlisted") && !maps\mp\_utility::_hasperk("specialty_class_armored_expert") && !maps\mp\_utility::_hasperk("specialty_class_armored_master") && !maps\mp\_utility::_hasperk("specialty_class_armored_grandmaster")) {
-      maps\mp\_utility::func_47A2("specialty_blastshield2");
-      self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale", 55) / 100;
+      maps\mp\_utility::giveperk("specialty_blastshield2");
+      self.var_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale", 55) / 100;
       if(isDefined(level.hardcoremode) && level.hardcoremode) {
-        self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale_HC", 14) / 100;
+        self.var_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale_HC", 14) / 100;
       }
     }
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_launched")) {
-    maps\mp\_utility::func_47A2("specialty_scavenger");
-    maps\mp\_utility::func_47A2("specialty_explosiveammoresupply");
+    maps\mp\_utility::giveperk("specialty_scavenger");
+    maps\mp\_utility::giveperk("specialty_explosiveammoresupply");
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_bang")) {}
 
   if(maps\mp\_utility::_hasperk("specialty_class_lookout")) {
-    maps\mp\_utility::func_47A2("specialty_moreminimap");
-    maps\mp\_utility::func_47A2("specialty_eagleeyes");
+    maps\mp\_utility::giveperk("specialty_moreminimap");
+    maps\mp\_utility::giveperk("specialty_eagleeyes");
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_undercover")) {
-    maps\mp\_utility::func_47A2("specialty_silentkill");
-    maps\mp\_utility::func_47A2("specialty_coldblooded");
-    maps\mp\_utility::func_47A2("specialty_spygame");
-    maps\mp\_utility::func_47A2("specialty_heartbreaker");
+    maps\mp\_utility::giveperk("specialty_silentkill");
+    maps\mp\_utility::giveperk("specialty_coldblooded");
+    maps\mp\_utility::giveperk("specialty_spygame");
+    maps\mp\_utility::giveperk("specialty_heartbreaker");
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_instincts")) {
     if(getdvarint("isMLGMatch", 0) == 0 && !function_03AF()) {
-      maps\mp\_utility::func_47A2("specialty_perception");
+      maps\mp\_utility::giveperk("specialty_perception");
     }
 
-    maps\mp\_utility::func_47A2("specialty_detectexplosive");
+    maps\mp\_utility::giveperk("specialty_detectexplosive");
     if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
-      maps\mp\_utility::func_47A2("specialty_stun_resistance");
-      maps\mp\_utility::func_47A2("specialty_resistshellshock");
-      maps\mp\_utility::func_47A2("specialty_immunesmoke");
+      maps\mp\_utility::giveperk("specialty_stun_resistance");
+      maps\mp\_utility::giveperk("specialty_resistshellshock");
+      maps\mp\_utility::giveperk("specialty_immunesmoke");
       self.var_94BE = 0.1;
     }
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_espionage")) {
     self.var_90DA = 6;
-    maps\mp\_utility::func_47A2("specialty_paint_pro");
-    maps\mp\_utility::func_47A2("specialty_minimapdangerinfo");
+    maps\mp\_utility::giveperk("specialty_paint_pro");
+    maps\mp\_utility::giveperk("specialty_minimapdangerinfo");
   }
 
   if(maps\mp\_utility::_hasperk("specialty_class_flanker")) {
-    maps\mp\_utility::func_47A2("specialty_radarimmune");
-    maps\mp\_utility::func_47A2("specialty_delaymine");
+    maps\mp\_utility::giveperk("specialty_radarimmune");
+    maps\mp\_utility::giveperk("specialty_delaymine");
   }
 
   if(maps\mp\_utility::isproductionlevelactive(7)) {
     if(maps\mp\_utility::_hasperk("specialty_class_saboteur")) {
-      maps\mp\_utility::func_47A2("specialty_shortfuse");
+      maps\mp\_utility::giveperk("specialty_shortfuse");
     }
   }
 
   if(maps\mp\_utility::isdivisionsglobaloverhaulenabled()) {
     if(maps\mp\_utility::_hasperk("specialty_class_blitzkrieg")) {
       if(!maps\mp\_utility::func_579B()) {
-        maps\mp\_utility::func_47A2("specialty_killstreaks");
-        maps\mp\_utility::func_47A2("specialty_improvedstreaks");
-        maps\mp\_utility::func_47A2("specialty_fourthstreak");
+        maps\mp\_utility::giveperk("specialty_killstreaks");
+        maps\mp\_utility::giveperk("specialty_improvedstreaks");
+        maps\mp\_utility::giveperk("specialty_fourthstreak");
       }
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_clandestine")) {
-      maps\mp\_utility::func_47A2("specialty_scavenger");
-      maps\mp\_utility::func_47A2("specialty_intelresupply");
-      maps\mp\_utility::func_47A2("specialty_radarpingonspawn");
+      maps\mp\_utility::giveperk("specialty_scavenger");
+      maps\mp\_utility::giveperk("specialty_intelresupply");
+      maps\mp\_utility::giveperk("specialty_radarpingonspawn");
     }
   }
 
   if(getdvarint("6020", 1) == 1) {
     if(maps\mp\_utility::_hasperk("specialty_class_wanderlust")) {
-      maps\mp\_utility::func_47A2("specialty_randomgun");
+      maps\mp\_utility::giveperk("specialty_randomgun");
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_escalation")) {
-      maps\mp\_utility::func_47A2("specialty_boostafterkill");
+      maps\mp\_utility::giveperk("specialty_boostafterkill");
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_specialist")) {
       if(!maps\mp\_utility::func_579B()) {
-        maps\mp\_utility::func_47A2("specialty_perkstreaks");
+        maps\mp\_utility::giveperk("specialty_perkstreaks");
       }
     }
   }
@@ -900,36 +900,36 @@ func_0F36() {
   if(getdvarint("6019", 1) == 1) {
     if(maps\mp\_utility::_hasperk("specialty_class_frenzy")) {
       if(!maps\mp\_utility::areexperimentalbasictrainingsenabled()) {
-        maps\mp\_utility::func_47A2("specialty_sessionProgressionA");
+        maps\mp\_utility::giveperk("specialty_sessionProgressionA");
       }
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_remedy")) {
-      maps\mp\_utility::func_47A2("specialty_fasterhealthregen");
+      maps\mp\_utility::giveperk("specialty_fasterhealthregen");
     }
   }
 
   if(maps\mp\_utility::areexperimentalbasictrainingsenabled()) {
     if(maps\mp\_utility::_hasperk("specialty_class_frigid")) {
-      maps\mp\_utility::func_47A2("specialty_fightorflight");
+      maps\mp\_utility::giveperk("specialty_fightorflight");
       thread maps\mp\perks\_perkfunctions::func_6391();
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_blizzard")) {
-      maps\mp\_utility::func_47A2("specialty_rof");
-      maps\mp\_utility::func_47A2("specialty_bulletinaccuracy");
-      maps\mp\_utility::func_47A2("specialty_increasedrecoil");
+      maps\mp\_utility::giveperk("specialty_rof");
+      maps\mp\_utility::giveperk("specialty_bulletinaccuracy");
+      maps\mp\_utility::giveperk("specialty_increasedrecoil");
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_snowblind")) {
-      maps\mp\_utility::func_47A2("specialty_bulletaccuracy");
-      maps\mp\_utility::func_47A2("specialty_steadyaimpro");
+      maps\mp\_utility::giveperk("specialty_bulletaccuracy");
+      maps\mp\_utility::giveperk("specialty_steadyaimpro");
       self allowads(0);
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_whiteout")) {
-      maps\mp\_utility::func_47A2("specialty_explosivedamage");
-      maps\mp\_utility::func_47A2("specialty_reducedexplosivefallprotection");
+      maps\mp\_utility::giveperk("specialty_explosivedamage");
+      maps\mp\_utility::giveperk("specialty_reducedexplosivefallprotection");
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_humbug")) {
@@ -937,49 +937,49 @@ func_0F36() {
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_thaw")) {
-      maps\mp\_utility::func_47A2("specialty_marathon");
+      maps\mp\_utility::giveperk("specialty_marathon");
       thread maps\mp\perks\_perkfunctions::monitorthaw();
     }
 
-    maps\mp\_utility::func_47A2("specialty_class_blitzkrieg");
-    maps\mp\_utility::func_47A2("specialty_killstreaks");
-    maps\mp\_utility::func_47A2("specialty_improvedstreaks");
-    maps\mp\_utility::func_47A2("specialty_fourthstreak");
+    maps\mp\_utility::giveperk("specialty_class_blitzkrieg");
+    maps\mp\_utility::giveperk("specialty_killstreaks");
+    maps\mp\_utility::giveperk("specialty_improvedstreaks");
+    maps\mp\_utility::giveperk("specialty_fourthstreak");
     if(maps\mp\_utility::_hasperk("specialty_class_stopping_power")) {
-      maps\mp\_utility::func_47A2("specialty_moredamage");
+      maps\mp\_utility::giveperk("specialty_moredamage");
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_juggernaut")) {
-      maps\mp\_utility::func_47A2("specialty_armorvest");
+      maps\mp\_utility::giveperk("specialty_armorvest");
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_danger_close")) {
-      maps\mp\_utility::func_47A2("specialty_explosivedamage");
+      maps\mp\_utility::giveperk("specialty_explosivedamage");
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_one_man_army")) {
-      maps\mp\_utility::func_47A2("specialty_rof");
-      maps\mp\_utility::func_47A2("specialty_bulletaccuracy");
-      maps\mp\_utility::func_47A2("specialty_steadyaimpro");
+      maps\mp\_utility::giveperk("specialty_rof");
+      maps\mp\_utility::giveperk("specialty_bulletaccuracy");
+      maps\mp\_utility::giveperk("specialty_steadyaimpro");
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_commando_pro")) {
-      maps\mp\_utility::func_47A2("specialty_extendedmelee");
-      maps\mp\_utility::func_47A2("specialty_fastermelee");
-      maps\mp\_utility::func_47A2("specialty_falldamage");
-      maps\mp\_utility::func_47A2("specialty_marathon");
+      maps\mp\_utility::giveperk("specialty_extendedmelee");
+      maps\mp\_utility::giveperk("specialty_fastermelee");
+      maps\mp\_utility::giveperk("specialty_falldamage");
+      maps\mp\_utility::giveperk("specialty_marathon");
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_last_stand")) {
-      maps\mp\_utility::func_47A2("specialty_stun_resistance");
-      maps\mp\_utility::func_47A2("specialty_resistshellshock");
-      maps\mp\_utility::func_47A2("specialty_immunesmoke");
+      maps\mp\_utility::giveperk("specialty_stun_resistance");
+      maps\mp\_utility::giveperk("specialty_resistshellshock");
+      maps\mp\_utility::giveperk("specialty_immunesmoke");
       self.var_94BE = 0.1;
     }
 
     if(maps\mp\_utility::_hasperk("specialty_class_martyrdom")) {
-      maps\mp\_utility::func_47A2("specialty_grenadepulldeath");
-      maps\mp\_utility::func_47A2("specialty_shortfuse");
+      maps\mp\_utility::giveperk("specialty_grenadepulldeath");
+      maps\mp\_utility::giveperk("specialty_shortfuse");
     }
   }
 }

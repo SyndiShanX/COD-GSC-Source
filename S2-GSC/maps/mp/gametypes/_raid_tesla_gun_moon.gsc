@@ -19,7 +19,7 @@ tryuseteslamoon(param_00) {
 }
 
 tryuseteslamooninternal() {
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     maps\mp\_matchdata::func_5E9A("raid_tesla_moon", self.origin);
     return 1;
   }
@@ -35,7 +35,7 @@ func_63FF() {
   var_00 = self;
   var_00 endon("death");
   var_01 = func_4344();
-  var_02 = distance(var_00.var_116, var_00.var_2DA7);
+  var_02 = distance(var_00.origin, var_00.var_2DA7);
   var_03 = var_02 / var_01;
   if(var_03 > 0) {
     var_00 moveTo(var_00.var_2DA7, var_03, 0, 0);
@@ -49,7 +49,7 @@ func_63FF() {
   var_00 lib_0378::func_8D74("aud_moon_projectile_end");
   wait(func_4319());
   var_04 = func_40AA() / 2;
-  playFX(common_scripts\utility::func_44F5("tesla_moon_explosion"), var_00.var_116);
+  playFX(common_scripts\utility::func_44F5("tesla_moon_explosion"), var_00.origin);
   var_00 delete();
 }
 
@@ -57,15 +57,15 @@ func_AAED() {
   var_00 = self;
   var_00 endon("moon_travel_end");
   for(;;) {
-    var_01 = maps\mp\gametypes\_raid_tesla_gun::get_all_enemies(var_00.var_721C);
+    var_01 = maps\mp\gametypes\_raid_tesla_gun::get_all_enemies(var_00.player);
     var_02 = func_43EC();
-    var_03 = common_scripts\utility::func_4461(var_00.var_116, var_01, var_02);
+    var_03 = common_scripts\utility::func_4461(var_00.origin, var_01, var_02);
     if(isDefined(var_03)) {
-      playFX(common_scripts\utility::func_44F5("tesla_moon_explosion"), var_03.var_116 + (0, 0, 54));
+      playFX(common_scripts\utility::func_44F5("tesla_moon_explosion"), var_03.origin + (0, 0, 54));
       playFXOnTag(common_scripts\utility::func_44F5("moon_plasma_unstable"), var_00, "tag_origin");
       var_03 lib_0378::func_8D74("aud_ww_projectile_zap");
       wait 0.05;
-      maps\mp\gametypes\_raid_tesla_gun::func_98E9(var_03.var_116, func_40AA(), var_00.var_721C, undefined, var_00.var_953E, (0.1882353, 0.2352941, 0.454902));
+      maps\mp\gametypes\_raid_tesla_gun::func_98E9(var_03.origin, func_40AA(), var_00.player, undefined, var_00.var_953E, (0.1882353, 0.2352941, 0.454902));
     }
 
     wait(max(0.05, func_4319()));
@@ -74,12 +74,12 @@ func_AAED() {
 
 func_63FC(param_00) {
   var_01 = self;
-  playFX(common_scripts\utility::func_44F5("tesla_moon_explosion"), param_00.var_116 + (0, 0, 54));
+  playFX(common_scripts\utility::func_44F5("tesla_moon_explosion"), param_00.origin + (0, 0, 54));
   playFXOnTag(common_scripts\utility::func_44F5("moon_plasma_unstable"), var_01, "tag_origin");
   param_00 lib_0378::func_8D74("aud_ww_projectile_zap");
   wait 0.05;
   var_02 = 200;
-  maps\mp\gametypes\_raid_tesla_gun::func_98E9(param_00.var_116, func_40AA(), var_01.var_721C, undefined, var_01.var_953E, (0.1882353, 0.2352941, 0.454902), var_02);
+  maps\mp\gametypes\_raid_tesla_gun::func_98E9(param_00.origin, func_40AA(), var_01.player, undefined, var_01.var_953E, (0.1882353, 0.2352941, 0.454902), var_02);
 }
 
 func_4319() {

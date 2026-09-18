@@ -6,7 +6,7 @@
 func_00F9() {
   setDvar("r_sunshadowscale", 1);
   setDvar("5153", 1);
-  if(level.var_1D4 && getDvar("2695") != "true") {
+  if(level.weaponinventorytype && getDvar("2695") != "true") {
     xbox_optimizations();
   }
 }

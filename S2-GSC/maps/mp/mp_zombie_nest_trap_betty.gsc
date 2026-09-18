@@ -33,7 +33,7 @@ func_8C2C(param_00) {
   while(!common_scripts\utility::func_562E(self.var_9409)) {
     var_01 = [];
     var_02 = [];
-    var_03 = common_scripts\utility::func_7A33(param_00);
+    var_03 = common_scripts\utility::random(param_00);
     param_00 = function_01AC(param_00, var_03.origin);
     for(var_04 = 0; var_04 < 4; var_04++) {
       var_02[var_04] = param_00[int(param_00.size / var_04 + 1) - 1];
@@ -103,7 +103,7 @@ func_9CC4(param_00, param_01) {
     var_03 = randomfloat(0.75) + 0.5;
     wait(var_03);
     var_02 = var_02 + var_03;
-    thread func_2E66(common_scripts\utility::func_7A33(var_05));
+    thread func_2E66(common_scripts\utility::random(var_05));
   }
 }
 
@@ -114,11 +114,11 @@ func_2E66(param_00) {
   }
 
   self.var_5BBA = var_01;
-  playFX(level.var_611["bouncing_betty_explode"], var_01);
+  playFX(level._effect["bouncing_betty_explode"], var_01);
   lib_0378::func_8D74("aud_trap_betty_triggered", var_01);
   wait(0.6);
   var_02 = var_01 + (0, 0, 70);
-  playFX(level.var_611["bouncing_betty_explosion"], var_02);
+  playFX(level._effect["bouncing_betty_explosion"], var_02);
   lib_0378::func_8D74("aud_trap_betty_explo", var_01);
   var_03 = lib_0547::func_408F();
   foreach(var_05 in var_03) {

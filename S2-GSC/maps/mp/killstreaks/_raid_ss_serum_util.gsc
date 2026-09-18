@@ -149,7 +149,7 @@ altered_state_fade_in(param_00, param_01) {
   var_02 endon("death");
   var_02 endon("disconnect");
   level endon("game_ended");
-  if(!maps\mp\_utility::func_57A0(var_02)) {
+  if(!maps\mp\_utility::isreallyalive(var_02)) {
     return;
   }
 
@@ -168,7 +168,7 @@ altered_state_fade_out(param_00, param_01) {
   var_02 endon("death");
   var_02 endon("disconnect");
   level endon("game_ended");
-  if(!maps\mp\_utility::func_57A0(var_02)) {
+  if(!maps\mp\_utility::isreallyalive(var_02)) {
     return;
   }
 
@@ -238,7 +238,7 @@ altered_state_start_fx(param_00) {
       break;
   }
 
-  if(isDefined(var_01) && maps\mp\_utility::func_57A0(var_01)) {
+  if(isDefined(var_01) && maps\mp\_utility::isreallyalive(var_01)) {
     var_01.altered_state_fx = spawnlinkedfxforclient(common_scripts\utility::func_44F5(var_02), var_01, "tag_origin", var_01);
     function_014E(var_01.altered_state_fx, 1);
     triggerfx(var_01.altered_state_fx);

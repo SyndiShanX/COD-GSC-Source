@@ -53,7 +53,7 @@ func_1AD3(param_00, param_01) {
   self botsetdifficulty(param_00);
   if(isPlayer(self) && var_03 != param_00) {
     maps\mp\_utility::func_8568();
-    var_04 = maps\mp\gametypes\_rank::func_4653(maps\mp\gametypes\_rank::func_46EC());
+    var_04 = maps\mp\gametypes\_rank::getrankforxp(maps\mp\gametypes\_rank::getrankxp());
     self.pers["rank"] = var_04;
     var_05 = self.pers["prestige"];
     self setrank(var_04, var_05);
@@ -118,7 +118,7 @@ func_4151(param_00) {
   }
 
   if(param_00 == "hard") {
-    return common_scripts\utility::func_7A33(["hardened", "veteran"]);
+    return common_scripts\utility::random(["hardened", "veteran"]);
   }
 }
 
@@ -405,7 +405,7 @@ func_19F1(param_00, param_01, param_02) {
 
       param_01 = var_03;
     } else {
-      param_01 = common_scripts\utility::func_7A33(param_01);
+      param_01 = common_scripts\utility::random(param_01);
     }
   }
 
@@ -575,7 +575,7 @@ func_1A98(param_00, param_01, param_02) {
   }
 
   if(!isDefined(var_03)) {
-    var_04 = common_scripts\utility::func_7A33(param_01);
+    var_04 = common_scripts\utility::random(param_01);
     var_05 = var_04.origin - param_00;
     var_03 = param_00 + vectorNormalize(var_05) * length(var_05) * randomfloat(1);
   }
@@ -585,7 +585,7 @@ func_1A98(param_00, param_01, param_02) {
 
 func_19D0(param_00, param_01) {
   var_02 = undefined;
-  var_03 = common_scripts\utility::func_F92(param_00);
+  var_03 = common_scripts\utility::array_randomize(param_00);
   for(var_04 = 0; var_04 < var_03.size; var_04++) {
     for(var_05 = var_04 + 1; var_05 < var_03.size; var_05++) {
       var_06 = var_03[var_04];
@@ -641,7 +641,7 @@ func_1937() {
     return 0;
   }
 
-  if(isDefined(self.var_260C) && self.var_260C) {
+  if(isDefined(self.controlsfrozen) && self.controlsfrozen) {
     return 0;
   }
 
@@ -653,7 +653,7 @@ func_1937() {
     return 0;
   }
 
-  if(maps\mp\_utility::func_44FC() > 0) {
+  if(maps\mp\_utility::getgametypenumlives() > 0) {
     var_00 = 1;
     foreach(var_02 in level.var_6E97) {
       if(isalive(var_02) && !isalliedsentient(self, var_02)) {
@@ -685,7 +685,7 @@ func_1AB2() {
   var_00 = undefined;
   var_01 = botmemoryflags("investigated", "killer_died");
   var_02 = botmemoryflags("investigated");
-  var_03 = common_scripts\utility::func_7A33(botgetmemoryevents(0, gettime() - 10000, 1, "death", var_01, self));
+  var_03 = common_scripts\utility::random(botgetmemoryevents(0, gettime() - 10000, 1, "death", var_01, self));
   if(isDefined(var_03)) {
     var_00 = var_03;
     self.var_1A7C = 10000;
@@ -697,7 +697,7 @@ func_1AB2() {
 
     var_05 = botgetmemoryevents(0, gettime() - -20536, 1, "kill", var_02, self);
     var_06 = botgetmemoryevents(0, gettime() - -20536, 1, "death", var_01, self);
-    var_03 = common_scripts\utility::func_7A33(common_scripts\utility::func_F73(var_05, var_06));
+    var_03 = common_scripts\utility::random(common_scripts\utility::func_F73(var_05, var_06));
     if(isDefined(var_03) > 0 && !isDefined(var_04) || distancesquared(var_04, var_03) > 1000000) {
       var_00 = var_03;
       self.var_1A7C = -20536;
@@ -889,7 +889,7 @@ func_1B2A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   thread func_A8CA();
-  self.var_A8C9 = common_scripts\utility::func_F92(self.var_A8C9);
+  self.var_A8C9 = common_scripts\utility::array_randomize(self.var_A8C9);
   foreach(var_0D in self.var_A8C9) {
     var_0D.var_A8C7[self.var_37CD] = 1;
     var_0D.var_A8C6[self.var_37CD] = 1;
@@ -996,7 +996,7 @@ func_1B2A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         for(var_15 = 0; var_15 < self.var_A8C9.size; var_15++) {
           var_0D = self.var_A8C9[var_15];
           var_2C = var_0D getnodenumber();
-          if(var_20 && !common_scripts\utility::func_AA4A(self.origin, var_1F, var_0D.origin, param_02)) {
+          if(var_20 && !common_scripts\utility::within_fov(self.origin, var_1F, var_0D.origin, param_02)) {
             continue;
           }
 
@@ -1008,7 +1008,7 @@ func_1B2A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
             var_1E[var_2C] = 0;
           }
 
-          if(common_scripts\utility::func_AA4A(self.origin, self getplayerangles(), var_0D.origin, var_24)) {
+          if(common_scripts\utility::within_fov(self.origin, self getplayerangles(), var_0D.origin, var_24)) {
             var_1E[var_2C] = var_23;
           }
 
@@ -1153,7 +1153,7 @@ func_A8CA() {
 
 func_1A59(param_00, param_01) {
   if(isDefined(param_01) && param_01 != (0, 0, 0)) {
-    if(!common_scripts\utility::func_AA4A(self.origin, self getplayerangles(), param_01, self method_8375())) {
+    if(!common_scripts\utility::within_fov(self.origin, self getplayerangles(), param_01, self method_8375())) {
       var_02 = self botpredictseepoint(param_01);
       if(isDefined(var_02)) {
         self botlookatpoint(var_02 + (0, 0, 40), 1, "script_seek");
@@ -1428,7 +1428,7 @@ func_1AA8(param_00, param_01, param_02, param_03, param_04, param_05) {
 }
 
 func_1A36() {
-  return maps\mp\_utility::func_581D() || self islinked();
+  return maps\mp\_utility::isusingremote() || self islinked();
 }
 
 func_19F8(param_00) {
@@ -1496,7 +1496,7 @@ func_1A80(param_00) {
         level.var_3716[var_03.team] = var_03 method_843B(1);
         if(isDefined(level.var_3716[var_03.team])) {
           if(!isDefined(level.var_3715[var_03.team]) || !common_scripts\utility::func_F79(level.var_3716[var_03.team], level.var_3715[var_03.team])) {
-            level.var_3715[var_03.team] = common_scripts\utility::func_7A33(level.var_3716[var_03.team]);
+            level.var_3715[var_03.team] = common_scripts\utility::random(level.var_3716[var_03.team]);
           }
 
           if(isDefined(level.var_3715[var_03.team])) {

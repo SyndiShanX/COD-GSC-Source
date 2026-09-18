@@ -4,7 +4,7 @@
 *************************************************/
 
 func_8A27() {
-  self.var_11AB = 26 + self.var_14F;
+  self.var_11AB = 26 + self.radius;
   self.var_60F5 = "normal";
   self.var_60F6 = 50;
   self.var_11B8 = 54;
@@ -23,11 +23,11 @@ func_8A27() {
   self.var_60F0 = 60;
   self.var_60F1 = squared(self.var_60F0);
   lib_0547::func_86C7(self.var_60F0);
-  self.var_2BCA = self.var_14F + 1;
+  self.var_2BCA = self.radius + 1;
   self method_8399(self.var_2BCA);
   self.var_60E5 = 0.5;
   if(!isDefined(self.var_8303)) {
-    self.var_8303 = self.var_14F;
+    self.var_8303 = self.radius;
   }
 
   if(!isDefined(self.var_8302)) {
@@ -52,9 +52,9 @@ init() {
   self.var_EAD.var_6ADB = [];
   self.var_EAD.var_6ADB["move"] = ::maps / mp / agents / humanoid / _humanoid_move::func_6ADB;
   self.var_BA4 = "idle";
-  self.var_108 = "walk";
+  self.vectortoangles = "walk";
   self.sharpturnnotifydist = 100;
-  self.var_14F = 15;
+  self.radius = 15;
   self.height = 40;
 }
 
@@ -86,7 +86,7 @@ func_8FC9(param_00, param_01, param_02, param_03) {
   self.var_90AB = gettime();
   self.var_5BE2 = gettime();
   init();
-  self method_838F(var_04, var_05, param_00, 15, 60, param_03);
+  self select_by_substring(var_04, var_05, param_00, 15, 60, param_03);
   level notify("spawned_agent", self);
   maps / mp / agents / _agent_common::func_83FD(100);
   if(isDefined(param_03)) {
@@ -150,7 +150,7 @@ func_7AC0(param_00, param_01) {
     return 0;
   }
 
-  if(!maps\mp\_utility::func_57A0(param_01)) {
+  if(!maps\mp\_utility::isreallyalive(param_01)) {
     return 0;
   }
 
@@ -203,7 +203,7 @@ func_457E(param_00) {
             self.var_7A40[self.var_7A40.size] = var_03;
           }
 
-          self.var_7A40 = common_scripts\utility::func_F92(self.var_7A40);
+          self.var_7A40 = common_scripts\utility::array_randomize(self.var_7A40);
         }
 
         foreach(var_05 in self.var_7A40) {

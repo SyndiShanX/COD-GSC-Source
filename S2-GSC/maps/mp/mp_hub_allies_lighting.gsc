@@ -4,10 +4,10 @@
 **********************************************/
 
 func_00F9() {
-  thread func_6B82();
+  thread onplayerspawned();
 }
 
-func_6B82() {
+onplayerspawned() {
   level endon("game_ended");
   for(;;) {
     level waittill("player_spawned", var_00);

@@ -190,7 +190,7 @@ func_1D5A(param_00) {
     return;
   }
 
-  var_0A = maps\mp\_utility::func_45DE(var_05);
+  var_0A = maps\mp\_utility::getotherteam(var_05);
   var_01 = 0;
   foreach(var_05 in level.placement[param_00]) {
     setclientmatchdata("scoreboards", param_00, "scoreboard", var_01, var_05.var_241A);

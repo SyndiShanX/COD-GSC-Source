@@ -4,7 +4,7 @@
 *********************************************/
 
 init() {
-  lib_0547::func_7BD0("tesla_shock", ::func_8316, undefined, 5, ::func_8315);
+  lib_0547::func_7BD0("tesla_shock", ::getcurrentweapon, undefined, 5, ::func_8315);
   common_scripts\utility::func_92C("shock", "vfx/sparks/tesla_stun_sparks");
   common_scripts\utility::func_92C("head_sparks", "vfx/sparks/microwave_grenade_sparks_char_1");
   lib_054D::func_7BC6(::func_98EC);
@@ -14,7 +14,7 @@ init() {
   var_00.var_78CA = 300;
   var_00.var_78C4 = 20;
   var_00.var_F43 = 0.5;
-  common_scripts\utility::func_3C87("teslagun_punch_active");
+  common_scripts\utility::flag_init("teslagun_punch_active");
   level.var_98F5 = var_00;
   lib_0581::func_17FD();
   lib_0583::func_6402();
@@ -567,7 +567,7 @@ func_8317(param_00, param_01, param_02, param_03) {
   return var_04;
 }
 
-func_8316(param_00) {
+getcurrentweapon(param_00) {
   var_01 = self;
   var_01 endon("death");
   var_01.var_98EF = 1;

@@ -37,7 +37,7 @@ func_8796() {
     level.var_1A19 = 1;
     var_04 = level.var_AC7C;
     if(!isDefined(var_04)) {
-      var_04 = common_scripts\utility::func_7A33(level.var_BCF);
+      var_04 = common_scripts\utility::random(level.var_BCF);
     }
 
     maps / mp / bots / _bots_gametype_common::func_1951([var_04]);
@@ -54,7 +54,7 @@ func_1950(param_00) {
     if(isDefined(var_03) && common_scripts\utility::func_F79(var_01, var_03)) {
       var_02 = var_03;
     } else {
-      var_02 = common_scripts\utility::func_7A33(var_01);
+      var_02 = common_scripts\utility::random(var_01);
     }
 
     maps / mp / bots / _bots_gametype_common::func_1951([var_02]);
@@ -102,9 +102,9 @@ func_1A1A() {
       if(var_02 > 0 && var_02 < 10000) {
         var_03 = level.var_AC7C.var_3FCA maps\mp\gametypes\_gameobjects::func_45F7() == self.team;
         if(!var_03) {
-          var_04 = level.var_AC7C.var_AC7F.var_14F * 6;
+          var_04 = level.var_AC7C.var_AC7F.radius * 6;
           if(var_02 < 5000) {
-            var_04 = level.var_AC7C.var_AC7F.var_14F * 3;
+            var_04 = level.var_AC7C.var_AC7F.radius * 3;
           }
 
           var_05 = distance(level.var_AC7C.var_AC7F.var_206B, self.origin);

@@ -157,7 +157,7 @@ func_0F12(param_00, param_01) {
 }
 
 func_40CB() {
-  var_00 = maps\mp\_utility::func_45DE(self.team);
+  var_00 = maps\mp\_utility::getotherteam(self.team);
   var_01 = [];
   if(0) {
     foreach(var_03 in level.players) {
@@ -165,7 +165,7 @@ func_40CB() {
         continue;
       }
 
-      if(!maps\mp\_utility::func_57A0(var_03)) {
+      if(!maps\mp\_utility::isreallyalive(var_03)) {
         continue;
       }
 
@@ -227,7 +227,7 @@ func_5E73(param_00) {
   var_01 = self getEye();
   var_02 = anglesToForward(self getplayerangles());
   var_03 = func_93AA(param_00);
-  if((isPlayer(param_00) || isbot(param_00)) && !maps\mp\_utility::func_57A0(param_00)) {
+  if((isPlayer(param_00) || isbot(param_00)) && !maps\mp\_utility::isreallyalive(param_00)) {
     return 0;
   }
 

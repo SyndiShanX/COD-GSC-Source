@@ -145,7 +145,7 @@ func_AC3F(param_00) {
 
 func_AC3E() {
   if(isDefined(self.var_6989)) {
-    maps\mp\_utility::func_68B(self.var_6989);
+    maps\mp\_utility::_objective_delete(self.var_6989);
     self.var_6989 = undefined;
   }
 }
@@ -511,7 +511,7 @@ func_90A0(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
         var_0C = [[level.zmb_additional_look_check]](var_0C);
       }
 
-      var_0B = common_scripts\utility::func_7A33(var_0C);
+      var_0B = common_scripts\utility::random(var_0C);
     }
 
     var_10 = param_01.var_5ED2[var_0B];
@@ -535,9 +535,9 @@ func_90A0(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 
     if(isDefined(var_10["heads"])) {
       var_07.var_2FDB = var_07.var_2FDB | 16;
-      var_07.var_4BF2 = common_scripts\utility::func_7A33(var_10["heads"]);
+      var_07.headmodel = common_scripts\utility::random(var_10["heads"]);
     } else {
-      var_07.var_4BF2 = undefined;
+      var_07.headmodel = undefined;
     }
 
     var_07.var_4B5A = 0;
@@ -547,15 +547,15 @@ func_90A0(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     if(var_11 < 33) {} else if(var_11 < 66) {
       if(isDefined(var_10["helmets"])) {
         var_07.var_4B6E = 1;
-        var_07.var_4CAA = common_scripts\utility::func_7A33(var_10["helmets"]);
+        var_07.var_4CAA = common_scripts\utility::random(var_10["helmets"]);
       }
     } else if(isDefined(var_10["caps"])) {
       var_07.var_4B5A = 1;
-      var_07.var_4CAA = common_scripts\utility::func_7A33(var_10["caps"]);
+      var_07.var_4CAA = common_scripts\utility::random(var_10["caps"]);
     }
 
     if(isDefined(var_10["facegear"])) {
-      var_07.var_399E = common_scripts\utility::func_7A33(var_10["facegear"]);
+      var_07.var_399E = common_scripts\utility::random(var_10["facegear"]);
     }
 
     var_07.var_6250 = 0;
@@ -620,7 +620,7 @@ func_4744(param_00) {
   var_01 = func_0A51(self.var_A4B);
   var_02 = var_01.var_5ED2[self.var_18B0];
   if(param_00 == 16) {
-    return self.var_4BF2;
+    return self.headmodel;
   }
 
   var_03 = func_443A(param_00);
@@ -641,9 +641,9 @@ func_A19E() {
     func_A19F(var_01, 8);
   }
 
-  var_02 = isDefined(self.var_4BF2) && self.var_6250 & 16 == 0;
+  var_02 = isDefined(self.headmodel) && self.var_6250 & 16 == 0;
   if(var_02) {
-    self attach(self.var_4BF2);
+    self attach(self.headmodel);
   }
 
   if((var_02 && self.var_4B6E) || var_02 && self.var_4B5A) {
@@ -852,7 +852,7 @@ func_6B9E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       var_0C = "death_melee_knife";
     }
   } else if(lib_0541::func_56FD()) {
-    if(self.var_108 == "run" || self.var_108 == "sprint") {
+    if(self.vectortoangles == "run" || self.vectortoangles == "sprint") {
       var_0C = "death_full_body_run";
     } else {
       var_0C = "death_full_body_stand";
@@ -860,7 +860,7 @@ func_6B9E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   } else if(self.var_BA4 == "idle" || self.var_BA4 == "melee") {
     var_0C = "death_stand";
   } else {
-    var_0C = "death_" + self.var_108;
+    var_0C = "death_" + self.vectortoangles;
   }
 
   var_10 = maps / mp / agents / _scripted_agent_anim_util::func_434D(var_0C);
@@ -900,10 +900,10 @@ func_6B9E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   if(!isDefined(self.var_1DEB) || !self.var_1DEB) {
     var_19 = is_important_zombie();
     var_1A = var_19 || var_0A;
-    self.var_18A8 = self method_8392(var_18 - int(var_15 * 1000), var_1A);
+    self.var_18A8 = self select_last_entity(var_18 - int(var_15 * 1000), var_1A);
     self.var_18A8.var_A4B = self.var_A4B;
     self.var_18A8.var_90AB = self.var_90AB;
-    self.var_18A8.var_4BF2 = self.var_4BF2;
+    self.var_18A8.headmodel = self.headmodel;
     self.var_18A8.var_4B6E = self.var_4B6E;
     self.var_18A8.var_4B5A = self.var_4B5A;
     self.var_18A8.var_4CAA = self.var_4CAA;
@@ -1251,7 +1251,7 @@ func_7A37() {
     }
   }
 
-  return common_scripts\utility::func_7A33(var_00);
+  return common_scripts\utility::random(var_00);
 }
 
 func_5E54() {
@@ -1560,7 +1560,7 @@ func_83C0() {
 }
 
 func_5731() {
-  var_00 = maps\mp\_utility::func_3FA0("insta_kill");
+  var_00 = maps\mp\_utility::gameflag("insta_kill");
   return var_00;
 }
 
@@ -1647,7 +1647,7 @@ func_2306() {
 func_0C23(param_00) {
   var_01 = "specialty_longersprint";
   if(param_00) {
-    maps\mp\_utility::func_47A2(var_01);
+    maps\mp\_utility::giveperk(var_01);
     return;
   }
 
@@ -1663,7 +1663,7 @@ func_73B0(param_00, param_01) {
 func_0C26(param_00) {
   var_01 = "specialty_lightweight";
   if(param_00) {
-    maps\mp\_utility::func_47A2(var_01);
+    maps\mp\_utility::giveperk(var_01);
     return;
   }
 
@@ -1982,7 +1982,7 @@ func_839B(param_00) {
       }
     }
 
-    var_01 = common_scripts\utility::func_7A33(var_0F);
+    var_01 = common_scripts\utility::random(var_0F);
     self setrankedplayerdata(common_scripts\utility::func_46A8(), "activeCostume", var_01);
     self setrankedplayerdata(common_scripts\utility::func_46A8(), "costumePrefZM", 0);
   }
@@ -2001,7 +2001,7 @@ func_0A00(param_00, param_01) {
     var_04.var_4BF9 = 0;
     var_04.var_55D3 = func_5868(param_01);
     var_04.kills = 0;
-    var_04.var_72AC = param_00.var_2418;
+    var_04.var_72AC = param_00.clientid;
     var_04.var_8B34 = 0;
     var_04.var_99E8 = 0;
     param_00.var_A9BA[var_02] = var_04;
@@ -2023,7 +2023,7 @@ func_0A00(param_00, param_01) {
     var_04.var_4BF9 = 0;
     var_04.var_55D3 = func_5868(param_01);
     var_04.kills = 0;
-    var_04.var_72AC = param_00.var_2418;
+    var_04.var_72AC = param_00.clientid;
     var_04.var_8B34 = 0;
     var_04.var_99E8 = 0;
     param_00.var_A9BA[var_02] = var_04;
@@ -2210,7 +2210,7 @@ func_0628(param_00, param_01) {
     common_scripts\utility::func_3C9F(param_00);
   }
 
-  common_scripts\utility::func_3C8F(param_01);
+  common_scripts\utility::flag_set(param_01);
 }
 
 func_45A2() {
@@ -2394,7 +2394,7 @@ func_061C() {
 
 func_92D8(param_00) {
   param_00 endon("disconnect");
-  if(param_00 maps\mp\gametypes\_playerlogic::func_60B2()) {
+  if(param_00 maps\mp\gametypes\_playerlogic::mayspawn()) {
     param_00 waittill("spawned_player");
   } else {
     param_00 waittill("joined_spectators");
@@ -2787,7 +2787,7 @@ func_AABF() {
   var_00 = level.var_A980 - 1;
   func_AABD();
   if(var_00 >= 0 && var_00 < 75) {
-    var_01 = maps\mp\_utility::clamptoshort(maps\mp\_utility::func_467B());
+    var_01 = maps\mp\_utility::clamptoshort(maps\mp\_utility::getsecondspassed());
     setmatchdata("rounds", var_00, "endTime", var_01);
     var_02 = getmatchdata("rounds", var_00, "startTime");
     setmatchdata("rounds", var_00, "duration", maps\mp\_utility::clamptoshort(var_01 - var_02));
@@ -2808,22 +2808,22 @@ func_AABF() {
 
 func_AABD() {
   foreach(var_01 in level.players) {
-    setmatchdata("players", var_01.var_2418, "end_assists", maps\mp\_utility::clamptoshort(var_01.assists));
-    setmatchdata("players", var_01.var_2418, "end_kills", maps\mp\_utility::clamptoshort(var_01.kills));
-    setmatchdata("players", var_01.var_2418, "end_hits", var_01.var_8B33);
-    setmatchdata("players", var_01.var_2418, "end_shots", var_01.var_8B3D);
-    setmatchdata("players", var_01.var_2418, "end_money_earned", var_01.var_62D7);
-    setmatchdata("players", var_01.var_2418, "end_money_spent", var_01.var_62D7 - var_01.var_62D6);
-    setmatchdata("players", var_01.var_2418, "end_magic_box_uses", maps\mp\_utility::clamptoshort(var_01.var_5F7C));
-    setmatchdata("players", var_01.var_2418, "end_trap_uses", maps\mp\_utility::clamptoshort(var_01.var_9CFF));
-    setmatchdata("players", var_01.var_2418, "end_headshot_kills", maps\mp\_utility::clamptoshort(var_01.var_4BF7));
-    setmatchdata("players", var_01.var_2418, "end_melee_kills", maps\mp\_utility::clamptoshort(var_01.var_60EC));
-    setmatchdata("players", var_01.var_2418, "end_explosive_kills", maps\mp\_utility::clamptoshort(var_01.var_394C));
-    setmatchdata("players", var_01.var_2418, "play_time", var_01.timeplayed["total"]);
-    setmatchdata("players", var_01.var_2418, "end_total_downs", maps\mp\_utility::clamptoshort(var_01.var_6882));
-    setmatchdata("players", var_01.var_2418, "end_total_rounds", maps\mp\_utility::clamptoshort(level.var_A980));
-    setmatchdata("players", var_01.var_2418, "end_doors_opened", maps\mp\_utility::clamptoshort(var_01.var_3295));
-    setmatchdata("players", var_01.var_2418, "present_at_end", var_01.var_2582);
+    setmatchdata("players", var_01.clientid, "end_assists", maps\mp\_utility::clamptoshort(var_01.assists));
+    setmatchdata("players", var_01.clientid, "end_kills", maps\mp\_utility::clamptoshort(var_01.kills));
+    setmatchdata("players", var_01.clientid, "end_hits", var_01.var_8B33);
+    setmatchdata("players", var_01.clientid, "end_shots", var_01.var_8B3D);
+    setmatchdata("players", var_01.clientid, "end_money_earned", var_01.var_62D7);
+    setmatchdata("players", var_01.clientid, "end_money_spent", var_01.var_62D7 - var_01.var_62D6);
+    setmatchdata("players", var_01.clientid, "end_magic_box_uses", maps\mp\_utility::clamptoshort(var_01.var_5F7C));
+    setmatchdata("players", var_01.clientid, "end_trap_uses", maps\mp\_utility::clamptoshort(var_01.var_9CFF));
+    setmatchdata("players", var_01.clientid, "end_headshot_kills", maps\mp\_utility::clamptoshort(var_01.var_4BF7));
+    setmatchdata("players", var_01.clientid, "end_melee_kills", maps\mp\_utility::clamptoshort(var_01.var_60EC));
+    setmatchdata("players", var_01.clientid, "end_explosive_kills", maps\mp\_utility::clamptoshort(var_01.var_394C));
+    setmatchdata("players", var_01.clientid, "play_time", var_01.timeplayed["total"]);
+    setmatchdata("players", var_01.clientid, "end_total_downs", maps\mp\_utility::clamptoshort(var_01.var_6882));
+    setmatchdata("players", var_01.clientid, "end_total_rounds", maps\mp\_utility::clamptoshort(level.var_A980));
+    setmatchdata("players", var_01.clientid, "end_doors_opened", maps\mp\_utility::clamptoshort(var_01.var_3295));
+    setmatchdata("players", var_01.clientid, "present_at_end", var_01.var_2582);
     level.var_7F2B = [];
     level.var_7F2B["normal"] = 0;
     level.var_7F2B["zombie_dog"] = 1;
@@ -2831,7 +2831,7 @@ func_AABD() {
     level.var_7F2B["zombie_melee_goliath"] = 3;
     level.var_7F2B["civilian"] = 4;
     if(isDefined(level.var_7F2B[level.var_7F2A])) {
-      setmatchdata("players", var_01.var_2418, "end_unlock_points", level.var_7F2B[level.var_7F2A]);
+      setmatchdata("players", var_01.clientid, "end_unlock_points", level.var_7F2B[level.var_7F2A]);
     }
 
     for(var_02 = 0; var_02 < var_01.var_A9BB; var_02++) {
@@ -2840,15 +2840,15 @@ func_AABD() {
         var_03 = "none";
       }
 
-      setmatchdata("players", var_01.var_2418, "weapon_usage", var_02, "weapon_id", var_03);
-      setmatchdata("players", var_01.var_2418, "weapon_usage", var_02, "hits", var_01.var_A9BA[var_02].var_4DDE);
-      setmatchdata("players", var_01.var_2418, "weapon_usage", var_02, "downs", maps\mp\_utility::func_2314(var_01.var_A9BA[var_02].var_32D0));
-      setmatchdata("players", var_01.var_2418, "weapon_usage", var_02, "headshots", maps\mp\_utility::clamptoshort(var_01.var_A9BA[var_02].var_4BF9));
-      setmatchdata("players", var_01.var_2418, "weapon_usage", var_02, "is_pap_version", var_01.var_A9BA[var_02].var_55D3);
-      setmatchdata("players", var_01.var_2418, "weapon_usage", var_02, "kills", maps\mp\_utility::clamptoshort(var_01.var_A9BA[var_02].kills));
-      setmatchdata("players", var_01.var_2418, "weapon_usage", var_02, "player_index", maps\mp\_utility::func_2314(var_01.var_A9BA[var_02].var_72AC));
-      setmatchdata("players", var_01.var_2418, "weapon_usage", var_02, "shots", var_01.var_A9BA[var_02].var_8B34);
-      setmatchdata("players", var_01.var_2418, "weapon_usage", var_02, "time_used", var_01.var_A9BA[var_02].var_99E8);
+      setmatchdata("players", var_01.clientid, "weapon_usage", var_02, "weapon_id", var_03);
+      setmatchdata("players", var_01.clientid, "weapon_usage", var_02, "hits", var_01.var_A9BA[var_02].var_4DDE);
+      setmatchdata("players", var_01.clientid, "weapon_usage", var_02, "downs", maps\mp\_utility::func_2314(var_01.var_A9BA[var_02].var_32D0));
+      setmatchdata("players", var_01.clientid, "weapon_usage", var_02, "headshots", maps\mp\_utility::clamptoshort(var_01.var_A9BA[var_02].var_4BF9));
+      setmatchdata("players", var_01.clientid, "weapon_usage", var_02, "is_pap_version", var_01.var_A9BA[var_02].var_55D3);
+      setmatchdata("players", var_01.clientid, "weapon_usage", var_02, "kills", maps\mp\_utility::clamptoshort(var_01.var_A9BA[var_02].kills));
+      setmatchdata("players", var_01.clientid, "weapon_usage", var_02, "player_index", maps\mp\_utility::func_2314(var_01.var_A9BA[var_02].var_72AC));
+      setmatchdata("players", var_01.clientid, "weapon_usage", var_02, "shots", var_01.var_A9BA[var_02].var_8B34);
+      setmatchdata("players", var_01.clientid, "weapon_usage", var_02, "time_used", var_01.var_A9BA[var_02].var_99E8);
     }
   }
 }
@@ -3063,7 +3063,7 @@ func_7B34(param_00) {
     return;
   }
 
-  var_01 = maps\mp\_utility::clamptoshort(maps\mp\_utility::func_467B());
+  var_01 = maps\mp\_utility::clamptoshort(maps\mp\_utility::getsecondspassed());
   setmatchdata("rounds", param_00, "startTime", var_01);
   foreach(var_03 in level.players) {
     var_03 func_7B37(param_00);
@@ -3101,7 +3101,7 @@ func_7B33(param_00) {
     return;
   }
 
-  var_05 = maps\mp\_utility::clamptoshort(maps\mp\_utility::func_467B());
+  var_05 = maps\mp\_utility::clamptoshort(maps\mp\_utility::getsecondspassed());
   setmatchdata("rounds", param_00, "endTime", var_05);
   var_06 = getmatchdata("rounds", param_00, "startTime");
   setmatchdata("rounds", param_00, "duration", maps\mp\_utility::clamptoshort(var_05 - var_06));
@@ -3458,7 +3458,7 @@ func_34A6(param_00, param_01, param_02) {
 
   var_03 = param_00 + (0, 0, param_02);
   var_04 = param_00 + (0, 0, param_01 * -1);
-  var_05 = self method_83EB(var_03, var_04, self.var_14F, self.height, 1);
+  var_05 = self method_83EB(var_03, var_04, self.radius, self.height, 1);
   if(abs(var_05[2] - var_03[2]) < 0.1) {
     return undefined;
   }
@@ -3476,7 +3476,7 @@ func_1F5B(param_00, param_01, param_02, param_03) {
   }
 
   if(!isDefined(param_03)) {
-    param_03 = self.var_14F;
+    param_03 = self.radius;
   }
 
   var_04 = (0, 0, 1) * param_02;
@@ -4644,7 +4644,7 @@ func_A28B(param_00) {
   }
 
   if(isDefined(self.var_819A)) {
-    common_scripts\utility::func_3C8F(self.var_819A);
+    common_scripts\utility::flag_set(self.var_819A);
   }
 
   self.var_9D65 makeunusable();
@@ -4703,7 +4703,7 @@ func_A2A1() {
   var_00 = getEntArray("valveTrigger", "script_noteworthy");
   foreach(var_02 in level.var_A2A0) {
     if(isDefined(var_02.var_819A)) {
-      common_scripts\utility::func_3C87(var_02.var_819A);
+      common_scripts\utility::flag_init(var_02.var_819A);
     }
 
     var_03 = common_scripts\utility::func_4461(var_02.origin, var_00, 200);
@@ -4851,7 +4851,7 @@ func_7BD0(param_00, param_01, param_02, param_03, param_04) {
   var_05.var_7F63 = param_01;
   var_05.var_5426 = param_02;
   var_05.var_6AA1 = param_04;
-  var_05.var_7734 = param_03;
+  var_05.priority = param_03;
   level.var_80D5[param_00] = var_05;
 }
 
@@ -4870,7 +4870,7 @@ func_7D1A(param_00, param_01, param_02, param_03) {
   var_05 = spawnStruct();
   var_05.name = param_00;
   var_05.var_9A01 = param_02;
-  var_05.var_7734 = var_04.var_7734;
+  var_05.priority = var_04.priority;
   var_05.var_6E59 = param_01;
   var_05.var_931E = var_04;
   var_05.var_1F36 = param_03;
@@ -4919,7 +4919,7 @@ func_06A2(param_00) {
 }
 
 func_05EA(param_00, param_01) {
-  return param_00.var_7734 >= param_01.var_7734;
+  return param_00.priority >= param_01.priority;
 }
 
 func_05FC(param_00) {
@@ -5208,7 +5208,7 @@ func_4BA7(param_00) {
 }
 
 func_8A6B(param_00) {
-  maps\mp\_utility::func_47A2(param_00);
+  maps\mp\_utility::giveperk(param_00);
 }
 
 func_A086(param_00) {
@@ -5471,7 +5471,7 @@ func_AC46(param_00, param_01, param_02) {
 
   var_03 = spawnStruct();
   var_03.name = param_00;
-  var_03.var_A281 = param_01;
+  var_03.value = param_01;
   var_03.type = param_02;
   self.var_6E5C = common_scripts\utility::func_F6F(self.var_6E5C, var_03);
   var_04 = 48;
@@ -5542,7 +5542,7 @@ func_AC4D() {
   foreach(var_09 in self.var_6E5C) {
     self.var_3E3D = self.var_3E3D + var_07 + var_09.name + " " + var_09.type;
     var_07 = ", ";
-    var_06 = common_scripts\utility::func_F6F(var_06, var_09.var_A281);
+    var_06 = common_scripts\utility::func_F6F(var_06, var_09.value);
   }
 
   if(isDefined(self.origin)) {
@@ -5917,7 +5917,7 @@ func_0593(param_00, param_01) {
   }
 
   var_02 = common_scripts\utility::func_F6F(param_00["attachments"], param_01);
-  param_00["attachments"] = common_scripts\utility::func_C9E(var_02);
+  param_00["attachments"] = common_scripts\utility::alphabetize(var_02);
   return param_00;
 }
 
@@ -5943,7 +5943,7 @@ func_6117(param_00, param_01) {
     var_0A = common_scripts\utility::func_FA3(var_0A, 0, 6);
   }
 
-  var_02["attachments"] = common_scripts\utility::func_C9E(var_0A);
+  var_02["attachments"] = common_scripts\utility::alphabetize(var_0A);
   return var_02;
 }
 
@@ -6421,7 +6421,7 @@ zmsustainedholdthinkplayerreset(param_00, param_01) {
 
 zmsustainedholdthinkloop(param_00, param_01) {
   var_02 = 0;
-  while(isDefined(self) && maps\mp\_utility::func_57A0(param_00) && param_00 useButtonPressed()) {
+  while(isDefined(self) && maps\mp\_utility::isreallyalive(param_00) && param_00 useButtonPressed()) {
     self.var_28D5 = self.var_28D5 + self.var_A22B * 50;
     if(!common_scripts\utility::func_562E(param_00.radial_interact_active)) {
       param_00.radial_interact_active = 1;
@@ -6496,7 +6496,7 @@ zm_util_run_outro_for_player(param_00, param_01, param_02, param_03, param_04, p
   var_06.var_324E = 1;
   var_06 func_8A6D(1);
   if(isDefined(param_05)) {
-    var_06 method_8626(param_05);
+    var_06 setaltsceneobj(param_05);
   }
 
   var_07 = param_02;
@@ -6601,8 +6601,8 @@ zombies_to_mp(param_00) {
     param_00 = function_0337(param_00, "_pap");
   }
 
-  param_00 = maps\mp\_utility::func_9472(param_00, "_zm");
-  param_00 = maps\mp\_utility::func_9472(param_00, "_mp");
+  param_00 = maps\mp\_utility::strip_suffix(param_00, "_zm");
+  param_00 = maps\mp\_utility::strip_suffix(param_00, "_mp");
   param_00 = param_00 + "_mp";
   return param_00;
 }
@@ -6612,8 +6612,8 @@ mp_to_zombies(param_00) {
     param_00 = function_0337(param_00, "_pap");
   }
 
-  param_00 = maps\mp\_utility::func_9472(param_00, "_zm");
-  param_00 = maps\mp\_utility::func_9472(param_00, "_mp");
+  param_00 = maps\mp\_utility::strip_suffix(param_00, "_zm");
+  param_00 = maps\mp\_utility::strip_suffix(param_00, "_mp");
   param_00 = param_00 + "_zm";
   return param_00;
 }
@@ -6653,7 +6653,7 @@ set_player_cinematic_mode(param_00, param_01) {
   var_02 method_848D();
   var_02 setclientomnvar("ui_hide_hud", 1);
   if(isDefined(param_01)) {
-    var_02 method_8626(param_01);
+    var_02 setaltsceneobj(param_01);
   }
 
   var_02.var_324E = 1;
@@ -6686,17 +6686,17 @@ unset_player_cinematic_mode(param_00, param_01) {
 
 init_damageable_script_model() {
   self setCanDamage(1);
-  if(isDefined(self.var_29B5)) {
+  if(isDefined(self.damagecallback)) {
     return;
   }
 
   self setdamagecallbackon(1);
-  self.var_29B5 = ::damageable_script_model_ondamage;
+  self.damagecallback = ::damageable_script_model_ondamage;
 }
 
 cleanup_damageable_script_model() {
   self setCanDamage(0);
-  self.var_29B5 = undefined;
+  self.damagecallback = undefined;
 }
 
 damageable_script_model_ondamage(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {

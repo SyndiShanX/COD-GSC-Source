@@ -91,35 +91,35 @@ func_46F4(param_00, param_01) {
 gettweakablevalue(param_00, param_01, param_02) {
   switch (param_00) {
     case "rule":
-      var_03 = level.var_7F46[param_01].var_A281;
+      var_03 = level.var_7F46[param_01].value;
       break;
 
     case "game":
-      var_03 = level.var_3FDB[param_02].var_A281;
+      var_03 = level.var_3FDB[param_02].value;
       break;
 
     case "team":
-      var_03 = level.var_986C[param_02].var_A281;
+      var_03 = level.var_986C[param_02].value;
       break;
 
     case "player":
-      var_03 = level.var_747C[param_02].var_A281;
+      var_03 = level.var_747C[param_02].value;
       break;
 
     case "class":
-      var_03 = level.var_2326[param_02].var_A281;
+      var_03 = level.var_2326[param_02].value;
       break;
 
     case "weapon":
-      var_03 = level.var_A9F3[param_02].var_A281;
+      var_03 = level.var_A9F3[param_02].value;
       break;
 
     case "hardpoint":
-      var_03 = level.var_4B1E[param_02].var_A281;
+      var_03 = level.var_4B1E[param_02].value;
       break;
 
     case "hud":
-      var_03 = level.var_4F7C[param_02].var_A281;
+      var_03 = level.var_4F7C[param_02].value;
       break;
 
     default:
@@ -268,7 +268,7 @@ func_7BFD(param_00, param_01, param_02, param_03, param_04) {
         level.var_7F46[param_01] = spawnStruct();
       }
 
-      level.var_7F46[param_01].var_A281 = param_03;
+      level.var_7F46[param_01].value = param_03;
       level.var_7F46[param_01].var_5C0D = param_03;
       level.var_7F46[param_01].var_3515 = param_02;
       break;
@@ -278,7 +278,7 @@ func_7BFD(param_00, param_01, param_02, param_03, param_04) {
         level.var_3FDB[param_01] = spawnStruct();
       }
 
-      level.var_3FDB[param_01].var_A281 = param_03;
+      level.var_3FDB[param_01].value = param_03;
       level.var_3FDB[param_01].var_5C0D = param_03;
       level.var_3FDB[param_01].var_3515 = param_02;
       break;
@@ -288,7 +288,7 @@ func_7BFD(param_00, param_01, param_02, param_03, param_04) {
         level.var_986C[param_01] = spawnStruct();
       }
 
-      level.var_986C[param_01].var_A281 = param_03;
+      level.var_986C[param_01].value = param_03;
       level.var_986C[param_01].var_5C0D = param_03;
       level.var_986C[param_01].var_3515 = param_02;
       break;
@@ -298,7 +298,7 @@ func_7BFD(param_00, param_01, param_02, param_03, param_04) {
         level.var_747C[param_01] = spawnStruct();
       }
 
-      level.var_747C[param_01].var_A281 = param_03;
+      level.var_747C[param_01].value = param_03;
       level.var_747C[param_01].var_5C0D = param_03;
       level.var_747C[param_01].var_3515 = param_02;
       break;
@@ -308,7 +308,7 @@ func_7BFD(param_00, param_01, param_02, param_03, param_04) {
         level.var_2326[param_01] = spawnStruct();
       }
 
-      level.var_2326[param_01].var_A281 = param_03;
+      level.var_2326[param_01].value = param_03;
       level.var_2326[param_01].var_5C0D = param_03;
       level.var_2326[param_01].var_3515 = param_02;
       break;
@@ -318,7 +318,7 @@ func_7BFD(param_00, param_01, param_02, param_03, param_04) {
         level.var_A9F3[param_01] = spawnStruct();
       }
 
-      level.var_A9F3[param_01].var_A281 = param_03;
+      level.var_A9F3[param_01].value = param_03;
       level.var_A9F3[param_01].var_5C0D = param_03;
       level.var_A9F3[param_01].var_3515 = param_02;
       break;
@@ -328,7 +328,7 @@ func_7BFD(param_00, param_01, param_02, param_03, param_04) {
         level.var_4B1E[param_01] = spawnStruct();
       }
 
-      level.var_4B1E[param_01].var_A281 = param_03;
+      level.var_4B1E[param_01].value = param_03;
       level.var_4B1E[param_01].var_5C0D = param_03;
       level.var_4B1E[param_01].var_3515 = param_02;
       break;
@@ -338,7 +338,7 @@ func_7BFD(param_00, param_01, param_02, param_03, param_04) {
         level.var_4F7C[param_01] = spawnStruct();
       }
 
-      level.var_4F7C[param_01].var_A281 = param_03;
+      level.var_4F7C[param_01].value = param_03;
       level.var_4F7C[param_01].var_5C0D = param_03;
       level.var_4F7C[param_01].var_3515 = param_02;
       break;

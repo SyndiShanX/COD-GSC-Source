@@ -10,7 +10,7 @@ init() {
     return;
   }
 
-  level.var_611["zmb_red_flare_idle"] = loadfx("vfx/map/mp_zombie_berlin/zmb_red_flare_idle");
+  level._effect["zmb_red_flare_idle"] = loadfx("vfx/map/mp_zombie_berlin/zmb_red_flare_idle");
   level thread lib_0526::func_52F6();
   level thread lib_0529::func_52F4();
   level.zombiecratecapturethink = ::zm_care_crate_capture_think;
@@ -23,7 +23,7 @@ init() {
     }
   }
 
-  var_06 = common_scripts\utility::func_7A33(var_02);
+  var_06 = common_scripts\utility::random(var_02);
   level.care_package_lz = var_06;
   level thread zm_care_flare_marker(level.care_package_lz);
 }
@@ -53,7 +53,7 @@ zm_care_spawn_toggle_fx(param_00, param_01, param_02) {
     if(isDefined(param_02)) {
       param_01 = common_scripts\utility::func_4461(param_02.origin, var_04);
     } else {
-      param_01 = common_scripts\utility::func_7A33(var_03);
+      param_01 = common_scripts\utility::random(var_03);
     }
   }
 

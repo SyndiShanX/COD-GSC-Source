@@ -90,7 +90,7 @@ throw_debris() {
   var_05 = common_scripts\utility::func_F6F(var_05, "zmi_fish_cage_03");
   var_05 = common_scripts\utility::func_F6F(var_05, "ger_crate_ammo_box_sm_01");
   var_05 = common_scripts\utility::func_F6F(var_05, "can_ger_dynamite_box_lid_01");
-  var_05 = common_scripts\utility::func_F92(var_05);
+  var_05 = common_scripts\utility::array_randomize(var_05);
   var_05 = common_scripts\utility::func_FA3(var_05, 0, var_00);
   if(common_scripts\utility::func_562E(level.players_sacrificed_jack)) {
     var_05 = common_scripts\utility::func_F6F(var_05, "vm_zom_jack_in_the_box");
@@ -100,7 +100,7 @@ throw_debris() {
   foreach(var_08 in var_05) {
     if(lib_0547::func_5565(var_08, "vm_zom_jack_in_the_box")) {
       var_09 = level.player;
-      foreach(var_0B in common_scripts\utility::func_F92(level.players)) {
+      foreach(var_0B in common_scripts\utility::array_randomize(level.players)) {
         if(common_scripts\utility::func_562E(var_0B.var_5728)) {
           continue;
         }

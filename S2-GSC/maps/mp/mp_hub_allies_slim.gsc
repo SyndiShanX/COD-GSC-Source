@@ -8,12 +8,12 @@ func_00F9() {
   level.var_A220 = level.var_A1FE;
   level.var_A259 = 1;
   maps\mp\gametypes\_hub_stats::func_4F3E();
-  lib_04AE::func_F9();
-  lib_0416::func_F9();
-  lib_04AD::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_hub_allies_lighting::func_F9();
-  maps\mp\mp_hub_allies_aud::func_F9();
+  lib_04AE::main();
+  lib_0416::main();
+  lib_04AD::main();
+  maps\mp\_load::main();
+  maps\mp\mp_hub_allies_lighting::main();
+  maps\mp\mp_hub_allies_aud::main();
   maps\mp\_compass::func_8A2F("");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -53,11 +53,11 @@ spawnspecialqmlighting() {
     var_01 = spawn("script_model", (-13312, -2992, 216));
     var_01.var_1D = (348.993, 246.801, 110.334);
     var_01 setModel("tag_origin");
-    playFXOnTag(level.var_611["quartermaster_rim"], var_01, "tag_origin");
+    playFXOnTag(level._effect["quartermaster_rim"], var_01, "tag_origin");
     var_02 = spawn("script_model", (-13029.8, -2966.69, 200));
     var_02.var_1D = (1.5344, 15.2113, 82.9237);
     var_02 setModel("tag_origin");
-    playFXOnTag(level.var_611["quartermaster_kick"], var_02, "tag_origin");
+    playFXOnTag(level._effect["quartermaster_kick"], var_02, "tag_origin");
   }
 }
 

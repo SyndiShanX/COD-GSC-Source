@@ -60,7 +60,7 @@ get_random_other_role() {
     var_03.abilityname = var_04;
   }
 
-  return common_scripts\utility::func_7A33(var_00);
+  return common_scripts\utility::random(var_00);
 }
 
 getrngabilitycharges(param_00) {

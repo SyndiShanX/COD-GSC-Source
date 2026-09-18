@@ -264,7 +264,7 @@ basic_keypoint_interact_think_loop(param_00, param_01) {
   param_00 endon("damage");
   var_02 = 0;
   level notify("sg_keypoint_interact_start");
-  while(isDefined(self) && maps\mp\_utility::func_57A0(param_00) && param_00 useButtonPressed() && param_00 istouching(self)) {
+  while(isDefined(self) && maps\mp\_utility::isreallyalive(param_00) && param_00 useButtonPressed() && param_00 istouching(self)) {
     self.var_28D5 = self.var_28D5 + self.var_A22B * 50;
     if(!common_scripts\utility::func_562E(param_00.radial_interact_active)) {
       param_00.radial_interact_active = 1;

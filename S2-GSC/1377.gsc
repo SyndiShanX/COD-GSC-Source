@@ -131,7 +131,7 @@ func_636D() {
 
 func_464C(param_00) {
   for(;;) {
-    var_01 = common_scripts\utility::func_7A33(param_00);
+    var_01 = common_scripts\utility::random(param_00);
     if(var_01.name == "self_revive") {
       param_00 = common_scripts\utility::func_F93(param_00, var_01);
       continue;

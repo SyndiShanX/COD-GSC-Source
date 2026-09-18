@@ -34,9 +34,9 @@ func_A150() {
     var_00 = -2;
   } else if(level.var_9850[var_01]) {
     var_00 = -1;
-  } else if(level.var_9854[maps\mp\_utility::func_45DE(var_01)]) {
+  } else if(level.var_9854[maps\mp\_utility::getotherteam(var_01)]) {
     var_00 = 2;
-  } else if(level.var_9850[maps\mp\_utility::func_45DE(var_01)]) {
+  } else if(level.var_9850[maps\mp\_utility::getotherteam(var_01)]) {
     var_00 = 1;
   }
 

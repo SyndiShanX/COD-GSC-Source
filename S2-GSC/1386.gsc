@@ -28,13 +28,13 @@ init() {
   func_532C("perk_random");
   func_532C("perk_all");
   thread func_5F1E();
-  level.var_611["care_package_allies_beacon"] = loadfx("vfx/lights/usa_carepackage_beacon");
-  level.var_611["zmb_elec_cherry_zombie"] = loadfx("vfx/gameplay/mp/zombie/zmb_elec_cherry_zombie");
-  level.var_611["zmb_elec_cherry_player"] = loadfx("vfx/gameplay/mp/zombie/zmb_elec_cherry_player");
-  level.var_611["zmb_elec_cherry_wv"] = loadfx("vfx/gameplay/mp/zombie/zmb_elec_cherry_wv");
-  level.var_611["zmb_pm_armor_use"] = loadfx("vfx/zombie/perk_machines/zmb_pm_armor_use");
-  level.var_611["zmb_hand_blood"] = loadfx("vfx/zombie/perk_machines/zmb_hand_blood");
-  level.var_611["zmb_pm_random_use"] = loadfx("vfx/zombie/perk_machines/zmb_pm_random_use");
+  level._effect["care_package_allies_beacon"] = loadfx("vfx/lights/usa_carepackage_beacon");
+  level._effect["zmb_elec_cherry_zombie"] = loadfx("vfx/gameplay/mp/zombie/zmb_elec_cherry_zombie");
+  level._effect["zmb_elec_cherry_player"] = loadfx("vfx/gameplay/mp/zombie/zmb_elec_cherry_player");
+  level._effect["zmb_elec_cherry_wv"] = loadfx("vfx/gameplay/mp/zombie/zmb_elec_cherry_wv");
+  level._effect["zmb_pm_armor_use"] = loadfx("vfx/zombie/perk_machines/zmb_pm_armor_use");
+  level._effect["zmb_hand_blood"] = loadfx("vfx/zombie/perk_machines/zmb_hand_blood");
+  level._effect["zmb_pm_random_use"] = loadfx("vfx/zombie/perk_machines/zmb_pm_random_use");
   level thread maps\mp\_utility::func_6F74(::restore_tactical_usage_on_spawn);
 }
 
@@ -47,7 +47,7 @@ restore_tactical_usage_on_spawn() {
     }
 
     if(lib_0547::func_5866(self.zmb_plr_tactical)) {
-      self method_831E(self.zmb_plr_tactical);
+      self setoffhandsecondaryclass(self.zmb_plr_tactical);
       if(!self hasweapon(self.zmb_plr_tactical)) {
         lib_0586::func_78C(self.zmb_plr_tactical);
       }
@@ -414,7 +414,7 @@ func_6F61(param_00, param_01) {
 
         var_05.var_F60++;
         if(isDefined(param_01)) {
-          playFX(level.var_611["zmb_pm_armor_use"], param_01.origin, anglesToForward(param_01.angles));
+          playFX(level._effect["zmb_pm_armor_use"], param_01.origin, anglesToForward(param_01.angles));
         }
 
         param_01 lib_0378::func_8D74("aud_use_armor_machine");
@@ -515,7 +515,7 @@ func_7A5A(param_00) {
       }
     }
 
-    var_07 = common_scripts\utility::func_7A33(var_06);
+    var_07 = common_scripts\utility::random(var_06);
     var_08 = func_4602(var_04, var_01);
     var_09 = 0;
     while(var_04 func_4B7E(var_07)) {
@@ -526,7 +526,7 @@ func_7A5A(param_00) {
         break;
       }
 
-      var_07 = common_scripts\utility::func_7A33(var_06);
+      var_07 = common_scripts\utility::random(var_06);
     }
 
     if(var_09 == 1) {
@@ -584,8 +584,8 @@ func_6F5D(param_00, param_01) {
   var_02 moveTo(self.var_741E.origin, 0.25);
   var_02 rotateTo(self.var_741E.angles, 0.25);
   param_00 common_scripts\utility::func_603();
-  param_00 common_scripts\utility::func_600();
-  param_00 maps\mp\_utility::func_3E8E(1);
+  param_00 common_scripts\utility::_disableoffhandweapons();
+  param_00 maps\mp\_utility::freezecontrolswrapper(1);
   param_00.var_5799 = 1;
   param_00 notify("can_use_consumable");
   wait(0.25);
@@ -631,7 +631,7 @@ func_6F5D(param_00, param_01) {
     }
   }
 
-  param_00 maps\mp\_utility::func_3E8E(0);
+  param_00 maps\mp\_utility::freezecontrolswrapper(0);
   param_00 unlink(var_02);
   var_02 delete();
   param_00.var_5799 = 0;
@@ -894,7 +894,7 @@ func_47B5() {
   }
 
   func_4793("fastreload", (0, 1, 0));
-  maps\mp\_utility::func_47A2("specialty_fastreload");
+  maps\mp\_utility::giveperk("specialty_fastreload");
 }
 
 func_95F1() {
@@ -935,8 +935,8 @@ func_47B8() {
   }
 
   func_4793("runperk", (1, 1, 0));
-  maps\mp\_utility::func_47A2("specialty_lightweight");
-  maps\mp\_utility::func_47A2("specialty_marathon");
+  maps\mp\_utility::giveperk("specialty_lightweight");
+  maps\mp\_utility::giveperk("specialty_marathon");
   lib_0547::func_7ACD();
 }
 
@@ -1124,7 +1124,7 @@ func_4784() {
     return;
   }
 
-  maps\mp\_utility::func_47A2("specialty_rof");
+  maps\mp\_utility::giveperk("specialty_rof");
   func_4793("doubletap", (1, 0, 1));
 }
 

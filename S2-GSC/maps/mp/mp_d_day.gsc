@@ -89,7 +89,7 @@ func_5461() {
     return;
   }
 
-  if(!isDefined(level.var_984D) || !level.var_984D) {
+  if(!isDefined(level.teambased) || !level.teambased) {
     return;
   }
 

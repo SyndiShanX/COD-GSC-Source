@@ -128,7 +128,7 @@ propinputwatch() {
   self.slopelocked = 0;
   self setclientomnvar("ui_ph_is_locked", 0);
   self setclientomnvar("ui_ph_matching_slope", 0);
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   childthread propmoveunlock();
   childthread propcamerazoom();
   childthread proprotate();
@@ -267,12 +267,12 @@ propchangeto(param_00) {
 
   maps / mp / gametypes / prop::applyxyzoffset();
   maps / mp / gametypes / prop::applyanglesoffset();
-  self.var_777D method_8449(self.propent, "J_prop_1");
+  self.var_777D linktosynchronizedparent(self.propent, "J_prop_1");
   if(self.slopelocked && common_scripts\utility::func_562E(self.var_5E61)) {
     self.propent set_pitch_roll_for_ground_normal(self.var_777D);
   }
 
-  self.propent method_8449(self.propanchor);
+  self.propent linktosynchronizedparent(self.propanchor);
   self.thirdpersonrange = maps / mp / gametypes / prop::getthirdpersonrangeforpropinfo(param_00);
   self.thirdpersonheightoffset = maps / mp / gametypes / prop::getthirdpersonheightoffsetforpropinfo(param_00);
   self method_86BD(1, self.thirdpersonrange, self.thirdpersonheightoffset);
@@ -285,7 +285,7 @@ propmatchslope() {
     if(common_scripts\utility::func_562E(self.var_5E61)) {
       self.propent unlink();
       self.propent set_pitch_roll_for_ground_normal(self.var_777D);
-      self.propent method_8449(self.propanchor);
+      self.propent linktosynchronizedparent(self.propanchor);
     }
 
     if(maps / mp / gametypes / prop::useprophudserver()) {
@@ -307,7 +307,7 @@ propmatchslope() {
     self.propent unlink();
     self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
     self.propent.origin = self.propanchor.origin;
-    self.propent method_8449(self.propanchor);
+    self.propent linktosynchronizedparent(self.propanchor);
   }
 
   if(maps / mp / gametypes / prop::useprophudserver()) {
@@ -322,7 +322,7 @@ propmatchslope() {
 }
 
 propability() {
-  if(!maps\mp\_utility::func_3FA0("props_hide_over")) {
+  if(!maps\mp\_utility::gameflag("props_hide_over")) {
     return;
   }
 
@@ -474,10 +474,10 @@ unlockprop() {
     self.propent unlink();
     self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
     self.propent.origin = self.propanchor.origin;
-    self.propent method_8449(self.propanchor);
+    self.propent linktosynchronizedparent(self.propanchor);
   }
 
-  self.propanchor method_8449(self);
+  self.propanchor linktosynchronizedparent(self);
   self.var_5E61 = 0;
   self setclientomnvar("ui_ph_is_locked", 0);
   if(maps / mp / gametypes / prop::useprophudserver()) {
@@ -496,7 +496,7 @@ lockprop() {
   if(self.slopelocked) {
     self.propent unlink();
     self.propent set_pitch_roll_for_ground_normal(self.var_777D);
-    self.propent method_8449(self.propanchor);
+    self.propent linktosynchronizedparent(self.propanchor);
   }
 
   self.var_5E61 = 1;
@@ -593,7 +593,7 @@ checkifvalidpropspectate() {
     return 0;
   }
 
-  if(maps\mp\_utility::func_57A0(var_00)) {
+  if(maps\mp\_utility::isreallyalive(var_00)) {
     return 1;
   }
 
@@ -691,7 +691,7 @@ returntoprop() {
     return;
   }
 
-  self.propanchor method_8449(self);
+  self.propanchor linktosynchronizedparent(self);
   self.propanchor.origin = self.origin;
 }
 
@@ -888,7 +888,7 @@ cloneprop() {
   var_00.var_7433 = self;
   var_00 setCanDamage(1);
   var_00 setdamagecallbackon(1);
-  var_00.var_29B5 = ::damageclonewatch;
+  var_00.damagecallback = ::damageclonewatch;
   var_00 thread deleteclone(self);
   var_00 thread maps / mp / gametypes / prop::highlighttoteam(game["defenders"], 0, self);
   var_00 common_scripts\utility::func_5FA9(self.team);

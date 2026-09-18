@@ -5,7 +5,7 @@
 
 func_5340() {
   level.var_79C4 = spawnStruct();
-  level.var_79C4.var_6C1E = [];
+  level.var_79C4.options = [];
   level.var_79C4.var_5FEE = 0;
   if(getdvarint("233")) {
     return;
@@ -26,7 +26,7 @@ func_5340() {
       var_04 = tablelookup("mp/raidSettingsOptionValues.csv", 0, var_03, 1);
     }
 
-    level.var_79C4.var_6C1E[var_03] = var_04;
+    level.var_79C4.options[var_03] = var_04;
   }
 }
 
@@ -41,7 +41,7 @@ func_4646(param_00) {
       return var_01;
     }
   } else {
-    var_02 = level.var_79C4.var_6C1E[param_00];
+    var_02 = level.var_79C4.options[param_00];
     if(isDefined(var_02)) {
       return var_02;
     }

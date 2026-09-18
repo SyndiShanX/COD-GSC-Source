@@ -6,13 +6,13 @@
 init() {
   lib_0547::func_7BD0("stunning_burst", ::func_AC63, ::func_AC65, 4.25);
   lib_0547::func_7BD0("mini_stunning_burst", ::mini_stunning_burst_state_run, ::mini_stunning_burst_state_interrupt, 4.24999, ::mini_stunning_burst_state_finish);
-  level.var_611["stunning_burst_aoe"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_stun_burst_aoe");
-  level.var_611["stunning_burst_aoe_mega"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_breathing_room");
-  level.var_611["stunning_burst"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_zmb_stun");
-  level.var_611["stunning_burst_sz"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_zmb_stun");
-  level.var_611["stunning_burst_sustain"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_sustain_zone");
-  level.var_611["stunning_burst_sustain_br"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_sustain_zone_br");
-  level.var_611["zmb_blood_player_heal"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_player_heal");
+  level._effect["stunning_burst_aoe"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_stun_burst_aoe");
+  level._effect["stunning_burst_aoe_mega"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_breathing_room");
+  level._effect["stunning_burst"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_zmb_stun");
+  level._effect["stunning_burst_sz"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_zmb_stun");
+  level._effect["stunning_burst_sustain"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_sustain_zone");
+  level._effect["stunning_burst_sustain_br"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_sustain_zone_br");
+  level._effect["zmb_blood_player_heal"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_player_heal");
 }
 
 func_3662() {
@@ -34,12 +34,12 @@ func_3662() {
   } else if(!common_scripts\utility::func_562E(lib_0547::func_4BA7("specialty_class_breathing_room_zm")) && common_scripts\utility::func_562E(lib_0547::func_4BA7("specialty_class_sustain_zone_zm"))) {
     playFX(common_scripts\utility::func_44F5("stunning_burst_aoe"), var_02 + (0, 0, var_03));
     lib_0378::func_8D74("aud_stunning_burst_use");
-    thread sustain_zone_fx(level.var_611["stunning_burst_sustain"], var_02 + (0, 0, var_03));
+    thread sustain_zone_fx(level._effect["stunning_burst_sustain"], var_02 + (0, 0, var_03));
     var_04 = var_04 * 0.25;
   } else if(common_scripts\utility::func_562E(lib_0547::func_4BA7("specialty_class_breathing_room_zm")) && common_scripts\utility::func_562E(lib_0547::func_4BA7("specialty_class_sustain_zone_zm"))) {
     playFX(common_scripts\utility::func_44F5("stunning_burst_aoe_mega"), var_02 + (0, 0, var_03));
     lib_0378::func_8D74("aud_stunning_burst_use");
-    thread sustain_zone_fx(level.var_611["stunning_burst_sustain_br"], var_02 + (0, 0, var_03));
+    thread sustain_zone_fx(level._effect["stunning_burst_sustain_br"], var_02 + (0, 0, var_03));
   } else {
     playFX(common_scripts\utility::func_44F5("stunning_burst_aoe"), var_02 + (0, 0, var_03));
     lib_0378::func_8D74("aud_stunning_burst_use");
@@ -64,7 +64,7 @@ func_3662() {
 
   var_0B = [];
   foreach(var_0D in level.players) {
-    if(var_0D != self && maps\mp\_utility::func_57A0(var_0D)) {
+    if(var_0D != self && maps\mp\_utility::isreallyalive(var_0D)) {
       var_0B[var_0B.size] = var_0D;
     }
   }
@@ -100,7 +100,7 @@ func_0A31(param_00) {
   if(lib_0547::func_4BA7("specialty_class_on_your_feet_zm")) {
     if(isPlayer(param_00) && lib_0547::func_577E(param_00)) {
       param_00 lib_0553::func_53E2(self);
-      playFX(level.var_611["zmb_blood_player_heal"], param_00.origin, anglesToForward(param_00.angles));
+      playFX(level._effect["zmb_blood_player_heal"], param_00.origin, anglesToForward(param_00.angles));
       param_00 luinotifyeventextraplayer(&"add_teammate_mod_buffs", 3, "specialty_class_on_your_feet_zm", 1, self);
     }
   }

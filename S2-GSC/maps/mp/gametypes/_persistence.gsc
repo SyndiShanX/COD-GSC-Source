@@ -4,7 +4,7 @@
 **********************************************/
 
 init() {
-  level.var_6F79 = [];
+  level.persistentdatainfo = [];
   maps\mp\gametypes\_class::init();
   maps\mp\gametypes\_missions::init();
   maps\mp\gametypes\_playercards::init();
@@ -13,12 +13,12 @@ init() {
     return;
   }
 
-  level thread func_A0ED();
+  level thread updatebufferedstats();
   level thread func_A1C2();
 }
 
 func_529D() {
-  self.var_1CEF = [];
+  self.bufferedstats = [];
   if(isbot(self)) {
     self resetplayerdata(common_scripts\utility::func_46AE());
     self resetplayerdata(common_scripts\utility::getstatgamemode());
@@ -28,38 +28,38 @@ func_529D() {
   }
 
   if(maps\mp\_utility::rankingenabled()) {
-    self.var_1CEF["totalShots"] = spawnStruct();
-    self.var_1CEF["totalShots"].var_A281 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "totalShots");
-    self.var_1CEF["totalShots"].var_2F14 = 0;
-    self.var_1CEF["accuracy"] = spawnStruct();
-    self.var_1CEF["accuracy"].var_A281 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "accuracy");
-    self.var_1CEF["accuracy"].var_2F14 = 0;
-    self.var_1CEF["misses"] = spawnStruct();
-    self.var_1CEF["misses"].var_A281 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "misses");
-    self.var_1CEF["misses"].var_2F14 = 0;
-    self.var_1CEF["hits"] = spawnStruct();
-    self.var_1CEF["hits"].var_A281 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "hits");
-    self.var_1CEF["hits"].var_2F14 = 0;
-    self.var_1CEF["timePlayedAllies"] = spawnStruct();
-    self.var_1CEF["timePlayedAllies"].var_A281 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedAllies");
-    self.var_1CEF["timePlayedAllies"].var_2F14 = 0;
-    self.var_1CEF["timePlayedOpfor"] = spawnStruct();
-    self.var_1CEF["timePlayedOpfor"].var_A281 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedOpfor");
-    self.var_1CEF["timePlayedOpfor"].var_2F14 = 0;
-    self.var_1CEF["timePlayedOther"] = spawnStruct();
-    self.var_1CEF["timePlayedOther"].var_A281 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedOther");
-    self.var_1CEF["timePlayedOther"].var_2F14 = 0;
-    self.var_1CEF["timePlayedTotal"] = spawnStruct();
-    self.var_1CEF["timePlayedTotal"].var_A281 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedTotal");
-    self.var_1CEF["timePlayedTotal"].var_2F14 = 0;
+    self.bufferedstats["totalShots"] = spawnStruct();
+    self.bufferedstats["totalShots"].value = self getrankedplayerdata(common_scripts\utility::func_46AE(), "totalShots");
+    self.bufferedstats["totalShots"].var_2F14 = 0;
+    self.bufferedstats["accuracy"] = spawnStruct();
+    self.bufferedstats["accuracy"].value = self getrankedplayerdata(common_scripts\utility::func_46AE(), "accuracy");
+    self.bufferedstats["accuracy"].var_2F14 = 0;
+    self.bufferedstats["misses"] = spawnStruct();
+    self.bufferedstats["misses"].value = self getrankedplayerdata(common_scripts\utility::func_46AE(), "misses");
+    self.bufferedstats["misses"].var_2F14 = 0;
+    self.bufferedstats["hits"] = spawnStruct();
+    self.bufferedstats["hits"].value = self getrankedplayerdata(common_scripts\utility::func_46AE(), "hits");
+    self.bufferedstats["hits"].var_2F14 = 0;
+    self.bufferedstats["timePlayedAllies"] = spawnStruct();
+    self.bufferedstats["timePlayedAllies"].value = self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedAllies");
+    self.bufferedstats["timePlayedAllies"].var_2F14 = 0;
+    self.bufferedstats["timePlayedOpfor"] = spawnStruct();
+    self.bufferedstats["timePlayedOpfor"].value = self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedOpfor");
+    self.bufferedstats["timePlayedOpfor"].var_2F14 = 0;
+    self.bufferedstats["timePlayedOther"] = spawnStruct();
+    self.bufferedstats["timePlayedOther"].value = self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedOther");
+    self.bufferedstats["timePlayedOther"].var_2F14 = 0;
+    self.bufferedstats["timePlayedTotal"] = spawnStruct();
+    self.bufferedstats["timePlayedTotal"].value = self getrankedplayerdata(common_scripts\utility::func_46AE(), "timePlayedTotal");
+    self.bufferedstats["timePlayedTotal"].var_2F14 = 0;
   }
 
-  self.var_1CEE = [];
-  self.var_1CEE["round"] = [];
-  self.var_1CEE["round"]["timePlayed"] = self getrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "timePlayed");
+  self.bufferedchildstats = [];
+  self.bufferedchildstats["round"] = [];
+  self.bufferedchildstats["round"]["timePlayed"] = self getrankedplayerdata(common_scripts\utility::getstatgamemode(), "round", "timePlayed");
 }
 
-func_932F(param_00) {
+statget(param_00) {
   if(maps\mp\_utility::func_585F()) {
     if(param_00 == "experience") {
       param_00 = "totalXP";
@@ -85,7 +85,7 @@ statset(param_00, param_01) {
   self setrankedplayerdata(common_scripts\utility::func_46AE(), param_00, param_01);
 }
 
-func_9314(param_00, param_01, param_02) {
+statadd(param_00, param_01, param_02) {
   if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::practiceroundgame()) {
     return;
   }
@@ -141,7 +141,7 @@ statsetchild(param_00, param_01, param_02) {
   self setrankedplayerdata(common_scripts\utility::func_46AE(), param_00, param_01, param_02);
 }
 
-func_9317(param_00, param_01, param_02) {
+stataddchild(param_00, param_01, param_02) {
   if(!maps\mp\_utility::rankingenabled() || maps\mp\_utility::practiceroundgame()) {
     return;
   }
@@ -154,29 +154,29 @@ func_9317(param_00, param_01, param_02) {
   self setrankedplayerdata(common_scripts\utility::func_46AE(), param_00, param_01, var_03 + param_02);
 }
 
-func_9332(param_00, param_01) {
+statgetchildbuffered(param_00, param_01) {
   if(!maps\mp\_utility::rankingenabled()) {
     return 0;
   }
 
-  return self.var_1CEE[param_00][param_01];
+  return self.bufferedchildstats[param_00][param_01];
 }
 
-func_933B(param_00, param_01, param_02) {
+statsetchildbuffered(param_00, param_01, param_02) {
   if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
 
-  self.var_1CEE[param_00][param_01] = param_02;
+  self.bufferedchildstats[param_00][param_01] = param_02;
 }
 
-func_9318(param_00, param_01, param_02) {
+stataddchildbuffered(param_00, param_01, param_02) {
   if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
 
-  var_03 = func_9332(param_00, param_01);
-  func_933B(param_00, param_01, var_03 + param_02);
+  var_03 = statgetchildbuffered(param_00, param_01);
+  statsetchildbuffered(param_00, param_01, var_03 + param_02);
 }
 
 func_9316(param_00, param_01, param_02) {
@@ -184,16 +184,16 @@ func_9316(param_00, param_01, param_02) {
     return;
   }
 
-  var_03 = func_9330(param_00) + param_01;
+  var_03 = statgetbuffered(param_00) + param_01;
   if(var_03 > param_02) {
     var_03 = param_02;
   }
 
-  if(var_03 < func_9330(param_00)) {
+  if(var_03 < statgetbuffered(param_00)) {
     var_03 = param_02;
   }
 
-  func_9339(param_00, var_03);
+  statsetbuffered(param_00, var_03);
 }
 
 func_9319(param_00, param_01, param_02, param_03) {
@@ -201,47 +201,47 @@ func_9319(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  var_04 = func_9332(param_00, param_01) + param_02;
+  var_04 = statgetchildbuffered(param_00, param_01) + param_02;
   if(var_04 > param_03) {
     var_04 = param_03;
   }
 
-  if(var_04 < func_9332(param_00, param_01)) {
+  if(var_04 < statgetchildbuffered(param_00, param_01)) {
     var_04 = param_03;
   }
 
-  func_933B(param_00, param_01, var_04);
+  statsetchildbuffered(param_00, param_01, var_04);
 }
 
-func_9330(param_00) {
+statgetbuffered(param_00) {
   if(!maps\mp\_utility::rankingenabled()) {
     return 0;
   }
 
-  return self.var_1CEF[param_00].var_A281;
+  return self.bufferedstats[param_00].value;
 }
 
-func_9339(param_00, param_01) {
+statsetbuffered(param_00, param_01) {
   if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
 
-  if(self.var_1CEF[param_00].var_A281 != param_01) {
-    self.var_1CEF[param_00].var_A281 = param_01;
-    self.var_1CEF[param_00].var_2F14 = 1;
+  if(self.bufferedstats[param_00].value != param_01) {
+    self.bufferedstats[param_00].value = param_01;
+    self.bufferedstats[param_00].var_2F14 = 1;
   }
 }
 
-func_9315(param_00, param_01) {
+stataddbuffered(param_00, param_01) {
   if(!maps\mp\_utility::rankingenabled()) {
     return;
   }
 
-  var_02 = func_9330(param_00);
-  func_9339(param_00, var_02 + param_01);
+  var_02 = statgetbuffered(param_00);
+  statsetbuffered(param_00, var_02 + param_01);
 }
 
-func_A0ED() {
+updatebufferedstats() {
   wait(0.15);
   var_00 = 0;
   while(!level.gameended) {
@@ -252,7 +252,7 @@ func_A0ED() {
     }
 
     if(isDefined(level.players[var_00])) {
-      level.players[var_00] func_AAB9();
+      level.players[var_00] writebufferedstats();
       level.players[var_00] func_A195();
     }
 
@@ -260,23 +260,23 @@ func_A0ED() {
   }
 
   foreach(var_02 in level.players) {
-    var_02 func_AAB9();
+    var_02 writebufferedstats();
     var_02 func_A195();
   }
 }
 
-func_AAB9() {
+writebufferedstats() {
   var_00 = maps\mp\_utility::rankingenabled() && !maps\mp\_utility::practiceroundgame() && !isDefined(level.disableallplayerstats) && level.disableallplayerstats;
   if(var_00) {
-    foreach(var_03, var_02 in self.var_1CEF) {
+    foreach(var_03, var_02 in self.bufferedstats) {
       if(var_02.var_2F14 == 1) {
-        self setrankedplayerdata(common_scripts\utility::func_46AE(), var_03, var_02.var_A281);
+        self setrankedplayerdata(common_scripts\utility::func_46AE(), var_03, var_02.value);
         var_02.var_2F14 = 0;
       }
     }
   }
 
-  foreach(var_03, var_02 in self.var_1CEE) {
+  foreach(var_03, var_02 in self.bufferedchildstats) {
     foreach(var_07, var_06 in var_02) {
       if(var_03 == "round") {
         self setrankedplayerdata(common_scripts\utility::getstatgamemode(), var_03, var_07, var_06);
@@ -313,7 +313,7 @@ func_50FF(param_00, param_01, param_02) {
     var_05 = var_04 + param_02;
     self setrankedplayerdata(common_scripts\utility::func_46AE(), "weaponStats", var_03, param_01, var_05);
     if(param_01 == "kills") {
-      if(maps\mp\_utility::func_5699(var_03)) {
+      if(maps\mp\_utility::iscacprimaryweapon(var_03)) {
         var_06 = maps\mp\_utility::func_452B(self getrankedplayerdata(common_scripts\utility::func_46AE(), "bestPrimaryID"));
         if(var_06 != var_03) {
           var_07 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "weaponStats", var_06, "kills");
@@ -533,7 +533,7 @@ func_A195() {
   }
 
   var_02 = function_02FF(var_02, "_sp");
-  if(!maps\mp\_utility::func_5699(var_02) && !maps\mp\_utility::iscacsecondaryweapon(var_02) && !maps\mp\gametypes\_weapons::func_5747(var_02) && !maps\mp\gametypes\_weapons::func_57F6(var_02)) {
+  if(!maps\mp\_utility::iscacprimaryweapon(var_02) && !maps\mp\_utility::iscacsecondaryweapon(var_02) && !maps\mp\gametypes\_weapons::func_5747(var_02) && !maps\mp\gametypes\_weapons::func_57F6(var_02)) {
     return;
   }
 
@@ -656,7 +656,7 @@ func_A195() {
 
 func_A1C2() {
   level waittill("game_ended");
-  if(!maps\mp\_utility::func_602B()) {
+  if(!maps\mp\_utility::matchmakinggame()) {
     return;
   }
 
@@ -671,7 +671,7 @@ func_A1C2() {
   }
 
   incrementcounter("global_minutes", int(var_05 / 60));
-  if(!maps\mp\_utility::func_A872()) {
+  if(!maps\mp\_utility::waslastround()) {
     return;
   }
 

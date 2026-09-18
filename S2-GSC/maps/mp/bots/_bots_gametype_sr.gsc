@@ -43,7 +43,7 @@ func_95B3() {
 
     var_00 = maps / mp / bots / _bots_gametype_conf::func_19D1(0);
     if(var_00.size > 0) {
-      var_01 = common_scripts\utility::func_7A33(var_00);
+      var_01 = common_scripts\utility::random(var_00);
       if(distancesquared(self.origin, var_01.var_95A6.var_28D4) < 10000) {
         func_913E(var_01.var_95A6);
       } else if(self.team == game["attackers"]) {

@@ -267,13 +267,13 @@ func_90BB(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   if(isDefined(level.var_1CC0) && !isDefined(param_02) && isDefined(param_02.ignoreforcedzombietype)) {
-    param_01 = common_scripts\utility::func_7A33(level.var_1CC0);
+    param_01 = common_scripts\utility::random(level.var_1CC0);
   }
 
   var_0B = lib_0547::func_A51(param_01);
   param_06 = param_06 &!common_scripts\utility::func_562E(var_0B.var_2F9B);
   if(isDefined(level.var_1CBF)) {
-    param_02 = common_scripts\utility::func_7A33(level.var_1CBF);
+    param_02 = common_scripts\utility::random(level.var_1CBF);
   }
 
   if(isDefined(param_02)) {
@@ -308,11 +308,11 @@ func_90BB(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   if(!common_scripts\utility::func_3C83("spawn_zombie_lock")) {
-    common_scripts\utility::func_3C87("spawn_zombie_lock");
+    common_scripts\utility::flag_init("spawn_zombie_lock");
   }
 
-  common_scripts\utility::func_3CA9("spawn_zombie_lock");
-  common_scripts\utility::func_3C8F("spawn_zombie_lock");
+  common_scripts\utility::flag_waitopen("spawn_zombie_lock");
+  common_scripts\utility::flag_set("spawn_zombie_lock");
   if(param_05 && !func_1F70(var_0B.var_A4B)) {
     if(func_7B4B()) {
       var_0E = 0;
@@ -484,7 +484,7 @@ func_4650(param_00) {
     }
   }
 
-  return common_scripts\utility::func_7A33(var_01);
+  return common_scripts\utility::random(var_01);
 }
 
 func_2AA5() {
@@ -720,7 +720,7 @@ monitorstuckfortraversal() {
       continue;
     }
 
-    var_07 = getgroundposition(var_04.origin, self.var_14F);
+    var_07 = getgroundposition(var_04.origin, self.radius);
     if(!isDefined(var_07)) {
       var_07 = var_04.origin;
     }
@@ -1180,7 +1180,7 @@ func_6BD3(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   level notify("zombie_damaged", self, param_01);
   maps / mp / agents / _agents::func_A40(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
   if(isalive(self)) {
-    if(isPlayer(param_01) && common_scripts\utility::func_562E(param_01.var_5F5C) && param_01 lib_0547::func_4BA7("specialty_class_suppressive_fire_zm") && maps\mp\_utility::func_5694(param_04)) {
+    if(isPlayer(param_01) && common_scripts\utility::func_562E(param_01.var_5F5C) && param_01 lib_0547::func_4BA7("specialty_class_suppressive_fire_zm") && maps\mp\_utility::isbulletdamage(param_04)) {
       maps\mp\zombies\_zombies_perks::func_F38(param_01);
     }
 
@@ -1318,7 +1318,7 @@ func_6704() {
   }
 
   var_05 = self[[maps / mp / agents / _agent_utility::func_A59("get_action_params")]]();
-  var_06 = "turn_" + self.var_108;
+  var_06 = "turn_" + self.vectortoangles;
   var_07 = maps / mp / agents / _scripted_agent_anim_util::func_87C(var_06, var_05);
   if(!isDefined(var_07)) {
     return;
@@ -1412,7 +1412,7 @@ func_6BD0() {
                 self.var_1E22.var_266C = var_05;
                 self.var_1E22.var_266F = var_06;
                 var_0B = self[[maps / mp / agents / _agent_utility::func_A59("get_action_params")]]();
-                var_0C = "turn_" + self.var_108;
+                var_0C = "turn_" + self.vectortoangles;
                 self.var_1E22.var_6748 = func_9031(var_0C, var_0B, var_06);
                 var_0C = var_0C + "_quick";
                 self.var_1E22.var_789D = func_9031(var_0C, var_0B, var_06);
@@ -1469,14 +1469,14 @@ func_AC04() {
     self.var_4013 = 1;
     self.var_6481 = undefined;
     if(isDefined(self.var_297D)) {
-      self.var_108 = [[self.var_297D]]();
+      self.vectortoangles = [[self.var_297D]]();
     } else if(!maps / mp / agents / humanoid / _humanoid_move::is_passive_exempt() && common_scripts\utility::func_3794("zombie_passive")) {
-      self.var_108 = "walk";
+      self.vectortoangles = "walk";
     } else {
-      self.var_108 = [[maps / mp / agents / _agent_utility::func_A59("move_mode")]]();
+      self.vectortoangles = [[maps / mp / agents / _agent_utility::func_A59("move_mode")]]();
     }
 
-    self.sharpturnnotifydist = level.var_AC58[self.var_108];
+    self.sharpturnnotifydist = level.var_AC58[self.vectortoangles];
     if(maps / mp / agents / humanoid / _humanoid_util::func_56BC()) {
       self.sharpturnnotifydist = 100;
       self.var_64C2 = self.var_4013;
@@ -1678,7 +1678,7 @@ func_AC22() {
   if(common_scripts\utility::func_3794("zombie_passive") && !common_scripts\utility::func_562E(self.ispassiveexempt)) {
     var_00["move_speed"] = "passive";
   } else {
-    var_00["move_speed"] = self.var_108;
+    var_00["move_speed"] = self.vectortoangles;
   }
 
   return var_00;
@@ -1687,7 +1687,7 @@ func_AC22() {
 func_6BD7(param_00, param_01, param_02) {
   lib_0547::func_6BAA(param_00, param_01, param_02);
   self.var_220D = ::func_6BD0;
-  self.var_648E = common_scripts\utility::func_7A33(getarraykeys(level.var_87E["zombie_generic"]["move_style"]));
+  self.var_648E = common_scripts\utility::random(getarraykeys(level.var_87E["zombie_generic"]["move_style"]));
   lib_0378::func_8D74("onZombieSpawn");
   thread lib_0547::func_4A58();
   var_03 = lib_0547::func_AC4B(self.origin, "spawn");
@@ -1983,7 +1983,7 @@ func_63A6() {
     var_00 = 0;
     var_01 = 0;
     foreach(var_03 in level.players) {
-      if(maps\mp\_utility::func_57A0(var_03)) {
+      if(maps\mp\_utility::isreallyalive(var_03)) {
         var_00++;
       }
 

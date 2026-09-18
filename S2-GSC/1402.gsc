@@ -141,7 +141,7 @@ func_259C(param_00) {
     if(isDefined(self.var_A9C1) && self hasweapon(self.var_A9C1)) {
       lib_0586::func_790(self.var_A9C1);
       if(self.var_A9C1 == "flamethrower_zm") {
-        self method_802E("npc_usa_flamethrower_backpack");
+        self detach("npc_usa_flamethrower_backpack");
       }
     }
 
@@ -201,7 +201,7 @@ func_259D(param_00) {
   }
 
   if(self.var_A9C1 == "flamethrower_zm") {
-    self method_802E("npc_usa_flamethrower_backpack");
+    self detach("npc_usa_flamethrower_backpack");
   }
 
   self.var_A9C1 = undefined;

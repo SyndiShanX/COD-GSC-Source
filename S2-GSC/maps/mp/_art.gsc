@@ -211,7 +211,7 @@ _clearalltextafterhudelem() {
   }
 
   level._clearalltextafterhudelem = 1;
-  self method_80BE();
+  self clearalltextafterhudelem();
   wait 0.05;
   level._clearalltextafterhudelem = 0;
 }

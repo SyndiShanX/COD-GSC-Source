@@ -10,8 +10,8 @@ func_3213(param_00) {
   lib_04FF::func_6965("pointsPerSiteOwned", 1);
   lib_04FF::func_6963("captureTime", 3, [1, 2, 3, 5, 7.5, 10]);
   self.var_321D = [];
-  var_01 = common_scripts\utility::func_46B7(self.var_1A2, "targetname");
-  var_02 = getEntArray(self.var_1A2, "targetname");
+  var_01 = common_scripts\utility::func_46B7(self.target, "targetname");
+  var_02 = getEntArray(self.target, "targetname");
   self.var_321D = common_scripts\utility::func_F73(var_01, var_02);
   foreach(var_04 in self.var_321D) {
     var_04 thread func_3215(self);
@@ -47,8 +47,8 @@ func_3214() {
     if(var_05 >= lib_04FF::func_45D0("objectiveScoreGoal")) {
       lib_04FF::func_6935(self.var_695A);
       wait(1);
-      var_03 maps\mp\gametypes\_hud_util::func_2DCC();
-      var_04 maps\mp\gametypes\_hud_util::func_2DCC();
+      var_03 maps\mp\gametypes\_hud_util::destroyelem();
+      var_04 maps\mp\gametypes\_hud_util::destroyelem();
       return;
     }
 
@@ -92,7 +92,7 @@ func_3215(param_00) {
 
 func_6BBF(param_00) {
   var_01 = gettime();
-  var_02 = param_00.var_1A7;
+  var_02 = param_00.team;
   var_03 = maps\mp\gametypes\_gameobjects::func_45F7();
   self.var_1FC1 = gettime();
   self.var_4B25 = 1;
@@ -207,6 +207,6 @@ func_933E(param_00, param_01, param_02) {
 func_2CDB(param_00, param_01) {
   level endon("game_ended");
   wait(0.1);
-  maps\mp\_utility::func_A790();
-  maps\mp\_utility::func_5C39(param_00, param_01);
+  maps\mp\_utility::waittillslowprocessallowed();
+  maps\mp\_utility::leaderdialog(param_00, param_01);
 }

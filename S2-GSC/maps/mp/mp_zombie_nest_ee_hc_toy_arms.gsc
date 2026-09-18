@@ -6,7 +6,7 @@
 main() {
   level.var_665D = [];
   level.var_665F = [randomint(12) + 1, randomint(12) + 1, randomint(12) + 1];
-  common_scripts\utility::func_3C87("flag_nest_hc_ee_record_acquired");
+  common_scripts\utility::flag_init("flag_nest_hc_ee_record_acquired");
   var_00 = func_52EE();
   lib_0557::func_4BC9("toy 0 get");
   lib_0557::func_4BC9("toy 1 get");
@@ -30,13 +30,13 @@ func_7E3C(param_00, param_01) {
   var_02 = getEnt("nest_hc_record_drawer", "targetname");
   var_03 = common_scripts\utility::func_46B5(var_02.target, "targetname");
   param_00 show();
-  param_00 method_8449(var_02);
+  param_00 linktosynchronizedparent(var_02);
   var_02 lib_0378::func_8D74("aud_spinning_top_drawer_open");
   var_02 moveTo(var_03.origin, 1.5, 0, 0.5);
   wait(1.5);
   param_00 unlink();
   param_00 func_A665(param_01);
-  common_scripts\utility::func_3C8F("flag_nest_hc_ee_record_acquired");
+  common_scripts\utility::flag_set("flag_nest_hc_ee_record_acquired");
   param_00 delete();
   level.var_4BD3 = 1;
   var_02 lib_0378::func_8D74("aud_spinning_top_record_obtained");
@@ -96,7 +96,7 @@ func_8573(param_00, param_01) {
     }
   }
 
-  var_0A = common_scripts\utility::func_7A33(var_02);
+  var_0A = common_scripts\utility::random(var_02);
   foreach(var_04 in var_02) {
     if(var_04 == var_0A) {
       continue;
@@ -131,9 +131,9 @@ func_171D(param_00) {
   foreach(var_07 in param_00["shootable_arms"]) {
     var_0E = var_01;
     var_01++;
-    common_scripts\utility::func_3C87("flag_nest_hc_ee_has_arm_" + var_01);
+    common_scripts\utility::flag_init("flag_nest_hc_ee_has_arm_" + var_01);
     var_08 = common_scripts\utility::func_46B7(var_07.target, "targetname");
-    var_0F = common_scripts\utility::func_7A33(var_08);
+    var_0F = common_scripts\utility::random(var_08);
     var_0F func_8F6F(var_0E);
   }
 
@@ -306,7 +306,7 @@ func_8B1B() {
   }
 
   level.var_665D = common_scripts\utility::func_F6F(level.var_665D, self.var_F5E + 1);
-  common_scripts\utility::func_3C8F("flag_nest_hc_ee_has_arm_" + self.var_F5E + 1);
+  common_scripts\utility::flag_set("flag_nest_hc_ee_has_arm_" + self.var_F5E + 1);
   lib_0547::func_AC40();
   self delete();
 }

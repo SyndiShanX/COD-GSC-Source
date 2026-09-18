@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  lib_049C::func_F9();
-  lib_0404::func_F9();
-  lib_049B::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_battleship_2_lighting::func_F9();
-  maps\mp\mp_battleship_2_aud::func_F9();
+  lib_049C::main();
+  lib_0404::main();
+  lib_049B::main();
+  maps\mp\_load::main();
+  maps\mp\mp_battleship_2_lighting::main();
+  maps\mp\mp_battleship_2_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_battleship_2");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -44,17 +44,17 @@ func_00F9() {
   setDvar("5800", 3);
   setDvar("1512", "1");
   setDvar("3220", "20");
-  level thread func_6B6C();
+  level thread onplayerconnect();
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
-    var_00 thread func_6B82();
+    var_00 thread onplayerspawned();
   }
 }
 
-func_6B82() {
+onplayerspawned() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
@@ -190,7 +190,7 @@ func_89F9() {
   level.var_99D8 = 2.5;
   level.var_99D9 = common_scripts\utility::func_8FFC();
   level.var_99D9.var_1D = (0, 0, 0);
-  level.var_99D9.var_116 = (0, 0, 2032);
+  level.var_99D9.origin = (0, 0, 2032);
   wait(0.2);
   level.var_99D9.var_1D = (0, 0, -0.5 * level.var_99D8);
   playFXOnTag(common_scripts\utility::func_44F5("mp_bat_vista_fog"), level.var_99D9, "tag_origin");

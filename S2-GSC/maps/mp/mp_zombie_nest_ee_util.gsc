@@ -112,7 +112,7 @@ func_A6A0(param_00, param_01) {
     }
   }
 
-  playFX(level.var_611["zmb_hilt_sphere_explosion"], param_00.origin, anglesToForward(param_00.angles));
+  playFX(level._effect["zmb_hilt_sphere_explosion"], param_00.origin, anglesToForward(param_00.angles));
   level.var_4D74 delete();
   var_05 = getEnt("nest_ee_shard_intro_start_trig", "targetname");
   var_05 common_scripts\utility::func_9DA3();
@@ -124,7 +124,7 @@ func_A6A0(param_00, param_01) {
   }
 
   if(!isDefined(var_06)) {
-    var_06 = common_scripts\utility::func_7A33(level.players);
+    var_06 = common_scripts\utility::random(level.players);
   }
 
   var_06 thread lib_0367::func_8E3B("conv_hiltrecovered");
@@ -136,7 +136,7 @@ func_A6A0(param_00, param_01) {
   var_05 waittill("trigger", var_04);
   var_05 common_scripts\utility::func_9D9F();
   lib_0378::func_8D74("aud_pickup_raven_sword");
-  common_scripts\utility::func_3C8F("flag_hilt_collected");
+  common_scripts\utility::flag_set("flag_hilt_collected");
   if(isDefined(var_02)) {
     var_02 delete();
   }
@@ -470,10 +470,10 @@ func_2024(param_00, param_01, param_02, param_03) {
     var_07 = var_04;
   }
 
-  playFXOnTag(level.var_611[var_06], param_00, var_07);
-  playFXOnTag(level.var_611["zmb_gk_claw_battery_charge_1"], level.var_3571, "flap1_shroud");
-  playFXOnTag(level.var_611["zmb_gk_claw_battery_charge_2"], level.var_3571, "flap2_shroud");
-  playFXOnTag(level.var_611["zmb_gk_claw_battery_charge_3"], level.var_3571, "flap3_shroud");
+  playFXOnTag(level._effect[var_06], param_00, var_07);
+  playFXOnTag(level._effect["zmb_gk_claw_battery_charge_1"], level.var_3571, "flap1_shroud");
+  playFXOnTag(level._effect["zmb_gk_claw_battery_charge_2"], level.var_3571, "flap2_shroud");
+  playFXOnTag(level._effect["zmb_gk_claw_battery_charge_3"], level.var_3571, "flap3_shroud");
   lib_0378::func_8D74("zombie_soul_suck", var_04.origin, param_00.origin);
   wait(0.45);
   var_05 delete();
@@ -507,14 +507,14 @@ func_283C(param_00, param_01, param_02, param_03, param_04, param_05) {
 }
 
 func_9066(param_00, param_01, param_02, param_03, param_04) {
-  if(!isDefined(level.var_611[param_03])) {
+  if(!isDefined(level._effect[param_03])) {
     return;
   }
 
   var_05 = spawn("script_model", param_02);
   var_05 setModel("tag_origin");
   playFXOnTag(common_scripts\utility::func_44F5(param_03), var_05, "tag_origin");
-  var_05 method_8449(param_00, param_01);
+  var_05 linktosynchronizedparent(param_00, param_01);
   var_05 thread func_36EC(param_03, param_04);
 }
 
@@ -639,7 +639,7 @@ func_A6A1(param_00, param_01, param_02, param_03, param_04) {
   for(;;) {
     param_00 waittill("fire_touched");
     if(!common_scripts\utility::func_562E(param_00.var_5685) && common_scripts\utility::func_562E(level.var_665A)) {
-      if(distance2d(param_00.origin, param_01.origin) < param_01.var_14F) {
+      if(distance2d(param_00.origin, param_01.origin) < param_01.radius) {
         param_00.var_5685 = 1;
         param_00 thread func_2FAD();
         param_00 thread func_8CD6(param_01, param_02, param_03);
@@ -1164,7 +1164,7 @@ func_74D2() {
 func_08A8() {
   var_00 = getEntArray("com_control_elec", "targetname");
   foreach(var_02 in var_00) {
-    var_02.schnelleeffects = spawnfx(level.var_611["zmb_electroschnelle_reg_chg_wv"], var_02.origin, anglesToForward(var_02.angles));
+    var_02.schnelleeffects = spawnfx(level._effect["zmb_electroschnelle_reg_chg_wv"], var_02.origin, anglesToForward(var_02.angles));
     triggerfx(var_02.schnelleeffects);
   }
 
@@ -1176,9 +1176,9 @@ func_08A8() {
     var_09 setscriptablepartstate("inner", "up", 0);
   }
 
-  playFXOnTag(level.var_611["zmb_gk_claw_battery_full_1"], level.var_3571, "flap1_shroud");
-  playFXOnTag(level.var_611["zmb_gk_claw_battery_full_2"], level.var_3571, "flap2_shroud");
-  playFXOnTag(level.var_611["zmb_gk_claw_battery_full_3"], level.var_3571, "flap3_shroud");
+  playFXOnTag(level._effect["zmb_gk_claw_battery_full_1"], level.var_3571, "flap1_shroud");
+  playFXOnTag(level._effect["zmb_gk_claw_battery_full_2"], level.var_3571, "flap2_shroud");
+  playFXOnTag(level._effect["zmb_gk_claw_battery_full_3"], level.var_3571, "flap3_shroud");
   wait(var_05);
   foreach(var_09 in var_04) {
     var_09 setscriptablepartstate("inner", "up_idle", 0);
@@ -1199,11 +1199,11 @@ func_8A53() {
   var_00 = spawnStruct();
   var_00.var_6FC5 = getEnt("ww_part_01_pickup", "targetname");
   var_00.var_6FC2 = getEnt(var_00.var_6FC5.target, "targetname");
-  playFXOnTag(level.var_611["zmb_tesla_barrel_prop_idle"], var_00.var_6FC2, "TAG_ORIGIN");
+  playFXOnTag(level._effect["zmb_tesla_barrel_prop_idle"], var_00.var_6FC2, "TAG_ORIGIN");
   var_01 = spawnStruct();
   var_01.var_6FC5 = getEnt("ww_part_02_pickup", "targetname");
   var_01.var_6FC2 = getEnt(var_01.var_6FC5.target, "targetname");
-  playFXOnTag(level.var_611["zmb_tesla_tube_prop_idle"], var_01.var_6FC2, "TAG_ORIGIN");
+  playFXOnTag(level._effect["zmb_tesla_tube_prop_idle"], var_01.var_6FC2, "TAG_ORIGIN");
   var_00.var_6FC5 common_scripts\utility::func_9D9F();
   var_01.var_6FC5 common_scripts\utility::func_9D9F();
   var_00.var_6FC5 useTriggerRequireLookAt();
@@ -1236,7 +1236,7 @@ func_8BEC(param_00, param_01, param_02, param_03) {
   self.var_6FC5 common_scripts\utility::func_9DA3();
   self.var_6FC5 waittill("trigger", var_04);
   if(isDefined(param_01)) {
-    common_scripts\utility::func_3C8F(param_01);
+    common_scripts\utility::flag_set(param_01);
   }
 
   self.var_6FC5 common_scripts\utility::func_9D9F();
@@ -1349,7 +1349,7 @@ func_7212(param_00) {
 
 func_4649() {
   var_00 = func_440D();
-  return common_scripts\utility::func_7A33(var_00);
+  return common_scripts\utility::random(var_00);
 }
 
 func_440D() {
@@ -1435,7 +1435,7 @@ func_44BA(param_00) {
     level.var_2932++;
   }
 
-  return common_scripts\utility::func_F92(var_02);
+  return common_scripts\utility::array_randomize(var_02);
 }
 
 func_44BB(param_00) {

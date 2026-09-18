@@ -18,7 +18,7 @@ func_4766() {
   lib_0555::func_83DD("jitb", self);
   self.var_4B72 = 1;
   thread func_73F3();
-  self method_831E("jack_in_box_decoy_zm");
+  self setoffhandsecondaryclass("jack_in_box_decoy_zm");
   lib_0586::func_78C("jack_in_box_decoy_zm");
   self setweaponammoclip("jack_in_box_decoy_zm", 3);
 }

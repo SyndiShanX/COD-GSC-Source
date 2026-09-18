@@ -6,9 +6,9 @@
 dig_trap_init() {
   level.var_9CFB = 1;
   level.var_62B5 = 1;
-  level.var_611["trap_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_small");
-  level.var_611["trap_not_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_blink_small");
-  level.var_611["trap_glint"] = loadfx("vfx/map/train/tra_sniper_glint");
+  level._effect["trap_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_small");
+  level._effect["trap_not_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_blink_small");
+  level._effect["trap_glint"] = loadfx("vfx/map/train/tra_sniper_glint");
   level.var_9CD1["ready_to_active"] = undefined;
   level.var_9CD1["active_to_cooldown"] = undefined;
   level.var_9CD1["cooldown_to_active"] = undefined;
@@ -71,7 +71,7 @@ trap_altar_spikes(param_00) {
 trap_altar_spikes_handle_damage() {
   self.var_565F = 1;
   var_00 = common_scripts\utility::func_46B5("med_trap_fx_point", "targetname");
-  var_01 = spawnfx(level.var_611["dlc_zmb_dig_02_spike_trap_on"], var_00.origin, anglesToForward(var_00.angles));
+  var_01 = spawnfx(level._effect["dlc_zmb_dig_02_spike_trap_on"], var_00.origin, anglesToForward(var_00.angles));
   triggerfx(var_01);
   thread trap_altar_spikes_damage_zombies(var_00);
   thread trap_altar_spikes_damage_players(var_00);
@@ -91,7 +91,7 @@ trap_altar_spikes_damage_zombies(param_00) {
 
       var_04 = distance2d(var_03.origin, param_00.origin);
       if(var_04 > 140 && var_04 < 242 && var_03.origin[2] < self.origin[2]) {
-        playFX(level.var_611["zmb_med_trap_gib"], var_03.origin + (0, 0, 50), anglesToForward(var_03.angles));
+        playFX(level._effect["zmb_med_trap_gib"], var_03.origin + (0, 0, 50), anglesToForward(var_03.angles));
         wait 0.05;
         var_05 = gettime();
         if(isalive(var_03) && var_03.var_BA4 != "traverse") {

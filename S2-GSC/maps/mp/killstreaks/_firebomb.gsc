@@ -56,7 +56,7 @@ func_27EC(param_00) {
 
 func_749B(param_00, param_01) {
   var_02 = undefined;
-  var_02 = spawnfx(level.var_611["fire_bomb_fire"], param_00);
+  var_02 = spawnfx(level._effect["fire_bomb_fire"], param_00);
   triggerfx(var_02);
   wait(12);
   if(isDefined(var_02)) {

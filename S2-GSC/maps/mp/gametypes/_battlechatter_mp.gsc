@@ -93,10 +93,10 @@ init() {
   }
 
   if(isDefined(level.add_bcs_location_mappings_callback)) {
-    level.var_166F = [];
+    level.bcs_location_mappings = [];
     [[level.add_bcs_location_mappings_callback]]();
-    common_scripts\_bcs_location_trigs::func_1674();
-    level.var_166F = undefined;
+    common_scripts\_bcs_location_trigs::bcs_trigs_assign_aliases();
+    level.bcs_location_mappings = undefined;
     anim.var_5E5E = [];
   } else {
     common_scripts\_bcs_location_trigs::func_1671();
@@ -184,7 +184,7 @@ func_486A() {
     var_02 = common_scripts\utility::func_98E7(isDefined(level.var_486C), level.var_486C, []);
     var_03 = common_scripts\utility::func_98E7(isDefined(level.var_6248), level.var_6248, []);
     var_04 = common_scripts\utility::func_98E7(isDefined(level.var_9BB5), level.var_9BB5, []);
-    if(var_02.size + var_03.size + var_04.size < 1 || !maps\mp\_utility::func_57A0(self)) {
+    if(var_02.size + var_03.size + var_04.size < 1 || !maps\mp\_utility::isreallyalive(self)) {
       wait 0.05;
       continue;
     }
@@ -406,7 +406,7 @@ func_1659() {
     self.var_1656 = 0;
     self waittill("sprint_melee_charge_begin");
     if(!maps\mp\_utility::func_585F()) {
-      self method_8626("bayo_submix");
+      self setaltsceneobj("bayo_submix");
     } else if(isDefined(self.nobayocharge) && self.nobayocharge) {
       continue;
     }
@@ -620,7 +620,7 @@ func_2030() {
       continue;
     }
 
-    if(!maps\mp\_utility::func_57A0(var_02)) {
+    if(!maps\mp\_utility::isreallyalive(var_02)) {
       continue;
     }
 
@@ -666,7 +666,7 @@ func_998F() {
     }
 
     foreach(var_04 in var_00) {
-      if(isDefined(var_04) && maps\mp\_utility::func_57A0(var_04) && !var_04 maps\mp\_utility::_hasperk("specialty_coldblooded") && distancesquared(self.origin, var_04.origin) < var_02) {
+      if(isDefined(var_04) && maps\mp\_utility::isreallyalive(var_04) && !var_04 maps\mp\_utility::_hasperk("specialty_coldblooded") && distancesquared(self.origin, var_04.origin) < var_02) {
         var_05 = var_04 func_4709(self);
         var_01 = var_04;
         if(isDefined(var_05) && func_1F69("callout_location") && func_3EB6(4840000)) {
@@ -845,7 +845,7 @@ func_32B5(param_00, param_01) {
         continue;
       }
 
-      if(!maps\mp\_utility::func_57A0(var_08)) {
+      if(!maps\mp\_utility::isreallyalive(var_08)) {
         continue;
       }
 
@@ -965,7 +965,7 @@ func_A0F4(param_00) {
 
 func_4561() {
   var_00 = func_4087();
-  var_00 = common_scripts\utility::func_F92(var_00);
+  var_00 = common_scripts\utility::array_randomize(var_00);
   if(var_00.size) {
     foreach(var_02 in var_00) {
       if(!func_5E57(var_02)) {
@@ -985,7 +985,7 @@ func_4561() {
 
 func_4709(param_00) {
   var_01 = func_4087();
-  var_01 = common_scripts\utility::func_F92(var_01);
+  var_01 = common_scripts\utility::array_randomize(var_01);
   if(var_01.size) {
     foreach(var_03 in var_01) {
       if(!func_5E57(var_03) && param_00 func_1F33(var_03)) {
@@ -1004,7 +1004,7 @@ func_4709(param_00) {
 }
 
 func_4087() {
-  var_00 = level.var_1672;
+  var_00 = level.bcs_locations;
   var_01 = self getistouchingentities(var_00);
   var_02 = [];
   foreach(var_04 in var_01) {
@@ -1017,8 +1017,8 @@ func_4087() {
 }
 
 func_A097() {
-  if(isDefined(level.var_1672)) {
-    anim.var_1672 = common_scripts\utility::func_FA0(level.var_1672);
+  if(isDefined(level.bcs_locations)) {
+    anim.bcs_locations = common_scripts\utility::func_FA0(level.bcs_locations);
   }
 }
 

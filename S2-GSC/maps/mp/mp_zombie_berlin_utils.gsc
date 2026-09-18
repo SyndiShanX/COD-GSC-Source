@@ -44,7 +44,7 @@ flag_try_set(param_00) {
     return;
   }
 
-  common_scripts\utility::func_3C8F(param_00);
+  common_scripts\utility::flag_set(param_00);
 }
 
 get_special_melee_weapon_flag_name(param_00) {
@@ -452,9 +452,9 @@ radio_system_setup() {
   level.radio_codes["dahme_spreewald"]["Model"]["3"] = 98.1;
   var_00 = getEnt("map_pushpin", "script_noteworthy");
   var_01 = getEnt("map_pushpin_origin", "script_noteworthy");
-  var_00 method_8449(var_01);
+  var_00 linktosynchronizedparent(var_01);
   var_02 = common_scripts\utility::func_46B7("map_pinpoint", "script_noteworthy");
-  var_03 = common_scripts\utility::func_7A33(var_02);
+  var_03 = common_scripts\utility::random(var_02);
   var_01.origin = var_03.origin;
   level.radio_map_location = var_03.var_8260;
   var_04 = 4;
@@ -622,12 +622,12 @@ radio_system_start_tuning() {
 
   var_02 = getEnt("radio_tuner_left", "targetname");
   var_03 = getEnt("radio_tuner_left_knob", "targetname");
-  var_03 method_8449(var_02);
+  var_03 linktosynchronizedparent(var_02);
   var_04 = getEnt("radio_tuner_left_needle", "targetname");
   thread radio_system_handle_tuner(var_02, "left", 1, level.tuner_values["radio_tuner"]["left"], "radio_tuner", var_00, var_04);
   var_05 = getEnt("radio_tuner_right", "targetname");
   var_06 = getEnt("radio_tuner_right_knob", "targetname");
-  var_06 method_8449(var_05);
+  var_06 linktosynchronizedparent(var_05);
   var_07 = getEnt("radio_tuner_right_needle", "targetname");
   thread radio_system_handle_tuner(var_05, "right", 1, level.tuner_values["radio_tuner"]["right"], "radio_tuner", var_01, var_07);
 }
@@ -722,7 +722,7 @@ radio_system_handle_tuner(param_00, param_01, param_02, param_03, param_04, para
   var_0D = undefined;
   if(isDefined(param_06)) {
     var_0D = getEnt(param_06.target, "targetname");
-    param_06 method_8449(var_0D);
+    param_06 linktosynchronizedparent(var_0D);
   }
 
   for(;;) {
@@ -817,14 +817,14 @@ radio_system_update_tuner_needle(param_00, param_01) {
 ____________________airships____________________() {}
 
 airship_straub_summon() {
-  common_scripts\utility::func_3C8F("flag_airship_summoned");
+  common_scripts\utility::flag_set("flag_airship_summoned");
 }
 
 airship_objects_show(param_00) {
   self show();
   self solid();
   if(isDefined(param_00) && param_00) {
-    self method_805F();
+    self saved_actionslotdata();
   }
 }
 
@@ -962,7 +962,7 @@ airship_lowering_handler() {
   }
 
   wait(0.5);
-  common_scripts\utility::func_3C8F("flag_airship_fully_lowered");
+  common_scripts\utility::flag_set("flag_airship_fully_lowered");
 }
 
 airship_lowering_handler_fully_lower() {
@@ -1060,7 +1060,7 @@ airship_turret_think() {
       }
 
       if(var_07.size > 0) {
-        var_0B = common_scripts\utility::func_7A33(level.players);
+        var_0B = common_scripts\utility::random(level.players);
         var_03 = common_scripts\utility::func_4461(var_0B.origin, level.straub_airship.valid_targets);
       } else {
         var_03 = common_scripts\utility::func_4461(self.origin, level.straub_airship.valid_targets);
@@ -1116,7 +1116,7 @@ airship_turret_shoot_target(param_00) {
   var_01 = level.straub_airship.siz_cannon gettagorigin("TAG_PITCH");
   var_02 = spawn("script_model", var_01);
   var_02 setModel("Tag_Origin");
-  var_02 method_8449(level.straub_airship.siz_cannon);
+  var_02 linktosynchronizedparent(level.straub_airship.siz_cannon);
   var_03 = level.straub_airship.siz_cannon gettagorigin("TAG_AIM");
   var_04 = level.straub_airship.siz_cannon gettagangles("TAG_AIM");
   var_05 = anglesToForward(var_04);
@@ -1137,7 +1137,7 @@ airship_turret_shoot_target(param_00) {
   }
 
   airship_turret_stop_firing();
-  playFX(level.var_611["zmb_ber_zep_lightning_bolt"], var_08.origin, var_02.origin - var_08.origin);
+  playFX(level._effect["zmb_ber_zep_lightning_bolt"], var_08.origin, var_02.origin - var_08.origin);
   airship_turret_clear_target();
   var_02 delete();
   wait(0.15);
@@ -1257,7 +1257,7 @@ airship_animation_straub_entrance(param_00) {
   level.straub_airship lib_0378::func_8D74("start_straub_airship_loop");
   level.straub_airship lib_0378::func_8D74("straub_airship_entrance");
   wait(getanimlength(%s2_zom_zep_intro));
-  common_scripts\utility::func_3C8F("flag_airship_reached_middle");
+  common_scripts\utility::flag_set("flag_airship_reached_middle");
   level.straub_airship lib_0378::func_8D74("stop_airship_loop", 10);
 }
 
@@ -1366,7 +1366,7 @@ airship_animation_enter_and_shoot_tethers(param_00) {
   level.cable_underbelly common_scripts\utility::func_2CBE(getanimlength(%s2_zom_zep_tether_scene_tether_bolt_fl_cable_into), ::method_8495, "s2_zom_zep_tether_scene_tether_bolt_fl_cable_into_idle", param_00.origin, param_00.angles);
   level.anchor_underbelly thread play_tether_impact_shake(%s2_zom_zep_tether_scene_tether_bolt_fl_into, 0.9826, 0.15);
   wait(3);
-  common_scripts\utility::func_3C8F("airship_tethers_out");
+  common_scripts\utility::flag_set("airship_tethers_out");
 }
 
 play_tether_impact_shake(param_00, param_01, param_02) {
@@ -1380,7 +1380,7 @@ play_tether_impact_shake(param_00, param_01, param_02) {
     level notify("airship_anchor_courtyard_impact");
     var_05 = getEnt("anchor_a_clip", "targetname");
     var_05.origin = var_05.origin + (0, 0, 512);
-    var_05 method_805F();
+    var_05 saved_actionslotdata();
     var_06 = lib_0547::func_408F();
     if(isDefined(var_06) && var_06.size > 0) {
       foreach(var_08 in var_06) {
@@ -1508,7 +1508,7 @@ airship_animation_pull_down_airship(param_00) {
   var_02 method_8495("s2_zom_zep_tether_scene_zep_drop_pod_down_04_idle", param_00.origin, param_00.angles);
   var_0F = getEnt("clip_drop_pod_nav_blocker", "script_noteworthy");
   var_0F solid();
-  var_0F method_805F();
+  var_0F saved_actionslotdata();
   var_10 = getEnt("clip_door", "script_noteworthy");
   var_10 notsolid();
   var_10 connectpaths();
@@ -1520,7 +1520,7 @@ airship_animation_pull_down_airship(param_00) {
   var_11 delete();
   var_12 = getEnt("pod_underneath_clip", "targetname");
   var_12 solid();
-  var_12 method_805F();
+  var_12 saved_actionslotdata();
 }
 
 airship_animation_drop_pod_movement(param_00) {
@@ -1562,7 +1562,7 @@ airship_animation_drop_pod_movement(param_00) {
     var_01 scriptmodelclearanim();
     var_01 scriptmodelplayanim("s2_zmb_drop_pod_open_front", "drop_pod_door_open");
     var_03 solid();
-    var_03 method_805F();
+    var_03 saved_actionslotdata();
     var_03 notsolid();
     var_04 notsolid();
     var_04 connectpaths();
@@ -1594,7 +1594,7 @@ pull_players_inside() {
 
   wait(1);
   var_02 solid();
-  var_02 method_805F();
+  var_02 saved_actionslotdata();
 }
 
 player_pulls_towards(param_00, param_01) {
@@ -1631,8 +1631,8 @@ ____________________hack_station____________________() {}
 hack_station_init() {
   lib_0378::func_8D74("aud_zep_puzzle_spark_loop");
   if(!common_scripts\utility::func_3C83("hack_stations_initialized")) {
-    common_scripts\utility::func_3C87("hack_stations_disabled");
-    common_scripts\utility::func_3C87("hack_stations_initialized");
+    common_scripts\utility::flag_init("hack_stations_disabled");
+    common_scripts\utility::flag_init("hack_stations_initialized");
     thread hack_station_handler();
     wait 0.05;
   }
@@ -1649,7 +1649,7 @@ hack_station_handler() {
 
     hack_station_start_logic();
     level waittill("hide_hack_stations");
-    common_scripts\utility::func_3C8F("hack_stations_disabled");
+    common_scripts\utility::flag_set("hack_stations_disabled");
   }
 }
 
@@ -1719,7 +1719,7 @@ hack_station_start_logic() {
     var_01.tag_org = spawn("script_model", var_01.origin);
     var_01.tag_org.angles = var_01.angles;
     var_01.tag_org setModel("tag_origin");
-    var_01.tag_org method_8449(var_01);
+    var_01.tag_org linktosynchronizedparent(var_01);
     var_01.tag_org_color = "blue";
     var_01 thread hack_station_blinking_light_update_color();
     wait 0.05;
@@ -1936,12 +1936,12 @@ hack_station_blinking_light_update_color() {
   for(;;) {
     self waittill("color_swap", var_05);
     if(var_01 == "blue") {
-      stopFXOnTag(level.var_611["hack_spark_" + var_01], self.tag_org, "tag_origin");
+      stopFXOnTag(level._effect["hack_spark_" + var_01], self.tag_org, "tag_origin");
     }
 
     wait 0.05;
     if(var_01 != "blue") {
-      playFXOnTag(level.var_611["hack_spark_" + var_02], self.tag_org, "tag_origin");
+      playFXOnTag(level._effect["hack_spark_" + var_02], self.tag_org, "tag_origin");
     }
 
     self.tag_org_color = var_02;
@@ -2278,7 +2278,7 @@ hack_station_interactable_bay_door() {
     }
 
     var_01 = 1;
-    common_scripts\utility::func_3C8F("flag_open_cargobay_complete");
+    common_scripts\utility::flag_set("flag_open_cargobay_complete");
   }
 }
 
@@ -2295,7 +2295,7 @@ hack_station_interactable_lab_door_left() {
     }
 
     var_01 = 1;
-    common_scripts\utility::func_3C8F("flag_open_cargobay_left_complete");
+    common_scripts\utility::flag_set("flag_open_cargobay_left_complete");
   }
 }
 
@@ -2312,7 +2312,7 @@ hack_station_interactable_lab_door_left_back() {
     }
 
     var_01 = 1;
-    common_scripts\utility::func_3C8F("flag_open_cargobay_left_back_complete");
+    common_scripts\utility::flag_set("flag_open_cargobay_left_back_complete");
   }
 }
 
@@ -2329,7 +2329,7 @@ hack_station_interactable_lab_door_right() {
     }
 
     var_01 = 1;
-    common_scripts\utility::func_3C8F("flag_open_cargobay_right_complete");
+    common_scripts\utility::flag_set("flag_open_cargobay_right_complete");
   }
 }
 
@@ -2346,7 +2346,7 @@ hack_station_interactable_lab_door_right_back() {
     }
 
     var_01 = 1;
-    common_scripts\utility::func_3C8F("flag_open_cargobay_right_back_complete");
+    common_scripts\utility::flag_set("flag_open_cargobay_right_back_complete");
   }
 }
 
@@ -2355,7 +2355,7 @@ hack_station_interactable_straub_node() {
   if(!isDefined(var_00.var_A203)) {
     var_00 waittill("hack_interact");
     var_00.var_A203 = 1;
-    common_scripts\utility::func_3C8F("flag_override_electroschnell_complete");
+    common_scripts\utility::flag_set("flag_override_electroschnell_complete");
   }
 }
 
@@ -2378,16 +2378,16 @@ hack_station_moving_spark_handler() {
 
 power_source_effects() {
   var_00 = getEnt("power_source_bottom_model", "targetname");
-  var_01 = spawnfx(level.var_611["zmb_ber_zep_power_source_on"], var_00.origin, anglesToForward(var_00.angles));
+  var_01 = spawnfx(level._effect["zmb_ber_zep_power_source_on"], var_00.origin, anglesToForward(var_00.angles));
   triggerfx(var_01);
   common_scripts\utility::func_3C9F("flag_override_electroschnell_complete");
   wait(10);
   lib_0378::func_8D74("aud_electroschnell_overload_explo");
-  var_02 = spawnfx(level.var_611["zmb_ber_zep_power_source_buildup"], var_00.origin, anglesToForward(var_00.angles));
+  var_02 = spawnfx(level._effect["zmb_ber_zep_power_source_buildup"], var_00.origin, anglesToForward(var_00.angles));
   triggerfx(var_02);
   wait(2);
   var_01 delete();
-  var_03 = spawnfx(level.var_611["zmb_ber_zep_power_source_overload"], var_00.origin, anglesToForward(var_00.angles));
+  var_03 = spawnfx(level._effect["zmb_ber_zep_power_source_overload"], var_00.origin, anglesToForward(var_00.angles));
   triggerfx(var_03);
   wait(0.5);
   thread earthquake_alive_players(0.2, 2, 1000);
@@ -2403,29 +2403,29 @@ hack_station_moving_spark_fx_swap() {
   var_01 = spawn("script_model", var_00.origin);
   var_01 setModel("tag_origin");
   thread hack_station_moving_spark_fx_kill(var_01);
-  playFXOnTag(level.var_611["zmb_ber_shp_elec_tube_point"], var_01, "tag_origin");
+  playFXOnTag(level._effect["zmb_ber_shp_elec_tube_point"], var_01, "tag_origin");
   for(;;) {
     level.in_world_spark waittill("swap_spark_FX", var_02, var_03, var_04);
     if(isDefined(var_04)) {
       var_01.origin = var_04.origin;
-      killfxontag(level.var_611[var_03], level.in_world_spark, "tag_origin");
-      playFXOnTag(level.var_611[var_02], var_01, "tag_origin");
+      killfxontag(level._effect[var_03], level.in_world_spark, "tag_origin");
+      playFXOnTag(level._effect[var_02], var_01, "tag_origin");
       var_01 lib_0378::func_8D74("aud_zep_puzzle_spark_leave");
       continue;
     }
 
-    killfxontag(level.var_611[var_03], var_01, "tag_origin");
-    playFXOnTag(level.var_611[var_02], level.in_world_spark, "tag_origin");
+    killfxontag(level._effect[var_03], var_01, "tag_origin");
+    playFXOnTag(level._effect[var_02], level.in_world_spark, "tag_origin");
     var_01 lib_0378::func_8D74("aud_zep_puzzle_spark_arrive");
   }
 }
 
 hack_station_moving_spark_fx_kill(param_00) {
   level waittill("airship_drop_pod_reached_ground");
-  killfxontag(level.var_611["hack_node_light_00"], param_00, "tag_origin");
-  killfxontag(level.var_611["hack_node_light_01"], param_00, "tag_origin");
-  killfxontag(level.var_611["hack_node_light_00"], level.in_world_spark, "tag_origin");
-  killfxontag(level.var_611["hack_node_light_01"], level.in_world_spark, "tag_origin");
+  killfxontag(level._effect["hack_node_light_00"], param_00, "tag_origin");
+  killfxontag(level._effect["hack_node_light_01"], param_00, "tag_origin");
+  killfxontag(level._effect["hack_node_light_00"], level.in_world_spark, "tag_origin");
+  killfxontag(level._effect["hack_node_light_01"], level.in_world_spark, "tag_origin");
 }
 
 hack_station_moving_spark_position_think() {
@@ -2462,24 +2462,24 @@ berlinroundstart() {
 berlinroundstartvo() {
   wait(randomintrange(2, 6));
   if(!common_scripts\utility::func_3C77("flag_exit_underbelly")) {
-    common_scripts\utility::func_7A33(level.players) lib_0367::func_8E3D("wavebreak_underbelly");
+    common_scripts\utility::random(level.players) lib_0367::func_8E3D("wavebreak_underbelly");
   }
 
   if(common_scripts\utility::func_3C77("flag_exit_underbelly")) {
     if(!common_scripts\utility::func_3C77("flag quest_contact_hq step_find_radio")) {
-      common_scripts\utility::func_7A33(level.players) lib_0367::func_8E3D("radio_nag");
+      common_scripts\utility::random(level.players) lib_0367::func_8E3D("radio_nag");
     }
   }
 
   if(common_scripts\utility::func_3C77("flag quest_contact_hq step_find_radio")) {
     if(!common_scripts\utility::func_3C77("flag quest_contact_soviets step_contact_soviets")) {
-      common_scripts\utility::func_7A33(level.players) lib_0367::func_8E3D("radio_code_nag");
+      common_scripts\utility::random(level.players) lib_0367::func_8E3D("radio_code_nag");
     }
   }
 
   if(common_scripts\utility::func_3C77("flag quest_draw_airship step_ignite_flare")) {
     if(!common_scripts\utility::func_3C77("flag_airship_summoned")) {
-      common_scripts\utility::func_7A33(level.players) lib_0367::func_8E3D("flares_nag");
+      common_scripts\utility::random(level.players) lib_0367::func_8E3D("flares_nag");
     }
   }
 
@@ -2487,17 +2487,17 @@ berlinroundstartvo() {
     if(!common_scripts\utility::func_3C77("flag_airship_fully_lowered")) {
       if(isDefined(level.fourth_flag)) {
         if(common_scripts\utility::func_3C77("flag_hc_quest_finale_door_open")) {
-          common_scripts\utility::func_7A33(level.players) lib_0367::func_8E3D("airship_tether_nag");
+          common_scripts\utility::random(level.players) lib_0367::func_8E3D("airship_tether_nag");
         }
       } else {
-        common_scripts\utility::func_7A33(level.players) lib_0367::func_8E3D("airship_tether_nag");
+        common_scripts\utility::random(level.players) lib_0367::func_8E3D("airship_tether_nag");
       }
     }
   }
 
   if(common_scripts\utility::func_3C77("flag quest_bring_down_airship step_reel_anchors")) {
     if(!common_scripts\utility::func_3C77("flag quest_bring_down_airship step_raise_dropcage")) {
-      common_scripts\utility::func_7A33(level.players) lib_0367::func_8E3D("airship_pod_nag");
+      common_scripts\utility::random(level.players) lib_0367::func_8E3D("airship_pod_nag");
     }
   }
 }
@@ -2791,7 +2791,7 @@ spine_zombie_collect_listener(param_00, param_01, param_02, param_03, param_04, 
 
   iprintln(var_09 + " collected!");
   param_01.spine_hint_complete = 1;
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_geistbolt_collected");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_geistbolt_collected");
   level notify("spine_collected", var_09, param_01);
 }
 
@@ -2813,7 +2813,7 @@ spine_pickup_anim(param_00) {
 
   var_02 = var_01 getcurrentweapon();
   var_01 common_scripts\utility::func_603();
-  var_01 common_scripts\utility::func_600();
+  var_01 common_scripts\utility::_disableoffhandweapons();
   var_01 lib_0586::func_78C(param_00);
   var_01 lib_0586::func_78E(param_00, 1);
   var_01 allowjump(0);

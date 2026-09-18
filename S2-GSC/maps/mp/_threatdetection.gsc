@@ -188,7 +188,7 @@ func_2E59(param_00, param_01, param_02) {
   }
 
   var_03.alpha = 1;
-  var_03 method_83A9(param_01);
+  var_03 selectedmove_right(param_01);
   return var_03;
 }
 
@@ -217,7 +217,7 @@ func_2E56(param_00, param_01, param_02, param_03) {
   var_04.color = (getdvarfloat("scr_paintexplosionred"), getdvarfloat("scr_paintexplosiongreen"), getdvarfloat("scr_paintexplosionblue"));
   var_04.alpha = getdvarfloat("scr_paintexplosionalpha");
   var_05 = getdvarint("paintexplosionwidth");
-  var_04 method_83A8(int(param_03 + var_05 / 2), int(var_05), param_02 + 0.05);
+  var_04 selectedmove_forward(int(param_03 + var_05 / 2), int(var_05), param_02 + 0.05);
   wait(param_02);
   if(isDefined(var_04)) {
     var_04 destroy();
@@ -243,7 +243,7 @@ func_3902(param_00, param_01, param_02, param_03, param_04) {
 
   var_05.alpha = 0.05;
   var_06 = getdvarint("scr_exopingwidth", 100);
-  var_05 method_83A8(int(param_02), int(var_06), param_01 + 0.05);
+  var_05 selectedmove_forward(int(param_02), int(var_06), param_01 + 0.05);
   wait(param_01);
   if(isDefined(var_05)) {
     var_05 destroy();
@@ -367,13 +367,13 @@ func_A576(param_00, param_01, param_02) {
   param_00.angles = self gettagangles(param_02);
   param_00 linkTo(self, param_02);
   wait 0.05;
-  playFXOnTag(param_00.var_3F2F, param_00, "tag_origin");
+  playFXOnTag(param_00.fx, param_00, "tag_origin");
 }
 
 func_A575(param_00, param_01, param_02) {
   var_03 = func_46DD();
   if(var_03 == "attached_glow") {
-    stopFXOnTag(param_00.var_3F2F, param_00, "tag_origin");
+    stopFXOnTag(param_00.fx, param_00, "tag_origin");
   }
 }
 
@@ -605,7 +605,7 @@ func_63EC() {
         self.var_72E.var_6008 hide();
       } else if(var_0A == "attached_glow") {
         foreach(var_05 in self.var_600A.var_3F3F) {
-          stopFXOnTag(var_05.var_3F2F, var_05, "tag_origin");
+          stopFXOnTag(var_05.fx, var_05, "tag_origin");
           var_05 hide();
         }
       } else {}
@@ -642,7 +642,7 @@ func_76A0(param_00, param_01, param_02) {
 }
 
 func_A577(param_00, param_01, param_02) {
-  playFXOnTag(param_00.var_3F2F, param_00, "tag_origin");
+  playFXOnTag(param_00.fx, param_00, "tag_origin");
 }
 
 func_217C(param_00) {
@@ -713,7 +713,7 @@ func_9976(param_00) {
       var_08.origin = self gettagorigin(var_03[0]);
       var_08.angles = self gettagangles(var_03[0]);
       var_08 linkTo(self, var_03[0]);
-      var_08.var_3F2F = var_03[1];
+      var_08.fx = var_03[1];
       var_01.var_3F3F[var_05] = var_08;
     }
 

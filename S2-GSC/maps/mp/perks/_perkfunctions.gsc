@@ -281,8 +281,8 @@ func_A052() {
 }
 
 func_8734() {
-  maps\mp\_utility::func_47A2("specialty_bulletaccuracy");
-  maps\mp\_utility::func_47A2("specialty_holdbreath");
+  maps\mp\_utility::giveperk("specialty_bulletaccuracy");
+  maps\mp\_utility::giveperk("specialty_holdbreath");
 }
 
 func_A080() {
@@ -356,7 +356,7 @@ func_83B7() {
   self endon("disconnect");
   level endon("game_ended");
   common_scripts\utility::func_603();
-  common_scripts\utility::func_600();
+  common_scripts\utility::_disableoffhandweapons();
   common_scripts\utility::func_601();
   self openpopupmenu(game["menu_onemanarmy"]);
   thread func_2449();
@@ -364,10 +364,10 @@ func_83B7() {
   common_scripts\utility::func_617();
   common_scripts\utility::func_614();
   common_scripts\utility::func_615();
-  if(var_01 == "back" || !func_5765(var_00) || maps\mp\_utility::func_581D()) {
+  if(var_01 == "back" || !func_5765(var_00) || maps\mp\_utility::isusingremote()) {
     if(self getcurrentweapon() == "onemanarmy_mp") {
       common_scripts\utility::func_603();
-      common_scripts\utility::func_600();
+      common_scripts\utility::_disableoffhandweapons();
       common_scripts\utility::func_601();
       self switchtoweapon(common_scripts\utility::func_4550());
       self waittill("weapon_change");
@@ -411,7 +411,7 @@ func_47A0(param_00) {
 
   thread func_6A6D(var_01);
   common_scripts\utility::func_602();
-  common_scripts\utility::func_600();
+  common_scripts\utility::_disableoffhandweapons();
   common_scripts\utility::func_601();
   wait(var_01);
   common_scripts\utility::func_616();
@@ -459,7 +459,7 @@ func_A065() {
 }
 
 func_8739() {
-  maps\mp\_utility::func_642("s2_tactical_insertion_device_mp");
+  maps\mp\_utility::_giveweapon("s2_tactical_insertion_device_mp");
   self givestartammo("s2_tactical_insertion_device_mp");
   thread func_63EF();
 }
@@ -478,7 +478,7 @@ func_A17C() {
   self endon("disconnect");
   self endon("faux_spawn");
   level endon("game_ended");
-  while(maps\mp\_utility::func_57A0(self)) {
+  while(maps\mp\_utility::isreallyalive(self)) {
     var_00 = getnodesinradiussorted(self.origin, 128, 0, 64);
     self.var_9A28 = undefined;
     foreach(var_02 in var_00) {
@@ -529,7 +529,7 @@ func_63EF() {
       continue;
     }
 
-    if(maps\mp\_utility::func_9AC1()) {
+    if(maps\mp\_utility::touchingbadtrigger()) {
       continue;
     }
 
@@ -554,15 +554,15 @@ func_63EB() {
   self endon("third_person_ti");
   for(;;) {
     if(isDefined(self.var_1156)) {
-      self method_802E("npc_usa_emergency_flare", "tag_inhand");
+      self detach("npc_usa_emergency_flare", "tag_inhand");
       self.var_1156 = undefined;
     }
 
     self waittillmatch("s2_tactical_insertion_device_mp", "grenade_pullback");
     self attach("npc_usa_emergency_flare", "tag_inhand", 1);
     self.var_1156 = "npc_usa_emergency_flare";
-    maps\mp\_utility::func_A6D1(3, "death");
-    self method_802E("npc_usa_emergency_flare", "tag_inhand");
+    maps\mp\_utility::waitfortimeornotify(3, "death");
+    self detach("npc_usa_emergency_flare", "tag_inhand");
     self.var_1156 = undefined;
   }
 }
@@ -637,7 +637,7 @@ func_6AE7(param_00, param_01, param_02, param_03) {
   }
 
   playFX(level.var_9062, self.origin);
-  self.owner thread maps\mp\_utility::func_5C43("ti_destroyed", undefined, undefined, self.origin);
+  self.owner thread maps\mp\_utility::leaderdialogonplayer("ti_destroyed", undefined, undefined, self.origin);
   param_00 thread func_2D54(self);
 }
 
@@ -659,7 +659,7 @@ func_47ED(param_00) {
 func_A10D(param_00) {
   self endon("death");
   for(;;) {
-    maps\mp\_utility::func_871E(param_00);
+    maps\mp\_utility::setselfusable(param_00);
     level common_scripts\utility::func_A732("joined_team", "player_spawned");
   }
 }
@@ -704,7 +704,7 @@ func_47EA(param_00) {
   param_00 endon("disconnect");
   self.var_3773 setCursorHint("HINT_NOICON");
   self.var_3773 setHintString(&"MP_DESTROY_TI");
-  self.var_3773 maps\mp\_utility::func_5FB6(param_00);
+  self.var_3773 maps\mp\_utility::makeenemyusable(param_00);
   for(;;) {
     self.var_3773 waittill("trigger", var_01);
     var_01 notify("destroyed_explosive");
@@ -736,7 +736,7 @@ func_A950() {
   self playerlinkTo(var_01, undefined, 0, 180, 180, 180, 180, 1);
   var_02 = spawn("script_model", var_01.origin);
   var_02 setModel("tag_origin");
-  var_02 method_8449(var_01);
+  var_02 linktosynchronizedparent(var_01);
   var_03 = spawn("script_model", var_02.origin);
   var_03 hide();
   if(self.team == "allies") {
@@ -747,14 +747,14 @@ func_A950() {
 
   var_03.var_62A0 = 0.5;
   var_03 scriptmodelplayanim("carepackage_parachute_loop");
-  var_03 method_8449(var_02, "tag_origin", (20, -20, 40), (0, 90, 0));
+  var_03 linktosynchronizedparent(var_02, "tag_origin", (20, -20, 40), (0, 90, 0));
   var_03 show();
   var_04 = spawn("script_model", var_03.origin);
   var_04.angles = var_03.angles;
   var_04 setModel("ger_carepackage_parachute");
   var_04 setCanDamage(1);
   var_04 hide();
-  var_04 method_8449(var_03);
+  var_04 linktosynchronizedparent(var_03);
   var_04 thread func_A94F(var_01);
   var_01 thread func_9A1E(self, var_02, var_03, var_04);
 }
@@ -839,7 +839,7 @@ func_8710() {
 }
 
 func_8680() {
-  maps\mp\_utility::func_47A2("specialty_pistoldeath");
+  maps\mp\_utility::giveperk("specialty_pistoldeath");
 }
 
 func_A061() {
@@ -859,7 +859,7 @@ func_8752() {
 func_A085() {}
 
 func_8735() {
-  maps\mp\_utility::func_47A2("specialty_bulletdamage");
+  maps\mp\_utility::giveperk("specialty_bulletdamage");
   thread func_A94C();
 }
 
@@ -960,7 +960,7 @@ func_A06D() {
   self endon("unset_juiced");
   for(;;) {
     wait 0.05;
-    if(maps\mp\_utility::func_581D()) {
+    if(maps\mp\_utility::isusingremote()) {
       thread func_A06B();
       break;
     }
@@ -1067,7 +1067,7 @@ func_867F() {
   if(isDefined(self.var_5720)) {
     if(self.var_5720) {
       maps\mp\gametypes\_weapons::func_A13B();
-      maps\mp\_utility::func_47A2("specialty_quickdraw_new");
+      maps\mp\_utility::giveperk("specialty_quickdraw_new");
     }
   }
 }
@@ -1164,11 +1164,11 @@ func_6F4E() {
     var_02 = 0;
     var_03 = maps\mp\_utility::_hasperk("specialty_perception");
     foreach(var_05 in var_01) {
-      if(maps\mp\_utility::func_581D()) {
+      if(maps\mp\_utility::isusingremote()) {
         break;
       }
 
-      if(!isDefined(var_05) || !maps\mp\_utility::func_57A0(var_05)) {
+      if(!isDefined(var_05) || !maps\mp\_utility::isreallyalive(var_05)) {
         continue;
       }
 
@@ -1255,7 +1255,7 @@ watchdeathorgameendperception() {
 }
 
 func_A147(param_00, param_01) {
-  if(isai(self) || function_026D(self)) {
+  if(isai(self) || istestclient(self)) {
     return;
   }
 
@@ -1373,7 +1373,7 @@ func_A055() {
 }
 
 func_8678() {
-  if(isai(self) || function_026D(self)) {
+  if(isai(self) || istestclient(self)) {
     return;
   }
 
@@ -1386,7 +1386,7 @@ func_8678() {
 }
 
 func_A05D() {
-  if(isai(self) || function_026D(self)) {
+  if(isai(self) || istestclient(self)) {
     return;
   }
 
@@ -1525,7 +1525,7 @@ setdeadeyeinternal() {
 
   var_00 = randomint(100);
   if(var_00 <= self.critchance) {
-    maps\mp\_utility::func_47A2("specialty_moredamage");
+    maps\mp\_utility::giveperk("specialty_moredamage");
   }
 }
 
@@ -1571,7 +1571,7 @@ handleescalationboostafterkill() {
     }
   }
 
-  maps\mp\_utility::func_47A2("specialty_quickdraw_new");
+  maps\mp\_utility::giveperk("specialty_quickdraw_new");
   wait(6);
   if(maps\mp\_utility::_hasperk("specialty_quickdraw_new")) {
     maps\mp\_utility::func_735("specialty_quickdraw_new");
@@ -1591,8 +1591,8 @@ setresistancedivisionscramblerindicator() {
 
   if(maps\mp\_utility::isdivisionsglobaloverhaulenabled() && !isDefined(self.pers["loadoutContainsAltSwitchWeapon"]) || self.pers["loadoutContainsAltSwitchWeapon"]) {
     self setclientomnvar("ui_show_division_resistance_ability_prompt", 0);
-    maps\mp\_utility::func_47A2("specialty_gpsjammer");
-    maps\mp\_utility::func_47A2("specialty_sixthsense");
+    maps\mp\_utility::giveperk("specialty_gpsjammer");
+    maps\mp\_utility::giveperk("specialty_sixthsense");
     self.pers["resistanceScramblerIndicatorActive"] = undefined;
     return;
   }
@@ -1705,9 +1705,9 @@ toggleresistancedivisionscramblerindicator(param_00, param_01) {
       return;
     }
 
-    maps\mp\_utility::func_47A2("specialty_gpsjammer");
+    maps\mp\_utility::giveperk("specialty_gpsjammer");
     wait(0.15);
-    maps\mp\_utility::func_47A2("specialty_sixthsense");
+    maps\mp\_utility::giveperk("specialty_sixthsense");
     return;
   }
 
@@ -1724,9 +1724,9 @@ toggleresistancedivisionscramblerindicator(param_00, param_01) {
           maps\mp\_utility::func_735("specialty_gpsjammer");
         }
       } else {
-        maps\mp\_utility::func_47A2("specialty_gpsjammer");
+        maps\mp\_utility::giveperk("specialty_gpsjammer");
         wait(0.15);
-        maps\mp\_utility::func_47A2("specialty_sixthsense");
+        maps\mp\_utility::giveperk("specialty_sixthsense");
       }
       break;
 
@@ -1739,7 +1739,7 @@ toggleresistancedivisionscramblerindicator(param_00, param_01) {
 
         wait(0.15);
       } else {
-        maps\mp\_utility::func_47A2("specialty_gpsjammer");
+        maps\mp\_utility::giveperk("specialty_gpsjammer");
       }
       break;
   }
@@ -1995,38 +1995,38 @@ togglegrenadierfrenzy(param_00) {
       }
 
       if(getdvarint("spv_grenadier_frenzy_mode", 0) == 2) {
-        maps\mp\_utility::func_47A2("specialty_sprintreload");
-        maps\mp\_utility::func_47A2("specialty_fastreload");
-        maps\mp\_utility::func_47A2("specialty_sprintfire");
-        maps\mp\_utility::func_47A2("specialty_divefire");
-        maps\mp\_utility::func_47A2("specialty_falldamage");
-        maps\mp\_utility::func_47A2("specialty_lightweight");
-        maps\mp\_utility::func_47A2("specialty_quieter");
-        maps\mp\_utility::func_47A2("specialty_crouchmovement");
-        maps\mp\_utility::func_47A2("specialty_stalker");
-        maps\mp\_utility::func_47A2("specialty_reducedsway");
-        maps\mp\_utility::func_47A2("specialty_scavenger");
-        maps\mp\_utility::func_47A2("specialty_bulletresupply");
-        maps\mp\_utility::func_47A2("specialty_extraammo");
-        maps\mp\_utility::func_47A2("specialty_regenbullets");
-        maps\mp\_utility::func_47A2("specialty_explosiveearlywarning");
-        maps\mp\_utility::func_47A2("specialty_throwback");
-        maps\mp\_utility::func_47A2("specialty_blastshield2");
-        self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale", 55) / 100;
-        maps\mp\_utility::func_47A2("specialty_moreminimap");
-        maps\mp\_utility::func_47A2("specialty_eagleeyes");
-        maps\mp\_utility::func_47A2("specialty_silentkill");
-        maps\mp\_utility::func_47A2("specialty_coldblooded");
-        maps\mp\_utility::func_47A2("specialty_spygame");
-        maps\mp\_utility::func_47A2("specialty_heartbreaker");
-        maps\mp\_utility::func_47A2("specialty_perception");
-        maps\mp\_utility::func_47A2("specialty_detectexplosive");
+        maps\mp\_utility::giveperk("specialty_sprintreload");
+        maps\mp\_utility::giveperk("specialty_fastreload");
+        maps\mp\_utility::giveperk("specialty_sprintfire");
+        maps\mp\_utility::giveperk("specialty_divefire");
+        maps\mp\_utility::giveperk("specialty_falldamage");
+        maps\mp\_utility::giveperk("specialty_lightweight");
+        maps\mp\_utility::giveperk("specialty_quieter");
+        maps\mp\_utility::giveperk("specialty_crouchmovement");
+        maps\mp\_utility::giveperk("specialty_stalker");
+        maps\mp\_utility::giveperk("specialty_reducedsway");
+        maps\mp\_utility::giveperk("specialty_scavenger");
+        maps\mp\_utility::giveperk("specialty_bulletresupply");
+        maps\mp\_utility::giveperk("specialty_extraammo");
+        maps\mp\_utility::giveperk("specialty_regenbullets");
+        maps\mp\_utility::giveperk("specialty_explosiveearlywarning");
+        maps\mp\_utility::giveperk("specialty_throwback");
+        maps\mp\_utility::giveperk("specialty_blastshield2");
+        self.var_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale", 55) / 100;
+        maps\mp\_utility::giveperk("specialty_moreminimap");
+        maps\mp\_utility::giveperk("specialty_eagleeyes");
+        maps\mp\_utility::giveperk("specialty_silentkill");
+        maps\mp\_utility::giveperk("specialty_coldblooded");
+        maps\mp\_utility::giveperk("specialty_spygame");
+        maps\mp\_utility::giveperk("specialty_heartbreaker");
+        maps\mp\_utility::giveperk("specialty_perception");
+        maps\mp\_utility::giveperk("specialty_detectexplosive");
         self.var_90DA = 6;
-        maps\mp\_utility::func_47A2("specialty_paint_pro");
-        maps\mp\_utility::func_47A2("specialty_minimapdangerinfo");
-        maps\mp\_utility::func_47A2("specialty_radarimmune");
-        maps\mp\_utility::func_47A2("specialty_delaymine");
-        maps\mp\_utility::func_47A2("specialty_shortfuse");
+        maps\mp\_utility::giveperk("specialty_paint_pro");
+        maps\mp\_utility::giveperk("specialty_minimapdangerinfo");
+        maps\mp\_utility::giveperk("specialty_radarimmune");
+        maps\mp\_utility::giveperk("specialty_delaymine");
+        maps\mp\_utility::giveperk("specialty_shortfuse");
         return;
       }
 
@@ -2034,37 +2034,37 @@ togglegrenadierfrenzy(param_00) {
         self.pers["sessionProgressionA_Modifier"] = 100;
         self.pers["sessionProgressionB_Modifier"] = 100;
         self.pers["sessionProgressionC_Modifier"] = 100;
-        maps\mp\_utility::func_47A2("specialty_sprintreload");
-        maps\mp\_utility::func_47A2("specialty_fastreload");
-        maps\mp\_utility::func_47A2("specialty_sprintfire");
-        maps\mp\_utility::func_47A2("specialty_divefire");
-        maps\mp\_utility::func_47A2("specialty_falldamage");
-        maps\mp\_utility::func_47A2("specialty_lightweight");
-        maps\mp\_utility::func_47A2("specialty_quieter");
-        maps\mp\_utility::func_47A2("specialty_crouchmovement");
-        maps\mp\_utility::func_47A2("specialty_stalker");
-        maps\mp\_utility::func_47A2("specialty_reducedsway");
-        maps\mp\_utility::func_47A2("specialty_scavenger");
-        maps\mp\_utility::func_47A2("specialty_bulletresupply");
-        maps\mp\_utility::func_47A2("specialty_extraammo");
-        maps\mp\_utility::func_47A2("specialty_regenbullets");
-        maps\mp\_utility::func_47A2("specialty_explosiveearlywarning");
-        maps\mp\_utility::func_47A2("specialty_throwback");
-        maps\mp\_utility::func_47A2("specialty_blastshield2");
-        self.var_90D4 = maps\mp\_utility::func_4529("perk_blastShieldScale", 55) / 100;
-        maps\mp\_utility::func_47A2("specialty_moreminimap");
-        maps\mp\_utility::func_47A2("specialty_eagleeyes");
-        maps\mp\_utility::func_47A2("specialty_silentkill");
-        maps\mp\_utility::func_47A2("specialty_coldblooded");
-        maps\mp\_utility::func_47A2("specialty_spygame");
-        maps\mp\_utility::func_47A2("specialty_heartbreaker");
-        maps\mp\_utility::func_47A2("specialty_detectexplosive");
+        maps\mp\_utility::giveperk("specialty_sprintreload");
+        maps\mp\_utility::giveperk("specialty_fastreload");
+        maps\mp\_utility::giveperk("specialty_sprintfire");
+        maps\mp\_utility::giveperk("specialty_divefire");
+        maps\mp\_utility::giveperk("specialty_falldamage");
+        maps\mp\_utility::giveperk("specialty_lightweight");
+        maps\mp\_utility::giveperk("specialty_quieter");
+        maps\mp\_utility::giveperk("specialty_crouchmovement");
+        maps\mp\_utility::giveperk("specialty_stalker");
+        maps\mp\_utility::giveperk("specialty_reducedsway");
+        maps\mp\_utility::giveperk("specialty_scavenger");
+        maps\mp\_utility::giveperk("specialty_bulletresupply");
+        maps\mp\_utility::giveperk("specialty_extraammo");
+        maps\mp\_utility::giveperk("specialty_regenbullets");
+        maps\mp\_utility::giveperk("specialty_explosiveearlywarning");
+        maps\mp\_utility::giveperk("specialty_throwback");
+        maps\mp\_utility::giveperk("specialty_blastshield2");
+        self.var_90D4 = maps\mp\_utility::getintproperty("perk_blastShieldScale", 55) / 100;
+        maps\mp\_utility::giveperk("specialty_moreminimap");
+        maps\mp\_utility::giveperk("specialty_eagleeyes");
+        maps\mp\_utility::giveperk("specialty_silentkill");
+        maps\mp\_utility::giveperk("specialty_coldblooded");
+        maps\mp\_utility::giveperk("specialty_spygame");
+        maps\mp\_utility::giveperk("specialty_heartbreaker");
+        maps\mp\_utility::giveperk("specialty_detectexplosive");
         self.var_90DA = 6;
-        maps\mp\_utility::func_47A2("specialty_paint_pro");
-        maps\mp\_utility::func_47A2("specialty_minimapdangerinfo");
-        maps\mp\_utility::func_47A2("specialty_radarimmune");
-        maps\mp\_utility::func_47A2("specialty_delaymine");
-        maps\mp\_utility::func_47A2("specialty_shortfuse");
+        maps\mp\_utility::giveperk("specialty_paint_pro");
+        maps\mp\_utility::giveperk("specialty_minimapdangerinfo");
+        maps\mp\_utility::giveperk("specialty_radarimmune");
+        maps\mp\_utility::giveperk("specialty_delaymine");
+        maps\mp\_utility::giveperk("specialty_shortfuse");
         var_01 = common_scripts\utility::func_44F5("perception_glow");
         playfxontagforclients(var_01, self, "j_head", self);
         maps\mp\gametypes\_weapons::func_A13B();
@@ -2491,7 +2491,7 @@ getnextrandomgun() {
       var_01[var_01.size] = var_0B;
     }
 
-    var_01 = common_scripts\utility::func_F92(var_01);
+    var_01 = common_scripts\utility::array_randomize(var_01);
     var_0D = common_scripts\utility::func_F73(var_00, var_01);
     self.pers["wanderlustGunList"] = var_0D;
   }
@@ -2556,7 +2556,7 @@ givenextrandomgun(param_00, param_01) {
     self setclientomnvar("ui_show_division_sniper_ability_prompt", 0);
   }
 
-  maps\mp\_utility::func_642(var_02);
+  maps\mp\_utility::_giveweapon(var_02);
   thread watchwanderlustweaponchange(var_02);
   var_08 = weaponclipsize(var_02);
   self setweaponammoclip(var_02, var_08);
@@ -2601,7 +2601,7 @@ getattachmentsforweapon(param_00, param_01) {
   }
 
   var_02 = function_0060(param_00);
-  var_02 = common_scripts\utility::func_F92(var_02);
+  var_02 = common_scripts\utility::array_randomize(var_02);
   var_03 = [];
   var_04 = [];
   for(var_05 = 0; var_05 < var_02.size; var_05++) {
@@ -2830,7 +2830,7 @@ shouldgrantspecialistallbasictrainings() {
 }
 
 processspecialistevent(param_00) {
-  if(!maps\mp\_utility::_hasperk("specialty_perkstreaks") || !maps\mp\_utility::func_57A0(self)) {
+  if(!maps\mp\_utility::_hasperk("specialty_perkstreaks") || !maps\mp\_utility::isreallyalive(self)) {
     return;
   }
 
@@ -2873,28 +2873,28 @@ processspecialistevent(param_00) {
 }
 
 grantallbasictrainingsforspecialist() {
-  maps\mp\_utility::func_47A2("specialty_class_hustle");
-  maps\mp\_utility::func_47A2("specialty_class_gunslinger");
-  maps\mp\_utility::func_47A2("specialty_class_energetic");
-  maps\mp\_utility::func_47A2("specialty_class_inconspicuous");
-  maps\mp\_utility::func_47A2("specialty_class_scoped");
-  maps\mp\_utility::func_47A2("specialty_class_duelist");
-  maps\mp\_utility::func_47A2("specialty_class_rifleman");
-  maps\mp\_utility::func_47A2("specialty_class_forage");
-  maps\mp\_utility::func_47A2("specialty_class_serrated");
-  maps\mp\_utility::func_47A2("specialty_class_hunker");
-  maps\mp\_utility::func_47A2("specialty_class_launched");
-  maps\mp\_utility::func_47A2("specialty_class_undercover");
-  maps\mp\_utility::func_47A2("specialty_class_lookout");
-  maps\mp\_utility::func_47A2("specialty_class_instincts");
-  maps\mp\_utility::func_47A2("specialty_class_flanker");
-  maps\mp\_utility::func_47A2("specialty_class_espionage");
-  maps\mp\_utility::func_47A2("specialty_class_shifty");
-  maps\mp\_utility::func_47A2("specialty_class_saboteur");
-  maps\mp\_utility::func_47A2("specialty_class_clandestine");
-  maps\mp\_utility::func_47A2("specialty_class_escalation");
+  maps\mp\_utility::giveperk("specialty_class_hustle");
+  maps\mp\_utility::giveperk("specialty_class_gunslinger");
+  maps\mp\_utility::giveperk("specialty_class_energetic");
+  maps\mp\_utility::giveperk("specialty_class_inconspicuous");
+  maps\mp\_utility::giveperk("specialty_class_scoped");
+  maps\mp\_utility::giveperk("specialty_class_duelist");
+  maps\mp\_utility::giveperk("specialty_class_rifleman");
+  maps\mp\_utility::giveperk("specialty_class_forage");
+  maps\mp\_utility::giveperk("specialty_class_serrated");
+  maps\mp\_utility::giveperk("specialty_class_hunker");
+  maps\mp\_utility::giveperk("specialty_class_launched");
+  maps\mp\_utility::giveperk("specialty_class_undercover");
+  maps\mp\_utility::giveperk("specialty_class_lookout");
+  maps\mp\_utility::giveperk("specialty_class_instincts");
+  maps\mp\_utility::giveperk("specialty_class_flanker");
+  maps\mp\_utility::giveperk("specialty_class_espionage");
+  maps\mp\_utility::giveperk("specialty_class_shifty");
+  maps\mp\_utility::giveperk("specialty_class_saboteur");
+  maps\mp\_utility::giveperk("specialty_class_clandestine");
+  maps\mp\_utility::giveperk("specialty_class_escalation");
   if(getdvarint("6019", 1) == 1) {
-    maps\mp\_utility::func_47A2("specialty_class_remedy");
+    maps\mp\_utility::giveperk("specialty_class_remedy");
   }
 }
 
@@ -2994,12 +2994,12 @@ handleclassifiedboostafterreload() {
   self.classifiedboostafterreloadactive = 1;
   var_00 = maps\mp\_utility::_hasperk("specialty_rof");
   if(!var_00) {
-    maps\mp\_utility::func_47A2("specialty_rof");
+    maps\mp\_utility::giveperk("specialty_rof");
   }
 
   var_01 = maps\mp\_utility::_hasperk("specialty_bulletaccuracy");
   if(!var_01) {
-    maps\mp\_utility::func_47A2("specialty_bulletaccuracy");
+    maps\mp\_utility::giveperk("specialty_bulletaccuracy");
   }
 
   wait(3.5);
@@ -3089,7 +3089,7 @@ handleserumbasictraining() {
 
       thread maps\mp\killstreaks\_killstreaks::func_478D("basic_training_serum", 0, 0, self, 1);
       if(!var_00) {
-        thread maps\mp\gametypes\_hud_message::func_5A78("basic_training_serum", 500, undefined, undefined);
+        thread maps\mp\gametypes\_hud_message::killstreaksplashnotify("basic_training_serum", 500, undefined, undefined);
       }
 
       while(var_01 == self.pers["basicTrainingSerumsUsed"]) {

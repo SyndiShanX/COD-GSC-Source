@@ -552,7 +552,7 @@ func_83BB(param_00, param_01) {
     var_05[var_06] = var_07;
   }
 
-  lib_0380::func_6844("mstrike_entry_npc", maps\mp\_utility::func_45DE(self.team), self);
+  lib_0380::func_6844("mstrike_entry_npc", maps\mp\_utility::getotherteam(self.team), self);
   lib_0380::func_6845("mstrike_entry_npc", self.team, self, self);
   self setblurforplayer(0, 0.3);
   self notify("location_selection_complete");

@@ -4,7 +4,7 @@
 *******************************************************/
 
 main() {
-  common_scripts\utility::func_3C87("flag_nest_hc_ee_true_voice_entered");
+  common_scripts\utility::flag_init("flag_nest_hc_ee_true_voice_entered");
   wait(1);
   lib_0557::func_4BC9("true voice of god", "unlocking true voice", "CONST_HC_ANALYTICS_TRUE_VOICE_OF_GOD");
   lib_0557::func_4BC9("barbarossa gem reveal", "revealing barb gem", "CONST_HC_ANALYTICS_BARB_GEM_REVEAL");
@@ -34,9 +34,9 @@ func_6A7B() {
   }
 
   self["god_gem"] moveTo(self["god_gem"].var_5AFC.origin, 5, 1, 1);
-  playFXOnTag(level.var_611["nest_ee_hc_gem_fx"], self["god_gem"], "tag_origin");
+  playFXOnTag(level._effect["nest_ee_hc_gem_fx"], self["god_gem"], "tag_origin");
   lib_0557::func_4BC8("barbarossa gem reveal");
-  common_scripts\utility::func_3C8F("flag_nest_hc_ee_true_voice_entered");
+  common_scripts\utility::flag_set("flag_nest_hc_ee_true_voice_entered");
   wait(5);
   lib_0557::func_4BC8("true voice of god");
   self["god_gem"] delete();
@@ -77,7 +77,7 @@ func_A646() {
 func_A726(param_00) {
   var_01 = [];
   var_02 = 0;
-  playFX(level.var_611["chandeleier_raven_idle"], self.origin);
+  playFX(level._effect["chandeleier_raven_idle"], self.origin);
   while(!var_02) {
     self waittill("damage", var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_0A, var_0B, var_0C);
     level thread common_scripts\_exploder::func_88E(216);

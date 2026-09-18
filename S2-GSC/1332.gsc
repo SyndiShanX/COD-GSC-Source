@@ -12,7 +12,7 @@ init() {
 }
 
 func_3662() {
-  maps\mp\_utility::func_47A2("specialty_finalstand");
+  maps\mp\_utility::giveperk("specialty_finalstand");
   self.var_4B91 = 1;
   self notify("self_revive");
 }

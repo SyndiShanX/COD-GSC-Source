@@ -4,10 +4,10 @@
 **********************************************************/
 
 init() {
-  level.var_611["zmb_blood_blast"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_med_trap_gib");
-  level.var_611["zmb_bat_long_hit_crit_blood"] = loadfx("vfx/blood/zmb_bat_long_hit_crit_blood");
-  level.var_611["zmb_raven_sword_barb_burst"] = loadfx("vfx/zombie/zmb_sword_barb_burst");
-  level.var_611["zmb_giestkraft_impact"] = loadfx("vfx/zombie/zmb_giestkraft_impact");
+  level._effect["zmb_blood_blast"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_med_trap_gib");
+  level._effect["zmb_bat_long_hit_crit_blood"] = loadfx("vfx/blood/zmb_bat_long_hit_crit_blood");
+  level._effect["zmb_raven_sword_barb_burst"] = loadfx("vfx/zombie/zmb_sword_barb_burst");
+  level._effect["zmb_giestkraft_impact"] = loadfx("vfx/zombie/zmb_giestkraft_impact");
   if(!isDefined(level.var_6DF9)) {
     level.var_6DF9 = [];
   }
@@ -183,7 +183,7 @@ togglemarathonability(param_00) {
   }
 
   if(param_00) {
-    maps\mp\_utility::func_47A2("specialty_marathon");
+    maps\mp\_utility::giveperk("specialty_marathon");
     return;
   }
 
@@ -212,30 +212,30 @@ sword_init() {
   level.var_4D3D["zom_dlc3_5_bomb_zm"] = 1;
   level.zerorewardweapons["zom_dlc3_5_bomb_zm"] = 1;
   level.nodamagescalingweapons["zom_dlc3_5_bomb_zm"] = 1;
-  level.var_611["zmb_barb_victim_drain_armor"] = loadfx("vfx/gameplay/mp/zombie/zmb_melee_drain_player");
-  level.var_611["zmb_barb_victim_geist_drain"] = loadfx("vfx/zombie/dark_energy_burst");
-  level.var_611["zmb_barb_geist_bomb_vesting"] = loadfx("vfx/zombie/dark_energy_burst_flare");
-  level.var_611["zmb_barb_geist_bomb_ready"] = loadfx("vfx/zombie/zmb_sword_giestbomb");
-  level.var_611["zmb_barb_sword_activate"] = loadfx("vfx/zombie/zmb_combined_sword_activate");
-  level.var_611["zmb_barb_sword_activate_wv"] = loadfx("vfx/zombie/zmb_combined_sword_activate_wv");
-  level.var_611["zmb_barb_sword_stun"] = loadfx("vfx/zombie/zmb_giestkraft_impact");
-  level.var_611["zmb_barb_sword_stun_secondary"] = loadfx("vfx/zombie/zmb_sword_stunbomb_impact");
-  level.var_611["zmb_sword_zmb_throw"] = loadfx("vfx/trail/zmb_sword_zmb_throw");
-  level.var_611["zmb_sword_stunbomb_aoe"] = loadfx("vfx/zombie/zmb_sword_stunbomb_aoe");
-  level.var_611["zmb_giestbomb_radius"] = loadfx("vfx/zombie/zmb_giestbomb_radius");
-  level.var_611["zmb_sword_point_purchase"] = loadfx("vfx/zombie/zmb_giestkraft_impact");
-  level.var_611["zmb_giestbomb_priming"] = loadfx("vfx/zombie/zmb_giestbomb_prime");
-  level.var_611["zmb_giestbomb_detonation"] = loadfx("vfx/zombie/zmb_giestbomb_exp_10s");
-  if(!isDefined(level.var_611["zmb_delivery_radius"])) {
-    level.var_611["zmb_delivery_radius"] = loadfx("vfx/zombie/zmb_giestbomb_radius");
+  level._effect["zmb_barb_victim_drain_armor"] = loadfx("vfx/gameplay/mp/zombie/zmb_melee_drain_player");
+  level._effect["zmb_barb_victim_geist_drain"] = loadfx("vfx/zombie/dark_energy_burst");
+  level._effect["zmb_barb_geist_bomb_vesting"] = loadfx("vfx/zombie/dark_energy_burst_flare");
+  level._effect["zmb_barb_geist_bomb_ready"] = loadfx("vfx/zombie/zmb_sword_giestbomb");
+  level._effect["zmb_barb_sword_activate"] = loadfx("vfx/zombie/zmb_combined_sword_activate");
+  level._effect["zmb_barb_sword_activate_wv"] = loadfx("vfx/zombie/zmb_combined_sword_activate_wv");
+  level._effect["zmb_barb_sword_stun"] = loadfx("vfx/zombie/zmb_giestkraft_impact");
+  level._effect["zmb_barb_sword_stun_secondary"] = loadfx("vfx/zombie/zmb_sword_stunbomb_impact");
+  level._effect["zmb_sword_zmb_throw"] = loadfx("vfx/trail/zmb_sword_zmb_throw");
+  level._effect["zmb_sword_stunbomb_aoe"] = loadfx("vfx/zombie/zmb_sword_stunbomb_aoe");
+  level._effect["zmb_giestbomb_radius"] = loadfx("vfx/zombie/zmb_giestbomb_radius");
+  level._effect["zmb_sword_point_purchase"] = loadfx("vfx/zombie/zmb_giestkraft_impact");
+  level._effect["zmb_giestbomb_priming"] = loadfx("vfx/zombie/zmb_giestbomb_prime");
+  level._effect["zmb_giestbomb_detonation"] = loadfx("vfx/zombie/zmb_giestbomb_exp_10s");
+  if(!isDefined(level._effect["zmb_delivery_radius"])) {
+    level._effect["zmb_delivery_radius"] = loadfx("vfx/zombie/zmb_giestbomb_radius");
   }
 
-  if(!isDefined(level.var_611["zmb_delivery_radius_128"])) {
-    level.var_611["zmb_delivery_radius_128"] = loadfx("vfx/zombie/zmb_giestbomb_radius_128");
+  if(!isDefined(level._effect["zmb_delivery_radius_128"])) {
+    level._effect["zmb_delivery_radius_128"] = loadfx("vfx/zombie/zmb_giestbomb_radius_128");
   }
 
-  if(!isDefined(level.var_611["zmb_delivery_radius_256"])) {
-    level.var_611["zmb_delivery_radius_256"] = loadfx("vfx/zombie/zmb_giestbomb_radius_256");
+  if(!isDefined(level._effect["zmb_delivery_radius_256"])) {
+    level._effect["zmb_delivery_radius_256"] = loadfx("vfx/zombie/zmb_giestbomb_radius_256");
   }
 
   var_00 = [];
@@ -389,7 +389,7 @@ delayed_sword_hit(param_00, param_01, param_02) {
 
   lib_0378::func_8D74("zmb_sword_melee_hit_delayed", param_00.origin);
   param_00 dodamage(var_08, var_03 getEye(), var_03, var_03, "MOD_MELEE", "zom_dlc3_5_aoe_zm", "none");
-  playFXOnTag(level.var_611["zmb_giestkraft_impact"], param_00, "J_Spine4");
+  playFXOnTag(level._effect["zmb_giestkraft_impact"], param_00, "J_Spine4");
   if(common_scripts\utility::func_562E(0)) {
     if(!common_scripts\utility::func_562E(1) || level.players.size <= 0) {
       if(isDefined(param_00.var_A4B)) {
@@ -709,7 +709,7 @@ sword_stun_secondary_aoe_trigger(param_00) {
   param_00 endon("death");
   param_00 endon("stun_aoe_cleanup");
   param_00.aoestuntrigger = spawn("trigger_radius", param_00.origin, 0, 36, 120);
-  param_00.aoestunfx = spawnlinkedfx(level.var_611["zmb_sword_stunbomb_aoe"], param_00, "J_spine4");
+  param_00.aoestunfx = spawnlinkedfx(level._effect["zmb_sword_stunbomb_aoe"], param_00, "J_spine4");
   triggerfx(param_00.aoestunfx);
   for(;;) {
     param_00.aoestuntrigger waittill("trigger", var_01);
@@ -787,7 +787,7 @@ sword_throw_handle_collision(param_00) {
     var_03 setModel("tag_origin");
     var_03.owner = var_01;
     var_04 = 180;
-    var_03 method_8449(var_01, "tag_origin", (0, 0, 0), (0, var_04, 0));
+    var_03 linktosynchronizedparent(var_01, "tag_origin", (0, 0, 0), (0, var_04, 0));
     var_01 maps / mp / agents / _agent_utility::deleteentonagentdeath(var_03);
     thread cleanup_ent_on_throw_end(var_03);
     var_05 = spawnStruct();
@@ -931,7 +931,7 @@ sword_throw_animate(param_00) {
   var_08 = 2;
   var_09 = randomfloat(1);
   var_01 maps / mp / agents / _scripted_agent_anim_util::func_8415(var_03, var_05, var_02, var_09);
-  var_01 maps\mp\_utility::func_A6D1(var_08, "sword_throw_blocked");
+  var_01 maps\mp\_utility::waitfortimeornotify(var_08, "sword_throw_blocked");
 }
 
 solve_yaw_for_throw_anim(param_00, param_01, param_02) {
@@ -1121,7 +1121,7 @@ sword_secondary_stun_intro(param_00) {
   var_01 = self;
   var_01 endon("all_secondary_stuns_expired");
   var_02 = ["side_stumble_2_left", "side_stumble_2_right", "side_stumble_3_left", "side_stumble_3_right", "pain_stand"];
-  var_03 = common_scripts\utility::func_F92(var_02)[0];
+  var_03 = common_scripts\utility::array_randomize(var_02)[0];
   var_04 = maps / mp / agents / _scripted_agent_anim_util::func_434D(var_03);
   var_05 = self method_83DB(var_04);
   var_06 = randomint(var_05);
@@ -2327,12 +2327,12 @@ sword_delivery_point_watch_buy(param_00) {
     var_06 = [];
     foreach(var_0B, var_08 in var_04) {
       var_09 = 48;
-      if(isDefined(param_00.onent.var_8276)) {
-        var_09 = param_00.onent.var_8276;
+      if(isDefined(param_00.onent.scriptmodelplayanim)) {
+        var_09 = param_00.onent.scriptmodelplayanim;
       }
 
-      if(isDefined(param_00.offent.var_8276)) {
-        var_09 = param_00.offent.var_8276;
+      if(isDefined(param_00.offent.scriptmodelplayanim)) {
+        var_09 = param_00.offent.scriptmodelplayanim;
       }
 
       if(distance(param_00.origin, var_08.origin) > var_09) {

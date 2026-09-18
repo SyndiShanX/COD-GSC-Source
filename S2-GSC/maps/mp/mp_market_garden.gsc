@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_market_garden_precache::func_F9();
-  maps\createart\mp_market_garden_art::func_F9();
-  maps\mp\mp_market_garden_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_market_garden_lighting::func_F9();
-  maps\mp\mp_market_garden_aud::func_F9();
+  maps\mp\mp_market_garden_precache::main();
+  maps\createart\mp_market_garden_art::main();
+  maps\mp\mp_market_garden_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_market_garden_lighting::main();
+  maps\mp\mp_market_garden_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_market_garden");
   game["attackers"] = "allies";
   game["defenders"] = "axis";

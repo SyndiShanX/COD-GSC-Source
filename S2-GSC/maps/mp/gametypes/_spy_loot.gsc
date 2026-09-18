@@ -55,7 +55,7 @@ initloot() {
   addlootweapon("bazooka_mp", 1, 1, (12, 0, 0), (0, 0, 0), "orange", 2, 0, 0, 7);
   waittillframeend;
   initlootlocations();
-  level.spylootlocations[0] = common_scripts\utility::func_F92(level.spylootlocations[0]);
+  level.spylootlocations[0] = common_scripts\utility::array_randomize(level.spylootlocations[0]);
   var_00 = int(level.spylootlocations[0].size * lootdensity());
   if(var_00 > lootmaxspawneditems()) {
     var_00 = lootmaxspawneditems();
@@ -162,7 +162,7 @@ addpathnodelootlocations() {
   var_04 = lootpathnodesinsidecomplete();
   level.spyinteriors = [];
   var_05 = getallnodes();
-  var_05 = common_scripts\utility::func_F92(var_05);
+  var_05 = common_scripts\utility::array_randomize(var_05);
   foreach(var_07 in var_05) {
     if(var_07.type != "Path") {
       continue;
@@ -349,7 +349,7 @@ spawnlootweapon(param_00, param_01) {
   var_1A = undefined;
   var_1B = undefined;
   if(randomfloat(1) < param_00.attachment1chance && var_03.size > 0) {
-    var_1A = common_scripts\utility::func_7A33(var_03);
+    var_1A = common_scripts\utility::random(var_03);
     if(randomfloat(1) < param_00.attachment2chance) {
       var_1C = tablelookuprownum("mp/attachmentcombos_mtx12.csv", 0, var_1A);
       var_1D = function_027B("mp/attachmentcombos_mtx12.csv");
@@ -362,7 +362,7 @@ spawnlootweapon(param_00, param_01) {
       }
 
       if(var_03.size > 0) {
-        var_1B = common_scripts\utility::func_7A33(var_03);
+        var_1B = common_scripts\utility::random(var_03);
       }
     }
   }
@@ -477,7 +477,7 @@ pickuponused() {
   self endon("death");
   for(;;) {
     self waittill("trigger", var_00);
-    if(!maps\mp\_utility::func_57A0(var_00)) {
+    if(!maps\mp\_utility::isreallyalive(var_00)) {
       continue;
     }
 
@@ -539,7 +539,7 @@ lootweaponwatchpickup() {
       return;
     }
 
-    var_0D = var_01.var_2953;
+    var_0D = var_01.currentweapon;
     if(shouldrestoreweapontoplayer(var_0D, var_01)) {
       var_01 takeweapon("shovel_mp");
       maps\mp\gametypes\_weapons::updateplayervariablesforweaponexchange(var_01, "shovel_mp", var_00);

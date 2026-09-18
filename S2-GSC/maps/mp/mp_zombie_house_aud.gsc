@@ -33,7 +33,7 @@ func_7248() {}
 func_7330() {
   lib_0366::func_AB0D();
   self method_8622("int_house_downstairs");
-  self method_8626("house_global", 0.25);
+  self setaltsceneobj("house_global", 0.25);
   lib_0366::snd_zmb_set_plr_vox_scare_count_max(1);
 }
 

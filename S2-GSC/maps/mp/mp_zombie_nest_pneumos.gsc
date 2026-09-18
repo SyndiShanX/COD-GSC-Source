@@ -4,11 +4,11 @@
 **********************************************/
 
 main() {
-  common_scripts\utility::func_3C87("flag_all_tubes_ridden");
-  common_scripts\utility::func_3C87("flag_pap_available");
-  common_scripts\utility::func_3C87("flag_cage_not_moving");
-  common_scripts\utility::func_3C87("flag_cage_power_outage_triggered");
-  common_scripts\utility::func_3C87("flag_pneumos_activated");
+  common_scripts\utility::flag_init("flag_all_tubes_ridden");
+  common_scripts\utility::flag_init("flag_pap_available");
+  common_scripts\utility::flag_init("flag_cage_not_moving");
+  common_scripts\utility::flag_init("flag_cage_power_outage_triggered");
+  common_scripts\utility::flag_init("flag_pneumos_activated");
   level.var_7532[0] = common_scripts\utility::func_46B5("pneumo_start_1", "targetname");
   level thread func_6C09();
   if(!isDefined(level.var_7532[0])) {
@@ -58,7 +58,7 @@ main() {
   }
 
   thread func_9E43();
-  common_scripts\utility::func_3C8F("flag_cage_not_moving");
+  common_scripts\utility::flag_set("flag_cage_not_moving");
   level.var_6E33 = func_8A0B();
   var_0C = common_scripts\utility::func_46B7("cage_button", "targetname");
   foreach(var_0E in var_0C) {
@@ -141,7 +141,7 @@ func_9E43() {
     }
 
     if(var_01) {
-      common_scripts\utility::func_3C8F("flag_all_tubes_ridden");
+      common_scripts\utility::flag_set("flag_all_tubes_ridden");
       break;
     }
 
@@ -315,7 +315,7 @@ func_A072(param_00, param_01) {
 
   for(;;) {
     if(self isonground()) {
-      playFX(level.var_611["zmb_pneumo_exit_splash"], self.origin + (0, 0, 20));
+      playFX(level._effect["zmb_pneumo_exit_splash"], self.origin + (0, 0, 20));
     }
 
     break;
@@ -328,7 +328,7 @@ func_A072(param_00, param_01) {
 func_38F5() {
   wait(2);
   if(self.var_53F0 == 1) {
-    playfxontagforclients(level.var_611["zmb_pneumo_tube_exit_cam"], self, "TAG_ORIGIN", self);
+    playfxontagforclients(level._effect["zmb_pneumo_tube_exit_cam"], self, "TAG_ORIGIN", self);
   }
 }
 
@@ -339,7 +339,7 @@ func_1DE0() {
 
   self.var_1E2C waittill("trigger", var_00);
   if(lib_0547::func_5565(self.script_noteworthy, "first_button")) {
-    common_scripts\utility::func_3C8F("flag_pneumos_activated");
+    common_scripts\utility::flag_set("flag_pneumos_activated");
   }
 
   self.var_1E2B lib_0378::func_8D74("zmb_pap_button");
@@ -354,7 +354,7 @@ func_1DE0() {
         func_7A2D();
         func_9ED1();
         var_01 = 1;
-        common_scripts\utility::func_3C8F("flag_cage_not_moving");
+        common_scripts\utility::flag_set("flag_cage_not_moving");
         continue;
       }
 
@@ -462,7 +462,7 @@ func_3299(param_00) {
     level.var_6E33.var_1E31 setscriptablepartstate("cage", "up_4");
   }
 
-  common_scripts\utility::func_3C8F("flag_pap_available");
+  common_scripts\utility::flag_set("flag_pap_available");
 }
 
 func_8A0B() {
@@ -477,7 +477,7 @@ func_46BA(param_00, param_01) {
   var_02 = "";
   if(!issubstr(param_01, param_00)) {} else {
     var_02 = getsubstr(param_01, param_00.size, param_01.size);
-    var_02 = int(common_scripts\utility::func_9468(var_02)) - 1;
+    var_02 = int(common_scripts\utility::stringtofloat(var_02)) - 1;
   }
 
   return var_02;
@@ -507,7 +507,7 @@ func_17BF() {
 func_1E33() {
   var_00 = randomint(level.var_7532.size);
   if(var_00 == 0 && !common_scripts\utility::func_3C77("flag_cage_power_outage_triggered")) {
-    common_scripts\utility::func_3C8F("flag_cage_power_outage_triggered");
+    common_scripts\utility::flag_set("flag_cage_power_outage_triggered");
     level.var_6E33.var_1E31 lib_0378::func_8D74("zmb_pap_fuse");
     thread func_203B();
     level thread common_scripts\_exploder::func_88E(207);
@@ -526,7 +526,7 @@ func_1E33() {
     level.var_6E33.var_1E31 lib_0378::func_8D74("catacombs_scare", "power_up_secondary");
     wait(0.5);
     func_2039();
-    level maps\mp\_utility::func_A6D1(30, "cage_zombies_dead");
+    level maps\mp\_utility::waitfortimeornotify(30, "cage_zombies_dead");
     level.var_6E33.var_1E31 lib_0378::func_8D74("catacombs_scare", "power_up_main");
     func_2037();
     return;

@@ -22,7 +22,7 @@ func_1E6E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     setmatchdata("down_count", maps\mp\_utility::clamptoshort(level.var_32CF));
     setmatchdata("downs", self.var_32CE, "round_downed", maps\mp\_utility::clamptoshort(level.var_A980));
     setmatchdata("downs", self.var_32CE, "player_index", maps\mp\_utility::func_2314(self.clientid));
-    var_0A = maps\mp\_utility::func_467B();
+    var_0A = maps\mp\_utility::getsecondspassed();
     setmatchdata("downs", self.var_32CE, "down_time", maps\mp\_utility::clamptoshort(var_0A));
     setmatchdata("downs", self.var_32CE, "down_pos", 0, maps\mp\_utility::clamptoshort(int(self.origin[0])));
     setmatchdata("downs", self.var_32CE, "down_pos", 1, maps\mp\_utility::clamptoshort(int(self.origin[1])));
@@ -119,7 +119,7 @@ func_1E6E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   thread lib_0547::func_AC16(0, "laststand");
   common_scripts\utility::func_601();
   self disableweaponswitch();
-  common_scripts\utility::func_600();
+  common_scripts\utility::_disableoffhandweapons();
   if(isDefined(param_03) && param_03 == "MOD_SUICIDE") {
     self method_8555();
   }
@@ -364,25 +364,25 @@ func_0F50(param_00) {
 
 func_7B38() {
   foreach(var_01 in level.players) {
-    setmatchdata("players", var_01.var_2418, "end_total_xp", var_01.var_AB46["xp"]);
-    setmatchdata("players", var_01.var_2418, "end_prestige", 0);
-    setmatchdata("players", var_01.var_2418, "end_rank", var_01.var_AB46["rank"]);
-    setmatchdata("players", var_01.var_2418, "end_xp", var_01.var_AB46["xp"] - var_01.var_AB46["totalXP"]);
+    setmatchdata("players", var_01.clientid, "end_total_xp", var_01.var_AB46["xp"]);
+    setmatchdata("players", var_01.clientid, "end_prestige", 0);
+    setmatchdata("players", var_01.clientid, "end_rank", var_01.var_AB46["rank"]);
+    setmatchdata("players", var_01.clientid, "end_xp", var_01.var_AB46["xp"] - var_01.var_AB46["totalXP"]);
     var_02 = lib_0547::func_4745(var_01, "totalTimePlayed") + var_01.timeplayed["total"];
     var_03 = lib_0547::func_4745(var_01, "totalGames");
-    setmatchdata("players", var_01.var_2418, "end_total_time_played", var_02);
-    setmatchdata("players", var_01.var_2418, "end_zm_games_played", var_03 + 1);
+    setmatchdata("players", var_01.clientid, "end_total_time_played", var_02);
+    setmatchdata("players", var_01.clientid, "end_zm_games_played", var_03 + 1);
     var_04 = lib_0547::func_4745(var_01, "totalHeadshots") + var_01.var_4BF7;
     var_05 = lib_0547::func_4745(var_01, "totalKills") + var_01.kills;
     var_06 = lib_0547::func_4745(var_01, "totalRevives") + var_01.assists;
     var_07 = lib_0547::func_4745(var_01, "totalMoneyEarned") + var_01.var_62D7;
     var_08 = lib_0547::func_4745(var_01, "totalRounds") + level.var_A980;
-    setmatchdata("players", var_01.var_2418, "end_lifetime_headshots", var_04);
-    setmatchdata("players", var_01.var_2418, "end_lifetime_kills", var_05);
-    setmatchdata("players", var_01.var_2418, "end_lifetime_revives", var_06);
-    setmatchdata("players", var_01.var_2418, "end_lifetime_score", var_07);
-    setmatchdata("players", var_01.var_2418, "end_lifetime_waves", var_08);
-    setmatchdata("players", var_01.var_2418, "play_time", var_01.timeplayed["total"]);
+    setmatchdata("players", var_01.clientid, "end_lifetime_headshots", var_04);
+    setmatchdata("players", var_01.clientid, "end_lifetime_kills", var_05);
+    setmatchdata("players", var_01.clientid, "end_lifetime_revives", var_06);
+    setmatchdata("players", var_01.clientid, "end_lifetime_score", var_07);
+    setmatchdata("players", var_01.clientid, "end_lifetime_waves", var_08);
+    setmatchdata("players", var_01.clientid, "play_time", var_01.timeplayed["total"]);
     if(var_01.var_32CE < level.var_6082) {
       setmatchdata("downs", var_01.var_32CE, "died", 1);
     }
@@ -426,7 +426,7 @@ func_AC1F(param_00, param_01, param_02) {
 }
 
 func_60AD(param_00) {
-  if(param_00 maps\mp\_utility::func_9AC1()) {
+  if(param_00 maps\mp\_utility::touchingbadtrigger()) {
     return 0;
   }
 
@@ -593,7 +593,7 @@ func_5BF2() {
   self.var_A22B = 1;
   self.var_A23F = 8000;
   var_00 = -1;
-  while(maps\mp\_utility::func_57A0(self) && isDefined(self.laststand) && !level.gameended) {
+  while(maps\mp\_utility::isreallyalive(self) && isDefined(self.laststand) && !level.gameended) {
     var_01 = int(gettime());
     self setclientomnvar("ui_use_bar_current_time", var_01);
     if(var_00 != self.var_A22B) {
@@ -618,7 +618,7 @@ func_5BF2() {
 }
 
 func_83CB(param_00) {
-  while(!level.gameended && maps\mp\_utility::func_57A0(param_00) && param_00.var_28D5 < param_00.var_A23F) {
+  while(!level.gameended && maps\mp\_utility::isreallyalive(param_00) && param_00.var_28D5 < param_00.var_A23F) {
     param_00.var_28D5 = param_00.var_28D5 + 50 * param_00.var_A22B;
     if(param_00.var_28D5 >= param_00.var_A23F) {
       param_00 notify("revive_trigger");
@@ -667,7 +667,7 @@ func_7E65() {
         self.owner lib_0547::func_7ACD();
       }
 
-      if(isDefined(var_00) && maps\mp\_utility::func_57A0(var_00)) {
+      if(isDefined(var_00) && maps\mp\_utility::isreallyalive(var_00)) {
         self notify("reviveTriggerThinkZombies_cleanup");
         if(!isDefined(var_04)) {
           var_00 maps\mp\gametypes\_gameobjects::func_A18A(self, 0);
@@ -753,7 +753,7 @@ func_5BFD() {
     }
 
     var_00.numselfrevivedowns++;
-    setmatchdata("downs", var_00.var_32CE, "reviver_player_index", maps\mp\_utility::func_2314(var_00.var_2418));
+    setmatchdata("downs", var_00.var_32CE, "reviver_player_index", maps\mp\_utility::func_2314(var_00.clientid));
     var_00 lib_056A::func_95F0();
     var_01 = var_00;
   }
@@ -764,9 +764,9 @@ func_5BFD() {
     var_01.assists = var_01 maps\mp\_utility::getpersstat("assists");
     if(var_01 != var_00) {
       var_00 thread lib_054E::func_7448(var_01);
-      var_00 thread maps\mp\gametypes\_hud_message::func_73C2("revived", var_01);
+      var_00 thread maps\mp\gametypes\_hud_message::playercardsplashnotify("revived", var_01);
       lib_0555::func_83DD("revived", var_01, var_00 getentitynumber());
-      setmatchdata("downs", var_00.var_32CE, "reviver_player_index", maps\mp\_utility::func_2314(var_01.var_2418));
+      setmatchdata("downs", var_00.var_32CE, "reviver_player_index", maps\mp\_utility::func_2314(var_01.clientid));
       var_01 maps\mp\gametypes\_persistence::statsetchild("round", "assists", var_01.assists);
       if(lib_0547::func_577E(var_01)) {
         var_01.var_801C++;
@@ -853,7 +853,7 @@ func_7DB4(param_00) {
   self.var_172C = 0;
   self.var_5BD7 = gettime();
   if(self.var_32CE < level.var_6082) {
-    var_01 = maps\mp\_utility::func_467B();
+    var_01 = maps\mp\_utility::getsecondspassed();
     setmatchdata("downs", self.var_32CE, "spawn_time", maps\mp\_utility::clamptoshort(var_01));
     var_02 = self.origin;
     setmatchdata("downs", self.var_32CE, "spawn_pos", 0, maps\mp\_utility::clamptoshort(int(var_02[0])));
@@ -886,7 +886,7 @@ func_7DB4(param_00) {
   common_scripts\utility::func_615();
   lib_0547::func_7ACD();
   maps\mp\_utility::func_2401("last_stand");
-  maps\mp\_utility::func_47A2("specialty_pistoldeath");
+  maps\mp\_utility::giveperk("specialty_pistoldeath");
   self method_8308(1);
   checktemporaryperks();
   if(!canspawn(self.origin)) {
@@ -899,7 +899,7 @@ func_1925() {
 }
 
 func_1926() {
-  var_00 = common_scripts\utility::func_7A33(level.var_1CBB);
+  var_00 = common_scripts\utility::random(level.var_1CBB);
   return var_00.origin;
 }
 
@@ -1141,7 +1141,7 @@ func_5BE9() {
   for(;;) {
     wait(var_00);
     var_01 = self getcurrentweapon();
-    var_02 = self method_817F(var_01);
+    var_02 = self getammocount(var_01);
     if(var_02 == 0) {
       var_03 = weaponclipsize(var_01);
       self setweaponammostock(var_01, var_03);
@@ -1168,7 +1168,7 @@ func_0634(param_00) {
 }
 
 func_53E2(param_00) {
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     self notify("revive_trigger", param_00);
     func_476A(self, param_00);
   }

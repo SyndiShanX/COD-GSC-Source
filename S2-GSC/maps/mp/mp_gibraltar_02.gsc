@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  lib_04AA::func_F9();
-  lib_0412::func_F9();
-  lib_04A9::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_gibraltar_02_lighting::func_F9();
-  maps\mp\mp_gibraltar_02_aud::func_F9();
+  lib_04AA::main();
+  lib_0412::main();
+  lib_04A9::main();
+  maps\mp\_load::main();
+  maps\mp\mp_gibraltar_02_lighting::main();
+  maps\mp\mp_gibraltar_02_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_gibraltar_02");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -62,7 +62,7 @@ setup_demolition_site_origins() {
 removevistaplanecollision() {
   var_00 = function_021F();
   foreach(var_02 in var_00) {
-    if(var_02.var_116[0] == 0 && var_02.var_116[1] == 0 && var_02.var_116[2] == 0) {
+    if(var_02.origin[0] == 0 && var_02.origin[1] == 0 && var_02.origin[2] == 0) {
       var_02 method_80B1();
     }
   }

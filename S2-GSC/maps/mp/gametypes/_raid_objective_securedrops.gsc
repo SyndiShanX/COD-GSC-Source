@@ -6,8 +6,8 @@
 securedropsobjectiveinit(param_00) {
   lib_04FF::func_6934(param_00);
   level.raidairdropcollision = getEnt("raid_securedrop_collision", "targetname");
-  level.var_611["airdrop_smoke"] = loadfx("vfx/smoke/beacon_smoke_green_long");
-  lib_04FF::func_6983(param_00.var_1A5);
+  level._effect["airdrop_smoke"] = loadfx("vfx/smoke/beacon_smoke_green_long");
+  lib_04FF::func_6983(param_00.targetname);
   var_01 = lib_04FF::func_27DE("A", game["attackers"], self.origin);
   var_01 maps\mp\gametypes\_gameobjects::func_8A60("none");
   param_00.var_2563 = var_01;
@@ -27,7 +27,7 @@ securedropsobjectiveinit(param_00) {
   }
 
   foreach(var_08, var_07 in param_00.drop_sites) {
-    var_07 = common_scripts\utility::func_F92(var_07);
+    var_07 = common_scripts\utility::array_randomize(var_07);
     param_00.drop_sites[var_08] = var_07;
   }
 
@@ -35,7 +35,7 @@ securedropsobjectiveinit(param_00) {
 }
 
 securedropssite(param_00) {
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   param_00 method_80B1();
 }
 
@@ -54,7 +54,7 @@ issiteindexlower(param_00, param_01) {
 runsecuredropsobjective() {
   level endon("game_ended");
   level endon("objective_A_complete");
-  maps\mp\_utility::func_3FA5("finished_intro_vignette_allies");
+  maps\mp\_utility::gameflagwait("finished_intro_vignette_allies");
   level.var_695E[level.var_695E.size] = ::secureobjectiveonplayerkilled;
   var_00 = 3;
   var_01 = var_00 * 1000;
@@ -83,7 +83,7 @@ runsecuredropsobjective() {
     if(var_06 == "attackers_secure_drop") {
       self.numsecures++;
       var_07 = self.numsecures * 1000;
-      self.var_2563 lib_04FF::func_8615(var_07);
+      self.var_2563 lib_04FF::playlocalsound(var_07);
     }
 
     if(self.numsecures < var_00) {
@@ -99,17 +99,17 @@ runsecuredropsobjective() {
 securedropsobjectivecleanup() {
   self endon("death");
   level endon("game_ended");
-  lib_04FF::func_6982(self.var_1A5);
+  lib_04FF::func_6982(self.targetname);
   self.var_2563 lib_04FF::func_7CCA();
   self.var_2563 maps\mp\gametypes\_gameobjects::func_2D58();
 }
 
 droppackage(param_00) {
-  playFX(level.var_611["airdrop_smoke"], param_00.var_116);
-  var_01 = param_00.var_116 + (0, 0, 6000);
+  playFX(level._effect["airdrop_smoke"], param_00.origin);
+  var_01 = param_00.origin + (0, 0, 6000);
   var_02 = spawn("script_model", var_01);
   var_02.var_1D = param_00.var_1D;
-  var_02.var_1A7 = game["attackers"];
+  var_02.team = game["attackers"];
   var_02.visualteam = lib_0502::func_7979("attackers");
   var_02.var_28D5 = 0;
   var_02.var_A22B = 0;
@@ -124,15 +124,15 @@ droppackage(param_00) {
     var_03 setModel("ger_carepackage_parachute_anim");
   }
 
-  var_04 = spawn("script_model", var_03.var_116);
+  var_04 = spawn("script_model", var_03.origin);
   var_04.var_1D = var_03.var_1D;
   var_04 setModel("ger_carepackage_parachute");
   var_04 setCanDamage(1);
-  var_04 method_805C();
-  var_04 method_8449(var_03);
+  var_04 save_undo_buffer();
+  var_04 linktosynchronizedparent(var_03);
   var_02.var_1D = var_03 gettagangles("TAG_CRATE");
-  var_02.var_116 = var_03 gettagorigin("TAG_CRATE");
-  var_02 method_8449(var_03, "TAG_CRATE");
+  var_02.origin = var_03 gettagorigin("TAG_CRATE");
+  var_02 linktosynchronizedparent(var_03, "TAG_CRATE");
   var_02.var_6E4A = var_03;
   var_02.flag_wait = var_04;
   level notify("airdrop_deployed");
@@ -146,17 +146,17 @@ droppackage(param_00) {
 
   var_05 = maps\mp\gametypes\_gameobjects::func_45A9();
   objective_add(var_05, "invisible", (0, 0, 0));
-  objective_position(var_05, param_00.var_116);
+  objective_position(var_05, param_00.origin);
   objective_state(var_05, "active");
   function_01D1(var_05, "waypoint_supplydrop_neutral_map");
-  objective_team(var_05, var_02.var_1A7);
+  objective_team(var_05, var_02.team);
   var_02.var_698E = var_05;
   var_05 = maps\mp\gametypes\_gameobjects::func_45A9();
   objective_add(var_05, "invisible", (0, 0, 0));
-  objective_position(var_05, param_00.var_116);
+  objective_position(var_05, param_00.origin);
   objective_state(var_05, "active");
   function_01D1(var_05, "waypoint_supplydrop_neutral_map");
-  objective_team(var_05, level.var_6C63[var_02.var_1A7]);
+  objective_team(var_05, level.var_6C63[var_02.team]);
   var_02.var_698D = var_05;
   var_02.parentobj = self;
   var_02 lib_04FF::func_990(var_02, "TAG_ORIGIN", (0, 0, 32), lib_0501::func_4647("airdrop_timeout") * 1000, 120, 1, 1, 0, 1, 1);
@@ -300,7 +300,7 @@ func_2752(param_00) {
     }
   }
 
-  if(isDefined(self.var_117) && abs(self.origin[2] - self.var_117.var_116[2]) > 4000) {
+  if(isDefined(self.var_117) && abs(self.origin[2] - self.var_117.origin[2]) > 4000) {
     func_2D30();
     return;
   }
@@ -321,11 +321,11 @@ func_64EC(param_00) {
 }
 
 func_1FFA(param_00) {
-  return !isDefined(self.var_1A5) || !isDefined(param_00.var_1A5) || self.var_1A5 != "care_package" || param_00.var_1A5 != "care_package";
+  return !isDefined(self.targetname) || !isDefined(param_00.targetname) || self.targetname != "care_package" || param_00.targetname != "care_package";
 }
 
 func_1FFB(param_00) {
-  return !isDefined(self.var_1A5) || !isDefined(param_00.var_1FFE) || self.var_1A5 != "care_package" || !param_00.var_1FFE;
+  return !isDefined(self.targetname) || !isDefined(param_00.var_1FFE) || self.targetname != "care_package" || !param_00.var_1FFE;
 }
 
 func_275D() {
@@ -337,8 +337,8 @@ func_275D() {
 
     if(var_02 istouching(self)) {
       foreach(var_04 in var_00) {
-        if(distancesquared(var_04.var_116, self.origin) > 10000) {
-          var_02 setOrigin(var_04.var_116, 1);
+        if(distancesquared(var_04.origin, self.origin) > 10000) {
+          var_02 setOrigin(var_04.origin, 1);
           var_00 = common_scripts\utility::func_F93(var_00, var_04);
           break;
         }
@@ -357,7 +357,7 @@ func_5A5F() {
   func_275A(maps\mp\killstreaks\_killstreaks::func_4533("carepackage"));
   for(;;) {
     self waittill("captured", var_00);
-    if(var_00.var_1A7 == self.var_1A7) {
+    if(var_00.team == self.team) {
       level notify("attackers_secure_drop");
     } else {
       level notify("defenders_secure_drop");
@@ -374,7 +374,7 @@ func_275A(param_00) {
   var_01 = 1;
   if(var_01) {
     var_02 = spawn("trigger_radius", self.origin + (0, 0, -1), 0, 160, 128);
-    var_03 = maps\mp\gametypes\_gameobjects::func_2837(self.var_1A7, var_02, [self], (0, 0, 100));
+    var_03 = maps\mp\gametypes\_gameobjects::func_2837(self.team, var_02, [self], (0, 0, 100));
     var_03 maps\mp\gametypes\_gameobjects::func_C30("friendly");
     var_03 maps\mp\gametypes\_gameobjects::func_1F49(lib_0501::func_4647("airdrop_contestable"));
     var_03 maps\mp\gametypes\_gameobjects::func_8A5A(lib_0501::func_4647("airdrop_captureTime"));
@@ -395,7 +395,7 @@ func_275A(param_00) {
       var_04.var_A222 = var_03;
     }
 
-    lib_04FF::func_8617("none", 121);
+    lib_04FF::playsound("none", 121);
     self.var_321B lib_04FF::func_990(self.origin, undefined, (0, 0, 32), lib_0501::func_4647("airdrop_captureTime") * 1000, 121, 0, 1, 0, 1, 1);
     self.var_321B onupdateuseratecrate();
     self.var_321B thread dropobjectiveupdate();
@@ -406,14 +406,14 @@ func_275A(param_00) {
   lib_04FF::func_8613(121);
   self setCursorHint("HINT_NOICON");
   self setHintString(&"RAIDS_USE_SECURE_AIRDROP");
-  var_05 = self.var_1A7;
-  foreach(var_07 in level.var_744A) {
-    if(var_07.var_1A7 != var_05 || var_07.var_1A7 == "spectator") {
+  var_05 = self.team;
+  foreach(var_07 in level.players) {
+    if(var_07.team != var_05 || var_07.team == "spectator") {
       self disableplayeruse(var_07);
       continue;
     }
 
-    if(var_07.var_1A7 == var_05) {
+    if(var_07.team == var_05) {
       self enableplayeruse(var_07);
     }
   }
@@ -427,7 +427,7 @@ canseecrate(param_00, param_01) {
   var_04 = 10;
   var_05 = param_00 getEye();
   var_06 = anglestoup(self.var_A582[0].var_1D);
-  var_07 = self.var_A582[0].var_116 + var_06 * var_02 + var_03 * var_04;
+  var_07 = self.var_A582[0].origin + var_06 * var_02 + var_03 * var_04;
   var_08 = param_01[0];
   for(;;) {
     var_09 = bulletTrace(var_07, var_05, 0, var_08, 0, 0, 0, 0, 1, 0, 0);
@@ -464,7 +464,7 @@ onendusecrate(param_00, param_01, param_02) {
   }
 
   var_03 = self.var_A582[0];
-  var_04 = self.var_9AC3[var_03.var_1A7];
+  var_04 = self.var_9AC3[var_03.team];
   foreach(var_06 in var_04) {}
 
   var_03 notify("captured", param_01);
@@ -493,7 +493,7 @@ onupdateuseratecrate() {
     function_01D1(var_00.var_698E, "waypoint_supplydrop_ally_map");
     function_01D1(var_00.var_698D, "waypoint_supplydrop_enemy_map");
     lib_04FF::func_8611();
-    lib_04FF::func_8617("taking", 122);
+    lib_04FF::playsound("taking", 122);
     var_00 lib_04FF::func_860F();
   }
 
@@ -501,7 +501,7 @@ onupdateuseratecrate() {
     function_01D1(var_00.var_698E, "waypoint_supplydrop_neutral_map");
     function_01D1(var_00.var_698D, "waypoint_supplydrop_ally_map");
     lib_04FF::func_860F();
-    lib_04FF::func_8615(0, 121);
+    lib_04FF::playlocalsound(0, 121);
     var_00 lib_04FF::func_8611();
   }
 }
@@ -527,7 +527,7 @@ func_11C3(param_00) {
     return;
   }
 
-  if(param_00.var_1A7 == self.var_1A7) {
+  if(param_00.team == self.team) {
     function_01D1(self.var_698E, "waypoint_supplydrop_ally_map");
     function_01D1(self.var_698D, "waypoint_supplydrop_enemy_map");
     lib_04FF::func_8613(122);
@@ -562,9 +562,9 @@ func_11C3(param_00) {
 }
 
 preventactionslotspam() {
-  self method_8309(0);
+  self scripted_elems(0);
   common_scripts\utility::func_A716("death", "game_ended", "disconnect", "attemptCaptureEnd");
-  self method_8309(1);
+  self scripted_elems(1);
 }
 
 func_A7A0(param_00) {
@@ -572,9 +572,9 @@ func_A7A0(param_00) {
     return 0;
   }
 
-  var_01 = param_00.var_116;
+  var_01 = param_00.origin;
   var_02 = gettime();
-  while(isDefined(param_00) && maps\mp\_utility::func_57A0(param_00) && !param_00 isonground() && var_01 == param_00.var_116 && param_00 useButtonPressed()) {
+  while(isDefined(param_00) && maps\mp\_utility::isreallyalive(param_00) && !param_00 isonground() && var_01 == param_00.origin && param_00 useButtonPressed()) {
     var_03 = gettime() - var_02;
     if(var_03 >= 200) {
       return 1;
@@ -646,23 +646,23 @@ func_6F82(param_00, param_01, param_02) {
   self setclientomnvar("ui_use_bar_text", 1);
   self setclientomnvar("ui_use_bar_start_time", int(gettime()));
   var_03 = -1;
-  while(maps\mp\_utility::func_57A0(self) && isDefined(param_00) && param_00.var_54F5 && !level.var_3F9D) {
+  while(maps\mp\_utility::isreallyalive(self) && isDefined(param_00) && param_00.var_54F5 && !level.gameended) {
     if(var_03 != param_00.var_A22B) {
       if(param_00.var_28D5 > param_01) {
         param_00.var_28D5 = param_01;
       }
 
       if(param_00.var_A22B > 0) {
-        var_04 = int(param_02.var_116[0]);
-        var_05 = int(param_02.var_116[1]);
-        var_06 = int(param_02.var_116[2] + 25);
+        var_04 = int(param_02.origin[0]);
+        var_05 = int(param_02.origin[1]);
+        var_06 = int(param_02.origin[2] + 25);
         self luinotifyevent(&"carepackage_icon_world_position", 3, var_04, var_05, var_06);
         var_07 = gettime();
         var_08 = param_00.var_28D5 / param_01;
         var_09 = var_07 + 1 - var_08 * param_01 / param_00.var_A22B;
         self setclientomnvar("ui_use_bar_end_time", int(var_09));
         self setclientomnvar("ui_mp_carepackage_scorestreak", maps\mp\_utility::func_453F("carepackage"));
-        self setclientomnvar("ui_mp_carepackage_team", maps\mp\_utility::func_46D4(param_02.var_1A7));
+        self setclientomnvar("ui_mp_carepackage_team", maps\mp\_utility::func_46D4(param_02.team));
         if(isDefined(param_02.var_117)) {
           self setclientomnvar("ui_mp_carepackage_owner", param_02.var_117 getentitynumber());
         }
@@ -680,14 +680,14 @@ func_6F82(param_00, param_01, param_02) {
 }
 
 func_A214(param_00, param_01) {
-  while(!level.var_3F9D && isDefined(self) && maps\mp\_utility::func_57A0(param_00) && param_00 useButtonPressed() && self.var_28D5 < param_01) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(param_00) && param_00 useButtonPressed() && self.var_28D5 < param_01) {
     self.var_28D5 = self.var_28D5 + self.var_A22B * 50;
     if(!self.var_A22B) {
       self.var_A22B = 1;
     }
 
     if(self.var_28D5 >= param_01) {
-      return maps\mp\_utility::func_57A0(param_00);
+      return maps\mp\_utility::isreallyalive(param_00);
     }
 
     wait 0.05;
@@ -784,11 +784,11 @@ func_2D30(param_00, param_01, param_02) {
   }
 
   if(isDefined(self.var_698E)) {
-    maps\mp\_utility::func_68B(self.var_698E);
+    maps\mp\_utility::_objective_delete(self.var_698E);
   }
 
   if(isDefined(self.var_698D)) {
-    maps\mp\_utility::func_68B(self.var_698D);
+    maps\mp\_utility::_objective_delete(self.var_698D);
   }
 
   if(isDefined(self) && !function_0279(self)) {
@@ -827,12 +827,12 @@ secureobjectiveonplayerkilled(param_00, param_01, param_02, param_03, param_04, 
     foreach(var_0C in level.activesecureobjective) {
       if(isDefined(var_0C.var_9D65)) {
         if(param_01 istouching(var_0C.var_9D65)) {
-          if(param_01.var_1A7 == game["attackers"]) {
+          if(param_01.team == game["attackers"]) {
             param_01 thread maps\mp\_events::func_5A82(var_0A, param_09, param_04);
             param_01.var_62A1["assaultObjective"] = var_0C;
           }
 
-          if(param_01.var_1A7 == game["defenders"]) {
+          if(param_01.team == game["defenders"]) {
             param_01 thread maps\mp\_events::func_2C80(var_0A, param_09, param_04);
             param_01.var_62A1["defendObjective"] = var_0C;
           }
@@ -842,12 +842,12 @@ secureobjectiveonplayerkilled(param_00, param_01, param_02, param_03, param_04, 
 
         if(var_0A istouching(var_0C.var_9D65)) {
           param_01 thread maps\mp\gametypes\_missions::func_80BB(param_04, param_03);
-          if(var_0A.var_1A7 == game["attackers"]) {
+          if(var_0A.team == game["attackers"]) {
             param_01 thread maps\mp\_events::func_2C80(var_0A, param_09, param_04);
             param_01.var_62A1["defendObjective"] = var_0C;
           }
 
-          if(var_0A.var_1A7 == game["defenders"]) {
+          if(var_0A.team == game["defenders"]) {
             param_01 thread maps\mp\_events::func_10BA(var_0A, param_09, param_04);
             param_01.var_62A1["assaultObjective"] = var_0C;
           }
@@ -859,7 +859,7 @@ secureobjectiveonplayerkilled(param_00, param_01, param_02, param_03, param_04, 
 
 onsecureobjectiveuse(param_00) {
   foreach(var_02 in self.var_9AC3[game["attackers"]]) {
-    var_02.var_721C thread raidsecureobjectiveevent();
+    var_02.player thread raidsecureobjectiveevent();
     param_00 notify("ch_capture", self);
   }
 
@@ -867,7 +867,7 @@ onsecureobjectiveuse(param_00) {
 }
 
 raidsecureobjectiveevent() {
-  maps\mp\_utility::func_50EA("raids_airdrop_secure", 1);
+  maps\mp\_utility::incplayerstat("raids_airdrop_secure", 1);
   level thread maps\mp\gametypes\_rank::giverankxp("raids_airdrop_secure", self);
 }
 
@@ -875,7 +875,7 @@ func_0F30(param_00, param_01) {
   var_02 = 300;
   var_03 = 100;
   var_04 = 1250;
-  var_05 = vectorNormalize(param_01 - param_00.var_116);
+  var_05 = vectorNormalize(param_01 - param_00.origin);
   var_06 = var_05[0] * var_02;
   var_07 = var_05[1] * var_02;
   var_08 = -1 * var_05[1] * var_04;
@@ -891,7 +891,7 @@ func_6376(param_00) {
   for(;;) {
     var_02 = self.origin + anglestoup(self.var_1D);
     if(distancesquared(var_01, var_02) > 100) {
-      foreach(var_04 in level.var_744A) {
+      foreach(var_04 in level.players) {
         if(var_04 istouching(self)) {
           thread func_0F30(var_04, var_02);
           var_04 dodamage(150, var_02, undefined, self, "MOD_PROJECTILE", "carepackage_crate_mp");

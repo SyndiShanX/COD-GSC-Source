@@ -206,31 +206,31 @@ zombies_init() {
   level.var_71D.zombie_vox_attack_hit_wait_time_max = 5;
   level.var_71D.zombie_vox_attack_hit_wait_time = randomintrange(2, 4);
   level.var_71D.zombie_vox_attack_hit_req_names = ["attack_hit", "anim_sprint_attack_1", "anim_sprint_attack_2", "anim_sprint_attack_3", "anim_stand_attack_1", "anim_stand_attack_2", "anim_stand_attack_3"];
-  level.var_611["torso_arm_loss_left"] = loadfx("vfx/blood/dlc_zombie_torso_loss_arm_le");
-  level.var_611["torso_arm_loss_right"] = loadfx("vfx/blood/dlc_zombie_torso_loss_arm_ri");
-  level.var_611["torso_head_loss"] = loadfx("vfx/blood/dlc_zombie_torso_loss_head_2");
-  level.var_611["torso_head_loss_p_melee_fdr_02"] = loadfx("vfx/blood/dlc_zombie_torso_loss_head_p_melee_fdr_02");
-  level.var_611["torso_head_loss_p_melee_fdr_03"] = loadfx("vfx/blood/dlc_zombie_torso_loss_head_p_melee_fdr_03");
-  level.var_611["torso_head_loss_p_melee_fdr_04"] = loadfx("vfx/blood/dlc_zombie_torso_loss_head_p_melee_fdr_04");
-  level.var_611["zmb_paired_melee_head_pop_fdr_02"] = loadfx("vfx/blood/zmb_paired_melee_head_pop_fdr_02");
-  level.var_611["zmb_paired_melee_head_pop_fdr_03"] = loadfx("vfx/blood/zmb_paired_melee_head_pop_fdr_03");
-  level.var_611["zmb_paired_melee_head_pop_fdr_04"] = loadfx("vfx/blood/zmb_paired_melee_head_pop_fdr_04");
-  level.var_611["torso_loss_head_p_melee_spr_01"] = loadfx("vfx/blood/dlc_zombie_torso_loss_head_p_melee_spr_01");
-  level.var_611["zmb_paired_melee_head_pop_spr_01"] = loadfx("vfx/blood/zmb_paired_melee_head_pop_spr_01");
-  level.var_611["torso_head_loss_small"] = loadfx("vfx/blood/dlc_zombie_torso_squirt_up");
-  level.var_611["torso_loss_left"] = loadfx("vfx/blood/dlc_zombie_torso_loss_impact_le");
-  level.var_611["torso_loss_right"] = loadfx("vfx/blood/dlc_zombie_torso_loss_impact_ri");
-  level.var_611["arm_loss_left"] = loadfx("vfx/blood/dlc_zombie_arm_loss_impact_le");
-  level.var_611["arm_loss_right"] = loadfx("vfx/blood/dlc_zombie_arm_loss_impact_ri");
-  level.var_611["head_gibs"] = loadfx("vfx/blood/zom_head_impact_01");
-  level.var_611["limb_loss_left"] = loadfx("vfx/blood/dlc_zombie_limb_loss_impact_le");
-  level.var_611["limb_loss_right"] = loadfx("vfx/blood/dlc_zombie_limb_loss_impact_ri");
-  level.var_611["gib_full_body"] = loadfx("vfx/blood/dlc_zombie_gib_full_body");
-  level.var_611["gib_full_body_cheap"] = loadfx("vfx/blood/dlc_zombie_gib_full_body_cheap");
-  level.var_611["gib_bloodpool"] = loadfx("vfx/blood/dlc_zombie_blood_tread_fx");
-  level.var_611["crawl_dust"] = loadfx("vfx/treadfx/DLC/crawl_dust");
-  level.var_611["nuke_blast"] = loadfx("vfx/gameplay/mp/zombie/zombie_nuke_burst");
-  level.var_611["zombieSpawn"] = loadfx("vfx/unique/infected_turn_lightning_01");
+  level._effect["torso_arm_loss_left"] = loadfx("vfx/blood/dlc_zombie_torso_loss_arm_le");
+  level._effect["torso_arm_loss_right"] = loadfx("vfx/blood/dlc_zombie_torso_loss_arm_ri");
+  level._effect["torso_head_loss"] = loadfx("vfx/blood/dlc_zombie_torso_loss_head_2");
+  level._effect["torso_head_loss_p_melee_fdr_02"] = loadfx("vfx/blood/dlc_zombie_torso_loss_head_p_melee_fdr_02");
+  level._effect["torso_head_loss_p_melee_fdr_03"] = loadfx("vfx/blood/dlc_zombie_torso_loss_head_p_melee_fdr_03");
+  level._effect["torso_head_loss_p_melee_fdr_04"] = loadfx("vfx/blood/dlc_zombie_torso_loss_head_p_melee_fdr_04");
+  level._effect["zmb_paired_melee_head_pop_fdr_02"] = loadfx("vfx/blood/zmb_paired_melee_head_pop_fdr_02");
+  level._effect["zmb_paired_melee_head_pop_fdr_03"] = loadfx("vfx/blood/zmb_paired_melee_head_pop_fdr_03");
+  level._effect["zmb_paired_melee_head_pop_fdr_04"] = loadfx("vfx/blood/zmb_paired_melee_head_pop_fdr_04");
+  level._effect["torso_loss_head_p_melee_spr_01"] = loadfx("vfx/blood/dlc_zombie_torso_loss_head_p_melee_spr_01");
+  level._effect["zmb_paired_melee_head_pop_spr_01"] = loadfx("vfx/blood/zmb_paired_melee_head_pop_spr_01");
+  level._effect["torso_head_loss_small"] = loadfx("vfx/blood/dlc_zombie_torso_squirt_up");
+  level._effect["torso_loss_left"] = loadfx("vfx/blood/dlc_zombie_torso_loss_impact_le");
+  level._effect["torso_loss_right"] = loadfx("vfx/blood/dlc_zombie_torso_loss_impact_ri");
+  level._effect["arm_loss_left"] = loadfx("vfx/blood/dlc_zombie_arm_loss_impact_le");
+  level._effect["arm_loss_right"] = loadfx("vfx/blood/dlc_zombie_arm_loss_impact_ri");
+  level._effect["head_gibs"] = loadfx("vfx/blood/zom_head_impact_01");
+  level._effect["limb_loss_left"] = loadfx("vfx/blood/dlc_zombie_limb_loss_impact_le");
+  level._effect["limb_loss_right"] = loadfx("vfx/blood/dlc_zombie_limb_loss_impact_ri");
+  level._effect["gib_full_body"] = loadfx("vfx/blood/dlc_zombie_gib_full_body");
+  level._effect["gib_full_body_cheap"] = loadfx("vfx/blood/dlc_zombie_gib_full_body_cheap");
+  level._effect["gib_bloodpool"] = loadfx("vfx/blood/dlc_zombie_blood_tread_fx");
+  level._effect["crawl_dust"] = loadfx("vfx/treadfx/DLC/crawl_dust");
+  level._effect["nuke_blast"] = loadfx("vfx/gameplay/mp/zombie/zombie_nuke_burst");
+  level._effect["zombieSpawn"] = loadfx("vfx/unique/infected_turn_lightning_01");
   level.var_666C = 2;
   level.var_ABD3 = -1000;
   level.var_A980 = 0;
@@ -335,7 +335,7 @@ dozombiethings() {
 handlezombieaggro(param_00, param_01) {
   var_02 = [];
   foreach(var_04 in param_00) {
-    if(maps\mp\_utility::func_57A0(var_04)) {
+    if(maps\mp\_utility::isreallyalive(var_04)) {
       var_02[var_02.size] = var_04;
     }
   }
@@ -373,7 +373,7 @@ updatezombiemovemode() {
 func_6BD7(param_00, param_01, param_02) {
   lib_0547::func_6BAA(param_00, param_01, param_02);
   self.var_220D = ::lib_054D::func_6BD0;
-  self.var_648E = common_scripts\utility::func_7A33(getarraykeys(level.var_87E["mp_zombie_generic"]["move_style"]));
+  self.var_648E = common_scripts\utility::random(getarraykeys(level.var_87E["mp_zombie_generic"]["move_style"]));
   lib_0378::func_8D74("onZombieSpawn");
   thread lib_0547::func_4A58();
   var_03 = lib_0547::func_AC4B(self.origin, "spawn");

@@ -190,7 +190,7 @@ func_277F(param_00, param_01, param_02, param_03, param_04) {
   } else {
     var_0B = get_viable_gbl_aliases(var_05, param_00, param_01, self);
     if(var_0B.size > 0) {
-      var_07 = common_scripts\utility::func_7A33(var_0B);
+      var_07 = common_scripts\utility::random(var_0B);
       var_08 = 1;
     } else if(param_01 == "perk_ouch") {
       var_07 = level.var_A62B.var_90BE[var_05].var_BB4[param_00][param_01];
@@ -871,7 +871,7 @@ func_AB1C(param_00, param_01, param_02) {
     }
   }
 
-  var_05 = common_scripts\utility::func_7A33(self.var_8F2F[param_01]);
+  var_05 = common_scripts\utility::random(self.var_8F2F[param_01]);
   self.var_8F2F[param_01] = common_scripts\utility::func_F93(self.var_8F2F[param_01], var_05);
   if(isDefined(param_02)) {
     var_05 = param_02;
@@ -1124,7 +1124,7 @@ func_2EC0(param_00) {
   }
 
   foreach(var_02 in param_00.var_20D9) {
-    if(!isDefined(var_02) || !maps\mp\_utility::func_57A0(var_02)) {
+    if(!isDefined(var_02) || !maps\mp\_utility::isreallyalive(var_02)) {
       return 0;
     }
   }
@@ -1148,7 +1148,7 @@ func_7401() {
 }
 
 func_27E1(param_00) {
-  var_01 = common_scripts\utility::func_F92(level.players);
+  var_01 = common_scripts\utility::array_randomize(level.players);
   var_02 = undefined;
   var_03 = undefined;
   foreach(var_05 in var_01) {
@@ -1229,7 +1229,7 @@ func_441D(param_00) {
     return level.players[randomint(level.players.size)];
   }
 
-  var_02 = common_scripts\utility::func_F92(level.players);
+  var_02 = common_scripts\utility::array_randomize(level.players);
   foreach(var_04 in level.players) {
     if(var_04 != var_01) {
       return var_04;

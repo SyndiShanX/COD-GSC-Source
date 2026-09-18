@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_airship_precache::func_F9();
-  maps\createart\mp_airship_art::func_F9();
-  maps\mp\mp_airship_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_airship_lighting::func_F9();
-  maps\mp\mp_airship_aud::func_F9();
+  maps\mp\mp_airship_precache::main();
+  maps\createart\mp_airship_art::main();
+  maps\mp\mp_airship_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_airship_lighting::main();
+  maps\mp\mp_airship_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_airship");
   game["attackers"] = "allies";
   game["defenders"] = "axis";

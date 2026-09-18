@@ -9,25 +9,25 @@ main() {
   }
 
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.gametype, 0, 0, 9);
-    maps\mp\_utility::func_7BFA(level.gametype, 10);
-    maps\mp\_utility::func_7BF9(level.gametype, 75);
-    maps\mp\_utility::func_7BF7(level.gametype, 1);
-    maps\mp\_utility::func_7C04(level.gametype, 1);
-    maps\mp\_utility::func_7BF1(level.gametype, 0);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
+    maps\mp\_utility::registerroundswitchdvar(level.gametype, 0, 0, 9);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 10);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 75);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
 
-  maps\mp\_utility::func_86EB(3);
+  maps\mp\_utility::setovertimelimitdvar(3);
   maps\mp\_utility::func_873B(1);
   level.var_6BAF = ::func_6BAF;
   level.onnormaldeath = ::onnormaldeath;
@@ -78,13 +78,13 @@ main() {
 func_5300() {
   maps\mp\_utility::func_8653();
   setdynamicdvar("scr_twar_roundswitch", 0);
-  maps\mp\_utility::func_7BF8("twar", 0, 0, 9);
+  maps\mp\_utility::registerroundswitchdvar("twar", 0, 0, 9);
   setdynamicdvar("scr_twar_roundlimit", 1);
-  maps\mp\_utility::func_7BF7("twar", 1);
+  maps\mp\_utility::registerroundlimitdvar("twar", 1);
   setdynamicdvar("scr_twar_winlimit", 1);
-  maps\mp\_utility::func_7C04("twar", 1);
+  maps\mp\_utility::registerwinlimitdvar("twar", 1);
   setdynamicdvar("scr_twar_halftime", 0);
-  maps\mp\_utility::func_7BE5("twar", 0);
+  maps\mp\_utility::registerhalftimedvar("twar", 0);
   setdynamicdvar("scr_twar_halftime", 0);
   setdynamicdvar("scr_twar_minionsmax", getmatchrulesdata("twarData", "numMinions"));
   setdynamicdvar("scr_twar_capture_time", getmatchrulesdata("twarData", "captureTime"));
@@ -107,18 +107,18 @@ func_6BAF() {
     game["defenders"] = var_00;
   }
 
-  maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_TWAR");
-  maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_TWAR");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_TWAR");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_TWAR");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_TWAR");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_TWAR");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_TWAR");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_TWAR");
   } else {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_TWAR_SCORE");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_TWAR_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_TWAR_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_TWAR_SCORE");
   }
 
-  maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_TWAR_HINT");
-  maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_TWAR_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_TWAR_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_TWAR_HINT");
   game["dialog"]["lockouts"]["mtm_taking"] = 5;
   game["dialog"]["lockouts"]["mtm_etaking"] = 5;
   lib_050D::func_10E4();
@@ -187,7 +187,7 @@ func_8FA8(param_00) {
 func_2777() {
   var_00[0] = func_8FA8((0, 0, 0));
   var_01 = spawn("trigger_radius", (0, 0, 0), 0, level.var_AC8B, level.var_AC87);
-  var_01.var_14F = level.var_AC8B;
+  var_01.radius = level.var_AC8B;
   var_02 = getdvarfloat("scr_twar_capture_time", 20);
   var_03 = maps\mp\gametypes\_gameobjects::func_2837("neutral", var_01, var_00);
   var_03 maps\mp\gametypes\_gameobjects::func_C30("any");
@@ -356,16 +356,16 @@ func_7D4C() {
 
 func_6ABC(param_00) {
   var_01 = param_00.team;
-  var_02 = maps\mp\_utility::func_45DE(var_01);
+  var_02 = maps\mp\_utility::getotherteam(var_01);
   func_AC8D(var_01);
-  maps\mp\_utility::func_5C39("mtm_taking", var_01);
-  maps\mp\_utility::func_5C39("mtm_etaking", var_02);
+  maps\mp\_utility::leaderdialog("mtm_taking", var_01);
+  maps\mp\_utility::leaderdialog("mtm_etaking", var_02);
   level notify("update_flag_outline");
 }
 
 func_6BBF(param_00) {
   var_01 = param_00.team;
-  var_02 = maps\mp\_utility::func_45DE(var_01);
+  var_02 = maps\mp\_utility::getotherteam(var_01);
   var_03 = self.var_AC7C;
   var_03.owner = var_01;
   var_04 = var_03.index;
@@ -394,7 +394,7 @@ func_6BBF(param_00) {
     func_AC83();
     func_AC7E();
     level maps\mp\gametypes\_gamescore::func_47BD(var_01, 1, 1);
-    maps\mp\_utility::func_5C39("mtm_secured", var_01);
+    maps\mp\_utility::leaderdialog("mtm_secured", var_01);
     if(level.gameended) {
       maps\mp\gametypes\_gameobjects::func_2F93();
     } else {
@@ -419,7 +419,7 @@ func_5C48(param_00, param_01) {
 
 func_0671(param_00, param_01) {
   wait 0.05;
-  maps\mp\_utility::func_5C39(param_00, param_01);
+  maps\mp\_utility::leaderdialog(param_00, param_01);
 }
 
 func_47C9(param_00) {
@@ -430,7 +430,7 @@ func_47C9(param_00) {
   }
 
   if(isPlayer(var_01)) {
-    level thread maps\mp\_utility::func_9863("callout_securedposition", var_01);
+    level thread maps\mp\_utility::teamplayercardsplash("callout_securedposition", var_01);
   }
 
   var_02 = getarraykeys(param_00);
@@ -458,7 +458,7 @@ func_6BBE() {
   var_00 = self.var_A22B;
   var_01 = 0;
   var_02 = 0;
-  var_03 = maps\mp\_utility::func_45DE(self.var_230F);
+  var_03 = maps\mp\_utility::getotherteam(self.var_230F);
   foreach(var_05 in self.var_9AC3[var_03]) {
     var_06 = var_05.player;
     if(!isDefined(var_06)) {
@@ -617,9 +617,9 @@ func_23C2(param_00) {
 
 func_23C3(param_00) {
   if(level.var_9FBF[param_00] == 1) {
-    maps\mp\_utility::func_5C39("mtm_clrd", param_00, "momentum_down");
+    maps\mp\_utility::leaderdialog("mtm_clrd", param_00, "momentum_down");
   } else {
-    maps\mp\_utility::func_5C39("mtm_reset", param_00, "momentum_down");
+    maps\mp\_utility::leaderdialog("mtm_reset", param_00, "momentum_down");
   }
 
   func_23C2(param_00);
@@ -690,7 +690,7 @@ func_8528(param_00, param_01) {
     level.var_9FC0 maps\mp\gametypes\_gameobjects::func_A18F();
     if(var_02 > param_01) {
       if(var_02 != level.var_62C4) {
-        maps\mp\_utility::func_5C39("mtm_lost", param_00, "momentum_down");
+        maps\mp\_utility::leaderdialog("mtm_lost", param_00, "momentum_down");
         return;
       }
 
@@ -698,7 +698,7 @@ func_8528(param_00, param_01) {
     }
 
     if(func_55B5(param_00)) {
-      maps\mp\_utility::func_5C39("mtm_max", param_00);
+      maps\mp\_utility::leaderdialog("mtm_max", param_00);
       if(!game["max_meter"][param_00]) {
         game["max_meter"][param_00] = 1;
         foreach(var_04 in level.players) {
@@ -715,7 +715,7 @@ func_8528(param_00, param_01) {
       return;
     }
 
-    maps\mp\_utility::func_5C39("mtm_gain", var_03);
+    maps\mp\_utility::leaderdialog("mtm_gain", var_03);
     return;
   }
 }
@@ -754,7 +754,7 @@ func_520A(param_00) {
 }
 
 func_522D(param_00) {
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   if(game["status"] == "overtime") {
     var_01 = 0;
     var_02 = game["owned_flags"][param_00];
@@ -1199,7 +1199,7 @@ func_A139() {
     wait 0.05;
   }
 
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   var_00 = getdvarint("scr_twar_minionsmax", 18);
   if(var_00 <= 0) {
     return;
@@ -1268,9 +1268,9 @@ func_A139() {
               break;
           }
 
-          var_17 maps\mp\_utility::func_642(var_19);
+          var_17 maps\mp\_utility::_giveweapon(var_19);
           var_17 switchtoweaponimmediate(var_19);
-          var_17 maps\mp\_utility::func_47A2("specialty_minion");
+          var_17 maps\mp\_utility::giveperk("specialty_minion");
           var_17.agentspeedscale = getdvarfloat("scr_twar_minionmovespeedscale", 0.85);
           var_17.var_29AA = getdvarfloat("scr_twar_miniondamagescale", 0.5);
           var_17.agentname = &"MP_MINION";

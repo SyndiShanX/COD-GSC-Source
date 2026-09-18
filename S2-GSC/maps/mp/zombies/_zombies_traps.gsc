@@ -4,8 +4,8 @@
 **********************************************/
 
 init() {
-  level.var_611["trap_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange");
-  level.var_611["trap_not_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_blink");
+  level._effect["trap_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange");
+  level._effect["trap_not_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_blink");
   level.var_9CD2 = [];
   level.var_9CD2["default"] = [];
   level.var_9CD1 = [];
@@ -975,14 +975,14 @@ unset_zombie_electrified() {
 func_9CA1(param_00, param_01) {
   var_02 = param_01[2] - param_00.origin[2];
   if(var_02 < 32) {
-    return common_scripts\utility::func_7A33(["right_leg_upper", "left_leg_upper"]);
+    return common_scripts\utility::random(["right_leg_upper", "left_leg_upper"]);
   }
 
   if(var_02 < 60) {
-    return common_scripts\utility::func_7A33(["left_arm_upper", "right_arm_upper"]);
+    return common_scripts\utility::random(["left_arm_upper", "right_arm_upper"]);
   }
 
-  return common_scripts\utility::func_7A33(["head", "neck"]);
+  return common_scripts\utility::random(["head", "neck"]);
 }
 
 func_56E6(param_00) {
@@ -1229,8 +1229,8 @@ func_9CD7(param_00) {
     precachempanim("zombie_ark_zomboni_trap");
     level.var_AC79 = 1;
     createthreatbiasgroup("zomboni");
-    level.var_611["chompy_churn"] = loadfx("vfx/gameplay/mp/zombie/dlc_chompy_churn");
-    level.var_611["chompy_lights"] = loadfx("vfx/gameplay/mp/zombie/dlc_chompy_lights");
+    level._effect["chompy_churn"] = loadfx("vfx/gameplay/mp/zombie/dlc_chompy_churn");
+    level._effect["chompy_lights"] = loadfx("vfx/gameplay/mp/zombie/dlc_chompy_lights");
     level thread func_9CEC();
   }
 
@@ -1284,7 +1284,7 @@ func_9CD7(param_00) {
       case "kill_trigger":
         var_11 enablelinkTo();
         var_11 linkTo(var_01);
-        var_01.var_5A81 = var_11;
+        var_01.killtrigger = var_11;
         break;
 
       case "door":
@@ -1720,7 +1720,7 @@ func_9CDE(param_00, param_01) {
 func_9CE3(param_00) {
   self endon("zomboni_done");
   for(;;) {
-    param_00.var_5A81 waittill("trigger", var_01);
+    param_00.killtrigger waittill("trigger", var_01);
     if(!isalive(var_01)) {
       continue;
     }
@@ -1833,14 +1833,14 @@ func_9CF3(param_00, param_01, param_02, param_03) {
     case "remove_arms":
       var_05 = lib_0541::func_5E60("right_arm_lower");
       var_06 = lib_0541::func_5E60("left_arm_lower");
-      var_07 = common_scripts\utility::func_7A33([var_05, var_06, var_05 | var_06]);
+      var_07 = common_scripts\utility::random([var_05, var_06, var_05 | var_06]);
       lib_0541::func_65D0(self.var_6250 | var_07, 1, 1, (0, 0, 1), 0);
       break;
 
     case "remove_legs":
       var_08 = lib_0541::func_5E60("right_leg_lower");
       var_09 = lib_0541::func_5E60("left_leg_lower");
-      var_0A = common_scripts\utility::func_7A33([var_08, var_09, var_08 | var_09]);
+      var_0A = common_scripts\utility::random([var_08, var_09, var_08 | var_09]);
       lib_0541::func_65D0(self.var_6250 | var_0A, 1, 1, (0, 0, 1), 0);
       break;
 
@@ -1992,8 +1992,8 @@ func_9CDD(param_00, param_01) {
 
 func_9CE5(param_00, param_01) {
   var_02 = [];
-  if(isDefined(param_00.var_81EF)) {
-    var_03 = strtok(param_00.var_81EF, " ");
+  if(isDefined(param_00.script_exploder)) {
+    var_03 = strtok(param_00.script_exploder, " ");
     for(var_04 = 0; var_04 < var_03.size; var_04++) {
       var_05 = getEnt(var_03[var_04], "script_linkname");
       if(isDefined(var_05)) {

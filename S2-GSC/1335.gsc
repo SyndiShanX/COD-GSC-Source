@@ -5,10 +5,10 @@
 
 init() {
   self.var_569F = 0;
-  level.var_611["zmb_moon_zmb_blind"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_zmb_blind");
-  level.var_611["zmb_moon_player_camo_cam"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_player_camo_cam");
-  level.var_611["zmb_moon_player_camo_wv"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_player_camo_wv");
-  level.var_611["zmb_moon_speed_up"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_speed_up");
+  level._effect["zmb_moon_zmb_blind"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_zmb_blind");
+  level._effect["zmb_moon_player_camo_cam"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_player_camo_cam");
+  level._effect["zmb_moon_player_camo_wv"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_player_camo_wv");
+  level._effect["zmb_moon_speed_up"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_speed_up");
 }
 
 func_3662() {
@@ -21,7 +21,7 @@ func_3662() {
     self[[level.custom_camo_func_on]]();
   }
 
-  playfxontagforclients(level.var_611["zmb_moon_player_camo_cam"], self, "Tag_Origin", self);
+  playfxontagforclients(level._effect["zmb_moon_player_camo_cam"], self, "Tag_Origin", self);
   lib_0378::func_8D74("aud_camo_use");
   thread func_17BB();
   thread camoplayerfx();
@@ -36,8 +36,8 @@ func_3662() {
 
 camoplayerfx() {
   if(lib_0547::func_4BA7("specialty_class_mobilization_zm")) {
-    var_00 = spawnlinkedfx(level.var_611["zmb_moon_speed_up"], self, "J_Knee_LE");
-    var_01 = spawnlinkedfx(level.var_611["zmb_moon_speed_up"], self, "J_Knee_RI");
+    var_00 = spawnlinkedfx(level._effect["zmb_moon_speed_up"], self, "J_Knee_LE");
+    var_01 = spawnlinkedfx(level._effect["zmb_moon_speed_up"], self, "J_Knee_RI");
     triggerfx(var_00);
     triggerfx(var_01);
     common_scripts\utility::waittill_any("camo_ended", "disconnect");
@@ -51,7 +51,7 @@ func_17BB() {
   while(self.var_569F) {
     foreach(var_01 in lib_0547::func_408F()) {
       if(!isDefined(var_01.var_5689) || var_01.var_5689 == 0) {
-        playfxontagforclients(level.var_611["zmb_moon_zmb_blind"], var_01, "J_Head", self);
+        playfxontagforclients(level._effect["zmb_moon_zmb_blind"], var_01, "J_Head", self);
         var_01.var_5689 = 1;
       }
     }
@@ -69,7 +69,7 @@ func_2F9E() {
     }
 
     foreach(var_01 in lib_0547::func_408F()) {
-      stopFXOnTag(level.var_611["zmb_moon_zmb_blind"], var_01, "J_Head");
+      stopFXOnTag(level._effect["zmb_moon_zmb_blind"], var_01, "J_Head");
     }
 
     lib_0547::func_8A6D(0);

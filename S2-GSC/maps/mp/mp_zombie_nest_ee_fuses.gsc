@@ -4,11 +4,11 @@
 ***********************************************/
 
 main() {
-  common_scripts\utility::func_3C87("flag_fuse_entered_correct");
-  common_scripts\utility::func_3C87("flag_player_inspected_right_hand");
-  common_scripts\utility::func_3C87("flag_cycle_started_once");
-  common_scripts\utility::func_3C87("flag_fuses_highlighted");
-  common_scripts\utility::func_3C87("flag_map_highlighted");
+  common_scripts\utility::flag_init("flag_fuse_entered_correct");
+  common_scripts\utility::flag_init("flag_player_inspected_right_hand");
+  common_scripts\utility::flag_init("flag_cycle_started_once");
+  common_scripts\utility::flag_init("flag_fuses_highlighted");
+  common_scripts\utility::flag_init("flag_map_highlighted");
   lib_0557::func_7846("5 Right Hand fuses", ::lib_0557::func_30D8, ["4 cart"], &"ZOMBIE_NEST_HINT_QUEST_FUSE", "ZOMBIE_NEST_HINT_QUEST_FUSE");
   lib_0557::func_781E("5 Right Hand fuses", "fuse matching start", ::func_785D, ::lib_0557::func_30D8, &"ZOMBIE_NEST_HINT_STEP_EXAMINE_RIGHT_HAND");
   lib_0557::func_781E("5 Right Hand fuses", "lift center rod", ::func_784D, ::lib_0557::func_30D8, &"ZOMBIE_NEST_HINT_STEP_FIRST_LIGHTNING_ROD");
@@ -156,7 +156,7 @@ func_9DBC(param_00, param_01) {
 
   level thread common_scripts\_exploder::func_88E(214);
   var_04 = getEnt("right_hand_of_god_model", "targetname");
-  playFXOnTag(level.var_611["zmb_rhog_on"], var_04, "Tag_Origin");
+  playFXOnTag(level._effect["zmb_rhog_on"], var_04, "Tag_Origin");
   var_04 lib_0378::func_8D74("aud_right_hand_of_god_ready");
 }
 
@@ -192,11 +192,11 @@ func_7218(param_00, param_01, param_02) {
   var_04 = anglesToForward(param_00.angles);
   var_05 = anglestoup(param_00.angles);
   if(param_00.script_noteworthy == "wire") {
-    playFX(level.var_611["zmb_fuse_chain_wire"], var_03.origin, var_04, var_05);
+    playFX(level._effect["zmb_fuse_chain_wire"], var_03.origin, var_04, var_05);
   }
 
   if(param_00.script_noteworthy == "fusebox") {
-    playFX(level.var_611["zmb_fuse_chain_box"], var_03.origin, var_04, var_05);
+    playFX(level._effect["zmb_fuse_chain_box"], var_03.origin, var_04, var_05);
   }
 
   var_03 moveTo(param_01.origin, param_02);
@@ -216,7 +216,7 @@ func_A689() {
   var_01 maps\mp\_utility::func_2CED(2, ::lib_0367::func_8E3C, "righthandgodtouch");
   var_00 common_scripts\utility::func_9D9F();
   var_02 = getEnt("right_hand_of_god_model", "targetname");
-  playFXOnTag(level.var_611["zmb_rhog_init"], var_02, "Tag_Origin");
+  playFXOnTag(level._effect["zmb_rhog_init"], var_02, "Tag_Origin");
 }
 
 func_785D() {
@@ -299,7 +299,7 @@ func_3F2B(param_00) {
           lib_0557::func_781D("5 Right Hand fuses", level.var_3F27);
         }
 
-        common_scripts\utility::func_3C8F("flag_fuses_highlighted");
+        common_scripts\utility::flag_set("flag_fuses_highlighted");
         return;
       }
 
@@ -334,7 +334,7 @@ func_4873(param_00) {
     if(common_scripts\utility::func_562E(param_00)) {
       if(!common_scripts\utility::func_3C77("flag_map_highlighted")) {
         lib_0557::func_781D("5 Right Hand fuses", level.var_7D2C);
-        common_scripts\utility::func_3C8F("flag_map_highlighted");
+        common_scripts\utility::flag_set("flag_map_highlighted");
         return;
       }
 
@@ -359,7 +359,7 @@ func_4874() {
   var_00 common_scripts\utility::func_9DA3();
   var_00 waittill("trigger", var_01);
   thread func_2EB6(var_01);
-  common_scripts\utility::func_3C8F("flag_cycle_started_once");
+  common_scripts\utility::flag_set("flag_cycle_started_once");
   var_00 common_scripts\utility::func_9D9F();
 }
 
@@ -516,7 +516,7 @@ func_6B34() {
 }
 
 func_2EA4() {
-  var_00 = common_scripts\utility::func_7A33(level.players);
+  var_00 = common_scripts\utility::random(level.players);
   var_00 thread lib_0367::func_8E3C("circuitmapfail");
 }
 
@@ -696,7 +696,7 @@ func_5413() {
     var_01 thread lib_0367::func_8E3B("conv_righthandaltarclue");
   }
 
-  common_scripts\utility::func_3C8F("flag_player_inspected_right_hand");
+  common_scripts\utility::flag_set("flag_player_inspected_right_hand");
   if(!common_scripts\utility::func_3C77("flag_cycle_started_once")) {
     lib_0557::func_7822("5 Right Hand fuses", &"ZOMBIE_NEST_HINT_STEP_ROUTE_TO_TOWER");
     func_4873(1);
@@ -947,7 +947,7 @@ func_9ECC() {
 }
 
 func_36B8() {
-  common_scripts\utility::func_3C8F("flag_fuse_entered_correct");
+  common_scripts\utility::flag_set("flag_fuse_entered_correct");
   func_8624();
   common_scripts\utility::array_thread(level.var_665B, ::func_868D);
   lib_0557::func_782D("5 Right Hand fuses", "fuse matching start");

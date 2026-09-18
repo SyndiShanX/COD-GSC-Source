@@ -16,7 +16,7 @@ truuseserumc(param_00) {
 }
 
 truuseserumcinternal() {
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     if(!isDefined(self.raidserumactive) || !self.raidserumactive) {
       maps\mp\_matchdata::func_5E9A("raid_ss_serum_c", self.origin);
       thread startmaniac();
@@ -64,12 +64,12 @@ maniacweapon() {
   var_00 = self getcurrentprimaryweapon();
   var_01 = self hasweapon("war_sword_mp");
   if(!var_01) {
-    maps\mp\_utility::func_642("war_sword_mp");
+    maps\mp\_utility::_giveweapon("war_sword_mp");
   }
 
   self switchtoweapon("war_sword_mp");
   common_scripts\utility::func_603();
-  common_scripts\utility::func_600();
+  common_scripts\utility::_disableoffhandweapons();
   self waittill("altered_state_end");
   common_scripts\utility::func_614();
   common_scripts\utility::func_617();

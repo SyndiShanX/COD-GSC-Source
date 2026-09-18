@@ -51,7 +51,7 @@ lewis_run_bullet_rewind() {
       var_00 waittill("reload_start");
       wait(0.7);
       for(var_06 = 0; var_06 < 7; var_06++) {
-        foreach(var_08 in common_scripts\utility::func_F92(var_00.rewindorigins)) {
+        foreach(var_08 in common_scripts\utility::array_randomize(var_00.rewindorigins)) {
           magicbullet(var_02, var_08, var_00 getEye() + (0, 0, -16), var_00);
           playFX(common_scripts\utility::func_44F5("zmb_lewis_upgraded_rewind"), var_08);
           wait 0.05;
@@ -304,7 +304,7 @@ exectute_mg81_feedback(param_00, param_01, param_02, param_03) {
 
 do_pommel_explosion_radius(param_00, param_01, param_02, param_03) {
   param_01 endon("disconnect");
-  playFX(level.var_611["zmb_pommel_energy_field_burst"], param_02);
+  playFX(level._effect["zmb_pommel_energy_field_burst"], param_02);
   lib_0378::func_8D74("zmb_pomel_grenade_final_explosion", param_02);
   foreach(var_05 in lib_0547::func_408F()) {
     if(!isDefined(var_05.var_A4B) || !common_scripts\utility::func_F79(["zombie_generic", "zombie_berserker", "zombie_heavy", "zombie_exploder"], var_05.var_A4B)) {

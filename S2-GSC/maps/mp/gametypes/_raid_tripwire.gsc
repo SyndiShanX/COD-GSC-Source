@@ -14,8 +14,8 @@ runtripwirelogic() {
 }
 
 runtripwirefx() {
-  level.var_611["trip_wire_exposion"] = loadfx("vfx/explosion/frag_grenade_concrete");
-  level.var_611["trip_wire_dust_on_bomb_plant"] = loadfx("vfx/weaponimpact/large_dirt_1");
+  level._effect["trip_wire_exposion"] = loadfx("vfx/explosion/frag_grenade_concrete");
+  level._effect["trip_wire_dust_on_bomb_plant"] = loadfx("vfx/weaponimpact/large_dirt_1");
 }
 
 watch_allow_fire() {
@@ -365,7 +365,7 @@ tripwire_place_anywhere_handler(param_00) {
   var_01 show();
   var_02 show();
   wait(0.03);
-  playFXOnTag(level.var_611["trip_wire_dust_on_bomb_plant"], var_01, "TAG_ORIGIN");
+  playFXOnTag(level._effect["trip_wire_dust_on_bomb_plant"], var_01, "TAG_ORIGIN");
   var_07 = lib_0380::func_6842("mp_war_tripwire_impact", undefined, var_01.origin);
   if(1) {
     var_02 scriptmodelplayanim("tripwire_plant_anim", "wire", 0, 1);

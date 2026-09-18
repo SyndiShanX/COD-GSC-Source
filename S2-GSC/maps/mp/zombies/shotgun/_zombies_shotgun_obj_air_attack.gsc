@@ -4,9 +4,9 @@
 ***********************************************************************/
 
 sg_init_obj_air_attack() {
-  common_scripts\utility::func_3C87("flag_flak_cannons_powered_on");
-  common_scripts\utility::func_3C87("flag_flak_cannons_ready");
-  common_scripts\utility::func_3C87("flag_players_have_won");
+  common_scripts\utility::flag_init("flag_flak_cannons_powered_on");
+  common_scripts\utility::flag_init("flag_flak_cannons_ready");
+  common_scripts\utility::flag_init("flag_players_have_won");
   common_scripts\utility::func_92C("plane_death", "vfx/vehicle/p47_death");
   common_scripts\utility::func_92C("zmb_isl_aa_gun_gk_energy", "vfx/map/mp_zombie_island/zmb_isl_aa_gun_gk_energy");
   common_scripts\utility::func_92C("zmb_stuka_turret_dirt_impact", "vfx/zombie/zmb_stuka_turret_dirt_impact");
@@ -32,7 +32,7 @@ run_air_attack(param_00) {
     return 1;
   }
 
-  common_scripts\utility::func_3C8F("flag_players_have_won");
+  common_scripts\utility::flag_set("flag_players_have_won");
   return 0;
 }
 
@@ -40,7 +40,7 @@ air_attack_skip_cleanup() {
   level endon("flag_players_have_won");
   level endon("sg_obj_timeout");
   level waittill("skipWave");
-  common_scripts\utility::func_3C8F("flag_players_have_won");
+  common_scripts\utility::flag_set("flag_players_have_won");
 }
 
 air_attack_set_rules() {
@@ -79,7 +79,7 @@ air_attack_score_counter() {
   }
 
   level notify("air_attack_all_planes_destroyed");
-  common_scripts\utility::func_3C8F("flag_players_have_won");
+  common_scripts\utility::flag_set("flag_players_have_won");
 }
 
 air_attack_cloud_handler() {
@@ -112,7 +112,7 @@ air_attack_cloud_handler() {
 air_attack_wave_handler() {
   var_00 = [1, 2, 3, 4];
   while(!common_scripts\utility::func_3C77("flag_players_have_won")) {
-    var_01 = common_scripts\utility::func_7A33(var_00);
+    var_01 = common_scripts\utility::random(var_00);
     var_00 = common_scripts\utility::func_F93(var_00, var_01);
     if(var_00.size <= 0) {
       var_00 = [1, 2, 3, 4];
@@ -274,7 +274,7 @@ aa_gun_use_think() {
       self.wall_model common_scripts\utility::func_379C("this_turret_is_done");
       self.wall_model aa_gun_unset_player_using(var_00, self.var_9EDD);
       self.wall_model common_scripts\utility::func_3796("this_turret_is_done");
-      playFX(level.var_611["zmb_isl_aa_gun_gk_energy"], self.wall_model.origin, anglesToForward(self.wall_model.angles));
+      playFX(level._effect["zmb_isl_aa_gun_gk_energy"], self.wall_model.origin, anglesToForward(self.wall_model.angles));
       var_00 lib_0378::func_8D74("aud_stunning_burst_use");
       self.wall_model thread aa_gun_open_gate();
       wait(1);
@@ -329,7 +329,7 @@ aa_gun_power_switch_think() {
     self.computer_panels setscriptablepartstate("light_green", "on");
     self.computer_panels setscriptablepartstate("light_power", "on");
     self.computer_panels setscriptablepartstate("light_graph", "on");
-    common_scripts\utility::func_3C8F("flag_flak_cannons_powered_on");
+    common_scripts\utility::flag_set("flag_flak_cannons_powered_on");
   }
 }
 
@@ -473,7 +473,7 @@ plane_spawn_plane() {
   var_02 thread plane_vehicle_paths_non_heli(self);
   var_02 thread maps\mp\gametypes\_damage::func_8676(100);
   var_02.health = 60;
-  var_02.var_29B5 = ::plane_on_damage;
+  var_02.damagecallback = ::plane_on_damage;
   var_02 thread plane_handle_flak_projectile_proximity();
   var_02 thread plane_cleanup();
   return var_02;
@@ -604,7 +604,7 @@ plane_crashy() {
     }
 
     var_00 = self.var_2944;
-    if(isDefined(var_00) && isDefined(var_00.var_81EF)) {
+    if(isDefined(var_00) && isDefined(var_00.script_exploder)) {
       self.crashingspecial = 1;
       var_00 = self.var_2944;
       plane_goto_linkto_path(var_00);
@@ -631,8 +631,8 @@ plane_crashy() {
 plane_wait_for_valid_crash_path() {
   self endon("plane_got_away");
   for(;;) {
-    if(isDefined(self.var_2944) && isDefined(self.var_2944.var_81EF)) {
-      var_00 = function_01DC(self.var_2944.var_81EF, "script_linkname");
+    if(isDefined(self.var_2944) && isDefined(self.var_2944.script_exploder)) {
+      var_00 = function_01DC(self.var_2944.script_exploder, "script_linkname");
       if(var_00.size > 0) {
         break;
       }
@@ -651,7 +651,7 @@ plane_go_boom(param_00) {
 
   var_01 = anglesToForward(self.angles);
   if(!common_scripts\utility::func_562E(param_00)) {
-    playFX(level.var_611["plane_death"], self.origin, var_01);
+    playFX(level._effect["plane_death"], self.origin, var_01);
     lib_0378::func_8D74("aud_plane_explode", self.origin);
   }
 
@@ -747,8 +747,8 @@ plane_death_roll_off() {
 
 plane_goto_linkto_path(param_00) {
   waittillframeend;
-  if(isDefined(param_00) && isDefined(param_00.var_81EF)) {
-    var_01 = function_01DC(param_00.var_81EF, "script_linkname");
+  if(isDefined(param_00) && isDefined(param_00.script_exploder)) {
+    var_01 = function_01DC(param_00.script_exploder, "script_linkname");
     if(isDefined(var_01) && isDefined(var_01[0])) {
       thread plane_vehicle_paths_non_heli(var_01[0]);
       self startpath(var_01[0]);
@@ -845,21 +845,21 @@ plane_vehicle_paths_non_heli(param_00) {
     }
 
     if(isDefined(var_04.var_8272)) {
-      var_04.var_8186 = var_04.var_8272;
+      var_04.setdepthoffield = var_04.var_8272;
       var_04.var_8272 = undefined;
     }
 
-    if(isDefined(var_04.var_8186)) {
+    if(isDefined(var_04.setdepthoffield)) {
       var_08 = var_04.var_8187;
       if(isDefined(var_08)) {
-        level maps\mp\_utility::func_2CED(var_08, ::common_scripts\_exploder::func_392A, var_04.var_8186);
+        level maps\mp\_utility::func_2CED(var_08, ::common_scripts\_exploder::exploder, var_04.setdepthoffield);
       } else {
-        level common_scripts\_exploder::func_392A(var_04.var_8186);
+        level common_scripts\_exploder::exploder(var_04.setdepthoffield);
       }
     }
 
     if(isDefined(var_04.var_81A0)) {
-      common_scripts\utility::func_3C8F(var_04.var_81A0);
+      common_scripts\utility::flag_set(var_04.var_81A0);
     }
 
     if(isDefined(var_04.var_8183)) {
@@ -943,8 +943,8 @@ plane_vehicle_paths_non_heli(param_00) {
       }
 
       var_0A = 60;
-      if(isDefined(var_04.var_80F6)) {
-        var_0A = var_04.var_80F6;
+      if(isDefined(var_04.script_accel)) {
+        var_0A = var_04.script_accel;
       }
 
       self method_8293(var_0A);
@@ -1026,7 +1026,7 @@ aud_plane_mission_start() {
   for(;;) {
     foreach(var_01 in level.players) {
       if(var_01.current_volume_is_interior) {
-        var_01 method_8626("isl_plane_interior_mix");
+        var_01 setaltsceneobj("isl_plane_interior_mix");
         continue;
       }
 

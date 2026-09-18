@@ -29,9 +29,9 @@ init() {
   level.teamprogressbarwidth = 192;
   level.teamprogressbartexty = 8;
   level.teamprogressbarfontsize = 1.65;
-  level.var_5F2F = "BOTTOM";
+  level.lowetextyalign = "BOTTOM";
   level.var_5F2E = -90;
-  level.var_5F2D = 1.6;
+  level.lowertextfontsize = 1.6;
 }
 
 func_3DDA(param_00) {

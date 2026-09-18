@@ -25,7 +25,7 @@ func_8A16() {
   self.var_17E8 = 0;
   self.var_6DAE = 20736;
   self.var_60F2 = 16384;
-  self.var_11AB = 25 + self.var_14F;
+  self.var_11AB = 25 + self.radius;
   self.var_11AD = 9437184;
   self.var_A85B = 302500;
   self.var_A85C = 96;
@@ -38,7 +38,7 @@ func_8A16() {
   self.var_621C = 50;
   self.var_3E0B = 0;
   self.ignoreclosefoliage = 1;
-  self.var_108 = "run";
+  self.vectortoangles = "run";
   self.var_3658 = 1;
   self.var_11B5 = "idle";
   self.var_64CE = "idle";
@@ -62,8 +62,8 @@ init() {
   self.var_EAD.var_6B2F["traverse"] = ::maps / mp / agents / dog / _dog_traverse::func_85;
   self.var_A8ED = ::func_A8EC;
   self.var_BA4 = "idle";
-  self.var_108 = "fastwalk";
-  self.var_14F = 15;
+  self.vectortoangles = "fastwalk";
+  self.radius = 15;
   self.height = 40;
 }
 
@@ -99,7 +99,7 @@ func_9963() {
   thread func_6394();
   for(;;) {
     if(self.var_BA4 != "melee" && !self.statelocked && self[[level.var_31F5]]() && !self[[level.var_31B2]]()) {
-      self method_83A1(self.var_28D2);
+      self selected_ent_buttons(self.var_28D2);
     }
 
     switch (self.var_BA4) {
@@ -248,7 +248,7 @@ func_A13C() {
   func_86F0(var_02);
   if(self.var_64CE == "follow") {
     self.var_28D2 = undefined;
-    self.var_108 = func_44EA(self.var_108);
+    self.vectortoangles = func_44EA(self.vectortoangles);
     self.var_15E1 = 1;
     var_05 = self method_83E7();
     if(!isDefined(var_05)) {
@@ -285,7 +285,7 @@ func_A13C() {
 
   if(self.var_64CE == "pursuit") {
     self.var_28D2 = self.enemy;
-    self.var_108 = "sprint";
+    self.vectortoangles = "sprint";
     self.var_15E1 = 0;
     self method_8395(var_00);
   }
@@ -402,7 +402,7 @@ func_7AC0() {
     return 0;
   }
 
-  if(!maps\mp\_utility::func_57A0(self.var_28D2)) {
+  if(!maps\mp\_utility::isreallyalive(self.var_28D2)) {
     return 0;
   }
 

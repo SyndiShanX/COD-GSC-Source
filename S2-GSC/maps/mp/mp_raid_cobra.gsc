@@ -4,13 +4,13 @@
 *********************************************/
 
 func_00F9() {
-  lib_04B7::func_F9();
-  lib_041E::func_F9();
-  lib_04B6::func_F9();
+  lib_04B7::main();
+  lib_041E::main();
+  lib_04B6::main();
   maps\mp\_audio_submixes::func_524C();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_raid_cobra_lighting::func_F9();
-  maps\mp\mp_raid_cobra_aud::func_F9();
+  maps\mp\_load::main();
+  maps\mp\mp_raid_cobra_lighting::main();
+  maps\mp\mp_raid_cobra_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_raid_cobra");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -33,11 +33,11 @@ func_00F9() {
 
   level.var_A3FB["aimAtTarget"] = ::func_97DC;
   level.var_A3FB["canFireAtTarget"] = ::func_9786;
-  level.var_611["b17_large_flame"] = loadfx("vfx/map/mp_raid_cobra/b17_large_flame");
-  level.var_611["us_tank_sherman_player_muzzle"] = loadfx("vfx/muzzleflash/us_tank_sherman_player_muzzle");
-  level.var_611["raid_flak88_death"] = loadfx("vfx/map/mp_raid_cobra/raid_flak88_death");
-  level.var_611["raid_flak88_flash"] = loadfx("vfx/map/mp_flak/mp_flak88_flash");
-  level.var_611["raid_flak88_death_smoke"] = loadfx("vfx/smoke/vehicle_destroyed_smoke_white_m");
+  level._effect["b17_large_flame"] = loadfx("vfx/map/mp_raid_cobra/b17_large_flame");
+  level._effect["us_tank_sherman_player_muzzle"] = loadfx("vfx/muzzleflash/us_tank_sherman_player_muzzle");
+  level._effect["raid_flak88_death"] = loadfx("vfx/map/mp_raid_cobra/raid_flak88_death");
+  level._effect["raid_flak88_flash"] = loadfx("vfx/map/mp_flak/mp_flak88_flash");
+  level._effect["raid_flak88_death_smoke"] = loadfx("vfx/smoke/vehicle_destroyed_smoke_white_m");
   precachempanim("mp_raids_cobra_depot_tarp_explode");
   precachempanim("mp_raids_cobra_depot_tarp_loop");
   lib_04FF::func_86DA("town_bombplant", "onBombExplodeFunc", ::func_6BB7);
@@ -52,7 +52,7 @@ func_00F9() {
   thread func_7FA1();
   thread func_7F89();
   thread func_7FB3();
-  thread maps\mp\mp_raid_cobra_bridge::func_D5();
+  thread maps\mp\mp_raid_cobra_bridge::init();
   thread func_7FCD();
   thread func_7F9C();
   thread func_7FB0();
@@ -81,12 +81,12 @@ func_54D6() {
 }
 
 func_54D7() {
-  var_00 = level.var_54D0["allies"].var_116;
+  var_00 = level.var_54D0["allies"].origin;
   var_01 = level.var_54D0["allies"].var_1D;
   var_02 = level.var_54D0["allies"].var_8097;
   var_03 = getEnt("allies_intro_blocker", "targetname");
   if(isDefined(var_03)) {
-    var_03 method_805C();
+    var_03 save_undo_buffer();
   }
 
   var_04 = spawn("script_model", var_00);
@@ -109,7 +109,7 @@ func_54D7() {
   var_06 = spawn("script_model", var_00);
   var_06 setModel("usa_tank_sherman_m1919_bucket_turret_mp");
   var_06 thread lib_0502::func_8C21(game["attackers"], 0);
-  var_06 method_8449(var_05, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
+  var_06 linktosynchronizedparent(var_05, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
   var_07 = spawn("script_model", var_00);
   var_07.var_267E = [1, 1, 1, 0, 0, 0];
   var_07 setcostumemodels(var_07.var_267E, "allies");
@@ -185,7 +185,7 @@ func_54D2(param_00, param_01) {
       continue;
     }
 
-    var_06 = level.var_54D0["allies"].var_8CA7[param_00].var_721C;
+    var_06 = level.var_54D0["allies"].var_8CA7[param_00].player;
     if(!isDefined(var_06)) {
       continue;
     }
@@ -310,7 +310,7 @@ func_54D8(param_00, param_01) {
       continue;
     }
 
-    var_03 = level.var_54D0["axis"].var_8CA7[param_00].var_721C;
+    var_03 = level.var_54D0["axis"].var_8CA7[param_00].player;
     if(!isDefined(var_03)) {
       continue;
     }
@@ -369,7 +369,7 @@ func_7FB3() {
     return;
   }
 
-  var_04 = var_03.var_116;
+  var_04 = var_03.origin;
   if(!isDefined(var_04)) {
     var_04 = (0, 0, 0);
   }
@@ -425,7 +425,7 @@ func_7FB1(param_00) {
     self waittill(param_00, var_01);
     switch (var_01) {
       case "start_fx":
-        playFXOnTag(level.var_611["b17_large_flame"], self, "tag_origin");
+        playFXOnTag(level._effect["b17_large_flame"], self, "tag_origin");
         break;
 
       case "hit_fx":
@@ -436,7 +436,7 @@ func_7FB1(param_00) {
 
       case "explode_fx":
       case "end":
-        stopFXOnTag(level.var_611["b17_large_flame"], self, "tag_origin");
+        stopFXOnTag(level._effect["b17_large_flame"], self, "tag_origin");
         break;
 
       default:
@@ -489,13 +489,13 @@ func_6C8D() {
   var_02 = vehicle_getarray();
   foreach(var_04 in var_02) {
     if(isDefined(var_04.var_9EDD)) {
-      var_04.var_9EDD method_805C();
+      var_04.var_9EDD save_undo_buffer();
     }
 
-    var_04 method_805C();
+    var_04 save_undo_buffer();
   }
 
-  var_06 = level.var_6C86["allies"].var_116;
+  var_06 = level.var_6C86["allies"].origin;
   var_07 = level.var_6C86["allies"].var_1D;
   var_08 = ["mp_raids_cobra_allieswin_flak01", "mp_raids_cobra_allieswin_flak02", "mp_raids_cobra_allieswin_flak03", "mp_raids_cobra_allieswin_flak04", "mp_raids_cobra_allieswin_flak05"];
   var_09 = [];
@@ -528,7 +528,7 @@ func_6C8D() {
   var_14 = ["mp_raids_cobra_allieswin_allies01", "mp_raids_cobra_allieswin_allies02", "mp_raids_cobra_allieswin_allies03"];
   var_15 = ["mp_raids_cobra_allieswin_axis01", "mp_raids_cobra_allieswin_axis02", "mp_raids_cobra_allieswin_axis03", "mp_raids_cobra_allieswin_axis04", "mp_raids_cobra_allieswin_axis05", "mp_raids_cobra_allieswin_axis06"];
   var_16 = lib_0502::func_4627(game["attackers"]);
-  var_16 = common_scripts\utility::func_F92(var_16);
+  var_16 = common_scripts\utility::array_randomize(var_16);
   for(var_17 = 0; var_17 < 3; var_17++) {
     var_18 = spawn("script_model", var_06);
     var_19 = "m1garand_mp";
@@ -561,7 +561,7 @@ func_6C8D() {
   level.var_C70.var_3AAD = var_0E;
   level.var_C70.var_C71 = var_12;
   level.var_C70.var_148D = var_11;
-  level.var_C70.var_A9E7 = var_13;
+  level.var_C70.weapons = var_13;
   level waittillmatch("4", "camRigCut");
   var_0C maps\mp\mp_raid_cobra_aud::func_9413();
   var_0C delete();
@@ -575,7 +575,7 @@ func_6C8B() {
   var_01 = level.var_C70.var_3AAD;
   var_02 = level.var_C70.var_C71;
   var_03 = level.var_C70.var_148D;
-  var_04 = level.var_C70.var_A9E7;
+  var_04 = level.var_C70.weapons;
   level.var_C70 = undefined;
   common_scripts\utility::func_F71(var_04, ::delete);
   common_scripts\utility::func_F71(var_00, ::delete);
@@ -600,7 +600,7 @@ func_0C07(param_00) {
         break;
 
       case "switch_to_destroyed_model":
-        self setModel(self.var_106 + "_destroyed");
+        self setModel(self.model + "_destroyed");
         break;
     }
   }
@@ -647,14 +647,14 @@ func_6C94() {
   maps\mp\mp_raid_cobra_aud::func_8C36();
   var_01 = getEntArray("misc_turret_flak88", "classname");
   common_scripts\utility::func_F71(var_01, ::delete);
-  var_02 = level.var_6C86["axis"].var_116;
+  var_02 = level.var_6C86["axis"].origin;
   var_03 = level.var_6C86["axis"].var_1D;
   var_04 = common_scripts\utility::func_46B5("anim_team_win_2", "targetname");
   if(!isDefined(var_04)) {
     return;
   }
 
-  var_05 = var_04.var_116;
+  var_05 = var_04.origin;
   if(!isDefined(var_05)) {
     var_05 = (0, 0, 0);
   }
@@ -701,7 +701,7 @@ func_6C94() {
   }
 
   var_18 = lib_0502::func_4627(game["defenders"]);
-  var_18 = common_scripts\utility::func_F92(var_18);
+  var_18 = common_scripts\utility::array_randomize(var_18);
   var_19 = ["mp_raids_cobra_axiswin_axis01", "mp_raids_cobra_axiswin_axis02", "mp_raids_cobra_axiswin_axis03", "mp_raids_cobra_axiswin_axis04", "mp_raids_cobra_axiswin_axis05", "mp_raids_cobra_axiswin_axis06"];
   var_1A = [];
   var_1B = [];
@@ -750,7 +750,7 @@ func_6C94() {
   level.var_148C.var_18D7 = var_0B;
   level.var_148C.var_18E9 = var_0D;
   level.var_148C.var_8F0A = var_10;
-  level.var_148C.var_A9E7 = var_11;
+  level.var_148C.weapons = var_11;
   level.var_148C.var_732F = var_1A;
   level.var_148C.var_73A5 = var_1B;
   level.var_148C.var_9E03 = var_21;
@@ -763,7 +763,7 @@ func_6C92() {
   var_01 = level.var_148C.var_18D7;
   var_02 = level.var_148C.var_18E9;
   var_03 = level.var_148C.var_8F0A;
-  var_04 = level.var_148C.var_A9E7;
+  var_04 = level.var_148C.weapons;
   var_05 = level.var_148C.var_732F;
   var_06 = level.var_148C.var_73A5;
   var_07 = level.var_148C.var_9E03;
@@ -816,7 +816,7 @@ func_1488(param_00, param_01) {
 
 func_7FCD() {
   level endon("game_ended");
-  maps\mp\_utility::func_3FA5("intro_vo_complete");
+  maps\mp\_utility::gameflagwait("intro_vo_complete");
   maps\mp\gametypes\_hostmigration::func_A6F5(randomfloatrange(10, 20));
   var_00 = undefined;
   for(;;) {
@@ -828,7 +828,7 @@ func_7FCD() {
         var_03 = var_03 + var_05.laststand_enter_levelspecificaction;
       }
 
-      var_07 = common_scripts\utility::func_7A33(["allies", "axis"]);
+      var_07 = common_scripts\utility::random(["allies", "axis"]);
       var_08 = randomfloat(var_03);
       var_09 = undefined;
       while(!isDefined(var_09)) {
@@ -960,8 +960,8 @@ func_7FA1() {
 
 func_3CD8() {
   thread func_3CD9();
-  if(isDefined(self.var_1A2)) {
-    var_00 = getEnt(self.var_1A2, "targetname");
+  if(isDefined(self.target)) {
+    var_00 = getEnt(self.target, "targetname");
     if(isDefined(var_00)) {
       var_00 linkTo(self, "tag_yaw");
     }
@@ -993,10 +993,10 @@ func_3CDD() {
     return;
   }
 
-  var_00 = level.var_3CE5[level.var_3CE4].var_116;
+  var_00 = level.var_3CE5[level.var_3CE4].origin;
   var_01 = spawnStruct();
-  var_01.var_116 = var_00;
-  self setturrettargetorigin(var_01.var_116);
+  var_01.origin = var_00;
+  self setturrettargetorigin(var_01.origin);
   thread func_3CDA(var_01);
   thread func_3CDC(var_01);
 }
@@ -1012,16 +1012,16 @@ func_3CDB() {
 func_3CDC(param_00) {
   self endon("death");
   for(;;) {
-    var_01 = level.var_3CE5[level.var_3CE4].var_116;
+    var_01 = level.var_3CE5[level.var_3CE4].origin;
     if(common_scripts\utility::func_562E(self.var_9827)) {
       var_01 = self.origin + anglesToForward(self.var_1D) * 200 + (0, 0, 400);
       level.var_3CE6 = 0;
     }
 
-    if(distancesquared(param_00.var_116, var_01) > 1) {
+    if(distancesquared(param_00.origin, var_01) > 1) {
       if(gettime() > level.var_3CE6) {
-        param_00.var_116 = var_01;
-        self setturrettargetorigin(param_00.var_116);
+        param_00.origin = var_01;
+        self setturrettargetorigin(param_00.origin);
         level.var_3CE6 = gettime() + randomintrange(800, 1200);
       }
     }
@@ -1035,7 +1035,7 @@ func_3CDA(param_00) {
   maps\mp\gametypes\_hostmigration::func_A6F5(randomfloatrange(1, 8));
   for(;;) {
     var_01 = self gettagangles("tag_aim");
-    var_02 = param_00.var_116 - self gettagorigin("tag_aim");
+    var_02 = param_00.origin - self gettagorigin("tag_aim");
     var_03 = vectortoangles(var_02);
     var_04 = anglesdelta(var_01, var_03);
     if(var_04 > 5) {
@@ -1074,7 +1074,7 @@ func_7F9E() {
   }
 
   lib_04FF::func_6972("farm_hardpoint");
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   lib_0502::func_86DE(lib_0501::func_4647("capture_objectiveTime"), 1);
   setomnvar("ui_raid_objective_index_allies", 0);
   setomnvar("ui_raid_objective_index_axis", 4);
@@ -1086,7 +1086,7 @@ func_7F9E() {
 
   var_01 = getEntArray("farm_bombplant_show", "targetname");
   foreach(var_03 in var_01) {
-    var_03 method_805C();
+    var_03 save_undo_buffer();
   }
 
   var_05 = var_00 lib_0502::func_6516();
@@ -1153,7 +1153,7 @@ func_9B78() {
 }
 
 func_9B77() {
-  if(!isDefined(self.var_106)) {
+  if(!isDefined(self.model)) {
     return;
   }
 
@@ -1168,7 +1168,7 @@ func_9B77() {
   var_03 = 0.65;
   var_01["mp_raid_cobra_ammo_stack_03"] = var_03;
   var_01["mp_raid_cobra_ammo_stack_dest_03"] = var_03;
-  var_04 = var_01[self.var_106];
+  var_04 = var_01[self.model];
   if(!isDefined(var_04)) {
     return;
   }
@@ -1189,7 +1189,7 @@ func_9B75() {
 func_9B76() {
   var_00["ger_wagon_supply_01"] = "ger_wagon_supply_01_burned";
   func_9B77();
-  self setModel(var_00[self.var_106]);
+  self setModel(var_00[self.model]);
 }
 
 func_7FD9(param_00) {
@@ -1245,7 +1245,7 @@ func_7FD1(param_00) {
 
 func_7F89() {
   waittillframeend;
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   lib_04F4::func_863D("allies_A", "active", 5);
   lib_04F4::func_863D("axis_A", "active", 5);
   lib_04F4::func_863D("axis_B", "active", 5);
@@ -1307,7 +1307,7 @@ func_7FDB() {
 }
 
 func_08B5(param_00) {
-  common_scripts\_exploder::func_392A(param_00);
+  common_scripts\_exploder::exploder(param_00);
   level.var_7961[level.var_7961.size] = param_00;
 }
 
@@ -1378,7 +1378,7 @@ func_7FB0() {
     if(var_08 == "MOD_EXPLOSIVE" || var_08 == "MOD_GRENADE_SPLASH") {
       var_03 = var_03 + var_04;
       if(var_03 >= var_02) {
-        common_scripts\_exploder::func_392A(19);
+        common_scripts\_exploder::exploder(19);
         var_03 = 0;
         wait(var_01);
       }
@@ -1387,9 +1387,9 @@ func_7FB0() {
 }
 
 func_7FD8() {
-  common_scripts\_exploder::func_392A(31);
+  common_scripts\_exploder::exploder(31);
   wait(1.5);
-  common_scripts\_exploder::func_392A(32);
+  common_scripts\_exploder::exploder(32);
 }
 
 func_97DC(param_00, param_01) {
@@ -1398,7 +1398,7 @@ func_97DC(param_00, param_01) {
     return;
   }
 
-  if(isDefined(self.var_9696) && self.var_9696.var_1A5 == param_00) {
+  if(isDefined(self.var_9696) && self.var_9696.targetname == param_00) {
     self.var_9696.var_1A4.var_9827 = undefined;
     func_97B3();
     return;
@@ -1418,9 +1418,9 @@ func_97DC(param_00, param_01) {
 
   self.var_9734 = 1;
   self.var_9696 = spawnStruct();
-  self.var_9696.var_1A5 = param_00;
+  self.var_9696.targetname = param_00;
   self.var_9696.var_1A4 = var_03[0];
-  self.var_9696.var_9832 = var_03[0].var_116 + (0, 0, 75);
+  self.var_9696.var_9832 = var_03[0].origin + (0, 0, 75);
   self method_825B(self.var_9696.var_9832);
   self.var_9696.var_1A4 notify("tank_targeting_ent");
   self.var_9696.var_1A4.var_9827 = 1;
@@ -1455,10 +1455,10 @@ func_4AFA() {
   wait(0.15);
   var_00 = spawn("script_model", self.origin);
   var_00.var_1D = self.var_1D;
-  var_00 setModel(self.var_106 + "_destroyed");
+  var_00 setModel(self.model + "_destroyed");
   var_00 scriptmodelplayanim("ger_btry_flak88_turret_destroy", "flak88_anim");
   playFXOnTag(common_scripts\utility::func_44F5("raid_flak88_death"), var_00, "tag_brass");
-  playFX(common_scripts\utility::func_44F5("raid_flak88_death_smoke"), var_00.var_116);
+  playFX(common_scripts\utility::func_44F5("raid_flak88_death_smoke"), var_00.origin);
   lib_04F3::func_79CF("flak88_explo", var_00, "tag_pitch");
   self delete();
   level notify("tank_target_destroyed");
@@ -1476,7 +1476,7 @@ func_1BBA(param_00, param_01) {
   if(isDefined(param_01) && isarray(param_01)) {
     foreach(var_05 in param_01) {
       wait(var_05);
-      lib_04F3::func_79CB("wood_break_med_conc", param_00.var_116);
+      lib_04F3::func_79CB("wood_break_med_conc", param_00.origin);
     }
   }
 }
@@ -1498,7 +1498,7 @@ func_1BB6(param_00, param_01, param_02) {
     wait(param_02);
   }
 
-  param_00 setModel(level.var_1BB9[param_00.var_106]);
+  param_00 setModel(level.var_1BB9[param_00.model]);
   param_00 method_8278(param_01, "breakObject");
   param_00 thread func_1BB4();
 }
@@ -1614,11 +1614,11 @@ func_1BB7(param_00) {
   var_01 = getEntArray(param_00, "targetname");
   var_02 = [];
   foreach(var_04 in var_01) {
-    if(!isDefined(var_04.var_165)) {
+    if(!isDefined(var_04.exitlevel)) {
       continue;
     }
 
-    switch (var_04.var_165) {
+    switch (var_04.exitlevel) {
       case "delete":
         var_04 delete();
         break;

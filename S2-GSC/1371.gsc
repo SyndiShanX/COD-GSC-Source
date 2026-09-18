@@ -101,7 +101,7 @@ func_AA2E(param_00, param_01) {
   foreach(var_08 in var_05) {
     if(distance(var_02.origin, var_08.origin) <= 100) {
       if(isDefined(self.var_AA3B) && !function_01CB(self.var_AA3B)) {
-        playFX(level.var_611["zmb_window_shatter_01"], var_08.origin, anglesToForward(var_08.angles));
+        playFX(level._effect["zmb_window_shatter_01"], var_08.origin, anglesToForward(var_08.angles));
         var_06 = var_08.origin;
       }
 
@@ -588,7 +588,7 @@ func_9053(param_00, param_01) {
     }
   }
 
-  if(!isDefined(self.var_873) || !isDefined(self.var_186) || !isDefined(self.var_502E) || !isDefined(self.var_502E.var_8276) || !isDefined(self.var_502E.var_82E5) || !isDefined(self.var_502F) || !isDefined(self.var_5EC8) || !isDefined(self.var_5EC8.var_8276)) {
+  if(!isDefined(self.var_873) || !isDefined(self.var_186) || !isDefined(self.var_502E) || !isDefined(self.var_502E.scriptmodelplayanim) || !isDefined(self.var_502E.var_82E5) || !isDefined(self.var_502F) || !isDefined(self.var_5EC8) || !isDefined(self.var_5EC8.scriptmodelplayanim)) {
     return;
   }
 
@@ -628,12 +628,12 @@ func_9053(param_00, param_01) {
       }
 
       var_0D = distance2d(var_07, var_0C);
-      if(var_0D < self.var_502E.var_8276 && vectordot(vectorNormalize(var_06), vectorNormalize(var_0B - var_0C)) > 0.5) {
+      if(var_0D < self.var_502E.scriptmodelplayanim && vectordot(vectorNormalize(var_06), vectorNormalize(var_0B - var_0C)) > 0.5) {
         var_10 = var_05 getEye() + self.var_502E.var_82E5 + 0.05 * var_06;
         var_11 = distance2d(var_10, var_0C);
         if(var_0D <= var_11) {
           var_12 = anglesToForward(var_05 geteyeangles());
-          if(lib_0547::func_3048(var_0B, var_07, var_07 + 9999 * var_12) < self.var_5EC8.var_8276 && vectordot(var_12, var_0B - var_07) > 0) {
+          if(lib_0547::func_3048(var_0B, var_07, var_07 + 9999 * var_12) < self.var_5EC8.scriptmodelplayanim && vectordot(var_12, var_0B - var_07) > 0) {
             var_13 = 0;
             foreach(var_15 in level.players) {
               if(var_15 != var_05) {
@@ -786,7 +786,7 @@ func_3D86() {
 }
 
 func_3D87() {
-  playFX(level.var_611["zmb_jump_scare_ground_snow"], self.origin + (0, 0, 64));
+  playFX(level._effect["zmb_jump_scare_ground_snow"], self.origin + (0, 0, 64));
 }
 
 func_3266() {
@@ -969,7 +969,7 @@ func_347B(param_00, param_01) {
   }
 
   foreach(var_05 in var_02) {
-    if(!maps\mp\_utility::func_57A0(var_05) || !self istouching(var_05) && distance2d(var_05.origin, self.var_5978) > self.var_5974) {
+    if(!maps\mp\_utility::isreallyalive(var_05) || !self istouching(var_05) && distance2d(var_05.origin, self.var_5978) > self.var_5974) {
       continue;
     }
 
@@ -1009,8 +1009,8 @@ func_3DB1() {
   var_00 = common_scripts\utility::func_46B7("fol_incubator_spawn", "targetname");
   var_01 = common_scripts\utility::func_46B7("fol_incubator_dormant", "targetname");
   var_02 = common_scripts\utility::func_F73(var_00, var_01);
-  common_scripts\utility::func_3C87("flag_first_fol_inc_selected");
-  common_scripts\utility::func_3C87("flag_fol_inc_armed");
+  common_scripts\utility::flag_init("flag_first_fol_inc_selected");
+  common_scripts\utility::flag_init("flag_fol_inc_armed");
   foreach(var_04 in var_02) {
     var_05 = common_scripts\utility::func_44BE(var_04.target, "targetname");
     foreach(var_07 in var_05) {
@@ -1037,11 +1037,11 @@ func_3DB1() {
           break;
 
         case "inc_js_door_exp_fx":
-          if(!isDefined(var_04.var_3F2F)) {
-            var_04.var_3F2F = [];
+          if(!isDefined(var_04.fx)) {
+            var_04.fx = [];
           }
 
-          var_04.var_3F2F[var_04.var_3F2F.size] = var_07;
+          var_04.fx[var_04.fx.size] = var_07;
           break;
       }
     }
@@ -1167,7 +1167,7 @@ func_3DAE(param_00) {
   if(common_scripts\utility::func_3C77("flag_first_fol_inc_selected")) {
     return;
   } else {
-    common_scripts\utility::func_3C8F("flag_first_fol_inc_selected");
+    common_scripts\utility::flag_set("flag_first_fol_inc_selected");
   }
 
   self.var_CA5 = 1;
@@ -1203,7 +1203,7 @@ func_3DAE(param_00) {
     self.var_3255 hide();
   }
 
-  foreach(var_05 in self.var_3F2F) {
+  foreach(var_05 in self.fx) {
     var_06 = anglesToForward(var_05.angles);
     var_07 = anglestoup(var_05.angles);
     playFX(common_scripts\utility::func_44F5("zmb_incubator_js_explosion"), var_05.origin, var_06, var_07);

@@ -6,8 +6,8 @@
 init() {
   common_scripts\utility::func_2CB4(5, ::drop_pod_init_drop_points);
   aud_blimp_attack_init();
-  level.var_611["zmb_zep_battery_fire_trail"] = loadfx("vfx/map/mp_zombie_nest/zmb_zep_battery_fire_trail");
-  level.var_611["zmb_zep_battery_land_explosion"] = loadfx("vfx/explosion/zmb_zep_battery_land_explosion");
+  level._effect["zmb_zep_battery_fire_trail"] = loadfx("vfx/map/mp_zombie_nest/zmb_zep_battery_fire_trail");
+  level._effect["zmb_zep_battery_land_explosion"] = loadfx("vfx/explosion/zmb_zep_battery_land_explosion");
 }
 
 drop_pod_init_drop_points() {
@@ -61,15 +61,15 @@ drop_pod_init_drop_points() {
 }
 
 drop_pod_spawn_drop() {
-  var_00 = common_scripts\utility::func_7A33(level.drop_pods);
+  var_00 = common_scripts\utility::random(level.drop_pods);
   var_01 = var_00.pod_model.origin + (0, 0, 8000);
   var_02 = var_00.pod_model.angles;
   var_03 = spawn("script_model", var_01);
   var_03 setModel("zbr_drop_pod_01");
   var_00.spawned_model = var_03;
-  var_00.clip_fall method_8449(var_03, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_00.clip_fall linktosynchronizedparent(var_03, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_00.clip_fall solid();
-  playFXOnTag(level.var_611["zmb_zep_battery_fire_trail"], var_03, "tag_origin");
+  playFXOnTag(level._effect["zmb_zep_battery_fire_trail"], var_03, "tag_origin");
   var_03 lib_0378::func_8D74("aud_droppod_launch");
   var_04 = (0, 0, -800);
   var_05 = 1;
@@ -84,7 +84,7 @@ drop_pod_spawn_drop() {
 
   wait(var_05);
   var_03.origin = var_00.pod_model.origin;
-  playFX(level.var_611["zmb_wm_droppod_dirt_impact"], var_00.pod_model.origin + (0, 0, -20));
+  playFX(level._effect["zmb_wm_droppod_dirt_impact"], var_00.pod_model.origin + (0, 0, -20));
   earthquake(0.3, 2, var_00.pod_model.origin, 850);
   lib_0378::func_8D74("aud_droppod_landed", var_00.pod_model.origin);
   var_00 drop_pod_set_drop_point_active();
@@ -105,7 +105,7 @@ drop_pod_open_pod_doors() {
 drop_pod_set_drop_point_active() {
   if(isDefined(self.clip_shell)) {
     self.clip_shell solid();
-    self.clip_shell method_805F();
+    self.clip_shell saved_actionslotdata();
   }
 
   wait 0.05;

@@ -4,15 +4,15 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_raid_dlc2_precache::func_F9();
-  maps\createart\mp_raid_dlc2_art::func_F9();
-  maps\mp\mp_raid_dlc2_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_raid_dlc2_lighting::func_F9();
-  maps\mp\mp_raid_dlc2_aud::func_F9();
+  maps\mp\mp_raid_dlc2_precache::main();
+  maps\createart\mp_raid_dlc2_art::main();
+  maps\mp\mp_raid_dlc2_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_raid_dlc2_lighting::main();
+  maps\mp\mp_raid_dlc2_aud::main();
   maps\mp\_audio_submixes::func_524C();
   maps\mp\_compass::func_8A2F("compass_map_mp_raid_dlc2");
-  maps\mp\_special_weapons::func_D5();
+  maps\mp\_special_weapons::init();
   game["attackers"] = "allies";
   game["defenders"] = "axis";
   lib_04FA::func_52FD(2);
@@ -53,9 +53,9 @@ func_00F9() {
   lib_04FF::func_86DA("intel_collect", "autoReturnTime", var_04);
   var_05 = lib_0501::func_4647("capture_time");
   lib_04FF::func_86DA("radio_hardpoint", "captureTimeSec", var_05);
-  maps\mp\_utility::func_3FA3("started_vignettes", 1);
-  maps\mp\_utility::func_3FA3("finished_intro_vignette_allies", 0);
-  maps\mp\_utility::func_3FA3("finished_intro_vignette_axis", 0);
+  maps\mp\_utility::gameflaginit("started_vignettes", 1);
+  maps\mp\_utility::gameflaginit("finished_intro_vignette_allies", 0);
+  maps\mp\_utility::gameflaginit("finished_intro_vignette_axis", 0);
   runvignettes();
   thread maps\mp\mp_raid_dlc2_vo::func_5366();
   thread maps\mp\mp_raid_dlc2_vo::func_7FDF();
@@ -143,8 +143,8 @@ func_0BF8(param_00) {
   level.var_A4B5["scaleX"] = 1;
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_0E in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_0E in level.players) {
       if(isalive(var_0E)) {
         self vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
       }
@@ -164,7 +164,7 @@ func_0BF9(param_00) {
 
 func_54D7() {
   var_00 = common_scripts\utility::func_46B5("anim_allies_intro", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   var_03 = [];
   var_04 = ["mp_raids_husky_ally_intro_axis_player_01"];
@@ -265,8 +265,8 @@ func_147F(param_00) {
   level.var_A4B5["scaleX"] = 1;
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_08 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_08 in level.players) {
       if(isalive(var_08)) {
         self vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
       }
@@ -285,7 +285,7 @@ func_1480(param_00) {
 
 func_1481(param_00) {
   level.introvignette_axis_data.briefcase method_805B();
-  level.introvignette_axis_data.briefcase_big method_805C();
+  level.introvignette_axis_data.briefcase_big save_undo_buffer();
   var_01 = [];
   var_01 = lib_0505::func_3187(var_01, 1.5, 53, 8, 16, 0);
   thread lib_0505::func_3188(param_00, var_01);
@@ -305,7 +305,7 @@ func_1482(param_00) {
 
 func_54E1() {
   var_00 = common_scripts\utility::func_46B5("anim_axis_intro", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   var_03 = [];
   var_04 = ["mp_raids_husky_axis_intro_npc"];
@@ -318,7 +318,7 @@ func_54E1() {
   }
 
   var_0A = getEntArray("objective_model", "script_noteworthy");
-  common_scripts\utility::func_F71(var_0A, ::method_805C);
+  common_scripts\utility::func_F71(var_0A, ::save_undo_buffer);
   var_0B = "mp_raids_husky_axis_intro_folder";
   var_0C = spawn("script_model", var_01);
   var_0C setModel("hus_german_folder_01");
@@ -331,7 +331,7 @@ func_54E1() {
   var_10 = spawn("script_model", var_01);
   var_10 setModel("par_briefcase_german_01_anim_dlc");
   var_10 method_8495(var_0F, var_01, var_02);
-  var_10 method_805C();
+  var_10 save_undo_buffer();
   var_11 = "mp_raids_husky_axis_intro_lamp";
   var_12 = spawn("script_model", var_01);
   var_12 setModel("ger_oil_lamp_01_b_rig");
@@ -413,8 +413,8 @@ func_6C87(param_00) {
   level.var_6465["velocityscaler"] = 2;
   level.var_6465["cameraRotationInfluence"] = 1;
   level.var_6465["cameraTranslationInfluence"] = 1;
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 setscriptmotionblurparams(2, 1, 1);
       }
@@ -426,8 +426,8 @@ func_6C87(param_00) {
   level.var_A4B5["scaleX"] = 1;
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         self vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
       }
@@ -445,7 +445,7 @@ func_6C87(param_00) {
 
 func_6C88(param_00) {
   level.outrovignette_allies.hero_bomer method_805B();
-  level.outrovignette_allies.hero_bomer_doors method_805C();
+  level.outrovignette_allies.hero_bomer_doors save_undo_buffer();
   self lightsetforplayer("mp_raid_dlc2_air_dark2");
   self method_8483("mp_raid_dlc2_air_cine");
   var_01 = [];
@@ -458,7 +458,7 @@ func_6C8D() {
   lib_0378::func_8D74("aud_allies_victory_sfx");
   level.outrovignette_allies = spawnStruct();
   var_00 = common_scripts\utility::func_46B5("anim_allies_air_outro", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   var_03 = [];
   var_04 = ["mp_raids_husky_ally_win_air_outro_ally_b17_03", "mp_raids_husky_ally_win_air_outro_ally_b17_05", "mp_raids_husky_ally_win_air_outro_ally_b17_06", "mp_raids_husky_ally_win_air_outro_ally_b17_07", "mp_raids_husky_ally_win_air_outro_ally_b17_08", "mp_raids_husky_ally_win_air_outro_ally_b17_09", "mp_raids_husky_ally_win_air_outro_ally_b17_10", "mp_raids_husky_ally_win_air_outro_ally_b17_11", "mp_raids_husky_ally_win_air_outro_ally_b17_12", "mp_raids_husky_ally_win_air_outro_ally_b17_14", "mp_raids_husky_ally_win_air_outro_ally_b17_15", "mp_raids_husky_ally_win_air_outro_ally_b17_17", "mp_raids_husky_ally_win_air_outro_ally_b17_18", "mp_raids_husky_ally_win_air_outro_ally_b17_19", "mp_raids_husky_ally_win_air_outro_ally_b17_20"];
@@ -476,7 +476,7 @@ func_6C8D() {
   var_0B = "mp_raids_husky_ally_win_air_outro_ally_b17_hero";
   var_0C = spawn("script_model", var_01);
   var_0C setModel("usa_bomber_b17_raid");
-  var_0C method_805C();
+  var_0C save_undo_buffer();
   var_0C animscripts\notetracks_common::give_player_xp(var_0B, var_01, var_02);
   var_0D = [];
   var_0E = ["mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_01", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_02", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_03", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_04", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_05", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_06", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_07", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_08", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_09", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_11", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_12", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_13", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_14", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_15", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_16", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_17", "mp_raids_husky_ally_win_air_outro_ally_carpetbomb_hero_18"];
@@ -511,8 +511,8 @@ func_6C8B() {
   level.var_6465["velocityscaler"] = 0.35;
   level.var_6465["cameraRotationInfluence"] = 0;
   level.var_6465["cameraTranslationInfluence"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_05 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_05 in level.players) {
       if(isalive(var_05)) {
         var_05 setscriptmotionblurparams(0.35, 0, 0);
       }
@@ -543,8 +543,8 @@ func_6C8E(param_00) {
   level.var_6465["velocityscaler"] = 0.35;
   level.var_6465["cameraRotationInfluence"] = 0;
   level.var_6465["cameraTranslationInfluence"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 setscriptmotionblurparams(0.35, 0, 0);
       }
@@ -556,8 +556,8 @@ func_6C8E(param_00) {
   level.var_A4B5["scaleX"] = 1;
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         self vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
       }
@@ -610,7 +610,7 @@ func_6C94() {
   preoutrovignettecleanup();
   lib_0378::func_8D74("aud_axis_ground_victory_sfx");
   var_00 = common_scripts\utility::func_46B5("anim_allies_intro", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   level.outrovignette_axis_ground = spawnStruct();
   var_03 = [];
@@ -661,13 +661,13 @@ func_6C94() {
   }
 
   level.outrovignette_axis_ground.axis_soldiers = var_0C;
-  level.outrovignette_axis_ground.var_A9E7 = var_03;
+  level.outrovignette_axis_ground.weapons = var_03;
   level.outrovignette_axis_ground.ally_soldiers = var_04;
 }
 
 func_6C92() {
   var_00 = level.outrovignette_axis_ground.axis_soldiers;
-  var_01 = level.outrovignette_axis_ground.var_A9E7;
+  var_01 = level.outrovignette_axis_ground.weapons;
   var_02 = level.outrovignette_axis_ground.ally_soldiers;
   common_scripts\utility::func_F71(var_00, ::delete);
   common_scripts\utility::func_F71(var_01, ::delete);
@@ -680,8 +680,8 @@ func_6C92() {
   level.var_6465["velocityscaler"] = 0.35;
   level.var_6465["cameraRotationInfluence"] = 0;
   level.var_6465["cameraTranslationInfluence"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_04 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_04 in level.players) {
       if(isalive(var_04)) {
         var_04 setscriptmotionblurparams(0.35, 0, 0);
       }
@@ -714,8 +714,8 @@ outrovignette_axis_air_cam01_func(param_00) {
   level.var_6465["velocityscaler"] = 2;
   level.var_6465["cameraRotationInfluence"] = 1;
   level.var_6465["cameraTranslationInfluence"] = 1;
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         var_02 setscriptmotionblurparams(2, 1, 1);
       }
@@ -727,8 +727,8 @@ outrovignette_axis_air_cam01_func(param_00) {
   level.var_A4B5["scaleX"] = 1;
   level.var_A4B5["scaleY"] = 1;
   level.var_A4B5["squareAspectRatio"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_02 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_02 in level.players) {
       if(isalive(var_02)) {
         self vignettesetparams(level.var_A4B5["intensity"], level.var_A4B5["falloff"], level.var_A4B5["scaleX"], level.var_A4B5["scaleY"], level.var_A4B5["squareAspectRatio"]);
       }
@@ -754,7 +754,7 @@ outrovignette_axis_air_start() {
   lib_0378::func_8D74("aud_axis_air_victory_sfx");
   level.outrovignette_axis_air = spawnStruct();
   var_00 = common_scripts\utility::func_46B5("anim_axis_air_outro", "targetname");
-  var_01 = var_00.var_116;
+  var_01 = var_00.origin;
   var_02 = var_00.var_1D;
   var_03 = [];
   var_04 = ["mp_raids_husky_axis_win_air_outro_ally_plane01", "mp_raids_husky_axis_win_air_outro_ally_plane02"];
@@ -794,8 +794,8 @@ outrovignette_axis_air_cleanup() {
   level.var_6465["velocityscaler"] = 0.35;
   level.var_6465["cameraRotationInfluence"] = 0;
   level.var_6465["cameraTranslationInfluence"] = 0;
-  if(isDefined(level.var_744A)) {
-    foreach(var_03 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_03 in level.players) {
       if(isalive(var_03)) {
         var_03 setscriptmotionblurparams(0.35, 0, 0);
       }
@@ -825,7 +825,7 @@ shiftspawnsobj2() {
 
 func_7F89() {
   waittillframeend;
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   lib_04F4::func_863D("allies_A", "active", 5);
   lib_04F4::func_863D("axis_A", "active", 5);
   lib_04F4::func_863D("axis_B", "active", 5);
@@ -862,7 +862,7 @@ runintelobjective() {
   setomnvar("ui_raid_objective_index_allies", 0);
   setomnvar("ui_raid_objective_index_axis", 3);
   lib_04FF::func_6972("intel_collect");
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   lib_0502::func_86DE(lib_0501::func_4647("ctf_objectiveTime"), 1);
   lib_04FF::func_6982("intel_collect");
   var_00 = 1;
@@ -934,7 +934,7 @@ runbomberobjective() {
 
   if(getdvarint("fighter_vs_fighter_mode") == 1) {}
 
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(var_01 maps\mp\_utility::func_5727()) {
       var_01 notify("abort_killcam");
     }
@@ -949,8 +949,8 @@ runbomberobjective() {
   var_03 = common_scripts\utility::func_46B5("fighter_deathmatch", "targetname");
   var_04 = getEnt("mp_global_intermission", "classname");
   var_04.var_1D = (0, 0, 0);
-  var_04.var_116 = (-5000, 0, var_03.var_116[2]);
-  maps\mp\gametypes\_raid_bomber::run_bomber_objective(var_03.var_116, "compass_map_mp_raid_dlc2_objective3");
+  var_04.origin = (-5000, 0, var_03.origin[2]);
+  maps\mp\gametypes\_raid_bomber::run_bomber_objective(var_03.origin, "compass_map_mp_raid_dlc2_objective3");
   if(getdvarint("fighter_vs_fighter_mode") != 1) {
     setomnvar("ui_war_attacker_flipped", 1);
     setDvar("ui_war_last_obj_flipped", 1);
@@ -1001,7 +1001,7 @@ fake_bomber_raid_ui() {
   var_00 = level.num_bombers;
   level.tempbomberui = newhudelem();
   level.tempbomberui.maxsightdistsqrd = -20;
-  level.tempbomberui.var_1D7 = 120;
+  level.tempbomberui.y = 120;
   level.tempbomberui.var_9B = 1.5;
   level.tempbomberui.accuracy = "left";
   level.tempbomberui.var_11 = "top";
@@ -1023,7 +1023,7 @@ fake_dogfight_raid_ui(param_00) {
   var_01 = 30;
   level.tempbomberui = newhudelem();
   level.tempbomberui.maxsightdistsqrd = -20;
-  level.tempbomberui.var_1D7 = 140;
+  level.tempbomberui.y = 140;
   level.tempbomberui.var_9B = 1.5;
   level.tempbomberui.accuracy = "left";
   level.tempbomberui.var_11 = "top";
@@ -1046,7 +1046,7 @@ bomberobjectivetransition() {
   maps\mp\gametypes\_hostmigration::func_A6F5(6);
   var_00 = newhudelem();
   var_00.maxsightdistsqrd = 0;
-  var_00.var_1D7 = 0;
+  var_00.y = 0;
   var_00.var_C6 = "fullscreen";
   var_00.var_1CA = "fullscreen";
   var_00 setshader("black", 640, 480);
@@ -1071,10 +1071,10 @@ bomberfadeup(param_00) {
 
 bomberhidehud() {
   maps\mp\gametypes\_hostmigration::func_A6F5(1);
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 setclientomnvar("ui_hide_hud", 1);
     var_01 method_8322();
-    var_01 maps\mp\_utility::func_3E8E(1);
+    var_01 maps\mp\_utility::freezecontrolswrapper(1);
     var_01 setclientdvar("ui_force_dont_draw_fighter_names", 1);
     var_01 setclientdvar("cg_drawVehicleCrosshair", 0);
   }
@@ -1082,9 +1082,9 @@ bomberhidehud() {
 
 bomberobjectivetakeallweapons() {
   var_00 = 0;
-  var_01 = level.var_744A;
+  var_01 = level.players;
   foreach(var_03 in var_01) {
-    if(isDefined(var_03.var_1A7) && var_03.var_1A7 == "allies") {
+    if(isDefined(var_03.team) && var_03.team == "allies") {
       if(game["switchedsides"]) {
         var_04 = maps\mp\_utility::func_452A("raid_flak");
       } else {
@@ -1104,7 +1104,7 @@ bomberobjectivetakeallweapons() {
 
 preoutrovignettecleanup() {
   if(isDefined(level.old_mapcenter_bomber)) {
-    foreach(var_01 in level.var_744A) {
+    foreach(var_01 in level.players) {
       var_02 = var_01 method_85E2();
       if(isDefined(var_02)) {
         var_01 method_80F4();
@@ -1119,29 +1119,29 @@ preoutrovignettecleanup() {
 
 setup_window_open_close(param_00, param_01, param_02) {
   var_03 = getEnt(param_00, "script_noteworthy");
-  var_04 = getEnt(var_03.var_1A2, "targetname");
+  var_04 = getEnt(var_03.target, "targetname");
   var_05 = getEnt(param_00 + "_clip_left", "script_noteworthy");
   var_06 = getEnt(param_00 + "_clip_right", "script_noteworthy");
   var_07 = getEnt(param_00 + "_mantle", "script_noteworthy");
-  var_08 = var_05.var_116 - var_04 gettagorigin("window_L");
+  var_08 = var_05.origin - var_04 gettagorigin("window_L");
   var_09 = var_05.var_1D - var_04 gettagangles("window_L");
-  var_0A = var_06.var_116 - var_04 gettagorigin("window_R");
+  var_0A = var_06.origin - var_04 gettagorigin("window_R");
   var_0B = var_06.var_1D - var_04 gettagangles("window_R");
   var_05 linkTo(var_04, "window_L", var_08, var_09);
   var_06 linkTo(var_04, "window_R", var_0A, var_0B);
   lib_0502::func_1D39(var_04);
-  var_04 lib_0502::func_1D3A(var_04.var_116, 1);
+  var_04 lib_0502::func_1D3A(var_04.origin, 1);
   level thread window_open_logic(var_03, var_04, param_01, param_02, var_07);
 }
 
 window_open_logic(param_00, param_01, param_02, param_03, param_04) {
   level endon("game_ended");
   level endon("runBomberObjective");
-  param_04 method_805C();
+  param_04 save_undo_buffer();
   param_00 setHintString(&"RAIDS_HUSKY_OPEN_WINDOW");
   param_00 waittill("trigger");
   param_01 lib_0502::func_1D3B(0);
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   param_01 method_8278(param_02);
   wait(1);
   param_00 method_805B();
@@ -1155,7 +1155,7 @@ window_close_logic(param_00, param_01, param_02, param_03, param_04) {
   param_00 setHintString(&"RAIDS_HUSKY_CLOSE_WINDOW");
   param_00 waittill("trigger");
   param_01 lib_0502::func_1D3B(1);
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   param_01 method_8278(param_03);
   wait(1);
   param_00 method_805B();

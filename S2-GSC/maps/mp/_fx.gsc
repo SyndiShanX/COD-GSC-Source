@@ -23,7 +23,7 @@ func_8274() {
 }
 
 func_4866(param_00) {
-  playFX(level.var_611["mechanical explosion"], param_00);
+  playFX(level._effect["mechanical explosion"], param_00);
   earthquake(0.15, 0.5, param_00, 250);
 }
 

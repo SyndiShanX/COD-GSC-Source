@@ -5,20 +5,20 @@
 
 main() {
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BFA(level.gametype, 3);
-    maps\mp\_utility::func_7BF9(level.gametype, 20);
-    maps\mp\_utility::func_7C04(level.gametype, 1);
-    maps\mp\_utility::func_7BF7(level.gametype, 1);
-    maps\mp\_utility::func_7BF1(level.gametype, 0);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
-    maps\mp\_utility::func_7BF9(level.gametype, 20);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 3);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 20);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 20);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
@@ -51,27 +51,27 @@ main() {
 func_5300() {
   maps\mp\_utility::func_8653(1);
   setdynamicdvar("scr_onevone_winlimit", 1);
-  maps\mp\_utility::func_7C04("onevone", 1);
+  maps\mp\_utility::registerwinlimitdvar("onevone", 1);
   setdynamicdvar("scr_onevone_roundlimit", 1);
-  maps\mp\_utility::func_7BF7("onevone", 1);
+  maps\mp\_utility::registerroundlimitdvar("onevone", 1);
   setdynamicdvar("scr_onevone_halftime", 0);
-  maps\mp\_utility::func_7BE5("onevone", 0);
+  maps\mp\_utility::registerhalftimedvar("onevone", 0);
 }
 
 func_6BAF() {
   setclientnamemode("auto_change");
-  maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_ONEVONE");
-  maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_ONEVONE");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_ONEVONE");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_ONEVONE");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_ONEVONE");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_ONEVONE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_ONEVONE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_ONEVONE");
   } else {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_ONEVONE_SCORE");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_ONEVONE_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_ONEVONE_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_ONEVONE_SCORE");
   }
 
-  maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_ONEVONE_HINT");
-  maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_ONEVONE_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_ONEVONE_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_ONEVONE_HINT");
   lib_050D::func_10E4();
   level.usestartspawns = 0;
   var_00[0] = "onevone";
@@ -130,9 +130,9 @@ func_57BE(param_00) {
 }
 
 func_92EE() {
-  level.var_9A12 = 1;
+  level.timerstopped = 1;
   level.var_9A13 = 1;
-  level.var_9A11 = gettime();
+  level.timerpausetime = gettime();
   level.var_6B20 = 1;
   while(level.players.size < 2 || level.var_5139) {
     wait 0.05;
@@ -373,33 +373,33 @@ func_86E3(param_00, param_01) {
 
   var_02.var_6B15 = maps\mp\gametypes\_class::func_44B4();
   var_02.var_6B21 = "maps/mp/gametypes/onevoneClassTable.csv";
-  var_02.var_6B15["loadoutDivision"] = maps\mp\gametypes\_class::func_9583(var_02.var_6B21, param_00);
-  var_02.var_6B15["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::func_9590(var_02.var_6B21, param_00, 0), 0);
+  var_02.var_6B15["loadoutDivision"] = maps\mp\gametypes\_class::table_getdivision(var_02.var_6B21, param_00);
+  var_02.var_6B15["loadoutPrimaryWeaponStruct"] = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::table_getweapon(var_02.var_6B21, param_00, 0), 0);
   for(var_03 = 0; var_03 < 6; var_03++) {
-    var_02.var_6B15["loadoutPrimaryAttachmentsGUID"][var_03] = maps\mp\gametypes\_class::func_958B(var_02.var_6B21, param_00, 0, var_03);
+    var_02.var_6B15["loadoutPrimaryAttachmentsGUID"][var_03] = maps\mp\gametypes\_class::table_getweaponattachment(var_02.var_6B21, param_00, 0, var_03);
   }
 
-  var_02.var_6B15["loadoutPrimaryCamoGUID"] = maps\mp\gametypes\_class::func_958E(var_02.var_6B21, param_00, 0);
-  var_02.var_6B15["loadoutPrimaryCamo2GUID"] = maps\mp\gametypes\_class::func_958D(var_02.var_6B21, param_00, 0);
-  var_02.var_6B15["loadoutPrimaryReticleGUID"] = maps\mp\gametypes\_class::func_9591(var_02.var_6B21, param_00, 0);
+  var_02.var_6B15["loadoutPrimaryCamoGUID"] = maps\mp\gametypes\_class::table_getweaponcamo(var_02.var_6B21, param_00, 0);
+  var_02.var_6B15["loadoutPrimaryCamo2GUID"] = maps\mp\gametypes\_class::table_getweaponcamo2(var_02.var_6B21, param_00, 0);
+  var_02.var_6B15["loadoutPrimaryReticleGUID"] = maps\mp\gametypes\_class::table_getweaponreticle(var_02.var_6B21, param_00, 0);
   var_02.var_6B15["loadoutPrimaryPaintjobId"] = 0;
   var_02.var_6B15["loadoutPrimaryCharmGUID"] = 0;
-  var_02.var_6B15["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::func_9590(var_02.var_6B21, param_00, 1), 0);
+  var_02.var_6B15["loadoutSecondaryWeaponStruct"] = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::table_getweapon(var_02.var_6B21, param_00, 1), 0);
   for(var_03 = 0; var_03 < 6; var_03++) {
-    var_02.var_6B15["loadoutSecondaryAttachmentsGUID"][var_03] = maps\mp\gametypes\_class::func_958B(var_02.var_6B21, param_00, 1, var_03);
+    var_02.var_6B15["loadoutSecondaryAttachmentsGUID"][var_03] = maps\mp\gametypes\_class::table_getweaponattachment(var_02.var_6B21, param_00, 1, var_03);
   }
 
-  var_02.var_6B15["loadoutSecondaryCamoGUID"] = maps\mp\gametypes\_class::func_958E(var_02.var_6B21, param_00, 1);
-  var_02.var_6B15["loadoutSecondaryCamo2GUID"] = maps\mp\gametypes\_class::func_958D(var_02.var_6B21, param_00, 1);
-  var_02.var_6B15["loadoutSecondaryReticleGUID"] = maps\mp\gametypes\_class::func_9591(var_02.var_6B21, param_00, 1);
+  var_02.var_6B15["loadoutSecondaryCamoGUID"] = maps\mp\gametypes\_class::table_getweaponcamo(var_02.var_6B21, param_00, 1);
+  var_02.var_6B15["loadoutSecondaryCamo2GUID"] = maps\mp\gametypes\_class::table_getweaponcamo2(var_02.var_6B21, param_00, 1);
+  var_02.var_6B15["loadoutSecondaryReticleGUID"] = maps\mp\gametypes\_class::table_getweaponreticle(var_02.var_6B21, param_00, 1);
   var_02.var_6B15["loadoutSecondaryPaintjobId"] = 0;
   var_02.var_6B15["loadoutSecondaryCharmGUID"] = 0;
-  var_02.var_6B15["loadoutEquipmentStruct"] = maps\mp\_utility::func_44CE(maps\mp\gametypes\_class::func_9584(var_02.var_6B21, param_00), 0);
+  var_02.var_6B15["loadoutEquipmentStruct"] = maps\mp\_utility::func_44CE(maps\mp\gametypes\_class::table_getequipment(var_02.var_6B21, param_00), 0);
   var_02.var_6B15["loadoutEquipmentNumExtra"] = maps\mp\gametypes\_class::func_9585(var_02.var_6B21, param_00);
-  var_02.var_6B15["loadoutOffhandStruct"] = maps\mp\_utility::func_44CE(maps\mp\gametypes\_class::func_9587(var_02.var_6B21, param_00), 0);
-  var_02.var_6B15["loadoutOffhandNumExtra"] = maps\mp\gametypes\_class::func_9588(var_02.var_6B21, param_00);
+  var_02.var_6B15["loadoutOffhandStruct"] = maps\mp\_utility::func_44CE(maps\mp\gametypes\_class::table_getoffhand(var_02.var_6B21, param_00), 0);
+  var_02.var_6B15["loadoutOffhandNumExtra"] = maps\mp\gametypes\_class::table_getoffhandextra(var_02.var_6B21, param_00);
   for(var_03 = 0; var_03 < 9; var_03++) {
-    var_02.var_6B15["loadoutPerksGUID"][var_03] = maps\mp\gametypes\_class::func_9589(var_02.var_6B21, param_00, var_03);
+    var_02.var_6B15["loadoutPerksGUID"][var_03] = maps\mp\gametypes\_class::table_getperk(var_02.var_6B21, param_00, var_03);
   }
 }
 
@@ -517,7 +517,7 @@ func_86E1(param_00) {
   }
 
   if(!isDefined(level.var_6B15) && !isDefined(level.var_6B1F) || !level.var_6B1F) {
-    maps\mp\_utility::func_3E8E(1);
+    maps\mp\_utility::freezecontrolswrapper(1);
     level waittill("onevoneClassCreated");
     thread maps\mp\_utility::func_3E90(0, 1);
   }
@@ -548,10 +548,10 @@ func_86E1(param_00) {
   }
 
   self.pers["lastClass"] = "";
-  self.var_2319 = self.pers["class"];
-  self.var_5B84 = self.pers["lastClass"];
+  self.class = self.pers["class"];
+  self.lastclass = self.pers["lastClass"];
   self.var_5DF2 = undefined;
-  maps\mp\gametypes\_class::func_4790(self.team, self.var_2319);
+  maps\mp\gametypes\_class::func_4790(self.team, self.class);
   self.var_5DEE.var_5A62 = 0;
   self.var_5DEE.var_5A63 = 0;
   self.var_5DEE.var_5A64 = 0;
@@ -720,7 +720,7 @@ func_45AB() {
       level.var_6B1A[level.var_6B1A.size] = var_00;
     }
 
-    level.var_6B1A = common_scripts\utility::func_F92(level.var_6B1A);
+    level.var_6B1A = common_scripts\utility::array_randomize(level.var_6B1A);
   }
 
   var_01 = common_scripts\utility::func_F82(level.var_6B1A);
@@ -729,7 +729,7 @@ func_45AB() {
 }
 
 func_479A() {
-  maps\mp\_utility::func_47A2("specialty_extralethal");
+  maps\mp\_utility::giveperk("specialty_extralethal");
   self setweaponammoclip("frag_grenade_mp", 2);
   self setweaponammoclip("frag_grenade_german_mp", 2);
   self.var_6088 = 2;
@@ -827,7 +827,7 @@ func_6FBC(param_00, param_01) {
         var_07 = level.var_6B28;
       }
 
-      return common_scripts\utility::func_7A33(var_07);
+      return common_scripts\utility::random(var_07);
     }
   }
 

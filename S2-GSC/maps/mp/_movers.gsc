@@ -163,7 +163,7 @@ func_821E() {
   }
 
   thread func_822D();
-  thread func_821F();
+  thread getplayerdata();
   thread func_8231();
   thread func_8232();
   thread func_8212(self);
@@ -262,7 +262,7 @@ func_822D() {
         break;
 
       case "goal":
-        var_03 func_821F();
+        var_03 getplayerdata();
         var_03 func_822D();
         self.var_480C[self.var_480C.size] = var_03;
         if(isDefined(var_03.var_6E5C["name"])) {
@@ -384,7 +384,7 @@ func_8215(param_00) {
 }
 
 func_8219(param_00) {
-  self method_805F(param_00);
+  self saved_actionslotdata(param_00);
 }
 
 func_8236(param_00) {
@@ -521,7 +521,7 @@ func_8225(param_00) {
   }
 
   while(param_00.var_480C.size != 0) {
-    var_01 = common_scripts\utility::func_7A33(param_00.var_480C);
+    var_01 = common_scripts\utility::random(param_00.var_480C);
     var_02 = self;
     var_02 func_8212(var_01);
     var_02 func_8217();
@@ -626,7 +626,7 @@ func_823D(param_00, param_01) {
   thread func_821A(param_00, "mover_reset", param_01);
 }
 
-func_821F() {
+getplayerdata() {
   self.var_6E5C = [];
   if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);

@@ -154,7 +154,7 @@ func_76A8(param_00) {
     }
   }
 
-  var_01 = common_scripts\utility::func_F92(var_01);
+  var_01 = common_scripts\utility::array_randomize(var_01);
   return var_01;
 }
 
@@ -176,7 +176,7 @@ func_5A86() {
       var_00.var_3C70 = self.var_90AB;
     }
 
-    var_00.var_6A3D = self.var_108;
+    var_00.var_6A3D = self.vectortoangles;
     var_00.var_6A3C = self.var_6481;
     var_00.var_6A3F = self.var_A978;
     if(isDefined(self.var_1CF1)) {
@@ -297,14 +297,14 @@ func_7FE1() {
     }
 
     if(isDefined(level.var_1CC0)) {
-      var_03 = common_scripts\utility::func_7A33(level.var_1CC0);
+      var_03 = common_scripts\utility::random(level.var_1CC0);
     }
 
     if(should_override_follower_spawn(isDefined(var_01.var_3EEC), var_03)) {
       if(maps\mp\_utility::func_4571() == "mp_zombie_house") {
         var_03 = "zombie_generic";
       } else {
-        var_03 = common_scripts\utility::func_7A33(["zombie_exploder", "zombie_berserker", "zombie_berserker"]);
+        var_03 = common_scripts\utility::random(["zombie_exploder", "zombie_berserker", "zombie_berserker"]);
       }
     }
 
@@ -328,7 +328,7 @@ func_7FE1() {
         var_0B = lib_055A::func_4696(var_03, 0, 0, var_0C.var_38C2);
       }
     } else if(isDefined(level.zmb_locked_spawn_zones)) {
-      var_0B = lib_055A::func_4696(var_03, 0, 0, common_scripts\utility::func_7A33(level.zmb_locked_spawn_zones));
+      var_0B = lib_055A::func_4696(var_03, 0, 0, common_scripts\utility::random(level.zmb_locked_spawn_zones));
     } else {
       var_0B = undefined;
     }
@@ -348,7 +348,7 @@ func_7FE1() {
       if(isDefined(var_0D)) {
         break;
       } else if(isDefined(level.zmb_locked_spawn_zones)) {
-        var_0B = lib_055A::func_4696(var_03, 0, 0, common_scripts\utility::func_7A33(level.zmb_locked_spawn_zones));
+        var_0B = lib_055A::func_4696(var_03, 0, 0, common_scripts\utility::random(level.zmb_locked_spawn_zones));
       }
 
       wait 0.05;

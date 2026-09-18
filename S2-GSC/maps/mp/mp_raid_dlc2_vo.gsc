@@ -5,7 +5,7 @@
 
 func_5366() {
   level endon("game_ended");
-  maps\mp\_utility::func_3FA3("intro_vo_complete", 0);
+  maps\mp\_utility::gameflaginit("intro_vo_complete", 0);
   waittillframeend;
   waittillframeend;
   if(!game["switchedsides"]) {
@@ -188,7 +188,7 @@ func_5366() {
 func_7FDF() {
   level endon("game_ended");
   waittillframeend;
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   runintelvo("intel_collect");
   runtransmitvo("radio_hardpoint");
   runbombervo("fighter_deathmatch");
@@ -196,8 +196,8 @@ func_7FDF() {
 
 runintelvo(param_00) {
   level.intelobjectivevoplayedcount = 0;
-  if(maps\mp\_utility::func_3FA0("started_vignettes")) {
-    maps\mp\_utility::func_3FA5("finished_intro_vignette_allies");
+  if(maps\mp\_utility::gameflag("started_vignettes")) {
+    maps\mp\_utility::gameflagwait("finished_intro_vignette_allies");
   } else {}
 
   lib_0506::func_A61C(param_00, "intel_start", 0.5);
@@ -210,7 +210,7 @@ runintelvo(param_00) {
 runtransmitvo(param_00) {
   level.transmitvoindex = 0;
   level.radiostruct = common_scripts\utility::func_46B5("radio_hardpoint", "targetname");
-  level.radiosoundent = spawn("script_model", level.radiostruct.var_116);
+  level.radiosoundent = spawn("script_model", level.radiostruct.origin);
   thread radiotransmitvo();
   var_01 = maps\mp\gametypes\_gamelogic::func_46E5() / 1000;
   thread lib_0506::func_7FE0(var_01, "transmit", lib_04FF::func_6937(param_00));
@@ -245,7 +245,7 @@ watchbomberdamage() {
 }
 
 func_A617(param_00, param_01, param_02) {
-  if(level.var_3F9D) {
+  if(level.gameended) {
     return;
   }
 

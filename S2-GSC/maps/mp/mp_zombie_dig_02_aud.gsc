@@ -321,7 +321,7 @@ aud_basalt_move() {
 
 aud_dig_earthquake(param_00, param_01, param_02) {
   foreach(var_04 in level.players) {
-    var_04 method_8626("dig_earthquake_mix");
+    var_04 setaltsceneobj("dig_earthquake_mix");
   }
 
   var_06 = 1;

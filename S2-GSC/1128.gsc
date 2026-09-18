@@ -256,10 +256,10 @@ func_0A23(param_00, param_01, param_02, param_03) {
   if(isDefined(param_02) && maps\mp\_utility::func_5697(param_02, param_01)) {
     var_04[var_04.size] = 3;
     var_04[var_04.size] = 1;
-  } else if(isDefined(param_02) && maps\mp\_utility::func_56E5(param_02)) {
+  } else if(isDefined(param_02) && maps\mp\_utility::isexplosivedamage(param_02)) {
     var_04[var_04.size] = 3;
     var_04[var_04.size] = 3;
-  } else if(isDefined(param_00.idflags) && param_00.idflags &level.var_503B) {
+  } else if(isDefined(param_00.idflags) && param_00.idflags &level.idflags_penetration) {
     var_04[var_04.size] = 3;
     var_04[var_04.size] = 4;
   } else if(isDefined(param_02) && param_02 == "MOD_MELEE") {
@@ -895,7 +895,7 @@ func_0A1E(param_00, param_01, param_02, param_03) {
     var_07 = 2;
     if(level.players.size > 5) {
       foreach(var_09 in var_06) {
-        if(self.clientid == var_09.var_2418) {
+        if(self.clientid == var_09.clientid) {
           var_07 = 1;
         }
       }
@@ -1524,7 +1524,7 @@ func_0A1A(param_00, param_01, param_02, param_03, param_04) {
     return;
   }
 
-  if(!isDefined(param_01.var_80BD)) {
+  if(!isDefined(param_01.settext)) {
     param_01 thread func_A93F();
   }
 
@@ -1618,8 +1618,8 @@ func_0A1A(param_00, param_01, param_02, param_03, param_04) {
 
     default:
       if(issubstr(param_00, "_earned")) {
-        param_01.var_80BD++;
-        if(param_01.var_80BD == 3) {
+        param_01.settext++;
+        if(param_01.settext == 3) {
           param_01 func_0A28("scorestreak3");
           param_01 notify("stopWatchingScorestreaks");
         }
@@ -1763,7 +1763,7 @@ func_A93F() {
   self endon("disconnect");
   self endon("stopWatchingScorestreaks");
   for(;;) {
-    self.var_80BD = 0;
+    self.settext = 0;
     self waittill("death");
   }
 }

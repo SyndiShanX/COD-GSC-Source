@@ -68,7 +68,7 @@ fog_start(param_00, param_01) {
   wait_for_initial_fog_conditions();
   param_00 = randomint(param_00) + 10;
   common_scripts\utility::func_A63E(param_00, "fasttrack_to_next_fog_state");
-  common_scripts\utility::func_3C8F(param_01);
+  common_scripts\utility::flag_set(param_01);
 }
 
 wait_for_initial_fog_conditions() {
@@ -88,7 +88,7 @@ fog_rolling_in(param_00, param_01) {
   common_scripts\utility::func_A63E(1, "fasttrack_to_next_fog_state");
   level childthread common_scripts\_exploder::func_88E(205);
   common_scripts\utility::func_A63E(8, "fasttrack_to_next_fog_state");
-  common_scripts\utility::func_3C8F(param_01);
+  common_scripts\utility::flag_set(param_01);
 }
 
 on_fog_settled(param_00, param_01) {
@@ -101,7 +101,7 @@ on_fog_settled(param_00, param_01) {
   level thread turn_on_fog_lights();
   common_scripts\utility::func_A63E(0.2, "fasttrack_to_next_fog_state");
   common_scripts\utility::func_A63E(param_00, "fasttrack_to_next_fog_state");
-  common_scripts\utility::func_3C8F(param_01);
+  common_scripts\utility::flag_set(param_01);
 }
 
 fog_rolling_out(param_00, param_01) {
@@ -120,7 +120,7 @@ fog_rolling_out(param_00, param_01) {
   level.island_fog_settle_time = 0;
   maps / mp / mp_zombie_island_fog_zones::set_fog_is_heavy(0);
   common_scripts\utility::func_A63E(param_00, "fasttrack_to_next_fog_state");
-  common_scripts\utility::func_3C8F(param_01);
+  common_scripts\utility::flag_set(param_01);
 }
 
 wait_for_intermission(param_00, param_01) {
@@ -128,7 +128,7 @@ wait_for_intermission(param_00, param_01) {
   wait_for_wave_requirement();
   param_00 = randomint(240);
   common_scripts\utility::func_A63E(param_00, "fasttrack_to_next_fog_state");
-  common_scripts\utility::func_3C8F(param_01);
+  common_scripts\utility::flag_set(param_01);
 }
 
 run_fog_functions_loop() {
@@ -292,12 +292,12 @@ clear_all_fog_flags() {
 
 set_all_fog_flags() {
   foreach(var_01 in level.fogfuncs) {
-    common_scripts\utility::func_3C8F(var_01.waitflag);
+    common_scripts\utility::flag_set(var_01.waitflag);
   }
 }
 
 toggle_next_fog_state() {
-  common_scripts\utility::func_3C8F(level.current_fog_flag);
+  common_scripts\utility::flag_set(level.current_fog_flag);
 }
 
 get_fog_volumn_touched(param_00) {
@@ -364,7 +364,7 @@ despawn_assassin_cover() {
 zombie_fog_effects_start() {
   wait(2);
   foreach(var_01 in lib_0547::func_408F()) {
-    playFXOnTag(level.var_611["zmb_isl_fog_zmb_emerge_01"], var_01, "J_SpineUpper");
+    playFXOnTag(level._effect["zmb_isl_fog_zmb_emerge_01"], var_01, "J_SpineUpper");
   }
 }
 
@@ -373,7 +373,7 @@ add_fog_function(param_00, param_01, param_02) {
   var_03.var_52BC = param_00;
   var_03.var_A796 = param_01;
   var_03.waitflag = param_02;
-  common_scripts\utility::func_3C87(var_03.waitflag);
+  common_scripts\utility::flag_init(var_03.waitflag);
   level.fogfuncs = common_scripts\utility::func_F6F(level.fogfuncs, var_03);
 }
 

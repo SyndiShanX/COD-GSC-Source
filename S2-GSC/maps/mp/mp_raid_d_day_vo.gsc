@@ -4,7 +4,7 @@
 *********************************************/
 
 func_5366() {
-  maps\mp\_utility::func_3FA3("intro_vo_complete", 0);
+  maps\mp\_utility::gameflaginit("intro_vo_complete", 0);
   waittillframeend;
   if(!game["switchedsides"]) {
     game["voice"]["allies"] = "al_war_";
@@ -165,7 +165,7 @@ func_5366() {
 func_7FDF() {
   level endon("game_ended");
   waittillframeend;
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   func_7F8F("capture_bunkers");
   runcommequipmentvo("comm_equipment");
   func_7F81("destroy_guns");
@@ -174,7 +174,7 @@ func_7FDF() {
 func_2EDE(param_00, param_01) {
   lib_0506::func_2EDC(param_00, param_01);
   if(issubstr(param_00, "capture_start")) {
-    maps\mp\_utility::func_3FA4("intro_vo_complete");
+    maps\mp\_utility::gameflagset("intro_vo_complete");
   }
 }
 
@@ -183,7 +183,7 @@ func_A617(param_00, param_01, param_02) {
   var_04 = 10000;
   var_05 = 15000;
   var_06 = 8000;
-  if(level.var_3F9D) {
+  if(level.gameended) {
     return;
   }
 
@@ -224,8 +224,8 @@ func_A617(param_00, param_01, param_02) {
 }
 
 func_7F8F(param_00) {
-  if(maps\mp\_utility::func_3FA0("started_vignettes")) {
-    maps\mp\_utility::func_3FA5("finished_intro_vignette_allies");
+  if(maps\mp\_utility::gameflag("started_vignettes")) {
+    maps\mp\_utility::gameflagwait("finished_intro_vignette_allies");
   } else {}
 
   thread runpartialcompletevo("capture");

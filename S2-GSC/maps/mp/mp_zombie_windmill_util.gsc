@@ -20,12 +20,12 @@ ambient_lightning_strikes() {
   var_01 = spawn("script_model", level.players[0].origin - (0, 0, 100));
   var_01 setModel("tag_origin");
   var_01.angles = var_01.angles + (-90, 0, 0);
-  var_01 method_8449(var_00);
+  var_01 linktosynchronizedparent(var_00);
   var_02 = getEntArray("lightning_strike_vol", "targetname");
   var_03 = 4900;
   for(;;) {
     wait(randomfloatrange(0.5, 1.25));
-    var_04 = common_scripts\utility::func_7A33(var_02);
+    var_04 = common_scripts\utility::random(var_02);
     var_05 = var_04 method_8216(randomfloatrange(-0.99, 0.99), randomfloatrange(-0.99, 0.99), randomfloatrange(-0.99, 0.99));
     var_05 = var_05 + (0, 0, 1500);
     var_05 = common_scripts\utility::func_348B(var_05);
@@ -55,7 +55,7 @@ ambient_lightning_strikes_forvfx() {
   var_01.angles = var_01.angles + (-90, 0, 0);
   wait 0.05;
   wait 0.05;
-  var_01 method_8449(var_00);
+  var_01 linktosynchronizedparent(var_00);
   var_02 = getEnt("lightning_strike_vol_test", "targetname");
   var_03 = 4900;
   for(;;) {
@@ -76,7 +76,7 @@ ambient_lightning_strikes_forvfx() {
     var_00.angles = (var_00.angles[0], var_00.angles[1] + randomintrange(45, 315), var_00.angles[2]);
     wait 0.05;
     var_05 = launchbeam("zmb_wm_lightning_beam", var_00, "tag_origin", var_01, "tag_origin");
-    playFXOnTag(level.var_611["zmb_wm_lightning_impact_base_rnr"], var_01, "tag_origin");
+    playFXOnTag(level._effect["zmb_wm_lightning_impact_base_rnr"], var_01, "tag_origin");
     if(getdvarint("snd_zmb_debug_lighting_strike")) {
       lib_0378::func_8D74("lightning_strike", var_00.origin, var_04);
     }
@@ -300,7 +300,7 @@ vo_master_handler() {
   wait(1);
   level.rideau_radio = spawn("script_origin", (0, 0, -10000));
   level.rideau_radio.var_20D8 = level.rideauindexes[0];
-  while(!common_scripts\utility::func_562E(level.var_3FA6)) {
+  while(!common_scripts\utility::func_562E(level.gamehasstarted)) {
     wait 0.05;
   }
 

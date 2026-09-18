@@ -57,7 +57,7 @@ func_786A() {
 }
 
 func_784E() {
-  playFXOnTag(level.var_611["zmb_gk_hilt_init"], level.var_3571, "TAG_FX");
+  playFXOnTag(level._effect["zmb_gk_hilt_init"], level.var_3571, "TAG_FX");
   lib_0378::func_8D74("aud_claw_move_start", level.var_3571, 0);
   level.var_3576 func_202A();
   lib_0378::func_8D74("aud_claw_move_stop", level.var_3571);
@@ -71,13 +71,13 @@ func_784E() {
   var_01 = common_scripts\utility::func_46B5("zmb_hilt_effects", "targetname");
   var_02 = spawn("script_model", var_01.origin);
   var_02 setModel("tag_origin");
-  playFXOnTag(level.var_611["zmb_geistkraft_radius_400"], var_02, "tag_origin");
+  playFXOnTag(level._effect["zmb_geistkraft_radius_400"], var_02, "tag_origin");
   level.var_3576 maps / mp / mp_zombie_nest_special_event_creator::func_170B(10, 400, undefined, "zombie soul", undefined, "extend_shroud");
-  killfxontag(level.var_611["zmb_geistkraft_radius_400"], var_02, "tag_origin");
+  killfxontag(level._effect["zmb_geistkraft_radius_400"], var_02, "tag_origin");
   var_02 delete();
-  playFXOnTag(level.var_611["zmb_gk_hilt"], level.var_3576, "TAG_FX");
+  playFXOnTag(level._effect["zmb_gk_hilt"], level.var_3576, "TAG_FX");
   thread func_089D();
-  common_scripts\utility::func_3C8F("flag_shard_souls_collected");
+  common_scripts\utility::flag_set("flag_shard_souls_collected");
   if(1) {
     if(isDefined(var_00)) {
       lib_0557::func_7847("3 shard", var_00);
@@ -230,8 +230,8 @@ func_2022(param_00) {
 }
 
 func_52EA() {
-  common_scripts\utility::func_3C87("flag_shard_souls_collected");
-  common_scripts\utility::func_3C87("flag_com_valve_turned");
+  common_scripts\utility::flag_init("flag_shard_souls_collected");
+  common_scripts\utility::flag_init("flag_com_valve_turned");
   level.var_3595 = maps / mp / mp_zombie_nest_ee_util::func_8A38("shard_valve", &"ZOMBIE_NEST_BRUTE_VALVE");
   level.var_3576 = func_8A45("ee_shard", "cart_align_node");
   level.var_3572 = func_8A10("com_cover", level.var_3576.var_BBE);

@@ -66,43 +66,43 @@ main() {
   lib_055A::func_993("zone_training_yard", "zone_training_house", "flag_link_house");
   lib_055A::func_993("zone_training_house", "zone_training_end", "house_to_end");
   lib_055A::func_88A();
-  common_scripts\utility::func_3C8F("flag_link_field");
-  common_scripts\utility::func_3C8F("flag_link_house");
-  common_scripts\utility::func_3C87("flag_dlg_german_death_done");
-  common_scripts\utility::func_3C87("flag_all_lamps_hit");
-  common_scripts\utility::func_3C87("flag_all_field_zombies_dead");
-  common_scripts\utility::func_3C87("flag_player_close_to_first_zombie");
-  common_scripts\utility::func_3C87("flag_player_has_weapon");
-  common_scripts\utility::func_3C87("flag_first_zombie_dead");
-  common_scripts\utility::func_3C87("flag_light_melee_popup_shown");
-  common_scripts\utility::func_3C87("flag_boards_popup_shown");
-  common_scripts\utility::func_3C87("flag_germans_start_search");
-  common_scripts\utility::func_3C87("flag_patrol_spots_zombie");
-  common_scripts\utility::func_3C87("flag_wallbuy_bought");
-  common_scripts\utility::func_3C87("flag_exit_door_seen");
-  common_scripts\utility::func_3C87("flag_exit_door_opened");
-  common_scripts\utility::func_3C87("flag_player_in_house");
-  common_scripts\utility::func_3C87("flag_enable_2nd_floor_spawns");
-  common_scripts\utility::func_3C87("flag_enable_all_1st_floor_spawns");
-  common_scripts\utility::func_3C87("flag_player_revived");
-  common_scripts\utility::func_3C87("flag_player_awoke_horde");
-  common_scripts\utility::func_3C87("flag_player_reached_exit");
-  common_scripts\utility::func_3C87("flag_player_got_electro");
-  common_scripts\utility::func_3C87("flag_player_ability_enabled");
-  common_scripts\utility::func_3C87("player_heartbeat_sound");
-  common_scripts\utility::func_3C87("flag_stop_crawl_sway");
-  common_scripts\utility::func_3C87("flag_stop_aftermath_sway");
-  common_scripts\utility::func_3C87("flag_player_used_ability");
-  common_scripts\utility::func_3C87("flag_patrol_timeout");
-  common_scripts\utility::func_3C87("flag_hit_patrol_trig");
-  common_scripts\utility::func_3C87("flag_spawn_first_zombie");
-  common_scripts\utility::func_3C87("flag_perk_popup_shown");
-  common_scripts\utility::func_3C87("flag_armor_popup_shown");
-  common_scripts\utility::func_3C87("flag_all_initial_house_zombies_dead");
-  common_scripts\utility::func_3C87("flag_show_round_ui");
-  common_scripts\utility::func_3C87("flag_shovel_popup_shown");
-  common_scripts\utility::func_3C87("flag_spawn_crawler");
-  common_scripts\utility::func_3C87("flag_show_inventory");
+  common_scripts\utility::flag_set("flag_link_field");
+  common_scripts\utility::flag_set("flag_link_house");
+  common_scripts\utility::flag_init("flag_dlg_german_death_done");
+  common_scripts\utility::flag_init("flag_all_lamps_hit");
+  common_scripts\utility::flag_init("flag_all_field_zombies_dead");
+  common_scripts\utility::flag_init("flag_player_close_to_first_zombie");
+  common_scripts\utility::flag_init("flag_player_has_weapon");
+  common_scripts\utility::flag_init("flag_first_zombie_dead");
+  common_scripts\utility::flag_init("flag_light_melee_popup_shown");
+  common_scripts\utility::flag_init("flag_boards_popup_shown");
+  common_scripts\utility::flag_init("flag_germans_start_search");
+  common_scripts\utility::flag_init("flag_patrol_spots_zombie");
+  common_scripts\utility::flag_init("flag_wallbuy_bought");
+  common_scripts\utility::flag_init("flag_exit_door_seen");
+  common_scripts\utility::flag_init("flag_exit_door_opened");
+  common_scripts\utility::flag_init("flag_player_in_house");
+  common_scripts\utility::flag_init("flag_enable_2nd_floor_spawns");
+  common_scripts\utility::flag_init("flag_enable_all_1st_floor_spawns");
+  common_scripts\utility::flag_init("flag_player_revived");
+  common_scripts\utility::flag_init("flag_player_awoke_horde");
+  common_scripts\utility::flag_init("flag_player_reached_exit");
+  common_scripts\utility::flag_init("flag_player_got_electro");
+  common_scripts\utility::flag_init("flag_player_ability_enabled");
+  common_scripts\utility::flag_init("player_heartbeat_sound");
+  common_scripts\utility::flag_init("flag_stop_crawl_sway");
+  common_scripts\utility::flag_init("flag_stop_aftermath_sway");
+  common_scripts\utility::flag_init("flag_player_used_ability");
+  common_scripts\utility::flag_init("flag_patrol_timeout");
+  common_scripts\utility::flag_init("flag_hit_patrol_trig");
+  common_scripts\utility::flag_init("flag_spawn_first_zombie");
+  common_scripts\utility::flag_init("flag_perk_popup_shown");
+  common_scripts\utility::flag_init("flag_armor_popup_shown");
+  common_scripts\utility::flag_init("flag_all_initial_house_zombies_dead");
+  common_scripts\utility::flag_init("flag_show_round_ui");
+  common_scripts\utility::flag_init("flag_shovel_popup_shown");
+  common_scripts\utility::flag_init("flag_spawn_crawler");
+  common_scripts\utility::flag_init("flag_show_inventory");
   thread func_327D();
   level.var_C11 = 0;
   thread func_357A();
@@ -122,7 +122,7 @@ main() {
 func_21D9() {
   var_00 = ["flag_dlg_german_death_done", "flag_patrol_spots_zombie", "flag_player_revived", "flag_player_got_electro", "flag_germans_start_search", "flag_stop_crawl_sway", "flag_stop_aftermath_sway", "flag_hit_patrol_trig", "flag_spawn_first_zombie"];
   foreach(var_02 in var_00) {
-    common_scripts\utility::func_3C8F(var_02);
+    common_scripts\utility::flag_set(var_02);
   }
 
   thread func_4056();
@@ -144,7 +144,7 @@ func_21D8() {
   var_00 = ["flag_light_melee_popup_shown", "flag_player_awoke_horde", "flag_player_in_house", "flag_player_close_to_first_zombie", "flag_player_has_weapon", "flag_first_zombie_dead", "flag_light_melee_popup_shown", "flag_spawn_first_zombie", "flag_show_inventory"];
   thread func_284D();
   foreach(var_02 in var_00) {
-    common_scripts\utility::func_3C8F(var_02);
+    common_scripts\utility::flag_set(var_02);
   }
 
   var_04 = ["trig_awaken_field_horde", "trig_entered_house", "trig_awaken_first_z_lure", "trig_reach_shovel", "trig_awaken_first_z_tree"];
@@ -162,9 +162,9 @@ func_21D8() {
 
 func_21D5() {
   wait(2);
-  common_scripts\utility::func_3C8F("collectible_gate_reached");
+  common_scripts\utility::flag_set("collectible_gate_reached");
   wait(0.5);
-  common_scripts\utility::func_3C8F("collectible_farmhouse_reached");
+  common_scripts\utility::flag_set("collectible_farmhouse_reached");
 }
 
 func_21D7() {
@@ -174,11 +174,11 @@ func_21D7() {
 func_5338() {
   lib_0557::func_786C();
   lib_0557::func_7846("Training Quest", ::lib_0557::func_30D8, undefined, &"ZOMBIE_TRAINING_HINT_QUEST", "ZOMBIE_TRAINING_HINT_QUEST");
-  common_scripts\utility::func_3C87("collectible_gun_purchased");
-  common_scripts\utility::func_3C87("collectible_blitz_purchased");
-  common_scripts\utility::func_3C87("collectible_gate_reached");
-  common_scripts\utility::func_3C87("collectible_farmhouse_reached");
-  common_scripts\utility::func_3C87("collectible_escape");
+  common_scripts\utility::flag_init("collectible_gun_purchased");
+  common_scripts\utility::flag_init("collectible_blitz_purchased");
+  common_scripts\utility::flag_init("collectible_gate_reached");
+  common_scripts\utility::flag_init("collectible_farmhouse_reached");
+  common_scripts\utility::flag_init("collectible_escape");
   lib_0557::func_AB8C("collectible_gate_reached");
   lib_0557::func_AB8C("collectible_farmhouse_reached");
   lib_0557::func_AB8C("collectible_gun_purchased");
@@ -224,7 +224,7 @@ func_787D() {
   lib_0557::func_781D("Training Quest", var_01);
   var_02 = lib_053F::func_44A6("field_to_yard");
   var_02 waittill("open");
-  common_scripts\utility::func_3C8F("collectible_gate_reached");
+  common_scripts\utility::flag_set("collectible_gate_reached");
   lib_0557::func_7847("Training Quest", var_01);
   var_00 delete();
   common_scripts\utility::func_3C9F("field_to_yard");
@@ -234,7 +234,7 @@ func_787B() {
   var_00 = getEntArray("wallbuy", "targetname");
   var_01 = lib_0557::func_782F(undefined, var_00);
   lib_0557::func_781D("Training Quest", var_01);
-  common_scripts\utility::func_3C8F("collectible_farmhouse_reached");
+  common_scripts\utility::flag_set("collectible_farmhouse_reached");
 }
 
 func_7875() {}
@@ -242,7 +242,7 @@ func_7875() {}
 func_7878() {}
 
 func_7876() {
-  common_scripts\utility::func_3C8F("collectible_escape");
+  common_scripts\utility::flag_set("collectible_escape");
 }
 
 func_9FFA() {
@@ -283,9 +283,9 @@ func_9FF7() {
 
 func_3FD2() {
   level waittill("player_spawned", var_00);
-  var_00 maps\mp\_utility::func_3E8E(1);
+  var_00 maps\mp\_utility::freezecontrolswrapper(1);
   lib_0378::func_8D0B("silence_fx");
-  while(!level.var_3FA6) {
+  while(!level.gamehasstarted) {
     wait 0.05;
   }
 
@@ -296,7 +296,7 @@ func_3FD2() {
   level.var_7F22["normal"] = ::func_9C4D;
   level.var_A41["zombie_generic"]["move_mode"] = ::func_9C4E;
   level.var_AC80.var_9065 = ::lib_055A::func_1E58;
-  level.var_611["zmb_player_attached_light"] = loadfx("vfx/lights/mp_zombie_training/zmb_player_attached_light_2");
+  level._effect["zmb_player_attached_light"] = loadfx("vfx/lights/mp_zombie_training/zmb_player_attached_light_2");
   func_327C();
   var_01 = func_325F();
   var_01 thread func_3263();
@@ -330,7 +330,7 @@ func_3FD2() {
       break;
 
     case 1:
-      var_00 maps\mp\_utility::func_3E8E(0);
+      var_00 maps\mp\_utility::freezecontrolswrapper(0);
       foreach(var_03 in level.var_4EE7) {
         maps\mp\_utility::func_2CED(2, ::func_3281, var_03, 1);
       }
@@ -358,7 +358,7 @@ func_3FD2() {
       break;
 
     case 2:
-      var_00 maps\mp\_utility::func_3E8E(0);
+      var_00 maps\mp\_utility::freezecontrolswrapper(0);
       foreach(var_03 in level.var_4EE7) {
         thread func_3281(var_03, 0);
       }
@@ -395,11 +395,11 @@ func_2845(param_00) {
   var_01 = lib_0547::func_AAFA("trig_call_out", "targetname");
   thread func_2E78();
   var_01 = lib_0547::func_AAFA("trig_kill_germans", "targetname");
-  common_scripts\utility::func_3C8F("flag_hit_patrol_trig");
+  common_scripts\utility::flag_set("flag_hit_patrol_trig");
   thread func_2E8C();
   common_scripts\utility::func_3C9F("flag_player_got_electro");
-  common_scripts\utility::func_3C8F("flag_spawn_first_zombie");
-  common_scripts\utility::func_3C8F("flag_stop_crawl_sway");
+  common_scripts\utility::flag_set("flag_spawn_first_zombie");
+  common_scripts\utility::flag_set("flag_stop_crawl_sway");
   thread func_AC02();
   common_scripts\utility::func_3C9F("flag_player_revived");
   func_ABD0();
@@ -410,7 +410,7 @@ func_284F() {
   thread func_284E();
   var_00 = getEnt("static_creek_shovel", "targetname");
   var_01 = lib_0547::func_AAFA("trig_reach_shovel", "targetname");
-  var_01 maps\mp\_utility::func_3E8E(1);
+  var_01 maps\mp\_utility::freezecontrolswrapper(1);
   var_02 = common_scripts\utility::func_46B5("shovel_lerp_struct", "targetname");
   var_03 = undefined;
   if(isDefined(var_02)) {
@@ -428,13 +428,13 @@ func_284F() {
   }
 
   var_01 _suicideD();
-  common_scripts\utility::func_3C8F("flag_player_has_weapon");
-  common_scripts\utility::func_3C8F("flag_stop_aftermath_sway");
+  common_scripts\utility::flag_set("flag_player_has_weapon");
+  common_scripts\utility::flag_set("flag_stop_aftermath_sway");
   wait(1.37);
   func_21D7();
   lib_0555::func_83DD("training_melee_2", var_01);
   var_01 thread creek_firstzombiekillnotifyhide();
-  var_01 maps\mp\_utility::func_3E8E(0);
+  var_01 maps\mp\_utility::freezecontrolswrapper(0);
   if(!var_01 common_scripts\utility::func_668()) {
     var_01 common_scripts\utility::func_617();
   }
@@ -471,7 +471,7 @@ func_284B() {
   level.var_3C5F thread func_ABAF();
   level.player lib_0378::func_8D74("first_zombie_tree_jumpscare");
   wait(0.3333333);
-  common_scripts\utility::func_3C8F("flag_player_close_to_first_zombie");
+  common_scripts\utility::flag_set("flag_player_close_to_first_zombie");
   func_ABAE(level.var_3C5F, var_00, 1);
   var_01 = 5;
   var_00 notifyonplayercommand("melee_pressed", "+attack");
@@ -645,7 +645,7 @@ func_2850() {
   self setstance("prone");
   waittillframeend;
   self method_8112(0);
-  maps\mp\_utility::func_3E8E(1);
+  maps\mp\_utility::freezecontrolswrapper(1);
   self setOrigin(var_01.origin);
   self setplayerangles(var_01.angles);
   self allowmovement(0);
@@ -667,7 +667,7 @@ func_2850() {
   thread func_2852();
   thread func_A002(self, 5, 1, 0, 1);
   wait(3);
-  maps\mp\_utility::func_3E8E(0);
+  maps\mp\_utility::freezecontrolswrapper(0);
   self allowmovement(1);
   self.zombietrainingmovespeedscale = 1;
   maps\mp\gametypes\_weapons::func_A13B();
@@ -693,7 +693,7 @@ func_2851() {
 func_2852() {
   level endon("flag_player_revived");
   self.var_729F = 2.4;
-  common_scripts\utility::func_3C8F("player_heartbeat_sound");
+  common_scripts\utility::flag_set("player_heartbeat_sound");
   for(;;) {
     if(common_scripts\utility::func_3C77("player_heartbeat_sound")) {
       wait 0.05;
@@ -710,7 +710,7 @@ func_2852() {
 
 func_3AA2() {
   common_scripts\utility::func_3C9F("field_to_yard");
-  common_scripts\utility::func_3C8F("flag_player_awoke_horde");
+  common_scripts\utility::flag_set("flag_player_awoke_horde");
   foreach(var_01 in level.var_3A72) {
     var_01 thread func_AB50();
   }
@@ -718,7 +718,7 @@ func_3AA2() {
 
 func_4EE8() {
   var_00 = lib_0547::func_AAFA("trig_entered_house", "targetname");
-  common_scripts\utility::func_3C8F("flag_player_in_house");
+  common_scripts\utility::flag_set("flag_player_in_house");
   thread func_4EF5();
   foreach(var_02 in level.var_52D1) {
     if(isDefined(var_02) && isalive(var_02)) {
@@ -782,8 +782,8 @@ func_4EF4() {
 }
 
 func_4EE6(param_00) {
-  common_scripts\utility::func_3C8F("flag_link_field");
-  common_scripts\utility::func_3C8F("flag_link_house");
+  common_scripts\utility::flag_set("flag_link_field");
+  common_scripts\utility::flag_set("flag_link_house");
   lib_0378::func_8D74("player_entered_house");
   if(level.var_21DA != 2) {
     level.var_28F0 = 2;
@@ -792,7 +792,7 @@ func_4EE6(param_00) {
   level.var_A981 = 1;
   level notify("zombies_manual_start");
   wait(10);
-  common_scripts\utility::func_3C8F("flag_show_round_ui");
+  common_scripts\utility::flag_set("flag_show_round_ui");
   level notify("disable_upper_floor_trig");
   func_4EF4();
 }
@@ -809,7 +809,7 @@ func_5FED() {
 
   lib_0557::func_782D("Training Quest", "Exit Farmhouse");
   var_00 = lib_0547::func_AAFA("trig_training_end", "targetname");
-  common_scripts\utility::func_3C8F("flag_player_reached_exit");
+  common_scripts\utility::flag_set("flag_player_reached_exit");
   lib_056D::func_8A6E(1);
   lib_0557::func_782D("Training Quest", "Rendezvouse with Squad");
   lib_0555::func_83DD("force_hide", var_00);
@@ -948,7 +948,7 @@ _suicideD() {
 
   if(0) {
     self method_8349("frag_grenade_zm");
-    maps\mp\_utility::func_642("frag_grenade_zm");
+    maps\mp\_utility::_giveweapon("frag_grenade_zm");
     self setweaponammoclip("frag_grenade_zm", 4);
   }
 
@@ -973,9 +973,9 @@ player_stripmods() {
 func_737F(param_00) {}
 
 func_7268() {
-  maps\mp\_utility::func_642("role_ability_mad_minute_zm");
+  maps\mp\_utility::_giveweapon("role_ability_mad_minute_zm");
   level.var_AB43 = 1;
-  common_scripts\utility::func_3C8F("flag_player_ability_enabled");
+  common_scripts\utility::flag_set("flag_player_ability_enabled");
   if(0) {
     self roleapplypowerchange(1);
   }
@@ -984,7 +984,7 @@ func_7268() {
 func_1351() {
   var_00 = common_scripts\utility::func_46B7("sfx_horde_right_pos", "targetname");
   while(!common_scripts\utility::func_3C77("flag_player_has_weapon")) {
-    var_01 = common_scripts\utility::func_7A33(var_00);
+    var_01 = common_scripts\utility::random(var_00);
     thread lib_0378::func_8D74("random_growl", var_01);
     wait(randomfloatrange(5, 10));
   }
@@ -1010,7 +1010,7 @@ func_4051() {
   level.var_4057 = var_05;
   common_scripts\utility::func_3C9F("flag_germans_start_search");
   lib_0547::func_AAFA("trig_kill_germans", "targetname");
-  common_scripts\utility::func_3C8F("flag_hit_patrol_trig");
+  common_scripts\utility::flag_set("flag_hit_patrol_trig");
 }
 
 func_404A() {
@@ -1128,11 +1128,11 @@ func_284D() {
 
 func_2849() {
   var_00 = lib_0547::func_AAFA("trig_pickup_elec_crawl", "targetname");
-  common_scripts\utility::func_3C8F("flag_player_got_electro");
+  common_scripts\utility::flag_set("flag_player_got_electro");
   var_00 playersetgroundreferenceent(undefined);
   thread func_2E9B();
   var_00 common_scripts\utility::func_603();
-  var_00 common_scripts\utility::func_600();
+  var_00 common_scripts\utility::_disableoffhandweapons();
   var_00 allowmovement(0);
   var_00 allowlook(0);
   var_00 lib_0586::func_78C("elec_inspect_zm");
@@ -1157,7 +1157,7 @@ func_2849() {
   thread func_2EB8();
   wait(3.017);
   var_00.zombietrainingmovespeedscale = 0.3;
-  common_scripts\utility::func_3C8F("flag_player_revived");
+  common_scripts\utility::flag_set("flag_player_revived");
   var_00 maps / mp / gametypes / zombies::func_4798(850);
   thread func_0A37();
   thread func_0A3A();
@@ -1434,7 +1434,7 @@ func_ABAF() {
   level endon("flag_player_in_house");
   self endon("death");
   for(;;) {
-    if(common_scripts\utility::func_AA4A(level.player.origin, level.player.angles, self.origin, cos(45)) && distance2dsquared(level.player.origin, self.origin) < squared(500)) {
+    if(common_scripts\utility::within_fov(level.player.origin, level.player.angles, self.origin, cos(45)) && distance2dsquared(level.player.origin, self.origin) < squared(500)) {
       if(!self.var_8386) {
         lib_0555::func_83DD("training_melee_2", level.player);
         level.player thread creek_firstzombiekillnotifyhide();
@@ -1442,7 +1442,7 @@ func_ABAF() {
       }
 
       if(distance2dsquared(level.player.origin, self.origin) < squared(75)) {
-        common_scripts\utility::func_3C8F("flag_player_close_to_first_zombie");
+        common_scripts\utility::flag_set("flag_player_close_to_first_zombie");
         break;
       }
     }
@@ -1452,7 +1452,7 @@ func_ABAF() {
 }
 
 func_ABB0() {
-  self.var_4BF2 = "zom_head_fdr02_org1";
+  self.headmodel = "zom_head_fdr02_org1";
   self.var_4B5A = 0;
   self.var_4B6E = 0;
   self.var_18B0 = "guts";
@@ -1460,7 +1460,7 @@ func_ABB0() {
 }
 
 func_ABD9() {
-  self.var_4BF2 = "zom_head_fdr04_org1";
+  self.headmodel = "zom_head_fdr04_org1";
   self.var_4B5A = 0;
   self.var_4B6E = 1;
   self.var_4CAA = "zom_m40helmet_net1";
@@ -1498,9 +1498,9 @@ func_ABDC(param_00) {
   }
 
   for(;;) {
-    if(common_scripts\utility::func_AA4A(level.player.origin, level.player.angles, self.origin, cos(45)) && distance2dsquared(level.player.origin, self.origin) < squared(150)) {
+    if(common_scripts\utility::within_fov(level.player.origin, level.player.angles, self.origin, cos(45)) && distance2dsquared(level.player.origin, self.origin) < squared(150)) {
       lib_0555::func_83DD("training_melee_1", level.player);
-      common_scripts\utility::func_3C8F("flag_light_melee_popup_shown");
+      common_scripts\utility::flag_set("flag_light_melee_popup_shown");
       break;
     }
 
@@ -1588,7 +1588,7 @@ func_ABD4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   if(isDefined(self.var_9C4F)) {
     switch (self.var_9C4F) {
       case 1:
-        common_scripts\utility::func_3C8F("flag_first_zombie_dead");
+        common_scripts\utility::flag_set("flag_first_zombie_dead");
         wait(3);
         lib_0555::func_83DD("training_econ_1", self);
         maps\mp\_utility::func_2CED(2, ::func_2E91);
@@ -1601,14 +1601,14 @@ func_ABD4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       case 3:
         level.var_3A72 = common_scripts\utility::func_F93(level.var_3A72, self);
         if(level.var_3A72.size == 0) {
-          common_scripts\utility::func_3C8F("flag_all_field_zombies_dead");
+          common_scripts\utility::flag_set("flag_all_field_zombies_dead");
         }
         break;
 
       case 4:
         level.var_52D3 = common_scripts\utility::func_F93(level.var_52D3, self);
         if(level.var_52D3.size == 0) {
-          common_scripts\utility::func_3C8F("flag_all_initial_house_zombies_dead");
+          common_scripts\utility::flag_set("flag_all_initial_house_zombies_dead");
         }
         break;
 
@@ -1666,7 +1666,7 @@ func_9FB0() {
     var_00 = self rolecheckstate("ready");
     var_01 = self rolecheckstate("active");
     if(var_01) {
-      common_scripts\utility::func_3C8F("flag_player_used_ability");
+      common_scripts\utility::flag_set("flag_player_used_ability");
       wait(1);
       continue;
     }
@@ -1721,8 +1721,8 @@ func_9FAA(param_00) {
         lib_0555::func_83DD("training_exit", self);
         var_01 = 1;
         if(!var_02) {
-          if(isDefined(param_00.var_8301)) {
-            foreach(var_06 in param_00.var_8301) {
+          if(isDefined(param_00.setclientdvars)) {
+            foreach(var_06 in param_00.setclientdvars) {
               var_06 hudoutlineenableforclient(self, 0, 0);
             }
 
@@ -1736,8 +1736,8 @@ func_9FAA(param_00) {
       }
 
       if(var_02) {
-        if(isDefined(param_00.var_8301)) {
-          foreach(var_06 in param_00.var_8301) {
+        if(isDefined(param_00.setclientdvars)) {
+          foreach(var_06 in param_00.setclientdvars) {
             var_06 hudoutlinedisable();
           }
 
@@ -1852,7 +1852,7 @@ func_9FAB() {
   level endon("flag_player_in_house");
   lib_0547::func_AAFB("trig_show_hint_tut");
   lib_0555::func_83DD("training_hint_1", self);
-  common_scripts\utility::func_3C8F("flag_show_inventory");
+  common_scripts\utility::flag_set("flag_show_inventory");
   self notifyonplayercommand("toggleScoresDown", "togglescores");
   self.ignoreme = 1;
   setslowmotion(1, 0.25, 0.5);
@@ -1873,7 +1873,7 @@ func_9FAD() {
     if(!func_9FFB()) {
       if(!common_scripts\utility::func_3C77("flag_perk_popup_shown")) {
         lib_0555::func_83DD("training_blitz", var_00);
-        common_scripts\utility::func_3C8F("flag_perk_popup_shown");
+        common_scripts\utility::flag_set("flag_perk_popup_shown");
         break;
       }
     }
@@ -1889,7 +1889,7 @@ func_9FA7() {
     if(!func_9FFB()) {
       if(!common_scripts\utility::func_3C77("flag_armor_popup_shown")) {
         lib_0555::func_83DD("training_armor", var_00);
-        common_scripts\utility::func_3C8F("flag_armor_popup_shown");
+        common_scripts\utility::flag_set("flag_armor_popup_shown");
         break;
       }
     }
@@ -1909,7 +1909,7 @@ func_9FAE() {
     if(!func_9FFB()) {
       if(!common_scripts\utility::func_3C77("flag_shovel_popup_shown")) {
         lib_0555::func_83DD("training_shovel", level.player);
-        common_scripts\utility::func_3C8F("flag_shovel_popup_shown");
+        common_scripts\utility::flag_set("flag_shovel_popup_shown");
         break;
       }
     }
@@ -1943,7 +1943,7 @@ func_9FB2() {
     foreach(var_0B in var_00) {
       if(lib_0586::func_791(var_0B, var_09)) {
         thread func_2EB9();
-        common_scripts\utility::func_3C8F("flag_wallbuy_bought");
+        common_scripts\utility::flag_set("flag_wallbuy_bought");
         if(!0) {
           func_7268();
         }
@@ -2107,7 +2107,7 @@ func_2E80() {
 func_2E78() {
   level.player thread lib_0378::func_307E("zmb_train_mari_drostenoliviajefferson");
   wait(4);
-  common_scripts\utility::func_3C8F("flag_germans_start_search");
+  common_scripts\utility::flag_set("flag_germans_start_search");
   wait(1);
   var_00 = common_scripts\utility::func_46B5("ger_start_pos", "targetname");
   thread lib_0378::func_8D74("ger_search", var_00, level.var_404C);
@@ -2115,11 +2115,11 @@ func_2E78() {
   level.player thread lib_0378::func_307E("zmb_train_mari_ohshit");
   if(0) {
     wait(2.6);
-    common_scripts\utility::func_3C8F("flag_patrol_spots_zombie");
+    common_scripts\utility::flag_set("flag_patrol_spots_zombie");
     wait(3);
     lib_0378::func_8D74("training_dist_gunfire");
     wait(2);
-    common_scripts\utility::func_3C8F("flag_spawn_crawler");
+    common_scripts\utility::flag_set("flag_spawn_crawler");
     wait(2);
     thread func_1351();
   }
@@ -2128,11 +2128,11 @@ func_2E78() {
 func_2E8C() {
   if(!0) {
     lib_0378::func_8D74("ger_combat1", level.var_404C);
-    common_scripts\utility::func_3C8F("flag_patrol_spots_zombie");
+    common_scripts\utility::flag_set("flag_patrol_spots_zombie");
     wait(4);
     lib_0378::func_8D74("training_dist_gunfire");
     wait(2);
-    common_scripts\utility::func_3C8F("flag_spawn_crawler");
+    common_scripts\utility::flag_set("flag_spawn_crawler");
     wait(2);
     thread func_1351();
   }
@@ -2278,7 +2278,7 @@ func_3579() {
   }
 
   if(var_0B) {
-    common_scripts\utility::func_3C8F("flag_all_lamps_hit");
+    common_scripts\utility::flag_set("flag_all_lamps_hit");
     thread lib_0378::func_8D74("ee_complete");
     if(level.var_A980 <= 25 && maps\mp\_utility::func_4571() == "mp_zombie_training") {
       level.var_400E[level.var_400E.size] = ["mountain_man_set 4 -1", "all"];
@@ -2385,7 +2385,7 @@ func_3281(param_00, param_01) {
 
   param_00 lib_0378::func_8D74("door_close");
   param_00 solid();
-  param_00 method_805F();
+  param_00 saved_actionslotdata();
 }
 
 func_325F() {
@@ -2400,9 +2400,9 @@ func_325F() {
 func_3263() {
   childthread func_3279();
   self waittill("open", var_00);
-  common_scripts\utility::func_3C8F("flag_exit_door_opened");
-  if(isDefined(self.var_8301)) {
-    foreach(var_02 in self.var_8301) {
+  common_scripts\utility::flag_set("flag_exit_door_opened");
+  if(isDefined(self.setclientdvars)) {
+    foreach(var_02 in self.setclientdvars) {
       var_02 hudoutlinedisable();
     }
   }
@@ -2419,7 +2419,7 @@ func_3279() {
 
     if(var_01.var_62D6 < self.var_267B && !common_scripts\utility::func_3C77("flag_exit_door_opened")) {
       thread func_2EAB();
-      common_scripts\utility::func_3C8F("flag_exit_door_seen");
+      common_scripts\utility::flag_set("flag_exit_door_seen");
       break;
     }
 
@@ -2482,7 +2482,7 @@ func_9C4E() {
 }
 
 func_9C4D() {
-  common_scripts\utility::func_3C8F("flag_enable_2nd_floor_spawns");
+  common_scripts\utility::flag_set("flag_enable_2nd_floor_spawns");
   if(common_scripts\utility::func_3C77("flag_player_reached_exit")) {
     return;
   }
@@ -2490,7 +2490,7 @@ func_9C4D() {
   switch (level.var_A980) {
     case 2:
       if(level.var_BCE) {
-        common_scripts\utility::func_3C8F("flag_enable_all_1st_floor_spawns");
+        common_scripts\utility::flag_set("flag_enable_all_1st_floor_spawns");
       }
       break;
 
@@ -2498,7 +2498,7 @@ func_9C4D() {
       thread func_2EBD(3);
       maps\mp\_utility::func_2CED(5, ::lib_0555::func_83DD, "training_rounds", self);
       if(!level.var_BCE) {
-        common_scripts\utility::func_3C8F("flag_enable_all_1st_floor_spawns");
+        common_scripts\utility::flag_set("flag_enable_all_1st_floor_spawns");
       }
       break;
 
@@ -2512,8 +2512,8 @@ func_9C4D() {
     case 10:
       level notify("challenge_kill_highlights");
       var_00 = func_325F();
-      if(isDefined(var_00.var_8301)) {
-        foreach(var_02 in var_00.var_8301) {
+      if(isDefined(var_00.setclientdvars)) {
+        foreach(var_02 in var_00.setclientdvars) {
           var_02 hudoutlinedisableforclient(level.player);
         }
       }
@@ -2544,8 +2544,8 @@ func_74EC(param_00, param_01, param_02) {
   }
 
   common_scripts\utility::func_603();
-  common_scripts\utility::func_600();
-  maps\mp\_utility::func_3E8E(1);
+  common_scripts\utility::_disableoffhandweapons();
+  maps\mp\_utility::freezecontrolswrapper(1);
   lib_0586::func_78C(param_00);
   wait(0.25);
   if(param_02) {
@@ -2562,7 +2562,7 @@ func_74EC(param_00, param_01, param_02) {
     lib_0586::func_790(param_00);
   }
 
-  maps\mp\_utility::func_3E8E(0);
+  maps\mp\_utility::freezecontrolswrapper(0);
 }
 
 func_5CA4(param_00) {

@@ -530,7 +530,7 @@ func_7576() {
   thread func_92B7();
   thread func_A0DB();
   thread func_1C87();
-  foreach(var_00 in level.var_744A) {
+  foreach(var_00 in level.players) {
     var_00 iclientprintln(&"HUB_1v1_CHAT", self.var_252A[0].var_0109, self.var_252A[1].var_0109);
   }
 }
@@ -593,7 +593,7 @@ func_237B() {
     return;
   }
 
-  if(!maps\mp\_utility::func_57A0(self)) {
+  if(!maps\mp\_utility::isreallyalive(self)) {
     self waittill("spawned");
     return;
   }
@@ -665,7 +665,7 @@ func_8A11(param_00) {
   var_04 = "";
   var_05 = 0;
   if(!isDefined(param_00.var_6B15) && !isDefined(param_00.onevone_classchoicenum)) {
-    maps\mp\_utility::func_3E8E(1);
+    maps\mp\_utility::freezecontrolswrapper(1);
     param_00 waittill("onevoneClassCreated");
     if(isarenaingungame(param_00)) {
       var_06 = getarenagungameweapons(param_00);
@@ -686,7 +686,7 @@ func_8A11(param_00) {
       wait 0.05;
     }
 
-    maps\mp\_utility::func_3E8E(0);
+    maps\mp\_utility::freezecontrolswrapper(0);
   } else if(isarenaingungame(param_00)) {
     var_04 = getcurrentgungameweapon(param_00, self.var_2923);
     var_05 = 1;
@@ -701,15 +701,15 @@ func_8A11(param_00) {
 
   self setclientomnvar("ui_hub_in_1v1", getarenaweaponmode(param_00) + 1);
   if(isDefined(param_00.var_6B15)) {
-    if(param_00.var_6B15["loadoutEquipmentStruct"].var_48CA != 0) {
+    if(param_00.var_6B15["loadoutEquipmentStruct"].guid != 0) {
       var_07 = maps\mp\_utility::func_44CD(param_00.var_6B15["loadoutEquipmentStruct"]);
       self method_8349(var_07);
       self giveweapon(var_07);
     }
 
-    if(param_00.var_6B15["loadoutOffhandStruct"].var_48CA != 0) {
+    if(param_00.var_6B15["loadoutOffhandStruct"].guid != 0) {
       var_08 = maps\mp\_utility::func_44CD(param_00.var_6B15["loadoutOffhandStruct"]);
-      self method_831E(var_08);
+      self setoffhandsecondaryclass(var_08);
       self giveweapon(var_08);
     }
   }
@@ -719,8 +719,8 @@ func_8A11(param_00) {
     self method_8328();
   }
 
-  maps\mp\_utility::func_47A2("specialty_marksmanvision");
-  maps\mp\_utility::func_47A2("specialty_improvedholdbreath");
+  maps\mp\_utility::giveperk("specialty_marksmanvision");
+  maps\mp\_utility::giveperk("specialty_improvedholdbreath");
   maps\mp\_utility::func_0642(var_04);
   if(isarenaingungame(param_00)) {
     self.current1v1weaponmode = 1;
@@ -764,7 +764,7 @@ func_77C0(param_00, param_01, param_02) {
     }
   }
 
-  foreach(var_07 in level.var_744A) {
+  foreach(var_07 in level.players) {
     var_07 iclientprintln(var_05, var_03, var_04);
   }
 }
@@ -922,7 +922,7 @@ func_4AA8(param_00, param_01, param_02, param_03) {
     }
   }
 
-  var_04 = common_scripts\utility::func_7A33(level.var_4F38.var_7A48);
+  var_04 = common_scripts\utility::random(level.var_4F38.var_7A48);
   switch (param_00) {
     case "win":
       if(isDefined(param_03) && param_03) {
@@ -947,7 +947,7 @@ func_4AA8(param_00, param_01, param_02, param_03) {
       }
 
       thread maps\mp\gametypes\_missions::func_7752("ch_daily_2");
-      thread maps\mp\gametypes\_missions::func_7750("ch_hq_1v1");
+      thread maps\mp\gametypes\_missions::processchallenge("ch_hq_1v1");
       var_09 = self getrankedplayerdata(common_scripts\utility::func_46AB(), "hubStats", "num1v1Wins") + 1;
       self setrankedplayerdata(common_scripts\utility::func_46AB(), "hubStats", "num1v1Wins", var_09);
       maps\mp\gametypes\_hub_unk1::func_84DE(["hubFeatureStats", "hub1v1", "numHub1v1Wins"], var_09);
@@ -975,7 +975,7 @@ func_4AA8(param_00, param_01, param_02, param_03) {
       break;
 
     default:
-      var_04 = common_scripts\utility::func_7A33(level.var_4F38.var_7A48);
+      var_04 = common_scripts\utility::random(level.var_4F38.var_7A48);
       break;
   }
 
@@ -1018,7 +1018,7 @@ func_4AA8(param_00, param_01, param_02, param_03) {
 func_4AA5(param_00, param_01) {
   level endon("game_ended");
   self endon("disconnect");
-  while(!maps\mp\_utility::func_57A0(self)) {
+  while(!maps\mp\_utility::isreallyalive(self)) {
     wait 0.05;
   }
 
@@ -1105,7 +1105,7 @@ func_237A() {
   maps\mp\gametypes\_hub_unk1::func_870B(0);
   self method_8114(0);
   self method_812B(0);
-  maps\mp\_utility::func_3E8E(0);
+  maps\mp\_utility::freezecontrolswrapper(0);
   self method_85BE(0);
   self method_812A(0);
   self method_8307(1);
@@ -1171,7 +1171,7 @@ func_A0DB() {
 func_1C87() {
   var_00 = self.var_252A[0];
   var_01 = self.var_252A[1];
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(var_03 == var_00 || var_03 == var_01) {
       continue;
     }
@@ -1189,7 +1189,7 @@ func_1C87() {
 }
 
 func_1C86() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 luinotifyeventextraplayer(&"clean_hub_1v1_score", 0);
   }
 }
@@ -1255,13 +1255,13 @@ func_6FB8(param_00, param_01) {
     var_02 = [];
     if(param_00 == param_00.var_2922.var_252A[0]) {
       if(isDefined(param_01) && param_01) {
-        return common_scripts\utility::func_7A33(param_00.var_2922.var_180D);
+        return common_scripts\utility::random(param_00.var_2922.var_180D);
       }
 
       var_02 = function_01AC(param_00.var_2922.var_0F59, param_00.var_2922.var_252A[1].var_0116, 3000);
     } else if(param_00 == param_00.var_2922.var_252A[1]) {
       if(isDefined(param_01) && param_01) {
-        return common_scripts\utility::func_7A33(param_00.var_2922.var_7B72);
+        return common_scripts\utility::random(param_00.var_2922.var_7B72);
       }
 
       var_02 = function_01AC(param_00.var_2922.var_0F59, param_00.var_2922.var_252A[0].var_0116, 3000);
@@ -1272,13 +1272,13 @@ func_6FB8(param_00, param_01) {
     }
 
     if(var_02[0].var_0165 == "blue") {
-      return common_scripts\utility::func_7A33(param_00.var_2922.var_7B72);
+      return common_scripts\utility::random(param_00.var_2922.var_7B72);
     } else {
-      return common_scripts\utility::func_7A33(param_00.var_2922.var_180D);
+      return common_scripts\utility::random(param_00.var_2922.var_180D);
     }
   }
 
-  return common_scripts\utility::func_7A33(param_01.var_2922.var_0F59);
+  return common_scripts\utility::random(param_01.var_2922.var_0F59);
 }
 
 func_75DE(param_00, param_01) {
@@ -1341,7 +1341,7 @@ func_35AC() {
       }
 
       if(!var_01) {
-        var_05 = common_scripts\utility::func_7A33(level.var_4F38.var_7A48);
+        var_05 = common_scripts\utility::random(level.var_4F38.var_7A48);
         var_00 maps\mp\gametypes\_hub_unk1::func_8698(var_05.var_0116);
         var_00 setangles(var_05.var_001D);
       }

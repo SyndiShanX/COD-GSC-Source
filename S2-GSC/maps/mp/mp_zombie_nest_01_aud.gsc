@@ -296,7 +296,7 @@ func_991B(param_00, param_01) {
 func_7248() {}
 
 func_7330() {
-  self method_8626("fireman_intro_fire_off");
+  self setaltsceneobj("fireman_intro_fire_off");
   thread func_8E8F();
   lib_0366::snd_zmb_set_plr_vox_scare_count_max(1);
 }
@@ -431,7 +431,7 @@ func_8E8F() {
       if(var_03) {
         self method_8627("pa_inside", 1);
       } else {
-        self method_8626("pa_inside", 1);
+        self setaltsceneobj("pa_inside", 1);
       }
 
       var_01 = var_03;
@@ -527,7 +527,7 @@ func_3FE4(param_00, param_01) {
 
 func_AC91(param_00, param_01) {
   foreach(var_03 in level.players) {
-    var_03 method_8626("earthquakezone1");
+    var_03 setaltsceneobj("earthquakezone1");
   }
 
   switch (param_00) {
@@ -774,7 +774,7 @@ func_3DB5() {
   var_00 = self;
   foreach(var_02 in level.players) {
     if(distance(var_02.origin, self.origin) <= 1500) {
-      var_02 method_8626("follower_intro");
+      var_02 setaltsceneobj("follower_intro");
     }
   }
 
@@ -782,14 +782,14 @@ func_3DB5() {
   wait(0.96);
   var_05 = lib_0380::func_2889("zmb_follower_script_duck", undefined, var_00.origin);
   wait(0.89);
-  lib_0380::func_2893(var_05);
+  lib_0380::_stoplocalsound(var_05);
   var_05 = undefined;
   var_06 = lib_0380::func_2889("zmb_follower_script_duck", undefined, var_00.origin);
   wait(1);
-  lib_0380::func_2893(var_06);
+  lib_0380::_stoplocalsound(var_06);
   var_06 = undefined;
   wait(3);
-  lib_0380::func_2893(var_04);
+  lib_0380::_stoplocalsound(var_04);
   var_04 = undefined;
 }
 
@@ -798,7 +798,7 @@ func_3DB4() {
   wait(2.11);
   var_01 = lib_0380::func_2889("zmb_follower_intro_door_slide", undefined, var_00.origin);
   wait(3.3);
-  lib_0380::func_2893(var_01);
+  lib_0380::_stoplocalsound(var_01);
   var_01 = undefined;
   lib_0378::func_8D18("follower_intro");
 }
@@ -883,7 +883,7 @@ func_201E() {
 }
 
 func_1304() {
-  self method_8626("pneumo_tube_slide");
+  self setaltsceneobj("pneumo_tube_slide");
   lib_0380::func_288B("zmb_pneumo_tube_main", self, self);
   wait(7.63);
   self method_8627("pneumo_tube_slide");
@@ -892,7 +892,7 @@ func_1304() {
 func_12E4() {
   foreach(var_01 in level.players) {
     if(distance(var_01.origin, self.origin) <= 800) {
-      var_01 method_8626("claw_button_press");
+      var_01 setaltsceneobj("claw_button_press");
     }
   }
 
@@ -903,7 +903,7 @@ func_12E4() {
 
 func_232A(param_00, param_01) {
   foreach(var_03 in level.players) {
-    var_03 method_8626("shard_claw_movement");
+    var_03 setaltsceneobj("shard_claw_movement");
   }
 
   lib_0380::func_288B("zmb_claw_move_start", undefined, param_00);
@@ -949,7 +949,7 @@ func_255E() {
 func_1D98(param_00) {
   if(param_00 == "off") {
     foreach(var_02 in level.players) {
-      var_02 method_8626("light_flicker_off_submix");
+      var_02 setaltsceneobj("light_flicker_off_submix");
       if(var_02 maps / mp / mp_zombie_nest_ee_util::func_7402()) {
         lib_0380::func_2888("zmb_bunker_lights_off", var_02);
       }
@@ -1024,7 +1024,7 @@ func_08A5(param_00) {
 func_08A6(param_00) {
   var_01 = self;
   var_02 = 15;
-  var_01 method_8626("build_ww_submix");
+  var_01 setaltsceneobj("build_ww_submix");
   lib_0380::func_2889("zmb_build_ww_transients", undefined, param_00);
   common_scripts\utility::waittill_notify_or_timeout("death", var_02);
   var_01 method_8627("build_ww_submix");
@@ -1291,7 +1291,7 @@ voice_of_god_mix_begin() {
     if(distance(var_01.origin, level.var_11CB.var_A5FB.origin) <= 2000) {
       var_01 lib_0366::func_8E32(1);
       var_01.voice_of_god_music_stopped = 1;
-      var_01 method_8626("voice_of_god");
+      var_01 setaltsceneobj("voice_of_god");
       var_01 thread vog_do_earthshake();
     }
   }
@@ -1519,7 +1519,7 @@ func_9B4D(param_00) {
   lib_0380::func_2889("zmb_twr_lightning_strike_lightning", undefined, self.origin);
   foreach(var_02 in level.players) {
     if(distance(var_02.origin, self.origin) <= 2000) {
-      var_02 method_8626("tower_lightning_strike_submix");
+      var_02 setaltsceneobj("tower_lightning_strike_submix");
     }
   }
 }
@@ -1711,34 +1711,34 @@ func_1302() {
   var_02 = lib_0380::func_288B("zmb_med_forge_propeller_part01", undefined, var_00);
   var_03 = lib_0380::func_288B("zmb_med_forge_room_part01", undefined, var_00);
   wait(9.91);
-  lib_0380::func_2893(var_01, 1);
+  lib_0380::_stoplocalsound(var_01, 1);
   var_01 = undefined;
-  lib_0380::func_2893(var_02, 1);
+  lib_0380::_stoplocalsound(var_02, 1);
   var_02 = undefined;
-  lib_0380::func_2893(var_03, 1);
+  lib_0380::_stoplocalsound(var_03, 1);
   var_03 = undefined;
   var_04 = lib_0380::func_288B("zmb_med_forge_hydro_part02", undefined, var_00);
   var_05 = lib_0380::func_288B("zmb_med_forge_propeller_part02", undefined, var_00);
   var_06 = lib_0380::func_288B("zmb_med_forge_room_part02", undefined, var_00);
   wait(9.94);
-  lib_0380::func_2893(var_04, 1);
+  lib_0380::_stoplocalsound(var_04, 1);
   var_04 = undefined;
-  lib_0380::func_2893(var_05, 1);
+  lib_0380::_stoplocalsound(var_05, 1);
   var_05 = undefined;
-  lib_0380::func_2893(var_06, 1);
+  lib_0380::_stoplocalsound(var_06, 1);
   var_06 = undefined;
   var_07 = lib_0380::func_288B("zmb_med_forge_hydro_part03", undefined, var_00);
   var_08 = lib_0380::func_288B("zmb_med_forge_hydro_trans_part03", undefined, var_00);
   var_09 = lib_0380::func_288B("zmb_med_forge_propeller_part03", undefined, var_00);
   var_0A = lib_0380::func_288B("zmb_med_forge_room_part03", undefined, var_00);
   wait(9.94);
-  lib_0380::func_2893(var_07, 1);
+  lib_0380::_stoplocalsound(var_07, 1);
   var_07 = undefined;
-  lib_0380::func_2893(var_08, 1);
+  lib_0380::_stoplocalsound(var_08, 1);
   var_08 = undefined;
-  lib_0380::func_2893(var_09, 1);
+  lib_0380::_stoplocalsound(var_09, 1);
   var_09 = undefined;
-  lib_0380::func_2893(var_0A, 1);
+  lib_0380::_stoplocalsound(var_0A, 1);
   var_0A = undefined;
   var_0B = lib_0380::func_288B("zmb_med_forge_hydro_part04", undefined, var_00);
   var_0C = lib_0380::func_288B("zmb_med_forge_steam_01", undefined, var_00);
@@ -1746,38 +1746,38 @@ func_1302() {
   var_0E = lib_0380::func_2889("zmb_med_forge_blood_cough", undefined, (-644, -2406, 1305));
   var_0F = lib_0380::func_288B("zmb_med_forge_room_part04", undefined, var_00);
   wait(9.94);
-  lib_0380::func_2893(var_0B, 1);
+  lib_0380::_stoplocalsound(var_0B, 1);
   var_0B = undefined;
-  lib_0380::func_2893(var_0C, 3);
+  lib_0380::_stoplocalsound(var_0C, 3);
   var_0C = undefined;
-  lib_0380::func_2893(var_0D, 3);
+  lib_0380::_stoplocalsound(var_0D, 3);
   var_0D = undefined;
-  lib_0380::func_2893(var_0E, 3);
+  lib_0380::_stoplocalsound(var_0E, 3);
   var_0E = undefined;
-  lib_0380::func_2893(var_0F, 1);
+  lib_0380::_stoplocalsound(var_0F, 1);
   var_0F = undefined;
   var_10 = lib_0380::func_288B("zmb_med_forge_hydro_part05", undefined, var_00);
   var_11 = lib_0380::func_288B("zmb_med_forge_hydro_trans_part05_a", undefined, var_00);
   var_12 = lib_0380::func_288B("zmb_med_forge_hydro_trans_part05_b", undefined, var_00);
   var_13 = lib_0380::func_288B("zmb_med_forge_room_part05", undefined, var_00);
   wait(9.87);
-  lib_0380::func_2893(var_10, 1);
+  lib_0380::_stoplocalsound(var_10, 1);
   var_10 = undefined;
-  lib_0380::func_2893(var_11, 1);
+  lib_0380::_stoplocalsound(var_11, 1);
   var_11 = undefined;
-  lib_0380::func_2893(var_12, 1);
+  lib_0380::_stoplocalsound(var_12, 1);
   var_12 = undefined;
-  lib_0380::func_2893(var_13, 1);
+  lib_0380::_stoplocalsound(var_13, 1);
   var_13 = undefined;
   var_14 = lib_0380::func_288B("zmb_med_forge_hydro_part06", undefined, var_00);
   var_15 = lib_0380::func_288B("zmb_med_forge_hydro_trans_part06", undefined, var_00);
   var_16 = lib_0380::func_288B("zmb_med_forge_room_part06", undefined, var_00);
   wait(2.73);
-  lib_0380::func_2893(var_14, 1);
+  lib_0380::_stoplocalsound(var_14, 1);
   var_14 = undefined;
-  lib_0380::func_2893(var_15, 1);
+  lib_0380::_stoplocalsound(var_15, 1);
   var_15 = undefined;
-  lib_0380::func_2893(var_16, 1);
+  lib_0380::_stoplocalsound(var_16, 1);
   var_16 = undefined;
   var_17 = lib_0380::func_288B("zmb_med_forge_room_end", undefined, var_00);
 }
@@ -1789,45 +1789,45 @@ func_1305() {
   var_02 = lib_0380::func_288B("zmb_rnd_forge_pistons_part01", undefined, var_00);
   var_03 = lib_0380::func_288B("zmb_rnd_forge_room_part01", undefined, var_00);
   wait(10.52);
-  lib_0380::func_2893(var_01, 1);
+  lib_0380::_stoplocalsound(var_01, 1);
   var_01 = undefined;
-  lib_0380::func_2893(var_02, 1);
+  lib_0380::_stoplocalsound(var_02, 1);
   var_02 = undefined;
-  lib_0380::func_2893(var_03, 1.5);
+  lib_0380::_stoplocalsound(var_03, 1.5);
   var_03 = undefined;
   var_04 = lib_0380::func_288B("zmb_rnd_forge_engine_part02", undefined, var_00);
   var_05 = lib_0380::func_288B("zmb_rnd_forge_pistons_part02", undefined, var_00);
   var_06 = lib_0380::func_288B("zmb_rnd_forge_room_part02", undefined, var_00);
   wait(10.24);
-  lib_0380::func_2893(var_04, 1);
+  lib_0380::_stoplocalsound(var_04, 1);
   var_04 = undefined;
-  lib_0380::func_2893(var_05, 1);
+  lib_0380::_stoplocalsound(var_05, 1);
   var_05 = undefined;
-  lib_0380::func_2893(var_06, 1.5);
+  lib_0380::_stoplocalsound(var_06, 1.5);
   var_06 = undefined;
   var_07 = lib_0380::func_288B("zmb_rnd_forge_engine_part03", undefined, var_00);
   var_08 = lib_0380::func_288B("zmb_rnd_forge_pistons_part03", undefined, var_00);
   var_09 = lib_0380::func_288B("zmb_rnd_forge_room_part03", undefined, var_00);
   wait(10.11);
-  lib_0380::func_2893(var_07, 1);
+  lib_0380::_stoplocalsound(var_07, 1);
   var_07 = undefined;
-  lib_0380::func_2893(var_08, 1);
+  lib_0380::_stoplocalsound(var_08, 1);
   var_08 = undefined;
-  lib_0380::func_2893(var_09, 1.5);
+  lib_0380::_stoplocalsound(var_09, 1.5);
   var_09 = undefined;
   var_0A = lib_0380::func_288B("zmb_rnd_forge_engine_part04", undefined, var_00);
   var_0B = lib_0380::func_288B("zmb_rnd_forge_pistons_part04", undefined, var_00);
   var_0C = lib_0380::func_288B("zmb_rnd_forge_room_part04", undefined, var_00);
   wait(10.16);
-  lib_0380::func_2893(var_0A, 1);
+  lib_0380::_stoplocalsound(var_0A, 1);
   var_0A = undefined;
-  lib_0380::func_2893(var_0B, 1);
+  lib_0380::_stoplocalsound(var_0B, 1);
   var_0B = undefined;
-  lib_0380::func_2893(var_0C, 1.5);
+  lib_0380::_stoplocalsound(var_0C, 1.5);
   var_0C = undefined;
   var_0D = lib_0380::func_288B("zmb_rnd_forge_chassis_end", undefined, var_00);
   wait(3.15);
-  lib_0380::func_2893(var_0D, 1);
+  lib_0380::_stoplocalsound(var_0D, 1);
   var_0D = undefined;
 }
 
@@ -1858,7 +1858,7 @@ func_9CA7(param_00) {
   lib_0380::func_6850(var_06);
   lib_0380::func_6850(var_07);
   lib_0380::func_6850(var_08);
-  lib_0380::func_2893(var_0A);
+  lib_0380::_stoplocalsound(var_0A);
   lib_0380::func_2889("trap_elec_stop", undefined, var_02);
 }
 
@@ -1956,8 +1956,8 @@ func_2A34(param_00, param_01) {
 
 func_2A33() {
   var_00 = 1.5;
-  lib_0380::func_2893(level.var_11CB.var_2A31.var_8E54, var_00);
-  lib_0380::func_2893(level.var_11CB.var_2A31.var_8E53, var_00);
+  lib_0380::_stoplocalsound(level.var_11CB.var_2A31.var_8E54, var_00);
+  lib_0380::_stoplocalsound(level.var_11CB.var_2A31.var_8E53, var_00);
   foreach(var_02 in level.players) {
     var_02 lib_0366::func_8E30(1, 2);
   }
@@ -1982,7 +1982,7 @@ func_8B10() {
 func_6343(param_00) {
   var_01 = self;
   var_02 = 9;
-  var_01 method_8626("shoot_chandelier");
+  var_01 setaltsceneobj("shoot_chandelier");
   lib_0380::func_2889("zmb_shoot_chandelier_main", undefined, param_00);
   var_01 common_scripts\utility::waittill_notify_or_timeout("death", var_02);
   self method_8627("shoot_chandelier");
@@ -2025,7 +2025,7 @@ func_9CC8(param_00) {
 
 func_1CC1() {
   foreach(var_01 in level.players) {
-    var_01 method_8626("brute_intro", 2);
+    var_01 setaltsceneobj("brute_intro", 2);
   }
 
   lib_0366::func_8E33(3);

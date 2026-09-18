@@ -5,19 +5,19 @@
 
 main() {
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BFA(level.gametype, 5);
-    maps\mp\_utility::func_7BF9(level.gametype, 0);
-    maps\mp\_utility::func_7C04(level.gametype, 1);
-    maps\mp\_utility::func_7BF7(level.gametype, 1);
-    maps\mp\_utility::func_7BF1(level.gametype, 0);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 5);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
     setdynamicdvar("scr_game_radarMode", 1);
@@ -64,27 +64,27 @@ main() {
 func_5300() {
   maps\mp\_utility::func_8653(1);
   setdynamicdvar("scr_aon_winlimit", 1);
-  maps\mp\_utility::func_7C04("aon", 1);
+  maps\mp\_utility::registerwinlimitdvar("aon", 1);
   setdynamicdvar("scr_aon_roundlimit", 1);
-  maps\mp\_utility::func_7BF7("aon", 1);
+  maps\mp\_utility::registerroundlimitdvar("aon", 1);
   setdynamicdvar("scr_aon_halftime", 0);
-  maps\mp\_utility::func_7BE5("aon", 0);
+  maps\mp\_utility::registerhalftimedvar("aon", 0);
 }
 
 func_6BAF() {
   setclientnamemode("auto_change");
-  maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_BLADES");
-  maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_BLADES");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_BLADES");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_BLADES");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_BLADES");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_BLADES");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_BLADES");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_BLADES");
   } else {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_BLADES_SCORE");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_BLADES_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_BLADES_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_BLADES_SCORE");
   }
 
-  maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_BLADES_HINT");
-  maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_BLADES_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_BLADES_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_BLADES_HINT");
   lib_050D::func_10E4();
   level.usestartspawns = 0;
   var_00[0] = "aon";
@@ -168,7 +168,7 @@ func_6B7B(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         var_0B = getleadingplayer();
         if(isDefined(var_0B) && self == var_0B) {
           param_01 thread maps\mp\_events::bankruptfirstplayerbladesscoreevent();
-          maps\mp\_utility::func_5C43("humiliation", "status");
+          maps\mp\_utility::leaderdialogonplayer("humiliation", "status");
           return;
         }
 
@@ -279,7 +279,7 @@ func_7B85() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {
-    if(maps\mp\_utility::func_57A0(self) && self.team != "spectator" && (isDefined(self.primaryweapon) && function_01A9(self.primaryweapon) != "melee" && self method_817F(self.primaryweapon) == 0) || isDefined(self.lethalweapon) && self method_817F(self.lethalweapon) == 0) {
+    if(maps\mp\_utility::isreallyalive(self) && self.team != "spectator" && (isDefined(self.primaryweapon) && function_01A9(self.primaryweapon) != "melee" && self getammocount(self.primaryweapon) == 0) || isDefined(self.lethalweapon) && self getammocount(self.lethalweapon) == 0) {
       wait(2);
       self notify("reload");
       wait(1);
@@ -294,9 +294,9 @@ func_1785() {
   self.pers["class"] = "gamemode";
   self.pers["lastClass"] = "";
   self.pers["gamemodeLoadout"] = level.aon_loadout;
-  self.var_2319 = self.pers["class"];
-  self.var_5B84 = self.pers["lastClass"];
-  maps\mp\gametypes\_class::func_4790(self.team, self.var_2319);
+  self.class = self.pers["class"];
+  self.lastclass = self.pers["lastClass"];
+  maps\mp\gametypes\_class::func_4790(self.team, self.class);
 }
 
 func_6BA7() {
@@ -329,26 +329,26 @@ givesticksnstonesloadout() {
   self notify("giveRifleBulletGun");
   self endon("giveRifleBulletGun");
   waittillframeend;
-  maps\mp\_utility::func_47A2("specialty_longersprint");
-  maps\mp\_utility::func_47A2("specialty_sprintfastrecovery");
-  maps\mp\_utility::func_47A2("specialty_fastclimb");
-  maps\mp\_utility::func_47A2("specialty_fastmantle");
-  maps\mp\_utility::func_47A2("specialty_sprintreload");
-  maps\mp\_utility::func_47A2("specialty_fastreload");
-  maps\mp\_utility::func_47A2("specialty_increasedmeleedamage");
+  maps\mp\_utility::giveperk("specialty_longersprint");
+  maps\mp\_utility::giveperk("specialty_sprintfastrecovery");
+  maps\mp\_utility::giveperk("specialty_fastclimb");
+  maps\mp\_utility::giveperk("specialty_fastmantle");
+  maps\mp\_utility::giveperk("specialty_sprintreload");
+  maps\mp\_utility::giveperk("specialty_fastreload");
+  maps\mp\_utility::giveperk("specialty_increasedmeleedamage");
   self takeallweapons();
   self.lethalweapon = "throwingknife_mp";
   self method_8349(self.lethalweapon);
   self giveweapon(self.lethalweapon);
   self setweaponammoclip(self.lethalweapon, 1);
   var_00 = "alt+m30_blades_mp+m30_rifle_blades";
-  maps\mp\_utility::func_642(var_00);
+  maps\mp\_utility::_giveweapon(var_00);
   self givestartammo(var_00);
   var_01 = maps\mp\_utility::getbaseweaponname(var_00);
   self.pers["secondaryWeapon"] = var_01;
   self.var_835A = var_00;
   var_02 = "alt+m1garand_blades_mp+grenade_launcher_blades";
-  maps\mp\_utility::func_642(var_02);
+  maps\mp\_utility::_giveweapon(var_02);
   self givestartammo(var_02);
   self switchtoweapon(var_02);
   self setspawnweapon(var_02);

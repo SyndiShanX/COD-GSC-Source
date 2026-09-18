@@ -751,7 +751,7 @@ func_4783(param_00, param_01) {
     return;
   }
 
-  if(!isDefined(self.var_2319) || !issubstr(self.var_2319, "custom")) {
+  if(!isDefined(self.class) || !issubstr(self.class, "custom")) {
     return;
   }
 
@@ -776,10 +776,10 @@ func_4783(param_00, param_01) {
         var_02 = maps\mp\gametypes\_rank::getscoreinfovalue(param_01);
       }
 
-      if(maps\mp\_utility::func_44FC() > 0) {
-        var_03 = max(1, int(5 / maps\mp\_utility::func_44FC()));
+      if(maps\mp\_utility::getgametypenumlives() > 0) {
+        var_03 = max(1, int(5 / maps\mp\_utility::getgametypenumlives()));
         if(level.gametype == "sr") {
-          var_03 = max(1, int(2.5 / maps\mp\_utility::func_44FC()));
+          var_03 = max(1, int(2.5 / maps\mp\_utility::getgametypenumlives()));
         }
 
         var_02 = int(var_02 * var_03);
@@ -848,7 +848,7 @@ func_4782(param_00, param_01) {
         if(isDefined(var_11) && var_11 != "") {
           var_12 = maps\mp\_utility::func_452A(var_11);
           for(var_13 = 0; var_13 < 20; var_13++) {
-            if(maps\mp\gametypes\_class::func_1E02(var_13) == param_00) {
+            if(maps\mp\gametypes\_class::cac_getdivision(var_13) == param_00) {
               self setrankedplayerdata(common_scripts\utility::func_46AF(), "customClasses", var_13, "perkSlots", 0, var_12);
               if(!getdvarint("spv_commandoTacInsert_disabled") && issubstr(var_11, "specialty_class_commando_")) {
                 self setrankedplayerdata(common_scripts\utility::func_46AF(), "customClasses", var_13, "equipmentSetups", 1, "equipment", 17379328);
@@ -865,8 +865,8 @@ func_4782(param_00, param_01) {
               }
 
               if(!maps\mp\_utility::isdivisionsglobaloverhaulenabled() && param_00 == 4) {
-                var_15 = maps\mp\gametypes\_class::func_1E03(var_13, 0);
-                var_16 = maps\mp\gametypes\_class::func_1E03(var_13, 1);
+                var_15 = maps\mp\gametypes\_class::cac_getequipment(var_13, 0);
+                var_16 = maps\mp\gametypes\_class::cac_getequipment(var_13, 1);
                 if(var_15 == 0) {
                   self setrankedplayerdata(common_scripts\utility::func_46AF(), "customClasses", var_13, "equipmentSetups", 0, "equipment", 16805888);
                 } else if(var_16 == 0) {

@@ -144,10 +144,10 @@ vignette_start_listener(param_00, param_01, param_02, param_03, param_04) {
       foreach(var_0D in level.players) {
         var_0E = 0;
         if(isDefined(self.script_noteworthy)) {
-          var_0E = common_scripts\utility::func_9468(self.script_noteworthy);
+          var_0E = common_scripts\utility::stringtofloat(self.script_noteworthy);
         }
 
-        var_0F = common_scripts\utility::func_AA4A(var_0D getEye(), var_0D.angles, var_07, cos(32.5));
+        var_0F = common_scripts\utility::within_fov(var_0D getEye(), var_0D.angles, var_07, cos(32.5));
         var_10 = distance(var_07, var_0D.origin) < param_02;
         var_11 = distance(var_07, var_0D.origin) < level.vignette_min_dist;
         var_12 = 0;
@@ -163,7 +163,7 @@ vignette_start_listener(param_00, param_01, param_02, param_03, param_04) {
           var_0A[var_0A.size] = var_0D;
         }
 
-        var_13 = common_scripts\utility::func_AA4A(self.origin, self.angles + (0, var_0E, 0), var_0D.origin, cos(60));
+        var_13 = common_scripts\utility::within_fov(self.origin, self.angles + (0, var_0E, 0), var_0D.origin, cos(60));
         var_14 = 1;
         if(param_04 && !var_13) {
           var_14 = 0;
@@ -191,7 +191,7 @@ vignette_run(param_00, param_01, param_02, param_03, param_04, param_05, param_0
   thread vignette_radial_cooldown_run();
   var_08 = ["soldier_rus"];
   var_09 = 1;
-  var_0A = lib_054D::func_90BA("zombie_generic", self, "vignette", 0, var_09, 0, common_scripts\utility::func_7A33(var_08));
+  var_0A = lib_054D::func_90BA("zombie_generic", self, "vignette", 0, var_09, 0, common_scripts\utility::random(var_08));
   if(isDefined(var_0A)) {
     var_0A.health = 1;
     var_0A.is_fellow_human = 1;
@@ -387,7 +387,7 @@ vignette_monitor_last_seen() {
 
     var_01 = lib_055A::func_4626(var_00.ent_zone_name, 1, 0);
     foreach(var_03 in var_01) {
-      var_04 = common_scripts\utility::func_AA4A(var_03 getEye(), var_03.angles, var_00.origin, cos(32.5));
+      var_04 = common_scripts\utility::within_fov(var_03 getEye(), var_03.angles, var_00.origin, cos(32.5));
       var_05 = var_04 && sighttracepassed(var_03 getEye(), var_00.origin + (0, 0, 36), 0, 0);
       if(var_05) {
         self.time_since_loc_seen = 0;

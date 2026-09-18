@@ -58,7 +58,7 @@ func_8007(param_00) {
   return lib_02EF::func_8AAB(param_00);
 }
 
-func_800D(param_00, param_01, param_02, param_03, param_04) {
+disableplayeruse(param_00, param_01, param_02, param_03, param_04) {
   param_00 lib_02EF::func_8AAF(param_01, param_02, param_03, param_04);
 }
 
@@ -66,7 +66,7 @@ func_8005(param_00) {
   return lib_02EF::func_8AAA(param_00);
 }
 
-func_800C(param_00, param_01, param_02, param_03, param_04) {
+enableplayeruse(param_00, param_01, param_02, param_03, param_04) {
   param_00 lib_02EF::func_8AAC(param_01, param_02, param_03, param_04);
 }
 
@@ -167,7 +167,7 @@ func_06BE(param_00, param_01, param_02, param_03) {
       var_04 = param_01;
     }
 
-    param_00 method_8449(param_02, param_03, var_04, var_05);
+    param_00 linktosynchronizedparent(param_02, param_03, var_04, var_05);
   }
 }
 
@@ -434,7 +434,7 @@ func_06C9(param_00, param_01) {
   }
 
   if(isDefined(param_01) == 1) {
-    func_800D(param_00, 0, param_01);
+    disableplayeruse(param_00, 0, param_01);
     wait(param_01 + 0.05);
     if(function_0279(param_00) == 1) {
       return;
@@ -466,7 +466,7 @@ func_06CA(param_00, param_01, param_02, param_03) {
 }
 
 func_06C8(param_00, param_01, param_02) {
-  func_800D(param_00, 0, 0);
+  disableplayeruse(param_00, 0, 0);
   if(isDefined(param_02) == 1 && param_02 > 0) {
     param_00 endon("rvSndAbortInitialFadeIn");
     wait(param_02);
@@ -474,7 +474,7 @@ func_06C8(param_00, param_01, param_02) {
   }
 
   if(isDefined(param_00) && !function_0279(param_00)) {
-    func_800D(param_00, 1, param_01);
+    disableplayeruse(param_00, 1, param_01);
   }
 }
 

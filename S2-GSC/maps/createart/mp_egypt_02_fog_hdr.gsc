@@ -4,8 +4,8 @@
 **************************************************/
 
 func_00F9() {
-  var_00 = maps\mp\_art::func_27C6("mp_egypt_02");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_egypt_02");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.5024, 0.412738, 0.333625);
   var_00.var_1108 = (0.482161, 0.27315, 0.191363);
@@ -48,8 +48,8 @@ func_00F9() {
   var_00.var_1119 = 61.3509;
   var_00.var_111A = 8.95145;
   var_00.var_1121 = 28.9794;
-  var_00 = maps\mp\_art::func_27C6("mp_egypt_02_killstreak");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_egypt_02_killstreak");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.5024, 0.412738, 0.333625);
   var_00.var_1108 = (0.482161, 0.27315, 0.191363);
@@ -92,8 +92,8 @@ func_00F9() {
   var_00.var_1119 = 61.3509;
   var_00.var_111A = 8.95145;
   var_00.var_1121 = 28.9794;
-  var_00 = maps\mp\_art::func_27C6("mp_egypt_02_underwater");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_egypt_02_underwater");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 0;
   var_00.var_1128 = (0.891419, 0.891419, 0.891419);
   var_00.var_1108 = (0.955511, 0.955511, 0.955511);
@@ -136,8 +136,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_egypt_02_osp");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_egypt_02_osp");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -180,8 +180,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_egypt_02_drone");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_egypt_02_drone");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -224,8 +224,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("mp_egypt_02_warbird");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_egypt_02_warbird");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.961025, 0.958042, 0.913618);
   var_00.var_1108 = (0.730207, 0.693009, 0.658697);
@@ -268,8 +268,8 @@ func_00F9() {
   var_00.var_1119 = 0;
   var_00.var_111A = 0;
   var_00.var_1121 = 0;
-  var_00 = maps\mp\_art::func_27C6("dna_bomb");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("dna_bomb");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 1;
   var_00.var_1128 = (0.5024, 0.404827, 0.333625);
   var_00.var_1108 = (0.482161, 0.204994, 0.191363);
@@ -312,8 +312,8 @@ func_00F9() {
   var_00.var_1119 = 61.3509;
   var_00.var_111A = 8.95145;
   var_00.var_1121 = 28.9794;
-  var_00 = maps\mp\_art::func_27C6("");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("");
+  var_00.transitiontime = 0;
   var_00.var_1103 = 0;
   var_00.var_1128 = (0.5024, 0.412738, 0.333625);
   var_00.var_1108 = (0.482161, 0.27315, 0.191363);
@@ -356,8 +356,8 @@ func_00F9() {
   var_00.var_1119 = 61.3509;
   var_00.var_111A = 8.95145;
   var_00.var_1121 = 28.9794;
-  var_00 = maps\mp\_art::func_27C6("mp_countdown");
-  var_00.var_9C83 = 0;
+  var_00 = maps\mp\_art::create_vision_set_fog("mp_countdown");
+  var_00.transitiontime = 0;
   var_00.var_1105 = 0;
   var_00.var_110E = 0;
   var_00.var_110F = 0;

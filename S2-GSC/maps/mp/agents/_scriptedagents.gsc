@@ -123,7 +123,7 @@ func_34A6(param_00, param_01) {
 
   var_02 = param_00 + (0, 0, param_01);
   var_03 = param_00 + (0, 0, param_01 * -1);
-  var_04 = self method_83EB(var_02, var_03, self.var_14F, self.height, 1);
+  var_04 = self method_83EB(var_02, var_03, self.radius, self.height, 1);
   if(abs(var_04[2] - var_02[2]) < 0.1) {
     return undefined;
   }
@@ -141,7 +141,7 @@ func_1F5B(param_00, param_01, param_02, param_03) {
   }
 
   if(!isDefined(param_03)) {
-    param_03 = self.var_14F;
+    param_03 = self.radius;
   }
 
   var_04 = (0, 0, 1) * param_02;
@@ -158,7 +158,7 @@ func_470B(param_00, param_01, param_02) {
   var_03 = (0, 0, 1) * param_02;
   var_04 = param_00 + var_03;
   var_05 = param_01 + var_03;
-  return self method_83EB(var_04, var_05, self.var_14F + 4, self.height - param_02, 1);
+  return self method_83EB(var_04, var_05, self.radius + 4, self.height - param_02, 1);
 }
 
 func_466C(param_00) {
@@ -170,12 +170,12 @@ func_466C(param_00) {
   return min(1, var_04 / var_05);
 }
 
-func_802E(param_00, param_01, param_02, param_03) {
+detach(param_00, param_01, param_02, param_03) {
   var_04 = func_464A(param_00);
   func_802D(param_00, var_04, param_01, param_02, param_03);
 }
 
-func_802B(param_00, param_01, param_02, param_03, param_04) {
+logstring(param_00, param_01, param_02, param_03, param_04) {
   var_05 = func_464A(param_00);
   func_802C(param_00, var_05, param_01, param_02, param_03, param_04);
 }

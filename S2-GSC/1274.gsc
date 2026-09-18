@@ -22,7 +22,7 @@ func_05EE(param_00) {
   var_02 method_8511();
   var_02.var_15FF = param_00;
   var_02.var_A203 = 0;
-  var_02.var_1A5 = "imageTimerEnt";
+  var_02.targetname = "imageTimerEnt";
   return var_02;
 }
 
@@ -144,7 +144,7 @@ func_0594(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  self.var_50A9.var_500F.var_116 = param_00 + param_02;
+  self.var_50A9.var_500F.origin = param_00 + param_02;
 }
 
 func_5DC1(param_00, param_01, param_02) {
@@ -153,13 +153,13 @@ func_5DC1(param_00, param_01, param_02) {
   }
 
   if(param_00 method_8445(param_01) != -1) {
-    self.var_50A9.var_500F method_8449(param_00, param_01, param_02, (0, 0, 0));
+    self.var_50A9.var_500F linktosynchronizedparent(param_00, param_01, param_02, (0, 0, 0));
     return;
   }
 
-  self.var_50A9.var_500F.var_116 = param_00.var_116 + param_02;
+  self.var_50A9.var_500F.origin = param_00.origin + param_02;
   self.var_50A9.var_500F.var_1D = param_00.var_1D;
-  self.var_50A9.var_500F method_8449(param_00);
+  self.var_50A9.var_500F linktosynchronizedparent(param_00);
 }
 
 func_6F1A(param_00, param_01) {

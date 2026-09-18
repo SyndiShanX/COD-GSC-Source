@@ -3,55 +3,55 @@
  * Script: character\character\\-\641.gsc
 *********************************************/
 
-func_86CC(param_00) {
+setmodelfromarray(param_00) {
   self setModel(param_00[randomint(param_00.size)]);
 }
 
-func_7653(param_00) {
+precachemodelarray(param_00) {
   for(var_01 = 0; var_01 < param_00.size; var_01++) {
     precachemodel(param_00[var_01]);
   }
 }
 
-func_114A(param_00, param_01) {
-  if(!isDefined(level.var_20D0)) {
-    level.var_20D0 = [];
+attachhead(param_00, param_01) {
+  if(!isDefined(level.character_head_index)) {
+    level.character_head_index = [];
   }
 
-  if(!isDefined(level.var_20D0[param_00])) {
-    level.var_20D0[param_00] = randomint(param_01.size);
+  if(!isDefined(level.character_head_index[param_00])) {
+    level.character_head_index[param_00] = randomint(param_01.size);
   }
 
-  var_02 = level.var_20D0[param_00] + 1 % param_01.size;
-  level.var_20D0[param_00] = var_02;
-  func_86A0(param_01[var_02]);
+  var_02 = level.character_head_index[param_00] + 1 % param_01.size;
+  level.character_head_index[param_00] = var_02;
+  setplayerheadmodel(param_01[var_02]);
 }
 
-func_86A0(param_00) {
-  if(isDefined(self.var_4BF2)) {
-    self method_802E(self.var_4BF2);
+setplayerheadmodel(param_00) {
+  if(isDefined(self.headmodel)) {
+    self detach(self.headmodel);
   }
 
   self attach(param_00, "", 1);
-  self.var_4BF2 = param_00;
+  self.headmodel = param_00;
 }
 
-func_1149(param_00, param_01) {
-  if(!isDefined(level.var_20CF)) {
-    level.var_20CF = [];
+attachhat(param_00, param_01) {
+  if(!isDefined(level.character_hat_index)) {
+    level.character_hat_index = [];
   }
 
-  if(!isDefined(level.var_20CF[param_00])) {
-    level.var_20CF[param_00] = randomint(param_01.size);
+  if(!isDefined(level.character_hat_index[param_00])) {
+    level.character_hat_index[param_00] = randomint(param_01.size);
   }
 
-  var_02 = level.var_20CF[param_00] + 1 % param_01.size;
-  level.var_20CF[param_00] = var_02;
+  var_02 = level.character_hat_index[param_00] + 1 % param_01.size;
+  level.character_hat_index[param_00] = var_02;
   self attach(param_01[var_02]);
-  self.var_4BA9 = param_01[var_02];
+  self.hatmodel = param_01[var_02];
 }
 
-func_6685() {
+new() {
   self detachall();
   var_00 = self.var_0E14;
   if(!isDefined(var_00)) {
@@ -59,14 +59,14 @@ func_6685() {
   }
 
   self.var_0E14 = "none";
-  self[[level.var_77C6]](var_00);
+  self[[level.put_guninhand]](var_00);
 }
 
-func_8055() {
+save() {
   var_00["gunHand"] = self.var_0E14;
   var_00["gunInHand"] = self.var_0E15;
   var_00["model"] = self.var_0106;
-  var_00["hatModel"] = self.var_4BA9;
+  var_00["hatModel"] = self.hatmodel;
   if(isDefined(self.var_0109)) {
     var_00["name"] = self.var_0109;
   } else {}
@@ -80,12 +80,12 @@ func_8055() {
   return var_00;
 }
 
-func_5DDF(param_00) {
+load(param_00) {
   self detachall();
   self.var_0E14 = param_00["gunHand"];
   self.var_0E15 = param_00["gunInHand"];
   self setModel(param_00["model"]);
-  self.var_4BA9 = param_00["hatModel"];
+  self.hatmodel = param_00["hatModel"];
   if(isDefined(param_00["name"])) {
     self.var_0109 = param_00["name"];
   } else {}
@@ -108,14 +108,14 @@ func_0136(param_00) {
   }
 }
 
-func_42DF(param_00) {
+get_random_character(param_00) {
   if(isDefined(self.var_003A)) {
     var_01 = strtok(self.var_003A, "_");
   } else {
     var_01 = [];
   }
 
-  if(!common_scripts\utility::func_57D7()) {
+  if(!common_scripts\utility::issp()) {
     if(isDefined(self.var_012C["modelIndex"]) && self.var_012C["modelIndex"] < param_00) {
       return self.var_012C["modelIndex"];
     }
@@ -130,20 +130,20 @@ func_42DF(param_00) {
   var_03 = "auto";
   var_02 = undefined;
   var_04 = var_01[2];
-  if(!isDefined(level.var_20D1)) {
-    level.var_20D1 = [];
+  if(!isDefined(level.character_index_cache)) {
+    level.character_index_cache = [];
   }
 
-  if(!isDefined(level.var_20D1[var_04])) {
-    level.var_20D1[var_04] = [];
+  if(!isDefined(level.character_index_cache[var_04])) {
+    level.character_index_cache[var_04] = [];
   }
 
-  if(!isDefined(level.var_20D1[var_04][var_02])) {
-    func_52DF(var_04, var_02, param_00);
+  if(!isDefined(level.character_index_cache[var_04][var_02])) {
+    initialize_character_group(var_04, var_02, param_00);
   }
 
   if(!isDefined(var_03)) {
-    var_03 = func_41E6(var_04, var_02);
+    var_03 = get_least_used_index(var_04, var_02);
     if(!isDefined(var_03)) {
       var_03 = randomint(5000);
     }
@@ -153,41 +153,41 @@ func_42DF(param_00) {
     var_03 = var_03 - param_00;
   }
 
-  level.var_20D1[var_04][var_02][var_03]++;
+  level.character_index_cache[var_04][var_02][var_03]++;
   return var_03;
 }
 
-func_41E6(param_00, param_01) {
+get_least_used_index(param_00, param_01) {
   var_02 = [];
-  var_03 = level.var_20D1[param_00][param_01][0];
+  var_03 = level.character_index_cache[param_00][param_01][0];
   var_02[0] = 0;
-  for(var_04 = 1; var_04 < level.var_20D1[param_00][param_01].size; var_04++) {
-    if(level.var_20D1[param_00][param_01][var_04] > var_03) {
+  for(var_04 = 1; var_04 < level.character_index_cache[param_00][param_01].size; var_04++) {
+    if(level.character_index_cache[param_00][param_01][var_04] > var_03) {
       continue;
     }
 
-    if(level.var_20D1[param_00][param_01][var_04] < var_03) {
+    if(level.character_index_cache[param_00][param_01][var_04] < var_03) {
       var_02 = [];
-      var_03 = level.var_20D1[param_00][param_01][var_04];
+      var_03 = level.character_index_cache[param_00][param_01][var_04];
     }
 
     var_02[var_02.size] = var_04;
   }
 
-  return func_7A33(var_02);
+  return random(var_02);
 }
 
-func_52DF(param_00, param_01, param_02) {
+initialize_character_group(param_00, param_01, param_02) {
   for(var_03 = 0; var_03 < param_02; var_03++) {
-    level.var_20D1[param_00][param_01][var_03] = 0;
+    level.character_index_cache[param_00][param_01][var_03] = 0;
   }
 }
 
-func_42EA(param_00) {
+get_random_weapon(param_00) {
   return randomint(param_00);
 }
 
-func_7A33(param_00) {
+random(param_00) {
   return param_00[randomint(param_00.size)];
 }
 

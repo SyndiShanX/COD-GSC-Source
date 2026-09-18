@@ -27,7 +27,7 @@ tryusedogfightflak(param_00) {
 
   level.flak_in_progress = 1;
   level.flak_scorestreak_id++;
-  level.var_9854[maps\mp\_utility::func_45DE(self.team)] = 1;
+  level.var_9854[maps\mp\_utility::getotherteam(self.team)] = 1;
   level thread lib_0528::func_A0E0();
   var_01 = undefined;
   var_02 = undefined;
@@ -48,7 +48,7 @@ dogfight_flak_timer() {
   level notify("flakGunsDisabled");
   destroy_remaining_agents();
   level.flak_in_progress = 0;
-  level.var_9854[maps\mp\_utility::func_45DE(self.team)] = 0;
+  level.var_9854[maps\mp\_utility::getotherteam(self.team)] = 0;
   level thread lib_0528::func_A0E0();
   clear_flak_death_flags();
 }
@@ -107,7 +107,7 @@ dogfight_flakselectradomtarget(param_00, param_01, param_02, param_03) {
   var_04 = undefined;
   if(getdvarint("dogfightFlakDamageWeightEnabled", 1)) {
     var_05 = randomfloat(1);
-    var_06 = common_scripts\utility::func_F92(param_00);
+    var_06 = common_scripts\utility::array_randomize(param_00);
     foreach(var_08 in var_06) {
       if(!param_03 || dogfight_flakisvalidtarget(var_08)) {
         var_09 = var_08 dogfight_flakgetzonescale(param_01, param_02);
@@ -118,7 +118,7 @@ dogfight_flakselectradomtarget(param_00, param_01, param_02, param_03) {
       }
     }
   } else {
-    var_04 = common_scripts\utility::func_7A33(param_00);
+    var_04 = common_scripts\utility::random(param_00);
   }
 
   return var_04;

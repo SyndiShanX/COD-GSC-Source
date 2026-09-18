@@ -54,7 +54,7 @@ set_cart_station_state(param_00, param_01, param_02, param_03) {
 }
 
 set_doors_closed(param_00) {
-  self.zmb_mine_cart_path_blocker[param_00] method_805F();
+  self.zmb_mine_cart_path_blocker[param_00] saved_actionslotdata();
   self.zmb_mine_cart_path_blocker[param_00] solid();
   var_01 = "s2_zom_mine_cart_gate_close";
   if(lib_0547::func_5565(self.zmb_mine_cart_gates[param_00].prevstate, 0)) {

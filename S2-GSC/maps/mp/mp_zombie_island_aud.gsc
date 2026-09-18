@@ -358,7 +358,7 @@ waves_splash_on_rocks() {
 
 func_1CC1() {
   foreach(var_01 in level.players) {
-    var_01 method_8626("brute_intro", 2);
+    var_01 setaltsceneobj("brute_intro", 2);
   }
 
   lib_0366::func_8E33(3);
@@ -447,20 +447,20 @@ fog_music_mix_monitor() {
   var_01 = 5;
   var_02 = lib_0366::snd_zmb_plr_is_in_thick_fog();
   if(var_02) {
-    var_00 method_8626("fog_music_mix");
+    var_00 setaltsceneobj("fog_music_mix");
   } else {
-    var_00 method_8626("no_fog_music_mix");
+    var_00 setaltsceneobj("no_fog_music_mix");
   }
 
   var_03 = var_02;
   for(;;) {
     var_02 = lib_0366::snd_zmb_plr_is_in_thick_fog();
     if(var_02 && !var_03) {
-      var_00 method_8626("fog_music_mix", var_01);
+      var_00 setaltsceneobj("fog_music_mix", var_01);
       var_00 method_8627("no_fog_music_mix", var_01);
     } else if(!var_02 && var_03) {
       var_00 method_8627("fog_music_mix", var_01);
-      var_00 method_8626("no_fog_music_mix", var_01);
+      var_00 setaltsceneobj("no_fog_music_mix", var_01);
     }
 
     var_03 = var_02;
@@ -483,7 +483,7 @@ func_8E8F() {
       if(var_03) {
         self method_8627("pa_inside", 1);
       } else {
-        self method_8626("pa_inside", 1);
+        self setaltsceneobj("pa_inside", 1);
       }
 
       var_01 = var_03;
@@ -690,7 +690,7 @@ start_corpse_gate_alarm() {
 
 stop_corpse_gate_alarm() {
   if(isDefined(level.var_11CB.corpse_gate_alarm_ent)) {
-    lib_0380::func_2893(level.var_11CB.corpse_gate_alarm_ent, 1.5);
+    lib_0380::_stoplocalsound(level.var_11CB.corpse_gate_alarm_ent, 1.5);
     level.var_11CB.corpse_gate_alarm_ent = undefined;
   }
 }
@@ -723,7 +723,7 @@ plane_mission_start() {
   for(;;) {
     foreach(var_01 in level.players) {
       if(var_01.current_volume_is_interior) {
-        var_01 method_8626("isl_plane_interior_mix");
+        var_01 setaltsceneobj("isl_plane_interior_mix");
         continue;
       }
 
@@ -735,7 +735,7 @@ plane_mission_start() {
 }
 
 plane_spawn() {
-  common_scripts\utility::func_3C87("aud_last_plane_spawned");
+  common_scripts\utility::flag_init("aud_last_plane_spawned");
   var_00 = self;
   foreach(var_02 in level.players) {
     var_02 thread plane_spawn_watcher(var_00);
@@ -804,7 +804,7 @@ last_plane_spawn_watcher(param_00) {
   for(;;) {
     var_02 = distance(param_00.origin, var_01.origin);
     if(var_02 <= 12500) {
-      common_scripts\utility::func_3C8F("aud_last_plane_spawned");
+      common_scripts\utility::flag_set("aud_last_plane_spawned");
       level.var_11CB.last_play_flyby_snd = lib_0380::func_288B("last_plane_flyby", undefined, param_00);
       lib_0380::func_288F(level.var_11CB.last_play_flyby_snd, param_00, "last_plane_sound_done");
       param_00 waittill("last_plane_sound_done");
@@ -816,7 +816,7 @@ last_plane_spawn_watcher(param_00) {
 
 last_plane_crash(param_00) {
   common_scripts\utility::func_3C7B("aud_last_plane_spawned");
-  lib_0380::func_2893(level.var_11CB.last_play_flyby_snd, 0.1);
+  lib_0380::_stoplocalsound(level.var_11CB.last_play_flyby_snd, 0.1);
   lib_0380::func_2889("last_plane_crash_explode_main", undefined, param_00);
   level notify("stop_plane_int_submix");
   foreach(var_02 in level.players) {
@@ -1058,19 +1058,19 @@ corpse_gate_talk(param_00) {
       break;
 
     case "alarm":
-      var_02 = common_scripts\utility::func_7A33(["zmb_isla_cgo_wobinichfeindehieralarmal", "zmb_isla_cgo_brenntihrbastardebrennt"]);
+      var_02 = common_scripts\utility::random(["zmb_isla_cgo_wobinichfeindehieralarmal", "zmb_isla_cgo_brenntihrbastardebrennt"]);
       break;
 
     case "beg":
-      var_02 = common_scripts\utility::func_7A33(["zmb_isla_cgo_waitwaitiamonyourside", "zmb_isla_cgo_iwashelpingyou", "zmb_isla_cgo_pleasedontdothis", "zmb_isla_cgo_bittemachtdasnicht", "zmb_isla_cgo_bittebittebefreitmichvond", "zmb_isla_cgo_wartetwartetichbinaufeure", "zmb_isla_cgo_ichhabeuchdochgeholfen"]);
+      var_02 = common_scripts\utility::random(["zmb_isla_cgo_waitwaitiamonyourside", "zmb_isla_cgo_iwashelpingyou", "zmb_isla_cgo_pleasedontdothis", "zmb_isla_cgo_bittemachtdasnicht", "zmb_isla_cgo_bittebittebefreitmichvond", "zmb_isla_cgo_wartetwartetichbinaufeure", "zmb_isla_cgo_ichhabeuchdochgeholfen"]);
       break;
 
     case "talk":
-      var_02 = common_scripts\utility::func_7A33(["zmb_isla_cgo_soundsofweepingifearthati", "zmb_isla_cgo_thisisredridinghoodwithaf", "zmb_isla_cgo_contdevennowhecarriestheh", "zmb_isla_cgo_angrybreathinghehasremove", "zmb_isla_cgo_iamnotsurewhetherishouldc", "zmb_isla_cgo_hisrecentexperimentswithr", "zmb_isla_cgo_contdandstraubwellheisfur", "zmb_isla_cgo_ravencrownthisisredriding", "zmb_isla_cgo_ravencrowistillhavenothea", "zmb_isla_cgo_youmustknowsinceourlastco", "zmb_isla_cgo_nervousisthisworkingtapta"]);
+      var_02 = common_scripts\utility::random(["zmb_isla_cgo_soundsofweepingifearthati", "zmb_isla_cgo_thisisredridinghoodwithaf", "zmb_isla_cgo_contdevennowhecarriestheh", "zmb_isla_cgo_angrybreathinghehasremove", "zmb_isla_cgo_iamnotsurewhetherishouldc", "zmb_isla_cgo_hisrecentexperimentswithr", "zmb_isla_cgo_contdandstraubwellheisfur", "zmb_isla_cgo_ravencrownthisisredriding", "zmb_isla_cgo_ravencrowistillhavenothea", "zmb_isla_cgo_youmustknowsinceourlastco", "zmb_isla_cgo_nervousisthisworkingtapta"]);
       break;
 
     case "scream":
-      var_02 = common_scripts\utility::func_7A33(["zmb_isla_cgo_aaaaaaaaaaaaaaarrrgh", "zmb_isla_cgo_neinneinaaaargh"]);
+      var_02 = common_scripts\utility::random(["zmb_isla_cgo_aaaaaaaaaaaaaaarrrgh", "zmb_isla_cgo_neinneinaaaargh"]);
       break;
   }
 
@@ -1134,7 +1134,7 @@ pagan_head_place(param_00, param_01) {
 pagan_room_earthquake(param_00, param_01, param_02) {
   foreach(var_04 in level.players) {
     if(distance(var_04.origin, param_02) < 500) {
-      var_04 method_8626("paganearthquake");
+      var_04 setaltsceneobj("paganearthquake");
     }
   }
 
@@ -1243,7 +1243,7 @@ ibeam_complete() {
 }
 
 get_random_alive_player() {
-  var_00 = common_scripts\utility::func_F92(level.players);
+  var_00 = common_scripts\utility::array_randomize(level.players);
   foreach(var_02 in var_00) {
     if(!isalive(var_02)) {
       continue;
@@ -1277,7 +1277,7 @@ get_closest_alive_player(param_00) {
 }
 
 get_player_looking_at(param_00, param_01, param_02) {
-  var_03 = common_scripts\utility::func_F92(level.players);
+  var_03 = common_scripts\utility::array_randomize(level.players);
   foreach(var_05 in var_03) {
     if(!isalive(var_05)) {
       continue;

@@ -102,7 +102,7 @@ killedplayer(param_00, param_01, param_02, param_03, param_04) {
   var_08 = gettime();
   var_09 = [];
   maps\mp\gametypes\_missions::processchallenge("ch_career_kills");
-  if(maps\mp\_utility::func_5694(param_03)) {
+  if(maps\mp\_utility::isbulletdamage(param_03)) {
     if(self.var_5BB4 == var_08) {
       self.var_1D84++;
     } else {
@@ -191,7 +191,7 @@ killedplayer(param_00, param_01, param_02, param_03, param_04) {
       var_09[var_09.size] = "payback";
     }
 
-    if(isDefined(param_01.idflags) && param_01.idflags &level.var_503B) {
+    if(isDefined(param_01.idflags) && param_01.idflags &level.idflags_penetration) {
       func_1D7E(param_00, param_02);
     }
 
@@ -412,7 +412,7 @@ killedplayer(param_00, param_01, param_02, param_03, param_04) {
 }
 
 func_5789(param_00, param_01) {
-  if(maps\mp\_utility::func_5694(param_01)) {
+  if(maps\mp\_utility::isbulletdamage(param_01)) {
     var_02 = self.origin;
     var_03 = 9216;
     if(isDefined(param_00.var_1192)) {
@@ -498,7 +498,7 @@ killedplayerevent(param_00, param_01, param_02, param_03) {
     maps\mp\gametypes\_divisions::func_50FC(self.var_79, 1, "weaponClassKills");
   }
 
-  maps\mp\_utility::func_A14B("kdRatio", "kills", "deaths");
+  maps\mp\_utility::updatepersratio("kdRatio", "kills", "deaths");
   var_04 = func_43D6(param_02, param_03);
   if(var_04 != "kill") {
     maps\mp\_utility::incplayerstat(var_04, 1);
@@ -529,7 +529,7 @@ func_6324(param_00) {
   }
 
   var_01 = maps\mp\gametypes\_persistence::statgetchild("round", "rescues");
-  var_02 = maps\mp\gametypes\_persistence::func_932F("kills");
+  var_02 = maps\mp\gametypes\_persistence::statget("kills");
   if(isDefined(var_02) && isDefined(var_01) && var_01 + var_02 == 10) {
     self giveachievement("MP_KILL_10");
   }
@@ -650,7 +650,7 @@ func_761F(param_00, param_01, param_02, param_03) {
   if(self.var_1730 > 0 && self.kills > self.var_1730) {
     func_761C();
     wait(var_04);
-    maps\mp\_utility::func_5C43("ptr_new_best");
+    maps\mp\_utility::leaderdialogonplayer("ptr_new_best");
     self.var_1730 = 0;
     return;
   }
@@ -659,7 +659,7 @@ func_761F(param_00, param_01, param_02, param_03) {
     if(param_03 == "MOD_HEAD_SHOT") {
       func_761C();
       wait(var_04);
-      maps\mp\_utility::func_5C43("ptr_headshot");
+      maps\mp\_utility::leaderdialogonplayer("ptr_headshot");
       return;
     }
 
@@ -669,7 +669,7 @@ func_761F(param_00, param_01, param_02, param_03) {
 
     func_761C();
     wait(var_04);
-    maps\mp\_utility::func_5C43("ptr_greatshot");
+    maps\mp\_utility::leaderdialogonplayer("ptr_greatshot");
     return;
   }
 }
@@ -684,7 +684,7 @@ func_7617(param_00) {
   var_01 = 0.5;
   func_761C();
   wait(var_01);
-  maps\mp\_utility::func_5C43("ptr_assist");
+  maps\mp\_utility::leaderdialogonplayer("ptr_assist");
 }
 
 func_5803(param_00, param_01) {
@@ -738,7 +738,7 @@ func_191A(param_00, param_01, param_02) {
 func_353A(param_00, param_01, param_02) {
   maps\mp\_utility::incplayerstat(param_00 + "_earned", 1);
   level thread maps\mp\gametypes\_rank::giverankxp(param_00 + "_earned", self);
-  thread maps\mp\gametypes\_hud_message::func_5A78(param_00, param_01, undefined, param_02);
+  thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(param_00, param_01, undefined, param_02);
   maps\mp\_matchdata::func_5E99(param_00);
 }
 
@@ -1009,7 +1009,7 @@ func_574D(param_00, param_01, param_02, param_03) {
     var_04 = param_03.var_1192;
   }
 
-  if(isalive(param_00) && !param_00 maps\mp\_utility::func_581D() && (param_02 == "MOD_RIFLE_BULLET" || param_02 == "MOD_PISTOL_BULLET" || param_02 == "MOD_HEAD_SHOT" || issubstr(param_01, "throwingknife") || issubstr(param_01, "exoknife_mp") || issubstr(param_01, "exocrossbow")) && !maps\mp\_utility::iskillstreakweapon(param_01) && !isDefined(param_00.assistedsuicide)) {
+  if(isalive(param_00) && !param_00 maps\mp\_utility::isusingremote() && (param_02 == "MOD_RIFLE_BULLET" || param_02 == "MOD_PISTOL_BULLET" || param_02 == "MOD_HEAD_SHOT" || issubstr(param_01, "throwingknife") || issubstr(param_01, "exoknife_mp") || issubstr(param_01, "exocrossbow")) && !maps\mp\_utility::iskillstreakweapon(param_01) && !isDefined(param_00.assistedsuicide)) {
     var_05 = maps\mp\_utility::getweaponclass(param_01);
     switch (var_05) {
       case "weapon_pistol":
@@ -1335,7 +1335,7 @@ func_6512(param_00, param_01, param_02, param_03) {
 
     case 3:
       level thread maps\mp\gametypes\_rank::giverankxp("triplekill", self, var_05);
-      level thread maps\mp\_utility::func_9863("callout_3xkill", self);
+      level thread maps\mp\_utility::teamplayercardsplash("callout_3xkill", self);
       maps\mp\_utility::incplayerstat("triplekill", 1);
       maps\mp\gametypes\_missions::processchallenge("ch_killer_triple");
       maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_triple");
@@ -1350,7 +1350,7 @@ func_6512(param_00, param_01, param_02, param_03) {
 
     case 4:
       level thread maps\mp\gametypes\_rank::giverankxp("fourkill", self, var_05);
-      level thread maps\mp\_utility::func_9863("callout_4xkill", self);
+      level thread maps\mp\_utility::teamplayercardsplash("callout_4xkill", self);
       maps\mp\_utility::incplayerstat("fourkill", 1);
       maps\mp\gametypes\_missions::processchallenge("ch_killer_fury");
       maps\mp\gametypes\_missions::processchallenge("ch_limited_bloodshed_fury");
@@ -1359,31 +1359,31 @@ func_6512(param_00, param_01, param_02, param_03) {
 
     case 5:
       level thread maps\mp\gametypes\_rank::giverankxp("fivekill", self, var_05);
-      level thread maps\mp\_utility::func_9863("callout_5xkill", self);
+      level thread maps\mp\_utility::teamplayercardsplash("callout_5xkill", self);
       maps\mp\_utility::incplayerstat("fivekill", 1);
       break;
 
     case 6:
       level thread maps\mp\gametypes\_rank::giverankxp("sixkill", self, var_05);
-      level thread maps\mp\_utility::func_9863("callout_6xkill", self);
+      level thread maps\mp\_utility::teamplayercardsplash("callout_6xkill", self);
       maps\mp\_utility::incplayerstat("sixkill", 1);
       break;
 
     case 7:
       level thread maps\mp\gametypes\_rank::giverankxp("sevenkill", self, var_05);
-      level thread maps\mp\_utility::func_9863("callout_7xkill", self);
+      level thread maps\mp\_utility::teamplayercardsplash("callout_7xkill", self);
       maps\mp\_utility::incplayerstat("sevenkill", 1);
       break;
 
     case 8:
       level thread maps\mp\gametypes\_rank::giverankxp("eightkill", self, var_05);
-      level thread maps\mp\_utility::func_9863("callout_8xkill", self);
+      level thread maps\mp\_utility::teamplayercardsplash("callout_8xkill", self);
       maps\mp\_utility::incplayerstat("eightkill", 1);
       break;
 
     default:
       level thread maps\mp\gametypes\_rank::giverankxp("multikill", self, var_05);
-      thread maps\mp\_utility::func_9863("callout_9xpluskill", self);
+      thread maps\mp\_utility::teamplayercardsplash("callout_9xpluskill", self);
       maps\mp\_utility::incplayerstat("multikill", 1);
       break;
   }
@@ -1414,7 +1414,7 @@ func_8A2C() {
 }
 
 func_9ABB(param_00) {
-  thread maps\mp\_utility::func_9863("callout_touchdown", self, undefined, param_00);
+  thread maps\mp\_utility::teamplayercardsplash("callout_touchdown", self, undefined, param_00);
   maps\mp\_utility::incplayerstat("touchdown", 1);
   func_8A2C();
   level thread maps\mp\gametypes\_rank::giverankxp("touchdown", self);
@@ -1424,7 +1424,7 @@ func_9ABB(param_00) {
 }
 
 func_3AA1(param_00) {
-  thread maps\mp\_utility::func_9863("callout_fieldgoal", self, undefined, param_00);
+  thread maps\mp\_utility::teamplayercardsplash("callout_fieldgoal", self, undefined, param_00);
   maps\mp\_utility::incplayerstat("fieldgoal", 1);
   func_8A2C();
   level thread maps\mp\gametypes\_rank::giverankxp("fieldgoal", self);
@@ -1486,7 +1486,7 @@ relicinterceptionevent() {
 }
 
 func_3CC1() {
-  thread maps\mp\_utility::func_9863("callout_flagpickup", self);
+  thread maps\mp\_utility::teamplayercardsplash("callout_flagpickup", self);
   maps\mp\_utility::incplayerstat("flagscarried", 1);
   level thread maps\mp\gametypes\_rank::giverankxp("flag_pickup", self);
   thread maps\mp\_matchdata::func_5E93("pickup", self.origin);
@@ -1494,7 +1494,7 @@ func_3CC1() {
 }
 
 func_3CB7() {
-  thread maps\mp\_utility::func_9863("callout_flagcapture", self);
+  thread maps\mp\_utility::teamplayercardsplash("callout_flagcapture", self);
   maps\mp\_utility::incplayerstat("flagscaptured", 1);
   maps\mp\_utility::incpersstat("captures", 1);
   maps\mp\gametypes\_persistence::statsetchild("round", "captures", self.pers["captures"]);
@@ -1506,7 +1506,7 @@ func_3CB7() {
 }
 
 func_3CC3() {
-  thread maps\mp\_utility::func_9863("callout_flagreturn", self);
+  thread maps\mp\_utility::teamplayercardsplash("callout_flagreturn", self);
   maps\mp\_utility::incplayerstat("flagsreturned", 1);
   maps\mp\_utility::incpersstat("returns", 1);
   self.assists = self.pers["returns"];
@@ -1524,7 +1524,7 @@ func_5A84(param_00) {
 }
 
 func_5A46(param_00) {
-  thread maps\mp\_utility::func_9863("callout_killflagcarrier", self);
+  thread maps\mp\_utility::teamplayercardsplash("callout_killflagcarrier", self);
   maps\mp\_utility::incplayerstat("flagcarrierkills", 1);
   maps\mp\_utility::incpersstat("defends", 1);
   maps\mp\_utility::func_867C(self.pers["defends"]);
@@ -1593,7 +1593,7 @@ func_18FC(param_00, param_01) {
   maps\mp\_utility::incpersstat("plants", 1);
   maps\mp\gametypes\_persistence::statsetchild("round", "plants", self.pers["plants"]);
   maps\mp\_utility::func_867B(self.pers["plants"]);
-  level thread maps\mp\_utility::func_9863("callout_bombplanted", self);
+  level thread maps\mp\_utility::teamplayercardsplash("callout_bombplanted", self);
   if(isDefined(param_01) && param_01) {
     level thread maps\mp\gametypes\_rank::giverankxp("raids_plant_multi", self);
   } else {
@@ -1608,7 +1608,7 @@ func_18D4(param_00, param_01) {
   maps\mp\_utility::incpersstat("defuses", 1);
   maps\mp\gametypes\_persistence::statsetchild("round", "defuses", self.pers["defuses"]);
   maps\mp\_utility::func_867C(self.pers["defuses"]);
-  level thread maps\mp\_utility::func_9863("callout_bombdefused", self);
+  level thread maps\mp\_utility::teamplayercardsplash("callout_bombdefused", self);
   if(param_00 == "ninja_defuse" || param_00 == "last_man_defuse") {
     maps\mp\_utility::incplayerstat(param_00, 1);
     if(param_00 == "last_man_defuse") {
@@ -1623,7 +1623,7 @@ func_18D4(param_00, param_01) {
 
 func_35D2(param_00, param_01) {
   maps\mp\_utility::incplayerstat("elimination", 1);
-  level thread maps\mp\_utility::func_9863("callout_eliminated", param_01);
+  level thread maps\mp\_utility::teamplayercardsplash("callout_eliminated", param_01);
   if(param_00) {
     maps\mp\_utility::incplayerstat("last_man_standing", 1);
     level thread maps\mp\gametypes\_rank::giverankxp("last_man_standing", self);
@@ -1639,7 +1639,7 @@ func_7E63(param_00) {
   maps\mp\_utility::incpersstat("denied", 1);
   maps\mp\gametypes\_persistence::statsetchild("round", "denied", self.pers["denied"]);
   self.assists = self.pers["denied"];
-  level thread maps\mp\_utility::func_9863("callout_tag_revive", param_00);
+  level thread maps\mp\_utility::teamplayercardsplash("callout_tag_revive", param_00);
   level thread maps\mp\gametypes\_rank::giverankxp("sr_tag_revive", self);
   maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_medic");
 }
@@ -1721,16 +1721,16 @@ bankruptfirstplayerbladesscoreevent() {
 
 func_3C69() {
   maps\mp\_utility::incplayerstat("patientzero", 1);
-  maps\mp\_utility::func_74D9("mp_enemy_obj_captured");
-  level thread maps\mp\_utility::func_9863("callout_first_infected", self);
+  maps\mp\_utility::playsoundonplayers("mp_enemy_obj_captured");
+  level thread maps\mp\_utility::teamplayercardsplash("callout_first_infected", self);
   level thread maps\mp\gametypes\_rank::giverankxp("first_infected", self);
   self.var_6EF6 = 0;
 }
 
 func_3B5F() {
   maps\mp\_utility::incplayerstat("omegaman", 1);
-  maps\mp\_utility::func_74D9("mp_obj_captured");
-  level thread maps\mp\_utility::func_9863("callout_final_survivor", self);
+  maps\mp\_utility::playsoundonplayers("mp_obj_captured");
+  level thread maps\mp\_utility::teamplayercardsplash("callout_final_survivor", self);
   level thread maps\mp\gametypes\_rank::giverankxp("final_survivor", self);
   maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_survivor");
 }
@@ -1747,7 +1747,7 @@ func_700A() {
 
 func_511D() {
   maps\mp\_utility::incplayerstat("contagious", 1);
-  level thread maps\mp\_utility::func_9863("callout_infected_survivor", self, "axis");
+  level thread maps\mp\_utility::teamplayercardsplash("callout_infected_survivor", self, "axis");
   level thread maps\mp\gametypes\_rank::giverankxp("infected_survivor", self);
 }
 
@@ -1829,7 +1829,7 @@ func_836D(param_00) {
   maps\mp\_utility::incplayerstat("hp_secure", 1);
   maps\mp\_utility::incpersstat("captures", 1);
   maps\mp\gametypes\_persistence::statsetchild("round", "captures", self.pers["captures"]);
-  level thread maps\mp\_utility::func_9863("callout_hp_captured_by", self);
+  level thread maps\mp\_utility::teamplayercardsplash("callout_hp_captured_by", self);
   level thread maps\mp\gametypes\_rank::giverankxp("hp_secure", self);
   maps\mp\gametypes\_missions::processchallenge("ch_heroics_destroyer");
   if(isDefined(self.var_5137) || isDefined(self.var_5384)) {
@@ -1847,7 +1847,7 @@ func_3C63(param_00, param_01, param_02) {
   self.modifiers["firstblood"] = 1;
   maps\mp\_utility::incplayerstat("firstblood", 1);
   self.firstbloodcount++;
-  thread maps\mp\_utility::func_9863("callout_firstblood", self);
+  thread maps\mp\_utility::teamplayercardsplash("callout_firstblood", self);
   level thread maps\mp\gametypes\_rank::giverankxp("firstblood", self, param_01, undefined, param_02);
   thread maps\mp\_matchdata::func_5E96(param_00, "firstblood");
 }
@@ -1989,7 +1989,7 @@ func_4D4F(param_00) {
   thread maps\mp\gametypes\_missions::genericchallenge("hijacker_airdrop");
   thread maps\mp\gametypes\_missions::processchallenge("ch_streak_thief");
   if(isDefined(param_00)) {
-    param_00 maps\mp\gametypes\_hud_message::func_73C2("hijacked_airdrop", self);
+    param_00 maps\mp\gametypes\_hud_message::playercardsplashnotify("hijacked_airdrop", self);
   }
 }
 
@@ -2124,7 +2124,7 @@ func_21E6(param_00) {
       break;
   }
 
-  thread maps\mp\_utility::func_9863("callout_kill_streaking", self, undefined, var_01);
+  thread maps\mp\_utility::teamplayercardsplash("callout_kill_streaking", self, undefined, var_01);
 }
 
 func_21C4(param_00) {
@@ -2134,7 +2134,7 @@ func_21C4(param_00) {
 
   var_01 = level.players;
   if(level.teambased) {
-    var_01 = level.var_9859[maps\mp\_utility::func_45DE(self.team)];
+    var_01 = level.var_9859[maps\mp\_utility::getotherteam(self.team)];
   }
 
   if(!isDefined(var_01) || var_01.size < 3) {

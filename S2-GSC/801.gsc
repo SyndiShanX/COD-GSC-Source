@@ -258,7 +258,7 @@ func_4101(param_00, param_01, param_02) {
 }
 
 func_3C96(param_00, param_01, param_02) {
-  common_scripts\utility::func_3C87(param_00);
+  common_scripts\utility::flag_init(param_00);
   if(!isDefined(param_02)) {
     param_02 = 0;
   }
@@ -268,7 +268,7 @@ func_3C96(param_00, param_01, param_02) {
 }
 
 func_3C97(param_00, param_01, param_02) {
-  common_scripts\utility::func_3C87(param_00);
+  common_scripts\utility::flag_init(param_00);
   if(!isDefined(param_02)) {
     param_02 = 0;
   }
@@ -282,7 +282,7 @@ func_3C97(param_00, param_01, param_02) {
 
 func_3C91(param_00, param_01) {
   wait(param_01);
-  common_scripts\utility::func_3C8F(param_00);
+  common_scripts\utility::flag_set(param_00);
 }
 
 func_3C7C(param_00, param_01) {
@@ -316,7 +316,7 @@ func_5CB1(param_00, param_01) {
     }
   }
 
-  common_scripts\utility::func_3C8F("game_saving");
+  common_scripts\utility::flag_set("game_saving");
   var_04 = "levelshots / autosave / autosave_" + level.script + "end";
   var_05 = param_01;
   function_0076("levelend", &"AUTOSAVE_AUTOSAVE", var_04, 1, 1, var_05);
@@ -849,11 +849,11 @@ func_848A(param_00) {
 }
 
 func_427D() {
-  return self.var_118;
+  return self.strtok;
 }
 
 func_8548(param_00) {
-  self.var_118 = param_00;
+  self.strtok = param_00;
 }
 
 func_508D(param_00) {
@@ -1023,7 +1023,7 @@ func_2BBE() {
     return;
   }
 
-  self method_805A();
+  self save_redo_buffer();
 }
 
 func_93E3() {
@@ -1053,7 +1053,7 @@ func_0692(param_00, param_01) {
   return 1;
 }
 
-func_71AC(param_00, param_01, param_02, param_03, param_04) {
+play_sound_on_tag(param_00, param_01, param_02, param_03, param_04) {
   if(common_scripts\utility::func_562E(param_02) && func_555F()) {
     return;
   }
@@ -1091,11 +1091,11 @@ func_71AC(param_00, param_01, param_02, param_03, param_04) {
 }
 
 func_71AD(param_00, param_01) {
-  func_71AC(param_00, param_01, 1);
+  play_sound_on_tag(param_00, param_01, 1);
 }
 
 func_71AB(param_00, param_01) {
-  func_71AC(param_00, undefined, undefined, param_01);
+  play_sound_on_tag(param_00, undefined, undefined, param_01);
 }
 
 func_7154(param_00, param_01, param_02, param_03) {
@@ -1150,7 +1150,7 @@ func_8057() {
       continue;
     }
 
-    game["character" + var_01] = var_00[var_02] lib_0281::func_8055();
+    game["character" + var_01] = var_00[var_02] lib_0281::save();
     var_01++;
   }
 
@@ -1174,14 +1174,14 @@ func_8FA3(param_00) {
 }
 
 func_8FF2(param_00) {
-  lib_0281::func_136(param_00);
+  lib_0281::precache(param_00);
   self waittill("spawned", var_01);
   if(func_8FA3(var_01)) {
     return;
   }
 
-  var_01 lib_0281::func_6685();
-  var_01 lib_0281::func_5DDF(param_00);
+  var_01 lib_0281::new();
+  var_01 lib_0281::load(param_00);
 }
 
 func_59E4(param_00, param_01) {
@@ -1315,13 +1315,13 @@ func_8494(param_00, param_01, param_02, param_03) {
   }
 
   [[param_02]](var_04.var_9044);
-  common_scripts\utility::func_3C8F(param_01);
+  common_scripts\utility::flag_set(param_01);
 }
 
 func_849A(param_00, param_01) {
   if(!common_scripts\utility::func_3C77(param_01)) {
     param_00 waittill("trigger", var_02);
-    common_scripts\utility::func_3C8F(param_01);
+    common_scripts\utility::flag_set(param_01);
     return var_02;
   }
 }
@@ -1333,7 +1333,7 @@ func_8499(param_00) {
 
   var_01 = getEnt(param_00, "targetname");
   var_01 waittill("trigger");
-  common_scripts\utility::func_3C8F(param_00);
+  common_scripts\utility::flag_set(param_00);
 }
 
 func_559A(param_00, param_01) {
@@ -1706,7 +1706,7 @@ func_0F8D(param_00, param_01) {
 
 func_455B() {
   var_00 = [];
-  if(isDefined(self.var_81EF)) {
+  if(isDefined(self.script_exploder)) {
     var_01 = common_scripts\utility::func_41F3();
     foreach(var_03 in var_01) {
       var_04 = function_01DC(var_03, "script_linkname");
@@ -2295,7 +2295,7 @@ func_6257() {
 
   level.player lib_02FA::func_4CFE();
   level.var_6256 = 1;
-  common_scripts\utility::func_3C8F("missionfailed");
+  common_scripts\utility::flag_set("missionfailed");
   if(func_0F44()) {
     return;
   }
@@ -2575,7 +2575,7 @@ func_66DA(param_00, param_01, param_02, param_03, param_04) {
     self notify("flashed");
     self.flashendtime = gettime() + var_0B * 1000;
     self shellshock("flashbang", var_0B);
-    common_scripts\utility::func_3C8F("player_flashed");
+    common_scripts\utility::flag_set("player_flashed");
     if(param_01 * param_02 > 0.5) {
       thread func_3D55(var_0B);
     }
@@ -2644,7 +2644,7 @@ func_3D54() {
     self.flashendtime = gettime() + var_09 * 1000;
     self shellshock("flashbang", var_09);
     self lightsetoverrideenableforplayer("flashed", 0.1);
-    common_scripts\utility::func_3C8F("player_flashed");
+    common_scripts\utility::flag_set("player_flashed");
     thread lib_0322::func_A01C(var_09);
     wait(0.1);
     self method_83C8(var_09 - 0.1);
@@ -2695,7 +2695,7 @@ func_6F22(param_00) {
     var_01 = level.var_2807[param_00];
     if(isDefined(var_01)) {
       foreach(var_03 in var_01) {
-        var_03 common_scripts\utility::func_6F21();
+        var_03 common_scripts\utility::pauseeffect();
       }
 
       return;
@@ -2704,16 +2704,16 @@ func_6F22(param_00) {
     return;
   }
 
-  foreach(var_06 in level.var_2804) {
-    if(!isDefined(var_06.var_A265["exploder"])) {
+  foreach(var_06 in level.createfxent) {
+    if(!isDefined(var_06.v["exploder"])) {
       continue;
     }
 
-    if(var_06.var_A265["exploder"] != var_03) {
+    if(var_06.v["exploder"] != var_03) {
       continue;
     }
 
-    var_06 common_scripts\utility::func_6F21();
+    var_06 common_scripts\utility::pauseeffect();
   }
 }
 
@@ -2732,12 +2732,12 @@ func_7DD4(param_00) {
     return;
   }
 
-  foreach(var_06 in level.var_2804) {
-    if(!isDefined(var_06.var_A265["exploder"])) {
+  foreach(var_06 in level.createfxent) {
+    if(!isDefined(var_06.v["exploder"])) {
       continue;
     }
 
-    if(var_06.var_A265["exploder"] != var_03) {
+    if(var_06.v["exploder"] != var_03) {
       continue;
     }
 
@@ -2747,15 +2747,15 @@ func_7DD4(param_00) {
 
 func_44F6(param_00) {
   var_01 = [];
-  if(isDefined(level.var_2802)) {
-    var_02 = level.var_2802[param_00];
+  if(isDefined(level.createfxbyfxid)) {
+    var_02 = level.createfxbyfxid[param_00];
     if(isDefined(var_02)) {
       var_01 = var_02;
     }
   } else {
-    for(var_03 = 0; var_03 < level.var_2804.size; var_03++) {
-      if(level.var_2804[var_03].var_A265["fxid"] == param_00) {
-        var_01[var_01.size] = level.var_2804[var_03];
+    for(var_03 = 0; var_03 < level.createfxent.size; var_03++) {
+      if(level.createfxent[var_03].v["fxid"] == param_00) {
+        var_01[var_01.size] = level.createfxent[var_03];
       }
     }
   }
@@ -2984,7 +2984,7 @@ func_AA4D(param_00, param_01) {
   var_02 = undefined;
   for(var_03 = 0; var_03 < level.players.size; var_03++) {
     var_04 = level.players[var_03] getEye();
-    var_02 = common_scripts\utility::func_AA4A(var_04, level.players[var_03] getplayerangles(), param_00, param_01);
+    var_02 = common_scripts\utility::within_fov(var_04, level.players[var_03] getplayerangles(), param_00, param_01);
     if(!var_02) {
       return 0;
     }
@@ -3037,7 +3037,7 @@ func_2EC5(param_00) {
   }
 
   func_1673();
-  if(var_01 != level.player && !isDefined(self.var_EC4) || !isDefined(level.var_80D2[self.var_EC4]) || !isDefined(level.var_80D2[self.var_EC4][param_00])) {
+  if(var_01 != level.player && !isDefined(self.var_EC4) || !isDefined(level.scr_sound[self.var_EC4]) || !isDefined(level.scr_sound[self.var_EC4][param_00])) {
     animscripts / face::func_7497("auto", param_00, 1, param_00);
     var_03 = 0;
   } else {
@@ -3095,15 +3095,15 @@ func_78B9(param_00, param_01) {
 
   level.var_7308 = 0;
   if(param_01 != "none" && isDefined(level.var_80D1["squelches"][param_01])) {
-    func_71AC(level.var_80D1["squelches"][param_01]["on"], undefined, 1);
+    play_sound_on_tag(level.var_80D1["squelches"][param_01]["on"], undefined, 1);
   }
 
   var_02 = 0;
   level.player notify(param_00);
   if(isDefined(level.var_80D1[param_00])) {
-    var_02 = func_71AC(level.var_80D1[param_00], undefined, 1);
+    var_02 = play_sound_on_tag(level.var_80D1[param_00], undefined, 1);
   } else {
-    var_02 = func_71AC(param_00, undefined, 1);
+    var_02 = play_sound_on_tag(param_00, undefined, 1);
   }
 
   if(param_01 != "none" && isDefined(level.var_80D1["squelches"][param_01])) {
@@ -3207,7 +3207,7 @@ func_78B6(param_00) {
     level.var_7306 = var_01;
   }
 
-  level.var_7306 func_71AC(level.var_80D1[param_00], undefined, 1);
+  level.var_7306 play_sound_on_tag(level.var_80D1[param_00], undefined, 1);
 }
 
 func_78BD(param_00) {
@@ -3250,7 +3250,7 @@ func_78C1(param_00, param_01) {
   level.var_7308 = 1;
   wait(param_01);
   if(isDefined(level.var_7306) && level.var_7308 == 1) {
-    level.var_7306 func_3F12(::func_71AC, level.var_80D1["squelches"][param_00]["off"], undefined, 1);
+    level.var_7306 func_3F12(::play_sound_on_tag, level.var_80D1["squelches"][param_00]["off"], undefined, 1);
   }
 }
 
@@ -3441,7 +3441,7 @@ func_0F7B(param_00) {
 
 func_0F87(param_00) {
   for(var_01 = 0; var_01 < param_00.size; var_01++) {
-    param_00[var_01] method_805A();
+    param_00[var_01] save_redo_buffer();
   }
 }
 
@@ -3531,7 +3531,7 @@ func_41C2() {
 func_85A2(param_00, param_01) {
   var_02 = function_00CB(param_00);
   for(var_03 = 0; var_03 < var_02.size; var_03++) {
-    var_02[var_03].var_118 = param_01;
+    var_02[var_03].strtok = param_01;
   }
 }
 
@@ -4310,7 +4310,7 @@ func_48D9() {
   if(!isDefined(self.var_48DA) && self.var_1D0 != "none") {
     self.var_48DA = 1;
     func_2E38(self.var_1D0);
-    self method_802E(getweaponmodel(self.var_1D0), "tag_weapon_right");
+    self detach(getweaponmodel(self.var_1D0), "tag_weapon_right");
   }
 }
 
@@ -4348,7 +4348,7 @@ func_2E38(param_00) {
     var_01 = function_029C(param_00);
     var_02 = common_scripts\utility::func_F9A(var_01, 0);
     foreach(var_04 in var_02) {
-      self method_802E(var_04["worldModel"], var_04["worldAttachTag"], 0);
+      self detach(var_04["worldModel"], var_04["worldAttachTag"], 0);
     }
   }
 }
@@ -4857,7 +4857,7 @@ func_8490() {
 
 func_8F71(param_00, param_01) {
   self endon("death");
-  common_scripts\utility::func_161();
+  common_scripts\utility::script_delay();
   if(!isDefined(self)) {
     return undefined;
   }
@@ -5329,8 +5329,8 @@ func_843E() {
     level.console = getDvar("5554") == "true";
   } else {}
 
-  if(!isDefined(level.var_1D4)) {
-    level.var_1D4 = getDvar("3475") == "true";
+  if(!isDefined(level.weaponinventorytype)) {
+    level.weaponinventorytype = getDvar("3475") == "true";
   } else {}
 
   if(!isDefined(level.var_1D5)) {
@@ -5350,7 +5350,7 @@ func_843E() {
   } else {}
 
   if(!isDefined(level.var_10B)) {
-    level.var_10B = level.var_122 || level.var_148 || level.var_1D4;
+    level.var_10B = level.var_122 || level.var_148 || level.weaponinventorytype;
   }
 }
 
@@ -5470,7 +5470,7 @@ func_05FB() {
 }
 
 func_0669() {
-  self method_805A();
+  self save_redo_buffer();
 }
 
 func_5A26() {
@@ -5485,7 +5485,7 @@ func_5A26() {
   }
 
   self method_80E3(0);
-  self method_805A();
+  self save_redo_buffer();
   return 1;
 }
 
@@ -5504,7 +5504,7 @@ func_0733() {
 func_2F50(param_00) {
   var_01 = getarraykeys(level.var_643[param_00]);
   for(var_02 = 0; var_02 < var_01.size; var_02++) {
-    level.var_643[param_00][var_01[var_02]].var_5EED delete();
+    level.var_643[param_00][var_01[var_02]].looper delete();
     level.var_643[param_00][var_01[var_02]] = undefined;
   }
 }
@@ -5555,7 +5555,7 @@ func_0FBA(param_00, param_01, param_02) {
 }
 
 func_2EED() {
-  self method_805A((0, 0, 0));
+  self save_redo_buffer((0, 0, 0));
 }
 
 func_458F(param_00) {
@@ -5664,7 +5664,7 @@ func_723A(param_00, param_01, param_02) {
   }
 
   param_00.var_7453 = var_03;
-  if(!common_scripts\utility::func_AA4A(level.player.origin, level.player geteyeangles(), param_00.origin, var_04)) {
+  if(!common_scripts\utility::within_fov(level.player.origin, level.player geteyeangles(), param_00.origin, var_04)) {
     param_00.var_7452 = 0;
     return 0;
   }
@@ -6000,7 +6000,7 @@ func_A967(param_00, param_01) {
       if(distance(self getvelocity(), (0, 0, 0)) < 5) {
         var_06 = "water_stop";
       }
-    } else if(isDefined(level.var_611["water_" + self.var_794.var_64B0])) {
+    } else if(isDefined(level._effect["water_" + self.var_794.var_64B0])) {
       var_06 = "water_" + self.var_794.var_64B0;
     }
 
@@ -6948,8 +6948,8 @@ func_9874(param_00) {
 }
 
 func_6470(param_00) {
-  foreach(var_02 in level.var_2804) {
-    var_02.var_A265["origin"] = var_02.var_A265["origin"] + param_00;
+  foreach(var_02 in level.createfxent) {
+    var_02.v["origin"] = var_02.v["origin"] + param_00;
   }
 }
 
@@ -7189,7 +7189,7 @@ func_0F7C(param_00, param_01, param_02) {
   foreach(var_05 in param_00) {
     var_03[var_03.size] = var_05;
     if(var_03.size == param_02) {
-      var_03 = common_scripts\utility::func_F92(var_03);
+      var_03 = common_scripts\utility::array_randomize(var_03);
       for(var_06 = param_01; var_06 < var_03.size; var_06++) {
         var_03[var_06] delete();
       }
@@ -7498,7 +7498,7 @@ func_7DEA(param_00) {
   }
 
   self method_8349(self.var_9429[param_00]["lethal_offhand"]);
-  self method_831E(self.var_9429[param_00]["tactical_offhand"]);
+  self setoffhandsecondaryclass(self.var_9429[param_00]["tactical_offhand"]);
 }
 
 func_4353() {
@@ -7600,7 +7600,7 @@ func_8BC7() {
       self show();
       self solid();
       if(self.spawnflags & 1) {
-        self method_805F();
+        self saved_actionslotdata();
       }
       break;
 
@@ -8040,10 +8040,10 @@ func_6017(param_00) {
   foreach(var_05 in param_00) {
     foreach(var_07 in var_01) {
       if(isDefined(var_07.var_8272)) {
-        var_07.var_8186 = var_07.var_8272;
+        var_07.setdepthoffield = var_07.var_8272;
       }
 
-      if(!isDefined(var_07.var_8186)) {
+      if(!isDefined(var_07.setdepthoffield)) {
         continue;
       }
 
@@ -8065,27 +8065,27 @@ func_6017(param_00) {
 }
 
 func_0892() {
-  foreach(var_01 in level.var_2804) {
-    if(!isDefined(var_01.var_A265["masked_exploder"])) {
+  foreach(var_01 in level.createfxent) {
+    if(!isDefined(var_01.v["masked_exploder"])) {
       continue;
     }
 
-    if(!self method_858B(var_01.var_A265["origin"])) {
+    if(!self method_858B(var_01.v["origin"])) {
       continue;
     }
 
-    var_02 = var_01.var_A265["masked_exploder"];
-    var_03 = var_01.var_A265["masked_exploder_spawnflags"];
-    var_04 = var_01.var_A265["masked_exploder_script_disconnectpaths"];
+    var_02 = var_01.v["masked_exploder"];
+    var_03 = var_01.v["masked_exploder_spawnflags"];
+    var_04 = var_01.v["masked_exploder_script_disconnectpaths"];
     var_05 = spawn("script_model", (0, 0, 0), var_03);
     var_05 setModel(var_02);
-    var_05.origin = var_01.var_A265["origin"];
-    var_05.angles = var_01.var_A265["angles"];
-    var_01.var_A265["masked_exploder"] = undefined;
-    var_01.var_A265["masked_exploder_spawnflags"] = undefined;
-    var_01.var_A265["masked_exploder_script_disconnectpaths"] = undefined;
+    var_05.origin = var_01.v["origin"];
+    var_05.angles = var_01.v["angles"];
+    var_01.v["masked_exploder"] = undefined;
+    var_01.v["masked_exploder_spawnflags"] = undefined;
+    var_01.v["masked_exploder_script_disconnectpaths"] = undefined;
     var_05.var_2FBF = var_04;
-    var_05.var_8186 = var_01.var_A265["exploder"];
+    var_05.setdepthoffield = var_01.v["exploder"];
     common_scripts\_exploder::func_885C(var_05);
     var_01.model = var_05;
   }
@@ -8157,7 +8157,7 @@ func_2D0E(param_00, param_01) {
 
   foreach(var_09 in param_00) {
     foreach(var_0B in var_02) {
-      if(!isDefined(var_0B.var_8186)) {
+      if(!isDefined(var_0B.setdepthoffield)) {
         continue;
       }
 
@@ -8187,7 +8187,7 @@ func_0890() {
     var_02.script_noteworthy = var_01.script_noteworthy;
     var_02.targetname = var_01.targetname;
     var_02.target = var_01.target;
-    var_02.var_81EF = var_01.var_81EF;
+    var_02.script_exploder = var_01.script_exploder;
     var_02.var_75 = var_01.var_75;
     var_02.var_8249 = var_01.var_8249;
     var_02 common_scripts\_destructible::func_87D2(1);
@@ -8297,7 +8297,7 @@ func_A76D() {
 
 func_A76E(param_00) {
   func_A76C();
-  common_scripts\utility::func_3C8F(param_00);
+  common_scripts\utility::flag_set(param_00);
 }
 
 func_A762(param_00, param_01) {
@@ -8556,19 +8556,19 @@ func_A7BB() {
   }
 
   self.var_6A50 = self.var_1CE;
-  self.var_6A51 = self.var_1CF;
+  self.var_6A51 = self.objective_delete;
   self.var_1CE = 0;
-  self.var_1CF = 0;
+  self.objective_delete = 0;
 }
 
 func_A7B9() {
   if(!isDefined(self.var_6A51)) {
     self.var_6A50 = self.var_1CE;
-    self.var_6A51 = self.var_1CF;
+    self.var_6A51 = self.objective_delete;
   }
 
   self.var_1CE = 999999999;
-  self.var_1CF = 999999999;
+  self.objective_delete = 999999999;
 }
 
 func_5656() {
@@ -8577,7 +8577,7 @@ func_5656() {
 
 func_A7BA() {
   self.var_1CE = self.var_6A50;
-  self.var_1CF = self.var_6A51;
+  self.objective_delete = self.var_6A51;
   self.var_6A50 = undefined;
   self.var_6A51 = undefined;
 }
@@ -8606,7 +8606,7 @@ func_509F() {
     }
   }
 
-  self method_805A();
+  self save_redo_buffer();
 }
 
 func_842B(param_00) {
@@ -8696,7 +8696,7 @@ func_85F7(param_00, param_01, param_02) {
     level.var_AA25.var_A2AD = param_02;
   }
 
-  level.var_AA25.var_7A76 = param_01;
+  level.var_AA25.rate = param_01;
   level.var_AA25.var_A9FE = param_00;
   level notify("windchange", "strong");
 }
@@ -8868,11 +8868,11 @@ func_3F56(param_00, param_01) {
   }
 
   if(param_01) {
-    func_0FB3(param_00.var_3F2F, ::common_scripts\utility::func_6F21);
+    func_0FB3(param_00.fx, ::common_scripts\utility::pauseeffect);
     return;
   }
 
-  common_scripts\utility::array_thread(param_00.var_3F2F, ::common_scripts\utility::func_6F21);
+  common_scripts\utility::array_thread(param_00.fx, ::common_scripts\utility::pauseeffect);
 }
 
 func_0FB3(param_00, param_01, param_02) {
@@ -8912,7 +8912,7 @@ func_3F5B(param_00) {
 }
 
 func_3F59(param_00) {
-  common_scripts\utility::array_thread(param_00.var_3F2F, ::func_7DD3);
+  common_scripts\utility::array_thread(param_00.fx, ::func_7DD3);
 }
 
 func_3C7F(param_00) {
@@ -8935,7 +8935,7 @@ func_3C7E(param_00) {
     return;
   }
 
-  common_scripts\utility::func_3C8F(param_00);
+  common_scripts\utility::flag_set(param_00);
 }
 
 func_3C80(param_00, param_01) {
@@ -9047,7 +9047,7 @@ hasperkA(param_00, param_01, param_02) {
 func_3C8D(param_00) {
   level endon(param_00);
   self waittill("death");
-  common_scripts\utility::func_3C8F(param_00);
+  common_scripts\utility::flag_set(param_00);
 }
 
 func_3615() {
@@ -9152,10 +9152,10 @@ func_2D4F(param_00) {
     }
   }
 
-  if(isDefined(level.var_9478)) {
-    foreach(var_04, var_03 in level.var_9478) {
+  if(isDefined(level.struct)) {
+    foreach(var_04, var_03 in level.struct) {
       if(param_00 == var_03) {
-        level.var_9478[var_04] = undefined;
+        level.struct[var_04] = undefined;
       }
     }
   }
@@ -9369,7 +9369,7 @@ func_8417(param_00) {}
 
 func_23A4() {
   if(isDefined(self.var_E94) && self.var_E94 == "creepwalk") {
-    self.var_17C = 30;
+    self.radiusdamage = 30;
   }
 
   self.var_E94 = undefined;
@@ -9408,7 +9408,7 @@ func_9C60(param_00) {
     wait(0.1);
   }
 
-  common_scripts\utility::func_3C8F(param_00 + "_loaded");
+  common_scripts\utility::flag_set(param_00 + "_loaded");
 }
 
 func_9C62(param_00) {
@@ -9421,7 +9421,7 @@ func_9C62(param_00) {
 }
 
 func_9C5F(param_00) {
-  common_scripts\utility::func_3C87(param_00 + "_loaded");
+  common_scripts\utility::flag_init(param_00 + "_loaded");
 }
 
 func_9C61(param_00, param_01) {
@@ -9674,7 +9674,7 @@ func_3DC5(param_00, param_01) {
   }
 
   self.var_28F9 = var_02;
-  var_02 common_scripts\utility::func_161();
+  var_02 common_scripts\utility::script_delay();
   while(isDefined(var_02)) {
     self.var_28F9 = var_02;
     if(isDefined(var_02.lookahead)) {
@@ -9689,8 +9689,8 @@ func_3DC5(param_00, param_01) {
       var_04 = ::func_3DC7;
     }
 
-    if(isDefined(var_02.var_14F) && var_02.var_14F != 0) {
-      self.var_AE = var_02.var_14F;
+    if(isDefined(var_02.radius) && var_02.radius != 0) {
+      self.var_AE = var_02.radius;
     }
 
     if(self.var_AE < 16) {
@@ -9716,7 +9716,7 @@ func_3DC5(param_00, param_01) {
 
     var_02 notify("trigger", self);
     if(isDefined(var_02.var_81A0)) {
-      common_scripts\utility::func_3C8F(var_02.var_81A0);
+      common_scripts\utility::flag_set(var_02.var_81A0);
     }
 
     if(isDefined(var_02.var_8260)) {
@@ -9769,7 +9769,7 @@ func_3DC5(param_00, param_01) {
       common_scripts\utility::func_3C9F(var_02.var_81A3);
     }
 
-    var_02 common_scripts\utility::func_161();
+    var_02 common_scripts\utility::script_delay();
     var_02 = var_02 common_scripts\utility::func_4375();
   }
 
@@ -10136,7 +10136,7 @@ func_76B5() {
 
 func_9932() {
   precacheshader("loading_animation");
-  common_scripts\utility::func_3C87("tff_sync_complete");
+  common_scripts\utility::flag_init("tff_sync_complete");
   lib_0322::func_72D();
 }
 
@@ -10152,7 +10152,7 @@ func_9930(param_00) {
       wait 0.05;
     }
 
-    common_scripts\utility::func_3C8F("tff_sync_complete");
+    common_scripts\utility::flag_set("tff_sync_complete");
   }
 }
 
@@ -10584,7 +10584,7 @@ func_1801(param_00, param_01, param_02) {
   var_03[6] = "j_clavicle_le";
   var_03[7] = "j_clavicle_ri";
   var_04 = getdvarint("cg_fov");
-  thread func_1802(common_scripts\utility::func_7A33(var_03), undefined);
+  thread func_1802(common_scripts\utility::random(var_03), undefined);
   if(isDefined(param_01) && isai(param_01) && isalive(param_01)) {
     if(!level.player method_8214(param_01.origin, var_04, 500)) {
       param_01 method_81E8();
@@ -10599,7 +10599,7 @@ func_1801(param_00, param_01, param_02) {
 
     var_06 = function_00CB(var_05);
     var_06 = function_01AC(var_06, level.player.origin, 2000);
-    var_06 = common_scripts\utility::func_F92(var_06);
+    var_06 = common_scripts\utility::array_randomize(var_06);
     foreach(var_08 in var_06) {
       if(!level.player method_8214(var_08.origin + (0, 0, 50), var_04, 500)) {
         if(isDefined(var_08.var_1D0) && function_01A9(var_08.var_1D0) == "bullet") {
@@ -10615,7 +10615,7 @@ func_1801(param_00, param_01, param_02) {
 
 func_1802(param_00, param_01) {
   if(!isDefined(param_01)) {
-    param_01 = level.var_611["bloody_death_impact"];
+    param_01 = level._effect["bloody_death_impact"];
   }
 
   playFXOnTag(param_01, self, param_00);

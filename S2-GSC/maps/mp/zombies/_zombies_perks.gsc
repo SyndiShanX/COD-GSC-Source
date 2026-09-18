@@ -69,7 +69,7 @@ init() {
   level.var_AB25["specialty_class_fast_hands_zm"] = ::func_A05F;
   level.var_AB23["specialty_class_hoarder_zm"] = ::func_86A8;
   level.var_AB25["specialty_class_hoarder_zm"] = ::func_A06A;
-  level.var_611["zmb_moon_speed_down"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_speed_down");
+  level._effect["zmb_moon_speed_down"] = loadfx("vfx/zombie/abilities_perks/zmb_moon_speed_down");
 }
 
 func_0F35(param_00) {}
@@ -167,7 +167,7 @@ func_8632() {}
 func_A051() {}
 
 func_868A() {
-  maps\mp\_utility::func_47A2("specialty_stockpile");
+  maps\mp\_utility::giveperk("specialty_stockpile");
 }
 
 func_A066() {
@@ -175,7 +175,7 @@ func_A066() {
 }
 
 func_8683() {
-  maps\mp\_utility::func_47A2("specialty_immune_grenade_suicide");
+  maps\mp\_utility::giveperk("specialty_immune_grenade_suicide");
 }
 
 func_A062() {
@@ -191,7 +191,7 @@ func_0633() {
 }
 
 func_8697() {
-  maps\mp\_utility::func_47A2("specialty_grenade_extra_zm");
+  maps\mp\_utility::giveperk("specialty_grenade_extra_zm");
 }
 
 func_A068() {
@@ -199,7 +199,7 @@ func_A068() {
 }
 
 func_8665() {
-  maps\mp\_utility::func_47A2("specialty_discipline_zm");
+  maps\mp\_utility::giveperk("specialty_discipline_zm");
 }
 
 func_A058() {
@@ -225,8 +225,8 @@ func_21B2() {
 }
 
 func_869B() {
-  maps\mp\_utility::func_47A2("specialty_sprintfire");
-  maps\mp\_utility::func_47A2("specialty_mantlefire");
+  maps\mp\_utility::giveperk("specialty_sprintfire");
+  maps\mp\_utility::giveperk("specialty_mantlefire");
 }
 
 func_A069() {
@@ -235,8 +235,8 @@ func_A069() {
 }
 
 func_867D() {
-  maps\mp\_utility::func_47A2("specialty_quickswap");
-  maps\mp\_utility::func_47A2("specialty_fastoffhand");
+  maps\mp\_utility::giveperk("specialty_quickswap");
+  maps\mp\_utility::giveperk("specialty_fastoffhand");
 }
 
 func_A05F() {
@@ -267,8 +267,8 @@ func_466B(param_00) {
 func_0F38(param_00) {
   lib_054D::setheight("suppressive_fire", func_46BB(param_00));
   if(isalive(self)) {
-    playFXOnTag(level.var_611["zmb_moon_speed_down"], self, "J_Knee_RI");
-    playFXOnTag(level.var_611["zmb_moon_speed_down"], self, "J_Knee_LE");
+    playFXOnTag(level._effect["zmb_moon_speed_down"], self, "J_Knee_RI");
+    playFXOnTag(level._effect["zmb_moon_speed_down"], self, "J_Knee_LE");
   }
 }
 
@@ -300,6 +300,6 @@ func_90A8() {
 
 func_7CFD(param_00) {
   self notify("speed_debuffs_changed");
-  stopFXOnTag(level.var_611["zmb_moon_speed_down"], self, "J_Knee_RI");
-  stopFXOnTag(level.var_611["zmb_moon_speed_down"], self, "J_Knee_LE");
+  stopFXOnTag(level._effect["zmb_moon_speed_down"], self, "J_Knee_RI");
+  stopFXOnTag(level._effect["zmb_moon_speed_down"], self, "J_Knee_LE");
 }

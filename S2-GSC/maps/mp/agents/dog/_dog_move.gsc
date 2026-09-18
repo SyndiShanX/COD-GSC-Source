@@ -28,7 +28,7 @@ func_2603() {
   self method_839C("code_move");
   self scragentsetorientmode("face motion");
   self method_839A(1, 1);
-  func_86CF(self.var_108);
+  func_86CF(self.vectortoangles);
 }
 
 func_86CF(param_00) {
@@ -38,11 +38,11 @@ func_86CF(param_00) {
 func_A6C2() {
   self endon("dogmove_endwait_runwalk");
   self endon("death");
-  var_00 = self.var_108;
+  var_00 = self.vectortoangles;
   for(;;) {
-    if(var_00 != self.var_108) {
-      func_86CF(self.var_108);
-      var_00 = self.var_108;
+    if(var_00 != self.vectortoangles) {
+      func_86CF(self.vectortoangles);
+      var_00 = self.vectortoangles;
     }
 
     wait(0.1);
@@ -322,9 +322,9 @@ func_4AC2(param_00, param_01, param_02, param_03) {
 
       if(self.var_BA4 == "traverse") {
         var_05 = "land";
-      } else if(self.var_108 == "sprint") {
+      } else if(self.vectortoangles == "sprint") {
         var_05 = "sprint";
-      } else if(self.var_108 == "fastwalk") {
+      } else if(self.vectortoangles == "fastwalk") {
         var_05 = "walk";
       } else {
         var_05 = "run";

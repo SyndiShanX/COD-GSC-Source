@@ -80,7 +80,7 @@ func_1BC0(param_00, param_01, param_02) {
   self endon("joined_team");
   self endon("joined_spectators");
   level endon("game_ended");
-  if(maps\mp\_utility::func_581D() || maps\mp\_utility::func_572D()) {
+  if(maps\mp\_utility::isusingremote() || maps\mp\_utility::func_572D()) {
     return;
   }
 
@@ -132,7 +132,7 @@ func_720E(param_00) {
 
   self.var_29AB = param_00;
   var_01 = randomintrange(1, 8);
-  self method_8626("mute_breath");
+  self setaltsceneobj("mute_breath");
   self.breathmute_submix_active = 1;
   if(self.team == "axis") {
     if(self method_843D()) {
@@ -271,7 +271,7 @@ func_7434() {
       continue;
     }
 
-    if(maps\mp\_utility::func_581D() || maps\mp\_utility::func_572D()) {
+    if(maps\mp\_utility::isusingremote() || maps\mp\_utility::func_572D()) {
       continue;
     }
 
@@ -280,7 +280,7 @@ func_7434() {
     }
 
     if(!common_scripts\utility::func_562E(self.breathmute_submix_active)) {
-      self method_8626("mute_breath");
+      self setaltsceneobj("mute_breath");
       self.breathmute_submix_active = 1;
     }
 

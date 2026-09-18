@@ -9,20 +9,20 @@ main() {
   }
 
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.gametype, 0, 0, 9);
-    maps\mp\_utility::func_7BFA(level.gametype, 5);
-    maps\mp\_utility::func_7BF9(level.gametype, 35);
-    maps\mp\_utility::func_7BF7(level.gametype, 1);
-    maps\mp\_utility::func_7C04(level.gametype, 1);
-    maps\mp\_utility::func_7BF1(level.gametype, 0);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
+    maps\mp\_utility::registerroundswitchdvar(level.gametype, 0, 0, 9);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 5);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 35);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
@@ -47,13 +47,13 @@ main() {
 func_5300() {
   maps\mp\_utility::func_8653();
   setdynamicdvar("scr_dogfight_roundswitch", 0);
-  maps\mp\_utility::func_7BF8("dogfight", 0, 0, 9);
+  maps\mp\_utility::registerroundswitchdvar("dogfight", 0, 0, 9);
   setdynamicdvar("scr_dogfight_roundlimit", 1);
-  maps\mp\_utility::func_7BF7("dogfight", 1);
+  maps\mp\_utility::registerroundlimitdvar("dogfight", 1);
   setdynamicdvar("scr_dogfight_winlimit", 1);
-  maps\mp\_utility::func_7C04("dogfight", 1);
+  maps\mp\_utility::registerwinlimitdvar("dogfight", 1);
   setdynamicdvar("scr_dogfight_halftime", 0);
-  maps\mp\_utility::func_7BE5("dogfight", 0);
+  maps\mp\_utility::registerhalftimedvar("dogfight", 0);
 }
 
 func_6BAF() {
@@ -69,18 +69,18 @@ func_6BAF() {
     game["defenders"] = var_00;
   }
 
-  maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_WAR");
-  maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_WAR");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_WAR");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_WAR");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_WAR");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_WAR");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_WAR");
   } else {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_WAR_SCORE");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_WAR_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_WAR_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_WAR_SCORE");
   }
 
-  maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_WAR_HINT");
-  maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_WAR_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_WAR_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_WAR_HINT");
   maps / mp / gametypes / dogfight_common::ondogfightstart();
 }
 

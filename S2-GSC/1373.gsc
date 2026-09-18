@@ -107,14 +107,14 @@ func_3D7B() {
 
 func_8FAA(param_00) {
   for(var_01 = 0; var_01 < 20; var_01++) {
-    var_02 = common_scripts\utility::func_7A33(self.var_175F);
+    var_02 = common_scripts\utility::random(self.var_175F);
     thread func_1763(var_02, param_00);
   }
 
   wait(0.1);
   physicsexplosionsphere(self.var_AA2A, 48, 16, 1, 0);
   glassradiusdamage(self.var_AA2A, 48, 100, 50);
-  earthquake(0.5, 1.5, self.var_78CB.origin, self.var_78CB.var_14F * 2);
+  earthquake(0.5, 1.5, self.var_78CB.origin, self.var_78CB.radius * 2);
   playrumbleonposition("zombie_birds_rumble", self.var_78CB.origin);
 }
 

@@ -158,7 +158,7 @@ func_400A() {
           continue;
         }
 
-        if(common_scripts\utility::func_562E(level.var_6B4D)) {
+        if(common_scripts\utility::func_562E(level.onlinegame)) {
           if(isstring(var_06) && var_06 == "all") {
             if(!isDefined(level.players)) {
               continue;
@@ -234,7 +234,7 @@ zombiegearchallengethread(param_00) {
   var_04 = param_00.challengefunc;
   var_05 = var_01 wait_for_challenge_return(var_04);
   var_06 = get_is_testing_offline();
-  if(!level.var_6B4D && !var_06) {
+  if(!level.onlinegame && !var_06) {
     return;
   }
 

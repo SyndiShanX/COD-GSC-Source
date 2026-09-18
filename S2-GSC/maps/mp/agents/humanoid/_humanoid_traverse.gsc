@@ -35,7 +35,7 @@ func_2CE5(param_00) {
 
 func_32B7() {
   var_00 = self method_8198();
-  var_01 = func_4392(var_00, self.var_14F);
+  var_01 = func_4392(var_00, self.radius);
   var_02 = self method_857F();
   self setOrigin(var_01, 0);
   self.angles = var_00.angles;
@@ -61,7 +61,7 @@ func_32B7() {
   var_0A = maps / mp / agents / _scripted_agent_anim_util::func_446A(var_08);
   var_0B = transformmove(var_01, var_00.angles, (0, 0, 0), (0, 0, 0), getmovedelta(var_08, 0, var_0A), (0, 0, 0));
   var_0C = (var_0B["origin"][0], var_0B["origin"][1], var_02[2]);
-  var_0D = getgroundposition(var_0C, self.var_14F, 32, 32, 0);
+  var_0D = getgroundposition(var_0C, self.radius, 32, 32, 0);
   if(!isDefined(var_0D)) {
     var_0D = var_0B["origin"];
   }
@@ -105,10 +105,10 @@ func_32B7() {
   var_1A = getclosestpointonnavmesh(self.origin, self);
   var_1B = self method_857F();
   if(distance2d(var_1A, self.origin) > 4 || abs(var_1A[2] - self.origin[2]) > 16) {
-    var_1C = getgroundposition(var_1B, self.var_14F, 32, 32, 1);
+    var_1C = getgroundposition(var_1B, self.radius, 32, 32, 1);
     self setOrigin(var_1C, 0);
   } else if(distance2d(self.origin, var_1B) > 96 || abs(self.origin[2] - var_1B[2]) > 16) {
-    var_1C = getgroundposition(getclosestpointonnavmesh(var_1B, self), self.var_14F, 32, 32, 1);
+    var_1C = getgroundposition(getclosestpointonnavmesh(var_1B, self), self.radius, 32, 32, 1);
     self setOrigin(var_1C, 0);
   }
 

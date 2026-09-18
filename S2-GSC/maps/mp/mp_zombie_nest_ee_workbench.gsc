@@ -116,7 +116,7 @@ func_AA6B() {
   thread maps / mp / mp_zombie_nest_ee_util::func_8A8();
   level.var_3571 thread maps / mp / mp_zombie_nest_ee_cart::func_202D("com_2");
   lib_0378::func_8D74("aud_activate_workbench", self.var_48F2.origin);
-  common_scripts\utility::func_3C8F("flag_ww_forged");
+  common_scripts\utility::flag_set("flag_ww_forged");
   level notify("stop_workbench_assembly_info");
   lib_0559::func_2D8E(level.var_AA67.var_4D91);
   self.var_10BD delete();
@@ -147,8 +147,8 @@ func_AA70() {
       if(!common_scripts\utility::func_3C77(var_01) || !common_scripts\utility::func_3C77(var_02)) {
         self.var_10BF show();
         self.var_10BE show();
-        common_scripts\utility::func_3C8F(var_01);
-        common_scripts\utility::func_3C8F(var_02);
+        common_scripts\utility::flag_set(var_01);
+        common_scripts\utility::flag_set(var_02);
       }
 
       break;
@@ -157,15 +157,15 @@ func_AA70() {
         self.var_10C0 linkTo(self.var_48F2, "clamp");
         self.var_10BF show();
         self.var_10BE show();
-        common_scripts\utility::func_3C8F(var_01);
-        common_scripts\utility::func_3C8F(var_02);
+        common_scripts\utility::flag_set(var_01);
+        common_scripts\utility::flag_set(var_02);
       }
 
       continue;
     } else if(common_scripts\utility::func_3C77(var_04)) {
       if(!common_scripts\utility::func_3C77(var_01)) {
         self.var_10BE show();
-        common_scripts\utility::func_3C8F(var_01);
+        common_scripts\utility::flag_set(var_01);
       }
 
       if(!isDefined(var_00.var_3079) && isPlayer(var_00)) {

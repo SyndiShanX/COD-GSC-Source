@@ -15,11 +15,11 @@ func_533B() {
 
 func_2E32(param_00) {
   lib_04FF::func_6934(param_00);
-  lib_04FF::func_6983(self.var_1A5);
+  lib_04FF::func_6983(self.targetname);
   lib_04FF::func_6965("objectHealth", 750, []);
   lib_04FF::func_6963("grenadeDamageMult", 0.1, [0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]);
-  param_00.var_1A7 = game["attackers"];
-  var_01 = lib_04FF::func_27DE("A", param_00.var_1A7, self.origin);
+  param_00.team = game["attackers"];
+  var_01 = lib_04FF::func_27DE("A", param_00.team, self.origin);
   var_01 maps\mp\gametypes\_gameobjects::func_8A60("any");
   param_00.var_2563 = var_01;
   param_00.var_6896 = 0;
@@ -37,7 +37,7 @@ func_7F99() {
     thread runovertimezone(self.overtimezone);
   }
 
-  lib_04FF::func_6982(self.var_1A5);
+  lib_04FF::func_6982(self.targetname);
   thread func_2E30();
 }
 
@@ -63,7 +63,7 @@ func_2E31(param_00) {
   for(;;) {
     if(self.var_6896 != var_03) {
       var_04 = var_03 - self.var_6896 * 1000;
-      param_00 lib_04FF::func_8615(var_04);
+      param_00 lib_04FF::playlocalsound(var_04);
     }
 
     self waittill("prop_destroyed");
@@ -93,30 +93,30 @@ func_2E33(param_00) {
   self.var_6896 = self.var_6896 + param_00;
   self notify("prop_destroyed");
   if(self.var_6896 <= 0) {
-    lib_04FF::func_6935(self.var_1A5);
+    lib_04FF::func_6935(self.targetname);
   }
 }
 
 func_52FB() {
-  level.var_611["destructionExplode"] = loadfx("vfx/map/mp_raid_d_day/r_dday_equipment_damaged_state_2");
-  level.var_611["engine_smoke"] = loadfx("vfx/fire/fire_licks_small");
-  level.var_611["engine_damage"] = loadfx("vfx/vehicle/vehicle_tank_engine_damage_3_lightfire");
-  level.var_611["engine_fire"] = loadfx("vfx/fire/fire_licks_small");
-  level.var_611["engine_explode"] = loadfx("vfx/explosion/drone_swarm_projectile_explode");
+  level._effect["destructionExplode"] = loadfx("vfx/map/mp_raid_d_day/r_dday_equipment_damaged_state_2");
+  level._effect["engine_smoke"] = loadfx("vfx/fire/fire_licks_small");
+  level._effect["engine_damage"] = loadfx("vfx/vehicle/vehicle_tank_engine_damage_3_lightfire");
+  level._effect["engine_fire"] = loadfx("vfx/fire/fire_licks_small");
+  level._effect["engine_explode"] = loadfx("vfx/explosion/drone_swarm_projectile_explode");
 }
 
 func_2E34(param_00) {
   param_00.var_65EA = self;
   param_00.var_7D11 = undefined;
-  if(param_00.var_982E.var_165 != "destructionObjective") {
+  if(param_00.var_982E.exitlevel != "destructionObjective") {
     param_00.var_982E.var_6DA7 = param_00;
     param_00.var_7D11 = param_00.var_982E;
   }
 
-  lib_04FF::func_6983(param_00.var_65EA.var_1A5);
+  lib_04FF::func_6983(param_00.var_65EA.targetname);
   waittillframeend;
   param_00 setdamagecallbackon(1);
-  param_00.var_29B5 = ::func_2E2C;
+  param_00.damagecallback = ::func_2E2C;
   param_00 setCanDamage(1);
   param_00 method_86B7();
   param_00 method_80B0(8576);
@@ -125,7 +125,7 @@ func_2E34(param_00) {
   param_00.var_FB = param_00.var_BC;
   param_00.repairdamageto = 0;
   param_00.var_6A = 0;
-  param_00.var_1A7 = game["defenders"];
+  param_00.team = game["defenders"];
   param_00.var_29D7 = 1;
   param_00.var_29DD = [];
   param_00.var_3F7C = -1;
@@ -165,7 +165,7 @@ destructionpropapplyparamaters(param_00) {
 initfxnodes(param_00) {
   foreach(var_02 in param_00.var_982D) {
     foreach(var_04 in var_02) {
-      if(var_04.var_165 == "fxSource") {
+      if(var_04.exitlevel == "fxSource") {
         fxstructinit(var_04);
       }
     }
@@ -183,7 +183,7 @@ initdamageportions() {
 
 func_2E2D(param_00) {
   param_00 endon("death");
-  lib_04FF::func_6982(self.var_1A5);
+  lib_04FF::func_6982(self.targetname);
   param_00 hudoutlinedisable();
   param_00 setdamagecallbackon(0);
 }
@@ -223,12 +223,12 @@ func_2E2C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  if(isDefined(param_01.var_1A7)) {
-    if(self.var_1A7 == param_01.var_1A7) {
+  if(isDefined(param_01.team)) {
+    if(self.team == param_01.team) {
       return;
     }
-  } else if(isDefined(param_01.var_117) && isDefined(param_01.var_117.var_1A7)) {
-    if(self.var_1A7 == param_01.var_117.var_1A7) {
+  } else if(isDefined(param_01.var_117) && isDefined(param_01.var_117.team)) {
+    if(self.team == param_01.var_117.team) {
       return;
     }
   }
@@ -275,7 +275,7 @@ func_2E2C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     }
   }
 
-  lib_04FF::func_6981(self.var_65EA.var_1A5);
+  lib_04FF::func_6981(self.var_65EA.targetname);
 }
 
 modifydamagefordestructibles(param_00, param_01, param_02, param_03) {
@@ -294,7 +294,7 @@ modifydamagefordestructibles(param_00, param_01, param_02, param_03) {
     }
 
     if(var_04 != 0) {
-      var_05 = distance(self.origin, param_03.var_116);
+      var_05 = distance(self.origin, param_03.origin);
       var_06 = lerp(0.1, self.var_65EA lib_04FF::func_45D0("grenadeDamageMult"), var_05 / var_04);
     } else {
       var_06 = self.var_65EA lib_04FF::func_45D0("grenadeDamageMult");
@@ -333,8 +333,8 @@ updatehudoutline() {
   self endon("death");
   self endon("destroyed");
   for(;;) {
-    foreach(var_01 in level.var_744A) {
-      var_01 setoutline(self, var_01.var_1A7);
+    foreach(var_01 in level.players) {
+      var_01 setoutline(self, var_01.team);
     }
 
     wait(3);
@@ -394,7 +394,7 @@ fxstructinit(param_00) {
 }
 
 fxstructapplyparamaters(param_00) {
-  if(!isDefined(level.var_611[param_00.var_6E56["effect"]])) {
+  if(!isDefined(level._effect[param_00.var_6E56["effect"]])) {
     return;
   }
 
@@ -441,18 +441,18 @@ func_36EB() {
 func_2E35(param_00) {
   param_00.var_65EA = self;
   param_00.var_6DA7 = undefined;
-  lib_04FF::func_6983(self.var_1A5);
+  lib_04FF::func_6983(self.targetname);
   if(!isDefined(param_00.var_6DA7)) {
     return;
   }
 
-  var_01 = maps\mp\gametypes\_gameobjects::func_2837(game["defenders"], param_00, [], param_00.var_116, 1, 1);
+  var_01 = maps\mp\gametypes\_gameobjects::func_2837(game["defenders"], param_00, [], param_00.origin, 1, 1);
   var_01 maps\mp\gametypes\_gameobjects::func_C30("friendly");
   var_01 maps\mp\gametypes\_gameobjects::func_8A60("any");
   var_01 maps\mp\gametypes\_gameobjects::func_8A59(&"RAIDS_RESUPPLY_USING_DEST");
   var_01 maps\mp\gametypes\_gameobjects::func_8A57(&"RAIDS_USE_CONSTRUCT");
   var_01.var_A23E = 7;
-  var_01.var_1B9 = "repair_trigger";
+  var_01.type = "repair_trigger";
   var_01.var_695F = 1;
   var_01.var_A414 = 1;
   var_01 maps\mp\gametypes\_gameobjects::func_8A5A(1);
@@ -460,7 +460,7 @@ func_2E35(param_00) {
   var_01.var_6AFA = ::func_2E26;
   param_00.var_7D0D = var_01;
   var_01 maps\mp\gametypes\_gameobjects::func_2F93();
-  lib_04FF::func_6982(self.var_1A5);
+  lib_04FF::func_6982(self.targetname);
   var_01 maps\mp\gametypes\_gameobjects::func_2D58();
 }
 
@@ -494,8 +494,8 @@ runovertimezone(param_00) {
   var_03 = [];
   var_04 = min(10, self.var_6896) * 1000;
   var_05 = maps\mp\gametypes\_gameobjects::func_2837(var_02, param_00, var_03, var_01, 0, 1);
-  var_05 thread destructionovertimeupdate(self.var_1A5);
-  lib_04FF::func_6982(self.var_1A5);
+  var_05 thread destructionovertimeupdate(self.targetname);
+  lib_04FF::func_6982(self.targetname);
   var_05 maps\mp\gametypes\_gameobjects::func_2F93();
   var_05 maps\mp\gametypes\_gameobjects::deleteuseobjectobjectives();
   waittillframeend;
@@ -510,7 +510,7 @@ destructionobjectiveupdate(param_00) {
       lib_04F3::func_79CE(game["music"]["stinger_pos"], game["attackers"]);
       lib_04F3::func_79CE(game["music"]["stinger_neg"], game["defenders"]);
       var_02 = var_01 - self.var_6896 * 1000;
-      param_00 lib_04FF::func_8615(var_02);
+      param_00 lib_04FF::playlocalsound(var_02);
     }
 
     self waittill("prop_destroyed");

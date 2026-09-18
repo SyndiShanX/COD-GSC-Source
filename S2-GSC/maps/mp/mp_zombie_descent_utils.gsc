@@ -44,7 +44,7 @@ flag_try_set(param_00) {
     return;
   }
 
-  common_scripts\utility::func_3C8F(param_00);
+  common_scripts\utility::flag_set(param_00);
 }
 
 lockin_system_monitor_death() {
@@ -234,7 +234,7 @@ initwavestories() {
 }
 
 vo_intro() {
-  while(!level.var_3FA6) {
+  while(!level.gamehasstarted) {
     wait 0.05;
   }
 
@@ -630,7 +630,7 @@ vo_whisper_think(param_00, param_01) {
     }
 
     if(var_02.size > 0) {
-      var_03 = common_scripts\utility::func_7A33(var_02);
+      var_03 = common_scripts\utility::random(var_02);
       var_02 = common_scripts\utility::func_F93(var_02, var_03);
       vo_play_klaus_line_on_player(var_03);
       if(var_02.size <= 0) {
@@ -856,7 +856,7 @@ spine_pickup_anim(param_00) {
 
   var_02 = var_01 getcurrentweapon();
   var_01 common_scripts\utility::func_603();
-  var_01 common_scripts\utility::func_600();
+  var_01 common_scripts\utility::_disableoffhandweapons();
   var_01 lib_0586::func_78C(param_00);
   var_01 lib_0586::func_78E(param_00, 1);
   var_01 allowjump(0);
@@ -900,8 +900,8 @@ wait_for_weapon_change(param_00) {
 }
 
 set_fx(param_00, param_01) {
-  if(isDefined(self.var_3F2F)) {
-    self.var_3F2F delete();
+  if(isDefined(self.fx)) {
+    self.fx delete();
   }
 
   if(!isDefined(param_01)) {
@@ -909,14 +909,14 @@ set_fx(param_00, param_01) {
   }
 
   self.var_3F74 = param_00;
-  self.var_3F2F = spawnlinkedfx(common_scripts\utility::func_44F5(param_00), self, param_01);
-  triggerfx(self.var_3F2F);
+  self.fx = spawnlinkedfx(common_scripts\utility::func_44F5(param_00), self, param_01);
+  triggerfx(self.fx);
   if(function_01EF(self)) {
-    maps / mp / agents / _agent_utility::deleteentonagentdeath(self.var_3F2F);
+    maps / mp / agents / _agent_utility::deleteentonagentdeath(self.fx);
     return;
   }
 
-  self.var_3F2F thread lib_0547::func_2D19(self);
+  self.fx thread lib_0547::func_2D19(self);
 }
 
 wait_for_player_close(param_00) {

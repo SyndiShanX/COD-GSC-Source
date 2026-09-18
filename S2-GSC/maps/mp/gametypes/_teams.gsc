@@ -89,7 +89,7 @@ func_9BC3() {
   self.timeplayed["allies"] = 0;
   self.timeplayed["axis"] = 0;
   self.timeplayed["other"] = 0;
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   for(;;) {
     if(game["state"] == "playing") {
       if(self.sessionteam == "allies") {
@@ -133,21 +133,21 @@ func_A14E() {
   }
 
   if(self.timeplayed["allies"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedAllies", self.timeplayed["allies"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["allies"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["allies"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedAllies", self.timeplayed["allies"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedTotal", self.timeplayed["allies"]);
+    maps\mp\gametypes\_persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["allies"]);
   }
 
   if(self.timeplayed["axis"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedOpfor", self.timeplayed["axis"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["axis"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["axis"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedOpfor", self.timeplayed["axis"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedTotal", self.timeplayed["axis"]);
+    maps\mp\gametypes\_persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["axis"]);
   }
 
   if(self.timeplayed["other"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedOther", self.timeplayed["other"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["other"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["other"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedOther", self.timeplayed["other"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedTotal", self.timeplayed["other"]);
+    maps\mp\gametypes\_persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["other"]);
   }
 
   if(game["state"] == "postgame") {
@@ -187,7 +187,7 @@ func_A171() {
   level.var_9858 = sv_maxclients / 2;
   level thread func_A172();
   wait(0.15);
-  if(level.var_984C && maps\mp\_utility::func_57B2()) {
+  if(level.var_984C && maps\mp\_utility::isroundbased()) {
     if(isDefined(game["BalanceTeamsNextRound"])) {
       iprintlnbold(&"MP_AUTOBALANCE_NEXT_ROUND");
     }
@@ -505,21 +505,21 @@ func_A114() {
   }
 
   if(self.timeplayed["allies"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedAllies", self.timeplayed["allies"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["allies"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["allies"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedAllies", self.timeplayed["allies"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedTotal", self.timeplayed["allies"]);
+    maps\mp\gametypes\_persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["allies"]);
   }
 
   if(self.timeplayed["axis"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedOpfor", self.timeplayed["axis"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["axis"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["axis"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedOpfor", self.timeplayed["axis"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedTotal", self.timeplayed["axis"]);
+    maps\mp\gametypes\_persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["axis"]);
   }
 
   if(self.timeplayed["other"]) {
-    maps\mp\gametypes\_persistence::func_9315("timePlayedOther", self.timeplayed["other"]);
-    maps\mp\gametypes\_persistence::func_9315("timePlayedTotal", self.timeplayed["other"]);
-    maps\mp\gametypes\_persistence::func_9318("round", "timePlayed", self.timeplayed["other"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedOther", self.timeplayed["other"]);
+    maps\mp\gametypes\_persistence::stataddbuffered("timePlayedTotal", self.timeplayed["other"]);
+    maps\mp\gametypes\_persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["other"]);
   }
 
   if(game["state"] == "postgame") {
@@ -632,7 +632,7 @@ func_46CD(param_00) {
 }
 
 func_46C5(param_00) {
-  return (common_scripts\utility::func_9468(tablelookup("mp/factionTable.csv", 0, game[param_00], 14)), common_scripts\utility::func_9468(tablelookup("mp/factionTable.csv", 0, game[param_00], 15)), common_scripts\utility::func_9468(tablelookup("mp/factionTable.csv", 0, game[param_00], 16)));
+  return (common_scripts\utility::stringtofloat(tablelookup("mp/factionTable.csv", 0, game[param_00], 14)), common_scripts\utility::stringtofloat(tablelookup("mp/factionTable.csv", 0, game[param_00], 15)), common_scripts\utility::stringtofloat(tablelookup("mp/factionTable.csv", 0, game[param_00], 16)));
 }
 
 func_46C6(param_00) {

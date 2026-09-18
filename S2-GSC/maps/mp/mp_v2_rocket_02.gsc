@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_v2_rocket_02_precache::func_F9();
-  maps\createart\mp_v2_rocket_02_art::func_F9();
-  maps\mp\mp_v2_rocket_02_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_v2_rocket_02_lighting::func_F9();
-  maps\mp\mp_v2_rocket_02_aud::func_F9();
+  maps\mp\mp_v2_rocket_02_precache::main();
+  maps\createart\mp_v2_rocket_02_art::main();
+  maps\mp\mp_v2_rocket_02_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_v2_rocket_02_lighting::main();
+  maps\mp\mp_v2_rocket_02_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_v2_rocket_02");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -48,7 +48,7 @@ func_00F9() {
   thread animate_trucks();
   thread deletepostshipents();
   level.alarmarray = getEntArray("alarm_red", "targetname");
-  if(level.var_3FDC != "prop") {
+  if(level.gametype != "prop") {
     thread rocketengine();
   }
 
@@ -67,10 +67,10 @@ deletepostshipents() {
   var_00 = 0;
   var_01 = 3;
   var_02 = getEntArray("script_model", "classname");
-  var_02 = common_scripts\utility::func_F92(var_02);
+  var_02 = common_scripts\utility::array_randomize(var_02);
   foreach(var_04 in var_02) {
-    if(isDefined(var_04.var_106) && isstring(var_04.var_106)) {
-      if(var_04.var_106 == "mp_lase2_dyn_chain_quater" || var_04.var_106 == "v2_rocket_windsock_01") {
+    if(isDefined(var_04.model) && isstring(var_04.model)) {
+      if(var_04.model == "mp_lase2_dyn_chain_quater" || var_04.model == "v2_rocket_windsock_01") {
         var_00++;
         if(var_00 == var_01) {
           var_00 = 0;
@@ -84,8 +84,8 @@ deletepostshipents() {
 
   var_06 = getEntArray("script_brushmodel", "classname");
   foreach(var_08 in var_06) {
-    if(isDefined(var_08.var_1A5) && isstring(var_08.var_1A5)) {
-      if(issubstr(var_08.var_1A5, "patchclip_player_")) {
+    if(isDefined(var_08.targetname) && isstring(var_08.targetname)) {
+      if(issubstr(var_08.targetname, "patchclip_player_")) {
         var_08 delete();
       }
     }
@@ -95,9 +95,9 @@ deletepostshipents() {
 animate_tanks() {
   var_00 = getEntArray("tank_scripted_node", "targetname");
   foreach(var_02 in var_00) {
-    var_03 = spawn("script_model", var_02.var_116);
+    var_03 = spawn("script_model", var_02.origin);
     var_03 setModel("rkt_tank_oxygen_rig");
-    var_03 method_8495("rkt_convoy_tank_anim", var_02.var_116, var_02.var_1D);
+    var_03 method_8495("rkt_convoy_tank_anim", var_02.origin, var_02.var_1D);
     wait(20);
   }
 }
@@ -105,9 +105,9 @@ animate_tanks() {
 animate_trucks() {
   var_00 = getEntArray("truck_scripted_node", "targetname");
   foreach(var_02 in var_00) {
-    var_03 = spawn("script_model", var_02.var_116);
+    var_03 = spawn("script_model", var_02.origin);
     var_03 setModel("vehicle_ger_trans_opel_blitz");
-    var_03 method_8495("rkt_convoy_truck_anim", var_02.var_116, var_02.var_1D);
+    var_03 method_8495("rkt_convoy_truck_anim", var_02.origin, var_02.var_1D);
     var_03 lib_0378::func_8D74("aud_mp_rocket_facility_truck_drive");
     wait(20);
   }
@@ -116,7 +116,7 @@ animate_trucks() {
 setuprocketkillcament() {
   var_00 = spawn("script_model", (0, 0, 0));
   var_00 setModel("tag_origin");
-  var_00.var_116 = (-669, 762, 487);
+  var_00.origin = (-669, 762, 487);
   var_00.var_1D = (7.76, 0, 0);
   var_00 setscriptmoverkillcam("script_entity");
   self.var_5A2C = var_00;
@@ -129,9 +129,9 @@ rocketengine() {
   var_02 = 10;
   var_03 = 120;
   var_04 = getEnt("rocket_engine_trigger", "targetname");
-  var_04.var_6C4E = var_04.var_116;
+  var_04.var_6C4E = var_04.origin;
   var_04 method_808C();
-  var_04.var_116 = var_04.var_116 + (0, 0, -5000);
+  var_04.origin = var_04.origin + (0, 0, -5000);
   var_04.damage_on = 0;
   var_05 = getEnt("rocket_button", "targetname");
   var_05 makeusable();
@@ -145,42 +145,42 @@ rocketengine() {
   var_0B = loadfx("vfx/lights/aircraft_light_red_blink_large");
   var_0C = loadfx("vfx/map/mp_v2_rocket/mp_v2_light_blink_green");
   wait(1);
-  var_0D = spawnfx(var_0C, var_06.var_116);
+  var_0D = spawnfx(var_0C, var_06.origin);
   triggerfx(var_0D);
   for(;;) {
     var_05 waittill("trigger", var_0E);
     var_05 makeunusable();
     var_0D delete();
-    var_0F = spawnfx(var_0B, var_06.var_116);
+    var_0F = spawnfx(var_0B, var_06.origin);
     triggerfx(var_0F);
     if(isDefined(level.alarmarray)) {
       thread alarm_flash(var_01);
     }
 
-    lib_0378::func_8D74("aud_v2_rocket_siren_start", var_08.var_116);
+    lib_0378::func_8D74("aud_v2_rocket_siren_start", var_08.origin);
     lib_0378::func_8D74("aud_v2_rocket_engine_fire_start");
     wait(var_01 - var_00);
     var_05.var_5A2C.var_5A32 = gettime();
     wait(var_00);
     var_04 method_808C();
-    var_04.var_116 = var_04.var_6C4E;
+    var_04.origin = var_04.var_6C4E;
     var_04.damage_on = 1;
     thread triggerdamage(var_04, var_0E, var_05);
-    var_10 = spawnfx(var_09, var_08.var_116, anglesToForward(var_08.var_1D) * -1, anglestoup(var_08.var_1D) * -1);
+    var_10 = spawnfx(var_09, var_08.origin, anglesToForward(var_08.var_1D) * -1, anglestoup(var_08.var_1D) * -1);
     triggerfx(var_10);
     var_10 thread smokethink(var_02);
     foreach(var_12 in var_07) {
-      var_13 = spawnfx(var_0A, var_12.var_116, anglesToForward(var_12.var_1D), anglestoup(var_12.var_1D));
+      var_13 = spawnfx(var_0A, var_12.origin, anglesToForward(var_12.var_1D), anglestoup(var_12.var_1D));
       triggerfx(var_13);
       var_13 thread smokethink(var_02);
     }
 
     wait(var_02);
     var_04.damage_on = 0;
-    var_04.var_116 = var_04.var_116 + (0, 0, -5000);
+    var_04.origin = var_04.origin + (0, 0, -5000);
     wait(var_03 - var_02 - var_01);
     var_0F delete();
-    var_0D = spawnfx(var_0C, var_06.var_116);
+    var_0D = spawnfx(var_0C, var_06.origin);
     triggerfx(var_0D);
     var_05 makeusable();
   }
@@ -188,10 +188,10 @@ rocketengine() {
 
 hidealarmmeshes() {
   foreach(var_01 in level.alarmarray) {
-    var_01.light_mesh = getEnt(var_01.var_1A2, "targetname");
+    var_01.light_mesh = getEnt(var_01.target, "targetname");
     if(isDefined(var_01.light_mesh)) {
       var_01.light_mesh linkTo(var_01);
-      var_01.light_mesh method_805C();
+      var_01.light_mesh save_undo_buffer();
     }
   }
 }
@@ -225,15 +225,15 @@ alarm_off() {
 
 triggerdamage(param_00, param_01, param_02) {
   while(param_00.damage_on == 1) {
-    foreach(var_04 in level.var_744A) {
+    foreach(var_04 in level.players) {
       if(isDefined(var_04) && isalive(var_04)) {
         if(var_04 istouching(param_00)) {
-          if(var_04.var_1A7 == param_01.var_1A7 && var_04 != param_01) {
-            var_04 dodamage(17, var_04.var_116, undefined, param_02, "MOD_BURNED");
+          if(var_04.team == param_01.team && var_04 != param_01) {
+            var_04 dodamage(17, var_04.origin, undefined, param_02, "MOD_BURNED");
             continue;
           }
 
-          var_04 dodamage(17, var_04.var_116, param_01, param_02, "MOD_BURNED");
+          var_04 dodamage(17, var_04.origin, param_01, param_02, "MOD_BURNED");
         }
       }
     }

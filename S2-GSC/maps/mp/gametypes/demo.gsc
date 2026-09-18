@@ -9,25 +9,25 @@ main() {
   }
 
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.gametype, 1, 0, 9);
-    maps\mp\_utility::func_7BFA(level.gametype, 5);
-    maps\mp\_utility::func_7BF9(level.gametype, 3);
-    maps\mp\_utility::func_7BF7(level.gametype, 2);
-    maps\mp\_utility::func_7C04(level.gametype, 1);
-    maps\mp\_utility::func_7BF1(level.gametype, 0);
-    maps\mp\_utility::func_7BE5(level.gametype, 1);
+    maps\mp\_utility::registerroundswitchdvar(level.gametype, 1, 0, 9);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 5);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 3);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 2);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 1);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
 
-  maps\mp\_utility::func_86EB(2.5);
+  maps\mp\_utility::setovertimelimitdvar(2.5);
   level.var_2D64 = 1;
   maps\mp\_utility::func_873B(1);
   level.var_4959 = 0;
@@ -60,7 +60,7 @@ func_5300() {
   maps\mp\_utility::func_8653();
   var_00 = getmatchrulesdata("demoData", "roundSwitch");
   setdynamicdvar("scr_demo_roundswitch", var_00);
-  maps\mp\_utility::func_7BF8("demo", var_00, 0, 9);
+  maps\mp\_utility::registerroundswitchdvar("demo", var_00, 0, 9);
   setdynamicdvar("scr_demo_bombtimer", getmatchrulesdata("demoData", "bombTimer"));
   setdynamicdvar("scr_demo_planttime", getmatchrulesdata("demoData", "plantTime"));
   setdynamicdvar("scr_demo_defusetime", getmatchrulesdata("demoData", "defuseTime"));
@@ -68,13 +68,13 @@ func_5300() {
   setdynamicdvar("scr_demo_silentplant", getmatchrulesdata("demoData", "silentPlant"));
   setdynamicdvar("scr_demo_extratime", getmatchrulesdata("demoData", "extraTime"));
   setdynamicdvar("scr_demo_winlimit", 1);
-  maps\mp\_utility::func_7C04("demo", 1);
+  maps\mp\_utility::registerwinlimitdvar("demo", 1);
   setdynamicdvar("scr_demo_roundlimit", 1);
-  maps\mp\_utility::func_7BF7("demo", 1);
+  maps\mp\_utility::registerroundlimitdvar("demo", 1);
   setdynamicdvar("scr_demo_scorelimit", 3);
-  maps\mp\_utility::func_7BF9("demo", 3);
+  maps\mp\_utility::registerscorelimitdvar("demo", 3);
   setdynamicdvar("scr_demo_halftime", 1);
-  maps\mp\_utility::func_7BE5("demo", 1);
+  maps\mp\_utility::registerhalftimedvar("demo", 1);
   setdynamicdvar("scr_demo_halftimeswitchsides", getmatchrulesdata("demoData", "halfTimeSwitchSides"));
 }
 
@@ -100,19 +100,19 @@ func_6BAF() {
   }
 
   setclientnamemode("manual_change");
-  level.var_611["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
-  maps\mp\_utility::func_86DC(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
-  maps\mp\_utility::func_86DC(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
+  level._effect["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
+  maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+  maps\mp\_utility::setobjectivetext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
-    maps\mp\_utility::func_86DB(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
-    maps\mp\_utility::func_86DB(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
-    maps\mp\_utility::func_86DB(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
   }
 
-  maps\mp\_utility::func_86D8(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
-  maps\mp\_utility::func_86D8(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
+  maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
+  maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   lib_050D::func_10E4();
   var_02[0] = "blocker_demo";
   if(game["status"] == "overtime") {
@@ -325,8 +325,8 @@ func_18FD() {
     var_0B.var_568E = 0;
     var_0B.var_18F9 = 0;
     for(var_0D = 0; var_0D < var_03.size; var_0D++) {
-      if(isDefined(var_03[var_0D].var_8186)) {
-        var_0B.var_3947 = var_03[var_0D].var_8186;
+      if(isDefined(var_03[var_0D].setdepthoffield)) {
+        var_0B.var_3947 = var_03[var_0D].setdepthoffield;
         var_03[var_0D] thread func_8A29(var_0B);
         break;
       }
@@ -360,9 +360,9 @@ func_6BC8(param_00) {
     param_00 notify("bomb_planted");
     param_00 thread maps\mp\_events::func_18FC();
     param_00 thread lib_0468::func_A22("demoBombPlanted");
-    maps\mp\_utility::func_5C39("bomb_planted");
-    maps\mp\_utility::func_74D9(game["bomb_planted_sound"], game["attackers"]);
-    maps\mp\_utility::func_74D9(game["bomb_planted_enemy_sound"], game["defenders"]);
+    maps\mp\_utility::leaderdialog("bomb_planted");
+    maps\mp\_utility::playsoundonplayers(game["bomb_planted_sound"], game["attackers"]);
+    maps\mp\_utility::playsoundonplayers(game["bomb_planted_enemy_sound"], game["defenders"]);
     self.var_18F8 = param_00;
     self.var_18F9 = 1;
     param_00.var_18FB = gettime();
@@ -478,8 +478,8 @@ func_18F9(param_00, param_01) {
   }
 
   maps\mp\gametypes\_gamelogic::func_6F27();
-  if(maps\mp\_utility::func_4502() && game["status"] != "halftime") {
-    setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::func_46E5()) - int(maps\mp\_utility::func_46E2() * 60 * 1000 * 0.5), 1);
+  if(maps\mp\_utility::gethalftime() && game["status"] != "halftime") {
+    setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::func_46E5()) - int(maps\mp\_utility::gettimelimit() * 60 * 1000 * 0.5), 1);
   } else {
     setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::func_46E5()), 1);
   }
@@ -521,7 +521,7 @@ func_18F9(param_00, param_01) {
   var_08.origin = var_04.origin;
   var_08.var_7AC4 = undefined;
   var_09 = [];
-  var_0A = maps\mp\gametypes\_gameobjects::func_2837(maps\mp\_utility::func_45DE(var_02), var_08, var_09, (0, 0, 32));
+  var_0A = maps\mp\gametypes\_gameobjects::func_2837(maps\mp\_utility::getotherteam(var_02), var_08, var_09, (0, 0, 32));
   var_0A maps\mp\gametypes\_gameobjects::func_C30("friendly");
   var_0A maps\mp\gametypes\_gameobjects::func_8A5A(level.var_2CA9);
   var_0A maps\mp\gametypes\_gameobjects::func_8A57(&"PLATFORM_HOLD_TO_DEFUSE_EXPLOSIVES");
@@ -545,7 +545,7 @@ func_18F9(param_00, param_01) {
     setomnvar("ui_broadcaster_game_mode_status_1", 2);
   }
 
-  maps\mp\_utility::func_74D8("mp_snd_bomb_planted", var_04.origin + (0, 0, 1));
+  maps\mp\_utility::playsoundinspace("mp_snd_bomb_planted", var_04.origin + (0, 0, 1));
   param_00 func_190B(var_03);
   param_00.var_A582[0] maps\mp\gametypes\_gamelogic::func_9415();
   if(level.gameended || param_00.var_568E) {
@@ -582,14 +582,14 @@ func_18F9(param_00, param_01) {
 
   var_0F = randomfloat(360);
   var_10 = var_0D + (0, 0, 50);
-  var_11 = spawnfx(level.var_611[var_0E], var_10 + (0, 0, 50), (0, 0, 1), (cos(var_0F), sin(var_0F), 0));
+  var_11 = spawnfx(level._effect[var_0E], var_10 + (0, 0, 50), (0, 0, 1), (cos(var_0F), sin(var_0F), 0));
   triggerfx(var_11);
   physicsexplosionsphere(var_10, 200, 100, 3);
   playrumbleonposition("grenade_rumble", var_0D);
   earthquake(0.75, 2, var_0D, 2000);
-  thread maps\mp\_utility::func_74D8("mp_snd_bomb_detonated", var_0D);
+  thread maps\mp\_utility::playsoundinspace("mp_snd_bomb_detonated", var_0D);
   if(isDefined(param_00.var_3947)) {
-    common_scripts\_exploder::func_392A(param_00.var_3947);
+    common_scripts\_exploder::exploder(param_00.var_3947);
   }
 
   var_0A maps\mp\gametypes\_gameobjects::func_2F93();
@@ -605,8 +605,8 @@ func_18F9(param_00, param_01) {
     func_2D63(var_02, game["end_reason"]["target_destroyed"]);
   }
 
-  if(maps\mp\_utility::func_4502() && game["status"] != "halftime") {
-    setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::func_46E5()) - int(maps\mp\_utility::func_46E2() * 60 * 1000 * 0.5), 1);
+  if(maps\mp\_utility::gethalftime() && game["status"] != "halftime") {
+    setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::func_46E5()) - int(maps\mp\_utility::gettimelimit() * 60 * 1000 * 0.5), 1);
   } else {
     setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::func_46E5()), 1);
   }
@@ -646,8 +646,8 @@ func_6BC3(param_00) {
   level.var_686C--;
   if(level.var_686C < 1) {
     maps\mp\gametypes\_gamelogic::func_7DFC();
-    if(maps\mp\_utility::func_4502() && game["status"] != "halftime") {
-      setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::func_46E5()) - int(maps\mp\_utility::func_46E2() * 60 * 1000 * 0.5), 1);
+    if(maps\mp\_utility::gethalftime() && game["status"] != "halftime") {
+      setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::func_46E5()) - int(maps\mp\_utility::gettimelimit() * 60 * 1000 * 0.5), 1);
     } else {
       setgameendtime(gettime() + int(maps\mp\gametypes\_gamelogic::func_46E5()), 1);
     }
@@ -665,12 +665,12 @@ func_6BC3(param_00) {
 
   self.var_190E maps\mp\gametypes\_gameobjects::func_C30(var_01);
   self.var_190E maps\mp\gametypes\_gameobjects::func_8A60("any");
-  maps\mp\_utility::func_5C39("bomb_defused_attackers", game["attackers"]);
-  maps\mp\_utility::func_5C39("bomb_defused_defenders", game["defenders"]);
-  maps\mp\_utility::func_74D9(game["bomb_disarm_enemy_sound"], game["attackers"]);
-  maps\mp\_utility::func_74D9(game["bomb_disarm_sound"], game["defenders"]);
+  maps\mp\_utility::leaderdialog("bomb_defused_attackers", game["attackers"]);
+  maps\mp\_utility::leaderdialog("bomb_defused_defenders", game["defenders"]);
+  maps\mp\_utility::playsoundonplayers(game["bomb_disarm_enemy_sound"], game["attackers"]);
+  maps\mp\_utility::playsoundonplayers(game["bomb_disarm_sound"], game["defenders"]);
   var_02 = "defuse";
-  if(isDefined(self.var_190E.var_18F8) && maps\mp\_utility::func_57A0(self.var_190E.var_18F8) && self.var_190E.var_18F8.var_18FB + 6000 + level.var_2CA9 * 1000 > gettime()) {
+  if(isDefined(self.var_190E.var_18F8) && maps\mp\_utility::isreallyalive(self.var_190E.var_18F8) && self.var_190E.var_18F8.var_18FB + 6000 + level.var_2CA9 * 1000 > gettime()) {
     var_02 = "ninja_defuse";
   }
 
@@ -742,7 +742,7 @@ func_2D63(param_00, param_01) {
 
   if(game["status"] == "normal") {
     if(param_01 == game["end_reason"]["target_destroyed"]) {
-      game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::func_471A("timelimit") * 60 * 1000 / 2;
+      game["roundMillisecondsAlreadyPassed"] = maps\mp\_utility::getwatcheddvar("timelimit") * 60 * 1000 / 2;
     }
 
     param_00 = "halftime";

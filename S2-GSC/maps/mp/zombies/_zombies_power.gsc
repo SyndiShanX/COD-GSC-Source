@@ -20,7 +20,7 @@ func_7603() {
     return;
   }
 
-  common_scripts\utility::func_3C87(self.var_819A);
+  common_scripts\utility::flag_init(self.var_819A);
   self.var_8BF7 = [];
   self.var_4D07 = [];
   var_00 = getEntArray(self.target, "targetname");
@@ -164,7 +164,7 @@ func_7604() {
     level.var_75FD = 1;
     self.var_9D65 setHintString("");
     self notify("on");
-    common_scripts\utility::func_3C8F(self.var_819A);
+    common_scripts\utility::flag_set(self.var_819A);
     lib_0378::func_8D74("generator_power_switch_state", "starting");
     if(isDefined(var_01)) {
       var_01 delete();
@@ -248,7 +248,7 @@ func_75FE() {
     self hide();
     common_scripts\utility::func_3C9F(self.var_819A);
     self show();
-    common_scripts\utility::func_3CA9(self.var_819A);
+    common_scripts\utility::flag_waitopen(self.var_819A);
   }
 }
 
@@ -263,7 +263,7 @@ func_75FA() {
     self show();
     common_scripts\utility::func_3C9F(self.var_819A);
     self hide();
-    common_scripts\utility::func_3CA9(self.var_819A);
+    common_scripts\utility::flag_waitopen(self.var_819A);
   }
 }
 

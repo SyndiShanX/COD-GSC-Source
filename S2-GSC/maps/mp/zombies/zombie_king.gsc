@@ -33,36 +33,36 @@ init() {
   thread validate_level_setup();
   lib_0547::func_7BD0("king_default", ::state_default_run, ::state_default_interrupt, 100, ::state_default_end);
   lib_0547::func_7BD0("king_stand_pain", ::anim_state_stand_pain_run, ::anim_state_stand_pain_interrupt, 149, ::anim_state_stand_pain_end);
-  level.var_611["zmb_king_gk_levitation"] = loadfx("vfx/zombie/zmb_king_gk_levitation");
-  level.var_611["zmb_king_gk_blood_levitation"] = loadfx("vfx/zombie/zmb_king_gk_blood_levitation");
-  level.var_611["zmb_king_gk_blood_levitation_chn_1"] = loadfx("vfx/zombie/zmb_king_gk_blood_levitation_chn_1");
-  level.var_611["zmb_king_gk_blood_levitation_chn_2"] = loadfx("vfx/zombie/zmb_king_gk_blood_levitation_chn_2");
-  level.var_611["zmb_king_gk_blood_levitation_chn_3"] = loadfx("vfx/zombie/zmb_king_gk_blood_levitation_chn_3");
-  level.var_611["zmb_king_gk_death_levitation"] = loadfx("vfx/zombie/zmb_king_gk_death_levitation");
-  level.var_611["zmb_king_gk_death_levitation_chn_1"] = loadfx("vfx/zombie/zmb_king_gk_death_levitation_chn_1");
-  level.var_611["zmb_king_gk_death_levitation_chn_2"] = loadfx("vfx/zombie/zmb_king_gk_death_levitation_chn_2");
-  level.var_611["zmb_king_gk_death_levitation_chn_3"] = loadfx("vfx/zombie/zmb_king_gk_death_levitation_chn_3");
-  level.var_611["zmb_king_gk_moon_levitation"] = loadfx("vfx/zombie/zmb_king_gk_moon_levitation");
-  level.var_611["zmb_king_gk_moon_levitation_chn_1"] = loadfx("vfx/zombie/zmb_king_gk_moon_levitation_chn_1");
-  level.var_611["zmb_king_gk_moon_levitation_chn_2"] = loadfx("vfx/zombie/zmb_king_gk_moon_levitation_chn_2");
-  level.var_611["zmb_king_gk_moon_levitation_chn_3"] = loadfx("vfx/zombie/zmb_king_gk_moon_levitation_chn_3");
-  level.var_611["zmb_king_gk_storm_levitation"] = loadfx("vfx/zombie/zmb_king_gk_storm_levitation");
-  level.var_611["zmb_king_gk_storm_levitation_chn_1"] = loadfx("vfx/zombie/zmb_king_gk_storm_levitation_chn_1");
-  level.var_611["zmb_king_gk_storm_levitation_chn_2"] = loadfx("vfx/zombie/zmb_king_gk_storm_levitation_chn_2");
-  level.var_611["zmb_king_gk_storm_levitation_chn_3"] = loadfx("vfx/zombie/zmb_king_gk_storm_levitation_chn_3");
-  level.var_611["zmb_king_gk_levitation"] = loadfx("vfx/zombie/zmb_king_gk_levitation");
-  level.var_611["zmb_king_gk_levitation_chn_1"] = loadfx("vfx/zombie/zmb_king_gk_levitation_chn_1");
-  level.var_611["zmb_king_gk_levitation_chn_2"] = loadfx("vfx/zombie/zmb_king_gk_levitation_chn_2");
-  level.var_611["zmb_king_gk_levitation_chn_3"] = loadfx("vfx/zombie/zmb_king_gk_levitation_chn_3");
-  level.var_611["zmb_gk_geistbomb_trail"] = loadfx("vfx/trail/zmb_gk_geistbomb_trail");
-  level.var_611["zmb_godking_giestbomb"] = loadfx("vfx/zombie/zmb_godking_giestbomb");
-  level.var_611["zmb_godking_giestbomb_prime"] = loadfx("vfx/zombie/zmb_godking_giestbomb_prime");
-  level.var_611["zmb_gk_lightsun_blast"] = loadfx("vfx/zombie/zmb_gk_lightsun_blast");
-  level.var_611["zmb_gk_lightsun_buildup"] = loadfx("vfx/zombie/zmb_gk_lightsun_buildup");
-  level.var_611["zmb_godking_gk_impact"] = loadfx("vfx/zombie/zmb_godking_gk_impact");
-  level.var_611["zmb_godking_sword_protection"] = loadfx("vfx/zombie/zmb_godking_sword_protection");
-  level.var_611["blood_godking_impact_burst"] = loadfx("vfx/blood/blood_godking_impact_burst");
-  level.var_611["zmf_corpse_eater_smoldering"] = loadfx("vfx/zombie/prototype_fx/zmf_corpse_eater_smoldering");
+  level._effect["zmb_king_gk_levitation"] = loadfx("vfx/zombie/zmb_king_gk_levitation");
+  level._effect["zmb_king_gk_blood_levitation"] = loadfx("vfx/zombie/zmb_king_gk_blood_levitation");
+  level._effect["zmb_king_gk_blood_levitation_chn_1"] = loadfx("vfx/zombie/zmb_king_gk_blood_levitation_chn_1");
+  level._effect["zmb_king_gk_blood_levitation_chn_2"] = loadfx("vfx/zombie/zmb_king_gk_blood_levitation_chn_2");
+  level._effect["zmb_king_gk_blood_levitation_chn_3"] = loadfx("vfx/zombie/zmb_king_gk_blood_levitation_chn_3");
+  level._effect["zmb_king_gk_death_levitation"] = loadfx("vfx/zombie/zmb_king_gk_death_levitation");
+  level._effect["zmb_king_gk_death_levitation_chn_1"] = loadfx("vfx/zombie/zmb_king_gk_death_levitation_chn_1");
+  level._effect["zmb_king_gk_death_levitation_chn_2"] = loadfx("vfx/zombie/zmb_king_gk_death_levitation_chn_2");
+  level._effect["zmb_king_gk_death_levitation_chn_3"] = loadfx("vfx/zombie/zmb_king_gk_death_levitation_chn_3");
+  level._effect["zmb_king_gk_moon_levitation"] = loadfx("vfx/zombie/zmb_king_gk_moon_levitation");
+  level._effect["zmb_king_gk_moon_levitation_chn_1"] = loadfx("vfx/zombie/zmb_king_gk_moon_levitation_chn_1");
+  level._effect["zmb_king_gk_moon_levitation_chn_2"] = loadfx("vfx/zombie/zmb_king_gk_moon_levitation_chn_2");
+  level._effect["zmb_king_gk_moon_levitation_chn_3"] = loadfx("vfx/zombie/zmb_king_gk_moon_levitation_chn_3");
+  level._effect["zmb_king_gk_storm_levitation"] = loadfx("vfx/zombie/zmb_king_gk_storm_levitation");
+  level._effect["zmb_king_gk_storm_levitation_chn_1"] = loadfx("vfx/zombie/zmb_king_gk_storm_levitation_chn_1");
+  level._effect["zmb_king_gk_storm_levitation_chn_2"] = loadfx("vfx/zombie/zmb_king_gk_storm_levitation_chn_2");
+  level._effect["zmb_king_gk_storm_levitation_chn_3"] = loadfx("vfx/zombie/zmb_king_gk_storm_levitation_chn_3");
+  level._effect["zmb_king_gk_levitation"] = loadfx("vfx/zombie/zmb_king_gk_levitation");
+  level._effect["zmb_king_gk_levitation_chn_1"] = loadfx("vfx/zombie/zmb_king_gk_levitation_chn_1");
+  level._effect["zmb_king_gk_levitation_chn_2"] = loadfx("vfx/zombie/zmb_king_gk_levitation_chn_2");
+  level._effect["zmb_king_gk_levitation_chn_3"] = loadfx("vfx/zombie/zmb_king_gk_levitation_chn_3");
+  level._effect["zmb_gk_geistbomb_trail"] = loadfx("vfx/trail/zmb_gk_geistbomb_trail");
+  level._effect["zmb_godking_giestbomb"] = loadfx("vfx/zombie/zmb_godking_giestbomb");
+  level._effect["zmb_godking_giestbomb_prime"] = loadfx("vfx/zombie/zmb_godking_giestbomb_prime");
+  level._effect["zmb_gk_lightsun_blast"] = loadfx("vfx/zombie/zmb_gk_lightsun_blast");
+  level._effect["zmb_gk_lightsun_buildup"] = loadfx("vfx/zombie/zmb_gk_lightsun_buildup");
+  level._effect["zmb_godking_gk_impact"] = loadfx("vfx/zombie/zmb_godking_gk_impact");
+  level._effect["zmb_godking_sword_protection"] = loadfx("vfx/zombie/zmb_godking_sword_protection");
+  level._effect["blood_godking_impact_burst"] = loadfx("vfx/blood/blood_godking_impact_burst");
+  level._effect["zmf_corpse_eater_smoldering"] = loadfx("vfx/zombie/prototype_fx/zmf_corpse_eater_smoldering");
 }
 
 king_post_model_vfx() {
@@ -75,7 +75,7 @@ attach_levitation_effects() {
   wait 0.05;
   wait 0.05;
   wait 0.05;
-  playFXOnTag(level.var_611["zmb_king_gk_levitation"], self, "J_Spine4");
+  playFXOnTag(level._effect["zmb_king_gk_levitation"], self, "J_Spine4");
 }
 
 validate_level_setup() {
@@ -122,14 +122,14 @@ king_think_setup() {
   self.nopairmelee = 1;
   self.var_66EC = 1;
   self.height = 100;
-  self.var_14F = 32;
-  self.var_2BCA = self.var_14F + 1;
+  self.radius = 32;
+  self.var_2BCA = self.radius + 1;
   self method_8399(self.var_2BCA);
   lib_0547::func_86C8(280);
   lib_0547::func_86C7(280);
   self.candamageallies = 1;
   self.var_2A9D = "death";
-  self.var_11AB = 85 + self.var_14F;
+  self.var_11AB = 85 + self.radius;
   self.var_60F5 = "large";
   self.var_60F6 = 200;
   self.var_60E1 = 40;
@@ -171,7 +171,7 @@ end_condition() {
   var_00 = self;
   var_00 waittill("it_is_over");
   level notify("god_king_defeated");
-  common_scripts\utility::func_3C8F("flag_boss_complete");
+  common_scripts\utility::flag_set("flag_boss_complete");
 }
 
 attacks_init() {
@@ -842,7 +842,7 @@ manage_respawn(param_00) {
   var_03 = undefined;
   for(;;) {
     if(!isDefined(var_01)) {
-      var_03 = lib_054D::func_90BA(param_00, common_scripts\utility::func_7A33(var_02), "final boss fight", 0, 1, 1);
+      var_03 = lib_054D::func_90BA(param_00, common_scripts\utility::random(var_02), "final boss fight", 0, 1, 1);
       if(!isDefined(var_03)) {
         wait(1);
         continue;
@@ -1859,7 +1859,7 @@ detonate_victim(param_00) {
   var_01 = self;
   var_01 endon("death");
   var_01.isempowered = 1;
-  var_01.fuze_fx = spawnlinkedfx(level.var_611["zmf_corpse_eater_smoldering"], var_01, "J_Spine4");
+  var_01.fuze_fx = spawnlinkedfx(level._effect["zmf_corpse_eater_smoldering"], var_01, "J_Spine4");
   triggerfx(var_01.fuze_fx);
   var_01 lib_0378::func_8D74("aud_corpse_eater_fully_charged");
   var_01 maps / mp / agents / _agent_utility::deleteentonagentdeath(var_01.fuze_fx);
@@ -1873,7 +1873,7 @@ try_detonation(param_00) {
   }
 
   var_01 = self gettagorigin("J_Spine4");
-  playFX(level.var_611["zmb_corpse_eater_detonate"], var_01);
+  playFX(level._effect["zmb_corpse_eater_detonate"], var_01);
   lib_0378::func_8D74("aud_corpse_eater_explosion");
   if(common_scripts\utility::func_562E(self.isforceshieldactive)) {
     break_force_shield();
@@ -2051,7 +2051,7 @@ geist_pull_attack_victim(param_00, param_01) {
     }
 
     if(!var_03 && param_00 lib_0547::func_4B2C() && isDefined(var_02.pull_attractor.var_F6D)) {
-      param_00 thread attract_to_boss(common_scripts\utility::func_7A33(var_02.pull_attractor.var_F6D));
+      param_00 thread attract_to_boss(common_scripts\utility::random(var_02.pull_attractor.var_F6D));
       param_00 thread pull_mind_control_fx();
     }
 
@@ -2109,11 +2109,11 @@ spawn_attractor_nodes() {
   var_03.origin = var_00.origin + (0, 115, 0);
   var_04.origin = var_00.origin + (-115, 0, 0);
   var_05.origin = var_00.origin + (0, -115, 0);
-  var_01 method_8449(var_00);
-  var_02 method_8449(var_01);
-  var_03 method_8449(var_01);
-  var_04 method_8449(var_01);
-  var_05 method_8449(var_01);
+  var_01 linktosynchronizedparent(var_00);
+  var_02 linktosynchronizedparent(var_01);
+  var_03 linktosynchronizedparent(var_01);
+  var_04 linktosynchronizedparent(var_01);
+  var_05 linktosynchronizedparent(var_01);
   var_00.pull_attractor = var_01;
   var_00.pull_attractor.var_F6D = [var_02, var_03, var_04, var_05];
   var_00.pull_attractor thread attractor_rotate();
@@ -2359,9 +2359,9 @@ geist_kneel_run(param_00) {
   var_01 = self;
   var_01 endon("disconnect");
   var_01 common_scripts\utility::func_603();
-  var_01 common_scripts\utility::func_600();
+  var_01 common_scripts\utility::_disableoffhandweapons();
   var_01 disableweapons();
-  var_01 maps\mp\_utility::func_3E8E(1);
+  var_01 maps\mp\_utility::freezecontrolswrapper(1);
   var_01 setstance("crouch");
   var_01 setdemigod(1);
   var_01 shellshock("zm_heavy_hit", 1.4, 1);
@@ -2378,7 +2378,7 @@ geist_kneel_run(param_00) {
   var_01 setdemigod(0);
   var_01 unlink(var_01.lerpposent);
   var_01.lerpposent delete();
-  var_01 maps\mp\_utility::func_3E8E(0);
+  var_01 maps\mp\_utility::freezecontrolswrapper(0);
   var_01 enableweapons();
   var_01 lib_0586::func_78E(lib_0547::func_AB2B());
   var_01 common_scripts\utility::func_617();
@@ -2783,14 +2783,14 @@ drain_plate_think(param_00, param_01, param_02) {
   var_03.plate_hit_clip setdamagecallbackon(1);
   var_03.plate_hit_clip.total_damage = 0;
   var_03.plate_hit_clip.my_fount = var_03;
-  var_03.plate_hit_clip.var_29B5 = ::geist_drain_plate_damage;
+  var_03.plate_hit_clip.damagecallback = ::geist_drain_plate_damage;
   var_03 childthread drain_plate(param_00, param_01);
   var_03 drain_end_wait(param_02);
   var_03.drain_fx_ent delete();
   var_03.plate_hit_clip notsolid();
   var_03.plate_hit_clip setCanDamage(0);
   var_03.plate_hit_clip setdamagecallbackon(0);
-  var_03.plate_hit_clip.var_29B5 = undefined;
+  var_03.plate_hit_clip.damagecallback = undefined;
   playFX(common_scripts\utility::func_44F5("zmb_hilt_sphere_explosion"), var_03.plate_model.origin, anglesToForward(var_03.plate_model.angles));
   var_03.fount_active = 0;
 }
@@ -3091,13 +3091,13 @@ attack_flame_wave_run() {
   var_01 = randomfloatrange(0, 360);
   var_02 = anglesToForward((0, var_01, 0));
   if(lib_0547::func_5565(var_00.istrial, 1)) {
-    var_00.var_3F2F = spawnfx(common_scripts\utility::func_44F5("zmb_desc_flame_wave_02"), var_00.origin, (0, 1, 0), (0, 0, 1));
+    var_00.fx = spawnfx(common_scripts\utility::func_44F5("zmb_desc_flame_wave_02"), var_00.origin, (0, 1, 0), (0, 0, 1));
   } else {
-    var_00.var_3F2F = spawnfx(common_scripts\utility::func_44F5("zmb_desc_flame_wave"), var_00.origin, var_02, (0, 0, 1));
+    var_00.fx = spawnfx(common_scripts\utility::func_44F5("zmb_desc_flame_wave"), var_00.origin, var_02, (0, 0, 1));
   }
 
-  function_014E(var_00.var_3F2F, 1);
-  triggerfx(var_00.var_3F2F);
+  function_014E(var_00.fx, 1);
+  triggerfx(var_00.fx);
   var_00 endon("attack_flame_wave_stop");
   var_00 childthread attack_flame_wave_handle_max_timeout();
   var_00 childthread attack_flame_wave_damage();
@@ -3188,8 +3188,8 @@ approximate_script_hit_cylinder(param_00) {
 
   if(isDefined(param_00.var_8303)) {
     var_02 = param_00.var_8303;
-  } else if(isDefined(param_00.var_14F)) {
-    var_02 = param_00.var_14F;
+  } else if(isDefined(param_00.radius)) {
+    var_02 = param_00.radius;
   } else {
     var_02 = 65;
   }
@@ -3203,7 +3203,7 @@ attack_flame_wave_stop() {
   var_00 = self;
   if(common_scripts\utility::func_562E(var_00.var_8BE)) {
     var_00.var_8BE = 0;
-    var_00.var_3F2F delete();
+    var_00.fx delete();
     var_00 notify("attack_flame_wave_stop");
     level notify("flame_wave_end_" + var_00.flame_id);
   }
@@ -3528,7 +3528,7 @@ anim_state_geist_drain_special_run() {
     }
 
     if(isDefined(level.zombie_king_sword)) {
-      playFX(level.var_611["zmb_desc_boss_death_sword_hide"], level.zombie_king_sword.origin, anglesToForward(level.zombie_king_sword.angles));
+      playFX(level._effect["zmb_desc_boss_death_sword_hide"], level.zombie_king_sword.origin, anglesToForward(level.zombie_king_sword.angles));
       level.zombie_king_sword delete();
     }
 
@@ -4250,7 +4250,7 @@ king_enemy_target_is_valid(param_00) {
     return 0;
   }
 
-  if(param_00 method_8541() || isDefined(param_00.owner) && param_00.owner method_8541()) {
+  if(param_00 set_off_exploders() || isDefined(param_00.owner) && param_00.owner set_off_exploders()) {
     return 0;
   }
 
@@ -4407,7 +4407,7 @@ get_victim_player() {
     var_03 = level.players;
   }
 
-  var_08 = common_scripts\utility::func_7A33(var_03);
+  var_08 = common_scripts\utility::random(var_03);
   var_08 thread set_victim_cooldown();
   return var_08;
 }
@@ -4568,12 +4568,12 @@ king_on_damaged(param_00, param_01, param_02, param_03, param_04, param_05, para
 
   if(isPlayer(param_01) && common_scripts\utility::func_562E(var_0D.geistbulletshield) && !king_check_if_raven_weapons(param_05)) {
     param_02 = 0;
-    god_king_impact_vfx(param_06, level.var_611["zmb_godking_gk_impact"]);
+    god_king_impact_vfx(param_06, level._effect["zmb_godking_gk_impact"]);
   }
 
   if(isPlayer(param_01) && common_scripts\utility::func_562E(var_0D.drainshieldacive)) {
     param_02 = 0;
-    god_king_impact_vfx(param_06, level.var_611["zmb_godking_gk_impact"]);
+    god_king_impact_vfx(param_06, level._effect["zmb_godking_gk_impact"]);
   }
 
   if(isDefined(param_05) && isDefined(param_04)) {
@@ -4628,7 +4628,7 @@ king_on_damaged(param_00, param_01, param_02, param_03, param_04, param_05, para
   }
 
   if(param_02 > 0) {
-    god_king_impact_vfx(param_06, level.var_611["blood_godking_impact_burst"]);
+    god_king_impact_vfx(param_06, level._effect["blood_godking_impact_burst"]);
   }
 
   if(param_02 <= 0) {
@@ -4891,7 +4891,7 @@ get_possible_boss_positions() {
 get_new_boss_position() {
   var_00 = self;
   var_01 = get_possible_boss_positions();
-  var_01 = common_scripts\utility::func_F92(var_01);
+  var_01 = common_scripts\utility::array_randomize(var_01);
   foreach(var_03 in var_01) {
     if(distancesquared(var_03.origin, var_00.puck.origin) > 100) {
       return var_03.origin;
@@ -4903,18 +4903,18 @@ get_new_boss_position() {
 
 get_random_boss_position() {
   var_00 = get_possible_boss_positions();
-  var_01 = common_scripts\utility::func_7A33(var_00);
+  var_01 = common_scripts\utility::random(var_00);
   return var_01.origin;
 }
 
 get_random_boss_sun_position() {
-  var_00 = common_scripts\utility::func_7A33(level.bossfight.boss_sun_pos);
+  var_00 = common_scripts\utility::random(level.bossfight.boss_sun_pos);
   return var_00.origin;
 }
 
 get_random_boss_blood_position() {
   if(common_scripts\utility::func_562E(level.king_level_setup)) {
-    var_00 = common_scripts\utility::func_7A33(level.bossfight.boss_blood_pos);
+    var_00 = common_scripts\utility::random(level.bossfight.boss_blood_pos);
     return var_00.origin;
   }
 
@@ -5322,7 +5322,7 @@ enable_geist_bullet_shield() {
 
   var_00.geistbulletshield = 1;
   if(isDefined(level.zombie_king_sword)) {
-    var_00.shieldprotectionfx = spawnlinkedfx(level.var_611["zmb_godking_sword_protection"], level.zombie_king_sword, "TAG_FX");
+    var_00.shieldprotectionfx = spawnlinkedfx(level._effect["zmb_godking_sword_protection"], level.zombie_king_sword, "TAG_FX");
     triggerfx(var_00.shieldprotectionfx);
   }
 }
@@ -5372,32 +5372,32 @@ vo_get_gdk_ability_line(param_00) {
   var_03 = undefined;
   switch (param_00) {
     case "geist_bomb_toss":
-      var_02 = common_scripts\utility::func_7A33(["youcanrunfrompainbutyouwi", "feelmypowerwashoveryou"]);
+      var_02 = common_scripts\utility::random(["youcanrunfrompainbutyouwi", "feelmypowerwashoveryou"]);
       var_03 = 1;
       break;
 
     case "kneel_tell":
-      var_02 = common_scripts\utility::func_7A33(["youcannotescapemymajesty", "gatherbeforemesupplicants"]);
+      var_02 = common_scripts\utility::random(["youcannotescapemymajesty", "gatherbeforemesupplicants"]);
       break;
 
     case "kneel_execute":
-      var_02 = common_scripts\utility::func_7A33(["kneelbeforeyourlord", "kneelbowyourheadsbeforedi"]);
+      var_02 = common_scripts\utility::random(["kneelbeforeyourlord", "kneelbowyourheadsbeforedi"]);
       break;
 
     case "geist_drain":
-      var_02 = common_scripts\utility::func_7A33(["paytributetoyourlord", "vesselsaremeanttobeemptie", "yourwillshallbreakitalway"]);
+      var_02 = common_scripts\utility::random(["paytributetoyourlord", "vesselsaremeanttobeemptie", "yourwillshallbreakitalway"]);
       break;
 
     case "light_of_the_sun":
-      var_02 = common_scripts\utility::func_7A33(["thesunandmooncowerbeforem", "lookuponyourfinaldawn"]);
+      var_02 = common_scripts\utility::random(["thesunandmooncowerbeforem", "lookuponyourfinaldawn"]);
       break;
 
     case "overwhelm_force":
-      var_02 = common_scripts\utility::func_7A33(["riseminionsicommandyou", "noforcecanresistmywill"]);
+      var_02 = common_scripts\utility::random(["riseminionsicommandyou", "noforcecanresistmywill"]);
       break;
 
     case "flame_wave":
-      var_02 = common_scripts\utility::func_7A33(["yourfleshshallwither", "yourbonesshallbreak"]);
+      var_02 = common_scripts\utility::random(["yourfleshshallwither", "yourbonesshallbreak"]);
       break;
 
     case "end_taunt":

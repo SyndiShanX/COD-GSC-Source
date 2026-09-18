@@ -122,8 +122,8 @@ func_2817(param_00) {
   if(isDefined(self.var_622D)) {
     self.var_622D = common_scripts\utility::func_FA0(self.var_622D);
     if(self.var_622D.size >= level.var_6232) {
-      maps\mp\_utility::func_68B(self.var_622D[0].var_3770);
-      maps\mp\_utility::func_68B(self.var_622D[0].var_3EE2);
+      maps\mp\_utility::_objective_delete(self.var_622D[0].var_3770);
+      maps\mp\_utility::_objective_delete(self.var_622D[0].var_3EE2);
       self.var_622D[0] = undefined;
     }
 
@@ -159,8 +159,8 @@ func_2817(param_00) {
   }
 
   self.var_622D = common_scripts\utility::func_F98(var_01, self.var_622D);
-  maps\mp\_utility::func_68B(var_01.var_3770);
-  maps\mp\_utility::func_68B(var_01.var_3EE2);
+  maps\mp\_utility::_objective_delete(var_01.var_3770);
+  maps\mp\_utility::_objective_delete(var_01.var_3EE2);
   var_01 = undefined;
 }
 
@@ -178,8 +178,8 @@ func_63CF(param_00) {
   }
 
   self.var_622D = common_scripts\utility::func_F98(param_00, self.var_622D);
-  maps\mp\_utility::func_68B(param_00.var_3770);
-  maps\mp\_utility::func_68B(param_00.var_3EE2);
+  maps\mp\_utility::_objective_delete(param_00.var_3770);
+  maps\mp\_utility::_objective_delete(param_00.var_3EE2);
   param_00 = undefined;
 }
 
@@ -192,8 +192,8 @@ func_2F9E() {
   if(isDefined(self.var_622D)) {
     self.var_622D = common_scripts\utility::func_FA0(self.var_622D);
     for(var_00 = self.var_622D.size - 1; var_00 >= 0; var_00--) {
-      maps\mp\_utility::func_68B(self.var_622D[var_00].var_3770);
-      maps\mp\_utility::func_68B(self.var_622D[var_00].var_3EE2);
+      maps\mp\_utility::_objective_delete(self.var_622D[var_00].var_3770);
+      maps\mp\_utility::_objective_delete(self.var_622D[var_00].var_3EE2);
       self.var_622D[var_00] = undefined;
     }
 

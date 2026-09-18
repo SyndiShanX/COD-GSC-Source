@@ -80,7 +80,7 @@ initialize_contract_tracking() {
   orders_and_contracts_challenge_init("mp_zombie_island_corpsegate_open", ::mp_zombie_island_corpse_gate_report_completion);
   orders_and_contracts_challenge_init("geistcraft_device_powered", ::mp_zombie_geistcraft_device_powered);
   initialize_per_player_tracking();
-  common_scripts\utility::func_3C87("zmb_contracts_boss_battle_active");
+  common_scripts\utility::flag_init("zmb_contracts_boss_battle_active");
   level.zmb_events_powerup_collected = ::contracts_report_player_collected_powerup;
   level.zmb_events_upgraded_a_weapon = ::contracts_report_player_upgraded_weapon;
   level thread contracts_report_players_opened_map();
@@ -368,7 +368,7 @@ zombie_died_from_melee_only(param_00, param_01, param_02, param_03) {
 has_no_primary_ammo(param_00, param_01, param_02, param_03) {
   var_04 = param_00 getweaponslistprimaries();
   foreach(param_02 in var_04) {
-    if(param_00 method_817F(param_02) > 0) {
+    if(param_00 getammocount(param_02) > 0) {
       return 0;
     }
   }
@@ -419,7 +419,7 @@ register_unique_kill_func(param_00, param_01, param_02, param_03) {
   var_04 = spawnStruct();
   var_04.var_502A = param_00;
   var_04.var_3F02 = param_01;
-  var_04.var_A281 = param_02;
+  var_04.value = param_02;
   var_04.debugname = param_03;
   level.register_unique_kill_funcs = common_scripts\utility::func_F6F(level.register_unique_kill_funcs, var_04);
 }
@@ -765,7 +765,7 @@ orders_and_contracts_challenge_init(param_00, param_01) {
 }
 
 is_contracts_game_online() {
-  return level.var_6B4D || get_testing_contracts_offline();
+  return level.onlinegame || get_testing_contracts_offline();
 }
 
 get_testing_contracts_offline() {
@@ -1218,7 +1218,7 @@ mp_zombie_map_won(param_00) {
 }
 
 start_boss_battle_tracking() {
-  common_scripts\utility::func_3C8F("zmb_contracts_boss_battle_active");
+  common_scripts\utility::flag_set("zmb_contracts_boss_battle_active");
 }
 
 end_boss_battle_tracking() {

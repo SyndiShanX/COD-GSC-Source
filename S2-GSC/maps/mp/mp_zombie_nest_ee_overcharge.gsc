@@ -5,7 +5,7 @@
 
 main() {
   for(var_00 = 1; var_00 <= 3; var_00++) {
-    common_scripts\utility::func_3C87("quest_item_blimp_uberschnelle_" + var_00);
+    common_scripts\utility::flag_init("quest_item_blimp_uberschnelle_" + var_00);
   }
 
   var_01 = maps / mp / mp_zombie_nest_ee_util::func_44C8("blimp_uberschnell_deposit");
@@ -19,7 +19,7 @@ main() {
   }
 
   var_01[0] show();
-  playFXOnTag(level.var_611["zmb_uberschnelle_charge"], var_01[0], "tag_origin");
+  playFXOnTag(level._effect["zmb_uberschnelle_charge"], var_01[0], "tag_origin");
   lib_0557::func_7846("6B Left Hand overcharge", ::func_6C9E, ["5 Right Hand fuses"], &"ZOMBIE_NEST_HINT_QUEST_OVERCHARGE", "ZOMBIE_NEST_HINT_QUEST_OVERCHARGE");
   lib_0557::func_781E("6B Left Hand overcharge", "examine left hand", ::func_7862, ::lib_0557::func_30D8, &"ZOMBIE_NEST_STUDY_LEFT_HAND");
   lib_0557::func_781E("6B Left Hand overcharge", "activate left hand", ::func_7861, ::func_714D, &"ZOMBIE_NEST_HINT_STEP_INTERACT_LEFT_HAND");
@@ -38,7 +38,7 @@ func_6C9E() {
 
 func_714D() {
   var_00 = getEnt("left_hand_of_god_model", "targetname");
-  playFXOnTag(level.var_611["zmb_lhog_init"], var_00, "tag_origin");
+  playFXOnTag(level._effect["zmb_lhog_init"], var_00, "tag_origin");
 }
 
 func_7862() {
@@ -77,10 +77,10 @@ func_7862() {
       }
 
       var_04[var_00.var_17A9] show();
-      playFXOnTag(level.var_611["zmb_uberschnelle_charge"], var_04[var_00.var_17A9], "tag_origin");
+      playFXOnTag(level._effect["zmb_uberschnelle_charge"], var_04[var_00.var_17A9], "tag_origin");
       lib_0378::func_8D74("aud_uberschnelle_place_altar");
       func_86A4();
-      common_scripts\utility::func_3C8F("quest_item_blimp_uberschnelle_" + var_00.var_17A9);
+      common_scripts\utility::flag_set("quest_item_blimp_uberschnelle_" + var_00.var_17A9);
     }
   }
 

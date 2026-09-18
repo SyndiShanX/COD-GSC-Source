@@ -55,7 +55,7 @@ func_7471(param_00) {
       var_05.var_8066 = (0, 0, 0);
       var_05.var_9815 = var_01;
       var_01.var_1E99 = var_05;
-      var_05.var_721C = var_01;
+      var_05.player = var_01;
       var_05.var_01A5 = "camera2player";
     }
 
@@ -125,8 +125,8 @@ func_7446() {
   self method_85BF(0);
   self method_8326();
   maps\mp\_utility::func_05E4();
-  maps\mp\_utility::func_47A2("specialty_marathon");
-  maps\mp\_utility::func_47A2("specialty_falldamage");
+  maps\mp\_utility::giveperk("specialty_marathon");
+  maps\mp\_utility::giveperk("specialty_falldamage");
 }
 
 func_73E5(param_00) {
@@ -145,7 +145,7 @@ func_73E5(param_00) {
 
 func_7DF8(param_00, param_01, param_02, param_03, param_04, param_05) {
   self allowmovement(param_00);
-  self method_8309(param_01);
+  self scripted_elems(param_01);
   self allowads(param_02);
   self method_8113(0);
   self method_8308(0);
@@ -166,7 +166,7 @@ func_7DF8(param_00, param_01, param_02, param_03, param_04, param_05) {
 
 func_A04C() {
   self allowmovement(1);
-  self method_8309(1);
+  self scripted_elems(1);
   self allowads(1);
   self method_8113(1);
   self method_8308(1);
@@ -288,8 +288,8 @@ func_721A(param_00, param_01) {
 
 func_459B(param_00, param_01) {
   var_02 = [];
-  foreach(var_04 in level.var_744A) {
-    if(maps\mp\_utility::func_57A0(var_04)) {
+  foreach(var_04 in level.players) {
+    if(maps\mp\_utility::isreallyalive(var_04)) {
       if(!isDefined(param_01) || isDefined(param_01) && var_04.var_5721 || var_04.var_572F) {
         if(common_scripts\utility::func_302B(self.var_0116, var_04.var_0116) < squared(param_00)) {
           var_02 = common_scripts\utility::func_0972(var_02, var_04);
@@ -305,7 +305,7 @@ func_63C0() {
   self endon("disconnect");
   var_00 = getDvar("hub_emote");
   for(;;) {
-    if(maps\mp\_utility::func_57A0(self) && var_00 != getDvar("hub_emote")) {
+    if(maps\mp\_utility::isreallyalive(self) && var_00 != getDvar("hub_emote")) {
       var_00 = getDvar("hub_emote");
       func_721A(var_00);
       thread maps\mp\gametypes\_hud_util::func_3005("Current emote: " + var_00, -100, 1, "hideCurrentEmoteStatus");
@@ -321,7 +321,7 @@ func_637C() {
   self endon("disconnect");
   var_00 = getdvarint("hub_setThirdPerson");
   for(;;) {
-    if(maps\mp\_utility::func_57A0(self) && var_00 != getdvarint("hub_setThirdPerson")) {
+    if(maps\mp\_utility::isreallyalive(self) && var_00 != getdvarint("hub_setThirdPerson")) {
       var_00 = getdvarint("hub_setThirdPerson");
       if(var_00 == 1) {
         self method_85C7();
@@ -363,7 +363,7 @@ func_639E() {
       var_02 = int(var_01 / 12);
       var_03 = maps\mp\gametypes\_hud_util::func_2097("ch_hq_falls");
       if(var_02 > var_03 && isalive(self)) {
-        maps\mp\gametypes\_missions::func_7750("ch_hq_falls", var_02, 1);
+        maps\mp\gametypes\_missions::processchallenge("ch_hq_falls", var_02, 1);
       }
     }
 
@@ -373,34 +373,34 @@ func_639E() {
 
 func_4834(param_00, param_01) {
   var_02 = [];
-  var_02["division"] = maps\mp\gametypes\_class::func_1E02(param_01);
-  var_02["primaryWeaponStruct"] = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::func_1E0A(param_01, 0), 0);
+  var_02["division"] = maps\mp\gametypes\_class::cac_getdivision(param_01);
+  var_02["primaryWeaponStruct"] = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::cac_getweapon(param_01, 0), 0);
   for(var_03 = 0; var_03 < 6; var_03++) {
-    var_02["primaryAttachmentsGUID"][var_03] = maps\mp\gametypes\_class::func_1E0B(param_01, 0, var_03);
+    var_02["primaryAttachmentsGUID"][var_03] = maps\mp\gametypes\_class::cac_getweaponattachment(param_01, 0, var_03);
   }
 
-  var_02["primaryCamoGUID"] = maps\mp\gametypes\_class::func_1E0C(param_01, 0);
-  var_02["primaryCamo2GUID"] = maps\mp\gametypes\_class::func_1E0D(param_01, 0);
-  var_02["primaryReticleGUID"] = maps\mp\gametypes\_class::func_1E0F(param_01, 0);
+  var_02["primaryCamoGUID"] = maps\mp\gametypes\_class::cac_getweaponcamo(param_01, 0);
+  var_02["primaryCamo2GUID"] = maps\mp\gametypes\_class::cac_getweaponcamo2(param_01, 0);
+  var_02["primaryReticleGUID"] = maps\mp\gametypes\_class::cac_getweaponcustomization(param_01, 0);
   var_02["primaryCustomization"] = maps\mp\gametypes\_class::func_1E0E(param_01, 0);
   var_02["primaryPaintjobId"] = maps\mp\gametypes\_class::cac_getweaponpaintjob(param_01, 0);
   var_02["primaryCharmGUID"] = maps\mp\gametypes\_class::cac_getweaponcharm(param_01, 0);
-  var_02["secondaryWeaponStruct"] = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::func_1E0A(param_01, 1), 0);
+  var_02["secondaryWeaponStruct"] = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::cac_getweapon(param_01, 1), 0);
   for(var_03 = 0; var_03 < 6; var_03++) {
-    var_02["secondaryAttachmentsGUID"][var_03] = maps\mp\gametypes\_class::func_1E0B(param_01, 1, var_03);
+    var_02["secondaryAttachmentsGUID"][var_03] = maps\mp\gametypes\_class::cac_getweaponattachment(param_01, 1, var_03);
   }
 
-  var_02["secondaryCamoGUID"] = maps\mp\gametypes\_class::func_1E0C(param_01, 1);
-  var_02["secondaryCamo2GUID"] = maps\mp\gametypes\_class::func_1E0D(param_01, 1);
-  var_02["secondaryReticleGUID"] = maps\mp\gametypes\_class::func_1E0F(param_01, 1);
+  var_02["secondaryCamoGUID"] = maps\mp\gametypes\_class::cac_getweaponcamo(param_01, 1);
+  var_02["secondaryCamo2GUID"] = maps\mp\gametypes\_class::cac_getweaponcamo2(param_01, 1);
+  var_02["secondaryReticleGUID"] = maps\mp\gametypes\_class::cac_getweaponcustomization(param_01, 1);
   var_02["secondaryCustomization"] = maps\mp\gametypes\_class::func_1E0E(param_01, 1);
   var_02["secondaryPaintjobId"] = maps\mp\gametypes\_class::cac_getweaponpaintjob(param_01, 1);
   var_02["secondaryCharmGUID"] = maps\mp\gametypes\_class::cac_getweaponcharm(param_01, 1);
   var_02["meleeWeaponStruct"] = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::func_1E07(), 0);
-  var_02["equipmentStruct"] = maps\mp\_utility::func_44CE(maps\mp\gametypes\_class::func_1E03(param_01, 0), 0);
-  var_02["offhandStruct"] = maps\mp\_utility::func_44CE(maps\mp\gametypes\_class::func_1E03(param_01, 1), 0);
+  var_02["equipmentStruct"] = maps\mp\_utility::func_44CE(maps\mp\gametypes\_class::cac_getequipment(param_01, 0), 0);
+  var_02["offhandStruct"] = maps\mp\_utility::func_44CE(maps\mp\gametypes\_class::cac_getequipment(param_01, 1), 0);
   for(var_03 = 0; var_03 < 9; var_03++) {
-    var_02["perkGUID" + var_03] = maps\mp\gametypes\_class::func_1E09(param_01, var_03);
+    var_02["perkGUID" + var_03] = maps\mp\gametypes\_class::cac_getperk(param_01, var_03);
   }
 
   return var_02;
@@ -452,7 +452,7 @@ func_4618() {
     self.var_294D = self.var_9FB3;
   }
 
-  var_01 = maps\mp\_utility::func_445D("lobby" + self.var_294D + 1);
+  var_01 = maps\mp\_utility::getclassindex("lobby" + self.var_294D + 1);
   if(level.var_A220) {
     if(isDefined(self.var_A597)) {
       var_02 = func_9C8C(self.var_A597);
@@ -477,7 +477,7 @@ func_4618() {
     var_0B = maps\mp\gametypes\_class::func_4432(var_0B);
   }
 
-  if(maps\mp\_utility::func_472A(var_0B) == "weapon_pistol") {
+  if(maps\mp\_utility::getweaponclass(var_0B) == "weapon_pistol") {
     if(var_0A) {
       switch (var_0B) {
         case "enfieldno2_mp":
@@ -504,25 +504,25 @@ func_4618() {
     }
   } else {}
 
-  if(isDefined(var_03) && isDefined(var_03.var_48CA) && var_03.var_48CA != 0) {
+  if(isDefined(var_03) && isDefined(var_03.guid) && var_03.guid != 0) {
     var_0F = maps\mp\_utility::func_4737(var_03);
     self.var_7706 = maps\mp\gametypes\_class::func_1D66(var_0F, var_02["primaryAttachmentsGUID"][0], var_02["primaryAttachmentsGUID"][1], var_02["primaryAttachmentsGUID"][2], var_02["primaryAttachmentsGUID"][3], var_02["primaryAttachmentsGUID"][4], var_02["primaryAttachmentsGUID"][5], maps\mp\_utility::func_472D(var_03), var_02["primaryCamoGUID"], var_02["primaryCamo2GUID"], var_02["primaryReticleGUID"], var_02["primaryCustomization"], self, self.var_0079);
     self.primarypaintjobid = var_02["primaryPaintjobId"];
     self.primarycharmguid = var_02["primaryCharmGUID"];
   }
 
-  if(isDefined(var_04) && isDefined(var_04.var_48CA) && var_04.var_48CA != 0) {
+  if(isDefined(var_04) && isDefined(var_04.guid) && var_04.guid != 0) {
     var_0F = maps\mp\_utility::func_4737(var_04);
     self.var_835C = maps\mp\gametypes\_class::func_1D66(var_0F, var_02["secondaryAttachmentsGUID"][0], var_02["secondaryAttachmentsGUID"][1], var_02["secondaryAttachmentsGUID"][2], var_02["secondaryAttachmentsGUID"][3], var_02["secondaryAttachmentsGUID"][4], var_09, maps\mp\_utility::func_472D(var_04), var_02["secondaryCamoGUID"], var_02["secondaryCamo2GUID"], var_02["secondaryReticleGUID"], var_02["secondaryCustomization"], self, self.var_0079);
     self.secondarypaintjobid = var_02["secondaryPaintjobId"];
     self.secondarycharmguid = var_02["secondaryCharmGUID"];
   }
 
-  if(isDefined(var_06) && isDefined(var_06.var_48CA) && var_06.var_48CA != 0) {
+  if(isDefined(var_06) && isDefined(var_06.guid) && var_06.guid != 0) {
     self.var_37FC = maps\mp\_utility::func_4737(var_06);
   }
 
-  if(isDefined(var_07) && isDefined(var_07.var_48CA) && var_07.var_48CA != 0) {
+  if(isDefined(var_07) && isDefined(var_07.guid) && var_07.guid != 0) {
     self.var_69AB = maps\mp\_utility::func_4737(var_07);
   }
 
@@ -554,7 +554,7 @@ func_115E() {
     var_01 = self.var_9FB3;
   }
 
-  var_02 = maps\mp\_utility::func_445D("lobby" + var_01 + 1);
+  var_02 = maps\mp\_utility::getclassindex("lobby" + var_01 + 1);
   if(level.var_A220) {
     if(isDefined(self.var_A597)) {
       var_03 = func_9C8C(self.var_A597);
@@ -568,12 +568,12 @@ func_115E() {
   var_04 = var_03["division"];
   var_05 = var_03["primaryWeaponStruct"];
   var_06 = undefined;
-  if(isDefined(var_05) && isDefined(var_05.var_48CA) && var_05.var_48CA != 0) {
+  if(isDefined(var_05) && isDefined(var_05.guid) && var_05.guid != 0) {
     var_07 = maps\mp\_utility::func_4737(var_05);
     var_06 = maps\mp\gametypes\_class::func_1D66(var_07, var_03["primaryAttachmentsGUID"][0], var_03["primaryAttachmentsGUID"][1], var_03["primaryAttachmentsGUID"][2], var_03["primaryAttachmentsGUID"][3], var_03["primaryAttachmentsGUID"][4], var_03["primaryAttachmentsGUID"][5], maps\mp\_utility::func_472D(var_05), var_03["primaryCamoGUID"], var_03["primaryCamo2GUID"], var_03["primaryReticleGUID"], var_03["primaryCustomization"], self, var_04);
   }
 
-  if(isDefined(var_06) && maps\mp\_utility::func_472A(var_06) != "weapon_other" && var_06 != "riotshield_mp") {
+  if(isDefined(var_06) && maps\mp\_utility::getweaponclass(var_06) != "weapon_other" && var_06 != "riotshield_mp") {
     var_08 = 0;
     if(isDefined(var_03["primaryPaintjobId"])) {
       var_08 = var_03["primaryPaintjobId"];
@@ -589,7 +589,7 @@ func_115E() {
 }
 
 func_2164(param_00) {
-  if(isDefined(self.var_012C["altModeActive"]) && isDefined(self.var_0079) && !self.var_012C["altModeActive"] && self.var_0079 != 5 && maps\mp\_utility::func_472A(param_00) == "weapon_smg" && issubstr(param_00, "suppressor")) {
+  if(isDefined(self.var_012C["altModeActive"]) && isDefined(self.var_0079) && !self.var_012C["altModeActive"] && self.var_0079 != 5 && maps\mp\_utility::getweaponclass(param_00) == "weapon_smg" && issubstr(param_00, "suppressor")) {
     param_00 = maps\mp\gametypes\_division_change::func_7CCD(param_00);
   }
 
@@ -607,11 +607,11 @@ func_2FA2() {
 }
 
 func_2811(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = maps\mp\gametypes\_hud_util::func_27ED("mphubfont", param_03);
+  var_05 = maps\mp\gametypes\_hud_util::createfontstring("mphubfont", param_03);
   if(isarray(param_02)) {
-    var_05 maps\mp\gametypes\_hud_util::func_8707(param_04, param_04, param_02[0], param_02[1]);
+    var_05 maps\mp\gametypes\_hud_util::setpoint(param_04, param_04, param_02[0], param_02[1]);
   } else {
-    var_05 maps\mp\gametypes\_hud_util::func_8707(param_04, param_04, 0, param_02);
+    var_05 maps\mp\gametypes\_hud_util::setpoint(param_04, param_04, 0, param_02);
   }
 
   var_05.var_0184 = 1001;
@@ -752,15 +752,15 @@ func_788A(param_00, param_01, param_02, param_03) {
 }
 
 func_A13F() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(isDefined(var_01)) {
-      var_01 func_2835("numPlayers", &"HUB_SOLDIERS_IN_HUB", level.var_744A.size, [-370, -220], 1);
+      var_01 func_2835("numPlayers", &"HUB_SOLDIERS_IN_HUB", level.players.size, [-370, -220], 1);
     }
   }
 }
 
 func_238C() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(isDefined(var_01)) {
       var_01 func_2DD2("numPlayers");
     }
@@ -778,7 +778,7 @@ func_5790(param_00) {
     return 1;
   } else if(isDefined(self.var_5733) && self.var_5733) {
     return 1;
-  } else if(isDefined(self.var_537A) && !maps\mp\_utility::func_57A0(self)) {
+  } else if(isDefined(self.var_537A) && !maps\mp\_utility::isreallyalive(self)) {
     return 1;
   } else if(isDefined(self.var_5722) && self.var_5722) {
     return 1;
@@ -1039,19 +1039,19 @@ func_1535(param_00) {
   self.var_A582[0] method_84E0();
   self.var_A582[0] method_805B();
   self.var_A582[0] method_8511();
-  param_00 method_82FA("hub_ball_mp", 1);
+  param_00 setweaponammoclip("hub_ball_mp", 1);
   param_00 playSound("grid_ball_pickup");
-  param_00 maps\mp\_utility::func_47A2("specialty_ballcarrier");
+  param_00 maps\mp\_utility::giveperk("specialty_ballcarrier");
   param_00 method_812B(1);
   param_00.var_56A4 = 1;
   param_00.var_155F = self;
   if(isDefined(self.var_152D)) {
-    param_00 thread maps\mp\gametypes\_missions::func_7750("ch_hq_data_ball" + self.var_152D);
+    param_00 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_data_ball" + self.var_152D);
     var_02 = param_00 maps\mp\gametypes\_hud_util::func_2097("ch_hq_data_ball1");
     var_03 = param_00 maps\mp\gametypes\_hud_util::func_2097("ch_hq_data_ball2");
     var_04 = param_00 maps\mp\gametypes\_hud_util::func_2097("ch_hq_data_ball3");
     var_05 = var_02 + var_03 + var_04;
-    param_00 thread maps\mp\gametypes\_missions::func_7750("ch_hq_balls", var_05, 1);
+    param_00 thread maps\mp\gametypes\_missions::processchallenge("ch_hq_balls", var_05, 1);
   }
 
   param_00 common_scripts\utility::_disableusability();
@@ -1069,7 +1069,7 @@ func_1550(param_00) {
   if(isDefined(var_01) && var_01.var_01A7 != "spectator") {
     var_02 = var_01 gettagorigin("TAG_ACCESSORY_RIGHT");
   } else {
-    var_02 = self.var_802F;
+    var_02 = self.detachall;
   }
 
   var_03 = (0, 0, 0);
@@ -1249,8 +1249,8 @@ func_531B() {
 }
 
 func_34DA() {
-  if(isDefined(level) && isDefined(level.var_744A)) {
-    foreach(var_01 in level.var_744A) {}
+  if(isDefined(level) && isDefined(level.players)) {
+    foreach(var_01 in level.players) {}
   }
 }
 
@@ -1277,7 +1277,7 @@ func_8C0D(param_00) {
 }
 
 func_8BEB() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(var_01 == self) {
       continue;
     }
@@ -1295,7 +1295,7 @@ func_8BFB() {
 
 func_4D02() {
   self.var_5710 = 1;
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(var_01 == self) {
       continue;
     }
@@ -1306,7 +1306,7 @@ func_4D02() {
 
 func_4D09() {
   self.var_5711 = 1;
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(var_01 == self) {
       continue;
     }
@@ -1321,7 +1321,7 @@ func_4D09() {
 }
 
 func_7B90() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(var_01 == self) {
       continue;
     }
@@ -1484,7 +1484,7 @@ func_83DC(param_00, param_01, param_02, param_03, param_04) {
     param_01 = "unknown_category";
   }
 
-  function_00F5("script_mp_hub_event: game_time %d, player_name %s, player_id %d, event_category %s, event_name %s, event_value_int %d, event_value_float %f, event_value_string %s, player_count %d", gettime(), self.var_0109, self.clientid, param_01, param_00, param_02, param_03, param_04, level.var_744A.size);
+  function_00F5("script_mp_hub_event: game_time %d, player_name %s, player_id %d, event_category %s, event_name %s, event_value_int %d, event_value_float %f, event_value_string %s, player_count %d", gettime(), self.var_0109, self.clientid, param_01, param_00, param_02, param_03, param_04, level.players.size);
 }
 
 func_50F0(param_00, param_01, param_02, param_03) {
@@ -1617,11 +1617,11 @@ func_5E88(param_00, param_01, param_02, param_03) {
     var_05 = -1;
   }
 
-  self dlogevent("telemetry_hq_event", ["base", ["hq_guid", function_0398(), "utc_timestamp_join", var_04, "data_center_id", function_0397(), "game_time", gettime(), "player_index", var_05, "player_count", level.var_744A.size, "event_name", param_00, "event_category", param_01, "duration_seconds", param_02], param_00, param_03]);
+  self dlogevent("telemetry_hq_event", ["base", ["hq_guid", function_0398(), "utc_timestamp_join", var_04, "data_center_id", function_0397(), "game_time", gettime(), "player_index", var_05, "player_count", level.players.size, "event_name", param_00, "event_category", param_01, "duration_seconds", param_02], param_00, param_03]);
 }
 
 func_582B() {
-  if(function_0367() && level.var_744A.size > 20 && getdvarint("3708", 0) != 1 && getdvarint("3645", 0) != 1) {
+  if(function_0367() && level.players.size > 20 && getdvarint("3708", 0) != 1 && getdvarint("3645", 0) != 1) {
     return 1;
   }
 
@@ -1832,23 +1832,23 @@ func_4B02(param_00, param_01, param_02) {
   level endon("game_ended");
   for(;;) {
     for(var_03 = 1; var_03 < param_02.size; var_03++) {
-      param_00 method_8495(param_02[0], self.var_831A.var_0116, self.var_831A.var_001D, "animEnded");
+      param_00 method_8495(param_02[0], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D, "animEnded");
       foreach(var_05 in param_01) {
         if(var_05.var_0ED2[0] == "") {
           continue;
         }
 
-        var_05.var_378F method_8495(var_05.var_0ED2[0], self.var_831A.var_0116, self.var_831A.var_001D);
+        var_05.var_378F method_8495(var_05.var_0ED2[0], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D);
       }
 
       param_00 waittillmatch("end", "animEnded");
-      param_00 method_8495(param_02[var_03], self.var_831A.var_0116, self.var_831A.var_001D, "animEnded");
+      param_00 method_8495(param_02[var_03], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D, "animEnded");
       foreach(var_05 in param_01) {
         if(var_05.var_0ED2[var_03] == "") {
           continue;
         }
 
-        var_05.var_378F method_8495(var_05.var_0ED2[var_03], self.var_831A.var_0116, self.var_831A.var_001D);
+        var_05.var_378F method_8495(var_05.var_0ED2[var_03], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D);
       }
 
       param_00 waittillmatch("end", "animEnded");

@@ -19,7 +19,7 @@ tryuseraidflak(param_00) {
 
   level.flak_in_progress = 1;
   level.flak_scorestreak_id++;
-  level.var_9854[maps\mp\_utility::func_45DE(self.var_1A7)] = 1;
+  level.var_9854[maps\mp\_utility::getotherteam(self.team)] = 1;
   level thread lib_0528::func_A0E0();
   thread raid_atmosphereflak();
   thread raid_flakrundamage();
@@ -32,7 +32,7 @@ raid_flak_timer() {
   level notify("flakGunsDisabled");
   destroy_remaining_agents();
   level.flak_in_progress = 0;
-  level.var_9854[maps\mp\_utility::func_45DE(self.var_1A7)] = 0;
+  level.var_9854[maps\mp\_utility::getotherteam(self.team)] = 0;
   level thread lib_0528::func_A0E0();
   clear_flak_death_flags();
 }
@@ -72,8 +72,8 @@ raid_atmosphereflak() {
       if(var_00.size == 0) {
         var_01 = (randomfloatrange(-18000, 18000) + level.var_5FEB[0], randomfloatrange(-18000, 18000) + level.var_5FEB[1], randomfloatrange(-8000, 8000) + level.var_5FEB[2]);
       } else {
-        var_02 = common_scripts\utility::func_7A33(var_01);
-        var_01 = (randomfloatrange(-500, 500) + var_02.var_116[0], randomfloatrange(-500, 500) + var_02.var_116[1], randomfloatrange(-500, 500) + var_02.var_116[2]);
+        var_02 = common_scripts\utility::random(var_01);
+        var_01 = (randomfloatrange(-500, 500) + var_02.origin[0], randomfloatrange(-500, 500) + var_02.origin[1], randomfloatrange(-500, 500) + var_02.origin[2]);
       }
 
       level.var_3CE1++;
@@ -89,7 +89,7 @@ raid_atmosphereflak() {
 
 raid_flakexplosioneffects(param_00) {
   var_01 = common_scripts\utility::func_8FFC();
-  var_01.var_116 = param_00;
+  var_01.origin = param_00;
   var_01 method_805B();
   wait 0.05;
   playFXOnTag(common_scripts\utility::func_44F5("flak_gun_explosion"), var_01, "tag_origin");
@@ -104,9 +104,9 @@ raid_flakrundamage() {
   level endon("game_ended");
   for(;;) {
     var_00 = getflaktargets();
-    var_01 = common_scripts\utility::func_7A33(var_00);
+    var_01 = common_scripts\utility::random(var_00);
     if(isDefined(var_01) && raid_flakisvalidtarget(var_01)) {
-      var_02 = (randomfloatrange(-100, 100) + var_01.var_116[0], randomfloatrange(-100, 100) + var_01.var_116[1], randomfloatrange(-100, 100) + var_01.var_116[2]);
+      var_02 = (randomfloatrange(-100, 100) + var_01.origin[0], randomfloatrange(-100, 100) + var_01.origin[1], randomfloatrange(-100, 100) + var_01.origin[2]);
       thread raid_flakexplosioneffects(var_02);
       if(function_01EF(var_01.occupied_player)) {
         var_01 dodamage(randomfloatrange(450, 500) * 10, var_02, self, undefined, "MOD_UNKNOWN", "killstreak_flak_gun_raids");
@@ -116,7 +116,7 @@ raid_flakrundamage() {
 
       if(1) {
         var_01.occupied_player playRumbleOnEntity("artillery_rumble");
-        earthquake(0.7, 0.5, var_01.var_116, 800, var_01.occupied_player);
+        earthquake(0.7, 0.5, var_01.origin, 800, var_01.occupied_player);
       }
     }
 
@@ -129,7 +129,7 @@ destroy_remaining_agents() {
   var_00 = getflaktargets();
   foreach(var_02 in var_00) {
     if(function_01EF(var_02.occupied_player)) {
-      var_02 dodamage(randomfloatrange(450, 500) * 10, var_02.var_116, self, undefined, "MOD_UNKNOWN", "killstreak_flak_gun_raids");
+      var_02 dodamage(randomfloatrange(450, 500) * 10, var_02.origin, self, undefined, "MOD_UNKNOWN", "killstreak_flak_gun_raids");
     }
   }
 }
@@ -167,7 +167,7 @@ canspawnmorefighters() {
 getflaktargets() {
   var_00 = [];
   foreach(var_02 in level.pp_array) {
-    if(isDefined(var_02.var_1A7) && var_02.var_1A7 == game["attackers"]) {
+    if(isDefined(var_02.team) && var_02.team == game["attackers"]) {
       var_00 = common_scripts\utility::func_F6F(var_00, var_02);
     }
   }

@@ -124,7 +124,7 @@ initleveldialog() {
 
 initwavestories() {
   level.wavestories = wavestoriescreate();
-  common_scripts\utility::func_3C87("radio_message_active");
+  common_scripts\utility::flag_init("radio_message_active");
 }
 
 wavestoriescreate() {
@@ -216,7 +216,7 @@ playnextwavestory(param_00, param_01, param_02) {
 
   if(!should_play_a_wave_story()) {
     if(isDefined(param_02)) {
-      level thread[[common_scripts\utility::func_7A33(param_02)]]();
+      level thread[[common_scripts\utility::random(param_02)]]();
     }
 
     return;
@@ -355,7 +355,7 @@ radio_message_all(param_00) {
 
 plr_play_radio_message(param_00) {
   wait_for_radio_message_done(param_00);
-  common_scripts\utility::func_3C8F("radio_message_active");
+  common_scripts\utility::flag_set("radio_message_active");
 }
 
 wait_for_radio_message_done(param_00) {

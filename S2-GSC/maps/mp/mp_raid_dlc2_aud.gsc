@@ -101,8 +101,8 @@ husky_dogfight_submix_wathcer() {
   lib_0380::func_6840("husky_dogfight_intro_flyby_front", undefined);
   wait(1);
   lib_0380::func_6840("amb_mp_husky_ext_dog_fight", undefined, 7);
-  if(isDefined(level.var_744A) && level.var_744A.size > 0) {
-    foreach(var_01 in level.var_744A) {
+  if(isDefined(level.players) && level.players.size > 0) {
+    foreach(var_01 in level.players) {
       var_01 maps\mp\_audio_submixes::func_8A9D("mp_war_husky_dogfight", 3, 1);
     }
   }
@@ -129,7 +129,7 @@ apply_husky_war_mix() {
 
 intro_start_sfx() {
   var_00 = 27;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 thread maps\mp\_audio_submixes::func_8A9D("mp_war_intro_master", 0.1, 1);
     var_02 thread intro_mix_clear(var_00);
   }
@@ -172,8 +172,8 @@ intro_allies_mixing() {
   var_04 = 1 - var_03;
   var_05 = 30;
   var_06 = 1;
-  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {
-    var_07 = level.var_54D0["allies"].var_9309;
+  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {
+    var_07 = level.var_54D0["allies"].starttime;
     var_00 maps\mp\_audio_submixes::func_8A9D("mp_war_intro_allies_vignette", 0.1, 1);
     wait 0.05;
     var_00 maps\mp\_audio_submixes::func_8A9E("mp_war_intro_master", var_04, var_01);
@@ -203,8 +203,8 @@ intro_axis_mixing() {
   var_04 = 1 - var_03;
   var_05 = 30;
   var_06 = 1;
-  if(isDefined(level.var_54D0["axis"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {
-    var_07 = level.var_54D0["axis"].var_9309;
+  if(isDefined(level.var_54D0["axis"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {
+    var_07 = level.var_54D0["axis"].starttime;
     var_00 maps\mp\_audio_submixes::func_8A9D("mp_war_intro_axis_vignette", 0.1, 1);
     wait 0.05;
     var_00 maps\mp\_audio_submixes::func_8A9E("mp_war_intro_master", var_04, var_01);
@@ -268,7 +268,7 @@ additional_air_victory_sfx() {
 }
 
 outro_vignette_submix() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 maps\mp\_audio_submixes::func_8A9D("mp_war_outro_vignette");
   }
 }
@@ -284,8 +284,8 @@ fighter_spawn() {
   self.var_11CB.acceleration_vol_boost = 0;
   self.var_11CB.hard_bank = 0;
   self.var_11CB.pitching = 0;
-  common_scripts\utility::func_3C87("damage_state_1");
-  common_scripts\utility::func_3C87("damage_state_2");
+  common_scripts\utility::flag_init("damage_state_1");
+  common_scripts\utility::flag_init("damage_state_2");
   thread func_6DBE();
 }
 
@@ -313,8 +313,8 @@ func_6DBE() {
   thread main_engine_loop(var_01);
   thread func_1585(var_02, var_03);
   thread func_AA25(var_04);
-  var_00 thread raid_flyby_watcher(var_00.var_1A7);
-  thread dogfight_close_loop(var_00, var_00.var_1A7);
+  var_00 thread raid_flyby_watcher(var_00.team);
+  thread dogfight_close_loop(var_00, var_00.team);
   thread p47_watch_game_end(var_00, self);
 }
 
@@ -639,14 +639,14 @@ raid_flyby_watcher(param_00) {
   var_11 = ["blg_dogfight_flyby_mid_01", "blg_dogfight_flyby_mid_02", "blg_dogfight_flyby_mid_03", "blg_dogfight_flyby_mid_04", "blg_dogfight_flyby_mid_05", "blg_dogfight_flyby_mid_06", "blg_dogfight_flyby_mid_07", "blg_dogfight_flyby_mid_08", "blg_dogfight_flyby_mid_09", "blg_dogfight_flyby_mid_10", "blg_dogfight_flyby_mid_11", "blg_dogfight_flyby_mid_12", "blg_dogfight_flyby_mid_13", "blg_dogfight_flyby_mid_14"];
   var_12 = ["blg_dogfight_flyby_far_01", "blg_dogfight_flyby_far_02", "blg_dogfight_flyby_far_03", "blg_dogfight_flyby_far_04", "blg_dogfight_flyby_far_05", "blg_dogfight_flyby_far_06", "blg_dogfight_flyby_far_07", "blg_dogfight_flyby_far_08", "blg_dogfight_flyby_far_09", "blg_dogfight_flyby_far_10", "blg_dogfight_flyby_far_11", "blg_dogfight_flyby_far_12", "blg_dogfight_flyby_far_13", "blg_dogfight_flyby_far_14", "blg_dogfight_flyby_far_15", "blg_dogfight_flyby_far_16", "blg_dogfight_flyby_far_17"];
   for(;;) {
-    foreach(var_1A, var_14 in level.var_744A) {
-      var_15 = var_14.var_2418;
+    foreach(var_1A, var_14 in level.players) {
+      var_15 = var_14.clientid;
       var_16 = var_14 method_85E2();
       if(var_14 == self || !isDefined(var_16)) {
         continue;
       }
 
-      if(var_14.var_1A7 == self.var_1A7) {
+      if(var_14.team == self.team) {
         var_0B = var_0C;
       } else {
         var_0B = 1;
@@ -666,13 +666,13 @@ raid_flyby_watcher(param_00) {
       }
 
       self.plane_data[var_15].lastdistance = self.plane_data[var_15].var_3018;
-      self.plane_data[var_15].var_3018 = distance(self.origin, var_14.var_116);
+      self.plane_data[var_15].var_3018 = distance(self.origin, var_14.origin);
       self.plane_data[var_15].approachspeed = self.plane_data[var_15].lastdistance - self.plane_data[var_15].var_3018;
       if(self.plane_data[var_15].var_3018 < var_07) {
         if(self.plane_data[var_15].approachspeed > var_08 && self.plane_data[var_15].closeoneshotstarted == 0 && self.plane_data[var_15].closetimer >= var_0A) {
           self.plane_data[var_15].closeoneshotstarted = 1;
           self.plane_data[var_15].closetimer = 0;
-          var_0E = common_scripts\utility::func_AA4A(self.origin, self.var_1D, var_16.var_116, cos(45));
+          var_0E = common_scripts\utility::within_fov(self.origin, self.var_1D, var_16.origin, cos(45));
           if(isDefined(var_0E) && var_0E == 0) {
             var_0B = var_0B * var_0D;
           }
@@ -775,7 +775,7 @@ fighter_damage_state_change(param_00) {
 
   if(param_00 == 1) {
     if(!common_scripts\utility::func_3C77("damage_state_1")) {
-      common_scripts\utility::func_3C8F("damage_state_1");
+      common_scripts\utility::flag_set("damage_state_1");
       maps\mp\_audio_submixes::func_8001("husky_player_damage_oneshot");
       self.var_11CB.engine_damage_loop = maps\mp\_audio_submixes::func_8004("blg_p47_engine_damage_plr_lp", "stop_damage_engine_loop", 0, 0);
     }
@@ -787,7 +787,7 @@ fighter_damage_state_change(param_00) {
   }
 
   if(param_00 == 2 && !common_scripts\utility::func_3C77("damage_state_2")) {
-    common_scripts\utility::func_3C8F("damage_state_2");
+    common_scripts\utility::flag_set("damage_state_2");
     maps\mp\_audio_submixes::func_8001("husky_player_damage_oneshot");
   }
 }

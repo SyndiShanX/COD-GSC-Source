@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_egypt_02_precache::func_F9();
-  maps\createart\mp_egypt_02_art::func_F9();
-  maps\mp\mp_egypt_02_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_egypt_02_lighting::func_F9();
-  maps\mp\mp_egypt_02_aud::func_F9();
+  maps\mp\mp_egypt_02_precache::main();
+  maps\createart\mp_egypt_02_art::main();
+  maps\mp\mp_egypt_02_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_egypt_02_lighting::main();
+  maps\mp\mp_egypt_02_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_egypt_02");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -44,7 +44,7 @@ func_00F9() {
 }
 
 performance_tweaks() {
-  if(level.var_1D4 && getDvar("2695") != "true") {
+  if(level.weaponinventorytype && getDvar("2695") != "true") {
     setDvar("4341", 0);
   }
 }

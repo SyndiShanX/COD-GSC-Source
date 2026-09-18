@@ -17,7 +17,7 @@ func_3DA6() {
   level thread lib_057D::func_4769();
   wait(1);
   level.var_76CE = 1;
-  common_scripts\utility::func_3C8F("5 Right Hand fuses");
+  common_scripts\utility::flag_set("5 Right Hand fuses");
   lib_0557::func_782D("1 fire well", "gas flowing");
   maps / mp / mp_zombie_nest_ee_fire_well::func_7854();
 }

@@ -14,15 +14,15 @@ func_5E8B() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  if(!maps\mp\_utility::func_3FA0("prematch_done")) {
+  if(!maps\mp\_utility::gameflag("prematch_done")) {
     level waittill("prematch_over");
   }
 
-  if(isbot(self) || function_026D(self)) {
+  if(isbot(self) || istestclient(self)) {
     return;
   }
 
-  if(maps\mp\_utility::func_57A0(self) && isDefined(self.var_5CC6) && maps\mp\_matchdata::func_1F59(self.var_5CC6)) {
+  if(maps\mp\_utility::isreallyalive(self) && isDefined(self.var_5CC6) && maps\mp\_matchdata::func_1F59(self.var_5CC6)) {
     var_00 = getdvarfloat("34");
     for(;;) {
       var_01 = self playerads() > 0.5;

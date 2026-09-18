@@ -5,9 +5,9 @@
 
 safeobjectiveinit(param_00) {
   if(!lib_04FF::func_694B()) {
-    level.var_611["objective_flag_glow"] = loadfx("vfx/map/mp_raid_bulge/raid_bulge_fuelcan_glow");
-    level.var_611["objective_flag_trail"] = loadfx("vfx/map/mp_raid_bulge/raid_bulge_fuelcan_trail");
-    level.var_611["objective_resupply_death"] = loadfx("vfx/test/raid/objective_resupply_death");
+    level._effect["objective_flag_glow"] = loadfx("vfx/map/mp_raid_bulge/raid_bulge_fuelcan_glow");
+    level._effect["objective_flag_trail"] = loadfx("vfx/map/mp_raid_bulge/raid_bulge_fuelcan_trail");
+    level._effect["objective_resupply_death"] = loadfx("vfx/test/raid/objective_resupply_death");
     setdvarifuninitialized("raid_ctf_flag_throw_type", 0);
   }
 
@@ -121,7 +121,7 @@ safeobjectivethink() {
     foreach(var_02 in self.var_3CB8) {
       var_03 = var_02.var_A223.var_A23F;
       var_04 = var_00 * var_03;
-      var_02.var_A223 lib_04FF::func_8615(var_04);
+      var_02.var_A223 lib_04FF::playlocalsound(var_04);
     }
 
     if(self.var_2933 >= lib_04FF::func_45D0("objectiveScoreGoal")) {
@@ -133,8 +133,8 @@ safeobjectivethink() {
 
 safeobjectivepickactivesafes() {
   self.activesafes = [];
-  self.activesafes[self.activesafes.size] = common_scripts\utility::func_7A33(self.group_a_containers);
-  self.activesafes[self.activesafes.size] = common_scripts\utility::func_7A33(self.group_b_containers);
+  self.activesafes[self.activesafes.size] = common_scripts\utility::random(self.group_a_containers);
+  self.activesafes[self.activesafes.size] = common_scripts\utility::random(self.group_b_containers);
   self notify("active_safes_selected");
 }
 
@@ -169,7 +169,7 @@ safeobjectiveactive() {
 onsafeobjectivecompleted() {
   lib_04FF::func_6982(self.var_695A);
   level.var_695E = common_scripts\utility::func_F93(level.var_695E, ::safeobjectiveonplayerkilled);
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(isDefined(var_01.var_2016)) {
       var_01.var_2016 safe_returnflag();
     }
@@ -203,7 +203,7 @@ safe_init3diconstimerprogressordered(param_00) {
     wait 0.05;
   }
 
-  lib_04FF::func_8615(param_00);
+  lib_04FF::playlocalsound(param_00);
 }
 
 safedelivertrigger(param_00) {
@@ -258,7 +258,7 @@ safecontainertrigger(param_00) {
   }
 
   var_01 = getEntArray("safeDoor", "script_noteworthy");
-  var_02 = common_scripts\utility::func_4461(param_00.var_116, var_01);
+  var_02 = common_scripts\utility::func_4461(param_00.origin, var_01);
   param_00.var_3255 = var_02;
   lib_04FF::func_6983(self.var_695A);
   level safe_open_logic(param_00, var_02, "mp_raids_dlc4_gun_locker_open");
@@ -268,10 +268,10 @@ safe_open_logic(param_00, param_01, param_02) {
   level endon("game_ended");
   param_01 method_8278("mp_raids_dlc4_gun_locker_closed");
   param_00 setHintString(&"RAIDS_DLC4_OPEN_SAFE");
-  param_00 thread maps\mp\_utility::func_73A(game["attackers"]);
+  param_00 thread maps\mp\_utility::_updateteamusable(game["attackers"]);
   param_00 waittill("trigger");
   param_00 setHintString(&"RAIDS_TRIPWIRE_BLANK");
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   param_01 method_8278(param_02, "open_safe_anim");
 }
 
@@ -395,7 +395,7 @@ safe_onpickupzonebeginuse(param_00) {
   lib_04FF::func_8613(var_01);
   var_02 = self.var_79AD lib_04FF::func_45D0("flagPickupStartSound");
   if(var_02 != "") {
-    self.var_A238 = lib_04F3::func_79CB(var_02, self.var_9D65.var_116);
+    self.var_A238 = lib_04F3::func_79CB(var_02, self.var_9D65.origin);
   }
 
   param_00.var_230C = self;
@@ -416,7 +416,7 @@ safe_onpickupzoneenduse(param_00, param_01, param_02) {
 
   var_04 = self.var_79AD lib_04FF::func_45D0("flagPickupStopSound");
   if(var_04 != "" && param_02 == 0) {
-    self.var_A238 = lib_04F3::func_79CB(var_04, self.var_9D65.var_116);
+    self.var_A238 = lib_04F3::func_79CB(var_04, self.var_9D65.origin);
   }
 
   if(isDefined(param_01)) {
@@ -432,7 +432,7 @@ safepickupzonereseticon() {
   if(isDefined(self.var_607D) && self.var_607D > 0 && isDefined(self.var_2016)) {
     var_01 = self.var_2016.var_2D5A / self.var_607D;
     var_02 = self.var_A23F - var_01 * self.var_A23F;
-    lib_04FF::func_8615(var_02, var_00);
+    lib_04FF::playlocalsound(var_02, var_00);
     return;
   }
 
@@ -469,12 +469,12 @@ safepickupzoneenable() {
 }
 
 saferelayitem(param_00) {
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   lib_04FF::func_6983(self.var_695A);
   param_00 method_805B();
   var_01 = lib_04FF::func_45D0("flagTriggerRadius");
   var_02 = lib_04FF::func_45D0("flagTriggerHeight");
-  var_03 = spawn("trigger_radius", param_00.var_116, 0, var_01, var_02);
+  var_03 = spawn("trigger_radius", param_00.origin, 0, var_01, var_02);
   var_03 enablelinkTo();
   var_03.var_66F0 = 1;
   var_04 = [param_00];
@@ -523,7 +523,7 @@ saferelayitem(param_00) {
   var_05.var_1F6A = ::safe_canseerelayitem;
   var_05.var_C33 = 1;
   var_05.var_2D5A = 0;
-  var_05.var_501F = spawn("script_origin", var_04[0].var_116);
+  var_05.var_501F = spawn("script_origin", var_04[0].origin);
   var_05.var_501F setModel("tag_origin");
   var_05.var_4B80 = [];
   var_05.var_501F thread safe_sticktoentnoangles(var_04[0]);
@@ -545,7 +545,7 @@ safe_sticktoentnoangles(param_00) {
   wait(1);
   for(;;) {
     if(isDefined(param_00)) {
-      self.origin = param_00.var_116;
+      self.origin = param_00.origin;
     } else {
       return;
     }
@@ -563,12 +563,12 @@ safe_canseerelayitem(param_00, param_01) {
     var_04[var_04.size] = var_03 method_8549(0, 0, var_07);
   }
 
-  var_09 = param_00.var_116 - self.var_9D65.var_116;
+  var_09 = param_00.origin - self.var_9D65.origin;
   var_0A = common_scripts\utility::func_3D5D(var_09);
   var_0B = vectorNormalize(var_0A);
   var_0C = var_0B * 5;
   foreach(var_0E in var_04) {
-    var_0F = param_00.var_116 + (0, 0, 10);
+    var_0F = param_00.origin + (0, 0, 10);
     var_10 = var_0E + var_0C;
     var_11 = bulletTrace(var_0F, var_10, 0, var_02, 0, 0, 0, 0, 1, 0, 0);
     if(var_11["fraction"] == 1) {
@@ -581,7 +581,7 @@ safe_canseerelayitem(param_00, param_01) {
 
 saferelayitemenable() {
   maps\mp\gametypes\_gameobjects::func_365D();
-  self.var_9D65.var_116 = self.var_A582[0].var_116;
+  self.var_9D65.origin = self.var_A582[0].origin;
   self.var_9D65 linkTo(self.var_A582[0]);
   maps\mp\gametypes\_gameobjects::func_8A60("any");
   thread safeitemovertimereturntimer();
@@ -632,7 +632,7 @@ safe_canuserelayitem(param_00) {
     return 0;
   }
 
-  if(isDefined(param_00.var_99AC)) {
+  if(isDefined(param_00.throwinggrenade)) {
     return 0;
   }
 
@@ -659,7 +659,7 @@ safe_onrelayitemupdateuserate() {
   self.var_A22B = 0;
   if(self.var_230F != "none") {
     var_00 = self.var_689F[self.var_230F];
-    var_01 = self.var_689F[maps\mp\_utility::func_45DE(self.var_230F)];
+    var_01 = self.var_689F[maps\mp\_utility::getotherteam(self.var_230F)];
     var_02 = var_00 && var_01;
     if(var_00 && !var_01) {
       self.var_A22B = 1;
@@ -673,7 +673,7 @@ safe_onrelayitemupdateuserate() {
 }
 
 safeitemshouldplayerkeepcarryweapon(param_00) {
-  return param_00.var_12C["team"] == maps\mp\gametypes\_gameobjects::func_45F7();
+  return param_00.pers["team"] == maps\mp\gametypes\_gameobjects::func_45F7();
 }
 
 safe_watchdroporthrowthink() {
@@ -725,7 +725,7 @@ safe_throwphysicsflag(param_00, param_01) {
   var_0B = 0;
   var_02.var_A879 = 1;
   var_02 thread onsafesetdropped(1);
-  var_02.var_A582[0].var_116 = param_01.var_116;
+  var_02.var_A582[0].origin = param_01.origin;
   var_02 safe_flagphysicslaunch(var_07 * var_05 + var_0B, param_00);
 }
 
@@ -751,7 +751,7 @@ safe_launchflagonstick(param_00, param_01) {
   param_01 waittill("missile_stuck", var_03);
   param_00.var_A582[0] unlink();
   param_00.var_A582[0] method_80B0(var_02);
-  param_00.var_A582[0].var_116 = param_00.var_A582[0].var_116 + (0, 0, 10);
+  param_00.var_A582[0].origin = param_00.var_A582[0].origin + (0, 0, 10);
   param_00 safe_flagphysicslaunch((0, 0, 8000));
 }
 
@@ -831,9 +831,9 @@ safe_detachflag() {
   self luinotifyevent(&"ctf_is_holding_flag", 2, 0, var_00);
   if(isDefined(self.var_2013)) {
     if(self.var_2013 != "hus_intel_case_01") {
-      var_01 = self method_802E(self.var_2013, self.carryflagtag, !function_02BD());
+      var_01 = self detach(self.var_2013, self.carryflagtag, !function_02BD());
     } else {
-      var_01 = self method_802E("tag_origin", self.carryflagtag, !function_02BD());
+      var_01 = self detach("tag_origin", self.carryflagtag, !function_02BD());
     }
   }
 
@@ -851,8 +851,8 @@ onsafeitempickup(param_00) {
   self notify("picked_up");
   safe_flagfxstop();
   self.var_A879 = 0;
-  var_01 = param_00.var_12C["team"];
-  var_02 = maps\mp\_utility::func_45DE(var_01);
+  var_01 = param_00.pers["team"];
+  var_02 = maps\mp\_utility::getotherteam(var_01);
   if(var_01 != maps\mp\gametypes\_gameobjects::func_45F7()) {
     thread safe_returnflag(self.var_9D65.var_81E1);
     lib_04F3::func_79CE(game["music"]["flag_returned_pos"], var_01);
@@ -872,9 +872,9 @@ onsafeitempickup(param_00) {
   self.var_A582[0] maps\mp\_movers::func_67F9();
   self.var_A582[0] method_805B();
   self.var_A582[0] method_8511();
-  self.var_A582[0].var_116 = self.var_A582[0].var_116 + (0, 0, -10000);
+  self.var_A582[0].origin = self.var_A582[0].origin + (0, 0, -10000);
   self.var_9D65 maps\mp\_movers::func_93CE();
-  param_00 thread safe_attachflag(self, self.var_A582[0].var_106);
+  param_00 thread safe_attachflag(self, self.var_A582[0].model);
   if(self.var_79AD lib_04FF::func_45D0("flagPickupWeapon") != "noWeapSwitch") {
     param_00 common_scripts\utility::func_601();
   }
@@ -895,7 +895,7 @@ onsafeitempickup(param_00) {
     param_00 givemaxammo(self.var_201C);
   }
 
-  param_00 thread safe_store_players_grenades(self.var_79AD, self.var_A582[0].var_106);
+  param_00 thread safe_store_players_grenades(self.var_79AD, self.var_A582[0].model);
   thread safeitemsupplycarrierwithammo();
   thread safeitemcarrieroobwatch();
   lib_04F3::func_79CD("mp_ctf_flag_pickup", param_00);
@@ -913,7 +913,7 @@ onsafeitempickup(param_00) {
 
 safe_tossableflagpickupevent(param_00) {
   if(common_scripts\utility::func_F79(param_00.var_4B80, self)) {
-    thread maps\mp\_utility::func_9863("callout_flagpickup", self);
+    thread maps\mp\_utility::teamplayercardsplash("callout_flagpickup", self);
     return;
   }
 
@@ -942,7 +942,7 @@ safeitemupdateicon() {
   }
 
   if(self.var_230F != "none" && isDefined(self.var_230E)) {
-    var_00 = self.var_230E.var_12C["team"];
+    var_00 = self.var_230E.pers["team"];
     var_01 = maps\mp\gametypes\_gameobjects::func_45F7();
     var_02 = common_scripts\utility::func_98E7(var_00 == var_01, "taking_return", "grab_taking");
     safeitemseticon(var_02);
@@ -1028,7 +1028,7 @@ onsafeitemdrop(param_00) {
   }
 
   var_03 = maps\mp\gametypes\_gameobjects::func_45F7();
-  var_04 = maps\mp\_utility::func_45DE(var_03);
+  var_04 = maps\mp\_utility::getotherteam(var_03);
   lib_04F3::func_79CE(game["music"]["flag_dropped_neg"], var_03);
   lib_04F3::func_79CE(game["music"]["flag_dropped_pos"], var_04);
   thread safeitemreturnaftertime();
@@ -1074,7 +1074,7 @@ safeitemsupplycarrierwithammo() {
 
   var_00 endon("death");
   var_00 endon("disconnect");
-  while(maps\mp\_utility::func_57A0(var_00)) {
+  while(maps\mp\_utility::isreallyalive(var_00)) {
     var_00 waittill("reload");
     var_01 = var_00 getcurrentprimaryweapon();
     var_02 = var_00 getweaponammostock(var_01);
@@ -1095,7 +1095,7 @@ safeitemreturnaftertime() {
   var_00 = undefined;
   var_01 = self.var_79AD lib_04FF::func_45D0("autoReturnTime") * 1000;
   var_02 = maps\mp\gametypes\_gameobjects::func_45F7();
-  var_03 = maps\mp\_utility::func_45DE(var_02);
+  var_03 = maps\mp\_utility::getotherteam(var_02);
   for(;;) {
     if(!isDefined(var_00) || self.var_9AC3[var_02].size > 0) {
       var_00 = gettime() + var_01;
@@ -1110,9 +1110,9 @@ safeitemreturnaftertime() {
 
   lib_04F3::func_79CE(game["music"]["flag_returned_neg"], var_02);
   lib_04F3::func_79CE(game["music"]["flag_returned_pos"], var_03);
-  lib_04F3::func_79CB("mp_war_bomb_explo", self.var_A582[0].var_116);
-  playFX(common_scripts\utility::func_44F5("objective_resupply_death"), self.var_A582[0].var_116);
-  physicsexplosionsphere(self.var_A582[0].var_116, 300, 50, 2);
+  lib_04F3::func_79CB("mp_war_bomb_explo", self.var_A582[0].origin);
+  playFX(common_scripts\utility::func_44F5("objective_resupply_death"), self.var_A582[0].origin);
+  physicsexplosionsphere(self.var_A582[0].origin, 300, 50, 2);
   thread safe_returnflag(self.var_9D65.var_81E1);
 }
 
@@ -1189,9 +1189,9 @@ safeitembadtriggerwatch() {
     if(safeitemistouchingbadtrigger()) {
       waittillframeend;
       safe_logoutofbounds(self.var_A582[0], "Flag");
-      playFX(common_scripts\utility::func_44F5("objective_resupply_death"), self.var_A582[0].var_116);
-      physicsexplosionsphere(self.var_A582[0].var_116, 300, 50, 2);
-      playsoundatpos(self.var_A582[0].var_116, "mp_war_bomb_explo");
+      playFX(common_scripts\utility::func_44F5("objective_resupply_death"), self.var_A582[0].origin);
+      physicsexplosionsphere(self.var_A582[0].origin, 300, 50, 2);
+      playsoundatpos(self.var_A582[0].origin, "mp_war_bomb_explo");
       safe_flagfxstop();
       thread safe_returnflag(self.var_9D65.var_81E1);
       return;
@@ -1237,7 +1237,7 @@ safe_logoutofbounds(param_00, param_01) {
     return;
   }
 
-  var_03 = param_01 + " out-of-bounds at " + safe_printvector(param_00.var_116);
+  var_03 = param_01 + " out-of-bounds at " + safe_printvector(param_00.origin);
   iprintlnbold(var_03);
 }
 
@@ -1273,10 +1273,10 @@ safe_attackersmayalwaysuse() {
 
 safe_ondeliverbeginuse(param_00) {
   param_00.var_230C = self;
-  param_00.var_2016.var_501C lib_04FF::func_8617("ctf", undefined, undefined, undefined, undefined, self.var_A23F, self);
+  param_00.var_2016.var_501C lib_04FF::playsound("ctf", undefined, undefined, undefined, undefined, self.var_A23F, self);
   var_01 = self.var_79AD lib_04FF::func_45D0("flagDeliverStartSound");
   if(var_01 != "") {
-    self.var_A238 = lib_04F3::func_79CB(var_01, self.var_9D65.var_116);
+    self.var_A238 = lib_04F3::func_79CB(var_01, self.var_9D65.origin);
   }
 
   lib_04FF::func_8610(param_00);
@@ -1301,7 +1301,7 @@ safe_ondeliverenduse(param_00, param_01, param_02) {
 
   var_04 = self.var_79AD lib_04FF::func_45D0("flagDeliverStopSound");
   if(var_04 != "") {
-    lib_04F3::func_79CB(var_04, self.var_9D65.var_116);
+    lib_04F3::func_79CB(var_04, self.var_9D65.origin);
   }
 }
 
@@ -1340,8 +1340,8 @@ onsafeitemdelivered(param_00) {
   var_01 thread safe_returnflag();
   var_01.var_2D5A++;
   param_00 thread maps\mp\_events::func_3CB7();
-  var_02 = param_00.var_12C["team"];
-  var_03 = maps\mp\_utility::func_45DE(var_02);
+  var_02 = param_00.pers["team"];
+  var_03 = maps\mp\_utility::getotherteam(var_02);
   if(self.var_79AD.var_2933 < self.var_79AD lib_04FF::func_45D0("objectiveScoreGoal")) {
     lib_04F3::func_79CE("mp_war_stinger_pos", var_02);
     lib_04F3::func_79CE("mp_war_stinger_neg", var_03);
@@ -1362,23 +1362,23 @@ onsafesetdropped(param_00) {
     var_01.var_230C.var_28D5 = 0;
   }
 
-  if(isDefined(var_01) && var_01.var_12C["team"] != "spectator") {
-    var_02 = var_01.var_116;
+  if(isDefined(var_01) && var_01.pers["team"] != "spectator") {
+    var_02 = var_01.origin;
   } else {
-    var_02 = self.var_802F;
+    var_02 = self.detachall;
   }
 
   var_02 = var_02 + (0, 0, 40);
   var_03 = (0, 0, 0);
   for(var_04 = 0; var_04 < self.var_A582.size; var_04++) {
-    self.var_A582[var_04].var_116 = var_02;
+    self.var_A582[var_04].origin = var_02;
     self.var_A582[var_04].var_1D = var_03;
     self.var_A582[var_04] method_805B();
   }
 
-  self.var_9D65.var_116 = var_02;
+  self.var_9D65.origin = var_02;
   self.var_A582[0] method_808C();
-  self.var_28D4 = self.var_9D65.var_116;
+  self.var_28D4 = self.var_9D65.origin;
   safe_flag_carrier_cleanup();
   if(isDefined(self.var_6AEF)) {
     self[[self.var_6AEF]](self.var_2006);
@@ -1407,7 +1407,7 @@ safe_flagphysicslaunch(param_00, param_01) {
     var_02.var_1D = (0, var_03[1] + 250, 120);
   }
 
-  var_02 physicslaunchserver(var_02.var_116, param_00);
+  var_02 physicslaunchserver(var_02.origin, param_00);
 }
 
 safe_flag_carrier_cleanup() {
@@ -1437,26 +1437,26 @@ safe_store_players_grenades(param_00, param_01) {
     }
 
     var_03 = spawnStruct();
-    var_03.var_109 = self method_834A();
-    var_03.var_2420 = self getweaponammoclip(var_03.var_109, "right");
-    var_03.var_93AF = self getweaponammostock(var_03.var_109);
+    var_03.name = self method_834A();
+    var_03.var_2420 = self getweaponammoclip(var_03.name, "right");
+    var_03.var_93AF = self getweaponammostock(var_03.name);
     self.var_9426["lethal_offhand"] = var_03;
     var_04 = spawnStruct();
-    var_04.var_109 = self method_831F();
-    var_04.var_2420 = self getweaponammoclip(var_04.var_109, "right");
-    var_04.var_93AF = self getweaponammostock(var_04.var_109);
+    var_04.name = self getoffhandsecondaryclass();
+    var_04.var_2420 = self getweaponammoclip(var_04.name, "right");
+    var_04.var_93AF = self getweaponammostock(var_04.name);
     self.var_9426["tactical_offhand"] = var_04;
-    if(var_03.var_109 != "none") {
-      self takeweapon(var_03.var_109);
+    if(var_03.name != "none") {
+      self takeweapon(var_03.name);
     }
 
-    if(var_04.var_109 != "none") {
-      self takeweapon(var_04.var_109);
+    if(var_04.name != "none") {
+      self takeweapon(var_04.name);
     }
 
     self method_8349(var_02);
     self giveweapon(var_02);
-    self method_82FA(var_02, 1, "right");
+    self setweaponammoclip(var_02, 1, "right");
     self setweaponammostock(var_02, 1);
     return;
   }
@@ -1492,19 +1492,19 @@ safe_restore_players_grenades(param_00, param_01) {
   }
 
   var_04 = self.var_9426["lethal_offhand"];
-  if(var_04.var_109 != "none") {
-    self method_8349(var_04.var_109);
-    self giveweapon(var_04.var_109);
-    self method_82FA(var_04.var_109, var_04.var_2420, "right");
-    self setweaponammostock(var_04.var_109, var_04.var_93AF);
+  if(var_04.name != "none") {
+    self method_8349(var_04.name);
+    self giveweapon(var_04.name);
+    self setweaponammoclip(var_04.name, var_04.var_2420, "right");
+    self setweaponammostock(var_04.name, var_04.var_93AF);
   }
 
   var_05 = self.var_9426["tactical_offhand"];
-  if(var_05.var_109 != "none") {
-    self method_831E(var_05.var_109);
-    self giveweapon(var_05.var_109);
-    self method_82FA(var_05.var_109, var_05.var_2420, "right");
-    self setweaponammostock(var_05.var_109, var_05.var_93AF);
+  if(var_05.name != "none") {
+    self setoffhandsecondaryclass(var_05.name);
+    self giveweapon(var_05.name);
+    self setweaponammoclip(var_05.name, var_05.var_2420, "right");
+    self setweaponammostock(var_05.name, var_05.var_93AF);
   }
 }
 
@@ -1583,7 +1583,7 @@ safe_updatefueldepotonpickup(param_00, param_01) {
     var_03 waittill("flag_pickup", var_04);
     if(param_01) {
       param_00 notify("showToTeam");
-      param_00 method_805C();
+      param_00 save_undo_buffer();
     } else {
       param_00 lib_0502::func_8C20();
     }
@@ -1599,7 +1599,7 @@ safe_updatefueldepotonpickup(param_00, param_01) {
 }
 
 safe_relayobjectivemodel(param_00) {
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   lib_04FF::func_6983(self.var_695A);
   if(!lib_04FF::func_45D0("objModelDissappearsOnPickup")) {
     param_00 thread lib_0502::func_8C21(game["attackers"]);
@@ -1619,7 +1619,7 @@ safe_relayobjectivemodel(param_00) {
 
 safe_relaynonobjectivemodel(param_00) {
   lib_04FF::func_6983(self.var_695A);
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   param_00 thread lib_0502::func_8C21(game["defenders"]);
   thread safe_updatefueldepotonpickup(param_00, 0);
   lib_04FF::func_6982(self.var_695A);
@@ -1635,7 +1635,7 @@ safe_updateintelonpickup(param_00, param_01) {
     var_03 waittill("flag_pickup", var_04);
     if(param_01) {
       param_00 notify("showToTeam");
-      param_00 method_805C();
+      param_00 save_undo_buffer();
     } else {
       param_00 lib_0502::func_8C20();
     }
@@ -1668,8 +1668,8 @@ safe_updatehudoutline() {
   self endon("death");
   self endon("destroyed");
   for(;;) {
-    foreach(var_01 in level.var_744A) {
-      var_01 safe_setoutline(self, var_01.var_1A7);
+    foreach(var_01 in level.players) {
+      var_01 safe_setoutline(self, var_01.team);
     }
 
     wait(3);
@@ -1683,8 +1683,8 @@ safe_updatehudoutlineforcarrier(param_00) {
   param_00 endon("death");
   param_00 endon("disconnect");
   for(;;) {
-    if(param_00.var_1A7 == game["attackers"]) {
-      param_00 safe_setoutline(self, param_00.var_1A7);
+    if(param_00.team == game["attackers"]) {
+      param_00 safe_setoutline(self, param_00.team);
     }
 
     wait(3);

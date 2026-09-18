@@ -8,8 +8,8 @@ init() {
   lib_0557::func_7846("quest_get_bearings", ::lib_0557::func_30D8, [], &"ZOMBIE_BERLIN_HINT_QUEST_GET_BEARINGS");
   lib_0557::func_781E("quest_get_bearings", "step_get_bearings", ::quest_step_get_bearings, ::lib_0557::func_30D8, &"ZOMBIE_BERLIN_HINT_STEP_GET_BEARINGS");
   lib_0557::func_7848("quest_get_bearings");
-  common_scripts\utility::func_3C87("flag_exit_underbelly");
-  common_scripts\utility::func_3C87("flag_straub_death_scene");
+  common_scripts\utility::flag_init("flag_exit_underbelly");
+  common_scripts\utility::flag_init("flag_straub_death_scene");
   lib_0557::func_7846("quest_contact_hq", ::lib_0557::func_30D8, ["quest_get_bearings"], &"ZOMBIE_BERLIN_HINT_QUEST_CONTACT_HQ");
   lib_0557::func_781E("quest_contact_hq", "step_find_radio", ::quest_step_find_radio, ::lib_0557::func_30D8, &"ZOMBIE_BERLIN_HINT_STEP_FIND_RADIO");
   lib_0557::func_781E("quest_contact_hq", "step_use_radio", ::quest_step_use_radio, ::lib_0557::func_30D8, &"ZOMBIE_BERLIN_HINT_STEP_USE_RADIO");
@@ -20,7 +20,7 @@ init() {
   lib_0557::func_7846("quest_draw_airship", ::lib_0557::func_30D8, ["quest_contact_soviets"], &"ZOMBIE_BERLIN_HINT_QUEST_DRAW_AIRSHIP");
   lib_0557::func_781E("quest_draw_airship", "step_ignite_flare", ::lib_0557::func_30D8, ::lib_0557::func_30D8, &"ZOMBIE_BERLIN_HINT_STEP_IGNITE_FLARE");
   lib_0557::func_7848("quest_draw_airship");
-  common_scripts\utility::func_3C87("flag_drop_pod_reached_airship");
+  common_scripts\utility::flag_init("flag_drop_pod_reached_airship");
   thread airship_master_logic();
   thread setup_airship_anchors();
   lib_0557::func_7846("quest_bring_down_airship", ::lib_0557::func_30D8, ["quest_draw_airship"], &"ZOMBIE_BERLIN_HINT_QUEST_BRING_DOWN_AIRSHIP");
@@ -82,7 +82,7 @@ quest_step_get_bearings_complete() {
     var_02 common_scripts\utility::func_9D9F();
   }
 
-  common_scripts\utility::func_3C8F("flag_exit_underbelly");
+  common_scripts\utility::flag_set("flag_exit_underbelly");
   iprintlnbold("We have to find a radio and contact HQ for help!");
 }
 
@@ -252,17 +252,17 @@ flare_box_init() {
     var_03 waittill("damage");
     lib_0378::func_8D74("aud_flare_triggered", var_00.origin);
     var_06 = getEnt("origin_flare_crate_fx", "targetname");
-    playFX(level.var_611["flare_sparks"], var_06.origin);
+    playFX(level._effect["flare_sparks"], var_06.origin);
     wait(0.5);
-    playFX(level.var_611["zmb_ber_warning_flare"], var_06.origin);
-    playFX(level.var_611["flare_sparks"], var_06.origin);
+    playFX(level._effect["zmb_ber_warning_flare"], var_06.origin);
+    playFX(level._effect["flare_sparks"], var_06.origin);
     wait(0.4);
-    playFX(level.var_611["flare_sparks"], var_06.origin);
-    playFX(level.var_611["zmb_ber_warning_flare"], var_06.origin);
+    playFX(level._effect["flare_sparks"], var_06.origin);
+    playFX(level._effect["zmb_ber_warning_flare"], var_06.origin);
     wait(1);
     if(common_scripts\utility::func_3C77(lib_0557::func_7838("quest_contact_soviets", "step_contact_soviets")) && !common_scripts\utility::func_3C77("flag_airship_summoned")) {
-      common_scripts\utility::func_3C8F("flag_airship_summoned");
-      common_scripts\utility::func_3C8F("flag_sizzlers_active");
+      common_scripts\utility::flag_set("flag_airship_summoned");
+      common_scripts\utility::flag_set("flag_sizzlers_active");
       iprintlnbold("Airship summoned!");
       lib_0557::func_782D("quest_draw_airship", "step_ignite_flare");
       lib_054D::giveplayersexp("berlin_exp_ref_21");
@@ -332,11 +332,11 @@ flare_crate_smash_open() {}
 __________________bring_down_airship__________________() {}
 
 setup_airship_anchors() {
-  common_scripts\utility::func_3C87("flag_airship_anchor_a_reeled");
-  common_scripts\utility::func_3C87("flag_airship_anchor_b_reeled");
-  common_scripts\utility::func_3C87("flag_airship_anchor_c_reeled");
-  common_scripts\utility::func_3C87("flag_airship_anchor_d_reeled");
-  common_scripts\utility::func_3C87("flag_airship_anchor_c_being_charged");
+  common_scripts\utility::flag_init("flag_airship_anchor_a_reeled");
+  common_scripts\utility::flag_init("flag_airship_anchor_b_reeled");
+  common_scripts\utility::flag_init("flag_airship_anchor_c_reeled");
+  common_scripts\utility::flag_init("flag_airship_anchor_d_reeled");
+  common_scripts\utility::flag_init("flag_airship_anchor_c_being_charged");
   common_scripts\utility::func_3C7B("flag_airship_anchor_c_being_charged");
   var_00 = getEnt("origin_anchor_base_a", "script_noteworthy");
   var_00 hide();
@@ -346,7 +346,7 @@ quest_step_airship_anchors() {
   var_00 = getEntArray("airship_anchor_model", "script_noteworthy");
   var_01 = getEntArray("airship_anchor_ring", "script_noteworthy");
   foreach(var_03 in var_00) {
-    var_03.tether_ambient_effects = spawnlinkedfx(level.var_611["zmb_ber_zep_tether_ambient"], var_03, "Tag_Origin");
+    var_03.tether_ambient_effects = spawnlinkedfx(level._effect["zmb_ber_zep_tether_ambient"], var_03, "Tag_Origin");
     triggerfx(var_03.tether_ambient_effects);
     foreach(var_05 in var_01) {
       if(var_05.var_8260 == var_03.var_8260) {
@@ -391,7 +391,7 @@ quest_step_airship_anchors() {
     }
 
     var_03.damage_trig enablelinkTo();
-    var_03.damage_trig method_8449(var_03);
+    var_03.damage_trig linktosynchronizedparent(var_03);
     var_03.damage_trig method_80B0(var_03.damage_trig method_85A0() | 256);
   }
 
@@ -412,7 +412,7 @@ airship_anchor_get_blasted(param_00, param_01, param_02) {
       self notify("notify_airship_anchor_blasted");
       level notify("airship_anchor_damaged");
       if(!isDefined(self.tether_impact)) {
-        self.tether_impact = spawnlinkedfx(level.var_611["zmb_ber_zep_tether_charge"], param_00, "Tag_Origin");
+        self.tether_impact = spawnlinkedfx(level._effect["zmb_ber_zep_tether_charge"], param_00, "Tag_Origin");
       }
 
       triggerfx(self.tether_impact);
@@ -428,7 +428,7 @@ airship_anchor_get_blasted(param_00, param_01, param_02) {
 
 airship_anchor_museum_first_shot(param_00) {
   self waittill("notify_airship_anchor_blasted");
-  playFX(level.var_611["zmb_tether_rock_burst"], param_00.origin);
+  playFX(level._effect["zmb_tether_rock_burst"], param_00.origin);
 }
 
 airship_anchor_soul_bucket(param_00, param_01) {
@@ -447,10 +447,10 @@ airship_anchor_soul_bucket(param_00, param_01) {
     }
 
     level.airship_lower_percentage = level.airship_lower_percentage + 25;
-    playFX(level.var_611["zmb_ber_zep_tether_charge"], var_02.origin);
+    playFX(level._effect["zmb_ber_zep_tether_charge"], var_02.origin);
     iprintlnbold("soul collection for " + param_01 + " end");
-    common_scripts\utility::func_3C8F(param_01);
-    var_03 = spawnlinkedfx(level.var_611["zmb_ber_zep_tether_on"], self, "Tag_Origin");
+    common_scripts\utility::flag_set(param_01);
+    var_03 = spawnlinkedfx(level._effect["zmb_ber_zep_tether_on"], self, "Tag_Origin");
     triggerfx(var_03);
     self notify("anchor_charge_complete");
     common_scripts\utility::func_3C7B("flag_airship_anchor_c_being_charged");
@@ -470,7 +470,7 @@ airship_anchor_wonderweapon_collection(param_00, param_01, param_02) {
   }
 
   if(!common_scripts\utility::func_3C77(param_02)) {
-    common_scripts\utility::func_3C8F(param_02);
+    common_scripts\utility::flag_set(param_02);
     var_03 = getEnt("origin_anchor_base_a", "script_noteworthy");
     level.var_8E3 = common_scripts\utility::func_F93(level.var_8E3, var_03);
     if(!isDefined(level.airship_lower_percentage)) {
@@ -479,7 +479,7 @@ airship_anchor_wonderweapon_collection(param_00, param_01, param_02) {
 
     level.airship_lower_percentage = level.airship_lower_percentage + 25;
     param_00.tether_ambient_effects delete();
-    var_04 = spawnlinkedfx(level.var_611["zmb_ber_zep_tether_on"], param_00, "Tag_Origin");
+    var_04 = spawnlinkedfx(level._effect["zmb_ber_zep_tether_on"], param_00, "Tag_Origin");
     thread maps / mp / mp_zombie_berlin_lighting::set_anchor_fast_pulse_lights();
   }
 }
@@ -487,7 +487,7 @@ airship_anchor_wonderweapon_collection(param_00, param_01, param_02) {
 airship_anchor_charge_progress_vfx() {
   for(;;) {
     if(self.percent_filled > 0) {
-      var_00 = spawnlinkedfx(level.var_611["zmb_ber_zep_tether_charge_a"], self, "Tag_Origin");
+      var_00 = spawnlinkedfx(level._effect["zmb_ber_zep_tether_charge_a"], self, "Tag_Origin");
       triggerfx(var_00);
       iprintlnbold("Play 1-49% VFX");
       break;
@@ -498,7 +498,7 @@ airship_anchor_charge_progress_vfx() {
 
   for(;;) {
     if(self.percent_filled > 50) {
-      var_01 = spawnlinkedfx(level.var_611["zmb_ber_zep_tether_charge_b"], self, "Tag_Origin");
+      var_01 = spawnlinkedfx(level._effect["zmb_ber_zep_tether_charge_b"], self, "Tag_Origin");
       var_00 delete();
       triggerfx(var_01);
       iprintlnbold("Play 50-99% VFX");
@@ -510,7 +510,7 @@ airship_anchor_charge_progress_vfx() {
 
   for(;;) {
     if(self.percent_filled >= 100) {
-      var_02 = spawnlinkedfx(level.var_611["zmb_ber_zep_tether_charge_c"], self, "Tag_Origin");
+      var_02 = spawnlinkedfx(level._effect["zmb_ber_zep_tether_charge_c"], self, "Tag_Origin");
       var_01 delete();
       triggerfx(var_02);
       iprintlnbold("Play 100% VFX");
@@ -535,7 +535,7 @@ airship_anchor_soul_bucket_charge(param_00, param_01) {
 
 airship_anchor_charge_soul_bucket_animation(param_00) {
   self endon("anchor_charge_complete");
-  common_scripts\utility::func_3C8F("flag_airship_anchor_c_being_charged");
+  common_scripts\utility::flag_set("flag_airship_anchor_c_being_charged");
   if(!isDefined(self.anim_progress)) {
     self.anim_progress = 0;
   }
@@ -572,7 +572,7 @@ airship_anchor_charge_ring_animation(param_00) {
   var_02 = param_00 * 0.1;
   for(;;) {
     self.ring scriptmodelplayanim("s2_zom_zep_tether_scene_ring_up", "", self.anim_progress * var_01, 1 / var_02);
-    common_scripts\utility::func_3C8F("flag_airship_anchor_c_being_charged");
+    common_scripts\utility::flag_set("flag_airship_anchor_c_being_charged");
     self.ring_start_time = gettime();
     var_03 = var_02 * 1 - self.anim_progress;
     if(var_03 < 0) {
@@ -621,14 +621,14 @@ airship_anchor_charge_ring_listen() {
 
 play_tether_charge_audio(param_00) {
   if(!common_scripts\utility::func_562E(param_00)) {
-    lib_0380::func_2893(self.charge_audio_stop, 0.2);
+    lib_0380::_stoplocalsound(self.charge_audio_stop, 0.2);
     self.charge_audio_stop = undefined;
     self.charge_audio_start = lib_0380::func_288B("zmb_berl_tether_winch_start", undefined, self);
     self.charge_audio_lp1 = lib_0380::func_6844("zmb_berl_tether_winch_lp", undefined, self, 0.5);
     self.charge_audio_lp2 = lib_0380::func_6844("zmb_berl_tether_winch_lp2", undefined, self, 0.5);
     self.charge_audio_lp3 = lib_0380::func_6844("zmb_berl_tether_winch_lp3", undefined, self, 0.5);
     common_scripts\utility::waittill_any("anchor_ring_stop_charging", "anchor_charge_complete");
-    lib_0380::func_2893(self.charge_audio_start, 0.2);
+    lib_0380::_stoplocalsound(self.charge_audio_start, 0.2);
     self.charge_audio_start = undefined;
     lib_0380::func_6850(self.charge_audio_lp1, 0.5);
     self.charge_audio_lp1 = undefined;
@@ -659,11 +659,11 @@ quest_drop_pod_init() {
   var_00 notsolid();
   var_01 = getEnt("dropcage_push_trigger", "targetname");
   var_01 enablelinkTo();
-  var_01 method_8449(var_00);
+  var_01 linktosynchronizedparent(var_00);
   var_02 = getEnt("pod_underneath_clip", "targetname");
   var_02 movez(-742, 0.05);
   wait 0.05;
-  var_02 method_8449(var_00);
+  var_02 linktosynchronizedparent(var_00);
   var_02 notsolid();
   var_02 connectpaths();
   var_03 = getEnt("drop_pod_cable", "script_noteworthy");
@@ -672,24 +672,24 @@ quest_drop_pod_init() {
   var_00.lightfx hide();
   var_04 = getEnt("trig_dmg_drop_pod_winch", "script_noteworthy");
   var_04 enablelinkTo();
-  var_04 method_8449(var_00);
+  var_04 linktosynchronizedparent(var_00);
   var_04 hide();
   var_05 = getEnt("clip_wpn_drop_pod_winch", "script_noteworthy");
   var_05 hide();
-  var_05 method_8449(var_00);
+  var_05 linktosynchronizedparent(var_00);
   var_06 = getEnt("clip_drop_pod_closed", "script_noteworthy");
   var_06 hide();
   var_06 notsolid();
-  var_06 method_8449(var_00);
+  var_06 linktosynchronizedparent(var_00);
   var_07 = getEnt("clip_drop_pod", "script_noteworthy");
   var_07 hide();
   var_07 notsolid();
-  var_07 method_8449(var_00);
+  var_07 linktosynchronizedparent(var_00);
   var_08 = getEnt("org_tp_plaza", "script_noteworthy");
-  var_08 method_8449(var_00);
+  var_08 linktosynchronizedparent(var_00);
   var_09 = getEntArray("pod_player_teleport_spot", "script_noteworthy");
   foreach(var_0B in var_09) {
-    var_0B method_8449(var_00);
+    var_0B linktosynchronizedparent(var_00);
   }
 
   var_0D = getEnt("clip_drop_pod_nav_blocker", "script_noteworthy");
@@ -739,8 +739,8 @@ quest_drop_pod_show_pod() {
   var_05 = getEnt("org_drop_pod_winch_vfx", "script_noteworthy");
   var_06 = spawn("script_model", var_05.origin);
   var_06 setModel("tag_origin");
-  var_06 method_8449(var_00);
-  playFXOnTag(level.var_611["zmb_ber_droppod_roof"], var_06, "Tag_Origin");
+  var_06 linktosynchronizedparent(var_00);
+  playFXOnTag(level._effect["zmb_ber_droppod_roof"], var_06, "Tag_Origin");
 }
 
 quest_drop_pod_movement() {
@@ -750,8 +750,8 @@ quest_drop_pod_movement() {
     var_02.var_A045 = ::quest_drop_pod_unresolved_collision_func;
   }
 
-  common_scripts\utility::func_3C87("flag_drop_pod_can_be_charged");
-  common_scripts\utility::func_3C8F("flag_drop_pod_can_be_charged");
+  common_scripts\utility::flag_init("flag_drop_pod_can_be_charged");
+  common_scripts\utility::flag_set("flag_drop_pod_can_be_charged");
   level.drop_pod_charge = 0;
   var_04 = getEnt("drop_pod_model", "script_noteworthy");
   var_05 = getEnt("clip_drop_pod_closed", "script_noteworthy");
@@ -823,7 +823,7 @@ quest_drop_pod_impact_ground() {
   lib_0378::func_8D74("inside_droppod_submix_stp");
   level notify("stop_move_down_rumble");
   maps / mp / mp_zombie_berlin_utils::earthquake_alive_players(0.35, 0.5, 100000);
-  common_scripts\utility::func_3C8F("flag_drop_pod_can_be_charged");
+  common_scripts\utility::flag_set("flag_drop_pod_can_be_charged");
   var_00 lib_0378::func_8D74("droppod_ground_impact");
 }
 
@@ -832,7 +832,7 @@ quest_drop_pod_charge_init() {
   var_00 = getEnt("trig_dmg_drop_pod_winch", "script_noteworthy");
   var_00 method_80B0(var_00 method_85A0() | 256);
   var_00 setdamagecallbackon(1);
-  var_00.var_29B5 = ::quest_drop_pod_charge_damage_callback;
+  var_00.damagecallback = ::quest_drop_pod_charge_damage_callback;
 }
 
 quest_drop_pod_charge_damage_callback(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
@@ -911,7 +911,7 @@ quest_drop_pod_charge_drain() {
 quest_drop_pod_teleport_to_airship() {
   level endon(lib_0557::func_7838("quest_bring_down_airship", "step_raise_dropcage"));
   level waittill("drop_pod_reached_airship");
-  common_scripts\utility::func_3C8F("flag_drop_pod_reached_airship");
+  common_scripts\utility::flag_set("flag_drop_pod_reached_airship");
   var_00 = getEnt("clip_door", "script_noteworthy");
   var_00 delete();
   thread airship_audiolog_init();
@@ -963,11 +963,11 @@ quest_drop_pod_entered_airship() {
 quest_drop_pod_unresolved_collision_func(param_00) {}
 
 airship_master_logic() {
-  common_scripts\utility::func_3C87("flag_airship_summoned");
-  common_scripts\utility::func_3C87("flag_airship_reached_middle");
-  common_scripts\utility::func_3C87("flag_airship_fully_lowered");
-  common_scripts\utility::func_3C87("flag_airship_doors_opened");
-  common_scripts\utility::func_3C87("level_to_airship");
+  common_scripts\utility::flag_init("flag_airship_summoned");
+  common_scripts\utility::flag_init("flag_airship_reached_middle");
+  common_scripts\utility::flag_init("flag_airship_fully_lowered");
+  common_scripts\utility::flag_init("flag_airship_doors_opened");
+  common_scripts\utility::flag_init("level_to_airship");
   level.airship = getEntArray("berlin_airship_map", "targetname");
   level.airship_active = 0;
   level.airship_doors_open = 0;
@@ -983,7 +983,7 @@ airship_master_logic() {
   level.straub_airship.canmakesizzlers = 0;
   var_03 = common_scripts\utility::func_46B5("zeppelin_sizzler_cannon", "targetname");
   level.straub_airship.siz_cannon = var_03 maps / mp / mp_zombie_berlin_utils::airship_turret_build("turretweapon_zeppelin_siz_zm", var_03.script_noteworthy, ::maps / mp / mp_zombie_berlin_utils::airship_turret_modify_player_damage, ::maps / mp / mp_zombie_berlin_utils::airship_turret_on_player_damage, ::maps / mp / mp_zombie_berlin_utils::airship_turret_modify_agent_damage, ::maps / mp / mp_zombie_berlin_utils::airship_turret_on_agent_damage);
-  level.straub_airship.siz_cannon method_8449(level.straub_airship);
+  level.straub_airship.siz_cannon linktosynchronizedparent(level.straub_airship);
   level.straub_airship thread maps / mp / mp_zombie_berlin_utils::airship_turret_think();
   common_scripts\utility::func_3C9F("flag_airship_summoned");
   level thread maps / mp / mp_zombie_berlin_utils::airship_straub_summon();
@@ -993,21 +993,21 @@ airship_master_logic() {
   common_scripts\utility::func_3C9F("flag_airship_fully_lowered");
   level thread maps / mp / mp_zombie_berlin_utils::airship_interior_state_swap();
   common_scripts\utility::func_3C9F("flag_airship_doors_opened");
-  common_scripts\utility::func_3C8F("level_to_airship");
+  common_scripts\utility::flag_set("level_to_airship");
   level thread maps / mp / mp_zombie_berlin_utils::airship_route_blockers_state_swap();
 }
 
 warp_lower_drop_pod() {
-  common_scripts\utility::func_3C8F("flag_airship_anchor_a_reeled");
-  common_scripts\utility::func_3C8F("flag_airship_anchor_b_reeled");
-  common_scripts\utility::func_3C8F("flag_airship_anchor_c_reeled");
-  common_scripts\utility::func_3C8F("flag_airship_anchor_d_reeled");
+  common_scripts\utility::flag_set("flag_airship_anchor_a_reeled");
+  common_scripts\utility::flag_set("flag_airship_anchor_b_reeled");
+  common_scripts\utility::flag_set("flag_airship_anchor_c_reeled");
+  common_scripts\utility::flag_set("flag_airship_anchor_d_reeled");
 }
 
 debug_show_tp_org() {
   var_00 = getEnt("drop_pod_model", "script_noteworthy");
   var_01 = getEnt("debug_drop_pod_tp", "script_noteworthy");
-  var_01 method_8449(var_00);
+  var_01 linktosynchronizedparent(var_00);
   var_01 notsolid();
   var_01 hide();
 }
@@ -1044,13 +1044,13 @@ debug_lower_drop_pod_incremental_listen() {
   }
 
   level waittill("debug_lower_drop_pod");
-  common_scripts\utility::func_3C8F(level.airship_anchor_flag_array[0]);
+  common_scripts\utility::flag_set(level.airship_anchor_flag_array[0]);
   level waittill("debug_lower_drop_pod");
-  common_scripts\utility::func_3C8F(level.airship_anchor_flag_array[1]);
+  common_scripts\utility::flag_set(level.airship_anchor_flag_array[1]);
   level waittill("debug_lower_drop_pod");
-  common_scripts\utility::func_3C8F(level.airship_anchor_flag_array[2]);
+  common_scripts\utility::flag_set(level.airship_anchor_flag_array[2]);
   level waittill("debug_lower_drop_pod");
-  common_scripts\utility::func_3C8F(level.airship_anchor_flag_array[3]);
+  common_scripts\utility::flag_set(level.airship_anchor_flag_array[3]);
 }
 
 debug_cheat_lower_drop_pod() {}
@@ -1058,13 +1058,13 @@ debug_cheat_lower_drop_pod() {}
 __________________build_wunderbuss__________________() {}
 
 quest_wunderbuss_init() {
-  common_scripts\utility::func_3C87("flag_quest_wunderbuss_battery_collected");
-  common_scripts\utility::func_3C87("flag_quest_wunderbuss_battery_placed");
-  common_scripts\utility::func_3C87("flag_quest_wunderbuss_geistbolt_collected");
-  common_scripts\utility::func_3C87("flag_quest_wunderbuss_geistbolt_placed");
-  common_scripts\utility::func_3C87("flag_quest_wunderbuss_holding_battery");
-  common_scripts\utility::func_3C87("flag_quest_wunderbuss_wunderbuss_built");
-  common_scripts\utility::func_3C87("flag_quest_wunderbuss_escape_smugglers_den");
+  common_scripts\utility::flag_init("flag_quest_wunderbuss_battery_collected");
+  common_scripts\utility::flag_init("flag_quest_wunderbuss_battery_placed");
+  common_scripts\utility::flag_init("flag_quest_wunderbuss_geistbolt_collected");
+  common_scripts\utility::flag_init("flag_quest_wunderbuss_geistbolt_placed");
+  common_scripts\utility::flag_init("flag_quest_wunderbuss_holding_battery");
+  common_scripts\utility::flag_init("flag_quest_wunderbuss_wunderbuss_built");
+  common_scripts\utility::flag_init("flag_quest_wunderbuss_escape_smugglers_den");
   level.smuggler_den_doors_open = 0;
   thread quest_wunderbuss_init_bench();
   var_00 = common_scripts\utility::func_46B5("weapon_assembly_bench", "targetname");
@@ -1102,20 +1102,20 @@ quest_wunderbuss_collect_battery() {
         var_0B = common_scripts\utility::func_46B5(var_0A.targetname, "targetname");
         var_07 = spawn("script_model", var_0B.origin);
         var_07 setModel("tag_origin");
-        playFXOnTag(level.var_611["red_dot_light"], var_07, "tag_origin");
+        playFXOnTag(level._effect["red_dot_light"], var_07, "tag_origin");
         break;
     }
   }
 
   var_06 waittill("trigger");
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_battery_collected");
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_holding_battery");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_battery_collected");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_holding_battery");
   lib_0378::func_8D74("wonderbuss_build_collect_battery", var_06.origin);
   foreach(var_02 in var_00) {
     var_02 delete();
   }
 
-  killfxontag(level.var_611["red_dot_light"], var_07, "tag_origin");
+  killfxontag(level._effect["red_dot_light"], var_07, "tag_origin");
 }
 
 quest_wunderbuss_collect_bolt() {
@@ -1156,7 +1156,7 @@ quest_wunderbuss_access_smuggler_den() {
     } else if(!common_scripts\utility::func_3C77("flag_quest_wunderbuss_holding_battery") && !common_scripts\utility::func_3C77("flag_quest_wunderbuss_battery_placed")) {
       lib_0378::func_8D74("wonderbuss_build_battery_door_lock", var_01.origin);
       var_01 hide();
-      common_scripts\utility::func_3C8F("flag_quest_wunderbuss_holding_battery");
+      common_scripts\utility::flag_set("flag_quest_wunderbuss_holding_battery");
       level thread common_scripts\_exploder::func_2A6D(220, undefined, 0);
       level thread common_scripts\_exploder::func_88E(219);
       if(level.smuggler_den_doors_open) {
@@ -1175,7 +1175,7 @@ quest_wunderbuss_build_weapon() {
   self.assembly_trig thread quest_wunderbuss_build_part(self.assembly_model_bolt, "flag_quest_wunderbuss_geistbolt_collected", "flag_quest_wunderbuss_geistbolt_placed");
   while(!common_scripts\utility::func_3C77("flag_quest_wunderbuss_wunderbuss_built")) {
     if(common_scripts\utility::func_3C77("flag_quest_wunderbuss_battery_placed") && common_scripts\utility::func_3C77("flag_quest_wunderbuss_geistbolt_placed")) {
-      common_scripts\utility::func_3C8F("flag_quest_wunderbuss_wunderbuss_built");
+      common_scripts\utility::flag_set("flag_quest_wunderbuss_wunderbuss_built");
       continue;
     }
 
@@ -1228,7 +1228,7 @@ quest_wunderbuss_build_part(param_00, param_01, param_02) {
     self waittill("trigger");
     if(param_01 == "flag_quest_wunderbuss_battery_collected") {
       if(common_scripts\utility::func_3C77(param_02)) {
-        common_scripts\utility::func_3C8F("flag_quest_wunderbuss_holding_battery");
+        common_scripts\utility::flag_set("flag_quest_wunderbuss_holding_battery");
         common_scripts\utility::func_3C7B(param_02);
         foreach(var_06 in var_04) {
           if(var_06.script_noteworthy != "wunderbuss_weapon_base") {
@@ -1252,7 +1252,7 @@ quest_wunderbuss_build_part(param_00, param_01, param_02) {
         lib_0378::func_8D74("wonderbuss_weapon_build_infusion", param_00.origin);
         self setHintString(" ");
         common_scripts\utility::func_3C7B("flag_quest_wunderbuss_holding_battery");
-        common_scripts\utility::func_3C8F(param_02);
+        common_scripts\utility::flag_set(param_02);
       }
     } else if(!common_scripts\utility::func_3C77("flag_quest_wunderbuss_geistbolt_placed")) {
       foreach(var_06 in var_04) {
@@ -1263,7 +1263,7 @@ quest_wunderbuss_build_part(param_00, param_01, param_02) {
       level thread common_scripts\_exploder::func_88E(208);
       lib_0378::func_8D74("wonderbuss_weapon_build_infusion", param_00.origin);
       self setHintString(" ");
-      common_scripts\utility::func_3C8F(param_02);
+      common_scripts\utility::flag_set(param_02);
     }
 
     if(common_scripts\utility::func_3C77("flag_quest_wunderbuss_wunderbuss_built")) {
@@ -1367,7 +1367,7 @@ quest_wunderbuss_escape_smuggler_den() {
     level thread quest_wunderbuss_open_close_doors();
   }
 
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_escape_smugglers_den");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_escape_smugglers_den");
 }
 
 quest_wunderbuss_escape_smuggler_den_reset_check() {
@@ -1396,7 +1396,7 @@ quest_wunderbuss_escape_smuggler_den_reset_check() {
     wait 0.05;
   }
 
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_escape_smugglers_den");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_escape_smugglers_den");
 }
 
 quest_wunderbuss_open_close_doors() {
@@ -1416,7 +1416,7 @@ quest_wunderbuss_open_close_doors() {
 
       foreach(var_09 in var_02) {
         var_09 solid();
-        var_09 method_805F();
+        var_09 saved_actionslotdata();
       }
       break;
 
@@ -1443,14 +1443,14 @@ quest_wunderbuss_open_close_doors() {
 }
 
 warp_give_wonderweapon_parts() {
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_battery_collected");
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_holding_battery");
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_geistbolt_collected");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_battery_collected");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_holding_battery");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_geistbolt_collected");
 }
 
 warp_wonderweapon_built() {
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_battery_placed");
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_geistbolt_placed");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_battery_placed");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_geistbolt_placed");
 }
 
 debug_cheat_give_wonderweapon() {}
@@ -1460,23 +1460,23 @@ debug_cheat_give_battery() {}
 debug_cheat_give_bolt() {}
 
 debug_give_battery() {
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_battery_collected");
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_holding_battery");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_battery_collected");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_holding_battery");
 }
 
 debug_give_bolt() {
-  common_scripts\utility::func_3C8F("flag_quest_wunderbuss_geistbolt_collected");
+  common_scripts\utility::flag_set("flag_quest_wunderbuss_geistbolt_collected");
 }
 
 __________________defeat_straub__________________() {}
 
 quest_init_defeat_straub() {
-  common_scripts\utility::func_3C87("flag_open_cargobay_complete");
-  common_scripts\utility::func_3C87("flag_open_cargobay_left_complete");
-  common_scripts\utility::func_3C87("flag_open_cargobay_left_back_complete");
-  common_scripts\utility::func_3C87("flag_open_cargobay_right_complete");
-  common_scripts\utility::func_3C87("flag_open_cargobay_right_back_complete");
-  common_scripts\utility::func_3C87("flag_override_electroschnell_complete");
+  common_scripts\utility::flag_init("flag_open_cargobay_complete");
+  common_scripts\utility::flag_init("flag_open_cargobay_left_complete");
+  common_scripts\utility::flag_init("flag_open_cargobay_left_back_complete");
+  common_scripts\utility::flag_init("flag_open_cargobay_right_complete");
+  common_scripts\utility::flag_init("flag_open_cargobay_right_back_complete");
+  common_scripts\utility::flag_init("flag_override_electroschnell_complete");
 }
 
 quest_step_find_way_through_cargo_bay() {
@@ -1518,7 +1518,7 @@ quest_step_overload_straubs_electroschnell() {
     level.airship_straub_zombies[var_01].animation_name = "s2_zom_straub_death_zom_0" + common_scripts\utility::func_9AAD(var_01 + 1);
     level.airship_straub_zombies[var_01].idle_anim_name = "s2_zom_straub_death_end_zom_0" + common_scripts\utility::func_9AAD(var_01 + 1);
     level.airship_straub_zombies[var_01].var_B9 = spawn("script_model", var_00.origin);
-    level.airship_straub_zombies[var_01].var_B9 setModel(common_scripts\utility::func_7A33(["zom_head_fdr02_org1", "zom_head_fdr03_org1", "zom_head_fdr04_org1"]));
+    level.airship_straub_zombies[var_01].var_B9 setModel(common_scripts\utility::random(["zom_head_fdr02_org1", "zom_head_fdr03_org1", "zom_head_fdr04_org1"]));
     level.airship_straub_zombies[var_01].var_B9 linkTo(level.airship_straub_zombies[var_01], "j_spineupper", (0, 0, 0), (0, 0, 0));
     level.airship_straub_zombies[var_01] method_8495(level.airship_straub_zombies[var_01].animation_name, var_00.origin, var_00.angles);
     level.airship_straub_zombies[var_01].var_B9 method_8495(level.airship_straub_zombies[var_01].animation_name, var_00.origin, var_00.angles);
@@ -1531,7 +1531,7 @@ quest_step_overload_straubs_electroschnell() {
 }
 
 quest_step_overload_straubs_electroschnell_complete() {
-  common_scripts\utility::func_3C8F("flag_straub_death_scene");
+  common_scripts\utility::flag_set("flag_straub_death_scene");
   wait(5);
   thread maps / mp / mp_zombie_nest_ee_wave_manipulation::func_8608();
   var_00 = lib_0547::func_408F();
@@ -1600,7 +1600,7 @@ quest_step_overload_straubs_electroschnell_lights() {
 
 quest_step_overload_straubs_electroschnell_straub_grit_blood() {
   wait(getanimlength(%s2_zom_straub_death_straub) * 0.65);
-  playFXOnTag(level.var_611["zmb_dlc2_straub_death_grit"], level.airship_straub, "j_spineupper");
+  playFXOnTag(level._effect["zmb_dlc2_straub_death_grit"], level.airship_straub, "j_spineupper");
   wait(5.5);
   var_00 = getEntArray("ariship_straub_blast_door", "targetname");
   foreach(var_02 in var_00) {
@@ -1709,10 +1709,10 @@ escape_airship_drop_pod_move() {
   var_02 = getEntArray("airship_drop_pod_body", "targetname");
   var_03 = getEnt("org_tp_airship", "script_noteworthy");
   foreach(var_05 in var_02) {
-    var_05 method_8449(var_01);
+    var_05 linktosynchronizedparent(var_01);
   }
 
-  var_03 method_8449(var_01);
+  var_03 linktosynchronizedparent(var_01);
   wait(0.25);
   var_01 movez(-360, 3);
   wait(3);
@@ -1750,7 +1750,7 @@ escape_plaza_drop_pod_move() {
   var_00 = getEnt("clip_drop_pod_closed", "script_noteworthy");
   var_00 notsolid();
   var_01 = common_scripts\utility::func_46B5("fx_org_escape_airship_drop_pod_crash", "script_noteworthy");
-  playFX(level.var_611["landing_dust"], var_01.origin);
+  playFX(level._effect["landing_dust"], var_01.origin);
   thread maps / mp / mp_zombie_berlin_utils::earthquake_alive_players(0.6, 1, 1000);
   lib_0547::markmapcompleteforleaderboards();
   level.var_400E[level.var_400E.size] = ["wicht_set 2 1", "all"];
@@ -1775,24 +1775,24 @@ escape_plaza_drop_pod_move_light_off() {
 }
 
 warp_show_airship_exterior() {
-  common_scripts\utility::func_3C8F("flag_exit_underbelly");
-  common_scripts\utility::func_3C8F("flag_airship_summoned");
-  common_scripts\utility::func_3C8F("flag_airship_reached_middle");
-  common_scripts\utility::func_3C8F("flag_airship_fully_lowered");
+  common_scripts\utility::flag_set("flag_exit_underbelly");
+  common_scripts\utility::flag_set("flag_airship_summoned");
+  common_scripts\utility::flag_set("flag_airship_reached_middle");
+  common_scripts\utility::flag_set("flag_airship_fully_lowered");
 }
 
 warp_show_airship_interior() {
-  common_scripts\utility::func_3C8F("flag_exit_underbelly");
-  common_scripts\utility::func_3C8F("flag_airship_summoned");
-  common_scripts\utility::func_3C8F("flag_airship_reached_middle");
-  common_scripts\utility::func_3C8F("flag_airship_fully_lowered");
-  common_scripts\utility::func_3C8F("flag_airship_doors_opened");
-  common_scripts\utility::func_3C8F("flag_drop_pod_reached_airship");
+  common_scripts\utility::flag_set("flag_exit_underbelly");
+  common_scripts\utility::flag_set("flag_airship_summoned");
+  common_scripts\utility::flag_set("flag_airship_reached_middle");
+  common_scripts\utility::flag_set("flag_airship_fully_lowered");
+  common_scripts\utility::flag_set("flag_airship_doors_opened");
+  common_scripts\utility::flag_set("flag_drop_pod_reached_airship");
   lib_0547::playerspawneroverrideset("airship");
 }
 
 warp_activateenemytypes() {
-  common_scripts\utility::func_3C8F("flag_sizzlers_active");
+  common_scripts\utility::flag_set("flag_sizzlers_active");
 }
 
 warp_setup_drop_pod_position() {
@@ -1826,7 +1826,7 @@ warp_setup_straub_death_scene() {
 __________________beast_of_berlin__________________() {}
 
 quest_step_defeat_bob() {
-  common_scripts\utility::func_3C8F("flag_sizzlers_active");
+  common_scripts\utility::flag_set("flag_sizzlers_active");
   thread boss_spawn();
 }
 
@@ -1933,8 +1933,8 @@ wait_time_earthquake(param_00, param_01) {
 __________________pack_a_punch__________________() {}
 
 quest_pap_init() {
-  common_scripts\utility::func_3C87("pap_ww_blasted_1");
-  common_scripts\utility::func_3C87("pap_ww_blasted_2");
+  common_scripts\utility::flag_init("pap_ww_blasted_1");
+  common_scripts\utility::flag_init("pap_ww_blasted_2");
   var_00 = getEnt("pap_machine_fake", "script_noteworthy");
   level thread quest_pap_handler(var_00);
 }
@@ -1956,17 +1956,17 @@ quest_pap_handler(param_00) {
   var_07 = getEnt("script_pap_elevator_mover", "script_noteworthy");
   var_08 = getEnt("script_pap_elevator_geo", "script_noteworthy");
   level waittill("pap_electric_box_complete");
-  playFX(level.var_611["elevator_crash"], param_00.origin);
+  playFX(level._effect["elevator_crash"], param_00.origin);
   wait(0.5);
-  var_08 method_8449(var_07);
-  param_00 method_8449(var_07);
+  var_08 linktosynchronizedparent(var_07);
+  param_00 linktosynchronizedparent(var_07);
   var_07 movez(-100, 0.5, 0.25, 0.1);
   var_07 lib_0378::func_8D74("aud_pap_move_elevator");
   wait(0.7);
   param_00 delete();
-  common_scripts\utility::func_3C8F("pap_ww_blasted_1");
+  common_scripts\utility::flag_set("pap_ww_blasted_1");
   level waittill("pap_electric_box_complete");
-  common_scripts\utility::func_3C8F("pap_ww_blasted_2");
+  common_scripts\utility::flag_set("pap_ww_blasted_2");
   var_09 = common_scripts\utility::func_46B5("zmb_pack_a_punch_scripted_node", "targetname");
   var_0A = getEnt("pap_elevator_doors", "script_noteworthy");
   var_0B = getEnt("pap_elevator_clip", "script_noteworthy");
@@ -2007,13 +2007,13 @@ trigger_electric_box_hit(param_00, param_01) {
     if(var_0E == "wunderbuss_zm") {
       self notify("pap_electric_box_hit");
       var_03++;
-      playFX(level.var_611["zmb_elec_coil_charge_pap_puzzle"], param_00.origin);
+      playFX(level._effect["zmb_elec_coil_charge_pap_puzzle"], param_00.origin);
     }
 
     wait 0.05;
   }
 
-  playFX(level.var_611["zmb_fog_wispy_cliff_electric_box"], param_00.origin);
+  playFX(level._effect["zmb_fog_wispy_cliff_electric_box"], param_00.origin);
   level notify("pap_electric_box_complete");
   self delete();
 }
@@ -2064,14 +2064,14 @@ js_dancer() {
   var_03 moveTo(var_04, 0.1);
   var_03.angles = var_05;
   wait(0.5);
-  var_03 method_8449(var_00, "TAG_WEAPON_RIGHT");
+  var_03 linktosynchronizedparent(var_00, "TAG_WEAPON_RIGHT");
   thread maps\mp\_utility::func_6F74(::bonus_ee_audiolog_dancer_alternate_prop_swap);
   var_06 = 0;
   common_scripts\utility::func_3C9F("flag_audiolog_dancer_jumpscare_available");
   while(!var_06) {
     foreach(var_08 in level.players) {
       var_09 = var_08 istouching(var_01);
-      var_0A = common_scripts\utility::func_AA4A(var_08 getEye(), var_08 geteyeangles(), var_02.origin, cos(25));
+      var_0A = common_scripts\utility::within_fov(var_08 getEye(), var_08 geteyeangles(), var_02.origin, cos(25));
       if(var_09 && var_0A) {
         var_06 = 1;
       }
@@ -2081,24 +2081,24 @@ js_dancer() {
   }
 
   wait(1);
-  common_scripts\utility::func_3C8F("flag_audiolog_dancer_jumpscare_triggered");
+  common_scripts\utility::flag_set("flag_audiolog_dancer_jumpscare_triggered");
   var_00 scriptmodelclearanim();
   var_00 scriptmodelplayanim("s2_zom_berlin_bed_scare_jump", "dancer_js_jump");
   var_00 lib_0378::func_8D74("aud_dancer_jumpscare");
 }
 
 warp_dancer_jump_scare() {
-  common_scripts\utility::func_3C8F("flag_audiolog_dancer_jumpscare_available");
+  common_scripts\utility::flag_set("flag_audiolog_dancer_jumpscare_available");
 }
 
 __________________audio_log_3_dancer___________________________________________________() {}
 
 bonus_ee_audiolog_dancer_init() {
-  common_scripts\utility::func_3C87("flag_audiolog_dancer_shot_painting");
-  common_scripts\utility::func_3C87("flag_audiolog_dancer_grabbed_record");
-  common_scripts\utility::func_3C87("flag_audiolog_dancer_placed_record");
-  common_scripts\utility::func_3C87("flag_audiolog_dancer_jumpscare_available");
-  common_scripts\utility::func_3C87("flag_audiolog_dancer_jumpscare_triggered");
+  common_scripts\utility::flag_init("flag_audiolog_dancer_shot_painting");
+  common_scripts\utility::flag_init("flag_audiolog_dancer_grabbed_record");
+  common_scripts\utility::flag_init("flag_audiolog_dancer_placed_record");
+  common_scripts\utility::flag_init("flag_audiolog_dancer_jumpscare_available");
+  common_scripts\utility::flag_init("flag_audiolog_dancer_jumpscare_triggered");
   var_00 = getEnt("bonus_ee_audiolog_dancer_painting", "script_noteworthy");
   var_01 = getEnt("bonus_ee_audiolog_dancer_painting_trig", "script_noteworthy");
   var_02 = getEnt("bonus_ee_audiolog_dancer_record", "script_noteworthy");
@@ -2139,7 +2139,7 @@ bonus_ee_audiolog_dancer_step_01(param_00, param_01, param_02, param_03) {
   wait(0.2);
   param_00 movez(-60, 0.5, 0.25, 0);
   param_03 waittill("trigger");
-  common_scripts\utility::func_3C8F("flag_audiolog_dancer_grabbed_record");
+  common_scripts\utility::flag_set("flag_audiolog_dancer_grabbed_record");
   param_02 delete();
 }
 
@@ -2147,7 +2147,7 @@ bonus_ee_audiolog_dancer_step_02(param_00) {
   common_scripts\utility::func_3C9F("flag_audiolog_dancer_grabbed_record");
   self["record_player_tech"] setscriptablepartstate("tech_light", "red_on");
   param_00 waittill("trigger");
-  common_scripts\utility::func_3C8F("flag_audiolog_dancer_placed_record");
+  common_scripts\utility::flag_set("flag_audiolog_dancer_placed_record");
 }
 
 bonus_ee_audiolog_dancer_step_03(param_00, param_01) {
@@ -2169,7 +2169,7 @@ bonus_ee_audiolog_dancer_step_03(param_00, param_01) {
   self["record_player"] thread set_phonograph_state("on");
   self["record_player"] setscriptablepartstate("record", "on");
   param_00 thread func_9276();
-  common_scripts\utility::func_3C8F("flag_audiolog_dancer_jumpscare_available");
+  common_scripts\utility::flag_set("flag_audiolog_dancer_jumpscare_available");
   if(isDefined(param_01)) {
     param_01 common_scripts\utility::func_9DA3();
   }
@@ -2212,15 +2212,15 @@ bonus_ee_audiolog_dancer_alternate_prop_swap(param_00) {
   var_05.angles = (5.07907, 282.089, -44.3602);
   lib_054F::func_86B3(var_05, self, var_02);
   wait(0.5);
-  var_05 method_8449(param_00, "TAG_WEAPON_RIGHT");
+  var_05 linktosynchronizedparent(param_00, "TAG_WEAPON_RIGHT");
 }
 
 __________________the_classic_ppsh__________________() {}
 
 the_classic_init() {
-  common_scripts\utility::func_3C87("flag_the_classic_mirror_one_complete");
-  common_scripts\utility::func_3C87("flag_the_classic_mirror_two_complete");
-  common_scripts\utility::func_3C87("flag_the_classic_mirror_three_complete");
+  common_scripts\utility::flag_init("flag_the_classic_mirror_one_complete");
+  common_scripts\utility::flag_init("flag_the_classic_mirror_two_complete");
+  common_scripts\utility::flag_init("flag_the_classic_mirror_three_complete");
   var_00 = getEntArray("classic_light_model", "targetname");
   foreach(var_02 in var_00) {
     var_02 hide();
@@ -2317,7 +2317,7 @@ the_classic_game_logic(param_00, param_01) {
         break;
     }
 
-    common_scripts\utility::func_3C8F(param_00);
+    common_scripts\utility::flag_set(param_00);
   } else {}
 
   foreach(var_06 in var_03) {
@@ -2477,7 +2477,7 @@ the_classic_jolt_drop_fx(param_00) {
 __________________bell_race__________________() {}
 
 bell_race_init() {
-  common_scripts\utility::func_3C87("bell_race_complete");
+  common_scripts\utility::flag_init("bell_race_complete");
   var_00 = getEntArray("lore_primary", "script_noteworthy");
   foreach(var_02 in var_00) {
     if(var_02.var_8260 == "lore19") {
@@ -2572,7 +2572,7 @@ bell_race_complete() {
   level.bell_race_log show();
   var_00 = getEnt("bell_race_box", "script_noteworthy");
   var_00 gravitymove((100, 100, 180), 1);
-  common_scripts\utility::func_3C8F("bell_race_complete");
+  common_scripts\utility::flag_set("bell_race_complete");
   level notify("bell_race_bells_complete");
 }
 
@@ -2614,7 +2614,7 @@ hangman_setup_word_array() {
     var_01[var_01.size] = var_02;
   }
 
-  var_01 = common_scripts\utility::func_F92(var_01);
+  var_01 = common_scripts\utility::array_randomize(var_01);
   var_03 = [];
   var_03[var_01[0]] = ["r", "e", "a", "p", "e", "r"];
   var_03[var_01[1]] = ["d", "a", "m", "n", "a", "t", "i", "o", "n"];
@@ -2811,7 +2811,7 @@ hangman_give_jack_in_the_box(param_00) {
   var_02 = spawn("script_model", param_00.origin + (0, 0, -205));
   var_02 setModel("tag_origin");
   var_02.angles = var_02.angles + (-90, 0, 0);
-  playFXOnTag(level.var_611["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
+  playFXOnTag(level._effect["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
   for(;;) {
     var_01 waittill("player_used", var_03);
     if(!isDefined(var_03.var_4B72) || !var_03.var_4B72) {
@@ -2824,7 +2824,7 @@ hangman_give_jack_in_the_box(param_00) {
   }
 
   var_01 delete();
-  killfxontag(level.var_611["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
+  killfxontag(level._effect["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
   var_02 delete();
 }
 
@@ -2836,13 +2836,13 @@ hangman_give_razer_gun(param_00) {
   var_02 = spawn("script_model", param_00.origin + (0, -48, -200));
   var_02 setModel("tag_origin");
   var_02.angles = var_02.angles + (-90, 0, 0);
-  playFXOnTag(level.var_611["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
+  playFXOnTag(level._effect["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
   var_01 waittill("player_used", var_03);
   var_03 lib_0586::func_78C("razergun_zm");
   var_03 lib_0586::func_78E("razergun_zm");
   var_01 lib_0547::func_AC40();
   var_01 delete();
-  killfxontag(level.var_611["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
+  killfxontag(level._effect["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
   var_02 delete();
 }
 
@@ -2856,13 +2856,13 @@ hangman_give_tesla_gun(param_00) {
   var_02.angles = var_02.angles + (-90, 0, 0);
   var_03 = lib_0586::create_streamed_world_weapon_model("teslagun_zm", var_01.origin);
   var_03.angles = var_01.angles;
-  playFXOnTag(level.var_611["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
+  playFXOnTag(level._effect["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
   var_01 waittill("player_used", var_04);
   maps\mp\zombies\_zombies_magicbox::func_A7D6(var_04, "teslagun_zm");
   var_04 lib_0586::func_78E("teslagun_zm");
   var_01 lib_0547::func_AC40();
   var_01 delete();
-  killfxontag(level.var_611["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
+  killfxontag(level._effect["zmb_ber_gun_cone_glow"], var_02, "tag_origin");
   var_02 delete();
   var_03 delete();
 }
@@ -3091,7 +3091,7 @@ run_outro_berlin() {
   maps / mp / zquests / dlc2_trophies_mp_zombie_berlin::complete_berlin_trophy_event_1();
   level thread maps / mp / gametypes / zombies::orders_and_contracts_report_event("mp_zombie_berlin_final_boss");
   level thread maps / mp / gametypes / zombies::orders_and_contracts_report_event("any_boss_completed");
-  common_scripts\utility::func_3C8F("berlin_cinematic_done");
+  common_scripts\utility::flag_set("berlin_cinematic_done");
   foreach(var_04 in level.players) {
     var_04 lib_056A::func_4772(1);
   }

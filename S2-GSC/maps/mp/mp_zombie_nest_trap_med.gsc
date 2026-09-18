@@ -14,7 +14,7 @@ func_9CB8(param_00) {
 func_8B0D() {
   self.var_9CB9.var_565F = 1;
   var_00 = common_scripts\utility::func_46B5("med_trap_fx_point", "targetname");
-  var_01 = spawnfx(level.var_611["zmb_med_spike_trap_on"], var_00.origin, anglesToForward(var_00.angles));
+  var_01 = spawnfx(level._effect["zmb_med_spike_trap_on"], var_00.origin, anglesToForward(var_00.angles));
   triggerfx(var_01);
   thread func_30E4(var_00);
   thread func_30E3(var_00);
@@ -54,7 +54,7 @@ func_30E4(param_00) {
     var_01 = lib_0547::func_408F();
     foreach(var_03 in var_01) {
       if(distance2d(var_03.origin, param_00.origin) < 135 && var_03.origin[2] < self.var_9CB9.origin[2]) {
-        playFX(level.var_611["zmb_med_trap_gib"], var_03.origin + (0, 0, 50), anglesToForward(var_03.angles));
+        playFX(level._effect["zmb_med_trap_gib"], var_03.origin + (0, 0, 50), anglesToForward(var_03.angles));
         wait 0.05;
         var_04 = gettime();
         if(isalive(var_03) && var_03.var_BA4 != "traverse") {

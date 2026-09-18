@@ -6,7 +6,7 @@
 init() {
   level.killstreakfuncs["v2_rocket"] = ::func_9E3D;
   level.var_5A7D["v2_rocket_mp"] = "v2_rocket";
-  level.var_611["nuke_flash"] = loadfx("vfx/explosion/v2_explosion_mp_rnr");
+  level._effect["nuke_flash"] = loadfx("vfx/explosion/v2_explosion_mp_rnr");
   setdvarifuninitialized("scr_nukeTimer", 10);
   level.var_6866 = getdvarint("scr_nukeTimer");
   level.var_685E = spawnStruct();
@@ -23,7 +23,7 @@ func_9E3D(param_00) {
     return 0;
   }
 
-  if(maps\mp\_utility::func_581D()) {
+  if(maps\mp\_utility::isusingremote()) {
     return 0;
   }
 
@@ -132,7 +132,7 @@ func_685B(param_00) {
   level endon("nuke_cancelled");
   param_00 endon("disconnect");
   wait 0.05;
-  playfxontagforclients(level.var_611["nuke_flash"], self, "tag_origin", param_00);
+  playfxontagforclients(level._effect["nuke_flash"], self, "tag_origin", param_00);
 }
 
 func_6860() {
@@ -180,7 +180,7 @@ func_6858() {
       continue;
     }
 
-    var_02.var_6857 = 1;
+    var_02.nuked = 1;
     if(isalive(var_02)) {
       var_02 thread maps\mp\gametypes\_damage::func_3BAC(level.var_685E.player, level.var_685E.player, 999999, 0, "MOD_EXPLOSIVE", "v2_rocket_mp", var_02.origin, var_02.origin, "none", 0, 0);
       if(isDefined(var_02.var_5738) && var_02.var_5738 == 1) {
@@ -214,7 +214,7 @@ func_6853() {
       continue;
     }
 
-    var_01.var_6857 = undefined;
+    var_01.nuked = undefined;
   }
 
   level notify("nuke_emp_update");
@@ -225,7 +225,7 @@ func_6855(param_00) {
   level endon("game_ended");
   var_01 = [];
   if(level.teambased) {
-    var_01 = level.var_9FDA[maps\mp\_utility::func_45DE(param_00.team)];
+    var_01 = level.var_9FDA[maps\mp\_utility::getotherteam(param_00.team)];
   } else {
     var_01 = level.var_9FDA;
   }

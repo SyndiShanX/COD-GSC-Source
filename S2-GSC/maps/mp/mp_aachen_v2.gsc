@@ -4,16 +4,16 @@
 *********************************************/
 
 func_00F9() {
-  lib_049A::func_F9();
-  lib_0402::func_F9();
-  lib_0499::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_aachen_v2_lighting::func_F9();
-  maps\mp\mp_aachen_v2_aud::func_F9();
+  lib_049A::main();
+  lib_0402::main();
+  lib_0499::main();
+  maps\mp\_load::main();
+  maps\mp\mp_aachen_v2_lighting::main();
+  maps\mp\mp_aachen_v2_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_aachen_v2");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
-  level.var_611["intro_explosion"] = loadfx("vfx/scorestreaks/mortar_scorestreak_exp_01");
+  level._effect["intro_explosion"] = loadfx("vfx/scorestreaks/mortar_scorestreak_exp_01");
   level.var_5A7C = "mp_aachen_v2_killstreak";
   level.var_5A6B = "mp_aachen_v2_killstreak";
   level.var_47CD = "mp_aachen_v2_glide1";
@@ -49,14 +49,14 @@ func_542C() {
     return;
   }
 
-  if(!isDefined(level.var_984D) || !level.var_984D || level.var_3FDC == "infect") {
+  if(!isDefined(level.teambased) || !level.teambased || level.gametype == "infect") {
     return;
   }
 
   level waittill("matchStartTimer");
   var_00 = common_scripts\utility::func_46B5("intro_bomb_loc", "targetname");
   level.var_811 = 1;
-  thread maps\mp\killstreaks\_airstrike::func_B9A(-1, "airstrike", undefined, "allies", var_00.var_116, var_00.var_1D[1]);
+  thread maps\mp\killstreaks\_airstrike::func_B9A(-1, "airstrike", undefined, "allies", var_00.origin, var_00.var_1D[1]);
   level waittill("carpetBombingEnded");
   level.var_811 = undefined;
 }

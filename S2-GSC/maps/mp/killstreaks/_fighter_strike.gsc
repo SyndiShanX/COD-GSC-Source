@@ -4,7 +4,7 @@
 ***************************************************/
 
 init() {
-  level.var_611["fighter_trail"] = loadfx("vfx/scorestreaks/fighter_strike_plane_trail");
+  level._effect["fighter_trail"] = loadfx("vfx/scorestreaks/fighter_strike_plane_trail");
   level.killstreakfuncs["fighter_strike"] = ::func_9E2A;
   level.var_5A7D["fighter_strike_gun_mp"] = "fighter_strike";
   level.var_5A7D["fighter_strike_plane_mp"] = "fighter_strike";
@@ -240,9 +240,9 @@ func_1E83(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_0C = (0, param_03, 0);
   var_0B = var_0B + -1 * anglesToForward(var_0C) * 1400;
   if(isDefined(param_01)) {
-    param_01 maps\mp\_utility::func_8A5B("fighter_strike");
+    param_01 maps\mp\_utility::setusingremote("fighter_strike");
     param_01 maps\mp\_utility::func_744E();
-    param_01 maps\mp\_utility::func_3E8E(1);
+    param_01 maps\mp\_utility::freezecontrolswrapper(1);
     param_01 thread lib_0526::func_8A61(0.05, level.var_5A7C, level.var_5A6B);
     lib_0526::func_A232(1);
   }
@@ -307,7 +307,7 @@ func_9080(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     var_0B setModel(var_0F);
     var_0B thread lib_0527::func_39C6("vehicle_usa_fighter_thunderbolt_vista", 2);
     var_0B scriptmodelplayanim("ks_fighter_strafe_usa");
-    playFXOnTag(level.var_611["fighter_trail"], var_0B, "TAG_TRAIL_FX");
+    playFXOnTag(level._effect["fighter_trail"], var_0B, "TAG_TRAIL_FX");
     if(isDefined(var_0C)) {
       var_0C linkTo(var_0A, "tag_origin", (46, 0, 6), (0, 0, 0));
       var_0C setModel("usa_fighter_thunderbolt_cockpit");
@@ -321,7 +321,7 @@ func_9080(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     var_0B setModel(var_0F);
     var_0B thread lib_0527::func_39C6("ger_bomber_stuka_vista", 2);
     var_0B scriptmodelplayanim("ks_fighter_strafe_ger");
-    playFXOnTag(level.var_611["fighter_trail"], var_0B, "TAG_TRAIL_FX");
+    playFXOnTag(level._effect["fighter_trail"], var_0B, "TAG_TRAIL_FX");
     if(isDefined(var_0C)) {
       var_0C linkTo(var_0A, "tag_origin", (1, 0, 1), (0, 0, 0));
       var_0C setModel("ger_bomber_stuka_cockpit");
@@ -353,7 +353,7 @@ func_9080(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     }
 
     var_0A.var_620D method_8351(var_11, lib_0527::func_4613(param_05), 20, 20);
-    var_0A.var_620D method_8449(var_0A, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_0A.var_620D linktosynchronizedparent(var_0A, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
 
   var_0A.var_5CC6 = param_00;
@@ -384,8 +384,8 @@ func_9080(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   thread func_636E(var_0A, param_01);
   thread func_63D9(var_0A, param_01);
   if(isDefined(param_01)) {
-    if(!isDefined(level.var_611["fighter_flying_1P"])) {
-      level.var_611["fighter_flying_1P"] = loadfx("vfx/scorestreaks/ss_fighter_plane_cockpit_flying");
+    if(!isDefined(level._effect["fighter_flying_1P"])) {
+      level._effect["fighter_flying_1P"] = loadfx("vfx/scorestreaks/ss_fighter_plane_cockpit_flying");
     }
 
     param_01 cameralinkTo(var_0D, "tag_origin");
@@ -550,7 +550,7 @@ func_6390(param_00, param_01, param_02) {
     thread func_3AAC(self, self.owner);
     thread func_316F(self, self.owner);
     self.owner thread func_7CF1(self, self.owner);
-    self.owner maps\mp\_utility::func_3E8E(0);
+    self.owner maps\mp\_utility::freezecontrolswrapper(0);
   }
 
   if(maps\mp\_utility::func_579B() && isDefined(param_02) && isDefined(level.var_79C2.var_80B0) && isDefined(level.var_79C2.var_80B0.var_3AAF)) {
@@ -569,7 +569,7 @@ func_6390(param_00, param_01, param_02) {
   if(isDefined(self.owner) && isPlayer(self.owner) && isDefined(self.owner.var_260D)) {
     self.owner method_8201();
     self.owner.var_260D = undefined;
-    self.owner maps\mp\_utility::func_3E8E(1);
+    self.owner maps\mp\_utility::freezecontrolswrapper(1);
     self.owner notify("player_exit");
   }
 
@@ -621,8 +621,8 @@ func_4AB8(param_00) {
   common_scripts\utility::func_A732("death", "crashing");
   if(isDefined(self)) {
     var_01 = anglesToForward(self.angles);
-    if(!isDefined(level.var_611["fighter_explode"])) {
-      level.var_611["fighter_explode"] = loadfx("vfx/scorestreaks/ss_fighter_plane_death");
+    if(!isDefined(level._effect["fighter_explode"])) {
+      level._effect["fighter_explode"] = loadfx("vfx/scorestreaks/ss_fighter_plane_death");
     }
 
     playFX(common_scripts\utility::func_44F5("fighter_explode"), self.origin, var_01);
@@ -850,7 +850,7 @@ func_7445(param_00, param_01) {
     param_00 = 1;
   }
 
-  maps\mp\_utility::func_3E8E(1);
+  maps\mp\_utility::freezecontrolswrapper(1);
   self setclientomnvar("fov_scale", 1);
   if(!isbot(self)) {
     self notifyonplayercommandremove("ExitButtonDown", "+activate");
@@ -866,7 +866,7 @@ func_7445(param_00, param_01) {
 
   self thermalvisionfofoverlayoff();
   self notify("clearAerialKillstreakMarkers");
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     self setclientomnvar("ui_plane_gunner_phase", 0);
   } else {
     thread func_4D08();
@@ -897,9 +897,9 @@ func_7445(param_00, param_01) {
     self.var_260D = undefined;
   }
 
-  maps\mp\_utility::func_3E8E(0);
-  if(maps\mp\_utility::func_581D()) {
-    maps\mp\_utility::func_2414();
+  maps\mp\_utility::freezecontrolswrapper(0);
+  if(maps\mp\_utility::isusingremote()) {
+    maps\mp\_utility::clearusingremote();
   }
 
   if(getdvarint("311")) {
@@ -965,8 +965,8 @@ func_27EB(param_00) {
   var_02 = spawn("script_model", var_01);
   var_02.angles = self.angles;
   var_02 setModel("tag_origin");
-  if(!isDefined(level.var_611["fighter_clouds_1P"])) {
-    level.var_611["fighter_clouds_1P"] = loadfx("vfx/scorestreaks/ss_fighter_plane_clouds");
+  if(!isDefined(level._effect["fighter_clouds_1P"])) {
+    level._effect["fighter_clouds_1P"] = loadfx("vfx/scorestreaks/ss_fighter_plane_clouds");
   }
 
   playfxontagforclients(common_scripts\utility::func_44F5("fighter_clouds_1P"), var_02, "tag_origin", param_00);

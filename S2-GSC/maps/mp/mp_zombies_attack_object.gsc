@@ -204,10 +204,10 @@ get_available_attack_point(param_00) {
   }
 
   if(var_01.size == 0) {
-    return common_scripts\utility::func_7A33(param_00);
+    return common_scripts\utility::random(param_00);
   }
 
-  return common_scripts\utility::func_7A33(var_01);
+  return common_scripts\utility::random(var_01);
 }
 
 travel_and_attack_position(param_00, param_01) {

@@ -10,21 +10,21 @@ main() {
 
   setDvar("4014", 1);
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   level.rankedmatch = 0;
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.gametype, 0, 0, 9);
-    maps\mp\_utility::func_7BFA(level.gametype, 0);
-    maps\mp\_utility::func_7BF9(level.gametype, 0);
-    maps\mp\_utility::func_7BF7(level.gametype, 0);
-    maps\mp\_utility::func_7C04(level.gametype, 0);
-    maps\mp\_utility::func_7BF1(level.gametype, 0);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
+    maps\mp\_utility::registerroundswitchdvar(level.gametype, 0, 0, 9);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 0);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
   }
 
   game["attackers"] = "allies";
@@ -74,19 +74,19 @@ func_6BA7() {
 
 hubclass() {
   self.var_294D = maps\mp\gametypes\_class::func_1E05();
-  self.var_2319 = "custom" + self.var_294D + 1;
+  self.class = "custom" + self.var_294D + 1;
 }
 
 func_5300() {
   maps\mp\_utility::func_8653();
   setdynamicdvar("scr_hub_roundswitch", 0);
-  maps\mp\_utility::func_7BF8("hub", 0, 0, 9);
+  maps\mp\_utility::registerroundswitchdvar("hub", 0, 0, 9);
   setdynamicdvar("scr_hub_roundlimit", 1);
-  maps\mp\_utility::func_7BF7("war", 1);
+  maps\mp\_utility::registerroundlimitdvar("war", 1);
   setdynamicdvar("scr_hub_winlimit", 1);
-  maps\mp\_utility::func_7C04("hub", 1);
+  maps\mp\_utility::registerwinlimitdvar("hub", 1);
   setdynamicdvar("scr_hub_halftime", 0);
-  maps\mp\_utility::func_7BE5("hub", 0);
+  maps\mp\_utility::registerhalftimedvar("hub", 0);
 }
 
 onnormaldeath(param_00, param_01, param_02) {
@@ -130,18 +130,18 @@ func_6BAF() {
     game["defenders"] = var_00;
   }
 
-  maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_HUB");
-  maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_HUB");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_HUB");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_HUB");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_HUB");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_HUB");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_HUB");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_HUB");
   } else {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_HUB_SCORE");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_HUB_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_HUB_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_HUB_SCORE");
   }
 
-  maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_WAR_HINT");
-  maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_WAR_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_WAR_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_WAR_HINT");
   lib_050D::func_10E4();
   var_02[0] = level.gametype;
   maps\mp\gametypes\_gameobjects::main(var_02);

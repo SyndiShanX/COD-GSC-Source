@@ -106,7 +106,7 @@ func_869E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         continue;
       }
 
-      var_11 = maps\mp\_utility::func_4621(var_12);
+      var_11 = maps\mp\_utility::getplayerforguid(var_12);
       if(var_11.team == param_01) {
         self.var_37D6[var_12] destroy();
         self.var_37D6[var_12] = undefined;
@@ -221,7 +221,7 @@ func_873C(param_00, param_01, param_02, param_03) {
 
   var_05 = param_00;
   if(maps\mp\_utility::func_579B() && common_scripts\utility::func_562E(level.var_79C1)) {
-    var_05 = maps\mp\_utility::func_45DE(param_00);
+    var_05 = maps\mp\_utility::getotherteam(param_00);
   }
 
   var_06 = game["entity_headicon_" + var_05];

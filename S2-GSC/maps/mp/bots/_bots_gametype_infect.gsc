@@ -191,11 +191,11 @@ func_1A20() {
                     maps / mp / bots / _bots_util::func_1AA8("find_node_can_see_ent", ::func_1A1F, self.enemy, self.var_60DC);
                   }
 
-                  if(!self method_817F(level.var_5119)) {
+                  if(!self getammocount(level.var_5119)) {
                     self setweaponammoclip(level.var_5119, 1);
                   }
 
-                  maps\mp\_utility::func_A6D1(30, "enemy");
+                  maps\mp\_utility::waitfortimeornotify(30, "enemy");
                   self method_8358();
                 }
               }
@@ -229,7 +229,7 @@ func_1A1F(param_00, param_01) {
 
   var_03 = function_0204(param_01);
   if(isDefined(var_03) && var_03.size) {
-    var_04 = common_scripts\utility::func_F92(var_03);
+    var_04 = common_scripts\utility::array_randomize(var_03);
     foreach(var_06 in var_04) {
       if(var_02 && issubstr(var_06.type, "End")) {
         continue;

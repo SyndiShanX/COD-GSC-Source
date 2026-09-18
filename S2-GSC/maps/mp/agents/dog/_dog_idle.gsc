@@ -101,7 +101,7 @@ func_A0DE() {
 }
 
 func_8B86() {
-  return isDefined(self.enemy) && maps\mp\_utility::func_57A0(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 1000000;
+  return isDefined(self.enemy) && maps\mp\_utility::isreallyalive(self.enemy) && distancesquared(self.origin, self.enemy.origin) < 1000000;
 }
 
 func_46F0(param_00) {

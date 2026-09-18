@@ -69,7 +69,7 @@ snd_zmb_register_messages_dlc4() {
 }
 
 dlc4_player_spawned() {
-  self method_8626("dlc4_default_mix");
+  self setaltsceneobj("dlc4_default_mix");
   lib_0366::snd_zmb_set_plr_vox_scare_count_max(0);
 }
 
@@ -133,7 +133,7 @@ dlc4_wave_mus_switcher() {
 
     if(!var_13 && var_11 - var_08 > var_14 && var_12 <= var_05 && var_0C) {
       var_0C = 0;
-      var_00 method_8626("dlc3_plr_idle_mus_fade", var_0E);
+      var_00 setaltsceneobj("dlc3_plr_idle_mus_fade", var_0E);
     } else if(!var_0C && var_13 || var_12 > var_05 && var_11 - var_09 > var_14 * 0.5) {
       var_0C = 1;
       var_00 method_8627("dlc3_plr_idle_mus_fade", var_0D);
@@ -347,7 +347,7 @@ scythe_proj_shoot() {
 scythe_proj_loop() {
   var_00 = lib_0380::func_288B("zmb_weap_scythe_proj_lp", undefined, self);
   common_scripts\utility::waittill_notify_or_timeout("death", 3);
-  lib_0380::func_2893(var_00, 1);
+  lib_0380::_stoplocalsound(var_00, 1);
 }
 
 scythe_proj_impact() {
@@ -362,7 +362,7 @@ scythe_charged_loop_start() {
 
 scythe_charged_loop_stop() {
   if(isDefined(self.scythe_charged_loop)) {
-    lib_0380::func_2893(self.scythe_charged_loop, 0);
+    lib_0380::_stoplocalsound(self.scythe_charged_loop, 0);
     wait 0.05;
     self.scythe_charged_loop = undefined;
   }
@@ -444,7 +444,7 @@ god_king_giestblast_throw(param_00, param_01) {
   }
 
   param_01 waittill("projectile_impact", var_03, var_04);
-  lib_0380::func_2893(var_02, 0.5);
+  lib_0380::_stoplocalsound(var_02, 0.5);
   lib_0380::func_2889("zmb_gdkng_geistblast_impact", undefined, var_04);
 }
 
@@ -529,7 +529,7 @@ zombie_giestdrain_submix(param_00, param_01) {
     for(;;) {
       var_04 = distance2d(var_03.origin, param_00.origin);
       if(var_04 < 800) {
-        var_03 method_8626("godking_giestdrain_mute_zvox");
+        var_03 setaltsceneobj("godking_giestdrain_mute_zvox");
         continue;
       }
 

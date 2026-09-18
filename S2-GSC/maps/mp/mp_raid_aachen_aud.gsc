@@ -108,7 +108,7 @@ func_54E4() {
   var_04 = 1 - var_03;
   var_05 = 14;
   var_06 = 1;
-  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {}
+  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {}
 }
 
 introvignettealliesplayercameramix(param_00) {
@@ -194,7 +194,7 @@ func_54E5() {
   var_04 = 1 - var_03;
   var_05 = 25;
   var_06 = 1;
-  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {}
+  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {}
 }
 
 introvignetteaxisplayercameramix(param_00) {
@@ -306,8 +306,8 @@ onhostageenduse(param_00, param_01) {
     }
 
     var_02 = self.hostagevisual.bodymodel;
-    var_03 = var_02.var_106;
-    var_04 = getsubstr(var_02.var_106, 23, 24);
+    var_03 = var_02.model;
+    var_04 = getsubstr(var_02.model, 23, 24);
     if(isDefined(var_02) == 1 && isDefined(var_03) == 1) {
       wait(2.9);
       switch (var_04) {
@@ -341,7 +341,7 @@ ondestructionaddobject(param_00) {
   if(isDefined(param_00) == 1 && function_0279(param_00) == 0 && isDefined(param_00.ambientsoundlp) == 0) {
     var_02 = param_00.var_6E56["size"];
     var_03 = "ob2_comm_amb_sml_lp";
-    var_04 = param_00.var_116;
+    var_04 = param_00.origin;
     var_05 = isDefined(param_00.var_6E56["sndcluster"]);
     var_06 = var_04[2] > 512;
     switch (var_02) {

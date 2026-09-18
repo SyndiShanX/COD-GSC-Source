@@ -12,11 +12,11 @@ init() {
   lib_054D::register_persistent_tactical_zombie_equipment("island_grenade_hc_zm");
   level.damagebuffzonemultiplier = 1.6;
   level.powerbuffzonemultiplier = 1.8;
-  level.var_611["zmb_pommel_zmb_dmg"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_zmb_dmg");
-  level.var_611["zmb_pommel_energy_field"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_energy_field");
-  level.var_611["zmb_pommel_energy_field_burst"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_energy_field_burst");
-  level.var_611["zmb_pommel_pickup_energy"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_pickup_energy");
-  level.var_611["zmb_isl_geis_pommel_float"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_geis_pommel_float");
+  level._effect["zmb_pommel_zmb_dmg"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_zmb_dmg");
+  level._effect["zmb_pommel_energy_field"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_energy_field");
+  level._effect["zmb_pommel_energy_field_burst"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_energy_field_burst");
+  level._effect["zmb_pommel_pickup_energy"] = loadfx("vfx/zombie/prototype_fx/zmb_pommel_pickup_energy");
+  level._effect["zmb_isl_geis_pommel_float"] = loadfx("vfx/map/mp_zombie_island/zmb_isl_geis_pommel_float");
   lib_0547::func_7BA9(::handle_pommel_kills);
   if(maps\mp\_utility::func_4571() != "mp_zombie_island") {
     init_pommel_aud();
@@ -74,7 +74,7 @@ initialize_pommel_grenade_pickups() {
           var_02.model_spawn = spawn("script_model", var_05.origin);
           var_02.model_spawn setModel("npc_zom_barb_pommel");
           var_02.model_spawn hide();
-          var_02.var_3F2F = lib_0547::func_8FBA(var_05, "zmb_isl_geis_pommel_float");
+          var_02.fx = lib_0547::func_8FBA(var_05, "zmb_isl_geis_pommel_float");
           break;
 
         case "pommel_trigger":
@@ -101,12 +101,12 @@ spawn_pommel_special_pickup(param_00, param_01, param_02) {
     var_04.origin = param_02;
     var_04.model_spawn = spawn("script_model", param_02);
     var_04.model_spawn setModel("npc_zom_barb_pommel");
-    var_04.var_3F2F = spawnlinkedfx(common_scripts\utility::func_44F5("zmb_isl_geis_pommel_float"), var_04, "tag_origin");
+    var_04.fx = spawnlinkedfx(common_scripts\utility::func_44F5("zmb_isl_geis_pommel_float"), var_04, "tag_origin");
     var_04 lib_0547::func_AC41(&"ZOMBIES_EMPTY_STRING", (0, 0, 8));
     level.zmb_spawned_pommel_pickup = var_04;
   }
 
-  triggerfx(var_04.var_3F2F);
+  triggerfx(var_04.fx);
   var_04.model_spawn show();
   var_04.model_spawn lib_0378::func_8D74("pommel_pickup");
   var_04 thread rotate_pommel();
@@ -126,7 +126,7 @@ spawn_pommel_special_pickup(param_00, param_01, param_02) {
 
     level thread maps\mp\zombies\_zombies_magicbox::func_A7D5(var_09, "island_grenade_hc_zm", undefined);
     var_09 thread lib_0367::func_8E3C("pommelpickup", level.players);
-    common_scripts\utility::func_3C8F(param_01);
+    common_scripts\utility::flag_set(param_01);
   }
 }
 
@@ -190,14 +190,14 @@ track_player_aoe_grenade() {
         var_04 = var_01 replace_projectile_with_model();
         var_04 common_scripts\utility::func_3799("pommel_stone_running");
         level.zmb_active_pommel_grenades = common_scripts\utility::func_F6F(level.zmb_active_pommel_grenades, var_04);
-        playFX(level.var_611["zmb_pommel_energy_field_burst"], var_04.origin);
+        playFX(level._effect["zmb_pommel_energy_field_burst"], var_04.origin);
         lib_0378::func_8D74("zmb_pomel_grenade_detonate", var_04.origin);
         var_05 = var_04 initial_burst(self);
         var_00 = thread handle_pommel_energy_field(var_04);
         var_04 thread run_pommel_aoe(var_05);
         var_04 common_scripts\utility::func_379C("pommel_stone_running");
         level.zmb_active_pommel_grenades = common_scripts\utility::func_F93(level.zmb_active_pommel_grenades, var_04);
-        playFX(level.var_611["zmb_pommel_energy_field_burst"], var_04.origin);
+        playFX(level._effect["zmb_pommel_energy_field_burst"], var_04.origin);
         lib_0378::func_8D74("zmb_pomel_grenade_final_explosion", var_04.origin);
         var_05 = var_04 initial_burst(self);
         if(isDefined(var_00)) {
@@ -310,7 +310,7 @@ register_as_pommel_grenade_target(param_00) {
 
 zap_zombies_vfx() {
   self endon("death");
-  self.pommel_damage = spawnlinkedfx(level.var_611["zmb_pommel_zmb_dmg"], self, "J_Spine4");
+  self.pommel_damage = spawnlinkedfx(level._effect["zmb_pommel_zmb_dmg"], self, "J_Spine4");
   triggerfx(self.pommel_damage);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.pommel_damage);
   wait(0.5);

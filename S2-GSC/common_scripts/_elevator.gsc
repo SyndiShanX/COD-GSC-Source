@@ -52,7 +52,7 @@ func_35CF() {
     level.var_35D0 = func_35C0("scr_elevator_waittime", "6");
     level.var_35B5 = func_35C0("scr_elevator_aggressive_call", "0");
     level.var_35BA = func_35C0("debug_elevator", "0");
-    if(common_scripts\utility::func_57D7()) {
+    if(common_scripts\utility::issp()) {
       level.var_35C6 = func_35C0("scr_elevator_motion_detection", "0");
     } else {
       level.var_35C6 = func_35C0("scr_elevator_motion_detection", "1");

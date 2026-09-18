@@ -15,8 +15,8 @@ func_87A7() {
   setdvarifuninitialized("spv_lep_cap", 6);
   if(getdvarint("leprechauns_enabled", 0) == 1 && !function_03A9()) {
     level.leprechaun_model = "usa_leprechaun_mtx7";
-    level.var_611["leprechaun_spawn_fx"] = loadfx("vfx/unique/st_patricks_day_leprechaun_spawn");
-    level.var_611["leprechaun_death_fx"] = loadfx("vfx/unique/st_patricks_day_leprechaun_death");
+    level._effect["leprechaun_spawn_fx"] = loadfx("vfx/unique/st_patricks_day_leprechaun_spawn");
+    level._effect["leprechaun_death_fx"] = loadfx("vfx/unique/st_patricks_day_leprechaun_death");
     level.var_A41["leprechauns"] = [];
     level.var_A41["leprechauns"]["spawn"] = ::spawn_leprechaun;
     level.var_A41["leprechauns"]["think"] = ::leprechaun_think;
@@ -45,7 +45,7 @@ try_spawn_leprechauns() {
   level endon("game_ended");
   for(;;) {
     level waittill("normal_enemy_kill");
-    if(!maps\mp\_utility::func_3FA0("prematch_done")) {
+    if(!maps\mp\_utility::gameflag("prematch_done")) {
       continue;
     }
 
@@ -79,7 +79,7 @@ try_spawn_leprechauns() {
     var_04 = undefined;
     var_05 = [];
     foreach(var_07 in level.players) {
-      if(maps\mp\_utility::func_57A0(var_07)) {
+      if(maps\mp\_utility::isreallyalive(var_07)) {
         var_05[var_05.size] = var_07;
       }
     }
@@ -143,7 +143,7 @@ spawn_leprechaun(param_00, param_01, param_02, param_03, param_04, param_05, par
     var_07 = var_0C;
   }
 
-  self method_838F(var_07, var_08);
+  self select_by_substring(var_07, var_08);
   self[[level.var_19D5["bot_set_difficulty"]]]("veteran");
   self[[level.var_19D5["bot_set_personality"]]]("run_and_gun");
   maps / mp / agents / _agent_common::func_83FD(getdvarint("spv_lep_health", 700));
@@ -163,13 +163,13 @@ spawn_leprechaun(param_00, param_01, param_02, param_03, param_04, param_05, par
 
   thread maps\mp\_flashgrenades::func_6394();
   self method_83D6(0);
-  maps\mp\_utility::func_47A2("specialty_silentmovement");
-  maps\mp\_utility::func_47A2("specialty_plainsight");
-  maps\mp\_utility::func_47A2("specialty_coldblooded");
-  maps\mp\_utility::func_47A2("specialty_spygame");
-  maps\mp\_utility::func_47A2("specialty_heartbreaker");
-  maps\mp\_utility::func_47A2("specialty_uavhidden");
-  maps\mp\_utility::func_47A2("specialty_delaymine");
+  maps\mp\_utility::giveperk("specialty_silentmovement");
+  maps\mp\_utility::giveperk("specialty_plainsight");
+  maps\mp\_utility::giveperk("specialty_coldblooded");
+  maps\mp\_utility::giveperk("specialty_spygame");
+  maps\mp\_utility::giveperk("specialty_heartbreaker");
+  maps\mp\_utility::giveperk("specialty_uavhidden");
+  maps\mp\_utility::giveperk("specialty_delaymine");
   self thread[[level.var_19D5["bot_think_watch_enemy"]]](1);
   self thread[[level.var_19D5["bot_think_tactical_goals"]]]();
   self thread[[maps / mp / agents / _agent_utility::func_A59("think")]]();
@@ -297,7 +297,7 @@ on_leprechaun_killed(param_00, param_01, param_02, param_03, param_04, param_05,
 
   if(self.var_565F) {
     self.var_4B60 = 1;
-    if(maps\mp\_utility::func_44FC() != 1 && isDefined(self.var_7DAD) && self.var_7DAD) {
+    if(maps\mp\_utility::getgametypenumlives() != 1 && isDefined(self.var_7DAD) && self.var_7DAD) {
       self thread[[maps / mp / agents / _agent_utility::func_A59("spawn")]]();
     } else {
       maps / mp / agents / _agent_utility::func_2A73();
@@ -383,7 +383,7 @@ all_player_card_splash(param_00, param_01, param_02) {
       continue;
     }
 
-    var_04 thread maps\mp\gametypes\_hud_message::func_73C2(param_00, param_01, param_02);
+    var_04 thread maps\mp\gametypes\_hud_message::playercardsplashnotify(param_00, param_01, param_02);
   }
 }
 

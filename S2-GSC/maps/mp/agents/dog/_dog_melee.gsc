@@ -109,7 +109,7 @@ func_8B8E(param_00) {
     return undefined;
   }
 
-  if(!self method_83EC(param_00.origin + (0, 0, 4), var_0B + (0, 0, 4), self.var_14F, self.height)) {
+  if(!self method_83EC(param_00.origin + (0, 0, 4), var_0B + (0, 0, 4), self.radius, self.height)) {
     return undefined;
   }
 
@@ -176,7 +176,7 @@ func_32AF(param_00, param_01) {
     var_08 = var_07;
   }
 
-  self method_83A4(self.origin, param_00, var_08);
+  self selected_fx_option_index(self.origin, param_00, var_08);
   thread func_A12D(self.var_28D2, var_08, param_01);
   maps / mp / agents / _scriptedagents::func_71FC(var_02, 0, "attack", "dog_melee");
   self notify("cancel_updatelerppos");
@@ -225,7 +225,7 @@ func_A12D(param_00, param_01, param_02) {
       break;
     }
 
-    self method_83A4(self.origin, var_05, var_03);
+    self selected_fx_option_index(self.origin, var_05, var_03);
   }
 }
 

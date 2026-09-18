@@ -105,8 +105,8 @@ func_8599(param_00, param_01) {
   var_04 = param_01.var_911F;
   var_05 = param_01.var_94EE;
   var_06 = param_01.var_781B;
-  if(isDefined(self.var_82A9)) {
-    var_02 = self.var_82A9;
+  if(isDefined(self.setperk)) {
+    var_02 = self.setperk;
   }
 
   if(isDefined(self.var_82AB)) {
@@ -307,12 +307,12 @@ func_6284(param_00, param_01, param_02, param_03) {
   var_05 = 0;
   var_06 = randomfloatrange(0.1, 0.25);
   if(isDefined(param_02)) {
-    func_392A(param_02);
+    exploder(param_02);
   }
 
   while(var_05 < param_01) {
     if(isDefined(param_03)) {
-      func_392A(param_03);
+      exploder(param_03);
     }
 
     foreach(var_08 in var_04) {
@@ -371,11 +371,11 @@ func_93C7(param_00) {
     var_01 = level.var_2807[param_00];
     if(isDefined(var_01)) {
       foreach(var_03 in var_01) {
-        if(!isDefined(var_03.var_5EED)) {
+        if(!isDefined(var_03.looper)) {
           continue;
         }
 
-        var_03.var_5EED delete();
+        var_03.looper delete();
       }
 
       return;
@@ -385,33 +385,33 @@ func_93C7(param_00) {
   }
 
   var_05 = 0;
-  while(var_03 < level.var_2804.size) {
-    var_05 = level.var_2804[var_03];
+  while(var_03 < level.createfxent.size) {
+    var_05 = level.createfxent[var_03];
     if(!isDefined(var_05)) {
       continue;
     }
 
-    if(var_05.var_A265["type"] != "exploder") {
+    if(var_05.v["type"] != "exploder") {
       continue;
     }
 
-    if(!isDefined(var_05.var_A265["exploder"])) {
+    if(!isDefined(var_05.v["exploder"])) {
       continue;
     }
 
-    if(var_05.var_A265["exploder"] + "" != var_02) {
+    if(var_05.v["exploder"] + "" != var_02) {
       continue;
     }
 
-    if(!isDefined(var_05.var_5EED)) {
+    if(!isDefined(var_05.looper)) {
       continue;
     }
 
-    var_05.var_5EED delete();
+    var_05.looper delete();
     var_03++;
   }
 }
 
-func_392A(param_00) {
+exploder(param_00) {
   [[level.var_3945]](param_00);
 }

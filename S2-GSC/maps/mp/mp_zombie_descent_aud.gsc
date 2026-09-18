@@ -1114,14 +1114,14 @@ bloodraven_bloodcode_final(param_00, param_01) {
 }
 
 enter_trial() {
-  self method_8626("trials_teleport");
+  self setaltsceneobj("trials_teleport");
   lib_0380::func_288B("zmb_dsnt_trials_enter", self, self);
   wait(1.5);
   self method_8627("trials_teleport");
 }
 
 exit_trial() {
-  self method_8626("trials_teleport");
+  self setaltsceneobj("trials_teleport");
   lib_0380::func_288B("zmb_dsnt_trials_exit", self, self);
   wait(1.5);
   self method_8627("trials_teleport");
@@ -1233,7 +1233,7 @@ citadel_entrance(param_00) {
 
 aud_gdk_intro() {
   foreach(var_01 in level.players) {
-    var_01 method_8626("god_king_intro", 2);
+    var_01 setaltsceneobj("god_king_intro", 2);
   }
 
   lib_0366::func_8E33(3);
@@ -1273,7 +1273,7 @@ gdk_intro_magic() {
 boss_music_start() {
   wait(1);
   foreach(var_01 in level.players) {
-    var_01 method_8626("god_king_fight", 2);
+    var_01 setaltsceneobj("god_king_fight", 2);
   }
 
   if(!isDefined(level.var_11CB.boss_music_playing) && !isDefined(level.var_11CB.boss_is_dead)) {
@@ -1297,7 +1297,7 @@ dlc_handle_boss_killed_music() {
 }
 
 dlc_play_boss_killed_stinger() {
-  self method_8626("bob_death_stinger", 0.2);
+  self setaltsceneobj("bob_death_stinger", 0.2);
   lib_0380::func_2888("mus_bob_death_stinger", self);
   wait(10);
   self method_8627("bob_death_stinger", 4);
@@ -1327,13 +1327,13 @@ spawn_raven() {
 }
 
 raven_fly_away() {
-  lib_0380::func_2893(level.var_11CB.crow_amb_caw, 0.1);
+  lib_0380::_stoplocalsound(level.var_11CB.crow_amb_caw, 0.1);
   lib_0380::func_2889("training_crow_caw", undefined, self.origin);
 }
 
 outro_vo_submix_start() {
   foreach(var_01 in level.players) {
-    var_01 method_8626("outro_vo");
+    var_01 setaltsceneobj("outro_vo");
   }
 }
 

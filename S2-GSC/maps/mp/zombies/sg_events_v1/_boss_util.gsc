@@ -61,7 +61,7 @@ spawn_zombie_boss_weapon_loot(param_00) {
   }
 
   if(var_0A.size > 0) {
-    var_0F = common_scripts\utility::func_7A33(var_0A);
+    var_0F = common_scripts\utility::random(var_0A);
     var_01 setrankedplayerdata(common_scripts\utility::func_46A8(), "weaponBuildKits", var_0F, "bossupgrade", 1);
     var_01 setrankedplayerdata(common_scripts\utility::func_46A8(), "weaponBuildKits", var_0F, "bossupgradebreadcrumb", 1);
     var_01 setrankedplayerdata(common_scripts\utility::func_46A8(), "getBossAttachmentLastMatch", 1);

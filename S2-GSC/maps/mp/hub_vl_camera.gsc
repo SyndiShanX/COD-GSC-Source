@@ -382,7 +382,7 @@ func_A59C() {
   var_0D = "none";
   var_0E = var_00.var_5E01["customClasses"][0];
   var_0F = var_0E["division"];
-  if(isDefined(var_0E["primaryWeaponStruct"]) && isDefined(var_0E["primaryWeaponStruct"].var_48CA) && var_0E["primaryWeaponStruct"].var_48CA != 0) {
+  if(isDefined(var_0E["primaryWeaponStruct"]) && isDefined(var_0E["primaryWeaponStruct"].guid) && var_0E["primaryWeaponStruct"].guid != 0) {
     var_10 = var_0E["primaryWeaponStruct"];
     var_11 = var_0E["primaryAttachmentsGUID"][0];
     var_12 = var_0E["primaryAttachmentsGUID"][1];
@@ -395,7 +395,7 @@ func_A59C() {
     var_19 = var_0E["primaryCustomization"];
     var_1A = maps\mp\_utility::func_4737(var_10);
     var_0B = maps\mp\gametypes\_class::func_1D66(var_1A, var_11, var_12, var_13, var_14, var_15, var_16, maps\mp\_utility::func_472D(var_10), var_17, var_18, var_19);
-  } else if(isDefined(var_0E["secondaryWeaponStruct"]) && isDefined(var_0E["secondaryWeaponStruct"].var_48CA) && var_0E["secondaryWeaponStruct"].var_48CA != 0) {
+  } else if(isDefined(var_0E["secondaryWeaponStruct"]) && isDefined(var_0E["secondaryWeaponStruct"].guid) && var_0E["secondaryWeaponStruct"].guid != 0) {
     var_1B = var_0E["secondaryWeaponStruct"];
     var_11 = var_0E["secondaryAttachmentsGUID"][0];
     var_12 = var_0E["secondaryAttachmentsGUID"][1];
@@ -408,7 +408,7 @@ func_A59C() {
     var_19 = var_0E["secondaryCustomization"];
     var_1A = maps\mp\_utility::func_4737(var_1B);
     var_0C = maps\mp\gametypes\_class::func_1D66(var_1A, var_11, var_12, var_13, var_14, var_15, var_16, maps\mp\_utility::func_472D(var_1B), var_17, var_18, var_19);
-  } else if(isDefined(var_0E["meleeWeaponStruct"]) && isDefined(var_0E["meleeWeaponStruct"].var_48CA) && var_0E["meleeWeaponStruct"].var_48CA != 0) {
+  } else if(isDefined(var_0E["meleeWeaponStruct"]) && isDefined(var_0E["meleeWeaponStruct"].guid) && var_0E["meleeWeaponStruct"].guid != 0) {
     var_1C = var_0E["meleeWeaponStruct"];
     var_1D = maps\mp\_utility::func_4737(var_1C);
   }
@@ -449,7 +449,7 @@ func_A59C() {
     var_0A = level.var_A595[var_00.var_A58C];
     var_0A.var_6101 = gettime();
     var_0A.var_294D = var_00.var_294D;
-    var_0A.var_721C = var_00;
+    var_0A.player = var_00;
     var_0A.var_83F4 = var_0A.var_267E;
   }
 
@@ -476,7 +476,7 @@ func_A59C() {
   func_9422(var_27);
   var_28 = 400;
   var_00.var_1E99 = var_27;
-  var_27.var_721C = var_00;
+  var_27.player = var_00;
   var_00.var_4B9E = 0;
   var_29 = (0, 90, 0);
   var_27.var_64ED = "starting";
@@ -1016,7 +1016,7 @@ func_5E39(param_00, param_01, param_02, param_03) {
     var_15 = 1;
     var_16 = getdvarint("virtualLobbyMode", 0);
     if(var_16 != 2 && var_16 != 4 && var_16 != 3) {
-      if(isDefined(param_01.var_721C) && param_01.var_721C == self) {
+      if(isDefined(param_01.player) && param_01.player == self) {
         maps\mp\hub_vl_base::func_7E92(param_01, 0.5);
       }
     } else if(var_16 == 4 || var_16 == 3) {
@@ -1115,7 +1115,7 @@ func_5E39(param_00, param_01, param_02, param_03) {
 func_8A5F() {
   level notify("cancel_vlp");
   level endon("cancel_vlp");
-  if(level.var_A595.size > 0 && isDefined(level.var_A595[0]) && isDefined(level.var_A595[0].var_7704) && func_5854(level.var_A595[0].var_7704)) {
+  if(level.var_A595.size > 0 && isDefined(level.var_A595[0]) && isDefined(level.var_A595[0].primaryweapon) && func_5854(level.var_A595[0].primaryweapon)) {
     level.var_6651 = undefined;
     wait(0.5);
     setDvar("3965", "1");
@@ -1341,7 +1341,7 @@ func_8F7D(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_11.var_7EF8 = 0;
   var_11.var_09F8 = 0;
   var_11.var_1E9B = 1;
-  var_11.var_721C = self;
+  var_11.player = self;
   if(!isDefined(param_0D) || !param_0D) {
     var_16 = var_11.var_13B6.var_0116 + (0, 0, -11);
     var_11.var_20F1 = var_13;
@@ -1361,11 +1361,11 @@ func_8F7D(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   if(param_0B == 1) {
     var_11.var_5541 = 1;
     param_02 = undefined;
-    var_11.var_7704 = undefined;
+    var_11.primaryweapon = undefined;
     var_11 func_A1D5("cao_01", 1, "lobby_idle");
   } else if(param_0C == 1) {
     param_02 = undefined;
-    var_11.var_7704 = undefined;
+    var_11.primaryweapon = undefined;
     var_11 func_A1D5("cao_01", 1, "lobby_idle");
   } else {
     level.var_A595[param_0A] = var_11;
@@ -1405,8 +1405,8 @@ func_21F1(param_00, param_01, param_02, param_03) {
       continue;
     }
 
-    if(isDefined(self) && isDefined(self.var_7704) && self.var_7704 != "none") {
-      var_05 = strtok(self.var_7704, "+");
+    if(isDefined(self) && isDefined(self.primaryweapon) && self.primaryweapon != "none") {
+      var_05 = strtok(self.primaryweapon, "+");
       var_04 = var_05[0];
     }
 
@@ -1420,12 +1420,12 @@ func_21F1(param_00, param_01, param_02, param_03) {
 
     if(isDefined(param_03.var_1EFF.var_627E)) {
       if(param_03.var_1EFF.var_669A != "cao" && param_03.var_1EFF.var_627E != "cao") {
-        if(isDefined(self) && isDefined(var_04) && self.var_7704 != "none") {
-          var_0C = func_5854(self.var_7704);
-          var_0D = self.var_9428 != self.var_7704;
+        if(isDefined(self) && isDefined(var_04) && self.primaryweapon != "none") {
+          var_0C = func_5854(self.primaryweapon);
+          var_0D = self.var_9428 != self.primaryweapon;
           var_0E = var_0D || var_06 != var_09;
-          var_0F = self.var_9428 != "none" && getweapondisplayname(self.var_9428) != getweapondisplayname(self.var_7704);
-          if(function_01A9(self.var_7704) == "melee") {
+          var_0F = self.var_9428 != "none" && getweapondisplayname(self.var_9428) != getweapondisplayname(self.primaryweapon);
+          if(function_01A9(self.primaryweapon) == "melee") {
             func_4CCF(self);
             func_4CCE(self);
           } else if(var_0E) {
@@ -1438,12 +1438,12 @@ func_21F1(param_00, param_01, param_02, param_03) {
               }
 
               if(level.var_A1FE) {
-                func_05E0(param_03 getentitynumber(), self.var_20F1, "prim_weapon", self.var_7704);
+                func_05E0(param_03 getentitynumber(), self.var_20F1, "prim_weapon", self.primaryweapon);
               } else {
-                self.var_7705 method_848E(self.var_7704);
+                self.var_7705 method_848E(self.primaryweapon);
               }
 
-              if(issubstr(self.var_7704, "akimbo")) {
+              if(issubstr(self.primaryweapon, "akimbo")) {
                 if(var_0F) {
                   func_A58A(param_03, self);
                 }
@@ -1451,7 +1451,7 @@ func_21F1(param_00, param_01, param_02, param_03) {
                 func_A593(param_03.var_01D6, self);
               }
 
-              self.var_9428 = self.var_7704;
+              self.var_9428 = self.primaryweapon;
               var_08 = func_441B(var_04);
               self.var_1EAD = var_08.var_1EAD;
               thread func_0EB2(var_08.var_0BB4, var_08.var_0EE8, param_03);
@@ -1467,10 +1467,10 @@ func_21F1(param_00, param_01, param_02, param_03) {
 
 func_5854(param_00) {
   var_01 = 0;
-  if(level.var_744A.size > 0) {
-    var_01 = level.var_744A[0] method_8530(param_00);
+  if(level.players.size > 0) {
+    var_01 = level.players[0] method_8530(param_00);
     if(!var_01) {
-      level.var_744A[0] method_8512(param_00);
+      level.players[0] method_8512(param_00);
     }
   }
 
@@ -1523,7 +1523,7 @@ func_441B(param_00) {
 func_A593(param_00, param_01) {
   if(isDefined(param_01.var_0BA9)) {
     if(level.var_A1FE) {
-      func_05E0(param_01.var_721C getentitynumber(), param_01.var_20F1, "sec_weapon", "");
+      func_05E0(param_01.player getentitynumber(), param_01.var_20F1, "sec_weapon", "");
       return;
     }
 
@@ -1534,52 +1534,52 @@ func_A593(param_00, param_01) {
 }
 
 func_A58A(param_00, param_01) {
-  if(issubstr(param_01.var_7705.var_7704, "akimbo")) {
+  if(issubstr(param_01.var_7705.primaryweapon, "akimbo")) {
     if(!isDefined(param_01.var_0BA9)) {
       if(level.var_A1FE) {
         var_02 = spawnStruct();
       } else {
-        var_02 = spawn("weapon_" + var_02.var_7704, (0, 0, 0));
+        var_02 = spawn("weapon_" + var_02.primaryweapon, (0, 0, 0));
         var_03 = func_43EA(param_01);
         function_02BA(var_02, var_03);
       }
 
       param_01.var_0BA9 = var_02;
-      var_02.var_7704 = param_01.var_7704;
-    } else if(param_01.var_0BA9.var_7704 != param_01.var_7704) {
-      param_01.var_0BA9.var_7704 = param_01.var_7704;
+      var_02.primaryweapon = param_01.primaryweapon;
+    } else if(param_01.var_0BA9.primaryweapon != param_01.primaryweapon) {
+      param_01.var_0BA9.primaryweapon = param_01.primaryweapon;
     }
 
     if(!level.var_A1FE) {
-      param_01.var_0BA9 method_848E(param_01.var_7704);
+      param_01.var_0BA9 method_848E(param_01.primaryweapon);
       var_04 = "tag_weapon_left";
-      if(issubstr(param_01.var_0BA9.var_7704, "combatknife")) {
+      if(issubstr(param_01.var_0BA9.primaryweapon, "combatknife")) {
         var_04 = "tag_inhand";
       }
 
-      if(issubstr(param_01.var_0BA9.var_7704, "riotshield")) {
+      if(issubstr(param_01.var_0BA9.primaryweapon, "riotshield")) {
         var_04 = "tag_weapon_left";
       }
 
       param_01.var_0BA9 unlink();
       param_01.var_0BA9.var_0116 = param_01 gettagorigin(var_04);
       param_01.var_0BA9.var_001D = param_01 gettagangles(var_04);
-      param_01.var_0BA9 method_805C();
+      param_01.var_0BA9 save_undo_buffer();
       param_01.var_0BA9 showtoclient(param_00);
-      param_01.var_0BA9 method_8449(param_01, var_04);
+      param_01.var_0BA9 linktosynchronizedparent(param_01, var_04);
       param_01.var_0BA9 method_852B(param_00);
     } else {
-      func_05E0(param_00 getentitynumber(), param_01.var_20F1, "sec_weapon", param_01.var_0BA9.var_7704);
+      func_05E0(param_00 getentitynumber(), param_01.var_20F1, "sec_weapon", param_01.var_0BA9.primaryweapon);
     }
 
-    if(issubstr(param_01.var_7705.var_7704, "akimbo")) {
+    if(issubstr(param_01.var_7705.primaryweapon, "akimbo")) {
       thread func_8BE9(param_01, param_00);
       return;
     }
 
     if(!isDefined(param_01.var_9428)) {
       if(!level.var_A1FE) {
-        param_01.var_0BA9 method_805C();
+        param_01.var_0BA9 save_undo_buffer();
         param_01.var_0BA9 hideallparts();
         return;
       }
@@ -1590,7 +1590,7 @@ func_A58A(param_00, param_01) {
 }
 
 func_A58D(param_00, param_01) {
-  if(!isDefined(param_01.var_7704)) {
+  if(!isDefined(param_01.primaryweapon)) {
     return;
   }
 
@@ -1598,31 +1598,31 @@ func_A58D(param_00, param_01) {
     return;
   }
 
-  if(param_01.var_7704 != "none") {
+  if(param_01.primaryweapon != "none") {
     if(!isDefined(param_01.var_7705)) {
       if(level.var_A1FE) {
         var_02 = spawnStruct();
       } else {
-        var_02 = spawn("weapon_" + var_02.var_7704, (0, 0, 0));
+        var_02 = spawn("weapon_" + var_02.primaryweapon, (0, 0, 0));
         var_03 = func_43EA(param_01);
         function_02BA(var_02, var_03);
       }
 
       var_02.var_01A5 = "avatar_weapon";
       param_01.var_7705 = var_02;
-      var_02.var_7704 = param_01.var_7704;
+      var_02.primaryweapon = param_01.primaryweapon;
       if(!level.var_A1FE) {
-        param_01.var_7705 method_805C();
+        param_01.var_7705 save_undo_buffer();
         param_01.var_7705 showtoclient(param_00);
-        param_01.var_7705 method_848E(param_01.var_7704);
+        param_01.var_7705 method_848E(param_01.primaryweapon);
       }
 
       func_1158(param_01);
       return;
     }
 
-    if(param_01.var_7705.var_7704 != param_01.var_7704) {
-      param_01.var_7705.var_7704 = param_01.var_7704;
+    if(param_01.var_7705.primaryweapon != param_01.primaryweapon) {
+      param_01.var_7705.primaryweapon = param_01.primaryweapon;
       return;
     }
 
@@ -1632,28 +1632,28 @@ func_A58D(param_00, param_01) {
 
 func_1158(param_00) {
   var_01 = undefined;
-  if(isDefined(param_00.var_721C)) {
-    var_01 = param_00.var_721C;
+  if(isDefined(param_00.player)) {
+    var_01 = param_00.player;
   }
 
   var_02 = "tag_weapon_right";
-  if(issubstr(param_00.var_7705.var_7704, "combatknife")) {
+  if(issubstr(param_00.var_7705.primaryweapon, "combatknife")) {
     var_02 = "tag_inhand";
   }
 
-  if(issubstr(param_00.var_7705.var_7704, "riotshield")) {
+  if(issubstr(param_00.var_7705.primaryweapon, "riotshield")) {
     var_02 = "tag_weapon_left";
   }
 
   if(level.var_A1FE) {
-    func_05E0(var_01 getentitynumber(), param_00.var_20F1, "prim_weapon", param_00.var_7704);
+    func_05E0(var_01 getentitynumber(), param_00.var_20F1, "prim_weapon", param_00.primaryweapon);
     return;
   }
 
   param_00.var_7705 unlink();
   param_00.var_7705.var_0116 = param_00 gettagorigin(var_02);
   param_00.var_7705.var_001D = param_00 gettagangles(var_02);
-  param_00.var_7705 method_8449(param_00, var_02);
+  param_00.var_7705 linktosynchronizedparent(param_00, var_02);
   param_00.var_7705 method_852B(var_01);
 }
 
@@ -1663,7 +1663,7 @@ func_8BE9(param_00, param_01) {
   param_00 endon("hide_akimbo_weapon");
   wait(param_01.var_1EFF.var_1E29);
   if(param_01.var_1EFF.var_669A != "cao" && param_01.var_1EFF.var_627E != "cao") {
-    if(issubstr(param_00.var_7705.var_7704, "akimbo")) {
+    if(issubstr(param_00.var_7705.primaryweapon, "akimbo")) {
       if(!level.var_A1FE) {
         param_00.var_0BA9 showtoclient(param_01);
         return;
@@ -1715,7 +1715,7 @@ func_A586(param_00, param_01, param_02) {
     var_04 = maps\mp\gametypes\_teams::func_73CA();
     if(!isDefined(param_00.var_5097) || !param_00.var_5097) {
       if(level.var_A1FE) {
-        func_05E0(param_00.var_721C getentitynumber(), param_00.var_20F1, "costume", param_00.var_267E[0], param_00.var_267E[1], param_00.var_267E[2], param_00.var_267E[3], param_00.var_267E[4], param_00.var_267E[5]);
+        func_05E0(param_00.player getentitynumber(), param_00.var_20F1, "costume", param_00.var_267E[0], param_00.var_267E[1], param_00.var_267E[2], param_00.var_267E[3], param_00.var_267E[4], param_00.var_267E[5]);
       } else {
         param_00 setcostumemodels(param_00.var_267E, "free");
       }
@@ -1726,7 +1726,7 @@ func_A586(param_00, param_01, param_02) {
       func_A586(var_05, param_00.var_267E);
       if(!isDefined(var_05.var_5097) || !var_05.var_5097) {
         if(level.var_A1FE) {
-          func_05E0(var_05.var_721C getentitynumber(), var_05.var_20F1, "costume", param_00.var_267E[0], param_00.var_267E[1], param_00.var_267E[2], param_00.var_267E[3], param_00.var_267E[4], param_00.var_267E[5]);
+          func_05E0(var_05.player getentitynumber(), var_05.var_20F1, "costume", param_00.var_267E[0], param_00.var_267E[1], param_00.var_267E[2], param_00.var_267E[3], param_00.var_267E[4], param_00.var_267E[5]);
           return;
         }
 
@@ -1742,7 +1742,7 @@ func_A586(param_00, param_01, param_02) {
 
   if(!isDefined(param_01.var_5097) || !param_01.var_5097) {
     if(level.var_A1FE) {
-      func_05E0(param_01.var_721C getentitynumber(), param_01.var_20F1, "costume", param_01.var_267E[0], param_01.var_267E[1], param_01.var_267E[2], param_01.var_267E[3], param_01.var_267E[4], param_01.var_267E[5]);
+      func_05E0(param_01.player getentitynumber(), param_01.var_20F1, "costume", param_01.var_267E[0], param_01.var_267E[1], param_01.var_267E[2], param_01.var_267E[3], param_01.var_267E[4], param_01.var_267E[5]);
       return;
     }
 
@@ -1782,7 +1782,7 @@ func_A587(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   param_0A.var_0079 = param_02;
-  param_0A.var_7704 = var_0D;
+  param_0A.primaryweapon = var_0D;
   param_0A.var_01A0 = param_07;
   param_0A.var_00ED = param_06;
   param_0A.var_6F65 = param_08;
@@ -1808,7 +1808,7 @@ func_62F5(param_00) {
         if(isDefined(var_06)) {
           self.var_A58C = param_00;
           func_A558(param_00, "lobby" + self.var_294D + 1, !var_05);
-          self.var_1E1F = var_06.var_7704;
+          self.var_1E1F = var_06.primaryweapon;
         }
 
         level.var_3E0C = var_05;
@@ -1833,7 +1833,7 @@ func_62EC(param_00, param_01) {
     var_04 = "none";
   } else {
     var_05 = level.var_A595[param_01];
-    var_04 = var_05.var_7704;
+    var_04 = var_05.primaryweapon;
   }
 
   self.var_1E1F = var_04;
@@ -1986,13 +1986,13 @@ func_A558(param_00, param_01, param_02, param_03, param_04) {
   }
 
   self.var_012C["class"] = param_01;
-  self.var_2319 = param_01;
-  maps\mp\gametypes\_class::func_864F(self.var_012C["class"]);
+  self.class = param_01;
+  maps\mp\gametypes\_class::setclass(self.var_012C["class"]);
   self.var_95AE = undefined;
   self.var_95AF = undefined;
   maps\mp\gametypes\_class::func_4773(self.var_012C["team"], self.var_012C["class"]);
   if(param_02) {
-    func_A587(self, param_00, self.var_7704, self.var_835A, self.var_60FA, self.var_5DF4, self.var_5DF7, self.var_6F65, self.var_267E);
+    func_A587(self, param_00, self.primaryweapon, self.var_835A, self.var_60FA, self.var_5DF4, self.var_5DF7, self.var_6F65, self.var_267E);
     if(isDefined(self.var_1F8E)) {
       func_A587(self, param_00, undefined, self.var_835A, self.var_60FA, self.var_5DF4, self.var_5DF7, self.var_6F65, self.var_267E, self.var_1F8E);
     }
@@ -2198,7 +2198,7 @@ func_8660(param_00) {
 
 func_3B94(param_00) {
   var_01 = undefined;
-  foreach(var_03 in level.var_744A) {
+  foreach(var_03 in level.players) {
     if(var_03.var_01D6 == param_00) {
       var_01 = var_03;
       break;
@@ -2212,11 +2212,11 @@ func_631E() {
   level.var_60B7 = [];
   var_00 = maps\mp\_utility::func_4604();
   for(;;) {
-    while(!isDefined(level.var_744A) || level.var_744A.size == 0) {
+    while(!isDefined(level.players) || level.players.size == 0) {
       wait 0.05;
     }
 
-    while(isDefined(level.var_744A) && level.var_744A.size > 0) {
+    while(isDefined(level.players) && level.players.size > 0) {
       var_01 = [];
       var_02 = [];
       var_03 = 0;
@@ -2259,15 +2259,15 @@ func_631E() {
         var_18[7] = maps\mp\_utility::func_452A(tablelookup(var_00, 0, var_07.var_012A, 1));
         var_18[8] = maps\mp\_utility::func_452A(tablelookup(var_00, 0, var_07.var_012B, 1));
         var_19 = 1;
-        if(!maps\mp\gametypes\_class::func_5835(var_09, var_19) && !maps\mp\gametypes\_class::func_5839(var_0F, var_19)) {
-          var_09 = maps\mp\gametypes\_class::func_9590(level.classtablename, 10, 0);
+        if(!maps\mp\gametypes\_class::isvalidprimary(var_09, var_19) && !maps\mp\gametypes\_class::isvalidsecondary(var_0F, var_19)) {
+          var_09 = maps\mp\gametypes\_class::table_getweapon(level.classtablename, 10, 0);
           for(var_1A = 0; var_1A < 6; var_1A++) {
             var_0A[var_1A] = 0;
           }
         }
 
-        if(!maps\mp\gametypes\_class::func_5839(var_0F, var_19)) {
-          var_0F = maps\mp\gametypes\_class::func_9590(level.classtablename, 10, 1);
+        if(!maps\mp\gametypes\_class::isvalidsecondary(var_0F, var_19)) {
+          var_0F = maps\mp\gametypes\_class::table_getweapon(level.classtablename, 10, 1);
           for(var_1A = 0; var_1A < 6; var_1A++) {
             var_10[var_1A] = 0;
           }
@@ -2327,7 +2327,7 @@ func_631E() {
           }
 
           if(var_08.var_012F >= 0) {
-            foreach(var_26 in level.var_744A) {
+            foreach(var_26 in level.players) {
               if(var_26.var_A58C == var_22) {
                 var_26 func_A0AD(var_09, var_0A, var_0B[0], var_0B[1], var_0B[2], var_0B[3], var_0B[4], var_0B[5], var_0D, var_0F, var_10, var_11[0], var_11[1], var_11[2], var_11[3], var_11[4], var_11[5], var_13, var_15, var_16, var_17, var_18, var_19[0], var_19[1], var_19[2], var_19[3], var_19[4], var_19[5], var_19[6], var_19[7], var_19[8], var_0C, var_12);
               }
@@ -2337,7 +2337,7 @@ func_631E() {
               if(isDefined(var_24.var_2685) && isDefined(var_24.var_2685[var_24.var_76D2])) {
                 var_1F = var_24.var_2685[var_24.var_76D2];
               } else {
-                var_1F = level.var_744A[0] maps\mp\gametypes\_class::func_1F97(var_24.var_76D2);
+                var_1F = level.players[0] maps\mp\gametypes\_class::func_1F97(var_24.var_76D2);
               }
 
               var_1F = func_8660(var_1F);
@@ -2370,13 +2370,13 @@ func_631E() {
             var_09 = 1;
             maps\mp\hub_vl_base::func_A59E("Updating xuid " + var_0B.var_01D6 + " with ownerId=" + var_26 + "\n");
             maps\mp\hub_vl_base::func_A59E("PartyMemberClassChange " + var_0B.var_01D6 + " : " + var_1F + "," + var_20 + "," + var_1B + "," + var_1C + "\n");
-            if(isDefined(var_27.var_721C)) {
-              var_27.var_721C.var_267E = var_21;
+            if(isDefined(var_27.player)) {
+              var_27.player.var_267E = var_21;
             }
 
-            func_A587(var_27.var_721C, var_26, var_1F, var_20, var_2A, var_1B, var_1C, var_22, var_21);
-            if(var_0B.var_012F >= 0 && isDefined(var_27.var_721C.var_1F8E)) {
-              func_A587(var_27.var_721C, var_26, undefined, var_20, "none", var_1B, var_1C, var_22, var_21, var_27.var_721C.var_1F8E);
+            func_A587(var_27.player, var_26, var_1F, var_20, var_2A, var_1B, var_1C, var_22, var_21);
+            if(var_0B.var_012F >= 0 && isDefined(var_27.player.var_1F8E)) {
+              func_A587(var_27.player, var_26, undefined, var_20, "none", var_1B, var_1C, var_22, var_21, var_27.player.var_1F8E);
             }
 
             var_27.var_5DEE = var_0B;
@@ -2413,7 +2413,7 @@ func_13B9(param_00, param_01, param_02) {
     }
 
     foreach(var_0A in param_01) {
-      if(var_05.var_A561[var_0A.var_2418] == 0) {
+      if(var_05.var_A561[var_0A.clientid] == 0) {
         var_0B = var_0A getentitynumber();
         func_05E0(var_0A getentitynumber(), var_08, "create", var_05.var_0116);
         func_05E0(var_0A getentitynumber(), var_08, "angles", var_05.var_001D);
@@ -2422,7 +2422,7 @@ func_13B9(param_00, param_01, param_02) {
           func_05E0(var_0A getentitynumber(), var_08, "anim", var_05.var_0EEC);
         }
 
-        var_05.var_A561[var_0A.var_2418] = 1;
+        var_05.var_A561[var_0A.clientid] = 1;
       } else if(param_02) {
         func_05E0(var_0A getentitynumber(), var_08, "costume", var_05.var_267E[0], var_05.var_267E[1], var_05.var_267E[2], var_05.var_267E[3], var_05.var_267E[4], var_05.var_267E[5]);
       }
@@ -2464,30 +2464,30 @@ func_6CC1(param_00) {
   var_0B = tablelookup(level.var_761A, 0, "loadoutPrimaryAttachment4", var_07);
   var_0C = tablelookup(level.var_761A, 0, "loadoutPrimaryAttachment5", var_07);
   var_0D = tablelookup(level.var_761A, 0, "loadoutPrimaryAttachment6", var_07);
-  var_04.var_7709 = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::func_9590(level.var_761A, var_07, 0), 0);
+  var_04.var_7709 = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::table_getweapon(level.var_761A, var_07, 0), 0);
   var_04.var_013C = int(tablelookup("mp/attachmenttable.csv", 3, var_08, 0));
   var_04.var_013D = int(tablelookup("mp/attachmenttable.csv", 3, var_09, 0));
   var_04.var_013E = int(tablelookup("mp/attachmenttable.csv", 3, var_0A, 0));
   var_04.var_013F = int(tablelookup("mp/attachmenttable.csv", 3, var_0B, 0));
   var_04.var_0140 = int(tablelookup("mp/attachmenttable.csv", 3, var_0C, 0));
   var_04.var_0141 = int(tablelookup("mp/attachmenttable.csv", 3, var_0D, 0));
-  var_04.var_76F5 = maps\mp\gametypes\_class::func_958E(level.var_761A, var_07, 0);
-  var_04.var_7700 = maps\mp\gametypes\_class::func_9591(level.var_761A, var_07, 0);
+  var_04.var_76F5 = maps\mp\gametypes\_class::table_getweaponcamo(level.var_761A, var_07, 0);
+  var_04.var_7700 = maps\mp\gametypes\_class::table_getweaponreticle(level.var_761A, var_07, 0);
   var_0E = tablelookup(level.var_761A, 0, "loadoutSecondaryAttachment", var_07);
   var_0F = tablelookup(level.var_761A, 0, "loadoutSecondaryAttachment2", var_07);
   var_10 = tablelookup(level.var_761A, 0, "loadoutSecondaryAttachment3", var_07);
   var_11 = tablelookup(level.var_761A, 0, "loadoutSecondaryAttachment4", var_07);
   var_12 = tablelookup(level.var_761A, 0, "loadoutSecondaryAttachment5", var_07);
   var_13 = tablelookup(level.var_761A, 0, "loadoutSecondaryAttachment6", var_07);
-  var_04.var_835D = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::func_9590(level.var_761A, var_07, 1), 0);
+  var_04.var_835D = maps\mp\_utility::func_473C(maps\mp\gametypes\_class::table_getweapon(level.var_761A, var_07, 1), 0);
   var_04.var_0170 = int(tablelookup("mp/attachmenttable.csv", 3, var_0E, 0));
   var_04.var_0171 = int(tablelookup("mp/attachmenttable.csv", 3, var_0F, 0));
   var_04.var_0172 = int(tablelookup("mp/attachmenttable.csv", 3, var_10, 0));
   var_04.var_8350 = int(tablelookup("mp/attachmenttable.csv", 3, var_11, 0));
   var_04.var_8351 = int(tablelookup("mp/attachmenttable.csv", 3, var_12, 0));
   var_04.var_8352 = int(tablelookup("mp/attachmenttable.csv", 3, var_13, 0));
-  var_04.var_8355 = maps\mp\gametypes\_class::func_958E(level.var_761A, var_07, 1);
-  var_04.var_8359 = maps\mp\gametypes\_class::func_9591(level.var_761A, var_07, 1);
+  var_04.var_8355 = maps\mp\gametypes\_class::table_getweaponcamo(level.var_761A, var_07, 1);
+  var_04.var_8359 = maps\mp\gametypes\_class::table_getweaponreticle(level.var_761A, var_07, 1);
   return var_04;
 }
 
@@ -2711,7 +2711,7 @@ func_62F9(param_00) {
           var_03.var_2685[var_03.var_76D2][var_04] = var_03.var_76D4;
           if(var_03.var_76D2 == var_03.var_08D2) {
             if(level.var_A1FE) {
-              func_05E0(var_03.var_721C getentitynumber(), var_03.var_20F1, "costume", var_03.var_2685[var_03.var_76D2][0], var_03.var_2685[var_03.var_76D2][1], var_03.var_2685[var_03.var_76D2][2], var_03.var_2685[var_03.var_76D2][3], var_03.var_2685[var_03.var_76D2][4], var_03.var_2685[var_03.var_76D2][5]);
+              func_05E0(var_03.player getentitynumber(), var_03.var_20F1, "costume", var_03.var_2685[var_03.var_76D2][0], var_03.var_2685[var_03.var_76D2][1], var_03.var_2685[var_03.var_76D2][2], var_03.var_2685[var_03.var_76D2][3], var_03.var_2685[var_03.var_76D2][4], var_03.var_2685[var_03.var_76D2][5]);
             } else {
               var_03 setcostumemodels(var_03.var_2685[var_03.var_76D2]);
             }
@@ -2743,7 +2743,7 @@ func_2318(param_00) {
       var_04 = strtok(var_03, "|");
       if(var_04.size > 0) {
         var_05 = int(var_04[0]);
-        var_06 = level.var_744A[0].var_2316[var_05];
+        var_06 = level.players[0].var_2316[var_05];
         if(isDefined(var_06)) {
           var_06.var_08D2 = 0;
           var_06.var_582A = int(var_04[1]) > 0;
@@ -2799,7 +2799,7 @@ func_62F4() {
 
 func_4CCD(param_00) {
   for(var_01 = 0; var_01 < 48; var_01++) {
-    var_02 = level.var_744A[var_01];
+    var_02 = level.players[var_01];
     if(!isDefined(var_02)) {
       continue;
     }
@@ -2808,7 +2808,7 @@ func_4CCD(param_00) {
   }
 
   if(!level.var_A1FE) {
-    param_00 method_805C();
+    param_00 save_undo_buffer();
   }
 
   func_4CD1(param_00);
@@ -2817,7 +2817,7 @@ func_4CCD(param_00) {
 func_8BBB(param_00) {
   for(var_01 = 0; var_01 < 48; var_01++) {
     if(param_00.var_A561[var_01]) {
-      var_02 = level.var_744A[var_01];
+      var_02 = level.players[var_01];
       if(!isDefined(var_02)) {
         param_00.var_A561[var_01] = 0;
         continue;
@@ -2836,7 +2836,7 @@ func_8BBB(param_00) {
         }
       }
 
-      if(isDefined(param_00.var_7704) && issubstr(param_00.var_7704, "akimbo")) {
+      if(isDefined(param_00.primaryweapon) && issubstr(param_00.primaryweapon, "akimbo")) {
         func_A58A(var_02, param_00);
       }
     }
@@ -2847,7 +2847,7 @@ func_4CCF(param_00) {
   if(isDefined(param_00.var_7705)) {
     param_00 notify("hide_primary_weapon");
     if(!level.var_A1FE) {
-      param_00.var_7705 method_805C();
+      param_00.var_7705 save_undo_buffer();
       param_00.var_7705 hideallparts();
     }
   }
@@ -2857,7 +2857,7 @@ func_4CD0(param_00) {
   if(isDefined(param_00.var_835B)) {
     param_00 notify("hide_secondary_weapon");
     if(!level.var_A1FE) {
-      param_00.var_835B method_805C();
+      param_00.var_835B save_undo_buffer();
       param_00.var_835B hideallparts();
     }
   }
@@ -2867,7 +2867,7 @@ func_4CCE(param_00) {
   if(isDefined(param_00.var_0BA9)) {
     param_00 notify("hide_akimbo_weapon");
     if(!level.var_A1FE) {
-      param_00.var_0BA9 method_805C();
+      param_00.var_0BA9 save_undo_buffer();
       param_00.var_0BA9 hideallparts();
     }
   }
@@ -2945,10 +2945,10 @@ func_7C75(param_00) {
     func_A593(var_03, var_04);
   }
 
-  var_04.var_7704 = undefined;
+  var_04.primaryweapon = undefined;
   var_04.var_9428 = undefined;
   maps\mp\hub_vl_base::func_3E76(var_04);
-  foreach(var_06 in level.var_744A) {
+  foreach(var_06 in level.players) {
     if(var_06.var_A58C == param_00) {
       var_06.var_A58C = 0;
     }
@@ -3007,8 +3007,8 @@ func_A1D5(param_00, param_01, param_02) {
   self.var_0EE8 = param_02;
   var_05 = level.var_0EE9[param_02][param_00];
   self.var_0EEC = var_05;
-  if(isDefined(self.var_721C)) {
-    func_05E0(self.var_721C getentitynumber(), self.var_20F1, "anim", var_05);
+  if(isDefined(self.player)) {
+    func_05E0(self.player getentitynumber(), self.var_20F1, "anim", var_05);
   }
 
   if(!level.var_A1FE) {
@@ -3114,7 +3114,7 @@ func_9271() {
 
   foreach(var_01 in level.var_A595) {
     if(!isDefined(var_01.var_0E93) || !isDefined(var_01.var_0EE8)) {
-      var_02 = var_01 func_441B(var_01.var_7704);
+      var_02 = var_01 func_441B(var_01.primaryweapon);
       var_01 func_A1D5(var_02.var_0BB4, undefined, var_02.var_0EE8);
     }
   }
@@ -3127,7 +3127,7 @@ func_9243() {
 
   foreach(var_01 in level.var_A595) {
     if(!isDefined(var_01.var_0E93) || !isDefined(var_01.var_0EE8)) {
-      var_02 = var_01 func_441B(var_01.var_7704);
+      var_02 = var_01 func_441B(var_01.primaryweapon);
       var_01 func_A1D5(var_02.var_0BB4, undefined, var_02.var_0EE8);
     }
   }
@@ -3140,7 +3140,7 @@ func_91B5() {
 
   foreach(var_01 in level.var_A595) {
     if(!isDefined(var_01.var_0E93) || !isDefined(var_01.var_0EE8)) {
-      var_02 = var_01 func_441B(var_01.var_7704);
+      var_02 = var_01 func_441B(var_01.primaryweapon);
       var_01 func_A1D5(var_02.var_0BB4, undefined, var_02.var_0EE8);
     }
   }
@@ -3872,8 +3872,8 @@ func_A59D(param_00, param_01) {
 func_4696(param_00) {
   if(!isDefined(param_00)) {
     param_00 = 0;
-    for(var_01 = 0; var_01 < level.var_744A.size; var_01++) {
-      if(level.var_744A[var_01] == self) {
+    for(var_01 = 0; var_01 < level.players.size; var_01++) {
+      if(level.players[var_01] == self) {
         param_00 = var_01;
         break;
       }

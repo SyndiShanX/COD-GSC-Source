@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_dunkirk_precache::func_F9();
-  maps\createart\mp_dunkirk_art::func_F9();
-  maps\mp\mp_dunkirk_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_dunkirk_lighting::func_F9();
-  maps\mp\mp_dunkirk_aud::func_F9();
+  maps\mp\mp_dunkirk_precache::main();
+  maps\createart\mp_dunkirk_art::main();
+  maps\mp\mp_dunkirk_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_dunkirk_lighting::main();
+  maps\mp\mp_dunkirk_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_dunkirk");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -39,10 +39,10 @@ func_00F9() {
   level.var_6465["velocityscaler"] = 0.35;
   level.var_6465["cameraRotationInfluence"] = 0;
   level.var_6465["cameraTranslationInfluence"] = 0;
-  level thread func_6B82();
+  level thread onplayerspawned();
 }
 
-func_6B82() {
+onplayerspawned() {
   level endon("game_ended");
   for(;;) {
     level waittill("player_spawned", var_00);

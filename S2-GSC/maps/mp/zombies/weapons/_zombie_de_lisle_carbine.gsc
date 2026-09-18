@@ -4,8 +4,8 @@
 ****************************************************************/
 
 init() {
-  level.var_611["trap_ready_red"] = loadfx("vfx/zombie/zmb_trap_light_red");
-  level.var_611["trap_ready_blue"] = loadfx("vfx/zombie/zmb_trap_light_blue");
+  level._effect["trap_ready_red"] = loadfx("vfx/zombie/zmb_trap_light_red");
+  level._effect["trap_ready_blue"] = loadfx("vfx/zombie/zmb_trap_light_blue");
   level thread maps\mp\_utility::func_6F74(::player_fire_tracking);
 }
 
@@ -98,18 +98,18 @@ get_close_zombies(param_00, param_01) {
 }
 
 clear_betty() {
-  if(isDefined(self.var_3F2F)) {
-    self.var_3F2F delete();
+  if(isDefined(self.fx)) {
+    self.fx delete();
   }
 }
 
 set_fx(param_00) {
   var_01 = self;
-  if(isDefined(var_01.var_3F2F)) {
-    var_01.var_3F2F delete();
+  if(isDefined(var_01.fx)) {
+    var_01.fx delete();
   }
 
-  var_02 = spawnlinkedfx(level.var_611[param_00], var_01, "tag_origin");
+  var_02 = spawnlinkedfx(level._effect[param_00], var_01, "tag_origin");
   triggerfx(var_02);
-  var_01.var_3F2F = var_02;
+  var_01.fx = var_02;
 }

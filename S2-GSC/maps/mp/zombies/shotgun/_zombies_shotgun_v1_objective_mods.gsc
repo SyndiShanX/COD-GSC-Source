@@ -13,15 +13,15 @@ get_assassin_types(param_00) {
     case 1:
       var_02 = ["zombie_assassin_shellshock", "zombie_assassin_shellshock", "zombie_assassin_shellshock", "zombie_assassin_camoflauge"];
       var_03 = ["zombie_assassin_shellshock", "zombie_assassin_shellshock", "zombie_assassin_shellshock", "zombie_assassin_frontline"];
-      var_01 = common_scripts\utility::func_7A33([var_02, var_03]);
+      var_01 = common_scripts\utility::random([var_02, var_03]);
       break;
 
     case 2:
       var_02 = ["zombie_assassin_shellshock", "zombie_assassin_camoflauge", "zombie_assassin_freefire", "zombie_assassin_freefire"];
       var_03 = ["zombie_assassin_shellshock", "zombie_assassin_frontline", "zombie_assassin_freefire", "zombie_assassin_camoflauge"];
-      var_01 = common_scripts\utility::func_7A33([var_02, var_03]);
+      var_01 = common_scripts\utility::random([var_02, var_03]);
       break;
   }
 
-  return common_scripts\utility::func_F92(var_01);
+  return common_scripts\utility::array_randomize(var_01);
 }

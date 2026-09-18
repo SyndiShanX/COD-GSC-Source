@@ -636,7 +636,7 @@ watch_player_sprint(param_00) {
 }
 
 watch_for_crouch(param_00, param_01) {
-  while(!level.var_3FA6) {
+  while(!level.gamehasstarted) {
     wait 0.05;
   }
 

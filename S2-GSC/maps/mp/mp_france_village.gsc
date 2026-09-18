@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  lib_04A8::func_F9();
-  lib_0410::func_F9();
-  lib_04A7::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_france_village_lighting::func_F9();
-  maps\mp\mp_france_village_aud::func_F9();
+  lib_04A8::main();
+  lib_0410::main();
+  lib_04A7::main();
+  maps\mp\_load::main();
+  maps\mp\mp_france_village_lighting::main();
+  maps\mp\mp_france_village_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_france_village");
   game["attackers"] = "allies";
   game["defenders"] = "axis";

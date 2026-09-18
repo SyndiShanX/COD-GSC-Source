@@ -67,7 +67,7 @@ random_valid_character_player(param_00, param_01) {
     }
   }
 
-  var_02 = common_scripts\utility::func_F92(var_02);
+  var_02 = common_scripts\utility::array_randomize(var_02);
   foreach(var_0A in var_02) {
     var_04 = var_0A[0];
     var_0B = var_0A[1];

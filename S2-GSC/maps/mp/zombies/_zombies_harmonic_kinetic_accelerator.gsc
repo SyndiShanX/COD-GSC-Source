@@ -4,7 +4,7 @@
 *********************************************************************/
 
 init() {
-  common_scripts\utility::func_3C87("zmb_double_points_available");
+  common_scripts\utility::flag_init("zmb_double_points_available");
   common_scripts\utility::func_92C("dlc_zmb_dig02_sword_looping", "vfx/map/mp_zombie_dig02/dlc_zmb_dig02_sword_looping");
   common_scripts\utility::func_92C("side_ee_reward_green", "vfx/zombie/prototype_fx/dlc4/side_ee_reward_green");
   common_scripts\utility::func_92C("side_ee_reward_cyan", "vfx/zombie/prototype_fx/dlc4/side_ee_reward_cyan");
@@ -66,9 +66,9 @@ renable_weaps() {
 }
 
 run_troubled_double_points(param_00) {
-  common_scripts\utility::func_3C87("troubled_double_points_0");
-  common_scripts\utility::func_3C87("troubled_double_points_1");
-  common_scripts\utility::func_3C87("troubled_double_points_2");
+  common_scripts\utility::flag_init("troubled_double_points_0");
+  common_scripts\utility::flag_init("troubled_double_points_1");
+  common_scripts\utility::flag_init("troubled_double_points_2");
   var_01 = common_scripts\utility::func_46B5("side_raven_ee", "targetname");
   var_02 = getEntArray(var_01.target, "targetname");
   common_scripts\utility::array_thread(var_02, ::set_flag_on_damage);
@@ -101,8 +101,8 @@ run_troubled_double_points(param_00) {
       common_scripts\utility::func_3C9F("troubled_double_points_" + var_0D);
     }
 
-    if(isDefined(var_09.var_3F2F)) {
-      var_09.var_3F2F delete();
+    if(isDefined(var_09.fx)) {
+      var_09.fx delete();
     }
 
     var_09.origin = (0, 0, 0);
@@ -118,8 +118,8 @@ run_troubled_double_points(param_00) {
     }
   }
 
-  if(isDefined(var_09.var_3F2F)) {
-    var_09.var_3F2F delete();
+  if(isDefined(var_09.fx)) {
+    var_09.fx delete();
   }
 
   if(isDefined(var_09)) {
@@ -198,9 +198,9 @@ spawn_a_floating_weapon_award(param_00, param_01, param_02) {
 
 show_prespawned_floating_award(param_00) {
   set_shown_only_to_player(param_00);
-  if(isDefined(self.var_3F2F)) {
-    self.var_3F2F set_shown_only_to_player(param_00);
-    triggerfx(self.var_3F2F);
+  if(isDefined(self.fx)) {
+    self.fx set_shown_only_to_player(param_00);
+    triggerfx(self.fx);
   }
 }
 
@@ -213,7 +213,7 @@ prespawn_a_floating_award(param_00, param_01, param_02) {
   var_04.origin = var_04.origin + (0, 0, 8);
   var_04 set_hidden_but_sent_to_player(param_02);
   var_03.origin = var_04.origin;
-  var_03 method_8449(var_04, "tag_origin");
+  var_03 linktosynchronizedparent(var_04, "tag_origin");
   var_03.linkent = var_04;
   var_04 rotateYaw(-29536, 850);
   var_05 = spawnStruct();
@@ -241,15 +241,15 @@ run_game_sequence(param_00, param_01) {
   var_03 = 0;
   var_04 = undefined;
   while(!var_03) {
-    param_01.var_3F2F = lib_0547::func_8FBA(param_01, "zmf_descent_vision_blood_ready");
-    triggerfx(param_01.var_3F2F);
+    param_01.fx = lib_0547::func_8FBA(param_01, "zmf_descent_vision_blood_ready");
+    triggerfx(param_01.fx);
     foreach(var_06 in var_02.children) {
       var_06 hide();
     }
 
     var_04 = get_new_player(param_01);
     var_04.is_in_side_ee_mini_game = 1;
-    param_01.var_3F2F delete();
+    param_01.fx delete();
     var_04 childthread maintain_grenades();
     var_08 = level.var_A980;
     var_03 = 0;
@@ -316,14 +316,14 @@ set_orbiters(param_00) {
     for(var_06 = 0; var_06 < 4; var_06++) {
       var_07 = var_01 common_scripts\utility::func_8FFC();
       var_07 show();
-      var_07 method_8449(var_01, "tag_origin", var_02[var_06], (0, 0, 0));
+      var_07 linktosynchronizedparent(var_01, "tag_origin", var_02[var_06], (0, 0, 0));
       var_01.children[var_01.children.size] = var_07;
     }
   } else {
     for(var_06 = 0; var_06 < 4; var_06++) {
       var_07 = var_01.children[var_06];
       var_07 unlink();
-      var_07 method_8449(var_01, "tag_origin", var_02[var_06], (0, 0, 0));
+      var_07 linktosynchronizedparent(var_01, "tag_origin", var_02[var_06], (0, 0, 0));
     }
   }
 
@@ -427,29 +427,29 @@ set_flag_on_damage() {
 move_around(param_00) {
   self endon("double_points_grabbed");
   self endon("entitydeleted");
-  self.var_3F2F = undefined;
-  if(isDefined(self.var_3F2F)) {
-    self.var_3F2F delete();
+  self.fx = undefined;
+  if(isDefined(self.fx)) {
+    self.fx delete();
   }
 
-  var_01 = common_scripts\utility::func_7A33(param_00);
+  var_01 = common_scripts\utility::random(param_00);
   self.origin = var_01.origin;
-  var_02 = common_scripts\utility::func_7A33(level.zmb_side_ee_colors);
+  var_02 = common_scripts\utility::random(level.zmb_side_ee_colors);
   self.ee_color = maps / mp / zombies / _zombies_orbital_gravity_entangler::get_color_for_grenade(var_02);
   for(;;) {
     self.angles = (randomint(360), randomint(360), randomint(360));
-    self.var_3F2F = lib_0547::func_8FBA(self, var_02);
-    triggerfx(self.var_3F2F);
+    self.fx = lib_0547::func_8FBA(self, var_02);
+    triggerfx(self.fx);
     wait(7);
     if(function_0279(self)) {
       return;
     }
 
-    var_01 = common_scripts\utility::func_7A33(param_00);
-    playFX(level.var_611["zmb_dnk_geistkraftexplode"], self.origin);
+    var_01 = common_scripts\utility::random(param_00);
+    playFX(level._effect["zmb_dnk_geistkraftexplode"], self.origin);
     lib_0378::func_8D74("aud_dlc4_magic_poof", self.origin);
-    if(isDefined(self.var_3F2F)) {
-      self.var_3F2F delete();
+    if(isDefined(self.fx)) {
+      self.fx delete();
     }
 
     wait(0.7);
@@ -458,7 +458,7 @@ move_around(param_00) {
     }
 
     self.origin = var_01.origin;
-    playFX(level.var_611["zmb_dnk_geistkraftexplode"], var_01.origin);
+    playFX(level._effect["zmb_dnk_geistkraftexplode"], var_01.origin);
     lib_0378::func_8D74("dlc3_magic_poof", self.origin);
   }
 }
@@ -485,7 +485,7 @@ wait_for_grab(param_00) {
     wait 0.05;
   }
 
-  common_scripts\utility::func_3C8F(param_00);
+  common_scripts\utility::flag_set(param_00);
   self notify("double_points_grabbed");
 }
 
@@ -495,7 +495,7 @@ run_harmonic_kinectic_acceleration() {
   if(self.var_82EC == "a") {
     common_scripts\utility::func_3C9F("flag_archives_to_bridge_1");
     common_scripts\utility::func_3C9F("flag_gallery_to_bridge_1");
-    common_scripts\utility::func_3C8F("zmb_double_points_available");
+    common_scripts\utility::flag_set("zmb_double_points_available");
   }
 
   level thread maps\mp\_utility::func_6F74(::launchplayers, self);

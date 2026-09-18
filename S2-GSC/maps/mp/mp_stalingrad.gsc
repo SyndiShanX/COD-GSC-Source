@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_stalingrad_precache::func_F9();
-  maps\createart\mp_stalingrad_art::func_F9();
-  maps\mp\mp_stalingrad_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_stalingrad_lighting::func_F9();
-  maps\mp\mp_stalingrad_aud::func_F9();
+  maps\mp\mp_stalingrad_precache::main();
+  maps\createart\mp_stalingrad_art::main();
+  maps\mp\mp_stalingrad_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_stalingrad_lighting::main();
+  maps\mp\mp_stalingrad_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_stalingrad");
   game["attackers"] = "allies";
   game["defenders"] = "axis";

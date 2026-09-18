@@ -31,8 +31,8 @@ main() {
   level.reworkedconsumabledenabled = 1;
   level.loot_pap_camo_ref_override = "zom_amp_04";
   level.pap_camo_ref_override = "zom_camo_01";
-  common_scripts\utility::func_3C87("dnk_defense_drop_spawner_enabled");
-  common_scripts\utility::func_3C8F("dnk_defense_drop_spawner_enabled");
+  common_scripts\utility::flag_init("dnk_defense_drop_spawner_enabled");
+  common_scripts\utility::flag_set("dnk_defense_drop_spawner_enabled");
   thread maps / mp / mp_zombie_dnk_code::init_dnk_code();
   thread maps / mp / mp_zombie_dnk_code::ee_init();
   thread maps / mp / zombies / shotgun / _zombies_shotgun_gamemode::shotgun_classic_init();
@@ -156,7 +156,7 @@ beast_boss_run(param_00) {
     var_05 setrankedplayerdata(common_scripts\utility::func_46A8(), "totalBossDefeats", var_06);
   }
 
-  common_scripts\utility::func_3C8F("zmb_players_gamemode_boss_defeated");
+  common_scripts\utility::flag_set("zmb_players_gamemode_boss_defeated");
   return 1;
 }
 

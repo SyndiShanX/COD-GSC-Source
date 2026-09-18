@@ -71,7 +71,7 @@ func_7BD2() {
 
 intro_start_sfx() {
   var_00 = 27;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 thread maps\mp\_audio_submixes::func_8A9D("mp_war_intro_master", 0.1, 1);
     var_02 thread intro_mix_clear(var_00);
   }
@@ -116,8 +116,8 @@ intro_allies_mixing() {
   var_04 = 1 - var_03;
   var_05 = 30;
   var_06 = 1;
-  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {
-    var_07 = level.var_54D0["allies"].var_9309;
+  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {
+    var_07 = level.var_54D0["allies"].starttime;
     var_00 maps\mp\_audio_submixes::func_8A9D("mp_war_intro_allies_vignette", 0.1, 1);
     wait 0.05;
     var_00 maps\mp\_audio_submixes::func_8A9E("mp_war_intro_master", var_04, var_01);
@@ -147,8 +147,8 @@ intro_axis_mixing() {
   var_04 = 1 - var_03;
   var_05 = 30;
   var_06 = 1;
-  if(isDefined(level.var_54D0["axis"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {
-    var_07 = level.var_54D0["axis"].var_9309;
+  if(isDefined(level.var_54D0["axis"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {
+    var_07 = level.var_54D0["axis"].starttime;
     var_00 maps\mp\_audio_submixes::func_8A9D("mp_war_intro_axis_vignette", 0.1, 1);
     wait 0.05;
     var_00 maps\mp\_audio_submixes::func_8A9E("mp_war_intro_master", var_04, var_01);
@@ -186,7 +186,7 @@ axis_victory_sfx() {
 }
 
 outro_vignette_submix() {
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     var_01 maps\mp\_audio_submixes::func_8A9D("mp_war_outro_vignette");
   }
 }
@@ -229,7 +229,7 @@ npc_tank_enter() {
 
 train_start_moving() {
   var_00 = self;
-  var_01 = spawn("script_origin", var_00.var_116);
+  var_01 = spawn("script_origin", var_00.origin);
   wait(0.5);
   lib_0380::func_6844("train_whistle", undefined, var_01);
   wait(3);
@@ -289,8 +289,8 @@ bridge_bomb_d_exp(param_00) {
 }
 
 sandstorm_start() {
-  if(isDefined(level.var_744A) && level.var_744A.size > 0) {
-    foreach(var_01 in level.var_744A) {
+  if(isDefined(level.players) && level.players.size > 0) {
+    foreach(var_01 in level.players) {
       lib_0380::func_6844("sandstorm_lp", var_01, var_01, 10);
     }
   }

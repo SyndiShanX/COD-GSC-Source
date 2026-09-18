@@ -39,7 +39,7 @@ init() {
     }
   }
 
-  level.var_611["zmb_brute_drool"] = loadfx("vfx/zombie/zmb_brute_drool");
+  level._effect["zmb_brute_drool"] = loadfx("vfx/zombie/zmb_brute_drool");
 }
 
 func_AB6D(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
@@ -84,7 +84,7 @@ func_1CC3(param_00) {
   }
 
   var_02 = self gettagorigin("J_Wrist_RI");
-  playFX(level.var_611["zmb_brute_slam"], var_02, anglesToForward(self.angles), anglestoup(self.angles));
+  playFX(level._effect["zmb_brute_slam"], var_02, anglesToForward(self.angles), anglestoup(self.angles));
   foreach(var_04 in level.players) {
     var_05 = distance(self.origin, var_04.origin);
     if(var_05 < 1) {
@@ -141,9 +141,9 @@ func_AB64(param_00) {
   var_01 = common_scripts\utility::func_46B7("brute_exit_destination", "targetname");
   var_02 = func_44C9(var_01, 256);
   if(var_02.size > 0) {
-    var_03 = common_scripts\utility::func_7A33(var_02);
+    var_03 = common_scripts\utility::random(var_02);
   } else {
-    var_03 = common_scripts\utility::func_7A33(var_02);
+    var_03 = common_scripts\utility::random(var_02);
   }
 
   self setOrigin(var_03.origin + (0, 0, 8));
@@ -556,7 +556,7 @@ func_1CCD(param_00) {
   foreach(var_03 in var_01) {
     param_00 waittill("show an uber battery");
     var_03 show();
-    playFXOnTag(level.var_611["gk_raven_hc_ee_uber_attached"], var_03, "tag_origin");
+    playFXOnTag(level._effect["gk_raven_hc_ee_uber_attached"], var_03, "tag_origin");
     var_03 lib_0378::func_8D74("uber_battery_spawn");
   }
 }
@@ -745,7 +745,7 @@ func_AB7C() {
   var_01 = 200;
   self method_856C(var_00, var_01);
   self.height = var_01;
-  self.var_14F = var_00;
+  self.radius = var_00;
   self method_85A1("zombie_boss_village");
   self method_84D4();
   self.maxhealth = 100000;
@@ -767,7 +767,7 @@ func_AB7C() {
 
 func_1CBE() {
   wait 0.05;
-  playFXOnTag(level.var_611["zmb_brute_drool"], self, "J_Head");
+  playFXOnTag(level._effect["zmb_brute_drool"], self, "J_Head");
 }
 
 func_AB5B() {

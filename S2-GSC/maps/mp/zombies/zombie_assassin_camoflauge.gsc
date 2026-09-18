@@ -51,7 +51,7 @@ intro_fog_vision() {
   wait(0.8);
   level thread maps / mp / zquests / casual / island_ee_util::func_7432(0.4, 1);
   wait(1.5);
-  common_scripts\utility::func_3C8F("asn_players_are_blinded");
+  common_scripts\utility::flag_set("asn_players_are_blinded");
   self.fog_set_is_locked = 0;
   thread maps / mp / mp_zombie_island_fog_zones::set_light_and_fog("mp_zombie_island_fog_beach", "mp_zombie_island_fog", 0, 1);
   level thread maps / mp / zquests / casual / island_ee_util::func_7432(1, 0);

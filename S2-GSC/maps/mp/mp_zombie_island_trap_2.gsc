@@ -41,12 +41,12 @@ play_propeller_blood_splatter(param_00) {
   var_01 = get_closest_propeller_blade(param_00);
   switch (var_01) {
     case "rotor_L":
-      playFXOnTag(level.var_611["zmb_isl_uboat_blood_grit"], self, "rotor_L");
+      playFXOnTag(level._effect["zmb_isl_uboat_blood_grit"], self, "rotor_L");
       level childthread common_scripts\_exploder::func_88E(209);
       break;
 
     case "rotor_R":
-      playFXOnTag(level.var_611["zmb_isl_uboat_blood_grit"], self, "rotor_R");
+      playFXOnTag(level._effect["zmb_isl_uboat_blood_grit"], self, "rotor_R");
       level childthread common_scripts\_exploder::func_88E(210);
       break;
   }
@@ -107,7 +107,7 @@ zombie_prop_gib_effects(param_00) {
     var_01 = lib_0547::func_408F();
     foreach(var_03 in var_01) {
       if(distance2d(var_03.origin, param_00.origin) < 105) {
-        playFX(level.var_611["zmb_isl_uboat_prop_blood_impact"], var_03.origin + (0, 0, 50), anglesToForward(param_00.angles));
+        playFX(level._effect["zmb_isl_uboat_prop_blood_impact"], var_03.origin + (0, 0, 50), anglesToForward(param_00.angles));
       }
     }
 
@@ -118,6 +118,6 @@ zombie_prop_gib_effects(param_00) {
 spin() {
   var_00 = getEnt("zmb_trap_propeller_model", "targetname");
   var_00 method_8278("s2_zom_ger_u_boat_rotor_spin");
-  playFXOnTag(level.var_611["zmb_isl_uboat_water_prop_spin_r"], var_00, "rotor_R");
-  playFXOnTag(level.var_611["zmb_isl_uboat_water_prop_spin_l"], var_00, "rotor_L");
+  playFXOnTag(level._effect["zmb_isl_uboat_water_prop_spin_r"], var_00, "rotor_R");
+  playFXOnTag(level._effect["zmb_isl_uboat_water_prop_spin_l"], var_00, "rotor_L");
 }

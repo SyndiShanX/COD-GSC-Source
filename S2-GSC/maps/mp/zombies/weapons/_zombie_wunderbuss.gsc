@@ -18,12 +18,12 @@ init() {
   setdvarifuninitialized("wunderbuss_debug", 0);
   thread maps\mp\_utility::func_6F74(::func_5330);
   thread scaledamage();
-  level.var_611["zmb_blood_blast"] = loadfx("vfx/map/mp_zombie_berlin/zmb_wunderbuss_blood_blast");
-  level.var_611["zmb_ber_bolt_rod_gk_attach"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bolt_rod_gk_attach");
-  level.var_611["zmb_ber_bolt_rod_gk_ground"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bolt_rod_gk_ground");
-  level.var_611["zmb_wunderbuss_tube_collect"] = loadfx("vfx/zombie/wunderbuss/zmb_wunderbuss_tube_collect");
-  level.var_611["zmb_ber_szlr_buildup_1"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_szlr_buildup_1");
-  level.var_611["zmb_ber_szlr_geistkraftdrain_1"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_szlr_geistkraftdrain_1");
+  level._effect["zmb_blood_blast"] = loadfx("vfx/map/mp_zombie_berlin/zmb_wunderbuss_blood_blast");
+  level._effect["zmb_ber_bolt_rod_gk_attach"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bolt_rod_gk_attach");
+  level._effect["zmb_ber_bolt_rod_gk_ground"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_bolt_rod_gk_ground");
+  level._effect["zmb_wunderbuss_tube_collect"] = loadfx("vfx/zombie/wunderbuss/zmb_wunderbuss_tube_collect");
+  level._effect["zmb_ber_szlr_buildup_1"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_szlr_buildup_1");
+  level._effect["zmb_ber_szlr_geistkraftdrain_1"] = loadfx("vfx/map/mp_zombie_berlin/zmb_ber_szlr_geistkraftdrain_1");
 }
 
 wunderbuss_kill_info_fallback(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
@@ -228,7 +228,7 @@ boltfx_stuck(param_00) {
   var_01 endon("projectileCleanup");
   wait 0.05;
   wait 0.05;
-  var_01.bolt_effects = spawnlinkedfx(level.var_611["zmb_ber_bolt_rod_gk_attach"], var_01, "Tag_Origin");
+  var_01.bolt_effects = spawnlinkedfx(level._effect["zmb_ber_bolt_rod_gk_attach"], var_01, "Tag_Origin");
   triggerfx(var_01.bolt_effects);
 }
 
@@ -288,7 +288,7 @@ boltfx_ground() {
   var_00 endon("droppedBoltCleanup");
   wait 0.05;
   wait 0.05;
-  var_00.bolt_effects = spawnlinkedfx(level.var_611["zmb_ber_bolt_rod_gk_ground"], var_00, "Tag_Origin");
+  var_00.bolt_effects = spawnlinkedfx(level._effect["zmb_ber_bolt_rod_gk_ground"], var_00, "Tag_Origin");
   triggerfx(var_00.bolt_effects);
 }
 
@@ -418,7 +418,7 @@ createpickuptrigger(param_00, param_01, param_02) {
     }
 
     var_03 waittill("trigger", var_04);
-    if(!isPlayer(var_04) || !maps\mp\_utility::func_57A0(var_04)) {
+    if(!isPlayer(var_04) || !maps\mp\_utility::isreallyalive(var_04)) {
       continue;
     }
 

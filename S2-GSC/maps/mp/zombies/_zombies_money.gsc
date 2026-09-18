@@ -170,7 +170,7 @@ func_A90B() {
   for(;;) {
     wait(var_02);
     var_00 waittill(var_01);
-    if(!maps\mp\_utility::func_57A0(var_00)) {
+    if(!maps\mp\_utility::isreallyalive(var_00)) {
       continue;
     }
 

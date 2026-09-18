@@ -62,7 +62,7 @@ trap_puddle_arcs() {
 trap_puddle_current() {
   self endon("stop_fx");
   for(;;) {
-    playFX(level.var_611["cage_trap_current"], self.origin);
+    playFX(level._effect["cage_trap_current"], self.origin);
     wait(randomfloatrange(0.2, 0.5));
   }
 }

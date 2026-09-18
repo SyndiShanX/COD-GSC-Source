@@ -5,20 +5,20 @@
 
 main() {
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BFA(level.gametype, 10);
-    maps\mp\_utility::func_7BF9(level.gametype, 30);
-    maps\mp\_utility::func_7C04(level.gametype, 1);
-    maps\mp\_utility::func_7BF7(level.gametype, 1);
-    maps\mp\_utility::func_7BF1(level.gametype, 0);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
-    maps\mp\_utility::func_7BF9(level.gametype, 30);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 10);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 30);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 1);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 0);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 30);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
@@ -43,27 +43,27 @@ main() {
 func_5300() {
   maps\mp\_utility::func_8653(1);
   setdynamicdvar("scr_dm_winlimit", 1);
-  maps\mp\_utility::func_7C04("dm", 1);
+  maps\mp\_utility::registerwinlimitdvar("dm", 1);
   setdynamicdvar("scr_dm_roundlimit", 1);
-  maps\mp\_utility::func_7BF7("dm", 1);
+  maps\mp\_utility::registerroundlimitdvar("dm", 1);
   setdynamicdvar("scr_dm_halftime", 0);
-  maps\mp\_utility::func_7BE5("dm", 0);
+  maps\mp\_utility::registerhalftimedvar("dm", 0);
 }
 
 func_6BAF() {
   setclientnamemode("auto_change");
-  maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_DM");
-  maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_DM");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_DM");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_DM");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_DM");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_DM");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DM");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DM");
   } else {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_DM_SCORE");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_DM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DM_SCORE");
   }
 
-  maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_DM_HINT");
-  maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_DM_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_DM_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_DM_HINT");
   lib_050D::func_10E4();
   level.usestartspawns = 1;
   var_00[0] = "dm";

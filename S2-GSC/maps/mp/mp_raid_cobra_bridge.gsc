@@ -192,7 +192,7 @@ func_67D1(param_00, param_01) {
   }
 
   if(isDefined(var_06)) {
-    var_10 = var_03.var_116;
+    var_10 = var_03.origin;
     if(isDefined(var_04)) {
       var_10 = var_03 gettagorigin(var_04);
     }
@@ -384,7 +384,7 @@ func_67D2(param_00, param_01) {
   }
 
   if(isDefined(var_06)) {
-    var_0F = var_03.var_116;
+    var_0F = var_03.origin;
     if(isDefined(var_04)) {
       var_0F = var_03 gettagorigin(var_04);
     }

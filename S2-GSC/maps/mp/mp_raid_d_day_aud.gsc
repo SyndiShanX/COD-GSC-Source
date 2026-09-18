@@ -56,7 +56,7 @@ func_18F5() {
 
 intro_start_sfx() {
   var_00 = 17;
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     var_02 maps\mp\_audio_submixes::func_8A9D("mp_war_intro_master", 0.1, 1);
     var_02 thread intro_mix_clear(var_00);
   }
@@ -94,8 +94,8 @@ intro_allies_mixing() {
   var_04 = 1 - var_03;
   var_05 = 20;
   var_06 = 1;
-  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {
-    var_07 = level.var_54D0["allies"].var_9309;
+  if(isDefined(level.var_54D0["allies"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {
+    var_07 = level.var_54D0["allies"].starttime;
     var_00 maps\mp\_audio_submixes::func_8A9D("mp_war_intro_allies_vignette", 0.1, 1);
     wait 0.05;
     var_00 maps\mp\_audio_submixes::func_8A9E("mp_war_intro_master", var_04, var_01);
@@ -125,8 +125,8 @@ intro_axis_mixing() {
   var_04 = 1 - var_03;
   var_05 = 30;
   var_06 = 1;
-  if(isDefined(level.var_54D0["axis"]) == 1 && isDefined(level.var_54D0["allies"].var_9309) == 1) {
-    var_07 = level.var_54D0["axis"].var_9309;
+  if(isDefined(level.var_54D0["axis"]) == 1 && isDefined(level.var_54D0["allies"].starttime) == 1) {
+    var_07 = level.var_54D0["axis"].starttime;
     var_00 maps\mp\_audio_submixes::func_8A9D("mp_war_intro_axis_vignette", 0.1, 1);
     wait 0.05;
     var_00 maps\mp\_audio_submixes::func_8A9E("mp_war_intro_master", var_04, var_01);
@@ -156,7 +156,7 @@ beach_mortar() {
   lib_0380::func_6846("dday_beach_exp_incoming_close", undefined, var_00);
   var_00 waittill("death");
   if(isDefined(var_00)) {
-    var_01 = var_00.var_116;
+    var_01 = var_00.origin;
     lib_0380::func_6842("dday_beach_exp_close", undefined, var_01);
   }
 }
@@ -174,7 +174,7 @@ interlude_artillery() {
   lib_0380::func_6846("dday_beach_exp_incoming_close", undefined, var_00);
   var_00 waittill("death");
   if(isDefined(var_00)) {
-    var_01 = var_00.var_116;
+    var_01 = var_00.origin;
     lib_0380::func_6842("ks_mstrike_exp", undefined, var_01);
   }
 }

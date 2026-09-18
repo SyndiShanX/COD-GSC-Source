@@ -7,9 +7,9 @@ init() {
   lib_0586::func_7BDB("Mad Minute", ::func_7F42, ::func_7F44);
   lib_0586::func_7BDB("Mk. II", ::func_7F43, ::func_7F45);
   level.var_62B3["frag_skull_zm"] = ::func_62AA;
-  level.var_611["zmb_death_mm_screen"] = loadfx("vfx/zombie/abilities_perks/zmb_death_mm_screen");
-  level.var_611["zmb_blood_ammo_up"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_ammo_up");
-  level.var_611["zmb_blood_grenades_up"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_grenades_up");
+  level._effect["zmb_death_mm_screen"] = loadfx("vfx/zombie/abilities_perks/zmb_death_mm_screen");
+  level._effect["zmb_blood_ammo_up"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_ammo_up");
+  level._effect["zmb_blood_grenades_up"] = loadfx("vfx/zombie/abilities_perks/zmb_blood_grenades_up");
 }
 
 func_3662() {
@@ -18,7 +18,7 @@ func_3662() {
   var_00 = ["Mad Minute"];
   thread lib_0547::func_73EC();
   lib_0547::func_7458(1, "mad_minute");
-  playFXOnTag(level.var_611["zmb_death_mm_screen"], self, "Tag_Origin");
+  playFXOnTag(level._effect["zmb_death_mm_screen"], self, "Tag_Origin");
   lib_0378::func_8D74("aud_mad_minute_use");
   if(lib_0547::func_4BA7("specialty_class_explosives_handler_zm")) {
     var_01 = 921600;
@@ -36,7 +36,7 @@ func_3662() {
         if(isDefined(var_05)) {
           var_06 = var_03 getweaponammoclip(var_05);
           var_03 setweaponammoclip(var_05, var_06 + 2);
-          playFXOnTag(level.var_611["zmb_blood_grenades_up"], var_03, "J_Hip_RI");
+          playFXOnTag(level._effect["zmb_blood_grenades_up"], var_03, "J_Hip_RI");
         }
       }
     }
@@ -55,7 +55,7 @@ func_3662() {
           var_0A = weaponclipsize(var_09);
           var_0B = var_03 getweaponammostock(var_09);
           var_03 setweaponammostock(var_09, var_0B + var_0A);
-          playFXOnTag(level.var_611["zmb_blood_ammo_up"], var_03, "TAG_WEAPON_RIGHT");
+          playFXOnTag(level._effect["zmb_blood_ammo_up"], var_03, "TAG_WEAPON_RIGHT");
           var_03 luinotifyeventextraplayer(&"add_teammate_mod_buffs", 3, "specialty_class_ammo_carrier_zm", 1, self);
         }
       }
@@ -116,7 +116,7 @@ func_62A6(param_00, param_01, param_02) {
 
 func_6BD4(param_00, param_01, param_02, param_03, param_04) {
   if(isPlayer(param_00) && param_00 lib_0547::func_4BA7("specialty_class_frag_skull_zm")) {
-    if(maps\mp\_utility::func_5694(param_01) && param_04 == "head" || param_04 == "helmet") {
+    if(maps\mp\_utility::isbulletdamage(param_01) && param_04 == "head" || param_04 == "helmet") {
       var_05 = spawn("script_origin", param_03);
       var_05 detonateusingweapon("frag_skull_zm", param_00, var_05);
       wait(5);
@@ -136,47 +136,47 @@ func_0675(param_00) {
 }
 
 func_7F42(param_00) {
-  var_01 = func_0675(param_00.var_2953);
+  var_01 = func_0675(param_00.currentweapon);
   if(isDefined(var_01)) {
     param_00.var_F20["Mad Minute"] = 1;
-    var_02 = function_03A5(param_00.var_2953);
+    var_02 = function_03A5(param_00.currentweapon);
     var_02 = lib_0547::func_593(var_02, var_01);
-    param_00.var_2953 = lib_0547::func_62F(var_02);
+    param_00.currentweapon = lib_0547::func_62F(var_02);
   }
 }
 
 func_7F44(param_00) {
-  var_01 = func_0675(param_00.var_2953);
+  var_01 = func_0675(param_00.currentweapon);
   if(isDefined(var_01)) {
-    var_02 = function_03A5(param_00.var_2953);
+    var_02 = function_03A5(param_00.currentweapon);
     var_02 = lib_0547::func_6AD(var_02, var_01);
-    param_00.var_2953 = lib_0547::func_62F(var_02);
+    param_00.currentweapon = lib_0547::func_62F(var_02);
     param_00.var_F20["Mad Minute"] = undefined;
   }
 }
 
 func_7F43(param_00) {
   var_01 = self;
-  var_02 = function_03A5(param_00.var_2953);
+  var_02 = function_03A5(param_00.currentweapon);
   var_03 = var_01 lib_0586::func_78B(var_02["weapon"]);
   if(isDefined(var_03)) {
     param_00.var_F20["Mk. II"] = 1;
     var_04 = function_03A5(var_03);
     param_00.var_6E35 = var_04;
     var_04 = lib_0547::func_6117(var_04, var_02);
-    param_00.var_2953 = lib_0547::func_62F(var_04);
+    param_00.currentweapon = lib_0547::func_62F(var_04);
   }
 }
 
 func_7F45(param_00) {
   if(common_scripts\utility::func_562E(param_00.var_F20["Mk. II"])) {
-    var_01 = function_03A5(param_00.var_2953);
+    var_01 = function_03A5(param_00.currentweapon);
     var_02 = function_03A5(param_00.var_6C57);
     foreach(var_05, var_04 in param_00.var_6E35) {
       var_01[var_05] = var_02[var_05];
     }
 
-    param_00.var_2953 = lib_0547::func_62F(var_01);
+    param_00.currentweapon = lib_0547::func_62F(var_01);
     param_00.var_6E35 = undefined;
     param_00.var_F20["Mk. II"] = undefined;
   }

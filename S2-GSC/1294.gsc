@@ -281,7 +281,7 @@ func_3894(param_00, param_01, param_02) {
         continue;
       }
 
-      param_01.var_9AB8 = param_01.var_9AB8 + lib_050C::func_80A2(var_06, var_07, param_00, param_01);
+      param_01.var_9AB8 = param_01.var_9AB8 + lib_050C::delete(var_06, var_07, param_00, param_01);
     }
   }
 }
@@ -493,7 +493,7 @@ func_8399(param_00, param_01, param_02, param_03) {
     }
   }
 
-  return common_scripts\utility::func_7A33(var_08);
+  return common_scripts\utility::random(var_08);
 }
 
 func_4706(param_00) {
@@ -520,7 +520,7 @@ func_839A(param_00) {
   }
 
   var_01 = undefined;
-  param_00 = common_scripts\utility::func_F92(param_00);
+  param_00 = common_scripts\utility::array_randomize(param_00);
   foreach(var_03 in param_00) {
     if(func_4706(var_03) != "primary") {
       continue;
@@ -751,7 +751,7 @@ func_4436(param_00, param_01, param_02, param_03, param_04, param_05) {
     if(level.var_9034) {
       var_0B = param_00;
     } else {
-      var_0B = maps\mp\_utility::func_45DE(param_01);
+      var_0B = maps\mp\_utility::getotherteam(param_01);
     }
 
     if(var_07.var_2BD3 == var_0B) {
@@ -807,7 +807,7 @@ createteamprogressbar() {
     return;
   }
 
-  var_00 = maps\mp\_utility::func_45DE(level.players[0].team);
+  var_00 = maps\mp\_utility::getotherteam(level.players[0].team);
   if(var_00 == "none") {
     var_00 = "axis";
   }

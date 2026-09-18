@@ -15,9 +15,9 @@ func_8D81() {
   level.var_71D.var_351F = 0;
   if(isDefined(level.players) && level.players.size > 0) {
     foreach(var_01 in level.players) {
-      var_01 method_8626("mp_init_mix");
+      var_01 setaltsceneobj("mp_init_mix");
       wait 0.05;
-      var_01 method_8626("mp_pre_event_mix");
+      var_01 setaltsceneobj("mp_pre_event_mix");
       wait 0.05;
     }
   }
@@ -29,7 +29,7 @@ func_8D82() {
     foreach(var_01 in level.players) {
       var_01 method_8627("mp_pre_event_mix");
       wait 0.05;
-      var_01 method_8626("mp_post_event_mix");
+      var_01 setaltsceneobj("mp_post_event_mix");
       wait 0.05;
     }
   }
@@ -80,15 +80,15 @@ func_7BA3() {
 
 func_7247() {
   self method_85A7("ClientScriptInit", "mp");
-  self method_8626("mp_init_mix");
+  self setaltsceneobj("mp_init_mix");
   thread func_8D7F();
   if(!isDefined(level.var_71D.var_351F) || !level.var_71D.var_351F) {
-    self method_8626("mp_pre_event_mix");
+    self setaltsceneobj("mp_pre_event_mix");
     return;
   }
 
   self method_8627("mp_pre_event_mix");
-  self method_8626("mp_post_event_mix");
+  self setaltsceneobj("mp_post_event_mix");
 }
 
 func_8D7F() {
@@ -110,7 +110,7 @@ func_8D7E() {
   var_00 = self;
   var_01 = gettime();
   var_02 = 1500;
-  var_00 method_8626("mp_focus_mode_mix");
+  var_00 setaltsceneobj("mp_focus_mode_mix");
   if(var_01 > self.var_3D9C + var_02) {
     var_00.var_3D98 = 0;
     lib_0380::func_2888("focus_mode_begin", var_00);
@@ -129,7 +129,7 @@ func_8D7D(param_00) {
       var_01.var_3D9D = lib_0380::func_2888("focus_mode_end", var_01);
     }
 
-    lib_0380::func_2893(var_01.var_3D9E, 1);
+    lib_0380::_stoplocalsound(var_01.var_3D9E, 1);
     self.var_3D9B = var_02;
   }
 }
@@ -231,7 +231,7 @@ func_6E73() {
   var_02 = 0.5;
   var_03 = lib_0380::func_288B("ks_ptps_parachute_lp", undefined, var_00, var_01);
   var_00 common_scripts\utility::waittill_any("paratrooper_released", "detach");
-  lib_0380::func_2893(var_03, var_02);
+  lib_0380::_stoplocalsound(var_03, var_02);
   lib_0380::func_2889("ks_ptps_parachute_release", undefined, var_00.origin);
 }
 
@@ -348,7 +348,7 @@ v2_explosion() {
 }
 
 player_parachute_submix() {
-  self method_8626("mp_tunisia_parachute_mix");
+  self setaltsceneobj("mp_tunisia_parachute_mix");
   common_scripts\utility::waittill_any("paratrooper_released", "detach");
   self method_8627("mp_tunisia_parachute_mix");
 }
@@ -391,9 +391,9 @@ mp_zombie_relic_drop() {
 }
 
 mp_zombie_relic_soul_captured(param_00) {
-  lib_0380::func_2893(level.var_11CB.relic_drop);
+  lib_0380::_stoplocalsound(level.var_11CB.relic_drop);
   level waittill("mp_relic_teleport_start");
-  lib_0380::func_2893(level.var_11CB.relic_teleport);
+  lib_0380::_stoplocalsound(level.var_11CB.relic_teleport);
 }
 
 mp_zombie_relic_teleport(param_00) {

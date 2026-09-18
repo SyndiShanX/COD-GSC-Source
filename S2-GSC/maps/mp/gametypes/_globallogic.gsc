@@ -6,7 +6,7 @@
 init() {
   level.splitscreen = issplitscreen();
   level.console = getDvar("5554") == "true";
-  level.var_6B4D = function_02A3();
+  level.onlinegame = function_02A3();
   level.rankedmatch = function_03AC();
   level.var_7616 = getdvarint("664");
   level.var_2F98 = getdvarint("78", 1) == 0;
@@ -14,7 +14,7 @@ init() {
   level.var_2FAA = getdvarint("437", 1) == 0;
   maps\mp\_utility::func_86FB();
   if(getdvarint("5357") == 1) {
-    level.var_6B4D = 1;
+    level.onlinegame = 1;
   }
 
   level.script = tolower(getDvar("1673"));
@@ -31,7 +31,7 @@ init() {
   level.var_6C63["axis"] = "allies";
   level.multiteambased = 0;
   maps\mp\_utility::func_873B(0);
-  level.var_6933 = 0;
+  level.objectivebased = 0;
   level.var_36BE = 1;
   level.var_8C03 = 0;
   level.var_9A27 = getdvarint("scr_tispawndelay");
@@ -66,7 +66,7 @@ init() {
   level.halftimestopwatch = 0;
   level.var_5C00 = 0;
   level.var_A87B = "none";
-  level.var_5BDF = 0;
+  level.lastslowprocessframe = 0;
   level.placement["allies"] = [];
   level.placement["axis"] = [];
   level.placement["all"] = [];
@@ -113,7 +113,7 @@ func_7BDF() {
   setDvar("311", getdvarint("scr_thirdPerson"));
 }
 
-func_8A0C() {
+setupcallbacks() {
   level.onxpevent = ::onxpevent;
   level.var_4696 = ::func_4437;
   level.var_7658 = ::lib_050E::func_4436;
@@ -202,10 +202,10 @@ func_991A() {
   for(;;) {
     wait(10);
     var_00 = spawnStruct();
-    var_00.var_9A2E = &"MP_CHALLENGE_COMPLETED";
-    var_00.var_6811 = "wheee";
-    var_00.var_8F2C = "mp_challenge_complete";
-    thread maps\mp\gametypes\_hud_message::func_680B(var_00);
+    var_00.titletext = &"MP_CHALLENGE_COMPLETED";
+    var_00.notifytext = "wheee";
+    var_00.sound = "mp_challenge_complete";
+    thread maps\mp\gametypes\_hud_message::notifymessage(var_00);
   }
 }
 

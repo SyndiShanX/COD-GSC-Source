@@ -4,14 +4,14 @@
 ***************************************************************/
 
 init() {
-  common_scripts\utility::func_3C87("pap_elevator_stage_1");
-  common_scripts\utility::func_3C87("pap_elevator_stage_2");
-  common_scripts\utility::func_3C87("pap_elevator_stage_3");
-  common_scripts\utility::func_3C87("pap_elevator_access_1");
-  common_scripts\utility::func_3C87("pap_elevator_access_2");
-  common_scripts\utility::func_3C87("pap_elevator_access_3");
+  common_scripts\utility::flag_init("pap_elevator_stage_1");
+  common_scripts\utility::flag_init("pap_elevator_stage_2");
+  common_scripts\utility::flag_init("pap_elevator_stage_3");
+  common_scripts\utility::flag_init("pap_elevator_access_1");
+  common_scripts\utility::flag_init("pap_elevator_access_2");
+  common_scripts\utility::flag_init("pap_elevator_access_3");
   level.pack_a_punch_current_access_count = 0;
-  common_scripts\utility::func_3C87("pap_elevator_arrived");
+  common_scripts\utility::flag_init("pap_elevator_arrived");
   var_00 = ["pap_elevator_stage_1", "pap_elevator_stage_2", "pap_elevator_stage_3"];
   level thread handle_island_pack_a_punch(var_00);
   level thread init_upgrade_machine_visuals();
@@ -19,7 +19,7 @@ init() {
 
 add_player_fuse_count() {
   level.pack_a_punch_current_access_count++;
-  common_scripts\utility::func_3C8F("pap_elevator_access_" + level.pack_a_punch_current_access_count);
+  common_scripts\utility::flag_set("pap_elevator_access_" + level.pack_a_punch_current_access_count);
 }
 
 handle_island_pack_a_punch(param_00) {
@@ -34,10 +34,10 @@ handle_island_pack_a_punch(param_00) {
 
   var_03.origin = (level.pap_model.origin[0] + 6.16, level.pap_model.origin[1] - 0.28, var_03.origin[2] + 2.056 - 2);
   wait 0.05;
-  var_03 method_8449(var_01, "cart");
+  var_03 linktosynchronizedparent(var_01, "cart");
   var_05 = getEntArray("elevator_linked_prop", "targetname");
   foreach(var_07 in var_05) {
-    var_07 method_8449(var_01, "cart");
+    var_07 linktosynchronizedparent(var_01, "cart");
   }
 
   var_01 thread open_elevator_doors(var_02);
@@ -63,7 +63,7 @@ handle_island_pack_a_punch(param_00) {
   var_04 connectpaths();
   var_04 delete();
   maps / mp / gametypes / zombies::func_47A8("DLC1_ZM_GOINGUP");
-  common_scripts\utility::func_3C8F("pap_elevator_arrived");
+  common_scripts\utility::flag_set("pap_elevator_arrived");
   wait 0.05;
   var_03 delete();
   thread packapunchlight();
@@ -184,7 +184,7 @@ wait_for_user_electroschnell_insert(param_00, param_01) {
   }
 
   common_scripts\utility::func_9D9F();
-  common_scripts\utility::func_3C8F(param_00);
+  common_scripts\utility::flag_set(param_00);
 }
 
 init_upgrade_machine_visuals() {

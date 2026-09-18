@@ -480,7 +480,7 @@ func_74D1() {
   self endon("tutorialShortcut");
   var_00 = ["Let\'s get moving, soldier!", "We\'ve got a war to fight. Get moving, private!", "Over here! Let\'s get going.", "Stay on track, private. Follow me.", "I\'ve got places to be, let\'s GO!", "Do I need to hold your hand, private? Get over here.", "Soldier, get back over here. We have work to do."];
   for(;;) {
-    self iclientprintlnbold(common_scripts\utility::func_7A33(var_00));
+    self iclientprintlnbold(common_scripts\utility::random(var_00));
     wait(10);
   }
 }
@@ -725,7 +725,7 @@ func_7FAE() {
 
     self setOrigin(function_0236(var_04.var_0116));
     self setangles((0, 90, 0));
-    var_04 method_805C();
+    var_04 save_undo_buffer();
     wait 0.05;
     self method_81E3();
     self freezecontrols(0);

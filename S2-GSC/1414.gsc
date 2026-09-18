@@ -217,11 +217,11 @@ func_A926() {
     var_00 = self method_82D5();
     if(!isDefined(var_00) || var_00 == "none") {
       lib_0556::func_5F16("melee");
-      maps\mp\_utility::func_6D0(4, "");
+      maps\mp\_utility::_setactionslot(4, "");
     } else {
       lib_0556::func_5F16(var_00);
       lib_0556::func_24DD(var_00, var_00, "melee");
-      maps\mp\_utility::func_6D0(4, "weapon", var_00);
+      maps\mp\_utility::_setactionslot(4, "weapon", var_00);
     }
 
     common_scripts\utility::waittill_any("weapon_given", "weapon_taken", "zombie_player_spawn_finished", "melee_weapon_change");
@@ -232,7 +232,7 @@ func_5371() {
   var_00 = spawnStruct();
   self.var_AB4A = var_00;
   var_00.var_8DF = [];
-  var_00.var_A9E7 = [];
+  var_00.weapons = [];
   thread clear_weapon_inventory_on_death();
   thread func_A88C();
 }
@@ -246,7 +246,7 @@ clear_weapon_inventory_on_death() {
       continue;
     }
 
-    var_00.var_AB4A.var_A9E7 = [];
+    var_00.var_AB4A.weapons = [];
   }
 }
 
@@ -266,7 +266,7 @@ func_A88C() {
       }
 
       var_04 = lib_0547::func_AAF9(var_02);
-      var_05 = self.var_AB4A.var_A9E7[var_04];
+      var_05 = self.var_AB4A.weapons[var_04];
       if(!isDefined(var_05)) {
         func_078D(var_02);
         continue;
@@ -274,7 +274,7 @@ func_A88C() {
 
       var_06 = var_05.var_5B9F;
       if(!isDefined(var_06)) {
-        var_06 = "(removed) " + var_05.var_2953;
+        var_06 = "(removed) " + var_05.currentweapon;
       }
 
       if(stricmp(var_02, var_06) != 0) {
@@ -287,14 +287,14 @@ func_A88C() {
     }
 
     var_08 = [];
-    foreach(var_0A, var_05 in self.var_AB4A.var_A9E7) {
+    foreach(var_0A, var_05 in self.var_AB4A.weapons) {
       if(isDefined(var_05.var_5B9F) && !self hasweapon(var_05.var_5B9F)) {
         var_08[var_08.size] = var_0A;
       }
     }
 
     foreach(var_0C in var_08) {
-      self.var_AB4A.var_A9E7[var_0C] = undefined;
+      self.var_AB4A.weapons[var_0C] = undefined;
     }
   }
 }
@@ -314,7 +314,7 @@ func_0680(param_00) {
   var_01 = spawnStruct();
   var_01.var_6C57 = param_00;
   var_01.var_F20 = [];
-  var_01.var_2953 = param_00;
+  var_01.currentweapon = param_00;
   var_01.var_5B9F = undefined;
   return var_01;
 }
@@ -323,7 +323,7 @@ func_4129(param_00) {
   var_01 = spawnStruct();
   var_02 = param_00;
   var_03 = lib_0547::func_AAF9(param_00);
-  var_04 = self.var_AB4A.var_A9E7[var_03];
+  var_04 = self.var_AB4A.weapons[var_03];
   if(isDefined(var_04)) {
     var_02 = var_04.var_5B9F;
   } else {
@@ -344,7 +344,7 @@ func_4129(param_00) {
 
 func_0F21(param_00, param_01) {
   var_02 = lib_0547::func_AAF9(param_00);
-  var_03 = self.var_AB4A.var_A9E7[var_02];
+  var_03 = self.var_AB4A.weapons[var_02];
   var_04 = param_00;
   if(isDefined(var_03)) {
     var_04 = var_03.var_5B9F;
@@ -387,7 +387,7 @@ func_0736(param_00, param_01) {
   var_02 = 0;
   var_03 = undefined;
   if(isDefined(param_00.var_5B9F)) {
-    if(param_00.var_2953 == param_00.var_5B9F) {
+    if(param_00.currentweapon == param_00.var_5B9F) {
       return;
     }
 
@@ -396,10 +396,10 @@ func_0736(param_00, param_01) {
     self takeweapon(param_00.var_5B9F);
   } else {}
 
-  thread func_0641(param_00.var_2953, param_01, param_00.var_A6DF, param_00.weaponcharmguid);
-  param_00.var_5B9F = param_00.var_2953;
+  thread func_0641(param_00.currentweapon, param_01, param_00.var_A6DF, param_00.weaponcharmguid);
+  param_00.var_5B9F = param_00.currentweapon;
   if(isDefined(var_03)) {
-    func_0F21(param_00.var_2953, var_03);
+    func_0F21(param_00.currentweapon, var_03);
   }
 }
 
@@ -429,7 +429,7 @@ func_078C(param_00, param_01, param_02, param_03, param_04) {
     return;
   }
 
-  var_08 = self.var_AB4A.var_A9E7[var_07];
+  var_08 = self.var_AB4A.weapons[var_07];
   if(isDefined(var_08)) {
     func_0790(var_08.var_5B9F);
     var_08 = undefined;
@@ -437,7 +437,7 @@ func_078C(param_00, param_01, param_02, param_03, param_04) {
 
   if(!isDefined(var_08)) {
     var_08 = func_0680(param_00);
-    self.var_AB4A.var_A9E7[var_07] = var_08;
+    self.var_AB4A.weapons[var_07] = var_08;
   }
 
   var_08.var_A6DF = param_02;
@@ -459,7 +459,7 @@ func_AC13(param_00) {}
 
 func_0632(param_00) {
   var_01 = lib_0547::func_AAF9(param_00);
-  var_02 = self.var_AB4A.var_A9E7[var_01];
+  var_02 = self.var_AB4A.weapons[var_01];
   if(isDefined(var_02)) {
     return var_02.var_6C57;
   }
@@ -468,7 +468,7 @@ func_0632(param_00) {
 }
 
 func_078F() {
-  var_00 = getarraykeys(self.var_AB4A.var_A9E7);
+  var_00 = getarraykeys(self.var_AB4A.weapons);
   foreach(var_02 in var_00) {
     func_0790(var_02);
   }
@@ -500,7 +500,7 @@ func_0641(param_00, param_01, param_02, param_03, param_04) {
     var_07 = lib_056C::getzombiepaintjob(self, param_00);
   }
 
-  maps\mp\_utility::func_642(param_00, var_06, var_07, param_03);
+  maps\mp\_utility::_giveweapon(param_00, var_06, var_07, param_03);
   if(!param_02 && !var_05) {
     childthread func_A8C2(param_00, param_01);
     return;
@@ -537,19 +537,19 @@ func_0790(param_00) {
   }
 
   var_04 = [];
-  if(isDefined(self.var_AB4A.var_A9E7[var_03])) {
+  if(isDefined(self.var_AB4A.weapons[var_03])) {
     var_04[var_03] = 1;
   }
 
   if(var_04.size != 1) {}
 
   foreach(var_11, var_0F in var_04) {
-    var_10 = self.var_AB4A.var_A9E7[var_11];
+    var_10 = self.var_AB4A.weapons[var_11];
     if(isDefined(var_10.var_5B9F)) {
       self takeweapon(var_10.var_5B9F);
     }
 
-    self.var_AB4A.var_A9E7[var_11] = undefined;
+    self.var_AB4A.weapons[var_11] = undefined;
   }
 
   self notify("zm_stream_cancel_" + var_03);
@@ -568,7 +568,7 @@ func_098F(param_00) {
   }
 
   var_06 = self getcurrentprimaryweapon();
-  foreach(var_0B, var_08 in self.var_AB4A.var_A9E7) {
+  foreach(var_0B, var_08 in self.var_AB4A.weapons) {
     foreach(var_04 in var_01) {
       if(isDefined(var_04.var_9AF)) {
         self[[var_04.var_9AF]](var_08);
@@ -598,7 +598,7 @@ func_7CC9(param_00) {
   }
 
   var_06 = self getcurrentprimaryweapon();
-  foreach(var_0B, var_08 in self.var_AB4A.var_A9E7) {
+  foreach(var_0B, var_08 in self.var_AB4A.weapons) {
     foreach(var_04 in var_01) {
       if(isDefined(var_04.var_2381)) {
         self[[var_04.var_2381]](var_08);
@@ -624,7 +624,7 @@ func_7CC8(param_00) {
 
 func_078E(param_00, param_01, param_02) {
   var_03 = lib_0547::func_AAF9(param_00);
-  var_04 = self.var_AB4A.var_A9E7[var_03];
+  var_04 = self.var_AB4A.weapons[var_03];
   if(isDefined(var_04)) {
     param_00 = var_04.var_5B9F;
   }
@@ -707,7 +707,7 @@ func_078A(param_00) {
   }
 
   var_01 = lib_0547::func_AAF9(param_00);
-  var_02 = self.var_AB4A.var_A9E7[var_01];
+  var_02 = self.var_AB4A.weapons[var_01];
   if(isDefined(var_02) && isDefined(var_02.var_5B9F)) {
     return var_02.var_5B9F;
   }

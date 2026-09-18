@@ -727,9 +727,9 @@ func_530A(param_00, param_01, param_02) {
     }
   }
 
-  common_scripts\utility::func_3C87(var_03.var_AC8A);
+  common_scripts\utility::flag_init(var_03.var_AC8A);
   if(param_01) {
-    common_scripts\utility::func_3C8F(var_03.var_AC8A);
+    common_scripts\utility::flag_set(var_03.var_AC8A);
   }
 
   level.var_AC80.var_ACB3[param_00] = var_03;
@@ -770,7 +770,7 @@ func_5374(param_00) {
 
     case "zombie_spawner":
       if(isDefined(param_00.var_819A) && !common_scripts\utility::func_3C83(param_00.var_819A)) {
-        common_scripts\utility::func_3C87(param_00.var_819A);
+        common_scripts\utility::flag_init(param_00.var_819A);
       }
       break;
   }
@@ -851,7 +851,7 @@ func_0993(param_00, param_01, param_02, param_03) {
   }
 
   if(!isDefined(level.var_3C77[param_02])) {
-    common_scripts\utility::func_3C87(param_02);
+    common_scripts\utility::flag_init(param_02);
   }
 
   func_5FBF(param_00, param_01, param_02, 0);
@@ -925,7 +925,7 @@ func_ACC2(param_00, param_01, param_02) {
   common_scripts\utility::func_3C9F(param_01);
   var_03 = level.var_AC80.var_ACB3[param_02];
   var_03.var_556E = 1;
-  common_scripts\utility::func_3C8F(param_00.var_AC8A);
+  common_scripts\utility::flag_set(param_00.var_AC8A);
   param_00.var_A01[param_02].var_554C = 1;
   level thread func_A100();
 }
@@ -1100,11 +1100,11 @@ func_1E55(param_00, param_01, param_02, param_03) {
 
   var_04 = undefined;
   if(param_02) {
-    var_05 = common_scripts\utility::func_F92(func_4691());
+    var_05 = common_scripts\utility::array_randomize(func_4691());
   } else if(isDefined(var_04)) {
-    var_05 = common_scripts\utility::func_F92(func_4693(var_04));
+    var_05 = common_scripts\utility::array_randomize(func_4693(var_04));
   } else {
-    var_05 = common_scripts\utility::func_F92(func_4692());
+    var_05 = common_scripts\utility::array_randomize(func_4692());
   }
 
   var_06 = [];
@@ -1116,7 +1116,7 @@ func_1E55(param_00, param_01, param_02, param_03) {
   }
 
   if(!isDefined(var_04) && common_scripts\utility::func_562E(level.var_7D20)) {
-    var_0A = common_scripts\utility::func_F92(level.var_AC4F);
+    var_0A = common_scripts\utility::array_randomize(level.var_AC4F);
     foreach(var_08 in var_0A) {
       if(var_08 func_905D() && var_08 func_905C(param_00, param_01)) {
         var_04 = var_08;
@@ -1217,7 +1217,7 @@ func_1E4E(param_00, param_01, param_02, param_03) {
   }
 
   if(!isDefined(var_11)) {
-    return common_scripts\utility::func_7A33(var_09);
+    return common_scripts\utility::random(var_09);
   }
 
   var_1B = 20;

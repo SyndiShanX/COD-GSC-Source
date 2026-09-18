@@ -4,19 +4,19 @@
 **************************************************/
 
 func_1671() {
-  if(isDefined(level.var_2A3D) && isDefined(level.var_1672)) {
+  if(isDefined(level.var_2A3D) && isDefined(level.bcs_locations)) {
     return;
   }
 
-  level.var_166F = [];
-  func_1670();
-  func_1674();
-  level.var_166F = undefined;
+  level.bcs_location_mappings = [];
+  bcs_location_trigs_do_mappings();
+  bcs_trigs_assign_aliases();
+  level.bcs_location_mappings = undefined;
   anim.var_5E5E = [];
 }
 
-func_1674() {
-  anim.var_1672 = [];
+bcs_trigs_assign_aliases() {
+  anim.bcs_locations = [];
   var_00 = getEntArray();
   var_01 = [];
   foreach(var_03 in var_00) {
@@ -26,31 +26,31 @@ func_1674() {
   }
 
   foreach(var_03 in var_01) {
-    if(!isDefined(level.var_166F[var_03.classname])) {
+    if(!isDefined(level.bcs_location_mappings[var_03.classname])) {
       continue;
     }
 
-    var_06 = func_6E89(level.var_166F[var_03.classname]);
+    var_06 = parselocationaliases(level.bcs_location_mappings[var_03.classname]);
     if(var_06.size > 1) {
-      var_06 = common_scripts\utility::func_F92(var_06);
+      var_06 = common_scripts\utility::array_randomize(var_06);
     }
 
     var_03.var_5E5C = var_06;
   }
 
-  anim.var_1672 = var_01;
+  anim.bcs_locations = var_01;
 }
 
-func_6E89(param_00) {
+parselocationaliases(param_00) {
   var_01 = strtok(param_00, " ");
   return var_01;
 }
 
 func_0903(param_00, param_01) {
-  if(isDefined(level.var_166F[param_00])) {
-    var_02 = level.var_166F[param_00];
-    var_03 = func_6E89(var_02);
-    var_04 = func_6E89(param_01);
+  if(isDefined(level.bcs_location_mappings[param_00])) {
+    var_02 = level.bcs_location_mappings[param_00];
+    var_03 = parselocationaliases(var_02);
+    var_04 = parselocationaliases(param_01);
     foreach(var_06 in var_04) {
       foreach(var_08 in var_03) {
         if(var_06 == var_08) {
@@ -60,15 +60,15 @@ func_0903(param_00, param_01) {
     }
 
     var_02 = var_02 + " " + param_01;
-    level.var_166F[param_00] = var_02;
+    level.bcs_location_mappings[param_00] = var_02;
     return;
   }
 
-  level.var_166F[var_09] = var_0A;
+  level.bcs_location_mappings[var_09] = var_0A;
 }
 
-func_1670() {
-  if(common_scripts\utility::func_57D7()) {
+bcs_location_trigs_do_mappings() {
+  if(common_scripts\utility::issp()) {
     func_6004();
     func_1D72();
     func_7C4F();

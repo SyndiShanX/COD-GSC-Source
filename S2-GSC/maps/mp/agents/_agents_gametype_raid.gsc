@@ -86,7 +86,7 @@ func_6BA4(param_00) {
   self endon("disconnect");
   level endon("game_ended");
   self waittill("applyLoadout");
-  self method_8543(1);
+  self set_origin_and_angles(1);
   self botsetflag("no_enemy_search", 1);
 }
 
@@ -202,7 +202,7 @@ func_6A79(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   if(self.var_565F) {
     self.var_4B60 = 1;
-    if(maps\mp\_utility::func_44FC() != 1 && isDefined(self.var_7DAD) && self.var_7DAD) {
+    if(maps\mp\_utility::getgametypenumlives() != 1 && isDefined(self.var_7DAD) && self.var_7DAD) {
       self thread[[maps / mp / agents / _agent_utility::func_A59("spawn")]]();
       return;
     }

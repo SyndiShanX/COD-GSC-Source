@@ -212,10 +212,10 @@ func_5302() {
   var_03 = self getrankedplayerdata(common_scripts\utility::func_46AA(), "hubLifetimeStats", "lifetimeHubSessions") + 1;
   self setrankedplayerdata(common_scripts\utility::func_46AA(), "hubLifetimeStats", "lifetimeHubSessions", var_03);
   self setrankedplayerdata(common_scripts\utility::func_46AB(), "hubStats", "lifetimeSessions", var_03);
-  function_00F5("script_mp_hub_event: game_time %d, player_name %s, player_id %d, event_category %s, event_name %s, event_value_int %d, event_value_float %f, event_value_string %s, player_count %d", gettime(), self.var_0109, self.clientid, "hub_session_info", "entered_hub", 1, -1, "NA", level.var_744A.size);
+  function_00F5("script_mp_hub_event: game_time %d, player_name %s, player_id %d, event_category %s, event_name %s, event_value_int %d, event_value_float %f, event_value_string %s, player_count %d", gettime(), self.var_0109, self.clientid, "hub_session_info", "entered_hub", 1, -1, "NA", level.players.size);
   maps\mp\gametypes\_hub_unk1::func_5E88("join", "hq_session_info", 0, ["join_type", var_02]);
   maps\mp\gametypes\_hub_unk1::func_531B();
-  maps\mp\gametypes\_missions::func_A0F3();
+  maps\mp\gametypes\_missions::updatechalleges();
   thread func_75D7();
   if(!common_scripts\utility::func_562E(level.var_AC5A) && function_03AE() == 0) {
     thread func_63B7();
@@ -312,7 +312,7 @@ func_A596(param_00) {
     var_01 = var_02[0];
   }
 
-  param_00 method_805C();
+  param_00 save_undo_buffer();
   return var_01;
 }
 
@@ -334,7 +334,7 @@ func_6B85() {
     level.var_4F50 = 0;
   }
 
-  if(!function_025F() && level.var_744A.size <= 1 && function_02A3() && getdvarint("2568", 0) == 0) {
+  if(!function_025F() && level.players.size <= 1 && function_02A3() && getdvarint("2568", 0) == 0) {
     if(maps\mp\gametypes\_hud_util::shoulddohubtutorialflow() && getdvarint("5740", 0) || !maps\mp\gametypes\_hub_unk1::func_4B90()) {
       level.var_4F50 = 1;
     }
@@ -439,10 +439,10 @@ func_6BA6() {
   }
 
   self.var_012C["gamemodeLoadout"] = var_00;
-  self.var_2319 = self.var_012C["class"];
-  self.var_5B84 = self.var_012C["lastClass"];
-  maps\mp\gametypes\_class::func_4790(level.var_746E, self.var_2319);
-  level.var_2BCB = self.var_2319;
+  self.class = self.var_012C["class"];
+  self.lastclass = self.var_012C["lastClass"];
+  maps\mp\gametypes\_class::func_4790(level.var_746E, self.class);
+  level.var_2BCB = self.class;
   self.var_00FB = 100;
   self.var_00BC = self.var_00FB;
   if(!isDefined(self.var_012C["killstreaks"])) {
@@ -522,7 +522,7 @@ func_6371() {
     return;
   }
 
-  if(isbot(self) || function_026D(self)) {
+  if(isbot(self) || istestclient(self)) {
     return;
   }
 
@@ -636,8 +636,8 @@ func_75D7() {
       self.var_177F destroy();
     }
 
-    maps\mp\_utility::func_47A2("specialty_marathon");
-    maps\mp\_utility::func_47A2("specialty_falldamage");
+    maps\mp\_utility::giveperk("specialty_marathon");
+    maps\mp\_utility::giveperk("specialty_falldamage");
     self.var_6CCE = 0;
     self.var_1EB2 = 1;
     self.var_542B = 1;
@@ -785,9 +785,9 @@ func_63B7() {
 }
 
 func_21BE() {
-  var_00 = maps\mp\gametypes\_rank::func_4639();
-  var_01 = maps\mp\gametypes\_rank::func_46EC();
-  var_02 = maps\mp\gametypes\_rank::func_4657(level.var_609A);
+  var_00 = maps\mp\gametypes\_rank::getprestigelevel();
+  var_01 = maps\mp\gametypes\_rank::getrankxp();
+  var_02 = maps\mp\gametypes\_rank::getrankinfomaxxp(level.maxrank);
   if(var_01 >= var_02 || var_00 > 0) {
     return 1;
   }
@@ -1303,12 +1303,12 @@ func_63CD() {
 }
 
 func_669F() {
-  level.var_6EA3 = ::maps\mp\gametypes\_hub_unk3::func_6EA2;
+  level.partymembers_cb = ::maps\mp\gametypes\_hub_unk3::func_6EA2;
   level thread maps\mp\gametypes\_hub_unk3::func_631E();
 }
 
 func_A598() {
-  level.var_6EA3 = ::maps\mp\hub_vl_camera::func_6EA2;
+  level.partymembers_cb = ::maps\mp\hub_vl_camera::func_6EA2;
   level.var_A595 = [];
   level.var_AAE2 = [];
   level.var_13B8 = [];
@@ -1426,7 +1426,7 @@ func_637D() {
     self.var_9B66 delete();
   }
 
-  foreach(var_01 in level.var_744A) {
+  foreach(var_01 in level.players) {
     if(isDefined(var_01.var_746C)) {
       if(!isDefined(self)) {
         var_01.var_746C = common_scripts\utility::func_0FA0(var_01.var_746C);

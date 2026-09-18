@@ -472,7 +472,7 @@ func_A6F8(param_00) {
   var_01 = 200;
   var_02 = param_00.origin;
   var_03 = gettime();
-  while(isDefined(param_00) && maps\mp\_utility::func_57A0(param_00) && !param_00 isonground() && var_02 == param_00.origin && param_00 useButtonPressed()) {
+  while(isDefined(param_00) && maps\mp\_utility::isreallyalive(param_00) && !param_00 isonground() && var_02 == param_00.origin && param_00 useButtonPressed()) {
     var_04 = gettime() - var_03;
     if(var_04 >= var_01) {
       return 1;
@@ -529,7 +529,7 @@ func_5A5F(param_00) {
 
     var_02 playlocalsound("scavenger_pack_pickup");
     var_03 = var_02 maps\mp\killstreaks\_killstreaks::func_45A5(self.var_944E, 0);
-    var_02 thread maps\mp\gametypes\_hud_message::func_5A78(self.var_944E, undefined, undefined, var_03);
+    var_02 thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(self.var_944E, undefined, undefined, var_03);
     var_02 thread maps\mp\killstreaks\_killstreaks::func_478D(self.var_944E, 0, 0, self.owner);
     var_02 lib_0468::func_A28("packageCapped");
     func_2D30(1);
@@ -546,11 +546,11 @@ func_2D30(param_00, param_01) {
   }
 
   if(isDefined(self.var_698E)) {
-    maps\mp\_utility::func_68B(self.var_698E);
+    maps\mp\_utility::_objective_delete(self.var_698E);
   }
 
   if(isDefined(self.var_698D)) {
-    maps\mp\_utility::func_68B(self.var_698D);
+    maps\mp\_utility::_objective_delete(self.var_698D);
   }
 
   if(isDefined(self.var_5A2C)) {
@@ -639,7 +639,7 @@ func_6F82(param_00, param_01) {
   self setclientomnvar("ui_use_bar_text", 1);
   self setclientomnvar("ui_use_bar_start_time", int(gettime()));
   var_02 = -1;
-  while(maps\mp\_utility::func_57A0(self) && isDefined(param_00) && param_00.var_54F5 && !level.gameended) {
+  while(maps\mp\_utility::isreallyalive(self) && isDefined(param_00) && param_00.var_54F5 && !level.gameended) {
     if(var_02 != param_00.var_A22B) {
       if(param_00.var_28D5 > param_01) {
         param_00.var_28D5 = param_01;
@@ -662,14 +662,14 @@ func_6F82(param_00, param_01) {
 }
 
 func_A214(param_00, param_01) {
-  while(!level.gameended && isDefined(self) && maps\mp\_utility::func_57A0(param_00) && param_00 useButtonPressed() && self.var_28D5 < param_01) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(param_00) && param_00 useButtonPressed() && self.var_28D5 < param_01) {
     self.var_28D5 = self.var_28D5 + self.var_A22B * 50;
     if(!self.var_A22B) {
       self.var_A22B = 1;
     }
 
     if(self.var_28D5 >= param_01) {
-      return maps\mp\_utility::func_57A0(param_00);
+      return maps\mp\_utility::isreallyalive(param_00);
     }
 
     wait 0.05;

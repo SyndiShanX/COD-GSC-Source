@@ -58,7 +58,7 @@ func_5282() {
 }
 
 func_2838(param_00, param_01, param_02, param_03, param_04, param_05) {
-  var_06 = param_00.var_1A5;
+  var_06 = param_00.targetname;
   if(!isDefined(var_06)) {
     var_06 = "UNDEFINED";
   }
@@ -67,9 +67,9 @@ func_2838(param_00, param_01, param_02, param_03, param_04, param_05) {
   if(common_scripts\utility::func_562E(param_00.use_original_classname)) {
     var_07 = param_00 method_8225();
   } else if(isDefined(param_05) && isPlayer(param_05)) {
-    var_07 = function_01E0(param_00.var_106, var_06, param_00.var_1C8, param_00.var_116, param_00.var_1D, param_05);
+    var_07 = function_01E0(param_00.model, var_06, param_00.var_1C8, param_00.origin, param_00.var_1D, param_05);
   } else {
-    var_07 = function_01E0(param_00.var_106, var_06, param_00.var_1C8, param_00.var_116, param_00.var_1D);
+    var_07 = function_01E0(param_00.model, var_06, param_00.var_1C8, param_00.origin, param_00.var_1D);
   }
 
   var_07.var_1C8 = param_00.var_1C8;
@@ -83,10 +83,10 @@ func_2838(param_00, param_01, param_02, param_03, param_04, param_05) {
 
   if(isDefined(param_01)) {
     var_07 method_8253(param_01);
-    var_07.var_1A7 = param_01;
+    var_07.team = param_01;
   } else {
     var_07 method_8253("axis");
-    var_07.var_1A7 = "axis";
+    var_07.team = "axis";
   }
 
   var_08 = level.var_79F0[param_00.var_1C8];
@@ -132,7 +132,7 @@ func_2838(param_00, param_01, param_02, param_03, param_04, param_05) {
       }
     }
 
-    var_07.var_A3F8 = func_A3EE(param_00.var_1A2);
+    var_07.var_A3F8 = func_A3EE(param_00.target);
     if(param_03 == 1) {
       var_07 thread func_4816(5, 1);
     } else {
@@ -140,7 +140,7 @@ func_2838(param_00, param_01, param_02, param_03, param_04, param_05) {
     }
   }
 
-  if(var_07.var_1A7 == "axis") {
+  if(var_07.team == "axis") {
     if(!isDefined(level.var_148E)) {
       level.var_148E = [];
     }
@@ -166,18 +166,18 @@ func_1D62(param_00, param_01, param_02, param_03) {
     var_04 method_8131();
     var_04 setdefaultdroppitchyaw(0);
   } else {
-    var_04 method_8449(self, param_02, (0, 0, 0), (0, 0, 0));
+    var_04 linktosynchronizedparent(self, param_02, (0, 0, 0), (0, 0, 0));
     var_04 setCanDamage(0);
     var_04 setCanRadiusDamage(0);
     var_04 setmode("manual");
     var_04 setdefaultdroppitchyaw(-45, 0);
   }
 
-  var_04.var_1A7 = self.var_1A7;
-  var_04.var_12C["team"] = self.var_1A7;
+  var_04.team = self.team;
+  var_04.pers["team"] = self.team;
   var_04.isbucket = param_03;
-  if(level.var_984D) {
-    var_04 method_8130(self.var_1A7);
+  if(level.teambased) {
+    var_04 method_8130(self.team);
   }
 
   var_04 method_80FB(0);
@@ -246,14 +246,14 @@ func_4466() {
   var_00 = (0, 0, 72);
   var_01 = (0, 0, 60);
   var_02 = (0, 0, 40);
-  if(level.var_744A.size == 0) {
+  if(level.players.size == 0) {
     return undefined;
   }
 
   var_03 = [];
   var_04 = [];
-  foreach(var_06 in level.var_744A) {
-    if(!var_06.var_CE && var_06.var_178 != "spectator") {
+  foreach(var_06 in level.players) {
+    if(!var_06.var_CE && var_06.sessionstate != "spectator") {
       var_04[var_04.size] = var_06;
     }
 
@@ -269,9 +269,9 @@ func_4466() {
   var_08 = 500000000;
   var_09 = undefined;
   foreach(var_06 in var_04) {
-    var_0B = distancesquared(var_06.var_116, self.origin);
+    var_0B = distancesquared(var_06.origin, self.origin);
     if(var_0B < var_08) {
-      if(sighttracepassed(var_06.var_116 + var_00, self.origin + var_01, 0, self)) {
+      if(sighttracepassed(var_06.origin + var_00, self.origin + var_01, 0, self)) {
         var_08 = var_0B;
         var_09 = var_06;
       }
@@ -284,10 +284,10 @@ func_4466() {
 
   var_08 = 500000000;
   foreach(var_0E in var_03) {
-    var_0B = distancesquared(var_0E.var_116, self.origin);
+    var_0B = distancesquared(var_0E.origin, self.origin);
     if(var_0B < var_08) {
-      var_0F = var_0E.var_116;
-      if(isDefined(var_0E.var_57C4) && var_0E.var_57C4) {
+      var_0F = var_0E.origin;
+      if(isDefined(var_0E.issentry) && var_0E.issentry) {
         var_0F = var_0F + var_02;
       }
 
@@ -332,7 +332,7 @@ func_9F9C() {
       var_00 = self gettagorigin("TAG_AIM");
       var_01 = self gettagangles("TAG_AIM");
       var_02 = anglesToForward(var_01);
-      var_03 = vectorNormalize(self.var_6E7A.var_9828.var_116 - var_00);
+      var_03 = vectorNormalize(self.var_6E7A.var_9828.origin - var_00);
       var_04 = vectordot(var_02, var_03);
       if(var_04 > 0.9) {
         self method_80D5();
@@ -355,7 +355,7 @@ func_A3FF() {
       var_00 = self gettagorigin("TAG_AIM");
       var_01 = self gettagangles("TAG_AIM");
       var_02 = anglesToForward(var_01);
-      var_03 = vectorNormalize(self.var_9828.var_116 - var_00);
+      var_03 = vectorNormalize(self.var_9828.origin - var_00);
       var_04 = vectordot(var_02, var_03);
       if(var_04 > 0.9) {
         self method_8263();
@@ -371,8 +371,8 @@ func_A334() {
   level endon("game_ended");
   for(;;) {
     self waittill("vehicle_mount", var_00);
-    if(isDefined(var_00) && isDefined(var_00.var_1A7)) {
-      common_scripts\utility::func_5FA9(var_00.var_1A7);
+    if(isDefined(var_00) && isDefined(var_00.team)) {
+      common_scripts\utility::func_5FA9(var_00.team);
     }
   }
 }
@@ -394,7 +394,7 @@ func_A333() {
 }
 
 func_9F53() {
-  self.var_29B5 = ::func_9F28;
+  self.damagecallback = ::func_9F28;
   self setCanDamage(1);
   self setdamagecallbackon(1);
 }
@@ -408,8 +408,8 @@ func_A3EE(param_00) {
   var_01 = [param_00];
   var_02 = param_00;
   for(;;) {
-    if(isDefined(var_02.var_1A2)) {
-      var_03 = getEnt(var_02.var_1A2, "targetname");
+    if(isDefined(var_02.target)) {
+      var_03 = getEnt(var_02.target, "targetname");
       var_01[var_01.size] = var_03;
       var_02 = var_03;
       continue;
@@ -431,8 +431,8 @@ func_4816(param_00, param_01) {
 
   for(var_02 = 0; var_02 < self.var_A3F8.size; var_02++) {
     self.var_66CA = self.var_A3F8[var_02];
-    self method_8224(self.var_66CA.var_116, param_00);
-    while(distance2d(self.origin, self.var_66CA.var_116) > 64) {
+    self method_8224(self.var_66CA.origin, param_00);
+    while(distance2d(self.origin, self.var_66CA.origin) > 64) {
       wait 0.05;
     }
   }
@@ -567,7 +567,7 @@ last_stand_player_down_slide() {
       var_02 notifyonplayercommand("switch_seats_gunner", "-actionslot 2");
       var_02 thread func_A913(self);
       if(isDefined(self.var_6E7A)) {
-        self.var_6E7A common_scripts\utility::func_5FA9(var_02.var_1A7);
+        self.var_6E7A common_scripts\utility::func_5FA9(var_02.team);
       }
     } else if(isDefined(self.var_6E7A)) {
       var_03 = self.var_6E7A method_8251();
@@ -693,7 +693,7 @@ func_9784(param_00, param_01) {
     thread func_9785();
   }
 
-  if(self.var_1C7 == "reverse") {
+  if(self.getfirstarraykey == "reverse") {
     if(self.var_B70.size > 0 && self.var_B70[self.var_B70.size - 1] == var_02) {
       self.var_B70 = common_scripts\utility::func_F9A(self.var_B70, self.var_B70.size - 1);
       self notify("tank_aim_update");
@@ -740,7 +740,7 @@ func_9785() {
     }
 
     self.var_9734 = 1;
-    self method_825B(var_01.var_116);
+    self method_825B(var_01.origin);
   }
 }
 
@@ -790,13 +790,13 @@ func_97C3() {
 
   self.var_3BD5 = var_04;
   self.var_9734 = 1;
-  self method_825B(var_05.var_116);
+  self method_825B(var_05.origin);
   var_06 = undefined;
   if(var_03) {
     var_06 = lib_04F3::func_79CC("tiger_turret_spin_lp", self);
   }
 
-  while(!func_57FA(var_05.var_116)) {
+  while(!func_57FA(var_05.origin)) {
     wait 0.05;
   }
 

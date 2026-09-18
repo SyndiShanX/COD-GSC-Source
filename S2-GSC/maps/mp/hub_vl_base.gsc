@@ -16,7 +16,7 @@ func_A591() {
   setDvar("1175", 3);
   setDvar("190", 1.5);
   function_02BB();
-  level.var_6EA3 = ::maps\mp\hub_vl_camera::func_6EA2;
+  level.partymembers_cb = ::maps\mp\hub_vl_camera::func_6EA2;
   level.var_A595 = [];
   level.var_AAE2 = [];
   level.var_13B8 = [];
@@ -53,7 +53,7 @@ func_3E76(param_00) {
   if(level.var_A1FE) {
     for(var_01 = 0; var_01 < 48; var_01++) {
       if(param_00.var_A561[var_01]) {
-        var_02 = level.var_744A[var_01];
+        var_02 = level.players[var_01];
         if(isDefined(var_02)) {
           maps\mp\hub_vl_camera::func_05E0(var_02 getentitynumber(), param_00.var_20F1, "free");
         }
@@ -257,7 +257,7 @@ func_7E92(param_00, param_01) {
 
   var_08 = distance(var_07, param_00.var_001D);
   if(var_08 > 0.01) {
-    maps\mp\hub_vl_camera::func_05E0(param_00.var_721C getentitynumber(), param_00.var_20F1, "angles", var_07);
+    maps\mp\hub_vl_camera::func_05E0(param_00.player getentitynumber(), param_00.var_20F1, "angles", var_07);
   }
 
   param_00.var_001D = var_07;
@@ -315,7 +315,7 @@ func_6323(param_00) {
     if(isDefined(param_00.var_50CA)) {
       var_01 = getdvarint("2454", 0);
       if(var_01 == 1 && !param_00.var_50CA) {
-        var_02 = maps\mp\_utility::func_445D("lobby" + param_00.var_294D + 1);
+        var_02 = maps\mp\_utility::getclassindex("lobby" + param_00.var_294D + 1);
         var_03 = maps\mp\_utility::func_1E01();
         var_04 = param_00.var_5E01[var_03][var_02];
         var_05 = var_04["primaryWeaponStruct"];
@@ -326,17 +326,17 @@ func_6323(param_00) {
         }
 
         var_08 = [];
-        if(isDefined(var_05) && isDefined(var_05.var_48CA) && var_05.var_48CA != 0) {
+        if(isDefined(var_05) && isDefined(var_05.guid) && var_05.guid != 0) {
           var_09 = maps\mp\_utility::func_4737(var_05);
           var_08[var_08.size] = maps\mp\gametypes\_class::func_1D66(var_09, var_04["primaryAttachmentsGUID"][0], var_04["primaryAttachmentsGUID"][1], var_04["primaryAttachmentsGUID"][2], var_04["primaryAttachmentsGUID"][3], var_04["primaryAttachmentsGUID"][4], var_04["primaryAttachmentsGUID"][5], maps\mp\_utility::func_472D(var_05), 0, 0, 0, 0);
         }
 
-        if(isDefined(var_06) && isDefined(var_06.var_48CA) && var_06.var_48CA != 0) {
+        if(isDefined(var_06) && isDefined(var_06.guid) && var_06.guid != 0) {
           var_09 = maps\mp\_utility::func_4737(var_06);
           var_08[var_08.size] = maps\mp\gametypes\_class::func_1D66(var_09, var_04["secondaryAttachmentsGUID"][0], var_04["secondaryAttachmentsGUID"][1], var_04["secondaryAttachmentsGUID"][2], var_04["secondaryAttachmentsGUID"][3], var_04["secondaryAttachmentsGUID"][4], var_04["secondaryAttachmentsGUID"][5], maps\mp\_utility::func_472D(var_06), 0, 0, 0, 0);
         }
 
-        if(isDefined(var_07) && isDefined(var_07.var_48CA) && var_07.var_48CA != 0) {
+        if(isDefined(var_07) && isDefined(var_07.guid) && var_07.guid != 0) {
           var_08[var_08.size] = maps\mp\_utility::func_4737(var_07);
         }
 
@@ -358,13 +358,13 @@ func_6323(param_00) {
         param_00 method_848D();
         param_00 func_3C3C();
         param_00 func_2F52();
-        if(isDefined(param_00.var_7704)) {
-          param_00 switchtoweapon(param_00.var_7704);
+        if(isDefined(param_00.primaryweapon)) {
+          param_00 switchtoweapon(param_00.primaryweapon);
         }
 
         param_00 notify("enter_lobby");
         func_37B6(param_00);
-        param_00 method_8626("mp_no_foley", 1);
+        param_00 setaltsceneobj("mp_no_foley", 1);
         setDvar("1175", 3);
         setDvar("190", 1.5);
       }

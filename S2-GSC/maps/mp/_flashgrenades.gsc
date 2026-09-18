@@ -39,7 +39,7 @@ func_6394() {
       break;
     }
 
-    if(isDefined(self.var_A25C)) {
+    if(isDefined(self.usingremote)) {
       continue;
     }
 
@@ -139,6 +139,6 @@ func_0F33(param_00, param_01, param_02) {
   self.var_3D57 = undefined;
 }
 
-func_56F3() {
+isflashbanged() {
   return isDefined(self.flashendtime) && gettime() < self.flashendtime;
 }

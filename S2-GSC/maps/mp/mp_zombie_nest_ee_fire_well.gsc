@@ -20,9 +20,9 @@ main() {
   lib_0557::func_7846("1 fire well", ::lib_0557::func_30D8, [], &"ZOMBIE_NEST_HINT_QUEST_SEWERS", "ZOMBIE_NEST_HINT_QUEST_SEWERS", 0, 0);
   lib_0557::func_781E("1 fire well", "gas flowing", ::func_7855, ::lib_0557::func_30D8, &"ZOMBIE_NEST_HINT_STEP_OPEN_SEWERS");
   lib_0557::func_7848("1 fire well");
-  common_scripts\utility::func_3C87("bunker_door_opened");
-  common_scripts\utility::func_3C87("Pilot light activated");
-  common_scripts\utility::func_3C87("fire trap active");
+  common_scripts\utility::flag_init("bunker_door_opened");
+  common_scripts\utility::flag_init("Pilot light activated");
+  common_scripts\utility::flag_init("fire trap active");
   func_AA06();
   thread func_AC98();
 }
@@ -59,7 +59,7 @@ func_785E() {
       var_05[var_05.size] = var_07.var_6298;
     }
 
-    var_09 = common_scripts\utility::func_F73(var_05, var_00.var_8301);
+    var_09 = common_scripts\utility::func_F73(var_05, var_00.setclientdvars);
     var_03 = lib_0557::func_782F(undefined, var_09);
     lib_0557::func_781D("explore village", var_03);
   }
@@ -68,13 +68,13 @@ func_785E() {
     common_scripts\utility::func_3C9F("power_sz2");
   }
 
-  foreach(var_0B in var_00.var_8301) {
+  foreach(var_0B in var_00.setclientdvars) {
     var_0B setscriptablepartstate("light", "green");
   }
 
   if(0) {
     lib_0557::func_7847("explore village", var_03);
-    var_03 = lib_0557::func_782F(undefined, var_00.var_8301);
+    var_03 = lib_0557::func_782F(undefined, var_00.setclientdvars);
     lib_0557::func_781D("explore village", var_03);
   }
 
@@ -144,7 +144,7 @@ func_AA06() {
   var_01.origin = var_01.origin + (0, 0, -128);
   var_01.var_50D0 = 1;
   wait 0.05;
-  var_01 method_805F();
+  var_01 saved_actionslotdata();
   var_02 = getEnt("well_clip_door", "script_noteworthy");
   var_02.origin = var_02.origin + (0, 0, -128);
   var_02.var_50D0 = 1;
@@ -152,7 +152,7 @@ func_AA06() {
   var_03.origin = var_03.origin + (0, 0, -128);
   var_03.var_50D0 = 1;
   wait 0.05;
-  var_03 method_805F();
+  var_03 saved_actionslotdata();
 }
 
 func_AA05() {
@@ -208,13 +208,13 @@ func_AA08() {
   var_00 delete();
   var_01 = getEnt("well_clip_top_plug", "script_noteworthy");
   var_01 notsolid();
-  var_01 method_805F();
+  var_01 saved_actionslotdata();
   var_02 = getEnt("well_clip_door", "script_noteworthy");
   var_02 notsolid();
   var_02 delete();
   var_03 = getEnt("well_clip_door_ai", "script_noteworthy");
   var_03 notsolid();
-  var_03 method_805F();
+  var_03 saved_actionslotdata();
 }
 
 func_0985() {
@@ -356,8 +356,8 @@ func_7854() {
   wait(3);
   if(!common_scripts\utility::func_3C77("fire trap active")) {
     func_AA05();
-    common_scripts\utility::func_3C8F("fire trap active");
-    common_scripts\utility::func_3C8F("gallows_to_well");
+    common_scripts\utility::flag_set("fire trap active");
+    common_scripts\utility::flag_set("gallows_to_well");
     var_05 = function_021F("color", "targetname");
     foreach(var_07 in var_05) {
       wait(0.1);
@@ -406,8 +406,8 @@ func_9CAB(param_00) {
   wait(3);
   if(!common_scripts\utility::func_3C77("fire trap active")) {
     func_AA05();
-    common_scripts\utility::func_3C8F("fire trap active");
-    common_scripts\utility::func_3C8F("gallows_to_well");
+    common_scripts\utility::flag_set("fire trap active");
+    common_scripts\utility::flag_set("gallows_to_well");
     var_06 = function_021F("color", "targetname");
     foreach(var_08 in var_06) {
       wait(0.1);
@@ -551,7 +551,7 @@ func_AC98() {
 
     if(common_scripts\utility::func_3C77("fuel_valve_1") && common_scripts\utility::func_3C77("fuel_valve_2") && common_scripts\utility::func_3C77("fuel_valve_3")) {
       level.var_6FEB = var_01;
-      common_scripts\utility::func_3C8F("Pilot light activated");
+      common_scripts\utility::flag_set("Pilot light activated");
       var_00 setHintString(&"ZOMBIES_EMPTY_STRING");
       break;
     } else {
@@ -696,7 +696,7 @@ func_3C20(param_00) {
 
   var_06 = common_scripts\utility::func_46B5("well_explosion_zombie_grab_radius", "script_noteworthy");
   if(!isDefined(level.var_3BD3)) {
-    level.var_3BD3 = spawn("trigger_radius", var_06.origin, 0, var_06.var_14F, 128);
+    level.var_3BD3 = spawn("trigger_radius", var_06.origin, 0, var_06.radius, 128);
   }
 
   if(isDefined(param_00)) {

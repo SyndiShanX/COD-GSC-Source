@@ -27,7 +27,7 @@ main() {
   level.pap_camo_ref_override = "zom_frontline_01";
   level.var_ACA3 = 1;
   level.var_C11 = 0;
-  common_scripts\utility::func_3C87("power_sz2");
+  common_scripts\utility::flag_init("power_sz2");
   func_5375();
   maps / mp / zombies / zombie_survival_common::init();
   thread maps / mp / mp_zombie_windmill_util::windmill_think();
@@ -72,7 +72,7 @@ init_new_zombie_types() {
 }
 
 house_door_listener() {
-  common_scripts\utility::func_3C87("zone_plaza_to_zone_house");
+  common_scripts\utility::flag_init("zone_plaza_to_zone_house");
   common_scripts\utility::func_3C9F("zone_plaza_to_zone_house");
   foreach(var_01 in level.var_AC1D) {
     if(isDefined(var_01.var_819A) && var_01.var_819A == "zone_plaza_to_zone_house" && !isDefined(var_01.var_6BE1) || !var_01.var_6BE1) {
@@ -117,12 +117,12 @@ windmill_srv_ee() {
     var_04.var_931A = "lowered";
     var_04.target_struct = common_scripts\utility::func_46B5(var_04.target, "targetname");
     var_04.raised_position = var_04.target_struct.origin;
-    var_04.var_29B5 = ::ee_dmg_listen;
+    var_04.damagecallback = ::ee_dmg_listen;
   }
 
   var_0A = 0;
   for(;;) {
-    var_0B = common_scripts\utility::func_7A33(var_01);
+    var_0B = common_scripts\utility::random(var_01);
     var_0B.is_starter = 1;
     var_0B thread ee_raise();
     level waittill("ee_started", var_0C);
@@ -141,7 +141,7 @@ windmill_srv_ee() {
 
       level.ducks_killed_in_window = 0;
       while(var_0E.size < level.ducks_per_window) {
-        var_0F = common_scripts\utility::func_7A33(var_10);
+        var_0F = common_scripts\utility::random(var_10);
         if(lib_0547::func_5565(var_0F.var_931A, "lowered")) {
           var_10 = common_scripts\utility::func_F93(var_10, var_0F);
           var_0E = common_scripts\utility::func_F6F(var_0E, var_0F);

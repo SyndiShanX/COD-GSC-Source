@@ -15,7 +15,7 @@ func_2C2C(param_00, param_01) {
 
   param_00 thread func_2D33(var_03);
   var_07 = maps / mp / agents / _agent_utility::func_43FD("all");
-  var_07 = common_scripts\utility::func_F92(var_07);
+  var_07 = common_scripts\utility::array_randomize(var_07);
   foreach(var_09 in var_07) {
     if(!var_09 maps / mp / mp_zombie_nest_ee_tower_battle_zombie_states::func_A7F2()) {
       var_09 notify("lose_focus");
@@ -184,7 +184,7 @@ func_27CE(param_00) {
     }
   }
 
-  return common_scripts\utility::func_F92(var_01);
+  return common_scripts\utility::array_randomize(var_01);
 }
 
 func_11B2(param_00) {

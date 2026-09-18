@@ -17,7 +17,7 @@ main() {
     var_04 = (var_02[0], var_02[1], 0);
     var_05 = vectortoangles(var_04);
     self scragentsetorientmode("face angle abs", var_05);
-    self method_83A4(var_00.origin, var_01.origin, var_03);
+    self selected_fx_option_index(var_00.origin, var_01.origin, var_03);
     self method_839D("noclip");
     maps / mp / agents / _scriptedagents::func_71F7("run", var_03);
     return;
@@ -115,7 +115,7 @@ main() {
     }
 
     var_20 = getanimlength(var_1A);
-    self method_83A4(var_05.origin, var_06.origin, var_20);
+    self selected_fx_option_index(var_05.origin, var_06.origin, var_20);
     maps / mp / agents / _scriptedagents::func_71FC(var_07, 0, "traverse");
     return;
   }

@@ -260,7 +260,7 @@ classic_game_logic(param_00, param_01) {
     var_07 = undefined;
     for(;;) {
       wait 0.05;
-      var_07 = common_scripts\utility::func_7A33(var_06);
+      var_07 = common_scripts\utility::random(var_06);
       if(common_scripts\utility::func_562E(var_07.var_4B57)) {
         continue;
       } else {
@@ -655,7 +655,7 @@ gold_ravens_think() {
     }
   }
 
-  common_scripts\utility::func_3C8F("flag_outlaw_raven_puzzle_complete");
+  common_scripts\utility::flag_set("flag_outlaw_raven_puzzle_complete");
   maps\mp\zombies\_zombies_magicbox::func_9C8("raven_gun_zm", "none", "none", "none");
   spawn_raven_guns();
 }
@@ -722,7 +722,7 @@ raven_manager() {
 
 get_raven_spawn() {
   for(var_00 = undefined; !isDefined(var_00); var_00 = var_01) {
-    var_01 = common_scripts\utility::func_7A33(level.raven_manager.raven_spawns);
+    var_01 = common_scripts\utility::random(level.raven_manager.raven_spawns);
     if(isDefined(var_01.isoccupied) && var_01.isoccupied == 1) {
       wait 0.05;
       continue;
@@ -943,7 +943,7 @@ dark_passenger_player_attach_to_host(param_00) {
   var_01.passenger_org.origin = var_05;
   var_01 setOrigin(var_01.passenger_org.origin + var_04[0], 1);
   var_01 setplayerangles(var_01.passenger_org.angles);
-  var_01.passenger_org method_8449(param_00, "TAG_ORIGIN");
+  var_01.passenger_org linktosynchronizedparent(param_00, "TAG_ORIGIN");
   var_01 playerlinktoblend(var_01.passenger_org, "TAG_ORIGIN", 0.05);
 }
 
@@ -1206,7 +1206,7 @@ dark_passenger_reward() {
     }
   }
 
-  var_02 = common_scripts\utility::func_7A33(var_01);
+  var_02 = common_scripts\utility::random(var_01);
   var_03 = 0;
   while(var_00 lib_056A::func_4B7E(var_02)) {
     var_01 = common_scripts\utility::func_F93(var_01, var_02);
@@ -1216,7 +1216,7 @@ dark_passenger_reward() {
       break;
     }
 
-    var_02 = common_scripts\utility::func_7A33(var_01);
+    var_02 = common_scripts\utility::random(var_01);
   }
 
   if(!isDefined(var_02)) {
@@ -1235,7 +1235,7 @@ _______________________sewers_______________________() {}
 
 sewers_init() {
   if(!common_scripts\utility::func_3C83("flag_bonus_plates_filled")) {
-    common_scripts\utility::func_3C87("flag_bonus_plates_filled");
+    common_scripts\utility::flag_init("flag_bonus_plates_filled");
   }
 
   lib_0551::func_3D50();
@@ -1255,7 +1255,7 @@ sewers_init() {
   var_05 = common_scripts\utility::func_46B7("blitz_all_spikes_spawn", "targetname");
   var_06 = [];
   while(var_06.size < var_00.size) {
-    var_07 = common_scripts\utility::func_7A33(var_05);
+    var_07 = common_scripts\utility::random(var_05);
     var_06 = common_scripts\utility::func_F6F(var_06, var_07);
     var_05 = common_scripts\utility::func_F93(var_05, var_07);
   }
@@ -1280,7 +1280,7 @@ sewers_init() {
   level thread sewers_handle_shelf_fill();
   sewers_wait_for_all_plates_full();
   sewers_disable_plinth();
-  common_scripts\utility::func_3C8F("flag_bonus_plates_filled");
+  common_scripts\utility::flag_set("flag_bonus_plates_filled");
   level sewers_handle_plinth_trap_door();
 }
 
@@ -1436,7 +1436,7 @@ sewers_shelf_handle_zombies() {
     if(var_01 == 5) {
       var_02 = "zombie_heavy";
     } else {
-      var_02 = common_scripts\utility::func_7A33(["zombie_generic", "zombie_berserker"]);
+      var_02 = common_scripts\utility::random(["zombie_generic", "zombie_berserker"]);
     }
 
     var_03 = sewers_shelf_spawn_zombie([var_00], var_02);
@@ -1457,7 +1457,7 @@ sewers_shelf_register_killed_func() {
 }
 
 sewers_shelf_spawn_zombie(param_00, param_01) {
-  var_02 = lib_054D::func_90BA(param_01, common_scripts\utility::func_7A33(param_00), "shelf zombies", 0, 1, 1);
+  var_02 = lib_054D::func_90BA(param_01, common_scripts\utility::random(param_00), "shelf zombies", 0, 1, 1);
   if(!isDefined(var_02)) {
     return undefined;
   }
@@ -1768,7 +1768,7 @@ sewers_register_killed_func() {
 }
 
 sewers_spawn_zombie(param_00) {
-  var_01 = lib_054D::func_90BA("zombie_generic", common_scripts\utility::func_7A33(param_00), "sewer zombies", 0, 1, 1);
+  var_01 = lib_054D::func_90BA("zombie_generic", common_scripts\utility::random(param_00), "sewer zombies", 0, 1, 1);
   if(!isDefined(var_01)) {
     return undefined;
   }

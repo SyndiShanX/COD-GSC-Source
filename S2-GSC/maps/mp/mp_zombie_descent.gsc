@@ -14,7 +14,7 @@ main() {
   maps\mp\_load::main();
   maps / mp / mp_zombie_descent_lighting::main();
   maps / mp / mp_zombie_descent_aud::main();
-  common_scripts\utility::func_3C87("flag_closet_to_basement_1");
+  common_scripts\utility::flag_init("flag_closet_to_basement_1");
   hack_swap_basement_cloest_door_flag();
   maps\mp\_compass::setupminimap("compass_map_mp_zombie_descent");
   game["attackers"] = "allies";
@@ -77,7 +77,7 @@ spawnfadein() {
   self.var_6772.horzalign = "fullscreen";
   self.var_6772.vertalign = "fullscreen";
   self.var_6772.foreground = 0;
-  while(!level.var_3FA6) {
+  while(!level.gamehasstarted) {
     wait 0.05;
   }
 
@@ -147,7 +147,7 @@ toggle_active() {
       }
 
       foreach(var_04 in level.players) {
-        if(distance2d(var_04.origin, var_02.origin) < var_02.var_14F && abs(var_04.origin[2] - var_02.origin[2]) < var_02.height) {
+        if(distance2d(var_04.origin, var_02.origin) < var_02.radius && abs(var_04.origin[2] - var_02.origin[2]) < var_02.height) {
           var_00.is_zombies_spawner_script_disabled = 1;
           break;
         }
@@ -167,8 +167,8 @@ descent_player_ignore_extra(param_00) {
 }
 
 mute_audio_on_intro() {
-  self method_8626("intro_movie");
-  while(!level.var_3FA6) {
+  self setaltsceneobj("intro_movie");
+  while(!level.gamehasstarted) {
     self freezecontrols(1);
     self method_812B(0);
     self disableoffhandweapons();
@@ -195,7 +195,7 @@ handle_boss_battle_playtest() {
   level.var_A980 = 18;
   level thread maps\mp\_utility::func_6F74(::give_all_boss_battle_perks);
   wait(1);
-  var_00 = common_scripts\utility::func_7A33(level.players);
+  var_00 = common_scripts\utility::random(level.players);
   var_00 lib_057D::func_4766();
   wait(5);
   maps / mp / mp_zombie_descent_ee_main::func_784C();
@@ -302,8 +302,8 @@ setup_blood_plates(param_00) {
 
   var_02 = "flag_plate_filled_" + param_00;
   var_03 = "flag_plate_pressed_" + param_00;
-  common_scripts\utility::func_3C87(var_02);
-  common_scripts\utility::func_3C87(var_03);
+  common_scripts\utility::flag_init(var_02);
+  common_scripts\utility::flag_init(var_03);
   var_01.blood_health = 0;
   var_01.blood_health_max = 100;
   var_01.index = param_00;
@@ -645,7 +645,7 @@ blood_plate_soul_fx(param_00) {
       var_07 = var_05;
     }
 
-    playFXOnTag(level.var_611[var_04], param_00, var_07);
+    playFXOnTag(level._effect[var_04], param_00, var_07);
   }
 
   wait(1);
@@ -712,7 +712,7 @@ pressure_plate_press(param_00) {
     var_01.pressing_player = param_00;
   }
 
-  common_scripts\utility::func_3C8F(var_01.pressed_flagname);
+  common_scripts\utility::flag_set(var_01.pressed_flagname);
   level notify("plate_pressed", var_01.plate_name);
   lib_0378::func_8D74("aud_blood_plate_press", var_01.plate_model);
   var_01.plate_model moveTo(var_01.model_start_origin + (0, 0, -5), 1, 0.25, 0.25);
@@ -773,12 +773,12 @@ init_ice_blocks() {
 
 setup_text_log_reveals() {
   var_00 = getEntArray("lore_primary", "script_noteworthy");
-  common_scripts\utility::func_3C87("flag_force_log_reveal");
+  common_scripts\utility::flag_init("flag_force_log_reveal");
   foreach(var_02 in var_00) {
     var_03 = getEntArray(var_02.target, "targetname");
     var_02.trigs = var_03;
     var_04 = function_0337(var_02.var_8260, "lore");
-    common_scripts\utility::func_3C87("flag_log_reveal_" + var_04);
+    common_scripts\utility::flag_init("flag_log_reveal_" + var_04);
     var_02 thread text_log_reveal_think("flag_log_reveal_" + var_04);
   }
 }
@@ -945,7 +945,7 @@ spawn_ice_breakers(param_00) {
   var_0A.startcorpseeater = 1;
   var_0A.cenerfedexplosion = 1;
   wait(0.5);
-  playFX(level.var_611["zmb_desc_ice_falling"], var_09.origin);
+  playFX(level._effect["zmb_desc_ice_falling"], var_09.origin);
   if(level.players.size >= 3 || common_scripts\utility::func_562E(param_00)) {
     var_0B = common_scripts\utility::func_46B5("spawn_cave_ice_breaker_main_2", "targetname");
     var_0C = lib_054D::func_90BA("zombie_dlc4", var_0B, "corpse_eater", 0, 1, 0);
@@ -992,31 +992,31 @@ descent_round_start() {}
 descent_round_end() {
   thread descent_attempt_wave_story();
   if(level.var_A980 >= 3) {
-    common_scripts\utility::func_3C8F("flag_log_reveal_24");
+    common_scripts\utility::flag_set("flag_log_reveal_24");
   }
 
   if(level.var_A980 >= 5) {
-    common_scripts\utility::func_3C8F("flag_log_reveal_25");
+    common_scripts\utility::flag_set("flag_log_reveal_25");
   }
 
   if(level.var_A980 >= 7) {
-    common_scripts\utility::func_3C8F("flag_log_reveal_26");
+    common_scripts\utility::flag_set("flag_log_reveal_26");
   }
 
   if(level.var_A980 >= 9) {
-    common_scripts\utility::func_3C8F("flag_log_reveal_27");
+    common_scripts\utility::flag_set("flag_log_reveal_27");
   }
 
   if(level.var_A980 >= 11) {
-    common_scripts\utility::func_3C8F("flag_log_reveal_28");
+    common_scripts\utility::flag_set("flag_log_reveal_28");
   }
 
   if(level.var_A980 >= 13) {
-    common_scripts\utility::func_3C8F("flag_log_reveal_29");
+    common_scripts\utility::flag_set("flag_log_reveal_29");
   }
 
   if(level.var_A980 >= 15) {
-    common_scripts\utility::func_3C8F("flag_log_reveal_30");
+    common_scripts\utility::flag_set("flag_log_reveal_30");
   }
 }
 
@@ -1139,11 +1139,11 @@ func_5339() {
 }
 
 initflags() {
-  common_scripts\utility::func_3C87("flag_boss_complete");
-  common_scripts\utility::func_3C87("flag_radio_picked_up");
-  common_scripts\utility::func_3C87("flag_blood_pool_0");
-  common_scripts\utility::func_3C87("flag_blood_pool_1");
-  common_scripts\utility::func_3C87("flag_blood_pool_2");
+  common_scripts\utility::flag_init("flag_boss_complete");
+  common_scripts\utility::flag_init("flag_radio_picked_up");
+  common_scripts\utility::flag_init("flag_blood_pool_0");
+  common_scripts\utility::flag_init("flag_blood_pool_1");
+  common_scripts\utility::flag_init("flag_blood_pool_2");
 }
 
 initquestnotebook() {
@@ -1176,8 +1176,8 @@ traps_init() {
 trap_archives_spikes() {
   level.var_9CFB = 1;
   level.var_62B5 = 1;
-  level.var_611["trap_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_small");
-  level.var_611["trap_not_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_blink_small");
+  level._effect["trap_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_small");
+  level._effect["trap_not_ready"] = loadfx("vfx/zombie/zmb_trap_light_orange_blink_small");
   level.var_9CD1["ready_to_active"] = undefined;
   level.var_9CD1["active_to_cooldown"] = undefined;
   level.var_9CD1["cooldown_to_active"] = undefined;
@@ -1302,7 +1302,7 @@ get_zombie_door(param_00) {
 assign_collision_handling(param_00, param_01, param_02) {
   param_00.var_A048 = [];
   var_03 = 2;
-  foreach(var_05 in self.var_8301) {
+  foreach(var_05 in self.setclientdvars) {
     if(common_scripts\utility::func_562E(param_01)) {
       param_00 assign_door_collision_node(var_05, 1);
     }

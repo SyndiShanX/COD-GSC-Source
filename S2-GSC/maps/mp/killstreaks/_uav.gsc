@@ -4,9 +4,9 @@
 *********************************************/
 
 init() {
-  level.var_611["uav_exit"] = loadfx("vfx/trail/smoketrail_uav");
-  level.var_611["uav_trail"] = loadfx("vfx/trail/smoketrail_uav");
-  level.var_611["counter_recon_hit"] = loadfx("vfx/explosion/rocket_explosion_airburst");
+  level._effect["uav_exit"] = loadfx("vfx/trail/smoketrail_uav");
+  level._effect["uav_trail"] = loadfx("vfx/trail/smoketrail_uav");
+  level._effect["counter_recon_hit"] = loadfx("vfx/explosion/rocket_explosion_airburst");
   level.killstreakfuncs["uav"] = ::func_9E3B;
   level.killstreakfuncs["counter_uav"] = ::func_9E25;
   level.killstreakfuncs["advanced_uav"] = ::func_9E22;
@@ -254,7 +254,7 @@ func_2692(param_00) {
   lib_0380::func_288B("ks_counter_uav_enter", undefined, param_00);
   var_01 = lib_0380::func_288D("ks_counter_uav_loop", undefined, param_00, 1.5);
   param_00 waittill("leaving");
-  lib_0380::func_2893(var_01, 1.5);
+  lib_0380::_stoplocalsound(var_01, 1.5);
   lib_0380::func_2889("ks_counter_uav_exit", undefined, param_00.origin);
 }
 
@@ -307,16 +307,16 @@ func_74E7() {
   if(self.var_1C8 == "counter_uav") {
     if(var_00 == "allies") {
       if(isDefined(self.var_57FB)) {
-        if(!isDefined(level.var_611["counter_uav_explode_allies_chase"])) {
-          level.var_611["counter_uav_explode_allies_chase"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion_allies_chase");
+        if(!isDefined(level._effect["counter_uav_explode_allies_chase"])) {
+          level._effect["counter_uav_explode_allies_chase"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion_allies_chase");
         }
 
         playFX(common_scripts\utility::func_44F5("counter_uav_explode_allies_chase"), self.origin, var_01);
         return;
       }
 
-      if(!isDefined(level.var_611["counter_uav_explode_allies"])) {
-        level.var_611["counter_uav_explode_allies"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion_allies");
+      if(!isDefined(level._effect["counter_uav_explode_allies"])) {
+        level._effect["counter_uav_explode_allies"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion_allies");
       }
 
       playFX(common_scripts\utility::func_44F5("counter_uav_explode_allies"), self.origin, var_01);
@@ -326,16 +326,16 @@ func_74E7() {
     }
 
     if(isDefined(self.var_57FB)) {
-      if(!isDefined(level.var_611["counter_uav_explode_axis_chase"])) {
-        level.var_611["counter_uav_explode_axis_chase"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion_chase");
+      if(!isDefined(level._effect["counter_uav_explode_axis_chase"])) {
+        level._effect["counter_uav_explode_axis_chase"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion_chase");
       }
 
       playFX(common_scripts\utility::func_44F5("counter_uav_explode_axis_chase"), self.origin, var_01);
       return;
     }
 
-    if(!isDefined(level.var_611["counter_uav_explode_axis"])) {
-      level.var_611["counter_uav_explode_axis"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion");
+    if(!isDefined(level._effect["counter_uav_explode_axis"])) {
+      level._effect["counter_uav_explode_axis"] = loadfx("vfx/explosion/vehicle_counter_uav_explosion");
     }
 
     playFX(common_scripts\utility::func_44F5("counter_uav_explode_axis"), self.origin, var_01);
@@ -346,16 +346,16 @@ func_74E7() {
 
   if(var_00 == "allies") {
     if(isDefined(self.var_57FB)) {
-      if(!isDefined(level.var_611["uav_explode_allies_chase"])) {
-        level.var_611["uav_explode_allies_chase"] = loadfx("vfx/explosion/vehicle_uav_explosion_allies_chase");
+      if(!isDefined(level._effect["uav_explode_allies_chase"])) {
+        level._effect["uav_explode_allies_chase"] = loadfx("vfx/explosion/vehicle_uav_explosion_allies_chase");
       }
 
       playFX(common_scripts\utility::func_44F5("uav_explode_allies_chase"), self.origin, var_01);
       return;
     }
 
-    if(!isDefined(level.var_611["uav_explode_allies"])) {
-      level.var_611["uav_explode_allies"] = loadfx("vfx/explosion/vehicle_uav_explosion_allies");
+    if(!isDefined(level._effect["uav_explode_allies"])) {
+      level._effect["uav_explode_allies"] = loadfx("vfx/explosion/vehicle_uav_explosion_allies");
     }
 
     playFX(common_scripts\utility::func_44F5("uav_explode_allies"), self.origin, var_01);
@@ -365,16 +365,16 @@ func_74E7() {
   }
 
   if(isDefined(self.var_57FB)) {
-    if(!isDefined(level.var_611["uav_explode_axis_chase"])) {
-      level.var_611["uav_explode_axis_chase"] = loadfx("vfx/explosion/vehicle_uav_explosion_chase");
+    if(!isDefined(level._effect["uav_explode_axis_chase"])) {
+      level._effect["uav_explode_axis_chase"] = loadfx("vfx/explosion/vehicle_uav_explosion_chase");
     }
 
     playFX(common_scripts\utility::func_44F5("uav_explode_axis_chase"), self.origin, var_01);
     return;
   }
 
-  if(!isDefined(level.var_611["uav_explode_axis"])) {
-    level.var_611["uav_explode_axis"] = loadfx("vfx/explosion/vehicle_uav_explosion");
+  if(!isDefined(level._effect["uav_explode_axis"])) {
+    level._effect["uav_explode_axis"] = loadfx("vfx/explosion/vehicle_uav_explosion");
   }
 
   playFX(common_scripts\utility::func_44F5("uav_explode_axis"), self.origin, var_01);
@@ -404,7 +404,7 @@ func_463C(param_00, param_01, param_02, param_03) {
   if(level.teambased) {
     var_04 = level.var_8E6[param_00];
     var_06 = level.var_8CD[param_00];
-    var_05 = level.var_8D3[maps\mp\_utility::func_45DE(param_00)];
+    var_05 = level.var_8D3[maps\mp\_utility::getotherteam(param_00)];
   } else {
     var_04 = level.var_8E6[param_01.guid];
     var_06 = level.var_8CD[param_01.guid];
@@ -432,13 +432,13 @@ func_463C(param_00, param_01, param_02, param_03) {
 func_A188(param_00) {
   var_01 = func_463C(param_00);
   setteamradarstrength(param_00, var_01);
-  var_02 = level.var_8D3[maps\mp\_utility::func_45DE(param_00)];
+  var_02 = level.var_8D3[maps\mp\_utility::getotherteam(param_00)];
   var_03 = 0;
   var_04 = var_01 > getuavstrengthlevelneutral();
   var_05 = var_01 >= getuavstrengthlevelshowenemyfastsweep();
   var_06 = var_01 >= getuavstrengthlevelshowenemydirectional();
   if(maps\mp\_utility::func_579B() && common_scripts\utility::func_562E(level.var_79C1)) {
-    param_00 = maps\mp\_utility::func_45DE(param_00);
+    param_00 = maps\mp\_utility::getotherteam(param_00);
   }
 
   if(var_03) {
@@ -460,7 +460,7 @@ func_A188(param_00) {
     }
 
     var_08.radarmode = level.radarmode[param_00];
-    var_08.enemyradarmode = level.radarmode[maps\mp\_utility::func_45DE(param_00)];
+    var_08.enemyradarmode = level.radarmode[maps\mp\_utility::getotherteam(param_00)];
     var_08.radarshowenemydirection = var_06;
     var_08 func_A09F(var_04);
   }
@@ -520,7 +520,7 @@ onplayerspawned() {
     self waittill("spawned_player");
     var_00 = 0;
     if(level.teambased) {
-      var_00 = level.var_8D3[maps\mp\_utility::func_45DE(self.team)];
+      var_00 = level.var_8D3[maps\mp\_utility::getotherteam(self.team)];
       continue;
     }
 
@@ -582,7 +582,7 @@ func_9E3C(param_00) {
 
   var_01 = self.team;
   if(maps\mp\_utility::func_579B() && common_scripts\utility::func_562E(level.var_79C1)) {
-    var_01 = maps\mp\_utility::func_45DE(var_01);
+    var_01 = maps\mp\_utility::getotherteam(var_01);
   }
 
   var_02 = 0;
@@ -618,7 +618,7 @@ func_09A8(param_00, param_01) {
     self.var_620D = spawnplane("script_model", (0, 0, 0));
     self.var_620D setModel("tag_origin");
     self.var_620D method_8351(param_00, param_01, 15, 15);
-    self.var_620D method_8449(self, "", (0, 0, 0), (0, 0, 0));
+    self.var_620D linktosynchronizedparent(self, "", (0, 0, 0), (0, 0, 0));
     self.var_620D hide();
   }
 }
@@ -706,7 +706,7 @@ func_2397(param_00, param_01) {
   }
 
   if(isDefined(param_01)) {
-    param_01 thread maps\mp\_utility::func_5C43(var_02);
+    param_01 thread maps\mp\_utility::leaderdialogonplayer(var_02);
   }
 
   func_7CCC(param_00);
@@ -780,7 +780,7 @@ func_7EF0(param_00) {
 func_74E6() {
   self endon("death");
   level endon("game_ended");
-  playFXOnTag(level.var_611["uav_trail"], self, "tag_origin");
+  playFXOnTag(level._effect["uav_trail"], self, "tag_origin");
 }
 
 func_39C7(param_00, param_01) {
@@ -931,7 +931,7 @@ func_0992(param_00) {
   func_0A05(param_00, 1);
   if(param_00 == "counter_uav") {
     if(level.teambased) {
-      level.var_9850[maps\mp\_utility::func_45DE(self.team)] = 1;
+      level.var_9850[maps\mp\_utility::getotherteam(self.team)] = 1;
     } else {
       level.var_2694 = self.owner;
     }
@@ -945,7 +945,7 @@ func_7CCC(param_00) {
   if(param_00 == "counter_uav") {
     if(level.teambased) {
       if(level.var_8D3[self.team] == 0) {
-        level.var_9850[maps\mp\_utility::func_45DE(self.team)] = 0;
+        level.var_9850[maps\mp\_utility::getotherteam(self.team)] = 0;
       }
     } else if(isDefined(self.owner) && level.var_8D3[self.owner.guid] == 0) {
       level.var_2694 = undefined;
@@ -1020,7 +1020,7 @@ func_A0F6() {
     }
 
     var_00 = func_463C(self.team, self);
-    var_01 = func_463C(maps\mp\_utility::func_45DE(self.team), self);
+    var_01 = func_463C(maps\mp\_utility::getotherteam(self.team), self);
     self.var_9846 setvalue(var_00);
     self.var_6C0C setvalue(var_01);
     level waittill("uav_update");
@@ -1063,7 +1063,7 @@ func_A22E(param_00) {
   var_01 = level.var_9FD8;
   level.var_9FD8++;
   foreach(var_03 in level.players) {
-    if(!isPlayer(var_03) || isbot(var_03) || function_026D(var_03)) {
+    if(!isPlayer(var_03) || isbot(var_03) || istestclient(var_03)) {
       continue;
     }
 
@@ -1078,7 +1078,7 @@ func_A22E(param_00) {
   wait(30);
   level notify("uav_locational_destroyed_" + var_01);
   foreach(var_03 in level.players) {
-    if(!isPlayer(var_03) || isbot(var_03) || function_026D(var_03)) {
+    if(!isPlayer(var_03) || isbot(var_03) || istestclient(var_03)) {
       continue;
     }
 
@@ -1148,7 +1148,7 @@ func_479B(param_00, param_01, param_02) {
   level endon("uav_locational_destroyed_" + param_00);
   for(;;) {
     level waittill("connected", var_03);
-    if(!isPlayer(var_03) || isbot(var_03) || function_026D(var_03)) {
+    if(!isPlayer(var_03) || isbot(var_03) || istestclient(var_03)) {
       continue;
     }
 
@@ -1164,7 +1164,7 @@ func_4475() {
   var_00 = undefined;
   var_01 = level.var_9FDA;
   if(level.teambased) {
-    var_01 = level.var_9FDA[maps\mp\_utility::func_45DE(self.team)];
+    var_01 = level.var_9FDA[maps\mp\_utility::getotherteam(self.team)];
   }
 
   foreach(var_03 in var_01) {

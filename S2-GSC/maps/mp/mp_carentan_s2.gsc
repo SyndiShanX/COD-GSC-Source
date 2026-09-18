@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  lib_04A0::func_F9();
-  lib_0408::func_F9();
-  lib_049F::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_carentan_s2_lighting::func_F9();
-  maps\mp\mp_carentan_s2_aud::func_F9();
+  lib_04A0::main();
+  lib_0408::main();
+  lib_049F::main();
+  maps\mp\_load::main();
+  maps\mp\mp_carentan_s2_lighting::main();
+  maps\mp\mp_carentan_s2_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_carentan_s2");
   game["attackers"] = "allies";
   game["defenders"] = "axis";

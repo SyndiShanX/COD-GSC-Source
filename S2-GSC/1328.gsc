@@ -16,7 +16,7 @@ func_3662() {
   if(maps\mp\_utility::_hasperk("specialty_stun_resistance")) {
     self.var_32A1 = 1;
   } else {
-    maps\mp\_utility::func_47A2("specialty_stun_resistance");
+    maps\mp\_utility::giveperk("specialty_stun_resistance");
   }
 
   self.var_4B64 = 1;

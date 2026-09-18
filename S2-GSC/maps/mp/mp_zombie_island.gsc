@@ -19,8 +19,8 @@ main() {
   level.custom_solo_zombie_sprint_rule = ::dont_solo_sprint_on_wave_0;
   level.use_zombie_unresolved_collision = 1;
   level.zmb_contracts_get_map_fog_state = ::maps / mp / mp_zombie_island_ee_fog_manager::get_is_fog_active;
-  common_scripts\utility::func_3C87("power_sz2");
-  common_scripts\utility::func_3C87("isolated_entry_to_isolated");
+  common_scripts\utility::flag_init("power_sz2");
+  common_scripts\utility::flag_init("isolated_entry_to_isolated");
   level.cart_train_size = 2;
   level.quest_warp_table = "mp/questWarpValuesIsland.csv";
   level.quest_assert_no_hints = 1;
@@ -178,7 +178,7 @@ get_zombie_door(param_00) {
 assign_collision_handling(param_00, param_01, param_02) {
   param_00.var_A048 = [];
   var_03 = 2;
-  foreach(var_05 in self.var_8301) {
+  foreach(var_05 in self.setclientdvars) {
     if(common_scripts\utility::func_562E(param_01)) {
       param_00 assign_door_collision_node(var_05, 1);
     }
@@ -246,8 +246,8 @@ island_hc_kill_tracking(param_00) {
 }
 
 mute_audio_on_intro() {
-  self method_8626("isl_intro_movie");
-  while(!level.var_3FA6) {
+  self setaltsceneobj("isl_intro_movie");
+  while(!level.gamehasstarted) {
     wait 0.05;
   }
 
@@ -311,7 +311,7 @@ zmb_island_link_revive_ent_to_cart(param_00, param_01) {
 }
 
 zmb_island_cart_on_revive(param_00, param_01, param_02) {
-  if(isDefined(param_00) && maps\mp\_utility::func_57A0(param_00)) {
+  if(isDefined(param_00) && maps\mp\_utility::isreallyalive(param_00)) {
     if(!common_scripts\utility::func_562E(param_00.oncartride)) {
       param_00 unlink();
     }
@@ -622,7 +622,7 @@ attempt_to_play_an_intermission_dialog_event() {
 
 try_play_weapon_nag(param_00) {
   if(common_scripts\utility::func_562E(param_00) || level.var_A980 == 2 || level.var_A980 == 3 || level.var_A980 == 5) {
-    nag_player_about_weapon_state_if_appropriate(common_scripts\utility::func_7A33(["weaponreminder", "weaponreminder2"]));
+    nag_player_about_weapon_state_if_appropriate(common_scripts\utility::random(["weaponreminder", "weaponreminder2"]));
   }
 }
 
@@ -835,7 +835,7 @@ init_island_objectives() {
 }
 
 setup_objective_flags() {
-  common_scripts\utility::func_3C87("spawn_ships_ee_destroyer_attacker");
+  common_scripts\utility::flag_init("spawn_ships_ee_destroyer_attacker");
 }
 
 jump_scare_setup() {
@@ -944,7 +944,7 @@ createperkmachineicon(param_00, param_01, param_02, param_03) {
 initquestscollectibles() {
   var_00 = lib_0557::func_7838("Explore the Beach", "Survive the Beach");
   lib_0557::func_AB8C(var_00);
-  common_scripts\utility::func_3C87("zombie_island_power");
+  common_scripts\utility::flag_init("zombie_island_power");
   lib_0547::func_3C8A("power_sz2", "zombie_island_power");
   lib_0557::func_AB8C("zombie_island_power");
   lib_0557::func_AB8C("flag_ranger_head_taken");

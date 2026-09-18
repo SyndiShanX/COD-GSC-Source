@@ -22,7 +22,7 @@ flare_player_give_flare() {
 
   thread flare_player_throw_monitor();
   self.var_60A0 = 3;
-  self method_831E(var_00);
+  self setoffhandsecondaryclass(var_00);
   lib_0586::func_78C(var_00);
   self setweaponammoclip(var_00, 3);
 }
@@ -86,7 +86,7 @@ flare_handle_effects(param_00, param_01) {
   var_02.burn_duration = 1750;
   var_02.var_3D37 = 16384;
   var_02.var_3F83 = common_scripts\utility::func_8FFC();
-  var_02.var_3F83 method_8449(self);
+  var_02.var_3F83 linktosynchronizedparent(self);
   var_02.var_3F83 show();
   playFXOnTag(common_scripts\utility::func_44F5("signal_flare_zombie"), var_02.var_3F83, "TAG_ORIGIN");
   thread flare_handle_cleanup(var_02);

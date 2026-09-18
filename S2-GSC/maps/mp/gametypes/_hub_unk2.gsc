@@ -83,8 +83,8 @@ func_A90E() {
 
 func_A937() {
   level endon("game_ended");
-  if(isDefined(level.var_744A)) {
-    foreach(var_01 in level.var_744A) {
+  if(isDefined(level.players)) {
+    foreach(var_01 in level.players) {
       var_01 func_7BE9();
     }
   }
@@ -98,8 +98,8 @@ func_A937() {
 
 func_8A3C() {
   level.var_781C = getEnt("quartermaster_npc", "targetname");
-  level.var_781C.var_831A = common_scripts\utility::func_44BD("quartermaster_scripted_node", "targetname");
-  func_772B(level.var_781C.var_831A, "quartermaster_scripted_node");
+  level.var_781C.switchtoweapon = common_scripts\utility::func_44BD("quartermaster_scripted_node", "targetname");
+  func_772B(level.var_781C.switchtoweapon, "quartermaster_scripted_node");
   if(!isDefined(level.var_781C)) {
     return;
   }
@@ -118,8 +118,8 @@ func_8A3C() {
 
 func_8A23() {
   level.var_4BF3 = getEnt("headquarters_npc", "targetname");
-  level.var_4BF3.var_831A = common_scripts\utility::func_44BD("headquarters_scripted_node", "targetname");
-  func_772B(level.var_4BF3.var_831A, "headquarters_scripted_node");
+  level.var_4BF3.switchtoweapon = common_scripts\utility::func_44BD("headquarters_scripted_node", "targetname");
+  func_772B(level.var_4BF3.switchtoweapon, "headquarters_scripted_node");
   if(!isDefined(level.var_4BF3)) {
     return;
   }
@@ -231,12 +231,12 @@ func_8A23() {
     level.var_4BF3.var_0EAC["mp_hub_ro_twitch_a"].var_3F02 = ::maps\mp\gametypes\_hub_unk1::func_83DE;
     level.var_4BF3.var_0EAC["mp_hub_ro_twitch_a"].var_0F5D = [var_05, "twitch_b", var_06, "twitch_b"];
     level.var_4BF3 thread func_71F3();
-    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_01, level.var_4BF3.var_0B42, level.var_4BF3.var_831A, ["idle", "coordinate", "map", "twitch_b"]);
-    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_02, level.var_4BF3.var_0B44, level.var_4BF3.var_831A, ["idle", "twitch_b"]);
-    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_04, level.var_4BF3.var_0B43, level.var_4BF3.var_831A, ["idle", "map"]);
-    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_03, level.var_4BF3.var_0B45, level.var_4BF3.var_831A, ["idle", "twitch_b"]);
-    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_05, level.var_4BF3.var_0B46, level.var_4BF3.var_831A, ["idle", "call", "talking", "twitch_a", "twitch_b"]);
-    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_06, level.var_4BF3.var_0B47, level.var_4BF3.var_831A, ["idle", "call", "talking", "twitch_a", "twitch_b"]);
+    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_01, level.var_4BF3.var_0B42, level.var_4BF3.switchtoweapon, ["idle", "coordinate", "map", "twitch_b"]);
+    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_02, level.var_4BF3.var_0B44, level.var_4BF3.switchtoweapon, ["idle", "twitch_b"]);
+    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_04, level.var_4BF3.var_0B43, level.var_4BF3.switchtoweapon, ["idle", "map"]);
+    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_03, level.var_4BF3.var_0B45, level.var_4BF3.switchtoweapon, ["idle", "twitch_b"]);
+    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_05, level.var_4BF3.var_0B46, level.var_4BF3.switchtoweapon, ["idle", "call", "talking", "twitch_a", "twitch_b"]);
+    thread maps\mp\gametypes\_hub_unk1::func_74AB(var_06, level.var_4BF3.var_0B47, level.var_4BF3.switchtoweapon, ["idle", "call", "talking", "twitch_a", "twitch_b"]);
   } else {
     var_08 = level.var_4BF3.var_0116 + (0, 0, 40);
     level.var_4BF3 setModel("tag_origin");
@@ -275,12 +275,12 @@ func_8A23() {
 
 func_8A07() {
   level.var_1783 = getEnt("blacksmith_npc", "targetname");
-  level.var_1783.var_831A = common_scripts\utility::func_44BD("blacksmith_scripted_node", "targetname");
+  level.var_1783.switchtoweapon = common_scripts\utility::func_44BD("blacksmith_scripted_node", "targetname");
   if(!isDefined(level.var_1783)) {
     return;
   }
 
-  func_772B(level.var_1783.var_831A, "blacksmith_scripted_node");
+  func_772B(level.var_1783.switchtoweapon, "blacksmith_scripted_node");
   level.var_1783.var_5A7E = "spv_hub_gunsmithVendor_kswitch";
   level.var_4F51[level.var_4F51.size] = level.var_1783;
   if(1) {
@@ -390,8 +390,8 @@ func_8A54() {
 
 func_8A1F() {
   level.var_4012 = getEnt("general_npc", "targetname");
-  level.var_4012.var_831A = common_scripts\utility::func_44BD("general_scripted_node", "targetname");
-  func_772B(level.var_4012.var_831A, "general_scripted_node");
+  level.var_4012.switchtoweapon = common_scripts\utility::func_44BD("general_scripted_node", "targetname");
+  func_772B(level.var_4012.switchtoweapon, "general_scripted_node");
   if(!isDefined(level.var_4012)) {
     return;
   }
@@ -508,7 +508,7 @@ func_6B88(param_00, param_01, param_02) {
   }
 
   var_03 = param_01 func_7478(level.var_781C, -6);
-  param_01 method_8626("mp_hub_vendor_mix");
+  param_01 setaltsceneobj("mp_hub_vendor_mix");
   if(isDefined(var_03) && var_03) {
     param_01 thread func_4AE6(level.var_781C);
     param_01 maps\mp\gametypes\_hub_unk1::func_7DF8(0, 0, 0, !param_02, 0);
@@ -535,7 +535,7 @@ func_6B43(param_00, param_01, param_02) {
   }
 
   var_03 = param_01 func_7478(level.var_4BF3);
-  param_01 method_8626("mp_hub_vendor_mix");
+  param_01 setaltsceneobj("mp_hub_vendor_mix");
   if(isDefined(var_03) && var_03) {
     param_01 maps\mp\gametypes\_hub_unk1::func_7DF8(0, 0, 0, 0, 0);
     if(isDefined(level.var_7B46)) {
@@ -562,7 +562,7 @@ func_6AC1(param_00, param_01, param_02) {
   }
 
   var_03 = param_01 func_7478(level.var_1783, -7);
-  param_01 method_8626("mp_hub_vendor_mix");
+  param_01 setaltsceneobj("mp_hub_vendor_mix");
   if(isDefined(var_03) && var_03) {
     param_01 thread func_4AA9(level.var_1783);
     param_01 maps\mp\gametypes\_hub_unk1::func_7DF8(0, 0, 0, 0, 0);
@@ -592,7 +592,7 @@ func_6B55(param_00, param_01) {
 
   var_02 = param_01 func_7478(level.var_5F83);
   param_01 maps\mp\gametypes\_hub_unk1::func_7DF8(0, 0, 0, 0, 0);
-  param_01 method_8626("mp_hub_vendor_mix");
+  param_01 setaltsceneobj("mp_hub_vendor_mix");
   if(isDefined(var_02) && var_02) {
     param_01 thread func_4AD3(level.var_5F83);
     param_01 maps\mp\gametypes\_hub_unk1::func_84DE(["hubFeatureStats", "hubVendors", "vendorVisitTimestamps", "Mail"], function_003E());
@@ -605,7 +605,7 @@ func_6BB5(param_00, param_01) {
     return;
   }
 
-  param_01 method_8626("hub_theater");
+  param_01 setaltsceneobj("hub_theater");
   param_01.var_5733 = 1;
   param_01 maps\mp\gametypes\_hub_unk1::func_870B(1);
   param_01 setclientomnvar("ui_vendor_set_up_ready", 1);
@@ -616,7 +616,7 @@ func_6BB5(param_00, param_01) {
 
 ontheateropenvlonly(param_00, param_01) {
   level endon("game_ended");
-  param_01 method_8626("hub_theater");
+  param_01 setaltsceneobj("hub_theater");
   param_01 lib_0468::func_0A2A("theater");
   param_01 thread handletheatervlonly(level.var_9957);
 }
@@ -627,7 +627,7 @@ func_6B8F(param_00, param_01) {
   param_01 maps\mp\gametypes\_hub_unk1::func_870B(1);
   param_01 setclientomnvar("ui_vendor_set_up_ready", 1);
   param_01 maps\mp\gametypes\_hub_unk1::func_7DF8(0, 0, 0, 0, 0);
-  param_01 method_8626("duck_background_sfx");
+  param_01 setaltsceneobj("duck_background_sfx");
   param_01 thread func_4AE9(param_01);
 }
 
@@ -689,7 +689,7 @@ func_6BCC(param_00, param_01, param_02) {
   }
 
   var_07 = param_01 func_7478(var_03);
-  param_01 method_8626("mp_hub_vendor_mix");
+  param_01 setaltsceneobj("mp_hub_vendor_mix");
   if(isDefined(var_07) && var_07) {
     if(isDefined(var_03.var_3F02)) {
       param_01 thread[[var_03.var_3F02]](var_03);
@@ -707,7 +707,7 @@ func_6BD6(param_00, param_01) {
   }
 
   var_02 = param_01 func_7478(level.var_AC32);
-  param_01 method_8626("mp_hub_vendor_mix");
+  param_01 setaltsceneobj("mp_hub_vendor_mix");
   if(isDefined(var_02) && var_02) {
     param_01 thread func_4B09(level.var_AC32);
     param_01 maps\mp\gametypes\_hub_unk1::func_50F0(["hubFeatureStats", "hubVendors", "zombiesVisits"], 1, undefined, undefined);
@@ -722,7 +722,7 @@ func_6B40(param_00, param_01) {
   }
 
   var_02 = param_01 func_7478(level.var_4012);
-  param_01 method_8626("mp_hub_vendor_mix");
+  param_01 setaltsceneobj("mp_hub_vendor_mix");
   if(isDefined(var_02) && var_02) {
     param_01 maps\mp\gametypes\_hub_unk1::func_7DF8(0, 0, 0, 0, 0);
     param_01 thread func_4AC6(level.var_4012);
@@ -926,7 +926,7 @@ func_4AA9(param_00) {
 
         case 10:
           if(isDefined(self.var_A405)) {
-            self.var_A405 method_805C();
+            self.var_A405 save_undo_buffer();
           }
           break;
 
@@ -948,7 +948,7 @@ func_4AA9(param_00) {
       var_06 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "weaponStats", getweapondisplayname(var_03), "prestigeLevel") + 1;
       var_07 = tablelookuprownum("mp/statstable.csv", 2, var_03);
       thread maps\mp\gametypes\_hud_message::func_A9DD("weapon_prestige", var_07, var_06);
-      foreach(var_09 in level.var_744A) {
+      foreach(var_09 in level.players) {
         switch (var_06) {
           case 1:
             var_0A = var_06 + "st";
@@ -1200,7 +1200,7 @@ func_4AC6(param_00) {
     switch (var_02) {
       case 77:
         var_03 = self.var_012C["prestige"];
-        foreach(var_05 in level.var_744A) {
+        foreach(var_05 in level.players) {
           if(var_05 == self) {
             var_05 iclientprintln(&"HUB_PRESTIGE_CHAT_YOU", &"HUB_YOU", var_03);
             continue;
@@ -1424,7 +1424,7 @@ func_7473(param_00) {
 
     var_01.var_001D = level.var_A409.var_001D + (0, 180, 0);
     var_01 scriptmodelplayanim("mp_hub_foldarms_idle_p");
-    var_01 method_805C();
+    var_01 save_undo_buffer();
     var_01 showtoclient(self);
     self.var_53DA = var_01;
     self.var_53DB = 1;
@@ -1493,7 +1493,7 @@ func_7478(param_00, param_01) {
     self.var_A407 = spawn("script_model", level.var_A408.var_0116);
     self.var_A407 setModel(param_00.var_1739);
     self.var_A407.var_001D = level.var_A408.var_001D;
-    self.var_A407 method_805C();
+    self.var_A407 save_undo_buffer();
     self.var_A407 showtoclient(self);
   }
 
@@ -1503,7 +1503,7 @@ func_7478(param_00, param_01) {
     }
 
     var_03.var_9FEB = param_00.var_9FEB;
-    var_03 method_805C();
+    var_03 save_undo_buffer();
     var_03 showtoclient(self);
     self.var_A405 = var_03;
   } else {
@@ -1607,7 +1607,7 @@ func_74AC(param_00, param_01) {
         break;
       }
 
-      var_02 = common_scripts\utility::func_7A33(param_00.var_0ED2["allTwitch"]);
+      var_02 = common_scripts\utility::random(param_00.var_0ED2["allTwitch"]);
       param_00 scriptmodelplayanim(var_02, "animEnded");
       param_00 waittillmatch("animEnded");
     }
@@ -1656,7 +1656,7 @@ func_7200(param_00, param_01, param_02, param_03) {
 func_71F3() {
   level endon("game_ended");
   self endon("fake_prestige");
-  if(!isDefined(self.var_831A)) {
+  if(!isDefined(self.switchtoweapon)) {
     return;
   }
 
@@ -1664,7 +1664,7 @@ func_71F3() {
     for(var_00 = 0; var_00 < self.var_0ED2["vendor"].size; var_00++) {
       for(var_01 = 1; var_01 < self.var_0ED2["vendor"][var_00].size; var_01++) {
         for(var_02 = 0; var_02 < 2; var_02++) {
-          self method_8495(self.var_0ED2["vendor"][var_00][0], self.var_831A.var_0116, self.var_831A.var_001D, "animEnded");
+          self method_8495(self.var_0ED2["vendor"][var_00][0], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D, "animEnded");
           foreach(var_04 in self.var_6DFB) {
             if(!isDefined(var_04) || !isDefined(self.var_0ED2[var_04.var_0109])) {
               continue;
@@ -1676,17 +1676,17 @@ func_71F3() {
 
             if(isDefined(var_04.var_5717) && !var_04.var_5717) {
               var_04.var_5717 = 1;
-              var_04 method_8495(self.var_0ED2[var_04.var_0109][var_00][0], self.var_831A.var_0116, self.var_831A.var_001D);
+              var_04 method_8495(self.var_0ED2[var_04.var_0109][var_00][0], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D);
               continue;
             }
 
-            var_04 method_8495(self.var_0ED2[var_04.var_0109][var_00][0], self.var_831A.var_0116, self.var_831A.var_001D);
+            var_04 method_8495(self.var_0ED2[var_04.var_0109][var_00][0], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D);
           }
 
           self waittillmatch("end", "animEnded");
         }
 
-        self method_8495(self.var_0ED2["vendor"][var_00][var_01], self.var_831A.var_0116, self.var_831A.var_001D, "animEnded");
+        self method_8495(self.var_0ED2["vendor"][var_00][var_01], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D, "animEnded");
         foreach(var_04 in self.var_6DFB) {
           if(!isDefined(var_04)) {
             continue;
@@ -1700,7 +1700,7 @@ func_71F3() {
             var_04.var_5717 = 0;
           }
 
-          var_04 method_8495(self.var_0ED2[var_04.var_0109][var_00][var_01], self.var_831A.var_0116, self.var_831A.var_001D);
+          var_04 method_8495(self.var_0ED2[var_04.var_0109][var_00][var_01], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D);
         }
 
         if(isDefined(self.var_0EAC[self.var_0ED2["vendor"][var_00][var_01]])) {
@@ -1715,7 +1715,7 @@ func_71F3() {
 
 func_4AE5() {
   level endon("game_ended");
-  if(!isDefined(self.var_831A)) {
+  if(!isDefined(self.switchtoweapon)) {
     return;
   }
 
@@ -1723,7 +1723,7 @@ func_4AE5() {
     self waittill("startCrateUnloadEvent");
     var_00 = spawn("script_model", (0, 0, 0));
     var_00 setModel("hub_lootcrate_b");
-    var_00 method_8495(self.var_2760[1][0], self.var_831A.var_0116, self.var_831A.var_001D);
+    var_00 method_8495(self.var_2760[1][0], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D);
     for(var_01 = 2; var_01 < self.var_2761.size; var_01++) {
       var_02 = spawn("script_model", (0, 0, 0));
       if(self.var_2761[var_01] == "ambient_costume") {
@@ -1732,7 +1732,7 @@ func_4AE5() {
         var_02 setModel(self.var_2761[var_01]);
       }
 
-      var_02 method_8495(self.var_2760[var_01], self.var_831A.var_0116, self.var_831A.var_001D, "animEnded");
+      var_02 method_8495(self.var_2760[var_01], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D, "animEnded");
       var_02 thread maps\mp\gametypes\_hub_unk1::func_2DD4("animEnded");
       if(self.var_2761[var_01] == "vehicle_usa_trans_cckw_base_hub") {
         var_02 lib_0378::func_8D74("truck_unload");
@@ -1740,7 +1740,7 @@ func_4AE5() {
     }
 
     self waittill("startCrateLoadEvent");
-    var_00 method_8495(self.var_2749[4], self.var_831A.var_0116, self.var_831A.var_001D);
+    var_00 method_8495(self.var_2749[4], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D);
     for(var_01 = 1; var_01 < self.var_274A.size; var_01++) {
       var_02 = spawn("script_model", (0, 0, 0));
       if(self.var_274A[var_01] == "ambient_costume") {
@@ -1749,7 +1749,7 @@ func_4AE5() {
         var_02 setModel(self.var_274A[var_01]);
       }
 
-      var_02 method_8495(self.var_2749[var_01], self.var_831A.var_0116, self.var_831A.var_001D, "animEnded");
+      var_02 method_8495(self.var_2749[var_01], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D, "animEnded");
       var_02 thread maps\mp\gametypes\_hub_unk1::func_2DD4("animEnded");
       if(self.var_274A[var_01] == "vehicle_usa_trans_cckw_base_hub") {
         var_02 lib_0378::func_8D74("truck_load");
@@ -1760,24 +1760,24 @@ func_4AE5() {
 
 func_4AB4(param_00, param_01) {
   level endon("game_ended");
-  if(!isDefined(self.var_831A)) {
+  if(!isDefined(self.switchtoweapon)) {
     return;
   }
 
   for(;;) {
-    param_00 method_8495(self.var_0ED2["crateStealer"][0][0], self.var_831A.var_0116, self.var_831A.var_001D);
-    param_01 method_8495(self.var_0ED2["crateToSteal"][0][0], self.var_831A.var_0116, self.var_831A.var_001D);
+    param_00 method_8495(self.var_0ED2["crateStealer"][0][0], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D);
+    param_01 method_8495(self.var_0ED2["crateToSteal"][0][0], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D);
     param_00 waittill("startCrateStealEvent");
-    param_00 method_8495(self.var_0ED2["crateStealer"][0][1], self.var_831A.var_0116, self.var_831A.var_001D);
-    param_01 method_8495(self.var_0ED2["crateToSteal"][0][1], self.var_831A.var_0116, self.var_831A.var_001D);
+    param_00 method_8495(self.var_0ED2["crateStealer"][0][1], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D);
+    param_01 method_8495(self.var_0ED2["crateToSteal"][0][1], self.switchtoweapon.var_0116, self.switchtoweapon.var_001D);
     self waittillmatch("end", "animEnded");
   }
 }
 
 func_771D(param_00, param_01) {
   level endon("game_ended");
-  if(isDefined(level.var_744A) && isDefined(level.var_744A[0]) && level.var_744A[0].var_0109 == "SHG-ABurt") {
-    level.var_744A[0] iclientprintln(param_00 + " playing: " + param_01);
+  if(isDefined(level.players) && isDefined(level.players[0]) && level.players[0].var_0109 == "SHG-ABurt") {
+    level.players[0] iclientprintln(param_00 + " playing: " + param_01);
   }
 }
 
@@ -1847,7 +1847,7 @@ func_8A47(param_00) {
     }
 
     var_04.var_0109 = var_03.var_0109;
-    var_04 method_805C();
+    var_04 save_undo_buffer();
     var_04 showtoclient(param_00);
     var_01[var_01.size] = var_04;
   }
@@ -2171,7 +2171,7 @@ func_1157(param_00) {
   if(!isDefined(self.var_76B2)) {
     self.var_76B2 = spawn("script_model", self.var_0116);
     self.var_76B2 setModel("usa_ctf_flag_physics_attach");
-    self.var_76B2 method_8449(self, "J_spine4", (0, 0, 0), (0, 0, 0));
+    self.var_76B2 linktosynchronizedparent(self, "J_spine4", (0, 0, 0), (0, 0, 0));
     self.var_76B2 method_805B();
     thread func_2E41(self.var_76B2);
   }

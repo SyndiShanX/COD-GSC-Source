@@ -8,7 +8,7 @@ func_194E() {
   var_01 = [];
   var_02 = 0;
   foreach(var_04 in level.var_1913) {
-    var_00[var_02] = common_scripts\utility::func_7A33(var_04.var_1B49).origin;
+    var_00[var_02] = common_scripts\utility::random(var_04.var_1B49).origin;
     var_01[var_02] = "zone" + var_04.label;
     var_02++;
   }
@@ -117,7 +117,7 @@ func_194D(param_00, param_01, param_02, param_03) {
 
 func_192E(param_00, param_01) {
   if(param_01.classname == "trigger_radius") {
-    var_02 = getnodesinradius(param_01.origin, param_01.var_14F, 0, 100);
+    var_02 = getnodesinradius(param_01.origin, param_01.radius, 0, 100);
     var_03 = common_scripts\utility::func_F94(var_02, param_00);
     if(var_03.size > 0) {
       param_00 = common_scripts\utility::func_F73(param_00, var_03);
@@ -321,7 +321,7 @@ func_19DA() {
           }
 
           if(!var_09 && var_08.size > 0) {
-            common_scripts\utility::func_7A33(var_08) func_19E9("defender");
+            common_scripts\utility::random(var_08) func_19E9("defender");
           }
         }
 
@@ -341,7 +341,7 @@ func_19DA() {
           }
 
           if(!var_0E && var_0D.size > 0) {
-            common_scripts\utility::func_7A33(var_0D) func_19E9("attacker");
+            common_scripts\utility::random(var_0D) func_19E9("attacker");
           }
         }
       }
@@ -425,7 +425,7 @@ func_1E4B(param_00) {
 
   var_01.var_206B = (var_01.var_61B1[0] + var_01.var_605E[0] / 2, var_01.var_61B1[1] + var_01.var_605E[1] / 2, var_01.var_61B1[2] + var_01.var_605E[2] / 2);
   var_01.var_4954 = (var_01.var_605E[0] - var_01.var_206B[0], var_01.var_605E[1] - var_01.var_206B[1], var_01.var_605E[2] - var_01.var_206B[2]);
-  var_01.var_14F = max(var_01.var_4954[0], var_01.var_4954[1]);
+  var_01.radius = max(var_01.var_4954[0], var_01.var_4954[1]);
   return var_01;
 }
 
@@ -509,7 +509,7 @@ func_41FB(param_00, param_01) {
       continue;
     }
 
-    if(maps\mp\_utility::func_57A0(var_04) && maps\mp\_utility::func_5800(var_04) && var_04.team == param_00) {
+    if(maps\mp\_utility::isreallyalive(var_04) && maps\mp\_utility::func_5800(var_04) && var_04.team == param_00) {
       if(!isDefined(param_01) || param_01 && isai(var_04) && isDefined(var_04.var_7ECA)) {
         var_02[var_02.size] = var_04;
       }
@@ -529,7 +529,7 @@ func_40DF(param_00, param_01) {
 
     var_03 = self botgetdifficultysetting("strategyLevel") * 0.3;
     var_04 = self botgetdifficultysetting("strategyLevel") + 1 * 0.15;
-    var_05 = common_scripts\utility::func_F92(param_00.var_1B49);
+    var_05 = common_scripts\utility::array_randomize(param_00.var_1B49);
     foreach(var_07 in var_05) {
       if(!common_scripts\utility::func_F79(var_02, var_07)) {
         var_02[var_02.size] = var_07;
@@ -544,7 +544,7 @@ func_40DF(param_00, param_01) {
       return var_02[1];
     }
 
-    return common_scripts\utility::func_7A33(var_02);
+    return common_scripts\utility::random(var_02);
   }
 
   return param_00.var_1B49[0];
@@ -554,7 +554,7 @@ func_40DE(param_00) {
   var_01 = self method_8382(param_00.var_1B49, "node_hide_anywhere", "ignore_occupancy");
   var_02 = self botgetdifficultysetting("strategyLevel") * 0.3;
   var_03 = self botgetdifficultysetting("strategyLevel") + 1 * 0.15;
-  var_04 = common_scripts\utility::func_F92(param_00.var_1B49);
+  var_04 = common_scripts\utility::array_randomize(param_00.var_1B49);
   foreach(var_06 in var_04) {
     if(!common_scripts\utility::func_F79(var_01, var_06)) {
       var_01[var_01.size] = var_06;
@@ -569,7 +569,7 @@ func_40DE(param_00) {
     return var_01[1];
   }
 
-  return common_scripts\utility::func_7A33(var_01);
+  return common_scripts\utility::random(var_01);
 }
 
 func_1911(param_00, param_01, param_02, param_03) {

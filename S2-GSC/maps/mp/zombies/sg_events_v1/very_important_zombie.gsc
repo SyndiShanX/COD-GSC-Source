@@ -32,8 +32,8 @@ basic_assassinate_skip_cleanup(param_00) {
 basic_assassinate_model_swap() {
   self detachall();
   self setModel("ger_m_valtunic_r1");
-  self.var_4BF2 = "zom_head_fdr04_org1";
-  self attach(self.var_4BF2);
+  self.headmodel = "zom_head_fdr04_org1";
+  self attach(self.headmodel);
   self.var_4B5A = 1;
   self.var_4B6E = 0;
   self.var_4CAA = "ger_alfakey_valhat_r1c1";
@@ -101,7 +101,7 @@ basic_vip_run(param_00, param_01) {
     var_07.ignoreforcedzombietype = 1;
   }
 
-  var_05 = common_scripts\utility::func_F92(var_05);
+  var_05 = common_scripts\utility::array_randomize(var_05);
   var_09 = 0;
   var_0A = 1;
   var_0B = 0;
@@ -242,7 +242,7 @@ basic_vip_move_to_destination(param_00, param_01) {
     }
   }
 
-  common_scripts\utility::func_3C8F("flag_sg_VIP_complete");
+  common_scripts\utility::flag_set("flag_sg_VIP_complete");
   var_02.exploder_godmode = 0;
   var_02 lib_0563::func_AB99(undefined, undefined, var_02.health + 1, undefined, "MOD_BULLET", "m1911_zm", var_02.origin, (0, 0, 0), "tag_origin", 0, "tag_weapon");
   var_02 endon("death");
@@ -311,7 +311,7 @@ basic_vip_waitfor_done_death_or_timeout(param_00, param_01, param_02) {
 basic_vip_timeout_listener(param_00) {
   level endon("sg_VIP_finished");
   level common_scripts\utility::waittill_any("sg_obj_timeout", "round complete");
-  common_scripts\utility::func_3C8F("flag_sg_VIP_timeout");
+  common_scripts\utility::flag_set("flag_sg_VIP_timeout");
   param_00 lib_0563::func_AB99(level.player, level.player, 1000, undefined, "MOD_BULLET", "m1911_zm", param_00.origin, (0, 0, 0), "tag_origin", 0, "tag_weapon");
 }
 
@@ -322,7 +322,7 @@ basic_vip_kill_listener(param_00) {
     wait 0.05;
   }
 
-  common_scripts\utility::func_3C8F("flag_sg_VIP_killed");
+  common_scripts\utility::flag_set("flag_sg_VIP_killed");
 }
 
 any_vib_alive(param_00) {
@@ -336,9 +336,9 @@ any_vib_alive(param_00) {
 }
 
 basic_vip_init() {
-  common_scripts\utility::func_3C87("flag_sg_VIP_complete");
-  common_scripts\utility::func_3C87("flag_sg_VIP_killed");
-  common_scripts\utility::func_3C87("flag_sg_VIP_timeout");
+  common_scripts\utility::flag_init("flag_sg_VIP_complete");
+  common_scripts\utility::flag_init("flag_sg_VIP_killed");
+  common_scripts\utility::flag_init("flag_sg_VIP_timeout");
 }
 
 basic_vip_clear() {

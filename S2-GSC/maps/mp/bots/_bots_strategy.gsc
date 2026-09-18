@@ -6,7 +6,7 @@
 func_19A0() {
   var_00 = func_199F(self.var_28C8);
   if(isDefined(var_00) && var_00.size > 0) {
-    return common_scripts\utility::func_7A33(var_00).origin;
+    return common_scripts\utility::random(var_00).origin;
   }
 
   return undefined;
@@ -101,7 +101,7 @@ func_1AD0(param_00, param_01, param_02, param_03, param_04) {
     }
 
     if(var_06.size > 0) {
-      var_05 = common_scripts\utility::func_7A33(var_06);
+      var_05 = common_scripts\utility::random(var_06);
       var_0B = getnodesinradius(var_05.origin, 300, 50);
       var_0C = [];
       foreach(var_0E in var_0B) {
@@ -737,7 +737,7 @@ func_2C82() {
 
     var_1B = [];
     for(var_0E = 0; var_0E < var_1A.size; var_0E++) {
-      if(!common_scripts\utility::func_AA4A(self.origin, self getplayerangles(), var_1A[var_0E].origin, 0)) {
+      if(!common_scripts\utility::within_fov(self.origin, self getplayerangles(), var_1A[var_0E].origin, 0)) {
         continue;
       }
 
@@ -833,7 +833,7 @@ func_62F2() {
       var_02 = self method_8375();
       for(var_03 = 0; var_03 < self.var_5E5F.size; var_03++) {
         if(function_01F4(var_01, self.var_5E5F[var_03].node, 1)) {
-          var_04 = common_scripts\utility::func_AA4A(self.origin, self getplayerangles(), self.var_5E5F[var_03].origin, var_02);
+          var_04 = common_scripts\utility::within_fov(self.origin, self getplayerangles(), self.var_5E5F[var_03].origin, var_02);
           var_05 = !var_04 || self.var_5E5F[var_03].var_3E73 < 17;
           if(var_05 && distancesquared(self.origin, self.var_5E5F[var_03].origin) < var_00) {
             var_04 = 1;
@@ -1402,7 +1402,7 @@ func_3B71() {
 
 func_1A0F(param_00, param_01) {
   if(self.var_19AC == "protect_zone") {
-    self.var_28C7 = common_scripts\utility::func_7A33(self.var_19A8).origin;
+    self.var_28C7 = common_scripts\utility::random(self.var_19A8).origin;
     return;
   }
 
@@ -1553,7 +1553,7 @@ func_1A85(param_00, param_01, param_02, param_03) {
     }
   }
 
-  var_04.var_7734 = param_02;
+  var_04.priority = param_02;
   var_04.var_68FB = param_03.var_68FB;
   var_04.var_4809 = param_03.var_81C9;
   var_04.var_480A = param_03.var_81CA;
@@ -1571,7 +1571,7 @@ func_1A85(param_00, param_01, param_02, param_03) {
   var_04.var_6C13 = param_03.var_6C13;
   var_04.var_23C7 = param_03.var_23C7;
   for(var_05 = 0; var_05 < self.var_959E.size; var_05++) {
-    if(var_04.var_7734 > self.var_959E[var_05].var_7734) {
+    if(var_04.priority > self.var_959E[var_05].priority) {
       break;
     }
   }

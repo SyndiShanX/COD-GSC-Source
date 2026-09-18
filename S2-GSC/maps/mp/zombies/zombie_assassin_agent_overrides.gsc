@@ -34,7 +34,7 @@ onassassinzombiechooseturn() {
                 self.var_1E22.var_266C = var_05;
                 self.var_1E22.var_266F = var_06;
                 var_0B = self[[maps / mp / agents / _agent_utility::func_A59("get_action_params")]]();
-                var_0C = "turn_" + self.var_108;
+                var_0C = "turn_" + self.vectortoangles;
                 self.var_1E22.var_6748 = lib_054D::func_9031(var_0C, var_0B, var_06);
                 var_0C = var_0C + "_quick";
                 self.var_1E22.var_789D = lib_054D::func_9031(var_0C, var_0B, var_06);
@@ -86,7 +86,7 @@ nocornerturnassassin() {
   }
 
   var_05 = self[[maps / mp / agents / _agent_utility::func_A59("get_action_params")]]();
-  var_06 = "turn_" + self.var_108;
+  var_06 = "turn_" + self.vectortoangles;
   var_07 = maps / mp / agents / _scripted_agent_anim_util::func_87C(var_06, var_05);
   if(!isDefined(var_07)) {
     return;

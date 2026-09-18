@@ -8,28 +8,28 @@ main(param_00, param_01, param_02) {
 }
 
 func_764D() {
-  level.var_611["p47_dmg_impact"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_impacts_lrg");
-  level.var_611["p47_dmg_impact_notrail"] = loadfx("vfx/vehicle/fighter_dmg_impact_notrail");
-  level.var_611["p47_dmg_light"] = loadfx("vfx/vehicle/p47_dmg_light");
-  level.var_611["p47_dmg_heavy"] = loadfx("vfx/vehicle/p47_dmg_heavy");
-  level.var_611["p47_contrail"] = loadfx("vfx/vehicle/p47_contrail");
-  level.var_611["p47_wing_evap"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_p47_wing_evap");
-  level.var_611["p47_exhaust"] = loadfx("vfx/vehicle/p47_exhaust");
-  level.var_611["bf109_wing_evap"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_wing_evap");
-  level.var_611["bf109_exhaust"] = loadfx("vfx/vehicle/p47_exhaust");
-  level.var_611["bf109_contrail_ext_vel"] = loadfx("vfx/vehicle/p47_contrail_ext_vel");
+  level._effect["p47_dmg_impact"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_impacts_lrg");
+  level._effect["p47_dmg_impact_notrail"] = loadfx("vfx/vehicle/fighter_dmg_impact_notrail");
+  level._effect["p47_dmg_light"] = loadfx("vfx/vehicle/p47_dmg_light");
+  level._effect["p47_dmg_heavy"] = loadfx("vfx/vehicle/p47_dmg_heavy");
+  level._effect["p47_contrail"] = loadfx("vfx/vehicle/p47_contrail");
+  level._effect["p47_wing_evap"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_p47_wing_evap");
+  level._effect["p47_exhaust"] = loadfx("vfx/vehicle/p47_exhaust");
+  level._effect["bf109_wing_evap"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_wing_evap");
+  level._effect["bf109_exhaust"] = loadfx("vfx/vehicle/p47_exhaust");
+  level._effect["bf109_contrail_ext_vel"] = loadfx("vfx/vehicle/p47_contrail_ext_vel");
   if(getdvarint("fighter_firing_mode") == 1) {
-    level.var_611["p47_muzzle01"] = loadfx("vfx/vehicle/p47_muzzle01");
-    level.var_611["p47_muzzle02"] = loadfx("vfx/vehicle/p47_muzzle02");
+    level._effect["p47_muzzle01"] = loadfx("vfx/vehicle/p47_muzzle01");
+    level._effect["p47_muzzle02"] = loadfx("vfx/vehicle/p47_muzzle02");
   }
 
-  level.var_611["p47_death"] = loadfx("vfx/scorestreaks/ss_fighter_plane_death");
-  level.var_611["20mm_metal_impact_1"] = loadfx("vfx/weaponimpact/20mm_metal_impact_1");
-  level.var_611["p47_dmg_impact_ext_vel"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_spark_impact_rnr");
-  level.var_611["p47_contrail_ext_vel"] = loadfx("vfx/vehicle/p47_contrail_ext_vel");
+  level._effect["p47_death"] = loadfx("vfx/scorestreaks/ss_fighter_plane_death");
+  level._effect["20mm_metal_impact_1"] = loadfx("vfx/weaponimpact/20mm_metal_impact_1");
+  level._effect["p47_dmg_impact_ext_vel"] = loadfx("vfx/map/mp_raid_bomber/mp_raid_fighter_spark_impact_rnr");
+  level._effect["p47_contrail_ext_vel"] = loadfx("vfx/vehicle/p47_contrail_ext_vel");
   if(getdvarint("fighter_firing_mode") == 1) {
-    level.var_611["p47_muzzle01_ext_vel"] = loadfx("vfx/vehicle/p47_muzzle01_ext_vel");
-    level.var_611["p47_muzzle02_ext_vel"] = loadfx("vfx/vehicle/p47_muzzle02_ext_vel");
+    level._effect["p47_muzzle01_ext_vel"] = loadfx("vfx/vehicle/p47_muzzle01_ext_vel");
+    level._effect["p47_muzzle02_ext_vel"] = loadfx("vfx/vehicle/p47_muzzle02_ext_vel");
   }
 }
 
@@ -199,12 +199,12 @@ func_6DB8() {
     var_04 = 9;
     if(self.var_29B1.size < var_04) {
       var_0B = spawn_tag_origin_internal();
-      var_0B.var_3F2F = var_02;
+      var_0B.fx = var_02;
       var_0B.origin = var_08;
       var_0B.angles = self gettagangles(self.var_9BDD);
       var_0B linkTo(self, self.var_9BDD);
       self.var_29B1[self.var_29B1.size] = var_0B;
-      playFXOnTag(var_0B.var_3F2F, var_0B, "tag_origin");
+      playFXOnTag(var_0B.fx, var_0B, "tag_origin");
       if(var_03 > 0) {
         thread func_6DB9(var_03, var_0B);
       }
@@ -217,7 +217,7 @@ func_6DB7() {
   if(isDefined(self.var_29B1)) {
     foreach(var_01 in self.var_29B1) {
       if(isDefined(var_01)) {
-        stopFXOnTag(var_01.var_3F2F, var_01, "tag_origin");
+        stopFXOnTag(var_01.fx, var_01, "tag_origin");
         var_01 delete();
       }
     }
@@ -229,7 +229,7 @@ func_6DB7() {
 func_6DB9(param_00, param_01) {
   wait(param_00);
   if(isDefined(param_01) && isDefined(self) && isDefined(self.var_29B1)) {
-    stopFXOnTag(param_01.var_3F2F, param_01, "tag_origin");
+    stopFXOnTag(param_01.fx, param_01, "tag_origin");
     self.var_29B1 = common_scripts\utility::func_F93(self.var_29B1, param_01);
   }
 
@@ -381,7 +381,7 @@ fx_speed_handler() {
     var_02 = var_00 getnormalizedmovement()[0];
     if(var_02 >= 0.5) {
       if(!var_01) {
-        playfxontagforclients(level.var_611["mp_raid_bomber_speedup"], self, self.var_9BDD, var_00);
+        playfxontagforclients(level._effect["mp_raid_bomber_speedup"], self, self.var_9BDD, var_00);
         var_01 = 1;
       }
 
@@ -389,7 +389,7 @@ fx_speed_handler() {
     }
 
     if(var_01) {
-      function_0294(level.var_611["mp_raid_bomber_speedup"], self, self.var_9BDD, var_00);
+      function_0294(level._effect["mp_raid_bomber_speedup"], self, self.var_9BDD, var_00);
       var_01 = 0;
     }
 

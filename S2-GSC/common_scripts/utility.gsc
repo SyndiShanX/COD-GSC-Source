@@ -1102,7 +1102,7 @@ func_51D1() {
   level.var_3C92 func_10DA();
 }
 
-func_3C87(param_00) {
+flag_init(param_00) {
   if(!isDefined(level.var_3C77)) {
     func_51D1();
   }
@@ -1139,7 +1139,7 @@ func_57EF(param_00, param_01) {
   return func_57E9(param_00, param_01, param_00.size - param_01.size, param_00.size);
 }
 
-func_3C8F(param_00, param_01) {
+flag_set(param_00, param_01) {
   level.var_3C77[param_00] = 1;
   func_85AF(param_00);
   if(isDefined(param_01)) {
@@ -1182,7 +1182,7 @@ func_3C7B(param_00, param_01) {
   level notify(param_00);
 }
 
-func_3CA9(param_00) {
+flag_waitopen(param_00) {
   var_01 = undefined;
   while(func_3C77(param_00)) {
     var_01 = undefined;
@@ -1549,7 +1549,7 @@ func_2798(param_00) {
   var_01 = strtok(param_00, " ");
   for(var_02 = 0; var_02 < var_01.size; var_02++) {
     if(!isDefined(level.var_3C77[var_01[var_02]])) {
-      func_3C87(var_01[var_02]);
+      flag_init(var_01[var_02]);
     }
   }
 
@@ -1648,7 +1648,7 @@ func_947B() {
   level.var_947C["targetname"] = [];
   level.var_947C["script_noteworthy"] = [];
   level.var_947C["script_linkname"] = [];
-  foreach(var_01 in level.var_9478) {
+  foreach(var_01 in level.struct) {
     func_096C(var_01);
   }
 }
@@ -2137,7 +2137,7 @@ func_2CBE(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 }
 
 func_2CBF(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A) {
-  if(func_57D7()) {
+  if(issp()) {
     self endon("death");
     self endon("stop_delay_call");
   }
@@ -2407,12 +2407,12 @@ func_6755(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   [[param_00]]();
 }
 
-func_57D7() {
-  if(!isDefined(level.var_57D7)) {
-    level.var_57D7 = !string_starts_with(getDvar("1673"), "mp_");
+issp() {
+  if(!isDefined(level.issp)) {
+    level.issp = !string_starts_with(getDvar("1673"), "mp_");
   }
 
-  return level.var_57D7;
+  return level.issp;
 }
 
 func_57D8() {
@@ -2719,7 +2719,7 @@ func_33A0(param_00, param_01, param_02, param_03) {
 
 func_41F0() {
   var_00 = [];
-  if(isDefined(self.var_81EF)) {
+  if(isDefined(self.script_exploder)) {
     var_01 = func_41F3();
     for(var_02 = 0; var_02 < var_01.size; var_02++) {
       var_03 = func_46B7(var_01[var_02], "script_linkname");
@@ -2734,7 +2734,7 @@ func_41F0() {
 
 func_41ED() {
   var_00 = [];
-  if(isDefined(self.var_81EF)) {
+  if(isDefined(self.script_exploder)) {
     var_01 = func_41F3();
     foreach(var_03 in var_01) {
       var_04 = getEntArray(var_03, "script_linkname");
@@ -2749,7 +2749,7 @@ func_41ED() {
 
 func_41EE() {
   var_00 = [];
-  if(isDefined(self.var_81EF)) {
+  if(isDefined(self.script_exploder)) {
     var_01 = func_41F3();
     foreach(var_03 in var_01) {
       var_04 = getnodearray(var_03, "script_linkname");
@@ -2764,7 +2764,7 @@ func_41EE() {
 
 func_41F2() {
   var_00 = [];
-  if(isDefined(self.var_81EF)) {
+  if(isDefined(self.script_exploder)) {
     var_01 = func_41F3();
     foreach(var_03 in var_01) {
       var_04 = function_01DC(var_03, "script_linkname");
@@ -2788,7 +2788,7 @@ func_41F1() {
 }
 
 func_41F3() {
-  return strtok(self.var_81EF, " ");
+  return strtok(self.script_exploder, " ");
 }
 
 func_7F77(param_00, param_01, param_02, param_03, param_04) {
@@ -2927,11 +2927,11 @@ func_339C(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 }
 
 func_44F5(param_00) {
-  return level.var_611[param_00];
+  return level._effect[param_00];
 }
 
 func_3F6F(param_00) {
-  return isDefined(level.var_611[param_00]);
+  return isDefined(level._effect[param_00]);
 }
 
 func_770A(param_00, param_01) {
@@ -3074,7 +3074,7 @@ func_0613(param_00, param_01) {
   self notify("WeaponDetonateDisabled", param_00);
 }
 
-func_7A33(param_00) {
+random(param_00) {
   var_01 = [];
   foreach(var_03 in param_00) {
     var_01[var_01.size] = var_03;
@@ -3210,8 +3210,8 @@ func_56C3() {
   return isDefined(self.var_75);
 }
 
-func_6F21() {
-  common_scripts\_createfx::func_93CD();
+pauseeffect() {
+  common_scripts\_createfx::stop_fx_looper();
 }
 
 func_0894() {
@@ -3228,7 +3228,7 @@ func_4375(param_00) {
     return var_01;
   }
 
-  if(func_57D7()) {
+  if(issp()) {
     var_01 = [[level.var_45B4]](param_00, "targetname");
     if(isDefined(var_01)) {
       return var_01;
@@ -3252,7 +3252,7 @@ func_424D(param_00) {
     return var_01;
   }
 
-  if(func_57D7()) {
+  if(issp()) {
     var_01 = [[level.var_45B4]](param_00, "script_noteworthy");
     if(isDefined(var_01)) {
       return var_01;
@@ -3325,7 +3325,7 @@ func_5EDF(param_00, param_01, param_02, param_03, param_04) {
     param_02 = undefined;
   }
 
-  self.var_A265["snd_ent"] = func_3F50(param_00, param_01);
+  self.v["snd_ent"] = func_3F50(param_00, param_01);
   if(isDefined(param_03)) {
     thread func_5EE9(param_03);
   }
@@ -3380,14 +3380,14 @@ func_3F50(param_00, param_01) {
 }
 
 func_3F51() {
-  if(isDefined(self) && isDefined(self.var_A265["snd_ent"])) {
-    self.var_A265["snd_ent"] method_863F(0.05);
-    self.var_A265["snd_ent"] = undefined;
+  if(isDefined(self) && isDefined(self.v["snd_ent"])) {
+    self.v["snd_ent"] method_863F(0.05);
+    self.v["snd_ent"] = undefined;
   }
 }
 
 func_5EE9(param_00) {
-  var_01 = self.var_A265["snd_ent"];
+  var_01 = self.v["snd_ent"];
   self endon("death");
   self waittill(param_00);
   if(isDefined(var_01)) {
@@ -3396,21 +3396,21 @@ func_5EE9(param_00) {
 }
 
 func_2814(param_00) {
-  var_01 = common_scripts\_createfx::func_27E5("loopfx", param_00);
-  var_01.var_A265["delay"] = common_scripts\_createfx::func_4566();
+  var_01 = common_scripts\_createfx::createeffect("loopfx", param_00);
+  var_01.v["delay"] = common_scripts\_createfx::getloopeffectdelaydefault();
   return var_01;
 }
 
 func_281B(param_00) {
-  var_01 = common_scripts\_createfx::func_27E5("oneshotfx", param_00);
-  var_01.var_A265["delay"] = common_scripts\_createfx::func_45D9();
+  var_01 = common_scripts\_createfx::createeffect("oneshotfx", param_00);
+  var_01.v["delay"] = common_scripts\_createfx::getoneshoteffectdelaydefault();
   return var_01;
 }
 
-func_27E7(param_00) {
-  var_01 = common_scripts\_createfx::func_27E5("exploder", param_00);
-  var_01.var_A265["delay"] = common_scripts\_createfx::func_44D0();
-  var_01.var_A265["exploder_type"] = "normal";
+createexploder(param_00) {
+  var_01 = common_scripts\_createfx::createeffect("exploder", param_00);
+  var_01.v["delay"] = common_scripts\_createfx::getexploderdelaydefault();
+  var_01.v["exploder_type"] = "normal";
   return var_01;
 }
 
@@ -3455,11 +3455,11 @@ func_7153(param_00, param_01) {
   if(isDefined(param_01)) {
     var_02.origin = self.origin + param_01;
     var_02.angles = self.angles;
-    var_02 method_8449(self);
+    var_02 linktosynchronizedparent(self);
   } else {
     var_02.origin = self.origin;
     var_02.angles = self.angles;
-    var_02 method_8449(self);
+    var_02 linktosynchronizedparent(self);
   }
 
   var_02 method_861D(param_00);
@@ -3554,7 +3554,7 @@ func_A039(param_00) {
   var_01 notify("unlocked");
 }
 
-func_4381() {
+get_template_level() {
   var_00 = level.script;
   if(isDefined(level.var_98DC)) {
     var_00 = level.var_98DC;
@@ -3694,7 +3694,7 @@ func_091F(param_00, param_01) {
   level.var_2E1E[param_00] = param_01;
 }
 
-func_AA4A(param_00, param_01, param_02, param_03) {
+within_fov(param_00, param_01, param_02, param_03) {
   var_04 = vectorNormalize(param_02 - param_00);
   var_05 = anglesToForward(param_01);
   var_06 = vectordot(var_05, var_04);
@@ -3728,7 +3728,7 @@ func_7237(param_00, param_01, param_02) {
   }
 
   param_00.var_7453[var_03] = var_04;
-  if(!func_AA4A(self.origin, self geteyeangles(), param_00.origin, var_05)) {
+  if(!within_fov(self.origin, self geteyeangles(), param_00.origin, var_05)) {
     param_00.var_7452[var_03] = 0;
     return 0;
   }
@@ -3789,7 +3789,7 @@ func_37CE(param_00) {
 
     if(var_04 != var_01 || var_05) {
       if(var_04) {
-        self method_805F();
+        self saved_actionslotdata();
       } else {
         self connectpaths();
       }
@@ -3975,11 +3975,11 @@ set_fog_to_ent_values(param_00, param_01) {
 }
 
 func_092C(param_00, param_01) {
-  if(!isDefined(level.var_611)) {
-    level.var_611 = [];
+  if(!isDefined(level._effect)) {
+    level._effect = [];
   }
 
-  level.var_611[param_00] = loadfx(param_01);
+  level._effect[param_00] = loadfx(param_01);
 }
 
 func_0FA4(param_00, param_01) {
@@ -4295,7 +4295,7 @@ func_7716(param_00, param_01, param_02, param_03, param_04) {
   }
 }
 
-func_9468(param_00) {
+stringtofloat(param_00) {
   var_01 = strtok(param_00, ".");
   var_02 = int(var_01[0]);
   if(isDefined(var_01[1])) {
@@ -4339,8 +4339,8 @@ func_40B5() {
   var_01 = getDvar("r_mode", "1280x720 [16:9]");
   var_02 = strtok(var_01, " ");
   var_03 = strtok(var_02[0], "x");
-  var_00.width = func_9468(var_03[0]);
-  var_00.height = func_9468(var_03[1]);
+  var_00.width = stringtofloat(var_03[0]);
+  var_00.height = stringtofloat(var_03[1]);
   var_00.var_1083 = func_7F03(var_00.width / var_00.height, 3);
   return var_00;
 }

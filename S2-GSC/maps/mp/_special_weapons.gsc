@@ -39,11 +39,11 @@ func_5356() {
     var_02.var_5A68 = tablelookup("mp/killstreaktable.csv", 1, var_02.var_5A6E, 19);
     if(issubstr(var_02.var_5A6E, "serum")) {
       level.raidserumstreaks = ["raid_ss_serum_a", "raid_ss_serum_b", "raid_ss_serum_c"];
-      var_02.var_5A6E = common_scripts\utility::func_7A33(level.raidserumstreaks);
+      var_02.var_5A6E = common_scripts\utility::random(level.raidserumstreaks);
       var_02.var_5A68 = "scorestreak_raid_ss_serum_neutral_hud";
     } else if(issubstr(var_02.var_5A6E, "superweapon")) {
       level.raidsuperweaponstreaks = ["raid_superweapon", "raid_tesla_moon"];
-      var_02.var_5A6E = common_scripts\utility::func_7A33(level.raidsuperweaponstreaks);
+      var_02.var_5A6E = common_scripts\utility::random(level.raidsuperweaponstreaks);
       var_02.var_5A68 = "scorestreak_raid_superweapon_neutral_hud";
     }
 
@@ -163,7 +163,7 @@ func_A943() {
   self.refillcount--;
   self.var_9D65 makeunusable();
   var_00 maps\mp\killstreaks\_killstreaks::func_478D(self.var_5A6E, 0, 0, var_00, var_02);
-  var_00 thread maps\mp\gametypes\_hud_message::func_5A78(self.var_5A6E, 500, undefined, undefined);
+  var_00 thread maps\mp\gametypes\_hud_message::killstreaksplashnotify(self.var_5A6E, 500, undefined, undefined);
   if(var_01) {
     thread maps / mp / killstreaks / _raid_ss_serum_util::handledisableserumonpickup(self.var_5A6E, var_00);
   }
@@ -240,9 +240,9 @@ func_7DB5() {
   self.oncooldown = 1;
   lib_0502::func_1D3B(!self.oncooldown);
   if(issubstr(self.var_5A6E, "serum")) {
-    self.var_5A6E = common_scripts\utility::func_7A33(level.raidserumstreaks);
+    self.var_5A6E = common_scripts\utility::random(level.raidserumstreaks);
   } else if(issubstr(self.var_5A68, "superweapon")) {
-    self.var_5A6E = common_scripts\utility::func_7A33(level.raidsuperweaponstreaks);
+    self.var_5A6E = common_scripts\utility::random(level.raidsuperweaponstreaks);
   }
 
   if(getdvarint("mp_raid_dlc4_test_serums", 0) == 1) {

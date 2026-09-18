@@ -239,11 +239,11 @@ func_2024(param_00, param_01, param_02, param_03) {
     var_07 = var_04;
   }
 
-  playFXOnTag(level.var_611[var_06], param_00, var_07);
+  playFXOnTag(level._effect[var_06], param_00, var_07);
   if(isDefined(level.var_3571)) {
-    playFXOnTag(level.var_611["zmb_gk_claw_battery_charge_1"], level.var_3571, "flap1_shroud");
-    playFXOnTag(level.var_611["zmb_gk_claw_battery_charge_2"], level.var_3571, "flap2_shroud");
-    playFXOnTag(level.var_611["zmb_gk_claw_battery_charge_3"], level.var_3571, "flap3_shroud");
+    playFXOnTag(level._effect["zmb_gk_claw_battery_charge_1"], level.var_3571, "flap1_shroud");
+    playFXOnTag(level._effect["zmb_gk_claw_battery_charge_2"], level.var_3571, "flap2_shroud");
+    playFXOnTag(level._effect["zmb_gk_claw_battery_charge_3"], level.var_3571, "flap3_shroud");
   }
 
   lib_0378::func_8D74("zombie_soul_suck", var_04.origin, param_00.origin);

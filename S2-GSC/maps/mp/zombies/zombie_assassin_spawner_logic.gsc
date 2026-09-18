@@ -99,7 +99,7 @@ get_valid_assassin_spawner(param_00, param_01, param_02, param_03, param_04, par
     }
 
     if(var_06.size) {
-      param_00 = common_scripts\utility::func_7A33(var_06).origin;
+      param_00 = common_scripts\utility::random(var_06).origin;
     }
   }
 
@@ -242,7 +242,7 @@ seek_exit_that_maintains_momentum(param_00) {
     return var_03[0];
   }
 
-  return common_scripts\utility::func_7A33(var_01);
+  return common_scripts\utility::random(var_01);
 }
 
 set_assassin_removed_from_game() {
@@ -268,7 +268,7 @@ respawnanassassinzombie() {
   var_00 = self.health;
   var_01 = common_scripts\utility::func_46B7("zombie_assassin_pagan_room_spawner", "targetname");
   if(everyone_in_pommel_room()) {
-    var_02 = spawn_an_assassin(undefined, undefined, common_scripts\utility::func_7A33(var_01), undefined, "Phase 1: Entrance", 1, 1);
+    var_02 = spawn_an_assassin(undefined, undefined, common_scripts\utility::random(var_01), undefined, "Phase 1: Entrance", 1, 1);
   } else {
     var_02 = spawn_an_assassin(undefined, var_01);
   }
@@ -400,7 +400,7 @@ get_ideal_spawner_near_origin(param_00, param_01, param_02) {
       var_07 = lib_055A::getadjacentzones(var_06);
     }
   } else {
-    var_03 = common_scripts\utility::func_F92(param_00);
+    var_03 = common_scripts\utility::array_randomize(param_00);
   }
 
   foreach(var_09 in var_03) {
@@ -433,7 +433,7 @@ get_ideal_spawner_near_origin(param_00, param_01, param_02) {
     return var_05[0];
   }
 
-  return common_scripts\utility::func_7A33(var_03);
+  return common_scripts\utility::random(var_03);
 }
 
 get_ideal_spawner_near_player(param_00, param_01, param_02) {
@@ -544,7 +544,7 @@ apply_modifier(param_00) {
 
 set_number_of_assassin_specials(param_00) {
   if(level.players.size == 1) {
-    param_00 = common_scripts\utility::func_7A33([1, 1, 1, 2]);
+    param_00 = common_scripts\utility::random([1, 1, 1, 2]);
   }
 
   self.max_special_activations = param_00;

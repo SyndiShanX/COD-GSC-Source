@@ -4,7 +4,7 @@
 *********************************************/
 
 init() {
-  level.var_611["flak_gun_explosion"] = loadfx("vfx/scorestreaks/ss_flak_explosion_01");
+  level._effect["flak_gun_explosion"] = loadfx("vfx/scorestreaks/ss_flak_explosion_01");
   level.killstreakfuncs["flak_gun"] = ::func_9E2C;
   level.var_5A7D["killstreak_flak_gun_mp"] = "flak_gun";
 }
@@ -54,14 +54,14 @@ func_A20C(param_00) {
     }
 
     if(level.teambased) {
-      level.var_9854[maps\mp\_utility::func_45DE(self.team)] = 1;
+      level.var_9854[maps\mp\_utility::getotherteam(self.team)] = 1;
     }
 
     level.var_3CE0 = self;
   } else if(param_00 == "counter_uav") {
     var_01 = 30;
     if(level.teambased) {
-      level.var_9850[maps\mp\_utility::func_45DE(self.team)] = 1;
+      level.var_9850[maps\mp\_utility::getotherteam(self.team)] = 1;
     } else {
       level.var_2694 = self;
     }
@@ -83,13 +83,13 @@ func_4AC0(param_00, param_01) {
   level.var_3CE2 = 0;
   if(param_01 == "flak_gun") {
     if(level.teambased) {
-      level.var_9854[maps\mp\_utility::func_45DE(param_00)] = 0;
+      level.var_9854[maps\mp\_utility::getotherteam(param_00)] = 0;
     }
 
     level.var_3CE0 = undefined;
   } else if(param_01 == "counter_uav") {
     if(level.teambased) {
-      level.var_9850[maps\mp\_utility::func_45DE(param_00)] = 0;
+      level.var_9850[maps\mp\_utility::getotherteam(param_00)] = 0;
     } else {
       level.var_2694 = undefined;
     }
@@ -147,7 +147,7 @@ func_2DC1(param_00, param_01) {
   for(;;) {
     var_03 = level.var_9FDA;
     if(level.teambased) {
-      var_03 = level.var_9FDA[maps\mp\_utility::func_45DE(param_00.team)];
+      var_03 = level.var_9FDA[maps\mp\_utility::getotherteam(param_00.team)];
     }
 
     foreach(var_05 in var_03) {

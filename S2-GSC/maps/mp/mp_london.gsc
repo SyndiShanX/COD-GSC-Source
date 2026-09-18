@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  lib_04B3::func_F9();
-  lib_041A::func_F9();
-  lib_04B2::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_london_lighting::func_F9();
-  maps\mp\mp_london_aud::func_F9();
+  lib_04B3::main();
+  lib_041A::main();
+  lib_04B2::main();
+  maps\mp\_load::main();
+  maps\mp\mp_london_lighting::main();
+  maps\mp\mp_london_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_london");
   game["attackers"] = "allies";
   game["defenders"] = "axis";
@@ -32,21 +32,21 @@ func_00F9() {
   level.var_6465["velocityscaler"] = 0.35;
   level.var_6465["cameraRotationInfluence"] = 0;
   level.var_6465["cameraTranslationInfluence"] = 0;
-  maps\mp\_water::func_D5();
-  level thread func_6B6C();
+  maps\mp\_water::init();
+  level thread onplayerconnect();
   thread func_0E99();
   func_877E();
   setup_tri_filtering_settings();
   setup_ctf_flag_offsets();
   var_00 = getEntArray("mp_artillery", "classname");
   foreach(var_02 in var_00) {
-    if(var_02.var_116[0] == -7104 && var_02.var_116[1] == -752 && var_02.var_116[2] == 60) {
-      var_02.var_116 = (-6384, -1312, 924);
+    if(var_02.origin[0] == -7104 && var_02.origin[1] == -752 && var_02.origin[2] == 60) {
+      var_02.origin = (-6384, -1312, 924);
       continue;
     }
 
-    if(var_02.var_116[0] == 7088 && var_02.var_116[1] == -768 && var_02.var_116[2] == 80) {
-      var_02.var_116 = (6560, -1664, 992);
+    if(var_02.origin[0] == 7088 && var_02.origin[1] == -768 && var_02.origin[2] == 80) {
+      var_02.origin = (6560, -1664, 992);
     }
   }
 }
@@ -56,14 +56,14 @@ setup_ctf_flag_offsets() {
   level.axis_ctf_flag_offset = (-64, 0, 0);
 }
 
-func_6B6C() {
+onplayerconnect() {
   for(;;) {
     level waittill("connected", var_00);
-    var_00 thread func_6B82();
+    var_00 thread onplayerspawned();
   }
 }
 
-func_6B82() {
+onplayerspawned() {
   level endon("game_ended");
   self endon("disconnect");
   for(;;) {

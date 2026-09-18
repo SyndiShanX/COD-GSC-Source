@@ -36,7 +36,7 @@ func_09F4() {
     level func_9007(var_00);
   }
 
-  if(maps\mp\_utility::func_602B()) {
+  if(maps\mp\_utility::matchmakinggame()) {
     setmatchdata("match_common", "has_bots", 1);
   }
 
@@ -50,8 +50,8 @@ func_8744() {
   if(var_00 > 0) {
     var_01 = getdvarfloat("ds_time_limit") / 60;
     level.starttime = gettime();
-    var_02 = "scr_" + level.var_3FDC + "_timelimit";
-    level.var_A901[var_02].var_A281 = var_01;
+    var_02 = "scr_" + level.gametype + "_timelimit";
+    level.watchdvars[var_02].value = var_01;
     setDvar(var_02, var_01);
   }
 }
@@ -59,8 +59,8 @@ func_8744() {
 func_871C() {
   var_00 = getdvarint("ds_score_limit");
   if(var_00 > 0) {
-    var_01 = "scr_" + level.var_3FDC + "_scorelimit";
-    level.var_A901[var_01].var_A281 = var_00;
+    var_01 = "scr_" + level.gametype + "_scorelimit";
+    level.watchdvars[var_01].value = var_00;
     setDvar(var_01, var_00);
   }
 }
@@ -132,7 +132,7 @@ func_535E(param_00, param_01) {
     self notify("luinotifyserver", "class_select", var_02);
   }
 
-  common_scripts\utility::func_A74B("spawned_player", 0.5);
+  common_scripts\utility::waittill_notify_or_timeout("spawned_player", 0.5);
   wait(0.1);
   if(isDefined(param_01)) {
     param_01.var_7ABD = 1;

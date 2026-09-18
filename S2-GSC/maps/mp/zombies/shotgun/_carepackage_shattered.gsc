@@ -36,7 +36,7 @@ spawn_player_carepackage(param_00) {
   level endon("new_carepackage_reward");
   var_01 = 4;
   var_02 = 125;
-  maps / mp / zombies / zombie_carepackage::zm_care_spawn(common_scripts\utility::func_7A33(level.players), level.care_package_lz);
+  maps / mp / zombies / zombie_carepackage::zm_care_spawn(common_scripts\utility::random(level.players), level.care_package_lz);
   for(;;) {
     level waittill("zombies_crate_captured", var_03, var_04, var_05);
     if(common_scripts\utility::func_562E(var_04.is_objective_package)) {
@@ -50,17 +50,17 @@ spawn_player_carepackage(param_00) {
 
   level notify("zombies_sg_carepackage_opened");
   var_06 = level.zmb_shotgun_carepackage_rewards["level_" + param_00];
-  var_07 = common_scripts\utility::func_FA3(common_scripts\utility::func_F92(var_06.normals), 0, var_01);
+  var_07 = common_scripts\utility::func_FA3(common_scripts\utility::array_randomize(var_06.normals), 0, var_01);
   if(isDefined(var_06.melees)) {
-    var_08 = common_scripts\utility::func_F92(var_06.melees);
+    var_08 = common_scripts\utility::array_randomize(var_06.melees);
     for(var_09 = 0; var_09 < 2; var_09++) {
       var_07[var_09] = var_08[var_09];
     }
   }
 
   if(isDefined(var_06.upgrades)) {
-    var_0A = common_scripts\utility::func_F92(var_06.upgrades);
-    var_07[var_07.size - 1] = common_scripts\utility::func_7A33(var_06.upgrades);
+    var_0A = common_scripts\utility::array_randomize(var_06.upgrades);
+    var_07[var_07.size - 1] = common_scripts\utility::random(var_06.upgrades);
   }
 
   foreach(var_0C in level.players) {

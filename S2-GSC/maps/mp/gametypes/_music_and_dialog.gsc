@@ -298,7 +298,7 @@ func_7620() {
 func_36E0() {
   level.var_7622 endon("death");
   while(game["state"] == "playing") {
-    if(!level.var_9A12 && maps\mp\_utility::func_46E2()) {
+    if(!level.timerstopped && maps\mp\_utility::gettimelimit()) {
       var_00 = maps\mp\gametypes\_gamelogic::func_46E5() / 1000;
       var_01 = int(var_00 + 0.5);
       if(var_01 <= 10) {
@@ -341,11 +341,11 @@ onplayerspawned() {
 
     if(isDefined(game["dialog"]["gametype"]) && !level.splitscreen || self == level.players[0]) {
       if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies") {
-        maps\mp\_utility::func_5C43("allies_gametype");
+        maps\mp\_utility::leaderdialogonplayer("allies_gametype");
       } else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
-        maps\mp\_utility::func_5C43("axis_gametype");
+        maps\mp\_utility::leaderdialogonplayer("axis_gametype");
       } else if(!self issplitscreenplayer() || self method_82ED()) {
-        maps\mp\_utility::func_5C43("gametype");
+        maps\mp\_utility::leaderdialogonplayer("gametype");
       }
     }
 
@@ -355,10 +355,10 @@ onplayerspawned() {
     }
 
     wait(5);
-    maps\mp\_utility::func_3FA5("prematch_done");
+    maps\mp\_utility::gameflagwait("prematch_done");
     if(self.team == game["attackers"]) {
       if(!self issplitscreenplayer() || self method_82ED()) {
-        maps\mp\_utility::func_5C43("offense_obj", "introboost");
+        maps\mp\_utility::leaderdialogonplayer("offense_obj", "introboost");
         return;
       }
 
@@ -366,7 +366,7 @@ onplayerspawned() {
     }
 
     if(!self issplitscreenplayer() || self method_82ED()) {
-      maps\mp\_utility::func_5C43("defense_obj", "introboost");
+      maps\mp\_utility::leaderdialogonplayer("defense_obj", "introboost");
       return;
     }
 
@@ -381,7 +381,7 @@ func_6B4C() {
     return;
   }
 
-  var_00 maps\mp\_utility::func_5C43("last_alive");
+  var_00 maps\mp\_utility::leaderdialogonplayer("last_alive");
 }
 
 func_6B99() {
@@ -393,7 +393,7 @@ func_6B99() {
           continue;
         }
 
-        var_02 maps\mp\_utility::func_5C43("halftime");
+        var_02 maps\mp\_utility::leaderdialogonplayer("halftime");
       }
       break;
 
@@ -403,7 +403,7 @@ func_6B99() {
           continue;
         }
 
-        var_02 maps\mp\_utility::func_5C43("overtime");
+        var_02 maps\mp\_utility::leaderdialogonplayer("overtime");
       }
       break;
 
@@ -413,7 +413,7 @@ func_6B99() {
           continue;
         }
 
-        var_02 maps\mp\_utility::func_5C43("side_switch");
+        var_02 maps\mp\_utility::leaderdialogonplayer("side_switch");
       }
       break;
   }
@@ -427,34 +427,34 @@ func_6B3E() {
   if(level.teambased) {
     if(level.splitscreen) {
       if(var_00 == "allies") {
-        maps\mp\_utility::func_74D9(game["music"]["victory_allies"], "allies");
+        maps\mp\_utility::playsoundonplayers(game["music"]["victory_allies"], "allies");
         return;
       }
 
       if(var_00 == "axis") {
-        maps\mp\_utility::func_74D9(game["music"]["victory_axis"], "axis");
+        maps\mp\_utility::playsoundonplayers(game["music"]["victory_axis"], "axis");
         return;
       }
 
-      maps\mp\_utility::func_74D9(game["music"]["draw_allies"], "allies");
-      maps\mp\_utility::func_74D9(game["music"]["draw_axis"], "axis");
+      maps\mp\_utility::playsoundonplayers(game["music"]["draw_allies"], "allies");
+      maps\mp\_utility::playsoundonplayers(game["music"]["draw_axis"], "axis");
       return;
     }
 
     if(var_00 == "allies") {
-      maps\mp\_utility::func_74D9(game["music"]["victory_allies"], "allies");
-      maps\mp\_utility::func_74D9(game["music"]["defeat_axis"], "axis");
+      maps\mp\_utility::playsoundonplayers(game["music"]["victory_allies"], "allies");
+      maps\mp\_utility::playsoundonplayers(game["music"]["defeat_axis"], "axis");
       return;
     }
 
     if(var_00 == "axis") {
-      maps\mp\_utility::func_74D9(game["music"]["victory_axis"], "axis");
-      maps\mp\_utility::func_74D9(game["music"]["defeat_allies"], "allies");
+      maps\mp\_utility::playsoundonplayers(game["music"]["victory_axis"], "axis");
+      maps\mp\_utility::playsoundonplayers(game["music"]["defeat_allies"], "allies");
       return;
     }
 
-    maps\mp\_utility::func_74D9(game["music"]["draw_allies"], "allies");
-    maps\mp\_utility::func_74D9(game["music"]["draw_axis"], "axis");
+    maps\mp\_utility::playsoundonplayers(game["music"]["draw_allies"], "allies");
+    maps\mp\_utility::playsoundonplayers(game["music"]["draw_axis"], "axis");
     return;
   }
 
@@ -491,8 +491,8 @@ func_7F2E() {
   }
 
   if(!isDefined(var_00) || isPlayer(var_00)) {
-    maps\mp\_utility::func_74D9(game["music"]["draw_allies"], "allies");
-    maps\mp\_utility::func_74D9(game["music"]["draw_axis"], "axis");
+    maps\mp\_utility::playsoundonplayers(game["music"]["draw_allies"], "allies");
+    maps\mp\_utility::playsoundonplayers(game["music"]["draw_axis"], "axis");
     return;
   }
 
@@ -501,18 +501,18 @@ func_7F2E() {
   }
 
   if(var_00 == "allies") {
-    maps\mp\_utility::func_5C39("round_success", "allies");
-    maps\mp\_utility::func_5C39("round_failure", "axis");
-    maps\mp\_utility::func_74D9(game["music"]["victory_allies"], "allies");
-    maps\mp\_utility::func_74D9(game["music"]["defeat_axis"], "axis");
+    maps\mp\_utility::leaderdialog("round_success", "allies");
+    maps\mp\_utility::leaderdialog("round_failure", "axis");
+    maps\mp\_utility::playsoundonplayers(game["music"]["victory_allies"], "allies");
+    maps\mp\_utility::playsoundonplayers(game["music"]["defeat_axis"], "axis");
     return;
   }
 
   if(var_00 == "axis") {
-    maps\mp\_utility::func_5C39("round_success", "axis");
-    maps\mp\_utility::func_5C39("round_failure", "allies");
-    maps\mp\_utility::func_74D9(game["music"]["victory_axis"], "axis");
-    maps\mp\_utility::func_74D9(game["music"]["defeat_allies"], "allies");
+    maps\mp\_utility::leaderdialog("round_success", "axis");
+    maps\mp\_utility::leaderdialog("round_failure", "allies");
+    maps\mp\_utility::playsoundonplayers(game["music"]["victory_axis"], "axis");
+    maps\mp\_utility::playsoundonplayers(game["music"]["defeat_allies"], "allies");
     return;
   }
 }
@@ -535,8 +535,8 @@ func_3FE1() {
       }
     }
 
-    maps\mp\_utility::func_5C39("ffa_win", "allies", undefined, var_03);
-    maps\mp\_utility::func_5C39("ffa_lost", "allies", undefined, var_02);
+    maps\mp\_utility::leaderdialog("ffa_win", "allies", undefined, var_03);
+    maps\mp\_utility::leaderdialog("ffa_lost", "allies", undefined, var_02);
   }
 
   if(!isDefined(var_00) || isPlayer(var_00)) {
@@ -548,18 +548,18 @@ func_3FE1() {
   }
 
   if(var_00 == "allies") {
-    maps\mp\_utility::func_5C39("mission_success", "allies");
-    maps\mp\_utility::func_5C39("mission_failure", "axis");
+    maps\mp\_utility::leaderdialog("mission_success", "allies");
+    maps\mp\_utility::leaderdialog("mission_failure", "axis");
     return;
   }
 
   if(var_00 == "axis") {
-    maps\mp\_utility::func_5C39("mission_success", "axis");
-    maps\mp\_utility::func_5C39("mission_failure", "allies");
+    maps\mp\_utility::leaderdialog("mission_success", "axis");
+    maps\mp\_utility::leaderdialog("mission_failure", "allies");
     return;
   }
 
-  maps\mp\_utility::func_5C39("mission_draw");
+  maps\mp\_utility::leaderdialog("mission_draw");
 }
 
 func_65BC() {
@@ -569,29 +569,29 @@ func_65BC() {
   if(var_00 == "time") {
     if(level.teambased) {
       if(game["teamScores"]["allies"] > game["teamScores"]["axis"]) {
-        maps\mp\_utility::func_5C39("winning_time", "allies");
-        maps\mp\_utility::func_5C39("losing_time", "axis");
+        maps\mp\_utility::leaderdialog("winning_time", "allies");
+        maps\mp\_utility::leaderdialog("losing_time", "axis");
       } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
-        maps\mp\_utility::func_5C39("winning_time", "axis");
-        maps\mp\_utility::func_5C39("losing_time", "allies");
+        maps\mp\_utility::leaderdialog("winning_time", "axis");
+        maps\mp\_utility::leaderdialog("losing_time", "allies");
       }
     } else {
-      maps\mp\_utility::func_5C39("timesup");
+      maps\mp\_utility::leaderdialog("timesup");
     }
   } else if(var_00 == "score") {
     if(level.teambased) {
       if(game["teamScores"]["allies"] > game["teamScores"]["axis"]) {
-        maps\mp\_utility::func_5C39("winning_score", "allies");
-        maps\mp\_utility::func_5C39("losing_score", "axis");
+        maps\mp\_utility::leaderdialog("winning_score", "allies");
+        maps\mp\_utility::leaderdialog("losing_score", "axis");
       } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
-        maps\mp\_utility::func_5C39("winning_score", "axis");
-        maps\mp\_utility::func_5C39("losing_score", "allies");
+        maps\mp\_utility::leaderdialog("winning_score", "axis");
+        maps\mp\_utility::leaderdialog("losing_score", "allies");
       }
     } else {
       var_01 = maps\mp\gametypes\_gamescore::func_450A();
       var_02 = maps\mp\gametypes\_gamescore::func_4568();
-      var_01 maps\mp\_utility::func_5C43("winning_score");
-      maps\mp\_utility::func_5C46("losing_score", var_02);
+      var_01 maps\mp\_utility::leaderdialogonplayer("winning_score");
+      maps\mp\_utility::leaderdialogonplayers("losing_score", var_02);
     }
   }
 
@@ -600,7 +600,7 @@ func_65BC() {
   }
 
   level waittill("match_ending_very_soon");
-  maps\mp\_utility::func_5C39("timesup");
+  maps\mp\_utility::leaderdialog("timesup");
 }
 
 func_9528() {
@@ -610,7 +610,7 @@ func_9528() {
   wait(120);
   for(;;) {
     wait(randomfloatrange(60, 120));
-    maps\mp\_utility::func_74D9(game["music"]["suspense"][randomint(var_00)]);
+    maps\mp\_utility::playsoundonplayers(game["music"]["suspense"][randomint(var_00)]);
   }
 }
 

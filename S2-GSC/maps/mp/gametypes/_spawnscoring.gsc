@@ -89,7 +89,7 @@ func_5EAC() {
         setspawndata("spawns", var_09, "spawnTuningVersion", common_scripts\utility::func_9AAD(level.var_90B4));
         setspawndata("spawns", var_09, "timeFromMatchStart", maps\mp\_utility::gettimepassed());
         setspawndata("spawns", var_09, "matchID", getmatchdata("match_common", "matchID"));
-        setspawndata("spawns", var_09, "playerID", var_0A.var_2418);
+        setspawndata("spawns", var_09, "playerID", var_0A.clientid);
       }
 
       var_0C = 0;
@@ -98,11 +98,11 @@ func_5EAC() {
       var_0F = var_0A.team;
       var_10 = 0;
       foreach(var_12 in level.players) {
-        if(isbot(var_12) || function_026D(var_12) || var_12 == var_0A) {
+        if(isbot(var_12) || istestclient(var_12) || var_12 == var_0A) {
           continue;
         }
 
-        if(maps\mp\_utility::func_57A0(var_12) && isDefined(var_12.var_5CC6) && maps\mp\_matchdata::func_1F59(var_12.var_5CC6)) {
+        if(maps\mp\_utility::isreallyalive(var_12) && isDefined(var_12.var_5CC6) && maps\mp\_matchdata::func_1F59(var_12.var_5CC6)) {
           if(level.teambased && var_12.team == var_0F) {
             if(var_0C < var_01) {
               var_05[var_0C].var_5E3E = var_12.origin;
@@ -169,16 +169,16 @@ func_5EAC() {
         var_22 = -1; var_23 = -1; var_24 = -1; var_25 = -1; var_26 = -1; var_27 = -1;
         if(level.teambased) {
           var_19 = maps\mp\gametypes\_gamescore::func_473F();
-          if(maps\mp\_utility::func_57B2() || maps\mp\_utility::func_5760()) {
-            var_24 = maps\mp\_utility::func_4669(var_15.team);
-            var_25 = maps\mp\_utility::func_4669(maps\mp\_utility::func_45DE(var_15.team));
-            var_22 = maps\mp\_utility::func_4669("allies");
-            var_23 = maps\mp\_utility::func_4669("axis");
+          if(maps\mp\_utility::isroundbased() || maps\mp\_utility::isobjectivebased()) {
+            var_24 = maps\mp\_utility::getroundswon(var_15.team);
+            var_25 = maps\mp\_utility::getroundswon(maps\mp\_utility::getotherteam(var_15.team));
+            var_22 = maps\mp\_utility::getroundswon("allies");
+            var_23 = maps\mp\_utility::getroundswon("axis");
             var_26 = maps\mp\gametypes\_gamescore::func_63E(var_15.team);
-            var_27 = maps\mp\gametypes\_gamescore::func_63E(maps\mp\_utility::func_45DE(var_15.team));
+            var_27 = maps\mp\gametypes\_gamescore::func_63E(maps\mp\_utility::getotherteam(var_15.team));
           } else {
             var_24 = maps\mp\gametypes\_gamescore::func_63E(var_15.team);
-            var_25 = maps\mp\gametypes\_gamescore::func_63E(maps\mp\_utility::func_45DE(var_15.team));
+            var_25 = maps\mp\gametypes\_gamescore::func_63E(maps\mp\_utility::getotherteam(var_15.team));
             var_22 = maps\mp\gametypes\_gamescore::func_63E("allies");
             var_23 = maps\mp\gametypes\_gamescore::func_63E("axis");
           }
@@ -198,7 +198,7 @@ func_5EAC() {
           }
         }
 
-        var_29 = maps\mp\_utility::func_4672(); var_2A = common_scripts\utility::func_98E7(var_24 > var_25, var_24, var_25);
+        var_29 = maps\mp\_utility::getscorelimit(); var_2A = common_scripts\utility::func_98E7(var_24 > var_25, var_24, var_25);
         if(var_29 > 0) {
           var_2B = var_2A / var_29;
         } else {
@@ -227,7 +227,7 @@ func_5EAC() {
               var_32 = var_2F.var_9AB7;
               var_33 = func_447B(var_2F.var_285B);
               var_34 = var_2F.var_2859;
-              var_35 = var_2F.var_6221[maps\mp\_utility::func_45DE(var_15.team)];
+              var_35 = var_2F.var_6221[maps\mp\_utility::getotherteam(var_15.team)];
               if(!isDefined(var_31)) {
                 var_31 = -1;
               }
@@ -315,7 +315,7 @@ func_5EAC() {
                 var_0E = -1;
               }
 
-              var_0F = getspawnpointmindist(self.var_9070.var_9087.index, maps\mp\_utility::func_45DE(self.team));
+              var_0F = getspawnpointmindist(self.var_9070.var_9087.index, maps\mp\_utility::getotherteam(self.team));
               if(!isDefined(var_0F) || var_0F > 15000) {
                 var_0F = -1;
               }
@@ -330,9 +330,9 @@ func_5EAC() {
                 }
               }
 
-              var_1C = getspawnpointtotalplayers(self.var_9070.var_9087.index, maps\mp\_utility::func_45DE(self.team));
+              var_1C = getspawnpointtotalplayers(self.var_9070.var_9087.index, maps\mp\_utility::getotherteam(self.team));
               if(var_1C > 0) {
-                var_11 = getspawnpointdistsum(self.var_9070.var_9087.index, maps\mp\_utility::func_45DE(self.team));
+                var_11 = getspawnpointdistsum(self.var_9070.var_9087.index, maps\mp\_utility::getotherteam(self.team));
                 if(!isDefined(var_11) || var_11 > 15000) {
                   var_11 = -1;
                 } else {
@@ -341,7 +341,7 @@ func_5EAC() {
               }
 
               var_12 = getspawnpointnearbyfriendlies(self.var_9070.var_9087.index, self.team);
-              var_13 = getspawnpointnearbyenemies(self.var_9070.var_9087.index, maps\mp\_utility::func_45DE(self.team));
+              var_13 = getspawnpointnearbyenemies(self.var_9070.var_9087.index, maps\mp\_utility::getotherteam(self.team));
               if(isDefined(self.var_9070.var_9087.var_2055) && self.var_9070.var_9087.var_2055) {
                 var_17 = 1;
               } else {
@@ -462,7 +462,7 @@ func_5EAC() {
                   var_2D = level.var_AC7C.origin; var_2E = distance2d(self.var_9092, var_2D); var_2F = level.var_AC7C.var_3FCA maps\mp\gametypes\_gameobjects::func_45F7();
                   if(var_2F == self.team) {
                     var_14 = var_2E;
-                  } else if(var_2F == maps\mp\_utility::func_45DE(self.team)) {
+                  } else if(var_2F == maps\mp\_utility::getotherteam(self.team)) {
                     var_15 = var_2E;
                   } else {
                     var_16 = var_2E;
@@ -521,7 +521,7 @@ func_5EAC() {
                       var_3D = var_3A maps\mp\gametypes\_gameobjects::func_45F7();
                       if(var_3D == self.team && var_14 == -1 || var_3C < var_14) {
                         var_14 = var_3C;
-                      } else if(var_3D == maps\mp\_utility::func_45DE(self.team) && var_15 == -1 || var_3C < var_15) {
+                      } else if(var_3D == maps\mp\_utility::getotherteam(self.team) && var_15 == -1 || var_3C < var_15) {
                         var_15 = var_3C;
                       } else if(var_16 == -1 || var_3C < var_16) {
                         var_16 = var_3C;
@@ -566,14 +566,14 @@ func_5EAC() {
                       var_16 = distance2d(self.var_9092, level.var_9853[self.team].var_2006.origin);
                     }
 
-                    var_14 = distance2d(self.var_9092, level.var_9853[self.team].origin); var_15 = distance2d(self.var_9092, level.var_9853[maps\mp\_utility::func_45DE(self.team)].origin); var_4B = var_14; var_4C = var_15; var_4D = var_16; var_4E = level.var_9853["allies"]; var_4F = level.var_9853["axis"]; var_50 = var_4E.var_2006; var_51 = var_4F.var_2006; var_52 = undefined; var_53 = undefined;
+                    var_14 = distance2d(self.var_9092, level.var_9853[self.team].origin); var_15 = distance2d(self.var_9092, level.var_9853[maps\mp\_utility::getotherteam(self.team)].origin); var_4B = var_14; var_4C = var_15; var_4D = var_16; var_4E = level.var_9853["allies"]; var_4F = level.var_9853["axis"]; var_50 = var_4E.var_2006; var_51 = var_4F.var_2006; var_52 = undefined; var_53 = undefined;
                     if(!isDefined(var_50)) {
                       var_54 = "none";
                       var_55 = -1;
                       var_52 = var_4E.origin;
                     } else {
                       var_54 = var_52.name;
-                      var_55 = var_51.var_2418;
+                      var_55 = var_51.clientid;
                       var_52 = var_50.origin;
                     }
 
@@ -583,7 +583,7 @@ func_5EAC() {
                       var_53 = var_4F.origin;
                     } else {
                       var_56 = var_53.name;
-                      var_57 = var_52.var_2418;
+                      var_57 = var_52.clientid;
                       var_53 = var_51.origin;
                     }
 
@@ -699,9 +699,9 @@ func_5EAC() {
                         var_10 = -1;
                         if(level.teambased) {
                           var_11 = maps\mp\gametypes\_gamescore::func_473F();
-                          if(maps\mp\_utility::func_57B2() || maps\mp\_utility::func_5760()) {
-                            var_0F = maps\mp\_utility::func_4669("allies");
-                            var_10 = maps\mp\_utility::func_4669("axis");
+                          if(maps\mp\_utility::isroundbased() || maps\mp\_utility::isobjectivebased()) {
+                            var_0F = maps\mp\_utility::getroundswon("allies");
+                            var_10 = maps\mp\_utility::getroundswon("axis");
                           } else {
                             var_0F = maps\mp\gametypes\_gamescore::func_63E("allies");
                             var_10 = maps\mp\gametypes\_gamescore::func_63E("axis");
@@ -720,7 +720,7 @@ func_5EAC() {
                           }
                         }
 
-                        var_13 = maps\mp\_utility::func_4672();
+                        var_13 = maps\mp\_utility::getscorelimit();
                         var_14 = common_scripts\utility::func_98E7(var_0F > var_10, var_0F, var_10);
                         if(var_13 > 0) {
                           var_15 = var_14 / var_13;
@@ -733,7 +733,7 @@ func_5EAC() {
                         var_18 = maps\mp\gametypes\_gamelogic::func_46E5();
                         function_00F5("@"script_mp_spawndata_gameover: gameTime % d, tuning_version % f, timePassed % d, timeRemaining % d, gameStatus % s, winning_team % s, winning_score_perc % f, allies_score % d, axis_score % d, objectiveFlipCount % d, activeCount % d, joinCount % d, botJoinCount % d, spawnCount % d, deathCount % d, badSpawnByAnyMeansCount % d, victimSpawnDiedTooFastCount % d, victimSpawnKilledTooFastCount % d, immediateActionDmgDealtCount % d, immediateActionDmgReceivedCount % d, playlistName % s, qaPlayList % d ",var_00,var_01,var_17,var_18,var_16,var_11,var_15,var_0F,var_10,var_0E,var_02,var_03,var_07,var_04,var_08,var_0D,var_09,var_0A,var_0B,var_0C,var_05,var_06);
                           foreach(var_1A in level.players) {
-                            if(isbot(var_1A) || function_026D(var_1A)) {
+                            if(isbot(var_1A) || istestclient(var_1A)) {
                               continue;
                             }
 

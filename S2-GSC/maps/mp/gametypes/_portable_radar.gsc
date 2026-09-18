@@ -148,7 +148,7 @@ func_757F(param_00) {
   param_00 endon("disconnect");
   self setCursorHint("HINT_NOICON");
   self setHintString(&"MP_PATCH_PICKUP_PORTABLE_RADAR");
-  maps\mp\_utility::func_871E(param_00);
+  maps\mp\_utility::setselfusable(param_00);
   for(;;) {
     self waittill("trigger", param_00);
     var_01 = param_00 getweaponammostock("portable_radar_mp");

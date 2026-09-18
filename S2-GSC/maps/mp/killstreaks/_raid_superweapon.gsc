@@ -14,7 +14,7 @@ tryusesuperweapon(param_00) {
 }
 
 tryusesuperweaponinternal() {
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     maps\mp\_matchdata::func_5E9A("raid_superweapon", self.origin);
     return 1;
   }

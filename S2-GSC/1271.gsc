@@ -233,7 +233,7 @@ func_7971() {
 }
 
 func_796B(param_00) {
-  var_01 = playerphysicstrace(param_00.var_116 + (0, 0, 60), param_00.var_116, param_00);
+  var_01 = playerphysicstrace(param_00.origin + (0, 0, 60), param_00.origin, param_00);
   param_00 setOrigin(var_01);
 }
 
@@ -292,7 +292,7 @@ func_79A3(param_00) {
   for(;;) {
     param_00 waittill("used", var_01);
     var_01 iclientprintlnbold("Locked");
-    lib_04F3::func_79CB("ammo_crate_use", param_00.var_116);
+    lib_04F3::func_79CB("ammo_crate_use", param_00.origin);
   }
 }
 
@@ -333,8 +333,8 @@ func_7A08(param_00, param_01) {
   param_00.var_2F16 = 0;
   param_00.var_6210 = undefined;
   param_00.var_2599 = param_01 == 0;
-  if(isDefined(param_00.var_81EF)) {
-    var_02 = getEntArray(param_00.var_81EF, "script_linkname");
+  if(isDefined(param_00.script_exploder)) {
+    var_02 = getEntArray(param_00.script_exploder, "script_linkname");
     foreach(var_04 in var_02) {
       if(isDefined(var_04) && var_04.var_3A == "misc_turret") {
         param_00.var_9EDD = var_04;
@@ -369,7 +369,7 @@ func_7968(param_00, param_01) {
   var_04 = (0, 0, 0);
   if(isDefined(param_00.var_982D["objective"]) && param_00.var_982D["objective"].size) {
     var_03 = 1;
-    var_04 = param_00.var_982D["objective"][0].var_116 - param_00.var_116;
+    var_04 = param_00.var_982D["objective"][0].origin - param_00.origin;
   }
 
   if(common_scripts\utility::func_562E(var_02)) {
@@ -385,7 +385,7 @@ func_7968(param_00, param_01) {
     var_05 maps\mp\gametypes\_gameobjects::func_86EC("none");
     var_05 maps\mp\gametypes\_gameobjects::func_8A60("any");
     var_05.var_502A = "raidPlantExplosive";
-    if(isDefined(self.var_1A5) && self.var_1A5 == "shingle" || self.var_1A5 == "barbed_wire") {
+    if(isDefined(self.targetname) && self.targetname == "shingle" || self.targetname == "barbed_wire") {
       var_05.var_A248 = "war_bangalore_mp";
     } else {
       var_05.var_A248 = "war_dynamite_mp";
@@ -462,9 +462,9 @@ func_7967(param_00, param_01) {
   var_04 = 0;
   while(var_03 > gettime()) {
     if(var_04 != 0) {
-      lib_04F3::func_79CB("dynamite_timer_tick", param_00.var_116);
+      lib_04F3::func_79CB("dynamite_timer_tick", param_00.origin);
     } else {
-      lib_04F3::func_79CB("dynamite_timer_tock", param_00.var_116);
+      lib_04F3::func_79CB("dynamite_timer_tock", param_00.origin);
     }
 
     var_04 = var_04 + 1 % 2;
@@ -477,7 +477,7 @@ func_7967(param_00, param_01) {
     }
 
     maps\mp\gametypes\_hostmigration::func_A783(var_06);
-    if(isDefined(level.var_4E09)) {
+    if(isDefined(level.hostmigrationtimer)) {
       var_07 = maps\mp\gametypes\_hostmigration::func_A782();
       var_03 = var_03 + var_07;
     }
@@ -490,7 +490,7 @@ func_7967(param_00, param_01) {
 func_7963(param_00, param_01, param_02, param_03) {
   var_04 = param_00.var_982D["explosive_model"][0];
   if(!common_scripts\utility::func_562E(param_03)) {
-    var_05 = var_04.var_116 + vectorNormalize(anglestoright(var_04.var_1D)) * 15;
+    var_05 = var_04.origin + vectorNormalize(anglestoright(var_04.var_1D)) * 15;
     if(isDefined(param_02)) {
       param_00 entityradiusdamage(var_05, 150, 180, 80, param_02, "MOD_EXPLOSIVE", "bomb_site_mp");
     } else {
@@ -527,7 +527,7 @@ func_2F6E() {
 }
 
 func_7964(param_00, param_01) {
-  level.var_611["raid_door_explode"] = loadfx("vfx/map/mp_raid_cobra/raid_wall_breach_mp");
+  level._effect["raid_door_explode"] = loadfx("vfx/map/mp_raid_cobra/raid_wall_breach_mp");
   var_02 = param_01 == 2 || param_01 == 1;
   var_03 = param_00.var_982E;
   param_00.var_6A55 = param_00 method_85A0();
@@ -544,7 +544,7 @@ func_7964(param_00, param_01) {
     switch (var_05) {
       case "explode":
         if(var_07 == var_03 && !common_scripts\utility::func_562E(var_08)) {
-          lib_04F3::func_79CB("mp_war_bomb_explo", param_00.var_116);
+          lib_04F3::func_79CB("mp_war_bomb_explo", param_00.origin);
           var_09 = "default";
           if(isDefined(param_00.var_8260)) {
             var_09 = param_00.var_8260;
@@ -552,15 +552,15 @@ func_7964(param_00, param_01) {
 
           switch (var_09) {
             case "brick":
-              playFX(common_scripts\utility::func_44F5("raid_wall_mp"), param_00.var_116, anglesToForward(param_00.var_1D + (0, -90, 0)));
+              playFX(common_scripts\utility::func_44F5("raid_wall_mp"), param_00.origin, anglesToForward(param_00.var_1D + (0, -90, 0)));
               break;
 
             case "sand":
-              playFX(common_scripts\utility::func_44F5("raid_sand_breach_mp"), param_00.var_116, anglesToForward(param_00.var_1D + (-30, -90, 0)));
+              playFX(common_scripts\utility::func_44F5("raid_sand_breach_mp"), param_00.origin, anglesToForward(param_00.var_1D + (-30, -90, 0)));
               break;
 
             default:
-              playFX(common_scripts\utility::func_44F5("raid_door_explode"), param_00.var_116, anglesToForward(param_00.var_1D + (0, -90, 0)));
+              playFX(common_scripts\utility::func_44F5("raid_door_explode"), param_00.origin, anglesToForward(param_00.var_1D + (0, -90, 0)));
               break;
           }
         }
@@ -587,33 +587,33 @@ func_7964(param_00, param_01) {
             var_0B = 2.5;
           }
 
-          var_04 = magicgrenademanual("war_dynamite_mp", param_00.var_116, (0, 0, 0), var_0B + 1);
-          var_04 method_8449(param_00);
-          if(param_00.var_106 == "par_dynamite_01_sheen") {
+          var_04 = magicgrenademanual("war_dynamite_mp", param_00.origin, (0, 0, 0), var_0B + 1);
+          var_04 linktosynchronizedparent(param_00);
+          if(param_00.model == "par_dynamite_01_sheen") {
             param_00 setModel("par_dynamite_01");
           }
 
-          if(param_00.var_106 == "npc_usa_bangalore_base_sheen") {
+          if(param_00.model == "npc_usa_bangalore_base_sheen") {
             param_00 setModel("npc_usa_bangalore_war");
           } else {
             param_00 setModel("par_dynamite_01");
           }
 
           param_00 setCanDamage(1);
-          param_00.var_706B = var_06.var_1A7;
+          param_00.var_706B = var_06.team;
           lib_0502::func_7D5C(param_00);
-          badplace_cylinder("war_dynamite_mp_" + param_00 getentitynumber(), var_0B + 1, param_00.var_116, 300, 300, "allies", "axis");
+          badplace_cylinder("war_dynamite_mp_" + param_00 getentitynumber(), var_0B + 1, param_00.origin, 300, 300, "allies", "axis");
           var_07 thread lib_0502::func_8A18(param_00);
         }
         break;
 
       case "explosive_defused":
       case "repaired":
-        if(param_00.var_106 == "par_dynamite_01") {
+        if(param_00.model == "par_dynamite_01") {
           param_00 setModel("par_dynamite_01_sheen");
         }
 
-        if(param_00.var_106 == "npc_usa_bangalore_base") {
+        if(param_00.model == "npc_usa_bangalore_base") {
           param_00 setModel("npc_usa_bangalore_base_sheen");
         } else {
           param_00 setModel("par_dynamite_01_sheen");
@@ -671,7 +671,7 @@ func_79BF(param_00, param_01) {
   var_03 = (0, 0, 0);
   var_04 = self.var_982D["repair_trigger"];
   foreach(var_06 in var_04) {
-    var_03 = var_03 + var_06.var_116;
+    var_03 = var_03 + var_06.origin;
   }
 
   var_03 = var_03 / var_04.size;
@@ -772,7 +772,7 @@ func_7A13(param_00, param_01) {
 raidwallladdertraversalstartdestroyed(param_00) {
   param_00 endon("death");
   var_01 = param_00;
-  var_02 = getnode(param_00.var_1A2, "targetname");
+  var_02 = getnode(param_00.target, "targetname");
   for(;;) {
     disconnectnodepair(var_01, var_02, 1);
     self waittillmatch("repaired", "trigger");
@@ -784,7 +784,7 @@ raidwallladdertraversalstartdestroyed(param_00) {
 raidwallbuildladdertraversalstartdestroyed(param_00) {
   param_00 endon("death");
   var_01 = param_00;
-  var_02 = getnode(param_00.var_1A2, "targetname");
+  var_02 = getnode(param_00.target, "targetname");
   for(;;) {
     connectnodepair(var_01, var_02, 1);
     self waittillmatch("repaired", "trigger");
@@ -809,7 +809,7 @@ raidwallanimatedstarthalf(param_00) {
 
 func_79FB(param_00, param_01) {
   param_00 endon("death");
-  if(param_00.var_106 == "mp_raid_breakable_wall") {
+  if(param_00.model == "mp_raid_breakable_wall") {
     var_02 = "mp_raids_wall_full_destroy";
     var_03 = "mp_raids_wall_full_repair";
     var_04 = "mp_raids_wall_full_reverse";
@@ -820,7 +820,7 @@ func_79FB(param_00, param_01) {
     var_09 = "mp_raid_breakable_wall_static_whole_dmg";
     var_0A = "buildable_wall_lp";
     var_0B = "buildable_wall_collapse";
-  } else if(var_0A.var_106 == "mp_raid_breakable_manor_wall") {
+  } else if(var_0A.model == "mp_raid_breakable_manor_wall") {
     var_02 = "mp_raids_manorwall_full_destroy";
     var_03 = "mp_raids_manorwall_full_repair";
     var_04 = "mp_raids_manorwall_full_reverse";
@@ -831,7 +831,7 @@ func_79FB(param_00, param_01) {
     var_09 = "mp_raid_breakable_manor_wall_static_whole_dmg";
     var_0A = "buildable_wood_wall_lp";
     var_0B = "buildable_wood_wall_collapse";
-  } else if(var_0A.var_106 == "mp_raid_ladder_01_broken_rig") {
+  } else if(var_0A.model == "mp_raid_ladder_01_broken_rig") {
     var_02 = "mp_raids_ladder_destroy";
     var_03 = "mp_raids_ladder_repair";
     var_04 = "mp_raids_ladder_destroy";
@@ -842,7 +842,7 @@ func_79FB(param_00, param_01) {
     var_09 = "mp_raid_ladder_01_broken";
     var_0A = "buildable_wood_wall_lp";
     var_0B = "buildable_wood_wall_collapse";
-  } else if(var_0A.var_106 == "mp_raid_ladder_03_broken") {
+  } else if(var_0A.model == "mp_raid_ladder_03_broken") {
     var_02 = "mp_raids_tun_ladder_destroy";
     var_03 = "mp_raids_tun_ladder_repair";
     var_04 = "mp_raids_tun_ladder_destroy";
@@ -853,7 +853,7 @@ func_79FB(param_00, param_01) {
     var_09 = "mp_raid_ladder_03_broken";
     var_0A = "buildable_wood_wall_lp";
     var_0B = "buildable_wood_wall_collapse";
-  } else if(var_0A.var_106 == "rblg_breakable_log_wall") {
+  } else if(var_0A.model == "rblg_breakable_log_wall") {
     var_02 = "mp_raids_logwall_full_destroy";
     var_03 = "mp_raids_logwall_full_repair";
     var_04 = "mp_raids_logwall_full_reverse";
@@ -864,7 +864,7 @@ func_79FB(param_00, param_01) {
     var_09 = "rblg_breakable_log_wall_static_whole_dmg";
     var_0A = "buildable_wood_wall_lp";
     var_0B = "buildable_wood_wall_collapse";
-  } else if(var_0A.var_106 == "mp_bunker_door_brick_01_window_01") {
+  } else if(var_0A.model == "mp_bunker_door_brick_01_window_01") {
     var_02 = "mp_raids_bunkerdoor_window_full_destroy";
     var_03 = "mp_raids_bunkerdoor_window_full_repair";
     var_04 = "mp_raids_bunkerdoor_window_full_reverse";
@@ -875,7 +875,7 @@ func_79FB(param_00, param_01) {
     var_09 = "mp_raids_bunker_door_window_01_static_dmg";
     var_0A = "buildable_wall_lp";
     var_0B = "buildable_wall_collapse";
-  } else if(var_0A.var_106 == "swf_bunker_door_brick_01_window_01") {
+  } else if(var_0A.model == "swf_bunker_door_brick_01_window_01") {
     var_02 = "mp_raids_dlc4_vaultdoor_full_destroy";
     var_03 = "mp_raids_dlc4_vaultdoor_full_repair";
     var_04 = "mp_raids_dlc4_vaultdoor_full_reverse";
@@ -886,7 +886,7 @@ func_79FB(param_00, param_01) {
     var_09 = "swf_bunker_door_brick_01_window_01_static_dmg";
     var_0A = "buildable_wall_lp";
     var_0B = "buildable_wall_collapse";
-  } else if(var_0A.var_106 == "mp_tun_door_brick_01_window_01") {
+  } else if(var_0A.model == "mp_tun_door_brick_01_window_01") {
     var_02 = "mp_raids_bunkerdoor_window_full_destroy";
     var_03 = "mp_raids_bunkerdoor_window_full_repair_b";
     var_04 = "mp_raids_bunkerdoor_window_full_reverse_b";
@@ -897,7 +897,7 @@ func_79FB(param_00, param_01) {
     var_09 = "mp_raids_tun_door_window_01_static_dmg";
     var_0A = "buildable_wall_lp";
     var_0B = "buildable_wall_collapse";
-  } else if(var_0A.var_106 == "hus_door_buildable_wall_01") {
+  } else if(var_0A.model == "hus_door_buildable_wall_01") {
     var_02 = "mp_war_husky_door_full_destroy";
     var_03 = "mp_war_husky_door_full_repair";
     var_04 = "mp_war_husky_door_full_reverse";
@@ -908,7 +908,7 @@ func_79FB(param_00, param_01) {
     var_09 = "hus_door_buildable_wall_static_full_dmg";
     var_0A = "buildable_wall_lp";
     var_0B = "buildable_wall_collapse";
-  } else if(var_0A.var_106 == "tun_door_buildable_wall_01") {
+  } else if(var_0A.model == "tun_door_buildable_wall_01") {
     var_02 = "mp_war_husky_door_full_destroy";
     var_03 = "mp_war_husky_door_full_repair_b";
     var_04 = "mp_war_husky_door_full_reverse_b";
@@ -919,7 +919,7 @@ func_79FB(param_00, param_01) {
     var_09 = "tun_door_buildable_wall_static_full_dmg";
     var_0A = "buildable_wall_lp";
     var_0B = "buildable_wall_collapse";
-  } else if(var_0A.var_106 == "tun_guard_tower_01") {
+  } else if(var_0A.model == "tun_guard_tower_01") {
     var_02 = "mp_raids_guard_tower_full_destroy";
     var_03 = "mp_raids_guard_tower_full_repair";
     var_04 = "mp_raids_guard_tower_full_reverse";
@@ -949,7 +949,7 @@ func_79FB(param_00, param_01) {
 
   if(isDefined(param_00.var_8260)) {
     param_00.mesh_anim_sheen = param_00.var_8260;
-    param_00.mesh_anim_original = param_00.var_106;
+    param_00.mesh_anim_original = param_00.model;
   }
 
   waittillframeend;
@@ -1059,7 +1059,7 @@ raidwallturrettoggle(param_00) {
   }
 
   self.var_9EDD method_8133();
-  self.var_9EDD method_805C();
+  self.var_9EDD save_undo_buffer();
 }
 
 raidwallsheenanimatetoggle(param_00, param_01) {
@@ -1097,9 +1097,9 @@ raidwalldeathtrigger(param_00) {
     return;
   }
 
-  var_02 = var_01 getistouchingentities(level.var_744A);
+  var_02 = var_01 getistouchingentities(level.players);
   foreach(var_04 in var_02) {
-    var_04 dodamage(500, var_04.var_116, undefined, undefined, "MOD_EXPLOSIVE");
+    var_04 dodamage(500, var_04.origin, undefined, undefined, "MOD_EXPLOSIVE");
   }
 }
 
@@ -1112,7 +1112,7 @@ raidwallrepairtriggersetcurprogress(param_00, param_01) {
 
 func_258A(param_00) {
   foreach(var_02 in param_00) {
-    var_03 = getnode(var_02.var_1A2, "targetname");
+    var_03 = getnode(var_02.target, "targetname");
     disconnectnodepair(var_02, var_03);
     connectnodepair(var_02, var_03, 1);
   }
@@ -1120,7 +1120,7 @@ func_258A(param_00) {
 
 func_2FC5(param_00) {
   foreach(var_02 in param_00) {
-    var_03 = getnode(var_02.var_1A2, "targetname");
+    var_03 = getnode(var_02.target, "targetname");
     disconnectnodepair(var_02, var_03);
   }
 }
@@ -1138,7 +1138,7 @@ func_7A09(param_00, param_01, param_02) {
       func_2FC5(param_01);
     }
 
-    param_00 method_805F();
+    param_00 saved_actionslotdata();
   }
 }
 
@@ -1156,7 +1156,7 @@ func_7A0A(param_00, param_01, param_02) {
       func_2FC5(param_02);
     }
 
-    param_00 method_805F();
+    param_00 saved_actionslotdata();
   }
 }
 
@@ -1178,7 +1178,7 @@ func_7A0B(param_00, param_01, param_02) {
 }
 
 func_79A0(param_00) {
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     if(var_02 common_scripts\_plant_weapon::func_5855() && isDefined(var_02.var_706D) && var_02.var_706D == param_00) {
       var_02 common_scripts\_plant_weapon::forcedismountweapon();
     }
@@ -1192,7 +1192,7 @@ removecollidingplantedtripwires(param_00) {
 
   foreach(var_02 in level.tripwireplantedmodels) {
     if(isDefined(var_02)) {
-      if(distancesquared(param_00.var_116, var_02.var_116) > 360000) {
+      if(distancesquared(param_00.origin, var_02.origin) > 360000) {
         continue;
       }
 
@@ -1228,12 +1228,12 @@ func_79FC(param_00, param_01) {
       self.var_5708 = 0;
       self.var_56FC = 1;
       var_08 solid();
-      var_08.var_116 = var_08.var_982D["full_pos"][0].var_116;
+      var_08.origin = var_08.var_982D["full_pos"][0].origin;
       if(isDefined(var_04)) {
         foreach(var_0A in var_04) {
           var_0A notsolid();
           var_0A.var_A046 = 0;
-          var_0A moveTo(var_0A.var_116 - (0, 320, 0), 0.1);
+          var_0A moveTo(var_0A.origin - (0, 320, 0), 0.1);
         }
       }
 
@@ -1248,12 +1248,12 @@ func_79FC(param_00, param_01) {
       self.var_5708 = 1;
       self.var_56FC = 0;
       var_08 solid();
-      var_08.var_116 = var_08.var_982D["half_pos"][0].var_116;
+      var_08.origin = var_08.var_982D["half_pos"][0].origin;
       if(isDefined(var_04)) {
         foreach(var_0A in var_04) {
           var_0A notsolid();
           var_0A.var_A046 = 0;
-          var_0A moveTo(var_0A.var_116 - (0, 320, 0), 0.1);
+          var_0A moveTo(var_0A.origin - (0, 320, 0), 0.1);
         }
       }
 
@@ -1271,7 +1271,7 @@ func_79FC(param_00, param_01) {
       foreach(var_0A in var_04) {
         var_0A solid();
         var_0A.var_A046 = 1;
-        var_0A moveTo(var_0A.var_116 + (0, 320, 0), 0.1);
+        var_0A moveTo(var_0A.origin + (0, 320, 0), 0.1);
       }
     }
 
@@ -1599,7 +1599,7 @@ func_7A01(param_00, param_01, param_02, param_03, param_04) {
   var_06 = 999999;
   var_07 = undefined;
   foreach(var_09 in var_05.var_982D["explosive_trigger"]) {
-    var_0A = distancesquared(var_09.var_116, self.origin);
+    var_0A = distancesquared(var_09.origin, self.origin);
     if(var_0A < var_06) {
       var_06 = var_0A;
       var_07 = var_09;
@@ -1617,7 +1617,7 @@ func_7A01(param_00, param_01, param_02, param_03, param_04) {
 raidwallstaticsheensetup(param_00) {
   if(isDefined(param_00.var_8260)) {
     param_00.mesh_sheen = param_00.var_8260;
-    param_00.mesh_original = param_00.var_106;
+    param_00.mesh_original = param_00.model;
   }
 }
 
@@ -1689,7 +1689,7 @@ func_5A4F(param_00, param_01, param_02) {
   var_05 = common_scripts\utility::func_46B7("exempt_from_kill", "targetname");
   var_04 = common_scripts\utility::func_F94(var_04, var_05);
   foreach(var_07 in var_04) {
-    var_08 = distancesquared(param_00, var_07.var_116);
+    var_08 = distancesquared(param_00, var_07.origin);
     if(var_08 < var_03) {
       var_09 = var_07 lib_0502::func_207E("explosive_trigger");
       if(isDefined(var_09)) {
@@ -1712,7 +1712,7 @@ func_2F99(param_00, param_01) {
       continue;
     }
 
-    var_07 = distancesquared(param_00, var_06.var_116);
+    var_07 = distancesquared(param_00, var_06.origin);
     if(var_07 < var_02) {
       disable_wall(var_06);
     }
@@ -1909,9 +1909,9 @@ raidwireaimatedexplosivetimer(param_00, param_01) {
   var_04 = 0;
   while(var_03 > gettime()) {
     if(var_04 != 0) {
-      lib_04F3::func_79CB("dynamite_timer_tick", param_00.var_116);
+      lib_04F3::func_79CB("dynamite_timer_tick", param_00.origin);
     } else {
-      lib_04F3::func_79CB("dynamite_timer_tock", param_00.var_116);
+      lib_04F3::func_79CB("dynamite_timer_tock", param_00.origin);
     }
 
     var_04 = var_04 + 1 % 2;
@@ -1924,7 +1924,7 @@ raidwireaimatedexplosivetimer(param_00, param_01) {
     }
 
     maps\mp\gametypes\_hostmigration::func_A783(var_06);
-    if(isDefined(level.var_4E09)) {
+    if(isDefined(level.hostmigrationtimer)) {
       var_07 = maps\mp\gametypes\_hostmigration::func_A782();
       var_03 = var_03 + var_07;
     }
@@ -1939,7 +1939,7 @@ raidwireanimatedexplosiveexplode(param_00, param_01, param_02) {
   var_04 = var_03.var_982D["explosive_model"][0];
   self.var_2599 = 0;
   if(!common_scripts\utility::func_562E(param_02)) {
-    param_00 entityradiusdamage(var_04.var_116, 256, 150, 20, param_01, "MOD_EXPLOSIVE", "bomb_site_mp");
+    param_00 entityradiusdamage(var_04.origin, 256, 150, 20, param_01, "MOD_EXPLOSIVE", "bomb_site_mp");
   }
 
   self notify("stop_timer");
@@ -1996,7 +1996,7 @@ raidwireanimatedanimatedmodel(param_00) {
       continue;
     }
 
-    var_02 = lib_0380::func_2889("buildable_barbed_wire_start", undefined, self.var_9D65.var_116);
+    var_02 = lib_0380::func_2889("buildable_barbed_wire_start", undefined, self.var_9D65.origin);
     thread barbed_wire_lp_snd_handler(self.var_9D65);
     if(isDefined(var_01) && var_01 maps\mp\_utility::hasperk("specialty_improvedobjectives")) {
       param_00 method_8278("mp_raids_barbedwire_full_repair_fast", "barbedwire");
@@ -2007,7 +2007,7 @@ raidwireanimatedanimatedmodel(param_00) {
     self.var_9D65 waittill("endUse", var_01, var_03);
     if(var_03) {
       lib_0502::func_7D5C(param_00);
-      var_04 = lib_0380::func_2889("buildable_barbed_wire_end", undefined, self.var_9D65.var_116);
+      var_04 = lib_0380::func_2889("buildable_barbed_wire_end", undefined, self.var_9D65.origin);
       for(;;) {
         self waittill("trigger", var_05, var_01);
         if(var_05 == "bomb_exploded" || var_05 == "destroyed") {
@@ -2017,7 +2017,7 @@ raidwireanimatedanimatedmodel(param_00) {
     }
 
     if(isDefined(var_03) && var_03 == 0) {
-      var_06 = lib_0380::func_2889("buildable_barbed_wire_cancel", undefined, self.var_9D65.var_116);
+      var_06 = lib_0380::func_2889("buildable_barbed_wire_cancel", undefined, self.var_9D65.origin);
     } else {}
 
     param_00 method_8278("mp_raids_barbedwire_full_destroy", "barbedwire");
@@ -2028,26 +2028,26 @@ barbed_wire_lp_snd_handler(param_00) {
   level endon("game_ended");
   param_00 endon("endUse");
   wait(0.5);
-  var_01 = lib_0380::func_2889("buildable_barbed_wire_loop_start", undefined, param_00.var_116);
+  var_01 = lib_0380::func_2889("buildable_barbed_wire_loop_start", undefined, param_00.origin);
   thread play_barbed_wire_loop(param_00);
   thread play_barbed_wire_wrench(param_00);
 }
 
 play_barbed_wire_loop(param_00) {
   level endon("game_ended");
-  var_01 = lib_0380::func_2889("buildable_barbed_wire_lp", undefined, param_00.var_116);
+  var_01 = lib_0380::func_2889("buildable_barbed_wire_lp", undefined, param_00.origin);
   param_00 waittill("endUse");
   if(isDefined(var_01)) {
-    lib_0380::func_2893(var_01, 0.5);
+    lib_0380::_stoplocalsound(var_01, 0.5);
   }
 }
 
 play_barbed_wire_wrench(param_00) {
   level endon("game_ended");
-  var_01 = lib_0380::func_2889("buildable_barbed_wire_wrench", undefined, param_00.var_116);
+  var_01 = lib_0380::func_2889("buildable_barbed_wire_wrench", undefined, param_00.origin);
   param_00 waittill("endUse");
   if(isDefined(var_01)) {
-    lib_0380::func_2893(var_01, 0.1);
+    lib_0380::_stoplocalsound(var_01, 0.1);
   }
 }
 
@@ -2078,7 +2078,7 @@ raidwireanimatedghostmodel(param_00) {
 }
 
 raidwireanimatedexplosivemodel(param_00, param_01) {
-  level.var_611["raid_door_explode"] = loadfx("vfx/map/mp_raid_cobra/raid_wall_breach_mp");
+  level._effect["raid_door_explode"] = loadfx("vfx/map/mp_raid_cobra/raid_wall_breach_mp");
   var_02 = param_00.var_982E;
   param_00.var_6A55 = param_00 method_85A0();
   param_00 lib_0502::func_7997();
@@ -2092,8 +2092,8 @@ raidwireanimatedexplosivemodel(param_00, param_01) {
     switch (var_04) {
       case "bomb_exploded":
         if(!common_scripts\utility::func_562E(var_06)) {
-          lib_04F3::func_79CB("mp_war_bomb_explo", param_00.var_116);
-          playFX(common_scripts\utility::func_44F5("raid_door_explode"), param_00.var_116, param_00.var_1D + (0, -90, 0));
+          lib_04F3::func_79CB("mp_war_bomb_explo", param_00.origin);
+          playFX(common_scripts\utility::func_44F5("raid_door_explode"), param_00.origin, param_00.var_1D + (0, -90, 0));
         }
 
         param_00 lib_0502::func_7997();
@@ -2109,12 +2109,12 @@ raidwireanimatedexplosivemodel(param_00, param_01) {
           var_07 = 2.5;
         }
 
-        var_03 = magicgrenademanual("war_dynamite_mp", param_00.var_116, (0, 0, 0), var_07 + 1);
-        var_03 method_8449(param_00);
+        var_03 = magicgrenademanual("war_dynamite_mp", param_00.origin, (0, 0, 0), var_07 + 1);
+        var_03 linktosynchronizedparent(param_00);
         param_00 setModel("npc_usa_bangalore_base");
         param_00 setCanDamage(1);
-        param_00.var_706B = var_05.var_1A7;
-        badplace_cylinder("war_dynamite_mp_" + param_00 getentitynumber(), var_07 + 1, param_00.var_116, 300, 300, "allies", "axis");
+        param_00.var_706B = var_05.team;
+        badplace_cylinder("war_dynamite_mp_" + param_00 getentitynumber(), var_07 + 1, param_00.origin, 300, 300, "allies", "axis");
         lib_0502::func_7D5C(param_00);
         self.var_9D65 thread lib_0502::func_8A18(param_00);
         break;
@@ -2244,9 +2244,9 @@ func_7A1A(param_00) {
   var_04 = self.var_982D["arrow"][0];
   var_05 = self.var_982D["repair_model"][0];
   lib_0502::func_1D3A(var_01, 0);
-  var_06 = param_00.var_116;
-  var_07 = param_00.var_116 + (0, 0, -50);
-  param_00.var_116 = var_07;
+  var_06 = param_00.origin;
+  var_07 = param_00.origin + (0, 0, -50);
+  param_00.origin = var_07;
   for(;;) {
     lib_0502::func_1D3B(0);
     var_02 makeunusable();
@@ -2304,7 +2304,7 @@ play_barbed_wire_oneshots(param_00) {
     self waittill("player_in_slowtrigger", var_01);
     if(isDefined(var_01) && isDefined(var_01.var_53C5)) {
       while(isDefined(var_01) && var_01.var_53C5 == 1) {
-        lib_0380::func_2889(param_00, undefined, var_01.var_116);
+        lib_0380::func_2889(param_00, undefined, var_01.origin);
         var_02 = randomfloatrange(0.5, 1.2);
         wait(var_02);
       }
@@ -2320,7 +2320,7 @@ play_barbed_wire_settles(param_00) {
     self waittill("player_in_slowtrigger", var_01);
     if(isDefined(var_01) && isDefined(var_01.var_53C5)) {
       while(isDefined(var_01) && var_01.var_53C5 == 1) {
-        lib_0380::func_2889(param_00, undefined, var_01.var_116);
+        lib_0380::func_2889(param_00, undefined, var_01.origin);
         var_02 = randomfloatrange(0.5, 1.2);
         wait(var_02);
       }

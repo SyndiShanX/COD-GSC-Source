@@ -173,7 +173,7 @@ func_2888(param_00, param_01, param_02, param_03) {
   return var_04;
 }
 
-func_2893(param_00, param_01) {
+_stoplocalsound(param_00, param_01) {
   if(isDefined(param_00)) {
     stopclientsound(param_00, param_01);
   }

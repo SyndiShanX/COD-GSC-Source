@@ -36,8 +36,8 @@ main() {
     var_02.origin = (10, 196, 139.9);
   }
 
-  common_scripts\utility::func_3C87("power_sz2");
-  common_scripts\utility::func_3C87("outer_to_arena");
+  common_scripts\utility::flag_init("power_sz2");
+  common_scripts\utility::flag_init("outer_to_arena");
   maps / mp / zombies / zombie_survival_common::init();
   level thread dig_kill_z_listener();
   init_dig_srv_zones();
@@ -62,7 +62,7 @@ init_dig_srv_zones() {
   lib_055A::func_530A("zone_under_outer", 1);
   lib_055A::func_993("zone_under_outer", "zone_under_arena", "outer_to_arena");
   lib_055A::func_88A();
-  common_scripts\utility::func_3C8F("outer_to_arena");
+  common_scripts\utility::flag_set("outer_to_arena");
 }
 
 init_new_zombie_types() {
@@ -102,7 +102,7 @@ dig_srv_blood_founts() {
 }
 
 blood_fount_single_listen(param_00, param_01) {
-  playFXOnTag(level.var_611["dlc_zmb_dig02_blood_statue_grit"], param_00, "TAG_ORIGIN");
+  playFXOnTag(level._effect["dlc_zmb_dig02_blood_statue_grit"], param_00, "TAG_ORIGIN");
   lib_0378::func_8D74("aud_turn_on_bloodfalls", param_00);
   level thread common_scripts\_exploder::func_88E(param_01);
 }
@@ -151,7 +151,7 @@ srv_rune_wall_init() {
         var_00.rune_models[var_06].my_index = var_06;
         var_00.rune_models[var_06].my_base_model = var_03.model;
         var_00.rune_models[var_06].my_highlight_model = var_03.model + "a";
-        var_00.rune_models[var_06].var_29B5 = ::rune_damaged;
+        var_00.rune_models[var_06].damagecallback = ::rune_damaged;
         break;
 
       case "rune_wall_special_rune_1":
@@ -207,7 +207,7 @@ srv_rune_wall_reset() {
     var_02 setModel(var_02.my_base_model);
     var_02 setCanDamage(1);
     var_02 setdamagecallbackon(1);
-    var_02.var_29B5 = ::rune_damaged;
+    var_02.damagecallback = ::rune_damaged;
   }
 }
 
@@ -220,7 +220,7 @@ rune_damaged(param_00, param_01, param_02, param_03, param_04, param_05, param_0
         self.var_5594 = 1;
         self setCanDamage(0);
         self setdamagecallbackon(0);
-        self.var_29B5 = undefined;
+        self.damagecallback = undefined;
         level notify("correct_rune_hit", self.my_index);
       } else {
         level notify("incorrect_rune_hit", self.my_index);
@@ -311,8 +311,8 @@ srv_kf_ee_init() {
     var_02.sign_model = spawn("script_model", var_02.origin);
     var_02.sign_model setModel("zmd_sign_objective_01");
     var_02.sign_model.angles = var_02.angles;
-    if(isDefined(var_02.var_8276)) {
-      var_02.sign_model.test_radius = var_02.var_8276;
+    if(isDefined(var_02.scriptmodelplayanim)) {
+      var_02.sign_model.test_radius = var_02.scriptmodelplayanim;
     } else {
       var_02.sign_model.test_radius = 16;
     }

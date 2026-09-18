@@ -89,12 +89,12 @@ func_1947(param_00, param_01, param_02) {
   var_03 = func_1949(param_00, param_01.origin);
   if(isDefined(param_02) && param_02) {
     if(!var_03) {
-      var_04 = param_01.origin - (0, 0, param_01.var_14F * 0.5);
+      var_04 = param_01.origin - (0, 0, param_01.radius * 0.5);
       var_03 = func_1949(param_00, var_04);
     }
 
     if(!var_03) {
-      var_04 = param_01.origin + (0, 0, param_01.var_14F * 0.5);
+      var_04 = param_01.origin + (0, 0, param_01.radius * 0.5);
       var_03 = func_1949(param_00, var_04);
     }
   }

@@ -78,7 +78,7 @@ func_7846(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   }
 
   var_07.var_4DAD = param_04;
-  common_scripts\utility::func_3C87(param_00);
+  common_scripts\utility::flag_init(param_00);
 }
 
 func_782F(param_00, param_01, param_02) {
@@ -156,7 +156,7 @@ func_781E(param_00, param_01, param_02, param_03, param_04) {
   var_06.var_4DAC = param_04;
   var_06.var_9399 = common_scripts\utility::func_98E7(isarray(param_03), param_03, [param_03]);
   var_05.var_939C[var_06.index] = var_06;
-  common_scripts\utility::func_3C87(func_7838(param_00, param_01));
+  common_scripts\utility::flag_init(func_7838(param_00, param_01));
 }
 
 func_7848(param_00) {
@@ -170,7 +170,7 @@ func_7870(param_00, param_01) {
 }
 
 func_782D(param_00, param_01) {
-  common_scripts\utility::func_3C8F(func_7838(param_00, param_01));
+  common_scripts\utility::flag_set(func_7838(param_00, param_01));
 }
 
 func_783E(param_00, param_01) {
@@ -311,7 +311,7 @@ func_AB8D(param_00, param_01) {
 }
 
 func_AB88(param_00) {
-  common_scripts\utility::func_3C8F(param_00);
+  common_scripts\utility::flag_set(param_00);
 }
 
 should_write_match_data(param_00, param_01) {
@@ -542,7 +542,7 @@ func_7849(param_00) {
     level childthread[[param_00.var_782C]]();
   }
 
-  common_scripts\utility::func_3C8F(param_00.name);
+  common_scripts\utility::flag_set(param_00.name);
 }
 
 func_7832(param_00) {
@@ -1022,7 +1022,7 @@ func_4BC8(param_00) {
       continue;
     }
 
-    common_scripts\utility::func_3C8F(var_03);
+    common_scripts\utility::flag_set(var_03);
     func_4BCA(var_03, 1);
   }
 }
@@ -1052,7 +1052,7 @@ func_4BC9(param_00, param_01, param_02, param_03) {
       param_02 = "ZOMBIES_EMPTY_STRING";
     }
   } else {
-    common_scripts\utility::func_3C87(param_00);
+    common_scripts\utility::flag_init(param_00);
   }
 
   if(isDefined(param_01)) {
@@ -1146,7 +1146,7 @@ giveplayereventbuff() {
   var_00 waittill("zombie_player_spawn_finished");
   var_00 endon("disconnect");
   var_01 = ["blunderbuss_zm"];
-  var_02 = maps\mp\zombies\_zombies_magicbox::func_454B(var_00, lib_0547::func_AAF9(common_scripts\utility::func_7A33(var_01)));
+  var_02 = maps\mp\zombies\_zombies_magicbox::func_454B(var_00, lib_0547::func_AAF9(common_scripts\utility::random(var_01)));
   maps\mp\zombies\_zombies_magicbox::func_A7D6(var_00, var_02);
   lib_0533::func_F37(2, 1, 0);
 }

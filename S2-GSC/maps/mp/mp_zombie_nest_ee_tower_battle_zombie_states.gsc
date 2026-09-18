@@ -220,7 +220,7 @@ func_5629() {
 func_9E0E(param_00, param_01, param_02, param_03, param_04) {
   var_05 = maps / mp / mp_zombie_nest_special_event_creator_interface::func_9959();
   for(var_06 = 0; var_06 < param_00.size; var_06++) {
-    var_07 = common_scripts\utility::func_7A33(param_01);
+    var_07 = common_scripts\utility::random(param_01);
     if(maps / mp / mp_zombie_nest_special_event_creator_interface::func_ABD2(param_00[var_06])) {
       continue;
     }
@@ -495,7 +495,7 @@ func_459C(param_00) {
     }
   }
 
-  return common_scripts\utility::func_7A33(param_00);
+  return common_scripts\utility::random(param_00);
 }
 
 func_7590(param_00, param_01) {

@@ -5,9 +5,9 @@
 
 func_52F7() {
   func_5304();
-  level.var_611["plane_death"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
-  level.var_611["airstrike_death_allies"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
-  level.var_611["airstrike_death_axis"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
+  level._effect["plane_death"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
+  level._effect["airstrike_death_allies"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
+  level._effect["airstrike_death_axis"] = loadfx("vfx/explosion/vehicle_warbird_explosion_midair");
   level.var_80BC = [];
 }
 
@@ -327,7 +327,7 @@ func_909F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     }
 
     var_0E.var_620D method_8351(var_15, func_4613(param_05), 20, 20, var_14, var_13, func_4614(param_05));
-    var_0E.var_620D method_8449(var_0E, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_0E.var_620D linktosynchronizedparent(var_0E, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
 
   var_0E.var_1C8 = param_05;

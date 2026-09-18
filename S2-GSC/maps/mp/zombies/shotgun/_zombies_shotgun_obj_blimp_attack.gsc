@@ -4,35 +4,35 @@
 *************************************************************************/
 
 sg_init_obj_blimp_attack() {
-  common_scripts\utility::func_3C87("sky_rush");
+  common_scripts\utility::flag_init("sky_rush");
   blimp_init();
   aud_blimp_attack_init();
-  level.var_611["zmb_zeppelin_shot"] = loadfx("vfx/zombie/zmb_zeppelin_shot");
-  level.var_611["zmb_zep_battery_fire_trail"] = loadfx("vfx/map/mp_zombie_nest/zmb_zep_battery_fire_trail");
-  level.var_611["zmb_zeppelin_shot_charge_weak_spot1"] = loadfx("vfx/zombie/prototype_fx/zmb_zeppelin_shot_charge_weak_spot1");
-  level.var_611["zmb_zeppelin_shot_charge_weak_spot2"] = loadfx("vfx/zombie/prototype_fx/zmb_zeppelin_shot_charge_weak_spot2");
-  level.var_611["zmb_zeppelin_shot_charge_weak_spot3"] = loadfx("vfx/zombie/prototype_fx/zmb_zeppelin_shot_charge_weak_spot3");
-  level.var_611["zmb_zeppelin_spotlight"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zeppelin_spotlight");
-  level.var_611["zmb_zeppelin_battery_explosion"] = loadfx("vfx/explosion/zmb_zeppelin_battery_explosion");
-  level.var_611["zmb_zeppelin_projectile"] = loadfx("vfx/trail/zmb_zeppelin_projectile");
-  level.var_611["temp_klaus_radius"] = loadfx("vfx/zombie/prototype_fx/temp_klaus_radius");
-  level.var_611["zmb_geistkraft_radius_400"] = loadfx("vfx/map/mp_zombie_nest/zmb_geistkraft_radius_400");
-  level.var_611["zmb_zeppelin_battery_hide_explosion"] = loadfx("vfx/explosion/zmb_zeppelin_battery_hide_explosion");
-  level.var_611["gk_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_1");
-  level.var_611["gk_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_2");
-  level.var_611["gk_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_3");
-  level.var_611["zmb_zeppelin_battery_damage"] = loadfx("vfx/zombie/prototype_fx/zmb_zeppelin_battery_damage");
-  level.var_611["zmb_zep_rocket_smoketrail"] = loadfx("vfx/trail/zmb_zep_rocket_smoketrail");
-  level.var_611["zmb_zeppelin_spotlight_nolight"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zeppelin_spotlight_nolight");
-  level.var_611["zmb_zeppelin_shot_charge_barrel"] = loadfx("vfx/map/mp_zombie_nest/zmb_zeppelin_shot_charge_barrel");
-  level.var_611["zmb_zeppelin_shot_charge"] = loadfx("vfx/map/mp_zombie_nest/zmb_zeppelin_shot_charge");
-  level.var_611["zmb_zeppelin_shot_explosion"] = loadfx("vfx/explosion/zmb_zeppelin_shot_explosion");
-  level.var_611["zmb_zep_battery_land_explosion"] = loadfx("vfx/explosion/zmb_zep_battery_land_explosion");
-  level.var_611["zmb_zeppelin_gun_flash_wv"] = loadfx("vfx/muzzleflash/zmb_zeppelin_gun_flash_wv");
-  level.var_611["zmb_zeppelin_gun_light"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zeppelin_gun_light");
-  level.var_611["zmb_zeppelin_underlight"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zeppelin_underlight");
-  level.var_611["zmb_zeppelin_spotlight_assault"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zeppelin_spotlight_assault");
-  level.var_611["zmb_zeppelin_lightning_bolt"] = loadfx("vfx/map/mp_zombie_nest/zmb_zeppelin_lightning_bolt");
+  level._effect["zmb_zeppelin_shot"] = loadfx("vfx/zombie/zmb_zeppelin_shot");
+  level._effect["zmb_zep_battery_fire_trail"] = loadfx("vfx/map/mp_zombie_nest/zmb_zep_battery_fire_trail");
+  level._effect["zmb_zeppelin_shot_charge_weak_spot1"] = loadfx("vfx/zombie/prototype_fx/zmb_zeppelin_shot_charge_weak_spot1");
+  level._effect["zmb_zeppelin_shot_charge_weak_spot2"] = loadfx("vfx/zombie/prototype_fx/zmb_zeppelin_shot_charge_weak_spot2");
+  level._effect["zmb_zeppelin_shot_charge_weak_spot3"] = loadfx("vfx/zombie/prototype_fx/zmb_zeppelin_shot_charge_weak_spot3");
+  level._effect["zmb_zeppelin_spotlight"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zeppelin_spotlight");
+  level._effect["zmb_zeppelin_battery_explosion"] = loadfx("vfx/explosion/zmb_zeppelin_battery_explosion");
+  level._effect["zmb_zeppelin_projectile"] = loadfx("vfx/trail/zmb_zeppelin_projectile");
+  level._effect["temp_klaus_radius"] = loadfx("vfx/zombie/prototype_fx/temp_klaus_radius");
+  level._effect["zmb_geistkraft_radius_400"] = loadfx("vfx/map/mp_zombie_nest/zmb_geistkraft_radius_400");
+  level._effect["zmb_zeppelin_battery_hide_explosion"] = loadfx("vfx/explosion/zmb_zeppelin_battery_hide_explosion");
+  level._effect["gk_raven_hc_ee_uber_stg_1"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_1");
+  level._effect["gk_raven_hc_ee_uber_stg_2"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_2");
+  level._effect["gk_raven_hc_ee_uber_stg_3"] = loadfx("vfx/zombie/abilities_perks/zmb_gk_uber_charge_stg_3");
+  level._effect["zmb_zeppelin_battery_damage"] = loadfx("vfx/zombie/prototype_fx/zmb_zeppelin_battery_damage");
+  level._effect["zmb_zep_rocket_smoketrail"] = loadfx("vfx/trail/zmb_zep_rocket_smoketrail");
+  level._effect["zmb_zeppelin_spotlight_nolight"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zeppelin_spotlight_nolight");
+  level._effect["zmb_zeppelin_shot_charge_barrel"] = loadfx("vfx/map/mp_zombie_nest/zmb_zeppelin_shot_charge_barrel");
+  level._effect["zmb_zeppelin_shot_charge"] = loadfx("vfx/map/mp_zombie_nest/zmb_zeppelin_shot_charge");
+  level._effect["zmb_zeppelin_shot_explosion"] = loadfx("vfx/explosion/zmb_zeppelin_shot_explosion");
+  level._effect["zmb_zep_battery_land_explosion"] = loadfx("vfx/explosion/zmb_zep_battery_land_explosion");
+  level._effect["zmb_zeppelin_gun_flash_wv"] = loadfx("vfx/muzzleflash/zmb_zeppelin_gun_flash_wv");
+  level._effect["zmb_zeppelin_gun_light"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zeppelin_gun_light");
+  level._effect["zmb_zeppelin_underlight"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zeppelin_underlight");
+  level._effect["zmb_zeppelin_spotlight_assault"] = loadfx("vfx/lights/mp_zombie_nest/zmb_zeppelin_spotlight_assault");
+  level._effect["zmb_zeppelin_lightning_bolt"] = loadfx("vfx/map/mp_zombie_nest/zmb_zeppelin_lightning_bolt");
   maps / mp / zombies / shotgun / _zombies_shotgun_gamemode_utility::sg_obj_register_defaults("blimp_attack", ::run_blimp_attack, 240, 0, 1);
 }
 
@@ -128,7 +128,7 @@ blimp_run_behavior() {
       case "blimp_new_objective":
         blimp_set_first_assault();
         blimp_set_all_attacks_enabled();
-        common_scripts\utility::func_3C8F("sky_rush");
+        common_scripts\utility::flag_set("sky_rush");
         break;
 
       case "blimp_leave":
@@ -171,7 +171,7 @@ blimp_reset(param_00) {
   }
 
   thread blimp_wait_for_all_weakpoints_destroyed();
-  common_scripts\utility::func_3C8F("sky_rush");
+  common_scripts\utility::flag_set("sky_rush");
   blimp_cancel_round_wait();
 }
 
@@ -232,9 +232,9 @@ blimp_attach_weakpoints(param_00) {
 
   foreach(var_08 in var_01) {
     var_08 enablelinkTo();
-    var_08 method_8449(self);
-    var_08.var_65D8 method_8449(self);
-    var_08.var_65D9 method_8449(self);
+    var_08 linktosynchronizedparent(self);
+    var_08.var_65D8 linktosynchronizedparent(self);
+    var_08.var_65D9 linktosynchronizedparent(self);
     var_08.var_65D8 scriptmodelplayanim("zom_zeppelin_panels_01_closed_idle");
     var_08.var_65D8 method_8511();
   }
@@ -247,7 +247,7 @@ blimp_attach_rockets(param_00) {
   var_01 = common_scripts\utility::func_46B5(param_00, "targetname");
   var_02 = getEntArray(var_01.target, "targetname");
   foreach(var_04 in var_02) {
-    var_04 method_8449(self);
+    var_04 linktosynchronizedparent(self);
     var_04 thread rocket_handle_damage();
     var_04 method_8511();
   }
@@ -258,13 +258,13 @@ blimp_attach_rockets(param_00) {
 blimp_attach_turret(param_00, param_01) {
   var_02 = common_scripts\utility::func_46B5(param_00, "targetname");
   self.blimp_turret = var_02 turret_build(param_01, var_02.script_noteworthy, ::turret_modify_player_damage, ::turret_on_player_damage);
-  self.blimp_turret method_8449(self);
+  self.blimp_turret linktosynchronizedparent(self);
   self.blimp_turret method_8511();
 }
 
 blimp_attach_battery(param_00) {
   self.battery = getEnt(param_00, "targetname");
-  self.battery method_8449(self);
+  self.battery linktosynchronizedparent(self);
 }
 
 blimp_set_battery_count(param_00) {
@@ -327,7 +327,7 @@ blimp_wait_for_all_weakpoints_destroyed() {
   while(level.blimp_parts_destroyed < self.blimp_weak_points.size) {
     self waittill("blimp_weakpoint_destroyed", var_00, var_02);
     thread set_zombies_active_for_seconds(15);
-    playFX(level.var_611["zmb_zeppelin_battery_explosion"], var_02.origin);
+    playFX(level._effect["zmb_zeppelin_battery_explosion"], var_02.origin);
     level.blimp_parts_destroyed++;
     foreach(var_05 in level.players) {
       var_05 setclientomnvar("ui_onevone_class_4", level.blimp_parts_destroyed);
@@ -356,7 +356,7 @@ blimp_take_damage() {
   }
 
   self waittill("blimp_weakpoint_destroyed", var_00, var_02);
-  playFX(level.var_611["zmb_zeppelin_battery_explosion"], var_02.origin);
+  playFX(level._effect["zmb_zeppelin_battery_explosion"], var_02.origin);
   if(!isDefined(level.blimp_parts_destroyed)) {
     level.blimp_parts_destroyed = 1;
   } else {
@@ -616,7 +616,7 @@ weakpoint_take_damage_and_report_death(param_00) {
     }
 
     if(randomint(100) < 30) {
-      playFX(level.var_611["zmb_zeppelin_battery_damage"], self.origin);
+      playFX(level._effect["zmb_zeppelin_battery_damage"], self.origin);
     }
 
     var_07 maps\mp\gametypes\_damagefeedback::func_A102("standard");
@@ -697,7 +697,7 @@ weakpoint_reveal(param_00) {
   }
 
   for(var_06 = 0; var_06 < 4; var_06++) {
-    var_07 = common_scripts\utility::func_7A33(var_02);
+    var_07 = common_scripts\utility::random(var_02);
     var_02 = common_scripts\utility::func_F93(var_02, var_07);
     var_01 = common_scripts\utility::func_F6F(var_01, var_07);
   }
@@ -874,7 +874,7 @@ turret_zap_players() {
   if(!isDefined(level.var_179A.var_982A)) {
     level.var_179A.var_982A = spawn("script_model", level.var_179A gettagorigin("J_searchlight_A_RI_2"));
     level.var_179A.var_982A setModel("tag_origin");
-    level.var_179A.var_982A method_8449(level.var_179A);
+    level.var_179A.var_982A linktosynchronizedparent(level.var_179A);
   }
 
   for(;;) {
@@ -894,7 +894,7 @@ turret_zap_players() {
       var_03 = level.var_179A.blimp_turret gettagorigin("TAG_PITCH");
       var_04 = spawn("script_model", var_03);
       var_04 setModel("Tag_Origin");
-      var_04 method_8449(level.var_179A.blimp_turret);
+      var_04 linktosynchronizedparent(level.var_179A.blimp_turret);
       var_04 lib_0378::func_8D74("aud_blimp_charge");
       var_05 = 0;
       while(isalive(var_02)) {
@@ -936,11 +936,11 @@ turret_zap_players() {
       var_12 = spawn("script_model", var_10);
       var_12 setModel("tag_origin");
       var_12.angles = var_11;
-      var_12 method_8449(level.var_179A.blimp_turret);
-      playFXOnTag(level.var_611["zmb_zeppelin_spotlight_assault"], var_12, "tag_origin");
-      playFXOnTag(level.var_611["zmb_zeppelin_shot"], var_0F, "tag_origin");
+      var_12 linktosynchronizedparent(level.var_179A.blimp_turret);
+      playFXOnTag(level._effect["zmb_zeppelin_spotlight_assault"], var_12, "tag_origin");
+      playFXOnTag(level._effect["zmb_zeppelin_shot"], var_0F, "tag_origin");
       wait(1);
-      stopFXOnTag(level.var_611["zmb_zeppelin_spotlight_assault"], var_12, "tag_origin");
+      stopFXOnTag(level._effect["zmb_zeppelin_spotlight_assault"], var_12, "tag_origin");
       turret_start_firing();
       var_13 = launchbeam("zmb_tesla_zep_beam", level.var_179A.blimp_turret, "tag_flash", var_0F, "tag_origin");
       wait(1);
@@ -1001,11 +1001,11 @@ battery_spawn(param_00) {
   }
 
   if(battery_should_collect_souls()) {
-    playFXOnTag(level.var_611["zmb_geistkraft_radius_400"], var_01, "TAG_ORIGIN");
+    playFXOnTag(level._effect["zmb_geistkraft_radius_400"], var_01, "TAG_ORIGIN");
     var_03 = 20;
     thread battery_show_soul_collect_progress(var_01);
     var_01 maps / mp / mp_zombies_soul_collection::func_170B(var_03, 400, 100, var_02, undefined, "tag_fx", "zmb_zep_receiver_charge_pnt", "tag_origin", undefined, var_01.var_34A5.var_7F41, (0, 0, 48));
-    stopFXOnTag(level.var_611["zmb_geistkraft_radius_400"], var_01, "TAG_ORIGIN");
+    stopFXOnTag(level._effect["zmb_geistkraft_radius_400"], var_01, "TAG_ORIGIN");
   }
 
   lib_0585::func_8F7E(var_01.origin, undefined, undefined, undefined, undefined);
@@ -1039,7 +1039,7 @@ battery_show_soul_collect_progress(param_00) {
       wait 0.05;
     }
 
-    var_03 = spawnfx(level.var_611["gk_raven_hc_ee_uber_stg_" + var_02 + 1], param_00.var_9FE6.origin, anglesToForward(param_00.var_9FE6.angles), anglestoup(param_00.var_9FE6.angles));
+    var_03 = spawnfx(level._effect["gk_raven_hc_ee_uber_stg_" + var_02 + 1], param_00.var_9FE6.origin, anglesToForward(param_00.var_9FE6.angles), anglestoup(param_00.var_9FE6.angles));
     triggerfx(var_03);
     var_02++;
   }
@@ -1103,7 +1103,7 @@ battery_rotate_to_motion() {
 battery_spawn_drop(param_00, param_01) {
   var_02 = spawn("script_model", self.origin);
   var_02 setModel("zmb_uberschnalle_battery_chunk_01");
-  playFXOnTag(level.var_611["zmb_zep_battery_fire_trail"], var_02, "tag_origin");
+  playFXOnTag(level._effect["zmb_zep_battery_fire_trail"], var_02, "tag_origin");
   var_02 lib_0378::func_8D74("aud_blimp_turret_explode");
   var_03 = common_scripts\utility::func_46B7("zmb_blimp_pieces_struct", "targetname");
   var_04 = (0, 0, -800);
@@ -1136,12 +1136,12 @@ battery_spawn_drop(param_00, param_01) {
     var_02.var_9FE6.angles = var_07.var_9FE1.angles;
   }
 
-  var_02.var_9FE6 method_8449(var_02);
+  var_02.var_9FE6 linktosynchronizedparent(var_02);
   if(isDefined(level.var_1CBF)) {
     var_02.origin = var_02.origin + (0, 0, 4);
   }
 
-  playFX(level.var_611["zmb_zep_battery_land_explosion"], var_07.var_4DEA.origin + (0, 0, -20));
+  playFX(level._effect["zmb_zep_battery_land_explosion"], var_07.var_4DEA.origin + (0, 0, -20));
   lib_0378::func_8D74("aud_blimp_battery_land", var_07.var_4DEA);
   var_02.var_34A5 = var_07;
   return var_02;
@@ -1172,7 +1172,7 @@ battery_set_drop_point_active() {
   self.var_7F41 = var_00;
   self.var_241F solid();
   self.var_241F show();
-  self.var_241F method_805F();
+  self.var_241F saved_actionslotdata();
   var_01 = common_scripts\utility::func_F73(level.players, lib_0547::func_408F());
   foreach(var_03 in var_01) {
     if(function_01EF(var_03)) {
@@ -1252,7 +1252,7 @@ battery_clip_exploit_listener() {
 rocket_modify_damage(param_00, param_01, param_02, param_03) {
   param_03 = blimp_tesla_damage_mod(param_01, param_03);
   if(randomint(100) < 30) {
-    playFX(level.var_611["zmb_zeppelin_battery_damage"], self.origin);
+    playFX(level._effect["zmb_zeppelin_battery_damage"], self.origin);
   }
 
   var_04 = param_03;
@@ -1309,7 +1309,7 @@ rocket_shoot_players() {
           var_08 = 8;
         }
 
-        var_09 = common_scripts\utility::func_7A33(level.players);
+        var_09 = common_scripts\utility::random(level.players);
         var_0A = getclosestpointonnavmesh(var_09.origin + (randomint(var_08) - var_08 / 2, randomint(var_08) - var_08 / 2, 0), var_09);
         var_0B = var_07.origin + var_07 rocket_get_pos_offset();
         var_0C = bullettracepassed(var_0B, var_0A, 0, var_07);
@@ -1342,7 +1342,7 @@ rocket_fire(param_00) {
   self scriptmodelplayanim("zmb_zeppelin_rocket_pod_open_idle");
   var_01 = spawn("script_model", self.origin + rocket_get_pos_offset());
   var_01 setModel("npc_usa_bazooka_rocket_base");
-  playFXOnTag(level.var_611["zmb_zep_rocket_smoketrail"], var_01, "tag_origin");
+  playFXOnTag(level._effect["zmb_zep_rocket_smoketrail"], var_01, "tag_origin");
   var_01 thread battery_fall_onto_pos(param_00);
   wait(0.5);
   self scriptmodelplayanim("zmb_zeppelin_rocket_pod_close");
@@ -1497,7 +1497,7 @@ aud_sndx_player_pa_monitor() {
       break;
     }
 
-    self method_8626("pa_inside", 1);
+    self setaltsceneobj("pa_inside", 1);
     wait(var_00);
   }
 }

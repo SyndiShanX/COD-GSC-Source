@@ -66,7 +66,7 @@ func_7248() {
 
 func_7330() {
   soundscripts / _snd_common_zmb_dlc3::dlc3_player_spawned();
-  self method_8626("windmill_default_mix");
+  self setaltsceneobj("windmill_default_mix");
 }
 
 func_A979(param_00) {
@@ -76,7 +76,7 @@ func_A979(param_00) {
 
 func_A97A() {
   soundscripts / _snd_common_zmb_dlc3::dlc3_wave_end();
-  self method_8626("wm_intermission_mix");
+  self setaltsceneobj("wm_intermission_mix");
 }
 
 lightning_strike_in_play_space(param_00, param_01) {
@@ -270,7 +270,7 @@ aud_droppod_launch() {
 }
 
 aud_droppod_landed(param_00) {
-  lib_0380::func_2893(level.var_11CB.droppod_released, 0.3);
+  lib_0380::_stoplocalsound(level.var_11CB.droppod_released, 0.3);
   lib_0380::func_2889("zmb_dig_droppod_impact", undefined, param_00);
 }
 

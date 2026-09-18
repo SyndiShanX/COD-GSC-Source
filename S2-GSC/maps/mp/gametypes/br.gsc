@@ -5,19 +5,19 @@
 
 main() {
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BFA(level.gametype, 0);
-    maps\mp\_utility::func_7BF9(level.gametype, 1);
-    maps\mp\_utility::func_7BF7(level.gametype, 0);
-    maps\mp\_utility::func_7C04(level.gametype, 3);
-    maps\mp\_utility::func_7BF1(level.gametype, 1);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 1);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 3);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 1);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
@@ -53,7 +53,7 @@ main() {
   }
 
   setteammode("ffa");
-  level.var_6933 = 1;
+  level.objectivebased = 1;
   maps\mp\_utility::func_873B(0);
   game["dialog"]["gametype"] = "br_intro";
   game["dialog"]["defense_obj"] = "gbl_start";
@@ -74,38 +74,38 @@ func_5300() {
   maps\mp\_utility::func_8653(1);
   var_00 = getmatchrulesdata("commonOption", "scoreLimit");
   setdynamicdvar("scr_br_winlimit", var_00);
-  maps\mp\_utility::func_7C04("br", var_00);
+  maps\mp\_utility::registerwinlimitdvar("br", var_00);
   setdynamicdvar("scr_br_roundlimit", 0);
-  maps\mp\_utility::func_7BF7("br", 0);
+  maps\mp\_utility::registerroundlimitdvar("br", 0);
   setdynamicdvar("scr_br_scorelimit", 0);
-  maps\mp\_utility::func_7BF9("br", 1);
+  maps\mp\_utility::registerscorelimitdvar("br", 1);
   setdynamicdvar("scr_br_halftime", 0);
-  maps\mp\_utility::func_7BE5("br", 0);
+  maps\mp\_utility::registerhalftimedvar("br", 0);
   setdynamicdvar("scr_br_numlives", 1);
-  maps\mp\_utility::func_7BF1("br", 1);
+  maps\mp\_utility::registernumlivesdvar("br", 1);
 }
 
 func_6BAF() {
   setclientnamemode("auto_change");
-  maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_BR");
-  maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_BR");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_BR");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_BR");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_BR");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_BR");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_BR");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_BR");
   } else {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_BR_SCORE");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_BR_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_BR_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_BR_SCORE");
   }
 
-  maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_BR_HINT");
-  maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_BR_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_BR_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_BR_HINT");
   lib_050D::func_10E4();
   level.usestartspawns = 1;
   var_00[0] = "br";
   maps\mp\gametypes\_gameobjects::main(var_00);
   level.var_7895 = 1;
   level.claimednodes = [];
-  maps\mp\_utility::func_3FA3("players_deployed", 0);
+  maps\mp\_utility::gameflaginit("players_deployed", 0);
   level thread onplayerconnect();
   level thread waittospawnplayers();
   level thread runshrinkingcircle();
@@ -142,9 +142,9 @@ setplayerclass(param_00) {
   param_00.pers["class"] = "gamemode";
   param_00.pers["lastClass"] = "";
   param_00.pers["gamemodeLoadout"] = var_01;
-  param_00.var_2319 = param_00.pers["class"];
-  param_00.var_5B84 = param_00.pers["lastClass"];
-  param_00 maps\mp\gametypes\_class::func_4790(param_00.team, param_00.var_2319);
+  param_00.class = param_00.pers["class"];
+  param_00.lastclass = param_00.pers["lastClass"];
+  param_00 maps\mp\gametypes\_class::func_4790(param_00.team, param_00.class);
 }
 
 onplayerspawned(param_00) {
@@ -157,7 +157,7 @@ onplayerspawned(param_00) {
       param_00.var_3C6F = 0;
       var_01 = getrandomspawnnodeforplayer(param_00);
       param_00 playerclaimspawnnode(var_01);
-      if(!maps\mp\_utility::func_3FA0("prematch_done")) {
+      if(!maps\mp\_utility::gameflag("prematch_done")) {
         param_00 thread playertargetedspawn();
       }
     }
@@ -176,11 +176,11 @@ checkendgamepartnermodeonkill() {
   wait 0.05;
   var_00 = [];
   foreach(var_02 in level.players) {
-    if(var_02 maps\mp\gametypes\_playerlogic::func_60B2()) {
+    if(var_02 maps\mp\gametypes\_playerlogic::mayspawn()) {
       return;
     }
 
-    if(maps\mp\_utility::func_57A0(var_02)) {
+    if(maps\mp\_utility::isreallyalive(var_02)) {
       var_00[var_00.size] = var_02;
     }
   }
@@ -265,7 +265,7 @@ func_A870(param_00, param_01) {
     return 0;
   }
 
-  if(param_00 maps\mp\gametypes\_playerlogic::func_60B2()) {
+  if(param_00 maps\mp\gametypes\_playerlogic::mayspawn()) {
     return 0;
   }
 
@@ -278,11 +278,11 @@ func_5742(param_00) {
       continue;
     }
 
-    if(var_02 maps\mp\gametypes\_playerlogic::func_60B2()) {
+    if(var_02 maps\mp\gametypes\_playerlogic::mayspawn()) {
       return 0;
     }
 
-    if(maps\mp\_utility::func_57A0(var_02)) {
+    if(maps\mp\_utility::isreallyalive(var_02)) {
       return 0;
     }
   }
@@ -341,7 +341,7 @@ dropweaponbattleroyale(param_00) {
 }
 
 modifyplayerdamagebattleroyale(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
-  if(!maps\mp\_utility::func_3FA0("prematch_done")) {
+  if(!maps\mp\_utility::gameflag("prematch_done")) {
     return 0;
   }
 
@@ -390,7 +390,7 @@ modifyplayerdamagebattleroyale(param_00, param_01, param_02, param_03, param_04,
 }
 
 issniperheadshot(param_00, param_01, param_02, param_03, param_04) {
-  if(!maps\mp\_utility::func_5694(param_03)) {
+  if(!maps\mp\_utility::isbulletdamage(param_03)) {
     return 0;
   }
 
@@ -429,9 +429,9 @@ getparachuteinsertiondelay() {
 
 waittospawnplayers() {
   level endon("game_ended");
-  maps\mp\_utility::func_3FA5("prematch_done");
-  var_00 = maps\mp\_utility::func_4630();
-  var_01 = common_scripts\utility::func_F92(var_00);
+  maps\mp\_utility::gameflagwait("prematch_done");
+  var_00 = maps\mp\_utility::getpotentiallivingplayers();
+  var_01 = common_scripts\utility::array_randomize(var_00);
   for(var_02 = 0; var_02 < var_01.size; var_02++) {
     var_03 = var_01[var_02];
     if(!isDefined(var_03.selectedspawnnode)) {
@@ -457,7 +457,7 @@ waittospawnplayers() {
   }
 
   level.claimednodes = [];
-  maps\mp\_utility::func_3FA4("players_deployed");
+  maps\mp\_utility::gameflagset("players_deployed");
 }
 
 playerhideteamchoiceonselect() {
@@ -530,9 +530,9 @@ playertargetedspawn() {
   }
 
   self nametagvisibleto("none");
-  maps\mp\_utility::func_3E8E(1);
+  maps\mp\_utility::freezecontrolswrapper(1);
   spawnselectioncreateoverlay();
-  self method_8626("mute_all");
+  self setaltsceneobj("mute_all");
   thread playersetupparachute();
   thread playerselectspawnlocation();
   level waittill("prematch_done");
@@ -542,7 +542,7 @@ playertargetedspawn() {
   self setclientomnvar("ui_map_location_selector", 0);
   self method_8627("mute_all");
   thread spawnselectionremoveoverlay();
-  maps\mp\_utility::func_3E8E(0);
+  maps\mp\_utility::freezecontrolswrapper(0);
   self nametagvisibleto("all");
   self unsetperk("specialty_radarblip", 1);
   playerparachuteinsertion();
@@ -686,7 +686,7 @@ getrandomspawnnodeforplayer(param_00) {
     var_01[var_01.size] = var_04;
   }
 
-  var_06 = common_scripts\utility::func_7A33(var_01);
+  var_06 = common_scripts\utility::random(var_01);
   return var_06;
 }
 
@@ -853,7 +853,7 @@ runshrinkingcircle() {
   level.circleobjective = initshrinkingcircle();
   level.circleobjective circlepauseatradius(level.circleobjective.var_78CA);
   if(level.prematchperiod > 0) {
-    maps\mp\_utility::func_3FA5("players_deployed");
+    maps\mp\_utility::gameflagwait("players_deployed");
   } else {
     while(!level.firstplayerspawned) {
       wait 0.05;
@@ -1184,7 +1184,7 @@ initloot() {
   initlootlocations();
   level.brlootlocationnext = 0;
   level.brlootlocationnum = level.brlootlocations[0].size;
-  level.brlootlocations[0] = common_scripts\utility::func_F92(level.brlootlocations[0]);
+  level.brlootlocations[0] = common_scripts\utility::array_randomize(level.brlootlocations[0]);
   spawnlootset("luger_mp", 20);
   spawnlootset("m712_mp", 20);
   spawnlootset("winchester1897_mp", 4);
@@ -1301,7 +1301,7 @@ addpathnodelootlocations() {
   var_04 = lootpathnodesinsidecomplete();
   level.brinteriors = [];
   var_05 = getallnodes();
-  var_05 = common_scripts\utility::func_F92(var_05);
+  var_05 = common_scripts\utility::array_randomize(var_05);
   foreach(var_07 in var_05) {
     if(var_07.type != "Path") {
       continue;
@@ -1567,7 +1567,7 @@ onpickupperk(param_00, param_01) {}
 onpickupammo(param_00, param_01) {
   var_02 = param_01 getweaponslistprimaries();
   foreach(var_04 in var_02) {
-    if(maps\mp\_utility::func_5699(var_04) || level.var_808C && maps\mp\_utility::iscacsecondaryweapon(var_04)) {
+    if(maps\mp\_utility::iscacprimaryweapon(var_04) || level.var_808C && maps\mp\_utility::iscacsecondaryweapon(var_04)) {
       var_05 = param_01 getweaponammostock(var_04);
       var_06 = 0;
       var_07 = maps\mp\_utility::getweaponclass(var_04);
@@ -1598,7 +1598,7 @@ onpickuptactical(param_00, param_01) {
   var_02 = param_00;
   var_03 = param_01 getweaponammoclip(var_02);
   param_01 giveweapon(var_02);
-  param_01 method_831E(var_02);
+  param_01 setoffhandsecondaryclass(var_02);
   param_01 setweaponammoclip(var_02, var_03 + 1);
 }
 
@@ -1606,7 +1606,7 @@ pickuponused() {
   self endon("death");
   for(;;) {
     self waittill("trigger", var_00);
-    if(!maps\mp\_utility::func_57A0(var_00)) {
+    if(!maps\mp\_utility::isreallyalive(var_00)) {
       continue;
     }
 
@@ -1733,7 +1733,7 @@ spawnlootweapon(param_00, param_01) {
   var_1A = undefined;
   var_1B = undefined;
   if(randomfloat(1) < param_00.attachment1chance && var_03.size > 0) {
-    var_1A = common_scripts\utility::func_7A33(var_03);
+    var_1A = common_scripts\utility::random(var_03);
     if(randomfloat(1) < param_00.attachment2chance) {
       var_1C = tablelookuprownum("mp/attachmentcombos_mtx12.csv", 0, var_1A);
       var_1D = function_027B("mp/attachmentcombos_mtx12.csv");
@@ -1746,7 +1746,7 @@ spawnlootweapon(param_00, param_01) {
       }
 
       if(var_03.size > 0) {
-        var_1B = common_scripts\utility::func_7A33(var_03);
+        var_1B = common_scripts\utility::random(var_03);
       }
     }
   }
@@ -1837,7 +1837,7 @@ lootweaponwatchpickup() {
       return;
     }
 
-    var_0D = var_01.var_2953;
+    var_0D = var_01.currentweapon;
     if(shouldrestoreweapontoplayer(var_0D, var_01)) {
       var_01 takeweapon("shovel_mp");
       maps\mp\gametypes\_weapons::updateplayervariablesforweaponexchange(var_01, "shovel_mp", var_00);
@@ -1966,7 +1966,7 @@ playergetcurrentweapon() {
   var_00 = self getcurrentweapon();
   if(var_00 == "none") {
     foreach(var_02 in self getweaponslistprimaries()) {
-      if(self method_817F(var_02) != 0) {
+      if(self getammocount(var_02) != 0) {
         var_00 = var_02;
         break;
       }
@@ -2145,9 +2145,9 @@ playdeathstingersforteams(param_00) {
   }
 
   var_01 = param_00.team;
-  var_02 = maps\mp\_utility::func_45DE(var_01);
-  level thread maps\mp\_utility::func_74D9("mp_obj_notify_pos_med", var_02);
-  level thread maps\mp\_utility::func_74D9("mp_obj_notify_neg_med", var_01);
+  var_02 = maps\mp\_utility::getotherteam(var_01);
+  level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_pos_med", var_02);
+  level thread maps\mp\_utility::playsoundonplayers("mp_obj_notify_neg_med", var_01);
 }
 
 callincarepackage(param_00, param_01, param_02) {
@@ -2160,7 +2160,7 @@ callincarepackage(param_00, param_01, param_02) {
   }
 
   var_03 = undefined;
-  var_04 = common_scripts\utility::func_F92(level.players);
+  var_04 = common_scripts\utility::array_randomize(level.players);
   var_03 = var_04[0];
   if(!isDefined(var_03)) {
     return;
@@ -2186,5 +2186,5 @@ callincarepackage(param_00, param_01, param_02) {
     return;
   }
 
-  thread maps\mp\_utility::func_9863("raids_airdrop_incoming", var_03, param_01);
+  thread maps\mp\_utility::teamplayercardsplash("raids_airdrop_incoming", var_03, param_01);
 }

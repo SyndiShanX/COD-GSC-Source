@@ -116,7 +116,7 @@ func_11DA() {
 
 func_4435(param_00, param_01, param_02) {
   foreach(var_04 in level.players) {
-    if(!maps\mp\_utility::func_57A0(var_04)) {
+    if(!maps\mp\_utility::isreallyalive(var_04)) {
       continue;
     }
 
@@ -180,7 +180,7 @@ func_4435(param_00, param_01, param_02) {
     var_0E = self.team;
   }
 
-  var_0F = level.var_7AD1[maps\mp\_utility::func_45DE(var_0E)];
+  var_0F = level.var_7AD1[maps\mp\_utility::getotherteam(var_0E)];
   if(!level.teambased) {
     var_0F = level.var_7AD1["all"];
   }

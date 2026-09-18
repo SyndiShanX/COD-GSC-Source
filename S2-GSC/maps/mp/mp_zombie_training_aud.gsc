@@ -43,7 +43,7 @@ func_526E() {}
 
 func_A979() {
   if(isDefined(self.var_11CB.var_601A)) {
-    lib_0380::func_2893(self.var_11CB.var_601A, 8);
+    lib_0380::_stoplocalsound(self.var_11CB.var_601A, 8);
     self.var_11CB.var_601A = undefined;
   }
 }
@@ -53,12 +53,12 @@ func_A97A() {}
 func_7248() {}
 
 func_7330() {
-  self method_8626("train_global", 0.25);
+  self setaltsceneobj("train_global", 0.25);
   lib_0366::snd_zmb_set_plr_vox_scare_count_max(1);
 }
 
 func_A7B1() {
-  level.player method_8626("wake_up");
+  level.player setaltsceneobj("wake_up");
   level.var_11CB.var_A7A5 = lib_0380::func_2888("training_intro_fire", undefined, 2);
   lib_0378::func_8D14(level.var_11CB.var_A7A5);
   level.var_11CB.var_A7A6 = lib_0380::func_2888("zmb_training_intro_hit");
@@ -98,7 +98,7 @@ func_8380() {
 func_404B() {
   var_00 = self;
   wait(6.4);
-  level.player method_8626("german_soldiers_encounter", 0.25);
+  level.player setaltsceneobj("german_soldiers_encounter", 0.25);
   lib_0380::func_6844("training_dying_soldier_foley", undefined, var_00);
   wait(1.5);
   lib_0380::func_6844("zmb_soldier_death_vox", undefined, var_00);
@@ -206,7 +206,7 @@ func_726F() {
       }
 
       if(isDefined(var_06.var_A1C6)) {
-        lib_0380::func_2893(var_06.var_A1C6, 0.25);
+        lib_0380::_stoplocalsound(var_06.var_A1C6, 0.25);
         var_06.var_A1C6 = undefined;
       }
     }

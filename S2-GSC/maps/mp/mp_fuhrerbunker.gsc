@@ -4,12 +4,12 @@
 *********************************************/
 
 func_00F9() {
-  maps\mp\mp_fuhrerbunker_precache::func_F9();
-  maps\createart\mp_fuhrerbunker_art::func_F9();
-  maps\mp\mp_fuhrerbunker_fx::func_F9();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_fuhrerbunker_lighting::func_F9();
-  maps\mp\mp_fuhrerbunker_aud::func_F9();
+  maps\mp\mp_fuhrerbunker_precache::main();
+  maps\createart\mp_fuhrerbunker_art::main();
+  maps\mp\mp_fuhrerbunker_fx::main();
+  maps\mp\_load::main();
+  maps\mp\mp_fuhrerbunker_lighting::main();
+  maps\mp\mp_fuhrerbunker_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_fuhrerbunker");
   game["attackers"] = "allies";
   game["defenders"] = "axis";

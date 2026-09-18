@@ -14,7 +14,7 @@ truuseseruma(param_00) {
 }
 
 truuseserumainternal() {
-  if(maps\mp\_utility::func_57A0(self)) {
+  if(maps\mp\_utility::isreallyalive(self)) {
     if(!isDefined(self.raidserumactive) || !self.raidserumactive) {
       maps\mp\_matchdata::func_5E9A("raid_ss_serum_a", self.origin);
       thread startawareness();
@@ -35,7 +35,7 @@ startawareness() {
   self.raidserumactive = 1;
   self.raidpreserumperkslist = self.var_6F65;
   if(!maps\mp\_utility::hasperk("specialty_perception")) {
-    maps\mp\_utility::func_47A2("specialty_perception");
+    maps\mp\_utility::giveperk("specialty_perception");
   }
 
   if(getdvarint("mp_raid_dlc4_test_serums", 0) == 1) {
@@ -52,8 +52,8 @@ highlightenemyplayers() {
   self endon("disconnect");
   thread stopserumtimer();
   self.awarenessserumactive = 1;
-  foreach(var_01 in level.var_744A) {
-    if(var_01.var_1A7 != self.var_1A7) {
+  foreach(var_01 in level.players) {
+    if(var_01.team != self.team) {
       thread awarenessserumhighlightplayer(var_01);
     }
   }

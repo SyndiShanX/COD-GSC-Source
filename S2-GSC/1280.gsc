@@ -39,18 +39,18 @@ func_533F() {
   level thread lib_0526::func_52F6();
   level thread lib_0527::func_52F7();
   level thread maps\mp\killstreaks\_v2_missle_strike::func_52F5();
-  level thread maps\mp\killstreaks\_missile_strike::func_D5();
-  level thread maps\mp\killstreaks\_airstrike::func_D5();
-  level thread maps\mp\killstreaks\_mortarstrike::func_D5();
-  level thread maps\mp\killstreaks\_fighter_strike::func_D5();
-  level thread maps\mp\killstreaks\_flamethrower::func_D5();
-  level thread maps\mp\killstreaks\_raid_superweapon::func_D5();
-  level thread maps\mp\killstreaks\_raid_ss_serum_a::func_D5();
-  level thread maps\mp\killstreaks\_raid_ss_serum_b::func_D5();
-  level thread maps\mp\killstreaks\_raid_ss_serum_c::func_D5();
-  level thread maps\mp\gametypes\_raid_tesla_gun::func_D5();
-  level thread maps\mp\killstreaks\_molotovs::func_D5();
-  level thread lib_0517::func_D5();
+  level thread maps\mp\killstreaks\_missile_strike::init();
+  level thread maps\mp\killstreaks\_airstrike::init();
+  level thread maps\mp\killstreaks\_mortarstrike::init();
+  level thread maps\mp\killstreaks\_fighter_strike::init();
+  level thread maps\mp\killstreaks\_flamethrower::init();
+  level thread maps\mp\killstreaks\_raid_superweapon::init();
+  level thread maps\mp\killstreaks\_raid_ss_serum_a::init();
+  level thread maps\mp\killstreaks\_raid_ss_serum_b::init();
+  level thread maps\mp\killstreaks\_raid_ss_serum_c::init();
+  level thread maps\mp\gametypes\_raid_tesla_gun::init();
+  level thread maps\mp\killstreaks\_molotovs::init();
+  level thread lib_0517::init();
   if(level.var_15D == "mp_raid_dlc2") {
     level thread maps\mp\gametypes\_raid_tripwire::runtripwirelogic();
     level thread maps\mp\gametypes\_raid_bomber_scorestreaks::init_bomber_killstreaks();
@@ -69,22 +69,22 @@ func_533F() {
 
 func_1E8A(param_00, param_01, param_02) {
   if(param_00 == "fighter_strike") {
-    thread maps\mp\killstreaks\_fighter_strike::func_1E83(-1, undefined, param_02[0].var_116, param_02[0].var_1D[1], "fighter_strike", param_01);
+    thread maps\mp\killstreaks\_fighter_strike::func_1E83(-1, undefined, param_02[0].origin, param_02[0].var_1D[1], "fighter_strike", param_01);
     return;
   }
 
   if(param_00 == "mortar_strike") {
-    thread maps\mp\killstreaks\_v2_missle_strike::func_9303(-1, [param_02[0].var_116, param_02[1].var_116, param_02[2].var_116], "mortar_strike", 1, param_01);
+    thread maps\mp\killstreaks\_v2_missle_strike::func_9303(-1, [param_02[0].origin, param_02[1].origin, param_02[2].origin], "mortar_strike", 1, param_01);
     return;
   }
 
   if(param_00 == "missile_strike") {
-    thread maps\mp\killstreaks\_v2_missle_strike::func_9303(-1, [param_02[0].var_116], "missile_strike", 1, param_01);
+    thread maps\mp\killstreaks\_v2_missle_strike::func_9303(-1, [param_02[0].origin], "missile_strike", 1, param_01);
     return;
   }
 
   if(param_00 == "airstrike") {
-    thread maps\mp\killstreaks\_airstrike::func_B9A(-1, "airstrike", undefined, param_01, param_02[0].var_116, param_02[0].var_1D[1]);
+    thread maps\mp\killstreaks\_airstrike::func_B9A(-1, "airstrike", undefined, param_01, param_02[0].origin, param_02[0].var_1D[1]);
     return;
   }
 }
@@ -109,10 +109,10 @@ func_4678(param_00, param_01, param_02, param_03, param_04) {
     }
 
     var_0D = anglesToForward(var_0B);
-    var_0E = var_05.var_116;
-    var_0F = getnodesinradiussorted(var_05.var_116, 256, 0);
+    var_0E = var_05.origin;
+    var_0F = getnodesinradiussorted(var_05.origin, 256, 0);
     if(var_0F.size > 0) {
-      var_0E = (var_0E[0], var_0E[1], var_0F[0].var_116[2]);
+      var_0E = (var_0E[0], var_0E[1], var_0F[0].origin[2]);
     }
 
     var_10 = 0;
@@ -120,12 +120,12 @@ func_4678(param_00, param_01, param_02, param_03, param_04) {
       var_0E = var_0E + var_0D * randomfloat(2000);
       var_11 = getnodesinradiussorted(var_0E, 256, 0);
       if(var_11.size == 0) {
-        if(distance2dsquared(var_0E, var_05.var_116) > 1000000) {
+        if(distance2dsquared(var_0E, var_05.origin) > 1000000) {
           var_10 = 1;
         }
       } else {
         var_12 = 1;
-        if(var_12 && distance2dsquared(var_0E, var_05.var_116) > 4000000) {
+        if(var_12 && distance2dsquared(var_0E, var_05.origin) > 4000000) {
           foreach(var_14 in var_06) {
             if(var_14 method_858B(var_0E)) {
               var_10 = 1;
@@ -144,12 +144,12 @@ func_4678(param_00, param_01, param_02, param_03, param_04) {
       }
 
       if(var_11.size > 0) {
-        var_0E = (var_0E[0], var_0E[1], var_11[0].var_116[2]);
+        var_0E = (var_0E[0], var_0E[1], var_11[0].origin[2]);
       }
     }
 
     var_16 = spawnStruct();
-    var_16.var_116 = var_0E;
+    var_16.origin = var_0E;
     var_16.var_1D = param_03;
     var_0A[var_0A.size] = var_16;
   }
@@ -293,9 +293,9 @@ func_1E85(param_00, param_01, param_02, param_03) {
   }
 
   var_05 = undefined;
-  var_06 = common_scripts\utility::func_F92(level.var_744A);
+  var_06 = common_scripts\utility::array_randomize(level.players);
   foreach(var_08 in var_06) {
-    if(var_08.var_1A7 != param_00) {
+    if(var_08.team != param_00) {
       continue;
     }
 
@@ -320,7 +320,7 @@ func_1E85(param_00, param_01, param_02, param_03) {
     thread lib_0506::func_A618("defender_airdrop");
   }
 
-  thread maps\mp\_utility::func_9863("raids_airdrop_incoming", var_05, param_00);
+  thread maps\mp\_utility::teamplayercardsplash("raids_airdrop_incoming", var_05, param_00);
 }
 
 func_444B(param_00, param_01) {
@@ -344,9 +344,9 @@ func_444B(param_00, param_01) {
     }
 
     if(!var_03[param_00].size) {
-      return var_03["none"][randomint(var_03["none"].size)].var_116;
+      return var_03["none"][randomint(var_03["none"].size)].origin;
     } else {
-      return var_03[param_00][randomint(var_03[param_00].size)].var_116;
+      return var_03[param_00][randomint(var_03[param_00].size)].origin;
     }
   }
 
@@ -358,9 +358,9 @@ func_9917(param_00, param_01) {
   var_03 = [];
   var_04 = getgamespawnpointactivelabel(param_00);
   foreach(var_06 in var_02) {
-    if(var_06.var_1A5 == var_04 && var_06.var_9849 == param_00 && var_06.var_6C97) {
+    if(var_06.targetname == var_04 && var_06.var_9849 == param_00 && var_06.var_6C97) {
       var_07 = lib_0527::func_4570();
-      param_01 lib_0527::func_9302(param_01, [var_06.var_116], [var_07], "raid_carepackage", undefined, lib_0502::func_7979(param_00));
+      param_01 lib_0527::func_9302(param_01, [var_06.origin], [var_07], "raid_carepackage", undefined, lib_0502::func_7979(param_00));
     }
   }
 }
@@ -369,7 +369,7 @@ func_2AAD(param_00, param_01) {
   self endon("disconnect");
   level endon("game_ended");
   for(var_02 = 1; var_02; var_02 = 0) {
-    if(!maps\mp\_utility::func_57A0(param_00)) {
+    if(!maps\mp\_utility::isreallyalive(param_00)) {
       wait(1);
       continue;
     }

@@ -24,8 +24,8 @@ main() {
   level.var_AC71 = ::func_52C4;
   level.var_AC72 = ::func_6B45;
   level.var_6BB0 = ::func_6B46;
-  common_scripts\utility::func_3C87("flag_all_lamps_hit");
-  common_scripts\utility::func_3C87("flag_all_signs_hit");
+  common_scripts\utility::flag_init("flag_all_lamps_hit");
+  common_scripts\utility::flag_init("flag_all_signs_hit");
   setomnvar("ui_zm_intermission_swaptime_1", 6);
   setomnvar("ui_zm_intermission_swaptime_2", 2);
   setDvar("2494", "0.12, 0, 0");
@@ -127,7 +127,7 @@ func_3596() {
   }
 
   if(var_01) {
-    common_scripts\utility::func_3C8F("flag_all_signs_hit");
+    common_scripts\utility::flag_set("flag_all_signs_hit");
   }
 
   self hide();
@@ -203,7 +203,7 @@ func_3579() {
   }
 
   if(var_0B) {
-    common_scripts\utility::func_3C8F("flag_all_lamps_hit");
+    common_scripts\utility::flag_set("flag_all_lamps_hit");
   }
 }
 
@@ -304,7 +304,7 @@ func_3281(param_00, param_01) {
   }
 
   param_00 solid();
-  param_00 method_805F();
+  param_00 saved_actionslotdata();
 }
 
 func_325F() {

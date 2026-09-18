@@ -41,7 +41,7 @@ init() {
   level.var_AC0A = [func_2792("free blitz bullets ( doubletap )", ::func_344C, 12.5), func_2792("free blitz reload ( fastreload )", ::func_344E, 12.5), func_2792("free blitz shock ( electriccherry )", ::func_344D, 12.5), func_2792("free blitz sprint ( runperk )", ::func_3451, 12.5), func_2792("free blitz strike ( punchperk )", ::func_344F, 12.5), func_2792("free panzer armor ( armor )", ::func_344B, 12.5), func_2792("free blitz revive ( quickrevive )", ::func_3450, 12.5), func_2792("free mystery box coupon", ::func_3452, 12.5)];
   level thread func_9D20();
   level thread maps\mp\_utility::func_6F74(::func_A0C4);
-  level.var_611["zmb_treasure_icon"] = loadfx("vfx/gameplay/mp/zombie/zmb_treasure_icon");
+  level._effect["zmb_treasure_icon"] = loadfx("vfx/gameplay/mp/zombie/zmb_treasure_icon");
 }
 
 func_9D2E() {
@@ -74,7 +74,7 @@ func_1139() {
   wait 0.05;
   wait 0.05;
   wait 0.05;
-  playFXOnTag(level.var_611["zmb_treasure_icon"], self, "TAG_FX");
+  playFXOnTag(level._effect["zmb_treasure_icon"], self, "TAG_FX");
 }
 
 func_9D38() {
@@ -129,7 +129,7 @@ func_9D32() {
 func_9D2F() {
   var_00 = func_4394();
   var_01 = getarraykeys(level.var_AC80.var_ACB3);
-  var_02 = common_scripts\utility::func_7A33(var_01);
+  var_02 = common_scripts\utility::random(var_01);
   var_00.var_9820 = var_02;
 }
 
@@ -186,7 +186,7 @@ func_9D34() {
       var_04 = [];
       if(isDefined(var_02)) {
         var_03 = level.var_AC80.var_ACB3[var_02];
-        var_04 = common_scripts\utility::func_F92(getarraykeys(var_03.var_A01));
+        var_04 = common_scripts\utility::array_randomize(getarraykeys(var_03.var_A01));
       }
 
       var_05 = undefined;
@@ -275,7 +275,7 @@ func_9D2D(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   var_09 lib_0378::func_8D74("aud_treasurer_end_timer");
-  var_09 method_802E("zom_bomb_treasure", "TAG_WEAPON_CHEST");
+  var_09 detach("zom_bomb_treasure", "TAG_WEAPON_CHEST");
   var_09 lib_054D::func_6BD4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
 }
 
@@ -426,7 +426,7 @@ func_3479(param_00, param_01) {
   }
 
   if(!isDefined(var_06)) {
-    var_06 = common_scripts\utility::func_7A33(param_00);
+    var_06 = common_scripts\utility::random(param_00);
   }
 
   func_3478(param_01, var_06.var_1E61);

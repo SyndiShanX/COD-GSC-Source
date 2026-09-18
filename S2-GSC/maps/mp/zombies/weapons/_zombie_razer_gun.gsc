@@ -53,7 +53,7 @@ init() {
   level.razer_touch_trigs = [];
   var_06 = getEntArray("trigger_multiple", "classname");
   if(!common_scripts\utility::func_3C83("ripsaw_punch_active")) {
-    common_scripts\utility::func_3C87("ripsaw_punch_active");
+    common_scripts\utility::flag_init("ripsaw_punch_active");
   }
 
   foreach(var_08 in var_06) {
@@ -216,7 +216,7 @@ togglemarathonability(param_00) {
   }
 
   if(param_00) {
-    maps\mp\_utility::func_47A2("specialty_marathon");
+    maps\mp\_utility::giveperk("specialty_marathon");
     return;
   }
 
@@ -276,7 +276,7 @@ handle_reflection(param_00, param_01, param_02) {
 
     var_04 = lib_055A::func_4562(self.origin);
     if(lib_0547::func_5565(var_04, "sub_pens_1_zone")) {
-      if(isDefined(level.var_611[param_02 + "_int"])) {
+      if(isDefined(level._effect[param_02 + "_int"])) {
         param_02 = param_02 + "_int";
       }
     }
@@ -468,7 +468,7 @@ monitor_razergun_kills(param_00, param_01, param_02, param_03, param_04, param_0
 }
 
 should_razgun_expire(param_00, param_01) {
-  if(maps\mp\_utility::func_3FA0("insta_kill")) {
+  if(maps\mp\_utility::gameflag("insta_kill")) {
     return 0;
   }
 

@@ -4,13 +4,13 @@
 *********************************************/
 
 func_00F9() {
-  lib_04B5::func_F9();
-  lib_041C::func_F9();
-  lib_04B4::func_F9();
+  lib_04B5::main();
+  lib_041C::main();
+  lib_04B4::main();
   maps\mp\_audio_submixes::func_524C();
-  maps\mp\_load::func_F9();
-  maps\mp\mp_raid_bulge_lighting::func_F9();
-  maps\mp\mp_raid_bulge_aud::func_F9();
+  maps\mp\_load::main();
+  maps\mp\mp_raid_bulge_lighting::main();
+  maps\mp\mp_raid_bulge_aud::main();
   maps\mp\_compass::func_8A2F("compass_map_mp_raid_bulge");
   game["attackers"] = "axis";
   game["defenders"] = "allies";
@@ -51,13 +51,13 @@ func_00F9() {
   lib_04FF::func_86DA("tank_refuel", "flagPickupStopSound", "gascan_stop");
   lib_04FF::func_86DA("tank_refuel", "flagPickupStopSoundFade", 0.5);
   lib_04FA::func_52FD(3);
-  maps\mp\_utility::func_3FA3("raid_objective_a_complete", 0);
-  maps\mp\_utility::func_3FA3("raid_objective_b_complete", 0);
-  maps\mp\_utility::func_3FA3("raid_objective_c1_complete", 0);
-  maps\mp\_utility::func_3FA3("raid_objective_c2_complete", 0);
-  maps\mp\_utility::func_3FA3("raid_objective_c3_complete", 0);
-  maps\mp\_utility::func_3FA3("raid_objective_c4_complete", 0);
-  maps\mp\_utility::func_3FA3("raid_objective_c_complete", 0);
+  maps\mp\_utility::gameflaginit("raid_objective_a_complete", 0);
+  maps\mp\_utility::gameflaginit("raid_objective_b_complete", 0);
+  maps\mp\_utility::gameflaginit("raid_objective_c1_complete", 0);
+  maps\mp\_utility::gameflaginit("raid_objective_c2_complete", 0);
+  maps\mp\_utility::gameflaginit("raid_objective_c3_complete", 0);
+  maps\mp\_utility::gameflaginit("raid_objective_c4_complete", 0);
+  maps\mp\_utility::gameflaginit("raid_objective_c_complete", 0);
   func_54D6();
   func_54DE();
   func_6C8C();
@@ -100,7 +100,7 @@ func_54D6() {
 }
 
 func_54D7() {
-  var_00 = level.var_54D0["allies"].var_116;
+  var_00 = level.var_54D0["allies"].origin;
   var_01 = level.var_54D0["allies"].var_1D;
   var_02 = spawn("script_model", var_00);
   var_02 setModel("foliage_s2_blg_pine_tree_tall_02_artillery_01_anim");
@@ -234,7 +234,7 @@ func_54DE() {
 }
 
 func_54E1() {
-  var_00 = level.var_54D0["axis"].var_116;
+  var_00 = level.var_54D0["axis"].origin;
   var_01 = level.var_54D0["axis"].var_1D;
   var_02 = spawn("script_model", var_00);
   var_02.var_267E = [4, 1, 4, 4, 4, 0];
@@ -307,17 +307,17 @@ func_54DC(param_00) {
 }
 
 func_54DB() {
-  self method_805C();
+  self save_undo_buffer();
   if(isDefined(self.var_9EDD)) {
-    self.var_9EDD method_805C();
+    self.var_9EDD save_undo_buffer();
   }
 
   if(isDefined(self.var_3850)) {
-    self.var_3850 method_805C();
+    self.var_3850 save_undo_buffer();
   }
 
   if(isDefined(self.var_9FA1)) {
-    self.var_9FA1 method_805C();
+    self.var_9FA1 save_undo_buffer();
   }
 }
 
@@ -356,7 +356,7 @@ func_54DA() {
     wait 0.05;
   }
 
-  if(maps\mp\_utility::func_3FA0("prematch_done")) {
+  if(maps\mp\_utility::gameflag("prematch_done")) {
     return;
   }
 
@@ -438,11 +438,11 @@ func_54DD() {
   level notify("axis_intro_cleanup");
   foreach(var_01 in level.var_1484.var_97C5) {
     lib_0502::func_7D03(var_01);
-    var_01 method_805C();
+    var_01 save_undo_buffer();
   }
 
   foreach(var_04 in level.var_1484.var_9F96) {
-    var_04 method_805C();
+    var_04 save_undo_buffer();
   }
 
   func_2A79([200], 0);
@@ -487,26 +487,26 @@ func_7FB4() {
 
 func_7FDC() {
   var_00 = common_scripts\utility::func_46B5("anim_loc_vignette_bridge", "script_noteworthy");
-  if(!isDefined(var_00.var_116)) {
-    var_00.var_116 = (0, 0, 0);
+  if(!isDefined(var_00.origin)) {
+    var_00.origin = (0, 0, 0);
   }
 
   if(!isDefined(var_00.var_1D)) {
     var_00.var_1D = (0, 0, 0);
   }
 
-  var_01 = spawn("script_model", var_00.var_116);
+  var_01 = spawn("script_model", var_00.origin);
   var_01 setModel("rblg_bridge_destruct_vista_02_anim");
-  var_01 method_8495("mp_raids_bulge_vista_bridge_preidle", var_00.var_116, var_00.var_1D);
+  var_01 method_8495("mp_raids_bulge_vista_bridge_preidle", var_00.origin, var_00.var_1D);
   level waittill("vista_bridge_destroy");
   func_A48F();
   thread func_7FDD();
   wait(0.6);
   var_02 = 11.5;
   var_01 thread lib_04B4::func_A476();
-  var_01 method_8495("mp_raids_bulge_vista_bridge_start", var_00.var_116, var_00.var_1D);
+  var_01 method_8495("mp_raids_bulge_vista_bridge_start", var_00.origin, var_00.var_1D);
   wait(var_02);
-  var_01 method_8495("mp_raids_bulge_vista_bridge_idle", var_00.var_116, var_00.var_1D);
+  var_01 method_8495("mp_raids_bulge_vista_bridge_idle", var_00.origin, var_00.var_1D);
 }
 
 func_7FDD() {
@@ -517,8 +517,8 @@ func_7FDD() {
 
 func_7FDE() {
   var_00 = common_scripts\utility::func_46B5("anim_loc_midpoint", "targetname");
-  if(!isDefined(var_00.var_116)) {
-    var_00.var_116 = (0, 0, 0);
+  if(!isDefined(var_00.origin)) {
+    var_00.origin = (0, 0, 0);
   }
 
   if(!isDefined(var_00.var_1D)) {
@@ -538,14 +538,14 @@ func_7FDE() {
 }
 
 func_90B8(param_00, param_01, param_02, param_03) {
-  var_04 = spawn("script_model", param_00.var_116);
+  var_04 = spawn("script_model", param_00.origin);
   var_04 setModel("vehicle_ger_trans_opel_blitz_snow");
-  var_04 method_8495(param_01, param_00.var_116, param_00.var_1D, param_03);
+  var_04 method_8495(param_01, param_00.origin, param_00.var_1D, param_03);
   var_04.var_56E8 = 1;
   var_04 thread maps\mp\mp_raid_bulge_aud::func_A57E(var_04);
-  var_05 = spawn("script_model", param_00.var_116);
+  var_05 = spawn("script_model", param_00.origin);
   var_05 setcostumemodels([2, 1, 2, 2, 2, 0], "axis");
-  var_05 method_8495(param_02, param_00.var_116, param_00.var_1D);
+  var_05 method_8495(param_02, param_00.origin, param_00.var_1D);
   var_04.var_33F3 = var_05;
   return var_04;
 }
@@ -573,14 +573,14 @@ func_6C8C() {
 func_6C8D() {
   var_00 = "vignette_notify";
   func_08B5(86);
-  var_01 = level.var_6C86["allies"].var_116;
+  var_01 = level.var_6C86["allies"].origin;
   var_02 = level.var_6C86["allies"].var_1D;
   var_03 = common_scripts\utility::func_46B5("anim_loc_allies_win_destruction", "script_noteworthy");
   if(!isDefined(var_03)) {
     return;
   }
 
-  var_04 = var_03.var_116;
+  var_04 = var_03.origin;
   if(!isDefined(var_04)) {
     var_04 = (0, 0, 0);
   }
@@ -681,7 +681,7 @@ func_6C8D() {
     level.var_C70.var_9600 = var_08;
     level.var_C70.var_9EDD = var_09;
     level.var_C70.var_8F0A = var_0A;
-    level.var_C70.var_A9E7 = var_0B;
+    level.var_C70.weapons = var_0B;
     level.var_C70.var_9782 = var_1A;
     level.var_C70.var_9F72 = var_1B;
   }
@@ -702,7 +702,7 @@ func_6C8B() {
     var_03 = level.var_C70.var_9600;
     var_04 = level.var_C70.var_9EDD;
     var_05 = level.var_C70.var_8F0A;
-    var_06 = level.var_C70.var_A9E7;
+    var_06 = level.var_C70.weapons;
     var_07 = level.var_C70.var_9782;
     var_08 = level.var_C70.var_9F72;
   }
@@ -804,7 +804,7 @@ func_6C93() {
 }
 
 func_6C94() {
-  var_00 = level.var_6C86["axis"].var_116;
+  var_00 = level.var_6C86["axis"].origin;
   var_01 = level.var_6C86["axis"].var_1D;
   var_02 = getEntArray("axis_win_outro_delete", "targetname");
   foreach(var_04 in var_02) {
@@ -820,7 +820,7 @@ func_6C94() {
   }
 
   var_09 = lib_0502::func_4627(game["attackers"]);
-  var_09 = common_scripts\utility::func_F92(var_09);
+  var_09 = common_scripts\utility::array_randomize(var_09);
   for(var_08 = 0; var_08 < var_09.size; var_08++) {
     var_06[var_08] = var_09[var_08].var_267E;
   }
@@ -911,9 +911,9 @@ func_6C92() {
 
 func_6C95() {
   if(isDefined(level.var_960A)) {
-    level.var_960A method_805C();
+    level.var_960A save_undo_buffer();
     if(isDefined(level.var_960A.var_9EDD)) {
-      level.var_960A.var_9EDD method_805C();
+      level.var_960A.var_9EDD save_undo_buffer();
     }
 
     lib_0502::func_7D03(level.var_960A);
@@ -965,9 +965,9 @@ func_7F7D() {
 func_7FCF() {
   setgamespawnpointactivelabel("A", "A", "A");
   thread func_7CF9();
-  maps\mp\_utility::func_3FA5("raid_objective_a_complete");
+  maps\mp\_utility::gameflagwait("raid_objective_a_complete");
   lib_0502::func_90A7("C", "B", 20, "C", "C");
-  maps\mp\_utility::func_3FA5("raid_objective_b_complete");
+  maps\mp\_utility::gameflagwait("raid_objective_b_complete");
   level waittill("bridge_escort_checkpoint_1");
   lib_0502::func_90A4("G", "W");
   level waittill("bridge_escort_checkpoint_2");
@@ -1007,19 +1007,19 @@ func_7F89() {
   func_27D1("ObjectiveC2", ::func_92BF);
   func_27D1("ObjectiveC3", ::func_92C0);
   func_27D1("ObjectiveC4", ::startboundries_objectivec_chk4);
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   func_20C5("ObjectiveA");
-  maps\mp\_utility::func_3FA5("raid_objective_a_complete");
+  maps\mp\_utility::gameflagwait("raid_objective_a_complete");
   func_20C5("ObjectiveB");
-  maps\mp\_utility::func_3FA5("raid_objective_b_complete");
+  maps\mp\_utility::gameflagwait("raid_objective_b_complete");
   func_20C5("ObjectiveC");
-  maps\mp\_utility::func_3FA5("raid_objective_c1_complete");
+  maps\mp\_utility::gameflagwait("raid_objective_c1_complete");
   func_20C5("ObjectiveC1");
-  maps\mp\_utility::func_3FA5("raid_objective_c2_complete");
+  maps\mp\_utility::gameflagwait("raid_objective_c2_complete");
   func_20C5("ObjectiveC2");
-  maps\mp\_utility::func_3FA5("raid_objective_c3_complete");
+  maps\mp\_utility::gameflagwait("raid_objective_c3_complete");
   func_20C5("ObjectiveC3");
-  maps\mp\_utility::func_3FA5("raid_objective_c4_complete");
+  maps\mp\_utility::gameflagwait("raid_objective_c4_complete");
   func_20C5("ObjectiveC4");
 }
 
@@ -1108,7 +1108,7 @@ func_27D1(param_00, param_01, param_02) {
   }
 
   var_03 = spawnStruct();
-  var_03.var_109 = param_00;
+  var_03.name = param_00;
   var_03.var_92C1 = param_01;
   var_03.var_36B1 = param_02;
   level.var_792A.var_7BE0[param_00] = var_03;
@@ -1131,7 +1131,7 @@ func_7FDB() {
 }
 
 func_08B5(param_00) {
-  common_scripts\_exploder::func_392A(param_00);
+  common_scripts\_exploder::exploder(param_00);
   level.var_7961[level.var_7961.size] = param_00;
 }
 
@@ -1146,12 +1146,12 @@ func_2A79(param_00, param_01) {
 }
 
 func_A483() {
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   func_08B5(210);
 }
 
 func_A489() {
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   var_00 = getEnt("tree_fall_01", "targetname");
   if(isDefined(var_00)) {
     var_00 method_8278("mp_raids_bulge_obj01treefall_tree01_preidle");
@@ -1164,7 +1164,7 @@ func_A489() {
 }
 
 func_A48A() {
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   var_00 = getEnt("tree_fall_02", "targetname");
   if(isDefined(var_00)) {
     var_00 method_8278("mp_raids_bulge_obj01treefall_tree01_preidle");
@@ -1178,7 +1178,7 @@ func_A48A() {
 }
 
 func_A48B() {
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   var_00 = getEnt("tree_fall_03", "targetname");
   if(isDefined(var_00)) {
     var_00 method_8278("mp_raids_bulge_obj01treefall_tree01_preidle");
@@ -1226,7 +1226,7 @@ func_A47A() {
   var_02 = 30;
   for(var_03 = 0; var_03 < var_00; var_03++) {
     var_04 = var_02 + randomint(var_01);
-    common_scripts\_exploder::func_392A(var_04);
+    common_scripts\_exploder::exploder(var_04);
     wait(randomfloatrange(0.25, 0.85));
   }
 }
@@ -1273,14 +1273,14 @@ func_7FBE() {
   func_97E8();
   setomnvar("ui_raid_objective_index_allies", 0);
   setomnvar("ui_raid_objective_index_axis", 3);
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   var_00 = lib_0502::func_6514();
   lib_0502::func_86DE(lib_0501::func_4647("escort3x_objectiveTime"), 1);
   level thread func_7FA0();
   lib_04FF::func_6982("escort_tanks");
   thread lib_04FF::func_2CDA(0.5, (-6389, 2817, 379));
   level thread lib_0500::func_1E85(game["defenders"], 15, "escort_tanks");
-  maps\mp\_utility::func_3FA4("raid_objective_a_complete");
+  maps\mp\_utility::gameflagset("raid_objective_a_complete");
   level notify("runObjectiveMultiEscortComplete");
 }
 
@@ -1294,9 +1294,9 @@ func_7FA0() {
 }
 
 func_97DD() {
-  var_00 = getvehiclenode(level.var_9601.var_1A2, "targetname");
-  var_01 = getvehiclenode(level.var_9604.var_1A2, "targetname");
-  var_02 = getvehiclenode(level.var_9607.var_1A2, "targetname");
+  var_00 = getvehiclenode(level.var_9601.target, "targetname");
+  var_01 = getvehiclenode(level.var_9604.target, "targetname");
+  var_02 = getvehiclenode(level.var_9607.target, "targetname");
   var_00 thread func_97C2();
   var_01 thread func_97C2();
   var_02 thread func_97C2();
@@ -1336,12 +1336,12 @@ func_97C2() {
       }
     }
 
-    if(!isDefined(var_00.var_1A2)) {
+    if(!isDefined(var_00.target)) {
       break;
     }
 
     var_01 = 0;
-    var_00 = getvehiclenode(var_00.var_1A2, "targetname");
+    var_00 = getvehiclenode(var_00.target, "targetname");
   }
 }
 
@@ -1406,13 +1406,13 @@ func_97EB() {
 
 func_3A55(param_00, param_01) {
   if(param_00.var_291C != param_00.var_693E) {
-    param_00.var_1C7 = "forward";
+    param_00.getfirstarraykey = "forward";
     param_00.var_1C1 = "forward";
     param_00 method_8281(200);
   }
 
   if(param_01.var_291C != param_01.var_693E) {
-    param_01.var_1C7 = "forward";
+    param_01.getfirstarraykey = "forward";
     param_01.var_1C1 = "forward";
     param_01 method_8281(200);
   }
@@ -1437,7 +1437,7 @@ func_97EE() {
   var_01 = common_scripts\utility::func_46B7("tank1_to_delete_by_link", "targetname");
   var_02 = 0;
   foreach(var_07 in var_01) {
-    var_08 = getEntArray(var_07.var_81EF, "script_linkname");
+    var_08 = getEntArray(var_07.script_exploder, "script_linkname");
     foreach(var_0A in var_08) {
       var_00 = common_scripts\utility::func_F6F(var_00, var_0A);
       if(isDefined(var_0A.var_E9E)) {
@@ -1454,7 +1454,7 @@ func_97EE() {
   var_0E = undefined;
   if(isDefined(var_0D)) {
     var_0F = level.var_9601 gettagorigin("tag_barrel");
-    var_10 = vectorNormalize(var_0D.var_116 - var_0F);
+    var_10 = vectorNormalize(var_0D.origin - var_0F);
     var_0E = var_0F + var_10 * 1200;
     level.var_9601.var_9734 = 1;
     level.var_9601 method_825B(var_0E);
@@ -1489,7 +1489,7 @@ func_97F0() {
 }
 
 func_97F1(param_00) {
-  if(isDefined(self.var_165)) {
+  if(isDefined(self.exitlevel)) {
     var_01 = undefined;
     if(!param_00) {
       self waittill("trigger", var_01);
@@ -1499,12 +1499,12 @@ func_97F1(param_00) {
       level notify(self.var_8260);
     }
 
-    if(self.var_165 == "aim") {
-      if(isDefined(self.var_81EF)) {
-        var_02 = common_scripts\utility::func_46B5(self.var_81EF, "script_linkname");
+    if(self.exitlevel == "aim") {
+      if(isDefined(self.script_exploder)) {
+        var_02 = common_scripts\utility::func_46B5(self.script_exploder, "script_linkname");
         if(isDefined(var_02)) {
           var_01.var_9734 = 1;
-          var_01 method_825B(var_02.var_116);
+          var_01 method_825B(var_02.origin);
           return;
         }
 
@@ -1514,19 +1514,19 @@ func_97F1(param_00) {
       return;
     }
 
-    if(self.var_165 == "aimStop") {
+    if(self.exitlevel == "aimStop") {
       var_02 method_825D();
       var_02.var_9734 = 0;
       return;
     }
 
-    level notify(self.var_165);
+    level notify(self.exitlevel);
     return;
   }
 }
 
 tanktransition_startnewpath(param_00, param_01) {
-  self.var_1C7 = "forward";
+  self.getfirstarraykey = "forward";
   self.var_1C1 = "forward";
   wait 0.05;
   self startpath(param_00);
@@ -1538,12 +1538,12 @@ func_97F2() {
   var_01 = 1;
   while(isDefined(var_00)) {
     var_00 thread func_97F1(var_01);
-    if(!isDefined(var_00.var_1A2)) {
+    if(!isDefined(var_00.target)) {
       break;
     }
 
     var_01 = 0;
-    var_00 = getvehiclenode(var_00.var_1A2, "targetname");
+    var_00 = getvehiclenode(var_00.target, "targetname");
   }
 }
 
@@ -1556,12 +1556,12 @@ func_97E4() {
 func_97E6(param_00, param_01) {
   level endon("transition_1_finished");
   level waittill(param_00);
-  common_scripts\utility::func_3C8F(param_01);
+  common_scripts\utility::flag_set(param_01);
 }
 
 func_97EC(param_00) {
   var_01 = common_scripts\utility::func_46B5("tank_tread_origin", "targetname");
-  var_02 = var_01.var_116;
+  var_02 = var_01.origin;
   if(!isDefined(var_02)) {
     var_02 = (0, 0, 0);
   }
@@ -1596,13 +1596,13 @@ func_97EA() {
   }
 
   var_01 lib_0502::func_7997();
-  var_02 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
+  var_02 = function_01E0(var_00.model, var_00.targetname, var_00.var_1C8, var_00.origin, var_00.var_1D);
   var_02.var_56E8 = 1;
   wait 0.05;
   lib_0502::func_9FF(var_02);
   level waittill("transition_1_started");
-  common_scripts\utility::func_3C87("sherman_fire");
-  common_scripts\utility::func_3C87("tiger_fire");
+  common_scripts\utility::flag_init("sherman_fire");
+  common_scripts\utility::flag_init("tiger_fire");
   level thread func_97E6("sherman_fire_node", "sherman_fire");
   level thread func_97E6("tiger_fire_node", "tiger_fire");
   var_03 = (0, 0, 60);
@@ -1619,7 +1619,7 @@ func_97EA() {
   common_scripts\utility::func_3C9F("tiger_fire");
   for(;;) {
     var_04 = level.var_960A gettagorigin("tag_flash");
-    var_05 = var_02.var_116 + var_03 - var_04;
+    var_05 = var_02.origin + var_03 - var_04;
     var_05 = vectorNormalize(var_05);
     var_06 = level.var_960A gettagangles("tag_flash");
     var_06 = anglesToForward(var_06);
@@ -1634,7 +1634,7 @@ func_97EA() {
   wait(0.1);
   lib_04F3::func_79CB("emt_vehicle_fire_2_lp", (-3063, 3642, 378));
   lib_04F3::func_79CB("raid_tank_explode_sweet", (-3063, 3642, 378));
-  playFX(common_scripts\utility::func_44F5("veh_opel_blitz_explo_1_rnr"), var_02.var_116, anglesToForward(var_02.var_1D));
+  playFX(common_scripts\utility::func_44F5("veh_opel_blitz_explo_1_rnr"), var_02.origin, anglesToForward(var_02.var_1D));
   lib_0502::func_7D03(var_02, 1);
   var_02 lib_0502::func_7997();
   var_01 lib_0502::func_79C6();
@@ -1679,7 +1679,7 @@ func_A6D3(param_00, param_01) {
   wait(param_00);
   if(isDefined(param_01)) {
     param_01 lib_0502::func_79C6();
-    foreach(var_03 in level.var_744A) {
+    foreach(var_03 in level.players) {
       if(var_03 istouching(param_01)) {
         param_01 maps\mp\_movers::func_A047(var_03);
       }
@@ -1737,17 +1737,17 @@ func_97E9(param_00, param_01, param_02, param_03) {
   level.var_960A.var_92ED = param_02;
   level.var_960A.var_36DA = param_02;
   level.var_960A.var_6F45 = param_02;
-  while(isDefined(level.var_960A.var_36DA.var_1A2)) {
+  while(isDefined(level.var_960A.var_36DA.target)) {
     level.var_960A.var_6F45 = level.var_960A.var_36DA;
-    level.var_960A.var_36DA = getvehiclenode(level.var_960A.var_36DA.var_1A2, "targetname");
+    level.var_960A.var_36DA = getvehiclenode(level.var_960A.var_36DA.target, "targetname");
   }
 
   level.var_964A.var_92ED = param_03;
   level.var_964A.var_36DA = param_03;
   level.var_964A.var_6F45 = param_03;
-  while(isDefined(level.var_964A.var_36DA.var_1A2)) {
+  while(isDefined(level.var_964A.var_36DA.target)) {
     level.var_964A.var_6F45 = level.var_964A.var_36DA;
-    level.var_964A.var_36DA = getvehiclenode(level.var_964A.var_36DA.var_1A2, "targetname");
+    level.var_964A.var_36DA = getvehiclenode(level.var_964A.var_36DA.target, "targetname");
   }
 }
 
@@ -1759,7 +1759,7 @@ func_7FC1() {
   lib_0502::func_86DE(lib_0501::func_4647("ctf_objectiveTime"), 2);
   lib_04FF::func_6982("tank_refuel");
   level thread lib_0500::func_1E85(game["defenders"], 2, "tank_refuel");
-  maps\mp\_utility::func_3FA4("raid_objective_b_complete");
+  maps\mp\_utility::gameflagset("raid_objective_b_complete");
   level notify("runObjectiveTankRefuelComplete");
 }
 
@@ -1772,7 +1772,7 @@ func_68F9() {
     level waittill("transition_1_finished");
     var_00 lib_0502::func_79C6();
     var_01 lib_0502::func_79C6();
-    foreach(var_03 in level.var_744A) {
+    foreach(var_03 in level.players) {
       if(var_03 isusingturret()) {
         continue;
       }
@@ -1804,22 +1804,22 @@ func_7FBD() {
   lib_0502::func_86DE(lib_0501::func_4647("escort_objectiveTime"), 3);
   lib_04FF::func_6972("bridge_escort");
   level waittill("bridge_escort_checkpoint_1");
-  maps\mp\_utility::func_3FA4("raid_objective_c1_complete");
+  maps\mp\_utility::gameflagset("raid_objective_c1_complete");
   thread func_2064();
   thread func_A6D5();
   level waittill("bridge_escort_checkpoint_2");
-  maps\mp\_utility::func_3FA4("raid_objective_c2_complete");
-  var_00 = level.var_79C2.var_693B["bridge_escort"].var_6984.var_116;
+  maps\mp\_utility::gameflagset("raid_objective_c2_complete");
+  var_00 = level.var_79C2.var_693B["bridge_escort"].var_6984.origin;
   lib_04F7::func_2F99(var_00, 3000);
   lib_0502::func_8628("bridge_escort");
   level waittill("bridge_escort_checkpoint_3");
-  maps\mp\_utility::func_3FA4("raid_objective_c3_complete");
+  maps\mp\_utility::gameflagset("raid_objective_c3_complete");
   thread func_A6D4();
   thread func_A6B3();
   level waittill("bridge_escort_checkpoint_4");
-  maps\mp\_utility::func_3FA4("raid_objective_c4_complete");
+  maps\mp\_utility::gameflagset("raid_objective_c4_complete");
   lib_04FF::func_6982("bridge_escort");
-  maps\mp\_utility::func_3FA4("raid_objective_c_complete");
+  maps\mp\_utility::gameflagset("raid_objective_c_complete");
   level notify("runObjectiveBridgeSecureComplete");
 }
 
@@ -1838,7 +1838,7 @@ func_1C6B() {
 func_1C6C() {
   var_00 = common_scripts\utility::func_46B5("bridge_escort", "targetname");
   var_01 = var_00.var_A2C8;
-  var_00.var_1A2 = level.var_960A;
+  var_00.target = level.var_960A;
   var_00.var_A2C8 = level.var_960A;
   var_01 delete();
   var_02 = getvehiclenode("transition_path_4", "targetname");
@@ -1859,8 +1859,8 @@ cavecheckforti() {
   level endon("game_ended");
   var_00 = (-1240, 5814, 319.155);
   var_01 = (-1176, 5870, 317.213);
-  foreach(var_03 in level.var_744A) {
-    if(isDefined(var_03.var_872A) && var_03.var_872A.var_116[0] == var_00[0] && var_03.var_872A.var_116[1] == var_00[1]) {
+  foreach(var_03 in level.players) {
+    if(isDefined(var_03.var_872A) && var_03.var_872A.origin[0] == var_00[0] && var_03.var_872A.origin[1] == var_00[1]) {
       maps\mp\perks\_perkfunctions::func_2D54(var_03.var_872A);
       continue;
     }
@@ -1927,18 +1927,18 @@ func_A6D5() {
       continue;
     }
 
-    if(!isDefined(var_08.var_165)) {
+    if(!isDefined(var_08.exitlevel)) {
       var_08 lib_0502::func_7997();
       continue;
     }
 
-    if(isDefined(var_08.var_1A2)) {
-      var_09 = getEnt(var_08.var_1A2, "targetname");
+    if(isDefined(var_08.target)) {
+      var_09 = getEnt(var_08.target, "targetname");
       var_09 linkTo(var_08);
       var_09 thread lib_0502::func_2FC2();
     }
 
-    switch (var_08.var_165) {
+    switch (var_08.exitlevel) {
       case "truck":
         var_04 = var_08;
         var_04 method_8278("mp_raids_bulge_obj03truckpush_truck01_start");
@@ -1983,7 +1983,7 @@ func_A6D5() {
   }
 
   if(isDefined(var_01)) {
-    lib_04F3::func_79CB("blg_watchtower_hit", var_01.var_116);
+    lib_04F3::func_79CB("blg_watchtower_hit", var_01.origin);
     var_01 lib_0502::func_7997();
   }
 
@@ -2035,7 +2035,7 @@ func_A6D4() {
     }
 
     if(var_08.var_3A == "script_model") {
-      if(var_08.var_165 == "delete") {
+      if(var_08.exitlevel == "delete") {
         var_08 lib_0502::func_7997();
         continue;
       }
@@ -2063,8 +2063,8 @@ func_A6B3() {
   foreach(var_08 in var_00) {
     if(var_05) {
       var_05 = 0;
-      var_06 = var_08.var_116;
-      lib_04F3::func_79CB("blg_watchtower_hit", var_08.var_116);
+      var_06 = var_08.origin;
+      lib_04F3::func_79CB("blg_watchtower_hit", var_08.origin);
     }
 
     var_08 lib_0502::func_7997();
@@ -2081,7 +2081,7 @@ func_0898() {
   if(isDefined(var_00)) {
     var_00 setdefaultdroppitch(-45);
     var_00.var_5DBC = 1;
-    var_01 = getEntArray(var_00.var_1A2, "targetname");
+    var_01 = getEntArray(var_00.target, "targetname");
   }
 
   if(var_01.size != 0) {
@@ -2178,7 +2178,7 @@ func_97DF(param_00) {
 
 func_97DE(param_00) {
   var_01 = common_scripts\utility::func_46B5(param_00, "script_linkname");
-  var_02 = var_01.var_1A5;
+  var_02 = var_01.targetname;
   if(isDefined(var_02)) {
     switch (var_02) {
       case "watchtower_1":
@@ -2198,7 +2198,7 @@ func_97DE(param_00) {
 
 func_7FCD() {
   level endon("game_ended");
-  maps\mp\_utility::func_3FA5("intro_vo_complete");
+  maps\mp\_utility::gameflagwait("intro_vo_complete");
   maps\mp\gametypes\_hostmigration::func_A6F5(randomfloatrange(10, 20));
   var_00 = undefined;
   for(;;) {
@@ -2210,7 +2210,7 @@ func_7FCD() {
         var_03 = var_03 + var_05.laststand_enter_levelspecificaction;
       }
 
-      var_07 = common_scripts\utility::func_7A33(["allies", "axis"]);
+      var_07 = common_scripts\utility::random(["allies", "axis"]);
       var_08 = randomfloat(var_03);
       var_09 = undefined;
       while(!isDefined(var_09)) {
@@ -2337,8 +2337,8 @@ func_7FA1() {
 
 func_3CD8() {
   thread func_3CD9();
-  if(isDefined(self.var_1A2)) {
-    var_00 = getEnt(self.var_1A2, "targetname");
+  if(isDefined(self.target)) {
+    var_00 = getEnt(self.target, "targetname");
     if(isDefined(var_00)) {
       var_00 linkTo(self, "tag_yaw");
     }
@@ -2370,10 +2370,10 @@ func_3CDD() {
     return;
   }
 
-  var_00 = level.var_3CE5[level.var_3CE4].var_116;
+  var_00 = level.var_3CE5[level.var_3CE4].origin;
   var_01 = spawnStruct();
-  var_01.var_116 = var_00;
-  self setturrettargetorigin(var_01.var_116);
+  var_01.origin = var_00;
+  self setturrettargetorigin(var_01.origin);
   thread func_3CDA(var_01);
   thread func_3CDC(var_01);
 }
@@ -2389,16 +2389,16 @@ func_3CDB() {
 func_3CDC(param_00) {
   self endon("death");
   for(;;) {
-    var_01 = level.var_3CE5[level.var_3CE4].var_116;
+    var_01 = level.var_3CE5[level.var_3CE4].origin;
     if(common_scripts\utility::func_562E(self.var_9827)) {
       var_01 = self.origin + anglesToForward(self.var_1D) * 200 + (0, 0, 400);
       level.var_3CE6 = 0;
     }
 
-    if(distancesquared(param_00.var_116, var_01) > 1) {
+    if(distancesquared(param_00.origin, var_01) > 1) {
       if(gettime() > level.var_3CE6) {
-        param_00.var_116 = var_01;
-        self setturrettargetorigin(param_00.var_116);
+        param_00.origin = var_01;
+        self setturrettargetorigin(param_00.origin);
         level.var_3CE6 = gettime() + randomintrange(800, 1200);
       }
     }
@@ -2412,7 +2412,7 @@ func_3CDA(param_00) {
   maps\mp\gametypes\_hostmigration::func_A6F5(randomfloatrange(1, 8));
   for(;;) {
     var_01 = self gettagangles("tag_aim");
-    var_02 = param_00.var_116 - self gettagorigin("tag_aim");
+    var_02 = param_00.origin - self gettagorigin("tag_aim");
     var_03 = vectortoangles(var_02);
     var_04 = anglesdelta(var_01, var_03);
     if(var_04 > 5) {

@@ -18,9 +18,9 @@ func_2E32(param_00) {
   lib_04FF::func_6965("objectHealth", 300, []);
   var_01 = [10, 8, 5, 2.5, 1];
   lib_04FF::func_6961("OvertimeDurationArray", var_01);
-  lib_04FF::func_6983(self.var_1A5);
-  param_00.var_1A7 = game["attackers"];
-  var_02 = lib_04FF::func_27DE("A", param_00.var_1A7, self.origin);
+  lib_04FF::func_6983(self.targetname);
+  param_00.team = game["attackers"];
+  var_02 = lib_04FF::func_27DE("A", param_00.team, self.origin);
   var_02 maps\mp\gametypes\_gameobjects::func_8A60("any");
   param_00.var_2563 = var_02;
   param_00.totalobjects = 0;
@@ -38,9 +38,9 @@ destructionobjectivecenter() {
 
 func_7F99() {
   wait 0.05;
-  lib_04FF::func_6983(self.var_1A5);
+  lib_04FF::func_6983(self.targetname);
   thread runovertimezone(self.overtimezone);
-  lib_04FF::func_6982(self.var_1A5);
+  lib_04FF::func_6982(self.targetname);
   thread func_2E30();
 }
 
@@ -56,7 +56,7 @@ func_2E31(param_00) {
   for(;;) {
     if(self.var_6896 != var_02) {
       var_03 = var_02 - self.var_6896 * 1000;
-      param_00 lib_04FF::func_8615(var_03);
+      param_00 lib_04FF::playlocalsound(var_03);
     }
 
     self waittill("prop_destroyed");
@@ -107,15 +107,15 @@ destructionobjectdestroyed(param_00) {
 }
 
 func_52FB(param_00) {
-  level.var_611["destructionExplode"] = loadfx("vfx/explosion/flashbang_no_model");
-  level.var_611["destructionExplode_sm"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_expl_sm");
-  level.var_611["destructionExplode_med"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_expl_med");
-  level.var_611["destructionExplode_lrg"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_expl_lrg");
-  level.var_611["sparks_burst"] = loadfx("vfx/explosion/sparks_burst_lrg_b");
-  level.var_611["damage_fire_small"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_dmg_sm");
-  level.var_611["damage_fire_medium"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_dmg_med");
-  level.var_611["damage_fire_large"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_dmg_lrg");
-  level.var_611["engine_fire"] = loadfx("vfx/map/mp_raid_d_day/r_dday_equipment_damaged_state_1");
+  level._effect["destructionExplode"] = loadfx("vfx/explosion/flashbang_no_model");
+  level._effect["destructionExplode_sm"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_expl_sm");
+  level._effect["destructionExplode_med"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_expl_med");
+  level._effect["destructionExplode_lrg"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_expl_lrg");
+  level._effect["sparks_burst"] = loadfx("vfx/explosion/sparks_burst_lrg_b");
+  level._effect["damage_fire_small"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_dmg_sm");
+  level._effect["damage_fire_medium"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_dmg_med");
+  level._effect["damage_fire_large"] = loadfx("vfx/map/mp_raid_aachen/raid_aachen_radio_dmg_lrg");
+  level._effect["engine_fire"] = loadfx("vfx/map/mp_raid_d_day/r_dday_equipment_damaged_state_1");
   param_00.sfxtable = [];
   param_00.sfxtable["damage_fire_small"] = "ob2_comm_fire_sml";
   param_00.sfxtable["damage_fire_medium"] = "ob2_comm_fire_med";
@@ -200,9 +200,9 @@ runovertimezone(param_00) {
   lib_04FF::func_6942(var_05);
   thread destructionobjectiveupdate(var_05);
   var_05 thread destructionzoneoccupied(self);
-  lib_04FF::func_6982(self.var_1A5);
-  lib_04F7::func_5A4F(param_00.var_116, 750);
-  lib_04F7::func_2F99(param_00.var_116, 750);
+  lib_04FF::func_6982(self.targetname);
+  lib_04F7::func_5A4F(param_00.origin, 750);
+  lib_04F7::func_2F99(param_00.origin, 750);
   var_05 lib_04FF::func_7CCA();
   var_05 maps\mp\gametypes\_gameobjects::func_2F93();
   var_05 maps\mp\gametypes\_gameobjects::deleteuseobjectobjectives();
@@ -228,11 +228,11 @@ destructionobjectiveupdate(param_00) {
 
       var_02 = gettime();
       var_04 = var_03 - self.var_6896 * 1000;
-      param_00 lib_04FF::func_8615(var_04);
+      param_00 lib_04FF::playlocalsound(var_04);
     }
 
     if(self.var_6896 == 0) {
-      lib_04FF::func_6935(self.var_1A5);
+      lib_04FF::func_6935(self.targetname);
       return;
     }
 
@@ -245,12 +245,12 @@ func_A90E(param_00) {
   var_01 = 0;
   var_02 = self.var_6896;
   for(;;) {
-    if(isDefined(level.var_4E09)) {
+    if(isDefined(level.hostmigrationtimer)) {
       var_01 = 1;
     } else if(var_01) {
       var_01 = 0;
       var_03 = var_02 - self.var_6896 * 1000;
-      param_00 lib_04FF::func_8615(var_03);
+      param_00 lib_04FF::playlocalsound(var_03);
     }
 
     wait(1);
@@ -291,13 +291,13 @@ func_2E34(param_00) {
   param_00.var_BC = 999999;
   param_00.var_FB = var_01;
   param_00.var_6A = 0;
-  param_00.var_1A7 = game["defenders"];
+  param_00.team = game["defenders"];
   param_00 method_86B7();
   param_00 method_80B0(8576);
-  lib_04FF::func_6983(param_00.var_65EA.var_1A5);
+  lib_04FF::func_6983(param_00.var_65EA.targetname);
   waittillframeend;
   param_00 setdamagecallbackon(1);
-  param_00.var_29B5 = ::func_2E2C;
+  param_00.damagecallback = ::func_2E2C;
   param_00 setCanDamage(1);
   param_00.healthmultiple = 1;
   param_00.canrepair = 0;
@@ -305,7 +305,7 @@ func_2E34(param_00) {
   param_00.var_29DD = [];
   param_00.var_3F7C = -1;
   param_00.var_3F6E = undefined;
-  param_00.basemodel = param_00.var_106;
+  param_00.basemodel = param_00.model;
   param_00.stagemodel = param_00.basemodel;
   param_00.killed = 0;
   param_00.suppressmodelchangesound = 1;
@@ -319,8 +319,8 @@ func_2E34(param_00) {
 }
 
 fixobjectorigin(param_00) {
-  if(param_00.var_106 == "ger_radio_equip_07" || param_00.var_106 == "ger_radio_equip_05") {
-    param_00.var_116 = param_00.var_116 + (0, 0, 1);
+  if(param_00.model == "ger_radio_equip_07" || param_00.model == "ger_radio_equip_05") {
+    param_00.origin = param_00.origin + (0, 0, 1);
   }
 }
 
@@ -367,7 +367,7 @@ destructionpropapplyparamaters(param_00) {
 initfxnodes(param_00) {
   foreach(var_02 in param_00.var_982D) {
     foreach(var_04 in var_02) {
-      if(var_04.var_165 == "fxSource") {
+      if(var_04.exitlevel == "fxSource") {
         fxstructinit(var_04, param_00.stagemodel);
       }
     }
@@ -385,7 +385,7 @@ initdamageportions() {
 
 func_2E2D(param_00) {
   param_00 endon("death");
-  lib_04FF::func_6982(self.var_1A5);
+  lib_04FF::func_6982(self.targetname);
   killdestructibleoutlinethread(param_00);
   param_00 setdamagecallbackon(0);
 }
@@ -432,12 +432,12 @@ func_2E2C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  if(isDefined(param_01.var_1A7)) {
-    if(self.var_1A7 == param_01.var_1A7) {
+  if(isDefined(param_01.team)) {
+    if(self.team == param_01.team) {
       return;
     }
-  } else if(isDefined(param_01.var_117) && isDefined(param_01.var_117.var_1A7)) {
-    if(self.var_1A7 == param_01.var_117.var_1A7) {
+  } else if(isDefined(param_01.var_117) && isDefined(param_01.var_117.team)) {
+    if(self.team == param_01.var_117.team) {
       return;
     }
   }
@@ -477,7 +477,7 @@ func_2E2C(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   param_01 maps\mp\gametypes\_damagefeedback::func_A102(var_0C);
-  self.var_65EA thread damageovertimesingleton(self.var_65EA.var_1A5);
+  self.var_65EA thread damageovertimesingleton(self.var_65EA.targetname);
 }
 
 damageovertimesingleton(param_00) {
@@ -642,7 +642,7 @@ fxstructapplyparamaters(param_00) {
     return;
   }
 
-  if(!isDefined(param_00.var_6E56["effect"]) || !isDefined(level.var_611[param_00.var_6E56["effect"]])) {
+  if(!isDefined(param_00.var_6E56["effect"]) || !isDefined(level._effect[param_00.var_6E56["effect"]])) {
     param_00.var_6E56["effect"] = "";
   }
 
@@ -684,7 +684,7 @@ func_74E0() {
   self.var_3F73 = common_scripts\utility::func_44F5(var_01);
   playFXOnTag(self.var_3F73, self.var_3F6E, "tag_origin");
   self.var_3F78 = 1;
-  var_02 = self.var_65EB.var_116;
+  var_02 = self.var_65EB.origin;
   var_03 = self.var_65EB.var_65EA.sfxtable[var_01];
   var_04 = self.var_65EB.var_65EA.sfxoffsets[var_01];
   if(isDefined(var_03) && !isDefined(self.var_65EB.var_A238)) {
@@ -741,8 +741,8 @@ destructenablerepair(param_00) {
   param_00.repairenabled = 1;
   enableactivate(param_00);
   param_00.var_65EA.damagedobjects = param_00.var_65EA.damagedobjects + 1;
-  lib_0502::func_2D53("dropped_weapon", param_00.var_116, 128);
-  param_00 maps\mp\_utility::func_5FBD(game["defenders"]);
+  lib_0502::func_2D53("dropped_weapon", param_00.origin, 128);
+  param_00 maps\mp\_utility::maketeamusable(game["defenders"]);
   param_00 thread repairablethink();
 }
 
@@ -772,8 +772,8 @@ attempttorepairobject(param_00) {
     return;
   }
 
-  level thread maps\mp\_utility::func_9863("raids_subobjective_repaired", param_00);
-  param_00 thread maps\mp\gametypes\_hud_message::func_73C2("raids_subobjective_repaired", param_00);
+  level thread maps\mp\_utility::teamplayercardsplash("raids_subobjective_repaired", param_00);
+  param_00 thread maps\mp\gametypes\_hud_message::playercardsplashnotify("raids_subobjective_repaired", param_00);
   func_2E26(undefined, undefined, var_01);
   self.var_65EA.damagedobjects = self.var_65EA.damagedobjects - 1;
   self notify("repaired", param_00);
@@ -841,16 +841,16 @@ func_6F82(param_00, param_01, param_02) {
   self setclientomnvar("ui_use_bar_start_time", int(gettime()));
   var_03 = -1;
   var_04 = gettime() + param_01;
-  while(maps\mp\_utility::func_57A0(self) && isDefined(param_00) && param_00.var_54F5 && !level.var_3F9D && param_00.killed == 0) {
+  while(maps\mp\_utility::isreallyalive(self) && isDefined(param_00) && param_00.var_54F5 && !level.gameended && param_00.killed == 0) {
     if(var_03 != param_00.buttonpressed) {
       if(param_00.var_28D5 > param_01) {
         param_00.var_28D5 = param_01;
       }
 
       if(param_00.buttonpressed > 0) {
-        var_05 = int(param_02.var_116[0]);
-        var_06 = int(param_02.var_116[1]);
-        var_07 = int(param_02.var_116[2] + 25);
+        var_05 = int(param_02.origin[0]);
+        var_06 = int(param_02.origin[1]);
+        var_07 = int(param_02.origin[2] + 25);
         self luinotifyevent(&"carepackage_icon_world_position", 3, var_05, var_06, var_07);
         self setclientomnvar("ui_use_bar_end_time", int(var_04));
       }
@@ -865,7 +865,7 @@ func_6F82(param_00, param_01, param_02) {
 }
 
 func_A214(param_00, param_01) {
-  while(!level.var_3F9D && isDefined(self) && maps\mp\_utility::func_57A0(param_00) && param_00 useButtonPressed() && self.var_28D5 < param_01) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(param_00) && param_00 useButtonPressed() && self.var_28D5 < param_01) {
     self.var_28D5 = self.var_28D5 + self.buttonpressed * 50;
     if(!self.buttonpressed) {
       self.buttonpressed = 1;
@@ -876,7 +876,7 @@ func_A214(param_00, param_01) {
     }
 
     if(self.var_28D5 >= param_01) {
-      return maps\mp\_utility::func_57A0(param_00);
+      return maps\mp\_utility::isreallyalive(param_00);
     }
 
     wait 0.05;

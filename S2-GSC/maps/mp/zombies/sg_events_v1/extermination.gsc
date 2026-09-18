@@ -21,7 +21,7 @@ basic_extermination_run(param_00) {
     if(isDefined(var_01.var_2A35.ext_type)) {
       if(isarray(var_01.var_2A35.ext_type)) {
         if(isarray(var_01.var_2A35.ext_type[0])) {
-          var_02 = common_scripts\utility::func_7A33(var_01.var_2A35.ext_type);
+          var_02 = common_scripts\utility::random(var_01.var_2A35.ext_type);
         } else {
           var_02 = var_01.var_2A35.ext_type;
         }
@@ -219,7 +219,7 @@ objective_extermination_sizzler_choose_best_generic(param_00) {
     return param_00[0];
   }
 
-  return common_scripts\utility::func_7A33(param_00);
+  return common_scripts\utility::random(param_00);
 }
 
 objective_extermination_sizzler_think(param_00) {
@@ -240,7 +240,7 @@ func_5D67(param_00) {
   var_03 setModel("tag_origin");
   var_03.angles = var_03.angles + (-90, 0, 0);
   var_04 = launchbeam("zmb_wm_lightning_beam", var_02, "tag_origin", var_03, "tag_origin");
-  playFXOnTag(level.var_611["zmb_wm_lightning_impact_base_rnr"], var_03, "tag_origin");
+  playFXOnTag(level._effect["zmb_wm_lightning_impact_base_rnr"], var_03, "tag_origin");
   lib_0378::func_8D74("lightning_strike", var_02.origin, param_00);
   wait(randomfloatrange(0.25, 0.35));
   var_04 delete();

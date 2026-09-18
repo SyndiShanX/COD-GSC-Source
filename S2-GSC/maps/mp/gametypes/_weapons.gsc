@@ -16,14 +16,14 @@ init() {
   level.var_808B = 1;
   level.var_808C = 1;
   if(!maps\mp\_utility::func_585F()) {
-    level.var_6092 = max(maps\mp\_utility::func_4529("scr_maxPerPlayerExplosives", 2), 1);
+    level.var_6092 = max(maps\mp\_utility::getintproperty("scr_maxPerPlayerExplosives", 2), 1);
   }
 
-  level.var_7EA4 = maps\mp\_utility::func_4529("scr_riotShieldXPBullets", 15);
+  level.var_7EA4 = maps\mp\_utility::getintproperty("scr_riotShieldXPBullets", 15);
   createthreatbiasgroup("DogsDontAttack");
   createthreatbiasgroup("Dogs");
   setignoremegroup("DogsDontAttack", "Dogs");
-  switch (maps\mp\_utility::func_4529("perk_scavengerMode", 0)) {
+  switch (maps\mp\_utility::getintproperty("perk_scavengerMode", 0)) {
     case 1:
       level.var_808B = 0;
       break;
@@ -39,7 +39,7 @@ init() {
   }
 
   var_00 = maps\mp\_utility::func_4427();
-  var_00 = common_scripts\utility::func_C9E(var_00);
+  var_00 = common_scripts\utility::alphabetize(var_00);
   thread maps\mp\_flashgrenades::main();
   thread maps\mp\_entityheadicons::init();
   if(!isDefined(level.iszombiegame) || !level.iszombiegame) {
@@ -79,30 +79,30 @@ init() {
   }
 
   if(!isDefined(level.iszombiegame) || !level.iszombiegame) {
-    level.var_611["mine_stunned"] = loadfx("vfx/sparks/emp_drone_damage");
-    level.var_611["signal_flare"] = loadfx("vfx/smoke/signal_flare_volumetric_runner_blinded");
-    level.var_611["signal_flare_friendly_tacmask"] = loadfx("vfx/smoke/signal_flare_volumetric_runner");
-    level.var_611["sentry_explode_mp"] = loadfx("vfx/explosion/remote_sentry_death");
-    level.var_611["sentry_smoke_mp"] = loadfx("vfx/explosion/remote_sentry_death_smoke");
-    level.var_611["trophy_detonation"] = loadfx("vfx/explosion/remote_sentry_death_smoke");
-    level.var_611["fire_lp_s_base_calm"] = loadfx("vfx/fire/fire_lp_s_base_calm");
-    level.var_611["sticky_grenade_splat"] = loadfx("vfx/weaponimpact/sticky_grenade_splat");
-    level.var_611["perception_glow"] = loadfx("vfx/ui/ui_role_ability_overlay_yellow");
-    level.var_611["divisions_bayonet_charge"] = loadfx("vfx/divisions/fx_divisions_rifle_bayont_charge_1p");
-    level.var_611["divisions_sniper"] = loadfx("vfx/divisions/divisions_sniper");
-    level.var_611["tactical_insertion_beacon_ally"] = loadfx("vfx/test/beacon_smoke_tac_insert_ally");
-    level.var_611["tactical_insertion_beacon_enemy"] = loadfx("vfx/test/beacon_smoke_tac_insert_enemy");
-    level.var_611["tactical_insertion_cavalry_ally"] = loadfx("vfx/test/mp_cav_tac_insert_ally");
-    level.var_611["tactical_insertion_cavalry_enemy"] = loadfx("vfx/test/mp_cav_tac_insert_enemy");
-    level.var_611["tactical_insertion_cavalry_ally_parachuting"] = loadfx("vfx/test/mp_cav_tac_insert_ally_parachuting");
-    level.var_611["tactical_insertion_cavalry_enemy_parachuting"] = loadfx("vfx/test/mp_cav_tac_insert_enemy_parachuting");
-    level.var_611["faster_health_regen_sweep"] = loadfx("vfx/unique/mp_fast_health_regen");
-    level.var_611["mp_dlc4_3rd_person_serum_orange"] = loadfx("vfx/map/mp_raid_dlc4/mp_dlc4_3rd_person_serum_orange");
-    level.var_611["mp_dlc4_1st_person_serum_orange"] = loadfx("vfx/map/mp_raid_dlc4/mp_dlc4_1st_person_serum_orange");
+    level._effect["mine_stunned"] = loadfx("vfx/sparks/emp_drone_damage");
+    level._effect["signal_flare"] = loadfx("vfx/smoke/signal_flare_volumetric_runner_blinded");
+    level._effect["signal_flare_friendly_tacmask"] = loadfx("vfx/smoke/signal_flare_volumetric_runner");
+    level._effect["sentry_explode_mp"] = loadfx("vfx/explosion/remote_sentry_death");
+    level._effect["sentry_smoke_mp"] = loadfx("vfx/explosion/remote_sentry_death_smoke");
+    level._effect["trophy_detonation"] = loadfx("vfx/explosion/remote_sentry_death_smoke");
+    level._effect["fire_lp_s_base_calm"] = loadfx("vfx/fire/fire_lp_s_base_calm");
+    level._effect["sticky_grenade_splat"] = loadfx("vfx/weaponimpact/sticky_grenade_splat");
+    level._effect["perception_glow"] = loadfx("vfx/ui/ui_role_ability_overlay_yellow");
+    level._effect["divisions_bayonet_charge"] = loadfx("vfx/divisions/fx_divisions_rifle_bayont_charge_1p");
+    level._effect["divisions_sniper"] = loadfx("vfx/divisions/divisions_sniper");
+    level._effect["tactical_insertion_beacon_ally"] = loadfx("vfx/test/beacon_smoke_tac_insert_ally");
+    level._effect["tactical_insertion_beacon_enemy"] = loadfx("vfx/test/beacon_smoke_tac_insert_enemy");
+    level._effect["tactical_insertion_cavalry_ally"] = loadfx("vfx/test/mp_cav_tac_insert_ally");
+    level._effect["tactical_insertion_cavalry_enemy"] = loadfx("vfx/test/mp_cav_tac_insert_enemy");
+    level._effect["tactical_insertion_cavalry_ally_parachuting"] = loadfx("vfx/test/mp_cav_tac_insert_ally_parachuting");
+    level._effect["tactical_insertion_cavalry_enemy_parachuting"] = loadfx("vfx/test/mp_cav_tac_insert_enemy_parachuting");
+    level._effect["faster_health_regen_sweep"] = loadfx("vfx/unique/mp_fast_health_regen");
+    level._effect["mp_dlc4_3rd_person_serum_orange"] = loadfx("vfx/map/mp_raid_dlc4/mp_dlc4_3rd_person_serum_orange");
+    level._effect["mp_dlc4_1st_person_serum_orange"] = loadfx("vfx/map/mp_raid_dlc4/mp_dlc4_1st_person_serum_orange");
   }
 
   if(!function_0367()) {
-    level.var_611["blood_pool"] = loadfx("vfx/blood/blood_pool_mp");
+    level._effect["blood_pool"] = loadfx("vfx/blood/blood_pool_mp");
   }
 
   level.var_2CE8 = 1.8;
@@ -121,11 +121,11 @@ init() {
   level.var_9DCB = [];
   if(!maps\mp\_utility::func_551F() && !function_0367()) {
     if(!isDefined(level.iszombiegame) || !level.iszombiegame) {
-      level.var_611["equipment_explode"] = loadfx("vfx/explosion/sparks_burst_lrg_c");
+      level._effect["equipment_explode"] = loadfx("vfx/explosion/sparks_burst_lrg_c");
     }
 
-    level.var_611["sniperDustLarge"] = loadfx("vfx/dust/sniper_dust_kickup");
-    level.var_611["sniperDustLargeSuppress"] = loadfx("vfx/dust/sniper_dust_kickup_accum_suppress");
+    level._effect["sniperDustLarge"] = loadfx("vfx/dust/sniper_dust_kickup");
+    level._effect["sniperDustLargeSuppress"] = loadfx("vfx/dust/sniper_dust_kickup_accum_suppress");
   }
 
   level thread onplayerconnect();
@@ -321,12 +321,12 @@ func_8EC8() {
 
     var_01 = anglesToForward(self.angles);
     if(!isDefined(var_00) || gettime() - var_00 > 2000) {
-      playFX(level.var_611["sniperDustLarge"], self.origin + (0, 0, 10) + var_01 * 50, var_01);
+      playFX(level._effect["sniperDustLarge"], self.origin + (0, 0, 10) + var_01 * 50, var_01);
       var_00 = gettime();
       continue;
     }
 
-    playFX(level.var_611["sniperDustLargeSuppress"], self.origin + (0, 0, 10) + var_01 * 50, var_01);
+    playFX(level._effect["sniperDustLargeSuppress"], self.origin + (0, 0, 10) + var_01 * 50, var_01);
   }
 }
 
@@ -643,8 +643,8 @@ func_A957() {
     }
 
     var_05 = function_0061(var_00, 1);
-    if(isDefined(var_00) && !maps\mp\_utility::func_585F() && !maps\mp\_utility::func_773F() && isPlayer(self)) {
-      if(maps\mp\_utility::func_5699(var_00) || maps\mp\_utility::iscacsecondaryweapon(var_00)) {
+    if(isDefined(var_00) && !maps\mp\_utility::func_585F() && !maps\mp\_utility::privatematch() && isPlayer(self)) {
+      if(maps\mp\_utility::iscacprimaryweapon(var_00) || maps\mp\_utility::iscacsecondaryweapon(var_00)) {
         var_06 = maps\mp\_utility::func_45B5(var_00);
         var_07 = self getrankedplayerdata(common_scripts\utility::func_46AE(), "weaponStats", var_06, "kills");
         if(isDefined(var_07)) {
@@ -845,7 +845,7 @@ func_60AE(param_00) {
 }
 
 func_34B7(param_00, param_01, param_02) {
-  if(!maps\mp\_utility::func_581D()) {
+  if(!maps\mp\_utility::isusingremote()) {
     waittillframeend;
   }
 
@@ -923,7 +923,7 @@ func_34B7(param_00, param_01, param_02) {
             var_11 = randomintrange(1, 3);
           } else if(maps\mp\_utility::func_5695(param_01)) {
             var_11 = randomintrange(3, 5);
-          } else if(maps\mp\_utility::func_56E5(param_01)) {
+          } else if(maps\mp\_utility::isexplosivedamage(param_01)) {
             var_11 = randomintrange(20, 40);
           } else {
             var_11 = randomintrange(1, 10);
@@ -987,7 +987,7 @@ func_2E42(param_00, param_01) {
     }
 
     var_05 = self getattachtagname(var_03);
-    self method_802E(param_00, var_05);
+    self detach(param_00, var_05);
     if(var_05 != param_01) {
       var_02 = self getattachsize();
       for(var_03 = 0; var_03 < var_02; var_03++) {
@@ -997,7 +997,7 @@ func_2E42(param_00, param_01) {
         }
 
         param_00 = self getattachmodelname(var_03);
-        self method_802E(param_00, var_05);
+        self detach(param_00, var_05);
         break;
       }
     }
@@ -1067,7 +1067,7 @@ func_A934() {
       var_09 = var_02 getweaponammoclip(var_07, "left");
       var_0A = var_02 getweaponammostock(var_07);
       var_02 takeweapon(var_07);
-      var_02 maps\mp\_utility::func_642(var_00, 0, 0, var_06);
+      var_02 maps\mp\_utility::_giveweapon(var_00, 0, 0, var_06);
       var_02 setweaponammoclip(var_00, var_08, "right");
       var_02 setweaponammoclip(var_00, var_09, "left");
       var_02 setweaponammostock(var_00, var_0A);
@@ -1181,7 +1181,7 @@ func_4AF1(param_00) {
   if(var_01 maps\mp\_utility::_hasperk("specialty_scavenger")) {
     var_0B = var_01 getweaponslistprimaries();
     foreach(var_0D in var_0B) {
-      if(maps\mp\_utility::func_5699(var_0D) || level.var_808C && maps\mp\_utility::iscacsecondaryweapon(var_0D)) {
+      if(maps\mp\_utility::iscacprimaryweapon(var_0D) || level.var_808C && maps\mp\_utility::iscacsecondaryweapon(var_0D)) {
         var_0E = var_01 getweaponammostock(var_0D);
         var_0F = 0;
         var_10 = maps\mp\_utility::getweaponclass(var_0D);
@@ -1386,12 +1386,12 @@ func_4727(param_00) {
 
 func_44ED() {
   var_00 = "frag_grenade_mp";
-  var_01 = self method_817F(var_00);
+  var_01 = self getammocount(var_00);
   return var_01;
 }
 
 func_468A() {
-  var_00 = self method_817F("smoke_grenade_mp");
+  var_00 = self getammocount("smoke_grenade_mp");
   return var_00;
 }
 
@@ -1444,18 +1444,18 @@ func_A959(param_00) {
     }
 
     var_03 = maps\mp\_utility::getbaseweaponname(var_01);
-    if(!maps\mp\_utility::func_5699(var_03) && !maps\mp\_utility::iscacsecondaryweapon(var_03)) {
+    if(!maps\mp\_utility::iscacprimaryweapon(var_03) && !maps\mp\_utility::iscacsecondaryweapon(var_03)) {
       continue;
     }
 
     var_04 = 0;
     if(!function_0367()) {
-      var_05 = maps\mp\gametypes\_persistence::func_9330("totalShots") + 1;
-      var_04 = maps\mp\gametypes\_persistence::func_9330("hits");
+      var_05 = maps\mp\gametypes\_persistence::statgetbuffered("totalShots") + 1;
+      var_04 = maps\mp\gametypes\_persistence::statgetbuffered("hits");
       var_06 = clamp(float(var_04) / float(var_05), 0, 1) * 10000;
-      maps\mp\gametypes\_persistence::func_9339("totalShots", var_05);
-      maps\mp\gametypes\_persistence::func_9339("accuracy", int(var_06));
-      maps\mp\gametypes\_persistence::func_9339("misses", int(var_05 - var_04));
+      maps\mp\gametypes\_persistence::statsetbuffered("totalShots", var_05);
+      maps\mp\gametypes\_persistence::statsetbuffered("accuracy", int(var_06));
+      maps\mp\gametypes\_persistence::statsetbuffered("misses", int(var_05 - var_04));
     }
 
     if(isDefined(self.laststandparams) && self.laststandparams.laststandstarttime == gettime()) {
@@ -1563,13 +1563,13 @@ func_21C6(param_00, param_01, param_02) {
   }
 
   self.var_5BA9[param_00] = gettime();
-  var_04 = maps\mp\gametypes\_persistence::func_9330("totalShots");
-  var_05 = maps\mp\gametypes\_persistence::func_9330("hits") + 1;
+  var_04 = maps\mp\gametypes\_persistence::statgetbuffered("totalShots");
+  var_05 = maps\mp\gametypes\_persistence::statgetbuffered("hits") + 1;
   if(var_05 <= var_04) {
-    maps\mp\gametypes\_persistence::func_9339("hits", var_05);
-    maps\mp\gametypes\_persistence::func_9339("misses", int(var_04 - var_05));
+    maps\mp\gametypes\_persistence::statsetbuffered("hits", var_05);
+    maps\mp\gametypes\_persistence::statsetbuffered("misses", int(var_04 - var_05));
     var_06 = clamp(float(var_05) / float(var_04), 0, 1) * 10000;
-    maps\mp\gametypes\_persistence::func_9339("accuracy", int(var_06));
+    maps\mp\gametypes\_persistence::statsetbuffered("accuracy", int(var_06));
   }
 }
 
@@ -1637,7 +1637,7 @@ func_A918() {
   self endon("faux_spawn");
   self.throwinggrenade = undefined;
   self.var_4820 = 0;
-  if(maps\mp\_utility::func_4529("scr_deleteexplosivesonspawn", 1) == 1) {
+  if(maps\mp\_utility::getintproperty("scr_deleteexplosivesonspawn", 1) == 1) {
     if(isDefined(self.var_3233)) {
       self.var_3233 = undefined;
     } else {
@@ -1823,7 +1823,7 @@ func_A94E() {
 func_99AD(param_00) {
   self endon("death");
   self makeunusable();
-  if(!isDefined(param_00) || !maps\mp\_utility::func_57A0(param_00)) {
+  if(!isDefined(param_00) || !maps\mp\_utility::isreallyalive(param_00)) {
     return;
   }
 
@@ -1847,7 +1847,7 @@ func_99AD(param_00) {
     }
 
     var_02 waittill("trigger", var_03);
-    if(!isPlayer(var_03) || !maps\mp\_utility::func_57A0(var_03) || var_03 != param_00) {
+    if(!isPlayer(var_03) || !maps\mp\_utility::isreallyalive(var_03) || var_03 != param_00) {
       continue;
     }
 
@@ -1885,7 +1885,7 @@ func_A92B() {
       case "iw5_lsr_mp":
         var_00.var_5E70 = self.var_93AE;
         level notify("stinger_fired", self, var_02);
-        thread maps\mp\_utility::func_8626(var_00, "tag_origin", 65);
+        thread maps\mp\_utility::setaltsceneobj(var_00, "tag_origin", 65);
         break;
 
       case "panzerfaust60_mp":
@@ -2004,7 +2004,7 @@ func_3D43(param_00, param_01, param_02) {
   var_05 = 60;
   var_06 = 40;
   var_07 = 11;
-  if(!maps\mp\_utility::func_57A0(param_00) || param_00.sessionstate != "playing") {
+  if(!maps\mp\_utility::isreallyalive(param_00) || param_00.sessionstate != "playing") {
     return;
   }
 
@@ -2296,7 +2296,7 @@ func_1DF6() {
   self endon("death");
   for(;;) {
     level waittill("emp_update");
-    if((level.teambased && level.var_9852[self.team]) || !level.teambased && isDefined(level.var_35F6) && level.var_35F6 != self.owner) {
+    if((level.teambased && level.teamemped[self.team]) || !level.teambased && isDefined(level.empplayer) && level.empplayer != self.owner) {
       self.var_2F74 = 1;
       self notify("disabled");
       continue;
@@ -2430,7 +2430,7 @@ func_37F9(param_00) {
     self.var_9D65 setHintString(&"DIVISIONS_DLC4_INSERTION_FLARE_PICKUP");
   }
 
-  self.var_9D65 maps\mp\_utility::func_871E(param_00);
+  self.var_9D65 maps\mp\_utility::setselfusable(param_00);
 }
 
 func_37F7(param_00) {
@@ -2604,7 +2604,7 @@ func_4A66(param_00, param_01) {
   self waittill("explode", var_02);
   var_03 = spawnStruct();
   var_03.var_6C2C = var_02;
-  var_03.var_14F = 150;
+  var_03.radius = 150;
   if(isDefined(param_00) && param_00 maps\mp\_utility::_hasperk("specialty_improvedtacticals")) {
     var_03.var_688C = 8;
     var_03.var_99EB = 0.625;
@@ -2634,7 +2634,7 @@ func_9595(param_00, param_01, param_02) {
         continue;
       }
 
-      if(func_746D(var_05.origin, param_00.var_6C2C, param_00.var_14F)) {
+      if(func_746D(var_05.origin, param_00.var_6C2C, param_00.radius)) {
         if(func_740F(var_05, param_00.var_6C2C)) {
           var_05 dodamage(param_00.var_2994, param_00.var_6C2C, param_01, self, "MOD_GAS", param_02, "none");
         }
@@ -2670,17 +2670,17 @@ func_4AF3(param_00, param_01) {
   var_02.var_3D33 = 1750;
   var_02.var_3D37 = 65536;
   var_02.var_3F83 = common_scripts\utility::func_8FFC();
-  var_02.var_3F83 method_8449(self);
+  var_02.var_3F83 linktosynchronizedparent(self);
   var_02.var_3F83 show();
   var_02.var_3F71 = maps\mp\_utility::func_9028(common_scripts\utility::func_44F5("signal_flare_friendly_tacmask"), param_00, param_00.team, 1, var_02.var_3F83, "TAG_ORIGIN");
   var_02.var_3F82 = common_scripts\utility::func_8FFC();
-  var_02.var_3F82 method_8449(self);
+  var_02.var_3F82 linktosynchronizedparent(self);
   var_02.var_3F82 show();
-  var_02.var_3F6D = maps\mp\_utility::func_9028(common_scripts\utility::func_44F5("signal_flare"), param_00, maps\mp\_utility::func_45DE(param_00.team), 0, var_02.var_3F82, "TAG_ORIGIN");
+  var_02.var_3F6D = maps\mp\_utility::func_9028(common_scripts\utility::func_44F5("signal_flare"), param_00, maps\mp\_utility::getotherteam(param_00.team), 0, var_02.var_3F82, "TAG_ORIGIN");
   thread func_8C50(var_02);
   while(isDefined(self)) {
     foreach(var_04 in level.players) {
-      if(!maps\mp\_utility::func_57A0(var_04)) {
+      if(!maps\mp\_utility::isreallyalive(var_04)) {
         continue;
       }
 
@@ -3007,7 +3007,7 @@ func_99C2() {
   }
 
   playFX(level.var_9062, self.origin);
-  self.owner thread maps\mp\_utility::func_5C43("ti_destroyed", undefined, undefined, self.origin);
+  self.owner thread maps\mp\_utility::leaderdialogonplayer("ti_destroyed", undefined, undefined, self.origin);
   self.owner luinotifyevent(&"tac_insert_destroyed", 0);
   self.owner.var_6E6E = 0;
   self.owner.var_872A = undefined;
@@ -3060,7 +3060,7 @@ func_9A30(param_00) {
 
 monitorparatrooperparachutingbeacon(param_00) {
   level endon("game_ended");
-  while(isDefined(self) && maps\mp\_utility::func_57A0(self) && isDefined(self.var_6E6B) && self.var_6E6B) {
+  while(isDefined(self) && maps\mp\_utility::isreallyalive(self) && isDefined(self.var_6E6B) && self.var_6E6B) {
     wait 0.05;
   }
 
@@ -3123,7 +3123,7 @@ func_9A23() {
   var_01 = magicbullet("tactical_insertion_parachute_mp", self.origin, var_00);
   var_02 = spawn("script_model", var_01.origin);
   var_02 setModel("tag_origin");
-  var_02 method_8449(var_01);
+  var_02 linktosynchronizedparent(var_01);
   var_03 = spawn("script_model", var_02.origin);
   var_03 hide();
   if(self.team == "allies") {
@@ -3134,7 +3134,7 @@ func_9A23() {
 
   var_03.var_62A0 = 0.5;
   var_03 scriptmodelplayanim("carepackage_parachute_loop", "finished_ti_paratrooper_insert");
-  var_03 method_8449(var_02, "tag_origin", (20, -20, 40), (0, 90, 0));
+  var_03 linktosynchronizedparent(var_02, "tag_origin", (20, -20, 40), (0, 90, 0));
   var_03 show();
   self.angles = var_03 gettagangles("tag_crate");
   self.origin = var_03 gettagorigin("tag_crate");
@@ -3145,7 +3145,7 @@ func_9A23() {
   var_04 setModel("ger_carepackage_parachute");
   var_04 setCanDamage(1);
   var_04 hide();
-  var_04 method_8449(var_03);
+  var_04 linktosynchronizedparent(var_03);
   var_04 thread func_9A20(var_01, self);
   thread func_9A21(var_00);
   thread func_9A22();
@@ -3199,7 +3199,7 @@ func_9A1F(param_00, param_01, param_02, param_03) {
     param_00 maps\mp\_utility::func_735("specialty_falldamage");
   }
 
-  param_00 maps\mp\_utility::func_47A2("specialty_moreminimap");
+  param_00 maps\mp\_utility::giveperk("specialty_moreminimap");
   self waittill("death");
   if(isDefined(param_00)) {
     param_00 notify("paratrooper_released");
@@ -3208,7 +3208,7 @@ func_9A1F(param_00, param_01, param_02, param_03) {
     if(!isDefined(param_00.var_5723) || !param_00.var_5723) {
       param_00.var_6E6B = 0;
       if(param_00 maps\mp\_utility::_hasperk("specialty_falldamage")) {
-        param_00 maps\mp\_utility::func_47A2("specialty_falldamage");
+        param_00 maps\mp\_utility::giveperk("specialty_falldamage");
       }
 
       param_00 maps\mp\_utility::func_735("specialty_moreminimap");
@@ -3243,7 +3243,7 @@ func_499D(param_00, param_01) {
   var_06.angles = var_05;
   var_06 setModel("ger_barbed_wire_pile_02");
   self waittill("explode", var_07);
-  maps\mp\_utility::func_74D8("wpn_smoke_grenade_exp", var_07);
+  maps\mp\_utility::playsoundinspace("wpn_smoke_grenade_exp", var_07);
   var_08 = spawnStruct();
   var_08.var_2994 = 11;
   var_08.var_6C2C = var_07;
@@ -3327,7 +3327,7 @@ func_2D06(param_00) {
   objective_state(param_00, "active");
   wait(2);
   objective_state(param_00, "invisible");
-  maps\mp\_utility::func_68B(param_00);
+  maps\mp\_utility::_objective_delete(param_00);
 }
 
 func_A184() {
@@ -3721,28 +3721,28 @@ func_5FB8(param_00) {
 
 func_8A08() {
   self.var_1906 = [];
-  if(self.var_2E51 && !self.var_1905.size) {
+  if(self.detectexplosives && !self.bombsquadicons.size) {
     for(var_00 = 0; var_00 < 4; var_00++) {
-      self.var_1905[var_00] = newclienthudelem(self);
-      self.var_1905[var_00].x = 0;
-      self.var_1905[var_00].y = 0;
-      self.var_1905[var_00].z = 0;
-      self.var_1905[var_00].alpha = 0;
-      self.var_1905[var_00].archived = 1;
-      self.var_1905[var_00] setshader("waypoint_bombsquad", 14, 14);
-      self.var_1905[var_00] setwaypoint(0, 0);
-      self.var_1905[var_00].var_2E53 = "";
+      self.bombsquadicons[var_00] = newclienthudelem(self);
+      self.bombsquadicons[var_00].x = 0;
+      self.bombsquadicons[var_00].y = 0;
+      self.bombsquadicons[var_00].z = 0;
+      self.bombsquadicons[var_00].alpha = 0;
+      self.bombsquadicons[var_00].archived = 1;
+      self.bombsquadicons[var_00] setshader("waypoint_bombsquad", 14, 14);
+      self.bombsquadicons[var_00] setwaypoint(0, 0);
+      self.bombsquadicons[var_00].var_2E53 = "";
     }
 
     return;
   }
 
-  if(!self.var_2E51) {
-    for(var_00 = 0; var_00 < self.var_1905.size; var_00++) {
-      self.var_1905[var_00] destroy();
+  if(!self.detectexplosives) {
+    for(var_00 = 0; var_00 < self.bombsquadicons.size; var_00++) {
+      self.bombsquadicons[var_00] destroy();
     }
 
-    self.var_1905 = [];
+    self.bombsquadicons = [];
   }
 }
 
@@ -3750,7 +3750,7 @@ func_8BFE(param_00) {
   var_01 = param_00.var_2E53;
   var_02 = -1;
   for(var_03 = 0; var_03 < 4; var_03++) {
-    var_04 = self.var_1905[var_03].var_2E53;
+    var_04 = self.bombsquadicons[var_03].var_2E53;
     if(var_04 == var_01) {
       return;
     }
@@ -3765,12 +3765,12 @@ func_8BFE(param_00) {
   }
 
   self.var_1906[var_01] = 1;
-  self.var_1905[var_02].x = param_00.origin[0];
-  self.var_1905[var_02].y = param_00.origin[1];
-  self.var_1905[var_02].z = param_00.origin[2] + 24 + 128;
-  self.var_1905[var_02] fadeovertime(0.25);
-  self.var_1905[var_02].alpha = 1;
-  self.var_1905[var_02].var_2E53 = param_00.var_2E53;
+  self.bombsquadicons[var_02].x = param_00.origin[0];
+  self.bombsquadicons[var_02].y = param_00.origin[1];
+  self.bombsquadicons[var_02].z = param_00.origin[2] + 24 + 128;
+  self.bombsquadicons[var_02] fadeovertime(0.25);
+  self.bombsquadicons[var_02].alpha = 1;
+  self.bombsquadicons[var_02].var_2E53 = param_00.var_2E53;
   while(isalive(self) && isDefined(param_00) && self istouching(param_00)) {
     wait 0.05;
   }
@@ -3779,9 +3779,9 @@ func_8BFE(param_00) {
     return;
   }
 
-  self.var_1905[var_02].var_2E53 = "";
-  self.var_1905[var_02] fadeovertime(0.25);
-  self.var_1905[var_02].alpha = 0;
+  self.bombsquadicons[var_02].var_2E53 = "";
+  self.bombsquadicons[var_02] fadeovertime(0.25);
+  self.bombsquadicons[var_02].alpha = 0;
   self.var_1906[var_01] = undefined;
 }
 
@@ -3802,19 +3802,19 @@ func_4486(param_00, param_01, param_02, param_03) {
       continue;
     }
 
-    var_08 = maps\mp\_utility::func_413B(var_06[var_07]);
+    var_08 = maps\mp\_utility::get_damagable_player_pos(var_06[var_07]);
     var_09 = distancesquared(param_00, var_08);
     if(var_09 < var_05 && !param_02 || func_A9C3(param_00, var_08, param_03, var_06[var_07])) {
-      var_04[var_04.size] = maps\mp\_utility::func_413A(var_06[var_07], var_08);
+      var_04[var_04.size] = maps\mp\_utility::get_damagable_player(var_06[var_07], var_08);
     }
   }
 
   var_0A = getEntArray("grenade", "classname");
   for(var_07 = 0; var_07 < var_0A.size; var_07++) {
-    var_0B = maps\mp\_utility::func_4138(var_0A[var_07]);
+    var_0B = maps\mp\_utility::get_damagable_grenade_pos(var_0A[var_07]);
     var_09 = distancesquared(param_00, var_0B);
     if(var_09 < var_05 && !param_02 || func_A9C3(param_00, var_0B, param_03, var_0A[var_07])) {
-      var_04[var_04.size] = maps\mp\_utility::func_4137(var_0A[var_07], var_0B);
+      var_04[var_04.size] = maps\mp\_utility::get_damagable_grenade(var_0A[var_07], var_0B);
     }
   }
 
@@ -3824,10 +3824,10 @@ func_4486(param_00, param_01, param_02, param_03) {
     var_09 = distancesquared(param_00, var_0B);
     if(var_09 < var_05 && !param_02 || func_A9C3(param_00, var_0B, param_03, var_0C[var_07])) {
       var_0D = spawnStruct();
-      var_0D.var_5779 = 0;
-      var_0D.var_5662 = 0;
+      var_0D.isplayer = 0;
+      var_0D.isadestructable = 0;
       var_0D.var_8E = var_0C[var_07];
-      var_0D.var_29B6 = var_0B;
+      var_0D.damagecenter = var_0B;
       var_04[var_04.size] = var_0D;
     }
   }
@@ -3838,10 +3838,10 @@ func_4486(param_00, param_01, param_02, param_03) {
     var_09 = distancesquared(param_00, var_0B);
     if(var_09 < var_05 && !param_02 || func_A9C3(param_00, var_0B, param_03, var_0E[var_07])) {
       var_0D = spawnStruct();
-      var_0D.var_5779 = 0;
-      var_0D.var_5662 = 1;
+      var_0D.isplayer = 0;
+      var_0D.isadestructable = 1;
       var_0D.var_8E = var_0E[var_07];
-      var_0D.var_29B6 = var_0B;
+      var_0D.damagecenter = var_0B;
       var_04[var_04.size] = var_0D;
     }
   }
@@ -3857,7 +3857,7 @@ func_4486(param_00, param_01, param_02, param_03) {
         case "mp_remote_turret":
         case "mp_scramble_turret":
         case "sentry_minigun_weak":
-          var_04[var_04.size] = maps\mp\_utility::func_413C(var_11, var_0B);
+          var_04[var_04.size] = maps\mp\_utility::get_damagable_sentry(var_11, var_0B);
           break;
       }
     }
@@ -3940,13 +3940,13 @@ func_A9C3(param_00, param_01, param_02, param_03) {
 }
 
 func_29C0(param_00, param_01, param_02, param_03, param_04, param_05, param_06) {
-  if(self.var_5779) {
+  if(self.isplayer) {
     self.var_29D2 = param_05;
     self.var_8E thread[[level.callbackplayerdamage]](param_00, param_01, param_02, 0, param_03, param_04, param_05, param_06, "none", 0);
     return;
   }
 
-  if(self.var_5662 && param_04 == "artillery_mp" || param_04 == "claymore_mp" || param_04 == "airstrike_bomb_mp" || param_04 == "airstrike_bomb_axis_mp" || param_04 == "firebomb_bomb_mp" || param_04 == "firebomb_bomb_axis_mp" || param_04 == "firebomb_bomb_grenadier_mp" || param_04 == "firebomb_bomb_axis_grenadier_mp") {
+  if(self.isadestructable && param_04 == "artillery_mp" || param_04 == "claymore_mp" || param_04 == "airstrike_bomb_mp" || param_04 == "airstrike_bomb_axis_mp" || param_04 == "firebomb_bomb_mp" || param_04 == "firebomb_bomb_axis_mp" || param_04 == "firebomb_bomb_grenadier_mp" || param_04 == "firebomb_bomb_axis_grenadier_mp") {
     return;
   }
 
@@ -4252,9 +4252,9 @@ func_582E(param_00) {
 }
 
 func_534B() {
-  self.var_2953 = self.var_2954;
-  self.var_8061 = self.var_2953;
-  func_8A68(self.var_2953);
+  self.currentweapon = self.var_2954;
+  self.var_8061 = self.currentweapon;
+  func_8A68(self.currentweapon);
 }
 
 func_A15E(param_00) {
@@ -4264,9 +4264,9 @@ func_A15E(param_00) {
     func_A13B();
   }
 
-  self.var_8061 = self.var_2953;
+  self.var_8061 = self.currentweapon;
   if(func_582E(param_00)) {
-    self.var_2953 = param_00;
+    self.currentweapon = param_00;
   }
 }
 
@@ -5235,7 +5235,7 @@ func_A920() {
 
 func_5316() {
   if(isDefined(self.var_37FB)) {
-    if(maps\mp\_utility::func_4529("scr_deleteexplosivesonspawn", 1) == 1) {
+    if(maps\mp\_utility::getintproperty("scr_deleteexplosivesonspawn", 1) == 1) {
       if(isDefined(self.var_3234)) {
         self.var_3234 = undefined;
       } else {
@@ -5386,7 +5386,7 @@ func_3969(param_00, param_01) {
   common_scripts\utility::waittill_any("mine_triggered", "mine_destroyed", "mine_selfdestruct", "death");
   if(isDefined(param_00)) {
     if(isDefined(param_00.var_28D3)) {
-      maps\mp\_utility::func_68B(param_00.var_28D3);
+      maps\mp\_utility::_objective_delete(param_00.var_28D3);
     }
 
     param_00 delete();
@@ -5435,7 +5435,7 @@ func_396D(param_00) {
     return;
   }
 
-  maps\mp\_utility::func_68B(self.var_9D65.var_28D3);
+  maps\mp\_utility::_objective_delete(self.var_9D65.var_28D3);
   if(isDefined(self.var_9D65)) {
     self.var_9D65 delete();
   }
@@ -5756,7 +5756,7 @@ func_7D30() {
 func_93A1(param_00, param_01) {
   var_02 = spawnStruct();
   if(isDefined(param_00)) {
-    var_02.var_6810 = param_00;
+    var_02.notifystring = param_00;
   }
 
   if(isDefined(param_01)) {
@@ -5774,13 +5774,13 @@ func_93A2(param_00) {
 
   self endon("death");
   if(isDefined(self)) {
-    if(isDefined(param_00.var_6810)) {
-      if(param_00.var_6810 == "detonate") {
+    if(isDefined(param_00.notifystring)) {
+      if(param_00.notifystring == "detonate") {
         self method_81D6();
         return;
       }
 
-      self notify(param_00.var_6810);
+      self notify(param_00.notifystring);
       return;
     }
 
@@ -6125,7 +6125,7 @@ func_6303() {
       continue;
     }
 
-    if(var_00 == "none" || self method_817F(var_00) == 0) {
+    if(var_00 == "none" || self getammocount(var_00) == 0) {
       self playRumbleOnEntity("defaultweapon_fire");
     }
   }
@@ -6144,7 +6144,7 @@ func_6304() {
       continue;
     }
 
-    if(var_00 == "none" || self method_817F(var_00) == 0) {
+    if(var_00 == "none" || self getammocount(var_00) == 0) {
       self playRumbleOnEntity("defaultweapon_fire");
     }
   }

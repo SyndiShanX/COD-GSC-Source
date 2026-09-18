@@ -46,7 +46,7 @@ func_5341() {
 raiddrivablevehiclespawn(param_00, param_01) {
   waittillframeend;
   var_02 = lib_0503::func_2838(param_00, param_01, 1, 0, 0);
-  var_02.var_1A2 = param_00.var_1A2;
+  var_02.target = param_00.target;
   var_02 setCanDamage(1);
   var_02.var_BC = 2000;
   var_02.var_FB = 2000;
@@ -67,10 +67,10 @@ raiddrivablevehiclespawn(param_00, param_01) {
 func_795B(param_00) {
   waittillframeend;
   var_01 = lib_0503::func_2838(param_00, game["attackers"], 1, 0, 0);
-  var_01.var_1A2 = param_00.var_1A2;
+  var_01.target = param_00.target;
   var_01 makeunusable();
   var_01 setCanDamage(1);
-  var_01.var_29B5 = ::func_7941;
+  var_01.damagecallback = ::func_7941;
   var_01.var_BC = 2000;
   var_01.var_FB = 2000;
   var_01.var_A3EF = 1;
@@ -104,13 +104,13 @@ func_7947() {
   for(;;) {
     var_02 = self.var_BC - self.var_6A;
     var_03 = var_02 / self.var_BC;
-    foreach(var_05 in level.var_744A) {
-      if(!maps\mp\_utility::func_57A0(var_05) || common_scripts\utility::func_562E(self.var_664C)) {
+    foreach(var_05 in level.players) {
+      if(!maps\mp\_utility::isreallyalive(var_05) || common_scripts\utility::func_562E(self.var_664C)) {
         var_05 func_73D1();
         continue;
       }
 
-      var_06 = distancesquared(var_05.var_116, self.origin);
+      var_06 = distancesquared(var_05.origin, self.origin);
       var_07 = 0;
       if(var_06 < var_00) {
         var_08 = anglesToForward(var_05 getangles());
@@ -124,7 +124,7 @@ func_7947() {
       if(var_07 && bullettracepassed(var_05 getvieworigin(), self.origin + (0, 0, 30), 0, self)) {
         if(!isDefined(var_05.var_97BC)) {
           var_05.var_97BC = var_05 maps\mp\gametypes\_hud_util::func_27CF((1, 1, 1), 200, 10);
-          var_05.var_97BC maps\mp\gametypes\_hud_util::func_8707("CENTER", undefined, 0, -200);
+          var_05.var_97BC maps\mp\gametypes\_hud_util::setpoint("CENTER", undefined, 0, -200);
         }
 
         var_0B = 1;
@@ -169,12 +169,12 @@ func_7941(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  if(isDefined(param_01.var_1A7)) {
-    if(self.var_1A7 == param_01.var_1A7) {
+  if(isDefined(param_01.team)) {
+    if(self.team == param_01.team) {
       return;
     }
-  } else if(isDefined(param_01.var_117) && isDefined(param_01.var_117.var_1A7)) {
-    if(self.var_1A7 == param_01.var_117.var_1A7) {
+  } else if(isDefined(param_01.var_117) && isDefined(param_01.var_117.team)) {
+    if(self.team == param_01.var_117.team) {
       return;
     }
   }
@@ -214,8 +214,8 @@ func_7954(param_00) {
   for(;;) {
     var_01 = [];
     var_02 = [];
-    foreach(var_04 in level.var_744A) {
-      if(var_04.var_1A7 == param_00.var_1A7) {
+    foreach(var_04 in level.players) {
+      if(var_04.team == param_00.team) {
         var_01[var_01.size] = var_04;
         continue;
       }
@@ -286,7 +286,7 @@ func_794B(param_00, param_01, param_02, param_03, param_04) {
       break;
   }
 
-  param_00.var_1A7 = param_04;
+  param_00.team = param_04;
   param_00.var_9EDD = param_00 lib_0503::func_1D62(param_03, param_02, param_01, 1);
   param_00.var_9EDD thread maps\mp\_load::func_A8E7();
   if(!isDefined(self.var_6967) || lib_04FF::func_45D0("escort_turretActive")) {
@@ -304,7 +304,7 @@ func_9F9B(param_00) {
 
 turretorvehiclesetusablebyteam(param_00) {
   self endon("death");
-  foreach(var_02 in level.var_744A) {
+  foreach(var_02 in level.players) {
     thread vehicleorturretsetplayerteamusability(var_02, param_00);
     var_02 thread playersetvehicleorturretteamusabilityonspawn(self, param_00);
   }
@@ -329,7 +329,7 @@ vehicleorturretsetplayerteamusability(param_00, param_01) {
   param_00 endon("death");
   self endon("death");
   var_02 = 4;
-  if(isDefined(param_01) && param_01 != param_00.var_1A7) {
+  if(isDefined(param_01) && param_01 != param_00.team) {
     self disableplayeruse(param_00);
     return;
   }
@@ -420,15 +420,15 @@ func_9F82(param_00) {
     return undefined;
   }
 
-  var_02 = var_01 method_864F();
+  var_02 = var_01 setclass();
   if(!isDefined(var_02)) {
     return undefined;
   }
 
   var_03 = 0;
   var_04 = 0;
-  for(var_05 = self.origin; isDefined(var_02); var_05 = var_05 method_864F()) {
-    var_06 = var_02.var_116;
+  for(var_05 = self.origin; isDefined(var_02); var_05 = var_05 setclass()) {
+    var_06 = var_02.origin;
     var_03 = var_03 + distance2d(var_05, var_06);
     if(var_03 > param_00) {
       var_07 = param_00 - var_04;
@@ -473,8 +473,8 @@ func_795D(param_00) {
       if(0) {
         var_04 = isDefined(var_02) && var_02 istouching(param_00);
         var_05 = isDefined(var_03) && var_03 istouching(param_00);
-        foreach(var_07 in level.var_744A) {
-          var_08 = var_07.var_1A7 == var_01.var_1A7;
+        foreach(var_07 in level.players) {
+          var_08 = var_07.team == var_01.team;
           if(var_08 && !var_04 && var_07 istouching(param_00)) {
             var_04 = 1;
             var_02 = var_07;
@@ -527,7 +527,7 @@ func_7942(param_00) {
     param_00 method_8280(param_00.var_384F, param_00.var_3835, param_00.var_3837);
   }
 
-  param_00.var_1C7 = "forward";
+  param_00.getfirstarraykey = "forward";
   param_00.var_1C1 = "forward";
   param_00.var_17DC = 0;
 }
@@ -545,7 +545,7 @@ func_795A(param_00) {
     param_00 method_8280(param_00.var_384F, param_00.var_3835, param_00.var_3837);
   }
 
-  param_00.var_1C7 = "reverse";
+  param_00.getfirstarraykey = "reverse";
   param_00.var_1C1 = "reverse";
   param_00.var_17D9 = 0;
 }
@@ -591,7 +591,7 @@ func_7945(param_00) {
   self.var_A3F6 = 0;
   for(;;) {
     param_00 waittill("trigger", var_01);
-    switch (param_00.var_165) {
+    switch (param_00.exitlevel) {
       case "blocker_forward":
       case "blocker_reverse":
         self.var_A3F6 = !self.var_A3F6;
@@ -645,20 +645,20 @@ func_7946(param_00) {
 }
 
 func_7949(param_00) {
-  param_00.var_92ED = getvehiclenode(param_00.var_1A2, "targetname");
+  param_00.var_92ED = getvehiclenode(param_00.target, "targetname");
   var_01 = param_00.var_92ED;
   while(!common_scripts\utility::func_562E(var_01.var_793E)) {
     var_01.var_793E = 1;
-    if(isDefined(var_01.var_165)) {
+    if(isDefined(var_01.exitlevel)) {
       thread func_794D(param_00, var_01);
     }
 
     param_00.var_36DA = var_01;
-    if(!isDefined(var_01.var_1A2)) {
+    if(!isDefined(var_01.target)) {
       break;
     }
 
-    var_01 = getvehiclenode(var_01.var_1A2, "targetname");
+    var_01 = getvehiclenode(var_01.target, "targetname");
   }
 
   thread func_7951(param_00, param_00.var_92ED);
@@ -684,7 +684,7 @@ func_794F(param_00) {
     return;
   }
 
-  switch (param_00.var_165) {
+  switch (param_00.exitlevel) {
     case "blocker":
     case "blocker_forward":
     case "blocker_reverse":
@@ -707,7 +707,7 @@ func_794D(param_00, param_01) {
       continue;
     }
 
-    switch (param_01.var_165) {
+    switch (param_01.exitlevel) {
       case "blocker_forward":
         if(param_00.var_931A == "forward") {
           thread func_793F(param_00, param_01);
@@ -729,12 +729,12 @@ func_794D(param_00, param_01) {
         break;
 
       case "notify_object_nearby":
-        func_7953(param_00.var_116, param_01.var_8260);
+        func_7953(param_00.origin, param_01.var_8260);
         break;
 
       case "trigger_targets":
-        var_03 = getEntArray(param_01.var_1A2, "targetname");
-        var_04 = common_scripts\utility::func_46B7(param_01.var_1A2, "targetname");
+        var_03 = getEntArray(param_01.target, "targetname");
+        var_04 = common_scripts\utility::func_46B7(param_01.target, "targetname");
         var_05 = common_scripts\utility::func_F73(var_03, var_04);
         foreach(var_07 in var_05) {
           if(isDefined(param_01.var_8260)) {
@@ -764,7 +764,7 @@ func_7953(param_00, param_01) {
       var_06.var_67EB = 0;
     }
 
-    var_07 = distance2d(param_00, var_06.var_116);
+    var_07 = distance2d(param_00, var_06.origin);
     if(var_07 < var_03 && var_06.var_67EB == 0) {
       var_03 = var_07;
       var_04 = var_06;
@@ -794,7 +794,7 @@ func_793F(param_00, param_01) {
 }
 
 func_7950(param_00, param_01) {
-  switch (param_00.var_165) {
+  switch (param_00.exitlevel) {
     case "blocker_forward":
       param_00.var_17D9 = param_01;
       param_00.var_17DC = 0;
@@ -847,7 +847,7 @@ func_79F8(param_00) {
       param_00.var_A240.var_113F = 0;
       param_00.var_A240.var_7894 = 1;
       param_00 setteamfortrigger(game["attackers"]);
-      var_02 = spawnfx(common_scripts\utility::func_44F5("needs_repair"), var_01.var_116 + (0, 0, 120));
+      var_02 = spawnfx(common_scripts\utility::func_44F5("needs_repair"), var_01.origin + (0, 0, 120));
       triggerfx(var_02);
       param_00 waittill("used", var_05);
     }
@@ -880,7 +880,7 @@ func_794A(param_00) {
       var_03 = param_00 getistouchingentities(level.var_6E97);
       foreach(var_05 in var_03) {
         if(isalive(var_05)) {
-          var_05 dodamage(var_05.var_FB * 10, var_05.var_116);
+          var_05 dodamage(var_05.var_FB * 10, var_05.origin);
         }
       }
     }
@@ -900,11 +900,11 @@ func_7956() {
   func_7955(var_00);
   wait(0.25);
   if(isDefined(var_00)) {
-    var_00 maps\mp\gametypes\_hud_util::func_2DCC();
+    var_00 maps\mp\gametypes\_hud_util::destroyelem();
   }
 
   if(isDefined(var_01)) {
-    var_01 maps\mp\gametypes\_hud_util::func_2DCC();
+    var_01 maps\mp\gametypes\_hud_util::destroyelem();
   }
 }
 
@@ -929,11 +929,11 @@ func_7958(param_00) {
   var_02 settext("Tank Repairing...");
   func_7959(param_00, var_01);
   if(isDefined(var_01)) {
-    var_01 maps\mp\gametypes\_hud_util::func_2DCC();
+    var_01 maps\mp\gametypes\_hud_util::destroyelem();
   }
 
   if(isDefined(var_02)) {
-    var_02 maps\mp\gametypes\_hud_util::func_2DCC();
+    var_02 maps\mp\gametypes\_hud_util::destroyelem();
   }
 }
 
@@ -941,17 +941,17 @@ func_7959(param_00, param_01) {
   self.var_A2C8 endon("repaired");
   for(;;) {
     var_02 = param_00.var_A22B;
-    var_03 = isDefined(level.var_4E09);
+    var_03 = isDefined(level.hostmigrationtimer);
     var_04 = param_00.var_54F5;
     wait 0.05;
-    if(common_scripts\utility::func_562E(var_04) != common_scripts\utility::func_562E(param_00.var_54F5) || var_02 != param_00.var_A22B || var_03 != isDefined(level.var_4E09)) {
+    if(common_scripts\utility::func_562E(var_04) != common_scripts\utility::func_562E(param_00.var_54F5) || var_02 != param_00.var_A22B || var_03 != isDefined(level.hostmigrationtimer)) {
       if(param_00.var_28D5 > param_00.var_A23F) {
         param_00.var_28D5 = param_00.var_A23F;
       }
 
       var_05 = param_00.var_28D5 / param_00.var_A23F;
       var_06 = 1000 / param_00.var_A23F * param_00.var_A22B;
-      if(isDefined(level.var_4E09) || !common_scripts\utility::func_562E(param_00.var_54F5)) {
+      if(isDefined(level.hostmigrationtimer) || !common_scripts\utility::func_562E(param_00.var_54F5)) {
         var_06 = 0;
       }
 
@@ -993,8 +993,8 @@ func_79F5(param_00) {
 }
 
 func_6B8A(param_00) {
-  param_00.var_6E96 = param_00 maps\mp\gametypes\_hud_util::func_27ED("default", 1);
-  param_00.var_6E96 maps\mp\gametypes\_hud_util::func_8707("BOTTOM", undefined, 0, -50);
+  param_00.var_6E96 = param_00 maps\mp\gametypes\_hud_util::createfontstring("default", 1);
+  param_00.var_6E96 maps\mp\gametypes\_hud_util::setpoint("BOTTOM", undefined, 0, -50);
 }
 
 func_6B89(param_00) {
@@ -1008,13 +1008,13 @@ func_6B8B(param_00) {
 }
 
 func_7957(param_00) {
-  var_01 = getvehiclenode(param_00.var_81EF, "script_linkname");
+  var_01 = getvehiclenode(param_00.script_exploder, "script_linkname");
   var_01 waittill("trigger", var_02);
   level notify("raidEscortVehiclePushObject");
   var_03 = var_02 method_8289();
   var_04 = length(var_03);
-  var_05 = param_00.var_116;
-  var_06 = param_00.var_64DB["end_pos"].var_116;
+  var_05 = param_00.origin;
+  var_06 = param_00.var_64DB["end_pos"].origin;
   var_07 = var_06 - var_05;
   var_08 = vectordot(var_07, var_03) / var_04;
   var_09 = abs(var_08 / var_04);
@@ -1022,7 +1022,7 @@ func_7957(param_00) {
 }
 
 func_795F(param_00) {
-  var_01 = getvehiclenode(param_00.var_81EF, "script_linkname");
+  var_01 = getvehiclenode(param_00.script_exploder, "script_linkname");
   thread func_7960(var_01);
   waittillframeend;
   var_02 = self.var_982D["explosive_trigger"][0].var_A240;
@@ -1060,18 +1060,18 @@ func_79C5(param_00) {
 }
 
 func_792B(param_00) {
-  var_01 = getEntArray(param_00.var_1A2, "targetname");
+  var_01 = getEntArray(param_00.target, "targetname");
   var_02 = [];
   foreach(var_04 in var_01) {
-    if(var_04.var_165 == "build_trigger") {
+    if(var_04.exitlevel == "build_trigger") {
       var_02[var_02.size] = var_04;
     }
   }
 
   param_00.var_5B3A = 0;
   param_00 thread func_7930(var_02);
-  if(isDefined(param_00.var_81EF)) {
-    var_06 = getvehiclenode(param_00.var_81EF, "script_linkname");
+  if(isDefined(param_00.script_exploder)) {
+    var_06 = getvehiclenode(param_00.script_exploder, "script_linkname");
     if(isDefined(var_06)) {
       thread func_7940(var_06);
       var_07 = 0;
@@ -1218,7 +1218,7 @@ func_7948(param_00) {
   param_00.var_4C28 = self;
   self.var_A3F6 = 0;
   waittillframeend;
-  if(param_00.var_165 == "blocker_forward") {
+  if(param_00.exitlevel == "blocker_forward") {
     if(isDefined(param_00.var_112)) {
       param_00.var_112.var_4C32[param_00.var_112.var_4C32.size] = self;
     }
@@ -1230,7 +1230,7 @@ func_7948(param_00) {
 
   for(;;) {
     param_00 waittill("trigger", var_01);
-    switch (param_00.var_165) {
+    switch (param_00.exitlevel) {
       case "blocker_forward":
       case "blocker_reverse":
         self.var_A3F6 = !self.var_A3F6;
@@ -1241,7 +1241,7 @@ func_7948(param_00) {
         }
 
         if(!self.var_A3F6) {
-          if(param_00.var_165 == "blocker_forward") {
+          if(param_00.exitlevel == "blocker_forward") {
             func_797F(game["defenders"]);
           } else {
             func_797F(game["attackers"]);
@@ -1470,9 +1470,9 @@ func_7989(param_00, param_01) {
   var_04 = 0;
   while(var_03 > gettime()) {
     if(var_04 != 0) {
-      lib_04F3::func_79CB("dynamite_timer_tick", param_00.var_116);
+      lib_04F3::func_79CB("dynamite_timer_tick", param_00.origin);
     } else {
-      lib_04F3::func_79CB("dynamite_timer_tock", param_00.var_116);
+      lib_04F3::func_79CB("dynamite_timer_tock", param_00.origin);
     }
 
     var_04 = var_04 + 1 % 2;
@@ -1485,7 +1485,7 @@ func_7989(param_00, param_01) {
     }
 
     maps\mp\gametypes\_hostmigration::func_A783(var_06);
-    if(isDefined(level.var_4E09)) {
+    if(isDefined(level.hostmigrationtimer)) {
       var_07 = maps\mp\gametypes\_hostmigration::func_A782();
       var_03 = var_03 + var_07;
     }
@@ -1500,7 +1500,7 @@ func_7987(param_00, param_01, param_02) {
   var_04 = var_03.var_982D["explosive_model"][0];
   self.var_2599 = 0;
   if(!common_scripts\utility::func_562E(param_02)) {
-    param_00 entityradiusdamage(var_04.var_116, 256, 150, 20, param_01, "MOD_EXPLOSIVE", "bomb_site_mp");
+    param_00 entityradiusdamage(var_04.origin, 256, 150, 20, param_01, "MOD_EXPLOSIVE", "bomb_site_mp");
   }
 
   self notify("stop_timer");
@@ -1627,7 +1627,7 @@ func_798A(param_00) {
 }
 
 func_7988(param_00, param_01) {
-  level.var_611["raid_door_explode"] = loadfx("vfx/map/mp_raid_cobra/raid_wall_breach_mp");
+  level._effect["raid_door_explode"] = loadfx("vfx/map/mp_raid_cobra/raid_wall_breach_mp");
   var_02 = param_00.var_982E;
   param_00.var_6A55 = param_00 method_85A0();
   param_00 lib_0502::func_7997();
@@ -1640,8 +1640,8 @@ func_7988(param_00, param_01) {
     switch (var_04) {
       case "bomb_exploded":
         if(!common_scripts\utility::func_562E(var_06)) {
-          lib_04F3::func_79CB("mp_war_bomb_explo", param_00.var_116);
-          playFX(common_scripts\utility::func_44F5("raid_door_explode"), param_00.var_116, param_00.var_1D + (0, -90, 0));
+          lib_04F3::func_79CB("mp_war_bomb_explo", param_00.origin);
+          playFX(common_scripts\utility::func_44F5("raid_door_explode"), param_00.origin, param_00.var_1D + (0, -90, 0));
         }
 
         param_00 lib_0502::func_7997();
@@ -1652,12 +1652,12 @@ func_7988(param_00, param_01) {
         break;
 
       case "bomb_planted":
-        var_03 = magicgrenademanual("war_dynamite_mp", param_00.var_116, (0, 0, 0), 6);
-        var_03 method_8449(param_00);
+        var_03 = magicgrenademanual("war_dynamite_mp", param_00.origin, (0, 0, 0), 6);
+        var_03 linktosynchronizedparent(param_00);
         param_00 setModel("par_dynamite_01");
         param_00 setCanDamage(1);
-        param_00.var_706B = var_05.var_1A7;
-        badplace_cylinder("war_dynamite_mp", 6, param_00.var_116, 300, 128, "allies", "axis");
+        param_00.var_706B = var_05.team;
+        badplace_cylinder("war_dynamite_mp", 6, param_00.origin, 300, 128, "allies", "axis");
         lib_0502::func_7D5C(param_00);
         self.var_9D65 thread lib_0502::func_8A18(param_00);
         break;
@@ -1702,11 +1702,11 @@ func_6B8C(param_00, param_01, param_02, param_03) {
     return 0;
   }
 
-  if(isPlayer(param_00) && isDefined(self.var_706B) && param_00.var_1A7 != self.var_706B) {
+  if(isPlayer(param_00) && isDefined(self.var_706B) && param_00.team != self.var_706B) {
     return 0;
   }
 
-  if(maps\mp\_utility::func_5694(param_02) || isexplosivedamagemod(param_02)) {
+  if(maps\mp\_utility::isbulletdamage(param_02) || isexplosivedamagemod(param_02)) {
     return param_03;
   }
 
@@ -1803,9 +1803,9 @@ func_79DD() {
   var_00 = getEnt("raid_escort_vehicle", "script_noteworthy");
   var_01 = 120;
   for(;;) {
-    var_02 = var_00.var_116;
+    var_02 = var_00.origin;
     if(isDefined(var_00.var_A2C8)) {
-      var_02 = var_00.var_A2C8.var_116;
+      var_02 = var_00.var_A2C8.origin;
     }
 
     var_03 = self.origin;
@@ -1918,8 +1918,8 @@ func_79D6(param_00) {
 func_7928(param_00) {
   waittillframeend;
   var_01 = lib_0503::func_2838(param_00, game["attackers"], 1, 0, 0);
-  param_00.var_1A5 = param_00.var_1A5 + "_spawner";
-  var_01.var_1A2 = param_00.var_1A2;
+  param_00.targetname = param_00.targetname + "_spawner";
+  var_01.target = param_00.target;
   var_01 makeunusable();
   var_01 setCanDamage(0);
   var_01.var_384F = 4;
@@ -1930,7 +1930,7 @@ func_7928(param_00) {
   var_01.var_17DC = 0;
   self.var_A2C8 = var_01;
   func_7949(var_01);
-  self waittillmatch(var_01.var_1A5, "unblock");
+  self waittillmatch(var_01.targetname, "unblock");
   var_01 startpath(var_01.var_92ED);
 }
 
@@ -1938,7 +1938,7 @@ func_7927(param_00) {
   thread func_79F8(param_00);
   wait 0.05;
   self.var_A2C8 waittill("repaired");
-  func_79FA(self.var_A2C8.var_1A5);
+  func_79FA(self.var_A2C8.targetname);
 }
 
 func_79FA(param_00) {
@@ -1947,8 +1947,8 @@ func_79FA(param_00) {
 
 func_79F3(param_00, param_01, param_02) {
   foreach(var_04 in param_01) {
-    if(isDefined(var_04.var_165)) {
-      var_05 = strtok(var_04.var_165, " ");
+    if(isDefined(var_04.exitlevel)) {
+      var_05 = strtok(var_04.exitlevel, " ");
       foreach(var_07 in var_05) {
         self thread[[param_02]](param_00, var_04, var_07);
       }

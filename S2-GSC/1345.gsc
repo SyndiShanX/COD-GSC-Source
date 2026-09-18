@@ -121,24 +121,24 @@ func_65C7(param_00) {
 }
 
 func_9AA4(param_00, param_01) {
-  if(isDefined(level.var_611[param_00 + "_head"])) {
-    lib_0547::func_74A5(level.var_611[param_00 + "_head"], self, "j_head");
+  if(isDefined(level._effect[param_00 + "_head"])) {
+    lib_0547::func_74A5(level._effect[param_00 + "_head"], self, "j_head");
   }
 
-  if(isDefined(level.var_611[param_00 + "_arm_r"])) {
-    lib_0547::func_74A5(level.var_611[param_00 + "_arm_r"], self, "j_shoulder_ri");
+  if(isDefined(level._effect[param_00 + "_arm_r"])) {
+    lib_0547::func_74A5(level._effect[param_00 + "_arm_r"], self, "j_shoulder_ri");
   }
 
-  if(isDefined(level.var_611[param_00 + "_arm_l"])) {
-    lib_0547::func_74A5(level.var_611[param_00 + "_arm_l"], self, "j_shoulder_le");
+  if(isDefined(level._effect[param_00 + "_arm_l"])) {
+    lib_0547::func_74A5(level._effect[param_00 + "_arm_l"], self, "j_shoulder_le");
   }
 
-  if(isDefined(level.var_611[param_00 + "_back"])) {
-    lib_0547::func_74A5(level.var_611[param_00 + "_back"], self, "j_spineupper");
+  if(isDefined(level._effect[param_00 + "_back"])) {
+    lib_0547::func_74A5(level._effect[param_00 + "_back"], self, "j_spineupper");
   }
 
-  if(isDefined(level.var_611[param_00 + "_spine"])) {
-    lib_0547::func_74A5(level.var_611[param_00 + "_spine"], self, "j_spine4");
+  if(isDefined(level._effect[param_00 + "_spine"])) {
+    lib_0547::func_74A5(level._effect[param_00 + "_spine"], self, "j_spine4");
   }
 
   self.var_9AA6 = param_00;
@@ -156,24 +156,24 @@ func_9AA5(param_00, param_01) {
   }
 
   if(isDefined(self)) {
-    if(isDefined(level.var_611[param_00 + "_head"])) {
-      lib_0547::func_9406(level.var_611[param_00 + "_head"], self, "j_head");
+    if(isDefined(level._effect[param_00 + "_head"])) {
+      lib_0547::func_9406(level._effect[param_00 + "_head"], self, "j_head");
     }
 
-    if(isDefined(level.var_611[param_00 + "_arm_r"])) {
-      lib_0547::func_9406(level.var_611[param_00 + "_arm_r"], self, "j_shoulder_ri");
+    if(isDefined(level._effect[param_00 + "_arm_r"])) {
+      lib_0547::func_9406(level._effect[param_00 + "_arm_r"], self, "j_shoulder_ri");
     }
 
-    if(isDefined(level.var_611[param_00 + "_arm_l"])) {
-      lib_0547::func_9406(level.var_611[param_00 + "_arm_l"], self, "j_shoulder_le");
+    if(isDefined(level._effect[param_00 + "_arm_l"])) {
+      lib_0547::func_9406(level._effect[param_00 + "_arm_l"], self, "j_shoulder_le");
     }
 
-    if(isDefined(level.var_611[param_00 + "_back"])) {
-      lib_0547::func_9406(level.var_611[param_00 + "_back"], self, "j_spineupper");
+    if(isDefined(level._effect[param_00 + "_back"])) {
+      lib_0547::func_9406(level._effect[param_00 + "_back"], self, "j_spineupper");
     }
 
-    if(isDefined(level.var_611[param_00 + "_spine"])) {
-      lib_0547::func_9406(level.var_611[param_00 + "_spine"], self, "j_spine4");
+    if(isDefined(level._effect[param_00 + "_spine"])) {
+      lib_0547::func_9406(level._effect[param_00 + "_spine"], self, "j_spine4");
     }
   }
 }
@@ -186,7 +186,7 @@ func_92C5() {
   self.var_2FDA = 1;
   maps / mp / agents / humanoid / _humanoid_util::func_313C();
   if(isDefined(self.var_5F4C)) {
-    maps / mp / agents / humanoid / _humanoid_util::func_5F4E(10, 240, 120, "attack_lunge_boost", level.var_611["boost_lunge"], 1, 255);
+    maps / mp / agents / humanoid / _humanoid_util::func_5F4E(10, 240, 120, "attack_lunge_boost", level._effect["boost_lunge"], 1, 255);
   }
 
   maps / mp / agents / humanoid / _humanoid_util::func_5C51();
@@ -374,7 +374,7 @@ func_A0DF(param_00, param_01) {
       if(!isDefined(self.var_788C) || self.var_788C != var_02) {
         self.var_788C = var_02;
         self notify("queuedDismembermentTransition");
-        switch (self.var_108) {
+        switch (self.vectortoangles) {
           case "walk":
             var_03 = var_03 + "_walk";
             break;

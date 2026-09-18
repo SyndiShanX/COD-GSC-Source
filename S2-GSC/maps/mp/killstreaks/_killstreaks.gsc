@@ -237,7 +237,7 @@ func_457A(param_00) {
 }
 
 func_A170() {
-  if(!maps\mp\_utility::func_57A0(self)) {
+  if(!maps\mp\_utility::isreallyalive(self)) {
     return;
   }
 
@@ -396,7 +396,7 @@ func_A206(param_00, param_01, param_02) {
 
   var_04 = self.team;
   if(maps\mp\_utility::func_579B() && common_scripts\utility::func_562E(level.var_79C1)) {
-    var_04 = maps\mp\_utility::func_45DE(var_04);
+    var_04 = maps\mp\_utility::getotherteam(var_04);
   }
 
   var_05 = var_04 + "_friendly_" + param_00 + "_inbound";
@@ -404,31 +404,31 @@ func_A206(param_00, param_01, param_02) {
   if(param_00 != "basic_training_serum") {
     if(level.teambased) {
       if(param_00 == "flamethrower" || param_00 == "molotovs" || param_00 == "raid_ss_serum_a" || param_00 == "raid_ss_serum_b" || param_00 == "raid_ss_serum_c" || param_00 == "raid_superweapon" || param_00 == "raid_tesla_moon") {
-        thread maps\mp\_utility::func_5C43(var_05);
+        thread maps\mp\_utility::leaderdialogonplayer(var_05);
       } else {
-        thread maps\mp\_utility::func_5C39(var_05, var_04);
+        thread maps\mp\_utility::leaderdialog(var_05, var_04);
       }
 
       if(func_4540(param_00)) {
-        thread maps\mp\_utility::func_5C39(var_06, level.var_6C63[self.team]);
+        thread maps\mp\_utility::leaderdialog(var_06, level.var_6C63[self.team]);
       }
     } else {
-      thread maps\mp\_utility::func_5C43(var_05);
+      thread maps\mp\_utility::leaderdialogonplayer(var_05);
       if(func_4540(param_00)) {
         var_07[0] = self;
-        thread maps\mp\_utility::func_5C39(var_06, undefined, undefined, var_07);
+        thread maps\mp\_utility::leaderdialog(var_06, undefined, undefined, var_07);
       }
     }
   }
 
   var_08 = "used_" + param_00;
   if(func_4540(param_00)) {
-    thread maps\mp\_utility::func_9863(var_08, self);
+    thread maps\mp\_utility::teamplayercardsplash(var_08, self);
     return;
   }
 
   if(level.teambased) {
-    thread maps\mp\_utility::func_9863(var_08, self, self.pers["team"]);
+    thread maps\mp\_utility::teamplayercardsplash(var_08, self, self.pers["team"]);
   }
 }
 
@@ -474,13 +474,13 @@ func_A129(param_00, param_01) {
           }
 
           if(!var_09) {
-            maps\mp\_utility::func_642(var_07);
+            maps\mp\_utility::_giveweapon(var_07);
           } else if(issubstr(var_07, "airdrop_")) {
             self setweaponammoclip(var_07, 1);
           }
 
           if(!common_scripts\utility::func_562E(self.pcwaitingforkillstreakweaponchange)) {
-            maps\mp\_utility::func_6D0(var_05 + 4, "weapon", var_07);
+            maps\mp\_utility::_setactionslot(var_05 + 4, "weapon", var_07);
           }
         }
       }
@@ -521,7 +521,7 @@ func_23DD() {
     self setclientomnvar(var_04, var_03);
     if(!level.console && !common_scripts\utility::func_55E0()) {
       var_05 = maps\mp\_utility::func_454A(var_00, self.team, maps\mp\_utility::_hasperk("specialty_improvedstreaks"));
-      maps\mp\_utility::func_6D0(4, "weapon", var_05);
+      maps\mp\_utility::_setactionslot(4, "weapon", var_05);
       return;
     }
 
@@ -823,7 +823,7 @@ func_5A7B() {
 
     if(!var_09 && !isalive(self) && !self hasweapon(common_scripts\utility::func_4550())) {
       var_06 = func_73EB(var_09);
-      maps\mp\_utility::func_642(var_06);
+      maps\mp\_utility::_giveweapon(var_06);
     }
 
     if(var_09) {
@@ -970,8 +970,8 @@ func_95D6(param_00) {
 
       if(isDefined(self.var_5A69) && param_00 == maps\mp\_utility::func_454A(var_02[self.var_5A69].var_944C, var_03, var_04)) {
         self takeweapon(param_00);
-        maps\mp\_utility::func_642(param_00);
-        maps\mp\_utility::func_6D0(4, "weapon", param_00);
+        maps\mp\_utility::_giveweapon(param_00);
+        maps\mp\_utility::_setactionslot(4, "weapon", param_00);
         return;
       }
 
@@ -979,7 +979,7 @@ func_95D6(param_00) {
     }
 
     self takeweapon(param_00);
-    maps\mp\_utility::func_642(param_00);
+    maps\mp\_utility::_giveweapon(param_00);
     return;
   }
 
@@ -1088,13 +1088,13 @@ func_5A60(param_00) {
     var_02 = self.var_231B;
     if(var_02 == -1) {
       var_03 = self.pers["copyCatLoadout"]["className"];
-      var_02 = maps\mp\_utility::func_445D(var_03);
+      var_02 = maps\mp\_utility::getclassindex(var_03);
       if(issubstr(var_03, "practice")) {
         var_02 = self.pers["copyCatLoadout"]["practiceClassNum"];
       }
     }
 
-    if(issubstr(self.var_2319, "custom")) {
+    if(issubstr(self.class, "custom")) {
       var_04 = common_scripts\utility::func_46AF();
       if(!function_03AC()) {
         var_04 = common_scripts\utility::func_46AC();
@@ -1269,9 +1269,9 @@ func_478D(param_00, param_01, param_02, param_03, param_04) {
     }
 
     var_12 = maps\mp\_utility::func_454A(param_00, var_0E, var_0F);
-    maps\mp\_utility::func_642(var_12);
+    maps\mp\_utility::_giveweapon(var_12);
     if(self.var_887[var_05]) {
-      maps\mp\_utility::func_6D0(var_05 + 4, "weapon", var_12);
+      maps\mp\_utility::_setactionslot(var_05 + 4, "weapon", var_12);
     }
 
     param_00 = self.pers["killstreaks"][var_05].var_944C;
@@ -1511,15 +1511,15 @@ func_478E(param_00, param_01) {
         }
       }
 
-      maps\mp\_utility::func_642(param_00);
-      maps\mp\_utility::func_6D0(4, "weapon", param_00);
+      maps\mp\_utility::_giveweapon(param_00);
+      maps\mp\_utility::_setactionslot(4, "weapon", param_00);
       if(func_3150(var_0A) && self getcurrentweapon() != var_0B) {
         func_A12A(var_0A, var_0B, param_01);
       }
     }
   } else {
-    maps\mp\_utility::func_642(param_00);
-    maps\mp\_utility::func_6D0(4, "weapon", param_00);
+    maps\mp\_utility::_giveweapon(param_00);
+    maps\mp\_utility::_setactionslot(4, "weapon", param_00);
   }
 
   if(issubstr(param_00, "flamethrower") && self getcurrentweapon() == param_00) {
@@ -1615,12 +1615,12 @@ func_47A1(param_00) {
         }
 
         if(!var_0B) {
-          maps\mp\_utility::func_642(var_09);
+          maps\mp\_utility::_giveweapon(var_09);
         } else if(issubstr(var_09, "airdrop_")) {
           self setweaponammoclip(var_09, 1);
         }
 
-        maps\mp\_utility::func_6D0(var_06 + 4, "weapon", var_09);
+        maps\mp\_utility::_setactionslot(var_06 + 4, "weapon", var_09);
         var_07 = var_01[var_06].var_944C;
         if(func_3150(var_07) && self getcurrentweapon() != var_09) {
           func_A12A(var_07, var_09, var_06);
@@ -1680,11 +1680,11 @@ func_5345(param_00, param_01, param_02, param_03) {
 
   func_73D0();
   common_scripts\utility::func_601();
-  maps\mp\_utility::func_3E8E(1);
+  maps\mp\_utility::freezecontrolswrapper(1);
   self.var_7C67 = 1;
   var_04 = func_5346(param_00, param_01, param_02, param_03);
   if(isDefined(self)) {
-    maps\mp\_utility::func_3E8E(0);
+    maps\mp\_utility::freezecontrolswrapper(0);
     common_scripts\utility::func_615();
     self.var_7C67 = undefined;
     if(var_04 == "success") {
@@ -1819,14 +1819,14 @@ func_7D69() {
   self endon("rideKillstreakComplete");
   self endon("rideKillstreakFailed");
   self waittill("joined_team");
-  maps\mp\_utility::func_3E8E(0);
+  maps\mp\_utility::freezecontrolswrapper(0);
   self.var_7C67 = undefined;
   if(self.var_2F80) {
     common_scripts\utility::func_615();
   }
 
-  if(maps\mp\_utility::func_581D()) {
-    maps\mp\_utility::func_2414();
+  if(maps\mp\_utility::isusingremote()) {
+    maps\mp\_utility::clearusingremote();
   }
 }
 
@@ -1977,7 +1977,7 @@ func_944D() {
     return;
   }
 
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   self notifyonplayercommand("toggled_up", "+actionslot 1");
   self notifyonplayercommand("toggled_down", "+actionslot 2");
   if(!level.console) {
@@ -2065,7 +2065,7 @@ func_4770(param_00) {
     var_01 = var_01 * level.var_252C;
   }
 
-  if(maps\mp\_utility::func_F5C() && (maps\mp\_utility::func_57A0(self) || maps\mp\_utility::_hasperk("specialty_supportstreaks")) && param_00 != "raid_flak_kill" && param_00 != "raid_fighters_kill" && param_00 != "raid_flak_assist" && param_00 != "raid_fighters_assist") {
+  if(maps\mp\_utility::func_F5C() && (maps\mp\_utility::isreallyalive(self) || maps\mp\_utility::_hasperk("specialty_supportstreaks")) && param_00 != "raid_flak_kill" && param_00 != "raid_fighters_kill" && param_00 != "raid_flak_assist" && param_00 != "raid_fighters_assist") {
     if(maps\mp\_utility::_hasperk("specialty_killstreaks")) {
       if(iskillevent(param_00)) {
         func_4771(1);
@@ -2143,8 +2143,8 @@ func_6F33() {
   level endon("game_ended");
   var_00 = common_scripts\utility::func_55E0();
   for(;;) {
-    if(maps\mp\_utility::func_572D() || maps\mp\_utility::func_581D() || maps\mp\_utility::func_56A8()) {
-      while(maps\mp\_utility::func_572D() || maps\mp\_utility::func_581D() || maps\mp\_utility::func_56A8()) {
+    if(maps\mp\_utility::func_572D() || maps\mp\_utility::isusingremote() || maps\mp\_utility::func_56A8()) {
+      while(maps\mp\_utility::func_572D() || maps\mp\_utility::isusingremote() || maps\mp\_utility::func_56A8()) {
         wait 0.05;
       }
 
@@ -2266,7 +2266,7 @@ func_2F8C() {
       continue;
     }
 
-    maps\mp\_utility::func_6D0(var_00 + 4, "");
+    maps\mp\_utility::_setactionslot(var_00 + 4, "");
     self.var_887[var_00] = 0;
   }
 }
@@ -2281,9 +2281,9 @@ func_365A() {
 
     if(self.pers["killstreaks"][var_02].var_13AF) {
       var_03 = maps\mp\_utility::func_454A(self.pers["killstreaks"][var_02].var_944C, var_00, var_01);
-      maps\mp\_utility::func_6D0(var_02 + 4, "weapon", var_03);
+      maps\mp\_utility::_setactionslot(var_02 + 4, "weapon", var_03);
     } else {
-      maps\mp\_utility::func_6D0(var_02 + 4, "");
+      maps\mp\_utility::_setactionslot(var_02 + 4, "");
     }
 
     self.var_887[var_02] = 1;
@@ -2307,13 +2307,13 @@ func_5A67(param_00, param_01, param_02) {
 
       param_00.var_5BA9[param_01] = gettime();
       param_00 thread maps\mp\gametypes\_gamelogic::func_996D(param_01, 1, "hits");
-      var_03 = param_00 maps\mp\gametypes\_persistence::func_9330("totalShots");
-      var_04 = param_00 maps\mp\gametypes\_persistence::func_9330("hits") + 1;
+      var_03 = param_00 maps\mp\gametypes\_persistence::statgetbuffered("totalShots");
+      var_04 = param_00 maps\mp\gametypes\_persistence::statgetbuffered("hits") + 1;
       if(var_04 <= var_03) {
-        param_00 maps\mp\gametypes\_persistence::func_9339("hits", var_04);
-        param_00 maps\mp\gametypes\_persistence::func_9339("misses", int(var_03 - var_04));
+        param_00 maps\mp\gametypes\_persistence::statsetbuffered("hits", var_04);
+        param_00 maps\mp\gametypes\_persistence::statsetbuffered("misses", int(var_03 - var_04));
         var_05 = clamp(float(var_04) / float(var_03), 0, 1) * 10000;
-        param_00 maps\mp\gametypes\_persistence::func_9339("accuracy", int(var_05));
+        param_00 maps\mp\gametypes\_persistence::statsetbuffered("accuracy", int(var_05));
         return;
       }
     }

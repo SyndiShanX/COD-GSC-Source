@@ -13,19 +13,19 @@ func_14D1() {
   self.var_3786 = 0;
   thread func_14D0();
   var_00 = spawnStruct();
-  var_00.var_109 = "prop_out_le";
+  var_00.name = "prop_out_le";
   var_00.var_56C0 = 0;
   self.var_3785[self.var_3785.size] = var_00;
   var_00 = spawnStruct();
-  var_00.var_109 = "prop_in_le";
+  var_00.name = "prop_in_le";
   var_00.var_56C0 = 0;
   self.var_3785[self.var_3785.size] = var_00;
   var_00 = spawnStruct();
-  var_00.var_109 = "prop_out_ri";
+  var_00.name = "prop_out_ri";
   var_00.var_56C0 = 0;
   self.var_3785[self.var_3785.size] = var_00;
   var_00 = spawnStruct();
-  var_00.var_109 = "prop_in_ri";
+  var_00.name = "prop_in_ri";
   var_00.var_56C0 = 0;
   self.var_3785[self.var_3785.size] = var_00;
   thread func_14C9();
@@ -46,7 +46,7 @@ func_14C9() {
 
     var_09 = 0;
     var_0A = [];
-    foreach(var_0C in level.var_744A) {
+    foreach(var_0C in level.players) {
       if(isDefined(var_0C.b17) && isalive(var_0C) && self == var_0C.b17) {
         var_0A = common_scripts\utility::func_F6F(var_0A, var_0C);
       }
@@ -65,12 +65,12 @@ func_14C9() {
 
     if(var_0E && self.var_29B1.size < 4) {
       var_0F = lib_0502::raid_spawn_tag_origin();
-      var_0F.var_3F2F = var_00;
-      var_0F.var_116 = var_07;
+      var_0F.fx = var_00;
+      var_0F.origin = var_07;
       var_0F.var_1D = self gettagangles("body_animate_jnt");
       var_0F linkTo(self, "body_animate_jnt");
       self.var_29B1[self.var_29B1.size] = var_0F;
-      playFXOnTag(var_0F.var_3F2F, var_0F, "tag_origin");
+      playFXOnTag(var_0F.fx, var_0F, "tag_origin");
     } else {
       playFX(var_01, var_07, anglesToForward(self.var_1D), anglestoup(self.var_1D));
     }
@@ -94,7 +94,7 @@ func_14C4(param_00) {
     var_04 = common_scripts\utility::func_44F5("b17_dmg_impact");
     var_05 = 0;
     foreach(var_07 in self.var_29B1) {
-      var_08 = var_07.var_116 - var_03;
+      var_08 = var_07.origin - var_03;
       if(param_00 == "left" || param_00 == "right") {
         var_09 = vectordot(var_08, var_02);
         if((param_00 == "left" && var_09 < 0) || param_00 == "right" && var_09 > 0) {
@@ -124,7 +124,7 @@ func_14C4(param_00) {
   if(0 && isDefined(self.var_3785)) {
     foreach(var_0C in self.var_3785) {
       if(param_00 == "left" || param_00 == "right") {
-        var_08 = self gettagorigin(var_0C.var_109) - var_03;
+        var_08 = self gettagorigin(var_0C.name) - var_03;
         var_09 = vectordot(var_08, var_02);
         if((param_00 == "left" && var_09 < 0) || param_00 == "right" && var_09 > 0) {
           func_14D2(var_0C);
@@ -169,7 +169,7 @@ func_14D0() {
   self waittill("b17_remove");
   if(isDefined(self.var_29B1)) {
     foreach(var_01 in self.var_29B1) {
-      stopFXOnTag(var_01.var_3F2F, var_01, "tag_origin");
+      stopFXOnTag(var_01.fx, var_01, "tag_origin");
       var_01 delete();
     }
   }
@@ -177,7 +177,7 @@ func_14D0() {
   if(isDefined(self.var_3785)) {
     foreach(var_04 in self.var_3785) {
       if(isDefined(var_04.var_95A6)) {
-        stopFXOnTag(var_04.var_95A6.var_3F2F, var_04.var_95A6, "tag_origin");
+        stopFXOnTag(var_04.var_95A6.fx, var_04.var_95A6, "tag_origin");
         var_04.var_95A6 delete();
       }
     }
@@ -196,13 +196,13 @@ func_14D4(param_00) {
   var_01 = undefined;
   var_02 = 300;
   foreach(var_04 in self.var_3785) {
-    var_05 = distance(param_00, self gettagorigin(var_04.var_109));
+    var_05 = distance(param_00, self gettagorigin(var_04.name));
     if(var_05 < var_02) {
       if(!isDefined(var_01)) {
         var_01 = var_04;
       }
 
-      if(var_05 < distance(param_00, self gettagorigin(var_01.var_109))) {
+      if(var_05 < distance(param_00, self gettagorigin(var_01.name))) {
         var_01 = var_04;
       }
     }
@@ -213,14 +213,14 @@ func_14D4(param_00) {
 
 func_14D6(param_00) {
   var_01 = lib_0502::raid_spawn_tag_origin();
-  var_01.var_116 = self gettagorigin(param_00.var_109);
+  var_01.origin = self gettagorigin(param_00.name);
   var_01.var_1D = self gettagangles("body_animate_jnt");
-  var_01.var_3F2F = common_scripts\utility::func_44F5("b17_dmg_engine");
+  var_01.fx = common_scripts\utility::func_44F5("b17_dmg_engine");
   var_01 linkTo(self, "body_animate_jnt");
   param_00.var_95A6 = var_01;
   param_00.var_56C0 = 1;
   self.var_3786++;
-  playFXOnTag(param_00.var_95A6.var_3F2F, param_00.var_95A6, "tag_origin");
+  playFXOnTag(param_00.var_95A6.fx, param_00.var_95A6, "tag_origin");
   var_02 = var_01 maps\mp\_audio_submixes::func_8004("bulge_b17_fire_lp");
 }
 
@@ -229,7 +229,7 @@ func_14D2(param_00) {
     return;
   }
 
-  stopFXOnTag(param_00.var_95A6.var_3F2F, param_00.var_95A6, "tag_origin");
+  stopFXOnTag(param_00.var_95A6.fx, param_00.var_95A6, "tag_origin");
   param_00.var_56C0 = 0;
   self.var_3786--;
   self method_8614();
@@ -242,7 +242,7 @@ func_9193() {
     return;
   }
 
-  if(!isDefined(level.var_744A) || level.var_744A.size == 0) {
+  if(!isDefined(level.players) || level.players.size == 0) {
     level waittill("connected", var_02);
     var_02 waittill("spawned_player");
   }

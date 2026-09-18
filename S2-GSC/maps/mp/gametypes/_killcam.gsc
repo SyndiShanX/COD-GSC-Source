@@ -144,7 +144,7 @@ func_5A2A(param_00, param_01, param_02, param_03) {
 
 func_5A34(param_00, param_01) {
   var_02 = 0;
-  return param_01 && level.var_5A29 && !isDefined(param_00.var_1F3F) && param_00.var_1F3F && game["state"] == "playing" && !param_00 maps\mp\_utility::func_581D() && !level.var_8C03 && !function_01EF(param_00) || var_02;
+  return param_01 && level.var_5A29 && !isDefined(param_00.var_1F3F) && param_00.var_1F3F && game["state"] == "playing" && !param_00 maps\mp\_utility::isusingremote() && !level.var_8C03 && !function_01EF(param_00) || var_02;
 }
 
 func_74C9() {
@@ -328,7 +328,7 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   wait 0.05;
   level.var_689A--;
-  if(isDefined(level.var_4E09)) {
+  if(isDefined(level.hostmigrationtimer)) {
     return;
   }
 
@@ -599,7 +599,7 @@ func_5A29(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       maps\mp\_utility::updatesessionstate("dead");
     }
 
-    maps\mp\_utility::func_23FF();
+    maps\mp\_utility::clearkillcamstate();
     self notify("killcam_ended");
     return;
   }
@@ -791,7 +791,7 @@ func_5A2B(param_00, param_01, param_02) {
     thread func_237D(param_02);
   }
 
-  maps\mp\_utility::func_23FF();
+  maps\mp\_utility::clearkillcamstate();
 }
 
 func_238F(param_00) {

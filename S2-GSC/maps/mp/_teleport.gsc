@@ -14,7 +14,7 @@ func_5F8E() {
     return;
   }
 
-  common_scripts\utility::func_3C87("teleport_setup_complete");
+  common_scripts\utility::flag_init("teleport_setup_complete");
   level.var_9891 = [];
   level.var_9876 = 1;
   level.var_98B7 = 0;
@@ -107,7 +107,7 @@ func_9898() {
     level[[var_01]]();
   }
 
-  common_scripts\utility::func_3C8F("teleport_setup_complete");
+  common_scripts\utility::flag_set("teleport_setup_complete");
 }
 
 func_98AB() {
@@ -188,7 +188,7 @@ func_987F(param_00) {
 
   var_01 = game["teleport_zone_dom"];
   if(!isDefined(var_01)) {
-    var_01 = common_scripts\utility::func_7A33(param_00);
+    var_01 = common_scripts\utility::random(param_00);
     game["teleport_zone_dom"] = var_01;
   }
 
@@ -376,7 +376,7 @@ func_989B(param_00) {
     var_10 = var_0F.label;
     foreach(var_12 in level.var_98C1["start"].var_3211) {
       if(var_12.label == var_10) {
-        var_0F.var_5CBA = var_12.var_5CBA;
+        var_0F.levelflag = var_12.levelflag;
       }
     }
   }
@@ -385,7 +385,7 @@ func_989B(param_00) {
     var_10 = var_0F.label;
     foreach(var_17 in level.var_98C1["start"].var_3CC5) {
       if(var_17.label == var_10) {
-        var_0F.var_5CBA = var_17.var_5CBA;
+        var_0F.levelflag = var_17.levelflag;
       }
     }
   }
@@ -737,7 +737,7 @@ func_98BA(param_00, param_01) {
   }
 
   foreach(var_0E, var_0A in var_05.var_989F) {
-    var_05.var_989F[var_0E] = common_scripts\utility::func_F92(var_0A);
+    var_05.var_989F[var_0E] = common_scripts\utility::array_randomize(var_0A);
     foreach(var_0C in var_0A) {
       var_0C.var_2307 = 0;
     }

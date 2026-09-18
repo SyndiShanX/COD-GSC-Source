@@ -237,7 +237,7 @@ func_1AD4() {
       return;
     }
 
-    self.var_1976 = self.var_2319;
+    self.var_1976 = self.class;
   }
 }
 
@@ -288,7 +288,7 @@ func_632D() {
 }
 
 func_1958(param_00) {
-  if(maps\mp\_utility::func_602B()) {
+  if(maps\mp\_utility::matchmakinggame()) {
     return 1;
   }
 
@@ -345,7 +345,7 @@ func_197E() {
     var_02 = botgetteamlimit(0);
     var_03 = botgetteamlimit(1);
     if(level.var_53C7) {
-      var_02 = level.var_80BF;
+      var_02 = level.setshader;
       var_03 = level.var_80C0;
     }
 
@@ -365,9 +365,9 @@ func_197E() {
     var_0C = func_2032(var_0B, "humans");
     if(var_0C > 1) {
       var_0D = func_19F5();
-      if(!maps\mp\_utility::func_602B() && isDefined(var_0D) && var_0D != "spectator") {
+      if(!maps\mp\_utility::matchmakinggame() && isDefined(var_0D) && var_0D != "spectator") {
         var_09 = var_0D;
-        var_0A = maps\mp\_utility::func_45DE(var_0D);
+        var_0A = maps\mp\_utility::getotherteam(var_0D);
       } else {
         var_0E = func_2032(var_0B, "humans_allies");
         var_0F = func_2032(var_0B, "humans_axis");
@@ -382,7 +382,7 @@ func_197E() {
         var_11 = var_10 func_19FD();
         if(isDefined(var_11) && var_11 != "spectator") {
           var_09 = var_11;
-          var_0A = maps\mp\_utility::func_45DE(var_11);
+          var_0A = maps\mp\_utility::getotherteam(var_11);
         }
       }
     }
@@ -449,7 +449,7 @@ func_197E() {
     if(var_20) {
       var_21 = !function_02A3();
       var_22 = var_03 != var_02;
-      var_23 = !func_19F6() && !var_01 && var_22 && !level.var_197A && level.var_197B < 10 || !maps\mp\_utility::func_3FA0("prematch_done");
+      var_23 = !func_19F6() && !var_01 && var_22 && !level.var_197A && level.var_197B < 10 || !maps\mp\_utility::gameflag("prematch_done");
       var_24 = 0;
       if(var_21 || var_23 || var_24) {
         level.var_197B = level.var_197B + var_00;
@@ -484,7 +484,7 @@ func_197E() {
     level.var_1A79[var_0A] = int(var_26 + var_16 + var_1A);
     func_A0AF();
     if(var_02 == var_03 && !var_01 && var_19 == 1 && var_1A == 0 && var_26 > 0) {
-      if(!isDefined(level.var_1AA3) && maps\mp\_utility::func_3FA0("prematch_done")) {
+      if(!isDefined(level.var_1AA3) && maps\mp\_utility::gameflag("prematch_done")) {
         level.var_1AA3 = gettime();
       }
 
@@ -513,7 +513,7 @@ func_197E() {
         var_2C = -1 * int(min(var_35, var_1D));
         var_2D = -1 * var_35 + var_2C;
       }
-    } else if(!maps\mp\_utility::func_602B() && var_2C * var_2D < 0 && maps\mp\_utility::func_3FA0("prematch_done") && func_1935()) {
+    } else if(!maps\mp\_utility::matchmakinggame() && var_2C * var_2D < 0 && maps\mp\_utility::gameflag("prematch_done") && func_1935()) {
       var_36 = int(min(abs(var_2C), abs(var_2D)));
       if(var_2C > 0) {
         func_6475(var_36, var_0A, var_09, var_04);
@@ -661,7 +661,7 @@ bot_get_human_picked_class() {
         var_00 = 1;
       }
 
-      if(isDefined(var_04.var_2319)) {
+      if(isDefined(var_04.class)) {
         var_01 = 1;
         if(var_04 ishost()) {
           var_02 = 1;
@@ -776,7 +776,7 @@ func_3447(param_00, param_01) {
       break;
     }
 
-    if(!maps\mp\_utility::func_57A0(var_02[var_06])) {
+    if(!maps\mp\_utility::isreallyalive(var_02[var_06])) {
       var_02[var_06] func_19BB();
       var_02 = common_scripts\utility::func_F93(var_02, var_02[var_06]);
       param_00--;
@@ -896,9 +896,9 @@ func_8F88(param_00, param_01, param_02, param_03, param_04, param_05) {
 }
 
 func_19DD() {
-  if(maps\mp\_utility::func_602B() && self.sessionteam != "none") {
+  if(maps\mp\_utility::matchmakinggame() && self.sessionteam != "none") {
     var_00 = 0;
-  } else if(!maps\mp\_utility::func_602B() && maps\mp\_utility::func_C2D()) {
+  } else if(!maps\mp\_utility::matchmakinggame() && maps\mp\_utility::func_C2D()) {
     var_00 = 1;
   } else {
     var_00 = 0;
@@ -1061,8 +1061,8 @@ func_19FE() {
     }
 
     var_07 = var_06["rank"];
-    var_08 = maps\mp\gametypes\_rank::func_4658(var_07);
-    var_09 = maps\mp\gametypes\_rank::func_4657(var_07);
+    var_08 = maps\mp\gametypes\_rank::getrankinfominxp(var_07);
+    var_09 = maps\mp\gametypes\_rank::getrankinfomaxxp(var_07);
     var_0A = randomintrange(var_08, var_09);
     self.pers[var_02] = var_0A;
     var_00.var_7A6D = var_0A;
@@ -1092,7 +1092,7 @@ func_192B(param_00) {
   self endon("disconnect");
   level endon("game_ended");
   for(;;) {
-    if(isalive(self) && !self method_8371(param_00) && common_scripts\utility::func_AA4A(self.origin, self getplayerangles(), param_00.origin, self method_8375())) {
+    if(isalive(self) && !self method_8371(param_00) && common_scripts\utility::within_fov(self.origin, self getplayerangles(), param_00.origin, self method_8375())) {
       self method_8379(param_00, param_00.origin);
     }
 
@@ -1562,7 +1562,7 @@ func_2737(param_00) {
       var_08 = 0;
       while(!isDefined(var_07) && var_08 < 100) {
         var_08++;
-        var_09 = common_scripts\utility::func_7A33(var_03);
+        var_09 = common_scripts\utility::random(var_03);
         if(distancesquared(var_06.origin, var_09.origin) > 250000) {
           var_07 = var_09;
         }
@@ -1774,7 +1774,7 @@ func_1AE9(param_00) {
     var_01 = self getnearestnode();
     if(isDefined(param_00.var_663A) && isDefined(param_00.var_663A[0]) && isDefined(var_01)) {
       if(function_01F4(var_01, param_00.var_663A[0], 1)) {
-        if(common_scripts\utility::func_AA4A(self.origin, self getplayerangles(), param_00.origin, self method_8375())) {
+        if(common_scripts\utility::within_fov(self.origin, self getplayerangles(), param_00.origin, self method_8375())) {
           return 1;
         }
       }
@@ -1940,7 +1940,7 @@ func_1AFF() {
       continue;
     }
 
-    if(maps\mp\_utility::func_581D()) {
+    if(maps\mp\_utility::isusingremote()) {
       continue;
     }
 
@@ -2150,7 +2150,7 @@ func_1A52() {
     return;
   }
 
-  while(!maps\mp\_utility::func_3FA6() || !maps\mp\_utility::func_3FA0("prematch_done")) {
+  while(!maps\mp\_utility::gamehasstarted() || !maps\mp\_utility::gameflag("prematch_done")) {
     wait 0.05;
   }
 
@@ -2196,7 +2196,7 @@ func_1B00() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   self thread[[level.var_19D5["gametype_think"]]]();
 }
 
@@ -2221,7 +2221,7 @@ func_6348() {
 
   for(;;) {
     level waittill("smoke", var_00, var_01);
-    var_02 = maps\mp\_utility::func_9472(var_01, "_lefthand");
+    var_02 = maps\mp\_utility::strip_suffix(var_01, "_lefthand");
     if(var_02 == "smoke_grenade_mp" || var_02 == "smoke_grenade_axis_mp" || var_02 == "smoke_grenade_expeditionary_mp" || var_02 == "smoke_grenade_axis_expeditionary_mp") {
       var_00 thread func_4A5C();
     }

@@ -216,7 +216,7 @@ wait_for_door_destroyed() {
     }
   }
 
-  var_01 = common_scripts\utility::func_7A33(self.bomb_placements);
+  var_01 = common_scripts\utility::random(self.bomb_placements);
   var_02 = spawn("script_model", var_01.origin);
   var_02 setModel("zom_bomb");
   var_02.angles = var_01.angles;
@@ -341,7 +341,7 @@ freezer_zombie_think() {
         var_01 = "zombie_berserker";
         var_06 = ::maps / mp / zquests / hardcore / island_ee_hc::pest_hc_zombie_setup;
         var_07 = "zmb_hc_pest_destination";
-        maps\mp\_utility::func_2CED(1.25, ::monk_head_dialogue, common_scripts\utility::func_7A33(var_03), 1, var_07);
+        maps\mp\_utility::func_2CED(1.25, ::monk_head_dialogue, common_scripts\utility::random(var_03), 1, var_07);
         break;
 
       case "hc_assassin":
@@ -349,14 +349,14 @@ freezer_zombie_think() {
         var_01 = "zombie_assassin";
         var_06 = ::maps / mp / zquests / hardcore / island_ee_hc::assassin_hc_zombie_setup;
         var_07 = "flag_hc_asn_escort_complete";
-        maps\mp\_utility::func_2CED(1.25, ::monk_head_dialogue, common_scripts\utility::func_7A33(var_04), 1, var_07);
+        maps\mp\_utility::func_2CED(1.25, ::monk_head_dialogue, common_scripts\utility::random(var_04), 1, var_07);
         break;
 
       case "hc_follower":
         var_01 = "zombie_heavy";
         var_06 = ::maps / mp / zquests / hardcore / island_ee_hc::wustling_hc_zombie_setup;
         var_07 = "zmb_hc_follower_destination";
-        maps\mp\_utility::func_2CED(1.25, ::monk_head_dialogue, common_scripts\utility::func_7A33(var_02), 1, var_07);
+        maps\mp\_utility::func_2CED(1.25, ::monk_head_dialogue, common_scripts\utility::random(var_02), 1, var_07);
         break;
 
       case "hc_zombie":
@@ -406,7 +406,7 @@ freezer_crane_retrieve_zombie_anim(param_00, param_01) {
   var_06 = getstartangles(var_02.origin, var_02.angles, var_04);
   level.freezer_crane.var_931A = "request_retrieve";
   level.freezer_crane common_scripts\utility::func_379C("ent_flag_crane_retrieving");
-  common_scripts\utility::func_3C8F("flag_crane_in_motion");
+  common_scripts\utility::flag_set("flag_crane_in_motion");
   param_00 setOrigin(var_05);
   param_00.angles = var_06;
   if(lib_0547::func_5565(level.escort_bomber, param_00)) {
@@ -432,7 +432,7 @@ exploder_run_big_uber_fx() {
     self.mybiguberfx delete();
   }
 
-  self.mybiguberfx = spawnlinkedfx(level.var_611["bomber_artillery_shell_carry"], self, "TAG_INHAND");
+  self.mybiguberfx = spawnlinkedfx(level._effect["bomber_artillery_shell_carry"], self, "TAG_INHAND");
   triggerfx(self.mybiguberfx);
   maps / mp / agents / _agent_utility::deleteentonagentdeath(self.mybiguberfx);
 }
@@ -446,7 +446,7 @@ freezer_crane_retrieve_zombie_mover(param_00, param_01) {
   param_00.var_509A = 1;
   param_00.ignoreall = 1;
   param_00 linkTo(level.freezer_crane, "tag_origin", (0, 0, -120), (0, 0, 0));
-  common_scripts\utility::func_3C8F("flag_crane_in_motion");
+  common_scripts\utility::flag_set("flag_crane_in_motion");
   for(var_03 = 0; var_03 < level.freezer_crane.cranepath.size; var_03++) {
     level.freezer_crane moveTo(level.freezer_crane.cranepath[var_03].origin, var_02);
     wait(var_02);
@@ -644,7 +644,7 @@ spine_pickup_anim(param_00) {
 
   var_02 = var_01 getcurrentweapon();
   var_01 common_scripts\utility::func_603();
-  var_01 common_scripts\utility::func_600();
+  var_01 common_scripts\utility::_disableoffhandweapons();
   var_01 lib_0586::func_78C(param_00);
   var_01 lib_0586::func_78E(param_00, 1);
   var_01 allowjump(0);
@@ -754,7 +754,7 @@ func_20AD(param_00) {
 }
 
 init_artillery_cannon() {
-  common_scripts\utility::func_3C87("flag_loaded_flak_cannon");
+  common_scripts\utility::flag_init("flag_loaded_flak_cannon");
   var_00 = initialize_artillery_controls();
   var_01 = common_scripts\utility::func_46B7("artillery_struct", "targetname");
   foreach(var_03 in var_01) {
@@ -838,7 +838,7 @@ waittill_string_return(param_00) {
 }
 
 add_ammo(param_00) {
-  common_scripts\utility::func_3C8F("flag_loaded_flak_cannon");
+  common_scripts\utility::flag_set("flag_loaded_flak_cannon");
   level thread common_scripts\_exploder::func_88E(218);
   self.controller.ammo_count = self.controller.ammo_count + param_00;
   foreach(var_02 in level.players) {
@@ -892,7 +892,7 @@ play_ammo_nag() {
 
   self.is_playing_ammo_nag = 1;
   var_00 = ["shipnoammo", "shipnoshots"];
-  lib_0367::func_8E3C(common_scripts\utility::func_7A33(var_00));
+  lib_0367::func_8E3C(common_scripts\utility::random(var_00));
   wait(3);
   self.is_playing_ammo_nag = undefined;
 }
@@ -926,7 +926,7 @@ handle_projectile_hit_loc(param_00, param_01, param_02) {
       common_scripts\utility::func_33A0(var_04 + (0, 0, 1000), var_04, (1, 0, 0), 6);
     } else {
       if(!isDefined(param_01.vo_artillery_miss_heard) || isDefined(param_01.vo_artillery_miss_heard) && gettime() - param_01.vo_artillery_miss_heard > 5000) {
-        param_01 maps\mp\_utility::func_2CED(0.75, ::lib_0367::func_8E3D, common_scripts\utility::func_7A33(var_05), level.players);
+        param_01 maps\mp\_utility::func_2CED(0.75, ::lib_0367::func_8E3D, common_scripts\utility::random(var_05), level.players);
         param_01.vo_artillery_miss_heard = gettime();
       }
 
@@ -946,7 +946,7 @@ handle_projectile_hit_loc(param_00, param_01, param_02) {
 ship_miss_dialogue(param_00, param_01, param_02, param_03) {
   var_04 = self;
   if(common_scripts\utility::func_562E(param_00.in_motion)) {
-    var_04 maps\mp\_utility::func_2CED(0.75, ::lib_0367::func_8E3D, common_scripts\utility::func_7A33(param_03), level.players);
+    var_04 maps\mp\_utility::func_2CED(0.75, ::lib_0367::func_8E3D, common_scripts\utility::random(param_03), level.players);
     return;
   }
 
@@ -1009,7 +1009,7 @@ ship_miss_dialogue(param_00, param_01, param_02, param_03) {
   if(var_11.size < 1) {
     var_12 = var_04;
   } else {
-    var_12 = common_scripts\utility::func_7A33(var_12);
+    var_12 = common_scripts\utility::random(var_12);
   }
 
   var_12 maps\mp\_utility::func_2CED(0.75, ::lib_0367::func_8E3D, var_10, level.players);
@@ -1019,7 +1019,7 @@ ship_hit_point_checks(param_00) {
   var_01 = self;
   var_02 = var_01.hit_points;
   foreach(var_04 in var_02) {
-    if(distance2d(var_04.origin, param_00) < var_04.var_14F) {
+    if(distance2d(var_04.origin, param_00) < var_04.radius) {
       return 1;
     }
   }
@@ -1036,7 +1036,7 @@ disable_ammo_obj(param_00) {
   show_control_buttons(param_00 - 1);
   if(param_00 == 1) {
     disable_source_battery();
-    common_scripts\utility::func_3C8F("flag_artillery_out_of_ammo_quest_started");
+    common_scripts\utility::flag_set("flag_artillery_out_of_ammo_quest_started");
   }
 }
 
@@ -1913,7 +1913,7 @@ get_player_frac(param_00) {
 
 wait_one_round_bomber() {
   var_00 = level.var_A980;
-  common_scripts\utility::func_3C8F("flag_bomber_wave_punished");
+  common_scripts\utility::flag_set("flag_bomber_wave_punished");
   while(level.var_A980 <= var_00) {
     wait(0.125);
   }

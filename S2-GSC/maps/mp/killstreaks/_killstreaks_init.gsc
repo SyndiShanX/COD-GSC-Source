@@ -16,7 +16,7 @@ init() {
     return;
   }
 
-  level.var_5A70 = maps\mp\_utility::func_4529("scr_game_killstreakdelay", 10);
+  level.var_5A70 = maps\mp\_utility::getintproperty("scr_game_killstreakdelay", 10);
   level.killstreakfuncs = [];
   level.var_5A75 = [];
   level.var_5A7D = [];

@@ -23,8 +23,8 @@ func_A346(param_00) {
 func_A353(param_00, param_01) {
   var_02 = self.var_1C8;
   var_03 = self.var_3A;
-  var_04 = self.var_106;
-  var_05 = self.var_1A5;
+  var_04 = self.model;
+  var_05 = self.targetname;
   thread func_5A12(var_03);
   if(isDefined(level.var_A2F8[var_03])) {
     thread func_8458(level.var_A2F8[var_03], level.var_A2F9[var_03]);
@@ -41,8 +41,8 @@ func_A351() {
   self endon("nodeath_thread");
   var_00 = self.var_1C8;
   var_01 = self.var_3A;
-  var_02 = self.var_106;
-  var_03 = self.var_1A5;
+  var_02 = self.model;
+  var_03 = self.targetname;
   var_04 = undefined;
   var_05 = undefined;
   var_06 = undefined;
@@ -65,7 +65,7 @@ func_A351() {
 
   var_09 = func_A353(var_04, var_05);
   if(isDefined(level.var_A2F0[var_01])) {
-    earthquake(level.var_A2F0[var_01].var_807E, level.var_A2F0[var_01].var_3511, self.origin, level.var_A2F0[var_01].var_14F);
+    earthquake(level.var_A2F0[var_01].fadeovertime, level.var_A2F0[var_01].duration, self.origin, level.var_A2F0[var_01].radius);
   }
 
   wait(0.5);
@@ -285,8 +285,8 @@ func_5A0A(param_00, param_01, param_02) {
     return;
   }
 
-  if(isDefined(param_01.var_6810)) {
-    self notify(param_01.var_6810);
+  if(isDefined(param_01.notifystring)) {
+    self notify(param_01.notifystring);
   }
 
   var_03 = func_0630();
@@ -311,8 +311,8 @@ func_5A0A(param_00, param_01, param_02) {
         return;
       }
 
-      var_05 = var_03.var_116 + (0, 0, 100) - var_03.var_116;
-      playFX(param_01.var_359B, var_03.var_116, var_05);
+      var_05 = var_03.origin + (0, 0, 100) - var_03.origin;
+      playFX(param_01.var_359B, var_03.origin, var_05);
       return;
     }
 
@@ -328,8 +328,8 @@ func_5A0A(param_00, param_01, param_02) {
       return;
     }
 
-    var_05 = var_04.var_116 + (0, 0, 100) - var_04.var_116;
-    playFX(param_01.var_359B, var_03.var_116, var_05);
+    var_05 = var_04.origin + (0, 0, 100) - var_04.origin;
+    playFX(param_01.var_359B, var_03.origin, var_05);
     return;
   }
 }
@@ -350,15 +350,15 @@ func_2AA4() {
   if(!isDefined(self.var_2AA4)) {
     var_00 = spawn("script_model", (0, 0, 0));
     var_01 = func_0630();
-    var_00 setModel(self.var_106);
-    var_00.var_116 = var_01.var_116;
+    var_00 setModel(self.model);
+    var_00.origin = var_01.origin;
     var_00.var_1D = var_01.var_1D;
     var_00 notsolid();
-    var_00 method_805C();
+    var_00 save_undo_buffer();
     var_00 linkTo(var_01);
     self.var_2AA4 = var_00;
   } else {
-    self.var_2AA4 setModel(self.var_106);
+    self.var_2AA4 setModel(self.model);
   }
 
   return self.var_2AA4;
@@ -366,24 +366,24 @@ func_2AA4() {
 
 func_74C1(param_00, param_01, param_02) {
   var_03 = func_0630();
-  var_04 = spawn("script_origin", var_03.var_116);
+  var_04 = spawn("script_origin", var_03.origin);
   self endon("fire_extinguish");
   thread func_74C2(param_02, var_04);
   for(;;) {
-    playFX(param_00, var_04.var_116, var_04.var_A1C8);
+    playFX(param_00, var_04.origin, var_04.var_A1C8);
     wait(param_01);
   }
 }
 
 func_74C2(param_00, param_01) {
   param_01.var_1D = self gettagangles(param_00);
-  param_01.var_116 = self gettagorigin(param_00);
+  param_01.origin = self gettagorigin(param_00);
   param_01.var_3E40 = anglesToForward(param_01.var_1D);
   param_01.var_A1C8 = anglestoup(param_01.var_1D);
   while(isDefined(self) && self.var_3B == "script_vehicle" && self method_8283() > 0) {
     var_02 = func_0630();
     param_01.var_1D = var_02 gettagangles(param_00);
-    param_01.var_116 = var_02 gettagorigin(param_00);
+    param_01.origin = var_02 gettagorigin(param_00);
     param_01.var_3E40 = anglesToForward(param_01.var_1D);
     param_01.var_A1C8 = anglestoup(param_01.var_1D);
     wait 0.05;
@@ -401,7 +401,7 @@ func_3EC8() {
   var_02 = undefined;
   var_03 = undefined;
   var_04 = "damage";
-  if(isDefined(self.var_29B5)) {
+  if(isDefined(self.damagecallback)) {
     var_04 = "damage_postcallback";
   }
 

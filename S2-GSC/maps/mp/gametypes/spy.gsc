@@ -5,19 +5,19 @@
 
 main() {
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BFA(level.gametype, 2.5);
-    maps\mp\_utility::func_7BF9(level.gametype, 0);
-    maps\mp\_utility::func_7BF7(level.gametype, 4);
-    maps\mp\_utility::func_7C04(level.gametype, 0);
-    maps\mp\_utility::func_7BF1(level.gametype, 1);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 2.5);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 4);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 0);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 1);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
@@ -65,14 +65,14 @@ func_5300() {
   maps\mp\_utility::func_8653(1);
   var_00 = getmatchrulesdata("commonOption", "timeLimit");
   setdynamicdvar("scr_spy_timelimit", var_00);
-  maps\mp\_utility::func_7BFA("spy", var_00);
+  maps\mp\_utility::registertimelimitdvar("spy", var_00);
   var_01 = getmatchrulesdata("commonOption", "scoreLimit");
   setdynamicdvar("scr_spy_roundlimit", var_01);
-  maps\mp\_utility::func_7BF7("spy", var_01);
+  maps\mp\_utility::registerroundlimitdvar("spy", var_01);
   setdynamicdvar("scr_spy_winlimit", 0);
-  maps\mp\_utility::func_7C04("spy", 0);
+  maps\mp\_utility::registerwinlimitdvar("spy", 0);
   setdynamicdvar("scr_spy_scorelimit", 0);
-  maps\mp\_utility::func_7BF9("spy", 0);
+  maps\mp\_utility::registerscorelimitdvar("spy", 0);
 }
 
 func_6BB6() {
@@ -119,20 +119,20 @@ playerdisconnect() {
 }
 
 func_6BAF() {
-  maps\mp\_utility::func_3FA3("spy_loot_done", 0);
+  maps\mp\_utility::gameflaginit("spy_loot_done", 0);
   setclientnamemode("auto_change");
-  maps\mp\_utility::func_86DC("allies", &"OBJECTIVES_DM");
-  maps\mp\_utility::func_86DC("axis", &"OBJECTIVES_DM");
+  maps\mp\_utility::setobjectivetext("allies", &"OBJECTIVES_DM");
+  maps\mp\_utility::setobjectivetext("axis", &"OBJECTIVES_DM");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_DM");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_DM");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DM");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DM");
   } else {
-    maps\mp\_utility::func_86DB("allies", &"OBJECTIVES_DM_SCORE");
-    maps\mp\_utility::func_86DB("axis", &"OBJECTIVES_DM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("allies", &"OBJECTIVES_DM_SCORE");
+    maps\mp\_utility::setobjectivescoretext("axis", &"OBJECTIVES_DM_SCORE");
   }
 
-  maps\mp\_utility::func_86D8("allies", &"OBJECTIVES_DM_HINT");
-  maps\mp\_utility::func_86D8("axis", &"OBJECTIVES_DM_HINT");
+  maps\mp\_utility::setobjectivehinttext("allies", &"OBJECTIVES_DM_HINT");
+  maps\mp\_utility::setobjectivehinttext("axis", &"OBJECTIVES_DM_HINT");
   lib_050D::func_10E4();
   level.usestartspawns = 1;
   var_00[0] = "spy";
@@ -152,11 +152,11 @@ spylootphase() {
   var_01 settimer(var_00);
   wait(var_00);
   var_01 destroy();
-  maps\mp\_utility::func_3FA4("spy_loot_done");
+  maps\mp\_utility::gameflagset("spy_loot_done");
 }
 
 serverhud() {
-  maps\mp\_utility::func_3FA5("spy_loot_done");
+  maps\mp\_utility::gameflagwait("spy_loot_done");
   var_00 = 32;
   var_01 = maps\mp\gametypes\_hud_util::createserverfontstring("default", 2);
   var_01 maps\mp\gametypes\_hud_util::setpoint("LEFT", "LEFT", var_00, -50);
@@ -209,7 +209,7 @@ onserverhudchange(param_00) {
 
 playerassignspyclass() {
   self endon("disconnect");
-  maps\mp\_utility::func_3FA5("prematch_done");
+  maps\mp\_utility::gameflagwait("prematch_done");
   if(!self.hasspawned) {
     self waittill("spawned_player");
   }
@@ -223,7 +223,7 @@ playerassignspyclass() {
     }
   }
 
-  self.spyclass = common_scripts\utility::func_7A33(var_01);
+  self.spyclass = common_scripts\utility::random(var_01);
   level.spy_class_counts[self.spyclass]++;
   self.spyhudclass = maps\mp\gametypes\_hud_util::createfontstring("default", 1.5);
   self.spyhudclass maps\mp\gametypes\_hud_util::setpoint("CENTER", "CENTER", 0, 0);
@@ -367,7 +367,7 @@ getaliveclasscounts() {
   var_01 = 0;
   var_02 = 0;
   foreach(var_04 in level.players) {
-    if(!maps\mp\_utility::func_57A0(var_04)) {
+    if(!maps\mp\_utility::isreallyalive(var_04)) {
       continue;
     }
 
@@ -410,7 +410,7 @@ spycheckforwin() {
 }
 
 modifyplayerdamagespymode(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
-  if(isPlayer(param_02) && !maps\mp\_utility::func_3FA0("spy_loot_done")) {
+  if(isPlayer(param_02) && !maps\mp\_utility::gameflag("spy_loot_done")) {
     param_02 iprintlnbold(&"MP_SPY_NO_DAMAGE");
     return 0;
   }
@@ -436,9 +436,9 @@ setplayerclass(param_00) {
   param_00.pers["class"] = "gamemode";
   param_00.pers["lastClass"] = "";
   param_00.pers["gamemodeLoadout"] = var_01;
-  param_00.var_2319 = param_00.pers["class"];
-  param_00.var_5B84 = param_00.pers["lastClass"];
-  param_00 maps\mp\gametypes\_class::func_4790(param_00.team, param_00.var_2319);
+  param_00.class = param_00.pers["class"];
+  param_00.lastclass = param_00.pers["lastClass"];
+  param_00 maps\mp\gametypes\_class::func_4790(param_00.team, param_00.class);
 }
 
 maydropweaponspymode(param_00) {

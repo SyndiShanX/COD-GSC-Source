@@ -253,7 +253,7 @@ func_55C1(param_00) {
 }
 
 func_405B() {
-  var_00 = common_scripts\utility::func_7A33(level.var_8CB);
+  var_00 = common_scripts\utility::random(level.var_8CB);
   return var_00.var_38C2;
 }
 

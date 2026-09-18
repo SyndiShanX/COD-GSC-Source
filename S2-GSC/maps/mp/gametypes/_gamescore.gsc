@@ -69,7 +69,7 @@ func_A161(param_00, param_01) {
   }
 
   param_00 maps\mp\gametypes\_persistence::statsetchild("round", "score", param_00.extrascore0);
-  param_00 maps\mp\gametypes\_persistence::func_9314("score", param_01);
+  param_00 maps\mp\gametypes\_persistence::statadd("score", param_01);
   if(param_01 > 0) {
     param_00 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_veteran", param_01);
   }
@@ -119,7 +119,7 @@ func_47A7(param_00, param_01, param_02, param_03, param_04) {
 
   if(level.teambased) {
     param_01 maps\mp\gametypes\_persistence::statsetchild("round", "score", param_01.score);
-    param_01 maps\mp\gametypes\_persistence::func_9314("score", var_06);
+    param_01 maps\mp\gametypes\_persistence::statadd("score", var_06);
     if(var_06 > 0) {
       param_01 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_veteran", var_06);
     }
@@ -178,18 +178,18 @@ func_47BE() {
   level endon("game_ended");
   waittillframeend;
   var_00 = func_473F();
-  if(!level.splitscreen && var_00 != "none" && var_00 != level.var_A87B && gettime() - level.var_5C00 > 5000 && maps\mp\_utility::func_4672() != 1 && level.gametype != "demo") {
+  if(!level.splitscreen && var_00 != "none" && var_00 != level.var_A87B && gettime() - level.var_5C00 > 5000 && maps\mp\_utility::getscorelimit() != 1 && level.gametype != "demo") {
     level.var_5C00 = gettime();
-    maps\mp\_utility::func_5C39("lead_taken", var_00, "status");
+    maps\mp\_utility::leaderdialog("lead_taken", var_00, "status");
     if(level.var_A87B != "none") {
-      maps\mp\_utility::func_5C39("lead_lost", level.var_A87B, "status");
+      maps\mp\_utility::leaderdialog("lead_lost", level.var_A87B, "status");
     }
   }
 
   if(var_00 != "none") {
     level.var_A87B = var_00;
     var_01 = func_063E(var_00);
-    var_02 = maps\mp\_utility::func_471A("scorelimit");
+    var_02 = maps\mp\_utility::getwatcheddvar("scorelimit");
     if(maps\mp\_utility::func_579B()) {
       return;
     }
@@ -238,7 +238,7 @@ func_06DB(param_00, param_01, param_02) {
 
   game["teamScores"][param_00] = param_01;
   func_A174(param_00);
-  if((maps\mp\_utility::func_5380() && !isDefined(level.var_6CD1)) || isDefined(level.var_6CD1) && !level.var_6CD1) {
+  if((maps\mp\_utility::inovertime() && !isDefined(level.var_6CD1)) || isDefined(level.var_6CD1) && !level.var_6CD1) {
     thread maps\mp\gametypes\_gamelogic::func_6B9B();
     return;
   }
@@ -251,7 +251,7 @@ func_06DB(param_00, param_01, param_02) {
 
 func_A174(param_00) {
   var_01 = 0;
-  if(!maps\mp\_utility::func_57B2() || !maps\mp\_utility::func_5760()) {
+  if(!maps\mp\_utility::isroundbased() || !maps\mp\_utility::isobjectivebased()) {
     var_01 = func_063E(param_00);
   } else {
     var_01 = game["roundsWon"][param_00];

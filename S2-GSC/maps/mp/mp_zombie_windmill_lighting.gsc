@@ -11,7 +11,7 @@ main() {
     var_02 setscriptablepartstate("lightpart", "off");
   }
 
-  if(level.var_1D4 && getDvar("2695") != "true") {
+  if(level.weaponinventorytype && getDvar("2695") != "true") {
     xbox_optimizations();
   }
 }

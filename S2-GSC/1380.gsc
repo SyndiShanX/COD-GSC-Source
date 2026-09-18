@@ -31,14 +31,14 @@ init() {
   level.var_9E16["zombie_fireman"] = ::func_9E17;
   level.var_7A5D["zombie_fireman"] = ::func_3C08;
   lib_0547::func_7BD0("fireman_do_flame", ::func_3BF1, ::func_3D2B, -1);
-  level.var_611["zombie_fireman_flamethrower"] = loadfx("vfx/fire/flamethrower_end_med");
-  level.var_611["zombie_fireman_flamethrower_expensive"] = loadfx("vfx/test/flamethrower_test");
-  level.var_611["zmb_zmb_fire_torso"] = loadfx("vfx/zombie/zmb_zmb_fire_torso");
-  level.var_611["zmb_ground_impact_lrg"] = loadfx("vfx/zombie/zmb_ground_impact_lrg");
-  level.var_611["gasTankExplosion"] = loadfx("vfx/explosion/molotov_cocktail_impact");
-  level.var_611["fireman_sparks"] = loadfx("vfx/weaponimpact/zmb_fireman_metal_impact_1");
-  level.var_611["fireman_explosion"] = loadfx("vfx/explosion/zmb_fireman_explosion");
-  level.var_611["fireman_leak"] = loadfx("vfx/smoke/zmb_fireman_leak");
+  level._effect["zombie_fireman_flamethrower"] = loadfx("vfx/fire/flamethrower_end_med");
+  level._effect["zombie_fireman_flamethrower_expensive"] = loadfx("vfx/test/flamethrower_test");
+  level._effect["zmb_zmb_fire_torso"] = loadfx("vfx/zombie/zmb_zmb_fire_torso");
+  level._effect["zmb_ground_impact_lrg"] = loadfx("vfx/zombie/zmb_ground_impact_lrg");
+  level._effect["gasTankExplosion"] = loadfx("vfx/explosion/molotov_cocktail_impact");
+  level._effect["fireman_sparks"] = loadfx("vfx/weaponimpact/zmb_fireman_metal_impact_1");
+  level._effect["fireman_explosion"] = loadfx("vfx/explosion/zmb_fireman_explosion");
+  level._effect["fireman_leak"] = loadfx("vfx/smoke/zmb_fireman_leak");
 }
 
 func_3BFB(param_00) {
@@ -88,7 +88,7 @@ func_ABA7() {
 func_8A1B() {
   self method_85A1("zombie_fireman");
   self method_839E("agent");
-  self.var_11AB = 70 + self.var_14F;
+  self.var_11AB = 70 + self.radius;
   self.var_60F5 = "large";
   self.var_60F6 = 200;
   self.var_64C2 = 1;
@@ -157,10 +157,10 @@ func_ABAB() {
 
       if(func_3BF0()) {
         if(!isDefined(self.var_5BC1) || distancesquared(self.var_5BC1, self.origin) > 256) {
-          self.var_60ED = self.var_108;
+          self.var_60ED = self.vectortoangles;
         }
 
-        self method_83A1(self.var_28D2);
+        self selected_ent_buttons(self.var_28D2);
         continue;
       }
     }
@@ -242,7 +242,7 @@ func_3C0F(param_00) {
     return 0;
   }
 
-  if(!maps\mp\_utility::func_57A0(self.var_28D2)) {
+  if(!maps\mp\_utility::isreallyalive(self.var_28D2)) {
     return 0;
   }
 
@@ -394,7 +394,7 @@ func_3C01(param_00, param_01) {
   self scragentsetscripted(1);
   self endon("killanimscript");
   self endon("death");
-  var_02 = common_scripts\utility::func_7A33(["s2_fireman_attack_flamethrower_stand", "s2_fireman_attack_flamethrower_walk"]);
+  var_02 = common_scripts\utility::random(["s2_fireman_attack_flamethrower_stand", "s2_fireman_attack_flamethrower_walk"]);
   var_03 = 1;
   var_04 = 1;
   self.var_5BBE = undefined;
@@ -415,7 +415,7 @@ func_3C01(param_00, param_01) {
 }
 
 func_3C0E(param_00, param_01) {
-  maps\mp\_utility::func_A6D1(param_01, "killanimscript");
+  maps\mp\_utility::waitfortimeornotify(param_01, "killanimscript");
   self.var_5BC0 = gettime();
   maps / mp / agents / _scripted_agent_anim_util::func_8732(0, "DoAttack");
 }
@@ -463,7 +463,7 @@ func_A136(param_00, param_01, param_02, param_03) {
     }
 
     self scragentsetorientmode("face enemy");
-    self method_83A4(self.origin, var_07, var_05);
+    self selected_fx_option_index(self.origin, var_07, var_05);
   }
 }
 
@@ -777,7 +777,7 @@ func_388D(param_00) {
     return -1;
   }
 
-  if(param_00 method_8541()) {
+  if(param_00 set_off_exploders()) {
     return -1;
   }
 
@@ -995,7 +995,7 @@ func_3C0D(param_00) {
   var_03 = 9216;
   var_04 = 2250000;
   maps / mp / agents / _scripted_agent_anim_util::func_A79F("scripted_anim", "land", 2);
-  playFX(level.var_611["zmb_ground_impact_lrg"], param_00 + (0, 0, -12));
+  playFX(level._effect["zmb_ground_impact_lrg"], param_00 + (0, 0, -12));
   var_05 = lib_0547::func_408F();
   foreach(var_07 in var_05) {
     if(var_07 == self) {
@@ -1096,7 +1096,7 @@ func_3C08() {
     }
   }
 
-  return common_scripts\utility::func_7A33(var_00);
+  return common_scripts\utility::random(var_00);
 }
 
 func_ABAA() {

@@ -9,25 +9,25 @@ main() {
   }
 
   maps\mp\gametypes\_globallogic::init();
-  lib_01DD::func_8A0C();
-  maps\mp\gametypes\_globallogic::func_8A0C();
+  lib_01DD::setupcallbacks();
+  maps\mp\gametypes\_globallogic::setupcallbacks();
   if(isusingmatchrulesdata()) {
     level.var_5300 = ::func_5300;
     [[level.var_5300]]();
     level thread maps\mp\_utility::func_7C13();
   } else {
-    maps\mp\_utility::func_7BF8(level.gametype, 3, 0, 9);
-    maps\mp\_utility::func_7BFA(level.gametype, 2.5);
-    maps\mp\_utility::func_7BF9(level.gametype, 1);
-    maps\mp\_utility::func_7BF7(level.gametype, 0);
-    maps\mp\_utility::func_7C04(level.gametype, 4);
-    maps\mp\_utility::func_7BF1(level.gametype, 1);
-    maps\mp\_utility::func_7BE5(level.gametype, 0);
+    maps\mp\_utility::registerroundswitchdvar(level.gametype, 3, 0, 9);
+    maps\mp\_utility::registertimelimitdvar(level.gametype, 2.5);
+    maps\mp\_utility::registerscorelimitdvar(level.gametype, 1);
+    maps\mp\_utility::registerroundlimitdvar(level.gametype, 0);
+    maps\mp\_utility::registerwinlimitdvar(level.gametype, 4);
+    maps\mp\_utility::registernumlivesdvar(level.gametype, 1);
+    maps\mp\_utility::registerhalftimedvar(level.gametype, 0);
     level.var_6031 = 0;
     level.var_6035 = 0;
   }
 
-  level.var_6933 = 1;
+  level.objectivebased = 1;
   maps\mp\_utility::func_873B(1);
   level.var_6B86 = ::maps / mp / gametypes / common_sd_sr::func_6B86;
   level.var_6BAF = ::func_6BAF;
@@ -58,24 +58,24 @@ func_5300() {
   maps\mp\_utility::func_8653();
   var_00 = getmatchrulesdata("sdData", "roundLength");
   setdynamicdvar("scr_sd_timelimit", var_00);
-  maps\mp\_utility::func_7BFA("sd", var_00);
+  maps\mp\_utility::registertimelimitdvar("sd", var_00);
   var_01 = getmatchrulesdata("sdData", "roundSwitch");
   setdynamicdvar("scr_sd_roundswitch", var_01);
-  maps\mp\_utility::func_7BF8("sd", var_01, 0, 9);
+  maps\mp\_utility::registerroundswitchdvar("sd", var_01, 0, 9);
   var_02 = getmatchrulesdata("commonOption", "scoreLimit");
   setdynamicdvar("scr_sd_winlimit", var_02);
-  maps\mp\_utility::func_7C04("sd", var_02);
+  maps\mp\_utility::registerwinlimitdvar("sd", var_02);
   setdynamicdvar("scr_sd_bombtimer", getmatchrulesdata("sdData", "bombTimer"));
   setdynamicdvar("scr_sd_planttime", getmatchrulesdata("sdData", "plantTime"));
   setdynamicdvar("scr_sd_defusetime", getmatchrulesdata("sdData", "defuseTime"));
   setdynamicdvar("scr_sd_multibomb", getmatchrulesdata("sdData", "multiBomb"));
   setdynamicdvar("scr_sd_silentplant", getmatchrulesdata("sdData", "silentPlant"));
   setdynamicdvar("scr_sd_roundlimit", 0);
-  maps\mp\_utility::func_7BF7("sd", 0);
+  maps\mp\_utility::registerroundlimitdvar("sd", 0);
   setdynamicdvar("scr_sd_scorelimit", 1);
-  maps\mp\_utility::func_7BF9("sd", 1);
+  maps\mp\_utility::registerscorelimitdvar("sd", 1);
   setdynamicdvar("scr_sd_halftime", 0);
-  maps\mp\_utility::func_7BE5("sd", 0);
+  maps\mp\_utility::registerhalftimedvar("sd", 0);
 }
 
 func_6BAF() {
@@ -92,20 +92,20 @@ func_6BAF() {
 
   setomnvar("ui_war_attacker_team", maps\mp\_utility::func_46D4(game["attackers"]));
   setclientnamemode("manual_change");
-  level.var_611["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
-  level.var_611["search_dstry_bomb_arming_light"] = loadfx("vfx/unique/search_dstry_bomb_arming_light");
-  maps\mp\_utility::func_86DC(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
-  maps\mp\_utility::func_86DC(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
+  level._effect["bomb_explosion"] = loadfx("vfx/explosion/mp_gametype_bomb");
+  level._effect["search_dstry_bomb_arming_light"] = loadfx("vfx/unique/search_dstry_bomb_arming_light");
+  maps\mp\_utility::setobjectivetext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+  maps\mp\_utility::setobjectivetext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   if(level.splitscreen) {
-    maps\mp\_utility::func_86DB(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
-    maps\mp\_utility::func_86DB(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER");
   } else {
-    maps\mp\_utility::func_86DB(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
-    maps\mp\_utility::func_86DB(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_SCORE");
+    maps\mp\_utility::setobjectivescoretext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_SCORE");
   }
 
-  maps\mp\_utility::func_86D8(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
-  maps\mp\_utility::func_86D8(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
+  maps\mp\_utility::setobjectivehinttext(game["attackers"], &"OBJECTIVES_SD_ATTACKER_HINT");
+  maps\mp\_utility::setobjectivehinttext(game["defenders"], &"OBJECTIVES_SD_DEFENDER_HINT");
   lib_050D::func_10E4();
   var_02[0] = "sd";
   var_02[1] = "bombzone";

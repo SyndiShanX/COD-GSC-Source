@@ -202,7 +202,7 @@ func_4C7F(param_00, param_01) {
     return var_02;
   }
 
-  return common_scripts\utility::func_7A33(param_00);
+  return common_scripts\utility::random(param_00);
 }
 
 func_4C76(param_00) {
@@ -462,8 +462,8 @@ func_42E5() {
 
   var_05 = undefined;
   if(var_00.size > 0) {
-    var_06 = common_scripts\utility::func_7A33(var_00);
-    var_07 = common_scripts\utility::func_7A33(getzonenodes(var_06));
+    var_06 = common_scripts\utility::random(var_00);
+    var_07 = common_scripts\utility::random(getzonenodes(var_06));
     var_05 = var_07.origin;
   } else {
     if(isDefined(level.var_98C4)) {

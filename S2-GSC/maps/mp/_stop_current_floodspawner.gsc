@@ -6,17 +6,17 @@
 func_9DB1(param_00, param_01) {
   param_00 endon("death");
   param_00 waittill("trigger", var_02);
-  param_00 common_scripts\utility::func_161();
+  param_00 common_scripts\utility::script_delay();
   maps\mp\_utility::func_FA8(param_00.target);
   if(isDefined(param_01)) {
-    common_scripts\utility::func_3C8F(param_01, var_02);
+    common_scripts\utility::flag_set(param_01, var_02);
   }
 }
 
 func_9D7C(param_00) {
   param_00 endon("death");
   param_00 waittill("trigger");
-  param_00 common_scripts\utility::func_161();
+  param_00 common_scripts\utility::script_delay();
   var_01 = getEntArray(param_00.target, "targetname");
   common_scripts\utility::array_thread(var_01, ::func_3D85);
 }
